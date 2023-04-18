@@ -778,6 +778,22 @@ declare interface UserThreeFactor {
   IdCardNumber: string | null;
 }
 
+declare interface BindEmployeeUserIdWithClientOpenIdRequest {
+  /** OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId */
+  Operator: UserInfo;
+  /** 电子签系统员工UserId */
+  UserId: string;
+  /** 客户系统OpenId */
+  OpenId: string;
+}
+
+declare interface BindEmployeeUserIdWithClientOpenIdResponse {
+  /** 绑定是否成功，1表示成功，0表示失败 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelFlowRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
@@ -1656,6 +1672,22 @@ declare interface StartFlowResponse {
   RequestId?: string;
 }
 
+declare interface UnbindEmployeeUserIdWithClientOpenIdRequest {
+  /** OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId */
+  Operator: UserInfo;
+  /** 电子签系统员工UserId */
+  UserId: string;
+  /** 客户系统OpenId */
+  OpenId: string;
+}
+
+declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
+  /** 解绑是否成功，1表示成功，0表示失败 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateIntegrationEmployeesRequest {
   /** 操作人信息 */
   Operator: UserInfo;
@@ -1721,6 +1753,8 @@ declare interface VerifyPdfResponse {
 /** {@link Ess 腾讯电子签企业版} */
 declare interface Ess {
   (): Versions;
+  /** 员工userid与客户系统openid绑定 {@link BindEmployeeUserIdWithClientOpenIdRequest} {@link BindEmployeeUserIdWithClientOpenIdResponse} */
+  BindEmployeeUserIdWithClientOpenId(data: BindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<BindEmployeeUserIdWithClientOpenIdResponse>;
   /** 撤销单个签署流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
   /** 取消一码多扫二维码 {@link CancelMultiFlowSignQRCodeRequest} {@link CancelMultiFlowSignQRCodeResponse} */
@@ -1801,6 +1835,8 @@ declare interface Ess {
   ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
   /** 模板发起合同-发起签署流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
+  /** 员工userid与客户系统openid解绑 {@link UnbindEmployeeUserIdWithClientOpenIdRequest} {@link UnbindEmployeeUserIdWithClientOpenIdResponse} */
+  UnbindEmployeeUserIdWithClientOpenId(data: UnbindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEmployeeUserIdWithClientOpenIdResponse>;
   /** 更新企业员工信息 {@link UpdateIntegrationEmployeesRequest} {@link UpdateIntegrationEmployeesResponse} */
   UpdateIntegrationEmployees(data: UpdateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIntegrationEmployeesResponse>;
   /** 多文件上传 {@link UploadFilesRequest} {@link UploadFilesResponse} */

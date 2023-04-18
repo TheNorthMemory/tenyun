@@ -152,6 +152,20 @@ declare interface CustomRule {
 declare interface Ext {
 }
 
+/** 业务加密入参 */
+declare interface InputEncryptData {
+  /** 加密方式，0：AES加密； */
+  EncryptMethod: number;
+  /** 加密算法中的块处理模式，1：CBC模式； 目前只支持CBC模式 */
+  EncryptMode: number;
+  /** 填充模式，0：ZeroPadding；1：PKCS5Padding；2：PKCS7Padding。 */
+  PaddingType: number;
+  /** 加密数据，将AuthorizedData结构体数组（数组最大长度不超过20）序列化成JSON字符串，对得到的字符串加密并填充到该字段。 */
+  EncryptData: string;
+  /** 用户是否授权，本接口取值：1，已授权。 */
+  IsAuthorized?: number;
+}
+
 /** 通用调度任务 */
 declare interface Job {
   /** 调度ID */
@@ -180,6 +194,16 @@ declare interface Merchant {
   CodeType: number;
   /** 第三方码域名前缀 */
   CodeUrl: string | null;
+}
+
+/** 业务出参 */
+declare interface OutputAuthorizedTransfer {
+  /** 推送状态，0表示成功。 */
+  Code?: number | null;
+  /** 错误码。 */
+  Message?: string | null;
+  /** 错误信息描述。 */
+  Value?: string | null;
 }
 
 /** 层级码配置 */
@@ -434,6 +458,18 @@ declare interface UsageQuota {
   RiskCnt: number | null;
   /** 时间 */
   UpdateTime: string | null;
+}
+
+declare interface AuthorizedTransferRequest {
+  /** 业务加密入参。 */
+  BusinessSecurityData: InputEncryptData;
+}
+
+declare interface AuthorizedTransferResponse {
+  /** 业务出参。 */
+  Data?: OutputAuthorizedTransfer;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateCodeBatchRequest {
@@ -1138,6 +1174,18 @@ declare interface DescribeTraceDataListResponse {
   RequestId?: string;
 }
 
+declare interface EffectFeedbackRequest {
+  /** 业务加密入参。 */
+  BusinessSecurityData: InputEncryptData;
+}
+
+declare interface EffectFeedbackResponse {
+  /** 业务出参。 */
+  Data?: OutputAuthorizedTransfer;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCodeBatchRequest {
   /** 批次ID */
   BatchId: string;
@@ -1342,9 +1390,23 @@ declare interface ModifyTraceDataResponse {
   RequestId?: string;
 }
 
+declare interface ReportBatchCallbackStatusRequest {
+  /** 业务加密入参。 */
+  BusinessSecurityData: InputEncryptData;
+}
+
+declare interface ReportBatchCallbackStatusResponse {
+  /** 业务出参。 */
+  Data?: OutputAuthorizedTransfer;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trp T-Sec-安心平台(RP)} */
 declare interface Trp {
   (): Versions;
+  /** 授权数据上报接口 {@link AuthorizedTransferRequest} {@link AuthorizedTransferResponse} */
+  AuthorizedTransfer(data: AuthorizedTransferRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizedTransferResponse>;
   /** 新增批次 {@link CreateCodeBatchRequest} {@link CreateCodeBatchResponse} */
   CreateCodeBatch(data?: CreateCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeBatchResponse>;
   /** 生成普通码包 {@link CreateCodePackRequest} {@link CreateCodePackResponse} */
@@ -1417,6 +1479,8 @@ declare interface Trp {
   DescribeTraceDataById(data: DescribeTraceDataByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataByIdResponse>;
   /** 查询溯源信息 {@link DescribeTraceDataListRequest} {@link DescribeTraceDataListResponse} */
   DescribeTraceDataList(data?: DescribeTraceDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataListResponse>;
+  /** 效果数据反馈 {@link EffectFeedbackRequest} {@link EffectFeedbackResponse} */
+  EffectFeedback(data: EffectFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<EffectFeedbackResponse>;
   /** 修改批次 {@link ModifyCodeBatchRequest} {@link ModifyCodeBatchResponse} */
   ModifyCodeBatch(data: ModifyCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCodeBatchResponse>;
   /** 修改自定义码规则 {@link ModifyCustomRuleRequest} {@link ModifyCustomRuleResponse} */
@@ -1435,6 +1499,8 @@ declare interface Trp {
   ModifyTraceData(data?: ModifyTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataResponse>;
   /** 修改溯源信息的排序 {@link ModifyTraceDataRanksRequest} {@link ModifyTraceDataRanksResponse} */
   ModifyTraceDataRanks(data?: ModifyTraceDataRanksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataRanksResponse>;
+  /** 离线筛选包数据推送 {@link ReportBatchCallbackStatusRequest} {@link ReportBatchCallbackStatusResponse} */
+  ReportBatchCallbackStatus(data: ReportBatchCallbackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ReportBatchCallbackStatusResponse>;
 }
 
 export declare type Versions = ["2021-05-15"];

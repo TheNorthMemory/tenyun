@@ -480,6 +480,122 @@ declare interface DeleteWhitelistResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAppDimensionMetricsRequest {
+  /** app 项目ID */
+  ProjectID: number;
+  /** 查询的表名 */
+  From: string;
+  /** 查询指标 fields */
+  Fields: string;
+  /** 查询的过滤条件 */
+  Filter: string;
+  /** 查询简单过滤条件 */
+  FilterSimple?: string;
+  /** group by 条件 */
+  GroupBy?: string[];
+  /** order by 条件 */
+  OrderBy?: string[];
+  /** limit 参数 */
+  Limit?: number;
+  /** offset 参数 */
+  Offset?: number;
+  /** 业务上下文参数 */
+  BusinessContext?: string;
+}
+
+declare interface DescribeAppDimensionMetricsResponse {
+  /** 查询数据返回 */
+  Data: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppMetricsDataRequest {
+  /** app 项目ID */
+  ProjectID: number;
+  /** 查询的表名 */
+  From: string;
+  /** 查询指标 field */
+  Fields: string;
+  /** 查询的过滤条件 */
+  Filter: string;
+  /** 查询简单过滤条件 */
+  FilterSimple?: string;
+  /** group by 条件 */
+  GroupBy?: string[];
+  /** order by 条件 */
+  OrderBy?: string[];
+  /** limit 参数 */
+  Limit?: number;
+  /** offset 参数 */
+  Offset?: number;
+  /** group by 参数 */
+  GroupByModifier?: string;
+}
+
+declare interface DescribeAppMetricsDataResponse {
+  /** 查询数据返回 */
+  Data: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppSingleCaseDetailListRequest {
+  /** app 项目ID */
+  ProjectID: number;
+  /** 查询的表名 */
+  From: string;
+  /** 查询指标 field */
+  Fields: string;
+  /** 查询的过滤条件 */
+  Filter: string;
+  /** 查询简单过滤条件 */
+  FilterSimple?: string;
+  /** group by 条件 */
+  GroupBy?: string[];
+  /** order by 条件 */
+  OrderBy?: string[];
+  /** limit 参数 */
+  Limit?: number;
+  /** offset 参数 */
+  Offset?: number;
+}
+
+declare interface DescribeAppSingleCaseDetailListResponse {
+  /** 查询数据返回 */
+  Data: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppSingleCaseListRequest {
+  /** app 项目 ID */
+  ProjectID: number;
+  /** 查询的表名 */
+  From: string;
+  /** 查询指标 field */
+  Fields: string;
+  /** 查询的过滤条件 */
+  Filter: string;
+  /** 查询简单过滤条件 */
+  FilterSimple?: string;
+  /** group by 条件 */
+  GroupBy?: string[];
+  /** order by 条件 */
+  OrderBy?: string[];
+  /** limit 参数 */
+  Limit?: number;
+  /** offset 参数 */
+  Offset?: number;
+}
+
+declare interface DescribeAppSingleCaseListResponse {
+  /** 查询数据返回 */
+  Data: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataCustomUrlRequest {
   /** 开始时间 */
   StartTime: number;
@@ -1893,6 +2009,14 @@ declare interface Rum {
   DeleteStarProject(data: DeleteStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStarProjectResponse>;
   /** 删除白名单 {@link DeleteWhitelistRequest} {@link DeleteWhitelistResponse} */
   DeleteWhitelist(data: DeleteWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhitelistResponse>;
+  /** 查询 app 多维分析数据 {@link DescribeAppDimensionMetricsRequest} {@link DescribeAppDimensionMetricsResponse} */
+  DescribeAppDimensionMetrics(data: DescribeAppDimensionMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDimensionMetricsResponse>;
+  /** 获取 app 监控指标数据 {@link DescribeAppMetricsDataRequest} {@link DescribeAppMetricsDataResponse} */
+  DescribeAppMetricsData(data: DescribeAppMetricsDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppMetricsDataResponse>;
+  /** 查询 app 监控个例样本详情列表 {@link DescribeAppSingleCaseDetailListRequest} {@link DescribeAppSingleCaseDetailListResponse} */
+  DescribeAppSingleCaseDetailList(data: DescribeAppSingleCaseDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSingleCaseDetailListResponse>;
+  /** 查询 app 监控个例聚合列表 {@link DescribeAppSingleCaseListRequest} {@link DescribeAppSingleCaseListResponse} */
+  DescribeAppSingleCaseList(data: DescribeAppSingleCaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSingleCaseListResponse>;
   /** 获取QueryData {@link DescribeDataRequest} {@link DescribeDataResponse} */
   DescribeData(data: DescribeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataResponse>;
   /** 获取DescribeDataCustomUrl信息 {@link DescribeDataCustomUrlRequest} {@link DescribeDataCustomUrlResponse} */

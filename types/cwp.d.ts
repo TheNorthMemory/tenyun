@@ -8911,7 +8911,7 @@ declare interface Cwp {
   DescribeScanTaskStatus(data: DescribeScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskStatusResponse>;
   /** 定期检测配置查询 {@link DescribeScanVulSettingRequest} {@link DescribeScanVulSettingResponse} */
   DescribeScanVulSetting(data?: DescribeScanVulSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanVulSettingResponse>;
-  /** 导出ES查询文档列表 {@link DescribeSearchExportListRequest} {@link DescribeSearchExportListResponse} */
+  /** @deprecated 导出ES查询文档列表 {@link DescribeSearchExportListRequest} {@link DescribeSearchExportListResponse} */
   DescribeSearchExportList(data: DescribeSearchExportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchExportListResponse>;
   /** 获取历史搜索记录 {@link DescribeSearchLogsRequest} {@link DescribeSearchLogsResponse} */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;

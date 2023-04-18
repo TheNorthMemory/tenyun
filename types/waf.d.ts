@@ -600,6 +600,24 @@ declare interface LoadBalancerPackageNew {
   LoadBalancerType: string | null;
 }
 
+/** PeakPoints数组项 */
+declare interface PeakPointsItem {
+  /** 秒级别时间戳 */
+  Time: number;
+  /** QPS */
+  Access: number;
+  /** 上行带宽峰值，单位B */
+  Up: number;
+  /** 下行带宽峰值，单位B */
+  Down: number;
+  /** Web攻击次数 */
+  Attack: number;
+  /** CC攻击次数 */
+  Cc: number;
+  /** Bot qps */
+  BotAccess: number | null;
+}
+
 /** 防护域名端口配置信息 */
 declare interface PortInfo {
 }
@@ -1252,6 +1270,58 @@ declare interface DescribeIpHitItemsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePeakPointsRequest {
+  /** 查询起始时间 */
+  FromTime: string;
+  /** 查询终止时间 */
+  ToTime: string;
+  /** 查询的域名，如果查询所有域名数据，该参数不填写 */
+  Domain?: string;
+  /** 只有两个值有效，sparta-waf，clb-waf，不传则不过滤 */
+  Edition?: string;
+  /** WAF实例ID，不传则不过滤 */
+  InstanceID?: string;
+  /** 六个值可选：access-峰值qps趋势图botAccess- bot峰值qps趋势图down-下行峰值带宽趋势图up-上行峰值带宽趋势图attack-Web攻击总数趋势图cc-CC攻击总数趋势图 */
+  MetricName?: string;
+}
+
+declare interface DescribePeakPointsResponse {
+  /** 数据点 */
+  Points: PeakPointsItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePeakValueRequest {
+  /** 查询起始时间 */
+  FromTime: string;
+  /** 查询结束时间 */
+  ToTime: string;
+  /** 需要查询的域名，当前用户所有域名可以不传 */
+  Domain?: string;
+  /** 只有两个值有效，sparta-waf，clb-waf，不传则不过滤 */
+  Edition?: string;
+  /** WAF实例ID，不传则不过滤 */
+  InstanceID?: string;
+  /** 五个值可选：access-峰值qpsdown-下行峰值带宽up-上行峰值带宽attack-Web攻击总数cc-CC攻击总数趋势图 */
+  MetricName?: string;
+}
+
+declare interface DescribePeakValueResponse {
+  /** QPS峰值 */
+  Access: number;
+  /** 上行带宽峰值，单位B */
+  Up: number;
+  /** 下行带宽峰值，单位B */
+  Down: number;
+  /** Web攻击总数 */
+  Attack: number;
+  /** CC攻击总数 */
+  Cc: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePolicyStatusRequest {
   /** 域名 */
   Domain: string;
@@ -1641,6 +1711,10 @@ declare interface Waf {
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
+  /** 查询业务和攻击概要趋势 {@link DescribePeakPointsRequest} {@link DescribePeakPointsResponse} */
+  DescribePeakPoints(data: DescribePeakPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakPointsResponse>;
+  /** 获取业务和攻击概览峰值 {@link DescribePeakValueRequest} {@link DescribePeakValueResponse} */
+  DescribePeakValue(data: DescribePeakValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakValueResponse>;
   /** 获取防护状态以及生效的实例id {@link DescribePolicyStatusRequest} {@link DescribePolicyStatusResponse} */
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
