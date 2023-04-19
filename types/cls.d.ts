@@ -96,6 +96,50 @@ declare interface AlarmTargetInfo {
   EndTimeOffset: number;
 }
 
+/** 告警通知渠道组详情 */
+declare interface AlertHistoryNotice {
+  /** 通知渠道组名称 */
+  Name: string;
+  /** 通知渠道组ID */
+  AlarmNoticeId: string;
+}
+
+/** 告警历史详情 */
+declare interface AlertHistoryRecord {
+  /** 告警历史ID */
+  RecordId: string;
+  /** 告警策略ID */
+  AlarmId: string;
+  /** 告警策略名称 */
+  AlarmName: string;
+  /** 监控对象ID */
+  TopicId: string;
+  /** 监控对象名称 */
+  TopicName: string;
+  /** 监控对象所属地域 */
+  Region: string;
+  /** 触发条件 */
+  Trigger: string;
+  /** 持续周期，持续满足触发条件TriggerCount个周期后，再进行告警 */
+  TriggerCount: number;
+  /** 告警通知发送频率，单位为分钟 */
+  AlarmPeriod: number;
+  /** 通知渠道组 */
+  Notices: AlertHistoryNotice[];
+  /** 告警持续时间，单位为分钟 */
+  Duration: number;
+  /** 告警状态，0代表未恢复，1代表已恢复，2代表已失效 */
+  Status: number;
+  /** 告警发生时间，毫秒级Unix时间戳 */
+  CreateTime: number;
+  /** 告警分组触发时对应的分组信息 */
+  GroupTriggerCondition?: GroupTriggerConditionInfo[] | null;
+  /** 告警级别，0代表警告(Warn)，1代表提醒(Info)，2代表紧急 (Critical) */
+  AlarmLevel?: number | null;
+  /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 */
+  MonitorObjectType?: number | null;
+}
+
 /** 多维分析的分析维度 */
 declare interface AnalysisDimensional {
   /** 分析名称 */
@@ -440,6 +484,14 @@ declare interface FullTextInfo {
   Tokenizer: string;
   /** 是否包含中文 */
   ContainZH?: boolean | null;
+}
+
+/** 分组触发条件 */
+declare interface GroupTriggerConditionInfo {
+  /** 分组触发字段名称 */
+  Key: string;
+  /** 分组触发字段值 */
+  Value: string;
 }
 
 /** 直方图详细信息 */
@@ -1334,6 +1386,28 @@ declare interface DescribeAlarmsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAlertRecordHistoryRequest {
+  /** 查询时间范围启始时间，毫秒级unix时间戳 */
+  From: number;
+  /** 查询时间范围结束时间，毫秒级unix时间戳 */
+  To: number;
+  /** 分页的偏移量，默认值为0。 */
+  Offset: number;
+  /** 分页单页限制数目，最大值100。 */
+  Limit: number;
+  /** - alertId：按照告警策略ID进行过滤。类型：String 必选：否- topicId：按照监控对象ID进行过滤。类型：String 必选：否- status：按照告警状态进行过滤。类型：String 必选：否，0代表未恢复，1代表已恢复，2代表已失效- alarmLevel：按照告警等级进行过滤。类型：String 必选：否，0代表警告，1代表提醒，2代表紧急每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeAlertRecordHistoryResponse {
+  /** 告警历史总数 */
+  TotalCount?: number;
+  /** 告警历史详情 */
+  Records?: AlertHistoryRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConfigExtrasRequest {
   /** 支持的key： topicId,name, configExtraId, machineGroupId */
   Filters?: Filter[];
@@ -2129,6 +2203,8 @@ declare interface Cls {
   DescribeAlarmNotices(data?: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
   /** 获取告警策略列表 {@link DescribeAlarmsRequest} {@link DescribeAlarmsResponse} */
   DescribeAlarms(data?: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
+  /** 获取告警历史 {@link DescribeAlertRecordHistoryRequest} {@link DescribeAlertRecordHistoryResponse} */
+  DescribeAlertRecordHistory(data: DescribeAlertRecordHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRecordHistoryResponse>;
   /** 获取特殊采集配置 {@link DescribeConfigExtrasRequest} {@link DescribeConfigExtrasResponse} */
   DescribeConfigExtras(data?: DescribeConfigExtrasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigExtrasResponse>;
   /** 获取采集规则配置所绑定的机器组 {@link DescribeConfigMachineGroupsRequest} {@link DescribeConfigMachineGroupsResponse} */

@@ -2032,6 +2032,8 @@ declare interface FileTamperEvent {
   ExeName?: string | null;
   /** 主机额外信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 文件威胁行为read 读取文件write 修改文件 */
+  FileAction?: string | null;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。* 最多只能有5个Filter* 同一个Filter存在多个Values，Values值数量最多不能超过5个。 */
@@ -5777,7 +5779,7 @@ declare interface DescribeExportMachinesResponse {
 }
 
 declare interface DescribeFileTamperEventsRequest {
-  /** 过滤条件。Status - String - 是否必填：否 - 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略ModifyTime - String - 是否必填：否 - 最近发生时间Uuid- String - 是否必填：否 - 主机uuid查询RuleCategory- string - 是否必填：否 - 规则类别 0 系统规则 1 自定义规则 */
+  /** 过滤条件。Status - String - 是否必填：否 - 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略ModifyTime - String - 是否必填：否 - 最近发生时间Uuid- String - 是否必填：否 - 主机uuid查询RuleCategory- string - 是否必填：否 - 规则类别 0 系统规则 1 自定义规则FileAction- string - 是否必填：否 - 威胁行为 read 读取文件 write 写文件 */
   Filters?: Filters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -5791,9 +5793,9 @@ declare interface DescribeFileTamperEventsRequest {
 
 declare interface DescribeFileTamperEventsResponse {
   /** 核心文件事件列表 */
-  List: FileTamperEvent[] | null;
+  List?: FileTamperEvent[] | null;
   /** 数据总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -3463,6 +3463,32 @@ declare interface CreateConfigTemplateWithDetailRespResponse {
   RequestId?: string;
 }
 
+declare interface CreateConfigWithDetailRespRequest {
+  /** 配置项名称 */
+  ConfigName: string;
+  /** 配置项版本 */
+  ConfigVersion: string;
+  /** 配置项值 */
+  ConfigValue: string;
+  /** 应用ID */
+  ApplicationId: string;
+  /** 配置项版本描述 */
+  ConfigVersionDesc?: string;
+  /** 配置项值类型 */
+  ConfigType?: string;
+  /** Base64编码的配置项 */
+  EncodeWithBase64?: boolean;
+  /** 无 */
+  ProgramIdList?: string[];
+}
+
+declare interface CreateConfigWithDetailRespResponse {
+  /** 配置项 */
+  Result?: Config | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateContainGroupRequest {
   /** 分组所属应用ID */
   ApplicationId: string;
@@ -3549,6 +3575,38 @@ declare interface CreateFileConfigRequest {
 declare interface CreateFileConfigResponse {
   /** true：创建成功；false：创建失败 */
   Result: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFileConfigWithDetailRespRequest {
+  /** 配置项名称 */
+  ConfigName: string;
+  /** 配置项版本 */
+  ConfigVersion: string;
+  /** 配置项文件名 */
+  ConfigFileName: string;
+  /** 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换） */
+  ConfigFileValue: string;
+  /** 配置项关联应用ID */
+  ApplicationId: string;
+  /** 发布路径 */
+  ConfigFilePath: string;
+  /** 配置项版本描述 */
+  ConfigVersionDesc?: string;
+  /** 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持 */
+  ConfigFileCode?: string;
+  /** 后置命令 */
+  ConfigPostCmd?: string;
+  /** Base64编码的配置项 */
+  EncodeWithBase64?: boolean;
+  /** 无 */
+  ProgramIdList?: string[];
+}
+
+declare interface CreateFileConfigWithDetailRespResponse {
+  /** 文件配置项 */
+  Result?: FileConfig | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7097,10 +7155,14 @@ declare interface Tsf {
   CreateConfigTemplate(data: CreateConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigTemplateResponse>;
   /** 创建参数模板返回详细信息 {@link CreateConfigTemplateWithDetailRespRequest} {@link CreateConfigTemplateWithDetailRespResponse} */
   CreateConfigTemplateWithDetailResp(data: CreateConfigTemplateWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigTemplateWithDetailRespResponse>;
+  /** 创建配置项并返回详细信息 {@link CreateConfigWithDetailRespRequest} {@link CreateConfigWithDetailRespResponse} */
+  CreateConfigWithDetailResp(data: CreateConfigWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigWithDetailRespResponse>;
   /** 创建容器部署组 {@link CreateContainGroupRequest} {@link CreateContainGroupResponse} */
   CreateContainGroup(data: CreateContainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContainGroupResponse>;
   /** 创建文件配置项 {@link CreateFileConfigRequest} {@link CreateFileConfigResponse} */
   CreateFileConfig(data: CreateFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileConfigResponse>;
+  /** 创建文件配置项并返回详细信息 {@link CreateFileConfigWithDetailRespRequest} {@link CreateFileConfigWithDetailRespResponse} */
+  CreateFileConfigWithDetailResp(data: CreateFileConfigWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileConfigWithDetailRespResponse>;
   /** 批量导入API至api分组 {@link CreateGatewayApiRequest} {@link CreateGatewayApiResponse} */
   CreateGatewayApi(data: CreateGatewayApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGatewayApiResponse>;
   /** 创建部署组 {@link CreateGroupRequest} {@link CreateGroupResponse} */

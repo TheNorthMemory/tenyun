@@ -7139,7 +7139,7 @@ declare interface DescribeReverseShellEventsRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}] */
+  /** 过滤参数InnerNetAlarmShow- int - 是否必填：1 - 内网告警展示 0 - 不展示 */
   Filters?: RunTimeFilters[];
   /** 升序降序,asc desc */
   Order?: string;
@@ -7149,9 +7149,9 @@ declare interface DescribeReverseShellEventsRequest {
 
 declare interface DescribeReverseShellEventsResponse {
   /** 事件总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 反弹shell数组 */
-  EventSet: ReverseShellEventInfo[];
+  EventSet?: ReverseShellEventInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

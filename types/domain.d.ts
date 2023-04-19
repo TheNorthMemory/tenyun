@@ -20,6 +20,12 @@ declare interface CertificateInfo {
   CertificateType: string;
   /** 证件照片地址。 */
   ImgUrl: string;
+  /** 联系人证件号码。 */
+  RegistrantCertificateCode?: string | null;
+  /** 联系人证件类型。 */
+  RegistrantCertificateType?: string | null;
+  /** 联系人证件照片地址。 */
+  RegistrantImgUrl?: string | null;
 }
 
 /** 域名联系人信息 */
@@ -357,7 +363,7 @@ declare interface CreateTemplateRequest {
 
 declare interface CreateTemplateResponse {
   /** 模板信息 */
-  Template: TemplateInfo;
+  Template?: TemplateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -513,9 +519,9 @@ declare interface DescribeTemplateListRequest {
 
 declare interface DescribeTemplateListResponse {
   /** 模板数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 模板详细信息列表。 */
-  TemplateSet: TemplateInfo[];
+  TemplateSet?: TemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

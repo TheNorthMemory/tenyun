@@ -458,6 +458,36 @@ declare interface DealInfo {
   InstanceChargeType: string;
 }
 
+/** 设置实例扩展事件阈值 */
+declare interface EventConfig {
+  /** 事件类型，slow-设置慢SQL阈值，blocked-设置阻塞、死锁阈值 */
+  EventType: string | null;
+  /** 阈值，单位毫秒。0表示关闭，大于0表示开启 */
+  Threshold: number | null;
+}
+
+/** 实例扩展事件详情 */
+declare interface Events {
+  /** ID */
+  Id?: number;
+  /** 扩展事件文件名称 */
+  FileName?: string;
+  /** 扩展事件文件大小 */
+  Size?: number;
+  /** 事件类型，slow-慢SQL事件，blocked-阻塞事件，deadlock-死锁事件 */
+  EventType?: string;
+  /** 事件记录状态，1-成功，2-失败 */
+  Status?: number;
+  /** 扩展文件生成开始时间 */
+  StartTime?: string;
+  /** 扩展文件生成开始时间 */
+  EndTime?: string;
+  /** 内网下载地址 */
+  InternalAddr?: string;
+  /** 外网下载地址 */
+  ExternalAddr?: string;
+}
+
 /** 允许动作信息 */
 declare interface FileAction {
   /** 支持的所有操作，值包括：view(查看列表) remark(修改备注)，deploy(部署)，delete(删除文件) */
@@ -1754,6 +1784,32 @@ declare interface DescribeDBInstanceInterResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBInstancesAttributeRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeDBInstancesAttributeResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 定期备份状态 enable-开启，disable-关闭 */
+  RegularBackupEnable?: string;
+  /** 定期备份保留天数 [90 - 3650]天 */
+  RegularBackupSaveDays?: number;
+  /** 定期备份策略 years-每年，quarters-每季度，months-每月 */
+  RegularBackupStrategy?: string;
+  /** 定期备份保留个数 */
+  RegularBackupCounts?: number;
+  /** 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期 */
+  RegularBackupStartTime?: string;
+  /** 阻塞进程阈值，单位毫秒 */
+  BlockedThreshold?: number;
+  /** 慢SQL、阻塞、死锁扩展事件文件保留时长 */
+  EventSaveDays?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBInstancesRequest {
   /** 项目ID */
   ProjectId?: number;
@@ -2278,6 +2334,30 @@ declare interface DescribeUploadIncrementalInfoResponse {
   StartTime: string;
   /** 临时密钥到期时间 */
   ExpiredTime: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeXEventsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 事件类型，slow-慢SQL事件，blocked-阻塞事件，deadlock-死锁事件 */
+  EventType: string;
+  /** 扩展文件生成开始时间 */
+  StartTime: string;
+  /** 扩展文件生成结束时间 */
+  EndTime: string;
+  /** 分页返回，页编号，默认值为第0页 */
+  Offset?: number;
+  /** 分页返回，每页返回的数目，取值为1~100，默认值为20 */
+  Limit?: number;
+}
+
+declare interface DescribeXEventsResponse {
+  /** 扩展事件列表 */
+  Events?: Events[];
+  /** 扩展事件总数量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2946,6 +3026,18 @@ declare interface StartIncrementalMigrationResponse {
   RequestId?: string;
 }
 
+declare interface StartInstanceXEventRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开启、关闭扩展事件 */
+  EventConfig: EventConfig[];
+}
+
+declare interface StartInstanceXEventResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartMigrationCheckRequest {
   /** 迁移任务id */
   MigrateId: number;
@@ -3087,6 +3179,8 @@ declare interface Sqlserver {
   DescribeDBInstanceInter(data: DescribeDBInstanceInterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceInterResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
+  /** 实例附属属性 {@link DescribeDBInstancesAttributeRequest} {@link DescribeDBInstancesAttributeResponse} */
+  DescribeDBInstancesAttribute(data: DescribeDBInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesAttributeResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询数据库列表 {@link DescribeDBsRequest} {@link DescribeDBsResponse} */
@@ -3133,6 +3227,8 @@ declare interface Sqlserver {
   DescribeUploadBackupInfo(data: DescribeUploadBackupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadBackupInfoResponse>;
   /** 查询增量备份上传权限 {@link DescribeUploadIncrementalInfoRequest} {@link DescribeUploadIncrementalInfoResponse} */
   DescribeUploadIncrementalInfo(data: DescribeUploadIncrementalInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadIncrementalInfoResponse>;
+  /** 查询扩展事件列表 {@link DescribeXEventsRequest} {@link DescribeXEventsResponse} */
+  DescribeXEvents(data: DescribeXEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeXEventsResponse>;
   /** 查询售卖可用区 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
@@ -3213,6 +3309,8 @@ declare interface Sqlserver {
   StartBackupMigration(data: StartBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<StartBackupMigrationResponse>;
   /** 启动增量备份导入任务 {@link StartIncrementalMigrationRequest} {@link StartIncrementalMigrationResponse} */
   StartIncrementalMigration(data: StartIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<StartIncrementalMigrationResponse>;
+  /** 开启、关闭扩展事件 {@link StartInstanceXEventRequest} {@link StartInstanceXEventResponse} */
+  StartInstanceXEvent(data: StartInstanceXEventRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstanceXEventResponse>;
   /** 启动迁移校验 {@link StartMigrationCheckRequest} {@link StartMigrationCheckResponse} */
   StartMigrationCheck(data: StartMigrationCheckRequest, config?: AxiosRequestConfig): AxiosPromise<StartMigrationCheckResponse>;
   /** 中止迁移任务 {@link StopMigrationRequest} {@link StopMigrationResponse} */

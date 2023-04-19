@@ -430,7 +430,7 @@ declare interface GroupOrganization {
   OrganizationId?: string | null;
   /** 更新时间 */
   UpdateTime?: number | null;
-  /** 成员企业状态 */
+  /** 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入 */
   Status?: number | null;
   /** 是否为集团主企业 */
   IsMainOrganization?: boolean | null;
@@ -500,23 +500,23 @@ declare interface OccupiedSeal {
 
 /** 机构信息 */
 declare interface OrganizationInfo {
-  /** 机构在平台的编号 */
+  /** 机构在平台的编号，内部字段，暂未开放 */
   OrganizationId?: string;
-  /** 用户渠道 */
+  /** 用户渠道，内部字段，暂未开放 */
   Channel?: string;
-  /** 用户在渠道的机构编号 */
+  /** 用户在渠道的机构编号，内部字段，暂未开放 */
   OrganizationOpenId?: string;
-  /** 用户真实的IP */
+  /** 用户真实的IP，内部字段，暂未开放 */
   ClientIp?: string;
-  /** 机构的代理IP */
+  /** 机构的代理IP，内部字段，暂未开放 */
   ProxyIp?: string;
 }
 
 /** 合同文件验签单个结果结构体 */
 declare interface PdfVerifyResult {
-  /** 验签结果 */
+  /** 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。 */
   VerifyResult: number;
-  /** 签署平台 */
+  /** 签署平台，如果文件是在腾讯电子签平台签署，则返回腾讯电子签，如果文件不在腾讯电子签平台签署，则返回其他平台。 */
   SignPlatform: string;
   /** 签署人名称 */
   SignerName: string;
@@ -546,7 +546,7 @@ declare interface PdfVerifyResult {
 declare interface Recipient {
   /** 签署参与者ID */
   RecipientId?: string;
-  /** 参与者类型（ENTERPRISE/INDIVIDUAL） */
+  /** 参与者类型。默认为空。ENTERPRISE-企业；INDIVIDUAL-个人；PROMOTER-发起方 */
   RecipientType?: string;
   /** 描述信息 */
   Description?: string;
@@ -566,7 +566,7 @@ declare interface Recipient {
   Mobile?: string;
   /** 关联的用户ID */
   UserId?: string;
-  /** 发送方式（EMAIL/MOBILE） */
+  /** 发送方式。默认为EMAIL。EMAIL-邮件；MOBILE-手机短信；WECHAT-微信通知 */
   DeliveryMethod?: string;
   /** 附属信息 */
   RecipientExtra?: string;
@@ -734,7 +734,7 @@ declare interface TemplateInfo {
   CreatedOn?: number;
   /** 发起人角色信息 */
   Promoter?: Recipient;
-  /** 模板可用状态，取值：0未知，但默认会被转成启用；1启用（默认），2停用 */
+  /** 模板可用状态，取值：1启用（默认），2停用 */
   Available?: number;
   /** 模板创建组织id */
   OrganizationId?: string;
@@ -758,13 +758,13 @@ declare interface UploadFile {
 declare interface UserInfo {
   /** 用户在平台的编号 */
   UserId?: string;
-  /** 用户的来源渠道 */
+  /** 用户的来源渠道，一般不用传，特定场景根据接口说明传值 */
   Channel?: string;
-  /** 用户在渠道的编号 */
+  /** 用户在渠道的编号，一般不用传，特定场景根据接口说明传值 */
   OpenId?: string;
-  /** 用户真实IP */
+  /** 用户真实IP，内部字段，暂未开放 */
   ClientIp?: string;
-  /** 用户代理IP */
+  /** 用户代理IP，内部字段，暂未开放 */
   ProxyIp?: string;
 }
 
@@ -779,7 +779,7 @@ declare interface UserThreeFactor {
 }
 
 declare interface BindEmployeeUserIdWithClientOpenIdRequest {
-  /** OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId */
+  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定 */
   Operator: UserInfo;
   /** 电子签系统员工UserId */
   UserId: string;
@@ -789,7 +789,7 @@ declare interface BindEmployeeUserIdWithClientOpenIdRequest {
 
 declare interface BindEmployeeUserIdWithClientOpenIdResponse {
   /** 绑定是否成功，1表示成功，0表示失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -871,7 +871,7 @@ declare interface CreateDocumentRequest {
   FlowId: string;
   /** 用户上传的模板ID */
   TemplateId: string;
-  /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起 */
+  /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。 */
   FileNames: string[];
   /** 内容控件信息数组 */
   FormFields?: FormField[];
@@ -1267,6 +1267,10 @@ declare interface CreateUserAutoSignEnableUrlRequest {
   AutoSignConfig: AutoSignConfig;
   /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
   UrlType?: string;
+  /** 通知类型，默认不填为不通知开通方，填写 SMS 为短息通知。 */
+  NotifyType?: string;
+  /** 若上方填写为 SMS，则此处为手机号 */
+  NotifyAddress?: string;
 }
 
 declare interface CreateUserAutoSignEnableUrlResponse {
@@ -1291,7 +1295,7 @@ declare interface DeleteIntegrationEmployeesRequest {
   Operator: UserInfo;
   /** 待移除员工的信息，userId和openId二选一，必填一个 */
   Employees: Staff[];
-  /** 代理信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id */
   Agent?: Agent;
 }
 
@@ -1423,8 +1427,6 @@ declare interface DescribeFlowInfoResponse {
 declare interface DescribeFlowTemplatesRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 企业组织相关信息，一般不用填 */
-  Organization?: OrganizationInfo;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 查询偏移位置，默认0 */
@@ -1437,10 +1439,12 @@ declare interface DescribeFlowTemplatesRequest {
   ApplicationId?: string;
   /** 默认为false，查询SaaS模板库列表；为true，查询第三方应用集成平台企业模板库管理列表 */
   IsChannel?: boolean;
-  /** 暂未开放 */
-  GenerateSource?: number;
   /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
   ContentType?: number;
+  /** 暂未开放 */
+  Organization?: OrganizationInfo;
+  /** 暂未开放 */
+  GenerateSource?: number;
 }
 
 declare interface DescribeFlowTemplatesResponse {
@@ -1525,7 +1529,7 @@ declare interface DescribeOrganizationGroupOrganizationsRequest {
   Name?: string;
   /** 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入 */
   Status?: number;
-  /** 是否到处当前成员企业数据 */
+  /** 是否导出当前成员企业数据 */
   Export?: boolean;
   /** 成员企业id */
   Id?: string;
@@ -1673,7 +1677,7 @@ declare interface StartFlowResponse {
 }
 
 declare interface UnbindEmployeeUserIdWithClientOpenIdRequest {
-  /** OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId */
+  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定 */
   Operator: UserInfo;
   /** 电子签系统员工UserId */
   UserId: string;
@@ -1683,7 +1687,7 @@ declare interface UnbindEmployeeUserIdWithClientOpenIdRequest {
 
 declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
   /** 解绑是否成功，1表示成功，0表示失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1691,10 +1695,10 @@ declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
 declare interface UpdateIntegrationEmployeesRequest {
   /** 操作人信息 */
   Operator: UserInfo;
-  /** 代理信息 */
-  Agent: Agent;
   /** 员工信息 */
   Employees: Staff[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id */
+  Agent?: Agent;
 }
 
 declare interface UpdateIntegrationEmployeesResponse {

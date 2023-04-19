@@ -86,6 +86,8 @@ declare interface CallBackTemplateInfo {
   CallbackKey: string;
   /** 推流异常回调 URL。 */
   PushExceptionNotifyUrl: string | null;
+  /** 音频审核回调 URL。 */
+  AudioAuditNotifyUrl?: string | null;
 }
 
 /** 回调事件信息 */
@@ -462,6 +464,10 @@ declare interface LivePackageInfo {
   Type?: number;
   /** 包状态，可选值:0: 未使用。1: 使用中。2: 已过期。3: 已冻结。4: 已耗尽。5: 已退款 */
   Status?: number;
+  /** 是否自动续购。 */
+  WillRenew?: number | null;
+  /** 续购状态。1 ：续购成功。0 ：尚未续购。<0 : 续购失败。 */
+  RenewalResult?: number | null;
 }
 
 /** 日志url信息。 */

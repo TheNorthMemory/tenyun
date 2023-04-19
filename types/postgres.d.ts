@@ -48,6 +48,20 @@ declare interface AnalysisItems {
   LastTime: string;
 }
 
+/** 备份下载限制信息 */
+declare interface BackupDownloadRestriction {
+  /** 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。 */
+  RestrictionType?: string;
+  /** vpc限制效力，ALLOW 允许；DENY 拒绝。 */
+  VpcRestrictionEffect?: string;
+  /** 允许或拒绝下载备份文件的vpcId列表。 */
+  VpcIdSet?: string[];
+  /** ip限制效力，ALLOW 允许；DENY 拒绝。 */
+  IpRestrictionEffect?: string;
+  /** 允许或拒绝下载备份文件的ip列表。 */
+  IpSet?: string[];
+}
+
 /** 备份计划 */
 declare interface BackupPlan {
   /** 备份周期 */
@@ -1351,11 +1365,13 @@ declare interface DescribeBackupDownloadURLRequest {
   BackupId: string;
   /** 链接的有效时间，默认为12小时。 */
   URLExpireTime?: number;
+  /** 备份下载限制 */
+  BackupDownloadRestriction?: BackupDownloadRestriction;
 }
 
 declare interface DescribeBackupDownloadURLResponse {
   /** 备份的下载地址。 */
-  BackupDownloadURL: string;
+  BackupDownloadURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

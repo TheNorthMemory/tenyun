@@ -3827,6 +3827,20 @@ declare interface ModifyTopicAttributesResponse {
   RequestId?: string;
 }
 
+declare interface RenewCkafkaInstanceRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 续费时长, 默认为1, 单位是月 */
+  TimeSpan?: number;
+}
+
+declare interface RenewCkafkaInstanceResponse {
+  /** 订单号 */
+  BigDealId?: string | null;
+  /** 子订单号 */
+  DealName?: string | null;
+}
+
 declare interface RouteResponse {
   /** 路由信息列表 */
   Routers: Route[] | null;
@@ -4065,6 +4079,8 @@ declare interface Ckafka {
   ModifyPassword(data: ModifyPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPasswordResponse>;
   /** 设置主题属性 {@link ModifyTopicAttributesRequest} {@link ModifyTopicAttributesResponse} */
   ModifyTopicAttributes(data: ModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributesResponse>;
+  /** 续费Ckafka实例 {@link RenewCkafkaInstanceRequest} {@link RenewCkafkaInstanceResponse} */
+  RenewCkafkaInstance(data: RenewCkafkaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewCkafkaInstanceResponse>;
   /** HTTP发送消息 {@link SendMessageRequest} {@link SendMessageResponse} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
 }

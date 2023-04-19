@@ -5230,6 +5230,20 @@ declare interface UninstallLogAgentResponse {
   RequestId?: string;
 }
 
+declare interface UpdateClusterKubeconfigRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 子账户Uin列表，传空默认为调用此接口的SubUin */
+  SubAccounts?: string[];
+}
+
+declare interface UpdateClusterKubeconfigResponse {
+  /** 已更新的子账户Uin列表 */
+  UpdatedSubAccounts?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateClusterVersionRequest {
   /** 集群 Id */
   ClusterId: string;
@@ -5797,6 +5811,8 @@ declare interface Tke {
   UninstallEdgeLogAgent(data: UninstallEdgeLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallEdgeLogAgentResponse>;
   /** 卸载日志采集组件 {@link UninstallLogAgentRequest} {@link UninstallLogAgentResponse} */
   UninstallLogAgent(data: UninstallLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallLogAgentResponse>;
+  /** 更新集群的kubeconfig信息 {@link UpdateClusterKubeconfigRequest} {@link UpdateClusterKubeconfigResponse} */
+  UpdateClusterKubeconfig(data: UpdateClusterKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateClusterKubeconfigResponse>;
   /** 升级集群 {@link UpdateClusterVersionRequest} {@link UpdateClusterVersionResponse} */
   UpdateClusterVersion(data: UpdateClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateClusterVersionResponse>;
   /** 修改弹性集群EKS {@link UpdateEKSClusterRequest} {@link UpdateEKSClusterResponse} */

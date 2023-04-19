@@ -326,6 +326,14 @@ declare interface DomainsPartInfo {
   ProxyReadTimeout: number | null;
   /** 300s */
   ProxySendTimeout: number | null;
+  /** 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost； */
+  SniType: number | null;
+  /** SniType=3时，需要填此参数，表示自定义的host； */
+  SniHost: string | null;
+  /** 无 */
+  Weights?: string[] | null;
+  /** IsCdn=3时，表示自定义header */
+  IpHeaders: string[] | null;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -444,6 +452,10 @@ declare interface HostRecord {
   CdcClusters?: string[] | null;
   /** 应用型负载均衡类型: clb或者apisix，默认clb */
   AlbType?: string | null;
+  /** IsCdn=3时，需要填此参数，表示自定义header */
+  IpHeaders?: string[] | null;
+  /** 规则引擎类型， 1: menshen, 2:tiga */
+  EngineType?: number | null;
 }
 
 /** 一个实例的详细信息 */
@@ -615,11 +627,35 @@ declare interface PeakPointsItem {
   /** CC攻击次数 */
   Cc: number;
   /** Bot qps */
-  BotAccess: number | null;
+  BotAccess: number;
+  /** WAF返回给客户端状态码次数 */
+  StatusServerError: number | null;
+  /** WAF返回给客户端状态码次数 */
+  StatusClientError: number | null;
+  /** WAF返回给客户端状态码次数 */
+  StatusRedirect: number | null;
+  /** WAF返回给客户端状态码次数 */
+  StatusOk: number | null;
+  /** 源站返回给WAF状态码次数 */
+  UpstreamServerError: number | null;
+  /** 源站返回给WAF状态码次数 */
+  UpstreamClientError: number | null;
+  /** 源站返回给WAF状态码次数 */
+  UpstreamRedirect: number | null;
 }
 
-/** 防护域名端口配置信息 */
+/** 服务端口配置 */
 declare interface PortInfo {
+  /** Nginx的服务器id */
+  NginxServerId: number;
+  /** 监听端口配置 */
+  Port: string;
+  /** 与端口对应的协议 */
+  Protocol: string;
+  /** 回源端口 */
+  UpstreamPort: string;
+  /** 回源协议 */
+  UpstreamProtocol: string;
 }
 
 /** 防护域名端口配置信息 */
@@ -825,7 +861,7 @@ declare interface AddSpartaProtectionRequest {
   HttpsRewrite?: number;
   /** 服务有多端口需要设置此字段 */
   Ports?: PortItem[];
-  /** 版本：sparta-waf、clb-waf、cdn-waf */
+  /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF，cdn-waf表示CDN上的Web防护能力 */
   Edition?: string;
   /** 是否开启长连接，仅IP回源时可以用填次参数，域名回源时这个参数无效 */
   IsKeepAlive?: string;
@@ -847,6 +883,12 @@ declare interface AddSpartaProtectionRequest {
   ProxyReadTimeout?: number;
   /** 300s */
   ProxySendTimeout?: number;
+  /** 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost； */
+  SniType?: number;
+  /** SniType=3时，需要填此参数，表示自定义的host； */
+  SniHost?: string;
+  /** is_cdn=3时，需要填此参数，表示自定义header */
+  IpHeaders?: string[];
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -1121,7 +1163,7 @@ declare interface DescribeDomainDetailsSaasRequest {
 
 declare interface DescribeDomainDetailsSaasResponse {
   /** 域名详情 */
-  DomainsPartInfo: DomainsPartInfo;
+  DomainsPartInfo?: DomainsPartInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1281,7 +1323,7 @@ declare interface DescribePeakPointsRequest {
   Edition?: string;
   /** WAF实例ID，不传则不过滤 */
   InstanceID?: string;
-  /** 六个值可选：access-峰值qps趋势图botAccess- bot峰值qps趋势图down-下行峰值带宽趋势图up-上行峰值带宽趋势图attack-Web攻击总数趋势图cc-CC攻击总数趋势图 */
+  /** 十三个值可选：access-峰值qps趋势图botAccess- bot峰值qps趋势图down-下行峰值带宽趋势图up-上行峰值带宽趋势图attack-Web攻击总数趋势图cc-CC攻击总数趋势图StatusServerError-WAF返回给客户端状态码次数趋势图StatusClientError-WAF返回给客户端状态码次数趋势图StatusRedirect-WAF返回给客户端状态码次数趋势图StatusOk-WAF返回给客户端状态码次数趋势图UpstreamServerError-源站返回给WAF状态码次数趋势图UpstreamClientError-源站返回给WAF状态码次数趋势图UpstreamRedirect-源站返回给WAF状态码次数趋势图 */
   MetricName?: string;
 }
 
@@ -1667,7 +1709,7 @@ declare interface Waf {
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
   /** 增加域名规则白名单 {@link AddDomainWhiteRuleRequest} {@link AddDomainWhiteRuleResponse} */
   AddDomainWhiteRule(data: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
-  /** 添加Spart防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
+  /** 添加SAAS-WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;

@@ -1040,6 +1040,8 @@ declare interface DomainLog {
   Area: string;
   /** 日志包文件名 */
   LogName: string;
+  /** 文件大小，单位: Byte */
+  FileSize?: number | null;
 }
 
 /** 单链接下行限速配置，默认为关闭状态 */
@@ -2985,9 +2987,9 @@ declare interface DescribeCdnDomainLogsRequest {
 
 declare interface DescribeCdnDomainLogsResponse {
   /** 日志包下载链接。下载内容是gz后缀的压缩包，解压后是无扩展名的文本文件。 */
-  DomainLogs: DomainLog[];
+  DomainLogs?: DomainLog[];
   /** 查询到的总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

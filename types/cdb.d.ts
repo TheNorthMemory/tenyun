@@ -4305,7 +4305,7 @@ declare interface Cdb {
   DescribeBinlogBackupOverview(data: DescribeBinlogBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogBackupOverviewResponse>;
   /** 查询二进制日志备份文件列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
-  /** 查询数据库代理 {@link DescribeCDBProxyRequest} {@link DescribeCDBProxyResponse} */
+  /** @deprecated 查询数据库代理 {@link DescribeCDBProxyRequest} {@link DescribeCDBProxyResponse} */
   DescribeCDBProxy(data: DescribeCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDBProxyResponse>;
   /** 查询数据库可用区及售卖规格 {@link DescribeCdbZoneConfigRequest} {@link DescribeCdbZoneConfigResponse} */
   DescribeCdbZoneConfig(data?: DescribeCdbZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbZoneConfigResponse>;
@@ -4357,7 +4357,7 @@ declare interface Cdb {
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */
   DescribeProjectSecurityGroups(data?: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
-  /** 查询代理连接池规格配置 {@link DescribeProxyConnectionPoolConfRequest} {@link DescribeProxyConnectionPoolConfResponse} */
+  /** @deprecated 查询代理连接池规格配置 {@link DescribeProxyConnectionPoolConfRequest} {@link DescribeProxyConnectionPoolConfResponse} */
   DescribeProxyConnectionPoolConf(data: DescribeProxyConnectionPoolConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyConnectionPoolConfResponse>;
   /** 查询代理规格配置 {@link DescribeProxyCustomConfRequest} {@link DescribeProxyCustomConfResponse} */
   DescribeProxyCustomConf(data: DescribeProxyCustomConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyCustomConfResponse>;
@@ -4417,11 +4417,11 @@ declare interface Cdb {
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
   /** 设置实例备份文件是否加密 {@link ModifyBackupEncryptionStatusRequest} {@link ModifyBackupEncryptionStatusResponse} */
   ModifyBackupEncryptionStatus(data: ModifyBackupEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupEncryptionStatusResponse>;
-  /** 配置数据库代理连接池 {@link ModifyCDBProxyConnectionPoolRequest} {@link ModifyCDBProxyConnectionPoolResponse} */
+  /** @deprecated 配置数据库代理连接池 {@link ModifyCDBProxyConnectionPoolRequest} {@link ModifyCDBProxyConnectionPoolResponse} */
   ModifyCDBProxyConnectionPool(data: ModifyCDBProxyConnectionPoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyConnectionPoolResponse>;
-  /** 修改数据库代理描述 {@link ModifyCDBProxyDescRequest} {@link ModifyCDBProxyDescResponse} */
+  /** @deprecated 修改数据库代理描述 {@link ModifyCDBProxyDescRequest} {@link ModifyCDBProxyDescResponse} */
   ModifyCDBProxyDesc(data: ModifyCDBProxyDescRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyDescResponse>;
-  /** 修改数据库代理VIP或端口 {@link ModifyCDBProxyVipVPortRequest} {@link ModifyCDBProxyVipVPortResponse} */
+  /** @deprecated 修改数据库代理VIP或端口 {@link ModifyCDBProxyVipVPortRequest} {@link ModifyCDBProxyVipVPortResponse} */
   ModifyCDBProxyVipVPort(data: ModifyCDBProxyVipVPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyVipVPortResponse>;
   /** 修改云数据库实例名 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
@@ -4459,7 +4459,7 @@ declare interface Cdb {
   OpenDBInstanceGTID(data: OpenDBInstanceGTIDRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBInstanceGTIDResponse>;
   /** 开通实例外网访问 {@link OpenWanServiceRequest} {@link OpenWanServiceResponse} */
   OpenWanService(data: OpenWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanServiceResponse>;
-  /** 查询代理详情 {@link QueryCDBProxyRequest} {@link QueryCDBProxyResponse} */
+  /** @deprecated 查询代理详情 {@link QueryCDBProxyRequest} {@link QueryCDBProxyResponse} */
   QueryCDBProxy(data: QueryCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCDBProxyResponse>;
   /** 解隔离云数据库实例 {@link ReleaseIsolatedDBInstancesRequest} {@link ReleaseIsolatedDBInstancesResponse} */
   ReleaseIsolatedDBInstances(data: ReleaseIsolatedDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIsolatedDBInstancesResponse>;

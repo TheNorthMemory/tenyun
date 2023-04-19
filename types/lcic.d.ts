@@ -88,6 +88,14 @@ declare interface DocumentInfo {
   DocumentSize?: number | null;
   /** 更新的UNIX时间戳 */
   UpdateTime?: number | null;
+  /** 课件页数 */
+  Pages?: number | null;
+  /** 宽，仅在静态转码的课件有效 */
+  Width?: number | null;
+  /** 高，仅在静态转码的课件有效 */
+  Height?: number | null;
+  /** 封面，仅转码的课件会生成封面 */
+  Cover?: string | null;
 }
 
 /** 房间事件对应的信息。 */
@@ -164,6 +172,14 @@ declare interface MemberRecord {
   PerMemberMicCount?: number;
   /** 每个成员发送消息数量。 */
   PerMemberMessageCount?: number;
+  /** 用户角色。0代表学生；1代表老师； 2助教；3巡课。 */
+  Role?: number;
+  /** 上课班号 */
+  GroupId?: string;
+  /** 子上课班号 */
+  SubGroupId?: string[] | null;
+  /** 用户的上台状态 */
+  Stage?: number | null;
 }
 
 /** 单条消息体内容 */
@@ -613,6 +629,18 @@ declare interface DeleteRoomResponse {
   RequestId?: string;
 }
 
+declare interface DeleteSupervisorRequest {
+  /** 应用ID */
+  SdkAppId: number;
+  /** 用户ID列表 */
+  Users: string[];
+}
+
+declare interface DeleteSupervisorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAnswerListRequest {
   /** 问题ID */
   QuestionId: string;
@@ -735,6 +763,32 @@ declare interface DescribeDocumentsByRoomResponse {
   Documents?: DocumentInfo[] | null;
   /** 符合查询条件文档总数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDocumentsRequest {
+  /** 学校id */
+  SchoolId: number;
+  /** 分页查询当前页数，从1开始递增 */
+  Page: number;
+  /** 每页数据量，最大1000 */
+  Limit: number;
+  /** 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件 */
+  Permission: number[];
+  /** 课件所有者的user_id，不填默认获取school_id下所有课件 */
+  Owner?: string;
+  /** 课件名称搜索词 */
+  Keyword?: string;
+  /** 课件id列表，从列表中查询，忽略错误的id */
+  DocumentId?: string[];
+}
+
+declare interface DescribeDocumentsResponse {
+  /** 符合查询条件文档总数 */
+  Total?: number;
+  /** 文档信息列表 */
+  Documents?: DocumentInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -945,6 +999,16 @@ declare interface DescribeUserResponse {
   Name: string;
   /** 用户头像Url。 */
   Avatar: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EndRoomRequest {
+  /** 房间ID。 */
+  RoomId: number;
+}
+
+declare interface EndRoomResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1207,6 +1271,16 @@ declare interface SetWatermarkResponse {
   RequestId?: string;
 }
 
+declare interface StartRoomRequest {
+  /** 房间ID。 */
+  RoomId: number;
+}
+
+declare interface StartRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindDocumentFromRoomRequest {
   /** 房间ID。 */
   RoomId: number;
@@ -1260,6 +1334,8 @@ declare interface Lcic {
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
+  /** 删除巡课 {@link DeleteSupervisorRequest} {@link DeleteSupervisorResponse} */
+  DeleteSupervisor(data: DeleteSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSupervisorResponse>;
   /** 获取房间答题详情 {@link DescribeAnswerListRequest} {@link DescribeAnswerListResponse} */
   DescribeAnswerList(data: DescribeAnswerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnswerListResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
@@ -1270,6 +1346,8 @@ declare interface Lcic {
   DescribeDeveloper(data?: DescribeDeveloperRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeveloperResponse>;
   /** 获取文档信息 {@link DescribeDocumentRequest} {@link DescribeDocumentResponse} */
   DescribeDocument(data: DescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentResponse>;
+  /** 批量获取文档信息 {@link DescribeDocumentsRequest} {@link DescribeDocumentsResponse} */
+  DescribeDocuments(data: DescribeDocumentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsResponse>;
   /** 获取指定房间下文档 {@link DescribeDocumentsByRoomRequest} {@link DescribeDocumentsByRoomResponse} */
   DescribeDocumentsByRoom(data: DescribeDocumentsByRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsByRoomResponse>;
   /** 获取群组详情 {@link DescribeGroupRequest} {@link DescribeGroupResponse} */
@@ -1290,6 +1368,8 @@ declare interface Lcic {
   DescribeSupervisors(data: DescribeSupervisorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupervisorsResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  /** 结束房间 {@link EndRoomRequest} {@link EndRoomResponse} */
+  EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
   /** 获取房间事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */
   GetRoomEvent(data: GetRoomEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomEventResponse>;
   /** 获取房间历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */
@@ -1316,6 +1396,8 @@ declare interface Lcic {
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
   /** 设置水印 {@link SetWatermarkRequest} {@link SetWatermarkResponse} */
   SetWatermark(data: SetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<SetWatermarkResponse>;
+  /** 开始房间 {@link StartRoomRequest} {@link StartRoomResponse} */
+  StartRoom(data: StartRoomRequest, config?: AxiosRequestConfig): AxiosPromise<StartRoomResponse>;
   /** 文档从房间解绑 {@link UnbindDocumentFromRoomRequest} {@link UnbindDocumentFromRoomResponse} */
   UnbindDocumentFromRoom(data: UnbindDocumentFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDocumentFromRoomResponse>;
 }

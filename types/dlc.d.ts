@@ -304,6 +304,10 @@ declare interface DataEngineInfo {
   ImageVersionName?: string | null;
   /** 是否开启备集群 */
   StartStandbyCluster?: boolean | null;
+  /** spark jar 包年包月集群是否开启弹性 */
+  ElasticSwitch?: boolean | null;
+  /** spark jar 包年包月集群弹性上限 */
+  ElasticLimit?: number | null;
 }
 
 /** 数据表数据格式。 */
@@ -386,6 +390,8 @@ declare interface JobLogResult {
   TopicName: string | null;
   /** 日志内容，json字符串 */
   LogJson: string | null;
+  /** 日志ID */
+  PkgLogId?: string | null;
 }
 
 /** 配置格式 */
@@ -726,6 +732,8 @@ declare interface SparkJobInfo {
   JobExecutorMaxNumbers?: number | null;
   /** 镜像版本 */
   SparkImageVersion?: string | null;
+  /** 查询脚本关联id */
+  SessionId?: string | null;
 }
 
 /** notebook session statement输出信息。 */
@@ -1679,6 +1687,8 @@ declare interface CreateSparkAppRequest {
   SparkImageVersion?: string;
   /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums */
   AppExecutorMaxNumbers?: number;
+  /** 关联dlc查询脚本id */
+  SessionId?: string;
 }
 
 declare interface CreateSparkAppResponse {
@@ -2171,6 +2181,8 @@ declare interface DescribeNotebookSessionStatementRequest {
   SessionId: string;
   /** Session Statement唯一标识 */
   StatementId: string;
+  /** 任务唯一标识 */
+  TaskId?: string;
 }
 
 declare interface DescribeNotebookSessionStatementResponse {
@@ -2315,13 +2327,13 @@ declare interface DescribeSparkAppJobsRequest {
   Sorting?: string;
   /** 按照该参数过滤,支持spark-job-name */
   Filters?: Filter[];
-  /** 更新时间起始点 */
+  /** 更新时间起始点，支持格式：yyyy-MM-dd HH:mm:ss */
   StartTime?: string;
-  /** 更新时间截止点 */
+  /** 更新时间截止点，支持格式：yyyy-MM-dd HH:mm:ss */
   EndTime?: string;
-  /** 查询列表偏移量 */
+  /** 查询列表偏移量, 默认值0 */
   Offset?: number;
-  /** 查询列表限制数量 */
+  /** 查询列表限制数量, 默认值100 */
   Limit?: number;
 }
 
@@ -2655,15 +2667,19 @@ declare interface ListTaskJobLogDetailRequest {
   Asc?: boolean;
   /** 预览日志的通用过滤条件 */
   Filters?: Filter[];
+  /** SparkSQL任务唯一ID */
+  BatchId?: string;
 }
 
 declare interface ListTaskJobLogDetailResponse {
   /** 下一次分页参数 */
-  Context: string | null;
+  Context?: string | null;
   /** 是否获取完结 */
-  ListOver: boolean | null;
+  ListOver?: boolean | null;
   /** 日志详情 */
-  Results: JobLogResult[] | null;
+  Results?: JobLogResult[] | null;
+  /** 日志url */
+  LogUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2753,6 +2769,8 @@ declare interface ModifySparkAppRequest {
   SparkImageVersion?: string;
   /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums */
   AppExecutorMaxNumbers?: number;
+  /** 关联dlc查询脚本 */
+  SessionId?: string;
 }
 
 declare interface ModifySparkAppResponse {
