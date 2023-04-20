@@ -2110,6 +2110,8 @@ declare interface VirtualNodeSpec {
   DisplayName: string;
   /** 子网ID */
   SubnetId: string;
+  /** 腾讯云标签 */
+  Tags?: Tag[] | null;
 }
 
 /** 数据卷挂载路径信息 */
@@ -2295,7 +2297,7 @@ declare interface CreateClusterEndpointRequest {
   Domain?: string;
   /** 使用的安全组，只有外网访问需要传递（开启外网访问时必传） */
   SecurityGroup?: string;
-  /** 创建lb参数，只有外网访问需要设置 */
+  /** 创建lb参数，只有外网访问需要设置，是一个json格式化后的字符串：{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}。各个参数意义：InternetAccessible.InternetChargeType含义：TRAFFIC_POSTPAID_BY_HOUR按流量按小时后计费;BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;InternetAccessible.BANDWIDTH_PACKAGE 按带宽包计费。InternetMaxBandwidthOut含义：最大出带宽，单位Mbps，范围支持0到2048，默认值10。VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE。 */
   ExtensiveParameters?: string;
 }
 
@@ -2385,7 +2387,7 @@ declare interface CreateClusterReleaseRequest {
   Chart: string;
   /** 自定义参数 */
   Values?: ReleaseValues;
-  /** 制品来源，范围：tke 应用市场/第三方chart */
+  /** 制品来源，范围：tke-market 或 other */
   ChartFrom?: string;
   /** 制品版本 */
   ChartVersion?: string;
@@ -2403,7 +2405,7 @@ declare interface CreateClusterReleaseRequest {
 
 declare interface CreateClusterReleaseResponse {
   /** 应用详情 */
-  Release: PendingRelease | null;
+  Release?: PendingRelease | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5425,7 +5427,7 @@ declare interface UpgradeClusterReleaseRequest {
   Chart: string;
   /** 自定义参数，覆盖chart 中values.yaml 中的参数 */
   Values?: ReleaseValues;
-  /** 制品来源，范围：tke-market/tcr/other */
+  /** 制品来源，范围：tke-market 或 other */
   ChartFrom?: string;
   /** 制品版本( 从第三安装时，不传这个参数） */
   ChartVersion?: string;
@@ -5443,7 +5445,7 @@ declare interface UpgradeClusterReleaseRequest {
 
 declare interface UpgradeClusterReleaseResponse {
   /** 应用详情 */
-  Release: PendingRelease | null;
+  Release?: PendingRelease | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

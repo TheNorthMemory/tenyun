@@ -6703,19 +6703,19 @@ declare interface DescribeStorageDataRequest {
 
 declare interface DescribeStorageDataResponse {
   /** 当前媒体总量。 */
-  MediaCount: number;
+  MediaCount?: number;
   /** 当前总存储量，单位是字节。 */
-  TotalStorage: number;
+  TotalStorage?: number;
   /** 当前标准存储量，单位是字节。 */
-  StandardStorage: number;
+  StandardStorage?: number;
   /** 当前低频存储量，单位是字节。 */
-  InfrequentStorage: number;
+  InfrequentStorage?: number;
   /** 当前归档存储量，单位是字节。 */
-  ArchiveStorage: number;
+  ArchiveStorage?: number;
   /** 当前深度归档存储量，单位是字节。 */
-  DeepArchiveStorage: number;
+  DeepArchiveStorage?: number;
   /** 各计费区域的存储用量。 */
-  StorageStat: StorageStatData[];
+  StorageStat?: StorageStatData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

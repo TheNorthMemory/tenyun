@@ -90,6 +90,12 @@ declare interface ApplicationList {
   AppType: number;
 }
 
+/** 语音转文本配置数据 */
+declare interface AsrConf {
+  /** 语音转文本服务开关，取值：open/close */
+  Status?: string;
+}
+
 /** 录音转文本用量统计数据 */
 declare interface AudioTextStatisticsItem {
   /** 统计值，单位：秒 */
@@ -110,10 +116,12 @@ declare interface CreateAppResp {
   CreateTime: number;
   /** 实时语音服务配置数据 */
   RealtimeSpeechConf: RealtimeSpeechConf;
-  /** 语音消息及转文本服务配置数据 */
+  /** 语音消息服务配置数据 */
   VoiceMessageConf: VoiceMessageConf;
   /** 语音分析服务配置数据 */
   VoiceFilterConf: VoiceFilterConf;
+  /** 语音转文本服务配置数据 */
+  AsrConf?: AsrConf;
 }
 
 /** 语音消息转文本热句模型配置 */
@@ -226,7 +234,7 @@ declare interface RealTimeSpeechStatisticsItem {
 declare interface RealtimeSpeechConf {
   /** 实时语音服务开关，取值：open/close */
   Status?: string;
-  /** 实时语音音质类型，取值：high-高音质 */
+  /** 实时语音音质类型，取值：high-高音质 ordinary-普通音质 */
   Quality?: string;
 }
 
@@ -306,6 +314,10 @@ declare interface ScanVoiceResult {
   TaskId: string;
 }
 
+/** SceneInfo场景信息'RealTime','实时语音分析','VoiceMessage','语音消息','GMECloudApi':'GME云API接口' */
+declare interface SceneInfo {
+}
+
 /** 服务开关状态 */
 declare interface ServiceStatus {
   /** 实时语音服务开关状态 */
@@ -382,6 +394,8 @@ declare interface UserMicStatus {
 declare interface VoiceFilterConf {
   /** 语音过滤服务开关，取值：open/close */
   Status?: string;
+  /** 场景配置信息，如开关状态，回调地址。 */
+  SceneInfos?: SceneInfo[] | null;
 }
 
 /** 语音过滤用量统计数据 */

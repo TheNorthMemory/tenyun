@@ -5443,7 +5443,7 @@ declare interface DisassociateAddressRequest {
 
 declare interface DisassociateAddressResponse {
   /** 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

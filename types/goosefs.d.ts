@@ -38,6 +38,10 @@ declare interface DescribeDataRepositoryTaskStatusResponse {
   TaskId?: string;
   /** 任务状态 0(初始化中), 1(运行中), 2(已完成), 3(任务失败) */
   Status?: number;
+  /** 已完成的文件数量 */
+  FinishedFileNumber?: number;
+  /** 已完成的数据量 */
+  FinishedCapacity?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

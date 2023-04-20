@@ -1617,7 +1617,7 @@ declare interface CreateDatasetRequest {
 
 declare interface CreateDatasetResponse {
   /** 数据集ID */
-  DatasetId: string | null;
+  DatasetId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

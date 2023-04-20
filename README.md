@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 233+ 款产品，9308+ 服务数</summary>
+<details><summary>共计 233+ 款产品，9313+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -244,7 +244,7 @@ mvj | 营销价值判断 | 2019-09-26(1) |
 nlp | [自然语言处理](https://cloud.tencent.com/document/product/271) | 2019-04-08(26) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(25) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(81) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(6) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(17) | 2018-12-25(20) |
@@ -323,7 +323,7 @@ vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(149) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(302) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(4) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(47) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(50) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(24) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(195) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

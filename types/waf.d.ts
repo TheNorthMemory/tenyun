@@ -802,6 +802,30 @@ declare interface AddCustomRuleResponse {
   RequestId?: string;
 }
 
+declare interface AddCustomWhiteRuleRequest {
+  /** 规则名称 */
+  Name: string;
+  /** 优先级 */
+  SortId: string;
+  /** 过期时间 */
+  ExpireTime: string;
+  /** 策略详情 */
+  Strategies: Strategy[];
+  /** 需要添加策略的域名 */
+  Domain: string;
+  /** 放行的详情 */
+  Bypass: string;
+}
+
+declare interface AddCustomWhiteRuleResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success: ResponseCode;
+  /** 添加成功的规则ID */
+  RuleId: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddDomainWhiteRuleRequest {
   /** 需要添加的域名 */
   Domain: string;
@@ -952,6 +976,20 @@ declare interface DeleteAttackDownloadRecordRequest {
 }
 
 declare interface DeleteAttackDownloadRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCustomWhiteRuleRequest {
+  /** 删除的域名 */
+  Domain: string;
+  /** 删除的规则ID */
+  RuleId: number;
+}
+
+declare interface DeleteCustomWhiteRuleResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1514,6 +1552,30 @@ declare interface ModifyCustomRuleStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCustomWhiteRuleRequest {
+  /** 编辑的域名 */
+  Domain: string;
+  /** 编辑的规则ID */
+  RuleId: number;
+  /** 编辑的规则名称 */
+  RuleName: string;
+  /** 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。 */
+  Bypass: string;
+  /** 优先级，1~100的整数，数字越小，代表这条规则的执行优先级越高。 */
+  SortId: number;
+  /** 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。 */
+  ExpireTime: number;
+  /** 匹配条件数组 */
+  Strategies: Strategy[];
+}
+
+declare interface ModifyCustomWhiteRuleResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success: ResponseCode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDomainWhiteRuleRequest {
   /** 需要更改的规则的域名 */
   Domain: string;
@@ -1689,7 +1751,7 @@ declare interface UpsertIpAccessControlRequest {
   Items: string[];
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
-  /** 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，佛祖饿为空 */
+  /** 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空 */
   SourceType?: string;
 }
 
@@ -1707,6 +1769,8 @@ declare interface Waf {
   (): Versions;
   /** 增加访问控制（自定义策略） {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
+  /** 添加精准白名单规则 {@link AddCustomWhiteRuleRequest} {@link AddCustomWhiteRuleResponse} */
+  AddCustomWhiteRule(data: AddCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomWhiteRuleResponse>;
   /** 增加域名规则白名单 {@link AddDomainWhiteRuleRequest} {@link AddDomainWhiteRuleResponse} */
   AddDomainWhiteRule(data: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
   /** 添加SAAS-WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
@@ -1719,6 +1783,8 @@ declare interface Waf {
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
   /** 删除攻击日志下载任务记录 {@link DeleteAttackDownloadRecordRequest} {@link DeleteAttackDownloadRecordResponse} */
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
+  /** 删除精准白名单规则 {@link DeleteCustomWhiteRuleRequest} {@link DeleteCustomWhiteRuleResponse} */
+  DeleteCustomWhiteRule(data: DeleteCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomWhiteRuleResponse>;
   /** 删除域名规则白名单 {@link DeleteDomainWhiteRulesRequest} {@link DeleteDomainWhiteRulesResponse} */
   DeleteDomainWhiteRules(data: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
   /** 删除访问日志下载记录 {@link DeleteDownloadRecordRequest} {@link DeleteDownloadRecordResponse} */
@@ -1781,6 +1847,8 @@ declare interface Waf {
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 开启或禁用访问控制（自定义策略） {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
+  /** 编辑精准白名单 {@link ModifyCustomWhiteRuleRequest} {@link ModifyCustomWhiteRuleResponse} */
+  ModifyCustomWhiteRule(data: ModifyCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
   ModifyDomainWhiteRule(data: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
   /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */

@@ -2,7 +2,7 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 房间问答问题详情 */
+/** 房间问答答案详情 */
 declare interface AnswerInfo {
   /** 用户名 */
   Name?: string;
@@ -204,7 +204,7 @@ declare interface MessageList {
   MessageBody?: MessageItem[] | null;
 }
 
-/** 房间问答答案详情 */
+/** 房间问答问题详情 */
 declare interface QuestionInfo {
   /** 问题ID */
   QuestionId?: string;

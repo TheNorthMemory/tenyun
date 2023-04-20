@@ -859,7 +859,7 @@ declare interface CreateCloudRecordingRequest {
   UserSig: string;
   /** 云端录制控制参数。 */
   RecordParams: RecordParams;
-  /** 云端录制文件上传到云存储的参数(目前只支持使用腾讯云点播作为存储)。 */
+  /** 云端录制文件上传到云存储的参数(目前支持云点播VOD和对象存储COS)。 */
   StorageParams: StorageParams;
   /** TRTC房间号的类型，必须和录制的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认） */
   RoomIdType?: number;
@@ -875,7 +875,7 @@ declare interface CreateCloudRecordingRequest {
 
 declare interface CreateCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
