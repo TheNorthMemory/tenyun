@@ -883,7 +883,7 @@ declare interface CreateCloudRecordingResponse {
 declare interface CreatePictureRequest {
   /** 应用id */
   SdkAppId: number;
-  /** 图片内容经base64编码后的string格式 */
+  /** 图片内容经base64编码后的string格式,最大长度为2M */
   Content: string;
   /** 图片后缀名 */
   Suffix: string;
@@ -899,7 +899,7 @@ declare interface CreatePictureRequest {
 
 declare interface CreatePictureResponse {
   /** 图片id */
-  PictureId: number;
+  PictureId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

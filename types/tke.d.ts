@@ -38,6 +38,26 @@ declare interface AutoscalingAdded {
   Total: number;
 }
 
+/** 仓储仓库信息 */
+declare interface BackupStorageLocation {
+  /** 备份仓库名称 */
+  Name?: string;
+  /** 存储仓库所属地域，比如COS广州(ap-guangzhou) */
+  StorageRegion?: string;
+  /** 存储服务提供方，默认腾讯云 */
+  Provider?: string | null;
+  /** 对象存储桶名称，如果是COS必须是tke-backup-前缀开头 */
+  Bucket?: string | null;
+  /** 对象存储桶路径 */
+  Path?: string | null;
+  /** 存储仓库状态 */
+  State?: string | null;
+  /** 详细状态信息 */
+  Message?: string | null;
+  /** 最后一次检查时间 */
+  LastValidationTime?: string | null;
+}
+
 /** cuDNN的版本信息 */
 declare interface CUDNN {
   /** cuDNN的版本 */
@@ -642,6 +662,8 @@ declare interface EdgeCluster {
   AutoUpgradeClusterLevel?: boolean | null;
   /** 集群付费模式，支持POSTPAID_BY_HOUR或者PREPAID */
   ChargeType?: string | null;
+  /** 边缘集群组件的版本 */
+  EdgeVersion?: string | null;
 }
 
 /** 边缘容器集群高级配置 */
@@ -2286,6 +2308,24 @@ declare interface CheckInstancesUpgradeAbleResponse {
   RequestId?: string;
 }
 
+declare interface CreateBackupStorageLocationRequest {
+  /** 存储仓库所属地域，比如COS广州(ap-guangzhou) */
+  StorageRegion: string;
+  /** 对象存储桶名称，如果是COS必须是tke-backup前缀开头 */
+  Bucket: string;
+  /** 备份仓库名称 */
+  Name: string;
+  /** 存储服务提供方，默认腾讯云 */
+  Provider?: string;
+  /** 对象存储桶路径 */
+  Path?: string;
+}
+
+declare interface CreateBackupStorageLocationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateClusterEndpointRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2870,6 +2910,16 @@ declare interface CreateTKEEdgeClusterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBackupStorageLocationRequest {
+  /** 备份仓库名称 */
+  Name: string;
+}
+
+declare interface DeleteBackupStorageLocationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteClusterAsGroupsRequest {
   /** 集群ID，通过[DescribeClusters](https://cloud.tencent.com/document/api/457/31862)接口获取。 */
   ClusterId: string;
@@ -3228,6 +3278,18 @@ declare interface DescribeAvailableTKEEdgeVersionResponse {
   EdgeVersionLatest: string | null;
   /** 边缘集群当前版本 */
   EdgeVersionCurrent: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupStorageLocationsRequest {
+  /** 多个备份仓库名称，如果不填写，默认返回当前地域所有存储仓库名称 */
+  Names?: string[];
+}
+
+declare interface DescribeBackupStorageLocationsResponse {
+  /** 详细备份仓库信息 */
+  BackupStorageLocationSet?: BackupStorageLocation[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4633,6 +4695,8 @@ declare interface EnableVpcCniNetworkTypeRequest {
   Subnets: string[];
   /** 在固定IP模式下，Pod销毁后退还IP的时间，传参必须大于300；不传默认IP永不销毁。 */
   ExpiredSeconds?: number;
+  /** 是否同步添加 vpc 网段到 ip-masq-agent-config 的 NonMasqueradeCIDRs 字段，默认 false 会同步添加 */
+  SkipAddingNonMasqueradeCIDRs?: boolean;
 }
 
 declare interface EnableVpcCniNetworkTypeResponse {
@@ -5469,6 +5533,8 @@ declare interface Tke {
   CheckEdgeClusterCIDR(data: CheckEdgeClusterCIDRRequest, config?: AxiosRequestConfig): AxiosPromise<CheckEdgeClusterCIDRResponse>;
   /** 节点是否可升级 {@link CheckInstancesUpgradeAbleRequest} {@link CheckInstancesUpgradeAbleResponse} */
   CheckInstancesUpgradeAble(data: CheckInstancesUpgradeAbleRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstancesUpgradeAbleResponse>;
+  /** 创建备份仓库 {@link CreateBackupStorageLocationRequest} {@link CreateBackupStorageLocationResponse} */
+  CreateBackupStorageLocation(data: CreateBackupStorageLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupStorageLocationResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建集群访问端口 {@link CreateClusterEndpointRequest} {@link CreateClusterEndpointResponse} */
@@ -5521,6 +5587,8 @@ declare interface Tke {
   CreatePrometheusTemplate(data: CreatePrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusTemplateResponse>;
   /** 创建边缘计算集群 {@link CreateTKEEdgeClusterRequest} {@link CreateTKEEdgeClusterResponse} */
   CreateTKEEdgeCluster(data: CreateTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTKEEdgeClusterResponse>;
+  /** 删除备份仓库 {@link DeleteBackupStorageLocationRequest} {@link DeleteBackupStorageLocationResponse} */
+  DeleteBackupStorageLocation(data: DeleteBackupStorageLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupStorageLocationResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** 删除集群伸缩组 {@link DeleteClusterAsGroupsRequest} {@link DeleteClusterAsGroupsResponse} */
@@ -5577,6 +5645,8 @@ declare interface Tke {
   DescribeAvailableClusterVersion(data?: DescribeAvailableClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableClusterVersionResponse>;
   /** 边缘计算支持的k8s版本 {@link DescribeAvailableTKEEdgeVersionRequest} {@link DescribeAvailableTKEEdgeVersionResponse} */
   DescribeAvailableTKEEdgeVersion(data?: DescribeAvailableTKEEdgeVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableTKEEdgeVersionResponse>;
+  /** 查询备份仓库 {@link DescribeBackupStorageLocationsRequest} {@link DescribeBackupStorageLocationsResponse} */
+  DescribeBackupStorageLocations(data?: DescribeBackupStorageLocationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupStorageLocationsResponse>;
   /** 集群弹性伸缩配置 {@link DescribeClusterAsGroupOptionRequest} {@link DescribeClusterAsGroupOptionResponse} */
   DescribeClusterAsGroupOption(data: DescribeClusterAsGroupOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAsGroupOptionResponse>;
   /** 集群关联的伸缩组列表 {@link DescribeClusterAsGroupsRequest} {@link DescribeClusterAsGroupsResponse} */

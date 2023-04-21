@@ -738,6 +738,24 @@ declare interface DescribeCertificatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCompaniesRequest {
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 分页每页限制数 */
+  Limit?: number;
+  /** 公司ID */
+  CompanyId?: number;
+}
+
+declare interface DescribeCompaniesResponse {
+  /** 公司列表 */
+  Companies: CompanyInfo[];
+  /** 公司总数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeployedResourcesRequest {
   /** 证书ID */
   CertificateIds: string[];
@@ -1137,6 +1155,8 @@ declare interface Ssl {
   DescribeCertificateOperateLogs(data?: DescribeCertificateOperateLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateOperateLogsResponse>;
   /** 获取证书列表 {@link DescribeCertificatesRequest} {@link DescribeCertificatesResponse} */
   DescribeCertificates(data?: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
+  /** 查询公司列表 {@link DescribeCompaniesRequest} {@link DescribeCompaniesResponse} */
+  DescribeCompanies(data?: DescribeCompaniesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompaniesResponse>;
   /** 证书查询关联资源 {@link DescribeDeployedResourcesRequest} {@link DescribeDeployedResourcesResponse} */
   DescribeDeployedResources(data: DescribeDeployedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployedResourcesResponse>;
   /** 查询管理人详情 {@link DescribeManagerDetailRequest} {@link DescribeManagerDetailResponse} */

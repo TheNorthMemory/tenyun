@@ -606,6 +606,92 @@ declare interface Publisher {
   Partition: number | null;
 }
 
+/** Pulsar 网络接入点信息 */
+declare interface PulsarNetworkAccessPointInfo {
+  /** vpc的id，支撑网和公网接入点，该字段为空 */
+  VpcId: string | null;
+  /** 子网id，支撑网和公网接入点，该字段为空 */
+  SubnetId: string | null;
+  /** 接入地址 */
+  Endpoint: string;
+  /** 实例id */
+  InstanceId: string;
+  /** 接入点类型：0：支撑网接入点 1：VPC接入点 2：公网接入点 */
+  RouteType: number;
+}
+
+/** Pulsar专业版集群信息 */
+declare interface PulsarProClusterInfo {
+  /** 集群Id。 */
+  ClusterId: string;
+  /** 集群名称。 */
+  ClusterName: string;
+  /** 说明信息。 */
+  Remark: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 集群状态，0:创建中，1:正常，2:隔离 */
+  Status: number;
+  /** 集群版本 */
+  Version: string;
+  /** 节点分布情况 */
+  NodeDistribution: InstanceNodeDistribution[] | null;
+  /** 最大储存容量，单位：MB */
+  MaxStorage: number;
+}
+
+/** Pulsar专业版集群规格信息 */
+declare interface PulsarProClusterSpecInfo {
+  /** 集群规格名称 */
+  SpecName: string;
+  /** 峰值tps */
+  MaxTps: number;
+  /** 峰值带宽。单位：mbps */
+  MaxBandWidth: number;
+  /** 最大命名空间个数 */
+  MaxNamespaces: number;
+  /** 最大主题分区数 */
+  MaxTopics: number;
+  /** 规格外弹性TPS */
+  ScalableTps: number | null;
+}
+
+/** Pulsar专业版实例信息 */
+declare interface PulsarProInstance {
+  /** 实例id */
+  InstanceId: string;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 实例版本 */
+  InstanceVersion: string;
+  /** 实例状态，0-创建中，1-正常，2-隔离中，3-已销毁，4 - 异常, 5 - 发货失败，6-变配中，7-变配失败 */
+  Status: number;
+  /** 实例配置规格名称 */
+  ConfigDisplay: string;
+  /** 峰值TPS */
+  MaxTps: number;
+  /** 存储容量，GB为单位 */
+  MaxStorage: number;
+  /** 实例到期时间，毫秒为单位 */
+  ExpireTime: number;
+  /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
+  AutoRenewFlag: number;
+  /** 0-后付费，1-预付费 */
+  PayMode: number;
+  /** 备注信息 */
+  Remark: string | null;
+  /** 实例配置ID */
+  SpecName: string;
+  /** 规格外弹性TPS */
+  ScalableTps: number | null;
+  /** VPC的id */
+  VpcId: string | null;
+  /** 子网id */
+  SubnetId: string | null;
+  /** 峰值带宽。单位：mbps */
+  MaxBandWidth: number;
+}
+
 /** queue使用配额信息 */
 declare interface QueueQuota {
   /** 可创建最大Queue数 */
@@ -2404,6 +2490,40 @@ declare interface DescribePublishersResponse {
   RequestId?: string;
 }
 
+declare interface DescribePulsarProInstanceDetailRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribePulsarProInstanceDetailResponse {
+  /** 集群信息 */
+  ClusterInfo: PulsarProClusterInfo;
+  /** 集群网络接入点信息 */
+  NetworkAccessPointInfos: PulsarNetworkAccessPointInfo[] | null;
+  /** 集群规格信息 */
+  ClusterSpecInfo: PulsarProClusterSpecInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePulsarProInstancesRequest {
+  /** 查询条件过滤器 */
+  Filters?: Filter[];
+  /** 查询数目上限，默认20 */
+  Limit?: number;
+  /** 查询起始位置 */
+  Offset?: number;
+}
+
+declare interface DescribePulsarProInstancesResponse {
+  /** 未分页的总数目 */
+  TotalCount: number;
+  /** 实例信息列表 */
+  Instances: PulsarProInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRabbitMQNodeListRequest {
   /** rabbitmq集群ID */
   InstanceId: string;
@@ -3367,6 +3487,10 @@ declare interface Tdmq {
   DescribePublisherSummary(data: DescribePublisherSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublisherSummaryResponse>;
   /** 获取生产者信息 {@link DescribePublishersRequest} {@link DescribePublishersResponse} */
   DescribePublishers(data: DescribePublishersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishersResponse>;
+  /** 获取Pulsar专业版集群实例信息 {@link DescribePulsarProInstanceDetailRequest} {@link DescribePulsarProInstanceDetailResponse} */
+  DescribePulsarProInstanceDetail(data: DescribePulsarProInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstanceDetailResponse>;
+  /** 查询Pulsar专业版实例列表 {@link DescribePulsarProInstancesRequest} {@link DescribePulsarProInstancesResponse} */
+  DescribePulsarProInstances(data?: DescribePulsarProInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstancesResponse>;
   /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
   /** 获取单个RabbitMQ专享实例信息 {@link DescribeRabbitMQVipInstanceRequest} {@link DescribeRabbitMQVipInstanceResponse} */

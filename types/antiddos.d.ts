@@ -52,9 +52,9 @@ declare interface BGPIPInstance {
   Region: RegionInfo;
   /** 资产实例的防护状态，状态码如下："idle"：正常状态(无攻击)"attacking"：攻击中"blocking"：封堵中"creating"：创建中"deblocking"：解封中"isolate"：回收隔离中 */
   Status: string;
-  /** 购买时间 */
-  ExpiredTime: string;
   /** 到期时间 */
+  ExpiredTime: string;
+  /** 购买时间 */
   CreatedTime: string;
   /** 资产实例的名称 */
   Name: string;
@@ -164,6 +164,8 @@ declare interface BGPInstance {
   ElasticServiceBandwidth: number;
   /** 赠送的业务带宽 */
   GiftServiceBandWidth?: number;
+  /** 修改时间 */
+  ModifyTime?: string | null;
 }
 
 /** 高防包资产实例的规格信息 */
@@ -532,6 +534,8 @@ declare interface EipProductInfo {
   DeviceType: string;
   /** IP所属的云产品实例ID，例如是弹性网卡的IP，InstanceId为弹性网卡的ID(eni-*); 如果是托管IP没有对应的资源实例ID,InstanceId为"" */
   InstanceId: string;
+  /** 域名化资产对应的域名 */
+  Domain?: string | null;
 }
 
 /** 转发监听器 */
@@ -588,6 +592,8 @@ declare interface IPLineInfo {
   Cname?: string;
   /** 资源flag，0：高防包资源，1：高防IP资源，2：非高防资源IP */
   ResourceFlag?: number;
+  /** 域名化资产对应的域名 */
+  Domain?: string | null;
 }
 
 /** 实例7层规则 */
@@ -1739,6 +1745,8 @@ declare interface DescribeBizTrendRequest {
   Domain?: string;
   /** 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效 */
   ProtoInfo?: ProtocolPort[];
+  /** 业务类型可取值domain, portport：端口业务domain：域名业务 */
+  BusinessType?: string;
 }
 
 declare interface DescribeBizTrendResponse {
@@ -1746,6 +1754,8 @@ declare interface DescribeBizTrendResponse {
   DataList?: number[];
   /** 统计纬度 */
   MetricName?: string;
+  /** 返回DataList中的最大值 */
+  MaxData?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2153,6 +2163,8 @@ declare interface DescribeListBGPInstancesRequest {
   FilterConvoy?: number;
   /** 默认false；接口传true，返回数据中不包含高级信息，高级信息包含：InstanceList[0].Usage。 */
   ExcludeAdvancedInfo?: boolean;
+  /** 资产IP数组 */
+  FilterAssetIpList?: string[];
 }
 
 declare interface DescribeListBGPInstancesResponse {
@@ -2371,13 +2383,15 @@ declare interface DescribeListSchedulingDomainRequest {
   Limit: number;
   /** 调度域名搜索 */
   FilterDomain?: string;
+  /** 运行状态 0 代表未运行 1 正在运行 2 运行异常 */
+  Status?: string;
 }
 
 declare interface DescribeListSchedulingDomainResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 调度域名信息列表 */
-  DomainList: SchedulingDomainInfo[];
+  DomainList?: SchedulingDomainInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2479,8 +2493,6 @@ declare interface DescribeOverviewAttackTrendResponse {
 }
 
 declare interface DescribeOverviewCCTrendRequest {
-  /** 大禹子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护） */
-  Business: string;
   /** 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)] */
   Period: number;
   /** 统计开始时间 */
@@ -2489,6 +2501,8 @@ declare interface DescribeOverviewCCTrendRequest {
   EndTime: string;
   /** 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))，incount(请求次数), dropcount(攻击次数)] */
   MetricName: string;
+  /** 大禹子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护） */
+  Business?: string;
   /** 资源的IP */
   IpList?: string[];
   /** 资源实例ID */
@@ -2497,9 +2511,9 @@ declare interface DescribeOverviewCCTrendRequest {
 
 declare interface DescribeOverviewCCTrendResponse {
   /** 值个数 */
-  Count: number;
+  Count?: number;
   /** 值数组 */
-  Data: number[];
+  Data?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2527,8 +2541,6 @@ declare interface DescribeOverviewDDoSEventListResponse {
 }
 
 declare interface DescribeOverviewDDoSTrendRequest {
-  /** 大禹子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护） */
-  Business: string;
   /** 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)] */
   Period: number;
   /** 统计开始时间 */
@@ -2537,6 +2549,8 @@ declare interface DescribeOverviewDDoSTrendRequest {
   EndTime: string;
   /** 指标，取值[bps(攻击流量带宽，pps(攻击包速率))] */
   MetricName: string;
+  /** 大禹子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护） */
+  Business?: string;
   /** 资源实例的IP列表 */
   IpList?: string[];
   /** 资源实例ID */
@@ -2545,9 +2559,9 @@ declare interface DescribeOverviewDDoSTrendRequest {
 
 declare interface DescribeOverviewDDoSTrendResponse {
   /** 值个数 */
-  Count: number;
+  Count?: number;
   /** 值数组，攻击流量带宽单位为Mbps，包速率单位为pps */
-  Data: number[];
+  Data?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

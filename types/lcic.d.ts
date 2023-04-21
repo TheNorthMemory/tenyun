@@ -404,6 +404,32 @@ declare interface BatchDeleteRecordResponse {
   RequestId?: string;
 }
 
+declare interface BatchDescribeDocumentRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 分页查询当前页数，从1开始递增 */
+  Page: number;
+  /** 每页数据量，最大1000 */
+  Limit: number;
+  /** 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件 */
+  Permission: number[];
+  /** 课件所有者的user_id，不填默认获取SdkAppId下所有课件 */
+  Owner?: string;
+  /** 课件名称搜索词 */
+  Keyword?: string;
+  /** 课件id列表，从列表中查询，忽略错误的id */
+  DocumentId?: string[];
+}
+
+declare interface BatchDescribeDocumentResponse {
+  /** 符合查询条件文档总数 */
+  Total?: number;
+  /** 文档信息列表 */
+  Documents?: DocumentInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchRegisterRequest {
   /** 批量注册用户信息列表 */
   Users: BatchUserRequest[];
@@ -1308,6 +1334,8 @@ declare interface Lcic {
   BatchDeleteGroupMember(data: BatchDeleteGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteGroupMemberResponse>;
   /** 批量删除多个房间的录制文件 {@link BatchDeleteRecordRequest} {@link BatchDeleteRecordResponse} */
   BatchDeleteRecord(data: BatchDeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteRecordResponse>;
+  /** 批量获取文档详情 {@link BatchDescribeDocumentRequest} {@link BatchDescribeDocumentResponse} */
+  BatchDescribeDocument(data: BatchDescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeDocumentResponse>;
   /** 用户批量注册 {@link BatchRegisterRequest} {@link BatchRegisterResponse} */
   BatchRegister(data: BatchRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterResponse>;
   /** 绑定文档到房间 {@link BindDocumentToRoomRequest} {@link BindDocumentToRoomResponse} */
@@ -1346,7 +1374,7 @@ declare interface Lcic {
   DescribeDeveloper(data?: DescribeDeveloperRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeveloperResponse>;
   /** 获取文档信息 {@link DescribeDocumentRequest} {@link DescribeDocumentResponse} */
   DescribeDocument(data: DescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentResponse>;
-  /** 批量获取文档信息 {@link DescribeDocumentsRequest} {@link DescribeDocumentsResponse} */
+  /** @deprecated 批量获取文档信息 {@link DescribeDocumentsRequest} {@link DescribeDocumentsResponse} */
   DescribeDocuments(data: DescribeDocumentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsResponse>;
   /** 获取指定房间下文档 {@link DescribeDocumentsByRoomRequest} {@link DescribeDocumentsByRoomResponse} */
   DescribeDocumentsByRoom(data: DescribeDocumentsByRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsByRoomResponse>;

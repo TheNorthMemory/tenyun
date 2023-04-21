@@ -2,6 +2,44 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 审计日志文件 */
+declare interface AuditLogFile {
+  /** 审计日志文件生成异步任务ID。 */
+  AsyncRequestId?: number | null;
+  /** 审计日志文件名称。 */
+  FileName?: string;
+  /** 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。 */
+  CreateTime?: string | null;
+  /** 文件状态值。可能返回的值为："creating" - 生成中;"failed" - 创建失败;"success" - 已生成; */
+  Status?: string | null;
+  /** 文件大小，单位为 KB。 */
+  FileSize?: number;
+  /** 审计日志下载地址。 */
+  DownloadUrl?: string;
+  /** 错误信息。 */
+  ErrMsg?: string;
+  /** 文件生成进度。 */
+  Progress?: number;
+  /** 文件生成成功时间。 */
+  FinishTime?: string;
+}
+
+/** 过滤条件。可按设置的过滤条件过滤日志。 */
+declare interface AuditLogFilter {
+  /** 客户端地址。 */
+  Host?: string[] | null;
+  /** 数据库名称。 */
+  DBName?: string[] | null;
+  /** 用户名。 */
+  User?: string[] | null;
+  /** 返回行数。表示筛选返回行数大于该值的审计日志。 */
+  SentRows?: number | null;
+  /** 影响行数。表示筛选影响行数大于该值的审计日志。 */
+  AffectRows?: number | null;
+  /** 执行时间。单位为：µs。表示筛选执行时间大于该值的审计日志。 */
+  ExecTime?: number | null;
+}
+
 /** 联系人contact描述。 */
 declare interface ContactItem {
   /** 联系人id。 */
@@ -670,6 +708,28 @@ declare interface CancelKillTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateAuditLogFileRequest {
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  Product: string;
+  /** 与Product保持一致。如："dcdb" ,"mariadb" */
+  NodeRequestType: string;
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 开始时间，如“2019-09-10 12:13:14”。 */
+  StartTime: string;
+  /** 截止时间，如“2019-09-11 10:13:14”。 */
+  EndTime: string;
+  /** 过滤条件。可按设置的过滤条件过滤日志。 */
+  Filter?: AuditLogFilter;
+}
+
+declare interface CreateAuditLogFileResponse {
+  /** 审计日志文件下载的任务ID */
+  AsyncRequestId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDBDiagReportTaskRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -836,6 +896,22 @@ declare interface CreateSqlFilterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuditLogFileRequest {
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  Product: string;
+  /** 与Product保持一致。如："dcdb" ,"mariadb" */
+  NodeRequestType: string;
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 审计日志文件生成异步任务ID。 */
+  AsyncRequestId: number;
+}
+
+declare interface DeleteAuditLogFileResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDBDiagReportTasksRequest {
   /** 需要删除的任务id列表 */
   AsyncRequestIds: number[];
@@ -908,6 +984,28 @@ declare interface DescribeAllUserGroupResponse {
   TotalCount: number;
   /** 组信息。 */
   Groups: GroupItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditLogFilesRequest {
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  Product: string;
+  /** 与Product保持一致。如："dcdb" ,"mariadb" */
+  NodeRequestType: string;
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 查询数目，默认为20，最大为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeAuditLogFilesResponse {
+  /** 符合条件的审计日志文件个数。 */
+  TotalCount?: number | null;
+  /** 审计日志文件详情。 */
+  Items?: AuditLogFile[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2687,6 +2785,8 @@ declare interface Dbbrain {
   AddUserContact(data: AddUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserContactResponse>;
   /** 终止中断会话任务 {@link CancelKillTaskRequest} {@link CancelKillTaskResponse} */
   CancelKillTask(data: CancelKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKillTaskResponse>;
+  /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
+  CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
   /** 创建健康报告生成任务 {@link CreateDBDiagReportTaskRequest} {@link CreateDBDiagReportTaskResponse} */
   CreateDBDiagReportTask(data: CreateDBDiagReportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportTaskResponse>;
   /** 创建健康报告浏览地址 {@link CreateDBDiagReportUrlRequest} {@link CreateDBDiagReportUrlResponse} */
@@ -2703,6 +2803,8 @@ declare interface Dbbrain {
   CreateSecurityAuditLogExportTask(data: CreateSecurityAuditLogExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityAuditLogExportTaskResponse>;
   /** 创建实例SQL限流任务 {@link CreateSqlFilterRequest} {@link CreateSqlFilterResponse} */
   CreateSqlFilter(data: CreateSqlFilterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSqlFilterResponse>;
+  /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
+  DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除健康报告生成任务 {@link DeleteDBDiagReportTasksRequest} {@link DeleteDBDiagReportTasksResponse} */
   DeleteDBDiagReportTasks(data: DeleteDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBDiagReportTasksResponse>;
   /** 删除安全审计日志导出任务 {@link DeleteSecurityAuditLogExportTasksRequest} {@link DeleteSecurityAuditLogExportTasksResponse} */
@@ -2713,6 +2815,8 @@ declare interface Dbbrain {
   DescribeAllUserContact(data: DescribeAllUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUserContactResponse>;
   /** 获取邮件发送中联系组信息 {@link DescribeAllUserGroupRequest} {@link DescribeAllUserGroupResponse} */
   DescribeAllUserGroup(data: DescribeAllUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUserGroupResponse>;
+  /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
+  DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 获取诊断事件详情 {@link DescribeDBDiagEventRequest} {@link DescribeDBDiagEventResponse} */
   DescribeDBDiagEvent(data: DescribeDBDiagEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagEventResponse>;
   /** 获取诊断事件列表 {@link DescribeDBDiagEventsRequest} {@link DescribeDBDiagEventsResponse} */

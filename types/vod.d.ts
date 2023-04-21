@@ -1746,12 +1746,20 @@ declare interface DomainDetailInfo {
   RefererAuthPolicy: RefererAuthPolicy | null;
   /** 域名添加到腾讯云点播系统中的时间。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   CreateTime: string;
+  /** 域名 QUIC 配置信息。 */
+  QUICConfig?: DomainQUICConfig | null;
 }
 
 /** 域名 HTTPS 配置信息 */
 declare interface DomainHTTPSConfig {
   /** 证书过期时间。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   CertExpireTime: string;
+}
+
+/** 域名 QUIC 配置信息 */
+declare interface DomainQUICConfig {
+  /** QUIC 配置状态，可选值：Enabled: 启用；Disabled: 禁用。 */
+  Status: string;
 }
 
 /** DRM 自适应码流播放信息 */
@@ -3892,8 +3900,14 @@ declare interface RemoveWaterMarkTaskInput {
 
 /** 智能去除水印任务的输出。 */
 declare interface RemoveWaterMarkTaskOutput {
-  /** 视频 ID。 */
+  /** 媒体文件 ID。 */
   FileId: string;
+  /** 文件类型，例如 mp4、mp3 等。 */
+  FileType?: string;
+  /** 媒体文件播放地址。 */
+  FileUrl?: string;
+  /** 文件名称，最长 64 个字符。 */
+  MediaName?: string;
   /** 元信息。包括大小、时长、视频流信息、音频流信息等。 */
   MetaData: MediaMetaData;
 }
@@ -7695,6 +7709,8 @@ declare interface ModifyVodDomainConfigRequest {
   RefererAuthPolicy?: RefererAuthPolicy;
   /** [Key 防盗链](/document/product/266/14047)规则。 */
   UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy;
+  /** QUIC 配置。 */
+  QUICConfig?: DomainQUICConfig;
 }
 
 declare interface ModifyVodDomainConfigResponse {

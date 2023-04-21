@@ -439,23 +439,25 @@ declare interface CreateAppRequest {
   AppName: string;
   /** 腾讯云项目ID，默认为0，表示默认项目 */
   ProjectId?: number;
-  /** 需要支持的引擎列表，默认全选。 */
+  /** 需要支持的引擎列表，默认全选。取值：android/ios/unity/cocos/unreal/windows */
   EngineList?: string[];
-  /** 服务区域列表，默认全选。 */
+  /** 服务区域列表，默认全选。取值：mainland-大陆地区，hmt-港澳台，sea-东南亚，na-北美，eu-欧洲，jpkr-日韩亚太，sa-南美，oc-澳洲，me-中东 */
   RegionList?: string[];
   /** 实时语音服务配置数据 */
   RealtimeSpeechConf?: RealtimeSpeechConf;
-  /** 语音消息及转文本服务配置数据 */
+  /** 语音消息服务配置数据 */
   VoiceMessageConf?: VoiceMessageConf;
   /** 语音分析服务配置数据 */
   VoiceFilterConf?: VoiceFilterConf;
+  /** 语音转文本配置数据 */
+  AsrConf?: AsrConf;
   /** 需要添加的标签列表 */
   Tags?: Tag[];
 }
 
 declare interface CreateAppResponse {
   /** 创建应用返回数据 */
-  Data: CreateAppResp;
+  Data?: CreateAppResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

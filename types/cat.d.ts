@@ -251,7 +251,7 @@ declare interface DescribeNodesRequest {
 
 declare interface DescribeNodesResponse {
   /** 节点列表 */
-  NodeSet: NodeDefineExt[] | null;
+  NodeSet?: NodeDefineExt[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

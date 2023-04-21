@@ -100,6 +100,10 @@ declare interface ApmInstanceDetail {
   ClientCount: number | null;
   /** 该实例已上报的总应用数量 */
   TotalCount: number | null;
+  /** CLS日志集 | ES集群ID */
+  LogSet: string | null;
+  /** Metric数据保存时长 */
+  MetricDuration: number | null;
 }
 
 /** 指标列表单元 */

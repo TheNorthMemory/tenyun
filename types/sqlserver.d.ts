@@ -336,6 +336,10 @@ declare interface DBInstance {
   IsDrZone: boolean;
   /** 备可用区信息 */
   SlaveZones: SlaveZones | null;
+  /** 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点 */
+  Architecture?: string | null;
+  /** 类型标识，EXCLUSIVE-独享型，SHARED-共享型 */
+  Style?: string | null;
 }
 
 /** 账号的数据库权限信息 */
@@ -2951,13 +2955,17 @@ declare interface RestoreInstanceRequest {
   TargetInstanceId?: string;
   /** 按照ReNameRestoreDatabase中的库进行恢复，并重命名，不填则按照默认方式命名恢复的库，且恢复所有的库。 */
   RenameRestore?: RenameRestoreDatabase[];
-  /** 备份任务组ID，在单库备份文件模式下，可通过[DescribeBackups](https://cloud.tencent.com/document/product/238/19943) 接口获得。 */
+  /** 回档类型，0-覆盖方式；1-重命名方式，默认1 */
+  Type?: number;
+  /** 需要覆盖回档的数据库，只有覆盖回档时必填 */
+  DBList?: string[];
+  /** 备份任务组ID，在单库备份文件模式下 */
   GroupId?: string;
 }
 
 declare interface RestoreInstanceResponse {
   /** 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2967,10 +2975,10 @@ declare interface RollbackInstanceRequest {
   InstanceId: string;
   /** 回档类型，0-回档的数据库覆盖原库；1-回档的数据库以重命名的形式生成，不覆盖原库 */
   Type: number;
-  /** 需要回档的数据库 */
-  DBs: string[];
   /** 回档目标时间点 */
   Time: string;
+  /** 需要回档的数据库 */
+  DBs?: string[];
   /** 备份恢复到的同一个APPID下的实例ID，不填则恢复到原实例ID */
   TargetInstanceId?: string;
   /** 按照ReNameRestoreDatabase中的库进行重命名，仅在Type = 1重命名回档方式有效；不填则按照默认方式命名库，DBs参数确定要恢复的库 */
@@ -2979,7 +2987,7 @@ declare interface RollbackInstanceRequest {
 
 declare interface RollbackInstanceResponse {
   /** 异步任务ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3299,9 +3307,9 @@ declare interface Sqlserver {
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
   /** 重启实例 {@link RestartDBInstanceRequest} {@link RestartDBInstanceResponse} */
   RestartDBInstance(data: RestartDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstanceResponse>;
-  /** 根据备份文件恢复实例 {@link RestoreInstanceRequest} {@link RestoreInstanceResponse} */
+  /** 按照备份集回档数据库 {@link RestoreInstanceRequest} {@link RestoreInstanceResponse} */
   RestoreInstance(data: RestoreInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreInstanceResponse>;
-  /** 回档实例 {@link RollbackInstanceRequest} {@link RollbackInstanceResponse} */
+  /** 按照时间点回档数据库 {@link RollbackInstanceRequest} {@link RollbackInstanceResponse} */
   RollbackInstance(data: RollbackInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackInstanceResponse>;
   /** 执行迁移任务 {@link RunMigrationRequest} {@link RunMigrationResponse} */
   RunMigration(data: RunMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<RunMigrationResponse>;

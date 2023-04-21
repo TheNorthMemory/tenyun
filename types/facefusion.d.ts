@@ -85,9 +85,9 @@ declare interface DescribeMaterialListRequest {
 
 declare interface DescribeMaterialListResponse {
   /** 素材列表数据 */
-  MaterialInfos: PublicMaterialInfos[];
+  MaterialInfos?: PublicMaterialInfos[];
   /** 素材条数 */
-  Count: number;
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

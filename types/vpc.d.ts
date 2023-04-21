@@ -64,6 +64,10 @@ declare interface Address {
   InternetChargeType: string | null;
   /** 弹性公网IP关联的标签列表。 */
   TagSet: Tag[] | null;
+  /** 到期时间。 */
+  DeadlineDate: string | null;
+  /** EIP绑定的实例类型。 */
+  InstanceType: string | null;
 }
 
 /** 用于描述弹性公网IP的费用对象 */
