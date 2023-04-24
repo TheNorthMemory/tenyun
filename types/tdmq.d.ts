@@ -3074,6 +3074,24 @@ declare interface ModifyRocketMQGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRocketMQInstanceSpecRequest {
+  /** 专享实例ID */
+  InstanceId: string;
+  /** 实例规格，rocket-vip-basic-1 基础型rocket-vip-basic-2 标准型rocket-vip-basic-3 高阶Ⅰ型rocket-vip-basic-4 高阶Ⅱ型 */
+  Specification?: string;
+  /** 节点数量 */
+  NodeCount?: number;
+  /** 存储空间，GB为单位 */
+  StorageSize?: number;
+}
+
+declare interface ModifyRocketMQInstanceSpecResponse {
+  /** 订单号 */
+  OrderId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRocketMQNamespaceRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3543,6 +3561,8 @@ declare interface Tdmq {
   ModifyRocketMQCluster(data: ModifyRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQClusterResponse>;
   /** 更新RocketMQ消费组信息 {@link ModifyRocketMQGroupRequest} {@link ModifyRocketMQGroupResponse} */
   ModifyRocketMQGroup(data: ModifyRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQGroupResponse>;
+  /** 修改RocketMQ专享实例配置 {@link ModifyRocketMQInstanceSpecRequest} {@link ModifyRocketMQInstanceSpecResponse} */
+  ModifyRocketMQInstanceSpec(data: ModifyRocketMQInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQInstanceSpecResponse>;
   /** 更新RocketMQ命名空间 {@link ModifyRocketMQNamespaceRequest} {@link ModifyRocketMQNamespaceResponse} */
   ModifyRocketMQNamespace(data: ModifyRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQNamespaceResponse>;
   /** 更新RocketMQ主题信息 {@link ModifyRocketMQTopicRequest} {@link ModifyRocketMQTopicResponse} */

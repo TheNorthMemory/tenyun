@@ -4237,7 +4237,7 @@ declare interface ModifyAlarmPolicyConditionRequest {
   GroupBy?: string[];
   /** 日志告警创建请求参数信息 */
   LogAlarmReqInfo?: LogAlarmReq;
-  /** 模版id，专供prom使用 */
+  /** 模板id，专供prom使用 */
   NoticeIds?: string[];
   /** 启停状态，0=停用，1=启用 */
   Enable?: number;

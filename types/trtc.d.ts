@@ -1199,7 +1199,7 @@ declare interface DescribeTRTCRealTimeScaleMetricDataRequest {
 
 declare interface DescribeTRTCRealTimeScaleMetricDataResponse {
   /** TRTC监控数据出参 */
-  Data: TRTCDataResp | null;
+  Data?: TRTCDataResp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -658,6 +658,22 @@ declare interface DescribeAutoBackupConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConnectionConfigRequest {
+  /** 实例 ID，如：kee-6ubh****。 */
+  InstanceId: string;
+}
+
+declare interface DescribeConnectionConfigResponse {
+  /** 单分片入流量带宽限制，单位：MB。 */
+  InNetLimit?: number;
+  /** 单分片出流量带宽限制，单位：MB。 */
+  OutNetLimit?: number;
+  /** 单分片连接数限制。 */
+  ClientLimit?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBSecurityGroupsRequest {
   /** 数据库引擎名称：keewidb。 */
   Product: string;
@@ -1263,6 +1279,8 @@ declare interface Keewidb {
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
   /** 获取自动备份配置 {@link DescribeAutoBackupConfigRequest} {@link DescribeAutoBackupConfigResponse} */
   DescribeAutoBackupConfig(data: DescribeAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoBackupConfigResponse>;
+  /** 查询实例连接配置 {@link DescribeConnectionConfigRequest} {@link DescribeConnectionConfigResponse} */
+  DescribeConnectionConfig(data: DescribeConnectionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectionConfigResponse>;
   /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询实例全量备份列表 {@link DescribeInstanceBackupsRequest} {@link DescribeInstanceBackupsResponse} */

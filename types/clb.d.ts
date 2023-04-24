@@ -2357,11 +2357,13 @@ declare interface ModifyLoadBalancerAttributesRequest {
   SnatPro?: boolean;
   /** 是否开启删除保护 */
   DeleteProtect?: boolean;
+  /** 将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换。修改后mycloud.com域名将失效。 */
+  ModifyClassicDomain?: boolean;
 }
 
 declare interface ModifyLoadBalancerAttributesResponse {
   /** 切换负载均衡计费方式时，可用此参数查询切换任务是否成功。 */
-  DealName: string | null;
+  DealName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

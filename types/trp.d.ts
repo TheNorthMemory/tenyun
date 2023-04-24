@@ -5,11 +5,11 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 上链数据 */
 declare interface ChainData {
   /** 区块hash */
-  BlockHash: string | null;
+  BlockHash?: string | null;
   /** 区块高度 */
-  BlockHeight: string | null;
+  BlockHeight?: string | null;
   /** 区块时间 */
-  BlockTime: string | null;
+  BlockTime?: string | null;
 }
 
 /** 批次 */
@@ -389,23 +389,23 @@ declare interface TraceCode {
 /** 溯源数据 */
 declare interface TraceData {
   /** 溯源ID */
-  TraceId: string | null;
+  TraceId: string;
   /** 企业ID */
-  CorpId: number | null;
+  CorpId: number;
   /** 码类型 0: 批次, 1: 码, 2: 生产任务 */
-  Type: number | null;
+  Type: number;
   /** 码值，跟码类型一一对应 */
   Code: string | null;
   /** 排序，在Phase相同情况下，值越小排名靠前 */
-  Rank: number | null;
+  Rank: number;
   /** 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源 */
-  Phase: number | null;
+  Phase: number;
   /** 溯源环节名称 */
-  PhaseName: string | null;
+  PhaseName: string;
   /** 溯源时间 */
   TraceTime: string | null;
   /** 无 */
-  TraceItems: TraceItem[] | null;
+  TraceItems: TraceItem[];
   /** 创建时间 */
   CreateTime: string | null;
   /** 上链状态 0: 未上链 1: 上链中 2: 已上链 -1: 异常 */
@@ -417,27 +417,31 @@ declare interface TraceData {
   /** 溯源阶段配置 */
   PhaseData: PhaseData | null;
   /** 溯源阶段状态 0: 无效, 1: 有效 */
-  Status: number | null;
+  Status: number;
 }
 
-/** 溯源数据项Type的枚举值text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型具体组合如下Type: "text" 文本类型, 对应值 Value: "文本字符串"Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"] */
+/** 溯源数据项 Type 的枚举值text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型具体组合如下- Type: "text" 文本类型, 对应值 Value: "文本字符串"- Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"- Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"- Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]- Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"- Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"] */
 declare interface TraceItem {
   /** 字段名称 */
-  Name: string | null;
+  Name: string;
   /** 字段值 */
-  Value: string | null;
-  /** 类型 text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型 */
-  Type: string | null;
+  Value: string;
+  /** 字段类型text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型,video:视频类型,mp:小程序类型 */
+  Type: string;
   /** 只读 */
-  ReadOnly: boolean | null;
+  ReadOnly: boolean;
   /** 扫码展示 */
-  Hidden: boolean | null;
+  Hidden: boolean;
   /** 多个值 */
-  Values: string[] | null;
+  Values: string[];
   /** 类型标识 */
-  Key: string | null;
+  Key: string;
   /** 扩展字段 */
-  Ext: string | null;
+  Ext: string;
+  /** 额外属性 */
+  Attrs?: TraceItem[];
+  /** 子页面，只读 */
+  List?: TraceData[];
 }
 
 /** 付费信息使用量 */
@@ -691,15 +695,19 @@ declare interface CreateTraceCodesRequest {
   CorpId?: number;
   /** 码 */
   Codes?: CodeItem[];
+  /** 码绑定激活策略，默认 00: 传什么码就激活什么码1: 层级码 + 层级子码 */
+  CodeType?: number;
+  /** 错误检查类型，默认 00: 没有新导入码时正常返回1: 没有新导入码时报错，并返回没有导入成功的原因 */
+  CheckType?: number;
 }
 
 declare interface CreateTraceCodesResponse {
   /** 批次ID */
-  BatchId: string;
+  BatchId?: string;
   /** 导入成功码数量 */
-  ActiveCnt: number;
+  ActiveCnt?: number;
   /** 批次码数量 */
-  CodeCnt: number;
+  CodeCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1357,12 +1365,16 @@ declare interface ModifyTraceDataRequest {
   TraceItems?: TraceItem[];
   /** 溯源阶段名称 */
   PhaseName?: string;
+  /** 环节数据 */
+  PhaseData?: PhaseData;
+  /** 溯源状态 0: 无效, 1: 有效 */
+  Status?: number;
+  /** 排序 */
+  Rank?: number;
   /** [无效] 类型 */
   Type?: number;
   /** [无效] 溯源码 */
   Code?: string;
-  /** [无效] 排序 */
-  Rank?: number;
   /** [无效] 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源 */
   Phase?: number;
   /** [无效] 溯源时间 */
@@ -1377,15 +1389,11 @@ declare interface ModifyTraceDataRequest {
   ChainData?: ChainData;
   /** 企业ID */
   CorpId?: number;
-  /** 溯源状态 0: 无效, 1: 有效 */
-  Status?: number;
-  /** 环节数据 */
-  PhaseData?: PhaseData;
 }
 
 declare interface ModifyTraceDataResponse {
   /** 溯源ID */
-  TraceId: string;
+  TraceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

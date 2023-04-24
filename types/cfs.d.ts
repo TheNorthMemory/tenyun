@@ -902,6 +902,22 @@ declare interface DescribeUserQuotaResponse {
   RequestId?: string;
 }
 
+declare interface ScaleUpFileSystemRequest {
+  /** 文件系统Id */
+  FileSystemId: string;
+  /** 扩容的目标容量 */
+  TargetCapacity: number;
+}
+
+declare interface ScaleUpFileSystemResponse {
+  /** 文件系统Id */
+  FileSystemId?: string;
+  /** 扩容的目标容量 */
+  TargetCapacity?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetUserQuotaRequest {
   /** 文件系统 ID */
   FileSystemId: string;
@@ -1159,6 +1175,8 @@ declare interface Cfs {
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
   /** 查询文件系统配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
   DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
+  /** 文件系统存储量扩容 {@link ScaleUpFileSystemRequest} {@link ScaleUpFileSystemResponse} */
+  ScaleUpFileSystem(data: ScaleUpFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpFileSystemResponse>;
   /** 设置文件系统配额 {@link SetUserQuotaRequest} {@link SetUserQuotaResponse} */
   SetUserQuota(data: SetUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<SetUserQuotaResponse>;
   /** 开通CFS服务 {@link SignUpCfsServiceRequest} {@link SignUpCfsServiceResponse} */

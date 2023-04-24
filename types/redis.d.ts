@@ -2219,25 +2219,25 @@ declare interface ModfiyInstancePasswordResponse {
 }
 
 declare interface ModifyAutoBackupConfigRequest {
-  /** 实例ID。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 设置自动备份周期。可设置为Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。该参数暂不支持修改。 */
   WeekDays: string[];
   /** 备份时间段。可设置为每个整点。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。 */
   TimePeriod: string;
-  /** 自动备份类型： 1 “定时回档”。 */
+  /** 自动备份类型。目前仅能配置为：1 ，指定时备份。 */
   AutoBackupType?: number;
 }
 
 declare interface ModifyAutoBackupConfigResponse {
-  /** 自动备份类型： 1 “定时回档” */
-  AutoBackupType: number;
+  /** 自动备份类型。目前仅能配置为：1 ，指定时备份。 */
+  AutoBackupType?: number;
   /** 自动备份周期。取值为：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。 */
-  WeekDays: string[];
-  /** 自动备份时间段。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。 */
-  TimePeriod: string;
+  WeekDays?: string[];
+  /** 自动定时备份时间段。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。 */
+  TimePeriod?: string;
   /** 全量备份文件保存天数,单位：天。 */
-  BackupStorageDays: number;
+  BackupStorageDays?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

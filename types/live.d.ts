@@ -3813,7 +3813,7 @@ declare interface Live {
   DescribeHttpStatusInfoList(data: DescribeHttpStatusInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpStatusInfoListResponse>;
   /** 获取回调规则列表 {@link DescribeLiveCallbackRulesRequest} {@link DescribeLiveCallbackRulesResponse} */
   DescribeLiveCallbackRules(data?: DescribeLiveCallbackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackRulesResponse>;
-  /** 获取单个回调模板 {@link DescribeLiveCallbackTemplateRequest} {@link DescribeLiveCallbackTemplateResponse} */
+  /** 获取直播单个回调模板 {@link DescribeLiveCallbackTemplateRequest} {@link DescribeLiveCallbackTemplateResponse} */
   DescribeLiveCallbackTemplate(data: DescribeLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplateResponse>;
   /** 获取回调模板列表 {@link DescribeLiveCallbackTemplatesRequest} {@link DescribeLiveCallbackTemplatesResponse} */
   DescribeLiveCallbackTemplates(data?: DescribeLiveCallbackTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplatesResponse>;

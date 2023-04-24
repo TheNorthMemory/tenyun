@@ -1328,6 +1328,8 @@ declare interface AsrFullTextConfigureInfo {
   SubtitleFormats?: string[];
   /** 生成的字幕文件格式，不填或者填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。注意：此字段已废弃，建议使用 SubtitleFormats。 */
   SubtitleFormat?: string;
+  /** 媒体源语言，取值范围：zh：中文普通话；en：英语；ja：日语；zh-ca：粤语。注意： 填空字符串，或者不填该参数，则自动识别（效果较难保证，推荐填写原始媒体对应的语言，以提高识别的准确率）。 */
+  SrcLanguage?: string;
 }
 
 /** 语音全文识别任务控制参数 */
@@ -1338,6 +1340,8 @@ declare interface AsrFullTextConfigureInfoForUpdate {
   SubtitleFormatsOperation?: SubtitleFormatsOperation;
   /** 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。注意：此字段已废弃，建议使用 SubtitleFormatsOperation。 */
   SubtitleFormat?: string;
+  /** 媒体源语言，取值范围：zh：中文普通话；en：英语；ja：日语；zh-ca：粤语。 */
+  SrcLanguage?: string | null;
 }
 
 /** 语音关键词识别控制参数。 */
@@ -5255,7 +5259,7 @@ declare interface CreateAIRecognitionTemplateRequest {
 
 declare interface CreateAIRecognitionTemplateResponse {
   /** 音视频内容识别模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6059,9 +6063,9 @@ declare interface DescribeAIRecognitionTemplatesRequest {
 
 declare interface DescribeAIRecognitionTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 音视频内容识别模板详情列表。 */
-  AIRecognitionTemplateSet: AIRecognitionTemplateItem[];
+  AIRecognitionTemplateSet?: AIRecognitionTemplateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

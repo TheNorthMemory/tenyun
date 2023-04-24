@@ -204,6 +204,8 @@ declare interface DescribeCustomRulesRspRuleListItem {
   Status: string;
   /** 策略详情 */
   Strategies: Strategy[];
+  /** 事件id */
+  EventId: string | null;
 }
 
 /** 域名的详细信息 */
@@ -390,7 +392,7 @@ declare interface ExportAccessInfo {
   CreateTime: string;
 }
 
-/** 实例入参过滤器 */
+/** 过滤数组 */
 declare interface FiltersItemNew {
   /** 字段名 */
   Name: string;
@@ -462,7 +464,7 @@ declare interface HostRecord {
 declare interface InstanceInfo {
   /** id */
   InstanceId: string;
-  /** name */
+  /** Name */
   InstanceName: string;
   /** 资源id */
   ResourceIds: string;
@@ -510,6 +512,16 @@ declare interface InstanceInfo {
   AttackLogPost?: number | null;
   /** 带宽峰值 */
   MaxBandwidth?: number | null;
+  /** api安全是否购买 */
+  APISecurity?: number;
+  /** 购买的qps规格 */
+  QpsStandard?: number | null;
+  /** 购买的带宽规格 */
+  BandwidthStandard?: number | null;
+  /** 实例状态 */
+  Status?: number | null;
+  /** 实例沙箱值 */
+  SandboxQps?: number | null;
 }
 
 /** 数据封装 */
@@ -713,13 +725,13 @@ declare interface RuleList {
 /** 自定义规则的匹配条件结构体 */
 declare interface Strategy {
   /** 匹配字段 */
-  Field: string;
+  Field: string | null;
   /** 逻辑符号 */
-  CompareFunc: string;
+  CompareFunc: string | null;
   /** 匹配内容 */
-  Content: string;
+  Content: string | null;
   /** 匹配参数 */
-  Arg: string;
+  Arg: string | null;
 }
 
 /** Vip信息 */
@@ -775,7 +787,7 @@ declare interface AddCustomRuleRequest {
   Name: string;
   /** 优先级 */
   SortId: string;
-  /** 过期时间 */
+  /** 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59. 0表示永不过期 */
   ExpireTime: string;
   /** 策略详情 */
   Strategies: Strategy[];
@@ -1128,6 +1140,8 @@ declare interface DescribeAttackOverviewResponse {
   CCCount?: number;
   /** Bot攻击总数 */
   BotCount?: number;
+  /** api资产总数 */
+  ApiAssetsCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1275,9 +1289,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** instance列表 */
-  Instances: InstanceInfo[];
+  Instances?: InstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

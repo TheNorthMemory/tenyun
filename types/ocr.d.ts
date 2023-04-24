@@ -986,6 +986,14 @@ declare interface WordCoordPoint {
   WordCoordinate: Coord[];
 }
 
+/** 还原文本信息 */
+declare interface WordItem {
+  /** 文本块内容 */
+  DetectedText?: string;
+  /** 四点坐标 */
+  Coord?: Polygon;
+}
+
 /** 识别出来的单词信息包括单词（包括单词Character和单词置信度confidence） */
 declare interface Words {
   /** 置信度 0 ~100 */
@@ -2689,6 +2697,8 @@ declare interface SmartStructuralOCRV2Request {
   PdfPageNumber?: number;
   /** 自定义结构化功能需返回的字段名称，例：若客户只想返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
   ItemNames?: string[];
+  /** 是否开启全文字段识别 */
+  ReturnFullText?: boolean;
 }
 
 declare interface SmartStructuralOCRV2Response {
@@ -2696,6 +2706,8 @@ declare interface SmartStructuralOCRV2Response {
   Angle?: number;
   /** 配置结构化文本信息 */
   StructuralList?: GroupInfo[];
+  /** 还原文本信息 */
+  WordList?: WordItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

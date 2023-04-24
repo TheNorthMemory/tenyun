@@ -348,6 +348,8 @@ declare interface FlowBrief {
   CreatedOn: number | null;
   /** 拒签或者取消的原因描述 */
   FlowMessage: string | null;
+  /** 合同发起人userId */
+  Creator?: string | null;
 }
 
 /** 创建流程的签署方信息 */
@@ -408,6 +410,8 @@ declare interface FlowDetailInfo {
   FlowApproverInfos: FlowApproverDetail[];
   /** 合同(流程)的关注方信息列表 */
   CcInfos?: FlowApproverDetail[];
+  /** 合同发起人UserId */
+  Creator?: string | null;
 }
 
 /** 电子文档的控件填充信息。按照控件类型进行相应的填充。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
@@ -872,7 +876,7 @@ declare interface CreateDocumentRequest {
   /** 用户上传的模板ID */
   TemplateId: string;
   /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。 */
-  FileNames: string[];
+  FileNames?: string[];
   /** 内容控件信息数组 */
   FormFields?: FormField[];
   /** 是否需要生成预览文件 默认不生成；预览链接有效期300秒； */
@@ -1055,10 +1059,10 @@ declare interface CreateFlowSignUrlRequest {
   FlowId: string;
   /** 流程签署人，其中ApproverName，ApproverMobile和ApproverType必传，其他可不传，ApproverType目前只支持个人类型的签署人。还需注意签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。 */
   FlowApproverInfos: FlowCreateApprover[];
-  /** 机构信息，暂未开放 */
-  Organization: OrganizationInfo;
   /** 用户信息，此结构体UserId必填 */
   Operator?: UserInfo;
+  /** 机构信息，暂未开放 */
+  Organization?: OrganizationInfo;
 }
 
 declare interface CreateFlowSignUrlResponse {

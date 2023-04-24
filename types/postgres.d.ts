@@ -1356,6 +1356,24 @@ declare interface DescribeAvailableRecoveryTimeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupDownloadRestrictionRequest {
+}
+
+declare interface DescribeBackupDownloadRestrictionResponse {
+  /** 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。 */
+  RestrictionType?: string;
+  /** vpc限制效力，ALLOW 允许；DENY 拒绝。 */
+  VpcRestrictionEffect?: string | null;
+  /** 允许或拒绝下载备份文件的vpcId列表。 */
+  VpcIdSet?: string[] | null;
+  /** ip限制效力，ALLOW 允许；DENY 拒绝。 */
+  IpRestrictionEffect?: string | null;
+  /** 允许或拒绝下载备份文件的ip列表。 */
+  IpSet?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupDownloadURLRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -2088,6 +2106,24 @@ declare interface ModifyAccountRemarkResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBackupDownloadRestrictionRequest {
+  /** 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。 */
+  RestrictionType: string;
+  /** vpc限制效力，ALLOW 允许；DENY 拒绝。 */
+  VpcRestrictionEffect?: string;
+  /** 允许或拒绝下载备份文件的vpcId列表。 */
+  VpcIdSet?: string[];
+  /** ip限制效力，ALLOW 允许；DENY 拒绝。 */
+  IpRestrictionEffect?: string;
+  /** 允许或拒绝下载备份文件的ip列表。 */
+  IpSet?: string[];
+}
+
+declare interface ModifyBackupDownloadRestrictionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBackupPlanRequest {
   /** 实例ID */
   DBInstanceId: string;
@@ -2116,6 +2152,26 @@ declare interface ModifyBaseBackupExpireTimeRequest {
 }
 
 declare interface ModifyBaseBackupExpireTimeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBInstanceChargeTypeRequest {
+  /** 实例ID，形如postgres-6fego161 */
+  DBInstanceId: string;
+  /** 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。 */
+  InstanceChargeType: string;
+  /** 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。 */
+  Period: number;
+  /** 续费标记：0-正常续费（默认）；1-自动续费。 */
+  AutoRenewFlag?: number;
+  /** 是否自动使用代金券,1是,0否，默认不使用 */
+  AutoVoucher?: number;
+}
+
+declare interface ModifyDBInstanceChargeTypeResponse {
+  /** 订单名 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2495,6 +2551,8 @@ declare interface Postgres {
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询实例可恢复的时间范围 {@link DescribeAvailableRecoveryTimeRequest} {@link DescribeAvailableRecoveryTimeResponse} */
   DescribeAvailableRecoveryTime(data: DescribeAvailableRecoveryTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableRecoveryTimeResponse>;
+  /** 查询备份文件下载限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
+  DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
   /** 获取备份下载链接 {@link DescribeBackupDownloadURLRequest} {@link DescribeBackupDownloadURLResponse} */
   DescribeBackupDownloadURL(data: DescribeBackupDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadURLResponse>;
   /** 查询备份概览 {@link DescribeBackupOverviewRequest} {@link DescribeBackupOverviewResponse} */
@@ -2573,10 +2631,14 @@ declare interface Postgres {
   IsolateDBInstances(data: IsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstancesResponse>;
   /** 修改帐号备注 {@link ModifyAccountRemarkRequest} {@link ModifyAccountRemarkResponse} */
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
+  /** 修改备份文件下载限制 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
+  ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
   /** 修改备份计划 {@link ModifyBackupPlanRequest} {@link ModifyBackupPlanResponse} */
   ModifyBackupPlan(data: ModifyBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupPlanResponse>;
   /** 修改基础备份过期时间 {@link ModifyBaseBackupExpireTimeRequest} {@link ModifyBaseBackupExpireTimeResponse} */
   ModifyBaseBackupExpireTime(data: ModifyBaseBackupExpireTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaseBackupExpireTimeResponse>;
+  /** 修改实例计费类型 {@link ModifyDBInstanceChargeTypeRequest} {@link ModifyDBInstanceChargeTypeResponse} */
+  ModifyDBInstanceChargeType(data: ModifyDBInstanceChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceChargeTypeResponse>;
   /** 修改实例部署方式 {@link ModifyDBInstanceDeploymentRequest} {@link ModifyDBInstanceDeploymentResponse} */
   ModifyDBInstanceDeployment(data: ModifyDBInstanceDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeploymentResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */

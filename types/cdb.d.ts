@@ -122,6 +122,12 @@ declare interface AuditLogFilter {
   IoWaitTimeSection?: string;
   /** 事务持续时间，格式为M-N，例如：10-200 */
   TransactionLivingTimeSection?: string;
+  /** 线程ID */
+  ThreadId?: string[] | null;
+  /** 返回行数。表示筛选返回行数大于该值的审计日志。 */
+  SentRows?: number | null;
+  /** mysql错误码 */
+  ErrCode?: number[] | null;
 }
 
 /** 审计策略 */
@@ -162,6 +168,12 @@ declare interface AuditRule {
   RuleFilters: AuditFilter[] | null;
   /** 是否开启全审计。 */
   AuditAll: boolean;
+}
+
+/** 审计规则的过滤条件 */
+declare interface AuditRuleFilters {
+  /** 单条审计规则。 */
+  RuleFilters?: RuleFilters[] | null;
 }
 
 /** ECDB第二个从库的配置信息，只有ECDB实例才有这个字段 */
@@ -1258,6 +1270,16 @@ declare interface Rule {
   Weight: number | null;
 }
 
+/** 审计规则的规则过滤条件 */
+declare interface RuleFilters {
+  /** 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句；affectRows -影响行数；sentRows-返回行数；checkRows-扫描行数；execTime-执行时间。 */
+  Type: string;
+  /** 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于；REG-正则；GT-大于；LT-小于。 */
+  Compare: string;
+  /** 审计规则过滤条件的匹配值。sqlType条件的Value需在一下选择"alter", "changeuser", "create", "delete", "drop", "execute", "insert", "login", "logout", "other", "replace", "select", "set", "update"。 */
+  Value: string[];
+}
+
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
@@ -1751,7 +1773,7 @@ declare interface CreateDBInstanceHourRequest {
   MasterInstanceId?: string;
   /** 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。 */
   InstanceRole?: string;
-  /** 主实例的可用区信息，购买灾备、RO实例时必填。 */
+  /** 主实例地域信息，购买灾备、RO实例时，该字段必填。 */
   MasterRegion?: string;
   /** 自定义端口，端口支持范围：[ 1024-65535 ] 。 */
   Port?: number;
@@ -1809,9 +1831,9 @@ declare interface CreateDBInstanceHourRequest {
 
 declare interface CreateDBInstanceHourResponse {
   /** 短订单 ID。 */
-  DealIds: string[];
+  DealIds?: string[];
   /** 实例 ID 列表。 */
-  InstanceIds: string[];
+  InstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3879,10 +3901,14 @@ declare interface OfflineIsolatedInstancesResponse {
 declare interface OpenAuditServiceRequest {
   /** CDB实例ID */
   InstanceId: string;
-  /** 审计日志保存时长。支持值包括：7 - 一周30 - 一个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年； */
+  /** 审计日志保存时长。支持值包括：7 - 一周30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年； */
   LogExpireDay: number;
-  /** 高频审计日志保存时长。支持值包括：7 - 一周30 - 一个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年； */
+  /** 高频审计日志保存时长。支持值包括：7 - 一周30 - 一个月； */
   HighLogExpireDay?: number;
+  /** 审计规则。同RuleTemplateIds都不填是全审计。 */
+  AuditRuleFilters?: AuditRuleFilters[];
+  /** 规则模版ID。同AuditRuleFilters都不填是全审计。 */
+  RuleTemplateIds?: string[];
 }
 
 declare interface OpenAuditServiceResponse {

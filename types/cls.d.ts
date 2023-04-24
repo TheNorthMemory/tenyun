@@ -1369,7 +1369,7 @@ declare interface DescribeAlarmNoticesResponse {
 }
 
 declare interface DescribeAlarmsRequest {
-  /** name按照【告警策略名称】进行过滤。类型：String必选：否 alarmId按照【告警策略ID】进行过滤。类型：String必选：否 topicId按照【监控对象的日志主题ID】进行过滤。类型：String必选：否 enable按照【启用状态】进行过滤。类型：String备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** name- 按照【告警策略名称】进行过滤。- 类型：String- 必选：否alarmId- 按照【告警策略ID】进行过滤。- 类型：String- 必选：否topicId- 按照【监控对象的日志主题ID】进行过滤。- 类型：String- 必选：否enable- 按照【启用状态】进行过滤。- 类型：String- 备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -1439,7 +1439,7 @@ declare interface DescribeConfigMachineGroupsResponse {
 }
 
 declare interface DescribeConfigsRequest {
-  /** configName按照【采集配置名称】进行模糊匹配过滤。类型：String必选：否 configId按照【采集配置ID】进行过滤。类型：String必选：否 topicId按照【日志主题】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** configName- 按照【采集配置名称】进行模糊匹配过滤。- 类型：String- 必选：否configId- 按照【采集配置ID】进行过滤。- 类型：String- 必选：否topicId- 按照【日志主题】进行过滤。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -1449,9 +1449,9 @@ declare interface DescribeConfigsRequest {
 
 declare interface DescribeConfigsResponse {
   /** 采集配置列表 */
-  Configs: ConfigInfo[] | null;
+  Configs?: ConfigInfo[] | null;
   /** 过滤到的总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1583,7 +1583,7 @@ declare interface DescribeLogHistogramResponse {
 }
 
 declare interface DescribeLogsetsRequest {
-  /** logsetName按照【日志集名称】进行过滤。类型：String必选：否 logsetId按照【日志集ID】进行过滤。类型：String必选：否 tagKey按照【标签键】进行过滤。类型：String必选：否 tag:tagKey按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** logsetName- 按照【日志集名称】进行过滤。- 类型：String- 必选：否logsetId- 按照【日志集ID】进行过滤。- 类型：String- 必选：否tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -1593,9 +1593,9 @@ declare interface DescribeLogsetsRequest {
 
 declare interface DescribeLogsetsResponse {
   /** 分页的总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志集列表 */
-  Logsets: LogsetInfo[];
+  Logsets?: LogsetInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1613,7 +1613,7 @@ declare interface DescribeMachineGroupConfigsResponse {
 }
 
 declare interface DescribeMachineGroupsRequest {
-  /** machineGroupName按照【机器组名称】进行过滤。类型：String必选：否 machineGroupId按照【机器组ID】进行过滤。类型：String必选：否 tagKey按照【标签键】进行过滤。类型：String必选：否 tag:tagKey按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** machineGroupName- 按照【机器组名称】进行过滤。- 类型：String- 必选：否machineGroupId- 按照【机器组ID】进行过滤。- 类型：String- 必选：否tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -1623,9 +1623,9 @@ declare interface DescribeMachineGroupsRequest {
 
 declare interface DescribeMachineGroupsResponse {
   /** 机器组信息列表 */
-  MachineGroups: MachineGroupInfo[] | null;
+  MachineGroups?: MachineGroupInfo[] | null;
   /** 分页的总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1681,7 +1681,7 @@ declare interface DescribeShipperTasksResponse {
 }
 
 declare interface DescribeShippersRequest {
-  /** shipperName按照【投递规则名称】进行过滤。类型：String必选：否 shipperId按照【投递规则ID】进行过滤。类型：String必选：否 topicId按照【日志主题】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** - shipperName：按照【投递规则名称】进行过滤。类型：String。必选：否- shipperId：按照【投递规则ID】进行过滤。类型：String。必选：否- topicId：按照【日志主题】进行过滤。类型：String。必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;

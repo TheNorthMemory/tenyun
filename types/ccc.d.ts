@@ -869,17 +869,19 @@ declare interface DescribeCallInMetricsRequest {
   EnabledSkillGroup?: boolean;
   /** 是否返回线路维度信息，默认“否” */
   EnabledNumber?: boolean;
+  /** 筛选技能组列表 */
+  GroupIdList?: number[];
 }
 
 declare interface DescribeCallInMetricsResponse {
   /** 时间戳 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 总体指标 */
-  TotalMetrics: CallInMetrics;
+  TotalMetrics?: CallInMetrics;
   /** 线路维度指标 */
-  NumberMetrics: CallInNumberMetrics[] | null;
+  NumberMetrics?: CallInNumberMetrics[] | null;
   /** 技能组维度指标 */
-  SkillGroupMetrics: CallInSkillGroupMetrics[] | null;
+  SkillGroupMetrics?: CallInSkillGroupMetrics[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1113,11 +1115,15 @@ declare interface DescribeStaffStatusMetricsRequest {
   SdkAppId: number;
   /** 筛选坐席列表，默认不传返回全部坐席信息 */
   StaffList?: string[];
+  /** 筛选技能组ID列表 */
+  GroupIdList?: number[];
+  /** 筛选坐席状态列表 */
+  StatusList?: string[];
 }
 
 declare interface DescribeStaffStatusMetricsResponse {
   /** 坐席状态实时信息 */
-  Metrics: StaffStatusMetrics[];
+  Metrics?: StaffStatusMetrics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
