@@ -946,7 +946,7 @@ declare interface Service {
   Namespace: string | null;
   /** 付费类型 */
   ChargeType: string | null;
-  /** 后付费资源组id */
+  /** 包年包月服务的资源组id，按量计费的服务为空 */
   ResourceGroupId: string | null;
   /** 创建者 */
   CreatedBy: string | null;
@@ -984,7 +984,7 @@ declare interface Service {
   ScheduledAction: ScheduledAction | null;
   /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
   CreateFailedReason: string | null;
-  /** 预付费服务对应的资源组名字 */
+  /** 包年包月服务对应的资源组名字 */
   ResourceGroupName: string | null;
   /** 服务的标签 */
   Tags: Tag[] | null;
@@ -1100,6 +1100,16 @@ declare interface ServiceInfo {
   Pods?: Pod | null;
   /** Pod列表信息 */
   PodInfos?: Pod[] | null;
+  /** 定时伸缩策略 */
+  ScaleStrategy?: string | null;
+  /** 定时伸缩任务 */
+  CronScaleJobs?: CronScaleJob[] | null;
+  /** 实例数量调节方式,默认为手动支持：自动 - "AUTO", 手动 - "MANUAL" */
+  ScaleMode?: string | null;
+  /** 服务限速限流相关配置 */
+  ServiceLimit?: ServiceLimit | null;
+  /** 定时停止的配置 */
+  ScheduledAction?: string | null;
 }
 
 /** 服务的限流限速等配置 */
@@ -1623,23 +1633,23 @@ declare interface CreateDatasetResponse {
 }
 
 declare interface CreateModelServiceRequest {
-  /** 镜像信息，配置服务运行所需的镜像地址等信息 */
-  ImageInfo: ImageInfo;
   /** 新增版本时需要填写 */
   ServiceGroupId?: string;
   /** 不超过60个字，仅支持英文、数字、下划线"_"、短横"-"，只能以英文、数字开头 */
   ServiceGroupName?: string;
   /** 模型服务的描述 */
   ServiceDescription?: string;
-  /** 付费模式,有 PREPAID 、 POSTPAID_BY_HOUR 和 HYBRID_PAID 三种 */
+  /** 付费模式,有 PREPAID （包年包月）和 POSTPAID_BY_HOUR（按量付费） */
   ChargeType?: string;
   /** 预付费模式下所属的资源组id，同服务组下唯一 */
   ResourceGroupId?: string;
   /** 模型信息，需要挂载模型时填写 */
   ModelInfo?: ModelInfo;
+  /** 镜像信息，配置服务运行所需的镜像地址等信息 */
+  ImageInfo?: ImageInfo;
   /** 环境变量，可选参数，用于配置容器中的环境变量 */
   Env?: EnvVar[];
-  /** 资源描述，指定预付费模式下的cpu,mem,gpu等信息，后付费无需填写 */
+  /** 资源描述，指定包年包月模式下的cpu,mem,gpu等信息，后付费无需填写 */
   Resources?: ResourceInfo;
   /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST	2C4GTI.S.LARGE.POST	4C8GTI.S.2XLARGE16.POST	8C16GTI.S.2XLARGE32.POST	8C32GTI.S.4XLARGE32.POST	16C32GTI.S.4XLARGE64.POST	16C64GTI.S.6XLARGE48.POST	24C48GTI.S.6XLARGE96.POST	24C96GTI.S.8XLARGE64.POST	32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST	4C20G T4*1/4TI.GN7.2XLARGE40.POST	10C40G T4*1/2TI.GN7.2XLARGE32.POST	8C32G T4*1TI.GN7.5XLARGE80.POST	20C80G T4*1TI.GN7.8XLARGE128.POST	32C128G T4*1TI.GN7.10XLARGE160.POST	40C160G T4*2TI.GN7.20XLARGE320.POST	80C320G T4*4 */
   InstanceType?: string;
@@ -2021,7 +2031,7 @@ declare interface DescribeBillingSpecsPriceResponse {
 declare interface DescribeBillingSpecsRequest {
   /** 枚举值：TRAIN、NOTEBOOK、INFERENCE */
   TaskType: string;
-  /** 付费模式：POSTPAID_BY_HOUR后付费、PREPAID预付费 */
+  /** 付费模式：POSTPAID_BY_HOUR按量付费、PREPAID包年包月 */
   ChargeType: string;
   /** 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘 */
   ResourceType?: string;
@@ -3384,7 +3394,7 @@ declare interface Tione {
   /** 创建数据集 {@link CreateDatasetRequest} {@link CreateDatasetResponse} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
   /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
-  CreateModelService(data: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
+  CreateModelService(data?: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
   /** 保存优化模型 {@link CreateOptimizedModelRequest} {@link CreateOptimizedModelResponse} */
   CreateOptimizedModel(data: CreateOptimizedModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOptimizedModelResponse>;
   /** 导入模型 {@link CreateTrainingModelRequest} {@link CreateTrainingModelResponse} */

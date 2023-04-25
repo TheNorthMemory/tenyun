@@ -508,6 +508,8 @@ declare interface ProjectEntryEx {
   ApplicationCount: number | null;
   /** 设备注册总数 */
   DeviceCount: number | null;
+  /** 是否开通物联使能 */
+  EnableOpenState: number | null;
 }
 
 /** 搜索关键词 */

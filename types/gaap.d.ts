@@ -676,6 +676,8 @@ declare interface RegionDetail {
   IDCType: string;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
   FeatureBitmap: number | null;
+  /** 接入区域支持的能力 */
+  SupportFeature: SupportFeature | null;
 }
 
 /** 7层监听器转发规则健康检查相关参数 */
@@ -780,6 +782,12 @@ declare interface StatisticsDataInfo {
   Time: number;
   /** 统计数据值 */
   Data: number | null;
+}
+
+/** 加速区域支持的能力，包括支持的网络类型等等。 */
+declare interface SupportFeature {
+  /** 接入区域支持的网络类型列表，normal表示支持常规BGP，cn2表示精品BGP，triple表示三网，secure_eip表示定制安全eip。 */
+  NetworkType: string[];
 }
 
 /** TCP类型监听器信息 */

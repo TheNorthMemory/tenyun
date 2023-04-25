@@ -948,9 +948,9 @@ declare interface RuleInput {
   Http2?: boolean;
   /** 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组 */
   TargetType?: string;
-  /** TRPC被调服务器路由，ForwardType为TRPC时必填 */
+  /** TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。 */
   TrpcCallee?: string;
-  /** TRPC调用服务接口，ForwardType为TRPC时必填 */
+  /** TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放 */
   TrpcFunc?: string;
   /** 是否开启QUIC，注意，只有HTTPS域名才能开启QUIC */
   Quic?: boolean;
@@ -998,9 +998,9 @@ declare interface RuleOutput {
   TargetGroup: BasicTargetGroupInfo | null;
   /** WAF实例ID */
   WafDomainId: string | null;
-  /** TRPC被调服务器路由，ForwardType为TRPC时有效 */
+  /** TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。 */
   TrpcCallee: string | null;
-  /** TRPC调用服务接口，ForwardType为TRPC时有效 */
+  /** TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。 */
   TrpcFunc: string | null;
   /** QUIC状态 */
   QuicStatus: string | null;
@@ -2407,9 +2407,9 @@ declare interface ModifyRuleRequest {
   SessionExpireTime?: number;
   /** 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、TRPC。 */
   ForwardType?: string;
-  /** TRPC被调服务器路由，ForwardType为TRPC时必填。 */
+  /** TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。 */
   TrpcCallee?: string;
-  /** TRPC调用服务接口，ForwardType为TRPC时必填。 */
+  /** TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放。 */
   TrpcFunc?: string;
 }
 

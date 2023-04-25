@@ -844,6 +844,8 @@ declare interface RabbitMQVipInstance {
   SpecName: string;
   /** 集群异常。 */
   ExceptionInformation?: string | null;
+  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败为了和计费区分开，额外开启一个状态位，用于显示。 */
+  ClusterStatus?: number;
 }
 
 /** 消息保留策略 */
@@ -920,6 +922,10 @@ declare interface RocketMQClusterInfo {
   HttpPublicEndpoint?: string | null;
   /** HTTP协议VPC接入地址 */
   HttpVpcEndpoint?: string | null;
+  /** TCP内部接入地址 */
+  InternalEndpoint?: string | null;
+  /** HTTP协议内部接入地址 */
+  HttpInternalEndpoint?: string | null;
 }
 
 /** RocketMQ近期使用量 */
@@ -1000,7 +1006,7 @@ declare interface RocketMQInstanceConfig {
 declare interface RocketMQNamespace {
   /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
   NamespaceId: string;
-  /** 未消费消息的保留时间，以毫秒单位，范围60秒到15天 */
+  /** 已废弃，未消费消息的保留时间，以毫秒单位，范围60秒到15天 */
   Ttl: number;
   /** 消息持久化后保留的时间，以毫秒单位 */
   RetentionTime: number;
@@ -1010,6 +1016,8 @@ declare interface RocketMQNamespace {
   PublicEndpoint: string | null;
   /** VPC接入点地址 */
   VpcEndpoint: string | null;
+  /** 内部接入点地址 */
+  InternalEndpoint?: string | null;
 }
 
 /** RocketMQ主题信息 */
@@ -1068,6 +1076,12 @@ declare interface RocketMQVipInstance {
   Remark: string | null;
   /** 实例配置ID */
   SpecName: string;
+  /** 最大可设置消息保留时间，小时为单位 */
+  MaxRetention?: number | null;
+  /** 最小可设置消息保留时间，小时为单位 */
+  MinRetention?: number | null;
+  /** 实例消息保留时间，小时为单位 */
+  Retention?: number | null;
 }
 
 /** 角色实例 */

@@ -2967,7 +2967,7 @@ declare interface DescribeTimingL7SourceDataRequest {
   EndTime: string;
   /** 指标列表，取值有:l7Flow_outFlux_hy: Edgeone请求流量；l7Flow_outBandwidth_hy: Edgeone请求带宽；l7Flow_inFlux_hy: 源站响应流量；l7Flow_inBandwidth_hy: 源站响应带宽；l7Flow_request_hy: 回源请求数； */
   MetricNames: string[];
-  /** 站点集合，不填默认选择全部站点。 */
+  /** 待查询的站点列表，此参数必填。 */
   ZoneIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
@@ -2979,9 +2979,9 @@ declare interface DescribeTimingL7SourceDataRequest {
 
 declare interface DescribeTimingL7SourceDataResponse {
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 时序流量数据列表。 */
-  TimingDataRecords: TimingDataRecord[] | null;
+  TimingDataRecords?: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

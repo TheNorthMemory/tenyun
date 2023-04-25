@@ -999,7 +999,7 @@ declare interface CreateConfigExtraRequest {
 
 declare interface CreateConfigExtraResponse {
   /** 采集配置扩展信息ID */
-  ConfigExtraId: string;
+  ConfigExtraId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

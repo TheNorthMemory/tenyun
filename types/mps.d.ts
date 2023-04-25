@@ -71,23 +71,23 @@ declare interface Activity {
 /** 编排原子任务 */
 declare interface ActivityPara {
   /** 视频转码任务 */
-  TranscodeTask?: TranscodeTaskInput;
+  TranscodeTask?: TranscodeTaskInput | null;
   /** 视频转动图任务 */
-  AnimatedGraphicTask?: AnimatedGraphicTaskInput;
+  AnimatedGraphicTask?: AnimatedGraphicTaskInput | null;
   /** 视频按时间点截图任务 */
-  SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTaskInput;
+  SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTaskInput | null;
   /** 视频采样截图任务 */
-  SampleSnapshotTask?: SampleSnapshotTaskInput;
+  SampleSnapshotTask?: SampleSnapshotTaskInput | null;
   /** 视频截雪碧图任务 */
-  ImageSpriteTask?: ImageSpriteTaskInput;
+  ImageSpriteTask?: ImageSpriteTaskInput | null;
   /** 转自适应码流任务 */
-  AdaptiveDynamicStreamingTask?: AdaptiveDynamicStreamingTaskInput;
+  AdaptiveDynamicStreamingTask?: AdaptiveDynamicStreamingTaskInput | null;
   /** 视频内容审核类型任务 */
-  AiContentReviewTask?: AiContentReviewTaskInput;
+  AiContentReviewTask?: AiContentReviewTaskInput | null;
   /** 视频内容分析类型任务 */
-  AiAnalysisTask?: AiAnalysisTaskInput;
+  AiAnalysisTask?: AiAnalysisTaskInput | null;
   /** 视频内容识别类型任务 */
-  AiRecognitionTask?: AiRecognitionTaskInput;
+  AiRecognitionTask?: AiRecognitionTaskInput | null;
 }
 
 /** 编排子任务输出 */
@@ -3559,7 +3559,7 @@ declare interface SchedulesInfo {
   /** 编排名称。 */
   ScheduleName: string | null;
   /** 编排状态，取值范围：Enabled：已启用，Disabled：已禁用。 */
-  Status: string[] | null;
+  Status: string | null;
   /** 编排绑定的触发规则。 */
   Trigger: WorkflowTrigger | null;
   /** 编排任务列表。 */

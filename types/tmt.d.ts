@@ -53,11 +53,11 @@ declare interface FileTranslateRequest {
   DocumentType: string;
   /** 数据来源，0：url，1：直接传文件编码后数据 */
   SourceType?: number;
-  /** 需要翻译文件url */
+  /** 需要翻译文件url，文件需小于100MB。 */
   Url?: string;
   /** 原始文档类型 */
   BasicDocumentType?: string;
-  /** 回调url */
+  /** 回调url，文件大于10MB，建议采用回调方式；回调时，所有内容会放入 Body 中。 */
   CallbackUrl?: string;
   /** 文件数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据要小于5MB。 */
   Data?: string;
@@ -65,7 +65,7 @@ declare interface FileTranslateRequest {
 
 declare interface FileTranslateResponse {
   /** 文件翻译的请求返回结果，包含结果查询需要的TaskId */
-  Data: Task;
+  Data?: Task;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -77,7 +77,7 @@ declare interface GetFileTranslateRequest {
 
 declare interface GetFileTranslateResponse {
   /** 任务id */
-  Data: GetFileTranslateData;
+  Data?: GetFileTranslateData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -175,23 +175,23 @@ declare interface TextTranslateBatchRequest {
   Target: string;
   /** 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0 */
   ProjectId: number;
-  /** 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000字符。 */
+  /** 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于6000字符。 */
   SourceTextList: string[];
 }
 
 declare interface TextTranslateBatchResponse {
-  /** 源语言，详见入参Target */
-  Source: string;
+  /** 源语言，详见入参Source */
+  Source?: string;
   /** 目标语言，详见入参Target */
-  Target: string;
+  Target?: string;
   /** 翻译后的文本列表 */
-  TargetTextList: string[];
+  TargetTextList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface TextTranslateRequest {
-  /** 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000字符。 */
+  /** 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于6000字符。 */
   SourceText: string;
   /** 源语言，支持：auto：自动识别（识别为一种语言）zh：简体中文zh-TW：繁体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印尼语th：泰语ms：马来西亚语ar：阿拉伯语hi：印地语 */
   Source: string;
@@ -205,11 +205,11 @@ declare interface TextTranslateRequest {
 
 declare interface TextTranslateResponse {
   /** 翻译后的文本 */
-  TargetText: string;
+  TargetText?: string;
   /** 源语言，详见入参Target */
-  Source: string;
+  Source?: string;
   /** 目标语言，详见入参Target */
-  Target: string;
+  Target?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

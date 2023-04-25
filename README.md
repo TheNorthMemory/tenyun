@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 233+ 款产品，9329+ 服务数</summary>
+<details><summary>共计 233+ 款产品，9340+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -140,13 +140,13 @@ casb | [云访问安全代理](https://cloud.tencent.com/document/product/1303) 
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(11) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(43) |
 ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(39) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(139) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(149) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(80+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(20) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
-cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(41) |
+cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(42) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(71) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(15) |

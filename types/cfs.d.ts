@@ -902,6 +902,30 @@ declare interface DescribeUserQuotaResponse {
   RequestId?: string;
 }
 
+declare interface ModifyFileSystemAutoScaleUpRuleRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** 扩容阈值，范围[10-90] */
+  ScaleUpThreshold: number;
+  /** 扩容后目标阈值,范围[10-90],该值要小于ScaleUpThreshold */
+  TargetThreshold: number;
+  /** 规则状态0:关闭，1 开启 */
+  Status?: number;
+}
+
+declare interface ModifyFileSystemAutoScaleUpRuleResponse {
+  /** 文件系统id */
+  FileSystemId?: string;
+  /** 规则状态0:关闭，1 开启 */
+  Status?: number;
+  /** 扩容阈值,范围[10-90] */
+  ScaleUpThreshold?: number;
+  /** 扩容后达到阈值,范围[10-90] */
+  TargetThreshold?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ScaleUpFileSystemRequest {
   /** 文件系统Id */
   FileSystemId: string;
@@ -1175,6 +1199,8 @@ declare interface Cfs {
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
   /** 查询文件系统配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
   DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
+  /** 更新文件系统自动扩容策略 {@link ModifyFileSystemAutoScaleUpRuleRequest} {@link ModifyFileSystemAutoScaleUpRuleResponse} */
+  ModifyFileSystemAutoScaleUpRule(data: ModifyFileSystemAutoScaleUpRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFileSystemAutoScaleUpRuleResponse>;
   /** 文件系统存储量扩容 {@link ScaleUpFileSystemRequest} {@link ScaleUpFileSystemResponse} */
   ScaleUpFileSystem(data: ScaleUpFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpFileSystemResponse>;
   /** 设置文件系统配额 {@link SetUserQuotaRequest} {@link SetUserQuotaResponse} */

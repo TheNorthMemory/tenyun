@@ -8573,7 +8573,7 @@ declare interface Vod {
   ParseStreamingManifest(data: ParseStreamingManifestRequest, config?: AxiosRequestConfig): AxiosPromise<ParseStreamingManifestResponse>;
   /** 图片处理 {@link ProcessImageRequest} {@link ProcessImageResponse} */
   ProcessImage(data: ProcessImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessImageResponse>;
-  /** 视频处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */
+  /** 媒体处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
   /** 使用任务流模板进行视频处理 {@link ProcessMediaByProcedureRequest} {@link ProcessMediaByProcedureResponse} */
   ProcessMediaByProcedure(data: ProcessMediaByProcedureRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByProcedureResponse>;
