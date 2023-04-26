@@ -216,6 +216,8 @@ declare interface Disk {
   LastAttachInsId?: string | null;
   /** 云硬盘最后一次操作错误提示 */
   ErrorPrompt?: string | null;
+  /** 云盘是否开启性能突发 */
+  BurstPerformance?: boolean | null;
 }
 
 /** 云硬盘备份点。 */
@@ -641,7 +643,7 @@ declare interface CreateSnapshotRequest {
 
 declare interface CreateSnapshotResponse {
   /** 新创建的快照ID。 */
-  SnapshotId?: string;
+  SnapshotId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -110,6 +110,8 @@ declare interface RumInstanceInfo {
   InstanceName: string;
   /** 创建时间 */
   CreatedAt: string;
+  /** 实例类型 1:原web相关类型 2:app端类型 */
+  InstanceType?: number | null;
 }
 
 /** Rum 项目信息 */
@@ -345,13 +347,15 @@ declare interface CreateTawInstanceRequest {
   ResourcePackageType?: number;
   /** 预付费资源包数量(仅预付费需要) */
   ResourcePackageNum?: number;
+  /** 实例类型 1:原web相关类型 2:app端类型 */
+  InstanceType?: number;
 }
 
 declare interface CreateTawInstanceResponse {
   /** 实例Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 预付费订单 id */
-  DealName: string | null;
+  DealName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

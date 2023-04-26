@@ -198,6 +198,8 @@ declare interface DomainAliasInfo {
   Id: number;
   /** 域名别名 */
   DomainAlias: string;
+  /** 别名状态：1-DNS不正确；2-正常；3-封禁。 */
+  Status?: number;
 }
 
 /** 当前统计维度解析量小计 */
@@ -642,6 +644,10 @@ declare interface SnapshotRecord {
   RecordId?: string;
   /** MX优先级 */
   MX?: string | null;
+  /** 权重 */
+  Weight?: string | null;
+  /** 失败原因 */
+  Reason?: string | null;
 }
 
 /** 子域名别名解析量统计信息 */
@@ -1917,6 +1923,8 @@ declare interface RollbackSnapshotRequest {
   SnapshotId: string;
   /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
   DomainId?: number;
+  /** 指定需要回滚的记录 */
+  RecordList?: SnapshotRecord[];
 }
 
 declare interface RollbackSnapshotResponse {

@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 基础粒度分词和词性标注的结果 */
+declare interface BasicParticiple {
+  /** 基础词。 */
+  Word?: string;
+  /** 基础词在NormalText中的起始位置。 */
+  BeginOffset?: number;
+  /** 基础词的长度。 */
+  Length?: number;
+  /** 词性。 */
+  Pos?: string;
+}
+
 /** 文本纠错结果 */
 declare interface CCIToken {
   /** 错别字内容 */
@@ -36,6 +48,40 @@ declare interface ClassificationResult {
   FifthClassProbability?: number | null;
 }
 
+/** 复合粒度分词和词性标注的结果。 */
+declare interface CompoundParticiple {
+  /** 基础词。 */
+  Word?: string;
+  /** 基础词在NormalText中的起始位置。 */
+  BeginOffset?: number;
+  /** 基础词的长度。 */
+  Length?: number;
+  /** 词性。 */
+  Pos?: string;
+}
+
+/** 纠错结果列表 */
+declare interface CorrectionItem {
+  /** 纠错句子的序号。 */
+  Order?: number;
+  /** 错误的起始位置，从0开始。 */
+  BeginOffset?: number;
+  /** 错误内容长度。 */
+  Len?: number;
+  /** 错误内容。 */
+  Word?: string;
+  /** 纠错结果，当为删除类错误时，结果为null。 */
+  CorrectWord?: string[] | null;
+  /** 纠错类型。0：替换；1：插入；2：删除。 */
+  CorrectionType?: number;
+  /** 纠错信息置信度。0：error；1：warning；error的置信度更高。（仅供参考） */
+  Confidence?: number;
+  /** 纠错信息中文描述。 */
+  DescriptionZh?: string | null;
+  /** 纠错信息英文描述。 */
+  DescriptionEn?: string | null;
+}
+
 /** 自定义词库信息 */
 declare interface DictInfo {
   /** 自定义词库名称。 */
@@ -62,12 +108,40 @@ declare interface DpToken {
   Id?: number | null;
 }
 
+/** 文本润色结果 */
+declare interface Embellish {
+  /** 润色后的文本。 */
+  Text?: string | null;
+  /** 润色类型。类型列表expansion：扩写rewriting：改写translation_m2a：从现代文改写为古文translation_a2m：从古文改写为现代文 */
+  EmbellishType?: string | null;
+}
+
+/** 实体识别结果。 */
+declare interface Entity {
+  /** 基础词。 */
+  Word?: string;
+  /** 基础词在NormalText中的起始位置。 */
+  BeginOffset?: number;
+  /** 基础词的长度。 */
+  Length?: number;
+  /** 实体类型的标准名字。 */
+  Type?: string;
+  /** 类型名字的自然语言表达。（中文或英文） */
+  Name?: string;
+}
+
 /** 关键词提取结果 */
 declare interface Keyword {
   /** 权重 */
   Score?: number;
   /** 关键词 */
   Word?: string;
+}
+
+/** 通过关键词生成的句子信息 */
+declare interface KeywordSentence {
+  /** 通过关键词生成的句子。 */
+  TargetText?: string;
 }
 
 /** 命名实体识别结果 */
@@ -106,6 +180,14 @@ declare interface SearchResult {
   Pos?: string | null;
 }
 
+/** 待分析的句子对 */
+declare interface SentencePair {
+  /** 需要与目标句子计算相似度的源句子。（仅支持UTF-8格式，不超过500字符） */
+  SourceText: string | null;
+  /** 目标句子。（仅支持UTF-8格式，不超过500字符） */
+  TargetText: string | null;
+}
+
 /** 文本相似度 */
 declare interface Similarity {
   /** 目标文本句子 */
@@ -122,6 +204,14 @@ declare interface WordItem {
   CreateTime?: string;
   /** 词条的词性。 */
   Pos?: string | null;
+}
+
+/** 文本续写结果 */
+declare interface Writing {
+  /** 续写的文本。 */
+  TargetText?: string;
+  /** 续写的前缀。 */
+  PrefixText?: string;
 }
 
 declare interface AutoSummarizationRequest {
@@ -266,6 +356,32 @@ declare interface DescribeWordItemsResponse {
   RequestId?: string;
 }
 
+declare interface EvaluateSentenceSimilarityRequest {
+  /** 待分析的句子对数组。句子对应不超过5对，支持中英文文本，原句子与目标句子均应不超过500字符。 */
+  SentencePairList: SentencePair[];
+}
+
+declare interface EvaluateSentenceSimilarityResponse {
+  /** 每个句子对的相似度分值。 */
+  ScoreList?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EvaluateWordSimilarityRequest {
+  /** 计算相似度的源词。（仅支持UTF-8格式，不超过10字符） */
+  SourceWord: string;
+  /** 计算相似度的目标词。（仅支持UTF-8格式，不超过10字符） */
+  TargetWord: string;
+}
+
+declare interface EvaluateWordSimilarityResponse {
+  /** 词相似度分值。 */
+  Similarity?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GenerateCoupletRequest {
   /** 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。 */
   Text: string;
@@ -280,6 +396,22 @@ declare interface GenerateCoupletResponse {
   Content: string[];
   /** 当对联随机生成时，展示随机生成原因。 */
   RandomCause: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GenerateKeywordSentenceRequest {
+  /** 生成句子的关键词，关键词个数需不超过4个，中文关键词长度应不超过10字符，英文关键词长度不超过3个单词。关键词中不可包含标点符号。 */
+  WordList: string[];
+  /** 返回生成句子的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
+  Number: number;
+  /** 指定生成句子的领域，支持领域列表general：通用领域，支持中英文academic：学术领域，仅支持英文默认为general（通用领域）。 */
+  Domain?: string;
+}
+
+declare interface GenerateKeywordSentenceResponse {
+  /** 生成的句子列表。 */
+  KeywordSentenceList?: KeywordSentence[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -334,6 +466,38 @@ declare interface LexicalAnalysisResponse {
   RequestId?: string;
 }
 
+declare interface ParseWordsRequest {
+  /** 待分析的文本（支持中英文文本，不超过500字符） */
+  Text: string;
+}
+
+declare interface ParseWordsResponse {
+  /** 输入文本正则化的结果。（包括对英文文本中的开头和实体进行大写等） */
+  NormalText?: string;
+  /** 基础粒度分词和词性标注的结果。（词性表请参见附录） */
+  BasicParticiples?: BasicParticiple[];
+  /** 复合粒度分词和词性标注的结果。（词性表请参见附录） */
+  CompoundParticiples?: CompoundParticiple[];
+  /** 实体识别结果。（实体类型数据请参见附录） */
+  Entities?: Entity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RetrieveSimilarWordsRequest {
+  /** 输入的词语。（仅支持UTF-8格式，不超过10字符） */
+  Text: string;
+  /** 召回的相似词个数，取值范围为1-20。 */
+  Number: number;
+}
+
+declare interface RetrieveSimilarWordsResponse {
+  /** 召回的相似词数组。 */
+  WordList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchWordItemsRequest {
   /** 自定义词库ID。 */
   DictId: string;
@@ -344,6 +508,18 @@ declare interface SearchWordItemsRequest {
 declare interface SearchWordItemsResponse {
   /** 词条检索结果集合。 */
   Results: SearchResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SentenceCorrectionRequest {
+  /** 待纠错的句子列表。可以以数组方式在一次请求中填写多个待纠错的句子。文本统一使用utf-8格式编码，每个中文句子的长度不超过150字符，每个英文句子的长度不超过100个单词，且数组长度需小于150，即句子总数需少于150句。 */
+  TextList: string[];
+}
+
+declare interface SentenceCorrectionResponse {
+  /** 纠错结果列表。（注意仅展示错误句子的纠错结果，若句子无错则不展示，若全部待纠错句子都被认为无错，则可能返回数组为空） */
+  CorrectionList?: CorrectionItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -440,6 +616,24 @@ declare interface TextCorrectionResponse {
   RequestId?: string;
 }
 
+declare interface TextEmbellishRequest {
+  /** 待润色的文本。中文文本长度需<=50字符；英文文本长度需<=30个单词。 */
+  Text: string;
+  /** 待润色文本的语言类型，支持语言列表zh：中文en：英文 */
+  SourceLang: string;
+  /** 返回润色结果的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
+  Number: number;
+  /** 控制润色类型，类型列表both：同时返回改写和扩写expansion：扩写rewriting：改写m2a：从现代文改写为古文a2m：从古文改写为现代文默认为both。 */
+  Style?: string;
+}
+
+declare interface TextEmbellishResponse {
+  /** 润色结果列表。 */
+  EmbellishList?: Embellish[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TextSimilarityProRequest {
   /** 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过128字符） */
   SrcText: string;
@@ -464,6 +658,26 @@ declare interface TextSimilarityRequest {
 declare interface TextSimilarityResponse {
   /** 每个目标句子与源句子的相似度分值，按照分值降序排列 */
   Similarity: Similarity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TextWritingRequest {
+  /** 待续写的句子，文本统一使用utf-8格式编码，长度不超过200字符。 */
+  Text: string;
+  /** 待续写文本的语言类型，支持语言列表zh：中文en：英文 */
+  SourceLang: string;
+  /** 返回续写结果的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
+  Number: number;
+  /** 指定续写领域，支持领域列表general：通用领域，支持中英文补全academic：学术领域，仅支持英文补全默认为general（通用领域）。 */
+  Domain?: string;
+  /** 指定续写风格，支持风格列表science_fiction：科幻military_history：军事xuanhuan_wuxia：武侠urban_officialdom：职场默认为xuanhuan_wuxia（武侠）。 */
+  Style?: string;
+}
+
+declare interface TextWritingResponse {
+  /** 续写结果列表。 */
+  WritingList?: Writing[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -510,7 +724,7 @@ declare interface WordSimilarityResponse {
   RequestId?: string;
 }
 
-/** {@link Nlp 自然语言处理} */
+/** {@link Nlp NLP服务} */
 declare interface Nlp {
   (): Versions;
   /** 自动摘要 {@link AutoSummarizationRequest} {@link AutoSummarizationResponse} */
@@ -533,16 +747,28 @@ declare interface Nlp {
   DescribeDicts(data?: DescribeDictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictsResponse>;
   /** 查询指定词库的词条信息 {@link DescribeWordItemsRequest} {@link DescribeWordItemsResponse} */
   DescribeWordItems(data: DescribeWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordItemsResponse>;
+  /** 句子相似度V2 {@link EvaluateSentenceSimilarityRequest} {@link EvaluateSentenceSimilarityResponse} */
+  EvaluateSentenceSimilarity(data: EvaluateSentenceSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateSentenceSimilarityResponse>;
+  /** 词相似度V2 {@link EvaluateWordSimilarityRequest} {@link EvaluateWordSimilarityResponse} */
+  EvaluateWordSimilarity(data: EvaluateWordSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateWordSimilarityResponse>;
   /** 智能春联 {@link GenerateCoupletRequest} {@link GenerateCoupletResponse} */
   GenerateCouplet(data: GenerateCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCoupletResponse>;
+  /** 句子生成 {@link GenerateKeywordSentenceRequest} {@link GenerateKeywordSentenceResponse} */
+  GenerateKeywordSentence(data: GenerateKeywordSentenceRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateKeywordSentenceResponse>;
   /** 智能写诗 {@link GeneratePoetryRequest} {@link GeneratePoetryResponse} */
   GeneratePoetry(data: GeneratePoetryRequest, config?: AxiosRequestConfig): AxiosPromise<GeneratePoetryResponse>;
   /** 关键词提取 {@link KeywordsExtractionRequest} {@link KeywordsExtractionResponse} */
   KeywordsExtraction(data: KeywordsExtractionRequest, config?: AxiosRequestConfig): AxiosPromise<KeywordsExtractionResponse>;
   /** 词法分析 {@link LexicalAnalysisRequest} {@link LexicalAnalysisResponse} */
   LexicalAnalysis(data: LexicalAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<LexicalAnalysisResponse>;
+  /** 词法分析V2 {@link ParseWordsRequest} {@link ParseWordsResponse} */
+  ParseWords(data: ParseWordsRequest, config?: AxiosRequestConfig): AxiosPromise<ParseWordsResponse>;
+  /** 相似词召回 {@link RetrieveSimilarWordsRequest} {@link RetrieveSimilarWordsResponse} */
+  RetrieveSimilarWords(data: RetrieveSimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveSimilarWordsResponse>;
   /** 检索词条 {@link SearchWordItemsRequest} {@link SearchWordItemsResponse} */
   SearchWordItems(data: SearchWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchWordItemsResponse>;
+  /** 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */
+  SentenceCorrection(data: SentenceCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceCorrectionResponse>;
   /** 句向量 {@link SentenceEmbeddingRequest} {@link SentenceEmbeddingResponse} */
   SentenceEmbedding(data: SentenceEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceEmbeddingResponse>;
   /** 情感分析 {@link SentimentAnalysisRequest} {@link SentimentAnalysisResponse} */
@@ -555,10 +781,14 @@ declare interface Nlp {
   TextCorrection(data: TextCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionResponse>;
   /** 文本纠错高级版 {@link TextCorrectionProRequest} {@link TextCorrectionProResponse} */
   TextCorrectionPro(data: TextCorrectionProRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionProResponse>;
+  /** 文本润色 {@link TextEmbellishRequest} {@link TextEmbellishResponse} */
+  TextEmbellish(data: TextEmbellishRequest, config?: AxiosRequestConfig): AxiosPromise<TextEmbellishResponse>;
   /** 句子相似度 {@link TextSimilarityRequest} {@link TextSimilarityResponse} */
   TextSimilarity(data: TextSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityResponse>;
   /** 句子相似度高级版 {@link TextSimilarityProRequest} {@link TextSimilarityProResponse} */
   TextSimilarityPro(data: TextSimilarityProRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityProResponse>;
+  /** 文本补全 {@link TextWritingRequest} {@link TextWritingResponse} */
+  TextWriting(data: TextWritingRequest, config?: AxiosRequestConfig): AxiosPromise<TextWritingResponse>;
   /** 修改自定义词库 {@link UpdateDictRequest} {@link UpdateDictResponse} */
   UpdateDict(data: UpdateDictRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDictResponse>;
   /** 词向量 {@link WordEmbeddingRequest} {@link WordEmbeddingResponse} */

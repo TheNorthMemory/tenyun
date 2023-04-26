@@ -2,6 +2,12 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 中国大陆加速优化配置。 */
+declare interface AccelerateMainland {
+  /** 是否开启中国大陆加速优化配置，取值有：on：开启；off：关闭。 */
+  Switch: string;
+}
+
 /** 加速类型 */
 declare interface AccelerateType {
   /** 加速开关。取值范围： on：打开;off：关闭。 */
@@ -372,7 +378,7 @@ declare interface CacheKey {
   FullUrlCache?: string | null;
   /** 是否忽略大小写缓存，取值有：on：忽略；off：不忽略。 */
   IgnoreCase?: string | null;
-  /** CacheKey中包含请求参数。 */
+  /** CacheKey 中包含请求参数。 */
   QueryString?: QueryString | null;
 }
 
@@ -388,7 +394,7 @@ declare interface CachePrefresh {
 declare interface ClientIpCountry {
   /** 配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 存放客户端IP所属地域信息的请求头名称，当Switch=on时有效。为空则使用默认值：EO-Client-IPCountry。 */
+  /** 存放客户端 IP 所属地域信息的请求头名称，当 Switch=on 时有效。为空则使用默认值：EO-Client-IPCountry。 */
   HeaderName?: string;
 }
 
@@ -396,7 +402,7 @@ declare interface ClientIpCountry {
 declare interface ClientIpHeader {
   /** 配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 回源时，存放客户端IP的请求头名称。为空则使用默认值：X-Forwarded-IP。 */
+  /** 回源时，存放客户端 IP 的请求头名称。为空则使用默认值：X-Forwarded-IP。 */
   HeaderName?: string | null;
 }
 
@@ -738,7 +744,7 @@ declare interface ForceRedirect {
 
 /** Grpc配置项 */
 declare interface Grpc {
-  /** 是否开启Grpc配置，取值有：on：开启；off：关闭。 */
+  /** 是否开启 Grpc 配置，取值有：on：开启；off：关闭。 */
   Switch: string;
 }
 
@@ -754,7 +760,7 @@ declare interface Header {
 declare interface Hsts {
   /** 是否开启，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** MaxAge数值。单位为秒，最大值为1天。 */
+  /** MaxAge 数值。单位为秒，最大值为1天。 */
   MaxAge?: number | null;
   /** 是否包含子域名，取值有：on：开启；off：关闭。 */
   IncludeSubDomains?: string | null;
@@ -768,7 +774,7 @@ declare interface Https {
   Http2?: string | null;
   /** OCSP 配置开关，取值有：on：开启；off：关闭。 */
   OcspStapling?: string | null;
-  /** Tls版本设置，取值有：TLSv1：TLSv1版本；TLSV1.1：TLSv1.1版本；TLSV1.2：TLSv1.2版本；TLSv1.3：TLSv1.3版本。修改时必须开启连续的版本。 */
+  /** Tls 版本设置，取值有：TLSv1：TLSv1版本；TLSV1.1：TLSv1.1版本；TLSV1.2：TLSv1.2版本；TLSv1.3：TLSv1.3版本。修改时必须开启连续的版本。 */
   TlsVersion?: string[] | null;
   /** HSTS 配置。 */
   Hsts?: Hsts | null;
@@ -778,6 +784,16 @@ declare interface Https {
   ApplyType?: string | null;
   /** 密码套件，取值有：loose-v2023：提供最高的兼容性，安全性一般，支持 TLS 1.0-1.3 密码套件；general-v2023：提供较高的兼容性，安全性中等，支持 TLS 1.2-1.3 密码套件；strict-v2023：提供最高的安全性能，禁用所有含不安全隐患的加密套件，支持 TLS 1.2-1.3 密码套件。 */
   CipherSuite?: string | null;
+}
+
+/** IP 网段组 */
+declare interface IPGroup {
+  /** 组 Id，创建时填 0 即可。 */
+  GroupId: number;
+  /** 组名称。 */
+  Name: string;
+  /** IP 组内容，可以填入 IP 及 IP 掩码。 */
+  Content: string[];
 }
 
 /** 源站防护IP白名单 */
@@ -856,7 +872,7 @@ declare interface IpTableRule {
 
 /** Ipv6访问配置 */
 declare interface Ipv6 {
-  /** Ipv6访问功能配置，取值有：on：开启Ipv6访问功能；off：关闭Ipv6访问功能。 */
+  /** Ipv6 访问功能配置，取值有：on：开启Ipv6访问功能；off：关闭Ipv6访问功能。 */
   Switch: string;
 }
 
@@ -952,7 +968,7 @@ declare interface Origin {
   BackupOrigins?: string[] | null;
   /** 回源协议配置，取值有：http：强制 http 回源；follow：协议跟随回源；https：强制 https 回源。 */
   OriginPullProtocol?: string | null;
-  /** 源站为腾讯云COS时，是否为私有访问bucket，取值有：on：私有访问；off：公共访问。 */
+  /** 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：on：私有访问；off：公共访问。 */
   CosPrivateAccess?: string | null;
 }
 
@@ -1080,7 +1096,7 @@ declare interface PlanInfo {
 
 /** POST请求上传文件流式传输最大限制 */
 declare interface PostMaxSize {
-  /** 是否开启POST请求上传文件限制，平台默认为限制为32MB，取值有：on：开启限制；off：关闭限制。 */
+  /** 是否开启 POST 请求上传文件限制，平台默认为限制为32MB，取值有：on：开启限制；off：关闭限制。 */
   Switch: string;
   /** 最大限制，取值在1MB和500MB之间。单位字节。 */
   MaxSize?: number | null;
@@ -1116,7 +1132,7 @@ declare interface QueryString {
 
 /** Quic配置项 */
 declare interface Quic {
-  /** 是否开启Quic配置，取值有：on：开启；off：关闭。 */
+  /** 是否开启 Quic 配置，取值有：on：开启；off：关闭。 */
   Switch: string;
 }
 
@@ -1806,7 +1822,7 @@ declare interface TopEntryValue {
 
 /** Http2回源配置 */
 declare interface UpstreamHttp2 {
-  /** http2回源配置开关，取值有：on：开启；off：关闭。 */
+  /** http2 回源配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
 }
 
@@ -2051,9 +2067,9 @@ declare interface CreateAliasDomainResponse {
 }
 
 declare interface CreateApplicationProxyRequest {
-  /** 站点ID。 */
+  /** 站点 ID。 */
   ZoneId: string;
-  /** 当ProxyType=hostname时，表示域名或子域名；当ProxyType=instance时，表示代理名称。 */
+  /** 当 ProxyType=hostname 时，表示域名或子域名；当 ProxyType=instance 时，表示代理名称。 */
   ProxyName: string;
   /** 调度模式，取值有：ip：表示Anycast IP调度；domain：表示CNAME调度。 */
   PlatType: string;
@@ -2065,15 +2081,17 @@ declare interface CreateApplicationProxyRequest {
   ProxyType?: string;
   /** 会话保持时间，取值范围：30-3600，单位：秒。不填写使用默认值600。 */
   SessionPersistTime?: number;
-  /** Ipv6访问配置。不填写表示关闭Ipv6访问。 */
+  /** Ipv6 访问配置。不填写表示关闭 Ipv6 访问。 */
   Ipv6?: Ipv6;
   /** 规则详细信息。不填写则不创建规则。 */
   ApplicationProxyRules?: ApplicationProxyRule[];
+  /** 中国大陆加速优化配置。不填写表示关闭中国大陆加速优化。 */
+  AccelerateMainland?: AccelerateMainland;
 }
 
 declare interface CreateApplicationProxyResponse {
   /** 新增的四层代理应用ID。 */
-  ProxyId: string;
+  ProxyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2226,6 +2244,20 @@ declare interface CreateRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateSecurityIPGroupRequest {
+  /** 站点 Id。 */
+  ZoneId: string;
+  /** IP 组信息。 */
+  IPGroup: IPGroup;
+}
+
+declare interface CreateSecurityIPGroupResponse {
+  /** IP 组 Id。 */
+  GroupId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSpeedTestingRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2332,6 +2364,18 @@ declare interface DeleteRulesRequest {
 }
 
 declare interface DeleteRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSecurityIPGroupRequest {
+  /** 站点 Id。 */
+  ZoneId: string;
+  /** IP 组 Id。 */
+  GroupId: number;
+}
+
+declare interface DeleteSecurityIPGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3409,18 +3453,20 @@ declare interface ModifyAliasDomainStatusResponse {
 }
 
 declare interface ModifyApplicationProxyRequest {
-  /** 站点ID。 */
+  /** 站点 ID。 */
   ZoneId: string;
-  /** 代理ID。 */
+  /** 代理 ID。 */
   ProxyId: string;
-  /** 当ProxyType=hostname时，表示域名或子域名；当ProxyType=instance时，表示代理名称。 */
+  /** 当 ProxyType=hostname 时，表示域名或子域名；当 ProxyType=instance 时，表示代理名称。 */
   ProxyName: string;
   /** 会话保持时间，取值范围：30-3600，单位：秒。不填写保持原有配置。 */
   SessionPersistTime?: number;
   /** 四层代理模式，取值有：hostname：表示子域名模式；instance：表示实例模式。不填写保持原有配置。 */
   ProxyType?: string;
-  /** Ipv6访问配置，不填写保持原有配置。 */
+  /** Ipv6 访问配置，不填写保持原有配置。 */
   Ipv6?: Ipv6;
+  /** 中国大陆加速优化配置。 不填写表示保持原有配置。 */
+  AccelerateMainland?: AccelerateMainland;
 }
 
 declare interface ModifyApplicationProxyResponse {
@@ -3572,6 +3618,20 @@ declare interface ModifyRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifySecurityIPGroupRequest {
+  /** 站点 Id。 */
+  ZoneId: string;
+  /** IP 组配置。 */
+  IPGroup: IPGroup;
+  /** 操作类型，取值有： append: 向 IPGroup 中追加 Content 参数中内容； remove: 从 IPGroup 中删除 Content 参数中内容； update: 全量替换 IPGroup 内容，并可修改 IPGroup 名称。 */
+  Mode: string;
+}
+
+declare interface ModifySecurityIPGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySecurityPolicyRequest {
   /** 站点Id。 */
   ZoneId: string;
@@ -3631,7 +3691,7 @@ declare interface ModifyZoneResponse {
 }
 
 declare interface ModifyZoneSettingRequest {
-  /** 待变更的站点ID。 */
+  /** 待变更的站点 ID。 */
   ZoneId: string;
   /** 缓存过期时间配置。不填写表示保持原有配置。 */
   CacheConfig?: CacheConfig;
@@ -3641,34 +3701,36 @@ declare interface ModifyZoneSettingRequest {
   MaxAge?: MaxAge;
   /** 离线缓存配置。不填写表示保持原有配置。 */
   OfflineCache?: OfflineCache;
-  /** Quic访问配置。不填写表示保持原有配置。 */
+  /** Quic 访问配置。不填写表示保持原有配置。 */
   Quic?: Quic;
-  /** Post请求传输配置。不填写表示保持原有配置。 */
+  /** Post 请求传输配置。不填写表示保持原有配置。 */
   PostMaxSize?: PostMaxSize;
   /** 智能压缩配置。不填写表示保持原有配置。 */
   Compression?: Compression;
-  /** Http2回源配置。不填写表示保持原有配置。 */
+  /** Http2 回源配置。不填写表示保持原有配置。 */
   UpstreamHttp2?: UpstreamHttp2;
-  /** 访问协议强制Https跳转配置。不填写表示保持原有配置。 */
+  /** 访问协议强制 Https 跳转配置。不填写表示保持原有配置。 */
   ForceRedirect?: ForceRedirect;
-  /** Https加速配置。不填写表示保持原有配置。 */
+  /** Https 加速配置。不填写表示保持原有配置。 */
   Https?: Https;
   /** 源站配置。不填写表示保持原有配置。 */
   Origin?: Origin;
   /** 智能加速配置。不填写表示保持原有配置。 */
   SmartRouting?: SmartRouting;
-  /** WebSocket配置。不填写表示保持原有配置。 */
+  /** WebSocket 配置。不填写表示保持原有配置。 */
   WebSocket?: WebSocket;
-  /** 客户端IP回源请求头配置。不填写表示保持原有配置。 */
+  /** 客户端 IP 回源请求头配置。不填写表示保持原有配置。 */
   ClientIpHeader?: ClientIpHeader;
   /** 缓存预刷新配置。不填写表示保持原有配置。 */
   CachePrefresh?: CachePrefresh;
-  /** Ipv6访问配置。不填写表示保持原有配置。 */
+  /** Ipv6 访问配置。不填写表示保持原有配置。 */
   Ipv6?: Ipv6;
-  /** 回源时是否携带客户端IP所属地域信息的配置。不填写表示保持原有配置。 */
+  /** 回源时是否携带客户端 IP 所属地域信息的配置。不填写表示保持原有配置。 */
   ClientIpCountry?: ClientIpCountry;
-  /** Grpc协议支持配置。不填写表示保持原有配置。 */
+  /** Grpc 协议支持配置。不填写表示保持原有配置。 */
   Grpc?: Grpc;
+  /** 图片优化配置。不填写表示关闭。 */
+  ImageOptimize?: ImageOptimize;
 }
 
 declare interface ModifyZoneSettingResponse {
@@ -3987,6 +4049,8 @@ declare interface Teo {
   CreateReplayTask(data: CreateReplayTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplayTaskResponse>;
   /** 创建规则引擎规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
+  /** 创建安全 IP 组 {@link CreateSecurityIPGroupRequest} {@link CreateSecurityIPGroupResponse} */
+  CreateSecurityIPGroup(data: CreateSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityIPGroupResponse>;
   /** 创建站点拨测任务 {@link CreateSpeedTestingRequest} {@link CreateSpeedTestingResponse} */
   CreateSpeedTesting(data: CreateSpeedTestingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpeedTestingResponse>;
   /** 创建站点 {@link CreateZoneRequest} {@link CreateZoneResponse} */
@@ -4003,6 +4067,8 @@ declare interface Teo {
   DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
   /** 批量删除规则引擎规则 {@link DeleteRulesRequest} {@link DeleteRulesResponse} */
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
+  /** 删除安全 IP 组 {@link DeleteSecurityIPGroupRequest} {@link DeleteSecurityIPGroupResponse} */
+  DeleteSecurityIPGroup(data: DeleteSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityIPGroupResponse>;
   /** 删除站点 {@link DeleteZoneRequest} {@link DeleteZoneResponse} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
   /** 查询加速域名列表 {@link DescribeAccelerationDomainsRequest} {@link DescribeAccelerationDomainsResponse} */
@@ -4121,6 +4187,8 @@ declare interface Teo {
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 修改规则引擎规则优先级 {@link ModifyRulePriorityRequest} {@link ModifyRulePriorityResponse} */
   ModifyRulePriority(data: ModifyRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRulePriorityResponse>;
+  /** 修改安全 IP 组 {@link ModifySecurityIPGroupRequest} {@link ModifySecurityIPGroupResponse} */
+  ModifySecurityIPGroup(data: ModifySecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityIPGroupResponse>;
   /** 修改Web&Bot安全配置 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
   /** 修改安全配置托管规则 {@link ModifySecurityWafGroupPolicyRequest} {@link ModifySecurityWafGroupPolicyResponse} */

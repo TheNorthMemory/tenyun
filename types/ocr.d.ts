@@ -2335,13 +2335,13 @@ declare interface RecognizePhilippinesSssIDOCRRequest {
 
 declare interface RecognizePhilippinesSssIDOCRResponse {
   /** 人像照片Base64后的结果 */
-  HeadPortrait: TextDetectionResult;
+  HeadPortrait?: TextDetectionResult;
   /** 编号 */
-  LicenseNumber: TextDetectionResult;
+  LicenseNumber?: TextDetectionResult;
   /** 姓名 */
-  FullName: TextDetectionResult;
+  FullName?: TextDetectionResult;
   /** 生日 */
-  Birthday: TextDetectionResult;
+  Birthday?: TextDetectionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

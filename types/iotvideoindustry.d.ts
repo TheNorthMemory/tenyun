@@ -360,6 +360,8 @@ declare interface RecordPlanItem {
   EventId: number | null;
   /** 绑定的设备列表 */
   Devices: DeviceItem[] | null;
+  /** 录像存储天数 */
+  RecordStorageTime?: number | null;
 }
 
 /** 大盘统计-录像存储统计 出参RecordStatistic */

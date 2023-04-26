@@ -2691,7 +2691,7 @@ declare interface CreateEdgeCVMInstancesRequest {
 
 declare interface CreateEdgeCVMInstancesResponse {
   /** cvm id 列表 */
-  CvmIdSet: string[];
+  CvmIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2901,11 +2901,13 @@ declare interface CreateTKEEdgeClusterRequest {
   EdgeVersion?: string;
   /** 边缘组件镜像仓库前缀 */
   RegistryPrefix?: string;
+  /** 集群绑定的云标签 */
+  TagSpecification?: TagSpecification;
 }
 
 declare interface CreateTKEEdgeClusterResponse {
   /** 边缘计算集群Id */
-  ClusterId: string;
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4480,6 +4482,8 @@ declare interface DescribeTKEEdgeClusterCredentialResponse {
   Health?: string;
   /** 是否部署GridDaemon以支持headless service */
   GridDaemon?: string;
+  /** 公网访问kins集群 */
+  UnitCluster?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4545,13 +4549,13 @@ declare interface DescribeTKEEdgeScriptRequest {
 
 declare interface DescribeTKEEdgeScriptResponse {
   /** 下载链接 */
-  Link: string;
+  Link?: string;
   /** 下载需要的token */
-  Token: string;
+  Token?: string;
   /** 下载命令 */
-  Command: string;
+  Command?: string;
   /** edgectl脚本版本，默认拉取最新版本 */
-  ScriptVersion: string | null;
+  ScriptVersion?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

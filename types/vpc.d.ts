@@ -5650,6 +5650,20 @@ declare interface EnableVpnGatewaySslClientCertResponse {
   RequestId?: string;
 }
 
+declare interface GenerateVpnConnectionDefaultHealthCheckIpRequest {
+  /** VPN网关id， 例如：vpngw-1w9tue3d */
+  VpnGatewayId: string;
+}
+
+declare interface GenerateVpnConnectionDefaultHealthCheckIpResponse {
+  /** VPN通道健康检查本端ip */
+  HealthCheckLocalIp?: string;
+  /** VPN通道健康检查对端ip */
+  HealthCheckRemoteIp?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetCcnRegionBandwidthLimitsRequest {
   /** CCN实例ID。形如：ccn-f49l6u0z。 */
   CcnId: string;
@@ -7323,6 +7337,8 @@ declare interface Vpc {
   EnableVpcEndPointConnect(data: EnableVpcEndPointConnectRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpcEndPointConnectResponse>;
   /** 启用SSL-VPN-CLIENT 证书 {@link EnableVpnGatewaySslClientCertRequest} {@link EnableVpnGatewaySslClientCertResponse} */
   EnableVpnGatewaySslClientCert(data: EnableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpnGatewaySslClientCertResponse>;
+  /** 获取一对VPN通道健康检查地址 {@link GenerateVpnConnectionDefaultHealthCheckIpRequest} {@link GenerateVpnConnectionDefaultHealthCheckIpResponse} */
+  GenerateVpnConnectionDefaultHealthCheckIp(data: GenerateVpnConnectionDefaultHealthCheckIpRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateVpnConnectionDefaultHealthCheckIpResponse>;
   /** 查询云联网相关地域带宽信息 {@link GetCcnRegionBandwidthLimitsRequest} {@link GetCcnRegionBandwidthLimitsResponse} */
   GetCcnRegionBandwidthLimits(data: GetCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<GetCcnRegionBandwidthLimitsResponse>;
   /** HAVIP绑定EIP {@link HaVipAssociateAddressIpRequest} {@link HaVipAssociateAddressIpResponse} */
