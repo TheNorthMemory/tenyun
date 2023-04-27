@@ -734,6 +734,10 @@ declare interface SparkJobInfo {
   SparkImageVersion?: string | null;
   /** 查询脚本关联id */
   SessionId?: string | null;
+  /** spark_emr_livy */
+  DataEngineClusterType?: string | null;
+  /** Spark 3.2-EMR */
+  DataEngineImageVersion?: string | null;
 }
 
 /** notebook session statement输出信息。 */

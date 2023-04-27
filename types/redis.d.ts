@@ -154,31 +154,31 @@ declare interface Inbound {
 
 /** 实例节点类型 */
 declare interface InstanceClusterNode {
-  /** 节点名称 */
+  /** 节点名称。 */
   Name: string;
-  /** 实例运行时节点Id */
+  /** 实例运行时节点 ID。 */
   RunId: string;
-  /** 集群角色：0-master；1-slave */
+  /** 集群角色。- 0：master。- 1：slave。 */
   Role: number;
-  /** 节点状态：0-readwrite, 1-read, 2-backup */
+  /** 节点状态。- 0：readwrite,。- 1：read。- 2：backup。 */
   Status: number;
-  /** 服务状态：0-down；1-on */
+  /** 服务状态。0-down。1-on */
   Connected: number;
-  /** 节点创建时间 */
+  /** 节点创建时间。 */
   CreateTime: string;
-  /** 节点下线时间 */
+  /** 节点下线时间。 */
   DownTime: string;
-  /** 节点slot分布 */
+  /** 节点 Slot 分布区间。 */
   Slots: string;
-  /** 节点key分布 */
+  /** 节点 Key分布。 */
   Keys: number;
-  /** 节点qps */
+  /** 节点 QPS。分片节点每秒执行次数。单位：次/秒。 */
   Qps: number;
-  /** 节点qps倾斜度 */
+  /** 节点 QPS 倾斜度。 */
   QpsSlope: number;
-  /** 节点存储 */
+  /** 节点存储。 */
   Storage: number;
-  /** 节点存储倾斜度 */
+  /** 节点存储倾斜度。 */
   StorageSlope: number;
 }
 
@@ -270,9 +270,9 @@ declare interface InstanceMultiParam {
 
 /** 实例节点 */
 declare interface InstanceNode {
-  /** Id */
+  /** 实例 ID。 */
   Id: number;
-  /** 节点详细信息 */
+  /** 节点详细信息。 */
   InstanceClusterNode: InstanceClusterNode[];
 }
 
@@ -452,9 +452,9 @@ declare interface InstanceSlowlogDetail {
 
 /** 实例标签信息 */
 declare interface InstanceTagInfo {
-  /** 标签键 */
+  /** 标签键。 */
   TagKey: string;
-  /** 标签值 */
+  /** 标签值。 */
   TagValue: string;
 }
 
@@ -1763,9 +1763,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息列表。 */
-  InstanceSet: InstanceSet[];
+  InstanceSet?: InstanceSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2171,17 +2171,17 @@ declare interface InquiryPriceUpgradeInstanceResponse {
 }
 
 declare interface KillMasterGroupRequest {
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 1.长度8-30位,推荐使用12位以上的密码2.不能以"/"开头3.至少包含两项 a.小写字母a-z b.大写字母A-Z c.数字0-9 d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/ */
-  Password: string;
-  /** 单AZ实例节点信息 */
+  /** 该参数用于配置指定实例的访问密码。若为免密认证，该参数则无需配置。密码复杂度要求如下所示。- 长度8-30位,推荐使用12位以上的密码- 不能以"/"开头- 至少包含小写字母a-z、大写字母A-Z、数字0-9及其 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。 */
+  Password?: string;
+  /** 分片集群的分片 ID。 */
   ShardIds?: number[];
 }
 
 declare interface KillMasterGroupResponse {
-  /** 异步任务ID */
-  TaskId: number;
+  /** 异步任务ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

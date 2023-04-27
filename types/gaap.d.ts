@@ -1596,6 +1596,14 @@ declare interface DescribeAccessRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAuthSignatureRequest {
+}
+
+declare interface DescribeAuthSignatureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBlackHeaderRequest {
 }
 
@@ -2857,6 +2865,8 @@ declare interface Gaap {
   DescribeAccessRegions(data?: DescribeAccessRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRegionsResponse>;
   /** 根据源站区域查询可用加速区域 {@link DescribeAccessRegionsByDestRegionRequest} {@link DescribeAccessRegionsByDestRegionResponse} */
   DescribeAccessRegionsByDestRegion(data: DescribeAccessRegionsByDestRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRegionsByDestRegionResponse>;
+  /** 获取计费签名 {@link DescribeAuthSignatureRequest} {@link DescribeAuthSignatureResponse} */
+  DescribeAuthSignature(data?: DescribeAuthSignatureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthSignatureResponse>;
   /** 查询禁用自定义header 名称列表 {@link DescribeBlackHeaderRequest} {@link DescribeBlackHeaderResponse} */
   DescribeBlackHeader(data?: DescribeBlackHeaderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlackHeaderResponse>;
   /** 查询证书详情 {@link DescribeCertificateDetailRequest} {@link DescribeCertificateDetailResponse} */

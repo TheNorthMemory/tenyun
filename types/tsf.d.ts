@@ -2814,6 +2814,14 @@ declare interface TsfPageUnitRule {
   Content: UnitRule[];
 }
 
+/** 单元化规则翻页对象 */
+declare interface TsfPageUnitRuleV2 {
+  /** 记录总数 */
+  TotalCount: number | null;
+  /** 记录实体列表 */
+  Content: UnitRule[] | null;
+}
+
 /** 列表中部署组分页信息 */
 declare interface TsfPageVmGroup {
   /** 虚拟机部署组总数目 */
@@ -6055,6 +6063,26 @@ declare interface DescribeUnitRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUnitRulesV2Request {
+  /** 网关实体ID */
+  GatewayInstanceId: string;
+  /** 根据规则名或备注内容模糊查询 */
+  SearchWord?: string;
+  /** 启用状态, disabled: 未发布， enabled: 发布 */
+  Status?: string;
+  /** 翻页查询偏移量 */
+  Offset?: number;
+  /** 翻页查询每页记录数 */
+  Limit?: number;
+}
+
+declare interface DescribeUnitRulesV2Response {
+  /** 分页列表信息 */
+  Result?: TsfPageUnitRuleV2 | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUploadInfoRequest {
   /** 应用ID */
   ApplicationId: string;
@@ -7421,6 +7449,8 @@ declare interface Tsf {
   DescribeUnitRule(data: DescribeUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitRuleResponse>;
   /** 查询单元化规则列表 {@link DescribeUnitRulesRequest} {@link DescribeUnitRulesResponse} */
   DescribeUnitRules(data: DescribeUnitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitRulesResponse>;
+  /** 查询单元化规则列表V2 {@link DescribeUnitRulesV2Request} {@link DescribeUnitRulesV2Response} */
+  DescribeUnitRulesV2(data: DescribeUnitRulesV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitRulesV2Response>;
   /** 获取上传程序包信息 {@link DescribeUploadInfoRequest} {@link DescribeUploadInfoResponse} */
   DescribeUploadInfo(data: DescribeUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadInfoResponse>;
   /** 查询可用于被导入的命名空间列表 {@link DescribeUsableUnitNamespacesRequest} {@link DescribeUsableUnitNamespacesResponse} */

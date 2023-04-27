@@ -456,6 +456,12 @@ declare interface ExtractRuleInfo {
   Address?: string | null;
   /** rfc3164：指定系统日志采集使用RFC3164协议解析日志。rfc5424：指定系统日志采集使用RFC5424协议解析日志。auto：自动匹配rfc3164或者rfc5424其中一种协议该字段适用于：创建采集规则配置、修改采集规则配置 */
   ParseProtocol?: string | null;
+  /** 元数据类型，0: 不使用元数据信息，1:使用机器组元数据，2:使用用户自定义元数据，3:使用采集配置路径， */
+  MetadataType?: number;
+  /** 采集配置路径正则表达式，MetadataType为1时必填 */
+  PathRegex?: string | null;
+  /** 用户自定义元数据信息，MetadataType为2时必填 */
+  MetaTags?: MetaTagInfo[];
 }
 
 /** 过滤器 */
@@ -636,6 +642,8 @@ declare interface MachineGroupInfo {
   UpdateEndTime: string | null;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
   ServiceLogging: boolean | null;
+  /** 机器组元数据信息列表 */
+  MetaTags?: MetaTagInfo[];
 }
 
 /** 机器组类型描述 */
@@ -664,6 +672,14 @@ declare interface MachineInfo {
   ErrCode: number;
   /** 机器升级结果信息。 */
   ErrMsg: string;
+}
+
+/** 元数据信息 */
+declare interface MetaTagInfo {
+  /** 元数据key */
+  Key?: string;
+  /** 元数据value */
+  Value?: string;
 }
 
 /** 告警策略中监控任务的执行时间点 */
@@ -1143,6 +1159,8 @@ declare interface CreateMachineGroupRequest {
   UpdateEndTime?: string;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
   ServiceLogging?: boolean;
+  /** 机器组元数据信息列表 */
+  MetaTags?: MetaTagInfo[];
 }
 
 declare interface CreateMachineGroupResponse {
@@ -1969,6 +1987,8 @@ declare interface ModifyMachineGroupRequest {
   UpdateEndTime?: string;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
   ServiceLogging?: boolean;
+  /** 机器组元数据信息列表 */
+  MetaTags?: MetaTagInfo[];
 }
 
 declare interface ModifyMachineGroupResponse {

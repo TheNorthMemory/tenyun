@@ -1631,10 +1631,10 @@ declare interface CreateRocketMQNamespaceRequest {
   ClusterId: string;
   /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
   NamespaceId: string;
-  /** 未消费消息的保留时间，以毫秒为单位，60秒-15天 */
-  Ttl: number;
-  /** 消息持久化后保留的时间，以毫秒为单位 */
-  RetentionTime: number;
+  /** 已废弃 */
+  Ttl?: number;
+  /** 已废弃 */
+  RetentionTime?: number;
   /** 说明，最大128个字符 */
   Remark?: string;
 }
@@ -3111,10 +3111,10 @@ declare interface ModifyRocketMQNamespaceRequest {
   ClusterId: string;
   /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
   NamespaceId: string;
-  /** 未消费消息的保留时间，以毫秒为单位，60秒-15天 */
-  Ttl: number;
-  /** 消息持久化后保留的时间，以毫秒为单位 */
-  RetentionTime: number;
+  /** 已废弃 */
+  Ttl?: number;
+  /** 已废弃 */
+  RetentionTime?: number;
   /** 说明，最大128个字符 */
   Remark?: string;
 }

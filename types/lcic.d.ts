@@ -252,6 +252,8 @@ declare interface RoomInfo {
   RecordLayout?: number | null;
   /** 房间绑定的群组ID */
   GroupId?: string | null;
+  /** 打开学生麦克风/摄像头的授权开关 */
+  EnableDirectControl?: number | null;
 }
 
 /** 房间列表 */
@@ -278,6 +280,10 @@ declare interface RoomItem {
   ReplayUrl?: string | null;
   /** 录制地址（协议为https)。仅在房间结束后存在。 */
   RecordUrl?: string | null;
+  /** 最高房间内人数（包括老师），0表示不限制，默认为0 */
+  MaxMicNumber?: number | null;
+  /** 打开学生麦克风/摄像头的授权开关 */
+  EnableDirectControl?: number | null;
 }
 
 /** 场景配置 */
@@ -564,6 +570,8 @@ declare interface CreateRoomRequest {
   RecordLayout?: number;
   /** 房间绑定的群组ID,非空时限制组成员进入 */
   GroupId?: string;
+  /** 打开学生麦克风/摄像头的授权开关 */
+  EnableDirectControl?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -937,6 +945,8 @@ declare interface DescribeRoomResponse {
   Status?: number | null;
   /** 房间绑定的群组ID */
   GroupId?: string | null;
+  /** 打开学生麦克风/摄像头的授权开关 */
+  EnableDirectControl?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1208,6 +1218,8 @@ declare interface ModifyRoomRequest {
   Assistants?: string[];
   /** 房间绑定的群组ID */
   GroupId?: string;
+  /** 打开学生麦克风/摄像头的授权开关 */
+  EnableDirectControl?: number;
 }
 
 declare interface ModifyRoomResponse {

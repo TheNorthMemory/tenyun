@@ -859,7 +859,7 @@ declare interface CreateCloudRecordingRequest {
   UserSig: string;
   /** 云端录制控制参数。 */
   RecordParams: RecordParams;
-  /** 云端录制文件上传到云存储的参数(目前支持云点播VOD和对象存储COS)。 */
+  /** 云端录制文件上传到云存储的参数(目前支持云点播VOD和对象存储COS)。点播和对象存储的参数必填其中之一，不支持同时设置点播和对象存储。 */
   StorageParams: StorageParams;
   /** TRTC房间号的类型，必须和录制的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认） */
   RoomIdType?: number;

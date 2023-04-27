@@ -1033,9 +1033,9 @@ declare interface CreateMigrateCheckJobResponse {
 }
 
 declare interface CreateMigrationServiceRequest {
-  /** 源实例数据库类型，mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb */
+  /** 源实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql */
   SrcDatabaseType: string;
-  /** 目标实例数据库类型，mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb */
+  /** 目标实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql */
   DstDatabaseType: string;
   /** 源实例地域，如：ap-guangzhou */
   SrcRegion: string;
@@ -1053,7 +1053,7 @@ declare interface CreateMigrationServiceRequest {
 
 declare interface CreateMigrationServiceResponse {
   /** 下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21 */
-  JobIds: string[] | null;
+  JobIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

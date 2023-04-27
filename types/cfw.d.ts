@@ -1729,13 +1729,13 @@ declare interface ModifyBlockTopResponse {
 }
 
 declare interface ModifyEnterpriseSecurityDispatchStatusRequest {
-  /** 状态，0：立即下发，1：停止下发 */
+  /** 0：打开立即下发开关；1：关闭立即下发开关；2：关闭立即下发开关下，触发开始下发 */
   Status: number;
 }
 
 declare interface ModifyEnterpriseSecurityDispatchStatusResponse {
   /** 0: 修改成功, 其他: 修改失败 */
-  Status: number | null;
+  Status?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -50,6 +50,12 @@ declare interface SecretMetadata {
   AssociatedInstanceIDs: string[] | null;
   /** 当凭据类型为云API密钥对凭据时，此字段有效，用于表示云API密钥对所属的用户UIN。 */
   TargetUin: number | null;
+  /** 轮转的频率，以天作为单位，在轮转开启状态下生效。 */
+  RotationFrequency?: number | null;
+  /** 云产品凭据对应的云产品实例 ID 号。 */
+  ResourceID?: string | null;
+  /** 用户指定的轮转开始时间。 */
+  RotationBeginTime?: string | null;
 }
 
 /** 标签键和标签值 */

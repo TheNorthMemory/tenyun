@@ -1505,9 +1505,9 @@ declare interface DescribeAccountQuotaRequest {
 
 declare interface DescribeAccountQuotaResponse {
   /** 用户appid */
-  AppId: string;
+  AppId?: number;
   /** 配额数据 */
-  AccountQuotaOverview: AccountQuotaOverview;
+  AccountQuotaOverview?: AccountQuotaOverview;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

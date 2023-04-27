@@ -917,8 +917,8 @@ declare interface DeleteDBDiagReportTasksRequest {
   AsyncRequestIds: number[];
   /** 实例ID */
   InstanceId: string;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "mongodb" - 云数据库 CynosDB for MySQL，默认值为"mysql"。 */
-  Product: string;
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  Product?: string;
 }
 
 declare interface DeleteDBDiagReportTasksResponse {

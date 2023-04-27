@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 233+ 款产品，9352+ 服务数</summary>
+<details><summary>共计 233+ 款产品，9354+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -196,7 +196,7 @@ facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 20
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(33) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
-gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
+gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(103) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(28) |
 goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(2) |
 gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 2020-08-20(18) |
@@ -241,7 +241,7 @@ mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(17) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 mvj | 营销价值判断 | 2019-09-26(1) |
-nlp | [NLP服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(34) |
+nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(34) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(25) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
@@ -314,7 +314,7 @@ trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) 
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(37) |
 tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(10) |
-tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(215) |
+tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(216) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) | 2020-09-18(17) |

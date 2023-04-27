@@ -724,7 +724,7 @@ declare interface WordSimilarityResponse {
   RequestId?: string;
 }
 
-/** {@link Nlp NLP服务} */
+/** {@link Nlp NLP 服务} */
 declare interface Nlp {
   (): Versions;
   /** 自动摘要 {@link AutoSummarizationRequest} {@link AutoSummarizationResponse} */

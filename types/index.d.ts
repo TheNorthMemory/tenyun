@@ -775,7 +775,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   msp: Msp,
   /** {@link Mvj 营销价值判断} */
   mvj: Mvj,
-  /** {@link Nlp NLP服务} */
+  /** {@link Nlp NLP 服务} */
   nlp: Nlp,
   /** {@link Npp 号码保护} */
   npp: Npp,

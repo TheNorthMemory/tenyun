@@ -683,11 +683,11 @@ declare interface UpdateDomainConfigResponse {
 /** {@link Ecdn 全站加速网络} */
 declare interface Ecdn {
   (): Versions;
-  /** 新增加速域名 {@link AddEcdnDomainRequest} {@link AddEcdnDomainResponse} */
+  /** @deprecated 新增加速域名 {@link AddEcdnDomainRequest} {@link AddEcdnDomainResponse} */
   AddEcdnDomain(data: AddEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddEcdnDomainResponse>;
-  /** 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
+  /** @deprecated 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
   CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
-  /** 删除加速域名 {@link DeleteEcdnDomainRequest} {@link DeleteEcdnDomainResponse} */
+  /** @deprecated 删除加速域名 {@link DeleteEcdnDomainRequest} {@link DeleteEcdnDomainResponse} */
   DeleteEcdnDomain(data: DeleteEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEcdnDomainResponse>;
   /** 查询域名基本信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
@@ -705,15 +705,15 @@ declare interface Ecdn {
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
   /** 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** 刷新目录 {@link PurgePathCacheRequest} {@link PurgePathCacheResponse} */
+  /** @deprecated 刷新目录 {@link PurgePathCacheRequest} {@link PurgePathCacheResponse} */
   PurgePathCache(data: PurgePathCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgePathCacheResponse>;
   /** 刷新 URL {@link PurgeUrlsCacheRequest} {@link PurgeUrlsCacheResponse} */
   PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
-  /** 启用加速域名 {@link StartEcdnDomainRequest} {@link StartEcdnDomainResponse} */
+  /** @deprecated 启用加速域名 {@link StartEcdnDomainRequest} {@link StartEcdnDomainResponse} */
   StartEcdnDomain(data: StartEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartEcdnDomainResponse>;
-  /** 停用加速域名 {@link StopEcdnDomainRequest} {@link StopEcdnDomainResponse} */
+  /** @deprecated 停用加速域名 {@link StopEcdnDomainRequest} {@link StopEcdnDomainResponse} */
   StopEcdnDomain(data: StopEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopEcdnDomainResponse>;
-  /** 更新域名配置 {@link UpdateDomainConfigRequest} {@link UpdateDomainConfigResponse} */
+  /** @deprecated 更新域名配置 {@link UpdateDomainConfigRequest} {@link UpdateDomainConfigResponse} */
   UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
 }
 
