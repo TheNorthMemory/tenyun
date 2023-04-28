@@ -114,6 +114,8 @@ declare interface FakeURLData {
   CertificationStatus?: number | null;
   /** 网址截图 */
   Snapshot?: string | null;
+  /** 账户资源状态：0-不可用 1-可用 */
+  AccountStatus?: number | null;
 }
 
 /** 过滤参数 */
@@ -187,6 +189,8 @@ declare interface CreateBPBrandRequest {
   BrandName: string;
   /** 企业名称 */
   CompanyName?: string;
+  /** 品牌logo */
+  BrandLogo?: string;
   /** 联系电话 */
   Phone?: string;
   /** 营业执照 */
@@ -213,7 +217,7 @@ declare interface CreateBPBrandRequest {
 
 declare interface CreateBPBrandResponse {
   /** 企业id */
-  CompanyId: number;
+  CompanyId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

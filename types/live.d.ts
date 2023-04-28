@@ -1321,7 +1321,7 @@ declare interface CreateLiveCallbackTemplateRequest {
   RecordNotifyUrl?: string;
   /** 截图回调 URL，相关协议文档：[事件消息通知](/document/product/267/32744)。 */
   SnapshotNotifyUrl?: string;
-  /** 鉴黄回调 URL，相关协议文档：[事件消息通知](/document/product/267/32741)。 */
+  /** 鉴黄回调 URL ，相关协议文档：[事件消息通知](/document/product/267/32741)。 */
   PornCensorshipNotifyUrl?: string;
   /** 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。[事件消息通知](/document/product/267/32744)。 */
   CallbackKey?: string;
@@ -1329,11 +1329,13 @@ declare interface CreateLiveCallbackTemplateRequest {
   StreamMixNotifyUrl?: string;
   /** 推流异常回调 URL。 */
   PushExceptionNotifyUrl?: string;
+  /** 音频审核回调 URL。 */
+  AudioAuditNotifyUrl?: string;
 }
 
 declare interface CreateLiveCallbackTemplateResponse {
   /** 模板ID。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1961,7 +1961,9 @@ declare interface Zone {
   /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
   AliasZoneName: string | null;
   /** 是否伪站点，取值有： 0：非伪站点； 1：伪站点。 */
-  IsFake: number | null;
+  IsFake: number;
+  /** 锁定状态，取值有： enable：正常，允许进行修改操作； disable：锁定中，不允许进行修改操作。 */
+  LockStatus?: string;
 }
 
 /** 站点配置。 */

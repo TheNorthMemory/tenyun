@@ -138,6 +138,8 @@ declare interface BotPkg {
   UsedNum?: number | null;
   /** 子产品code */
   Type?: string | null;
+  /** 续费标志 */
+  RenewFlag?: number | null;
 }
 
 /** bot的qps详情 */
@@ -152,6 +154,8 @@ declare interface BotQPS {
   Region: string;
   /** 使用qps的最大值 */
   MaxBotQPS: number;
+  /** 续费标志 */
+  RenewFlag?: number | null;
 }
 
 /** bot的趋势图对象 */
@@ -418,6 +422,8 @@ declare interface FraudPkg {
   InquireNum?: number | null;
   /** 使用数量 */
   UsedNum?: number | null;
+  /** 续费标志 */
+  RenewFlag?: number | null;
 }
 
 /** clb-waf防护域名 */
@@ -772,12 +778,12 @@ declare interface WafRuleLimit {
   TrafficMarking: number;
 }
 
-/** Waf 威胁情报封禁模块配置详情 */
+/** 当前WAF威胁情报封禁模块详情 */
 declare interface WafThreatenIntelligenceDetails {
-  /** 封禁模组启用状态 */
-  DefenseStatus: number;
   /** 封禁属性标签 */
   Tags?: string[] | null;
+  /** 封禁模组启用状态 */
+  DefenseStatus?: number;
   /** 最后更新时间 */
   LastUpdateTime?: string;
 }
@@ -1509,7 +1515,7 @@ declare interface DescribeWafThreatenIntelligenceRequest {
 
 declare interface DescribeWafThreatenIntelligenceResponse {
   /** WAF 威胁情报封禁信息 */
-  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
+  WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1644,7 +1650,7 @@ declare interface ModifyWafAutoDenyStatusResponse {
 
 declare interface ModifyWafThreatenIntelligenceRequest {
   /** 配置WAF威胁情报封禁模块详情 */
-  WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
+  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
 }
 
 declare interface ModifyWafThreatenIntelligenceResponse {
@@ -1870,7 +1876,7 @@ declare interface Waf {
   /** 配置WAF自动封禁模块状态 {@link ModifyWafAutoDenyStatusRequest} {@link ModifyWafAutoDenyStatusResponse} */
   ModifyWafAutoDenyStatus(data: ModifyWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyStatusResponse>;
   /** 配置WAF威胁情报封禁模块详情 {@link ModifyWafThreatenIntelligenceRequest} {@link ModifyWafThreatenIntelligenceResponse} */
-  ModifyWafThreatenIntelligence(data: ModifyWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafThreatenIntelligenceResponse>;
+  ModifyWafThreatenIntelligence(data?: ModifyWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafThreatenIntelligenceResponse>;
   /** 创建搜索下载攻击日志任务 {@link PostAttackDownloadTaskRequest} {@link PostAttackDownloadTaskResponse} */
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
   /** 搜索访问日志 {@link SearchAccessLogRequest} {@link SearchAccessLogResponse} */

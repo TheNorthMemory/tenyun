@@ -116,6 +116,28 @@ declare interface Command {
   TimeOffset: number;
   /** 命令执行情况，1--允许，2--拒绝，3--确认 */
   Action: number;
+  /** 会话id */
+  Sid?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 设备account */
+  Account?: string | null;
+  /** 设备ip */
+  InstanceId?: string | null;
+  /** source ip */
+  FromIp?: string | null;
+  /** 该命令所属会话的会话开始时间 */
+  SessTime?: string | null;
+  /** 复核时间 */
+  ConfirmTime?: string | null;
+  /** 用户部门id */
+  UserDepartmentId?: string | null;
+  /** 用户部门name */
+  UserDepartmentName?: string | null;
+  /** 设备部门id */
+  DeviceDepartmentId?: string | null;
+  /** 设备部门name */
+  DeviceDepartmentName?: string | null;
 }
 
 /** 部门信息 */
@@ -330,6 +352,22 @@ declare interface SearchCommandResult {
   Sid: string;
   /** 命令执行时间相对于所属会话开始时间的偏移量，单位ms */
   TimeOffset: number;
+  /** 账号 */
+  Account?: string | null;
+  /** source ip */
+  FromIp?: string | null;
+  /** 该命令所属会话的会话开始时间 */
+  SessTime?: string | null;
+  /** 复核时间 */
+  ConfirmTime?: string | null;
+  /** 部门id */
+  UserDepartmentId?: string | null;
+  /** 用户部门名称 */
+  UserDepartmentName?: string | null;
+  /** 设备部门id */
+  DeviceDepartmentId?: string | null;
+  /** 设备部门名称 */
+  DeviceDepartmentName?: string | null;
 }
 
 /** 文件操作搜索结果 */
@@ -625,11 +663,13 @@ declare interface CreateCmdTemplateRequest {
   Name: string;
   /** 命令列表，\n分隔，最大长度32768字节 */
   CmdList: string;
+  /** 标识cmdlist字段前端是否为base64加密传值.0:表示非base64加密1:表示是base64加密 */
+  Encoding?: number;
 }
 
 declare interface CreateCmdTemplateResponse {
   /** 新建成功后返回的记录ID */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1345,6 +1385,8 @@ declare interface SearchCommandBySidRequest {
   Sid: string;
   /** 命令，可模糊搜索 */
   Cmd?: string;
+  /** Cmd字段是前端传值是否进行base64.0:否，1：是 */
+  Encoding?: number;
   /** 偏移量 */
   Offset?: number;
   /** 每页容量，默认20，最大200 */
@@ -1355,9 +1397,9 @@ declare interface SearchCommandBySidRequest {
 
 declare interface SearchCommandBySidResponse {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 命令列表 */
-  CommandSet: Command[];
+  CommandSet?: Command[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1381,6 +1423,8 @@ declare interface SearchCommandRequest {
   PrivateIp?: string;
   /** 执行的命令 */
   Cmd?: string;
+  /** Cmd字段是前端传值是否进行base64.0:否，1：是 */
+  Encoding?: number;
   /** 根据拦截状态进行过滤：1 - 已执行，2 - 被阻断 */
   AuditAction?: number[];
   /** 每页容量，默认20，最大200 */
@@ -1391,9 +1435,9 @@ declare interface SearchCommandRequest {
 
 declare interface SearchCommandResponse {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 命令列表 */
-  Commands: SearchCommandResult[];
+  Commands?: SearchCommandResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1471,15 +1515,17 @@ declare interface SearchSessionCommandRequest {
   Offset?: number;
   /** 默认值为20，最大200 */
   Limit?: number;
+  /** Cmd字段前端是否做base64加密0：否，1：是 */
+  Encoding?: number;
   /** 结束时间 */
   EndTime?: string;
 }
 
 declare interface SearchSessionCommandResponse {
   /** 记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 命令和所属会话 */
-  CommandSessionSet: SessionCommand[];
+  CommandSessionSet?: SessionCommand[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

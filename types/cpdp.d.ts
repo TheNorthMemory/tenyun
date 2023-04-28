@@ -2260,6 +2260,8 @@ declare interface PaymentOrderResult {
   AdditionalTaxItem: string | null;
   /** 失败原因。当Status为FAILED时，改字段为失败的原因。 */
   FailReason: string | null;
+  /** 资金账户字类型: WECHATPAY_ACCOUNT 微信零钱, BANK_ACCOUNT 银行卡 */
+  FundingAccountSubType?: string | null;
 }
 
 /** 付款订单状态结果 */

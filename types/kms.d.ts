@@ -734,6 +734,70 @@ declare interface OverwriteWhiteBoxDeviceFingerprintsResponse {
   RequestId?: string;
 }
 
+declare interface PostQuantumCryptoDecryptRequest {
+  /** 待解密的密文数据 */
+  CiphertextBlob: string;
+  /** PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。 */
+  EncryptionPublicKey?: string;
+  /** 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。 */
+  EncryptionAlgorithm?: string;
+}
+
+declare interface PostQuantumCryptoDecryptResponse {
+  /** CMK的全局唯一标识 */
+  KeyId?: string;
+  /** 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。 */
+  PlainText?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PostQuantumCryptoEncryptRequest {
+  /** 调用CreateKey生成的CMK全局唯一标识符 */
+  KeyId: string;
+  /** 被加密的明文数据，该字段必须使用base64编码，原文最大长度支持4K */
+  PlainText: string;
+}
+
+declare interface PostQuantumCryptoEncryptResponse {
+  /** 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为PostQuantumCryptoDecrypt接口的输入参数，才可以解密出原文。 */
+  CiphertextBlob?: string;
+  /** 加密使用的CMK的全局唯一标识 */
+  KeyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PostQuantumCryptoSignRequest {
+  /** Base64 编码的消息原文。消息原文的长度（Base64编码前的长度）不超过4096字节。 */
+  Message: string;
+  /** 密钥的唯一标识 */
+  KeyId: string;
+}
+
+declare interface PostQuantumCryptoSignResponse {
+  /** 签名值，Base64编码。可使用 PostQuantumCryptoVerify接口对签名值进行验证。 */
+  Signature?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PostQuantumCryptoVerifyRequest {
+  /** 密钥的唯一标识 */
+  KeyId: string;
+  /** 签名值，通过调用KMS PostQuantumCryptoSign签名接口生成 */
+  SignatureValue: string;
+  /** Base64 编码的消息原文，消息原文的长度（Base64编码前的长度）不超过4096字节。 */
+  Message: string;
+}
+
+declare interface PostQuantumCryptoVerifyResponse {
+  /** 签名是否有效。true：签名有效，false：签名无效。 */
+  SignatureValid?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReEncryptRequest {
   /** 需要重新加密的密文 */
   CiphertextBlob: string;
@@ -937,6 +1001,14 @@ declare interface Kms {
   ListKeys(data?: ListKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeysResponse>;
   /** 覆盖指定密钥的设备指纹信息 {@link OverwriteWhiteBoxDeviceFingerprintsRequest} {@link OverwriteWhiteBoxDeviceFingerprintsResponse} */
   OverwriteWhiteBoxDeviceFingerprints(data: OverwriteWhiteBoxDeviceFingerprintsRequest, config?: AxiosRequestConfig): AxiosPromise<OverwriteWhiteBoxDeviceFingerprintsResponse>;
+  /** 后量子密码算法解密 {@link PostQuantumCryptoDecryptRequest} {@link PostQuantumCryptoDecryptResponse} */
+  PostQuantumCryptoDecrypt(data: PostQuantumCryptoDecryptRequest, config?: AxiosRequestConfig): AxiosPromise<PostQuantumCryptoDecryptResponse>;
+  /** 后量子密码算法加密 {@link PostQuantumCryptoEncryptRequest} {@link PostQuantumCryptoEncryptResponse} */
+  PostQuantumCryptoEncrypt(data: PostQuantumCryptoEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<PostQuantumCryptoEncryptResponse>;
+  /** 后量子密码算法签名 {@link PostQuantumCryptoSignRequest} {@link PostQuantumCryptoSignResponse} */
+  PostQuantumCryptoSign(data: PostQuantumCryptoSignRequest, config?: AxiosRequestConfig): AxiosPromise<PostQuantumCryptoSignResponse>;
+  /** 后量子密码算法验签 {@link PostQuantumCryptoVerifyRequest} {@link PostQuantumCryptoVerifyResponse} */
+  PostQuantumCryptoVerify(data: PostQuantumCryptoVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<PostQuantumCryptoVerifyResponse>;
   /** 密文刷新 {@link ReEncryptRequest} {@link ReEncryptResponse} */
   ReEncrypt(data: ReEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<ReEncryptResponse>;
   /** CMK计划删除接口 {@link ScheduleKeyDeletionRequest} {@link ScheduleKeyDeletionResponse} */

@@ -96,6 +96,8 @@ declare interface BlockIgnoreRule {
   MatchTimes: number | null;
   /** 国家 */
   Country: string | null;
+  /** 备注 */
+  Comment: string | null;
 }
 
 /** NAT防火墙Dnat规则 */
@@ -1119,9 +1121,9 @@ declare interface DescribeBlockIgnoreListRequest {
   Direction: string;
   /** 规则类型：1封禁，2放通 */
   RuleType: number;
-  /** 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数 */
-  Order: string;
   /** 排序类型：desc降序，asc正序 */
+  Order: string;
+  /** 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数 */
   By: string;
   /** 搜索参数，json格式字符串，空则传"{}"，域名：domain，危险等级：level，放通原因：ignore_reason，安全事件来源：rule_source，地理位置：address，模糊搜索：common */
   SearchValue?: string;
@@ -1129,13 +1131,13 @@ declare interface DescribeBlockIgnoreListRequest {
 
 declare interface DescribeBlockIgnoreListResponse {
   /** 列表数据 */
-  Data: BlockIgnoreRule[];
+  Data?: BlockIgnoreRule[];
   /** 查询结果总数，用于分页 */
-  Total: number;
+  Total?: number;
   /** 状态值，0：查询成功，非0：查询失败 */
-  ReturnCode: number;
+  ReturnCode?: number;
   /** 状态信息，success：查询成功，fail：查询失败 */
-  ReturnMsg: string;
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

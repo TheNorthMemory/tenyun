@@ -1732,6 +1732,8 @@ declare interface DescribeFileAttributesTask {
 declare interface DescribeFileAttributesTaskOutput {
   /** 媒体文件的 Md5 值。 */
   Md5: string;
+  /** 媒体文件的 Sha1 值。 */
+  Sha1?: string;
 }
 
 /** 域名信息 */
@@ -2178,7 +2180,7 @@ declare interface ImageContentReviewInput {
 
 /** 单个图片处理操作。 */
 declare interface ImageOperation {
-  /** 图片处理类型。可选类型有：Scale : 图片缩略处理。CenterCut : 图片裁剪处理。 */
+  /** 图片处理类型。可选类型有：Scale : 图片缩略处理；CenterCut : 图片裁剪处理；Blur : 图片模糊处理。 */
   Type: string;
   /** 图片缩略处理，仅当 Type 为 Scale 时有效。 */
   Scale?: ImageScale;

@@ -343,9 +343,9 @@ declare interface GetAsrVocabListRequest {
 
 declare interface GetAsrVocabListResponse {
   /** 热词表列表 */
-  VocabList: Vocab[];
+  VocabList?: Vocab[];
   /** 热词列表总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -385,9 +385,9 @@ declare interface GetCustomizationListRequest {
 
 declare interface GetCustomizationListResponse {
   /** 自学习模型数组 */
-  Data: Model[] | null;
+  Data?: Model[] | null;
   /** 自学习模型总量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

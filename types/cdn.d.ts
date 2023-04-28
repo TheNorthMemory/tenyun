@@ -3331,23 +3331,25 @@ declare interface DescribeOriginDataResponse {
 }
 
 declare interface DescribePayTypeRequest {
-  /** 指定服务地域查询mainland：境内计费方式查询overseas：境外计费方式查询未填充时默认为 mainland */
+  /** 指定服务地域查询mainland：境内计费方式查询overseas：境外计费方式查询global：全球计费方式查询未填充时，默认为 mainland */
   Area?: string;
   /** 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn */
   Product?: string;
+  /** 指定资源包查询flux：流量包https：HTTPS请求包未填充时，默认为 flux */
+  Type?: string;
 }
 
 declare interface DescribePayTypeResponse {
-  /** 计费类型：flux：流量计费bandwidth：带宽计费request：请求数计费flux_sep：动静分离流量计费bandwidth_sep：动静分离带宽计费日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。 */
-  PayType: string;
-  /** 计费周期：day：日结计费month：月结计费hour：小时结计费 */
-  BillingCycle: string;
-  /** monthMax：日峰值月平均，月结模式day95：日 95 带宽，月结模式month95：月95带宽，月结模式sum：总流量/总请求数，日结或月结模式max：峰值带宽，日结模式 */
-  StatType: string;
-  /** 境外计费类型：all：全地区统一计费multiple：分地区计费 */
-  RegionType: string;
-  /** 当前生效计费类型：flux：流量计费bandwidth：带宽计费request：请求数计费flux_sep：动静分离流量计费bandwidth_sep：动静分离带宽计费 */
-  CurrentPayType: string;
+  /** 计费类型flux：流量计费bandwidth：带宽计费request：请求数计费flux_sep：动静分离流量计费bandwidth_sep：动静分离带宽计费日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。 */
+  PayType?: string;
+  /** 计费周期day：日结计费month：月结计费hour：小时结计费 */
+  BillingCycle?: string;
+  /** 统计类型monthMax：日峰值月平均，月结模式day95：日 95 带宽，月结模式month95：月95带宽，月结模式sum：总流量/总请求数，日结或月结模式max：峰值带宽，日结模式 */
+  StatType?: string;
+  /** 计费区域all：全地区统一计费multiple：分地区计费 */
+  RegionType?: string;
+  /** 当前生效计费类型flux：流量计费bandwidth：带宽计费request：请求数计费flux_sep：动静分离流量计费bandwidth_sep：动静分离带宽计费 */
+  CurrentPayType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

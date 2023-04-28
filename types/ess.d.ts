@@ -372,9 +372,9 @@ declare interface FlowCreateApprover {
   VerifyChannel?: string[];
   /** 是否发送短信，sms--短信通知，none--不通知，默认为sms；发起方=签署方时不发送短信 */
   NotifyType?: string;
-  /** 签署前置条件：是否需要阅读全文，默认为不需要 */
+  /** 合同强制需要阅读全文，无需传此参数 */
   IsFullText?: boolean;
-  /** 签署前置条件：阅读时长限制，单位秒，默认为不需要 */
+  /** 合同的强制预览时间：3~300s，未指定则按合同页数计算 */
   PreReadTime?: number;
   /** 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个。 */
   UserId?: string;
@@ -1271,7 +1271,7 @@ declare interface CreateUserAutoSignEnableUrlRequest {
   AutoSignConfig: AutoSignConfig;
   /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
   UrlType?: string;
-  /** 通知类型，默认不填为不通知开通方，填写 SMS 为短息通知。 */
+  /** 通知类型，默认不填为不通知开通方，填写 SMS 为短信通知。 */
   NotifyType?: string;
   /** 若上方填写为 SMS，则此处为手机号 */
   NotifyAddress?: string;
@@ -1372,7 +1372,7 @@ declare interface DescribeFileUrlsRequest {
 }
 
 declare interface DescribeFileUrlsResponse {
-  /** URL信息 */
+  /** 文件URL信息；链接不是永久链接，有效期5分钟后链接失效。 */
   FileUrls?: FileUrl[];
   /** URL数量 */
   TotalCount?: number;

@@ -54,6 +54,8 @@ declare interface AlarmIndicatorInfo {
   EstimatedTime?: number | null;
   /** 实时任务告警需要的参数 */
   Operator?: number | null;
+  /** 告警指标阈值单位：ms(毫秒)、s(秒)、min(分钟) */
+  AlarmIndicatorUnit?: string | null;
 }
 
 /** 任务告警信息 */
@@ -304,6 +306,8 @@ declare interface DataSourceInfo {
   ParamsString: string | null;
   /** BizParams json字符串 */
   BizParamsString: string | null;
+  /** 修改时间 */
+  ModifiedTime?: number | null;
 }
 
 /** 查询数据源分页列表 */
@@ -2206,6 +2210,18 @@ declare interface TaskInfoDataPage {
   TotalCount: number;
 }
 
+/** 任务分页查询 */
+declare interface TaskInfoPage {
+  /** 页号 */
+  PageNumber: number;
+  /** 页大小 */
+  PageSize: number;
+  /** 工作流列表信息 */
+  Items: TaskCanvasInfo[];
+  /** 总页数 */
+  TotalPage: number;
+}
+
 /** 任务属性 */
 declare interface TaskInnerInfo {
   /** 任务ID */
@@ -3695,6 +3711,8 @@ declare interface DescribeDataTypesResponse {
 }
 
 declare interface DescribeDatabaseInfoListRequest {
+  /** 过滤参数 */
+  Filters: Filter[];
   /** 如果是hive这里写rpc，如果是其他类型不传 */
   ConnectionType: string;
 }
@@ -4292,6 +4310,46 @@ declare interface DescribeOfflineTaskTokenResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOperateTasksRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 文件夹id，多个文件夹以逗号分隔 */
+  FolderIdList?: string;
+  /** 工作流id，多个工作流id之间以英文字符逗号分隔 */
+  WorkFlowIdList?: string;
+  /** 工作流名称，多个工作流名称之间以英文字符逗号分隔 */
+  WorkFlowNameList?: string;
+  /** 任务名称，多个任务名称之间以英文字符逗号分隔 */
+  TaskNameList?: string;
+  /** 任务id，多个任务id之间以英文字符逗号分隔 */
+  TaskIdList?: string;
+  /** 页号 */
+  PageNumber?: string;
+  /** 分页大小 */
+  PageSize?: string;
+  /** 排序字段，支持字段为FirstSubmitTime和FirstRunTime，标识最近提交和首次执行事件 */
+  SortItem?: string;
+  /** 排序类型。两种取值 DESC、ASC */
+  SortType?: string;
+  /** 责任人，多个责任人之间以英文字符逗号分隔 */
+  InChargeList?: string;
+  /** 任务类型Id字符串，多个任务类型id之间以英文字符逗号分隔 */
+  TaskTypeIdList?: string;
+  /** 任务状态字符串，多个任务状态之间以英文字符逗号分隔 */
+  StatusList?: string;
+  /** 任务周期类型字符串，多个任务周期之间以英文字符逗号分隔 */
+  TaskCycleUnitList?: string;
+  /** 任务所属产品类型 */
+  ProductNameList?: string;
+}
+
+declare interface DescribeOperateTasksResponse {
+  /** 任务列表信息 */
+  Data: TaskInfoPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrganizationalFunctionsRequest {
   /** 场景类型：开发、使用 */
   Type: string;
@@ -4401,31 +4459,35 @@ declare interface DescribeRealTimeTaskInstanceNodeInfoResponse {
 }
 
 declare interface DescribeRealTimeTaskMetricOverviewRequest {
-  /** 无 */
+  /** 要查看的实时任务的任务Id */
   TaskId: string;
   /** 无 */
   ProjectId: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
 }
 
 declare interface DescribeRealTimeTaskMetricOverviewResponse {
   /** 总读取记录数 */
-  TotalRecordNumOfRead: number;
+  TotalRecordNumOfRead?: number;
   /** 总读取字节数 */
-  TotalRecordByteNumOfRead: number;
+  TotalRecordByteNumOfRead?: number;
   /** 总写入记录数 */
-  TotalRecordNumOfWrite: number;
+  TotalRecordNumOfWrite?: number;
   /** 总写入字节数 单位字节 */
-  TotalRecordByteNumOfWrite: number;
+  TotalRecordByteNumOfWrite?: number;
   /** 总的脏记录数据 */
-  TotalDirtyRecordNum: number;
+  TotalDirtyRecordNum?: number;
   /** 总的脏字节数 单位字节 */
-  TotalDirtyRecordByte: number;
+  TotalDirtyRecordByte?: number;
   /** 运行时长 单位s */
-  TotalDuration: number;
+  TotalDuration?: number;
   /** 开始运行时间 */
-  BeginRunTime: string;
+  BeginRunTime?: string;
   /** 目前运行到的时间 */
-  EndRunTime: string;
+  EndRunTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5405,13 +5467,15 @@ declare interface GenHiveTableDDLSqlRequest {
   AddPositionDeletes?: number;
   /** 增加的delete file数量阈值 */
   AddDeleteFiles?: number;
+  /** 下游节点数据源ID */
+  TargetDatasourceId?: string;
 }
 
 declare interface GenHiveTableDDLSqlResponse {
   /** 生成的ddl语句 */
-  DDLSql: string;
+  DDLSql?: string;
   /** 生成的ddl语句。与DDLSql相同含义，优先取Data，如果Data为空，则取DDLSql。 */
-  Data: string | null;
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6573,6 +6637,8 @@ declare interface Wedata {
   DescribeMonitorsByPage(data?: DescribeMonitorsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsByPageResponse>;
   /** 获取离线任务长连接Token {@link DescribeOfflineTaskTokenRequest} {@link DescribeOfflineTaskTokenResponse} */
   DescribeOfflineTaskToken(data?: DescribeOfflineTaskTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineTaskTokenResponse>;
+  /** 任务运维列表组合条件查询 {@link DescribeOperateTasksRequest} {@link DescribeOperateTasksResponse} */
+  DescribeOperateTasks(data: DescribeOperateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOperateTasksResponse>;
   /** 查询全量函数（层级化）接口 {@link DescribeOrganizationalFunctionsRequest} {@link DescribeOrganizationalFunctionsResponse} */
   DescribeOrganizationalFunctions(data: DescribeOrganizationalFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationalFunctionsResponse>;
   /** 获取生产调度任务列表 {@link DescribeProdTasksRequest} {@link DescribeProdTasksResponse} */

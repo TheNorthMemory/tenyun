@@ -5783,6 +5783,8 @@ declare interface ProcessLiveStreamRequest {
   AiContentReviewTask?: AiContentReviewTaskInput;
   /** 视频内容识别类型任务参数。 */
   AiRecognitionTask?: AiRecognitionTaskInput;
+  /** 视频内容分析类型任务参数。 */
+  AiAnalysisTask?: AiAnalysisTaskInput;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
@@ -5791,7 +5793,7 @@ declare interface ProcessLiveStreamRequest {
 
 declare interface ProcessLiveStreamResponse {
   /** 任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 233+ 款产品，9354+ 服务数</summary>
+<details><summary>共计 233+ 款产品，9359+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -222,7 +222,7 @@ iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.te
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
-kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49) |
+kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
 lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(53) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(77) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(130) |
@@ -325,7 +325,7 @@ vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-1
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(4) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(50) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(24) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(195) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(196) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(16) |
 youmall |  | 2018-02-28(31) |

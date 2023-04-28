@@ -397,13 +397,15 @@ declare interface DescribeKTVMusicsByTagRequest {
   Limit?: number;
   /** 权益过滤，取值有：Play：可播；Sing：可唱。 */
   RightFilters?: string[];
+  /** 物料过滤，取值有：Lyrics：含有歌词；Midi：含有音高线。 */
+  MaterialFilters?: string[];
 }
 
 declare interface DescribeKTVMusicsByTagResponse {
   /** 歌曲信息列表。 */
-  KTVMusicInfoSet: KTVMusicBaseInfo[];
+  KTVMusicInfoSet?: KTVMusicBaseInfo[];
   /** 滚动标记，用于设置下次请求的 ScrollToken 参数。 */
-  ScrollToken: string;
+  ScrollToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -423,6 +425,8 @@ declare interface DescribeKTVPlaylistDetailRequest {
   RightFilters?: string[];
   /** 播放场景。默认为ChatLive：直播Chat：语聊 */
   PlayScene?: string;
+  /** 物料过滤，取值有：Lyrics：含有歌词；Midi：含有音高线。 */
+  MaterialFilters?: string[];
 }
 
 declare interface DescribeKTVPlaylistDetailResponse {
@@ -601,6 +605,8 @@ declare interface SearchKTVMusicsRequest {
   RightFilters?: string[];
   /** 播放场景。默认为ChatLive：直播Chat：语聊 */
   PlayScene?: string;
+  /** 物料过滤，取值有：Lyrics：含有歌词；Midi：含有音高线。 */
+  MaterialFilters?: string[];
 }
 
 declare interface SearchKTVMusicsResponse {
