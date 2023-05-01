@@ -294,6 +294,14 @@ declare interface NodeOverview {
   NodeType?: string | null;
 }
 
+/** 描述节点执行脚本信息。 */
+declare interface NodeScript {
+  /** 节点执行脚本获取地址。目前仅支持cos地址。地址最大长度：255。 */
+  ScriptPath: string | null;
+  /** 脚本执行超时时间（包含拉取脚本的时间）。单位秒，默认值：30。取值范围：10～1200。 */
+  Timeout?: number | null;
+}
+
 /** 描述了实例的抽象位置 */
 declare interface Placement {
   /** 实例所属的可用区名称。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。 */
@@ -322,6 +330,8 @@ declare interface QueueConfig {
   InternetAccessible?: InternetAccessible;
   /** 扩容节点配置信息。 */
   ExpansionNodeConfigs?: ExpansionNodeConfig[];
+  /** 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。 */
+  DesiredIdleNodeCapacity?: number | null;
 }
 
 /** 扩容队列配置概览。 */
@@ -338,6 +348,8 @@ declare interface QueueConfigOverview {
   EnableAutoShrink?: boolean;
   /** 扩容节点配置信息。 */
   ExpansionNodeConfigs?: ExpansionNodeConfigOverview[];
+  /** 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。 */
+  DesiredIdleNodeCapacity?: number | null;
 }
 
 /** 队列信息概览。 */
@@ -499,6 +511,8 @@ declare interface CreateClusterRequest {
   Tags?: Tag[];
   /** 弹性伸缩类型。默认值：THPC_ASTHPC_AS：集群自动扩缩容由THPC产品内部实现。AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。 */
   AutoScalingType?: string;
+  /** 节点初始化脚本信息列表。 */
+  InitNodeScripts?: NodeScript[];
 }
 
 declare interface CreateClusterResponse {
@@ -654,6 +668,18 @@ declare interface DescribeQueuesResponse {
   QueueSet?: QueueOverview[];
   /** 符合条件的节点数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInitNodeScriptsRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 节点初始化脚本信息列表。 */
+  InitNodeScripts?: NodeScript[];
+}
+
+declare interface ModifyInitNodeScriptsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1685,6 +1711,8 @@ declare interface Thpc {
   DescribeNodes(data: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
   DescribeQueues(data: DescribeQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueuesResponse>;
+  /** 修改节点初始化脚本 {@link ModifyInitNodeScriptsRequest} {@link ModifyInitNodeScriptsResponse} */
+  ModifyInitNodeScripts(data: ModifyInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInitNodeScriptsResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
   /** 添加集群存储选项 {@link V20220401.AddClusterStorageOptionRequest} {@link V20220401.AddClusterStorageOptionResponse} */

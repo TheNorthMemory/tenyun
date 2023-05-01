@@ -3252,6 +3252,34 @@ declare interface QueryTransferResultData {
   Remark: string | null;
 }
 
+/** 查询用户微工卡核身结果 */
+declare interface QueryWechatAuthResult {
+  /** 商户核身单号 */
+  AuthNo?: string;
+  /** 微信用户标识 */
+  OpenId?: string;
+  /** 商户号 */
+  MchId?: string;
+  /** 子商户号 */
+  SubMchId?: string;
+  /** 核身渠道FROM_MINI_APP：来自小程序方式核身FROM_HARDWARE：来自硬件设备方式核身 */
+  AuthScene?: string;
+  /** 核身渠道标识用于定位渠道具体来源，如果是扫码打卡渠道标识就是具体的小程序appid，若是硬件设备，则是设备的序列号等 */
+  AuthSource?: string;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 所属单位名称 */
+  EmployerName?: string;
+  /** 核身时间yyyy-MM-DDTHH:mm:ss+TIMEZONE示例值：2015-05-20T13:29:35+08:00 */
+  AuthTime?: string | null;
+  /** 核身类型SIGN_IN：考勤、签到打卡类型INSURANCE：投保类型CONTRACT：签约类型 */
+  AuthType?: string;
+  /** 核身状态AUTHENTICATE_PROCESSING：核身中AUTHENTICATE_SUCCESS：核身成功AUTHENTICATE_FAILED：核身失败 */
+  AuthState?: string;
+  /** 核身失败原因描述 */
+  AuthFailReason?: string | null;
+}
+
 /** 订单退款响应对象 */
 declare interface RefundOrderResult {
   /** 付款订单号 */
@@ -3922,6 +3950,22 @@ declare interface ViewShopResult {
   CityId: string | null;
 }
 
+/** 微工卡预核身结果 */
+declare interface WechatPreAuthResult {
+  /** 商户核身单号 */
+  AuthNo?: string;
+  /** 微信用户标识 */
+  OpenId?: string;
+  /** 商户号 */
+  MchId?: string;
+  /** 子商户号 */
+  SubMchId?: string;
+  /** 预核身token值 */
+  Token?: string;
+  /** token有效期时间，单位：秒 */
+  Expire?: number;
+}
+
 /** 聚鑫提现订单内容 */
 declare interface WithdrawBill {
   /** 业务提现订单号 */
@@ -4386,6 +4430,38 @@ declare interface ApplyFlexSettlementResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: ApplyFlexSettlementResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ApplyFlexWechatPreAuthRequest {
+  /** 商家核身单号 */
+  AuthNo: string;
+  /** 微信用户标识 */
+  OpenId: string;
+  /** 项目名称 */
+  ProjectName: string;
+  /** 用工单位名称 */
+  EmployerName: string;
+  /** 用户姓名 */
+  UserName: string;
+  /** 用户证件号 */
+  IdNo: string;
+  /** 用工类型LONG_TERM_EMPLOYMENT：长期用工，SHORT_TERM_EMPLOYMENT： 短期用工，COOPERATION_EMPLOYMENT：合作关系 */
+  EmploymentType: string;
+  /** 核身类型SIGN_IN：考勤、签到打卡类型INSURANCE：投保类型CONTRACT：签约类型 */
+  AuthType: string;
+  /** 环境类型test 测试release 生产sandbox 沙箱 */
+  Environment: string;
+}
+
+declare interface ApplyFlexWechatPreAuthResponse {
+  /** 错误码。SUCCESS为成功，其他为失败 */
+  ErrCode?: string;
+  /** 错误信息 */
+  ErrMessage?: string;
+  /** 返回结果 */
+  Result?: WechatPreAuthResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8190,6 +8266,24 @@ declare interface QueryFlexSettlementOrderListResponse {
   RequestId?: string;
 }
 
+declare interface QueryFlexWechatAuthResultRequest {
+  /** 商户核身单号 */
+  AuthNo: string;
+  /** 环境类型test 测试release 生产sandbox 沙箱 */
+  Environment?: string;
+}
+
+declare interface QueryFlexWechatAuthResultResponse {
+  /** 错误码。SUCCESS为成功，其他为失败 */
+  ErrCode?: string;
+  /** 错误消息 */
+  ErrMessage?: string;
+  /** 返回结果 */
+  Result?: QueryWechatAuthResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryFundsTransactionDetailsRequest {
   /** 查询的交易发生时间类型。__1__：当日__2__：历史 */
   QueryDateType: string;
@@ -10845,6 +10939,8 @@ declare interface Cpdp {
   ApplyFlexPayment(data: ApplyFlexPaymentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFlexPaymentResponse>;
   /** 灵云V2-结算 {@link ApplyFlexSettlementRequest} {@link ApplyFlexSettlementResponse} */
   ApplyFlexSettlement(data: ApplyFlexSettlementRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFlexSettlementResponse>;
+  /** 灵云V2-微工卡开通预核身接口 {@link ApplyFlexWechatPreAuthRequest} {@link ApplyFlexWechatPreAuthResponse} */
+  ApplyFlexWechatPreAuth(data: ApplyFlexWechatPreAuthRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFlexWechatPreAuthResponse>;
   /** 云企付-申请单笔交易回单 {@link ApplyOpenBankOrderDetailReceiptRequest} {@link ApplyOpenBankOrderDetailReceiptResponse} */
   ApplyOpenBankOrderDetailReceipt(data: ApplyOpenBankOrderDetailReceiptRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOpenBankOrderDetailReceiptResponse>;
   /** 云企付-结算申请接口 {@link ApplyOpenBankSettleOrderRequest} {@link ApplyOpenBankSettleOrderResponse} */
@@ -11097,6 +11193,8 @@ declare interface Cpdp {
   QueryFlexServiceProviderAccountBalance(data: QueryFlexServiceProviderAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexServiceProviderAccountBalanceResponse>;
   /** 灵云V2-查询结算订单列表 {@link QueryFlexSettlementOrderListRequest} {@link QueryFlexSettlementOrderListResponse} */
   QueryFlexSettlementOrderList(data: QueryFlexSettlementOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexSettlementOrderListResponse>;
+  /** 灵云V2-查询微工卡核身结果 {@link QueryFlexWechatAuthResultRequest} {@link QueryFlexWechatAuthResultResponse} */
+  QueryFlexWechatAuthResult(data: QueryFlexWechatAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexWechatAuthResultResponse>;
   /** 聚鑫-查询会员资金交易信息列表 {@link QueryFundsTransactionDetailsRequest} {@link QueryFundsTransactionDetailsResponse} */
   QueryFundsTransactionDetails(data: QueryFundsTransactionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFundsTransactionDetailsResponse>;
   /** 智慧零售-发票查询 {@link QueryInvoiceRequest} {@link QueryInvoiceResponse} */

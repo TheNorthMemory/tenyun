@@ -1675,17 +1675,17 @@ declare interface DescribeInstanceSecurityGroupResponse {
 }
 
 declare interface DescribeInstanceShardsRequest {
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 是否过滤掉从节信息 */
+  /** 是否过滤掉从节信息。- true；过滤从节点。- false：不过滤。 */
   FilterSlave?: boolean;
 }
 
 declare interface DescribeInstanceShardsResponse {
-  /** 实例分片列表信息 */
-  InstanceShards: InstanceClusterShard[];
-  /** 实例分片节点总数 */
-  TotalCount: number;
+  /** 实例分片列表信息，包括：节点信息、节点ID、Key数量、使用容量、容量倾斜率等信息。 */
+  InstanceShards?: InstanceClusterShard[];
+  /** 实例分片节点数量。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1707,11 +1707,11 @@ declare interface DescribeInstanceZoneInfoResponse {
 declare interface DescribeInstancesRequest {
   /** 每页输出实例的数量，参数默认值20，最大值为1000。 */
   Limit?: number;
-  /** 分页偏移量，取Limit整数倍。 */
+  /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
-  /** 实例 ID，如：crs-6ubhgouj。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId?: string;
-  /** 实例排序依据，枚举值如下所示：projectId：项目ID。createtime：实例创建时间。instancename：实例名称。type：实例类型。curDeadline：实例到期时间。 */
+  /** 实例列表排序依据，枚举值如下所示：projectId：依据项目ID排序。createtime：依据实例创建时间排序。instancename：依据实例名称排序。type：依据实例类型排序。curDeadline：依据实例到期时间排序。 */
   OrderBy?: string;
   /** 实例排序方式，默认为倒序排序。1：倒序。0：顺序。 */
   OrderType?: number;
@@ -1737,7 +1737,7 @@ declare interface DescribeInstancesRequest {
   TypeVersion?: number;
   /** 存储引擎信息。可设置为Redis-2.8、Redis-4.0、Redis-5.0、Redis-6.0 或者 CKV。 */
   EngineName?: string;
-  /** 续费模式。0：默认状态（手动续费）。1：自动续费。2：明确不自动续费。 */
+  /** 续费模式。0：手动续费。1：自动续费。2：到期不再续费。 */
   AutoRenew?: number[];
   /** 计费模式。postpaid：按量计费。prepaid：包年包月。 */
   BillingMode?: string;
@@ -1753,7 +1753,7 @@ declare interface DescribeInstancesRequest {
   InstanceTags?: InstanceTagInfo[];
   /** 根据标签的 Key 筛选资源，该参数不配置或者数组设置为空值，则不根据标签Key进行过滤。 */
   TagKeys?: string[];
-  /** 实例的产品版本。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。local：本地盘版。cloud：云盘版。cdc：独享集群版。 */
+  /** 实例的产品版本。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。local：本地盘版。cdc：独享集群版。 */
   ProductVersions?: string[];
   /** 批量查询指定的实例 ID，返回结果已 Limit 限制为主。 */
   InstanceIds?: string[];
@@ -1935,17 +1935,17 @@ declare interface DescribeSSLStatusResponse {
 }
 
 declare interface DescribeSlowLogRequest {
-  /** 实例Id。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 开始时间。 */
+  /** 预查询慢日志的起始时间。 */
   BeginTime: string;
-  /** 结束时间。 */
+  /** 预查询慢日志的结束时间。 */
   EndTime: string;
-  /** 慢查询平均执行时间阈值（单位：毫秒）。 */
+  /** 慢查询平均执行时间阈值，单位：毫秒。 */
   MinQueryTime?: number;
   /** 每个页面展示的慢查询条数，默认值为20。 */
   Limit?: number;
-  /** 慢查询条数的偏移量，取Limit整数倍。 */
+  /** 慢查询条数的偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
   /** 节点所属角色。master：主节点。slave：从节点。 */
   Role?: string;

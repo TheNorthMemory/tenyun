@@ -1346,6 +1346,8 @@ declare interface PrivateIpAddressSpecification {
   IsWanIpBlocked?: boolean;
   /** IP状态：PENDING：生产中MIGRATING：迁移中DELETING：删除中AVAILABLE：可用的 */
   State?: string;
+  /** IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。 */
+  QosLevel?: string;
 }
 
 /** 描述网络中心每个产品的配额信息 */
@@ -2337,11 +2339,13 @@ declare interface AssignPrivateIpAddressesRequest {
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
   /** 新申请的内网IP地址个数，与PrivateIpAddresses至少提供一个。内网IP地址个数总和不能超过配额数，详见弹性网卡使用限制。 */
   SecondaryPrivateIpAddressCount?: number;
+  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。 */
+  QosLevel?: string;
 }
 
 declare interface AssignPrivateIpAddressesResponse {
   /** 内网IP详细信息。 */
-  PrivateIpAddressSet: PrivateIpAddressSpecification[];
+  PrivateIpAddressSet?: PrivateIpAddressSpecification[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2619,6 +2623,8 @@ declare interface CreateAndAttachNetworkInterfaceRequest {
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
   /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。 */
   SecondaryPrivateIpAddressCount?: number;
+  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。 */
+  QosLevel?: string;
   /** 指定绑定的安全组，例如：['sg-1dd51d']。 */
   SecurityGroupIds?: string[];
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
@@ -3005,6 +3011,8 @@ declare interface CreateNetworkInterfaceRequest {
   NetworkInterfaceDescription?: string;
   /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。 */
   SecondaryPrivateIpAddressCount?: number;
+  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。 */
+  QosLevel?: string;
   /** 指定绑定的安全组，例如：['sg-1dd51d']。 */
   SecurityGroupIds?: string[];
   /** 指定的内网IP信息，单次最多指定10个。 */
