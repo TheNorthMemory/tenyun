@@ -664,6 +664,8 @@ declare interface EdgeCluster {
   ChargeType?: string | null;
   /** 边缘集群组件的版本 */
   EdgeVersion?: string | null;
+  /** 集群绑定的云标签 */
+  TagSpecification?: TagSpecification | null;
 }
 
 /** 边缘容器集群高级配置 */

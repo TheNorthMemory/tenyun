@@ -876,6 +876,8 @@ declare interface DescribeSafeAuthFlagCollResponse {
   ActionFlag?: LoginActionFlag;
   /** 异地登录保护设置 */
   OffsiteFlag?: OffsiteFlag;
+  /** 是否提示信任设备1 ：提示 0: 不提示 */
+  PromptTrust?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

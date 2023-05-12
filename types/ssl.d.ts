@@ -126,6 +126,10 @@ declare interface CompanyInfo {
   CompanyAddress: string;
   /** 公司电话 */
   CompanyPhone: string;
+  /** 类型 */
+  IdType?: string | null;
+  /** ID号 */
+  IdNumber?: string | null;
 }
 
 /** 资源详情 */
@@ -633,69 +637,75 @@ declare interface DescribeCertificateRequest {
 
 declare interface DescribeCertificateResponse {
   /** 用户 UIN。 */
-  OwnerUin: string | null;
+  OwnerUin?: string | null;
   /** 项目 ID。 */
-  ProjectId: string | null;
+  ProjectId?: string | null;
   /** 证书来源：trustasia = 亚洲诚信，upload = 用户上传。 */
-  From: string | null;
+  From?: string | null;
   /** 证书类型：CA = 客户端证书，SVR = 服务器证书。 */
-  CertificateType: string | null;
+  CertificateType?: string | null;
   /** 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。 */
-  PackageType: string | null;
+  PackageType?: string | null;
   /** 证书颁发者名称。 */
-  ProductZhName: string | null;
+  ProductZhName?: string | null;
   /** 域名。 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 备注名称。 */
-  Alias: string | null;
+  Alias?: string | null;
   /** 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。 */
-  Status: number | null;
+  Status?: number | null;
   /** 状态信息。 */
-  StatusMsg: string | null;
+  StatusMsg?: string | null;
   /** 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。 */
-  VerifyType: string | null;
+  VerifyType?: string | null;
   /** 漏洞扫描状态。 */
-  VulnerabilityStatus: string | null;
+  VulnerabilityStatus?: string | null;
   /** 证书生效时间。 */
-  CertBeginTime: string | null;
+  CertBeginTime?: string | null;
   /** 证书失效时间。 */
-  CertEndTime: string | null;
+  CertEndTime?: string | null;
   /** 证书有效期：单位(月)。 */
-  ValidityPeriod: string | null;
+  ValidityPeriod?: string | null;
   /** 申请时间。 */
-  InsertTime: string | null;
+  InsertTime?: string | null;
   /** 订单 ID。 */
-  OrderId: string | null;
+  OrderId?: string | null;
   /** 证书扩展信息。 */
-  CertificateExtra: CertificateExtra | null;
+  CertificateExtra?: CertificateExtra | null;
   /** DV 认证信息。 */
-  DvAuthDetail: DvAuthDetail | null;
+  DvAuthDetail?: DvAuthDetail | null;
   /** 漏洞扫描评估报告。 */
-  VulnerabilityReport: string | null;
+  VulnerabilityReport?: string | null;
   /** 证书 ID。 */
-  CertificateId: string | null;
+  CertificateId?: string | null;
   /** 证书类型名称。 */
-  PackageTypeName: string | null;
+  PackageTypeName?: string | null;
   /** 状态描述。 */
-  StatusName: string | null;
+  StatusName?: string | null;
   /** 证书包含的多个域名（包含主域名）。 */
-  SubjectAltName: string[] | null;
+  SubjectAltName?: string[] | null;
   /** 是否为 VIP 客户。 */
-  IsVip: boolean | null;
+  IsVip?: boolean | null;
   /** 是否为泛域名证书。 */
-  IsWildcard: boolean | null;
+  IsWildcard?: boolean | null;
   /** 是否为 DV 版证书。 */
-  IsDv: boolean | null;
+  IsDv?: boolean | null;
   /** 是否启用了漏洞扫描功能。 */
-  IsVulnerability: boolean | null;
+  IsVulnerability?: boolean | null;
   /** 是否可重颁发证书。 */
-  RenewAble: boolean | null;
+  RenewAble?: boolean | null;
   /** 提交的资料信息。 */
-  SubmittedData: SubmittedData | null;
+  SubmittedData?: SubmittedData | null;
   /** 是否可部署。 */
-  Deployable: boolean | null;
+  Deployable?: boolean | null;
   /** 标签列表 */
-  Tags: Tags[] | null;
+  Tags?: Tags[] | null;
+  /** CA证书的所有加密方式 */
+  CAEncryptAlgorithms?: string[] | null;
+  /** CA证书的所有通用名称 */
+  CACommonNames?: string[] | null;
+  /** CA证书所有的到期时间 */
+  CAEndTimes?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

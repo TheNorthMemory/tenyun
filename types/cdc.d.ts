@@ -589,9 +589,9 @@ declare interface DescribeDedicatedClusterTypesRequest {
 
 declare interface DescribeDedicatedClusterTypesResponse {
   /** 专用集群配置列表 */
-  DedicatedClusterTypeSet: DedicatedClusterType[];
+  DedicatedClusterTypeSet?: DedicatedClusterType[];
   /** 符合条件的个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -543,7 +543,7 @@ declare interface CopySnapshotCrossRegionsRequest {
 
 declare interface CopySnapshotCrossRegionsResponse {
   /** 快照跨地域复制的结果，如果请求下发成功，则返回相应地地域的新快照ID，否则返回Error。 */
-  SnapshotCopyResultSet: SnapshotCopyResult[];
+  SnapshotCopyResultSet?: SnapshotCopyResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -565,9 +565,9 @@ declare interface CreateAutoSnapshotPolicyRequest {
 
 declare interface CreateAutoSnapshotPolicyResponse {
   /** 新创建的定期快照策略ID。 */
-  AutoSnapshotPolicyId: string;
+  AutoSnapshotPolicyId?: string;
   /** 首次开始备份的时间。 */
-  NextTriggerTime: string;
+  NextTriggerTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -581,7 +581,7 @@ declare interface CreateDiskBackupRequest {
 
 declare interface CreateDiskBackupResponse {
   /** 云硬盘备份点的ID。 */
-  DiskBackupId: string;
+  DiskBackupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -623,7 +623,7 @@ declare interface CreateDisksRequest {
 
 declare interface CreateDisksResponse {
   /** 创建的云硬盘ID列表。 */
-  DiskIdSet?: string[];
+  DiskIdSet?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -807,7 +807,7 @@ declare interface DescribeDiskStoragePoolResponse {
 }
 
 declare interface DescribeDisksRequest {
-  /** 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：表示SSD云硬盘 | CLOUD_HSSD：表示增强型SSD云硬盘。| CLOUD_TSSD：表示极速型云硬盘。)disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。)instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753)过滤。instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
+  /** 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：表示SSD云硬盘 | CLOUD_HSSD：表示增强型SSD云硬盘。| CLOUD_TSSD：表示极速型云硬盘。)disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。)instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753)过滤。instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。dedicated-cluster-id - Array of String - 是否必填：否 -（过滤条件）按照 CDC 独享集群 ID 进行过滤。cluster-group-id - String - 是否必填：否 -（过滤条件）按照 集群群组 ID 进行过滤。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。 */
   Limit?: number;
@@ -825,9 +825,9 @@ declare interface DescribeDisksRequest {
 
 declare interface DescribeDisksResponse {
   /** 符合条件的云硬盘数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 云硬盘的详细信息列表。 */
-  DiskSet: Disk[];
+  DiskSet?: Disk[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -839,7 +839,7 @@ declare interface DescribeInstancesDiskNumRequest {
 
 declare interface DescribeInstancesDiskNumResponse {
   /** 各个云服务器已挂载和可挂载弹性云盘的数量。 */
-  AttachDetail: AttachDetail[];
+  AttachDetail?: AttachDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1087,7 +1087,7 @@ declare interface ModifyDiskExtraPerformanceResponse {
 }
 
 declare interface ModifyDisksChargeTypeRequest {
-  /** 一个或多个待操作的云硬盘ID。每次请求批量云盘上限为100。 */
+  /** 一个或多个待操作的云硬盘ID。每次请求批量云硬盘上限为100。 */
   DiskIds: string[];
   /** 设置为预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。 */
   DiskChargePrepaid?: DiskChargePrepaid;
@@ -1129,12 +1129,12 @@ declare interface ModifySnapshotAttributeResponse {
 }
 
 declare interface ModifySnapshotsSharePermissionRequest {
+  /** 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。 */
+  SnapshotIds: string[];
   /** 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。帐号ID不同于QQ号，查询用户帐号ID请查看[帐号信息](https://console.cloud.tencent.com/developer)中的帐号ID栏。 */
   AccountIds: string[];
   /** 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。 */
   Permission: string;
-  /** 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。 */
-  SnapshotIds: string[];
 }
 
 declare interface ModifySnapshotsSharePermissionResponse {
@@ -1143,7 +1143,7 @@ declare interface ModifySnapshotsSharePermissionResponse {
 }
 
 declare interface RenewDiskRequest {
-  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的续费时长。在云盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时云盘会按对齐到实例续费后的到期时间来续费。 */
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云硬盘的续费时长。在云硬盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时云硬盘会按对齐到实例续费后的到期时间来续费。 */
   DiskChargePrepaid: DiskChargePrepaid;
   /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。 */
   DiskId: string;
@@ -1263,7 +1263,7 @@ declare interface Cbs {
   ModifyDiskBackupQuota(data: ModifyDiskBackupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskBackupQuotaResponse>;
   /** 调整云硬盘额外性能 {@link ModifyDiskExtraPerformanceRequest} {@link ModifyDiskExtraPerformanceResponse} */
   ModifyDiskExtraPerformance(data: ModifyDiskExtraPerformanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskExtraPerformanceResponse>;
-  /** 修改弹性云盘计费模式 {@link ModifyDisksChargeTypeRequest} {@link ModifyDisksChargeTypeResponse} */
+  /** 修改弹性云硬盘计费模式 {@link ModifyDisksChargeTypeRequest} {@link ModifyDisksChargeTypeResponse} */
   ModifyDisksChargeType(data: ModifyDisksChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksChargeTypeResponse>;
   /** 修改云硬盘续费标识 {@link ModifyDisksRenewFlagRequest} {@link ModifyDisksRenewFlagResponse} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;

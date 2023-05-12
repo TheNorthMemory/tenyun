@@ -1216,6 +1216,10 @@ declare interface Metric {
   IsOpen: number | null;
   /** 集成中心产品ID */
   ProductId: number | null;
+  /** 匹配运算符 */
+  Operators?: Operator[] | null;
+  /** 指标触发 */
+  Periods?: number[] | null;
 }
 
 /** 指标配置 */
@@ -3246,6 +3250,14 @@ declare interface DescribeBindingPolicyObjectListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterAgentCreatingProgressRequest {
+}
+
+declare interface DescribeClusterAgentCreatingProgressResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConditionsTemplateListRequest {
   /** 固定值，为"monitor" */
   Module: string;
@@ -4999,6 +5011,8 @@ declare interface Monitor {
   DescribeBasicAlarmList(data: DescribeBasicAlarmListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicAlarmListResponse>;
   /** 获取已绑定对象列表 {@link DescribeBindingPolicyObjectListRequest} {@link DescribeBindingPolicyObjectListResponse} */
   DescribeBindingPolicyObjectList(data: DescribeBindingPolicyObjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindingPolicyObjectListResponse>;
+  /** 获取集群绑定进度 {@link DescribeClusterAgentCreatingProgressRequest} {@link DescribeClusterAgentCreatingProgressResponse} */
+  DescribeClusterAgentCreatingProgress(data?: DescribeClusterAgentCreatingProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAgentCreatingProgressResponse>;
   /** 获取条件模板列表 {@link DescribeConditionsTemplateListRequest} {@link DescribeConditionsTemplateListResponse} */
   DescribeConditionsTemplateList(data: DescribeConditionsTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConditionsTemplateListResponse>;
   /** 列出 Grafana DNS 配置 {@link DescribeDNSConfigRequest} {@link DescribeDNSConfigResponse} */

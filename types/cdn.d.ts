@@ -1264,6 +1264,8 @@ declare interface HttpsPackage {
   ExtensionAvailable: boolean;
   /** HTTPS请求包当前续订模式0：未续订1：到期续订2：用完续订3：到期或用完续订 */
   ExtensionMode: number;
+  /** HTTPS请求包是否自动续订 */
+  AutoExtension?: boolean | null;
 }
 
 /** 华为云对象存储回源鉴权 */

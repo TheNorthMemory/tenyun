@@ -374,6 +374,8 @@ declare interface InstanceLog {
   Ip: string;
   /** 日志内容 */
   Message: string;
+  /** 集群节点ID */
+  NodeID?: string;
 }
 
 /** OperationDetail使用此结构的数组描述新旧配置 */
@@ -418,6 +420,8 @@ declare interface KibanaView {
   CpuUsage: number;
   /** 可用区 */
   Zone: string;
+  /** ts-0noqayxu-az6-hot-03222010-0 */
+  NodeId?: string;
 }
 
 /** 节点本地盘信息 */

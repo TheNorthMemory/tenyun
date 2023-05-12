@@ -160,6 +160,8 @@ declare interface WorkspaceInfo {
   WorkspaceId: number | null;
   /** 工作空间标识 */
   SpaceKey: string | null;
+  /** 工作空间名称 */
+  Name?: string | null;
 }
 
 /** 工作空间基本信息描述 */
@@ -365,11 +367,13 @@ declare interface CreateWorkspaceByTemplateRequest {
   CloudStudioSessionTeam: string;
   /** 模板ID */
   TemplateId: number;
+  /** 工作空间名称 */
+  Name?: string;
 }
 
 declare interface CreateWorkspaceByTemplateResponse {
   /** 创建工作空间返回的信息 */
-  Data: WorkspaceInfo;
+  Data?: WorkspaceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

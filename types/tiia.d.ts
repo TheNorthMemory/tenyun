@@ -413,7 +413,7 @@ declare interface DescribeGroupsRequest {
 
 declare interface DescribeGroupsResponse {
   /** 图库信息 */
-  Groups: GroupInfo[] | null;
+  Groups?: GroupInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -559,9 +559,9 @@ declare interface DetectMisbehaviorRequest {
 
 declare interface DetectMisbehaviorResponse {
   /** 对于图片中包含不良行为的置信度，取值[0,1]，一般超过0.5则表明可能包含不良行为内容； */
-  Confidence: number;
+  Confidence?: number;
   /** 图像中最可能包含的不良行为类别，包括赌博、打架斗殴、吸毒等。 */
-  Type: string;
+  Type?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -655,9 +655,9 @@ declare interface RecognizeCarProRequest {
 
 declare interface RecognizeCarProResponse {
   /** 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。 */
-  CarCoords: Coord[];
+  CarCoords?: Coord[];
   /** 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。注意：置信度是指车牌信息置信度。 */
-  CarTags: CarTagItem[];
+  CarTags?: CarTagItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

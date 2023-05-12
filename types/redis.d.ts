@@ -4,17 +4,17 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 子账号信息 */
 declare interface Account {
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string | null;
-  /** 账号名称（如果是主账号，名称为root） */
+  /** 账号名称。 */
   AccountName: string | null;
-  /** 账号描述信息 */
+  /** 账号描述信息。 */
   Remark: string | null;
-  /** 读写策略：r-只读，w-只写，rw-读写 */
+  /** 读写权限策略。- r：只读。- w：只写。- rw：读写。 */
   Privilege: string | null;
-  /** 路由策略：master-主节点，replication-从节点 */
+  /** 只读路由策略。- master：主节点。- replication：从节点。 */
   ReadonlyPolicy: string[] | null;
-  /** 子账号状态：1-账号变更中，2-账号有效，-4-账号已删除 */
+  /** 子账号状态.- 1：账号变更中。- 2：账号有效。- 4：账号已删除。 */
   Status: number | null;
 }
 
@@ -206,21 +206,21 @@ declare interface InstanceClusterShard {
 
 /** 实例枚举类型参数描述 */
 declare interface InstanceEnumParam {
-  /** 参数名 */
+  /** 参数名称。 */
   ParamName: string;
-  /** 参数类型：enum */
+  /** 参数类型，例如：Enum。 */
   ValueType: string;
-  /** 修改后是否需要重启：true，false */
+  /** 参数值修改后是否需要重启。- true：需要。- false：不需要。 */
   NeedRestart: string;
-  /** 参数默认值 */
+  /** 参数默认值。 */
   DefaultValue: string;
-  /** 当前运行参数值 */
+  /** 参数当前运行值。 */
   CurrentValue: string;
-  /** 参数说明 */
+  /** 参数说明。 */
   Tips: string;
-  /** 参数可取值 */
+  /** 参数可取的值。 */
   EnumValue: string[];
-  /** 参数状态, 1: 修改中， 2：修改完成 */
+  /** 参数修改状态。- 1: 修改中。- 2：修改完成。 */
   Status: number;
 }
 
@@ -250,21 +250,21 @@ declare interface InstanceIntegerParam {
 
 /** 实例多选项类型参数描述 */
 declare interface InstanceMultiParam {
-  /** 参数名 */
+  /** 参数名称。 */
   ParamName: string;
-  /** 参数类型：multi */
+  /** 参数类型。例如：multi。 */
   ValueType: string;
-  /** 修改后是否需要重启：true，false */
+  /** 参数修改后是否需要重启。- true：需要。- false：不需要。 */
   NeedRestart: string;
-  /** 参数默认值 */
+  /** 参数默认值。 */
   DefaultValue: string;
-  /** 当前运行参数值 */
+  /** 当前运行参数值。 */
   CurrentValue: string;
-  /** 参数说明 */
+  /** 参数说明。 */
   Tips: string;
-  /** 参数说明 */
+  /** 参数说明。 */
   EnumValue: string[];
-  /** 参数状态, 1: 修改中， 2：修改完成 */
+  /** 参数修改的状态。- 1：修改中。- 2：修改完成。 */
   Status: number;
 }
 
@@ -314,9 +314,9 @@ declare interface InstanceProxySlowlogDetail {
 
 /** 实例安全组信息 */
 declare interface InstanceSecurityGroupDetail {
-  /** 实例Id */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 安全组信息 */
+  /** 安全组信息，包括：安全组 ID、安全组名称、安全组出入站规则。 */
   SecurityGroupDetails: SecurityGroupDetail[];
 }
 
@@ -460,21 +460,21 @@ declare interface InstanceTagInfo {
 
 /** 实例字符型参数描述 */
 declare interface InstanceTextParam {
-  /** 参数名 */
+  /** 参数名称。 */
   ParamName: string;
-  /** 参数类型：text */
+  /** 参数类型。例如：text。 */
   ValueType: string;
-  /** 修改后是否需要重启：true，false */
+  /** 参数修改后是否需要重启。- true：需要。- false：不需要。 */
   NeedRestart: string;
-  /** 参数默认值 */
+  /** 参数默认值。 */
   DefaultValue: string;
-  /** 当前运行参数值 */
+  /** 参数当前运行值。 */
   CurrentValue: string;
-  /** 参数说明 */
+  /** 参数说明。 */
   Tips: string;
-  /** 参数可取值 */
+  /** 参数可取值。 */
   TextValue: string[];
-  /** 参数状态, 1: 修改中， 2：修改完成 */
+  /** 参数修改状态。- 1: 修改中。- 2：修改完成。 */
   Status: number;
 }
 
@@ -682,15 +682,15 @@ declare interface RedisCommonInstanceList {
 
 /** Redis节点的运行信息 */
 declare interface RedisNode {
-  /** 节点key的个数 */
+  /** Redis 节点上 Key 的个数。 */
   Keys: number;
-  /** 节点slot分布 */
+  /** Redis 节点 Slot 分布范围。例如：0-5460。 */
   Slot: string;
-  /** 节点的序列ID */
+  /** 节点的序列 ID。 */
   NodeId: string;
-  /** 节点的状态 */
+  /** 节点的状态。 */
   Status: string;
-  /** 节点角色 */
+  /** 节点角色。 */
   Role: string;
 }
 
@@ -708,13 +708,13 @@ declare interface RedisNodeInfo {
 
 /** Redis节点信息 */
 declare interface RedisNodes {
-  /** 节点ID */
+  /** 节点 ID。 */
   NodeId: string;
-  /** 节点角色 */
+  /** 节点角色。 */
   NodeRole: string;
-  /** 分片ID */
+  /** 分片 ID。 */
   ClusterId: number;
-  /** 可用区ID */
+  /** 可用区 ID。 */
   ZoneId: number;
 }
 
@@ -732,11 +732,11 @@ declare interface RegionConf {
   ZoneSet: ZoneCapacityConf[];
 }
 
-/** 实例节点信息 */
+/** 实例节点组信息 */
 declare interface ReplicaGroup {
-  /** 节点组ID */
+  /** 节点组 ID。 */
   GroupId: number;
-  /** 节点组的名称，主节点为空 */
+  /** 节点组的名称，主节点为空。 */
   GroupName: string;
   /** 节点的可用区ID，比如ap-guangzhou-1 */
   ZoneId: string;
@@ -774,31 +774,31 @@ declare interface SecurityGroup {
 
 /** 安全组详情 */
 declare interface SecurityGroupDetail {
-  /** 项目Id */
+  /** 项目ID。 */
   ProjectId: number;
-  /** 创建时间 */
+  /** 创建安全组的时间。 */
   CreateTime: string;
-  /** 安全组Id */
+  /** 安全组 ID。 */
   SecurityGroupId: string;
-  /** 安全组名称 */
+  /** 安全组名称。 */
   SecurityGroupName: string;
-  /** 安全组标记 */
+  /** 安全组标记。 */
   SecurityGroupRemark: string;
-  /** 安全组入站规则 */
+  /** 安全组入站规则，即控制访问数据库的来源。 */
   InboundRule: SecurityGroupsInboundAndOutbound[];
-  /** 安全组出站规则 */
+  /** 安全组出站规则。 */
   OutboundRule: SecurityGroupsInboundAndOutbound[];
 }
 
 /** 安全组出入规则 */
 declare interface SecurityGroupsInboundAndOutbound {
-  /** 执行动作 */
+  /** 标识出入数据库的IP与端口是否被允许。 */
   Action: string;
-  /** IP地址 */
+  /** 出入数据库的IP地址 */
   Ip: string;
-  /** 端口号 */
+  /** 端口号。 */
   Port: string;
-  /** 协议类型 */
+  /** 协议类型。 */
   Proto: string;
 }
 
@@ -822,23 +822,23 @@ declare interface SourceInfo {
 
 /** 任务信息详情 */
 declare interface TaskInfoDetail {
-  /** 任务Id */
+  /** 任务 ID。 */
   TaskId: number | null;
-  /** 开始时间 */
+  /** 任务开始时间。 */
   StartTime: string | null;
-  /** 任务类型 */
+  /** 任务类型。- FLOW_CREATE：创建实例。- FLOW_MODIFYCONNECTIONCONFIG：调整带宽连接数。- FLOW_MODIFYINSTANCEPASSWORDFREE：免密变更流程。- FLOW_CLEARNETWORK：VPC退还中。- FLOW_SETPWD：设置访问密码。- FLOW_EXPORSHR：扩缩容流程。- FLOW_UpgradeArch：实例架构升级流程。- FLOW_MODIFYINSTANCEPARAMS：修改实例参数。- FLOW_MODIFYINSTACEREADONLY：只读变更流程。- FLOW_CLOSE：关闭实例。- FLOW_DELETE：删除实例。- FLOW_OPEN_WAN：开启外网。- FLOW_CLEAN：清空实例。 - FLOW_MODIFYINSTANCEACCOUNT：修改实例账号。- FLOW_ENABLEINSTANCE_REPLICATE：开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE: 关闭副本只读。- FLOW_SWITCHINSTANCEVIP：交换实例 VIP。- FLOW_CHANGE_REPLICA_TO_MSTER：副本节点升主节点。- FLOW_BACKUPINSTANCE：备份实例。 */
   TaskType: string | null;
-  /** 实例名称 */
+  /** 实例名称。 */
   InstanceName: string | null;
-  /** 实例Id */
+  /** 实例 ID。 */
   InstanceId: string | null;
-  /** 项目Id */
+  /** 项目 ID。 */
   ProjectId: number | null;
-  /** 任务进度 */
+  /** 任务进度。 */
   Progress: number | null;
-  /** 结束时间 */
+  /** 任务执行结束时间。 */
   EndTime: string | null;
-  /** 任务状态 */
+  /** 任务执行状态。0：任务初始化。1：执行中。2：完成。4：失败。 */
   Result: number | null;
 }
 
@@ -999,15 +999,15 @@ declare interface ChangeMasterInstanceResponse {
 }
 
 declare interface ChangeReplicaToMasterRequest {
-  /** 实例Id */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 副本组Id，多AZ实例必填 */
+  /** 副本节点组 ID，请通过接口[DescribeInstanceZoneInfo](https://cloud.tencent.com/document/product/239/50312)获取多 AZ备节点组的 ID 信息。单 AZ，则无需配置该参数。 */
   GroupId?: number;
 }
 
 declare interface ChangeReplicaToMasterResponse {
-  /** 异步任务ID */
-  TaskId: number;
+  /** 异步任务ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1387,35 +1387,35 @@ declare interface DescribeCommonDBInstancesResponse {
 declare interface DescribeDBSecurityGroupsRequest {
   /** 数据库引擎名称，本接口取值：redis。 */
   Product: string;
-  /** 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeDBSecurityGroupsResponse {
   /** 安全组规则。 */
-  Groups: SecurityGroup[];
-  /** 安全组生效内网地址。 */
-  VIP: string;
-  /** 安全组生效内网端口。 */
-  VPort: string;
+  Groups?: SecurityGroup[];
+  /** 实例内网IPv4地址。 */
+  VIP?: string;
+  /** 内网端口。 */
+  VPort?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeInstanceAccountRequest {
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 分页大小 */
+  /** 分页大小。 */
   Limit: number;
-  /** 分页偏移量 */
+  /** 分页偏移量。取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset: number;
 }
 
 declare interface DescribeInstanceAccountResponse {
-  /** 账号详细信息 */
-  Accounts: Account[] | null;
-  /** 账号个数 */
-  TotalCount: number | null;
+  /** 账号详细信息。 */
+  Accounts?: Account[] | null;
+  /** 账号个数。 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1599,27 +1599,27 @@ declare interface DescribeInstanceMonitorTopNCmdTookResponse {
 }
 
 declare interface DescribeInstanceNodeInfoRequest {
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 列表大小 */
+  /** 列表大小。每页输出的节点信息大小。默认为 20，最多输出1000条。该字段已不再使用，请忽略。 */
   Limit?: number;
-  /** 偏移量 */
+  /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。该字段已不再使用，请忽略。 */
   Offset?: number;
 }
 
 declare interface DescribeInstanceNodeInfoResponse {
-  /** proxy节点数量 */
-  ProxyCount: number;
-  /** proxy节点信息 */
-  Proxy: ProxyNodes[] | null;
-  /** redis节点数量 */
-  RedisCount: number;
-  /** redis节点信息 */
-  Redis: RedisNodes[] | null;
-  /** tendis节点数量 */
-  TendisCount: number;
-  /** tendis节点信息 */
-  Tendis: TendisNodes[] | null;
+  /** Proxy节点数量。 */
+  ProxyCount?: number;
+  /** Proxy节点信息。 */
+  Proxy?: ProxyNodes[] | null;
+  /** Redis节点数量。 */
+  RedisCount?: number;
+  /** Redis节点信息。 */
+  Redis?: RedisNodes[] | null;
+  /** 该参数不再使用，请忽略。 */
+  TendisCount?: number;
+  /** 该参数不再使用，请忽略。 */
+  Tendis?: TendisNodes[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1643,33 +1643,33 @@ declare interface DescribeInstanceParamRecordsResponse {
 }
 
 declare interface DescribeInstanceParamsRequest {
-  /** 实例Id */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeInstanceParamsResponse {
-  /** 实例参数个数 */
-  TotalCount: number;
-  /** 实例枚举类型参数 */
-  InstanceEnumParam: InstanceEnumParam[];
-  /** 实例整型参数 */
-  InstanceIntegerParam: InstanceIntegerParam[];
-  /** 实例字符型参数 */
-  InstanceTextParam: InstanceTextParam[];
-  /** 实例多选项型参数 */
-  InstanceMultiParam: InstanceMultiParam[];
+  /** 参数列表总数量。 */
+  TotalCount?: number;
+  /** 实例枚举类型参数。 */
+  InstanceEnumParam?: InstanceEnumParam[];
+  /** 实例整型参数。 */
+  InstanceIntegerParam?: InstanceIntegerParam[];
+  /** 实例字符型参数。 */
+  InstanceTextParam?: InstanceTextParam[];
+  /** 实例多选项型参数。 */
+  InstanceMultiParam?: InstanceMultiParam[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeInstanceSecurityGroupRequest {
-  /** 实例列表 */
+  /** 实例 ID 列表。例如;["crs-f2ho5rsz\n"] */
   InstanceIds: string[];
 }
 
 declare interface DescribeInstanceSecurityGroupResponse {
-  /** 实例安全组信息 */
-  InstanceSecurityGroupsDetail: InstanceSecurityGroupDetail[];
+  /** 实例安全组信息。 */
+  InstanceSecurityGroupsDetail?: InstanceSecurityGroupDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1691,15 +1691,15 @@ declare interface DescribeInstanceShardsResponse {
 }
 
 declare interface DescribeInstanceZoneInfoRequest {
-  /** 实例Id，如：crs-6ubhgouj */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId?: string;
 }
 
 declare interface DescribeInstanceZoneInfoResponse {
-  /** 实例节点组的个数 */
-  TotalCount: number;
-  /** 实例节点组列表 */
-  ReplicaGroups: ReplicaGroup[];
+  /** 实例节点组的个数。 */
+  TotalCount?: number;
+  /** 实例节点组列表。 */
+  ReplicaGroups?: ReplicaGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1741,7 +1741,7 @@ declare interface DescribeInstancesRequest {
   AutoRenew?: number[];
   /** 计费模式。postpaid：按量计费。prepaid：包年包月。 */
   BillingMode?: string;
-  /** 实例类型。1：Redis 老集群版。2：Redis 2.8 主从版。3：CKV 主从版。4：CKV 集群版。5：Redis 2.8 单机版。6：Redis 4.0主从版。7：Redis 4.0 集群版。8：Redis 5.0 主从版。9：Redis 5.0 集群版。 */
+  /** 实例类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
   Type?: number;
   /** 设置搜索关键字数组，可根据实例ID、实例名称、完整IP地址查询实例。 */
   SearchKeys?: string[];
@@ -1871,25 +1871,25 @@ declare interface DescribeProjectSecurityGroupsResponse {
 }
 
 declare interface DescribeProxySlowLogRequest {
-  /** 实例Id */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 开始时间 */
+  /** 慢查询的开始时间。 */
   BeginTime: string;
-  /** 结束时间 */
+  /** 慢查询的结束时间。 */
   EndTime: string;
-  /** 慢查询阈值（单位：毫秒） */
+  /** 慢查询阈值，单位：毫秒。 */
   MinQueryTime?: number;
-  /** 页面大小 */
+  /** 分页大小。默认为 20，取值范围[20,1000]。 */
   Limit?: number;
-  /** 偏移量，取Limit整数倍 */
+  /** 偏移量，取Limit整数倍。 */
   Offset?: number;
 }
 
 declare interface DescribeProxySlowLogResponse {
-  /** 慢查询总数 */
-  TotalCount: number;
-  /** 慢查询详情 */
-  InstanceProxySlowLogDetail: InstanceProxySlowlogDetail[];
+  /** 慢查询总数。 */
+  TotalCount?: number;
+  /** 慢查询详情。 */
+  InstanceProxySlowLogDetail?: InstanceProxySlowlogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1943,7 +1943,7 @@ declare interface DescribeSlowLogRequest {
   EndTime: string;
   /** 慢查询平均执行时间阈值，单位：毫秒。 */
   MinQueryTime?: number;
-  /** 每个页面展示的慢查询条数，默认值为20。 */
+  /** 每个页面展示的慢查询条数，默认值为20。取值范围：[20,1000]。 */
   Limit?: number;
   /** 慢查询条数的偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
@@ -1981,37 +1981,37 @@ declare interface DescribeTaskInfoResponse {
 }
 
 declare interface DescribeTaskListRequest {
-  /** 实例Id */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId?: string;
-  /** 实例名称 */
+  /** 实例名称。 */
   InstanceName?: string;
-  /** 分页大小,默认20，上限不大于100 */
+  /** 每页输出的任务列表大小。默认为 20，最多输出100条。 */
   Limit?: number;
-  /** 偏移量，取Limit整数倍（自动向下取整） */
+  /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
-  /** 项目Id */
+  /** 项目 ID。登录 [Redis 控制台](https://console.cloud.tencent.com/redis)，在右上角的账号信息下拉菜单中，选择**项目管理**，即可获取对应的项目 ID。 */
   ProjectIds?: number[];
-  /** 任务类型 */
+  /** 任务类型。- FLOW_CREATE：创建实例。- FLOW_MODIFYCONNECTIONCONFIG：调整带宽连接数。- FLOW_MODIFYINSTANCEPASSWORDFREE：免密变更流程。- FLOW_CLEARNETWORK：VPC退还中。- FLOW_SETPWD：设置访问密码。- FLOW_EXPORSHR：扩缩容流程。- FLOW_UpgradeArch：实例架构升级流程。- FLOW_MODIFYINSTANCEPARAMS：修改实例参数。- FLOW_MODIFYINSTACEREADONLY：只读变更流程。- FLOW_CLOSE：关闭实例。- FLOW_DELETE：删除实例。- FLOW_OPEN_WAN：开启外网。- FLOW_CLEAN：清空实例。 - FLOW_MODIFYINSTANCEACCOUNT：修改实例账号。- FLOW_ENABLEINSTANCE_REPLICATE：开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE: 关闭副本只读。- FLOW_SWITCHINSTANCEVIP：交换实例 VIP。- FLOW_CHANGE_REPLICA_TO_MSTER：副本节点升主节点。- FLOW_BACKUPINSTANCE：备份实例。 */
   TaskTypes?: string[];
-  /** 起始时间 */
+  /** 任务执行的起始时间。格式如：2021-12-30 00:00:00。 */
   BeginTime?: string;
-  /** 终止时间 */
+  /** 任务运行的终止时间。格式如：2021-12-30 20:59:35 */
   EndTime?: string;
-  /** 任务状态 */
+  /** 该参数为内部使用，请忽略。 */
   TaskStatus?: number[];
-  /** 任务状态 */
+  /** 任务执行状态。- 0：任务初始化。- 1：执行中。- 2：完成。- 4：失败。 */
   Result?: number[];
-  /** 操作者Uin，该字段已废弃，使用OperateUin代替 */
+  /** 该字段已废弃，使用OperateUin代替，请忽略。 */
   OperatorUin?: number[];
-  /** 操作者Uin */
+  /** 操作者账号 ID，UIN。 */
   OperateUin?: string[];
 }
 
 declare interface DescribeTaskListResponse {
-  /** 任务总数 */
-  TotalCount: number;
-  /** 任务详细信息 */
-  Tasks: TaskInfoDetail[];
+  /** 任务总数。 */
+  TotalCount?: number;
+  /** 任务详细信息。 */
+  Tasks?: TaskInfoDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2187,17 +2187,17 @@ declare interface KillMasterGroupResponse {
 }
 
 declare interface ManualBackupInstanceRequest {
-  /** 待操作的实例ID，可通过 DescribeInstance接口返回值中的 InstanceId 获取。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 备份的备注信息 */
+  /** 手动备份任务的备注信息。 */
   Remark?: string;
-  /** 保存天数。0代表指定默认保留时间 */
+  /** 备份数据的保存天数。- 单位：天；默认值为7天；取值范围：[0.1825]。如果超过 7天，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请。- 如果不配置该参数，默认与自动备份的保留时间一致。- 如果未设置自动备份，默认为7天。 */
   StorageDays?: number;
 }
 
 declare interface ManualBackupInstanceResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

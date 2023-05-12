@@ -18,12 +18,22 @@ declare interface AlertDetail {
   Detail: string | null;
 }
 
+/** 空Aggregations结构体 */
+declare interface AlertListAggregations {
+  /** 名字 */
+  Name?: string | null;
+  /** 值 */
+  Value?: string | null;
+}
+
 /** 告警列表响应数据 */
 declare interface AlertListData {
   /** 总数 */
   Total: number | null;
   /** 返回列表 */
   AlertList: AlertType[] | null;
+  /** 聚合参数 */
+  Aggregations?: AlertListAggregations | null;
 }
 
 /** 告警字段 */
@@ -78,6 +88,20 @@ declare interface AlertType {
   AttackTactic: string | null;
   /** 资产子网 */
   VictimAssetSub: string | null;
+  /** 资产vpc */
+  VictimAssetVpc?: string | null;
+  /** 时间戳 */
+  Timestamp?: string | null;
+  /** 资产组名 */
+  AssetGroupName?: string[] | null;
+  /** 资产项目名 */
+  AssetProjectName?: string | null;
+  /** 失陷资产内容 */
+  VictimAssetContent?: string[] | null;
+  /** 错误报告状态 */
+  WrongReportStatus?: number | null;
+  /** 错误报告Id */
+  WrongReportConditionId?: number | null;
 }
 
 /** 资产类型 */
@@ -238,6 +262,18 @@ declare interface AssetDetail {
   EventRisk: string | null;
   /** 漏洞数量 */
   AssetVulNum: number | null;
+  /** 资产事件 */
+  AssetEventNum?: number | null;
+  /** cspm风险 */
+  AssetCspmRiskNum?: number | null;
+  /** 资产删除时间 */
+  SsaAssetDeleteTime?: string | null;
+  /** 费用类型 */
+  ChargeType?: string | null;
+  /** 地域 */
+  AssetRegionName?: string | null;
+  /** vpc信息 */
+  AssetVpcid?: string | null;
 }
 
 /** 资产列表 */
@@ -394,6 +430,58 @@ declare interface ConcernInfo {
   Concern: string | null;
   /** 最近数量 */
   StatisticsCount: number | null;
+  /** IP国家 */
+  IpCountry?: string | null;
+  /** IP省份 */
+  IpProvince?: string | null;
+  /** 结果 */
+  Result?: string | null;
+  /** 置信度 */
+  Confidence?: number | null;
+  /** 服务商 */
+  IpIsp?: string | null;
+  /** 是否基础设施 */
+  IpInfrastructure?: string | null;
+  /** 威胁类型 */
+  ThreatType?: string[] | null;
+  /** 威胁团伙 */
+  Groups?: string[] | null;
+  /** 状态威胁情报接口 */
+  Status?: string | null;
+  /** 恶意标签 */
+  Tags?: string[] | null;
+  /** 资产类型 */
+  VictimAssetType?: string | null;
+  /** 资产名 */
+  VictimAssetName?: string | null;
+  /** 注册者 */
+  DomainRegistrant?: string | null;
+  /** 注册机构 */
+  DomainRegisteredInstitution?: string | null;
+  /** 注册时间 */
+  DomainRegistrationTime?: string | null;
+  /** 文件名 */
+  FileName?: string | null;
+  /** MD5 */
+  FileMd5?: string | null;
+  /** 病毒名 */
+  VirusName?: string | null;
+  /** 文件路径 */
+  FilePath?: string | null;
+  /** 文件大小 */
+  FileSize?: string | null;
+  /** 进程名 */
+  ProcName?: string | null;
+  /** 进程ID */
+  Pid?: string | null;
+  /** 进程路径 */
+  ProcPath?: string | null;
+  /** 用户名 */
+  ProcUser?: string | null;
+  /** 已防御 */
+  DefendedCount?: number | null;
+  /** 仅检测 */
+  DetectedCount?: number | null;
   /** 可疑关注点字段 */
   SearchData: string | null;
   /** 可疑关注点字段 */
@@ -680,6 +768,10 @@ declare interface MappingResult {
   Region: string | null;
   /** 安全防护状态 */
   SecurityStatus: SecurityStatus[] | null;
+  /** 处置建议 */
+  DisposalRecommendation?: number | null;
+  /** 测绘类型 */
+  MappingType?: string | null;
 }
 
 /** DataSaEventPub */
@@ -861,9 +953,9 @@ declare interface SocProductionItem {
 /** 标签 */
 declare interface Tag {
   /** 数据库标识 */
-  Fid: number;
-  /** 标签名称 */
-  Fname: string;
+  Fid?: number;
+  /** 标签名称字段 */
+  Fname?: string;
 }
 
 /** 漏洞管理漏洞数据 */

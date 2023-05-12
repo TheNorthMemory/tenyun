@@ -949,6 +949,8 @@ declare interface DeleteSqlFiltersRequest {
   SessionToken: string;
   /** 限流任务ID列表。 */
   FilterIds: number[];
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  Product?: string;
 }
 
 declare interface DeleteSqlFiltersResponse {
@@ -1469,7 +1471,7 @@ declare interface DescribeSlowLogsRequest {
   Product: string;
   /** 实例id。 */
   InstanceId: string;
-  /** sql模版的md5值 */
+  /** sql模板的md5值 */
   Md5: string;
   /** 开始时间，如“2019-09-10 12:13:14”。 */
   StartTime: string;
@@ -1485,7 +1487,7 @@ declare interface DescribeSlowLogsRequest {
   Key?: string[];
   /** 用户 */
   User?: string[];
-  /** ip */
+  /** IP */
   Ip?: string[];
   /** 耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素 */
   Time?: number[];
@@ -1511,13 +1513,15 @@ declare interface DescribeSqlFiltersRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  Product?: string;
 }
 
 declare interface DescribeSqlFiltersResponse {
   /** 限流任务总数目。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 限流任务列表。 */
-  Items: SQLFilter[];
+  Items?: SQLFilter[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1673,13 +1677,15 @@ declare interface KillMySqlThreadsRequest {
   SqlExecId?: string;
   /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
   Product?: string;
+  /** 默认是ture, 记录下kill的记录，为了加快kill，可设置为false。 */
+  RecordHistory?: boolean;
 }
 
 declare interface KillMySqlThreadsResponse {
   /** kill完成的sql会话ID列表。 */
-  Threads: number[];
+  Threads?: number[];
   /** 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。 */
-  SqlExecId: string | null;
+  SqlExecId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2851,7 +2857,7 @@ declare interface Dbbrain {
   DescribeSecurityAuditLogExportTasks(data: DescribeSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAuditLogExportTasksResponse>;
   /** 获取慢日志统计柱状图 {@link DescribeSlowLogTimeSeriesStatsRequest} {@link DescribeSlowLogTimeSeriesStatsResponse} */
   DescribeSlowLogTimeSeriesStats(data: DescribeSlowLogTimeSeriesStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTimeSeriesStatsResponse>;
-  /** 获取慢SQL模版列表 {@link DescribeSlowLogTopSqlsRequest} {@link DescribeSlowLogTopSqlsResponse} */
+  /** 获取慢SQL模板列表 {@link DescribeSlowLogTopSqlsRequest} {@link DescribeSlowLogTopSqlsResponse} */
   DescribeSlowLogTopSqls(data: DescribeSlowLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTopSqlsResponse>;
   /** 获取慢日志来源地址统计分布图 {@link DescribeSlowLogUserHostStatsRequest} {@link DescribeSlowLogUserHostStatsResponse} */
   DescribeSlowLogUserHostStats(data: DescribeSlowLogUserHostStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogUserHostStatsResponse>;

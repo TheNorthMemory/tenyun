@@ -2126,6 +2126,10 @@ declare interface HeadTailTemplate {
   TailCandidateSet: string[];
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“； gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊； white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充； black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。默认值：stretch 。 */
   FillType: string;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  UpdateTime?: string;
 }
 
 /** 智能精彩集锦片段列表。 */
@@ -2758,6 +2762,10 @@ declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
   Input: AdaptiveDynamicStreamingTaskInput;
   /** 对视频转自适应码流任务的输出。 */
   Output: AdaptiveDynamicStreamingInfoItem;
+  /** 转自适应码流任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 转自适应码流任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 转动图任务结果类型 */
@@ -2776,6 +2784,10 @@ declare interface MediaProcessTaskAnimatedGraphicResult {
   Output: MediaAnimatedGraphicsItem | null;
   /** 转动图任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 转动图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 转动图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 对视频截图做封面任务结果类型 */
@@ -2794,6 +2806,10 @@ declare interface MediaProcessTaskCoverBySnapshotResult {
   Output: CoverBySnapshotTaskOutput;
   /** 对视频截图做封面任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 截图做封面任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 截图做封面任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 对视频截雪碧图任务结果类型 */
@@ -2812,6 +2828,10 @@ declare interface MediaProcessTaskImageSpriteResult {
   Output: MediaImageSpriteItem | null;
   /** 对视频截雪碧图任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 截雪碧图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 截雪碧图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 视频处理任务类型 */
@@ -2868,6 +2888,10 @@ declare interface MediaProcessTaskSampleSnapshotResult {
   Output: MediaSampleSnapshotItem | null;
   /** 对视频做采样截图任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 采样截图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 采样截图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 对视频按指定时间点截图任务结果类型 */
@@ -2886,6 +2910,10 @@ declare interface MediaProcessTaskSnapshotByTimeOffsetResult {
   Output: MediaSnapshotByTimeOffsetItem | null;
   /** 对视频按指定时间点截图任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 时间点截图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 时间点截图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 转码任务结果类型 */
@@ -4388,7 +4416,7 @@ declare interface SplitMediaTaskSegmentInfo {
 declare interface StatDataItem {
   /** 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。 */
   Time: string;
-  /** 数据大小。存储空间的数据，单位是字节。转码时长的数据，单位是秒。流量数据，单位是字节。带宽数据，单位是比特每秒。直播剪辑数据，单位是秒。 */
+  /** 数据大小。存储空间的数据，单位是字节。转码时长的数据，单位是秒。流量数据，单位是字节。带宽数据，单位是比特每秒。直播剪辑数据，单位是秒。轮播数据，单位是秒。 */
   Value: number;
 }
 
@@ -6129,7 +6157,7 @@ declare interface DescribeAnimatedGraphicsTemplatesResponse {
 }
 
 declare interface DescribeCDNStatDetailsRequest {
-  /** 查询指标，取值有：Traffic：流量，单位为 Byte。Bandwidth：带宽，单位为 Bps。Requests：请求数。 */
+  /** 查询指标，取值有：Traffic：流量，单位为 Byte。Bandwidth：带宽，单位为 Bps。Requests：请求数。QUICRequests：QUIC 请求数。 */
   Metric: string;
   /** 起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   StartTime: string;
@@ -6151,9 +6179,9 @@ declare interface DescribeCDNStatDetailsRequest {
 
 declare interface DescribeCDNStatDetailsResponse {
   /** 每条数据的时间粒度，单位：分钟。 */
-  DataInterval: number;
+  DataInterval?: number;
   /** CDN 用量数据。 */
-  Data: StatDataItem[];
+  Data?: StatDataItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

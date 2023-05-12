@@ -1828,6 +1828,8 @@ declare interface NetworkAuditRecord {
   AppId: number | null;
   /** 操作人uin */
   Uin: string;
+  /** 策略id */
+  PolicyId?: number | null;
 }
 
 /** 网络集群资产返回的结构体 */

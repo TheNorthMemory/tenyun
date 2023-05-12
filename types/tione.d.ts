@@ -286,6 +286,8 @@ declare interface DataConfig {
   CFSSource?: CFSConfig | null;
   /** 来自HDFS的数据 */
   HDFSSource?: HDFSConfig | null;
+  /** 配饰GooseFS的数据 */
+  GooseFSSource?: GooseFS | null;
 }
 
 /** 数据点 */
@@ -512,6 +514,12 @@ declare interface FrameworkVersion {
   TrainingModes: string[];
   /** 框架运行环境 */
   Environment?: string;
+}
+
+/** 配置GooseFS参数 */
+declare interface GooseFS {
+  /** goosefs实例id */
+  Id?: string | null;
 }
 
 /** gpu 详情 */
@@ -830,6 +838,12 @@ declare interface PointInfo {
   Y: number | null;
 }
 
+/** RDMA配置 */
+declare interface RDMAConfig {
+  /** 是否开启RDMA */
+  Enable?: boolean | null;
+}
+
 /** 资源配置 */
 declare interface ResourceConfigInfo {
   /** 角色，eg：PS、WORKER、DRIVER、EXECUTOR */
@@ -848,6 +862,8 @@ declare interface ResourceConfigInfo {
   InstanceNum?: number;
   /** 算力规格名称计算规格 (for后付费)，可选值如下：4C8G 8C16G 8C32G 16C32G6C64G24C48G24C96G32C64G32C128G8C40G V100*1 8C80G V100*2 32C160G V100*472C320G V100*832C128G T4*1 40C160G T4*2 80C32 */
   InstanceTypeAlias?: string;
+  /** RDMA配置 */
+  RDMAConfig?: RDMAConfig | null;
 }
 
 /** 资源组 */
@@ -1428,7 +1444,7 @@ declare interface TrainingTaskDetail {
   UpdateTime: string;
   /** 训练结束时间 */
   EndTime: string | null;
-  /** 计费金额信息，eg：2.00元/小时 (for后付费) */
+  /** 计费金额信息，eg：2.00元/小时 (按量计费) */
   BillingInfo: string | null;
   /** 预付费专用资源组名称 */
   ResourceGroupName: string | null;
@@ -1478,7 +1494,7 @@ declare interface TrainingTaskSetItem {
   FailureReason: string | null;
   /** 更新时间 */
   UpdateTime: string;
-  /** 计费金额信息，eg：2.00元/小时 (for后付费) */
+  /** 计费金额信息，eg：2.00元/小时 (按量计费) */
   BillingInfo: string;
   /** 预付费专用资源组名称 */
   ResourceGroupName: string;
@@ -1779,7 +1795,7 @@ declare interface CreateTrainingModelResponse {
 declare interface CreateTrainingTaskRequest {
   /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
-  /** 计费模式，eg：PREPAID预付费，即包年包月；POSTPAID_BY_HOUR按小时后付费 */
+  /** 计费模式，eg：PREPAID 包年包月（资源组）;POSTPAID_BY_HOUR 按量计费 */
   ChargeType: string;
   /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}] */
   ResourceConfigInfos: ResourceConfigInfo[];
@@ -1825,7 +1841,7 @@ declare interface CreateTrainingTaskRequest {
 
 declare interface CreateTrainingTaskResponse {
   /** 训练任务ID */
-  Id: string;
+  Id?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2467,9 +2483,9 @@ declare interface DescribeTrainingTasksRequest {
 
 declare interface DescribeTrainingTasksResponse {
   /** 训练任务集 */
-  TrainingTaskSet: TrainingTaskSetItem[];
+  TrainingTaskSet?: TrainingTaskSetItem[];
   /** 数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

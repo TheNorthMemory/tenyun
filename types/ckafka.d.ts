@@ -304,6 +304,14 @@ declare interface ConsumerGroup {
   SubscribedInfo: SubscribedInfo[];
 }
 
+/** 消费者组消费速度排行 */
+declare interface ConsumerGroupSpeed {
+  /** 消费者组名称 */
+  ConsumerGroupName: string;
+  /** 消费速度 Count/Minute */
+  Speed: number;
+}
+
 /** 消费组主题对象 */
 declare interface ConsumerGroupTopic {
   /** 主题ID */
@@ -1990,6 +1998,32 @@ declare interface TopicDetail {
   Tags: Tag[] | null;
 }
 
+/** topic 流量排行 */
+declare interface TopicFlowRanking {
+  /** 主题Id */
+  TopicId: string;
+  /** 主题名称 */
+  TopicName: string;
+  /** 分区数 */
+  PartitionNum: number;
+  /** 副本数 */
+  ReplicaNum: number;
+  /** Topic 流量 */
+  TopicTraffic: string;
+  /** Topic 消息堆积 */
+  MessageHeap: number;
+}
+
+/** topic 生产消息数据，消费者数据 */
+declare interface TopicFlowRankingResult {
+  /** Topic 流量数组 */
+  TopicFlow: TopicFlowRanking[];
+  /** 消费者组消费速度排行速度 */
+  ConsumeSpeed: ConsumerGroupSpeed[];
+  /** Topic 消息堆积/占用磁盘排行 */
+  TopicMessageHeap: TopicMessageHeapRanking[] | null;
+}
+
 /** topic副本及详细信息 */
 declare interface TopicInSyncReplicaInfo {
   /** 分区名称 */
@@ -2016,6 +2050,22 @@ declare interface TopicInSyncReplicaResult {
   TopicInSyncReplicaList: TopicInSyncReplicaInfo[];
   /** 总计个数 */
   TotalCount: number;
+}
+
+/** topic消息堆积、占用磁盘排行 */
+declare interface TopicMessageHeapRanking {
+  /** 主题ID */
+  TopicId: string | null;
+  /** 主题名称 */
+  TopicName: string | null;
+  /** 分区数 */
+  PartitionNum: number | null;
+  /** 副本数 */
+  ReplicaNum: number | null;
+  /** Topic 流量 */
+  TopicTraffic: string | null;
+  /** topic消息堆积/占用磁盘 */
+  MessageHeap: number | null;
 }
 
 /** Topic配置 */
@@ -3244,6 +3294,18 @@ declare interface DescribeRouteResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskStatusRequest {
+  /** 任务唯一标记 */
+  FlowId: number;
+}
+
+declare interface DescribeTaskStatusResponse {
+  /** 返回结果 */
+  Result?: TaskStatusResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicAttributesRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -3274,6 +3336,24 @@ declare interface DescribeTopicDetailRequest {
 declare interface DescribeTopicDetailResponse {
   /** 返回的主题详情实体 */
   Result: TopicDetailResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopicFlowRankingRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 排行类别(PRO-Topic生产流量/CON-Topic消费流量) */
+  RankingType: string;
+  /** 排行起始日期 */
+  BeginDate?: string;
+  /** 排行结束日期 */
+  EndDate?: string;
+}
+
+declare interface DescribeTopicFlowRankingResponse {
+  /** 流量排行 */
+  Result: TopicFlowRankingResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3860,6 +3940,13 @@ declare interface SendMessageResponse {
   RequestId?: string;
 }
 
+declare interface TaskStatusResponse {
+  /** 任务状态:0 成功1 失败2 进行中 */
+  Status: number;
+  /** 输出信息 */
+  Output: string | null;
+}
+
 declare interface TopicAttributesResponse {
   /** 主题 ID */
   TopicId: string;
@@ -4037,12 +4124,16 @@ declare interface Ckafka {
   DescribeRegion(data?: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;
   /** 查看路由信息 {@link DescribeRouteRequest} {@link DescribeRouteResponse} */
   DescribeRoute(data: DescribeRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteResponse>;
+  /** 查询任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
+  DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 获取主题列表 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 获取主题属性 {@link DescribeTopicAttributesRequest} {@link DescribeTopicAttributesResponse} */
   DescribeTopicAttributes(data: DescribeTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicAttributesResponse>;
   /** 获取主题列表详情 {@link DescribeTopicDetailRequest} {@link DescribeTopicDetailResponse} */
   DescribeTopicDetail(data: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
+  /** Topic 流量排行 {@link DescribeTopicFlowRankingRequest} {@link DescribeTopicFlowRankingResponse} */
+  DescribeTopicFlowRanking(data: DescribeTopicFlowRankingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicFlowRankingResponse>;
   /** 查询topic生产端连接信息 {@link DescribeTopicProduceConnectionRequest} {@link DescribeTopicProduceConnectionResponse} */
   DescribeTopicProduceConnection(data: DescribeTopicProduceConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicProduceConnectionResponse>;
   /** 查询订阅某主题消息分组信息 {@link DescribeTopicSubscribeGroupRequest} {@link DescribeTopicSubscribeGroupResponse} */

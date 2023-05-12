@@ -322,14 +322,16 @@ declare interface FlowApproverDetail {
 
 /** 签署链接信息 */
 declare interface FlowApproverUrlInfo {
-  /** 签署链接，注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
+  /** 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
   SignUrl?: string | null;
-  /** 签署人手机号 */
-  ApproverMobile?: string | null;
-  /** 签署人姓名 */
-  ApproverName?: string | null;
   /** 签署人类型 1-个人 */
   ApproverType?: number | null;
+  /** 签署人姓名 */
+  ApproverName?: string | null;
+  /** 签署人手机号 */
+  ApproverMobile?: string | null;
+  /** 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
+  LongUrl?: string | null;
 }
 
 /** 流程信息摘要 */
@@ -388,6 +390,8 @@ declare interface FlowCreateApprover {
   RegisterInfo?: RegisterInfo;
   /** 签署人个性化能力值 */
   ApproverOption?: ApproverOption;
+  /** 签署完前端跳转的url，暂未使用 */
+  JumpUrl?: string | null;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -846,6 +850,22 @@ declare interface CreateBatchCancelFlowUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateChannelSubOrganizationModifyQrCodeRequest {
+  /** 操作人 */
+  Operator: UserInfo;
+  /** 应用编号 */
+  ApplicationId: string;
+}
+
+declare interface CreateChannelSubOrganizationModifyQrCodeResponse {
+  /** 二维码下载链接 */
+  QrCodeUrl?: string;
+  /** 二维码失效时间 unix 时间戳 精确到秒 */
+  ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConvertTaskApiRequest {
   /** 资源类型 取值范围doc,docx,html,xls,xlsx之一 */
   ResourceType: string;
@@ -1061,6 +1081,8 @@ declare interface CreateFlowSignUrlRequest {
   FlowApproverInfos: FlowCreateApprover[];
   /** 用户信息，此结构体UserId必填 */
   Operator?: UserInfo;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
   /** 机构信息，暂未开放 */
   Organization?: OrganizationInfo;
 }
@@ -1769,6 +1791,8 @@ declare interface Ess {
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
   /** 批量撤销签署流程 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
+  /** 生成子客编辑企业信息二维码 {@link CreateChannelSubOrganizationModifyQrCodeRequest} {@link CreateChannelSubOrganizationModifyQrCodeResponse} */
+  CreateChannelSubOrganizationModifyQrCode(data: CreateChannelSubOrganizationModifyQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelSubOrganizationModifyQrCodeResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */

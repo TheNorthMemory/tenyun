@@ -3718,6 +3718,8 @@ declare interface DescribeDatabaseInfoListRequest {
 }
 
 declare interface DescribeDatabaseInfoListResponse {
+  /** 数据库列表 */
+  DatabaseInfo?: DatabaseInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

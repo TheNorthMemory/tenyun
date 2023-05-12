@@ -308,14 +308,16 @@ declare interface FlowApproverInfo {
 
 /** 签署人签署链接信息 */
 declare interface FlowApproverUrlInfo {
-  /** 签署链接，注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
+  /** 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
   SignUrl: string;
-  /** 签署人手机号 */
-  Mobile: string;
-  /** 签署人姓名 */
-  Name: string;
   /** 签署人类型 PERSON-个人 */
   ApproverType: string;
+  /** 签署人姓名 */
+  Name: string;
+  /** 签署人手机号 */
+  Mobile: string;
+  /** 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
+  LongUrl?: string | null;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */

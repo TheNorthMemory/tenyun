@@ -110,6 +110,8 @@ declare interface ObjectDetail {
   Location: Location;
   /** 该参数用于返回命中的实体二级标签。 */
   SubLabel: string;
+  /** 该参数用于返回命中的人脸id */
+  ObjectId?: string | null;
 }
 
 /** 用于返回实体检测结果详情 */
@@ -399,6 +401,10 @@ declare namespace V20200713 {
     Location: Location;
     /** 二级标签名称 */
     SubLabel: string;
+    /** 图库或人脸库id */
+    GroupId?: string | null;
+    /** 图或人脸id */
+    ObjectId?: string | null;
   }
 
   /** 实体检测结果详情：实体、广告台标、二维码 */
@@ -459,6 +465,24 @@ declare namespace V20200713 {
     Rate: number;
     /** OCR文本命中的二级标签 */
     SubLabel: string;
+  }
+
+  /** 识别类型标签结果信息 */
+  interface RecognitionResult {
+    /** 当前可能的取值：Scene（图片场景模型） */
+    Label?: string | null;
+    /** Label对应模型下的识别标签信息 */
+    Tags?: RecognitionTag[] | null;
+  }
+
+  /** 识别类型标签信息 */
+  interface RecognitionTag {
+    /** 标签名称 */
+    Name?: string | null;
+    /** 置信分：0～100，数值越大表示置信度越高 */
+    Score?: number | null;
+    /** 标签位置信息，若模型无位置信息，则可能为零值 */
+    Location?: Location | null;
   }
 
   /** User结果 */
@@ -527,6 +551,8 @@ declare namespace V20200713 {
     BizType?: string;
     /** 扩展字段，用于特定信息返回，不同客户/Biztype下返回信息不同。 */
     Extra?: string | null;
+    /** 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息 */
+    RecognitionResults?: RecognitionResult[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

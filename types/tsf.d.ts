@@ -4049,6 +4049,20 @@ declare interface DeleteFileConfigResponse {
   RequestId?: string;
 }
 
+declare interface DeleteGatewayApiRequest {
+  /** 分组ID */
+  GroupId: string;
+  /** Api ID 数组 */
+  ApiList: string[];
+}
+
+declare interface DeleteGatewayApiResponse {
+  /** 是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteGroupRequest {
   /** 部署组ID */
   GroupId: string;
@@ -7239,6 +7253,8 @@ declare interface Tsf {
   DeleteContainerGroup(data: DeleteContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContainerGroupResponse>;
   /** 删除文件配置项 {@link DeleteFileConfigRequest} {@link DeleteFileConfigResponse} */
   DeleteFileConfig(data: DeleteFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileConfigResponse>;
+  /** 批量删除API {@link DeleteGatewayApiRequest} {@link DeleteGatewayApiResponse} */
+  DeleteGatewayApi(data: DeleteGatewayApiRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayApiResponse>;
   /** 删除虚拟机部署组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** 批量删除镜像版本 {@link DeleteImageTagsRequest} {@link DeleteImageTagsResponse} */

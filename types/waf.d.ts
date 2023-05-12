@@ -846,15 +846,15 @@ declare interface AddCustomWhiteRuleResponse {
 
 declare interface AddDomainWhiteRuleRequest {
   /** 需要添加的域名 */
-  Domain: string;
+  Domain?: string;
   /** 需要添加的规则 */
-  Rules: number[];
+  Rules?: number[];
   /** 需要添加的规则url */
-  Url: string;
+  Url?: string;
   /** 规则的方法 */
-  Function: string;
+  Function?: string;
   /** 规则的开关 */
-  Status: number;
+  Status?: number;
 }
 
 declare interface AddDomainWhiteRuleResponse {
@@ -1014,9 +1014,9 @@ declare interface DeleteCustomWhiteRuleResponse {
 
 declare interface DeleteDomainWhiteRulesRequest {
   /** 需要删除的规则域名 */
-  Domain: string;
+  Domain?: string;
   /** 需要删除的白名单规则 */
-  Ids: number[];
+  Ids?: number[];
 }
 
 declare interface DeleteDomainWhiteRulesResponse {
@@ -1598,17 +1598,17 @@ declare interface ModifyCustomWhiteRuleResponse {
 
 declare interface ModifyDomainWhiteRuleRequest {
   /** 需要更改的规则的域名 */
-  Domain: string;
+  Domain?: string;
   /** 白名单id */
-  Id: number;
+  Id?: number;
   /** 规则的id列表 */
-  Rules: number[];
+  Rules?: number[];
   /** 规则匹配路径 */
-  Url: string;
+  Url?: string;
   /** 规则匹配方法 */
-  Function: string;
-  /** 规则的开关状态 */
-  Status: number;
+  Function?: string;
+  /** 规则的开关状态，0表示关闭开关，1表示打开开关 */
+  Status?: number;
 }
 
 declare interface ModifyDomainWhiteRuleResponse {
@@ -1750,11 +1750,11 @@ declare interface SearchAttackLogResponse {
 
 declare interface SwitchDomainRulesRequest {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 规则列表 */
-  Ids: number[];
+  Ids?: number[];
   /** 开关状态 */
-  Status: number;
+  Status?: number;
   /** 设置为观察模式原因 */
   Reason?: number;
 }
@@ -1792,7 +1792,7 @@ declare interface Waf {
   /** 添加精准白名单规则 {@link AddCustomWhiteRuleRequest} {@link AddCustomWhiteRuleResponse} */
   AddCustomWhiteRule(data: AddCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomWhiteRuleResponse>;
   /** 增加域名规则白名单 {@link AddDomainWhiteRuleRequest} {@link AddDomainWhiteRuleResponse} */
-  AddDomainWhiteRule(data: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
+  AddDomainWhiteRule(data?: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
   /** 添加SAAS-WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
@@ -1806,7 +1806,7 @@ declare interface Waf {
   /** 删除精准白名单规则 {@link DeleteCustomWhiteRuleRequest} {@link DeleteCustomWhiteRuleResponse} */
   DeleteCustomWhiteRule(data: DeleteCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomWhiteRuleResponse>;
   /** 删除域名规则白名单 {@link DeleteDomainWhiteRulesRequest} {@link DeleteDomainWhiteRulesResponse} */
-  DeleteDomainWhiteRules(data: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
+  DeleteDomainWhiteRules(data?: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
   /** 删除访问日志下载记录 {@link DeleteDownloadRecordRequest} {@link DeleteDownloadRecordResponse} */
   DeleteDownloadRecord(data: DeleteDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDownloadRecordResponse>;
   /** Waf IP黑白名单Delete接口 {@link DeleteIpAccessControlRequest} {@link DeleteIpAccessControlResponse} */
@@ -1870,7 +1870,7 @@ declare interface Waf {
   /** 编辑精准白名单 {@link ModifyCustomWhiteRuleRequest} {@link ModifyCustomWhiteRuleResponse} */
   ModifyCustomWhiteRule(data: ModifyCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
-  ModifyDomainWhiteRule(data: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
+  ModifyDomainWhiteRule(data?: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
   /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
   /** 配置WAF自动封禁模块状态 {@link ModifyWafAutoDenyStatusRequest} {@link ModifyWafAutoDenyStatusResponse} */
@@ -1884,7 +1884,7 @@ declare interface Waf {
   /** 搜索CLS新版本攻击日志 {@link SearchAttackLogRequest} {@link SearchAttackLogResponse} */
   SearchAttackLog(data: SearchAttackLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAttackLogResponse>;
   /** 切换域名的规则开关 {@link SwitchDomainRulesRequest} {@link SwitchDomainRulesResponse} */
-  SwitchDomainRules(data: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
+  SwitchDomainRules(data?: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
   /** Waf IP黑白名单Upsert接口 {@link UpsertIpAccessControlRequest} {@link UpsertIpAccessControlResponse} */
   UpsertIpAccessControl(data: UpsertIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertIpAccessControlResponse>;
 }

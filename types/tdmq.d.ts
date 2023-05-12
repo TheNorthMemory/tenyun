@@ -1556,6 +1556,30 @@ declare interface CreateEnvironmentRoleResponse {
   RequestId?: string;
 }
 
+declare interface CreateRabbitMQUserRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 用户名，登录时使用 */
+  User: string;
+  /** 密码，登录时使用 */
+  Password: string;
+  /** 描述 */
+  Description?: string;
+  /** 用户标签，用于决定改用户访问RabbitMQ Management的权限范围management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户 */
+  Tags?: string[];
+  /** 该用户的最大连接数，不填写则不限制 */
+  MaxConnections?: number;
+  /** 该用户的最大channel数，不填写则不限制 */
+  MaxChannels?: number;
+}
+
+declare interface CreateRabbitMQUserResponse {
+  /** 用户名，登录时使用 */
+  User?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRabbitMQVipInstanceRequest {
   /** 可用区 */
   ZoneIds: number[];
@@ -1584,6 +1608,24 @@ declare interface CreateRabbitMQVipInstanceResponse {
   TranId?: string | null;
   /** 实例Id */
   InstanceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRabbitMQVirtualHostRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** vhost名 */
+  VirtualHost: string;
+  /** 描述 */
+  Description?: string;
+  /** 消息轨迹开关,true打开,false关闭,默认关闭 */
+  TraceFlag?: boolean;
+}
+
+declare interface CreateRabbitMQVirtualHostResponse {
+  /** vhost名 */
+  VirtualHost: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2807,6 +2849,8 @@ declare interface DescribeSubscriptionsResponse {
 declare interface DescribeTopicsRequest {
   /** 环境（命名空间）名称。 */
   EnvironmentId: string;
+  /** Pulsar 集群的ID */
+  ClusterId: string;
   /** 主题名模糊匹配。 */
   TopicName?: string;
   /** 起始下标，不填默认为0。 */
@@ -2815,8 +2859,6 @@ declare interface DescribeTopicsRequest {
   Limit?: number;
   /** topic类型描述：0：非持久非分区主题类型；1：非持久分区主题类型；2：持久非分区主题类型；3：持久分区主题类型； */
   TopicType?: number;
-  /** Pulsar 集群的ID */
-  ClusterId?: string;
   /** * TopicName按照主题名字查询，精确查询。类型：String必选：否 */
   Filters?: Filter[];
   /** 创建来源：1：用户创建2：系统创建 */
@@ -2825,9 +2867,9 @@ declare interface DescribeTopicsRequest {
 
 declare interface DescribeTopicsResponse {
   /** 主题集合数组。 */
-  TopicSets: Topic[];
+  TopicSets?: Topic[];
   /** 主题数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3417,8 +3459,12 @@ declare interface Tdmq {
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
   /** 创建环境角色授权 {@link CreateEnvironmentRoleRequest} {@link CreateEnvironmentRoleResponse} */
   CreateEnvironmentRole(data: CreateEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentRoleResponse>;
+  /** 创建RabbitMQ的用户 {@link CreateRabbitMQUserRequest} {@link CreateRabbitMQUserResponse} */
+  CreateRabbitMQUser(data: CreateRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQUserResponse>;
   /** 创建RabbitMQ专享版实例 {@link CreateRabbitMQVipInstanceRequest} {@link CreateRabbitMQVipInstanceResponse} */
   CreateRabbitMQVipInstance(data: CreateRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQVipInstanceResponse>;
+  /** 创建RabbitMQ的vhost {@link CreateRabbitMQVirtualHostRequest} {@link CreateRabbitMQVirtualHostResponse} */
+  CreateRabbitMQVirtualHost(data: CreateRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQVirtualHostResponse>;
   /** 创建RocketMQ集群 {@link CreateRocketMQClusterRequest} {@link CreateRocketMQClusterResponse} */
   CreateRocketMQCluster(data: CreateRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQClusterResponse>;
   /** 创建RocketMQ消费组 {@link CreateRocketMQGroupRequest} {@link CreateRocketMQGroupResponse} */

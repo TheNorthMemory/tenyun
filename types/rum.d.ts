@@ -148,6 +148,8 @@ declare interface RumProject {
   IsStar: number | null;
   /** 项目状态(1 创建中，2 运行中，3 异常，4 重启中，5 停止中，6 已停止， 7 销毁中，8 已销毁) */
   ProjectStatus: number | null;
+  /** 日志接入点，用户忽略。 */
+  AccessPoint?: string | null;
 }
 
 /** rum 日志对象 */

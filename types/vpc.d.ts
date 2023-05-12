@@ -724,7 +724,7 @@ declare interface EndPointService {
 declare interface Filter {
   /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
   Name: string;
-  /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
+  /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。当值类型为布尔类型时，可直接取值为字符串"TRUE"或 "FALSE"。 */
   Values: string[];
 }
 
@@ -1486,7 +1486,7 @@ declare interface Route {
   DestinationCidrBlock: string;
   /** 下一跳类型，目前我们支持的类型有：CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：NAT网关; NORMAL_CVM：普通云服务器；EIP：云服务器的公网IP；LOCAL_GATEWAY：本地网关。 */
   GatewayType: string;
-  /** 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。 */
+  /** 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。特殊说明：GatewayType为NORMAL_CVM时，GatewayId填写实例的内网IP。 */
   GatewayId: string;
   /** 路由策略ID。IPv4路由策略ID是有意义的值，IPv6路由策略是无意义的值0。后续建议完全使用字符串唯一ID `RouteItemId`操作路由策略。该字段在删除时必填，其他字段无需填写。 */
   RouteId?: number;
@@ -1600,6 +1600,12 @@ declare interface SecurityGroupLimitSet {
   SecurityGroupInstanceLimit: number;
   /** 实例关联安全组数 */
   InstanceSecurityGroupLimit: number;
+  /** 安全组展开后的规则数限制 */
+  SecurityGroupExtendedPolicyLimit?: number;
+  /** 被引用的安全组关联CVM、ENI的实例配额 */
+  SecurityGroupReferedCvmAndEniLimit?: number;
+  /** 被引用的安全组关联数据库、LB等服务实例配额 */
+  SecurityGroupReferedSvcLimit?: number;
 }
 
 /** 安全组规则对象 */
@@ -1612,7 +1618,7 @@ declare interface SecurityGroupPolicy {
   Port?: string;
   /** 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。 */
   ServiceTemplate?: ServiceTemplateSpecification;
-  /** 网段或IP(互斥)。 */
+  /** 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。 */
   CidrBlock?: string;
   /** 网段或IPv6(互斥)。 */
   Ipv6CidrBlock?: string;
@@ -1631,11 +1637,11 @@ declare interface SecurityGroupPolicy {
 /** 安全组规则集合 */
 declare interface SecurityGroupPolicySet {
   /** 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。 */
-  Version?: string;
+  Version?: string | null;
   /** 出站规则。 */
-  Egress?: SecurityGroupPolicy[];
+  Egress?: SecurityGroupPolicy[] | null;
   /** 入站规则。 */
-  Ingress?: SecurityGroupPolicy[];
+  Ingress?: SecurityGroupPolicy[] | null;
 }
 
 /** SecurityPolicyDatabase策略 */
@@ -2605,7 +2611,7 @@ declare interface CreateAddressTemplateRequest {
 
 declare interface CreateAddressTemplateResponse {
   /** IP地址模板对象。 */
-  AddressTemplate: AddressTemplate;
+  AddressTemplate?: AddressTemplate;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3521,7 +3527,7 @@ declare interface DeleteDirectConnectGatewayResponse {
 }
 
 declare interface DeleteFlowLogRequest {
-  /** 流日志唯一ID */
+  /** 流日志唯一ID。 */
   FlowLogId: string;
   /** 私用网络ID或者统一ID，建议使用统一ID，删除云联网流日志时，可不填，其他流日志类型必填。 */
   VpcId?: string;
@@ -3929,9 +3935,9 @@ declare interface DescribeAssistantCidrRequest {
 
 declare interface DescribeAssistantCidrResponse {
   /** 符合条件的辅助CIDR数组。 */
-  AssistantCidrSet: AssistantCidr[] | null;
+  AssistantCidrSet?: AssistantCidr[] | null;
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4279,14 +4285,14 @@ declare interface DescribeDirectConnectGatewaysResponse {
 }
 
 declare interface DescribeFlowLogRequest {
-  /** 私用网络ID或者统一ID，建议使用统一ID */
+  /** 私用网络ID或者统一ID，建议使用统一ID。 */
   VpcId: string;
-  /** 流日志唯一ID */
+  /** 流日志唯一ID。 */
   FlowLogId: string;
 }
 
 declare interface DescribeFlowLogResponse {
-  /** 流日志信息 */
+  /** 流日志信息。 */
   FlowLog?: FlowLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4665,9 +4671,9 @@ declare interface DescribeNetworkAclsRequest {
 
 declare interface DescribeNetworkAclsResponse {
   /** 实例详细信息列表。 */
-  NetworkAclSet: NetworkAcl[];
+  NetworkAclSet?: NetworkAcl[];
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5161,7 +5167,7 @@ declare interface DescribeVpcPrivateIpAddressesRequest {
 
 declare interface DescribeVpcPrivateIpAddressesResponse {
   /** 内网`IP`地址信息列表。 */
-  VpcPrivateIpAddressSet: VpcPrivateIpAddress[];
+  VpcPrivateIpAddressSet?: VpcPrivateIpAddress[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6013,13 +6019,13 @@ declare interface ModifyDirectConnectGatewayAttributeResponse {
 }
 
 declare interface ModifyFlowLogAttributeRequest {
-  /** 流日志唯一ID */
+  /** 流日志唯一ID。 */
   FlowLogId: string;
   /** 私用网络ID或者统一ID，建议使用统一ID，修改云联网流日志属性时可不填，其他流日志类型必填。 */
   VpcId?: string;
-  /** 流日志实例名字 */
+  /** 流日志实例名字。 */
   FlowLogName?: string;
-  /** 流日志实例描述 */
+  /** 流日志实例描述。 */
   FlowLogDescription?: string;
 }
 

@@ -162,6 +162,10 @@ declare interface DeviceUser {
   UserId: string;
   /** 用户角色 1所有者，0：其他分享者 */
   Role: number;
+  /** 家庭ID，所有者带该参数 */
+  FamilyId?: string | null;
+  /** 家庭名称，所有者带该参数 */
+  FamilyName?: string | null;
 }
 
 /** ProductId -> DeviceName */
@@ -1597,7 +1601,7 @@ declare interface GetFamilyDeviceUserListRequest {
 
 declare interface GetFamilyDeviceUserListResponse {
   /** 设备的用户列表 */
-  UserList: DeviceUser[] | null;
+  UserList?: DeviceUser[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

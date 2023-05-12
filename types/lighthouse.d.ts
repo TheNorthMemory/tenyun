@@ -12,6 +12,16 @@ declare interface AttachDetail {
   MaxAttachCount: number;
 }
 
+/** 自动挂载并初始化该数据盘。 */
+declare interface AutoMountConfiguration {
+  /** 待挂载的实例ID。指定的实例必须处于“运行中”状态。 */
+  InstanceId: string;
+  /** 实例内的挂载点。仅Linux操作系统的实例可传入该参数, 不传则默认挂载在“/data/disk”路径下。 */
+  MountPoint?: string;
+  /** 文件系统类型。取值: “ext4”、“xfs”。仅Linux操作系统的实例可传入该参数, 不传则默认为“ext4”。 */
+  FileSystemType?: string;
+}
+
 /** 描述了镜像信息。 */
 declare interface Blueprint {
   /** 镜像 ID ，是 Blueprint 的唯一标识。 */
@@ -272,7 +282,7 @@ declare interface DiskBackupDeniedActions {
 declare interface DiskChargePrepaid {
   /** 新购周期。 */
   Period: number;
-  /** 续费标识。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。 */
   RenewFlag?: string;
   /** 新购单位. 默认值: "m"。 */
   TimeUnit?: string;
@@ -616,13 +626,13 @@ declare interface RegionInfo {
 
 /** 续费云硬盘包年包月相关参数设置 */
 declare interface RenewDiskChargePrepaid {
-  /** 新购周期。 */
+  /** 续费周期。 */
   Period?: number;
-  /** 续费标识。 */
+  /** 续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。 */
   RenewFlag?: string;
-  /** 周期单位. 默认值: "m"。 */
+  /** 周期单位。取值范围：“m”(月)。默认值: "m"。 */
   TimeUnit?: string;
-  /** 当前实例到期时间。 */
+  /** 当前实例到期时间。如“2018-01-01 00:00:00”。指定该参数即可对齐云硬盘所挂载的实例到期时间。该参数与Period必须指定其一，且不支持同时指定。 */
   CurInstanceDeadline?: string;
 }
 
@@ -823,7 +833,7 @@ declare interface AttachDisksRequest {
   DiskIds: string[];
   /** 实例ID。 */
   InstanceId: string;
-  /** 续费标识。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。 */
   RenewFlag?: string;
 }
 
@@ -860,6 +870,34 @@ declare interface CreateDiskBackupRequest {
 declare interface CreateDiskBackupResponse {
   /** 备份点ID。 */
   DiskBackupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDisksRequest {
+  /** 可用区。可通过[DescribeZones](https://cloud.tencent.com/document/product/1207/57513)返回值中的Zone获取。 */
+  Zone: string;
+  /** 云硬盘大小, 单位: GB。 */
+  DiskSize: number;
+  /** 云硬盘介质类型。取值: "CLOUD_PREMIUM"(高性能云盘), "CLOUD_SSD"(SSD云硬盘)。 */
+  DiskType: string;
+  /** 云硬盘包年包月相关参数设置。 */
+  DiskChargePrepaid: DiskChargePrepaid;
+  /** 云硬盘名称。最大长度60。 */
+  DiskName?: string;
+  /** 云硬盘个数。取值范围: [1, 30]。默认值: 1。 */
+  DiskCount?: number;
+  /** 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置1个云硬盘备份点配额。 */
+  DiskBackupQuota?: number;
+  /** 是否自动使用代金券。默认不使用。 */
+  AutoVoucher?: boolean;
+  /** 自动挂载并初始化数据盘。 */
+  AutoMountConfiguration?: AutoMountConfiguration;
+}
+
+declare interface CreateDisksResponse {
+  /** 当通过本接口来创建云硬盘时会返回该参数，表示一个或多个云硬盘ID。返回云硬盘ID列表并不代表云硬盘创建成功。可根据 [DescribeDisks](https://cloud.tencent.com/document/product/1207/66093) 接口查询返回的DiskSet中对应云硬盘的ID的状态来判断创建是否完成；如果云硬盘状态由“PENDING”变为“UNATTACHED”或“ATTACHED”，则为创建成功。 */
+  DiskIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1626,6 +1664,16 @@ declare interface InquirePriceRenewInstancesResponse {
   RequestId?: string;
 }
 
+declare interface IsolateDisksRequest {
+  /** 云硬盘ID列表。一个或多个待操作的云硬盘ID。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。每次请求退还数据盘数量总计上限为20。 */
+  DiskIds: string[];
+}
+
+declare interface IsolateDisksResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface IsolateInstancesRequest {
   /** 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求退还实例和数据盘数量总计上限为20。 */
   InstanceIds: string[];
@@ -1788,6 +1836,20 @@ declare interface RebootInstancesResponse {
   RequestId?: string;
 }
 
+declare interface RenewDisksRequest {
+  /** 云硬盘ID列表。一个或多个待操作的云硬盘ID。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。每次请求续费数据盘数量总计上限为50。 */
+  DiskIds: string[];
+  /** 续费云硬盘包年包月相关参数设置。 */
+  RenewDiskChargePrepaid: RenewDiskChargePrepaid;
+  /** 是否自动使用代金券。默认不使用。 */
+  AutoVoucher?: boolean;
+}
+
+declare interface RenewDisksResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewInstancesRequest {
   /** 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
@@ -1897,6 +1959,8 @@ declare interface Lighthouse {
   CreateBlueprint(data: CreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlueprintResponse>;
   /** 创建云硬盘备份点 {@link CreateDiskBackupRequest} {@link CreateDiskBackupResponse} */
   CreateDiskBackup(data: CreateDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiskBackupResponse>;
+  /** 创建云硬盘 {@link CreateDisksRequest} {@link CreateDisksResponse} */
+  CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** 添加防火墙规则 {@link CreateFirewallRulesRequest} {@link CreateFirewallRulesResponse} */
   CreateFirewallRules(data: CreateFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirewallRulesResponse>;
   /** 创建实例快照 {@link CreateInstanceSnapshotRequest} {@link CreateInstanceSnapshotResponse} */
@@ -1995,6 +2059,8 @@ declare interface Lighthouse {
   InquirePriceRenewDisks(data: InquirePriceRenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewDisksResponse>;
   /** 续费实例询价 {@link InquirePriceRenewInstancesRequest} {@link InquirePriceRenewInstancesResponse} */
   InquirePriceRenewInstances(data: InquirePriceRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewInstancesResponse>;
+  /** 隔离云硬盘 {@link IsolateDisksRequest} {@link IsolateDisksResponse} */
+  IsolateDisks(data: IsolateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDisksResponse>;
   /** 隔离实例 {@link IsolateInstancesRequest} {@link IsolateInstancesResponse} */
   IsolateInstances(data: IsolateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstancesResponse>;
   /** 修改镜像属性 {@link ModifyBlueprintAttributeRequest} {@link ModifyBlueprintAttributeResponse} */
@@ -2021,6 +2087,8 @@ declare interface Lighthouse {
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
   /** 重启实例 {@link RebootInstancesRequest} {@link RebootInstancesResponse} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
+  /** 续费云硬盘 {@link RenewDisksRequest} {@link RenewDisksResponse} */
+  RenewDisks(data: RenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDisksResponse>;
   /** 续费实例 {@link RenewInstancesRequest} {@link RenewInstancesResponse} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
   /** 重新申请关联云联网 {@link ResetAttachCcnRequest} {@link ResetAttachCcnResponse} */

@@ -634,6 +634,18 @@ declare interface DescribeClustersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInitNodeScriptsRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+}
+
+declare interface DescribeInitNodeScriptsResponse {
+  /** 节点初始化脚本列表。 */
+  InitNodeScriptSet?: NodeScript[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNodesRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1707,6 +1719,8 @@ declare interface Thpc {
   DescribeClusterStorageOption(data: DescribeClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStorageOptionResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  /** 查询节点初始化脚本列表 {@link DescribeInitNodeScriptsRequest} {@link DescribeInitNodeScriptsResponse} */
+  DescribeInitNodeScripts(data: DescribeInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInitNodeScriptsResponse>;
   /** 查询指定集群节点列表 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
   DescribeNodes(data: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */

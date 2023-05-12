@@ -84,6 +84,12 @@ declare interface Cluster {
   PayMode: number | null;
   /** 前端区分 集群是否需要2CU逻辑 因为历史集群 变配不需要, default 1 新集群都需要 */
   IsNeedManageNode: number | null;
+  /** session集群信息 */
+  ClusterSessions?: ClusterSession[] | null;
+}
+
+/** session集群信息 */
+declare interface ClusterSession {
 }
 
 /** 集群的版本相关信息 */
@@ -96,10 +102,40 @@ declare interface ClusterVersion {
 
 /** 复制作业单条明细 */
 declare interface CopyJobItem {
+  /** 需要复制的作业serial id */
+  SourceId: string;
+  /** 目标集群的cluster serial id */
+  TargetClusterId: string;
+  /** 需要复制的作业名称 */
+  SourceName?: string;
+  /** 新作业的名称 */
+  TargetName?: string;
+  /** 新作业的目录id */
+  TargetFolderId?: string;
+  /** 源作业类型 */
+  JobType?: number;
 }
 
 /** 复制作业单条明细结果 */
 declare interface CopyJobResult {
+  /** 原作业id */
+  JobId: string | null;
+  /** 原作业名称 */
+  JobName: string | null;
+  /** 新作业名称 */
+  TargetJobName: string | null;
+  /** 新作业id */
+  TargetJobId: string | null;
+  /** 失败时候的信息 */
+  Message: string | null;
+  /** 0 成功 -1 失败 */
+  Result: number | null;
+  /** 目标集群名称 */
+  ClusterName: string | null;
+  /** 目标集群id */
+  ClusterId: string | null;
+  /** 作业类型 */
+  JobType: number | null;
 }
 
 /** 树状结构资源列表对象 */

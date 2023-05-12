@@ -1928,6 +1928,12 @@ declare interface EmergencyVul {
   IsSupportDefense: number | null;
   /** 已防御的攻击次数 */
   DefenseAttackCount: number | null;
+  /** 检测规则 0 - 版本比对, 1 - POC验证 */
+  Method?: number | null;
+  /** 攻击热度级别 */
+  AttackLevel?: number | null;
+  /** 是否有漏洞主机开启漏洞防御 */
+  DefenseState?: boolean | null;
 }
 
 /** 未处理的安全事件统计信息 */
@@ -2309,33 +2315,35 @@ declare interface LicenseUnBindRsp {
 /** 异地登录合并后白名单 */
 declare interface LoginWhiteCombinedInfo {
   /** 白名单地域 */
-  Places: Place[] | null;
+  Places?: Place[] | null;
   /** 白名单用户（多个用户逗号隔开） */
-  UserName: string;
+  UserName?: string;
   /** 白名单IP（多个IP逗号隔开） */
-  SrcIp: string;
+  SrcIp?: string;
   /** 地域字符串 */
-  Locale: string;
+  Locale?: string;
   /** 备注 */
-  Remark: string;
+  Remark?: string;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 是否对全局生效, 1：全局有效 0: 对指定主机列表生效' */
-  IsGlobal: number;
+  IsGlobal?: number;
   /** 白名单名字：IsLocal=1时固定为：全部服务器；单台机器时为机器内网IP，多台服务器时为服务器数量，如：11台 */
-  Name: string;
+  Name?: string;
   /** 仅在单台服务器时，返回服务器名称 */
-  Desc: string;
+  Desc?: string;
   /** 白名单ID */
-  Id: number;
+  Id?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 服务器Uuid */
-  Uuid: string;
+  Uuid?: string;
+  /** 登陆地 */
+  Locations: string;
 }
 
 /** 异地登录白名单 */
@@ -2790,6 +2798,14 @@ declare interface ProtectDirInfo {
   ProtectException: number;
   /** 自动恢复开关 (Filters 过滤Quuid 时 返回) 默认0 */
   AutoRestoreSwitchStatus: number;
+  /** 首次开启防护时间 */
+  FirstProtectTime?: string | null;
+  /** 最近开启防护时间 */
+  LatestProtectTime?: string | null;
+  /** 防护文件类型 */
+  ProtectFileType?: string | null;
+  /** 防护文件总数 */
+  ProtectFilesCount?: number | null;
 }
 
 /** 防护目录关联服务器列表信息 */
@@ -2846,6 +2862,8 @@ declare interface ProtectEventLists {
   FileType?: number;
   /** 主机额外信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 机器实例uuid */
+  Quuid?: string | null;
 }
 
 /** 防护机器信息 */
@@ -4119,6 +4137,8 @@ declare interface DescribeAlarmIncidentNodesRequest {
   AlarmVid: string;
   /** 告警时间 */
   AlarmTime: number;
+  /** 告警来源表ID */
+  TableId?: number;
 }
 
 declare interface DescribeAlarmIncidentNodesResponse {
@@ -5687,15 +5707,17 @@ declare interface DescribeEmergencyVulListRequest {
   Order?: string;
   /** 排序字段 PublishDate LastScanTime HostCount */
   By?: string;
+  /** 是否热点漏洞 */
+  HotspotAttack?: boolean;
 }
 
 declare interface DescribeEmergencyVulListResponse {
   /** 漏洞列表 */
-  List: EmergencyVul[] | null;
+  List?: EmergencyVul[] | null;
   /** 漏洞总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 是否存在风险 */
-  ExistsRisk: boolean | null;
+  ExistsRisk?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6090,6 +6112,8 @@ declare interface DescribeLicenseGeneralResponse {
   AutoRepurchaseSwitch: boolean;
   /** 自动加购订单是否自动续费 ,true 开启, false 关闭 */
   AutoRepurchaseRenewSwitch: boolean;
+  /** 已销毁订单数 */
+  DestroyOrderNum: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6575,9 +6599,9 @@ declare interface DescribeProtectDirListRequest {
 
 declare interface DescribeProtectDirListResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 防护目录列表信息 */
-  List: ProtectDirInfo[];
+  List?: ProtectDirInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

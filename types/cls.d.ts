@@ -524,6 +524,8 @@ declare interface JsonInfo {
   EnableTag: boolean;
   /** 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__。 */
   MetaFields: string[] | null;
+  /** 投递Json格式，0：字符串方式投递；1:以结构化方式投递 */
+  JsonType?: number | null;
 }
 
 /** 需要过滤日志的key，及其对应的regex */
@@ -796,6 +798,16 @@ declare interface ShipperInfo {
   CreateTime: string;
   /** 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名） */
   FilenameMode: number | null;
+  /** 投递数据范围的开始时间点 */
+  StartTime: number | null;
+  /** 投递数据范围的结束时间点 */
+  EndTime: number | null;
+  /** 历史数据投递的进度（仅当用户选择的数据内中历史数据时才有效） */
+  Progress: number | null;
+  /** 历史数据全部投递完成剩余的时间（仅当用户选择的数据中有历史数据时才有效） */
+  RemainTime: number | null;
+  /** 历史任务状态：0：实时任务1：任务准备中2：任务运行中3：任务运行异常4：任务运行结束 */
+  HistoryStatus: number | null;
 }
 
 /** 投递任务信息 */
@@ -1193,6 +1205,10 @@ declare interface CreateShipperRequest {
   Content?: ContentInfo;
   /** 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名） */
   FilenameMode?: number;
+  /** 投递数据范围的开始时间点，不能超出日志主题的生命周期起点。如果用户不填写，默认为用户新建投递任务的时间。 */
+  StartTime?: number;
+  /** 投递数据范围的结束时间点，不能填写未来时间。如果用户不填写，默认为持续投递，即无限。 */
+  EndTime?: number;
 }
 
 declare interface CreateShipperResponse {

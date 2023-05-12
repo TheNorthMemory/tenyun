@@ -175,11 +175,17 @@ declare interface GetRuntimeResourceMonitorMetricMCResponse {
 }
 
 declare interface ListDeployableRuntimesMCRequest {
+  /** 应用id */
+  ProjectId?: number;
+  /** 实例id */
+  InstanceId?: number;
+  /** 版本类型 0-pro 1-lite */
+  PlanType?: number;
 }
 
 declare interface ListDeployableRuntimesMCResponse {
   /** 运行时列表 */
-  Runtimes: AbstractRuntimeMC[];
+  Runtimes?: AbstractRuntimeMC[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

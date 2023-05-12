@@ -2,22 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 广告信息 */
-declare interface AdInfo {
-  /** 插播广告列表 */
-  Spots: PluginInfo[];
-  /** 精品推荐广告列表 */
-  BoutiqueRecommands: PluginInfo[];
-  /** 悬浮窗广告列表 */
-  FloatWindowses: PluginInfo[];
-  /** banner广告列表 */
-  Banners: PluginInfo[];
-  /** 积分墙广告列表 */
-  IntegralWalls: PluginInfo[];
-  /** 通知栏广告列表 */
-  NotifyBars: PluginInfo[];
-}
-
 /** app的详细基础信息 */
 declare interface AppDetailInfo {
   /** app的名称 */
@@ -54,36 +38,6 @@ declare interface AppInfo {
   AppIconUrl?: string;
   /** app的名称 */
   AppName?: string;
-}
-
-/** 扫描后app的信息，包含基本信息和扫描状态信息 */
-declare interface AppScanSet {
-  /** 任务唯一标识 */
-  ItemId: string;
-  /** app的名称 */
-  AppName: string;
-  /** app的包名 */
-  AppPkgName: string;
-  /** app的版本号 */
-  AppVersion: string;
-  /** app的md5 */
-  AppMd5: string;
-  /** app的大小 */
-  AppSize: number;
-  /** 扫描结果返回码 */
-  ScanCode: number;
-  /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  TaskStatus: number;
-  /** 提交扫描时间 */
-  TaskTime: number;
-  /** app的图标url */
-  AppIconUrl: string;
-  /** 标识唯一该app，主要用于删除 */
-  AppSid: string;
-  /** 安全类型:1-安全软件，2-风险软件，3病毒软件 */
-  SafeType: number;
-  /** 漏洞个数 */
-  VulCount: number;
 }
 
 /** 加固后app的信息，包含基本信息和加固信息 */
@@ -196,16 +150,6 @@ declare interface PlanInfo {
   AntiSSL: number;
 }
 
-/** 插件信息 */
-declare interface PluginInfo {
-  /** 插件类型，分别为 1-通知栏广告，2-积分墙广告，3-banner广告，4- 悬浮窗图标广告，5-精品推荐列表广告, 6-插播广告 */
-  PluginType: number;
-  /** 插件名称 */
-  PluginName: string;
-  /** 插件描述 */
-  PluginDesc: string;
-}
-
 /** APK检测服务：广告插件结果结构体 */
 declare interface PluginListItem {
   /** 数字类型，分别为 1-通知栏广告，2-积分墙广告，3-banner广告，4- 悬浮窗图标广告，5-精品推荐列表广告, 6-插播广告 */
@@ -284,68 +228,6 @@ declare interface ResultListItem {
   ErrMsg: string;
 }
 
-/** 需要扫描的应用的服务信息 */
-declare interface ScanInfo {
-  /** 任务处理完成后的反向通知回调地址,批量提交app每扫描完成一个会通知一次,通知为POST请求，post信息{ItemId: */
-  CallbackUrl: string;
-  /** VULSCAN-漏洞扫描信息，VIRUSSCAN-返回病毒扫描信息， ADSCAN-广告扫描信息，PLUGINSCAN-插件扫描信息，PERMISSION-系统权限信息，SENSITIVE-敏感词信息，可以自由组合 */
-  ScanTypes: string[];
-}
-
-/** 安全扫描系统权限信息 */
-declare interface ScanPermissionInfo {
-  /** 系统权限 */
-  Permission: string;
-}
-
-/** 安全扫描系统权限信息 */
-declare interface ScanPermissionList {
-  /** 系统权限信息 */
-  PermissionList: ScanPermissionInfo[];
-}
-
-/** 安全扫描敏感词 */
-declare interface ScanSensitiveInfo {
-  /** 敏感词 */
-  WordList: string[];
-  /** 敏感词对应的文件信息 */
-  FilePath: string;
-  /** 文件sha1值 */
-  FileSha: string;
-}
-
-/** 安全扫描敏感词列表 */
-declare interface ScanSensitiveList {
-  /** 敏感词列表 */
-  SensitiveList: ScanSensitiveInfo[];
-}
-
-/** app扫描结果集 */
-declare interface ScanSetInfo {
-  /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  TaskStatus: number;
-  /** app信息 */
-  AppDetailInfo: AppDetailInfo;
-  /** 病毒信息 */
-  VirusInfo: VirusInfo;
-  /** 漏洞信息 */
-  VulInfo: VulInfo;
-  /** 广告插件信息 */
-  AdInfo: AdInfo;
-  /** 提交扫描的时间 */
-  TaskTime: number;
-  /** 状态码，成功返回0，失败返回错误码 */
-  StatusCode: number;
-  /** 状态描述 */
-  StatusDesc: string;
-  /** 状态操作指引 */
-  StatusRef: string;
-  /** 系统权限信息 */
-  PermissionInfo: ScanPermissionList;
-  /** 敏感词列表 */
-  SensitiveInfo: ScanSensitiveList;
-}
-
 /** 提交app加固的服务信息 */
 declare interface ServiceInfo {
   /** 服务版本，基础版basic，专业版professional，企业版enterprise。 */
@@ -388,44 +270,6 @@ declare interface ShieldPlanInfo {
 declare interface SoInfo {
   /** so文件列表 */
   SoFileNames: string[];
-}
-
-/** 病毒信息 */
-declare interface VirusInfo {
-  /** 软件安全类型，分别为0-未知、 1-安全软件、2-风险软件、3-病毒软件 */
-  SafeType: number;
-  /** 病毒名称， utf8编码，非病毒时值为空 */
-  VirusName: string;
-  /** 病毒描述，utf8编码，非病毒时值为空 */
-  VirusDesc: string;
-}
-
-/** 漏洞信息 */
-declare interface VulInfo {
-  /** 漏洞列表 */
-  VulList: VulList[];
-  /** 漏洞文件评分 */
-  VulFileScore: number;
-}
-
-/** 漏洞信息 */
-declare interface VulList {
-  /** 漏洞id */
-  VulId: string;
-  /** 漏洞名称 */
-  VulName: string;
-  /** 漏洞代码 */
-  VulCode: string;
-  /** 漏洞描述 */
-  VulDesc: string;
-  /** 漏洞解决方案 */
-  VulSolution: string;
-  /** 漏洞来源类别，0默认自身，1第三方插件 */
-  VulSrcType: number;
-  /** 漏洞位置 */
-  VulFilepath: string;
-  /** 风险级别：1 低风险 ；2中等风险；3 高风险 */
-  RiskLevel: number;
 }
 
 declare interface CreateBindInstanceRequest {
@@ -492,28 +336,6 @@ declare interface CreateResourceInstancesResponse {
   RequestId?: string;
 }
 
-declare interface CreateScanInstancesRequest {
-  /** 待扫描的app信息列表，一次最多提交20个 */
-  AppInfos: AppInfo[];
-  /** 扫描信息 */
-  ScanInfo: ScanInfo;
-}
-
-declare interface CreateScanInstancesResponse {
-  /** 任务唯一标识 */
-  ItemId: string;
-  /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  Progress: number;
-  /** 提交成功的app的md5集合 */
-  AppMd5s: string[];
-  /** 剩余可用次数 */
-  LimitCount: number;
-  /** 到期时间 */
-  LimitTime: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateShieldInstanceRequest {
   /** 待加固的应用信息 */
   AppInfo: AppInfo;
@@ -542,18 +364,6 @@ declare interface CreateShieldPlanInstanceRequest {
 declare interface CreateShieldPlanInstanceResponse {
   /** 策略id */
   PlanId: number;
-  /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  Progress: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteScanInstancesRequest {
-  /** 删除一个或多个扫描的app，最大支持20个 */
-  AppSids: string[];
-}
-
-declare interface DeleteScanInstancesResponse {
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
   Progress: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -610,46 +420,6 @@ declare interface DescribeResourceInstancesResponse {
   TotalCount: number;
   /** 符合要求的资源数组 */
   ResourceSet: ResourceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeScanInstancesRequest {
-  /** 支持通过app名称，app包名进行筛选 */
-  Filters?: Filter[];
-  /** 偏移量，默认为0 */
-  Offset?: number;
-  /** 数量限制，默认为20，最大值为100。 */
-  Limit?: number;
-  /** 可以提供ItemId数组来查询一个或者多个结果。注意不可以同时指定ItemIds和Filters。 */
-  ItemIds?: string[];
-  /** 按某个字段排序，目前仅支持TaskTime排序。 */
-  OrderField?: string;
-  /** 升序（asc）还是降序（desc），默认：desc。 */
-  OrderDirection?: string;
-}
-
-declare interface DescribeScanInstancesResponse {
-  /** 符合要求的app数量 */
-  TotalCount: number;
-  /** 一个关于app详细信息的结构体，主要包括app的基本信息和扫描状态信息。 */
-  ScanSet: AppScanSet[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeScanResultsRequest {
-  /** 任务唯一标识 */
-  ItemId: string;
-  /** 批量查询一个或者多个app的扫描结果，如果不传表示查询该任务下所提交的所有app */
-  AppMd5s?: string[];
-}
-
-declare interface DescribeScanResultsResponse {
-  /** 批量扫描的app结果集 */
-  ScanSet: ScanSetInfo[];
-  /** 批量扫描结果的个数 */
-  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -775,24 +545,16 @@ declare interface Ms {
   CreateCosSecKeyInstance(data?: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
   /** 创建资源 {@link CreateResourceInstancesRequest} {@link CreateResourceInstancesResponse} */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
-  /** @deprecated 批量提交安全扫描 {@link CreateScanInstancesRequest} {@link CreateScanInstancesResponse} */
-  CreateScanInstances(data: CreateScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanInstancesResponse>;
   /** 提交加固基础数据 {@link CreateShieldInstanceRequest} {@link CreateShieldInstanceResponse} */
   CreateShieldInstance(data: CreateShieldInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldInstanceResponse>;
   /** 新增加固策略 {@link CreateShieldPlanInstanceRequest} {@link CreateShieldPlanInstanceResponse} */
   CreateShieldPlanInstance(data: CreateShieldPlanInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldPlanInstanceResponse>;
-  /** @deprecated 批量删除提交过的app扫描信息 {@link DeleteScanInstancesRequest} {@link DeleteScanInstancesResponse} */
-  DeleteScanInstances(data: DeleteScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanInstancesResponse>;
   /** 批量删除提交过的app信息 {@link DeleteShieldInstancesRequest} {@link DeleteShieldInstancesResponse} */
   DeleteShieldInstances(data: DeleteShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShieldInstancesResponse>;
   /** 环境安全检测-apk检测 {@link DescribeApkDetectionResultRequest} {@link DescribeApkDetectionResultResponse} */
   DescribeApkDetectionResult(data: DescribeApkDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApkDetectionResultResponse>;
   /** 获取用户的所有资源信息 {@link DescribeResourceInstancesRequest} {@link DescribeResourceInstancesResponse} */
   DescribeResourceInstances(data?: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;
-  /** @deprecated 查询扫描列表 {@link DescribeScanInstancesRequest} {@link DescribeScanInstancesResponse} */
-  DescribeScanInstances(data?: DescribeScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanInstancesResponse>;
-  /** @deprecated 批量查询扫描结果 {@link DescribeScanResultsRequest} {@link DescribeScanResultsResponse} */
-  DescribeScanResults(data: DescribeScanResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultsResponse>;
   /** 用户查询提交过的app列表 {@link DescribeShieldInstancesRequest} {@link DescribeShieldInstancesResponse} */
   DescribeShieldInstances(data?: DescribeShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldInstancesResponse>;
   /** 查询加固策略 {@link DescribeShieldPlanInstanceRequest} {@link DescribeShieldPlanInstanceResponse} */

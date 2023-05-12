@@ -959,11 +959,11 @@ declare interface QueryExternalContactDetailRequest {
 
 declare interface QueryExternalContactDetailResponse {
   /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
-  NextCursor: string | null;
+  NextCursor?: string | null;
   /** 客户信息 */
-  Customer: ExternalContact | null;
+  Customer?: ExternalContact | null;
   /** 添加了此外部联系人的企业成员信息 */
-  FollowUser: FollowUser[] | null;
+  FollowUser?: FollowUser[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

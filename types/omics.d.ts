@@ -2,6 +2,68 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 云服务器配置。 */
+declare interface CVMOption {
+  /** 云服务器可用区。 */
+  Zone: string | null;
+  /** 云服务器实例规格。 */
+  InstanceType: string | null;
+}
+
+/** 计算集群配置。 */
+declare interface ClusterOption {
+  /** 计算集群可用区。 */
+  Zone: string | null;
+  /** 计算集群类型，取值范围：- KUBERNETES */
+  Type: string | null;
+}
+
+/** 数据库配置。 */
+declare interface DatabaseOption {
+  /** 数据库可用区。 */
+  Zone: string | null;
+}
+
+/** 组学平台环境详情。 */
+declare interface Environment {
+  /** 环境ID。 */
+  EnvironmentId?: string;
+  /** 环境名称。 */
+  Name?: string;
+  /** 环境描述信息。 */
+  Description?: string;
+  /** 环境地域。 */
+  Region?: string;
+  /** 环境类型，取值范围：- KUBERNETES：Kubernetes容器集群- HPC：HPC高性能计算集群 */
+  Type?: string;
+  /** 环境状态，取值范围：- INITIALIZING：创建中- INITIALIZATION_ERROR：创建失败- RUNNING：运行中- ERROR：异常- DELETING：正在删除- DELETE_ERROR：删除失败 */
+  Status?: string;
+  /** 环境是否可用。环境需要可用才能投递计算任务。 */
+  Available?: boolean;
+  /** 环境信息。 */
+  Message?: string;
+  /** 云资源ID。 */
+  ResourceIds?: ResourceIds;
+  /** 上个工作流UUID。 */
+  LastWorkflowUuid?: string | null;
+  /** 创建时间。 */
+  CreationTime?: string | null;
+}
+
+/** 环境配置。 */
+declare interface EnvironmentConfig {
+  /** 私有网络配置。 */
+  VPCOption: VPCOption | null;
+  /** 计算集群配置。 */
+  ClusterOption: ClusterOption | null;
+  /** 数据库配置。 */
+  DatabaseOption: DatabaseOption | null;
+  /** 存储配置。 */
+  StorageOption: StorageOption | null;
+  /** 云服务器配置。 */
+  CVMOption: CVMOption | null;
+}
+
 /** 执行时间。 */
 declare interface ExecutionTime {
   /** 提交时间。 */
@@ -18,6 +80,26 @@ declare interface Filter {
   Name: string | null;
   /** 过滤字段值。 */
   Values: string[] | null;
+}
+
+/** 云资源ID。 */
+declare interface ResourceIds {
+  /** 私有网络ID。 */
+  VPCId?: string | null;
+  /** 子网ID。 */
+  SubnetId?: string | null;
+  /** 安全组ID。 */
+  SecurityGroupId?: string | null;
+  /** TDSQL-C Mysql版数据库ID。 */
+  TDSQLCId?: string | null;
+  /** 文件存储ID。 */
+  CFSId?: string | null;
+  /** 文件存储类型：取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
+  CFSStorageType?: string | null;
+  /** 云服务器ID。 */
+  CVMId?: string | null;
+  /** 弹性容器集群ID。 */
+  EKSId?: string | null;
 }
 
 /** 任务。 */
@@ -150,6 +232,10 @@ declare interface RunOption {
   UseCallCache: boolean;
   /** 是否使用错误挂起功能。 */
   UseErrorOnHold: boolean;
+  /** 输出归档COS路径。 */
+  FinalWorkflowOutputsDir?: string | null;
+  /** 是否使用相对目录归档输出。 */
+  UseRelativeOutputPaths?: boolean | null;
 }
 
 /** 任务运行状态。 */
@@ -158,6 +244,108 @@ declare interface RunStatusCount {
   Status?: string;
   /** 数量。 */
   Count?: number;
+}
+
+/** 文件存储配置。 */
+declare interface StorageOption {
+  /** 文件存储类型，取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
+  StorageType: string | null;
+  /** 文件存储可用区。 */
+  Zone: string | null;
+  /** 文件系统容量，turbo系列必填，单位为GiB。 - turbo标准型起售40TiB，即40960GiB；扩容步长20TiB，即20480 GiB。- turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。 */
+  Capacity?: number | null;
+}
+
+/** 表格。 */
+declare interface Table {
+  /** 表格ID */
+  TableId?: string | null;
+  /** 关联项目ID */
+  ProjectId?: string | null;
+  /** 表格名称 */
+  Name?: string | null;
+  /** 表格描述 */
+  Description?: string | null;
+  /** 表格列 */
+  Columns?: TableColumn[] | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 创建人 */
+  Creator?: string | null;
+}
+
+/** 表格列。 */
+declare interface TableColumn {
+  /** 列名称 */
+  Header?: string | null;
+  /** 列数据类型 */
+  DataType?: string | null;
+}
+
+/** 表格行。 */
+declare interface TableRow {
+  /** 表格行UUID。 */
+  TableRowUuid?: string | null;
+  /** 表格行内容。 */
+  Content?: string[] | null;
+}
+
+/** 私有网络配置。 */
+declare interface VPCOption {
+  /** 子网可用区。 */
+  SubnetZone: string | null;
+  /** 私有网络CIDR。 */
+  VPCCIDRBlock: string | null;
+  /** 子网CIDR。 */
+  SubnetCIDRBlock: string | null;
+}
+
+declare interface CreateEnvironmentRequest {
+  /** 环境名称。 */
+  Name: string;
+  /** 环境配置信息。 */
+  Config: EnvironmentConfig;
+  /** 环境描述。 */
+  Description?: string;
+}
+
+declare interface CreateEnvironmentResponse {
+  /** 环境ID。 */
+  EnvironmentId?: string;
+  /** 工作流UUID。 */
+  WorkflowUuid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEnvironmentRequest {
+  /** 环境ID。 */
+  EnvironmentId: string;
+}
+
+declare interface DeleteEnvironmentResponse {
+  /** 工作流UUID。 */
+  WorkflowUuid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEnvironmentsRequest {
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 过滤器，支持过滤字段：- EnvironmentId：环境ID- Name：名称- Status：环境状态 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeEnvironmentsResponse {
+  /** 符合条件的数量。 */
+  TotalCount?: number;
+  /** 环境详情列表。 */
+  Environments?: Environment[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeRunGroupsRequest {
@@ -196,6 +384,48 @@ declare interface DescribeRunsResponse {
   TotalCount?: number;
   /** 任务列表。 */
   Runs?: Run[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTablesRequest {
+  /** 项目ID。 */
+  ProjectId: string;
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：- Name：表格名称- TableId：表格ID */
+  Filters?: Filter[];
+}
+
+declare interface DescribeTablesResponse {
+  /** 结果总数。 */
+  TotalCount?: number;
+  /** 表格列表。 */
+  Tables?: Table[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTablesRowsRequest {
+  /** 项目ID。 */
+  ProjectId: string;
+  /** 表格ID。 */
+  TableId: string;
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：- Tr：表格数据，支持模糊查询- TableRowUuid：表格行UUID */
+  Filters?: Filter[];
+}
+
+declare interface DescribeTablesRowsResponse {
+  /** 结果总数。 */
+  TotalCount?: number;
+  /** 表格行列表。 */
+  Rows?: TableRow[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -250,6 +480,18 @@ declare interface ImportTableFileResponse {
   RequestId?: string;
 }
 
+declare interface RetryRunsRequest {
+  /** 关联项目ID。 */
+  ProjectId: string;
+  /** 任务UUID。 */
+  RunUuids: string[];
+}
+
+declare interface RetryRunsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunApplicationRequest {
   /** 应用ID。 */
   ApplicationId: string;
@@ -283,16 +525,28 @@ declare interface RunApplicationResponse {
 /** {@link Omics 腾讯健康组学平台} */
 declare interface Omics {
   (): Versions;
+  /** 创建环境 {@link CreateEnvironmentRequest} {@link CreateEnvironmentResponse} */
+  CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
+  /** 删除环境 {@link DeleteEnvironmentRequest} {@link DeleteEnvironmentResponse} */
+  DeleteEnvironment(data: DeleteEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentResponse>;
+  /** 查询环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
+  DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询任务批次列表 {@link DescribeRunGroupsRequest} {@link DescribeRunGroupsResponse} */
   DescribeRunGroups(data: DescribeRunGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunGroupsResponse>;
   /** 查询任务列表 {@link DescribeRunsRequest} {@link DescribeRunsResponse} */
   DescribeRuns(data: DescribeRunsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunsResponse>;
+  /** 查询表格 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
+  DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
+  /** 查询表格行数据 {@link DescribeTablesRowsRequest} {@link DescribeTablesRowsResponse} */
+  DescribeTablesRows(data: DescribeTablesRowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesRowsResponse>;
   /** 查询作业详情 {@link GetRunCallsRequest} {@link GetRunCallsResponse} */
   GetRunCalls(data: GetRunCallsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunCallsResponse>;
   /** 查询任务详情 {@link GetRunStatusRequest} {@link GetRunStatusResponse} */
   GetRunStatus(data: GetRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunStatusResponse>;
   /** 导入表格文件 {@link ImportTableFileRequest} {@link ImportTableFileResponse} */
   ImportTableFile(data: ImportTableFileRequest, config?: AxiosRequestConfig): AxiosPromise<ImportTableFileResponse>;
+  /** 重试任务 {@link RetryRunsRequest} {@link RetryRunsResponse} */
+  RetryRuns(data: RetryRunsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRunsResponse>;
   /** 运行应用 {@link RunApplicationRequest} {@link RunApplicationResponse} */
   RunApplication(data: RunApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RunApplicationResponse>;
 }

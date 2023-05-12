@@ -727,73 +727,73 @@ declare interface WordSimilarityResponse {
 /** {@link Nlp NLP 服务} */
 declare interface Nlp {
   (): Versions;
-  /** 自动摘要 {@link AutoSummarizationRequest} {@link AutoSummarizationResponse} */
+  /** @deprecated 自动摘要 {@link AutoSummarizationRequest} {@link AutoSummarizationResponse} */
   AutoSummarization(data: AutoSummarizationRequest, config?: AxiosRequestConfig): AxiosPromise<AutoSummarizationResponse>;
-  /** 闲聊 {@link ChatBotRequest} {@link ChatBotResponse} */
+  /** @deprecated 闲聊 {@link ChatBotRequest} {@link ChatBotResponse} */
   ChatBot(data: ChatBotRequest, config?: AxiosRequestConfig): AxiosPromise<ChatBotResponse>;
-  /** 创建自定义词库 {@link CreateDictRequest} {@link CreateDictResponse} */
+  /** @deprecated 创建自定义词库 {@link CreateDictRequest} {@link CreateDictResponse} */
   CreateDict(data: CreateDictRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDictResponse>;
-  /** 新增自定义词库词条 {@link CreateWordItemsRequest} {@link CreateWordItemsResponse} */
+  /** @deprecated 新增自定义词库词条 {@link CreateWordItemsRequest} {@link CreateWordItemsResponse} */
   CreateWordItems(data: CreateWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWordItemsResponse>;
-  /** 删除自定义词库 {@link DeleteDictRequest} {@link DeleteDictResponse} */
+  /** @deprecated 删除自定义词库 {@link DeleteDictRequest} {@link DeleteDictResponse} */
   DeleteDict(data: DeleteDictRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDictResponse>;
-  /** 删除词条 {@link DeleteWordItemsRequest} {@link DeleteWordItemsResponse} */
+  /** @deprecated 删除词条 {@link DeleteWordItemsRequest} {@link DeleteWordItemsResponse} */
   DeleteWordItems(data: DeleteWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordItemsResponse>;
-  /** 句法依存分析 {@link DependencyParsingRequest} {@link DependencyParsingResponse} */
+  /** @deprecated 句法依存分析 {@link DependencyParsingRequest} {@link DependencyParsingResponse} */
   DependencyParsing(data: DependencyParsingRequest, config?: AxiosRequestConfig): AxiosPromise<DependencyParsingResponse>;
-  /** 查询词库信息 {@link DescribeDictRequest} {@link DescribeDictResponse} */
+  /** @deprecated 查询词库信息 {@link DescribeDictRequest} {@link DescribeDictResponse} */
   DescribeDict(data?: DescribeDictRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictResponse>;
-  /** 查询词库列表 {@link DescribeDictsRequest} {@link DescribeDictsResponse} */
+  /** @deprecated 查询词库列表 {@link DescribeDictsRequest} {@link DescribeDictsResponse} */
   DescribeDicts(data?: DescribeDictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictsResponse>;
-  /** 查询指定词库的词条信息 {@link DescribeWordItemsRequest} {@link DescribeWordItemsResponse} */
+  /** @deprecated 查询指定词库的词条信息 {@link DescribeWordItemsRequest} {@link DescribeWordItemsResponse} */
   DescribeWordItems(data: DescribeWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordItemsResponse>;
   /** 句子相似度V2 {@link EvaluateSentenceSimilarityRequest} {@link EvaluateSentenceSimilarityResponse} */
   EvaluateSentenceSimilarity(data: EvaluateSentenceSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateSentenceSimilarityResponse>;
   /** 词相似度V2 {@link EvaluateWordSimilarityRequest} {@link EvaluateWordSimilarityResponse} */
   EvaluateWordSimilarity(data: EvaluateWordSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateWordSimilarityResponse>;
-  /** 智能春联 {@link GenerateCoupletRequest} {@link GenerateCoupletResponse} */
+  /** @deprecated 智能春联 {@link GenerateCoupletRequest} {@link GenerateCoupletResponse} */
   GenerateCouplet(data: GenerateCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCoupletResponse>;
   /** 句子生成 {@link GenerateKeywordSentenceRequest} {@link GenerateKeywordSentenceResponse} */
   GenerateKeywordSentence(data: GenerateKeywordSentenceRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateKeywordSentenceResponse>;
-  /** 智能写诗 {@link GeneratePoetryRequest} {@link GeneratePoetryResponse} */
+  /** @deprecated 智能写诗 {@link GeneratePoetryRequest} {@link GeneratePoetryResponse} */
   GeneratePoetry(data: GeneratePoetryRequest, config?: AxiosRequestConfig): AxiosPromise<GeneratePoetryResponse>;
-  /** 关键词提取 {@link KeywordsExtractionRequest} {@link KeywordsExtractionResponse} */
+  /** @deprecated 关键词提取 {@link KeywordsExtractionRequest} {@link KeywordsExtractionResponse} */
   KeywordsExtraction(data: KeywordsExtractionRequest, config?: AxiosRequestConfig): AxiosPromise<KeywordsExtractionResponse>;
-  /** 词法分析 {@link LexicalAnalysisRequest} {@link LexicalAnalysisResponse} */
+  /** @deprecated 词法分析 {@link LexicalAnalysisRequest} {@link LexicalAnalysisResponse} */
   LexicalAnalysis(data: LexicalAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<LexicalAnalysisResponse>;
   /** 词法分析V2 {@link ParseWordsRequest} {@link ParseWordsResponse} */
   ParseWords(data: ParseWordsRequest, config?: AxiosRequestConfig): AxiosPromise<ParseWordsResponse>;
   /** 相似词召回 {@link RetrieveSimilarWordsRequest} {@link RetrieveSimilarWordsResponse} */
   RetrieveSimilarWords(data: RetrieveSimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveSimilarWordsResponse>;
-  /** 检索词条 {@link SearchWordItemsRequest} {@link SearchWordItemsResponse} */
+  /** @deprecated 检索词条 {@link SearchWordItemsRequest} {@link SearchWordItemsResponse} */
   SearchWordItems(data: SearchWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchWordItemsResponse>;
   /** 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */
   SentenceCorrection(data: SentenceCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceCorrectionResponse>;
-  /** 句向量 {@link SentenceEmbeddingRequest} {@link SentenceEmbeddingResponse} */
+  /** @deprecated 句向量 {@link SentenceEmbeddingRequest} {@link SentenceEmbeddingResponse} */
   SentenceEmbedding(data: SentenceEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceEmbeddingResponse>;
-  /** 情感分析 {@link SentimentAnalysisRequest} {@link SentimentAnalysisResponse} */
+  /** @deprecated 情感分析 {@link SentimentAnalysisRequest} {@link SentimentAnalysisResponse} */
   SentimentAnalysis(data: SentimentAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<SentimentAnalysisResponse>;
-  /** 相似词 {@link SimilarWordsRequest} {@link SimilarWordsResponse} */
+  /** @deprecated 相似词 {@link SimilarWordsRequest} {@link SimilarWordsResponse} */
   SimilarWords(data: SimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<SimilarWordsResponse>;
-  /** 文本分类 {@link TextClassificationRequest} {@link TextClassificationResponse} */
+  /** @deprecated 文本分类 {@link TextClassificationRequest} {@link TextClassificationResponse} */
   TextClassification(data: TextClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<TextClassificationResponse>;
-  /** 文本纠错 {@link TextCorrectionRequest} {@link TextCorrectionResponse} */
+  /** @deprecated 文本纠错 {@link TextCorrectionRequest} {@link TextCorrectionResponse} */
   TextCorrection(data: TextCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionResponse>;
-  /** 文本纠错高级版 {@link TextCorrectionProRequest} {@link TextCorrectionProResponse} */
+  /** @deprecated 文本纠错高级版 {@link TextCorrectionProRequest} {@link TextCorrectionProResponse} */
   TextCorrectionPro(data: TextCorrectionProRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionProResponse>;
   /** 文本润色 {@link TextEmbellishRequest} {@link TextEmbellishResponse} */
   TextEmbellish(data: TextEmbellishRequest, config?: AxiosRequestConfig): AxiosPromise<TextEmbellishResponse>;
-  /** 句子相似度 {@link TextSimilarityRequest} {@link TextSimilarityResponse} */
+  /** @deprecated 句子相似度 {@link TextSimilarityRequest} {@link TextSimilarityResponse} */
   TextSimilarity(data: TextSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityResponse>;
-  /** 句子相似度高级版 {@link TextSimilarityProRequest} {@link TextSimilarityProResponse} */
+  /** @deprecated 句子相似度高级版 {@link TextSimilarityProRequest} {@link TextSimilarityProResponse} */
   TextSimilarityPro(data: TextSimilarityProRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityProResponse>;
   /** 文本补全 {@link TextWritingRequest} {@link TextWritingResponse} */
   TextWriting(data: TextWritingRequest, config?: AxiosRequestConfig): AxiosPromise<TextWritingResponse>;
-  /** 修改自定义词库 {@link UpdateDictRequest} {@link UpdateDictResponse} */
+  /** @deprecated 修改自定义词库 {@link UpdateDictRequest} {@link UpdateDictResponse} */
   UpdateDict(data: UpdateDictRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDictResponse>;
-  /** 词向量 {@link WordEmbeddingRequest} {@link WordEmbeddingResponse} */
+  /** @deprecated 词向量 {@link WordEmbeddingRequest} {@link WordEmbeddingResponse} */
   WordEmbedding(data: WordEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<WordEmbeddingResponse>;
-  /** 词相似度 {@link WordSimilarityRequest} {@link WordSimilarityResponse} */
+  /** @deprecated 词相似度 {@link WordSimilarityRequest} {@link WordSimilarityResponse} */
   WordSimilarity(data: WordSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<WordSimilarityResponse>;
 }
 

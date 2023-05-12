@@ -422,6 +422,16 @@ declare interface CynosdbClusterDetail {
   NetworkStatus: string | null;
 }
 
+/** 实例错误日志返回类型 */
+declare interface CynosdbErrorLogItem {
+  /** 日志时间戳 */
+  Timestamp?: number | null;
+  /** 日志等级 */
+  Level?: string | null;
+  /** 日志内容 */
+  Content?: string | null;
+}
+
 /** 实例信息 */
 declare interface CynosdbInstance {
   /** 用户Uin */
@@ -668,6 +678,16 @@ declare interface DbTable {
   TableName?: string;
 }
 
+/** 错误日志导出格式 */
+declare interface ErrorLogItemExport {
+  /** 时间 */
+  Timestamp?: string | null;
+  /** 日志等级，可选值note, warning，error */
+  Level?: string | null;
+  /** 日志内容 */
+  Content?: string | null;
+}
+
 /** 账号，包含accountName和host */
 declare interface InputAccount {
   /** 账号 */
@@ -792,6 +812,8 @@ declare interface NetAddr {
   WanIP: string | null;
   /** 外网状态 */
   WanStatus: string | null;
+  /** 实例组ID */
+  InstanceGroupId?: string | null;
 }
 
 /** x08新创建的账号 */
@@ -1792,6 +1814,36 @@ declare interface DescribeInstanceDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceErrorLogsRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 日志条数限制 */
+  Limit?: number;
+  /** 日志条数偏移量 */
+  Offset?: number;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 排序字段，有Timestamp枚举值 */
+  OrderBy?: string;
+  /** 排序类型，有ASC,DESC枚举值 */
+  OrderByType?: string;
+  /** 日志等级，有error、warning、note三种，支持多个等级同时搜索 */
+  LogLevels?: string[];
+  /** 关键字，支持模糊搜索 */
+  KeyWords?: string[];
+}
+
+declare interface DescribeInstanceErrorLogsResponse {
+  /** 日志条数 */
+  TotalCount?: number | null;
+  /** 错误日志列表 */
+  ErrorLogs?: CynosdbErrorLogItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceSlowQueriesRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2012,6 +2064,36 @@ declare interface DisassociateSecurityGroupsRequest {
 }
 
 declare interface DisassociateSecurityGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExportInstanceErrorLogsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志最早时间 */
+  StartTime?: string;
+  /** 日志最晚时间 */
+  EndTime?: string;
+  /** 限制条数 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 日志等级 */
+  LogLevels?: string[];
+  /** 关键字 */
+  KeyWords?: string[];
+  /** 文件类型，可选值：csv, original */
+  FileType?: string;
+  /** 可选值Timestamp */
+  OrderBy?: string;
+  /** ASC或DESC */
+  OrderByType?: string;
+}
+
+declare interface ExportInstanceErrorLogsResponse {
+  /** 错误日志导出内容 */
+  ErrorLogItems?: ErrorLogItemExport[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2408,6 +2490,28 @@ declare interface OpenAuditServiceResponse {
   RequestId?: string;
 }
 
+declare interface OpenReadOnlyInstanceExclusiveAccessRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 需要开通独有访问的只读实例ID */
+  InstanceId: string;
+  /** 指定的vpc ID */
+  VpcId: string;
+  /** 指定的子网ID */
+  SubnetId: string;
+  /** 端口 */
+  Port: number;
+  /** 安全组 */
+  SecurityGroupIds?: string[];
+}
+
+declare interface OpenReadOnlyInstanceExclusiveAccessResponse {
+  /** 开通流程ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PauseServerlessRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2723,6 +2827,8 @@ declare interface Cynosdb {
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
   /** 查询实例详情 {@link DescribeInstanceDetailRequest} {@link DescribeInstanceDetailResponse} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
+  /** 查询错误日志列表 {@link DescribeInstanceErrorLogsRequest} {@link DescribeInstanceErrorLogsResponse} */
+  DescribeInstanceErrorLogs(data: DescribeInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceErrorLogsResponse>;
   /** 查询实例慢查询日志 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
   /** 查询实例规格 {@link DescribeInstanceSpecsRequest} {@link DescribeInstanceSpecsResponse} */
@@ -2745,6 +2851,8 @@ declare interface Cynosdb {
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
+  /** 导出实例错误日志 {@link ExportInstanceErrorLogsRequest} {@link ExportInstanceErrorLogsResponse} */
+  ExportInstanceErrorLogs(data: ExportInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportInstanceErrorLogsResponse>;
   /** 导出实例慢日志 {@link ExportInstanceSlowQueriesRequest} {@link ExportInstanceSlowQueriesResponse} */
   ExportInstanceSlowQueries(data: ExportInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportInstanceSlowQueriesResponse>;
   /** 批量授权账号权限 {@link GrantAccountPrivilegesRequest} {@link GrantAccountPrivilegesResponse} */
@@ -2789,6 +2897,8 @@ declare interface Cynosdb {
   OfflineInstance(data: OfflineInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineInstanceResponse>;
   /** 实例开通审计服务 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
+  /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
+  OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
   /** 暂停serverless集群 {@link PauseServerlessRequest} {@link PauseServerlessResponse} */
   PauseServerless(data: PauseServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<PauseServerlessResponse>;
   /** 删除从可用区 {@link RemoveClusterSlaveZoneRequest} {@link RemoveClusterSlaveZoneResponse} */

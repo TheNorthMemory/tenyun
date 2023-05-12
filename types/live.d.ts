@@ -1188,6 +1188,32 @@ declare interface WatermarkInfo {
   Height?: number;
 }
 
+/** 央视P2P流信息。 */
+declare interface XP2PDetailInfo {
+  /** CDN流量。 */
+  CdnBytes: number;
+  /** P2P流量。 */
+  P2pBytes: number;
+  /** 卡播人数。 */
+  StuckPeople: number;
+  /** 卡播次数。 */
+  StuckTimes: number;
+  /** 在线人数。 */
+  OnlinePeople: number;
+  /** 起播请求次数 */
+  Request: number;
+  /** 起播成功次数 */
+  RequestSuccess: number;
+  /** 时间，一分钟粒度，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732 */
+  Time: string;
+  /** 类型，分live和vod两种。 */
+  Type: string | null;
+  /** 流ID。 */
+  StreamName: string | null;
+  /** AppId。 */
+  AppId: string | null;
+}
+
 declare interface AddDelayLiveStreamRequest {
   /** 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。 */
   AppName: string;
@@ -2736,6 +2762,24 @@ declare interface DescribeLiveWatermarksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLiveXP2PDetailInfoListRequest {
+  /** utc分钟粒度查询时间，查询某一分钟的用量数据，格式为：yyyy-mm-ddTHH:MM:00Z，参考https://cloud.tencent.com/document/product/266/11732 */
+  QueryTime?: string;
+  /** 类型数组，分直播live和点播vod，不传默认查全部。 */
+  Type?: string[];
+  /** 查询流数组，不传默认查所有流。 */
+  StreamNames?: string[];
+  /** 查询维度，不传该参数则默认查询流维度的数据，传递该参数则只查对应维度的数据，和返回值的字段相关，目前支持AppId维度查询。 */
+  Dimension?: string[];
+}
+
+declare interface DescribeLiveXP2PDetailInfoListResponse {
+  /** P2P流统计信息。 */
+  DataInfoList: XP2PDetailInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogDownloadListRequest {
   /** 开始时间，北京时间。格式：yyyy-mm-dd HH:MM:SS。注：此字段为北京时间（UTC+8时区）。 */
   StartTime: string;
@@ -3891,6 +3935,8 @@ declare interface Live {
   DescribeLiveWatermarkRules(data?: DescribeLiveWatermarkRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarkRulesResponse>;
   /** 查询水印列表 {@link DescribeLiveWatermarksRequest} {@link DescribeLiveWatermarksResponse} */
   DescribeLiveWatermarks(data?: DescribeLiveWatermarksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarksResponse>;
+  /** P2P流数据查询 {@link DescribeLiveXP2PDetailInfoListRequest} {@link DescribeLiveXP2PDetailInfoListResponse} */
+  DescribeLiveXP2PDetailInfoList(data?: DescribeLiveXP2PDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveXP2PDetailInfoListResponse>;
   /** 批量获取日志URL {@link DescribeLogDownloadListRequest} {@link DescribeLogDownloadListResponse} */
   DescribeLogDownloadList(data: DescribeLogDownloadListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadListResponse>;
   /** 查询播放http错误码实时数据 {@link DescribePlayErrorCodeDetailInfoListRequest} {@link DescribePlayErrorCodeDetailInfoListResponse} */

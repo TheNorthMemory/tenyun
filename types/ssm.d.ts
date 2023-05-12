@@ -155,29 +155,33 @@ declare interface CreateSSHKeyPairSecretResponse {
 declare interface CreateSecretRequest {
   /** 凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。一旦创建不可修改。 */
   SecretName: string;
-  /** 凭据版本，查询凭据信息时需要根据SecretName 和 VersionId进行查询，最长64 字节，使用字母、数字或者 - _ . 的组合并且以字母或数字开头。 */
-  VersionId: string;
+  /** 凭据版本，查询凭据信息时需要根据SecretName 和 VersionId进行查询，最长64 字节，使用字母、数字或者 - _ . 的组合并且以字母或数字开头。若为空，则使用默认的初始凭据版本号。可选，若为空或该凭据为云产品类凭据，则该版本号默认为 SSM_Current。 */
+  VersionId?: string;
   /** 描述信息，用于详细描述用途等，最大支持2048字节。 */
   Description?: string;
   /** 指定对凭据进行加密的KMS CMK。如果为空则表示使用Secrets Manager为您默认创建的CMK进行加密。您也可以指定在同region 下自行创建的KMS CMK进行加密。 */
   KmsKeyId?: string;
+  /** 凭据类型，默认为自定义凭据。 */
+  SecretType?: number;
   /** 二进制凭据信息base64编码后的明文。SecretBinary 和 SecretString 必须且只能设置一个，最大支持4096字节。 */
   SecretBinary?: string;
   /** 文本类型凭据信息明文（不需要进行base64编码）。SecretBinary 和 SecretString 必须且只能设置一个，，最大支持4096字节。 */
   SecretString?: string;
+  /** JSON 格式字符串，用于指定特定凭据类型的额外配置。 */
+  AdditionalConfig?: string;
   /** 标签列表 */
   Tags?: Tag[];
 }
 
 declare interface CreateSecretResponse {
   /** 新创建的凭据名称。 */
-  SecretName: string;
+  SecretName?: string;
   /** 新创建的凭据版本。 */
-  VersionId: string;
+  VersionId?: string;
   /** 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误 */
-  TagCode: number | null;
+  TagCode?: number | null;
   /** 标签操作的返回信息 */
-  TagMsg: string | null;
+  TagMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -269,37 +273,39 @@ declare interface DescribeSecretRequest {
 
 declare interface DescribeSecretResponse {
   /** 凭据名称。 */
-  SecretName: string;
+  SecretName?: string;
   /** 凭据描述信息。 */
-  Description: string;
+  Description?: string;
   /** 用于加密的KMS CMK ID。 */
-  KmsKeyId: string;
+  KmsKeyId?: string;
   /** 创建者UIN。 */
-  CreateUin: number;
+  CreateUin?: number;
   /** 凭据状态：Enabled、Disabled、PendingDelete, Creating, Failed。 */
-  Status: string;
+  Status?: string;
   /** 删除日期，uinx 时间戳，非计划删除状态的凭据为0。 */
-  DeleteTime: number;
+  DeleteTime?: number;
   /** 创建日期。 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 0 -- 用户自定义凭据类型；1 -- 数据库凭据类型；2 -- SSH密钥对凭据类型。 */
-  SecretType: number | null;
+  SecretType?: number | null;
   /** 云产品名称。 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 云产品实例ID。 */
-  ResourceID: string | null;
+  ResourceID?: string | null;
   /** 是否开启轮转：True -- 开启轮转；False -- 关闭轮转。 */
-  RotationStatus: boolean | null;
+  RotationStatus?: boolean | null;
   /** 轮转周期，默认以天为单位。 */
-  RotationFrequency: number | null;
+  RotationFrequency?: number | null;
   /** 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对凭据的名称。 */
-  ResourceName: string | null;
+  ResourceName?: string | null;
   /** 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所属的项目ID。 */
-  ProjectID: number | null;
+  ProjectID?: number | null;
   /** 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所关联的CVM实例ID。 */
-  AssociatedInstanceIDs: string[] | null;
+  AssociatedInstanceIDs?: string[] | null;
   /** 当凭据类型为云API密钥对凭据时，此字段有效，用于表示此云API密钥对所属的用户UIN。 */
-  TargetUin: number | null;
+  TargetUin?: number | null;
+  /** 凭据额外配置 */
+  AdditionalConfig?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -564,13 +564,13 @@ declare interface CreateRoomRequest {
   Assistants?: string[];
   /** rtc人数。 */
   RTCAudienceNumber?: number;
-  /** 观看类型。0未知，1互动，2cdn或直播。 目前仅支持互动类型 */
+  /** 观看类型，互动直播（默认）。 */
   AudienceType?: number;
   /** 录制布局。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;
   /** 房间绑定的群组ID,非空时限制组成员进入 */
   GroupId?: string;
-  /** 打开学生麦克风/摄像头的授权开关 */
+  /** 是否允许老师/助教直接控制学生的摄像头/麦克风。可以有以下取值：0 不允许直接控制（需同意，默认值）1 允许直接控制（无需同意） */
   EnableDirectControl?: number;
 }
 
@@ -733,7 +733,7 @@ declare interface DescribeDeveloperRequest {
 }
 
 declare interface DescribeDeveloperResponse {
-  /** 服务商ID */
+  /** 开发商ID */
   DeveloperId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1382,7 +1382,7 @@ declare interface Lcic {
   DescribeAppDetail(data: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
   /** 获取当前房间的成员列表 {@link DescribeCurrentMemberListRequest} {@link DescribeCurrentMemberListResponse} */
   DescribeCurrentMemberList(data: DescribeCurrentMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentMemberListResponse>;
-  /** 服务商信息获取 {@link DescribeDeveloperRequest} {@link DescribeDeveloperResponse} */
+  /** 开发商信息获取 {@link DescribeDeveloperRequest} {@link DescribeDeveloperResponse} */
   DescribeDeveloper(data?: DescribeDeveloperRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeveloperResponse>;
   /** 获取文档信息 {@link DescribeDocumentRequest} {@link DescribeDocumentResponse} */
   DescribeDocument(data: DescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentResponse>;

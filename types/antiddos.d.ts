@@ -642,7 +642,7 @@ declare interface KeyValue {
 declare interface L4RuleSource {
   /** 回源IP或域名 */
   Source: string;
-  /** 权重值，取值[0,100] */
+  /** 权重值，取值[0,100]，暂不支持 */
   Weight: number;
   /** 8000 */
   Port?: number | null;

@@ -194,6 +194,8 @@ declare interface DeviceInfo {
   EnableState: number;
   /** 设备过期时间 */
   ExpireTime: number;
+  /** 设备的sdk日志等级，0：关闭，1：错误，2：告警，3：信息，4：调试 */
+  LogLevel?: number | null;
 }
 
 /** 设备签名信息 */
@@ -2435,6 +2437,8 @@ declare namespace V20201215 {
     EnableState: number;
     /** 设备过期时间 */
     ExpireTime: number;
+    /** 设备的sdk日志等级，0：关闭，1：错误，2：告警，3：信息，4：调试 */
+    LogLevel?: number | null;
   }
 
   /** 设备上下线日志记录 */

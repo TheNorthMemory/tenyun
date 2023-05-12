@@ -368,6 +368,8 @@ declare interface ServeParticipant {
   Type: string | null;
   /** 转接来源坐席信息 */
   TransferFrom: string | null;
+  /** 转接来源参与者类型，取值与 Type 一致 */
+  TransferFromType?: string | null;
   /** 转接去向坐席信息 */
   TransferTo: string | null;
   /** 转接去向参与者类型，取值与 Type 一致 */

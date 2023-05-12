@@ -701,7 +701,7 @@ declare interface Ecdn {
   DescribeEcdnStatistics(data: DescribeEcdnStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnStatisticsResponse>;
   /** 查询平台服务节点IP {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** 查询刷新用量配额 {@link DescribePurgeQuotaRequest} {@link DescribePurgeQuotaResponse} */
+  /** @deprecated 查询刷新用量配额 {@link DescribePurgeQuotaRequest} {@link DescribePurgeQuotaResponse} */
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
   /** 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;

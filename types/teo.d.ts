@@ -280,7 +280,7 @@ declare interface BotConfig {
 
 /** Bot扩展处置方式，多处置动作组合。 */
 declare interface BotExtendAction {
-  /** 处置动作，取值有：monitor：观察；trans：放行；alg：JavaScript挑战；captcha：托管挑战；random：随机，按照ExtendActions分配处置动作和比例；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
+  /** 处置动作，取值有：monitor：观察；alg：JavaScript挑战；captcha：托管挑战；random：随机，按照ExtendActions分配处置动作和比例；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
   Action: string;
   /** 处置方式的触发概率，范围0-100。 */
   Percent?: number | null;
@@ -324,7 +324,7 @@ declare interface BotPortraitRule {
 declare interface BotUserRule {
   /** 规则名，只能以英文字符，数字，下划线组合，且不能以下划线开头。 */
   RuleName: string;
-  /** 处置动作，取值有：drop：拦截；monitor：观察；trans：放行；alg：JavaScript挑战；captcha：托管挑战；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
+  /** 处置动作，取值有：drop：拦截；monitor：观察；trans：放行；alg：JavaScript挑战；captcha：托管挑战；random：随机处置；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
   Action: string;
   /** 规则状态，取值有：on：生效；off：不生效。默认on生效。 */
   RuleStatus: string;
@@ -2010,6 +2010,8 @@ declare interface ZoneSetting {
   Grpc: Grpc | null;
   /** 图片优化相关配置。 */
   ImageOptimize: ImageOptimize | null;
+  /** 中国大陆加速优化配置。 */
+  AccelerateMainland?: AccelerateMainland | null;
 }
 
 declare interface BindZoneToPlanRequest {
@@ -2393,7 +2395,7 @@ declare interface DeleteZoneResponse {
 }
 
 declare interface DescribeAccelerationDomainsRequest {
-  /** 加速域名所属站点ID。不填写该参数默认返回所有站点下的加速域名。 */
+  /** 加速域名所属站点ID。 */
   ZoneId: string;
   /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：domain-name 按照【加速域名名称】进行过滤。 类型：String 必选：否origin-type 按照【源站类型】进行过滤。 类型：String 必选：否origin 按照【主源站地址】进行过滤。 类型：String 必选：否backup-origin 按照【备用源站地址】进行过滤。 类型：String 必选：否domain-cname 按照【加速CNAME名】进行过滤。 类型：String 必选：否share-cname 按照【共享CNAME名】进行过滤。 类型：String 必选：否 */
   Filters?: AdvancedFilter[];

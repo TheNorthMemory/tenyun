@@ -952,6 +952,8 @@ declare interface ParameterDetail {
   MaxFunc: string;
   /** 参数是公式类型时，该字段有效，表示公式类型最小值 */
   MinFunc: string;
+  /** 参数是否不支持修改 */
+  IsNotSupportEdit?: boolean | null;
 }
 
 /** 数据库代理连接池规格配置 */
