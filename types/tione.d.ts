@@ -68,9 +68,9 @@ declare interface BatchTaskDetail {
   Region: string;
   /** 计费模式 */
   ChargeType: string;
-  /** 预付费专用资源组id */
+  /** 包年包月资源组id */
   ResourceGroupId: string | null;
-  /** 预付费专用资源组名称 */
+  /** 包年包月资源组名称 */
   ResourceGroupName: string | null;
   /** 资源配置 */
   ResourceConfigInfo: ResourceConfigInfo;
@@ -120,6 +120,8 @@ declare interface BatchTaskDetail {
   BillingInfo: string | null;
   /** 运行中的Pod的名字 */
   PodList?: string[] | null;
+  /** 模型推理代码信息 */
+  ModelInferenceCodeInfo?: CosPathInfo | null;
 }
 
 /** 批处理任务实例 */
@@ -150,7 +152,7 @@ declare interface BatchTaskSetItem {
   ChargeType: string;
   /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
   ChargeStatus: string;
-  /** 预付费专用资源组 */
+  /** 包年包月资源组ID */
   ResourceGroupId: string | null;
   /** 资源配置 */
   ResourceConfigInfo: ResourceConfigInfo;
@@ -170,11 +172,11 @@ declare interface BatchTaskSetItem {
   UpdateTime: string | null;
   /** 输出 */
   Outputs: DataConfig[];
-  /** 预付费专用资源组名称 */
+  /** 包年包月资源组名称 */
   ResourceGroupName: string | null;
   /** 失败原因 */
   FailureReason: string;
-  /** 计费金额信息，eg：2.00元/小时 (for后付费) */
+  /** 计费金额信息，eg：2.00元/小时 (for 按量计费) */
   BillingInfo: string;
 }
 
@@ -1571,7 +1573,7 @@ declare interface CreateBatchModelAccTasksResponse {
 declare interface CreateBatchTaskRequest {
   /** 跑批任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   BatchTaskName: string;
-  /** 计费模式，eg：PREPAID预付费，即包年包月；POSTPAID_BY_HOUR按小时后付费 */
+  /** 计费模式，eg：PREPAID 包年包月；POSTPAID_BY_HOUR 按量计费 */
   ChargeType: string;
   /** 资源配置 */
   ResourceConfigInfo: ResourceConfigInfo;
@@ -1583,7 +1585,7 @@ declare interface CreateBatchTaskRequest {
   JobType?: number;
   /** 任务周期描述 */
   CronInfo?: CronInfo;
-  /** 预付费专用资源组 */
+  /** 包年包月资源组ID */
   ResourceGroupId?: string;
   /** 标签配置 */
   Tags?: Tag[];
@@ -1611,7 +1613,7 @@ declare interface CreateBatchTaskRequest {
 
 declare interface CreateBatchTaskResponse {
   /** 跑批任务ID */
-  BatchTaskId: string;
+  BatchTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1983,7 +1985,7 @@ declare interface DescribeBatchTaskResponse {
 }
 
 declare interface DescribeBatchTasksRequest {
-  /** 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]取值范围：Name（名称）：task1Id（task ID）：train-23091792777383936Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILEDChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止） */
+  /** 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]取值范围：Name（名称）：task1Id（task ID）：train-23091792777383936Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILEDChargeType（计费类型）：PREPAID 包年包月 / POSTPAID_BY_HOUR 按量计费CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止） */
   Filters?: Filter[];
   /** 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }] */
   TagFilters?: TagFilter[];
@@ -1999,9 +2001,9 @@ declare interface DescribeBatchTasksRequest {
 
 declare interface DescribeBatchTasksResponse {
   /** 数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务集 */
-  BatchTaskSet: BatchTaskSetItem[] | null;
+  BatchTaskSet?: BatchTaskSetItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

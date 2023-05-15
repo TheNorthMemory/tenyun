@@ -362,6 +362,8 @@ declare interface DatasourceBaseInfo {
   Type: string | null;
   /** 数据源所属的集群id */
   ClusterId: string | null;
+  /** 数据源版本信息 */
+  Version?: string | null;
 }
 
 /** 依赖配置 */

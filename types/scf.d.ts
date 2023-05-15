@@ -518,6 +518,8 @@ declare interface Trigger {
   TriggerAttribute: string;
   /** 触发器绑定的别名或版本 */
   Qualifier: string;
+  /** 触发器描述 */
+  Description?: string;
 }
 
 /** 预置定时任务动作 */
@@ -797,11 +799,13 @@ declare interface CreateTriggerRequest {
   Enable?: string;
   /** 用户自定义参数，仅支持timer触发器 */
   CustomArgument?: string;
+  /** 触发器描述 */
+  Description?: string;
 }
 
 declare interface CreateTriggerResponse {
   /** 触发器信息 */
-  TriggerInfo: Trigger;
+  TriggerInfo?: Trigger;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

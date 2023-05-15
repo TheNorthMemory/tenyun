@@ -223,11 +223,13 @@ declare interface ListRuntimeDeployedInstancesMCResponse {
 declare interface ListRuntimesMCRequest {
   /** 环境运行类型：0:运行时类型、1:api类型 */
   RuntimeClass?: number;
+  /** 计划类型：0-pro 1-lite */
+  PlanType?: number;
 }
 
 declare interface ListRuntimesMCResponse {
   /** 运行时列表 */
-  Runtimes: RuntimeMC[];
+  Runtimes?: RuntimeMC[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -328,6 +328,10 @@ declare interface DataFormat {
 
 /** 数据治理规则 */
 declare interface DataGovernPolicy {
+  /** 治理规则类型，Customize: 自定义；Intelligence: 智能治理 */
+  RuleType?: string | null;
+  /** 治理引擎 */
+  GovernEngine?: string | null;
 }
 
 /** 数据库对象 */
@@ -838,6 +842,8 @@ declare interface TableBaseInfo {
   UserSubUin?: string | null;
   /** 数据治理配置项 */
   GovernPolicy?: DataGovernPolicy | null;
+  /** 库数据治理是否关闭，关闭：true，开启：false */
+  DbGovernPolicyIsDisable?: string | null;
 }
 
 /** 返回数据表的相关信息。 */
@@ -2647,11 +2653,13 @@ declare interface GenerateCreateMangedTableSqlRequest {
   Partitions?: TPartition[];
   /** 表属性信息 */
   Properties?: Property[];
+  /** V2 upsert表 upsert键 */
+  UpsertKeys?: string[];
 }
 
 declare interface GenerateCreateMangedTableSqlResponse {
   /** 创建托管存储内表sql语句描述 */
-  Execution: Execution;
+  Execution?: Execution;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

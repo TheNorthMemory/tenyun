@@ -65,11 +65,11 @@ declare interface CreateVRSTaskRequest {
   SessionId: string;
   /** 音色名称 */
   VoiceName: string;
-  /** 音频采样率：16000：16k（默认） */
+  /** 音频采样率：16000：16k */
   SampleRate: number;
   /** 音色性别:1-male2-female */
   VoiceGender: number;
-  /** 语言类型：1-中文（默认） */
+  /** 语言类型：1-中文 */
   VoiceLanguage: number;
   /** 音频格式，音频类型(wav,mp3,aac,m4a) */
   Codec: string;
@@ -101,7 +101,7 @@ declare interface DescribeVRSTaskStatusResponse {
 declare interface DetectEnvAndSoundQualityRequest {
   /** 标注文本信息 ID */
   TextId: string;
-  /** 语音数据 要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。 */
+  /** 语音数据 要使用base64编码(采用python语言时注意读取文件时需要转成base64字符串编码，例如：str(base64.b64encode(open("input.aac", mode="rb").read()), encoding='utf-8') )。 */
   AudioData: string;
   /** 音频格式，音频类型(wav,mp3,aac,m4a) */
   Codec: string;

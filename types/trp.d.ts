@@ -1101,7 +1101,7 @@ declare interface DescribeTmpTokenRequest {
 
 declare interface DescribeTmpTokenResponse {
   /** 临时token */
-  Token: string | null;
+  Token?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

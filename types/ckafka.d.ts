@@ -3935,7 +3935,7 @@ declare interface SendMessageRequest {
 
 declare interface SendMessageResponse {
   /** 消息ID列表 */
-  MessageId: string[];
+  MessageId?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

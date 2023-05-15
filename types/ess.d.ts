@@ -136,7 +136,7 @@ declare interface CcInfo {
 
 /** 模板控件信息 */
 declare interface Component {
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区划控件，ComponentValue填写省市区行政区划字符串内容；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
   ComponentType: string;
   /** 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N） */
   FileIndex: number;

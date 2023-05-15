@@ -3592,6 +3592,12 @@ declare interface VulInfoList {
   FirstAppearTime: string | null;
   /** 漏洞类别 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞 */
   VulCategory: number | null;
+  /** 攻击热度级别 */
+  AttackLevel?: number | null;
+  /** 漏洞修复后是否需要重启 */
+  FixNoNeedRestart?: boolean | null;
+  /** 检测方式0 - 版本比对, 1 - POC验证 */
+  Method?: number | null;
 }
 
 /** 漏洞等级数量实体 */
@@ -7381,7 +7387,7 @@ declare interface DescribeVulListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Status - String - 是否必填：否 - 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略ModifyTime - String - 是否必填：否 - 最近发生时间Uuid- String - 是否必填：否 - 主机uuid查询VulName- string -VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持Labels- string- 是否必填：否 - 标签搜索 */
+  /** 过滤条件。Status - String - 是否必填：否 - 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略ModifyTime - String - 是否必填：否 - 最近发生时间Uuid- String - 是否必填：否 - 主机uuid查询VulName- string -VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持Labels- string- 是否必填：否 - 标签搜索IsSupportAutoFix- string- 是否必填：否 - 是否支持自动修复 0:不支持 1:支持CvssScore- string- 是否必填：否 - CvssScore大于多少AttackLevel- string- 是否必填：否 - 攻击热度大于多少 */
   Filters?: Filters[];
   /** 可选排序字段 Level，LastTime，HostCount */
   By?: string;
@@ -7391,11 +7397,11 @@ declare interface DescribeVulListRequest {
 
 declare interface DescribeVulListResponse {
   /** 漏洞列表 */
-  VulInfoList: VulInfoList[] | null;
+  VulInfoList?: VulInfoList[] | null;
   /** 漏洞总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 重点关注漏洞总数 */
-  FollowVulCount: number | null;
+  FollowVulCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
