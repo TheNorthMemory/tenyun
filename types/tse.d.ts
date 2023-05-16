@@ -136,6 +136,8 @@ declare interface EnvInfo {
   EnvDesc?: string;
   /** 客户端带宽 */
   ClientBandWidth?: number;
+  /** 客户端内网开关 */
+  EnableConfigIntranet?: boolean | null;
 }
 
 /** 查询过滤通用对象 */

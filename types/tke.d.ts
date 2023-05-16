@@ -1146,6 +1146,112 @@ declare interface InstanceUpgradeProgressItem {
   Detail: TaskStepInfo[];
 }
 
+/** 集群巡检诊断的默认目录类型 */
+declare interface KubeJarvisStateCatalogue {
+  /** 目录级别，支持参数：first：一级目录second：二级目录 */
+  CatalogueLevel?: string | null;
+  /** 目录名 */
+  CatalogueName?: string | null;
+}
+
+/** 集群巡检诊断结果 */
+declare interface KubeJarvisStateDiagnostic {
+  /** 诊断开始时间 */
+  StartTime?: string | null;
+  /** 诊断结束时间 */
+  EndTime?: string | null;
+  /** 诊断目录 */
+  Catalogues?: KubeJarvisStateCatalogue[] | null;
+  /** 诊断类型 */
+  Type?: string | null;
+  /** 诊断名称 */
+  Name?: string | null;
+  /** 诊断描述 */
+  Desc?: string | null;
+  /** 诊断结果列表 */
+  Results?: KubeJarvisStateResultsItem[] | null;
+  /** 诊断结果统计 */
+  Statistics?: KubeJarvisStateStatistic[] | null;
+}
+
+/** 集群巡检诊断概览 */
+declare interface KubeJarvisStateDiagnosticOverview {
+  /** 诊断目录 */
+  Catalogues?: KubeJarvisStateCatalogue[] | null;
+  /** 诊断结果统计 */
+  Statistics?: KubeJarvisStateStatistic[] | null;
+}
+
+/** 集群巡检检查结果概览 */
+declare interface KubeJarvisStateInspectionOverview {
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** 诊断结果统计 */
+  Statistics?: KubeJarvisStateStatistic[] | null;
+  /** 诊断结果详情 */
+  Diagnostics?: KubeJarvisStateDiagnosticOverview[] | null;
+}
+
+/** 集群巡检检查结果 */
+declare interface KubeJarvisStateInspectionResult {
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** 诊断开始时间 */
+  StartTime?: string | null;
+  /** 诊断结束时间 */
+  EndTime?: string | null;
+  /** 诊断结果统计 */
+  Statistics?: KubeJarvisStateStatistic[] | null;
+  /** 诊断结果详情 */
+  Diagnostics?: KubeJarvisStateDiagnostic[] | null;
+  /** 查询巡检报告相关报错 */
+  Error?: string | null;
+}
+
+/** 集群巡检结果历史列表 */
+declare interface KubeJarvisStateInspectionResultsItem {
+  /** 巡检结果名称 */
+  Name?: string | null;
+  /** 诊断结果统计 */
+  Statistics?: KubeJarvisStateStatistic[] | null;
+}
+
+/** 集群巡检诊断对象信息 */
+declare interface KubeJarvisStateResultObjInfo {
+  /** 对象属性名称 */
+  PropertyName?: string | null;
+  /** 对象属性值 */
+  PropertyValue?: string | null;
+}
+
+/** 集群巡检诊断结果详情信息 */
+declare interface KubeJarvisStateResultsItem {
+  /** 诊断结果级别 */
+  Level?: string | null;
+  /** 诊断对象名 */
+  ObjName?: string | null;
+  /** 诊断对象信息 */
+  ObjInfo?: KubeJarvisStateResultObjInfo[] | null;
+  /** 诊断项标题 */
+  Title?: string | null;
+  /** 诊断项描述 */
+  Desc?: string | null;
+  /** 诊断建议 */
+  Proposal?: string | null;
+  /** 诊断建议文档链接 */
+  ProposalDocUrl?: string | null;
+  /** 诊断建议文档名称 */
+  ProposalDocName?: string | null;
+}
+
+/** 集群巡检统计结果 */
+declare interface KubeJarvisStateStatistic {
+  /** 诊断结果的健康水平 */
+  HealthyLevel?: string | null;
+  /** 诊断结果的统计 */
+  Count?: number | null;
+}
+
 /** k8s中标签，一般以数组的方式存在 */
 declare interface Label {
   /** map表中的Name */
@@ -3430,6 +3536,24 @@ declare interface DescribeClusterEndpointsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterInspectionResultsOverviewRequest {
+  /** Array of String	目标集群列表，为空查询用户所有集群 */
+  ClusterIds?: string[];
+  /** 聚合字段信息，概览结果按照 GroupBy 信息聚合后返回，可选参数：catalogue.first：按一级分类聚合catalogue.second：按二级分类聚合 */
+  GroupBy?: string[];
+}
+
+declare interface DescribeClusterInspectionResultsOverviewResponse {
+  /** 诊断结果统计 */
+  Statistics?: KubeJarvisStateStatistic[] | null;
+  /** 诊断结果概览 */
+  Diagnostics?: KubeJarvisStateDiagnosticOverview[] | null;
+  /** 集群诊断结果概览 */
+  InspectionOverview?: KubeJarvisStateInspectionOverview[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterInstancesRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4848,6 +4972,38 @@ declare interface InstallLogAgentResponse {
   RequestId?: string;
 }
 
+declare interface ListClusterInspectionResultsItemsRequest {
+  /** 目标集群ID */
+  ClusterId: string;
+  /** 查询历史结果的开始时间，Unix时间戳 */
+  StartTime?: string;
+  /** 查询历史结果的结束时间，默认当前距离开始时间3天，Unix时间戳 */
+  EndTime?: string;
+}
+
+declare interface ListClusterInspectionResultsItemsResponse {
+  /** 巡检结果历史列表 */
+  InspectionResultsItems?: KubeJarvisStateInspectionResultsItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListClusterInspectionResultsRequest {
+  /** 目标集群列表，为空查询用户所有集群 */
+  ClusterIds?: string[];
+  /** 隐藏的字段信息，为了减少无效的字段返回，隐藏字段不会在返回值中返回。可选值：results */
+  Hide?: string[];
+  /** 指定查询结果的报告名称，默认查询最新的每个集群只查询最新的一条 */
+  Name?: string;
+}
+
+declare interface ListClusterInspectionResultsResponse {
+  /** 集群诊断结果列表 */
+  InspectionResults?: KubeJarvisStateInspectionResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterAsGroupAttributeRequest {
   /** 集群ID */
   ClusterId: string;
@@ -5669,6 +5825,8 @@ declare interface Tke {
   DescribeClusterEndpointVipStatus(data: DescribeClusterEndpointVipStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointVipStatusResponse>;
   /** 获取集群访问地址 {@link DescribeClusterEndpointsRequest} {@link DescribeClusterEndpointsResponse} */
   DescribeClusterEndpoints(data: DescribeClusterEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointsResponse>;
+  /** 查询集群巡检结果概览信息 {@link DescribeClusterInspectionResultsOverviewRequest} {@link DescribeClusterInspectionResultsOverviewResponse} */
+  DescribeClusterInspectionResultsOverview(data?: DescribeClusterInspectionResultsOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInspectionResultsOverviewResponse>;
   /** 查询集群节点信息 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
   /** 获取集群kubeconfig文件 {@link DescribeClusterKubeconfigRequest} {@link DescribeClusterKubeconfigResponse} */
@@ -5831,6 +5989,10 @@ declare interface Tke {
   InstallEdgeLogAgent(data: InstallEdgeLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallEdgeLogAgentResponse>;
   /** 安装日志采集组件 {@link InstallLogAgentRequest} {@link InstallLogAgentResponse} */
   InstallLogAgent(data: InstallLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallLogAgentResponse>;
+  /** 查询指定集群的巡检结果信息 {@link ListClusterInspectionResultsRequest} {@link ListClusterInspectionResultsResponse} */
+  ListClusterInspectionResults(data?: ListClusterInspectionResultsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClusterInspectionResultsResponse>;
+  /** 查询集群巡检结果历史列表 {@link ListClusterInspectionResultsItemsRequest} {@link ListClusterInspectionResultsItemsResponse} */
+  ListClusterInspectionResultsItems(data: ListClusterInspectionResultsItemsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClusterInspectionResultsItemsResponse>;
   /** 修改集群伸缩组属性 {@link ModifyClusterAsGroupAttributeRequest} {@link ModifyClusterAsGroupAttributeResponse} */
   ModifyClusterAsGroupAttribute(data: ModifyClusterAsGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterAsGroupAttributeResponse>;
   /** 修改集群弹性伸缩属性 {@link ModifyClusterAsGroupOptionAttributeRequest} {@link ModifyClusterAsGroupOptionAttributeResponse} */

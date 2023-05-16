@@ -942,6 +942,20 @@ declare interface Ip6Translator {
   IP6RuleSet: Ip6Rule[];
 }
 
+/** 占用ip的资源信息 */
+declare interface IpAddressStates {
+  /** VPC实例ID。 */
+  VpcId: string;
+  /** 子网实例ID。 */
+  SubnetId: string;
+  /** IP地址。 */
+  IpAddress: string;
+  /** 资源类型 */
+  ResourceType: string;
+  /** 资源ID */
+  ResourceId: string;
+}
+
 /** IP在线查询的字段信息 */
 declare interface IpField {
   /** 国家字段信息 */
@@ -1326,7 +1340,7 @@ declare interface NetworkInterfaceAttachment {
 declare interface Price {
   /** 实例价格。 */
   InstancePrice?: ItemPrice;
-  /** 网络价格。 */
+  /** 带宽价格。 */
   BandwidthPrice?: ItemPrice;
 }
 
@@ -3061,9 +3075,9 @@ declare interface CreateRoutesRequest {
 
 declare interface CreateRoutesResponse {
   /** 新增的实例个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 路由表对象。 */
-  RouteTableSet: RouteTable[];
+  RouteTableSet?: RouteTable[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3662,7 +3676,7 @@ declare interface DeleteRoutesRequest {
   /** 路由表实例ID。 */
   RouteTableId: string;
   /** 路由策略对象，删除路由策略时，仅需使用Route的RouteId字段。 */
-  Routes: Route[];
+  Routes?: Route[];
 }
 
 declare interface DeleteRoutesResponse {
@@ -5044,6 +5058,28 @@ declare interface DescribeTrafficPackagesResponse {
   TotalCount: number;
   /** 流量包信息 */
   TrafficPackageSet: TrafficPackage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUsedIpAddressRequest {
+  /** VPC实例ID。 */
+  VpcId: string;
+  /** 子网实例ID。 */
+  SubnetId?: string;
+  /** 查询是否占用的ip列表 */
+  IpAddresses?: string[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 请求对象个数。 */
+  Limit?: number;
+}
+
+declare interface DescribeUsedIpAddressResponse {
+  /** 占用ip地址的资源信息 */
+  IpAddressStates?: IpAddressStates[] | null;
+  /** 返回占用资源的个数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6677,9 +6713,9 @@ declare interface ReplaceRoutesRequest {
 
 declare interface ReplaceRoutesResponse {
   /** 原路由策略信息。 */
-  OldRouteSet: Route[];
+  OldRouteSet?: Route[];
   /** 修改后的路由策略信息。 */
-  NewRouteSet: Route[];
+  NewRouteSet?: Route[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7267,6 +7303,8 @@ declare interface Vpc {
   DescribeTenantCcns(data?: DescribeTenantCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTenantCcnsResponse>;
   /** 查询共享流量包 {@link DescribeTrafficPackagesRequest} {@link DescribeTrafficPackagesResponse} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
+  /** 查看子网或者vpc内IP使用情况 {@link DescribeUsedIpAddressRequest} {@link DescribeUsedIpAddressResponse} */
+  DescribeUsedIpAddress(data: DescribeUsedIpAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsedIpAddressResponse>;
   /** 查询终端节点列表 {@link DescribeVpcEndPointRequest} {@link DescribeVpcEndPointResponse} */
   DescribeVpcEndPoint(data?: DescribeVpcEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointResponse>;
   /** 查询终端节点服务列表 {@link DescribeVpcEndPointServiceRequest} {@link DescribeVpcEndPointServiceResponse} */

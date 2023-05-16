@@ -623,7 +623,7 @@ declare interface CreateAclRequest {
   AccountSet?: string[];
   /** 关联的高危命令模板ID */
   CmdTemplateIdSet?: number[];
-  /** 关联高危DB模版ID */
+  /** 关联高危DB模板ID */
   ACTemplateIdSet?: string[];
   /** 是否开启rdp磁盘映射文件上传 */
   AllowDiskFileUp?: boolean;
@@ -1251,7 +1251,7 @@ declare interface ModifyAclRequest {
   AccountSet?: string[];
   /** 关联的高危命令模板ID */
   CmdTemplateIdSet?: number[];
-  /** 关联高危DB模版ID */
+  /** 关联高危DB模板ID */
   ACTemplateIdSet?: string[];
   /** 是否开启 RDP 磁盘映射文件上传 */
   AllowDiskFileUp?: boolean;

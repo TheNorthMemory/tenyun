@@ -2254,6 +2254,10 @@ declare interface LicenseBindTaskDetail {
   ErrMsg: string;
   /** 0 执行中, 1 成功,2失败 */
   Status: number;
+  /** 修复建议 */
+  FixMessage?: string;
+  /** 机器额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 授权订单列表对象 */

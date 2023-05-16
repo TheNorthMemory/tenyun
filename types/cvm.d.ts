@@ -1767,9 +1767,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息列表。 */
-  InstanceSet: Instance[];
+  InstanceSet?: Instance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -74,6 +74,10 @@ declare interface Task {
   TaskPolicy: DescribePolicy | null;
   /** 标签列表 */
   Tags?: TagWithDescribe[] | null;
+  /** 关联的演练计划ID */
+  TaskPlanId?: number | null;
+  /** 关联的演练计划名称 */
+  TaskPlanTitle?: string | null;
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */

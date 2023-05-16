@@ -110,7 +110,7 @@ declare interface EventDataInfo {
 declare interface EventInfo {
   /** 事件发生的秒级unix时间戳。 */
   Timestamp?: number;
-  /** 事件类型,有以下值:RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束 */
+  /** 事件类型,有以下值:RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束Camera0n: 摄像头打开Camera0ff: 摄像头关闭MicOn: 麦克风打开MicOff: 麦克风关闭ScreenOn: 屏幕共享打开ScreenOff: 屏幕共享关闭VisibleOn: 页面可见VisibleOff: 页面不可见 */
   EventType?: string;
   /** 事件详细内容，包含房间号,成员类型事件包含用户Id。 */
   EventData?: EventDataInfo | null;
@@ -1129,6 +1129,24 @@ declare interface GetWatermarkResponse {
   RequestId?: string;
 }
 
+declare interface KickUserFromRoomRequest {
+  /** 房间Id。 */
+  RoomId: number;
+  /** 低代码平台的SdkAppId。 */
+  SdkAppId: number;
+  /** 需要踢出成员Id */
+  UserId: string;
+  /** 踢出类型：1：临时踢出，可以使用Duration参数指定污点时间，污点时间间隔内用户无法进入房间。2：永久踢出 */
+  KickType: number;
+  /** 污点时间(单位秒)，KickType = 1时生效，默认为0 */
+  Duration: number;
+}
+
+declare interface KickUserFromRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface LoginOriginIdRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -1418,6 +1436,8 @@ declare interface Lcic {
   GetRooms(data: GetRoomsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomsResponse>;
   /** 获取水印设置 {@link GetWatermarkRequest} {@link GetWatermarkResponse} */
   GetWatermark(data: GetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<GetWatermarkResponse>;
+  /** 踢出房间用户 {@link KickUserFromRoomRequest} {@link KickUserFromRoomResponse} */
+  KickUserFromRoom(data: KickUserFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<KickUserFromRoomResponse>;
   /** 源账号登录 {@link LoginOriginIdRequest} {@link LoginOriginIdResponse} */
   LoginOriginId(data: LoginOriginIdRequest, config?: AxiosRequestConfig): AxiosPromise<LoginOriginIdResponse>;
   /** 登录 {@link LoginUserRequest} {@link LoginUserResponse} */

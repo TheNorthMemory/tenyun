@@ -68,7 +68,7 @@ declare interface BatchTaskDetail {
   Region: string;
   /** 计费模式 */
   ChargeType: string;
-  /** 包年包月资源组id */
+  /** 包年包月资源组ID */
   ResourceGroupId: string | null;
   /** 包年包月资源组名称 */
   ResourceGroupName: string | null;
@@ -116,7 +116,7 @@ declare interface BatchTaskDetail {
   Remark: string | null;
   /** 失败原因 */
   FailureReason: string | null;
-  /** 计费金额信息，eg：2.00元/小时 (for后付费) */
+  /** 计费金额信息，eg：2.00元/小时 (for 按量计费) */
   BillingInfo: string | null;
   /** 运行中的Pod的名字 */
   PodList?: string[] | null;
@@ -578,6 +578,8 @@ declare interface HyperParameter {
   MinBlockSizePt?: string | null;
   /** FROZEN_GRAPH、SAVED_MODEL格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为10 */
   MinBlockSizeTf?: string | null;
+  /** Stable Diffusion 模型优化参数 */
+  PipelineArgs?: string | null;
 }
 
 /** 镜像描述信息 */

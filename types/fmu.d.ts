@@ -85,7 +85,7 @@ declare interface BeautifyPicRequest {
   Url?: string;
   /** 美白程度，取值范围[0,100]。0不美白，100代表最高程度。默认值30。 */
   Whitening?: number;
-  /** 磨皮程度，取值范围[0,100]。0不磨皮，100代表最高程度。默认值10。 */
+  /** 磨皮程度，取值范围[0,30]。0不磨皮，30代表最高程度。默认值10。 */
   Smoothing?: number;
   /** 瘦脸程度，取值范围[0,100]。0不瘦脸，100代表最高程度。默认值70。 */
   FaceLifting?: number;
@@ -97,9 +97,9 @@ declare interface BeautifyPicRequest {
 
 declare interface BeautifyPicResponse {
   /** RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64 */
-  ResultImage: string | null;
+  ResultImage?: string | null;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。 */
-  ResultUrl: string | null;
+  ResultUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

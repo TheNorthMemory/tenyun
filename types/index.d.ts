@@ -526,7 +526,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   api: Api,
   /** {@link Apigateway API 网关} */
   apigateway: Apigateway,
-  /** {@link Apm 应用性能观测} */
+  /** {@link Apm 应用性能监控} */
   apm: Apm,
   /** {@link Asr 语音识别} */
   asr: Asr,

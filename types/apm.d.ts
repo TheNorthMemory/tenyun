@@ -374,7 +374,7 @@ declare interface TerminateApmInstanceResponse {
   RequestId?: string;
 }
 
-/** {@link Apm 应用性能观测} */
+/** {@link Apm 应用性能监控} */
 declare interface Apm {
   (): Versions;
   /** 创建Apm实例 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */

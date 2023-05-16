@@ -1002,6 +1002,18 @@ declare interface RocketMQInstanceConfig {
   MaxQueuesPerTopic?: number | null;
 }
 
+/** Rocketmq消息消费track信息 */
+declare interface RocketMQMessageTrack {
+  /** 消费者组 */
+  Group: string;
+  /** 消费状态 */
+  ConsumeStatus: string;
+  /** 消息track类型 */
+  TrackType: string;
+  /** 异常信息 */
+  ExceptionDesc: string | null;
+}
+
 /** RocketMQ命名空间信息 */
 declare interface RocketMQNamespace {
   /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
@@ -2722,6 +2734,40 @@ declare interface DescribeRocketMQGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQMsgRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 命名空间 */
+  EnvironmentId: string;
+  /** 主题，查询死信时传groupId */
+  TopicName: string;
+  /** 消息id */
+  MsgId: string;
+  /** pulsar消息id */
+  PulsarMsgId: string;
+  /** 查询死信时该值为true，只对Rocketmq有效 */
+  QueryDlqMsg?: boolean;
+}
+
+declare interface DescribeRocketMQMsgResponse {
+  /** 消息体 */
+  Body?: string;
+  /** 详情参数 */
+  Properties?: string;
+  /** 生产时间 */
+  ProduceTime?: string;
+  /** 消息id */
+  MsgId?: string;
+  /** 生产者地址 */
+  ProducerAddr?: string;
+  /** 消费组消费情况 */
+  MessageTracks?: RocketMQMessageTrack[] | null;
+  /** 详情页展示的topic名称 */
+  ShowTopicName?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQNamespacesRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3581,6 +3627,8 @@ declare interface Tdmq {
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
   /** 获取RocketMQ消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
+  /** rocketmq消息详情 {@link DescribeRocketMQMsgRequest} {@link DescribeRocketMQMsgResponse} */
+  DescribeRocketMQMsg(data: DescribeRocketMQMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgResponse>;
   /** 获取RocketMQ命名空间列表 {@link DescribeRocketMQNamespacesRequest} {@link DescribeRocketMQNamespacesResponse} */
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
   /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */

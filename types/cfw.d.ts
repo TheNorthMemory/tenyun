@@ -576,6 +576,16 @@ declare interface SecurityGroupListData {
   Direction?: number;
   /** 是否使用端口协议模板，0：否，1：是 */
   ProtocolPortType?: number;
+  /** Uuid */
+  Uuid?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 资产分组名称 */
+  AssetGroupNameIn?: string | null;
+  /** 资产分组名称 */
+  AssetGroupNameOut?: string | null;
+  /** 模板名称 */
+  ParameterName?: string | null;
 }
 
 /** 企业安全组规则执行顺序修改对象 */
