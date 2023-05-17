@@ -767,7 +767,7 @@ declare interface ChannelBatchCancelFlowsRequest {
   Agent: Agent;
   /** 签署流程Id数组，最多100个，超过100不处理 */
   FlowIds: string[];
-  /** 撤销理由 */
+  /** 撤销理由,不超过200个字符 */
   CancelMessage?: string;
   /** 撤销理由自定义格式；选项：0 默认格式1 只保留身份信息：展示为【发起方】2 保留身份信息+企业名称：展示为【发起方xxx公司】3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
   CancelMessageFormat?: number;

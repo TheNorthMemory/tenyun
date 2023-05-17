@@ -4897,7 +4897,7 @@ declare interface UpgradeGrafanaInstanceResponse {
 /** {@link Monitor 腾讯云可观测平台} */
 declare interface Monitor {
   (): Versions;
-  /** 绑定 Grafana 可视化服务实例 {@link BindPrometheusManagedGrafanaRequest} {@link BindPrometheusManagedGrafanaResponse} */
+  /** 绑定 Grafana 可视化实例 {@link BindPrometheusManagedGrafanaRequest} {@link BindPrometheusManagedGrafanaResponse} */
   BindPrometheusManagedGrafana(data: BindPrometheusManagedGrafanaRequest, config?: AxiosRequestConfig): AxiosPromise<BindPrometheusManagedGrafanaResponse>;
   /** 绑定策略对象 {@link BindingPolicyObjectRequest} {@link BindingPolicyObjectResponse} */
   BindingPolicyObject(data: BindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyObjectResponse>;

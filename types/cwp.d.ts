@@ -2316,6 +2316,16 @@ declare interface LicenseUnBindRsp {
   ErrMsg: string;
 }
 
+/** 日志存储量记录 */
+declare interface LogStorageRecord {
+  /** 年月份 */
+  Month?: string | null;
+  /** 存储量，字节 */
+  UsedSize?: number | null;
+  /** 总量，字节 */
+  InquireSize?: number | null;
+}
+
 /** 异地登录合并后白名单 */
 declare interface LoginWhiteCombinedInfo {
   /** 白名单地域 */
@@ -6148,6 +6158,30 @@ declare interface DescribeLicenseListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLogStorageConfigRequest {
+}
+
+declare interface DescribeLogStorageConfigResponse {
+  /** 存储类型，string数组 */
+  Type?: string[] | null;
+  /** 日志存储天数，3640表示不限 */
+  Period?: number | null;
+  /** 本月Period的修改次数 */
+  PeriodModifyCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogStorageRecordRequest {
+}
+
+declare interface DescribeLogStorageRecordResponse {
+  /** 存储量记录 */
+  Records?: LogStorageRecord[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogStorageStatisticRequest {
 }
 
@@ -8216,6 +8250,20 @@ declare interface ModifyLicenseUnBindsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLogStorageConfigRequest {
+  /** 是否修改有效期 */
+  IsModifyPeriod: boolean;
+  /** 存储类型，string数组 */
+  Type?: string[];
+  /** 日志存储天数，3640表示不限 */
+  Period?: number;
+}
+
+declare interface ModifyLogStorageConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMachineRemarkRequest {
   /** 主机Quuid */
   Quuid: string;
@@ -8869,6 +8917,10 @@ declare interface Cwp {
   DescribeLicenseGeneral(data?: DescribeLicenseGeneralRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseGeneralResponse>;
   /** 获取授权订单列表 {@link DescribeLicenseListRequest} {@link DescribeLicenseListResponse} */
   DescribeLicenseList(data?: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
+  /** 获取日志存储配置 {@link DescribeLogStorageConfigRequest} {@link DescribeLogStorageConfigResponse} */
+  DescribeLogStorageConfig(data?: DescribeLogStorageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageConfigResponse>;
+  /** 获取日志存储量记录 {@link DescribeLogStorageRecordRequest} {@link DescribeLogStorageRecordResponse} */
+  DescribeLogStorageRecord(data?: DescribeLogStorageRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageRecordResponse>;
   /** 获取日志检索容量使用统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 获取异地登录白名单合并后列表 {@link DescribeLoginWhiteCombinedListRequest} {@link DescribeLoginWhiteCombinedListResponse} */
@@ -9097,6 +9149,8 @@ declare interface Cwp {
   ModifyLicenseBinds(data: ModifyLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseBindsResponse>;
   /** 授权批量解绑 {@link ModifyLicenseUnBindsRequest} {@link ModifyLicenseUnBindsResponse} */
   ModifyLicenseUnBinds(data: ModifyLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseUnBindsResponse>;
+  /** 修改日志存储配置 {@link ModifyLogStorageConfigRequest} {@link ModifyLogStorageConfigResponse} */
+  ModifyLogStorageConfig(data: ModifyLogStorageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogStorageConfigResponse>;
   /** 修改主机备注信息 {@link ModifyMachineRemarkRequest} {@link ModifyMachineRemarkResponse} */
   ModifyMachineRemark(data: ModifyMachineRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineRemarkResponse>;
   /** 定时扫描设置 {@link ModifyMalwareTimingScanSettingsRequest} {@link ModifyMalwareTimingScanSettingsResponse} */

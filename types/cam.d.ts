@@ -693,6 +693,8 @@ declare interface CreateUserOIDCConfigResponse {
 declare interface CreateUserSAMLConfigRequest {
   /** SAML元数据文档，需要base64 encode */
   SAMLMetadataDocument: string;
+  /** 辅助域名 */
+  AuxiliaryDomain?: string;
 }
 
 declare interface CreateUserSAMLConfigResponse {
@@ -959,9 +961,11 @@ declare interface DescribeUserSAMLConfigRequest {
 
 declare interface DescribeUserSAMLConfigResponse {
   /** SAML元数据文档 */
-  SAMLMetadata: string;
+  SAMLMetadata?: string;
   /** 状态：0:未设置，1:已开启，2:已禁用 */
-  Status: number;
+  Status?: number;
+  /** 辅助域名 */
+  AuxiliaryDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1803,6 +1807,8 @@ declare interface UpdateUserSAMLConfigRequest {
   Operate: string;
   /** 元数据文档，需要base64 encode，仅当Operate为updateSAML时需要此参数 */
   SAMLMetadataDocument?: string;
+  /** 辅助域名 */
+  AuxiliaryDomain?: string;
 }
 
 declare interface UpdateUserSAMLConfigResponse {

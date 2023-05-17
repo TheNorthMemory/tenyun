@@ -90,6 +90,16 @@ declare interface CallInSkillGroupMetrics {
   Name: string;
 }
 
+/** 被叫属性 */
+declare interface CalleeAttribute {
+  /** 被叫号码 */
+  Callee: string;
+  /** 随路数据 */
+  UUI?: string;
+  /** 参数 */
+  Variables?: Variable[];
+}
+
 /** 运营商白名单号码申请单 */
 declare interface CarrierPrivilegeNumberApplicant {
   /** 实例Id */
@@ -621,6 +631,10 @@ declare interface CreateAutoCalloutTaskRequest {
   Tries?: number;
   /** 自定义变量（仅高级版支持） */
   Variables?: Variable[];
+  /** UUI */
+  UUI?: string;
+  /** 被叫属性 */
+  CalleeAttributes?: CalleeAttribute[];
 }
 
 declare interface CreateAutoCalloutTaskResponse {

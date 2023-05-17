@@ -1494,6 +1494,28 @@ declare interface ResourceDashboard {
   RouteTable: number;
 }
 
+/** 资源统计信息 */
+declare interface ResourceStatistics {
+  /** Vpc实例ID，例如：vpc-f1xjkw1b。 */
+  VpcId: string;
+  /** 子网实例ID，例如：subnet-bthucmmy。 */
+  SubnetId: string;
+  /** 当前已使用的IP总数。 */
+  Ip: number;
+  /** 资源统计信息。 */
+  ResourceStatisticsItemSet: ResourceStatisticsItem[];
+}
+
+/** 资源统计项。 */
+declare interface ResourceStatisticsItem {
+  /** 资源类型。比如，CVM，ENI等。 */
+  ResourceType: string;
+  /** 资源名称。 */
+  ResourceName: string;
+  /** 资源个数。 */
+  ResourceCount: number;
+}
+
 /** 路由策略对象 */
 declare interface Route {
   /** 目的网段，取值不能在私有网络网段内，例如：112.20.51.0/24。 */
@@ -3760,6 +3782,16 @@ declare interface DeleteTemplateMemberResponse {
   RequestId?: string;
 }
 
+declare interface DeleteTrafficPackagesRequest {
+  /** 待删除的流量包唯一ID数组 */
+  TrafficPackageIds: string[];
+}
+
+declare interface DeleteTrafficPackagesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteVpcEndPointRequest {
   /** 终端节点ID。 */
   EndPointId: string;
@@ -4974,6 +5006,18 @@ declare interface DescribeSnapshotPoliciesResponse {
   SnapshotPolicySet: SnapshotPolicy[];
   /** 符合条件的对象数。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSubnetResourceDashboardRequest {
+  /** Subnet实例ID，例如：subnet-f1xjkw1b。 */
+  SubnetIds: string[];
+}
+
+declare interface DescribeSubnetResourceDashboardResponse {
+  /** 资源统计结果。 */
+  ResourceStatisticsSet?: ResourceStatistics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7157,6 +7201,8 @@ declare interface Vpc {
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
   /** 删除模板对象成员 {@link DeleteTemplateMemberRequest} {@link DeleteTemplateMemberResponse} */
   DeleteTemplateMember(data: DeleteTemplateMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTemplateMemberResponse>;
+  /** 删除共享流量包 {@link DeleteTrafficPackagesRequest} {@link DeleteTrafficPackagesResponse} */
+  DeleteTrafficPackages(data: DeleteTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrafficPackagesResponse>;
   /** 删除VPC {@link DeleteVpcRequest} {@link DeleteVpcResponse} */
   DeleteVpc(data: DeleteVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcResponse>;
   /** 删除终端节点 {@link DeleteVpcEndPointRequest} {@link DeleteVpcEndPointResponse} */
@@ -7293,6 +7339,8 @@ declare interface Vpc {
   DescribeSnapshotFiles(data: DescribeSnapshotFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotFilesResponse>;
   /** 查询快照策略 {@link DescribeSnapshotPoliciesRequest} {@link DescribeSnapshotPoliciesResponse} */
   DescribeSnapshotPolicies(data?: DescribeSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotPoliciesResponse>;
+  /** 查看Subnet资源信息 {@link DescribeSubnetResourceDashboardRequest} {@link DescribeSubnetResourceDashboardResponse} */
+  DescribeSubnetResourceDashboard(data: DescribeSubnetResourceDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetResourceDashboardResponse>;
   /** 查询子网列表 {@link DescribeSubnetsRequest} {@link DescribeSubnetsResponse} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
   /** 查询异步任务执行结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */

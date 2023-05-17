@@ -435,11 +435,11 @@ declare interface ModifyCustomizationStateResponse {
 }
 
 declare interface SentenceRecognitionRequest {
-  /** 引擎模型类型。电话场景：• 8k_zh：中文电话通用；• 8k_en：英文电话通用；非电话场景：• 16k_zh：中文通用；• 16k_zh-PY：中英粤;• 16k_zh_medical：中文医疗；• 16k_en：英语；• 16k_ca：粤语；• 16k_ja：日语；• 16k_ko：韩语；• 16k_vi：越南语；• 16k_ms：马来语；• 16k_id：印度尼西亚语；• 16k_fil：菲律宾语；• 16k_th：泰语；• 16k_pt：葡萄牙语；• 16k_tr：土耳其语；• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）； */
+  /** 引擎模型类型。电话场景：• 8k_zh：中文电话通用；• 8k_en：英文电话通用；非电话场景：• 16k_zh：中文通用；• 16k_zh-PY：中英粤;• 16k_zh_medical：中文医疗；• 16k_en：英语；• 16k_yue：粤语；• 16k_ja：日语；• 16k_ko：韩语；• 16k_vi：越南语；• 16k_ms：马来语；• 16k_id：印度尼西亚语；• 16k_fil：菲律宾语；• 16k_th：泰语；• 16k_pt：葡萄牙语；• 16k_tr：土耳其语；• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）； */
   EngSerViceType: string;
   /** 语音数据来源。0：语音 URL；1：语音数据（post body）。 */
   SourceType: number;
-  /** 识别音频的音频格式，支持wav、pcm、ogg-opus、speex、silk、mp3、m4a、aac。 */
+  /** 识别音频的音频格式，支持wav、pcm、ogg-opus、speex、silk、mp3、m4a、aac、amr。 */
   VoiceFormat: string;
   /** 腾讯云项目 ID，废弃参数，填写0即可。 */
   ProjectId?: number;

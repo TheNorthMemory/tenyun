@@ -4,7 +4,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 带宽信息 */
 declare interface BandwidthInfo {
-  /** 返回格式：yyyy-mm-dd HH:MM:SS根据粒度会有不同程度的缩减。 */
+  /** 返回格式：使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。根据粒度会有不同程度的缩减。 */
   Time: string;
   /** 带宽。 */
   Bandwidth: number;
@@ -38,13 +38,13 @@ declare interface BillCountryInfo {
 
 /** 带宽和流量信息。 */
 declare interface BillDataInfo {
-  /** 时间点，格式: yyyy-mm-dd HH:MM:SS。 */
+  /** 时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   Time: string;
   /** 带宽，单位是 Mbps。 */
   Bandwidth: number;
   /** 流量，单位是 MB。 */
   Flux: number;
-  /** 峰值时间点，格式: yyyy-mm-dd HH:MM:SS，原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。 */
+  /** 峰值时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。 */
   PeakTime: string;
 }
 
@@ -110,7 +110,7 @@ declare interface CallbackEventInfo {
 
 /** 下行播放统计指标 */
 declare interface CdnPlayStatData {
-  /** 时间点，格式: yyyy-mm-dd HH:MM:SS。 */
+  /** 时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   Time: string;
   /** 带宽，单位: Mbps。 */
   Bandwidth: number;
@@ -1156,7 +1156,7 @@ declare interface TranscodeTaskNum {
 
 /** 转码总量数据 */
 declare interface TranscodeTotalInfo {
-  /** 时间点，北京时间，示例：2019-03-01 00:00:00。 */
+  /** 时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   Time: string;
   /** 转码时长，单位：分钟。 */
   Duration: number;
@@ -1985,9 +1985,9 @@ declare interface DescribeAreaBillBandwidthAndFluxListResponse {
 }
 
 declare interface DescribeBillBandwidthAndFluxListRequest {
-  /** 起始时间点，格式为yyyy-mm-dd HH:MM:SS。 */
+  /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近3年的数据查询 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   EndTime: string;
   /** 直播播放域名，若不填，表示总体数据。 */
   PlayDomains?: string[];
@@ -2002,18 +2002,18 @@ declare interface DescribeBillBandwidthAndFluxListRequest {
 }
 
 declare interface DescribeBillBandwidthAndFluxListResponse {
-  /** 峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。 */
-  PeakBandwidthTime: string;
+  /** 峰值带宽所在时间点，接口返回支持两种时间格式(与接口请求传递的时间格式一致)：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
+  PeakBandwidthTime?: string;
   /** 峰值带宽，单位是Mbps。 */
-  PeakBandwidth: number;
-  /** 95峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。 */
-  P95PeakBandwidthTime: string;
+  PeakBandwidth?: number;
+  /** 95峰值带宽所在时间点，接口返回支持两种时间格式(与接口请求传递的时间格式一致)：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
+  P95PeakBandwidthTime?: string;
   /** 95峰值带宽，单位是Mbps。 */
-  P95PeakBandwidth: number;
+  P95PeakBandwidth?: number;
   /** 总流量，单位是MB。 */
-  SumFlux: number;
+  SumFlux?: number;
   /** 明细数据信息。 */
-  DataInfoList: BillDataInfo[];
+  DataInfoList?: BillDataInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2053,9 +2053,9 @@ declare interface DescribeCallbackRecordsListResponse {
 declare interface DescribeConcurrentRecordStreamNumRequest {
   /** 直播类型，SlowLive：慢直播。NormalLive：普通直播。 */
   LiveType: string;
-  /** 起始时间，格式：yyyy-mm-dd HH:MM:SS。可以查询最近180天的数据。 */
+  /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** 结束时间，格式：yyyy-mm-dd HH:MM:SS。时间跨度最大支持31天。 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   EndTime: string;
   /** 如果为空，查询所有地区数据；如果为“Mainland”，查询国内数据；如果为“Oversea”，则查询国外数据。 */
   MainlandOrOversea?: string;
@@ -2065,21 +2065,21 @@ declare interface DescribeConcurrentRecordStreamNumRequest {
 
 declare interface DescribeConcurrentRecordStreamNumResponse {
   /** 统计信息列表。 */
-  DataInfoList: ConcurrentRecordStreamNum[];
+  DataInfoList?: ConcurrentRecordStreamNum[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDeliverBandwidthListRequest {
-  /** 起始时间，格式为%Y-%m-%d %H:%M:%S。 */
+  /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** 结束时间，格式为%Y-%m-%d %H:%M:%S，支持最近三个月的数据查询，时间跨度最大是1个月。 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   EndTime: string;
 }
 
 declare interface DescribeDeliverBandwidthListResponse {
   /** 转推计费带宽数据 */
-  DataInfoList: BandwidthInfo[];
+  DataInfoList?: BandwidthInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2711,9 +2711,9 @@ declare interface DescribeLiveTranscodeTemplatesResponse {
 }
 
 declare interface DescribeLiveTranscodeTotalInfoRequest {
-  /** 开始时间，北京时间。格式：yyyy-mm-dd HH:MM:SS。 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** 结束时间，北京时间。格式：yyyy-mm-dd HH:MM:SS。 */
+  /** 结束时间，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
   /** 推流域名列表，若不填，表示查询所有域名总体数据。指定域名时返回1小时粒度数据。 */
   PushDomains?: string[];
@@ -2723,7 +2723,7 @@ declare interface DescribeLiveTranscodeTotalInfoRequest {
 
 declare interface DescribeLiveTranscodeTotalInfoResponse {
   /** 统计数据列表。 */
-  DataInfoList: TranscodeTotalInfo[] | null;
+  DataInfoList?: TranscodeTotalInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3013,9 +3013,9 @@ declare interface DescribeRecordTaskResponse {
 }
 
 declare interface DescribeScreenShotSheetNumListRequest {
-  /** utc起始时间，格式为yyyy-mm-ddTHH:MM:SSZ */
+  /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** utc结束时间，格式为yyyy-mm-ddTHH:MM:SSZ，支持查询最近1年数据。 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   EndTime: string;
   /** 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。 */
   Zone?: string;
@@ -3027,7 +3027,7 @@ declare interface DescribeScreenShotSheetNumListRequest {
 
 declare interface DescribeScreenShotSheetNumListResponse {
   /** 数据信息列表。 */
-  DataInfoList: TimeValue[];
+  DataInfoList?: TimeValue[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3231,9 +3231,9 @@ declare interface DescribeTranscodeTaskNumResponse {
 }
 
 declare interface DescribeUploadStreamNumsRequest {
-  /** 起始时间点，格式为yyyy-mm-dd HH:MM:SS。 */
+  /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近31天的数据查询 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   EndTime: string;
   /** 直播域名，若不填，表示总体数据。 */
   Domains?: string[];
@@ -3243,7 +3243,7 @@ declare interface DescribeUploadStreamNumsRequest {
 
 declare interface DescribeUploadStreamNumsResponse {
   /** 明细数据信息 */
-  DataInfoList: ConcurrentRecordStreamNum[];
+  DataInfoList?: ConcurrentRecordStreamNum[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

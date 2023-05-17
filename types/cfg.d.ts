@@ -447,7 +447,7 @@ declare interface DescribeTaskListRequest {
   TaskTitle?: string;
   /** 标签键 */
   TaskTag?: string[];
-  /** 状态 */
+  /** 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束) */
   TaskStatus?: number;
   /** 开始时间，固定格式%Y-%m-%d %H:%M:%S */
   TaskStartTime?: string;
@@ -459,9 +459,9 @@ declare interface DescribeTaskListRequest {
 
 declare interface DescribeTaskListResponse {
   /** 无 */
-  TaskList: TaskListItem[];
+  TaskList?: TaskListItem[];
   /** 列表数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

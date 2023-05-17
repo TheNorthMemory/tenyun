@@ -408,7 +408,7 @@ declare interface AiRecognitionResult {
   OcrWordsTask: AiRecognitionTaskOcrWordsResult | null;
   /** 文本全文识别结果，当 Type 为 OcrFullTextRecognition 时有效。 */
   OcrFullTextTask: AiRecognitionTaskOcrFullTextResult | null;
-  /** 翻译结果，当 Type 为 TransTextRecognition 时有效。 */
+  /** 翻译结果，当 Type 为TransTextRecognition 时有效。 */
   TransTextTask: AiRecognitionTaskTransTextResult | null;
 }
 
@@ -1802,6 +1802,8 @@ declare interface EditMediaTaskOutput {
   OutputStorage: TaskOutputStorage;
   /** 编辑后的视频文件路径。 */
   Path: string;
+  /** 编辑后的视频文件元信息。 */
+  MetaData?: MediaMetaData | null;
 }
 
 /** 音视频增强配置 */
@@ -2542,6 +2544,10 @@ declare interface MediaAudioStreamItem {
   Codec: string;
   /** 音频声道数，例如 2。 */
   Channel: number | null;
+  /** 音频Codecs。 */
+  Codecs?: string | null;
+  /** 音频响度。 */
+  Loudness?: number | null;
 }
 
 /** 内容审核 Asr 文字审核嫌疑片段 */
@@ -2688,6 +2694,10 @@ declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
   Input: AdaptiveDynamicStreamingTaskInput;
   /** 对视频转自适应码流任务的输出。 */
   Output: AdaptiveDynamicStreamingInfoItem | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 转动图任务结果类型 */
@@ -2704,6 +2714,10 @@ declare interface MediaProcessTaskAnimatedGraphicResult {
   Input: AnimatedGraphicTaskInput;
   /** 转动图任务的输出。 */
   Output: MediaAnimatedGraphicsItem | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 对视频截雪碧图任务结果类型 */
@@ -2720,6 +2734,10 @@ declare interface MediaProcessTaskImageSpriteResult {
   Input: ImageSpriteTaskInput;
   /** 对视频截雪碧图任务的输出。 */
   Output: MediaImageSpriteItem | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 媒体处理任务类型 */
@@ -2770,6 +2788,10 @@ declare interface MediaProcessTaskSampleSnapshotResult {
   Input: SampleSnapshotTaskInput;
   /** 对视频做采样截图任务输出。 */
   Output: MediaSampleSnapshotItem | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 对视频按指定时间点截图任务结果类型 */
@@ -2786,6 +2808,10 @@ declare interface MediaProcessTaskSnapshotByTimeOffsetResult {
   Input: SnapshotByTimeOffsetTaskInput;
   /** 对视频按指定时间点截图任务输出。 */
   Output: MediaSnapshotByTimeOffsetItem | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 转码任务结果类型 */
@@ -2890,6 +2916,8 @@ declare interface MediaVideoStreamItem {
   ColorTransfer: string | null;
   /** HDR类型。 */
   HdrType: string | null;
+  /** 视频Codecs。 */
+  Codecs?: string | null;
 }
 
 /** 修改输入信息的参数。 */
@@ -3484,6 +3512,10 @@ declare interface ScheduleAnalysisTaskResult {
   Input: AiAnalysisTaskInput;
   /** 分析任务的输出。 */
   Output: AiAnalysisResult[] | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 质检任务结果类型 */
@@ -3516,6 +3548,10 @@ declare interface ScheduleRecognitionTaskResult {
   Input: AiRecognitionTaskInput;
   /** 识别任务的输出。 */
   Output: AiRecognitionResult[] | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 编排视频审核任务结果类型 */
@@ -3532,6 +3568,10 @@ declare interface ScheduleReviewTaskResult {
   Input: AiContentReviewTaskInput;
   /** 审核任务的输出。 */
   Output: AiContentReviewResult[] | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
 }
 
 /** 编排任务信息 */
@@ -3686,7 +3726,7 @@ declare interface SvgWatermarkInputForUpdate {
 
 /** 极速高清参数配置。 */
 declare interface TEHDConfig {
-  /** 极速高清类型，可选值：TEHD-100：极速高清-100。不填代表不启用极速高清。 */
+  /** 极速高清类型，可选值：TEHD-100：极速高清-100（视频极速高清）。TEHD-200：极速高清-200（音频极速高清）。不填代表不启用极速高清。 */
   Type: string;
   /** 视频码率上限，当 Type 指定了极速高清类型时有效。不填或填0表示不设视频码率上限。 */
   MaxVideoBitrate?: number;
@@ -3694,7 +3734,7 @@ declare interface TEHDConfig {
 
 /** 极速高清参数配置。 */
 declare interface TEHDConfigForUpdate {
-  /** 极速高清类型，可选值：TEHD-100：极速高清-100。不填代表不修改。 */
+  /** 极速高清类型，可选值：TEHD-100：极速高清-100（视频极速高清）。TEHD-200：极速高清-200（音频极速高清）。不填代表不修改。 */
   Type?: string;
   /** 视频码率上限，不填代表不修改。 */
   MaxVideoBitrate?: number;
@@ -5135,33 +5175,33 @@ declare interface DescribeTaskDetailRequest {
 
 declare interface DescribeTaskDetailResponse {
   /** 任务类型，目前取值有：WorkflowTask：视频工作流处理任务。EditMediaTask：视频编辑任务。LiveStreamProcessTask：直播流处理任务。ScheduleTask：编排处理任务。 */
-  TaskType: string;
+  TaskType?: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  BeginProcessTime: string;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  FinishTime: string;
+  FinishTime?: string;
   /** 视频编辑任务信息，仅当 TaskType 为 EditMediaTask，该字段有值。 */
-  EditMediaTask: EditMediaTask | null;
+  EditMediaTask?: EditMediaTask | null;
   /** 视频处理任务信息，仅当 TaskType 为 WorkflowTask，该字段有值。 */
-  WorkflowTask: WorkflowTask | null;
+  WorkflowTask?: WorkflowTask | null;
   /** 直播流处理任务信息，仅当 TaskType 为 LiveStreamProcessTask，该字段有值。 */
-  LiveStreamProcessTask: LiveStreamProcessTask | null;
+  LiveStreamProcessTask?: LiveStreamProcessTask | null;
   /** 任务的事件通知信息。 */
-  TaskNotifyConfig: TaskNotifyConfig | null;
+  TaskNotifyConfig?: TaskNotifyConfig | null;
   /** 任务流的优先级，取值范围为 [-10, 10]。 */
-  TasksPriority: number;
+  TasksPriority?: number;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。 */
-  SessionId: string;
+  SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
-  SessionContext: string;
+  SessionContext?: string;
   /** 扩展信息字段，仅用于特定场景。 */
-  ExtInfo: string;
+  ExtInfo?: string;
   /** 编排处理任务信息，仅当 TaskType 为 ScheduleTask，该字段有值。 */
-  ScheduleTask: ScheduleTask | null;
+  ScheduleTask?: ScheduleTask | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

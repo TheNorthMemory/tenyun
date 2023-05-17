@@ -1089,7 +1089,7 @@ declare interface SystemDisk {
   /** 系统盘大小，单位：GB。默认值为 50 */
   DiskSize?: number;
   /** 所属的独享集群ID。 */
-  CdcId?: string;
+  CdcId?: string | null;
 }
 
 /** 标签键值对，可以通过调用 [DescribeTags](https://cloud.tencent.com/document/api/651/35316) 返回值中的 Tags 字段来获取。 */

@@ -120,9 +120,9 @@ declare interface CfwNatDnatRule {
 declare interface CommonFilter {
   /** 检索的键值 */
   Name: string;
-  /** 检索的值 */
+  /** 检索的值，各检索值间为OR关系 */
   Values: string[];
-  /** 枚举类型，代表name与values之间的匹配关系enum FilterOperatorType { //INVALID FILTER_OPERATOR_TYPE_INVALID = 0; //等于 FILTER_OPERATOR_TYPE_EQUAL = 1; //大于 FILTER_OPERATOR_TYPE_GREATER = 2; //小于 FILTER_OPERATOR_TYPE_LESS = 3; //大于等于 FILTER_OPERATOR_TYPE_GREATER_EQ = 4; //小于等于 FILTER_OPERATOR_TYPE_LESS_EQ = 5; //不等于 FILTER_OPERATOR_TYPE_NO_EQ = 6; //in，数组中包含 FILTER_OPERATOR_TYPE_IN = 7; //not in FILTER_OPERATOR_TYPE_NOT_IN = 8; //模糊匹配 FILTER_OPERATOR_TYPE_FUZZINESS = 9; //存在 FILTER_OPERATOR_TYPE_EXIST = 10; //不存在 FILTER_OPERATOR_TYPE_NOT_EXIST = 11; //正则 FILTER_OPERATOR_TYPE_REGULAR = 12;} */
+  /** 枚举类型，代表Name与Values之间的匹配关系enum FilterOperatorType { //等于 FILTER_OPERATOR_TYPE_EQUAL = 1; //大于 FILTER_OPERATOR_TYPE_GREATER = 2; //小于 FILTER_OPERATOR_TYPE_LESS = 3; //大于等于 FILTER_OPERATOR_TYPE_GREATER_EQ = 4; //小于等于 FILTER_OPERATOR_TYPE_LESS_EQ = 5; //不等于 FILTER_OPERATOR_TYPE_NO_EQ = 6; //not in FILTER_OPERATOR_TYPE_NOT_IN = 8; //模糊匹配 FILTER_OPERATOR_TYPE_FUZZINESS = 9;} */
   OperatorType: number;
 }
 
@@ -624,6 +624,22 @@ declare interface SecurityGroupRule {
   Enable?: string;
 }
 
+/** 安全组规则 */
+declare interface SecurityGroupSimplifyRule {
+  /** 访问源示例：net：IP/CIDR(192.168.0.2)template：参数模板(ipm-dyodhpby)instance：资产实例(ins-123456)resourcegroup：资产分组(/全部分组/分组1/子分组1)tag：资源标签({"Key":"标签key值","Value":"标签Value值"})region：地域(ap-gaungzhou) */
+  SourceContent: string | null;
+  /** 访问目的示例：net：IP/CIDR(192.168.0.2)template：参数模板(ipm-dyodhpby)instance：资产实例(ins-123456)resourcegroup：资产分组(/全部分组/分组1/子分组1)tag：资源标签({"Key":"标签key值","Value":"标签Value值"})region：地域(ap-gaungzhou) */
+  DestContent: string | null;
+  /** 协议；TCP/UDP/ICMP/ANY */
+  Protocol?: string | null;
+  /** 描述 */
+  Description: string | null;
+  /** 规则对应的唯一id */
+  RuleUuid?: number | null;
+  /** 规则序号 */
+  Sequence?: number | null;
+}
+
 /** 执行顺序对象 */
 declare interface SequenceData {
   /** 规则Id值 */
@@ -797,7 +813,9 @@ declare interface AddEnterpriseSecurityGroupRulesRequest {
 
 declare interface AddEnterpriseSecurityGroupRulesResponse {
   /** 状态值，0：添加成功，非0：添加失败 */
-  Status: number;
+  Status?: number;
+  /** 规则uuid */
+  Rules?: SecurityGroupSimplifyRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1231,17 +1249,19 @@ declare interface DescribeEnterpriseSecurityGroupRuleRequest {
   Protocol?: string;
   /** 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥 */
   ServiceTemplateId?: string;
+  /** 规则的uuid */
+  RuleUuid?: number;
 }
 
 declare interface DescribeEnterpriseSecurityGroupRuleResponse {
   /** 分页查询时，显示的当前页的页码。 */
-  PageNo: string;
+  PageNo?: string;
   /** 分页查询时，显示的每页数据的最大条数。 */
-  PageSize: string;
+  PageSize?: string;
   /** 访问控制策略列表 */
-  Rules: SecurityGroupRule[];
+  Rules?: SecurityGroupRule[];
   /** 访问控制策略的总数量。 */
-  TotalCount: string;
+  TotalCount?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2079,7 +2099,7 @@ declare interface Cfw {
   AddAcRule(data: AddAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAcRuleResponse>;
   /** 创建新企业安全组规则 {@link AddEnterpriseSecurityGroupRulesRequest} {@link AddEnterpriseSecurityGroupRulesResponse} */
   AddEnterpriseSecurityGroupRules(data: AddEnterpriseSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEnterpriseSecurityGroupRulesResponse>;
-  /** 添加nat访问控制规则 {@link AddNatAcRuleRequest} {@link AddNatAcRuleResponse} */
+  /** 添加nat访问控制规则(地域必填) {@link AddNatAcRuleRequest} {@link AddNatAcRuleResponse} */
   AddNatAcRule(data: AddNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddNatAcRuleResponse>;
   /** 创建访问控制规则 {@link CreateAcRulesRequest} {@link CreateAcRulesResponse} */
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;

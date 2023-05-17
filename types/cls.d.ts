@@ -74,6 +74,8 @@ declare interface AlarmTarget {
   EndTimeOffset: number;
   /** 日志集ID。 */
   LogsetId: string;
+  /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
+  SyntaxRule?: number;
 }
 
 /** 告警对象 */

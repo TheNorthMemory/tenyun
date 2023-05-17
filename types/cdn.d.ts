@@ -198,7 +198,7 @@ declare interface AdvancedCCRules {
   RedirectUrl?: string | null;
   /** 七层限频具体配置 */
   Configure?: ScdnSevenLayerRules[] | null;
-  /** 是否开启改规则 on 开启，off关闭 */
+  /** 自定义cc规则配置开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
 }
 
@@ -1502,7 +1502,7 @@ declare interface OfflineCache {
 declare interface Origin {
   /** 主源站列表修改源站时，需要同时填充对应的 OriginType */
   Origins?: string[] | null;
-  /** 主源站类型入参支持以下几种类型：domain：域名类型domainv6：域名解析V6类型cos：对象存储源站ip：IP 列表作为源站ipv6：源站列表为一个单独的 IPv6 地址ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ip_domain: 支持IP和域名形式源站混填（白名单功能）ip_domainv6：源站列表为多个 IPv4 地址以及域名解析v6地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ipv6_domainv6：源站列表为多个 IPv6 地址以及域名解析v6地址domain_domainv6：源站列表为多个域名解析v4 地址以及域名解析v6地址ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名ip_ipv6_domainv6：源站列表为多个 IPv4 地址IPv6 地址以及域名解析v6地址ip_domain_domainv6：源站列表为多个 IPv4 地址域名解析v4 地址以及域名解析v6地址ipv6_domain_domainv6：源站列表为多个 域名解析v4 地址IPv6 地址以及域名解析v6地址ip_ipv6_domain_domainv6：源站列表为多个 IPv4 地址IPv6 地址 域名解析v4 地址以及域名解析v6地址出参增加以下几种类型：image：数据万象源站ftp：历史 FTP 托管源源站，现已不维护修改 Origins 时需要同时填充对应的 OriginTypeIPv6 功能目前尚未全量，需要先申请试用 */
+  /** 主源站类型入参支持以下几种类型：domain：域名类型domainv6：域名解析V6类型cos：对象存储源站third_party: 第三方存储源站ip：IP 列表作为源站ipv6：源站列表为一个单独的 IPv6 地址ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ip_domain: 支持IP和域名形式源站混填（白名单功能）ip_domainv6：源站列表为多个 IPv4 地址以及域名解析v6地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ipv6_domainv6：源站列表为多个 IPv6 地址以及域名解析v6地址domain_domainv6：源站列表为多个域名解析v4 地址以及域名解析v6地址ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名ip_ipv6_domainv6：源站列表为多个 IPv4 地址IPv6 地址以及域名解析v6地址ip_domain_domainv6：源站列表为多个 IPv4 地址域名解析v4 地址以及域名解析v6地址ipv6_domain_domainv6：源站列表为多个 域名解析v4 地址IPv6 地址以及域名解析v6地址ip_ipv6_domain_domainv6：源站列表为多个 IPv4 地址IPv6 地址 域名解析v4 地址以及域名解析v6地址出参增加以下几种类型：image：数据万象源站ftp：历史 FTP 托管源源站，现已不维护修改 Origins 时需要同时填充对应的 OriginTypeIPv6 功能目前尚未全量，需要先申请试用 */
   OriginType?: string | null;
   /** 当源站类型为cos或者第三方存储加速时,ServerName字段必填回主源站时 Host 头部，不填充则默认为加速域名若接入的是泛域名，则回源 Host 默认为访问时的子域名 */
   ServerName?: string | null;
@@ -1524,7 +1524,7 @@ declare interface Origin {
   PathBasedOrigin?: PathBasedOriginRule[] | null;
   /** HTTPS回源高级配置 */
   AdvanceHttps?: AdvanceHttps | null;
-  /** 对象存储回源厂商 */
+  /** 对象存储回源厂商，当源站类型为第三方存储源站(third_party)时必填，可选值包括以下:aws_s3: AWS S3ali_oss: 阿里云 OSShw_obs: 华为 OBSqiniu_kodo: 七牛云 kodoothers: 其它厂商对象存储,仅支持兼容以AWS签名算法的对象存储，如腾讯云金融专区COS */
   OriginCompany?: string | null;
 }
 
@@ -1742,11 +1742,11 @@ declare interface QnPrivateAccess {
 
 /** 组成CacheKey的一部分 */
 declare interface QueryStringKey {
-  /** on | off CacheKey是否由QueryString组成 */
+  /** CacheKey是否由QueryString组成配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 是否重新排序 */
   Reorder?: string | null;
-  /** includeAll | excludeAll | includeCustom | excludeCustom 使用/排除部分url参数 */
+  /** 使用/排除部分url参数，取值有：includeAll：包含所有excludeAll：排除所有includeCustom：自定义包含excludeCustom：自定义排除 */
   Action?: string | null;
   /** 使用/排除的url参数数组，';' 分割 */
   Value?: string | null;
@@ -2020,7 +2020,7 @@ declare interface ScdnCCRules {
   DetectionTime?: number | null;
   /** 限频阈值 */
   FrequencyLimit?: number | null;
-  /** IP 惩罚开关，可选on|off */
+  /** IP 惩罚配置开关，取值有：on：开启off：关闭 */
   PunishmentSwitch?: string | null;
   /** IP 惩罚时长 */
   PunishmentTime?: number | null;
@@ -2032,7 +2032,7 @@ declare interface ScdnCCRules {
 
 /** cc的配置类型 */
 declare interface ScdnConfig {
-  /** on | off */
+  /** scdn cc配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 自定义 cc 防护规则 */
   Rules?: ScdnCCRules[] | null;
@@ -2044,7 +2044,7 @@ declare interface ScdnConfig {
 
 /** ddos配置类型 */
 declare interface ScdnDdosConfig {
-  /** on|off */
+  /** Scdn ddos配置开关，取值有：on：开启off：关闭 */
   Switch: string;
 }
 
@@ -2208,19 +2208,19 @@ declare interface ScdnTypeData {
 
 /** waf配置类型 */
 declare interface ScdnWafConfig {
-  /** on|off */
+  /** Scdn waf配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** intercept|observe，默认intercept */
   Mode?: string | null;
   /** 重定向的错误页面 */
   ErrorPage?: ScdnErrorPage | null;
-  /** webshell拦截开关，on|off，默认off */
+  /** webshell拦截配置开关，取值有：on：开启off：关闭 */
   WebShellSwitch?: string | null;
   /** 类型拦截规则 */
   Rules?: ScdnWafRule[] | null;
   /** waf规则等级，可取100|200|300 */
   Level?: number | null;
-  /** waf子规则开关 */
+  /** waf子规则配置开关，取值有：on：开启off：关闭 */
   SubRuleSwitch?: WafSubRuleStatus[] | null;
 }
 
@@ -2234,19 +2234,19 @@ declare interface ScdnWafRule {
 
 /** 作为CacheKey的一部分 */
 declare interface SchemeKey {
-  /** on | off 是否使用scheme作为cache key的一部分 */
+  /** scheme作为cache key配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
 }
 
 /** scdn相关的配置 */
 declare interface SecurityConfig {
-  /** on|off */
+  /** scdn 安全配置开关，取值有：on：开启off：关闭 */
   Switch: string;
 }
 
 /** SEO 搜索引擎优化配置，默认为关闭状态 */
 declare interface Seo {
-  /** SEO 配置开关on：开启off：关闭 */
+  /** SEO 搜索引擎优化配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
 }
 
@@ -2270,9 +2270,9 @@ declare interface ServerCert {
   From?: string | null;
 }
 
-/** ShareCname配置 */
+/** ShareCname配置ShareCname 为内测功能,如需使用,请联系腾讯云工程师开白. */
 declare interface ShareCname {
-  /** ShareCname 配置开关, 开关为off时，域名使用默认CNAME，若需要使用共享CNAME，将开关置为on.* ShareCname 为内测功能,如需使用,请联系腾讯云工程师开白. */
+  /** ShareCname 配置开关, 取值有：on：开启，使用共享CNAMEoff：关闭，使用默认CNAME */
   Switch: string;
   /** 设置共享CNAME. */
   Cname?: string | null;
@@ -2332,19 +2332,19 @@ declare interface StatisticItem {
   CounterMeasure?: string | null;
   /** 触发提醒阈值百分比 */
   AlertPercentage?: number | null;
-  /** 提醒开关 on/off */
+  /** 累计用量封顶告警配置，取值有：on：开启off：关闭 */
   AlertSwitch?: string | null;
   /** 指标类型，流量flux或带宽bandwidth */
   Metric?: string | null;
   /** 检测周期，单位分钟，60或1440 */
   Cycle?: number | null;
-  /** 是否开启该选项，on/off */
+  /** 累计用量封顶配置开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
 }
 
 /** 状态码缓存过期配置，默认情况下会对 404 状态码缓存 10 秒 */
 declare interface StatusCodeCache {
-  /** 状态码缓存过期配置开关on：开启off：关闭 */
+  /** 状态码缓存过期配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 状态码缓存过期规则明细 */
   CacheRules?: StatusCodeCacheRule[] | null;
@@ -2434,7 +2434,7 @@ declare interface TopicInfo {
 
 /** 图片优化-TpgAdapter配置 */
 declare interface TpgAdapter {
-  /** 开关，"on/off" */
+  /** 图片优化-TpgAdapter配置开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
 }
 
@@ -2496,7 +2496,7 @@ declare interface UrlRecord {
 
 /** 访问URL重写配置 */
 declare interface UrlRedirect {
-  /** 访问URL重写配置开关on：开启off：关闭 */
+  /** 访问URL重写配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 访问URL重写规则，当Switch为on时必填，规则数量最大为10个。 */
   PathRules?: UrlRedirectRule[] | null;
@@ -2518,7 +2518,7 @@ declare interface UrlRedirectRule {
 
 /** UserAgent黑白名单配置 */
 declare interface UserAgentFilter {
-  /** 开关，on或off */
+  /** UserAgent黑白名单配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** UA黑白名单生效规则列表 */
   FilterRules?: UserAgentFilterRule[] | null;
@@ -2538,7 +2538,7 @@ declare interface UserAgentFilterRule {
 
 /** 视频拖拽配置，默认为关闭状态 */
 declare interface VideoSeek {
-  /** 视频拖拽开关on：开启off：关闭 */
+  /** 视频拖拽配置开关，取值有：on：开启off：关闭 */
   Switch: string;
 }
 
@@ -2560,15 +2560,15 @@ declare interface ViolationUrl {
 
 /** Waf子规则开关状态 */
 declare interface WafSubRuleStatus {
-  /** 子规则状态，on|off */
+  /** Waf子规则开关状态配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 规则id列表 */
   SubIds: number[];
 }
 
-/** WebSocket配置 */
+/** WebSocket配置WebSocket 为ECDN产品功能，如需使用请通过ECDN域名配置. */
 declare interface WebSocket {
-  /** WebSocket 超时配置开关, 开关为off时，平台仍支持WebSocket连接，此时超时时间默认为15秒，若需要调整超时时间，将开关置为on.* WebSocket 为ECDN产品功能，如需使用请通过ECDN域名配置. */
+  /** WebSocket 超时配置开关，取值有：on：开启，可以调整超时时间off：关闭，平台仍支持WebSocket连接，此时超时时间默认为15秒 */
   Switch: string;
   /** 设置超时时间，单位为秒，最大超时时间300秒。 */
   Timeout?: number | null;
@@ -2576,7 +2576,7 @@ declare interface WebSocket {
 
 /** 图片优化-WebpAdapter配置 */
 declare interface WebpAdapter {
-  /** 开关，"on/off" */
+  /** 图片优化-WebpAdapter配置开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
 }
 

@@ -918,6 +918,8 @@ declare interface ParamTemplateInfo {
   EngineVersion: string;
   /** 参数模板类型 */
   TemplateType: string;
+  /** 参数模板引擎 */
+  EngineType?: string | null;
 }
 
 /** 数据库实例参数 */
@@ -2546,6 +2548,20 @@ declare interface DescribeBackupDatabasesResponse {
   TotalCount: number;
   /** 符合查询条件的数据库数组。 */
   Items: DatabaseName[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupDecryptionKeyRequest {
+  /** 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 实例的备份ID，可通过DescribeBackups接口查询备份的ID。 */
+  BackupId: number;
+}
+
+declare interface DescribeBackupDecryptionKeyResponse {
+  /** 备份文件解密密钥。 */
+  DecryptionKey: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4677,6 +4693,8 @@ declare interface Cdb {
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
   /** 查询备份数据库列表 {@link DescribeBackupDatabasesRequest} {@link DescribeBackupDatabasesResponse} */
   DescribeBackupDatabases(data: DescribeBackupDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDatabasesResponse>;
+  /** 查询备份文件解密密钥 {@link DescribeBackupDecryptionKeyRequest} {@link DescribeBackupDecryptionKeyResponse} */
+  DescribeBackupDecryptionKey(data: DescribeBackupDecryptionKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDecryptionKeyResponse>;
   /** 查询备份文件下载源限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
   DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
   /** 查询实例默认备份加密状态 {@link DescribeBackupEncryptionStatusRequest} {@link DescribeBackupEncryptionStatusResponse} */
