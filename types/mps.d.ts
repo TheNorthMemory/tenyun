@@ -388,7 +388,7 @@ declare interface AiContentReviewTaskInput {
 
 /** 视频质检输入参数类型 */
 declare interface AiQualityControlTaskInput {
-  /** 视频质检模板 ID 。 */
+  /** 视频质检模板 ID 。暂时可以直接使用 预设模板ID 10，后面控制台支持用户配置自定义模板。 */
   Definition?: number | null;
   /** 渠道扩展参数json序列化字符串。 */
   ChannelExtPara?: string | null;

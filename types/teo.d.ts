@@ -226,6 +226,8 @@ declare interface ApplicationProxy {
   UpdateTime: string;
   /** 规则列表。 */
   ApplicationProxyRules: ApplicationProxyRule[];
+  /** 中国大陆加速优化配置。 */
+  AccelerateMainland?: AccelerateMainland;
 }
 
 /** 应用代理规则 */

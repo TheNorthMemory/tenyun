@@ -973,6 +973,8 @@ declare interface CreateFlowByFilesRequest {
   Agent?: Agent;
   /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
   CcNotifyType?: number;
+  /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  AutoSignScene?: string;
 }
 
 declare interface CreateFlowByFilesResponse {
@@ -1047,6 +1049,8 @@ declare interface CreateFlowRequest {
   Agent?: Agent;
   /** 被抄送人的信息列表。注: 此功能为白名单功能，若有需要，请联系电子签客服开白使用。 */
   CcInfos?: CcInfo[];
+  /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  AutoSignScene?: string;
 }
 
 declare interface CreateFlowResponse {

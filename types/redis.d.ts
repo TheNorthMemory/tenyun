@@ -620,7 +620,7 @@ declare interface RedisBackupSet {
   StartTime: string;
   /** 备份任务ID。 */
   BackupId: string;
-  /** 备份类型。- 1：凌晨系统发起的备份。- 0：用户发起的手动备份。 */
+  /** 备份类型。- 1：凌晨系统发起的自动备份。- 0：用户发起的手动备份。 */
   BackupType: string;
   /** 备份状态。 - 1：备份被其它流程锁定。- 2：备份正常，没有被任何流程锁定。- -1：备份已过期。- 3：备份正在被导出。- 4：备份导出成功。 */
   Status: number;
@@ -1261,21 +1261,21 @@ declare interface DeleteReplicationInstanceResponse {
 }
 
 declare interface DescribeAutoBackupConfigRequest {
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeAutoBackupConfigResponse {
-  /** 备份类型。自动备份类型： 1 “定时回档” */
-  AutoBackupType: number;
-  /** Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。 */
-  WeekDays: string[];
-  /** 时间段。 */
-  TimePeriod: string;
-  /** 全量备份文件保存天数 */
-  BackupStorageDays: number;
-  /** tendis binlog备份文件保存天数 */
-  BinlogStorageDays: number;
+  /** 该参数因兼容性问题暂时保留，请忽略。 */
+  AutoBackupType?: number;
+  /** 备份周期，默认为每天自动备份，Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。 */
+  WeekDays?: string[];
+  /** 备份任务发起时间段。 */
+  TimePeriod?: string;
+  /** 全量备份文件保存天数。默认为7天。如需保存更多天数，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请。 */
+  BackupStorageDays?: number;
+  /** 该参数不再使用，请忽略。 */
+  BinlogStorageDays?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

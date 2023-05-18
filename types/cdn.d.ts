@@ -364,7 +364,7 @@ declare interface BandwidthAlert {
 
 /** Bot cookie策略 */
 declare interface BotCookie {
-  /** on|off */
+  /** Bot cookie策略配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 规则类型，当前只有all */
   RuleType: string;
@@ -380,7 +380,7 @@ declare interface BotCookie {
 
 /** Bot js策略 */
 declare interface BotJavaScript {
-  /** on|off */
+  /** Bot js策略配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 规则类型，当前只有file */
   RuleType: string;
@@ -1320,7 +1320,7 @@ declare interface IpFilterPathRule {
 
 /** 单节点单 IP 访问限频配置，默认为关闭状态 */
 declare interface IpFreqLimit {
-  /** IP 限频配置开关on：开启off：关闭 */
+  /** IP 限频配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 设置每秒请求数限制超出限制的请求会直接返回 514 */
   Qps?: number | null;
@@ -1342,15 +1342,15 @@ declare interface IpStatus {
   Ipv6: string | null;
 }
 
-/** Ipv6启用配置，不可更改 */
+/** Ipv6源站启用配置，不可更改 */
 declare interface Ipv6 {
-  /** 域名是否开启ipv6功能，on或off。 */
+  /** 域名开启源站ipv6配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
 }
 
 /** Ipv6访问配置 */
 declare interface Ipv6Access {
-  /** 域名是否开启ipv6访问功能，on或off。 */
+  /** 域名开启ipv6访问配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
 }
 
@@ -1464,7 +1464,7 @@ declare interface MapInfo {
 
 /** 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态 */
 declare interface MaxAge {
-  /** 浏览器缓存配置开关on：开启off：关闭 */
+  /** 浏览器缓存配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** MaxAge 规则 */
   MaxAgeRules?: MaxAgeRule[] | null;
@@ -1494,7 +1494,7 @@ declare interface MaxAgeRule {
 
 /** 离线缓存是否开启 */
 declare interface OfflineCache {
-  /** on | off, 离线缓存是否开启 */
+  /** 离线缓存配置开关，取值有：on：开启off：关闭 */
   Switch: string;
 }
 
@@ -1530,7 +1530,7 @@ declare interface Origin {
 
 /** 回源鉴权高级配置 */
 declare interface OriginAuthentication {
-  /** 鉴权开关，on或off */
+  /** 回源鉴权高级配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 鉴权类型A配置 */
   TypeA?: OriginAuthenticationTypeA | null;
@@ -1544,7 +1544,7 @@ declare interface OriginAuthenticationTypeA {
 
 /** 合并回源配置项 */
 declare interface OriginCombine {
-  /** on|off 是否开启合并回源 */
+  /** 合并回源配置开关，取值有：on：开启off：关闭 */
   Switch: string;
 }
 
@@ -1556,7 +1556,7 @@ declare interface OriginIp {
 
 /** 跨国回源优化配置，默认为关闭状态 (已下线) */
 declare interface OriginPullOptimization {
-  /** 跨国回源优化配置开关on：开启off：关闭 */
+  /** 跨国回源优化配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 跨国类型OVToCN：境外回源境内CNToOV：境内回源境外 */
   OptimizationType?: string | null;
@@ -1572,7 +1572,7 @@ declare interface OriginPullTimeout {
 
 /** oss回源鉴权 */
 declare interface OssPrivateAccess {
-  /** 开关， on/off。 */
+  /** oss回源鉴权配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 访问ID。 */
   AccessKey?: string | null;
@@ -1586,7 +1586,7 @@ declare interface OssPrivateAccess {
 
 /** 其他厂商对象存储回源鉴权 */
 declare interface OthersPrivateAccess {
-  /** 开关， on/off。 */
+  /** 其他厂商对象存储回源鉴权配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 访问ID。 */
   AccessKey?: string | null;
@@ -1732,7 +1732,7 @@ declare interface PushTask {
 
 /** 七牛元对象存储回源鉴权配置 */
 declare interface QnPrivateAccess {
-  /** 开关 on/off */
+  /** 七牛元对象存储回源鉴权配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 访问 ID */
   AccessKey?: string | null;
@@ -1754,7 +1754,7 @@ declare interface QueryStringKey {
 
 /** Quic配置项 */
 declare interface Quic {
-  /** 是否启动Quic配置 */
+  /** Quic功能配置开关，取值有：on：开启off：关闭 */
   Switch: string;
 }
 
@@ -1772,7 +1772,7 @@ declare interface Quota {
 
 /** 分片回源配置，默认为开启状态 */
 declare interface RangeOriginPull {
-  /** 分片回源配置开关on：开启off：关闭 */
+  /** 分片回源配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 分路径分片回源配置 */
   RangeRules?: RangeOriginPullRule[] | null;
@@ -1780,7 +1780,7 @@ declare interface RangeOriginPull {
 
 /** 分路径分片回源配置 */
 declare interface RangeOriginPullRule {
-  /** 分片回源配置开关 */
+  /** 分片回源配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 规则类型：file：指定文件后缀生效directory：指定路径生效path：指定绝对路径生效 */
   RuleType: string | null;
@@ -1790,7 +1790,7 @@ declare interface RangeOriginPullRule {
 
 /** 自定义回源302 follow请求host配置 */
 declare interface RedirectConfig {
-  /** 配置开关 */
+  /** 自定义回源302 follow请求host配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 主源站follow302请求时带的自定义的host头部 */
   FollowRedirectHost: string;
@@ -1800,7 +1800,7 @@ declare interface RedirectConfig {
 
 /** Referer 黑白名单配置，默认为关闭状态 */
 declare interface Referer {
-  /** referer 黑白名单配置开关on：开启off：关闭 */
+  /** referer 黑白名单配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** referer 黑白名单配置规则 */
   RefererRules?: RefererRule[] | null;
@@ -1830,7 +1830,7 @@ declare interface RegionMapRelation {
 
 /** 远程鉴权规则配置，可以包含多种规则配置。RemoteAuthenticationRules和Server 互斥，只需要配置其中一个。若只配置Server ，RemoteAuthenticationRules中详细规则参数将采用默认参数；默认参数值见各个配置项中说明； */
 declare interface RemoteAuthentication {
-  /** 远程鉴权开关；on : 开启;off: 关闭； */
+  /** 远程鉴权配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 远程鉴权规则配置 */
   RemoteAuthenticationRules?: RemoteAuthenticationRule[] | null;
@@ -1872,7 +1872,7 @@ declare interface ReportData {
 
 /** 自定义请求头配置，默认为关闭状态 */
 declare interface RequestHeader {
-  /** 自定义请求头配置开关on：开启off：关闭 */
+  /** 自定义请求头配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 自定义请求头配置规则 */
   HeaderRules?: HttpHeaderPathRule[] | null;
@@ -1904,7 +1904,7 @@ declare interface ResourceOriginData {
 
 /** 自定义响应头配置，默认为关闭状态 */
 declare interface ResponseHeader {
-  /** 自定义响应头开关on：开启off：关闭 */
+  /** 自定义响应头配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 自定义响应头规则 */
   HeaderRules?: HttpHeaderPathRule[] | null;
@@ -1912,7 +1912,7 @@ declare interface ResponseHeader {
 
 /** 源站头部缓存配置，默认为开启状态，缓存所有头部信息 */
 declare interface ResponseHeaderCache {
-  /** 源站头部缓存开关on：开启off：关闭 */
+  /** 源站头部缓存配置开关，取值有：on：开启off：关闭 */
   Switch: string;
 }
 
@@ -1946,7 +1946,7 @@ declare interface RuleCacheConfig {
 
 /** 规则引擎配置 */
 declare interface RuleEngine {
-  /** 规则引擎配置开关on：开启off：关闭 */
+  /** 规则引擎配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 规则 */
   Content?: string | null;
@@ -1964,7 +1964,7 @@ declare interface RuleQueryString {
 
 /** SCDN访问控制 */
 declare interface ScdnAclConfig {
-  /** 是否开启，on | off */
+  /** SCDN访问控制配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 新版本请使用AdvancedScriptData */
   ScriptData?: ScdnAclGroup[] | null;
@@ -2000,7 +2000,7 @@ declare interface ScdnAclRule {
 
 /** bot配置类型 */
 declare interface ScdnBotConfig {
-  /** on|off */
+  /** Scdn bot配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** Bot cookie策略 */
   BotCookie?: BotCookie[] | null;

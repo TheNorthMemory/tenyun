@@ -3915,6 +3915,20 @@ declare interface CreateTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateUnitNamespacesRequest {
+  /** 网关实体ID */
+  GatewayInstanceId: string;
+  /** 单元化命名空间对象列表 */
+  UnitNamespaceList?: UnitNamespace[];
+}
+
+declare interface CreateUnitNamespacesResponse {
+  /** 是否成功 */
+  Result?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUnitRuleRequest {
   /** 网关实体ID */
   GatewayInstanceId: string;
@@ -7233,6 +7247,8 @@ declare interface Tsf {
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
   /** 创建工作流 {@link CreateTaskFlowRequest} {@link CreateTaskFlowResponse} */
   CreateTaskFlow(data: CreateTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFlowResponse>;
+  /** 批量创建单元化命名空间 {@link CreateUnitNamespacesRequest} {@link CreateUnitNamespacesResponse} */
+  CreateUnitNamespaces(data: CreateUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitNamespacesResponse>;
   /** 创建单元化规则 {@link CreateUnitRuleRequest} {@link CreateUnitRuleResponse} */
   CreateUnitRule(data: CreateUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitRuleResponse>;
   /** 创建单元化规则返回详细信息 {@link CreateUnitRuleWithDetailRespRequest} {@link CreateUnitRuleWithDetailRespResponse} */

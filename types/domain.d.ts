@@ -20,6 +20,8 @@ declare interface CertificateInfo {
   CertificateType: string;
   /** 证件照片地址。 */
   ImgUrl: string;
+  /** 原始照片地址 */
+  OriginImgUrl?: string | null;
   /** 联系人证件号码。 */
   RegistrantCertificateCode?: string | null;
   /** 联系人证件类型。 */

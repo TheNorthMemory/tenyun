@@ -6513,19 +6513,21 @@ declare interface DescribeImageRegistryTimingScanTaskRequest {
 
 declare interface DescribeImageRegistryTimingScanTaskResponse {
   /** 定时扫描开关 */
-  Enable: boolean | null;
+  Enable?: boolean | null;
   /** 定时任务扫描时间 */
-  ScanTime: string;
+  ScanTime?: string;
   /** 定时扫描间隔 */
-  ScanPeriod: number;
+  ScanPeriod?: number;
   /** 扫描类型数组 */
-  ScanType: string[] | null;
+  ScanType?: string[] | null;
   /** 扫描全部镜像 */
-  All: boolean;
+  All?: boolean;
   /** 自定义扫描镜像 */
-  Images: ImageInfo[] | null;
+  Images?: ImageInfo[] | null;
   /** 自动以扫描镜像Id */
-  Id: number[] | null;
+  Id?: number[] | null;
+  /** 是否扫描最新版本镜像 */
+  Latest?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9337,6 +9339,8 @@ declare interface UpdateImageRegistryTimingScanTaskRequest {
   All?: boolean;
   /** 扫描镜像Id */
   Id?: number[];
+  /** 是否扫描最新版本 */
+  Latest?: boolean;
 }
 
 declare interface UpdateImageRegistryTimingScanTaskResponse {
