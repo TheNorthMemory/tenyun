@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 234+ 款产品，9402+ 服务数</summary>
+<details><summary>共计 234+ 款产品，9424+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -147,7 +147,7 @@ cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/pro
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(20) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(42) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(71) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(72) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(15) |
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
@@ -270,7 +270,7 @@ soe | [智聆口语评测](https://cloud.tencent.com/document/product/884) | 201
 solar | 智汇零售 | 2018-10-11(17) |
 sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(107) |
 ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(23) |
-ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(30) |
+ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(51) |
 sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10) |
 ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24) |
 sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 2018-08-13(6) |

@@ -447,21 +447,23 @@ declare interface DescribeOrganizationResponse {
 }
 
 declare interface ListOrganizationIdentityRequest {
-  /** 偏移量。 */
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
-  /** 限制数目。最大50 */
+  /** 限制数目。取值范围：1~50。默认值：10。 */
   Limit: number;
   /** 名称搜索关键字。 */
   SearchKey?: string;
   /** 身份ID搜索。 */
   IdentityId?: number;
+  /** 身份类型。取值范围 1-预设, 2-自定义 */
+  IdentityType?: number;
 }
 
 declare interface ListOrganizationIdentityResponse {
   /** 总数。 */
-  Total: number | null;
+  Total?: number | null;
   /** 条目详情。 */
-  Items: OrgIdentity[] | null;
+  Items?: OrgIdentity[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

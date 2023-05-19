@@ -190,6 +190,10 @@ declare interface AiAnalysisTaskClassificationResult {
   Output: AiAnalysisTaskClassificationOutput | null;
   /** 智能分类任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 智能分类任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 智能分类任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 智能分类任务输入类型 */
@@ -224,6 +228,10 @@ declare interface AiAnalysisTaskCoverResult {
   Output: AiAnalysisTaskCoverOutput | null;
   /** 智能封面任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 智能封面任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 智能封面任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 智能按帧标签任务输入类型 */
@@ -258,6 +266,10 @@ declare interface AiAnalysisTaskFrameTagResult {
   Output: AiAnalysisTaskFrameTagOutput | null;
   /** 智能按帧标签任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 智能按帧标签任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 智能按帧标签任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 智能精彩片段任务输入类型 */
@@ -292,6 +304,10 @@ declare interface AiAnalysisTaskHighlightResult {
   Output: AiAnalysisTaskHighlightOutput | null;
   /** 智能精彩片段任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 智能精彩片段任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 智能精彩片段任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** AI 视频智能分析输入参数类型 */
@@ -332,6 +348,10 @@ declare interface AiAnalysisTaskTagResult {
   Output: AiAnalysisTaskTagOutput | null;
   /** 智能标签任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 智能标签任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 智能标签任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 音视频审核结果 */
@@ -402,8 +422,12 @@ declare interface AiRecognitionTaskAsrFullTextResult {
   Input: AiRecognitionTaskAsrFullTextResultInput;
   /** 语音全文识别任务输出信息。 */
   Output: AiRecognitionTaskAsrFullTextResultOutput | null;
-  /** 任务进度，取值范围 [0-100] 。 */
+  /** 语音全文识别任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 语音全文识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 语音全文识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 语音全文识别的输入。 */
@@ -462,6 +486,10 @@ declare interface AiRecognitionTaskAsrWordsResult {
   Output: AiRecognitionTaskAsrWordsResultOutput | null;
   /** 语音关键词识别任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 语音关键词识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 语音关键词识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 语音关键词识别输入。 */
@@ -514,6 +542,10 @@ declare interface AiRecognitionTaskFaceResult {
   Output: AiRecognitionTaskFaceResultOutput | null;
   /** 人脸识别任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 人脸识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 人脸识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 人脸识别输入。 */
@@ -572,6 +604,10 @@ declare interface AiRecognitionTaskHeadTailResult {
   Output: AiRecognitionTaskHeadTailResultOutput | null;
   /** 视频片头片尾识别任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 视频片头片尾识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 视频片头片尾识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 视频片头片尾识别的输入。 */
@@ -614,6 +650,10 @@ declare interface AiRecognitionTaskObjectResult {
   Output: AiRecognitionTaskObjectResultOutput | null;
   /** 物体识别任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 物体识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 物体识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 物体识别任务输入类型。 */
@@ -668,6 +708,10 @@ declare interface AiRecognitionTaskOcrFullTextResult {
   Output: AiRecognitionTaskOcrFullTextResultOutput | null;
   /** 文本全文识别任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 文本全文识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 文本全文识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 文本全文识别输入。 */
@@ -722,6 +766,10 @@ declare interface AiRecognitionTaskOcrWordsResult {
   Output: AiRecognitionTaskOcrWordsResultOutput | null;
   /** 文本关键词识别任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 文本关键词识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 文本关键词识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 文本关键词识别输入。 */
@@ -776,6 +824,10 @@ declare interface AiRecognitionTaskSegmentResult {
   Output: AiRecognitionTaskSegmentResultOutput | null;
   /** 视频拆条任务进度，取值范围 [0-100] 。 */
   Progress: number;
+  /** 视频拆条任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  BeginProcessTime?: string;
+  /** 视频拆条任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  FinishTime?: string;
 }
 
 /** 视频拆条输入。 */
@@ -1008,6 +1060,8 @@ declare interface AiReviewTaskPoliticalOcrResult {
   Input: AiReviewPoliticalOcrTaskInput;
   /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务输出。 */
   Output: AiReviewPoliticalOcrTaskOutput | null;
+  /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
+  Progress?: number;
 }
 
 /** 音视频审核涉及令人不适宜信息的任务结果类型 */
@@ -1986,6 +2040,8 @@ declare interface ExtractTraceWatermarkTask {
 declare interface ExtractTraceWatermarkTaskInput {
   /** 需要提取水印的媒体 URL。 */
   Url: string;
+  /** 媒体文件 ID。Url 对应的原始媒体文件 ID。 */
+  FileId?: string;
 }
 
 /** 提取溯源水印输出信息 */

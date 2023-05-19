@@ -4,7 +4,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 请求头部及请求url访问控制 */
 declare interface AccessControl {
-  /** on | off 是否启用请求头部及请求url访问控制 */
+  /** 启用请求头部及请求url访问控制开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 请求头部及请求url访问规则 */
   AccessControlRules?: AccessControlRule[] | null;
@@ -60,7 +60,7 @@ declare interface AdvanceHttps {
 
 /** 时间戳防盗链高级版配置，白名单功能 */
 declare interface AdvancedAuthentication {
-  /** 防盗链配置开关，on或off，开启时必须且只能配置一种模式，其余模式为null。 */
+  /** 防盗链配置开关，取值有：on：开启off：关闭开启时必须且只配置一种模式，其余模式需要设置为 null */
   Switch: string;
   /** 时间戳防盗链高级版模式A配置。 */
   TypeA?: AdvancedAuthenticationTypeA | null;
@@ -242,7 +242,7 @@ declare interface AdvancedScdnAclRule {
 
 /** 时间戳防盗链配置 */
 declare interface Authentication {
-  /** 防盗链配置开关on：开启off：关闭开启时必须且只配置一种模式，其余模式需要设置为 null */
+  /** 防盗链配置开关，取值有：on：开启off：关闭开启时必须且只配置一种模式，其余模式需要设置为 null */
   Switch: string;
   /** 时间戳防盗链模式 A 配置 */
   TypeA?: AuthenticationTypeA | null;
@@ -322,13 +322,13 @@ declare interface AuthenticationTypeD {
 
 /** 图片优化-AvifAdapter配置 */
 declare interface AvifAdapter {
-  /** 开关，"on/off" */
+  /** 图片优化AvifAdapter配置项开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
 }
 
 /** s3源站回源鉴权。 */
 declare interface AwsPrivateAccess {
-  /** 开关，on/off。 */
+  /** s3源站回源鉴权配置项开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 访问ID。 */
   AccessKey?: string | null;
@@ -342,7 +342,7 @@ declare interface AwsPrivateAccess {
 
 /** 带宽封顶配置，默认为关闭状态 */
 declare interface BandwidthAlert {
-  /** 用量封顶配置开关on：开启off：关闭 */
+  /** 用量封顶配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 用量封顶阈值，带宽单位为bps，流量单位byte */
   BpsThreshold?: number | null;
@@ -350,7 +350,7 @@ declare interface BandwidthAlert {
   CounterMeasure?: string | null;
   /** 境内区域上次触发用量封顶阈值的时间 */
   LastTriggerTime?: string | null;
-  /** 用量封顶提醒开关on：开启off：关闭 */
+  /** 用量封顶提醒配置开关，取值有：on：开启off：关闭 */
   AlertSwitch?: string | null;
   /** 用量封顶阈值提醒百分比 */
   AlertPercentage?: number | null;
@@ -506,7 +506,7 @@ declare interface Cache {
 
 /** 启发式自定义时间缓存配置 */
 declare interface CacheConfig {
-  /** on 代表开启自定义启发式缓存时间off 代表关闭自定义启发式缓存时间 */
+  /** 启发式自定义时间缓存配置开关，取值有：on：开启off：关闭 */
   HeuristicCacheTimeSwitch: string;
   /** 单位 秒. */
   HeuristicCacheTime: number;
@@ -514,7 +514,7 @@ declare interface CacheConfig {
 
 /** 路径缓存缓存配置 */
 declare interface CacheConfigCache {
-  /** 缓存配置开关on：开启off：关闭 */
+  /** 路径缓存配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 缓存过期时间设置单位为秒，最大可设置为 365 天 */
   CacheTime: number | null;
@@ -528,7 +528,7 @@ declare interface CacheConfigCache {
 
 /** 路径缓存遵循源站配置 */
 declare interface CacheConfigFollowOrigin {
-  /** 遵循源站配置开关on：开启off：关闭 */
+  /** 路径缓存遵循源站配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 启发式缓存配置 */
   HeuristicCache?: HeuristicCache | null;
@@ -536,7 +536,7 @@ declare interface CacheConfigFollowOrigin {
 
 /** 路径缓存不缓存配置 */
 declare interface CacheConfigNoCache {
-  /** 不缓存配置开关on：开启off：关闭 */
+  /** 路径缓存不缓存配置配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 总是回源站校验on：开启off：关闭默认为关闭状态 */
   Revalidate: string | null;
@@ -572,7 +572,7 @@ declare interface CacheOptResult {
 
 /** 组成CacheKey的一部分 */
 declare interface CacheTagKey {
-  /** 是否使用CacheTag作为CacheKey的一部分 */
+  /** 使用CacheTag作为CacheKey的一部分配置开关，取值有on：开启，使用CacheTag作为CacheKey的一部分off：关闭，不使用CacheTag作为CacheKey的一部分 */
   Switch: string | null;
   /** 自定义CacheTag的值 */
   Value?: string | null;
@@ -706,7 +706,7 @@ declare interface Compatibility {
 
 /** 智能压缩配置，默认对 js、html、css、xml、json、shtml、htm 后缀且大小为 256 ~ 2097152 字节的文件进行 GZIP 压缩 */
 declare interface Compression {
-  /** 智能压缩配置开关on：开启off：关闭 */
+  /** 智能压缩配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 压缩规则数组 */
   CompressionRules?: CompressionRule[] | null;
@@ -732,7 +732,7 @@ declare interface CompressionRule {
 
 /** 组成CacheKey的一部分 */
 declare interface CookieKey {
-  /** on | off 是否使用Cookie作为Cache的一部分 */
+  /** 使用Cookie作为Cache的一部分配置开关，取值有：on：开启，使用Cookie作为Cache的一部分off：关闭，不使用Cookie作为Cache的一部分 */
   Switch: string | null;
   /** 使用的cookie，';' 分割 */
   Value?: string | null;
@@ -1046,7 +1046,7 @@ declare interface DomainLog {
 
 /** 单链接下行限速配置，默认为关闭状态 */
 declare interface DownstreamCapping {
-  /** 下行速度配置开关on：开启off：关闭 */
+  /** 下行速度配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 下行限速规则 */
   CappingRules?: CappingRule[] | null;
@@ -1080,7 +1080,7 @@ declare interface EdgePackTaskStatus {
 
 /** 状态码重定向配置，默认为关闭状态 */
 declare interface ErrorPage {
-  /** 状态码重定向配置开关on：开启off：关闭 */
+  /** 状态码重定向配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 状态码重定向规则配置 */
   PageRules?: ErrorPageRule[] | null;
@@ -1114,7 +1114,7 @@ declare interface ExtraLogset {
 
 /** 回源 301/302 状态码自动跟随配置，默认为关闭状态 */
 declare interface FollowRedirect {
-  /** 回源跟随开关on：开启off：关闭 */
+  /** 回源跟随配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 自定义回源302 follow请求host配置，该功能为白名单功能，需要开启请联系腾讯云工程师。 */
   RedirectConfig?: RedirectConfig | null;
@@ -1122,7 +1122,7 @@ declare interface FollowRedirect {
 
 /** 访问协议强制跳转配置，默认为关闭状态 */
 declare interface ForceRedirect {
-  /** 访问强制跳转配置开关on：开启off：关闭 */
+  /** 访问强制跳转配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 访问强制跳转类型http：强制 http 跳转https：强制 https 跳转 */
   RedirectType?: string | null;
@@ -1134,7 +1134,7 @@ declare interface ForceRedirect {
 
 /** 图片优化-GuetzliAdapter配置 */
 declare interface GuetzliAdapter {
-  /** 开关，"on/off" */
+  /** 图片优化-GuetzliAdapter配置开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
 }
 
@@ -1148,7 +1148,7 @@ declare interface HTTPHeader {
 
 /** 组成CacheKey */
 declare interface HeaderKey {
-  /** 是否组成Cachekey */
+  /** 组成Cachekey配置开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
   /** 组成CacheKey的header数组，';' 分割 */
   Value?: string | null;
@@ -1156,7 +1156,7 @@ declare interface HeaderKey {
 
 /** 启发式缓存配置 */
 declare interface HeuristicCache {
-  /** on 代表开启启发式缓存off 代表关闭启发式缓存 */
+  /** 启发式缓存配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 自定义启发式缓存时间配置 */
   CacheConfig?: CacheConfig;
@@ -1164,7 +1164,7 @@ declare interface HeuristicCache {
 
 /** HSTS 配置。 */
 declare interface Hsts {
-  /** 是否开启，on或off。 */
+  /** HSTS 配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** MaxAge数值。 */
   MaxAge?: number | null;
@@ -1198,7 +1198,7 @@ declare interface HttpHeaderRule {
 
 /** 域名 https 加速配置，默认为关闭状态 */
 declare interface Https {
-  /** https 配置开关on：开启off：关闭 */
+  /** https 配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** http2 配置开关on：开启off：关闭 */
   Http2?: string | null;
@@ -1222,7 +1222,7 @@ declare interface Https {
 
 /** HTTPS服务，若关闭，下发配置拦截https请求，开启时会产生计费 */
 declare interface HttpsBilling {
-  /** HTTPS服务，缺省时默认开启【会产生计费】 */
+  /** HTTPS服务配置开关，取值有：on：开启，缺省时默认开启【会产生计费】off：关闭，拦截https请求 */
   Switch: string;
 }
 
@@ -1270,7 +1270,7 @@ declare interface HttpsPackage {
 
 /** 华为云对象存储回源鉴权 */
 declare interface HwPrivateAccess {
-  /** 开关 on/off */
+  /** 华为云对象存储回源鉴权配置开关，取值有：on：开启off：关闭 */
   Switch: string;
   /** 访问 ID */
   AccessKey?: string | null;
@@ -1294,7 +1294,7 @@ declare interface ImageOptimization {
 
 /** IP 黑白名单配置，默认为关闭状态 */
 declare interface IpFilter {
-  /** IP 黑白名单配置开关on：开启off：关闭 */
+  /** IP 黑白名单配置开关，取值有on：开启off：关闭 */
   Switch: string;
   /** IP 黑白名单类型whitelist：白名单blacklist：黑名单 */
   FilterType?: string | null;
@@ -1918,7 +1918,7 @@ declare interface ResponseHeaderCache {
 
 /** 是否回源站校验 */
 declare interface Revalidate {
-  /** on | off 是否总是回源校验 */
+  /** 总是回源校验配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
   /** 只在特定请求路径回源站校验 */
   Path?: string | null;
@@ -1954,7 +1954,7 @@ declare interface RuleEngine {
 
 /** 路径保留参数配置 */
 declare interface RuleQueryString {
-  /** on | off CacheKey是否由QueryString组成 */
+  /** 路径保留参数配置开关，取值有：on：开启，CacheKey由QueryString组成off：关闭，CacheKey不由QueryString组成 */
   Switch: string | null;
   /** includeCustom 包含部分url参数 */
   Action: string | null;

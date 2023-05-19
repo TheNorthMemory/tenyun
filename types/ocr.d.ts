@@ -1260,6 +1260,8 @@ declare interface TextVehicleBack {
   Record: string | null;
   /** 准牵引总质量 */
   TotalQuasiMass: string | null;
+  /** 副页编码 */
+  SubPageCode?: string | null;
 }
 
 /** 行驶证主页正面的识别结果 */

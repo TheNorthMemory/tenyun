@@ -3029,7 +3029,7 @@ declare interface DescribeDBPriceRequest {
   PayType?: string;
   /** 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。 */
   ProtectMode?: number;
-  /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。 */
+  /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - 单节点云盘版实例。 不指定则默认为通用型实例。 */
   DeviceType?: string;
   /** 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要询价三节点实例， 请将该值设置为3。其余主实例该值默认为2。 */
   InstanceNodes?: number;
@@ -3043,11 +3043,11 @@ declare interface DescribeDBPriceRequest {
 
 declare interface DescribeDBPriceResponse {
   /** 实例价格，单位：分。 */
-  Price: number;
+  Price?: number;
   /** 实例原价，单位：分。 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 货币单位。CNY-人民币，USD-美元。 */
-  Currency: string;
+  Currency?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4693,7 +4693,7 @@ declare interface Cdb {
   DescribeAuditRules(data?: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
   /** 查询云数据库备份配置信息 {@link DescribeBackupConfigRequest} {@link DescribeBackupConfigResponse} */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
-  /** 查询备份数据库列表 {@link DescribeBackupDatabasesRequest} {@link DescribeBackupDatabasesResponse} */
+  /** @deprecated 查询备份数据库列表 {@link DescribeBackupDatabasesRequest} {@link DescribeBackupDatabasesResponse} */
   DescribeBackupDatabases(data: DescribeBackupDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDatabasesResponse>;
   /** 查询备份文件解密密钥 {@link DescribeBackupDecryptionKeyRequest} {@link DescribeBackupDecryptionKeyResponse} */
   DescribeBackupDecryptionKey(data: DescribeBackupDecryptionKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDecryptionKeyResponse>;
@@ -4705,7 +4705,7 @@ declare interface Cdb {
   DescribeBackupOverview(data: DescribeBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupOverviewResponse>;
   /** 查询备份实时统计 {@link DescribeBackupSummariesRequest} {@link DescribeBackupSummariesResponse} */
   DescribeBackupSummaries(data: DescribeBackupSummariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupSummariesResponse>;
-  /** 查询指定数据库的备份数据表 {@link DescribeBackupTablesRequest} {@link DescribeBackupTablesResponse} */
+  /** @deprecated 查询指定数据库的备份数据表 {@link DescribeBackupTablesRequest} {@link DescribeBackupTablesResponse} */
   DescribeBackupTables(data: DescribeBackupTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupTablesResponse>;
   /** 查询数据备份文件列表 {@link DescribeBackupsRequest} {@link DescribeBackupsResponse} */
   DescribeBackups(data: DescribeBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupsResponse>;

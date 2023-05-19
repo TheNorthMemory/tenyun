@@ -1360,7 +1360,7 @@ declare interface PrivateIpAddressSpecification {
   IsWanIpBlocked?: boolean;
   /** IP状态：PENDING：生产中MIGRATING：迁移中DELETING：删除中AVAILABLE：可用的 */
   State?: string;
-  /** IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。 */
+  /** IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
   QosLevel?: string;
 }
 
@@ -1816,6 +1816,8 @@ declare interface SslClientConfig {
   SslVpnKey: string;
   /** 客户端证书 */
   SslVpnCert: string;
+  /** SSL-VPN-CLIENT 实例ID。 */
+  SslVpnClientId?: string;
 }
 
 /** SSL-VPN-CLIENT 出参 */
@@ -3419,15 +3421,17 @@ declare interface CreateVpnGatewayRoutesResponse {
 declare interface CreateVpnGatewaySslClientRequest {
   /** SSL-VPN-SERVER 实例ID。 */
   SslVpnServerId: string;
-  /** name */
-  SslVpnClientName: string;
+  /** SSL-VPN-CLIENT实例Name。不可和SslVpnClientNames同时使用。 */
+  SslVpnClientName?: string;
+  /** SSL-VPN-CLIENT实例Name数字。批量创建时使用。不可和SslVpnClientName同时使用。 */
+  SslVpnClientNames?: string[];
 }
 
 declare interface CreateVpnGatewaySslClientResponse {
   /** 异步任务ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** SSL-VPN client 唯一ID */
-  SslVpnClientId: string;
+  SslVpnClientId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3869,13 +3873,15 @@ declare interface DeleteVpnGatewayRoutesResponse {
 }
 
 declare interface DeleteVpnGatewaySslClientRequest {
-  /** SSL-VPN-CLIENT 实例ID。 */
-  SslVpnClientId: string;
+  /** SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。 */
+  SslVpnClientId?: string;
+  /** SSL-VPN-CLIENT 实例ID列表。批量删除时使用。不可和SslVpnClientId同时使用。 */
+  SslVpnClientIds?: string[];
 }
 
 declare interface DeleteVpnGatewaySslClientResponse {
   /** 异步任务ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5527,13 +5533,15 @@ declare interface DisableSnapshotPoliciesResponse {
 }
 
 declare interface DisableVpnGatewaySslClientCertRequest {
-  /** SSL-VPN-CLIENT 实例ID。 */
-  SslVpnClientId: string;
+  /** SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。 */
+  SslVpnClientId?: string;
+  /** SSL-VPN-CLIENT 实例ID列表。批量禁用时使用。不可和SslVpnClientId同时使用。 */
+  SslVpnClientIds?: string[];
 }
 
 declare interface DisableVpnGatewaySslClientCertResponse {
   /** 异步任务实例ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5643,21 +5651,23 @@ declare interface DownloadCustomerGatewayConfigurationResponse {
 }
 
 declare interface DownloadVpnGatewaySslClientCertRequest {
-  /** SSL-VPN-CLIENT 实例ID。 */
-  SslVpnClientId: string;
-  /** SAML-TOKEN */
+  /** SSL-VPN-CLIENT 实例ID。不可以和SslVpnClientIds同时使用。 */
+  SslVpnClientId?: string;
+  /** SAML Token（SAML令牌）。 */
   SamlToken?: string;
-  /** VPN门户网站使用。默认Flase */
+  /** VPN门户网站使用。默认False */
   IsVpnPortal?: boolean;
+  /** SSL-VPN-CLIENT 实例ID列表。批量下载时使用。不可以和SslVpnClientId同时使用。 */
+  SslVpnClientIds?: string[];
 }
 
 declare interface DownloadVpnGatewaySslClientCertResponse {
-  /** 无 */
-  SslClientConfigsSet: string;
-  /** SSL-VPN client配置 */
-  SslClientConfig: SslClientConfig[];
-  /** 是否鉴权成功 只有传入SamlToken 才生效 */
-  Authenticated: number;
+  /** SSL-VPN 客户端配置。 */
+  SslClientConfigsSet?: string;
+  /** SSL-VPN 客户端配置。 */
+  SslClientConfig?: SslClientConfig[];
+  /** 是否鉴权成功 只有传入SamlToken 才生效，1为成功，0为失败。 */
+  Authenticated?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5733,13 +5743,15 @@ declare interface EnableVpcEndPointConnectResponse {
 }
 
 declare interface EnableVpnGatewaySslClientCertRequest {
-  /** SSL-VPN-CLIENT 实例ID。 */
-  SslVpnClientId: string;
+  /** SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。 */
+  SslVpnClientId?: string;
+  /** SSL-VPN-CLIENT 实例ID列表。批量启用时使用。不可和SslVpnClientId同时使用。 */
+  SslVpnClientIds?: string[];
 }
 
 declare interface EnableVpnGatewaySslClientCertResponse {
   /** 异步任务实例ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7218,7 +7230,7 @@ declare interface Vpc {
   /** 删除VPN网关路由 {@link DeleteVpnGatewayRoutesRequest} {@link DeleteVpnGatewayRoutesResponse} */
   DeleteVpnGatewayRoutes(data: DeleteVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewayRoutesResponse>;
   /** 删除SSL-VPN-CLIENT {@link DeleteVpnGatewaySslClientRequest} {@link DeleteVpnGatewaySslClientResponse} */
-  DeleteVpnGatewaySslClient(data: DeleteVpnGatewaySslClientRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewaySslClientResponse>;
+  DeleteVpnGatewaySslClient(data?: DeleteVpnGatewaySslClientRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewaySslClientResponse>;
   /** 删除SSL-VPN-SERVER {@link DeleteVpnGatewaySslServerRequest} {@link DeleteVpnGatewaySslServerResponse} */
   DeleteVpnGatewaySslServer(data: DeleteVpnGatewaySslServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewaySslServerResponse>;
   /** 查询账户属性 {@link DescribeAccountAttributesRequest} {@link DescribeAccountAttributesResponse} */
@@ -7404,7 +7416,7 @@ declare interface Vpc {
   /** 停用快照策略 {@link DisableSnapshotPoliciesRequest} {@link DisableSnapshotPoliciesResponse} */
   DisableSnapshotPolicies(data: DisableSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableSnapshotPoliciesResponse>;
   /** 禁用SSL-VPN-CLIENT 证书 {@link DisableVpnGatewaySslClientCertRequest} {@link DisableVpnGatewaySslClientCertResponse} */
-  DisableVpnGatewaySslClientCert(data: DisableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<DisableVpnGatewaySslClientCertResponse>;
+  DisableVpnGatewaySslClientCert(data?: DisableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<DisableVpnGatewaySslClientCertResponse>;
   /** 解绑定弹性公网IP {@link DisassociateAddressRequest} {@link DisassociateAddressResponse} */
   DisassociateAddress(data: DisassociateAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateAddressResponse>;
   /** DhcpIp解绑EIP {@link DisassociateDhcpIpWithAddressIpRequest} {@link DisassociateDhcpIpWithAddressIpResponse} */
@@ -7422,7 +7434,7 @@ declare interface Vpc {
   /** 下载VPN通道配置 {@link DownloadCustomerGatewayConfigurationRequest} {@link DownloadCustomerGatewayConfigurationResponse} */
   DownloadCustomerGatewayConfiguration(data: DownloadCustomerGatewayConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomerGatewayConfigurationResponse>;
   /** 下载SSL-VPN-CLIENT 客户端证书 {@link DownloadVpnGatewaySslClientCertRequest} {@link DownloadVpnGatewaySslClientCertResponse} */
-  DownloadVpnGatewaySslClientCert(data: DownloadVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadVpnGatewaySslClientCertResponse>;
+  DownloadVpnGatewaySslClientCert(data?: DownloadVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadVpnGatewaySslClientCertResponse>;
   /** 启用云联网路由 {@link EnableCcnRoutesRequest} {@link EnableCcnRoutesResponse} */
   EnableCcnRoutes(data: EnableCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableCcnRoutesResponse>;
   /** 启动流日志 {@link EnableFlowLogsRequest} {@link EnableFlowLogsResponse} */
@@ -7436,7 +7448,7 @@ declare interface Vpc {
   /** 是否接受终端节点连接请求 {@link EnableVpcEndPointConnectRequest} {@link EnableVpcEndPointConnectResponse} */
   EnableVpcEndPointConnect(data: EnableVpcEndPointConnectRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpcEndPointConnectResponse>;
   /** 启用SSL-VPN-CLIENT 证书 {@link EnableVpnGatewaySslClientCertRequest} {@link EnableVpnGatewaySslClientCertResponse} */
-  EnableVpnGatewaySslClientCert(data: EnableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpnGatewaySslClientCertResponse>;
+  EnableVpnGatewaySslClientCert(data?: EnableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpnGatewaySslClientCertResponse>;
   /** 获取一对VPN通道健康检查地址 {@link GenerateVpnConnectionDefaultHealthCheckIpRequest} {@link GenerateVpnConnectionDefaultHealthCheckIpResponse} */
   GenerateVpnConnectionDefaultHealthCheckIp(data: GenerateVpnConnectionDefaultHealthCheckIpRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateVpnConnectionDefaultHealthCheckIpResponse>;
   /** 查询云联网相关地域带宽信息 {@link GetCcnRegionBandwidthLimitsRequest} {@link GetCcnRegionBandwidthLimitsResponse} */

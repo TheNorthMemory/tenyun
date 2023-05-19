@@ -112,7 +112,7 @@ declare interface DpToken {
 declare interface Embellish {
   /** 润色后的文本。 */
   Text?: string | null;
-  /** 润色类型。类型列表expansion：扩写rewriting：改写translation_m2a：从现代文改写为古文translation_a2m：从古文改写为现代文 */
+  /** 润色类型。类型如下：expansion：扩写rewriting：改写translation_m2a：从现代文改写为古文translation_a2m：从古文改写为现代文 */
   EmbellishType?: string | null;
 }
 
@@ -405,7 +405,7 @@ declare interface GenerateKeywordSentenceRequest {
   WordList: string[];
   /** 返回生成句子的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
   Number: number;
-  /** 指定生成句子的领域，支持领域列表general：通用领域，支持中英文academic：学术领域，仅支持英文默认为general（通用领域）。 */
+  /** 指定生成句子的领域，支持领域如下：general：通用领域，支持中英文academic：学术领域，仅支持英文默认为general（通用领域）。 */
   Domain?: string;
 }
 
@@ -619,11 +619,11 @@ declare interface TextCorrectionResponse {
 declare interface TextEmbellishRequest {
   /** 待润色的文本。中文文本长度需<=50字符；英文文本长度需<=30个单词。 */
   Text: string;
-  /** 待润色文本的语言类型，支持语言列表zh：中文en：英文 */
+  /** 待润色文本的语言类型，支持语言如下：zh：中文en：英文 */
   SourceLang: string;
   /** 返回润色结果的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
   Number: number;
-  /** 控制润色类型，类型列表both：同时返回改写和扩写expansion：扩写rewriting：改写m2a：从现代文改写为古文a2m：从古文改写为现代文默认为both。 */
+  /** 控制润色类型，类型如下：both：同时返回改写和扩写expansion：扩写rewriting：改写m2a：从现代文改写为古文a2m：从古文改写为现代文默认为both。 */
   Style?: string;
 }
 
@@ -665,13 +665,13 @@ declare interface TextSimilarityResponse {
 declare interface TextWritingRequest {
   /** 待续写的句子，文本统一使用utf-8格式编码，长度不超过200字符。 */
   Text: string;
-  /** 待续写文本的语言类型，支持语言列表zh：中文en：英文 */
+  /** 待续写文本的语言类型，支持语言如下：zh：中文en：英文 */
   SourceLang: string;
   /** 返回续写结果的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
   Number: number;
-  /** 指定续写领域，支持领域列表general：通用领域，支持中英文补全academic：学术领域，仅支持英文补全默认为general（通用领域）。 */
+  /** 指定续写领域，支持领域如下：general：通用领域，支持中英文补全academic：学术领域，仅支持英文补全默认为general（通用领域）。 */
   Domain?: string;
-  /** 指定续写风格，支持风格列表science_fiction：科幻military_history：军事xuanhuan_wuxia：武侠urban_officialdom：职场默认为xuanhuan_wuxia（武侠）。 */
+  /** 指定续写风格，支持风格如下：science_fiction：科幻military_history：军事xuanhuan_wuxia：武侠urban_officialdom：职场默认为xuanhuan_wuxia（武侠）。 */
   Style?: string;
 }
 

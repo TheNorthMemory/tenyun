@@ -1272,7 +1272,7 @@ declare interface ChannelGetTaskResultApiResponse {
   TaskMessage?: string;
   /** 资源Id，也是FileId，用于文件发起使用 */
   ResourceId?: string;
-  /** 预览文件Url，有效期30分钟 */
+  /** 预览文件Url，有效期30分钟 当前字段返回为空，发起的时候，将ResourceId 放入发起即可 */
   PreviewUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

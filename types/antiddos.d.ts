@@ -230,6 +230,8 @@ declare interface BoundIpInfo {
   DeviceType?: string;
   /** 运营商，绑定操作为必填项，解绑操作可不填。0：电信；1：联通；2：移动；5：BGP */
   IspCode?: number;
+  /** 域名化资产对应的域名 */
+  Domain?: string | null;
 }
 
 /** CC分级策略 */
@@ -1211,11 +1213,13 @@ declare interface CreateBoundIPRequest {
   UnBoundDevList?: BoundIpInfo[];
   /** 已弃用，不填 */
   CopyPolicy?: string;
+  /** 如果该资源实例为域名化资产则，该参数必填 */
+  FilterRegion?: string;
 }
 
 declare interface CreateBoundIPResponse {
   /** 成功码 */
-  Success: SuccessCode;
+  Success?: SuccessCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1662,12 +1666,18 @@ declare interface DeleteWaterPrintKeyResponse {
 
 declare interface DescribeBasicDeviceStatusRequest {
   /** IP 资源列表 */
-  IpList: string[];
+  IpList?: string[];
+  /** 域名化资源传id */
+  IdList?: string[];
+  /** 地域名称 */
+  FilterRegion?: number;
 }
 
 declare interface DescribeBasicDeviceStatusResponse {
   /** 返回资源及状态，状态码：1 - 封堵状态2 - 正常状态3 - 攻击状态 */
-  Data: KeyValue[];
+  Data?: KeyValue[];
+  /** 域名化资产的名称 */
+  CLBData?: KeyValue[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2449,15 +2459,17 @@ declare interface DescribeNewL7RulesRequest {
   ProtocolList?: string[];
   /** 高防IP实例的Cname */
   Cname?: string;
+  /** 默认为false，当为true时，将不对各个规则做策略检查，直接导出所有规则 */
+  Export?: boolean;
 }
 
 declare interface DescribeNewL7RulesResponse {
   /** 转发规则列表 */
-  Rules: NewL7RuleEntry[];
+  Rules?: NewL7RuleEntry[];
   /** 健康检查配置列表 */
-  Healths: L7RuleHealth[];
+  Healths?: L7RuleHealth[];
   /** 总规则数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2956,7 +2968,7 @@ declare interface Antiddos {
   /** 删除DDoS防护的水印防护密钥 {@link DeleteWaterPrintKeyRequest} {@link DeleteWaterPrintKeyResponse} */
   DeleteWaterPrintKey(data: DeleteWaterPrintKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWaterPrintKeyResponse>;
   /** 获取基础防护攻击状态 {@link DescribeBasicDeviceStatusRequest} {@link DescribeBasicDeviceStatusResponse} */
-  DescribeBasicDeviceStatus(data: DescribeBasicDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceStatusResponse>;
+  DescribeBasicDeviceStatus(data?: DescribeBasicDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceStatusResponse>;
   /** 获取高防包流量折线图 {@link DescribeBgpBizTrendRequest} {@link DescribeBgpBizTrendResponse} */
   DescribeBgpBizTrend(data: DescribeBgpBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBgpBizTrendResponse>;
   /** 获取业务流量状态码统计列表 {@link DescribeBizHttpStatusRequest} {@link DescribeBizHttpStatusResponse} */

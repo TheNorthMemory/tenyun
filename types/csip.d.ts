@@ -100,6 +100,8 @@ declare interface CVMAssetVO {
   MemberId?: string | null;
   /** os全称 */
   Os?: string | null;
+  /** 风险服务暴露 */
+  RiskExposure?: number | null;
 }
 
 /** db资产输出字段 */
@@ -182,9 +184,9 @@ declare interface Filter {
   Limit?: number | null;
   /** 查询偏移位置 */
   Offset?: number | null;
-  /** 需排序的字段 */
-  Order?: string | null;
   /** 排序采用升序还是降序 升:asc 降 desc */
+  Order?: string | null;
+  /** 需排序的字段 */
   By?: string | null;
   /** 过滤的列及内容 */
   Filters?: WhereFilter[] | null;
@@ -427,6 +429,8 @@ declare interface DescribeCVMAssetsResponse {
   AppIdList?: FilterDataObject[] | null;
   /** 可用区列表 */
   ZoneList?: FilterDataObject[] | null;
+  /** os列表 */
+  OsList?: FilterDataObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
