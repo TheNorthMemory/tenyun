@@ -356,9 +356,9 @@ declare interface Condition {
   ProductId: string | null;
 }
 
-/** 告警条件模版 */
+/** 告警条件模板 */
 declare interface ConditionsTemp {
-  /** 模版名称 */
+  /** 模板名称 */
   TemplateName: string | null;
   /** 指标触发条件 */
   Condition: AlarmPolicyCondition | null;
@@ -2138,6 +2138,8 @@ declare interface UserNotice {
   PhoneCallType?: string | null;
   /** 通知周期 1-7表示周一到周日 */
   Weekday?: number[] | null;
+  /** 值班表id列表 */
+  OnCallFormIDs?: string[] | null;
 }
 
 declare interface BindPrometheusManagedGrafanaRequest {
@@ -3031,13 +3033,15 @@ declare interface DescribeAlarmNoticesRequest {
   NoticeIds?: string[];
   /** 模板根据标签过滤 */
   Tags?: Tag[];
+  /** 值班列表 */
+  OnCallFormIDs?: string[];
 }
 
 declare interface DescribeAlarmNoticesResponse {
   /** 告警通知模板总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 告警通知模板列表 */
-  Notices: AlarmNotice[];
+  Notices?: AlarmNotice[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3069,7 +3073,7 @@ declare interface DescribeAlarmPoliciesRequest {
   Order?: string;
   /** 策略所属项目的id数组，可在此页面查看[项目管理](https://console.cloud.tencent.com/project) */
   ProjectIds?: number[];
-  /** 通知模版的id列表，可查询通知模版列表获取。可使用 [查询通知模板列表](https://cloud.tencent.com/document/product/248/51280) 接口查询。 */
+  /** 通知模板的id列表，可查询通知模板列表获取。可使用 [查询通知模板列表](https://cloud.tencent.com/document/product/248/51280) 接口查询。 */
   NoticeIds?: string[];
   /** 根据触发条件筛选 不传展示全部策略 STATIC=展示静态阈值策略 DYNAMIC=展示动态阈值策略 */
   RuleTypes?: string[];
@@ -3085,19 +3089,23 @@ declare interface DescribeAlarmPoliciesRequest {
   TriggerTasks?: AlarmPolicyTriggerTask[];
   /** 根据一键告警策略筛选 不传展示全部策略 ONECLICK=展示一键告警策略 NOT_ONECLICK=展示非一键告警策略 */
   OneClickPolicyType?: string[];
-  /** 根据全部对象过滤，1代表需要过滤掉全部对象，0则无需过滤 */
+  /** 返回结果过滤掉绑定全部对象的策略，1代表需要过滤，0则无需过滤 */
   NotBindAll?: number;
-  /** 根据实例对象过滤，1代表需要过滤掉有实例对象，0则无需过滤 */
+  /** 返回结果过滤掉关联实例为实例分组的策略，1代表需要过滤，0则无需过滤 */
   NotInstanceGroup?: number;
   /** 策略根据标签过滤 */
   Tags?: Tag[];
+  /** prom实例id，自定义指标策略时会用到 */
+  PromInsId?: string;
+  /** 根据排班表搜索 */
+  ReceiverOnCallFormIDs?: string[];
 }
 
 declare interface DescribeAlarmPoliciesResponse {
   /** 策略总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 策略数组 */
-  Policies: AlarmPolicy[];
+  Policies?: AlarmPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

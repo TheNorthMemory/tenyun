@@ -3357,6 +3357,8 @@ declare interface ModifyLiveCallbackTemplateRequest {
   CallbackKey?: string;
   /** 推流异常回调 URL。 */
   PushExceptionNotifyUrl?: string;
+  /** 音频审核回调 URL。 */
+  AudioAuditNotifyUrl?: string;
 }
 
 declare interface ModifyLiveCallbackTemplateResponse {

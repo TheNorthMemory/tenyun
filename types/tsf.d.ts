@@ -2886,6 +2886,12 @@ declare interface UnitRuleItem {
   Description?: string | null;
   /** 规则标签列表 */
   UnitRuleTagList?: UnitRuleTag[] | null;
+  /** 项目id */
+  ItemIndex?: number | null;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+  /** 修改时间 */
+  UpdatedTime?: string | null;
 }
 
 /** 微服务网关单元化规则标签 */

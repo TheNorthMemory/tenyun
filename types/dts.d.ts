@@ -578,11 +578,11 @@ declare interface MigrateOption {
 
 /** 同步的数据库对对象描述 */
 declare interface Objects {
-  /** 迁移对象类型 Partial(部分对象)，默认为Partial */
+  /** 迁移对象类型 Partial(部分对象) */
   Mode?: string | null;
   /** 同步对象，当 Mode 为 Partial 时，不为空 */
   Databases?: Database[] | null;
-  /** 高级对象类型，如function、procedure，当需要同步高级对象时，初始化类型必须包含结构初始化类型，即Options.InitType字段值为Structure或Full */
+  /** 高级对象类型，如function、procedure，当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full */
   AdvancedObjects?: string[] | null;
   /** OnlineDDL类型，冗余字段不做配置用途 */
   OnlineDDL?: OnlineDDL | null;
@@ -704,7 +704,7 @@ declare interface StepInfo {
   Errors?: StepTip[] | null;
   /** 警告信息 */
   Warnings?: StepTip[] | null;
-  /** 当前步骤进度，范围为[0-100] */
+  /** 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度 */
   Progress?: number | null;
 }
 
@@ -908,7 +908,7 @@ declare interface TradeInfo {
 declare interface View {
   /** view名 */
   ViewName?: string | null;
-  /** 新view名 */
+  /** 预留字段、目前暂时不支持view的重命名 */
   NewViewName?: string | null;
 }
 

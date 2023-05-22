@@ -3291,7 +3291,7 @@ declare interface Essbasic {
   ChannelCreateFlowReminds(data: ChannelCreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link ChannelCreateFlowSignReviewRequest} {@link ChannelCreateFlowSignReviewResponse} */
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
-  /** 创建签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
+  /** 创建个人H5签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
   ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
   /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
@@ -3323,7 +3323,7 @@ declare interface Essbasic {
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
   /** 生成控制台、移动端链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
-  /** 使用多个模板批量创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
+  /** 使用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
   /** 通过图片为子客企业代创建印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;

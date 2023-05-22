@@ -1205,7 +1205,7 @@ declare interface CreatePreparedPersonalEsignRequest {
   Operator?: UserInfo;
   /** 身份证件类型:ID_CARD 身份证PASSPORT 护照HONGKONG_AND_MACAO 中国香港FOREIGN_ID_CARD 境外身份HONGKONG_MACAO_AND_TAIWAN 中国台湾 */
   IdCardType?: string;
-  /** 手机号码 */
+  /** 手机号码；当需要开通自动签时，该参数必传 */
   Mobile?: string;
   /** 是否开通自动签，该功能需联系运营工作人员开通后使用 */
   EnableAutoSign?: boolean;
@@ -1628,8 +1628,12 @@ declare interface DescribeUserAutoSignStatusRequest {
 }
 
 declare interface DescribeUserAutoSignStatusResponse {
-  /** 是否开通 */
+  /** 是否已开通自动签 */
   IsOpen?: boolean;
+  /** 自动签许可生效时间。当且仅当已开通自动签时有值。 */
+  LicenseFrom?: number;
+  /** 自动签许可到期时间。当且仅当已开通自动签时有值。 */
+  LicenseTo?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1813,7 +1817,7 @@ declare interface Ess {
   CreateFlowReminds(data: CreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
-  /** 获取集成页面签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
+  /** 创建个人用户H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;
   /** 创建企业员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;

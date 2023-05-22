@@ -1508,12 +1508,6 @@ declare interface SqlFileInfo {
   FileId: string;
 }
 
-/** 表名 */
-declare interface TableName {
-  /** 表名 */
-  TableName: string;
-}
-
 /** 数据库表权限 */
 declare interface TablePrivilege {
   /** 数据库名 */
@@ -2638,30 +2632,6 @@ declare interface DescribeBackupSummariesResponse {
   Items: BackupSummaryItem[];
   /** 实例备份统计总条目数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBackupTablesRequest {
-  /** 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。 */
-  InstanceId: string;
-  /** 开始时间，格式为：2017-07-12 10:29:20。 */
-  StartTime: string;
-  /** 指定的数据库名。 */
-  DatabaseName: string;
-  /** 要查询的数据表名前缀。 */
-  SearchTable?: string;
-  /** 分页偏移。 */
-  Offset?: number;
-  /** 分页大小，最小值为1，最大值为2000。 */
-  Limit?: number;
-}
-
-declare interface DescribeBackupTablesResponse {
-  /** 返回的数据个数。 */
-  TotalCount: number;
-  /** 符合条件的数据表数组。 */
-  Items: TableName[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4705,8 +4675,6 @@ declare interface Cdb {
   DescribeBackupOverview(data: DescribeBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupOverviewResponse>;
   /** 查询备份实时统计 {@link DescribeBackupSummariesRequest} {@link DescribeBackupSummariesResponse} */
   DescribeBackupSummaries(data: DescribeBackupSummariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupSummariesResponse>;
-  /** @deprecated 查询指定数据库的备份数据表 {@link DescribeBackupTablesRequest} {@link DescribeBackupTablesResponse} */
-  DescribeBackupTables(data: DescribeBackupTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupTablesResponse>;
   /** 查询数据备份文件列表 {@link DescribeBackupsRequest} {@link DescribeBackupsResponse} */
   DescribeBackups(data: DescribeBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupsResponse>;
   /** 查询日志备份概览 {@link DescribeBinlogBackupOverviewRequest} {@link DescribeBinlogBackupOverviewResponse} */
