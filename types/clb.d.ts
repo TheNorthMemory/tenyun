@@ -1155,7 +1155,7 @@ declare interface TargetHealth {
   /** 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。 */
   HealthStatusDetail: string;
   /** (**该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情**) 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。 */
-  HealthStatusDetial: string;
+  HealthStatusDetial?: string;
 }
 
 /** 负载均衡实例所绑定的后端服务的信息，包括所属地域、所属网络。 */

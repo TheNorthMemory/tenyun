@@ -932,6 +932,70 @@ declare interface CreateDCDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateDedicatedClusterDCDBInstanceRequest {
+  /** 分配实例个数 */
+  GoodsNum: number;
+  /** 分片数量 */
+  ShardNum: number;
+  /** 分片內存大小, 单位GB */
+  ShardMemory: number;
+  /** 分片磁盘大小, 单位GB */
+  ShardStorage: number;
+  /** 独享集群集群uuid */
+  ClusterId: string;
+  /** （废弃）可用区 */
+  Zone?: string;
+  /** 项目ID */
+  ProjectId?: number;
+  /** （废弃）cpu大小，单位：核 */
+  Cpu?: number;
+  /** 网络ID */
+  VpcId?: string;
+  /** 子网ID */
+  SubnetId?: string;
+  /** （废弃）分片机型 */
+  ShardMachine?: string;
+  /** 分片的节点个数 */
+  ShardNodeNum?: number;
+  /** （废弃）节点cpu核数，单位：1/100核 */
+  ShardNodeCpu?: number;
+  /** （废弃）节点內存大小，单位：GB */
+  ShardNodeMemory?: number;
+  /** （废弃）节点磁盘大小，单位：GB */
+  ShardNodeStorage?: number;
+  /** db版本 */
+  DbVersionId?: string;
+  /** 安全组ID */
+  SecurityGroupId?: string;
+  /** DCN源实例ID */
+  DcnInstanceId?: string;
+  /** DCN源实例地域名 */
+  DcnRegion?: string;
+  /** 自定义实例名称 */
+  InstanceName?: string;
+  /** 标签 */
+  ResourceTags?: ResourceTag[];
+  /** 支持IPv6标志：1 支持， 0 不支持 */
+  Ipv6Flag?: number;
+  /** （废弃）Pid，可通过获取独享集群售卖配置接口得到 */
+  Pid?: number;
+  /** 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。 */
+  InitParams?: DBParamValue[];
+  /** 指定主节点uuid，不填随机分配 */
+  MasterHostId?: string;
+  /** 指定从节点uuid，不填随机分配 */
+  SlaveHostIds?: string[];
+  /** 需要回档的源实例ID */
+  RollbackInstanceId?: string;
+  /** 回档时间 */
+  RollbackTime?: string;
+}
+
+declare interface CreateDedicatedClusterDCDBInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateHourDCDBInstanceRequest {
   /** 分片内存大小，单位：GB，可以通过 DescribeShardSpec 查询实例规格获得。 */
   ShardMemory: number;
@@ -1072,6 +1136,22 @@ declare interface DescribeBackupFilesResponse {
   Files: InstanceBackupFileItem[];
   /** 总条目数 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBEncryptAttributesRequest {
+  /** 实例Id，形如：tdsqlshard-ow728lmc。 */
+  InstanceId: string;
+}
+
+declare interface DescribeDBEncryptAttributesResponse {
+  /** 是否启用加密，1-已开启；0-未开启。 */
+  EncryptStatus: number;
+  /** DEK密钥 */
+  CipherText: string;
+  /** DEK密钥过期日期。 */
+  ExpireDate: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2100,6 +2180,32 @@ declare interface UpgradeDCDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeDedicatedDCDBInstanceRequest {
+  /** 升级类型，取值为ADD，SPLIT和EXPAND。ADD-添加分片；SPLIT-切分某个分片；EXPAND-垂直扩容某个分片 */
+  UpgradeType: string;
+  /** 实例ID，形如 dcdbt-mlfjm74h */
+  InstanceId: string;
+  /** 当UpgradeType取值为ADD时，添加分片的配置参数 */
+  AddShardConfig?: AddShardConfig;
+  /** 当UpgradeType取值为EXPAND时，垂直扩容分片的配置参数 */
+  ExpandShardConfig?: ExpandShardConfig;
+  /** 当UpgradeType取值为SPLIT时，切分分片的配置参数 */
+  SplitShardConfig?: SplitShardConfig;
+  /** 错过切换时间窗口时，是否自动重试一次，0-否，1-是 */
+  SwitchAutoRetry?: number;
+  /** 切换时间窗口开始时间 */
+  SwitchStartTime?: string;
+  /** 切换时间窗口结束时间 */
+  SwitchEndTime?: string;
+}
+
+declare interface UpgradeDedicatedDCDBInstanceResponse {
+  /** 异步任务流程ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeHourDCDBInstanceRequest {
   /** 待升级的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。 */
   InstanceId: string;
@@ -2145,6 +2251,8 @@ declare interface Dcdb {
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
   /** 创建DCDB分布式实例 {@link CreateDCDBInstanceRequest} {@link CreateDCDBInstanceResponse} */
   CreateDCDBInstance(data: CreateDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDCDBInstanceResponse>;
+  /** 创建独享集群DCDB实例 {@link CreateDedicatedClusterDCDBInstanceRequest} {@link CreateDedicatedClusterDCDBInstanceResponse} */
+  CreateDedicatedClusterDCDBInstance(data: CreateDedicatedClusterDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterDCDBInstanceResponse>;
   /** 创建DCDB后付费实例 {@link CreateHourDCDBInstanceRequest} {@link CreateHourDCDBInstanceResponse} */
   CreateHourDCDBInstance(data: CreateHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHourDCDBInstanceResponse>;
   /** 删除账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
@@ -2155,6 +2263,8 @@ declare interface Dcdb {
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查看备份文件列表 {@link DescribeBackupFilesRequest} {@link DescribeBackupFilesResponse} */
   DescribeBackupFiles(data?: DescribeBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupFilesResponse>;
+  /** 查询实例数据加密状态 {@link DescribeDBEncryptAttributesRequest} {@link DescribeDBEncryptAttributesResponse} */
+  DescribeDBEncryptAttributes(data: DescribeDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBEncryptAttributesResponse>;
   /** 获取日志列表 {@link DescribeDBLogFilesRequest} {@link DescribeDBLogFilesResponse} */
   DescribeDBLogFiles(data: DescribeDBLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBLogFilesResponse>;
   /** 查看数据库参数 {@link DescribeDBParametersRequest} {@link DescribeDBParametersResponse} */
@@ -2201,7 +2311,7 @@ declare interface Dcdb {
   DescribeProjects(data?: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 查询分布式数据库可售卖分片规格 {@link DescribeShardSpecRequest} {@link DescribeShardSpecResponse} */
   DescribeShardSpec(data?: DescribeShardSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShardSpecResponse>;
-  /** 获取SQL日志 {@link DescribeSqlLogsRequest} {@link DescribeSqlLogsResponse} */
+  /** @deprecated 获取SQL日志 {@link DescribeSqlLogsRequest} {@link DescribeSqlLogsResponse} */
   DescribeSqlLogs(data: DescribeSqlLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlLogsResponse>;
   /** 拉取用户任务列表 {@link DescribeUserTasksRequest} {@link DescribeUserTasksResponse} */
   DescribeUserTasks(data?: DescribeUserTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserTasksResponse>;
@@ -2259,6 +2369,8 @@ declare interface Dcdb {
   TerminateDedicatedDBInstance(data: TerminateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDedicatedDBInstanceResponse>;
   /** 升级分布式数据库 {@link UpgradeDCDBInstanceRequest} {@link UpgradeDCDBInstanceResponse} */
   UpgradeDCDBInstance(data: UpgradeDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDCDBInstanceResponse>;
+  /** 升级独享DCDB实例 {@link UpgradeDedicatedDCDBInstanceRequest} {@link UpgradeDedicatedDCDBInstanceResponse} */
+  UpgradeDedicatedDCDBInstance(data: UpgradeDedicatedDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDedicatedDCDBInstanceResponse>;
   /** 升级DCDB后付费实例 {@link UpgradeHourDCDBInstanceRequest} {@link UpgradeHourDCDBInstanceResponse} */
   UpgradeHourDCDBInstance(data: UpgradeHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeHourDCDBInstanceResponse>;
 }

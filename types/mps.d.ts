@@ -4845,9 +4845,9 @@ declare interface DescribeAnimatedGraphicsTemplatesRequest {
 
 declare interface DescribeAnimatedGraphicsTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 转动图模板详情列表。 */
-  AnimatedGraphicsTemplateSet: AnimatedGraphicsTemplate[];
+  AnimatedGraphicsTemplateSet?: AnimatedGraphicsTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

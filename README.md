@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 235+ 款产品，9430+ 服务数</summary>
+<details><summary>共计 235+ 款产品，9434+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -176,7 +176,7 @@ dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(49) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
-dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(66) |
+dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(69) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(86) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(65) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(26) |
@@ -230,7 +230,7 @@ lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(131) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |
-mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(70) |
+mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(71) |
 market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-10(2) |
 memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1) |
 mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/1038) | 2020-10-14(7) | 2019-09-29(1) |

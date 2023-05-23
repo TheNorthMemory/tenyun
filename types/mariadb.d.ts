@@ -1996,6 +1996,28 @@ declare interface UpgradeDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeDedicatedDBInstanceRequest {
+  /** 待升级的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例获得。 */
+  InstanceId: string;
+  /** 内存大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs 查询实例规格获得。 */
+  Memory: number;
+  /** 存储空间大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。 */
+  Storage: number;
+  /** 错过切换时间窗口时，是否自动重试一次，0-否，1-是 */
+  SwitchAutoRetry?: number;
+  /** 切换时间窗口开始时间 */
+  SwitchStartTime?: string;
+  /** 切换时间窗口结束时间 */
+  SwitchEndTime?: string;
+}
+
+declare interface UpgradeDedicatedDBInstanceResponse {
+  /** 异步流程Id */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Mariadb 云数据库 MariaDB} */
 declare interface Mariadb {
   (): Versions;
@@ -2139,6 +2161,8 @@ declare interface Mariadb {
   TerminateDedicatedDBInstance(data: TerminateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDedicatedDBInstanceResponse>;
   /** 扩容实例 {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
+  /** 升级独享云数据库实例 {@link UpgradeDedicatedDBInstanceRequest} {@link UpgradeDedicatedDBInstanceResponse} */
+  UpgradeDedicatedDBInstance(data: UpgradeDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDedicatedDBInstanceResponse>;
 }
 
 export declare type Versions = ["2017-03-12"];

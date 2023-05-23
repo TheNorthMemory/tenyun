@@ -94,11 +94,11 @@ declare interface Bundle {
   BundleId: string;
   /** 内存大小，单位 GB。 */
   Memory: number;
-  /** 系统盘类型。取值范围： LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地 SSD 硬盘 CLOUD_BASIC：普通云硬盘 CLOUD_SSD：SSD 云硬盘 CLOUD_PREMIUM：高性能云硬盘 */
+  /** 系统盘类型。取值范围： CLOUD_SSD：SSD 云硬盘 CLOUD_PREMIUM：高性能云硬盘 */
   SystemDiskType: string;
-  /** 系统盘大小。 */
+  /** 系统盘大小。单位GB。 */
   SystemDiskSize: number;
-  /** 每月网络流量，单位 Gb。 */
+  /** 每月网络流量，单位 GB。 */
   MonthlyTraffic: number;
   /** 是否支持 Linux/Unix 平台。 */
   SupportLinuxUnixPlatform: boolean;
@@ -1101,7 +1101,7 @@ declare interface DescribeBundlesRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Limit?: number;
-  /** 过滤器列表。bundle-id按照【套餐 ID】进行过滤。类型：String必选：否support-platform-type按照【系统类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）类型：String必选：否bundle-type按照 【套餐类型进行过滤】。取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);类型：String必选：否bundle-state按照【套餐状态】进行过滤。取值: ‘ONLINE’(在线); ‘OFFLINE’(下线);类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。 */
+  /** 过滤器列表。bundle-id按照【套餐 ID】进行过滤。类型：String必选：否support-platform-type按照【系统类型】进行过滤。取值： LINUX_UNIX(Linux/Unix系统) ;WINDOWS(Windows 系统)类型：String必选：否bundle-type按照 【套餐类型进行过滤】。取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);STARTER_BUNDLE(入门型套餐);CAREFREE_BUNDLE(无忧型套餐);类型：String必选：否bundle-state按照【套餐状态】进行过滤。取值: ONLINE(在线); OFFLINE(下线);类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。 */
   Filters?: Filter[];
   /** 可用区列表。默认为全部可用区。 */
   Zones?: string[];

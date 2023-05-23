@@ -1306,6 +1306,8 @@ declare interface HostInfo {
   Project: ProjectInfo | null;
   /** 标签 */
   Tags: TagInfo[] | null;
+  /** 集群id */
+  ClusterID?: string;
 }
 
 /** 镜像自动授权任务信息 */
@@ -5217,9 +5219,9 @@ declare interface DescribeAssetHostListRequest {
 
 declare interface DescribeAssetHostListResponse {
   /** 主机列表 */
-  List: HostInfo[];
+  List?: HostInfo[];
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

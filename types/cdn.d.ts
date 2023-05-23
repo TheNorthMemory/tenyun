@@ -188,7 +188,7 @@ declare interface AdvancedCCRules {
   DetectionTime?: number | null;
   /** 限频阈值 */
   FrequencyLimit?: number | null;
-  /** IP 惩罚开关，可选on|off */
+  /** IP 惩罚配置开关，取值有：on：开启off：关闭 */
   PunishmentSwitch?: string | null;
   /** IP 惩罚时长 */
   PunishmentTime?: number | null;
@@ -1020,7 +1020,7 @@ declare interface DomainBotCount {
 
 /** 域名查询时过滤条件。 */
 declare interface DomainFilter {
-  /** 过滤字段名，支持的列表如下：- origin：主源站。- domain：域名。- resourceId：域名id。- status：域名状态，online，offline或processing。- serviceType：业务类型，web，download，media，hybrid或dynamic。- projectId：项目ID。- domainType：主源站类型，cname表示自有源，cos表示cos接入，third_party表示第三方对象存储。- fullUrlCache：全路径缓存，on或off。- https：是否配置https，on，off或processing。- originPullProtocol：回源协议类型，支持http，follow或https。- tagKey：标签键。 */
+  /** 过滤字段名，支持的列表如下：- origin：主源站。- domain：域名。- resourceId：域名id。- status：域名状态，online，offline或processing。- serviceType：业务类型，web，download，media，hybrid或dynamic。- projectId：项目ID。- domainType：主源站类型，cname表示自有源，cos表示cos接入，third_party表示第三方对象存储，igtm表示IGTM多活源。- fullUrlCache：全路径缓存，on或off。- https：是否配置https，on，off或processing。- originPullProtocol：回源协议类型，支持http，follow或https。- tagKey：标签键。 */
   Name: string;
   /** 过滤字段值。 */
   Value: string[];
@@ -1222,7 +1222,7 @@ declare interface Https {
 
 /** HTTPS服务，若关闭，下发配置拦截https请求，开启时会产生计费 */
 declare interface HttpsBilling {
-  /** HTTPS服务配置开关，取值有：on：开启，缺省时默认开启【会产生计费】off：关闭，拦截https请求 */
+  /** HTTPS服务配置开关，取值有：on：开启，缺省时默认开启，会产生计费off：关闭，拦截https请求 */
   Switch: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface OfflineCache {
 declare interface Origin {
   /** 主源站列表修改源站时，需要同时填充对应的 OriginType */
   Origins?: string[] | null;
-  /** 主源站类型入参支持以下几种类型：domain：域名类型domainv6：域名解析V6类型cos：对象存储源站third_party: 第三方存储源站ip：IP 列表作为源站ipv6：源站列表为一个单独的 IPv6 地址ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ip_domain: 支持IP和域名形式源站混填（白名单功能）ip_domainv6：源站列表为多个 IPv4 地址以及域名解析v6地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ipv6_domainv6：源站列表为多个 IPv6 地址以及域名解析v6地址domain_domainv6：源站列表为多个域名解析v4 地址以及域名解析v6地址ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名ip_ipv6_domainv6：源站列表为多个 IPv4 地址IPv6 地址以及域名解析v6地址ip_domain_domainv6：源站列表为多个 IPv4 地址域名解析v4 地址以及域名解析v6地址ipv6_domain_domainv6：源站列表为多个 域名解析v4 地址IPv6 地址以及域名解析v6地址ip_ipv6_domain_domainv6：源站列表为多个 IPv4 地址IPv6 地址 域名解析v4 地址以及域名解析v6地址出参增加以下几种类型：image：数据万象源站ftp：历史 FTP 托管源源站，现已不维护修改 Origins 时需要同时填充对应的 OriginTypeIPv6 功能目前尚未全量，需要先申请试用 */
+  /** 主源站类型入参支持以下几种类型：domain：域名类型domainv6：域名解析V6类型cos：对象存储源站third_party: 第三方存储源站igtm: IGTM多活源ip：IP 列表作为源站ipv6：源站列表为一个单独的 IPv6 地址ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ip_domain: 支持IP和域名形式源站混填（白名单功能）ip_domainv6：源站列表为多个 IPv4 地址以及域名解析v6地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ipv6_domainv6：源站列表为多个 IPv6 地址以及域名解析v6地址domain_domainv6：源站列表为多个域名解析v4 地址以及域名解析v6地址ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名ip_ipv6_domainv6：源站列表为多个 IPv4 地址IPv6 地址以及域名解析v6地址ip_domain_domainv6：源站列表为多个 IPv4 地址域名解析v4 地址以及域名解析v6地址ipv6_domain_domainv6：源站列表为多个 域名解析v4 地址IPv6 地址以及域名解析v6地址ip_ipv6_domain_domainv6：源站列表为多个 IPv4 地址IPv6 地址 域名解析v4 地址以及域名解析v6地址出参增加以下几种类型：image：数据万象源站ftp：历史 FTP 托管源源站，现已不维护修改 Origins 时需要同时填充对应的 OriginTypeIPv6 功能目前尚未全量，需要先申请试用 */
   OriginType?: string | null;
   /** 当源站类型为cos或者第三方存储加速时,ServerName字段必填回主源站时 Host 头部，不填充则默认为加速域名若接入的是泛域名，则回源 Host 默认为访问时的子域名 */
   ServerName?: string | null;
@@ -1690,7 +1690,7 @@ declare interface PathRule {
 
 /** POST请求上传文件流式传输最大限制 */
 declare interface PostSize {
-  /** 是调整POST请求限制，平台默认为32MB。关闭：off，开启：on。 */
+  /** POST请求上传文件流式传输最大限制配置开关，取值有：on：开启，平台默认为32MBoff：关闭 */
   Switch: string;
   /** 最大限制，取值在1MB和200MB之间。 */
   MaxSize?: number;

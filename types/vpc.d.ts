@@ -4983,15 +4983,15 @@ declare interface DescribeSnapshotFilesRequest {
   EndDate: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大为200。 */
+  /** 返回数量，默认为20，最大为100。 */
   Limit?: number;
 }
 
 declare interface DescribeSnapshotFilesResponse {
   /** 快照文件集合。 */
-  SnapshotFileSet: SnapshotFileInfo[];
+  SnapshotFileSet?: SnapshotFileInfo[];
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5155,13 +5155,13 @@ declare interface DescribeVpcEndPointResponse {
 }
 
 declare interface DescribeVpcEndPointServiceRequest {
-  /** 过滤条件。 service-id - String - （过滤条件）终端节点服务唯一ID。service-name - String - （过滤条件）终端节点实例名称。service-instance-id - String - （过滤条件）后端服务的唯一ID，比如lb-xxx。service-type - String - （过滤条件）后端PAAS服务类型，CLB,CDB,CRS，不填默认查询类型为CLB。 */
+  /** 过滤条件。不支持同时传入参数 EndPointServiceIds and Filters。 service-id - String - （过滤条件）终端节点服务唯一ID。service-name - String - （过滤条件）终端节点实例名称。service-instance-id - String - （过滤条件）后端服务的唯一ID，比如lb-xxx。service-type - String - （过滤条件）后端PAAS服务类型，CLB,CDB,CRS，不填默认查询类型为CLB。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
   /** 单页返回数量，默认为20，最大值为100。 */
   Limit?: number;
-  /** 终端节点服务ID。 */
+  /** 终端节点服务ID。不支持同时传入参数 EndPointServiceIds and Filters。 */
   EndPointServiceIds?: string[];
 }
 
