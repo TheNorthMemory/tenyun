@@ -76,6 +76,10 @@ declare interface LifeCycleRule {
   Status?: number;
   /** 创建时间 */
   CreateTime?: string;
+  /** 生命周期规则当前路径具体存储量 */
+  Summary?: Summary;
+  /** Summary更新时间 */
+  LastSummaryTime?: string;
 }
 
 /** 挂载点 */
@@ -108,6 +112,22 @@ declare interface RestoreTask {
   Status?: number;
   /** 创建时间 */
   CreateTime?: string;
+}
+
+/** 生命周期规则当前路径具体存储量信息 */
+declare interface Summary {
+  /** 总存储量（单位byte） */
+  CapacityUsed: number | null;
+  /** 标准存储量（单位byte） */
+  StandardCapacityUsed: number | null;
+  /** 低频存储量（单位byte） */
+  DegradeCapacityUsed?: number | null;
+  /** 归档存储量（单位byte） */
+  ArchiveCapacityUsed?: number | null;
+  /** 深度归档存储量（单位byte） */
+  DeepArchiveCapacityUsed?: number | null;
+  /** 智能分层存储量（单位byte） */
+  IntelligentCapacityUsed?: number | null;
 }
 
 /** 资源标签。 */
@@ -369,7 +389,7 @@ declare interface DescribeLifeCycleRulesRequest {
 
 declare interface DescribeLifeCycleRulesResponse {
   /** 生命周期规则列表 */
-  LifeCycleRules: LifeCycleRule[];
+  LifeCycleRules?: LifeCycleRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

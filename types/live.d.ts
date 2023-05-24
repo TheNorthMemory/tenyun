@@ -2019,9 +2019,9 @@ declare interface DescribeBillBandwidthAndFluxListResponse {
 }
 
 declare interface DescribeCallbackRecordsListRequest {
-  /** 起始时间点，格式为yyyy-mm-dd HH:MM:SS。 */
+  /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过1天。 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   EndTime: string;
   /** 流名称，精确匹配。 */
   StreamName: string;
@@ -2037,15 +2037,15 @@ declare interface DescribeCallbackRecordsListRequest {
 
 declare interface DescribeCallbackRecordsListResponse {
   /** 回调事件列表。 */
-  DataInfoList: CallbackEventInfo[];
+  DataInfoList?: CallbackEventInfo[];
   /** 页码。 */
-  PageNum: number;
+  PageNum?: number;
   /** 每页条数。 */
-  PageSize: number;
+  PageSize?: number;
   /** 总条数。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 总页数。 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

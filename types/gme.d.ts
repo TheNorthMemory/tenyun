@@ -244,7 +244,7 @@ declare interface RealtimeTextStatisticsItem {
   Data: number | null;
 }
 
-/** 房间内录制信息信息 */
+/** 房间内录制信息。 */
 declare interface RecordInfo {
   /** 用户ID（当混流模式时，取值为0）。 */
   UserId: string;

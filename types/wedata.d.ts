@@ -1276,6 +1276,8 @@ declare interface Rule {
   TargetObjectDataTypeName?: string | null;
   /** 目标字段名称 */
   TargetObjectValue?: string | null;
+  /** 源端对应的引擎类型 */
+  SourceEngineTypes?: number[] | null;
 }
 
 /** 规则配置 */
@@ -1312,6 +1314,8 @@ declare interface RuleExecConfig {
   QueueName?: string | null;
   /** 执行资源组 */
   ExecutorGroupId?: string | null;
+  /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+  EngineType?: string | null;
 }
 
 /** 概览趋势结果 */
@@ -1524,6 +1528,8 @@ declare interface RuleGroupExecResult {
   Permission?: boolean | null;
   /** 执行详情，调度计划或者关联生产任务ID */
   ExecDetail?: string | null;
+  /** 实际执行引擎 */
+  EngineType?: string | null;
 }
 
 /** 规则组执行结果分页 */
@@ -1560,6 +1566,10 @@ declare interface RuleGroupExecStrategy {
   CycleStep: number | null;
   /** 时间指定 */
   TaskAction: string | null;
+  /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+  ExecEngineType?: string | null;
+  /** 执行计划 */
+  ExecPlan?: string | null;
 }
 
 /** 规则组监控业务视图 */
@@ -2937,11 +2947,13 @@ declare interface CommitRuleGroupTaskRequest {
   ExecConfig?: RuleExecConfig;
   /** 项目ID */
   ProjectId?: string;
+  /** 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+  EngineType?: string;
 }
 
 declare interface CommitRuleGroupTaskResponse {
   /** 规则组执行id */
-  Data: RuleGroupExecResult | null;
+  Data?: RuleGroupExecResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3249,11 +3261,13 @@ declare interface CreateRuleRequest {
   FieldConfig?: RuleFieldConfig;
   /** 目标字段名称 CITY */
   TargetObjectValue?: string;
+  /** 该规则支持的执行引擎列表 */
+  SourceEngineTypes?: number[];
 }
 
 declare interface CreateRuleResponse {
   /** 规则 */
-  Data: Rule | null;
+  Data?: Rule | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4933,11 +4947,13 @@ declare interface DescribeRulesRequest {
   ProjectId?: string;
   /** 规则组id */
   RuleGroupId?: number;
+  /** 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+  EngineType?: string;
 }
 
 declare interface DescribeRulesResponse {
   /** 规则列表 */
-  Data: Rule[] | null;
+  Data?: Rule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5701,11 +5717,13 @@ declare interface ModifyExecStrategyRequest {
   DatasourceId?: string;
   /** 数据表Id */
   TableId?: string;
+  /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+  ExecEngineType?: string;
 }
 
 declare interface ModifyExecStrategyResponse {
   /** 规则组ID */
-  Data: number | null;
+  Data?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5851,11 +5869,13 @@ declare interface ModifyRuleRequest {
   FieldConfig?: RuleFieldConfig;
   /** 目标字段名称 CITY */
   TargetObjectValue?: string;
+  /** 该规则适配的执行引擎 */
+  SourceEngineTypes?: number[];
 }
 
 declare interface ModifyRuleResponse {
   /** 是否更新成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

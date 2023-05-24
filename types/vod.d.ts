@@ -1956,6 +1956,8 @@ declare interface EditMediaVideoStream {
   Width?: number;
   /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率取基准分辨率；当 Width 为 0，Height 非 0，则 Width 按基准分辨率比例缩放；当 Width 非 0，Height 为 0，则 Height 按基准分辨率比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
   Height?: number;
+  /** 视频帧率，取值范围：[0, 100]，单位：Hz。当取值为0，将自动为视频设置帧率。默认值为 0。 */
+  Fps?: number | null;
 }
 
 /** 空的轨道片段，用来进行时间轴的占位。如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。 */

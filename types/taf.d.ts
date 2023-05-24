@@ -116,6 +116,10 @@ declare interface OutputRecognizeTargetAudienceValue {
   IsFound: number | null;
   /** 返回分值 */
   Score: number | null;
+  /** 模型类型 */
+  ModelType: number | null;
+  /** 入参Uid */
+  Uid: string | null;
 }
 
 declare interface RecognizeCustomizedAudienceRequest {
