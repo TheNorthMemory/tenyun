@@ -70,6 +70,8 @@ declare interface BaseFlowInfo {
   UserData?: string | null;
   /** 抄送人信息 */
   CcInfos?: CcInfo[] | null;
+  /** 是否需要发起前审核，当指定NeedCreateReview=true，则发起后，需要使用接口：ChannelCreateFlowSignReview，来完成发起前审核，审核通过后，可以继续查看，签署合同 */
+  NeedCreateReview?: boolean | null;
 }
 
 /** 抄送信息 */
@@ -344,6 +346,8 @@ declare interface FlowDetailInfo {
   FlowApproverInfos: FlowApproverDetail[];
   /** 合同(流程)关注方信息列表 */
   CcInfos?: FlowApproverDetail[];
+  /** 是否需要发起前审批，当NeedCreateReview为true，表明当前流程是需要发起前审核的合同，可能无法进行查看，签署操作，需要等审核完成后，才可以继续后续流程 */
+  NeedCreateReview?: boolean;
 }
 
 /** 合同组中每个子合同的发起信息 */
@@ -1130,7 +1134,7 @@ declare interface ChannelCreateUserRolesRequest {
   /** 绑定角色的角色id列表 */
   RoleIds: string[];
   /** 操作者信息 */
-  Operator: UserInfo;
+  Operator?: UserInfo;
 }
 
 declare interface ChannelCreateUserRolesResponse {
@@ -1148,7 +1152,7 @@ declare interface ChannelDeleteRoleUsersRequest {
   /** 用户列表 */
   UserIds: string[];
   /** 操作人信息 */
-  Operator: UserInfo;
+  Operator?: UserInfo;
 }
 
 declare interface ChannelDeleteRoleUsersResponse {
@@ -1233,10 +1237,10 @@ declare interface ChannelDescribeRolesRequest {
   Offset: number;
   /** 查询数量，最大200 */
   Limit: string;
-  /** 操作人信息 */
-  Operator: UserInfo;
-  /** 查询的关键字段:Key:"RoleType",Vales:["1"]查询系统角色，Values:["2]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色 */
+  /** 查询的关键字段:Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色 */
   Filters?: Filter[];
+  /** 操作人信息 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelDescribeRolesResponse {

@@ -1780,6 +1780,20 @@ declare interface VatInvoiceItem {
   TaxAmount: string;
   /** 税收分类编码 */
   TaxClassifyCode: string;
+  /** 运输工具类型 */
+  VehicleType?: string;
+  /** 运输工具牌号 */
+  VehicleBrand?: string;
+  /** 起始地 */
+  DeparturePlace?: string;
+  /** 到达地 */
+  ArrivalPlace?: string;
+  /** 运输货物名称 */
+  TransportItemsName?: string;
+  /** 建筑服务发生地 */
+  ConstructionPlace?: string;
+  /** 建筑项目名称 */
+  ConstructionName?: string;
 }
 
 /** 增值税发票项目信息 */
@@ -3403,9 +3417,9 @@ declare interface RecognizePhilippinesVoteIDOCRResponse {
 }
 
 declare interface RecognizeTableAccurateOCRRequest {
-  /** 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片支持的像素范围：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片支持的像素范围：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
   PdfPageNumber?: number;
@@ -3857,9 +3871,9 @@ declare interface TrainTicketOCRResponse {
 }
 
 declare interface VatInvoiceOCRRequest {
-  /** 图片/PDF的 Base64 值。支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片/PDF大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 图片/PDF的 Base64 值。支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片/PDF大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片/PDF的 Url 地址。支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 7M。文件下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片/PDF的 Url 地址。支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 7M。文件下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
   /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
   IsPdf?: boolean;
@@ -3869,13 +3883,13 @@ declare interface VatInvoiceOCRRequest {
 
 declare interface VatInvoiceOCRResponse {
   /** 检测到的文本信息，具体内容请点击左侧链接。 */
-  VatInvoiceInfos: TextVatInvoice[];
+  VatInvoiceInfos?: TextVatInvoice[];
   /** 明细条目。VatInvoiceInfos中关于明细项的具体条目。 */
-  Items: VatInvoiceItem[];
+  Items?: VatInvoiceItem[];
   /** 默认值为0。如果图片为PDF时，返回PDF的总页数。 */
-  PdfPageSize: number;
+  PdfPageSize?: number;
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
-  Angle: number;
+  Angle?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

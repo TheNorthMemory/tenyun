@@ -670,6 +670,34 @@ declare interface DatabaseTables {
   Tables?: string[] | null;
 }
 
+/** 数据库详细信息 */
+declare interface DbInfo {
+  /** 数据库名称 */
+  DbName: string;
+  /** 字符集类型 */
+  CharacterSet: string;
+  /** 数据库状态 */
+  Status: string;
+  /** 拍讯规则 */
+  CollateRule: string;
+  /** 数据库备注 */
+  Description: string | null;
+  /** 用户权限 */
+  UserHostPrivileges: UserHostPrivilege[] | null;
+  /** 数据库ID */
+  DbId: number | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 用户appid */
+  AppId: number | null;
+  /** 用户Uin */
+  Uin: string | null;
+  /** 集群Id */
+  ClusterId: string | null;
+}
+
 /** 数据库表 */
 declare interface DbTable {
   /** 数据库名称 */
@@ -742,6 +770,14 @@ declare interface InstanceNetInfo {
   WanPort?: number | null;
   /** 外网开启状态 */
   WanStatus?: string | null;
+}
+
+/** 实例参数信息 */
+declare interface InstanceParamItem {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例参数列表 */
+  ParamsItems: ParamItemDetail[];
 }
 
 /** 实例可售卖规格详细信息，创建实例时Cpu/Memory确定实例规格，存储可选大小为[MinStorageSize,MaxStorageSize] */
@@ -854,6 +890,42 @@ declare interface OldAddrInfo {
   ReturnTime?: string | null;
 }
 
+/** 实例参数详细描述 */
+declare interface ParamDetail {
+  /** 参数名称 */
+  ParamName: string;
+  /** 参数类型：integer，enum，float，string，func */
+  ParamType: string;
+  /** true-支持"func"，false-不支持公式 */
+  SupportFunc: boolean;
+  /** 默认值 */
+  Default: string;
+  /** 参数描述 */
+  Description: string;
+  /** 参数当前值 */
+  CurrentValue: string;
+  /** 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。 */
+  NeedReboot: number;
+  /** 参数容许的最大值 */
+  Max: string;
+  /** 参数容许的最小值 */
+  Min: string;
+  /** 参数的可选枚举值。如果为非枚举值，则为空 */
+  EnumValue: string[] | null;
+  /** 1：全局参数，0：非全局参数 */
+  IsGlobal: number;
+  /** 匹配类型，multiVal */
+  MatchType: string;
+  /** 匹配目标值，当multiVal时，各个key用，分割 */
+  MatchValue: string;
+  /** true-为公式，false-非公式 */
+  IsFunc: boolean | null;
+  /** 参数设置为公式时，Func返回设置的公式内容 */
+  Func: string | null;
+  /** 参数是否可修改 */
+  ModifiableInfo: ModifiableInfo | null;
+}
+
 /** 参数信息 */
 declare interface ParamInfo {
   /** 当前值 */
@@ -896,6 +968,34 @@ declare interface ParamItem {
   CurrentValue: string;
   /** 原有值 */
   OldValue: string;
+}
+
+/** 实例参数信息 */
+declare interface ParamItemDetail {
+  /** 当前值 */
+  CurrentValue: string;
+  /** 默认值 */
+  Default: string;
+  /** 参数的可选枚举值。如果为非枚举值，则为空 */
+  EnumValue: string[];
+  /** 1：全局参数，0：非全局参数 */
+  IsGlobal: number;
+  /** 最大值 */
+  Max: string;
+  /** 最小值 */
+  Min: string;
+  /** 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。 */
+  NeedReboot: number;
+  /** 参数名称 */
+  ParamName: string;
+  /** 参数类型：integer，enum，float，string，func */
+  ParamType: string;
+  /** 参数描述 */
+  Description: string;
+  /** 类型是否为公式 */
+  IsFunc: boolean | null;
+  /** 参数配置公式 */
+  Func: string | null;
 }
 
 /** 参数模板信息 */
@@ -1126,6 +1226,16 @@ declare interface TradePrice {
   ChargeUnit: string;
 }
 
+/** 用户主机权限 */
+declare interface UserHostPrivilege {
+  /** 授权用户 */
+  DbUserName: string;
+  /** 客户端ip */
+  DbHost: string | null;
+  /** 用户权限 */
+  DbPrivilege: string | null;
+}
+
 /** 可用区库存信息 */
 declare interface ZoneStockInfo {
   /** 可用区 */
@@ -1236,6 +1346,44 @@ declare interface CloseAuditServiceResponse {
   RequestId?: string;
 }
 
+declare interface CloseClusterPasswordComplexityRequest {
+  /** 集群ID数组 */
+  ClusterIds: string[];
+}
+
+declare interface CloseClusterPasswordComplexityResponse {
+  /** 任务流ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CloseWanRequest {
+  /** 实例组id */
+  InstanceGrpId: string;
+}
+
+declare interface CloseWanResponse {
+  /** 任务流ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CopyClusterPasswordComplexityRequest {
+  /** 复制集群ID数组 */
+  ClusterIds: string[];
+  /** 集群id */
+  SourceClusterId: string;
+}
+
+declare interface CopyClusterPasswordComplexityResponse {
+  /** 任务流ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccountsRequest {
   /** 集群id */
   ClusterId: string;
@@ -1302,6 +1450,26 @@ declare interface CreateBackupRequest {
 declare interface CreateBackupResponse {
   /** 异步任务流ID */
   FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateClusterDatabaseRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库名 */
+  DbName: string;
+  /** 字符集类型 */
+  CharacterSet: string;
+  /** 排序规则 */
+  CollateRule: string;
+  /** 授权用户主机权限 */
+  UserHostPrivileges?: UserHostPrivilege[];
+  /** 备注 */
+  Description?: string;
+}
+
+declare interface CreateClusterDatabaseResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1406,6 +1574,40 @@ declare interface CreateClustersResponse {
   RequestId?: string;
 }
 
+declare interface CreateParamTemplateRequest {
+  /** 模版名称 */
+  TemplateName: string;
+  /** mysql版本号 */
+  EngineVersion: string;
+  /** 模版描述 */
+  TemplateDescription?: string;
+  /** 可选参数，需要复制的模版ID */
+  TemplateId?: number;
+  /** 数据库类型，可选值：NORMAL（默认值），SERVERLESS */
+  DbMode?: string;
+  /** 参数列表 */
+  ParamList?: ParamItem[];
+}
+
+declare interface CreateParamTemplateResponse {
+  /** 模版ID */
+  TemplateId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAccountsRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 账号数组，包含account和host */
+  Accounts?: InputAccount[];
+}
+
+declare interface DeleteAccountsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAuditLogFileRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1442,6 +1644,28 @@ declare interface DeleteBackupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteClusterDatabaseRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库名 */
+  DbNames: string[];
+}
+
+declare interface DeleteClusterDatabaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteParamTemplateRequest {
+  /** 参数模版ID */
+  TemplateId: number;
+}
+
+declare interface DeleteParamTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccountAllGrantPrivilegesRequest {
   /** 集群id */
   ClusterId: string;
@@ -1458,6 +1682,28 @@ declare interface DescribeAccountAllGrantPrivilegesResponse {
   DatabasePrivileges: DatabasePrivileges[] | null;
   /** 数据库表权限 */
   TablePrivileges: TablePrivileges[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccountPrivilegesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 账户名 */
+  AccountName: string;
+  /** 主机 */
+  Host: string;
+  /** 数据库名，为*时，忽略Type/TableName, 表示修改用户全局权限； */
+  Db: string;
+  /** 指定数据库下的对象类型，可选"table"，"*" */
+  Type: string;
+  /** 当Type="table"时，用来指定表名 */
+  TableName?: string;
+}
+
+declare interface DescribeAccountPrivilegesResponse {
+  /** 权限列表，示例值为：["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"] */
+  Privileges: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1688,6 +1934,26 @@ declare interface DescribeBinlogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterDetailDatabasesRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 偏移量，默认0 */
+  Offset?: number;
+  /** 返回数量，默认20,最大100 */
+  Limit?: number;
+  /** 数据库名称 */
+  DbName?: string;
+}
+
+declare interface DescribeClusterDetailDatabasesResponse {
+  /** 数据库信息 */
+  DbInfos: DbInfo[] | null;
+  /** 总数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterDetailRequest {
   /** 集群Id */
   ClusterId: string;
@@ -1750,6 +2016,28 @@ declare interface DescribeClusterParamsResponse {
   TotalCount: number;
   /** 实例参数列表 */
   Items: ParamInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterPasswordComplexityRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterPasswordComplexityResponse {
+  /** 数据字典参数 */
+  ValidatePasswordDictionary: ParamInfo | null;
+  /** 密码长度 */
+  ValidatePasswordLength: ParamInfo | null;
+  /** 大小写敏感字符个数 */
+  ValidatePasswordMixedCaseCount: ParamInfo | null;
+  /** 数字个数 */
+  ValidatePasswordNumberCount: ParamInfo | null;
+  /** 密码等级 */
+  ValidatePasswordPolicy: ParamInfo | null;
+  /** 特殊字符个数 */
+  ValidatePasswordSpecialCharCount: ParamInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1844,6 +2132,22 @@ declare interface DescribeInstanceErrorLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceParamsRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID，支持批量查询 */
+  InstanceIds: string[];
+  /** 参数名搜索条件，支持模糊匹配 */
+  ParamKeyword?: string;
+}
+
+declare interface DescribeInstanceParamsResponse {
+  /** 实例参数列表 */
+  Items: InstanceParamItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceSlowQueriesRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1930,6 +2234,30 @@ declare interface DescribeMaintainPeriodResponse {
   MaintainStartTime: number;
   /** 维护时长，单位秒 */
   MaintainDuration: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeParamTemplateDetailRequest {
+  /** 参数模版ID */
+  TemplateId: number;
+}
+
+declare interface DescribeParamTemplateDetailResponse {
+  /** 参数模版ID */
+  TemplateId: number;
+  /** 参数模版名称 */
+  TemplateName: string;
+  /** 参数模版描述 */
+  TemplateDescription: string;
+  /** 引擎版本 */
+  EngineVersion: string;
+  /** 参数总条数 */
+  TotalCount: number;
+  /** 参数列表 */
+  Items: ParamDetail[];
+  /** 数据库类型，可选值：NORMAL，SERVERLESS */
+  DbMode: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2232,6 +2560,36 @@ declare interface IsolateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAccountDescriptionRequest {
+  /** 数据库账号名 */
+  AccountName: string;
+  /** 数据库账号描述信息 */
+  Description: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** 主机，默认为"%" */
+  Host?: string;
+}
+
+declare interface ModifyAccountDescriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccountHostRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 新主机 */
+  NewHost: string;
+  /** 账号信息 */
+  Account: InputAccount;
+}
+
+declare interface ModifyAccountHostResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAccountParamsRequest {
   /** 集群id，不超过32个字符 */
   ClusterId: string;
@@ -2242,6 +2600,24 @@ declare interface ModifyAccountParamsRequest {
 }
 
 declare interface ModifyAccountParamsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccountPrivilegesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 账号信息 */
+  Account: InputAccount;
+  /** 全局权限数组 */
+  GlobalPrivileges?: string[];
+  /** 数据库权限数组 */
+  DatabasePrivileges?: DatabasePrivileges[];
+  /** 表权限数组 */
+  TablePrivileges?: TablePrivileges[];
+}
+
+declare interface ModifyAccountPrivilegesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2316,6 +2692,36 @@ declare interface ModifyBackupNameResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBinlogSaveDaysRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** Binlog保留天数 */
+  BinlogSaveDays: number;
+}
+
+declare interface ModifyBinlogSaveDaysResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyClusterDatabaseRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库名 */
+  DbName: string;
+  /** 新授权用户主机权限 */
+  NewUserHostPrivileges?: UserHostPrivilege[];
+  /** 备注 */
+  Description?: string;
+  /** 历史授权用户主机权限 */
+  OldUserHostPrivileges?: UserHostPrivilege[];
+}
+
+declare interface ModifyClusterDatabaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterNameRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2340,6 +2746,30 @@ declare interface ModifyClusterParamRequest {
 declare interface ModifyClusterParamResponse {
   /** 异步请求Id，用于查询结果 */
   AsyncRequestId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyClusterPasswordComplexityRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 密码长度 */
+  ValidatePasswordLength: number;
+  /** 大小写字符个数 */
+  ValidatePasswordMixedCaseCount: number;
+  /** 特殊字符个数 */
+  ValidatePasswordSpecialCharCount: number;
+  /** 数字个数 */
+  ValidatePasswordNumberCount: number;
+  /** 密码强度（"MEDIUM", "STRONG"） */
+  ValidatePasswordPolicy: string;
+  /** 数据字典 */
+  ValidatePasswordDictionary?: string[];
+}
+
+declare interface ModifyClusterPasswordComplexityResponse {
+  /** 任务流ID */
+  FlowId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2408,6 +2838,26 @@ declare interface ModifyInstanceNameResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceParamRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceIds?: string[];
+  /** 集群参数列表 */
+  ClusterParamList?: ModifyParamItem[];
+  /** 实例参数列表 */
+  InstanceParamList?: ModifyParamItem[];
+  /** yes：在运维时间窗内修改，no：立即执行（默认值） */
+  IsInMaintainPeriod?: string;
+}
+
+declare interface ModifyInstanceParamResponse {
+  /** 任务ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMaintainPeriodConfigRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2420,6 +2870,22 @@ declare interface ModifyMaintainPeriodConfigRequest {
 }
 
 declare interface ModifyMaintainPeriodConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyParamTemplateRequest {
+  /** 模版ID */
+  TemplateId: number;
+  /** 模版名 */
+  TemplateName?: string;
+  /** 模版描述 */
+  TemplateDescription?: string;
+  /** 参数列表 */
+  ParamList?: ModifyParamItem[];
+}
+
+declare interface ModifyParamTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2490,6 +2956,30 @@ declare interface OpenAuditServiceResponse {
   RequestId?: string;
 }
 
+declare interface OpenClusterPasswordComplexityRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 密码长度 */
+  ValidatePasswordLength: number;
+  /** 大小写字符个数 */
+  ValidatePasswordMixedCaseCount: number;
+  /** 特殊字符个数 */
+  ValidatePasswordSpecialCharCount: number;
+  /** 数字个数 */
+  ValidatePasswordNumberCount: number;
+  /** 密码强度（"MEDIUM", "STRONG"） */
+  ValidatePasswordPolicy: string;
+  /** 数据字典 */
+  ValidatePasswordDictionary?: string[];
+}
+
+declare interface OpenClusterPasswordComplexityResponse {
+  /** 任务流ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenReadOnlyInstanceExclusiveAccessRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2508,6 +2998,18 @@ declare interface OpenReadOnlyInstanceExclusiveAccessRequest {
 declare interface OpenReadOnlyInstanceExclusiveAccessResponse {
   /** 开通流程ID */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenWanRequest {
+  /** 实例组id */
+  InstanceGrpId: string;
+}
+
+declare interface OpenWanResponse {
+  /** 任务流ID */
+  FlowId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2726,6 +3228,22 @@ declare interface SwitchProxyVpcResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeClusterVersionRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 内核版本 */
+  CynosVersion: string;
+  /** 升级时间类型，可选：upgradeImmediate,upgradeInMaintain */
+  UpgradeType: string;
+}
+
+declare interface UpgradeClusterVersionResponse {
+  /** 异步任务id */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2771,6 +3289,12 @@ declare interface Cynosdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
+  /** 关闭集群密码复杂度 {@link CloseClusterPasswordComplexityRequest} {@link CloseClusterPasswordComplexityResponse} */
+  CloseClusterPasswordComplexity(data: CloseClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<CloseClusterPasswordComplexityResponse>;
+  /** 关闭外网 {@link CloseWanRequest} {@link CloseWanResponse} */
+  CloseWan(data: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
+  /** 复制集群密码复杂度 {@link CopyClusterPasswordComplexityRequest} {@link CopyClusterPasswordComplexityResponse} */
+  CopyClusterPasswordComplexity(data: CopyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<CopyClusterPasswordComplexityResponse>;
   /** 创建账号 {@link CreateAccountsRequest} {@link CreateAccountsResponse} */
   CreateAccounts(data: CreateAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountsResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
@@ -2779,16 +3303,28 @@ declare interface Cynosdb {
   CreateAuditRuleTemplate(data: CreateAuditRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleTemplateResponse>;
   /** 创建手动备份 {@link CreateBackupRequest} {@link CreateBackupResponse} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
+  /** 创建数据库 {@link CreateClusterDatabaseRequest} {@link CreateClusterDatabaseResponse} */
+  CreateClusterDatabase(data: CreateClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterDatabaseResponse>;
   /** 创建集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
+  /** 创建参数模版 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */
+  CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
+  /** 删除账号 {@link DeleteAccountsRequest} {@link DeleteAccountsResponse} */
+  DeleteAccounts(data: DeleteAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountsResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除审计规则模版 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
   DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
   /** 删除手动备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
+  /** 删除数据库 {@link DeleteClusterDatabaseRequest} {@link DeleteClusterDatabaseResponse} */
+  DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
+  /** 删除参数模版 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
+  DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
   /** 账号所有权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
   DescribeAccountAllGrantPrivileges(data: DescribeAccountAllGrantPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAllGrantPrivilegesResponse>;
+  /** 查询账号已有权限 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
+  DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
   /** 查询数据库管理账号 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
@@ -2813,12 +3349,16 @@ declare interface Cynosdb {
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
   /** 集群详情 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
+  /** 查询数据库列表 {@link DescribeClusterDetailDatabasesRequest} {@link DescribeClusterDetailDatabasesResponse} */
+  DescribeClusterDetailDatabases(data: DescribeClusterDetailDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailDatabasesResponse>;
   /** 查询实例组 {@link DescribeClusterInstanceGrpsRequest} {@link DescribeClusterInstanceGrpsResponse} */
   DescribeClusterInstanceGrps(data: DescribeClusterInstanceGrpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGrpsResponse>;
   /** 查询参数修改日志 {@link DescribeClusterParamLogsRequest} {@link DescribeClusterParamLogsResponse} */
   DescribeClusterParamLogs(data: DescribeClusterParamLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamLogsResponse>;
   /** 查询集群参数 {@link DescribeClusterParamsRequest} {@link DescribeClusterParamsResponse} */
   DescribeClusterParams(data: DescribeClusterParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamsResponse>;
+  /** 查看集群密码复杂度详情 {@link DescribeClusterPasswordComplexityRequest} {@link DescribeClusterPasswordComplexityResponse} */
+  DescribeClusterPasswordComplexity(data: DescribeClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPasswordComplexityResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
@@ -2829,6 +3369,8 @@ declare interface Cynosdb {
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 查询错误日志列表 {@link DescribeInstanceErrorLogsRequest} {@link DescribeInstanceErrorLogsResponse} */
   DescribeInstanceErrorLogs(data: DescribeInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceErrorLogsResponse>;
+  /** 查询实例参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
+  DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
   /** 查询实例慢查询日志 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
   /** 查询实例规格 {@link DescribeInstanceSpecsRequest} {@link DescribeInstanceSpecsResponse} */
@@ -2837,6 +3379,8 @@ declare interface Cynosdb {
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintainPeriodRequest} {@link DescribeMaintainPeriodResponse} */
   DescribeMaintainPeriod(data: DescribeMaintainPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainPeriodResponse>;
+  /** 查询参数模版详情 {@link DescribeParamTemplateDetailRequest} {@link DescribeParamTemplateDetailResponse} */
+  DescribeParamTemplateDetail(data: DescribeParamTemplateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplateDetailResponse>;
   /** 查询参数模板信息 {@link DescribeParamTemplatesRequest} {@link DescribeParamTemplatesResponse} */
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */
@@ -2865,8 +3409,14 @@ declare interface Cynosdb {
   IsolateCluster(data: IsolateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateClusterResponse>;
   /** 隔离实例 {@link IsolateInstanceRequest} {@link IsolateInstanceResponse} */
   IsolateInstance(data: IsolateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstanceResponse>;
+  /** 修改数据库账号描述信息 {@link ModifyAccountDescriptionRequest} {@link ModifyAccountDescriptionResponse} */
+  ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
+  /** 修改账号主机 {@link ModifyAccountHostRequest} {@link ModifyAccountHostResponse} */
+  ModifyAccountHost(data: ModifyAccountHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountHostResponse>;
   /** 修改账号参数 {@link ModifyAccountParamsRequest} {@link ModifyAccountParamsResponse} */
   ModifyAccountParams(data: ModifyAccountParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountParamsResponse>;
+  /** 修改账号权限 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */
+  ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
   /** 修改审计规则模版 {@link ModifyAuditRuleTemplatesRequest} {@link ModifyAuditRuleTemplatesResponse} */
   ModifyAuditRuleTemplates(data: ModifyAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleTemplatesResponse>;
   /** 实例修改审计服务 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
@@ -2875,10 +3425,16 @@ declare interface Cynosdb {
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
   /** 修改备份文件备注名 {@link ModifyBackupNameRequest} {@link ModifyBackupNameResponse} */
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
+  /** 修改Binlog保留天数 {@link ModifyBinlogSaveDaysRequest} {@link ModifyBinlogSaveDaysResponse} */
+  ModifyBinlogSaveDays(data: ModifyBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBinlogSaveDaysResponse>;
+  /** 修改数据库 {@link ModifyClusterDatabaseRequest} {@link ModifyClusterDatabaseResponse} */
+  ModifyClusterDatabase(data: ModifyClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDatabaseResponse>;
   /** 修改集群名称 {@link ModifyClusterNameRequest} {@link ModifyClusterNameResponse} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
   /** 修改集群参数 {@link ModifyClusterParamRequest} {@link ModifyClusterParamResponse} */
   ModifyClusterParam(data: ModifyClusterParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterParamResponse>;
+  /** 修改集群密码复杂度 {@link ModifyClusterPasswordComplexityRequest} {@link ModifyClusterPasswordComplexityResponse} */
+  ModifyClusterPasswordComplexity(data: ModifyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPasswordComplexityResponse>;
   /** 修改从可用区 {@link ModifyClusterSlaveZoneRequest} {@link ModifyClusterSlaveZoneResponse} */
   ModifyClusterSlaveZone(data: ModifyClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterSlaveZoneResponse>;
   /** 升级预付费存储 {@link ModifyClusterStorageRequest} {@link ModifyClusterStorageResponse} */
@@ -2887,8 +3443,12 @@ declare interface Cynosdb {
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
+  /** 修改实例参数 {@link ModifyInstanceParamRequest} {@link ModifyInstanceParamResponse} */
+  ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
   /** 修改维护时间配置 {@link ModifyMaintainPeriodConfigRequest} {@link ModifyMaintainPeriodConfigResponse} */
   ModifyMaintainPeriodConfig(data: ModifyMaintainPeriodConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainPeriodConfigResponse>;
+  /** 修改参数模版 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
+  ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
   /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
   ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;
   /** 下线集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */
@@ -2897,8 +3457,12 @@ declare interface Cynosdb {
   OfflineInstance(data: OfflineInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineInstanceResponse>;
   /** 实例开通审计服务 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
+  /** 开启集群密码复杂度 {@link OpenClusterPasswordComplexityRequest} {@link OpenClusterPasswordComplexityResponse} */
+  OpenClusterPasswordComplexity(data: OpenClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterPasswordComplexityResponse>;
   /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
   OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
+  /** 开通外网 {@link OpenWanRequest} {@link OpenWanResponse} */
+  OpenWan(data: OpenWanRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanResponse>;
   /** 暂停serverless集群 {@link PauseServerlessRequest} {@link PauseServerlessResponse} */
   PauseServerless(data: PauseServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<PauseServerlessResponse>;
   /** 删除从可用区 {@link RemoveClusterSlaveZoneRequest} {@link RemoveClusterSlaveZoneResponse} */
@@ -2925,6 +3489,8 @@ declare interface Cynosdb {
   SwitchClusterZone(data: SwitchClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterZoneResponse>;
   /** 更换数据库代理vpc {@link SwitchProxyVpcRequest} {@link SwitchProxyVpcResponse} */
   SwitchProxyVpc(data: SwitchProxyVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyVpcResponse>;
+  /** 更新集群Cynos内核版本 {@link UpgradeClusterVersionRequest} {@link UpgradeClusterVersionResponse} */
+  UpgradeClusterVersion(data: UpgradeClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeClusterVersionResponse>;
   /** 升级实例 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
 }

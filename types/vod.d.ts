@@ -4222,6 +4222,12 @@ declare interface RoundPlayInfo {
   Name: string;
   /** 轮播播单描述信息，长度限制：256 个字符。 */
   Desc: string;
+  /** 播放状态，可选值：Enabled：启动状态；Disabled：停止状态。默认值：Enabled。 */
+  Status?: string;
+  /** 播放模式，可选值：Loop：循环播放播单；Linear：单次播放，播单播放完停止播放。默认值：Loop。 */
+  PlayBackMode?: string;
+  /** 轮播播放地址。 */
+  Url?: string;
 }
 
 /** 加权轮播媒体文件信息 */
@@ -5637,6 +5643,8 @@ declare interface CreateRoundPlayRequest {
   Name?: string;
   /** 轮播播单描述信息，长度限制：256 个字符。 */
   Desc?: string;
+  /** 播放模式，可选值：Loop：循环播放播单；Linear：单次播放，播单播放完停止播放。默认值：Loop。 */
+  PlayBackMode?: string;
 }
 
 declare interface CreateRoundPlayResponse {
@@ -7625,6 +7633,10 @@ declare interface ModifyRoundPlayRequest {
   Name?: string;
   /** 轮播播单描述信息，长度限制：256 个字符。 */
   Desc?: string;
+  /** 播放状态，可选值：Disabled：结束播放，结束后轮播任务不能再次启动。 */
+  Status?: string;
+  /** 播放模式，可选值：Loop：循环播放播单；Linear：单次播放，播单播放完停止播放。 */
+  PlayBackMode?: string;
 }
 
 declare interface ModifyRoundPlayResponse {

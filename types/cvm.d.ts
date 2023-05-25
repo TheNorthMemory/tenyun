@@ -462,6 +462,8 @@ declare interface InstanceTypeConfig {
   Memory?: number;
   /** FPGA核数，单位：核。 */
   FPGA: number;
+  /** 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。 */
+  GpuCount: number;
 }
 
 /** 描述实例机型配置信息及状态信息 */
@@ -1929,9 +1931,9 @@ declare interface DescribeReservedInstancesRequest {
 
 declare interface DescribeReservedInstancesResponse {
   /** 符合条件的预留实例计费数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合条件的预留实例计费列表。 */
-  ReservedInstancesSet: ReservedInstances[];
+  ReservedInstancesSet?: ReservedInstances[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2368,7 +2370,7 @@ declare interface ModifyHpcClusterAttributeResponse {
 declare interface ModifyImageAttributeRequest {
   /** 镜像ID，形如`img-gvbnzy6f`。镜像ID可以通过如下方式获取：通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 */
   ImageId: string;
-  /** 设置新的镜像名称；必须满足下列限制： 不得超过20个字符。 镜像名称不能与已有镜像重复。 */
+  /** 设置新的镜像名称；必须满足下列限制： 不得超过60个字符。 镜像名称不能与已有镜像重复。 */
   ImageName?: string;
   /** 设置新的镜像描述；必须满足下列限制： 不得超过60个字符。 */
   ImageDescription?: string;
@@ -2926,7 +2928,7 @@ declare interface Cvm {
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 列出已购买的预留实例 {@link DescribeReservedInstancesRequest} {@link DescribeReservedInstancesResponse} */
   DescribeReservedInstances(data?: DescribeReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesResponse>;
-  /** 查询预留实例机型配置 {@link DescribeReservedInstancesConfigInfosRequest} {@link DescribeReservedInstancesConfigInfosResponse} */
+  /** 查询预留实例机型配置参数。 {@link DescribeReservedInstancesConfigInfosRequest} {@link DescribeReservedInstancesConfigInfosResponse} */
   DescribeReservedInstancesConfigInfos(data?: DescribeReservedInstancesConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesConfigInfosResponse>;
   /** 列出可购买的预留实例配置 {@link DescribeReservedInstancesOfferingsRequest} {@link DescribeReservedInstancesOfferingsResponse} */
   DescribeReservedInstancesOfferings(data?: DescribeReservedInstancesOfferingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesOfferingsResponse>;

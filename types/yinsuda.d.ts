@@ -335,6 +335,10 @@ declare interface BatchDescribeKTVMusicDetailsRequest {
   MusicIds: string[];
   /** 播放场景。默认为ChatLive：直播Chat：语聊 */
   PlayScene?: string;
+  /** 玩家用户标识 */
+  GuestUserId?: string;
+  /** 房间Id */
+  RoomId?: string;
 }
 
 declare interface BatchDescribeKTVMusicDetailsResponse {
@@ -581,6 +585,10 @@ declare interface RechargeLiveVipRequest {
   RoomId: string;
   /** 充值会员天数。取值有：3193186372 */
   VipDays: number;
+  /** 充值分类。取值有：room_card-包月房卡; 其他-保留。 */
+  GiveType?: string;
+  /** 播放场景。默认为LiveLive：直播Chat：语聊 */
+  PlayScene?: string;
 }
 
 declare interface RechargeLiveVipResponse {

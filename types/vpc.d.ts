@@ -1822,19 +1822,19 @@ declare interface SslClientConfig {
 
 /** SSL-VPN-CLIENT 出参 */
 declare interface SslVpnClient {
-  /** VPC实例ID */
+  /** VPC实例ID。 */
   VpcId: string;
-  /** SSL-VPN-SERVER 实例ID */
+  /** SSL-VPN-SERVER 实例ID。 */
   SslVpnServerId: string;
-  /** 证书状态. 0:创建中1:正常2:已停用3.已过期4.创建出错 */
+  /** 证书状态。0:创建中1:正常2:已停用3.已过期4.创建出错 */
   CertStatus: number;
-  /** SSL-VPN-CLIENT 实例ID */
+  /** SSL-VPN-CLIENT 实例ID。 */
   SslVpnClientId: string;
-  /** 证书开始时间 */
+  /** 证书开始时间。 */
   CertBeginTime: string;
-  /** 证书到期时间 */
+  /** 证书到期时间。 */
   CertEndTime: string;
-  /** CLIENT NAME */
+  /** CLIENT NAME。 */
   Name: string;
   /** 创建CLIENT 状态。0 创建中1 创建出错2 更新中3 更新出错4 销毁中5 销毁出粗6 已连通7 未知 */
   State: string;
@@ -5365,13 +5365,13 @@ declare interface DescribeVpnGatewayRoutesResponse {
 }
 
 declare interface DescribeVpnGatewaySslClientsRequest {
-  /** 过滤条件，参数不支持同时指定SslVpnClientIds和Filters。vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID形如：vpngwSslServer-123456。ssl-vpn-client-id - String - （过滤条件）SSL-VPN-CLIENT实例ID形如：vpngwSslClient-123456。ssl-vpn-client-name - String - （过滤条件）SSL-VPN-CLIENT实例名称。 */
+  /** 过滤条件，参数不支持同时指定SslVpnClientIds和Filters。vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID形如：vpns-1j2w6xpx。ssl-vpn-client-id - String - （过滤条件）SSL-VPN-CLIENT实例ID形如：vpnc-3rlxp4nd。ssl-vpn-client-name - String - （过滤条件）SSL-VPN-CLIENT实例名称。 */
   Filters?: Filter[];
-  /** 偏移量 */
+  /** 偏移量，默认值0。 */
   Offset?: number;
-  /** 请求对象个数 */
+  /** 请求对象个数，默认值20。 */
   Limit?: number;
-  /** SSL-VPN-CLIENT实例ID。形如：vpngwSslClient-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定SslVpnClientIds和Filters。 */
+  /** SSL-VPN-CLIENT实例ID。形如：	vpns-1jww3xpx。每次请求的实例的上限为100。参数不支持同时指定SslVpnClientIds和Filters。 */
   SslVpnClientIds?: string[];
   /** VPN门户网站使用。默认是False。 */
   IsVpnPortal?: boolean;
@@ -5379,9 +5379,9 @@ declare interface DescribeVpnGatewaySslClientsRequest {
 
 declare interface DescribeVpnGatewaySslClientsResponse {
   /** 符合条件的实例数量。 */
-  TotalCount: number;
-  /** 符合条件的实例个数。 */
-  SslVpnClientSet: SslVpnClient[];
+  TotalCount?: number;
+  /** SSL-VPN-CLIENT 实例列表。 */
+  SslVpnClientSet?: SslVpnClient[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -324,11 +324,11 @@ declare interface GetFlowStatisticRequest {
 declare interface GetFlowStatisticResponse {
   /** 流量详细信息 */
   NetDetails?: NetDetails[];
-  /** 查找时间段流量使用最大值（单位：bit） */
+  /** 查找时间段流量使用最大值（单位：byte） */
   MaxValue?: number;
-  /** 查找时间段流量使用平均值（单位：bit） */
+  /** 查找时间段流量使用平均值（单位：byte） */
   AvgValue?: number;
-  /** 查找时间段流量使用总量（单位：bit） */
+  /** 查找时间段流量使用总量（单位：byte） */
   TotalValue?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

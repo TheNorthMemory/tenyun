@@ -578,7 +578,7 @@ declare interface MigrateOption {
 
 /** 同步的数据库对对象描述 */
 declare interface Objects {
-  /** 迁移对象类型 Partial(部分对象) */
+  /** 同步对象类型 Partial(部分对象) */
   Mode?: string | null;
   /** 同步对象，当 Mode 为 Partial 时，不为空 */
   Databases?: Database[] | null;

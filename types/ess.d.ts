@@ -860,7 +860,7 @@ declare interface CreateChannelSubOrganizationModifyQrCodeRequest {
 declare interface CreateChannelSubOrganizationModifyQrCodeResponse {
   /** 二维码下载链接 */
   QrCodeUrl?: string;
-  /** 二维码失效时间 unix 时间戳 精确到秒 */
+  /** 二维码失效时间 UNIX 时间戳 精确到秒 */
   ExpiredTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1301,6 +1301,8 @@ declare interface CreateUserAutoSignEnableUrlRequest {
   NotifyType?: string;
   /** 若上方填写为 SMS，则此处为手机号 */
   NotifyAddress?: string;
+  /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。 */
+  ExpiredTime?: number;
 }
 
 declare interface CreateUserAutoSignEnableUrlResponse {
