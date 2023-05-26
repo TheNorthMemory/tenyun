@@ -5462,6 +5462,36 @@ declare interface CreateContentReviewTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateEnhanceMediaTemplateRequest {
+  /** 输出文件封装格式，可选值：mp4、flv、hls。 */
+  Container: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 音画质重生模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+  /** 音画质重生视频控制控制信息。 */
+  RebuildVideoInfo?: RebuildVideoInfo;
+  /** 音画质重生音频控制控制信息。 */
+  RebuildAudioInfo?: RebuildAudioInfo;
+  /** 输出目标视频控制信息。 */
+  TargetVideoInfo?: RebuildMediaTargetVideoStream;
+  /** 输出目标音频控制信息。 */
+  TargetAudioInfo?: RebuildMediaTargetAudioStream;
+  /** 是否去除视频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveVideo?: number;
+  /** 是否去除音频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveAudio?: number;
+}
+
+declare interface CreateEnhanceMediaTemplateResponse {
+  /** 音画质重生模板 ID。 */
+  Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateHeadTailTemplateRequest {
   /** 模板名，长度限制 64 个字符。 */
   Name: string;
@@ -5928,6 +5958,18 @@ declare interface DeleteContentReviewTemplateRequest {
 }
 
 declare interface DeleteContentReviewTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEnhanceMediaTemplateRequest {
+  /** 音画质重生模板号。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+}
+
+declare interface DeleteEnhanceMediaTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6414,6 +6456,28 @@ declare interface DescribeDrmKeyProviderInfoRequest {
 declare interface DescribeDrmKeyProviderInfoResponse {
   /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
   SDMCInfo: SDMCDrmKeyProviderInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEnhanceMediaTemplatesRequest {
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 音画质重生模板列表。长度限制：100。 */
+  Definitions?: number[];
+  /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeEnhanceMediaTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 音画质重生模板详情列表。 */
+  RebuildMediaTemplateSet?: RebuildMediaTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7120,6 +7184,36 @@ declare interface EditMediaResponse {
   RequestId?: string;
 }
 
+declare interface EnhanceMediaByTemplateRequest {
+  /** 媒体文件 ID。 */
+  FileId: string;
+  /** 音画质重生模板 ID。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 起始偏移时间，单位：秒，不填表示从视频开始截取。 */
+  StartTimeOffset?: number;
+  /** 结束偏移时间，单位：秒，不填表示截取到视频末尾。 */
+  EndTimeOffset?: number;
+  /** 音画质重生后的文件配置。 */
+  OutputConfig?: RebuildMediaOutputConfig;
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+  TasksPriority?: number;
+  /** 保留字段，特殊用途时使用。 */
+  ExtInfo?: string;
+}
+
+declare interface EnhanceMediaByTemplateResponse {
+  /** 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExecuteFunctionRequest {
   /** 调用后端接口名称。 */
   FunctionName: string;
@@ -7408,6 +7502,36 @@ declare interface ModifyDefaultStorageRegionRequest {
 }
 
 declare interface ModifyDefaultStorageRegionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEnhanceMediaTemplateRequest {
+  /** 音画质重生模板号。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 音画质重生模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+  /** 音画质重生视频控制控制信息。 */
+  RebuildVideoInfo?: RebuildVideoInfo;
+  /** 音画质重生音频控制控制信息。 */
+  RebuildAudioInfo?: RebuildAudioInfo;
+  /** 输出目标视频控制信息。 */
+  TargetVideoInfo?: RebuildMediaTargetVideoStream;
+  /** 输出目标音频控制信息。 */
+  TargetAudioInfo?: RebuildMediaTargetAudioStream;
+  /** 输出文件封装格式，可选值：mp4、flv、hls。 */
+  Container?: string;
+  /** 是否去除视频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveVideo?: number;
+  /** 是否去除音频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveAudio?: number;
+}
+
+declare interface ModifyEnhanceMediaTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8435,6 +8559,8 @@ declare interface Vod {
   CreateClass(data: CreateClassRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassResponse>;
   /** 创建音视频内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
+  /** 创建音画质重生模板 {@link CreateEnhanceMediaTemplateRequest} {@link CreateEnhanceMediaTemplateResponse} */
+  CreateEnhanceMediaTemplate(data: CreateEnhanceMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnhanceMediaTemplateResponse>;
   /** 创建片头片尾模板 {@link CreateHeadTailTemplateRequest} {@link CreateHeadTailTemplateResponse} */
   CreateHeadTailTemplate(data: CreateHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHeadTailTemplateResponse>;
   /** 创建图片即时处理模板 {@link CreateImageProcessingTemplateRequest} {@link CreateImageProcessingTemplateResponse} */
@@ -8481,6 +8607,8 @@ declare interface Vod {
   DeleteClass(data: DeleteClassRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClassResponse>;
   /** 删除音视频内容审核模板 {@link DeleteContentReviewTemplateRequest} {@link DeleteContentReviewTemplateResponse} */
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
+  /** 删除音画质重生模板 {@link DeleteEnhanceMediaTemplateRequest} {@link DeleteEnhanceMediaTemplateResponse} */
+  DeleteEnhanceMediaTemplate(data: DeleteEnhanceMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnhanceMediaTemplateResponse>;
   /** 删除片头片尾模板 {@link DeleteHeadTailTemplateRequest} {@link DeleteHeadTailTemplateResponse} */
   DeleteHeadTailTemplate(data: DeleteHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHeadTailTemplateResponse>;
   /** 删除图片即时处理模板 {@link DeleteImageProcessingTemplateRequest} {@link DeleteImageProcessingTemplateResponse} */
@@ -8543,6 +8671,8 @@ declare interface Vod {
   DescribeDrmDataKey(data: DescribeDrmDataKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmDataKeyResponse>;
   /** 查询 DRM 密钥提供商信息 {@link DescribeDrmKeyProviderInfoRequest} {@link DescribeDrmKeyProviderInfoResponse} */
   DescribeDrmKeyProviderInfo(data?: DescribeDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmKeyProviderInfoResponse>;
+  /** 获取音画质重生模板列表 {@link DescribeEnhanceMediaTemplatesRequest} {@link DescribeEnhanceMediaTemplatesResponse} */
+  DescribeEnhanceMediaTemplates(data?: DescribeEnhanceMediaTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnhanceMediaTemplatesResponse>;
   /** 查询事件通知配置 {@link DescribeEventConfigRequest} {@link DescribeEventConfigResponse} */
   DescribeEventConfig(data?: DescribeEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventConfigResponse>;
   /** 获取事件通知状态 {@link DescribeEventsStateRequest} {@link DescribeEventsStateResponse} */
@@ -8607,6 +8737,8 @@ declare interface Vod {
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
   /** 编辑视频 {@link EditMediaRequest} {@link EditMediaResponse} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
+  /** 使用模板发起音画质重生 {@link EnhanceMediaByTemplateRequest} {@link EnhanceMediaByTemplateResponse} */
+  EnhanceMediaByTemplate(data: EnhanceMediaByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceMediaByTemplateResponse>;
   /** 执行定制 API {@link ExecuteFunctionRequest} {@link ExecuteFunctionResponse} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
   /** 提取溯源水印 {@link ExtractTraceWatermarkRequest} {@link ExtractTraceWatermarkResponse} */
@@ -8631,6 +8763,8 @@ declare interface Vod {
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
   /** 设置默认的存储地域 {@link ModifyDefaultStorageRegionRequest} {@link ModifyDefaultStorageRegionResponse} */
   ModifyDefaultStorageRegion(data: ModifyDefaultStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultStorageRegionResponse>;
+  /** 修改音画质重生模板 {@link ModifyEnhanceMediaTemplateRequest} {@link ModifyEnhanceMediaTemplateResponse} */
+  ModifyEnhanceMediaTemplate(data: ModifyEnhanceMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnhanceMediaTemplateResponse>;
   /** 修改事件通知配置 {@link ModifyEventConfigRequest} {@link ModifyEventConfigResponse} */
   ModifyEventConfig(data?: ModifyEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEventConfigResponse>;
   /** 修改片头片尾模板 {@link ModifyHeadTailTemplateRequest} {@link ModifyHeadTailTemplateResponse} */

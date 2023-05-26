@@ -4635,7 +4635,7 @@ declare interface DescribeTKEEdgeClustersRequest {
   Offset?: number;
   /** 最大输出条数，默认20 */
   Limit?: number;
-  /** 过滤条件,当前只支持按照ClusterName和云标签进行过滤 */
+  /** 过滤条件,当前只支持按照ClusterName和云标签进行过滤,云标签过滤格式Tags:["key1:value1","key2:value2"] */
   Filters?: Filter[];
 }
 

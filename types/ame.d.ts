@@ -532,6 +532,8 @@ declare interface TRTCJoinRoomInput {
   PrivateMapKey?: string;
   /** 用户角色，目前支持两种角色：anchor：主播audience：观众 */
   Role?: string;
+  /** TRTC房间号的类型：Integer：数字类型 String：字符串类型默认为：Integer 。 */
+  RoomIdType?: string;
 }
 
 /** 下架歌曲复合结构 */

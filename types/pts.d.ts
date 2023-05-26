@@ -1373,9 +1373,9 @@ declare interface DescribeNormalLogsRequest {
 
 declare interface DescribeNormalLogsResponse {
   /** 日志上下文，加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时 */
-  Context: string | null;
+  Context?: string | null;
   /** 日志数组 */
-  NormalLogs: NormalLog[] | null;
+  NormalLogs?: NormalLog[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

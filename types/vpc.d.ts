@@ -14,6 +14,8 @@ declare interface AccessPolicy {
   UserGroupIds: string[];
   /** 更新时间 */
   UpdateTime: string;
+  /** Remark */
+  Remark?: string | null;
 }
 
 /** 账户属性对象 */
@@ -5387,13 +5389,13 @@ declare interface DescribeVpnGatewaySslClientsResponse {
 }
 
 declare interface DescribeVpnGatewaySslServersRequest {
-  /** 偏移量 */
+  /** 偏移量。 */
   Offset?: number;
-  /** 请求对象个数 */
+  /** 请求对象个数。 */
   Limit?: number;
   /** SSL-VPN-SERVER实例ID。形如：vpngwSslServer-12345678。每次请求的实例的上限为100。参数不支持同时指定SslVpnServerIds和Filters。 */
   SslVpnServerIds?: string[];
-  /** 过滤条件，参数不支持同时指定SslVpnServerIds和Filters。vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。vpn-gateway-name - String - （过滤条件）VPN实例名称。ssl-vpn-server-name - String - （过滤条件）SSL-VPN-SERVER实例名称。ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID形如：vpngwSslServer-123456。 */
+  /** 过滤条件，参数不支持同时指定SslVpnServerIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。vpn-gateway-id - String - （过滤条件）VPN实例ID，形如：vpngw-5aluhh9t。vpn-gateway-name - String - （过滤条件）VPN实例名称。ssl-vpn-server-name - String - （过滤条件）SSL-VPN-SERVER实例名称。ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID，形如：vpns-xxx。 */
   Filters?: FilterObject[];
   /** vpn门户使用。 默认Flase */
   IsVpnPortal?: boolean;
@@ -5401,9 +5403,9 @@ declare interface DescribeVpnGatewaySslServersRequest {
 
 declare interface DescribeVpnGatewaySslServersResponse {
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** SSL-VPN-SERVER 实例详细信息列表。 */
-  SslVpnSeverSet: SslVpnSever[];
+  SslVpnSeverSet?: SslVpnSever[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

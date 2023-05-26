@@ -588,6 +588,10 @@ declare interface TeoInstanceDetail {
   Host: string;
   /** 证书ID */
   CertId: string;
+  /** 区域ID */
+  ZoneId?: string | null;
+  /** 域名状态 */
+  Status?: string;
 }
 
 /** tke ingress实例详情 */

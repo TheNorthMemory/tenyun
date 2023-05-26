@@ -605,15 +605,15 @@ declare interface CheckForwardAuthRequest {
 
 declare interface CheckForwardAuthResponse {
   /** 腾讯云账号 */
-  Endpoint: string;
+  Endpoint?: string;
   /** 结果 */
-  Result: number;
+  Result?: number;
   /** 产品ID */
-  Productid: string;
+  Productid?: string;
   /** 错误消息 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 队列类型 0.CMQ 1.Ckafka */
-  QueueType: number;
+  QueueType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2726,15 +2726,15 @@ declare namespace V20201215 {
 
   interface CheckForwardAuthResponse {
     /** 腾讯云账号 */
-    Endpoint: string;
+    Endpoint?: string;
     /** 结果 */
-    Result: number;
+    Result?: number;
     /** 产品ID */
-    Productid: string;
+    Productid?: string;
     /** 错误消息 */
-    ErrMsg: string;
+    ErrMsg?: string;
     /** 队列类型 0.CMQ 1.Ckafka */
-    QueueType: number;
+    QueueType?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5611,7 +5611,7 @@ declare interface Iotvideo {
   CancelAIModelApplication(data: CancelAIModelApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAIModelApplicationResponse>;
   /** 取消设备升级任务 {@link CancelDeviceFirmwareTaskRequest} {@link CancelDeviceFirmwareTaskResponse} */
   CancelDeviceFirmwareTask(data: CancelDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDeviceFirmwareTaskResponse>;
-  /** 判断是否开启的转发的权限 {@link CheckForwardAuthRequest} {@link CheckForwardAuthResponse} */
+  /** 判断是否开启转发的权限 {@link CheckForwardAuthRequest} {@link CheckForwardAuthResponse} */
   CheckForwardAuth(data: CheckForwardAuthRequest, config?: AxiosRequestConfig): AxiosPromise<CheckForwardAuthResponse>;
   /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
@@ -5795,7 +5795,7 @@ declare interface Iotvideo {
   CancelAIModelApplication(data: V20201215.CancelAIModelApplicationRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CancelAIModelApplicationResponse>;
   /** 取消设备升级任务 {@link V20201215.CancelDeviceFirmwareTaskRequest} {@link V20201215.CancelDeviceFirmwareTaskResponse} */
   CancelDeviceFirmwareTask(data: V20201215.CancelDeviceFirmwareTaskRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CancelDeviceFirmwareTaskResponse>;
-  /** 判断是否开启的转发的权限 {@link V20201215.CheckForwardAuthRequest} {@link V20201215.CheckForwardAuthResponse} */
+  /** 判断是否开启转发的权限 {@link V20201215.CheckForwardAuthRequest} {@link V20201215.CheckForwardAuthResponse} */
   CheckForwardAuth(data: V20201215.CheckForwardAuthRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CheckForwardAuthResponse>;
   /** 设备远程控制 {@link V20201215.ControlDeviceDataRequest} {@link V20201215.ControlDeviceDataResponse} */
   ControlDeviceData(data: V20201215.ControlDeviceDataRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ControlDeviceDataResponse>;

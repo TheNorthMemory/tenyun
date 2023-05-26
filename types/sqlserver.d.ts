@@ -1211,7 +1211,11 @@ declare interface CreateBusinessDBInstancesRequest {
 
 declare interface CreateBusinessDBInstancesResponse {
   /** 订单名称 */
-  DealName: string;
+  DealName?: string;
+  /** 流程ID */
+  FlowId?: number | null;
+  /** 实例ID集合 */
+  InstanceIdSet?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

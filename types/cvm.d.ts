@@ -1703,13 +1703,13 @@ declare interface DescribeInstanceInternetBandwidthConfigsResponse {
 }
 
 declare interface DescribeInstanceTypeConfigsRequest {
-  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表instance-family按照【实例机型系列】进行过滤。实例机型系列形如：S1、I1、M1等。类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。 */
+  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表instance-family按照【实例机型系列】进行过滤。实例机型系列形如：S1、I1、M1等。类型：String必选：否instance-type按照【实例类型】进行过滤。实例类型形如：S5.12XLARGE128、S5.12XLARGE96等。类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。 */
   Filters?: Filter[];
 }
 
 declare interface DescribeInstanceTypeConfigsResponse {
   /** 实例机型配置列表。 */
-  InstanceTypeConfigSet: InstanceTypeConfig[];
+  InstanceTypeConfigSet?: InstanceTypeConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

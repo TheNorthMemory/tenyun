@@ -352,6 +352,8 @@ declare interface FlowBrief {
   FlowMessage: string | null;
   /** 合同发起人userId */
   Creator?: string | null;
+  /** 合同过期时间，时间戳，单位秒 */
+  Deadline?: number | null;
 }
 
 /** 创建流程的签署方信息 */

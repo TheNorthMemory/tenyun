@@ -89,9 +89,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例详细信息列表 */
-  InstanceList: InstanceListInfo[];
+  InstanceList?: InstanceListInfo[];
   /** 实例数量 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
