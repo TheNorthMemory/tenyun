@@ -68,6 +68,8 @@ declare interface DBAccount {
   DelayThresh: number;
   /** 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。 */
   SlaveConst: number;
+  /** 用户最大连接数，0代表无限制 */
+  MaxUserConnections?: number;
 }
 
 /** 云数据库参数信息。 */
@@ -468,6 +470,20 @@ declare interface RegionInfo {
   AvailableChoice: ShardZoneChooseInfo[];
 }
 
+/** 保留的网络资源信息 */
+declare interface ReservedNetResource {
+  /** 私有网络 */
+  VpcId?: string;
+  /** 子网 */
+  SubnetId?: string;
+  /** VpcId,SubnetId下保留的内网ip */
+  Vip?: string;
+  /** Vip下的端口 */
+  Vports?: number[];
+  /** Vip的回收时间 */
+  RecycleTime?: string;
+}
+
 /** 标签对象，包含tagKey & tagValue */
 declare interface ResourceTag {
   /** 标签键key */
@@ -751,9 +767,9 @@ declare interface ActiveHourDCDBInstanceRequest {
 
 declare interface ActiveHourDCDBInstanceResponse {
   /** 解隔离成功的实例id列表 */
-  SuccessInstanceIds: string[];
+  SuccessInstanceIds?: string[];
   /** 解隔离失败的实例id列表 */
-  FailedInstanceIds: string[];
+  FailedInstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -907,7 +923,7 @@ declare interface CreateDCDBInstanceRequest {
   SecurityGroupId?: string;
   /** 实例名称， 可以通过该字段自主的设置实例的名字 */
   InstanceName?: string;
-  /** 是否支持IPv6 */
+  /** 是否支持IPv6，0:不支持，1:支持 */
   Ipv6Flag?: number;
   /** 标签键值对数组 */
   ResourceTags?: ResourceTag[];
@@ -917,7 +933,7 @@ declare interface CreateDCDBInstanceRequest {
   DcnRegion?: string;
   /** DCN源实例ID */
   DcnInstanceId?: string;
-  /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费，用户开通了预付费不停服特权也会进行自动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0 */
+  /** 自动续费标记，0:默认状态(用户未设置，即初始状态即手动续费，用户开通了预付费不停服特权也会进行自动续费)， 1:自动续费，2:明确不自动续费(用户设置)。若业务无续费概念或无需自动续费，需要设置为0 */
   AutoRenewFlag?: number;
   /** 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数 */
   SecurityGroupIds?: string[];
@@ -1023,7 +1039,7 @@ declare interface CreateHourDCDBInstanceRequest {
   SecurityGroupId?: string;
   /** 实例名称， 可以通过该字段自主的设置实例的名字 */
   InstanceName?: string;
-  /** 是否支持IPv6 */
+  /** 是否支持IPv6，0:不支持，1:支持 */
   Ipv6Flag?: number;
   /** 标签键值对数组 */
   ResourceTags?: ResourceTag[];
@@ -1035,7 +1051,7 @@ declare interface CreateHourDCDBInstanceRequest {
   InitParams?: DBParamValue[];
   /** 需要回档的源实例ID */
   RollbackInstanceId?: string;
-  /** 回档时间 */
+  /** 回档时间，例如“2021-11-22 00:00:00” */
   RollbackTime?: string;
   /** 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数 */
   SecurityGroupIds?: string[];
@@ -1048,6 +1064,20 @@ declare interface CreateHourDCDBInstanceResponse {
   FlowId?: number;
   /** 订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
   DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTmpDCDBInstanceRequest {
+  /** 回档实例的ID */
+  InstanceId: string;
+  /** 回档时间点 */
+  RollbackTime: string;
+}
+
+declare interface CreateTmpDCDBInstanceResponse {
+  /** 任务流ID */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1376,6 +1406,8 @@ declare interface DescribeDCDBInstanceDetailResponse {
   ExclusterType?: number | null;
   /** VPC就近访问 */
   RsAccessStrategy?: number | null;
+  /** 尚未回收的网络资源 */
+  ReservedNetResources?: ReservedNetResource[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1623,7 +1655,7 @@ declare interface DescribeDcnDetailRequest {
 
 declare interface DescribeDcnDetailResponse {
   /** DCN同步详情 */
-  DcnDetails: DcnDetailItem[];
+  DcnDetails?: DcnDetailItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1767,9 +1799,9 @@ declare interface DestroyDCDBInstanceRequest {
 
 declare interface DestroyDCDBInstanceResponse {
   /** 实例 ID，与入参InstanceId一致。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1781,9 +1813,9 @@ declare interface DestroyHourDCDBInstanceRequest {
 
 declare interface DestroyHourDCDBInstanceResponse {
   /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。 */
-  FlowId: number;
+  FlowId?: number;
   /** 实例 ID，与入参InstanceId一致。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1863,15 +1895,15 @@ declare interface IsolateDedicatedDBInstanceResponse {
 }
 
 declare interface IsolateHourDCDBInstanceRequest {
-  /** 实例uuid列表 */
+  /** 待升级的实例ID列表。形如：["dcdbt-ow728lmc"]，可以通过 DescribeDCDBInstances 查询实例详情获得。 */
   InstanceIds: string[];
 }
 
 declare interface IsolateHourDCDBInstanceResponse {
   /** 隔离成功的实例id列表 */
-  SuccessInstanceIds: string[];
+  SuccessInstanceIds?: string[];
   /** 隔离失败的实例id列表 */
-  FailedInstanceIds: string[];
+  FailedInstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1929,7 +1961,7 @@ declare interface ModifyAccountPrivilegesRequest {
 
 declare interface ModifyAccountPrivilegesResponse {
   /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2201,7 +2233,7 @@ declare interface UpgradeDedicatedDCDBInstanceRequest {
 
 declare interface UpgradeDedicatedDCDBInstanceResponse {
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2235,7 +2267,7 @@ declare interface UpgradeHourDCDBInstanceResponse {
 /** {@link Dcdb TDSQL MySQL 版} */
 declare interface Dcdb {
   (): Versions;
-  /** 解隔离DCDB后付费实例 {@link ActiveHourDCDBInstanceRequest} {@link ActiveHourDCDBInstanceResponse} */
+  /** 解隔离TDSQL按量计费实例 {@link ActiveHourDCDBInstanceRequest} {@link ActiveHourDCDBInstanceResponse} */
   ActiveHourDCDBInstance(data: ActiveHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActiveHourDCDBInstanceResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
@@ -2249,12 +2281,14 @@ declare interface Dcdb {
   CopyAccountPrivileges(data: CopyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAccountPrivilegesResponse>;
   /** 创建账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
-  /** 创建DCDB分布式实例 {@link CreateDCDBInstanceRequest} {@link CreateDCDBInstanceResponse} */
+  /** 创建TDSQL包年包月实例 {@link CreateDCDBInstanceRequest} {@link CreateDCDBInstanceResponse} */
   CreateDCDBInstance(data: CreateDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDCDBInstanceResponse>;
-  /** 创建独享集群DCDB实例 {@link CreateDedicatedClusterDCDBInstanceRequest} {@link CreateDedicatedClusterDCDBInstanceResponse} */
+  /** 创建TDSQL独享集群实例 {@link CreateDedicatedClusterDCDBInstanceRequest} {@link CreateDedicatedClusterDCDBInstanceResponse} */
   CreateDedicatedClusterDCDBInstance(data: CreateDedicatedClusterDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterDCDBInstanceResponse>;
-  /** 创建DCDB后付费实例 {@link CreateHourDCDBInstanceRequest} {@link CreateHourDCDBInstanceResponse} */
+  /** 创建TDSQL按量计费实例 {@link CreateHourDCDBInstanceRequest} {@link CreateHourDCDBInstanceResponse} */
   CreateHourDCDBInstance(data: CreateHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHourDCDBInstanceResponse>;
+  /** 回档TDSQL实例 {@link CreateTmpDCDBInstanceRequest} {@link CreateTmpDCDBInstanceResponse} */
+  CreateTmpDCDBInstance(data: CreateTmpDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTmpDCDBInstanceResponse>;
   /** 删除账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
   /** 查询账号权限 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
@@ -2275,7 +2309,7 @@ declare interface Dcdb {
   DescribeDBSlowLogs(data: DescribeDBSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowLogsResponse>;
   /** 查询同步模式 {@link DescribeDBSyncModeRequest} {@link DescribeDBSyncModeResponse} */
   DescribeDBSyncMode(data: DescribeDBSyncModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSyncModeResponse>;
-  /** 获取DCDB实例详情 {@link DescribeDCDBInstanceDetailRequest} {@link DescribeDCDBInstanceDetailResponse} */
+  /** 获取实例详情 {@link DescribeDCDBInstanceDetailRequest} {@link DescribeDCDBInstanceDetailResponse} */
   DescribeDCDBInstanceDetail(data: DescribeDCDBInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstanceDetailResponse>;
   /** 获取实例节点信息 {@link DescribeDCDBInstanceNodeInfoRequest} {@link DescribeDCDBInstanceNodeInfoResponse} */
   DescribeDCDBInstanceNodeInfo(data: DescribeDCDBInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstanceNodeInfoResponse>;
@@ -2315,9 +2349,9 @@ declare interface Dcdb {
   DescribeSqlLogs(data: DescribeSqlLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlLogsResponse>;
   /** 拉取用户任务列表 {@link DescribeUserTasksRequest} {@link DescribeUserTasksResponse} */
   DescribeUserTasks(data?: DescribeUserTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserTasksResponse>;
-  /** 销毁已隔离的包年包月实例 {@link DestroyDCDBInstanceRequest} {@link DestroyDCDBInstanceResponse} */
+  /** 销毁已隔离的TDSQL包年包月实例 {@link DestroyDCDBInstanceRequest} {@link DestroyDCDBInstanceResponse} */
   DestroyDCDBInstance(data: DestroyDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDCDBInstanceResponse>;
-  /** 销毁按量计费实例 {@link DestroyHourDCDBInstanceRequest} {@link DestroyHourDCDBInstanceResponse} */
+  /** 销毁TDSQL按量计费实例 {@link DestroyHourDCDBInstanceRequest} {@link DestroyHourDCDBInstanceResponse} */
   DestroyHourDCDBInstance(data: DestroyHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyHourDCDBInstanceResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
@@ -2329,7 +2363,7 @@ declare interface Dcdb {
   InitDCDBInstances(data: InitDCDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDCDBInstancesResponse>;
   /** 隔离独享云数据库实例 {@link IsolateDedicatedDBInstanceRequest} {@link IsolateDedicatedDBInstanceResponse} */
   IsolateDedicatedDBInstance(data: IsolateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDedicatedDBInstanceResponse>;
-  /** 隔离DCDB后付费实例 {@link IsolateHourDCDBInstanceRequest} {@link IsolateHourDCDBInstanceResponse} */
+  /** 隔离TDSQL按量计费实例 {@link IsolateHourDCDBInstanceRequest} {@link IsolateHourDCDBInstanceResponse} */
   IsolateHourDCDBInstance(data: IsolateHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateHourDCDBInstanceResponse>;
   /** 杀死指定会话 {@link KillSessionRequest} {@link KillSessionResponse} */
   KillSession(data: KillSessionRequest, config?: AxiosRequestConfig): AxiosPromise<KillSessionResponse>;
@@ -2369,9 +2403,9 @@ declare interface Dcdb {
   TerminateDedicatedDBInstance(data: TerminateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDedicatedDBInstanceResponse>;
   /** 升级分布式数据库 {@link UpgradeDCDBInstanceRequest} {@link UpgradeDCDBInstanceResponse} */
   UpgradeDCDBInstance(data: UpgradeDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDCDBInstanceResponse>;
-  /** 升级独享DCDB实例 {@link UpgradeDedicatedDCDBInstanceRequest} {@link UpgradeDedicatedDCDBInstanceResponse} */
+  /** 升级TDSQL独享集群实例 {@link UpgradeDedicatedDCDBInstanceRequest} {@link UpgradeDedicatedDCDBInstanceResponse} */
   UpgradeDedicatedDCDBInstance(data: UpgradeDedicatedDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDedicatedDCDBInstanceResponse>;
-  /** 升级DCDB后付费实例 {@link UpgradeHourDCDBInstanceRequest} {@link UpgradeHourDCDBInstanceResponse} */
+  /** 升级TDSQL按量计费实例 {@link UpgradeHourDCDBInstanceRequest} {@link UpgradeHourDCDBInstanceResponse} */
   UpgradeHourDCDBInstance(data: UpgradeHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeHourDCDBInstanceResponse>;
 }
 

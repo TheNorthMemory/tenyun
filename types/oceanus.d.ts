@@ -272,6 +272,8 @@ declare interface JobV1 {
   WorkSpaceId: string | null;
   /** 工作空间名称 */
   WorkSpaceName: string | null;
+  /** 作业标签 */
+  Tags?: Tag[] | null;
 }
 
 /** 系统配置属性 */
@@ -508,6 +510,8 @@ declare interface TreeResourceItem {
   FileName: string | null;
   /** 目录ID */
   FolderId: string | null;
+  /** 分状态统计关联作业数 */
+  RefJobStatusCountSet?: RefJobStatusCountItem[] | null;
 }
 
 /** 空间和集群绑定关系 */
@@ -655,11 +659,13 @@ declare interface CreateJobRequest {
   FlinkVersion?: string;
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 作业标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateJobResponse {
   /** 作业Id */
-  JobId: string;
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

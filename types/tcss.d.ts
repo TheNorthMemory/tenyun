@@ -1942,6 +1942,8 @@ declare interface NetworkClusterInfoItem {
   NetworkPolicyPluginStatus: string;
   /** 集群网络插件错误信息 */
   NetworkPolicyPluginError: string | null;
+  /** 容器网络插件 */
+  ClusterNetworkSettings?: string | null;
 }
 
 /** 网络集群网络空间返回的结构体 */

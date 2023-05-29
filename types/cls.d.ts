@@ -1607,15 +1607,17 @@ declare interface DescribeLogHistogramRequest {
   TopicId?: string;
   /** 时间间隔: 单位ms 限制性条件：(To-From) / interval <= 200 */
   Interval?: number;
+  /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
+  SyntaxRule?: number;
 }
 
 declare interface DescribeLogHistogramResponse {
   /** 统计周期： 单位ms */
-  Interval: number;
+  Interval?: number;
   /** 命中关键字的日志总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 周期内统计结果详情 */
-  HistogramInfos: HistogramInfo[];
+  HistogramInfos?: HistogramInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

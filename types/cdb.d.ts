@@ -1216,7 +1216,7 @@ declare interface RoGroup {
   MinRoInGroup?: number;
   /** 读写权重分配模式，可选值：system-系统自动分配；custom-自定义。 */
   WeightMode?: string;
-  /** 权重值。 */
+  /** 该字段已经废弃，无意义。查看只读实例的权重，请查看 RoInstances 字段里的 Weight 值。 */
   Weight?: number;
   /** 只读组中的只读实例详情。 */
   RoInstances?: RoInstanceInfo[];

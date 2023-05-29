@@ -309,7 +309,7 @@ declare interface AssessQualityResponse {
 }
 
 declare interface CreateGroupRequest {
-  /** 图库ID，不可重复，仅支持字母、数字和下划线。 */
+  /** 图库ID，不可重复，仅支持字母、数字和下划线。图库数量单个用户上限为30。 */
   GroupId: string;
   /** 图库名称描述。 */
   GroupName: string;

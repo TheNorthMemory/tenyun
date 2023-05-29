@@ -48,6 +48,8 @@ declare interface DBAccount {
   DelayThresh: number | null;
   /** 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。 */
   SlaveConst: number;
+  /** 用户最大连接数，0代表无限制 */
+  MaxUserConnections?: number;
 }
 
 /** 云数据库实例备份时间配置信息 */
@@ -422,6 +424,20 @@ declare interface RegionInfo {
   AvailableChoice: ZoneChooseInfo[];
 }
 
+/** 保留的网络资源信息 */
+declare interface ReservedNetResource {
+  /** 私有网络 */
+  VpcId?: string;
+  /** 子网 */
+  SubnetId?: string;
+  /** VpcId,SubnetId下保留的内网ip */
+  Vip?: string;
+  /** Vip下的端口 */
+  Vports?: number[];
+  /** vip的回收时间 */
+  RecycleTime?: string;
+}
+
 /** 标签对象，包含tagKey & tagValue */
 declare interface ResourceTag {
   /** 标签键key */
@@ -579,9 +595,9 @@ declare interface ActivateHourDBInstanceRequest {
 
 declare interface ActivateHourDBInstanceResponse {
   /** 隔离成功的实例id列表 */
-  SuccessInstanceIds: string[];
+  SuccessInstanceIds?: string[];
   /** 隔离失败的实例id列表 */
-  FailedInstanceIds: string[];
+  FailedInstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -735,7 +751,7 @@ declare interface CreateDBInstanceRequest {
   SecurityGroupIds?: string[];
   /** 自动续费标志，1:自动续费，2:不自动续费 */
   AutoRenewFlag?: number;
-  /** 是否支持IPv6 */
+  /** 是否支持IPv6，0:不支持，1:支持 */
   Ipv6Flag?: number;
   /** 标签键值对数组 */
   ResourceTags?: ResourceTag[];
@@ -811,9 +827,9 @@ declare interface CreateDedicatedClusterDBInstanceRequest {
 
 declare interface CreateDedicatedClusterDBInstanceResponse {
   /** 分配资源ID数组 */
-  InstanceIds: string[];
+  InstanceIds?: string[];
   /** 流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -841,7 +857,7 @@ declare interface CreateHourDBInstanceRequest {
   InstanceName?: string;
   /** 安全组ID，不传表示不绑定安全组 */
   SecurityGroupIds?: string[];
-  /** 是否支持IPv6 */
+  /** 是否支持IPv6，0:不支持，1:支持 */
   Ipv6Flag?: number;
   /** 标签键值对数组 */
   ResourceTags?: ResourceTag[];
@@ -851,7 +867,7 @@ declare interface CreateHourDBInstanceRequest {
   DcnInstanceId?: string;
   /** 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化，默认为强同步可退化）。 */
   InitParams?: DBParamValue[];
-  /** 回档源实例ID */
+  /** 回档源实例ID，例如“2021-11-22 00:00:00” */
   RollbackInstanceId?: string;
   /** 回档时间 */
   RollbackTime?: string;
@@ -1114,6 +1130,8 @@ declare interface DescribeDBInstanceDetailResponse {
   ExclusterType?: number | null;
   /** VPC就近访问 */
   RsAccessStrategy?: number | null;
+  /** 尚未回收的网络资源 */
+  ReservedNetResources?: ReservedNetResource[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1337,7 +1355,7 @@ declare interface DescribeDcnDetailRequest {
 
 declare interface DescribeDcnDetailResponse {
   /** DCN同步详情 */
-  DcnDetails: DcnDetailItem[];
+  DcnDetails?: DcnDetailItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1531,9 +1549,9 @@ declare interface DestroyHourDBInstanceRequest {
 
 declare interface DestroyHourDBInstanceResponse {
   /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。 */
-  FlowId: number;
+  FlowId?: number;
   /** 实例 ID，与入参InstanceId一致。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1609,9 +1627,9 @@ declare interface IsolateDBInstanceRequest {
 
 declare interface IsolateDBInstanceResponse {
   /** 隔离成功实例ID列表。 */
-  SuccessInstanceIds: string[];
+  SuccessInstanceIds?: string[];
   /** 隔离失败实例ID列表。 */
-  FailedInstanceIds: string[];
+  FailedInstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1633,9 +1651,9 @@ declare interface IsolateHourDBInstanceRequest {
 
 declare interface IsolateHourDBInstanceResponse {
   /** 解隔离成功的实例id列表 */
-  SuccessInstanceIds: string[];
+  SuccessInstanceIds?: string[];
   /** 解隔离失败的实例id列表 */
-  FailedInstanceIds: string[];
+  FailedInstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1693,7 +1711,7 @@ declare interface ModifyAccountPrivilegesRequest {
 
 declare interface ModifyAccountPrivilegesResponse {
   /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2021,7 +2039,7 @@ declare interface UpgradeDedicatedDBInstanceResponse {
 /** {@link Mariadb 云数据库 MariaDB} */
 declare interface Mariadb {
   (): Versions;
-  /** 解隔离后付费实例 {@link ActivateHourDBInstanceRequest} {@link ActivateHourDBInstanceResponse} */
+  /** 解隔离MariaDB按量计费实例 {@link ActivateHourDBInstanceRequest} {@link ActivateHourDBInstanceResponse} */
   ActivateHourDBInstance(data: ActivateHourDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateHourDBInstanceResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
@@ -2035,11 +2053,11 @@ declare interface Mariadb {
   CopyAccountPrivileges(data: CopyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAccountPrivilegesResponse>;
   /** 创建账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
-  /** 创建实例（包年包月） {@link CreateDBInstanceRequest} {@link CreateDBInstanceResponse} */
+  /** 创建MariaDB包年包月实例 {@link CreateDBInstanceRequest} {@link CreateDBInstanceResponse} */
   CreateDBInstance(data: CreateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceResponse>;
-  /** 创建独享集群Mariadb实例 {@link CreateDedicatedClusterDBInstanceRequest} {@link CreateDedicatedClusterDBInstanceResponse} */
+  /** 创建Mariadb独享集群实例 {@link CreateDedicatedClusterDBInstanceRequest} {@link CreateDedicatedClusterDBInstanceResponse} */
   CreateDedicatedClusterDBInstance(data: CreateDedicatedClusterDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterDBInstanceResponse>;
-  /** 创建后付费实例 {@link CreateHourDBInstanceRequest} {@link CreateHourDBInstanceResponse} */
+  /** 创建MariaDB按量计费实例 {@link CreateHourDBInstanceRequest} {@link CreateHourDBInstanceResponse} */
   CreateHourDBInstance(data: CreateHourDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHourDBInstanceResponse>;
   /** 创建临时实例 {@link CreateTmpInstancesRequest} {@link CreateTmpInstancesResponse} */
   CreateTmpInstances(data: CreateTmpInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTmpInstancesResponse>;
@@ -2099,7 +2117,7 @@ declare interface Mariadb {
   DescribeUpgradePrice(data: DescribeUpgradePriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpgradePriceResponse>;
   /** 销毁已隔离的包年包月实例 {@link DestroyDBInstanceRequest} {@link DestroyDBInstanceResponse} */
   DestroyDBInstance(data: DestroyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBInstanceResponse>;
-  /** 销毁按量计费实例 {@link DestroyHourDBInstanceRequest} {@link DestroyHourDBInstanceResponse} */
+  /** 销毁MariaDB按量计费实例 {@link DestroyHourDBInstanceRequest} {@link DestroyHourDBInstanceResponse} */
   DestroyHourDBInstance(data: DestroyHourDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyHourDBInstanceResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
@@ -2109,11 +2127,11 @@ declare interface Mariadb {
   GrantAccountPrivileges(data: GrantAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<GrantAccountPrivilegesResponse>;
   /** 初始化实例 {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
-  /** 隔离云数据库实例（包年包月） {@link IsolateDBInstanceRequest} {@link IsolateDBInstanceResponse} */
+  /** 隔离MariaDB包年包月实例 {@link IsolateDBInstanceRequest} {@link IsolateDBInstanceResponse} */
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
   /** 隔离独享云数据库实例 {@link IsolateDedicatedDBInstanceRequest} {@link IsolateDedicatedDBInstanceResponse} */
   IsolateDedicatedDBInstance(data: IsolateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDedicatedDBInstanceResponse>;
-  /** 隔离后付费实例 {@link IsolateHourDBInstanceRequest} {@link IsolateHourDBInstanceResponse} */
+  /** 隔离MariaDB按量计费实例 {@link IsolateHourDBInstanceRequest} {@link IsolateHourDBInstanceResponse} */
   IsolateHourDBInstance(data: IsolateHourDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateHourDBInstanceResponse>;
   /** 杀死指定会话 {@link KillSessionRequest} {@link KillSessionResponse} */
   KillSession(data: KillSessionRequest, config?: AxiosRequestConfig): AxiosPromise<KillSessionResponse>;

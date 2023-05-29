@@ -1591,7 +1591,7 @@ declare interface CreateParamTemplateRequest {
 
 declare interface CreateParamTemplateResponse {
   /** 模版ID */
-  TemplateId: number;
+  TemplateId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2245,19 +2245,19 @@ declare interface DescribeParamTemplateDetailRequest {
 
 declare interface DescribeParamTemplateDetailResponse {
   /** 参数模版ID */
-  TemplateId: number;
+  TemplateId?: number;
   /** 参数模版名称 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 参数模版描述 */
-  TemplateDescription: string;
+  TemplateDescription?: string;
   /** 引擎版本 */
-  EngineVersion: string;
+  EngineVersion?: string;
   /** 参数总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数列表 */
-  Items: ParamDetail[];
+  Items?: ParamDetail[];
   /** 数据库类型，可选值：NORMAL，SERVERLESS */
-  DbMode: string;
+  DbMode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3307,7 +3307,7 @@ declare interface Cynosdb {
   CreateClusterDatabase(data: CreateClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterDatabaseResponse>;
   /** 创建集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
-  /** 创建参数模版 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */
+  /** 创建参数模板 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
   /** 删除账号 {@link DeleteAccountsRequest} {@link DeleteAccountsResponse} */
   DeleteAccounts(data: DeleteAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountsResponse>;
@@ -3319,7 +3319,7 @@ declare interface Cynosdb {
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
   /** 删除数据库 {@link DeleteClusterDatabaseRequest} {@link DeleteClusterDatabaseResponse} */
   DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
-  /** 删除参数模版 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
+  /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
   /** 账号所有权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
   DescribeAccountAllGrantPrivileges(data: DescribeAccountAllGrantPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAllGrantPrivilegesResponse>;
@@ -3379,7 +3379,7 @@ declare interface Cynosdb {
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintainPeriodRequest} {@link DescribeMaintainPeriodResponse} */
   DescribeMaintainPeriod(data: DescribeMaintainPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainPeriodResponse>;
-  /** 查询参数模版详情 {@link DescribeParamTemplateDetailRequest} {@link DescribeParamTemplateDetailResponse} */
+  /** 查询参数模板详情 {@link DescribeParamTemplateDetailRequest} {@link DescribeParamTemplateDetailResponse} */
   DescribeParamTemplateDetail(data: DescribeParamTemplateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplateDetailResponse>;
   /** 查询参数模板信息 {@link DescribeParamTemplatesRequest} {@link DescribeParamTemplatesResponse} */
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
@@ -3447,7 +3447,7 @@ declare interface Cynosdb {
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
   /** 修改维护时间配置 {@link ModifyMaintainPeriodConfigRequest} {@link ModifyMaintainPeriodConfigResponse} */
   ModifyMaintainPeriodConfig(data: ModifyMaintainPeriodConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainPeriodConfigResponse>;
-  /** 修改参数模版 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
+  /** 修改参数模板 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
   /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
   ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;

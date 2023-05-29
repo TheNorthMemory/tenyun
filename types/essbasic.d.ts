@@ -991,6 +991,8 @@ declare interface ChannelCreateFlowSignReviewRequest {
   ReviewMessage?: string;
   /** 签署节点审核时需要指定 */
   RecipientId?: string;
+  /** 操作类型，默认：SignReview；SignReview:签署审核，CreateReview：发起审核注：接口通过该字段区分操作类型该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若想使用发起审核，请指定该字段为：CreateReview */
+  OperateType?: string;
 }
 
 declare interface ChannelCreateFlowSignReviewResponse {
@@ -1063,7 +1065,7 @@ declare interface ChannelCreatePrepareFlowRequest {
   Agent?: Agent;
   /** 合同流程配置信息 */
   FlowOption?: CreateFlowOption;
-  /** 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL */
+  /** 通过flowid快速获得之前成功通过页面发起的合同生成链接 */
   FlowId?: string;
   /** 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL */
   NeedPreview?: boolean;
@@ -1147,7 +1149,7 @@ declare interface ChannelCreateUserRolesResponse {
 declare interface ChannelDeleteRoleUsersRequest {
   /** 代理信息 */
   Agent: Agent;
-  /** 角色Id */
+  /** 角色Id（非超管或法人角色Id） */
   RoleId: string;
   /** 用户列表 */
   UserIds: string[];
@@ -3285,7 +3287,7 @@ declare interface Essbasic {
   ChannelCreateBoundFlows(data: ChannelCreateBoundFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBoundFlowsResponse>;
   /** 创建文件转换任务 {@link ChannelCreateConvertTaskApiRequest} {@link ChannelCreateConvertTaskApiResponse} */
   ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
-  /** 创建嵌入web的链接 {@link ChannelCreateEmbedWebUrlRequest} {@link ChannelCreateEmbedWebUrlResponse} */
+  /** 获取印章模板可嵌入web页面 {@link ChannelCreateEmbedWebUrlRequest} {@link ChannelCreateEmbedWebUrlResponse} */
   ChannelCreateEmbedWebUrl(data: ChannelCreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateEmbedWebUrlResponse>;
   /** 通过文件创建签署流程 {@link ChannelCreateFlowByFilesRequest} {@link ChannelCreateFlowByFilesResponse} */
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
@@ -3299,7 +3301,7 @@ declare interface Essbasic {
   ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
   /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
-  /** 创建预发起合同 {@link ChannelCreatePrepareFlowRequest} {@link ChannelCreatePrepareFlowResponse} */
+  /** 获取模板发起合同web页面 {@link ChannelCreatePrepareFlowRequest} {@link ChannelCreatePrepareFlowResponse} */
   ChannelCreatePrepareFlow(data: ChannelCreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePrepareFlowResponse>;
   /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */
   ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;

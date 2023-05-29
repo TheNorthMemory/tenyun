@@ -744,6 +744,28 @@ declare interface SparkJobInfo {
   DataEngineImageVersion?: string | null;
 }
 
+/** SparkSQL批任务运行日志 */
+declare interface SparkSessionBatchLog {
+  /** 日志步骤：BEG/CS/DS/DSS/DSF/FINF/RTO/CANCEL/CT/DT/DTS/DTF/FINT/EXCE */
+  Step?: string | null;
+  /** 时间 */
+  Time?: string | null;
+  /** 日志提示 */
+  Message?: string | null;
+  /** 日志操作 */
+  Operate?: SparkSessionBatchLogOperate[] | null;
+}
+
+/** SparkSQL批任务日志操作信息。 */
+declare interface SparkSessionBatchLogOperate {
+  /** 操作提示 */
+  Text?: string | null;
+  /** 操作类型：COPY、LOG、UI、RESULT、List、TAB */
+  Operate?: string | null;
+  /** 补充信息：如：taskid、sessionid、sparkui等 */
+  Supplement?: KVPair[] | null;
+}
+
 /** notebook session statement输出信息。 */
 declare interface StatementOutput {
   /** 执行总数 */
@@ -1314,6 +1336,16 @@ declare interface CancelNotebookSessionStatementResponse {
   RequestId?: string;
 }
 
+declare interface CancelSparkSessionBatchSQLRequest {
+  /** 批任务唯一标识 */
+  BatchId: string;
+}
+
+declare interface CancelSparkSessionBatchSQLResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelTaskRequest {
   /** 任务Id，全局唯一 */
   TaskId: string;
@@ -1720,6 +1752,36 @@ declare interface CreateSparkAppTaskResponse {
   BatchId: string;
   /** 任务Id */
   TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSparkSessionBatchSQLRequest {
+  /** DLC Spark作业引擎名称 */
+  DataEngineName: string;
+  /** 运行sql */
+  ExecuteSQL: string;
+  /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  DriverSize?: string;
+  /** 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  ExecutorSize?: string;
+  /** 指定的Executor数量，默认为1 */
+  ExecutorNumbers?: number;
+  /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers */
+  ExecutorMaxNumbers?: number;
+  /** 指定的Session超时时间，单位秒，默认3600秒 */
+  TimeoutInSecond?: number;
+  /** Session唯一标识，当指定sessionid，则使用该session运行任务。 */
+  SessionId?: string;
+  /** 指定要创建的session名称 */
+  SessionName?: string;
+  /** Session相关配置，当前支持：dlc.eni、dlc.role.arn、dlc.sql.set.config以及用户指定的配置，注：roleArn必填； */
+  Arguments?: KVPair[];
+}
+
+declare interface CreateSparkSessionBatchSQLResponse {
+  /** 批任务唯一标识 */
+  BatchId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2384,6 +2446,20 @@ declare interface DescribeSparkAppTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSparkSessionBatchSqlLogRequest {
+  /** SparkSQL唯一标识 */
+  BatchId: string;
+}
+
+declare interface DescribeSparkSessionBatchSqlLogResponse {
+  /** 状态：0：初始化、1：成功、2：失败、3：取消、4：异常； */
+  State?: number;
+  /** 日志信息列表 */
+  LogSet?: SparkSessionBatchLog[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStoreLocationRequest {
 }
 
@@ -2911,6 +2987,8 @@ declare interface Dlc {
   CancelNotebookSessionStatement(data: CancelNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<CancelNotebookSessionStatementResponse>;
   /** 按批取消Session statement. {@link CancelNotebookSessionStatementBatchRequest} {@link CancelNotebookSessionStatementBatchResponse} */
   CancelNotebookSessionStatementBatch(data: CancelNotebookSessionStatementBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CancelNotebookSessionStatementBatchResponse>;
+  /** 取消Spark SQL批任务 {@link CancelSparkSessionBatchSQLRequest} {@link CancelSparkSessionBatchSQLResponse} */
+  CancelSparkSessionBatchSQL(data: CancelSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CancelSparkSessionBatchSQLResponse>;
   /** 取消任务执行 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
   /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
@@ -2943,6 +3021,8 @@ declare interface Dlc {
   CreateSparkApp(data: CreateSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppResponse>;
   /** 创建spark任务 {@link CreateSparkAppTaskRequest} {@link CreateSparkAppTaskResponse} */
   CreateSparkAppTask(data: CreateSparkAppTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppTaskResponse>;
+  /** 提交Spark SQL批任务 {@link CreateSparkSessionBatchSQLRequest} {@link CreateSparkSessionBatchSQLResponse} */
+  CreateSparkSessionBatchSQL(data: CreateSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkSessionBatchSQLResponse>;
   /** 修改结果存储位置 {@link CreateStoreLocationRequest} {@link CreateStoreLocationResponse} */
   CreateStoreLocation(data: CreateStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStoreLocationResponse>;
   /** 生成建表SQL {@link CreateTableRequest} {@link CreateTableResponse} */
@@ -3011,6 +3091,8 @@ declare interface Dlc {
   DescribeSparkAppJobs(data?: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
   /** 查询spark应用的运行任务实例列表 {@link DescribeSparkAppTasksRequest} {@link DescribeSparkAppTasksResponse} */
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
+  /** 获取SparkSQL批任务日志 {@link DescribeSparkSessionBatchSqlLogRequest} {@link DescribeSparkSessionBatchSqlLogResponse} */
+  DescribeSparkSessionBatchSqlLog(data: DescribeSparkSessionBatchSqlLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSqlLogResponse>;
   /** 查询结果存储位置 {@link DescribeStoreLocationRequest} {@link DescribeStoreLocationResponse} */
   DescribeStoreLocation(data?: DescribeStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStoreLocationResponse>;
   /** 查询表详情 {@link DescribeTableRequest} {@link DescribeTableResponse} */
