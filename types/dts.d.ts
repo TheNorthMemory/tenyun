@@ -392,6 +392,18 @@ declare interface DifferenceItem {
   FinishedAt: string | null;
 }
 
+/** 数据同步中的选项 */
+declare interface DynamicOptions {
+  /** 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)，PartialDDL(自定义,和DdlOptions一起起作用 )；必填、dts会用该值覆盖原有的值 */
+  OpTypes: string[] | null;
+  /** DDL同步选项，具体描述要同步那些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值 */
+  DdlOptions: DdlOption[] | null;
+  /** 冲突处理选项，ReportError(报错)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖); 目前目标端为kafka的链路不支持修改该配置 */
+  ConflictHandleType?: string | null;
+  /** 冲突处理的详细选项，如条件覆盖中的条件行和条件操作；不能部分更新该选项的内部字段；有更新时、需要全量更新该字段 */
+  ConflictHandleOption?: ConflictHandleOption | null;
+}
+
 /** 数据同步中的描述源端和目的端的信息 */
 declare interface Endpoint {
   /** 地域英文名，如：ap-guangzhou */
@@ -1058,6 +1070,16 @@ declare interface CreateMigrationServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateModifyCheckSyncJobRequest {
+  /** 同步任务id */
+  JobId: string;
+}
+
+declare interface CreateModifyCheckSyncJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSyncJobRequest {
   /** 付款类型, 如：PrePay(表示包年包月)、PostPay(表示按时按量) */
   PayMode: string;
@@ -1322,6 +1344,26 @@ declare interface DescribeMigrationJobsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModifyCheckSyncJobResultRequest {
+  /** 同步任务id */
+  JobId: string;
+}
+
+declare interface DescribeModifyCheckSyncJobResultResponse {
+  /** 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功) */
+  Status?: string;
+  /** 校验的步骤总数 */
+  StepCount?: number | null;
+  /** 当前所在步骤 */
+  StepCur?: number | null;
+  /** 总体进度，范围为[0,100] */
+  Progress?: number | null;
+  /** 步骤详细信息 */
+  StepInfos?: StepInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSyncJobsRequest {
   /** 同步任务id，如sync-werwfs23 */
   JobId?: string;
@@ -1480,6 +1522,20 @@ declare interface ModifyMigrationJobResponse {
   RequestId?: string;
 }
 
+declare interface ModifySyncJobConfigRequest {
+  /** 同步任务id */
+  JobId: string;
+  /** 修改后的同步对象 */
+  DynamicObjects?: Objects;
+  /** 修改后的同步任务选项 */
+  DynamicOptions?: DynamicOptions;
+}
+
+declare interface ModifySyncJobConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PauseMigrateJobRequest {
   /** 数据迁移任务ID */
   JobId: string;
@@ -1600,6 +1656,16 @@ declare interface StartMigrateJobRequest {
 }
 
 declare interface StartMigrateJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartModifySyncJobRequest {
+  /** 同步任务id */
+  JobId: string;
+}
+
+declare interface StartModifySyncJobResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2365,6 +2431,8 @@ declare interface Dts {
   CreateMigrateCheckJob(data: CreateMigrateCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrateCheckJobResponse>;
   /** 购买迁移任务 {@link CreateMigrationServiceRequest} {@link CreateMigrationServiceResponse} */
   CreateMigrationService(data: CreateMigrationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationServiceResponse>;
+  /** 创建修改同步配置的校验任务 {@link CreateModifyCheckSyncJobRequest} {@link CreateModifyCheckSyncJobResponse} */
+  CreateModifyCheckSyncJob(data: CreateModifyCheckSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModifyCheckSyncJobResponse>;
   /** 创建同步任务 {@link CreateSyncJobRequest} {@link CreateSyncJobResponse} */
   CreateSyncJob(data: CreateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSyncJobResponse>;
   /** 删除一致性校验任务 {@link DeleteCompareTaskRequest} {@link DeleteCompareTaskResponse} */
@@ -2383,6 +2451,8 @@ declare interface Dts {
   DescribeMigrationDetail(data: DescribeMigrationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationDetailResponse>;
   /** 查询数据迁移任务列表 {@link DescribeMigrationJobsRequest} {@link DescribeMigrationJobsResponse} */
   DescribeMigrationJobs(data?: DescribeMigrationJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationJobsResponse>;
+  /** 查询修改对象的校验任务的结果 {@link DescribeModifyCheckSyncJobResultRequest} {@link DescribeModifyCheckSyncJobResultResponse} */
+  DescribeModifyCheckSyncJobResult(data: DescribeModifyCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyCheckSyncJobResultResponse>;
   /** 查询同步任务信息 {@link DescribeSyncJobsRequest} {@link DescribeSyncJobsResponse} */
   DescribeSyncJobs(data?: DescribeSyncJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncJobsResponse>;
   /** 下线数据迁移任务 {@link DestroyMigrateJobRequest} {@link DestroyMigrateJobResponse} */
@@ -2403,6 +2473,8 @@ declare interface Dts {
   ModifyMigrateName(data: ModifyMigrateNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateNameResponse>;
   /** 配置迁移服务 {@link ModifyMigrationJobRequest} {@link ModifyMigrationJobResponse} */
   ModifyMigrationJob(data: ModifyMigrationJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationJobResponse>;
+  /** 修改同步任务配置 {@link ModifySyncJobConfigRequest} {@link ModifySyncJobConfigResponse} */
+  ModifySyncJobConfig(data: ModifySyncJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySyncJobConfigResponse>;
   /** 暂停迁移任务 {@link PauseMigrateJobRequest} {@link PauseMigrateJobResponse} */
   PauseMigrateJob(data: PauseMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<PauseMigrateJobResponse>;
   /** 暂停同步任务 {@link PauseSyncJobRequest} {@link PauseSyncJobResponse} */
@@ -2425,6 +2497,8 @@ declare interface Dts {
   StartCompare(data: StartCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StartCompareResponse>;
   /** 启动数据迁移任务 {@link StartMigrateJobRequest} {@link StartMigrateJobResponse} */
   StartMigrateJob(data: StartMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartMigrateJobResponse>;
+  /** 开始修改配置流程 {@link StartModifySyncJobRequest} {@link StartModifySyncJobResponse} */
+  StartModifySyncJob(data: StartModifySyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartModifySyncJobResponse>;
   /** 启动同步任务 {@link StartSyncJobRequest} {@link StartSyncJobResponse} */
   StartSyncJob(data?: StartSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartSyncJobResponse>;
   /** 终止一致性校验任务 {@link StopCompareRequest} {@link StopCompareResponse} */

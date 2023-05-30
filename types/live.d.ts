@@ -1186,6 +1186,10 @@ declare interface WatermarkInfo {
   Width?: number;
   /** 水印高。 */
   Height?: number;
+  /** 背景水印宽。 */
+  BackgroundWidth?: number;
+  /** 背景水印高。 */
+  BackgroundHeight?: number;
 }
 
 /** 央视P2P流信息。 */
@@ -1265,11 +1269,15 @@ declare interface AddLiveWatermarkRequest {
   Width?: number;
   /** 水印高度，占直播原始画面高度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。 */
   Height?: number;
+  /** 背景水印宽度。默认宽度1920。 */
+  BackgroundWidth?: number;
+  /** 背景水印高度。默认高度1080。 */
+  BackgroundHeight?: number;
 }
 
 declare interface AddLiveWatermarkResponse {
   /** 水印ID。 */
-  WatermarkId: number;
+  WatermarkId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3753,6 +3761,10 @@ declare interface UpdateLiveWatermarkRequest {
   Width?: number;
   /** 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。 */
   Height?: number;
+  /** 背景水印宽度。默认宽度1920。 */
+  BackgroundWidth?: number;
+  /** 背景水印高度。默认高度1080。 */
+  BackgroundHeight?: number;
 }
 
 declare interface UpdateLiveWatermarkResponse {

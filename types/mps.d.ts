@@ -1756,6 +1756,22 @@ declare interface DescribeRTSPPullSourceAddress {
   Url: string | null;
 }
 
+/** 诊断结果项。 */
+declare interface DiagnoseResult {
+  /** 诊断出的异常类别。 */
+  Category?: string | null;
+  /** 诊断出的具体异常类型。 */
+  Type?: string | null;
+  /** 诊断出异常开始的PTS时间戳。 */
+  Timestamp?: number | null;
+  /** 诊断出的异常描述。 */
+  Description?: string | null;
+  /** 诊断到异常的北京时间，采用 ISO 日期格式。 */
+  DateTime?: string | null;
+  /** 诊断出的异常级别。 */
+  SeverityLevel?: string | null;
+}
+
 /** 编辑点播视频文件信息 */
 declare interface EditMediaFileInfo {
   /** 视频的输入信息。 */
@@ -2204,6 +2220,28 @@ declare interface InputAddress {
   Port: number;
 }
 
+/** 直播流分析结果 */
+declare interface LiveStreamAiAnalysisResultInfo {
+  /** 直播分析子任务结果，暂时只支持直播拆条。 */
+  ResultSet?: LiveStreamAiAnalysisResultItem[] | null;
+}
+
+/** 直播流 AI 分析结果 */
+declare interface LiveStreamAiAnalysisResultItem {
+  /** 结果的类型，取值范围：SegmentRecognition：拆条。 */
+  Type: string;
+  /** 拆条结果，当 Type 为SegmentRecognition 时有效。 */
+  SegmentResultSet: SegmentRecognitionItem[] | null;
+}
+
+/** 直播流质检结果 */
+declare interface LiveStreamAiQualityControlResultInfo {
+  /** 质检结果列表。 */
+  QualityControlResults: QualityControlResult[] | null;
+  /** 格式诊断结果列表。 */
+  DiagnoseResults?: DiagnoseResult[] | null;
+}
+
 /** 直播流 AI 识别结果 */
 declare interface LiveStreamAiRecognitionResultInfo {
   /** 内容识别结果列表。 */
@@ -2330,6 +2368,12 @@ declare interface LiveStreamAsrFullTextRecognitionResult {
   EndPtsTime: number;
   /** 识别片段置信度。取值：0~100。 */
   Confidence: number;
+  /** 识别开始UTC时间。 */
+  StartTime?: string | null;
+  /** 识别结束UTC时间。 */
+  EndTime?: string | null;
+  /** 稳态标记。 */
+  SteadyState?: boolean | null;
 }
 
 /** 直播 AI Asr 单词识别结果 */
@@ -2440,6 +2484,12 @@ declare interface LiveStreamTransTextRecognitionResult {
   Confidence: number;
   /** 翻译文本。 */
   Trans: string;
+  /** 翻译开始UTC时间。 */
+  StartTime?: string | null;
+  /** 翻译结束UTC时间。 */
+  EndTime?: string | null;
+  /** 稳态标记。 */
+  SteadyState?: boolean | null;
 }
 
 /** 低光照增强配置 */
@@ -3622,6 +3672,18 @@ declare interface ScratchRepairConfig {
   Switch?: string;
   /** 强度，取值范围：0.0~1.0。默认：0.0。 */
   Intensity?: number | null;
+}
+
+/** 智能拆条片段。 */
+declare interface SegmentRecognitionItem {
+  /** 置信度。 */
+  Confidence: number;
+  /** 片段起始时间偏移。 */
+  StartTimeOffset: number;
+  /** 片段结束时间偏移。 */
+  EndTimeOffset: number;
+  /** 拆条片段URL。 */
+  SegmentUrl?: string | null;
 }
 
 /** 细节增强配置 */
@@ -5780,6 +5842,10 @@ declare interface ParseLiveStreamProcessNotificationResponse {
   AiReviewResultInfo?: LiveStreamAiReviewResultInfo | null;
   /** 内容识别结果，当 NotificationType 为 AiRecognitionResult 时有效。 */
   AiRecognitionResultInfo?: LiveStreamAiRecognitionResultInfo | null;
+  /** 内容分析结果，当 NotificationType 为 AiAnalysisResult 时有效。 */
+  AiAnalysisResultInfo?: LiveStreamAiAnalysisResultInfo | null;
+  /** 媒体质检结果，当 NotificationType 为 AiQualityControlResult 时有效。 */
+  AiQualityControlResultInfo?: LiveStreamAiQualityControlResultInfo | null;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。 */
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
@@ -5795,17 +5861,17 @@ declare interface ParseNotificationRequest {
 
 declare interface ParseNotificationResponse {
   /** 支持事件类型，目前取值有：WorkflowTask：视频工作流处理任务。EditMediaTask：视频编辑任务。ScheduleTask：编排任务。 */
-  EventType: string;
+  EventType?: string;
   /** 视频处理任务信息，仅当 EventType 为 WorkflowTask，该字段有值。 */
-  WorkflowTaskEvent: WorkflowTask | null;
+  WorkflowTaskEvent?: WorkflowTask | null;
   /** 视频编辑任务信息，仅当 EventType 为 EditMediaTask，该字段有值。 */
-  EditMediaTaskEvent: EditMediaTask | null;
+  EditMediaTaskEvent?: EditMediaTask | null;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。 */
-  SessionId: string;
+  SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
-  SessionContext: string;
+  SessionContext?: string;
   /** 编排任务信息，仅当 EventType 为 ScheduleTask，该字段有值。 */
-  ScheduleTaskEvent: ScheduleTask | null;
+  ScheduleTaskEvent?: ScheduleTask | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

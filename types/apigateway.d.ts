@@ -1511,7 +1511,7 @@ declare interface BindSecretIdsRequest {
 
 declare interface BindSecretIdsResponse {
   /** 绑定操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

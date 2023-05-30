@@ -90,6 +90,8 @@ declare interface DetectInfoText {
   ErrMsg: string | null;
   /** 本次验证使用的身份证号。 */
   IdCard: string | null;
+  /** 用户认证时使用的证件号码类型：0：二代身份证的证件号码1：港澳台居住证的证件号码2：其他（核验使用的证件号码非合法身份号码） */
+  UseIDType: number | null;
   /** 本次验证使用的姓名。 */
   Name: string | null;
   /** 身份校验环节识别结果：民族。 */

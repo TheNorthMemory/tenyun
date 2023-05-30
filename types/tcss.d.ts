@@ -965,9 +965,17 @@ declare interface ComponentInfo {
 /** 组件信息 */
 declare interface ComponentsInfo {
   /** 组件名称 */
-  Component: string | null;
+  Component?: string | null;
   /** 组件版本信息 */
   Version: string | null;
+  /** 可修复版本 */
+  FixedVersion?: string | null;
+  /** 路径 */
+  Path?: string | null;
+  /** 类型 */
+  Type?: string | null;
+  /** 组件名称 */
+  Name?: string | null;
 }
 
 /** 容器列表集合 */

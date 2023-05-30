@@ -777,6 +777,8 @@ declare interface CheckCertificateChainResponse {
 declare interface CommitCertificateInformationRequest {
   /** 证书 ID。 */
   CertificateId: string;
+  /** 域名验证方式 */
+  VerifyType?: string;
 }
 
 declare interface CommitCertificateInformationResponse {

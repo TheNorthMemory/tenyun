@@ -188,6 +188,14 @@ declare interface CFSConfig {
   Path: string;
 }
 
+/** 配置CFSTurbo参数 */
+declare interface CFSTurbo {
+  /** CFSTurbo实例id */
+  Id?: string | null;
+  /** CFSTurbo路径 */
+  Path?: string | null;
+}
+
 /** 容器信息 */
 declare interface Container {
   /** 名字 */
@@ -288,8 +296,10 @@ declare interface DataConfig {
   CFSSource?: CFSConfig | null;
   /** 来自HDFS的数据 */
   HDFSSource?: HDFSConfig | null;
-  /** 配饰GooseFS的数据 */
+  /** 配置GooseFS的数据 */
   GooseFSSource?: GooseFS | null;
+  /** 配置TurboFS的数据 */
+  CFSTurboSource?: CFSTurbo | null;
 }
 
 /** 数据点 */
@@ -901,9 +911,9 @@ declare interface ResourceInfo {
   /** Gpu卡型号 T4或者V100。仅展示当前 GPU 卡型号，若存在多类型同时使用，则参考 RealGpuDetailSet 的值。 */
   GpuType?: string | null;
   /** 创建或更新时无需填写，仅展示需要关注后付费非整卡实例对应的实际的Gpu卡资源, 表示gpu资源对应实际的gpu卡个数.RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有可能代表带有1/4卡的实例4个, 或者带有1/2卡的实例2个, 或者带有1卡的实力1个. */
-  RealGpu?: number | null;
+  RealGpu?: number;
   /** 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。 */
-  RealGpuDetailSet?: GpuDetail[] | null;
+  RealGpuDetailSet?: GpuDetail[];
 }
 
 /** 文本行信息 */
