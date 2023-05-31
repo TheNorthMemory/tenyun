@@ -730,6 +730,12 @@ declare interface AssetSystemPackageInfo {
   FirstTime: string;
   /** 是否新增[0:否|1:是] */
   IsNew: number;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo;
+  /** 主机Id */
+  Quuid?: string;
+  /** Agent Id */
+  Uuid?: string;
 }
 
 /** 资源管理账号基本信息 */
@@ -4602,9 +4608,9 @@ declare interface DescribeAssetRecentMachineInfoResponse {
 
 declare interface DescribeAssetSystemPackageListRequest {
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 过滤条件。Name - String - 是否必填：否 - 包 名StartTime - String - 是否必填：否 - 安装开始时间EndTime - String - 是否必填：否 - 安装开始时间Type - int - 是否必填：否 - 安装包类型：1:rmp2:dpkg3:java4:system */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
@@ -4619,9 +4625,9 @@ declare interface DescribeAssetSystemPackageListRequest {
 
 declare interface DescribeAssetSystemPackageListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 列表 */
-  Packages: AssetSystemPackageInfo[] | null;
+  Packages?: AssetSystemPackageInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8764,7 +8770,7 @@ declare interface Cwp {
   /** 获取主机概况趋势 {@link DescribeAssetRecentMachineInfoRequest} {@link DescribeAssetRecentMachineInfoResponse} */
   DescribeAssetRecentMachineInfo(data: DescribeAssetRecentMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRecentMachineInfoResponse>;
   /** 获取资产管理系统安装包列表 {@link DescribeAssetSystemPackageListRequest} {@link DescribeAssetSystemPackageListResponse} */
-  DescribeAssetSystemPackageList(data: DescribeAssetSystemPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemPackageListResponse>;
+  DescribeAssetSystemPackageList(data?: DescribeAssetSystemPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemPackageListResponse>;
   /** 获取主机账号详情 {@link DescribeAssetUserInfoRequest} {@link DescribeAssetUserInfoResponse} */
   DescribeAssetUserInfo(data: DescribeAssetUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserInfoResponse>;
   /** 获取账号列表 {@link DescribeAssetUserListRequest} {@link DescribeAssetUserListResponse} */
@@ -8985,7 +8991,7 @@ declare interface Cwp {
   DescribeRiskDnsEventList(data?: DescribeRiskDnsEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsEventListResponse>;
   /** 获取恶意请求列表 {@link DescribeRiskDnsListRequest} {@link DescribeRiskDnsListResponse} */
   DescribeRiskDnsList(data?: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
-  /** 更新用户告警设置 {@link DescribeSaveOrUpdateWarningsRequest} {@link DescribeSaveOrUpdateWarningsResponse} */
+  /** @deprecated 更新用户告警设置 {@link DescribeSaveOrUpdateWarningsRequest} {@link DescribeSaveOrUpdateWarningsResponse} */
   DescribeSaveOrUpdateWarnings(data?: DescribeSaveOrUpdateWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaveOrUpdateWarningsResponse>;
   /** 查询木马扫描进度 {@link DescribeScanMalwareScheduleRequest} {@link DescribeScanMalwareScheduleResponse} */
   DescribeScanMalwareSchedule(data?: DescribeScanMalwareScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanMalwareScheduleResponse>;

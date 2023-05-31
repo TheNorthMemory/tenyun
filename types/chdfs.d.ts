@@ -116,17 +116,17 @@ declare interface RestoreTask {
 
 /** 生命周期规则当前路径具体存储量信息 */
 declare interface Summary {
-  /** 总存储量（单位byte） */
+  /** 已使用容量（byte） */
   CapacityUsed: number | null;
-  /** 标准存储量（单位byte） */
+  /** 已使用COS标准存储容量（byte） */
   StandardCapacityUsed: number | null;
-  /** 低频存储量（单位byte） */
+  /** 已使用COS低频存储容量（byte） */
   DegradeCapacityUsed?: number | null;
-  /** 归档存储量（单位byte） */
+  /** 已使用COS归档存储容量（byte） */
   ArchiveCapacityUsed?: number | null;
-  /** 深度归档存储量（单位byte） */
+  /** 已使用COS深度归档存储容量（byte） */
   DeepArchiveCapacityUsed?: number | null;
-  /** 智能分层存储量（单位byte） */
+  /** 已使用COS智能分层存储容量（byte） */
   IntelligentCapacityUsed?: number | null;
 }
 

@@ -511,11 +511,11 @@ declare interface Trigger {
   /** 触发器状态 */
   AvailableStatus: string;
   /** 触发器最小资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 触发器和云函数绑定状态 */
-  BindStatus: string;
+  BindStatus?: string;
   /** 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建 */
-  TriggerAttribute: string;
+  TriggerAttribute?: string;
   /** 触发器绑定的别名或版本 */
   Qualifier: string;
   /** 触发器描述 */
@@ -583,11 +583,11 @@ declare interface TriggerInfo {
   /** 触发器最后修改时间 */
   ModTime: string;
   /** 触发器最小资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 触发器和云函数绑定状态 */
-  BindStatus: string;
+  BindStatus?: string;
   /** 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建 */
-  TriggerAttribute: string;
+  TriggerAttribute?: string;
   /** 客户自定义触发器描述 */
   Description?: string | null;
 }

@@ -26,29 +26,29 @@ declare interface Agent {
 declare interface ApproverInfo {
   /** 参与者类型：0：企业1：个人3：企业静默签署注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。 */
   ApproverType: number;
-  /** 本环节需要操作人的名字 */
+  /** 签署人的姓名 */
   ApproverName: string;
-  /** 本环节需要操作人的手机号 */
+  /** 签署人的手机号，11位数字 */
   ApproverMobile: string;
-  /** 本环节操作人签署控件配置 */
+  /** 签署人的签署控件列表 */
   SignComponents: Component[];
-  /** 如果是企业,则为企业的名字 */
+  /** 如果签署方是企业签署方，则为企业名 */
   OrganizationName?: string;
-  /** 身份证号 */
+  /** 签署人的身份证号 */
   ApproverIdCardNumber?: string;
-  /** 证件类型 ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  /** 签署人的身份证件类型 ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
   ApproverIdCardType?: string;
-  /** sms--短信，none--不通知 */
+  /** 签署通知类型：sms--短信，none--不通知 */
   NotifyType?: string;
-  /** 1--收款人、2--开具人、3--见证人 */
+  /** 签署人角色类型：1--收款人、2--开具人、3--见证人 */
   ApproverRole?: number;
-  /** 签署意愿确认渠道,WEIXINAPP:人脸识别 */
+  /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别 */
   VerifyChannel?: string[];
   /** 合同的强制预览时间：3~300s，未指定则按合同页数计算 */
   PreReadTime?: number;
   /** 签署人userId，传此字段则不用传姓名、手机号 */
   UserId?: string;
-  /** 签署人用户来源,企微侧用户请传入：WEWORKAPP */
+  /** 签署人用户来源，企微侧用户请传入：WEWORKAPP */
   ApproverSource?: string;
   /** 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段 */
   CustomApproverTag?: string;
@@ -72,17 +72,17 @@ declare interface ApproverOption {
 declare interface ApproverRestriction {
   /** 指定签署人名字 */
   Name?: string;
-  /** 指定签署人手机号 */
+  /** 指定签署人手机号，11位数字 */
   Mobile?: string;
-  /** 指定签署人证件类型 */
+  /** 指定签署人证件类型，ID_CARD-身份证 */
   IdCardType?: string;
-  /** 指定签署人证件号码 */
+  /** 指定签署人证件号码，字母大写 */
   IdCardNumber?: string;
 }
 
 /** 授权用户 */
 declare interface AuthorizedUser {
-  /** 用户id */
+  /** 电子签系统中的用户id */
   UserId: string;
 }
 
@@ -90,13 +90,13 @@ declare interface AuthorizedUser {
 declare interface AutoSignConfig {
   /** 自动签开通个人用户的三要素 */
   UserInfo: UserThreeFactor | null;
-  /** 回调链接 */
+  /** 接受自动签开启的回调地址。需要保证post返回200 */
   CallbackUrl: string | null;
-  /** 是否回调证书信息 */
+  /** 是否回调证书信息，默认false-不需要 */
   CertInfoCallback?: boolean | null;
-  /** 是否支持用户自定义签名印章 */
+  /** 是否支持用户自定义签名印章，默认false-不需要 */
   UserDefineSeal?: boolean | null;
-  /** 是否需要回调的时候返回印章(签名) 图片的 base64 */
+  /** 是否需要回调的时候返回印章(签名) 图片的 base64，默认false-不需要 */
   SealImgCallback?: boolean | null;
   /** 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。 */
   VerifyChannels?: string[] | null;
@@ -124,7 +124,7 @@ declare interface Caller {
 
 /** 抄送信息 */
 declare interface CcInfo {
-  /** 被抄送人手机号 */
+  /** 被抄送人手机号，11位数字 */
   Mobile?: string;
   /** 被抄送人姓名 */
   Name?: string | null;
@@ -136,9 +136,9 @@ declare interface CcInfo {
 
 /** 模板控件信息 */
 declare interface Component {
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component填写控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；如果是SignComponent签署控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
   ComponentType: string;
-  /** 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N） */
+  /** 控件所属文件的序号（取值为：0-N）。目前单文件的情况下，值是0 */
   FileIndex: number;
   /** 参数控件高度，单位pt */
   ComponentHeight: number;
@@ -150,9 +150,9 @@ declare interface Component {
   ComponentPosX: number;
   /** 参数控件Y位置，单位pt */
   ComponentPosY: number;
-  /** GenerateMode==KEYWORD 指定关键字 */
+  /** 查询时返回控件唯一Id。使用文件发起合同时用于GenerateMode==KEYWORD 指定关键字 */
   ComponentId?: string;
-  /** GenerateMode==FIELD 指定表单域名称 */
+  /** 查询时返回控件名。使用文件发起合同时用于GenerateMode==FIELD 指定表单域名称 */
   ComponentName?: string;
   /** 是否必选，默认为false */
   ComponentRequired?: boolean;
@@ -160,7 +160,7 @@ declare interface Component {
   ComponentRecipientId?: string;
   /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙钟的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}", */
   ComponentExtra?: string;
-  /** 是否是表单域类型，默认不存在 */
+  /** 是否是表单域类型，默认不false-不是 */
   IsFormType?: boolean;
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525)$/签署意见控件： 约束：签署意见最大长度为50字符签署人手机号控件： 约束：国内手机号 13,14,15,16,17,18,19号段长度11位签署人身份证控件： 约束：合法的身份证号码检查控件名称： 约束：控件名称最大长度为20字符单行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号多行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号勾选框控件： 约束：选择填字符串true，不选填字符串false选择器控件： 约束：同单行文本控件约束，填写选择值中的字符串数字控件： 约束：请输入有效的数字(可带小数点) 检查正则表达式：/^(-|\+)?\d+(\.\d+)?$/日期控件： 约束：格式：yyyy年mm月dd日附件控件： 约束：JPG或PNG图片，上传数量限制，1到6个，最大6个附件图片控件： 约束：JPG或PNG图片，填写上传的图片资源ID邮箱控件： 约束：请输入有效的邮箱地址, w3c标准 检查正则表达式：/^([A-Za-z0-9_\-.!#$%&])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/ 参考：https://emailregex.com/地址控件： 同单行文本控件约束省市区控件： 同单行文本控件约束性别控件： 同单行文本控件约束，填写选择值中的字符串学历控件： 同单行文本控件约束，填写选择值中的字符串 */
   ComponentValue?: string;
@@ -168,13 +168,13 @@ declare interface Component {
   GenerateMode?: string;
   /** 日期签署控件的字号，默认为 12 */
   ComponentDateFontSize?: number;
-  /** 平台模板控件 id 标识 */
+  /** 第三方应用集成平台模板控件 id 标识 */
   ChannelComponentId?: string;
   /** 指定关键字时横坐标偏移量，单位pt */
   OffsetX?: number;
   /** 指定关键字时纵坐标偏移量，单位pt */
   OffsetY?: number;
-  /** //子客控件来源。0-平台指定；1-用户自定义 */
+  /** 第三方应用集成中子客企业控件来源。0-平台指定；1-用户自定义 */
   ChannelComponentSource?: number;
   /** 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
   KeywordOrder?: string;
@@ -248,11 +248,11 @@ declare interface FailedUpdateStaffData {
   Reason?: string;
   /** 用户Id */
   UserId?: string;
-  /** 用户OpenId */
+  /** 员工在第三方平台的openId */
   OpenId?: string;
 }
 
-/** 二期接口返回的模板中文件的信息结构 */
+/** 模板中文件的信息结构 */
 declare interface FileInfo {
   /** 文件Id */
   FileId?: string;
@@ -744,6 +744,8 @@ declare interface TemplateInfo {
   CreatedOn?: number;
   /** 发起人角色信息 */
   Promoter?: Recipient;
+  /** 模板类型取值：1 静默签,3 普通模板 */
+  TemplateType?: number;
   /** 模板可用状态，取值：1启用（默认），2停用 */
   Available?: number;
   /** 模板创建组织id */
@@ -1195,22 +1197,28 @@ declare interface CreatePrepareFlowResponse {
 }
 
 declare interface CreatePreparedPersonalEsignRequest {
-  /** 个人用户名称 */
+  /** 个人用户姓名 */
   UserName: string;
   /** 身份证件号码 */
   IdCardNumber: string;
-  /** 印章图片的base64 */
-  SealImage: string;
   /** 印章名称 */
   SealName: string;
+  /** 印章图片的base64，最大不超过 8M */
+  SealImage: string;
   /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator?: UserInfo;
   /** 身份证件类型:ID_CARD 身份证PASSPORT 护照HONGKONG_AND_MACAO 中国香港FOREIGN_ID_CARD 境外身份HONGKONG_MACAO_AND_TAIWAN 中国台湾 */
   IdCardType?: string;
+  /** 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。 */
+  SealImageCompress?: boolean;
   /** 手机号码；当需要开通自动签时，该参数必传 */
   Mobile?: string;
   /** 是否开通自动签，该功能需联系运营工作人员开通后使用 */
   EnableAutoSign?: boolean;
+  /** 印章颜色（参数ProcessSeal=true时生效）默认值：BLACK黑色取值: BLACK 黑色,RED 红色,BLUE 蓝色。 */
+  SealColor?: string;
+  /** 是否处理印章默认不做印章处理。取值：false：不做任何处理；true：做透明化处理和颜色增强。 */
+  ProcessSeal?: boolean;
 }
 
 declare interface CreatePreparedPersonalEsignResponse {
@@ -1831,7 +1839,7 @@ declare interface Ess {
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 通过页面快速发起签署流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
-  /** 创建导入个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
+  /** 创建导入处方单个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;

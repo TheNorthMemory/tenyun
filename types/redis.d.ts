@@ -74,9 +74,9 @@ declare interface CommandTake {
 
 /** 延时分布详情 */
 declare interface DelayDistribution {
-  /** 分布阶梯，延时和Ladder值的对应关系：[0ms,1ms]: 1；[1ms,5ms]: 5；[5ms,10ms]: 10；[10ms,50ms]: 50；[50ms,200ms]: 200；[200ms,∞]: -1。 */
+  /** 指延时分布阶梯，其与延时区间的对应关系如下所示。- 1：[0ms,1ms]。- 5： [1ms,5ms]。- 10： [5ms,10ms]。- 50： [10ms,50ms]。- 200：[50ms,200ms]。- -1： [200ms,∞]。 */
   Ladder: number;
-  /** 延时处于当前分布阶梯的命令数量，个。 */
+  /** 延时处于当前分布阶梯的命令数量，单位：个。 */
   Size: number;
   /** 修改时间。 */
   Updatetime: number;
@@ -1377,9 +1377,9 @@ declare interface DescribeCommonDBInstancesRequest {
 
 declare interface DescribeCommonDBInstancesResponse {
   /** 实例数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例信息 */
-  InstanceDetails: RedisCommonInstanceList[];
+  InstanceDetails?: RedisCommonInstanceList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1495,7 +1495,7 @@ declare interface DescribeInstanceMonitorBigKeyRequest {
 
 declare interface DescribeInstanceMonitorBigKeyResponse {
   /** 大Key详细信息 */
-  Data: BigKeyInfo[];
+  Data?: BigKeyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1523,7 +1523,7 @@ declare interface DescribeInstanceMonitorBigKeyTypeDistRequest {
 
 declare interface DescribeInstanceMonitorBigKeyTypeDistResponse {
   /** 大Key类型分布详细信息 */
-  Data: BigKeyTypeInfo[];
+  Data?: BigKeyTypeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2699,7 +2699,7 @@ declare interface Redis {
   DescribeBackupUrl(data: DescribeBackupUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupUrlResponse>;
   /** 查询实例带宽信息 {@link DescribeBandwidthRangeRequest} {@link DescribeBandwidthRangeResponse} */
   DescribeBandwidthRange(data: DescribeBandwidthRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthRangeResponse>;
-  /** 查询Redis实例列表信息 {@link DescribeCommonDBInstancesRequest} {@link DescribeCommonDBInstancesResponse} */
+  /** 查询Redis实例列表信息（已废弃） {@link DescribeCommonDBInstancesRequest} {@link DescribeCommonDBInstancesResponse} */
   DescribeCommonDBInstances(data?: DescribeCommonDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommonDBInstancesResponse>;
   /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
@@ -2711,11 +2711,11 @@ declare interface Redis {
   DescribeInstanceDTSInfo(data: DescribeInstanceDTSInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDTSInfoResponse>;
   /** 查询订单信息 {@link DescribeInstanceDealDetailRequest} {@link DescribeInstanceDealDetailResponse} */
   DescribeInstanceDealDetail(data: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
-  /** 查询实例大Key {@link DescribeInstanceMonitorBigKeyRequest} {@link DescribeInstanceMonitorBigKeyResponse} */
+  /** 查询实例大Key（已废弃） {@link DescribeInstanceMonitorBigKeyRequest} {@link DescribeInstanceMonitorBigKeyResponse} */
   DescribeInstanceMonitorBigKey(data: DescribeInstanceMonitorBigKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeyResponse>;
-  /** 查询实例大Key大小分布 {@link DescribeInstanceMonitorBigKeySizeDistRequest} {@link DescribeInstanceMonitorBigKeySizeDistResponse} */
+  /** 查询实例大Key大小分布（已废弃） {@link DescribeInstanceMonitorBigKeySizeDistRequest} {@link DescribeInstanceMonitorBigKeySizeDistResponse} */
   DescribeInstanceMonitorBigKeySizeDist(data: DescribeInstanceMonitorBigKeySizeDistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeySizeDistResponse>;
-  /** 查询实例大Key类型分布 {@link DescribeInstanceMonitorBigKeyTypeDistRequest} {@link DescribeInstanceMonitorBigKeyTypeDistResponse} */
+  /** 查询实例大Key类型分布（已废弃） {@link DescribeInstanceMonitorBigKeyTypeDistRequest} {@link DescribeInstanceMonitorBigKeyTypeDistResponse} */
   DescribeInstanceMonitorBigKeyTypeDist(data: DescribeInstanceMonitorBigKeyTypeDistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeyTypeDistResponse>;
   /** 查询实例热Key {@link DescribeInstanceMonitorHotKeyRequest} {@link DescribeInstanceMonitorHotKeyResponse} */
   DescribeInstanceMonitorHotKey(data: DescribeInstanceMonitorHotKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorHotKeyResponse>;

@@ -70,6 +70,8 @@ declare interface PublicMaterialInfos {
   MaterialFaceList: MaterialFaces[];
   /** 素材名 */
   MaterialName: string;
+  /** 审核原因 */
+  AuditResult?: string | null;
 }
 
 declare interface DescribeMaterialListRequest {

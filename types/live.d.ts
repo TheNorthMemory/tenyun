@@ -1647,9 +1647,9 @@ declare interface CreateLiveTranscodeTemplateRequest {
   AdaptBitratePercent?: number;
   /** 是否以短边作为高度，0：否，1：是。默认0。 */
   ShortEdgeAsHeight?: number;
-  /** DRM 加密类型，可选值：fairplay、normalaes、widevine。不传递或着为空字符串，清空之前的DRM配置。 */
+  /** DRM 加密类型，可选值：fairplay、normalaes、widevine。不传递或者为空字符串，清空之前的DRM配置。 */
   DRMType?: string;
-  /** DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。不传递或着为空字符串，清空之前的DRM配置。 */
+  /** DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。不传递或者为空字符串，清空之前的DRM配置。 */
   DRMTracks?: string;
 }
 
@@ -3629,9 +3629,9 @@ declare interface ModifyLiveTranscodeTemplateRequest {
   AdaptBitratePercent?: number;
   /** 是否以短边作为高度，0：否，1：是。默认0。 */
   ShortEdgeAsHeight?: number;
-  /** DRM 加密类型，可选值：fairplay、normalaes、widevine。不传递或着为空字符串，清空之前的DRM配置。 */
+  /** DRM 加密类型，可选值：fairplay、normalaes、widevine。不传递或者为空字符串，清空之前的DRM配置。 */
   DRMType?: string;
-  /** DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。不传递或着为空字符串，清空之前的DRM配置。 */
+  /** DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。不传递或者为空字符串，清空之前的DRM配置。 */
   DRMTracks?: string;
 }
 

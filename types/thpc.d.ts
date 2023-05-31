@@ -100,6 +100,8 @@ declare interface ComputeNode {
   InternetAccessible?: InternetAccessible;
   /** 节点显示名称。不指定节点显示名称则默认显示‘未命名’。最多支持60个字符。 */
   InstanceName?: string;
+  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  ProjectId?: number | null;
 }
 
 /** 计算节点概览。 */
@@ -128,6 +130,8 @@ declare interface ExpansionNodeConfig {
   InstanceType?: string;
   /** 私有网络相关信息配置。 */
   VirtualPrivateCloud?: VirtualPrivateCloud;
+  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  ProjectId?: number | null;
 }
 
 /** 扩容节点配置信息概览。 */
@@ -228,6 +232,8 @@ declare interface LoginNode {
   InternetAccessible?: InternetAccessible;
   /** 节点显示名称。不指定节点显示名称则默认显示‘未命名’。最多支持60个字符。 */
   InstanceName?: string;
+  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  ProjectId?: number | null;
 }
 
 /** 登录节点概览。 */
@@ -258,6 +264,8 @@ declare interface ManagerNode {
   InternetAccessible?: InternetAccessible;
   /** 节点显示名称。不指定节点显示名称则默认显示‘未命名’。购买多个节点，如果指定模式串`{R:x}`，表示生成数字[`[x, x+n-1]`，其中`n`表示购买节点的数量，例如`server_{R:3}`，购买1个时，节点显示名称为`server_3`；购买2个时，节点显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。购买多个节点，如果不指定模式串，则在节点显示名称添加后缀`1、2...n`，其中`n`表示购买节点的数量，例如`server_`，购买2个时，节点显示名称分别为`server_1`，`server_2`。最多支持60个字符（包含模式串）。 */
   InstanceName?: string;
+  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  ProjectId?: number | null;
 }
 
 /** 管控节点概览。 */
@@ -463,6 +471,8 @@ declare interface AddNodesRequest {
   DryRun?: boolean;
   /** 添加节点类型。默认取值：STATIC。STATIC：静态节点，不会参与弹性伸缩流程。DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。 */
   NodeType?: string;
+  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  ProjectId?: number;
 }
 
 declare interface AddNodesResponse {

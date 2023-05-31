@@ -1458,14 +1458,16 @@ declare interface DeleteSecurityPolicyRequest {
   /** 实例Id */
   RegistryId: string;
   /** 白名单Id */
-  PolicyIndex: number;
+  PolicyIndex?: number;
   /** 白名单版本 */
-  PolicyVersion: string;
+  PolicyVersion?: string;
+  /** 网段或IP(互斥) */
+  CidrBlock?: string;
 }
 
 declare interface DeleteSecurityPolicyResponse {
   /** 实例Id */
-  RegistryId: string;
+  RegistryId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

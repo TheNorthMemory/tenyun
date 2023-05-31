@@ -2084,6 +2084,24 @@ declare interface TaskCanvasInfo {
   TaskAction: string | null;
   /** 延迟时间 */
   DelayTime: number | null;
+  /** 执行开始时间 */
+  ExecutionStartTime?: string | null;
+  /** 执行结束时间 */
+  ExecutionEndTime?: string | null;
+  /** 层级 */
+  Layer?: string | null;
+  /** 来源数据源ID */
+  SourceServiceId?: string | null;
+  /** 来源数据源类型 */
+  SourceServiceType?: string | null;
+  /** 目标数据源ID */
+  TargetServiceId?: string | null;
+  /** 目标数据源类型 */
+  TargetServiceType?: string | null;
+  /** 任务告警类型 */
+  AlarmType?: string | null;
+  /** 任务创建时间 */
+  CreateTime?: string | null;
 }
 
 /** 任务扩展信息 */
@@ -2232,6 +2250,10 @@ declare interface TaskInfoPage {
   Items: TaskCanvasInfo[];
   /** 总页数 */
   TotalPage: number;
+  /** 页数 */
+  PageCount?: number;
+  /** 总条数 */
+  TotalCount?: number;
 }
 
 /** 任务属性 */
@@ -4359,11 +4381,21 @@ declare interface DescribeOperateTasksRequest {
   TaskCycleUnitList?: string;
   /** 任务所属产品类型 */
   ProductNameList?: string;
+  /** 数据源id或（仅针对离线同步任务）来源数据源id */
+  SourceServiceId?: string;
+  /** 数据源类型或（仅针对离线同步任务）来源数据源类型 */
+  SourceServiceType?: string;
+  /** （仅针对离线同步任务）目标数据源id */
+  TargetServiceId?: string;
+  /** （仅针对离线同步任务）目标数据源类型 */
+  TargetServiceType?: string;
+  /** 告警类型，多个类型以逗号分隔 */
+  AlarmType?: string;
 }
 
 declare interface DescribeOperateTasksResponse {
   /** 任务列表信息 */
-  Data: TaskInfoPage;
+  Data?: TaskInfoPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
