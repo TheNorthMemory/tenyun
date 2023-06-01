@@ -1154,6 +1154,14 @@ declare interface UpdateInstanceSettings {
   InstanceType?: string;
 }
 
+/** 容器集群用户组信息 */
+declare interface UserAndGroup {
+  /** 用户名 */
+  UserName: string | null;
+  /** 用户组 */
+  UserGroup: string | null;
+}
+
 /** 添加的用户信息列表 */
 declare interface UserInfoForUserManager {
   /** 用户名 */
@@ -1368,7 +1376,13 @@ declare interface DeleteUserManagerUserListRequest {
   /** 集群实例ID */
   InstanceId: string;
   /** 集群用户名列表 */
-  UserNameList: string[];
+  UserNameList?: string[];
+  /** tke/eks集群id，容器集群传 */
+  TkeClusterId?: string;
+  /** 默认空，容器版传"native" */
+  DisplayStrategy?: string;
+  /** 用户组 */
+  UserGroupList?: UserAndGroup[];
 }
 
 declare interface DeleteUserManagerUserListResponse {

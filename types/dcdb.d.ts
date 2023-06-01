@@ -42,6 +42,14 @@ declare interface ColumnPrivilege {
   Privileges: string[];
 }
 
+/** 配置信息。包含配置项Config，配置值Value */
+declare interface ConfigValue {
+  /** 配置项的名称，支持填写max_user_connections */
+  Config: string | null;
+  /** 配置值 */
+  Value: string | null;
+}
+
 /** 约束类型值的范围 */
 declare interface ConstraintRange {
   /** 约束类型为section时的最小值 */
@@ -1926,6 +1934,22 @@ declare interface KillSessionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAccountConfigRequest {
+  /** 实例 ID，格式如：tdsqlshard-kpkvq5oj，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 账号的名称 */
+  UserName: string;
+  /** 账号的域名 */
+  Host: string;
+  /** 配置列表，每一个元素是Config和Value的组合 */
+  Configs: ConfigValue[];
+}
+
+declare interface ModifyAccountConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAccountDescriptionRequest {
   /** 实例 ID，形如：dcdbt-ow728lmc。 */
   InstanceId: string;
@@ -2367,6 +2391,8 @@ declare interface Dcdb {
   IsolateHourDCDBInstance(data: IsolateHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateHourDCDBInstanceResponse>;
   /** 杀死指定会话 {@link KillSessionRequest} {@link KillSessionResponse} */
   KillSession(data: KillSessionRequest, config?: AxiosRequestConfig): AxiosPromise<KillSessionResponse>;
+  /** 修改账号配置 {@link ModifyAccountConfigRequest} {@link ModifyAccountConfigResponse} */
+  ModifyAccountConfig(data: ModifyAccountConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountConfigResponse>;
   /** 修改数据库账号备注 {@link ModifyAccountDescriptionRequest} {@link ModifyAccountDescriptionResponse} */
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
   /** 修改云数据库实例账号的权限信息 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */

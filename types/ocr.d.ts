@@ -3388,6 +3388,36 @@ declare interface RecognizePhilippinesTinIDOCRResponse {
   RequestId?: string;
 }
 
+declare interface RecognizePhilippinesUMIDOCRRequest {
+  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 是否返回人像照片。 */
+  ReturnHeadImage?: boolean;
+}
+
+declare interface RecognizePhilippinesUMIDOCRResponse {
+  /** 姓 */
+  Surname?: TextDetectionResult;
+  /** 中间名 */
+  MiddleName?: TextDetectionResult;
+  /** 名 */
+  GivenName?: TextDetectionResult;
+  /** 地址 */
+  Address?: TextDetectionResult;
+  /** 生日 */
+  Birthday?: TextDetectionResult;
+  /** crn码 */
+  CRN?: TextDetectionResult;
+  /** 性别 */
+  Sex?: TextDetectionResult;
+  /** 人像照片Base64后的结果 */
+  HeadPortrait?: TextDetectionResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizePhilippinesVoteIDOCRRequest {
   /** 是否返回人像照片。 */
   ReturnHeadImage: boolean;
@@ -4371,6 +4401,8 @@ declare interface Ocr {
   RecognizePhilippinesSssIDOCR(data: RecognizePhilippinesSssIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesSssIDOCRResponse>;
   /** 菲律宾TinID识别 {@link RecognizePhilippinesTinIDOCRRequest} {@link RecognizePhilippinesTinIDOCRResponse} */
   RecognizePhilippinesTinIDOCR(data: RecognizePhilippinesTinIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesTinIDOCRResponse>;
+  /** 菲律宾UMID识别 {@link RecognizePhilippinesUMIDOCRRequest} {@link RecognizePhilippinesUMIDOCRResponse} */
+  RecognizePhilippinesUMIDOCR(data?: RecognizePhilippinesUMIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesUMIDOCRResponse>;
   /** 菲律宾VoteID识别 {@link RecognizePhilippinesVoteIDOCRRequest} {@link RecognizePhilippinesVoteIDOCRResponse} */
   RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
   /** 表格识别（V3） {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */
