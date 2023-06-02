@@ -2934,6 +2934,26 @@ declare interface VulAffectedImageInfo {
   ComponentList: VulAffectedImageComponentInfo[];
 }
 
+/** 漏洞影响的仓库镜像列表 */
+declare interface VulAffectedRegistryImageInfo {
+  /** 镜像ID */
+  ImageID: string;
+  /** 镜像名称 */
+  ImageName: string;
+  /** 镜像版本 */
+  ImageTag: string;
+  /** 镜像命名空间 */
+  Namespace: string;
+  /** 镜像地址 */
+  ImageRepoAddress: string;
+  /** 组件列表 */
+  ComponentList: VulAffectedImageComponentInfo[];
+  /** 是否为镜像的最新版本 */
+  IsLatestImage: boolean;
+  /** 内部镜像资产ID */
+  ImageAssetId: number;
+}
+
 /** 漏洞防御事件详情 */
 declare interface VulDefenceEvent {
   /** 漏洞CVEID */
@@ -8712,6 +8732,30 @@ declare interface DescribeVulLevelSummaryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVulRegistryImageListRequest {
+  /** 漏洞ID */
+  PocID: string;
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。OnlyAffectedNewestImage bool 是否影响最新镜像ImageDigest 镜像Digest，支持模糊查询ImageId 镜像ID，支持模糊查询Namespace 命名空间，支持模糊查询ImageTag 镜像版本，支持模糊查询InstanceName 实例名称，支持模糊查询ImageName 镜像名，支持模糊查询ImageRepoAddress 镜像地址，支持模糊查询 */
+  Filters?: AssetFilters[];
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeVulRegistryImageListResponse {
+  /** 镜像总数 */
+  TotalCount: number;
+  /** 仓库镜像列表 */
+  List: VulAffectedRegistryImageInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVulScanAuthorizedImageSummaryRequest {
 }
 
@@ -10257,6 +10301,8 @@ declare interface Tcss {
   DescribeVulLevelImageSummary(data?: DescribeVulLevelImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelImageSummaryResponse>;
   /** 查询漏洞各威胁等级统计数 {@link DescribeVulLevelSummaryRequest} {@link DescribeVulLevelSummaryResponse} */
   DescribeVulLevelSummary(data: DescribeVulLevelSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelSummaryResponse>;
+  /** 查询漏洞影响的仓库镜像列表 {@link DescribeVulRegistryImageListRequest} {@link DescribeVulRegistryImageListResponse} */
+  DescribeVulRegistryImageList(data: DescribeVulRegistryImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulRegistryImageListResponse>;
   /** 统计漏洞扫描页已授权和未扫描镜像数 {@link DescribeVulScanAuthorizedImageSummaryRequest} {@link DescribeVulScanAuthorizedImageSummaryResponse} */
   DescribeVulScanAuthorizedImageSummary(data?: DescribeVulScanAuthorizedImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanAuthorizedImageSummaryResponse>;
   /** 查询漏洞扫描任务信息 {@link DescribeVulScanInfoRequest} {@link DescribeVulScanInfoResponse} */

@@ -829,7 +829,7 @@ declare interface Partners {
   DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
   /** 代理商自付订单查询接口（预付费） {@link DescribeAgentSelfPayDealsV2Request} {@link DescribeAgentSelfPayDealsV2Response} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
-  /** 查询客户余额 {@link DescribeClientBalanceRequest} {@link DescribeClientBalanceResponse} */
+  /** @deprecated 查询客户余额 {@link DescribeClientBalanceRequest} {@link DescribeClientBalanceResponse} */
   DescribeClientBalance(data: DescribeClientBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceResponse>;
   /** 查询客户余额（新） {@link DescribeClientBalanceNewRequest} {@link DescribeClientBalanceNewResponse} */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;

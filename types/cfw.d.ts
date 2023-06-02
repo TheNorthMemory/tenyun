@@ -52,6 +52,10 @@ declare interface AssociatedInstanceInfo {
   Ip: string | null;
   /** 关联安全组数量 */
   SecurityGroupCount: number | null;
+  /** 关联安全组规则数量 */
+  SecurityGroupRuleCount?: number | null;
+  /** 关联数据库代理Id */
+  CdbId?: string | null;
 }
 
 /** 规则关联的beta任务 */
@@ -302,6 +306,8 @@ declare interface InstanceInfo {
   InsSource: string;
   /** [a,b] */
   ResourcePath: string[] | null;
+  /** 扫描结果 */
+  Server?: string[] | null;
 }
 
 /** 黑白名单IOC列表 */

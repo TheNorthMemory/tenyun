@@ -957,13 +957,15 @@ declare interface AssetWebFrameBaseInfo {
   /** 主机名称 */
   MachineName?: string;
   /** 数据更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 首次采集时间 */
   FirstTime?: string;
   /** 是否新增[0:否|1:是] */
   IsNew?: number;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 应用路径 */
+  Path?: string;
 }
 
 /** 资产管理Web站点列表信息 */

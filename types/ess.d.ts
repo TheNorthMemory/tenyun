@@ -116,7 +116,7 @@ declare interface Caller {
   ApplicationId?: string;
   /** 主机构ID */
   OrganizationId?: string;
-  /** 经办人的用户ID */
+  /** 经办人的用户ID，同UserId */
   OperatorId?: string;
   /** 下属机构ID */
   SubOrganizationId?: string;
@@ -266,19 +266,19 @@ declare interface FileInfo {
 
 /** 下载文件的URL信息 */
 declare interface FileUrl {
-  /** 下载文件的URL */
+  /** 下载文件的URL，有效期为输入的UrlTtl，默认5分钟 */
   Url: string;
-  /** 下载文件的附加信息 */
+  /** 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽 */
   Option: string | null;
 }
 
 /** 补充签署人信息 */
 declare interface FillApproverInfo {
-  /** 签署人签署Id */
+  /** 对应模板中的参与方ID */
   RecipientId: string;
   /** 签署人来源WEWORKAPP: 企业微信 */
   ApproverSource: string;
-  /** 企业自定义账号IdWEWORKAPP场景下指企业自有应用获取企微明文的userid */
+  /** 企业自定义账号IDWEWORKAPP场景下指企业自有应用获取企微明文的userid */
   CustomUserId: string;
 }
 
@@ -292,31 +292,31 @@ declare interface Filter {
 
 /** 签署人详情信息 */
 declare interface FlowApproverDetail {
-  /** 签署人信息 */
+  /** 签署时的相关信息 */
   ApproveMessage?: string | null;
-  /** 签署人名字 */
+  /** 签署方姓名 */
   ApproveName: string;
-  /** 签署人的状态0：还没有发起1：流程中 没有开始处理2：待处理3：签署态4：拒绝态5：过期没人处理6：取消态7：还没有预发起8：待填写9：因为各种原因而终止 */
+  /** 签署方的签署状态0：还没有发起1：流程中 没有开始处理2：待签署3：已签署4：已拒绝5：已过期6：已撤销7：还没有预发起8：待填写9：因为各种原因而终止10：填写完成15：已解除19：转他人处理 */
   ApproveStatus: number;
-  /** 模板配置时候的签署人id,与控件绑定 */
+  /** 模板配置中的参与方ID,与控件绑定 */
   ReceiptId: string;
-  /** 客户自定义userId */
+  /** 客户自定义的用户ID */
   CustomUserId: string | null;
   /** 签署人手机号 */
   Mobile: string;
-  /** 签署顺序 */
+  /** 签署顺序，如果是有序签署，签署顺序从小到大 */
   SignOrder: number;
-  /** 签署人签署时间 */
+  /** 签署人签署时间，时间戳，单位秒 */
   ApproveTime: number;
-  /** 参与者类型 */
+  /** 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签 */
   ApproveType: string | null;
-  /** 签署人侧用户来源 */
+  /** 签署方侧用户来源，如WEWORKAPP-企业微信等 */
   ApproverSource: string | null;
-  /** 客户自定义签署人标识 */
+  /** 客户自定义签署方标识 */
   CustomApproverTag: string | null;
-  /** 签署人企业Id */
+  /** 签署方企业Id */
   OrganizationId: string | null;
-  /** 签署人企业名称 */
+  /** 签署方企业名称 */
   OrganizationName: string | null;
 }
 
@@ -336,17 +336,17 @@ declare interface FlowApproverUrlInfo {
 
 /** 流程信息摘要 */
 declare interface FlowBrief {
-  /** 流程的编号 */
+  /** 流程的编号ID */
   FlowId: string;
   /** 流程的名称 */
   FlowName: string;
-  /** 流程的描述 */
+  /** 流程的描述信息 */
   FlowDescription: string | null;
   /** 流程的类型 */
   FlowType: string;
-  /** 流程状态- `0` 还没有发起- `1` 未签署- `2` 部分签署- `3` 已退回- `4` 完成签署- `5` 已过期- `6` 已取消- `7` 还没有预发起- `8` 等待填写- `9` 部分填写- `10` 拒填 */
+  /** 流程状态- 0 还没有发起- 1 待签署- 2 部分签署- 3 已拒签- 4 已签署- 5 已过期- 6 已撤销- 7 还没有预发起- 8 等待填写- 9 部分填写- 10 拒填- 21 已解除 */
   FlowStatus: number | null;
-  /** 流程创建的时间戳 */
+  /** 流程创建的时间戳，单位秒 */
   CreatedOn: number | null;
   /** 拒签或者取消的原因描述 */
   FlowMessage: string | null;
@@ -358,7 +358,7 @@ declare interface FlowBrief {
 
 /** 创建流程的签署方信息 */
 declare interface FlowCreateApprover {
-  /** 参与者类型：0：企业1：个人3：企业静默签署注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。 */
+  /** 参与者类型：0：企业1：个人3：企业静默签署注：类型为3（企业静默签署）时，会默认完成该签署方的签署。静默签署仅进行盖章操作，不能是手写签名。 */
   ApproverType: number;
   /** 如果签署方为企业，需要填入企业全称 */
   OrganizationName?: string;
@@ -370,7 +370,7 @@ declare interface FlowCreateApprover {
   ApproverIdCardType?: string;
   /** 签署方经办人证件号码 */
   ApproverIdCardNumber?: string;
-  /** 签署方经办人在模板中的角色ID */
+  /** 签署方经办人在模板中的参与方ID */
   RecipientId?: string;
   /** 签署意愿确认渠道,WEIXINAPP:人脸识别 */
   VerifyChannel?: string[];
@@ -398,21 +398,21 @@ declare interface FlowCreateApprover {
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
 declare interface FlowDetailInfo {
-  /** 合同(流程)的Id */
+  /** 合同(流程)的ID */
   FlowId: string;
   /** 合同(流程)的名字 */
   FlowName: string;
   /** 合同(流程)的类型 */
   FlowType: string | null;
-  /** 流程状态- 0 还没有发起- 1 未签署- 2 部分签署- 3 已退回- 4 完成签署- 5 已过期- 6 已取消- 7 还没有预发起- 8 等待填写- 9 部分填写- 10 拒填 */
+  /** 流程状态- 0 还没有发起- 1 待签署- 2 部分签署- 3 已拒签- 4 已签署- 5 已过期- 6 已撤销- 7 还没有预发起- 8 等待填写- 9 部分填写- 10 拒填- 21 已解除 */
   FlowStatus: number;
   /** 合同(流程)的信息 */
   FlowMessage: string | null;
   /** 流程的描述 */
   FlowDescription: string | null;
-  /** 合同(流程)的创建时间戳 */
+  /** 合同(流程)的创建时间戳，单位秒 */
   CreatedOn: number;
-  /** 合同(流程)的签署人数组 */
+  /** 合同(流程)的签署方数组 */
   FlowApproverInfos: FlowApproverDetail[];
   /** 合同(流程)的关注方信息列表 */
   CcInfos?: FlowApproverDetail[];

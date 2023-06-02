@@ -802,6 +802,52 @@ declare interface CompleteCertificateResponse {
   RequestId?: string;
 }
 
+declare interface CreateCertificateByPackageRequest {
+  /** 证书产品PID。 */
+  ProductPid: number;
+  /** 要消耗的权益包ID。 */
+  PackageIds: string[];
+  /** 证书域名数量。 */
+  DomainCount: string;
+  /** 多年期证书年限。 */
+  Period: number;
+  /** 要续费的原证书ID（续费时填写）。 */
+  OldCertificateId?: string;
+  /** 续费时CSR生成方式（original、upload、online）。 */
+  RenewGenCsrMethod?: string;
+  /** 续费时选择上传CSR时填写CSR。 */
+  RenewCsr?: string;
+  /** 续费证书CSR的算法类型。 */
+  RenewAlgorithmType?: string;
+  /** 续费证书CSR的算法参数。 */
+  RenewAlgorithmParam?: string;
+  /** 项目ID。 */
+  ProjectId?: number;
+  /** 标签。 */
+  Tags?: Tags[];
+  /** 续费证书的私钥密码。 */
+  RenewKeyPass?: string;
+  /** 批量购买证书时预填写的域名。 */
+  DomainNames?: string;
+  /** 批量购买证书数量。 */
+  CertificateCount?: number;
+  /** 预填写的管理人ID。 */
+  ManagerId?: number;
+  /** 预填写的公司ID。 */
+  CompanyId?: number;
+  /** 验证方式 */
+  VerifyType?: string;
+}
+
+declare interface CreateCertificateByPackageResponse {
+  /** 证书ID。 */
+  CertificateId?: string;
+  /** 批量购买证书时返回多个证书ID。 */
+  CertificateIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCertificateRequest {
   /** 证书商品ID，3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书，25 = Wotrus 域名型证书，26 = Wotrus 域名型多域名证书，27 = Wotrus 域名型通配符证书，28 = Wotrus 企业型证书，29 = Wotrus 企业型多域名证书，30 = Wotrus 企业型通配符证书，31 = Wotrus 增强型证书，32 = Wotrus 增强型多域名证书，33 = DNSPod 国密域名型证书，34 = DNSPod 国密域名型多域名证书，35 = DNSPod 国密域名型通配符证书，37 = DNSPod 国密企业型证书，38 = DNSPod 国密企业型多域名证书，39 = DNSPod 国密企业型通配符证书，40 = DNSPod 国密增强型证书，41 = DNSPod 国密增强型多域名证书，42 = TrustAsia 域名型通配符多域名证书。 */
   ProductId: number;
@@ -1909,6 +1955,8 @@ declare interface Ssl {
   CompleteCertificate(data: CompleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteCertificateResponse>;
   /** 创建付费证书 {@link CreateCertificateRequest} {@link CreateCertificateResponse} */
   CreateCertificate(data: CreateCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateResponse>;
+  /** 使用权益点创建证书 {@link CreateCertificateByPackageRequest} {@link CreateCertificateByPackageResponse} */
+  CreateCertificateByPackage(data: CreateCertificateByPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateByPackageResponse>;
   /** 删除证书 {@link DeleteCertificateRequest} {@link DeleteCertificateResponse} */
   DeleteCertificate(data: DeleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificateResponse>;
   /** 删除管理人 {@link DeleteManagerRequest} {@link DeleteManagerResponse} */

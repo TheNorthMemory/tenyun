@@ -472,7 +472,7 @@ declare interface IdleLoadBalancer {
 declare interface InternetAccessible {
   /** TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;BANDWIDTH_PACKAGE 按带宽包计费; */
   InternetChargeType?: string | null;
-  /** 最大出带宽，单位Mbps，仅对公网属性的共享型、性能容量型和独占型 CLB 实例、以及内网属性的性能容量型 CLB 实例生效。- 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。- 对于公网属性和内网属性的性能容量型 CLB实例 - 当您开通了普通规格的性能容量型时，最大出带宽的范围为1Mbps-10240Mbps。普通规格的性能容量型正在内测中，请提交 [内测申请](https://cloud.tencent.com/apply/p/hf45esx99lf)。 - 当您开通了超大型规格的性能容量型时，最大出带宽的范围为1Mbps-61440Mbps。超大型规格的性能容量型正在内测中，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category)。 */
+  /** 最大出带宽，单位Mbps，仅对公网属性的共享型、性能容量型和独占型 CLB 实例、以及内网属性的性能容量型 CLB 实例生效。- 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。- 对于公网属性和内网属性的性能容量型 CLB实例 - 默认为普通规格的性能容量型实例，SLA对应超强型1规格，最大出带宽的范围为1Mbps-10240Mbps。 - 当您开通了超大型规格的性能容量型时，最大出带宽的范围为1Mbps-61440Mbps。超大型规格的性能容量型正在内测中，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category)。 */
   InternetMaxBandwidthOut?: number | null;
   /** 带宽包的类型，如SINGLEISP */
   BandwidthpkgSubType?: string | null;
@@ -860,6 +860,8 @@ declare interface Resource {
   Isp: string;
   /** 可用资源。 */
   AvailabilitySet: ResourceAvailability[] | null;
+  /** 运营商类型信息 */
+  TypeSet?: TypeInfo[] | null;
 }
 
 /** 资源可用性 */
@@ -1052,6 +1054,14 @@ declare interface SnatIp {
   Ip?: string;
 }
 
+/** 规格可用性 */
+declare interface SpecAvailability {
+  /** 规格类型 */
+  SpecType?: string | null;
+  /** 规格可用性 */
+  Availability?: string | null;
+}
+
 /** 负载均衡的标签信息 */
 declare interface TagInfo {
   /** 标签的键 */
@@ -1164,6 +1174,14 @@ declare interface TargetRegionInfo {
   Region: string;
   /** Target所属网络，私有网络格式如 vpc-abcd1234，如果是基础网络，则为"0" */
   VpcId: string;
+}
+
+/** 运营商类型信息 */
+declare interface TypeInfo {
+  /** 运营商类型 */
+  Type?: string | null;
+  /** 规格可用性 */
+  SpecAvailabilitySet?: SpecAvailability[] | null;
 }
 
 /** 可用区相关信息 */
@@ -1399,7 +1417,7 @@ declare interface CreateLoadBalancerRequest {
   MasterZoneId?: string;
   /** 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。 */
   ZoneId?: string;
-  /** 仅适用于公网负载均衡。负载均衡的网络计费模式。 */
+  /** 仅对内网属性的性能容量型实例和公网属性的所有实例生效。 */
   InternetAccessible?: InternetAccessible;
   /** 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 */
   VipIsp?: string;
@@ -1411,7 +1429,7 @@ declare interface CreateLoadBalancerRequest {
   BandwidthPackageId?: string;
   /** 独占型实例信息。若创建独占型的内网负载均衡实例，则此参数必填。 */
   ExclusiveCluster?: ExclusiveCluster;
-  /** 创建性能容量型实例。若需要创建性能容量型实例，则此参数必填，且取值为：SLA，表示创建按量计费模式下的默认规格的性能容量型实例。当您开通了普通规格的性能容量型时，SLA对应超强型1规格。普通规格的性能容量型正在内测中，请提交 [内测申请](https://cloud.tencent.com/apply/p/hf45esx99lf)。当您开通了超大型规格的性能容量型时，SLA对应超强型4规格。超大型规格的性能容量型正在内测中，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category)。若需要创建共享型实例，则无需填写此参数。 */
+  /** 创建性能容量型实例。若需要创建性能容量型实例，则此参数必填，且取值为：SLA，表示创建按量计费模式下的默认规格的性能容量型实例。默认为普通规格的性能容量型实例，SLA对应超强型1规格。当您开通了超大型规格的性能容量型时，SLA对应超强型4规格。超大型规格的性能容量型正在内测中，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category)。若需要创建共享型实例，则无需填写此参数。 */
   SlaType?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -1427,13 +1445,15 @@ declare interface CreateLoadBalancerRequest {
   EipAddressId?: string;
   /** Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。 */
   LoadBalancerPassToTarget?: boolean;
+  /** 创建域名化负载均衡。 */
+  DynamicVip?: boolean;
 }
 
 declare interface CreateLoadBalancerResponse {
   /** 由负载均衡实例唯一 ID 组成的数组。存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过DescribeTaskStatus接口查询创建的资源ID。 */
-  LoadBalancerIds: string[] | null;
+  LoadBalancerIds?: string[] | null;
   /** 订单号。 */
-  DealName: string | null;
+  DealName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
