@@ -1016,6 +1016,10 @@ declare interface CreateDedicatedClusterDCDBInstanceRequest {
 }
 
 declare interface CreateDedicatedClusterDCDBInstanceResponse {
+  /** 分配资源ID数组 */
+  InstanceIds?: string[];
+  /** 流程ID */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

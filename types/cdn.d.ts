@@ -1522,6 +1522,8 @@ declare interface Origin {
   PathRules?: PathRule[] | null;
   /** 分路径回源配置 */
   PathBasedOrigin?: PathBasedOriginRule[] | null;
+  /** HTTPS回源SNI配置 */
+  Sni?: OriginSni | null;
   /** HTTPS回源高级配置 */
   AdvanceHttps?: AdvanceHttps | null;
   /** 对象存储回源厂商，当源站类型为第三方存储源站(third_party)时必填，可选值包括以下:aws_s3: AWS S3ali_oss: 阿里云 OSShw_obs: 华为 OBSqiniu_kodo: 七牛云 kodoothers: 其它厂商对象存储,仅支持兼容以AWS签名算法的对象存储，如腾讯云金融专区COS */
@@ -1568,6 +1570,14 @@ declare interface OriginPullTimeout {
   ConnectTimeout: number | null;
   /** 回源接收超时时间，单位为秒，要求10 ~ 300之间 */
   ReceiveTimeout: number | null;
+}
+
+/** HTTPS回源SNI */
+declare interface OriginSni {
+  /** 是否开启HTTPS回源SNI。开启：on，关闭：off */
+  Switch: string;
+  /** 回源域名。 */
+  ServerName: string | null;
 }
 
 /** oss回源鉴权 */

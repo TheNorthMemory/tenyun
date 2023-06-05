@@ -3638,6 +3638,30 @@ declare interface VulLevelInfo {
   Count: number;
 }
 
+/** 漏洞仓库列表信息 */
+declare interface VulStoreListInfo {
+  /** 漏洞ID */
+  VulId: number;
+  /** 漏洞级别 */
+  Level: number;
+  /** 漏洞名称 */
+  Name: string;
+  /** cve编号 */
+  CveId: string;
+  /** 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞 */
+  VulCategory: number;
+  /** 发布时间 */
+  PublishDate: string;
+  /** 漏洞检测方法 0 - 版本比对, 1 - POC验证 */
+  Method?: number;
+  /** 漏洞攻击热度 */
+  AttackLevel?: number;
+  /** 漏洞是否支持自动修复0-windows/linux均关闭; 1-windows/linux均打开; 2-仅linux; 3-仅windows */
+  FixSwitch?: number;
+  /** 漏洞是否支持防御0:不支持 1:支持 */
+  SupportDefense?: number;
+}
+
 /** 漏洞top统计实体 */
 declare interface VulTopInfo {
   /** 漏洞 名 */
@@ -6814,16 +6838,6 @@ declare interface DescribeRiskDnsListResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSaveOrUpdateWarningsRequest {
-  /** 告警设置的修改内容 */
-  WarningObjects?: WarningObject[];
-}
-
-declare interface DescribeSaveOrUpdateWarningsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeScanMalwareScheduleRequest {
 }
 
@@ -7448,6 +7462,32 @@ declare interface DescribeVulListResponse {
   TotalCount?: number | null;
   /** 重点关注漏洞总数 */
   FollowVulCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulStoreListRequest {
+  /** VulName- string - 是否必填：否 - 漏洞名称CveId- string - 是否必填：否 - cveidVulCategory- string - 是否必填：否 - 漏洞分类 1 Web-CMS漏洞 ,2 应用漏洞 ,4 Linux软件漏洞,5 Windows系统漏洞Method- string - 是否必填：否 - 检测方法 0版本对比,1 poc检测 SupportDefense- string - 是否必填：否 - 是否支持防御 0不支持,1支持FixSwitch- string - 是否必填：否 - 是否支持自动修复 0不支持,1支持 */
+  Filters?: Filter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列: [PublishDate] */
+  By?: string;
+}
+
+declare interface DescribeVulStoreListResponse {
+  /** 漏洞信息 */
+  List?: VulStoreListInfo[] | null;
+  /** 总数 */
+  TotalCount?: number;
+  /** 今日剩余搜索此时 */
+  Remaining?: number;
+  /** 免费搜索次数 */
+  FreeSearchTimes?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8993,8 +9033,6 @@ declare interface Cwp {
   DescribeRiskDnsEventList(data?: DescribeRiskDnsEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsEventListResponse>;
   /** 获取恶意请求列表 {@link DescribeRiskDnsListRequest} {@link DescribeRiskDnsListResponse} */
   DescribeRiskDnsList(data?: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
-  /** @deprecated 更新用户告警设置 {@link DescribeSaveOrUpdateWarningsRequest} {@link DescribeSaveOrUpdateWarningsResponse} */
-  DescribeSaveOrUpdateWarnings(data?: DescribeSaveOrUpdateWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaveOrUpdateWarningsResponse>;
   /** 查询木马扫描进度 {@link DescribeScanMalwareScheduleRequest} {@link DescribeScanMalwareScheduleResponse} */
   DescribeScanMalwareSchedule(data?: DescribeScanMalwareScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanMalwareScheduleResponse>;
   /** 查询检测进度 {@link DescribeScanScheduleRequest} {@link DescribeScanScheduleResponse} */
@@ -9053,6 +9091,8 @@ declare interface Cwp {
   DescribeVulLevelCount(data?: DescribeVulLevelCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelCountResponse>;
   /** 漏洞列表 {@link DescribeVulListRequest} {@link DescribeVulListResponse} */
   DescribeVulList(data?: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
+  /** 获取漏洞库列表 {@link DescribeVulStoreListRequest} {@link DescribeVulStoreListResponse} */
+  DescribeVulStoreList(data?: DescribeVulStoreListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulStoreListResponse>;
   /** 获取漏洞top统计 {@link DescribeVulTopRequest} {@link DescribeVulTopResponse} */
   DescribeVulTop(data: DescribeVulTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTopResponse>;
   /** 获取当前用户告警列表 {@link DescribeWarningListRequest} {@link DescribeWarningListResponse} */

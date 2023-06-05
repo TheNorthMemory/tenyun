@@ -94,6 +94,8 @@ declare interface TextResetResponse {
   SessionAttributes?: string | null;
   /** 结果类型 {中间逻辑出错:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3; 未匹配上，返回预设兜底话术:5; 未匹配上，返回相似问题列表:6}。 */
   ResultType?: string | null;
+  /** 机器人对话的应答文本。 */
+  ResponseText?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

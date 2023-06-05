@@ -308,6 +308,18 @@ declare interface DataEngineInfo {
   ElasticSwitch?: boolean | null;
   /** spark jar 包年包月集群弹性上限 */
   ElasticLimit?: number | null;
+  /** 是否为默认引擎 */
+  DefaultHouse?: boolean | null;
+  /** 单个集群任务最大并发数 */
+  MaxConcurrency?: number | null;
+  /** 任务排队上限时间 */
+  TolerableQueueTime?: number | null;
+  /** 用户appid */
+  UserAppId?: number | null;
+  /** 用户uin */
+  UserUin?: string | null;
+  /** SessionResourceTemplate */
+  SessionResourceTemplate?: SessionResourceTemplate | null;
 }
 
 /** 数据表数据格式。 */
@@ -366,7 +378,7 @@ declare interface DatabaseResponseInfo {
   UserSubUin: string | null;
   /** 数据治理配置项 */
   GovernPolicy: DataGovernPolicy | null;
-  /** 数据库ID */
+  /** 数据库ID（无效字段） */
   DatabaseId: string | null;
 }
 
@@ -662,6 +674,18 @@ declare interface Script {
   UpdateTime: number | null;
 }
 
+/** Spark批作业集群Session资源配置模板； */
+declare interface SessionResourceTemplate {
+  /** driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
+  DriverSize?: string | null;
+  /** executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
+  ExecutorSize?: string | null;
+  /** 指定executor数量，最小值为1，最大值小于集群规格 */
+  ExecutorNums?: number | null;
+  /** 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums） */
+  ExecutorMaxNumbers?: number | null;
+}
+
 /** spark作业详情。 */
 declare interface SparkJobInfo {
   /** spark作业ID */
@@ -742,6 +766,8 @@ declare interface SparkJobInfo {
   DataEngineClusterType?: string | null;
   /** Spark 3.2-EMR */
   DataEngineImageVersion?: string | null;
+  /** 任务资源配置是否继承集群模板，0（默认）不继承，1：继承 */
+  IsInherit?: number | null;
 }
 
 /** SparkSQL批任务运行日志 */
@@ -904,6 +930,8 @@ declare interface TableResponseInfo {
   StorageSize: number | null;
   /** 数据表行数 */
   RecordCount: number | null;
+  /** xxxx */
+  MapMaterializedViewName?: string | null;
 }
 
 /** 标签对信息 */
@@ -988,6 +1016,16 @@ declare interface TaskResponseInfo {
   TotalTime: number | null;
   /** spark app job执行task的程序入口参数 */
   CmdArgs: string | null;
+  /** 集群镜像大版本名称 */
+  ImageVersion: string | null;
+  /** driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
+  DriverSize?: string | null;
+  /** executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
+  ExecutorSize?: string | null;
+  /** 指定executor数量，最小值为1，最大值小于集群规格 */
+  ExecutorNums?: number | null;
+  /** 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums） */
+  ExecutorMaxNumbers?: number | null;
 }
 
 /** 任务结果信息。 */
@@ -1491,6 +1529,8 @@ declare interface CreateDataEngineRequest {
   ElasticSwitch?: boolean;
   /** spark jar 包年包月集群弹性上限 */
   ElasticLimit?: number;
+  /** spark作业集群session资源配置模板 */
+  SessionResourceTemplate?: SessionResourceTemplate;
 }
 
 declare interface CreateDataEngineResponse {
@@ -1731,6 +1771,8 @@ declare interface CreateSparkAppRequest {
   AppExecutorMaxNumbers?: number;
   /** 关联dlc查询脚本id */
   SessionId?: string;
+  /** 任务资源配置是否继承集群模板，0（默认）不继承，1：继承 */
+  IsInherit?: number;
 }
 
 declare interface CreateSparkAppResponse {
@@ -2859,6 +2901,8 @@ declare interface ModifySparkAppRequest {
   AppExecutorMaxNumbers?: number;
   /** 关联dlc查询脚本 */
   SessionId?: string;
+  /** 任务资源配置是否继承集群配置模板：0（默认）不继承、1：继承 */
+  IsInherit?: number;
 }
 
 declare interface ModifySparkAppResponse {

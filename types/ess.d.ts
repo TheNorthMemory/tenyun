@@ -106,8 +106,12 @@ declare interface AutoSignConfig {
 declare interface CallbackInfo {
   /** 回调url */
   CallbackUrl: string;
-  /** 回调加密token */
-  Token: string;
+  /** 回调加密key，已废弃 */
+  Token?: string;
+  /** 回调加密key */
+  CallbackKey?: string | null;
+  /** 回调验签token */
+  CallbackToken?: string | null;
 }
 
 /** 此结构体 (Caller) 用于描述调用方属性。 */
@@ -438,7 +442,7 @@ declare interface GroupOrganization {
   Alias?: string | null;
   /** 成员企业id */
   OrganizationId?: string | null;
-  /** 更新时间 */
+  /** 更新时间，时间戳，单位秒 */
   UpdateTime?: number | null;
   /** 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入 */
   Status?: number | null;
@@ -450,11 +454,11 @@ declare interface GroupOrganization {
   AdminInfo?: Admin | null;
   /** 企业许可证 */
   License?: string | null;
-  /** 企业许可证过期时间 */
+  /** 企业许可证过期时间，时间戳，单位秒 */
   LicenseExpireTime?: number | null;
-  /** 成员企业加入集团时间 */
+  /** 成员企业加入集团时间，时间戳，单位秒 */
   JoinTime?: number | null;
-  /** 是否可以使用审批流引擎 */
+  /** 是否使用审批流引擎，true-是，false-否 */
   FlowEngineEnable?: boolean | null;
 }
 
@@ -466,7 +470,7 @@ declare interface IntegrateRole {
   RoleName?: string | null;
   /** 角色状态，1-启用，2-禁用 */
   RoleStatus?: number | null;
-  /** 是否是集团角色 */
+  /** 是否是集团角色，true-是，false-否 */
   IsGroupRole?: boolean | null;
   /** 管辖的子企业列表 */
   SubOrgIdList?: string[] | null;
@@ -488,9 +492,9 @@ declare interface OccupiedSeal {
   SealId: string;
   /** 电子印章名称 */
   SealName: string;
-  /** 电子印章授权时间戳 */
+  /** 电子印章授权时间戳，单位秒 */
   CreateOn: number;
-  /** 电子印章授权人 */
+  /** 电子印章授权人的UserId */
   Creator: string;
   /** 电子印章策略Id */
   SealPolicyId: string;
@@ -500,9 +504,9 @@ declare interface OccupiedSeal {
   FailReason: string | null;
   /** 印章图片url，5分钟内有效 */
   Url: string;
-  /** 印章类型 */
+  /** 印章类型,OFFICIAL-企业公章, CONTRACT-合同专用章,ORGANIZATIONSEAL-企业印章(本地上传印章类型),LEGAL_PERSON_SEAL-法人印章 */
   SealType: string;
-  /** 用印申请是否为永久授权 */
+  /** 用印申请是否为永久授权，true-是，false-否 */
   IsAllTime: boolean;
   /** 授权人列表 */
   AuthorizedUsers: AuthorizedUser[] | null;
@@ -530,25 +534,25 @@ declare interface PdfVerifyResult {
   SignPlatform: string;
   /** 签署人名称 */
   SignerName: string;
-  /** 签署时间 */
+  /** 签署时间戳，单位秒 */
   SignTime: number;
   /** 签名算法 */
   SignAlgorithm: string;
   /** 签名证书序列号 */
   CertSn: string;
-  /** 证书起始时间 */
+  /** 证书起始时间戳，单位秒 */
   CertNotBefore: number;
-  /** 证书过期时间 */
+  /** 证书过期时间戳，单位秒 */
   CertNotAfter: number;
-  /** 签名域横坐标 */
+  /** 签名域横坐标，单位pt */
   ComponentPosX: number;
-  /** 签名域纵坐标 */
+  /** 签名域纵坐标，单位pt */
   ComponentPosY: number;
-  /** 签名域宽度 */
+  /** 签名域宽度，单位pt */
   ComponentWidth: number;
-  /** 签名域高度 */
+  /** 签名域高度，单位pt */
   ComponentHeight: number;
-  /** 签名域所在页码 */
+  /** 签名域所在页码，1～N */
   ComponentPage: number;
 }
 
@@ -566,7 +570,7 @@ declare interface Recipient {
   RequireValidation?: boolean;
   /** 是否需要签署，默认为true */
   RequireSign?: boolean;
-  /** 添加序列 */
+  /** 添加序列，0～N */
   RoutingOrder?: number;
   /** 是否需要发送，默认为true */
   RequireDelivery?: boolean;
@@ -616,11 +620,11 @@ declare interface RelieveInfo {
 
 /** 催办接口返回详细信息 */
 declare interface RemindFlowRecords {
-  /** 是否能够催办 */
+  /** 是否能够催办，true-是，false-否 */
   CanRemind: boolean;
   /** 合同id */
   FlowId: string;
-  /** 催办详情 */
+  /** 催办详情信息 */
   RemindMessage: string;
 }
 
@@ -630,7 +634,7 @@ declare interface SignQrCode {
   QrCodeId: string;
   /** 二维码url */
   QrCodeUrl: string;
-  /** 二维码过期时间 */
+  /** 二维码过期时间戳，单位秒 */
   ExpiredTime: number;
 }
 
@@ -662,9 +666,9 @@ declare interface Staff {
   Department?: Department | null;
   /** 员工是否实名 */
   Verified?: boolean;
-  /** 员工创建时间戳 */
+  /** 员工创建时间戳，单位秒 */
   CreatedOn?: number;
-  /** 员工实名时间戳 */
+  /** 员工实名时间戳，单位秒 */
   VerifiedOn?: number | null;
   /** 员工是否离职：0-未离职，1-离职 */
   QuiteJob?: number | null;
@@ -714,7 +718,7 @@ declare interface SuccessUpdateStaffData {
   UserId?: string;
 }
 
-/** 二期接口返回的模板的信息结构 */
+/** 企业模板的信息结构 */
 declare interface TemplateInfo {
   /** 模板ID */
   TemplateId?: string;
@@ -722,11 +726,11 @@ declare interface TemplateInfo {
   TemplateName?: string;
   /** 模板描述信息 */
   Description?: string;
-  /** 模板关联的资源IDs */
+  /** 模板关联的资源ID列表 */
   DocumentResourceIds?: string[];
   /** 返回的文件信息结构 */
   FileInfos?: FileInfo[];
-  /** 附件关联的资源ID是 */
+  /** 附件关联的资源ID */
   AttachmentResourceIds?: string[];
   /** 签署顺序 */
   SignOrder?: number[];
@@ -738,9 +742,9 @@ declare interface TemplateInfo {
   SignComponents?: Component[];
   /** 模板状态(-1:不可用；0:草稿态；1:正式态) */
   Status?: number;
-  /** 模板的创建人 */
+  /** 模板的创建人UserId */
   Creator?: string;
-  /** 模板创建的时间戳（精确到秒） */
+  /** 模板创建的时间戳，单位秒 */
   CreatedOn?: number;
   /** 发起人角色信息 */
   Promoter?: Recipient;
@@ -748,9 +752,9 @@ declare interface TemplateInfo {
   TemplateType?: number;
   /** 模板可用状态，取值：1启用（默认），2停用 */
   Available?: number;
-  /** 模板创建组织id */
+  /** 创建模板的机构id */
   OrganizationId?: string;
-  /** 模板预览链接 */
+  /** 模板预览链接，有效时间5分钟 */
   PreviewUrl?: string | null;
   /** 模板版本。默认为空时，全数字字符，初始版本为yyyyMMdd001。 */
   TemplateVersion?: string | null;
@@ -791,7 +795,7 @@ declare interface UserThreeFactor {
 }
 
 declare interface BindEmployeeUserIdWithClientOpenIdRequest {
-  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定 */
+  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定。（参数参考示例） */
   Operator: UserInfo;
   /** 电子签系统员工UserId */
   UserId: string;
@@ -813,7 +817,7 @@ declare interface CancelFlowRequest {
   FlowId: string;
   /** 撤销原因，最长200个字符； */
   CancelMessage: string;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
@@ -823,11 +827,11 @@ declare interface CancelFlowResponse {
 }
 
 declare interface CancelMultiFlowSignQRCodeRequest {
-  /** 用户信息 */
+  /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
   /** 二维码id */
   QrCodeId: string;
-  /** 应用信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
@@ -855,7 +859,7 @@ declare interface CreateBatchCancelFlowUrlResponse {
 }
 
 declare interface CreateChannelSubOrganizationModifyQrCodeRequest {
-  /** 操作人 */
+  /** 操作人信息，userId必填 */
   Operator: UserInfo;
   /** 应用编号 */
   ApplicationId: string;
@@ -1073,7 +1077,7 @@ declare interface CreateFlowSignReviewRequest {
   ReviewType: string;
   /** 审核原因 当ReviewType 是REJECT 时此字段必填,字符串长度不超过200 */
   ReviewMessage?: string;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
@@ -1119,7 +1123,7 @@ declare interface CreateIntegrationEmployeesResponse {
 }
 
 declare interface CreateIntegrationUserRolesRequest {
-  /** 操作人信息 */
+  /** 操作人信息，UserId必填 */
   Operator: UserInfo;
   /** 绑定角色的用户id列表 */
   UserIds: string[];
@@ -1137,7 +1141,7 @@ declare interface CreateIntegrationUserRolesResponse {
 }
 
 declare interface CreateMultiFlowSignQRCodeRequest {
-  /** 用户信息 */
+  /** 用户信息，其中UserId为必填参数 */
   Operator: UserInfo;
   /** 模板ID */
   TemplateId: string;
@@ -1190,7 +1194,7 @@ declare interface CreatePrepareFlowRequest {
 }
 
 declare interface CreatePrepareFlowResponse {
-  /** 快速发起预览链接 */
+  /** 快速发起预览链接，有效期5分钟 */
   Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1203,12 +1207,12 @@ declare interface CreatePreparedPersonalEsignRequest {
   IdCardNumber: string;
   /** 印章名称 */
   SealName: string;
-  /** 印章图片的base64，最大不超过 8M */
-  SealImage: string;
   /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator?: UserInfo;
   /** 身份证件类型:ID_CARD 身份证PASSPORT 护照HONGKONG_AND_MACAO 中国香港FOREIGN_ID_CARD 境外身份HONGKONG_MACAO_AND_TAIWAN 中国台湾 */
   IdCardType?: string;
+  /** 印章图片的base64注：已废弃请先通过UploadFiles接口上传文件，获取 FileId */
+  SealImage?: string;
   /** 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。 */
   SealImageCompress?: boolean;
   /** 手机号码；当需要开通自动签时，该参数必传 */
@@ -1219,6 +1223,8 @@ declare interface CreatePreparedPersonalEsignRequest {
   SealColor?: string;
   /** 是否处理印章默认不做印章处理。取值：false：不做任何处理；true：做透明化处理和颜色增强。 */
   ProcessSeal?: boolean;
+  /** 印章图片文件 id取值：填写的FileId通过UploadFiles接口上传文件获取。 */
+  FileId?: string;
 }
 
 declare interface CreatePreparedPersonalEsignResponse {
@@ -1268,14 +1274,14 @@ declare interface CreateSchemeUrlRequest {
 }
 
 declare interface CreateSchemeUrlResponse {
-  /** 小程序链接地址 */
+  /** 小程序链接地址，有效期5分钟 */
   SchemeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateSealPolicyRequest {
-  /** 授权发起人在平台信息，具体参考UserInfo结构体 */
+  /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
   /** 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用 */
   Users: UserInfo[];
@@ -1283,12 +1289,12 @@ declare interface CreateSealPolicyRequest {
   SealId: string;
   /** 授权有效期。时间戳秒级 */
   Expired: number;
-  /** 印章授权内容 */
-  Policy?: string;
-  /** 应用相关 */
-  Agent?: Agent;
   /** 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用 */
   UserIds?: string[];
+  /** 印章授权内容 */
+  Policy?: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreateSealPolicyResponse {
@@ -1299,7 +1305,7 @@ declare interface CreateSealPolicyResponse {
 }
 
 declare interface CreateUserAutoSignEnableUrlRequest {
-  /** 操作人信息 */
+  /** 操作人信息,UserId必填 */
   Operator: UserInfo;
   /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
   SceneKey: string;
@@ -1349,13 +1355,13 @@ declare interface DeleteIntegrationEmployeesResponse {
 }
 
 declare interface DeleteIntegrationRoleUsersRequest {
-  /** 操作人 */
+  /** 操作人信息，userId必填 */
   Operator: UserInfo;
   /** 角色id */
   RoleId: string;
   /** 用户信息 */
   Users: UserInfo[];
-  /** 代理信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
@@ -1367,16 +1373,16 @@ declare interface DeleteIntegrationRoleUsersResponse {
 }
 
 declare interface DeleteSealPoliciesRequest {
-  /** 操作撤销的用户信息 */
+  /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
   /** 印章授权编码数组。这个参数跟下面的SealId其中一个必填，另外一个可选填 */
   PolicyIds?: string[];
-  /** 应用相关 */
-  Agent?: Agent;
   /** 印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填 */
   SealId?: string;
   /** 待授权的员工ID */
   UserIds?: string[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface DeleteSealPoliciesResponse {
@@ -1421,15 +1427,15 @@ declare interface DescribeFileUrlsResponse {
 declare interface DescribeFlowBriefsRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 需要查询的流程ID列表，限制最大20个 */
+  /** 需要查询的流程ID列表，限制最大100个 */
   FlowIds: string[];
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
 declare interface DescribeFlowBriefsResponse {
   /** 流程列表 */
-  FlowBriefs: FlowBrief[];
+  FlowBriefs?: FlowBrief[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1453,7 +1459,7 @@ declare interface DescribeFlowEvidenceReportResponse {
 declare interface DescribeFlowInfoRequest {
   /** 需要查询的流程ID列表，限制最大100个 */
   FlowIds: string[];
-  /** 调用方用户信息 */
+  /** 调用方用户信息，userId 必填 */
   Operator?: UserInfo;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
@@ -1471,18 +1477,18 @@ declare interface DescribeFlowTemplatesRequest {
   Operator: UserInfo;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
+  ContentType?: number;
+  /** 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤 */
+  Filters?: Filter[];
   /** 查询偏移位置，默认0 */
   Offset?: number;
   /** 查询个数，默认20，最大200 */
   Limit?: number;
-  /** 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤 */
-  Filters?: Filter[];
   /** 这个参数跟下面的IsChannel参数配合使用。IsChannel=false时，ApplicationId参数不起任何作用。IsChannel=true时，ApplicationId为空，查询所有第三方应用集成平台企业模板列表；ApplicationId不为空，查询指定应用下的模板列表ApplicationId为空，查询所有应用下的模板列表 */
   ApplicationId?: string;
   /** 默认为false，查询SaaS模板库列表；为true，查询第三方应用集成平台企业模板库管理列表 */
   IsChannel?: boolean;
-  /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
-  ContentType?: number;
   /** 暂未开放 */
   Organization?: OrganizationInfo;
   /** 暂未开放 */
@@ -1492,7 +1498,7 @@ declare interface DescribeFlowTemplatesRequest {
 declare interface DescribeFlowTemplatesResponse {
   /** 模板详情列表 */
   Templates?: TemplateInfo[];
-  /** 查询到的总个数 */
+  /** 查询到的总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1503,6 +1509,8 @@ declare interface DescribeIntegrationEmployeesRequest {
   Operator: UserInfo;
   /** 返回最大数量，最大为20 */
   Limit: number;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
   /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...] */
   Filters?: Filter[];
   /** 偏移量，默认为0，最大为20000 */
@@ -1631,7 +1639,7 @@ declare interface DescribeThirdPartyAuthCodeResponse {
 }
 
 declare interface DescribeUserAutoSignStatusRequest {
-  /** 操作人信息 */
+  /** 操作人信息，UserId必填 */
   Operator: UserInfo;
   /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
   SceneKey: string;
@@ -1651,7 +1659,7 @@ declare interface DescribeUserAutoSignStatusResponse {
 }
 
 declare interface DisableUserAutoSignRequest {
-  /** 操作人信息 */
+  /** 操作人信息,UserId必填 */
   Operator: UserInfo;
   /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
   SceneKey: string;
@@ -1667,7 +1675,7 @@ declare interface DisableUserAutoSignResponse {
 declare interface GetTaskResultApiRequest {
   /** 任务Id，通过CreateConvertTaskApi得到 */
   TaskId: string;
-  /** 操作人信息 */
+  /** 操作人信息,UserId必填 */
   Operator?: UserInfo;
   /** 应用号信息 */
   Agent?: Agent;
