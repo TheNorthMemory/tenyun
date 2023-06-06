@@ -288,7 +288,7 @@ declare interface AccessControlEventInfo {
 declare interface AccessControlRuleInfo {
   /** 开关,true:开启，false:禁用 */
   IsEnable: boolean;
-  /** 生效惊现id，空数组代表全部镜像 */
+  /** 生效镜像id，空数组代表全部镜像 */
   ImageIds: string[];
   /** 用户策略的子策略数组 */
   ChildRules: AccessControlChildRuleInfo[];

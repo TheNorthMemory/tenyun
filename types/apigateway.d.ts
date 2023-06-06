@@ -135,7 +135,7 @@ declare interface ApiIdStatus {
   /** API唯一ID。 */
   ApiId: string;
   /** API描述 */
-  ApiDesc: string;
+  ApiDesc: string | null;
   /** API PATH。 */
   Path: string;
   /** API METHOD。 */
@@ -219,7 +219,7 @@ declare interface ApiInfo {
   /** API 的后端服务配置。 */
   ServiceConfig: ServiceConfig | null;
   /** API的后端服务参数。 */
-  ServiceParameters: ServiceParameter[] | null;
+  ServiceParameters: DescribeApiResultServiceParametersInfo[] | null;
   /** 常量参数。 */
   ConstantParameters: ConstantParameter[] | null;
   /** API 的后端 Mock 返回信息。如果 ServiceType 是 Mock，则此参数必传。 */
@@ -358,14 +358,6 @@ declare interface ApiUsagePlanSet {
   ApiUsagePlanList: ApiUsagePlan[] | null;
 }
 
-/** 描述api列表状态 */
-declare interface ApisStatus {
-  /** 符合条件的 API 接口数量。 */
-  TotalCount: number;
-  /** API 接口列表。 */
-  ApiIdStatusSet: DesApisStatus[];
-}
-
 /** 插件绑定的API信息 */
 declare interface AttachedApiInfo {
   /** API所在服务ID。 */
@@ -463,13 +455,13 @@ declare interface BindApiInfo {
 /** 常量参数 */
 declare interface ConstantParameter {
   /** 常量参数名称。只有 ServiceType 是 HTTP 才会用到此参数。 */
-  Name?: string;
+  Name?: string | null;
   /** 常量参数描述。只有 ServiceType 是 HTTP 才会用到此参数。 */
-  Desc?: string;
+  Desc?: string | null;
   /** 常量参数位置。只有 ServiceType 是 HTTP 才会用到此参数。 */
-  Position?: string;
+  Position?: string | null;
   /** 常量参数默认值。只有 ServiceType 是 HTTP 才会用到此参数。 */
-  DefaultValue?: string;
+  DefaultValue?: string | null;
 }
 
 /** cos类型的api配置 */
@@ -482,6 +474,18 @@ declare interface CosConfig {
   Authorization?: boolean | null;
   /** API后端COS的路径匹配模式，可选值：BackEndPath ： 后端路径匹配FullPath ： 全路径匹配默认值为：BackEndPath */
   PathMatchMode?: string | null;
+}
+
+/** 创建api返回 */
+declare interface CreateApiResultInfo {
+  /** api id */
+  ApiId: string | null;
+  /** 路径 */
+  Path: string | null;
+  /** 请求方法 */
+  Method: string | null;
+  /** 创建时间 */
+  CreatedTime: string | null;
 }
 
 /** 创建api返回 */
@@ -550,6 +554,40 @@ declare interface DesApisStatus {
   Path: string | null;
   /** API 的请求方法，如 GET。 */
   Method: string | null;
+}
+
+/** ServiceParameter */
+declare interface DescribeApiResultServiceParametersInfo {
+  /** API的后端服务参数名称。只有ServiceType是HTTP才会用到此参数。前后端参数名称可不同。 */
+  Name?: string | null;
+  /** API 的后端服务参数位置，如 head。只有 ServiceType 是 HTTP 才会用到此参数。前后端参数位置可配置不同。 */
+  Position?: string | null;
+  /** API 的后端服务参数对应的前端参数位置，如 head。只有 ServiceType 是 HTTP 才会用到此参数。 */
+  RelevantRequestParameterPosition?: string | null;
+  /** API 的后端服务参数对应的前端参数名称。只有 ServiceType 是 HTTP 才会用到此参数。 */
+  RelevantRequestParameterName?: string | null;
+  /** API 的后端服务参数默认值。只有 ServiceType 是 HTTP 才会用到此参数。 */
+  DefaultValue?: string | null;
+  /** API 的后端服务参数备注。只有 ServiceType 是 HTTP 才会用到此参数。 */
+  RelevantRequestParameterDesc?: string | null;
+}
+
+/** 描述api列表状态 */
+declare interface DescribeApisStatusResultInfo {
+  /** 符合条件的 API 接口数量。 */
+  TotalCount: number;
+}
+
+/** 数据结构 */
+declare interface DescribeExclusiveInstancesResult {
+}
+
+/** 服务发布列表详情 */
+declare interface DescribeServiceReleaseVersionResultVersionListInfo {
+  /** 版本号。 */
+  VersionName: string | null;
+  /** 版本描述。 */
+  VersionDesc: string | null;
 }
 
 /** 查询后端通道绑定API列表 */
@@ -622,8 +660,6 @@ declare interface EnvironmentStrategy {
   EnvironmentName: string;
   /** 限流值 */
   Quota: number;
-  /** 限流最大值 */
-  MaxQuota: number | null;
 }
 
 /** 用户自定义错误码 */
@@ -651,13 +687,13 @@ declare interface Filter {
 /** 健康检查配置，包括TsfHealthCheckConf和TargetServicesHealthCheckConf */
 declare interface HealthCheckConf {
   /** 是否开启健康检查。 */
-  IsHealthCheck?: boolean;
+  IsHealthCheck?: boolean | null;
   /** 健康检查阈值。 */
-  RequestVolumeThreshold?: number;
+  RequestVolumeThreshold?: number | null;
   /** 窗口大小。 */
-  SleepWindowInMilliseconds?: number;
+  SleepWindowInMilliseconds?: number | null;
   /** 阈值百分比。 */
-  ErrorThresholdPercentage?: number;
+  ErrorThresholdPercentage?: number | null;
 }
 
 /** ip策略 */
@@ -848,6 +884,36 @@ declare interface MicroServiceReq {
   NamespaceId: string;
   /** 微服务名称。 */
   MicroServiceName: string;
+}
+
+/** 后端通道详细信息 */
+declare interface ModifyUpstreamResultInfo {
+  /** 后端通道唯一ID */
+  UpstreamId: string;
+  /** 后端通道名字 */
+  UpstreamName: string;
+  /** 后端通道描述 */
+  UpstreamDescription: string;
+  /** 后端协议，取值范围：HTTP, HTTPS */
+  Scheme: string;
+  /** 负载均衡算法，取值范围：ROUND_ROBIN */
+  Algorithm: string;
+  /** VPC唯一ID */
+  UniqVpcId: string;
+  /** 请求重试次数 */
+  Retries: number;
+  /** 后端节点 */
+  Nodes: UpstreamNode[];
+  /** 创建时间 */
+  CreatedTime: string;
+  /** 健康检查配置 */
+  HealthChecker: UpstreamHealthChecker | null;
+  /** 后端的类型，取值范围：IP_PORT, K8S */
+  UpstreamType: string;
+  /** K8S容器服务配置 */
+  K8sServices: K8sService[] | null;
+  /** 网关转发给后端的Host请求头 */
+  UpstreamHost: string | null;
 }
 
 /** 独享实例网络配置 */
@@ -1133,7 +1199,7 @@ declare interface ServiceReleaseVersion {
   /** 发布版本总数量。 */
   TotalCount: number | null;
   /** 发布版本列表。 */
-  VersionList: ServiceReleaseHistoryInfo[] | null;
+  VersionList: DescribeServiceReleaseVersionResultVersionListInfo[] | null;
 }
 
 /** 服务自定义域名路径映射 */
@@ -1293,7 +1359,7 @@ declare interface UsagePlan {
   /** 使用计划名称。 */
   UsagePlanName: string;
   /** 使用计划描述。 */
-  UsagePlanDesc: string;
+  UsagePlanDesc: string | null;
   /** 使用计划qps，-1表示没有限制。 */
   MaxRequestNumPreSec: number;
   /** 使用计划时间。 */
@@ -1372,14 +1438,10 @@ declare interface UsagePlanInfo {
   UsagePlanName: string | null;
   /** 使用计划描述。 */
   UsagePlanDesc: string | null;
-  /** 初始化调用次数。 */
-  InitQuota: number | null;
   /** 每秒请求限制数。 */
   MaxRequestNumPreSec: number | null;
   /** 最大调用次数。 */
   MaxRequestNum: number | null;
-  /** 是否隐藏。 */
-  IsHide: number | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime: string | null;
   /** 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
@@ -1538,8 +1600,6 @@ declare interface BindSubDomainRequest {
 }
 
 declare interface BindSubDomainResponse {
-  /** 绑定操作是否成功。 */
-  Result: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1717,7 +1777,7 @@ declare interface CreateApiRequest {
 
 declare interface CreateApiResponse {
   /** api信息 */
-  Result: CreateApiRsp | null;
+  Result?: CreateApiResultInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1835,7 +1895,7 @@ declare interface CreateUpstreamRequest {
 
 declare interface CreateUpstreamResponse {
   /** 创建返回的唯一ID */
-  UpstreamId: string | null;
+  UpstreamId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2223,7 +2283,7 @@ declare interface DescribeApisStatusRequest {
 
 declare interface DescribeApisStatusResponse {
   /** API 详情列表。 */
-  Result: ApisStatus;
+  Result?: DescribeApisStatusResultInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2251,7 +2311,7 @@ declare interface DescribeExclusiveInstancesRequest {
 
 declare interface DescribeExclusiveInstancesResponse {
   /** 独享实例列表查询结果 */
-  Result: InstanceInfo;
+  Result?: DescribeExclusiveInstancesResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2563,57 +2623,57 @@ declare interface DescribeServiceRequest {
 
 declare interface DescribeServiceResponse {
   /** 服务唯一ID。 */
-  ServiceId: string;
+  ServiceId?: string;
   /** 服务 环境列表。 */
-  AvailableEnvironments: string[];
+  AvailableEnvironments?: string[];
   /** 服务名称。 */
-  ServiceName: string;
+  ServiceName?: string;
   /** 服务描述。 */
-  ServiceDesc: string | null;
+  ServiceDesc?: string | null;
   /** 服务支持协议，可选值为http、https、http&https。 */
-  Protocol: string;
+  Protocol?: string;
   /** 服务创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 服务修改时间。 */
-  ModifiedTime: string;
+  ModifiedTime?: string;
   /** 独立集群名称。 */
-  ExclusiveSetName: string;
+  ExclusiveSetName?: string;
   /** 网络类型列表，INNER为内网访问，OUTER为外网访问。 */
-  NetTypes: string[];
+  NetTypes?: string[];
   /** 内网访问子域名。 */
-  InternalSubDomain: string;
+  InternalSubDomain?: string;
   /** 外网访问子域名。 */
-  OuterSubDomain: string;
+  OuterSubDomain?: string;
   /** 内网访问http服务端口号。 */
-  InnerHttpPort: number;
+  InnerHttpPort?: number;
   /** 内网访问https端口号。 */
-  InnerHttpsPort: number;
+  InnerHttpsPort?: number;
   /** API总数。 */
-  ApiTotalCount: number;
+  ApiTotalCount?: number;
   /** API列表。 */
-  ApiIdStatusSet: ApiIdStatus[] | null;
+  ApiIdStatusSet?: ApiIdStatus[] | null;
   /** 使用计划总数量。 */
-  UsagePlanTotalCount: number;
+  UsagePlanTotalCount?: number;
   /** 使用计划数组。 */
-  UsagePlanList: UsagePlan[] | null;
+  UsagePlanList?: UsagePlan[] | null;
   /** IP版本。 */
-  IpVersion: string | null;
+  IpVersion?: string | null;
   /** 此服务的用户类型。 */
-  UserType: string | null;
+  UserType?: string | null;
   /** 预留字段。 */
-  SetId: number | null;
+  SetId?: number | null;
   /** 服务绑定的标签。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 独享实例id */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 独享实例name */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 集群类型 */
-  SetType: string | null;
+  SetType?: string | null;
   /** 服务部署的集群类型 */
-  DeploymentType: string | null;
+  DeploymentType?: string | null;
   /** 特殊用途, NULL和DEFAULT表示无特殊用途，其他用途如HTTP_DNS等 */
-  SpecialUse: string | null;
+  SpecialUse?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3181,7 +3241,7 @@ declare interface ModifyUpstreamRequest {
 
 declare interface ModifyUpstreamResponse {
   /** 返回修改后的后端通道信息 */
-  Result: UpstreamInfo | null;
+  Result?: ModifyUpstreamResultInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3379,7 +3439,7 @@ declare interface UpdateServiceRequest {
 
 declare interface UpdateServiceResponse {
   /** 切换版本操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

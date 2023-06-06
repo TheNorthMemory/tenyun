@@ -226,6 +226,10 @@ declare interface DiskInfo {
   DiskId: string;
   /** 磁盘大小（GB） */
   DiskSize: number;
+  /** 是否随实例删除。 */
+  DeleteWithInstance: boolean;
+  /** 快照ID */
+  SnapshotId: string | null;
 }
 
 /** 描述EIP配额信息 */
@@ -740,6 +744,8 @@ declare interface Module {
   SystemDisk: SystemDisk;
   /** 数据盘信息。 */
   DataDisks: DataDisk[];
+  /** 是否禁止外网ip */
+  DisableWanIp?: number;
 }
 
 /** 节点统计数据 */
@@ -898,6 +904,8 @@ declare interface Node {
   ISPSet: ISP[];
   /** 运营商数量。 */
   ISPNum: number;
+  /** 节点是否支持LB */
+  LBSupported?: boolean;
 }
 
 /** 节点实例数量信息 */

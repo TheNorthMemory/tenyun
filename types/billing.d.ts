@@ -260,6 +260,26 @@ declare interface BillTransactionInfo {
   DeductMode: string;
 }
 
+/** 产品汇总信息 */
+declare interface BusinessSummaryInfo {
+  /** 产品编码 */
+  BusinessCode?: string;
+  /** 产品名称：用户所采购的各类云产品，例如：云服务器 CVM */
+  BusinessCodeName?: string;
+  /** 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。 */
+  TotalCost?: string | null;
+  /** 优惠后总价 */
+  RealTotalCost?: string;
+  /** 现金账户支出：通过现金账户支付的金额 */
+  CashPayAmount?: string;
+  /** 赠送账户支出：使用赠送金支付的金额 */
+  IncentivePayAmount?: string;
+  /** 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额 */
+  VoucherPayAmount?: string;
+  /** 分成金账户支出：通过分成金账户支付的金额 */
+  TransferPayAmount?: string | null;
+}
+
 /** 按产品汇总产品详情 */
 declare interface BusinessSummaryOverviewItem {
   /** 产品编码 */
@@ -384,6 +404,14 @@ declare interface ConsumptionBusinessSummaryDataItem {
   RealTotalCost: string;
   /** 费用趋势 */
   Trend: ConsumptionSummaryTrend;
+  /** 现金 */
+  CashPayAmount?: string | null;
+  /** 赠送金 */
+  IncentivePayAmount?: string | null;
+  /** 代金券 */
+  VoucherPayAmount?: string | null;
+  /** 分成金 */
+  TransferPayAmount?: string | null;
 }
 
 /** 消耗按项目汇总详情 */
@@ -398,6 +426,14 @@ declare interface ConsumptionProjectSummaryDataItem {
   Trend: ConsumptionSummaryTrend;
   /** 产品消耗详情 */
   Business: ConsumptionBusinessSummaryDataItem[];
+  /** 现金 */
+  CashPayAmount?: string | null;
+  /** 赠送金 */
+  IncentivePayAmount?: string | null;
+  /** 代金券 */
+  VoucherPayAmount?: string | null;
+  /** 分成金 */
+  TransferPayAmount?: string | null;
 }
 
 /** 消耗按地域汇总详情 */
@@ -454,6 +490,24 @@ declare interface ConsumptionResourceSummaryDataItem {
   BusinessCodeName: string;
   /** 消耗类型 */
   ConsumptionTypeName: string;
+  /** 折前价 */
+  RealCost?: string | null;
+  /** 费用起始时间 */
+  FeeBeginTime?: string | null;
+  /** 费用结束时间 */
+  FeeEndTime?: string | null;
+  /** 天数 */
+  DayDiff?: string | null;
+  /** 每日消耗 */
+  DailyTotalCost?: string | null;
+  /** 订单号 */
+  OrderId?: string | null;
+  /** 代金券 */
+  VoucherPayAmount?: string | null;
+  /** 赠送金 */
+  IncentivePayAmount?: string | null;
+  /** 分成金 */
+  TransferPayAmount?: string | null;
 }
 
 /** 消耗汇总详情 */
@@ -712,6 +766,28 @@ declare interface RegionSummaryOverviewItem {
   BillMonth: string;
   /** 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。 */
   TotalCost: string;
+}
+
+/** 账单多维度汇总消费详情 */
+declare interface SummaryDetail {
+  /** 账单维度编码 */
+  GroupKey?: string | null;
+  /** 账单维度值 */
+  GroupValue?: string | null;
+  /** 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。 */
+  TotalCost?: string;
+  /** 优惠后总价 */
+  RealTotalCost?: string;
+  /** 现金账户支出：通过现金账户支付的金额 */
+  CashPayAmount?: string;
+  /** 赠送账户支出：使用赠送金支付的金额 */
+  IncentivePayAmount?: string;
+  /** 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额 */
+  VoucherPayAmount?: string;
+  /** 分成金账户支出：通过分成金账户支付的金额 */
+  TransferPayAmount?: string | null;
+  /** 产品汇总信息 */
+  Business?: BusinessSummaryInfo[] | null;
 }
 
 /** 总数 */
@@ -1038,6 +1114,24 @@ declare interface DescribeBillSummaryByTagResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBillSummaryRequest {
+  /** 账单月份，格式为2023-04 */
+  Month: string;
+  /** 账单维度类型，枚举值如下：business、project、region、payMode、tag */
+  GroupType: string;
+  /** 标签键，GroupType=tag获取标签维度账单时传 */
+  TagKey?: string[];
+}
+
+declare interface DescribeBillSummaryResponse {
+  /** 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可） */
+  Ready?: number;
+  /** 账单多维度汇总消费详情 */
+  SummaryDetail?: SummaryDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCostDetailRequest {
   /** 数量，最大值为100 */
   Limit: number;
@@ -1073,9 +1167,9 @@ declare interface DescribeCostSummaryByProductRequest {
   BeginTime: string;
   /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
   EndTime: string;
-  /** 每次获取数据量 */
+  /** 每次获取数据量，最大值为100 */
   Limit: number;
-  /** 偏移量 */
+  /** 偏移量,默认从0开始 */
   Offset: number;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
@@ -1101,9 +1195,9 @@ declare interface DescribeCostSummaryByProjectRequest {
   BeginTime: string;
   /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
   EndTime: string;
-  /** 每次获取数据量 */
+  /** 每次获取数据量，最大值为100 */
   Limit: number;
-  /** 偏移量 */
+  /** 偏移量,默认从0开始 */
   Offset: number;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
@@ -1129,9 +1223,9 @@ declare interface DescribeCostSummaryByRegionRequest {
   BeginTime: string;
   /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
   EndTime: string;
-  /** 每次获取数据量 */
+  /** 每次获取数据量，最大值为100 */
   Limit: number;
-  /** 偏移量 */
+  /** 偏移量,默认从0开始 */
   Offset: number;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
@@ -1157,9 +1251,9 @@ declare interface DescribeCostSummaryByResourceRequest {
   BeginTime: string;
   /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
   EndTime: string;
-  /** 每次获取数据量 */
+  /** 每次获取数据量，最大值为100 */
   Limit: number;
-  /** 偏移量 */
+  /** 偏移量,默认从0开始 */
   Offset: number;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
@@ -1355,6 +1449,8 @@ declare interface Billing {
   DescribeBillList(data: DescribeBillListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillListResponse>;
   /** 查询账单资源汇总数据 {@link DescribeBillResourceSummaryRequest} {@link DescribeBillResourceSummaryResponse} */
   DescribeBillResourceSummary(data: DescribeBillResourceSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillResourceSummaryResponse>;
+  /** 获取账单多维度汇总费用(新) {@link DescribeBillSummaryRequest} {@link DescribeBillSummaryResponse} */
+  DescribeBillSummary(data: DescribeBillSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryResponse>;
   /** 获取按计费模式汇总费用分布 {@link DescribeBillSummaryByPayModeRequest} {@link DescribeBillSummaryByPayModeResponse} */
   DescribeBillSummaryByPayMode(data: DescribeBillSummaryByPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByPayModeResponse>;
   /** 获取产品汇总费用分布 {@link DescribeBillSummaryByProductRequest} {@link DescribeBillSummaryByProductResponse} */

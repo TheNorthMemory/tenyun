@@ -60,6 +60,8 @@ declare interface TextProcessResponse {
   SessionAttributes?: string | null;
   /** 结果类型 {中间逻辑出错:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3; 未匹配上，返回预设兜底话术:5; 未匹配上，返回相似问题列表:6}。 */
   ResultType?: string | null;
+  /** 机器人对话的应答文本。 */
+  ResponseText?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -102,6 +104,22 @@ declare interface TextResetResponse {
 
 declare namespace V20190311 {
   type VersionHeader = { headers: { 'X-TC-Version': '2019-03-11' } }
+
+  /** Group是消息组的具体定义，当前包含ContentType、Url、Content三个字段。其中，具体的ContentType字段定义，参考互联网MIME类型标准。 */
+  interface Group {
+    /** 消息类型参考互联网MIME类型标准，当前仅支持"text/plain"。 */
+    ContentType?: string;
+    /** 返回内容以链接形式提供。 */
+    Url?: string | null;
+    /** 普通文本。 */
+    Content?: string | null;
+  }
+
+  /** 从TBP-RTS服务v1.3版本起，机器人以消息组列表的形式响应，消息组列表GroupList包含多组消息，用户根据需要对部分或全部消息组进行组合使用。 */
+  interface ResponseMessage {
+    /** 消息组列表。 */
+    GroupList?: Group | null;
+  }
 
   /** 槽位信息 */
   interface SlotInfo {
@@ -189,6 +207,10 @@ declare namespace V20190311 {
     SessionAttributes?: string | null;
     /** 机器人对话的应答文本。 */
     ResponseText?: string | null;
+    /** 机器人应答。 */
+    ResponseMessage?: ResponseMessage | null;
+    /** 结果类型 {中间逻辑出错:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3; 未匹配上，返回预设兜底话术:5; 未匹配上，返回相似问题列表:6}。 */
+    ResultType?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -233,7 +255,7 @@ declare interface Tbp {
   CreateBot(data: V20190311.CreateBotRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.CreateBotResponse>;
   /** 复位 {@link V20190311.ResetRequest} {@link V20190311.ResetResponse} */
   Reset(data: V20190311.ResetRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.ResetResponse>;
-  /** 文本处理 {@link V20190311.TextProcessRequest} {@link V20190311.TextProcessResponse} */
+  /** 文本处理（旧） {@link V20190311.TextProcessRequest} {@link V20190311.TextProcessResponse} */
   TextProcess(data: V20190311.TextProcessRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.TextProcessResponse>;
   /** 会话重置 {@link V20190311.TextResetRequest} {@link V20190311.TextResetResponse} */
   TextReset(data: V20190311.TextResetRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.TextResetResponse>;

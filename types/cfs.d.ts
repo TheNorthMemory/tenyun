@@ -364,6 +364,8 @@ declare interface TagInfo {
 
 /** 分层存储详细信息 */
 declare interface TieringDetailInfo {
+  /** 低频存储容量 */
+  TieringSizeInBytes?: number | null;
 }
 
 /** 文件系统配额信息 */

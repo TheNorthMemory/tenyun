@@ -38,6 +38,8 @@ declare interface AlarmEventInfo {
   MessageId?: string | null;
   /** 阈值计算算子，1 : 大于 2 ：小于 */
   Operator?: number | null;
+  /** 告警规则ID */
+  RegularId?: string | null;
 }
 
 /** 告警指标 */
@@ -622,6 +624,34 @@ declare interface InstanceInfo {
   CurRunDate: string;
 }
 
+/** 离线运维实例列表 */
+declare interface InstanceList {
+  /** 耗费时间 */
+  CostTime?: string | null;
+  /** 数据时间 */
+  CurRunDate?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
+  /** 是否补录 */
+  DoFlag?: number | null;
+  /** 责任人 */
+  InCharge?: string | null;
+  /** 日志 */
+  LastLog?: string | null;
+  /** 调度计划 */
+  SchedulerDesc?: string | null;
+  /** 开始启动时间 */
+  StartTime?: string | null;
+  /** 实例状态 */
+  State?: string | null;
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 尝试运行次数 */
+  TryLimit?: number | null;
+}
+
 /** 实例日志实体 */
 declare interface InstanceLog {
   /** 任务ID */
@@ -642,6 +672,32 @@ declare interface InstanceLog {
   InstanceLogType: string;
   /** 运行耗时 */
   CostTime: number;
+}
+
+/** 实例日志信息 */
+declare interface InstanceLogList {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 数据时间 */
+  CurRunDate?: string | null;
+  /** 重试次数 */
+  Tries?: string | null;
+  /** 最后更新事件 */
+  LastUpdate?: string | null;
+  /** 节点ip */
+  BrokerIp?: string | null;
+  /** 文件大小 */
+  FileSize?: string | null;
+  /** 原始文件名 */
+  OriginFileName?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 实例日志类型 */
+  InstanceLogType?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 耗费时间 */
+  CostTime?: string | null;
 }
 
 /** 查询实时任务实例当前的节点信息 */
@@ -714,6 +770,12 @@ declare interface InstanceReportWriteNode {
   ByteSpeed: number;
   /** 脏数据条数 */
   TotalErrorRecords: number;
+}
+
+/** 实例日志信息 */
+declare interface IntegrationInstanceLog {
+  /** 任务日志信息 */
+  LogInfo?: string | null;
 }
 
 /** 集成节点详情 */
@@ -888,6 +950,36 @@ declare interface IntegrationTaskInfo {
   DataProxyUrl?: string[] | null;
   /** 任务版本是否已提交运维 */
   Submit?: boolean | null;
+  /** MYSQL */
+  InputDatasourceType?: string | null;
+  /** DLC */
+  OutputDatasourceType?: string | null;
+  /** 读取条数 */
+  NumRecordsIn?: number | null;
+  /** 写入条数 */
+  NumRecordsOut?: number | null;
+  /** 读取延迟 */
+  ReaderDelay?: number | null;
+  /** 重启次数 */
+  NumRestarts?: number | null;
+  /** 任务创建时间 */
+  CreateTime?: string | null;
+  /** 任务更新时间 */
+  UpdateTime?: string | null;
+  /** 任务最后一次运行时间 */
+  LastRunTime?: string | null;
+  /** 任务停止时间 */
+  StopTime?: string | null;
+  /** 作业是否已提交 */
+  HasVersion?: boolean | null;
+  /** 任务是否被锁定 */
+  Locked?: boolean | null;
+  /** 任务锁定人 */
+  Locker?: string | null;
+  /** 耗费资源量 */
+  RunningCu?: number | null;
+  /** 该任务关联的告警规则 */
+  TaskAlarmRegularList?: string[] | null;
 }
 
 /** 标签类型 */
@@ -2036,6 +2128,22 @@ declare interface TaskAlarmInfo {
   AlarmRecipientType?: number | null;
   /** 企业微信群Hook地址，多个hook地址使用,隔开 */
   WeComHook?: string | null;
+  /** 最近操作时间 */
+  UpdateTime?: string | null;
+  /** 最近操作人Uin */
+  OperatorUin?: string | null;
+  /** 关联任务数 */
+  TaskCount?: number | null;
+  /** 监控对象类型,1:所有任务,2:指定任务,3:指定责任人 */
+  MonitorType?: number | null;
+  /** 监控对象列表 */
+  MonitorObjectIds?: string[] | null;
+  /** 最近一次告警的实例ID */
+  LatestAlarmInstanceId?: string | null;
+  /** 最近一次告警时间 */
+  LatestAlarmTime?: string | null;
+  /** 告警规则描述 */
+  Description?: string | null;
 }
 
 /** 任务信息 */
@@ -2799,17 +2907,19 @@ declare interface BatchUpdateIntegrationTasksResponse {
 declare interface CheckAlarmRegularNameExistRequest {
   /** 项目名称 */
   ProjectId: string;
-  /** 任务ID */
-  TaskId: string;
   /** 规则名称 */
   AlarmRegularName: string;
+  /** 任务ID */
+  TaskId?: string;
   /** 主键ID */
   Id?: string;
+  /** 任务类型:201.实时,202.离线 */
+  TaskType?: number;
 }
 
 declare interface CheckAlarmRegularNameExistResponse {
   /** 是否重名 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3197,11 +3307,11 @@ declare interface CreateOfflineTaskResponse {
 }
 
 declare interface CreateOrUpdateResourceRequest {
-  /** 项目ID */
+  /** 项目ID，必填项 */
   ProjectId?: string;
-  /** 文件名 */
+  /** 文件名，必填项 */
   Files?: string[];
-  /** 文件所属路径，资源管理根路径为 /datastudio/resouce */
+  /** 必填项，文件所属路径，资源管理根路径为 /datastudio/resource/项目ID/文件夹名 */
   FilePath?: string;
   /** cos存储桶名字 */
   CosBucketName?: string;
@@ -3209,13 +3319,13 @@ declare interface CreateOrUpdateResourceRequest {
   CosRegion?: string;
   /** 是否为新文件，新增为 true，更新为 false */
   NewFile?: boolean;
-  /** 文件大小 */
+  /** 必填项，文件大小，与 Files 字段对应 */
   FilesSize?: string[];
 }
 
 declare interface CreateOrUpdateResourceResponse {
   /** 响应数据 */
-  Data: UserFileDTO[] | null;
+  Data?: UserFileDTO[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3695,9 +3805,9 @@ declare interface DescribeDataSourceInfoListRequest {
 
 declare interface DescribeDataSourceInfoListResponse {
   /** 总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 数据源信息列表。 */
-  DatasourceSet: DatasourceBaseInfo[] | null;
+  DatasourceSet?: DatasourceBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4027,7 +4137,11 @@ declare interface DescribeInstanceListRequest {
 
 declare interface DescribeInstanceListResponse {
   /** 结果 */
-  Data: string;
+  Data?: string;
+  /** 实例列表 */
+  InstanceList?: InstanceList[] | null;
+  /** 总条数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4041,7 +4155,9 @@ declare interface DescribeInstanceLogListRequest {
 
 declare interface DescribeInstanceLogListResponse {
   /** 日志列表 */
-  Data: string;
+  Data?: string;
+  /** 日志列表 */
+  InstanceLogList?: InstanceLogList[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4059,7 +4175,9 @@ declare interface DescribeInstanceLogRequest {
 
 declare interface DescribeInstanceLogResponse {
   /** 返回结果 */
-  Data: string;
+  Data?: string;
+  /** 返回结果 */
+  InstanceLogInfo?: IntegrationInstanceLog | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4279,7 +4397,9 @@ declare interface DescribeIntegrationTasksRequest {
 
 declare interface DescribeIntegrationTasksResponse {
   /** 任务列表 */
-  TaskInfoSet: IntegrationTaskInfo[] | null;
+  TaskInfoSet?: IntegrationTaskInfo[] | null;
+  /** 任务总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5115,12 +5235,8 @@ declare interface DescribeTableScoreTrendResponse {
 }
 
 declare interface DescribeTaskAlarmRegulationsRequest {
-  /** 任务ID */
-  TaskId: string;
   /** 项目ID */
   ProjectId: string;
-  /** 任务类型(201代表实时任务，202代表离线任务) */
-  TaskType: number;
   /** 当前页 */
   PageNumber: number;
   /** 每页记录数 */
@@ -5129,13 +5245,17 @@ declare interface DescribeTaskAlarmRegulationsRequest {
   Filters?: Filter[];
   /** 排序条件(RegularId) */
   OrderFields?: OrderField[];
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务类型(201代表实时任务，202代表离线任务) */
+  TaskType?: number;
 }
 
 declare interface DescribeTaskAlarmRegulationsResponse {
-  /** 任务告警规则信息 */
-  TaskAlarmInfos: TaskAlarmInfo[] | null;
+  /** 告警规则信息 */
+  TaskAlarmInfos?: TaskAlarmInfo[] | null;
   /** 总记录数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6657,7 +6777,7 @@ declare interface Wedata {
   DescribeInLongTkeClusterList(data: DescribeInLongTkeClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongTkeClusterListResponse>;
   /** 日志获取详情页面 {@link DescribeInstanceLastLogRequest} {@link DescribeInstanceLastLogResponse} */
   DescribeInstanceLastLog(data: DescribeInstanceLastLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLastLogResponse>;
-  /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
+  /** 获取离线运维实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
   /** 获取实例运行日志 {@link DescribeInstanceLogRequest} {@link DescribeInstanceLogResponse} */
   DescribeInstanceLog(data: DescribeInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogResponse>;

@@ -429,7 +429,7 @@ declare interface GetSendEmailStatusRequest {
 
 declare interface GetSendEmailStatusResponse {
   /** 邮件发送状态列表 */
-  EmailStatusList: SendEmailStatus[];
+  EmailStatusList?: SendEmailStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -569,6 +569,10 @@ declare interface SendEmailRequest {
   Subject: string;
   /** 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。 */
   ReplyToAddresses?: string;
+  /** 抄送人邮箱地址，最多支持抄送20人。 */
+  Cc?: string[];
+  /** 密送人邮箱地址，最多支持抄送20人。 */
+  Bcc?: string[];
   /** 使用模板发送时，填写的模板相关参数。因 Simple 已经废除使用，Template 为必填项 */
   Template?: Template;
   /** 已废弃 */
@@ -661,7 +665,7 @@ declare interface Ses {
   GetEmailIdentity(data: GetEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmailIdentityResponse>;
   /** 获取模板详情 {@link GetEmailTemplateRequest} {@link GetEmailTemplateResponse} */
   GetEmailTemplate(data: GetEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmailTemplateResponse>;
-  /** 获取邮件发送的状态（待废弃） {@link GetSendEmailStatusRequest} {@link GetSendEmailStatusResponse} */
+  /** 获取邮件发送的状态 {@link GetSendEmailStatusRequest} {@link GetSendEmailStatusResponse} */
   GetSendEmailStatus(data: GetSendEmailStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSendEmailStatusResponse>;
   /** 获取发送统计数据 {@link GetStatisticsReportRequest} {@link GetStatisticsReportResponse} */
   GetStatisticsReport(data: GetStatisticsReportRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticsReportResponse>;
