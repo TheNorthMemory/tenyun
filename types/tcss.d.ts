@@ -554,6 +554,14 @@ declare interface ClusterCreateComponentItem {
   ClusterRegion: string;
 }
 
+/** 集群自定义参数 */
+declare interface ClusterCustomParameters {
+  /** 参数名 */
+  Name: string;
+  /** 参数值 */
+  Values: string[];
+}
+
 /** 集群资产返回的结构体 */
 declare interface ClusterInfoItem {
   /** 集群id */
@@ -4943,11 +4951,13 @@ declare interface DescribeAgentDaemonSetCmdRequest {
   VpcId?: string;
   /** 命令有效期，非腾讯云时必填 */
   ExpireDate?: string;
+  /** 集群自定义参数 */
+  ClusterCustomParameters?: ClusterCustomParameters[];
 }
 
 declare interface DescribeAgentDaemonSetCmdResponse {
   /** 安装命令 */
-  Command: string;
+  Command?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

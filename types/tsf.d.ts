@@ -826,6 +826,32 @@ declare interface ContainerGroupDetail {
   Alias?: string | null;
 }
 
+/** 部署组列表-其它字段 */
+declare interface ContainerGroupOther {
+  /** 实例总数 */
+  InstanceNum: number;
+  /** 已启动实例总数 */
+  CurrentNum: number;
+  /** 负载均衡ip */
+  LbIp: string;
+  /** Service ip */
+  ClusterIp: string;
+  /** 服务状态，请参考后面的的状态定义 */
+  Status: string;
+  /** 服务状态，请参考后面的的状态定义 */
+  Message: string;
+  /** 环境变量 */
+  Envs: Env[];
+  /** Service NodePort */
+  NodePort: number | null;
+  /** 子网ID */
+  SubnetId: string | null;
+  /** 健康检查相关字段 */
+  HealthCheckSettings: HealthCheckSetting[] | null;
+  /** 服务配置信息是否匹配 */
+  IsNotEqualServiceConfig: boolean | null;
+}
+
 /** cos临时帐号信息 */
 declare interface CosCredentials {
   /** 会话Token */
@@ -4797,6 +4823,18 @@ declare interface DescribeContainerEventsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContainerGroupAttributeRequest {
+  /** 部署组ID */
+  GroupId: string;
+}
+
+declare interface DescribeContainerGroupAttributeResponse {
+  /** 部署组列表-其它字段 */
+  Result?: ContainerGroupOther;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContainerGroupDeployInfoRequest {
   /** 实例所属 groupId */
   GroupId: string;
@@ -7353,6 +7391,8 @@ declare interface Tsf {
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
   /** 获取容器事件列表 {@link DescribeContainerEventsRequest} {@link DescribeContainerEventsResponse} */
   DescribeContainerEvents(data: DescribeContainerEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerEventsResponse>;
+  /** 获取部署组其他字段-用于前端并发调用 {@link DescribeContainerGroupAttributeRequest} {@link DescribeContainerGroupAttributeResponse} */
+  DescribeContainerGroupAttribute(data: DescribeContainerGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupAttributeResponse>;
   /** 获取部署组详情 {@link DescribeContainerGroupDeployInfoRequest} {@link DescribeContainerGroupDeployInfoResponse} */
   DescribeContainerGroupDeployInfo(data: DescribeContainerGroupDeployInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDeployInfoResponse>;
   /** 查询容器部署组详情 {@link DescribeContainerGroupDetailRequest} {@link DescribeContainerGroupDetailResponse} */

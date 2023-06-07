@@ -2844,6 +2844,28 @@ declare interface ModifyGovernEventRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifySparkAppBatchRequest {
+  /** 需要批量修改的Spark作业任务ID列表 */
+  SparkAppId: string[];
+  /** 引擎ID */
+  DataEngine?: string;
+  /** driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
+  AppDriverSize?: string;
+  /** executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
+  AppExecutorSize?: string;
+  /** 指定executor数量，最小值为1，最大值小于集群规格 */
+  AppExecutorNums?: number;
+  /** 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums） */
+  AppExecutorMaxNumbers?: number;
+  /** 任务资源配置是否继承集群模板，0（默认）不继承，1：继承 */
+  IsInherit?: number;
+}
+
+declare interface ModifySparkAppBatchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySparkAppRequest {
   /** spark应用名 */
   AppName: string;
@@ -3173,6 +3195,8 @@ declare interface Dlc {
   ModifyGovernEventRule(data?: ModifyGovernEventRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernEventRuleResponse>;
   /** 更新spark应用 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
   ModifySparkApp(data: ModifySparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppResponse>;
+  /** 批量修改Spark作业参数配置 {@link ModifySparkAppBatchRequest} {@link ModifySparkAppBatchResponse} */
+  ModifySparkAppBatch(data: ModifySparkAppBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppBatchResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 修改工作组信息 {@link ModifyWorkGroupRequest} {@link ModifyWorkGroupResponse} */

@@ -4558,6 +4558,20 @@ declare interface CreateStreamLinkFlowResponse {
   RequestId?: string;
 }
 
+declare interface CreateStreamLinkInputRequest {
+  /** 媒体传输流ID。 */
+  FlowId: string;
+  /** 流的输入组。 */
+  InputGroup?: CreateInput[];
+}
+
+declare interface CreateStreamLinkInputResponse {
+  /** 创建的Flow信息。 */
+  Info: DescribeFlow;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateStreamLinkOutputInfoRequest {
   /** 传输流Id。 */
   FlowId: string;
@@ -5891,6 +5905,8 @@ declare interface ProcessLiveStreamRequest {
   AiRecognitionTask?: AiRecognitionTaskInput;
   /** 视频内容分析类型任务参数。 */
   AiAnalysisTask?: AiAnalysisTaskInput;
+  /** 视频内容质检类型任务参数。 */
+  AiQualityControlTask?: AiQualityControlTaskInput;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
@@ -6049,6 +6065,8 @@ declare interface Mps {
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
   /** 创建媒体传输流 {@link CreateStreamLinkFlowRequest} {@link CreateStreamLinkFlowResponse} */
   CreateStreamLinkFlow(data: CreateStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkFlowResponse>;
+  /** 创建媒体传输输入 {@link CreateStreamLinkInputRequest} {@link CreateStreamLinkInputResponse} */
+  CreateStreamLinkInput(data: CreateStreamLinkInputRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkInputResponse>;
   /** 创建媒体传输的输出信息 {@link CreateStreamLinkOutputInfoRequest} {@link CreateStreamLinkOutputInfoResponse} */
   CreateStreamLinkOutputInfo(data: CreateStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkOutputInfoResponse>;
   /** 创建转码模板 {@link CreateTranscodeTemplateRequest} {@link CreateTranscodeTemplateResponse} */

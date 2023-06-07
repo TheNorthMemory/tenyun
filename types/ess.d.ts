@@ -602,6 +602,8 @@ declare interface ReleasedApprover {
   Mobile: string | null;
   /** 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ） */
   RelievedApproverReceiptId: string | null;
+  /** 指定签署人类型，目前仅支持ORGANIZATION-企业ENTERPRISESERVER-企业静默签 */
+  ApproverType?: string | null;
 }
 
 /** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。 */

@@ -708,7 +708,7 @@ declare interface QPSPackageNew {
 
 /** 响应体的返回码 */
 declare interface ResponseCode {
-  /** 如果成功则返回Success，失败则返回yunapi定义的错误码 */
+  /** 如果成功则返回Success，失败则返回云api定义的错误码 */
   Code: string;
   /** 如果成功则返回Success，失败则返回WAF定义的二级错误码 */
   Message: string;

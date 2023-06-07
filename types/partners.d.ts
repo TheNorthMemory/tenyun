@@ -819,13 +819,13 @@ declare interface Partners {
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
   /** 代理商缓存订单查询接口（预付费） {@link DescribeAgentDealsByCacheRequest} {@link DescribeAgentDealsByCacheResponse} */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
-  /** 【已切换至DescribeAgentDealsByCache】代理商缓存订单查询接口 {@link DescribeAgentDealsCacheRequest} {@link DescribeAgentDealsCacheResponse} */
+  /** @deprecated 【已切换至DescribeAgentDealsByCache】代理商缓存订单查询接口 {@link DescribeAgentDealsCacheRequest} {@link DescribeAgentDealsCacheResponse} */
   DescribeAgentDealsCache(data: DescribeAgentDealsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsCacheResponse>;
-  /** 【已切换至DescribeAgentPayDealsV2】代理商代付订单查询接口 {@link DescribeAgentPayDealsRequest} {@link DescribeAgentPayDealsResponse} */
+  /** @deprecated 【已切换至DescribeAgentPayDealsV2】代理商代付订单查询接口 {@link DescribeAgentPayDealsRequest} {@link DescribeAgentPayDealsResponse} */
   DescribeAgentPayDeals(data: DescribeAgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsResponse>;
   /** 代理商代付订单查询接口（预付费） {@link DescribeAgentPayDealsV2Request} {@link DescribeAgentPayDealsV2Response} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
-  /** 【已切换至DescribeAgentSelfPayDealsV2】代理商自付订单查询接口 {@link DescribeAgentSelfPayDealsRequest} {@link DescribeAgentSelfPayDealsResponse} */
+  /** @deprecated 【已切换至DescribeAgentSelfPayDealsV2】代理商自付订单查询接口 {@link DescribeAgentSelfPayDealsRequest} {@link DescribeAgentSelfPayDealsResponse} */
   DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
   /** 代理商自付订单查询接口（预付费） {@link DescribeAgentSelfPayDealsV2Request} {@link DescribeAgentSelfPayDealsV2Response} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;

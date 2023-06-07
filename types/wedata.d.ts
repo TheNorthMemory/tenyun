@@ -3634,14 +3634,14 @@ declare interface DeleteTaskAlarmRegularRequest {
   /** 项目ID */
   ProjectId: string;
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 任务类型(201表示实时任务，202表示离线任务) */
-  TaskType: number;
+  TaskType?: number;
 }
 
 declare interface DeleteTaskAlarmRegularResponse {
   /** 删除结果(true表示删除成功，false表示删除失败) */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

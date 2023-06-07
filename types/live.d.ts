@@ -242,7 +242,7 @@ declare interface ConcurrentRecordStreamNum {
 
 /** 流播放信息 */
 declare interface DayStreamPlayInfo {
-  /** 数据时间点，格式：yyyy-mm-dd HH:MM:SS。 */
+  /** 数据时间点，接口返回支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   Time: string;
   /** 带宽（单位Mbps）。 */
   Bandwidth: number;
@@ -678,6 +678,8 @@ declare interface PullStreamTaskInfo {
   WatermarkList: PullPushWatermarkInfo[] | null;
   /** 点播源是否启用本地推流模式，默认0，不启用。0 - 不启用。1 - 启用。 */
   VodLocalMode: number | null;
+  /** 录制模板 ID。 */
+  RecordTemplateId?: string | null;
 }
 
 /** 推流鉴权key信息。 */
@@ -1375,7 +1377,7 @@ declare interface CreateLiveCallbackTemplateResponse {
 }
 
 declare interface CreateLivePullStreamTaskRequest {
-  /** 拉流源的类型：PullLivePushLive -直播，PullVodPushLive -点播。PullPicPushLive -图片。 */
+  /** 拉流源的类型：PullLivePushLive -直播，PullVodPushLive -点播，PullPicPushLive -图片。 */
   SourceType: string;
   /** 拉流源 url 列表。SourceType 为直播（PullLivePushLive）只可以填1个，SourceType 为点播（PullVodPushLive）可以填多个，上限30个。当前支持的文件格式：flv，mp4，hls。当前支持的拉流协议：http，https，rtmp，rtmps，rtsp，srt。注意：1. 建议优先使用 flv 文件，对于 mp4 未交织好的文件轮播推流易产生卡顿，可通过点播转码进行重新交织后再轮播。2. 拒绝内网域名等攻击性拉流地址，如有使用，则做账号封禁处理。3. 源文件请保持时间戳正常交织递增，避免因源文件异常影响推流及播放。4. 视频编码格式仅支持: H264, H265。5. 音频编码格式仅支持: AAC。6. 点播源请使用小文件，尽量时长保持在1小时内，较大文件打开和续播耗时较久，耗时超过15秒会有无法正常转推风险。 */
   SourceUrls: string[];
@@ -1419,7 +1421,7 @@ declare interface CreateLivePullStreamTaskRequest {
 
 declare interface CreateLivePullStreamTaskResponse {
   /** 任务 Id 。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3095,15 +3097,15 @@ declare interface DescribeStreamDayPlayInfoListResponse {
 }
 
 declare interface DescribeStreamPlayInfoListRequest {
-  /** 开始时间，北京时间，格式为yyyy-mm-dd HH:MM:SS */
+  /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
-  /** 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，结束时间 和 开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。 */
+  /** 结束时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   EndTime: string;
   /** 播放域名，若不填，则为查询所有播放域名的在线流数据。 */
   PlayDomain?: string;
   /** 流名称，精确匹配。若不填，则为查询总体播放数据。 */
   StreamName?: string;
-  /** 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。若不填，则为查询总体播放数据。注意：按AppName查询请先联系工单申请，开通后配置生效预计需要5个工作日左右，具体时间以最终回复为准。 */
+  /** 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。若不填，则为查询总体播放数据。 */
   AppName?: string;
   /** 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。 */
   ServiceName?: string;
@@ -3111,7 +3113,7 @@ declare interface DescribeStreamPlayInfoListRequest {
 
 declare interface DescribeStreamPlayInfoListResponse {
   /** 统计信息列表，时间粒度是1分钟。 */
-  DataInfoList: DayStreamPlayInfo[];
+  DataInfoList?: DayStreamPlayInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

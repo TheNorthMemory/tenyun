@@ -308,7 +308,7 @@ declare interface PackageBuyInfo {
   CapacityRemain: number;
   /** 购买时间戳 */
   BuyTime: number;
-  /** 截至时间戳 */
+  /** 截止时间戳 */
   EndTime: number;
 }
 
@@ -322,7 +322,7 @@ declare interface PhoneNumBuyInfo {
   CallType: number;
   /** 购买时间戳 */
   BuyTime: number;
-  /** 截至时间戳 */
+  /** 截止时间戳 */
   EndTime: number;
   /** 号码状态，1正常|2欠费停用|4管理员停用|5违规停用 */
   State: number;
