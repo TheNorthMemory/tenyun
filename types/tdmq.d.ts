@@ -438,6 +438,8 @@ declare interface Environment {
   TopicNum: number | null;
   /** 消息保留策略 */
   RetentionPolicy: RetentionPolicy | null;
+  /** 是否自动创建订阅 */
+  AutoSubscriptionCreation?: boolean | null;
 }
 
 /** 环境角色集合 */
@@ -1539,17 +1541,19 @@ declare interface CreateEnvironmentRequest {
   ClusterId?: string;
   /** 消息保留策略 */
   RetentionPolicy?: RetentionPolicy;
+  /** 是否开启自动创建订阅 */
+  AutoSubscriptionCreation?: boolean;
 }
 
 declare interface CreateEnvironmentResponse {
   /** 环境（命名空间）名称。 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 未消费消息过期时间，单位：秒。 */
-  MsgTTL: number;
+  MsgTTL?: number;
   /** 说明，128个字符以内。 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 命名空间ID */
-  NamespaceId: string;
+  NamespaceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3099,17 +3103,19 @@ declare interface ModifyEnvironmentAttributesRequest {
   ClusterId?: string;
   /** 消息保留策略 */
   RetentionPolicy?: RetentionPolicy;
+  /** 是否开启自动创建订阅 */
+  AutoSubscriptionCreation?: boolean;
 }
 
 declare interface ModifyEnvironmentAttributesResponse {
   /** 命名空间名称。 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 未消费消息过期时间，单位：秒。 */
-  MsgTTL: number;
+  MsgTTL?: number;
   /** 备注，字符串最长不超过128。 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3447,9 +3453,9 @@ declare interface SendMessagesRequest {
 
 declare interface SendMessagesResponse {
   /** 消息的messageID, 是全局唯一的，用来标识消息的元数据信息 */
-  MessageId: string | null;
+  MessageId?: string | null;
   /** 返回的错误消息，如果返回为 “”，说明没有错误 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

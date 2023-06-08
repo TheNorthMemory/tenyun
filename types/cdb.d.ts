@@ -3120,7 +3120,7 @@ declare interface DescribeDatabasesResponse {
 
 declare interface DescribeDefaultParamsRequest {
   /** 引擎版本，目前支持 ["5.1", "5.5", "5.6", "5.7", "8.0"] */
-  EngineVersion: string;
+  EngineVersion?: string;
   /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。 */
   TemplateType?: string;
   /** 参数模板引擎，默认值：InnoDB */
@@ -4724,7 +4724,7 @@ declare interface Cdb {
   /** 查询数据库 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询默认的可设置参数列表 {@link DescribeDefaultParamsRequest} {@link DescribeDefaultParamsResponse} */
-  DescribeDefaultParams(data: DescribeDefaultParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParamsResponse>;
+  DescribeDefaultParams(data?: DescribeDefaultParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParamsResponse>;
   /** 查询置放群组列表 {@link DescribeDeployGroupListRequest} {@link DescribeDeployGroupListResponse} */
   DescribeDeployGroupList(data?: DescribeDeployGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployGroupListResponse>;
   /** 物理机监控信息 {@link DescribeDeviceMonitorInfoRequest} {@link DescribeDeviceMonitorInfoResponse} */

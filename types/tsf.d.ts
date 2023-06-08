@@ -847,7 +847,7 @@ declare interface ContainerGroupOther {
   /** 子网ID */
   SubnetId: string | null;
   /** 健康检查相关字段 */
-  HealthCheckSettings: HealthCheckSetting[] | null;
+  HealthCheckSettings: HealthCheckSettings | null;
   /** 服务配置信息是否匹配 */
   IsNotEqualServiceConfig: boolean | null;
 }

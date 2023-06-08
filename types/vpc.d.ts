@@ -1168,7 +1168,7 @@ declare interface NetDetect {
   DetectSourceIp: string[];
   /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关；NONEXTHOP：无下一跳； */
   NextHopType: string;
-  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
+  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
   NextHopDestination: string;
   /** 下一跳网关名称。 */
   NextHopName: string | null;
@@ -2911,7 +2911,7 @@ declare interface CreateIp6TranslatorsRequest {
 
 declare interface CreateIp6TranslatorsResponse {
   /** 转换实例的唯一ID数组，形如"ip6-xxxxxxxx" */
-  Ip6TranslatorSet: string[];
+  Ip6TranslatorSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3003,7 +3003,7 @@ declare interface CreateNetDetectRequest {
   DetectDestinationIp: string[];
   /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关；NONEXTHOP：无下一跳； */
   NextHopType?: string;
-  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
+  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
   NextHopDestination?: string;
   /** 网络探测描述。 */
   NetDetectDescription?: string;
@@ -4757,7 +4757,7 @@ declare interface DescribeNetworkInterfaceLimitResponse {
 declare interface DescribeNetworkInterfacesRequest {
   /** 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。 */
   NetworkInterfaceIds?: string[];
-  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。“AG”-服务质量为云铜，“AU”-服务质量为云银。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。 */
+  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。“AG”-服务质量为云铜，“AU”-服务质量为云银。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -4815,9 +4815,9 @@ declare interface DescribeRouteTablesRequest {
 
 declare interface DescribeRouteTablesResponse {
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 路由表对象。 */
-  RouteTableSet: RouteTable[];
+  RouteTableSet?: RouteTable[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6165,7 +6165,7 @@ declare interface ModifyIp6AddressesBandwidthRequest {
 
 declare interface ModifyIp6AddressesBandwidthResponse {
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6281,7 +6281,7 @@ declare interface ModifyNetDetectRequest {
   DetectDestinationIp?: string[];
   /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关；NONEXTHOP：无下一跳； */
   NextHopType?: string;
-  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
+  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
   NextHopDestination?: string;
   /** 网络探测描述。 */
   NetDetectDescription?: string;
@@ -6929,9 +6929,9 @@ declare interface TransformAddressRequest {
 
 declare interface TransformAddressResponse {
   /** 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
-  TaskId: number;
+  TaskId?: number;
   /** 转为弹性公网IP后的唯一ID */
-  AddressId: string;
+  AddressId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

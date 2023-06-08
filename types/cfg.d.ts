@@ -118,6 +118,12 @@ declare interface TaskGroup {
   TaskGroupInstanceList: string[];
   /** 执行模式。1 --- 顺序执行，2 --- 阶段执行 */
   TaskGroupMode: number;
+  /** 不参演的实例列表 */
+  TaskGroupDiscardInstanceList?: string[];
+  /** 参演实例列表 */
+  TaskGroupSelectedInstanceList?: string[] | null;
+  /** 机器选取规则 */
+  TaskGroupInstancesExecuteRule?: TaskGroupInstancesExecuteRules[] | null;
 }
 
 /** 任务分组动作 */
@@ -212,6 +218,16 @@ declare interface TaskGroupInstance {
   TaskGroupInstanceIsRedo?: boolean | null;
   /** 动作实例执行时间 */
   TaskGroupInstanceExecuteTime?: number | null;
+}
+
+/** 机器选取规则 */
+declare interface TaskGroupInstancesExecuteRules {
+  /** 实例选取模式 */
+  TaskGroupInstancesExecuteMode?: number | null;
+  /** 按比例选取模式下选取比例 */
+  TaskGroupInstancesExecutePercent?: number | null;
+  /** 按数量选取模式下选取数量 */
+  TaskGroupInstancesExecuteNum?: number | null;
 }
 
 /** 任务列表信息 */

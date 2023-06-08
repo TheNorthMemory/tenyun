@@ -1144,6 +1144,48 @@ declare interface DescribeDomainAnalyticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainFilterListRequest {
+  /** 根据域名分组类型获取域名。可取值为 ALL，MINE，SHARE，RECENT。ALL：全部MINE：我的域名SHARE：共享给我的域名RECENT：最近操作过的域名 */
+  Type: string;
+  /** 记录开始的偏移, 第一条记录为 0, 依次类推。默认值为 0。 */
+  Offset?: number;
+  /** 要获取的域名数量, 比如获取 20 个, 则为 20。默认值为 5000。如果账户中的域名数量超过了 5000, 将会强制分页并且只返回前 5000 条, 这时需要通过 Offset 和 Limit 参数去获取其它域名。 */
+  Limit?: number;
+  /** 根据域名分组 id 获取域名，可通过 DescribeDomain 或 DescribeDomainList 接口 GroupId 字段获取。 */
+  GroupId?: number[];
+  /** 根据关键字获取域名。 */
+  Keyword?: string;
+  /** 排序字段。可取值为 NAME，STATUS，RECORDS，GRADE，UPDATED_ON。NAME：域名名称STATUS：域名状态RECORDS：记录数量GRADE：套餐等级UPDATED_ON：更新时间 */
+  SortField?: string;
+  /** 排序类型，升序：ASC，降序：DESC。 */
+  SortType?: string;
+  /** 根据域名状态获取域名。可取值为 ENABLE，LOCK，PAUSE，SPAM。ENABLE：正常LOCK：锁定PAUSE：暂停SPAM：封禁 */
+  Status?: string[];
+  /** 根据套餐获取域名，可通过 DescribeDomain 或 DescribeDomainList 接口 Grade 字段获取。 */
+  Package?: string[];
+  /** 根据备注信息获取域名。 */
+  Remark?: string;
+  /** 要获取域名的更新时间起始时间点，如 '2021-05-01 03:00:00'。 */
+  UpdatedAtBegin?: string;
+  /** 要获取域名的更新时间终止时间点，如 '2021-05-10 20:00:00'。 */
+  UpdatedAtEnd?: string;
+  /** 要获取域名的记录数查询区间起点。 */
+  RecordCountBegin?: number;
+  /** 要获取域名的记录数查询区间终点。 */
+  RecordCountEnd?: number;
+  /** 项目ID */
+  ProjectId?: number;
+}
+
+declare interface DescribeDomainFilterListResponse {
+  /** 列表页统计信息 */
+  DomainCountInfo?: DomainCountInfo;
+  /** 域名列表 */
+  DomainList?: DomainListItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainGroupListRequest {
 }
 
@@ -1981,6 +2023,8 @@ declare interface Dnspod {
   DescribeDomainAliasList(data: DescribeDomainAliasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAliasListResponse>;
   /** 域名解析量统计 {@link DescribeDomainAnalyticsRequest} {@link DescribeDomainAnalyticsResponse} */
   DescribeDomainAnalytics(data: DescribeDomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAnalyticsResponse>;
+  /** 获取域名筛选列表 {@link DescribeDomainFilterListRequest} {@link DescribeDomainFilterListResponse} */
+  DescribeDomainFilterList(data: DescribeDomainFilterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainFilterListResponse>;
   /** 获取域名分组列表 {@link DescribeDomainGroupListRequest} {@link DescribeDomainGroupListResponse} */
   DescribeDomainGroupList(data?: DescribeDomainGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainGroupListResponse>;
   /** 获取域名列表 {@link DescribeDomainListRequest} {@link DescribeDomainListResponse} */

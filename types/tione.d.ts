@@ -844,6 +844,14 @@ declare interface Pod {
   ContainerInfos?: Container[] | null;
 }
 
+/** 任务建模Pod信息 */
+declare interface PodInfo {
+  /** pod名 */
+  Name?: string | null;
+  /** pod的IP */
+  IP?: string | null;
+}
+
 /** 点信息描述 */
 declare interface PointInfo {
   /** X坐标值 */
@@ -2461,9 +2469,11 @@ declare interface DescribeTrainingTaskPodsRequest {
 
 declare interface DescribeTrainingTaskPodsResponse {
   /** pod名称列表 */
-  PodNames: string[];
+  PodNames?: string[];
   /** 数量 */
-  TotalCount: number;
+  TotalCount?: number;
+  /** pod详细信息 */
+  PodInfoList?: PodInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

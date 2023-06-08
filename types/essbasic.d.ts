@@ -110,7 +110,7 @@ declare interface CommonFlowApprover {
   ApproverType?: number | null;
   /** 企业id */
   OrganizationId?: string | null;
-  /** 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同毕传 */
+  /** 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同必传 */
   OrganizationOpenId?: string | null;
   /** 企业名称，第三方应用集成非静默签子客企业签署人必传，saas企业签署人必传 */
   OrganizationName?: string | null;
@@ -308,6 +308,8 @@ declare interface FlowApproverInfo {
   ApproverVerifyTypes?: number[] | null;
   /** 签署人签署合同时的认证方式1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2) */
   ApproverSignTypes?: number[] | null;
+  /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
+  SignId?: string | null;
 }
 
 /** 签署人签署链接信息 */
@@ -877,16 +879,16 @@ declare interface ChannelCreateConvertTaskApiResponse {
 }
 
 declare interface ChannelCreateEmbedWebUrlRequest {
-  /** WEB嵌入资源类型，取值范围：CREATE_SEAL创建印章，CREATE_TEMPLATE创建模板，MODIFY_TEMPLATE修改模板，PREVIEW_TEMPLATE预览模板，PREVIEW_FLOW预览流程 */
-  EmbedType: string;
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
   Agent: Agent;
-  /** 渠道操作者信息 */
-  Operator?: UserInfo;
+  /** WEB嵌入资源类型，取值范围：CREATE_SEAL创建印章，CREATE_TEMPLATE创建模板，MODIFY_TEMPLATE修改模板，PREVIEW_TEMPLATE预览模板，PREVIEW_FLOW预览流程 */
+  EmbedType: string;
   /** WEB嵌入的业务资源ID，EmbedType取值MODIFY_TEMPLATE或PREVIEW_TEMPLATE或 PREVIEW_FLOW时BusinessId必填 */
   BusinessId?: string;
   /** 是否隐藏控件，只有预览模板时生效 */
   HiddenComponents?: boolean;
+  /** 渠道操作者信息 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelCreateEmbedWebUrlResponse {
@@ -927,14 +929,14 @@ declare interface ChannelCreateFlowByFilesRequest {
   ApproverVerifyType?: string;
   /** 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件 */
   SignBeanTag?: number;
-  /** 操作者的信息，不用传 */
-  Operator?: UserInfo;
   /** 被抄送人信息列表 */
   CcInfos?: CcInfo[];
   /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
   CcNotifyType?: number;
   /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   AutoSignScene?: string;
+  /** 操作者的信息，不用传 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
@@ -1113,16 +1115,16 @@ declare interface ChannelCreateSealPolicyRequest {
   Agent: Agent;
   /** 指定印章ID */
   SealId: string;
-  /** 指定待授权的用户ID数组 */
+  /** 指定待授权的用户ID数组,电子签的用户ID */
   UserIds: string[];
-  /** 企业机构信息，不用传 */
-  Organization?: OrganizationInfo;
   /** 操作人（用户）信息，不用传 */
   Operator?: UserInfo;
+  /** 企业机构信息，不用传 */
+  Organization?: OrganizationInfo;
 }
 
 declare interface ChannelCreateSealPolicyResponse {
-  /** 最终授权成功的用户ID数组。其他的跳过的是已经授权了的 */
+  /** 最终授权成功的电子签系统用户ID数组。其他的跳过的是已经授权了的 */
   UserIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1131,7 +1133,7 @@ declare interface ChannelCreateSealPolicyResponse {
 declare interface ChannelCreateUserRolesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
   Agent: Agent;
-  /** 绑定角色的员工id列表 */
+  /** 绑定角色的员工id列表，电子签的UserId */
   UserIds: string[];
   /** 绑定角色的角色id列表 */
   RoleIds: string[];
@@ -1151,7 +1153,7 @@ declare interface ChannelDeleteRoleUsersRequest {
   Agent: Agent;
   /** 角色Id（非超管或法人角色Id） */
   RoleId: string;
-  /** 用户列表 */
+  /** 用户列表，电子签系统的UserId */
   UserIds: string[];
   /** 操作人信息 */
   Operator?: UserInfo;
@@ -1169,7 +1171,7 @@ declare interface ChannelDeleteSealPoliciesRequest {
   Agent: Agent;
   /** 指定印章ID */
   SealId: string;
-  /** 指定用户ID数组 */
+  /** 指定用户ID数组，电子签系统用户ID */
   UserIds: string[];
   /** 组织机构信息，不用传 */
   Organization?: OrganizationInfo;
@@ -1291,10 +1293,10 @@ declare interface ChannelUpdateSealStatusRequest {
   Status: string;
   /** 印章ID */
   SealId: string;
-  /** 操作者的信息 */
-  Operator?: UserInfo;
   /** 更新印章状态原因说明 */
   Reason?: string;
+  /** 操作者的信息 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelUpdateSealStatusResponse {
@@ -1368,7 +1370,7 @@ declare interface CreateConsoleLoginUrlRequest {
 declare interface CreateConsoleLoginUrlResponse {
   /** 子客企业Web控制台url注意事项：1. 所有类型的链接在企业未认证/员工未认证完成时，只要在有效期内（一年）都可以访问2. 若企业认证完成且员工认证完成后，重新获取pc端的链接5分钟之内有效，且只能访问一次3. 若企业认证完成且员工认证完成后，重新获取H5/APP的链接只要在有效期内（一年）都可以访问4. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）5. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义 */
   ConsoleUrl?: string;
-  /** 子客企业是否已开通腾讯电子签 */
+  /** 子客企业是否已开通腾讯电子签，true-是，false-否 */
   IsActivated?: boolean;
   /** 当前经办人是否已认证（false:未认证 true:已认证） */
   ProxyOperatorIsVerified?: boolean;
@@ -1549,14 +1551,14 @@ declare interface DescribeTemplatesRequest {
   QueryAllComponents?: boolean;
   /** 模糊搜索模板名称，最大长度200 */
   TemplateName?: string;
-  /** 操作者的信息 */
-  Operator?: UserInfo;
   /** 是否获取模板预览链接 */
   WithPreviewUrl?: boolean;
   /** 是否获取模板的PDF文件链接- 第三方应用集成需要开启白名单时才能使用。 */
   WithPdfUrl?: boolean;
-  /** 模板ID */
+  /** 对应第三方应用平台企业的模板ID */
   ChannelTemplateId?: string;
+  /** 操作者的信息 */
+  Operator?: UserInfo;
 }
 
 declare interface DescribeTemplatesResponse {

@@ -1908,6 +1908,26 @@ declare interface SchemaDetail {
   Type: string | null;
 }
 
+/** 开发空间-上传脚本请求 */
+declare interface ScriptRequestInfo {
+  /** 脚本路径 */
+  FilePath?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 脚本版本 */
+  Version?: string | null;
+  /** 操作类型 */
+  Operation?: string | null;
+  /** 额外信息 */
+  ExtraInfo?: string | null;
+  /** 桶名称 */
+  BucketName?: string | null;
+  /** 所属地区 */
+  Region?: string | null;
+  /** 文件扩展类型 */
+  FileExtensionType?: string | null;
+}
+
 /** 查询实例条件 */
 declare interface SearchCondition {
   /** 查询框架，必选 */
@@ -6438,6 +6458,47 @@ declare interface SaveCustomFunctionResponse {
   RequestId?: string;
 }
 
+declare interface ScriptInfoResponse {
+  /** 资源id */
+  ResourceId?: string | null;
+  /** 脚本名称 */
+  FileName?: string | null;
+  /** 文件扩展名类型 */
+  FileExtensionType?: string | null;
+  /** 文件类型 */
+  Type?: string | null;
+  /** md5值 */
+  Md5Value?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 文件大小 */
+  Size?: number | null;
+  /** 本地路径 */
+  LocalPath?: string | null;
+  /** 远程路径 */
+  RemotePath?: string | null;
+  /** 用户名称 */
+  OwnerName?: string | null;
+  /** 用户id */
+  Owner?: string | null;
+  /** 路径深度 */
+  PathDepth?: number | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 附加信息 */
+  ExtraInfo?: string | null;
+  /** 本地临时文件路径 */
+  LocalTempPath?: string | null;
+  /** 本地压缩文件路径 */
+  ZipPath?: string | null;
+  /** cos桶名 */
+  Bucket?: string | null;
+  /** cos地区 */
+  Region?: string | null;
+}
+
 declare interface SetTaskAlarmNewRequest {
   /** 设置任务超时告警和失败告警信息 */
   AlarmInfoList: AlarmInfo[];
@@ -6618,6 +6679,18 @@ declare interface UpdateInLongAgentRequest {
 }
 
 declare interface UpdateInLongAgentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UploadContentRequest {
+  /** 脚本上传信息 */
+  ScriptRequestInfo: ScriptRequestInfo;
+}
+
+declare interface UploadContentResponse {
+  /** 脚本信息响应 */
+  ScriptInfo?: ScriptInfoResponse | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7017,6 +7090,8 @@ declare interface Wedata {
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
   /** 更新采集器 {@link UpdateInLongAgentRequest} {@link UpdateInLongAgentResponse} */
   UpdateInLongAgent(data: UpdateInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInLongAgentResponse>;
+  /** 开发空间-保存任务信息 {@link UploadContentRequest} {@link UploadContentResponse} */
+  UploadContent(data: UploadContentRequest, config?: AxiosRequestConfig): AxiosPromise<UploadContentResponse>;
 }
 
 export declare type Versions = ["2021-08-20"];

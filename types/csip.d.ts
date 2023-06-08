@@ -391,6 +391,18 @@ declare interface AssetBaseInfoResponse {
   ProtectedDay?: number | null;
 }
 
+declare interface CreateDomainAndIpRequest {
+  /** - */
+  Content: string[];
+}
+
+declare interface CreateDomainAndIpResponse {
+  /** 返回创建成功的数量 */
+  Data?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCVMAssetInfoRequest {
   /** - */
   AssetId: string;
@@ -532,6 +544,8 @@ declare interface Csip {
   (): Versions;
   /** csip角色授权绑定接口 {@link AddNewBindRoleUserRequest} {@link AddNewBindRoleUserResponse} */
   AddNewBindRoleUser(data?: AddNewBindRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<AddNewBindRoleUserResponse>;
+  /** 创建域名、ip相关信息 {@link CreateDomainAndIpRequest} {@link CreateDomainAndIpResponse} */
+  CreateDomainAndIp(data: CreateDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAndIpResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */

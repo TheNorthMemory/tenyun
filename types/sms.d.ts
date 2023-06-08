@@ -365,7 +365,7 @@ declare interface ModifySmsSignRequest {
 
 declare interface ModifySmsSignResponse {
   /** 修改签名响应 */
-  ModifySignStatus: ModifySignStatus;
+  ModifySignStatus?: ModifySignStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -878,7 +878,7 @@ declare namespace V20190711 {
 
   interface ModifySmsSignResponse {
     /** 修改签名响应 */
-    ModifySignStatus: ModifySignStatus;
+    ModifySignStatus?: ModifySignStatus;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

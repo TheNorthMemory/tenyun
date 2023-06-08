@@ -1896,6 +1896,20 @@ declare interface InitDCDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface IsolateDCDBInstanceRequest {
+  /** 实例 ID，格式如：tdsqlshard-avw0207d，与云数据库控制台页面中显示的实例 ID 相同，可使用 查询实例列表 接口获取，其值为输出参数中字段 InstanceId 的值。 */
+  InstanceIds: string[];
+}
+
+declare interface IsolateDCDBInstanceResponse {
+  /** 隔离成功实例ID列表。 */
+  SuccessInstanceIds?: string[];
+  /** 隔离失败实例ID列表。 */
+  FailedInstanceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface IsolateDedicatedDBInstanceRequest {
   /** 实例 Id，形如：dcdbt-ow728lmc。 */
   InstanceId: string;
@@ -2389,6 +2403,8 @@ declare interface Dcdb {
   GrantAccountPrivileges(data: GrantAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<GrantAccountPrivilegesResponse>;
   /** 初始化实例 {@link InitDCDBInstancesRequest} {@link InitDCDBInstancesResponse} */
   InitDCDBInstances(data: InitDCDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDCDBInstancesResponse>;
+  /** 隔离TDSQL包年包月实例 {@link IsolateDCDBInstanceRequest} {@link IsolateDCDBInstanceResponse} */
+  IsolateDCDBInstance(data: IsolateDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDCDBInstanceResponse>;
   /** 隔离独享云数据库实例 {@link IsolateDedicatedDBInstanceRequest} {@link IsolateDedicatedDBInstanceResponse} */
   IsolateDedicatedDBInstance(data: IsolateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDedicatedDBInstanceResponse>;
   /** 隔离TDSQL按量计费实例 {@link IsolateHourDCDBInstanceRequest} {@link IsolateHourDCDBInstanceResponse} */
