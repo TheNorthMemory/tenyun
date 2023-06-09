@@ -478,6 +478,20 @@ declare interface IntegrateRole {
   SubOrgIdList?: string[] | null;
 }
 
+/** 部门信息 */
+declare interface IntegrationDepartment {
+  /** 部门ID */
+  DeptId?: string | null;
+  /** 部门名 */
+  DeptName?: string | null;
+  /** 父部门ID */
+  ParentDeptId?: string | null;
+  /** 客户系统部门ID */
+  DeptOpenId?: string | null;
+  /** 序列号 */
+  OrderNo?: number | null;
+}
+
 /** 主企业员工账号信息 */
 declare interface IntegrationMainOrganizationUser {
   /** 主企业id */
@@ -1110,6 +1124,28 @@ declare interface CreateFlowSignUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateIntegrationDepartmentRequest {
+  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  Operator: UserInfo;
+  /** 部门名称，不超过50个字符 */
+  DeptName: string;
+  /** 电子签父部门ID，与ParentDeptOpenId二选一,优先ParentDeptId,都为空时自动填充至根节点下 */
+  ParentDeptId?: string;
+  /** 第三方平台中父部门ID,与ParentDeptId二选一,优先ParentDeptId,都为空时自动填充至根节点下 */
+  ParentDeptOpenId?: string;
+  /** 客户系统部门ID，不超过64个字符 */
+  DeptOpenId?: string;
+  /** 排序号,1~30000范围内 */
+  OrderNo?: number;
+}
+
+declare interface CreateIntegrationDepartmentResponse {
+  /** 电子签部门ID */
+  DeptId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
@@ -1342,6 +1378,20 @@ declare interface CreateUserAutoSignEnableUrlResponse {
   RequestId?: string;
 }
 
+declare interface DeleteIntegrationDepartmentRequest {
+  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  Operator: UserInfo;
+  /** 电子签中的部门id */
+  DeptId: string;
+  /** 交接部门ID。待删除部门中的合同、印章和模版数据，交接至该部门ID下，未填写交接至公司根部门。 */
+  ReceiveDeptId?: string;
+}
+
+declare interface DeleteIntegrationDepartmentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
@@ -1504,6 +1554,24 @@ declare interface DescribeFlowTemplatesResponse {
   Templates?: TemplateInfo[];
   /** 查询到的总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIntegrationDepartmentsRequest {
+  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  Operator: UserInfo;
+  /** 查询类型 0-查询单个部门节点 1-单个部门节点及一级子节点部门列表 */
+  QueryType: number;
+  /** 部门ID,与DeptOpenId二选一,优先DeptId,都为空时获取根节点数据 */
+  DeptId?: string;
+  /** 客户系统部门ID,与DeptId二选一,优先DeptId,都为空时获取根节点数据 */
+  DeptOpenId?: string;
+}
+
+declare interface DescribeIntegrationDepartmentsResponse {
+  /** 部门列表 */
+  Departments?: IntegrationDepartment[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1714,6 +1782,26 @@ declare interface ModifyApplicationCallbackInfoResponse {
   RequestId?: string;
 }
 
+declare interface ModifyIntegrationDepartmentRequest {
+  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  Operator: UserInfo;
+  /** 电子签部门ID */
+  DeptId: string;
+  /** 电子签父部门ID */
+  ParentDeptId?: string;
+  /** 部门名称，不超过50个字符 */
+  DeptName?: string;
+  /** 客户系统部门ID，不超过64个字符 */
+  DeptOpenId?: string;
+  /** 排序号,1~30000范围内 */
+  OrderNo?: number;
+}
+
+declare interface ModifyIntegrationDepartmentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartFlowRequest {
   /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
@@ -1843,6 +1931,8 @@ declare interface Ess {
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
   /** 创建个人用户H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;
+  /** 创建企业部门 {@link CreateIntegrationDepartmentRequest} {@link CreateIntegrationDepartmentResponse} */
+  CreateIntegrationDepartment(data: CreateIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationDepartmentResponse>;
   /** 创建企业员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
   /** 绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
@@ -1861,6 +1951,8 @@ declare interface Ess {
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
   /** 获取个人用户自动签开启链接 {@link CreateUserAutoSignEnableUrlRequest} {@link CreateUserAutoSignEnableUrlResponse} */
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
+  /** 删除企业部门 {@link DeleteIntegrationDepartmentRequest} {@link DeleteIntegrationDepartmentResponse} */
+  DeleteIntegrationDepartment(data: DeleteIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationDepartmentResponse>;
   /** 移除企业员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
   /** 解绑员工角色 {@link DeleteIntegrationRoleUsersRequest} {@link DeleteIntegrationRoleUsersResponse} */
@@ -1877,6 +1969,8 @@ declare interface Ess {
   DescribeFlowInfo(data: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
   /** 查询模板 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
+  /** 获取企业部门列表 {@link DescribeIntegrationDepartmentsRequest} {@link DescribeIntegrationDepartmentsResponse} */
+  DescribeIntegrationDepartments(data: DescribeIntegrationDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationDepartmentsResponse>;
   /** 查询企业员工列表 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
   /** 查询集团主企业员工账号 {@link DescribeIntegrationMainOrganizationUserRequest} {@link DescribeIntegrationMainOrganizationUserResponse} */
@@ -1897,6 +1991,8 @@ declare interface Ess {
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
   /** 修改企业回调配置 {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */
   ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
+  /** 更新企业部门 {@link ModifyIntegrationDepartmentRequest} {@link ModifyIntegrationDepartmentResponse} */
+  ModifyIntegrationDepartment(data: ModifyIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationDepartmentResponse>;
   /** 模板发起合同-发起签署流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
   /** 员工userid与客户系统openid解绑 {@link UnbindEmployeeUserIdWithClientOpenIdRequest} {@link UnbindEmployeeUserIdWithClientOpenIdResponse} */

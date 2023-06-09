@@ -358,6 +358,10 @@ declare interface ApiUsagePlanSet {
   ApiUsagePlanList: ApiUsagePlan[] | null;
 }
 
+/** key-value */
+declare interface ApigatewayTags {
+}
+
 /** 插件绑定的API信息 */
 declare interface AttachedApiInfo {
   /** API所在服务ID。 */
@@ -572,10 +576,54 @@ declare interface DescribeApiResultServiceParametersInfo {
   RelevantRequestParameterDesc?: string | null;
 }
 
+/** api状态详情 */
+declare interface DescribeApisStatusResultApiIdStatusSetInfo {
+  /** 服务唯一ID。 */
+  ServiceId: string;
+  /** API唯一ID。 */
+  ApiId: string;
+  /** 用户自定义的 API 接口描述。 */
+  ApiDesc: string | null;
+  /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
+  CreatedTime: string | null;
+  /** 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
+  ModifiedTime: string | null;
+  /** API 接口的名称。 */
+  ApiName: string | null;
+  /** VPCID。 */
+  VpcId: number | null;
+  /** VPC唯一ID。 */
+  UniqVpcId: string | null;
+  /** API类型。取值为NORMAL（普通API）和TSF（微服务API）。 */
+  ApiType: string | null;
+  /** API协议。 */
+  Protocol: string | null;
+  /** 是否买后调试。（云市场预留字段） */
+  IsDebugAfterCharge: boolean | null;
+  /** API 鉴权类型。取值为SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH、EIAM。 */
+  AuthType: string | null;
+  /** OAUTH API的类型。当AuthType 为 OAUTH时该字段有效， 取值为NORMAL（业务API）和 OAUTH（授权API）。 */
+  ApiBusinessType: string | null;
+  /** 关联的授权API 唯一 ID，当AuthType为OAUTH且ApiBusinessType为NORMAL时生效。标示业务API绑定的oauth2.0授权API唯一ID。 */
+  AuthRelationApiId: string | null;
+  /** OAUTH 配置信息。当AuthType是OAUTH时生效。 */
+  OauthConfig: OauthConfig | null;
+  /** 授权API关联的业务API列表。 */
+  RelationBuniessApiIds?: string[] | null;
+  /** API关联的标签信息。 */
+  Tags: ApigatewayTags[] | null;
+  /** API 的路径，如 /path。 */
+  Path: string | null;
+  /** API 的请求方法，如 GET。 */
+  Method: string | null;
+}
+
 /** 描述api列表状态 */
 declare interface DescribeApisStatusResultInfo {
   /** 符合条件的 API 接口数量。 */
   TotalCount: number;
+  /** API 接口列表。 */
+  ApiIdStatusSet: DescribeApisStatusResultApiIdStatusSetInfo[];
 }
 
 /** 数据结构 */
