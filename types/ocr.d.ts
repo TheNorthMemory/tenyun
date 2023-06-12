@@ -2093,6 +2093,8 @@ declare interface BizLicenseOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否返回黑白复印件告警码，默认为false */
+  EnableCopyWarn?: boolean;
 }
 
 declare interface BizLicenseOCRResponse {
@@ -2116,9 +2118,9 @@ declare interface BizLicenseOCRResponse {
   ComposingForm?: string;
   /** 成立日期 */
   SetDate?: string;
-  /** Code 告警码列表和释义：-20001 非营业执照-9102 黑白复印件告警注：告警码可以同时存在多个 */
+  /** Code 告警码列表和释义：-9102 黑白复印件告警 */
   RecognizeWarnCode?: number[];
-  /** 告警码说明：OCR_WARNING_TYPE_NOT_MATCH 非营业执照WARN_COPY_CARD 黑白复印件告警注：告警信息可以同时存在多个 */
+  /** 告警码说明：WARN_COPY_CARD 黑白复印件告警 */
   RecognizeWarnMsg?: string[];
   /** 是否为副本。1为是，-1为不是。 */
   IsDuplication?: number;

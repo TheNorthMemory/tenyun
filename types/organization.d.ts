@@ -174,6 +174,22 @@ declare interface OrgPermission {
   Name: string;
 }
 
+declare interface AddOrganizationMemberEmailRequest {
+  /** 成员Uin */
+  MemberUin: number;
+  /** 邮箱地址 */
+  Email: string;
+  /** 国际区号 */
+  CountryCode: string;
+  /** 手机号 */
+  Phone: string;
+}
+
+declare interface AddOrganizationMemberEmailResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddOrganizationNodeRequest {
   /** 父节点ID。可以调用DescribeOrganizationNodes获取 */
   ParentNodeId: number;
@@ -342,6 +358,34 @@ declare interface DescribeOrganizationMemberAuthIdentitiesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOrganizationMemberEmailBindRequest {
+  /** 成员Uin */
+  MemberUin: number;
+}
+
+declare interface DescribeOrganizationMemberEmailBindResponse {
+  /** 绑定ID */
+  BindId: number | null;
+  /** 申请时间 */
+  ApplyTime: string | null;
+  /** 邮箱地址 */
+  Email: string | null;
+  /** 手机号 */
+  Phone: string | null;
+  /** 绑定状态 未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed */
+  BindStatus: string | null;
+  /** 绑定时间 */
+  BindTime: string | null;
+  /** 失败说明 */
+  Description: string | null;
+  /** 安全手机绑定状态 未绑定：0，已绑定：1 */
+  PhoneBind: number | null;
+  /** 国际区号 */
+  CountryCode: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrganizationMemberPoliciesRequest {
   /** 偏移量。 */
   Offset: number;
@@ -476,6 +520,24 @@ declare interface MoveOrganizationNodeMembersRequest {
 }
 
 declare interface MoveOrganizationNodeMembersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateOrganizationMemberEmailBindRequest {
+  /** 成员Uin */
+  MemberUin: number;
+  /** 绑定ID */
+  BindId: number;
+  /** 邮箱 */
+  Email: string;
+  /** 国际区号 */
+  CountryCode: string;
+  /** 手机号 */
+  Phone: string;
+}
+
+declare interface UpdateOrganizationMemberEmailBindResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -823,6 +885,8 @@ declare namespace V20181225 {
 /** {@link Organization 集团账号管理} */
 declare interface Organization {
   (): Versions;
+  /** 添加组织成员邮箱 {@link AddOrganizationMemberEmailRequest} {@link AddOrganizationMemberEmailResponse} */
+  AddOrganizationMemberEmail(data: AddOrganizationMemberEmailRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationMemberEmailResponse>;
   /** 添加企业组织节点 {@link AddOrganizationNodeRequest} {@link AddOrganizationNodeResponse} */
   AddOrganizationNode(data: AddOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationNodeResponse>;
   /** 绑定组织成员和组织管理员子账号的授权关系 {@link BindOrganizationMemberAuthAccountRequest} {@link BindOrganizationMemberAuthAccountResponse} */
@@ -845,6 +909,8 @@ declare interface Organization {
   DescribeOrganizationMemberAuthAccounts(data: DescribeOrganizationMemberAuthAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthAccountsResponse>;
   /** 获取组织成员可被管理的身份列表 {@link DescribeOrganizationMemberAuthIdentitiesRequest} {@link DescribeOrganizationMemberAuthIdentitiesResponse} */
   DescribeOrganizationMemberAuthIdentities(data: DescribeOrganizationMemberAuthIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthIdentitiesResponse>;
+  /** 查询成员邮箱绑定详细信息 {@link DescribeOrganizationMemberEmailBindRequest} {@link DescribeOrganizationMemberEmailBindResponse} */
+  DescribeOrganizationMemberEmailBind(data: DescribeOrganizationMemberEmailBindRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberEmailBindResponse>;
   /** 获取组织成员的授权策略列表 {@link DescribeOrganizationMemberPoliciesRequest} {@link DescribeOrganizationMemberPoliciesResponse} */
   DescribeOrganizationMemberPolicies(data: DescribeOrganizationMemberPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberPoliciesResponse>;
   /** 获取企业组织成员列表 {@link DescribeOrganizationMembersRequest} {@link DescribeOrganizationMembersResponse} */
@@ -855,6 +921,8 @@ declare interface Organization {
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
   /** 移动成员到指定企业组织节点 {@link MoveOrganizationNodeMembersRequest} {@link MoveOrganizationNodeMembersResponse} */
   MoveOrganizationNodeMembers(data: MoveOrganizationNodeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<MoveOrganizationNodeMembersResponse>;
+  /** 修改绑定成员邮箱 {@link UpdateOrganizationMemberEmailBindRequest} {@link UpdateOrganizationMemberEmailBindResponse} */
+  UpdateOrganizationMemberEmailBind(data: UpdateOrganizationMemberEmailBindRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationMemberEmailBindResponse>;
   /** 更新企业组织节点 {@link UpdateOrganizationNodeRequest} {@link UpdateOrganizationNodeResponse} */
   UpdateOrganizationNode(data: UpdateOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationNodeResponse>;
   /** 接受加入企业组织邀请 {@link V20181225.AcceptOrganizationInvitationRequest} {@link V20181225.AcceptOrganizationInvitationResponse} */

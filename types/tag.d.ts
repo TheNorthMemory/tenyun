@@ -291,9 +291,9 @@ declare interface DescribeResourceTagsByTagKeysRequest {
   ResourcePrefix: string;
   /** 资源地域 */
   ResourceRegion: string;
-  /** 资源唯一标识 */
+  /** 资源唯一标识ID的列表，列表容量不超过20 */
   ResourceIds: string[];
-  /** 资源标签键 */
+  /** 资源标签键列表，列表容量不超过20 */
   TagKeys: string[];
   /** 每页大小，默认为 400 */
   Limit?: number;

@@ -438,7 +438,7 @@ declare interface StaffBuyInfo {
   Num: number;
   /** 购买时间戳 */
   BuyTime: number;
-  /** 截至时间戳 */
+  /** 截止时间戳 */
   EndTime: number;
 }
 

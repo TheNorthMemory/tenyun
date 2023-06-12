@@ -1088,10 +1088,10 @@ declare interface Target {
 declare interface TargetGroupAssociation {
   /** 负载均衡ID */
   LoadBalancerId: string;
-  /** 监听器ID */
-  ListenerId: string;
   /** 目标组ID */
   TargetGroupId: string;
+  /** 监听器ID */
+  ListenerId?: string;
   /** 转发规则ID */
   LocationId?: string;
 }
@@ -1145,7 +1145,7 @@ declare interface TargetGroupInstance {
   /** 目标组实例的内网IP */
   BindIP: string;
   /** 目标组实例的端口 */
-  Port: number;
+  Port?: number;
   /** 目标组实例的权重 */
   Weight?: number;
   /** 目标组实例的新端口 */
@@ -1501,7 +1501,7 @@ declare interface CreateTargetGroupRequest {
 
 declare interface CreateTargetGroupResponse {
   /** 创建目标组后生成的id */
-  TargetGroupId: string;
+  TargetGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

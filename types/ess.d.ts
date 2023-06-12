@@ -858,6 +858,20 @@ declare interface CancelMultiFlowSignQRCodeResponse {
   RequestId?: string;
 }
 
+declare interface CancelUserAutoSignEnableUrlRequest {
+  /** 操作人信息，UseId必填 */
+  Operator: UserInfo;
+  /** 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 指定撤销链接的用户指定撤销链接的用户信息，包含姓名、证件类型、证件号码。 */
+  UserInfo: UserThreeFactor;
+}
+
+declare interface CancelUserAutoSignEnableUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBatchCancelFlowUrlRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
@@ -893,7 +907,7 @@ declare interface CreateChannelSubOrganizationModifyQrCodeResponse {
 }
 
 declare interface CreateConvertTaskApiRequest {
-  /** 资源类型 取值范围doc,docx,html,xls,xlsx之一 */
+  /** 资源类型 支持doc,docx,html,xls,xlsx,jpg,jpeg,png,bmp文件类型 */
   ResourceType: string;
   /** 资源名称，长度限制为256字符 */
   ResourceName: string;
@@ -1909,6 +1923,8 @@ declare interface Ess {
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
   /** 取消一码多扫二维码 {@link CancelMultiFlowSignQRCodeRequest} {@link CancelMultiFlowSignQRCodeResponse} */
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
+  /** 撤销自动签开通链接 {@link CancelUserAutoSignEnableUrlRequest} {@link CancelUserAutoSignEnableUrlResponse} */
+  CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 批量撤销签署流程 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
   /** 生成子客编辑企业信息二维码 {@link CreateChannelSubOrganizationModifyQrCodeRequest} {@link CreateChannelSubOrganizationModifyQrCodeResponse} */

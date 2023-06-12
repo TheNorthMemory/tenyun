@@ -1233,6 +1233,8 @@ declare interface DescribeHostCdnInstanceListRequest {
   Offset?: number;
   /** 每页数量，默认10。 */
   Limit?: number;
+  /** 是否异步 */
+  AsyncCache?: number;
 }
 
 declare interface DescribeHostCdnInstanceListResponse {
@@ -1240,6 +1242,12 @@ declare interface DescribeHostCdnInstanceListResponse {
   InstanceList?: CdnInstanceDetail[] | null;
   /** CDN域名总数 */
   TotalCount?: number | null;
+  /** 异步刷新总数 */
+  AsyncTotalNum?: number | null;
+  /** 异步刷新当前执行数 */
+  AsyncOffset?: number | null;
+  /** 当前缓存读取时间 */
+  AsyncCacheTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1270,6 +1278,8 @@ declare interface DescribeHostClbInstanceListResponse {
   AsyncTotalNum?: number | null;
   /** 异步刷新当前执行数 */
   AsyncOffset?: number | null;
+  /** 当前缓存读取时间 */
+  AsyncCacheTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1287,13 +1297,15 @@ declare interface DescribeHostCosInstanceListRequest {
 
 declare interface DescribeHostCosInstanceListResponse {
   /** COS实例列表 */
-  InstanceList: CosInstanceDetail[] | null;
+  InstanceList?: CosInstanceDetail[] | null;
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 异步刷新总数 */
-  AsyncTotalNum: number | null;
+  AsyncTotalNum?: number | null;
   /** 异步刷新当前执行数 */
-  AsyncOffset: number | null;
+  AsyncOffset?: number | null;
+  /** 当前缓存读取时间 */
+  AsyncCacheTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1450,6 +1462,8 @@ declare interface DescribeHostTkeInstanceListResponse {
   AsyncTotalNum?: number | null;
   /** 异步刷新当前执行数 */
   AsyncOffset?: number | null;
+  /** 当前缓存读取时间 */
+  AsyncCacheTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1983,7 +1997,7 @@ declare interface Ssl {
   DescribeHostApiGatewayInstanceList(data: DescribeHostApiGatewayInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostApiGatewayInstanceListResponse>;
   /** 查询证书cdn云资源部署实例列表 {@link DescribeHostCdnInstanceListRequest} {@link DescribeHostCdnInstanceListResponse} */
   DescribeHostCdnInstanceList(data: DescribeHostCdnInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostCdnInstanceListResponse>;
-  /** 查询证书clb云资源部署实例列表 {@link DescribeHostClbInstanceListRequest} {@link DescribeHostClbInstanceListResponse} */
+  /** 查询证书CLB云资源部署实例列表信息 {@link DescribeHostClbInstanceListRequest} {@link DescribeHostClbInstanceListResponse} */
   DescribeHostClbInstanceList(data: DescribeHostClbInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostClbInstanceListResponse>;
   /** 查询证书cos云资源部署实例列表 {@link DescribeHostCosInstanceListRequest} {@link DescribeHostCosInstanceListResponse} */
   DescribeHostCosInstanceList(data: DescribeHostCosInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostCosInstanceListResponse>;

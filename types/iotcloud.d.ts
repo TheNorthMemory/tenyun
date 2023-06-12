@@ -262,6 +262,10 @@ declare interface ProductInfo {
 declare interface ProductMetadata {
   /** 产品创建时间 */
   CreationDate: number;
+  /** 创建者 Uin */
+  CreateUserId: number;
+  /** 账号 Uin */
+  UserId: number;
 }
 
 /** 产品属性 */
@@ -288,7 +292,7 @@ declare interface ProductProperties {
   ProductKey?: string;
   /** 动态注册类型 0-关闭, 1-预定义设备名 2-动态定义设备名 */
   RegisterType?: number;
-  /** 动态注册产品秘钥 */
+  /** 动态注册产品密钥 */
   ProductSecret?: string;
   /** RegisterType为2时，设备动态创建的限制数量 */
   RegisterLimit?: number;
@@ -298,6 +302,10 @@ declare interface ProductProperties {
   PrivateCAName?: string;
   /** 划归的产品，展示为源用户ID，其余为空 */
   OriginUserId?: number;
+  /** 设备限制 */
+  DeviceLimit?: number;
+  /** 产品禁用状态 */
+  ForbiddenStatus?: number;
 }
 
 /** 产品资源详细信息 */

@@ -2451,7 +2451,7 @@ declare interface DescribeNewL7RulesRequest {
   Domain?: string;
   /** IP搜索，选填，当需要搜索IP请填写 */
   Ip?: string;
-  /** 一页条数，填0表示不分页 */
+  /** 一页条数，默认值100，最大值100，超过100最大返回100条 */
   Limit?: number;
   /** 页起始偏移，取值为(页码-1)*一页条数 */
   Offset?: number;

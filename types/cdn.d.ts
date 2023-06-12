@@ -244,6 +244,8 @@ declare interface AdvancedScdnAclRule {
 declare interface Authentication {
   /** 防盗链配置开关，取值有：on：开启off：关闭开启时必须且只配置一种模式，其余模式需要设置为 null */
   Switch: string;
+  /** 鉴权算法，取值有：md5：按MD5算法取hash值sha256：按SHA-256算法取hash值默认为 md5 */
+  AuthAlgorithm?: string | null;
   /** 时间戳防盗链模式 A 配置 */
   TypeA?: AuthenticationTypeA | null;
   /** 时间戳防盗链模式 B 配置（模式 B 后台升级中，暂时不支持配置） */
@@ -1502,9 +1504,9 @@ declare interface OfflineCache {
 declare interface Origin {
   /** 主源站列表修改源站时，需要同时填充对应的 OriginType */
   Origins?: string[] | null;
-  /** 主源站类型入参支持以下几种类型：domain：域名类型domainv6：域名解析V6类型cos：对象存储源站third_party: 第三方存储源站igtm: IGTM多活源ip：IP 列表作为源站ipv6：源站列表为一个单独的 IPv6 地址ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ip_domain: 支持IP和域名形式源站混填（白名单功能）ip_domainv6：源站列表为多个 IPv4 地址以及域名解析v6地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ipv6_domainv6：源站列表为多个 IPv6 地址以及域名解析v6地址domain_domainv6：源站列表为多个域名解析v4 地址以及域名解析v6地址ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名ip_ipv6_domainv6：源站列表为多个 IPv4 地址IPv6 地址以及域名解析v6地址ip_domain_domainv6：源站列表为多个 IPv4 地址域名解析v4 地址以及域名解析v6地址ipv6_domain_domainv6：源站列表为多个 域名解析v4 地址IPv6 地址以及域名解析v6地址ip_ipv6_domain_domainv6：源站列表为多个 IPv4 地址IPv6 地址 域名解析v4 地址以及域名解析v6地址出参增加以下几种类型：image：数据万象源站ftp：历史 FTP 托管源源站，现已不维护修改 Origins 时需要同时填充对应的 OriginTypeIPv6 功能目前尚未全量，需要先申请试用 */
+  /** 主源站类型当源站列表 Origins 不为空时必填入参支持以下几种类型：domain：域名类型domainv6：域名解析V6类型cos：对象存储源站third_party: 第三方存储源站igtm: IGTM多活源ip：IP 列表作为源站ipv6：源站列表为一个单独的 IPv6 地址ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ip_domain: 支持IP和域名形式源站混填（白名单功能）ip_domainv6：源站列表为多个 IPv4 地址以及域名解析v6地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ipv6_domainv6：源站列表为多个 IPv6 地址以及域名解析v6地址domain_domainv6：源站列表为多个域名解析v4 地址以及域名解析v6地址ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名ip_ipv6_domainv6：源站列表为多个 IPv4 地址IPv6 地址以及域名解析v6地址ip_domain_domainv6：源站列表为多个 IPv4 地址域名解析v4 地址以及域名解析v6地址ipv6_domain_domainv6：源站列表为多个 域名解析v4 地址IPv6 地址以及域名解析v6地址ip_ipv6_domain_domainv6：源站列表为多个 IPv4 地址IPv6 地址 域名解析v4 地址以及域名解析v6地址出参增加以下几种类型：image：数据万象源站ftp：历史 FTP 托管源源站，现已不维护修改 Origins 时需要同时填充对应的 OriginTypeIPv6 功能目前尚未全量，需要先申请试用 */
   OriginType?: string | null;
-  /** 当源站类型为cos或者第三方存储加速时,ServerName字段必填回主源站时 Host 头部，不填充则默认为加速域名若接入的是泛域名，则回源 Host 默认为访问时的子域名 */
+  /** 回主源站时 Host 头部当源站类型为cos或者第三方存储加速时,ServerName字段必填不填充则默认为加速域名若接入的是泛域名，则回源 Host 默认为访问时的子域名 */
   ServerName?: string | null;
   /** OriginType 为对象存储（COS）时，可以指定是否允许访问私有 bucket注意：需要先授权 CDN 访问该私有 Bucket 的权限后，才可开启此配置。取值范围: on/off */
   CosPrivateAccess?: string | null;
@@ -1512,7 +1514,7 @@ declare interface Origin {
   OriginPullProtocol?: string | null;
   /** 备源站列表修改备源站时，需要同时填充对应的 BackupOriginType */
   BackupOrigins?: string[] | null;
-  /** 备源站类型，支持以下类型：domain：域名类型ip：IP 列表作为源站修改 BackupOrigins 时需要同时填充对应的 BackupOriginType以下备源源站类型尚未全量支持，需要申请试用：ipv6_domain: 源站列表为多个 IPv6 地址以及域名ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名 */
+  /** 备源站类型备源站列表BackupOrigins 不为空时必填支持以下类型：domain：域名类型ip：IP 列表作为源站以下备源源站类型尚未全量支持，需要申请试用：ipv6_domain: 源站列表为多个 IPv6 地址以及域名ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名 */
   BackupOriginType?: string | null;
   /** 回备源站时 Host 头部，不填充则默认为主源站的 ServerName */
   BackupServerName?: string | null;
@@ -1526,7 +1528,7 @@ declare interface Origin {
   Sni?: OriginSni | null;
   /** HTTPS回源高级配置 */
   AdvanceHttps?: AdvanceHttps | null;
-  /** 对象存储回源厂商，当源站类型为第三方存储源站(third_party)时必填，可选值包括以下:aws_s3: AWS S3ali_oss: 阿里云 OSShw_obs: 华为 OBSqiniu_kodo: 七牛云 kodoothers: 其它厂商对象存储,仅支持兼容以AWS签名算法的对象存储，如腾讯云金融专区COS */
+  /** 对象存储回源厂商当源站类型为第三方存储源站(third_party)时必填可选值包括以下:aws_s3: AWS S3ali_oss: 阿里云 OSShw_obs: 华为 OBSqiniu_kodo: 七牛云 kodoothers: 其它厂商对象存储,仅支持兼容以AWS签名算法的对象存储，如腾讯云金融专区COS */
   OriginCompany?: string | null;
 }
 

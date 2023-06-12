@@ -434,6 +434,8 @@ declare interface CynosdbClusterDetail {
   NetworkStatus: string | null;
   /** 集群绑定的资源包信息 */
   ResourcePackages?: ResourcePackage[] | null;
+  /** 自动续费标识，1为自动续费，0为到期不续 */
+  RenewFlag?: number | null;
 }
 
 /** 实例错误日志返回类型 */
@@ -2369,16 +2371,16 @@ declare interface DescribeMaintainPeriodResponse {
 }
 
 declare interface DescribeParamTemplateDetailRequest {
-  /** 参数模版ID */
+  /** 参数模板ID */
   TemplateId: number;
 }
 
 declare interface DescribeParamTemplateDetailResponse {
-  /** 参数模版ID */
+  /** 参数模板ID */
   TemplateId?: number;
-  /** 参数模版名称 */
+  /** 参数模板名称 */
   TemplateName?: string;
-  /** 参数模版描述 */
+  /** 参数模板描述 */
   TemplateDescription?: string;
   /** 引擎版本 */
   EngineVersion?: string;

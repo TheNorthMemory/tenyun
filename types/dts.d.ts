@@ -1193,9 +1193,9 @@ declare interface DescribeCompareTasksRequest {
 
 declare interface DescribeCompareTasksResponse {
   /** 数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 一致性校验列表 */
-  Items: CompareTaskItem[] | null;
+  Items?: CompareTaskItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1937,7 +1937,7 @@ declare namespace V20180330 {
     SubscribeVersion?: string | null;
   }
 
-  /** 数据数据订阅的对象 */
+  /** 数据订阅的对象 */
   interface SubscribeObject {
     /** 数据订阅对象的类型，0-数据库，1-数据库内的表 */
     ObjectsType: number | null;

@@ -362,6 +362,8 @@ declare interface ClusterLevelChangeRecord {
   NewLevel: string;
   /** 变配触发类型：manual 手动,auto 自动 */
   TriggerType: string;
+  /** 创建时间 */
+  CreatedAt?: string;
   /** 开始时间 */
   StartedAt: string;
   /** 结束时间 */

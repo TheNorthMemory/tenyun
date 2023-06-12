@@ -859,7 +859,7 @@ declare interface ChannelCreateBoundFlowsResponse {
 declare interface ChannelCreateConvertTaskApiRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
-  /** 资源类型 取值范围doc,docx,html,xls,xlsx之一 */
+  /** 资源类型 支持doc,docx,html,xls,xlsx,jpg,jpeg,png,bmp文件类型 */
   ResourceType: string;
   /** 资源名称，长度限制为256字符 */
   ResourceName: string;
@@ -1133,10 +1133,12 @@ declare interface ChannelCreateSealPolicyResponse {
 declare interface ChannelCreateUserRolesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
   Agent: Agent;
-  /** 绑定角色的员工id列表，电子签的UserId */
-  UserIds: string[];
   /** 绑定角色的角色id列表 */
   RoleIds: string[];
+  /** 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数 */
+  UserIds?: string[];
+  /** 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数 */
+  OpenIds?: string[];
   /** 操作者信息 */
   Operator?: UserInfo;
 }
@@ -1153,10 +1155,12 @@ declare interface ChannelDeleteRoleUsersRequest {
   Agent: Agent;
   /** 角色Id（非超管或法人角色Id） */
   RoleId: string;
-  /** 用户列表，电子签系统的UserId */
-  UserIds: string[];
+  /** 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数 */
+  UserIds?: string[];
   /** 操作人信息 */
   Operator?: UserInfo;
+  /** 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数 */
+  OpenIds?: string[];
 }
 
 declare interface ChannelDeleteRoleUsersResponse {

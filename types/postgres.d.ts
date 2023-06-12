@@ -180,7 +180,7 @@ declare interface DBInstance {
   DBInstanceId: string;
   /** 实例名称 */
   DBInstanceName: string;
-  /** 实例状态，分别为：applying（申请中）、init(待初始化)、initing(初始化中)、running(运行中)、limited run（受限运行）、isolated（已隔离）、recycling（回收中）、recycled（已回收）、job running（任务执行中）、offline（下线）、migrating（迁移中）、expanding（扩容中）、waitSwitch（等待切换）、switching（切换中）、readonly（只读）、restarting（重启中）、network changing（网络变更中）、upgrading（内核版本升级中） */
+  /** 实例状态，分别为：applying（申请中）、init(待初始化)、initing(初始化中)、running(运行中)、limited run（受限运行）、isolating（隔离中）、isolated（已隔离）、recycling（回收中）、recycled（已回收）、job running（任务执行中）、offline（下线）、migrating（迁移中）、expanding（扩容中）、waitSwitch（等待切换）、switching（切换中）、readonly（只读）、restarting（重启中）、network changing（网络变更中）、upgrading（内核版本升级中） */
   DBInstanceStatus: string;
   /** 实例分配的内存大小，单位：GB */
   DBInstanceMemory: number;
@@ -924,6 +924,8 @@ declare interface CreateBaseBackupRequest {
 }
 
 declare interface CreateBaseBackupResponse {
+  /** 基础备份集ID */
+  BaseBackupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1459,7 +1461,7 @@ declare interface DescribeBaseBackupsRequest {
   MinFinishTime?: string;
   /** 备份的最大结束时间，形如2018-01-01 00:00:00。默认为当前时间。 */
   MaxFinishTime?: string;
-  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。 */
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。base-backup-id：按照备份集ID过滤，类型为string。 */
   Filters?: Filter[];
   /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
   Limit?: number;
@@ -1473,9 +1475,9 @@ declare interface DescribeBaseBackupsRequest {
 
 declare interface DescribeBaseBackupsResponse {
   /** 查询到的基础备份数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 基础备份详细信息列表。 */
-  BaseBackupSet: BaseBackup[];
+  BaseBackupSet?: BaseBackup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1843,7 +1845,7 @@ declare interface DescribeProductConfigResponse {
 }
 
 declare interface DescribeReadOnlyGroupsRequest {
-  /** 过滤条件，必须传入主实例ID进行过滤，否则返回值将为空，过滤参数为：db-master-instance-id */
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-master-instance-id：按照主实例过滤，类型为string。read-only-group-id：按照只读组ID过滤，类型为string。 */
   Filters?: Filter[];
   /** 查询每一页的条数，默认为10 */
   PageSize?: number;
@@ -1857,7 +1859,7 @@ declare interface DescribeReadOnlyGroupsRequest {
 
 declare interface DescribeReadOnlyGroupsResponse {
   /** 只读组列表 */
-  ReadOnlyGroupList: ReadOnlyGroup[];
+  ReadOnlyGroupList?: ReadOnlyGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

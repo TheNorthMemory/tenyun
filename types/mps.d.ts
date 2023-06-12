@@ -1180,6 +1180,8 @@ declare interface AsrFullTextConfigureInfo {
   Switch: string;
   /** 生成的字幕文件格式，不填或者填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件。 */
   SubtitleFormat?: string;
+  /** 视频源语言。 */
+  SourceLanguage?: string;
 }
 
 /** 语音全文识别任务控制参数 */
@@ -1188,6 +1190,8 @@ declare interface AsrFullTextConfigureInfoForUpdate {
   Switch?: string;
   /** 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件。 */
   SubtitleFormat?: string;
+  /** 视频源语言。 */
+  SourceLanguage?: string | null;
 }
 
 /** 语音关键词识别控制参数。 */
@@ -1510,6 +1514,22 @@ declare interface CreateOutputSRTSettingsDestinations {
   Port: number;
 }
 
+/** 查询Event的配置信息。 */
+declare interface DescribeEvent {
+  /** Event的名称。 */
+  EventName: string;
+  /** Event的Id，唯一标识一个event。 */
+  EventId: string;
+  /** Event创建时间，格式为yyyy-MM-ddTHH:mm:ssZ。 */
+  CreateTime: string;
+  /** Event的描述。 */
+  Description: string;
+  /** Event的状态信息0：未运行1：运行中 */
+  Status: number;
+  /** Event关联的Flow列表。 */
+  AttachedFlowGroup: DescribeFlowId[] | null;
+}
+
 /** 查询Flow的配置信息。 */
 declare interface DescribeFlow {
   /** 流Id。 */
@@ -1527,6 +1547,14 @@ declare interface DescribeFlow {
   /** 该Flow关联的媒体传输事件EventId。 */
   EventId: string;
   /** 媒体传输输入流所属的区域，取值和InputRegion相同。 */
+  Region: string;
+}
+
+/** Event管理的Flow列表 */
+declare interface DescribeFlowId {
+  /** FlowId，唯一标识一个flow。 */
+  FlowId: string;
+  /** flow所在的区域名称。 */
   Region: string;
 }
 
@@ -4004,6 +4032,26 @@ declare interface TranscodeTemplate {
   EnhanceConfig: EnhanceConfig | null;
 }
 
+/** 语音翻译任务控制参数 */
+declare interface TranslateConfigureInfo {
+  /** 语音翻译任务开关，可选值：ON：开启智能语音翻译任务；OFF：关闭智能语音翻译任务。 */
+  Switch: string;
+  /** 视频源语言。 */
+  SourceLanguage?: string;
+  /** 翻译目标语言。 */
+  DestinationLanguage?: string;
+}
+
+/** 语音翻译任务控制参数 */
+declare interface TranslateConfigureInfoForUpdate {
+  /** 语音翻译任务开关，可选值：ON：开启智能语音翻译任务；OFF：关闭智能语音翻译任务。 */
+  Switch?: string;
+  /** 视频源语言。 */
+  SourceLanguage?: string | null;
+  /** 翻译目标语言。 */
+  DestinationLanguage?: string | null;
+}
+
 /** 媒体处理 URL 对象信息。 */
 declare interface UrlInputInfo {
   /** 视频的 URL。 */
@@ -4294,6 +4342,42 @@ declare interface WorkflowTrigger {
   AwsS3FileUploadTrigger?: AwsS3FileUploadTrigger | null;
 }
 
+declare interface BatchDeleteStreamLinkFlowRequest {
+  /** EventId。 */
+  EventId: string;
+  /** Event关联的流Id数组，如果不传默认删除Event下面的所有媒体传输流。 */
+  FlowIds?: string[];
+}
+
+declare interface BatchDeleteStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchStartStreamLinkFlowRequest {
+  /** EventId。 */
+  EventId: string;
+  /** Event关联的流Id数组，如果不传默认启动Event下面的所有媒体传输流。 */
+  FlowIds?: string[];
+}
+
+declare interface BatchStartStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchStopStreamLinkFlowRequest {
+  /** EventId。 */
+  EventId: string;
+  /** 流Id，如果不传默认停止Event下所有的媒体传输流。 */
+  FlowIds?: string[];
+}
+
+declare interface BatchStopStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAIAnalysisTemplateRequest {
   /** 视频内容分析模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -4331,11 +4415,13 @@ declare interface CreateAIRecognitionTemplateRequest {
   AsrFullTextConfigure?: AsrFullTextConfigureInfo;
   /** 语音关键词识别控制参数。 */
   AsrWordsConfigure?: AsrWordsConfigureInfo;
+  /** 语音翻译控制参数。 */
+  TranslateConfigure?: TranslateConfigureInfo;
 }
 
 declare interface CreateAIRecognitionTemplateResponse {
   /** 视频内容识别模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4536,6 +4622,20 @@ declare interface CreateSnapshotByTimeOffsetTemplateRequest {
 declare interface CreateSnapshotByTimeOffsetTemplateResponse {
   /** 时间点截图模板唯一标识。 */
   Definition: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateStreamLinkEventRequest {
+  /** 事件名称。 */
+  EventName: string;
+  /** 事件描述。 */
+  Description?: string;
+}
+
+declare interface CreateStreamLinkEventResponse {
+  /** 创建的Event信息。 */
+  Info: DescribeEvent;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4782,6 +4882,16 @@ declare interface DeleteSnapshotByTimeOffsetTemplateRequest {
 }
 
 declare interface DeleteSnapshotByTimeOffsetTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamLinkEventRequest {
+  /** 媒体传输事件Id，删除前需要保证该Event关联的所有Flow都已经删除。 */
+  EventId: string;
+}
+
+declare interface DeleteStreamLinkEventResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5076,6 +5186,58 @@ declare interface DescribeStreamLinkActivateStateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeStreamLinkEventAttachedFlowsRequest {
+  /** EventId。 */
+  EventId: string;
+  /** 当前页数，默认1。 */
+  PageNum?: number;
+  /** 每页大小，默认10。 */
+  PageSize?: number;
+}
+
+declare interface DescribeStreamLinkEventAttachedFlowsResponse {
+  /** 流的配置信息列表。 */
+  Infos: DescribeFlow[];
+  /** 总数量。 */
+  TotalNum: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkEventRequest {
+  /** 媒体传输事件ID。 */
+  EventId: string;
+}
+
+declare interface DescribeStreamLinkEventResponse {
+  /** 媒体传输事件的配置信息。 */
+  Info: DescribeEvent;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkEventsRequest {
+  /** 当前页数，默认1。 */
+  PageNum?: number;
+  /** 每页大小，默认10。 */
+  PageSize?: number;
+}
+
+declare interface DescribeStreamLinkEventsResponse {
+  /** 媒体传输事件的配置信息列表。 */
+  Infos: DescribeEvent[];
+  /** 当前页数。 */
+  PageNum: number;
+  /** 每页大小。 */
+  PageSize: number;
+  /** 总数量。 */
+  TotalNum: number;
+  /** 总页数。 */
+  TotalPage: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStreamLinkFlowLogsRequest {
   /** 传输流Id。 */
   FlowId: string;
@@ -5309,21 +5471,21 @@ declare interface DescribeTranscodeTemplatesRequest {
   Type?: string;
   /** 封装格式过滤条件，可选值：Video：视频格式，可以同时包含视频流和音频流的封装格式板；PureAudio：纯音频格式，只能包含音频流的封装格式。 */
   ContainerType?: string;
-  /** 极速高清过滤条件，用于过滤普通转码或极速高清转码模板，可选值：Common：普通转码模板；TEHD：极速高清模板。 */
+  /** （建议使用TranscodeType代替）极速高清过滤条件，用于过滤普通转码或极速高清转码模板，可选值：Common：普通转码模板；TEHD：极速高清模板。 */
   TEHDType?: string;
   /** 分页偏移量，默认值：0。 */
   Offset?: number;
   /** 返回记录条数，默认值：10，最大值：100。 */
   Limit?: number;
-  /** 模板类型（替换旧版本 TEHDType），可选值：Common：普通转码模板；TEHD：极速高清模板。Enhance：音视频增强模板。默认空，不限制类型。 */
+  /** 模板类型（替换旧版本 TEHDType），可选值：Common：普通转码模板；TEHD：视频极速高清，老的类型（建议使用 TEHD-100） 。TEHD-100：视频极速高清TEHD-200：音频极速高清Enhance：音视频增强模板。默认空，不限制类型。 */
   TranscodeType?: string;
 }
 
 declare interface DescribeTranscodeTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 转码模板详情列表。 */
-  TranscodeTemplateSet: TranscodeTemplate[];
+  TranscodeTemplateSet?: TranscodeTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5521,6 +5683,8 @@ declare interface ModifyAIRecognitionTemplateRequest {
   AsrFullTextConfigure?: AsrFullTextConfigureInfoForUpdate;
   /** 语音关键词识别控制参数。 */
   AsrWordsConfigure?: AsrWordsConfigureInfoForUpdate;
+  /** 语音翻译控制参数。 */
+  TranslateConfigure?: TranslateConfigureInfoForUpdate;
 }
 
 declare interface ModifyAIRecognitionTemplateResponse {
@@ -5726,6 +5890,20 @@ declare interface ModifySnapshotByTimeOffsetTemplateRequest {
 }
 
 declare interface ModifySnapshotByTimeOffsetTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyStreamLinkEventRequest {
+  /** 媒体传输事件Event Id。 */
+  EventId: string;
+  /** 需要修改的事件名称。 */
+  EventName: string;
+  /** Event的描述信息。 */
+  Description?: string;
+}
+
+declare interface ModifyStreamLinkEventResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6043,6 +6221,12 @@ declare interface WithdrawsWatermarkResponse {
 /** {@link Mps 媒体处理} */
 declare interface Mps {
   (): Versions;
+  /** 批量删除媒体传输流 {@link BatchDeleteStreamLinkFlowRequest} {@link BatchDeleteStreamLinkFlowResponse} */
+  BatchDeleteStreamLinkFlow(data: BatchDeleteStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteStreamLinkFlowResponse>;
+  /** 批量开启媒体传输流 {@link BatchStartStreamLinkFlowRequest} {@link BatchStartStreamLinkFlowResponse} */
+  BatchStartStreamLinkFlow(data: BatchStartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStartStreamLinkFlowResponse>;
+  /** 批量停止媒体传输流 {@link BatchStopStreamLinkFlowRequest} {@link BatchStopStreamLinkFlowResponse} */
+  BatchStopStreamLinkFlow(data: BatchStopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopStreamLinkFlowResponse>;
   /** 创建内容分析模板 {@link CreateAIAnalysisTemplateRequest} {@link CreateAIAnalysisTemplateResponse} */
   CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
   /** 创建内容识别模板 {@link CreateAIRecognitionTemplateRequest} {@link CreateAIRecognitionTemplateResponse} */
@@ -6063,6 +6247,8 @@ declare interface Mps {
   CreateSchedule(data: CreateScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduleResponse>;
   /** 创建指定时间点截图模板 {@link CreateSnapshotByTimeOffsetTemplateRequest} {@link CreateSnapshotByTimeOffsetTemplateResponse} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
+  /** 创建媒体传输事件 {@link CreateStreamLinkEventRequest} {@link CreateStreamLinkEventResponse} */
+  CreateStreamLinkEvent(data: CreateStreamLinkEventRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkEventResponse>;
   /** 创建媒体传输流 {@link CreateStreamLinkFlowRequest} {@link CreateStreamLinkFlowResponse} */
   CreateStreamLinkFlow(data: CreateStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkFlowResponse>;
   /** 创建媒体传输输入 {@link CreateStreamLinkInputRequest} {@link CreateStreamLinkInputResponse} */
@@ -6097,6 +6283,8 @@ declare interface Mps {
   DeleteSchedule(data: DeleteScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduleResponse>;
   /** 删除指定时间点截图模板 {@link DeleteSnapshotByTimeOffsetTemplateRequest} {@link DeleteSnapshotByTimeOffsetTemplateResponse} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
+  /** 删除媒体传输事件 {@link DeleteStreamLinkEventRequest} {@link DeleteStreamLinkEventResponse} */
+  DeleteStreamLinkEvent(data: DeleteStreamLinkEventRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkEventResponse>;
   /** 删除媒体传输流 {@link DeleteStreamLinkFlowRequest} {@link DeleteStreamLinkFlowResponse} */
   DeleteStreamLinkFlow(data: DeleteStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkFlowResponse>;
   /** 删除媒体传输输出 {@link DeleteStreamLinkOutputRequest} {@link DeleteStreamLinkOutputResponse} */
@@ -6133,6 +6321,12 @@ declare interface Mps {
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
   /** 查询媒体传输开通状态 {@link DescribeStreamLinkActivateStateRequest} {@link DescribeStreamLinkActivateStateResponse} */
   DescribeStreamLinkActivateState(data?: DescribeStreamLinkActivateStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkActivateStateResponse>;
+  /** 查询媒体传输事件 {@link DescribeStreamLinkEventRequest} {@link DescribeStreamLinkEventResponse} */
+  DescribeStreamLinkEvent(data: DescribeStreamLinkEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkEventResponse>;
+  /** 查询媒体传输事件关联的所有媒体输入流的配置信息 {@link DescribeStreamLinkEventAttachedFlowsRequest} {@link DescribeStreamLinkEventAttachedFlowsResponse} */
+  DescribeStreamLinkEventAttachedFlows(data: DescribeStreamLinkEventAttachedFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkEventAttachedFlowsResponse>;
+  /** 批量查询媒体传输事件 {@link DescribeStreamLinkEventsRequest} {@link DescribeStreamLinkEventsResponse} */
+  DescribeStreamLinkEvents(data?: DescribeStreamLinkEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkEventsResponse>;
   /** 查询媒体输入流 {@link DescribeStreamLinkFlowRequest} {@link DescribeStreamLinkFlowResponse} */
   DescribeStreamLinkFlow(data: DescribeStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowResponse>;
   /** 查询传输流的日志 {@link DescribeStreamLinkFlowLogsRequest} {@link DescribeStreamLinkFlowLogsResponse} */
@@ -6195,6 +6389,8 @@ declare interface Mps {
   ModifySchedule(data: ModifyScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduleResponse>;
   /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
+  /** 修改媒体传输事件 {@link ModifyStreamLinkEventRequest} {@link ModifyStreamLinkEventResponse} */
+  ModifyStreamLinkEvent(data: ModifyStreamLinkEventRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkEventResponse>;
   /** 修改媒体传输流 {@link ModifyStreamLinkFlowRequest} {@link ModifyStreamLinkFlowResponse} */
   ModifyStreamLinkFlow(data: ModifyStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkFlowResponse>;
   /** 修改媒体传输输入 {@link ModifyStreamLinkInputRequest} {@link ModifyStreamLinkInputResponse} */

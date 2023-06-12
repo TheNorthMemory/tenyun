@@ -332,6 +332,16 @@ declare interface ScheduleStrategy {
   ScheduleId: number;
 }
 
+/** 列表页搜索的标记列表 */
+declare interface SearchTags {
+  /** 标签的键 */
+  TagKey?: string;
+  /** 标签的值 */
+  TagValue?: string;
+  /** 1表示只输入标签的键，没有输入值；0表示输入键时且输入值 */
+  AllValue?: number;
+}
+
 /** 服务详细信息描述。 */
 declare interface ServiceInfo {
   /** 服务名称 */
@@ -550,6 +560,28 @@ declare interface DescribeInstanceStateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstancesNewRequest {
+  /** 搜索的集群id名称 */
+  SearchInstanceId?: string;
+  /** 搜索的集群name */
+  SearchInstanceName?: string;
+  /** 分页参数，第一页为0，第二页为10 */
+  Offset?: number;
+  /** 分页参数，分页步长，默认为10 */
+  Limit?: number;
+  /** 搜索标签列表 */
+  SearchTags?: SearchTags[];
+}
+
+declare interface DescribeInstancesNewResponse {
+  /** 实例总数 */
+  TotalCount?: number;
+  /** 实例数组 */
+  InstancesList?: InstanceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSpecRequest {
   /** 地域信息，例如"ap-guangzhou-1" */
   Zone: string;
@@ -745,6 +777,8 @@ declare interface Cdwch {
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
   /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
   DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
+  /** 获取实例简单信息列表 {@link DescribeInstancesNewRequest} {@link DescribeInstancesNewResponse} */
+  DescribeInstancesNew(data?: DescribeInstancesNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesNewResponse>;
   /** 获取集群规格 {@link DescribeSpecRequest} {@link DescribeSpecResponse} */
   DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
   /** 销毁集群api {@link DestroyInstanceRequest} {@link DestroyInstanceResponse} */

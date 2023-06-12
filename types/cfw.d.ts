@@ -1234,6 +1234,16 @@ declare interface DescribeDefenseSwitchResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEnterpriseSGRuleProgressRequest {
+}
+
+declare interface DescribeEnterpriseSGRuleProgressResponse {
+  /** 0-100，代表下发进度百分比 */
+  Progress: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnterpriseSecurityGroupRuleRequest {
   /** 分页查询时，显示的当前页的页码。默认值为1。 */
   PageNo: string;
@@ -2173,6 +2183,8 @@ declare interface Cfw {
   DescribeCfwEips(data: DescribeCfwEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwEipsResponse>;
   /** 获取入侵防御按钮列表 {@link DescribeDefenseSwitchRequest} {@link DescribeDefenseSwitchResponse} */
   DescribeDefenseSwitch(data?: DescribeDefenseSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefenseSwitchResponse>;
+  /** 查询新版安全组下发进度 {@link DescribeEnterpriseSGRuleProgressRequest} {@link DescribeEnterpriseSGRuleProgressResponse} */
+  DescribeEnterpriseSGRuleProgress(data?: DescribeEnterpriseSGRuleProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSGRuleProgressResponse>;
   /** 查询新企业安全组规则 {@link DescribeEnterpriseSecurityGroupRuleRequest} {@link DescribeEnterpriseSecurityGroupRuleResponse} */
   DescribeEnterpriseSecurityGroupRule(data: DescribeEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSecurityGroupRuleResponse>;
   /** 新手引导扫描接口信息 {@link DescribeGuideScanInfoRequest} {@link DescribeGuideScanInfoResponse} */

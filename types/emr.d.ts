@@ -1114,6 +1114,18 @@ declare interface Step {
   User?: string;
 }
 
+/** 重启/停止/启动服务/监控的配置 */
+declare interface StrategyConfig {
+  /** 0:关闭滚动重启1:开启滚动启动 */
+  RollingRestartSwitch?: number | null;
+  /** 滚动重启每批次的重启数量 */
+  BatchSize?: number | null;
+  /** 滚动重启每批停止等待时间 ,最大重启台数为 99999 台，最大间隔为 5 分钟 单位是秒 */
+  TimeWait?: number | null;
+  /** 操作失败处理策略，0:失败阻塞, 1:失败自动跳过 */
+  DealOnFail?: number | null;
+}
+
 /** 子网信息 */
 declare interface SubnetInfo {
   /** 子网信息（名字） */
@@ -1995,10 +2007,12 @@ declare interface ScaleOutInstanceResponse {
 declare interface StartStopServiceOrMonitorRequest {
   /** 集群ID */
   InstanceId: string;
-  /** 操作类型，当前支持StartService：启动服务StopService：停止服务StartMonitor：退出维护StopMonitor：进入维护 */
+  /** 操作类型，当前支持StartService：启动服务StopService：停止服务StartMonitor：退出维护StopMonitor：进入维护RestartService：重启服务 */
   OpType: string;
   /** 操作范围 */
   OpScope: OpScope;
+  /** 操作策略 */
+  StrategyConfig?: StrategyConfig;
 }
 
 declare interface StartStopServiceOrMonitorResponse {

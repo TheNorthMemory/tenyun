@@ -372,11 +372,13 @@ declare interface CreateInstancePreData {
   FlowId: number | null;
   /** 订单号列表 */
   DealNames: string[] | null;
-  /** 实例Id */
+  /** 实例Id，当购买多个实例时，默认返回购买的第一个实例 id */
   InstanceId: string | null;
+  /** 订单和购买实例对应映射列表 */
+  DealNameInstanceIdMapping?: DealInstanceDTO[] | null;
 }
 
-/** 创建预付费实例返回结构 */
+/** 预付费实例相关接口返回结构 */
 declare interface CreateInstancePreResp {
   /** 返回的code，0为正常，非0为错误 */
   ReturnCode: string;
@@ -384,8 +386,8 @@ declare interface CreateInstancePreResp {
   ReturnMessage: string;
   /** 操作型返回的Data数据 */
   Data: CreateInstancePreData | null;
-  /** 删除是时间 */
-  DeleteRouteTimestamp: string | null;
+  /** 删除时间。目前该参数字段已废弃，将会在未来被删除 */
+  DeleteRouteTimestamp?: string | null;
 }
 
 /** 创建主题返回 */
@@ -540,6 +542,14 @@ declare interface DateParam {
   TargetType?: string | null;
   /** 时区，默认GMT+8 */
   TimeZone?: string | null;
+}
+
+/** 预付费/后付费接口中，订单和 CKafka 实例映射数据结构 */
+declare interface DealInstanceDTO {
+  /** 订单流水 */
+  DealName?: string | null;
+  /** 订单流水对应购买的 CKafka 实例 id 列表 */
+  InstanceIdList?: string[] | null;
 }
 
 /** topic链接信息 */
@@ -2601,7 +2611,7 @@ declare interface CreateInstancePostRequest {
   Partition?: number;
   /** 实例最大 topic 数量，需要满足当前实例的计费规格 */
   TopicNum?: number;
-  /** 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在的子网 */
+  /** 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在子网的可用区 id */
   ZoneId?: number;
   /** 当前实例是否为多可用区实例。 */
   MultiZoneFlag?: boolean;
@@ -2657,6 +2667,8 @@ declare interface CreateInstancePreRequest {
   MultiZoneFlag?: boolean;
   /** 可用区列表，购买多可用区实例时为必填项 */
   ZoneIds?: number[];
+  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1。默认值为 0 */
+  PublicNetworkMonthly?: number;
 }
 
 declare interface CreateInstancePreResponse {

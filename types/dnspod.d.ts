@@ -314,6 +314,20 @@ declare interface DomainInfo {
   RecordCount: number;
   /** 域名所有者的账户昵称 */
   OwnerNick: string | null;
+  /** 是否在付费套餐宽限期 */
+  IsGracePeriod?: string | null;
+  /** 是否在付费套餐缓冲期 */
+  VipBuffered?: string | null;
+  /** VIP套餐有效期开始时间 */
+  VipStartAt?: string | null;
+  /** VIP套餐有效期结束时间 */
+  VipEndAt?: string | null;
+  /** VIP套餐自动续费标识。可能的值为：default-默认；no-不自动续费；yes-自动续费 */
+  VipAutoRenew?: string | null;
+  /** VIP套餐资源ID */
+  VipResourceId?: string | null;
+  /** 是否是子域名。 */
+  IsSubDomain?: boolean | null;
 }
 
 /** 域名列表元素 */

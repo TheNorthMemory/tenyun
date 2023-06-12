@@ -234,12 +234,16 @@ declare interface InstanceInfo {
   AuditPolicyStatus: string;
   /** 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。 */
   AuditRunningStatus: string;
-  /** 内网vip */
+  /** 内网vip。 */
   InternalVip?: string | null;
-  /** 内网port */
+  /** 内网port。 */
   InternalVport?: number | null;
-  /** 创建时间 */
+  /** 创建时间。 */
   CreateTime?: string;
+  /** 所属集群ID（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
+  ClusterId?: string | null;
+  /** 所属集群名称（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
+  ClusterName?: string | null;
 }
 
 /** 指标信息。 */
@@ -356,6 +360,10 @@ declare interface RedisKeySpaceData {
   ItemCount: number;
   /** 最大元素长度。 */
   MaxElementSize: number;
+  /** 平均元素长度。 */
+  AveElementSize?: number;
+  /** 所属分片序号。 */
+  ShardId?: string;
 }
 
 /** redis key前缀空间信息 */
@@ -578,6 +586,16 @@ declare interface SlowLogTopSqlItem {
   RowsExaminedAvg: number;
   /** SOL模板的MD5值 */
   Md5: string;
+}
+
+/** 慢日志来源用户详情。 */
+declare interface SlowLogUser {
+  /** 来源用户名。 */
+  UserName?: string;
+  /** 该来源用户名的慢日志数目占总数目的比例，单位%。 */
+  Ratio?: number;
+  /** 该来源用户名的慢日志数目。 */
+  Count?: number;
 }
 
 /** 表结构。 */
@@ -1459,9 +1477,13 @@ declare interface DescribeSlowLogUserHostStatsRequest {
 
 declare interface DescribeSlowLogUserHostStatsResponse {
   /** 来源地址数目。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 各来源地址的慢日志占比详情列表。 */
-  Items: SlowLogHost[];
+  Items?: SlowLogHost[];
+  /** 各来源用户名的慢日志占比详情列表。 */
+  UserNameItems?: SlowLogUser[];
+  /** 来源用户数目。 */
+  UserTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1877,6 +1899,8 @@ declare namespace V20191016 {
     DailyInspection?: string;
     /** 实例概览开关，Yes/No。 */
     OverviewDisplay?: string;
+    /** redis大key分析的自定义分割符，仅redis使用 */
+    KeyDelimiters?: string[] | null;
   }
 
   /** 查询实例列表，返回实例的相关信息的对象。 */
@@ -1937,6 +1961,16 @@ declare namespace V20191016 {
     AuditPolicyStatus: string;
     /** 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。 */
     AuditRunningStatus: string;
+    /** 内网vip。 */
+    InternalVip?: string | null;
+    /** 内网port。 */
+    InternalVport?: number | null;
+    /** 创建时间。 */
+    CreateTime?: string;
+    /** 所属集群ID（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
+    ClusterId?: string | null;
+    /** 所属集群名称（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
+    ClusterName?: string | null;
   }
 
   /** 指标信息。 */
@@ -2151,6 +2185,18 @@ declare namespace V20191016 {
     LockTimeAvg: number;
     /** 平均扫描行数 */
     RowsExaminedAvg: number;
+    /** SOL模板的MD5值 */
+    Md5?: string;
+  }
+
+  /** 慢日志来源用户详情。 */
+  interface SlowLogUser {
+    /** 来源用户名。 */
+    UserName?: string;
+    /** 该来源用户名的慢日志数目占总数目的比例，单位%。 */
+    Ratio?: number;
+    /** 该来源用户名的慢日志数目。 */
+    Count?: number;
   }
 
   /** 库表空间统计数据。 */
@@ -2222,7 +2268,7 @@ declare namespace V20191016 {
 
   interface AddUserContactResponse {
     /** 添加成功的联系人id。 */
-    Id: number;
+    Id?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2262,9 +2308,9 @@ declare namespace V20191016 {
 
   interface CreateDBDiagReportUrlResponse {
     /** 健康报告浏览地址。 */
-    ReportUrl: string;
+    ReportUrl?: string;
     /** 健康报告浏览地址到期时间戳（秒）。 */
-    ExpireTime: number;
+    ExpireTime?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2322,7 +2368,7 @@ declare namespace V20191016 {
 
   interface CreateSecurityAuditLogExportTaskResponse {
     /** 日志导出任务Id。 */
-    AsyncRequestId: number;
+    AsyncRequestId?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2350,9 +2396,9 @@ declare namespace V20191016 {
 
   interface DescribeAllUserContactResponse {
     /** 联系人的总数量。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 联系人的信息。 */
-    Contacts: ContactItem[] | null;
+    Contacts?: ContactItem[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2366,9 +2412,9 @@ declare namespace V20191016 {
 
   interface DescribeAllUserGroupResponse {
     /** 组总数。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 组信息。 */
-    Groups: GroupItem[] | null;
+    Groups?: GroupItem[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2384,27 +2430,27 @@ declare namespace V20191016 {
 
   interface DescribeDBDiagEventResponse {
     /** 诊断项。 */
-    DiagItem: string;
+    DiagItem?: string;
     /** 诊断类型。 */
-    DiagType: string;
+    DiagType?: string;
     /** 事件 ID 。 */
-    EventId: number;
+    EventId?: number;
     /** 事件详情。 */
-    Explanation: string;
+    Explanation?: string;
     /** 概要。 */
-    Outline: string;
+    Outline?: string;
     /** 诊断出的问题。 */
-    Problem: string;
+    Problem?: string;
     /** 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。 */
-    Severity: number;
+    Severity?: number;
     /** 开始时间 */
-    StartTime: string;
+    StartTime?: string;
     /** 建议。 */
-    Suggestions: string;
+    Suggestions?: string;
     /** 保留字段。 */
-    Metric: string | null;
+    Metric?: string | null;
     /** 结束时间。 */
-    EndTime: string;
+    EndTime?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2450,9 +2496,9 @@ declare namespace V20191016 {
 
   interface DescribeDBDiagReportTasksResponse {
     /** 任务总数目。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 任务列表。 */
-    Tasks: HealthReportTask[];
+    Tasks?: HealthReportTask[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2498,11 +2544,11 @@ declare namespace V20191016 {
 
   interface DescribeDiagDBInstancesResponse {
     /** 实例总数。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 全实例巡检状态：0：开启全实例巡检；1：未开启全实例巡检。 */
-    DbScanStatus: number;
+    DbScanStatus?: number;
     /** 实例相关信息。 */
-    Items: InstanceInfo[];
+    Items?: InstanceInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2518,7 +2564,7 @@ declare namespace V20191016 {
 
   interface DescribeHealthScoreResponse {
     /** 健康得分以及异常扣分项。 */
-    Data: HealthScoreInfo;
+    Data?: HealthScoreInfo;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2538,9 +2584,9 @@ declare namespace V20191016 {
 
   interface DescribeMailProfileResponse {
     /** 邮件配置详情。 */
-    ProfileList: UserProfile[] | null;
+    ProfileList?: UserProfile[] | null;
     /** 邮件模版总数。 */
-    TotalCount: number | null;
+    TotalCount?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2556,7 +2602,7 @@ declare namespace V20191016 {
 
   interface DescribeSecurityAuditLogDownloadUrlsResponse {
     /** 导出结果的COS链接列表。当结果集很大时，可能会切分为多个url下载。 */
-    Urls: string[];
+    Urls?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2576,9 +2622,9 @@ declare namespace V20191016 {
 
   interface DescribeSecurityAuditLogExportTasksResponse {
     /** 安全审计日志导出任务列表。 */
-    Tasks: SecLogExportTaskInfo[];
+    Tasks?: SecLogExportTaskInfo[];
     /** 安全审计日志导出任务总数。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2648,9 +2694,13 @@ declare namespace V20191016 {
 
   interface DescribeSlowLogUserHostStatsResponse {
     /** 来源地址数目。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 各来源地址的慢日志占比详情列表。 */
-    Items: SlowLogHost[];
+    Items?: SlowLogHost[];
+    /** 各来源用户名的慢日志占比详情列表。 */
+    UserNameItems?: SlowLogUser[];
+    /** 来源用户数目。 */
+    UserTotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2672,7 +2722,7 @@ declare namespace V20191016 {
 
   interface DescribeTopSpaceSchemaTimeSeriesResponse {
     /** 返回的Top库空间统计信息的时序数据列表。 */
-    TopSpaceSchemaTimeSeries: SchemaSpaceTimeSeries[];
+    TopSpaceSchemaTimeSeries?: SchemaSpaceTimeSeries[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2690,9 +2740,9 @@ declare namespace V20191016 {
 
   interface DescribeTopSpaceSchemasResponse {
     /** 返回的Top库空间统计信息列表。 */
-    TopSpaceSchemas: SchemaSpaceData[];
+    TopSpaceSchemas?: SchemaSpaceData[];
     /** 采集库空间数据的时间戳（秒）。 */
-    Timestamp: number;
+    Timestamp?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2714,7 +2764,7 @@ declare namespace V20191016 {
 
   interface DescribeTopSpaceTableTimeSeriesResponse {
     /** 返回的Top表空间统计信息的时序数据列表。 */
-    TopSpaceTableTimeSeries: TableSpaceTimeSeries[];
+    TopSpaceTableTimeSeries?: TableSpaceTimeSeries[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2732,9 +2782,9 @@ declare namespace V20191016 {
 
   interface DescribeTopSpaceTablesResponse {
     /** 返回的Top表空间统计信息列表。 */
-    TopSpaceTables: TableSpaceData[];
+    TopSpaceTables?: TableSpaceData[];
     /** 采集表空间数据的时间戳（秒）。 */
-    Timestamp: number;
+    Timestamp?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2750,19 +2800,19 @@ declare namespace V20191016 {
 
   interface DescribeUserSqlAdviceResponse {
     /** SQL优化建议，可解析为JSON数组。 */
-    Advices: string;
+    Advices?: string;
     /** SQL优化建议备注，可解析为String数组。 */
-    Comments: string;
+    Comments?: string;
     /** SQL语句。 */
-    SqlText: string;
+    SqlText?: string;
     /** 库名。 */
-    Schema: string;
+    Schema?: string;
     /** 相关表的DDL信息，可解析为JSON数组。 */
-    Tables: string;
+    Tables?: string;
     /** SQL执行计划，可解析为JSON。 */
-    SqlPlan: string;
+    SqlPlan?: string;
     /** SQL优化后的成本节约详情，可解析为JSON。 */
-    Cost: string;
+    Cost?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

@@ -2191,6 +2191,10 @@ declare interface BindingPolicyTagRequest {
   InstanceGroupId?: number;
   /** 批量绑定标签 */
   BatchTag?: PolicyTag[];
+  /** 是否同步eb */
+  EbEventFlag?: number;
+  /** 事件配置的告警 */
+  EbSubject?: string;
 }
 
 declare interface BindingPolicyTagResponse {
