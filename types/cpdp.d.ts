@@ -2128,6 +2128,18 @@ declare interface PayeeAccountBalanceResult {
   InPayBalance: string | null;
   /** 累计结算金额 */
   SumSettlementAmount: string | null;
+  /** 已缴个税 */
+  PaidIncomeTax?: string | null;
+  /** 提现中个税 */
+  InPayIncomeTax?: string | null;
+  /** 已缴增值税 */
+  PaidValueAddedTax?: string | null;
+  /** 提现中增值税 */
+  InPayValueAddedTax?: string | null;
+  /** 已缴附加税 */
+  PaidAttachTax?: string | null;
+  /** 提现中附加税 */
+  InPayAttachTax?: string | null;
 }
 
 /** 账户信息结果 */

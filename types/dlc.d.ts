@@ -80,6 +80,32 @@ declare interface Column {
   IsPartition?: boolean | null;
 }
 
+/** 任务公共指标 */
+declare interface CommonMetrics {
+  /** 创建任务时长，单位：ms */
+  CreateTaskTime?: number | null;
+  /** 预处理总时长，单位：ms */
+  ProcessTime?: number | null;
+  /** 排队时长，单位：ms */
+  QueueTime?: number | null;
+  /** 执行时长，单位：ms */
+  ExecutionTime?: number | null;
+  /** 是否命中结果缓存 */
+  IsResultCacheHit?: boolean | null;
+  /** 匹配物化视图数据量 */
+  MatchedMVBytes?: number | null;
+  /** 匹配物化视图列表 */
+  MatchedMVs?: string | null;
+  /** 结果数据量，单位：byte */
+  AffectedBytes?: string | null;
+  /** 结果行数 */
+  AffectedRows?: number | null;
+  /** 扫描数据量，单位：byte */
+  ProcessedBytes?: number | null;
+  /** 扫描行数 */
+  ProcessedRows?: number | null;
+}
+
 /** 定时启停策略信息 */
 declare interface CrontabResumeSuspendStrategy {
   /** 定时拉起时间：如：周一8点 */
@@ -642,6 +668,14 @@ declare interface Policy {
   Id?: number | null;
 }
 
+/** Presto监控指标 */
+declare interface PrestoMonitorMetrics {
+  /** Alluxio本地缓存命中率 */
+  LocalCacheHitRate?: number | null;
+  /** Fragment缓存命中率 */
+  FragmentCacheHitRate?: number | null;
+}
+
 /** 数据库和数据表属性信息 */
 declare interface Property {
   /** 属性key名称。 */
@@ -768,6 +802,14 @@ declare interface SparkJobInfo {
   DataEngineImageVersion?: string | null;
   /** 任务资源配置是否继承集群模板，0（默认）不继承，1：继承 */
   IsInherit?: number | null;
+}
+
+/** Spark监控数据 */
+declare interface SparkMonitorMetrics {
+  /** shuffle写溢出到COS数据量，单位：byte */
+  ShuffleWriteBytesCos?: number | null;
+  /** shuffle写数据量，单位：byte */
+  ShuffleWriteBytesTotal?: number | null;
 }
 
 /** SparkSQL批任务运行日志 */
@@ -1026,6 +1068,12 @@ declare interface TaskResponseInfo {
   ExecutorNums?: number | null;
   /** 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums） */
   ExecutorMaxNumbers?: number | null;
+  /** 任务公共指标数据 */
+  CommonMetrics?: CommonMetrics | null;
+  /** spark任务指标数据 */
+  SparkMonitorMetrics?: SparkMonitorMetrics | null;
+  /** presto任务指标数据 */
+  PrestoMonitorMetrics?: PrestoMonitorMetrics | null;
 }
 
 /** 任务结果信息。 */
@@ -1509,7 +1557,7 @@ declare interface CreateDataEngineRequest {
   CrontabResumeSuspend?: number;
   /** 定时启停策略，复杂类型：包含启停时间、挂起集群策略 */
   CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy;
-  /** 引擎执行任务类型，默认为SQL */
+  /** 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL */
   EngineExecType?: string;
   /** 单个集群最大并发任务数，默认5 */
   MaxConcurrency?: number;
@@ -1671,7 +1719,7 @@ declare interface CreateNotebookSessionStatementSupportBatchSQLRequest {
   SessionId: string;
   /** 执行的代码 */
   Code: string;
-  /** 类型，当前支持：spark、pyspark、sparkr、sql */
+  /** 类型，当前支持：sql */
   Kind: string;
   /** 是否保存运行结果 */
   SaveResult: boolean;
@@ -1717,53 +1765,53 @@ declare interface CreateScriptResponse {
 }
 
 declare interface CreateSparkAppRequest {
-  /** spark应用名 */
+  /** spark作业名 */
   AppName: string;
-  /** 1代表spark jar应用，2代表spark streaming应用 */
+  /** spark作业类型，1代表spark jar作业，2代表spark streaming作业 */
   AppType: number;
-  /** 执行spark作业的数据引擎 */
+  /** 执行spark作业的数据引擎名称 */
   DataEngine: string;
-  /** spark应用的执行入口 */
+  /** spark作业程序包文件路径 */
   AppFile: string;
-  /** 执行spark作业的角色ID */
+  /** 数据访问策略，CAM Role arn */
   RoleArn: number;
-  /** spark作业driver资源规格大小, 可取small,medium,large,xlarge */
+  /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
   AppDriverSize: string;
-  /** spark作业executor资源规格大小, 可取small,medium,large,xlarge */
+  /** 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
   AppExecutorSize: string;
   /** spark作业executor个数 */
   AppExecutorNums: number;
   /** 该字段已下线，请使用字段Datasource */
   Eni?: string;
-  /** 是否本地上传，可去cos,lakefs */
+  /** spark作业程序包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocal?: string;
-  /** spark jar作业时的主类 */
+  /** spark作业主类 */
   MainClass?: string;
   /** spark配置，以换行符分隔 */
   AppConf?: string;
-  /** 是否本地上传，包含cos,lakefs */
+  /** spark 作业依赖jar包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalJars?: string;
-  /** spark jar作业依赖jars，以逗号分隔 */
+  /** spark 作业依赖jar包（--jars），以逗号分隔 */
   AppJars?: string;
-  /** 是否本地上传，包含cos,lakefs */
+  /** spark作业依赖文件资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalFiles?: string;
-  /** spark作业依赖资源，以逗号分隔 */
+  /** spark作业依赖文件资源（--files）（非jar、zip），以逗号分隔 */
   AppFiles?: string;
-  /** spark作业命令行参数 */
+  /** spark作业程序入参，空格分割 */
   CmdArgs?: string;
-  /** 只对spark流任务生效 */
+  /** 最大重试次数，只对spark流任务生效 */
   MaxRetries?: number;
-  /** 数据源名 */
+  /** 数据源名称 */
   DataSource?: string;
-  /** pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用） */
+  /** pyspark：依赖上传方式，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalPythonFiles?: string;
-  /** pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔 */
+  /** pyspark作业依赖python资源（--py-files），支持py/zip/egg等归档格式，多文件以逗号分隔 */
   AppPythonFiles?: string;
-  /** archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用） */
+  /** spark作业依赖archives资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalArchives?: string;
-  /** archives：依赖资源 */
+  /** spark作业依赖archives资源（--archives），支持tar.gz/tgz/tar等归档格式，以逗号分隔 */
   AppArchives?: string;
-  /** Spark Image 版本 */
+  /** Spark Image 版本号 */
   SparkImage?: string;
   /** Spark Image 版本名称 */
   SparkImageVersion?: string;
@@ -1785,15 +1833,15 @@ declare interface CreateSparkAppResponse {
 declare interface CreateSparkAppTaskRequest {
   /** spark作业名 */
   JobName: string;
-  /** spark作业的命令行参数，以空格分隔；一般用于周期性调用使用 */
+  /** spark作业程序入参，以空格分隔；一般用于周期性调用使用 */
   CmdArgs?: string;
 }
 
 declare interface CreateSparkAppTaskResponse {
   /** 批Id */
-  BatchId: string;
+  BatchId?: string;
   /** 任务Id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1863,7 +1911,7 @@ declare interface CreateTaskRequest {
 
 declare interface CreateTaskResponse {
   /** 任务ID */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1899,9 +1947,9 @@ declare interface CreateTasksRequest {
 
 declare interface CreateTasksResponse {
   /** 本批次提交的任务的批次Id */
-  BatchId: string;
+  BatchId?: string;
   /** 任务Id集合，按照执行顺序排列 */
-  TaskIdSet: string[];
+  TaskIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1967,7 +2015,7 @@ declare interface DeleteScriptResponse {
 }
 
 declare interface DeleteSparkAppRequest {
-  /** spark应用名 */
+  /** spark作业名 */
   AppName: string;
 }
 
@@ -2163,7 +2211,7 @@ declare interface DescribeDMSTablesResponse {
 declare interface DescribeDataEnginesRequest {
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 滤类型，传参Name应为以下其中一个,data-engine-name - String engine-type - Stringstate - String mode - String create-time - String message - String */
+  /** 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH） */
   Filters?: Filter[];
   /** 排序字段，支持如下字段类型，create-time */
   SortBy?: string;
@@ -2177,7 +2225,7 @@ declare interface DescribeDataEnginesRequest {
   ExcludePublicEngine?: boolean;
   /** 参数应该为引擎权限类型，有效类型："USE", "MODIFY", "OPERATE", "MONITOR", "DELETE" */
   AccessTypes?: string[];
-  /** 引擎执行任务类型，有效值：SQL/BATCH */
+  /** 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL */
   EngineExecType?: string;
   /** 引擎类型，有效值：spark/presto */
   EngineType?: string;
@@ -2203,7 +2251,7 @@ declare interface DescribeDatabasesRequest {
   KeyWord?: string;
   /** 数据源唯名称，该名称可以通过DescribeDatasourceConnection接口查询到。默认为DataLakeCatalog */
   DatasourceConnectionName?: string;
-  /** 排序字段，当前版本仅支持按库名排序 */
+  /** 排序字段，CreateTime：创建时间，Name：数据库名称 */
   Sort?: string;
   /** 排序类型：false：降序（默认）、true：升序 */
   Asc?: boolean;
@@ -2211,25 +2259,25 @@ declare interface DescribeDatabasesRequest {
 
 declare interface DescribeDatabasesResponse {
   /** 数据库对象列表。 */
-  DatabaseList: DatabaseResponseInfo[];
+  DatabaseList?: DatabaseResponseInfo[];
   /** 实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeEngineUsageInfoRequest {
-  /** House Id */
+  /** 数据引擎ID */
   DataEngineId: string;
 }
 
 declare interface DescribeEngineUsageInfoResponse {
   /** 集群总规格 */
-  Total: number;
+  Total?: number;
   /** 已占用集群规格 */
-  Used: number;
+  Used?: number;
   /** 剩余集群规格 */
-  Available: number;
+  Available?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2269,11 +2317,11 @@ declare interface DescribeNotebookSessionLogRequest {
 
 declare interface DescribeNotebookSessionLogResponse {
   /** 日志信息，默认获取最新的200条 */
-  Logs: string[];
+  Logs?: string[];
   /** 分页参数，默认200 */
-  Limit: number;
+  Limit?: number;
   /** 分页参数，默认0 */
-  Offset: number;
+  Offset?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2353,23 +2401,23 @@ declare interface DescribeNotebookSessionsRequest {
   SortFields?: string[];
   /** 排序字段：true：升序、false：降序（默认） */
   Asc?: boolean;
-  /** 分页字段 */
+  /** 分页参数，默认10 */
   Limit?: number;
-  /** 分页字段 */
+  /** 分页参数，默认0 */
   Offset?: number;
 }
 
 declare interface DescribeNotebookSessionsResponse {
   /** session总数量 */
-  TotalElements: number;
+  TotalElements?: number;
   /** 总页数 */
-  TotalPages: number;
+  TotalPages?: number;
   /** 当前页码 */
-  Page: number;
+  Page?: number;
   /** 当前页数量 */
-  Size: number;
+  Size?: number;
   /** session列表信息 */
-  Sessions: NotebookSessions[];
+  Sessions?: NotebookSessions[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2411,15 +2459,15 @@ declare interface DescribeScriptsRequest {
 
 declare interface DescribeScriptsResponse {
   /** Script列表 */
-  Scripts: Script[] | null;
+  Scripts?: Script[] | null;
   /** 实例总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeSparkAppJobRequest {
-  /** spark作业Id，与JobName同时存在时，JobName无效 */
+  /** spark作业Id，与JobName同时存在时，JobName无效，JobId与JobName至少存在一个 */
   JobId?: string;
   /** spark作业名 */
   JobName?: string;
@@ -2439,7 +2487,7 @@ declare interface DescribeSparkAppJobsRequest {
   SortBy?: string;
   /** 正序或者倒序，例如：desc */
   Sorting?: string;
-  /** 按照该参数过滤,支持spark-job-name */
+  /** 过滤条件，如下支持的过滤类型，传参Name应为其一:spark-job-name（作业名称），spark-job-id（作业id），spark-app-type（作业类型，1：批任务，2：流任务，4：SQL作业），user-name（创建人），key-word（作业名称或ID关键词模糊搜索） */
   Filters?: Filter[];
   /** 更新时间起始点，支持格式：yyyy-MM-dd HH:mm:ss */
   StartTime?: string;
@@ -2469,9 +2517,9 @@ declare interface DescribeSparkAppTasksRequest {
   Limit?: number;
   /** 执行实例id */
   TaskId?: string;
-  /** 更新时间起始点 */
+  /** 更新时间起始点，支持格式：yyyy-MM-dd HH:mm:ss */
   StartTime?: string;
-  /** 更新时间截止点 */
+  /** 更新时间截止点，支持格式：yyyy-MM-dd HH:mm:ss */
   EndTime?: string;
   /** 按照该参数过滤,支持task-state */
   Filters?: Filter[];
@@ -2479,11 +2527,11 @@ declare interface DescribeSparkAppTasksRequest {
 
 declare interface DescribeSparkAppTasksResponse {
   /** 任务结果（该字段已废弃） */
-  Tasks: TaskResponseInfo | null;
+  Tasks?: TaskResponseInfo | null;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务结果列表 */
-  SparkAppTasks: TaskResponseInfo[] | null;
+  SparkAppTasks?: TaskResponseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2539,11 +2587,11 @@ declare interface DescribeTablesRequest {
   Filters?: Filter[];
   /** 指定查询的数据源名称，默认为DataLakeCatalog */
   DatasourceConnectionName?: string;
-  /** 起始时间：用于对更新时间的筛选 */
+  /** 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS */
   StartTime?: string;
-  /** 终止时间：用于对更新时间的筛选 */
+  /** 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS */
   EndTime?: string;
-  /** 排序字段，支持：CreateTime、UpdateTime、StorageSize、RecordCount、Name（不传则默认按name升序） */
+  /** 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序） */
   Sort?: string;
   /** 排序字段，false：降序（默认）；true：升序 */
   Asc?: boolean;
@@ -2555,9 +2603,9 @@ declare interface DescribeTablesRequest {
 
 declare interface DescribeTablesResponse {
   /** 数据表对象列表。 */
-  TableList: TableResponseInfo[];
+  TableList?: TableResponseInfo[];
   /** 实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2593,17 +2641,17 @@ declare interface DescribeTasksRequest {
   StartTime?: string;
   /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻 */
   EndTime?: string;
-  /** 支持计算资源名字筛选 */
+  /** 数据引擎名称，用于筛选 */
   DataEngineName?: string;
 }
 
 declare interface DescribeTasksResponse {
   /** 任务对象列表。 */
-  TaskList: TaskResponseInfo[];
+  TaskList?: TaskResponseInfo[];
   /** 实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务概览信息 */
-  TasksOverview: TasksOverview | null;
+  TasksOverview?: TasksOverview | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2867,55 +2915,55 @@ declare interface ModifySparkAppBatchResponse {
 }
 
 declare interface ModifySparkAppRequest {
-  /** spark应用名 */
+  /** spark作业名 */
   AppName: string;
-  /** 1代表spark jar应用，2代表spark streaming应用 */
+  /** spark作业类型，1代表spark jar作业，2代表spark streaming作业 */
   AppType: number;
-  /** 执行spark作业的数据引擎 */
+  /** 执行spark作业的数据引擎名称 */
   DataEngine: string;
-  /** spark应用的执行入口 */
+  /** spark作业程序包文件路径 */
   AppFile: string;
-  /** 执行spark作业的角色ID */
+  /** 数据访问策略，CAM Role arn */
   RoleArn: number;
-  /** spark作业driver资源规格大小, 可取small,medium,large,xlarge */
+  /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
   AppDriverSize: string;
-  /** spark作业executor资源规格大小, 可取small,medium,large,xlarge */
+  /** 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
   AppExecutorSize: string;
   /** spark作业executor个数 */
   AppExecutorNums: number;
-  /** spark应用Id */
+  /** spark作业Id */
   SparkAppId: string;
   /** 该字段已下线，请使用字段Datasource */
   Eni?: string;
-  /** 是否本地上传，可取cos,lakefs */
+  /** spark作业程序包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocal?: string;
-  /** spark jar作业时的主类 */
+  /** spark作业主类 */
   MainClass?: string;
   /** spark配置，以换行符分隔 */
   AppConf?: string;
-  /** jar资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用） */
+  /** spark 作业依赖jar包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalJars?: string;
-  /** spark jar作业依赖jars，以逗号分隔 */
+  /** spark 作业依赖jar包（--jars），以逗号分隔 */
   AppJars?: string;
-  /** file资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用） */
+  /** spark作业依赖文件资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalFiles?: string;
-  /** spark作业依赖资源，以逗号分隔 */
+  /** spark作业依赖文件资源（--files）（非jar、zip），以逗号分隔 */
   AppFiles?: string;
-  /** pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用） */
+  /** pyspark：依赖上传方式，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalPythonFiles?: string;
-  /** pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔 */
+  /** pyspark作业依赖python资源（--py-files），支持py/zip/egg等归档格式，多文件以逗号分隔 */
   AppPythonFiles?: string;
-  /** spark作业命令行参数 */
+  /** spark作业程序入参 */
   CmdArgs?: string;
-  /** 只对spark流任务生效 */
+  /** 最大重试次数，只对spark流任务生效 */
   MaxRetries?: number;
   /** 数据源名 */
   DataSource?: string;
-  /** archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用） */
+  /** spark作业依赖archives资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
   IsLocalArchives?: string;
-  /** archives：依赖资源 */
+  /** spark作业依赖archives资源（--archives），支持tar.gz/tgz/tar等归档格式，以逗号分隔 */
   AppArchives?: string;
-  /** Spark Image 版本 */
+  /** Spark Image 版本号 */
   SparkImage?: string;
   /** Spark Image 版本名称 */
   SparkImageVersion?: string;
@@ -2979,7 +3027,7 @@ declare interface SuspendResumeDataEngineRequest {
 
 declare interface SuspendResumeDataEngineResponse {
   /** 虚拟集群详细信息 */
-  DataEngineName: string;
+  DataEngineName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3049,13 +3097,13 @@ declare interface Dlc {
   AttachWorkGroupPolicy(data: AttachWorkGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachWorkGroupPolicyResponse>;
   /** 绑定工作组到用户 {@link BindWorkGroupsToUserRequest} {@link BindWorkGroupsToUserResponse} */
   BindWorkGroupsToUser(data: BindWorkGroupsToUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindWorkGroupsToUserResponse>;
-  /** 取消session statement {@link CancelNotebookSessionStatementRequest} {@link CancelNotebookSessionStatementResponse} */
+  /** 取消session中执行的任务 {@link CancelNotebookSessionStatementRequest} {@link CancelNotebookSessionStatementResponse} */
   CancelNotebookSessionStatement(data: CancelNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<CancelNotebookSessionStatementResponse>;
-  /** 按批取消Session statement. {@link CancelNotebookSessionStatementBatchRequest} {@link CancelNotebookSessionStatementBatchResponse} */
+  /** 批量取消Session 中执行的任务 {@link CancelNotebookSessionStatementBatchRequest} {@link CancelNotebookSessionStatementBatchResponse} */
   CancelNotebookSessionStatementBatch(data: CancelNotebookSessionStatementBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CancelNotebookSessionStatementBatchResponse>;
   /** 取消Spark SQL批任务 {@link CancelSparkSessionBatchSQLRequest} {@link CancelSparkSessionBatchSQLResponse} */
   CancelSparkSessionBatchSQL(data: CancelSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CancelSparkSessionBatchSQLResponse>;
-  /** 取消任务执行 {@link CancelTaskRequest} {@link CancelTaskResponse} */
+  /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
   /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
@@ -3063,7 +3111,7 @@ declare interface Dlc {
   CreateDMSDatabase(data?: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
   /** DMS元数据创建表 {@link CreateDMSTableRequest} {@link CreateDMSTableResponse} */
   CreateDMSTable(data?: CreateDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSTableResponse>;
-  /** 数据引擎创建 {@link CreateDataEngineRequest} {@link CreateDataEngineResponse} */
+  /** 创建数据引擎. {@link CreateDataEngineRequest} {@link CreateDataEngineResponse} */
   CreateDataEngine(data: CreateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataEngineResponse>;
   /** 生成建库SQL语句 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
@@ -3073,19 +3121,19 @@ declare interface Dlc {
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
   /** 创建托管存储内表 {@link CreateInternalTableRequest} {@link CreateInternalTableResponse} */
   CreateInternalTable(data: CreateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInternalTableResponse>;
-  /** 创建notebook livy session {@link CreateNotebookSessionRequest} {@link CreateNotebookSessionResponse} */
+  /** 创建交互式session（notebook） {@link CreateNotebookSessionRequest} {@link CreateNotebookSessionResponse} */
   CreateNotebookSession(data: CreateNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionResponse>;
-  /** 创建session statement {@link CreateNotebookSessionStatementRequest} {@link CreateNotebookSessionStatementResponse} */
+  /** 在session中执行代码片段 {@link CreateNotebookSessionStatementRequest} {@link CreateNotebookSessionStatementResponse} */
   CreateNotebookSessionStatement(data: CreateNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionStatementResponse>;
-  /** 创建Statement批量运行SQL任务 {@link CreateNotebookSessionStatementSupportBatchSQLRequest} {@link CreateNotebookSessionStatementSupportBatchSQLResponse} */
+  /** 创建交互式session并执行SQL任务 {@link CreateNotebookSessionStatementSupportBatchSQLRequest} {@link CreateNotebookSessionStatementSupportBatchSQLResponse} */
   CreateNotebookSessionStatementSupportBatchSQL(data: CreateNotebookSessionStatementSupportBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionStatementSupportBatchSQLResponse>;
   /** 创建查询结果下载任务 {@link CreateResultDownloadRequest} {@link CreateResultDownloadResponse} */
   CreateResultDownload(data: CreateResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResultDownloadResponse>;
   /** 创建sql脚本 {@link CreateScriptRequest} {@link CreateScriptResponse} */
   CreateScript(data: CreateScriptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScriptResponse>;
-  /** 创建spark应用 {@link CreateSparkAppRequest} {@link CreateSparkAppResponse} */
+  /** 创建spark作业 {@link CreateSparkAppRequest} {@link CreateSparkAppResponse} */
   CreateSparkApp(data: CreateSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppResponse>;
-  /** 创建spark任务 {@link CreateSparkAppTaskRequest} {@link CreateSparkAppTaskResponse} */
+  /** 启动Spark作业 {@link CreateSparkAppTaskRequest} {@link CreateSparkAppTaskResponse} */
   CreateSparkAppTask(data: CreateSparkAppTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppTaskResponse>;
   /** 提交Spark SQL批任务 {@link CreateSparkSessionBatchSQLRequest} {@link CreateSparkSessionBatchSQLResponse} */
   CreateSparkSessionBatchSQL(data: CreateSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkSessionBatchSQLResponse>;
@@ -3093,9 +3141,9 @@ declare interface Dlc {
   CreateStoreLocation(data: CreateStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStoreLocationResponse>;
   /** 生成建表SQL {@link CreateTableRequest} {@link CreateTableResponse} */
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
-  /** 任务创建 {@link CreateTaskRequest} {@link CreateTaskResponse} */
+  /** 创建并执行SQL任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** 批量创建任务 {@link CreateTasksRequest} {@link CreateTasksResponse} */
+  /** 批量创建并执行SQL任务 {@link CreateTasksRequest} {@link CreateTasksResponse} */
   CreateTasks(data: CreateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksResponse>;
   /** 按顺序创建任务 {@link CreateTasksInOrderRequest} {@link CreateTasksInOrderResponse} */
   CreateTasksInOrder(data: CreateTasksInOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksInOrderResponse>;
@@ -3107,7 +3155,7 @@ declare interface Dlc {
   DeleteNotebookSession(data: DeleteNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookSessionResponse>;
   /** 删除sql脚本 {@link DeleteScriptRequest} {@link DeleteScriptResponse} */
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;
-  /** 删除spark应用 {@link DeleteSparkAppRequest} {@link DeleteSparkAppResponse} */
+  /** 删除spark作业 {@link DeleteSparkAppRequest} {@link DeleteSparkAppResponse} */
   DeleteSparkApp(data: DeleteSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSparkAppResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
@@ -3123,37 +3171,37 @@ declare interface Dlc {
   DescribeDMSTable(data?: DescribeDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTableResponse>;
   /** DMS元数据获取表列表 {@link DescribeDMSTablesRequest} {@link DescribeDMSTablesResponse} */
   DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
-  /** 获取DataEngines列表 {@link DescribeDataEnginesRequest} {@link DescribeDataEnginesResponse} */
+  /** 查询DataEngines列表 {@link DescribeDataEnginesRequest} {@link DescribeDataEnginesResponse} */
   DescribeDataEngines(data?: DescribeDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
-  /** 获取数据引擎资源使用情况 {@link DescribeEngineUsageInfoRequest} {@link DescribeEngineUsageInfoResponse} */
+  /** 查询数据引擎资源使用情况 {@link DescribeEngineUsageInfoRequest} {@link DescribeEngineUsageInfoResponse} */
   DescribeEngineUsageInfo(data: DescribeEngineUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineUsageInfoResponse>;
-  /** 获取被禁用的表属性列表（新） {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
+  /** 查询被禁用的表属性列表（新） {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
   DescribeForbiddenTablePro(data?: DescribeForbiddenTableProRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForbiddenTableProResponse>;
   /** 查询托管存储指定目录的Summary {@link DescribeLakeFsDirSummaryRequest} {@link DescribeLakeFsDirSummaryResponse} */
   DescribeLakeFsDirSummary(data?: DescribeLakeFsDirSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsDirSummaryResponse>;
   /** 查询用户的托管存储信息 {@link DescribeLakeFsInfoRequest} {@link DescribeLakeFsInfoResponse} */
   DescribeLakeFsInfo(data?: DescribeLakeFsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsInfoResponse>;
-  /** 获取notebook livy session详情信息 {@link DescribeNotebookSessionRequest} {@link DescribeNotebookSessionResponse} */
+  /** 查询交互式 session详情信息 {@link DescribeNotebookSessionRequest} {@link DescribeNotebookSessionResponse} */
   DescribeNotebookSession(data: DescribeNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionResponse>;
-  /** 获取notebook livy session日志 {@link DescribeNotebookSessionLogRequest} {@link DescribeNotebookSessionLogResponse} */
+  /** 查询交互式 session日志 {@link DescribeNotebookSessionLogRequest} {@link DescribeNotebookSessionLogResponse} */
   DescribeNotebookSessionLog(data: DescribeNotebookSessionLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionLogResponse>;
-  /** 获取session statement信息 {@link DescribeNotebookSessionStatementRequest} {@link DescribeNotebookSessionStatementResponse} */
+  /** 查询session 中执行任务的详情 {@link DescribeNotebookSessionStatementRequest} {@link DescribeNotebookSessionStatementResponse} */
   DescribeNotebookSessionStatement(data: DescribeNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionStatementResponse>;
   /** 获取statement运行结果。 {@link DescribeNotebookSessionStatementSqlResultRequest} {@link DescribeNotebookSessionStatementSqlResultResponse} */
   DescribeNotebookSessionStatementSqlResult(data: DescribeNotebookSessionStatementSqlResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionStatementSqlResultResponse>;
-  /** 获取Session Statement列表 {@link DescribeNotebookSessionStatementsRequest} {@link DescribeNotebookSessionStatementsResponse} */
+  /** 查询Session中执行的任务列表 {@link DescribeNotebookSessionStatementsRequest} {@link DescribeNotebookSessionStatementsResponse} */
   DescribeNotebookSessionStatements(data: DescribeNotebookSessionStatementsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionStatementsResponse>;
-  /** 获取notebook livy session列表 {@link DescribeNotebookSessionsRequest} {@link DescribeNotebookSessionsResponse} */
+  /** 查询交互式 session列表 {@link DescribeNotebookSessionsRequest} {@link DescribeNotebookSessionsResponse} */
   DescribeNotebookSessions(data: DescribeNotebookSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionsResponse>;
   /** 查询结果下载任务 {@link DescribeResultDownloadRequest} {@link DescribeResultDownloadResponse} */
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
-  /** 查询script列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */
+  /** 查询SQL脚本列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */
   DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
-  /** 查询具体的spark应用 {@link DescribeSparkAppJobRequest} {@link DescribeSparkAppJobResponse} */
+  /** 查询spark作业信息 {@link DescribeSparkAppJobRequest} {@link DescribeSparkAppJobResponse} */
   DescribeSparkAppJob(data?: DescribeSparkAppJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobResponse>;
-  /** 获取spark应用列表 {@link DescribeSparkAppJobsRequest} {@link DescribeSparkAppJobsResponse} */
+  /** 查询spark作业列表 {@link DescribeSparkAppJobsRequest} {@link DescribeSparkAppJobsResponse} */
   DescribeSparkAppJobs(data?: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
   /** 查询spark应用的运行任务实例列表 {@link DescribeSparkAppTasksRequest} {@link DescribeSparkAppTasksResponse} */
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
@@ -3187,13 +3235,13 @@ declare interface Dlc {
   DropDMSTable(data?: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
   /** 生成创建托管表语句 {@link GenerateCreateMangedTableSqlRequest} {@link GenerateCreateMangedTableSqlResponse} */
   GenerateCreateMangedTableSql(data: GenerateCreateMangedTableSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCreateMangedTableSqlResponse>;
-  /** 日志列表 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
+  /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
   /** 修改数据治理事件阈值 {@link ModifyGovernEventRuleRequest} {@link ModifyGovernEventRuleResponse} */
   ModifyGovernEventRule(data?: ModifyGovernEventRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernEventRuleResponse>;
-  /** 更新spark应用 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
+  /** 更新spark作业 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
   ModifySparkApp(data: ModifySparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppResponse>;
   /** 批量修改Spark作业参数配置 {@link ModifySparkAppBatchRequest} {@link ModifySparkAppBatchResponse} */
   ModifySparkAppBatch(data: ModifySparkAppBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppBatchResponse>;
@@ -3203,7 +3251,7 @@ declare interface Dlc {
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
-  /** 暂停或恢复数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
+  /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
   SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
   /** 切换主备集群 {@link SwitchDataEngineRequest} {@link SwitchDataEngineResponse} */
   SwitchDataEngine(data: SwitchDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineResponse>;

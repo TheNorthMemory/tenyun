@@ -2007,7 +2007,7 @@ declare interface ScaleOutInstanceResponse {
 declare interface StartStopServiceOrMonitorRequest {
   /** 集群ID */
   InstanceId: string;
-  /** 操作类型，当前支持StartService：启动服务StopService：停止服务StartMonitor：退出维护StopMonitor：进入维护RestartService：重启服务 */
+  /** 操作类型，当前支持StartService：启动服务StopService：停止服务StartMonitor：退出维护StopMonitor：进入维护RestartService：重启服务 如果操作类型选择重启服务 StrategyConfig操作策略则是必填项 */
   OpType: string;
   /** 操作范围 */
   OpScope: OpScope;

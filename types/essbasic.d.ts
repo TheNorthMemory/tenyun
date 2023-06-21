@@ -256,7 +256,7 @@ declare interface FlowApproverDetail {
   SignOrder: number;
   /** 签署人姓名 */
   ApproveName: string | null;
-  /** 当前签署人的状态, 状态如下PENDING 流程等待中 FILLPENDING 待填写状态FILLACCEPT 参与人已经填写FILLREJECT 参与人解决填写WAITPICKUP 待签收ACCEPT 签收 REJECT 拒签 DEADLINE 过期没有处理 CANCEL 取消FORWARD 已经转他人处理STOP 流程因为其他原因终止RELIEVED 已经解除 */
+  /** 当前签署人的状态, 状态如下PENDING 待签署	FILLPENDING 待填写FILLACCEPT 填写完成	FILLREJECT 拒绝填写	WAITPICKUP 待领取	ACCEPT 已签署	REJECT 拒签 DEADLINE 过期没人处理 CANCEL 流程已撤回	FORWARD 已经转他人处理STOP 流程已终止	RELIEVED 解除协议（已解除） */
   ApproveStatus: string | null;
   /** 签署人信息 */
   ApproveMessage: string | null;
@@ -314,7 +314,7 @@ declare interface FlowApproverInfo {
 
 /** 签署人签署链接信息 */
 declare interface FlowApproverUrlInfo {
-  /** 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
+  /** 签署短链接，不支持小程序嵌入，只支持移动端浏览器打开。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
   SignUrl: string;
   /** 签署人类型 PERSON-个人 */
   ApproverType: string;
@@ -322,7 +322,7 @@ declare interface FlowApproverUrlInfo {
   Name: string;
   /** 签署人手机号 */
   Mobile: string;
-  /** 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
+  /** 签署长链接，支持小程序嵌入。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
   LongUrl?: string | null;
 }
 
@@ -334,7 +334,7 @@ declare interface FlowDetailInfo {
   FlowName: string;
   /** 合同(流程)的类型 */
   FlowType: string;
-  /** 合同(流程)的状态, 状态如下INIT 还没发起PART 部分签署REJECT 拒签ALL 全部签署DEADLINE 流签CANCEL 取消RELIEVED 解除 */
+  /** 合同(流程)的状态, 状态如下INIT 合同创建PART 合同签署中REJECT 合同拒签ALL 合同签署完成DEADLINE 合同流签(合同过期)CANCEL 合同撤回RELIEVED 解除协议（已解除） */
   FlowStatus: string;
   /** 合同(流程)的信息 */
   FlowMessage: string;

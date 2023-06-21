@@ -816,6 +816,34 @@ declare interface RabbitMQPrivateNode {
   ProcessNumber?: number | null;
 }
 
+/** RabbitMQ专享版虚拟机 */
+declare interface RabbitMQPrivateVirtualHost {
+  /** 虚拟主机的名字 */
+  VirtualHostName: string | null;
+  /** 虚拟主机的描述 */
+  Description: string | null;
+}
+
+/** RabbitMQ用户实体详情 */
+declare interface RabbitMQUser {
+  /** 集群实例Id */
+  InstanceId?: string;
+  /** 用户名，登录时使用 */
+  User?: string;
+  /** 密码，登录时使用 */
+  Password?: string;
+  /** 用户描述 */
+  Description?: string | null;
+  /** 用户标签，用于决定改用户访问RabbitMQ Management的权限范围 */
+  Tags?: string[] | null;
+  /** 用户创建时间 */
+  CreateTime?: string;
+  /** 用户最后修改时间 */
+  ModifyTime?: string;
+  /** 用户类型，System：系统创建，User：用户创建 */
+  Type?: string;
+}
+
 /** RabbitMQ专享实例信息 */
 declare interface RabbitMQVipInstance {
   /** 实例id */
@@ -850,6 +878,38 @@ declare interface RabbitMQVipInstance {
   ExceptionInformation?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败为了和计费区分开，额外开启一个状态位，用于显示。 */
   ClusterStatus?: number;
+}
+
+/** RabbitMQ的vhost详情 */
+declare interface RabbitMQVirtualHostInfo {
+  /** 集群实例Id */
+  InstanceId?: string;
+  /** vhost名 */
+  VirtualHost?: string;
+  /** vhost描述信息 */
+  Description?: string | null;
+  /** vhost标签 */
+  Tags?: string[] | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** vhost概览统计信息 */
+  VirtualHostStatistics?: RabbitMQVirtualHostStatistics | null;
+}
+
+/** vhost概览统计信息 */
+declare interface RabbitMQVirtualHostStatistics {
+  /** 当前vhost的queue数量 */
+  CurrentQueues?: number;
+  /** 当前vhost的exchange数量 */
+  CurrentExchanges?: number;
+  /** 当前vhost的连接数量 */
+  CurrentConnections?: number;
+  /** 当前vhost的channel数量 */
+  CurrentChannels?: number;
+  /** 当前vhost的用户数量 */
+  CurrentUsers?: number;
 }
 
 /** 消息保留策略 */
@@ -1938,6 +1998,30 @@ declare interface DeleteEnvironmentsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRabbitMQUserRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 用户名，登录时使用 */
+  User: string;
+}
+
+declare interface DeleteRabbitMQUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRabbitMQVirtualHostRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** vhost名 */
+  VirtualHost: string;
+}
+
+declare interface DeleteRabbitMQVirtualHostResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRocketMQClusterRequest {
   /** 待删除的集群Id。 */
   ClusterId: string;
@@ -2628,6 +2712,30 @@ declare interface DescribeRabbitMQNodeListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRabbitMQUserRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 用户名检索，支持前缀匹配，后缀匹配 */
+  SearchUser?: string;
+  /** 分页Offset */
+  Offset?: number;
+  /** 分页Limit */
+  Limit?: number;
+  /** 用户名，精确查询 */
+  User?: string;
+  /** 用户标签，根据标签过滤列表 */
+  Tags?: string[];
+}
+
+declare interface DescribeRabbitMQUserResponse {
+  /** 返回的User数量 */
+  TotalCount: number;
+  /** 当前已创建的RabbitMQ用户列表 */
+  RabbitMQUserList: RabbitMQUser[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRabbitMQVipInstanceRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2666,6 +2774,46 @@ declare interface DescribeRabbitMQVipInstancesResponse {
   TotalCount: number;
   /** 实例信息列表 */
   Instances: RabbitMQVipInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRabbitMQVirtualHostListRequest {
+  /** 不适用，默认参数 */
+  InstanceId: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 一页限制 */
+  Limit?: number;
+}
+
+declare interface DescribeRabbitMQVirtualHostListResponse {
+  /** 集群列表数量 */
+  TotalCount: number;
+  /** 集群列表 */
+  VirtualHostList: RabbitMQPrivateVirtualHost[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRabbitMQVirtualHostRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** vhost名,不传则查询全部 */
+  VirtualHost?: string;
+  /** 分页Offset */
+  Offset?: number;
+  /** 分页Limit */
+  Limit?: number;
+  /** search-virtual-host：vhost名称模糊查询，之前前缀和后缀匹配 */
+  Filters?: Filter;
+}
+
+declare interface DescribeRabbitMQVirtualHostResponse {
+  /** 返回vhost数量 */
+  TotalCount?: number;
+  /** vhost详情列表 */
+  VirtualHostList?: RabbitMQVirtualHostInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2982,22 +3130,6 @@ declare interface ModifyAMQPQueueResponse {
   RequestId?: string;
 }
 
-declare interface ModifyAMQPVHostRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** vhost名称，3-64个字符，只能包含字母、数字、“-”及“_” */
-  VHostId: string;
-  /** 未消费消息的保留时间，以毫秒为单位，60秒-15天 */
-  MsgTtl: number;
-  /** 说明，最大128个字符 */
-  Remark?: string;
-}
-
-declare interface ModifyAMQPVHostResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyClusterRequest {
   /** Pulsar 集群的ID，需要更新的集群Id。 */
   ClusterId: string;
@@ -3136,6 +3268,28 @@ declare interface ModifyEnvironmentRoleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRabbitMQUserRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 用户名，登录时使用 */
+  User: string;
+  /** 密码，登录时使用 */
+  Password: string;
+  /** 描述，不传则不修改 */
+  Description?: string;
+  /** 用户标签，用于决定改用户访问RabbitMQ Management的权限范围，不传则不修改 */
+  Tags?: string[];
+  /** 该用户的最大连接数，不传则不修改 */
+  MaxConnections?: number;
+  /** 该用户的最大channel数，不传则不修改 */
+  MaxChannels?: number;
+}
+
+declare interface ModifyRabbitMQUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRabbitMQVipInstanceRequest {
   /** 实例Id */
   InstanceId: string;
@@ -3148,6 +3302,22 @@ declare interface ModifyRabbitMQVipInstanceRequest {
 declare interface ModifyRabbitMQVipInstanceResponse {
   /** 实例id */
   InstanceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRabbitMQVirtualHostRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** vhost名 */
+  VirtualHost: string;
+  /** 描述 */
+  Description?: string;
+  /** 消息轨迹开关,true打开,false关闭 */
+  TraceFlag?: boolean;
+}
+
+declare interface ModifyRabbitMQVirtualHostResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3476,6 +3646,30 @@ declare interface SendMsgResponse {
   RequestId?: string;
 }
 
+declare interface SendRocketMQMessageRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 命名空间 */
+  NamespaceId: string;
+  /** topic名称 */
+  TopicName: string;
+  /** 信息内容 */
+  MsgBody: string;
+  /** 消息key信息 */
+  MsgKey?: string;
+  /** 消息tag信息 */
+  MsgTag?: string;
+}
+
+declare interface SendRocketMQMessageResponse {
+  /** 发送结果 */
+  Result: boolean;
+  /** 消息ID */
+  MsgId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindCmqDeadLetterRequest {
   /** 死信策略源队列名称，调用本接口会清空该队列的死信队列策略。 */
   SourceQueueName: string;
@@ -3559,6 +3753,10 @@ declare interface Tdmq {
   DeleteEnvironmentRoles(data: DeleteEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentRolesResponse>;
   /** 删除命名空间 {@link DeleteEnvironmentsRequest} {@link DeleteEnvironmentsResponse} */
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
+  /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
+  DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;
+  /** 删除RabbitMQ的vhost {@link DeleteRabbitMQVirtualHostRequest} {@link DeleteRabbitMQVirtualHostResponse} */
+  DeleteRabbitMQVirtualHost(data: DeleteRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQVirtualHostResponse>;
   /** 删除RocketMQ集群 {@link DeleteRocketMQClusterRequest} {@link DeleteRocketMQClusterResponse} */
   DeleteRocketMQCluster(data: DeleteRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQClusterResponse>;
   /** 删除RocketMQ消费组 {@link DeleteRocketMQGroupRequest} {@link DeleteRocketMQGroupResponse} */
@@ -3629,10 +3827,16 @@ declare interface Tdmq {
   DescribePulsarProInstances(data?: DescribePulsarProInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstancesResponse>;
   /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
+  /** 查询RabbitMQ用户列表 {@link DescribeRabbitMQUserRequest} {@link DescribeRabbitMQUserResponse} */
+  DescribeRabbitMQUser(data: DescribeRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQUserResponse>;
   /** 获取单个RabbitMQ专享实例信息 {@link DescribeRabbitMQVipInstanceRequest} {@link DescribeRabbitMQVipInstanceResponse} */
   DescribeRabbitMQVipInstance(data: DescribeRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstanceResponse>;
   /** 查询RabbitMQ专享实例列表 {@link DescribeRabbitMQVipInstancesRequest} {@link DescribeRabbitMQVipInstancesResponse} */
   DescribeRabbitMQVipInstances(data?: DescribeRabbitMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstancesResponse>;
+  /** 查询RabbitMQ vhost列表 {@link DescribeRabbitMQVirtualHostRequest} {@link DescribeRabbitMQVirtualHostResponse} */
+  DescribeRabbitMQVirtualHost(data: DescribeRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostResponse>;
+  /** RabbitMQ专享版查询虚拟主机列表 {@link DescribeRabbitMQVirtualHostListRequest} {@link DescribeRabbitMQVirtualHostListResponse} */
+  DescribeRabbitMQVirtualHostList(data: DescribeRabbitMQVirtualHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostListResponse>;
   /** 获取单个RocketMQ集群信息 {@link DescribeRocketMQClusterRequest} {@link DescribeRocketMQClusterResponse} */
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
   /** 获取RocketMQ集群列表 {@link DescribeRocketMQClustersRequest} {@link DescribeRocketMQClustersResponse} */
@@ -3661,8 +3865,6 @@ declare interface Tdmq {
   ModifyAMQPExchange(data: ModifyAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPExchangeResponse>;
   /** @deprecated 更新Amqp队列 {@link ModifyAMQPQueueRequest} {@link ModifyAMQPQueueResponse} */
   ModifyAMQPQueue(data: ModifyAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPQueueResponse>;
-  /** @deprecated 更新Vhost {@link ModifyAMQPVHostRequest} {@link ModifyAMQPVHostResponse} */
-  ModifyAMQPVHost(data: ModifyAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPVHostResponse>;
   /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
   /** 修改cmq队列属性 {@link ModifyCmqQueueAttributeRequest} {@link ModifyCmqQueueAttributeResponse} */
@@ -3675,8 +3877,12 @@ declare interface Tdmq {
   ModifyEnvironmentAttributes(data: ModifyEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentAttributesResponse>;
   /** 修改环境角色授权 {@link ModifyEnvironmentRoleRequest} {@link ModifyEnvironmentRoleResponse} */
   ModifyEnvironmentRole(data: ModifyEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentRoleResponse>;
+  /** 修改RabbitMQ的用户 {@link ModifyRabbitMQUserRequest} {@link ModifyRabbitMQUserResponse} */
+  ModifyRabbitMQUser(data: ModifyRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQUserResponse>;
   /** 修改RabbitMQ专享版实例 {@link ModifyRabbitMQVipInstanceRequest} {@link ModifyRabbitMQVipInstanceResponse} */
   ModifyRabbitMQVipInstance(data: ModifyRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQVipInstanceResponse>;
+  /** 修改RabbitMQ的vhost {@link ModifyRabbitMQVirtualHostRequest} {@link ModifyRabbitMQVirtualHostResponse} */
+  ModifyRabbitMQVirtualHost(data: ModifyRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQVirtualHostResponse>;
   /** 更新RocketMQ集群信息 {@link ModifyRocketMQClusterRequest} {@link ModifyRocketMQClusterResponse} */
   ModifyRocketMQCluster(data: ModifyRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQClusterResponse>;
   /** 更新RocketMQ消费组信息 {@link ModifyRocketMQGroupRequest} {@link ModifyRocketMQGroupResponse} */
@@ -3709,6 +3915,8 @@ declare interface Tdmq {
   SendMessages(data: SendMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessagesResponse>;
   /** 发送消息 {@link SendMsgRequest} {@link SendMsgResponse} */
   SendMsg(data: SendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendMsgResponse>;
+  /** 发送RocketMQ消息 {@link SendRocketMQMessageRequest} {@link SendRocketMQMessageResponse} */
+  SendRocketMQMessage(data: SendRocketMQMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendRocketMQMessageResponse>;
   /** 解绑cmq死信队列 {@link UnbindCmqDeadLetterRequest} {@link UnbindCmqDeadLetterResponse} */
   UnbindCmqDeadLetter(data: UnbindCmqDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCmqDeadLetterResponse>;
 }

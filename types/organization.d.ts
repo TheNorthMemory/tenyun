@@ -36,6 +36,18 @@ declare interface MemberMainInfo {
   MemberName: string | null;
 }
 
+/** 按月获取组织财务信息 */
+declare interface OrgFinancialByMonth {
+  /** 记录ID。 */
+  Id: number | null;
+  /** 月份，格式：yyyy-mm，示例：2021-01。 */
+  Month: string | null;
+  /** 消耗金额，单元：元。 */
+  TotalCost: number | null;
+  /** 比上月增长率%。正数增长，负数下降，空值无法统计。 */
+  GrowthRate?: string | null;
+}
+
 /** 组织身份 */
 declare interface OrgIdentity {
   /** 身份ID。 */
@@ -130,6 +142,18 @@ declare interface OrgMemberAuthIdentity {
   IdentityType?: number | null;
 }
 
+/** 组织成员财务信息。 */
+declare interface OrgMemberFinancial {
+  /** 成员Uin。 */
+  MemberUin: number | null;
+  /** 成员名称。 */
+  MemberName: string | null;
+  /** 消耗金额，单位：元。 */
+  TotalCost: number | null;
+  /** 占比%。 */
+  Ratio?: string | null;
+}
+
 /** 组织成员被授权的策略 */
 declare interface OrgMemberPolicy {
   /** 策略ID。 */
@@ -172,6 +196,18 @@ declare interface OrgPermission {
   Id: number;
   /** 权限名 */
   Name: string;
+}
+
+/** 组织产品财务信息 */
+declare interface OrgProductFinancial {
+  /** 产品Code。 */
+  ProductName: string | null;
+  /** 产品名。 */
+  ProductCode: string | null;
+  /** 产品消耗，单位：元。 */
+  TotalCost: number | null;
+  /** 占比%。 */
+  Ratio?: string | null;
 }
 
 declare interface AddOrganizationMemberEmailRequest {
@@ -316,6 +352,76 @@ declare interface DescribeOrganizationAuthNodeResponse {
   Total?: number | null;
   /** 条目详情。 */
   Items?: AuthNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationFinancialByMemberRequest {
+  /** 查询开始月份。格式：yyyy-mm，例如：2021-01。 */
+  Month: string;
+  /** 限制数目。取值范围：1~50，默认值：10 */
+  Limit?: number;
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
+  Offset?: number;
+  /** 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份。 */
+  EndMonth?: string;
+  /** 查询成员列表。 最大100个 */
+  MemberUins?: number[];
+  /** 查询产品列表。 最大100个 */
+  ProductCodes?: string[];
+}
+
+declare interface DescribeOrganizationFinancialByMemberResponse {
+  /** 当月总消耗。 */
+  TotalCost?: number | null;
+  /** 成员消耗详情。 */
+  Items?: OrgMemberFinancial[] | null;
+  /** 总数目。 */
+  Total?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationFinancialByMonthRequest {
+  /** 查询月数。取值范围：1~6，默认值：6 */
+  Limit?: number;
+  /** 查询结束月份。格式：yyyy-mm，例如：2021-01 */
+  EndMonth?: string;
+  /** 查询成员列表。 最大100个 */
+  MemberUins?: number[];
+  /** 查询产品列表。 最大100个 */
+  ProductCodes?: string[];
+}
+
+declare interface DescribeOrganizationFinancialByMonthResponse {
+  /** 产品消耗详情。 */
+  Items?: OrgFinancialByMonth[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationFinancialByProductRequest {
+  /** 查询开始月份。格式：yyyy-mm，例如：2021-01 */
+  Month: string;
+  /** 限制数目。取值范围：1~50，默认值：10 */
+  Limit?: number;
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
+  Offset?: number;
+  /** 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份 */
+  EndMonth?: string;
+  /** 查询成员列表。 最大100个 */
+  MemberUins?: number[];
+  /** 查询产品列表。 最大100个 */
+  ProductCodes?: string[];
+}
+
+declare interface DescribeOrganizationFinancialByProductResponse {
+  /** 当月总消耗。 */
+  TotalCost?: number | null;
+  /** 产品消耗详情。 */
+  Items?: OrgProductFinancial[] | null;
+  /** 总数目。 */
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -905,6 +1011,12 @@ declare interface Organization {
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
   /** 获取已设置管理员的互信主体关系列表 {@link DescribeOrganizationAuthNodeRequest} {@link DescribeOrganizationAuthNodeResponse} */
   DescribeOrganizationAuthNode(data: DescribeOrganizationAuthNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthNodeResponse>;
+  /** 以成员维度获取组织财务信息 {@link DescribeOrganizationFinancialByMemberRequest} {@link DescribeOrganizationFinancialByMemberResponse} */
+  DescribeOrganizationFinancialByMember(data: DescribeOrganizationFinancialByMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationFinancialByMemberResponse>;
+  /** 以月维度获取组织财务信息趋势 {@link DescribeOrganizationFinancialByMonthRequest} {@link DescribeOrganizationFinancialByMonthResponse} */
+  DescribeOrganizationFinancialByMonth(data?: DescribeOrganizationFinancialByMonthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationFinancialByMonthResponse>;
+  /** 以产品维度获取组织财务信息 {@link DescribeOrganizationFinancialByProductRequest} {@link DescribeOrganizationFinancialByProductResponse} */
+  DescribeOrganizationFinancialByProduct(data: DescribeOrganizationFinancialByProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationFinancialByProductResponse>;
   /** 获取组织成员被绑定授权关系的子账号列表 {@link DescribeOrganizationMemberAuthAccountsRequest} {@link DescribeOrganizationMemberAuthAccountsResponse} */
   DescribeOrganizationMemberAuthAccounts(data: DescribeOrganizationMemberAuthAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthAccountsResponse>;
   /** 获取组织成员可被管理的身份列表 {@link DescribeOrganizationMemberAuthIdentitiesRequest} {@link DescribeOrganizationMemberAuthIdentitiesResponse} */

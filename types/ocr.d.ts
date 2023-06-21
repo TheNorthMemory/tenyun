@@ -346,9 +346,9 @@ declare interface InvoiceGeneralInfo {
 
 /** 混贴票据单张发票识别信息 */
 declare interface InvoiceItem {
-  /** 识别结果。OK：表示识别成功；FailedOperation.UnsupportedInvioce：表示不支持识别；FailedOperation.UnKnowError：表示识别失败；其它错误码见各个票据接口的定义。 */
+  /** 识别结果。OK：表示识别成功；FailedOperation.UnsupportedInvoice：表示不支持识别；FailedOperation.UnKnowError：表示识别失败；其它错误码见各个票据接口的定义。 */
   Code: string;
-  /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票 */
+  /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票 */
   Type: number;
   /** 旋转后的图片四点坐标。 */
   Polygon: Polygon;
@@ -358,13 +358,13 @@ declare interface InvoiceItem {
   SingleInvoiceInfos: SingleInvoiceItem;
   /** 发票处于识别图片或PDF文件中的页教，默认从1开始。 */
   Page?: number;
-  /** 发票详细类型，详见下方 SubType 返回值说明 */
+  /** 发票详细类型，详见上方 SubType 返回值说明 */
   SubType?: string;
-  /** 发票类型描述，详见下方 TypeDescription 返回值说明 */
+  /** 发票类型描述，详见上方 TypeDescription 返回值说明 */
   TypeDescription?: string;
   /** 切割单图文件，Base64编码后的切图后的图片文件，开启 EnableCutImage 后进行返回 */
   CutImage?: string;
-  /** 发票详细类型描述，详见下方 SubType 返回值说明 */
+  /** 发票详细类型描述，详见上方 SubType 返回值说明 */
   SubTypeDescription?: string;
 }
 
@@ -488,6 +488,28 @@ declare interface MachinePrintedInvoice {
   OrderNumber?: string;
   /** 条目 */
   GeneralMachineItems?: GeneralMachineItem[];
+}
+
+/** 医疗票据信息 */
+declare interface MedicalInvoice {
+  /** 发票名称 */
+  Title?: string;
+  /** 发票代码 */
+  Code?: string;
+  /** 发票号码 */
+  Number?: string;
+  /** 价税合计（小写） */
+  Total?: string;
+  /** 价税合计（大写） */
+  TotalCn?: string;
+  /** 开票日期 */
+  Date?: string;
+  /** 校验码 */
+  CheckCode?: string;
+  /** 发票属地 */
+  Place?: string;
+  /** 复核人 */
+  Reviewer?: string;
 }
 
 /** 医疗发票识别结果 */
@@ -978,6 +1000,10 @@ declare interface SingleInvoiceItem {
   NonTaxIncomeElectronicBill?: NonTaxIncomeBill | null;
   /** 火车票 */
   TrainTicket?: TrainTicket | null;
+  /** 医疗门诊收费票据（电子） */
+  MedicalOutpatientInvoice?: MedicalInvoice | null;
+  /** 医疗住院收费票据（电子） */
+  MedicalHospitalizedInvoice?: MedicalInvoice | null;
 }
 
 /** 智慧表单上传文件信息 */
@@ -1756,6 +1782,12 @@ declare interface VatInvoiceInfo {
   CodeConfirm?: string;
   /** 收款人 */
   Receiptor?: string;
+  /** 是否有全电纸质票（0：没有，1：有） */
+  ElectronicFullMark?: number;
+  /** 全电号码 */
+  ElectronicFullNumber?: string;
+  /** 发票联名 */
+  FormName?: string;
 }
 
 /** 增值税发票项目明细 */
@@ -3149,11 +3181,11 @@ declare interface RecognizeContainerOCRResponse {
 }
 
 declare interface RecognizeGeneralInvoiceRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票-1：其他发票默认为空，识别所有类型发票。当传入单个类型时，图片均采用该票类型进行处理。暂不支持多个参数进行局部控制。 */
+  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。暂不支持多个参数进行局部控制。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票-1：其他发票 */
   Types?: number[];
   /** 是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。 */
   EnableOther?: boolean;
@@ -3520,9 +3552,9 @@ declare interface RecognizeThaiIDCardOCRResponse {
   Address?: string;
   /** 出生日期 */
   Birthday?: string;
-  /** 首次领用日期 */
-  IssueDate?: string;
   /** 签发日期 */
+  IssueDate?: string;
+  /** 到期日期 */
   ExpirationDate?: string;
   /** 英文姓名 */
   EnLastName?: string;

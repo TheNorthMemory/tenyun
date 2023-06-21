@@ -660,16 +660,22 @@ declare interface UpdateRecordDetail {
   InstanceId: string | null;
   /** 部署实例名称 */
   InstanceName: string | null;
-  /** 部署监听器ID */
+  /** 部署监听器ID（CLB专用） */
   ListenerId: string | null;
-  /** 部署监听器名称 */
+  /** 部署监听器名称（CLB专用） */
   ListenerName: string | null;
   /** 协议 */
   Protocol: string | null;
-  /** 是否开启SNI */
+  /** 是否开启SNI（CLB专用） */
   SniSwitch: number | null;
-  /** bucket名称 */
+  /** bucket名称（COS专用） */
   Bucket: string | null;
+  /** 端口 */
+  Port?: number | null;
+  /** 命名空间（TKE专用） */
+  Namespace?: string | null;
+  /** secret名称（TKE专用） */
+  SecretName?: string | null;
 }
 
 /** 更新记录详情列表 */
@@ -678,6 +684,8 @@ declare interface UpdateRecordDetails {
   ResourceType: string;
   /** 部署资源详情列表 */
   List: UpdateRecordDetail[];
+  /** 该部署资源总数 */
+  TotalCount?: number;
 }
 
 /** 部署记录信息 */
@@ -723,9 +731,9 @@ declare interface ApplyCertificateRequest {
   ContactPhone?: string;
   /** 有效期，默认12个月，目前仅支持12个月。 */
   ValidityPeriod?: string;
-  /** 加密算法，仅支持 RSA。 */
+  /** 加密算法，支持 RSA及ECC。 */
   CsrEncryptAlgo?: string;
-  /** 密钥对参数，仅支持2048。 */
+  /** 密钥对参数，RSA仅支持2048。ECC仅支持prime256v1 */
   CsrKeyParameter?: string;
   /** CSR 的加密密码。 */
   CsrKeyPassword?: string;
@@ -741,7 +749,7 @@ declare interface ApplyCertificateRequest {
 
 declare interface ApplyCertificateResponse {
   /** 证书 ID。 */
-  CertificateId: string;
+  CertificateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1471,19 +1479,23 @@ declare interface DescribeHostTkeInstanceListResponse {
 declare interface DescribeHostUpdateRecordDetailRequest {
   /** 待部署的证书ID */
   DeployRecordId: string;
+  /** 每页数量，默认10。 */
+  Limit?: string;
+  /** 分页偏移量，从0开始。 */
+  Offset?: string;
 }
 
 declare interface DescribeHostUpdateRecordDetailResponse {
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 证书部署记录列表 */
-  RecordDetailList: UpdateRecordDetails[] | null;
+  RecordDetailList?: UpdateRecordDetails[] | null;
   /** 成功总数 */
-  SuccessTotalCount: number | null;
+  SuccessTotalCount?: number | null;
   /** 失败总数 */
-  FailedTotalCount: number | null;
+  FailedTotalCount?: number | null;
   /** 部署中总数 */
-  RunningTotalCount: number | null;
+  RunningTotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

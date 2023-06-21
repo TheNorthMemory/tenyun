@@ -2375,7 +2375,7 @@ declare interface DescribeExclusiveInstancesStatusRequest {
 
 declare interface DescribeExclusiveInstancesStatusResponse {
   /** 独享实例列表查询结果 */
-  Result: InstanceSummary;
+  Result?: InstanceSummary;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -694,6 +694,14 @@ declare interface MonitorTime {
   Time: number;
 }
 
+/** 多日志主题检索相关信息 */
+declare interface MultiTopicSearchInformation {
+  /** 要检索分析的日志主题ID */
+  TopicId?: string;
+  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时 */
+  Context?: string;
+}
+
 /** 告警通知接收者信息 */
 declare interface NoticeReceiver {
   /** 接受者类型。可选值： Uin - 用户ID Group - 用户组ID暂不支持其余接收者类型。 */
@@ -1049,11 +1057,13 @@ declare interface CreateConfigRequest {
   ExcludePaths?: ExcludePathInfo[];
   /** 用户自定义采集规则，Json格式序列化的字符串 */
   UserDefineRule?: string;
+  /** 高级采集配置 */
+  AdvancedConfig?: string;
 }
 
 declare interface CreateConfigResponse {
   /** 采集配置ID */
-  ConfigId: string;
+  ConfigId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1197,7 +1207,7 @@ declare interface CreateShipperRequest {
   ShipperName: string;
   /** 投递的时间间隔，单位 秒，默认300，范围 300-900 */
   Interval?: number;
-  /** 投递的文件的最大值，单位 MB，默认256，范围 100-256 */
+  /** 投递的文件的最大值，单位 MB，默认256，范围 5-256 */
   MaxSize?: number;
   /** 投递日志的过滤规则，匹配的日志进行投递，各rule之间是and关系，最多5个，数组为空则表示不过滤而全部投递 */
   FilterRules?: FilterRuleInfo[];
@@ -1587,11 +1597,11 @@ declare interface DescribeLogContextRequest {
 
 declare interface DescribeLogContextResponse {
   /** 日志上下文信息集合 */
-  LogContextInfos: LogContextInfo[];
+  LogContextInfos?: LogContextInfo[];
   /** 上文日志是否已经返回 */
-  PrevOver: boolean;
+  PrevOver?: boolean;
   /** 下文日志是否已经返回 */
-  NextOver: boolean;
+  NextOver?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2031,7 +2041,7 @@ declare interface ModifyShipperRequest {
   ShipperName?: string;
   /** 投递的时间间隔，单位 秒，默认300，范围 300-900 */
   Interval?: number;
-  /** 投递的文件的最大值，单位 MB，默认256，范围 100-256 */
+  /** 投递的文件的最大值，单位 MB，默认256，范围 5-256 */
   MaxSize?: number;
   /** 投递日志的过滤规则，匹配的日志进行投递，各rule之间是and关系，最多5个，数组为空则表示不过滤而全部投递 */
   FilterRules?: FilterRuleInfo[];
@@ -2111,7 +2121,7 @@ declare interface SearchLogRequest {
   To: number;
   /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志 */
   Query: string;
-  /** 要检索分析的日志主题ID */
+  /** - 要检索分析的日志主题ID，仅能指定一个日志主题。- 如需同时检索多个日志主题，请使用Topics参数。 */
   TopicId?: string;
   /** 表示单次查询返回的原始日志条数，最大值为1000，获取后续日志需使用Context参数注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法 */
   Limit?: number;
@@ -2125,6 +2135,8 @@ declare interface SearchLogRequest {
   SamplingRate?: number;
   /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
   SyntaxRule?: number;
+  /** - 要检索分析的日志主题列表，最大支持20个日志主题。- 检索单个日志主题时请使用TopicId。- 不能同时使用TopicId和Topics。 */
+  Topics?: MultiTopicSearchInformation[];
 }
 
 declare interface SearchLogResponse {

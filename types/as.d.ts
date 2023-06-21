@@ -52,6 +52,8 @@ declare interface Advice {
   Detail: string;
   /** 建议解决方案。 */
   Solution: string;
+  /** 伸缩建议警告级别。取值范围：WARNING：警告级别CRITICAL：严重级别 */
+  Level?: string;
 }
 
 /** 伸缩组配置建议。 */
@@ -1051,7 +1053,7 @@ declare interface DescribeAutoScalingAdvicesRequest {
 
 declare interface DescribeAutoScalingAdvicesResponse {
   /** 伸缩组配置建议集合。 */
-  AutoScalingAdviceSet: AutoScalingAdvice[];
+  AutoScalingAdviceSet?: AutoScalingAdvice[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1566,7 +1568,7 @@ declare interface ScaleOutInstancesRequest {
 
 declare interface ScaleOutInstancesResponse {
   /** 伸缩活动ID。 */
-  ActivityId: string;
+  ActivityId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

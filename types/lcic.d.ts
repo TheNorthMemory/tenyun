@@ -538,9 +538,9 @@ declare interface CreateGroupWithSubGroupResponse {
 declare interface CreateRoomRequest {
   /** 房间名称。 */
   Name: string;
-  /** 预定的房间开始时间，unix时间戳。 */
+  /** 预定的房间开始时间，unix时间戳（秒）。 */
   StartTime: number;
-  /** 预定的房间结束时间，unix时间戳。 */
+  /** 预定的房间结束时间，unix时间戳（秒）。 */
   EndTime: number;
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -917,9 +917,9 @@ declare interface DescribeRoomRequest {
 declare interface DescribeRoomResponse {
   /** 房间名称。 */
   Name?: string;
-  /** 预定的房间开始时间，unix时间戳。 */
+  /** 预定的房间开始时间，unix时间戳（秒）。 */
   StartTime?: number;
-  /** 预定的房间结束时间，unix时间戳。 */
+  /** 预定的房间结束时间，unix时间戳（秒）。 */
   EndTime?: number;
   /** 老师的UserId。 */
   TeacherId?: string;
@@ -1212,9 +1212,9 @@ declare interface ModifyRoomRequest {
   RoomId: number;
   /** 低代码互动课堂的SdkAppId */
   SdkAppId: number;
-  /** 预定的房间开始时间，unix时间戳。直播开始后不允许修改。 */
+  /** 预定的房间开始时间，unix时间戳（秒）。直播开始后不允许修改。 */
   StartTime?: number;
-  /** 预定的房间结束时间，unix时间戳。直播开始后不允许修改。 */
+  /** 预定的房间结束时间，unix时间戳（秒）。直播开始后不允许修改。 */
   EndTime?: number;
   /** 老师ID。直播开始后不允许修改。 */
   TeacherId?: string;

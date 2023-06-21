@@ -1114,6 +1114,8 @@ declare interface NatGateway {
   ExclusiveGatewayBandwidth: number | null;
   /** NAT网关是否被封禁。“NORMAL”：未被封禁，“RESTRICTED”：已被封禁。 */
   RestrictState: string | null;
+  /** NAT网关大版本号，传统型=1，标准型=2 */
+  NatProductVersion: number | null;
 }
 
 /** NAT网关绑定的弹性IP */
@@ -1788,9 +1790,9 @@ declare interface SnapshotPolicy {
 
 /** NAT的SNAT规则 */
 declare interface SourceIpTranslationNatRule {
-  /** 资源ID */
+  /** 资源ID，如果ResourceType为USERDEFINED，可以为空 */
   ResourceId: string;
-  /** 资源类型，目前包含SUBNET、NETWORKINTERFACE */
+  /** 资源类型，目前包含SUBNET、NETWORKINTERFACE、USERDEFINED */
   ResourceType: string | null;
   /** 源IP/网段 */
   PrivateIpAddress: string;
@@ -2429,11 +2431,11 @@ declare interface AssociateDhcpIpWithAddressIpResponse {
 }
 
 declare interface AssociateDirectConnectGatewayNatGatewayRequest {
-  /** 专线网关ID。 */
+  /** VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
   VpcId: string;
   /** NAT网关ID。 */
   NatGatewayId: string;
-  /** VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
+  /** 专线网关ID。 */
   DirectConnectGatewayId: string;
 }
 
@@ -2973,9 +2975,9 @@ declare interface CreateNatGatewayRequest {
 
 declare interface CreateNatGatewayResponse {
   /** NAT网关对象数组。 */
-  NatGatewaySet: NatGateway[];
+  NatGatewaySet?: NatGateway[];
   /** 符合条件的 NAT网关对象数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

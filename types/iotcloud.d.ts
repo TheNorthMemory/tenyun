@@ -126,6 +126,8 @@ declare interface DeviceInfo {
   ClientIP: string | null;
   /** ota最后更新时间 */
   FirmwareUpdateTime: number | null;
+  /** 创建者 Uin */
+  CreateUserId: number | null;
 }
 
 /** 设备标签 */
@@ -208,6 +210,10 @@ declare interface FirmwareInfo {
   Description: string | null;
   /** 产品ID */
   ProductId: string | null;
+  /** 固件类型 */
+  FwType: string | null;
+  /** 创建者 Uin */
+  CreateUserId: number | null;
 }
 
 /** 固件升级任务信息 */

@@ -694,6 +694,62 @@ declare interface DescribeSocCheckResultListRspRsp {
   NormalTotal: number;
 }
 
+/** 域名列表 */
+declare interface DomainInfo {
+  /** 域名 */
+  Domain: string | null;
+  /** 解析地址 */
+  ResolveAddr: string[] | null;
+  /** 地域 */
+  Region: string[] | null;
+  /** 资产类型 */
+  AssetType: string[] | null;
+  /** 漏洞风险 */
+  RiskVulCount: number | null;
+  /** 敏感内容 */
+  SensitiveCount: number | null;
+  /** 挂马暗链 */
+  HorseLinkCount: number | null;
+  /** 网页篡改 */
+  WebModifyCount: number;
+  /** 上次扫描时间 */
+  ScanTime: string;
+  /** 最近发现时间 */
+  DiscoverTime: string;
+  /** 扫描次数 */
+  ScanTaskCount: number;
+  /** 端口 */
+  PortRisk: number;
+  /** 弱口令 */
+  WeekPwdCount: number;
+  /** 资产归属 */
+  AssetLocation: string | null;
+  /** 网络风险 */
+  NetworkRisk: number | null;
+  /** 网络攻击 */
+  NetworkAttack: number | null;
+  /** bot访问 */
+  BotVisit: number | null;
+  /** 网络访问 */
+  NetworkAccess: number | null;
+  /** 资产创建时间 */
+  CreateTime: string | null;
+  /** waf状态 */
+  WafStatus: number | null;
+  /** 最近扫描时间 */
+  LastScanTime: string | null;
+  /** 资产id */
+  AssetId: string[] | null;
+  /** 资产名 */
+  AssetName: string[] | null;
+  /** 类别 */
+  SourceType: string | null;
+  /** 是否核心资产 */
+  IsNotCore: number | null;
+  /** 是否云外资产 */
+  IsCloud: number | null;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
 declare interface Filter {
   /** 过滤键的名称。 */
@@ -790,6 +846,18 @@ declare interface QueryFilter {
   FilterOperatorType?: number;
   /** 过滤value */
   FilterValue?: string;
+}
+
+/** 过滤 */
+declare interface QueryFilterV3 {
+  /** 过滤条件 */
+  Filter?: QueryFilter;
+  /** 有无子条件 */
+  HasSub?: boolean;
+  /** 查询条件 */
+  SubFilters?: QueryFilter[];
+  /** 逻辑操作(只支持32位) */
+  Logic?: number;
 }
 
 /** 排序的字段 */
@@ -1198,6 +1266,42 @@ declare interface DescribeConfigListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainListRequest {
+  /** 起始，从0开始(只支持32位) */
+  Offset?: number;
+  /** limit,最大值200(只支持32位) */
+  Limit?: number;
+  /** 资产大类，根据此字段时返回不同的子结构,AssetBasicType(只支持32位) */
+  AssetBasicType?: number;
+  /** 过滤条件 */
+  Filter?: QueryFilterV3[];
+  /** 排序 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 导出字段 */
+  Field?: string[];
+  /** 时间范围(只支持32位) */
+  TimeRange?: number;
+  /** 逻辑字段(只支持32位) */
+  Logic?: number;
+  /** 聚合字段 */
+  GroupByField?: string;
+  /** - */
+  Task?: string;
+  /** 0:cfw 1:vss 2.soc 3.waf 4.cwp */
+  RequestFrom?: number;
+}
+
+declare interface DescribeDomainListResponse {
+  /** 无 */
+  Total?: number;
+  /** 无 */
+  DomainInfoCollection?: DomainInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEventDetailRequest {
   /** 事件索引名 */
   Index?: string;
@@ -1529,6 +1633,8 @@ declare interface Ssa {
   DescribeComplianceList(data?: DescribeComplianceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceListResponse>;
   /** 云配置检查项总览页检查项列表 {@link DescribeConfigListRequest} {@link DescribeConfigListResponse} */
   DescribeConfigList(data?: DescribeConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigListResponse>;
+  /** 域名列表 {@link DescribeDomainListRequest} {@link DescribeDomainListResponse} */
+  DescribeDomainList(data?: DescribeDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainListResponse>;
   /** 获取安全事件详情 {@link DescribeEventDetailRequest} {@link DescribeEventDetailResponse} */
   DescribeEventDetail(data?: DescribeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventDetailResponse>;
   /** 获取泄露列表 {@link DescribeLeakDetectionListRequest} {@link DescribeLeakDetectionListResponse} */

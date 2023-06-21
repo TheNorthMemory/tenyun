@@ -272,6 +272,14 @@ declare interface DelayInfo {
   Status: number;
 }
 
+/** 媒体诊断结果，包含断流信息、低帧率信息等 */
+declare interface DiagnoseResult {
+  /** 断流信息 */
+  StreamBrokenResults?: string[] | null;
+  /** 低帧率信息 */
+  LowFrameRateResults?: string[] | null;
+}
+
 /** 域名证书信息 */
 declare interface DomainCertInfo {
   /** 证书Id。 */
@@ -470,6 +478,82 @@ declare interface LivePackageInfo {
   RenewalResult?: number | null;
 }
 
+/** 直播监播任务信息。 */
+declare interface LiveStreamMonitorInfo {
+  /** 监播任务ID。 */
+  MonitorId: string | null;
+  /** 监播任务名称。128字节以内。 */
+  MonitorName?: string | null;
+  /** 监播任务输出信息。 */
+  OutputInfo?: LiveStreamMonitorOutputInfo | null;
+  /** 待监播的输入流信息。 */
+  InputList?: LiveStreamMonitorInputInfo[] | null;
+  /** 监播任务状态。0： 代表空闲1： 代表监播中。 */
+  Status?: number | null;
+  /** 上一次的启动时间，unix时间戳。 */
+  StartTime?: number | null;
+  /** 上一次的停止时间，unix时间戳。 */
+  StopTime?: number | null;
+  /** 监播任务创建时间，unix时间戳 */
+  CreateTime?: number | null;
+  /** 监播任务更新时间，unix时间戳 */
+  UpdateTime?: number | null;
+  /** 监播事件通知策略。 */
+  NotifyPolicy?: LiveStreamMonitorNotifyPolicy | null;
+  /** 输出音频的输入Index列表。 */
+  AudibleInputIndexList?: number[] | null;
+  /** 开启智能语音识别的输入Index列表 */
+  AiAsrInputIndexList?: number[] | null;
+  /** 是否开启断流检测 */
+  CheckStreamBroken?: number | null;
+  /** 是否开启低帧率检测 */
+  CheckStreamLowFrameRate?: number | null;
+  /** 智能语音识别语种：0 关闭 1 中文 2 英文 3日文 4 韩文 */
+  AsrLanguage?: number | null;
+  /** 智能文字识别语种：0 关闭 1 中、英文 */
+  OcrLanguage?: number | null;
+  /** 开启智能文字识别的输入Index列表 */
+  AiOcrInputIndexList?: number[] | null;
+  /** 是否存储监播事件到监播报告，以及是否允许查询监播报告 */
+  AllowMonitorReport?: number | null;
+}
+
+/** 直播监播功能输入流信息 */
+declare interface LiveStreamMonitorInputInfo {
+  /** 待监播的输入流名称。256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
+  InputStreamName: string | null;
+  /** 待监播的输入流推流域名。128字节以内，只允许填处于启用状态的推流域名。 */
+  InputDomain?: string | null;
+  /** 待监播的输入流推流路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
+  InputApp?: string | null;
+  /** 待监播的输入流推流url。一般场景下，无需该参数。 */
+  InputUrl?: string | null;
+  /** 描述。256字节以内。 */
+  Description?: string | null;
+}
+
+/** 直播流监播通知策略 */
+declare interface LiveStreamMonitorNotifyPolicy {
+  /** 通知策略类型：范围[0,1]0:代表不使用任何通知策略1:代表使用全局回调策略，所有事件通知到CallbackUrl。 */
+  NotifyPolicyType?: number | null;
+  /** 回调URL：长度[0,512]只支持http和https类型的url。 */
+  CallbackUrl?: string | null;
+}
+
+/** 直播流监播输出流信息 */
+declare interface LiveStreamMonitorOutputInfo {
+  /** 监播任务输出流宽度像素。范围[1,1920]。建议至少大于100像素。 */
+  OutputStreamWidth: number | null;
+  /** 监播任务输出流长度像素。范围[1,1080]，建议至少大于100像素。 */
+  OutputStreamHeight: number | null;
+  /** 监播任务输出流名称。不填时，系统会自动生成。256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
+  OutputStreamName?: string | null;
+  /** 监播任务播放域名。128字节以内，只允许填处于启用状态的播放域名。 */
+  OutputDomain?: string | null;
+  /** 监播任务播放路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
+  OutputApp?: string | null;
+}
+
 /** 日志url信息。 */
 declare interface LogInfo {
   /** 日志名称。 */
@@ -480,6 +564,14 @@ declare interface LogInfo {
   LogTime?: string;
   /** 文件大小。 */
   FileSize?: number;
+}
+
+/** 媒体处理结果，包含智能语音识别、智能文字识别结果 */
+declare interface MPSResult {
+  /** 智能语音识别结果 */
+  AiAsrResults?: string[] | null;
+  /** 智能文字识别结果 */
+  AiOcrResults?: string[] | null;
 }
 
 /** 监控播放数据 */
@@ -498,6 +590,28 @@ declare interface MonitorStreamPlayInfo {
   Online: number;
   /** 请求数。 */
   Request: number;
+}
+
+/** 直播垫片模板。 */
+declare interface PadTemplate {
+  /** 模板id。 */
+  TemplateId: number;
+  /** 模板名称。 */
+  TemplateName: string;
+  /** 垫片内容。 */
+  Url: string;
+  /** 模板创建时间。 */
+  CreateTime: string;
+  /** 模板修改时间。 */
+  UpdateTime: string;
+  /** 模板描述。 */
+  Description?: string;
+  /** 断流等待时间。取值范围：0-30000。单位：ms。 */
+  WaitDuration?: number;
+  /** 最大垫片时长。取值范围：0 - 正无穷。单位：ms。 */
+  MaxDuration?: number;
+  /** 垫片内容类型： 1：图片，2：视频。 默认值：1。 */
+  Type?: number;
 }
 
 /** 播放鉴权key信息。 */
@@ -1376,6 +1490,44 @@ declare interface CreateLiveCallbackTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateLivePadRuleRequest {
+  /** 推流域名。 */
+  DomainName: string;
+  /** 模板 ID。 */
+  TemplateId: number;
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName?: string;
+  /** 流名称。注：如果本参数设置为非空字符串，规则将只对此推流起作用。 */
+  StreamName?: string;
+}
+
+declare interface CreateLivePadRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLivePadTemplateRequest {
+  /** 模板名称。长度上限：255字节。仅支持中文、英文、数字、_、-。 */
+  TemplateName: string;
+  /** 垫片内容。 */
+  Url: string;
+  /** 描述信息。长度上限：1024字节。仅支持中文、英文、数字、_、-。 */
+  Description?: string;
+  /** 断流等待时间。取值范围：0-30000。单位：ms。 */
+  WaitDuration?: number;
+  /** 最大垫片时长。取值范围：0 - 正无穷。单位：ms。 */
+  MaxDuration?: number;
+  /** 垫片内容类型：1：图片，2：视频。默认值：1。 */
+  Type?: number;
+}
+
+declare interface CreateLivePadTemplateResponse {
+  /** 模板Id。 */
+  TemplateId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLivePullStreamTaskRequest {
   /** 拉流源的类型：PullLivePushLive -直播，PullVodPushLive -点播，PullPicPushLive -图片。 */
   SourceType: string;
@@ -1387,9 +1539,9 @@ declare interface CreateLivePullStreamTaskRequest {
   AppName: string;
   /** 推流名称。将拉取过来的流推到该流名称。 */
   StreamName: string;
-  /** 开始时间。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 开始时间。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时。 */
   StartTime: string;
-  /** 结束时间，注意：1. 结束时间必须大于开始时间；2. 结束时间和开始时间必须大于当前时间；3. 结束时间 和 开始时间 间隔必须小于七天。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 结束时间，注意：1. 结束时间必须大于开始时间；2. 结束时间和开始时间必须大于当前时间；3. 结束时间 和 开始时间 间隔必须小于七天。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时。 */
   EndTime: string;
   /** 任务操作人备注。 */
   Operator: string;
@@ -1417,6 +1569,8 @@ declare interface CreateLivePullStreamTaskRequest {
   WatermarkList?: PullPushWatermarkInfo[];
   /** 点播源是否启用本地推流模式，默认0，不启用。0 - 不启用。1 - 启用。注意：启用本地模式后，会将源列表中的 MP4 文件进行本地下载，优先使用本地已下载文件进行推流，提高点播源推流稳定性。使用本地下载文件推流时，会产生增值费用。 */
   VodLocalMode?: number;
+  /** 录制模板 ID。 */
+  RecordTemplateId?: string;
 }
 
 declare interface CreateLivePullStreamTaskResponse {
@@ -1548,6 +1702,38 @@ declare interface CreateLiveSnapshotTemplateRequest {
 declare interface CreateLiveSnapshotTemplateResponse {
   /** 模板Id。 */
   TemplateId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLiveStreamMonitorRequest {
+  /** 监播任务的输出信息。 */
+  OutputInfo: LiveStreamMonitorOutputInfo;
+  /** 待监播的输入流信息列表。 */
+  InputList: LiveStreamMonitorInputInfo[];
+  /** 监播任务名称。字段长度小于128字节（一个汉字两个字节）。 */
+  MonitorName?: string;
+  /** 监播事件通知策略。不填默认为没有任何通知。 */
+  NotifyPolicy?: LiveStreamMonitorNotifyPolicy;
+  /** 智能语音识别语种设置：0 关闭 1 中文 2 英文 3 日文 4 韩文。 */
+  AsrLanguage?: number;
+  /** 智能文字识别语种设置：0 关闭 1 中、英文。 */
+  OcrLanguage?: number;
+  /** 智能语音识别的输入列表，若开启语音识别则必填。（第1条输入流index为1） */
+  AiAsrInputIndexList?: number[];
+  /** 智能文字识别的输入列表，若开启文字识别则必填。（第1条输入流index为1） */
+  AiOcrInputIndexList?: number[];
+  /** 是否开启断流检测。 */
+  CheckStreamBroken?: number;
+  /** 是否开启低帧率检测。 */
+  CheckStreamLowFrameRate?: number;
+  /** 是否存储监播事件到监播报告，以及是否允许查询监播报告。 */
+  AllowMonitorReport?: number;
+}
+
+declare interface CreateLiveStreamMonitorResponse {
+  /** 监播任务ID。 */
+  MonitorId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1786,6 +1972,32 @@ declare interface DeleteLiveDomainResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLivePadRuleRequest {
+  /** 推流域名。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  DomainName: string;
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  AppName: string;
+  /** 流名称。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  StreamName: string;
+  /** 直播垫片模板id。 */
+  TemplateId: number;
+}
+
+declare interface DeleteLivePadRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLivePadTemplateRequest {
+  /** 模板 ID。 */
+  TemplateId: number;
+}
+
+declare interface DeleteLivePadTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLivePullStreamTaskRequest {
   /** 任务 Id。 */
   TaskId: string;
@@ -1854,6 +2066,16 @@ declare interface DeleteLiveSnapshotTemplateRequest {
 }
 
 declare interface DeleteLiveSnapshotTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLiveStreamMonitorRequest {
+  /** 监播任务ID */
+  MonitorId: string;
+}
+
+declare interface DeleteLiveStreamMonitorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2360,6 +2582,38 @@ declare interface DescribeLivePackageInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLivePadRulesRequest {
+}
+
+declare interface DescribeLivePadRulesResponse {
+  /** 规则信息列表。 */
+  Rules: RuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLivePadTemplateRequest {
+  /** 模板id。 */
+  TemplateId: number;
+}
+
+declare interface DescribeLivePadTemplateResponse {
+  /** 直播垫片模板信息。 */
+  Template: PadTemplate;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLivePadTemplatesRequest {
+}
+
+declare interface DescribeLivePadTemplatesResponse {
+  /** 直播垫片模板信息。 */
+  Templates: PadTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLivePlayAuthKeyRequest {
   /** 域名。 */
   DomainName: string;
@@ -2510,6 +2764,34 @@ declare interface DescribeLiveStreamEventListResponse {
   TotalNum: number;
   /** 总页数。 */
   TotalPage: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveStreamMonitorListRequest {
+  /** 查询列表时的起始偏移。 */
+  Index: number;
+  /** 本次查询的记录个数。最小值为1。 */
+  Count: number;
+}
+
+declare interface DescribeLiveStreamMonitorListResponse {
+  /** 账号下的直播流监播任务个数。 */
+  TotalNum?: number | null;
+  /** 直播流监播任务列表 */
+  LiveStreamMonitors?: LiveStreamMonitorInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveStreamMonitorRequest {
+  /** 监播任务ID。 */
+  MonitorId: string;
+}
+
+declare interface DescribeLiveStreamMonitorResponse {
+  /** 直播监播任务相关信息。 */
+  LiveStreamMonitor?: LiveStreamMonitorInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2806,6 +3088,20 @@ declare interface DescribeLogDownloadListResponse {
   LogInfoList?: LogInfo[];
   /** 总条数。 */
   TotalNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMonitorReportRequest {
+  /** 监播任务ID。 */
+  MonitorId: string;
+}
+
+declare interface DescribeMonitorReportResponse {
+  /** 媒体处理结果信息。 */
+  MPSResult?: MPSResult | null;
+  /** 媒体诊断结果信息。 */
+  DiagnoseResult?: DiagnoseResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3416,6 +3712,28 @@ declare interface ModifyLiveDomainRefererResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLivePadTemplateRequest {
+  /** 模板id。 */
+  TemplateId: number;
+  /** 垫片内容。 */
+  Url: string;
+  /** 断流等待时间。取值范围：0-30000。单位：ms。 */
+  WaitDuration: number;
+  /** 最大垫片时长。取值范围：0 - 正无穷。单位：ms。 */
+  MaxDuration: number;
+  /** 模板名称。长度上限：255字节。仅支持中文、英文、数字、_、-。 */
+  TemplateName: string;
+  /** 描述信息。长度上限：1024字节。仅支持中文、英文、数字、_、-。 */
+  Description?: string;
+  /** 垫片内容类型： 1：图片，2：视频。 默认值：1。 */
+  Type?: number;
+}
+
+declare interface ModifyLivePadTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLivePlayAuthKeyRequest {
   /** 播放域名。 */
   DomainName: string;
@@ -3568,6 +3886,38 @@ declare interface ModifyLiveSnapshotTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLiveStreamMonitorRequest {
+  /** 监播任务ID。 */
+  MonitorId: string;
+  /** 监播任务的名称。长度128字节以内（一个汉字两个字节）。 */
+  MonitorName?: string;
+  /** 监播任务输出信息。 */
+  OutputInfo?: LiveStreamMonitorOutputInfo;
+  /** 待监播的输入流信息。 */
+  InputList?: LiveStreamMonitorInputInfo[];
+  /** 监播事件通知策略。 */
+  NotifyPolicy?: LiveStreamMonitorNotifyPolicy;
+  /** 智能语音识别语种：0 关闭 1 中文 2 英文 3 日文 4 韩文。 */
+  AsrLanguage?: number;
+  /** 智能文字识别语种：0 关闭 1 中、英文。 */
+  OcrLanguage?: number;
+  /** 语音识别输入流列表，1代表第一条输入流。 */
+  AiAsrInputIndexList?: number[];
+  /** 文字识别输入流列表，1代表第一条输入流。 */
+  AiOcrInputIndexList?: number[];
+  /** 是否开启断流检测。 */
+  CheckStreamBroken?: number;
+  /** 是否开启低帧率检测。 */
+  CheckStreamLowFrameRate?: number;
+  /** 是否存储监播事件到监播报告，以及是否允许查询监播报告。 */
+  AllowMonitorReport?: number;
+}
+
+declare interface ModifyLiveStreamMonitorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLiveTimeShiftTemplateRequest {
   /** 时移模板id。 */
   TemplateId: number;
@@ -3676,6 +4026,18 @@ declare interface ModifyPullStreamStatusResponse {
   RequestId?: string;
 }
 
+declare interface RestartLivePullStreamTaskRequest {
+  /** 任务 Id。 */
+  TaskId: string;
+  /** 操作人备注名称。 */
+  Operator: string;
+}
+
+declare interface RestartLivePullStreamTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResumeDelayLiveStreamRequest {
   /** 推流路径，与推流和播放地址中的AppName保持一致，默认为live。 */
   AppName: string;
@@ -3704,6 +4066,18 @@ declare interface ResumeLiveStreamResponse {
   RequestId?: string;
 }
 
+declare interface StartLiveStreamMonitorRequest {
+  /** 监播ID。 */
+  MonitorId: string;
+  /** 监播画面声音InputIndex,支持多个输入声音。取值范围 InputIndex必须已经存在。不填默认无声音输出。 */
+  AudibleInputIndexList?: number[];
+}
+
+declare interface StartLiveStreamMonitorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopLiveRecordRequest {
   /** 流名称。 */
   StreamName: string;
@@ -3712,6 +4086,16 @@ declare interface StopLiveRecordRequest {
 }
 
 declare interface StopLiveRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopLiveStreamMonitorRequest {
+  /** 监播ID */
+  MonitorId: string;
+}
+
+declare interface StopLiveStreamMonitorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3793,6 +4177,10 @@ declare interface Live {
   CreateLiveCallbackRule(data: CreateLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackRuleResponse>;
   /** 创建回调模板 {@link CreateLiveCallbackTemplateRequest} {@link CreateLiveCallbackTemplateResponse} */
   CreateLiveCallbackTemplate(data: CreateLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackTemplateResponse>;
+  /** 创建直播垫片规则 {@link CreateLivePadRuleRequest} {@link CreateLivePadRuleResponse} */
+  CreateLivePadRule(data: CreateLivePadRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLivePadRuleResponse>;
+  /** 创建直播垫片模板 {@link CreateLivePadTemplateRequest} {@link CreateLivePadTemplateResponse} */
+  CreateLivePadTemplate(data: CreateLivePadTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLivePadTemplateResponse>;
   /** 创建直播拉流任务 {@link CreateLivePullStreamTaskRequest} {@link CreateLivePullStreamTaskResponse} */
   CreateLivePullStreamTask(data: CreateLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLivePullStreamTaskResponse>;
   /** 创建录制任务(已废弃,请使用新接口) {@link CreateLiveRecordRequest} {@link CreateLiveRecordResponse} */
@@ -3805,6 +4193,8 @@ declare interface Live {
   CreateLiveSnapshotRule(data: CreateLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotRuleResponse>;
   /** 创建截图模板 {@link CreateLiveSnapshotTemplateRequest} {@link CreateLiveSnapshotTemplateResponse} */
   CreateLiveSnapshotTemplate(data: CreateLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotTemplateResponse>;
+  /** 创建直播流监播任务 {@link CreateLiveStreamMonitorRequest} {@link CreateLiveStreamMonitorResponse} */
+  CreateLiveStreamMonitor(data: CreateLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveStreamMonitorResponse>;
   /** 创建直播时移规则 {@link CreateLiveTimeShiftRuleRequest} {@link CreateLiveTimeShiftRuleResponse} */
   CreateLiveTimeShiftRule(data: CreateLiveTimeShiftRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTimeShiftRuleResponse>;
   /** 创建直播时移模板 {@link CreateLiveTimeShiftTemplateRequest} {@link CreateLiveTimeShiftTemplateResponse} */
@@ -3827,6 +4217,10 @@ declare interface Live {
   DeleteLiveCallbackTemplate(data: DeleteLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackTemplateResponse>;
   /** 删除域名 {@link DeleteLiveDomainRequest} {@link DeleteLiveDomainResponse} */
   DeleteLiveDomain(data: DeleteLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveDomainResponse>;
+  /** 删除直播垫片规则 {@link DeleteLivePadRuleRequest} {@link DeleteLivePadRuleResponse} */
+  DeleteLivePadRule(data: DeleteLivePadRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLivePadRuleResponse>;
+  /** 删除直播垫片模板 {@link DeleteLivePadTemplateRequest} {@link DeleteLivePadTemplateResponse} */
+  DeleteLivePadTemplate(data: DeleteLivePadTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLivePadTemplateResponse>;
   /** 删除直播拉流任务 {@link DeleteLivePullStreamTaskRequest} {@link DeleteLivePullStreamTaskResponse} */
   DeleteLivePullStreamTask(data: DeleteLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLivePullStreamTaskResponse>;
   /** 删除录制任务(已废弃,请使用新接口) {@link DeleteLiveRecordRequest} {@link DeleteLiveRecordResponse} */
@@ -3839,6 +4233,8 @@ declare interface Live {
   DeleteLiveSnapshotRule(data: DeleteLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotRuleResponse>;
   /** 删除截图模板 {@link DeleteLiveSnapshotTemplateRequest} {@link DeleteLiveSnapshotTemplateResponse} */
   DeleteLiveSnapshotTemplate(data: DeleteLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotTemplateResponse>;
+  /** 删除直播流监播任务 {@link DeleteLiveStreamMonitorRequest} {@link DeleteLiveStreamMonitorResponse} */
+  DeleteLiveStreamMonitor(data: DeleteLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveStreamMonitorResponse>;
   /** 删除直播时移规则 {@link DeleteLiveTimeShiftRuleRequest} {@link DeleteLiveTimeShiftRuleResponse} */
   DeleteLiveTimeShiftRule(data: DeleteLiveTimeShiftRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTimeShiftRuleResponse>;
   /** 删除直播时移模板 {@link DeleteLiveTimeShiftTemplateRequest} {@link DeleteLiveTimeShiftTemplateResponse} */
@@ -3901,6 +4297,12 @@ declare interface Live {
   DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
   /** 查询直播套餐包信息 {@link DescribeLivePackageInfoRequest} {@link DescribeLivePackageInfoResponse} */
   DescribeLivePackageInfo(data: DescribeLivePackageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePackageInfoResponse>;
+  /** 获取直播垫片规则列表 {@link DescribeLivePadRulesRequest} {@link DescribeLivePadRulesResponse} */
+  DescribeLivePadRules(data?: DescribeLivePadRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadRulesResponse>;
+  /** 获取单个直播垫片模板 {@link DescribeLivePadTemplateRequest} {@link DescribeLivePadTemplateResponse} */
+  DescribeLivePadTemplate(data: DescribeLivePadTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadTemplateResponse>;
+  /** 获取直播垫片模板 {@link DescribeLivePadTemplatesRequest} {@link DescribeLivePadTemplatesResponse} */
+  DescribeLivePadTemplates(data?: DescribeLivePadTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadTemplatesResponse>;
   /** 查询播放鉴权key {@link DescribeLivePlayAuthKeyRequest} {@link DescribeLivePlayAuthKeyResponse} */
   DescribeLivePlayAuthKey(data: DescribeLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePlayAuthKeyResponse>;
   /** 查询直播拉流任务 {@link DescribeLivePullStreamTasksRequest} {@link DescribeLivePullStreamTasksResponse} */
@@ -3921,6 +4323,10 @@ declare interface Live {
   DescribeLiveSnapshotTemplates(data?: DescribeLiveSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotTemplatesResponse>;
   /** 查询推断流事件 {@link DescribeLiveStreamEventListRequest} {@link DescribeLiveStreamEventListResponse} */
   DescribeLiveStreamEventList(data: DescribeLiveStreamEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamEventListResponse>;
+  /** 查询直播流监播任务 {@link DescribeLiveStreamMonitorRequest} {@link DescribeLiveStreamMonitorResponse} */
+  DescribeLiveStreamMonitor(data: DescribeLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamMonitorResponse>;
+  /** 查询直播流监播任务配置列表 {@link DescribeLiveStreamMonitorListRequest} {@link DescribeLiveStreamMonitorListResponse} */
+  DescribeLiveStreamMonitorList(data: DescribeLiveStreamMonitorListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamMonitorListResponse>;
   /** 查询直播中的流 {@link DescribeLiveStreamOnlineListRequest} {@link DescribeLiveStreamOnlineListResponse} */
   DescribeLiveStreamOnlineList(data?: DescribeLiveStreamOnlineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamOnlineListResponse>;
   /** 查询历史流列表 {@link DescribeLiveStreamPublishedListRequest} {@link DescribeLiveStreamPublishedListResponse} */
@@ -3955,6 +4361,8 @@ declare interface Live {
   DescribeLiveXP2PDetailInfoList(data?: DescribeLiveXP2PDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveXP2PDetailInfoListResponse>;
   /** 批量获取日志URL {@link DescribeLogDownloadListRequest} {@link DescribeLogDownloadListResponse} */
   DescribeLogDownloadList(data: DescribeLogDownloadListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadListResponse>;
+  /** 查询监播报告 {@link DescribeMonitorReportRequest} {@link DescribeMonitorReportResponse} */
+  DescribeMonitorReport(data: DescribeMonitorReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorReportResponse>;
   /** 查询播放http错误码实时数据 {@link DescribePlayErrorCodeDetailInfoListRequest} {@link DescribePlayErrorCodeDetailInfoListResponse} */
   DescribePlayErrorCodeDetailInfoList(data: DescribePlayErrorCodeDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeDetailInfoListResponse>;
   /** 查询播放http错误码汇总数据 {@link DescribePlayErrorCodeSumInfoListRequest} {@link DescribePlayErrorCodeSumInfoListResponse} */
@@ -4005,6 +4413,8 @@ declare interface Live {
   ModifyLiveDomainCertBindings(data: ModifyLiveDomainCertBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveDomainCertBindingsResponse>;
   /** 设置直播域名 Referer 黑白名单 {@link ModifyLiveDomainRefererRequest} {@link ModifyLiveDomainRefererResponse} */
   ModifyLiveDomainReferer(data: ModifyLiveDomainRefererRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveDomainRefererResponse>;
+  /** 修改直播垫片模板 {@link ModifyLivePadTemplateRequest} {@link ModifyLivePadTemplateResponse} */
+  ModifyLivePadTemplate(data: ModifyLivePadTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePadTemplateResponse>;
   /** 修改播放鉴权key {@link ModifyLivePlayAuthKeyRequest} {@link ModifyLivePlayAuthKeyResponse} */
   ModifyLivePlayAuthKey(data: ModifyLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePlayAuthKeyResponse>;
   /** 修改播放域名信息 {@link ModifyLivePlayDomainRequest} {@link ModifyLivePlayDomainResponse} */
@@ -4017,6 +4427,8 @@ declare interface Live {
   ModifyLiveRecordTemplate(data: ModifyLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordTemplateResponse>;
   /** 修改截图模板 {@link ModifyLiveSnapshotTemplateRequest} {@link ModifyLiveSnapshotTemplateResponse} */
   ModifyLiveSnapshotTemplate(data: ModifyLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveSnapshotTemplateResponse>;
+  /** 修改直播流监播任务 {@link ModifyLiveStreamMonitorRequest} {@link ModifyLiveStreamMonitorResponse} */
+  ModifyLiveStreamMonitor(data: ModifyLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveStreamMonitorResponse>;
   /** 修改直播时移模板 {@link ModifyLiveTimeShiftTemplateRequest} {@link ModifyLiveTimeShiftTemplateResponse} */
   ModifyLiveTimeShiftTemplate(data: ModifyLiveTimeShiftTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTimeShiftTemplateResponse>;
   /** 修改转码模板配置 {@link ModifyLiveTranscodeTemplateRequest} {@link ModifyLiveTranscodeTemplateResponse} */
@@ -4025,12 +4437,18 @@ declare interface Live {
   ModifyPullStreamConfig(data: ModifyPullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamConfigResponse>;
   /** 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamStatusRequest} {@link ModifyPullStreamStatusResponse} */
   ModifyPullStreamStatus(data: ModifyPullStreamStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamStatusResponse>;
+  /** 重启直播拉流任务 {@link RestartLivePullStreamTaskRequest} {@link RestartLivePullStreamTaskResponse} */
+  RestartLivePullStreamTask(data: RestartLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartLivePullStreamTaskResponse>;
   /** 取消直播延时 {@link ResumeDelayLiveStreamRequest} {@link ResumeDelayLiveStreamResponse} */
   ResumeDelayLiveStream(data: ResumeDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDelayLiveStreamResponse>;
   /** 恢复直播推流 {@link ResumeLiveStreamRequest} {@link ResumeLiveStreamResponse} */
   ResumeLiveStream(data: ResumeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeLiveStreamResponse>;
+  /** 启动直播流监播任务 {@link StartLiveStreamMonitorRequest} {@link StartLiveStreamMonitorResponse} */
+  StartLiveStreamMonitor(data: StartLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveStreamMonitorResponse>;
   /** 终止录制任务(已废弃,请使用新接口) {@link StopLiveRecordRequest} {@link StopLiveRecordResponse} */
   StopLiveRecord(data: StopLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveRecordResponse>;
+  /** 停止直播流监播任务 {@link StopLiveStreamMonitorRequest} {@link StopLiveStreamMonitorResponse} */
+  StopLiveStreamMonitor(data: StopLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveStreamMonitorResponse>;
   /** 终止录制任务（新） {@link StopRecordTaskRequest} {@link StopRecordTaskResponse} */
   StopRecordTask(data: StopRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordTaskResponse>;
   /** 终止截图任务 {@link StopScreenshotTaskRequest} {@link StopScreenshotTaskResponse} */

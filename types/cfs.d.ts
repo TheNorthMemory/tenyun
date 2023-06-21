@@ -34,6 +34,8 @@ declare interface AutoSnapshotPolicyInfo {
   DayOfMonth?: string | null;
   /** 快照定期间隔天数，1-365 天；该参数与DayOfMonth,DayOfWeek互斥 */
   IntervalDays?: number | null;
+  /** 跨地域复制的快照保留时间 */
+  CrossRegionsAliveDays?: number;
 }
 
 /** 版本控制-协议详情 */

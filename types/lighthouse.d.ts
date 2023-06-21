@@ -14,12 +14,12 @@ declare interface AttachDetail {
 
 /** 自动挂载并初始化该数据盘。 */
 declare interface AutoMountConfiguration {
-  /** 待挂载的实例ID。指定的实例必须处于“运行中”状态。 */
-  InstanceId: string;
+  /** 待挂载的实例ID。指定的实例必须与指定的数据盘处于同一可用区，实例状态必须处于“运行中”状态，且实例必须支持[自动化助手](https://cloud.tencent.com/document/product/1340/50752)。 */
+  InstanceId: string | null;
   /** 实例内的挂载点。仅Linux操作系统的实例可传入该参数, 不传则默认挂载在“/data/disk”路径下。 */
-  MountPoint?: string;
+  MountPoint?: string | null;
   /** 文件系统类型。取值: “ext4”、“xfs”。仅Linux操作系统的实例可传入该参数, 不传则默认为“ext4”。 */
-  FileSystemType?: string;
+  FileSystemType?: string | null;
 }
 
 /** 描述了镜像信息。 */
@@ -1891,7 +1891,7 @@ declare interface ResetInstanceResponse {
 declare interface ResetInstancesPasswordRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。 */
   InstanceIds: string[];
-  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：`LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：小写字母：[a-z]大写字母：[A-Z]数字：0-9特殊字符： ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/`WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符小写字母：[a-z]大写字母：[A-Z]数字： 0-9特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。 */
+  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：`LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：小写字母：[a-z]大写字母：[A-Z]数字：0-9特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/`WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符小写字母：[a-z]大写字母：[A-Z]数字： 0-9特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。 */
   Password: string;
   /** 待重置密码的实例操作系统用户名。不得超过 64 个字符。 */
   UserName?: string;

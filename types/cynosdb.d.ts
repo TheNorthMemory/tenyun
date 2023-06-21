@@ -1102,6 +1102,118 @@ declare interface PolicyRule {
   Desc: string;
 }
 
+/** 数据库代理连接池信息 */
+declare interface ProxyConnectionPoolInfo {
+  /** 连接池保持阈值：单位（秒） */
+  ConnectionPoolTimeOut: number | null;
+  /** 是否开启了连接池 */
+  OpenConnectionPool?: string | null;
+  /** 连接池类型：SessionConnectionPool（会话级别连接池 */
+  ConnectionPoolType?: string | null;
+}
+
+/** proxy组 */
+declare interface ProxyGroup {
+  /** 数据库代理组ID */
+  ProxyGroupId: string;
+  /** 数据库代理组节点个数 */
+  ProxyNodeCount: number;
+  /** 数据库代理组状态 */
+  Status: string;
+  /** 地域 */
+  Region: string;
+  /** 可用区 */
+  Zone: string;
+  /** 当前代理版本 */
+  CurrentProxyVersion: string;
+  /** 集群ID */
+  ClusterId: string | null;
+  /** 用户AppId */
+  AppId: number | null;
+  /** 读写节点开通数据库代理 */
+  OpenRw: string | null;
+}
+
+/** 数据库代理组详细信息 */
+declare interface ProxyGroupInfo {
+  /** 数据库代理组 */
+  ProxyGroup: ProxyGroup | null;
+  /** 数据库代理组读写分离信息 */
+  ProxyGroupRwInfo: ProxyGroupRwInfo | null;
+  /** 数据库代理节点信息 */
+  ProxyNodes: ProxyNodeInfo[] | null;
+  /** 数据库代理连接池信息 */
+  ConnectionPool: ProxyConnectionPoolInfo | null;
+  /** 数据库代理网络信息 */
+  NetAddrInfos: NetAddr[] | null;
+  /** 数据库代理任务集 */
+  Tasks: ObjectTask[] | null;
+}
+
+/** 数据库代理组读写分离信息 */
+declare interface ProxyGroupRwInfo {
+  /** 一致性类型 eventual-最终一致性,global-全局一致性,session-会话一致性 */
+  ConsistencyType?: string;
+  /** 一致性超时时间 */
+  ConsistencyTimeOut?: number;
+  /** 权重模式 system-系统分配，custom-自定义 */
+  WeightMode?: string;
+  /** 是否开启故障转移 */
+  FailOver?: string;
+  /** 是否自动添加只读实例，yes-是，no-不自动添加 */
+  AutoAddRo?: string;
+  /** 实例权重数组 */
+  InstanceWeights?: ProxyInstanceWeight[];
+  /** 是否开通读写节点，yse-是，no-否 */
+  OpenRw?: string | null;
+  /** 读写属性，可选值：READWRITE,READONLY */
+  RwType?: string;
+  /** 事务拆分 */
+  TransSplit?: boolean;
+  /** 连接模式，可选值：balance，nearby */
+  AccessMode?: string;
+}
+
+/** 数据库代理，读写分离实例权重 */
+declare interface ProxyInstanceWeight {
+  /** 实例Id */
+  InstanceId: string;
+  /** 实例权重 */
+  Weight: number;
+}
+
+/** 数据库代理组节点 */
+declare interface ProxyNodeInfo {
+  /** 数据库代理节点ID */
+  ProxyNodeId: string;
+  /** 节点当前连接数, DescribeProxyNodes接口此字段值不返回 */
+  ProxyNodeConnections: number;
+  /** 数据库代理节点cpu */
+  Cpu: number;
+  /** 数据库代理节点内存 */
+  Mem: number;
+  /** 数据库代理节点状态 */
+  Status: string;
+  /** 数据库代理组ID */
+  ProxyGroupId: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** 用户AppID */
+  AppId: number;
+  /** 地域 */
+  Region: string;
+  /** 可用区 */
+  Zone: string;
+}
+
+/** proxy节点可用区内个数 */
+declare interface ProxyZone {
+  /** proxy节点可用区 */
+  ProxyNodeZone?: string | null;
+  /** proxy节点数量 */
+  ProxyNodeCount?: number | null;
+}
+
 /** 查询过滤器 */
 declare interface QueryFilter {
   /** 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip" */
@@ -1114,6 +1226,16 @@ declare interface QueryFilter {
   Name?: string;
   /** 操作符 */
   Operator?: string;
+}
+
+/** 查询参数过滤器 */
+declare interface QueryParamFilter {
+  /** 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip" */
+  Names: string[];
+  /** 搜索字符串 */
+  Values: string[];
+  /** 是否精确匹配 */
+  ExactMatch?: boolean;
 }
 
 /** 资源包信息 */
@@ -1462,6 +1584,24 @@ declare interface CloseClusterPasswordComplexityResponse {
   RequestId?: string;
 }
 
+declare interface CloseProxyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库代理组ID */
+  ProxyGroupId?: string;
+  /** 是否只关闭读写分离，取值：是 "true","false" */
+  OnlyCloseRW?: boolean;
+}
+
+declare interface CloseProxyResponse {
+  /** 异步流程ID */
+  FlowId?: number;
+  /** 异步任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseWanRequest {
   /** 实例组id */
   InstanceGrpId: string;
@@ -1696,6 +1836,90 @@ declare interface CreateParamTemplateRequest {
 declare interface CreateParamTemplateResponse {
   /** 模版ID */
   TemplateId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateProxyEndPointRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 私有网络ID，默认与集群私有网络ID保持一致 */
+  UniqueVpcId: string;
+  /** 私有网络子网ID，默认与集群子网ID保持一致 */
+  UniqueSubnetId: string;
+  /** 连接池类型：SessionConnectionPool(会话级别连接池 ) */
+  ConnectionPoolType?: string;
+  /** 是否开启连接池,yes-开启，no-不开启 */
+  OpenConnectionPool?: string;
+  /** 连接池阀值：单位（秒） */
+  ConnectionPoolTimeOut?: number;
+  /** 安全组ID数组 */
+  SecurityGroupIds?: string[];
+  /** 描述说明 */
+  Description?: string;
+  /** vip信息 */
+  Vip?: string;
+  /** 权重模式：system-系统分配，custom-自定义 */
+  WeightMode?: string;
+  /** 是否自动添加只读实例，yes-是，no-不自动添加 */
+  AutoAddRo?: string;
+  /** 是否开启故障转移 */
+  FailOver?: string;
+  /** 一致性类型：eventual,global,session */
+  ConsistencyType?: string;
+  /** 读写属性：READWRITE,READONLY */
+  RwType?: string;
+  /** 一致性超时时间 */
+  ConsistencyTimeOut?: number;
+  /** 事务拆分 */
+  TransSplit?: boolean;
+  /** 连接模式：nearby,balance */
+  AccessMode?: string;
+  /** 实例权重 */
+  InstanceWeights?: ProxyInstanceWeight[];
+}
+
+declare interface CreateProxyEndPointResponse {
+  /** 异步流程ID */
+  FlowId?: number;
+  /** 异步任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateProxyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** cpu核数 */
+  Cpu: number;
+  /** 内存 */
+  Mem: number;
+  /** 私有网络ID，默认与集群私有网络ID保持一致 */
+  UniqueVpcId?: string;
+  /** 私有网络子网ID，默认与集群子网ID保持一致 */
+  UniqueSubnetId?: string;
+  /** 数据库代理组节点个数 */
+  ProxyCount?: number;
+  /** 连接池类型：SessionConnectionPool(会话级别连接池 ) */
+  ConnectionPoolType?: string;
+  /** 是否开启连接池,yes-开启，no-不开启 */
+  OpenConnectionPool?: string;
+  /** 连接池阀值：单位（秒） */
+  ConnectionPoolTimeOut?: number;
+  /** 安全组ID数组 */
+  SecurityGroupIds?: string[];
+  /** 描述说明 */
+  Description?: string;
+  /** 数据库节点信息 */
+  ProxyZones?: ProxyZone[];
+}
+
+declare interface CreateProxyResponse {
+  /** 异步流程ID */
+  FlowId?: number;
+  /** 异步任务ID */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2448,6 +2672,54 @@ declare interface DescribeProjectSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProxiesRequest {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 返回数量，默认为 20，最大值为 100 */
+  Limit?: number;
+  /** 记录偏移量，默认值为0 */
+  Offset?: number;
+  /** 排序字段，取值范围： CREATETIME：创建时间 PERIODENDTIME：过期时间 */
+  OrderBy?: string;
+  /** 排序类型，取值范围： ASC：升序排序 DESC：降序排序 */
+  OrderByType?: string;
+  /** 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
+  Filters?: QueryParamFilter[];
+}
+
+declare interface DescribeProxiesResponse {
+  /** 数据库代理组数 */
+  TotalCount?: number;
+  /** 数据库代理组列表 */
+  ProxyGroupInfos?: ProxyGroupInfo[] | null;
+  /** 数据库代理节点 */
+  ProxyNodeInfos?: ProxyNodeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProxyNodesRequest {
+  /** 返回数量，默认为 20，最大值为 100 */
+  Limit?: number;
+  /** 记录偏移量，默认值为0 */
+  Offset?: number;
+  /** 排序字段，取值范围： CREATETIME：创建时间 PERIODENDTIME：过期时间 */
+  OrderBy?: string;
+  /** 排序类型，取值范围： ASC：升序排序 DESC：降序排序 */
+  OrderByType?: string;
+  /** 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
+  Filters?: QueryFilter[];
+}
+
+declare interface DescribeProxyNodesResponse {
+  /** 数据库代理节点总数 */
+  TotalCount: number;
+  /** 数据库代理节点列表 */
+  ProxyNodeInfos: ProxyNodeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourcePackageDetailRequest {
   /** 资源包唯一ID */
   PackageId: string;
@@ -3098,6 +3370,62 @@ declare interface ModifyParamTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyProxyDescRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库代理组ID */
+  ProxyGroupId: string;
+  /** 数据库代理描述 */
+  Description: string;
+}
+
+declare interface ModifyProxyDescResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProxyRwSplitRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库代理组ID */
+  ProxyGroupId: string;
+  /** 一致性类型；“eventual"-最终一致性, "session"-会话一致性, "global"-全局一致性 */
+  ConsistencyType?: string;
+  /** 一致性超时时间 */
+  ConsistencyTimeOut?: string;
+  /** 读写权重分配模式；系统自动分配："system"， 自定义："custom" */
+  WeightMode?: string;
+  /** 实例只读权重 */
+  InstanceWeights?: ProxyInstanceWeight[];
+  /** 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值："yes" , "no" */
+  FailOver?: string;
+  /** 是否自动添加只读实例，取值："yes" , "no" */
+  AutoAddRo?: string;
+  /** 是否打开读写分离 */
+  OpenRw?: string;
+  /** 读写类型：READWRITE,READONLY */
+  RwType?: string;
+  /** 事务拆分 */
+  TransSplit?: boolean;
+  /** 连接模式：nearby,balance */
+  AccessMode?: string;
+  /** 是否打开连接池：yes,no */
+  OpenConnectionPool?: string;
+  /** 连接池类型：SessionConnectionPool */
+  ConnectionPoolType?: string;
+  /** 连接池时间 */
+  ConnectionPoolTimeOut?: number;
+}
+
+declare interface ModifyProxyRwSplitResponse {
+  /** 异步FlowId */
+  FlowId?: number;
+  /** 异步任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyResourcePackageClustersRequest {
   /** 资源包唯一ID */
   PackageId: string;
@@ -3270,6 +3598,22 @@ declare interface RefundResourcePackageRequest {
 declare interface RefundResourcePackageResponse {
   /** 每个物品对应一个dealName，业务需要根据dealName保证发货接口幂等 */
   DealNames?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReloadBalanceProxyNodeRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库代理组ID */
+  ProxyGroupId: string;
+}
+
+declare interface ReloadBalanceProxyNodeResponse {
+  /** 异步流程ID */
+  FlowId: number;
+  /** 异步任务ID */
+  TaskId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3534,6 +3878,56 @@ declare interface UpgradeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeProxyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** cpu核数 */
+  Cpu: number;
+  /** 内存 */
+  Mem: number;
+  /** 数据库代理组节点个数 */
+  ProxyCount?: number;
+  /** 数据库代理组ID（已废弃） */
+  ProxyGroupId?: string;
+  /** 重新负载均衡：auto（自动），manual（手动） */
+  ReloadBalance?: string;
+  /** 升级时间 ：no（升级完成时）yes（实例维护时间） */
+  IsInMaintainPeriod?: string;
+  /** 数据库代理节点信息 */
+  ProxyZones?: ProxyZone[];
+}
+
+declare interface UpgradeProxyResponse {
+  /** 异步流程ID */
+  FlowId?: number;
+  /** 异步任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpgradeProxyVersionRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库代理当前版本 */
+  SrcProxyVersion: string;
+  /** 数据库代理升级版本 */
+  DstProxyVersion: string;
+  /** 数据库代理组ID */
+  ProxyGroupId?: string;
+  /** 升级时间 ：no（升级完成时）yes（实例维护时间） */
+  IsInMaintainPeriod?: string;
+}
+
+declare interface UpgradeProxyVersionResponse {
+  /** 异步流程ID */
+  FlowId?: number;
+  /** 异步任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cynosdb TDSQL-C MySQL 版} */
 declare interface Cynosdb {
   (): Versions;
@@ -3551,6 +3945,8 @@ declare interface Cynosdb {
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭集群密码复杂度 {@link CloseClusterPasswordComplexityRequest} {@link CloseClusterPasswordComplexityResponse} */
   CloseClusterPasswordComplexity(data: CloseClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<CloseClusterPasswordComplexityResponse>;
+  /** 关闭数据库代理 {@link CloseProxyRequest} {@link CloseProxyResponse} */
+  CloseProxy(data: CloseProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyResponse>;
   /** 关闭外网 {@link CloseWanRequest} {@link CloseWanResponse} */
   CloseWan(data: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
   /** 复制集群密码复杂度 {@link CopyClusterPasswordComplexityRequest} {@link CopyClusterPasswordComplexityResponse} */
@@ -3569,6 +3965,10 @@ declare interface Cynosdb {
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
   /** 创建参数模板 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
+  /** 创建数据库代理 {@link CreateProxyRequest} {@link CreateProxyResponse} */
+  CreateProxy(data: CreateProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyResponse>;
+  /** 创建数据库代理连接点 {@link CreateProxyEndPointRequest} {@link CreateProxyEndPointResponse} */
+  CreateProxyEndPoint(data: CreateProxyEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyEndPointResponse>;
   /** 新购资源包 {@link CreateResourcePackageRequest} {@link CreateResourcePackageResponse} */
   CreateResourcePackage(data: CreateResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourcePackageResponse>;
   /** 删除账号 {@link DeleteAccountsRequest} {@link DeleteAccountsResponse} */
@@ -3647,6 +4047,10 @@ declare interface Cynosdb {
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */
   DescribeProjectSecurityGroups(data?: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
+  /** 查询数据库代理列表 {@link DescribeProxiesRequest} {@link DescribeProxiesResponse} */
+  DescribeProxies(data?: DescribeProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesResponse>;
+  /** 查询代理节点列表 {@link DescribeProxyNodesRequest} {@link DescribeProxyNodesResponse} */
+  DescribeProxyNodes(data?: DescribeProxyNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyNodesResponse>;
   /** 查询资源包使用详情 {@link DescribeResourcePackageDetailRequest} {@link DescribeResourcePackageDetailResponse} */
   DescribeResourcePackageDetail(data: DescribeResourcePackageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePackageDetailResponse>;
   /** 查询资源包列表 {@link DescribeResourcePackageListRequest} {@link DescribeResourcePackageListResponse} */
@@ -3717,6 +4121,10 @@ declare interface Cynosdb {
   ModifyMaintainPeriodConfig(data: ModifyMaintainPeriodConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainPeriodConfigResponse>;
   /** 修改参数模板 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
+  /** 修改数据库代理描述 {@link ModifyProxyDescRequest} {@link ModifyProxyDescResponse} */
+  ModifyProxyDesc(data: ModifyProxyDescRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyDescResponse>;
+  /** 配置数据库代理读写分离 {@link ModifyProxyRwSplitRequest} {@link ModifyProxyRwSplitResponse} */
+  ModifyProxyRwSplit(data: ModifyProxyRwSplitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyRwSplitResponse>;
   /** 给资源包绑定集群 {@link ModifyResourcePackageClustersRequest} {@link ModifyResourcePackageClustersResponse} */
   ModifyResourcePackageClusters(data: ModifyResourcePackageClustersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackageClustersResponse>;
   /** 修改资源包名称 {@link ModifyResourcePackageNameRequest} {@link ModifyResourcePackageNameResponse} */
@@ -3739,6 +4147,8 @@ declare interface Cynosdb {
   PauseServerless(data: PauseServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<PauseServerlessResponse>;
   /** 退款资源包 {@link RefundResourcePackageRequest} {@link RefundResourcePackageResponse} */
   RefundResourcePackage(data: RefundResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<RefundResourcePackageResponse>;
+  /** 负载均衡数据库代理 {@link ReloadBalanceProxyNodeRequest} {@link ReloadBalanceProxyNodeResponse} */
+  ReloadBalanceProxyNode(data: ReloadBalanceProxyNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadBalanceProxyNodeResponse>;
   /** 删除从可用区 {@link RemoveClusterSlaveZoneRequest} {@link RemoveClusterSlaveZoneResponse} */
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
   /** 重置数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
@@ -3769,6 +4179,10 @@ declare interface Cynosdb {
   UpgradeClusterVersion(data: UpgradeClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeClusterVersionResponse>;
   /** 升级实例 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
+  /** 升级数据库代理配置 {@link UpgradeProxyRequest} {@link UpgradeProxyResponse} */
+  UpgradeProxy(data: UpgradeProxyRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeProxyResponse>;
+  /** 升级数据库代理版本 {@link UpgradeProxyVersionRequest} {@link UpgradeProxyVersionResponse} */
+  UpgradeProxyVersion(data: UpgradeProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeProxyVersionResponse>;
 }
 
 export declare type Versions = ["2019-01-07"];

@@ -80,10 +80,12 @@ declare interface AdaptiveDynamicStreamingInfoItem {
   Url: string;
   /** 媒体文件大小，单位：字节。当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和；当媒体文件为 DASH 时，大小是 mpd 和分片文件大小的总和；注意：在 2022-01-10T16:00:00Z 前处理生成的自适应码流文件此字段为0。 */
   Size?: number;
-  /** 数字水印类型。可选值：Trace 表示经过溯源水印处理；None 表示没有经过数字水印处理。 */
+  /** 数字水印类型。可选值：Trace 表示经过溯源水印处理；CopyRight 表示经过版权水印处理；None 表示没有经过数字水印处理。 */
   DigitalWatermarkType?: string;
   /** 子流信息列表。 */
   SubStreamSet?: MediaSubStreamInfoItem[];
+  /** 版权信息。 */
+  CopyRightWatermarkText?: string;
 }
 
 /** 对视频转自适应码流的输入参数类型 */
@@ -94,6 +96,8 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   WatermarkSet?: WatermarkInput[];
   /** 溯源水印。 */
   TraceWatermark?: TraceWatermarkInput;
+  /** 版权水印。 */
+  CopyRightWatermark?: CopyRightWatermarkInput;
   /** 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。 */
   SubtitleSet?: string[];
 }
@@ -1480,9 +1484,9 @@ declare interface AudioVolumeParam {
 declare interface Canvas {
   /** 背景颜色，取值有：Black：黑色背景White：白色背景默认值：Black。 */
   Color?: string;
-  /** 画布宽度，即输出视频的宽度，取值范围：0~ 4096，单位：px。默认值：0，表示和第一个视频轨的第一个视频片段的视频宽度一致。 */
+  /** 画布宽度，即输出视频的宽度，取值范围：0~ 3840，单位：px。默认值：0，表示和第一个视频轨的第一个视频片段的视频宽度一致。 */
   Width?: number;
-  /** 画布高度，即输出视频的高度（或长边），取值范围：0~ 4096，单位：px。默认值：0，表示和第一个视频轨的第一个视频片段的视频高度一致。 */
+  /** 画布高度，即输出视频的高度（或长边），取值范围：0~ 3840，单位：px。默认值：0，表示和第一个视频轨的第一个视频片段的视频高度一致。 */
   Height?: number;
 }
 
@@ -1694,6 +1698,12 @@ declare interface ContentReviewTemplateItem {
   CreateTime: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   UpdateTime: string;
+}
+
+/** 版权水印参数 */
+declare interface CopyRightWatermarkInput {
+  /** 版权信息，最大长度为 200 个字符。 */
+  Text: string;
 }
 
 /** 对视频截图做封面任务输入参数类型 */
@@ -1970,7 +1980,7 @@ declare interface EmptyTrackItem {
 declare interface EventContent {
   /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
   EventHandle: string;
-  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；DescribeFileAttributesComplete：获取文件属性完成；兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
   EventType: string;
   /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
   FileUploadEvent: FileUploadTask | null;
@@ -2008,12 +2018,48 @@ declare interface EventContent {
   RebuildMediaCompleteEvent: RebuildMediaTask | null;
   /** 溯源水印提取完成事件，当事件类型为 ExtractTraceWatermarkComplete 时有效。 */
   ExtractTraceWatermarkCompleteEvent: ExtractTraceWatermarkTask | null;
+  /** 版权水印提取完成事件，当事件类型为 ExtractCopyRightWatermarkComplete 时有效。 */
+  ExtractCopyRightWatermarkCompleteEvent?: ExtractCopyRightWatermarkTask | null;
   /** 音视频审核完成事件，当事件类型为 ReviewAudioVideoComplete 时有效。 */
   ReviewAudioVideoCompleteEvent: ReviewAudioVideoTask | null;
   /** 该字段已无效。 */
   ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask | null;
   /** 获取文件属性完成事件，当事件类型为 DescribeFileAttributesComplete 时有效。 */
   DescribeFileAttributesCompleteEvent: DescribeFileAttributesTask | null;
+}
+
+/** 提取版权水印任务。 */
+declare interface ExtractCopyRightWatermarkTask {
+  /** 任务 ID。 */
+  TaskId?: string;
+  /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+  Status?: string;
+  /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
+  ErrCodeExt?: string;
+  /** 提取版权水印任务输入信息。 */
+  Input?: ExtractCopyRightWatermarkTaskInput | null;
+  /** 提取版权水印任务输出信息。 */
+  Output?: ExtractCopyRightWatermarkTaskOutput | null;
+  /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+}
+
+/** 提取版权水印任务输入 */
+declare interface ExtractCopyRightWatermarkTaskInput {
+  /** 需要提取水印的媒体 URL。 */
+  Url?: string;
+}
+
+/** 提取版权水印输出信息 */
+declare interface ExtractCopyRightWatermarkTaskOutput {
+  /** 版权信息。 */
+  Text?: string;
 }
 
 /** 提取溯源水印任务。 */
@@ -3150,8 +3196,10 @@ declare interface MediaTranscodeItem {
   VideoStreamSet: MediaVideoStreamItem[];
   /** 音频流信息。 */
   AudioStreamSet: MediaAudioStreamItem[];
-  /** 数字水印类型。可选值：Trace 表示经过溯源水印处理；None 表示没有经过数字水印处理。 */
+  /** 数字水印类型。可选值：Trace 表示经过溯源水印处理；CopyRight 表示经过版权水印处理；None 表示没有经过数字水印处理。 */
   DigitalWatermarkType: string;
+  /** 版权信息。 */
+  CopyRightWatermarkText?: string;
 }
 
 /** 转场信息 */
@@ -4830,6 +4878,8 @@ declare interface TranscodeTaskInput {
   WatermarkSet?: WatermarkInput[];
   /** 溯源水印。 */
   TraceWatermark?: TraceWatermarkInput;
+  /** 版权水印。 */
+  CopyRightWatermark?: CopyRightWatermarkInput;
   /** 马赛克列表，最大可支持 10 张。 */
   MosaicSet?: MosaicInput[];
   /** 片头片尾列表，支持多片头片尾，最大可支持 10 个。 */
@@ -6982,7 +7032,7 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务。 */
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务。 */
   TaskType?: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status?: string;
@@ -7022,6 +7072,8 @@ declare interface DescribeTaskDetailResponse {
   RebuildMediaTask?: RebuildMediaTask | null;
   /** 提取溯源水印任务信息，仅当 TaskType 为 ExtractTraceWatermark，该字段有值。 */
   ExtractTraceWatermarkTask?: ExtractTraceWatermarkTask | null;
+  /** 提取版权水印任务信息，仅当 TaskType 为 ExtractCopyRightWatermark，该字段有值。 */
+  ExtractCopyRightWatermarkTask?: ExtractCopyRightWatermarkTask | null;
   /** 音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。 */
   ReviewAudioVideoTask?: ReviewAudioVideoTask | null;
   /** 该字段已无效。 */
@@ -7232,6 +7284,28 @@ declare interface ExecuteFunctionRequest {
 declare interface ExecuteFunctionResponse {
   /** 处理结果打包后的字符串，具体与后台一同协调。 */
   Result: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExtractCopyRightWatermarkRequest {
+  /** 需要提取水印的媒体 URL。 */
+  Url: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 标识来源上下文，用于透传用户请求信息，在 ExtractCopyRightWatermarkComplete 回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+  TasksPriority?: number;
+  /** 保留字段，特殊用途时使用。 */
+  ExtInfo?: string;
+}
+
+declare interface ExtractCopyRightWatermarkResponse {
+  /** 任务 ID。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8741,6 +8815,8 @@ declare interface Vod {
   EnhanceMediaByTemplate(data: EnhanceMediaByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceMediaByTemplateResponse>;
   /** 执行定制 API {@link ExecuteFunctionRequest} {@link ExecuteFunctionResponse} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
+  /** 提取版权水印 {@link ExtractCopyRightWatermarkRequest} {@link ExtractCopyRightWatermarkResponse} */
+  ExtractCopyRightWatermark(data: ExtractCopyRightWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractCopyRightWatermarkResponse>;
   /** 提取溯源水印 {@link ExtractTraceWatermarkRequest} {@link ExtractTraceWatermarkResponse} */
   ExtractTraceWatermark(data: ExtractTraceWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractTraceWatermarkResponse>;
   /** 禁播媒体 {@link ForbidMediaDistributionRequest} {@link ForbidMediaDistributionResponse} */

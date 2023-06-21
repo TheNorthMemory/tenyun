@@ -140,7 +140,7 @@ declare interface CcInfo {
 
 /** 模板控件信息 */
 declare interface Component {
-  /** 如果是Component填写控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；如果是SignComponent签署控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component填写控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；如果是SignComponent签署控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
   ComponentType: string;
   /** 控件所属文件的序号（取值为：0-N）。目前单文件的情况下，值是0 */
   FileIndex: number;
@@ -162,10 +162,10 @@ declare interface Component {
   ComponentRequired?: boolean;
   /** 控件关联的签署人ID */
   ComponentRecipientId?: string;
-  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙钟的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}", */
+  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}", */
   ComponentExtra?: string;
   /** 是否是表单域类型，默认不false-不是 */
-  IsFormType?: boolean;
+  IsFormType?: boolean | null;
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525)$/签署意见控件： 约束：签署意见最大长度为50字符签署人手机号控件： 约束：国内手机号 13,14,15,16,17,18,19号段长度11位签署人身份证控件： 约束：合法的身份证号码检查控件名称： 约束：控件名称最大长度为20字符单行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号多行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号勾选框控件： 约束：选择填字符串true，不选填字符串false选择器控件： 约束：同单行文本控件约束，填写选择值中的字符串数字控件： 约束：请输入有效的数字(可带小数点) 检查正则表达式：/^(-|\+)?\d+(\.\d+)?$/日期控件： 约束：格式：yyyy年mm月dd日附件控件： 约束：JPG或PNG图片，上传数量限制，1到6个，最大6个附件图片控件： 约束：JPG或PNG图片，填写上传的图片资源ID邮箱控件： 约束：请输入有效的邮箱地址, w3c标准 检查正则表达式：/^([A-Za-z0-9_\-.!#$%&])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/ 参考：https://emailregex.com/地址控件： 同单行文本控件约束省市区控件： 同单行文本控件约束性别控件： 同单行文本控件约束，填写选择值中的字符串学历控件： 同单行文本控件约束，填写选择值中的字符串 */
   ComponentValue?: string;
   /** NORMAL 正常模式，使用坐标制定签署控件位置FIELD 表单域，需使用ComponentName指定表单域名称KEYWORD 关键字，使用ComponentId指定关键字 */
@@ -175,9 +175,9 @@ declare interface Component {
   /** 第三方应用集成平台模板控件 id 标识 */
   ChannelComponentId?: string;
   /** 指定关键字时横坐标偏移量，单位pt */
-  OffsetX?: number;
+  OffsetX?: number | null;
   /** 指定关键字时纵坐标偏移量，单位pt */
-  OffsetY?: number;
+  OffsetY?: number | null;
   /** 第三方应用集成中子客企业控件来源。0-平台指定；1-用户自定义 */
   ChannelComponentSource?: number;
   /** 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
@@ -212,6 +212,22 @@ declare interface Department {
   DepartmentId: string;
   /** 部门名称 */
   DepartmentName: string;
+}
+
+/** 授权服务信息 */
+declare interface ExtendAuthInfo {
+  /** 授权服务类型OPEN_SERVER_SIGN：开通企业静默签署OVERSEA_SIGN：企业与港澳台居民签署合同MOBILE_CHECK_APPROVER：使用手机号验证签署方身份PAGING_SEAL：骑缝章BATCH_SIGN：批量签署 */
+  Type?: string;
+  /** 授权服务名称 */
+  Name?: string;
+  /** 授权服务状态，ENABLE：开通DISABLE：未开通 */
+  Status?: string;
+  /** 授权人用户id */
+  OperatorUserId?: string | null;
+  /** 授权时间戳，单位秒 */
+  OperateOn?: number | null;
+  /** 被授权用户列表 */
+  HasAuthUserList?: HasAuthUser[] | null;
 }
 
 /** 绑定角色失败信息 */
@@ -464,6 +480,14 @@ declare interface GroupOrganization {
   FlowEngineEnable?: boolean | null;
 }
 
+/** 被授权用户信息 */
+declare interface HasAuthUser {
+  /** 用户id */
+  UserId?: string | null;
+  /** 用户归属MainOrg：主企业CurrentOrg：当前企业 */
+  BelongTo?: string | null;
+}
+
 /** 企业角色数据信息 */
 declare interface IntegrateRole {
   /** 角色id */
@@ -646,6 +670,10 @@ declare interface RemindFlowRecords {
   RemindMessage: string;
 }
 
+/** 模板结构体中的印章信息 */
+declare interface SealInfo {
+}
+
 /** 一码多扫签署二维码对象 */
 declare interface SignQrCode {
   /** 二维码id */
@@ -712,7 +740,7 @@ declare interface SuccessCreateStaffData {
   Mobile: string;
   /** 员工在电子签平台的id */
   UserId: string;
-  /** 提示，当创建已存在未实名用户时，改字段有值 */
+  /** 提示，当创建已存在未实名用户时，该字段有值 */
   Note?: string | null;
 }
 
@@ -778,6 +806,10 @@ declare interface TemplateInfo {
   TemplateVersion?: string | null;
   /** 模板是否已发布。true-已发布；false-未发布 */
   Published?: boolean | null;
+  /** 模板内部指定的印章列表 */
+  TemplateSeals?: SealInfo[] | null;
+  /** 模板内部指定的印章列表 */
+  Seals?: SealInfo[] | null;
 }
 
 /** 此结构体 (UploadFile) 用于描述多文件上传的文件信息。 */
@@ -995,6 +1027,8 @@ declare interface CreateFlowByFilesRequest {
   PreviewType?: number;
   /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后 */
   Deadline?: number;
+  /** 合同到期提醒时间戳，单位秒。设定该值后，可以提前进行到期通知，方便客户处理合同到期事务，如合同续签等。该值支持的范围是从发起时间起到往后的10年内。仅合同发起方企业的发起人可以编辑修改。 */
+  RemindedOn?: number;
   /** 发送类型：true：无序签false：有序签注：默认为false（有序签） */
   Unordered?: boolean;
   /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
@@ -1069,10 +1103,10 @@ declare interface CreateFlowRequest {
   FlowType?: string;
   /** 客户端Token，保持接口幂等性,最大长度64个字符 */
   ClientToken?: string;
-  /** 暂未开放 */
-  RelatedFlowId?: string;
   /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后 */
   DeadLine?: number;
+  /** 合同到期提醒时间戳，单位秒。设定该值后，可以提前进行到期通知，方便客户处理合同到期事务，如合同续签等。该值支持的范围是从发起时间起到往后的10年内。仅合同发起方企业的发起人可以编辑修改。 */
+  RemindedOn?: number;
   /** 用户自定义字段，回调的时候会进行透传，长度需要小于20480 */
   UserData?: string;
   /** 签署流程描述,最大长度1000个字符 */
@@ -1083,14 +1117,16 @@ declare interface CreateFlowRequest {
   CustomShowMap?: string;
   /** 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。 */
   NeedSignReview?: boolean;
-  /** 暂未开放 */
-  CallbackUrl?: string;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 被抄送人的信息列表。注: 此功能为白名单功能，若有需要，请联系电子签客服开白使用。 */
   CcInfos?: CcInfo[];
   /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   AutoSignScene?: string;
+  /** 暂未开放 */
+  RelatedFlowId?: string;
+  /** 暂未开放 */
+  CallbackUrl?: string;
 }
 
 declare interface CreateFlowResponse {
@@ -1163,7 +1199,7 @@ declare interface CreateIntegrationDepartmentResponse {
 declare interface CreateIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
-  /** 待创建员工的信息，Mobile和DisplayName必填 */
+  /** 待创建员工的信息，不超过20个。Mobile和DisplayName必填,OpenId、Email和Department.DepartmentId选填，其他字段暂不支持。 */
   Employees: Staff[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
@@ -1358,6 +1394,44 @@ declare interface CreateSealPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateSealRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 电子印章名字 */
+  SealName: string;
+  /** 应用相关信息 */
+  Agent?: Agent;
+  /** 电子印章类型，PERSONAL-个人私章,OFFICIAL-公章,SPECIAL_FINANCIAL-财务专用章,CONTRACT-合同专用章,LEGAL_REPRESENTATIVE-法定代表人章,SPECIAL_NATIONWIDE_INVOICE-发票专用章 */
+  SealType?: string;
+  /** 电子印章图片文件名称 */
+  FileName?: string;
+  /** 电子印章图片base64编码参数Image,FileToken或GenerateSource=SealGenerateSourceSystem三选一。 */
+  Image?: string;
+  /** 电子印章宽度,单位px参数不再启用，系统会设置印章大小为标准尺寸。 */
+  Width?: number;
+  /** 电子印章高度,单位px参数不再启用，系统会设置印章大小为标准尺寸。 */
+  Height?: number;
+  /** 电子印章印章颜色(默认红色RED),RED-红色系统目前只支持红色印章创建。 */
+  Color?: string;
+  /** 电子印章生成时的横向文字。 */
+  SealHorizontalText?: string;
+  /** 电子印章下弦文字 */
+  SealChordText?: string;
+  /** 电子印章中心图案类型,STAR-圆形有五角星,NONE-圆形无五角星系统生成的印章只支持STAR */
+  SealCentralType?: string;
+  /** 通过文件上传时，服务端生成的电子印章上传图片的token */
+  FileToken?: string;
+  /** 印章生成来源方式取值：SealGenerateSourceSystem 表示系统生成企业印章 */
+  GenerateSource?: string;
+}
+
+declare interface CreateSealResponse {
+  /** 电子印章编号 */
+  SealId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserAutoSignEnableUrlRequest {
   /** 操作人信息,UserId必填 */
   Operator: UserInfo;
@@ -1397,7 +1471,7 @@ declare interface DeleteIntegrationDepartmentRequest {
   Operator: UserInfo;
   /** 电子签中的部门id */
   DeptId: string;
-  /** 交接部门ID。待删除部门中的合同、印章和模版数据，交接至该部门ID下，未填写交接至公司根部门。 */
+  /** 交接部门ID。待删除部门中的合同、印章和模板数据，交接至该部门ID下，未填写交接至公司根部门。 */
   ReceiveDeptId?: string;
 }
 
@@ -1454,6 +1528,22 @@ declare interface DeleteSealPoliciesRequest {
 }
 
 declare interface DeleteSealPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExtendedServiceAuthInfosRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 代理相关应用信息，如集团主企业代子企业操作 */
+  Agent?: Agent;
+  /** 扩展服务类型，默认为空，查询目前支持的所有扩展服务信息，单个指定则查询单个扩展服务开通信息，取值：OPEN_SERVER_SIGN：开通企业静默签署OVERSEA_SIGN：企业与港澳台居民签署合同MOBILE_CHECK_APPROVER：使用手机号验证签署方身份PAGING_SEAL：骑缝章BATCH_SIGN：批量签署 */
+  ExtendServiceType?: string;
+}
+
+declare interface DescribeExtendedServiceAuthInfosResponse {
+  /** 授权服务信息列表 */
+  AuthInfoList?: ExtendAuthInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1553,7 +1643,7 @@ declare interface DescribeFlowTemplatesRequest {
   Offset?: number;
   /** 查询个数，默认20，最大200 */
   Limit?: number;
-  /** 这个参数跟下面的IsChannel参数配合使用。IsChannel=false时，ApplicationId参数不起任何作用。IsChannel=true时，ApplicationId为空，查询所有第三方应用集成平台企业模板列表；ApplicationId不为空，查询指定应用下的模板列表ApplicationId为空，查询所有应用下的模板列表 */
+  /** ApplicationId不为空，查询指定应用下的模板列表ApplicationId为空，查询所有应用下的模板列表 */
   ApplicationId?: string;
   /** 默认为false，查询SaaS模板库列表；为true，查询第三方应用集成平台企业模板库管理列表 */
   IsChannel?: boolean;
@@ -1629,7 +1719,7 @@ declare interface DescribeIntegrationMainOrganizationUserResponse {
 }
 
 declare interface DescribeIntegrationRolesRequest {
-  /** 操作人信息 */
+  /** 操作人信息，UserId必填 */
   Operator: UserInfo;
   /** 返回最大数量，最大为200 */
   Limit: number;
@@ -1837,7 +1927,7 @@ declare interface StartFlowResponse {
 }
 
 declare interface UnbindEmployeeUserIdWithClientOpenIdRequest {
-  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定 */
+  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定(参数用法参考示例) */
   Operator: UserInfo;
   /** 电子签系统员工UserId */
   UserId: string;
@@ -1853,9 +1943,9 @@ declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
 }
 
 declare interface UpdateIntegrationEmployeesRequest {
-  /** 操作人信息 */
+  /** 操作人信息，userId必填 */
   Operator: UserInfo;
-  /** 员工信息 */
+  /** 员工信息，不超过100个。根据UserId或OpenId更新员工，必填一个，优先UserId。可更新Mobile、DisplayName、Email和Department.DepartmentId字段，其他字段暂不支持 */
   Employees: Staff[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id */
   Agent?: Agent;
@@ -1963,6 +2053,8 @@ declare interface Ess {
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
   /** 获取小程序签署链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
+  /** 创建电子印章 {@link CreateSealRequest} {@link CreateSealResponse} */
+  CreateSeal(data: CreateSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealResponse>;
   /** 创建印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
   /** 获取个人用户自动签开启链接 {@link CreateUserAutoSignEnableUrlRequest} {@link CreateUserAutoSignEnableUrlResponse} */
@@ -1975,6 +2067,8 @@ declare interface Ess {
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
   /** 撤销印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
+  /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
+  DescribeExtendedServiceAuthInfos(data: DescribeExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfosResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
   /** 查询流程摘要 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */

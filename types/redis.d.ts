@@ -2587,17 +2587,17 @@ declare interface UpgradeInstanceResponse {
 }
 
 declare interface UpgradeInstanceVersionRequest {
-  /** 目标实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type，即实例要变更的目标类型 */
+  /** 目标实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的**TypeId**，即实例要变更的目标类型。- Redis 4.0 及以上的版本，支持相同版本的实例从标准架构升级至集群架构，例如，支持 Redis 4.0 标准架构升级至 Redis 4.0 集群架构。- 不支持跨版本架构升级，例如，Redis 4.0 标准架构升级至 Redis 5.0 集群架构。- 不支持 Redis 2.8 版本升级架构。- 不支持从集群架构降级至标准架构。 */
   TargetInstanceType: string;
-  /** 切换模式：1-维护时间窗切换，2-立即切换 */
+  /** 切换时间。- 1：维护时间窗切换。- 2：立即切换。 */
   SwitchOption: number;
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****，请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface UpgradeInstanceVersionResponse {
   /** 订单ID */
-  DealId: string;
+  DealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2831,7 +2831,7 @@ declare interface Redis {
   SwitchProxy(data: SwitchProxyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyResponse>;
   /** 变更实例配置 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
-  /** 升级实例版本或者结构 {@link UpgradeInstanceVersionRequest} {@link UpgradeInstanceVersionResponse} */
+  /** 升级实例架构 {@link UpgradeInstanceVersionRequest} {@link UpgradeInstanceVersionResponse} */
   UpgradeInstanceVersion(data: UpgradeInstanceVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceVersionResponse>;
   /** 实例proxy版本升级接口 {@link UpgradeProxyVersionRequest} {@link UpgradeProxyVersionResponse} */
   UpgradeProxyVersion(data: UpgradeProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeProxyVersionResponse>;

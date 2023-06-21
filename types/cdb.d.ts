@@ -1901,11 +1901,13 @@ declare interface CreateCdbProxyAddressRequest {
   VPort?: number;
   /** 安全组 */
   SecurityGroup?: string[];
+  /** 连接池类型。可选值 transaction（事务级别连接池），connection（会话级别连接池），ConnectionPool为true时生效。 */
+  ConnectionPoolType?: string;
 }
 
 declare interface CreateCdbProxyAddressResponse {
   /** 异步任务ID */
-  AsyncRequestId: string | null;
+  AsyncRequestId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2691,9 +2693,9 @@ declare interface DescribeBinlogsRequest {
   Offset?: number;
   /** 分页大小，默认值为20，最小值为1，最大值为100。 */
   Limit?: number;
-  /** binlog开始时间，筛选大于等于此值，时间格式：2016-03-17 02:10:37 */
+  /** binlog最早开始时间，时间格式：2016-03-17 02:10:37 */
   MinStartTime?: string;
-  /** binlog开始时间，筛选小于等于此值，时间格式：2016-03-17 02:10:37 */
+  /** binlog最晚开始时间，时间格式：2016-03-17 02:10:37 */
   MaxStartTime?: string;
 }
 

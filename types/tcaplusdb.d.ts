@@ -969,9 +969,9 @@ declare interface DeleteTableDataFlowRequest {
 
 declare interface DeleteTableDataFlowResponse {
   /** 删除表格分布式索引结果数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 删除表格分布式索引结果列表 */
-  TableResults: TableResultNew[];
+  TableResults?: TableResultNew[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1257,7 +1257,7 @@ declare interface DescribeTablesRequest {
   ClusterId?: string;
   /** 待查询表格所属表格组ID列表 */
   TableGroupIds?: string[];
-  /** 待查询表格信息列表 */
+  /** 待查询表格信息列表，用户不用关注，过滤请使用filter */
   SelectedTables?: SelectedTableInfoNew[];
   /** 过滤条件，本接口支持：TableName，TableInstanceId */
   Filters?: Filter[];
@@ -1269,9 +1269,9 @@ declare interface DescribeTablesRequest {
 
 declare interface DescribeTablesResponse {
   /** 表格数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 表格详情结果列表 */
-  TableInfos: TableInfoNew[];
+  TableInfos?: TableInfoNew[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1329,9 +1329,9 @@ declare interface EnableRestProxyRequest {
 
 declare interface EnableRestProxyResponse {
   /** RestProxy的状态，0为关闭，1为开启中，2为开启，3为关闭中 */
-  RestProxyStatus: number;
+  RestProxyStatus?: number;
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1355,7 +1355,9 @@ declare interface ImportSnapshotsRequest {
 
 declare interface ImportSnapshotsResponse {
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
-  TaskId: string | null;
+  TaskId?: string | null;
+  /** ApplicationId由 AppInstanceId-applicationId 组成，以区分不同集群的申请 */
+  ApplicationId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1369,7 +1371,7 @@ declare interface MergeTablesDataRequest {
 
 declare interface MergeTablesDataResponse {
   /** 合服结果集 */
-  Results: MergeTableResult[];
+  Results?: MergeTableResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1635,9 +1637,9 @@ declare interface SetTableDataFlowRequest {
 
 declare interface SetTableDataFlowResponse {
   /** 表格数据订阅创建结果数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 表格数据订阅创建结果列表 */
-  TableResults: TableResultNew[];
+  TableResults?: TableResultNew[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1651,9 +1653,9 @@ declare interface SetTableIndexRequest {
 
 declare interface SetTableIndexResponse {
   /** 表格分布式索引创建结果数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 表格分布式索引创建结果列表 */
-  TableResults: TableResultNew[];
+  TableResults?: TableResultNew[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1665,9 +1667,9 @@ declare interface UpdateApplyRequest {
 
 declare interface UpdateApplyResponse {
   /** 已更新的申请单列表 */
-  ApplyResults: ApplyResult[] | null;
+  ApplyResults?: ApplyResult[] | null;
   /** 更新数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

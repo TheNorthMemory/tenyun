@@ -901,7 +901,7 @@ declare interface CloseDBExtranetAccessRequest {
 
 declare interface CloseDBExtranetAccessResponse {
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -945,13 +945,13 @@ declare interface CreateDBInstanceNetworkAccessRequest {
 
 declare interface CreateDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateDBInstancesRequest {
-  /** 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。 */
+  /** 售卖规格ID。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。 */
   SpecCode: string;
   /** 实例容量大小，单位：GB。 */
   Storage: number;
@@ -965,7 +965,7 @@ declare interface CreateDBInstancesRequest {
   ProjectId?: number;
   /** PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBMajorVersion、DBKernelVersion至少需要传递一个。 */
   DBVersion?: string;
-  /** 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。 */
+  /** 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。 */
   InstanceChargeType?: string;
   /** 是否自动使用代金券。1（是），0（否），默认不使用。 */
   AutoVoucher?: number;
@@ -995,17 +995,17 @@ declare interface CreateDBInstancesRequest {
 
 declare interface CreateDBInstancesResponse {
   /** 订单号列表。每个实例对应一个订单号。 */
-  DealNames: string[];
+  DealNames?: string[];
   /** 冻结流水号 */
-  BillId: string;
+  BillId?: string;
   /** 创建成功的实例ID集合，只在后付费情景下有返回值 */
-  DBInstanceIdSet: string[];
+  DBInstanceIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateInstancesRequest {
-  /** 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。 */
+  /** 售卖规格ID。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。 */
   SpecCode: string;
   /** 实例容量大小，单位：GB。 */
   Storage: number;
@@ -1025,7 +1025,7 @@ declare interface CreateInstancesRequest {
   ProjectId?: number;
   /** PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBMajorVersion、DBKernelVersion至少需要传递一个。 */
   DBVersion?: string;
-  /** 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。 */
+  /** 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。 */
   InstanceChargeType?: string;
   /** 是否自动使用代金券。1（是），0（否），默认不使用。 */
   AutoVoucher?: number;
@@ -1063,15 +1063,17 @@ declare interface CreateInstancesRequest {
   DBEngine?: string;
   /** 数据库引擎的配置信息，配置格式如下：{"$key1":"$value1", "$key2":"$value2"}各引擎支持如下：1、mssql_compatible引擎：migrationMode：数据库模式，可选参数，可取值：single-db（单数据库模式），multi-db（多数据库模式）。默认为single-db。defaultLocale：排序区域规则，可选参数，在初始化后不可修改，默认为en_US，可选值如下："af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN"。serverCollationName：排序规则名称，可选参数，在初始化后不可修改，默认为sql_latin1_general_cp1_ci_as，可选值如下："bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as"。 */
   DBEngineConfig?: string;
+  /** 主从同步方式，可取值： 1、Semi-sync：半同步2、Async：异步 当前只支持Semi-sync */
+  SyncMode?: string;
 }
 
 declare interface CreateInstancesResponse {
   /** 订单号列表。每个实例对应一个订单号。 */
-  DealNames: string[];
+  DealNames?: string[];
   /** 冻结流水号。 */
-  BillId: string;
+  BillId?: string;
   /** 创建成功的实例ID集合，只在后付费情景下有返回值。 */
-  DBInstanceIdSet: string[];
+  DBInstanceIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1163,7 +1165,7 @@ declare interface CreateReadOnlyGroupNetworkAccessRequest {
 
 declare interface CreateReadOnlyGroupNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1337,9 +1339,9 @@ declare interface DescribeAccountsRequest {
 
 declare interface DescribeAccountsResponse {
   /** 本次调用接口共返回了多少条数据。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 帐号列表详细信息。 */
-  Details: AccountInfo[];
+  Details?: AccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1509,9 +1511,9 @@ declare interface DescribeCloneDBInstanceSpecRequest {
 
 declare interface DescribeCloneDBInstanceSpecResponse {
   /** 可购买的最小规格码。 */
-  MinSpecCode: string;
+  MinSpecCode?: string;
   /** 可购买的最小磁盘容量，单位GB。 */
-  MinStorage: number;
+  MinStorage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1533,35 +1535,35 @@ declare interface DescribeDBBackupsRequest {
 
 declare interface DescribeDBBackupsResponse {
   /** 返回备份列表中备份文件的个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 备份列表 */
-  BackupList: DBBackup[];
+  BackupList?: DBBackup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDBErrlogsRequest {
-  /** 实例ID，形如postgres-5bq3wfjd */
+  /** 实例ID。 */
   DBInstanceId: string;
-  /** 查询起始时间，形如2018-01-01 00:00:00，起始时间不得小于7天以前 */
+  /** 查询起始时间，形如2018-01-01 00:00:00。日志保留时间默认为7天，起始时间不能超出保留时间范围。 */
   StartTime: string;
-  /** 查询结束时间，形如2018-01-01 00:00:00 */
+  /** 查询结束时间，形如2018-01-01 00:00:00。 */
   EndTime: string;
-  /** 数据库名字 */
+  /** 数据库名字。 */
   DatabaseName?: string;
-  /** 搜索关键字 */
+  /** 搜索关键字。 */
   SearchKeys?: string[];
-  /** 分页返回，每页返回的最大数量。取值为1-100 */
+  /** 每页显示数量，取值范围为1-100。默认值为50。 */
   Limit?: number;
-  /** 分页返回，返回第几页的数据，从第0页开始计数 */
+  /** 数据偏移量，从0开始。默认值为0。 */
   Offset?: number;
 }
 
 declare interface DescribeDBErrlogsResponse {
-  /** 本次调用返回了多少条数据 */
-  TotalCount: number;
-  /** 错误日志列表 */
-  Details: ErrLogDetail[];
+  /** 查询到的日志数量，最大值为10000条。 */
+  TotalCount?: number;
+  /** 错误日志详细信息集合。 */
+  Details?: ErrLogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1587,9 +1589,9 @@ declare interface DescribeDBInstanceParametersRequest {
 
 declare interface DescribeDBInstanceParametersResponse {
   /** 参数列表总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数列表返回详情 */
-  Detail: ParamInfo[];
+  Detail?: ParamInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1603,7 +1605,7 @@ declare interface DescribeDBInstanceSecurityGroupsRequest {
 
 declare interface DescribeDBInstanceSecurityGroupsResponse {
   /** 安全组信息数组 */
-  SecurityGroupSet: SecurityGroup[];
+  SecurityGroupSet?: SecurityGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1651,9 +1653,9 @@ declare interface DescribeDBSlowlogsRequest {
 
 declare interface DescribeDBSlowlogsResponse {
   /** 本次返回多少条数据 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 慢查询日志详情 */
-  Detail: SlowlogDetail;
+  Detail?: SlowlogDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1683,9 +1685,9 @@ declare interface DescribeDBXlogsRequest {
 
 declare interface DescribeDBXlogsResponse {
   /** 表示此次返回结果有多少条数据。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** Xlog列表 */
-  XlogList: Xlog[];
+  XlogList?: Xlog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1697,7 +1699,7 @@ declare interface DescribeDatabasesRequest {
 
 declare interface DescribeDatabasesResponse {
   /** 数据库信息 */
-  Items: string[];
+  Items?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1725,7 +1727,7 @@ declare interface DescribeEncryptionKeysRequest {
 
 declare interface DescribeEncryptionKeysResponse {
   /** 实例密钥信息列表。 */
-  EncryptionKeys: EncryptionKey[] | null;
+  EncryptionKeys?: EncryptionKey[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1749,9 +1751,9 @@ declare interface DescribeLogBackupsRequest {
 
 declare interface DescribeLogBackupsResponse {
   /** 查询到的日志备份数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志备份详细信息列表。 */
-  LogBackupSet: LogBackup[];
+  LogBackupSet?: LogBackup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1763,9 +1765,9 @@ declare interface DescribeOrdersRequest {
 
 declare interface DescribeOrdersResponse {
   /** 订单数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 订单数组 */
-  Deals: PgDeal[];
+  Deals?: PgDeal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1823,9 +1825,9 @@ declare interface DescribeParamsEventRequest {
 
 declare interface DescribeParamsEventResponse {
   /** 参数修改事件总数，以参数为统计粒度 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例参数修改事件详情 */
-  EventItems: EventItem[];
+  EventItems?: EventItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1839,7 +1841,7 @@ declare interface DescribeProductConfigRequest {
 
 declare interface DescribeProductConfigResponse {
   /** 售卖规格列表。 */
-  SpecInfoList: SpecInfo[];
+  SpecInfoList?: SpecInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2007,7 +2009,7 @@ declare interface InitDBInstancesRequest {
 
 declare interface InitDBInstancesResponse {
   /** 实例ID集合。 */
-  DBInstanceIdSet: string[];
+  DBInstanceIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2015,7 +2017,7 @@ declare interface InitDBInstancesResponse {
 declare interface InquiryPriceCreateDBInstancesRequest {
   /** 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。 */
   Zone: string;
-  /** 规格ID。该参数可以通过调用DescribeProductConfig接口的返回值中的SpecCode字段来获取。 */
+  /** 规格ID。该参数可以通过调用DescribeClasses接口的返回值中的SpecCode字段来获取。 */
   SpecCode: string;
   /** 存储容量大小，单位：GB。 */
   Storage: number;
@@ -2035,11 +2037,11 @@ declare interface InquiryPriceCreateDBInstancesRequest {
 
 declare interface InquiryPriceCreateDBInstancesResponse {
   /** 刊例价，单位：分 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 折后实际付款金额，单位：分 */
-  Price: number;
+  Price?: number;
   /** 币种。例如，CNY：人民币。 */
-  Currency: string;
+  Currency?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2273,9 +2275,9 @@ declare interface ModifyDBInstanceSpecRequest {
 
 declare interface ModifyDBInstanceSpecResponse {
   /** 订单号。 */
-  DealName: string;
+  DealName?: string;
   /** 冻结流水号。 */
-  BillId: string;
+  BillId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2289,7 +2291,7 @@ declare interface ModifyDBInstancesProjectRequest {
 
 declare interface ModifyDBInstancesProjectResponse {
   /** 转移项目成功的实例个数 */
-  Count: number;
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2357,7 +2359,7 @@ declare interface OpenDBExtranetAccessRequest {
 
 declare interface OpenDBExtranetAccessResponse {
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2499,9 +2501,9 @@ declare interface UpgradeDBInstanceRequest {
 
 declare interface UpgradeDBInstanceResponse {
   /** 交易名字。 */
-  DealName: string;
+  DealName?: string;
   /** 冻结流水号 */
-  BillId: string;
+  BillId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2513,17 +2515,17 @@ declare interface Postgres {
   AddDBInstanceToReadOnlyGroup(data: AddDBInstanceToReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddDBInstanceToReadOnlyGroupResponse>;
   /** 克隆实例 {@link CloneDBInstanceRequest} {@link CloneDBInstanceResponse} */
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
-  /** 关闭实例外网链接 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
+  /** 关闭实例公网地址 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
-  /** 关闭serverlessDB实例外网 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
+  /** 关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
   /** 创建实例基础备份 {@link CreateBaseBackupRequest} {@link CreateBaseBackupResponse} */
   CreateBaseBackup(data: CreateBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseBackupResponse>;
-  /** 添加实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
+  /** 创建实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
-  /** 创建实例(旧) {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
+  /** 创建实例（废弃） {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
-  /** 创建实例(新) {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
+  /** 创建实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
   /** 创建参数模板 {@link CreateParameterTemplateRequest} {@link CreateParameterTemplateResponse} */
   CreateParameterTemplate(data: CreateParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParameterTemplateResponse>;
@@ -2531,7 +2533,7 @@ declare interface Postgres {
   CreateReadOnlyDBInstance(data: CreateReadOnlyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyDBInstanceResponse>;
   /** 创建只读组 {@link CreateReadOnlyGroupRequest} {@link CreateReadOnlyGroupResponse} */
   CreateReadOnlyGroup(data: CreateReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupResponse>;
-  /** 添加RO组网络 {@link CreateReadOnlyGroupNetworkAccessRequest} {@link CreateReadOnlyGroupNetworkAccessResponse} */
+  /** 创建RO组网络 {@link CreateReadOnlyGroupNetworkAccessRequest} {@link CreateReadOnlyGroupNetworkAccessResponse} */
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
   /** 创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
@@ -2549,13 +2551,13 @@ declare interface Postgres {
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
   /** 删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
   DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
-  /** 获取实例用户列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
+  /** 查询实例的数据库账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询实例可恢复的时间范围 {@link DescribeAvailableRecoveryTimeRequest} {@link DescribeAvailableRecoveryTimeResponse} */
   DescribeAvailableRecoveryTime(data: DescribeAvailableRecoveryTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableRecoveryTimeResponse>;
   /** 查询备份文件下载限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
   DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
-  /** 获取备份下载链接 {@link DescribeBackupDownloadURLRequest} {@link DescribeBackupDownloadURLResponse} */
+  /** 查询备份集的下载地址 {@link DescribeBackupDownloadURLRequest} {@link DescribeBackupDownloadURLResponse} */
   DescribeBackupDownloadURL(data: DescribeBackupDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadURLResponse>;
   /** 查询备份概览 {@link DescribeBackupOverviewRequest} {@link DescribeBackupOverviewResponse} */
   DescribeBackupOverview(data?: DescribeBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupOverviewResponse>;
@@ -2567,45 +2569,45 @@ declare interface Postgres {
   DescribeBaseBackups(data?: DescribeBaseBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseBackupsResponse>;
   /** 查询售卖规格 {@link DescribeClassesRequest} {@link DescribeClassesResponse} */
   DescribeClasses(data: DescribeClassesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassesResponse>;
-  /** 查询克隆实例购买规格 {@link DescribeCloneDBInstanceSpecRequest} {@link DescribeCloneDBInstanceSpecResponse} */
+  /** 查询克隆实例可购买的规格 {@link DescribeCloneDBInstanceSpecRequest} {@link DescribeCloneDBInstanceSpecResponse} */
   DescribeCloneDBInstanceSpec(data: DescribeCloneDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneDBInstanceSpecResponse>;
-  /** 查询实例备份列表 {@link DescribeDBBackupsRequest} {@link DescribeDBBackupsResponse} */
+  /** 查询实例备份列表（废弃） {@link DescribeDBBackupsRequest} {@link DescribeDBBackupsResponse} */
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
-  /** 获取错误日志 {@link DescribeDBErrlogsRequest} {@link DescribeDBErrlogsResponse} */
+  /** 查询错误日志 {@link DescribeDBErrlogsRequest} {@link DescribeDBErrlogsResponse} */
   DescribeDBErrlogs(data: DescribeDBErrlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBErrlogsResponse>;
   /** 查询实例详情 {@link DescribeDBInstanceAttributeRequest} {@link DescribeDBInstanceAttributeResponse} */
   DescribeDBInstanceAttribute(data: DescribeDBInstanceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceAttributeResponse>;
-  /** 获取实例可修改参数列表 {@link DescribeDBInstanceParametersRequest} {@link DescribeDBInstanceParametersResponse} */
+  /** 查询实例参数 {@link DescribeDBInstanceParametersRequest} {@link DescribeDBInstanceParametersResponse} */
   DescribeDBInstanceParameters(data: DescribeDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParametersResponse>;
-  /** 查询实例安全组信息 {@link DescribeDBInstanceSecurityGroupsRequest} {@link DescribeDBInstanceSecurityGroupsResponse} */
+  /** 查询实例安全组 {@link DescribeDBInstanceSecurityGroupsRequest} {@link DescribeDBInstanceSecurityGroupsResponse} */
   DescribeDBInstanceSecurityGroups(data?: DescribeDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSecurityGroupsResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 获取慢查询日志 （废弃） {@link DescribeDBSlowlogsRequest} {@link DescribeDBSlowlogsResponse} */
   DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
-  /** 查询支持的数据库版本号列表 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
+  /** 查询支持的数据库版本 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
   DescribeDBVersions(data?: DescribeDBVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBVersionsResponse>;
-  /** 获取实例Xlog列表 {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
+  /** 获取实例Xlog列表（废弃） {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
   DescribeDBXlogs(data: DescribeDBXlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBXlogsResponse>;
-  /** 拉取数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
+  /** 查询实例的数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询默认参数列表 {@link DescribeDefaultParametersRequest} {@link DescribeDefaultParametersResponse} */
   DescribeDefaultParameters(data: DescribeDefaultParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParametersResponse>;
-  /** 实例密钥信息列表 {@link DescribeEncryptionKeysRequest} {@link DescribeEncryptionKeysResponse} */
+  /** 查询实例密钥信息列表 {@link DescribeEncryptionKeysRequest} {@link DescribeEncryptionKeysResponse} */
   DescribeEncryptionKeys(data: DescribeEncryptionKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionKeysResponse>;
   /** 查询日志备份列表 {@link DescribeLogBackupsRequest} {@link DescribeLogBackupsResponse} */
   DescribeLogBackups(data?: DescribeLogBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogBackupsResponse>;
-  /** 获取订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
+  /** 查询订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询参数模板详情 {@link DescribeParameterTemplateAttributesRequest} {@link DescribeParameterTemplateAttributesResponse} */
   DescribeParameterTemplateAttributes(data: DescribeParameterTemplateAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplateAttributesResponse>;
   /** 查询参数模板列表 {@link DescribeParameterTemplatesRequest} {@link DescribeParameterTemplatesResponse} */
   DescribeParameterTemplates(data?: DescribeParameterTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplatesResponse>;
-  /** 获取参数修改事件详情 {@link DescribeParamsEventRequest} {@link DescribeParamsEventResponse} */
+  /** 查询参数修改事件 {@link DescribeParamsEventRequest} {@link DescribeParamsEventResponse} */
   DescribeParamsEvent(data: DescribeParamsEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamsEventResponse>;
-  /** 查询售卖规格配置 {@link DescribeProductConfigRequest} {@link DescribeProductConfigResponse} */
+  /** 查询售卖规格配置（废弃） {@link DescribeProductConfigRequest} {@link DescribeProductConfigResponse} */
   DescribeProductConfig(data?: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
-  /** 查询只读组信息 {@link DescribeReadOnlyGroupsRequest} {@link DescribeReadOnlyGroupsResponse} */
+  /** 查询只读组列表 {@link DescribeReadOnlyGroupsRequest} {@link DescribeReadOnlyGroupsResponse} */
   DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
   /** 查询售卖地域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
@@ -2621,9 +2623,9 @@ declare interface Postgres {
   DestroyDBInstance(data: DestroyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBInstanceResponse>;
   /** 解隔离实例 {@link DisIsolateDBInstancesRequest} {@link DisIsolateDBInstancesResponse} */
   DisIsolateDBInstances(data: DisIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DisIsolateDBInstancesResponse>;
-  /** 初始化实例 {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
+  /** 初始化实例（废弃） {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
-  /** 查询售卖价格 {@link InquiryPriceCreateDBInstancesRequest} {@link InquiryPriceCreateDBInstancesResponse} */
+  /** 查询实例创建售卖价格 {@link InquiryPriceCreateDBInstancesRequest} {@link InquiryPriceCreateDBInstancesResponse} */
   InquiryPriceCreateDBInstances(data: InquiryPriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDBInstancesResponse>;
   /** 查询实例续费价格 {@link InquiryPriceRenewDBInstanceRequest} {@link InquiryPriceRenewDBInstanceResponse} */
   InquiryPriceRenewDBInstance(data: InquiryPriceRenewDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewDBInstanceResponse>;
@@ -2645,25 +2647,25 @@ declare interface Postgres {
   ModifyDBInstanceDeployment(data: ModifyDBInstanceDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeploymentResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
-  /** 批量修改参数 {@link ModifyDBInstanceParametersRequest} {@link ModifyDBInstanceParametersResponse} */
+  /** 修改实例参数 {@link ModifyDBInstanceParametersRequest} {@link ModifyDBInstanceParametersResponse} */
   ModifyDBInstanceParameters(data: ModifyDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceParametersResponse>;
   /** 修改实例所属的只读组 {@link ModifyDBInstanceReadOnlyGroupRequest} {@link ModifyDBInstanceReadOnlyGroupResponse} */
   ModifyDBInstanceReadOnlyGroup(data: ModifyDBInstanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceReadOnlyGroupResponse>;
   /** 修改实例的安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
-  /** 调整实例规格（新） {@link ModifyDBInstanceSpecRequest} {@link ModifyDBInstanceSpecResponse} */
+  /** 修改实例规格 {@link ModifyDBInstanceSpecRequest} {@link ModifyDBInstanceSpecResponse} */
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
-  /** 将实例转至其他项目 {@link ModifyDBInstancesProjectRequest} {@link ModifyDBInstancesProjectResponse} */
+  /** 修改实例所属项目 {@link ModifyDBInstancesProjectRequest} {@link ModifyDBInstancesProjectResponse} */
   ModifyDBInstancesProject(data: ModifyDBInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstancesProjectResponse>;
-  /** 修改参数模板信息 {@link ModifyParameterTemplateRequest} {@link ModifyParameterTemplateResponse} */
+  /** 修改参数模板 {@link ModifyParameterTemplateRequest} {@link ModifyParameterTemplateResponse} */
   ModifyParameterTemplate(data: ModifyParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParameterTemplateResponse>;
   /** 修改只读组配置 {@link ModifyReadOnlyGroupConfigRequest} {@link ModifyReadOnlyGroupConfigResponse} */
   ModifyReadOnlyGroupConfig(data: ModifyReadOnlyGroupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupConfigResponse>;
   /** 修改变更配置切换时间 {@link ModifySwitchTimePeriodRequest} {@link ModifySwitchTimePeriodResponse} */
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
-  /** 开通外网 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
+  /** 开通实例公网地址 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
-  /** 开通serverlessDB实例外网 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
+  /** 开通serverlessDB实例公网地址 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
   OpenServerlessDBExtranetAccess(data?: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
   /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;

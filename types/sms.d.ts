@@ -74,7 +74,7 @@ declare interface DescribeTemplateListStatus {
   TemplateId: number;
   /** 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信。 */
   International: number;
-  /** 申请模板状态，其中0表示审核通过，1表示审核中，-1表示审核未通过或审核失败。 */
+  /** 申请模板状态，其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。 */
   StatusCode: number;
   /** 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。 */
   ReviewReply: string;
@@ -493,7 +493,7 @@ declare interface SendSmsRequest {
   TemplateParamSet?: string[];
   /** 短信码号扩展号，默认未开通，如需开通请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773)。 */
   ExtendCode?: string;
-  /** 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。 */
+  /** 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。注意长度需小于512字节。 */
   SessionContext?: string;
   /** 国内短信无需填写该项；国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。注：月度使用量达到指定量级可申请独立 SenderId 使用，详情请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773)。 */
   SenderId?: string;
@@ -501,7 +501,7 @@ declare interface SendSmsRequest {
 
 declare interface SendSmsResponse {
   /** 短信发送状态。 */
-  SendStatusSet: SendStatus[];
+  SendStatusSet?: SendStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -623,7 +623,7 @@ declare namespace V20190711 {
     TemplateId: number;
     /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。 */
     International: number;
-    /** 申请签名状态。其中：0：表示审核通过。1：表示审核中。-1：表示审核未通过或审核失败。 */
+    /** 申请模板状态，其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。 */
     StatusCode: number;
     /** 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。 */
     ReviewReply: string;
@@ -990,7 +990,7 @@ declare namespace V20190711 {
     TemplateParamSet?: string[];
     /** 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773)。 */
     ExtendCode?: string;
-    /** 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。 */
+    /** 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。注意长度需小于512字节。 */
     SessionContext?: string;
     /** 国内短信无senderid，无需填写该项；若需开通国际/港澳台短信senderid，请联系smshelper。 */
     SenderId?: string;
@@ -998,7 +998,7 @@ declare namespace V20190711 {
 
   interface SendSmsResponse {
     /** 短信发送状态。 */
-    SendStatusSet: SendStatus[];
+    SendStatusSet?: SendStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

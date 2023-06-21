@@ -330,6 +330,8 @@ declare interface ServiceStatus {
   Live: StatusInfo | null;
   /** 语音转文本服务开关状态 */
   RealTimeAsr: StatusInfo | null;
+  /** 文本翻译服务开关状态 */
+  TextTranslate?: StatusInfo | null;
 }
 
 /** 用量数据单元 */

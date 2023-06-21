@@ -266,6 +266,16 @@ declare interface CreatePrivateZoneResponse {
   RequestId?: string;
 }
 
+declare interface DeleteEndPointRequest {
+  /** 终端节点ID */
+  EndPointId?: string;
+}
+
+declare interface DeleteEndPointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeletePrivateDNSAccountRequest {
   /** 私有域解析账号 */
   Account: PrivateDNSAccount;
@@ -563,6 +573,8 @@ declare interface Privatedns {
   CreatePrivateZone(data: CreatePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneResponse>;
   /** 添加私有域解析记录 {@link CreatePrivateZoneRecordRequest} {@link CreatePrivateZoneRecordResponse} */
   CreatePrivateZoneRecord(data: CreatePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneRecordResponse>;
+  /** 删除终端节点 {@link DeleteEndPointRequest} {@link DeleteEndPointResponse} */
+  DeleteEndPoint(data?: DeleteEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndPointResponse>;
   /** 删除私有域解析账号 {@link DeletePrivateDNSAccountRequest} {@link DeletePrivateDNSAccountResponse} */
   DeletePrivateDNSAccount(data: DeletePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateDNSAccountResponse>;
   /** 删除私有域 {@link DeletePrivateZoneRequest} {@link DeletePrivateZoneResponse} */

@@ -584,7 +584,7 @@ declare interface SlowLogTopSqlItem {
   LockTimeAvg: number;
   /** 平均扫描行数 */
   RowsExaminedAvg: number;
-  /** SOL模板的MD5值 */
+  /** SQL模板的MD5值 */
   Md5: string;
 }
 
@@ -893,8 +893,6 @@ declare interface CreateSecurityAuditLogExportTaskResponse {
 declare interface CreateSqlFilterRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。 */
-  SessionToken: string;
   /** SQL类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。 */
   SqlType: string;
   /** 关键字，用于筛选SQL语句，多个关键字用英文逗号分隔，逗号不能作为关键词，多个关键词之间的关系为“逻辑与”。 */
@@ -903,13 +901,15 @@ declare interface CreateSqlFilterRequest {
   MaxConcurrency: number;
   /** 限流时长，单位秒，支持-1和小于2147483647的正整数，-1表示永不过期。 */
   Duration: number;
+  /** 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。 */
+  SessionToken?: string;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
   Product?: string;
 }
 
 declare interface CreateSqlFilterResponse {
   /** 限流任务ID。 */
-  FilterId: number;
+  FilterId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -963,10 +963,10 @@ declare interface DeleteSecurityAuditLogExportTasksResponse {
 declare interface DeleteSqlFiltersRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。 */
-  SessionToken: string;
   /** 限流任务ID列表。 */
   FilterIds: number[];
+  /** 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。 */
+  SessionToken?: string;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
   Product?: string;
 }
@@ -1471,7 +1471,7 @@ declare interface DescribeSlowLogUserHostStatsRequest {
   EndTime: string;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
   Product?: string;
-  /** SOL模板的MD5值 */
+  /** SQL模板的MD5值 */
   Md5?: string;
 }
 
@@ -1731,12 +1731,12 @@ declare interface ModifyDiagDBInstanceConfResponse {
 declare interface ModifySqlFiltersRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。 */
-  SessionToken: string;
   /** SQL限流任务ID列表。 */
   FilterIds: number[];
   /** 限流任务状态，取值支持TERMINATED - 终止。 */
   Status: string;
+  /** 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。 */
+  SessionToken?: string;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
   Product?: string;
 }

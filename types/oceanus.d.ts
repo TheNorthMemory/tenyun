@@ -88,6 +88,48 @@ declare interface Cluster {
   ClusterSessions?: ClusterSession[] | null;
 }
 
+/** 工作空间集群组信息 */
+declare interface ClusterGroupSetItem {
+  /** clusterGroup 的 SerialId */
+  ClusterId: string;
+  /** 集群名称 */
+  Name: string;
+  /** 地域 */
+  Region: string;
+  /** 区 */
+  Zone: string;
+  /** 账号 APPID */
+  AppId: number;
+  /** 主账号 UIN */
+  OwnerUin: string;
+  /** 创建账号 UIN */
+  CreatorUin: string;
+  /** CU 数量 */
+  CuNum: number;
+  /** CU 内存规格 */
+  CuMem: number;
+  /** 集群状态, 1 未初始化,，3 初始化中，2 运行中 */
+  Status: number;
+  /** 状态描述 */
+  StatusDesc: string;
+  /** 集群创建时间 */
+  CreateTime: string;
+  /** 最后一次操作集群的时间 */
+  UpdateTime: string;
+  /** 描述 */
+  Remark: string;
+  /** 网络 */
+  NetEnvironmentType: number;
+  /** 空闲 CU */
+  FreeCuNum: number;
+  /** 细粒度资源下的空闲CU */
+  FreeCu: number;
+  /** 运行中CU */
+  RunningCu?: number;
+  /** 付费模式 */
+  PayMode?: number;
+}
+
 /** session集群信息 */
 declare interface ClusterSession {
 }
@@ -414,6 +456,34 @@ declare interface ResourceRefJobInfo {
   ResourceVersion: number;
 }
 
+/** 角色授权信息 */
+declare interface RoleAuth {
+  /** 用户 AppID */
+  AppId?: number;
+  /** 工作空间 SerialId */
+  WorkSpaceSerialId?: string;
+  /** 主账号 UIN */
+  OwnerUin?: string;
+  /** 创建者 UIN */
+  CreatorUin?: string;
+  /** 绑定授权的 UIN */
+  AuthSubAccountUin?: string;
+  /** 对应 role表的id */
+  Permission?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 最后一次操作时间 */
+  UpdateTime?: string;
+  /** 2 启用 1 停用 */
+  Status?: number;
+  /** id */
+  Id?: number | null;
+  /** 工作空间id */
+  WorkSpaceId?: number | null;
+  /** 权限名称 */
+  RoleName?: string | null;
+}
+
 /** 作业启动详情 */
 declare interface RunJobDescription {
   /** 作业Id */
@@ -532,6 +602,40 @@ declare interface WorkSpaceClusterItem {
   ProjectId: number;
   /** 项目ID string类型 */
   ProjectIdStr: string | null;
+}
+
+/** 工作空间详情 */
+declare interface WorkSpaceSetItem {
+  /** 工作空间 SerialId */
+  SerialId: string;
+  /** 用户 APPID */
+  AppId: number;
+  /** 主账号 UIN */
+  OwnerUin: string;
+  /** 创建者 UIN */
+  CreatorUin: string;
+  /** 工作空间名称 */
+  WorkSpaceName: string;
+  /** 区域 */
+  Region: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 1 未初始化 2 可用 -1 已删除 */
+  Status: number;
+  /** 工作空间描述 */
+  Description: string;
+  /** 工作空间包含集群信息 */
+  ClusterGroupSetItem: ClusterGroupSetItem[];
+  /** 工作空间角色的信息 */
+  RoleAuth: RoleAuth[];
+  /** 工作空间成员数量 */
+  RoleAuthCount: number;
+  /** 工作空间 SerialId */
+  WorkSpaceId: string;
+  /** 1 */
+  JobsCount: number | null;
 }
 
 declare interface CheckSavepointRequest {
@@ -994,6 +1098,26 @@ declare interface DescribeTreeResourcesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWorkSpacesRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 1 按照创建时间降序排序(默认) 2.按照创建时间升序排序，3. 按照状态降序排序 4. 按照状态升序排序 默认为0 */
+  OrderType?: number;
+  /** 请求的集群数量，默认 20 */
+  Limit?: number;
+  /** 过滤规则 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeWorkSpacesResponse {
+  /** 空间详情列表 */
+  WorkSpaceSetItem?: WorkSpaceSetItem[] | null;
+  /** 空间总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyJobRequest {
   /** 作业Id */
   JobId: string;
@@ -1103,6 +1227,8 @@ declare interface Oceanus {
   DescribeTreeJobs(data?: DescribeTreeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeJobsResponse>;
   /** 查询树状结构资源列表 {@link DescribeTreeResourcesRequest} {@link DescribeTreeResourcesResponse} */
   DescribeTreeResources(data?: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
+  /** 授权工作空间列表 {@link DescribeWorkSpacesRequest} {@link DescribeWorkSpacesResponse} */
+  DescribeWorkSpaces(data?: DescribeWorkSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpacesResponse>;
   /** 更新作业 {@link ModifyJobRequest} {@link ModifyJobResponse} */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
   /** 运行作业 {@link RunJobsRequest} {@link RunJobsResponse} */

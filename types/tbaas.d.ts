@@ -670,6 +670,38 @@ declare interface GetLatesdTransactionListResponse {
   RequestId?: string;
 }
 
+declare interface GetLatestTransactionListRequest {
+  /** 模块名称，固定字段：transaction */
+  Module: string;
+  /** 操作名称，固定字段：latest_transaction_list */
+  Operation: string;
+  /** 组织ID，固定字段：0 */
+  GroupId: number;
+  /** 通道ID，固定字段：0 */
+  ChannelId: number;
+  /** 获取的最新交易的区块数量，取值范围1~5 */
+  LatestBlockNumber: number;
+  /** 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称 */
+  GroupName: string;
+  /** 需要查询的通道名称，可在通道详情或列表中获取 */
+  ChannelName: string;
+  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
+  ClusterId: string;
+  /** 需要获取的起始交易偏移 */
+  Offset?: number;
+  /** 需要获取的交易数量 */
+  Limit?: number;
+}
+
+declare interface GetLatestTransactionListResponse {
+  /** 交易总数量 */
+  TotalCount?: number;
+  /** 交易列表 */
+  TransactionList?: TransactionItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetPeerLogForUserRequest {
   /** 模块名，本接口取值：peer_mng */
   Module: string;
@@ -1045,17 +1077,17 @@ declare interface Tbaas {
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
   /** 创建并安装合约 {@link CreateChaincodeAndInstallForUserRequest} {@link CreateChaincodeAndInstallForUserResponse} */
   CreateChaincodeAndInstallForUser(data: CreateChaincodeAndInstallForUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChaincodeAndInstallForUserResponse>;
-  /** 动态部署并发布Bcos合约 {@link DeployDynamicBcosContractRequest} {@link DeployDynamicBcosContractResponse} */
+  /** @deprecated 动态部署并发布Bcos合约 {@link DeployDynamicBcosContractRequest} {@link DeployDynamicBcosContractResponse} */
   DeployDynamicBcosContract(data: DeployDynamicBcosContractRequest, config?: AxiosRequestConfig): AxiosPromise<DeployDynamicBcosContractResponse>;
   /** 下载用户证书 {@link DownloadUserCertRequest} {@link DownloadUserCertResponse} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
-  /** 使用块高查询区块信息 {@link GetBcosBlockByNumberRequest} {@link GetBcosBlockByNumberResponse} */
+  /** @deprecated 使用块高查询区块信息 {@link GetBcosBlockByNumberRequest} {@link GetBcosBlockByNumberResponse} */
   GetBcosBlockByNumber(data: GetBcosBlockByNumberRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockByNumberResponse>;
-  /** 分页查询Bcos区块列表 {@link GetBcosBlockListRequest} {@link GetBcosBlockListResponse} */
+  /** @deprecated 分页查询Bcos区块列表 {@link GetBcosBlockListRequest} {@link GetBcosBlockListResponse} */
   GetBcosBlockList(data: GetBcosBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockListResponse>;
-  /** 使用交易哈希查询Bcos交易信息 {@link GetBcosTransByHashRequest} {@link GetBcosTransByHashResponse} */
+  /** @deprecated 使用交易哈希查询Bcos交易信息 {@link GetBcosTransByHashRequest} {@link GetBcosTransByHashResponse} */
   GetBcosTransByHash(data: GetBcosTransByHashRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransByHashResponse>;
-  /** 分页查询Bcos交易列表 {@link GetBcosTransListRequest} {@link GetBcosTransListResponse} */
+  /** @deprecated 分页查询Bcos交易列表 {@link GetBcosTransListRequest} {@link GetBcosTransListResponse} */
   GetBcosTransList(data: GetBcosTransListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransListResponse>;
   /** 查询区块列表 {@link GetBlockListRequest} {@link GetBlockListResponse} */
   GetBlockList(data: GetBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockListResponse>;
@@ -1075,8 +1107,10 @@ declare interface Tbaas {
   GetClusterSummary(data: GetClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterSummaryResponse>;
   /** Invoke异步调用结果查询 {@link GetInvokeTxRequest} {@link GetInvokeTxResponse} */
   GetInvokeTx(data: GetInvokeTxRequest, config?: AxiosRequestConfig): AxiosPromise<GetInvokeTxResponse>;
-  /** 获取最新交易列表 {@link GetLatesdTransactionListRequest} {@link GetLatesdTransactionListResponse} */
+  /** 获取最新交易列表（已废弃） {@link GetLatesdTransactionListRequest} {@link GetLatesdTransactionListResponse} */
   GetLatesdTransactionList(data: GetLatesdTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatesdTransactionListResponse>;
+  /** 获取fabric最新交易列表 {@link GetLatestTransactionListRequest} {@link GetLatestTransactionListResponse} */
+  GetLatestTransactionList(data: GetLatestTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatestTransactionListResponse>;
   /** 获取节点日志 {@link GetPeerLogForUserRequest} {@link GetPeerLogForUserResponse} */
   GetPeerLogForUser(data: GetPeerLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetPeerLogForUserResponse>;
   /** 获取交易详情 {@link GetTransactionDetailForUserRequest} {@link GetTransactionDetailForUserResponse} */
@@ -1085,7 +1119,7 @@ declare interface Tbaas {
   InitializeChaincodeForUser(data: InitializeChaincodeForUserRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeChaincodeForUserResponse>;
   /** 新增交易 {@link InvokeRequest} {@link InvokeResponse} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;
-  /** 执行Bcos交易 {@link InvokeBcosTransRequest} {@link InvokeBcosTransResponse} */
+  /** @deprecated 执行Bcos交易 {@link InvokeBcosTransRequest} {@link InvokeBcosTransResponse} */
   InvokeBcosTrans(data: InvokeBcosTransRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeBcosTransResponse>;
   /** 调用长安链合约执行交易 {@link InvokeChainMakerContractRequest} {@link InvokeChainMakerContractResponse} */
   InvokeChainMakerContract(data: InvokeChainMakerContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerContractResponse>;

@@ -4667,7 +4667,7 @@ declare interface CreateStreamLinkInputRequest {
 
 declare interface CreateStreamLinkInputResponse {
   /** 创建的Flow信息。 */
-  Info: DescribeFlow;
+  Info?: DescribeFlow;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5191,15 +5191,15 @@ declare interface DescribeStreamLinkEventAttachedFlowsRequest {
   EventId: string;
   /** 当前页数，默认1。 */
   PageNum?: number;
-  /** 每页大小，默认10。 */
+  /** 每页大小，默认1000。 */
   PageSize?: number;
 }
 
 declare interface DescribeStreamLinkEventAttachedFlowsResponse {
   /** 流的配置信息列表。 */
-  Infos: DescribeFlow[];
+  Infos?: DescribeFlow[];
   /** 总数量。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

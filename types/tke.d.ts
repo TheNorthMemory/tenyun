@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** addon的具体描述 */
+declare interface Addon {
+  /** addon名称 */
+  AddonName?: string;
+  /** addon的版本 */
+  AddonVersion?: string;
+  /** addon的参数，是一个json格式的base64转码后的字符串 */
+  RawValues?: string | null;
+  /** addon的状态 */
+  Phase?: string | null;
+  /** addon失败的原因 */
+  Reason?: string | null;
+}
+
 /** app所支持的chart */
 declare interface AppChart {
   /** chart名称 */
@@ -3022,6 +3036,18 @@ declare interface CreateTKEEdgeClusterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAddonRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** addon名称 */
+  AddonName: string;
+}
+
+declare interface DeleteAddonResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteBackupStorageLocationRequest {
   /** 备份仓库名称 */
   Name: string;
@@ -3358,6 +3384,36 @@ declare interface DeleteTKEEdgeClusterRequest {
 }
 
 declare interface DeleteTKEEdgeClusterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAddonRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** addon名称（不传时会返回集群下全部的addon） */
+  AddonName?: string;
+}
+
+declare interface DescribeAddonResponse {
+  /** addon列表 */
+  Addons?: Addon[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAddonValuesRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** addon名称 */
+  AddonName: string;
+}
+
+declare interface DescribeAddonValuesResponse {
+  /** 参数列表，如果addon已安装，会使用已设置的的参数做渲染，是一个json格式的字符串 */
+  Values?: string;
+  /** addon支持的参数列表，使用默认值，是一个json格式的字符串 */
+  DefaultValues?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4118,6 +4174,14 @@ declare interface DescribeEnableVpcCniProgressResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEncryptionStatusRequest {
+}
+
+declare interface DescribeEncryptionStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExistedInstancesRequest {
   /** 集群 ID，请填写查询集群列表 接口中返回的 ClusterId 字段（仅通过ClusterId获取需要过滤条件中的VPCID。节点状态比较时会使用该地域下所有集群中的节点进行比较。参数不支持同时指定InstanceIds和ClusterId。 */
   ClusterId?: string;
@@ -4740,6 +4804,14 @@ declare interface DisableClusterDeletionProtectionResponse {
   RequestId?: string;
 }
 
+declare interface DisableEncryptionProtectionRequest {
+}
+
+declare interface DisableEncryptionProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableEventPersistenceRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4796,6 +4868,14 @@ declare interface EnableClusterDeletionProtectionRequest {
 }
 
 declare interface EnableClusterDeletionProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableEncryptionProtectionRequest {
+}
+
+declare interface EnableEncryptionProtectionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4948,6 +5028,22 @@ declare interface GetUpgradeInstanceProgressResponse {
   Instances?: InstanceUpgradeProgressItem[];
   /** 集群当前状态 */
   ClusterStatus?: InstanceUpgradeClusterStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InstallAddonRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** addon名称 */
+  AddonName: string;
+  /** addon版本（不传默认安装最新版本） */
+  AddonVersion?: string;
+  /** addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取） */
+  RawValues?: string;
+}
+
+declare interface InstallAddonResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5460,6 +5556,22 @@ declare interface UninstallLogAgentResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAddonRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** addon名称 */
+  AddonName: string;
+  /** addon版本（不传默认不更新） */
+  AddonVersion?: string;
+  /** addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取） */
+  RawValues?: string;
+}
+
+declare interface UpdateAddonResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateClusterKubeconfigRequest {
   /** 集群ID */
   ClusterId: string;
@@ -5751,6 +5863,8 @@ declare interface Tke {
   CreatePrometheusTemplate(data: CreatePrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusTemplateResponse>;
   /** 创建边缘计算集群 {@link CreateTKEEdgeClusterRequest} {@link CreateTKEEdgeClusterResponse} */
   CreateTKEEdgeCluster(data: CreateTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTKEEdgeClusterResponse>;
+  /** 删除addon {@link DeleteAddonRequest} {@link DeleteAddonResponse} */
+  DeleteAddon(data: DeleteAddonRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAddonResponse>;
   /** 删除备份仓库 {@link DeleteBackupStorageLocationRequest} {@link DeleteBackupStorageLocationResponse} */
   DeleteBackupStorageLocation(data: DeleteBackupStorageLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupStorageLocationResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
@@ -5805,6 +5919,10 @@ declare interface Tke {
   DeletePrometheusTemplateSync(data: DeletePrometheusTemplateSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTemplateSyncResponse>;
   /** 删除边缘计算集群 {@link DeleteTKEEdgeClusterRequest} {@link DeleteTKEEdgeClusterResponse} */
   DeleteTKEEdgeCluster(data: DeleteTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTKEEdgeClusterResponse>;
+  /** 获取addon列表 {@link DescribeAddonRequest} {@link DescribeAddonResponse} */
+  DescribeAddon(data: DescribeAddonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddonResponse>;
+  /** 获取addon的参数 {@link DescribeAddonValuesRequest} {@link DescribeAddonValuesResponse} */
+  DescribeAddonValues(data: DescribeAddonValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddonValuesResponse>;
   /** 获取集群可以升级的所有版本 {@link DescribeAvailableClusterVersionRequest} {@link DescribeAvailableClusterVersionResponse} */
   DescribeAvailableClusterVersion(data?: DescribeAvailableClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableClusterVersionResponse>;
   /** 边缘计算支持的k8s版本 {@link DescribeAvailableTKEEdgeVersionRequest} {@link DescribeAvailableTKEEdgeVersionResponse} */
@@ -5891,6 +6009,8 @@ declare interface Tke {
   DescribeEksContainerInstanceLog(data: DescribeEksContainerInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEksContainerInstanceLogResponse>;
   /** 查询开启vpc-cni异步任务的进度 {@link DescribeEnableVpcCniProgressRequest} {@link DescribeEnableVpcCniProgressResponse} */
   DescribeEnableVpcCniProgress(data: DescribeEnableVpcCniProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnableVpcCniProgressResponse>;
+  /** 查询信息加密状态 {@link DescribeEncryptionStatusRequest} {@link DescribeEncryptionStatusResponse} */
+  DescribeEncryptionStatus(data?: DescribeEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionStatusResponse>;
   /** 查询已经存在的节点 {@link DescribeExistedInstancesRequest} {@link DescribeExistedInstancesResponse} */
   DescribeExistedInstances(data?: DescribeExistedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExistedInstancesResponse>;
   /** 获取导入第三方集群YAML定义 {@link DescribeExternalClusterSpecRequest} {@link DescribeExternalClusterSpecResponse} */
@@ -5961,6 +6081,8 @@ declare interface Tke {
   DisableClusterAudit(data: DisableClusterAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterAuditResponse>;
   /** 关闭集群删除保护 {@link DisableClusterDeletionProtectionRequest} {@link DisableClusterDeletionProtectionResponse} */
   DisableClusterDeletionProtection(data: DisableClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterDeletionProtectionResponse>;
+  /** 关闭加密信息保护 {@link DisableEncryptionProtectionRequest} {@link DisableEncryptionProtectionResponse} */
+  DisableEncryptionProtection(data?: DisableEncryptionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DisableEncryptionProtectionResponse>;
   /** 关闭事件持久化功能 {@link DisableEventPersistenceRequest} {@link DisableEventPersistenceResponse} */
   DisableEventPersistence(data: DisableEventPersistenceRequest, config?: AxiosRequestConfig): AxiosPromise<DisableEventPersistenceResponse>;
   /** 关闭附加的VPC-CNI网络能力 {@link DisableVpcCniNetworkTypeRequest} {@link DisableVpcCniNetworkTypeResponse} */
@@ -5971,6 +6093,8 @@ declare interface Tke {
   EnableClusterAudit(data: EnableClusterAuditRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterAuditResponse>;
   /** 启用集群删除保护 {@link EnableClusterDeletionProtectionRequest} {@link EnableClusterDeletionProtectionResponse} */
   EnableClusterDeletionProtection(data: EnableClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterDeletionProtectionResponse>;
+  /** 开启加密数据保护 {@link EnableEncryptionProtectionRequest} {@link EnableEncryptionProtectionResponse} */
+  EnableEncryptionProtection(data?: EnableEncryptionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableEncryptionProtectionResponse>;
   /** 开启事件持久化功能 {@link EnableEventPersistenceRequest} {@link EnableEventPersistenceResponse} */
   EnableEventPersistence(data: EnableEventPersistenceRequest, config?: AxiosRequestConfig): AxiosPromise<EnableEventPersistenceResponse>;
   /** 开启vpc-cni容器网络能力 {@link EnableVpcCniNetworkTypeRequest} {@link EnableVpcCniNetworkTypeResponse} */
@@ -5987,6 +6111,8 @@ declare interface Tke {
   GetTkeAppChartList(data?: GetTkeAppChartListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTkeAppChartListResponse>;
   /** 获得节点升级当前的进度 {@link GetUpgradeInstanceProgressRequest} {@link GetUpgradeInstanceProgressResponse} */
   GetUpgradeInstanceProgress(data: GetUpgradeInstanceProgressRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeInstanceProgressResponse>;
+  /** 安装addon {@link InstallAddonRequest} {@link InstallAddonResponse} */
+  InstallAddon(data: InstallAddonRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAddonResponse>;
   /** 安装边缘日志采集组件 {@link InstallEdgeLogAgentRequest} {@link InstallEdgeLogAgentResponse} */
   InstallEdgeLogAgent(data: InstallEdgeLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallEdgeLogAgentResponse>;
   /** 安装日志采集组件 {@link InstallLogAgentRequest} {@link InstallLogAgentResponse} */
@@ -6053,6 +6179,8 @@ declare interface Tke {
   UninstallEdgeLogAgent(data: UninstallEdgeLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallEdgeLogAgentResponse>;
   /** 卸载日志采集组件 {@link UninstallLogAgentRequest} {@link UninstallLogAgentResponse} */
   UninstallLogAgent(data: UninstallLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallLogAgentResponse>;
+  /** 更新addon {@link UpdateAddonRequest} {@link UpdateAddonResponse} */
+  UpdateAddon(data: UpdateAddonRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAddonResponse>;
   /** 更新集群的kubeconfig信息 {@link UpdateClusterKubeconfigRequest} {@link UpdateClusterKubeconfigResponse} */
   UpdateClusterKubeconfig(data: UpdateClusterKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateClusterKubeconfigResponse>;
   /** 升级集群 {@link UpdateClusterVersionRequest} {@link UpdateClusterVersionResponse} */

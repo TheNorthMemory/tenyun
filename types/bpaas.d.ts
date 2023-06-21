@@ -102,6 +102,10 @@ declare interface StatusNode {
   ExternalUrl: string | null;
   /** 并行节点 3-4 */
   ParallelNodes?: string | null;
+  /** scf拒绝时返回信息 */
+  RejectedCloudFunctionMsg?: string | null;
+  /** 上一个节点 */
+  PrevNode?: string | null;
 }
 
 declare interface GetBpaasApproveDetailRequest {
@@ -111,27 +115,29 @@ declare interface GetBpaasApproveDetailRequest {
 
 declare interface GetBpaasApproveDetailResponse {
   /** 申请人uin */
-  ApplyUin: number;
+  ApplyUin?: number;
   /** 申请人主账号 */
-  ApplyOwnUin: number;
+  ApplyOwnUin?: number;
   /** 申请人昵称 */
-  ApplyUinNick: string | null;
+  ApplyUinNick?: string | null;
   /** 审批流id */
-  BpaasId: number;
+  BpaasId?: number;
   /** 审批流名称 */
-  BpaasName: string;
+  BpaasName?: string;
   /** 申请参数 */
-  ApplicationParams: ApplyParam[] | null;
+  ApplicationParams?: ApplyParam[] | null;
   /** 申请原因 */
-  Reason: string | null;
+  Reason?: string | null;
   /** 申请时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 申请单状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 节点信息 */
-  Nodes: StatusNode[] | null;
+  Nodes?: StatusNode[] | null;
   /** 正在审批的节点id */
-  ApprovingNodeId: string | null;
+  ApprovingNodeId?: string | null;
+  /** 更新时间，时间格式：2021-12-12 10:12:10 */
+  ModifyTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

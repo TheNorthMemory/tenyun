@@ -95,66 +95,6 @@ declare interface AgentClientElem {
 }
 
 /** 描述代理商代付的订单信息 */
-declare interface AgentDealElem {
-  /** 订单自增 ID【请勿依赖该字段作为唯一标识】 */
-  DealId: string;
-  /** 订单号【订单唯一键】 */
-  DealName: string;
-  /** 商品类型 ID */
-  GoodsCategoryId: string;
-  /** 订单所有者 */
-  OwnerUin: string;
-  /** 订单所有者对应 appId */
-  AppId: string | null;
-  /** 商品数量 */
-  GoodsNum: string | null;
-  /** 价格详情 */
-  GoodsPrice: DealGoodsPriceElem | null;
-  /** 下单人 */
-  Creater: string | null;
-  /** 下单时间 */
-  CreatTime: string | null;
-  /** 支付结束时间 */
-  PayEndTime: string | null;
-  /** 扣费流水号 */
-  BillId: string | null;
-  /** 支付人 */
-  Payer: string | null;
-  /** 订单状态，中文描述 */
-  DealStatus: string | null;
-  /** 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中) */
-  Status: string | null;
-  /** 产品名称 */
-  GoodsName: string | null;
-  /** 客户备注 */
-  ClientRemark: string | null;
-  /** 订单操作类型，purchase（新购），renew（续费），modify（配置变更） */
-  ActionType: string | null;
-  /** 代金券抵扣金额，单位分 */
-  VoucherDecline: string | null;
-  /** 大订单号 */
-  BigDealId: string | null;
-  /** 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)） */
-  ClientType: string | null;
-  /** 项目类型（self：自拓；repeat：直销；platform：官网合作） */
-  ProjectType: string | null;
-  /** 业务员账号ID */
-  SalesUin: string | null;
-  /** 支付方式，0：自付；1：代付 */
-  PayerMode: string | null;
-  /** 活动ID */
-  ActivityId: string | null;
-  /** 订单过期时间 */
-  OverdueTime: string | null;
-  /** 产品详情 */
-  ProductInfo: ProductInfoElem[] | null;
-  /** 付款方式 */
-  PaymentMethod: string | null;
-  /** 订单更新时间 */
-  UpdateTime: string | null;
-}
-
-/** 描述代理商代付的订单信息 */
 declare interface AgentDealNewElem {
   /** 订单自增 ID【请勿依赖该字段作为唯一标识】 */
   DealId: string;
@@ -224,14 +164,6 @@ declare interface AgentSalesmanElem {
   SalesName: string;
   /** 业务员创建时间 */
   CreateTime: string;
-}
-
-/** 订单价格详情 */
-declare interface DealGoodsPriceElem {
-  /** 实付金额（单位：分） */
-  RealTotalCost: number;
-  /** 订单实际金额（不含折扣，单位：分） */
-  OriginalTotalCost: number;
 }
 
 /** 订单价格详情 */
@@ -516,64 +448,6 @@ declare interface DescribeAgentDealsByCacheResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAgentDealsCacheRequest {
-  /** 偏移量 */
-  Offset: number;
-  /** 限制数目 最大200 */
-  Limit: number;
-  /** 下单时间范围起始点【请保持时间范围最大90天】 */
-  CreatTimeRangeStart?: string;
-  /** 下单时间范围终止点【请保持时间范围最大90天】 */
-  CreatTimeRangeEnd?: string;
-  /** 0:下单时间降序；其他：下单时间升序 */
-  Order?: number;
-  /** 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中) */
-  Status?: number;
-  /** 下单人账号ID列表 */
-  OwnerUins?: string[];
-  /** 订单号列表 */
-  DealNames?: string[];
-  /** 支付方式，0：自付；1：代付 */
-  PayerMode?: number;
-}
-
-declare interface DescribeAgentDealsCacheResponse {
-  /** 订单数组 */
-  AgentDealSet?: AgentDealElem[];
-  /** 符合条件的订单总数量 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAgentPayDealsRequest {
-  /** 偏移量 */
-  Offset: number;
-  /** 限制数目 最大100 */
-  Limit: number;
-  /** 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间) */
-  CreatTimeRangeStart?: string;
-  /** 下单时间范围终止点 */
-  CreatTimeRangeEnd?: string;
-  /** 0:下单时间降序；其他：下单时间升序 */
-  Order?: number;
-  /** 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中) */
-  Status?: number;
-  /** 下单人账号ID列表 */
-  OwnerUins?: string[];
-  /** 订单号列表 */
-  DealNames?: string[];
-}
-
-declare interface DescribeAgentPayDealsResponse {
-  /** 订单数组 */
-  AgentPayDealSet?: AgentDealElem[];
-  /** 符合条件的订单总数量 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeAgentPayDealsV2Request {
   /** 偏移量 */
   Offset: number;
@@ -600,34 +474,6 @@ declare interface DescribeAgentPayDealsV2Response {
   AgentPayDealSet: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAgentSelfPayDealsRequest {
-  /** 下单人账号ID */
-  OwnerUin: string;
-  /** 偏移量 */
-  Offset: number;
-  /** 限制数目 最大100 */
-  Limit: number;
-  /** 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间) */
-  CreatTimeRangeStart?: string;
-  /** 下单时间范围终止点 */
-  CreatTimeRangeEnd?: string;
-  /** 0:下单时间降序；其他：下单时间升序 */
-  Order?: number;
-  /** 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中) */
-  Status?: number;
-  /** 订单号列表 */
-  DealNames?: string[];
-}
-
-declare interface DescribeAgentSelfPayDealsResponse {
-  /** 订单数组 */
-  AgentPayDealSet?: AgentDealElem[];
-  /** 符合条件的订单总数量 */
-  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -669,20 +515,6 @@ declare interface DescribeClientBalanceNewRequest {
 
 declare interface DescribeClientBalanceNewResponse {
   /** 账户可用余额，单位分 （可用余额 = 现金余额 + 赠送金余额 - 欠费金额 - 冻结金额） */
-  Balance: number;
-  /** 账户现金余额，单位分 */
-  Cash: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeClientBalanceRequest {
-  /** 客户(代客)账号ID */
-  ClientUin: string;
-}
-
-declare interface DescribeClientBalanceResponse {
-  /** 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额） 【注：该数据准确性存疑，请切换至DescribeClientBalanceNew取值】 */
   Balance: number;
   /** 账户现金余额，单位分 */
   Cash: number;
@@ -819,18 +651,10 @@ declare interface Partners {
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
   /** 代理商缓存订单查询接口（预付费） {@link DescribeAgentDealsByCacheRequest} {@link DescribeAgentDealsByCacheResponse} */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
-  /** @deprecated 【已切换至DescribeAgentDealsByCache】代理商缓存订单查询接口 {@link DescribeAgentDealsCacheRequest} {@link DescribeAgentDealsCacheResponse} */
-  DescribeAgentDealsCache(data: DescribeAgentDealsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsCacheResponse>;
-  /** @deprecated 【已切换至DescribeAgentPayDealsV2】代理商代付订单查询接口 {@link DescribeAgentPayDealsRequest} {@link DescribeAgentPayDealsResponse} */
-  DescribeAgentPayDeals(data: DescribeAgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsResponse>;
   /** 代理商代付订单查询接口（预付费） {@link DescribeAgentPayDealsV2Request} {@link DescribeAgentPayDealsV2Response} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
-  /** @deprecated 【已切换至DescribeAgentSelfPayDealsV2】代理商自付订单查询接口 {@link DescribeAgentSelfPayDealsRequest} {@link DescribeAgentSelfPayDealsResponse} */
-  DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
   /** 代理商自付订单查询接口（预付费） {@link DescribeAgentSelfPayDealsV2Request} {@link DescribeAgentSelfPayDealsV2Response} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
-  /** @deprecated 查询客户余额 {@link DescribeClientBalanceRequest} {@link DescribeClientBalanceResponse} */
-  DescribeClientBalance(data: DescribeClientBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceResponse>;
   /** 查询客户余额（新） {@link DescribeClientBalanceNewRequest} {@link DescribeClientBalanceNewResponse} */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
   /** 【已切换至DescribeRebateInfosNew】查询代理商返佣信息 {@link DescribeRebateInfosRequest} {@link DescribeRebateInfosResponse} */
