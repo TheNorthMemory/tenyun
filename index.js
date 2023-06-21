@@ -95,7 +95,7 @@ export const SERVICE_VERSIONS = {
   clb: ['2018-03-17'],
   cloudaudit: ['2019-03-19'],
   cloudhsm: ['2019-11-12'],
-  cloudstudio: ['2021-05-24'],
+  cloudstudio: ['2023-05-08', '2021-05-24'],
   cls: ['2020-10-16'],
   cme: ['2019-10-29'],
   cmq: ['2019-03-04'],
