@@ -3151,7 +3151,7 @@ declare interface Dlc {
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 创建工作组 {@link CreateWorkGroupRequest} {@link CreateWorkGroupResponse} */
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
-  /** 删除notebook livy session {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
+  /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
   DeleteNotebookSession(data: DeleteNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookSessionResponse>;
   /** 删除sql脚本 {@link DeleteScriptRequest} {@link DeleteScriptResponse} */
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;

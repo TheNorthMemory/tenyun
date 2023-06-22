@@ -58,6 +58,18 @@ declare interface AIRecognitionTemplateItem {
   UpdateTime: string;
 }
 
+/** 视频画面低光、过曝检测的控制参数。 */
+declare interface AbnormalLightingConfigureInfo {
+  /** 视频画面低光、过曝检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面低光、过曝检测的控制参数。 */
+declare interface AbnormalLightingConfigureInfoForUpdate {
+  /** 视频画面低光、过曝检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+}
+
 /** 域名的地区加速信息 */
 declare interface AccelerateAreaInfo {
   /** 加速地区，可选值：Chinese Mainland：中国境内（不包含港澳台）。Outside Chinese Mainland：中国境外。 */
@@ -1480,6 +1492,30 @@ declare interface AudioVolumeParam {
   Gain?: number;
 }
 
+/** 视频画面黑边、白边、黑屏、白屏检测的控制参数。 */
+declare interface BlackWhiteEdgeConfigureInfo {
+  /** 视频画面黑边、白边、黑屏、白屏检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面黑边、白边、黑屏、白屏检测的控制参数。 */
+declare interface BlackWhiteEdgeConfigureInfoForUpdate {
+  /** 视频画面黑边、白边、黑屏、白屏检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+}
+
+/** 视频画面模糊检测的控制参数。 */
+declare interface BlurConfigureInfo {
+  /** 视频画面模糊检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面模糊检测的控制参数。 */
+declare interface BlurConfigureInfoForUpdate {
+  /** 视频画面模糊检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+}
+
 /** 画布信息。制作视频时，如果源素材（视频或者图片）不能填满输出的视频窗口，将用设置的画布进行背景绘制。 */
 declare interface Canvas {
   /** 背景颜色，取值有：Black：黑色背景White：白色背景默认值：Black。 */
@@ -1736,6 +1772,18 @@ declare interface CoverConfigureInfoForUpdate {
   Switch?: string;
 }
 
+/** 视频画面花屏检测的控制参数。 */
+declare interface CrashScreenConfigureInfo {
+  /** 视频画面花屏检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面花屏检测的控制参数。 */
+declare interface CrashScreenConfigureInfoForUpdate {
+  /** 视频画面花屏检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+}
+
 /** 视频截取雪碧图任务，该结构仅用于对 2017 版[截取雪碧图](https://cloud.tencent.com/document/product/266/8101)接口发起的任务。 */
 declare interface CreateImageSpriteTask2017 {
   /** 截图雪碧图任务 ID。 */
@@ -1980,7 +2028,7 @@ declare interface EmptyTrackItem {
 declare interface EventContent {
   /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
   EventHandle: string;
-  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
   EventType: string;
   /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
   FileUploadEvent: FileUploadTask | null;
@@ -2026,6 +2074,8 @@ declare interface EventContent {
   ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask | null;
   /** 获取文件属性完成事件，当事件类型为 DescribeFileAttributesComplete 时有效。 */
   DescribeFileAttributesCompleteEvent: DescribeFileAttributesTask | null;
+  /** 音画质检测完成事件，当事件类型为 QualityInspectComplete 时有效。 */
+  QualityInspectCompleteEvent?: QualityInspectTask | null;
 }
 
 /** 提取版权水印任务。 */
@@ -2426,6 +2476,18 @@ declare interface ImageWatermarkTemplate {
   RepeatType: string;
   /** 图片透明度，取值范围：[0, 100]0：完全不透明100：完全透明。 */
   Transparency: number;
+}
+
+/** 视频画面抖动重影检测的控制参数。 */
+declare interface JitterConfigureInfo {
+  /** 视频画面抖动重影检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面抖动重影检测的控制参数。 */
+declare interface JitterConfigureInfoForUpdate {
+  /** 视频画面抖动重影检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string;
 }
 
 /** License 请求次数统计数据。 */
@@ -3228,6 +3290,18 @@ declare interface MediaVideoStreamItem {
   DynamicRangeInfo: DynamicRangeInfo;
 }
 
+/** 视频画面马赛克检测的控制参数。 */
+declare interface MosaicConfigureInfo {
+  /** 视频画面马赛克检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面马赛克检测的控制参数。 */
+declare interface MosaicConfigureInfoForUpdate {
+  /** 视频画面马赛克检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+}
+
 /** 视频处理任务中的马赛克参数类型 */
 declare interface MosaicInput {
   /** 原点位置，目前仅支持：TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。默认值：TopLeft。 */
@@ -3244,6 +3318,18 @@ declare interface MosaicInput {
   StartTimeOffset?: number;
   /** 马赛克的结束时间偏移，单位：秒。不填或填0，表示马赛克持续到画面结束；当数值大于0时（假设为 n），表示马赛克持续到第 n 秒时消失；当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。 */
   EndTimeOffset?: number;
+}
+
+/** 视频画面噪点检测的控制参数。 */
+declare interface NoiseConfigureInfo {
+  /** 视频画面噪点检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面噪点检测的控制参数。 */
+declare interface NoiseConfigureInfoForUpdate {
+  /** 视频画面噪点检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
 }
 
 /** 物体识别任务控制参数 */
@@ -3742,6 +3828,138 @@ declare interface PullUploadTask {
   SessionId?: string;
   /** 拉取上传进度，取值范围 [0-100] 。 */
   Progress?: number;
+}
+
+/** 视频画面二维码检测的控制参数。 */
+declare interface QRCodeConfigureInfo {
+  /** 视频画面二维码检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 视频画面二维码检测的控制参数。 */
+declare interface QRCodeConfigureInfoForUpdate {
+  /** 视频画面二维码检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+}
+
+/** 视频画面质量评价的控制参数。 */
+declare interface QualityEvaluationConfigureInfo {
+  /** 视频画面质量评价检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+  /** 视频画面质量评价过滤阈值，结果只返回低于该值的时间段，默认值为 60。 */
+  Score?: number;
+}
+
+/** 视频画面质量评价的控制参数。 */
+declare interface QualityEvaluationConfigureInfoForUpdate {
+  /** 视频画面质量评价开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+  /** 视频画面质量评价过滤阈值，结果只返回低于该值的时间段。 */
+  Score?: number | null;
+}
+
+/** 音画质检测异常片段信息。 */
+declare interface QualityInspectItem {
+  /** 置信度，取值范围：[0, 100]。注意： 仅当 Type 取值为下列之一时，本字段取值有效：Mosaic：马赛克；QRCode：二维码；AppletCode：小程序码；BarCode：条形码。 */
+  Confidence?: number;
+  /** 异常片段起始的偏移时间，单位：秒。 */
+  StartTimeOffset?: number;
+  /** 异常片段终止的偏移时间，单位：秒。 */
+  EndTimeOffset?: number;
+  /** 检测出异常的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。注意： 仅当 Type 取值为下列之一时，本字段取值有效：BlackWhiteEdge：黑白边；Mosaic：马赛克；QRCode：二维码；AppletCode：小程序码；BarCode：条形码。 */
+  AreaCoordSet?: number[];
+}
+
+/** 音画质检测异常结果信息。 */
+declare interface QualityInspectResultItem {
+  /** 异常类型，取值范围：Jitter：抖动；Blur：模糊；LowLighting：低光照；HighLighting：过曝；CrashScreen：花屏；BlackWhiteEdge：黑白边；SolidColorScreen：纯色屏；Noise：噪点；Mosaic：马赛克；QRCode：二维码；AppletCode：小程序码；BarCode：条形码；LowVoice：低音；HighVoice：爆音；NoVoice：静音；LowEvaluation：无参考打分低于阈值。 */
+  Type?: string;
+  /** 异常片段列表。注意： 该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
+  SegmentSet?: QualityInspectItem[];
+  /** 异常片段列表文件 URL。文件 内容 为 JSON，数据结构与 SegmentSet 字段一致。（文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
+  SegmentSetFileUrl?: string;
+  /** 异常片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  SegmentSetFileUrlExpireTime?: string;
+}
+
+/** 音画质检测任务信息。 */
+declare interface QualityInspectTask {
+  /** 任务 ID。 */
+  TaskId?: string;
+  /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误信息。 */
+  Message?: string;
+  /** 音画质检测输入音视频的元信息。 */
+  MetaData?: MediaMetaData | null;
+  /** 音画质检测任务输入。 */
+  Input?: QualityInspectTaskInput | null;
+  /** 音画质检测任务输出。 */
+  Output?: QualityInspectTaskOutput | null;
+  /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，音画质检测完成回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+}
+
+/** 音画质检测任务的输入。 */
+declare interface QualityInspectTaskInput {
+  /** 媒体文件 ID。 */
+  FileId?: string;
+  /** 音画质检测模板 ID。 */
+  Definition?: number;
+}
+
+/** 音画质检测任务的输出。 */
+declare interface QualityInspectTaskOutput {
+  /** 媒体文件是否无音频轨，取值范围：0：否，即有音频轨；1：是，即无音频轨。 */
+  NoAudio?: number;
+  /** 媒体文件是否无视频轨，取值范围：0：否，即有视频轨；1：是，即无视频轨。 */
+  NoVideo?: number;
+  /** 视频画面质量评分，取值范围：[0, 100]。 */
+  QualityEvaluationScore?: number;
+  /** 音画质检测出的异常项列表。 */
+  QualityInspectResultSet?: QualityInspectResultItem[];
+}
+
+/** 音画质检测模板详情。 */
+declare interface QualityInspectTemplateItem {
+  /** 模板 ID。 */
+  Definition?: number;
+  /** 模板类型，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 模板名称。 */
+  Name?: string;
+  /** 模板描述。 */
+  Comment?: string;
+  /** 截帧间隔，单位为秒。 */
+  ScreenshotInterval?: number;
+  /** 视频画面抖动重影检测的控制参数。 */
+  JitterConfigure?: JitterConfigureInfo | null;
+  /** 视频画面模糊检测的控制参数。 */
+  BlurConfigure?: BlurConfigureInfo | null;
+  /** 视频画面低光、过曝检测的控制参数。 */
+  AbnormalLightingConfigure?: AbnormalLightingConfigureInfo | null;
+  /** 视频画面花屏检测的控制参数。 */
+  CrashScreenConfigure?: CrashScreenConfigureInfo | null;
+  /** 视频画面黑边、白边、黑屏、白屏检测的控制参数。 */
+  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo | null;
+  /** 视频画面噪点检测的控制参数。 */
+  NoiseConfigure?: NoiseConfigureInfo | null;
+  /** 视频画面马赛克检测的控制参数。 */
+  MosaicConfigure?: MosaicConfigureInfo | null;
+  /** 视频画面二维码检测的控制参数。 */
+  QRCodeConfigure?: QRCodeConfigureInfo | null;
+  /** 视频画面质量评价的控制参数。 */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo | null;
+  /** 音频（静音、低音、爆音）检测的控制参数。 */
+  VoiceConfigure?: VoiceConfigureInfo | null;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  UpdateTime?: string;
 }
 
 /** 音画质重生音频控制控制信息。 */
@@ -5134,6 +5352,18 @@ declare interface VideoTrackItem {
   ImageOperations?: ImageTransform[];
 }
 
+/** 音频（静音、低音、爆音）检测的控制参数。 */
+declare interface VoiceConfigureInfo {
+  /** 音频（静音、低音、爆音）检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch: string;
+}
+
+/** 音频（静音、低音、爆音）检测的控制参数。 */
+declare interface VoiceConfigureInfoForUpdate {
+  /** 音频（静音、低音、爆音）检测开关，可选值：ON：开启；OFF：关闭。 */
+  Switch?: string | null;
+}
+
 /** 水印周期配置。 */
 declare interface WatermarkCycleConfigForUpdate {
   /** 水印在视频里第一次出现的播放时间点，单位：秒。 */
@@ -5664,6 +5894,44 @@ declare interface CreateProcedureTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateQualityInspectTemplateRequest {
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 音画质检测模板名称。 */
+  Name?: string;
+  /** 音画质检测模板描述。 */
+  Comment?: string;
+  /** 截帧间隔，单位为秒，最小值为 1。当不填时，默认截帧间隔为 1 秒。 */
+  ScreenshotInterval?: number;
+  /** 视频画面抖动重影检测的控制参数。 */
+  JitterConfigure?: JitterConfigureInfo;
+  /** 视频画面模糊检测的控制参数。 */
+  BlurConfigure?: BlurConfigureInfo;
+  /** 视频画面低光、过曝检测的控制参数。 */
+  AbnormalLightingConfigure?: AbnormalLightingConfigureInfo;
+  /** 视频画面花屏检测的控制参数。 */
+  CrashScreenConfigure?: CrashScreenConfigureInfo;
+  /** 视频画面黑边、白边、黑屏、白屏检测的控制参数。 */
+  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo;
+  /** 视频画面噪点检测的控制参数。 */
+  NoiseConfigure?: NoiseConfigureInfo;
+  /** 视频画面马赛克检测的控制参数。 */
+  MosaicConfigure?: MosaicConfigureInfo;
+  /** 视频画面二维码检测的控制参数。 */
+  QRCodeConfigure?: QRCodeConfigureInfo;
+  /** 视频画面质量评价的控制参数。 */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo;
+  /** 音频（静音、低音、爆音）检测的控制参数。 */
+  VoiceConfigure?: VoiceConfigureInfo;
+}
+
+declare interface CreateQualityInspectTemplateResponse {
+  /** 音画质检测模板 ID。 */
+  Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRebuildMediaTemplateRequest {
   /** 输出文件封装格式，可选值：mp4、flv、hls。 */
   Container: string;
@@ -6094,6 +6362,18 @@ declare interface DeleteProcedureTemplateRequest {
 }
 
 declare interface DeleteProcedureTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteQualityInspectTemplateRequest {
+  /** 音画质检测模板号。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+}
+
+declare interface DeleteQualityInspectTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6796,6 +7076,28 @@ declare interface DescribeProcedureTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeQualityInspectTemplatesRequest {
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 音画质检测模板列表。长度限制：100。 */
+  Definitions?: number[];
+  /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeQualityInspectTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 音画质检测模板详情列表。 */
+  QualityInspectTemplateSet?: QualityInspectTemplateItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRebuildMediaTemplatesRequest {
   /** 音画质重生模板列表。 */
   Definitions?: number[];
@@ -7032,7 +7334,7 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务。 */
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务。 */
   TaskType?: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status?: string;
@@ -7080,6 +7382,8 @@ declare interface DescribeTaskDetailResponse {
   ReduceMediaBitrateTask?: ReduceMediaBitrateTask | null;
   /** 获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。 */
   DescribeFileAttributesTask?: DescribeFileAttributesTask | null;
+  /** 音画质检测任务信息，仅当 TaskType 为 QualityInspect 时该字段有值。 */
+  QualityInspectTask?: QualityInspectTask | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7346,6 +7650,30 @@ declare interface ForbidMediaDistributionRequest {
 declare interface ForbidMediaDistributionResponse {
   /** 不存在的文件 ID 列表。 */
   NotExistFileIdSet: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InspectMediaQualityRequest {
+  /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
+  FileId: string;
+  /** 音画质检测模板 ID。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+  TasksPriority?: number;
+  /** 来源上下文，用于透传用户请求信息，音画质检测完成回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 保留字段，特殊用途时使用。 */
+  ExtInfo?: string;
+}
+
+declare interface InspectMediaQualityResponse {
+  /** 音画质检测任务 ID。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7766,6 +8094,44 @@ declare interface ModifyPersonSampleResponse {
   Person: AiSamplePerson;
   /** 处理失败的五官信息。 */
   FailFaceInfoSet: AiSampleFailFaceInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyQualityInspectTemplateRequest {
+  /** 模板 ID。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+  /** 截帧间隔，单位为秒，最小值为 1。 */
+  ScreenshotInterval?: number;
+  /** 视频画面抖动重影检测的控制参数。 */
+  JitterConfigure?: JitterConfigureInfoForUpdate;
+  /** 视频画面模糊检测的控制参数。 */
+  BlurConfigure?: BlurConfigureInfoForUpdate;
+  /** 视频画面低光、过曝检测的控制参数。 */
+  AbnormalLightingConfigure?: AbnormalLightingConfigureInfoForUpdate;
+  /** 视频画面花屏检测的控制参数。 */
+  CrashScreenConfigure?: CrashScreenConfigureInfoForUpdate;
+  /** 视频画面黑边、白边、黑屏、白屏检测的控制参数。 */
+  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfoForUpdate;
+  /** 视频画面噪点检测的控制参数。 */
+  NoiseConfigure?: NoiseConfigureInfoForUpdate;
+  /** 视频画面马赛克检测的控制参数。 */
+  MosaicConfigure?: MosaicConfigureInfoForUpdate;
+  /** 视频画面二维码检测的控制参数。 */
+  QRCodeConfigure?: QRCodeConfigureInfoForUpdate;
+  /** 视频画面质量评价的控制参数。 */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate;
+  /** 音频（静音、低音、爆音）检测的控制参数。 */
+  VoiceConfigure?: VoiceConfigureInfoForUpdate;
+}
+
+declare interface ModifyQualityInspectTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8645,6 +9011,8 @@ declare interface Vod {
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建任务流模板 {@link CreateProcedureTemplateRequest} {@link CreateProcedureTemplateResponse} */
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
+  /** 创建音画质检测模板 {@link CreateQualityInspectTemplateRequest} {@link CreateQualityInspectTemplateResponse} */
+  CreateQualityInspectTemplate(data?: CreateQualityInspectTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityInspectTemplateResponse>;
   /** 创建音画质重生模板 {@link CreateRebuildMediaTemplateRequest} {@link CreateRebuildMediaTemplateResponse} */
   CreateRebuildMediaTemplate(data: CreateRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRebuildMediaTemplateResponse>;
   /** 创建审核模板 {@link CreateReviewTemplateRequest} {@link CreateReviewTemplateResponse} */
@@ -8695,6 +9063,8 @@ declare interface Vod {
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
   /** 删除任务流模板 {@link DeleteProcedureTemplateRequest} {@link DeleteProcedureTemplateResponse} */
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
+  /** 删除音画质检测模板 {@link DeleteQualityInspectTemplateRequest} {@link DeleteQualityInspectTemplateResponse} */
+  DeleteQualityInspectTemplate(data: DeleteQualityInspectTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQualityInspectTemplateResponse>;
   /** 删除音画质重生模板 {@link DeleteRebuildMediaTemplateRequest} {@link DeleteRebuildMediaTemplateResponse} */
   DeleteRebuildMediaTemplate(data: DeleteRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRebuildMediaTemplateResponse>;
   /** 删除审核模板 {@link DeleteReviewTemplateRequest} {@link DeleteReviewTemplateResponse} */
@@ -8775,6 +9145,8 @@ declare interface Vod {
   DescribePrepaidProducts(data?: DescribePrepaidProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrepaidProductsResponse>;
   /** 获取任务流模板列表 {@link DescribeProcedureTemplatesRequest} {@link DescribeProcedureTemplatesResponse} */
   DescribeProcedureTemplates(data?: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
+  /** 获取音画质检测模板列表 {@link DescribeQualityInspectTemplatesRequest} {@link DescribeQualityInspectTemplatesResponse} */
+  DescribeQualityInspectTemplates(data?: DescribeQualityInspectTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityInspectTemplatesResponse>;
   /** 获取音画质重生模板列表 {@link DescribeRebuildMediaTemplatesRequest} {@link DescribeRebuildMediaTemplatesResponse} */
   DescribeRebuildMediaTemplates(data?: DescribeRebuildMediaTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebuildMediaTemplatesResponse>;
   /** 查询内容智能识别详情 {@link DescribeReviewDetailsRequest} {@link DescribeReviewDetailsResponse} */
@@ -8821,6 +9193,8 @@ declare interface Vod {
   ExtractTraceWatermark(data: ExtractTraceWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractTraceWatermarkResponse>;
   /** 禁播媒体 {@link ForbidMediaDistributionRequest} {@link ForbidMediaDistributionResponse} */
   ForbidMediaDistribution(data: ForbidMediaDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidMediaDistributionResponse>;
+  /** 音画质检测 {@link InspectMediaQualityRequest} {@link InspectMediaQualityResponse} */
+  InspectMediaQuality(data: InspectMediaQualityRequest, config?: AxiosRequestConfig): AxiosPromise<InspectMediaQualityResponse>;
   /** 直播即时剪辑 {@link LiveRealTimeClipRequest} {@link LiveRealTimeClipResponse} */
   LiveRealTimeClip(data: LiveRealTimeClipRequest, config?: AxiosRequestConfig): AxiosPromise<LiveRealTimeClipResponse>;
   /** 任务管理 {@link ManageTaskRequest} {@link ManageTaskResponse} */
@@ -8853,6 +9227,8 @@ declare interface Vod {
   ModifyMediaStorageClass(data: ModifyMediaStorageClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaStorageClassResponse>;
   /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
+  /** 修改音画质检测模板 {@link ModifyQualityInspectTemplateRequest} {@link ModifyQualityInspectTemplateResponse} */
+  ModifyQualityInspectTemplate(data: ModifyQualityInspectTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQualityInspectTemplateResponse>;
   /** 修改音画质重生模板 {@link ModifyRebuildMediaTemplateRequest} {@link ModifyRebuildMediaTemplateResponse} */
   ModifyRebuildMediaTemplate(data: ModifyRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRebuildMediaTemplateResponse>;
   /** 修改审核模板 {@link ModifyReviewTemplateRequest} {@link ModifyReviewTemplateResponse} */

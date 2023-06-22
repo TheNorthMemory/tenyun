@@ -1206,6 +1206,14 @@ declare interface ProxyNodeInfo {
   Zone: string;
 }
 
+/** 数据库代理规格 */
+declare interface ProxySpec {
+  /** 数据库代理cpu核数 */
+  Cpu: number;
+  /** 数据库代理内存 */
+  Mem: number;
+}
+
 /** proxy节点可用区内个数 */
 declare interface ProxyZone {
   /** proxy节点可用区 */
@@ -2720,6 +2728,16 @@ declare interface DescribeProxyNodesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProxySpecsRequest {
+}
+
+declare interface DescribeProxySpecsResponse {
+  /** 数据库代理规格列表 */
+  ProxySpecs: ProxySpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourcePackageDetailRequest {
   /** 资源包唯一ID */
   PackageId: string;
@@ -4051,6 +4069,8 @@ declare interface Cynosdb {
   DescribeProxies(data?: DescribeProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesResponse>;
   /** 查询代理节点列表 {@link DescribeProxyNodesRequest} {@link DescribeProxyNodesResponse} */
   DescribeProxyNodes(data?: DescribeProxyNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyNodesResponse>;
+  /** 查询数据库代理规格 {@link DescribeProxySpecsRequest} {@link DescribeProxySpecsResponse} */
+  DescribeProxySpecs(data?: DescribeProxySpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySpecsResponse>;
   /** 查询资源包使用详情 {@link DescribeResourcePackageDetailRequest} {@link DescribeResourcePackageDetailResponse} */
   DescribeResourcePackageDetail(data: DescribeResourcePackageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePackageDetailResponse>;
   /** 查询资源包列表 {@link DescribeResourcePackageListRequest} {@link DescribeResourcePackageListResponse} */

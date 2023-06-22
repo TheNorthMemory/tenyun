@@ -2184,6 +2184,20 @@ declare interface CreateDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateDatabaseRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 数据库名称。 */
+  DBName: string;
+  /** 字符集，可选值：utf8，gbk，latin1，utf8mb4。 */
+  CharacterSetName: string;
+}
+
+declare interface CreateDatabaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeployGroupRequest {
   /** 置放群组名称，最长不能超过60个字符。 */
   DeployGroupName: string;
@@ -4635,6 +4649,8 @@ declare interface Cdb {
   CreateDBInstance(data: CreateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceResponse>;
   /** 创建云数据库实例（按量计费） {@link CreateDBInstanceHourRequest} {@link CreateDBInstanceHourResponse} */
   CreateDBInstanceHour(data: CreateDBInstanceHourRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceHourResponse>;
+  /** 创建数据库 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
+  CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
   /** 创建置放群组 {@link CreateDeployGroupRequest} {@link CreateDeployGroupResponse} */
   CreateDeployGroup(data: CreateDeployGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeployGroupResponse>;
   /** 创建参数模板 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */

@@ -54,6 +54,8 @@ declare interface BatchRecordInfo {
   MX: number | null;
   /** 记录权重 */
   Weight?: number | null;
+  /** 备注信息 */
+  Remark?: string | null;
 }
 
 /** 批量添加域名返回结构 */

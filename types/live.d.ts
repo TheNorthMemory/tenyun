@@ -1110,6 +1110,26 @@ declare interface StreamOnlineInfo {
   AppName: string;
   /** 推流域名。 */
   DomainName: string;
+  /** 流是否推送到延播。0 - 无延播，1 - 有延播。 */
+  PushToDelay?: number | null;
+}
+
+/** 直播拉流任务状态信息。 */
+declare interface TaskStatusInfo {
+  /** 当前使用的源 URL。 */
+  FileUrl: string;
+  /** 点播源任务的轮播次数。 */
+  LoopedTimes: number;
+  /** 点播源的播放偏移，单位：秒。 */
+  OffsetTime: number;
+  /** 最新心跳上报时间。UTC时间，例如：2022-02-11T10:00:00Z。注意：UTC时间与北京时间相差八小时。 */
+  ReportTime: string;
+  /** 实际运行状态：active - 活跃，inactive - 不活跃。 */
+  RunStatus: string;
+  /** 点播源的文件时长，单位：秒。 */
+  FileDuration: number;
+  /** 下一进度点播文件 URL。 */
+  NextFileUrl: string;
 }
 
 /** 转码模板信息。 */
@@ -2622,6 +2642,18 @@ declare interface DescribeLivePlayAuthKeyRequest {
 declare interface DescribeLivePlayAuthKeyResponse {
   /** 播放鉴权key信息。 */
   PlayAuthKeyInfo?: PlayAuthKeyInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLivePullStreamTaskStatusRequest {
+  /** 任务 ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeLivePullStreamTaskStatusResponse {
+  /** 任务状态信息。 */
+  TaskStatusInfo: TaskStatusInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4305,6 +4337,8 @@ declare interface Live {
   DescribeLivePadTemplates(data?: DescribeLivePadTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadTemplatesResponse>;
   /** 查询播放鉴权key {@link DescribeLivePlayAuthKeyRequest} {@link DescribeLivePlayAuthKeyResponse} */
   DescribeLivePlayAuthKey(data: DescribeLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePlayAuthKeyResponse>;
+  /** 查询直播拉流任务状态 {@link DescribeLivePullStreamTaskStatusRequest} {@link DescribeLivePullStreamTaskStatusResponse} */
+  DescribeLivePullStreamTaskStatus(data: DescribeLivePullStreamTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePullStreamTaskStatusResponse>;
   /** 查询直播拉流任务 {@link DescribeLivePullStreamTasksRequest} {@link DescribeLivePullStreamTasksResponse} */
   DescribeLivePullStreamTasks(data?: DescribeLivePullStreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePullStreamTasksResponse>;
   /** 查询推流鉴权key {@link DescribeLivePushAuthKeyRequest} {@link DescribeLivePushAuthKeyResponse} */

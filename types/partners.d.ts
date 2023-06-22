@@ -152,6 +152,8 @@ declare interface AgentDealNewElem {
   PaymentMethod: string | null;
   /** 订单更新时间 */
   UpdateTime: string | null;
+  /** 资源id */
+  ResourceIds?: string[] | null;
 }
 
 /** 代理商业务员信息 */

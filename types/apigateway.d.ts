@@ -419,19 +419,19 @@ declare interface AttachedPluginSummary {
 /** 插件相关的API信息。 */
 declare interface AvailableApiInfo {
   /** API ID。 */
-  ApiId: string;
+  ApiId?: string;
   /** API名称。 */
-  ApiName: string;
+  ApiName?: string;
   /** API类型。 */
-  ApiType: string;
+  ApiType?: string;
   /** API路径。 */
-  Path: string;
+  Path?: string;
   /** API方法。 */
-  Method: string;
+  Method?: string;
   /** API是否绑定其他插件。 */
-  AttachedOtherPlugin: boolean | null;
+  AttachedOtherPlugin?: boolean | null;
   /** API是否绑定当前插件。 */
-  IsAttached: boolean | null;
+  IsAttached?: boolean | null;
 }
 
 /** Base64编码的header触发规则 */
@@ -843,23 +843,23 @@ declare interface InstanceDetail {
 /** 独享实例信息 */
 declare interface InstanceInfo {
   /** 独享实例唯一id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 独享实例name */
-  InstanceName: string;
+  InstanceName?: string;
   /** 独享实例描述 */
-  InstanceDescription: string;
+  InstanceDescription?: string;
   /** 独享实例计费类型 */
-  InstanceChargeType: string;
+  InstanceChargeType?: string;
   /** 独享实例类型 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 独享实例状态 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 独享实例创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 订单号 */
-  DealName: string | null;
+  DealName?: string | null;
   /** 资源ID同唯一id */
-  ResourceId: string;
+  ResourceId?: string;
 }
 
 /** 独享实例参数信息 */

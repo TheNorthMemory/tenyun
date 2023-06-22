@@ -221,11 +221,13 @@ declare interface DescribeApmInstancesRequest {
   InstanceIds?: string[];
   /** 是否查询官方demo实例 */
   DemoInstanceFlag?: number;
+  /** 是否查询全地域实例 */
+  AllRegionsFlag?: number;
 }
 
 declare interface DescribeApmInstancesResponse {
   /** apm实例列表 */
-  Instances: ApmInstanceDetail[] | null;
+  Instances?: ApmInstanceDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

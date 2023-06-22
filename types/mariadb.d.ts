@@ -558,6 +558,40 @@ declare interface TablePrivilege {
   Privileges: string[];
 }
 
+/** 临时实例 */
+declare interface TmpInstance {
+  /** 应用ID */
+  AppId: number | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 实例备注 */
+  InstanceRemark: string | null;
+  /** 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例 */
+  TempType: number | null;
+  /** 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线 */
+  Status: number | null;
+  /** 实例 ID，形如：tdsql-ow728lmc。 */
+  InstanceId: string | null;
+  /** 实例虚IP */
+  Vip: string | null;
+  /** 实例虚端口 */
+  Vport: number | null;
+  /** 有效期结束时间 */
+  PeriodEndTime: string | null;
+  /** 源实例 ID，形如：tdsql-ow728lmc。 */
+  SrcInstanceId: string | null;
+  /** 实例状态描述 */
+  StatusDesc: string | null;
+  /** 实例所在地域 */
+  Region: string | null;
+  /** 实例所在可用区 */
+  Zone: string | null;
+  /** 实例虚IPv6 */
+  Vipv6: string | null;
+  /** 实例IPv6标志 */
+  Ipv6Flag: number | null;
+}
+
 /** 视图权限信息 */
 declare interface ViewPrivileges {
   /** 数据库名 */
@@ -1286,6 +1320,18 @@ declare interface DescribeDBSlowLogsResponse {
   Total: number;
   /** 所有语句查询时间总和 */
   QueryTimeSum: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBTmpInstancesRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeDBTmpInstancesResponse {
+  /** 临时实例 */
+  TmpInstances: TmpInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2089,6 +2135,8 @@ declare interface Mariadb {
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询慢查询日志列表 {@link DescribeDBSlowLogsRequest} {@link DescribeDBSlowLogsResponse} */
   DescribeDBSlowLogs(data: DescribeDBSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowLogsResponse>;
+  /** 获取实例回档生成的临时实例 {@link DescribeDBTmpInstancesRequest} {@link DescribeDBTmpInstancesResponse} */
+  DescribeDBTmpInstances(data: DescribeDBTmpInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBTmpInstancesResponse>;
   /** 查询数据库对象列表 {@link DescribeDatabaseObjectsRequest} {@link DescribeDatabaseObjectsResponse} */
   DescribeDatabaseObjects(data: DescribeDatabaseObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseObjectsResponse>;
   /** 查询数据库表信息 {@link DescribeDatabaseTableRequest} {@link DescribeDatabaseTableResponse} */

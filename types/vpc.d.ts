@@ -2289,11 +2289,11 @@ declare interface AllocateAddressesRequest {
   InternetServiceProvider?: string;
   /** EIP计费方式。已开通标准账户类型白名单的用户，可选值：BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费（需额外开通共享带宽包白名单）BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR。未开通标准账户类型白名单的用户，EIP计费方式与其绑定的实例的计费方式一致，无需传递此参数。 */
   InternetChargeType?: string;
-  /** EIP出带宽上限，单位：Mbps。已开通标准账户类型白名单的用户，可选值范围取决于EIP计费方式：BANDWIDTH_PACKAGE：1 Mbps 至 1000 MbpsBANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 MbpsBANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 MbpsTRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps默认值：1 Mbps。未开通标准账户类型白名单的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。 */
+  /** EIP出带宽上限，单位：Mbps。已开通标准账户类型白名单的用户，可选值范围取决于EIP计费方式：BANDWIDTH_PACKAGE：1 Mbps 至 2000 MbpsBANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 MbpsBANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 MbpsTRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps默认值：1 Mbps。未开通标准账户类型白名单的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。 */
   InternetMaxBandwidthOut?: number;
   /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递 */
   AddressChargePrepaid?: AddressChargePrepaid;
-  /** EIP类型。默认值：EIP。已开通Anycast公网加速白名单的用户，可选值：AnycastEIP：加速IP，可参见 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)注意：仅部分地域支持加速IP。已开通精品IP白名单的用户，可选值：HighQualityEIP：精品IP注意：仅部分地域支持精品IP。 */
+  /** EIP类型。默认值：EIP。已开通Anycast公网加速白名单的用户，可选值：AnycastEIP：加速IP，可参见 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)注意：仅部分地域支持加速IP。已开通精品IP白名单的用户，可选值：HighQualityEIP：精品IP注意：仅部分地域支持精品IP。已开高防IP白名单的用户，可选值：AntiDDoSEIP：高防IP注意：仅部分地域支持高防IP。 */
   AddressType?: string;
   /** Anycast发布域。已开通Anycast公网加速白名单的用户，可选值：ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）ANYCAST_ZONE_OVERSEAS：境外发布域[已废弃] ANYCAST_ZONE_A：发布域A（已更新为全球发布域）[已废弃] ANYCAST_ZONE_B：发布域B（已更新为全球发布域）默认值：ANYCAST_ZONE_OVERSEAS。 */
   AnycastZone?: string;
@@ -2311,9 +2311,9 @@ declare interface AllocateAddressesRequest {
 
 declare interface AllocateAddressesResponse {
   /** 申请到的 EIP 的唯一 ID 列表。 */
-  AddressSet: string[];
+  AddressSet?: string[];
   /** 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4015,7 +4015,7 @@ declare interface DescribeBandwidthPackageQuotaRequest {
 
 declare interface DescribeBandwidthPackageQuotaResponse {
   /** 带宽包配额详细信息 */
-  QuotaSet: Quota[];
+  QuotaSet?: Quota[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5109,9 +5109,9 @@ declare interface DescribeTrafficPackagesRequest {
 
 declare interface DescribeTrafficPackagesResponse {
   /** 按照条件查询出来的流量包数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 流量包信息 */
-  TrafficPackageSet: TrafficPackage[];
+  TrafficPackageSet?: TrafficPackage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -102,6 +102,14 @@ declare interface KTVMusicDetailInfo {
   BPMInfo: KTVBPMInfo | null;
 }
 
+/** 其它片段时间（可用于抢唱） */
+declare interface KTVOtherSegments {
+  /** 片段开始时间 */
+  SegmentBegin?: number | null;
+  /** 片段结束时间 */
+  SegmentEnd?: number | null;
+}
+
 /** 歌单基础信息。 */
 declare interface KTVPlaylistBaseInfo {
   /** 歌单Id。 */
@@ -388,6 +396,38 @@ declare interface DescribeKTVMatchMusicsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKTVMusicAccompanySegmentUrlRequest {
+  /** 应用名称。 */
+  AppName: string;
+  /** 用户标识。 */
+  UserId: string;
+  /** 歌曲 Id 。 */
+  MusicId: string;
+  /** 播放场景。默认为ChatLive：直播Chat：语聊 */
+  PlayScene?: string;
+  /** 房间Id */
+  RoomId?: string;
+}
+
+declare interface DescribeKTVMusicAccompanySegmentUrlResponse {
+  /** 歌曲状态。0：可用1：下线2：没权限3：没伴奏当返回2时，其他参数有可能全部为空 */
+  Status?: number;
+  /** 伴奏链接 */
+  Url?: string;
+  /** 伴奏类型，如mkv，mp3等 */
+  ExtName?: string;
+  /** 高潮开始时间 */
+  SegmentBegin?: number;
+  /** 高潮结束时间 */
+  SegmentEnd?: number;
+  /** 链接文件大小 单位 字节 */
+  FileSize?: number;
+  /** 其它片段时间（可用于抢唱） */
+  OtherSegments?: KTVOtherSegments[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeKTVMusicsByTagRequest {
   /** 应用名称。 */
   AppName: string;
@@ -653,6 +693,8 @@ declare interface Yinsuda {
   CreateKTVRobot(data: CreateKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKTVRobotResponse>;
   /** 匹配歌曲 {@link DescribeKTVMatchMusicsRequest} {@link DescribeKTVMatchMusicsResponse} */
   DescribeKTVMatchMusics(data: DescribeKTVMatchMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMatchMusicsResponse>;
+  /** 获取歌曲伴奏片段链接 {@link DescribeKTVMusicAccompanySegmentUrlRequest} {@link DescribeKTVMusicAccompanySegmentUrlResponse} */
+  DescribeKTVMusicAccompanySegmentUrl(data: DescribeKTVMusicAccompanySegmentUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicAccompanySegmentUrlResponse>;
   /** 获取标签歌曲 {@link DescribeKTVMusicsByTagRequest} {@link DescribeKTVMusicsByTagResponse} */
   DescribeKTVMusicsByTag(data: DescribeKTVMusicsByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicsByTagResponse>;
   /** 获取歌单详情 {@link DescribeKTVPlaylistDetailRequest} {@link DescribeKTVPlaylistDetailResponse} */

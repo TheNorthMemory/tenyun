@@ -160,7 +160,7 @@ declare interface Component {
   ComponentPosX?: number;
   /** 参数控件Y位置，单位px */
   ComponentPosY?: number;
-  /** 参数控件样式，json格式表述不同类型的控件会有部分非通用参数TEXT/MULTI_LINE_TEXT控件可以指定1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐例如：{"FontSize":12}ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙钟的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}", */
+  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}"ComponentType为SIGN_SEAL类型时，支持以下参数：1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例： "ComponentExtra":"{\"PageRanges\":[\"PageRange\":{\"BeginPage\":1,\"EndPage\":-1}]}"参数控件样式，json格式表述不同类型的控件会有部分非通用参数TEXT/MULTI_LINE_TEXT控件可以指定1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐例如：{"FontSize":12}ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙钟的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}"ComponentType为SIGN_SEAL类型时，支持以下参数：1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例： "ComponentExtra":"{\"PageRanges\":[\"PageRange\":{\"BeginPage\":1,\"EndPage\":-1}]}" */
   ComponentExtra?: string;
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DATE - 默认是格式化为xxxx年xx月xx日DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525)$/签署意见控件： 约束：签署意见最大长度为50字符签署人手机号控件： 约束：国内手机号 13,14,15,16,17,18,19号段长度11位签署人身份证控件： 约束：合法的身份证号码检查控件名称： 约束：控件名称最大长度为20字符单行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号多行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号勾选框控件： 约束：选择填字符串true，不选填字符串false选择器控件： 约束：同单行文本控件约束，填写选择值中的字符串数字控件： 约束：请输入有效的数字(可带小数点) 检查正则表达式：/^(-|\+)?\d+(\.\d+)?$/日期控件： 约束：格式：yyyy年mm月dd日附件控件： 约束：JPG或PNG图片，上传数量限制，1到6个，最大6个附件图片控件： 约束：JPG或PNG图片，填写上传的图片资源ID邮箱控件： 约束：请输入有效的邮箱地址, w3c标准 检查正则表达式：/^([A-Za-z0-9_\-.!#$%&])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/ 参考：https://emailregex.com/地址控件： 同单行文本控件约束省市区控件： 同单行文本控件约束性别控件： 同单行文本控件约束，填写选择值中的字符串学历控件： 同单行文本控件约束，填写选择值中的字符串 */
   ComponentValue?: string;
@@ -230,6 +230,20 @@ declare interface FailedCreateRoleData {
   UserId?: string | null;
   /** 角色RoleId列表 */
   RoleIds?: string[] | null;
+}
+
+/** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
+declare interface FilledComponent {
+  /** 控件Id */
+  ComponentId?: string | null;
+  /** 控件名称 */
+  ComponentName?: string | null;
+  /** 控件填写状态；0-未填写；1-已填写 */
+  ComponentFillStatus?: string | null;
+  /** 控件填写内容 */
+  ComponentValue?: string | null;
+  /** 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。 */
+  ImageUrl?: string | null;
 }
 
 /** 此结构体 (Filter) 用于描述查询过滤条件。 */
@@ -536,6 +550,18 @@ declare interface Recipient {
   RoutingOrder?: number;
   /** 是否是发起方 */
   IsPromoter?: boolean;
+}
+
+/** 参与方填写控件信息 */
+declare interface RecipientComponentInfo {
+  /** 参与方Id */
+  RecipientId?: string | null;
+  /** 参与方填写状态 */
+  RecipientFillStatus?: string | null;
+  /** 是否发起方 */
+  IsPromoter?: boolean | null;
+  /** 填写控件内容 */
+  Components?: FilledComponent[] | null;
 }
 
 /** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。如果需要指定B端（机构身份类型）签署人，其中ReleasedApprover需要传递的参数如下：ApproverNumber, OrganizationName, ApproverType必传。对于其他身份标识- 子客企业指定经办人：OpenId必传，OrganizationOpenId必传；- 非子客企业：Name、Mobile必传。 */
@@ -1210,6 +1236,20 @@ declare interface ChannelDescribeEmployeesResponse {
   Limit?: number;
   /** 符合条件的员工数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDescribeFlowComponentsRequest {
+  /** 应用相关信息 */
+  Agent: Agent;
+  /** 电子签流程的Id */
+  FlowId: string;
+}
+
+declare interface ChannelDescribeFlowComponentsResponse {
+  /** 流程关联的填写控件信息 */
+  RecipientComponentInfos?: RecipientComponentInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3321,6 +3361,8 @@ declare interface Essbasic {
   ChannelDeleteSealPolicies(data: ChannelDeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteSealPoliciesResponse>;
   /** 查询企业员工 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
+  /** 查询流程填写控件内容 {@link ChannelDescribeFlowComponentsRequest} {@link ChannelDescribeFlowComponentsResponse} */
+  ChannelDescribeFlowComponents(data: ChannelDescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeFlowComponentsResponse>;
   /** 查询子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
   /** 查询用户角色 {@link ChannelDescribeRolesRequest} {@link ChannelDescribeRolesResponse} */

@@ -118,7 +118,7 @@ declare namespace V20190311 {
   /** 从TBP-RTS服务v1.3版本起，机器人以消息组列表的形式响应，消息组列表GroupList包含多组消息，用户根据需要对部分或全部消息组进行组合使用。 */
   interface ResponseMessage {
     /** 消息组列表。 */
-    GroupList?: Group | null;
+    GroupList?: Group[] | null;
   }
 
   /** 槽位信息 */
@@ -207,10 +207,10 @@ declare namespace V20190311 {
     SessionAttributes?: string | null;
     /** 机器人对话的应答文本。 */
     ResponseText?: string | null;
-    /** 机器人应答。 */
-    ResponseMessage?: ResponseMessage | null;
     /** 结果类型 {中间逻辑出错:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3; 未匹配上，返回预设兜底话术:5; 未匹配上，返回相似问题列表:6}。 */
     ResultType?: string | null;
+    /** 机器人应答。 */
+    ResponseMessage?: ResponseMessage | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

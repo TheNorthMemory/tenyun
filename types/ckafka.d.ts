@@ -140,6 +140,16 @@ declare interface BatchModifyTopicResultDTO {
   Message: string;
 }
 
+/** 主题占用Broker磁盘大小 */
+declare interface BrokerTopicData {
+  /** 主题名称 */
+  TopicName?: string | null;
+  /** 主题ID */
+  TopicId?: string | null;
+  /** 主题占用Broker 容量大小 */
+  DataSize?: number | null;
+}
+
 /** ClickHouse连接源参数 */
 declare interface ClickHouseConnectParam {
   /** ClickHouse的连接port */
@@ -2040,6 +2050,10 @@ declare interface TopicFlowRankingResult {
   ConsumeSpeed: ConsumerGroupSpeed[];
   /** Topic 消息堆积/占用磁盘排行 */
   TopicMessageHeap: TopicMessageHeapRanking[] | null;
+  /** Broker Ip 列表 */
+  BrokerIp?: string[] | null;
+  /** 单个broker 节点 Topic占用的数据大小 */
+  BrokerTopicData?: BrokerTopicData[] | null;
 }
 
 /** topic副本及详细信息 */
@@ -3393,11 +3407,13 @@ declare interface DescribeTopicFlowRankingRequest {
   BeginDate?: string;
   /** 排行结束日期 */
   EndDate?: string;
+  /** Broker IP 地址 */
+  BrokerIp?: string;
 }
 
 declare interface DescribeTopicFlowRankingResponse {
   /** 流量排行 */
-  Result: TopicFlowRankingResult;
+  Result?: TopicFlowRankingResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

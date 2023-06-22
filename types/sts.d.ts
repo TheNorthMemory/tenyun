@@ -35,7 +35,7 @@ declare interface AssumeRoleRequest {
   RoleArn: string;
   /** 临时会话名称，由用户自定义名称。长度在2到128之间，可包含大小写字符，数字以及特殊字符：=,.@_-。 正则为：[\w+=,.@_-]* */
   RoleSessionName: string;
-  /** 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒 */
+  /** 指定临时访问凭证的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒 */
   DurationSeconds?: number;
   /** 策略描述注意：1、policy 需要做 urlencode（如果通过 GET 方法请求云 API，发送请求前，所有参数都需要按照[云 API 规范](https://cloud.tencent.com/document/api/598/33159)再 urlencode 一次）。2、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。3、策略中不能包含 principal 元素。 */
   Policy?: string;
@@ -48,12 +48,12 @@ declare interface AssumeRoleRequest {
 }
 
 declare interface AssumeRoleResponse {
-  /** 临时安全证书 */
-  Credentials: Credentials;
-  /** 证书无效的时间，返回 Unix 时间戳，精确到秒 */
-  ExpiredTime: number;
-  /** 证书无效的时间，以 iso8601 格式的 UTC 时间表示 */
-  Expiration: string;
+  /** 临时访问凭证 */
+  Credentials?: Credentials;
+  /** 临时访问凭证的过期时间，返回 Unix 时间戳，精确到秒 */
+  ExpiredTime?: number;
+  /** 临时访问凭证的过期时间，以 iso8601 格式的 UTC 时间表示 */
+  Expiration?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -67,16 +67,16 @@ declare interface AssumeRoleWithSAMLRequest {
   RoleArn: string;
   /** 会话名称 */
   RoleSessionName: string;
-  /** 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒 */
+  /** 指定临时访问凭证的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒 */
   DurationSeconds?: number;
 }
 
 declare interface AssumeRoleWithSAMLResponse {
   /** 对象里面包含 Token，TmpSecretId，TmpSecretKey 三元组 */
   Credentials?: Credentials;
-  /** 证书无效的时间，返回 Unix 时间戳，精确到秒 */
+  /** 临时访问凭证的过期时间，返回 Unix 时间戳，精确到秒 */
   ExpiredTime?: number;
-  /** 证书无效的时间，以 ISO8601 格式的 UTC 时间表示 */
+  /** 临时访问凭证的过期时间，以 ISO8601 格式的 UTC 时间表示 */
   Expiration?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -91,17 +91,17 @@ declare interface AssumeRoleWithWebIdentityRequest {
   RoleArn: string;
   /** 会话名称 */
   RoleSessionName: string;
-  /** 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒 */
+  /** 指定临时访问凭证的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒 */
   DurationSeconds?: number;
 }
 
 declare interface AssumeRoleWithWebIdentityResponse {
-  /** 临时密钥过期时间(时间戳) */
-  ExpiredTime: number;
-  /** 临时密钥过期时间 */
-  Expiration: string;
-  /** 临时密钥 */
-  Credentials: Credentials;
+  /** 临时访问凭证过期时间(时间戳) */
+  ExpiredTime?: number;
+  /** 临时访问凭证过期时间 */
+  Expiration?: string;
+  /** 临时访问凭证 */
+  Credentials?: Credentials;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -127,18 +127,18 @@ declare interface GetCallerIdentityResponse {
 declare interface GetFederationTokenRequest {
   /** 您可以自定义调用方英文名称，由字母组成。 */
   Name: string;
-  /** 授予该临时证书权限的CAM策略注意：1、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。2、策略中不能包含 principal 元素。3、该参数需要做urlencode。 */
+  /** 授予该临时访问凭证权限的CAM策略注意：1、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。2、策略中不能包含 principal 元素。3、该参数需要做urlencode。 */
   Policy: string;
   /** 指定临时证书的有效期，单位：秒，默认1800秒，主账号最长可设定有效期为7200秒，子账号最长可设定有效期为129600秒。 */
   DurationSeconds?: number;
 }
 
 declare interface GetFederationTokenResponse {
-  /** 临时证书 */
+  /** 临时访问凭证 */
   Credentials?: Credentials;
-  /** 临时证书有效的时间，返回 Unix 时间戳，精确到秒 */
+  /** 临时访问凭证有效的时间，返回 Unix 时间戳，精确到秒 */
   ExpiredTime?: number;
-  /** 证书有效的时间，以 iso8601 格式的 UTC 时间表示 */
+  /** 临时访问凭证有效的时间，以 iso8601 格式的 UTC 时间表示 */
   Expiration?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -159,11 +159,11 @@ declare interface QueryApiKeyResponse {
 /** {@link Sts 安全凭证服务} */
 declare interface Sts {
   (): Versions;
-  /** 申请扮演角色 {@link AssumeRoleRequest} {@link AssumeRoleResponse} */
+  /** 申请扮演角色临时访问凭证 {@link AssumeRoleRequest} {@link AssumeRoleResponse} */
   AssumeRole(data: AssumeRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleResponse>;
-  /** 根据 SAML 断言申请角色临时凭证 {@link AssumeRoleWithSAMLRequest} {@link AssumeRoleWithSAMLResponse} */
+  /** 根据 SAML 断言申请角色临时访问凭证 {@link AssumeRoleWithSAMLRequest} {@link AssumeRoleWithSAMLResponse} */
   AssumeRoleWithSAML(data: AssumeRoleWithSAMLRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleWithSAMLResponse>;
-  /** 申请OIDC角色临时密钥 {@link AssumeRoleWithWebIdentityRequest} {@link AssumeRoleWithWebIdentityResponse} */
+  /** 申请OIDC角色临时访问凭证 {@link AssumeRoleWithWebIdentityRequest} {@link AssumeRoleWithWebIdentityResponse} */
   AssumeRoleWithWebIdentity(data: AssumeRoleWithWebIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleWithWebIdentityResponse>;
   /** 获取当前调用者的身份信息 {@link GetCallerIdentityRequest} {@link GetCallerIdentityResponse} */
   GetCallerIdentity(data?: GetCallerIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetCallerIdentityResponse>;

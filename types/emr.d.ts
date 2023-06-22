@@ -1118,9 +1118,9 @@ declare interface Step {
 declare interface StrategyConfig {
   /** 0:关闭滚动重启1:开启滚动启动 */
   RollingRestartSwitch?: number | null;
-  /** 滚动重启每批次的重启数量 */
+  /** 滚动重启每批次的重启数量，最大重启台数为 99999 台 */
   BatchSize?: number | null;
-  /** 滚动重启每批停止等待时间 ,最大重启台数为 99999 台，最大间隔为 5 分钟 单位是秒 */
+  /** 滚动重启每批停止等待时间 ,最大间隔为 5 分钟 单位是秒 */
   TimeWait?: number | null;
   /** 操作失败处理策略，0:失败阻塞, 1:失败自动跳过 */
   DealOnFail?: number | null;
@@ -2125,7 +2125,7 @@ declare interface Emr {
   ScaleOutCluster(data: ScaleOutClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutClusterResponse>;
   /** 实例扩容 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
-  /** 启动或停止监控或服务 {@link StartStopServiceOrMonitorRequest} {@link StartStopServiceOrMonitorResponse} */
+  /** 执行服务操作 {@link StartStopServiceOrMonitorRequest} {@link StartStopServiceOrMonitorResponse} */
   StartStopServiceOrMonitor(data: StartStopServiceOrMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartStopServiceOrMonitorResponse>;
   /** EMR同步POD状态 {@link SyncPodStateRequest} {@link SyncPodStateResponse} */
   SyncPodState(data: SyncPodStateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPodStateResponse>;

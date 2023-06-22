@@ -162,7 +162,7 @@ declare interface Component {
   ComponentRequired?: boolean;
   /** 控件关联的签署人ID */
   ComponentRecipientId?: string;
-  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}", */
+  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}"ComponentType为SIGN_SEAL类型时，支持以下参数：1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例： "ComponentExtra":"{\"PageRanges\":[\"PageRange\":{\"BeginPage\":1,\"EndPage\":-1}]}" */
   ComponentExtra?: string;
   /** 是否是表单域类型，默认不false-不是 */
   IsFormType?: boolean | null;
@@ -300,6 +300,22 @@ declare interface FillApproverInfo {
   ApproverSource: string;
   /** 企业自定义账号IDWEWORKAPP场景下指企业自有应用获取企微明文的userid */
   CustomUserId: string;
+}
+
+/** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
+declare interface FilledComponent {
+  /** 控件Id */
+  ComponentId?: string | null;
+  /** 控件名称 */
+  ComponentName?: string | null;
+  /** 控件填写状态；0-未填写；1-已填写 */
+  ComponentFillStatus?: string | null;
+  /** 控件填写内容 */
+  ComponentValue?: string | null;
+  /** 控件所属参与方Id */
+  ComponentRecipientId?: string | null;
+  /** 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。 */
+  ImageUrl?: string | null;
 }
 
 /** 查询过滤条件 */
@@ -624,6 +640,18 @@ declare interface Recipient {
   DeliveryMethod?: string;
   /** 附属信息 */
   RecipientExtra?: string;
+}
+
+/** 参与方填写控件信息 */
+declare interface RecipientComponentInfo {
+  /** 参与方Id */
+  RecipientId?: string | null;
+  /** 参与方填写状态 */
+  RecipientFillStatus?: string | null;
+  /** 是否发起方 */
+  IsPromoter?: boolean | null;
+  /** 填写控件内容 */
+  Components?: FilledComponent[] | null;
 }
 
 /** 发起流程快速注册相关信息 */
@@ -1598,6 +1626,22 @@ declare interface DescribeFlowBriefsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFlowComponentsRequest {
+  /** 操作者信息 */
+  Operator: UserInfo;
+  /** 电子签流程的Id */
+  FlowId: string;
+  /** 应用相关信息 */
+  Agent?: Agent;
+}
+
+declare interface DescribeFlowComponentsResponse {
+  /** 流程关联的填写控件信息 */
+  RecipientComponentInfos?: RecipientComponentInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFlowEvidenceReportRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
@@ -2073,6 +2117,8 @@ declare interface Ess {
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
   /** 查询流程摘要 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */
   DescribeFlowBriefs(data: DescribeFlowBriefsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowBriefsResponse>;
+  /** 查询流程填写控件内容 {@link DescribeFlowComponentsRequest} {@link DescribeFlowComponentsResponse} */
+  DescribeFlowComponents(data: DescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowComponentsResponse>;
   /** 查询出证报告 {@link DescribeFlowEvidenceReportRequest} {@link DescribeFlowEvidenceReportResponse} */
   DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;
   /** 查询合同详情 {@link DescribeFlowInfoRequest} {@link DescribeFlowInfoResponse} */
