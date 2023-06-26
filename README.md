@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 235+ 款产品，9584+ 服务数</summary>
+<details><summary>共计 235+ 款产品，9553+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -142,7 +142,7 @@ cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(4
 ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(39) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(150) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
-cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(80+3) |
+cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(21) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
@@ -153,7 +153,7 @@ ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
 cim |  | 2019-03-18(1) |
 cis |  | 2018-04-08(7) |
-ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) | 2019-08-19(78) |
+ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) | 2019-08-19(79) |
 clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(79) |
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
@@ -169,7 +169,7 @@ csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(94) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(275) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(127) |
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(128) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(51) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
@@ -280,7 +280,7 @@ tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(31) 
 tan | [碳引擎](https://cloud.tencent.com/document/product/1498) | 2022-04-20(1) |
 tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(19) |
 tav | 文件检测 | 2019-01-18(4) |
-tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(35) |
+tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(29) |
 tbm |  | 2018-01-29(9) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(53) |
@@ -292,7 +292,7 @@ tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-
 tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(106) |
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(331) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
-tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(48) |
+tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(20) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(118) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |

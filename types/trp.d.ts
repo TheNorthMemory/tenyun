@@ -2,6 +2,26 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 通用属性Type 的枚举值text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型具体组合如下- Type: "text" 文本类型, 对应值 Value: "文本字符串"- Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"- Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"- Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]- Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"- Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"] */
+declare interface AttrItem {
+  /** 字段名称 */
+  Name: string;
+  /** 字段值 */
+  Value: string;
+  /** 字段类型text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型,video:视频类型,mp:小程序类型 */
+  Type: string;
+  /** 只读 */
+  ReadOnly: boolean;
+  /** 扫码展示 */
+  Hidden: boolean;
+  /** 多个值 */
+  Values: string[];
+  /** 类型标识 */
+  Key: string;
+  /** 扩展字段 */
+  Ext: string;
+}
+
 /** 上链数据 */
 declare interface ChainData {
   /** 区块hash */
@@ -48,6 +68,12 @@ declare interface CodeBatch {
   TplName?: string | null;
   /** 调度任务 */
   Job?: Job | null;
+  /** 生产日期 */
+  ProductionDate?: string | null;
+  /** 有效期 */
+  ValidDate?: string | null;
+  /** 扩展属性 */
+  Attrs?: AttrItem[];
 }
 
 /** 码类型 */
@@ -238,30 +264,30 @@ declare interface PhaseData {
 
 /** 商品信息 */
 declare interface Product {
-  /** 商品id */
-  ProductId: string;
-  /** 企业id */
-  CorpId: number;
   /** 商户标识码 */
   MerchantId: string;
-  /** 商品编号 */
-  ProductCode: string;
   /** 商品名称 */
   Name: string;
+  /** 商品id */
+  ProductId?: string;
+  /** 企业id */
+  CorpId?: number;
+  /** 商品编号 */
+  ProductCode?: string;
   /** 商品规格 */
-  Specification: string | null;
+  Specification?: string | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 商品图片 */
-  Logo: string[] | null;
+  Logo?: string[] | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 预留字段 */
-  Ext: Ext | null;
+  Ext?: Ext | null;
   /** 商户名称 */
-  MerchantName: string;
+  MerchantName?: string;
 }
 
 /** 企业配额信息 */
@@ -297,7 +323,7 @@ declare interface Quota {
 /** 扫码明细 */
 declare interface ScanLog {
   /** 行ID */
-  LogId: number | null;
+  LogId: number;
   /** 微信openid */
   Openid: string | null;
   /** 微信昵称 */
@@ -328,6 +354,12 @@ declare interface ScanLog {
   First?: number | null;
   /** 批次ID */
   BatchId?: string | null;
+  /** 扫码类型 0:无效扫码 1: 小程序扫码 2: 商家扫码 */
+  Type?: number;
+  /** 商户名称 */
+  MerchantName?: string | null;
+  /** 产品名称 */
+  ProductName?: string | null;
 }
 
 /** 扫码统计 */
@@ -404,8 +436,6 @@ declare interface TraceData {
   PhaseName: string;
   /** 溯源时间 */
   TraceTime: string | null;
-  /** 无 */
-  TraceItems: TraceItem[];
   /** 创建时间 */
   CreateTime: string | null;
   /** 上链状态 0: 未上链 1: 上链中 2: 已上链 -1: 异常 */
@@ -418,6 +448,8 @@ declare interface TraceData {
   PhaseData: PhaseData | null;
   /** 溯源阶段状态 0: 无效, 1: 有效 */
   Status: number;
+  /** 无 */
+  TraceItems?: TraceItem[];
 }
 
 /** 溯源数据项 Type 的枚举值text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型具体组合如下- Type: "text" 文本类型, 对应值 Value: "文本字符串"- Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"- Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"- Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]- Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"- Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"] */
@@ -428,16 +460,16 @@ declare interface TraceItem {
   Value: string;
   /** 字段类型text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型,video:视频类型,mp:小程序类型 */
   Type: string;
-  /** 只读 */
-  ReadOnly: boolean;
-  /** 扫码展示 */
-  Hidden: boolean;
   /** 多个值 */
   Values: string[];
+  /** 只读 */
+  ReadOnly?: boolean;
+  /** 扫码展示 */
+  Hidden?: boolean;
   /** 类型标识 */
-  Key: string;
+  Key?: string;
   /** 扩展字段 */
-  Ext: string;
+  Ext?: string;
   /** 额外属性 */
   Attrs?: TraceItem[];
   /** 子页面，只读 */
@@ -495,11 +527,15 @@ declare interface CreateCodeBatchRequest {
   CloneId?: string;
   /** 批次编号，业务字段不判断唯一性 */
   BatchCode?: string;
+  /** 有效期 */
+  ValidDate?: string;
+  /** 生产日期 */
+  ProductionDate?: string;
 }
 
 declare interface CreateCodeBatchResponse {
   /** 批次ID */
-  BatchId: string;
+  BatchId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1053,19 +1089,25 @@ declare interface DescribeProductsResponse {
 }
 
 declare interface DescribeScanLogsRequest {
-  /** 码 */
-  Code: string;
   /** 企业ID */
   CorpId?: number;
+  /** 分页数量 */
+  PageSize?: number;
+  /** 当前分页 */
+  PageNumber?: number;
+  /** 安心码 */
+  Code?: string;
+  /** 小程序用户ID */
+  Openid?: string;
 }
 
 declare interface DescribeScanLogsResponse {
   /** 【弃用】 */
-  Products: ScanLog[] | null;
+  Products?: ScanLog[];
   /** 条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 扫描记录 */
-  ScanLogs: ScanLog[];
+  ScanLogs?: ScanLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1115,7 +1157,9 @@ declare interface DescribeTraceCodeByIdRequest {
 
 declare interface DescribeTraceCodeByIdResponse {
   /** 无 */
-  TraceCode: TraceCode;
+  TraceCode?: TraceCode;
+  /** 码路径，如level是2，则为 [1级, 2级] */
+  CodePath?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1211,6 +1255,10 @@ declare interface ModifyCodeBatchRequest {
   Remark?: string;
   /** 批次编码，业务字段不判断唯一性 */
   BatchCode?: string;
+  /** 有效期 */
+  ValidDate?: string;
+  /** 生产日期 */
+  ProductionDate?: string;
 }
 
 declare interface ModifyCodeBatchResponse {
@@ -1474,7 +1522,7 @@ declare interface Trp {
   /** 查询商品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
   /** 查询扫码日志明细 {@link DescribeScanLogsRequest} {@link DescribeScanLogsResponse} */
-  DescribeScanLogs(data: DescribeScanLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanLogsResponse>;
+  DescribeScanLogs(data?: DescribeScanLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanLogsResponse>;
   /** 查询扫码统计列表 {@link DescribeScanStatsRequest} {@link DescribeScanStatsResponse} */
   DescribeScanStats(data?: DescribeScanStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStatsResponse>;
   /** 查询临时Token {@link DescribeTmpTokenRequest} {@link DescribeTmpTokenResponse} */

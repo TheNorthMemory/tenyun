@@ -2,44 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** Bcos区块对象 */
-declare interface BcosBlockObj {
-  /** 区块哈希 */
-  BlockHash: string;
-  /** 区块高度 */
-  BlockNumber: number;
-  /** 区块时间戳 */
-  BlockTimestamp: string;
-  /** 打包节点ID */
-  Sealer: string;
-  /** 打包节点索引 */
-  SealerIndex: number;
-  /** 记录保存时间 */
-  CreateTime: string;
-  /** 交易数量 */
-  TransCount: number;
-  /** 记录修改时间 */
-  ModifyTime: string;
-}
-
-/** Bcos交易信息对象 */
-declare interface BcosTransInfo {
-  /** 所属区块高度 */
-  BlockNumber: number;
-  /** 区块时间戳 */
-  BlockTimestamp: string;
-  /** 交易哈希 */
-  TransHash: string;
-  /** 交易发起者 */
-  TransFrom: string;
-  /** 交易接收者 */
-  TransTo: string;
-  /** 落库时间 */
-  CreateTime: string;
-  /** 修改时间 */
-  ModifyTime: string;
-}
-
 /** 区块对象 */
 declare interface Block {
   /** 区块编号 */
@@ -244,28 +206,6 @@ declare interface CreateChaincodeAndInstallForUserResponse {
   RequestId?: string;
 }
 
-declare interface DeployDynamicBcosContractRequest {
-  /** 网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 群组编号，可在群组列表中获取 */
-  GroupId: number;
-  /** 合约编译后的ABI，可在合约详情获取 */
-  AbiInfo: string;
-  /** 合约编译得到的字节码，hex编码，可在合约详情获取 */
-  ByteCodeBin: string;
-  /** 签名用户编号，可在私钥管理页面获取 */
-  SignUserId: string;
-  /** 构造函数入参，Json数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] */
-  ConstructorParams?: string;
-}
-
-declare interface DeployDynamicBcosContractResponse {
-  /** 部署成功返回的合约地址 */
-  ContractAddress: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DownloadUserCertRequest {
   /** 模块名，固定字段：cert_mng */
   Module: string;
@@ -286,86 +226,6 @@ declare interface DownloadUserCertResponse {
   CertName?: string;
   /** 证书内容 */
   CertCtx?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetBcosBlockByNumberRequest {
-  /** 网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 群组编号，可在群组列表中获取 */
-  GroupId: number;
-  /** 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取 */
-  BlockNumber: number;
-}
-
-declare interface GetBcosBlockByNumberResponse {
-  /** 返回区块json字符串 */
-  BlockJson: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetBcosBlockListRequest {
-  /** 网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 群组编号，可在群组列表中获取 */
-  GroupId: number;
-  /** 当前页数，默认为1 */
-  PageNumber?: number;
-  /** 每页记录数，默认为10 */
-  PageSize?: number;
-  /** 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取 */
-  BlockNumber?: number;
-  /** 区块哈希，可以从InvokeBcosTrans接口的返回值中解析获取 */
-  BlockHash?: string;
-}
-
-declare interface GetBcosBlockListResponse {
-  /** 总记录数 */
-  TotalCount: number;
-  /** 返回数据列表 */
-  List: BcosBlockObj[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetBcosTransByHashRequest {
-  /** 网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 群组编号，可在群组列表中获取 */
-  GroupId: number;
-  /** 交易哈希值，可以从InvokeBcosTrans接口的返回值中解析获取 */
-  TransHash: string;
-}
-
-declare interface GetBcosTransByHashResponse {
-  /** 交易信息json字符串 */
-  TransactionJson: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetBcosTransListRequest {
-  /** 网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 群组编号，可在群组列表中获取 */
-  GroupId: number;
-  /** 当前页数，默认是1 */
-  PageNumber?: number;
-  /** 每页记录数，默认为10 */
-  PageSize?: number;
-  /** 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取 */
-  BlockNumber?: number;
-  /** 交易哈希，可以从InvokeBcosTrans接口的返回值中解析获取 */
-  TransHash?: string;
-}
-
-declare interface GetBcosTransListResponse {
-  /** 总记录数 */
-  TotalCount: number;
-  /** 返回数据列表 */
-  List: BcosTransInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -804,30 +664,6 @@ declare interface InitializeChaincodeForUserResponse {
   RequestId?: string;
 }
 
-declare interface InvokeBcosTransRequest {
-  /** 网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 群组编号，可在群组列表中获取 */
-  GroupId: number;
-  /** 合约地址，可在合约详情获取 */
-  ContractAddress: string;
-  /** 合约Abi的json数组格式的字符串，可在合约详情获取 */
-  AbiInfo: string;
-  /** 合约方法名 */
-  FuncName: string;
-  /** 签名用户编号，可在私钥管理页面获取 */
-  SignUserId: string;
-  /** 合约方法入参，json格式字符串 */
-  FuncParam?: string;
-}
-
-declare interface InvokeBcosTransResponse {
-  /** 交易结果json字符串 */
-  TransactionRsp: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface InvokeChainMakerContractRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
@@ -1077,18 +913,8 @@ declare interface Tbaas {
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
   /** 创建并安装合约 {@link CreateChaincodeAndInstallForUserRequest} {@link CreateChaincodeAndInstallForUserResponse} */
   CreateChaincodeAndInstallForUser(data: CreateChaincodeAndInstallForUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChaincodeAndInstallForUserResponse>;
-  /** @deprecated 动态部署并发布Bcos合约 {@link DeployDynamicBcosContractRequest} {@link DeployDynamicBcosContractResponse} */
-  DeployDynamicBcosContract(data: DeployDynamicBcosContractRequest, config?: AxiosRequestConfig): AxiosPromise<DeployDynamicBcosContractResponse>;
   /** 下载用户证书 {@link DownloadUserCertRequest} {@link DownloadUserCertResponse} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
-  /** @deprecated 使用块高查询区块信息 {@link GetBcosBlockByNumberRequest} {@link GetBcosBlockByNumberResponse} */
-  GetBcosBlockByNumber(data: GetBcosBlockByNumberRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockByNumberResponse>;
-  /** @deprecated 分页查询Bcos区块列表 {@link GetBcosBlockListRequest} {@link GetBcosBlockListResponse} */
-  GetBcosBlockList(data: GetBcosBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockListResponse>;
-  /** @deprecated 使用交易哈希查询Bcos交易信息 {@link GetBcosTransByHashRequest} {@link GetBcosTransByHashResponse} */
-  GetBcosTransByHash(data: GetBcosTransByHashRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransByHashResponse>;
-  /** @deprecated 分页查询Bcos交易列表 {@link GetBcosTransListRequest} {@link GetBcosTransListResponse} */
-  GetBcosTransList(data: GetBcosTransListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransListResponse>;
   /** 查询区块列表 {@link GetBlockListRequest} {@link GetBlockListResponse} */
   GetBlockList(data: GetBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockListResponse>;
   /** 获取区块内的交易列表 {@link GetBlockTransactionListForUserRequest} {@link GetBlockTransactionListForUserResponse} */
@@ -1119,8 +945,6 @@ declare interface Tbaas {
   InitializeChaincodeForUser(data: InitializeChaincodeForUserRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeChaincodeForUserResponse>;
   /** 新增交易 {@link InvokeRequest} {@link InvokeResponse} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;
-  /** @deprecated 执行Bcos交易 {@link InvokeBcosTransRequest} {@link InvokeBcosTransResponse} */
-  InvokeBcosTrans(data: InvokeBcosTransRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeBcosTransResponse>;
   /** 调用长安链合约执行交易 {@link InvokeChainMakerContractRequest} {@link InvokeChainMakerContractResponse} */
   InvokeChainMakerContract(data: InvokeChainMakerContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerContractResponse>;
   /** 调用长安链体验网络合约执行交易 {@link InvokeChainMakerDemoContractRequest} {@link InvokeChainMakerDemoContractResponse} */

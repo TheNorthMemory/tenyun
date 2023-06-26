@@ -1499,7 +1499,7 @@ declare interface CreateClusterResponse {
 }
 
 declare interface CreateCmqQueueRequest {
-  /** 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   QueueName: string;
   /** 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。 */
   MaxMsgHeapNum?: number;
@@ -1537,7 +1537,7 @@ declare interface CreateCmqQueueRequest {
 
 declare interface CreateCmqQueueResponse {
   /** 创建成功的queueId */
-  QueueId: string;
+  QueueId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -228,6 +228,8 @@ declare interface DBDetail {
   Accounts: AccountPrivilege[];
   /** 内部状态。ONLINE表示运行中 */
   InternalStatus: string;
+  /** 是否已开启TDE加密，enable-已加密，disable-未加密 */
+  Encryption?: string;
 }
 
 /** 实例详细信息 */
@@ -992,6 +994,16 @@ declare interface StepDetail {
   Status: number;
   /** 步骤名称 */
   Name: string;
+}
+
+/** TDE透明数据加密配置 */
+declare interface TDEConfigAttribute {
+  /** 是否已开通TDE加密，enable-已开通，disable-未开通 */
+  Encryption?: string;
+  /** 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，none-表示没有证书 */
+  CertificateAttribution?: string;
+  /** 开通TDE加密时引用的其他主账号ID */
+  QuoteUin?: string | null;
 }
 
 /** 可用区信息 */
@@ -1928,6 +1940,8 @@ declare interface DescribeDBInstancesAttributeResponse {
   BlockedThreshold?: number;
   /** 慢SQL、阻塞、死锁扩展事件文件保留时长 */
   EventSaveDays?: number;
+  /** TDE透明数据加密配置 */
+  TDEConfig?: TDEConfigAttribute;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2013,13 +2027,15 @@ declare interface DescribeDBsRequest {
   Name?: string;
   /** 排序规则（desc-降序，asc-升序），默认desc */
   OrderByType?: string;
+  /** 是否已开启TDE加密，enable-已加密，disable-未加密 */
+  Encryption?: string;
 }
 
 declare interface DescribeDBsResponse {
   /** 数据库数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例数据库列表 */
-  DBInstances: InstanceDBDetail[];
+  DBInstances?: InstanceDBDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3309,7 +3325,7 @@ declare interface Sqlserver {
   DescribeDBInstanceInter(data: DescribeDBInstanceInterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceInterResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** 实例附属属性 {@link DescribeDBInstancesAttributeRequest} {@link DescribeDBInstancesAttributeResponse} */
+  /** 查询实例附属属性 {@link DescribeDBInstancesAttributeRequest} {@link DescribeDBInstancesAttributeResponse} */
   DescribeDBInstancesAttribute(data: DescribeDBInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesAttributeResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;

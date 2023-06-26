@@ -186,6 +186,10 @@ declare interface CFSConfig {
   Id: string;
   /** 存储的路径 */
   Path: string;
+  /** cfs的挂载类型，可选值为：STORAGE、SOURCE 分别表示存储拓展模式和数据源模式，默认为 STORAGE */
+  MountType?: string | null;
+  /** 协议 1: NFS, 2: TURBO */
+  Protocol?: string | null;
 }
 
 /** 配置CFSTurbo参数 */

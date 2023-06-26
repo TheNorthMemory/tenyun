@@ -4104,6 +4104,20 @@ declare interface ManageClsTopicDomainsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDomainConfigRequest {
+  /** 域名 */
+  Domain: string;
+  /** 配置路径 */
+  Route: string;
+  /** 配置路径值，使用 json 进行序列化，其中固定 update 作为 key */
+  Value: string;
+}
+
+declare interface ModifyDomainConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPurgeFetchTaskStatusRequest {
   /** 执行时间 */
   ExecutionTime: string;
@@ -4559,6 +4573,8 @@ declare interface Cdn {
   ListTopWafData(data: ListTopWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopWafDataResponse>;
   /** 管理日志主题下绑定的域名 {@link ManageClsTopicDomainsRequest} {@link ManageClsTopicDomainsResponse} */
   ManageClsTopicDomains(data: ManageClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ManageClsTopicDomainsResponse>;
+  /** 变更加速域名配置 {@link ModifyDomainConfigRequest} {@link ModifyDomainConfigResponse} */
+  ModifyDomainConfig(data: ModifyDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainConfigResponse>;
   /** 上报定时刷新预热任务执行状态 {@link ModifyPurgeFetchTaskStatusRequest} {@link ModifyPurgeFetchTaskStatusResponse} */
   ModifyPurgeFetchTaskStatus(data: ModifyPurgeFetchTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPurgeFetchTaskStatusResponse>;
   /** 刷新目录 {@link PurgePathCacheRequest} {@link PurgePathCacheResponse} */

@@ -2866,6 +2866,22 @@ declare interface DescribeRollbackTimeValidityResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSupportProxyVersionRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库代理组ID */
+  ProxyGroupId?: string;
+}
+
+declare interface DescribeSupportProxyVersionResponse {
+  /** 支持的数据库代理版本集合 */
+  SupportProxyVersions: string[] | null;
+  /** 当前proxy版本号 */
+  CurrentProxyVersion: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeZonesRequest {
   /** 是否包含虚拟区 */
   IncludeVirtualZones?: boolean;
@@ -4083,6 +4099,8 @@ declare interface Cynosdb {
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
   /** 查询指定时间是否可回滚 {@link DescribeRollbackTimeValidityRequest} {@link DescribeRollbackTimeValidityResponse} */
   DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
+  /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */
+  DescribeSupportProxyVersion(data: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;
   /** 查询可售卖地域可用区信息。 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
