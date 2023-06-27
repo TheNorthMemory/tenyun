@@ -24,6 +24,18 @@ declare interface CCIToken {
   CorrectWord?: string;
 }
 
+/** 分类详细信息 */
+declare interface Category {
+  /** 分类id。 */
+  Id?: number | null;
+  /** 分类英文名。 */
+  Label?: string | null;
+  /** 分类中文名。 */
+  Name?: string | null;
+  /** 分类置信度。 */
+  Score?: number | null;
+}
+
 /** 文本分类结果 */
 declare interface ClassificationResult {
   /** 一级分类名称 */
@@ -214,6 +226,24 @@ declare interface Writing {
   PrefixText?: string;
 }
 
+declare interface AnalyzeSentimentRequest {
+  /** 待分析的文本（仅支持UTF-8格式，不超过200字）。 */
+  Text: string;
+}
+
+declare interface AnalyzeSentimentResponse {
+  /** 正面情感概率。 */
+  Positive?: number;
+  /** 中性情感概率。 */
+  Neutral?: number;
+  /** 负面情感概率。 */
+  Negative?: number;
+  /** 情感分类结果：positive：正面情感negative：负面情感neutral：中性、无情感 */
+  Sentiment?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AutoSummarizationRequest {
   /** 待处理的文本（仅支持UTF-8格式，不超过2000字） */
   Text: string;
@@ -242,6 +272,60 @@ declare interface ChatBotResponse {
   Reply: string;
   /** 对于当前输出回复的自信度 */
   Confidence: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ClassifyContentRequest {
+  /** 待分类的文章的标题（仅支持UTF-8格式，不超过100字符）。 */
+  Title: string;
+  /** 待分类文章的内容, 每个元素对应一个段落。（仅支持UTF-8格式，文章内容长度总和不超过2000字符） */
+  Content: string[];
+}
+
+declare interface ClassifyContentResponse {
+  /** 一级分类。分类详情见附录-三级分类体系表。 */
+  FirstClassification?: Category;
+  /** 二级分类。分类详情见附录-三级分类体系表。 */
+  SecondClassification?: Category;
+  /** 三级分类。分类详情见附录-三级分类体系表。 */
+  ThirdClassification?: Category | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ComposeCoupletRequest {
+  /** 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。 */
+  Text: string;
+  /** 返回的文本结果为繁体还是简体。0：简体；1：繁体。默认为0。 */
+  TargetType?: number;
+}
+
+declare interface ComposeCoupletResponse {
+  /** 横批。 */
+  TopScroll?: string;
+  /** 上联与下联。 */
+  Content?: string[];
+  /** 当对联随机生成时，展示随机生成原因。 */
+  RandomCause?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ComposePoetryRequest {
+  /** 生成诗词的关键词。 */
+  Text: string;
+  /** 生成诗词的类型。0：藏头或藏身；1：藏头；2：藏身。默认为0。 */
+  PoetryType?: number;
+  /** 诗的体裁。0：五言律诗或七言律诗；5：五言律诗；7：七言律诗。默认为0。 */
+  Genre?: number;
+}
+
+declare interface ComposePoetryResponse {
+  /** 诗题，即输入的生成诗词的关键词。 */
+  Title?: string;
+  /** 诗的内容。 */
+  Content?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -727,10 +811,18 @@ declare interface WordSimilarityResponse {
 /** {@link Nlp NLP 服务} */
 declare interface Nlp {
   (): Versions;
+  /** 情感分析V2 {@link AnalyzeSentimentRequest} {@link AnalyzeSentimentResponse} */
+  AnalyzeSentiment(data: AnalyzeSentimentRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeSentimentResponse>;
   /** @deprecated 自动摘要 {@link AutoSummarizationRequest} {@link AutoSummarizationResponse} */
   AutoSummarization(data: AutoSummarizationRequest, config?: AxiosRequestConfig): AxiosPromise<AutoSummarizationResponse>;
   /** @deprecated 闲聊 {@link ChatBotRequest} {@link ChatBotResponse} */
   ChatBot(data: ChatBotRequest, config?: AxiosRequestConfig): AxiosPromise<ChatBotResponse>;
+  /** 文本分类V2 {@link ClassifyContentRequest} {@link ClassifyContentResponse} */
+  ClassifyContent(data: ClassifyContentRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyContentResponse>;
+  /** 对联生成 {@link ComposeCoupletRequest} {@link ComposeCoupletResponse} */
+  ComposeCouplet(data: ComposeCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<ComposeCoupletResponse>;
+  /** 诗词生成 {@link ComposePoetryRequest} {@link ComposePoetryResponse} */
+  ComposePoetry(data: ComposePoetryRequest, config?: AxiosRequestConfig): AxiosPromise<ComposePoetryResponse>;
   /** @deprecated 创建自定义词库 {@link CreateDictRequest} {@link CreateDictResponse} */
   CreateDict(data: CreateDictRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDictResponse>;
   /** @deprecated 新增自定义词库词条 {@link CreateWordItemsRequest} {@link CreateWordItemsResponse} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 235+ 款产品，9553+ 服务数</summary>
+<details><summary>共计 235+ 款产品，9556+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -243,7 +243,7 @@ mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(13) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 mvj | 营销价值判断 | 2019-09-26(1) |
-nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(34) |
+nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(38) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(26) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(85) |
@@ -292,7 +292,7 @@ tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-
 tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(106) |
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(331) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
-tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(20) |
+tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(18) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(118) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
@@ -325,7 +325,7 @@ vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(160) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(306) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(4) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(50) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(51) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(24) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(197) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

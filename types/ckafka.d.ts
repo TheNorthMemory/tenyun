@@ -2635,7 +2635,7 @@ declare interface CreateInstancePostRequest {
   MsgRetentionTime?: number;
   /** 创建实例时可以选择集群Id, 该入参表示集群Id。不指定实例所在集群则不传入该参数 */
   ClusterId?: number;
-  /** 实例版本。目前支持 "0.10.2","1.1.1","2.4.2","2.8.1" */
+  /** 实例版本。目前支持 "0.10.2","1.1.1","2.4.1","2.4.2","2.8.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
   /** 实例类型。"standard"：标准版，"profession"：专业版 */
   SpecificationsType?: string;
@@ -2655,7 +2655,7 @@ declare interface CreateInstancePostRequest {
   ZoneIds?: number[];
   /** 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例 */
   InstanceNum?: number;
-  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1 */
+  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍 */
   PublicNetworkMonthly?: number;
 }
 
@@ -2675,7 +2675,7 @@ declare interface CreateInstancePreRequest {
   Period: string;
   /** 实例规格说明 专业版实例[所有规格]填写1.标准版实例 ([入门型(general)]填写1，[标准型(standard)]填写2，[进阶型(advanced)]填写3，[容量型(capacity)]填写4，[高阶型1(specialized-1)]填写5，[高阶性2(specialized-2)]填写6,[高阶型3(specialized-3)]填写7,[高阶型4(specialized-4)]填写8，[独占型(exclusive)]填写9。 */
   InstanceType: number;
-  /** vpcId，不填默认基础网络 */
+  /** vpcId必填 */
   VpcId?: string;
   /** 子网id，vpc网络需要传该参数，基础网络可以不传 */
   SubnetId?: string;
@@ -2685,7 +2685,7 @@ declare interface CreateInstancePreRequest {
   ClusterId?: number;
   /** 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置) */
   RenewFlag?: number;
-  /** CKafka版本号[0.10.2、1.1.1、2.4.1], 默认是1.1.1 */
+  /** CKafka版本号[0.10.2、1.1.1、2.4.1、2.4.2、2.8.1], 默认是1.1.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
   /** 实例类型: [标准版实例]填写 standard(默认), [专业版实例]填写 profession */
   SpecificationsType?: string;
@@ -2703,8 +2703,10 @@ declare interface CreateInstancePreRequest {
   MultiZoneFlag?: boolean;
   /** 可用区列表，购买多可用区实例时为必填项 */
   ZoneIds?: number[];
-  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1。默认值为 0 */
+  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。默认值为 0。需要保证传入参数为 3 的整数倍 */
   PublicNetworkMonthly?: number;
+  /** 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例 */
+  InstanceNum?: number;
 }
 
 declare interface CreateInstancePreResponse {
@@ -2743,7 +2745,7 @@ declare interface CreatePostPaidInstanceRequest {
   MsgRetentionTime?: number;
   /** 创建实例时可以选择集群Id, 该入参表示集群Id。不指定实例所在集群则不传入该参数 */
   ClusterId?: number;
-  /** 实例版本。目前支持 "0.10.2","1.1.1","2.4.2","2.8.1" */
+  /** 实例版本。目前支持 "0.10.2","1.1.1","2.4.1","2.4.2","2.8.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
   /** 实例类型。"standard"：标准版，"profession"：专业版 */
   SpecificationsType?: string;
@@ -2765,7 +2767,7 @@ declare interface CreatePostPaidInstanceRequest {
   ZoneIds?: number[];
   /** 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例 */
   InstanceNum?: number;
-  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1 */
+  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍 */
   PublicNetworkMonthly?: number;
 }
 

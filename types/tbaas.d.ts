@@ -911,7 +911,7 @@ declare interface Tbaas {
   ApplyChainMakerBatchUserCert(data: ApplyChainMakerBatchUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyChainMakerBatchUserCertResponse>;
   /** 申请用户证书 {@link ApplyUserCertRequest} {@link ApplyUserCertResponse} */
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
-  /** 创建并安装合约 {@link CreateChaincodeAndInstallForUserRequest} {@link CreateChaincodeAndInstallForUserResponse} */
+  /** @deprecated 创建并安装合约 {@link CreateChaincodeAndInstallForUserRequest} {@link CreateChaincodeAndInstallForUserResponse} */
   CreateChaincodeAndInstallForUser(data: CreateChaincodeAndInstallForUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChaincodeAndInstallForUserResponse>;
   /** 下载用户证书 {@link DownloadUserCertRequest} {@link DownloadUserCertResponse} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
@@ -919,15 +919,15 @@ declare interface Tbaas {
   GetBlockList(data: GetBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockListResponse>;
   /** 获取区块内的交易列表 {@link GetBlockTransactionListForUserRequest} {@link GetBlockTransactionListForUserResponse} */
   GetBlockTransactionListForUser(data: GetBlockTransactionListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockTransactionListForUserResponse>;
-  /** 获取合约编译日志 {@link GetChaincodeCompileLogForUserRequest} {@link GetChaincodeCompileLogForUserResponse} */
+  /** @deprecated 获取合约编译日志 {@link GetChaincodeCompileLogForUserRequest} {@link GetChaincodeCompileLogForUserResponse} */
   GetChaincodeCompileLogForUser(data: GetChaincodeCompileLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeCompileLogForUserResponse>;
-  /** 实例化结果查询 {@link GetChaincodeInitializeResultForUserRequest} {@link GetChaincodeInitializeResultForUserResponse} */
+  /** @deprecated 实例化结果查询 {@link GetChaincodeInitializeResultForUserRequest} {@link GetChaincodeInitializeResultForUserResponse} */
   GetChaincodeInitializeResultForUser(data: GetChaincodeInitializeResultForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeInitializeResultForUserResponse>;
-  /** 获取合约容器日志 {@link GetChaincodeLogForUserRequest} {@link GetChaincodeLogForUserResponse} */
+  /** @deprecated 获取合约容器日志 {@link GetChaincodeLogForUserRequest} {@link GetChaincodeLogForUserResponse} */
   GetChaincodeLogForUser(data: GetChaincodeLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeLogForUserResponse>;
-  /** 获取通道列表 {@link GetChannelListForUserRequest} {@link GetChannelListForUserResponse} */
+  /** @deprecated 获取通道列表 {@link GetChannelListForUserRequest} {@link GetChannelListForUserResponse} */
   GetChannelListForUser(data: GetChannelListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChannelListForUserResponse>;
-  /** 获取网络列表 {@link GetClusterListForUserRequest} {@link GetClusterListForUserResponse} */
+  /** @deprecated 获取网络列表 {@link GetClusterListForUserRequest} {@link GetClusterListForUserResponse} */
   GetClusterListForUser(data: GetClusterListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterListForUserResponse>;
   /** 获取区块链网络概要 {@link GetClusterSummaryRequest} {@link GetClusterSummaryResponse} */
   GetClusterSummary(data: GetClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterSummaryResponse>;
@@ -937,11 +937,11 @@ declare interface Tbaas {
   GetLatesdTransactionList(data: GetLatesdTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatesdTransactionListResponse>;
   /** 获取fabric最新交易列表 {@link GetLatestTransactionListRequest} {@link GetLatestTransactionListResponse} */
   GetLatestTransactionList(data: GetLatestTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatestTransactionListResponse>;
-  /** 获取节点日志 {@link GetPeerLogForUserRequest} {@link GetPeerLogForUserResponse} */
+  /** @deprecated 获取节点日志 {@link GetPeerLogForUserRequest} {@link GetPeerLogForUserResponse} */
   GetPeerLogForUser(data: GetPeerLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetPeerLogForUserResponse>;
   /** 获取交易详情 {@link GetTransactionDetailForUserRequest} {@link GetTransactionDetailForUserResponse} */
   GetTransactionDetailForUser(data: GetTransactionDetailForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetTransactionDetailForUserResponse>;
-  /** 实例化合约 {@link InitializeChaincodeForUserRequest} {@link InitializeChaincodeForUserResponse} */
+  /** @deprecated 实例化合约 {@link InitializeChaincodeForUserRequest} {@link InitializeChaincodeForUserResponse} */
   InitializeChaincodeForUser(data: InitializeChaincodeForUserRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeChaincodeForUserResponse>;
   /** 新增交易 {@link InvokeRequest} {@link InvokeResponse} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;

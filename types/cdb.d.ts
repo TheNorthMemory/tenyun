@@ -1076,8 +1076,8 @@ declare interface ProxyInst {
   InstanceId?: string | null;
   /** 实例名称 */
   InstanceName?: string | null;
-  /** 实例类型 */
-  InstanceType?: string | null;
+  /** 实例类型：1 master 主实例; 2 ro 只读实例; 3 dr 灾备实例; 4 sdr 小灾备实例 */
+  InstanceType?: number | null;
   /** 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离 */
   Status?: number | null;
   /** 只读权重,如果权重为系统自动分配，改值不生效，只代表是否启用该实例 */

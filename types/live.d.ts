@@ -2537,13 +2537,13 @@ declare interface DescribeLiveDomainsRequest {
 
 declare interface DescribeLiveDomainsResponse {
   /** 总记录数。 */
-  AllCount: number;
+  AllCount?: number;
   /** 域名详细信息列表。 */
-  DomainList: DomainInfo[];
+  DomainList?: DomainInfo[];
   /** 可继续添加域名数量。 */
-  CreateLimitCount: number | null;
+  CreateLimitCount?: number | null;
   /** 启用的播放域名加速区域统计，数组元素分别为：中国大陆（境内），全球地区，国际/港澳台（境外）域名数量。 */
-  PlayTypeCount: number[] | null;
+  PlayTypeCount?: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

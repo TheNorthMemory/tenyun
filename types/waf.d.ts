@@ -730,6 +730,20 @@ declare interface RuleList {
   Status: number;
 }
 
+/** waf斯巴达-编辑防护域名中的端口结构 */
+declare interface SpartaProtectionPort {
+  /** nginx Id */
+  NginxServerId: number;
+  /** 端口 */
+  Port: string;
+  /** 协议 */
+  Protocol: string;
+  /** 后端端口 */
+  UpstreamPort: string;
+  /** 后端协议 */
+  UpstreamProtocol: string;
+}
+
 /** 自定义规则的匹配条件结构体 */
 declare interface Strategy {
   /** 匹配字段 */
@@ -1618,6 +1632,78 @@ declare interface ModifyDomainWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifySpartaProtectionRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId?: string;
+  /** 证书类型，0表示没有证书，CertType=1表示自有证书,2 为托管证书 */
+  CertType?: number;
+  /** CertType=1时，需要填次参数，表示证书内容 */
+  Cert?: string;
+  /** CertType=1时，需要填次参数，表示证书的私钥 */
+  PrivateKey?: string;
+  /** CertType=2时，需要填次参数，表示证书的ID */
+  SSLId?: string;
+  /** 表示是否开启了CDN代理 */
+  IsCdn?: number;
+  /** HTTPS回源协议 */
+  UpstreamScheme?: string;
+  /** HTTPS回源端口,仅UpstreamScheme为http时需要填当前字段 */
+  HttpsUpstreamPort?: string;
+  /** 表示是否强制跳转到HTTPS，1表示开启，0表示不开启 */
+  HttpsRewrite?: number;
+  /** 回源类型，0表示通过IP回源,1 表示通过域名回源 */
+  UpstreamType?: number;
+  /** UpstreamType=1时，填次字段表示回源域名 */
+  UpstreamDomain?: string;
+  /** UpstreamType=0时，填次字段表示回源ip */
+  SrcList?: string[];
+  /** 是否开启HTTP2，1表示开启，0表示不开启http2。开启HTTP2需要HTTPS支持 */
+  IsHttp2?: number;
+  /** 是否开启WebSocket， 1：开启WebSocket，0：不开启WebSocket */
+  IsWebsocket?: number;
+  /** 负载均衡策略，0表示轮徇，1表示IP hash */
+  LoadBalance?: number;
+  /** 是否灰度 */
+  IsGray?: number;
+  /** WAF版本 */
+  Edition?: string;
+  /** 端口信息 */
+  Ports?: SpartaProtectionPort[];
+  /** 长短连接标志，仅IP回源时有效 */
+  IsKeepAlive?: string;
+  /** 实例id */
+  InstanceID?: string;
+  /** 是否为Anycast ip类型：1 Anycast 0 普通ip */
+  Anycast?: number;
+  /** src的权重 */
+  Weights?: number[];
+  /** 是否开启源站的主动健康检测，1表示开启，0表示不开启 */
+  ActiveCheck?: number;
+  /** TLS版本信息 */
+  TLSVersion?: number;
+  /** 加密套件信息 */
+  Ciphers?: number[];
+  /** 0:不支持选择：默认模版 1:通用型模版 2:安全型模版 3:自定义模版 */
+  CipherTemplate?: number;
+  /** 300s */
+  ProxyReadTimeout?: number;
+  /** 300s */
+  ProxySendTimeout?: number;
+  /** 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost； */
+  SniType?: number;
+  /** SniType=3时，需要填此参数，表示自定义的host； */
+  SniHost?: string;
+  /** IsCdn=3时，需要填此参数，表示自定义header */
+  IpHeaders?: string[];
+}
+
+declare interface ModifySpartaProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWafAutoDenyRulesRequest {
   /** 域名 */
   Domain: string;
@@ -1879,6 +1965,8 @@ declare interface Waf {
   ModifyCustomWhiteRule(data: ModifyCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
   ModifyDomainWhiteRule(data?: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
+  /** 修改域名配置 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */
+  ModifySpartaProtection(data: ModifySpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionResponse>;
   /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
   /** 配置WAF自动封禁模块状态 {@link ModifyWafAutoDenyStatusRequest} {@link ModifyWafAutoDenyStatusResponse} */

@@ -424,6 +424,8 @@ declare interface DimensionCount {
   DimType?: number | null;
   /** 统计值 */
   Count?: number | null;
+  /** 维度类型1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  QualityDim?: number | null;
 }
 
 /** 维度评分 */
@@ -1476,6 +1478,10 @@ declare interface RuleExecResult {
   FieldConfig: RuleFieldConfig | null;
   /** 源字段与目标字段关联条件on表达式 */
   RelConditionExpr: string | null;
+  /** 执行时间 */
+  StartTime?: string | null;
+  /** 1/2/3:低/中/高 */
+  AlarmLevel?: number | null;
 }
 
 /** 规则执行结果详情 */
@@ -1498,6 +1504,8 @@ declare interface RuleExecResultDetail {
   RuleExecResult?: RuleExecResult | null;
   /** 表负责人userId */
   TableOwnerUserId?: number | null;
+  /** 2.HIVE 3.DLC */
+  DatasourceType?: number | null;
 }
 
 /** 规则执行结果分页 */
@@ -1588,6 +1596,8 @@ declare interface RuleGroup {
   MonitorStatus?: boolean | null;
   /** 表负责人UserId */
   TableOwnerUserId?: number | null;
+  /** 实例ID */
+  InstanceId?: string | null;
 }
 
 /** 规则组执行结果 */
@@ -1996,6 +2006,12 @@ declare interface SourceObject {
   SourceObjectDataTypeName?: string | null;
   /** 源字段名称 */
   SourceObjectValue?: string | null;
+  /** 源字段详细类型，int、string */
+  ObjectDataTypeName?: string | null;
+  /** 源字段名称 */
+  ObjectValue?: string | null;
+  /** 对象类型 1.常量 2.离线表级 3.离线字段级 */
+  ObjectType?: number | null;
 }
 
 /** 速度值对象 */
@@ -3931,11 +3947,13 @@ declare interface DescribeDimensionScoreRequest {
   ProjectId: string;
   /** 数据来源id */
   DatasourceId?: string;
+  /** 过滤参数 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeDimensionScoreResponse {
   /** 维度评分 */
-  Data: DimensionScore | null;
+  Data?: DimensionScore | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4607,11 +4625,15 @@ declare interface DescribeQualityScoreRequest {
   ProjectId: string;
   /** 数据来源id */
   DatasourceId?: string;
+  /** 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1 */
+  ScoreType?: string;
+  /** 过滤参数 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeQualityScoreResponse {
   /** 质量评分 */
-  Data: QualityScore | null;
+  Data?: QualityScore | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4625,11 +4647,15 @@ declare interface DescribeQualityScoreTrendRequest {
   ProjectId: string;
   /** 数据来源id */
   DatasourceId?: string;
+  /** 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1 */
+  ScoreType?: string;
+  /** 过滤参数 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeQualityScoreTrendResponse {
   /** 质量评分趋势视图 */
-  Data: QualityScoreTrend | null;
+  Data?: QualityScoreTrend | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5205,11 +5231,13 @@ declare interface DescribeTableQualityDetailsRequest {
   OrderFields?: OrderField[];
   /** 数据来源id */
   DatasourceId?: string;
+  /** 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1 */
+  ScoreType?: string;
 }
 
 declare interface DescribeTableQualityDetailsResponse {
   /** 表质量分详情结果 */
-  Data: TableQualityDetailPage | null;
+  Data?: TableQualityDetailPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5245,11 +5273,13 @@ declare interface DescribeTableScoreTrendRequest {
   StatisticsEndDate: number;
   /** 表id */
   TableId: string;
+  /** 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1 */
+  ScoreType?: string;
 }
 
 declare interface DescribeTableScoreTrendResponse {
   /** 表得分趋势 */
-  Data: QualityScoreTrend | null;
+  Data?: QualityScoreTrend | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -43,57 +43,57 @@ declare interface AnycastOutPackRelation {
 /** 高防IP资产实例信息 */
 declare interface BGPIPInstance {
   /** 资产实例的详细信息 */
-  InstanceDetail: InstanceRelation;
+  InstanceDetail?: InstanceRelation;
   /** 资产实例的规格信息 */
-  SpecificationLimit: BGPIPInstanceSpecification;
+  SpecificationLimit?: BGPIPInstanceSpecification;
   /** 资产实例的使用统计信息 */
-  Usage: BGPIPInstanceUsages;
+  Usage?: BGPIPInstanceUsages;
   /** 资产实例所在的地域 */
-  Region: RegionInfo;
+  Region?: RegionInfo;
   /** 资产实例的防护状态，状态码如下："idle"：正常状态(无攻击)"attacking"：攻击中"blocking"：封堵中"creating"：创建中"deblocking"：解封中"isolate"：回收隔离中 */
-  Status: string;
+  Status?: string;
   /** 到期时间 */
-  ExpiredTime: string;
+  ExpiredTime?: string;
   /** 购买时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 资产实例的名称 */
-  Name: string;
+  Name?: string;
   /** 资产实例所属的套餐包信息，注意：当资产实例不是套餐包的实例时，此字段为null */
-  PackInfo: PackInfo | null;
+  PackInfo?: PackInfo | null;
   /** 资产实例所属的三网套餐包详情，注意：当资产实例不是三网套餐包的实例时，此字段为null */
-  StaticPackRelation: StaticPackRelation | null;
+  StaticPackRelation?: StaticPackRelation | null;
   /** 区分高防IP境外线路 */
-  ZoneId: number | null;
+  ZoneId?: number | null;
   /** 区分集群 */
-  Tgw: number | null;
+  Tgw?: number | null;
   /** 高防弹性公网IP状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)。只对高防弹性公网IP实例有效。 */
-  EipAddressStatus: string | null;
+  EipAddressStatus?: string | null;
   /** 是否高防弹性公网IP实例，是为1，否为0。 */
-  EipFlag: number | null;
+  EipFlag?: number | null;
   /** 资产实例所属的高防弹性公网IP套餐包详情，注意：当资产实例不是高防弹性公网IP套餐包的实例时，此字段为null */
-  EipAddressPackRelation: EipAddressPackRelation | null;
+  EipAddressPackRelation?: EipAddressPackRelation | null;
   /** 高防弹性公网IP关联的实例信息。注意：当资产实例不是高防弹性公网IP实例时，此字段为null */
-  EipAddressInfo: EipAddressRelation | null;
+  EipAddressInfo?: EipAddressRelation | null;
   /** 建议客户接入的域名，客户可使用域名接入。 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 是否开启安全加速，是为1，否为0。 */
-  DamDDoSStatus: number;
+  DamDDoSStatus?: number;
   /** 是否Ipv6版本的IP, 是为1，否为0 */
-  V6Flag: number | null;
+  V6Flag?: number | null;
   /** 是否渠道版高防IP，是为1，否为0 */
-  BGPIPChannelFlag: number | null;
+  BGPIPChannelFlag?: number | null;
   /** 资源关联标签 */
-  TagInfoList: TagInfo[] | null;
+  TagInfoList?: TagInfo[] | null;
   /** 资产实例所属的全力防护套餐包详情，注意：当资产实例不是全力防护套餐包的实例时，此字段为null */
-  AnycastOutPackRelation: AnycastOutPackRelation | null;
+  AnycastOutPackRelation?: AnycastOutPackRelation | null;
   /** 资源实例版本 */
-  InstanceVersion: number | null;
+  InstanceVersion?: number | null;
   /** 重保实例 */
-  ConvoyId: string | null;
+  ConvoyId?: string | null;
   /** 带宽后付费 */
-  ElasticBandwidth: number | null;
+  ElasticBandwidth?: number | null;
   /** 是否为EO代播的ip: 1是，0不是 */
-  EOFlag: number | null;
+  EOFlag?: number | null;
 }
 
 /** 高防IP资产实例的规格信息 */
@@ -166,6 +166,8 @@ declare interface BGPInstance {
   GiftServiceBandWidth?: number;
   /** 修改时间 */
   ModifyTime?: string | null;
+  /** 是否是基础防护加强版 0: 不是 1: 是 */
+  BasicPlusFlag?: number | null;
 }
 
 /** 高防包资产实例的规格信息 */
@@ -2175,6 +2177,8 @@ declare interface DescribeListBGPInstancesRequest {
   ExcludeAdvancedInfo?: boolean;
   /** 资产IP数组 */
   FilterAssetIpList?: string[];
+  /** 是否包含基础防护增强版 0: 不包含 1: 包含 */
+  FilterBasicPlusFlag?: number;
 }
 
 declare interface DescribeListBGPInstancesResponse {
