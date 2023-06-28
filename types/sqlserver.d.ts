@@ -376,6 +376,14 @@ declare interface DBRenameRes {
   OldName: string;
 }
 
+/** 开启、关闭TDE数据库加密 */
+declare interface DBTDEEncrypt {
+  /** 数据库名称 */
+  DBName?: string | null;
+  /** enable-开启加密，disable-关闭加密 */
+  Encryption?: string | null;
+}
+
 /** 该数据结构表示具有发布订阅关系的两个数据库。 */
 declare interface DatabaseTuple {
   /** 发布数据库名称 */
@@ -2696,6 +2704,20 @@ declare interface ModifyBackupStrategyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBEncryptAttributesRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开启、关闭数据库TDE加密 */
+  DBTDEEncrypt: DBTDEEncrypt[];
+}
+
+declare interface ModifyDBEncryptAttributesResponse {
+  /** 任务流ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNameRequest {
   /** 数据库实例ID，形如mssql-njj2mtpl */
   InstanceId: string;
@@ -2858,6 +2880,22 @@ declare interface ModifyIncrementalMigrationRequest {
 declare interface ModifyIncrementalMigrationResponse {
   /** 增量备份导入任务ID */
   IncrementalMigrationId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceEncryptAttributesRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，默认self。 */
+  CertificateAttribution: string;
+  /** 引用的其他主账号ID，当CertificateAttribution 为others时必填。 */
+  QuoteUin?: string;
+}
+
+declare interface ModifyInstanceEncryptAttributesResponse {
+  /** 任务流ID */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3395,6 +3433,8 @@ declare interface Sqlserver {
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
   /** 设置备份策略 {@link ModifyBackupStrategyRequest} {@link ModifyBackupStrategyResponse} */
   ModifyBackupStrategy(data: ModifyBackupStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupStrategyResponse>;
+  /** 开启、关闭数据库的TDE加密功能 {@link ModifyDBEncryptAttributesRequest} {@link ModifyDBEncryptAttributesResponse} */
+  ModifyDBEncryptAttributes(data: ModifyDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBEncryptAttributesResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** 修改实例网络 {@link ModifyDBInstanceNetworkRequest} {@link ModifyDBInstanceNetworkResponse} */
@@ -3417,6 +3457,8 @@ declare interface Sqlserver {
   ModifyDatabaseMdf(data: ModifyDatabaseMdfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseMdfResponse>;
   /** 修改增量备份导入任务 {@link ModifyIncrementalMigrationRequest} {@link ModifyIncrementalMigrationResponse} */
   ModifyIncrementalMigration(data: ModifyIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIncrementalMigrationResponse>;
+  /** 开通实例的TDE加密功能 {@link ModifyInstanceEncryptAttributesRequest} {@link ModifyInstanceEncryptAttributesResponse} */
+  ModifyInstanceEncryptAttributes(data: ModifyInstanceEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEncryptAttributesResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamRequest} {@link ModifyInstanceParamResponse} */
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
   /** 修改可维护时间窗 {@link ModifyMaintenanceSpanRequest} {@link ModifyMaintenanceSpanResponse} */

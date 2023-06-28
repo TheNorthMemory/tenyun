@@ -287,13 +287,15 @@ declare interface DescribeMetricRecordsRequest {
   PageIndex?: number;
   /** 页长 */
   PageSize?: number;
+  /** Or过滤条件 */
+  OrFilters?: Filter[];
 }
 
 declare interface DescribeMetricRecordsResponse {
   /** 指标结果集 */
-  Records: ApmMetricRecord[] | null;
+  Records?: ApmMetricRecord[] | null;
   /** 查询指标结果集条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

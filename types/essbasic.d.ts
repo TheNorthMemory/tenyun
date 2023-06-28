@@ -907,9 +907,9 @@ declare interface ChannelCreateConvertTaskApiResponse {
 declare interface ChannelCreateEmbedWebUrlRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
   Agent: Agent;
-  /** WEB嵌入资源类型，取值范围：CREATE_SEAL创建印章，CREATE_TEMPLATE创建模板，MODIFY_TEMPLATE修改模板，PREVIEW_TEMPLATE预览模板，PREVIEW_FLOW预览流程 */
+  /** WEB嵌入资源类型。CREATE_SEAL: 创建印章CREATE_TEMPLATE：创建模版MODIFY_TEMPLATE：修改模版PREVIEW_TEMPLATE：预览模版PREVIEW_FLOW：预览合同文档PREVIEW_FLOW_DETAIL：预览合同详情PREVIEW_SEAL_LIST：预览印章列表PREVIEW_SEAL_DETAIL：预览印章详情EXTEND_SERVICE：扩展服务 */
   EmbedType: string;
-  /** WEB嵌入的业务资源ID，EmbedType取值MODIFY_TEMPLATE或PREVIEW_TEMPLATE或 PREVIEW_FLOW时BusinessId必填 */
+  /** WEB嵌入的业务资源IDEmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时必填，取值为模版idPREVIEW_FLOW，PREVIEW_FLOW_DETAIL时必填，取值为合同idPREVIEW_SEAL_DETAIL，必填，取值为印章id */
   BusinessId?: string;
   /** 是否隐藏控件，只有预览模板时生效 */
   HiddenComponents?: boolean;

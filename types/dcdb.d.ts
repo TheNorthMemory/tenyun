@@ -1025,6 +1025,8 @@ declare interface CreateDedicatedClusterDCDBInstanceRequest {
   DbVersionId?: string;
   /** 安全组ID */
   SecurityGroupId?: string;
+  /** 安全组ID列表 */
+  SecurityGroupIds?: string[];
   /** DCN源实例ID */
   DcnInstanceId?: string;
   /** DCN源实例地域名 */

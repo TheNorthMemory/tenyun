@@ -1005,6 +1005,8 @@ declare interface DescribeBillResourceSummaryRequest {
   PayMode?: string;
   /** 产品名称代码备注：如需获取当月使用过的BusinessCode，请调用API：获取产品汇总费用分布 */
   BusinessCode?: string;
+  /** 支付者的账号 ID（账号 ID 是用户在腾讯云的唯一账号标识），默认查询本账号账单，如集团管理账号需查询成员账号自付的账单，该字段需入参成员账号UIN */
+  PayerUin?: string;
 }
 
 declare interface DescribeBillResourceSummaryResponse {
@@ -1026,7 +1028,7 @@ declare interface DescribeBillSummaryByPayModeRequest {
 }
 
 declare interface DescribeBillSummaryByPayModeResponse {
-  /** 数据是否准备好，0未准备好，1准备好。Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试 */
+  /** 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可） */
   Ready?: number;
   /** 各付费模式花费分布详情 */
   SummaryOverview?: PayModeSummaryOverviewItem[] | null;
@@ -1046,7 +1048,7 @@ declare interface DescribeBillSummaryByProductRequest {
 }
 
 declare interface DescribeBillSummaryByProductResponse {
-  /** 数据是否准备好，0未准备好，1准备好。Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试 */
+  /** 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可） */
   Ready?: number;
   /** 总花费详情 */
   SummaryTotal?: BusinessSummaryTotal | null;
@@ -1066,7 +1068,7 @@ declare interface DescribeBillSummaryByProjectRequest {
 }
 
 declare interface DescribeBillSummaryByProjectResponse {
-  /** 数据是否准备好，0未准备好，1准备好Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试 */
+  /** 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可） */
   Ready?: number;
   /** 各项目花费分布详情 */
   SummaryOverview?: ProjectSummaryOverviewItem[] | null;
@@ -1084,7 +1086,7 @@ declare interface DescribeBillSummaryByRegionRequest {
 }
 
 declare interface DescribeBillSummaryByRegionResponse {
-  /** 数据是否准备好，0未准备好，1准备好Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试 */
+  /** 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可） */
   Ready?: number;
   /** 各地域花费分布详情 */
   SummaryOverview?: RegionSummaryOverviewItem[] | null;
@@ -1106,7 +1108,7 @@ declare interface DescribeBillSummaryByTagRequest {
 }
 
 declare interface DescribeBillSummaryByTagResponse {
-  /** 数据是否准备好，0未准备好，1准备好Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试 */
+  /** 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可） */
   Ready?: number;
   /** 各标签值花费分布详情 */
   SummaryOverview?: TagSummaryOverviewItem[] | null;

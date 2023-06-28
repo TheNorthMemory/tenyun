@@ -783,135 +783,135 @@ declare interface DDoSTopData {
 /** 加速域名全量配置信息 */
 declare interface DetailDomain {
   /** 域名 ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 腾讯云账号ID */
-  AppId: number;
+  AppId?: number;
   /** 加速域名 */
-  Domain: string;
+  Domain?: string;
   /** 域名对应的 CNAME 地址 */
-  Cname: string | null;
+  Cname?: string | null;
   /** 加速服务状态rejected：域名审核未通过，域名备案过期/被注销导致processing：部署中closing：关闭中online：已启动offline：已关闭 */
-  Status: string;
+  Status?: string;
   /** 项目 ID，可前往腾讯云项目管理页面查看 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 加速域名业务类型web：网页小文件download：下载大文件media：音视频点播hybrid: 动静加速dynamic: 动态加速 */
-  ServiceType: string;
+  ServiceType?: string;
   /** 域名创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 域名更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 源站配置 */
-  Origin: Origin;
+  Origin?: Origin;
   /** IP 黑白名单配置 */
-  IpFilter: IpFilter | null;
+  IpFilter?: IpFilter | null;
   /** IP 访问限频配置 */
-  IpFreqLimit: IpFreqLimit | null;
+  IpFreqLimit?: IpFreqLimit | null;
   /** 状态码缓存配置 */
-  StatusCodeCache: StatusCodeCache | null;
+  StatusCodeCache?: StatusCodeCache | null;
   /** 智能压缩配置 */
-  Compression: Compression | null;
+  Compression?: Compression | null;
   /** 带宽封顶配置 */
-  BandwidthAlert: BandwidthAlert | null;
+  BandwidthAlert?: BandwidthAlert | null;
   /** Range 回源配置 */
-  RangeOriginPull: RangeOriginPull | null;
+  RangeOriginPull?: RangeOriginPull | null;
   /** 301/302 回源自动跟随配置 */
-  FollowRedirect: FollowRedirect | null;
+  FollowRedirect?: FollowRedirect | null;
   /** 自定义错误页面配置 */
-  ErrorPage: ErrorPage | null;
+  ErrorPage?: ErrorPage | null;
   /** 自定义请求头部配置 */
-  RequestHeader: RequestHeader | null;
+  RequestHeader?: RequestHeader | null;
   /** 自定义响应头部配置 */
-  ResponseHeader: ResponseHeader | null;
+  ResponseHeader?: ResponseHeader | null;
   /** 单链接下行限速配置 */
-  DownstreamCapping: DownstreamCapping | null;
+  DownstreamCapping?: DownstreamCapping | null;
   /** 带参/不带参缓存配置 */
-  CacheKey: CacheKey | null;
+  CacheKey?: CacheKey | null;
   /** 源站头部缓存配置 */
-  ResponseHeaderCache: ResponseHeaderCache | null;
+  ResponseHeaderCache?: ResponseHeaderCache | null;
   /** 视频拖拽配置 */
-  VideoSeek: VideoSeek | null;
+  VideoSeek?: VideoSeek | null;
   /** 节点缓存过期规则配置 */
-  Cache: Cache | null;
+  Cache?: Cache | null;
   /** 跨国链路优化配置（功能灰度中，敬请期待） */
-  OriginPullOptimization: OriginPullOptimization | null;
+  OriginPullOptimization?: OriginPullOptimization | null;
   /** Https 加速相关配置 */
-  Https: Https | null;
+  Https?: Https | null;
   /** 时间戳防盗链配置 */
-  Authentication: Authentication | null;
+  Authentication?: Authentication | null;
   /** SEO 优化配置 */
-  Seo: Seo | null;
+  Seo?: Seo | null;
   /** 域名封禁状态normal：正常状态overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务malicious：域名出现恶意行为，强制关闭加速服务ddos：域名被大规模 DDoS 攻击，关闭加速服务idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务capping：触发配置的带宽阈值上限readonly：域名存在特殊配置，被锁定 */
-  Disable: string | null;
+  Disable?: string | null;
   /** 访问协议强制跳转配置 */
-  ForceRedirect: ForceRedirect | null;
+  ForceRedirect?: ForceRedirect | null;
   /** Referer 防盗链配置 */
-  Referer: Referer | null;
+  Referer?: Referer | null;
   /** 浏览器缓存过期规则配置（功能灰度中，敬请期待） */
-  MaxAge: MaxAge | null;
+  MaxAge?: MaxAge | null;
   /** Ipv6 回源配置（功能灰度中，敬请期待） */
-  Ipv6: Ipv6 | null;
+  Ipv6?: Ipv6 | null;
   /** 是否兼容旧版本配置（内部兼容性字段） */
-  Compatibility: Compatibility | null;
+  Compatibility?: Compatibility | null;
   /** 区域特殊配置 */
-  SpecificConfig: SpecificConfig | null;
+  SpecificConfig?: SpecificConfig | null;
   /** 加速区域mainland：中国境内加速overseas：中国境外加速global：全球加速 */
-  Area: string | null;
+  Area?: string | null;
   /** 域名锁定状态normal：未锁定mainland：中国境内锁定overseas：中国境外锁定global：全球锁定 */
-  Readonly: string | null;
+  Readonly?: string | null;
   /** 回源超时配置 */
-  OriginPullTimeout: OriginPullTimeout | null;
+  OriginPullTimeout?: OriginPullTimeout | null;
   /** 回源S3鉴权配置 */
-  AwsPrivateAccess: AwsPrivateAccess | null;
+  AwsPrivateAccess?: AwsPrivateAccess | null;
   /** Scdn配置 */
-  SecurityConfig: SecurityConfig | null;
+  SecurityConfig?: SecurityConfig | null;
   /** ImageOptimization配置 */
-  ImageOptimization: ImageOptimization | null;
+  ImageOptimization?: ImageOptimization | null;
   /** UA黑白名单配置 */
-  UserAgentFilter: UserAgentFilter | null;
+  UserAgentFilter?: UserAgentFilter | null;
   /** 访问控制 */
-  AccessControl: AccessControl | null;
+  AccessControl?: AccessControl | null;
   /** 是否支持高级配置项on：支持off：不支持 */
-  Advance: string | null;
+  Advance?: string | null;
   /** URL重定向配置 */
-  UrlRedirect: UrlRedirect | null;
+  UrlRedirect?: UrlRedirect | null;
   /** 访问端口配置 */
-  AccessPort: number[] | null;
+  AccessPort?: number[] | null;
   /** 标签配置 */
-  Tag: Tag[] | null;
+  Tag?: Tag[] | null;
   /** 时间戳防盗链高级配置，白名单功能 */
-  AdvancedAuthentication: AdvancedAuthentication | null;
+  AdvancedAuthentication?: AdvancedAuthentication | null;
   /** 回源鉴权高级配置，白名单功能 */
-  OriginAuthentication: OriginAuthentication | null;
+  OriginAuthentication?: OriginAuthentication | null;
   /** Ipv6访问配置 */
-  Ipv6Access: Ipv6Access | null;
+  Ipv6Access?: Ipv6Access | null;
   /** 高级配置集合 */
-  AdvanceSet: AdvanceConfig[] | null;
+  AdvanceSet?: AdvanceConfig[] | null;
   /** 离线缓存（功能灰度中，尚未全量，请等待后续全量发布） */
-  OfflineCache: OfflineCache | null;
+  OfflineCache?: OfflineCache | null;
   /** 合并回源（白名单功能） */
-  OriginCombine: OriginCombine | null;
+  OriginCombine?: OriginCombine | null;
   /** POST上传配置项 */
-  PostMaxSize: PostSize | null;
+  PostMaxSize?: PostSize | null;
   /** Quic配置 */
-  Quic: Quic | null;
+  Quic?: Quic | null;
   /** 回源OSS私有鉴权 */
-  OssPrivateAccess: OssPrivateAccess | null;
+  OssPrivateAccess?: OssPrivateAccess | null;
   /** WebSocket配置 */
-  WebSocket: WebSocket | null;
+  WebSocket?: WebSocket | null;
   /** 远程鉴权配置 */
-  RemoteAuthentication: RemoteAuthentication | null;
+  RemoteAuthentication?: RemoteAuthentication | null;
   /** 共享CNAME配置（白名单功能） */
-  ShareCname: ShareCname | null;
+  ShareCname?: ShareCname | null;
   /** 规则引擎 */
-  RuleEngine: RuleEngine | null;
+  RuleEngine?: RuleEngine | null;
   /** 主域名 */
-  ParentHost: string | null;
+  ParentHost?: string | null;
   /** 华为云对象存储回源鉴权 */
-  HwPrivateAccess: HwPrivateAccess | null;
+  HwPrivateAccess?: HwPrivateAccess | null;
   /** 七牛云对象存储回源鉴权 */
-  QnPrivateAccess: QnPrivateAccess | null;
+  QnPrivateAccess?: QnPrivateAccess | null;
   /** HTTPS服务，缺省时默认开启 */
-  HttpsBilling: HttpsBilling | null;
+  HttpsBilling?: HttpsBilling | null;
   /** 其他厂商对象存储回源鉴权 */
   OthersPrivateAccess?: OthersPrivateAccess | null;
 }
@@ -4289,7 +4289,7 @@ declare interface UpdateDomainConfigRequest {
   FollowRedirect?: FollowRedirect;
   /** 错误码重定向配置（功能灰度中，尚未全量） */
   ErrorPage?: ErrorPage;
-  /** 请求头部配置 */
+  /** 回源请求头部配置 */
   RequestHeader?: RequestHeader;
   /** 响应头部配置 */
   ResponseHeader?: ResponseHeader;

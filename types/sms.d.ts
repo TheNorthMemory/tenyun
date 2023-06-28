@@ -487,7 +487,7 @@ declare interface SendSmsRequest {
   SmsSdkAppId: string;
   /** 模板 ID，必须填写已审核通过的模板 ID。模板 ID 可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-template) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-template) 的正文模板管理查看，若向境外手机号发送短信，仅支持使用国际/港澳台短信模板。 */
   TemplateId: string;
-  /** 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-sign) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-sign) 的签名管理查看。发送国内短信该参数必填。</dx-alert> */
+  /** 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-sign) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-sign) 的签名管理查看。发送国内短信该参数必填，且需填写签名内容而非签名ID。</dx-alert> */
   SignName?: string;
   /** 模板参数，若无模板参数，则设置为空。模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致。</dx-alert> */
   TemplateParamSet?: string[];
@@ -533,15 +533,15 @@ declare interface SmsPackagesStatisticsRequest {
   Limit: number;
   /** 偏移量。 */
   Offset: number;
-  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。注：拉取套餐包的创建时间不小于起始时间。 */
+  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。注：接口会返回 BeginTime 到 EndTime 之间创建的套餐包的统计信息。 */
   BeginTime: string;
-  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。注：EndTime 必须大于 BeginTime且小于当前时间，拉取套餐包的创建时间不大于结束时间。 */
+  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。注：EndTime 必须大于 BeginTime 且小于当前时间。 */
   EndTime: string;
 }
 
 declare interface SmsPackagesStatisticsResponse {
   /** 发送数据统计响应包体。 */
-  SmsPackagesStatisticsSet: SmsPackagesStatistics[];
+  SmsPackagesStatisticsSet?: SmsPackagesStatistics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

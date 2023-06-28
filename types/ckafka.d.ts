@@ -3173,7 +3173,7 @@ declare interface DescribeConsumerGroupRequest {
   GroupName?: string;
   /** 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。 */
   TopicName?: string;
-  /** 本次返回个数限制 */
+  /** 本次返回个数限制，最大支持50 */
   Limit?: number;
   /** 偏移位置 */
   Offset?: number;
@@ -3682,21 +3682,21 @@ declare interface GroupResponse {
 }
 
 declare interface InquireCkafkaPriceRequest {
-  /** 国内站标准版填写standards2, 专业版填写profession */
+  /** 国内站标准版填写standards2, 国际站标准版填写standard，专业版填写profession */
   InstanceType: string;
   /** 购买/续费付费类型(购买时不填的话, 默认获取购买包年包月一个月的费用) */
   InstanceChargeParam?: InstanceChargeParam;
   /** 购买/续费时购买的实例数量(不填时, 默认为1个) */
   InstanceNum?: number;
-  /** 实例内网带宽大小, 单位MB/s (购买时必填) */
+  /** 实例内网带宽大小, 单位MB/s (购买时必填，专业版询价时带宽信息必填) */
   Bandwidth?: number;
-  /** 实例的硬盘购买类型以及大小 (购买时必填) */
+  /** 实例的硬盘购买类型以及大小 (购买时必填，专业版询价时磁盘信息必填) */
   InquiryDiskParam?: InquiryDiskParam;
   /** 实例消息保留时间大小, 单位小时 (购买时必填) */
   MessageRetention?: number;
   /** 购买实例topic数, 单位个 (购买时必填) */
   Topic?: number;
-  /** 购买实例分区数, 单位个 (购买时必填) */
+  /** 购买实例分区数, 单位个 (购买时必填，专业版询价时带宽信息必填) */
   Partition?: number;
   /** 购买地域, 可通过查看DescribeCkafkaZone这个接口获取ZoneId */
   ZoneIds?: number[];
@@ -3712,7 +3712,7 @@ declare interface InquireCkafkaPriceRequest {
 
 declare interface InquireCkafkaPriceResponse {
   /** 出参 */
-  Result: InquireCkafkaPriceResp;
+  Result?: InquireCkafkaPriceResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

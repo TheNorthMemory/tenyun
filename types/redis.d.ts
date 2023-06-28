@@ -105,21 +105,21 @@ declare interface DescribeInstanceDTSInstanceInfo {
 /** 复制组信息 */
 declare interface Groups {
   /** 用户 APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。 */
-  AppId: number;
-  /** 地域ID 。- 1：广州 - 4：上海 - 5：中国香港 - 6：多伦多 - 7：上海金融 - 8：北京 - 9：新加坡- 11：深圳金融- 15：美西（硅谷）- 16：成都 - 17：德国 - 18：韩国 - 19：重庆 - 21：印度 - 22：美东（弗吉尼亚）- 23：泰国 - 24：俄罗斯 - 25：日本 */
-  RegionId: number;
+  AppId?: number;
+  /** 地域ID 。- 1：广州 - 4：上海 - 5：中国香港 - 6：多伦多 - 7：上海金融 - 8：北京 - 9：新加坡- 11：深圳金融- 15：美西（硅谷）- 16：成都 - 17：德国 - 18：韩国 - 19：重庆 - 21：印度 - 22：美东（弗吉尼亚）- 23：泰国 - 25：日本 */
+  RegionId?: number;
   /** 复制组 ID。格式如：crs-rpl-deind****。 */
-  GroupId: string;
+  GroupId?: string;
   /** 复制组名称。 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 复制组状态。- 37：绑定复制组中。- 38：复制组重连中。- 51：解绑复制组中。- 52：复制组实例切主中。- 53：角色变更中。 */
-  Status: number;
+  Status?: number;
   /** 复制组数量。 */
-  InstanceCount: number;
+  InstanceCount?: number;
   /** 复制组中的实例信息。 */
-  Instances: Instances[] | null;
+  Instances?: Instances[] | null;
   /** 备注信息。 */
-  Remark: string | null;
+  Remark?: string | null;
 }
 
 /** 热Key详细信息 */
@@ -481,45 +481,45 @@ declare interface InstanceTextParam {
 /** 复制组实例 */
 declare interface Instances {
   /** 用户APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。 */
-  AppId: number;
+  AppId?: number;
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 地域ID。1：广州。4：上海。 5：香港。 6：多伦多。 7：上海金融。 8：北京。 9：新加坡。 11：深圳金融。 15：美西（硅谷）。 */
-  RegionId: number;
+  RegionId?: number;
   /** 区域 ID。 */
-  ZoneId: number;
+  ZoneId?: number;
   /** 副本数量。 */
-  RedisReplicasNum: number;
+  RedisReplicasNum?: number;
   /** 分片数量。 */
-  RedisShardNum: number;
+  RedisShardNum?: number;
   /** 分片内存大小。 */
-  RedisShardSize: number;
-  /** 实例的磁盘大小 */
-  DiskSize: number | null;
+  RedisShardSize?: number;
+  /** 实例的磁盘大小。 */
+  DiskSize?: number | null;
   /** 引擎：社区版Redis、腾讯云CKV。 */
-  Engine: string;
+  Engine?: string;
   /** 实例读写权限。rw：可读写。r：只读。 */
-  Role: string;
+  Role?: string;
   /** 实例 VIP 地址。 */
-  Vip: string;
+  Vip?: string;
   /** 内部参数，用户可忽略。 */
-  Vip6: string | null;
+  Vip6?: string | null;
   /** VPC 网络ID，如：75101。 */
-  VpcID: number;
+  VpcID?: number;
   /** 实例端口。 */
-  VPort: number;
+  VPort?: number;
   /** 实例状态。0：待初始化。1：流程中。2：运行中。-2：已隔离。-3：待删除。 */
-  Status: number;
+  Status?: number;
   /** 仓库ID。 */
-  GrocerySysId: number;
+  GrocerySysId?: number;
   /** 实例类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
-  ProductType: number;
+  ProductType?: number;
   /** 实例加入复制组的时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 复制组中实例更新的时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 安全组出站规则 */
@@ -985,15 +985,17 @@ declare interface ChangeInstanceRoleResponse {
 }
 
 declare interface ChangeMasterInstanceRequest {
-  /** 复制组ID */
+  /** 复制组ID。创建复制组时，系统自动分配的 ID，是复制组的唯一标识。例如：crs-rpl-m3zt****，请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID。 */
   GroupId: string;
-  /** 实例ID */
+  /** 指定待提升为主实例的只读实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
+  /** 标识是否强制提主。- true：强制提主。- false：不强制提主。 */
+  ForceSwitch?: boolean;
 }
 
 declare interface ChangeMasterInstanceResponse {
-  /** 异步流程ID */
-  TaskId: number;
+  /** 异步流程ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1207,7 +1209,7 @@ declare interface CreateParamTemplateResponse {
 declare interface CreateReplicationGroupRequest {
   /** 指定复制组中的主实例ID。 */
   InstanceId: string;
-  /** 复制组名称。 */
+  /** 复制组名称。名称只支持长度为2-64个字符的中文、英文、数字、下划线_、分隔符-。 */
   GroupName?: string;
   /** 备注信息。 */
   Remark?: string;
@@ -1215,7 +1217,7 @@ declare interface CreateReplicationGroupRequest {
 
 declare interface CreateReplicationGroupResponse {
   /** 异步流程ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1899,9 +1901,9 @@ declare interface DescribeReplicationGroupRequest {
   Limit: number;
   /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset: number;
-  /** 复制组ID。 */
+  /** 指定复制组 ID。例如：crs-rpl-m3zt****。请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID。 */
   GroupId?: string;
-  /** 模糊查询的关键字，可以设置为复制组ID或复制组名称进行模糊查询。 */
+  /** 模糊查询的关键字，可以设置为复制组ID或复制组名称进行模糊查询。请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID及名称。 */
   SearchKey?: string;
 }
 
@@ -1961,21 +1963,21 @@ declare interface DescribeSlowLogResponse {
 }
 
 declare interface DescribeTaskInfoRequest {
-  /** 任务ID */
+  /** 任务 ID。 */
   TaskId: number;
 }
 
 declare interface DescribeTaskInfoResponse {
-  /** 任务状态preparing:待执行，running：执行中，succeed：成功，failed：失败，error 执行出错 */
-  Status: string;
-  /** 任务开始时间 */
-  StartTime: string;
-  /** 任务类型 */
-  TaskType: string;
-  /** 实例的ID */
-  InstanceId: string;
-  /** 任务信息，错误时显示错误信息。执行中与成功则为空 */
-  TaskMessage: string;
+  /** 任务状态。- preparing：待执行。- running：执行中。- succeed：成功。- failed：失败。- error：执行出错。 */
+  Status?: string;
+  /** 任务开始时间。 */
+  StartTime?: string;
+  /** 任务类型。常见的类型包含：新建类型、配置变更、关闭实例、清空实例、重置密码、版本升级、备份实例、改变网络类型、实例可用区迁移、手动提主等。 */
+  TaskType?: string;
+  /** 实例的 ID。 */
+  InstanceId?: string;
+  /** 任务执行返回的信息，执行错误时显示错误信息。执行中或执行成功则为空。 */
+  TaskMessage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

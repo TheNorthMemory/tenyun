@@ -3329,6 +3329,8 @@ declare interface ModifyRocketMQClusterRequest {
   ClusterName?: string;
   /** 说明信息，不超过128个字符 */
   Remark?: string;
+  /** 是否开启HTTP公网访问 */
+  PublicAccessEnabled?: boolean;
 }
 
 declare interface ModifyRocketMQClusterResponse {
@@ -3387,6 +3389,8 @@ declare interface ModifyRocketMQNamespaceRequest {
   RetentionTime?: number;
   /** 说明，最大128个字符 */
   Remark?: string;
+  /** 是否开启公网访问 */
+  PublicAccessEnabled?: boolean;
 }
 
 declare interface ModifyRocketMQNamespaceResponse {
