@@ -171,107 +171,107 @@ declare interface ApiIdStatus {
 /** 展示api信息 */
 declare interface ApiInfo {
   /** API 所在的服务唯一 ID。 */
-  ServiceId: string | null;
+  ServiceId?: string | null;
   /** API 所在的服务的名称。 */
-  ServiceName: string | null;
+  ServiceName?: string | null;
   /** API 所在的服务的描述。 */
-  ServiceDesc: string | null;
+  ServiceDesc?: string | null;
   /** API 接口唯一 ID。 */
-  ApiId: string | null;
+  ApiId?: string | null;
   /** API 接口的描述。 */
-  ApiDesc: string | null;
+  ApiDesc?: string | null;
   /** 创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 最后修改时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  ModifiedTime: string | null;
+  ModifiedTime?: string | null;
   /** API 接口的名称。 */
-  ApiName: string | null;
+  ApiName?: string | null;
   /** API 类型。可取值为NORMAL（普通API）、TSF（微服务API）。 */
-  ApiType: string | null;
+  ApiType?: string | null;
   /** API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** API 鉴权类型。可取值为 SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。 */
-  AuthType: string | null;
+  AuthType?: string | null;
   /** OAUTH API的类型。可取值为NORMAL（业务API）、OAUTH（授权API）。 */
-  ApiBusinessType: string | null;
+  ApiBusinessType?: string | null;
   /** OAUTH 业务API 关联的授权API 唯一 ID。 */
-  AuthRelationApiId: string | null;
+  AuthRelationApiId?: string | null;
   /** OAUTH配置。 */
-  OauthConfig: OauthConfig | null;
+  OauthConfig?: OauthConfig | null;
   /** 是否购买后调试（云市场预留参数）。 */
-  IsDebugAfterCharge: boolean | null;
+  IsDebugAfterCharge?: boolean | null;
   /** 请求的前端配置。 */
-  RequestConfig: RequestConfig | null;
+  RequestConfig?: RequestConfig | null;
   /** 返回类型。 */
-  ResponseType: string | null;
+  ResponseType?: string | null;
   /** 自定义响应配置成功响应示例。 */
-  ResponseSuccessExample: string | null;
+  ResponseSuccessExample?: string | null;
   /** 自定义响应配置失败响应示例。 */
-  ResponseFailExample: string | null;
+  ResponseFailExample?: string | null;
   /** 用户自定义错误码配置。 */
-  ResponseErrorCodes: ErrorCodes[] | null;
+  ResponseErrorCodes?: ErrorCodes[] | null;
   /** 前端请求参数。 */
-  RequestParameters: ReqParameter[] | null;
+  RequestParameters?: ReqParameter[] | null;
   /** API 的后端服务超时时间，单位是秒。 */
-  ServiceTimeout: number | null;
+  ServiceTimeout?: number | null;
   /** API 的后端服务类型。可取值为 HTTP、MOCK、TSF、CLB、SCF、WEBSOCKET、TARGET（内测）。 */
-  ServiceType: string | null;
+  ServiceType?: string | null;
   /** API 的后端服务配置。 */
-  ServiceConfig: ServiceConfig | null;
+  ServiceConfig?: ServiceConfig | null;
   /** API的后端服务参数。 */
-  ServiceParameters: DescribeApiResultServiceParametersInfo[] | null;
+  ServiceParameters?: DescribeApiResultServiceParametersInfo[] | null;
   /** 常量参数。 */
-  ConstantParameters: ConstantParameter[] | null;
+  ConstantParameters?: ConstantParameter[] | null;
   /** API 的后端 Mock 返回信息。如果 ServiceType 是 Mock，则此参数必传。 */
-  ServiceMockReturnMessage: string | null;
+  ServiceMockReturnMessage?: string | null;
   /** scf 函数名称。当后端类型是SCF时生效。 */
-  ServiceScfFunctionName: string | null;
+  ServiceScfFunctionName?: string | null;
   /** scf 函数命名空间。当后端类型是SCF时生效。 */
-  ServiceScfFunctionNamespace: string | null;
+  ServiceScfFunctionNamespace?: string | null;
   /** scf函数版本。当后端类型是SCF时生效。 */
-  ServiceScfFunctionQualifier: string | null;
+  ServiceScfFunctionQualifier?: string | null;
   /** 是否开启集成响应。 */
-  ServiceScfIsIntegratedResponse: boolean | null;
+  ServiceScfIsIntegratedResponse?: boolean | null;
   /** scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效 */
-  ServiceWebsocketRegisterFunctionName: string | null;
+  ServiceWebsocketRegisterFunctionName?: string | null;
   /** scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketRegisterFunctionNamespace: string | null;
+  ServiceWebsocketRegisterFunctionNamespace?: string | null;
   /** scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketRegisterFunctionQualifier: string | null;
+  ServiceWebsocketRegisterFunctionQualifier?: string | null;
   /** scf websocket清理函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketCleanupFunctionName: string | null;
+  ServiceWebsocketCleanupFunctionName?: string | null;
   /** scf websocket清理函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketCleanupFunctionNamespace: string | null;
+  ServiceWebsocketCleanupFunctionNamespace?: string | null;
   /** scf websocket清理函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketCleanupFunctionQualifier: string | null;
+  ServiceWebsocketCleanupFunctionQualifier?: string | null;
   /** WEBSOCKET 回推地址。 */
-  InternalDomain: string | null;
+  InternalDomain?: string | null;
   /** scf websocket传输函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketTransportFunctionName: string | null;
+  ServiceWebsocketTransportFunctionName?: string | null;
   /** scf websocket传输函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketTransportFunctionNamespace: string | null;
+  ServiceWebsocketTransportFunctionNamespace?: string | null;
   /** scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。 */
-  ServiceWebsocketTransportFunctionQualifier: string | null;
-  /** API绑定微服务服务列表。 */
-  MicroServices: MicroService[] | null;
+  ServiceWebsocketTransportFunctionQualifier?: string | null;
+  /** API绑定微服务列表。 */
+  MicroServices?: MicroService[] | null;
   /** 微服务信息详情。 */
-  MicroServicesInfo: number[] | null;
+  MicroServicesInfo?: number[] | null;
   /** 微服务的负载均衡配置。 */
-  ServiceTsfLoadBalanceConf: TsfLoadBalanceConfResp | null;
+  ServiceTsfLoadBalanceConf?: TsfLoadBalanceConfResp | null;
   /** 微服务的健康检查配置。 */
-  ServiceTsfHealthCheckConf: HealthCheckConf | null;
+  ServiceTsfHealthCheckConf?: HealthCheckConf | null;
   /** 是否开启跨域。 */
-  EnableCORS: boolean | null;
+  EnableCORS?: boolean | null;
   /** API绑定的tag信息。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** API已发布的环境信息。 */
-  Environments: string[] | null;
+  Environments?: string[] | null;
   /** 是否开启Base64编码，只有后端为scf时才会生效。 */
-  IsBase64Encoded: boolean | null;
+  IsBase64Encoded?: boolean | null;
   /** 是否开启Base64编码的header触发，只有后端为scf时才会生效。 */
-  IsBase64Trigger: boolean | null;
+  IsBase64Trigger?: boolean | null;
   /** Header触发规则，总规则数量不超过10。 */
-  Base64EncodedTriggerRules: Base64EncodedTriggerRule[] | null;
+  Base64EncodedTriggerRules?: Base64EncodedTriggerRule[] | null;
 }
 
 /** 插件相关的API列表信息。 */
@@ -811,33 +811,33 @@ declare interface InstanceChargePrepaid {
 /** 独享实例详情 */
 declare interface InstanceDetail {
   /** 独享实例唯一id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 独享实例名字 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 独享实例描述 */
-  InstanceDescription: string;
+  InstanceDescription?: string;
   /** 独享实例计费类型 */
-  InstanceChargeType: string;
+  InstanceChargeType?: string;
   /** 独享实例状态 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 独享实例预付费类型 */
-  InstanceChargePrepaid: InstanceChargePrepaid | null;
+  InstanceChargePrepaid?: InstanceChargePrepaid | null;
   /** 独享实例类型 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 独享实例网络类型 */
-  NetworkConfig: NetworkConfig | null;
+  NetworkConfig?: NetworkConfig | null;
   /** 独享实例vpc配置 */
-  VpcConfig: VpcConfig;
+  VpcConfig?: VpcConfig;
   /** 独享实例参数配置 */
-  Parameters: ParameterInfo[] | null;
+  Parameters?: ParameterInfo[] | null;
   /** 独享实例隔离时间 */
-  IsolationStartedTime: string;
+  IsolationStartedTime?: string;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 可用区列表 */
-  Zones: string | null;
+  Zones?: string[] | null;
 }
 
 /** 独享实例信息 */
@@ -1743,7 +1743,7 @@ declare interface CreateApiRequest {
   ApiBusinessType?: string;
   /** API 的后端 Mock 返回信息。如果 ServiceType 是 Mock，则此参数必传。 */
   ServiceMockReturnMessage?: string;
-  /** API绑定微服务服务列表。 */
+  /** API绑定微服务列表。 */
   MicroServices?: MicroServiceReq[];
   /** 微服务的负载均衡配置。 */
   ServiceTsfLoadBalanceConf?: TsfLoadBalanceConfResp;
@@ -1843,7 +1843,7 @@ declare interface CreateIPStrategyRequest {
 
 declare interface CreateIPStrategyResponse {
   /** 新建的IP策略详情。 */
-  Result: IPStrategy | null;
+  Result?: IPStrategy | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1875,13 +1875,11 @@ declare interface CreateServiceRequest {
   Protocol: string;
   /** 用户自定义的服务描述。 */
   ServiceDesc?: string;
-  /** 独立集群名称，用于指定创建服务所在的独立集群。 */
-  ExclusiveSetName?: string;
   /** 网络类型列表，用于指定支持的访问类型，INNER为内网访问，OUTER为外网访问。默认为OUTER。 */
   NetTypes?: string[];
   /** IP版本号，支持IPv4和IPv6，默认为IPv4。 */
   IpVersion?: string;
-  /** 集群名称。保留字段，tsf serverlss类型使用。 */
+  /** 集群名称。保留字段，tsf serverless类型使用。 */
   SetServerName?: string;
   /** 用户类型。保留类型，serverless用户使用。 */
   AppIdType?: string;
@@ -1895,21 +1893,21 @@ declare interface CreateServiceRequest {
 
 declare interface CreateServiceResponse {
   /** 服务唯一ID。 */
-  ServiceId: string;
+  ServiceId?: string;
   /** 用户自定义服务名称。 */
-  ServiceName: string;
+  ServiceName?: string;
   /** 用户自定义服务描述。 */
-  ServiceDesc: string;
+  ServiceDesc?: string;
   /** 外网默认域名。 */
-  OuterSubDomain: string;
+  OuterSubDomain?: string;
   /** vpc内网默认域名。 */
-  InnerSubDomain: string;
+  InnerSubDomain?: string;
   /** 服务创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 网络类型列表，INNER为内网访问，OUTER为外网访问。 */
-  NetTypes: string[];
+  NetTypes?: string[];
   /** IP版本号。 */
-  IpVersion: string | null;
+  IpVersion?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1961,7 +1959,7 @@ declare interface CreateUsagePlanRequest {
 
 declare interface CreateUsagePlanResponse {
   /** 使用计划详情。 */
-  Result: UsagePlanInfo | null;
+  Result?: UsagePlanInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2067,7 +2065,7 @@ declare interface DeleteServiceSubDomainMappingRequest {
 
 declare interface DeleteServiceSubDomainMappingResponse {
   /** 删除自定义域名的路径映射操作是否成功。 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2343,7 +2341,7 @@ declare interface DescribeExclusiveInstanceDetailRequest {
 
 declare interface DescribeExclusiveInstanceDetailResponse {
   /** 独享实例详情 */
-  Result: InstanceDetail;
+  Result?: InstanceDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2603,47 +2601,45 @@ declare interface DescribeServiceForApiAppRequest {
 
 declare interface DescribeServiceForApiAppResponse {
   /** 服务唯一ID。 */
-  ServiceId: string;
+  ServiceId?: string;
   /** 服务 环境列表。 */
-  AvailableEnvironments: string[] | null;
+  AvailableEnvironments?: string[] | null;
   /** 服务名称。 */
-  ServiceName: string | null;
+  ServiceName?: string | null;
   /** 服务描述。 */
-  ServiceDesc: string | null;
+  ServiceDesc?: string | null;
   /** 服务支持协议，可选值为http、https、http&https。 */
-  Protocol: string;
+  Protocol?: string;
   /** 服务创建时间。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 服务修改时间。 */
-  ModifiedTime: string | null;
-  /** 独立集群名称。 */
-  ExclusiveSetName: string | null;
+  ModifiedTime?: string | null;
   /** 网络类型列表，INNER为内网访问，OUTER为外网访问。 */
-  NetTypes: string[];
+  NetTypes?: string[];
   /** 内网访问子域名。 */
-  InternalSubDomain: string;
+  InternalSubDomain?: string;
   /** 外网访问子域名。 */
-  OuterSubDomain: string;
+  OuterSubDomain?: string;
   /** 内网访问http服务端口号。 */
-  InnerHttpPort: number;
+  InnerHttpPort?: number;
   /** 内网访问https端口号。 */
-  InnerHttpsPort: number;
+  InnerHttpsPort?: number;
   /** API总数。 */
-  ApiTotalCount: number | null;
+  ApiTotalCount?: number | null;
   /** API列表。 */
-  ApiIdStatusSet: ApiIdStatus[] | null;
+  ApiIdStatusSet?: ApiIdStatus[] | null;
   /** 使用计划总数量。 */
-  UsagePlanTotalCount: number | null;
+  UsagePlanTotalCount?: number | null;
   /** 使用计划数组。 */
-  UsagePlanList: UsagePlan[] | null;
+  UsagePlanList?: UsagePlan[] | null;
   /** IP版本。 */
-  IpVersion: string | null;
+  IpVersion?: string | null;
   /** 此服务的用户类型。 */
-  UserType: string | null;
+  UserType?: string | null;
   /** 预留字段。 */
-  SetId: number | null;
+  SetId?: number | null;
   /** 服务绑定的标签。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2684,8 +2680,6 @@ declare interface DescribeServiceResponse {
   CreatedTime?: string;
   /** 服务修改时间。 */
   ModifiedTime?: string;
-  /** 独立集群名称。 */
-  ExclusiveSetName?: string;
   /** 网络类型列表，INNER为内网访问，OUTER为外网访问。 */
   NetTypes?: string[];
   /** 内网访问子域名。 */
@@ -2825,7 +2819,7 @@ declare interface DescribeUpstreamsResponse {
 declare interface DescribeUsagePlanEnvironmentsRequest {
   /** 待查询的使用计划唯一 ID。 */
   UsagePlanId: string;
-  /** 定类型，取值为 API、SERVICE，默认值为 SERVICE。 */
+  /** 定义类型，取值为 API、SERVICE，默认值为 SERVICE。 */
   BindType: string;
   /** 返回数量，默认为 20，最大值为 100。 */
   Limit?: number;
@@ -2835,7 +2829,7 @@ declare interface DescribeUsagePlanEnvironmentsRequest {
 
 declare interface DescribeUsagePlanEnvironmentsResponse {
   /** 使用计划绑定详情。 */
-  Result: UsagePlanEnvironmentStatus | null;
+  Result?: UsagePlanEnvironmentStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3065,7 +3059,7 @@ declare interface ModifyApiRequest {
   ApiBusinessType?: string;
   /** API 的后端 Mock 返回信息。如果 ServiceType 是 Mock，则此参数必传。 */
   ServiceMockReturnMessage?: string;
-  /** API绑定微服务服务列表。 */
+  /** API绑定微服务列表。 */
   MicroServices?: MicroServiceReq[];
   /** 微服务的负载均衡配置。 */
   ServiceTsfLoadBalanceConf?: TsfLoadBalanceConfResp;
@@ -3255,7 +3249,7 @@ declare interface ModifySubDomainRequest {
 
 declare interface ModifySubDomainResponse {
   /** 修改自定义域名操作是否成功。 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3327,7 +3321,7 @@ declare interface ReleaseServiceRequest {
 
 declare interface ReleaseServiceResponse {
   /** 发布信息。 */
-  Result: ReleaseService;
+  Result?: ReleaseService;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3405,7 +3399,7 @@ declare interface UnBindSubDomainRequest {
 
 declare interface UnBindSubDomainResponse {
   /** 解绑自定义域名操作是否成功。 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -836,6 +836,22 @@ declare interface DeleteTraceDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAgentCorpsRequest {
+  /** 每页数量 */
+  PageSize?: number;
+  /** 页数 */
+  PageNumber?: number;
+  /** 渠道ID */
+  AgentId?: number;
+  /** 企业ID */
+  CorpId?: number;
+}
+
+declare interface DescribeAgentCorpsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCodeBatchByIdRequest {
   /** 企业ID */
   CorpId?: number;
@@ -1493,6 +1509,8 @@ declare interface Trp {
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
   /** 删除溯源信息 {@link DeleteTraceDataRequest} {@link DeleteTraceDataResponse} */
   DeleteTraceData(data: DeleteTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTraceDataResponse>;
+  /** 查询渠道企业列表 {@link DescribeAgentCorpsRequest} {@link DescribeAgentCorpsResponse} */
+  DescribeAgentCorps(data?: DescribeAgentCorpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentCorpsResponse>;
   /** 查询批次信息 {@link DescribeCodeBatchByIdRequest} {@link DescribeCodeBatchByIdResponse} */
   DescribeCodeBatchById(data?: DescribeCodeBatchByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchByIdResponse>;
   /** 查询批次列表 {@link DescribeCodeBatchsRequest} {@link DescribeCodeBatchsResponse} */

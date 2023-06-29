@@ -55,9 +55,11 @@ declare interface ApproverInfo {
   /** 签署人个性化能力值 */
   ApproverOption?: ApproverOption;
   /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式)如果不传默认为1 */
-  ApproverVerifyTypes?: number[] | null;
+  ApproverVerifyTypes?: number[];
   /** 签署人签署合同时的认证方式1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)合同签署认证方式的优先级 verifyChannel>approverSignTypes */
-  ApproverSignTypes?: number[] | null;
+  ApproverSignTypes?: number[];
+  /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。 */
+  ApproverNeedSignReview?: boolean;
 }
 
 /** 签署人个性化能力信息 */
@@ -131,11 +133,13 @@ declare interface CcInfo {
   /** 被抄送人手机号，11位数字 */
   Mobile?: string;
   /** 被抄送人姓名 */
-  Name?: string | null;
+  Name?: string;
   /** 被抄送人类型,0--个人1--员工 */
-  CcType?: number | null;
+  CcType?: number;
   /** 被抄送人权限0--可查看1--可查看也可下载 */
-  CcPermission?: number | null;
+  CcPermission?: number;
+  /** 关注方通知类型：sms--短信，none--不通知 */
+  NotifyType?: string;
 }
 
 /** 模板控件信息 */
@@ -429,9 +433,11 @@ declare interface FlowCreateApprover {
   /** 签署人个性化能力值 */
   ApproverOption?: ApproverOption;
   /** 签署完前端跳转的url，暂未使用 */
-  JumpUrl?: string | null;
+  JumpUrl?: string;
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
-  SignId?: string | null;
+  SignId?: string;
+  /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。 */
+  ApproverNeedSignReview?: boolean;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */

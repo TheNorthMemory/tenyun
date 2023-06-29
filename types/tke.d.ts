@@ -1162,6 +1162,10 @@ declare interface InstanceUpgradeProgressItem {
   Detail: TaskStepInfo[];
 }
 
+/** kms加密参数 */
+declare interface KMSConfiguration {
+}
+
 /** 集群巡检诊断的默认目录类型 */
 declare interface KubeJarvisStateCatalogue {
   /** 目录级别，支持参数：first：一级目录second：二级目录 */
@@ -4175,9 +4179,15 @@ declare interface DescribeEnableVpcCniProgressResponse {
 }
 
 declare interface DescribeEncryptionStatusRequest {
+  /** 集群id */
+  ClusterId: string;
 }
 
 declare interface DescribeEncryptionStatusResponse {
+  /** 加密状态 */
+  Status?: string;
+  /** 加密错误信息 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4805,6 +4815,8 @@ declare interface DisableClusterDeletionProtectionResponse {
 }
 
 declare interface DisableEncryptionProtectionRequest {
+  /** 集群ID */
+  ClusterId: string;
 }
 
 declare interface DisableEncryptionProtectionResponse {
@@ -4873,6 +4885,10 @@ declare interface EnableClusterDeletionProtectionResponse {
 }
 
 declare interface EnableEncryptionProtectionRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** kms加密配置 */
+  KMSConfiguration: KMSConfiguration;
 }
 
 declare interface EnableEncryptionProtectionResponse {
@@ -6010,7 +6026,7 @@ declare interface Tke {
   /** 查询开启vpc-cni异步任务的进度 {@link DescribeEnableVpcCniProgressRequest} {@link DescribeEnableVpcCniProgressResponse} */
   DescribeEnableVpcCniProgress(data: DescribeEnableVpcCniProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnableVpcCniProgressResponse>;
   /** 查询信息加密状态 {@link DescribeEncryptionStatusRequest} {@link DescribeEncryptionStatusResponse} */
-  DescribeEncryptionStatus(data?: DescribeEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionStatusResponse>;
+  DescribeEncryptionStatus(data: DescribeEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionStatusResponse>;
   /** 查询已经存在的节点 {@link DescribeExistedInstancesRequest} {@link DescribeExistedInstancesResponse} */
   DescribeExistedInstances(data?: DescribeExistedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExistedInstancesResponse>;
   /** 获取导入第三方集群YAML定义 {@link DescribeExternalClusterSpecRequest} {@link DescribeExternalClusterSpecResponse} */
@@ -6082,7 +6098,7 @@ declare interface Tke {
   /** 关闭集群删除保护 {@link DisableClusterDeletionProtectionRequest} {@link DisableClusterDeletionProtectionResponse} */
   DisableClusterDeletionProtection(data: DisableClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterDeletionProtectionResponse>;
   /** 关闭加密信息保护 {@link DisableEncryptionProtectionRequest} {@link DisableEncryptionProtectionResponse} */
-  DisableEncryptionProtection(data?: DisableEncryptionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DisableEncryptionProtectionResponse>;
+  DisableEncryptionProtection(data: DisableEncryptionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DisableEncryptionProtectionResponse>;
   /** 关闭事件持久化功能 {@link DisableEventPersistenceRequest} {@link DisableEventPersistenceResponse} */
   DisableEventPersistence(data: DisableEventPersistenceRequest, config?: AxiosRequestConfig): AxiosPromise<DisableEventPersistenceResponse>;
   /** 关闭附加的VPC-CNI网络能力 {@link DisableVpcCniNetworkTypeRequest} {@link DisableVpcCniNetworkTypeResponse} */
@@ -6094,7 +6110,7 @@ declare interface Tke {
   /** 启用集群删除保护 {@link EnableClusterDeletionProtectionRequest} {@link EnableClusterDeletionProtectionResponse} */
   EnableClusterDeletionProtection(data: EnableClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterDeletionProtectionResponse>;
   /** 开启加密数据保护 {@link EnableEncryptionProtectionRequest} {@link EnableEncryptionProtectionResponse} */
-  EnableEncryptionProtection(data?: EnableEncryptionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableEncryptionProtectionResponse>;
+  EnableEncryptionProtection(data: EnableEncryptionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableEncryptionProtectionResponse>;
   /** 开启事件持久化功能 {@link EnableEventPersistenceRequest} {@link EnableEventPersistenceResponse} */
   EnableEventPersistence(data: EnableEventPersistenceRequest, config?: AxiosRequestConfig): AxiosPromise<EnableEventPersistenceResponse>;
   /** 开启vpc-cni容器网络能力 {@link EnableVpcCniNetworkTypeRequest} {@link EnableVpcCniNetworkTypeResponse} */

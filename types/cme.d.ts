@@ -464,6 +464,8 @@ declare interface MediaCastPlaySetting {
   LoopCount?: number;
   /** 结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime?: string;
+  /** 自动启动时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  AutoStartTime?: string;
 }
 
 /** 点播转直播项目信息。 */
@@ -500,12 +502,18 @@ declare interface MediaCastProjectInput {
 declare interface MediaCastSourceInfo {
   /** 输入源 Id，由系统分配。 */
   Id?: string | null;
-  /** 输入源的媒体类型，取值有：CME：多媒体创作引擎的媒体文件；VOD：云点播的媒资文件。 */
+  /** 输入源的媒体类型，取值有：CME：多媒体创作引擎的媒体文件；VOD：云点播的媒资文件。EXTERNAL：非多媒体创建引擎或者云点播的媒资文件。 */
   Type?: string;
   /** 云点播媒体文件 ID。当 Type = VOD 时必填。 */
   FileId?: string;
   /** 多媒体创作引擎的媒体 ID。当 Type = CME 时必填。 */
   MaterialId?: string;
+  /** 文件播放的的起始位置，单位：秒。默认为0，从文件头开始播放。当 Type = CME 或者 VOD 时有效。 */
+  Offset?: number;
+  /** 播放时长，单位：秒。默认播放整个文件。当 Type = CME 或者 VOD 时有效。 */
+  Duration?: number;
+  /** 外部文件的 Url， Type=EXTERNAL 时必填，可以是点播文件或者直播文件，支持的 Scheme 包括HTTP、HTTPS、RTMP。 */
+  Url?: string;
 }
 
 /** 点播转直播输入断流信息。 */
@@ -1327,7 +1335,7 @@ declare interface CreateProjectRequest {
   StreamConnectProjectInput?: StreamConnectProjectInput;
   /** 录制回放项目输入信息，仅当项目类型为 RECORD_REPLAY 时必填。 */
   RecordReplayProjectInput?: RecordReplayProjectInput;
-  /** 点播转直播项目输入信息，仅当项目类型为 MEDIA_CAST 时必填。 */
+  /** 媒体转推项目输入信息，仅当项目类型为 MEDIA_CAST 时必填。 */
   MediaCastProjectInput?: MediaCastProjectInput;
 }
 
@@ -1951,7 +1959,7 @@ declare interface GrantResourceAuthorizationResponse {
 declare interface HandleMediaCastProjectRequest {
   /** 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。 */
   Platform: string;
-  /** 点播转直播项目 Id 。 */
+  /** 媒体转推项目 Id 。 */
   ProjectId: string;
   /** 请参考 [操作类型](#Operation)。 */
   Operation: string;
@@ -1965,17 +1973,17 @@ declare interface HandleMediaCastProjectRequest {
   PlaySetting?: MediaCastPlaySetting;
   /** 新添加的输入源位于输入源列表的位置，从0开始。默认加在输入源列表的后面。具体操作方式详见 [操作类型](#Operation) 及下文示例。当 Operation 为 AddSource 时必填。 */
   Position?: number;
-  /** 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有点播转直播项目。如果指定操作者，则操作者必须为项目所有者。 */
+  /** 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有媒体转推项目。如果指定操作者，则操作者必须为项目所有者。 */
   Operator?: string;
 }
 
 declare interface HandleMediaCastProjectResponse {
   /** 播放信息，Operation 为 DescribePlayInfo 时返回。 */
-  PlayInfo: MediaCastPlayInfo | null;
+  PlayInfo?: MediaCastPlayInfo | null;
   /** 输入源信息， Operation 为 AddSource 时返回添加成功的输入源信息。 */
-  SourceInfoSet: MediaCastSourceInfo[] | null;
+  SourceInfoSet?: MediaCastSourceInfo[] | null;
   /** 输出源信息， Operation 为 AddDestination 时返回添加成功的输出源信息。 */
-  DestinationInfoSet: MediaCastDestinationInfo[] | null;
+  DestinationInfoSet?: MediaCastDestinationInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2367,9 +2375,9 @@ declare interface Cme {
   GenerateVideoSegmentationSchemeByAi(data: GenerateVideoSegmentationSchemeByAiRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateVideoSegmentationSchemeByAiResponse>;
   /** 发起媒资授权 {@link GrantResourceAuthorizationRequest} {@link GrantResourceAuthorizationResponse} */
   GrantResourceAuthorization(data: GrantResourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourceAuthorizationResponse>;
-  /** 操作点播转直播项目 {@link HandleMediaCastProjectRequest} {@link HandleMediaCastProjectResponse} */
+  /** 操作媒体转推项目 {@link HandleMediaCastProjectRequest} {@link HandleMediaCastProjectResponse} */
   HandleMediaCastProject(data: HandleMediaCastProjectRequest, config?: AxiosRequestConfig): AxiosPromise<HandleMediaCastProjectResponse>;
-  /** 操作云转推项目 {@link HandleStreamConnectProjectRequest} {@link HandleStreamConnectProjectResponse} */
+  /** 操作云转推项目 (废弃) {@link HandleStreamConnectProjectRequest} {@link HandleStreamConnectProjectResponse} */
   HandleStreamConnectProject(data: HandleStreamConnectProjectRequest, config?: AxiosRequestConfig): AxiosPromise<HandleStreamConnectProjectResponse>;
   /** 导入媒体 {@link ImportMaterialRequest} {@link ImportMaterialResponse} */
   ImportMaterial(data: ImportMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMaterialResponse>;

@@ -233,23 +233,25 @@ declare interface TaskGroupInstancesExecuteRules {
 /** 任务列表信息 */
 declare interface TaskListItem {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 任务标题 */
-  TaskTitle: string;
+  TaskTitle?: string;
   /** 任务描述 */
-  TaskDescription: string;
+  TaskDescription?: string;
   /** 任务标签 */
-  TaskTag: string | null;
+  TaskTag?: string | null;
   /** 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束) */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 任务创建时间 */
-  TaskCreateTime: string;
+  TaskCreateTime?: string;
   /** 任务更新时间 */
-  TaskUpdateTime: string;
+  TaskUpdateTime?: string;
   /** 0--未开始，1--进行中，2--已完成 */
-  TaskPreCheckStatus: number | null;
+  TaskPreCheckStatus?: number | null;
   /** 环境检查是否通过 */
-  TaskPreCheckSuccess: boolean | null;
+  TaskPreCheckSuccess?: boolean | null;
+  /** 演练是否符合预期 1-符合预期 2-不符合预期 */
+  TaskExpect?: number | null;
 }
 
 /** 监控指标 */
@@ -287,35 +289,37 @@ declare interface TaskReportInfo {
 /** 经验库 */
 declare interface Template {
   /** 经验库ID */
-  TemplateId: number;
+  TemplateId?: number;
   /** 经验库标题 */
-  TemplateTitle: string;
+  TemplateTitle?: string;
   /** 经验库描述 */
-  TemplateDescription: string;
+  TemplateDescription?: string;
   /** 自定义标签 */
-  TemplateTag: string | null;
+  TemplateTag?: string | null;
   /** 使用状态。1 ---- 使用中，2 --- 停用 */
-  TemplateIsUsed: number;
+  TemplateIsUsed?: number;
   /** 经验库创建时间 */
-  TemplateCreateTime: string;
+  TemplateCreateTime?: string;
   /** 经验库更新时间 */
-  TemplateUpdateTime: string;
+  TemplateUpdateTime?: string;
   /** 经验库模式。1:手工执行，2:自动执行 */
-  TemplateMode: number;
+  TemplateMode?: number;
   /** 自动暂停时长。单位分钟 */
-  TemplatePauseDuration: number;
+  TemplatePauseDuration?: number;
   /** 演练创建者Uin */
-  TemplateOwnerUin: string;
+  TemplateOwnerUin?: string;
   /** 地域ID */
-  TemplateRegionId: number;
+  TemplateRegionId?: number;
   /** 动作组 */
-  TemplateGroups: TemplateGroup[];
+  TemplateGroups?: TemplateGroup[];
   /** 监控指标 */
-  TemplateMonitors: TemplateMonitor[];
+  TemplateMonitors?: TemplateMonitor[];
   /** 护栏监控 */
-  TemplatePolicy: TemplatePolicy | null;
+  TemplatePolicy?: TemplatePolicy | null;
   /** 标签列表 */
-  Tags: TagWithDescribe[] | null;
+  Tags?: TagWithDescribe[] | null;
+  /** 经验来源 0-自建 1-专家推荐 */
+  TemplateSource?: number | null;
 }
 
 /** 任务分组 */
@@ -375,21 +379,23 @@ declare interface TemplateGroupAction {
 /** 经验库列表信息 */
 declare interface TemplateListItem {
   /** 经验库ID */
-  TemplateId: number;
+  TemplateId?: number;
   /** 经验库标题 */
-  TemplateTitle: string;
+  TemplateTitle?: string;
   /** 经验库描述 */
-  TemplateDescription: string;
+  TemplateDescription?: string;
   /** 经验库标签 */
-  TemplateTag: string | null;
+  TemplateTag?: string | null;
   /** 经验库状态。1 -- 使用中，2 -- 停用 */
-  TemplateIsUsed: number;
+  TemplateIsUsed?: number;
   /** 经验库创建时间 */
-  TemplateCreateTime: string;
+  TemplateCreateTime?: string;
   /** 经验库更新时间 */
-  TemplateUpdateTime: string;
+  TemplateUpdateTime?: string;
   /** 经验库关联的任务数量 */
-  TemplateUsedNum: number;
+  TemplateUsedNum?: number;
+  /** 经验库来源 0-自建经验 1-专家推荐 */
+  TemplateSource?: number | null;
 }
 
 /** 监控指标 */
@@ -509,13 +515,17 @@ declare interface DescribeTemplateListRequest {
   IsUsed?: number;
   /** 标签对 */
   Tags?: TagWithDescribe[];
+  /** 经验来源 0-自建 1-专家推荐 */
+  TemplateSource?: number;
+  /** 经验ID */
+  TemplateIdList?: number[];
 }
 
 declare interface DescribeTemplateListResponse {
   /** 经验库列表 */
-  TemplateList: TemplateListItem[];
+  TemplateList?: TemplateListItem[];
   /** 列表数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

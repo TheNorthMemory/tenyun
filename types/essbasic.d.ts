@@ -105,33 +105,33 @@ declare interface CommonApproverOption {
 /** 通用签署人信息 */
 declare interface CommonFlowApprover {
   /** 指定当前签署人为第三方应用集成子客，默认false：当前签署人为第三方应用集成子客，true：当前签署人为saas企业用户 */
-  NotChannelOrganization: boolean | null;
+  NotChannelOrganization: boolean;
   /** 签署人类型,目前支持：0-企业签署人，1-个人签署人，3-企业静默签署人 */
-  ApproverType?: number | null;
+  ApproverType?: number;
   /** 企业id */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同必传 */
-  OrganizationOpenId?: string | null;
+  OrganizationOpenId?: string;
   /** 企业名称，第三方应用集成非静默签子客企业签署人必传，saas企业签署人必传 */
-  OrganizationName?: string | null;
+  OrganizationName?: string;
   /** 用户id */
-  UserId?: string | null;
+  UserId?: string;
   /** 用户openId，第三方应用集成非静默签子客企业签署人必传 */
-  OpenId?: string | null;
+  OpenId?: string;
   /** 签署人名称，saas企业签署人，个人签署人必传 */
-  ApproverName?: string | null;
+  ApproverName?: string;
   /** 签署人手机号，saas企业签署人，个人签署人必传 */
-  ApproverMobile?: string | null;
+  ApproverMobile?: string;
   /** 签署人Id，使用模板发起是，对应模板配置中的签署人RecipientId注意：模板发起时该字段必填 */
-  RecipientId?: string | null;
+  RecipientId?: string;
   /** 签署前置条件：阅读时长限制，不传默认10s,最大300s，最小3s */
-  PreReadTime?: number | null;
+  PreReadTime?: number;
   /** 签署前置条件：阅读全文限制 */
-  IsFullText?: boolean | null;
+  IsFullText?: boolean;
   /** 通知类型：SMS（短信） NONE（不做通知）, 不传 默认SMS */
-  NotifyType?: string | null;
+  NotifyType?: string;
   /** 签署人配置 */
-  ApproverOption?: CommonApproverOption | null;
+  ApproverOption?: CommonApproverOption;
 }
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */

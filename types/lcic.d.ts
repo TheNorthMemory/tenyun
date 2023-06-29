@@ -180,6 +180,8 @@ declare interface MemberRecord {
   SubGroupId?: string[] | null;
   /** 用户的上台状态 */
   Stage?: number | null;
+  /** 用户状态。0为未到，1为在线，2为离线，3为被踢，4为永久被踢，5为暂时掉线 */
+  CurrentState?: number | null;
 }
 
 /** 单条消息体内容 */
@@ -221,39 +223,43 @@ declare interface QuestionInfo {
 /** 批量创建房间的房间信息 */
 declare interface RoomInfo {
   /** 房间名称。 */
-  Name: string | null;
+  Name: string;
   /** 预定的房间开始时间，unix时间戳。 */
-  StartTime: number | null;
+  StartTime: number;
   /** 预定的房间结束时间，unix时间戳。 */
-  EndTime: number | null;
+  EndTime: number;
   /** 分辨率。可以有如下取值： 1 标清 2 高清 3 全高清 */
-  Resolution: number | null;
+  Resolution: number;
   /** 最大连麦人数（不包括老师）。取值范围[0, 16] */
-  MaxMicNumber: number | null;
+  MaxMicNumber: number;
   /** 房间子类型，可以有以下取值： videodoc 文档+视频 video 纯视频 */
-  SubType: string | null;
+  SubType: string;
   /** 老师ID。通过[注册用户]接口获取的UserId。 */
-  TeacherId?: string | null;
+  TeacherId?: string;
   /** 进入课堂时是否自动连麦。可以有以下取值： 0 不自动连麦（需要手动申请上麦，默认值） 1 自动连麦 */
-  AutoMic?: number | null;
+  AutoMic?: number;
   /** 释放音视频权限后是否自动取消连麦。可以有以下取值： 0 自动取消连麦（默认值） 1 保持连麦状态 */
-  TurnOffMic?: number | null;
+  TurnOffMic?: number;
   /** 高音质模式。可以有以下取值： 0 不开启高音质（默认值） 1 开启高音质 */
-  AudioQuality?: number | null;
+  AudioQuality?: number;
   /** 上课后是否禁止自动录制。可以有以下取值： 0 不禁止录制（自动开启录制，默认值） 1 禁止录制 注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
-  DisableRecord?: number | null;
+  DisableRecord?: number;
   /** 助教Id列表。通过[注册用户]接口获取的UserId。 */
-  Assistants?: string[] | null;
+  Assistants?: string[];
   /** rtc人数。 */
-  RTCAudienceNumber?: number | null;
+  RTCAudienceNumber?: number;
   /** 观看类型。 */
-  AudienceType?: number | null;
+  AudienceType?: number;
   /** 录制布局。 */
-  RecordLayout?: number | null;
+  RecordLayout?: number;
   /** 房间绑定的群组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 打开学生麦克风/摄像头的授权开关 */
-  EnableDirectControl?: number | null;
+  EnableDirectControl?: number;
+  /** 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教 */
+  InteractionMode?: number;
+  /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
+  VideoOrientation?: number;
 }
 
 /** 房间列表 */
@@ -564,7 +570,7 @@ declare interface CreateRoomRequest {
   Assistants?: string[];
   /** rtc人数。 */
   RTCAudienceNumber?: number;
-  /** 观看类型，互动直播（默认）。 */
+  /** 观看类型。互动观看 （默认） */
   AudienceType?: number;
   /** 录制布局。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;
@@ -572,6 +578,10 @@ declare interface CreateRoomRequest {
   GroupId?: string;
   /** 是否允许老师/助教直接控制学生的摄像头/麦克风。可以有以下取值：0 不允许直接控制（需同意，默认值）1 允许直接控制（无需同意） */
   EnableDirectControl?: number;
+  /** 开启专注模式。0 收看全部角色音视频(默认)1 只看老师和助教 */
+  InteractionMode?: number;
+  /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
+  VideoOrientation?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -947,6 +957,10 @@ declare interface DescribeRoomResponse {
   GroupId?: string | null;
   /** 打开学生麦克风/摄像头的授权开关 */
   EnableDirectControl?: number;
+  /** 开启专注模式。0 收看全部角色音视频(默认)1 只看老师和助教 */
+  InteractionMode?: number;
+  /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
+  VideoOrientation?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1228,16 +1242,20 @@ declare interface ModifyRoomRequest {
   AutoMic?: number;
   /** 高音质模式。可以有以下取值：0 不开启高音质（默认值）1 开启高音质直播开始后不允许修改。 */
   AudioQuality?: number;
-  /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频coteaching 双师直播开始后不允许修改。 */
+  /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频直播开始后不允许修改。 */
   SubType?: string;
   /** 禁止录制。可以有以下取值：0 不禁止录制（默认值）1 禁止录制直播开始后不允许修改。 */
   DisableRecord?: number;
   /** 助教Id列表。直播开始后不允许修改。 */
   Assistants?: string[];
-  /** 房间绑定的群组ID */
+  /** 房间绑定的群组ID。直播开始后不允许修改。 */
   GroupId?: string;
-  /** 打开学生麦克风/摄像头的授权开关 */
+  /** 打开学生麦克风/摄像头的授权开关。直播开始后不允许修改。 */
   EnableDirectControl?: number;
+  /** 开启专注模式。0 收看全部角色音视频(默认)1 只看老师和助教 */
+  InteractionMode?: number;
+  /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
+  VideoOrientation?: number;
 }
 
 declare interface ModifyRoomResponse {

@@ -6595,7 +6595,7 @@ declare interface DescribeAnimatedGraphicsTemplatesResponse {
 }
 
 declare interface DescribeCDNStatDetailsRequest {
-  /** 查询指标，取值有：Traffic：流量，单位为 Byte。Bandwidth：带宽，单位为 Bps。Requests：请求数。QUICRequests：QUIC 请求数。 */
+  /** 查询指标，取值有：Traffic：流量，单位为 Byte。Bandwidth：带宽，单位为 Bps。Requests：请求数。QUICRequests：QUIC 请求数。IpVisit：IP 访问数。 */
   Metric: string;
   /** 起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   StartTime: string;

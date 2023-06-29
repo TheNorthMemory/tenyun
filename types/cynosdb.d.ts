@@ -693,29 +693,29 @@ declare interface DatabaseTables {
 /** 数据库详细信息 */
 declare interface DbInfo {
   /** 数据库名称 */
-  DbName: string;
+  DbName?: string;
   /** 字符集类型 */
-  CharacterSet: string;
+  CharacterSet?: string;
   /** 数据库状态 */
-  Status: string;
-  /** 拍讯规则 */
-  CollateRule: string;
+  Status?: string;
+  /** 排序规则 */
+  CollateRule?: string;
   /** 数据库备注 */
-  Description: string | null;
+  Description?: string | null;
   /** 用户权限 */
-  UserHostPrivileges: UserHostPrivilege[] | null;
+  UserHostPrivileges?: UserHostPrivilege[] | null;
   /** 数据库ID */
-  DbId: number | null;
+  DbId?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 用户appid */
-  AppId: number | null;
+  AppId?: number | null;
   /** 用户Uin */
-  Uin: string | null;
+  Uin?: string | null;
   /** 集群Id */
-  ClusterId: string | null;
+  ClusterId?: string | null;
 }
 
 /** 数据库表 */
@@ -1937,7 +1937,7 @@ declare interface CreateResourcePackageRequest {
   InstanceType: string;
   /** 资源包使用地域china-中国内地通用，overseas-港澳台及海外通用 */
   PackageRegion: string;
-  /** 资源包类型资源包类型：CCU-计算资源包，DISK-存储资源包 */
+  /** 资源包类型：CCU-计算资源包，DISK-存储资源包 */
   PackageType: string;
   /** 资源包版本base-基础版本，common-通用版本，enterprise-企业版本 */
   PackageVersion: string;
