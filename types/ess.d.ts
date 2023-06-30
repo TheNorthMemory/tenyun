@@ -943,6 +943,8 @@ declare interface CreateBatchCancelFlowUrlRequest {
   Operator: UserInfo;
   /** 需要执行撤回的签署流程id数组，最多100个 */
   FlowIds: string[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreateBatchCancelFlowUrlResponse {
@@ -1099,6 +1101,8 @@ declare interface CreateFlowEvidenceReportRequest {
   Operator: UserInfo;
   /** 签署流程编号 */
   FlowId: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreateFlowEvidenceReportResponse {
@@ -1117,6 +1121,8 @@ declare interface CreateFlowRemindsRequest {
   Operator: UserInfo;
   /** 需要执行催办的签署流程id数组，最多100个 */
   FlowIds: string[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreateFlowRemindsResponse {
@@ -1653,6 +1659,8 @@ declare interface DescribeFlowEvidenceReportRequest {
   Operator: UserInfo;
   /** 出证报告编号 */
   ReportId: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface DescribeFlowEvidenceReportResponse {

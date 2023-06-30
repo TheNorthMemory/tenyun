@@ -1892,6 +1892,8 @@ declare interface CreateProxyEndPointResponse {
   FlowId?: number;
   /** 异步任务ID */
   TaskId?: number;
+  /** 数据库代理组ID */
+  ProxyGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1928,6 +1930,8 @@ declare interface CreateProxyResponse {
   FlowId?: number;
   /** 异步任务ID */
   TaskId?: number;
+  /** 数据库代理组ID */
+  ProxyGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

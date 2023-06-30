@@ -675,7 +675,7 @@ declare interface DetectFaceAttributesResponse {
 declare interface DetectFaceRequest {
   /** 最多处理的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为120。 此参数用于控制处理待检测图片中的人脸个数，值越小，处理速度越快。 */
   MaxFaceNum?: number;
-  /** 人脸长和宽的最小尺寸，单位为像素。默认为34。建议不低于34。低于MinFaceSize值的人脸不会被检测。 */
+  /** 人脸长和宽的最小尺寸，单位为像素，低于MinFaceSize值的人脸不会被检测。只支持设置34和20，建议使用34。 */
   MinFaceSize?: number;
   /** 图片 base64 数据，base64 编码后大小不可超过5M。jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。 */
   Image?: string;
@@ -693,13 +693,13 @@ declare interface DetectFaceRequest {
 
 declare interface DetectFaceResponse {
   /** 请求的图片宽度。 */
-  ImageWidth: number;
+  ImageWidth?: number;
   /** 请求的图片高度。 */
-  ImageHeight: number;
+  ImageHeight?: number;
   /** 人脸信息列表。包含人脸坐标信息、属性信息（若需要）、质量分信息（若需要）。 */
-  FaceInfos: FaceInfo[];
+  FaceInfos?: FaceInfo[];
   /** 人脸识别所用的算法模型版本。 */
-  FaceModelVersion: string;
+  FaceModelVersion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

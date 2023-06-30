@@ -1328,30 +1328,30 @@ declare interface WatermarkInfo {
   BackgroundHeight?: number;
 }
 
-/** 央视P2P流信息。 */
+/** P2P流信息。 */
 declare interface XP2PDetailInfo {
   /** CDN流量。 */
-  CdnBytes: number;
+  CdnBytes?: number;
   /** P2P流量。 */
-  P2pBytes: number;
+  P2pBytes?: number;
   /** 卡播人数。 */
-  StuckPeople: number;
+  StuckPeople?: number;
   /** 卡播次数。 */
-  StuckTimes: number;
+  StuckTimes?: number;
   /** 在线人数。 */
-  OnlinePeople: number;
+  OnlinePeople?: number;
   /** 起播请求次数 */
-  Request: number;
+  Request?: number;
   /** 起播成功次数 */
-  RequestSuccess: number;
+  RequestSuccess?: number;
   /** 时间，一分钟粒度，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732 */
-  Time: string;
+  Time?: string;
   /** 类型，分live和vod两种。 */
-  Type: string | null;
+  Type?: string | null;
   /** 流ID。 */
-  StreamName: string | null;
+  StreamName?: string | null;
   /** AppId。 */
-  AppId: string | null;
+  AppId?: string | null;
 }
 
 declare interface AddDelayLiveStreamRequest {

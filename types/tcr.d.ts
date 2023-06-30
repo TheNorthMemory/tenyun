@@ -964,20 +964,6 @@ declare interface CreateImageAccelerationServiceResponse {
   RequestId?: string;
 }
 
-declare interface CreateImageLifecyclePersonalRequest {
-  /** 仓库名称 */
-  RepoName: string;
-  /** keep_last_days:保留最近几天的数据;keep_last_nums:保留最近多少个 */
-  Type: string;
-  /** 策略值 */
-  Val: number;
-}
-
-declare interface CreateImageLifecyclePersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateImmutableTagRulesRequest {
   /** 实例 Id */
   RegistryId: string;
@@ -1318,16 +1304,6 @@ declare interface DeleteImageLifecycleGlobalPersonalRequest {
 }
 
 declare interface DeleteImageLifecycleGlobalPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteImageLifecyclePersonalRequest {
-  /** 仓库名称 */
-  RepoName: string;
-}
-
-declare interface DeleteImageLifecyclePersonalResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2649,8 +2625,6 @@ declare interface Tcr {
   CreateCustomAccount(data: CreateCustomAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomAccountResponse>;
   /** 创建镜像加速服务 {@link CreateImageAccelerationServiceRequest} {@link CreateImageAccelerationServiceResponse} */
   CreateImageAccelerationService(data: CreateImageAccelerationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAccelerationServiceResponse>;
-  /** @deprecated 创建个人版镜像版本清理策略 {@link CreateImageLifecyclePersonalRequest} {@link CreateImageLifecyclePersonalResponse} */
-  CreateImageLifecyclePersonal(data: CreateImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageLifecyclePersonalResponse>;
   /** 创建镜像不可变规则 {@link CreateImmutableTagRulesRequest} {@link CreateImmutableTagRulesResponse} */
   CreateImmutableTagRules(data: CreateImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImmutableTagRulesResponse>;
   /** 创建实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
@@ -2697,8 +2671,6 @@ declare interface Tcr {
   DeleteImageAccelerateService(data: DeleteImageAccelerateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageAccelerateServiceResponse>;
   /** 删除个人版全局镜像版本自动清理策略 {@link DeleteImageLifecycleGlobalPersonalRequest} {@link DeleteImageLifecycleGlobalPersonalResponse} */
   DeleteImageLifecycleGlobalPersonal(data?: DeleteImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecycleGlobalPersonalResponse>;
-  /** @deprecated 删除个人版镜像仓库Tag自动清理策略 {@link DeleteImageLifecyclePersonalRequest} {@link DeleteImageLifecyclePersonalResponse} */
-  DeleteImageLifecyclePersonal(data: DeleteImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecyclePersonalResponse>;
   /** 删除个人版仓库tag {@link DeleteImagePersonalRequest} {@link DeleteImagePersonalResponse} */
   DeleteImagePersonal(data: DeleteImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagePersonalResponse>;
   /** 删除镜像不可变规则 {@link DeleteImmutableTagRulesRequest} {@link DeleteImmutableTagRulesResponse} */

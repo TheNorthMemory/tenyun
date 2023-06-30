@@ -1164,6 +1164,10 @@ declare interface InstanceUpgradeProgressItem {
 
 /** kms加密参数 */
 declare interface KMSConfiguration {
+  /** kms id */
+  KeyId?: string;
+  /** kms 地域 */
+  KmsRegion?: string;
 }
 
 /** 集群巡检诊断的默认目录类型 */

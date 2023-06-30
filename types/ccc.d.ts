@@ -572,6 +572,8 @@ declare interface TelCdrInfo {
   QueuedSkillGroupName?: string | null;
   /** 通话中语音留言录音URL */
   VoicemailRecordURL?: string[] | null;
+  /** 通话中语音留言ASR文本信息地址 */
+  VoicemailAsrURL?: string[] | null;
 }
 
 /** 变量 */
@@ -711,6 +713,10 @@ declare interface CreateExtensionRequest {
   ExtensionId: string;
   /** 分机名称 */
   ExtensionName: string;
+  /** 绑定的技能组列表 */
+  SkillGroupIds?: number[];
+  /** 绑定的坐席邮箱 */
+  Relation?: string;
 }
 
 declare interface CreateExtensionResponse {

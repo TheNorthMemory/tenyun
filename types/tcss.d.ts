@@ -832,6 +832,8 @@ declare interface ComplianceHostDetailInfo {
   DockerVersion: string | null;
   /** 主机上的K8S的版本。 */
   K8SVersion: string | null;
+  /** 主机上Containerd版本 */
+  ContainerdVersion?: string | null;
 }
 
 /** 表示镜像资产专属的详情。 */

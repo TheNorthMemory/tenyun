@@ -17,15 +17,19 @@ declare interface AttachCBSSpec {
 /** 备份表信息 */
 declare interface BackupTableContent {
   /** 数据库 */
-  Database: string;
+  Database: string | null;
   /** 表 */
-  Table: string;
+  Table: string | null;
   /** 表总字节数 */
-  TotalBytes: number;
+  TotalBytes: number | null;
   /** 虚拟cluster */
-  VCluster?: string;
+  VCluster?: string | null;
   /** 表ip */
-  Ips?: string;
+  Ips?: string | null;
+  /** zk路径 */
+  ZooPath?: string | null;
+  /** cvm的ip地址 */
+  Rip?: string | null;
 }
 
 /** 集群计费相关信息 */
@@ -321,15 +325,17 @@ declare interface ResourceSpec {
 /** 策略详情 */
 declare interface ScheduleStrategy {
   /** 备份桶列表 */
-  CosBucketName: string | null;
+  CosBucketName?: string | null;
   /** 备份保留天数 */
-  RetainDays: number;
+  RetainDays?: number;
   /** 备份的天 */
-  WeekDays: string;
+  WeekDays?: string;
   /** 备份小时 */
-  ExecuteHour: number;
+  ExecuteHour?: number;
   /** 策略id */
-  ScheduleId: number;
+  ScheduleId?: number;
+  /** 下次备份时间 */
+  NextBackupTime?: string | null;
 }
 
 /** 列表页搜索的标记列表 */
@@ -421,11 +427,11 @@ declare interface CreateInstanceNewRequest {
 
 declare interface CreateInstanceNewResponse {
   /** 流程ID */
-  FlowId: string | null;
+  FlowId?: string | null;
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -437,15 +443,17 @@ declare interface DescribeBackUpScheduleRequest {
 
 declare interface DescribeBackUpScheduleResponse {
   /** 备份是否开启 */
-  BackUpOpened: boolean;
+  BackUpOpened?: boolean;
   /** 元数据备份策略 */
-  MetaStrategy: ScheduleStrategy | null;
+  MetaStrategy?: ScheduleStrategy | null;
   /** 表数据备份策略 */
-  DataStrategy: ScheduleStrategy | null;
+  DataStrategy?: ScheduleStrategy | null;
   /** 备份表列表 */
-  BackUpContents: BackupTableContent[] | null;
+  BackUpContents?: BackupTableContent[] | null;
   /** 备份的状态 */
-  BackUpStatus: number;
+  BackUpStatus?: number;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -571,6 +579,8 @@ declare interface DescribeInstancesNewRequest {
   Limit?: number;
   /** 搜索标签列表 */
   SearchTags?: SearchTags[];
+  /** 信息详细与否 */
+  IsSimple?: boolean;
 }
 
 declare interface DescribeInstancesNewResponse {
@@ -653,9 +663,9 @@ declare interface ModifyInstanceKeyValConfigsRequest {
 
 declare interface ModifyInstanceKeyValConfigsResponse {
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -693,11 +703,11 @@ declare interface ResizeDiskRequest {
 
 declare interface ResizeDiskResponse {
   /** 流程ID */
-  FlowId: string | null;
+  FlowId?: string | null;
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

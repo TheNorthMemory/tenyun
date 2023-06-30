@@ -308,6 +308,8 @@ declare interface InstanceInfo {
   ResourcePath: string[] | null;
   /** 扫描结果 */
   Server?: string[] | null;
+  /** 地域 */
+  RegionKey?: string | null;
 }
 
 /** 黑白名单IOC列表 */
@@ -1172,6 +1174,8 @@ declare interface DescribeBlockIgnoreListResponse {
   ReturnCode?: number;
   /** 状态信息，success：查询成功，fail：查询失败 */
   ReturnMsg?: string;
+  /** 安全事件来源下拉框 */
+  SourceList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -757,6 +757,10 @@ declare interface CreateFunctionRequest {
   AsyncRunEnable?: string;
   /** 是否开启事件追踪，TRUE 为开启，FALSE为关闭 */
   TraceEnable?: string;
+  /** 是否自动创建cls索引，TRUE 为开启，FALSE为关闭 */
+  AutoDeployClsTopicIndex?: string;
+  /** 是否自动创建cls主题，TRUE 为开启，FALSE为关闭 */
+  AutoCreateClsTopic?: string;
   /** HTTP函数支持的访问协议。当前支持WebSockets协议，值为WS */
   ProtocolType?: string;
   /** HTTP函数配置ProtocolType访问协议，当前协议可配置的参数 */

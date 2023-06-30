@@ -2049,7 +2049,7 @@ declare interface DeleteServiceRequest {
 
 declare interface DeleteServiceResponse {
   /** 删除操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2655,7 +2655,7 @@ declare interface DescribeServiceReleaseVersionRequest {
 
 declare interface DescribeServiceReleaseVersionResponse {
   /** 服务发布版本列表。 */
-  Result: ServiceReleaseVersion | null;
+  Result?: ServiceReleaseVersion | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

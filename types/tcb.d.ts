@@ -80,6 +80,38 @@ declare interface BackendServiceInfo {
   Status: string;
 }
 
+/** 封禁配置 */
+declare interface BanConfig {
+  /** ip白名单，支持ipv4、ipv6，支持CIDR */
+  IpWhiteList?: string[];
+  /** ip黑名单，支持ipv4、ipv6，支持CIDR */
+  IpBlackList?: string[];
+  /** 地域白名单（国家英文名） */
+  CountryWhiteList?: string[];
+  /** 地域黑名单（国家英文名） */
+  CountryBlackList?: string[];
+}
+
+/** 代码包信息 */
+declare interface CbrPackageInfo {
+  /** 代码包名称 */
+  PackageName?: string | null;
+  /** 代码包版本 */
+  PackageVersion?: string | null;
+}
+
+/** 仓库信息 */
+declare interface CbrRepoInfo {
+  /** 仓库名称 */
+  Repo?: string | null;
+  /** 仓库平台 */
+  RepoType?: string | null;
+  /** 仓库语言 */
+  RepoLanguage?: string | null;
+  /** 分支名称 */
+  Branch?: string | null;
+}
+
 /** cloudrun安全特性能力 */
 declare interface CloudBaseCapabilities {
   /** 启用安全能力项列表 */
@@ -514,6 +546,22 @@ declare interface CodeSource {
   ProjectName?: string | null;
 }
 
+/** 安全网关自定义日志配置 */
+declare interface CustomLogConfig {
+  /** 是否需要请求体 */
+  NeedReqBodyLog?: boolean;
+  /** 是否需要请求头 */
+  NeedReqHeaderLog?: boolean;
+  /** 是否需要回包体 */
+  NeedRspBodyLog?: boolean;
+  /** 是否需要回包头部信息 */
+  NeedRspHeaderLog?: boolean;
+  /** cls set信息 */
+  LogSetId?: string;
+  /** cls topicId */
+  LogTopicId?: string;
+}
+
 /** 数据库资源信息 */
 declare interface DatabasesInfo {
   /** 数据库唯一标识 */
@@ -595,51 +643,55 @@ declare interface EnvBillingInfoItem {
 /** 环境信息 */
 declare interface EnvInfo {
   /** 账户下该环境唯一标识 */
-  EnvId: string;
+  EnvId?: string;
   /** 环境来源。包含以下取值：miniapp：微信小程序qcloud ：腾讯云 */
-  Source: string;
+  Source?: string;
   /** 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符 */
-  Alias: string;
+  Alias?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 环境状态。包含以下取值：NORMAL：正常可用UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中 */
-  Status: string;
+  Status?: string;
   /** 数据库列表 */
-  Databases: DatabasesInfo[];
+  Databases?: DatabasesInfo[];
   /** 存储列表 */
-  Storages: StorageInfo[];
+  Storages?: StorageInfo[];
   /** 函数列表 */
-  Functions: FunctionInfo[];
+  Functions?: FunctionInfo[];
   /** tcb产品套餐ID，参考DescribePackages接口的返回值。 */
-  PackageId: string | null;
+  PackageId?: string | null;
   /** 套餐中文名称，参考DescribePackages接口的返回值。 */
-  PackageName: string | null;
+  PackageName?: string | null;
   /** 云日志服务列表 */
-  LogServices: LogServiceInfo[] | null;
+  LogServices?: LogServiceInfo[] | null;
   /** 静态资源信息 */
-  StaticStorages: StaticStorageInfo[] | null;
+  StaticStorages?: StaticStorageInfo[] | null;
   /** 是否到期自动降为免费版 */
-  IsAutoDegrade: boolean | null;
+  IsAutoDegrade?: boolean | null;
   /** 环境渠道 */
-  EnvChannel: string | null;
+  EnvChannel?: string | null;
   /** 支付方式。包含以下取值： prepayment：预付费 postpaid：后付费 */
-  PayMode: string | null;
+  PayMode?: string | null;
   /** 是否为默认环境 */
-  IsDefault: boolean | null;
+  IsDefault?: boolean | null;
   /** 环境所属地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 环境标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 自定义日志服务 */
-  CustomLogServices: ClsInfo[] | null;
+  CustomLogServices?: ClsInfo[] | null;
   /** 环境类型：baas, run, hoting, weda */
-  EnvType: string | null;
+  EnvType?: string | null;
   /** 是否是dau新套餐 */
-  IsDauPackage: boolean | null;
+  IsDauPackage?: boolean | null;
   /** 套餐类型:空\baas\tcbr */
-  PackageType: string | null;
+  PackageType?: string | null;
+  /** 架构类型 */
+  ArchitectureType?: string | null;
+  /** 回收标志，默认为空 */
+  Recycle?: string | null;
 }
 
 /** 扩展文件 */
@@ -678,12 +730,88 @@ declare interface FreequotaInfo {
   FreeQuotaType: string | null;
 }
 
+/** 安全网关版本路由信息限额配置 */
+declare interface FrequencyLimitConfig {
+  /** 限额对象 "ConnectionsLimit" 或 "QPSLimit" */
+  LimitObject?: string;
+  /** 限额配置 */
+  LimitConfig?: string;
+}
+
 /** 函数的信息 */
 declare interface FunctionInfo {
   /** 命名空间 */
   Namespace: string;
   /** 所属地域。当前支持ap-shanghai */
   Region: string;
+}
+
+/** 网关信息 */
+declare interface GatewayItem {
+  /** 用户uin */
+  Uin: string;
+  /** 用户appid */
+  AppId: number | null;
+  /** 环境id */
+  EnvId: string | null;
+  /** Gateway唯一id */
+  GatewayId: string | null;
+  /** Gateway名称 */
+  GatewayName: string | null;
+  /** Gateway类型 */
+  GatewayType: string | null;
+  /** Gateway描述 */
+  GatewayDesc: string | null;
+  /** 套餐版本 */
+  PackageVersion: string | null;
+  /** 套餐唯一id */
+  PackageId: number | null;
+  /** vpc唯一id */
+  VpcId: string | null;
+  /** 子网id */
+  SubnetIds: string[] | null;
+  /** 网关状态 */
+  Status: string | null;
+  /** l5地址 */
+  L5Addr: string | null;
+  /** 地域 */
+  Region: string | null;
+  /** 隔离时间 */
+  IsolateTime: string | null;
+  /** 到期时间 */
+  ExpireTime: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 变更时间 */
+  UpdateTime: string | null;
+  /** 允许未登录访问 */
+  AllowUncertified: number | null;
+  /** 网关版本限额 */
+  VersionNumLimit?: number | null;
+}
+
+/** 网关版本详情 */
+declare interface GatewayVersionItem {
+  /** 版本名 */
+  VersionName: string;
+  /** 版本流量权重 */
+  Weight: number;
+  /** 创建状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+  /** 构建ID */
+  BuildId?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 优先级 */
+  Priority?: number;
+  /** 是否默认版本 */
+  IsDefault?: boolean;
+  /** 网关版本自定义配置 */
+  CustomConfig?: WxGatewayCustomConfig;
 }
 
 /** 扩缩容策略 */
@@ -970,6 +1098,52 @@ declare interface TkeClusterInfo {
   VersionClbSubnetId?: string | null;
 }
 
+/** 安全网关自定义配置 */
+declare interface WxGatewayCustomConfig {
+  /** 是否开启x-real-ip */
+  IsOpenXRealIp?: boolean;
+  /** 封禁配置 */
+  BanConfig?: BanConfig;
+  /** 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address) */
+  SourceIpType?: string;
+  /** 日志信息 */
+  LogConfig?: CustomLogConfig;
+  /** 是否开启http1.0 */
+  IsAcceptHttpOne?: boolean | null;
+}
+
+/** 安全网关路由 */
+declare interface WxGatewayRountItem {
+  /** 安全网关路由名称 */
+  GatewayRouteName: string;
+  /** 安全网关路由协议 */
+  GatewayRouteProtocol: string;
+  /** 安全网关路由地址 */
+  GatewayRouteAddr: string;
+  /** 安全网关路由描述 */
+  GatewayRouteDesc: string;
+  /** 安全网关后端集群id，如果是外网服务，该id与GatewayRountName相同 */
+  GatewayRouteClusterId: string;
+  /** 安全网关创建时间 */
+  GatewayRouteCreateTime: string;
+  /** 安全网关路由限制 */
+  FrequencyLimitConfig: FrequencyLimitConfig[] | null;
+  /** ip代表绑定后端ip。cbr代表云托管服务 */
+  GatewayRouteServerType: string | null;
+  /** 服务名 */
+  GatewayRouteServerName: string | null;
+  /** ip */
+  GatewayRewriteHost: string | null;
+  /** 网关版本 */
+  GatewayVersion: string | null;
+  /** 请求路径 */
+  GatewayRoutePath: string | null;
+  /** 请求模式 */
+  GatewayRouteMethod: string | null;
+  /** 4层端口 */
+  GatewayRoutePort: number | null;
+}
+
 declare interface BindEnvGatewayRequest {
   /** 子环境id */
   SubEnvId: string;
@@ -1193,7 +1367,7 @@ declare interface CreatePostpayPackageRequest {
   WxAppId?: string;
   /** 付费来源miniappqcloud */
   Source?: string;
-  /** 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。 */
+  /** 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，表示不享受免费额度。 */
   FreeQuota?: string;
   /** 环境创建来源，取值：miniappqcloud用法同CreateEnv接口的Source参数和 Channel 参数同时传，或者同时不传；EnvId 为空时必传。 */
   EnvSource?: string;
@@ -1352,6 +1526,30 @@ declare interface DeleteEndUserResponse {
   RequestId?: string;
 }
 
+declare interface DeleteGatewayVersionRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 网关id */
+  GatewayId: string;
+  /** 版本名 */
+  VersionName: string;
+  /** 是否删除服务 */
+  IsDeleteServer?: boolean;
+  /** 是否删除镜像 */
+  IsDeleteImage?: boolean;
+  /** 是否强制删除 */
+  IsForce?: boolean;
+  /** 操作记录 */
+  OperatorRemark?: string;
+}
+
+declare interface DeleteGatewayVersionResponse {
+  /** 删除结果 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteWxGatewayRouteRequest {
   /** 环境id */
   EnvId: string;
@@ -1404,7 +1602,7 @@ declare interface DescribeAuthDomainsRequest {
 }
 
 declare interface DescribeAuthDomainsResponse {
-  /** 安全域名列表列表 */
+  /** 安全域名列表 */
   Domains?: AuthDomain[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1432,6 +1630,94 @@ declare interface DescribeBaasPackageListRequest {
 declare interface DescribeBaasPackageListResponse {
   /** 套餐列表 */
   PackageList: BaasPackageInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBillingInfoRequest {
+  /** 环境ID */
+  EnvId?: string;
+}
+
+declare interface DescribeBillingInfoResponse {
+  /** 环境计费信息列表 */
+  EnvBillingInfoList?: EnvBillingInfoItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCbrServerVersionRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 服务名称 */
+  ServerName: string;
+  /** 版本名称 */
+  VersionName: string;
+}
+
+declare interface DescribeCbrServerVersionResponse {
+  /** 版本名称 */
+  VersionName?: string;
+  /** 备注 */
+  Remark?: string | null;
+  /** Dockefile的路径 */
+  DockerfilePath?: string | null;
+  /** DockerBuild的目录 */
+  BuildDir?: string | null;
+  /** Cpu大小 */
+  Cpu?: number;
+  /** Mem大小 */
+  Mem?: number;
+  /** 副本最小值 */
+  MinNum?: number;
+  /** 副本最大值 */
+  MaxNum?: number;
+  /** 环境变量 */
+  EnvParams?: string | null;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+  /** 版本的IP */
+  VersionIP?: string | null;
+  /** 版本的端口号 */
+  VersionPort?: number | null;
+  /** 版本状态 */
+  Status?: string | null;
+  /** 枚举（package/repository/image) */
+  UploadType?: string | null;
+  /** 服务名字 */
+  ServerName?: string | null;
+  /** 是否对于外网开放 */
+  IsPublic?: boolean | null;
+  /** vpc id */
+  VpcId?: string | null;
+  /** 子网实例id */
+  SubnetIds?: string[] | null;
+  /** 日志采集路径 */
+  CustomLogs?: string | null;
+  /** 监听端口 */
+  ContainerPort?: number | null;
+  /** 延迟多长时间开始健康检查（单位s） */
+  InitialDelaySeconds?: number | null;
+  /** 镜像地址 */
+  ImageUrl?: string | null;
+  /** 是否有Dockerfile：0-default has, 1-has, 2-has not */
+  HasDockerfile?: number | null;
+  /** 基础镜像 */
+  BaseImage?: string | null;
+  /** 容器启动入口命令 */
+  EntryPoint?: string | null;
+  /** 自动扩缩容策略组 */
+  PolicyDetail?: HpaPolicy[] | null;
+  /** Tke集群信息 */
+  TkeClusterInfo?: TkeClusterInfo | null;
+  /** 版本工作负载类型；deployment/deamonset */
+  TkeWorkloadType?: string | null;
+  /** 代码包信息 */
+  PackageInfo?: CbrPackageInfo | null;
+  /** 仓库信息 */
+  RepoInfo?: CbrRepoInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2194,6 +2480,56 @@ declare interface DescribeGatewayCurveDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGatewayVersionsRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 网关id */
+  GatewayId: string;
+  /** 版本名 */
+  VersionName?: string;
+}
+
+declare interface DescribeGatewayVersionsResponse {
+  /** 网关id */
+  GatewayId?: string;
+  /** 版本总数 */
+  TotalCount?: number;
+  /** 版本信息详情 */
+  GatewayVersionItems?: GatewayVersionItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGraphDataRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 指标名: StorageRead: 存储读请求次数 StorageWrite: 存储写请求次数 StorageCdnOriginFlux: CDN回源流量, 单位字节 CDNFlux: CDN回源流量, 单位字节 FunctionInvocation: 云函数调用次数 FunctionGBs: 云函数资源使用量, 单位Mb*Ms FunctionFlux: 云函数流量, 单位千字节(KB) FunctionError: 云函数调用错误次数 FunctionDuration: 云函数运行时间, 单位毫秒 DbRead: 数据库读请求数 DbWrite: 数据库写请求数 DbCostTime10ms: 数据库耗时在10ms~50ms请求数 DbCostTime50ms: 数据库耗时在50ms~100ms请求数 DbCostTime100ms: 数据库耗时在100ms以上请求数 TkeCpuRatio: 容器CPU占用率 TkeMemRatio: 容器内存占用率 TkeCpuUsed: 容器CPU使用量 TkeMemUsed: 容器内存使用量 TkeInvokeNum: 调用量 FunctionConcurrentExecutions: 云函数并发执行个数FunctionIdleProvisioned: 云函数预置并发闲置量 FunctionConcurrencyMemoryMB: 云函数并发执行内存量 FunctionThrottle: 云函数受限次数 FunctionProvisionedConcurrency: 云函数预置并发 */
+  MetricName: string;
+  /** 开始时间，如2018-08-24 10:50:00, 开始时间需要早于结束时间至少五分钟(原因是因为目前统计粒度最小是5分钟). */
+  StartTime: string;
+  /** 结束时间，如2018-08-24 10:50:00, 结束时间需要晚于开始时间至少五分钟(原因是因为目前统计粒度最小是5分钟).. */
+  EndTime: string;
+  /** 资源ID, 目前仅对云函数、容器托管相关的指标有意义。云函数(FunctionInvocation, FunctionGBs, FunctionFlux, FunctionError, FunctionDuration)、容器托管（服务名称）, 如果想查询某个云函数的指标则在ResourceId中传入函数名; 如果只想查询整个namespace的指标, 则留空或不传.如果想查询数据库某个集合相关信息，传入集合名称 */
+  ResourceID?: string;
+}
+
+declare interface DescribeGraphDataResponse {
+  /** 开始时间, 会根据数据的统计周期进行取整. */
+  StartTime?: string;
+  /** 结束时间, 会根据数据的统计周期进行取整. */
+  EndTime?: string;
+  /** 指标名 */
+  MetricName?: string;
+  /** 统计周期(单位秒), 当时间区间为1天内, 统计周期为5分钟; 当时间区间选择为1天以上, 15天以下, 统计周期为1小时; 当时间区间选择为15天以上, 180天以下, 统计周期为1天. */
+  Period?: number;
+  /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到. */
+  Values?: number[];
+  /** 时间数据, 标识监控数据Values中的点是哪个时间段上报的. */
+  Time?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHostingDomainTaskRequest {
   /** 环境ID */
   EnvId: string;
@@ -2368,6 +2704,46 @@ declare interface DescribeWxCloudBaseRunSubNetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWxGatewayRoutesRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 网关名称 */
+  GatewayId: string;
+  /** 网关路由名称 */
+  GatewayRouteName?: string;
+  /** 网关版本名 */
+  GatewayVersion?: string;
+}
+
+declare interface DescribeWxGatewayRoutesResponse {
+  /** 返回的服务个数 */
+  TotalCount: number | null;
+  /** 返回的服务列表 */
+  WxGatewayRouteSet: WxGatewayRountItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWxGatewaysRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 服务名称，精确匹配 */
+  GatewayName?: string;
+  /** 分页参数 */
+  Limit?: number;
+  /** 分页参数 */
+  Offset?: number;
+}
+
+declare interface DescribeWxGatewaysResponse {
+  /** 返回的服务列表 */
+  Gateways: GatewayItem[] | null;
+  /** 网关总数 */
+  TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyEnvRequest {
   /** 环境Id */
   EnvId: string;
@@ -2476,10 +2852,10 @@ declare interface FreezeCloudBaseRunServersRequest {
 }
 
 declare interface FreezeCloudBaseRunServersResponse {
-  /** 批量状态状态成功：succ失败：fail部分：partial（部分成功、部分失败） */
-  Result: string | null;
+  /** 批量状态成功：succ失败：fail部分：partial（部分成功、部分失败） */
+  Result?: string | null;
   /** 冻结失败服务列表 */
-  FailServerList: string[] | null;
+  FailServerList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2569,7 +2945,7 @@ declare interface ModifyEndUserRequest {
   EnvId: string;
   /** C端用户端的唯一ID */
   UUId: string;
-  /** 帐号的状态ENABLEDISABLE */
+  /** 账号的状态ENABLEDISABLE */
   Status?: string;
 }
 
@@ -2586,6 +2962,20 @@ declare interface ModifyEnvRequest {
 }
 
 declare interface ModifyEnvResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGatewayVersionTrafficRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 网关id */
+  GatewayId: string;
+  /** 网关版本流量比例信息 */
+  VersionsWeight: GatewayVersionItem[];
+}
+
+declare interface ModifyGatewayVersionTrafficResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2809,6 +3199,8 @@ declare interface Tcb {
   DeleteCloudBaseRunServerVersion(data: DeleteCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseRunServerVersionResponse>;
   /** 删除终端用户 {@link DeleteEndUserRequest} {@link DeleteEndUserResponse} */
   DeleteEndUser(data: DeleteEndUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndUserResponse>;
+  /** 删除网关某版本 {@link DeleteGatewayVersionRequest} {@link DeleteGatewayVersionResponse} */
+  DeleteGatewayVersion(data: DeleteGatewayVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayVersionResponse>;
   /** 删除安全网关路由 {@link DeleteWxGatewayRouteRequest} {@link DeleteWxGatewayRouteResponse} */
   DeleteWxGatewayRoute(data: DeleteWxGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWxGatewayRouteResponse>;
   /** 查询活动信息 {@link DescribeActivityInfoRequest} {@link DescribeActivityInfoResponse} */
@@ -2819,6 +3211,10 @@ declare interface Tcb {
   DescribeAuthDomains(data: DescribeAuthDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthDomainsResponse>;
   /** 获取新套餐 {@link DescribeBaasPackageListRequest} {@link DescribeBaasPackageListResponse} */
   DescribeBaasPackageList(data?: DescribeBaasPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaasPackageListResponse>;
+  /** 获取计费相关信息 {@link DescribeBillingInfoRequest} {@link DescribeBillingInfoResponse} */
+  DescribeBillingInfo(data?: DescribeBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingInfoResponse>;
+  /** 查询服务版本的详情 {@link DescribeCbrServerVersionRequest} {@link DescribeCbrServerVersionResponse} */
+  DescribeCbrServerVersion(data: DescribeCbrServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCbrServerVersionResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
   /** 获取云开发项目列表 {@link DescribeCloudBaseProjectLatestVersionListRequest} {@link DescribeCloudBaseProjectLatestVersionListResponse} */
@@ -2843,7 +3239,7 @@ declare interface Tcb {
   DescribeCloudBaseRunServer(data: DescribeCloudBaseRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerResponse>;
   /** 查询微信云托管服务域名 {@link DescribeCloudBaseRunServerDomainNameRequest} {@link DescribeCloudBaseRunServerDomainNameResponse} */
   DescribeCloudBaseRunServerDomainName(data: DescribeCloudBaseRunServerDomainNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerDomainNameResponse>;
-  /** 查询服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
+  /** 查询云托管服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
   DescribeCloudBaseRunServerVersion(data: DescribeCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerVersionResponse>;
   /** 查询服务版本详情 {@link DescribeCloudBaseRunVersionRequest} {@link DescribeCloudBaseRunVersionResponse} */
   DescribeCloudBaseRunVersion(data: DescribeCloudBaseRunVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionResponse>;
@@ -2851,7 +3247,7 @@ declare interface Tcb {
   DescribeCloudBaseRunVersionRsByCondition(data?: DescribeCloudBaseRunVersionRsByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionRsByConditionResponse>;
   /** 查询版本历史 {@link DescribeCloudBaseRunVersionSnapshotRequest} {@link DescribeCloudBaseRunVersionSnapshotResponse} */
   DescribeCloudBaseRunVersionSnapshot(data: DescribeCloudBaseRunVersionSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionSnapshotResponse>;
-  /** 查询环境的监控曲线数据 {@link DescribeCurveDataRequest} {@link DescribeCurveDataResponse} */
+  /** 查询环境监控曲线 {@link DescribeCurveDataRequest} {@link DescribeCurveDataResponse} */
   DescribeCurveData(data: DescribeCurveDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurveDataResponse>;
   /** 获取数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
@@ -2879,6 +3275,10 @@ declare interface Tcb {
   DescribeExtraPkgBillingInfo(data?: DescribeExtraPkgBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtraPkgBillingInfoResponse>;
   /** 查询网关监控数据 {@link DescribeGatewayCurveDataRequest} {@link DescribeGatewayCurveDataResponse} */
   DescribeGatewayCurveData(data: DescribeGatewayCurveDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayCurveDataResponse>;
+  /** 查询网关版本信息 {@link DescribeGatewayVersionsRequest} {@link DescribeGatewayVersionsResponse} */
+  DescribeGatewayVersions(data: DescribeGatewayVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayVersionsResponse>;
+  /** 查询环境的监控曲线数据 {@link DescribeGraphDataRequest} {@link DescribeGraphDataResponse} */
+  DescribeGraphData(data: DescribeGraphDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGraphDataResponse>;
   /** 查询静态托管域名任务状态 {@link DescribeHostingDomainTaskRequest} {@link DescribeHostingDomainTaskResponse} */
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
   /** 查询后付费资源免费量 {@link DescribePostpayFreeQuotasRequest} {@link DescribePostpayFreeQuotasResponse} */
@@ -2901,6 +3301,10 @@ declare interface Tcb {
   DescribeWxCloudBaseRunEnvs(data?: DescribeWxCloudBaseRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunEnvsResponse>;
   /** 查询微信云托管子网 {@link DescribeWxCloudBaseRunSubNetsRequest} {@link DescribeWxCloudBaseRunSubNetsResponse} */
   DescribeWxCloudBaseRunSubNets(data: DescribeWxCloudBaseRunSubNetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunSubNetsResponse>;
+  /** 查看安全网关路由 {@link DescribeWxGatewayRoutesRequest} {@link DescribeWxGatewayRoutesResponse} */
+  DescribeWxGatewayRoutes(data: DescribeWxGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewayRoutesResponse>;
+  /** 查看安全网关 {@link DescribeWxGatewaysRequest} {@link DescribeWxGatewaysResponse} */
+  DescribeWxGateways(data: DescribeWxGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewaysResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
   /** 销毁小租户网关 {@link DestroyStandaloneGatewayRequest} {@link DestroyStandaloneGatewayResponse} */
@@ -2925,6 +3329,8 @@ declare interface Tcb {
   ModifyEndUser(data: ModifyEndUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEndUserResponse>;
   /** 更新环境信息 {@link ModifyEnvRequest} {@link ModifyEnvResponse} */
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
+  /** 设置网关版本的流量比例 {@link ModifyGatewayVersionTrafficRequest} {@link ModifyGatewayVersionTrafficResponse} */
+  ModifyGatewayVersionTraffic(data: ModifyGatewayVersionTrafficRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatewayVersionTrafficResponse>;
   /** 恢复环境，解除隔离状态 {@link ReinstateEnvRequest} {@link ReinstateEnvResponse} */
   ReinstateEnv(data: ReinstateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReinstateEnvResponse>;
   /** 更新活动详情 {@link ReplaceActivityRecordRequest} {@link ReplaceActivityRecordResponse} */
@@ -3041,8 +3447,6 @@ declare interface Tcb {
   DescribeAmountAfterDeduction(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeAuthentification(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeBillingInfo(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeBuild(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */

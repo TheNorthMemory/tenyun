@@ -10,7 +10,7 @@ declare interface Acl {
   ResourceName?: string;
   /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户 */
   Principal?: string | null;
-  /** 默认为：*，表示任何host都可以访问，当前ckafka不支持host为：*，但是后面开源kafka的产品化会直接支持 */
+  /** 默认\*,表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持 */
   Host?: string | null;
   /** Acl操作方式(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTEN_WRITE) */
   Operation?: number;
@@ -54,7 +54,7 @@ declare interface AclRuleInfo {
   Operation: string;
   /** 权限类型，(Deny，Allow) */
   PermissionType: string;
-  /** 默认为：*，表示任何host都可以访问，当前ckafka不支持host为：* 和 ip网段 */
+  /** 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\* 和 ip网段 */
   Host: string;
   /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入格式需要带【User:】前缀。例如用户A，传入为User:A。 */
   Principal: string;
