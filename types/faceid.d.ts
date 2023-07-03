@@ -176,7 +176,7 @@ declare interface Encryption {
   TagList?: string[];
 }
 
-/** 获取token时的的配置 */
+/** 获取token时的配置 */
 declare interface GetEidTokenConfig {
   /** 姓名身份证输入方式。1：传身份证正反面OCR 2：传身份证正面OCR 3：用户手动输入 4：客户后台传入 默认1注：使用OCR时仅支持用户修改结果中的姓名 */
   InputType?: string;
@@ -191,7 +191,7 @@ declare interface GetEidTokenConfig {
   /** 意愿核身过程中识别用户的回答意图，开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过，默认不开启。 */
   IntentionRecognition?: boolean;
   /** 是否支持港澳台居住证识别 */
-  IsSupportHMTResidentPermitOCR?: boolean | null;
+  IsSupportHMTResidentPermitOCR?: boolean;
 }
 
 /** 意愿核身过程中播报的问题文本、用户回答的标准文本。 */
@@ -305,7 +305,7 @@ declare interface BankCardVerificationRequest {
   Name: string;
   /** 银行卡 */
   BankCard: string;
-  /** 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。目前默认：0 身份证，其他证件类型需求可以添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行确认。 */
+  /** 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。目前默认：0 身份证，其他证件类型暂不支持。 */
   CertType?: number;
   /** 敏感数据加密信息。对传入信息（姓名、身份证号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
@@ -313,9 +313,9 @@ declare interface BankCardVerificationRequest {
 
 declare interface BankCardVerificationResponse {
   /** 认证结果码收费结果码：'0': '认证通过''-1': '认证未通过''-5': '持卡人信息有误''-6': '未开通无卡支付''-7': '此卡被没收''-8': '无效卡号''-9': '此卡无对应发卡行''-10': '该卡未初始化或睡眠卡''-11': '作弊卡、吞卡''-12': '此卡已挂失''-13': '该卡已过期''-14': '受限制的卡''-15': '密码错误次数超限''-16': '发卡行不支持此交易'不收费结果码：'-2': '姓名校验不通过''-3': '身份证号码有误''-4': '银行卡号码有误''-17': '验证中心服务繁忙' */
-  Result: string;
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

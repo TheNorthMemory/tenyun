@@ -62,6 +62,28 @@ declare interface ActivityJoinDetail {
   UpdateTime: number | null;
 }
 
+/** 发生过到店的潜客到店信息 */
+declare interface ArrivalInfo {
+  /** 线索id */
+  ClueId?: number;
+  /** 客户id */
+  CustomerId?: number;
+  /** 客户姓名 */
+  UserName?: string;
+  /** 客户的手机号 */
+  Phone?: string;
+  /** 是否首次到店，0否，1是 */
+  FirstArrival?: number;
+  /** 到店时间 */
+  ArrivalTime?: number | null;
+  /** 发生事件 */
+  EventType?: number;
+  /** 发生事件名称 */
+  EventTypeName?: string;
+  /** 跟进记录 */
+  FollowRecord?: string;
+}
+
 /** 渠道活码详情 */
 declare interface ChannelCodeInnerDetail {
   /** 渠道活码id */
@@ -141,35 +163,35 @@ declare interface ChatArchivingMsgTypeVideo {
 /** 线索信息详情 */
 declare interface ClueInfoDetail {
   /** 线索id，线索唯一识别编码 */
-  ClueId: string;
-  /** 接待客户经销商顾问所属组织id,多个组织使用逗号分割 */
-  DealerId: string;
+  ClueId?: string;
+  /** 接待客户经销商顾问所属经销商code */
+  DealerId?: string;
   /** 线索获取时间，用户添加企业微信时间，单位是秒 */
-  EnquireTime: number;
+  EnquireTime?: number;
   /** 客户在微信生态中唯一识别码 */
-  UnionId: string;
+  UnionId?: string;
   /** 微信昵称 */
-  Name: string;
+  Name?: string;
   /** 联系方式 */
-  Phone: string;
+  Phone?: string;
   /** 车系编号 */
-  SeriesCode: string;
+  SeriesCode?: string;
   /** 车型编号 */
-  ModelCode: string;
+  ModelCode?: string;
   /** 省份编号 */
-  ProvinceCode: string;
+  ProvinceCode?: string;
   /** 城市编号 */
-  CityCode: string;
+  CityCode?: string;
   /** 顾问名称 */
-  SalesName: string;
+  SalesName?: string;
   /** 顾问电话 */
-  SalesPhone: string;
+  SalesPhone?: string;
   /** 备注 */
-  Remark: string;
+  Remark?: string;
   /** 标签 */
-  TagList: string[];
+  TagList?: string[];
   /** 客户姓名 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 线索属性，0：个人，1：企业 */
   LeadUserType?: number;
   /** 线索来源类型，1：线上，2：线下 */
@@ -194,30 +216,78 @@ declare interface ClueInfoDetail {
   DistributeTime?: number | null;
   /** 获取线索的时间戳，单位：秒 */
   CreateAtTime?: number;
+  /** 客户微信id */
+  WxId?: string;
+  /** 意向车型对应品牌code */
+  BrandCode?: string;
+  /** 建档时间 */
+  BuildTime?: number | null;
+  /** 下订时间，单位：秒 */
+  OrderTime?: number | null;
+  /** 到店时间，单位：秒 */
+  ArrivalTime?: number | null;
+  /** 交车时间，单位：秒 */
+  DeliveryTime?: number | null;
+  /** 上次跟进时间，单位：秒 */
+  FollowTime?: number | null;
+  /** 下次跟进时间，单位：秒 */
+  NextFollowTime?: number | null;
+  /** 线索所属组织id */
+  OrgId?: number;
+  /** 线索所属组织名称 */
+  OrgName?: string;
+  /** 介绍人姓名 */
+  Introducer?: string;
+  /** 介绍人电话 */
+  IntroducerPhone?: string;
+  /** 是否关联微信 1 是 0 否 */
+  IsBindWx?: number;
+  /** 是否经过合并 1 是 0 否 */
+  IsMerge?: number;
+  /** 是否无效 1 是 0 否 */
+  IsInvalid?: number;
+  /** 无效类型 */
+  InvalidType?: string;
+  /** 无效类型枚举：无意向购买、空错号、未接听、其他 */
+  InvalidTypeName?: string;
+  /** 由顾问手动输入的无效原因文字 */
+  InvalidRemark?: string;
+  /** 无效时间 */
+  InvalidTime?: number | null;
+  /** 经销商名称 */
+  DealerName?: string;
+  /** 经销商下级门店ID */
+  ShopId?: number;
+  /** 经销商下级门店名称 */
+  ShopName?: string;
+  /** 职位 */
+  Position?: string;
 }
 
 /** 企业成员信息 */
 declare interface CorpUserInfo {
   /** 企业成员UserId */
-  UserId: number;
+  UserId?: number;
   /** 企业成员在SaaS名片内填写的姓名 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 企业成员在企微原生通讯录内的id */
-  UserOpenId: string | null;
+  UserOpenId?: string | null;
   /** 成员所属经销商id，可为空 */
-  DealerId: number | null;
+  DealerId?: number | null;
   /** 成员所属门店id，可为空 */
-  ShopId: number | null;
+  ShopId?: number | null;
   /** 企业成员手机号 */
-  Phone: string | null;
+  Phone?: string | null;
   /** 成员所属部门id列表，仅返回该应用有查看权限的部门id；成员授权模式下，固定返回根部门id，即固定为1；多个部门使用逗号分割 */
-  OrgIds: string | null;
+  OrgIds?: string | null;
   /** 主部门，仅当应用对主部门有查看权限时返回 */
-  MainDepartment: string | null;
+  MainDepartment?: string | null;
   /** 是否为部门负责人，第三方应用可为空。与orgIds值一一对应，多个部门使用逗号隔开，0-否， 1-是 */
-  IsLeaderInDept: string | null;
+  IsLeaderInDept?: string | null;
   /** 激活状态: 0=已激活，1=已禁用，-1=退出企业" */
-  Status: number;
+  Status?: number;
+  /** 工号 */
+  JobNumber?: string | null;
 }
 
 /** CRM统计数据响应 */
@@ -432,6 +502,36 @@ declare interface ExternalUserMappingInfo {
   CorpExternalUserId: string;
   /** 乐销车应用主体对应的外部联系人, 当不存在好友关系时，该字段值为空 */
   ExternalUserId: string | null;
+}
+
+/** 发生过跟进的潜客信息 */
+declare interface FollowInfo {
+  /** 线索id */
+  ClueId?: number;
+  /** 客户档案id */
+  CustomerId?: number;
+  /** 客户姓名 */
+  UserName?: string;
+  /** 客户的手机号 */
+  Phone?: string;
+  /** 是否逾期 */
+  IsOverdue?: number;
+  /** 逾期时间 */
+  OverdueTime?: number | null;
+  /** 发生事件 */
+  EventType?: number;
+  /** 发生事件名称 */
+  EventTypeName?: string;
+  /** 跟进方式 */
+  FollowWayType?: string;
+  /** 跟进方式名称 */
+  FollowWayName?: string;
+  /** 本次跟进时间 */
+  FollowTime?: number | null;
+  /** 下次跟进时间 */
+  NextFollowTime?: number | null;
+  /** 跟进记录 */
+  FollowRecord?: string;
 }
 
 /** 添加了此外部联系人的企业成员信息 */
@@ -792,6 +892,28 @@ declare interface QueryActivityLiveCodeListResponse {
   RequestId?: string;
 }
 
+declare interface QueryArrivalListRequest {
+  /** 分页，预期请求的数据量，取值范围 1 ~ 1000 */
+  Limit: number;
+  /** 查询开始时间， 单位秒 */
+  BeginTime: number;
+  /** 查询结束时间， 单位秒 */
+  EndTime: number;
+  /** 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填 */
+  Cursor?: string;
+}
+
+declare interface QueryArrivalListResponse {
+  /** 分页游标，下次调用带上该值，则从当前的位置继续往后拉，以实现增量拉取。 */
+  NextCursor?: string | null;
+  /** 潜客客户存档信息 */
+  PageData?: ArrivalInfo[] | null;
+  /** 是否还有更多数据。0-否；1-是。 */
+  HasMore?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryChannelCodeListRequest {
   /** 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填 */
   Cursor?: string;
@@ -1016,6 +1138,28 @@ declare interface QueryExternalUserMappingInfoResponse {
   RequestId?: string;
 }
 
+declare interface QueryFollowListRequest {
+  /** 分页，预期请求的数据量，取值范围 1 ~ 1000 */
+  Limit: number;
+  /** 查询开始时间， 单位秒 */
+  BeginTime: number;
+  /** 查询结束时间， 单位秒 */
+  EndTime: number;
+  /** 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填 */
+  Cursor?: string;
+}
+
+declare interface QueryFollowListResponse {
+  /** 分页游标，下次调用带上该值，则从当前的位置继续往后拉，以实现增量拉取。 */
+  NextCursor?: string | null;
+  /** 潜客客户存档信息 */
+  PageData?: FollowInfo[] | null;
+  /** 是否还有更多数据。0-否；1-是。 */
+  HasMore?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryLicenseInfoRequest {
   /** license编号 */
   License: string;
@@ -1091,9 +1235,9 @@ declare interface QueryUserInfoListRequest {
 
 declare interface QueryUserInfoListResponse {
   /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
-  NextCursor: string | null;
+  NextCursor?: string | null;
   /** 企业成员信息列表响应数据 */
-  PageData: CorpUserInfo[] | null;
+  PageData?: CorpUserInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1131,6 +1275,8 @@ declare interface Wav {
   QueryActivityList(data?: QueryActivityListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityListResponse>;
   /** 查询活动活码列表接口 {@link QueryActivityLiveCodeListRequest} {@link QueryActivityLiveCodeListResponse} */
   QueryActivityLiveCodeList(data?: QueryActivityLiveCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityLiveCodeListResponse>;
+  /** 查询指定时间范围内发生过到店的潜客到店信息 {@link QueryArrivalListRequest} {@link QueryArrivalListResponse} */
+  QueryArrivalList(data: QueryArrivalListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryArrivalListResponse>;
   /** 查询渠道活码列表接口 {@link QueryChannelCodeListRequest} {@link QueryChannelCodeListResponse} */
   QueryChannelCodeList(data?: QueryChannelCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChannelCodeListResponse>;
   /** 查询会话存档列表接口 {@link QueryChatArchivingListRequest} {@link QueryChatArchivingListResponse} */
@@ -1155,6 +1301,8 @@ declare interface Wav {
   QueryExternalUserEventList(data: QueryExternalUserEventListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalUserEventListResponse>;
   /** 外部联系人转换接口 {@link QueryExternalUserMappingInfoRequest} {@link QueryExternalUserMappingInfoResponse} */
   QueryExternalUserMappingInfo(data: QueryExternalUserMappingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalUserMappingInfoResponse>;
+  /** 查询指定时间范围内发生过跟进的潜客信息 {@link QueryFollowListRequest} {@link QueryFollowListResponse} */
+  QueryFollowList(data: QueryFollowListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFollowListResponse>;
   /** 查询license信息接口 {@link QueryLicenseInfoRequest} {@link QueryLicenseInfoResponse} */
   QueryLicenseInfo(data: QueryLicenseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLicenseInfoResponse>;
   /** 获取企业素材列表接口 {@link QueryMaterialListRequest} {@link QueryMaterialListResponse} */

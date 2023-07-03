@@ -2649,9 +2649,9 @@ declare interface DescribeBackupSummariesRequest {
 
 declare interface DescribeBackupSummariesResponse {
   /** 实例备份统计条目。 */
-  Items: BackupSummaryItem[];
+  Items?: BackupSummaryItem[];
   /** 实例备份统计总条目数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

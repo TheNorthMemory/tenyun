@@ -668,16 +668,20 @@ declare interface RegisterInfo {
   Uscc: string;
 }
 
-/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。 */
+/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。注意：当指定C端签署人的签署方自定义控件别名不空时，除RelievedApproverReceiptId参数外，可以只参数ApproverSignRole。 */
 declare interface ReleasedApprover {
   /** 签署人姓名，最大长度50个字符 */
-  Name: string | null;
+  Name: string;
   /** 签署人手机号 */
-  Mobile: string | null;
+  Mobile: string;
   /** 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ） */
-  RelievedApproverReceiptId: string | null;
+  RelievedApproverReceiptId: string;
   /** 指定签署人类型，目前仅支持ORGANIZATION-企业ENTERPRISESERVER-企业静默签 */
-  ApproverType?: string | null;
+  ApproverType?: string;
+  /** 签署控件类型，支持自定义企业签署方的签署控件为“印章”或“签名”- SIGN_SEAL-默认为印章控件类型- SIGN_SIGNATURE-手写签名控件类型 */
+  ApproverSignComponentType?: string;
+  /** 签署方自定义控件别名，最大长度20个字符 */
+  ApproverSignRole?: string;
 }
 
 /** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。 */
@@ -1373,6 +1377,8 @@ declare interface CreateReleaseFlowRequest {
   ReliveInfo: RelieveInfo;
   /** 非必须，解除协议的本企业签署人列表，默认使用原流程的签署人列表,当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业其他已实名员工来替换原流程中的原签署人，注意需要指明原签署人的编号(ReceiptId,通过DescribeFlowInfo接口获取)来代表需要替换哪一个签署人解除协议的签署人数量不能多于原流程的签署人数量 */
   ReleasedApprovers?: ReleasedApprover[];
+  /** 签署流程的签署截止时间。 值为unix时间戳,精确到秒,不传默认为当前时间七天后 */
+  Deadline?: number;
 }
 
 declare interface CreateReleaseFlowResponse {

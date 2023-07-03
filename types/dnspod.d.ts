@@ -166,6 +166,22 @@ declare interface DeleteDomainBatchDetail {
   Operation?: string;
 }
 
+/** 批量删除记录详情 */
+declare interface DeleteRecordBatchDetail {
+  /** 域名 ID */
+  DomainId?: number;
+  /** 域名 */
+  Domain?: string;
+  /** 错误信息 */
+  Error?: string | null;
+  /** 删除状态 */
+  Status?: string;
+  /** 操作 */
+  Operation?: string;
+  /** 解析记录列表，json 序列化之后的字符串形式 */
+  RecordList: string;
+}
+
 /** 查看任务详情返回结构 */
 declare interface DescribeBatchTaskDetail {
   /** 见BatchRecordInfo */
@@ -1040,6 +1056,20 @@ declare interface DeleteDomainRequest {
 }
 
 declare interface DeleteDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordBatchRequest {
+  /** 解析记录 ID 数组 */
+  RecordIdList: number[];
+}
+
+declare interface DeleteRecordBatchResponse {
+  /** 批量任务 ID */
+  JobId?: number;
+  /** 任务详情 */
+  DetailList?: DeleteRecordBatchDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2025,6 +2055,8 @@ declare interface Dnspod {
   DeleteDomainBatch(data: DeleteDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainBatchResponse>;
   /** 删除记录 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
+  /** 批量删除解析记录 {@link DeleteRecordBatchRequest} {@link DeleteRecordBatchResponse} */
+  DeleteRecordBatch(data: DeleteRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordBatchResponse>;
   /** 删除记录分组 {@link DeleteRecordGroupRequest} {@link DeleteRecordGroupResponse} */
   DeleteRecordGroup(data: DeleteRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordGroupResponse>;
   /** 删除域名共享 {@link DeleteShareDomainRequest} {@link DeleteShareDomainResponse} */

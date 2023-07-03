@@ -2135,7 +2135,7 @@ declare interface ModifyBackupPlanRequest {
   MinBackupStartTime?: string;
   /** 实例最晚开始备份时间 */
   MaxBackupStartTime?: string;
-  /** 实例备份保留时长，取值范围为3-7，单位是天 */
+  /** 实例备份保留时长，取值范围为7-1830，单位是天 */
   BaseBackupRetentionPeriod?: number;
   /** 实例备份周期，按照星期维度，格式为小写星期英文单词 */
   BackupPeriod?: string[];

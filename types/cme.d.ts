@@ -508,7 +508,7 @@ declare interface MediaCastSourceInfo {
   FileId?: string;
   /** 多媒体创作引擎的媒体 ID。当 Type = CME 时必填。 */
   MaterialId?: string;
-  /** 文件播放的的起始位置，单位：秒。默认为0，从文件头开始播放。当 Type = CME 或者 VOD 时有效。 */
+  /** 文件播放的起始位置，单位：秒。默认为0，从文件头开始播放。当 Type = CME 或者 VOD 时有效。 */
   Offset?: number;
   /** 播放时长，单位：秒。默认播放整个文件。当 Type = CME 或者 VOD 时有效。 */
   Duration?: number;
@@ -1315,7 +1315,7 @@ declare interface CreateProjectRequest {
   Name: string;
   /** 项目归属者，即项目的所有者，后续操作只有该所有者有权限操作。注：目前所有项目只能设置归属个人，暂不支持团队项目。 */
   Owner: Entity;
-  /** 项目类别，取值有：VIDEO_EDIT：视频编辑。SWITCHER：导播台。VIDEO_SEGMENTATION：视频拆条。STREAM_CONNECT：云转推。RECORD_REPLAY：录制回放。MEDIA_CAST：点播转直播。 */
+  /** 项目类别，取值有：VIDEO_EDIT：视频编辑。SWITCHER：导播台。VIDEO_SEGMENTATION：视频拆条。STREAM_CONNECT：云转推。RECORD_REPLAY：录制回放。MEDIA_CAST：媒体转推。 */
   Category: string;
   /** 项目模式，一个项目可以有多种模式并相互切换。当 Category 为 VIDEO_EDIT 时，可选模式有：Default：默认模式，即普通视频编辑项目。VideoEditTemplate：剪辑模板制作模式，用于制作剪辑模板。注：不填则为默认模式。 */
   Mode?: string;

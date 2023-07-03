@@ -564,7 +564,7 @@ declare interface RecipientComponentInfo {
   Components?: FilledComponent[] | null;
 }
 
-/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。如果需要指定B端（机构身份类型）签署人，其中ReleasedApprover需要传递的参数如下：ApproverNumber, OrganizationName, ApproverType必传。对于其他身份标识- 子客企业指定经办人：OpenId必传，OrganizationOpenId必传；- 非子客企业：Name、Mobile必传。 */
+/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。 注意：当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只参数ApproverSignRole。如果需要指定B端（机构身份类型）签署人，其中ReleasedApprover需要传递的参数如下：ApproverNumber, OrganizationName, ApproverType必传。对于其他身份标识- 子客企业指定经办人：OpenId必传，OrganizationOpenId必传；- 非子客企业：Name、Mobile必传。 */
 declare interface ReleasedApprover {
   /** 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符 */
   OrganizationName: string;
@@ -584,6 +584,10 @@ declare interface ReleasedApprover {
   OrganizationOpenId?: string;
   /** 用户侧第三方id，最大长度64个字符当签署方为同一第三方应用下的员工时，该字必传 */
   OpenId?: string;
+  /** 签署控件类型，支持自定义企业签署方的签署控件为“印章”或“签名”- SIGN_SEAL-默认为印章控件类型- SIGN_SIGNATURE-手写签名控件类型 */
+  ApproverSignComponentType?: string;
+  /** 签署方自定义控件别名，最大长度20个字符 */
+  ApproverSignRole?: string;
 }
 
 /** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。 */
@@ -1127,6 +1131,8 @@ declare interface ChannelCreateReleaseFlowRequest {
   Organization?: OrganizationInfo;
   /** 暂未开放 */
   Operator?: UserInfo;
+  /** 签署流程的签署截止时间。 值为unix时间戳,精确到秒,不传默认为当前时间七天后 */
+  Deadline?: number;
 }
 
 declare interface ChannelCreateReleaseFlowResponse {
@@ -1767,7 +1773,7 @@ declare interface SyncProxyOrganizationResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 应用相关信息，若是第三方应用集成调用 appid 和proxyappid 必填 */
+  /** 应用相关信息，若是第三方应用集成调用 若是第三方应用集成调用,Agent.AppId 和 Agent.ProxyOrganizationOpenId 必填 */
   Agent: Agent;
   /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html */
   BusinessType: string;
@@ -1778,10 +1784,10 @@ declare interface UploadFilesRequest {
 }
 
 declare interface UploadFilesResponse {
-  /** 文件id数组，有效期一个小时；有效期内此文件id可以反复使用 */
-  FileIds?: string[];
   /** 上传成功文件数量 */
   TotalCount?: number;
+  /** 文件id数组，有效期一个小时；有效期内此文件id可以反复使用 */
+  FileIds?: string[];
   /** 文件Url */
   FileUrls?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */

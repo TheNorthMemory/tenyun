@@ -1533,7 +1533,7 @@ declare interface CreateDataEngineRequest {
   MinClusters?: number;
   /** 最大资源 */
   MaxClusters?: number;
-  /** 是否为默虚拟集群 */
+  /** 是否为默认虚拟集群 */
   DefaultDataEngine?: boolean;
   /** VPC网段 */
   CidrBlock?: string;
@@ -1571,7 +1571,7 @@ declare interface CreateDataEngineRequest {
   DataEngineConfigPairs?: DataEngineConfigPair[];
   /** 集群镜像版本名字。如SuperSQL-P 1.1;SuperSQL-S 3.2等,不传，默认创建最新镜像版本的集群 */
   ImageVersionName?: string;
-  /** 主集群名称 */
+  /** 主集群名称，创建容灾集群时指定 */
   MainClusterName?: string;
   /** spark jar 包年包月集群是否开启弹性 */
   ElasticSwitch?: boolean;
