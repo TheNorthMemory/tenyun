@@ -438,7 +438,7 @@ declare interface ExtractRuleInfo {
   LogRegex?: string | null;
   /** 行首匹配规则，只有log_type为multiline_log或fullregex_log时有效 */
   BeginRegex?: string | null;
-  /** 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key */
+  /** 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。 */
   Keys?: string[] | null;
   /** 需要过滤日志的key，及其对应的regex */
   FilterKeyRegex?: KeyRegexInfo[] | null;
@@ -530,6 +530,66 @@ declare interface JsonInfo {
   JsonType?: number | null;
 }
 
+/** kafka协议消费内容 */
+declare interface KafkaConsumerContent {
+  /** 消费格式 0:全文；1:json */
+  Format: number;
+  /** 是否投递 TAG 信息Format为0时，此字段不需要赋值 */
+  EnableTag: boolean;
+  /** 元数据信息列表, 可选值为：\_\_SOURCE\_\_、\_\_FILENAME\_\_、\_\_TIMESTAMP\_\_、\_\_HOSTNAME\_\_、\_\_PKGID\_\_Format为0时，此字段不需要赋值 */
+  MetaFields: string[];
+  /** tag数据处理方式：1:不平铺（默认值）2:平铺 */
+  TagTransaction?: number | null;
+  /** 消费数据Json格式：1：不转义（默认格式）2：转义 */
+  JsonType?: number;
+}
+
+/** Kafka访问协议 */
+declare interface KafkaProtocolInfo {
+  /** 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证 */
+  Protocol?: string | null;
+  /** 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512 */
+  Mechanism?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 用户密码 */
+  Password?: string | null;
+}
+
+/** Kafka导入配置信息 */
+declare interface KafkaRechargeInfo {
+  /** 主键ID */
+  Id: string | null;
+  /** 日志主题ID */
+  TopicId: string | null;
+  /** Kafka导入任务名称 */
+  Name: string | null;
+  /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
+  KafkaType?: number | null;
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填 */
+  KafkaInstance?: string | null;
+  /** 服务地址 */
+  ServerAddr: string | null;
+  /** ServerAddr是否为加密连接 */
+  IsEncryptionAddr?: boolean | null;
+  /** 加密访问协议，IsEncryptionAddr参数为true时必填 */
+  Protocol?: KafkaProtocolInfo;
+  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开 */
+  UserKafkaTopics: string | null;
+  /** 用户Kafka消费组名称 */
+  ConsumerGroupName: string | null;
+  /** 状态 status 1: 运行中, 2: 暂停 ... */
+  Status: number | null;
+  /** 导入数据位置，-1:最早（默认），-2：最晚，大于等于0: 指定offset */
+  Offset?: number | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 日志导入规则 */
+  LogRechargeRule: LogRechargeRuleInfo | null;
+}
+
 /** 需要过滤日志的key，及其对应的regex */
 declare interface KeyRegexInfo {
   /** 需要过滤日志的key */
@@ -606,6 +666,38 @@ declare interface LogItem {
 declare interface LogItems {
   /** 分析结果返回的KV数据对 */
   Data: LogItem[];
+}
+
+/** 日志导入规则 */
+declare interface LogRechargeRuleInfo {
+  /** 导入类型，支持json_log：json格式日志，minimalist_log: 单行全文，fullregex_log: 单行完全正则 */
+  RechargeType: string;
+  /** 解析编码格式，0: UTF-8（默认值），1: GBK */
+  EncodingFormat: number;
+  /** 使用默认时间，true：开启（默认值）， flase：关闭 */
+  DefaultTimeSwitch: boolean;
+  /** 整条日志匹配规则，只有RechargeType为fullregex_log时有效 */
+  LogRegex?: string | null;
+  /** 解析失败日志是否上传，true表示上传，false表示不上传 */
+  UnMatchLogSwitch?: boolean;
+  /** 解析失败日志的键名称 */
+  UnMatchLogKey?: string | null;
+  /** 解析失败日志时间来源，0: 系统当前时间，1: Kafka消息时间戳 */
+  UnMatchLogTimeSrc?: number | null;
+  /** 默认时间来源，0: 系统当前时间，1: Kafka消息时间戳 */
+  DefaultTimeSrc?: number | null;
+  /** 时间字段 */
+  TimeKey?: string | null;
+  /** 时间提取正则表达式 */
+  TimeRegex?: string | null;
+  /** 时间字段格式 */
+  TimeFormat?: string | null;
+  /** 时间字段时区 */
+  TimeZone?: string | null;
+  /** 元数据信息，Kafka导入支持kafka_topic,kafka_partition,kafka_offset,kafka_timestamp */
+  Metadata?: string[] | null;
+  /** 日志Key列表，RechargeType为full_regex_log时必填 */
+  Keys?: string[] | null;
 }
 
 /** 日志集相关信息 */
@@ -938,6 +1030,26 @@ declare interface ApplyConfigToMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface CheckRechargeKafkaServerRequest {
+  /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
+  KafkaType: number;
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填 */
+  KafkaInstance?: string;
+  /** 服务地址 */
+  ServerAddr?: string;
+  /** ServerAddr是否为加密连接 */
+  IsEncryptionAddr?: boolean;
+  /** 加密访问协议，IsEncryptionAddr参数为true时必填 */
+  Protocol?: KafkaProtocolInfo;
+}
+
+declare interface CheckRechargeKafkaServerResponse {
+  /** Kafka集群可访问状态，0：可正常访问 ... */
+  Status?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseKafkaConsumerRequest {
   /** CLS对应的topic标识 */
   FromTopicId: string;
@@ -1156,6 +1268,38 @@ declare interface CreateIndexResponse {
   RequestId?: string;
 }
 
+declare interface CreateKafkaRechargeRequest {
+  /** 导入CLS目标topic ID */
+  TopicId: string;
+  /** Kafka导入配置名称 */
+  Name: string;
+  /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
+  KafkaType: number;
+  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开 */
+  UserKafkaTopics: string;
+  /** 导入数据位置，-2:最早（默认），-1：最晚 */
+  Offset: number;
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填 */
+  KafkaInstance?: string;
+  /** 服务地址，KafkaType为1时必填 */
+  ServerAddr?: string;
+  /** ServerAddr是否为加密连接，KafkaType为1时必填 */
+  IsEncryptionAddr?: boolean;
+  /** 加密访问协议，IsEncryptionAddr参数为true时必填 */
+  Protocol?: KafkaProtocolInfo;
+  /** 用户Kafka消费组名称 */
+  ConsumerGroupName?: string;
+  /** 日志导入规则 */
+  LogRechargeRule?: LogRechargeRuleInfo;
+}
+
+declare interface CreateKafkaRechargeResponse {
+  /** Kafka导入配置ID */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLogsetRequest {
   /** 日志集名字，不能重名 */
   LogsetName: string;
@@ -1342,6 +1486,18 @@ declare interface DeleteIndexRequest {
 }
 
 declare interface DeleteIndexResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteKafkaRechargeRequest {
+  /** Kafka导入配置ID */
+  Id: string;
+  /** 导入CLS目标topic ID */
+  TopicId: string;
+}
+
+declare interface DeleteKafkaRechargeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1576,6 +1732,24 @@ declare interface DescribeIndexResponse {
   IncludeInternalFields: boolean | null;
   /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKafkaRechargesRequest {
+  /** 日志主题 ID */
+  TopicId: string;
+  /** 导入配置ID */
+  Id?: string;
+  /** 状态 status 1: 运行中, 2: 暂停... */
+  Status?: number;
+}
+
+declare interface DescribeKafkaRechargesResponse {
+  /** KafkaRechargeInfo 信息列表 */
+  Infos?: KafkaRechargeInfo[];
+  /** Kafka导入信息总条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1988,6 +2162,38 @@ declare interface ModifyIndexResponse {
   RequestId?: string;
 }
 
+declare interface ModifyKafkaRechargeRequest {
+  /** Kafka导入配置ID */
+  Id: string;
+  /** 导入CLS目标topic ID */
+  TopicId: string;
+  /** Kafka导入配置名称 */
+  Name?: string;
+  /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
+  KafkaType?: number;
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填 */
+  KafkaInstance?: string;
+  /** 服务地址 */
+  ServerAddr?: string;
+  /** ServerAddr是否为加密连接 */
+  IsEncryptionAddr?: boolean;
+  /** 加密访问协议，IsEncryptionAddr参数为true时必填 */
+  Protocol?: KafkaProtocolInfo;
+  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开 */
+  UserKafkaTopics?: string;
+  /** 用户Kafka消费组名称 */
+  ConsumerGroupName?: string;
+  /** 日志导入规则 */
+  LogRechargeRule?: LogRechargeRuleInfo;
+  /** 导入控制，1：暂停，2：继续 */
+  StatusControl?: number;
+}
+
+declare interface ModifyKafkaRechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLogsetRequest {
   /** 日志集ID */
   LogsetId: string;
@@ -2093,11 +2299,45 @@ declare interface OpenKafkaConsumerRequest {
   FromTopicId: string;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression?: number;
+  /** kafka协议消费数据格式 */
+  ConsumerContent?: KafkaConsumerContent;
 }
 
 declare interface OpenKafkaConsumerResponse {
   /** 待消费TopicId */
   TopicID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PreviewKafkaRechargeRequest {
+  /** 预览类型，1:源数据预览，2:导出结果预览 */
+  PreviewType: number;
+  /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
+  KafkaType: number;
+  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开 */
+  UserKafkaTopics: string;
+  /** 导入数据位置，-2:最早（默认），-1：最晚 */
+  Offset: number;
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填 */
+  KafkaInstance?: string;
+  /** 服务地址 */
+  ServerAddr?: string;
+  /** ServerAddr是否为加密连接 */
+  IsEncryptionAddr?: boolean;
+  /** 加密访问协议，IsEncryptionAddr参数为true时必填 */
+  Protocol?: KafkaProtocolInfo;
+  /** 用户Kafka消费组 */
+  ConsumerGroupName?: string;
+  /** 日志导入规则 */
+  LogRechargeRule?: LogRechargeRuleInfo;
+}
+
+declare interface PreviewKafkaRechargeResponse {
+  /** 日志样例，PreviewType为2时返回 */
+  LogSample?: string;
+  /** 日志预览结果 */
+  LogData?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2201,6 +2441,8 @@ declare interface Cls {
   AddMachineGroupInfo(data: AddMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddMachineGroupInfoResponse>;
   /** 应用采集配置到指定机器组 {@link ApplyConfigToMachineGroupRequest} {@link ApplyConfigToMachineGroupResponse} */
   ApplyConfigToMachineGroup(data: ApplyConfigToMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConfigToMachineGroupResponse>;
+  /** Kafka服务集群连通性校验 {@link CheckRechargeKafkaServerRequest} {@link CheckRechargeKafkaServerResponse} */
+  CheckRechargeKafkaServer(data: CheckRechargeKafkaServerRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRechargeKafkaServerResponse>;
   /** 关闭Kafka协议消费 {@link CloseKafkaConsumerRequest} {@link CloseKafkaConsumerResponse} */
   CloseKafkaConsumer(data: CloseKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CloseKafkaConsumerResponse>;
   /** 创建告警策略 {@link CreateAlarmRequest} {@link CreateAlarmResponse} */
@@ -2219,6 +2461,8 @@ declare interface Cls {
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
   CreateIndex(data: CreateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIndexResponse>;
+  /** 创建Kafka数据订阅任务 {@link CreateKafkaRechargeRequest} {@link CreateKafkaRechargeResponse} */
+  CreateKafkaRecharge(data: CreateKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKafkaRechargeResponse>;
   /** 创建日志集 {@link CreateLogsetRequest} {@link CreateLogsetResponse} */
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
   /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
@@ -2243,6 +2487,8 @@ declare interface Cls {
   DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
   /** 删除索引配置 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
+  /** 删除Kafka数据订阅任务 {@link DeleteKafkaRechargeRequest} {@link DeleteKafkaRechargeResponse} */
+  DeleteKafkaRecharge(data: DeleteKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKafkaRechargeResponse>;
   /** 删除日志集 {@link DeleteLogsetRequest} {@link DeleteLogsetResponse} */
   DeleteLogset(data: DeleteLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogsetResponse>;
   /** 删除机器组 {@link DeleteMachineGroupRequest} {@link DeleteMachineGroupResponse} */
@@ -2273,6 +2519,8 @@ declare interface Cls {
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
   /** 获取索引配置信息 {@link DescribeIndexRequest} {@link DescribeIndexResponse} */
   DescribeIndex(data: DescribeIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexResponse>;
+  /** 获取Kafka数据订阅任务列表 {@link DescribeKafkaRechargesRequest} {@link DescribeKafkaRechargesResponse} */
+  DescribeKafkaRecharges(data: DescribeKafkaRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaRechargesResponse>;
   /** 上下文检索 {@link DescribeLogContextRequest} {@link DescribeLogContextResponse} */
   DescribeLogContext(data: DescribeLogContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogContextResponse>;
   /** 获取日志数量直方图 {@link DescribeLogHistogramRequest} {@link DescribeLogHistogramResponse} */
@@ -2311,6 +2559,8 @@ declare interface Cls {
   ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
+  /** 修改Kafka数据订阅任务 {@link ModifyKafkaRechargeRequest} {@link ModifyKafkaRechargeResponse} */
+  ModifyKafkaRecharge(data: ModifyKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaRechargeResponse>;
   /** 修改日志集 {@link ModifyLogsetRequest} {@link ModifyLogsetResponse} */
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
   /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */
@@ -2321,6 +2571,8 @@ declare interface Cls {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 打开Kafka协议消费 {@link OpenKafkaConsumerRequest} {@link OpenKafkaConsumerResponse} */
   OpenKafkaConsumer(data: OpenKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenKafkaConsumerResponse>;
+  /** Kafka数据订阅日志预览 {@link PreviewKafkaRechargeRequest} {@link PreviewKafkaRechargeResponse} */
+  PreviewKafkaRecharge(data: PreviewKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewKafkaRechargeResponse>;
   /** 重试失败的投递任务 {@link RetryShipperTaskRequest} {@link RetryShipperTaskResponse} */
   RetryShipperTask(data: RetryShipperTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryShipperTaskResponse>;
   /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */

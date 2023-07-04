@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 用户组删除时关联的应用信息 */
+declare interface AppAssociatedUserGroupIds {
+  /** 用户组id */
+  UserGroupId: string | null;
+  /** 应用id */
+  ApplicationId: string | null;
+  /** 应用名称 */
+  ApplicationName: string | null;
+}
+
 /** 失败详情 */
 declare interface ErrorDetails {
   /** 用户信息 */
@@ -306,6 +316,60 @@ declare interface User {
   IndexedAttribute5: string | null;
 }
 
+/** 用户组 */
+declare interface UserGroup {
+  /** 用户组ID */
+  UserGroupId: string;
+  /** 用户组名称 */
+  DisplayName: string;
+  /** 用户组描述 */
+  Description: string | null;
+  /** 用户目录ID */
+  UserStoreId: string;
+  /** 租户ID */
+  TenantId: string;
+  /** 创建时间 */
+  CreatedDate: number;
+  /** 最近更新时间 */
+  LastModifyDate: number;
+}
+
+/** 删除用户组信息时返回的详情 */
+declare interface UserGroupDeleteResp {
+  /** 错误详情 */
+  ErrorMessage: string | null;
+  /** 用户组关联的应用信息 */
+  AppAssociatedUserGroupIds: AppAssociatedUserGroupIds[] | null;
+}
+
+/** 用户池 */
+declare interface UserStore {
+  /** 租户ID */
+  TenantId: string;
+  /** 用户池logo */
+  UserStoreLogo: string | null;
+  /** 用户池描述 */
+  UserStoreDesc: string | null;
+  /** 用户池名称 */
+  UserStoreName: string;
+  /** 用户数量 */
+  UserNum: number;
+  /** 用户池ID */
+  UserStoreId: string;
+  /** 应用数量 */
+  AppNum: number;
+  /** 上次切换的用户池 */
+  LastStatus: boolean | null;
+  /** 默认用户池 */
+  DefaultStatus: boolean | null;
+  /** 创建时间 */
+  CreateDate: number | null;
+  /** 上次切换时间 */
+  LastStatusTime: number | null;
+  /** 用户目录域名 */
+  UserStoreProtocolHost: string | null;
+}
+
 declare interface CreateApiImportUserJobRequest {
   /** 用户目录ID */
   UserStoreId: string;
@@ -334,6 +398,20 @@ declare interface CreateFileExportUserJobRequest {
 declare interface CreateFileExportUserJobResponse {
   /** 数据流任务 */
   Job: Job;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateUserGroupRequest {
+  /** 用户组名称 */
+  DisplayName: string;
+  /** 用户目录ID */
+  UserStoreId: string;
+  /** 用户组描述 */
+  Description?: string;
+}
+
+declare interface CreateUserGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -374,6 +452,44 @@ declare interface CreateUserRequest {
 declare interface CreateUserResponse {
   /** 创建的用户信息 */
   User: User | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateUserStoreRequest {
+  /** 用户池名字 */
+  UserPoolName: string;
+  /** 用户池描述 */
+  UserPoolDesc?: string;
+  /** 用户池logo */
+  UserPoolLogo?: string;
+}
+
+declare interface CreateUserStoreResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserGroupsRequest {
+  /** 用户组ID数组 */
+  UserGroupIds: string[];
+  /** 用户目录ID */
+  UserStoreId: string;
+}
+
+declare interface DeleteUserGroupsResponse {
+  /** 删除的用户组关联的应用信息 */
+  UserGroupDeletedInfo: UserGroupDeleteResp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserStoreRequest {
+  /** 用户池ID */
+  UserPoolId: string;
+}
+
+declare interface DeleteUserStoreResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -500,6 +616,26 @@ declare interface ListUserByPropertyResponse {
   RequestId?: string;
 }
 
+declare interface ListUserGroupsRequest {
+  /** 用户目录ID */
+  UserStoreId: string;
+  /** 分页数据 */
+  Pageable: Pageable;
+  /** Key可选值为condition **condition** Values = 查询条件，用户组ID或用户组名称 */
+  Filters?: Filter[];
+}
+
+declare interface ListUserGroupsResponse {
+  /** 用户组列表 */
+  Content: UserGroup[] | null;
+  /** 总条数 */
+  Total: number | null;
+  /** 分页 */
+  Pageable: Pageable | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListUserRequest {
   /** 用户目录ID */
   UserStoreId: string;
@@ -518,6 +654,16 @@ declare interface ListUserResponse {
   Pageable: Pageable | null;
   /** 用户列表 */
   Content: User[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListUserStoreRequest {
+}
+
+declare interface ListUserStoreResponse {
+  /** 用户目录列表 */
+  UserStoreSet: UserStore[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -546,6 +692,22 @@ declare interface SetPasswordRequest {
 }
 
 declare interface SetPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateUserGroupRequest {
+  /** 用户组ID */
+  UserGroupId: string;
+  /** 用户组名称 */
+  DisplayName: string;
+  /** 用户目录ID */
+  UserStoreId: string;
+  /** 用户组描述 */
+  Description?: string;
+}
+
+declare interface UpdateUserGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -604,6 +766,22 @@ declare interface UpdateUserStatusResponse {
   RequestId?: string;
 }
 
+declare interface UpdateUserStoreRequest {
+  /** 用户池ID */
+  UserPoolId: string;
+  /** 用户池名字 */
+  UserPoolName?: string;
+  /** 用户池描述 */
+  UserPoolDesc?: string;
+  /** 用户池logo */
+  UserPoolLogo?: string;
+}
+
+declare interface UpdateUserStoreResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ciam 账号风控平台} */
 declare interface Ciam {
   (): Versions;
@@ -613,6 +791,14 @@ declare interface Ciam {
   CreateFileExportUserJob(data: CreateFileExportUserJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileExportUserJobResponse>;
   /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
+  /** 创建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
+  CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
+  /** 创建用户目录 {@link CreateUserStoreRequest} {@link CreateUserStoreResponse} */
+  CreateUserStore(data: CreateUserStoreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserStoreResponse>;
+  /** 批量删除用户组 {@link DeleteUserGroupsRequest} {@link DeleteUserGroupsResponse} */
+  DeleteUserGroups(data: DeleteUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupsResponse>;
+  /** 删除用户目录 {@link DeleteUserStoreRequest} {@link DeleteUserStoreResponse} */
+  DeleteUserStore(data: DeleteUserStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserStoreResponse>;
   /** 批量删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
   /** 查询用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
@@ -629,14 +815,22 @@ declare interface Ciam {
   ListUser(data: ListUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserResponse>;
   /** 根据属性查询用户列表 {@link ListUserByPropertyRequest} {@link ListUserByPropertyResponse} */
   ListUserByProperty(data: ListUserByPropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserByPropertyResponse>;
+  /** 查询用户组列表 {@link ListUserGroupsRequest} {@link ListUserGroupsResponse} */
+  ListUserGroups(data: ListUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsResponse>;
+  /** 查询用户目录列表 {@link ListUserStoreRequest} {@link ListUserStoreResponse} */
+  ListUserStore(data?: ListUserStoreRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserStoreResponse>;
   /** 重置用户密码 {@link ResetPasswordRequest} {@link ResetPasswordResponse} */
   ResetPassword(data: ResetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetPasswordResponse>;
   /** 设置用户密码 {@link SetPasswordRequest} {@link SetPasswordResponse} */
   SetPassword(data: SetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<SetPasswordResponse>;
   /** 更新用户 {@link UpdateUserRequest} {@link UpdateUserResponse} */
   UpdateUser(data: UpdateUserRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserResponse>;
+  /** 更新用户组 {@link UpdateUserGroupRequest} {@link UpdateUserGroupResponse} */
+  UpdateUserGroup(data: UpdateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserGroupResponse>;
   /** 更新用户状态 {@link UpdateUserStatusRequest} {@link UpdateUserStatusResponse} */
   UpdateUserStatus(data: UpdateUserStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserStatusResponse>;
+  /** 更新用户目录 {@link UpdateUserStoreRequest} {@link UpdateUserStoreResponse} */
+  UpdateUserStore(data: UpdateUserStoreRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserStoreResponse>;
 }
 
 export declare type Versions = ["2022-03-31"];

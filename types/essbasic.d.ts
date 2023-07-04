@@ -18,7 +18,7 @@ declare interface Agent {
 
 /** 签署人个性化能力信息 */
 declare interface ApproverOption {
-  /** 是否隐藏一键签署 false-不隐藏,默认 true-隐藏 */
+  /** 是否隐藏一键签署 默认false-不隐藏true-隐藏 */
   HideOneKeySign?: boolean;
 }
 
