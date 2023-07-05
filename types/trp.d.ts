@@ -320,6 +320,32 @@ declare interface Quota {
   Version?: string | null;
 }
 
+/** 原始扫码日志 */
+declare interface RawScanLog {
+  /** 日志ID */
+  LogId?: number;
+  /** 微信小程序openid */
+  Openid?: string | null;
+  /** 扫码时间 */
+  CreateTime?: string;
+  /** 溯源码 */
+  Code?: string;
+  /** 企业ID */
+  CorpId?: number;
+  /** 商户ID */
+  MerchantId?: string | null;
+  /** 商品ID */
+  ProductId?: string | null;
+  /** 批次ID */
+  BatchId?: string | null;
+  /** 省份 */
+  Province?: string | null;
+  /** 地市 */
+  City?: string | null;
+  /** 区/县 */
+  District?: string | null;
+}
+
 /** 扫码明细 */
 declare interface ScanLog {
   /** 行ID */
@@ -1104,6 +1130,24 @@ declare interface DescribeProductsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRawScanLogsRequest {
+  /** 企业ID, 默认为当前企业如果有渠道权限，可以传 0 会查渠道下所有的企业 */
+  CorpId?: number;
+  /** 分页数量，默认为 100，最大为 1000 */
+  PageSize?: number;
+  /** 当前分页，默认为 1 */
+  PageNumber?: number;
+  /** 从哪个日志后查询即: LogId > $AfterLogId */
+  AfterLogId?: number;
+}
+
+declare interface DescribeRawScanLogsResponse {
+  /** 原始扫码日志 */
+  ScanLogs?: RawScanLog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScanLogsRequest {
   /** 企业ID */
   CorpId?: number;
@@ -1391,11 +1435,11 @@ declare interface ModifyTraceCodeUnlinkRequest {
 
 declare interface ModifyTraceCodeUnlinkResponse {
   /** 成功解绑溯源码的数量 */
-  UnlinkCnt: number;
+  UnlinkCnt?: number;
   /** 当前批次的码数量 */
-  CodeCnt: number;
+  CodeCnt?: number;
   /** 批次ID */
-  BatchId: string;
+  BatchId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1539,6 +1583,8 @@ declare interface Trp {
   DescribeProductById(data: DescribeProductByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductByIdResponse>;
   /** 查询商品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
+  /** 增量查询原始扫码日志 {@link DescribeRawScanLogsRequest} {@link DescribeRawScanLogsResponse} */
+  DescribeRawScanLogs(data?: DescribeRawScanLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRawScanLogsResponse>;
   /** 查询扫码日志明细 {@link DescribeScanLogsRequest} {@link DescribeScanLogsResponse} */
   DescribeScanLogs(data?: DescribeScanLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanLogsResponse>;
   /** 查询扫码统计列表 {@link DescribeScanStatsRequest} {@link DescribeScanStatsResponse} */

@@ -470,10 +470,80 @@ declare interface Filters {
   Values: string[];
 }
 
+/** Hive查询详情 */
+declare interface HiveQuery {
+  /** 查询语句 */
+  Statement?: string | null;
+  /** 执行时长 */
+  Duration?: string | null;
+  /** 开始时间毫秒 */
+  StartTime?: number | null;
+  /** 结束时间毫秒 */
+  EndTime?: number | null;
+  /** 状态 */
+  State?: string | null;
+  /** 用户 */
+  User?: string | null;
+  /** appId列表 */
+  JobIds?: string[] | null;
+  /** 执行引擎 */
+  ExecutionEngine?: string | null;
+  /** 查询ID */
+  Id?: string | null;
+}
+
 /** Pod HostPath挂载方式描述 */
 declare interface HostVolumeContext {
   /** Pod挂载宿主机的目录。资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用 */
   VolumePath: string | null;
+}
+
+/** Impala查询详情 */
+declare interface ImpalaQuery {
+  /** 执行语句 */
+  Statement?: string | null;
+  /** 查询ID */
+  Id?: string | null;
+  /** 开始时间 */
+  StartTime?: number | null;
+  /** 运行时间 */
+  Duration?: string | null;
+  /** 结束时间 */
+  EndTime?: number | null;
+  /** 执行状态 */
+  State?: string | null;
+  /** 获取行数 */
+  RowsFetched?: number | null;
+  /** 用户 */
+  User?: string | null;
+  /** 默认DB */
+  DefaultDB?: string | null;
+  /** 执行的Coordinator节点 */
+  Coordinator?: string | null;
+  /** 单节点内存峰值 */
+  MaxNodePeakMemoryUsage?: string | null;
+  /** 查询类型 */
+  QueryType?: string | null;
+  /** 扫描的HDFS行数 */
+  ScanHDFSRows?: number | null;
+  /** 扫描的Kudu行数 */
+  ScanKUDURows?: number | null;
+  /** 扫描的总行数 */
+  ScanRowsTotal?: number | null;
+  /** 读取的总字节数 */
+  TotalBytesRead?: number | null;
+  /** 发送的总字节数 */
+  TotalBytesSent?: number | null;
+  /** CPU总时间 */
+  TotalCpuTime?: number | null;
+  /** 内部数据发送总量(Bytes) */
+  TotalInnerBytesSent?: number | null;
+  /** 内部扫描数据发送总量(Bytes) */
+  TotalScanBytesSent?: number | null;
+  /** 预估单节点内存 */
+  EstimatedPerHostMemBytes?: number | null;
+  /** 从缓存中获取的数据行数 */
+  NumRowsFetchedFromCache?: number | null;
 }
 
 /** 实例预付费参数，只有在付费类型为PREPAID时生效。 */
@@ -1224,6 +1294,108 @@ declare interface VirtualPrivateCloud {
   SubnetId: string;
 }
 
+/** Yarn 运行的Application信息 */
+declare interface YarnApplication {
+  /** 应用ID */
+  Id?: string | null;
+  /** 用户 */
+  User?: string | null;
+  /** 应用名 */
+  Name?: string | null;
+  /** 队列 */
+  Queue?: string | null;
+  /** 应用类型 */
+  ApplicationType?: string | null;
+  /** 运行时间 */
+  ElapsedTime?: string | null;
+  /** 状态 */
+  State?: string | null;
+  /** 最终状态 */
+  FinalStatus?: string | null;
+  /** 进度 */
+  Progress?: number | null;
+  /** 开始时间毫秒 */
+  StartedTime?: number | null;
+  /** 结束时间毫秒 */
+  FinishedTime?: number | null;
+  /** 申请内存MB */
+  AllocatedMB?: number | null;
+  /** 申请VCores */
+  AllocatedVCores?: number | null;
+  /** 运行的Containers数 */
+  RunningContainers?: number | null;
+  /** 内存MB*时间秒 */
+  MemorySeconds?: number | null;
+  /** VCores*时间秒 */
+  VCoreSeconds?: number | null;
+  /** 队列资源占比 */
+  QueueUsagePercentage?: number | null;
+  /** 集群资源占比 */
+  ClusterUsagePercentage?: number | null;
+  /** 预占用的内存 */
+  PreemptedResourceMB?: number | null;
+  /** 预占用的VCore */
+  PreemptedResourceVCores?: number | null;
+  /** 预占的非应用程序主节点容器数量 */
+  NumNonAMContainerPreempted?: number | null;
+  /** AM预占用的容器数量 */
+  NumAMContainerPreempted?: number | null;
+  /** Map总数 */
+  MapsTotal?: number | null;
+  /** 完成的Map数 */
+  MapsCompleted?: number | null;
+  /** Reduce总数 */
+  ReducesTotal?: number | null;
+  /** 完成的Reduce数 */
+  ReducesCompleted?: number | null;
+  /** 平均Map时间 */
+  AvgMapTime?: number | null;
+  /** 平均Reduce时间 */
+  AvgReduceTime?: number | null;
+  /** 平均Shuffle时间毫秒 */
+  AvgShuffleTime?: number | null;
+  /** 平均Merge时间毫秒 */
+  AvgMergeTime?: number | null;
+  /** 失败的Reduce执行次数 */
+  FailedReduceAttempts?: number | null;
+  /** Kill的Reduce执行次数 */
+  KilledReduceAttempts?: number | null;
+  /** 成功的Reduce执行次数 */
+  SuccessfulReduceAttempts?: number | null;
+  /** 失败的Map执行次数 */
+  FailedMapAttempts?: number | null;
+  /** Kill的Map执行次数 */
+  KilledMapAttempts?: number | null;
+  /** 成功的Map执行次数 */
+  SuccessfulMapAttempts?: number | null;
+  /** GC毫秒 */
+  GcTimeMillis?: number | null;
+  /** Map使用的VCore毫秒 */
+  VCoreMillisMaps?: number | null;
+  /** Map使用的内存毫秒 */
+  MbMillisMaps?: number | null;
+  /** Reduce使用的VCore毫秒 */
+  VCoreMillisReduces?: number | null;
+  /** Reduce使用的内存毫秒 */
+  MbMillisReduces?: number | null;
+  /** 启动Map的总数 */
+  TotalLaunchedMaps?: number | null;
+  /** 启动Reduce的总数 */
+  TotalLaunchedReduces?: number | null;
+  /** Map输入记录数 */
+  MapInputRecords?: number | null;
+  /** Map输出记录数 */
+  MapOutputRecords?: number | null;
+  /** Reduce输入记录数 */
+  ReduceInputRecords?: number | null;
+  /** Reduce输出记录数 */
+  ReduceOutputRecords?: number | null;
+  /** HDFS写入字节数 */
+  HDFSBytesWritten?: number | null;
+  /** HDFS读取字节数 */
+  HDFSBytesRead?: number | null;
+}
+
 /** 用于创建集群价格清单 不同可用区下价格详情 */
 declare interface ZoneDetailPriceResult {
   /** 可用区Id */
@@ -1492,6 +1664,50 @@ declare interface DescribeEmrApplicationStaticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHiveQueriesRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 起始时间秒 */
+  StartTime: number;
+  /** 结束时间秒，EndTime-StartTime不得超过31天秒数31*24*3600 */
+  EndTime: number;
+  /** 分页起始偏移，从0开始 */
+  Offset: number;
+  /** 分页大小，合法范围[1,100] */
+  Limit: number;
+}
+
+declare interface DescribeHiveQueriesResponse {
+  /** 总条数 */
+  Total?: number;
+  /** 结果列表 */
+  Results?: HiveQuery[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImpalaQueriesRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 起始时间秒 */
+  StartTime: number;
+  /** 结束时间秒，EndTime-StartTime不得超过31天秒数31243600 */
+  EndTime: number;
+  /** 分页起始偏移，从0开始 */
+  Offset: number;
+  /** 分页大小，合法范围[1,100] */
+  Limit: number;
+}
+
+declare interface DescribeImpalaQueriesResponse {
+  /** 总数 */
+  Total?: number;
+  /** 结果列表 */
+  Results?: ImpalaQuery[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceRenewNodesRequest {
   /** 集群实例ID,实例ID形如: emr-xxxxxxxx */
   InstanceId: string;
@@ -1610,6 +1826,28 @@ declare interface DescribeUsersForUserManagerResponse {
   TotalCnt: number;
   /** 用户信息列表 */
   UserManagerUserList: UserManagerUserBriefInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeYarnApplicationsRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 起始时间秒 */
+  StartTime: number;
+  /** 结束时间秒，EndTime-StartTime不得超过31天秒数31243600 */
+  EndTime: number;
+  /** 分页起始偏移，从0开始 */
+  Offset: number;
+  /** 分页大小，合法范围[1,100] */
+  Limit: number;
+}
+
+declare interface DescribeYarnApplicationsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 结果列表 */
+  Results?: YarnApplication[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2091,6 +2329,10 @@ declare interface Emr {
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
   /** 查询YARN的任务统计信息 {@link DescribeEmrApplicationStaticsRequest} {@link DescribeEmrApplicationStaticsResponse} */
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
+  /** 获取hive查询信息 {@link DescribeHiveQueriesRequest} {@link DescribeHiveQueriesResponse} */
+  DescribeHiveQueries(data: DescribeHiveQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHiveQueriesResponse>;
+  /** 获取Impala查询列表 {@link DescribeImpalaQueriesRequest} {@link DescribeImpalaQueriesResponse} */
+  DescribeImpalaQueries(data: DescribeImpalaQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImpalaQueriesResponse>;
   /** 查询待续费节点信息 {@link DescribeInstanceRenewNodesRequest} {@link DescribeInstanceRenewNodesResponse} */
   DescribeInstanceRenewNodes(data: DescribeInstanceRenewNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRenewNodesResponse>;
   /** 查询集群实例信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
@@ -2103,6 +2345,8 @@ declare interface Emr {
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
   /** 查询用户列表 {@link DescribeUsersForUserManagerRequest} {@link DescribeUsersForUserManagerResponse} */
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;
+  /** 获取Yarn的任务信息 {@link DescribeYarnApplicationsRequest} {@link DescribeYarnApplicationsResponse} */
+  DescribeYarnApplications(data: DescribeYarnApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYarnApplicationsResponse>;
   /** 集群续费询价 {@link InquirePriceRenewEmrRequest} {@link InquirePriceRenewEmrResponse} */
   InquirePriceRenewEmr(data: InquirePriceRenewEmrRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewEmrResponse>;
   /** 创建实例询价 {@link InquiryPriceCreateInstanceRequest} {@link InquiryPriceCreateInstanceResponse} */

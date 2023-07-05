@@ -2562,7 +2562,7 @@ declare interface DescribeServiceEnvironmentReleaseHistoryRequest {
   /** 待查询的服务唯一 ID。 */
   ServiceId: string;
   /** 环境名称。 */
-  EnvironmentName: string;
+  EnvironmentName?: string;
   /** 返回数量，默认为 20，最大值为 100。 */
   Limit?: number;
   /** 偏移量，默认为 0。 */
@@ -2571,7 +2571,7 @@ declare interface DescribeServiceEnvironmentReleaseHistoryRequest {
 
 declare interface DescribeServiceEnvironmentReleaseHistoryResponse {
   /** 服务发布历史。 */
-  Result: ServiceReleaseHistory | null;
+  Result?: ServiceReleaseHistory | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

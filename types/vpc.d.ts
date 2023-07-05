@@ -41,35 +41,37 @@ declare interface Address {
   /** 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
   CreatedTime?: string;
   /** 绑定的弹性网卡ID */
-  NetworkInterfaceId: string;
+  NetworkInterfaceId?: string;
   /** 绑定的资源内网ip */
-  PrivateAddressIp: string;
+  PrivateAddressIp?: string;
   /** 资源隔离状态。true表示eip处于隔离状态，false表示资源处于未隔离状态 */
-  IsArrears: boolean;
+  IsArrears?: boolean;
   /** 资源封堵状态。true表示eip处于封堵状态，false表示eip处于未封堵状态 */
-  IsBlocked: boolean;
+  IsBlocked?: boolean;
   /** eip是否支持直通模式。true表示eip支持直通模式，false表示资源不支持直通模式 */
-  IsEipDirectConnection: boolean;
+  IsEipDirectConnection?: boolean;
   /** EIP 资源类型，包括CalcIP、WanIP、EIP和AnycastEIP、高防EIP。其中：`CalcIP` 表示设备 IP，`WanIP` 表示普通公网 IP，`EIP` 表示弹性公网 IP，`AnycastEip` 表示加速 EIP，`AntiDDoSEIP`表示高防EIP。 */
-  AddressType: string;
+  AddressType?: string;
   /** eip是否在解绑后自动释放。true表示eip将会在解绑后自动释放，false表示eip在解绑后不会自动释放 */
-  CascadeRelease: boolean;
+  CascadeRelease?: boolean;
   /** EIP ALG开启的协议类型。 */
-  EipAlgType: AlgType;
+  EipAlgType?: AlgType;
   /** 弹性公网IP的运营商信息，当前可能返回值包括"CMCC","CTCC","CUCC","BGP" */
-  InternetServiceProvider: string;
+  InternetServiceProvider?: string;
   /** 是否本地带宽EIP */
-  LocalBgp: boolean;
+  LocalBgp?: boolean;
   /** 弹性公网IP的带宽值。注意，传统账户类型账户的弹性公网IP没有带宽属性，值为空。 */
-  Bandwidth: number | null;
+  Bandwidth?: number | null;
   /** 弹性公网IP的网络计费模式。注意，传统账户类型账户的弹性公网IP没有网络计费模式属性，值为空。包括：BANDWIDTH_PREPAID_BY_MONTH表示包月带宽预付费。TRAFFIC_POSTPAID_BY_HOUR表示按小时流量后付费。BANDWIDTH_POSTPAID_BY_HOUR表示按小时带宽后付费。BANDWIDTH_PACKAGE表示共享带宽包。 */
-  InternetChargeType: string | null;
+  InternetChargeType?: string | null;
   /** 弹性公网IP关联的标签列表。 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 到期时间。 */
-  DeadlineDate: string | null;
+  DeadlineDate?: string | null;
   /** EIP绑定的实例类型。 */
-  InstanceType: string | null;
+  InstanceType?: string | null;
+  /** 高防包ID,当EIP类型为高防EIP时，返回EIP绑定的高防包ID. */
+  AntiDDoSPackageId?: string;
 }
 
 /** 用于描述弹性公网IP的费用对象 */
@@ -2307,6 +2309,10 @@ declare interface AllocateAddressesRequest {
   AddressName?: string;
   /** 网络出口，默认是：center_egress1 */
   Egress?: string;
+  /** 高防包ID， 申请高防IP时，该字段必传。 */
+  AntiDDoSPackageId?: string;
+  /** 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。 */
+  ClientToken?: string;
 }
 
 declare interface AllocateAddressesResponse {
@@ -4065,7 +4071,7 @@ declare interface DescribeCcnAttachedInstancesRequest {
   Offset?: number;
   /** 返回数量 */
   Limit?: number;
-  /** 过滤条件：ccn-id - String -（过滤条件）CCN实例ID。instance-type - String -（过滤条件）关联实例类型。instance-region - String -（过滤条件）关联实例所属地域。instance-id - String -（过滤条件）关联实例实例ID。 */
+  /** 过滤条件：ccn-id - String -（过滤条件）CCN实例ID。instance-type - String -（过滤条件）关联实例类型。instance-region - String -（过滤条件）关联实例所属地域。instance-id - String -（过滤条件）关联实例ID。 */
   Filters?: Filter[];
   /** 云联网实例ID */
   CcnId?: string;

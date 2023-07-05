@@ -245,11 +245,13 @@ declare interface FailedCreateRoleData {
 /** 创建员工的失败数据 */
 declare interface FailedCreateStaffData {
   /** 员工名 */
-  DisplayName: string;
+  DisplayName?: string;
   /** 员工手机号 */
-  Mobile: string;
+  Mobile?: string;
+  /** 传入的企微账号id */
+  WeworkOpenId?: string;
   /** 失败原因 */
-  Reason: string;
+  Reason?: string;
 }
 
 /** 删除员工失败数据 */
@@ -734,7 +736,7 @@ declare interface SignUrl {
 
 /** 企业员工信息 */
 declare interface Staff {
-  /** 用户在电子签平台的id */
+  /** 用户在电子签平台的id注：创建和更新场景无需填写 */
   UserId?: string;
   /** 显示的用户名/昵称 */
   DisplayName?: string;
@@ -744,22 +746,24 @@ declare interface Staff {
   Email?: string | null;
   /** 用户在第三方平台id，如需在此接口提醒员工实名，该参数不传 */
   OpenId?: string | null;
-  /** 员工角色 */
+  /** 员工角色注：创建和更新场景无需填写 */
   Roles?: StaffRole[] | null;
   /** 员工部门 */
   Department?: Department | null;
-  /** 员工是否实名 */
+  /** 员工是否实名注：创建和更新场景无需填写 */
   Verified?: boolean;
-  /** 员工创建时间戳，单位秒 */
+  /** 员工创建时间戳，单位秒注：创建和更新场景无需填写 */
   CreatedOn?: number;
-  /** 员工实名时间戳，单位秒 */
+  /** 员工实名时间戳，单位秒注：创建和更新场景无需填写 */
   VerifiedOn?: number | null;
-  /** 员工是否离职：0-未离职，1-离职 */
+  /** 员工是否离职：0-未离职，1-离职注：创建和更新场景无需填写 */
   QuiteJob?: number | null;
-  /** 员工离职交接人用户id */
+  /** 员工离职交接人用户id注：创建和更新场景无需填写 */
   ReceiveUserId?: string;
-  /** 员工离职交接人用户OpenId */
+  /** 员工离职交接人用户OpenId注：创建和更新场景无需填写 */
   ReceiveOpenId?: string;
+  /** 企业微信用户账号ID注：仅企微类型的企业创建员工接口支持该字段 */
+  WeworkOpenId?: string | null;
 }
 
 /** 集成版企业角色信息 */
@@ -773,13 +777,15 @@ declare interface StaffRole {
 /** 创建员工的成功数据 */
 declare interface SuccessCreateStaffData {
   /** 员工名 */
-  DisplayName: string;
+  DisplayName?: string;
   /** 员工手机号 */
-  Mobile: string;
+  Mobile?: string;
   /** 员工在电子签平台的id */
-  UserId: string;
+  UserId?: string;
   /** 提示，当创建已存在未实名用户时，该字段有值 */
   Note?: string | null;
+  /** 传入的企微账号id */
+  WeworkOpenId?: string;
 }
 
 /** 删除员工的成功数据 */
@@ -1191,6 +1197,10 @@ declare interface CreateFlowSignReviewRequest {
   ReviewMessage?: string;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 审核签署节点使用 非必填 如果填写则审核该签署节点。给个人审核时必填。 */
+  RecipientId?: string;
+  /** 操作类型：操作类型，默认：SignReview；SignReview:签署审核注：接口通过该字段区分操作类型该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若发起个人审核，则指定该字段为：SignReview（注意，给个人审核时，需联系客户经理开白使用） */
+  OperateType?: string;
 }
 
 declare interface CreateFlowSignReviewResponse {
@@ -1243,7 +1253,7 @@ declare interface CreateIntegrationDepartmentResponse {
 declare interface CreateIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
-  /** 待创建员工的信息，不超过20个。Mobile和DisplayName必填,OpenId、Email和Department.DepartmentId选填，其他字段暂不支持。 */
+  /** 待创建员工的信息，不超过20个。所有类型的企业支持的入参：Mobile和DisplayName必填,OpenId、Email和Department.DepartmentId选填，其他字段暂不支持。企微类型的企业特有支持的入参：WeworkOpenId，传入此字段无需在传入其他信息 */
   Employees: Staff[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;

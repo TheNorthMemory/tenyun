@@ -233,7 +233,7 @@ declare interface CreatePrivateZoneRecordRequest {
 
 declare interface CreatePrivateZoneRecordResponse {
   /** 记录Id */
-  RecordId: string;
+  RecordId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

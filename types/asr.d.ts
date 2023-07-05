@@ -134,6 +134,24 @@ declare interface Vocab {
   TagInfos: string[] | null;
 }
 
+/** 说话人基础数据，包括说话人id和说话人昵称 */
+declare interface VoicePrintBaseData {
+  /** 说话人id */
+  VoicePrintId?: string | null;
+  /** 说话人昵称 */
+  SpeakerNick?: string | null;
+}
+
+/** 说话人验证数据 */
+declare interface VoicePrintVerifyData {
+  /** 说话人id */
+  VoicePrintId?: string | null;
+  /** 匹配度 取值范围(0.0 - 100.0) */
+  Score?: string | null;
+  /** 验证结果 0: 未通过 1: 通过 */
+  Decision?: number | null;
+}
+
 declare interface CloseAsyncRecognitionTaskRequest {
   /** 语音流异步识别任务的唯一标识，在创建任务时会返回 */
   TaskId: number;
@@ -163,7 +181,7 @@ declare interface CreateAsrVocabResponse {
 }
 
 declare interface CreateAsyncRecognitionTaskRequest {
-  /** 引擎模型类型。• 16k_zh：中文普通话通用；• 16k_en：英语；• 16k_ca：粤语；• 16k_id：印度尼西亚语；• 16k_fil：菲律宾语；• 16k_th：泰语；• 16k_pt：葡萄牙语；• 16k_tr：土耳其语； */
+  /** 引擎模型类型。• 16k_zh：中文普通话通用；• 16k_en：英语；• 16k_yue：粤语；• 16k_id：印度尼西亚语；• 16k_fil：菲律宾语；• 16k_th：泰语；• 16k_pt：葡萄牙语；• 16k_tr：土耳其语； */
   EngineType: string;
   /** 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls, m3u8) */
   Url: string;
@@ -213,11 +231,11 @@ declare interface CreateCustomizationResponse {
 }
 
 declare interface CreateRecTaskRequest {
-  /** 引擎模型类型。注意：非电话场景请务必使用16k的引擎。电话场景：• 8k_zh：中文电话通用；• 8k_en：英文电话通用；非电话场景：• 16k_zh：中文通用；• 16k_zh-PY：中英粤;• 16k_zh_medical：中文医疗；• 16k_en：英语；• 16k_ca：粤语；• 16k_ja：日语；• 16k_ko：韩语；• 16k_vi：越南语；• 16k_ms：马来语；• 16k_id：印度尼西亚语；• 16k_fil：菲律宾语；• 16k_th：泰语；• 16k_pt：葡萄牙语；• 16k_tr：土耳其语；• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）； */
+  /** 引擎模型类型。注意：非电话场景请务必使用16k的引擎。电话场景：• 8k_zh：中文电话通用；• 8k_en：英文电话通用；非电话场景：• 16k_zh：中文通用；• 16k_zh-PY：中英粤;• 16k_zh_medical：中文医疗；• 16k_en：英语；• 16k_yue：粤语；• 16k_ja：日语；• 16k_ko：韩语；• 16k_vi：越南语；• 16k_ms：马来语；• 16k_id：印度尼西亚语；• 16k_fil：菲律宾语；• 16k_th：泰语；• 16k_pt：葡萄牙语；• 16k_tr：土耳其语；• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）； */
   EngineModelType: string;
   /** 识别声道数。1：单声道（非电话场景，直接选择单声道即可，忽略音频声道数）；2：双声道（仅支持8k_zh电话场景，双声道应分别对应通话双方）。注意：双声道的电话音频已物理分离说话人，无需再开启说话人分离功能。 */
   ChannelNum: number;
-  /** 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824)(不含标点，含语速值)；2：词级别粒度的详细识别结果（包含标点、语速值）；3: 标点符号分段，包含每段时间戳，特别适用于字幕场景（包含词级时间、标点、语速值）。 */
+  /** 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824)(不含标点，含语速值)；2：词级别粒度的详细识别结果（包含标点、语速值）；3: 标点符号分段，包含每段时间戳，特别适用于字幕场景（包含词级时间、标点、语速值）。4：【付费功能】将对ASR结果按照语义分段，并展示词级别粒度的详细识别结果（注意：如果开启后付费，将[自动计费](https://cloud.tencent.com/document/product/1093/35686)） */
   ResTextFormat: number;
   /** 语音数据来源。0：语音 URL；1：语音数据（post body）。 */
   SourceType: number;
@@ -520,6 +538,74 @@ declare interface UpdateAsrVocabResponse {
   RequestId?: string;
 }
 
+declare interface VoicePrintDeleteRequest {
+  /** 说话人id，说话人唯一标识 */
+  VoicePrintId: string;
+}
+
+declare interface VoicePrintDeleteResponse {
+  /** 说话人基本信息 */
+  Data?: VoicePrintBaseData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VoicePrintEnrollRequest {
+  /** 音频格式 0: pcm, 1: wav */
+  VoiceFormat: number;
+  /** 音频采样率，目前支持16000，单位：Hz，必填 */
+  SampleRate: number;
+  /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
+  Data: string;
+  /** 说话人昵称 不超过32字节 */
+  SpeakerNick?: string;
+}
+
+declare interface VoicePrintEnrollResponse {
+  /** 说话人基本数据 */
+  Data?: VoicePrintBaseData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VoicePrintUpdateRequest {
+  /** 音频格式 0: pcm, 1: wav */
+  VoiceFormat: number;
+  /** 音频采样率 目前仅支持16000 单位Hz */
+  SampleRate: number;
+  /** 说话人id， 说话人唯一标识 */
+  VoicePrintId: string;
+  /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
+  Data: string;
+  /** 说话人昵称 不超过32字节 */
+  SpeakerNick?: string;
+}
+
+declare interface VoicePrintUpdateResponse {
+  /** 说话人基础数据 */
+  Data?: VoicePrintBaseData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VoicePrintVerifyRequest {
+  /** 音频格式 0: pcm, 1: wav */
+  VoiceFormat: number;
+  /** 音频采样率，目前支持16000，单位：Hz，必填 */
+  SampleRate: number;
+  /** 说话人id, 说话人唯一标识 */
+  VoicePrintId: string;
+  /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
+  Data: string;
+}
+
+declare interface VoicePrintVerifyResponse {
+  /** 说话人验证数据 */
+  Data?: VoicePrintVerifyData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Asr 语音识别} */
 declare interface Asr {
   (): Versions;
@@ -563,6 +649,14 @@ declare interface Asr {
   SetVocabState(data: SetVocabStateRequest, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateResponse>;
   /** 更新热词表 {@link UpdateAsrVocabRequest} {@link UpdateAsrVocabResponse} */
   UpdateAsrVocab(data: UpdateAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAsrVocabResponse>;
+  /** 说话人删除 {@link VoicePrintDeleteRequest} {@link VoicePrintDeleteResponse} */
+  VoicePrintDelete(data: VoicePrintDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintDeleteResponse>;
+  /** 说话人注册 {@link VoicePrintEnrollRequest} {@link VoicePrintEnrollResponse} */
+  VoicePrintEnroll(data: VoicePrintEnrollRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintEnrollResponse>;
+  /** 说话人更新 {@link VoicePrintUpdateRequest} {@link VoicePrintUpdateResponse} */
+  VoicePrintUpdate(data: VoicePrintUpdateRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintUpdateResponse>;
+  /** 说话人认证 {@link VoicePrintVerifyRequest} {@link VoicePrintVerifyResponse} */
+  VoicePrintVerify(data: VoicePrintVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintVerifyResponse>;
 }
 
 export declare type Versions = ["2019-06-14"];

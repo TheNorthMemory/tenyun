@@ -58,6 +58,12 @@ declare interface AlarmIndicatorInfo {
   Operator?: number | null;
   /** 告警指标阈值单位：ms(毫秒)、s(秒)、min(分钟) */
   AlarmIndicatorUnit?: string | null;
+  /** 告警周期 */
+  Duration?: number;
+  /** 告警周期单位 */
+  DurationUnit?: string;
+  /** 周期内最多告警次数 */
+  MaxTimes?: number;
 }
 
 /** 任务告警信息 */
@@ -450,6 +456,78 @@ declare interface DimensionScoreInfo {
   JoinTableNumber: number;
   /** 评分 */
   Score: number;
+}
+
+/** 数据治理配置项 */
+declare interface DlcDataGovernPolicy {
+  /** 数据排布治理项 */
+  RewriteDataPolicy?: DlcRewriteDataInfo | null;
+  /** 快照过期治理项 */
+  ExpiredSnapshotsPolicy?: DlcExpiredSnapshotsInfo | null;
+  /** 移除孤立文件治理项 */
+  RemoveOrphanFilesPolicy?: DlcRemoveOrphanFilesInfo | null;
+  /** 合并元数据Manifests治理项 */
+  MergeManifestsPolicy?: DlcMergeManifestsInfo | null;
+  /** 是否集成库规则：default（默认继承）、none（不继承） */
+  InheritDataBase?: string | null;
+  /** 治理规则类型，Customize: 自定义；Intelligence: 智能治理 */
+  RuleType?: string | null;
+  /** 治理引擎 */
+  GovernEngine?: string | null;
+}
+
+/** 快照过期治理项 */
+declare interface DlcExpiredSnapshotsInfo {
+  /** 是否启用快照过期治理项：enable、none */
+  ExpiredSnapshotsEnable?: string | null;
+  /** 用于运行快照过期治理项的引擎名称 */
+  Engine?: string | null;
+  /** 需要保留的最近快照个数 */
+  RetainLast?: number | null;
+  /** 过期指定天前的快照 */
+  BeforeDays?: number | null;
+  /** 清理过期快照的并行数 */
+  MaxConcurrentDeletes?: number | null;
+  /** 快照过期治理运行周期，单位为分钟 */
+  IntervalMin?: number | null;
+}
+
+/** 合并元数据Manifests治理项 */
+declare interface DlcMergeManifestsInfo {
+  /** 是否启用合并元数据Manifests文件治理项：enable、none */
+  MergeManifestsEnable?: string | null;
+  /** 用于运行合并元数据Manifests文件治理项的引擎名称 */
+  Engine?: string | null;
+  /** 合并元数据Manifests文件治理运行周期，单位为分钟 */
+  IntervalMin?: number | null;
+}
+
+/** 移除孤立文件治理项 */
+declare interface DlcRemoveOrphanFilesInfo {
+  /** 是否启用移除孤立文件治理项：enable、none */
+  RemoveOrphanFilesEnable?: string | null;
+  /** 用于运行移除孤立文件治理项的引擎名称 */
+  Engine?: string | null;
+  /** 移除指定天前的孤立文件 */
+  BeforeDays?: number | null;
+  /** 移除孤立文件的并行数 */
+  MaxConcurrentDeletes?: number | null;
+  /** 移除孤立文件治理运行周期，单位为分钟 */
+  IntervalMin?: number | null;
+}
+
+/** 数据排布治理项 */
+declare interface DlcRewriteDataInfo {
+  /** 是否启用数据重排布治理项：enable（启动）、disable（不启用，默认） */
+  RewriteDataEnable?: string | null;
+  /** 用于运行数据重排布治理项的引擎名称 */
+  Engine?: string | null;
+  /** 重排布任务执行的文件个数 */
+  MinInputFiles?: number | null;
+  /** 数据重排布写后的数据文件大小，单位为字节 */
+  TargetFileSizeBytes?: number | null;
+  /** 数据重排布治理运行周期，单位为分钟 */
+  IntervalMin?: number | null;
 }
 
 /** 数据导出任务详情 */
@@ -1241,9 +1319,9 @@ declare interface RealTimeTaskSpeed {
 /** 通用记录字段 */
 declare interface RecordField {
   /** 字段名称 */
-  Name: string;
+  Name?: string;
   /** 字段值 */
-  Value: string;
+  Value?: string;
 }
 
 /** 实时任务同步速度 条/s */
@@ -1998,6 +2076,8 @@ declare interface SourceFieldInfo {
   FieldType?: string;
   /** 字段别名 */
   Alias?: string;
+  /** 字段描述 */
+  Comment?: string | null;
 }
 
 /** 数据质量数据对象 */
@@ -2048,6 +2128,30 @@ declare interface SubscribeWebHook {
   HookType?: string | null;
   /** 群机器人webhook地址，配置方式参考https://cloud.tencent.com/document/product/1254/70736 */
   HookAddress?: string | null;
+}
+
+/** 建dlc表所需信息 */
+declare interface TableBaseInfo {
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 数据表所属数据源名字 */
+  DatasourceConnectionName?: string | null;
+  /** 表备注 */
+  TableComment?: string | null;
+  /** 类型 */
+  Type?: string | null;
+  /** 数据格式类型 */
+  TableFormat?: string | null;
+  /** 用户昵称 */
+  UserAlias?: string | null;
+  /** 建表用户ID */
+  UserSubUin?: string | null;
+  /** 数据治理配置项 */
+  GovernPolicy?: DlcDataGovernPolicy | null;
+  /** 库数据治理是否关闭，关闭：true，开启：false */
+  DbGovernPolicyIsDisable?: string | null;
 }
 
 /** 规则表变量替换 */
@@ -3077,11 +3181,13 @@ declare interface CommitIntegrationTaskRequest {
   CommitType?: number;
   /** 实时任务 201 离线任务 202 默认实时任务 */
   TaskType?: number;
+  /** 额外参数 */
+  ExtConfig?: RecordField[];
 }
 
 declare interface CommitIntegrationTaskResponse {
   /** 操作成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5691,6 +5797,10 @@ declare interface GenHiveTableDDLSqlRequest {
   AddDeleteFiles?: number;
   /** 下游节点数据源ID */
   TargetDatasourceId?: string;
+  /** dlc upsert主键 */
+  UpsertKeys?: string[];
+  /** dlc表治理信息 */
+  TableBaseInfo?: TableBaseInfo;
 }
 
 declare interface GenHiveTableDDLSqlResponse {
@@ -6417,11 +6527,15 @@ declare interface ResumeIntegrationTaskRequest {
   TaskId: string;
   /** 项目id */
   ProjectId: string;
+  /** 事件类型(START, STOP, SUSPEND, RESUME, COMMIT, TIMESTAMP) */
+  Event?: string;
+  /** 额外参数 */
+  ExtConfig?: RecordField[];
 }
 
 declare interface ResumeIntegrationTaskResponse {
   /** 操作成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6548,11 +6662,15 @@ declare interface StartIntegrationTaskRequest {
   TaskId: string;
   /** 项目id */
   ProjectId: string;
+  /** 事件类型(START, STOP, SUSPEND, RESUME, COMMIT, TIMESTAMP) */
+  Event?: string;
+  /** 额外参数 */
+  ExtConfig?: RecordField[];
 }
 
 declare interface StartIntegrationTaskResponse {
   /** 操作成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

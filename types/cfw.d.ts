@@ -1809,7 +1809,7 @@ declare interface ModifyBlockTopResponse {
 }
 
 declare interface ModifyEnterpriseSecurityDispatchStatusRequest {
-  /** 0：打开立即下发开关；1：关闭立即下发开关；2：关闭立即下发开关下，触发开始下发 */
+  /** 0：打开立即下发开关；1：关闭立即下发开关；2：关闭立即下发开关情况下，触发开始下发 */
   Status: number;
 }
 

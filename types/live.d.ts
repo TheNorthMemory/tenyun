@@ -278,6 +278,8 @@ declare interface DiagnoseResult {
   StreamBrokenResults?: string[] | null;
   /** 低帧率信息 */
   LowFrameRateResults?: string[] | null;
+  /** 流格式诊断信息 */
+  StreamFormatResults?: string[] | null;
 }
 
 /** 域名证书信息 */
@@ -516,6 +518,8 @@ declare interface LiveStreamMonitorInfo {
   AiOcrInputIndexList?: number[] | null;
   /** 是否存储监播事件到监播报告，以及是否允许查询监播报告 */
   AllowMonitorReport?: number | null;
+  /** 是否开启格式诊断 */
+  AiFormatDiagnose?: number | null;
 }
 
 /** 直播监播功能输入流信息 */
@@ -1749,6 +1753,8 @@ declare interface CreateLiveStreamMonitorRequest {
   CheckStreamLowFrameRate?: number;
   /** 是否存储监播事件到监播报告，以及是否允许查询监播报告。 */
   AllowMonitorReport?: number;
+  /** 是否开启格式诊断。 */
+  AiFormatDiagnose?: number;
 }
 
 declare interface CreateLiveStreamMonitorResponse {
@@ -3943,6 +3949,8 @@ declare interface ModifyLiveStreamMonitorRequest {
   CheckStreamLowFrameRate?: number;
   /** 是否存储监播事件到监播报告，以及是否允许查询监播报告。 */
   AllowMonitorReport?: number;
+  /** 是否开启格式诊断。 */
+  AiFormatDiagnose?: number;
 }
 
 declare interface ModifyLiveStreamMonitorResponse {
