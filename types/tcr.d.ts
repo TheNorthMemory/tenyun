@@ -1007,6 +1007,8 @@ declare interface CreateInstanceRequest {
   SyncTag?: boolean;
   /** 是否开启Cos桶多AZ特性 */
   EnableCosMAZ?: boolean;
+  /** 是否开启实例删除保护 */
+  DeletionProtection?: boolean;
 }
 
 declare interface CreateInstanceResponse {
@@ -2415,8 +2417,10 @@ declare interface ModifyImmutableTagRulesResponse {
 declare interface ModifyInstanceRequest {
   /** 实例ID */
   RegistryId: string;
-  /** 实例的规格 */
-  RegistryType: string;
+  /** 实例的规格,基础版：basic标准版：standard高级版：premium */
+  RegistryType?: string;
+  /** 实例删除保护，false为关闭 */
+  DeletionProtection?: boolean;
 }
 
 declare interface ModifyInstanceResponse {

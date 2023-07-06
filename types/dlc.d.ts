@@ -3001,7 +3001,7 @@ declare interface ModifyUserResponse {
 declare interface ModifyWorkGroupRequest {
   /** 工作组Id */
   WorkGroupId: number;
-  /** 工作组描述 */
+  /** 工作组描述，最大字符数限制50 */
   WorkGroupDescription: string;
 }
 

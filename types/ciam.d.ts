@@ -412,6 +412,8 @@ declare interface CreateUserGroupRequest {
 }
 
 declare interface CreateUserGroupResponse {
+  /** 用户组ID */
+  UserGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -466,6 +468,8 @@ declare interface CreateUserStoreRequest {
 }
 
 declare interface CreateUserStoreResponse {
+  /** 用户目录ID */
+  UserStoreId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

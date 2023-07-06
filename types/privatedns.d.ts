@@ -545,11 +545,11 @@ declare interface ModifyRecordsStatusRequest {
 
 declare interface ModifyRecordsStatusResponse {
   /** 私有域ID */
-  ZoneId: string;
+  ZoneId?: string;
   /** 解析记录ID列表 */
-  RecordIds: number[];
+  RecordIds?: number[];
   /** enabled：生效，disabled：失效 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

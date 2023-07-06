@@ -3335,7 +3335,7 @@ declare interface CreateHiveTableByDDLRequest {
 
 declare interface CreateHiveTableByDDLResponse {
   /** 表名称 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

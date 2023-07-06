@@ -248,6 +248,8 @@ declare interface ApplicationProxyRule {
   ForwardClientIp?: string;
   /** 是否开启会话保持，取值有：true：开启；false：关闭。默认值：false。 */
   SessionPersist?: boolean;
+  /** 会话保持的时间，只有当SessionPersist为true时，该值才会生效。 */
+  SessionPersistTime?: number | null;
   /** 源站端口，支持格式：单端口，如：80。端口段：81-82，表示81，82两个端口。 */
   OriginPort?: string;
 }
@@ -408,54 +410,14 @@ declare interface ClientIpHeader {
   HeaderName?: string | null;
 }
 
-/** 客户端规则信息 */
-declare interface ClientRule {
-  /** 客户端ip。 */
-  ClientIp: string;
-  /** 规则类型。 */
-  RuleType: string;
-  /** 规则id。 */
-  RuleId: number | null;
-  /** 规则描述。 */
-  Description: string | null;
-  /** 封禁状态，取值有：block ：封禁 ；allow ：放行 。 */
-  IpStatus: string;
-  /** 封禁时间，采用unix秒级时间戳。 */
-  BlockTime: number;
-  /** 每条数据的唯一标识id。 */
-  Id: string;
-}
-
-/** 日志任务主题信息 */
-declare interface ClsLogTopicInfo {
-  /** 任务名。 */
-  TaskName: string;
-  /** 站点名称。 */
-  ZoneName: string;
-  /** 日志集ID。 */
-  LogSetId: string;
-  /** 日志主题ID。 */
-  TopicId: string;
-  /** 任务类型。 */
-  EntityType: string;
-  /** 任务主题保存时间。 */
-  Period: number;
-  /** 任务主题是否开启。 */
-  Enabled: boolean;
-  /** 任务主题是否异常。 */
-  Deleted: string;
-  /** 创建时间。 */
-  CreateTime: string;
-  /** 推送目标地址,取值有：cls: 推送到cls；custom_enpoint: 自定义推送地址。 */
-  Target: string;
-  /** 日志集所属地区。 */
-  LogSetRegion: string | null;
-  /** 站点id。 */
-  ZoneId: string | null;
-  /** 加速区域，取值有：mainland：中国大陆境内;overseas：全球（不含中国大陆）。 */
-  Area: string;
-  /** 推送任务类型，取值有：cls：推送到cls；custom_endpoint：推送到自定义接口。 */
-  LogSetType: string;
+/** CNAME 状态 */
+declare interface CnameStatus {
+  /** 记录名称。 */
+  RecordName: string;
+  /** CNAME 地址。 */
+  Cname: string | null;
+  /** Cname状态信息，取值有：active：生效；moved：不生效。 */
+  Status: string | null;
 }
 
 /** 规则引擎带有状态码的动作 */
@@ -600,22 +562,6 @@ declare interface DiffIPWhitelist {
   RemovedIPWhitelist: IPWhitelist;
   /** 最新IP白名单列表相比于当前IP白名单列表，不变部分。 */
   NoChangeIPWhitelist: IPWhitelist;
-}
-
-/** 拨测分地域统计数据 */
-declare interface DistrictStatistics {
-  /** ISO 3166-2 国家/地区简写，详情请参考[ISO 3166-2](https://zh.m.wikipedia.org/zh-hans/ISO_3166-2)。 */
-  Alpha2: string;
-  /** 整体拨测用时，单位ms。 */
-  LoadTime: number;
-}
-
-/** Dns统计曲线数据项 */
-declare interface DnsData {
-  /** 时间。 */
-  Time: string;
-  /** 数值。 */
-  Value: number;
 }
 
 /** 拦截页面的总体配置，用于配置各个模块的拦截后行为。 */
@@ -910,18 +856,6 @@ declare interface L7OfflineLog {
   Area: string;
 }
 
-/** 日志集基本信息 */
-declare interface LogSetInfo {
-  /** 日志集所属地区。 */
-  LogSetRegion: string;
-  /** 日志集名 */
-  LogSetName: string;
-  /** 日志集Id */
-  LogSetId: string;
-  /** 该日志集是否已被删除, 可选的值有：no: 日志集没有被删除；yes: 日志集已经被删除； */
-  Deleted: string;
-}
-
 /** 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态 */
 declare interface MaxAge {
   /** 是否遵循源站，取值有：on：遵循源站，忽略MaxAge 时间设置；off：不遵循源站，使用MaxAge 时间设置。 */
@@ -948,18 +882,6 @@ declare interface NormalAction {
 declare interface OfflineCache {
   /** 离线缓存是否开启，取值有：on：开启；off：关闭。 */
   Switch: string;
-}
-
-/** 站点拨测优化建议 */
-declare interface OptimizeAction {
-  /** 站点性能优化配置项，取值有：Http2；Http3；Brotli。 */
-  Name: string;
-  /** 网络环境。 */
-  Connectivity: string;
-  /** 开启配置项后，预估性能优化效果，单位ms。 */
-  Value: number;
-  /** 开启配置项后，预估性能提升比例，单位%。 */
-  Ratio: number;
 }
 
 /** 源站配置。 */
@@ -1016,16 +938,16 @@ declare interface OriginGroup {
 
 /** 加速域名源站信息。 */
 declare interface OriginInfo {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6或域名类型源站；COS：COS源。ORIGIN_GROUP：源站组类型源站。AWS_S3：AWS S3对象存储源站。 */
-  OriginType: string | null;
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6或域名类型源站；COS：COS源。ORIGIN_GROUP：源站组类型源站。AWS_S3：AWS S3对象存储源站。SPACE：Edgeone源站Space存储，Space存储不允许配置该类型源站。 */
+  OriginType: string;
   /** 源站地址，当OriginType参数指定为ORIGIN_GROUP时，该参数填写源站组ID，其他情况下填写源站地址。 */
-  Origin: string | null;
+  Origin: string;
   /** 备用源站组ID，该参数在OriginType参数指定为ORIGIN_GROUP时生效，为空表示不使用备用源站。 */
-  BackupOrigin?: string | null;
+  BackupOrigin?: string;
   /** 指定是否允许访问私有对象存储源站，当源站类型OriginType=COS或AWS_S3时有效，取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为：off。 */
-  PrivateAccess?: string | null;
+  PrivateAccess?: string;
   /** 私有鉴权使用参数，当源站类型PrivateAccess=on时有效。 */
-  PrivateParameters?: PrivateParameter[] | null;
+  PrivateParameters?: PrivateParameter[];
 }
 
 /** 源站防护信息 */
@@ -1252,6 +1174,10 @@ declare interface Resource {
   PlanId: string;
   /** 地域，取值有：mainland：国内；overseas：海外。global：全球。 */
   Area: string;
+  /** 资源类型，取值有：plan：套餐类型；pay-as-you-go：后付费类型。value-added：增值服务类型。 */
+  Group?: string | null;
+  /** 当前资源绑定的站点数量。 */
+  ZoneNumber?: number | null;
 }
 
 /** 规则引擎HTTP请求头/响应头类型的动作 */
@@ -1398,16 +1324,6 @@ declare interface RulesSettingAction {
   Properties: RulesProperties[];
 }
 
-/** 客户端ip信息 */
-declare interface SecClientIp {
-  /** 客户端ip。 */
-  ClientIp: string;
-  /** 最大qps。 */
-  RequestMaxQps: number;
-  /** 请求数。 */
-  RequestNum: number;
-}
-
 /** 安全数据Entry返回值 */
 declare interface SecEntry {
   /** 查询维度值。 */
@@ -1428,60 +1344,6 @@ declare interface SecEntryValue {
   Avg: number;
   /** 数据总和。 */
   Sum: number;
-}
-
-/** 命中规则信息 */
-declare interface SecHitRuleInfo {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 规则ID。 */
-  RuleId: number;
-  /** 规则类型名称。 */
-  RuleTypeName: string;
-  /** 命中时间，采用unix秒级时间戳。 */
-  HitTime: number;
-  /** 请求数。 */
-  RequestNum: number;
-  /** 规则描述。 */
-  Description: string;
-  /** 子域名。 */
-  Domain: string;
-  /** 执行动作（处置方式），取值有：trans ：通过 ；alg ：算法挑战 ；drop ：丢弃 ；ban ：封禁源ip ；redirect ：重定向 ；page ：返回指定页面 ；monitor ：观察 。 */
-  Action: string;
-  /** Bot标签，取值有:evil_bot：恶意Bot；suspect_bot：疑似Bot；good_bot：正常Bot；normal：正常请求；none：未分类。 */
-  BotLabel: string;
-  /** 规则是否启用。 */
-  RuleEnabled: boolean;
-  /** 规则是否启用监控告警。 */
-  AlarmEnabled: boolean;
-  /** 规则是否存在，取值有：true: 规则不存在；false: 规则存在。 */
-  RuleDeleted: boolean;
-}
-
-/** 安全规则（cc/waf/bot）相关信息 */
-declare interface SecRuleRelatedInfo {
-  /** 规则ID。 */
-  RuleId: number;
-  /** 执行动作（处置方式），取值有：trans ：通过 ；alg ：算法挑战 ；drop ：丢弃 ；ban ：封禁源ip ；redirect ：重定向 ；page ：返回指定页面 ；monitor ：观察 。 */
-  Action: string;
-  /** 风险等级（waf日志中独有），取值有：high risk ：高危 ；middle risk ：中危 ；low risk ：低危 ；unkonw ：未知 。 */
-  RiskLevel: string;
-  /** 规则等级，取值有：normal ：正常 。 */
-  RuleLevel: string;
-  /** 规则描述。 */
-  Description: string;
-  /** 规则类型名称。 */
-  RuleTypeName: string;
-  /** 攻击内容。 */
-  AttackContent: string | null;
-  /** 规则类型，取值有：waf: 托管规则；acl：自定义规则；rate：速率限制规则；bot：bot防护规则。 */
-  RuleType: string;
-  /** 规则是否开启。 */
-  RuleEnabled: boolean;
-  /** 规则是否存在，取值有：true: 规则不存在；false: 规则存在。 */
-  RuleDeleted: boolean;
-  /** 规则是否启用监控告警。 */
-  AlarmEnabled: boolean;
 }
 
 /** 安全配置 */
@@ -1532,22 +1394,6 @@ declare interface ServerCertInfo {
   CommonName?: string | null;
 }
 
-/** 单值类数据记录 */
-declare interface SingleDataRecord {
-  /** 查询维度值。 */
-  TypeKey: string;
-  /** 查询维度下具体指标值。 */
-  TypeValue: SingleTypeValue[];
-}
-
-/** 单值指标数据 */
-declare interface SingleTypeValue {
-  /** 指标名。 */
-  MetricName: string;
-  /** 指标值。 */
-  DetailData: number;
-}
-
 /** 例外规则的跳过匹配条件，即在例外时根据本匹配条件，略过指定字段及内容。 */
 declare interface SkipCondition {
   /** 例外跳过类型，取值为：header_fields：HTTP请求Header；cookie：HTTP请求Cookie；query_string：HTTP请求URL中的Query参数；uri：HTTP请求URI；body_raw：HTTP请求Body；body_json： JSON格式的HTTP Body。 */
@@ -1594,108 +1440,14 @@ declare interface SmartRouting {
   Switch: string;
 }
 
-/** 站点拨测配置 */
-declare interface SpeedTestingConfig {
-  /** 任务类型，取值有：1：页面性能;2：文件上传;3：文件下载;4：端口性能;5：网络质量;6：音视频体验。 */
-  TaskType: number;
-  /** 拨测 url。 */
-  Url: string;
-  /** 拨测 UA。 */
-  UA: string;
-  /** 网络类型。 */
-  Connectivity: string;
-}
-
-/** 拨测详细数据，包括各地域性能数据。 */
-declare interface SpeedTestingDetailData {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 站点名称。 */
-  ZoneName: string;
-  /** 地域性能数据。 */
-  DistrictStatistics: DistrictStatistics[];
-}
-
-/** 拨测结果信息 */
-declare interface SpeedTestingInfo {
-  /** 任务状态，取值有： 200：任务完成; 100：任务进行中； 503: 任务失败。 */
-  StatusCode: number;
-  /** 拨测任务 ID。 */
-  TestId: string;
-  /** 拨测任务配置。 */
-  SpeedTestingConfig: SpeedTestingConfig;
-  /** 拨测任务统计结果。 */
-  SpeedTestingStatistics: SpeedTestingStatistics | null;
-}
-
-/** 不同维度的测速数据。 */
-declare interface SpeedTestingMetricData {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 站点名称。 */
-  ZoneName: string;
-  /** 源站拨测信息。 */
-  OriginSpeedTestingInfo: SpeedTestingInfo[];
-  /** EO 拨测信息。 */
-  ProxySpeedTestingInfo: SpeedTestingInfo[];
-  /** 站点状态。 */
-  SpeedTestingStatus: SpeedTestingStatus;
-  /** 优化建议。 */
-  OptimizeAction: OptimizeAction[];
-  /** EO 整体性能，单位ms。 */
-  ProxyLoadTime: number | null;
-  /** 源站整体性能，单位ms。 */
-  OriginLoadTime: number | null;
-}
-
-/** 拨测配额数据。 */
-declare interface SpeedTestingQuota {
-  /** 站点总拨测次数。 */
-  TotalTestRuns: number;
-  /** 站点剩余可用拨测次数。 */
-  AvailableTestRuns: number;
-}
-
-/** 拨测统计结果 */
-declare interface SpeedTestingStatistics {
-  /** 首屏时间，单位 ms。 */
-  FirstContentfulPaint: number | null;
-  /** 首屏完全渲染时间，单位 ms。 */
-  FirstMeaningfulPaint: number | null;
-  /** 整体下载速度，单位 KB/s。 */
-  OverallDownloadSpeed: number | null;
-  /** 渲染时间，单位 ms。 */
-  RenderTime: number | null;
-  /** 文档完成时间, 单位 ms。 */
-  DocumentFinishTime: number | null;
-  /** 基础文档TCP连接时间，单位 ms。 */
-  TcpConnectionTime: number | null;
-  /** 基础文档服务器响应时间，单位 ms。 */
-  ResponseTime: number | null;
-  /** 基础文档下载时间，单位 ms。 */
-  FileDownloadTime: number | null;
-  /** 整体性能，测试总时间，单位 ms。 */
-  LoadTime: number | null;
-}
-
-/** 拨测任务状态信息 */
-declare interface SpeedTestingStatus {
-  /** 拨测 url。 */
-  Url: string;
-  /** 拨测 url 是否使用 https。 */
-  Tls: boolean;
-  /** 任务创建时间。 */
-  CreatedOn: string;
-  /** 任务状态，取值有： 200：任务完成; 100：任务进行中。 503: 任务失败。 */
-  StatusCode: number | null;
-  /** 拨测 UA。 */
-  UA: string | null;
-  /** 网络环境。 */
-  Connectivity: string | null;
-  /** 是否可达，取值： true：可达； false：不可达。 */
-  Reachable: boolean | null;
-  /** 是否超时，取值： true：超时； false：不超时。 */
-  TimedOut: boolean | null;
+/** 支持标准debug结构体 */
+declare interface StandardDebug {
+  /** Debug 功能开关，取值有：on：开启；off：关闭。 */
+  Switch: string;
+  /** 允许的客户端来源。支持填写 IPV4 以及 IPV6 的 IP/IP 段，不填则表示允许任意客户端 IP。 */
+  AllowClientIPList: string[];
+  /** Debug 功能到期时间。超出设置的时间，则功能失效。 */
+  ExpireTime: string;
 }
 
 /** 嵌套规则信息。 */
@@ -1720,6 +1472,12 @@ declare interface Sv {
   Key: string;
   /** 询价参数值。 */
   Value: string;
+  /** 询价参数映射的配额，取值有：zone：站点数；custom-rule：自定义规则数；rate-limiting-rule：速率限制规则数；l4-proxy-instance：四层代理实例数。 */
+  Pack?: string | null;
+  /** 询价参数映射的四层代理实例Id。 */
+  InstanceId?: string | null;
+  /** 询价参数对应的防护等级。取值有： cm_30G：中国大陆加速区域保底防护30Gbps； cm_60G：中国大陆加速区域保底防护60Gbps； cm_100G：中国大陆加速区域保底防护100Gbps； anycast_300G：全球加速区域（除中国大陆）Anycast联防300Gbps； anycast_unlimited：全球加速区域（除中国大陆）Anycast无上限全力防护； cm_30G_anycast_300G：中国大陆加速区域保底防护30Gbps，全球加速区域（除中国大陆）Anycast联防300Gbps； cm_30G_anycast_unlimited：中国大陆加速区域保底防护30Gbps，全球加速区域（除中国大陆）Anycast无上限全力防护； cm_60G_anycast_300G：中国大陆加速区域保底防护60Gbps，全球加速区域（除中国大陆）Anycast联防300Gbps； cm_60G_anycast_unlimited：中国大陆加速区域保底防护60Gbps，全球加速区域（除中国大陆）Anycast无上限全力防护； cm_100G_anycast_300G：中国大陆加速区域保底防护100Gbps，全球加速区域（除中国大陆）Anycast联防300Gbps； cm_100G_anycast_unlimited：中国大陆加速区域保底防护100Gbps，全球加速区域（除中国大陆）Anycast无上限全力防护。 */
+  ProtectionSpecs?: string | null;
 }
 
 /** 功能总开关 */
@@ -1866,16 +1624,6 @@ declare interface WafConfig {
   AiRule?: AiRule;
 }
 
-/** Waf托管规则组 */
-declare interface WafGroup {
-  /** 执行动作，取值有： block：阻断； observe：观察。 */
-  Action?: string | null;
-  /** 防护级别，取值有： loose：宽松； normal：正常； strict：严格； stricter：超严格； custom：自定义。 */
-  Level?: string | null;
-  /** 规则类型id。 */
-  TypeId?: number | null;
-}
-
 /** Waf规则 */
 declare interface WafRule {
   /** 托管规则开关，取值有： on：开启； off：关闭。 */
@@ -1884,36 +1632,6 @@ declare interface WafRule {
   BlockRuleIDs: number[];
   /** 观察模式ID列表，将规则ID加入本参数列表中代表该ID使用观察模式生效，即该规则ID进入观察模式。 */
   ObserveRuleIDs: number[];
-}
-
-/** web攻击日志 */
-declare interface WebLogs {
-  /** 请求（事件）ID。 */
-  EventId: string;
-  /** http 日志内容。 */
-  HttpLog: string;
-  /** 受攻击子域名。 */
-  Domain: string;
-  /** 攻击源（客户端）Ip。 */
-  AttackIp: string;
-  /** IP所在国家iso-3166中alpha-2编码，编码信息请参考[ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json) */
-  SipCountryCode: string;
-  /** 真实客户端Ip。 */
-  RealClientIp?: string;
-  /** 真实客户端Ip所在国家iso-3166中alpha-2编码。 */
-  RealClientIpCountryCode?: string;
-  /** 攻击时间，采用unix秒级时间戳。 */
-  AttackTime: number;
-  /** 请求地址。 */
-  RequestUri: string;
-  /** 请求类型。 */
-  ReqMethod: string | null;
-  /** 规则相关信息列表。 */
-  RuleDetailList: SecRuleRelatedInfo[] | null;
-  /** 攻击内容。 */
-  AttackContent: string | null;
-  /** 日志所属区域。 */
-  Area: string | null;
 }
 
 /** WebSocket配置 */
@@ -1936,7 +1654,7 @@ declare interface Zone {
   NameServers: string[];
   /** 站点状态，取值有： active：NS 已切换； pending：NS 未切换； moved：NS 已切走； deactivated：被封禁。 */
   Status: string;
-  /** 站点接入方式，取值有 full：NS 接入； partial：CNAME 接入。 */
+  /** 站点接入方式，取值有 full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入。 */
   Type: string;
   /** 站点是否关闭。 */
   Paused: boolean;
@@ -1971,49 +1689,51 @@ declare interface Zone {
 /** 站点配置。 */
 declare interface ZoneSetting {
   /** 站点名称。 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 站点加速区域信息，取值有： mainland：中国境内加速； overseas：中国境外加速。 */
-  Area: string;
+  Area?: string;
   /** 节点缓存键配置。 */
-  CacheKey: CacheKey | null;
+  CacheKey?: CacheKey | null;
   /** Quic访问配置。 */
-  Quic: Quic | null;
+  Quic?: Quic | null;
   /** POST请求传输配置。 */
-  PostMaxSize: PostMaxSize | null;
+  PostMaxSize?: PostMaxSize | null;
   /** 智能压缩配置。 */
-  Compression: Compression | null;
+  Compression?: Compression | null;
   /** Http2回源配置。 */
-  UpstreamHttp2: UpstreamHttp2 | null;
+  UpstreamHttp2?: UpstreamHttp2 | null;
   /** 访问协议强制Https跳转配置。 */
-  ForceRedirect: ForceRedirect | null;
+  ForceRedirect?: ForceRedirect | null;
   /** 缓存过期时间配置。 */
-  CacheConfig: CacheConfig | null;
+  CacheConfig?: CacheConfig | null;
   /** 源站配置。 */
-  Origin: Origin | null;
+  Origin?: Origin | null;
   /** 智能加速配置。 */
-  SmartRouting: SmartRouting | null;
+  SmartRouting?: SmartRouting | null;
   /** 浏览器缓存配置。 */
-  MaxAge: MaxAge | null;
+  MaxAge?: MaxAge | null;
   /** 离线缓存配置。 */
-  OfflineCache: OfflineCache | null;
+  OfflineCache?: OfflineCache | null;
   /** WebSocket配置。 */
-  WebSocket: WebSocket | null;
+  WebSocket?: WebSocket | null;
   /** 客户端IP回源请求头配置。 */
-  ClientIpHeader: ClientIpHeader | null;
+  ClientIpHeader?: ClientIpHeader | null;
   /** 缓存预刷新配置。 */
-  CachePrefresh: CachePrefresh | null;
+  CachePrefresh?: CachePrefresh | null;
   /** Ipv6访问配置。 */
-  Ipv6: Ipv6 | null;
+  Ipv6?: Ipv6 | null;
   /** Https 加速配置。 */
-  Https: Https | null;
+  Https?: Https | null;
   /** 回源时是否携带客户端IP所属地域信息的配置。 */
-  ClientIpCountry: ClientIpCountry | null;
+  ClientIpCountry?: ClientIpCountry | null;
   /** Grpc协议支持配置。 */
-  Grpc: Grpc | null;
+  Grpc?: Grpc | null;
   /** 图片优化相关配置。 */
-  ImageOptimize: ImageOptimize | null;
+  ImageOptimize?: ImageOptimize | null;
   /** 中国大陆加速优化配置。 */
   AccelerateMainland?: AccelerateMainland | null;
+  /** 标准 Debug 配置。 */
+  StandardDebug?: StandardDebug | null;
 }
 
 declare interface BindZoneToPlanRequest {
@@ -2028,14 +1748,16 @@ declare interface BindZoneToPlanResponse {
   RequestId?: string;
 }
 
-declare interface CheckCertificateRequest {
-  /** 证书内容。 */
-  Certificate: string;
-  /** 私钥内容。 */
-  PrivateKey: string;
+declare interface CheckCnameStatusRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 记录名称列表。 */
+  RecordNames: string[];
 }
 
-declare interface CheckCertificateResponse {
+declare interface CheckCnameStatusResponse {
+  /** 域名Cname状态信息列表。 */
+  CnameStatus: CnameStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2119,21 +1841,15 @@ declare interface CreateApplicationProxyRuleRequest {
   ForwardClientIp?: string;
   /** 是否开启会话保持，取值有：true：开启；false：关闭。默认值：false。 */
   SessionPersist?: boolean;
+  /** 会话保持的时间，只有当SessionPersist为true时，该值才会生效。 */
+  SessionPersistTime?: number;
   /** 源站端口，支持格式：单端口：80；端口段：81-90，81至90端口。 */
   OriginPort?: string;
 }
 
 declare interface CreateApplicationProxyRuleResponse {
   /** 规则ID */
-  RuleId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateCredentialRequest {
-}
-
-declare interface CreateCredentialResponse {
+  RuleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2179,7 +1895,7 @@ declare interface CreatePlanForZoneResponse {
 declare interface CreatePrefetchTaskRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 要预热的资源列表，每个元素格式类似如下:http://www.example.com/example.txt。 */
+  /** 要预热的资源列表，每个元素格式类似如下:http://www.example.com/example.txt。注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
   Targets?: string[];
   /** 是否对url进行encode，若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;
@@ -2189,43 +1905,31 @@ declare interface CreatePrefetchTaskRequest {
 
 declare interface CreatePrefetchTaskResponse {
   /** 任务 ID。 */
-  JobId: string;
+  JobId?: string;
   /** 失败的任务列表。 */
-  FailedList: FailReason[] | null;
+  FailedList?: FailReason[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreatePurgeTaskRequest {
-  /** 站点ID。 */
+  /** 站点 ID。 */
   ZoneId: string;
-  /** 清除缓存类型，取值有：purge_url：URL；purge_prefix：前缀；purge_host：Hostname；purge_all：全部缓存；purge_cache_tag：cache-tag刷新。 */
+  /** 节点缓存清除类型，取值有：purge_url：URL刷新；purge_prefix：目录刷新；purge_host：Hostname 刷新；purge_all：站点下全部缓存刷新；purge_cache_tag：cache-tag 刷新。缓存清除类型详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。 */
   Type: string;
-  /** 要清除缓存的资源列表，每个元素格式依据Type而定：1) Type = purge_host 时：形如：www.example.com 或 foo.bar.example.com。2) Type = purge_prefix 时：形如：http://www.example.com/example。3) Type = purge_url 时：形如：https://www.example.com/example.jpg。4）Type = purge_all 时：Targets可为空，不需要填写。5）Type = purge_cache_tag 时：形如：tag1。 */
+  /** 节点缓存清除方法，仅对目录刷新类型有效，取值有： invalidate：仅刷新目录下产生了更新的资源； delete：无论目录下资源是否更新都刷新节点资源。注意：使用目录刷新时，默认值： invalidate。 */
+  Method?: string;
+  /** 要清除缓存的资源列表。每个元素格式依据清除缓存类型而定，可参考接口示例。EO 默认针对内容含有非 ASCII 字符集的字符进行转义，编码规则遵循 RFC3986；单次提交的任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
   Targets?: string[];
   /** 若有编码转换，仅清除编码转换后匹配的资源。若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;
 }
 
 declare interface CreatePurgeTaskResponse {
-  /** 任务ID。 */
-  JobId: string;
+  /** 任务 ID。 */
+  JobId?: string;
   /** 失败的任务列表及原因。 */
-  FailedList: FailReason[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateReplayTaskRequest {
-  /** 重放任务的 ID 列表。 */
-  Ids: string[];
-}
-
-declare interface CreateReplayTaskResponse {
-  /** 此次任务ID。 */
-  JobId: string;
-  /** 失败的任务列表及原因。 */
-  FailedList: FailReason[];
+  FailedList?: FailReason[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2264,22 +1968,10 @@ declare interface CreateSecurityIPGroupResponse {
   RequestId?: string;
 }
 
-declare interface CreateSpeedTestingRequest {
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 拨测子域名。 */
-  Host?: string;
-}
-
-declare interface CreateSpeedTestingResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateZoneRequest {
   /** 站点名称。 */
-  ZoneName: string;
-  /** 接入方式，取值有： full：NS接入； partial：CNAME接入，请先调用认证站点API（IdentifyZone）进行站点归属权校验，校验通过后继续调用本接口创建站点。不填写使用默认值full。 */
+  ZoneName?: string;
+  /** 接入方式，取值有： full：NS接入； partial：CNAME接入，请先调用认证站点API（IdentifyZone）进行站点归属权校验，校验通过后继续调用本接口创建站点；noDomainAccess：无域名接入，取此值时仅Tags字段有效。不填写使用默认值full。 */
   Type?: string;
   /** 是否跳过站点现有的DNS记录扫描。默认值：false。 */
   JumpStart?: boolean;
@@ -2293,7 +1985,7 @@ declare interface CreateZoneRequest {
 
 declare interface CreateZoneResponse {
   /** 站点ID。 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2422,24 +2114,6 @@ declare interface DescribeAccelerationDomainsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAddableEntityListRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 推送数据类型，取值有:domain：七层加速日志；application：四层加速日志；web-rateLiming：速率限制日志；web-attack：web攻击防护日志；web-rule：自定义规则日志；web-bot：Bot管理日志。 */
-  EntityType: string;
-  /** 服务区域，取值有：mainland：中国大陆境内；overseas：全球（不含中国大陆）。若为国内站账号，则默认取值为mainland；若为国际站账号，则默认取值为overseas。 */
-  Area?: string;
-}
-
-declare interface DescribeAddableEntityListResponse {
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 可添加的实体列表。 */
-  EntityList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeAliasDomainsRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2484,34 +2158,6 @@ declare interface DescribeAvailablePlansRequest {
 declare interface DescribeAvailablePlansResponse {
   /** 当前账户可购买套餐类型及相关信息。 */
   PlanInfo: PlanInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeClientRuleListRequest {
-  /** 查询的站点ID. */
-  ZoneId: string;
-  /** 查询的子域名。 */
-  Domain: string;
-  /** 规则类型，取值有：acl：自定义规则；rate：限速规则。不填表示查询所有规则。 */
-  RuleType?: string;
-  /** 规则ID。 */
-  RuleId?: number;
-  /** 客户端IP。 */
-  SourceClientIp?: string;
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
-  Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
-  Offset?: number;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeClientRuleListResponse {
-  /** 封禁客户端数据列表。 */
-  Data: ClientRule[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2638,24 +2284,6 @@ declare interface DescribeDefaultCertificatesResponse {
   RequestId?: string;
 }
 
-declare interface DescribeDnsDataRequest {
-  /** 起始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone 按照【站点名称】进行过滤。站点名称形如：tencent.com 类型：String 必选：否，仅支持填写一个站点host 按照【域名】进行过滤。域名形如：test.tencent.com 类型：String 必选：否，仅支持填写一个域名type 按照【DNS解析类型】进行过滤 类型：String 必选：否 可选项： A：A记录 AAAA：AAAA记录 CNAME：CNAME记录 MX：MX记录 TXT：TXT记录 NS：NS记录 SRV：SRV记录 CAA：CAA记录code 按照【DNS解析状态码】进行过滤。 类型：String 必选：否 可选项： NoError：成功 NXDomain：请求域不存在 NotImp：不支持的请求类型 Refused：域名服务器因为策略的原因拒绝执行请求area 按照【DNS解析地域】进行过滤。 类型：String 必选：否。 可选项： 亚洲：Asia 欧洲：Europe 非洲：Africa 大洋洲：Oceania 美洲：Americas */
-  Filters?: Filter[];
-  /** 时间粒度，取值有：min：1分钟粒度；5min：5分钟粒度；hour：1小时粒度；day：天粒度。不填写，默认值为：min。 */
-  Interval?: string;
-}
-
-declare interface DescribeDnsDataResponse {
-  /** 统计数据。 */
-  Data: DnsData[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeHostsSettingRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -2690,42 +2318,6 @@ declare interface DescribeIdentificationsResponse {
   TotalCount: number;
   /** 站点验证信息列表。 */
   Identifications: Identification[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeLogSetsRequest {
-  /** 日志集所属的地域。 */
-  LogSetRegion: string;
-  /** 日志集ID。 */
-  LogSetId?: string;
-  /** 日志集名称。 */
-  LogSetName?: string;
-}
-
-declare interface DescribeLogSetsResponse {
-  /** 日志集列表数据。 */
-  LogSetList: LogSetInfo[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeLogTopicTasksRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
-  Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
-  Offset?: number;
-}
-
-declare interface DescribeLogTopicTasksResponse {
-  /** 推送任务列表。 */
-  TopicList: ClsLogTopicInfo[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2868,68 +2460,6 @@ declare interface DescribeRulesSettingResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSingleL7AnalysisDataRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 查询的指标，取值有: l7Flow_singleIpRequest：独立IP请求数。 */
-  MetricNames: string[];
-  /** 站点集合。若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的数据分析最大查询范围。 */
-  ZoneIds?: string[];
-  /** 过滤条件，详细的过滤条件Key值如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。domain 按照【子域名】进行过滤，子域名形如： test.example.com。protocol 按照【HTTP协议版本】进行过滤。 对应的Value可选项如下： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
-  Filters?: QueryCondition[];
-  /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天;。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
-  Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
-  Area?: string;
-}
-
-declare interface DescribeSingleL7AnalysisDataResponse {
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 单值流量数据列表。 */
-  Data: SingleDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeSpeedTestingDetailsRequest {
-  /** 站点ID。 */
-  ZoneId?: string;
-}
-
-declare interface DescribeSpeedTestingDetailsResponse {
-  /** 分地域拨测统计数据。 */
-  SpeedTestingDetailData: SpeedTestingDetailData;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeSpeedTestingMetricDataRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-}
-
-declare interface DescribeSpeedTestingMetricDataResponse {
-  /** 站点拨测维度数据。 */
-  SpeedTestingMetricData: SpeedTestingMetricData;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeSpeedTestingQuotaRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-}
-
-declare interface DescribeSpeedTestingQuotaResponse {
-  /** 配额数据。 */
-  SpeedTestingQuota?: SpeedTestingQuota;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTimingL4DataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -3010,32 +2540,6 @@ declare interface DescribeTimingL7CacheDataResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTimingL7SourceDataRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 指标列表，取值有:l7Flow_outFlux_hy: Edgeone请求流量；l7Flow_outBandwidth_hy: Edgeone请求带宽；l7Flow_inFlux_hy: 源站响应流量；l7Flow_inBandwidth_hy: 源站响应带宽；l7Flow_request_hy: 回源请求数； */
-  MetricNames: string[];
-  /** 待查询的站点列表，此参数必填。 */
-  ZoneIds?: string[];
-  /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
-  Interval?: string;
-  /** 过滤条件，详细的过滤条件如下：domain 按照【回源Host】进行过滤。 类型：String 必选：否origin 按照【源站】进行过滤。 类型：String 必选：否originGroup 按照【源站组】进行过滤，源站组形如：origin-xxxxx。 类型：String 必选：否flowType 按照【源站响应类型】进行过滤，优先级高于 MetricNames.N 参数。 类型：String 必选：否 可选项： inFlow：源站响应流量，对应MetricNames中l7Flow_inFlux_hy、l7Flow_inBandwidth_hy、l7Flow_request_hy三个指标； outFlow：EdgeOne请求流量，对应MetricNames中l7Flow_outFlux_hy、l7Flow_outBandwidth_hy、l7Flow_request_hy三个指标。 */
-  Filters?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
-  Area?: string;
-}
-
-declare interface DescribeTimingL7SourceDataResponse {
-  /** 查询结果的总条数。 */
-  TotalCount?: number;
-  /** 时序流量数据列表。 */
-  TimingDataRecords?: TimingDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTopL7AnalysisDataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -3088,212 +2592,6 @@ declare interface DescribeTopL7CacheDataResponse {
   TotalCount: number;
   /** 七层缓存TopN流量数据列表。 */
   Data: TopDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWebManagedRulesDataRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 统计指标列表，取值有：waf_interceptNum：waf拦截次数。 */
-  MetricNames: string[];
-  /** 站点集合，不填默认选择全部站点。 */
-  ZoneIds?: string[];
-  /** 子域名集合，不填默认选择全部子域名。 */
-  Domains?: string[];
-  /** 筛选条件，key可选的值有：action：执行动作。 */
-  QueryCondition?: QueryCondition[];
-  /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
-  Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeWebManagedRulesDataResponse {
-  /** WAF攻击的时序数据列表。 */
-  Data: SecEntry[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWebManagedRulesHitRuleDetailRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 站点集合，不填默认选择全部站点。 */
-  ZoneIds?: string[];
-  /** 子域名列表，不填默认选择全部全部子域名。 */
-  Domains?: string[];
-  /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天 。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
-  Interval?: string;
-  /** 筛选条件，key可选的值有：action ：执行动作 。 */
-  QueryCondition?: QueryCondition[];
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
-  Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
-  Offset?: number;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeWebManagedRulesHitRuleDetailResponse {
-  /** 命中规则的详细列表。 */
-  Data: SecHitRuleInfo[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWebManagedRulesLogRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 站点集合，不填默认选择全部站点。 */
-  ZoneIds?: string[];
-  /** 域名集合，不填默认选择全部子域名。 */
-  Domains?: string[];
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
-  Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
-  Offset?: number;
-  /** 筛选条件，key可选的值有：attackType：攻击类型；riskLevel：风险等级；action：执行动作（处置方式）；ruleId：规则id；sipCountryCode：ip所在国家；attackIp：攻击ip；realClientIp：真实客户端ip；oriDomain：被攻击的子域名；eventId：事件id；ua：用户代理；requestMethod：请求方法；uri：统一资源标识符。 */
-  QueryCondition?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeWebManagedRulesLogResponse {
-  /** Web攻击日志数据列表。 */
-  Data: WebLogs[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWebProtectionClientIpListRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 站点集合，不填默认选择全部站点。 */
-  ZoneIds?: string[];
-  /** 域名集合，不填默认选择全部子域名。 */
-  Domains?: string[];
-  /** 查询的时间粒度，支持的粒度有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
-  Interval?: string;
-  /** 筛选条件，key可选的值有：action：执行动作。 */
-  QueryCondition?: QueryCondition[];
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
-  Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
-  Offset?: number;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeWebProtectionClientIpListResponse {
-  /** CC防护客户端（攻击源）ip信息列表。 */
-  Data: SecClientIp[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWebProtectionDataRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 统计指标，取值有：ccRate_interceptNum：速率限制规则限制次数；ccAcl_interceptNum：自定义规则拦截次数。 */
-  MetricNames: string[];
-  /** 站点集合，不填默认选择全部站点。 */
-  ZoneIds?: string[];
-  /** 域名集合，不填默认选择全部子域名。 */
-  Domains?: string[];
-  /** 查询时间粒度，支持的时间粒度有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
-  Interval?: string;
-  /** 筛选条件，key可选的值有：action：执行动作。 */
-  QueryCondition?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeWebProtectionDataResponse {
-  /** CC防护时序数据列表。 */
-  Data: SecEntry[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWebProtectionHitRuleDetailRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 所属规则数据类型，支持的规则有：rate：限速规则；acl：自定义规则。 */
-  EntityType: string;
-  /** 站点集合，不填默认选择全部站点。 */
-  ZoneIds?: string[];
-  /** 域名列表，不填默认选择全部子域名。 */
-  Domains?: string[];
-  /** 筛选条件，key可选的值有：action：执行动作。 */
-  QueryCondition?: QueryCondition[];
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
-  Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
-  Offset?: number;
-  /** 查询时间粒度，支持的时间粒度有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
-  Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeWebProtectionHitRuleDetailResponse {
-  /** cc防护命中规则列表。 */
-  Data: SecHitRuleInfo[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWebProtectionTopDataRequest {
-  /** 开始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 统计指标列表，取值有：ccRate_requestNum_url：速率限制规则请求次数url分布排行；ccRate_cipRequestNum_region：速率限制规则请求次数区域客户端ip分布排行；ccAcl_requestNum_url：自定义规则请求次数url分布排行；ccAcl_requestNum_cip：自定义规则请求次数客户端ip分布排行；ccAcl_cipRequestNum_region：自定义规则请求次数客户端区域分布排行。 */
-  MetricName: string;
-  /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
-  Interval?: string;
-  /** 站点集合，不填默认选择全部站点。 */
-  ZoneIds?: string[];
-  /** 域名集合，不填默认选择全部子域名。 */
-  Domains?: string[];
-  /** 查询前多少个数据，不填默认默认为10， 表示查询前top 10的数据。 */
-  Limit?: number;
-  /** 筛选条件，key可选的值有：action：执行动作 。 */
-  QueryCondition?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
-  Area?: string;
-}
-
-declare interface DescribeWebProtectionTopDataResponse {
-  /** CC防护的TopN数据列表。 */
-  Data: TopEntry[] | null;
-  /** 查询结果的总条数。 */
-  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3499,6 +2797,8 @@ declare interface ModifyApplicationProxyRuleRequest {
   ForwardClientIp?: string;
   /** 是否开启会话保持，取值有：true：开启；false：关闭。不填为false。 */
   SessionPersist?: boolean;
+  /** 会话保持的时间，只有当SessionPersist为true时，该值才会生效。 */
+  SessionPersistTime?: number;
   /** 源站端口，支持格式：单端口：80；端口段：81-90，81至90端口。 */
   OriginPort?: string;
 }
@@ -3538,20 +2838,6 @@ declare interface ModifyApplicationProxyStatusResponse {
   RequestId?: string;
 }
 
-declare interface ModifyDefaultCertificateRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 默认证书ID。 */
-  CertId?: string;
-  /** 证书状态，取值有：deployed ：部署证书；disabled ：禁用证书。失败状态下重新deployed即可重试。 */
-  Status?: string;
-}
-
-declare interface ModifyDefaultCertificateResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyHostsCertificateRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -3586,18 +2872,6 @@ declare interface ModifyOriginGroupRequest {
 }
 
 declare interface ModifyOriginGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyRulePriorityRequest {
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 规则 ID 的顺序，多条规则执行顺序依次往下。 */
-  RuleIds: string[];
-}
-
-declare interface ModifyRulePriorityResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3654,41 +2928,19 @@ declare interface ModifySecurityPolicyResponse {
   RequestId?: string;
 }
 
-declare interface ModifySecurityWafGroupPolicyRequest {
-  /** 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
-  ZoneId?: string;
-  /** 子域名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
-  Entity?: string;
-  /** 总开关，取值有：on：开启；off：关闭。不填默认为上次的配置。 */
-  Switch?: string;
-  /** 规则等级，取值有： loose：宽松； normal：正常； strict：严格； stricter：超严格； custom：自定义。不填默认为上次的配置。 */
-  Level?: string;
-  /** 处置方式，取值有： block：阻断； observe：观察。不填默认为上次的配置。 */
-  Mode?: string;
-  /** 托管规则。不填默认为上次的配置。 */
-  WafRules?: WafRule;
-  /** AI引擎模式。不填默认为上次的配置。 */
-  AiRule?: AiRule;
-  /** 托管规则等级组。不填默认为上次的配置。 */
-  WafGroups?: WafGroup[];
-  /** 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。 */
-  TemplateId?: string;
-}
-
-declare interface ModifySecurityWafGroupPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyZoneRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入。不填写保持原有配置。 */
+  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到CNAME接入。不填写保持原有配置。 */
   Type?: string;
-  /** 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。 */
+  /** 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。 */
   VanityNameServers?: VanityNameServers;
   /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
   AliasZoneName?: string;
+  /** 站点接入地域，取值有： global：全球； mainland：中国大陆； overseas：境外区域。当站点是无域名接入方式时，不允许传此参数。 */
+  Area?: string;
+  /** 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。 */
+  ZoneName?: string;
 }
 
 declare interface ModifyZoneResponse {
@@ -3737,6 +2989,8 @@ declare interface ModifyZoneSettingRequest {
   Grpc?: Grpc;
   /** 图片优化配置。不填写表示关闭。 */
   ImageOptimize?: ImageOptimize;
+  /** 标准 Debug 配置。 */
+  StandardDebug?: StandardDebug;
 }
 
 declare interface ModifyZoneSettingResponse {
@@ -3752,38 +3006,6 @@ declare interface ModifyZoneStatusRequest {
 }
 
 declare interface ModifyZoneStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ReclaimAliasDomainRequest {
-  /** 站点 ID。 */
-  ZoneId?: string;
-  /** 站点名称。 */
-  ZoneName?: string;
-}
-
-declare interface ReclaimAliasDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ReclaimZoneRequest {
-  /** 站点名称。 */
-  ZoneName: string;
-}
-
-declare interface ReclaimZoneResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface UpdateOriginProtectionIPWhitelistRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-}
-
-declare interface UpdateOriginProtectionIPWhitelistResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4031,8 +3253,8 @@ declare interface Teo {
   (): Versions;
   /** 为站点绑定套餐 {@link BindZoneToPlanRequest} {@link BindZoneToPlanResponse} */
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
-  /** 校验证书 {@link CheckCertificateRequest} {@link CheckCertificateResponse} */
-  CheckCertificate(data: CheckCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateResponse>;
+  /** 校验域名 CNAME 状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */
+  CheckCnameStatus(data: CheckCnameStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCnameStatusResponse>;
   /** 创建加速域名 {@link CreateAccelerationDomainRequest} {@link CreateAccelerationDomainResponse} */
   CreateAccelerationDomain(data: CreateAccelerationDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccelerationDomainResponse>;
   /** 创建别称域名 {@link CreateAliasDomainRequest} {@link CreateAliasDomainResponse} */
@@ -4041,8 +3263,6 @@ declare interface Teo {
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
   /** 创建应用代理规则 {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
-  /** 创建凭证 {@link CreateCredentialRequest} {@link CreateCredentialResponse} */
-  CreateCredential(data?: CreateCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCredentialResponse>;
   /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
   CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
   /** 为未购买套餐的站点购买套餐 {@link CreatePlanForZoneRequest} {@link CreatePlanForZoneResponse} */
@@ -4051,16 +3271,12 @@ declare interface Teo {
   CreatePrefetchTask(data: CreatePrefetchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrefetchTaskResponse>;
   /** 创建清除缓存任务 {@link CreatePurgeTaskRequest} {@link CreatePurgeTaskResponse} */
   CreatePurgeTask(data: CreatePurgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePurgeTaskResponse>;
-  /** 创建重放任务 {@link CreateReplayTaskRequest} {@link CreateReplayTaskResponse} */
-  CreateReplayTask(data: CreateReplayTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplayTaskResponse>;
   /** 创建规则引擎规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建安全 IP 组 {@link CreateSecurityIPGroupRequest} {@link CreateSecurityIPGroupResponse} */
   CreateSecurityIPGroup(data: CreateSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityIPGroupResponse>;
-  /** 创建站点拨测任务 {@link CreateSpeedTestingRequest} {@link CreateSpeedTestingResponse} */
-  CreateSpeedTesting(data: CreateSpeedTestingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpeedTestingResponse>;
   /** 创建站点 {@link CreateZoneRequest} {@link CreateZoneResponse} */
-  CreateZone(data: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
+  CreateZone(data?: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
   /** 批量删除加速域名 {@link DeleteAccelerationDomainsRequest} {@link DeleteAccelerationDomainsResponse} */
   DeleteAccelerationDomains(data: DeleteAccelerationDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccelerationDomainsResponse>;
   /** 删除别称域名 {@link DeleteAliasDomainRequest} {@link DeleteAliasDomainResponse} */
@@ -4079,16 +3295,12 @@ declare interface Teo {
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
   /** 查询加速域名列表 {@link DescribeAccelerationDomainsRequest} {@link DescribeAccelerationDomainsResponse} */
   DescribeAccelerationDomains(data: DescribeAccelerationDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccelerationDomainsResponse>;
-  /** 查询剩余可添加的日志推送实体列表 {@link DescribeAddableEntityListRequest} {@link DescribeAddableEntityListResponse} */
-  DescribeAddableEntityList(data: DescribeAddableEntityListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddableEntityListResponse>;
   /** 查询别称域名信息列表 {@link DescribeAliasDomainsRequest} {@link DescribeAliasDomainsResponse} */
   DescribeAliasDomains(data: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
   /** 查询应用代理列表 {@link DescribeApplicationProxiesRequest} {@link DescribeApplicationProxiesResponse} */
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
   /** 查询当前账户可购买套餐信息列表 {@link DescribeAvailablePlansRequest} {@link DescribeAvailablePlansResponse} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
-  /** 查询封禁客户端信息列表 {@link DescribeClientRuleListRequest} {@link DescribeClientRuleListResponse} */
-  DescribeClientRuleList(data: DescribeClientRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientRuleListResponse>;
   /** 查询内容管理接口配额 {@link DescribeContentQuotaRequest} {@link DescribeContentQuotaResponse} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
   /** 查询DDoS攻击时序数据 {@link DescribeDDoSAttackDataRequest} {@link DescribeDDoSAttackDataResponse} */
@@ -4099,16 +3311,10 @@ declare interface Teo {
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
   /** 查询默认证书列表 {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */
   DescribeDefaultCertificates(data: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
-  /** 获取DNS请求数统计曲线 {@link DescribeDnsDataRequest} {@link DescribeDnsDataResponse} */
-  DescribeDnsData(data: DescribeDnsDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsDataResponse>;
   /** 查询域名详细配置 {@link DescribeHostsSettingRequest} {@link DescribeHostsSettingResponse} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
   /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
-  /** 获取日志集列表 {@link DescribeLogSetsRequest} {@link DescribeLogSetsResponse} */
-  DescribeLogSets(data: DescribeLogSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSetsResponse>;
-  /** 获取推送任务列表 {@link DescribeLogTopicTasksRequest} {@link DescribeLogTopicTasksResponse} */
-  DescribeLogTopicTasks(data: DescribeLogTopicTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTopicTasksResponse>;
   /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
   DescribeOriginGroup(data: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
   /** 查询源站防护信息 {@link DescribeOriginProtectionRequest} {@link DescribeOriginProtectionResponse} */
@@ -4123,40 +3329,16 @@ declare interface Teo {
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
   /** 查询规则引擎的设置参数 {@link DescribeRulesSettingRequest} {@link DescribeRulesSettingResponse} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
-  /** 查询流量分析单值数据 {@link DescribeSingleL7AnalysisDataRequest} {@link DescribeSingleL7AnalysisDataResponse} */
-  DescribeSingleL7AnalysisData(data: DescribeSingleL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSingleL7AnalysisDataResponse>;
-  /** 查询拨测分地区数据 {@link DescribeSpeedTestingDetailsRequest} {@link DescribeSpeedTestingDetailsResponse} */
-  DescribeSpeedTestingDetails(data?: DescribeSpeedTestingDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingDetailsResponse>;
-  /** 查询站点拨测结果 {@link DescribeSpeedTestingMetricDataRequest} {@link DescribeSpeedTestingMetricDataResponse} */
-  DescribeSpeedTestingMetricData(data: DescribeSpeedTestingMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingMetricDataResponse>;
-  /** 查询站点拨测配额 {@link DescribeSpeedTestingQuotaRequest} {@link DescribeSpeedTestingQuotaResponse} */
-  DescribeSpeedTestingQuota(data: DescribeSpeedTestingQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingQuotaResponse>;
   /** 查询四层流量时序数据 {@link DescribeTimingL4DataRequest} {@link DescribeTimingL4DataResponse} */
   DescribeTimingL4Data(data: DescribeTimingL4DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4DataResponse>;
   /** 查询流量分析时序数据 {@link DescribeTimingL7AnalysisDataRequest} {@link DescribeTimingL7AnalysisDataResponse} */
   DescribeTimingL7AnalysisData(data: DescribeTimingL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7AnalysisDataResponse>;
   /** 查询缓存分析时序数据 {@link DescribeTimingL7CacheDataRequest} {@link DescribeTimingL7CacheDataResponse} */
   DescribeTimingL7CacheData(data: DescribeTimingL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7CacheDataResponse>;
-  /** 查询回源分析时序数据 {@link DescribeTimingL7SourceDataRequest} {@link DescribeTimingL7SourceDataResponse} */
-  DescribeTimingL7SourceData(data: DescribeTimingL7SourceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7SourceDataResponse>;
   /** 查询流量分析Top数据 {@link DescribeTopL7AnalysisDataRequest} {@link DescribeTopL7AnalysisDataResponse} */
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
   /** 查询缓存分析Top数据 {@link DescribeTopL7CacheDataRequest} {@link DescribeTopL7CacheDataResponse} */
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
-  /** 查询WAF攻击时序数据 {@link DescribeWebManagedRulesDataRequest} {@link DescribeWebManagedRulesDataResponse} */
-  DescribeWebManagedRulesData(data: DescribeWebManagedRulesDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesDataResponse>;
-  /** 查询Web攻击命中规则详情 {@link DescribeWebManagedRulesHitRuleDetailRequest} {@link DescribeWebManagedRulesHitRuleDetailResponse} */
-  DescribeWebManagedRulesHitRuleDetail(data: DescribeWebManagedRulesHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesHitRuleDetailResponse>;
-  /** 查询Web攻击日志 {@link DescribeWebManagedRulesLogRequest} {@link DescribeWebManagedRulesLogResponse} */
-  DescribeWebManagedRulesLog(data: DescribeWebManagedRulesLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesLogResponse>;
-  /** 查询CC防护攻击源IP信息列表 {@link DescribeWebProtectionClientIpListRequest} {@link DescribeWebProtectionClientIpListResponse} */
-  DescribeWebProtectionClientIpList(data: DescribeWebProtectionClientIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionClientIpListResponse>;
-  /** 查询CC防护时序数据列表 {@link DescribeWebProtectionDataRequest} {@link DescribeWebProtectionDataResponse} */
-  DescribeWebProtectionData(data: DescribeWebProtectionDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionDataResponse>;
-  /** 查询CC防护命中规则详情列表 {@link DescribeWebProtectionHitRuleDetailRequest} {@link DescribeWebProtectionHitRuleDetailResponse} */
-  DescribeWebProtectionHitRuleDetail(data: DescribeWebProtectionHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionHitRuleDetailResponse>;
-  /** 查询CC防护Top数据 {@link DescribeWebProtectionTopDataRequest} {@link DescribeWebProtectionTopDataResponse} */
-  DescribeWebProtectionTopData(data: DescribeWebProtectionTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionTopDataResponse>;
   /** 查询站点配置 {@link DescribeZoneSettingRequest} {@link DescribeZoneSettingResponse} */
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
   /** 查询用户站点信息列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
@@ -4183,34 +3365,22 @@ declare interface Teo {
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
   /** 修改应用代理的状态 {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
-  /** 修改默认证书状态 {@link ModifyDefaultCertificateRequest} {@link ModifyDefaultCertificateResponse} */
-  ModifyDefaultCertificate(data: ModifyDefaultCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultCertificateResponse>;
   /** 修改域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
   /** 修改规则引擎规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** 修改规则引擎规则优先级 {@link ModifyRulePriorityRequest} {@link ModifyRulePriorityResponse} */
-  ModifyRulePriority(data: ModifyRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRulePriorityResponse>;
   /** 修改安全 IP 组 {@link ModifySecurityIPGroupRequest} {@link ModifySecurityIPGroupResponse} */
   ModifySecurityIPGroup(data: ModifySecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityIPGroupResponse>;
   /** 修改Web&Bot安全配置 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
-  /** 修改安全配置托管规则 {@link ModifySecurityWafGroupPolicyRequest} {@link ModifySecurityWafGroupPolicyResponse} */
-  ModifySecurityWafGroupPolicy(data?: ModifySecurityWafGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityWafGroupPolicyResponse>;
   /** 修改站点 {@link ModifyZoneRequest} {@link ModifyZoneResponse} */
   ModifyZone(data: ModifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneResponse>;
   /** 修改站点配置 {@link ModifyZoneSettingRequest} {@link ModifyZoneSettingResponse} */
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
   /** 切换站点状态 {@link ModifyZoneStatusRequest} {@link ModifyZoneStatusResponse} */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
-  /** 取回别称域名 {@link ReclaimAliasDomainRequest} {@link ReclaimAliasDomainResponse} */
-  ReclaimAliasDomain(data?: ReclaimAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimAliasDomainResponse>;
-  /** 找回站点 {@link ReclaimZoneRequest} {@link ReclaimZoneResponse} */
-  ReclaimZone(data: ReclaimZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimZoneResponse>;
-  /** 更新源站防护IP白名单 {@link UpdateOriginProtectionIPWhitelistRequest} {@link UpdateOriginProtectionIPWhitelistResponse} */
-  UpdateOriginProtectionIPWhitelist(data: UpdateOriginProtectionIPWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOriginProtectionIPWhitelistResponse>;
   /** 创建预热任务 {@link V20220106.CreatePrefetchTaskRequest} {@link V20220106.CreatePrefetchTaskResponse} */
   CreatePrefetchTask(data: V20220106.CreatePrefetchTaskRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePrefetchTaskResponse>;
   /** 创建清除缓存任务 {@link V20220106.CreatePurgeTaskRequest} {@link V20220106.CreatePurgeTaskResponse} */
