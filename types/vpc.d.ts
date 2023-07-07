@@ -1985,31 +1985,31 @@ declare interface TrafficPackage {
 /** 私有网络(VPC)对象。 */
 declare interface VpcInfo {
   /** `VPC`名称。 */
-  VpcName: string;
+  VpcName?: string;
   /** `VPC`实例`ID`，例如：vpc-azd4dt1c。 */
-  VpcId: string;
+  VpcId?: string;
   /** `VPC`的`IPv4` `CIDR`。 */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** 是否默认`VPC`。 */
   IsDefault?: boolean;
   /** 是否开启组播。 */
-  EnableMulticast: boolean;
+  EnableMulticast?: boolean;
   /** 创建时间。 */
   CreatedTime?: string;
   /** `DNS`列表。 */
-  DnsServerSet: string[];
+  DnsServerSet?: string[];
   /** `DHCP`域名选项值。 */
-  DomainName: string;
+  DomainName?: string;
   /** `DHCP`选项集`ID`。 */
-  DhcpOptionsId: string;
+  DhcpOptionsId?: string;
   /** 是否开启`DHCP`。 */
-  EnableDhcp: boolean;
+  EnableDhcp?: boolean;
   /** `VPC`的`IPv6` `CIDR`。 */
-  Ipv6CidrBlock: string;
+  Ipv6CidrBlock?: string;
   /** 标签键值对 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** 辅助CIDR */
-  AssistantCidrSet: AssistantCidr[] | null;
+  AssistantCidrSet?: AssistantCidr[] | null;
 }
 
 /** 终端节点服务的服务白名单对象详情。 */
@@ -4985,7 +4985,7 @@ declare interface DescribeSnapshotAttachedInstancesResponse {
 declare interface DescribeSnapshotFilesRequest {
   /** 业务类型，目前支持安全组：securitygroup。 */
   BusinessType: string;
-  /** 实例Id。 */
+  /** 业务实例Id，和BusinessType对应。 */
   InstanceId: string;
   /** 开始日期，格式%Y-%m-%d %H:%M:%S。 */
   StartDate: string;
@@ -5127,11 +5127,11 @@ declare interface DescribeUsedIpAddressRequest {
   VpcId: string;
   /** 子网实例ID。 */
   SubnetId?: string;
-  /** 查询是否占用的ip列表 */
+  /** 查询是否占用的ip列表，ip需要在vpc或子网内。最多允许一次查询100个IP。 */
   IpAddresses?: string[];
-  /** 偏移量。 */
+  /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 请求对象个数。 */
+  /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
 }
 
@@ -6501,6 +6501,8 @@ declare interface ModifyVpcAttributeRequest {
   DnsServers?: string[];
   /** 域名。 */
   DomainName?: string;
+  /** 发布cdc 子网到云联网的开关。true: 发布, false: 不发布。 */
+  EnableCdcPublish?: boolean;
 }
 
 declare interface ModifyVpcAttributeResponse {

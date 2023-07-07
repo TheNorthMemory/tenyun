@@ -222,7 +222,7 @@ declare interface InternetAccessible {
 
 /** 登录节点信息。 */
 declare interface LoginNode {
-  /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费默认值：POSTPAID_BY_HOUR。 */
+  /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
   InstanceChargeType?: string;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
@@ -237,7 +237,7 @@ declare interface LoginNode {
   /** 节点显示名称。不指定节点显示名称则默认显示‘未命名’。最多支持60个字符。 */
   InstanceName?: string;
   /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
-  ProjectId?: number | null;
+  ProjectId?: number;
 }
 
 /** 登录节点概览。 */

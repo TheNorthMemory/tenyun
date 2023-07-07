@@ -143,11 +143,11 @@ declare interface Command {
 /** 部门信息 */
 declare interface Department {
   /** 部门ID */
-  Id: string;
+  Id?: string;
   /** 部门名称，1 - 256个字符 */
-  Name: string;
+  Name?: string;
   /** 部门管理员账号ID */
-  Managers: string[] | null;
+  Managers?: string[] | null;
 }
 
 /** 资产信息 */
@@ -504,10 +504,10 @@ declare interface User {
   UserName: string;
   /** 用户姓名， 最大20个字符，不能包含空白字符 */
   RealName: string;
-  /** 手机号码， 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx" */
-  Phone: string;
   /** 用户ID */
   Id?: number;
+  /** 手机号码， 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx" */
+  Phone?: string;
   /** 电子邮件 */
   Email?: string;
   /** 用户生效时间，如:"2021-09-22T00:00:00+00:00"生效、失效时间不填则用户长期有效 */
@@ -724,7 +724,7 @@ declare interface CreateUserRequest {
   /** 用户姓名，最大长度20个字符，不能包含空白字符 */
   RealName: string;
   /** 大陆手机号直接填写，如果是其他国家、地区号码， 按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx" */
-  Phone: string;
+  Phone?: string;
   /** 电子邮件 */
   Email?: string;
   /** 用户生效时间，如:"2021-09-22T00:00:00+00:00"生效、失效时间不填则用户长期有效 */
@@ -743,7 +743,7 @@ declare interface CreateUserRequest {
 
 declare interface CreateUserResponse {
   /** 新建用户的ID */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1187,6 +1187,8 @@ declare interface DescribeUsersRequest {
   UserName?: string;
   /** 精确查询，IdSet、UserName为空时才生效。大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx" */
   Phone?: string;
+  /** 邮箱，精确查询 */
+  Email?: string;
   /** 查询具有指定资产ID访问权限的用户 */
   AuthorizedDeviceIdSet?: number[];
   /** 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部 */
@@ -1197,9 +1199,9 @@ declare interface DescribeUsersRequest {
 
 declare interface DescribeUsersResponse {
   /** 用户总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 用户列表 */
-  UserSet: User[];
+  UserSet?: User[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1312,9 +1314,9 @@ declare interface ModifyUserRequest {
   /** 用户姓名，最大长度20个字符，不能包含空格 */
   RealName: string;
   /** 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx" */
-  Phone: string;
+  Phone?: string;
   /** 电子邮件 */
-  Email: string;
+  Email?: string;
   /** 用户生效时间，如:"2021-09-22T00:00:00+00:00"生效、失效时间不填则用户长期有效 */
   ValidateFrom?: string;
   /** 用户失效时间，如:"2021-09-23T00:00:00+00:00"生效、失效时间不填则用户长期有效 */

@@ -533,75 +533,75 @@ declare interface ProxyIdDict {
 /** 通道信息 */
 declare interface ProxyInfo {
   /** （旧参数，请使用ProxyId）通道实例ID。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 项目ID。 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 通道名称。 */
-  ProxyName: string;
+  ProxyName?: string;
   /** 接入地域。 */
-  AccessRegion: string;
+  AccessRegion?: string;
   /** 源站地域。 */
-  RealServerRegion: string;
+  RealServerRegion?: string;
   /** 带宽，单位：Mbps。 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 并发，单位：万个/秒。 */
-  Concurrent: number;
+  Concurrent?: number;
   /** 通道状态。其中：RUNNING表示运行中；CREATING表示创建中；DESTROYING表示销毁中；OPENING表示开启中；CLOSING表示关闭中；CLOSED表示已关闭；ADJUSTING表示配置变更中；ISOLATING表示隔离中；ISOLATED表示已隔离；CLONING表示复制中；RECOVERING表示通道维护中；MOVING表示迁移中。 */
-  Status: string;
+  Status?: string;
   /** 接入域名。 */
-  Domain: string;
+  Domain?: string;
   /** 接入IP。 */
-  IP: string;
+  IP?: string;
   /** 通道版本号：1.0，2.0，3.0。 */
-  Version: string;
+  Version?: string;
   /** （新参数）通道实例ID。 */
-  ProxyId: string | null;
+  ProxyId?: string | null;
   /** 1，该通道可缩扩容；0，该通道无法缩扩容。 */
-  Scalarable: number;
+  Scalarable?: number;
   /** 支持的协议类型。 */
-  SupportProtocols: string[];
+  SupportProtocols?: string[];
   /** 通道组ID，当通道归属于某一通道组时，存在该字段。 */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 安全策略ID，当设置了安全策略时，存在该字段。 */
-  PolicyId: string | null;
+  PolicyId?: string | null;
   /** 接入地域详细信息，包括地域ID和地域名。 */
-  AccessRegionInfo: RegionDetail | null;
+  AccessRegionInfo?: RegionDetail | null;
   /** 源站地域详细信息，包括地域ID和地域名。 */
-  RealServerRegionInfo: RegionDetail | null;
+  RealServerRegionInfo?: RegionDetail | null;
   /** 通道转发IP */
-  ForwardIP: string;
+  ForwardIP?: string;
   /** 标签列表，不存在标签时，该字段为空列表。 */
-  TagSet: TagPair[] | null;
+  TagSet?: TagPair[] | null;
   /** 是否支持安全组配置 */
-  SupportSecurity: number | null;
+  SupportSecurity?: number | null;
   /** 计费类型: 0表示按带宽计费 1表示按流量计费。 */
-  BillingType: number | null;
+  BillingType?: number | null;
   /** 关联了解析的域名列表 */
-  RelatedGlobalDomains: string[] | null;
+  RelatedGlobalDomains?: string[] | null;
   /** 配置变更时间 */
-  ModifyConfigTime: number | null;
+  ModifyConfigTime?: number | null;
   /** 通道类型，100表示THUNDER通道，103表示微软合作通道 */
-  ProxyType: number | null;
+  ProxyType?: number | null;
   /** 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol */
-  ClientIPMethod: number[] | null;
+  ClientIPMethod?: number[] | null;
   /** IP版本：IPv4、IPv6 */
-  IPAddressVersion: string | null;
+  IPAddressVersion?: string | null;
   /** 网络类型：normal表示常规BGP，cn2表示精品BGP，triple表示三网，secure_eip表示定制安全EIP */
-  NetworkType: string | null;
+  NetworkType?: string | null;
   /** 通道套餐类型：Thunder表示标准通道，Accelerator表示银牌加速通道，CrossBorder表示跨境通道。 */
-  PackageType: string | null;
+  PackageType?: string | null;
   /** 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。 */
-  BanStatus: string | null;
+  BanStatus?: string | null;
   /** IP列表 */
-  IPList: IPDetail[] | null;
+  IPList?: IPDetail[] | null;
   /** 支持Http3协议的标识，其中：0表示关闭；1表示启用。 */
-  Http3Supported: number | null;
+  Http3Supported?: number | null;
   /** 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。 */
-  InBanBlacklist: number | null;
+  InBanBlacklist?: number | null;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
-  FeatureBitmap: number | null;
+  FeatureBitmap?: number | null;
 }
 
 /** 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息 */

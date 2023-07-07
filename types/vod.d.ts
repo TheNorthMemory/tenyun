@@ -3237,29 +3237,29 @@ declare interface MediaTranscodeInfo {
 /** 转码信息 */
 declare interface MediaTranscodeItem {
   /** 转码后的视频文件地址。 */
-  Url: string;
+  Url?: string;
   /** 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。 */
-  Definition: number;
+  Definition?: number;
   /** 视频流码率平均值与音频流码率平均值之和， 单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 视频流高度的最大值，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 视频流宽度的最大值，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 媒体文件总大小，单位：字节。当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和。 */
-  Size: number;
+  Size?: number;
   /** 视频时长，单位：秒。 */
-  Duration: number;
+  Duration?: number;
   /** 视频的 md5 值。 */
-  Md5: string;
+  Md5?: string;
   /** 容器类型，例如 m4a，mp4 等。 */
-  Container: string;
+  Container?: string;
   /** 视频流信息。 */
-  VideoStreamSet: MediaVideoStreamItem[];
+  VideoStreamSet?: MediaVideoStreamItem[];
   /** 音频流信息。 */
-  AudioStreamSet: MediaAudioStreamItem[];
+  AudioStreamSet?: MediaAudioStreamItem[];
   /** 数字水印类型。可选值：Trace 表示经过溯源水印处理；CopyRight 表示经过版权水印处理；None 表示没有经过数字水印处理。 */
-  DigitalWatermarkType: string;
+  DigitalWatermarkType?: string;
   /** 版权信息。 */
   CopyRightWatermarkText?: string;
 }
@@ -6103,7 +6103,7 @@ declare interface CreateSuperPlayerConfigRequest {
   TranscodeDefinition?: number;
   /** 允许输出的雪碧图模板 ID。 */
   ImageSpriteDefinition?: number;
-  /** 播放器对不于不同分辨率的子流展示名字，不填或者填空数组则使用默认配置：MinEdgeLength：240，Name：流畅；MinEdgeLength：480，Name：标清；MinEdgeLength：720，Name：高清；MinEdgeLength：1080，Name：全高清；MinEdgeLength：1440，Name：2K；MinEdgeLength：2160，Name：4K；MinEdgeLength：4320，Name：8K。 */
+  /** 播放器对于不同分辨率的子流展示名字，不填或者填空数组则使用默认配置：MinEdgeLength：240，Name：流畅；MinEdgeLength：480，Name：标清；MinEdgeLength：720，Name：高清；MinEdgeLength：1080，Name：全高清；MinEdgeLength：1440，Name：2K；MinEdgeLength：2160，Name：4K；MinEdgeLength：4320，Name：8K。 */
   ResolutionNames?: ResolutionNameInfo[];
   /** 播放时使用的域名。不填或者填 Default，表示使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的域名。 */
   Domain?: string;
@@ -7443,7 +7443,7 @@ declare interface DescribeTranscodeTemplatesResponse {
 }
 
 declare interface DescribeVodDomainsRequest {
-  /** 域名列表。当该字段不填时，则默认列出所有域名信息。本字段字段限制如下：域名个数度最大为 20。 */
+  /** 域名列表。当该字段不填时，则默认列出所有域名信息。本字段限制如下：域名个数度最大为 20。 */
   Domains?: string[];
   /** 分页拉取的最大返回结果数。默认值：20。 */
   Limit?: number;
@@ -7455,9 +7455,9 @@ declare interface DescribeVodDomainsRequest {
 
 declare interface DescribeVodDomainsResponse {
   /** 域名总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 域名信息列表。 */
-  DomainSet: DomainDetailInfo[];
+  DomainSet?: DomainDetailInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8307,7 +8307,7 @@ declare interface ModifySuperPlayerConfigRequest {
   TranscodeDefinition?: number;
   /** 允许输出的雪碧图模板 ID。 */
   ImageSpriteDefinition?: number;
-  /** 播放器对不于不同分辨率的子流展示名字。 */
+  /** 播放器对于不同分辨率的子流展示名字。 */
   ResolutionNames?: ResolutionNameInfo[];
   /** 播放时使用的域名。填 Default 表示使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的域名。 */
   Domain?: string;
@@ -8969,7 +8969,7 @@ declare interface WeChatMiniProgramPublishRequest {
 
 declare interface WeChatMiniProgramPublishResponse {
   /** 任务 ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

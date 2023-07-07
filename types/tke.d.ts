@@ -352,6 +352,8 @@ declare interface ClusterLevelAttribute {
   PodCount: number;
   /** Configmap数量 */
   ConfigMapCount: number;
+  /** ReplicaSets数量 */
+  RSCount?: number;
   /** CRD数量 */
   CRDCount: number;
   /** 是否启用 */
@@ -4639,13 +4641,15 @@ declare interface DescribeResourceUsageRequest {
 
 declare interface DescribeResourceUsageResponse {
   /** CRD使用量 */
-  CRDUsage: ResourceUsage;
+  CRDUsage?: ResourceUsage;
   /** Pod使用量 */
-  PodUsage: number;
+  PodUsage?: number;
+  /** ReplicaSet使用量 */
+  RSUsage?: number;
   /** ConfigMap使用量 */
-  ConfigMapUsage: number;
+  ConfigMapUsage?: number;
   /** 其他资源使用量 */
-  OtherUsage: ResourceUsage;
+  OtherUsage?: ResourceUsage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5259,6 +5263,8 @@ declare interface ModifyClusterVirtualNodePoolRequest {
   NodePoolId: string;
   /** 节点池名称 */
   Name?: string;
+  /** 安全组ID列表 */
+  SecurityGroupIds?: string[];
   /** 虚拟节点label */
   Labels?: Label[];
   /** 虚拟节点taint */

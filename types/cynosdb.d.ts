@@ -4167,7 +4167,7 @@ declare interface Cynosdb {
   ModifyProxyDesc(data: ModifyProxyDescRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyDescResponse>;
   /** 配置数据库代理读写分离 {@link ModifyProxyRwSplitRequest} {@link ModifyProxyRwSplitResponse} */
   ModifyProxyRwSplit(data: ModifyProxyRwSplitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyRwSplitResponse>;
-  /** 给资源包绑定集群 {@link ModifyResourcePackageClustersRequest} {@link ModifyResourcePackageClustersResponse} */
+  /** 修改集群与资源包之间的绑定关系 {@link ModifyResourcePackageClustersRequest} {@link ModifyResourcePackageClustersResponse} */
   ModifyResourcePackageClusters(data: ModifyResourcePackageClustersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackageClustersResponse>;
   /** 修改资源包名称 {@link ModifyResourcePackageNameRequest} {@link ModifyResourcePackageNameResponse} */
   ModifyResourcePackageName(data: ModifyResourcePackageNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackageNameResponse>;

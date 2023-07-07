@@ -852,6 +852,24 @@ declare interface CreateProxySessionKillTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateRedisBigKeyAnalysisTaskRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 分片节点序号列表。当列表为空时，选择所有分片节点。 */
+  ShardIds?: number[];
+  /** Top Key前缀的分隔符列表。目前仅支持以下分割符：[",", ";", ":", "_", "-", "+", "@", "=", "|", "#", "."]，当列表为空时，默认选择所有分隔符。 */
+  KeyDelimiterList?: string[];
+}
+
+declare interface CreateRedisBigKeyAnalysisTaskResponse {
+  /** 异步任务ID。 */
+  AsyncRequestId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSchedulerMailProfileRequest {
   /** 取值范围1-7，分别代表周一至周日。 */
   WeekConfiguration: number[];
@@ -2853,6 +2871,8 @@ declare interface Dbbrain {
   CreateMailProfile(data: CreateMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMailProfileResponse>;
   /** 创建中止代理节点会话的任务 {@link CreateProxySessionKillTaskRequest} {@link CreateProxySessionKillTaskResponse} */
   CreateProxySessionKillTask(data: CreateProxySessionKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxySessionKillTaskResponse>;
+  /** 创建redis实例即时大key分析任务 {@link CreateRedisBigKeyAnalysisTaskRequest} {@link CreateRedisBigKeyAnalysisTaskResponse} */
+  CreateRedisBigKeyAnalysisTask(data: CreateRedisBigKeyAnalysisTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRedisBigKeyAnalysisTaskResponse>;
   /** 创建定期生成的邮件发送配置 {@link CreateSchedulerMailProfileRequest} {@link CreateSchedulerMailProfileResponse} */
   CreateSchedulerMailProfile(data: CreateSchedulerMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchedulerMailProfileResponse>;
   /** 创建安全审计日志导出任务 {@link CreateSecurityAuditLogExportTaskRequest} {@link CreateSecurityAuditLogExportTaskResponse} */

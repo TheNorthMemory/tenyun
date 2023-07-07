@@ -388,6 +388,48 @@ declare interface DependencyConfig {
   SonTask?: TaskInnerInfo | null;
 }
 
+/** 批量操作任务列表 */
+declare interface DescribeBatchOperateTaskDTO {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 工作流Id */
+  WorkflowId?: string | null;
+  /** 工作流名 */
+  WorkflowName?: string | null;
+  /** 状态 */
+  Status?: string | null;
+  /** 任务ID */
+  TaskTypeId?: number | null;
+  /** 任务类型 */
+  TaskTypeDesc?: string | null;
+  /** 文件夹名 */
+  FolderName?: string | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+  /** 负责人 */
+  InCharge?: string | null;
+  /** 是否提交 */
+  Submit?: number | null;
+  /** 引擎：presto\SparkJob\SparkSql */
+  DataEngine?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 创造时间 */
+  CreateTime?: string | null;
+}
+
+/** 批量操作任务列表分页 */
+declare interface DescribeBatchOperateTaskPage {
+  /** 总页码数 */
+  PageCount: number | null;
+  /** 内容 */
+  Items: DescribeBatchOperateTaskDTO[] | null;
+  /** 总个数 */
+  TotalCount?: number | null;
+}
+
 /** 文件夹分页信息 */
 declare interface DescribeFolderListData {
   /** 文件夹信息列表 */
@@ -3864,6 +3906,50 @@ declare interface DescribeAlarmReceiverResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBatchOperateTaskRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 页码 */
+  Page: string;
+  /** 页号 */
+  Size: string;
+  /** 状态列表草稿：'NS'，'N','P','R'运行：''Y'停止：'F'冻结：'O'停止中：'T' */
+  StatusList?: string[];
+  /** 责任人名列表 */
+  OwnerNameList?: string[];
+  /** 工作流列表 */
+  WorkflowIdList?: string[];
+  /** 任务名称搜索 */
+  TaskNameFilter?: string;
+  /** 任务类型列表 */
+  TaskTypeList?: string[];
+  /** 文件夹列表 */
+  FordIdList?: string[];
+  /** 任务Id搜索 */
+  TaskIdFilter?: string;
+  /** 责任人搜索 */
+  OwnerNameFilter?: string;
+  /** 排序字段：UpdateTimeCreateTime */
+  SortItem?: string;
+  /** asc:升序desc:降序 */
+  SortType?: string;
+  /** 引擎类型列表：三种SparkJobSparkSqlpresto */
+  DataEngineList?: string[];
+  /** 操作人名 */
+  UserId?: string;
+  /** 1 */
+  OwnerId?: string;
+  /** 1 */
+  TenantId?: string;
+}
+
+declare interface DescribeBatchOperateTaskResponse {
+  /** 无 */
+  Data?: DescribeBatchOperateTaskPage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterNamespaceListRequest {
   /** 集群ID */
   ClusterId: string;
@@ -6954,6 +7040,8 @@ declare interface Wedata {
   DescribeAlarmEvents(data: DescribeAlarmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmEventsResponse>;
   /** 告警接收人详情 {@link DescribeAlarmReceiverRequest} {@link DescribeAlarmReceiverResponse} */
   DescribeAlarmReceiver(data: DescribeAlarmReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmReceiverResponse>;
+  /** 批量操作任务列表 {@link DescribeBatchOperateTaskRequest} {@link DescribeBatchOperateTaskResponse} */
+  DescribeBatchOperateTask(data: DescribeBatchOperateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperateTaskResponse>;
   /** 获取集群命名空间列表 {@link DescribeClusterNamespaceListRequest} {@link DescribeClusterNamespaceListResponse} */
   DescribeClusterNamespaceList(data: DescribeClusterNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNamespaceListResponse>;
   /** 查询数据来源列表 {@link DescribeDataBasesRequest} {@link DescribeDataBasesResponse} */

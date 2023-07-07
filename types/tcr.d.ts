@@ -538,6 +538,24 @@ declare interface SecurityPolicy {
   PolicyVersion?: string;
 }
 
+/** 服务级账号 */
+declare interface ServiceAccount {
+  /** 服务级账号名 */
+  Name?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 是否禁用 */
+  Disable?: boolean | null;
+  /** 过期时间 */
+  ExpiresAt?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 策略 */
+  Permissions?: Permission[] | null;
+}
+
 /** 云标签Tag */
 declare interface Tag {
   /** 云标签的key */
@@ -1174,6 +1192,36 @@ declare interface CreateSecurityPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateServiceAccountRequest {
+  /** 实例Id */
+  RegistryId: string;
+  /** 服务级账号名 */
+  Name: string;
+  /** 策略列表 */
+  Permissions: Permission[];
+  /** 服务级账号描述 */
+  Description?: string;
+  /** 有效期(单位：天)，从当前时间开始计算，优先级高于ExpiresAt */
+  Duration?: number;
+  /** 过期时间（时间戳，单位:毫秒） */
+  ExpiresAt?: number;
+  /** 是否禁用服务级账号 */
+  Disable?: boolean;
+}
+
+declare interface CreateServiceAccountResponse {
+  /** 服务级账号名（会自动加上前缀tcr$） */
+  Name?: string;
+  /** 服务级账号密码，仅展示一次，请注意留存 */
+  Password?: string;
+  /** 服务级账号失效时间（时间戳） */
+  ExpiresAt?: number;
+  /** 服务级账号创建时间 */
+  CreateTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSignaturePolicyRequest {
   /** 实例 Id */
   RegistryId: string;
@@ -1514,6 +1562,18 @@ declare interface DeleteSecurityPolicyRequest {
 declare interface DeleteSecurityPolicyResponse {
   /** 实例Id */
   RegistryId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteServiceAccountRequest {
+  /** 实例Id */
+  RegistryId: string;
+  /** 服务级账号名 */
+  Name: string;
+}
+
+declare interface DeleteServiceAccountResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2118,6 +2178,30 @@ declare interface DescribeSecurityPoliciesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeServiceAccountsRequest {
+  /** 实例Id */
+  RegistryId: string;
+  /** 列出所有服务级账号 */
+  All?: boolean;
+  /** 是否填充策略 */
+  EmbedPermission?: boolean;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 最大输出条数，默认20，最大为100（超出最大值，调整到最大值） */
+  Limit?: number;
+}
+
+declare interface DescribeServiceAccountsResponse {
+  /** 服务级账号列表 */
+  ServiceAccounts?: ServiceAccount[] | null;
+  /** 自定义账户数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTagRetentionExecutionRequest {
   /** 主实例iD */
   RegistryId: string;
@@ -2528,6 +2612,28 @@ declare interface ModifySecurityPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyServiceAccountRequest {
+  /** 实例Id */
+  RegistryId: string;
+  /** 服务级账号名 */
+  Name: string;
+  /** 服务级账号描述 */
+  Description?: string;
+  /** 有效期(单位：天)，从当前时间开始计算，优先级高于ExpiresAt */
+  Duration?: number;
+  /** 过期时间（时间戳，单位:毫秒） */
+  ExpiresAt?: number;
+  /** 是否禁用服务级账号 */
+  Disable?: boolean;
+  /** 策略列表 */
+  Permissions?: Permission[];
+}
+
+declare interface ModifyServiceAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTagRetentionRuleRequest {
   /** 主实例iD */
   RegistryId: string;
@@ -2653,6 +2759,8 @@ declare interface Tcr {
   CreateRepositoryPersonal(data: CreateRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryPersonalResponse>;
   /** 创建实例公网访问白名单策略 {@link CreateSecurityPolicyRequest} {@link CreateSecurityPolicyResponse} */
   CreateSecurityPolicy(data: CreateSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityPolicyResponse>;
+  /** 创建服务级账号 {@link CreateServiceAccountRequest} {@link CreateServiceAccountResponse} */
+  CreateServiceAccount(data: CreateServiceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceAccountResponse>;
   /** 创建镜像签名 {@link CreateSignatureRequest} {@link CreateSignatureResponse} */
   CreateSignature(data: CreateSignatureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignatureResponse>;
   /** 创建签名策略 {@link CreateSignaturePolicyRequest} {@link CreateSignaturePolicyResponse} */
@@ -2703,6 +2811,8 @@ declare interface Tcr {
   DeleteRepositoryTags(data: DeleteRepositoryTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryTagsResponse>;
   /** 删除实例公网访问白名单策略 {@link DeleteSecurityPolicyRequest} {@link DeleteSecurityPolicyResponse} */
   DeleteSecurityPolicy(data: DeleteSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityPolicyResponse>;
+  /** 删除服务级账号 {@link DeleteServiceAccountRequest} {@link DeleteServiceAccountResponse} */
+  DeleteServiceAccount(data: DeleteServiceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceAccountResponse>;
   /** 删除命名空间加签策略 {@link DeleteSignaturePolicyRequest} {@link DeleteSignaturePolicyResponse} */
   DeleteSignaturePolicy(data: DeleteSignaturePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSignaturePolicyResponse>;
   /** 删除版本保留规则 {@link DeleteTagRetentionRuleRequest} {@link DeleteTagRetentionRuleResponse} */
@@ -2775,6 +2885,8 @@ declare interface Tcr {
   DescribeRepositoryPersonal(data: DescribeRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryPersonalResponse>;
   /** 查询实例公网访问白名单策略 {@link DescribeSecurityPoliciesRequest} {@link DescribeSecurityPoliciesResponse} */
   DescribeSecurityPolicies(data: DescribeSecurityPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPoliciesResponse>;
+  /** 查询服务级账号 {@link DescribeServiceAccountsRequest} {@link DescribeServiceAccountsResponse} */
+  DescribeServiceAccounts(data: DescribeServiceAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceAccountsResponse>;
   /** 查询版本保留执行记录 {@link DescribeTagRetentionExecutionRequest} {@link DescribeTagRetentionExecutionResponse} */
   DescribeTagRetentionExecution(data: DescribeTagRetentionExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionResponse>;
   /** 查询版本保留执行任务 {@link DescribeTagRetentionExecutionTaskRequest} {@link DescribeTagRetentionExecutionTaskResponse} */
@@ -2819,6 +2931,8 @@ declare interface Tcr {
   ModifyRepositoryInfoPersonal(data: ModifyRepositoryInfoPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryInfoPersonalResponse>;
   /** 更新实例公网访问白名单 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
+  /** 更新服务级账号 {@link ModifyServiceAccountRequest} {@link ModifyServiceAccountResponse} */
+  ModifyServiceAccount(data: ModifyServiceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceAccountResponse>;
   /** 更新版本保留规则 {@link ModifyTagRetentionRuleRequest} {@link ModifyTagRetentionRuleResponse} */
   ModifyTagRetentionRule(data: ModifyTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTagRetentionRuleResponse>;
   /** 修改个人用户登录密码 {@link ModifyUserPasswordPersonalRequest} {@link ModifyUserPasswordPersonalResponse} */

@@ -1399,9 +1399,9 @@ declare interface DescribeProjectsRequest {
 
 declare interface DescribeProjectsResponse {
   /** 项目数组 */
-  ProjectSet: Project[] | null;
+  ProjectSet?: Project[] | null;
   /** 项目数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

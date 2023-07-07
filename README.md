@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 235+ 款产品，9568+ 服务数</summary>
+<details><summary>共计 235+ 款产品，9574+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -173,7 +173,7 @@ cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(51) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(49) | 2019-10-16(27) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(50) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
@@ -289,7 +289,7 @@ tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243
 tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020-07-27(2) |
 tci | 腾讯智学课堂分析 | 2019-03-18(41) |
 tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-13(12) |
-tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(108) |
+tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(112) |
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(331) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(18) |
@@ -327,7 +327,7 @@ vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-1
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(4) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(51) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(197) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(198) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(17) |
 youmall |  | 2018-02-28(31) |

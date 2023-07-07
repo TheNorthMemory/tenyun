@@ -330,6 +330,14 @@ declare interface ISPCounter {
   ZoneInstanceInfoSet: ZoneInstanceInfo[];
 }
 
+/** 多运营商IPv6 Cidr Block */
+declare interface ISPIPv6CidrBlock {
+  /** IPv6 CIdr Block。 */
+  IPv6CidrBlock?: string | null;
+  /** 网络运营商类型 取值范围:'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调 */
+  ISPType?: string | null;
+}
+
 /** 镜像信息 */
 declare interface Image {
   /** 镜像ID */
@@ -1361,43 +1369,45 @@ declare interface SrcImage {
 /** 子网对象 */
 declare interface Subnet {
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 子网实例ID，例如：subnet-bthucmmy。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 子网名称。 */
-  SubnetName: string;
+  SubnetName?: string;
   /** 子网的 IPv4 CIDR。 */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** 是否默认子网。 */
-  IsDefault: boolean;
+  IsDefault?: boolean;
   /** 是否开启广播。 */
-  EnableBroadcast: boolean;
+  EnableBroadcast?: boolean;
   /** 路由表实例ID，例如：rtb-l2h8d7c2。 */
-  RouteTableId: string;
+  RouteTableId?: string;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 可用IP数。 */
-  AvailableIpAddressCount: number;
+  AvailableIpAddressCount?: number;
   /** 子网的 IPv6 CIDR。 */
-  Ipv6CidrBlock: string;
+  Ipv6CidrBlock?: string;
   /** 关联ACLID */
-  NetworkAclId: string;
+  NetworkAclId?: string;
   /** 是否为 SNAT 地址池子网。 */
-  IsRemoteVpcSnat: boolean;
+  IsRemoteVpcSnat?: boolean;
   /** 标签键值对。 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 所在区域 */
-  Zone: string;
+  Zone?: string;
   /** 可用区名称 */
-  ZoneName: string | null;
+  ZoneName?: string | null;
   /** 实例数量 */
-  InstanceCount: number | null;
+  InstanceCount?: number | null;
   /** VPC的 IPv4 CIDR。 */
-  VpcCidrBlock: string | null;
+  VpcCidrBlock?: string | null;
   /** VPC的 IPv6 CIDR。 */
-  VpcIpv6CidrBlock: string | null;
+  VpcIpv6CidrBlock?: string | null;
   /** 地域 */
-  Region: string | null;
+  Region?: string | null;
+  /** 运营商类型。'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调 */
+  ISPType?: string | null;
 }
 
 /** 用于描述系统盘。 */
@@ -1508,44 +1518,48 @@ declare interface VirtualPrivateCloud {
   Ipv6AddressCount?: number;
 }
 
-/** 私有网络(VPC)对象。 */
+/** 私有网络(VPC) 对象。 */
 declare interface VpcInfo {
   /** VPC名称。 */
-  VpcName: string;
+  VpcName?: string;
   /** VPC实例ID，例如：vpc-azd4dt1c。 */
-  VpcId: string;
+  VpcId?: string;
   /** VPC的IPv4 CIDR。 */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** 是否默认VPC。 */
-  IsDefault: boolean;
+  IsDefault?: boolean;
   /** 是否开启组播。 */
-  EnableMulticast: boolean;
+  EnableMulticast?: boolean;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** DNS列表。 */
-  DnsServerSet: string[] | null;
+  DnsServerSet?: string[] | null;
   /** DHCP域名选项值。 */
-  DomainName: string;
+  DomainName?: string;
   /** DHCP选项集ID。 */
-  DhcpOptionsId: string;
+  DhcpOptionsId?: string;
   /** 是否开启DHCP。 */
-  EnableDhcp: boolean;
+  EnableDhcp?: boolean;
   /** VPC的IPv6 CIDR。 */
-  Ipv6CidrBlock: string;
+  Ipv6CidrBlock?: string;
   /** 标签键值对 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 辅助CIDR */
-  AssistantCidrSet: AssistantCidr[] | null;
+  AssistantCidrSet?: AssistantCidr[] | null;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 描述 */
-  Description: string;
+  Description?: string;
   /** 地域中文名 */
-  RegionName: string;
+  RegionName?: string;
   /** 包含子网数量 */
-  SubnetCount: number;
+  SubnetCount?: number;
   /** 包含实例数量 */
-  InstanceCount: number;
+  InstanceCount?: number;
+  /** ipv6运营商 */
+  Ipv6ISP?: string | null;
+  /** 多运营商IPv6 Cidr Block。 */
+  Ipv6CidrBlockSet?: ISPIPv6CidrBlock[] | null;
 }
 
 /** Zone信息 */
@@ -1622,12 +1636,18 @@ declare interface AssignIpv6AddressesRequest {
   /** 自动分配IPv6地址个数，内网IP地址个数总和不能超过配数。与入参Ipv6Addresses合并计算配额。与Ipv6Addresses必填一个。 */
   Ipv6AddressCount?: number;
   /** ipv6运营商如下：CTCC：中国电信CUCC：中国联通CMCC：中国移动 */
+  ISPType?: string;
+  /** 是否跳过校验一个网卡只能分配一个IPv6 CIDR。该字段通常为true（用于兼容存量子机只有一个地址的情形）。 */
+  SkipCheckIPv6Address?: boolean;
+  /** 是否跳过自动开通公网带宽。通常为true(根据运营系统的用户配置来决定是否自动开通，以支持当前子机购买时的行为）。 */
+  SkipAllocateBandwidth?: boolean;
+  /** 该字段没有使用（已过期）。 */
   Ipv6ISP?: string;
 }
 
 declare interface AssignIpv6AddressesResponse {
   /** 分配给弹性网卡的IPv6地址列表。 */
-  Ipv6AddressSet: Ipv6Address[];
+  Ipv6AddressSet?: Ipv6Address[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2803,7 +2823,7 @@ declare interface DescribeSnapshotsResponse {
 declare interface DescribeSubnetsRequest {
   /** 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定SubnetIds和Filters。 */
   SubnetIds?: string[];
-  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - Subnet实例名称。subnet-name - String - 子网名称。只支持单值的模糊查询。cidr-block - String - 子网网段，形如: 192.168.1.0 。只支持单值的模糊查询。vpc-id - String - VPC实例ID，形如：vpc-f49l6u0z。vpc-cidr-block - String - vpc网段，形如: 192.168.1.0 。只支持单值的模糊查询。region - String - ECM地域zone - String - 可用区。tag-key - String -是否必填：否- 按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。 */
+  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - Subnet实例名称。subnet-name - String - 子网名称。只支持单值的模糊查询。cidr-block - String - 子网网段，形如: 192.168.1.0 。只支持单值的模糊查询。vpc-id - String - VPC实例ID，形如：vpc-f49l6u0z。vpc-cidr-block - String - vpc网段，形如: 192.168.1.0 。只支持单值的模糊查询。region - String - ECM地域zone - String - 可用区。tag-key - String -是否必填：否- 按照标签键进行过滤。ipv6-cidr-block- String - 是否必填：否 - 按照IPv6 CIDR进行过滤。isp-type - String - 是否必填：否 - 按照运营商类型( 如CMCC，CUCC， CTCC)进行过滤。 */
   Filters?: Filter[];
   /** 偏移量 */
   Offset?: string;
@@ -2885,7 +2905,7 @@ declare interface DescribeTaskStatusResponse {
 declare interface DescribeVpcsRequest {
   /** VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。 */
   VpcIds?: string[];
-  /** 过滤条件，参数不支持同时指定VpcIds和Filters。vpc-name - String - VPC实例名称，只支持单值的模糊查询。vpc-id - String - VPC实例ID形如：vpc-f49l6u0z。cidr-block - String - vpc的cidr，只支持单值的模糊查询。region - String - vpc的region。tag-key - String -是否必填：否- 按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。 */
+  /** 过滤条件，参数不支持同时指定VpcIds和Filters。vpc-name - String - VPC实例名称，只支持单值的模糊查询。vpc-id - String - VPC实例ID形如：vpc-f49l6u0z。cidr-block - String - vpc的cidr，只支持单值的模糊查询。region - String - vpc的region。tag-key - String -是否必填：否- 按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。ipv6-cidr-block - String - 是否必填：否 - 按照IPv6 CIDR block进行过滤。isp-type - String - 是否必填：否 - 按照运营商（如CMCC, CUCC, CTCC）进行过滤。 */
   Filters?: Filter[];
   /** 偏移量 */
   Offset?: number;
