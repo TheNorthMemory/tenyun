@@ -290,6 +290,10 @@ declare interface RoomItem {
   MaxMicNumber?: number | null;
   /** 打开学生麦克风/摄像头的授权开关 */
   EnableDirectControl?: number | null;
+  /** 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教 */
+  InteractionMode?: number | null;
+  /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
+  VideoOrientation?: number | null;
 }
 
 /** 场景配置 */
@@ -1114,6 +1118,8 @@ declare interface GetRoomsRequest {
   Page?: number;
   /** 默认是10条 */
   Limit?: number;
+  /** 课堂状态。默认展示所有课堂，0为未开始，1为正在上课，2为已结束，3为已过期 */
+  Status?: number[];
 }
 
 declare interface GetRoomsResponse {

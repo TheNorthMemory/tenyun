@@ -10,7 +10,7 @@ declare interface Agent {
   ProxyOrganizationOpenId?: string;
   /** 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。 */
   ProxyOperator?: UserInfo;
-  /** 在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。 */
+  /** 非必需参数，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。 */
   ProxyAppId?: string;
   /** 内部参数，暂未开放使用 */
   ProxyOrganizationId?: string;
@@ -191,7 +191,7 @@ declare interface Component {
 /** 创建合同配置信息 */
 declare interface CreateFlowOption {
   /** 是否允许修改合同信息，true-是，false-否 */
-  CanEditFlow?: boolean | null;
+  CanEditFlow?: boolean;
 }
 
 /** 第三方应用集成员工部门信息 */
@@ -1093,9 +1093,9 @@ declare interface ChannelCreatePrepareFlowRequest {
   FlowInfo: BaseFlowInfo;
   /** 合同签署人信息 */
   FlowApproverList: CommonFlowApprover[];
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填 */
   Agent?: Agent;
-  /** 合同流程配置信息 */
+  /** 合同流程配置信息，用于配置发起合同时定制化 */
   FlowOption?: CreateFlowOption;
   /** 通过flowid快速获得之前成功通过页面发起的合同生成链接 */
   FlowId?: string;

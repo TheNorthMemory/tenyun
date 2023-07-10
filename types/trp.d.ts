@@ -1133,12 +1133,16 @@ declare interface DescribeProductsResponse {
 declare interface DescribeRawScanLogsRequest {
   /** 企业ID, 默认为当前企业如果有渠道权限，可以传 0 会查渠道下所有的企业 */
   CorpId?: number;
-  /** 分页数量，默认为 100，最大为 1000 */
+  /** 分页数量，默认为 20，最大为 1000 */
   PageSize?: number;
   /** 当前分页，默认为 1 */
   PageNumber?: number;
   /** 从哪个日志后查询即: LogId > $AfterLogId */
   AfterLogId?: number;
+  /** 开始时间 >= StartTime */
+  StartTime?: string;
+  /** 结束时间 < EndTime */
+  EndTime?: string;
 }
 
 declare interface DescribeRawScanLogsResponse {

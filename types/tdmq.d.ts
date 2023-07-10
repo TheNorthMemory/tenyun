@@ -2010,6 +2010,20 @@ declare interface DeleteRabbitMQUserResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRabbitMQVipInstanceRequest {
+  /** 实例Id */
+  InstanceId: string;
+}
+
+declare interface DeleteRabbitMQVipInstanceResponse {
+  /** 订单号Id */
+  TranId?: string | null;
+  /** 实例Id */
+  InstanceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRabbitMQVirtualHostRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -3759,6 +3773,8 @@ declare interface Tdmq {
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
   DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;
+  /** 删除RabbitMQ专享版实例 {@link DeleteRabbitMQVipInstanceRequest} {@link DeleteRabbitMQVipInstanceResponse} */
+  DeleteRabbitMQVipInstance(data: DeleteRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQVipInstanceResponse>;
   /** 删除RabbitMQ的vhost {@link DeleteRabbitMQVirtualHostRequest} {@link DeleteRabbitMQVirtualHostResponse} */
   DeleteRabbitMQVirtualHost(data: DeleteRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQVirtualHostResponse>;
   /** 删除RocketMQ集群 {@link DeleteRocketMQClusterRequest} {@link DeleteRocketMQClusterResponse} */

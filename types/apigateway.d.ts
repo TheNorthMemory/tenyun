@@ -3631,7 +3631,7 @@ declare interface Apigateway {
   DisableApiKey(data: DisableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableApiKeyResponse>;
   /** 启用密钥 {@link EnableApiKeyRequest} {@link EnableApiKeyResponse} */
   EnableApiKey(data: EnableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableApiKeyResponse>;
-  /** 生成文档和 SDK {@link GenerateApiDocumentRequest} {@link GenerateApiDocumentResponse} */
+  /** @deprecated 生成文档和 SDK {@link GenerateApiDocumentRequest} {@link GenerateApiDocumentResponse} */
   GenerateApiDocument(data: GenerateApiDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateApiDocumentResponse>;
   /** 导入OpenAPI {@link ImportOpenApiRequest} {@link ImportOpenApiResponse} */
   ImportOpenApi(data: ImportOpenApiRequest, config?: AxiosRequestConfig): AxiosPromise<ImportOpenApiResponse>;

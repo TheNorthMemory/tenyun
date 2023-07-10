@@ -30,6 +30,60 @@ declare interface BoundK8SInfo {
   SyncMode?: string | null;
 }
 
+/** 灰度规则列表 */
+declare interface CloudAPIGatewayCanaryRuleList {
+  /** 灰度规则 */
+  CanaryRuleList?: CloudNativeAPIGatewayCanaryRule[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
+}
+
+/** 含百分比流量配置的服务 */
+declare interface CloudNativeAPIGatewayBalancedService {
+  /** 服务 ID，作为入参时，必填 */
+  ServiceID?: string | null;
+  /** 服务名称，作为入参时，无意义 */
+  ServiceName?: string | null;
+  /** Upstream 名称，作为入参时，无意义 */
+  UpstreamName?: string | null;
+  /** 百分比，10 即 10%，范围0-100 */
+  Percent?: number | null;
+}
+
+/** 灰度规则 */
+declare interface CloudNativeAPIGatewayCanaryRule {
+  /** 优先级，值范围为 0 到 100；值越大，优先级越高；不同规则间优先级不可重复 */
+  Priority: number | null;
+  /** 是否启用规则 */
+  Enabled: boolean | null;
+  /** 参数匹配条件 */
+  ConditionList?: CloudNativeAPIGatewayCanaryRuleCondition[] | null;
+  /** 服务的流量百分比配置 */
+  BalancedServiceList?: CloudNativeAPIGatewayBalancedService[] | null;
+  /** 归属服务 ID */
+  ServiceId?: string | null;
+  /** 归属服务名称 */
+  ServiceName?: string | null;
+}
+
+/** 灰度规则中的条件配置 */
+declare interface CloudNativeAPIGatewayCanaryRuleCondition {
+  /** 条件类型，支持 path, method, query, header, cookie, body 和 system。 */
+  Type: string | null;
+  /** 参数名 */
+  Key?: string | null;
+  /** 操作符，支持 "le", "eq", "lt", "ne", "ge", "gt", "regex", "exists", "in", "not in", "prefix" ,"exact", "regex" 等 */
+  Operator?: string | null;
+  /** 目标参数值 */
+  Value?: string | null;
+  /** 分隔符，当 Operator 为 in 或者 not in 时生效。支持值为英文逗号，英文分号，空格，换行符。 */
+  Delimiter?: string | null;
+  /** 全局配置 Id */
+  GlobalConfigId?: string | null;
+  /** 全局配置名称 */
+  GlobalConfigName?: string | null;
+}
+
 /** 云原生API网关节点信息。 */
 declare interface CloudNativeAPIGatewayNode {
   /** 云原生网关节点 id */
@@ -46,6 +100,36 @@ declare interface CloudNativeAPIGatewayNode {
   GroupName?: string | null;
   /** 状态 */
   Status?: string | null;
+}
+
+/** 云原生网关Tse 限流插件配置 */
+declare interface CloudNativeAPIGatewayRateLimitDetail {
+  /** 插件启用状态 */
+  Enabled: boolean;
+  /** qps阈值 */
+  QpsThresholds: QpsThreshold[];
+  /** 限流依据ip service consumer credential path header */
+  LimitBy: string;
+  /** 响应策略url请求转发text 响应配置default 直接返回 */
+  ResponseType: string;
+  /** 是否隐藏限流客户端响应头 */
+  HideClientHeaders: boolean;
+  /** 是否开启请求排队 */
+  IsDelay: boolean;
+  /** 需要进行流量控制的请求路径 */
+  Path?: string | null;
+  /** 需要进行流量控制的请求头Key */
+  Header?: string | null;
+  /** 外部redis配置 */
+  ExternalRedis?: ExternalRedis | null;
+  /** 计数器策略 local 单机redis 默认redisexternal_redis 外部redis */
+  Policy?: string | null;
+  /** 响应配置，响应策略为text */
+  RateLimitResponse?: RateLimitResponse | null;
+  /** 请求转发地址 */
+  RateLimitResponseUrl?: string | null;
+  /** 排队时间 */
+  LineUpTime?: number;
 }
 
 /** 获取网关节点信息 */
@@ -140,6 +224,18 @@ declare interface EnvInfo {
   EnableConfigIntranet?: boolean | null;
 }
 
+/** 云原生网关限流插件外部redis配置 */
+declare interface ExternalRedis {
+  /** redis ip */
+  RedisHost: string | null;
+  /** redis密码 */
+  RedisPassword: string | null;
+  /** redis端口 */
+  RedisPort: number | null;
+  /** 超时时间 ms */
+  RedisTimeout: number | null;
+}
+
 /** 查询过滤通用对象 */
 declare interface Filter {
   /** 过滤参数名 */
@@ -157,11 +253,179 @@ declare interface InstanceTagInfo {
 }
 
 /** 键值对 */
+declare interface KVMapping {
+  /** key */
+  Key?: string | null;
+  /** value */
+  Value?: string | null;
+}
+
+/** 键值对 */
 declare interface KVPair {
   /** 键 */
   Key: string;
   /** 值 */
   Value: string;
+}
+
+/** 云原生网关路由信息 */
+declare interface KongRoutePreview {
+  /** 服务ID */
+  ID: string | null;
+  /** 服务名字 */
+  Name?: string | null;
+  /** 无 */
+  Methods?: string[] | null;
+  /** 无 */
+  Paths?: string[] | null;
+  /** 无 */
+  Hosts?: string[] | null;
+  /** 无 */
+  Protocols?: string[] | null;
+  /** 无 */
+  PreserveHost?: boolean | null;
+  /** 无 */
+  HttpsRedirectStatusCode?: number | null;
+  /** 无 */
+  StripPath?: boolean | null;
+  /** 无 */
+  CreatedTime?: string | null;
+  /** 是否开启了强制HTTPS */
+  ForceHttps?: boolean | null;
+  /** 服务名 */
+  ServiceName?: string | null;
+  /** 服务ID */
+  ServiceID?: string | null;
+  /** 目的端口 */
+  DestinationPorts?: number[] | null;
+  /** 路由的Headers */
+  Headers?: KVMapping | null;
+}
+
+/** 云原生网关服务详细信息 */
+declare interface KongServiceDetail {
+  /** 服务ID */
+  ID: string | null;
+  /** 服务名字 */
+  Name?: string | null;
+  /** 后端协议 */
+  Protocol?: string | null;
+  /** 后端路径 */
+  Path?: string | null;
+  /** 后端延时，单位ms */
+  Timeout?: number | null;
+  /** 重试次数 */
+  Retries?: number | null;
+  /** 标签 */
+  Tags?: string[] | null;
+  /** 后端配置 */
+  UpstreamInfo?: KongUpstreamInfo | null;
+  /** 后端类型 */
+  UpstreamType?: string | null;
+  /** 是否可编辑 */
+  Editable?: boolean | null;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+}
+
+/** 云原生网关服务预览信息 */
+declare interface KongServicePreview {
+  /** 服务ID */
+  ID: string | null;
+  /** 服务名字 */
+  Name?: string | null;
+  /** 标签 */
+  Tags?: string[] | null;
+  /** 后端配置 */
+  UpstreamInfo?: KongUpstreamInfo | null;
+  /** 后端类型 */
+  UpstreamType?: string | null;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+  /** 是否可编辑 */
+  Editable?: boolean | null;
+}
+
+/** kong服务路由列表 */
+declare interface KongServiceRouteList {
+  /** 无 */
+  RouteList?: KongRoutePreview[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
+}
+
+/** kong实例的服务列表 */
+declare interface KongServices {
+  /** kong实例的服务列表 */
+  ServiceList?: KongServicePreview[] | null;
+  /** 列表总数 */
+  TotalCount?: number | null;
+}
+
+/** Kong Upstream中的Target */
+declare interface KongTarget {
+  /** Host */
+  Host: string | null;
+  /** 端口 */
+  Port: number | null;
+  /** 权重 */
+  Weight: number | null;
+  /** 健康状态 */
+  Health?: string | null;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+  /** Target的来源 */
+  Source?: string | null;
+}
+
+/** 服务的后端配置 */
+declare interface KongUpstreamInfo {
+  /** IP或域名 */
+  Host?: string | null;
+  /** 端口 */
+  Port?: number | null;
+  /** 服务来源ID */
+  SourceID?: string | null;
+  /** 名字空间 */
+  Namespace?: string | null;
+  /** 服务（注册中心或Kubernetes中的服务）名字 */
+  ServiceName?: string | null;
+  /** 服务后端类型是IPList时提供 */
+  Targets?: KongTarget[] | null;
+  /** 服务来源类型 */
+  SourceType?: string | null;
+  /** SCF函数类型 */
+  ScfType?: string | null;
+  /** SCF函数命名空间 */
+  ScfNamespace?: string | null;
+  /** SCF函数名 */
+  ScfLambdaName?: string | null;
+  /** SCF函数版本 */
+  ScfLambdaQualifier?: string | null;
+  /** 冷启动时间，单位秒 */
+  SlowStart?: number | null;
+  /** 负载均衡算法，默认为 round-robin，还支持 least-connections，consisten_hashing */
+  Algorithm?: string | null;
+  /** CVM弹性伸缩组ID */
+  AutoScalingGroupID?: string | null;
+  /** CVM弹性伸缩组端口 */
+  AutoScalingCvmPort?: number | null;
+  /** CVM弹性伸缩组使用的CVM TAT命令状态 */
+  AutoScalingTatCmdStatus?: string | null;
+  /** CVM弹性伸缩组生命周期挂钩状态 */
+  AutoScalingHookStatus?: string | null;
+  /** 服务来源的名字 */
+  SourceName?: string | null;
+  /** 精确的服务来源类型，新建服务来源时候传入的类型 */
+  RealSourceType?: string | null;
+}
+
+/** 列表过滤条件，模糊匹配 */
+declare interface ListFilter {
+  /** 过滤字段 */
+  Key?: string | null;
+  /** 过滤值 */
+  Value?: string | null;
 }
 
 /** Nacos副本信息 */
@@ -192,6 +456,14 @@ declare interface NacosServerInterface {
 declare interface PolarisLimiterAddress {
   /** VPC接入IP列表 */
   IntranetAddress: string | null;
+}
+
+/** 云原生网关限流插件Qps阈值 */
+declare interface QpsThreshold {
+  /** qps阈值控制维度,包含:second、minute、hour、day、month、year */
+  Unit: string;
+  /** 阈值 */
+  Max: number;
 }
 
 /** 微服务注册引擎实例 */
@@ -320,6 +592,106 @@ declare interface ZookeeperServerInterface {
   Interface: string | null;
 }
 
+declare interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
+  /** 网关 ID */
+  GatewayId: string;
+  /** 服务 ID */
+  ServiceId: string;
+  /** 灰度规则配置 */
+  CanaryRule: CloudNativeAPIGatewayCanaryRule;
+}
+
+declare interface CreateCloudNativeAPIGatewayCanaryRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayRouteRateLimitRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 路由id，或路由名称。不支持“未命名” */
+  Id: string;
+  /** 限流配置 */
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail;
+}
+
+declare interface CreateCloudNativeAPIGatewayRouteRateLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayRouteRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 所属服务的ID */
+  ServiceID: string;
+  /** 路由的名字，实例级别唯一，可以不提供 */
+  RouteName?: string;
+  /** 路由的方法，其中方法可选值：- GET- POST- DELETE- PUT- OPTIONS- PATCH- HEAD- ANY- TRACE- COPY- MOVE- PROPFIND- PROPPATCH- MKCOL- LOCK- UNLOCK */
+  Methods?: string[];
+  /** 路由的域名 */
+  Hosts?: string[];
+  /** 路由的路径 */
+  Paths?: string[];
+  /** 路由的协议，可选- https- http */
+  Protocols?: string[];
+  /** 转发到后端时是否保留Host */
+  PreserveHost?: boolean;
+  /** https重定向状态码 */
+  HttpsRedirectStatusCode?: number;
+  /** 转发到后端时是否StripPath */
+  StripPath?: boolean;
+  /** 是否开启强制HTTPS */
+  ForceHttps?: boolean;
+  /** 四层匹配的目的端口 */
+  DestinationPorts?: number[];
+  /** 路由的Headers */
+  Headers?: KVMapping[];
+}
+
+declare interface CreateCloudNativeAPIGatewayRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayServiceRateLimitRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务名称，或服务ID */
+  Name: string;
+  /** 限流配置 */
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail;
+}
+
+declare interface CreateCloudNativeAPIGatewayServiceRateLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayServiceRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务名称 */
+  Name: string;
+  /** 请求协议：- https- http- tcp- udp */
+  Protocol: string;
+  /** 请求路径 */
+  Path: string;
+  /** 超时时间，单位ms */
+  Timeout: number;
+  /** 重试次数 */
+  Retries: number;
+  /** 服务类型: - Kubernetes - Registry- IPList- HostIP- Scf */
+  UpstreamType: string;
+  /** 服务配置信息 */
+  UpstreamInfo: KongUpstreamInfo;
+}
+
+declare interface CreateCloudNativeAPIGatewayServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateEngineRequest {
   /** 引擎类型。参考值：- zookeeper- nacos- consul- apollo- eureka- polaris */
   EngineType: string;
@@ -362,12 +734,92 @@ declare interface CreateEngineResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
+  /** 网关 ID */
+  GatewayId: string;
+  /** 服务 ID */
+  ServiceId: string;
+  /** 优先级 */
+  Priority: number;
+}
+
+declare interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayRouteRateLimitRequest {
+  /** 网关Id */
+  GatewayId: string;
+  /** 路由Id，或路由名称。不支持“未命名” */
+  Id: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayRouteRateLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayRouteRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 路由的ID或名字，不支持名称“未命名” */
+  Name: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayServiceRateLimitRequest {
+  /** 网关Id */
+  GatewayId: string;
+  /** 服务名称，或服务ID */
+  Name: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayServiceRateLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayServiceRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务名字，服务ID */
+  Name: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteEngineRequest {
   /** 引擎实例 ID */
   InstanceId: string;
 }
 
 declare interface DeleteEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务 ID */
+  ServiceId: string;
+  /** 列表数量 */
+  Limit?: number;
+  /** 列表offset */
+  Offset?: number;
+}
+
+declare interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
+  /** 灰度规则列表 */
+  Result?: CloudAPIGatewayCanaryRuleList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -386,6 +838,74 @@ declare interface DescribeCloudNativeAPIGatewayNodesRequest {
 declare interface DescribeCloudNativeAPIGatewayNodesResponse {
   /** 获取云原生网关节点列表结果。 */
   Result: DescribeCloudNativeAPIGatewayNodesResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayRouteRateLimitRequest {
+  /** 网关Id */
+  GatewayId: string;
+  /** 路由Id，或路由名称。不支持“未命名” */
+  Id: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayRouteRateLimitResponse {
+  /** 获取云原生网关限流插件(路由) */
+  Result?: CloudNativeAPIGatewayRateLimitDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayRoutesRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 翻页单页查询限制数量[0,1000], 默认值0 */
+  Limit?: number;
+  /** 翻页单页偏移量，默认值0 */
+  Offset?: number;
+  /** 服务的名字，精确匹配 */
+  ServiceName?: string;
+  /** 路由的名字，精确匹配 */
+  RouteName?: string;
+  /** 过滤条件，多个过滤条件之间是与的关系，支持 name, path, host, method, service, protocol */
+  Filters?: ListFilter[];
+}
+
+declare interface DescribeCloudNativeAPIGatewayRoutesResponse {
+  /** 无 */
+  Result?: KongServiceRouteList | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayServiceRateLimitRequest {
+  /** 网关Id */
+  GatewayId: string;
+  /** 服务名称，或服务ID。 */
+  Name: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayServiceRateLimitResponse {
+  /** 获取云原生网关限流插件(服务) */
+  Result?: CloudNativeAPIGatewayRateLimitDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayServicesRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 列表数量 */
+  Limit?: number;
+  /** 列表 offset */
+  Offset?: number;
+  /** 过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType */
+  Filters?: ListFilter[];
+}
+
+declare interface DescribeCloudNativeAPIGatewayServicesResponse {
+  /** 无 */
+  Result?: KongServices | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -422,6 +942,20 @@ declare interface DescribeNacosServerInterfacesResponse {
   TotalCount: number;
   /** 接口列表 */
   Content: NacosServerInterface[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOneCloudNativeAPIGatewayServiceRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务名字，或服务ID */
+  Name: string;
+}
+
+declare interface DescribeOneCloudNativeAPIGatewayServiceResponse {
+  /** 无 */
+  Result?: KongServiceDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -518,6 +1052,121 @@ declare interface DescribeZookeeperServerInterfacesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
+  /** 网关 ID */
+  GatewayId: string;
+  /** 服务 ID */
+  ServiceId: string;
+  /** 优先级，同一个服务的灰度规则优先级是唯一的 */
+  Priority: number;
+  /** 灰度规则配置 */
+  CanaryRule: CloudNativeAPIGatewayCanaryRule;
+}
+
+declare interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 路由id，或路由名称。不支持“未命名” */
+  Id: string;
+  /** 限流配置 */
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail;
+}
+
+declare interface ModifyCloudNativeAPIGatewayRouteRateLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayRouteRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 所属服务的ID */
+  ServiceID: string;
+  /** 路由的ID，实例级别唯一 */
+  RouteID: string;
+  /** 路由的名字，实例级别唯一，可以不提供 */
+  RouteName?: string;
+  /** 路由的方法，其中方法可选值：- GET- POST- DELETE- PUT- OPTIONS- PATCH- HEAD- ANY- TRACE- COPY- MOVE- PROPFIND- PROPPATCH- MKCOL- LOCK- UNLOCK */
+  Methods?: string[];
+  /** 路由的域名 */
+  Hosts?: string[];
+  /** 路由的路径 */
+  Paths?: string[];
+  /** 路由的协议，可选- https- http */
+  Protocols?: string[];
+  /** 转发到后端时是否保留Host */
+  PreserveHost?: boolean;
+  /** https重定向状态码 */
+  HttpsRedirectStatusCode?: number;
+  /** 转发到后端时是否StripPath */
+  StripPath?: boolean;
+  /** 是否开启强制HTTPS */
+  ForceHttps?: boolean;
+  /** 四层匹配的目的端口 */
+  DestinationPorts?: number[];
+  /** 路由的Headers */
+  Headers?: KVMapping[];
+}
+
+declare interface ModifyCloudNativeAPIGatewayRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务名称，或服务ID */
+  Name: string;
+  /** 限流配置 */
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail;
+}
+
+declare interface ModifyCloudNativeAPIGatewayServiceRateLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayServiceRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务名称 */
+  Name: string;
+  /** 请求协议： - https - http - tcp - udp */
+  Protocol: string;
+  /** 请求路径 */
+  Path: string;
+  /** 超时时间，单位ms */
+  Timeout: number;
+  /** 重试次数 */
+  Retries: number;
+  /** 服务类型: - Kubernetes - Registry- IPList- HostIP- Scf */
+  UpstreamType: string;
+  /** 服务配置 */
+  UpstreamInfo: KongUpstreamInfo;
+  /** 服务ID */
+  ID: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RateLimitResponse {
+  /** 自定义响应体 */
+  Body?: string | null;
+  /** headrs */
+  Headers?: KVMapping[] | null;
+  /** http状态码 */
+  HttpStatus?: number | null;
+}
+
 declare interface UpdateEngineInternetAccessRequest {
   /** 引擎ID */
   InstanceId: string;
@@ -535,16 +1184,48 @@ declare interface UpdateEngineInternetAccessResponse {
 /** {@link Tse 微服务引擎 TSE} */
 declare interface Tse {
   (): Versions;
+  /** 创建云原生网关的灰度规则 {@link CreateCloudNativeAPIGatewayCanaryRuleRequest} {@link CreateCloudNativeAPIGatewayCanaryRuleResponse} */
+  CreateCloudNativeAPIGatewayCanaryRule(data: CreateCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayCanaryRuleResponse>;
+  /** 创建云原生网关路由 {@link CreateCloudNativeAPIGatewayRouteRequest} {@link CreateCloudNativeAPIGatewayRouteResponse} */
+  CreateCloudNativeAPIGatewayRoute(data: CreateCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayRouteResponse>;
+  /** 创建云原生网关限流插件(路由) {@link CreateCloudNativeAPIGatewayRouteRateLimitRequest} {@link CreateCloudNativeAPIGatewayRouteRateLimitResponse} */
+  CreateCloudNativeAPIGatewayRouteRateLimit(data: CreateCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayRouteRateLimitResponse>;
+  /** 创建云原生网关服务 {@link CreateCloudNativeAPIGatewayServiceRequest} {@link CreateCloudNativeAPIGatewayServiceResponse} */
+  CreateCloudNativeAPIGatewayService(data: CreateCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayServiceResponse>;
+  /** 创建云原生网关限流插件(服务) {@link CreateCloudNativeAPIGatewayServiceRateLimitRequest} {@link CreateCloudNativeAPIGatewayServiceRateLimitResponse} */
+  CreateCloudNativeAPIGatewayServiceRateLimit(data: CreateCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 创建引擎实例 {@link CreateEngineRequest} {@link CreateEngineResponse} */
   CreateEngine(data: CreateEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEngineResponse>;
+  /** 删除云原生网关的灰度规则 {@link DeleteCloudNativeAPIGatewayCanaryRuleRequest} {@link DeleteCloudNativeAPIGatewayCanaryRuleResponse} */
+  DeleteCloudNativeAPIGatewayCanaryRule(data: DeleteCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
+  /** 删除云原生网关路由 {@link DeleteCloudNativeAPIGatewayRouteRequest} {@link DeleteCloudNativeAPIGatewayRouteResponse} */
+  DeleteCloudNativeAPIGatewayRoute(data: DeleteCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayRouteResponse>;
+  /** 删除云原生网关的限流插件(路由) {@link DeleteCloudNativeAPIGatewayRouteRateLimitRequest} {@link DeleteCloudNativeAPIGatewayRouteRateLimitResponse} */
+  DeleteCloudNativeAPIGatewayRouteRateLimit(data: DeleteCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayRouteRateLimitResponse>;
+  /** 删除云原生网关服务 {@link DeleteCloudNativeAPIGatewayServiceRequest} {@link DeleteCloudNativeAPIGatewayServiceResponse} */
+  DeleteCloudNativeAPIGatewayService(data: DeleteCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayServiceResponse>;
+  /** 删除云原生网关的限流插件(服务) {@link DeleteCloudNativeAPIGatewayServiceRateLimitRequest} {@link DeleteCloudNativeAPIGatewayServiceRateLimitResponse} */
+  DeleteCloudNativeAPIGatewayServiceRateLimit(data: DeleteCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 删除引擎实例 {@link DeleteEngineRequest} {@link DeleteEngineResponse} */
   DeleteEngine(data: DeleteEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEngineResponse>;
+  /** 查询云原生网关灰度规则列表 {@link DescribeCloudNativeAPIGatewayCanaryRulesRequest} {@link DescribeCloudNativeAPIGatewayCanaryRulesResponse} */
+  DescribeCloudNativeAPIGatewayCanaryRules(data: DescribeCloudNativeAPIGatewayCanaryRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCanaryRulesResponse>;
   /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */
   DescribeCloudNativeAPIGatewayNodes(data: DescribeCloudNativeAPIGatewayNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayNodesResponse>;
+  /** 查询云原生网关的限流插件(路由) {@link DescribeCloudNativeAPIGatewayRouteRateLimitRequest} {@link DescribeCloudNativeAPIGatewayRouteRateLimitResponse} */
+  DescribeCloudNativeAPIGatewayRouteRateLimit(data: DescribeCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayRouteRateLimitResponse>;
+  /** 查询云原生网关路由列表 {@link DescribeCloudNativeAPIGatewayRoutesRequest} {@link DescribeCloudNativeAPIGatewayRoutesResponse} */
+  DescribeCloudNativeAPIGatewayRoutes(data: DescribeCloudNativeAPIGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayRoutesResponse>;
+  /** 查询云原生网关的限流插件(服务) {@link DescribeCloudNativeAPIGatewayServiceRateLimitRequest} {@link DescribeCloudNativeAPIGatewayServiceRateLimitResponse} */
+  DescribeCloudNativeAPIGatewayServiceRateLimit(data: DescribeCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse>;
+  /** 查询云原生网关服务列表 {@link DescribeCloudNativeAPIGatewayServicesRequest} {@link DescribeCloudNativeAPIGatewayServicesResponse} */
+  DescribeCloudNativeAPIGatewayServices(data: DescribeCloudNativeAPIGatewayServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServicesResponse>;
   /** 查询Nacos类型引擎实例副本信息 {@link DescribeNacosReplicasRequest} {@link DescribeNacosReplicasResponse} */
   DescribeNacosReplicas(data: DescribeNacosReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosReplicasResponse>;
   /** 查询nacos服务接口列表 {@link DescribeNacosServerInterfacesRequest} {@link DescribeNacosServerInterfacesResponse} */
   DescribeNacosServerInterfaces(data?: DescribeNacosServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosServerInterfacesResponse>;
+  /** 获取云原生网关服务详情 {@link DescribeOneCloudNativeAPIGatewayServiceRequest} {@link DescribeOneCloudNativeAPIGatewayServiceResponse} */
+  DescribeOneCloudNativeAPIGatewayService(data: DescribeOneCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOneCloudNativeAPIGatewayServiceResponse>;
   /** 查询引擎实例访问地址 {@link DescribeSREInstanceAccessAddressRequest} {@link DescribeSREInstanceAccessAddressResponse} */
   DescribeSREInstanceAccessAddress(data?: DescribeSREInstanceAccessAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstanceAccessAddressResponse>;
   /** 查询引擎实例列表 {@link DescribeSREInstancesRequest} {@link DescribeSREInstancesResponse} */
@@ -553,6 +1234,16 @@ declare interface Tse {
   DescribeZookeeperReplicas(data: DescribeZookeeperReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperReplicasResponse>;
   /** 查询zookeeper服务接口列表 {@link DescribeZookeeperServerInterfacesRequest} {@link DescribeZookeeperServerInterfacesResponse} */
   DescribeZookeeperServerInterfaces(data?: DescribeZookeeperServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperServerInterfacesResponse>;
+  /** 修改云原生网关的灰度规则 {@link ModifyCloudNativeAPIGatewayCanaryRuleRequest} {@link ModifyCloudNativeAPIGatewayCanaryRuleResponse} */
+  ModifyCloudNativeAPIGatewayCanaryRule(data: ModifyCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayCanaryRuleResponse>;
+  /** 修改云原生网关路由 {@link ModifyCloudNativeAPIGatewayRouteRequest} {@link ModifyCloudNativeAPIGatewayRouteResponse} */
+  ModifyCloudNativeAPIGatewayRoute(data: ModifyCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayRouteResponse>;
+  /** 修改云原生网关限流插件(路由) {@link ModifyCloudNativeAPIGatewayRouteRateLimitRequest} {@link ModifyCloudNativeAPIGatewayRouteRateLimitResponse} */
+  ModifyCloudNativeAPIGatewayRouteRateLimit(data: ModifyCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayRouteRateLimitResponse>;
+  /** 修改云原生网关服务 {@link ModifyCloudNativeAPIGatewayServiceRequest} {@link ModifyCloudNativeAPIGatewayServiceResponse} */
+  ModifyCloudNativeAPIGatewayService(data: ModifyCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceResponse>;
+  /** 修改云原生网关限流插件(服务) {@link ModifyCloudNativeAPIGatewayServiceRateLimitRequest} {@link ModifyCloudNativeAPIGatewayServiceRateLimitResponse} */
+  ModifyCloudNativeAPIGatewayServiceRateLimit(data: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 修改引擎公网访问配置 {@link UpdateEngineInternetAccessRequest} {@link UpdateEngineInternetAccessResponse} */
   UpdateEngineInternetAccess(data: UpdateEngineInternetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineInternetAccessResponse>;
 }

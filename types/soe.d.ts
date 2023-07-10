@@ -76,26 +76,38 @@ declare interface SentenceInfo {
   UnKeyWordHits: number[] | null;
 }
 
+/** 中文声调检测结果 */
+declare interface Tone {
+  /** 检测结果是否有效 */
+  Valid?: boolean | null;
+  /** 文本标准声调，数值范围[-1,1,2,3,4] */
+  RefTone?: number | null;
+  /** 实际发音声调，数值范围[-1,1,2,3,4] */
+  HypothesisTone?: number | null;
+}
+
 /** 单词评分细则 */
 declare interface WordRsp {
   /** 当前单词语音起始时间点，单位为ms，该字段段落模式下无意义。 */
-  MemBeginTime: number;
+  MemBeginTime?: number;
   /** 当前单词语音终止时间点，单位为ms，该字段段落模式下无意义。 */
-  MemEndTime: number;
+  MemEndTime?: number;
   /** 单词发音准确度，取值范围[-1, 100]，当取-1时指完全不匹配 */
-  PronAccuracy: number;
+  PronAccuracy?: number;
   /** 单词发音流利度，取值范围[0, 1] */
-  PronFluency: number;
+  PronFluency?: number;
   /** 当前词 */
-  Word: string;
+  Word?: string;
   /** 当前词与输入语句的匹配情况，0：匹配单词、1：新增单词、2：缺少单词、3：错读的词、4：未录入单词。 */
-  MatchTag: number;
+  MatchTag?: number;
   /** 音节评估详情 */
-  PhoneInfos: PhoneInfo[];
+  PhoneInfos?: PhoneInfo[];
   /** 参考词，目前为保留字段。 */
-  ReferenceWord: string;
+  ReferenceWord?: string;
   /** 主题词命中标志，0表示没命中，1表示命中 */
-  KeywordTag: number | null;
+  KeywordTag?: number | null;
+  /** 声调检测结果 */
+  Tone?: Tone | null;
 }
 
 declare interface InitOralProcessRequest {

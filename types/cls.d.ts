@@ -382,6 +382,44 @@ declare interface CsvInfo {
   NonExistingField: string;
 }
 
+/** 数据加工的资源信息 */
+declare interface DataTransformResouceInfo {
+  /** 目标主题id */
+  TopicId: string;
+  /** 别名 */
+  Alias: string;
+}
+
+/** 数据加工任务基本详情 */
+declare interface DataTransformTaskInfo {
+  /** 数据加工任务名称 */
+  Name: string;
+  /** 数据加工任务id */
+  TaskId: string;
+  /** 任务启用状态，默认为1，正常开启, 2关闭 */
+  EnableFlag: number;
+  /** 加工任务类型，1： DSL， 2：SQL */
+  Type: number;
+  /** 源日志主题 */
+  SrcTopicId: string;
+  /** 当前加工任务状态（1准备中/2运行中/3停止中/4已停止） */
+  Status: number;
+  /** 加工任务创建时间 */
+  CreateTime: string;
+  /** 最近修改时间 */
+  UpdateTime: string;
+  /** 最后启用时间，如果需要重建集群，修改该时间 */
+  LastEnableTime: string;
+  /** 日志主题名称 */
+  SrcTopicName: string;
+  /** 日志集id */
+  LogsetId: string;
+  /** 加工任务目的topic_id以及别名 */
+  DstResources: DataTransformResouceInfo[];
+  /** 加工逻辑函数 */
+  EtlContent: string;
+}
+
 /** 动态更新索引配置 */
 declare interface DynamicIndex {
   /** 动态索引配置开关 */
@@ -842,6 +880,22 @@ declare interface PartitionInfo {
   LastWriteTime: string | null;
 }
 
+/** 预览数据详情 */
+declare interface PreviewLogStatistic {
+  /** 日志内容 */
+  LogContent: string;
+  /** 行号 */
+  LineNum: number;
+  /** 目标日志主题 */
+  DstTopicId?: string;
+  /** 失败错误码， 空字符串""表示正常 */
+  FailReason?: string;
+  /** 日志时间戳 */
+  Time?: string;
+  /** 目标topic-name */
+  DstTopicName?: string | null;
+}
+
 /** 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数 */
 declare interface RuleInfo {
   /** 全文索引配置, 如果为空时代表未开启全文索引 */
@@ -1226,6 +1280,32 @@ declare interface CreateCosRechargeResponse {
   RequestId?: string;
 }
 
+declare interface CreateDataTransformRequest {
+  /** 任务类型. 1: 指定主题；2:动态创建 */
+  FuncType: number;
+  /** 源日志主题 */
+  SrcTopicId: string;
+  /** 加工任务名称 */
+  Name: string;
+  /** 加工语句 */
+  EtlContent: string;
+  /** 加工类型 1 使用源日志主题中的随机数据，进行加工预览 :2 使用用户自定义测试数据，进行加工预览 3 创建真实加工任务 */
+  TaskType: number;
+  /** 任务启动状态. 默认为1:开启, 2:关闭 */
+  EnableFlag?: number;
+  /** 加工任务目的topic_id以及别名 */
+  DstResources?: DataTransformResouceInfo[];
+  /** 用于预览加工结果的测试数据 */
+  PreviewLogStatistics?: PreviewLogStatistic[];
+}
+
+declare interface CreateDataTransformResponse {
+  /** 任务id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExportRequest {
   /** 日志主题ID */
   TopicId: string;
@@ -1470,6 +1550,16 @@ declare interface DeleteConsumerResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDataTransformRequest {
+  /** 数据加工任务id */
+  TaskId: string;
+}
+
+declare interface DeleteDataTransformResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteExportRequest {
   /** 日志导出ID */
   ExportId: string;
@@ -1692,6 +1782,28 @@ declare interface DescribeCosRechargesRequest {
 declare interface DescribeCosRechargesResponse {
   /** 见: CosRechargeInfo 结构描述 */
   Data?: CosRechargeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataTransformInfoRequest {
+  /** taskName按照【加工任务名称】进行过滤。类型：String必选：否 taskId按照【加工任务id】进行过滤。类型：String必选：否 srctopicId按照【源topicId】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+  /** 默认值为2. 1: 获取单个任务的详细信息 2：获取任务列表 */
+  Type?: number;
+  /** Type为1， 此参数必填 */
+  TaskId?: string;
+}
+
+declare interface DescribeDataTransformInfoResponse {
+  /** 数据加工任务列表信息 */
+  DataTransformTaskInfos?: DataTransformTaskInfo[];
+  /** 任务总次数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2148,6 +2260,24 @@ declare interface ModifyCosRechargeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDataTransformRequest {
+  /** 加工任务id */
+  TaskId: string;
+  /** 加工任务名称 */
+  Name?: string;
+  /** 加工语句 */
+  EtlContent?: string;
+  /** 任务启动状态. 默认为1，开启, 2关闭 */
+  EnableFlag?: number;
+  /** 加工任务目的topic_id以及别名 */
+  DstResources?: DataTransformResouceInfo[];
+}
+
+declare interface ModifyDataTransformResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyIndexRequest {
   /** 日志主题ID */
   TopicId: string;
@@ -2461,6 +2591,8 @@ declare interface Cls {
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
   /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
   CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
+  /** 创建数据加工任务 {@link CreateDataTransformRequest} {@link CreateDataTransformResponse} */
+  CreateDataTransform(data: CreateDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataTransformResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
@@ -2487,6 +2619,8 @@ declare interface Cls {
   DeleteConfigFromMachineGroup(data: DeleteConfigFromMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFromMachineGroupResponse>;
   /** 删除投递配置 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
+  /** 删除数据加工任务 {@link DeleteDataTransformRequest} {@link DeleteDataTransformResponse} */
+  DeleteDataTransform(data: DeleteDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataTransformResponse>;
   /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
   DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
   /** 删除索引配置 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
@@ -2519,6 +2653,8 @@ declare interface Cls {
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
   /** 获取cos导入配置 {@link DescribeCosRechargesRequest} {@link DescribeCosRechargesResponse} */
   DescribeCosRecharges(data: DescribeCosRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRechargesResponse>;
+  /** 获取数据加工任务列表基本信息 {@link DescribeDataTransformInfoRequest} {@link DescribeDataTransformInfoResponse} */
+  DescribeDataTransformInfo(data?: DescribeDataTransformInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataTransformInfoResponse>;
   /** 获取日志下载任务列表 {@link DescribeExportsRequest} {@link DescribeExportsResponse} */
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
   /** 获取索引配置信息 {@link DescribeIndexRequest} {@link DescribeIndexResponse} */
@@ -2561,6 +2697,8 @@ declare interface Cls {
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
   /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */
   ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;
+  /** 修改数据加工任务 {@link ModifyDataTransformRequest} {@link ModifyDataTransformResponse} */
+  ModifyDataTransform(data: ModifyDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataTransformResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
   /** 修改Kafka数据订阅任务 {@link ModifyKafkaRechargeRequest} {@link ModifyKafkaRechargeResponse} */

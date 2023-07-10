@@ -346,6 +346,8 @@ declare interface DomainInfo {
   VipResourceId?: string | null;
   /** 是否是子域名。 */
   IsSubDomain?: boolean | null;
+  /** 域名关联的标签列表 */
+  TagList?: TagItem[] | null;
 }
 
 /** 域名列表元素 */
@@ -394,6 +396,8 @@ declare interface DomainListItem {
   UpdatedOn: string;
   /** 域名所属账号 */
   Owner: string;
+  /** 域名关联的标签列表 */
+  TagList?: TagItem[] | null;
 }
 
 /** 域名共享信息 */
@@ -706,6 +710,22 @@ declare interface SubdomainAnalyticsInfo {
   Subdomain: string;
 }
 
+/** 标签项 */
+declare interface TagItem {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue?: string | null;
+}
+
+/** 标签过滤条件 */
+declare interface TagItemFilter {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签键 */
+  TagValue?: string[];
+}
+
 /** 用户信息 */
 declare interface UserInfo {
   /** 用户昵称 */
@@ -935,6 +955,10 @@ declare interface CreateDomainRequest {
   GroupId?: number;
   /** 是否星标域名，”yes”、”no” 分别代表是和否。 */
   IsMark?: string;
+  /** 添加子域名时，是否迁移相关父域名的解析记录。不传默认为 true */
+  TransferSubDomain?: boolean;
+  /** 域名绑定的标签 */
+  Tags?: TagItem[];
 }
 
 declare interface CreateDomainResponse {
@@ -1221,6 +1245,8 @@ declare interface DescribeDomainFilterListRequest {
   RecordCountEnd?: number;
   /** 项目ID */
   ProjectId?: number;
+  /** 标签过滤 */
+  Tags?: TagItemFilter[];
 }
 
 declare interface DescribeDomainFilterListResponse {
@@ -1253,6 +1279,8 @@ declare interface DescribeDomainListRequest {
   GroupId?: number;
   /** 根据关键字搜索域名 */
   Keyword?: string;
+  /** 标签过滤 */
+  Tags?: TagItemFilter[];
 }
 
 declare interface DescribeDomainListResponse {
