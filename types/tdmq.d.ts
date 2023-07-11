@@ -1849,15 +1849,15 @@ declare interface CreateTopicRequest {
 
 declare interface CreateTopicResponse {
   /** 环境（命名空间）名称。 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 主题名。 */
-  TopicName: string;
+  TopicName?: string;
   /** 0或1：非分区topic，无分区；大于1：具体分区topic的分区数。（存量非分区主题返回0，增量非分区主题返回1） */
-  Partitions: number;
+  Partitions?: number;
   /** 备注，128字符以内。 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 0： 普通消息；1 ：全局顺序消息；2 ：局部顺序消息；3 ：重试队列；4 ：死信队列； */
-  TopicType: number | null;
+  TopicType?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

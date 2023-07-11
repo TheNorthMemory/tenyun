@@ -5956,7 +5956,7 @@ declare interface CreateRebuildMediaTemplateRequest {
 }
 
 declare interface CreateRebuildMediaTemplateResponse {
-  /** 音画质重生模板 ID。 */
+  /** 视频重生模板 ID。 */
   Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -6379,7 +6379,7 @@ declare interface DeleteQualityInspectTemplateResponse {
 }
 
 declare interface DeleteRebuildMediaTemplateRequest {
-  /** 音画质重生模板号。 */
+  /** 视频重生模板号。 */
   Definition: number;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -9013,7 +9013,7 @@ declare interface Vod {
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
   /** 创建音画质检测模板 {@link CreateQualityInspectTemplateRequest} {@link CreateQualityInspectTemplateResponse} */
   CreateQualityInspectTemplate(data?: CreateQualityInspectTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityInspectTemplateResponse>;
-  /** 创建音画质重生模板 {@link CreateRebuildMediaTemplateRequest} {@link CreateRebuildMediaTemplateResponse} */
+  /** 创建视频重生模板 {@link CreateRebuildMediaTemplateRequest} {@link CreateRebuildMediaTemplateResponse} */
   CreateRebuildMediaTemplate(data: CreateRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRebuildMediaTemplateResponse>;
   /** 创建审核模板 {@link CreateReviewTemplateRequest} {@link CreateReviewTemplateResponse} */
   CreateReviewTemplate(data: CreateReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReviewTemplateResponse>;
@@ -9065,7 +9065,7 @@ declare interface Vod {
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
   /** 删除音画质检测模板 {@link DeleteQualityInspectTemplateRequest} {@link DeleteQualityInspectTemplateResponse} */
   DeleteQualityInspectTemplate(data: DeleteQualityInspectTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQualityInspectTemplateResponse>;
-  /** 删除音画质重生模板 {@link DeleteRebuildMediaTemplateRequest} {@link DeleteRebuildMediaTemplateResponse} */
+  /** 删除视频重生模板 {@link DeleteRebuildMediaTemplateRequest} {@link DeleteRebuildMediaTemplateResponse} */
   DeleteRebuildMediaTemplate(data: DeleteRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRebuildMediaTemplateResponse>;
   /** 删除审核模板 {@link DeleteReviewTemplateRequest} {@link DeleteReviewTemplateResponse} */
   DeleteReviewTemplate(data: DeleteReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReviewTemplateResponse>;

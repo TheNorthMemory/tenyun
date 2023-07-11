@@ -1085,21 +1085,21 @@ declare interface ParamTemplateListInfo {
 /** 安全组规则 */
 declare interface PolicyRule {
   /** 策略，ACCEPT或者DROP */
-  Action: string;
-  /** 来源Ip或Ip段，例如192.168.0.0/16 */
-  CidrIp: string;
+  Action?: string;
+  /** 来源IP或IP段，例如192.168.0.0/16 */
+  CidrIp?: string;
   /** 端口 */
-  PortRange: string;
+  PortRange?: string;
   /** 网络协议，支持udp、tcp等 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 协议端口ID或者协议端口组ID。 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** IP地址ID或者ID地址组ID。 */
-  AddressModule: string;
+  AddressModule?: string;
   /** id */
-  Id: string;
+  Id?: string;
   /** 描述 */
-  Desc: string;
+  Desc?: string;
 }
 
 /** 数据库代理连接池信息 */
@@ -1108,7 +1108,7 @@ declare interface ProxyConnectionPoolInfo {
   ConnectionPoolTimeOut: number | null;
   /** 是否开启了连接池 */
   OpenConnectionPool?: string | null;
-  /** 连接池类型：SessionConnectionPool（会话级别连接池 */
+  /** 连接池类型：SessionConnectionPool（会话级别连接池） */
   ConnectionPoolType?: string | null;
 }
 
@@ -1369,27 +1369,27 @@ declare interface SecurityGroup {
 /** 实例慢查询信息 */
 declare interface SlowQueriesItem {
   /** 执行时间戳 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 执行时长，单位秒 */
-  QueryTime: number;
+  QueryTime?: number;
   /** sql语句 */
-  SqlText: string;
+  SqlText?: string;
   /** 客户端host */
-  UserHost: string;
+  UserHost?: string;
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 数据库名 */
-  Database: string;
+  Database?: string;
   /** 锁时长，单位秒 */
-  LockTime: number;
+  LockTime?: number;
   /** 扫描行数 */
-  RowsExamined: number;
+  RowsExamined?: number;
   /** 返回行数 */
-  RowsSent: number;
-  /** sql模版 */
-  SqlTemplate: string;
+  RowsSent?: number;
+  /** sql模板 */
+  SqlTemplate?: string;
   /** sql语句md5 */
-  SqlMd5: string;
+  SqlMd5?: string;
 }
 
 /** mysql表权限 */
@@ -1523,7 +1523,7 @@ declare interface AddInstancesRequest {
   OrderSource?: string;
   /** 交易模式 0-下单并支付 1-下单 */
   DealMode?: number;
-  /** 参数模版ID */
+  /** 参数模板ID */
   ParamTemplateId?: number;
   /** 参数列表，ParamTemplateId 传入时InstanceParams才有效 */
   InstanceParams?: ModifyParamItem[];
@@ -1827,13 +1827,13 @@ declare interface CreateClustersResponse {
 }
 
 declare interface CreateParamTemplateRequest {
-  /** 模版名称 */
+  /** 模板名称 */
   TemplateName: string;
   /** mysql版本号 */
   EngineVersion: string;
-  /** 模版描述 */
+  /** 模板描述 */
   TemplateDescription?: string;
-  /** 可选参数，需要复制的模版ID */
+  /** 可选参数，需要复制的模板ID */
   TemplateId?: number;
   /** 数据库类型，可选值：NORMAL（默认值），SERVERLESS */
   DbMode?: string;
@@ -1842,7 +1842,7 @@ declare interface CreateParamTemplateRequest {
 }
 
 declare interface CreateParamTemplateResponse {
-  /** 模版ID */
+  /** 模板ID */
   TemplateId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1859,7 +1859,7 @@ declare interface CreateProxyEndPointRequest {
   ConnectionPoolType?: string;
   /** 是否开启连接池,yes-开启，no-不开启 */
   OpenConnectionPool?: string;
-  /** 连接池阀值：单位（秒） */
+  /** 连接池阈值：单位（秒） */
   ConnectionPoolTimeOut?: number;
   /** 安全组ID数组 */
   SecurityGroupIds?: string[];
@@ -1915,7 +1915,7 @@ declare interface CreateProxyRequest {
   ConnectionPoolType?: string;
   /** 是否开启连接池,yes-开启，no-不开启 */
   OpenConnectionPool?: string;
-  /** 连接池阀值：单位（秒） */
+  /** 连接池阈值：单位（秒） */
   ConnectionPoolTimeOut?: number;
   /** 安全组ID数组 */
   SecurityGroupIds?: string[];
@@ -2025,7 +2025,7 @@ declare interface DeleteClusterDatabaseResponse {
 }
 
 declare interface DeleteParamTemplateRequest {
-  /** 参数模版ID */
+  /** 参数模板ID */
   TemplateId: number;
 }
 
@@ -2633,9 +2633,9 @@ declare interface DescribeParamTemplateDetailResponse {
 declare interface DescribeParamTemplatesRequest {
   /** 数据库引擎版本号 */
   EngineVersions?: string[];
-  /** 模版名称 */
+  /** 模板名称 */
   TemplateNames?: string[];
-  /** 模版ID */
+  /** 模板ID */
   TemplateIds?: number[];
   /** 数据库类型，可选值：NORMAL，SERVERLESS */
   DbModes?: string[];
@@ -2645,7 +2645,7 @@ declare interface DescribeParamTemplatesRequest {
   Limit?: number;
   /** 查询的模板对应的产品类型 */
   Products?: string[];
-  /** 模版类型 */
+  /** 模板类型 */
   TemplateTypes?: string[];
   /** 版本类型 */
   EngineTypes?: string[];
@@ -2657,9 +2657,9 @@ declare interface DescribeParamTemplatesRequest {
 
 declare interface DescribeParamTemplatesResponse {
   /** 参数模板数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数模板信息 */
-  Items: ParamTemplateListInfo[];
+  Items?: ParamTemplateListInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3393,11 +3393,11 @@ declare interface ModifyMaintainPeriodConfigResponse {
 }
 
 declare interface ModifyParamTemplateRequest {
-  /** 模版ID */
+  /** 模板ID */
   TemplateId: number;
-  /** 模版名 */
+  /** 模板名 */
   TemplateName?: string;
-  /** 模版描述 */
+  /** 模板描述 */
   TemplateDescription?: string;
   /** 参数列表 */
   ParamList?: ModifyParamItem[];

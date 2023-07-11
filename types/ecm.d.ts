@@ -338,6 +338,14 @@ declare interface ISPIPv6CidrBlock {
   ISPType?: string | null;
 }
 
+/** 申请ipv6 cidr block的信息 */
+declare interface ISPTypeItem {
+  /** IPv6 Cidr所属运营商类型，支持的类型有 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调。作为入参数时为必选。 */
+  ISPType?: string;
+  /** 申请IPv6 Cidr Block的个数。作为入参数时为必选。 */
+  Count?: number;
+}
+
 /** 镜像信息 */
 declare interface Image {
   /** 镜像ID */
@@ -594,6 +602,14 @@ declare interface Ipv6Address {
   IsWanIpBlocked?: boolean;
   /** IPv6地址状态：PENDING：生产中MIGRATING：迁移中DELETING：删除中AVAILABLE：可用的 */
   State?: string;
+}
+
+/** IPv6子网段对象。 */
+declare interface Ipv6SubnetCidrBlock {
+  /** 子网实例`ID`。形如：`subnet-pxir56ns`。 */
+  SubnetId?: string | null;
+  /** `IPv6`子网段。形如：`3402:4e00:20:1001::/64` */
+  Ipv6CidrBlock?: string | null;
 }
 
 /** 描述密钥对信息 */
@@ -1576,7 +1592,7 @@ declare interface ZoneInfo {
 declare interface ZoneInstanceCountISP {
   /** 创建实例的可用区。 */
   Zone: string;
-  /** 在当前可用区欲创建的实例数目。 */
+  /** 在当前可用区创建的实例数目。 */
   InstanceCount: number;
   /** 运营商如下：CTCC：中国电信CUCC：中国联通CMCC：中国移动多个运营商用英文分号连接";"，例如："CMCC;CUCC;CTCC"。多运营商需要开通白名单，请直接联系腾讯云客服。 */
   ISP: string;
@@ -1626,6 +1642,26 @@ declare interface AllocateAddressesResponse {
   RequestId?: string;
 }
 
+declare interface AllocateIpv6AddressesBandwidthRequest {
+  /** ECM 地域。 */
+  EcmRegion: string;
+  /** 需要开通公网访问能力的IPV6地址。 */
+  Ipv6Addresses: string[];
+  /** 带宽，单位Mbps，默认是1Mbps。 */
+  InternetMaxBandwidthOut?: number;
+  /** 网络计费模式，当前支持 BANDWIDTH_PACKAGE。 */
+  InternetChargeType?: string;
+}
+
+declare interface AllocateIpv6AddressesBandwidthResponse {
+  /** 弹性公网 IPV6 的唯一 ID 列表。 */
+  AddressSet: string[] | null;
+  /** 异步任务TaskId。 */
+  TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssignIpv6AddressesRequest {
   /** ECM 地域 */
   EcmRegion: string;
@@ -1648,6 +1684,54 @@ declare interface AssignIpv6AddressesRequest {
 declare interface AssignIpv6AddressesResponse {
   /** 分配给弹性网卡的IPv6地址列表。 */
   Ipv6AddressSet?: Ipv6Address[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssignIpv6CidrBlockRequest {
+  /** `VPC`实例`ID`，形如：`vpc-f49l6u0z`。 */
+  VpcId: string;
+  /** 网络运营商类型 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调 */
+  ISPType: string;
+  /** ECM地域。 */
+  EcmRegion?: string;
+}
+
+declare interface AssignIpv6CidrBlockResponse {
+  /** 分配的 `IPv6` 网段。形如：`3402:4e00:20:1000::/56`。 */
+  Ipv6CidrBlock?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssignIpv6CidrBlocksRequest {
+  /** `VPC`实例`ID`，形如：`vpc-f49l6u0z`。 */
+  VpcId: string;
+  /** 网络运营商类型 取值范围:'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调 */
+  ISPTypes: ISPTypeItem[];
+  /** ECM地域。 */
+  EcmRegion?: string;
+}
+
+declare interface AssignIpv6CidrBlocksResponse {
+  /** IPv6网段和所属运营商。 */
+  IPv6CidrBlockSet?: ISPIPv6CidrBlock[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssignIpv6SubnetCidrBlockRequest {
+  /** 子网所在私有网络`ID`。形如：`vpc-f49l6u0z`。 */
+  VpcId: string;
+  /** 分配 `IPv6` 子网段列表。 */
+  Ipv6SubnetCidrBlocks: Ipv6SubnetCidrBlock[];
+  /** ECM地域。 */
+  EcmRegion?: string;
+}
+
+declare interface AssignIpv6SubnetCidrBlockResponse {
+  /** 分配 `IPv6` 子网段列表。 */
+  Ipv6SubnetCidrBlockSet?: Ipv6SubnetCidrBlock[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2706,6 +2790,26 @@ declare interface DescribePriceRunInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRegionIpv6AddressesRequest {
+  /** ECM 地域，为空时返回所有地域的IPv6地址。 */
+  EcmRegion: string;
+  /** 详细的过滤条件如下：address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的 ID 过滤。address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 所绑定的实例 ID 过滤。vpc-id - String - 是否必填：否 - （过滤条件）按照 EIP 所在 VPC 的 ID 进行过滤。address-isp - String - 是否必填：否 - （过滤条件）按照 EIP 的运营商进行过滤。address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态信息进行过滤。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。 */
+  Limit?: number;
+}
+
+declare interface DescribeRegionIpv6AddressesResponse {
+  /** 符合条件的 IPV6 数量。 */
+  TotalCount: number;
+  /** IPV6 详细信息列表。 */
+  AddressSet: Address[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRouteConflictsRequest {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId: string;
@@ -3192,6 +3296,22 @@ declare interface ModifyIpv6AddressesAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyIpv6AddressesBandwidthRequest {
+  /** ECM 地域 */
+  EcmRegion: string;
+  /** 修改的目标带宽，单位Mbps */
+  InternetMaxBandwidthOut: number;
+  /** IPV6地址。Ipv6Addresses和Ipv6AddressId必须且只能传一个 */
+  Ipv6Addresses?: Ipv6Address[];
+  /** IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ipv6Addresses和Ipv6AddressId必须且只能传一个 */
+  Ipv6AddressIds?: string[];
+}
+
+declare interface ModifyIpv6AddressesBandwidthResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyListenerRequest {
   /** 负载均衡实例 ID */
   LoadBalancerId: string;
@@ -3444,6 +3564,20 @@ declare interface ModifyVpcAttributeResponse {
   RequestId?: string;
 }
 
+declare interface QueryVpcTaskResultRequest {
+  /** 无 */
+  TaskId: string;
+}
+
+declare interface QueryVpcTaskResultResponse {
+  /** 执行结果，包括"SUCCESS", "FAILED", "RUNNING" */
+  Status: string;
+  /** 异步任务执行输出。 */
+  Output: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RebootInstancesRequest {
   /** 待重启的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。 */
   InstanceIdSet: string[];
@@ -3468,6 +3602,22 @@ declare interface ReleaseAddressesRequest {
 declare interface ReleaseAddressesResponse {
   /** 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。 */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReleaseIpv6AddressesBandwidthRequest {
+  /** ECM 地域。 */
+  EcmRegion: string;
+  /** IPV6地址。Ipv6Addresses和Ipv6AddressIds必须且只能传一个。 */
+  Ipv6Addresses?: string[];
+  /** IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ipv6Addresses和Ipv6AddressIds必须且只能传一个。 */
+  Ipv6AddressIds?: string[];
+}
+
+declare interface ReleaseIpv6AddressesBandwidthResponse {
+  /** 异步任务TaskId。 */
+  TaskId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3732,13 +3882,35 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
+declare interface UnassignIpv6SubnetCidrBlockRequest {
+  /** 子网所在私有网络`ID`。形如：`vpc-f49l6u0z`。 */
+  VpcId: string;
+  /** `IPv6` 子网段列表。 */
+  Ipv6SubnetCidrBlocks: Ipv6SubnetCidrBlock[];
+  /** ECM地域。 */
+  EcmRegion?: string;
+}
+
+declare interface UnassignIpv6SubnetCidrBlockResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ecm 边缘计算机器} */
 declare interface Ecm {
   (): Versions;
   /** 创建弹性公网IP {@link AllocateAddressesRequest} {@link AllocateAddressesResponse} */
   AllocateAddresses(data: AllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateAddressesResponse>;
+  /** IPv6地址分配公网带宽 {@link AllocateIpv6AddressesBandwidthRequest} {@link AllocateIpv6AddressesBandwidthResponse} */
+  AllocateIpv6AddressesBandwidth(data: AllocateIpv6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateIpv6AddressesBandwidthResponse>;
   /** 分配IPv6地址 {@link AssignIpv6AddressesRequest} {@link AssignIpv6AddressesResponse} */
   AssignIpv6Addresses(data: AssignIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6AddressesResponse>;
+  /** 分配IPv6网段 {@link AssignIpv6CidrBlockRequest} {@link AssignIpv6CidrBlockResponse} */
+  AssignIpv6CidrBlock(data: AssignIpv6CidrBlockRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6CidrBlockResponse>;
+  /** 分配不同类型的IPv6网段 {@link AssignIpv6CidrBlocksRequest} {@link AssignIpv6CidrBlocksResponse} */
+  AssignIpv6CidrBlocks(data: AssignIpv6CidrBlocksRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6CidrBlocksResponse>;
+  /** 分配IPv6子网段 {@link AssignIpv6SubnetCidrBlockRequest} {@link AssignIpv6SubnetCidrBlockResponse} */
+  AssignIpv6SubnetCidrBlock(data: AssignIpv6SubnetCidrBlockRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6SubnetCidrBlockResponse>;
   /** 弹性网卡申请内网 IP {@link AssignPrivateIpAddressesRequest} {@link AssignPrivateIpAddressesResponse} */
   AssignPrivateIpAddresses(data: AssignPrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignPrivateIpAddressesResponse>;
   /** 绑定弹性公网IP {@link AssociateAddressRequest} {@link AssociateAddressResponse} */
@@ -3863,6 +4035,8 @@ declare interface Ecm {
   DescribePeakNetworkOverview(data?: DescribePeakNetworkOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakNetworkOverviewResponse>;
   /** 查询实例价格 {@link DescribePriceRunInstanceRequest} {@link DescribePriceRunInstanceResponse} */
   DescribePriceRunInstance(data: DescribePriceRunInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePriceRunInstanceResponse>;
+  /** 查询地域下IPV6地址信息 {@link DescribeRegionIpv6AddressesRequest} {@link DescribeRegionIpv6AddressesResponse} */
+  DescribeRegionIpv6Addresses(data: DescribeRegionIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionIpv6AddressesResponse>;
   /** 查询路由策略冲突列表 {@link DescribeRouteConflictsRequest} {@link DescribeRouteConflictsResponse} */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
   /** 查询路由表对象列表 {@link DescribeRouteTablesRequest} {@link DescribeRouteTablesResponse} */
@@ -3925,6 +4099,8 @@ declare interface Ecm {
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
   /** 修改弹性网卡IPv6地址属性 {@link ModifyIpv6AddressesAttributeRequest} {@link ModifyIpv6AddressesAttributeResponse} */
   ModifyIpv6AddressesAttribute(data: ModifyIpv6AddressesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpv6AddressesAttributeResponse>;
+  /** 修改IPV6访问internet的带宽 {@link ModifyIpv6AddressesBandwidthRequest} {@link ModifyIpv6AddressesBandwidthResponse} */
+  ModifyIpv6AddressesBandwidth(data: ModifyIpv6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpv6AddressesBandwidthResponse>;
   /** 修改负载均衡监听器属性 {@link ModifyListenerRequest} {@link ModifyListenerResponse} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
   /** 修改负载均衡实例的属性 {@link ModifyLoadBalancerAttributesRequest} {@link ModifyLoadBalancerAttributesResponse} */
@@ -3959,12 +4135,16 @@ declare interface Ecm {
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
   /** 修改VPC属性 {@link ModifyVpcAttributeRequest} {@link ModifyVpcAttributeResponse} */
   ModifyVpcAttribute(data: ModifyVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcAttributeResponse>;
+  /** 查询Vpc异步任务请求结果 {@link QueryVpcTaskResultRequest} {@link QueryVpcTaskResultResponse} */
+  QueryVpcTaskResult(data: QueryVpcTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryVpcTaskResultResponse>;
   /** 重启实例 {@link RebootInstancesRequest} {@link RebootInstancesResponse} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
   /** 释放弹性公网IP {@link ReleaseAddressesRequest} {@link ReleaseAddressesResponse} */
   ReleaseAddresses(data: ReleaseAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseAddressesResponse>;
   /** 释放IPv6地址 {@link ReleaseIpv6AddressesRequest} {@link ReleaseIpv6AddressesResponse} */
   ReleaseIpv6Addresses(data: ReleaseIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIpv6AddressesResponse>;
+  /** 释放弹性公网IPv6地址带宽 {@link ReleaseIpv6AddressesBandwidthRequest} {@link ReleaseIpv6AddressesBandwidthResponse} */
+  ReleaseIpv6AddressesBandwidth(data: ReleaseIpv6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIpv6AddressesBandwidthResponse>;
   /** 弹性网卡退还内网 IP {@link RemovePrivateIpAddressesRequest} {@link RemovePrivateIpAddressesResponse} */
   RemovePrivateIpAddresses(data: RemovePrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<RemovePrivateIpAddressesResponse>;
   /** 替换路由表绑定关系 {@link ReplaceRouteTableAssociationRequest} {@link ReplaceRouteTableAssociationResponse} */
@@ -3995,6 +4175,8 @@ declare interface Ecm {
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
   /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
+  /** 释放IPv6子网段 {@link UnassignIpv6SubnetCidrBlockRequest} {@link UnassignIpv6SubnetCidrBlockResponse} */
+  UnassignIpv6SubnetCidrBlock(data: UnassignIpv6SubnetCidrBlockRequest, config?: AxiosRequestConfig): AxiosPromise<UnassignIpv6SubnetCidrBlockResponse>;
 }
 
 export declare type Versions = ["2019-07-19"];

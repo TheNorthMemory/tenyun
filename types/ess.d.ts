@@ -30,10 +30,10 @@ declare interface ApproverInfo {
   ApproverName: string;
   /** 签署人的手机号，11位数字 */
   ApproverMobile: string;
-  /** 签署人的签署控件列表 */
-  SignComponents: Component[];
   /** 如果签署方是企业签署方，则为企业名 */
   OrganizationName?: string;
+  /** 签署人的签署控件列表 */
+  SignComponents?: Component[];
   /** 签署人的身份证号 */
   ApproverIdCardNumber?: string;
   /** 签署人的身份证件类型 ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
@@ -337,29 +337,29 @@ declare interface FlowApproverDetail {
   /** 签署时的相关信息 */
   ApproveMessage?: string | null;
   /** 签署方姓名 */
-  ApproveName: string;
+  ApproveName?: string;
   /** 签署方的签署状态0：还没有发起1：流程中 没有开始处理2：待签署3：已签署4：已拒绝5：已过期6：已撤销7：还没有预发起8：待填写9：因为各种原因而终止10：填写完成15：已解除19：转他人处理 */
-  ApproveStatus: number;
+  ApproveStatus?: number;
   /** 模板配置中的参与方ID,与控件绑定 */
-  ReceiptId: string;
+  ReceiptId?: string;
   /** 客户自定义的用户ID */
-  CustomUserId: string | null;
+  CustomUserId?: string | null;
   /** 签署人手机号 */
-  Mobile: string;
+  Mobile?: string;
   /** 签署顺序，如果是有序签署，签署顺序从小到大 */
-  SignOrder: number;
+  SignOrder?: number;
   /** 签署人签署时间，时间戳，单位秒 */
-  ApproveTime: number;
+  ApproveTime?: number;
   /** 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签 */
-  ApproveType: string | null;
+  ApproveType?: string | null;
   /** 签署方侧用户来源，如WEWORKAPP-企业微信等 */
-  ApproverSource: string | null;
+  ApproverSource?: string | null;
   /** 客户自定义签署方标识 */
-  CustomApproverTag: string | null;
+  CustomApproverTag?: string | null;
   /** 签署方企业Id */
-  OrganizationId: string | null;
+  OrganizationId?: string | null;
   /** 签署方企业名称 */
-  OrganizationName: string | null;
+  OrganizationName?: string | null;
 }
 
 /** 签署链接信息 */
@@ -445,25 +445,65 @@ declare interface FlowCreateApprover {
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
 declare interface FlowDetailInfo {
   /** 合同(流程)的ID */
-  FlowId: string;
+  FlowId?: string;
   /** 合同(流程)的名字 */
-  FlowName: string;
+  FlowName?: string;
   /** 合同(流程)的类型 */
-  FlowType: string | null;
+  FlowType?: string | null;
   /** 流程状态- 0 还没有发起- 1 待签署- 2 部分签署- 3 已拒签- 4 已签署- 5 已过期- 6 已撤销- 7 还没有预发起- 8 等待填写- 9 部分填写- 10 拒填- 21 已解除 */
-  FlowStatus: number;
+  FlowStatus?: number;
   /** 合同(流程)的信息 */
-  FlowMessage: string | null;
+  FlowMessage?: string | null;
   /** 流程的描述 */
-  FlowDescription: string | null;
+  FlowDescription?: string | null;
   /** 合同(流程)的创建时间戳，单位秒 */
-  CreatedOn: number;
+  CreatedOn?: number;
   /** 合同(流程)的签署方数组 */
-  FlowApproverInfos: FlowApproverDetail[];
+  FlowApproverInfos?: FlowApproverDetail[];
   /** 合同(流程)的关注方信息列表 */
   CcInfos?: FlowApproverDetail[];
   /** 合同发起人UserId */
   Creator?: string | null;
+}
+
+/** 此结构体(FlowGroupInfo)描述的是合同组(流程组)的单个合同(流程)信息 */
+declare interface FlowGroupInfo {
+  /** 合同（流程）的名称 */
+  FlowName: string;
+  /** 合同（流程）的签署方信息 */
+  Approvers: ApproverInfo[];
+  /** 发起合同（流程）的资源Id,此资源必须是PDF文件,来自UploadFiles,使用文件发起合同(流程)组时必传 */
+  FileIds?: string[];
+  /** 发起合同（流程）的模板Id,用模板发起合同（流程）组时必填 */
+  TemplateId?: string;
+  /** 合同（流程）的类型 */
+  FlowType?: string;
+  /** 合同（流程）的描述 */
+  FlowDescription?: string;
+  /** 合同（流程）的截止时间戳，单位秒。默认是一年 */
+  Deadline?: number;
+  /** 合同（流程）的回调地址 */
+  CallbackUrl?: string;
+  /** 第三方平台传递过来的信息, 限制1024字符 格式必须是base64的 */
+  UserData?: string;
+  /** 合同（流程）的签署是否是无序签, true - 无序。 false - 有序, 默认 */
+  Unordered?: boolean;
+  /** 合同（流程）发起方的填写控件，用户 */
+  Components?: Component[];
+  /** 本企业（发起方）是否需要签署审批，若需要审批则只允许查看不允许签署，需要您调用接口CreateFlowSignReview提交审批结果。 */
+  NeedSignReview?: boolean;
+  /** 本企业（发起方）自动签署，需要您在发起合同时给印章控件指定自动签的印章。 */
+  AutoSignScene?: string;
+}
+
+/** 此结构体(FlowGroupOptions)描述的是合同组的个性化配置，支持控制是否发送短信、未实名个人签署方查看合同组时是否需要实名认证（仅在合同组文件发起配置时生效） */
+declare interface FlowGroupOptions {
+  /** 发起合同（流程）组的合同（流程）签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证参数说明：此参数仅在合同组文件发起有效，可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
+  ApproverVerifyType?: string;
+  /** 发起合同（流程）组本方企业经办人通知方式签署通知类型：sms--短信，none--不通知 */
+  SelfOrganizationApproverNotifyType?: string;
+  /** 发起合同（流程）组他方经办人通知方式签署通知类型：sms--短信，none--不通知 */
+  OtherApproverNotifyType?: string;
 }
 
 /** 电子文档的控件填充信息。按照控件类型进行相应的填充。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
@@ -1126,6 +1166,50 @@ declare interface CreateFlowEvidenceReportResponse {
   RequestId?: string;
 }
 
+declare interface CreateFlowGroupByFilesRequest {
+  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同 */
+  Operator: UserInfo;
+  /** 合同（流程）组名称,最大长度200个字符 */
+  FlowGroupName: string;
+  /** 合同（流程）组的子合同信息，支持2-50个子合同 */
+  FlowGroupInfos: FlowGroupInfo[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
+  /** 合同（流程）组的配置项信息。包括是否通知本企业签署方，是否通知其他签署方 */
+  FlowGroupOptions?: FlowGroupOptions;
+}
+
+declare interface CreateFlowGroupByFilesResponse {
+  /** 合同(流程)组的合同组Id */
+  FlowGroupId?: string | null;
+  /** 合同(流程)组中子合同列表. */
+  FlowIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFlowGroupByTemplatesRequest {
+  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同 */
+  Operator: UserInfo;
+  /** 合同组名称,最大长度200个字符 */
+  FlowGroupName: string;
+  /** 合同组的子合同信息，支持2-50个子合同 */
+  FlowGroupInfos: FlowGroupInfo[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
+  /** 合同组的配置信息。包括是否通知本企业签署方，是否通知其他签署方 */
+  FlowGroupOptions?: FlowGroupOptions;
+}
+
+declare interface CreateFlowGroupByTemplatesResponse {
+  /** 合同(流程)组的合同组Id */
+  FlowGroupId?: string | null;
+  /** 合同(流程)组中子合同列表. */
+  FlowIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFlowRemindsRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
@@ -1411,6 +1495,8 @@ declare interface CreateSchemeUrlRequest {
   EndPoint?: string;
   /** 签署流程编号 (PathType=1时必传) */
   FlowId?: string;
+  /** 合同组ID */
+  FlowGroupId?: string;
   /** 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页 */
   PathType?: number;
   /** 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效 */
@@ -1689,17 +1775,23 @@ declare interface DescribeFlowEvidenceReportResponse {
 }
 
 declare interface DescribeFlowInfoRequest {
-  /** 需要查询的流程ID列表，限制最大100个 */
-  FlowIds: string[];
   /** 调用方用户信息，userId 必填 */
   Operator?: UserInfo;
+  /** 需要查询的流程ID列表，限制最大100个 */
+  FlowIds?: string[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 合同组ID */
+  FlowGroupId?: string;
 }
 
 declare interface DescribeFlowInfoResponse {
   /** 签署流程信息 */
   FlowDetailInfos?: FlowDetailInfo[];
+  /** 合同组ID */
+  FlowGroupId?: string;
+  /** 合同组名称 */
+  FlowGroupName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2105,6 +2197,10 @@ declare interface Ess {
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;
   /** 创建并返回出证报告 {@link CreateFlowEvidenceReportRequest} {@link CreateFlowEvidenceReportResponse} */
   CreateFlowEvidenceReport(data: CreateFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowEvidenceReportResponse>;
+  /** 通过多文件创建合同组签署流程 {@link CreateFlowGroupByFilesRequest} {@link CreateFlowGroupByFilesResponse} */
+  CreateFlowGroupByFiles(data: CreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupByFilesResponse>;
+  /** 通过多模板创建合同组签署流程 {@link CreateFlowGroupByTemplatesRequest} {@link CreateFlowGroupByTemplatesResponse} */
+  CreateFlowGroupByTemplates(data: CreateFlowGroupByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupByTemplatesResponse>;
   /** 合同催办 {@link CreateFlowRemindsRequest} {@link CreateFlowRemindsResponse} */
   CreateFlowReminds(data: CreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
@@ -2152,7 +2248,7 @@ declare interface Ess {
   /** 查询出证报告 {@link DescribeFlowEvidenceReportRequest} {@link DescribeFlowEvidenceReportResponse} */
   DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;
   /** 查询合同详情 {@link DescribeFlowInfoRequest} {@link DescribeFlowInfoResponse} */
-  DescribeFlowInfo(data: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
+  DescribeFlowInfo(data?: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
   /** 查询模板 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
   /** 获取企业部门列表 {@link DescribeIntegrationDepartmentsRequest} {@link DescribeIntegrationDepartmentsResponse} */

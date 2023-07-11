@@ -232,20 +232,20 @@ declare interface ClusterAsGroupOption {
   ScaleDownUnneededTime?: number | null;
   /** 节点资源使用量低于多少(百分比)时认为空闲(默认: 50(百分比)) */
   ScaleDownUtilizationThreshold?: number | null;
-  /** 含有本地存储Pod的节点是否不缩容(默认： FALSE) */
+  /** 含有本地存储Pod的节点是否不缩容(默认： true) */
   SkipNodesWithLocalStorage?: boolean | null;
-  /** 含有kube-system namespace下非DaemonSet管理的Pod的节点是否不缩容 (默认： FALSE) */
+  /** 含有kube-system namespace下非DaemonSet管理的Pod的节点是否不缩容 (默认： true) */
   SkipNodesWithSystemPods?: boolean | null;
   /** 计算资源使用量时是否默认忽略DaemonSet的实例(默认值: False，不忽略) */
   IgnoreDaemonSetsUtilization?: boolean | null;
   /** CA做健康性判断的个数，默认3，即超过OkTotalUnreadyCount个数后，CA会进行健康性判断。 */
-  OkTotalUnreadyCount: number | null;
+  OkTotalUnreadyCount?: number | null;
   /** 未就绪节点的最大百分比，此后CA会停止操作 */
-  MaxTotalUnreadyPercentage: number | null;
+  MaxTotalUnreadyPercentage?: number | null;
   /** 表示未准备就绪的节点在有资格进行缩减之前应该停留多长时间 */
-  ScaleDownUnreadyTime: number | null;
+  ScaleDownUnreadyTime?: number | null;
   /** CA删除未在Kubernetes中注册的节点之前等待的时间 */
-  UnregisteredNodeRemovalTime: number | null;
+  UnregisteredNodeRemovalTime?: number | null;
 }
 
 /** 描述集群的基本配置信息 */

@@ -452,6 +452,8 @@ declare interface CreateKeywordsSamplesRequest {
 declare interface CreateKeywordsSamplesResponse {
   /** 添加成功的关键词ID列表 */
   SampleIDs?: string[] | null;
+  /** 成功入库关键词列表 */
+  SuccessInfos?: UserKeywordInfo[];
   /** 重复关键词列表 */
   DupInfos?: UserKeywordInfo[] | null;
   /** 无效关键词列表 */
@@ -461,10 +463,12 @@ declare interface CreateKeywordsSamplesResponse {
 }
 
 declare interface DeleteLibSamplesRequest {
-  /** 关键词ID */
+  /** 关键词ID列表 */
   SampleIDs: string[];
   /** 词库ID */
   LibID?: string;
+  /** 关键词内容列表 */
+  SampleContents?: string[];
 }
 
 declare interface DeleteLibSamplesResponse {
@@ -505,6 +509,8 @@ declare interface DescribeLibSamplesRequest {
   Content?: string;
   /** 违规类型列表过滤 */
   EvilTypeList?: number[];
+  /** 样本词ID列表过滤 */
+  SampleIDs?: string[];
 }
 
 declare interface DescribeLibSamplesResponse {

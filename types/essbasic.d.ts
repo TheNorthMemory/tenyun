@@ -386,6 +386,8 @@ declare interface FlowFileInfo {
   CustomerData?: string;
   /** 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署 */
   Unordered?: boolean;
+  /** 签署文件中的发起方的填写控件，需要在发起的时候进行填充 */
+  Components?: Component[];
   /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
   CustomShowMap?: string;
   /** 本企业(发起方企业)是否需要签署审批 */
@@ -977,7 +979,7 @@ declare interface ChannelCreateFlowByFilesResponse {
 }
 
 declare interface ChannelCreateFlowGroupByFilesRequest {
-  /** 每个子合同的发起所需的信息，数量限制2-100 */
+  /** 每个子合同的发起所需的信息，数量限制2-50 */
   FlowFileInfos: FlowFileInfo[];
   /** 合同组名称，长度不超过200个字符 */
   FlowGroupName: string;
@@ -994,6 +996,26 @@ declare interface ChannelCreateFlowGroupByFilesResponse {
   FlowGroupId?: string | null;
   /** 子合同ID列表 */
   FlowIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreateFlowGroupByTemplatesRequest {
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 均必填。 */
+  Agent: Agent;
+  /** 每个子合同的发起所需的信息，数量限制2-50（合同组暂不支持抄送功能） */
+  FlowInfos: FlowInfo[];
+  /** 合同组名称，长度不超过200个字符 */
+  FlowGroupName: string;
+}
+
+declare interface ChannelCreateFlowGroupByTemplatesResponse {
+  /** 合同组ID */
+  FlowGroupId?: string;
+  /** 子合同ID列表 */
+  FlowIds?: string[];
+  /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
+  TaskInfos?: TaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3347,6 +3369,8 @@ declare interface Essbasic {
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
   /** 通过多文件创建合同组签署流程 {@link ChannelCreateFlowGroupByFilesRequest} {@link ChannelCreateFlowGroupByFilesResponse} */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
+  /** 通过多模板创建合同组签署流程 {@link ChannelCreateFlowGroupByTemplatesRequest} {@link ChannelCreateFlowGroupByTemplatesResponse} */
+  ChannelCreateFlowGroupByTemplates(data: ChannelCreateFlowGroupByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByTemplatesResponse>;
   /** 合同催办 {@link ChannelCreateFlowRemindsRequest} {@link ChannelCreateFlowRemindsResponse} */
   ChannelCreateFlowReminds(data: ChannelCreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link ChannelCreateFlowSignReviewRequest} {@link ChannelCreateFlowSignReviewResponse} */
@@ -3373,7 +3397,7 @@ declare interface Essbasic {
   ChannelDescribeFlowComponents(data: ChannelDescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeFlowComponentsResponse>;
   /** 查询子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
-  /** 查询用户角色 {@link ChannelDescribeRolesRequest} {@link ChannelDescribeRolesResponse} */
+  /** 查询角色列表 {@link ChannelDescribeRolesRequest} {@link ChannelDescribeRolesResponse} */
   ChannelDescribeRoles(data: ChannelDescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeRolesResponse>;
   /** 查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;

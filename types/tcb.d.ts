@@ -295,41 +295,41 @@ declare interface CloudBaseRunNfsVolumeSource {
 /** 版本的列表 */
 declare interface CloudBaseRunServerVersionItem {
   /** 版本名称 */
-  VersionName: string;
+  VersionName?: string;
   /** 状态 */
-  Status: string | null;
+  Status?: string | null;
   /** 流量占比 */
-  FlowRatio: number;
+  FlowRatio?: number;
   /** 创建时间 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 更新时间 */
-  UpdatedTime: string | null;
+  UpdatedTime?: string | null;
   /** 构建ID */
-  BuildId: number | null;
+  BuildId?: number | null;
   /** 构建方式 */
-  UploadType: string | null;
+  UploadType?: string | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** url中的参数路径 */
-  UrlParam: ObjectKV | null;
+  UrlParam?: ObjectKV | null;
   /** 优先级（数值越小，优先级越高） */
-  Priority: number | null;
+  Priority?: number | null;
   /** 是否是默认兜底版本 */
-  IsDefaultPriority: boolean | null;
+  IsDefaultPriority?: boolean | null;
   /** KV Params */
-  FlowParams: CloudBaseRunKVPriority[] | null;
+  FlowParams?: CloudBaseRunKVPriority[] | null;
   /** 最小副本数 */
-  MinReplicas: number | null;
+  MinReplicas?: number | null;
   /** 最大副本数 */
-  MaxReplicas: number | null;
+  MaxReplicas?: number | null;
   /** 操作记录id */
-  RunId: string | null;
+  RunId?: string | null;
   /** 进度 */
-  Percent: number | null;
+  Percent?: number | null;
   /** 当前副本数 */
-  CurrentReplicas: number | null;
+  CurrentReplicas?: number | null;
   /** Monolithic，Microservice */
-  Architecture: string | null;
+  Architecture?: string | null;
 }
 
 /** 主机路径挂载参数 */
@@ -733,9 +733,9 @@ declare interface FreequotaInfo {
 /** 安全网关版本路由信息限额配置 */
 declare interface FrequencyLimitConfig {
   /** 限额对象 "ConnectionsLimit" 或 "QPSLimit" */
-  LimitObject?: string;
+  LimitObject?: string | null;
   /** 限额配置 */
-  LimitConfig?: string;
+  LimitConfig?: string | null;
 }
 
 /** 函数的信息 */
@@ -1142,6 +1142,8 @@ declare interface WxGatewayRountItem {
   GatewayRouteMethod: string | null;
   /** 4层端口 */
   GatewayRoutePort: number | null;
+  /** 路由环境ID */
+  GatewayRouteEnvId?: string | null;
 }
 
 declare interface BindEnvGatewayRequest {

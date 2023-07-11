@@ -262,6 +262,8 @@ declare interface ClueInfoDetail {
   ShopName?: string;
   /** 职位 */
   Position?: string;
+  /** 自定义的门店id */
+  CorpShopId?: string;
 }
 
 /** 企业成员信息 */

@@ -554,16 +554,6 @@ declare interface ScaleInfomation {
   RoomNumbers: number | null;
 }
 
-/** SdkAppId级别实时音视频的用量数据 */
-declare interface SdkAppIdNewTrtcTimeUsage {
-  /** SdkAppId的值。 */
-  SdkAppId: string;
-  /** 统计的时间点数据。 */
-  TrtcTimeUsages: TrtcTimeNewUsage[];
-  /** 统计的麦下用量的时间点数据。 */
-  AudienceTrtcTimeUsages: TrtcTimeNewUsage[];
-}
-
 /** SdkAppId级别录制时长数据。 */
 declare interface SdkAppIdRecordUsage {
   /** SdkAppId的值。 */
@@ -688,30 +678,6 @@ declare interface TimeValue {
   Time: number;
   /** 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ） */
   Value: number;
-}
-
-/** 实时音视频用量的某一时间段的统计信息. */
-declare interface TrtcTimeNewUsage {
-  /** 时间点。 */
-  TimeKey: string;
-  /** 通话人数。仅供参考。在线人数以仪表盘查询结果为准。 */
-  VoiceUserNum: number;
-  /** 音视频通话收费时长。单位：秒。 */
-  VideoTime: number;
-  /** 标清视频通话收费时长。单位：秒。 */
-  Class1VideoTime: number;
-  /** 高清视频通话收费时长。单位：秒。 */
-  Class2VideoTime: number;
-  /** 超高清视频通话收费时长。单位：秒。 */
-  Class3VideoTime: number;
-  /** 音频通话收费时长。单位：秒。 */
-  AudioTime: number;
-  /** 带宽。单位：Mbps。 */
-  Bandwidth: number;
-  /** 2k视频通话收费时长。单位：秒。 */
-  Video2KTime: number;
-  /** 4k视频通话收费时长。单位：秒。 */
-  Video4KTime: number;
 }
 
 /** 实时音视频用量在某一时间段的统计信息。 */
@@ -974,26 +940,6 @@ declare interface DescribeCloudRecordingResponse {
   Status: string;
   /** 录制文件信息。 */
   StorageFileList: StorageFile[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeExternalTrtcMeasureRequest {
-  /** 查询开始日期。 */
-  StartTime: string;
-  /** 查询结束日期。 */
-  EndTime: string;
-  /** 对应的应用。如果没有这个参数，表示获取用户名下全部实时音视频应用的汇总。 */
-  SdkAppId?: number;
-}
-
-declare interface DescribeExternalTrtcMeasureResponse {
-  /** 每个SdkAppId的时长使用信息 */
-  SdkAppIdTrtrTimeUsages: SdkAppIdNewTrtcTimeUsage[];
-  /** 主播的用量统计方式。取值"InRoomTime":房间时长,"SubscribeTime":"订阅时长","Bandwidth":带宽 */
-  AnchorUsageMode: string;
-  /** 观众的用量统计方式。取值"InRoomTime":在房间时长,"SubscribeTime":"订阅时长","Bandwidth":带宽,"MergeWithAnchor":"不区分麦上麦下" */
-  AudienceUsageMode: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1567,8 +1513,6 @@ declare interface Trtc {
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
   /** 查询云端录制状态 {@link DescribeCloudRecordingRequest} {@link DescribeCloudRecordingResponse} */
   DescribeCloudRecording(data: DescribeCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRecordingResponse>;
-  /** @deprecated 查询音视频用量计费时长（旧） {@link DescribeExternalTrtcMeasureRequest} {@link DescribeExternalTrtcMeasureResponse} */
-  DescribeExternalTrtcMeasure(data: DescribeExternalTrtcMeasureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalTrtcMeasureResponse>;
   /** 查询TRTC混流转码用量 {@link DescribeMixTranscodingUsageRequest} {@link DescribeMixTranscodingUsageResponse} */
   DescribeMixTranscodingUsage(data: DescribeMixTranscodingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMixTranscodingUsageResponse>;
   /** 查询图片 {@link DescribePictureRequest} {@link DescribePictureResponse} */
