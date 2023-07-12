@@ -3325,7 +3325,7 @@ declare interface DescribeExporterIntegrationsRequest {
 
 declare interface DescribeExporterIntegrationsResponse {
   /** 集成配置列表 */
-  IntegrationSet: IntegrationConfiguration[];
+  IntegrationSet?: IntegrationConfiguration[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3683,9 +3683,9 @@ declare interface DescribePrometheusAgentsRequest {
 
 declare interface DescribePrometheusAgentsResponse {
   /** Agent 列表 */
-  AgentSet: PrometheusAgent[] | null;
+  AgentSet?: PrometheusAgent[] | null;
   /** Agent 总量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

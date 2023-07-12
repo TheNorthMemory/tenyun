@@ -1252,6 +1252,18 @@ declare interface GetRequestTargetNodeTypesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyEsVipSecurityGroupRequest {
+  /** es集群的实例id */
+  InstanceId: string;
+  /** 安全组id列表 */
+  SecurityGroupIds?: string[];
+}
+
+declare interface ModifyEsVipSecurityGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RestartInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1651,6 +1663,8 @@ declare interface Es {
   DiagnoseInstance(data: DiagnoseInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseInstanceResponse>;
   /** 获取接收客户端请求的节点类型 {@link GetRequestTargetNodeTypesRequest} {@link GetRequestTargetNodeTypesResponse} */
   GetRequestTargetNodeTypes(data: GetRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestTargetNodeTypesResponse>;
+  /** 修改集群VIP绑定的安全组 {@link ModifyEsVipSecurityGroupRequest} {@link ModifyEsVipSecurityGroupResponse} */
+  ModifyEsVipSecurityGroup(data: ModifyEsVipSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEsVipSecurityGroupResponse>;
   /** 重启ES集群实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */
   RestartInstance(data: RestartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInstanceResponse>;
   /** 重启Kibana {@link RestartKibanaRequest} {@link RestartKibanaResponse} */

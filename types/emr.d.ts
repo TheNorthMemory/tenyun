@@ -1933,7 +1933,7 @@ declare interface InquiryPriceCreateInstanceResponse {
 }
 
 declare interface InquiryPriceRenewInstanceRequest {
-  /** 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月 */
+  /** 实例续费的时长。需要结合TimeUnit一起使用。1表示续费一个月 */
   TimeSpan: number;
   /** 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。 */
   ResourceIds: string[];
@@ -1951,13 +1951,13 @@ declare interface InquiryPriceRenewInstanceRequest {
 
 declare interface InquiryPriceRenewInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost: number | null;
+  OriginalCost?: number | null;
   /** 折扣价，单位为元。 */
-  DiscountCost: number | null;
+  DiscountCost?: number | null;
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
-  TimeUnit: string | null;
+  TimeUnit?: string | null;
   /** 实例续费的时长。 */
-  TimeSpan: number | null;
+  TimeSpan?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

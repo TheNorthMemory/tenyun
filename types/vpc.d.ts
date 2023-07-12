@@ -4879,7 +4879,7 @@ declare interface DescribeSecurityGroupReferencesResponse {
 }
 
 declare interface DescribeSecurityGroupsRequest {
-  /** 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。 */
+  /** 安全组实例ID，例如：sg-33ocnj9n。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。 */
   SecurityGroupIds?: string[];
   /** 过滤条件，参数不支持同时指定SecurityGroupIds和Filters。security-group-id - String - （过滤条件）安全组ID。project-id - Integer - （过滤条件）项目ID。security-group-name - String - （过滤条件）安全组名称。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3。 */
   Filters?: Filter[];
@@ -4887,13 +4887,17 @@ declare interface DescribeSecurityGroupsRequest {
   Offset?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: string;
+  /** 排序字段。支持：`CreatedTime` `UpdateTime`。注意：该字段没有默认值。 */
+  OrderField?: string;
+  /** 排序方法。升序：`ASC`，倒序：`DESC`。默认值：`ASC` */
+  OrderDirection?: string;
 }
 
 declare interface DescribeSecurityGroupsResponse {
   /** 安全组对象。 */
-  SecurityGroupSet: SecurityGroup[] | null;
+  SecurityGroupSet?: SecurityGroup[] | null;
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

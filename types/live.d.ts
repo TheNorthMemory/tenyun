@@ -1583,7 +1583,7 @@ declare interface CreateLivePullStreamTaskRequest {
   ExtraCmd?: string;
   /** 任务描述，限制 512 字节。 */
   Comment?: string;
-  /** 完整目标 URL 地址。用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空字符串，任务将会使用该 ToUrl 参数指定的目标地址。注意：签名时间需要超过任务结束时间，避免因签名过期造成任务失败。 */
+  /** 完整目标 URL 地址。用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空字符串，任务将会使用该 ToUrl 参数指定的目标地址。使用该方式传入目标地址支持的协议有：rtmp、rtmps、rtsp、rtp、srt。注意：签名时间需要超过任务结束时间，避免因签名过期造成任务失败。 */
   ToUrl?: string;
   /** 备源的类型：PullLivePushLive -直播，PullVodPushLive -点播。注意：1. 仅当主源类型为直播源时，备源才会生效。2. 主直播源拉流中断时，自动使用备源进行拉流。3. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。 */
   BackupSourceType?: string;
@@ -2147,7 +2147,7 @@ declare interface DeleteLiveTranscodeRuleResponse {
 }
 
 declare interface DeleteLiveTranscodeTemplateRequest {
-  /** 模板 ID。1. 在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。2. 可以从接口 [DescribeLiveTranscodeTemplates](/document/product/267/32641) 查询已经创建的过的模板列表。 */
+  /** 模板 ID。1. 在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。2. 可以从接口 [DescribeLiveTranscodeTemplates](/document/product/267/32641) 查询已经创建过的模板列表。 */
   TemplateId: number;
 }
 

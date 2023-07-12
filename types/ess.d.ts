@@ -1283,7 +1283,7 @@ declare interface CreateFlowSignReviewRequest {
   Agent?: Agent;
   /** 审核签署节点使用 非必填 如果填写则审核该签署节点。给个人审核时必填。 */
   RecipientId?: string;
-  /** 操作类型：操作类型，默认：SignReview；SignReview:签署审核注：接口通过该字段区分操作类型该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若发起个人审核，则指定该字段为：SignReview（注意，给个人审核时，需联系客户经理开白使用） */
+  /** 操作类型：（接口通过该字段区分操作类型）SignReview:签署审核CreateReview:发起审核默认：SignReview；SignReview:签署审核该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若发起个人审核，则指定该字段为：SignReview（注意，给个人审核时，需联系客户经理开白使用） */
   OperateType?: string;
 }
 

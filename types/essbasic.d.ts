@@ -324,6 +324,8 @@ declare interface FlowApproverInfo {
   ApproverSignTypes?: number[];
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
   SignId?: string;
+  /** SMS: 短信; NONE: 不发信息默认为SMS(该字段对子客无效) */
+  NotifyType?: string;
 }
 
 /** 签署人签署链接信息 */

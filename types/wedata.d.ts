@@ -162,6 +162,72 @@ declare interface CanvasInfo {
   LinksList: TaskLinkInfo[];
 }
 
+/** 列血缘聚合信息 */
+declare interface ColumnAggregationLineage {
+  /** 表名 */
+  TableName: string | null;
+  /** 父节点ID */
+  ParentId: string | null;
+  /** 元数据类型 */
+  MetastoreType: string | null;
+  /** 字符串类型的父节点集合 */
+  ParentSet: string | null;
+  /** 字符串类型的子节点集合 */
+  ChildSet: string | null;
+  /** 列信息集合 */
+  ColumnInfoSet: SimpleColumnInfo[] | null;
+}
+
+/** 血缘字段信息 */
+declare interface ColumnLineageInfo {
+  /** 血缘id */
+  Id: string | null;
+  /** 由中心节点出发的路径信息 */
+  PrefixPath: string | null;
+  /** 数据源ID */
+  DatasourceId: string | null;
+  /** 表ID */
+  TableId: string | null;
+  /** 字段名称 */
+  ColumnName?: string | null;
+  /** 字段中文名称 */
+  ColumnNameCn?: string | null;
+  /** 字段类型 */
+  ColumnType?: string | null;
+  /** 关系参数 */
+  RelationParams?: string | null;
+  /** 参数 */
+  Params?: string | null;
+  /** 父id */
+  ParentId?: string | null;
+  /** 元数据类型 */
+  MetastoreType?: string | null;
+  /** 元数据类型名称 */
+  MetastoreTypeName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 字段全名称 */
+  QualifiedName?: string | null;
+  /** 下游节点数 */
+  DownStreamCount?: number | null;
+  /** 上游节点数 */
+  UpStreamCount?: number | null;
+  /** 描述信息 */
+  Description?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  ModifyTime?: string | null;
+  /** 任务id列表 */
+  Tasks?: string[] | null;
+  /** 父节点列表字符串 */
+  ParentSet?: string | null;
+  /** 子节点列表字符串 */
+  ChildSet?: string | null;
+  /** 额外参数 */
+  ExtParams?: LineageParamRecord[] | null;
+}
+
 /** 内容详情 */
 declare interface CommonContent {
   /** 详情内容 */
@@ -1110,6 +1176,14 @@ declare interface Label {
   Value: string;
   /** 类型名称。 */
   Text: string;
+}
+
+/** 血缘参数记录 */
+declare interface LineageParamRecord {
+  /** 字段名 */
+  Name: string;
+  /** 字段值 */
+  Value: string | null;
 }
 
 /** 实时任务日志内容 */
@@ -2102,6 +2176,40 @@ declare interface SearchConditionNew {
   SortCol?: string;
 }
 
+/** 血缘列描述 */
+declare interface SimpleColumnInfo {
+  /** 列ID */
+  Id: string | null;
+  /** 限定名 */
+  QualifiedName: string | null;
+  /** 列名 */
+  ColumnName: string | null;
+  /** 列中文名 */
+  ColumnNameCn: string | null;
+  /** 列类型 */
+  ColumnType: string | null;
+  /** 列描述 */
+  Description: string | null;
+  /** 前缀路径 */
+  PrefixPath: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 修改时间 */
+  ModifyTime: string | null;
+  /** 数据源ID */
+  DatasourceId: string | null;
+  /** 下游数量 */
+  DownStreamCount: number | null;
+  /** 上游数量 */
+  UpStreamCount: number | null;
+  /** 关系参数 */
+  RelationParams: string | null;
+  /** 参数 */
+  Params: string | null;
+  /** 任务集合 */
+  Tasks: string[] | null;
+}
+
 /** 简单Task信息 */
 declare interface SimpleTaskInfo {
   /** 任务ID */
@@ -2222,6 +2330,48 @@ declare interface TableInfo {
   OriginDatabaseName: string | null;
   /** 表schemaName */
   OriginSchemaName: string | null;
+}
+
+/** 表血缘详细信息 */
+declare interface TableLineageInfo {
+  /** 元数据类型 */
+  MetastoreType: string | null;
+  /** 由中心节点到该节点的路径 */
+  PrefixPath: string | null;
+  /** 空间id */
+  ProjectId?: string | null;
+  /** 数据源id */
+  DatasourceId?: string | null;
+  /** 表id */
+  TableId?: string | null;
+  /** 表血缘参数 */
+  Params?: LineageParamRecord[] | null;
+  /** 父节点列表 */
+  ParentSet?: string | null;
+  /** 子节点列表 */
+  ChildSet?: string | null;
+  /** 额外参数 */
+  ExtParams?: RecordField[] | null;
+  /** 血缘id */
+  Id?: string | null;
+  /** 元数据类型名称 */
+  MetastoreTypeName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 表全称 */
+  QualifiedName?: string | null;
+  /** 血缘下游节点数 */
+  DownStreamCount?: number | null;
+  /** 血缘上游节点数 */
+  UpStreamCount?: number | null;
+  /** 血缘描述 */
+  Description?: string | null;
+  /** 血缘创建时间 */
+  CreateTime?: string | null;
+  /** 血缘更新时间 */
+  ModifyTime?: string | null;
+  /** 修改血缘的任务id列表 */
+  Tasks?: string[] | null;
 }
 
 /** 表质量详情 */
@@ -3964,6 +4114,28 @@ declare interface DescribeClusterNamespaceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeColumnLineageRequest {
+  /** 查询方向，INPUT,OUTPUT,BOTH枚举值 */
+  Direction: string;
+  /** 字段信息 */
+  Data: ColumnLineageInfo;
+  /** 单次查询入度 */
+  InputDepth?: number;
+  /** 单次查询出度 */
+  OutputDepth?: number;
+  /** 额外参数（传递调用方信息） */
+  ExtParams?: RecordField[];
+  /** 是否过滤临时表 默认值为true */
+  IgnoreTemp?: boolean;
+}
+
+declare interface DescribeColumnLineageResponse {
+  /** 字段血缘信息 */
+  ColumnAggregationLineage: ColumnAggregationLineage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataBasesRequest {
   /** 项目Id */
   ProjectId?: string;
@@ -5404,6 +5576,28 @@ declare interface DescribeTableInfoListRequest {
 declare interface DescribeTableInfoListResponse {
   /** 表信息 */
   TableInfo: TableInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTableLineageRequest {
+  /** 查询方向，INPUT,OUTPUT,BOTH枚举值 */
+  Direction: string;
+  /** 表信息 */
+  Data: TableLineageInfo;
+  /** 单次查询入度,默认 1 */
+  InputDepth?: number;
+  /** 单次查询出度,默认 1 */
+  OutputDepth?: number;
+  /** 额外参数（传递调用方信息） */
+  ExtParams?: LineageParamRecord[];
+  /** 是否过滤临时表,默认true */
+  IgnoreTemp?: boolean;
+}
+
+declare interface DescribeTableLineageResponse {
+  /** 表血缘信息 */
+  TableLineage: TableLineageInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7044,6 +7238,8 @@ declare interface Wedata {
   DescribeBatchOperateTask(data: DescribeBatchOperateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperateTaskResponse>;
   /** 获取集群命名空间列表 {@link DescribeClusterNamespaceListRequest} {@link DescribeClusterNamespaceListResponse} */
   DescribeClusterNamespaceList(data: DescribeClusterNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNamespaceListResponse>;
+  /** 列出字段血缘信息 {@link DescribeColumnLineageRequest} {@link DescribeColumnLineageResponse} */
+  DescribeColumnLineage(data: DescribeColumnLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeColumnLineageResponse>;
   /** 查询数据来源列表 {@link DescribeDataBasesRequest} {@link DescribeDataBasesResponse} */
   DescribeDataBases(data?: DescribeDataBasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataBasesResponse>;
   /** 数据质量数据监测情况接口 {@link DescribeDataCheckStatRequest} {@link DescribeDataCheckStatResponse} */
@@ -7196,6 +7392,8 @@ declare interface Wedata {
   DescribeStreamTaskLogList(data: DescribeStreamTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamTaskLogListResponse>;
   /** 获取数据表信息 {@link DescribeTableInfoListRequest} {@link DescribeTableInfoListResponse} */
   DescribeTableInfoList(data: DescribeTableInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableInfoListResponse>;
+  /** 列出表血缘信息 {@link DescribeTableLineageRequest} {@link DescribeTableLineageResponse} */
+  DescribeTableLineage(data: DescribeTableLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableLineageResponse>;
   /** 查询表质量详情 {@link DescribeTableQualityDetailsRequest} {@link DescribeTableQualityDetailsResponse} */
   DescribeTableQualityDetails(data: DescribeTableQualityDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableQualityDetailsResponse>;
   /** 获取表schema信息 {@link DescribeTableSchemaInfoRequest} {@link DescribeTableSchemaInfoResponse} */

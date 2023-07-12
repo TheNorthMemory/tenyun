@@ -381,43 +381,43 @@ declare interface KongTarget {
 /** 服务的后端配置 */
 declare interface KongUpstreamInfo {
   /** IP或域名 */
-  Host?: string | null;
+  Host?: string;
   /** 端口 */
-  Port?: number | null;
+  Port?: number;
   /** 服务来源ID */
-  SourceID?: string | null;
-  /** 名字空间 */
-  Namespace?: string | null;
+  SourceID?: string;
+  /** 命名空间 */
+  Namespace?: string;
   /** 服务（注册中心或Kubernetes中的服务）名字 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 服务后端类型是IPList时提供 */
-  Targets?: KongTarget[] | null;
+  Targets?: KongTarget[];
   /** 服务来源类型 */
-  SourceType?: string | null;
+  SourceType?: string;
   /** SCF函数类型 */
-  ScfType?: string | null;
+  ScfType?: string;
   /** SCF函数命名空间 */
-  ScfNamespace?: string | null;
+  ScfNamespace?: string;
   /** SCF函数名 */
-  ScfLambdaName?: string | null;
+  ScfLambdaName?: string;
   /** SCF函数版本 */
-  ScfLambdaQualifier?: string | null;
+  ScfLambdaQualifier?: string;
   /** 冷启动时间，单位秒 */
-  SlowStart?: number | null;
+  SlowStart?: number;
   /** 负载均衡算法，默认为 round-robin，还支持 least-connections，consisten_hashing */
-  Algorithm?: string | null;
+  Algorithm?: string;
   /** CVM弹性伸缩组ID */
-  AutoScalingGroupID?: string | null;
+  AutoScalingGroupID?: string;
   /** CVM弹性伸缩组端口 */
-  AutoScalingCvmPort?: number | null;
+  AutoScalingCvmPort?: number;
   /** CVM弹性伸缩组使用的CVM TAT命令状态 */
-  AutoScalingTatCmdStatus?: string | null;
+  AutoScalingTatCmdStatus?: string;
   /** CVM弹性伸缩组生命周期挂钩状态 */
-  AutoScalingHookStatus?: string | null;
+  AutoScalingHookStatus?: string;
   /** 服务来源的名字 */
-  SourceName?: string | null;
+  SourceName?: string;
   /** 精确的服务来源类型，新建服务来源时候传入的类型 */
-  RealSourceType?: string | null;
+  RealSourceType?: string;
 }
 
 /** 列表过滤条件，模糊匹配 */
