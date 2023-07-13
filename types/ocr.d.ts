@@ -2621,31 +2621,31 @@ declare interface HKIDCardOCRRequest {
 
 declare interface HKIDCardOCRResponse {
   /** 中文姓名 */
-  CnName: string;
+  CnName?: string;
   /** 英文姓名 */
-  EnName: string;
+  EnName?: string;
   /** 中文姓名对应电码 */
-  TelexCode: string;
+  TelexCode?: string;
   /** 性别 ：“男M”或“女F” */
-  Sex: string;
+  Sex?: string;
   /** 出生日期 */
-  Birthday: string;
+  Birthday?: string;
   /** 永久性居民身份证。0：非永久；1：永久；-1：未知。 */
-  Permanent: number;
+  Permanent?: number;
   /** 身份证号码 */
-  IdNum: string;
+  IdNum?: string;
   /** 证件符号，出生日期下的符号，例如"***AZ" */
-  Symbol: string;
+  Symbol?: string;
   /** 首次签发日期 */
-  FirstIssueDate: string;
+  FirstIssueDate?: string;
   /** 最近领用日期 */
-  CurrentIssueDate: string;
+  CurrentIssueDate?: string;
   /** 真假判断。0：无法判断（图像模糊、不完整、反光、过暗等导致无法判断）；1：假；2：真。 */
-  FakeDetectResult: number | null;
+  FakeDetectResult?: number | null;
   /** 人像照片Base64后的结果 */
-  HeadImage: string | null;
-  /** 多重告警码，当身份证是翻拍、复印、PS件时返回对应告警码。-9102：证照复印件告警-9103：证照翻拍告警-9104：证照PS告警 */
-  WarningCode: number[];
+  HeadImage?: string | null;
+  /** 多重告警码，当身份证是翻拍、复印件时返回对应告警码。-9102：证照复印件告警-9103：证照翻拍告警 */
+  WarningCode?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4049,13 +4049,13 @@ declare interface VehicleLicenseOCRRequest {
 
 declare interface VehicleLicenseOCRResponse {
   /** 行驶证主页正面的识别结果，CardSide 为 FRONT。 */
-  FrontInfo: TextVehicleFront | null;
+  FrontInfo?: TextVehicleFront | null;
   /** 行驶证副页正面的识别结果，CardSide 为 BACK。 */
-  BackInfo: TextVehicleBack | null;
-  /** Code 告警码列表和释义：-9102 复印件告警-9103 翻拍件告警-9106 ps告警注：告警码可以同时存在多个 */
-  RecognizeWarnCode: number[];
-  /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警WARN_DRIVER_LICENSE_PS_CARD ps告警注：告警信息可以同时存在多个 */
-  RecognizeWarnMsg: string[];
+  BackInfo?: TextVehicleBack | null;
+  /** Code 告警码列表和释义：-9102 复印件告警-9103 翻拍件告警注：告警码可以同时存在多个 */
+  RecognizeWarnCode?: number[];
+  /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警注：告警信息可以同时存在多个 */
+  RecognizeWarnMsg?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

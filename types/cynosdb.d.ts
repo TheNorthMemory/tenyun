@@ -49,33 +49,45 @@ declare interface Addr {
 /** 审计日志详细信息 */
 declare interface AuditLog {
   /** 影响行数。 */
-  AffectRows: number;
+  AffectRows?: number;
   /** 错误码。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** SQL类型。 */
-  SqlType: string;
+  SqlType?: string;
   /** 表名称。 */
-  TableName: string;
+  TableName?: string;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 审计策略名称。 */
-  PolicyName: string;
+  PolicyName?: string;
   /** 数据库名称。 */
-  DBName: string;
+  DBName?: string;
   /** SQL语句。 */
-  Sql: string;
+  Sql?: string;
   /** 客户端地址。 */
-  Host: string;
+  Host?: string;
   /** 用户名。 */
-  User: string;
-  /** 执行时间。 */
-  ExecTime: number;
-  /** 时间戳。 */
-  Timestamp: string;
-  /** 发送行数。 */
-  SentRows: number;
+  User?: string;
+  /** 执行时间，微秒。 */
+  ExecTime?: number;
+  /** 时间。 */
+  Timestamp?: string;
+  /** 返回行数。 */
+  SentRows?: number;
   /** 执行线程ID。 */
-  ThreadId: number;
+  ThreadId?: number;
+  /** 扫描行数。 */
+  CheckRows?: number | null;
+  /** cpu执行时间，微秒。 */
+  CpuTime?: number | null;
+  /** IO等待时间，微秒。 */
+  IoWaitTime?: number | null;
+  /** 锁等待时间，微秒。 */
+  LockWaitTime?: number | null;
+  /** 事物持续等待时间，微秒。 */
+  TrxLivingTime?: number | null;
+  /** 开始时间，与timestamp构成一个精确到纳秒的时间。 */
+  NsTime?: number | null;
 }
 
 /** 审计日志文件 */
@@ -742,6 +754,16 @@ declare interface InputAccount {
   AccountName: string;
   /** 主机，默认‘%’ */
   Host?: string;
+}
+
+/** 审计日志搜索条件 */
+declare interface InstanceAuditLogFilter {
+  /** 过滤项。支持以下搜索条件:分词搜索：sql - SQL语句；等于、不等于、包含、不包含：host - 客户端地址；user - 用户名；dbName - 数据库名称；等于、不等于：sqlType - SQL类型；errCode - 错误码；threadId - 线程ID；范围搜索（时间类型统一为微妙）：execTime - 执行时间；lockWaitTime - 执行时间；ioWaitTime - IO等待时间；trxLivingTime - 事物持续时间；cpuTime - cpu时间；checkRows - 扫描行数；affectRows - 影响行数；sentRows - 返回行数。 */
+  Type: string;
+  /** 过滤条件。支持以下选项:INC - 包含,EXC - 不包含,EQS - 等于,NEQ - 不等于,RA - 范围. */
+  Compare: string;
+  /** 过滤的值。 */
+  Value: string[];
 }
 
 /** 实例的审计规则详情，DescribeAuditRuleWithInstanceIds接口的出参。 */
@@ -1659,13 +1681,15 @@ declare interface CreateAuditLogFileRequest {
   Order?: string;
   /** 排序字段。支持值包括："timestamp" - 时间戳；"affectRows" - 影响行数；"execTime" - 执行时间。 */
   OrderBy?: string;
-  /** 过滤条件。可按设置的过滤条件过滤日志。 */
+  /** 已废弃。 */
   Filter?: AuditLogFilter;
+  /** 审计日志过滤条件 */
+  LogFilter?: InstanceAuditLogFilter[];
 }
 
 declare interface CreateAuditLogFileResponse {
   /** 审计日志文件名称。 */
-  FileName: string;
+  FileName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2131,19 +2155,21 @@ declare interface DescribeAuditLogsRequest {
   Order?: string;
   /** 排序字段。支持值包括："timestamp" - 时间戳；"affectRows" - 影响行数；"execTime" - 执行时间。 */
   OrderBy?: string;
-  /** 过滤条件。可按设置的过滤条件过滤日志。 */
+  /** 已废弃。 */
   Filter?: AuditLogFilter;
   /** 分页参数，单次返回的数据条数。默认值为100，最大值为100。 */
   Limit?: number;
   /** 分页偏移量。 */
   Offset?: number;
+  /** 审计日志过滤条件。 */
+  LogFilter?: InstanceAuditLogFilter[];
 }
 
 declare interface DescribeAuditLogsResponse {
   /** 符合条件的审计日志条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 审计日志详情。 */
-  Items: AuditLog[] | null;
+  Items?: AuditLog[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

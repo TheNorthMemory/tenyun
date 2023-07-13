@@ -192,6 +192,16 @@ declare interface Component {
 declare interface CreateFlowOption {
   /** 是否允许修改合同信息，true-是，false-否 */
   CanEditFlow?: boolean;
+  /** 是否允许发起合同弹窗隐藏合同名称 */
+  HideShowFlowName?: boolean;
+  /** 是否允许发起合同弹窗隐藏合同类型 */
+  HideShowFlowType?: boolean;
+  /** 是否允许发起合同弹窗隐藏合同到期时间 */
+  HideShowDeadline?: boolean;
+  /** 是否允许发起合同步骤跳过指定签署方步骤 */
+  CanSkipAddApprover?: boolean;
+  /** 定制化发起合同页合同描述信息 */
+  CustomCreateFlowDescription?: string;
 }
 
 /** 第三方应用集成员工部门信息 */
@@ -444,6 +454,8 @@ declare interface FormField {
   ComponentId?: string | null;
   /** 控件的名字，跟ComponentId二选一，不能全为空 */
   ComponentName?: string | null;
+  /** 是否锁定模版控件值，锁定后无法修改（用于嵌入式发起合同） */
+  LockComponentValue?: boolean | null;
 }
 
 /** 持有的电子印章信息 */

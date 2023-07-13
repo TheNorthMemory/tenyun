@@ -2762,7 +2762,7 @@ declare interface MediaContentReviewSegmentItem {
 
 /** 指定删除点播视频时的删除内容 */
 declare interface MediaDeleteItem {
-  /** 所指定的删除部分。如果未填写该字段则参数无效。可选值有：OriginalFiles（删除原文件，删除后无法发起转码、微信发布等任何视频处理操作）；TranscodeFiles（删除转码文件）；AdaptiveDynamicStreamingFiles（删除转自适应码流文件）；WechatPublishFiles（删除微信发布文件）。 */
+  /** 所指定的删除部分。如果未填写该字段则参数无效。可选值有：OriginalFiles（删除原文件，删除后无法发起转码、微信发布等任何视频处理操作）；TranscodeFiles（删除转码文件）；AdaptiveDynamicStreamingFiles（删除转自适应码流文件）；WechatPublishFiles（删除微信发布文件）；WechatMiniProgramPublishFiles（删除微信小程序发布文件）。注意： 取值为OriginalFiles时，文件上传时携带的封面文件会被删除；取值为TranscodeFiles时，媒体处理产生的封面文件会被删除。 */
   Type: string;
   /** 删除由Type参数指定的种类下的视频模板号，模板定义参见[转码模板](https://cloud.tencent.com/document/product/266/33478)。默认值为0，表示删除参数Type指定种类下所有的视频。 */
   Definition?: number;
@@ -8841,14 +8841,6 @@ declare interface SearchMediaRequest {
   CreateTime?: TimeRange;
   /** 匹配过期时间在此时间段内的文件，无法检索到已过期文件。包含所指定的头尾时间点。 */
   ExpireTime?: TimeRange;
-  /** 排序方式。Sort.Field 可选 CreateTime 。当 Text、 Names 或 Descriptions 不为空时，Sort.Field 字段无效， 搜索结果将以匹配度排序。 */
-  Sort?: SortBy;
-  /** 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。取值范围：Offset + Limit 不超过5000。（参见：接口返回结果数限制） */
-  Offset?: number;
-  /** 分页返回的记录条数，默认值：10。将返回第 Offset 到第 Offset+Limit-1 条。取值范围：Offset + Limit 不超过5000。（参见：接口返回结果数限制） */
-  Limit?: number;
-  /** 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：basicInfo（视频基础信息）。metaData（视频元信息）。transcodeInfo（视频转码结果信息）。animatedGraphicsInfo（视频转动图结果信息）。imageSpriteInfo（视频雪碧图信息）。snapshotByTimeOffsetInfo（视频指定时间点截图信息）。sampleSnapshotInfo（采样截图信息）。keyFrameDescInfo（打点信息）。adaptiveDynamicStreamingInfo（转自适应码流信息）。miniProgramReviewInfo（小程序审核信息）。 */
-  Filters?: string[];
   /** 媒体文件存储地区，如 ap-chongqing，参见[地域列表](https://cloud.tencent.com/document/product/266/9760)。单个存储地区长度限制：20个字符。数组长度限制：20。 */
   StorageRegions?: string[];
   /** 存储类型数组。可选值有： STANDARD：标准存储。 STANDARD_IA：低频存储。 ARCHIVE：归档存储。 DEEP_ARCHIVE：深度归档存储。 */
@@ -8863,6 +8855,14 @@ declare interface SearchMediaRequest {
   TrtcSdkAppIds?: number[];
   /** TRTC 房间 ID 集合。匹配集合中的任意元素。单个房间 ID 长度限制：64个字符；数组长度限制：10。 */
   TrtcRoomIds?: string[];
+  /** 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：basicInfo（视频基础信息）。metaData（视频元信息）。transcodeInfo（视频转码结果信息）。animatedGraphicsInfo（视频转动图结果信息）。imageSpriteInfo（视频雪碧图信息）。snapshotByTimeOffsetInfo（视频指定时间点截图信息）。sampleSnapshotInfo（采样截图信息）。keyFrameDescInfo（打点信息）。adaptiveDynamicStreamingInfo（转自适应码流信息）。miniProgramReviewInfo（小程序审核信息）。 */
+  Filters?: string[];
+  /** 排序方式。Sort.Field 可选 CreateTime 。当 Text、 Names 或 Descriptions 不为空时，Sort.Field 字段无效， 搜索结果将以匹配度排序。 */
+  Sort?: SortBy;
+  /** 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。取值范围：Offset + Limit 不超过5000。（参见：接口返回结果数限制） */
+  Offset?: number;
+  /** 分页返回的记录条数，默认值：10。将返回第 Offset 到第 Offset+Limit-1 条。取值范围：Offset + Limit 不超过5000。（参见：接口返回结果数限制） */
+  Limit?: number;
   /** （不推荐：应使用 Names、NamePrefixes 或 Descriptions 替代）搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64个字符。 */
   Text?: string;
   /** （不推荐：应使用 SourceTypes 替代）媒体文件来源，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773)。 */

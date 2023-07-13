@@ -2,6 +2,58 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 实例详细信息 */
+declare interface AuditInstance {
+  /** 审计状态，已开通审计为：YES，未开通审计为：ON。 */
+  AuditStatus?: string;
+  /** 审计日志大小，为兼容老版本用。 */
+  BillingAmount?: number;
+  /** 计费确认状态，0-未确认；1-已确认。 */
+  BillingConfirmed?: number;
+  /** 低频存储时长。 */
+  ColdLogExpireDay?: number;
+  /** 低频日志存储量单位MB。 */
+  ColdLogSize?: number;
+  /** 高频日志存储天数。 */
+  HotLogExpireDay?: number;
+  /** 高频日志存储量，单位MB。 */
+  HotLogSize?: number;
+  /** 实例Id。 */
+  InstanceId?: string;
+  /** 日志保存总天数，为高频存储时长+低频存储时长。 */
+  LogExpireDay?: number;
+  /** 实例创建时间。 */
+  CreateTime?: string;
+  /** 实例详细信息。 */
+  InstanceInfo?: AuditInstanceInfo;
+}
+
+/** 实例列表查询条件 */
+declare interface AuditInstanceFilter {
+  /** 搜索条件名称 */
+  Name: string;
+  /** 要搜索的条件的值 */
+  Values: string[];
+}
+
+/** 实例详情 */
+declare interface AuditInstanceInfo {
+  /** appId。 */
+  AppId?: number;
+  /** 审计状态，0-未开通审计；1-已开通审计。 */
+  AuditStatus?: number;
+  /** 实例Id。 */
+  InstanceId?: string;
+  /** 实例名称。 */
+  InstanceName?: string;
+  /** 项目Id。 */
+  ProjectId?: number;
+  /** 实例所在地域。 */
+  Region?: string;
+  /** 资源Tags。 */
+  ResourceTags?: string[] | null;
+}
+
 /** 审计日志文件 */
 declare interface AuditLogFile {
   /** 审计日志文件生成异步任务ID。 */
@@ -726,6 +778,22 @@ declare interface CancelKillTaskResponse {
   RequestId?: string;
 }
 
+declare interface CloseAuditServiceRequest {
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  Product: string;
+  /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
+  NodeRequestType: string;
+  /** 实例Id。 */
+  InstanceId: string;
+}
+
+declare interface CloseAuditServiceResponse {
+  /** 0-关闭审计成功，非0关闭审计失败。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAuditLogFileRequest {
   /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
   Product: string;
@@ -1022,6 +1090,30 @@ declare interface DescribeAllUserGroupResponse {
   TotalCount: number;
   /** 组信息。 */
   Groups: GroupItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditInstanceListRequest {
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  Product: string;
+  /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
+  NodeRequestType: string;
+  /** 审计状态标识，0-未开通审计；1-已开通审计，默认为0。 */
+  AuditSwitch?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 查询数目，默认为20，最大为100。 */
+  Limit?: number;
+  /** 查询实例的搜索条件。 */
+  Filters?: AuditInstanceFilter[];
+}
+
+declare interface DescribeAuditInstanceListResponse {
+  /** 符合条件的实例个数。 */
+  TotalCount?: number | null;
+  /** 实例详情。 */
+  Items?: AuditInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1730,6 +1822,26 @@ declare interface KillMySqlThreadsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAuditServiceRequest {
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  Product: string;
+  /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
+  NodeRequestType: string;
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 日志保存总时长，只能是7,30,90,180,365,1095,1825 */
+  LogExpireDay: number;
+  /** 高频日志保存时长，只能是7,30,90,180,365,1095,1825 */
+  HotLogExpireDay: number;
+}
+
+declare interface ModifyAuditServiceResponse {
+  /** 审计配置修改结果，0-修改成功,非0-修改失败。 */
+  Success?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDiagDBInstanceConfRequest {
   /** 实例配置，包括巡检、概览开关等。 */
   InstanceConfs: InstanceConfs;
@@ -1760,6 +1872,26 @@ declare interface ModifySqlFiltersRequest {
 }
 
 declare interface ModifySqlFiltersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenAuditServiceRequest {
+  /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
+  Product: string;
+  /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
+  NodeRequestType: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志保存总时长，只能是7,30,90,180,365,1095,1825 */
+  LogExpireDay: number;
+  /** 高频日志保存时长，只能是7,30,90,180,365,1095,1825 */
+  HotLogExpireDay: number;
+}
+
+declare interface OpenAuditServiceResponse {
+  /** taskId 为0表示开通审计成功，否则开通失败 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2859,6 +2991,8 @@ declare interface Dbbrain {
   AddUserContact(data: AddUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserContactResponse>;
   /** 终止中断会话任务 {@link CancelKillTaskRequest} {@link CancelKillTaskResponse} */
   CancelKillTask(data: CancelKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKillTaskResponse>;
+  /** 关闭数据审计 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
+  CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
   CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
   /** 创建健康报告生成任务 {@link CreateDBDiagReportTaskRequest} {@link CreateDBDiagReportTaskResponse} */
@@ -2891,6 +3025,8 @@ declare interface Dbbrain {
   DescribeAllUserContact(data: DescribeAllUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUserContactResponse>;
   /** 获取邮件发送中联系组信息 {@link DescribeAllUserGroupRequest} {@link DescribeAllUserGroupResponse} */
   DescribeAllUserGroup(data: DescribeAllUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUserGroupResponse>;
+  /** 查询实例列表 {@link DescribeAuditInstanceListRequest} {@link DescribeAuditInstanceListResponse} */
+  DescribeAuditInstanceList(data: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 获取诊断事件详情 {@link DescribeDBDiagEventRequest} {@link DescribeDBDiagEventResponse} */
@@ -2949,10 +3085,14 @@ declare interface Dbbrain {
   DescribeUserSqlAdvice(data: DescribeUserSqlAdviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSqlAdviceResponse>;
   /** 中断MySql会话线程 {@link KillMySqlThreadsRequest} {@link KillMySqlThreadsResponse} */
   KillMySqlThreads(data: KillMySqlThreadsRequest, config?: AxiosRequestConfig): AxiosPromise<KillMySqlThreadsResponse>;
+  /** 修改审计配置 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
+  ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改实例巡检开关状态 {@link ModifyDiagDBInstanceConfRequest} {@link ModifyDiagDBInstanceConfResponse} */
   ModifyDiagDBInstanceConf(data: ModifyDiagDBInstanceConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiagDBInstanceConfResponse>;
   /** 更改实例限流任务状态 {@link ModifySqlFiltersRequest} {@link ModifySqlFiltersResponse} */
   ModifySqlFilters(data: ModifySqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySqlFiltersResponse>;
+  /** 开通数据库审计 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
+  OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 验证用户数据库账号权限 {@link VerifyUserAccountRequest} {@link VerifyUserAccountResponse} */
   VerifyUserAccount(data: VerifyUserAccountRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyUserAccountResponse>;
   /** 添加联系人信息 {@link V20191016.AddUserContactRequest} {@link V20191016.AddUserContactResponse} */

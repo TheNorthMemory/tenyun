@@ -1815,19 +1815,25 @@ declare interface ReplaceParam {
 /** 路由实体对象 */
 declare interface Route {
   /** 实例接入方式0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持） */
-  AccessType: number;
+  AccessType?: number;
   /** 路由ID */
-  RouteId: number;
+  RouteId?: number;
   /** vip网络类型（1:外网TGW 2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境） */
-  VipType: number;
+  VipType?: number;
   /** 虚拟IP列表 */
-  VipList: VipEntity[];
+  VipList?: VipEntity[];
   /** 域名 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 域名port */
-  DomainPort: number | null;
+  DomainPort?: number | null;
   /** 时间戳 */
-  DeleteTimestamp: string | null;
+  DeleteTimestamp?: string | null;
+  /** 子网信息 */
+  Subnet?: string | null;
+  /** 虚拟IP列表(1对1 broker节点) */
+  BrokerVipList?: VipEntity[] | null;
+  /** vpc信息 */
+  VpcId?: string | null;
 }
 
 /** RouteDTO */

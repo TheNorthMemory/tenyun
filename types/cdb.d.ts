@@ -696,6 +696,16 @@ declare interface Inbound {
   Desc: string;
 }
 
+/** 审计日志搜索过滤器 */
+declare interface InstanceAuditLogFilters {
+  /** 过滤项。目前支持以下搜索条件：分词搜索：sql - SQL语句；等于、不等于、包含、不包含：host - 客户端地址；user - 用户名；dbName - 数据库名称；等于、不等于：sqlType - SQL类型；errCode - 错误码；threadId - 线程ID；范围搜索（时间类型统一为微妙）：execTime - 执行时间；lockWaitTime - 执行时间；ioWaitTime - IO等待时间；trxLivingTime - 事物持续时间；cpuTime - cpu时间；checkRows - 扫描行数；affectRows - 影响行数；sentRows - 返回行数。 */
+  Type?: string;
+  /** 过滤条件。支持以下条件：INC - 包含,EXC - 不包含,EQS - 等于,NEQ - 不等于,RA - 范围。 */
+  Compare?: string;
+  /** 过滤的值。 */
+  Value?: string[];
+}
+
 /** 实例详细信息 */
 declare interface InstanceInfo {
   /** 外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网 */
@@ -1695,8 +1705,10 @@ declare interface AnalyzeAuditLogsRequest {
   EndTime: string;
   /** 聚合维度的排序条件。 */
   AggregationConditions: AggregationCondition[];
-  /** 该过滤条件下的审计日志结果集作为分析日志。 */
+  /** 已废弃。该过滤条件下的审计日志结果集作为分析日志。 */
   AuditLogFilter?: AuditLogFilter;
+  /** 该过滤条件下的审计日志结果集作为分析日志。 */
+  LogFilter?: InstanceAuditLogFilters[];
 }
 
 declare interface AnalyzeAuditLogsResponse {
@@ -1791,18 +1803,20 @@ declare interface CreateAccountsResponse {
 }
 
 declare interface CreateAuditLogFileRequest {
-  /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  /** 实例 ID，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 开始时间，格式为："2017-07-12 10:29:20"。 */
+  /** 开始时间。 */
   StartTime: string;
-  /** 结束时间，格式为："2017-07-12 10:29:20"。 */
+  /** 结束时间。 */
   EndTime: string;
   /** 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。 */
   Order?: string;
   /** 排序字段。支持值包括："timestamp" - 时间戳；"affectRows" - 影响行数；"execTime" - 执行时间。 */
   OrderBy?: string;
-  /** 过滤条件。可按设置的过滤条件过滤日志。 */
+  /** 已废弃。 */
   Filter?: AuditLogFilter;
+  /** 过滤条件。可按设置的过滤条件过滤日志。 */
+  LogFilter?: InstanceAuditLogFilters[];
 }
 
 declare interface CreateAuditLogFileResponse {

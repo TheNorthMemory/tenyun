@@ -458,6 +458,14 @@ declare interface EnvironmentRole {
   UpdateTime: string;
 }
 
+/** 批量绑定名字空间和角色权限关系 */
+declare interface EnvironmentRoleSet {
+  /** 需要绑定的命名空间Id，不重复且存在资源 */
+  EnvironmentId: string | null;
+  /** 名字空间需要绑定的权限，枚举为 "consume" "produce" 组合，但是不为空 */
+  Permissions: string[] | null;
+}
+
 /** exchange使用配额信息 */
 declare interface ExchangeQuota {
   /** 可创建最大exchange数 */
@@ -1795,11 +1803,13 @@ declare interface CreateRoleRequest {
 
 declare interface CreateRoleResponse {
   /** 角色名称 */
-  RoleName: string;
+  RoleName?: string;
   /** 角色token */
-  Token: string;
+  Token?: string;
   /** 备注说明 */
-  Remark: string | null;
+  Remark?: string | null;
+  /** 批量绑定名字空间 */
+  EnvironmentRoleSets?: EnvironmentRoleSet[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
