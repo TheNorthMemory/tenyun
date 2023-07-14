@@ -5,36 +5,36 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 快照策略信息 */
 declare interface AutoSnapshotPolicyInfo {
   /** 快照策略ID */
-  AutoSnapshotPolicyId: string;
+  AutoSnapshotPolicyId?: string;
   /** 快照策略ID */
-  PolicyName: string;
+  PolicyName?: string;
   /** 快照策略创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 关联的文件系统个数 */
-  FileSystemNums: number;
+  FileSystemNums?: number;
   /** 快照定期备份在一星期哪一天，该参数与DayOfMonth,IntervalDays互斥 */
-  DayOfWeek: string;
+  DayOfWeek?: string;
   /** 快照定期备份在一天的哪一小时 */
-  Hour: string;
-  /** 是否激活定期快照功能 */
-  IsActivated: number;
+  Hour?: string;
+  /** 是否激活定期快照功能,1代表已激活，0代表未激活 */
+  IsActivated?: number;
   /** 下一次触发快照时间 */
-  NextActiveTime: string;
-  /** 快照策略状态 */
-  Status: string;
+  NextActiveTime?: string;
+  /** 快照策略状态，1代表快照策略状态正常。这里只有一种状态 */
+  Status?: string;
   /** 帐号ID */
-  AppId: number;
+  AppId?: number;
   /** 保留时间 */
-  AliveDays: number;
+  AliveDays?: number;
   /** 地域 */
-  RegionName: string;
+  RegionName?: string;
   /** 文件系统信息 */
-  FileSystems: FileSystemByPolicy[];
+  FileSystems?: FileSystemByPolicy[];
   /** 快照定期备份在一个月的某个时间；该参数与DayOfWeek,IntervalDays互斥 */
   DayOfMonth?: string | null;
   /** 快照定期间隔天数，1-365 天；该参数与DayOfMonth,DayOfWeek互斥 */
   IntervalDays?: number | null;
-  /** 跨地域复制的快照保留时间 */
+  /** 跨地域复制的快照保留时间，单位天 */
   CrossRegionsAliveDays?: number;
 }
 
@@ -95,19 +95,19 @@ declare interface BucketInfo {
 /** 绑定快照策略的文件系统信息 */
 declare interface FileSystemByPolicy {
   /** 文件系统名称 */
-  CreationToken: string;
+  CreationToken?: string;
   /** 文件系统ID */
-  FileSystemId: string;
-  /** 文件系统大小 */
-  SizeByte: number;
-  /** 存储类型 */
-  StorageType: string;
-  /** 快照总大小 */
-  TotalSnapshotSize: number;
+  FileSystemId?: string;
+  /** 文件系统大小，单位Byte */
+  SizeByte?: number;
+  /** 存储类型，HP：通用性能型；SD：通用标准型；TP:turbo性能型；TB：turbo标准型；THP：吞吐型 */
+  StorageType?: string;
+  /** 快照总大小，单位GiB */
+  TotalSnapshotSize?: number;
   /** 文件系统创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 文件系统所在区ID */
-  ZoneId: number;
+  ZoneId?: number;
 }
 
 /** 文件系统客户端信息 */
@@ -129,49 +129,49 @@ declare interface FileSystemClient {
 /** 文件系统基本信息 */
 declare interface FileSystemInfo {
   /** 创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 用户自定义名称 */
-  CreationToken: string;
+  CreationToken?: string;
   /** 文件系统 ID */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 文件系统状态。取值范围：- creating:创建中- mounting:挂载中- create_failed:创建失败- available:可使用- unserviced:停服中- upgrading:升级中 */
-  LifeCycleState: string;
-  /** 文件系统已使用容量 */
-  SizeByte: number;
-  /** 文件系统最大空间限制 */
-  SizeLimit: number;
+  LifeCycleState?: string;
+  /** 文件系统已使用容量,单位Byte */
+  SizeByte?: number;
+  /** 文件系统最大空间限制,GiB */
+  SizeLimit?: number;
   /** 区域 ID */
-  ZoneId: number;
+  ZoneId?: number;
   /** 区域名称 */
-  Zone: string;
-  /** 文件系统协议类型 */
-  Protocol: string;
-  /** 文件系统存储类型 */
-  StorageType: string;
+  Zone?: string;
+  /** 文件系统协议类型, 支持 NFS,CIFS,TURBO */
+  Protocol?: string;
+  /** 存储类型，HP：通用性能型；SD：通用标准型；TP:turbo性能型；TB：turbo标准型；THP：吞吐型 */
+  StorageType?: string;
   /** 文件系统绑定的预付费存储包 */
-  StorageResourcePkg: string;
+  StorageResourcePkg?: string;
   /** 文件系统绑定的预付费带宽包（暂未支持） */
-  BandwidthResourcePkg: string;
+  BandwidthResourcePkg?: string;
   /** 文件系统绑定权限组信息 */
-  PGroup: PGroup;
+  PGroup?: PGroup;
   /** 用户自定义名称 */
-  FsName: string;
-  /** 文件系统是否加密 */
-  Encrypted: boolean;
+  FsName?: string;
+  /** 文件系统是否加密,true：代表加密，false：非加密 */
+  Encrypted?: boolean;
   /** 加密所使用的密钥，可以为密钥的 ID 或者 ARN */
-  KmsKeyId: string;
+  KmsKeyId?: string;
   /** 应用ID */
-  AppId: number;
-  /** 文件系统吞吐上限，吞吐上限是根据文件系统当前已使用存储量、绑定的存储资源包以及吞吐资源包一同确定 */
-  BandwidthLimit: number;
+  AppId?: number;
+  /** 文件系统吞吐上限，吞吐上限是根据文件系统当前已使用存储量、绑定的存储资源包以及吞吐资源包一同确定. 单位MiB/s */
+  BandwidthLimit?: number;
   /** 文件系统总容量 */
-  Capacity: number;
+  Capacity?: number;
   /** 文件系统标签列表 */
-  Tags: TagInfo[];
-  /** 文件系统生命周期管理状态 */
-  TieringState: string;
+  Tags?: TagInfo[];
+  /** 文件系统生命周期管理状态NotAvailable：不可用Available:可用 */
+  TieringState?: string;
   /** 分层存储详情 */
-  TieringDetail: TieringDetailInfo | null;
+  TieringDetail?: TieringDetailInfo | null;
 }
 
 /** 条件过滤 */
@@ -308,7 +308,7 @@ declare interface SnapshotInfo {
   SnapshotName?: string;
   /** 快照ID */
   SnapshotId?: string;
-  /** 快照状态 */
+  /** 快照状态，createing-创建中；available-运行中；deleting-删除中；rollbacking-new 创建新文件系统中；create-failed 创建失败 */
   Status?: string;
   /** 地域名称 */
   RegionName?: string;
@@ -318,7 +318,7 @@ declare interface SnapshotInfo {
   Size?: number;
   /** 保留时长天 */
   AliveDay?: number;
-  /** 快照进度 */
+  /** 快照进度百分比，1表示1% */
   Percent?: number;
   /** 帐号ID */
   AppId?: number;
@@ -328,24 +328,24 @@ declare interface SnapshotInfo {
   FsName?: string;
   /** 快照标签 */
   Tags?: TagInfo[];
-  /** 快照类型 */
+  /** 快照类型, general为通用系列快照，turbo为Turbo系列快照 */
   SnapshotType?: string | null;
-  /** 实际快照时间，这里主要是为了标识跨地域复制快照的时间快照时间 */
+  /** 实际快照时间，反应快照对应文件系统某个时刻的数据。 */
   SnapshotTime?: string | null;
 }
 
 /** 快照操作日志 */
 declare interface SnapshotOperateLog {
-  /** 操作类型 */
-  Action: string;
+  /** 操作类型CreateCfsSnapshot：创建快照DeleteCfsSnapshot：删除快照CreateCfsFileSystem：创建文件系统UpdateCfsSnapshotAttribute：更新快照 */
+  Action?: string;
   /** 操作时间 */
-  ActionTime: string;
-  /** 操作名称 */
-  ActionName: string;
-  /** 操作者 */
-  Operator: string;
-  /** 结果 */
-  Result: number;
+  ActionTime?: string;
+  /** 操作名称CreateCfsSnapshotDeleteCfsSnapshotCreateCfsFileSystemUpdateCfsSnapshotAttribute */
+  ActionName?: string;
+  /** 操作者uin */
+  Operator?: string;
+  /** 1-任务进行中；2-任务成功；3-任务失败 */
+  Result?: number;
 }
 
 /** 文件系统快照统计 */
@@ -405,13 +405,13 @@ declare interface BindAutoSnapshotPolicyResponse {
 }
 
 declare interface CreateAutoSnapshotPolicyRequest {
-  /** 快照重复时间点 */
+  /** 快照重复时间点,0-23 */
   Hour: string;
   /** 策略名称 */
   PolicyName?: string;
-  /** 快照重复日期，星期一到星期日 */
+  /** 快照重复日期，星期一到星期日。 1代表星期一、7代表星期天 */
   DayOfWeek?: string;
-  /** 快照保留时长 */
+  /** 快照保留时长，单位天 */
   AliveDays?: number;
   /** 快照按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照。 */
   DayOfMonth?: string;
@@ -903,15 +903,15 @@ declare interface DescribeUserQuotaRequest {
   Filters?: Filter[];
   /** Offset 分页码 */
   Offset?: number;
-  /** Limit 页面大小 */
+  /** Limit 页面大小，可填范围为大于0的整数 */
   Limit?: number;
 }
 
 declare interface DescribeUserQuotaResponse {
   /** UserQuota条目总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** UserQuota条目 */
-  UserQuotaInfo: UserQuota[];
+  UserQuotaInfo?: UserQuota[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1017,13 +1017,13 @@ declare interface UpdateAutoSnapshotPolicyRequest {
   AutoSnapshotPolicyId: string;
   /** 快照策略名称 */
   PolicyName?: string;
-  /** 快照定期备份在一星期哪一天 */
+  /** 快照定期备份，按照星期一到星期日。 1代表星期一，7代表星期日 */
   DayOfWeek?: string;
   /** 快照定期备份在一天的哪一小时 */
   Hour?: string;
   /** 快照保留日期 */
   AliveDays?: number;
-  /** 是否激活定期快照功能 */
+  /** 是否激活定期快照功能；1代表激活，0代表未激活 */
   IsActivated?: number;
   /** 定期快照在每月的第几天创建快照，该参数与DayOfWeek互斥 */
   DayOfMonth?: string;

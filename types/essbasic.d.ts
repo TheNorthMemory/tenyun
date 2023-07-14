@@ -192,15 +192,15 @@ declare interface Component {
 declare interface CreateFlowOption {
   /** 是否允许修改合同信息，true-是，false-否 */
   CanEditFlow?: boolean;
-  /** 是否允许发起合同弹窗隐藏合同名称 */
+  /** 是否允许发起合同弹窗隐藏合同名称，true-允许，false-不允许 */
   HideShowFlowName?: boolean;
-  /** 是否允许发起合同弹窗隐藏合同类型 */
+  /** 是否允许发起合同弹窗隐藏合同类型，true-允许，false-不允许 */
   HideShowFlowType?: boolean;
-  /** 是否允许发起合同弹窗隐藏合同到期时间 */
+  /** 是否允许发起合同弹窗隐藏合同到期时间，true-允许，false-不允许 */
   HideShowDeadline?: boolean;
-  /** 是否允许发起合同步骤跳过指定签署方步骤 */
+  /** 是否允许发起合同步骤跳过指定签署方步骤，true-允许，false-不允许 */
   CanSkipAddApprover?: boolean;
-  /** 定制化发起合同页合同描述信息 */
+  /** 定制化发起合同弹窗的描述信息，描述信息最长500 */
   CustomCreateFlowDescription?: string;
 }
 
@@ -334,7 +334,7 @@ declare interface FlowApproverInfo {
   ApproverSignTypes?: number[];
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
   SignId?: string;
-  /** SMS: 短信; NONE: 不发信息默认为SMS(该字段对子客无效) */
+  /** SMS: 短信(需确保“电子签短信通知签署方”功能是开启状态才能生效); NONE: 不发信息默认为SMS(签署方为子客时该字段不生效) */
   NotifyType?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface FormField {
   ComponentId?: string | null;
   /** 控件的名字，跟ComponentId二选一，不能全为空 */
   ComponentName?: string | null;
-  /** 是否锁定模版控件值，锁定后无法修改（用于嵌入式发起合同） */
+  /** 是否锁定模版控件值，锁定后无法修改（用于嵌入式发起合同），true-锁定，false-不锁定 */
   LockComponentValue?: boolean | null;
 }
 
@@ -927,9 +927,9 @@ declare interface ChannelCreateConvertTaskApiResponse {
 declare interface ChannelCreateEmbedWebUrlRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** WEB嵌入资源类型。CREATE_SEAL: 创建印章CREATE_TEMPLATE：创建模版MODIFY_TEMPLATE：修改模版PREVIEW_TEMPLATE：预览模版PREVIEW_FLOW：预览合同文档PREVIEW_FLOW_DETAIL：预览合同详情PREVIEW_SEAL_LIST：预览印章列表PREVIEW_SEAL_DETAIL：预览印章详情EXTEND_SERVICE：扩展服务 */
+  /** WEB嵌入资源类型。CREATE_SEAL: 创建印章CREATE_TEMPLATE：创建模板MODIFY_TEMPLATE：修改模板PREVIEW_TEMPLATE：预览模板PREVIEW_FLOW：预览合同文档PREVIEW_FLOW_DETAIL：预览合同详情PREVIEW_SEAL_LIST：预览印章列表PREVIEW_SEAL_DETAIL：预览印章详情EXTEND_SERVICE：扩展服务 */
   EmbedType: string;
-  /** WEB嵌入的业务资源IDEmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时必填，取值为模版idPREVIEW_FLOW，PREVIEW_FLOW_DETAIL时必填，取值为合同idPREVIEW_SEAL_DETAIL，必填，取值为印章id */
+  /** WEB嵌入的业务资源IDEmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时必填，取值为模板idPREVIEW_FLOW，PREVIEW_FLOW_DETAIL时必填，取值为合同idPREVIEW_SEAL_DETAIL，必填，取值为印章id */
   BusinessId?: string;
   /** 是否隐藏控件，只有预览模板时生效 */
   HiddenComponents?: boolean;
@@ -1740,7 +1740,7 @@ declare interface OperateChannelTemplateResponse {
   AppId?: string | null;
   /** 第三方应用平台模板库模板唯一标识 */
   TemplateId?: string | null;
-  /** 描述模版可见性更改的结果，和参数中Available无关，全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示。 */
+  /** 描述模板可见性更改的结果，和参数中Available无关，全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示。 */
   OperateResult?: string | null;
   /** 模板可见性, 全部可见-"all", 部分可见-"part" */
   AuthTag?: string | null;

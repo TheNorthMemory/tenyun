@@ -2229,7 +2229,7 @@ declare interface DescribeCurveDataResponse {
   /** 时间数据, 标识监控数据Values中的点是哪个时间段上报的. */
   Time?: number[];
   /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到. */
-  NewValues?: number;
+  NewValues?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

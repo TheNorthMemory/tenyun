@@ -870,6 +870,24 @@ declare interface CreateAcRulesResponse {
   RequestId?: string;
 }
 
+declare interface CreateAddressTemplateRequest {
+  /** 模板名称 */
+  Name: string;
+  /** 模板描述 */
+  Detail: string;
+  /** Type为1，ip模板eg：1.1.1.1,2.2.2.2；Type为5，域名模板eg：www.qq.com,www.tencent.com */
+  IpString: string;
+  /** 1 ip模板5 域名模板 */
+  Type: number;
+}
+
+declare interface CreateAddressTemplateResponse {
+  /** 创建结果,0成功 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateChooseVpcsRequest {
   /** vpc列表 */
   VpcList: string[];
@@ -988,6 +1006,18 @@ declare interface DeleteAcRuleResponse {
   Status: number;
   /** 返回多余的信息 */
   Info: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAddressTemplateRequest {
+  /** 模板id */
+  Uuid: string;
+}
+
+declare interface DeleteAddressTemplateResponse {
+  /** 删除结果,0成功 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2151,6 +2181,8 @@ declare interface Cfw {
   AddNatAcRule(data: AddNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddNatAcRuleResponse>;
   /** 创建访问控制规则 {@link CreateAcRulesRequest} {@link CreateAcRulesResponse} */
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
+  /** 创建地址模板规则 {@link CreateAddressTemplateRequest} {@link CreateAddressTemplateResponse} */
+  CreateAddressTemplate(data: CreateAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAddressTemplateResponse>;
   /** 创建、选择vpc {@link CreateChooseVpcsRequest} {@link CreateChooseVpcsResponse} */
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
   /** 创建暴露数据库白名单规则 {@link CreateDatabaseWhiteListRulesRequest} {@link CreateDatabaseWhiteListRulesResponse} */
@@ -2163,6 +2195,8 @@ declare interface Cfw {
   CreateSecurityGroupRules(data: CreateSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupRulesResponse>;
   /** 删除规则 {@link DeleteAcRuleRequest} {@link DeleteAcRuleResponse} */
   DeleteAcRule(data: DeleteAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAcRuleResponse>;
+  /** 删除地址模板规则 {@link DeleteAddressTemplateRequest} {@link DeleteAddressTemplateResponse} */
+  DeleteAddressTemplate(data: DeleteAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAddressTemplateResponse>;
   /** 全部删除规则 {@link DeleteAllAccessControlRuleRequest} {@link DeleteAllAccessControlRuleResponse} */
   DeleteAllAccessControlRule(data?: DeleteAllAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllAccessControlRuleResponse>;
   /** 销毁防火墙实例 {@link DeleteNatFwInstanceRequest} {@link DeleteNatFwInstanceResponse} */

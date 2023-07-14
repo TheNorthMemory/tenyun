@@ -789,6 +789,8 @@ declare interface DescribeDocumentResponse {
   UpdateTime?: number;
   /** 课件页数 */
   Pages?: number;
+  /** 课件预览地址 */
+  Preview?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

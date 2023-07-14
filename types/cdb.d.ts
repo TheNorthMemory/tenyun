@@ -62,6 +62,46 @@ declare interface AuditFilter {
   Value: string;
 }
 
+/** 审计日志详细信息 */
+declare interface AuditLog {
+  /** 影响行数。 */
+  AffectRows?: number;
+  /** 错误码。 */
+  ErrCode?: number;
+  /** SQL 类型。 */
+  SqlType?: string;
+  /** 审计策略名称，逐步下线。 */
+  PolicyName?: string;
+  /** 数据库名称。 */
+  DBName?: string;
+  /** SQL 语句。 */
+  Sql?: string;
+  /** 客户端地址。 */
+  Host?: string;
+  /** 用户名。 */
+  User?: string;
+  /** 执行时间，微秒。 */
+  ExecTime?: number;
+  /** 时间。 */
+  Timestamp?: string;
+  /** 返回行数。 */
+  SentRows?: number;
+  /** 线程ID。 */
+  ThreadId?: number;
+  /** 扫描行数。 */
+  CheckRows?: number | null;
+  /** cpu执行时间，微秒。 */
+  CpuTime?: number | null;
+  /** IO等待时间，微秒。 */
+  IoWaitTime?: number | null;
+  /** 锁等待时间，微秒。 */
+  LockWaitTime?: number | null;
+  /** 开始时间，与timestamp构成一个精确到纳秒的时间。 */
+  NsTime?: number | null;
+  /** 事物持续时间，微秒。 */
+  TrxLivingTime?: number | null;
+}
+
 /** 审计日志分析结果 */
 declare interface AuditLogAggregationResult {
   /** 聚合维度 */
@@ -2464,6 +2504,34 @@ declare interface DescribeAuditLogFilesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAuditLogsRequest {
+  /** 实例 ID。 */
+  InstanceId: string;
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 分页参数，单次返回的数据条数。默认值为100，最大值为100。 */
+  Limit?: number;
+  /** 分页偏移量。 */
+  Offset?: number;
+  /** 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。 */
+  Order?: string;
+  /** 排序字段。支持值包括："timestamp" - 时间戳；"affectRows" - 影响行数；"execTime" - 执行时间。 */
+  OrderBy?: string;
+  /** 过滤条件。可按设置的过滤条件过滤日志。 */
+  LogFilter?: InstanceAuditLogFilters[];
+}
+
+declare interface DescribeAuditLogsResponse {
+  /** 符合条件的审计日志条数。 */
+  TotalCount?: number;
+  /** 审计日志详情。 */
+  Items?: AuditLog[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAuditPoliciesRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId?: string;
@@ -4697,6 +4765,8 @@ declare interface Cdb {
   DescribeAuditConfig(data: DescribeAuditConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditConfigResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
+  /** 查询数据库审计日志 {@link DescribeAuditLogsRequest} {@link DescribeAuditLogsResponse} */
+  DescribeAuditLogs(data: DescribeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogsResponse>;
   /** 查询审计策略 {@link DescribeAuditPoliciesRequest} {@link DescribeAuditPoliciesResponse} */
   DescribeAuditPolicies(data?: DescribeAuditPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditPoliciesResponse>;
   /** 查询审计规则 {@link DescribeAuditRulesRequest} {@link DescribeAuditRulesResponse} */

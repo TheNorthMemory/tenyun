@@ -121,7 +121,7 @@ declare interface ApiEnvironmentStrategy {
 }
 
 /** API绑定策略列表 */
-declare interface ApiEnvironmentStrategyStataus {
+declare interface ApiEnvironmentStrategyStatus {
   /** API绑定的限流策略数量。 */
   TotalCount: number | null;
   /** API绑定的限流策略列表。 */
@@ -744,6 +744,14 @@ declare interface HealthCheckConf {
   ErrorThresholdPercentage?: number | null;
 }
 
+/** 策略列表 */
+declare interface IPStrategiesStatus {
+  /** 策略数量。 */
+  TotalCount: number | null;
+  /** 策略列表。 */
+  StrategySet: IPStrategy[] | null;
+}
+
 /** ip策略 */
 declare interface IPStrategy {
   /** 策略唯一ID。 */
@@ -790,14 +798,6 @@ declare interface IPStrategyApiStatus {
   TotalCount: number | null;
   /** 环境绑定API详情。 */
   ApiIdStatusSet: IPStrategyApi[] | null;
-}
-
-/** 策略列表 */
-declare interface IPStrategysStatus {
-  /** 策略数量。 */
-  TotalCount: number | null;
-  /** 策略列表。 */
-  StrategySet: IPStrategy[] | null;
 }
 
 /** 独享实例预付费详情 */
@@ -1235,11 +1235,11 @@ declare interface ServiceReleaseHistory {
 /** 服务发布列表详情 */
 declare interface ServiceReleaseHistoryInfo {
   /** 版本号。 */
-  VersionName: string | null;
+  VersionName?: string | null;
   /** 版本描述。 */
-  VersionDesc: string | null;
+  VersionDesc?: string | null;
   /** 版本发布时间。 */
-  ReleaseTime: string | null;
+  ReleaseTime?: string | null;
 }
 
 /** 服务发布版本 */
@@ -2237,7 +2237,7 @@ declare interface DescribeApiEnvironmentStrategyRequest {
 
 declare interface DescribeApiEnvironmentStrategyResponse {
   /** api绑定策略详情 */
-  Result: ApiEnvironmentStrategyStataus | null;
+  Result?: ApiEnvironmentStrategyStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2431,7 +2431,7 @@ declare interface DescribeIPStrategysStatusRequest {
 
 declare interface DescribeIPStrategysStatusResponse {
   /** 符合条件的策略列表。 */
-  Result: IPStrategysStatus | null;
+  Result?: IPStrategiesStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3581,7 +3581,7 @@ declare interface Apigateway {
   DescribeIPStrategy(data: DescribeIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategyResponse>;
   /** 查询IP策略绑定的API列表 {@link DescribeIPStrategyApisStatusRequest} {@link DescribeIPStrategyApisStatusResponse} */
   DescribeIPStrategyApisStatus(data: DescribeIPStrategyApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategyApisStatusResponse>;
-  /** 查询服务IP策略列表 {@link DescribeIPStrategysStatusRequest} {@link DescribeIPStrategysStatusResponse} */
+  /** 查询服务IP策略列表（旧） {@link DescribeIPStrategysStatusRequest} {@link DescribeIPStrategysStatusResponse} */
   DescribeIPStrategysStatus(data: DescribeIPStrategysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategysStatusResponse>;
   /** 日志搜索服务 {@link DescribeLogSearchRequest} {@link DescribeLogSearchResponse} */
   DescribeLogSearch(data: DescribeLogSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSearchResponse>;

@@ -779,7 +779,7 @@ declare interface CancelKillTaskResponse {
 }
 
 declare interface CloseAuditServiceRequest {
-  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。 */
   Product: string;
   /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
   NodeRequestType: string;
@@ -1095,7 +1095,7 @@ declare interface DescribeAllUserGroupResponse {
 }
 
 declare interface DescribeAuditInstanceListRequest {
-  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。 */
   Product: string;
   /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
   NodeRequestType: string;
@@ -1823,15 +1823,15 @@ declare interface KillMySqlThreadsResponse {
 }
 
 declare interface ModifyAuditServiceRequest {
-  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。 */
   Product: string;
   /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
   NodeRequestType: string;
   /** 实例ID。 */
   InstanceId: string;
-  /** 日志保存总时长，只能是7,30,90,180,365,1095,1825 */
+  /** 日志保存总时长，只能是7,30,90,180,365,1095,1825。 */
   LogExpireDay: number;
-  /** 高频日志保存时长，只能是7,30,90,180,365,1095,1825 */
+  /** 高频日志保存时长，只能是7,30,90,180,365,1095,1825。 */
   HotLogExpireDay: number;
 }
 
@@ -1877,15 +1877,15 @@ declare interface ModifySqlFiltersResponse {
 }
 
 declare interface OpenAuditServiceRequest {
-  /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。 */
   Product: string;
   /** 与Product保持一致。如："dcdb" ,"mariadb"。 */
   NodeRequestType: string;
-  /** 实例ID */
+  /** 实例ID。 */
   InstanceId: string;
-  /** 日志保存总时长，只能是7,30,90,180,365,1095,1825 */
+  /** 日志保存总时长，只能是7,30,90,180,365,1095,1825。 */
   LogExpireDay: number;
-  /** 高频日志保存时长，只能是7,30,90,180,365,1095,1825 */
+  /** 高频日志保存时长，只能是7,30,90,180,365,1095,1825。 */
   HotLogExpireDay: number;
 }
 
