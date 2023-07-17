@@ -134,6 +134,7 @@ import Lighthouse, { Versions as LighthouseVersions } from "./lighthouse";
 import Live, { Versions as LiveVersions } from "./live";
 import Lowcode, { Versions as LowcodeVersions } from "./lowcode";
 import Lp, { Versions as LpVersions } from "./lp";
+import Mall, { Versions as MallVersions } from "./mall";
 import Mariadb, { Versions as MariadbVersions } from "./mariadb";
 import Market, { Versions as MarketVersions } from "./market";
 import Memcached, { Versions as MemcachedVersions } from "./memcached";
@@ -374,6 +375,7 @@ export declare type SERVICE_VERSIONS = {
   live: LiveVersions,
   lowcode: LowcodeVersions,
   lp: LpVersions,
+  mall: MallVersions,
   mariadb: MariadbVersions,
   market: MarketVersions,
   memcached: MemcachedVersions,
@@ -759,6 +761,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   lowcode: Lowcode,
   /** {@link Lp 登录保护} */
   lp: Lp,
+  /** {@link Mall 商场客留通} */
+  mall: Mall,
   /** {@link Mariadb 云数据库 MariaDB} */
   mariadb: Mariadb,
   /** {@link Market 云市场} */

@@ -168,6 +168,7 @@ export const SERVICE_VERSIONS = {
   live: ['2018-08-01'],
   lowcode: ['2021-01-08'],
   lp: ['2020-02-24'],
+  mall: ['2023-05-18'],
   mariadb: ['2017-03-12'],
   market: ['2019-10-10'],
   memcached: ['2019-03-18'],
