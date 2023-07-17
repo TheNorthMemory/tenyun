@@ -440,6 +440,12 @@ declare interface FlowCreateApprover {
   SignId?: string;
   /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。 */
   ApproverNeedSignReview?: boolean;
+  /** 签署人签署控件 */
+  SignComponents?: Component[];
+  /** 签署人填写控件 */
+  Components?: Component[];
+  /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
+  ComponentLimitType?: string[];
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -2183,7 +2189,7 @@ declare interface Ess {
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 批量撤销签署流程 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
-  /** 生成子客编辑企业信息二维码 {@link CreateChannelSubOrganizationModifyQrCodeRequest} {@link CreateChannelSubOrganizationModifyQrCodeResponse} */
+  /** @deprecated 生成子客编辑企业信息二维码 {@link CreateChannelSubOrganizationModifyQrCodeRequest} {@link CreateChannelSubOrganizationModifyQrCodeResponse} */
   CreateChannelSubOrganizationModifyQrCode(data: CreateChannelSubOrganizationModifyQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelSubOrganizationModifyQrCodeResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;

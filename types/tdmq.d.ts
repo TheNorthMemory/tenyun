@@ -54,114 +54,6 @@ declare interface AMQPClusterInfo {
   VpcEndPoint: string | null;
 }
 
-/** AMQP集群近期使用量 */
-declare interface AMQPClusterRecentStats {
-  /** Queue数量 */
-  QueueNum: number;
-  /** 消息生产数 */
-  ProducedMsgNum: number;
-  /** 消息堆积数 */
-  AccumulativeMsgNum: number;
-  /** Exchange数量 */
-  ExchangeNum: number;
-}
-
-/** AMQP Exchange信息 */
-declare interface AMQPExchange {
-  /** Exchange名称 */
-  Name: string;
-  /** Exchange的类别，为枚举类型:Direct, Fanout, Topic */
-  Type: string;
-  /** 主绑定数 */
-  SourceBindedNum: number;
-  /** 说明 */
-  Remark: string | null;
-  /** 被绑定数 */
-  DestBindedNum: number;
-  /** 创建时间，以毫秒为单位 */
-  CreateTime: number;
-  /** 创建时间，以毫秒为单位 */
-  UpdateTime: number;
-  /** 是否为内部Exchange(以amq.前缀开头的) */
-  Internal: boolean;
-  /** 备用Exchange名称 */
-  AlternateExchange: string | null;
-  /** 备用Exchange是否删除标识: true(已删除) */
-  AlternateExchangeDeleteMark: boolean | null;
-  /** 延迟Exchange的类别，为枚举类型:Direct, Fanout, Topic */
-  DelayType: string | null;
-}
-
-/** AMQP 队列信息 */
-declare interface AMQPQueueDetail {
-  /** Queue名称 */
-  Name: string;
-  /** 说明 */
-  Remark: string | null;
-  /** 被绑定数 */
-  DestBindedNum: number | null;
-  /** 创建时间，以毫秒为单位 */
-  CreateTime: number | null;
-  /** 创建时间，以毫秒为单位 */
-  UpdateTime: number | null;
-  /** 在线消费者数 */
-  OnlineConsumerNum: number | null;
-  /** 每秒钟的事务数 */
-  Tps: number | null;
-  /** 消息堆积数 */
-  AccumulativeMsgNum: number | null;
-  /** 是否自动删除 */
-  AutoDelete: boolean | null;
-  /** 死信交换机 */
-  DeadLetterExchange: string | null;
-  /** 死信交换机路由键 */
-  DeadLetterRoutingKey: string | null;
-  /** Queue对应的Topic名称 */
-  TopicName: string | null;
-}
-
-/** AMQP路由关系 */
-declare interface AMQPRouteRelation {
-  /** 路由关系ID */
-  RouteRelationId: string;
-  /** 源Exchange */
-  SourceExchange: string;
-  /** 目标类型:Queue|Exchange */
-  DestType: string;
-  /** 目标值 */
-  DestValue: string;
-  /** 绑定key */
-  RoutingKey: string;
-  /** 源路由类型:Direct|Topic|Fanout */
-  SourceExchangeType: string;
-  /** 创建时间，以毫秒为单位 */
-  CreateTime: number;
-  /** 修改时间，以毫秒为单位 */
-  UpdateTime: number;
-  /** 说明信息 */
-  Remark: string | null;
-}
-
-/** vhostd信息 */
-declare interface AMQPVHost {
-  /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
-  VHostId: string;
-  /** 未消费消息的保留时间，以毫秒单位，范围60秒到15天 */
-  MsgTtl: number;
-  /** 备注 */
-  Remark: string | null;
-  /** 创建时间，以毫秒为单位 */
-  CreateTime: number;
-  /** 更新时间，以毫秒为单位 */
-  UpdateTime: number;
-  /** 用户名 */
-  Username: string;
-  /** 密码 */
-  Password: string;
-  /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
-  Status: number | null;
-}
-
 /** 用户专享集群信息 */
 declare interface BindCluster {
   /** 物理集群的名称 */
@@ -1390,102 +1282,6 @@ declare interface ClearCmqSubscriptionFilterTagsResponse {
   RequestId?: string;
 }
 
-declare interface CreateAMQPClusterRequest {
-  /** 3-64个字符，只能包含字母、数字、“-”及“_” */
-  Name: string;
-  /** 集群描述，128个字符以内 */
-  Remark?: string;
-}
-
-declare interface CreateAMQPClusterResponse {
-  /** 集群ID */
-  ClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateAMQPExchangeRequest {
-  /** 交换机名称，3-64个字符，只能包含字母、数字、“-”及“_” */
-  Exchange: string;
-  /** 交换机所在的vhost，目前支持在单个vhost下创建主题 */
-  VHosts: string[];
-  /** 交换机类型，可选值为Direct, Fanout, Topic, x-delayed-message */
-  Type: string;
-  /** 集群ID */
-  ClusterId: string;
-  /** 交换机说明，最大128个字符 */
-  Remark?: string;
-  /** 备用交换机名称 */
-  AlternateExchange?: string;
-  /** 延迟交换机类型，可选值为Direct, Fanout, Topic, 不允许为x-delayed-message */
-  DelayedType?: string;
-}
-
-declare interface CreateAMQPExchangeResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateAMQPQueueRequest {
-  /** 队列名称，3-64个字符，只能包含字母、数字、“-”及“_” */
-  Queue: string;
-  /** 队列所在的vhost名称 */
-  VHostId: string;
-  /** 是否自动清除 */
-  AutoDelete: boolean;
-  /** 集群ID */
-  ClusterId: string;
-  /** 队列说明，最大128个字符 */
-  Remark?: string;
-  /** 死信exchange */
-  DeadLetterExchange?: string;
-  /** 路由键 */
-  DeadLetterRoutingKey?: string;
-}
-
-declare interface CreateAMQPQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateAMQPRouteRelationRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** 交换机所在的vhost */
-  VHostId: string;
-  /** 源Exchange名称 */
-  SourceExchange: string;
-  /** 目标类型:Queue|Exchange */
-  DestType: string;
-  /** 目标值 */
-  DestValue: string;
-  /** 交换机说明，最大128个字符 */
-  Remark?: string;
-  /** 绑定key,缺省值为default */
-  RoutingKey?: string;
-}
-
-declare interface CreateAMQPRouteRelationResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateAMQPVHostRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** vhost名称，3-64个字符，只能包含字母、数字、“-”及“_” */
-  VHostId: string;
-  /** 未消费消息的保留时间，以毫秒为单位，60秒-15天 */
-  MsgTtl: number;
-  /** 说明，最大128个字符 */
-  Remark?: string;
-}
-
-declare interface CreateAMQPVHostResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateClusterRequest {
   /** 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过16个字符。 */
   ClusterName: string;
@@ -1872,70 +1668,6 @@ declare interface CreateTopicResponse {
   RequestId?: string;
 }
 
-declare interface DeleteAMQPClusterRequest {
-  /** 待删除的集群Id。 */
-  ClusterId: string;
-}
-
-declare interface DeleteAMQPClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteAMQPExchangeRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost名称 */
-  VHostId: string;
-  /** 交换机名称 */
-  Exchange: string;
-}
-
-declare interface DeleteAMQPExchangeResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteAMQPQueueRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost名称 */
-  VHostId: string;
-  /** 队列名称 */
-  Queue: string;
-}
-
-declare interface DeleteAMQPQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteAMQPRouteRelationRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost名称 */
-  VHostId: string;
-  /** 路由关系ID */
-  RouteRelationId: string;
-}
-
-declare interface DeleteAMQPRouteRelationResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteAMQPVHostRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** vhost名称 */
-  VHostId: string;
-}
-
-declare interface DeleteAMQPVHostResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteClusterRequest {
   /** 集群Id，传入需要删除的集群Id。 */
   ClusterId: string;
@@ -2146,22 +1878,6 @@ declare interface DeleteTopicsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAMQPClusterRequest {
-  /** 集群ID */
-  ClusterId: string;
-}
-
-declare interface DescribeAMQPClusterResponse {
-  /** 集群信息 */
-  ClusterInfo: AMQPClusterInfo;
-  /** 集群配置 */
-  ClusterConfig: AMQPClusterConfig;
-  /** 集群最近使用量 */
-  ClusterStats: AMQPClusterRecentStats | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeAMQPClustersRequest {
   /** 偏移量 */
   Offset: number;
@@ -2182,126 +1898,6 @@ declare interface DescribeAMQPClustersRequest {
 declare interface DescribeAMQPClustersResponse {
   /** 集群信息 */
   ClusterList: AMQPClusterDetail[] | null;
-  /** 总条数 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAMQPCreateQuotaRequest {
-}
-
-declare interface DescribeAMQPCreateQuotaResponse {
-  /** 租户总共可使用集群数量 */
-  MaxClusterNum: number;
-  /** 租户已创建集群数量 */
-  UsedClusterNum: number;
-  /** Exchange容量 */
-  ExchangeCapacity: number;
-  /** Queue容量 */
-  QueueCapacity: number;
-  /** 单Vhost TPS */
-  MaxTpsPerVHost: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAMQPExchangesRequest {
-  /** 查询偏移量 */
-  Offset: number;
-  /** 查询限制数 */
-  Limit: number;
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost ID */
-  VHostId: string;
-  /** 按路由类型过滤查询结果，可选择Direct, Fanout, Topic */
-  FilterType?: string[];
-  /** 按exchange名称搜索，支持模糊查询 */
-  FilterName?: string;
-  /** 过滤查询内部或者外部exchange */
-  FilterInternal?: boolean;
-}
-
-declare interface DescribeAMQPExchangesResponse {
-  /** 总记录数 */
-  TotalCount: number;
-  /** 主题信息列表 */
-  Exchanges: AMQPExchange[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAMQPQueuesRequest {
-  /** 查询偏移量 */
-  Offset: number;
-  /** 查询限制数 */
-  Limit: number;
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost名称 */
-  VHostId: string;
-  /** 按队列名称搜索，支持模糊查询 */
-  NameKeyword?: string;
-  /** 查询结果排序规则，ASC为升序，DESC为降序 */
-  SortOrder?: string;
-  /** 对查询结果排序，此为排序字段，目前支持Accumulative（消息堆积量）、Tps */
-  SortedBy?: string;
-  /** 队列名称，指定此参数后将只返回该队列信息 */
-  FilterOneQueue?: string;
-}
-
-declare interface DescribeAMQPQueuesResponse {
-  /** 总记录数 */
-  TotalCount: number;
-  /** 队列信息列表 */
-  Queues: AMQPQueueDetail[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAMQPRouteRelationsRequest {
-  /** 查询偏移量 */
-  Offset: number;
-  /** 查询限制数 */
-  Limit: number;
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost名称 */
-  VHostId: string;
-  /** 按源exchange名称过滤查询结果，支持模糊查询 */
-  FilterSourceExchange?: string;
-  /** 按绑定的目标类型过滤查询结果，可选值:Exchange、Queue */
-  FilterDestType?: string;
-  /** 按目标名称过滤查询结果，支持模糊查询 */
-  FilterDestValue?: string;
-}
-
-declare interface DescribeAMQPRouteRelationsResponse {
-  /** 总记录数 */
-  TotalCount: number;
-  /** 路由关系列表 */
-  RouteRelations: AMQPRouteRelation[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAMQPVHostsRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** 偏移量 */
-  Offset: number;
-  /** 限制数目 */
-  Limit: number;
-  /** 按名称搜索 */
-  NameKeyword?: string;
-  /** VHostId 列表过滤 */
-  VHostIdList?: string[];
-}
-
-declare interface DescribeAMQPVHostsResponse {
-  /** Vhost 列表 */
-  VHosts: AMQPVHost[];
   /** 总条数 */
   TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3116,44 +2712,6 @@ declare interface ModifyAMQPClusterResponse {
   RequestId?: string;
 }
 
-declare interface ModifyAMQPExchangeRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost间名称 */
-  VHostId: string;
-  /** 交换机名称 */
-  Exchange: string;
-  /** 说明信息，最大128个字符 */
-  Remark?: string;
-}
-
-declare interface ModifyAMQPExchangeResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyAMQPQueueRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** Vhost名称 */
-  VHostId: string;
-  /** 队列名称 */
-  Queue: string;
-  /** 是否自动清除 */
-  AutoDelete: boolean;
-  /** 说明信息，最大128个字符 */
-  Remark?: string;
-  /** 死信exchange */
-  DeadLetterExchange?: string;
-  /** 路由键 */
-  DeadLetterRoutingKey?: string;
-}
-
-declare interface ModifyAMQPQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyClusterRequest {
   /** Pulsar 集群的ID，需要更新的集群Id。 */
   ClusterId: string;
@@ -3717,16 +3275,6 @@ declare interface Tdmq {
   ClearCmqQueue(data: ClearCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqQueueResponse>;
   /** 清空cmq订阅者消息标签 {@link ClearCmqSubscriptionFilterTagsRequest} {@link ClearCmqSubscriptionFilterTagsResponse} */
   ClearCmqSubscriptionFilterTags(data: ClearCmqSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqSubscriptionFilterTagsResponse>;
-  /** @deprecated 创建AMQP集群 {@link CreateAMQPClusterRequest} {@link CreateAMQPClusterResponse} */
-  CreateAMQPCluster(data: CreateAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPClusterResponse>;
-  /** @deprecated 创建AMQP Exchange {@link CreateAMQPExchangeRequest} {@link CreateAMQPExchangeResponse} */
-  CreateAMQPExchange(data: CreateAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPExchangeResponse>;
-  /** @deprecated 创建AMQP队列 {@link CreateAMQPQueueRequest} {@link CreateAMQPQueueResponse} */
-  CreateAMQPQueue(data: CreateAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPQueueResponse>;
-  /** @deprecated 创建AMQP路由关系 {@link CreateAMQPRouteRelationRequest} {@link CreateAMQPRouteRelationResponse} */
-  CreateAMQPRouteRelation(data: CreateAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPRouteRelationResponse>;
-  /** @deprecated 创建Amqp Vhost {@link CreateAMQPVHostRequest} {@link CreateAMQPVHostResponse} */
-  CreateAMQPVHost(data: CreateAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPVHostResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建cmq队列接口 {@link CreateCmqQueueRequest} {@link CreateCmqQueueResponse} */
@@ -3759,16 +3307,6 @@ declare interface Tdmq {
   CreateSubscription(data: CreateSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscriptionResponse>;
   /** 新增主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** @deprecated 删除AMQP集群 {@link DeleteAMQPClusterRequest} {@link DeleteAMQPClusterResponse} */
-  DeleteAMQPCluster(data: DeleteAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPClusterResponse>;
-  /** @deprecated 删除Amqp交换机 {@link DeleteAMQPExchangeRequest} {@link DeleteAMQPExchangeResponse} */
-  DeleteAMQPExchange(data: DeleteAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPExchangeResponse>;
-  /** @deprecated 删除Amqp队列 {@link DeleteAMQPQueueRequest} {@link DeleteAMQPQueueResponse} */
-  DeleteAMQPQueue(data: DeleteAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPQueueResponse>;
-  /** @deprecated 删除Amqp路由关系 {@link DeleteAMQPRouteRelationRequest} {@link DeleteAMQPRouteRelationResponse} */
-  DeleteAMQPRouteRelation(data: DeleteAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPRouteRelationResponse>;
-  /** @deprecated 删除Vhost {@link DeleteAMQPVHostRequest} {@link DeleteAMQPVHostResponse} */
-  DeleteAMQPVHost(data: DeleteAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPVHostResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** 删除cmq队列 {@link DeleteCmqQueueRequest} {@link DeleteCmqQueueResponse} */
@@ -3801,20 +3339,8 @@ declare interface Tdmq {
   DeleteSubscriptions(data: DeleteSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscriptionsResponse>;
   /** 删除主题 {@link DeleteTopicsRequest} {@link DeleteTopicsResponse} */
   DeleteTopics(data: DeleteTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicsResponse>;
-  /** @deprecated 获取单个Amqp集群信息 {@link DescribeAMQPClusterRequest} {@link DescribeAMQPClusterResponse} */
-  DescribeAMQPCluster(data: DescribeAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClusterResponse>;
   /** 获取amqp集群列表 {@link DescribeAMQPClustersRequest} {@link DescribeAMQPClustersResponse} */
   DescribeAMQPClusters(data: DescribeAMQPClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClustersResponse>;
-  /** @deprecated 获取用户配额 {@link DescribeAMQPCreateQuotaRequest} {@link DescribeAMQPCreateQuotaResponse} */
-  DescribeAMQPCreateQuota(data?: DescribeAMQPCreateQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPCreateQuotaResponse>;
-  /** @deprecated 获取AMQP Exchange列表 {@link DescribeAMQPExchangesRequest} {@link DescribeAMQPExchangesResponse} */
-  DescribeAMQPExchanges(data: DescribeAMQPExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPExchangesResponse>;
-  /** @deprecated 获取Amqp队列列表 {@link DescribeAMQPQueuesRequest} {@link DescribeAMQPQueuesResponse} */
-  DescribeAMQPQueues(data: DescribeAMQPQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPQueuesResponse>;
-  /** @deprecated 获取Amqp路由关系列表 {@link DescribeAMQPRouteRelationsRequest} {@link DescribeAMQPRouteRelationsResponse} */
-  DescribeAMQPRouteRelations(data: DescribeAMQPRouteRelationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPRouteRelationsResponse>;
-  /** @deprecated 获取Amqp Vhost列表 {@link DescribeAMQPVHostsRequest} {@link DescribeAMQPVHostsResponse} */
-  DescribeAMQPVHosts(data: DescribeAMQPVHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPVHostsResponse>;
   /** 获取某个租户的虚拟集群列表 {@link DescribeAllTenantsRequest} {@link DescribeAllTenantsResponse} */
   DescribeAllTenants(data: DescribeAllTenantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllTenantsResponse>;
   /** 获取专享集群列表 {@link DescribeBindClustersRequest} {@link DescribeBindClustersResponse} */
@@ -3891,10 +3417,6 @@ declare interface Tdmq {
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 更新Amqp集群信息 {@link ModifyAMQPClusterRequest} {@link ModifyAMQPClusterResponse} */
   ModifyAMQPCluster(data: ModifyAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPClusterResponse>;
-  /** @deprecated 更新Amqp交换机 {@link ModifyAMQPExchangeRequest} {@link ModifyAMQPExchangeResponse} */
-  ModifyAMQPExchange(data: ModifyAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPExchangeResponse>;
-  /** @deprecated 更新Amqp队列 {@link ModifyAMQPQueueRequest} {@link ModifyAMQPQueueResponse} */
-  ModifyAMQPQueue(data: ModifyAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPQueueResponse>;
   /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
   /** 修改cmq队列属性 {@link ModifyCmqQueueAttributeRequest} {@link ModifyCmqQueueAttributeResponse} */

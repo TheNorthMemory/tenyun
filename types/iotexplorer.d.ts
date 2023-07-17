@@ -1193,7 +1193,7 @@ declare interface DescribeDeviceRequest {
 
 declare interface DescribeDeviceResponse {
   /** 设备信息 */
-  Device: DeviceInfo;
+  Device?: DeviceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1253,21 +1253,25 @@ declare interface DescribeFirmwareTaskRequest {
 
 declare interface DescribeFirmwareTaskResponse {
   /** 固件任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 固件任务状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 固件任务创建时间，单位：秒 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 固件任务升级类型 */
-  Type: number | null;
+  Type?: number | null;
   /** 产品名称 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级） */
-  UpgradeMode: string | null;
+  UpgradeMode?: string | null;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回 */
-  OriginalVersion: string | null;
+  OriginalVersion?: string | null;
+  /** 创建账号ID */
+  CreateUserId?: number | null;
+  /** 创建账号ID昵称 */
+  CreatorNickName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1387,7 +1391,7 @@ declare interface DescribeProjectRequest {
 
 declare interface DescribeProjectResponse {
   /** 返回信息 */
-  Project: ProjectEntryEx;
+  Project?: ProjectEntryEx;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1565,9 +1569,9 @@ declare interface GetDeviceListRequest {
 
 declare interface GetDeviceListResponse {
   /** 返回的设备列表, 注意列表设备的 DevicePsk 为空, 要获取设备的 DevicePsk 请使用 DescribeDevice */
-  Devices: DeviceInfo[] | null;
+  Devices?: DeviceInfo[] | null;
   /** 产品下的设备总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1681,9 +1685,9 @@ declare interface GetProjectListRequest {
 
 declare interface GetProjectListResponse {
   /** 项目列表 */
-  Projects: ProjectEntryEx[] | null;
+  Projects?: ProjectEntryEx[] | null;
   /** 列表项个数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1769,9 +1773,9 @@ declare interface ListFirmwaresRequest {
 
 declare interface ListFirmwaresResponse {
   /** 固件总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 固件列表 */
-  Firmwares: FirmwareInfo[];
+  Firmwares?: FirmwareInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2079,9 +2083,9 @@ declare interface SearchStudioProductRequest {
 
 declare interface SearchStudioProductResponse {
   /** 产品列表 */
-  Products: ProductEntry[];
+  Products?: ProductEntry[];
   /** 产品数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

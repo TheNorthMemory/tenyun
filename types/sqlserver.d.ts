@@ -72,7 +72,7 @@ declare interface AccountPrivilegeModifyInfo {
   UserName: string;
   /** 账号权限变更信息 */
   DBPrivileges: DBPrivilegeModifyInfo[];
-  /** 是否为管理员账户,当值为true 等价于基础版AccountType=L0，高可用AccountType=L1，当值为false时，表示删除管理员权限，默认false */
+  /** 表示是否为管理员账户，当值为true，表示是 管理员。若实例 是 单节点，则管理员所在的 账号类型为超级权限账号 ，即AccountType=L0；若实例 是 双节点，则管理员所在的 账号类型为高级权限账号，即AccountType=L1；当值为false，表示 不是管理员，则账号类型为普通账号，即AccountType=L3 */
   IsAdmin?: boolean;
   /** 账号类型，IsAdmin字段的扩展字段。 L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限，默认L3 */
   AccountType?: string;
@@ -1129,7 +1129,7 @@ declare interface CreateBackupRequest {
   Strategy?: number;
   /** 需要备份库名的列表(多库备份才填写) */
   DBNames?: string[];
-  /** 实例ID，形如mssql-i1z41iwd */
+  /** 实例ID（必填），形如mssql-i1z41iwd */
   InstanceId?: string;
   /** 备份名称，若不填则自动生成“实例ID_备份开始时间戳” */
   BackupName?: string;
@@ -1137,7 +1137,7 @@ declare interface CreateBackupRequest {
 
 declare interface CreateBackupResponse {
   /** 异步任务ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1739,7 +1739,7 @@ declare interface DescribeBackupCommandResponse {
 declare interface DescribeBackupFilesRequest {
   /** 实例ID，形如mssql-njj2mtpl */
   InstanceId: string;
-  /** 聚合ID, 可通过接口DescribeBackups获取 */
+  /** 单库备份的聚合ID, 可通过接口DescribeBackups获取（不支持查询打包备份记录） */
   GroupId: string;
   /** 分页返回，每页返回的数目，取值为1-100，默认值为20 */
   Limit?: number;
@@ -1753,9 +1753,9 @@ declare interface DescribeBackupFilesRequest {
 
 declare interface DescribeBackupFilesResponse {
   /** 备份总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 备份文件列表详情 */
-  BackupFiles: BackupFile[];
+  BackupFiles?: BackupFile[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3345,7 +3345,7 @@ declare interface Sqlserver {
   DescribeBackupByFlowId(data: DescribeBackupByFlowIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupByFlowIdResponse>;
   /** 查询创建备份命令 {@link DescribeBackupCommandRequest} {@link DescribeBackupCommandResponse} */
   DescribeBackupCommand(data: DescribeBackupCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupCommandResponse>;
-  /** 查询备份文件列表 {@link DescribeBackupFilesRequest} {@link DescribeBackupFilesResponse} */
+  /** 查询单库备份文件明细 {@link DescribeBackupFilesRequest} {@link DescribeBackupFilesResponse} */
   DescribeBackupFiles(data: DescribeBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupFilesResponse>;
   /** 查询备份导入任务 {@link DescribeBackupMigrationRequest} {@link DescribeBackupMigrationResponse} */
   DescribeBackupMigration(data: DescribeBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupMigrationResponse>;

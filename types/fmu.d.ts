@@ -182,6 +182,8 @@ declare interface QueryBeautifyVideoJobResponse {
   JobStatus?: string;
   /** 视频美颜输出的结果信息 */
   BeautifyVideoOutput?: BeautifyVideoOutput | null;
+  /** 当前任务状态码：1：排队中、3: 处理中、5: 处理失败、7:处理完成 */
+  JobStatusCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -255,9 +257,9 @@ declare interface Fmu {
   (): Versions;
   /** 人脸美颜 {@link BeautifyPicRequest} {@link BeautifyPicResponse} */
   BeautifyPic(data?: BeautifyPicRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyPicResponse>;
-  /** 视频美颜 {@link BeautifyVideoRequest} {@link BeautifyVideoResponse} */
+  /** 视频美颜(此接口目前已下线) {@link BeautifyVideoRequest} {@link BeautifyVideoResponse} */
   BeautifyVideo(data: BeautifyVideoRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyVideoResponse>;
-  /** 撤销视频美颜任务 {@link CancelBeautifyVideoJobRequest} {@link CancelBeautifyVideoJobResponse} */
+  /** 撤销视频美颜任务(此接口目前已下线) {@link CancelBeautifyVideoJobRequest} {@link CancelBeautifyVideoJobResponse} */
   CancelBeautifyVideoJob(data: CancelBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBeautifyVideoJobResponse>;
   /** 上传唇色素材 {@link CreateModelRequest} {@link CreateModelResponse} */
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
@@ -265,7 +267,7 @@ declare interface Fmu {
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
   /** 查询唇色素材 {@link GetModelListRequest} {@link GetModelListResponse} */
   GetModelList(data?: GetModelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelListResponse>;
-  /** 查询视频美颜任务 {@link QueryBeautifyVideoJobRequest} {@link QueryBeautifyVideoJobResponse} */
+  /** 查询视频美颜任务(此接口目前已下线) {@link QueryBeautifyVideoJobRequest} {@link QueryBeautifyVideoJobResponse} */
   QueryBeautifyVideoJob(data: QueryBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBeautifyVideoJobResponse>;
   /** 图片滤镜 {@link StyleImageRequest} {@link StyleImageResponse} */
   StyleImage(data: StyleImageRequest, config?: AxiosRequestConfig): AxiosPromise<StyleImageResponse>;

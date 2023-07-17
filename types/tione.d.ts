@@ -541,9 +541,9 @@ declare interface GooseFS {
 /** gpu 详情 */
 declare interface GpuDetail {
   /** GPU 显卡类型；枚举值: V100 A100 T4 */
-  Name: string | null;
+  Name?: string | null;
   /** GPU 显卡数；单位为1/100卡，比如100代表1卡 */
-  Value: number | null;
+  Value?: number | null;
 }
 
 /** 资源信息 */
@@ -594,6 +594,8 @@ declare interface HyperParameter {
   MinBlockSizeTf?: string | null;
   /** Stable Diffusion 模型优化参数 */
   PipelineArgs?: string | null;
+  /** Stable Diffusion 模型优化参数，控制Lora模型的影响效果 */
+  LoraScale?: string | null;
 }
 
 /** 镜像描述信息 */
@@ -792,6 +794,8 @@ declare interface ModelInfo {
   AlgorithmFramework?: string | null;
   /** 默认为 NORMAL, 已加速模型: ACCELERATE, 自动学习模型 AUTO_ML */
   ModelType?: string | null;
+  /** 模型格式 */
+  ModelFormat?: string | null;
 }
 
 /** 模型输入信息 */
@@ -980,6 +984,8 @@ declare interface Service {
   ServiceGroupName: string;
   /** 服务描述 */
   ServiceDescription: string | null;
+  /** 服务的详细信息 */
+  ServiceInfo: ServiceInfo | null;
   /** 集群id */
   ClusterId: string | null;
   /** 地域 */
@@ -990,6 +996,12 @@ declare interface Service {
   ChargeType: string | null;
   /** 包年包月服务的资源组id，按量计费的服务为空 */
   ResourceGroupId: string | null;
+  /** 包年包月服务对应的资源组名字 */
+  ResourceGroupName: string | null;
+  /** 服务的标签 */
+  Tags: Tag[] | null;
+  /** 服务所在的 ingress 的 name */
+  IngressName: string | null;
   /** 创建者 */
   CreatedBy: string | null;
   /** 创建时间 */
@@ -1002,34 +1014,26 @@ declare interface Service {
   SubUin: string | null;
   /** app_id */
   AppId: number | null;
+  /** 服务的业务状态 */
+  BusinessStatus: string | null;
+  /** 已废弃 */
+  ServiceLimit: ServiceLimit | null;
+  /** 已废弃 */
+  ScheduledAction: ScheduledAction | null;
+  /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
+  CreateFailedReason: string | null;
+  /** 服务状态CREATING 创建中CREATE_FAILED 创建失败Normal	正常运行中Stopped 已停止Stopping 停止中Abnormal 异常Pending 启动中Waiting 就绪中 */
+  Status: string | null;
+  /** 费用信息 */
+  BillingInfo: string | null;
+  /** 模型权重 */
+  Weight: number | null;
+  /** 服务的创建来源AUTO_ML: 来自自动学习的一键发布DEFAULT: 其他来源 */
+  CreateSource: string | null;
   /** 版本号 */
   Version: string | null;
   /** 服务组下服务的最高版本号 */
   LatestVersion: string | null;
-  /** 服务的详细信息 */
-  ServiceInfo: ServiceInfo | null;
-  /** 服务的业务状态 */
-  BusinessStatus: string | null;
-  /** 服务的创建来源AUTO_ML: 来自自动学习的一键发布DEFAULT: 其他来源 */
-  CreateSource: string | null;
-  /** 费用信息 */
-  BillingInfo: string | null;
-  /** 服务状态CREATING 创建中CREATE_FAILED 创建失败Normal	正常运行中Stopped 已停止Stopping 停止中Abnormal 异常Pending 启动中Waiting 就绪中 */
-  Status: string | null;
-  /** 模型权重 */
-  Weight: number | null;
-  /** 服务所在的 ingress 的 name */
-  IngressName: string | null;
-  /** 服务限速限流相关配置 */
-  ServiceLimit: ServiceLimit | null;
-  /** 定时停止的配置 */
-  ScheduledAction: ScheduledAction | null;
-  /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
-  CreateFailedReason: string | null;
-  /** 包年包月服务对应的资源组名字 */
-  ResourceGroupName: string | null;
-  /** 服务的标签 */
-  Tags: Tag[] | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -1138,20 +1142,22 @@ declare interface ServiceInfo {
   OldHybridBillingPrepaidReplicas: number | null;
   /** 是否开启模型的热更新。默认不开启 */
   ModelHotUpdateEnable: boolean | null;
+  /** 实例数量调节方式,默认为手动支持：自动 - "AUTO", 手动 - "MANUAL" */
+  ScaleMode?: string | null;
+  /** 定时伸缩任务 */
+  CronScaleJobs?: CronScaleJob[] | null;
+  /** 定时伸缩策略 */
+  ScaleStrategy?: string | null;
+  /** 定时停止的配置 */
+  ScheduledAction?: string | null;
   /** Pod列表信息 */
   Pods?: Pod | null;
   /** Pod列表信息 */
   PodInfos?: Pod[] | null;
-  /** 定时伸缩策略 */
-  ScaleStrategy?: string | null;
-  /** 定时伸缩任务 */
-  CronScaleJobs?: CronScaleJob[] | null;
-  /** 实例数量调节方式,默认为手动支持：自动 - "AUTO", 手动 - "MANUAL" */
-  ScaleMode?: string | null;
   /** 服务限速限流相关配置 */
   ServiceLimit?: ServiceLimit | null;
-  /** 定时停止的配置 */
-  ScheduledAction?: string | null;
+  /** 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。 */
+  ModelTurboEnable?: boolean | null;
 }
 
 /** 服务的限流限速等配置 */
@@ -1568,6 +1574,8 @@ declare interface WorkloadStatus {
   StatefulSetCondition?: StatefulSetCondition[];
   /** 工作负载历史的状况信息 */
   Conditions?: StatefulSetCondition[];
+  /** 状态异常时，展示原因 */
+  Reason?: string | null;
 }
 
 declare interface CreateBatchModelAccTasksRequest {
@@ -1729,6 +1737,10 @@ declare interface CreateModelServiceRequest {
   ServiceLimit?: ServiceLimit;
   /** 回调地址，用于回调创建服务状态信息，回调格式&内容详情见：[TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292) */
   CallbackUrl?: string;
+  /** 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。 */
+  ModelTurboEnable?: boolean;
+  /** 服务分类 */
+  ServiceCategory?: string;
 }
 
 declare interface CreateModelServiceResponse {
@@ -2350,6 +2362,8 @@ declare interface DescribeModelServiceHotUpdatedRequest {
 }
 
 declare interface DescribeModelServiceHotUpdatedResponse {
+  /** 模型加速标志位.Allowed 允许模型加速. Forbidden 禁止模型加速 */
+  ModelTurboFlag?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2575,11 +2589,13 @@ declare interface ModifyModelServiceRequest {
   ServiceLimit?: ServiceLimit;
   /** 挂载配置，目前只支持CFS */
   VolumeMount?: VolumeMount;
+  /** 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。默认不开启 */
+  ModelTurboEnable?: boolean;
 }
 
 declare interface ModifyModelServiceResponse {
   /** 生成的模型服务 */
-  Service: Service | null;
+  Service?: Service | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

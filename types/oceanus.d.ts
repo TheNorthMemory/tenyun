@@ -250,6 +250,16 @@ declare interface JobConfig {
   LogLevel: string | null;
 }
 
+/** 搜索启动日志时返回的作业实例 */
+declare interface JobInstanceForSubmissionLog {
+  /** 实例的Id, 按照启动的时间顺序，从1开始 */
+  RunningOrderId: number;
+  /** 作业实例的启动时间 */
+  JobInstanceStartTime: string;
+  /** 作业实例启动的时间（毫秒） */
+  StartingMillis: number;
+}
+
 /** Job详细信息 */
 declare interface JobV1 {
   /** 作业ID */
@@ -316,6 +326,20 @@ declare interface JobV1 {
   WorkSpaceName: string | null;
   /** 作业标签 */
   Tags?: Tag[] | null;
+}
+
+/** 日志查询的每行日志信息 */
+declare interface LogContent {
+  /** 日志内容 */
+  Log: string | null;
+  /** 毫秒级时间戳 */
+  Time: number | null;
+  /** 日志组Id */
+  PkgId: string | null;
+  /** 日志Id，在日志组范围里唯一 */
+  PkgLogId: number;
+  /** 日志所属的容器名 */
+  ContainerName: string | null;
 }
 
 /** 系统配置属性 */
@@ -948,6 +972,42 @@ declare interface DescribeJobSavepointResponse {
   RequestId?: string;
 }
 
+declare interface DescribeJobSubmissionLogRequest {
+  /** 作业ID，例如：cql-6v1jkxrn */
+  JobId: string;
+  /** 起始时间，unix时间戳，毫秒级，例如：1611754219108 */
+  StartTime: number;
+  /** 结束时间，unix时间戳，毫秒级，例如：1611754219108 */
+  EndTime: number;
+  /** 作业运行的实例ID, 例如：1,2,3。默认为0，表示未选中任何实例，搜索该时间段内最近的一个实例的日志 */
+  RunningOrderId?: number;
+  /** 日志搜索的关键词，默认为空 */
+  Keyword?: string;
+  /** 日志搜索的游标，可透传上次返回的值，默认为空 */
+  Cursor?: string;
+  /** 时间戳排序规则，asc - 升序，desc - 降序。默认为升序 */
+  OrderType?: string;
+  /** 搜索的日志条数上限值，最大为100 */
+  Limit?: number;
+}
+
+declare interface DescribeJobSubmissionLogResponse {
+  /** 日志搜索的游标，需要搜索更多时透传这个值 */
+  Cursor: string;
+  /** 是否返回了所有的日志记录 */
+  ListOver: boolean;
+  /** 作业启动的requestId */
+  JobRequestId: string | null;
+  /** 该时间段内符合关键字的所有的作业实例列表 */
+  JobInstanceList: JobInstanceForSubmissionLog[] | null;
+  /** 废弃，请使用LogContentList */
+  LogList: string[] | null;
+  /** 日志列表 */
+  LogContentList: LogContent[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobsRequest {
   /** 按照一个或者多个作业ID查询。作业ID形如：cql-11112222，每次请求的作业上限为100。参数不支持同时指定JobIds和Filters。 */
   JobIds?: string[];
@@ -1213,6 +1273,8 @@ declare interface Oceanus {
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
   /** 查找Savepoint列表 {@link DescribeJobSavepointRequest} {@link DescribeJobSavepointResponse} */
   DescribeJobSavepoint(data: DescribeJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSavepointResponse>;
+  /** 查询作业实例启动日志 {@link DescribeJobSubmissionLogRequest} {@link DescribeJobSubmissionLogResponse} */
+  DescribeJobSubmissionLog(data: DescribeJobSubmissionLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSubmissionLogResponse>;
   /** 查询作业 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */
   DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
   /** 描述资源配置接口 {@link DescribeResourceConfigsRequest} {@link DescribeResourceConfigsResponse} */

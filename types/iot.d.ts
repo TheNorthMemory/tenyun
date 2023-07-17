@@ -1193,7 +1193,7 @@ declare interface Iot {
   PublishMsg(data: PublishMsgRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMsgResponse>;
   /** 重置设备 {@link ResetDeviceRequest} {@link ResetDeviceResponse} */
   ResetDevice(data: ResetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceResponse>;
-  /** 取消子设备产品与网关设备产品的关联 {@link UnassociateSubDeviceFromGatewayProductRequest} {@link UnassociateSubDeviceFromGatewayProductResponse} */
+  /** @deprecated 取消子设备产品与网关设备产品的关联 {@link UnassociateSubDeviceFromGatewayProductRequest} {@link UnassociateSubDeviceFromGatewayProductResponse} */
   UnassociateSubDeviceFromGatewayProduct(data: UnassociateSubDeviceFromGatewayProductRequest, config?: AxiosRequestConfig): AxiosPromise<UnassociateSubDeviceFromGatewayProductResponse>;
   /** 更新产品信息 {@link UpdateProductRequest} {@link UpdateProductResponse} */
   UpdateProduct(data: UpdateProductRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProductResponse>;

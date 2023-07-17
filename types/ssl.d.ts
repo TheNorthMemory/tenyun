@@ -1028,6 +1028,8 @@ declare interface DescribeCertificateDetailResponse {
   EncryptCertFingerprint?: string | null;
   /** 证书算法 */
   EncryptAlgorithm?: string | null;
+  /** DV证书吊销验证值 */
+  DvRevokeAuthDetail?: DvAuths[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1130,6 +1132,8 @@ declare interface DescribeCertificateResponse {
   CACommonNames?: string[] | null;
   /** CA证书所有的到期时间 */
   CAEndTimes?: string[] | null;
+  /** DV证书吊销验证值 */
+  DvRevokeAuthDetail?: DvAuths[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

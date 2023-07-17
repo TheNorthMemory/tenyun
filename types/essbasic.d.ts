@@ -318,7 +318,7 @@ declare interface FlowApproverInfo {
   CallbackUrl?: string;
   /** 使用PDF文件直接发起合同时，签署人指定的签署控件 */
   SignComponents?: Component[];
-  /** 个人签署方指定签署控件类型，目前支持：OCR_ESIGN -AI智慧手写签名HANDWRITE -手写签名 */
+  /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
   ComponentLimitType?: string[];
   /** 合同的强制预览时间：3~300s，未指定则按合同页数计算 */
   PreReadTime?: number;
@@ -1116,6 +1116,20 @@ declare interface ChannelCreateMultiFlowSignQRCodeResponse {
   QrCode?: SignQrCode;
   /** 签署链接对象 */
   SignUrls?: SignUrl;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreateOrganizationModifyQrCodeRequest {
+  /** 应用相关信息。 此接口Agent.AppId 必填。 */
+  Agent: Agent;
+}
+
+declare interface ChannelCreateOrganizationModifyQrCodeResponse {
+  /** 二维码下载链接 */
+  QrCodeUrl?: string;
+  /** 二维码失效时间 UNIX 时间戳 精确到秒 */
+  ExpiredTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3393,6 +3407,8 @@ declare interface Essbasic {
   ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
   /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
+  /** 生成渠道子客编辑企业信息二维码 {@link ChannelCreateOrganizationModifyQrCodeRequest} {@link ChannelCreateOrganizationModifyQrCodeResponse} */
+  ChannelCreateOrganizationModifyQrCode(data: ChannelCreateOrganizationModifyQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateOrganizationModifyQrCodeResponse>;
   /** 获取模板发起合同web页面 {@link ChannelCreatePrepareFlowRequest} {@link ChannelCreatePrepareFlowResponse} */
   ChannelCreatePrepareFlow(data: ChannelCreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePrepareFlowResponse>;
   /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */

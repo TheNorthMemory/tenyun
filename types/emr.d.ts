@@ -619,11 +619,11 @@ declare interface MetaDbInfo {
 /** 多云盘参数 */
 declare interface MultiDisk {
   /** 云盘类型CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_HSSD：表示增强型SSD云硬盘。 */
-  DiskType?: string;
+  DiskType?: string | null;
   /** 云盘大小 */
-  Volume?: number;
+  Volume?: number | null;
   /** 该类型云盘个数 */
-  Count?: number;
+  Count?: number | null;
 }
 
 /** 多云盘参数 */
@@ -1741,9 +1741,9 @@ declare interface DescribeInstancesListRequest {
 
 declare interface DescribeInstancesListResponse {
   /** 符合条件的实例总数。 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** 集群实例列表 */
-  InstancesList: EmrListInstance[];
+  InstancesList?: EmrListInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1757,7 +1757,7 @@ declare interface DescribeInstancesRequest {
   Offset?: number;
   /** 每页返回数量，默认值为10，最大值为100。 */
   Limit?: number;
-  /** 建议必填-1，表示拉取所有项目下的集群。不填默认值为0，表示拉取默认项目下的集群。实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的 projectId 字段来获取。 */
+  /** 建议必填-1，表示拉取所有项目下的集群。不填默认值为0，表示拉取默认项目下的集群。实例所属项目ID。该参数可以通过调用 [DescribeProjects](https://cloud.tencent.com/document/product/651/78725) 的返回值中的 projectId 字段来获取。 */
   ProjectId?: number;
   /** 排序字段。取值范围：clusterId：表示按照实例ID排序。addTime：表示按照实例创建时间排序。status：表示按照实例的状态码排序。 */
   OrderField?: string;
@@ -1767,11 +1767,11 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 符合条件的实例总数。 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** EMR实例详细信息列表。 */
-  ClusterList: ClusterInstancesInfo[] | null;
+  ClusterList?: ClusterInstancesInfo[] | null;
   /** 实例关联的标签键列表。 */
-  TagKeys: string[] | null;
+  TagKeys?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1869,13 +1869,13 @@ declare interface InquirePriceRenewEmrRequest {
 
 declare interface InquirePriceRenewEmrResponse {
   /** 原价，单位为元。 */
-  OriginalCost: number | null;
+  OriginalCost?: number | null;
   /** 折扣价，单位为元。 */
-  DiscountCost: number | null;
+  DiscountCost?: number | null;
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
-  TimeUnit: string | null;
+  TimeUnit?: string | null;
   /** 实例续费的时长。 */
-  TimeSpan: number | null;
+  TimeSpan?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1919,15 +1919,15 @@ declare interface InquiryPriceCreateInstanceRequest {
 
 declare interface InquiryPriceCreateInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost: number | null;
+  OriginalCost?: number | null;
   /** 折扣价，单位为元。 */
-  DiscountCost: number | null;
+  DiscountCost?: number | null;
   /** 购买实例的时间单位。取值范围：s：表示秒。m：表示月份。 */
-  TimeUnit: string | null;
+  TimeUnit?: string | null;
   /** 购买实例的时长。 */
-  TimeSpan: number | null;
+  TimeSpan?: number | null;
   /** 价格清单 */
-  PriceList: ZoneDetailPriceResult[] | null;
+  PriceList?: ZoneDetailPriceResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1935,7 +1935,7 @@ declare interface InquiryPriceCreateInstanceResponse {
 declare interface InquiryPriceRenewInstanceRequest {
   /** 实例续费的时长。需要结合TimeUnit一起使用。1表示续费一个月 */
   TimeSpan: number;
-  /** 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。 */
+  /** 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。 */
   ResourceIds: string[];
   /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。 */
   Placement: Placement;
@@ -1987,15 +1987,15 @@ declare interface InquiryPriceScaleOutInstanceRequest {
 
 declare interface InquiryPriceScaleOutInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost: string | null;
+  OriginalCost?: string | null;
   /** 折扣价，单位为元。 */
-  DiscountCost: string | null;
+  DiscountCost?: string | null;
   /** 扩容的时间单位。取值范围：s：表示秒。m：表示月份。 */
-  Unit: string | null;
+  Unit?: string | null;
   /** 询价的节点规格。 */
-  PriceSpec: PriceResource | null;
+  PriceSpec?: PriceResource | null;
   /** 对应入参MultipleResources中多个规格的询价结果，其它出参返回的是第一个规格的询价结果 */
-  MultipleEmrPrice: EmrPrice[] | null;
+  MultipleEmrPrice?: EmrPrice[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2303,7 +2303,7 @@ declare interface TerminateInstanceResponse {
 declare interface TerminateTasksRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。 */
+  /** 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。 */
   ResourceIds: string[];
 }
 

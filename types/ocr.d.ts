@@ -347,15 +347,15 @@ declare interface InvoiceGeneralInfo {
 /** 混贴票据单张发票识别信息 */
 declare interface InvoiceItem {
   /** 识别结果。OK：表示识别成功；FailedOperation.UnsupportedInvoice：表示不支持识别；FailedOperation.UnKnowError：表示识别失败；其它错误码见各个票据接口的定义。 */
-  Code: string;
+  Code?: string;
   /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票 */
-  Type: number;
-  /** 旋转后的图片四点坐标。 */
-  Polygon: Polygon;
+  Type?: number;
+  /** 该发票在原图片中的四点坐标。 */
+  Polygon?: Polygon;
   /** 识别出的图片在混贴票据图片中的旋转角度。 */
-  Angle: number;
+  Angle?: number;
   /** 识别到的内容。 */
-  SingleInvoiceInfos: SingleInvoiceItem;
+  SingleInvoiceInfos?: SingleInvoiceItem;
   /** 发票处于识别图片或PDF文件中的页教，默认从1开始。 */
   Page?: number;
   /** 发票详细类型，详见上方 SubType 返回值说明 */

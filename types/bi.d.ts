@@ -49,11 +49,11 @@ declare interface ApplyEmbedIntervalRequest {
 
 declare interface ApplyEmbedIntervalResponse {
   /** 额外参数 */
-  Extra: string | null;
+  Extra?: string | null;
   /** 结果数据 */
-  Data: ApplyEmbedTokenInfo | null;
+  Data?: ApplyEmbedTokenInfo | null;
   /** 结果描述 */
-  Msg: string | null;
+  Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

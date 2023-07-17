@@ -396,6 +396,8 @@ declare interface Instance {
   HpcClusterId: string | null;
   /** 高性能计算集群`IP`列表。 */
   RdmaIpAddresses: string[] | null;
+  /** 实例所在的专用集群`ID`。 */
+  DedicatedClusterId: string | null;
   /** 实例隔离类型。取值范围：ARREAR：表示欠费隔离EXPIRE：表示到期隔离MANMADE：表示主动退还隔离NOTISOLATED：表示未隔离 */
   IsolatedSource: string | null;
   /** GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。 */
