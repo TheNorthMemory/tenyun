@@ -995,71 +995,71 @@ declare interface Task {
 /** 任务实例。 */
 declare interface TaskResponseInfo {
   /** 任务所属Database的名称。 */
-  DatabaseName: string;
+  DatabaseName?: string;
   /** 任务数据量。 */
-  DataAmount: number;
+  DataAmount?: number;
   /** 任务Id。 */
-  Id: string;
+  Id?: string;
   /** 计算耗时，单位： ms */
-  UsedTime: number;
+  UsedTime?: number;
   /** 任务输出路径。 */
-  OutputPath: string;
+  OutputPath?: string;
   /** 任务创建时间。 */
-  CreateTime: string;
-  /** 任务状态：0 初始化， 1 执行中， 2 执行成功，-1 执行失败，-3 已取消。 */
-  State: number;
+  CreateTime?: string;
+  /** 任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。 */
+  State?: number;
   /** 任务SQL类型，DDL|DML等 */
-  SQLType: string;
+  SQLType?: string;
   /** 任务SQL语句 */
-  SQL: string;
+  SQL?: string;
   /** 结果是否过期。 */
-  ResultExpired: boolean;
+  ResultExpired?: boolean;
   /** 数据影响统计信息。 */
-  RowAffectInfo: string;
+  RowAffectInfo?: string;
   /** 任务结果数据表。 */
-  DataSet: string | null;
+  DataSet?: string | null;
   /** 失败信息, 例如：errorMessage。该字段已废弃。 */
-  Error: string;
+  Error?: string;
   /** 任务执行进度num/100(%) */
-  Percentage: number;
+  Percentage?: number;
   /** 任务执行输出信息。 */
-  OutputMessage: string;
+  OutputMessage?: string;
   /** 执行SQL的引擎类型 */
-  TaskType: string;
+  TaskType?: string;
   /** 任务进度明细 */
-  ProgressDetail: string | null;
+  ProgressDetail?: string | null;
   /** 任务结束时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 计算资源id */
-  DataEngineId: string | null;
+  DataEngineId?: string | null;
   /** 执行sql的子uin */
-  OperateUin: string | null;
+  OperateUin?: string | null;
   /** 计算资源名字 */
-  DataEngineName: string | null;
+  DataEngineName?: string | null;
   /** 导入类型是本地导入还是cos */
-  InputType: string | null;
+  InputType?: string | null;
   /** 导入配置 */
-  InputConf: string | null;
+  InputConf?: string | null;
   /** 数据条数 */
-  DataNumber: number | null;
+  DataNumber?: number | null;
   /** 查询数据能不能下载 */
-  CanDownload: boolean | null;
+  CanDownload?: boolean | null;
   /** 用户别名 */
-  UserAlias: string | null;
+  UserAlias?: string | null;
   /** spark应用作业名 */
-  SparkJobName: string | null;
+  SparkJobName?: string | null;
   /** spark应用作业Id */
-  SparkJobId: string | null;
+  SparkJobId?: string | null;
   /** spark应用入口jar文件 */
-  SparkJobFile: string | null;
+  SparkJobFile?: string | null;
   /** spark ui url */
-  UiUrl: string | null;
+  UiUrl?: string | null;
   /** 任务耗时，单位： ms */
-  TotalTime: number | null;
+  TotalTime?: number | null;
   /** spark app job执行task的程序入口参数 */
-  CmdArgs: string | null;
+  CmdArgs?: string | null;
   /** 集群镜像大版本名称 */
-  ImageVersion: string | null;
+  ImageVersion?: string | null;
   /** driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
   DriverSize?: string | null;
   /** executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */

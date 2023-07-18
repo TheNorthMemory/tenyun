@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9607+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9611+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -167,7 +167,7 @@ cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(15) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(94) |
-cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(275) |
+cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(274) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(128) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(51) |
@@ -200,7 +200,7 @@ fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(103) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(28) |
-goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(2) |
+goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(5) |
 gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 2020-08-20(18) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(8) |
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74) |
@@ -230,7 +230,7 @@ lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(149) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |
-mall | [商场客留通](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
+mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
 mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(72) |
 market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-10(2) |
 memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1) |
@@ -326,7 +326,7 @@ vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 202
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(160) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(306) |
-vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(4) |
+vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(51) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(200) |

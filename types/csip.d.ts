@@ -402,6 +402,8 @@ declare interface DomainAssetVO {
   CCAttack?: number | null;
   /** web攻击 */
   WebAttack?: number | null;
+  /** 风险服务暴露数量 */
+  ServiceRisk?: number | null;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */

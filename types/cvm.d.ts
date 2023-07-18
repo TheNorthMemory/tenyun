@@ -528,7 +528,7 @@ declare interface InstanceTypeQuotaItem {
 
 /** 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等 */
 declare interface InternetAccessible {
-  /** 网络计费类型。取值范围：BANDWIDTH_PREPAID：预付费按带宽结算TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PACKAGE：带宽包用户默认取值：非带宽包用户默认与子机付费类型保持一致。 */
+  /** 网络计费类型。取值范围：BANDWIDTH_PREPAID：预付费按带宽结算TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PACKAGE：带宽包用户默认取值：非带宽包用户默认与子机付费类型保持一致，比如子机付费类型为预付费，网络计费类型默认为预付费；子机付费类型为后付费，网络计费类型默认为后付费。 */
   InternetChargeType?: string;
   /** 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](https://cloud.tencent.com/document/product/213/12523)。 */
   InternetMaxBandwidthOut?: number;
@@ -1759,9 +1759,9 @@ declare interface DescribeInstancesOperationLimitResponse {
 }
 
 declare interface DescribeInstancesRequest {
-  /** 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。参数不支持同时指定`InstanceIds`和`Filters`。 */
+  /** 按照一个或者多个实例ID查询。实例ID例如：`ins-xxxxxxxx`。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。参数不支持同时指定`InstanceIds`和`Filters`。 */
   InstanceIds?: string[];
-  /** zone 按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表 project-id 按照【项目ID】进行过滤，可通过调用[DescribeProjects](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID形如：1002189。类型：Integer必选：否 host-id 按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。类型：String必选：否 dedicated-cluster-id 按照【[CDC](https://cloud.tencent.com/document/product/1346) ID】进行过滤。[CDC](https://cloud.tencent.com/document/product/1346) ID形如：cluster-xxxxxxx。类型：String必选：否 vpc-id 按照【VPC ID】进行过滤。VPC ID形如：vpc-xxxxxxxx。类型：String必选：否 subnet-id 按照【子网ID】进行过滤。子网ID形如：subnet-xxxxxxxx。类型：String必选：否 instance-id 按照【实例ID】进行过滤。实例ID形如：ins-xxxxxxxx。类型：String必选：否 uuid 按照【实例UUID】进行过滤。实例UUID形如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。类型：String必选：否 security-group-id 按照【安全组ID】进行过滤。安全组ID形如: sg-8jlk3f3r。类型：String必选：否 instance-name 按照【实例名称】进行过滤。类型：String必选：否 instance-charge-type 按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)类型：String必选：否 instance-state 按照【实例状态】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753)类型：String必选：否 private-ip-address 按照【实例主网卡的内网IP】进行过滤。类型：String必选：否 public-ip-address 按照【实例主网卡的公网IP】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。类型：String必选：否 ipv6-address 按照【实例的IPv6地址】进行过滤。类型：String必选：否 tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。类型：String必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。 */
+  /** zone 按照【可用区】进行过滤。可用区例如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表 project-id 按照【项目ID】进行过滤，可通过调用[DescribeProjects](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID例如：1002189。类型：Integer必选：否 host-id 按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID例如：host-xxxxxxxx。类型：String必选：否 dedicated-cluster-id 按照【[CDC](https://cloud.tencent.com/document/product/1346) ID】进行过滤。[CDC](https://cloud.tencent.com/document/product/1346) ID例如：cluster-xxxxxxx。类型：String必选：否 vpc-id 按照【VPC ID】进行过滤。VPC ID例如：vpc-xxxxxxxx。类型：String必选：否 subnet-id 按照【子网ID】进行过滤。子网ID例如：subnet-xxxxxxxx。类型：String必选：否 instance-id 按照【实例ID】进行过滤。实例ID例如：ins-xxxxxxxx。类型：String必选：否 uuid 按照【实例UUID】进行过滤。实例UUID例如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。类型：String必选：否 security-group-id 按照【安全组ID】进行过滤。安全组ID例如: sg-8jlk3f3r。类型：String必选：否 instance-name 按照【实例名称】进行过滤。类型：String必选：否 instance-charge-type 按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)类型：String必选：否 instance-state 按照【实例状态】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753)类型：String必选：否 private-ip-address 按照【实例主网卡的内网IP】进行过滤。类型：String必选：否 public-ip-address 按照【实例主网卡的公网IP】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。类型：String必选：否 ipv6-address 按照【实例的IPv6地址】进行过滤。类型：String必选：否 tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。类型：String必选：否creation-start-time 按照【实例创建起始时间】进行过滤。例如：2023-06-01 00:00:00。类型：String必选：否creation-end-time 按照【实例创建截止时间】进行过滤。例如：2023-06-01 00:00:00。类型：String必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
@@ -2420,7 +2420,7 @@ declare interface ModifyInstancesAttributeRequest {
   SecurityGroups?: string[];
   /** 给实例绑定用户角色，传空值为解绑操作 */
   CamRoleName?: string;
-  /** 实例的主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 */
+  /** 实例的主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：主机名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 */
   HostName?: string;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
   DisableApiTermination?: boolean;
@@ -2644,7 +2644,7 @@ declare interface ResetInstanceRequest {
   LoginSettings?: LoginSettings;
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。 */
   EnhancedService?: EnhancedService;
-  /** 重装系统时，可以指定修改实例的主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 */
+  /** 重装系统时，可以指定修改实例的主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：主机名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 */
   HostName?: string;
   /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。 */
   UserData?: string;

@@ -1079,6 +1079,8 @@ declare interface ChannelCreateFlowSignUrlRequest {
   Operator?: UserInfo;
   /** 机构信息，暂未开放 */
   Organization?: OrganizationInfo;
+  /** 签署完之后的H5页面的跳转链接，此链接支持http://和https://，最大长度1000个字符。 */
+  JumpUrl?: string;
 }
 
 declare interface ChannelCreateFlowSignUrlResponse {

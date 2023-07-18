@@ -1396,7 +1396,7 @@ declare interface LogSetInfo {
   RegionEn: string | null;
 }
 
-/** 域名国内地区特殊配置。分地区特殊配置。UpdateDomainConfig接口只支持修改部分分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：+ Authentication+ BandwidthAlert+ ErrorPage+ IpFilter+ Origin+ Referer */
+/** 域名国内地区特殊配置。分地区特殊配置。UpdateDomainConfig接口只支持修改部分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：+ Authentication+ BandwidthAlert+ ErrorPage+ IpFilter+ Origin+ Referer */
 declare interface MainlandConfig {
   /** 时间戳防盗链配置。 */
   Authentication?: Authentication | null;
@@ -1610,7 +1610,7 @@ declare interface OthersPrivateAccess {
   Bucket?: string | null;
 }
 
-/** 域名海外地区特殊配置。UpdateDomainConfig接口只支持修改部分分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：+ Authentication+ BandwidthAlert+ ErrorPage+ IpFilter+ Origin+ Referer */
+/** 域名海外地区特殊配置。UpdateDomainConfig接口只支持修改部分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：+ Authentication+ BandwidthAlert+ ErrorPage+ IpFilter+ Origin+ Referer */
 declare interface OverseaConfig {
   /** 时间戳防盗链配置。 */
   Authentication?: Authentication | null;
@@ -1826,7 +1826,7 @@ declare interface RefererRule {
   RulePaths: string[];
   /** referer 配置类型whitelist：白名单blacklist：黑名单 */
   RefererType: string;
-  /** referer 内容列表列表 */
+  /** referer 内容列表 */
   Referers: string[];
   /** 是否允许空 referer防盗链类型为白名单时，true表示允许空 referer，false表示不允许空 referer；防盗链类型为黑名单时，true表示拒绝空referer，false表示不拒绝空referer； */
   AllowEmpty: boolean;
@@ -2557,17 +2557,17 @@ declare interface VideoSeek {
 /** 违规 URL 详情 */
 declare interface ViolationUrl {
   /** ID */
-  Id: number;
+  Id?: number;
   /** 违规资源原始访问 URL */
-  RealUrl: string;
+  RealUrl?: string;
   /** 快照路径，用于控制台展示违规内容快照 */
-  DownloadUrl: string;
-  /** 违规资源当前状态forbid：已封禁release：已解封delay ： 延迟处理reject ：申诉驳回，状态仍为封禁态complain：申诉进行中 */
-  UrlStatus: string;
+  DownloadUrl?: string;
+  /** 违规资源当前状态forbid：已封禁release：已解封delay ： 延迟处理reject ：申诉驳回，状态仍为封禁状态complain：申诉进行中 */
+  UrlStatus?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** Waf子规则开关状态 */

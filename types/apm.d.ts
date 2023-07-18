@@ -53,57 +53,59 @@ declare interface ApmField {
 /** apm实例信息 */
 declare interface ApmInstanceDetail {
   /** 存储使用量(MB) */
-  AmountOfUsedStorage: number | null;
+  AmountOfUsedStorage?: number | null;
   /** 实例名 */
-  Name: string | null;
+  Name?: string | null;
   /** 实例所属tag列表 */
-  Tags: ApmTag[] | null;
+  Tags?: ApmTag[] | null;
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 创建人Uin */
-  CreateUin: string | null;
+  CreateUin?: string | null;
   /** 该实例已上报的服务端应用数量 */
-  ServiceCount: number | null;
+  ServiceCount?: number | null;
   /** 日均上报Span数 */
-  CountOfReportSpanPerDay: number | null;
+  CountOfReportSpanPerDay?: number | null;
   /** AppId信息 */
-  AppId: number;
+  AppId?: number;
   /** Trace数据保存时长 */
-  TraceDuration: number | null;
+  TraceDuration?: number | null;
   /** 实例描述信息 */
-  Description: string | null;
+  Description?: string | null;
   /** 实例状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 实例所属地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 实例上报额度 */
-  SpanDailyCounters: number | null;
+  SpanDailyCounters?: number | null;
   /** 实例是否开通计费 */
-  BillingInstance: number | null;
+  BillingInstance?: number | null;
   /** 错误率阈值 */
-  ErrRateThreshold: number | null;
+  ErrRateThreshold?: number | null;
   /** 采样率阈值 */
-  SampleRate: number | null;
+  SampleRate?: number | null;
   /** 是否开启错误采样 0 关 1 开 */
-  ErrorSample: number | null;
+  ErrorSample?: number | null;
   /** 慢调用保存阈值 */
-  SlowRequestSavedThreshold: number | null;
+  SlowRequestSavedThreshold?: number | null;
   /** cls日志所在地域 */
-  LogRegion: string | null;
+  LogRegion?: string | null;
   /** 日志来源 */
-  LogSource: string | null;
+  LogSource?: string | null;
   /** 日志功能开关 0 关 | 1 开 */
-  IsRelatedLog: number | null;
+  IsRelatedLog?: number | null;
   /** 日志主题ID */
-  LogTopicID: string | null;
+  LogTopicID?: string | null;
   /** 该实例已上报的客户端应用数量 */
-  ClientCount: number | null;
+  ClientCount?: number | null;
   /** 该实例已上报的总应用数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** CLS日志集 | ES集群ID */
-  LogSet: string | null;
+  LogSet?: string | null;
   /** Metric数据保存时长 */
-  MetricDuration: number | null;
+  MetricDuration?: number | null;
+  /** 用户自定义展示标签列表 */
+  CustomShowTags?: string[] | null;
 }
 
 /** 指标列表单元 */
@@ -361,6 +363,8 @@ declare interface ModifyApmInstanceRequest {
   LogSet?: string;
   /** CLS | ES */
   LogSource?: string;
+  /** 用户自定义展示标签列表 */
+  CustomShowTags?: string[];
 }
 
 declare interface ModifyApmInstanceResponse {

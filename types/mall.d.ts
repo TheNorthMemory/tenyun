@@ -46,7 +46,7 @@ declare interface DescribeDrawResourceListResponse {
   RequestId?: string;
 }
 
-/** {@link Mall 商场客留通} */
+/** {@link Mall 商场客留大数据} */
 declare interface Mall {
   (): Versions;
   /** 查询所有用户的资源接口 {@link DescribeDrawResourceListRequest} {@link DescribeDrawResourceListResponse} */

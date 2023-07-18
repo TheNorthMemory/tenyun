@@ -97,33 +97,57 @@ declare interface RecentSessionInfo {
 /** 会话数据详单（按设备区分） */
 declare interface SessionDeviceDetail {
   /** 设备类型：field或remote */
-  DeviceType: string;
+  DeviceType?: string;
   /** 起始点位时间，单位：秒 */
-  StartTime: number;
+  StartTime?: number;
   /** 结束点位时间，单位：秒 */
-  EndTime: number;
+  EndTime?: number;
   /** 会话ID */
-  SessionId: string;
+  SessionId?: string;
   /** 码率，单位：kbps */
-  Rate: number[];
+  Rate?: number[];
   /** 帧率 */
-  Fps: number[];
+  Fps?: number[];
   /** 丢包率，单位：% */
-  Lost: number[];
+  Lost?: number[];
   /** 网络时延，单位：ms */
-  NetworkLatency: number[];
+  NetworkLatency?: number[];
   /** 视频时延，单位：ms */
-  VideoLatency: number[];
+  VideoLatency?: number[];
   /** CPU使用率，单位：% */
-  CpuUsed: number[];
+  CpuUsed?: number[];
   /** 内存使用率，单位：% */
-  MemUsed: number[];
+  MemUsed?: number[];
   /** 时间偏移量，单位：秒 */
-  TimeOffset: number[];
+  TimeOffset?: number[];
   /** 项目ID */
-  ProjectId: string;
+  ProjectId?: string;
   /** 设备ID */
-  DeviceId: string;
+  DeviceId?: string;
+  /** sdk版本 */
+  Ver?: string | null;
+  /** 模式(p2p/server) */
+  SdkMode?: string | null;
+  /** 解码耗时，单位：ms */
+  DecodeCost?: number[] | null;
+  /** 渲染耗时，单位：ms */
+  RenderConst?: number[] | null;
+  /** 卡顿k100 */
+  K100?: number[] | null;
+  /** 卡顿k150 */
+  K150?: number[] | null;
+  /** nack请求数 */
+  NACK?: number[] | null;
+  /** 服务端调控码率,单位：kbps */
+  BitRateEstimate?: number[] | null;
+  /** 宽度 */
+  Width?: number | null;
+  /** 高度 */
+  Height?: number | null;
+  /** 编码耗时，单位：ms */
+  EncodeCost?: number[] | null;
+  /** 采集耗时，单位：ms */
+  CaptureCost?: number[] | null;
 }
 
 /** 会话信息 */

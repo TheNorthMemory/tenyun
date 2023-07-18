@@ -761,7 +761,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   lowcode: Lowcode,
   /** {@link Lp 登录保护} */
   lp: Lp,
-  /** {@link Mall 商场客留通} */
+  /** {@link Mall 商场客留大数据} */
   mall: Mall,
   /** {@link Mariadb 云数据库 MariaDB} */
   mariadb: Mariadb,

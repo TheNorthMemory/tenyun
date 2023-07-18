@@ -166,7 +166,7 @@ declare interface DomainSimpleInfo {
   CreationDate: string;
   /** 到期时间 */
   ExpirationDate: string;
-  /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除 */
+  /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhobited: 注册商禁止续费 */
   DomainStatus: string[];
   /** 域名购买状态。ok：正常RegisterPending：待注册RegisterDoing：注册中RegisterFailed：注册失败AboutToExpire: 即将过期RenewPending：已进入续费期，需要进行续费RenewDoing：续费中RedemptionPending：已进入赎回期，需要进行续费RedemptionDoing：赎回中TransferPending：待转入中TransferTransing：转入中TransferFailed：转入失败 */
   BuyStatus: string;
@@ -479,9 +479,9 @@ declare interface DescribeDomainSimpleInfoRequest {
 
 declare interface DescribeDomainSimpleInfoResponse {
   /** 域名信息 */
-  DomainInfo: DomainSimpleInfo;
+  DomainInfo?: DomainSimpleInfo;
   /** 账号ID */
-  Uin: string;
+  Uin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -611,7 +611,7 @@ declare interface SendPhoneEmailCodeResponse {
 }
 
 declare interface SetDomainAutoRenewRequest {
-  /** 域名ID。 */
+  /** 域名ID 例如：domain-123abc */
   DomainId: string;
   /** AutoRenew 有三个可选值： 0：不设置自动续费1：设置自动续费2：设置到期后不续费 */
   AutoRenew: number;

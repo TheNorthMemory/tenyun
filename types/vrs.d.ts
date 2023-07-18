@@ -2,6 +2,10 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 取消任务响应 */
+declare interface CancelVRSTaskRsp {
+}
+
 /** 声音复刻任务创建响应 */
 declare interface CreateVRSTaskRespData {
   /** 任务ID */
@@ -34,6 +38,20 @@ declare interface DetectionEnvAndSoundQualityRespData {
   DetectionTip?: Words[] | null;
 }
 
+/** 离线声音复刻模型下载响应 */
+declare interface DownloadVRSModelRsp {
+  /** 模型cos地址 */
+  Model?: string | null;
+  /** 音色名称 */
+  VoiceName?: string | null;
+  /** 音色性别:1-male2-female */
+  VoiceGender?: number | null;
+  /** 语言类型：1-中文 */
+  VoiceLanguage?: number | null;
+  /** 任务ID */
+  TaskId?: string;
+}
+
 /** 训练文本 */
 declare interface TrainingText {
   /** 文本ID */
@@ -60,6 +78,18 @@ declare interface Words {
   Word?: string | null;
 }
 
+declare interface CancelVRSTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface CancelVRSTaskResponse {
+  /** 任务ID */
+  Data?: CancelVRSTaskRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateVRSTaskRequest {
   /** 唯一请求 ID */
   SessionId: string;
@@ -77,6 +107,8 @@ declare interface CreateVRSTaskRequest {
   AudioIdList: string[];
   /** 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""} */
   CallbackUrl?: string;
+  /** 任务类型 1:在线 2:离线 默认为1 */
+  ModelType?: number;
 }
 
 declare interface CreateVRSTaskResponse {
@@ -118,6 +150,18 @@ declare interface DetectEnvAndSoundQualityResponse {
   RequestId?: string;
 }
 
+declare interface DownloadVRSModelRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DownloadVRSModelResponse {
+  /** 响应 */
+  Data?: DownloadVRSModelRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTrainingTextRequest {
 }
 
@@ -131,12 +175,16 @@ declare interface GetTrainingTextResponse {
 /** {@link Vrs 声音复刻} */
 declare interface Vrs {
   (): Versions;
+  /** 声音复刻取消任务接口 {@link CancelVRSTaskRequest} {@link CancelVRSTaskResponse} */
+  CancelVRSTask(data: CancelVRSTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelVRSTaskResponse>;
   /** 声音复刻任务创建接口 {@link CreateVRSTaskRequest} {@link CreateVRSTaskResponse} */
   CreateVRSTask(data: CreateVRSTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVRSTaskResponse>;
   /** 声音复刻任务结果查询接口 {@link DescribeVRSTaskStatusRequest} {@link DescribeVRSTaskStatusResponse} */
   DescribeVRSTaskStatus(data: DescribeVRSTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVRSTaskStatusResponse>;
   /** 环境检测和音频质量检测 {@link DetectEnvAndSoundQualityRequest} {@link DetectEnvAndSoundQualityResponse} */
   DetectEnvAndSoundQuality(data: DetectEnvAndSoundQualityRequest, config?: AxiosRequestConfig): AxiosPromise<DetectEnvAndSoundQualityResponse>;
+  /** 下载声音复刻离线模型 {@link DownloadVRSModelRequest} {@link DownloadVRSModelResponse} */
+  DownloadVRSModel(data: DownloadVRSModelRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadVRSModelResponse>;
   /** 获取声音复刻训练文本 {@link GetTrainingTextRequest} {@link GetTrainingTextResponse} */
   GetTrainingText(data?: GetTrainingTextRequest, config?: AxiosRequestConfig): AxiosPromise<GetTrainingTextResponse>;
 }

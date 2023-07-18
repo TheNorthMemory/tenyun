@@ -1369,7 +1369,7 @@ declare interface StartMCUMixTranscodeByStrRoomIdRequest {
   EncodeParams: EncodeParams;
   /** 混流输出布局参数。 */
   LayoutParams: LayoutParams;
-  /** 第三方CDN转推参数。 */
+  /** 第三方CDN转推参数。如需转推至腾讯云云直播，此参数无需填写，会默认转推 */
   PublishCdnParams?: PublishCdnParams;
 }
 
@@ -1389,7 +1389,7 @@ declare interface StartMCUMixTranscodeRequest {
   EncodeParams: EncodeParams;
   /** 混流输出布局参数。 */
   LayoutParams: LayoutParams;
-  /** 第三方CDN转推参数。 */
+  /** 第三方CDN转推参数。如需转推至腾讯云云直播，此参数无需填写，会默认转推 */
   PublishCdnParams?: PublishCdnParams;
 }
 

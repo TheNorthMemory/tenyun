@@ -6982,20 +6982,6 @@ declare interface DescribeScanVulSettingResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSearchExportListRequest {
-  /** ES查询条件JSON */
-  Query: string;
-}
-
-declare interface DescribeSearchExportListResponse {
-  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
-  TaskId?: number;
-  /** 该参数作废 */
-  DownloadUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeSearchLogsRequest {
 }
 
@@ -9045,8 +9031,6 @@ declare interface Cwp {
   DescribeScanTaskStatus(data: DescribeScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskStatusResponse>;
   /** 定期检测配置查询 {@link DescribeScanVulSettingRequest} {@link DescribeScanVulSettingResponse} */
   DescribeScanVulSetting(data?: DescribeScanVulSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanVulSettingResponse>;
-  /** @deprecated 导出ES查询文档列表 {@link DescribeSearchExportListRequest} {@link DescribeSearchExportListResponse} */
-  DescribeSearchExportList(data: DescribeSearchExportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchExportListResponse>;
   /** 获取历史搜索记录 {@link DescribeSearchLogsRequest} {@link DescribeSearchLogsResponse} */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
   /** 获取快速检索列表 {@link DescribeSearchTemplatesRequest} {@link DescribeSearchTemplatesResponse} */

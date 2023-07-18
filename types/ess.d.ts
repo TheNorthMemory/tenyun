@@ -54,9 +54,9 @@ declare interface ApproverInfo {
   CustomApproverTag?: string;
   /** 签署人个性化能力值 */
   ApproverOption?: ApproverOption;
-  /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式)如果不传默认为1 */
+  /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式)如果不传默认为1模板发起的时候,认证方式以模版配置为主 */
   ApproverVerifyTypes?: number[];
-  /** 签署人签署合同时的认证方式1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)合同签署认证方式的优先级 verifyChannel>approverSignTypes */
+  /** 签署人签署合同时的认证方式1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)合同签署认证方式的优先级 verifyChannel>approverSignTypes模板发起的时候,认证方式以模版配置为主 */
   ApproverSignTypes?: number[];
   /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。 */
   ApproverNeedSignReview?: boolean;
@@ -1309,6 +1309,8 @@ declare interface CreateFlowSignUrlRequest {
   Agent?: Agent;
   /** 机构信息，暂未开放 */
   Organization?: OrganizationInfo;
+  /** 签署完之后的H5页面的跳转链接，此链接支持http://和https://，最大长度1000个字符。 */
+  JumpUrl?: string;
 }
 
 declare interface CreateFlowSignUrlResponse {
@@ -2221,7 +2223,7 @@ declare interface Ess {
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 创建一码多扫流程签署二维码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
-  /** 通过页面快速发起签署流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
+  /** 获取发起合同web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
   /** 创建导入处方单个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
