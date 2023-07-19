@@ -352,6 +352,8 @@ declare interface DockerContainerConfiguration {
   Volumes?: DockerContainerVolume[];
   /** 运行的命令 */
   Command?: string;
+  /** 容器重启策略 */
+  RestartPolicy?: string;
 }
 
 /** Docker容器映射的端口 */

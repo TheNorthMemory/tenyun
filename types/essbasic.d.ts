@@ -188,7 +188,7 @@ declare interface Component {
   Placeholder?: string | null;
 }
 
-/** 创建合同配置信息 */
+/** 创建合同个性化参数 */
 declare interface CreateFlowOption {
   /** 是否允许修改合同信息，true-是，false-否 */
   CanEditFlow?: boolean;

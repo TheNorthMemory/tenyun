@@ -924,6 +924,14 @@ declare interface RuleTagInfo {
   KeyValues: KeyValueInfo[];
 }
 
+/** ScheduledSql的资源信息 */
+declare interface ScheduledSqlResouceInfo {
+  /** 目标主题id */
+  TopicId: string;
+  /** topic的地域信息 */
+  Region?: string;
+}
+
 /** 投递规则 */
 declare interface ShipperInfo {
   /** 投递规则ID */
@@ -1416,6 +1424,42 @@ declare interface CreateMachineGroupRequest {
 declare interface CreateMachineGroupResponse {
   /** 机器组ID */
   GroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateScheduledSqlRequest {
+  /** 源日志主题 */
+  SrcTopicId: string;
+  /** 任务名称 */
+  Name: string;
+  /** 任务启动状态. 1正常开启, 2关闭 */
+  EnableFlag: number;
+  /** 加工任务目的topic_id以及别名 */
+  DstResource: ScheduledSqlResouceInfo;
+  /** ScheduledSQL语句 */
+  ScheduledSqlContent: string;
+  /** 调度开始时间,Unix时间戳，单位ms */
+  ProcessStartTime: number;
+  /** 调度类型，1:持续运行 2:指定调度结束时间 */
+  ProcessType: number;
+  /** 调度周期(分钟) */
+  ProcessPeriod: number;
+  /** 调度时间窗口 */
+  ProcessTimeWindow: string;
+  /** 执行延迟(秒) */
+  ProcessDelay: number;
+  /** 源topicId的地域信息 */
+  SrcTopicRegion: string;
+  /** 调度结束时间，当ProcessType=2时为必传字段, Unix时间戳，单位ms */
+  ProcessEndTime?: number;
+  /** 语法规则。 默认值为0。0：Lucene语法，1：CQL语法 */
+  SyntaxRule?: number;
+}
+
+declare interface CreateScheduledSqlResponse {
+  /** 任务id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2603,6 +2647,8 @@ declare interface Cls {
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
   /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
+  /** 创建ScheduledSql任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
+  CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
   /** 创建日志主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */

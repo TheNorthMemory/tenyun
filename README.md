@@ -3,7 +3,7 @@
 Promise based and chained Tencent Cloud OpenAPI client for NodeJS
 
 [![release](https://img.shields.io/npm/v/tenyun)](https://github.com/TheNorthMemory/tenyun/releases)
-[![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/tenyun?label=snyk.io)](https://snyk.io/advisor/npm-package/tenyun)
+[![advisor](https://snyk.io/advisor/npm-package/tenyun/badge.svg)](https://snyk.io/advisor/npm-package/tenyun)
 [![types](https://img.shields.io/badge/types-included-blue)](https://www.npmjs.com/package/tenyun)
 [![requirement](https://img.shields.io/node/v/tenyun)](https://www.npmjs.com/package/tenyun)
 [![downloads](https://img.shields.io/npm/dm/tenyun)](https://www.npmjs.com/package/tenyun)
@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9611+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9620+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -158,7 +158,7 @@ clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-1
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) | 2021-05-24(22) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(76) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(77) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -238,7 +238,7 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [移动网络加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(13) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(36) | 2018-04-08(13) |
-monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(150) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(149) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(100) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(4) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(13) |
@@ -317,7 +317,7 @@ trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/160
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(50) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(36) |
-tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(31) |
+tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(32) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(219) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
@@ -329,7 +329,7 @@ vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-1
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(51) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(200) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(208) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(17) |
 youmall |  | 2018-02-28(31) |

@@ -140,6 +140,14 @@ declare interface DescribeCloudNativeAPIGatewayNodesResult {
   NodeList: CloudNativeAPIGatewayNode[];
 }
 
+/** 获取云原生API网关实例协议端口列表响应结果 */
+declare interface DescribeGatewayInstancePortResult {
+  /** 云原生API网关ID */
+  GatewayId?: string | null;
+  /** 网关实例协议端口列表 */
+  GatewayInstancePortList?: GatewayInstanceSchemeAndPorts[] | null;
+}
+
 /** 实例地域信息描述 */
 declare interface DescribeInstanceRegionInfo {
   /** 引擎部署地域信息 */
@@ -242,6 +250,14 @@ declare interface Filter {
   Name: string;
   /** 过滤参数值 */
   Values: string[];
+}
+
+/** 网关实例协议端口列表 */
+declare interface GatewayInstanceSchemeAndPorts {
+  /** 端口协议，可选HTTP、HTTPS、TCP和UDP */
+  Scheme?: string | null;
+  /** 端口列表 */
+  PortList?: number[] | null;
 }
 
 /** 引擎实例的标签信息 */
@@ -842,6 +858,18 @@ declare interface DescribeCloudNativeAPIGatewayNodesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayPortsRequest {
+  /** 云原生API网关实例ID */
+  GatewayId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayPortsResponse {
+  /** 云原生API网关实例协议端口列表响应结果 */
+  Result?: DescribeGatewayInstancePortResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayRouteRateLimitRequest {
   /** 网关Id */
   GatewayId: string;
@@ -1212,6 +1240,8 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayCanaryRules(data: DescribeCloudNativeAPIGatewayCanaryRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCanaryRulesResponse>;
   /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */
   DescribeCloudNativeAPIGatewayNodes(data: DescribeCloudNativeAPIGatewayNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayNodesResponse>;
+  /** 获取云原生API网关实例端口信息 {@link DescribeCloudNativeAPIGatewayPortsRequest} {@link DescribeCloudNativeAPIGatewayPortsResponse} */
+  DescribeCloudNativeAPIGatewayPorts(data: DescribeCloudNativeAPIGatewayPortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayPortsResponse>;
   /** 查询云原生网关的限流插件(路由) {@link DescribeCloudNativeAPIGatewayRouteRateLimitRequest} {@link DescribeCloudNativeAPIGatewayRouteRateLimitResponse} */
   DescribeCloudNativeAPIGatewayRouteRateLimit(data: DescribeCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayRouteRateLimitResponse>;
   /** 查询云原生网关路由列表 {@link DescribeCloudNativeAPIGatewayRoutesRequest} {@link DescribeCloudNativeAPIGatewayRoutesResponse} */

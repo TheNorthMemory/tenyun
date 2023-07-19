@@ -1695,7 +1695,7 @@ declare interface HostCertificateRequest {
 
 declare interface HostCertificateResponse {
   /** 云资源配置详情 */
-  CertHostingInfo: CertHostingInfo;
+  CertHostingInfo?: CertHostingInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

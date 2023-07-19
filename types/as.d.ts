@@ -5,43 +5,45 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 符合条件的伸缩活动相关信息。 */
 declare interface Activity {
   /** 伸缩组ID。 */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 伸缩活动ID。 */
-  ActivityId: string;
+  ActivityId?: string;
   /** 伸缩活动类型。取值如下：SCALE_OUT：扩容活动SCALE_IN：缩容活动ATTACH_INSTANCES：添加实例REMOVE_INSTANCES：销毁实例DETACH_INSTANCES：移出实例TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁REPLACE_UNHEALTHY_INSTANCE：替换不健康实例START_INSTANCES：开启实例STOP_INSTANCES：关闭实例INVOKE_COMMAND：执行命令 */
-  ActivityType: string;
+  ActivityType?: string;
   /** 伸缩活动状态。取值如下：INIT：初始化中RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败CANCELLED：活动取消 */
-  StatusCode: string;
+  StatusCode?: string;
   /** 伸缩活动状态描述。 */
-  StatusMessage: string;
+  StatusMessage?: string;
   /** 伸缩活动起因。 */
-  Cause: string;
+  Cause?: string;
   /** 伸缩活动描述。 */
-  Description: string;
+  Description?: string;
   /** 伸缩活动开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 伸缩活动结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 伸缩活动创建时间。 */
-  CreatedTime: string;
-  /** 伸缩活动相关实例信息集合。 */
-  ActivityRelatedInstanceSet: ActivtyRelatedInstance[];
+  CreatedTime?: string;
+  /** 该参数已废弃，请勿使用。 */
+  ActivityRelatedInstanceSet?: ActivtyRelatedInstance[];
   /** 伸缩活动状态简要描述。 */
-  StatusMessageSimplified: string;
+  StatusMessageSimplified?: string;
   /** 伸缩活动中生命周期挂钩的执行结果。 */
-  LifecycleActionResultSet: LifecycleActionResultInfo[];
+  LifecycleActionResultSet?: LifecycleActionResultInfo[];
   /** 伸缩活动状态详细描述。 */
-  DetailedStatusMessageSet: DetailedStatusMessage[];
+  DetailedStatusMessageSet?: DetailedStatusMessage[];
   /** 执行命令结果。 */
-  InvocationResultSet: InvocationResult[];
+  InvocationResultSet?: InvocationResult[];
+  /** 伸缩活动相关实例信息集合。 */
+  RelatedInstanceSet?: RelatedInstance[];
 }
 
 /** 与本次伸缩活动相关的实例信息。 */
 declare interface ActivtyRelatedInstance {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例在伸缩活动中的状态。取值如下：INIT：初始化中RUNNING：实例操作中SUCCESSFUL：活动成功FAILED：活动失败 */
-  InstanceStatus: string;
+  InstanceStatus?: string;
 }
 
 /** 伸缩配置建议。 */
@@ -498,6 +500,14 @@ declare interface NotificationTarget {
   QueueName?: string;
   /** 主题名称，如果`TargetType`取值为`CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC`，则本字段必填。 */
   TopicName?: string;
+}
+
+/** 与本次伸缩活动相关的实例信息。 */
+declare interface RelatedInstance {
+  /** 实例ID。 */
+  InstanceId?: string;
+  /** 实例在伸缩活动中的状态。取值如下：INIT：初始化中RUNNING：实例操作中SUCCESSFUL：活动成功FAILED：活动失败 */
+  InstanceStatus?: string;
 }
 
 /** 描述了 “自动化助手” 服务相关的信息 */

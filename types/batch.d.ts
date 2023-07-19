@@ -775,11 +775,11 @@ declare interface SpotMarketOptions {
 /** HDD的本地存储信息 */
 declare interface StorageBlock {
   /** HDD本地存储类型，值为：LOCAL_PRO. */
-  Type: string | null;
+  Type?: string | null;
   /** HDD本地存储的最小容量 */
-  MinSize: number | null;
+  MinSize?: number | null;
   /** HDD本地存储的最大容量 */
-  MaxSize: number | null;
+  MaxSize?: number | null;
 }
 
 /** 描述了操作系统所在块设备即系统盘的信息 */

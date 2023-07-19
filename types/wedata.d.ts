@@ -2,6 +2,36 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 子任务记录 */
+declare interface AdhocDetail {
+  /** 子任务记录Id */
+  Id: number;
+  /** 脚本内容 */
+  ScriptContent: string;
+  /** 任务启动时间 */
+  StartTime: string | null;
+  /** 任务结束时间 */
+  EndTime: string | null;
+  /** 当前任务状态 */
+  Status: string;
+  /** 提交任务id */
+  RecordId: number;
+}
+
+/** 任务提交记录 */
+declare interface AdhocRecord {
+  /** 任务提交记录id */
+  Id: number | null;
+  /** 脚本内容 */
+  ScriptContent: string | null;
+  /** 任务提交时间 */
+  CreateTime: string | null;
+  /** 任务状态 */
+  Status: string | null;
+  /** 实例id */
+  InstanceId: string | null;
+}
+
 /** 告警事件详情 */
 declare interface AlarmEventInfo {
   /** 告警ID */
@@ -2542,6 +2572,12 @@ declare interface TaskCanvasInfo {
   AlarmType?: string | null;
   /** 任务创建时间 */
   CreateTime?: string | null;
+  /** UserId */
+  UserId?: string | null;
+  /** OwnerId */
+  OwnerId?: string | null;
+  /** TenantId */
+  TenantId?: string | null;
 }
 
 /** 任务扩展信息 */
@@ -2934,6 +2970,58 @@ declare interface UserFileDTO {
   Region: string | null;
 }
 
+/** 开发空间-获取数据开发脚本信息响应体 */
+declare interface UserFileInfo {
+  /** 资源ID */
+  ResourceId?: string | null;
+  /** 文件名 */
+  FileName?: string | null;
+  /** 文件类型，如 jar zip 等 */
+  FileExtensionType?: string | null;
+  /** 文件上传类型，资源管理为 resource */
+  Type?: string | null;
+  /** 文件MD5值 */
+  Md5Value?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 文件大小，单位为字节 */
+  Size?: number | null;
+  /** 本地路径 */
+  LocalPath?: string | null;
+  /** 本地临时路径 */
+  LocalTempPath?: string | null;
+  /** 远程路径 */
+  RemotePath?: string | null;
+  /** 文件拥有者名字 */
+  OwnerName?: string | null;
+  /** 文件拥有者uin */
+  Owner?: string | null;
+  /** 文件深度 */
+  PathDepth?: number | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 附加信息 */
+  ExtraInfo?: ParamInfo[] | null;
+  /** 本地临时压缩文件绝对路径 */
+  ZipPath?: string | null;
+  /** 文件所属存储桶 */
+  Bucket?: string | null;
+  /** 文件所属存储桶的地域 */
+  Region?: string | null;
+  /** 无 */
+  DeleteName?: string | null;
+  /** 无 */
+  DeleteOwner?: string | null;
+  /** 无 */
+  Operator?: string | null;
+  /** 无 */
+  OperatorName?: string | null;
+  /** 附加信息 base64编码 */
+  EncodeExtraInfo?: string | null;
+}
+
 /** 权重信息 */
 declare interface WeightInfo {
   /** 权重 */
@@ -3004,6 +3092,26 @@ declare interface BatchDeleteIntegrationTasksResponse {
   FailedCount: number | null;
   /** 任务总数 */
   TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchDeleteTasksDsRequest {
+  /** 批量删除的任务TaskId */
+  TaskIdList: string[];
+  /** true : 删除后下游任务可正常运行false：删除后下游任务不可运行 */
+  DeleteMode?: boolean;
+  /** true：通知下游任务责任人false: 不通知下游任务责任人 */
+  OperateInform?: boolean;
+  /** 项目Id */
+  ProjectId?: string;
+  /** true: 删除任务引用的脚本false: 不删除任务引用的脚本 */
+  DeleteScript?: boolean;
+}
+
+declare interface BatchDeleteTasksDsResponse {
+  /** 返回批量操作成功个数、失败个数、操作总数 */
+  Data?: BatchOperateResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3848,6 +3956,24 @@ declare interface DeleteDataSourcesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteFilePathRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 资源ID */
+  ResourceIds: string[];
+  /** 使用状态 */
+  UseStatus: string;
+  /** 文件路径 */
+  FilePaths?: string[];
+}
+
+declare interface DeleteFilePathResponse {
+  /** 文件列表 */
+  UserFileList?: UserFileInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteFolderRequest {
   /** 项目Id */
   ProjectId: string;
@@ -3920,6 +4046,38 @@ declare interface DeleteOfflineTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteProjectParamDsRequest {
+  /** 参数名 */
+  ParamKey?: string;
+  /** 项目id */
+  ProjectId?: string;
+}
+
+declare interface DeleteProjectParamDsResponse {
+  /** 结果 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteResourceFilesRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 使用状态 */
+  UseStatus: boolean;
+  /** 资源id列表 */
+  ResourceIds?: string[];
+  /** 资源路径列表 */
+  FilePaths?: string[];
+}
+
+declare interface DeleteResourceFilesResponse {
+  /** 资源批量删除结果 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteResourceRequest {
   /** 项目ID */
   ProjectId?: string;
@@ -3975,6 +4133,30 @@ declare interface DeleteTaskAlarmRegularRequest {
 
 declare interface DeleteTaskAlarmRegularResponse {
   /** 删除结果(true表示删除成功，false表示删除失败) */
+  Data?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTaskDsRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 是否删除脚本 */
+  DeleteScript?: boolean;
+  /** 任务操作是否消息通知下游任务责任人 */
+  OperateInform?: boolean;
+  /** 任务ID */
+  TaskId?: string;
+  /** 虚拟任务id */
+  VirtualTaskId?: string;
+  /** 虚拟任务标记 */
+  VirtualFlag?: boolean;
+  /** 任务删除方式 */
+  DeleteMode?: boolean;
+}
+
+declare interface DeleteTaskDsResponse {
+  /** 无 */
   Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -6766,6 +6948,20 @@ declare interface RegisterEventResponse {
   RequestId?: string;
 }
 
+declare interface RemoveWorkflowDsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+}
+
+declare interface RemoveWorkflowDsResponse {
+  /** 工作流ID */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RerunInstancesRequest {
   /** 项目Id */
   ProjectId: string;
@@ -6937,6 +7133,37 @@ declare interface SetTaskAlarmNewResponse {
   RequestId?: string;
 }
 
+declare interface StageCloudApiRequest {
+  /** 无 */
+  ClusterId?: string | null;
+  /** 无 */
+  StageId?: string | null;
+  /** 无 */
+  JobId?: string | null;
+  /** 无 */
+  StageName?: string | null;
+  /** 无 */
+  Type?: string | null;
+  /** 无 */
+  Mode?: string | null;
+  /** 无 */
+  Version?: string | null;
+  /** 无 */
+  Queue?: string | null;
+  /** 无 */
+  Content?: string | null;
+  /** 无 */
+  Parameters?: Property[] | null;
+  /** 无 */
+  Description?: string | null;
+  /** 无 */
+  ProjectId?: string | null;
+  /** 无 */
+  JobType?: string | null;
+  /** 无 */
+  WorkFlowId?: string | null;
+}
+
 declare interface StartIntegrationTaskRequest {
   /** 任务id */
   TaskId: string;
@@ -6989,6 +7216,44 @@ declare interface SubmitCustomFunctionResponse {
   RequestId?: string;
 }
 
+declare interface SubmitSqlTaskRequest {
+  /** 数据库类型 */
+  DatabaseType: string;
+  /** 数据源Id */
+  DatasourceId: number;
+  /** 资源组Id */
+  GroupId: string;
+  /** 脚本文件id */
+  ScriptId: string;
+  /** 项目id */
+  ProjectId: string;
+  /** 数据库名称 */
+  DatabaseName?: string;
+  /** 执行引擎实例ID */
+  EngineId?: string;
+  /** 脚本内容 */
+  ScriptContent?: string;
+  /** 资源队列 */
+  ResourceQueue?: string;
+  /** 数据库类型 */
+  DatasourceType?: string;
+  /** 计算资源名称 */
+  ComputeResource?: string;
+  /** 高级运行参数 */
+  RunParams?: string;
+  /** 高级设置 */
+  ConfParams?: string;
+}
+
+declare interface SubmitSqlTaskResponse {
+  /** 任务提交记录 */
+  Record: AdhocRecord;
+  /** 子任务记录列表 */
+  Details: AdhocDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitTaskRequest {
   /** 项目Id */
   ProjectId: string;
@@ -7003,6 +7268,36 @@ declare interface SubmitTaskRequest {
 declare interface SubmitTaskResponse {
   /** 成功或者失败 */
   Data: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitTaskTestRunRequest {
+  /** 无 */
+  TaskIds: string;
+  /** 无 */
+  ProjectId: string;
+  /** 无 */
+  WorkFlowId?: string;
+  /** 无 */
+  Name?: string;
+  /** 无 */
+  Tasks?: StageCloudApiRequest[];
+  /** 无 */
+  Description?: string;
+  /** 无 */
+  RunParams?: string;
+  /** 无 */
+  ScriptContent?: string;
+  /** 无 */
+  VersionId?: string;
+}
+
+declare interface SubmitTaskTestRunResponse {
+  /** 无 */
+  JobId?: number;
+  /** 无 */
+  RecordId?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7130,6 +7425,8 @@ declare interface Wedata {
   BatchCreateIntegrationTaskAlarms(data: BatchCreateIntegrationTaskAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateIntegrationTaskAlarmsResponse>;
   /** 批量删除集成任务 {@link BatchDeleteIntegrationTasksRequest} {@link BatchDeleteIntegrationTasksResponse} */
   BatchDeleteIntegrationTasks(data: BatchDeleteIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteIntegrationTasksResponse>;
+  /** 批量删除任务Ds {@link BatchDeleteTasksDsRequest} {@link BatchDeleteTasksDsResponse} */
+  BatchDeleteTasksDs(data: BatchDeleteTasksDsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteTasksDsResponse>;
   /** 批量删除任务【Beta版本】 {@link BatchDeleteTasksNewRequest} {@link BatchDeleteTasksNewResponse} */
   BatchDeleteTasksNew(data: BatchDeleteTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteTasksNewResponse>;
   /** 批量置成功集成任务实例 {@link BatchForceSuccessIntegrationTaskInstancesRequest} {@link BatchForceSuccessIntegrationTaskInstancesResponse} */
@@ -7210,6 +7507,8 @@ declare interface Wedata {
   DeleteCustomFunction(data: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
   /** 数据源管理-删除数据源【Beta版本】 {@link DeleteDataSourcesRequest} {@link DeleteDataSourcesResponse} */
   DeleteDataSources(data: DeleteDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourcesResponse>;
+  /** 开发空间-批量删除目录和文件 {@link DeleteFilePathRequest} {@link DeleteFilePathResponse} */
+  DeleteFilePath(data: DeleteFilePathRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilePathResponse>;
   /** 删除文件夹【Beta版本】 {@link DeleteFolderRequest} {@link DeleteFolderResponse} */
   DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
   /** 删除采集器 {@link DeleteInLongAgentRequest} {@link DeleteInLongAgentResponse} */
@@ -7220,14 +7519,20 @@ declare interface Wedata {
   DeleteIntegrationTask(data: DeleteIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationTaskResponse>;
   /** 删除任务 {@link DeleteOfflineTaskRequest} {@link DeleteOfflineTaskResponse} */
   DeleteOfflineTask(data: DeleteOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineTaskResponse>;
+  /** 删除项目参数 {@link DeleteProjectParamDsRequest} {@link DeleteProjectParamDsResponse} */
+  DeleteProjectParamDs(data?: DeleteProjectParamDsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectParamDsResponse>;
   /** 删除资源 {@link DeleteResourceRequest} {@link DeleteResourceResponse} */
   DeleteResource(data?: DeleteResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceResponse>;
+  /** 【资源管理】批量删除资源 {@link DeleteResourceFilesRequest} {@link DeleteResourceFilesResponse} */
+  DeleteResourceFiles(data: DeleteResourceFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceFilesResponse>;
   /** 删除质量规则接口 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data?: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
   /** 删除规则模版 {@link DeleteRuleTemplateRequest} {@link DeleteRuleTemplateResponse} */
   DeleteRuleTemplate(data?: DeleteRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleTemplateResponse>;
   /** 删除任务告警规则 {@link DeleteTaskAlarmRegularRequest} {@link DeleteTaskAlarmRegularResponse} */
   DeleteTaskAlarmRegular(data: DeleteTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskAlarmRegularResponse>;
+  /** 删除任务Ds {@link DeleteTaskDsRequest} {@link DeleteTaskDsResponse} */
+  DeleteTaskDs(data?: DeleteTaskDsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskDsResponse>;
   /** 删除工作流【Beta版本】 {@link DeleteWorkflowNewRequest} {@link DeleteWorkflowNewResponse} */
   DeleteWorkflowNew(data: DeleteWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowNewResponse>;
   /** 告警事件列表 {@link DescribeAlarmEventsRequest} {@link DescribeAlarmEventsResponse} */
@@ -7490,6 +7795,8 @@ declare interface Wedata {
   RegisterEvent(data: RegisterEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventResponse>;
   /** 注册事件监听器【Beta版本】 {@link RegisterEventListenerRequest} {@link RegisterEventListenerResponse} */
   RegisterEventListener(data: RegisterEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventListenerResponse>;
+  /** 删除编排空间工作流 {@link RemoveWorkflowDsRequest} {@link RemoveWorkflowDsResponse} */
+  RemoveWorkflowDs(data: RemoveWorkflowDsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkflowDsResponse>;
   /** 实例批量重跑【Beta版本】 {@link RerunInstancesRequest} {@link RerunInstancesResponse} */
   RerunInstances(data: RerunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RerunInstancesResponse>;
   /** 重启采集器 {@link RestartInLongAgentRequest} {@link RestartInLongAgentResponse} */
@@ -7510,8 +7817,12 @@ declare interface Wedata {
   StopIntegrationTask(data: StopIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopIntegrationTaskResponse>;
   /** 提交自定义函数 {@link SubmitCustomFunctionRequest} {@link SubmitCustomFunctionResponse} */
   SubmitCustomFunction(data: SubmitCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCustomFunctionResponse>;
+  /** 提交SQL任务 {@link SubmitSqlTaskRequest} {@link SubmitSqlTaskResponse} */
+  SubmitSqlTask(data: SubmitSqlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitSqlTaskResponse>;
   /** 提交任务【Beta版本】 {@link SubmitTaskRequest} {@link SubmitTaskResponse} */
   SubmitTask(data: SubmitTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskResponse>;
+  /** 提交工作流测试运行任务 {@link SubmitTaskTestRunRequest} {@link SubmitTaskTestRunResponse} */
+  SubmitTaskTestRun(data: SubmitTaskTestRunRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskTestRunResponse>;
   /** 提交工作流【Beta版本】 {@link SubmitWorkflowRequest} {@link SubmitWorkflowResponse} */
   SubmitWorkflow(data: SubmitWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitWorkflowResponse>;
   /** 暂停集成任务 {@link SuspendIntegrationTaskRequest} {@link SuspendIntegrationTaskResponse} */

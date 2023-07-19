@@ -4,8 +4,14 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 查询Client Token */
 declare interface ClientToken {
+  /** 节点 IP */
+  NodeIp?: string | null;
   /** 挂载点 */
   LocalDirectory?: string | null;
+  /** 可以访问的 GooseFS 目录 */
+  GooseFSDirectory?: string | null;
+  /** token */
+  Token?: string | null;
 }
 
 /** ClusterRole */
@@ -81,6 +87,8 @@ declare interface DescribeClusterRoleTokenResponse {
 declare interface DescribeClusterRolesRequest {
   /** 集群ID */
   ClusterId: string;
+  /** 角色名 */
+  RoleName?: string;
 }
 
 declare interface DescribeClusterRolesResponse {

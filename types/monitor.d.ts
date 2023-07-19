@@ -1248,14 +1248,6 @@ declare interface MetricDataPoint {
   Values: Point[];
 }
 
-/** 指标名称和值的封装 */
-declare interface MetricDatum {
-  /** 指标名称 */
-  MetricName: string;
-  /** 指标的值 */
-  Value: number;
-}
-
 /** 指标数据的解释 */
 declare interface MetricObjectMeaning {
   /** 指标英文解释 */
@@ -4488,22 +4480,6 @@ declare interface ModifyPrometheusTempResponse {
   RequestId?: string;
 }
 
-declare interface PutMonitorDataRequest {
-  /** 一组指标和数据 */
-  Metrics: MetricDatum[];
-  /** 上报时自行指定的 IP */
-  AnnounceIp?: string;
-  /** 上报时自行指定的时间戳 */
-  AnnounceTimestamp?: number;
-  /** 上报时自行指定的 IP 或 产品实例ID */
-  AnnounceInstance?: string;
-}
-
-declare interface PutMonitorDataResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ResumeGrafanaInstanceRequest {
   /** Grafana 实例 ID，例如：grafana-12345678 */
   InstanceId: string;
@@ -5153,8 +5129,6 @@ declare interface Monitor {
   ModifyPrometheusRecordRuleYaml(data: ModifyPrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusRecordRuleYamlResponse>;
   /** 修改模板实例 {@link ModifyPrometheusTempRequest} {@link ModifyPrometheusTempResponse} */
   ModifyPrometheusTemp(data: ModifyPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTempResponse>;
-  /** @deprecated 自定义监控上报数据 {@link PutMonitorDataRequest} {@link PutMonitorDataResponse} */
-  PutMonitorData(data: PutMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<PutMonitorDataResponse>;
   /** 恢复 Grafana 实例 {@link ResumeGrafanaInstanceRequest} {@link ResumeGrafanaInstanceResponse} */
   ResumeGrafanaInstance(data: ResumeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeGrafanaInstanceResponse>;
   /** 初始化TMP实例 {@link RunPrometheusInstanceRequest} {@link RunPrometheusInstanceResponse} */
