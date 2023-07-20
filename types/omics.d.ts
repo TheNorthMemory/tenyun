@@ -513,6 +513,8 @@ declare interface RunApplicationRequest {
   TableId?: string;
   /** 批量投递表格行UUID。不填表示表格全部行。 */
   TableRowUuids?: string[];
+  /** 应用版本ID。不填表示使用当前最新版本。 */
+  ApplicationVersionId?: string;
 }
 
 declare interface RunApplicationResponse {

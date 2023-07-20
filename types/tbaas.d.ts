@@ -52,52 +52,12 @@ declare interface ChainMakerTransactionResult {
   Timestamp: number | null;
 }
 
-/** 通道详情信息 */
-declare interface ChannelDetailForUser {
-  /** 通道名称 */
-  ChannelName: string;
-  /** 当前组织加入通道的节点列表 */
-  PeerList: PeerDetailForUser[];
-}
-
-/** 网络详情信息 */
-declare interface ClusterDetailForUser {
-  /** 网络ID */
-  ClusterId: string;
-  /** 组织列表 */
-  GroupList: GroupDetailForUser[];
-  /** 网络名称 */
-  ClusterName: string;
-}
-
 /** 背书组织及其节点列表 */
 declare interface EndorserGroup {
   /** 背书组织名称 */
   EndorserGroupName: string;
   /** 背书节点列表 */
   EndorserPeerList: string[];
-}
-
-/** 组织详情信息 */
-declare interface GroupDetailForUser {
-  /** 组织名称 */
-  GroupName: string;
-  /** 组织MSP Identity */
-  GroupMSPId: string;
-}
-
-/** 日志详情信息 */
-declare interface LogDetailForUser {
-  /** 日志行号 */
-  LineNumber: number;
-  /** 日志详情 */
-  LogMessage: string;
-}
-
-/** 节点详情信息 */
-declare interface PeerDetailForUser {
-  /** 节点名称 */
-  PeerName: string;
 }
 
 /** PeerSet */
@@ -180,32 +140,6 @@ declare interface ApplyUserCertResponse {
   RequestId?: string;
 }
 
-declare interface CreateChaincodeAndInstallForUserRequest {
-  /** 模块名，本接口取值：chaincode_mng */
-  Module: string;
-  /** 操作名，本接口取值：chaincode_create_and_install_for_user */
-  Operation: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称 */
-  GroupName: string;
-  /** 合约安装节点名称，可以在通道详情中获取该通道上的节点名称 */
-  PeerName: string;
-  /** 智能合约名称，格式说明：以小写字母开头，由2-12位数字或小写字母组成 */
-  ChaincodeName: string;
-  /** 智能合约版本，格式说明：由1-12位数字、小写字母、特殊符号(“.”)组成，如v1.0 */
-  ChaincodeVersion: string;
-  /** 智能合约代码文件类型，支持类型：1. "go"：.go合约文件2. "gozip"：go合约工程zip包，要求压缩目录为代码根目录3. "javazip"：java合约工程zip包，要求压缩目录为代码根目录4. "nodezip"：nodejs合约工程zip包，要求压缩目录为代码根目录 */
-  ChaincodeFileType: string;
-  /** 合约内容，合约文件或压缩包内容的base64编码，大小要求小于等于5M */
-  Chaincode: string;
-}
-
-declare interface CreateChaincodeAndInstallForUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DownloadUserCertRequest {
   /** 模块名，固定字段：cert_mng */
   Module: string;
@@ -284,138 +218,6 @@ declare interface GetBlockTransactionListForUserResponse {
   TotalCount?: number;
   /** 交易列表 */
   TransactionList?: TransactionItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetChaincodeCompileLogForUserRequest {
-  /** 模块名，本接口取值：chaincode_mng */
-  Module: string;
-  /** 操作名，本接口取值：chaincode_compile_log_for_user */
-  Operation: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 调用合约的组织名称 */
-  GroupName: string;
-  /** 业务所属智能合约名称 */
-  ChaincodeName: string;
-  /** 业务所属智能合约版本 */
-  ChaincodeVersion: string;
-  /** 合约安装节点名称，可以在通道详情中获取该通道上的节点名称 */
-  PeerName: string;
-  /** 返回数据项数，本接口默认取值：10 */
-  Limit?: number;
-  /** 返回数据起始偏移，本接口默认取值：0 */
-  Offset?: number;
-}
-
-declare interface GetChaincodeCompileLogForUserResponse {
-  /** 日志总行数，上限2000条日志 */
-  TotalCount?: number;
-  /** 日志列表 */
-  CompileLogList?: LogDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetChaincodeInitializeResultForUserRequest {
-  /** 模块名，本接口取值：chaincode_mng */
-  Module: string;
-  /** 操作名，本接口取值：chaincode_init_result_for_user */
-  Operation: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 调用合约的组织名称 */
-  GroupName: string;
-  /** 业务所属通道名称 */
-  ChannelName: string;
-  /** 业务所属合约名称 */
-  ChaincodeName: string;
-  /** 业务所属智能合约版本 */
-  ChaincodeVersion: string;
-  /** 实例化任务ID */
-  TaskId: number;
-}
-
-declare interface GetChaincodeInitializeResultForUserResponse {
-  /** 实例化结果：0，实例化中；1，实例化成功；2，实例化失败 */
-  InitResult?: number;
-  /** 实例化信息 */
-  InitMessage?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetChaincodeLogForUserRequest {
-  /** 模块名，本接口取值：chaincode_mng */
-  Module: string;
-  /** 操作名，本接口取值：chaincode_log_for_user */
-  Operation: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 调用合约的组织名称 */
-  GroupName: string;
-  /** 业务所属智能合约名称 */
-  ChaincodeName: string;
-  /** 业务所属智能合约版本 */
-  ChaincodeVersion: string;
-  /** 合约安装节点名称，可以在通道详情中获取该通道上的节点名称 */
-  PeerName: string;
-  /** 日志开始时间，如"2020-11-24 19:49:25" */
-  BeginTime: string;
-  /** 返回日志行数的最大值，系统设定该参数最大为1000，且一行日志的最大字节数是500，即最大返回50万个字节数的日志数据 */
-  RowNum: number;
-}
-
-declare interface GetChaincodeLogForUserResponse {
-  /** 返回日志总行数，不会超过入参的RowNum */
-  TotalCount: number;
-  /** 日志列表 */
-  ChaincodeLogList: LogDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetChannelListForUserRequest {
-  /** 模块名，本接口取值：channel_mng */
-  Module: string;
-  /** 操作名，本接口取值：channel_list_for_user */
-  Operation: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 组织名称 */
-  GroupName: string;
-  /** 返回数据项数，本接口默认取值：10，上限取值：20 */
-  Limit?: number;
-  /** 返回数据起始偏移，本接口默认取值：0 */
-  Offset?: number;
-}
-
-declare interface GetChannelListForUserResponse {
-  /** 通道总数量 */
-  TotalCount?: number;
-  /** 通道列表 */
-  ChannelList?: ChannelDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetClusterListForUserRequest {
-  /** 模块名，本接口取值：cluster_mng */
-  Module: string;
-  /** 操作名，本接口取值：cluster_list_for_user */
-  Operation: string;
-  /** 返回数据项数，本接口默认取值：10，上限取值：20 */
-  Limit?: number;
-  /** 返回数据起始偏移，本接口默认取值：0 */
-  Offset?: number;
-}
-
-declare interface GetClusterListForUserResponse {
-  /** 网络总数量 */
-  TotalCount?: number;
-  /** 网络列表 */
-  ClusterList?: ClusterDetailForUser[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -562,32 +364,6 @@ declare interface GetLatestTransactionListResponse {
   RequestId?: string;
 }
 
-declare interface GetPeerLogForUserRequest {
-  /** 模块名，本接口取值：peer_mng */
-  Module: string;
-  /** 操作名，本接口取值：peer_log_for_user */
-  Operation: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 调用合约的组织名称 */
-  GroupName: string;
-  /** 节点名称 */
-  PeerName: string;
-  /** 日志开始时间，如"2020-11-24 19:49:25" */
-  BeginTime: string;
-  /** 返回日志行数的最大值，系统设定该参数最大为1000，且一行日志的最大字节数是500，即最大返回50万个字节数的日志数据 */
-  RowNum: number;
-}
-
-declare interface GetPeerLogForUserResponse {
-  /** 返回日志总行数，不会超过入参的RowNum */
-  TotalCount: number;
-  /** 日志列表 */
-  PeerLogList: LogDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetTransactionDetailForUserRequest {
   /** 模块名，固定字段：transaction */
   Module: string;
@@ -632,34 +408,6 @@ declare interface GetTransactionDetailForUserResponse {
   ContractName?: string;
   /** 背书组织列表 */
   EndorserOrgList?: EndorserGroup[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface InitializeChaincodeForUserRequest {
-  /** 模块名，本接口取值：chaincode_mng */
-  Module: string;
-  /** 操作名，本接口取值：chaincode_init_for_user */
-  Operation: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 调用合约的组织名称 */
-  GroupName: string;
-  /** 业务所属智能合约名称 */
-  ChaincodeName: string;
-  /** 业务所属智能合约版本 */
-  ChaincodeVersion: string;
-  /** 业务所属通道名称 */
-  ChannelName: string;
-  /** 合约实例化节点名称，可以在通道详情中获取该通道上的节点名称 */
-  PeerName: string;
-  /** 实例化的函数参数列表 */
-  Args?: string[];
-}
-
-declare interface InitializeChaincodeForUserResponse {
-  /** 实例化任务ID，用于查询实例化结果 */
-  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -911,24 +659,12 @@ declare interface Tbaas {
   ApplyChainMakerBatchUserCert(data: ApplyChainMakerBatchUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyChainMakerBatchUserCertResponse>;
   /** 申请用户证书 {@link ApplyUserCertRequest} {@link ApplyUserCertResponse} */
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
-  /** @deprecated 创建并安装合约 {@link CreateChaincodeAndInstallForUserRequest} {@link CreateChaincodeAndInstallForUserResponse} */
-  CreateChaincodeAndInstallForUser(data: CreateChaincodeAndInstallForUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChaincodeAndInstallForUserResponse>;
   /** 下载用户证书 {@link DownloadUserCertRequest} {@link DownloadUserCertResponse} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
   /** 查询区块列表 {@link GetBlockListRequest} {@link GetBlockListResponse} */
   GetBlockList(data: GetBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockListResponse>;
   /** 获取区块内的交易列表 {@link GetBlockTransactionListForUserRequest} {@link GetBlockTransactionListForUserResponse} */
   GetBlockTransactionListForUser(data: GetBlockTransactionListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockTransactionListForUserResponse>;
-  /** @deprecated 获取合约编译日志 {@link GetChaincodeCompileLogForUserRequest} {@link GetChaincodeCompileLogForUserResponse} */
-  GetChaincodeCompileLogForUser(data: GetChaincodeCompileLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeCompileLogForUserResponse>;
-  /** @deprecated 实例化结果查询 {@link GetChaincodeInitializeResultForUserRequest} {@link GetChaincodeInitializeResultForUserResponse} */
-  GetChaincodeInitializeResultForUser(data: GetChaincodeInitializeResultForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeInitializeResultForUserResponse>;
-  /** @deprecated 获取合约容器日志 {@link GetChaincodeLogForUserRequest} {@link GetChaincodeLogForUserResponse} */
-  GetChaincodeLogForUser(data: GetChaincodeLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeLogForUserResponse>;
-  /** @deprecated 获取通道列表 {@link GetChannelListForUserRequest} {@link GetChannelListForUserResponse} */
-  GetChannelListForUser(data: GetChannelListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChannelListForUserResponse>;
-  /** @deprecated 获取网络列表 {@link GetClusterListForUserRequest} {@link GetClusterListForUserResponse} */
-  GetClusterListForUser(data: GetClusterListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterListForUserResponse>;
   /** 获取区块链网络概要 {@link GetClusterSummaryRequest} {@link GetClusterSummaryResponse} */
   GetClusterSummary(data: GetClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterSummaryResponse>;
   /** Invoke异步调用结果查询 {@link GetInvokeTxRequest} {@link GetInvokeTxResponse} */
@@ -937,12 +673,8 @@ declare interface Tbaas {
   GetLatesdTransactionList(data: GetLatesdTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatesdTransactionListResponse>;
   /** 获取fabric最新交易列表 {@link GetLatestTransactionListRequest} {@link GetLatestTransactionListResponse} */
   GetLatestTransactionList(data: GetLatestTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatestTransactionListResponse>;
-  /** @deprecated 获取节点日志 {@link GetPeerLogForUserRequest} {@link GetPeerLogForUserResponse} */
-  GetPeerLogForUser(data: GetPeerLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetPeerLogForUserResponse>;
   /** 获取交易详情 {@link GetTransactionDetailForUserRequest} {@link GetTransactionDetailForUserResponse} */
   GetTransactionDetailForUser(data: GetTransactionDetailForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetTransactionDetailForUserResponse>;
-  /** @deprecated 实例化合约 {@link InitializeChaincodeForUserRequest} {@link InitializeChaincodeForUserResponse} */
-  InitializeChaincodeForUser(data: InitializeChaincodeForUserRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeChaincodeForUserResponse>;
   /** 新增交易 {@link InvokeRequest} {@link InvokeResponse} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;
   /** 调用长安链合约执行交易 {@link InvokeChainMakerContractRequest} {@link InvokeChainMakerContractResponse} */

@@ -83,19 +83,19 @@ declare interface ApiAppApiInfos {
 /** 应用信息 */
 declare interface ApiAppInfo {
   /** 应用名称 */
-  ApiAppName: string | null;
+  ApiAppName?: string | null;
   /** 应用ID */
-  ApiAppId: string;
-  /** 应用SECRET */
-  ApiAppSecret: string | null;
+  ApiAppId?: string;
+  /** 应用SECRET注意:此字段可能返回null，表示取不到有效值 */
+  ApiAppSecret?: string | null;
   /** 应用描述 */
-  ApiAppDesc: string | null;
+  ApiAppDesc?: string | null;
   /** 创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 修改时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  ModifiedTime: string | null;
-  /** 应用KEY */
-  ApiAppKey: string | null;
+  ModifiedTime?: string | null;
+  /** 应用KEY注意:此字段可能返回null，表示取不到有效值 */
+  ApiAppKey?: string | null;
 }
 
 /** 应用信息集 */
@@ -2181,7 +2181,7 @@ declare interface DescribeApiAppRequest {
 
 declare interface DescribeApiAppResponse {
   /** 应用详情。 */
-  Result: ApiAppInfos | null;
+  Result?: ApiAppInfos | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

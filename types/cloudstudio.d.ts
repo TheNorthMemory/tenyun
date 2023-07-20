@@ -108,7 +108,7 @@ declare interface CreateWorkspaceResponse {
 
 declare interface CreateWorkspaceTokenRequest {
   /** 工作空间 SpaceKey */
-  SpaceKey?: string;
+  SpaceKey: string;
   /** token过期时间，单位是秒，默认 3600 */
   TokenExpiredLimitSec?: number;
 }
@@ -857,8 +857,8 @@ declare interface Cloudstudio {
   (): Versions;
   /** 创建工作空间 {@link CreateWorkspaceRequest} {@link CreateWorkspaceResponse} */
   CreateWorkspace(data: CreateWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceResponse>;
-  /** 为工作空间创建临时访问凭证 {@link CreateWorkspaceTokenRequest} {@link CreateWorkspaceTokenResponse} */
-  CreateWorkspaceToken(data?: CreateWorkspaceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceTokenResponse>;
+  /** 创建工作空间临时访问凭证 {@link CreateWorkspaceTokenRequest} {@link CreateWorkspaceTokenResponse} */
+  CreateWorkspaceToken(data: CreateWorkspaceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceTokenResponse>;
   /** 获取用户配置 {@link DescribeConfigRequest} {@link DescribeConfigResponse} */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
   /** 获取基础镜像列表 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */

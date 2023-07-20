@@ -4042,20 +4042,6 @@ declare interface ModifyCDBProxyConnectionPoolResponse {
   RequestId?: string;
 }
 
-declare interface ModifyCDBProxyDescRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 数据库代理ID */
-  ProxyGroupId: string;
-  /** 数据库代理描述 */
-  Desc: string;
-}
-
-declare interface ModifyCDBProxyDescResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyCDBProxyVipVPortRequest {
   /** 代理组ID */
   ProxyGroupId: string;
@@ -4651,7 +4637,7 @@ declare interface UpgradeDBInstanceRequest {
   InstanceRole?: string;
   /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 */
   DeviceType?: string;
-  /** 升级后的实例cpu核数，如果不传将根据 Memory 指定的内存值自动填充对应的cpu值。 */
+  /** 升级后的实例cpu核数，如果不传将根据 Memory 指定的内存值自动填充最小允许规格的cpu值。 */
   Cpu?: number;
   /** 是否极速变配。0-普通升级，1-极速变配，2 极速优先。选择极速变配会根据资源状况校验是否可以进行极速变配，满足条件则进行极速变配，不满足条件会返回报错信息。 */
   FastUpgrade?: number;
@@ -4909,8 +4895,6 @@ declare interface Cdb {
   ModifyBackupEncryptionStatus(data: ModifyBackupEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupEncryptionStatusResponse>;
   /** @deprecated 配置数据库代理连接池 {@link ModifyCDBProxyConnectionPoolRequest} {@link ModifyCDBProxyConnectionPoolResponse} */
   ModifyCDBProxyConnectionPool(data: ModifyCDBProxyConnectionPoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyConnectionPoolResponse>;
-  /** @deprecated 修改数据库代理描述 {@link ModifyCDBProxyDescRequest} {@link ModifyCDBProxyDescResponse} */
-  ModifyCDBProxyDesc(data: ModifyCDBProxyDescRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyDescResponse>;
   /** @deprecated 修改数据库代理VIP或端口 {@link ModifyCDBProxyVipVPortRequest} {@link ModifyCDBProxyVipVPortResponse} */
   ModifyCDBProxyVipVPort(data: ModifyCDBProxyVipVPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyVipVPortResponse>;
   /** 修改代理地址描述 {@link ModifyCdbProxyAddressDescRequest} {@link ModifyCdbProxyAddressDescResponse} */

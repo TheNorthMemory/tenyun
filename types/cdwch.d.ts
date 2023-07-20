@@ -141,73 +141,73 @@ declare interface InstanceConfigItem {
 /** 实例描述信息 */
 declare interface InstanceInfo {
   /** 集群实例ID, "cdw-xxxx" 字符串类型 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 集群实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 状态,Init 创建中; Serving 运行中； Deleted已销毁；Deleting 销毁中；Modify 集群变更中； */
-  Status: string | null;
+  Status?: string | null;
   /** 版本 */
-  Version: string | null;
+  Version?: string | null;
   /** 地域, ap-guangzhou */
-  Region: string | null;
+  Region?: string | null;
   /** 可用区， ap-guangzhou-3 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 私有网络名称 */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网名称 */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 付费类型，"hour", "prepay" */
-  PayMode: string | null;
+  PayMode?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 过期时间 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 数据节点描述信息 */
-  MasterSummary: NodesSummary | null;
+  MasterSummary?: NodesSummary | null;
   /** zookeeper节点描述信息 */
-  CommonSummary: NodesSummary | null;
+  CommonSummary?: NodesSummary | null;
   /** 高可用，“true" "false" */
-  HA: string | null;
+  HA?: string | null;
   /** 访问地址，例如 "10.0.0.1:9000" */
-  AccessInfo: string | null;
+  AccessInfo?: string | null;
   /** 记录ID，数值型 */
-  Id: number | null;
+  Id?: number | null;
   /** regionId, 表示地域 */
-  RegionId: number | null;
+  RegionId?: number | null;
   /** 可用区说明，例如 "广州二区" */
-  ZoneDesc: string | null;
+  ZoneDesc?: string | null;
   /** 错误流程说明信息 */
-  FlowMsg: string | null;
+  FlowMsg?: string | null;
   /** 状态描述，例如“运行中”等 */
-  StatusDesc: string | null;
+  StatusDesc?: string | null;
   /** 自动续费标记 */
-  RenewFlag: boolean | null;
+  RenewFlag?: boolean | null;
   /** 标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 监控信息 */
-  Monitor: string | null;
+  Monitor?: string | null;
   /** 是否开通日志 */
-  HasClsTopic: boolean | null;
+  HasClsTopic?: boolean | null;
   /** 日志主题ID */
-  ClsTopicId: string | null;
+  ClsTopicId?: string | null;
   /** 日志集ID */
-  ClsLogSetId: string | null;
+  ClsLogSetId?: string | null;
   /** 是否支持xml配置管理 */
-  EnableXMLConfig: number | null;
+  EnableXMLConfig?: number | null;
   /** 区域 */
-  RegionDesc: string | null;
+  RegionDesc?: string | null;
   /** 弹性网卡地址 */
-  Eip: string | null;
+  Eip?: string | null;
   /** 冷热分层系数 */
-  CosMoveFactor: number | null;
+  CosMoveFactor?: number | null;
   /** external/local/yunti */
-  Kind: string | null;
+  Kind?: string | null;
   /** 是否弹性ck */
-  IsElastic: boolean | null;
+  IsElastic?: boolean | null;
   /** 集群详细状态 */
-  InstanceStateInfo: InstanceStateInfo | null;
+  InstanceStateInfo?: InstanceStateInfo | null;
   /** ZK高可用 */
-  HAZk: boolean | null;
+  HAZk?: boolean | null;
   /** 挂载盘,默认0:没有类型；1:裸盘;2:lvm */
   MountDiskType?: number | null;
   /** 无 */
@@ -224,26 +224,36 @@ declare interface InstanceInfo {
   Components?: ServiceInfo[] | null;
   /** 可升级的内核版本 */
   UpgradeVersions?: string | null;
+  /** ex-index */
+  EsIndexId?: string | null;
+  /** username */
+  EsIndexUsername?: string | null;
+  /** password */
+  EsIndexPassword?: string | null;
+  /** true */
+  HasEsIndex?: boolean | null;
 }
 
 /** 集群状态抽象后的结构体 */
 declare interface InstanceStateInfo {
   /** 集群状态，例如：Serving */
-  InstanceState: string | null;
+  InstanceState?: string | null;
   /** 集群操作创建时间 */
-  FlowCreateTime: string | null;
+  FlowCreateTime?: string | null;
   /** 集群操作名称 */
-  FlowName: string | null;
+  FlowName?: string | null;
   /** 集群操作进度 */
-  FlowProgress: number | null;
+  FlowProgress?: number | null;
   /** 集群状态描述，例如：运行中 */
-  InstanceStateDesc: string | null;
+  InstanceStateDesc?: string | null;
   /** 集群流程错误信息，例如：“创建失败，资源不足” */
-  FlowMsg: string | null;
+  FlowMsg?: string | null;
   /** 当前步骤的名称，例如：”购买资源中“ */
-  ProcessName: string | null;
+  ProcessName?: string | null;
   /** 请求id */
   RequestId?: string | null;
+  /** 流程的二级名称 */
+  ProcessSubName?: string | null;
 }
 
 /** kv配置，多层级item */

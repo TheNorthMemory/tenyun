@@ -276,6 +276,28 @@ declare interface InstanceConcurrencyConfig {
   MaxConcurrency?: number | null;
 }
 
+/** k8s label */
+declare interface K8SLabel {
+  /** label的名称 */
+  Key: string;
+  /** label的值 */
+  Value: string;
+}
+
+/** Kubernetes污点容忍，使用时请注意您的Kubernetes版本所支持的字段情况。可参考 https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/taint-and-toleration/ */
+declare interface K8SToleration {
+  /** 匹配的污点名 */
+  Key: string;
+  /** 匹配方式，默认值为: Equal */
+  Operator?: string | null;
+  /** 执行策略 */
+  Effect?: string | null;
+  /** 匹配的污点值，当Operator为Equal时必填 */
+  Value?: string | null;
+  /** 当污点不被容忍时，Pod还能在节点上运行多久 */
+  TolerationSeconds?: number | null;
+}
+
 /** 层版本信息 */
 declare interface LayerVersionInfo {
   /** 版本适用的运行时 */
@@ -366,6 +388,30 @@ declare interface NamespaceLimit {
   MinMsgTTL: number;
   /** 异步重试消息保留时间上限 */
   MaxMsgTTL: number;
+}
+
+/** 命名空间资源池配置 */
+declare interface NamespaceResourceEnv {
+  /** 基于TKE集群的资源池 */
+  TKE?: NamespaceResourceEnvTKE | null;
+}
+
+/** 基于TKE的资源池选项 */
+declare interface NamespaceResourceEnvTKE {
+  /** 集群ID */
+  ClusterID: string;
+  /** 子网ID */
+  SubnetID: string;
+  /** 命名空间 */
+  Namespace: string;
+  /** 数据存储地址 */
+  DataPath?: string | null;
+  /** node选择器 */
+  NodeSelector?: K8SLabel[] | null;
+  /** 污点容忍 */
+  Tolerations?: K8SToleration[] | null;
+  /** scf组件将占用的节点端口起始号 */
+  Port?: number | null;
 }
 
 /** 名称空间已使用信息 */
@@ -779,6 +825,8 @@ declare interface CreateNamespaceRequest {
   Namespace: string;
   /** 命名空间描述 */
   Description?: string;
+  /** 资源池配置 */
+  ResourceEnv?: NamespaceResourceEnv;
 }
 
 declare interface CreateNamespaceResponse {

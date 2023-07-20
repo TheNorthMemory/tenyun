@@ -253,9 +253,9 @@ declare interface McuPassThrough {
   /** PayloadType为5，PayloadUuid必须填写。PayloadType不是5时，不需要填写，填写会被后台忽略。该值必须是32长度的十六进制。 */
   PayloadUuid?: string;
   /** SEI发送间隔，单位毫秒，默认值为1000。 */
-  Interval?: number | null;
+  Interval?: number;
   /** 取值范围[0,1]，填1：发送关键帧时会确保带SEI；填0：发送关键帧时不确保带SEI。默认值为0。 */
-  FollowIdr?: number | null;
+  FollowIdr?: number;
 }
 
 /** 转推参数。 */

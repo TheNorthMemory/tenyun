@@ -3860,14 +3860,14 @@ declare interface QualityEvaluationConfigureInfoForUpdate {
 
 /** 音画质检测异常片段信息。 */
 declare interface QualityInspectItem {
-  /** 置信度，取值范围：[0, 100]。注意： 仅当 Type 取值为下列之一时，本字段取值有效：Mosaic：马赛克；QRCode：二维码；AppletCode：小程序码；BarCode：条形码。 */
-  Confidence?: number;
   /** 异常片段起始的偏移时间，单位：秒。 */
   StartTimeOffset?: number;
   /** 异常片段终止的偏移时间，单位：秒。 */
   EndTimeOffset?: number;
   /** 检测出异常的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。注意： 仅当 Type 取值为下列之一时，本字段取值有效：BlackWhiteEdge：黑白边；Mosaic：马赛克；QRCode：二维码；AppletCode：小程序码；BarCode：条形码。 */
   AreaCoordSet?: number[];
+  /** 置信度，取值范围：[0, 100]。注意： 仅当 Type 取值为下列之一时，本字段取值有效：Mosaic：马赛克；QRCode：二维码；AppletCode：小程序码；BarCode：条形码。 */
+  Confidence?: number;
 }
 
 /** 音画质检测异常结果信息。 */
@@ -5919,10 +5919,10 @@ declare interface CreateQualityInspectTemplateRequest {
   MosaicConfigure?: MosaicConfigureInfo;
   /** 视频画面二维码检测的控制参数。 */
   QRCodeConfigure?: QRCodeConfigureInfo;
-  /** 视频画面质量评价的控制参数。 */
-  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo;
   /** 音频（静音、低音、爆音）检测的控制参数。 */
   VoiceConfigure?: VoiceConfigureInfo;
+  /** 视频画面质量评价的控制参数。 */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo;
 }
 
 declare interface CreateQualityInspectTemplateResponse {
@@ -8125,10 +8125,10 @@ declare interface ModifyQualityInspectTemplateRequest {
   MosaicConfigure?: MosaicConfigureInfoForUpdate;
   /** 视频画面二维码检测的控制参数。 */
   QRCodeConfigure?: QRCodeConfigureInfoForUpdate;
-  /** 视频画面质量评价的控制参数。 */
-  QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate;
   /** 音频（静音、低音、爆音）检测的控制参数。 */
   VoiceConfigure?: VoiceConfigureInfoForUpdate;
+  /** 视频画面质量评价的控制参数。 */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate;
 }
 
 declare interface ModifyQualityInspectTemplateResponse {

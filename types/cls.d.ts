@@ -597,35 +597,35 @@ declare interface KafkaProtocolInfo {
 /** Kafka导入配置信息 */
 declare interface KafkaRechargeInfo {
   /** 主键ID */
-  Id: string | null;
+  Id?: string | null;
   /** 日志主题ID */
-  TopicId: string | null;
+  TopicId?: string | null;
   /** Kafka导入任务名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
   KafkaType?: number | null;
   /** 腾讯云CKafka实例ID，KafkaType为0时必填 */
   KafkaInstance?: string | null;
   /** 服务地址 */
-  ServerAddr: string | null;
+  ServerAddr?: string | null;
   /** ServerAddr是否为加密连接 */
   IsEncryptionAddr?: boolean | null;
   /** 加密访问协议，IsEncryptionAddr参数为true时必填 */
   Protocol?: KafkaProtocolInfo;
   /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开 */
-  UserKafkaTopics: string | null;
+  UserKafkaTopics?: string | null;
   /** 用户Kafka消费组名称 */
-  ConsumerGroupName: string | null;
+  ConsumerGroupName?: string | null;
   /** 状态 status 1: 运行中, 2: 暂停 ... */
-  Status: number | null;
-  /** 导入数据位置，-1:最早（默认），-2：最晚，大于等于0: 指定offset */
+  Status?: number | null;
+  /** 导入数据位置，-2:最早（默认），-1：最晚 */
   Offset?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 日志导入规则 */
-  LogRechargeRule: LogRechargeRuleInfo | null;
+  LogRechargeRule?: LogRechargeRuleInfo | null;
 }
 
 /** 需要过滤日志的key，及其对应的regex */

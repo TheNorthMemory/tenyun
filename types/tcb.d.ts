@@ -1057,15 +1057,15 @@ declare interface StandaloneGatewayPackageInfo {
 /** 静态CDN资源信息 */
 declare interface StaticStorageInfo {
   /** 静态CDN域名 */
-  StaticDomain: string | null;
+  StaticDomain?: string | null;
   /** 静态CDN默认文件夹，当前为根目录 */
-  DefaultDirName: string | null;
+  DefaultDirName?: string | null;
   /** 资源状态(process/online/offline/init) */
-  Status: string | null;
+  Status?: string | null;
   /** cos所属区域 */
-  Region: string | null;
+  Region?: string | null;
   /** bucket信息 */
-  Bucket: string | null;
+  Bucket?: string | null;
 }
 
 /** StorageInfo 资源信息 */

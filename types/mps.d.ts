@@ -3133,9 +3133,9 @@ declare interface OverrideTranscodeParameter {
   /** 音频流配置参数。 */
   AudioTemplate?: AudioTemplateInfoForUpdate;
   /** 极速高清转码参数。 */
-  TEHDConfig?: TEHDConfigForUpdate;
+  TEHDConfig?: TEHDConfigForUpdate | null;
   /** 字幕流配置参数。 */
-  SubtitleTemplate?: SubtitleTemplate;
+  SubtitleTemplate?: SubtitleTemplate | null;
   /** 外挂音轨参数。 */
   AddonAudioStream?: MediaInputInfo[] | null;
 }
@@ -4210,7 +4210,7 @@ declare interface VideoTemplateInfo {
 declare interface VideoTemplateInfoForUpdate {
   /** 视频流的编码格式，可选值：libx264：H.264 编码libx265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
   Codec?: string;
-  /** 视频帧率，取值范围：[0, 100]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
   Fps?: number;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate?: number;
