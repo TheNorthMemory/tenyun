@@ -2,62 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** bcos网络信息 */
-declare interface BcosClusterItem {
-  /** 网络索引id */
-  ChainId: number;
-  /** 网络名称 */
-  ChainName: string;
-  /** 机构数量 */
-  AgencyCount: number;
-  /** 联盟id */
-  ConsortiumId: number;
-  /** 创建时间 */
-  CreateTime: string;
-  /** 过期时间 */
-  ExpireTime: string;
-  /** 网络状态 */
-  ChainStatus: number;
-  /** 资源 id */
-  ResourceId: string;
-  /** 集群id */
-  ClusterId: string;
-  /** 组织名称 */
-  ConsortiumName: string;
-  /** 机构id */
-  AgencyId: number;
-  /** 续费状态 */
-  AutoRenewFlag: number;
-  /** 网络模式 */
-  TotalNetworkNode: number;
-  /** 创建节点数 */
-  TotalCreateNode: number;
-  /** 总群组数量 */
-  TotalGroups: number;
-}
-
-/** 联盟信息 */
-declare interface ConsortiumItem {
-  /** 联盟id */
-  Id: number;
-  /** 联盟名称 */
-  Name: string;
-}
-
-/** 模板颁发量排名 */
-declare interface CptIssueRank {
-  /** 模板名称 */
-  CptName: string;
-  /** 名次 */
-  Rank: number;
-  /** 颁发量 */
-  Count: number;
-  /** 应用名称 */
-  ApplyName: string;
-  /** 应用ID */
-  ApplyId: number;
-}
-
 /** 凭证链上状态信息 */
 declare interface CredentialStatus {
   /** 凭证唯一id */
@@ -294,28 +238,6 @@ declare interface GetAuthorityIssuerResponse {
   RequestId?: string;
 }
 
-declare interface GetConsortiumClusterListRequest {
-  /** 联盟id */
-  ConsortiumId: number;
-}
-
-declare interface GetConsortiumClusterListResponse {
-  /** 网络列表 */
-  ClusterList: BcosClusterItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetConsortiumListRequest {
-}
-
-declare interface GetConsortiumListResponse {
-  /** 联盟列表 */
-  ConsortiumList: ConsortiumItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetCptInfoRequest {
   /** Cpt索引 */
   CptIndex: number;
@@ -324,22 +246,6 @@ declare interface GetCptInfoRequest {
 declare interface GetCptInfoResponse {
   /** CptJsonData的具体信息 */
   CptJsonData: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetCredentialCptRankRequest {
-  /** 开始时间（支持到天 2021-4-23） */
-  StartTime: string;
-  /** 结束时间（支持到天 2021-4-23） */
-  EndTime: string;
-  /** 网络ID */
-  ClusterId?: string;
-}
-
-declare interface GetCredentialCptRankResponse {
-  /** Rank集合 */
-  RankIssueResult: CptIssueRank[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -437,14 +343,8 @@ declare interface Tdid {
   GetAgencyTDid(data: GetAgencyTDidRequest, config?: AxiosRequestConfig): AxiosPromise<GetAgencyTDidResponse>;
   /** @deprecated 获取权威机构信息 {@link GetAuthorityIssuerRequest} {@link GetAuthorityIssuerResponse} */
   GetAuthorityIssuer(data: GetAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthorityIssuerResponse>;
-  /** @deprecated 获取联盟bcos网络列表 {@link GetConsortiumClusterListRequest} {@link GetConsortiumClusterListResponse} */
-  GetConsortiumClusterList(data: GetConsortiumClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<GetConsortiumClusterListResponse>;
-  /** @deprecated 获取联盟列表 {@link GetConsortiumListRequest} {@link GetConsortiumListResponse} */
-  GetConsortiumList(data?: GetConsortiumListRequest, config?: AxiosRequestConfig): AxiosPromise<GetConsortiumListResponse>;
   /** @deprecated 凭证模版详情 {@link GetCptInfoRequest} {@link GetCptInfoResponse} */
   GetCptInfo(data: GetCptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCptInfoResponse>;
-  /** @deprecated 凭证颁发模板排行 {@link GetCredentialCptRankRequest} {@link GetCredentialCptRankResponse} */
-  GetCredentialCptRank(data: GetCredentialCptRankRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialCptRankResponse>;
   /** @deprecated 获取凭证链上状态 {@link GetCredentialStatusRequest} {@link GetCredentialStatusResponse} */
   GetCredentialStatus(data: GetCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialStatusResponse>;
   /** @deprecated 查看DID文档 {@link GetDidDocumentRequest} {@link GetDidDocumentResponse} */

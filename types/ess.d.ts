@@ -428,7 +428,7 @@ declare interface FlowCreateApprover {
   Required?: boolean;
   /** 签署人用户来源,企微侧用户请传入：WEWORKAPP */
   ApproverSource?: string;
-  /** 客户自定义签署人标识，64位长度，保证唯一。非企微场景不使用此字段 */
+  /** 客户自定义签署人标识，64位长度，保证唯一。用于发起含有或签签署人的合同。或签参与人必须有此字段。不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP */
   CustomApproverTag?: string;
   /** 快速注册相关信息，目前暂未开放！ */
   RegisterInfo?: RegisterInfo;
@@ -713,7 +713,9 @@ declare interface RegisterInfo {
   /** 法人姓名 */
   LegalName: string;
   /** 社会统一信用代码 */
-  Uscc: string;
+  Uscc?: string;
+  /** 社会统一信用代码 */
+  UnifiedSocialCreditCode?: string;
 }
 
 /** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。注意：当指定C端签署人的签署方自定义控件别名不空时，除RelievedApproverReceiptId参数外，可以只参数ApproverSignRole。 */
@@ -1513,6 +1515,8 @@ declare interface CreateSchemeUrlRequest {
   AutoJumpBack?: boolean;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下0:合同签署页面更多操作按钮1:合同签署页面更多操作的拒绝签署按钮2:合同签署页面更多操作的转他人处理按钮3:签署成功页的查看详情按钮 */
+  Hides?: number[];
 }
 
 declare interface CreateSchemeUrlResponse {

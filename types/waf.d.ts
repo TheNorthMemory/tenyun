@@ -877,7 +877,7 @@ declare interface AddDomainWhiteRuleRequest {
   Url?: string;
   /** 规则的方法 */
   Function?: string;
-  /** 规则的开关 */
+  /** 规则的开关，0表示规则关闭，1表示规则打开 */
   Status?: number;
 }
 
@@ -1213,7 +1213,7 @@ declare interface DescribeAutoDenyIPResponse {
 declare interface DescribeCustomWhiteRuleRequest {
   /** 域名 */
   Domain: string;
-  /** 偏移 */
+  /** 偏移量 */
   Offset: number;
   /** 容量 */
   Limit: number;
@@ -1227,9 +1227,9 @@ declare interface DescribeCustomWhiteRuleRequest {
 
 declare interface DescribeCustomWhiteRuleResponse {
   /** 规则详情 */
-  RuleList: DescribeCustomRulesRspRuleListItem[];
+  RuleList?: DescribeCustomRulesRspRuleListItem[];
   /** 规则条数 */
-  TotalCount: string;
+  TotalCount?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1721,7 +1721,7 @@ declare interface ModifyWafAutoDenyRulesRequest {
   TimeThreshold: number;
   /** 触发IP封禁后的封禁时间，范围为5~360分钟 */
   DenyTimeThreshold: number;
-  /** 自动封禁状态 */
+  /** 自动封禁状态，0表示关闭，1表示打开 */
   DefenseStatus: number;
 }
 
@@ -1855,9 +1855,9 @@ declare interface SwitchDomainRulesRequest {
   Domain?: string;
   /** 规则列表 */
   Ids?: number[];
-  /** 开关状态 */
+  /** 开关状态，0表示关闭，1表示开启，2表示只观察 */
   Status?: number;
-  /** 设置为观察模式原因 */
+  /** 设置为观察模式原因，1表示业务自身原因观察，2表示系统规则误报上报，3表示核心业务灰度观察，4表示其他 */
   Reason?: number;
 }
 

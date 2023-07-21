@@ -67,19 +67,19 @@ declare interface DetectInfoBestFrame {
 /** 核身身份证图片信息 */
 declare interface DetectInfoIdCardData {
   /** OCR正面照片的base64编码。 */
-  OcrFront: string | null;
+  OcrFront?: string | null;
   /** OCR反面照片的base64编码 */
-  OcrBack: string | null;
+  OcrBack?: string | null;
   /** 旋转裁边后的正面照片base64编码。 */
-  ProcessedFrontImage: string | null;
+  ProcessedFrontImage?: string | null;
   /** 旋转裁边后的背面照片base64编码。 */
-  ProcessedBackImage: string | null;
+  ProcessedBackImage?: string | null;
   /** 身份证正面人像图base64编码。 */
-  Avatar: string | null;
-  /** 身份证人像面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警，-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证 PS 告警，-9107 身份证反光告警。 */
-  WarnInfos: number[] | null;
-  /** 身份证国徽面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警，-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证 PS 告警，-9107 身份证反光告警。 */
-  BackWarnInfos: number[] | null;
+  Avatar?: string | null;
+  /** 身份证人像面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警，-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证 PS 告警（疑似存在PS痕迹），-9107 身份证反光告警。 */
+  WarnInfos?: number[] | null;
+  /** 身份证国徽面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警，-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证 PS 告警（疑似存在PS痕迹），-9107 身份证反光告警。 */
+  BackWarnInfos?: number[] | null;
 }
 
 /** 核身文本信息 */
@@ -165,15 +165,15 @@ declare interface EidInfo {
 /** 敏感数据加密 */
 declare interface Encryption {
   /** 在使用加密服务时，填入要被加密的字段。本接口中可填入加密后的一个或多个字段 */
-  EncryptList: string[];
+  EncryptList: string[] | null;
   /** 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅数据加密 文档。 */
-  CiphertextBlob: string;
+  CiphertextBlob: string | null;
   /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。 */
-  Iv: string;
+  Iv: string | null;
   /** 加密使用的算法（支持'AES-256-CBC'、'SM4-GCM'），不传默认为'AES-256-CBC' */
-  Algorithm?: string;
+  Algorithm?: string | null;
   /** SM4-GCM算法生成的消息摘要（校验消息完整性时使用） */
-  TagList?: string[];
+  TagList?: string[] | null;
 }
 
 /** 获取token时的配置 */
@@ -357,7 +357,7 @@ declare interface CheckIdCardInformationRequest {
   ImageBase64?: string;
   /** 身份证人像面的 Url 地址支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 以下可选字段均为bool 类型，默认false：CopyWarn，复印件告警BorderCheckWarn，边框和框内遮挡告警ReshootWarn，翻拍告警DetectPsWarn，PS检测告警TempIdWarn，临时身份证告警Quality，图片质量告警（评价图片模糊程度）SDK 设置方式参考：Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})API 3.0 Explorer 设置方式参考：Config = {"CopyWarn":true,"ReshootWarn":true} */
+  /** 以下可选字段均为bool 类型，默认false：CopyWarn，复印件告警BorderCheckWarn，边框和框内遮挡告警ReshootWarn，翻拍告警DetectPsWarn，PS检测告警（疑似存在PS痕迹）TempIdWarn，临时身份证告警Quality，图片质量告警（评价图片模糊程度）SDK 设置方式参考：Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})API 3.0 Explorer 设置方式参考：Config = {"CopyWarn":true,"ReshootWarn":true} */
   Config?: string;
   /** 是否需要对返回中的敏感信息进行加密。默认false。其中敏感信息包括：Response.IdNum、Response.Name */
   IsEncrypt?: boolean;
@@ -365,31 +365,31 @@ declare interface CheckIdCardInformationRequest {
 
 declare interface CheckIdCardInformationResponse {
   /** 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一） */
-  Sim: number;
+  Sim?: number;
   /** 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分 */
-  Result: string;
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 姓名 */
-  Name: string;
+  Name?: string;
   /** 性别 */
-  Sex: string;
+  Sex?: string;
   /** 民族 */
-  Nation: string;
+  Nation?: string;
   /** 出生日期 */
-  Birth: string;
+  Birth?: string;
   /** 地址 */
-  Address: string;
+  Address?: string;
   /** 身份证号 */
-  IdNum: string;
+  IdNum?: string;
   /** 身份证头像照片的base64编码，如果抠图失败会拿整张身份证做比对并返回空。 */
-  Portrait: string;
-  /** 告警信息，当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息，Code 告警码列表和释义：-9101 身份证边框不完整告警，-9102 身份证复印件告警，-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证 PS 告警。-8001 图片模糊告警多个会 | 隔开如 "-9101|-9106|-9104" */
-  Warnings: string;
+  Portrait?: string;
+  /** 告警信息，当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息，Code 告警码列表和释义：-9101 身份证边框不完整告警，-9102 身份证复印件告警，-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证 PS 告警（疑似存在PS痕迹）。-8001 图片模糊告警多个会 | 隔开如 "-9101|-9106|-9104" */
+  Warnings?: string;
   /** 图片质量分数，当请求Config中配置图片模糊告警该参数才有意义，取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。 */
-  Quality: number;
+  Quality?: number;
   /** 敏感数据加密信息。 */
-  Encryption: Encryption | null;
+  Encryption?: Encryption | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -743,9 +743,9 @@ declare interface IdCardVerificationRequest {
 
 declare interface IdCardVerificationResponse {
   /** 认证结果码，收费情况如下。收费结果码：0: 姓名和身份证号一致-1: 姓名和身份证号不一致不收费结果码：-2: 非法身份证号（长度、校验位等不正确）-3: 非法姓名（长度、格式等不正确）-4: 证件库服务异常-5: 证件库中无此身份证记录-6: 权威比对系统升级中，请稍后再试-7: 认证次数超过当日限制 */
-  Result: string;
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1109,7 +1109,7 @@ declare interface Faceid {
   GetWeChatBillDetails(data: GetWeChatBillDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetWeChatBillDetailsResponse>;
   /** 身份证识别及信息核验 {@link IdCardOCRVerificationRequest} {@link IdCardOCRVerificationResponse} */
   IdCardOCRVerification(data?: IdCardOCRVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardOCRVerificationResponse>;
-  /** 身份信息认证 {@link IdCardVerificationRequest} {@link IdCardVerificationResponse} */
+  /** 身份信息认证（二要素核验） {@link IdCardVerificationRequest} {@link IdCardVerificationResponse} */
   IdCardVerification(data: IdCardVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardVerificationResponse>;
   /** 照片人脸核身 {@link ImageRecognitionRequest} {@link ImageRecognitionResponse} */
   ImageRecognition(data: ImageRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<ImageRecognitionResponse>;

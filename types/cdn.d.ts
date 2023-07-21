@@ -3433,7 +3433,7 @@ declare interface DescribePushTasksRequest {
   Offset?: number;
   /** 分页查询限制数目，默认为 20 */
   Limit?: number;
-  /** 指定地区查询预热纪录mainland：境内overseas：境外global：全球 */
+  /** 指定地区查询预热记录mainland：境内overseas：境外global：全球 */
   Area?: string;
   /** 指定任务状态查询fail：预热失败done：预热成功process：预热中invalid: 预热无效(源站返回4xx或5xx状态码) */
   Status?: string;
@@ -3441,9 +3441,9 @@ declare interface DescribePushTasksRequest {
 
 declare interface DescribePushTasksResponse {
   /** 预热历史记录 */
-  PushLogs: PushTask[] | null;
+  PushLogs?: PushTask[] | null;
   /** 任务总数，用于分页 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

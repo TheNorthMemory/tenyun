@@ -1076,7 +1076,7 @@ declare interface Instance {
 declare interface InstanceAdvancedSettings {
   /** 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限 */
   DesiredPodNumber: number | null;
-  /** GPU驱动相关参数 */
+  /** GPU驱动相关参数,相关的GPU参数获取:https://cloud.tencent.com/document/api/213/15715 */
   GPUArgs: GPUArgs | null;
   /** base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效 */
   PreStartUserScript: string | null;
@@ -2545,7 +2545,7 @@ declare interface CreateClusterNodePoolRequest {
 
 declare interface CreateClusterNodePoolResponse {
   /** 节点池id */
-  NodePoolId: string;
+  NodePoolId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

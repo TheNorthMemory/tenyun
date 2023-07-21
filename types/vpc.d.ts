@@ -4573,7 +4573,7 @@ declare interface DescribeLocalGatewayResponse {
 declare interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
   /** NAT网关ID。 */
   NatGatewayIds?: string[];
-  /** 过滤条件:参数不支持同时指定NatGatewayIds和Filters。 nat-gateway-id，NAT网关的ID，如`nat-0yi4hekt` vpc-id，私有网络VPC的ID，如`vpc-0yi4hekt` public-ip-address， 弹性IP，如`139.199.232.238`。public-port， 公网端口。private-ip-address， 内网IP，如`10.0.0.1`。private-port， 内网端口。description，规则描述。 */
+  /** 过滤条件:参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5 nat-gateway-id，NAT网关的ID，如`nat-0yi4hekt` vpc-id，私有网络VPC的ID，如`vpc-0yi4hekt` public-ip-address， 弹性IP，如`139.199.232.238`。public-port， 公网端口。private-ip-address， 内网IP，如`10.0.0.1`。private-port， 内网端口。description，规则描述。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -4583,9 +4583,9 @@ declare interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest 
 
 declare interface DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse {
   /** NAT网关端口转发规则对象数组。 */
-  NatGatewayDestinationIpPortTranslationNatRuleSet: NatGatewayDestinationIpPortTranslationNatRule[];
+  NatGatewayDestinationIpPortTranslationNatRuleSet?: NatGatewayDestinationIpPortTranslationNatRule[];
   /** 符合条件的NAT网关端口转发规则对象数目。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4631,9 +4631,9 @@ declare interface DescribeNatGatewaySourceIpTranslationNatRulesResponse {
 }
 
 declare interface DescribeNatGatewaysRequest {
-  /** NAT网关统一 ID，形如：`nat-123xx454`。 */
+  /** NAT网关统一 ID，形如：`nat-123xx454`。每次请求的实例上限为100。参数不支持同时指定NatGatewayIds和Filters。 */
   NatGatewayIds?: string[];
-  /** 过滤条件，参数不支持同时指定NatGatewayIds和Filters。nat-gateway-id - String - （过滤条件）协议端口模板实例ID，形如：`nat-123xx454`。vpc-id - String - （过滤条件）私有网络 唯一ID，形如：`vpc-123xx454`。nat-gateway-name - String - （过滤条件）协议端口模板实例ID，形如：`test_nat`。tag-key - String - （过滤条件）标签键，形如：`test-key`。 */
+  /** 过滤条件，参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5。nat-gateway-id - String - （过滤条件）协议端口模板实例ID，形如：`nat-123xx454`。vpc-id - String - （过滤条件）私有网络 唯一ID，形如：`vpc-123xx454`。nat-gateway-name - String - （过滤条件）协议端口模板实例ID，形如：`test_nat`。tag-key - String - （过滤条件）标签键，形如：`test-key`。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -4643,9 +4643,9 @@ declare interface DescribeNatGatewaysRequest {
 
 declare interface DescribeNatGatewaysResponse {
   /** NAT网关对象数组。 */
-  NatGatewaySet: NatGateway[];
+  NatGatewaySet?: NatGateway[];
   /** 符合条件的NAT网关对象个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

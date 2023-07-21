@@ -1022,6 +1022,12 @@ declare interface DescribeTranscodeResponse {
   ResourceListUrl?: string | null;
   /** 文档制作方式(内测体验) */
   Ext?: string | null;
+  /** 文档转码任务创建时间，单位s */
+  CreateTime?: number | null;
+  /** 文档转码任务分配时间，单位s */
+  AssignTime?: number | null;
+  /** 文档转码任务完成时间，单位s */
+  FinishedTime?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

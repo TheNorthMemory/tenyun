@@ -1553,6 +1553,8 @@ declare interface CreateSignUrlsRequest {
   JumpUrl?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
+  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下0:合同签署页面更多操作按钮1:合同签署页面更多操作的拒绝签署按钮2:合同签署页面更多操作的转他人处理按钮3:签署成功页的查看详情按钮 */
+  Hides?: number[];
 }
 
 declare interface CreateSignUrlsResponse {
