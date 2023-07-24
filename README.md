@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9696+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9689+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -138,9 +138,9 @@ captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(5) |
 casb | [云访问安全代理](https://cloud.tencent.com/document/product/1303) | 2020-05-07(1) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(11) |
-cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(43) |
+cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(41) |
 ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(39) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(150) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(145) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
@@ -179,7 +179,7 @@ dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(90) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(67) |
-domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(26) |
+domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(27) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
 dtf | [分布式事务](https://cloud.tencent.com/document/product/1224) | 2020-05-06(1) |
@@ -294,7 +294,7 @@ tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-
 tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(112) |
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(331) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
-tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(15) |
+tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(13) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(101) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
@@ -307,7 +307,7 @@ tics | [威胁情报云查服务](https://cloud.tencent.com/document/product/101
 tiems | [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) | 2019-04-16(25) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(23) |
 tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(55) | 2019-10-22(23) |
-tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(63) |
+tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(64) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(203) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |
 tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 2020-12-29(1) | 2020-07-13(4) |
