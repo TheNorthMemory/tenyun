@@ -298,14 +298,18 @@ declare interface FileUrl {
   Option: string | null;
 }
 
-/** 补充签署人信息 */
+/** 补充签署人信息- RecipientId 必须指定- 通过企业自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填- 通过二要素（姓名/手机号）补充签署人时，ApproverName 和 ApproverMobile 必填 */
 declare interface FillApproverInfo {
   /** 对应模板中的参与方ID */
   RecipientId: string;
   /** 签署人来源WEWORKAPP: 企业微信 */
-  ApproverSource: string;
+  ApproverSource?: string;
   /** 企业自定义账号IDWEWORKAPP场景下指企业自有应用获取企微明文的userid */
-  CustomUserId: string;
+  CustomUserId?: string;
+  /** 补充签署人姓名 */
+  ApproverName?: string;
+  /** 补充签署人手机号 */
+  ApproverMobile?: string;
 }
 
 /** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
@@ -943,6 +947,8 @@ declare interface BindEmployeeUserIdWithClientOpenIdRequest {
   UserId: string;
   /** 客户系统OpenId */
   OpenId: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface BindEmployeeUserIdWithClientOpenIdResponse {
@@ -1093,6 +1099,8 @@ declare interface CreateFlowApproversRequest {
   Approvers: FillApproverInfo[];
   /** 企微消息中的发起人 */
   Initiator?: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作 */
+  Agent?: Agent;
 }
 
 declare interface CreateFlowApproversResponse {
@@ -1603,6 +1611,8 @@ declare interface CreateUserAutoSignEnableUrlRequest {
   NotifyAddress?: string;
   /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。 */
   ExpiredTime?: number;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreateUserAutoSignEnableUrlResponse {
@@ -1985,6 +1995,10 @@ declare interface DescribeOrganizationSealsResponse {
 declare interface DescribeThirdPartyAuthCodeRequest {
   /** 电子签小程序跳转客户小程序时携带的授权查看码 */
   AuthCode: string;
+  /** 操作人信息 */
+  Operator?: UserInfo;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface DescribeThirdPartyAuthCodeResponse {
@@ -2001,6 +2015,8 @@ declare interface DescribeUserAutoSignStatusRequest {
   SceneKey: string;
   /** 查询开启状态的用户信息 */
   UserInfo: UserThreeFactor;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface DescribeUserAutoSignStatusResponse {
@@ -2021,6 +2037,8 @@ declare interface DisableUserAutoSignRequest {
   SceneKey: string;
   /** 关闭自动签的个人的三要素 */
   UserInfo: UserThreeFactor;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface DisableUserAutoSignResponse {
@@ -2113,6 +2131,8 @@ declare interface UnbindEmployeeUserIdWithClientOpenIdRequest {
   UserId: string;
   /** 客户系统OpenId */
   OpenId: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
@@ -2205,7 +2225,7 @@ declare interface Ess {
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
   /** 模板发起合同-创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
   CreateFlow(data: CreateFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowResponse>;
-  /** 补充签署流程本企业签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
+  /** 补充签署流程企业签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
   CreateFlowApprovers(data: CreateFlowApproversRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowApproversResponse>;
   /** 用PDF文件创建签署流程 {@link CreateFlowByFilesRequest} {@link CreateFlowByFilesResponse} */
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;

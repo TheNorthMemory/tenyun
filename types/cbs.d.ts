@@ -280,22 +280,6 @@ declare interface DiskConfig {
   Price?: Price | null;
 }
 
-/** 云盘操作日志。 */
-declare interface DiskOperationLog {
-  /** 操作的状态。取值范围：SUCCESS :表示操作成功 FAILED :表示操作失败 PROCESSING :表示操作中。 */
-  OperationState: string;
-  /** 开始时间。 */
-  StartTime: string;
-  /** 操作者的UIN。 */
-  Operator: string;
-  /** 操作类型。取值范围：CBS_OPERATION_ATTACH：挂载云硬盘CBS_OPERATION_DETACH：解挂云硬盘CBS_OPERATION_RENEW：续费CBS_OPERATION_EXPAND：扩容CBS_OPERATION_CREATE：创建CBS_OPERATION_ISOLATE：隔离CBS_OPERATION_MODIFY：修改云硬盘属性ASP_OPERATION_BIND：关联定期快照策略ASP_OPERATION_UNBIND：取消关联定期快照策略 */
-  Operation: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 操作的云盘ID。 */
-  DiskId: string;
-}
-
 /** 描述键值对过滤器，用于条件过滤查询。 */
 declare interface Filter {
   /** 一个或者多个过滤值。 */
@@ -450,22 +434,6 @@ declare interface SnapshotCopyResult {
   Code: string;
   /** 跨地复制的目标地域。 */
   DestinationRegion: string;
-}
-
-/** 快照操作日志，已废弃。 */
-declare interface SnapshotOperationLog {
-  /** 操作的状态。取值范围：SUCCESS :表示操作成功 FAILED :表示操作失败 PROCESSING :表示操作中。 */
-  OperationState: string;
-  /** 开始时间。 */
-  StartTime: string;
-  /** 操作者的UIN。 */
-  Operator: string | null;
-  /** 操作的快照ID。 */
-  SnapshotId: string;
-  /** 操作类型。取值范围：SNAP_OPERATION_DELETE：删除快照SNAP_OPERATION_ROLLBACK：回滚快照SNAP_OPERATION_MODIFY：修改快照属性SNAP_OPERATION_CREATE：创建快照SNAP_OPERATION_COPY：跨地域复制快照ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照 */
-  Operation: string;
-  /** 结束时间。 */
-  EndTime: string;
 }
 
 /** 标签。 */
@@ -770,22 +738,6 @@ declare interface DescribeDiskConfigQuotaResponse {
   RequestId?: string;
 }
 
-declare interface DescribeDiskOperationLogsRequest {
-  /** 过滤条件。支持以下条件：disk-id - Array of String - 是否必填：是 - 按云盘ID过滤，每个请求最多可指定10个云盘ID。 */
-  Filters: Filter[];
-  /** 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59" */
-  EndTime?: string;
-  /** 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00" */
-  BeginTime?: string;
-}
-
-declare interface DescribeDiskOperationLogsResponse {
-  /** 云盘的操作日志列表。 */
-  DiskOperationLogSet: DiskOperationLog[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeDiskStoragePoolRequest {
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。 */
   Limit?: number;
@@ -842,22 +794,6 @@ declare interface DescribeInstancesDiskNumRequest {
 declare interface DescribeInstancesDiskNumResponse {
   /** 各个云服务器已挂载和可挂载弹性云盘的数量。 */
   AttachDetail?: AttachDetail[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeSnapshotOperationLogsRequest {
-  /** 过滤条件。支持以下条件：snapshot-id - Array of String - 是否必填：是 - 按快照ID过滤，每个请求最多可指定10个快照ID。 */
-  Filters: Filter[];
-  /** 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59" */
-  EndTime?: string;
-  /** 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00" */
-  BeginTime?: string;
-}
-
-declare interface DescribeSnapshotOperationLogsResponse {
-  /** 快照操作日志列表。 */
-  SnapshotOperationLogSet: SnapshotOperationLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1229,16 +1165,12 @@ declare interface Cbs {
   DescribeDiskBackups(data?: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
   /** 查询云硬盘配额 {@link DescribeDiskConfigQuotaRequest} {@link DescribeDiskConfigQuotaResponse} */
   DescribeDiskConfigQuota(data: DescribeDiskConfigQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigQuotaResponse>;
-  /** @deprecated 查询云盘操作日志列表 {@link DescribeDiskOperationLogsRequest} {@link DescribeDiskOperationLogsResponse} */
-  DescribeDiskOperationLogs(data: DescribeDiskOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskOperationLogsResponse>;
   /** 查询云硬盘独享集群列表 {@link DescribeDiskStoragePoolRequest} {@link DescribeDiskStoragePoolResponse} */
   DescribeDiskStoragePool(data?: DescribeDiskStoragePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskStoragePoolResponse>;
   /** 查询云硬盘列表 {@link DescribeDisksRequest} {@link DescribeDisksResponse} */
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询实例关联的云硬盘数量 {@link DescribeInstancesDiskNumRequest} {@link DescribeInstancesDiskNumResponse} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
-  /** @deprecated 查询快照操作日志列表 {@link DescribeSnapshotOperationLogsRequest} {@link DescribeSnapshotOperationLogsResponse} */
-  DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
   /** 查看快照分享信息 {@link DescribeSnapshotSharePermissionRequest} {@link DescribeSnapshotSharePermissionResponse} */
   DescribeSnapshotSharePermission(data: DescribeSnapshotSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotSharePermissionResponse>;
   /** 查询快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */

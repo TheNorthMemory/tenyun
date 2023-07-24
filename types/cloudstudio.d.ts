@@ -111,6 +111,8 @@ declare interface CreateWorkspaceTokenRequest {
   SpaceKey: string;
   /** token过期时间，单位是秒，默认 3600 */
   TokenExpiredLimitSec?: number;
+  /** token 授权策略，可选值为 workspace-run-only, all。默认为 all */
+  Policies?: string[];
 }
 
 declare interface CreateWorkspaceTokenResponse {

@@ -30,20 +30,6 @@ declare interface FunctionArg {
   ClaimJson: string;
 }
 
-/** did详情 */
-declare interface Identity {
-  /** 账户标识符 */
-  AccountIdentifier: string;
-  /** 链ID */
-  ChainID: string;
-  /** 完整tdid */
-  Did: string;
-  /** 群组ID */
-  GroupId: number;
-  /** 群组名称 */
-  GroupName: string;
-}
-
 /** 验证凭证签名 */
 declare interface Proof {
   /** 创建时间 */
@@ -84,18 +70,6 @@ declare interface VerifyFunctionArg {
   Proof: Proof;
   /** type值 */
   Type: string[];
-}
-
-declare interface AddLabelRequest {
-  /** 标签ID */
-  LabelId: number;
-  /** tdid */
-  Did: string;
-}
-
-declare interface AddLabelResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
 }
 
 declare interface CheckChainRequest {
@@ -196,20 +170,6 @@ declare interface CreateTDidRequest {
 declare interface CreateTDidResponse {
   /** TDID */
   Did: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetAgencyTDidRequest {
-  /** 网络ID */
-  ClusterId: string;
-}
-
-declare interface GetAgencyTDidResponse {
-  /** 固定前缀 */
-  Prefix: string;
-  /** did详情 */
-  Identity: Identity[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -325,8 +285,6 @@ declare interface VerifyCredentialResponse {
 /** {@link Tdid 分布式身份} */
 declare interface Tdid {
   (): Versions;
-  /** @deprecated DID添加标签 {@link AddLabelRequest} {@link AddLabelResponse} */
-  AddLabel(data: AddLabelRequest, config?: AxiosRequestConfig): AxiosPromise<AddLabelResponse>;
   /** @deprecated 检查区块链信息 {@link CheckChainRequest} {@link CheckChainResponse} */
   CheckChain(data: CheckChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckChainResponse>;
   /** @deprecated 创建凭证 {@link CreateCredentialRequest} {@link CreateCredentialResponse} */
@@ -339,8 +297,6 @@ declare interface Tdid {
   CreateTDidByPrivateKey(data: CreateTDidByPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidByPrivateKeyResponse>;
   /** @deprecated 新建DID根据公钥生成Tdid {@link CreateTDidByPublicKeyRequest} {@link CreateTDidByPublicKeyResponse} */
   CreateTDidByPublicKey(data: CreateTDidByPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidByPublicKeyResponse>;
-  /** @deprecated 本机构DID详情 {@link GetAgencyTDidRequest} {@link GetAgencyTDidResponse} */
-  GetAgencyTDid(data: GetAgencyTDidRequest, config?: AxiosRequestConfig): AxiosPromise<GetAgencyTDidResponse>;
   /** @deprecated 获取权威机构信息 {@link GetAuthorityIssuerRequest} {@link GetAuthorityIssuerResponse} */
   GetAuthorityIssuer(data: GetAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthorityIssuerResponse>;
   /** @deprecated 凭证模版详情 {@link GetCptInfoRequest} {@link GetCptInfoResponse} */

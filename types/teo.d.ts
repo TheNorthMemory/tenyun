@@ -2845,7 +2845,7 @@ declare interface ModifyHostsCertificateRequest {
   Hosts: string[];
   /** 证书信息, 只需要传入 CertId 即可, 如果为空, 则使用默认证书。 */
   ServerCertInfo?: ServerCertInfo[];
-  /** 托管类型，取值有：apply：托管EO；none：不托管EO；不填，默认取值为apply。 */
+  /** 托管类型，取值有：apply：托管EO；none：不托管EO；不填，默认取值为none。 */
   ApplyType?: string;
 }
 
