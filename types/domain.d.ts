@@ -342,6 +342,16 @@ declare interface CreateDomainBatchResponse {
   RequestId?: string;
 }
 
+declare interface CreateDomainRedemptionRequest {
+  /** 域名 ID */
+  DomainId: string;
+}
+
+declare interface CreateDomainRedemptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePhoneEmailRequest {
   /** 手机号或者邮箱 */
   Code: string;
@@ -705,6 +715,8 @@ declare interface Domain {
   CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
   /** 批量域名注册 {@link CreateDomainBatchRequest} {@link CreateDomainBatchResponse} */
   CreateDomainBatch(data: CreateDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainBatchResponse>;
+  /** 创建赎回订单 {@link CreateDomainRedemptionRequest} {@link CreateDomainRedemptionResponse} */
+  CreateDomainRedemption(data: CreateDomainRedemptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainRedemptionResponse>;
   /** 验证手机邮箱 {@link CreatePhoneEmailRequest} {@link CreatePhoneEmailResponse} */
   CreatePhoneEmail(data: CreatePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePhoneEmailResponse>;
   /** 添加域名信息模板 {@link CreateTemplateRequest} {@link CreateTemplateResponse} */

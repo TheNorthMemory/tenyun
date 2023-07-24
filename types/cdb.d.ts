@@ -28,20 +28,6 @@ declare interface AccountInfo {
   MaxUserConnections: number;
 }
 
-/** 地址 */
-declare interface Address {
-  /** 地址 */
-  Vip: string | null;
-  /** 端口 */
-  VPort: number | null;
-  /** 私有网络ID */
-  UniqVpcId: string | null;
-  /** 私有网络子网ID */
-  UniqSubnet: string | null;
-  /** 描述 */
-  Desc: string | null;
-}
-
 /** 审计日志聚合条件 */
 declare interface AggregationCondition {
   /** 聚合字段。目前仅支持host-源IP、user-用户名、dbName-数据库名、sqlType-sql类型。 */
@@ -312,26 +298,6 @@ declare interface BackupSummaryItem {
   BackupVolume: number;
 }
 
-/** proxy代理组信息 */
-declare interface BaseGroupInfo {
-  /** 代理组ID */
-  ProxyGroupId: string | null;
-  /** 代理节点数 */
-  NodeCount: number | null;
-  /** 状态：发货中（init）运行中（online）下线中（offline）销毁中（destroy） */
-  Status: string | null;
-  /** 地域 */
-  Region: string | null;
-  /** 可用区 */
-  Zone: string | null;
-  /** 是否开启读写分离 */
-  OpenRW: boolean | null;
-  /** 当前代理版本 */
-  CurrentProxyVersion: string | null;
-  /** 支持升级版本 */
-  SupportUpgradeProxyVersion: string | null;
-}
-
 /** 二进制日志信息 */
 declare interface BinlogInfo {
   /** binlog 日志备份文件名 */
@@ -534,16 +500,6 @@ declare interface CommonTimeWindow {
   Days?: number[];
   /** 月度备份时间窗，BackupPeriodStrategy为monthly时必填。格式如： 02:00-06:00 */
   BackupPeriodTime?: string;
-}
-
-/** 连接池信息 */
-declare interface ConnectionPoolInfo {
-  /** 是否开启了连接池 */
-  ConnectionPool: boolean | null;
-  /** 连接池类型：SessionConnectionPool（会话级别连接池） */
-  ConnectionPoolType: string | null;
-  /** 连接池保持阈值：单位（秒） */
-  PoolConnectionTimeOut: number | null;
 }
 
 /** proxy配置 */
@@ -1012,16 +968,6 @@ declare interface ParameterDetail {
   IsNotSupportEdit?: boolean | null;
 }
 
-/** 数据库代理连接池规格配置 */
-declare interface PoolConf {
-  /** 连接池类型：SessionConnectionPool（会话级别连接池 */
-  ConnectionPoolType: string | null;
-  /** 最大可保持连接阈值：单位（秒） */
-  MaxPoolConnectionTimeOut: number | null;
-  /** 最小可保持连接阈值：单位（秒） */
-  MinPoolConnectionTimeOut: number | null;
-}
-
 /** 数据库代理地址信息 */
 declare interface ProxyAddress {
   /** 代理组地址ID */
@@ -1068,20 +1014,6 @@ declare interface ProxyAllocation {
   ProxyInstance: ProxyInst[];
 }
 
-/** 数据代理组信息 */
-declare interface ProxyGroup {
-  /** 代理基本信息 */
-  BaseGroup: BaseGroupInfo | null;
-  /** 代理地址信息 */
-  Address: Address[] | null;
-  /** 代理连接池信息 */
-  ConnectionPoolInfo: ConnectionPoolInfo | null;
-  /** 代理节点信息 */
-  ProxyNode: ProxyNodeInfo[] | null;
-  /** 代理路由信息 */
-  RWInstInfo: RWInfo | null;
-}
-
 /** 代理组详情 */
 declare interface ProxyGroupInfo {
   /** 代理组ID */
@@ -1104,20 +1036,6 @@ declare interface ProxyGroupInfo {
   SupportCreateProxyAddress: boolean | null;
   /** 支持升级代理版本所需的cdb版本 */
   SupportUpgradeProxyMysqlVersion: string | null;
-}
-
-/** 数据代理组信息 */
-declare interface ProxyGroups {
-  /** 代理基本信息 */
-  BaseGroup: BaseGroupInfo | null;
-  /** 代理地址信息 */
-  Address: Address[] | null;
-  /** 代理连接池信息 */
-  ConnectionPoolInfo: ConnectionPoolInfo | null;
-  /** 代理节点信息 */
-  ProxyNode: ProxyNodeInfo[] | null;
-  /** 代理路由信息 */
-  RWInstInfo: RWInfos | null;
 }
 
 /** 代理实例 */
@@ -1168,64 +1086,6 @@ declare interface ProxyNodeCustom {
   Region: string;
   /** 可用区 */
   Zone: string;
-}
-
-/** 代理节点信息 */
-declare interface ProxyNodeInfo {
-  /** 代理节点ID */
-  ProxyNodeId: string | null;
-  /** 节点当前连接数 */
-  ProxyNodeConnections: number | null;
-  /** cup */
-  ProxyNodeCpu: number | null;
-  /** 内存 */
-  ProxyNodeMem: number | null;
-  /** 节点状态：init（申请中）online（运行中）offline（离线中）destroy（已销毁）recovering（故障恢复中）error（节点故障） */
-  ProxyStatus: string | null;
-}
-
-/** proxy读写分离信息 */
-declare interface RWInfo {
-  /** 代理实例数量 */
-  InstCount: number | null;
-  /** 权重分配模式；系统自动分配："system"， 自定义："custom" */
-  WeightMode: string | null;
-  /** 是否开启延迟剔除 */
-  IsKickOut: boolean | null;
-  /** 最小保留数 */
-  MinCount: number | null;
-  /** 延迟剔除阈值 */
-  MaxDelay: number | null;
-  /** 是否开启故障转移 */
-  FailOver: boolean | null;
-  /** 是否自动添加RO */
-  AutoAddRo: boolean | null;
-  /** 代理实例信息 */
-  RWInstInfo: RWInstanceInfo | null;
-}
-
-/** proxy读写分离信息 */
-declare interface RWInfos {
-  /** 代理实例数量 */
-  InstCount: number | null;
-  /** 权重分配模式；系统自动分配："system"， 自定义："custom" */
-  WeightMode: string | null;
-  /** 是否开启延迟剔除 */
-  IsKickOut: boolean | null;
-  /** 最小保留数 */
-  MinCount: number | null;
-  /** 延迟剔除阈值 */
-  MaxDelay: number | null;
-  /** 是否开启故障转移 */
-  FailOver: boolean | null;
-  /** 是否自动添加RO */
-  AutoAddRo: boolean | null;
-  /** 代理实例信息 */
-  RWInstInfo: RWInstanceInfo[] | null;
-}
-
-/** 代理实例信息 */
-declare interface RWInstanceInfo {
 }
 
 /** 解隔离任务结果 */
@@ -2804,32 +2664,6 @@ declare interface DescribeBinlogsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeCDBProxyRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 代理组ID */
-  ProxyGroupId?: string;
-}
-
-declare interface DescribeCDBProxyResponse {
-  /** 代理组基本信息 */
-  BaseGroup: BaseGroupInfo | null;
-  /** 代理组地址信息 */
-  Address: Address | null;
-  /** 代理组节点信息 */
-  ProxyNode: ProxyNodeInfo | null;
-  /** 读写分析信息 */
-  RWInstInfo: RWInfo | null;
-  /** 连接池信息 */
-  ConnectionPoolInfo: ConnectionPoolInfo | null;
-  /** 代理数量 */
-  Count: number | null;
-  /** 代理信息 */
-  ProxyGroup: ProxyGroup[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeCdbProxyInfoRequest {
   /** 实例ID */
   InstanceId: string;
@@ -3402,24 +3236,6 @@ declare interface DescribeProjectSecurityGroupsResponse {
   Groups: SecurityGroup[];
   /** 安全组规则数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeProxyConnectionPoolConfRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 分页查询偏移量 */
-  Offset?: number;
-  /** 分页查询限制 */
-  Limit?: number;
-}
-
-declare interface DescribeProxyConnectionPoolConfResponse {
-  /** 配置规格数量 */
-  Count: number | null;
-  /** 连接池配置规格 */
-  PoolConf: PoolConf | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4024,44 +3840,6 @@ declare interface ModifyBackupEncryptionStatusResponse {
   RequestId?: string;
 }
 
-declare interface ModifyCDBProxyConnectionPoolRequest {
-  /** 数据库代理ID */
-  ProxyGroupId: string;
-  /** 是否开启连接池，true：开启连接池； false：关闭连接池。 */
-  OpenConnectionPool: boolean;
-  /** 连接池类型，通过DescribeProxyConnectionPoolConf获取连接池类型值 */
-  ConnectionPoolType?: string;
-  /** 连接保留阈值：单位（秒） */
-  PoolConnectionTimeOut?: number;
-}
-
-declare interface ModifyCDBProxyConnectionPoolResponse {
-  /** 异步处理ID */
-  AsyncRequestId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyCDBProxyVipVPortRequest {
-  /** 代理组ID */
-  ProxyGroupId: string;
-  /** 私有网络ID */
-  UniqVpcId: string;
-  /** 私有网络子网ID */
-  UniqSubnetId: string;
-  /** 目标IP */
-  DstIp?: string;
-  /** 目标端口 */
-  DstPort?: number;
-  /** 旧IP回收时间 单位小时 */
-  ReleaseDuration?: number;
-}
-
-declare interface ModifyCDBProxyVipVPortResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyCdbProxyAddressDescRequest {
   /** 代理组ID */
   ProxyGroupId: string;
@@ -4382,22 +4160,6 @@ declare interface OpenWanServiceRequest {
 declare interface OpenWanServiceResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
   AsyncRequestId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface QueryCDBProxyRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 代理ID */
-  ProxyGroupId?: string;
-}
-
-declare interface QueryCDBProxyResponse {
-  /** 代理数量 */
-  Count: number | null;
-  /** 代理信息 */
-  ProxyGroup: ProxyGroups[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4777,8 +4539,6 @@ declare interface Cdb {
   DescribeBinlogBackupOverview(data: DescribeBinlogBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogBackupOverviewResponse>;
   /** 查询二进制日志备份文件列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
-  /** @deprecated 查询数据库代理 {@link DescribeCDBProxyRequest} {@link DescribeCDBProxyResponse} */
-  DescribeCDBProxy(data: DescribeCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDBProxyResponse>;
   /** 查询数据库代理详情 {@link DescribeCdbProxyInfoRequest} {@link DescribeCdbProxyInfoResponse} */
   DescribeCdbProxyInfo(data: DescribeCdbProxyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbProxyInfoResponse>;
   /** 查询数据库可用区及售卖规格 {@link DescribeCdbZoneConfigRequest} {@link DescribeCdbZoneConfigResponse} */
@@ -4831,8 +4591,6 @@ declare interface Cdb {
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */
   DescribeProjectSecurityGroups(data?: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
-  /** @deprecated 查询代理连接池规格配置 {@link DescribeProxyConnectionPoolConfRequest} {@link DescribeProxyConnectionPoolConfResponse} */
-  DescribeProxyConnectionPoolConf(data: DescribeProxyConnectionPoolConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyConnectionPoolConfResponse>;
   /** 查询代理规格配置 {@link DescribeProxyCustomConfRequest} {@link DescribeProxyCustomConfResponse} */
   DescribeProxyCustomConf(data: DescribeProxyCustomConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyCustomConfResponse>;
   /** 查询实例支持代理版本和参数 {@link DescribeProxySupportParamRequest} {@link DescribeProxySupportParamResponse} */
@@ -4893,10 +4651,6 @@ declare interface Cdb {
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
   /** 设置实例备份文件是否加密 {@link ModifyBackupEncryptionStatusRequest} {@link ModifyBackupEncryptionStatusResponse} */
   ModifyBackupEncryptionStatus(data: ModifyBackupEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupEncryptionStatusResponse>;
-  /** @deprecated 配置数据库代理连接池 {@link ModifyCDBProxyConnectionPoolRequest} {@link ModifyCDBProxyConnectionPoolResponse} */
-  ModifyCDBProxyConnectionPool(data: ModifyCDBProxyConnectionPoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyConnectionPoolResponse>;
-  /** @deprecated 修改数据库代理VIP或端口 {@link ModifyCDBProxyVipVPortRequest} {@link ModifyCDBProxyVipVPortResponse} */
-  ModifyCDBProxyVipVPort(data: ModifyCDBProxyVipVPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyVipVPortResponse>;
   /** 修改代理地址描述 {@link ModifyCdbProxyAddressDescRequest} {@link ModifyCdbProxyAddressDescResponse} */
   ModifyCdbProxyAddressDesc(data: ModifyCdbProxyAddressDescRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCdbProxyAddressDescResponse>;
   /** 修改数据库代理地址VPC {@link ModifyCdbProxyAddressVipAndVPortRequest} {@link ModifyCdbProxyAddressVipAndVPortResponse} */
@@ -4939,8 +4693,6 @@ declare interface Cdb {
   OpenDBInstanceGTID(data: OpenDBInstanceGTIDRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBInstanceGTIDResponse>;
   /** 开通实例外网访问 {@link OpenWanServiceRequest} {@link OpenWanServiceResponse} */
   OpenWanService(data: OpenWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanServiceResponse>;
-  /** @deprecated 查询代理详情 {@link QueryCDBProxyRequest} {@link QueryCDBProxyResponse} */
-  QueryCDBProxy(data: QueryCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCDBProxyResponse>;
   /** 解隔离云数据库实例 {@link ReleaseIsolatedDBInstancesRequest} {@link ReleaseIsolatedDBInstancesResponse} */
   ReleaseIsolatedDBInstances(data: ReleaseIsolatedDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIsolatedDBInstancesResponse>;
   /** 负载均衡数据库代理 {@link ReloadBalanceProxyNodeRequest} {@link ReloadBalanceProxyNodeResponse} */

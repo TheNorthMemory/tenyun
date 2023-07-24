@@ -976,6 +976,24 @@ declare interface DescribeTIWRoomDailyUsageResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTranscodeByUrlRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 经过URL编码后的转码文件地址。URL 编码会将字符转换为可通过因特网传输的格式，比如文档地址为http://example.com/测试.pdf，经过URL编码之后为http://example.com/%E6%B5%8B%E8%AF%95.pdf。为了提高URL解析的成功率，请对URL进行编码。 */
+  Url: string;
+}
+
+declare interface DescribeTranscodeByUrlResponse {
+  /** 转码的当前进度,取值范围为0~100 */
+  Progress?: number;
+  /** 任务的当前状态- QUEUED: 正在排队等待转换- PROCESSING: 转换中- FINISHED: 转换完成- EXCEPTION: 转换异常 */
+  Status?: string;
+  /** 转码任务的唯一标识Id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTranscodeCallbackRequest {
   /** 应用的SdkAppId */
   SdkAppId: number;
@@ -1657,6 +1675,8 @@ declare interface Tiw {
   DescribeTIWRoomDailyUsage(data: DescribeTIWRoomDailyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTIWRoomDailyUsageResponse>;
   /** 查询文档转码任务 {@link DescribeTranscodeRequest} {@link DescribeTranscodeResponse} */
   DescribeTranscode(data: DescribeTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeResponse>;
+  /** 通过文档URL查询转码任务 {@link DescribeTranscodeByUrlRequest} {@link DescribeTranscodeByUrlResponse} */
+  DescribeTranscodeByUrl(data: DescribeTranscodeByUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeByUrlResponse>;
   /** 查询文档转码回调地址 {@link DescribeTranscodeCallbackRequest} {@link DescribeTranscodeCallbackResponse} */
   DescribeTranscodeCallback(data: DescribeTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeCallbackResponse>;
   /** 搜索转码任务 {@link DescribeTranscodeSearchRequest} {@link DescribeTranscodeSearchResponse} */
