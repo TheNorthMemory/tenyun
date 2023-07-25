@@ -454,7 +454,7 @@ declare interface FormField {
   ComponentId?: string | null;
   /** 控件的名字，跟ComponentId二选一，不能全为空 */
   ComponentName?: string | null;
-  /** 是否锁定模版控件值，锁定后无法修改（用于嵌入式发起合同），true-锁定，false-不锁定 */
+  /** 是否锁定模板控件值，锁定后无法修改（用于嵌入式发起合同），true-锁定，false-不锁定 */
   LockComponentValue?: boolean | null;
 }
 

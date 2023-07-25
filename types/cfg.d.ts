@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 动作库筛选栏位 */
+declare interface ActionFilter {
+  /** 关键字 */
+  Keyword: string;
+  /** 搜索内容值 */
+  Values: string[];
+}
+
 /** 查询-保护策略 */
 declare interface DescribePolicy {
   /** 保护策略ID列表 */
@@ -477,6 +485,8 @@ declare interface DescribeTaskListRequest {
   TaskEndTime?: string;
   /** 标签对 */
   Tags?: TagWithDescribe[];
+  /** 筛选条件 */
+  Filters?: ActionFilter[];
 }
 
 declare interface DescribeTaskListResponse {
@@ -519,6 +529,8 @@ declare interface DescribeTemplateListRequest {
   TemplateSource?: number;
   /** 经验ID */
   TemplateIdList?: number[];
+  /** 过滤参数 */
+  Filters?: ActionFilter[];
 }
 
 declare interface DescribeTemplateListResponse {

@@ -54,9 +54,9 @@ declare interface ApproverInfo {
   CustomApproverTag?: string;
   /** 签署人个性化能力值 */
   ApproverOption?: ApproverOption;
-  /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式)如果不传默认为1模板发起的时候,认证方式以模版配置为主 */
+  /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式)如果不传默认为1模板发起的时候,认证方式以模板配置为主 */
   ApproverVerifyTypes?: number[];
-  /** 签署人签署合同时的认证方式1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)合同签署认证方式的优先级 verifyChannel>approverSignTypes模板发起的时候,认证方式以模版配置为主 */
+  /** 签署人签署合同时的认证方式1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)合同签署认证方式的优先级 verifyChannel>approverSignTypes模板发起的时候,认证方式以模板配置为主 */
   ApproverSignTypes?: number[];
   /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。 */
   ApproverNeedSignReview?: boolean;
@@ -2077,6 +2077,8 @@ declare interface ModifyApplicationCallbackInfoRequest {
   OperateType: number;
   /** 回调信息 */
   CallbackInfo: CallbackInfo;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface ModifyApplicationCallbackInfoResponse {

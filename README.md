@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9689+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9702+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -153,7 +153,7 @@ ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
 cim |  | 2019-03-18(1) |
 cis |  | 2018-04-08(7) |
-ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) | 2019-08-19(79) |
+ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) | 2019-08-19(80) |
 clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(79) |
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
@@ -226,7 +226,7 @@ ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
 lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(54) |
-lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(80) |
+lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(92) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(149) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |

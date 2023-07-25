@@ -1669,7 +1669,7 @@ declare interface DescribeHiveQueriesRequest {
   InstanceId: string;
   /** 起始时间秒 */
   StartTime: number;
-  /** 结束时间秒，EndTime-StartTime不得超过31天秒数31*24*3600 */
+  /** 结束时间秒，EndTime-StartTime不得超过1天秒数86400 */
   EndTime: number;
   /** 分页起始偏移，从0开始 */
   Offset: number;
@@ -1691,7 +1691,7 @@ declare interface DescribeImpalaQueriesRequest {
   InstanceId: string;
   /** 起始时间秒 */
   StartTime: number;
-  /** 结束时间秒，EndTime-StartTime不得超过31天秒数31243600 */
+  /** 结束时间秒，EndTime-StartTime不得超过1天秒数86400 */
   EndTime: number;
   /** 分页起始偏移，从0开始 */
   Offset: number;
@@ -1835,7 +1835,7 @@ declare interface DescribeYarnApplicationsRequest {
   InstanceId: string;
   /** 起始时间秒 */
   StartTime: number;
-  /** 结束时间秒，EndTime-StartTime不得超过31天秒数31243600 */
+  /** 结束时间秒，EndTime-StartTime不得超过1天秒数86400 */
   EndTime: number;
   /** 分页起始偏移，从0开始 */
   Offset: number;
@@ -1853,7 +1853,7 @@ declare interface DescribeYarnApplicationsResponse {
 }
 
 declare interface InquirePriceRenewEmrRequest {
-  /** 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月 */
+  /** 实例续费的时长。需要结合TimeUnit一起使用。1表示续费一个月 */
   TimeSpan: number;
   /** 待续费集群ID列表。 */
   InstanceId: string;

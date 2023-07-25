@@ -338,6 +338,46 @@ declare interface DiskReturnable {
   ReturnFailMessage: string;
 }
 
+/** Docker活动信息 */
+declare interface DockerActivity {
+  /** 活动ID。 */
+  ActivityId: string;
+  /** 活动名称。 */
+  ActivityName: string;
+  /** 活动状态。取值范围： INIT：表示初始化，活动尚未执行OPERATING：表示活动执行中SUCCESS：表示活动执行成功FAILED：表示活动执行失败 */
+  ActivityState: string;
+  /** 活动执行的命令输出，以base64编码。 */
+  ActivityCommandOutput: string;
+  /** 容器ID列表。 */
+  ContainerIds: string[];
+  /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 */
+  CreatedTime: string;
+  /** 结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 */
+  EndTime: string | null;
+}
+
+/** Docker容器信息 */
+declare interface DockerContainer {
+  /** 容器ID */
+  ContainerId: string;
+  /** 容器名称 */
+  ContainerName: string;
+  /** 容器镜像地址 */
+  ContainerImage: string;
+  /** 容器Command */
+  Command: string;
+  /** 容器状态描述 */
+  Status: string;
+  /** 容器状态，和docker的容器状态保持一致，当前取值有：created, restarting, running, removing, paused, exited, or dead */
+  State: string;
+  /** 容器端口主机端口映射列表 */
+  PublishPortSet: DockerContainerPublishPort[];
+  /** 容器挂载本地卷列表 */
+  VolumeSet: DockerContainerVolume[];
+  /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 */
+  CreatedTime: string;
+}
+
 /** Docker容器创建时的配置 */
 declare interface DockerContainerConfiguration {
   /** 容器镜像地址 */
@@ -427,59 +467,59 @@ declare interface GeneralResourceQuota {
 /** 描述了实例信息。 */
 declare interface Instance {
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 套餐 ID。 */
-  BundleId: string;
+  BundleId?: string;
   /** 镜像 ID。 */
-  BlueprintId: string;
+  BlueprintId?: string;
   /** 实例的 CPU 核数，单位：核。 */
-  CPU: number;
+  CPU?: number;
   /** 实例内存容量，单位：GB 。 */
-  Memory: number;
+  Memory?: number;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月。 */
-  InstanceChargeType: string;
+  InstanceChargeType?: string;
   /** 实例系统盘信息。 */
-  SystemDisk: SystemDisk;
+  SystemDisk?: SystemDisk;
   /** 实例主网卡的内网 IP。 注意：此字段可能返回 空，表示取不到有效值。 */
-  PrivateAddresses: string[];
+  PrivateAddresses?: string[];
   /** 实例主网卡的公网 IP。 注意：此字段可能返回 空，表示取不到有效值。 */
-  PublicAddresses: string[];
+  PublicAddresses?: string[];
   /** 实例带宽信息。 */
-  InternetAccessible: InternetAccessible;
+  InternetAccessible?: InternetAccessible;
   /** 自动续费标识。取值范围： NOTIFY_AND_MANUAL_RENEW：表示通知即将过期，但不自动续费 NOTIFY_AND_AUTO_RENEW：表示通知即将过期，而且自动续费 。 */
-  RenewFlag: string;
+  RenewFlag?: string;
   /** 实例登录设置。 */
-  LoginSettings: LoginSettings;
+  LoginSettings?: LoginSettings;
   /** 实例状态。取值范围： PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中STOPPED：表示关机STARTING：表示开机中STOPPING：表示关机中REBOOTING：表示重启中SHUTDOWN：表示停止待销毁TERMINATING：表示销毁中DELETING：表示删除中FREEZING：表示冻结中ENTER_RESCUE_MODE：表示进入救援模式中RESCUE_MODE：表示救援模式EXIT_RESCUE_MODE：表示退出救援模式中 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 实例全局唯一 ID。 */
-  Uuid: string;
+  Uuid?: string;
   /** 实例的最新操作。例：StopInstances、ResetInstance。注意：此字段可能返回 空值，表示取不到有效值。 */
-  LatestOperation: string;
+  LatestOperation?: string;
   /** 实例的最新操作状态。取值范围： SUCCESS：表示操作成功 OPERATING：表示操作执行中 FAILED：表示操作失败 注意：此字段可能返回 空值，表示取不到有效值。 */
-  LatestOperationState: string;
+  LatestOperationState?: string;
   /** 实例最新操作的唯一请求 ID。 注意：此字段可能返回 空值，表示取不到有效值。 */
-  LatestOperationRequestId: string;
+  LatestOperationRequestId?: string;
   /** 隔离时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  IsolatedTime: string | null;
+  IsolatedTime?: string | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ 。 */
-  ExpiredTime: string | null;
+  ExpiredTime?: string | null;
   /** 操作系统平台类型，如 LINUX_UNIX、WINDOWS。 */
-  PlatformType: string;
+  PlatformType?: string;
   /** 操作系统平台。 */
-  Platform: string;
+  Platform?: string;
   /** 操作系统名称。 */
-  OsName: string;
+  OsName?: string;
   /** 可用区。 */
-  Zone: string;
+  Zone?: string;
   /** 实例绑定的标签列表。 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** 实例封禁状态。取值范围：NORMAL实例正常。NETWORK_RESTRICT：网络封禁。 */
-  InstanceRestrictState: string;
+  InstanceRestrictState?: string;
 }
 
 /** 描述了实例的计费模式 */
@@ -574,6 +614,8 @@ declare interface LoginConfiguration {
   AutoGeneratePassword?: string;
   /** 实例登录密码。具体按照操作系统的复杂度要求。 `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能包含空格, 不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：小写字母：[a-z]大写字母：[A-Z]数字：0-9特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/`WINDOWS` 实例密码必须 12-30 位，不能包含空格, 不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符小写字母：[a-z]大写字母：[A-Z]数字： 0-9特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/ */
   Password?: string;
+  /** 密钥ID列表，最多同时指定5个密钥。关联密钥后，就可以通过对应的私钥来访问实例。密钥与密码不能同时指定，同时WINDOWS操作系统不支持指定密钥。密钥ID列表可以通过[DescribeKeyPairs](https://cloud.tencent.com/document/product/1207/55540)接口获取。 */
+  KeyIds?: string[];
 }
 
 /** 描述了实例登录相关配置与信息。 */
@@ -1244,6 +1286,80 @@ declare interface DescribeDisksReturnableResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDockerActivitiesRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** Docker活动ID列表。 */
+  ActivityIds?: string[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 活动创建时间的起始值，时间戳秒数。 */
+  CreatedTimeBegin?: number;
+  /** 活动创建时间的结束值，时间戳秒数。 */
+  CreatedTimeEnd?: number;
+}
+
+declare interface DescribeDockerActivitiesResponse {
+  /** 总数量。 */
+  TotalCount: number;
+  /** Docker活动列表。 */
+  DockerActivitySet: DockerActivity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDockerContainerConfigurationRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID。 */
+  ContainerId: string;
+}
+
+declare interface DescribeDockerContainerConfigurationResponse {
+  /** Docker容器配置信息。 */
+  ContainerConfiguration?: DockerContainerConfiguration;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDockerContainerDetailRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID。 */
+  ContainerId: string;
+}
+
+declare interface DescribeDockerContainerDetailResponse {
+  /** Docker容器详情，json字符串base64编码。 */
+  ContainerDetail?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDockerContainersRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID列表。 */
+  ContainerIds?: string[];
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 过滤器列表。container-id按照【容器ID】进行过滤。类型：String必选：否container-name按照【容器名称】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 ContainerIds 和 Filters。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDockerContainersResponse {
+  /** 总数量。 */
+  TotalCount?: number;
+  /** 容器列表。 */
+  DockerContainerSet?: DockerContainer[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFirewallRulesRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -1738,6 +1854,30 @@ declare interface ModifyDisksRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDockerContainerRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID。 */
+  ContainerId: string;
+  /** 环境变量列表 */
+  Envs?: ContainerEnv[];
+  /** 容器端口主机端口映射列表 */
+  PublishPorts?: DockerContainerPublishPort[];
+  /** 容器加载本地卷列表 */
+  Volumes?: DockerContainerVolume[];
+  /** 运行的命令 */
+  Command?: string;
+  /** 容器重启策略，对应docker "--restart"参数。枚举值:no: 不自动重启。默认策略。on-failure[:max-retries]: 当容器退出码非0时重启容器。使用max-retries限制重启次数，比如on-failure:10，限制最多重启10次。always: 只要容器退出就重启。unless-stopped: 始终重新启动容器，包括在守护进程启动时，除非容器在 Docker 守护进程停止之前进入停止状态。 */
+  RestartPolicy?: string;
+}
+
+declare interface ModifyDockerContainerResponse {
+  /** Docker活动ID。 */
+  DockerActivityId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFirewallRuleDescriptionRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -1838,6 +1978,36 @@ declare interface RebootInstancesResponse {
   RequestId?: string;
 }
 
+declare interface RemoveDockerContainersRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID列表。 */
+  ContainerIds: string[];
+}
+
+declare interface RemoveDockerContainersResponse {
+  /** Docker活动ID。 */
+  DockerActivityId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RenameDockerContainerRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID。 */
+  ContainerId: string;
+  /** 容器新的名称。 */
+  ContainerName: string;
+}
+
+declare interface RenameDockerContainerResponse {
+  /** Docker活动ID。 */
+  DockerActivityId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewDisksRequest {
   /** 云硬盘ID列表。一个或多个待操作的云硬盘ID。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。每次请求续费数据盘数量总计上限为50。 */
   DiskIds: string[];
@@ -1864,6 +2034,22 @@ declare interface RenewInstancesRequest {
 }
 
 declare interface RenewInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RerunDockerContainerRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 重新创建的容器配置。 */
+  ContainerConfiguration: DockerContainerConfiguration;
+  /** 容器ID。 */
+  ContainerId: string;
+}
+
+declare interface RerunDockerContainerResponse {
+  /** Docker活动ID。 */
+  DockerActivityId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1904,12 +2090,68 @@ declare interface ResetInstancesPasswordResponse {
   RequestId?: string;
 }
 
+declare interface RestartDockerContainersRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID列表。 */
+  ContainerIds: string[];
+}
+
+declare interface RestartDockerContainersResponse {
+  /** Docker活动ID。 */
+  DockerActivityId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunDockerContainersRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 要创建的容器列表。 */
+  Containers: DockerContainerConfiguration[];
+}
+
+declare interface RunDockerContainersResponse {
+  /** Docker活动ID列表。 */
+  DockerActivitySet: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartDockerContainersRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID列表。 */
+  ContainerIds: string[];
+}
+
+declare interface StartDockerContainersResponse {
+  /** Docker活动ID。 */
+  DockerActivityId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartInstancesRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
 }
 
 declare interface StartInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopDockerContainersRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 容器ID列表。 */
+  ContainerIds: string[];
+}
+
+declare interface StopDockerContainersResponse {
+  /** Docker活动ID。 */
+  DockerActivityId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2007,6 +2249,14 @@ declare interface Lighthouse {
   DescribeDisksDeniedActions(data: DescribeDisksDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksDeniedActionsResponse>;
   /** 查看云硬盘是否可退还 {@link DescribeDisksReturnableRequest} {@link DescribeDisksReturnableResponse} */
   DescribeDisksReturnable(data?: DescribeDisksReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksReturnableResponse>;
+  /** 查询Docker活动列表 {@link DescribeDockerActivitiesRequest} {@link DescribeDockerActivitiesResponse} */
+  DescribeDockerActivities(data: DescribeDockerActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDockerActivitiesResponse>;
+  /** 查询Docker容器配置信息 {@link DescribeDockerContainerConfigurationRequest} {@link DescribeDockerContainerConfigurationResponse} */
+  DescribeDockerContainerConfiguration(data: DescribeDockerContainerConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDockerContainerConfigurationResponse>;
+  /** 查询Docker容器详情 {@link DescribeDockerContainerDetailRequest} {@link DescribeDockerContainerDetailResponse} */
+  DescribeDockerContainerDetail(data: DescribeDockerContainerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDockerContainerDetailResponse>;
+  /** 查询容器列表 {@link DescribeDockerContainersRequest} {@link DescribeDockerContainersResponse} */
+  DescribeDockerContainers(data: DescribeDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDockerContainersResponse>;
   /** 查询防火墙规则 {@link DescribeFirewallRulesRequest} {@link DescribeFirewallRulesResponse} */
   DescribeFirewallRules(data: DescribeFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesResponse>;
   /** 查询防火墙规则模板 {@link DescribeFirewallRulesTemplateRequest} {@link DescribeFirewallRulesTemplateResponse} */
@@ -2073,6 +2323,8 @@ declare interface Lighthouse {
   ModifyDisksAttribute(data: ModifyDisksAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksAttributeResponse>;
   /** 修改云硬盘续费标识 {@link ModifyDisksRenewFlagRequest} {@link ModifyDisksRenewFlagResponse} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;
+  /** 修改实例内的Docker容器 {@link ModifyDockerContainerRequest} {@link ModifyDockerContainerResponse} */
+  ModifyDockerContainer(data: ModifyDockerContainerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDockerContainerResponse>;
   /** 修改防火墙规则描述 {@link ModifyFirewallRuleDescriptionRequest} {@link ModifyFirewallRuleDescriptionResponse} */
   ModifyFirewallRuleDescription(data: ModifyFirewallRuleDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRuleDescriptionResponse>;
   /** 修改防火墙规则 {@link ModifyFirewallRulesRequest} {@link ModifyFirewallRulesResponse} */
@@ -2089,18 +2341,32 @@ declare interface Lighthouse {
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
   /** 重启实例 {@link RebootInstancesRequest} {@link RebootInstancesResponse} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
+  /** 删除Docker容器 {@link RemoveDockerContainersRequest} {@link RemoveDockerContainersResponse} */
+  RemoveDockerContainers(data: RemoveDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveDockerContainersResponse>;
+  /** 重命名Docker容器 {@link RenameDockerContainerRequest} {@link RenameDockerContainerResponse} */
+  RenameDockerContainer(data: RenameDockerContainerRequest, config?: AxiosRequestConfig): AxiosPromise<RenameDockerContainerResponse>;
   /** 续费云硬盘 {@link RenewDisksRequest} {@link RenewDisksResponse} */
   RenewDisks(data: RenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDisksResponse>;
   /** 续费实例 {@link RenewInstancesRequest} {@link RenewInstancesResponse} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
+  /** 重新创建并运行Docker容器 {@link RerunDockerContainerRequest} {@link RerunDockerContainerResponse} */
+  RerunDockerContainer(data: RerunDockerContainerRequest, config?: AxiosRequestConfig): AxiosPromise<RerunDockerContainerResponse>;
   /** 重新申请关联云联网 {@link ResetAttachCcnRequest} {@link ResetAttachCcnResponse} */
   ResetAttachCcn(data: ResetAttachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAttachCcnResponse>;
   /** 重装系统 {@link ResetInstanceRequest} {@link ResetInstanceResponse} */
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
   /** 重置实例密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
+  /** 重启Docker容器 {@link RestartDockerContainersRequest} {@link RestartDockerContainersResponse} */
+  RestartDockerContainers(data: RestartDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDockerContainersResponse>;
+  /** 创建并运行Docker容器 {@link RunDockerContainersRequest} {@link RunDockerContainersResponse} */
+  RunDockerContainers(data: RunDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RunDockerContainersResponse>;
+  /** 启动Docker容器 {@link StartDockerContainersRequest} {@link StartDockerContainersResponse} */
+  StartDockerContainers(data: StartDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<StartDockerContainersResponse>;
   /** 启动实例 {@link StartInstancesRequest} {@link StartInstancesResponse} */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
+  /** 停止Docker容器 {@link StopDockerContainersRequest} {@link StopDockerContainersResponse} */
+  StopDockerContainers(data: StopDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<StopDockerContainersResponse>;
   /** 关闭实例 {@link StopInstancesRequest} {@link StopInstancesResponse} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
   /** 销毁云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */

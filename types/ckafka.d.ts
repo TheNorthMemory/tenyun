@@ -1942,6 +1942,12 @@ declare interface SaleInfo {
   SoldOut: boolean | null;
 }
 
+/** 实例缩容应答 */
+declare interface ScalingDownResp {
+  /** 订单号 */
+  DealNames?: string[] | null;
+}
+
 /** Scf类型入参 */
 declare interface ScfParam {
   /** SCF云函数函数名 */
@@ -3822,6 +3828,26 @@ declare interface InstanceResponse {
   TotalCount: number | null;
 }
 
+declare interface InstanceScalingDownRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 缩容模式 1:稳定变配 2.高速变配 */
+  UpgradeStrategy: number;
+  /** 磁盘大小 单位 GB */
+  DiskSize?: number;
+  /** 峰值带宽 单位 MB/s */
+  BandWidth?: number;
+  /** 分区上限 */
+  Partition?: number;
+}
+
+declare interface InstanceScalingDownResponse {
+  /** 缩容应答 */
+  Result?: ScalingDownResp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface JgwOperateResponse {
   /** 返回的code，0为正常，非0为错误 */
   ReturnCode: string;
@@ -4302,6 +4328,8 @@ declare interface Ckafka {
   FetchMessageListByOffset(data: FetchMessageListByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByOffsetResponse>;
   /** Ckafka询价 {@link InquireCkafkaPriceRequest} {@link InquireCkafkaPriceResponse} */
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
+  /** 按量实例缩容 {@link InstanceScalingDownRequest} {@link InstanceScalingDownResponse} */
+  InstanceScalingDown(data: InstanceScalingDownRequest, config?: AxiosRequestConfig): AxiosPromise<InstanceScalingDownResponse>;
   /** 修改Acl策略 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */
   ModifyAclRule(data: ModifyAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclRuleResponse>;
   /** 编辑Datahub连接源 {@link ModifyConnectResourceRequest} {@link ModifyConnectResourceResponse} */

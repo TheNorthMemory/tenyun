@@ -523,19 +523,19 @@ declare interface GetDetectInfoEnhancedRequest {
 
 declare interface GetDetectInfoEnhancedResponse {
   /** 文本类信息。 */
-  Text: DetectInfoText | null;
+  Text?: DetectInfoText | null;
   /** 身份证照片信息。 */
-  IdCardData: DetectInfoIdCardData | null;
+  IdCardData?: DetectInfoIdCardData | null;
   /** 最佳帧信息。 */
-  BestFrame: DetectInfoBestFrame | null;
+  BestFrame?: DetectInfoBestFrame | null;
   /** 视频信息。 */
-  VideoData: DetectInfoVideoData | null;
+  VideoData?: DetectInfoVideoData | null;
   /** 敏感数据加密信息。 */
-  Encryption: Encryption | null;
-  /** 意愿核身相关信息。若未使用意愿核身功能，该字段返回值可以不处理。 */
-  IntentionVerifyData: IntentionVerifyData | null;
+  Encryption?: Encryption | null;
+  /** 意愿核身朗读模式结果信息。若未使用意愿核身功能，该字段返回值可以不处理。 */
+  IntentionVerifyData?: IntentionVerifyData | null;
   /** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
-  IntentionQuestionResult: IntentionQuestionResult | null;
+  IntentionQuestionResult?: IntentionQuestionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
