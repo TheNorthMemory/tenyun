@@ -3238,7 +3238,7 @@ declare interface MediaTranscodeInfo {
 declare interface MediaTranscodeItem {
   /** 转码后的视频文件地址。 */
   Url?: string;
-  /** 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。 */
+  /** 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。注意：取值 0 表示原始文件。 */
   Definition?: number;
   /** 视频流码率平均值与音频流码率平均值之和， 单位：bps。 */
   Bitrate?: number;
@@ -4496,7 +4496,7 @@ declare interface RoundPlayInfo {
   Url?: string;
 }
 
-/** 加权轮播媒体文件信息 */
+/** 轮播媒体文件信息 */
 declare interface RoundPlayListItemInfo {
   /** 媒体文件标识。 */
   FileId: string;
@@ -8757,9 +8757,9 @@ declare interface ResetProcedureTemplateResponse {
 }
 
 declare interface RestoreMediaRequest {
-  /** 媒体文件唯一标识列表。 */
+  /** 媒体文件唯一标识列表，最大长度：100。 */
   FileIds: string[];
-  /** 解冻出的临时媒体文件的可访问持续时长，单位为“天”。 */
+  /** 解冻出的临时媒体文件的可访问持续时长，必须大于0，单位为“天”。 */
   RestoreDay?: number;
   /** 解冻模式。当媒体文件当前的存储类型为归档存储时，有以下取值：极速模式：Expedited，解冻任务在5分钟后完成。标准模式：Standard，解冻任务在5小时后完成 。批量模式：Bulk，，解冻任务在12小时后完成。当媒体文件的存储类型为深度归档存储时，有以下取值：标准模式：Standard，解冻任务在24小时后完成。批量模式：Bulk，解冻任务在48小时后完成。 */
   RestoreTier?: string;

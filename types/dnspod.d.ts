@@ -1410,6 +1410,66 @@ declare interface DescribeRecordExistExceptDefaultNSResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordFilterListRequest {
+  /** 要获取的解析记录所属的域名。 */
+  Domain: string;
+  /** 要获取的解析记录所属的域名 Id，如果传了 DomainId，系统将会忽略 Domain 参数。 可以通过接口 DescribeDomainList 查到所有的 Domain 以及 DomainId。 */
+  DomainId?: number;
+  /** 根据解析记录的主机头获取解析记录。默认模糊匹配。可以通过设置 IsExactSubdomain 参数为 true 进行精确查找。 */
+  SubDomain?: string;
+  /** 获取某些类型的解析记录，如 A，CNAME，NS，AAAA，显性URL，隐性URL，CAA，SPF等。 */
+  RecordType?: string[];
+  /** 获取某些线路ID的解析记录。可以通过接口 DescribeRecordLineList 查看当前域名允许的线路信息。 */
+  RecordLine?: string[];
+  /** 获取某些分组下的解析记录时，传这个分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。 */
+  GroupId?: number[];
+  /** 通过关键字搜索解析记录，当前支持搜索主机头和记录值 */
+  Keyword?: string;
+  /** 排序字段，支持 NAME，LINE，TYPE，VALUE，WEIGHT，MX，TTL，UPDATED_ON 几个字段。NAME：解析记录的主机头LINE：解析记录线路TYPE：解析记录类型VALUE：解析记录值WEIGHT：权重MX：MX 优先级TTL：解析记录缓存时间UPDATED_ON：解析记录更新时间 */
+  SortField?: string;
+  /** 排序方式，升序：ASC，降序：DESC。默认值为ASC。 */
+  SortType?: string;
+  /** 偏移量，默认值为0。 */
+  Offset?: number;
+  /** 限制数量，当前Limit最大支持3000。默认值为100。 */
+  Limit?: number;
+  /** 根据解析记录的值获取解析记录 */
+  RecordValue?: string;
+  /** 根据解析记录的状态获取解析记录。可取值为 ENABLE，DISABLE。ENABLE：正常 DISABLE：暂停 */
+  RecordStatus?: string[];
+  /** 要获取解析记录权重查询区间起点。 */
+  WeightBegin?: number;
+  /** 要获取解析记录权重查询区间终点。 */
+  WeightEnd?: number;
+  /** 要获取解析记录 MX 优先级查询区间起点。 */
+  MXBegin?: number;
+  /** 要获取解析记录 MX 优先级查询区间终点。 */
+  MXEnd?: number;
+  /** 要获取解析记录 TTL 查询区间起点。 */
+  TTLBegin?: number;
+  /** 要获取解析记录 TTL 查询区间终点。 */
+  TTLEnd?: number;
+  /** 要获取解析记录更新时间查询区间起点。 */
+  UpdatedAtBegin?: string;
+  /** 要获取解析记录更新时间查询区间终点。 */
+  UpdatedAtEnd?: string;
+  /** 根据解析记录的备注获取解析记录。 */
+  Remark?: string;
+  /** 是否根据 Subdomain 参数进行精确查找。 */
+  IsExactSubDomain?: boolean;
+  /** 项目ID */
+  ProjectId?: number;
+}
+
+declare interface DescribeRecordFilterListResponse {
+  /** 记录的数量统计信息 */
+  RecordCountInfo?: RecordCountInfo;
+  /** 获取的记录列表 */
+  RecordList?: RecordListItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRecordGroupListRequest {
   /** 域名 */
   Domain: string;
@@ -2121,6 +2181,8 @@ declare interface Dnspod {
   DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
   /** 判断是否有除系统默认的@-NS记录之外的记录存在 {@link DescribeRecordExistExceptDefaultNSRequest} {@link DescribeRecordExistExceptDefaultNSResponse} */
   DescribeRecordExistExceptDefaultNS(data: DescribeRecordExistExceptDefaultNSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordExistExceptDefaultNSResponse>;
+  /** 获取域名的解析记录筛选列表 {@link DescribeRecordFilterListRequest} {@link DescribeRecordFilterListResponse} */
+  DescribeRecordFilterList(data: DescribeRecordFilterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordFilterListResponse>;
   /** 查询解析记录分组列表 {@link DescribeRecordGroupListRequest} {@link DescribeRecordGroupListResponse} */
   DescribeRecordGroupList(data: DescribeRecordGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordGroupListResponse>;
   /** 获取等级允许的线路 {@link DescribeRecordLineListRequest} {@link DescribeRecordLineListResponse} */

@@ -635,39 +635,41 @@ declare interface RabbitMQClusterAccessInfo {
 /** RabbiteMQ集群基本信息 */
 declare interface RabbitMQClusterInfo {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 地域信息 */
-  Region: string;
+  Region?: string;
   /** 创建时间，毫秒为单位 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 集群说明信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** VPC及网络信息 */
-  Vpcs: VpcEndpointInfo[];
+  Vpcs?: VpcEndpointInfo[];
+  /** 可用区信息 */
+  ZoneIds?: number[] | null;
   /** 虚拟主机数量 */
-  VirtualHostNumber: number;
+  VirtualHostNumber?: number;
   /** 队列数量 */
-  QueueNumber: number;
+  QueueNumber?: number;
   /** 每秒生产消息数 单位：条/秒 */
-  MessagePublishRate: number;
+  MessagePublishRate?: number;
   /** 堆积消息数 单位：条 */
-  MessageStackNumber: number;
+  MessageStackNumber?: number;
   /** 过期时间 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** Channel数量 */
-  ChannelNumber: number;
+  ChannelNumber?: number;
   /** Connection数量 */
-  ConnectionNumber: number;
+  ConnectionNumber?: number;
   /** Consumer数量 */
-  ConsumerNumber: number;
+  ConsumerNumber?: number;
   /** Exchang数量 */
-  ExchangeNumber: number;
+  ExchangeNumber?: number;
   /** 集群异常。 */
   ExceptionInformation?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
-  ClusterStatus?: number | null;
+  ClusterStatus?: number;
 }
 
 /** RabbitMQ集群规格信息 */

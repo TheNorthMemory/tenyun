@@ -322,6 +322,18 @@ declare interface PackageConsumeTask {
   State: number;
 }
 
+/** 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间 */
+declare interface PackageInfo {
+  /** 云存开启状态，0为未开启，2为正在生效，1为已过期注：这里只返回状态为0的数据 */
+  Status?: number;
+  /** 云存类型，1为全时云存，2为事件云存 */
+  CSType?: number;
+  /** 云存回看时长 */
+  CSShiftDuration?: number;
+  /** 云存套餐过期时间 */
+  CSExpiredTime?: number;
+}
+
 /** 产品模型定义 */
 declare interface ProductModelDefinition {
   /** 产品ID */
@@ -830,6 +842,26 @@ declare interface CreateTaskFileUrlResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudStorageEventRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 事件id */
+  EventId: string;
+  /** 开始时间，unix时间 */
+  StartTime: number;
+  /** 结束时间，unix时间 */
+  EndTime: number;
+  /** 用户ID */
+  UserId?: string;
+}
+
+declare interface DeleteCloudStorageEventResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDeviceRequest {
   /** 产品ID。 */
   ProductId: string;
@@ -1211,7 +1243,9 @@ declare interface DescribeCloudStorageThumbnailRequest {
 
 declare interface DescribeCloudStorageThumbnailResponse {
   /** 缩略图访问地址 */
-  ThumbnailURL: string;
+  ThumbnailURL?: string;
+  /** 缩略图访问地址的过期时间 */
+  ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1420,6 +1454,26 @@ declare interface DescribeDeviceEventHistoryResponse {
   Listover: boolean | null;
   /** 搜集结果集 */
   EventHistory: EventHistoryItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDevicePackagesRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 分页拉取数量 */
+  Limit: number;
+  /** 分页拉取偏移 */
+  Offset: number;
+}
+
+declare interface DescribeDevicePackagesResponse {
+  /** 有效云存套餐数量 */
+  TotalCount?: number;
+  /** 有效云存套餐列表 */
+  Packages?: PackageInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5631,6 +5685,8 @@ declare interface Iotvideo {
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
   /** 获取任务文件上传链接 {@link CreateTaskFileUrlRequest} {@link CreateTaskFileUrlResponse} */
   CreateTaskFileUrl(data: CreateTaskFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFileUrlResponse>;
+  /** 删除云存事件 {@link DeleteCloudStorageEventRequest} {@link DeleteCloudStorageEventResponse} */
+  DeleteCloudStorageEvent(data: DeleteCloudStorageEventRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudStorageEventResponse>;
   /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
   /** 删除固件 {@link DeleteFirmwareRequest} {@link DeleteFirmwareResponse} */
@@ -5695,6 +5751,8 @@ declare interface Iotvideo {
   DescribeDeviceDataStats(data: DescribeDeviceDataStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataStatsResponse>;
   /** 获取设备的历史事件 {@link DescribeDeviceEventHistoryRequest} {@link DescribeDeviceEventHistoryResponse} */
   DescribeDeviceEventHistory(data: DescribeDeviceEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceEventHistoryResponse>;
+  /** 拉取有效云存套餐列表 {@link DescribeDevicePackagesRequest} {@link DescribeDevicePackagesResponse} */
+  DescribeDevicePackages(data: DescribeDevicePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePackagesResponse>;
   /** 获取设备上下线日志 {@link DescribeDeviceStatusLogRequest} {@link DescribeDeviceStatusLogResponse} */
   DescribeDeviceStatusLog(data: DescribeDeviceStatusLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceStatusLogResponse>;
   /** 获取设备列表 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */

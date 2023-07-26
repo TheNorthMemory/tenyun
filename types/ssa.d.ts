@@ -423,13 +423,13 @@ declare interface ComplianceCheckDetail {
 /** 关注点类型 */
 declare interface ConcernInfo {
   /** 关注点类型 */
-  ConcernType: number | null;
-  /** 实体类型 */
-  EntityType: number | null;
+  ConcernType?: number | null;
+  /** 实体类型 1: 非云上IP，2: 云上IP，3: 域名，4: IP，5: 文件，6: 进程 */
+  EntityType?: number | null;
   /** 关注点 */
-  Concern: string | null;
+  Concern?: string | null;
   /** 最近数量 */
-  StatisticsCount: number | null;
+  StatisticsCount?: number | null;
   /** IP国家 */
   IpCountry?: string | null;
   /** IP省份 */
@@ -483,15 +483,15 @@ declare interface ConcernInfo {
   /** 仅检测 */
   DetectedCount?: number | null;
   /** 可疑关注点字段 */
-  SearchData: string | null;
+  SearchData?: string | null;
   /** 可疑关注点字段 */
-  IpCountryIso: string | null;
+  IpCountryIso?: string | null;
   /** 可疑关注点字段 */
-  IpProvinceIso: string | null;
+  IpProvinceIso?: string | null;
   /** 可疑关注点字段 */
-  IpCity: string | null;
+  IpCity?: string | null;
   /** 可疑关注点字段 */
-  EventSubType: string | null;
+  EventSubType?: string | null;
 }
 
 /** 资产测绘对象 */

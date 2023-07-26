@@ -50,7 +50,7 @@ declare interface ApproverInfo {
   UserId?: string;
   /** 签署人用户来源，企微侧用户请传入：WEWORKAPP */
   ApproverSource?: string;
-  /** 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段 */
+  /** 企业签署方或签标识，客户自定义，64位长度。用于发起含有或签签署人的合同。或签参与人必须有此字段。合同内不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP */
   CustomApproverTag?: string;
   /** 签署人个性化能力值 */
   ApproverOption?: ApproverOption;
@@ -432,7 +432,7 @@ declare interface FlowCreateApprover {
   Required?: boolean;
   /** 签署人用户来源,企微侧用户请传入：WEWORKAPP */
   ApproverSource?: string;
-  /** 客户自定义签署人标识，64位长度，保证唯一。用于发起含有或签签署人的合同。或签参与人必须有此字段。不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP */
+  /** 企业签署方或签标识，客户自定义，64位长度。用于发起含有或签签署人的合同。或签参与人必须有此字段。合同内不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP */
   CustomApproverTag?: string;
   /** 快速注册相关信息，目前暂未开放！ */
   RegisterInfo?: RegisterInfo;
@@ -1565,7 +1565,9 @@ declare interface CreateSealRequest {
   SealName: string;
   /** 应用相关信息 */
   Agent?: Agent;
-  /** 电子印章类型，PERSONAL-个人私章,OFFICIAL-公章,SPECIAL_FINANCIAL-财务专用章,CONTRACT-合同专用章,LEGAL_REPRESENTATIVE-法定代表人章,SPECIAL_NATIONWIDE_INVOICE-发票专用章 */
+  /** 本接口支持上传图片印章及系统直接生成印章；如果要使用系统生成印章，此值传：SealGenerateSourceSystem；如果要使用图片上传请传字段 Image */
+  GenerateSource?: string;
+  /** 电子印章类型，OFFICIAL-公章,CONTRACT-合同专用章 */
   SealType?: string;
   /** 电子印章图片文件名称 */
   FileName?: string;
@@ -1577,16 +1579,14 @@ declare interface CreateSealRequest {
   Height?: number;
   /** 电子印章印章颜色(默认红色RED),RED-红色系统目前只支持红色印章创建。 */
   Color?: string;
-  /** 电子印章生成时的横向文字。 */
+  /** 暂时不支持横向文字设置 */
   SealHorizontalText?: string;
-  /** 电子印章下弦文字 */
+  /** 暂时不支持下弦文字设置 */
   SealChordText?: string;
-  /** 电子印章中心图案类型,STAR-圆形有五角星,NONE-圆形无五角星系统生成的印章只支持STAR */
+  /** 系统生成的印章只支持STAR */
   SealCentralType?: string;
   /** 通过文件上传时，服务端生成的电子印章上传图片的token */
   FileToken?: string;
-  /** 印章生成来源方式取值：SealGenerateSourceSystem 表示系统生成企业印章 */
-  GenerateSource?: string;
 }
 
 declare interface CreateSealResponse {
@@ -2291,7 +2291,7 @@ declare interface Ess {
   DescribeIntegrationDepartments(data: DescribeIntegrationDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationDepartmentsResponse>;
   /** 查询企业员工列表 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
-  /** 查询集团主企业员工账号 {@link DescribeIntegrationMainOrganizationUserRequest} {@link DescribeIntegrationMainOrganizationUserResponse} */
+  /** @deprecated 查询集团主企业员工账号 {@link DescribeIntegrationMainOrganizationUserRequest} {@link DescribeIntegrationMainOrganizationUserResponse} */
   DescribeIntegrationMainOrganizationUser(data: DescribeIntegrationMainOrganizationUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationMainOrganizationUserResponse>;
   /** 查询企业角色列表 {@link DescribeIntegrationRolesRequest} {@link DescribeIntegrationRolesResponse} */
   DescribeIntegrationRoles(data: DescribeIntegrationRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationRolesResponse>;

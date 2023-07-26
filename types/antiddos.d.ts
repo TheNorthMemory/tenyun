@@ -1738,6 +1738,32 @@ declare interface DescribeBizHttpStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBizMonitorTrendRequest {
+  /** 大禹子产品代号（bgpip表示高防IP） */
+  Business: string;
+  /** 统计开始时间。 例：“2020-09-22 00:00:00” */
+  StartTime: string;
+  /** 统计结束时间。 例：“2020-09-22 00:00:00” */
+  EndTime: string;
+  /** 资源实例ID */
+  Id: string;
+  /** 统计纬度，可取值intraffic outtraffic inpkg outpkg */
+  MetricName: string;
+  /** 时间粒度 60 300 3600 21600 86400 */
+  Period: number;
+}
+
+declare interface DescribeBizMonitorTrendResponse {
+  /** 曲线图各个时间点的值 */
+  DataList?: number[];
+  /** 统计纬度 */
+  MetricName?: string;
+  /** 返回DataList中的最大值 */
+  MaxData?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBizTrendRequest {
   /** 统计方式，可取值max, min, avg, sum, 如统计纬度是流量速率或包量速率，仅可取值max */
   Statistics: string;
@@ -2977,6 +3003,8 @@ declare interface Antiddos {
   DescribeBgpBizTrend(data: DescribeBgpBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBgpBizTrendResponse>;
   /** 获取业务流量状态码统计列表 {@link DescribeBizHttpStatusRequest} {@link DescribeBizHttpStatusResponse} */
   DescribeBizHttpStatus(data: DescribeBizHttpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizHttpStatusResponse>;
+  /** 获取高防IP业务监控流量曲线 {@link DescribeBizMonitorTrendRequest} {@link DescribeBizMonitorTrendResponse} */
+  DescribeBizMonitorTrend(data: DescribeBizMonitorTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizMonitorTrendResponse>;
   /** 获取高防IP业务流量曲线 {@link DescribeBizTrendRequest} {@link DescribeBizTrendResponse} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
   /** 获取DDoS防护的IP黑白名单 {@link DescribeBlackWhiteIpListRequest} {@link DescribeBlackWhiteIpListResponse} */

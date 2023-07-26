@@ -932,6 +932,46 @@ declare interface ScheduledSqlResouceInfo {
   Region?: string;
 }
 
+/** ScheduledSql任务详情 */
+declare interface ScheduledSqlTaskInfo {
+  /** ScheduledSql任务id */
+  TaskId?: string;
+  /** ScheduledSql任务名称 */
+  Name?: string;
+  /** 源日志主题id */
+  SrcTopicId?: string;
+  /** 源日志主题名称 */
+  SrcTopicName?: string;
+  /** 定时SQL分析目标主题 */
+  DstResource?: ScheduledSqlResouceInfo;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务更新时间 */
+  UpdateTime?: string;
+  /** 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题5: 访问权限问题 6:内部故障 7:其他故障 */
+  Status?: number;
+  /** 任务启用状态，1开启, 2关闭 */
+  EnableFlag?: number;
+  /** 查询语句 */
+  ScheduledSqlContent?: string;
+  /** 调度开始时间 */
+  ProcessStartTime?: string;
+  /** 调度类型，1:持续运行 2:指定调度结束时间 */
+  ProcessType?: number;
+  /** 调度结束时间，当process_type=2时为必传字段 */
+  ProcessEndTime?: string;
+  /** 调度周期(分钟) */
+  ProcessPeriod?: number;
+  /** 查询的时间窗口. @m-15m, @m，意为近15分钟 */
+  ProcessTimeWindow?: string;
+  /** 执行延迟(秒) */
+  ProcessDelay?: number;
+  /** 源topicId的地域信息 */
+  SrcTopicRegion?: string;
+  /** 语法规则，0：Lucene语法，1：CQL语法 */
+  SyntaxRule?: number | null;
+}
+
 /** 投递规则 */
 declare interface ShipperInfo {
   /** 投递规则ID */
@@ -1435,9 +1475,9 @@ declare interface CreateScheduledSqlRequest {
   Name: string;
   /** 任务启动状态. 1正常开启, 2关闭 */
   EnableFlag: number;
-  /** 加工任务目的topic_id以及别名 */
+  /** 定时SQL分析目标日志主题 */
   DstResource: ScheduledSqlResouceInfo;
-  /** ScheduledSQL语句 */
+  /** 查询语句 */
   ScheduledSqlContent: string;
   /** 调度开始时间,Unix时间戳，单位ms */
   ProcessStartTime: number;
@@ -1445,7 +1485,7 @@ declare interface CreateScheduledSqlRequest {
   ProcessType: number;
   /** 调度周期(分钟) */
   ProcessPeriod: number;
-  /** 调度时间窗口 */
+  /** 单次查询的时间窗口 */
   ProcessTimeWindow: string;
   /** 执行延迟(秒) */
   ProcessDelay: number;
@@ -1664,6 +1704,18 @@ declare interface DeleteMachineGroupRequest {
 }
 
 declare interface DeleteMachineGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteScheduledSqlRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 源日志主题ID */
+  SrcTopicId: string;
+}
+
+declare interface DeleteScheduledSqlResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2044,6 +2096,26 @@ declare interface DescribePartitionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScheduledSqlInfoRequest {
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+  /** 任务名称 */
+  Name?: string;
+  /** 任务id */
+  TaskId?: string;
+}
+
+declare interface DescribeScheduledSqlInfoResponse {
+  /** ScheduledSQL任务列表信息 */
+  ScheduledSqlTaskInfos: ScheduledSqlTaskInfo[];
+  /** 任务总次数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeShipperTasksRequest {
   /** 投递规则ID */
   ShipperId: string;
@@ -2412,6 +2484,36 @@ declare interface ModifyMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyScheduledSqlRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 源日志主题 */
+  SrcTopicId?: string;
+  /** 任务启动状态. 1正常开启, 2关闭 */
+  EnableFlag?: number;
+  /** 定时SQL分析的目标日志主题 */
+  DstResource?: ScheduledSqlResouceInfo;
+  /** 查询语句 */
+  ScheduledSqlContent?: string;
+  /** 调度周期(分钟) */
+  ProcessPeriod?: number;
+  /** 单次查询的时间窗口. 例子中为近15分钟 */
+  ProcessTimeWindow?: string;
+  /** 执行延迟(秒) */
+  ProcessDelay?: number;
+  /** 源topicId的地域信息 */
+  SrcTopicRegion?: string;
+  /** 任务名称 */
+  Name?: string;
+  /** 语法规则。 默认值为0。 0：Lucene语法，1：CQL语法 */
+  SyntaxRule?: number;
+}
+
+declare interface ModifyScheduledSqlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyShipperRequest {
   /** 投递规则ID */
   ShipperId: string;
@@ -2679,6 +2781,8 @@ declare interface Cls {
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
   /** 删除机器组信息 {@link DeleteMachineGroupInfoRequest} {@link DeleteMachineGroupInfoResponse} */
   DeleteMachineGroupInfo(data: DeleteMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupInfoResponse>;
+  /** 删除ScheduledSql任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
+  DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
   /** 删除投递COS任务 {@link DeleteShipperRequest} {@link DeleteShipperResponse} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
   /** 删除日志主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
@@ -2721,6 +2825,8 @@ declare interface Cls {
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
   /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
+  /** 获取ScheduledSql任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
+  DescribeScheduledSqlInfo(data?: DescribeScheduledSqlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledSqlInfoResponse>;
   /** 获取投递任务列表 {@link DescribeShipperTasksRequest} {@link DescribeShipperTasksResponse} */
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
   /** 获取投递到COS的任务配置信息 {@link DescribeShippersRequest} {@link DescribeShippersResponse} */
@@ -2753,6 +2859,8 @@ declare interface Cls {
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
   /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */
   ModifyMachineGroup(data: ModifyMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineGroupResponse>;
+  /** 修改ScheduledSql任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
+  ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
   /** 修改投递COS任务 {@link ModifyShipperRequest} {@link ModifyShipperResponse} */
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;
   /** 修改日志主题 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */

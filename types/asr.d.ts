@@ -19,9 +19,9 @@ declare interface AsyncRecognitionTasks {
 /** 热词的词和权重 */
 declare interface HotWord {
   /** 热词 */
-  Word: string;
+  Word: string | null;
   /** 权重 */
-  Weight: number;
+  Weight: number | null;
 }
 
 /** 自学习模型信息 */
@@ -345,7 +345,7 @@ declare interface DownloadCustomizationRequest {
 
 declare interface DownloadCustomizationResponse {
   /** 下载地址 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -447,7 +447,7 @@ declare interface ModifyCustomizationStateRequest {
 
 declare interface ModifyCustomizationStateResponse {
   /** 自学习模型ID */
-  ModelId: string;
+  ModelId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -535,7 +535,7 @@ declare interface UpdateAsrVocabRequest {
 
 declare interface UpdateAsrVocabResponse {
   /** 热词表ID */
-  VocabId: string;
+  VocabId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

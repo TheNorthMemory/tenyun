@@ -724,6 +724,8 @@ declare interface OtherInvoice {
   OtherInvoiceListItems?: OtherInvoiceItem[];
   /** 表格 */
   OtherInvoiceTableItems?: OtherInvoiceList[];
+  /** 发票日期 */
+  Date?: string;
 }
 
 /** OtherInvoiceItem */
@@ -957,11 +959,11 @@ declare interface SingleInvoiceInfo {
 /** 混贴票据中单张发票的内容 */
 declare interface SingleInvoiceItem {
   /** 增值税专用发票 */
-  VatSpecialInvoice: VatInvoiceInfo | null;
+  VatSpecialInvoice?: VatInvoiceInfo | null;
   /** 增值税普通发票 */
-  VatCommonInvoice: VatInvoiceInfo | null;
+  VatCommonInvoice?: VatInvoiceInfo | null;
   /** 增值税电子普通发票 */
-  VatElectronicCommonInvoice: VatInvoiceInfo | null;
+  VatElectronicCommonInvoice?: VatInvoiceInfo | null;
   /** 增值税电子专用发票 */
   VatElectronicSpecialInvoice?: VatInvoiceInfo | null;
   /** 区块链电子发票 */
@@ -1004,6 +1006,8 @@ declare interface SingleInvoiceItem {
   MedicalOutpatientInvoice?: MedicalInvoice | null;
   /** 医疗住院收费票据（电子） */
   MedicalHospitalizedInvoice?: MedicalInvoice | null;
+  /** 增值税销货清单 */
+  VatSalesList?: VatInvoiceInfo | null;
 }
 
 /** 智慧表单上传文件信息 */
@@ -1788,6 +1792,14 @@ declare interface VatInvoiceInfo {
   ElectronicFullNumber?: string;
   /** 发票联名 */
   FormName?: string;
+  /** 是否有区块链标记（0：没有，1：有） */
+  BlockChainMark?: number;
+  /** 是否有收购标记（0：没有，1：有） */
+  AcquisitionMark?: number;
+  /** 小计金额 */
+  SubTotal?: string;
+  /** 小计税额 */
+  SubTax?: string;
 }
 
 /** 增值税发票项目明细 */
@@ -1854,6 +1866,8 @@ declare interface VatInvoiceItemInfo {
   LicensePlate?: string;
   /** 车辆类型 */
   VehicleType?: string;
+  /** 序号 */
+  SerialNumber?: string;
 }
 
 /** 增值税普通发票(卷票) */

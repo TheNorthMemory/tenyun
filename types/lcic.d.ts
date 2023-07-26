@@ -260,6 +260,10 @@ declare interface RoomInfo {
   InteractionMode?: number;
   /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
   VideoOrientation?: number;
+  /** 开启课后评分。 0：不开启(默认) 1：开启 */
+  IsGradingRequiredPostClass?: number;
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
+  RoomType?: number;
 }
 
 /** 房间列表 */
@@ -588,6 +592,8 @@ declare interface CreateRoomRequest {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
+  RoomType?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -973,6 +979,8 @@ declare interface DescribeRoomResponse {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
+  RoomType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1272,6 +1280,8 @@ declare interface ModifyRoomRequest {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
+  RoomType?: number;
 }
 
 declare interface ModifyRoomResponse {

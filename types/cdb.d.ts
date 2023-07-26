@@ -2559,19 +2559,19 @@ declare interface DescribeBackupOverviewRequest {
 
 declare interface DescribeBackupOverviewResponse {
   /** 用户在当前地域备份的总个数（包含数据备份和日志备份）。 */
-  BackupCount: number;
+  BackupCount?: number;
   /** 用户在当前地域备份的总容量 */
-  BackupVolume: number;
+  BackupVolume?: number;
   /** 用户在当前地域备份的计费容量，即超出赠送容量的部分。 */
-  BillingVolume: number;
+  BillingVolume?: number;
   /** 用户在当前地域获得的赠送备份容量。 */
-  FreeVolume: number;
+  FreeVolume?: number;
   /** 用户在当前地域的异地备份总容量。 */
-  RemoteBackupVolume: number | null;
+  RemoteBackupVolume?: number | null;
   /** 归档备份容量，包含数据备份以及日志备份。 */
-  BackupArchiveVolume: number | null;
+  BackupArchiveVolume?: number | null;
   /** 标准存储备份容量，包含数据备份以及日志备份。 */
-  BackupStandbyVolume: number | null;
+  BackupStandbyVolume?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

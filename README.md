@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9702+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9715+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -109,7 +109,7 @@ aiart | [AI 绘画](https://cloud.tencent.com/document/product/1668) | 2022-12-2
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
 anicloud | [动效素材服务](https://cloud.tencent.com/document/product/1641) | 2022-09-23(3) |
-antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2020-03-09(93) |
+antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2020-03-09(94) |
 apcas | [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) | 2020-11-27(7) |
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
@@ -158,7 +158,7 @@ clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-1
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) | 2021-05-24(22) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(77) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(80) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -178,7 +178,7 @@ dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/132
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(90) |
-dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(67) |
+dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(68) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(27) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
@@ -219,7 +219,7 @@ iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(72) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(90) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
-iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(95) | 2020-12-15(79)<br/>2019-11-26(66) |
+iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(97) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
@@ -241,7 +241,7 @@ mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240)
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(149) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(100) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(4) |
-ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(13) |
+ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(19) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 mvj | 营销价值判断 | 2019-09-26(1) |
 nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(38) |

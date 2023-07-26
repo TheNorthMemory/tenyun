@@ -65,9 +65,9 @@ declare interface AudioTrackItem {
 /** 资源权限信息 */
 declare interface AuthorizationInfo {
   /** 被授权者实体。 */
-  Authorizee: Entity;
-  /** 详细授权值。 取值有：R：可读，可以浏览素材，但不能使用该素材（将其添加到 Project），或复制到自己的媒资库中X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。W：可修改、删除媒资。 */
-  PermissionSet: string[];
+  Authorizee?: Entity;
+  /** 详细授权值。 取值有：R：可读，可以浏览素材，但不能使用该素材（将其添加到 Project），或复制到自己的媒资库中。X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。W：可修改、删除媒资。 */
+  PermissionSet?: string[];
 }
 
 /** 授权者 */
