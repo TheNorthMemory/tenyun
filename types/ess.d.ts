@@ -450,6 +450,10 @@ declare interface FlowCreateApprover {
   Components?: Component[];
   /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
   ComponentLimitType?: string[];
+  /** 合同查看方式默认1 -实名查看 2-短信验证码查看(企业签署方暂不支持该方式) */
+  ApproverVerifyTypes?: number[];
+  /** 合同签署方式(默认1,2) 1-人脸认证 2-签署密码 3-运营商三要素 */
+  ApproverSignTypes?: number[];
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -762,6 +766,14 @@ declare interface RemindFlowRecords {
   RemindMessage: string;
 }
 
+/** 关注方信息 */
+declare interface ReviewerInfo {
+  /** 姓名 */
+  Name?: string;
+  /** 手机号 */
+  Mobile?: string;
+}
+
 /** 模板结构体中的印章信息 */
 declare interface SealInfo {
 }
@@ -940,6 +952,14 @@ declare interface UserThreeFactor {
   IdCardNumber: string | null;
 }
 
+/** 页面主题配置 */
+declare interface WebThemeConfig {
+  /** 是否页面底部显示电子签logotrue：允许在页面底部隐藏电子签logofalse：不允许允许在页面底部隐藏电子签logo默认false，不隐藏logo */
+  DisplaySignBrandLogo?: boolean;
+  /** 主题颜色支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65) */
+  WebEmbedThemeColor?: string;
+}
+
 declare interface BindEmployeeUserIdWithClientOpenIdRequest {
   /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定。（参数参考示例） */
   Operator: UserInfo;
@@ -1086,6 +1106,26 @@ declare interface CreateDocumentResponse {
   DocumentId?: string;
   /** 签署流程文件的预览地址, 5分钟内有效。仅当NeedPreview为true 时返回 */
   PreviewFileUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateEmbedWebUrlRequest {
+  /** 操作者信息 */
+  Operator: UserInfo;
+  /** WEB嵌入资源类型。CREATE_SEAL: 创建印章PREVIEW_SEAL_LIST：预览印章列表PREVIEW_SEAL_DETAIL：预览印章详情EXTEND_SERVICE：拓展服务 */
+  EmbedType: string;
+  /** WEB嵌入的业务资源IDPREVIEW_SEAL_DETAIL，必填，取值为印章id */
+  BusinessId?: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作 */
+  Agent?: Agent;
+  /** 抄送方信息 */
+  Reviewer?: ReviewerInfo;
+}
+
+declare interface CreateEmbedWebUrlResponse {
+  /** 嵌入的web链接，有效期：5分钟EmbedType=PREVIEW_CC_FLOW，该url为h5链接 */
+  WebUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1420,6 +1460,30 @@ declare interface CreateMultiFlowSignQRCodeResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrganizationBatchSignUrlRequest {
+  /** 调用方用户信息，UserId 必填，支持填入集团子公司经办人UserId。 */
+  Operator: UserInfo;
+  /** 指定需要进行批量签署的流程id，数量1-100，填写后用户将通过链接对这些合同进行批量签署。 */
+  FlowIds: string[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填。 */
+  Agent?: Agent;
+  /** 员工的UserId，该UserId对应的员工必须已经加入企业并实名，Name和Mobile为空时该字段不能为空。（优先使用UserId对应的员工） */
+  UserId?: string;
+  /** 员工姓名，该字段需要与Mobile组合使用，UserId为空时该字段不能为空。（UserId为空时，使用Name和Mbile对应的员工） */
+  Name?: string;
+  /** 员工手机号码，该字段需要与Name组合使用，UserId为空时该字段不能为空。（UserId为空时，使用Name和Mbile对应的员工） */
+  Mobile?: string;
+}
+
+declare interface CreateOrganizationBatchSignUrlResponse {
+  /** 批量签署入口链接 */
+  SignUrl?: string;
+  /** 链接过期时间戳 */
+  ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePrepareFlowRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
@@ -1437,6 +1501,8 @@ declare interface CreatePrepareFlowRequest {
   Approvers?: FlowCreateApprover[];
   /** 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE") */
   IntelligentStatus?: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreatePrepareFlowResponse {
@@ -1628,6 +1694,20 @@ declare interface CreateUserAutoSignEnableUrlResponse {
   QrCode?: string;
   /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
   UrlType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWebThemeConfigRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 主题类型EMBED_WEB_THEME：嵌入式主题目前只支持EMBED_WEB_THEME，web页面嵌入的主题风格配置 */
+  ThemeType: string;
+  /** 主题配置 */
+  WebThemeConfig: WebThemeConfig;
+}
+
+declare interface CreateWebThemeConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2225,6 +2305,8 @@ declare interface Ess {
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
+  /** 获取其他可嵌入web页面 {@link CreateEmbedWebUrlRequest} {@link CreateEmbedWebUrlResponse} */
+  CreateEmbedWebUrl(data: CreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedWebUrlResponse>;
   /** 模板发起合同-创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
   CreateFlow(data: CreateFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowResponse>;
   /** 补充签署流程企业签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
@@ -2251,6 +2333,8 @@ declare interface Ess {
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 创建一码多扫流程签署二维码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
+  /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
+  CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
   /** 获取发起合同web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
   /** 创建导入处方单个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
@@ -2265,6 +2349,8 @@ declare interface Ess {
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
   /** 获取个人用户自动签开启链接 {@link CreateUserAutoSignEnableUrlRequest} {@link CreateUserAutoSignEnableUrlResponse} */
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
+  /** 创建页面主题配置 {@link CreateWebThemeConfigRequest} {@link CreateWebThemeConfigResponse} */
+  CreateWebThemeConfig(data: CreateWebThemeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebThemeConfigResponse>;
   /** 删除企业部门 {@link DeleteIntegrationDepartmentRequest} {@link DeleteIntegrationDepartmentResponse} */
   DeleteIntegrationDepartment(data: DeleteIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationDepartmentResponse>;
   /** 移除企业员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */

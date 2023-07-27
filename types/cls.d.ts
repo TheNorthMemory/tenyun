@@ -785,7 +785,7 @@ declare interface MachineGroupTypeInfo {
   /** 机器组类型，ip表示该机器组Values中存的是采集机器的IP地址，label表示该机器组Values中存储的是机器的标签 */
   Type: string;
   /** 机器描述列表 */
-  Values: string[];
+  Values?: string[];
 }
 
 /** 机器状态信息 */

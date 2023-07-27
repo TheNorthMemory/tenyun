@@ -332,6 +332,10 @@ declare interface PackageInfo {
   CSShiftDuration?: number;
   /** 云存套餐过期时间 */
   CSExpiredTime?: number;
+  /** 云存套餐创建时间 */
+  CreatedAt?: number | null;
+  /** 云存套餐更新时间 */
+  UpdatedAt?: number | null;
 }
 
 /** 产品模型定义 */

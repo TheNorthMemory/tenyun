@@ -110,7 +110,7 @@ declare interface EventDataInfo {
 declare interface EventInfo {
   /** 事件发生的秒级unix时间戳。 */
   Timestamp?: number;
-  /** 事件类型,有以下值:RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束Camera0n: 摄像头打开Camera0ff: 摄像头关闭MicOn: 麦克风打开MicOff: 麦克风关闭ScreenOn: 屏幕共享打开ScreenOff: 屏幕共享关闭VisibleOn: 页面可见VisibleOff: 页面不可见 */
+  /** 事件类型,有以下值:RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束CameraOn: 摄像头打开CameraOff: 摄像头关闭MicOn: 麦克风打开MicOff: 麦克风关闭ScreenOn: 屏幕共享打开ScreenOff: 屏幕共享关闭VisibleOn: 页面可见VisibleOff: 页面不可见 */
   EventType?: string;
   /** 事件详细内容，包含房间号,成员类型事件包含用户Id。 */
   EventData?: EventDataInfo | null;

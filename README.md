@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9715+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9718+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -113,7 +113,7 @@ antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/prod
 apcas | [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) | 2020-11-27(7) |
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
-apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(97) |
+apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(96) |
 apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(8) |
 asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(24) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
@@ -192,8 +192,8 @@ eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/docum
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(32) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(38) |
-ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(56) |
-essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(46) | 2020-12-22(53) |
+ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(59) |
+essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(47) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(2) | 2018-12-01(4) |
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(33) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10) |

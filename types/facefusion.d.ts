@@ -26,6 +26,18 @@ declare interface FaceRect {
   Height: number;
 }
 
+/** 融合参数 */
+declare interface FuseParam {
+  /** 图片编码参数 */
+  ImageCodecParam?: ImageCodecParam;
+}
+
+/** 图片编码参数 */
+declare interface ImageCodecParam {
+  /** 元数据 */
+  MetaData?: MetaData[];
+}
+
 /** logo参数 */
 declare interface LogoParam {
   /** 标识图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配 */
@@ -54,6 +66,14 @@ declare interface MergeInfo {
   InputImageFaceRect?: FaceRect;
   /** 控制台上传的素材人脸ID，不填默认取最大人脸 */
   TemplateFaceID?: string;
+}
+
+/** MetaData数据结构，Key/Value格式 */
+declare interface MetaData {
+  /** MetaData的Key */
+  MetaKey: string | null;
+  /** MetaData的Value */
+  MetaValue: string | null;
 }
 
 /** 素材信息 */
@@ -111,11 +131,13 @@ declare interface FuseFaceRequest {
   LogoAdd?: number;
   /** 标识内容设置。默认在融合结果图右下角添加“本图片为AI合成图片”字样，您可根据自身需要替换为其他的Logo图片。 */
   LogoParam?: LogoParam;
+  /** 融合参数。 */
+  FuseParam?: FuseParam;
 }
 
 declare interface FuseFaceResponse {
   /** RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。 */
-  FusedImage: string;
+  FusedImage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -175,6 +197,18 @@ declare namespace V20181201 {
     DetailSet: FuseFaceReviewDetail[];
   }
 
+  /** 融合参数 */
+  interface FuseParam {
+    /** 图片编码参数 */
+    ImageCodecParam?: ImageCodecParam;
+  }
+
+  /** 图片编码参数 */
+  interface ImageCodecParam {
+    /** 元数据 */
+    MetaData?: MetaData[];
+  }
+
   /** 人脸信息 */
   interface MaterialFaceList {
     /** 人脸序号 */
@@ -193,6 +227,14 @@ declare namespace V20181201 {
     InputImageFaceRect?: FaceRect;
     /** 控制台上传的素材人脸ID，不填默认取最大人脸 */
     TemplateFaceID?: string;
+  }
+
+  /** MetaData数据结构，Key/Value格式 */
+  interface MetaData {
+    /** MetaData的Key */
+    MetaKey: string | null;
+    /** MetaData的Value */
+    MetaValue: string | null;
   }
 
   /** 素材信息 */
@@ -278,13 +320,15 @@ declare namespace V20181201 {
     CelebrityIdentify?: number;
     /** 图片Url地址 */
     Url?: string;
+    /** 融合参数 */
+    FuseParam?: FuseParam;
   }
 
   interface FaceFusionResponse {
     /** RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。 */
-    Image: string;
+    Image?: string;
     /** 不适宜内容识别结果 */
-    ReviewResultSet: FuseFaceReviewResult[];
+    ReviewResultSet?: FuseFaceReviewResult[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -304,13 +348,15 @@ declare namespace V20181201 {
     FuseFaceDegree?: number;
     /** 0表示不需要不适宜内容识别，1表示需要不适宜内容识别。默认值为0。请注意，不适宜内容识别服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。 */
     CelebrityIdentify?: number;
+    /** 融合参数 */
+    FuseParam?: FuseParam;
   }
 
   interface FuseFaceResponse {
     /** RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。 */
-    FusedImage: string;
+    FusedImage?: string;
     /** 不适宜内容识别结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应 */
-    ReviewResultSet: FuseFaceReviewResult[] | null;
+    ReviewResultSet?: FuseFaceReviewResult[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

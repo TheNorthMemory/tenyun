@@ -654,14 +654,6 @@ declare interface DescribeUpstreamInfo {
   UpstreamSet: UpstreamInfo[];
 }
 
-/** api文档下载 */
-declare interface DocumentSDK {
-  /** 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。 */
-  DocumentURL: string;
-  /** 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。 */
-  SdkURL: string;
-}
-
 /** 服务自定义域名列表 */
 declare interface DomainSetList {
   /** 域名名称。 */
@@ -2920,22 +2912,6 @@ declare interface EnableApiKeyResponse {
   RequestId?: string;
 }
 
-declare interface GenerateApiDocumentRequest {
-  /** 待创建文档的服务唯一 ID。 */
-  ServiceId: string;
-  /** 待创建 SDK 的服务所在环境。 */
-  GenEnvironment: string;
-  /** 待创建 SDK 的语言。当前只支持 Python 和 JavaScript。 */
-  GenLanguage: string;
-}
-
-declare interface GenerateApiDocumentResponse {
-  /** api文档&sdk链接。 */
-  Result: DocumentSDK;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ImportOpenApiRequest {
   /** API所在的服务唯一ID。 */
   ServiceId: string;
@@ -3631,8 +3607,6 @@ declare interface Apigateway {
   DisableApiKey(data: DisableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableApiKeyResponse>;
   /** 启用密钥 {@link EnableApiKeyRequest} {@link EnableApiKeyResponse} */
   EnableApiKey(data: EnableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableApiKeyResponse>;
-  /** @deprecated 生成文档和 SDK {@link GenerateApiDocumentRequest} {@link GenerateApiDocumentResponse} */
-  GenerateApiDocument(data: GenerateApiDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateApiDocumentResponse>;
   /** 导入OpenAPI {@link ImportOpenApiRequest} {@link ImportOpenApiResponse} */
   ImportOpenApi(data: ImportOpenApiRequest, config?: AxiosRequestConfig): AxiosPromise<ImportOpenApiResponse>;
   /** 修改 API 文档 {@link ModifyAPIDocRequest} {@link ModifyAPIDocResponse} */

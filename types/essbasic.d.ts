@@ -816,6 +816,14 @@ declare interface UserInfo {
   ProxyIp?: string;
 }
 
+/** 主题配置 */
+declare interface WebThemeConfig {
+  /** 页面底部是否显示电子签logotrue：允许在页面底部隐藏电子签logo 默认false，不允许允许在页面底部隐藏电子签logo */
+  DisplaySignBrandLogo?: boolean;
+  /** 嵌入式主题颜色支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65) */
+  WebEmbedThemeColor?: string;
+}
+
 declare interface ChannelBatchCancelFlowsRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
@@ -1230,6 +1238,20 @@ declare interface ChannelCreateUserRolesRequest {
 declare interface ChannelCreateUserRolesResponse {
   /** 绑定失败的用户角色列表 */
   FailedCreateRoleData?: FailedCreateRoleData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreateWebThemeConfigRequest {
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  Agent: Agent;
+  /** 主题类型EMBED_WEB_THEME：嵌入式主题目前只支持EMBED_WEB_THEME，web页面嵌入的主题风格配置 */
+  ThemeType: string;
+  /** 主题配置 */
+  WebThemeConfig: WebThemeConfig;
+}
+
+declare interface ChannelCreateWebThemeConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3421,6 +3443,8 @@ declare interface Essbasic {
   ChannelCreateSealPolicy(data: ChannelCreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateSealPolicyResponse>;
   /** 绑定员工角色 {@link ChannelCreateUserRolesRequest} {@link ChannelCreateUserRolesResponse} */
   ChannelCreateUserRoles(data: ChannelCreateUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserRolesResponse>;
+  /** 生成页面主题配置 {@link ChannelCreateWebThemeConfigRequest} {@link ChannelCreateWebThemeConfigResponse} */
+  ChannelCreateWebThemeConfig(data: ChannelCreateWebThemeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateWebThemeConfigResponse>;
   /** 删除员工绑定角色 {@link ChannelDeleteRoleUsersRequest} {@link ChannelDeleteRoleUsersResponse} */
   ChannelDeleteRoleUsers(data: ChannelDeleteRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteRoleUsersResponse>;
   /** 删除印章授权 {@link ChannelDeleteSealPoliciesRequest} {@link ChannelDeleteSealPoliciesResponse} */
