@@ -298,6 +298,10 @@ declare interface RoomItem {
   InteractionMode?: number | null;
   /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
   VideoOrientation?: number | null;
+  /** 开启课后评分。 0：不开启(默认) 1：开启 */
+  IsGradingRequiredPostClass?: number | null;
+  /** 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展） */
+  RoomType?: number | null;
 }
 
 /** 场景配置 */
@@ -1092,7 +1096,7 @@ declare interface GetRoomEventRequest {
   Page: number;
   /** 每页个数。keyword为空时有效。一次性最多200条。 */
   Limit: number;
-  /** 搜索事件类型。有以下事件类型:RoomStart:房间开始RoomEnd:房间结束MemberJoin:成员加入MemberQuit:成员退出RecordFinish:录制结束 */
+  /** 搜索事件类型。有以下事件类型:RoomStart:房间开始RoomEnd:房间结束MemberJoin:成员加入MemberQuit:成员退出RecordFinish:录制结束CameraOn: 摄像头打开CameraOff: 摄像头关闭MicOn: 麦克风打开MicOff: 麦克风关闭ScreenOn: 屏幕共享打开ScreenOff: 屏幕共享关闭VisibleOn: 页面可见VisibleOff: 页面不可见 */
   Keyword?: string;
 }
 

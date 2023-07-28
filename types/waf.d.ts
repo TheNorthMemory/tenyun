@@ -12,6 +12,14 @@ declare interface AccessFullTextInfo {
   ContainZH: boolean | null;
 }
 
+/** 用于接口DescribeAccessHistogram 的出参 */
+declare interface AccessHistogramItem {
+  /** 时间，单位ms */
+  BTime?: number;
+  /** 日志条数 */
+  Count?: number;
+}
+
 /** 用于 DescribeAccessIndex 的出参 */
 declare interface AccessKeyValueInfo {
   /** 需要配置键值或者元字段索引的字段 */
@@ -1130,6 +1138,30 @@ declare interface DescribeAccessFastAnalysisResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAccessHistogramRequest {
+  /** 老版本查询的日志主题ID，新版本传空字符串即可 */
+  TopicId: string;
+  /** 要查询的日志的起始时间，Unix时间戳，单位ms */
+  From: number;
+  /** 要查询的日志的结束时间，Unix时间戳，单位ms */
+  To: number;
+  /** 查询语句，语句长度最大为4096 */
+  Query: string;
+  /** 柱状图间隔时间差，单位ms */
+  Interval?: number;
+}
+
+declare interface DescribeAccessHistogramResponse {
+  /** 柱状图间隔时间差，单位ms */
+  Interval?: number;
+  /** 满足条件的日志条数 */
+  TotalCount?: number;
+  /** 注意：此字段可能返回 null，表示取不到有效值 */
+  HistogramInfos?: AccessHistogramItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccessIndexRequest {
 }
 
@@ -1919,6 +1951,8 @@ declare interface Waf {
   DescribeAccessExports(data: DescribeAccessExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessExportsResponse>;
   /** 访问日志快速分析统计 {@link DescribeAccessFastAnalysisRequest} {@link DescribeAccessFastAnalysisResponse} */
   DescribeAccessFastAnalysis(data: DescribeAccessFastAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessFastAnalysisResponse>;
+  /** 访问日志柱状趋势图 {@link DescribeAccessHistogramRequest} {@link DescribeAccessHistogramResponse} */
+  DescribeAccessHistogram(data: DescribeAccessHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessHistogramResponse>;
   /** 获取访问日志索引配置信息 {@link DescribeAccessIndexRequest} {@link DescribeAccessIndexResponse} */
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */

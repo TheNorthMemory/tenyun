@@ -84,9 +84,9 @@ declare interface FakeURLData {
   FakeDomain?: string | null;
   /** 热度 */
   Heat?: number | null;
-  /** 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败 */
+  /** 拦截处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败 */
   BlockStatus?: number | null;
-  /** 协助处置状态说明 */
+  /** 拦截处置状态说明 */
   BlockNote?: string | null;
   /** 关停状态：0-未关停 1-关停中 2-关停成功 3-关停失败 4-重复上架 */
   OfflineStatus?: number | null;
@@ -116,6 +116,8 @@ declare interface FakeURLData {
   Snapshot?: string | null;
   /** 账户资源状态：0-不可用 1-可用 */
   AccountStatus?: number | null;
+  /** 审核状态：0-未审核 1-审核中 2-审核成功 3-审核失败 */
+  AuditStatus?: number | null;
 }
 
 /** 过滤参数 */

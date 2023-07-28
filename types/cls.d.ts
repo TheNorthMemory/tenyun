@@ -382,6 +382,40 @@ declare interface CsvInfo {
   NonExistingField: string;
 }
 
+/** 仪表盘信息 */
+declare interface DashboardInfo {
+  /** 仪表盘id */
+  DashboardId: string;
+  /** 仪表盘名字 */
+  DashboardName: string;
+  /** 仪表盘数据 */
+  Data: string | null;
+  /** 创建仪表盘的时间 */
+  CreateTime: string;
+  /** AssumerUin非空则表示创建该日志主题的服务方Uin */
+  AssumerUin: number | null;
+  /** RoleName非空则表示创建该日志主题的服务方使用的角色 */
+  RoleName: string | null;
+  /** AssumerName非空则表示创建该日志主题的服务方名称 */
+  AssumerName: string | null;
+  /** 日志主题绑定的标签信息 */
+  Tags: Tag[] | null;
+  /** 仪表盘所在地域： 为了兼容老的地域。 */
+  DashboardRegion: string | null;
+  /** 修改仪表盘的时间 */
+  UpdateTime: string | null;
+  /** 仪表盘对应的topic相关信息 */
+  DashboardTopicInfos: DashboardTopicInfo[] | null;
+}
+
+/** 仪表盘关联的topic信息 */
+declare interface DashboardTopicInfo {
+  /** 主题id */
+  TopicId: string;
+  /** topic所在的地域 */
+  Region: string;
+}
+
 /** 数据加工的资源信息 */
 declare interface DataTransformResouceInfo {
   /** 目标主题id */
@@ -928,8 +962,12 @@ declare interface RuleTagInfo {
 declare interface ScheduledSqlResouceInfo {
   /** 目标主题id */
   TopicId: string;
-  /** topic的地域信息 */
+  /** 主题的的地域信息 */
   Region?: string;
+  /** 主题类型：0为日志主题，1为指标主题 */
+  BizType?: number;
+  /** 指标名称 */
+  MetricName?: string;
 }
 
 /** ScheduledSql任务详情 */
@@ -1042,6 +1080,14 @@ declare interface Tag {
   Key: string | null;
   /** 标签值 */
   Value: string | null;
+}
+
+/** 仪表盘 topic与地域信息 */
+declare interface TopicIdAndRegion {
+  /** 日志主题id */
+  TopicId: string;
+  /** 日志主题id 所在的地域id地域ID - 访问链接查看详情：https://iwiki.woa.com/pages/viewpage.action?pageId=780556968 */
+  RegionId: number;
 }
 
 /** 日志主题信息 */
@@ -1878,6 +1924,26 @@ declare interface DescribeCosRechargesRequest {
 declare interface DescribeCosRechargesResponse {
   /** 见: CosRechargeInfo 结构描述 */
   Data?: CosRechargeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDashboardsRequest {
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+  /** dashboardId按照【仪表盘id】进行过滤。类型：String必选：否 dashboardName按照【仪表盘名字】进行模糊搜索过滤。类型：String必选：否 dashboardRegion按照【仪表盘地域】进行过滤，为了兼容老的仪表盘，通过云API创建的仪表盘没有地域属性类型：String必选：否 tagKey按照【标签键】进行过滤。类型：String必选：否 tag:tagKey按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 按照topicId和regionId过滤。 */
+  TopicIdRegionFilter?: TopicIdAndRegion[];
+}
+
+declare interface DescribeDashboardsResponse {
+  /** 仪表盘的数量 */
+  TotalCount: number;
+  /** 仪表盘详细明细 */
+  DashboardInfos: DashboardInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2803,6 +2869,8 @@ declare interface Cls {
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
   /** 获取cos导入配置 {@link DescribeCosRechargesRequest} {@link DescribeCosRechargesResponse} */
   DescribeCosRecharges(data: DescribeCosRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRechargesResponse>;
+  /** 获取仪表盘 {@link DescribeDashboardsRequest} {@link DescribeDashboardsResponse} */
+  DescribeDashboards(data?: DescribeDashboardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardsResponse>;
   /** 获取数据加工任务列表基本信息 {@link DescribeDataTransformInfoRequest} {@link DescribeDataTransformInfoResponse} */
   DescribeDataTransformInfo(data?: DescribeDataTransformInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataTransformInfoResponse>;
   /** 获取日志下载任务列表 {@link DescribeExportsRequest} {@link DescribeExportsResponse} */

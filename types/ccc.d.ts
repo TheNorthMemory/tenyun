@@ -340,6 +340,8 @@ declare interface SdkAppIdBuyInfo {
   StaffBuyList: StaffBuyInfo[];
   /** 号码购买列表 */
   PhoneNumBuyList: PhoneNumBuyInfo[];
+  /** 办公电话购买数（还在有效期内） */
+  SipBuyNum?: number | null;
 }
 
 /** 坐席用户信息 */
@@ -440,6 +442,8 @@ declare interface StaffBuyInfo {
   BuyTime: number;
   /** 截止时间戳 */
   EndTime: number;
+  /** 购买办公电话数量 */
+  SipNum?: number | null;
 }
 
 /** 带有技能组优先级的坐席信息 */

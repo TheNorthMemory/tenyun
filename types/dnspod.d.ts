@@ -1023,6 +1023,8 @@ declare interface CreateRecordRequest {
   Weight?: number;
   /** 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。 */
   Status?: string;
+  /** 备注 */
+  Remark?: string;
 }
 
 declare interface CreateRecordResponse {

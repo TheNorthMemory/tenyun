@@ -1577,9 +1577,9 @@ declare interface DescribeAccessRegionsByDestRegionRequest {
 
 declare interface DescribeAccessRegionsByDestRegionResponse {
   /** 可用加速区域数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 可用加速区域信息列表 */
-  AccessRegionSet: AccessRegionDetial[];
+  AccessRegionSet?: AccessRegionDetial[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

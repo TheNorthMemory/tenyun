@@ -1609,27 +1609,27 @@ declare interface InvocationMetricScatterPlot {
 /** DescribeJvmMonitor查询jvm监控数据接口返回数据封装 */
 declare interface JvmMonitorData {
   /** 堆内存监控图,三条线 */
-  HeapMemory: MemoryPicture | null;
+  HeapMemory?: MemoryPicture | null;
   /** 非堆内存监控图,三条线 */
-  NonHeapMemory: MemoryPicture | null;
+  NonHeapMemory?: MemoryPicture | null;
   /** 伊甸园区监控图,三条线 */
-  EdenSpace: MemoryPicture | null;
+  EdenSpace?: MemoryPicture | null;
   /** 幸存者区监控图,三条线 */
-  SurvivorSpace: MemoryPicture | null;
+  SurvivorSpace?: MemoryPicture | null;
   /** 老年代监控图,三条线 */
-  OldSpace: MemoryPicture | null;
+  OldSpace?: MemoryPicture | null;
   /** 元空间监控图,三条线 */
-  MetaSpace: MemoryPicture | null;
+  MetaSpace?: MemoryPicture | null;
   /** 线程监控图,三条线 */
-  ThreadPicture: ThreadPicture | null;
+  ThreadPicture?: ThreadPicture | null;
   /** youngGC增量监控图,一条线 */
-  YoungGC: CurvePoint[] | null;
+  YoungGC?: CurvePoint[] | null;
   /** fullGC增量监控图,一条线 */
-  FullGC: CurvePoint[] | null;
+  FullGC?: CurvePoint[] | null;
   /** cpu使用率,一条线 */
-  CpuUsage: CurvePoint[] | null;
+  CpuUsage?: CurvePoint[] | null;
   /** 加载类数,一条线 */
-  ClassCount: CurvePoint[] | null;
+  ClassCount?: CurvePoint[] | null;
 }
 
 /** 投递kafka配置项 */

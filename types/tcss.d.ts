@@ -988,6 +988,14 @@ declare interface ComponentsInfo {
   Name?: string | null;
 }
 
+/** 联通性检测配置 */
+declare interface ConnDetectConfig {
+  /** 主机quuid */
+  Quuid?: string;
+  /** 主机uuid */
+  Uuid?: string;
+}
+
 /** 容器列表集合 */
 declare interface ContainerInfo {
   /** 容器id */
@@ -2216,6 +2224,22 @@ declare interface RegionInfo {
   RegionName: string;
 }
 
+/** 镜像仓库联通性检测结果 */
+declare interface RegistryConnDetectResult {
+  /** 联通性检测的主机quuid 或者 backend */
+  Quuid?: string;
+  /** 联通性检测的主机uuid 或者 backend */
+  Uuid?: string;
+  /** 检测结果状态 */
+  ConnDetectStatus?: string;
+  /** 检测结果信息 */
+  ConnDetectMessage?: string;
+  /** 失败的解决方案 */
+  Solution?: string;
+  /** 失败原因 */
+  FailReason?: string;
+}
+
 /** 运行时容器反弹shell事件描述信息 */
 declare interface ReverseShellEventDescription {
   /** 描述信息 */
@@ -3429,15 +3453,17 @@ declare interface AddAssetImageRegistryRegistryDetailRequest {
   SpeedLimit?: number;
   /** 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1 */
   Insecure?: number;
+  /** 联通性检测的记录ID */
+  ConnDetectConfig?: ConnDetectConfig[];
 }
 
 declare interface AddAssetImageRegistryRegistryDetailResponse {
   /** 连接错误信息 */
-  HealthCheckErr: string | null;
+  HealthCheckErr?: string | null;
   /** 名称错误信息 */
-  NameRepeatErr: string | null;
+  NameRepeatErr?: string | null;
   /** 仓库唯一id */
-  RegistryId: number | null;
+  RegistryId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3720,6 +3746,8 @@ declare interface CreateAssetImageRegistryScanTaskOneKeyRequest {
 }
 
 declare interface CreateAssetImageRegistryScanTaskOneKeyResponse {
+  /** 扫描任务id */
+  TaskID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3742,6 +3770,8 @@ declare interface CreateAssetImageRegistryScanTaskRequest {
 }
 
 declare interface CreateAssetImageRegistryScanTaskResponse {
+  /** 返回的任务ID */
+  TaskID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5557,25 +5587,29 @@ declare interface DescribeAssetImageRegistryRegistryDetailRequest {
 
 declare interface DescribeAssetImageRegistryRegistryDetailResponse {
   /** 仓库名 */
-  Name: string;
+  Name?: string;
   /** 用户名 */
-  Username: string;
+  Username?: string;
   /** 密码 */
-  Password: string;
+  Password?: string;
   /** 仓库url */
-  Url: string;
+  Url?: string;
   /** 仓库类型，列表：harbor */
-  RegistryType: string;
+  RegistryType?: string;
   /** 仓库版本 */
-  RegistryVersion: string | null;
-  /** 网络类型，列表：public（公网） */
-  NetType: string;
+  RegistryVersion?: string | null;
+  /** 网络类型，列表：public（公网）,private（私网） */
+  NetType?: string;
   /** 区域，列表:default（默认） */
-  RegistryRegion: string | null;
+  RegistryRegion?: string | null;
   /** 限速 */
-  SpeedLimit: number | null;
+  SpeedLimit?: number | null;
   /** 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1 */
-  Insecure: number | null;
+  Insecure?: number | null;
+  /** 联通性检测结果详情 */
+  ConnDetectDetail?: RegistryConnDetectResult[];
+  /** tcr情况下instance_id */
+  InstanceID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5643,25 +5677,27 @@ declare interface DescribeAssetImageRegistryScanStatusOneKeyRequest {
   All?: boolean;
   /** 需要获取进度的镜像列表Id */
   Id?: number[];
+  /** 获取进度的任务ID */
+  TaskID?: number;
 }
 
 declare interface DescribeAssetImageRegistryScanStatusOneKeyResponse {
   /** 镜像个数 */
-  ImageTotal: number;
+  ImageTotal?: number;
   /** 扫描镜像个数 */
-  ImageScanCnt: number;
+  ImageScanCnt?: number;
   /** 扫描进度列表 */
-  ImageStatus: ImageProgress[] | null;
+  ImageStatus?: ImageProgress[] | null;
   /** 安全个数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 风险个数 */
-  RiskCount: number;
+  RiskCount?: number;
   /** 总的扫描进度 */
-  Schedule: number;
+  Schedule?: number;
   /** 总的扫描状态 */
-  Status: string;
+  Status?: string;
   /** 扫描剩余时间 */
-  ScanRemainTime: number | null;
+  ScanRemainTime?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9019,6 +9055,8 @@ declare interface ModifyAssetImageRegistryScanStopOneKeyRequest {
   Images?: ImageInfo[];
   /** 扫描的镜像列表Id */
   Id?: number[];
+  /** 停止的任务ID */
+  TaskID?: number;
 }
 
 declare interface ModifyAssetImageRegistryScanStopOneKeyResponse {
@@ -9039,6 +9077,8 @@ declare interface ModifyAssetImageRegistryScanStopRequest {
   ExcludeImageList?: number[];
   /** 是否仅扫描各repository最新版本的镜像 */
   OnlyScanLatest?: boolean;
+  /** 停止的任务ID */
+  TaskID?: number;
 }
 
 declare interface ModifyAssetImageRegistryScanStopResponse {
@@ -9689,15 +9729,17 @@ declare interface UpdateAssetImageRegistryRegistryDetailRequest {
   SpeedLimit?: number;
   /** 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1 */
   Insecure?: number;
+  /** 联通性检测的配置 */
+  ConnDetectConfig?: ConnDetectConfig[];
 }
 
 declare interface UpdateAssetImageRegistryRegistryDetailResponse {
   /** 连接错误信息 */
-  HealthCheckErr: string | null;
+  HealthCheckErr?: string | null;
   /** 名称错误信息 */
-  NameRepeatErr: string | null;
+  NameRepeatErr?: string | null;
   /** 仓库唯一id */
-  RegistryId: number | null;
+  RegistryId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

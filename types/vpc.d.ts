@@ -1958,6 +1958,16 @@ declare interface TemplateLimit {
   ServiceTemplateGroupMemberLimit: number;
 }
 
+/** 流量描述。 */
+declare interface TrafficFlow {
+  /** 实际流量，单位为 字节 */
+  Value: number;
+  /** 格式化后的流量，单位见参数 FormatUnit */
+  FormatValue: number | null;
+  /** 格式化后流量的单位 */
+  FormatUnit: string | null;
+}
+
 /** 流量包信息描述类型 */
 declare interface TrafficPackage {
   /** 流量包唯一ID */
@@ -1980,6 +1990,30 @@ declare interface TrafficPackage {
   TagSet: Tag[] | null;
   /** 区分闲时流量包与全时流量包 */
   DeductType: string;
+}
+
+/** 共享流量包用量明细 */
+declare interface UsedDetail {
+  /** 流量包唯一ID */
+  TrafficPackageId: string;
+  /** 流量包名称 */
+  TrafficPackageName: string | null;
+  /** 流量包总量 */
+  TotalAmount: TrafficFlow;
+  /** 本次抵扣 */
+  Deduction: TrafficFlow;
+  /** 本次抵扣后剩余量 */
+  RemainingAmount: TrafficFlow;
+  /** 抵扣时间 */
+  Time: string;
+  /** 资源类型。可能的值: CVM, LB, NAT, HAVIP, EIP */
+  ResourceType: string;
+  /** 资源ID */
+  ResourceId: string;
+  /** 资源名称 */
+  ResourceName: string;
+  /** 流量包到期时间 */
+  Deadline: string;
 }
 
 /** 私有网络(VPC)对象。 */
@@ -5030,6 +5064,34 @@ declare interface DescribeSnapshotPoliciesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSpecificTrafficPackageUsedDetailsRequest {
+  /** 共享流量包唯一ID */
+  TrafficPackageId: string;
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。详细的过滤条件如下： resource-id - String - 是否必填：否 - （过滤条件）按照抵扣流量资源的唯一 ID 过滤。 resource-type - String - 是否必填：否 - （过滤条件）按照资源类型过滤，资源类型包括 CVM 和 EIP */
+  Filters?: Filter[];
+  /** 排序条件。该参数仅支持根据抵扣量排序，传值为 deduction */
+  OrderField?: string;
+  /** 排序类型，仅支持0和1，0-降序，1-升序。不传默认为0 */
+  OrderType?: number;
+  /** 开始时间。不传默认为当前时间往前推30天 */
+  StartTime?: string;
+  /** 结束时间。不传默认为当前时间 */
+  EndTime?: string;
+  /** 分页参数 */
+  Offset?: number;
+  /** 分页参数 */
+  Limit?: number;
+}
+
+declare interface DescribeSpecificTrafficPackageUsedDetailsResponse {
+  /** 符合查询条件的共享流量包用量明细的总数 */
+  TotalCount?: number;
+  /** 共享流量包用量明细列表 */
+  UsedDetailSet?: UsedDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubnetResourceDashboardRequest {
   /** Subnet实例ID，例如：subnet-f1xjkw1b。 */
   SubnetIds: string[];
@@ -5177,6 +5239,8 @@ declare interface DescribeVpcEndPointServiceRequest {
   Limit?: number;
   /** 终端节点服务ID。不支持同时传入参数 EndPointServiceIds and Filters。 */
   EndPointServiceIds?: string[];
+  /** 不支持同时传入参数 Filters 。 列出授权给当前账号的的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，那些终端节点服务授权了该账户。 */
+  IsListAuthorizedEndPointService?: boolean;
 }
 
 declare interface DescribeVpcEndPointServiceResponse {
@@ -7367,6 +7431,8 @@ declare interface Vpc {
   DescribeSnapshotFiles(data: DescribeSnapshotFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotFilesResponse>;
   /** 查询快照策略 {@link DescribeSnapshotPoliciesRequest} {@link DescribeSnapshotPoliciesResponse} */
   DescribeSnapshotPolicies(data?: DescribeSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotPoliciesResponse>;
+  /** 查询指定共享流量包的用量明细 {@link DescribeSpecificTrafficPackageUsedDetailsRequest} {@link DescribeSpecificTrafficPackageUsedDetailsResponse} */
+  DescribeSpecificTrafficPackageUsedDetails(data: DescribeSpecificTrafficPackageUsedDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecificTrafficPackageUsedDetailsResponse>;
   /** 查看Subnet资源信息 {@link DescribeSubnetResourceDashboardRequest} {@link DescribeSubnetResourceDashboardResponse} */
   DescribeSubnetResourceDashboard(data: DescribeSubnetResourceDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetResourceDashboardResponse>;
   /** 查询子网列表 {@link DescribeSubnetsRequest} {@link DescribeSubnetsResponse} */

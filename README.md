@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9718+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9721+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -158,7 +158,7 @@ clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-1
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) | 2021-05-24(22) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(80) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(81) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -325,9 +325,9 @@ ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(160) |
-vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(306) |
+vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(307) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(51) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(52) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(296) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
