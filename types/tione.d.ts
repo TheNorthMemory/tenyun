@@ -806,6 +806,156 @@ declare interface ModelInputInfo {
   ModelInputDimension: string[] | null;
 }
 
+/** 类型NotebookDetail */
+declare interface NotebookDetail {
+  /** notebook ID */
+  Id: string;
+  /** notebook 名称 */
+  Name: string;
+  /** 生命周期脚本 */
+  LifecycleScriptId: string | null;
+  /** Pod-Name */
+  PodName: string | null;
+  /** Update-Time */
+  UpdateTime: string;
+  /** 是否访问公网 */
+  DirectInternetAccess: boolean;
+  /** 预付费专用资源组 */
+  ResourceGroupId: string | null;
+  /** 标签配置 */
+  Tags: Tag[] | null;
+  /** 是否自动停止 */
+  AutoStopping: boolean;
+  /** 其他GIT存储库，最多3个，单个长度不超过512字符 */
+  AdditionalCodeRepoIds: string[] | null;
+  /** 自动停止时间，单位小时 */
+  AutomaticStopTime: number | null;
+  /** 资源配置 */
+  ResourceConf: ResourceConf;
+  /** 默认GIT存储库，长度不超过512字符 */
+  DefaultCodeRepoId: string;
+  /** 训练输出 */
+  EndTime: string | null;
+  /** 是否上报日志 */
+  LogEnable: boolean;
+  /** 日志配置 */
+  LogConfig: LogConfig | null;
+  /** VPC ID */
+  VpcId: string | null;
+  /** 子网ID */
+  SubnetId: string | null;
+  /** 任务状态 */
+  Status: string;
+  /** 运行时长 */
+  RuntimeInSeconds: number | null;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 训练开始时间 */
+  StartTime: string | null;
+  /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
+  ChargeStatus: string | null;
+  /** 是否ROOT权限 */
+  RootAccess: boolean;
+  /** 计贺金额信息，eg:2.00元/小时 */
+  BillingInfos: string[] | null;
+  /** 存储卷大小 （单位时GB，最小10GB，必须是10G的倍数） */
+  VolumeSizeInGB: number | null;
+  /** 失败原因 */
+  FailureReason: string | null;
+  /** 计算资源付费模式 (- PREPAID：预付费，即包年包月 - POSTPAID_BY_HOUR：按小时后付费) */
+  ChargeType: string;
+  /** 后付费资源规格说明 */
+  InstanceTypeAlias: string | null;
+  /** 预付费资源组名称 */
+  ResourceGroupName: string | null;
+  /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
+  VolumeSourceType: string | null;
+  /** CFS存储的配置 */
+  VolumeSourceCFS: CFSConfig | null;
+  /** 数据配置 */
+  DataConfigs: DataConfig[] | null;
+  /** notebook 信息 */
+  Message: string | null;
+  /** 数据源来源，eg：WeData_HDFS */
+  DataSource: string | null;
+  /** 镜像信息 */
+  ImageInfo?: ImageInfo;
+  /** 镜像类型 */
+  ImageType?: string | null;
+}
+
+/** 镜像保存记录 */
+declare interface NotebookImageRecord {
+  /** 保存记录ID */
+  RecordId?: string | null;
+  /** 镜像地址 */
+  ImageUrl?: string | null;
+  /** 状态 */
+  Status?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 状态信息 */
+  Message?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** kernel数组 */
+  Kernels?: string[] | null;
+}
+
+/** Notebook列表元素 */
+declare interface NotebookSetItem {
+  /** notebook ID */
+  Id: string;
+  /** notebook 名称 */
+  Name: string;
+  /** 计费模式 */
+  ChargeType: string;
+  /** 资源配置 */
+  ResourceConf: ResourceConf;
+  /** 预付费资源组 */
+  ResourceGroupId: string | null;
+  /** 存储卷大小 */
+  VolumeSizeInGB: number | null;
+  /** 计费金额信息，eg：2.00元/小时 (for后付费) */
+  BillingInfos: string[] | null;
+  /** 标签配置 */
+  Tags: Tag[] | null;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 启动时间 */
+  StartTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 运行时间 */
+  RuntimeInSeconds: number | null;
+  /** 计费状态 */
+  ChargeStatus: string | null;
+  /** 状态 */
+  Status: string;
+  /** 错误原因 */
+  FailureReason: string | null;
+  /** 结束时间 */
+  EndTime: string | null;
+  /** Pod名称 */
+  PodName: string | null;
+  /** 后付费资源规格名称 */
+  InstanceTypeAlias: string | null;
+  /** 预付费资源组名称 */
+  ResourceGroupName: string | null;
+  /** 是否自动终止 */
+  AutoStopping: boolean;
+  /** 自动停止时间 */
+  AutomaticStopTime: number | null;
+  /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
+  VolumeSourceType: string | null;
+  /** CFS存储的配置 */
+  VolumeSourceCFS: CFSConfig | null;
+  /** notebook 信息 */
+  Message: string | null;
+  /** notebook用户类型 */
+  UserTypes?: string[] | null;
+}
+
 /** OCR场景标签列表 */
 declare interface OcrLabelInfo {
   /** 坐标点围起来的框 */
@@ -872,6 +1022,20 @@ declare interface PointInfo {
 declare interface RDMAConfig {
   /** 是否开启RDMA */
   Enable?: boolean | null;
+}
+
+/** Notebook资源参数 */
+declare interface ResourceConf {
+  /** cpu 处理器资源, 单位为1/1000核 (for预付费) */
+  Cpu?: number | null;
+  /** memory 内存资源, 单位为1M (for预付费) */
+  Memory?: number | null;
+  /** gpu Gpu卡资源，单位为1单位的GpuType，例如GpuType=T4时，1 Gpu = 1/100 T4卡，GpuType=vcuda时，1 Gpu = 1/100 vcuda-core (for预付费) */
+  Gpu?: number | null;
+  /** GpuType 卡类型 vcuda, T4,P4,V100等 (for预付费) */
+  GpuType?: string | null;
+  /** 计算规格 (for后付费)，可选值如下：TI.S.LARGE.POST: 4C8G TI.S.2XLARGE16.POST: 8C16G TI.S.2XLARGE32.POST: 8C32G TI.S.4XLARGE32.POST: 16C32GTI.S.4XLARGE64.POST: 16C64GTI.S.6XLARGE48.POST: 24C48GTI.S.6XLARGE96.POST: 24C96GTI.S.8XLARGE64.POST: 32C64GTI.S.8XLARGE128.POST : 32C128GTI.GN10.2XLARGE40.POST: 8C40G V100*1 TI.GN10.5XLARGE80.POST: 18C80G V100*2 TI.GN10.10XLARGE160.POST : 32C160G V100*4TI.GN10.20XLARGE320.POST : 72C320G V100*8TI.GN7.8XLARGE128.POST: 32C128G T4*1 TI.GN7.10XLARGE160.POST: 40C160G T4*2 TI.GN7.20XLARGE320.POST: 80C320G T4*4 */
+  InstanceType?: string | null;
 }
 
 /** 资源配置 */
@@ -1750,6 +1914,74 @@ declare interface CreateModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateNotebookImageRequest {
+  /** 要保存的kernel数组 */
+  Kernels: string[];
+  /** 镜像信息 */
+  ImageInfo: ImageInfo;
+  /** notebook id */
+  NotebookId: string;
+}
+
+declare interface CreateNotebookImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateNotebookRequest {
+  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  Name: string;
+  /** 计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
+  ChargeType: string;
+  /** 计算资源配置 */
+  ResourceConf: ResourceConf;
+  /** 是否上报日志 */
+  LogEnable: boolean;
+  /** 是否ROOT权限 */
+  RootAccess: boolean;
+  /** 是否自动停止 */
+  AutoStopping: boolean;
+  /** 是否访问公网 */
+  DirectInternetAccess: boolean;
+  /** 资源组ID(for预付费) */
+  ResourceGroupId?: string;
+  /** Vpc-Id */
+  VpcId?: string;
+  /** 子网Id */
+  SubnetId?: string;
+  /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
+  VolumeSourceType?: string;
+  /** 存储卷大小，单位GB */
+  VolumeSizeInGB?: number;
+  /** CFS存储的配置 */
+  VolumeSourceCFS?: CFSConfig;
+  /** 日志配置 */
+  LogConfig?: LogConfig;
+  /** 生命周期脚本的ID */
+  LifecycleScriptId?: string;
+  /** 默认GIT存储库的ID */
+  DefaultCodeRepoId?: string;
+  /** 其他GIT存储库的ID，最多3个 */
+  AdditionalCodeRepoIds?: string[];
+  /** 自动停止时间，单位小时 */
+  AutomaticStopTime?: number;
+  /** 标签配置 */
+  Tags?: Tag[];
+  /** 数据配置 */
+  DataConfigs?: DataConfig[];
+  /** 镜像信息 */
+  ImageInfo?: ImageInfo;
+  /** 镜像类型 */
+  ImageType?: string;
+}
+
+declare interface CreateNotebookResponse {
+  /** notebook标志 */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOptimizedModelRequest {
   /** 模型加速任务ID */
   ModelAccTaskId: string;
@@ -1934,6 +2166,26 @@ declare interface DeleteModelServiceRequest {
 }
 
 declare interface DeleteModelServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNotebookImageRecordRequest {
+  /** 记录id */
+  RecordId: string;
+}
+
+declare interface DeleteNotebookImageRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNotebookRequest {
+  /** notebook id */
+  Id: string;
+}
+
+declare interface DeleteNotebookResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2404,6 +2656,74 @@ declare interface DescribeModelServicesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNotebookImageKernelsRequest {
+  /** notebook id */
+  NotebookId: string;
+}
+
+declare interface DescribeNotebookImageKernelsResponse {
+  /** 镜像kernel数组 */
+  Kernels?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNotebookImageRecordsRequest {
+  /** notebook id */
+  NotebookId: string;
+  /** 位移值 */
+  Offset: number;
+  /** 日志限制 */
+  Limit: number;
+  /** 状态筛选 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeNotebookImageRecordsResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 镜像保存记录 */
+  NotebookImageRecords?: NotebookImageRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNotebookRequest {
+  /** notebook id */
+  Id: string;
+}
+
+declare interface DescribeNotebookResponse {
+  /** 详情 */
+  NotebookDetail: NotebookDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNotebooksRequest {
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 每页返回的实例数，默认为10 */
+  Limit?: number;
+  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列。默认为DESC */
+  Order?: string;
+  /** 根据哪个字段排序，如：CreateTime、UpdateTime，默认为UpdateTime */
+  OrderField?: string;
+  /** 过滤器，eg：[{ "Name": "Id", "Values": ["nb-123456789"] }]取值范围Name（名称）：notebook1Id（notebook ID）：nb-123456789Status（状态）：Starting / Running / Stopped / Stopping / Failed / SubmitFailedChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）ChargeStatus（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ BILLING_STORAGE（存储计费中）/ARREARS_STOP（欠费停止）DefaultCodeRepoId（默认代码仓库ID）：cr-123456789AdditionalCodeRepoId（关联代码仓库ID）：cr-123456789LifecycleScriptId（生命周期ID）：ls-12312312311312 */
+  Filters?: Filter[];
+  /** 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }] */
+  TagFilters?: TagFilter[];
+}
+
+declare interface DescribeNotebooksResponse {
+  /** 详情 */
+  NotebookSet?: NotebookSetItem[] | null;
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrainingFrameworksRequest {
 }
 
@@ -2600,6 +2920,72 @@ declare interface ModifyModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNotebookRequest {
+  /** notebook id */
+  Id: string;
+  /** 名称 */
+  Name: string;
+  /** 计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
+  ChargeType: string;
+  /** 计算资源配置 */
+  ResourceConf: ResourceConf;
+  /** 是否上报日志 */
+  LogEnable: boolean;
+  /** 是否自动停止 */
+  AutoStopping: boolean;
+  /** 是否访问公网 */
+  DirectInternetAccess: boolean;
+  /** 是否ROOT权限 */
+  RootAccess: boolean;
+  /** 资源组ID(for预付费) */
+  ResourceGroupId?: string;
+  /** Vpc-Id */
+  VpcId?: string;
+  /** 子网Id */
+  SubnetId?: string;
+  /** 存储卷大小，单位GB */
+  VolumeSizeInGB?: number;
+  /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
+  VolumeSourceType?: string;
+  /** CFS存储的配置 */
+  VolumeSourceCFS?: CFSConfig;
+  /** 日志配置 */
+  LogConfig?: LogConfig;
+  /** 生命周期脚本的ID */
+  LifecycleScriptId?: string;
+  /** 默认GIT存储库的ID */
+  DefaultCodeRepoId?: string;
+  /** 其他GIT存储库的ID，最多3个 */
+  AdditionalCodeRepoIds?: string[];
+  /** 自动停止时间，单位小时 */
+  AutomaticStopTime?: number;
+  /** 标签配置 */
+  Tags?: Tag[];
+  /** 数据配置 */
+  DataConfigs?: DataConfig[];
+  /** 镜像信息 */
+  ImageInfo?: ImageInfo;
+  /** 镜像类型 */
+  ImageType?: string;
+}
+
+declare interface ModifyNotebookResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNotebookTagsRequest {
+  /** Notebook Id */
+  Id: string;
+  /** Notebook修改标签集合 */
+  Tags?: Tag[];
+}
+
+declare interface ModifyNotebookTagsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyServiceGroupWeightsRequest {
   /** 服务组id */
   ServiceGroupId: string;
@@ -2672,6 +3058,16 @@ declare interface RestartModelAccelerateTaskResponse {
   RequestId?: string;
 }
 
+declare interface StartNotebookRequest {
+  /** notebook id */
+  Id: string;
+}
+
+declare interface StartNotebookResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartTrainingTaskRequest {
   /** 训练任务ID */
   Id: string;
@@ -2692,6 +3088,16 @@ declare interface StopBatchTaskResponse {
   RequestId?: string;
 }
 
+declare interface StopCreatingImageRequest {
+  /** 镜像保存记录ID */
+  RecordId: string;
+}
+
+declare interface StopCreatingImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopModelAccelerateTaskRequest {
   /** 模型加速任务ID */
   ModelAccTaskId: string;
@@ -2702,6 +3108,16 @@ declare interface StopModelAccelerateTaskResponse {
   ModelAccTaskId: string | null;
   /** 异步任务ID */
   AsyncTaskId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopNotebookRequest {
+  /** notebook id */
+  Id: string;
+}
+
+declare interface StopNotebookResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3455,6 +3871,10 @@ declare interface Tione {
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
   /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
   CreateModelService(data?: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
+  /** 创建Notebook {@link CreateNotebookRequest} {@link CreateNotebookResponse} */
+  CreateNotebook(data: CreateNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookResponse>;
+  /** 保存镜像 {@link CreateNotebookImageRequest} {@link CreateNotebookImageResponse} */
+  CreateNotebookImage(data: CreateNotebookImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookImageResponse>;
   /** 保存优化模型 {@link CreateOptimizedModelRequest} {@link CreateOptimizedModelResponse} */
   CreateOptimizedModel(data: CreateOptimizedModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOptimizedModelResponse>;
   /** 导入模型 {@link CreateTrainingModelRequest} {@link CreateTrainingModelResponse} */
@@ -3471,6 +3891,10 @@ declare interface Tione {
   DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
   /** 删除模型服务组 {@link DeleteModelServiceGroupRequest} {@link DeleteModelServiceGroupResponse} */
   DeleteModelServiceGroup(data: DeleteModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceGroupResponse>;
+  /** 删除Notebook {@link DeleteNotebookRequest} {@link DeleteNotebookResponse} */
+  DeleteNotebook(data: DeleteNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookResponse>;
+  /** 删除notebook镜像保存记录 {@link DeleteNotebookImageRecordRequest} {@link DeleteNotebookImageRecordResponse} */
+  DeleteNotebookImageRecord(data: DeleteNotebookImageRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookImageRecordResponse>;
   /** 删除模型 {@link DeleteTrainingModelRequest} {@link DeleteTrainingModelResponse} */
   DeleteTrainingModel(data: DeleteTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelResponse>;
   /** 删除模型版本 {@link DeleteTrainingModelVersionRequest} {@link DeleteTrainingModelVersionResponse} */
@@ -3523,6 +3947,14 @@ declare interface Tione {
   DescribeModelServiceHotUpdated(data: DescribeModelServiceHotUpdatedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHotUpdatedResponse>;
   /** 查询多个服务 {@link DescribeModelServicesRequest} {@link DescribeModelServicesResponse} */
   DescribeModelServices(data?: DescribeModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServicesResponse>;
+  /** Notebook详情 {@link DescribeNotebookRequest} {@link DescribeNotebookResponse} */
+  DescribeNotebook(data: DescribeNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookResponse>;
+  /** 查询镜像kernel {@link DescribeNotebookImageKernelsRequest} {@link DescribeNotebookImageKernelsResponse} */
+  DescribeNotebookImageKernels(data: DescribeNotebookImageKernelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookImageKernelsResponse>;
+  /** 查看notebook镜像保存记录 {@link DescribeNotebookImageRecordsRequest} {@link DescribeNotebookImageRecordsResponse} */
+  DescribeNotebookImageRecords(data: DescribeNotebookImageRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookImageRecordsResponse>;
+  /** Notebook列表 {@link DescribeNotebooksRequest} {@link DescribeNotebooksResponse} */
+  DescribeNotebooks(data?: DescribeNotebooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebooksResponse>;
   /** 训练框架列表 {@link DescribeTrainingFrameworksRequest} {@link DescribeTrainingFrameworksResponse} */
   DescribeTrainingFrameworks(data?: DescribeTrainingFrameworksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingFrameworksResponse>;
   /** 查询训练自定义指标 {@link DescribeTrainingMetricsRequest} {@link DescribeTrainingMetricsResponse} */
@@ -3543,18 +3975,28 @@ declare interface Tione {
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
   /** 增量修改模型服务 {@link ModifyModelServicePartialConfigRequest} {@link ModifyModelServicePartialConfigResponse} */
   ModifyModelServicePartialConfig(data: ModifyModelServicePartialConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServicePartialConfigResponse>;
+  /** 修改Notebook {@link ModifyNotebookRequest} {@link ModifyNotebookResponse} */
+  ModifyNotebook(data: ModifyNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookResponse>;
+  /** 修改Notebook标签 {@link ModifyNotebookTagsRequest} {@link ModifyNotebookTagsResponse} */
+  ModifyNotebookTags(data: ModifyNotebookTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookTagsResponse>;
   /** 更新推理服务组流量分配 {@link ModifyServiceGroupWeightsRequest} {@link ModifyServiceGroupWeightsResponse} */
   ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 重启模型加速任务 {@link RestartModelAccelerateTaskRequest} {@link RestartModelAccelerateTaskResponse} */
   RestartModelAccelerateTask(data: RestartModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartModelAccelerateTaskResponse>;
+  /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */
+  StartNotebook(data: StartNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StartNotebookResponse>;
   /** 启动模型训练任务 {@link StartTrainingTaskRequest} {@link StartTrainingTaskResponse} */
   StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
   /** 停止跑批任务 {@link StopBatchTaskRequest} {@link StopBatchTaskResponse} */
   StopBatchTask(data: StopBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopBatchTaskResponse>;
+  /** 停止保存镜像 {@link StopCreatingImageRequest} {@link StopCreatingImageResponse} */
+  StopCreatingImage(data: StopCreatingImageRequest, config?: AxiosRequestConfig): AxiosPromise<StopCreatingImageResponse>;
   /** 停止模型加速任务 {@link StopModelAccelerateTaskRequest} {@link StopModelAccelerateTaskResponse} */
   StopModelAccelerateTask(data: StopModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopModelAccelerateTaskResponse>;
+  /** 停止Notebook {@link StopNotebookRequest} {@link StopNotebookResponse} */
+  StopNotebook(data: StopNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StopNotebookResponse>;
   /** 停止模型训练任务 {@link StopTrainingTaskRequest} {@link StopTrainingTaskResponse} */
   StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
   /** 创建存储库 {@link V20191022.CreateCodeRepositoryRequest} {@link V20191022.CreateCodeRepositoryResponse} */

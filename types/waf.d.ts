@@ -646,6 +646,14 @@ declare interface LoadBalancerPackageNew {
   LoadBalancerType: string | null;
 }
 
+/** 攻击日志统计详情 */
+declare interface LogHistogramInfo {
+  /** 日志条数 */
+  Count: number;
+  /** 时间戳 */
+  TimeStamp: number;
+}
+
 /** PeakPoints数组项 */
 declare interface PeakPointsItem {
   /** 秒级别时间戳 */
@@ -1586,6 +1594,28 @@ declare interface GetAttackDownloadRecordsResponse {
   RequestId?: string;
 }
 
+declare interface GetAttackHistogramRequest {
+  /** 查询的域名，所有域名使用all */
+  Domain: string;
+  /** 查询起始时间 */
+  StartTime: string;
+  /** 查询结束时间 */
+  EndTime: string;
+  /** Lucene语法 */
+  QueryString: string;
+}
+
+declare interface GetAttackHistogramResponse {
+  /** 统计详情 */
+  Data?: LogHistogramInfo[];
+  /** 时间段大小 */
+  Period?: number;
+  /** 统计的条目数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAccessPeriodRequest {
   /** 访问日志保存期限，范围为[1, 30] */
   Period: number;
@@ -1997,6 +2027,8 @@ declare interface Waf {
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
   /** 查询下载攻击日志任务记录列表 {@link GetAttackDownloadRecordsRequest} {@link GetAttackDownloadRecordsResponse} */
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
+  /** 攻击日志统计 {@link GetAttackHistogramRequest} {@link GetAttackHistogramResponse} */
+  GetAttackHistogram(data: GetAttackHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackHistogramResponse>;
   /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
   /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */

@@ -1169,51 +1169,51 @@ declare interface RoGroupAttr {
 /** RO实例的详细信息 */
 declare interface RoInstanceInfo {
   /** RO组对应的主实例的ID */
-  MasterInstanceId: string;
+  MasterInstanceId?: string;
   /** RO实例在RO组内的状态，可能的值：online-在线，offline-下线 */
-  RoStatus: string;
+  RoStatus?: string;
   /** RO实例在RO组内上一次下线的时间 */
-  OfflineTime: string;
+  OfflineTime?: string;
   /** RO实例在RO组内的权重 */
-  Weight: number;
+  Weight?: number;
   /** RO实例所在区域名称，如ap-shanghai */
-  Region: string;
+  Region?: string;
   /** RO可用区的正式名称，如ap-shanghai-1 */
-  Zone: string;
+  Zone?: string;
   /** RO实例ID，格式如：cdbro-c1nl9rpv */
-  InstanceId: string;
+  InstanceId?: string;
   /** RO实例状态，可能返回值：0-创建中，1-运行中，3-异地RO（仅在使用DescribeDBInstances查询主实例信息时，返回值中异地RO的状态恒等于3，其他场景下无此值），4-删除中 */
-  Status: number;
+  Status?: number;
   /** 实例类型，可能返回值：1-主实例，2-灾备实例，3-只读实例 */
-  InstanceType: number;
+  InstanceType?: number;
   /** RO实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 按量计费状态，可能的取值：1-正常，2-欠费 */
-  HourFeeStatus: number;
+  HourFeeStatus?: number;
   /** RO实例任务状态，可能返回值：0-没有任务1-升级中2-数据导入中3-开放Slave中4-外网访问开通中5-批量操作执行中6-回档中7-外网访问关闭中8-密码修改中9-实例名修改中10-重启中12-自建迁移中13-删除库表中14-灾备实例创建同步中 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** RO实例内存大小，单位：MB */
-  Memory: number;
+  Memory?: number;
   /** RO实例硬盘大小，单位：GB */
-  Volume: number;
+  Volume?: number;
   /** 每次查询数量 */
-  Qps: number;
+  Qps?: number;
   /** RO实例的内网IP地址 */
-  Vip: string;
+  Vip?: string;
   /** RO实例访问端口 */
-  Vport: number;
+  Vport?: number;
   /** RO实例所在私有网络ID */
-  VpcId: number;
+  VpcId?: number;
   /** RO实例所在私有网络子网ID */
-  SubnetId: number;
+  SubnetId?: number;
   /** RO实例规格描述，目前可取值 CUSTOM */
-  DeviceType: string;
+  DeviceType?: string;
   /** RO实例数据库引擎版本，可能返回值：5.1、5.5、5.6、5.7、8.0 */
-  EngineVersion: string;
+  EngineVersion?: string;
   /** RO实例到期时间，时间格式：yyyy-mm-dd hh:mm:ss，如实例为按量计费模式，则此字段值为0000-00-00 00:00:00 */
-  DeadlineTime: string;
+  DeadlineTime?: string;
   /** RO实例计费类型，可能返回值：0-包年包月，1-按量计费，2-后付费月结 */
-  PayType: number;
+  PayType?: number;
 }
 
 /** 只读vip信息 */
@@ -2033,7 +2033,7 @@ declare interface CreateDBInstanceRequest {
   InstanceRole?: string;
   /** 实例 ID，购买只读实例时必填，该字段表示只读实例的主实例ID，请使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询云数据库实例 ID。 */
   MasterInstanceId?: string;
-  /** MySQL 版本，值包括：5.5、5.6 和 5.7，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。 */
+  /** MySQL 版本，值包括：5.5、5.6 、5.7和8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。 */
   EngineVersion?: string;
   /** 设置 root 帐号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
   Password?: string;
@@ -2090,10 +2090,10 @@ declare interface CreateDBInstanceRequest {
 }
 
 declare interface CreateDBInstanceResponse {
-  /** 短订单 ID。 */
-  DealIds: string[];
+  /** 计费子订单 ID。 */
+  DealIds?: string[];
   /** 实例 ID 列表。 */
-  InstanceIds: string[];
+  InstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

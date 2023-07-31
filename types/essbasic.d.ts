@@ -51,27 +51,27 @@ declare interface AuthorizedUser {
 /** 基础流程信息 */
 declare interface BaseFlowInfo {
   /** 合同流程名称 */
-  FlowName: string | null;
-  /** 合同流程类型 */
-  FlowType: string | null;
+  FlowName: string;
+  /** 合同流程类型客户自定义，用于合同分类展示 */
+  FlowType: string;
   /** 合同流程描述信息 */
-  FlowDescription: string | null;
+  FlowDescription: string;
   /** 合同流程截止时间，unix时间戳，单位秒 */
-  Deadline: number | null;
-  /** 是否顺序签署(true:无序签,false:顺序签) */
-  Unordered?: boolean | null;
+  Deadline: number;
+  /** 是否顺序签署(true:无序签,false:顺序签)默认false，有序签署合同 */
+  Unordered?: boolean;
   /** 是否打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE") */
-  IntelligentStatus?: string | null;
+  IntelligentStatus?: string;
   /** 填写控件内容 */
-  FormFields?: FormField[] | null;
-  /** 本企业(发起方企业)是否需要签署审批，true：开启本企业签署审批。使用ChannelCreateFlowSignReview接口提交审批结果，才能继续完成签署 */
-  NeedSignReview?: boolean | null;
+  FormFields?: FormField[];
+  /** 本企业(发起方企业)是否需要签署审批true：开启发起方签署审批false：不开启发起方签署审批开启后，使用ChannelCreateFlowSignReview接口提交审批结果，才能继续完成签署 */
+  NeedSignReview?: boolean;
   /** 用户流程自定义数据参数 */
-  UserData?: string | null;
+  UserData?: string;
   /** 抄送人信息 */
-  CcInfos?: CcInfo[] | null;
-  /** 是否需要发起前审核，当指定NeedCreateReview=true，则发起后，需要使用接口：ChannelCreateFlowSignReview，来完成发起前审核，审核通过后，可以继续查看，签署合同 */
-  NeedCreateReview?: boolean | null;
+  CcInfos?: CcInfo[];
+  /** 是否需要开启发起方发起前审核true：开启发起方发起前审核false：不开启发起方发起前审核当指定NeedCreateReview=true，则提交审核后，需要使用接口：ChannelCreateFlowSignReview，来完成发起前审核，审核通过后，可以继续查看，签署合同 */
+  NeedCreateReview?: boolean;
 }
 
 /** 抄送信息 */
@@ -831,7 +831,7 @@ declare interface ChannelBatchCancelFlowsRequest {
   FlowIds: string[];
   /** 撤销理由,不超过200个字符 */
   CancelMessage?: string;
-  /** 撤销理由自定义格式；选项：0 默认格式1 只保留身份信息：展示为【发起方】2 保留身份信息+企业名称：展示为【发起方xxx公司】3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
+  /** 撤销理由自定义格式；选项：- 0 默认格式- 1 只保留身份信息：展示为【发起方】- 2 保留身份信息+企业名称：展示为【发起方xxx公司】- 3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
   CancelMessageFormat?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -935,9 +935,9 @@ declare interface ChannelCreateConvertTaskApiResponse {
 declare interface ChannelCreateEmbedWebUrlRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** WEB嵌入资源类型。CREATE_SEAL: 创建印章CREATE_TEMPLATE：创建模板MODIFY_TEMPLATE：修改模板PREVIEW_TEMPLATE：预览模板PREVIEW_FLOW：预览合同文档PREVIEW_FLOW_DETAIL：预览合同详情PREVIEW_SEAL_LIST：预览印章列表PREVIEW_SEAL_DETAIL：预览印章详情EXTEND_SERVICE：扩展服务 */
+  /** 要生成WEB嵌入界面的类型, 可以选择的值如下: - CREATE_SEAL: 生成创建印章的嵌入页面- CREATE_TEMPLATE：生成创建模板的嵌入页面- MODIFY_TEMPLATE：生成修改模板的嵌入页面- PREVIEW_TEMPLATE：生成预览模板的嵌入页面- PREVIEW_FLOW：生成预览合同文档的嵌入页面- PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面- PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面- PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面- EXTEND_SERVICE：生成扩展服务的嵌入页面 */
   EmbedType: string;
-  /** WEB嵌入的业务资源IDEmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时必填，取值为模板idPREVIEW_FLOW，PREVIEW_FLOW_DETAIL时必填，取值为合同idPREVIEW_SEAL_DETAIL，必填，取值为印章id */
+  /** WEB嵌入的业务资源ID- 当EmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时需要填写模板id作为BusinessId- 当EmbedType取值PREVIEW_FLOW，PREVIEW_FLOW_DETAIL时需要填写合同id作为BusinessId- 当EmbedType取值PREVIEW_SEAL_DETAIL需要填写印章id作为BusinessId */
   BusinessId?: string;
   /** 是否隐藏控件，只有预览模板时生效 */
   HiddenComponents?: boolean;
@@ -1067,7 +1067,7 @@ declare interface ChannelCreateFlowSignReviewRequest {
   ReviewMessage?: string;
   /** 签署节点审核时需要指定，给个人审核时必填。 */
   RecipientId?: string;
-  /** 操作类型，默认：SignReview；SignReview:签署审核，CreateReview：发起审核注：接口通过该字段区分操作类型该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若想使用发起审核，请指定该字段为：CreateReview若发起个人审核，则指定该字段为：SignReview（注意，给个人审核时，需联系客户经理开白使用） */
+  /** 操作类型，默认：SignReview；SignReview:签署审核，CreateReview：发起审核注：接口通过该字段区分操作类型该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若想使用发起审核，请指定该字段为：CreateReview若发起个人审核，则指定该字段为：SignReview */
   OperateType?: string;
 }
 
@@ -1151,12 +1151,12 @@ declare interface ChannelCreatePrepareFlowRequest {
   ResourceType: number;
   /** 合同流程基础信息 */
   FlowInfo: BaseFlowInfo;
-  /** 合同签署人信息 */
-  FlowApproverList: CommonFlowApprover[];
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填 */
   Agent?: Agent;
   /** 合同流程配置信息，用于配置发起合同时定制化 */
   FlowOption?: CreateFlowOption;
+  /** 合同签署人信息 */
+  FlowApproverList?: CommonFlowApprover[];
   /** 通过flowid快速获得之前成功通过页面发起的合同生成链接 */
   FlowId?: string;
   /** 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL */
@@ -1456,9 +1456,9 @@ declare interface CreateChannelFlowEvidenceReportRequest {
 }
 
 declare interface CreateChannelFlowEvidenceReportResponse {
-  /** 出证报告 ID，用于查询出证报告接口DescribeChannelFlowEvidenceReport时用到 */
+  /** 出证报告 ID，可用户DescribeChannelFlowEvidenceReport接口查询出证PDF的下载地址 */
   ReportId?: string | null;
-  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  /** 出征任务的执行状态,状态列表如下- EvidenceStatusExecuting : 出征任务正在执行中- EvidenceStatusSuccess : 出征任务执行成功- EvidenceStatusFailed : 出征任务执行失败 */
   Status?: string;
   /** 废除，字段无效 */
   ReportUrl?: string | null;
@@ -1598,9 +1598,9 @@ declare interface DescribeChannelFlowEvidenceReportRequest {
 }
 
 declare interface DescribeChannelFlowEvidenceReportResponse {
-  /** 出证报告 URL */
+  /** 出证报告下载 URL */
   ReportUrl?: string | null;
-  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  /** 出征任务的执行状态,状态列表如下- EvidenceStatusExecuting : 出征任务正在执行中- EvidenceStatusSuccess : 出征任务执行成功- EvidenceStatusFailed : 出征任务执行失败 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1621,7 +1621,7 @@ declare interface DescribeExtendedServiceAuthInfoResponse {
 declare interface DescribeFlowDetailInfoRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 合同(流程)编号数组，最多支持100个。（备注：该参数和合同组编号必须二选一） */
+  /** 合同(流程)编号数组，最多支持100个。（备注：该参数和合同组编号必须二选一, 如果填写FlowGroupId则忽略此FlowIds的入参） */
   FlowIds?: string[];
   /** 合同组编号（备注：该参数和合同(流程)编号数组必须二选一） */
   FlowGroupId?: string;

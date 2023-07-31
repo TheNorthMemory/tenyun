@@ -91,17 +91,17 @@ declare interface AuthorizedUser {
 /** 自动签开启、签署相关配置 */
 declare interface AutoSignConfig {
   /** 自动签开通个人用户的三要素 */
-  UserInfo: UserThreeFactor | null;
-  /** 接受自动签开启的回调地址。需要保证post返回200 */
-  CallbackUrl: string | null;
-  /** 是否回调证书信息，默认false-不需要 */
-  CertInfoCallback?: boolean | null;
-  /** 是否支持用户自定义签名印章，默认false-不需要 */
-  UserDefineSeal?: boolean | null;
-  /** 是否需要回调的时候返回印章(签名) 图片的 base64，默认false-不需要 */
-  SealImgCallback?: boolean | null;
-  /** 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。 */
-  VerifyChannels?: string[] | null;
+  UserInfo: UserThreeFactor;
+  /** 接受回调URL地址。支持http://或者https://协议Post数据到此地址后后返回httpcode200表示接受回调成功, 返回其他httpcode表示接受回调失败 */
+  CallbackUrl: string;
+  /** 是否回调证书信息false-不需要 (默认值)true-需要 */
+  CertInfoCallback?: boolean;
+  /** 是否支持用户自定义签名印章false-不需要(默认)true-需要 */
+  UserDefineSeal?: boolean;
+  /** 是否需要回调的时候返回印章(签名) 图片的 base64false-不需要(默认)true-需要( */
+  SealImgCallback?: boolean;
+  /** 开通时候的验证方式, 分布为WEIXINAPP : 微信人脸识别INSIGHT : 慧眼人脸认别TELECOM : 运营商三要素验证如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。 */
+  VerifyChannels?: string[];
 }
 
 /** 应用回调信息 */
@@ -383,19 +383,19 @@ declare interface FlowApproverUrlInfo {
 /** 流程信息摘要 */
 declare interface FlowBrief {
   /** 流程的编号ID */
-  FlowId: string;
+  FlowId?: string;
   /** 流程的名称 */
-  FlowName: string;
+  FlowName?: string;
   /** 流程的描述信息 */
-  FlowDescription: string | null;
+  FlowDescription?: string | null;
   /** 流程的类型 */
-  FlowType: string;
+  FlowType?: string;
   /** 流程状态- 0 还没有发起- 1 待签署- 2 部分签署- 3 已拒签- 4 已签署- 5 已过期- 6 已撤销- 7 还没有预发起- 8 等待填写- 9 部分填写- 10 拒填- 21 已解除 */
-  FlowStatus: number | null;
+  FlowStatus?: number | null;
   /** 流程创建的时间戳，单位秒 */
-  CreatedOn: number | null;
-  /** 拒签或者取消的原因描述 */
-  FlowMessage: string | null;
+  CreatedOn?: number | null;
+  /** 当合同被拒签或者取消后(当FlowStatus=3或者FlowStatus=6的时候)此字段展示拒签或者取消的原因描述 */
+  FlowMessage?: string | null;
   /** 合同发起人userId */
   Creator?: string | null;
   /** 合同过期时间，时间戳，单位秒 */
@@ -738,7 +738,7 @@ declare interface ReleasedApprover {
   ApproverType?: string;
   /** 签署控件类型，支持自定义企业签署方的签署控件为“印章”或“签名”- SIGN_SEAL-默认为印章控件类型- SIGN_SIGNATURE-手写签名控件类型 */
   ApproverSignComponentType?: string;
-  /** 签署方自定义控件别名，最大长度20个字符 */
+  /** 参与方在合同中的角色是按照创建合同的时候来排序的; 解除协议会将第一个参与人叫甲方, 第二个叫乙方,第三个叫丙方, 依次类推. 如果想改动参与人的角色名字, 可以设置此签署方自定义控件别名字段，最大20个字符 */
   ApproverSignRole?: string;
 }
 
@@ -1025,7 +1025,7 @@ declare interface CancelUserAutoSignEnableUrlResponse {
 declare interface CreateBatchCancelFlowUrlRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 需要执行撤回的签署流程id数组，最多100个 */
+  /** 需要执行撤回的流程(合同)的编号列表，最多100个.列表中的流程(合同)编号不要重复. */
   FlowIds: string[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
@@ -1034,9 +1034,9 @@ declare interface CreateBatchCancelFlowUrlRequest {
 declare interface CreateBatchCancelFlowUrlResponse {
   /** 批量撤回签署流程链接 */
   BatchCancelFlowUrl?: string;
-  /** 签署流程撤回失败信息 */
+  /** 签署流程撤回失败信息数组里边的错误原因与传进来的FlowIds一一对应,如果是空字符串则标识没有出错 */
   FailMessages?: string[];
-  /** 签署连接过期时间字符串：年月日-时分秒 */
+  /** 签署连接过期时间字符串：年月日-时分秒例如:2023-07-28 17:25:59 */
   UrlExpireOn?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1339,7 +1339,7 @@ declare interface CreateFlowSignReviewRequest {
   Agent?: Agent;
   /** 审核签署节点使用 非必填 如果填写则审核该签署节点。给个人审核时必填。 */
   RecipientId?: string;
-  /** 操作类型：（接口通过该字段区分操作类型）SignReview:签署审核CreateReview:发起审核默认：SignReview；SignReview:签署审核该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若发起个人审核，则指定该字段为：SignReview（注意，给个人审核时，需联系客户经理开白使用） */
+  /** 操作类型：（接口通过该字段区分操作类型）SignReview:签署审核CreateReview:发起审核默认：SignReview；SignReview:签署审核该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若发起个人审核，则指定该字段为：SignReview */
   OperateType?: string;
 }
 
@@ -1585,7 +1585,7 @@ declare interface CreateSchemeUrlRequest {
   FlowGroupId?: string;
   /** 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页 */
   PathType?: number;
-  /** 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效 */
+  /** 是否自动回跳true：是，false：否。该参数只针对"APP" 类型的签署链接有效 */
   AutoJumpBack?: boolean;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
@@ -1669,11 +1669,11 @@ declare interface CreateUserAutoSignEnableUrlRequest {
   SceneKey: string;
   /** 自动签开通，签署相关配置 */
   AutoSignConfig: AutoSignConfig;
-  /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
+  /** 链接类型，空-默认小程序端链接H5SIGN-h5端链接 */
   UrlType?: string;
-  /** 通知类型，默认不填为不通知开通方，填写 SMS 为短信通知。 */
+  /** 通知类型默认不设置为不通知开通方，SMS 为短信通知 , 此种方式需要NotifyAddress填写手机号。 */
   NotifyType?: string;
-  /** 若上方填写为 SMS，则此处为手机号 */
+  /** 如果通知类型NotifyType选择为SMS，则此处为手机号, 其他通知类型不需要设置此项 */
   NotifyAddress?: string;
   /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。 */
   ExpiredTime?: number;
@@ -1690,7 +1690,7 @@ declare interface CreateUserAutoSignEnableUrlResponse {
   AppOriginalId?: string;
   /** 跳转路径 */
   Path?: string;
-  /** base64格式跳转二维码 */
+  /** base64格式跳转二维码,可以通过微信扫描后跳转到业务界面 */
   QrCode?: string;
   /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
   UrlType?: string;
@@ -1870,9 +1870,9 @@ declare interface DescribeFlowEvidenceReportRequest {
 }
 
 declare interface DescribeFlowEvidenceReportResponse {
-  /** 报告 URL */
+  /** 出证报告PDF的下载 URL */
   ReportUrl?: string | null;
-  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  /** 出证任务执行的状态, 分布表示下面的含义EvidenceStatusExecuting 出证任务在执行中EvidenceStatusSuccess 出证任务执行成功EvidenceStatusFailed 出征任务执行失败 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1881,11 +1881,11 @@ declare interface DescribeFlowEvidenceReportResponse {
 declare interface DescribeFlowInfoRequest {
   /** 调用方用户信息，userId 必填 */
   Operator?: UserInfo;
-  /** 需要查询的流程ID列表，限制最大100个 */
+  /** 需要查询的流程ID列表，限制最大100个如果查询合同组的信息,不要传此参数 */
   FlowIds?: string[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
-  /** 合同组ID */
+  /** 合同组ID, 如果传此参数会忽略FlowIds入参 所以如传此参数不要传FlowIds参数 */
   FlowGroupId?: string;
 }
 
@@ -2093,18 +2093,18 @@ declare interface DescribeUserAutoSignStatusRequest {
   Operator: UserInfo;
   /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
   SceneKey: string;
-  /** 查询开启状态的用户信息 */
+  /** 要查询开启状态的用户信息 */
   UserInfo: UserThreeFactor;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
 declare interface DescribeUserAutoSignStatusResponse {
-  /** 是否已开通自动签 */
+  /** 查询用户是否已开通自动签 */
   IsOpen?: boolean;
-  /** 自动签许可生效时间。当且仅当已开通自动签时有值。 */
+  /** 自动签许可生效时间。当且仅当已开通自动签时有值。值为unix时间戳,单位为秒。 */
   LicenseFrom?: number;
-  /** 自动签许可到期时间。当且仅当已开通自动签时有值。 */
+  /** 自动签许可到期时间。当且仅当已开通自动签时有值。值为unix时间戳,单位为秒。 */
   LicenseTo?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2127,7 +2127,7 @@ declare interface DisableUserAutoSignResponse {
 }
 
 declare interface GetTaskResultApiRequest {
-  /** 任务Id，通过CreateConvertTaskApi得到 */
+  /** 任务Id，通过接口CreateConvertTaskApi或CreateMergeFileTask得到的返回任务id */
   TaskId: string;
   /** 操作人信息,UserId必填 */
   Operator?: UserInfo;
@@ -2144,7 +2144,7 @@ declare interface GetTaskResultApiResponse {
   TaskStatus?: number;
   /** 状态描述，需要关注的状态NeedTranform - 任务已提交Processing - 文档转换中TaskEnd - 任务处理完成DownloadFailed - 下载失败ProcessFailed - 转换失败ProcessTimeout - 转换文件超时 */
   TaskMessage?: string;
-  /** 资源Id，也是FileId，用于文件发起使用 */
+  /** 资源Id，也是FileId，用于文件发起时使用 */
   ResourceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

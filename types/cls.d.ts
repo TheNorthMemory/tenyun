@@ -45,19 +45,19 @@ declare interface AlarmInfo {
 /** 告警通知模板类型 */
 declare interface AlarmNotice {
   /** 告警通知模板名称。 */
-  Name: string;
+  Name?: string;
   /** 告警模板的类型。可选值： Trigger - 告警触发 Recovery - 告警恢复 All - 告警触发和告警恢复 */
-  Type: string;
+  Type?: string;
   /** 告警通知模板接收者信息。 */
-  NoticeReceivers: NoticeReceiver[] | null;
+  NoticeReceivers?: NoticeReceiver[] | null;
   /** 告警通知模板回调信息。 */
-  WebCallbacks: WebCallback[] | null;
+  WebCallbacks?: WebCallback[] | null;
   /** 告警通知模板ID。 */
-  AlarmNoticeId: string | null;
+  AlarmNoticeId?: string | null;
   /** 创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 最近更新时间。 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 告警对象 */
@@ -994,7 +994,7 @@ declare interface ScheduledSqlTaskInfo {
   ScheduledSqlContent?: string;
   /** 调度开始时间 */
   ProcessStartTime?: string;
-  /** 调度类型，1:持续运行 2:指定调度结束时间 */
+  /** 调度类型，1:持续运行 2:指定时间范围 */
   ProcessType?: number;
   /** 调度结束时间，当process_type=2时为必传字段 */
   ProcessEndTime?: string;
@@ -1221,7 +1221,7 @@ declare interface CreateAlarmNoticeRequest {
 
 declare interface CreateAlarmNoticeResponse {
   /** 告警模板ID */
-  AlarmNoticeId: string;
+  AlarmNoticeId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1519,7 +1519,7 @@ declare interface CreateScheduledSqlRequest {
   SrcTopicId: string;
   /** 任务名称 */
   Name: string;
-  /** 任务启动状态. 1正常开启, 2关闭 */
+  /** 任务启动状态. 1开启, 2关闭 */
   EnableFlag: number;
   /** 定时SQL分析目标日志主题 */
   DstResource: ScheduledSqlResouceInfo;
@@ -1527,7 +1527,7 @@ declare interface CreateScheduledSqlRequest {
   ScheduledSqlContent: string;
   /** 调度开始时间,Unix时间戳，单位ms */
   ProcessStartTime: number;
-  /** 调度类型，1:持续运行 2:指定调度结束时间 */
+  /** 调度类型，1:持续运行 2:指定时间范围 */
   ProcessType: number;
   /** 调度周期(分钟) */
   ProcessPeriod: number;
@@ -1539,7 +1539,7 @@ declare interface CreateScheduledSqlRequest {
   SrcTopicRegion: string;
   /** 调度结束时间，当ProcessType=2时为必传字段, Unix时间戳，单位ms */
   ProcessEndTime?: number;
-  /** 语法规则。 默认值为0。0：Lucene语法，1：CQL语法 */
+  /** 查询语法规则。 默认值为0。0：Lucene语法，1：CQL语法 */
   SyntaxRule?: number;
 }
 
@@ -2175,9 +2175,9 @@ declare interface DescribeScheduledSqlInfoRequest {
 
 declare interface DescribeScheduledSqlInfoResponse {
   /** ScheduledSQL任务列表信息 */
-  ScheduledSqlTaskInfos: ScheduledSqlTaskInfo[];
+  ScheduledSqlTaskInfos?: ScheduledSqlTaskInfo[];
   /** 任务总次数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2555,7 +2555,7 @@ declare interface ModifyScheduledSqlRequest {
   TaskId: string;
   /** 源日志主题 */
   SrcTopicId?: string;
-  /** 任务启动状态. 1正常开启, 2关闭 */
+  /** 任务启动状态. 1开启, 2关闭 */
   EnableFlag?: number;
   /** 定时SQL分析的目标日志主题 */
   DstResource?: ScheduledSqlResouceInfo;

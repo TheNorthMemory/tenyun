@@ -196,14 +196,6 @@ declare interface Coord {
   Y: number;
 }
 
-/** 企业四要素核验结果 */
-declare interface Detail {
-  /** 企业四要素核验结果状态码 */
-  Result: number;
-  /** 企业四要素核验结果描述 */
-  Desc: string;
-}
-
 /** 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。 */
 declare interface DetectedWordCoordPoint {
   /** 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。 */
@@ -766,40 +758,6 @@ declare interface Polygon {
   RightBottom: Coord;
   /** 左下顶点坐标 */
   LeftBottom: Coord;
-}
-
-/** 商品码信息 */
-declare interface ProductDataRecord {
-  /** 产品名称 */
-  ProductName: string;
-  /** 产品名称(英文) */
-  EnName: string;
-  /** 品牌名称 */
-  BrandName: string;
-  /** 规格型号 */
-  Type: string;
-  /** 宽度，单位毫米 */
-  Width: string;
-  /** 高度，单位毫米 */
-  Height: string;
-  /** 深度，单位毫米 */
-  Depth: string;
-  /** 关键字 */
-  KeyWord: string;
-  /** 简短描述 */
-  Description: string;
-  /** 图片链接 */
-  ImageLink: string[];
-  /** 厂家名称 */
-  ManufacturerName: string;
-  /** 厂家地址 */
-  ManufacturerAddress: string;
-  /** 企业社会信用代码 */
-  FirmCode: string;
-  /** 表示数据查询状态checkResult	状态说明1 经查，该商品条码已在中国物品编码中心注册2	经查，该厂商识别代码已在中国物品编码中心注册，但编码信息未按规定通报。3	经查，该厂商识别代码已于xxxxx注销，请关注产品生产日期。4	经查，该企业以及条码未经条码中心注册，属于违法使用-1	经查，该商品条码被冒用-2	经查，该厂商识别代码已在中国物品编码中心注册，但该产品已经下市S001 未找到该厂商识别代码的注册信息。S002 该厂商识别代码已经在GS1注册，但编码信息未通报S003 该商品条码已在GS1通报S004 该商品条码已注销S005 数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。E001 完整性失败：此GTIN的长度无效。E002 完整性失败：校验位不正确。E003 完整性失败：字符串包含字母数字字符。E004 数字不正确。GS1前缀（3位国家/地区代码）不存在。E005 数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。E006 数字不正确。尚未分配该GS1公司前缀。E008 经查，该企业厂商识别代码以及条码尚未通报 */
-  CheckResult: string;
-  /** UNSPSC分类码 */
-  CategoryCode: string;
 }
 
 /** 图片大小 */
@@ -3118,20 +3076,6 @@ declare interface QrcodeOCRResponse {
   RequestId?: string;
 }
 
-declare interface QueryBarCodeRequest {
-  /** 条形码 */
-  BarCode: string;
-}
-
-declare interface QueryBarCodeResponse {
-  /** 条码 */
-  BarCode?: string;
-  /** 条码信息数组 */
-  ProductDataRecords?: ProductDataRecord[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface QuotaInvoiceOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4242,26 +4186,6 @@ declare interface VerifyBizLicenseResponse {
   RequestId?: string;
 }
 
-declare interface VerifyEnterpriseFourFactorsRequest {
-  /** 姓名 */
-  RealName: string;
-  /** 证件号码（公司注册证件号） */
-  IdCard: string;
-  /** 企业全称 */
-  EnterpriseName: string;
-  /** 企业标识（注册号，统一社会信用代码） */
-  EnterpriseMark: string;
-}
-
-declare interface VerifyEnterpriseFourFactorsResponse {
-  /** 核验一致性（1:一致，2:不一致，3:查询无记录） */
-  State?: number;
-  /** 核验结果明细，7：企业法人/负责人，6：企业股东，5：企业管理人员，-21：企业名称与企业标识不符，-22：姓名不一致，-23：证件号码不一致，-24：企业名称不一致，-25：企业标识不一致 */
-  Detail?: Detail | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface VerifyOfdVatInvoiceOCRRequest {
   /** OFD文件的 Url 地址。 */
   OfdFileUrl?: string;
@@ -4433,8 +4357,6 @@ declare interface Ocr {
   PropOwnerCertOCR(data?: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
   /** 二维码和条形码识别 {@link QrcodeOCRRequest} {@link QrcodeOCRResponse} */
   QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
-  /** @deprecated 条码信息查询 {@link QueryBarCodeRequest} {@link QueryBarCodeResponse} */
-  QueryBarCode(data: QueryBarCodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBarCodeResponse>;
   /** 定额发票识别 {@link QuotaInvoiceOCRRequest} {@link QuotaInvoiceOCRResponse} */
   QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
   /** 集装箱识别 {@link RecognizeContainerOCRRequest} {@link RecognizeContainerOCRResponse} */
@@ -4507,8 +4429,6 @@ declare interface Ocr {
   VerifyBasicBizLicense(data?: VerifyBasicBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBasicBizLicenseResponse>;
   /** @deprecated 营业执照识别及核验（详细版） {@link VerifyBizLicenseRequest} {@link VerifyBizLicenseResponse} */
   VerifyBizLicense(data?: VerifyBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseResponse>;
-  /** @deprecated 企业四要素核验 {@link VerifyEnterpriseFourFactorsRequest} {@link VerifyEnterpriseFourFactorsResponse} */
-  VerifyEnterpriseFourFactors(data: VerifyEnterpriseFourFactorsRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEnterpriseFourFactorsResponse>;
   /** OFD发票识别 {@link VerifyOfdVatInvoiceOCRRequest} {@link VerifyOfdVatInvoiceOCRResponse} */
   VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
   /** 车辆VIN码识别 {@link VinOCRRequest} {@link VinOCRResponse} */

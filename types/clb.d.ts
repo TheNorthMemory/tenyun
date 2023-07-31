@@ -1042,7 +1042,7 @@ declare interface RulesItems {
 declare interface SlaUpdateParam {
   /** lb的字符串ID */
   LoadBalancerId: string;
-  /** 升级为性能容量型，固定取值为SLA。SLA表示升级为默认规格的性能容量型实例。当您开通了普通规格的性能容量型时，SLA对应超强型1规格。普通规格的性能容量型正在内测中，请提交 [内测申请](https://cloud.tencent.com/apply/p/hf45esx99lf)。当您开通了超大型规格的性能容量型时，SLA对应超强型4规格。超大型规格的性能容量型正在内测中，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category)。 */
+  /** 升级为性能容量型，固定取值为SLA。SLA表示超强型1规格。当您开通了超大型规格的性能容量型时，SLA对应超强型4规格。如需超大型规格的性能容量型，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。 */
   SlaType: string;
 }
 
@@ -1429,7 +1429,7 @@ declare interface CreateLoadBalancerRequest {
   BandwidthPackageId?: string;
   /** 独占型实例信息。若创建独占型的内网负载均衡实例，则此参数必填。 */
   ExclusiveCluster?: ExclusiveCluster;
-  /** 创建性能容量型实例。若需要创建性能容量型实例，则此参数必填，且取值为：SLA，表示创建按量计费模式下的默认规格的性能容量型实例。默认为普通规格的性能容量型实例，SLA对应超强型1规格。当您开通了超大型规格的性能容量型时，SLA对应超强型4规格。超大型规格的性能容量型正在内测中，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category)。若需要创建共享型实例，则无需填写此参数。 */
+  /** 创建性能容量型实例。若需要创建性能容量型实例，则此参数必填，且取值为：SLA，表示超强型1规格。当您开通了超大型规格的性能容量型时，SLA对应超强型4规格。如需超大型规格的性能容量型，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category)。若需要创建共享型实例，则无需填写此参数。 */
   SlaType?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;

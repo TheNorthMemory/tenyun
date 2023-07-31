@@ -955,6 +955,8 @@ declare interface DescribeRoomResponse {
   TeacherId?: string;
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId?: number;
+  /** 观看类型。互动观看 （默认） */
+  AudienceType?: number;
   /** 分辨率。可以有如下取值：1 标清2 高清3 全高清 */
   Resolution?: number;
   /** 最大连麦人数（不包括老师）。取值范围[0, 16] */

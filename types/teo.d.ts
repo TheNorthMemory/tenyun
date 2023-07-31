@@ -193,39 +193,39 @@ declare interface AliasDomain {
 /** 应用代理实例 */
 declare interface ApplicationProxy {
   /** 站点ID。 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 站点名称。 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 代理ID。 */
   ProxyId?: string;
   /** 当ProxyType=hostname时，表示域名或子域名；当ProxyType=instance时，表示代理名称。 */
-  ProxyName: string;
+  ProxyName?: string;
   /** 四层代理模式，取值有：hostname：表示子域名模式；instance：表示实例模式。 */
-  ProxyType: string;
+  ProxyType?: string;
   /** 调度模式，取值有：ip：表示Anycast IP调度；domain：表示CNAME调度。 */
-  PlatType: string;
+  PlatType?: string;
   /** 加速区域，取值有：mainland：中国大陆境内;overseas：全球（不含中国大陆）。默认值：overseas */
-  Area: string;
+  Area?: string;
   /** 是否开启安全，取值有：0：关闭安全；1：开启安全。 */
-  SecurityType: number;
+  SecurityType?: number;
   /** 是否开启加速，取值有：0：关闭加速；1：开启加速。 */
-  AccelerateType: number;
+  AccelerateType?: number;
   /** 会话保持时间。 */
-  SessionPersistTime: number;
+  SessionPersistTime?: number;
   /** 状态，取值有：online：启用；offline：停用；progress：部署中；stopping：停用中；fail：部署失败/停用失败。 */
-  Status: string;
+  Status?: string;
   /** 封禁状态，取值有：banned：已封禁;banning：封禁中；recover：已解封；recovering：解封禁中。 */
-  BanStatus: string;
+  BanStatus?: string;
   /** 调度信息。 */
-  ScheduleValue: string[];
+  ScheduleValue?: string[];
   /** 当ProxyType=hostname时：表示代理加速唯一标识。 */
-  HostId: string;
+  HostId?: string;
   /** Ipv6访问配置。 */
-  Ipv6: Ipv6;
+  Ipv6?: Ipv6;
   /** 更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 规则列表。 */
-  ApplicationProxyRules: ApplicationProxyRule[];
+  ApplicationProxyRules?: ApplicationProxyRule[];
   /** 中国大陆加速优化配置。 */
   AccelerateMainland?: AccelerateMainland;
 }

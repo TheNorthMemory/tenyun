@@ -2473,7 +2473,7 @@ declare interface CreateAclRequest {
   PermissionType: number;
   /** 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称，当resourceType为CLUSTER时，该字段可为空。 */
   ResourceName?: string;
-  /** 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持 */
+  /** 默认为*，表示任何host都可以访问。支持填写IP或网段，支持“;”分隔。 */
   Host?: string;
   /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入时需要加 User: 前缀,如用户A则传入User:A。 */
   Principal?: string;
@@ -2483,7 +2483,7 @@ declare interface CreateAclRequest {
 
 declare interface CreateAclResponse {
   /** 返回结果 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
