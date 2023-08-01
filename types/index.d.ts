@@ -773,7 +773,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   mgobe: Mgobe,
   /** {@link Mmps 小程序安全} */
   mmps: Mmps,
-  /** {@link Mna 移动网络加速} */
+  /** {@link Mna 多网聚合加速} */
   mna: Mna,
   /** {@link Mongodb 云数据库 MongoDB} */
   mongodb: Mongodb,

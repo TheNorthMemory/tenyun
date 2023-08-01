@@ -140,11 +140,11 @@ declare interface Component {
   ComponentId?: string;
   /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认;SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
   ComponentType?: string;
-  /** 控件简称，不能超过30个字符 */
+  /** 控件简称，不超过30个字符 */
   ComponentName?: string;
-  /** 定义控件是否为必填项，默认为false */
+  /** 控件是否为必填项，默认为false-非必填 */
   ComponentRequired?: boolean;
-  /** 控件关联的签署方id */
+  /** 控件关联的参与方ID，对应Recipient结构体中的RecipientId */
   ComponentRecipientId?: string;
   /** 控件所属文件的序号 (文档中文件的排列序号，从0开始) */
   FileIndex?: number;
@@ -166,9 +166,9 @@ declare interface Component {
   ComponentValue?: string;
   /** 日期签署控件的字号，默认为 12签署区日期控件会转换成图片格式并带存证，需要通过字体决定图片大小 */
   ComponentDateFontSize?: number;
-  /** 控件所属文档的Id, 模块相关接口为空值 */
+  /** 控件所属文档的Id, 模板相关接口为空值 */
   DocumentId?: string;
-  /** 控件描述，不能超过30个字符 */
+  /** 控件描述，不超过30个字符 */
   ComponentDescription?: string;
   /** 指定关键字时横坐标偏移量，单位pt */
   OffsetX?: number;
@@ -178,11 +178,11 @@ declare interface Component {
   ChannelComponentId?: string;
   /** 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
   KeywordOrder?: string;
-  /** 指定关键字页码，可选参数，指定页码后，将只在指定的页码内查找关键字，非该页码的关键字将不会查询出来 */
+  /** 指定关键字页码。指定页码后，将只在指定的页码内查找关键字，非该页码的关键字将不会查询出来 */
   KeywordPage?: number;
   /** 关键字位置模式，Middle-居中，Below-正下方，Right-正右方，LowerRight-右上角，UpperRight-右下角。示例：如果设置Middle的关键字盖章，则印章的中心会和关键字的中心重合，如果设置Below，则印章在关键字的正下方 */
   RelativeLocation?: string;
-  /** 关键字索引，可选参数，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。示例[0,2]，说明使用PDF文件内第1个和第3个关键字位置。 */
+  /** 关键字索引，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。示例[0,2]，说明使用PDF文件内第1个和第3个关键字位置。 */
   KeywordIndexes?: number[];
   /** 填写提示的内容 */
   Placeholder?: string | null;
@@ -546,25 +546,25 @@ declare interface ProxyOrganizationOperator {
   DefaultRole?: string | null;
 }
 
-/** 签署参与者信息 */
+/** 流程中参与方的信息结构 */
 declare interface Recipient {
-  /** 签署人唯一标识，在通过模板发起合同的时候对应签署方Id */
+  /** 签署人唯一标识，在通过模板发起合同的时候对应签署方ID */
   RecipientId?: string;
-  /** 参与者类型。默认为空。ENTERPRISE-企业；INDIVIDUAL-个人；PROMOTER-发起方 */
+  /** 参与者类型，默认为空。ENTERPRISE-企业；INDIVIDUAL-个人；PROMOTER-发起方 */
   RecipientType?: string;
-  /** 描述 */
+  /** 描述信息 */
   Description?: string;
-  /** 签署方备注角色名 */
+  /** 角色名称 */
   RoleName?: string;
   /** 是否需要校验，true-是，false-否 */
   RequireValidation?: boolean;
   /** 是否必须填写，true-是，false-否 */
   RequireSign?: boolean;
-  /** 签署类型 */
+  /** 内部字段，签署类型 */
   SignType?: number;
   /** 签署顺序：数字越小优先级越高 */
   RoutingOrder?: number;
-  /** 是否是发起方 */
+  /** 是否是发起方，true-是 false-否 */
   IsPromoter?: boolean;
 }
 
@@ -740,41 +740,41 @@ declare interface TaskInfo {
   TaskStatus: string | null;
 }
 
-/** 此结构体 (TemplateInfo) 用于描述模板的信息。 */
+/** 此结构体 (TemplateInfo) 用于描述模板的信息。> **模板组成** >> 一个模板通常会包含以下结构信息>- 模板基本信息>- 签署参与方 Recipients，在模板发起合同时用于指定参与方>- 填写控件 Components>- 签署控件 SignComponents */
 declare interface TemplateInfo {
-  /** 模板ID */
-  TemplateId: string;
-  /** 模板名字 */
-  TemplateName: string;
+  /** 模板ID，模板的唯一标识 */
+  TemplateId?: string;
+  /** 模板名 */
+  TemplateName?: string;
   /** 模板描述信息 */
-  Description: string;
-  /** 模板的填充控件信息结构 */
-  Components: Component[];
-  /** 模板中的流程参与人信息 */
-  Recipients: Recipient[];
-  /** 模板中的签署控件信息结构 */
-  SignComponents: Component[];
+  Description?: string;
+  /** 模板的填充控件列表 */
+  Components?: Component[];
+  /** 模板中的签署参与方列表 */
+  Recipients?: Recipient[];
+  /** 模板中的签署控件列表 */
+  SignComponents?: Component[];
   /** 模板类型：1-静默签；3-普通模板 */
-  TemplateType: number;
+  TemplateType?: number;
   /** 是否是发起人 ,已弃用 */
   IsPromoter?: boolean;
   /** 模板的创建者信息，电子签系统用户ID */
-  Creator: string;
-  /** 模板创建的时间戳，单位秒 */
-  CreatedOn: number;
-  /** 模板的H5预览链接,可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。请求参数WithPreviewUrl=true时返回，有效期5分钟。 */
-  PreviewUrl: string | null;
-  /** 第三方应用集成-模板PDF文件链接。请求参数WithPdfUrl=true时返回（此功能开放需要联系客户经理），有效期5分钟。 */
-  PdfUrl: string | null;
-  /** 关联的第三方应用平台企业模板ID */
-  ChannelTemplateId: string;
-  /** 关联的三方应用平台平台企业模板名称 */
-  ChannelTemplateName: string | null;
+  Creator?: string;
+  /** 模板创建的时间戳，格式为Unix标准时间戳（秒） */
+  CreatedOn?: number;
+  /** 模板的H5预览链接,有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。（此功能开放需要联系客户经理） */
+  PreviewUrl?: string | null;
+  /** 第三方应用集成-模板PDF文件链接，有效期5分钟。请求参数WithPdfUrl=true时返回（此功能开放需要联系客户经理）。 */
+  PdfUrl?: string | null;
+  /** 本模板关联的第三方应用平台企业模板ID */
+  ChannelTemplateId?: string;
+  /** 本模板关联的三方应用平台平台企业模板名称 */
+  ChannelTemplateName?: string | null;
   /** 0-需要子客企业手动领取平台企业的模板(默认); 1-平台自动设置子客模板 */
-  ChannelAutoSave: number | null;
+  ChannelAutoSave?: number | null;
   /** 模板版本，全数字字符。默认为空，初始版本为yyyyMMdd001。 */
-  TemplateVersion: string | null;
-  /** 模板可用状态，取值：1启用（默认），2停用 */
+  TemplateVersion?: string | null;
+  /** 模板可用状态：1启用（默认）2停用 */
   Available?: number | null;
 }
 
@@ -1669,17 +1669,17 @@ declare interface DescribeTemplatesRequest {
   TemplateId?: string;
   /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
   ContentType?: number;
-  /** 查询个数，默认20，最大100；在查询列表的时候有效 */
+  /** 指定每页多少条数据，如果不传默认为20，单页最大100。 */
   Limit?: number;
-  /** 查询偏移位置，默认0；在查询列表的时候有效 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默从第一页返回。页码从0开始，即首页为0。 */
   Offset?: number;
   /** 是否返回所有组件信息。默认false，只返回发起方控件；true，返回所有签署方控件 */
   QueryAllComponents?: boolean;
   /** 模糊搜索模板名称，最大长度200 */
   TemplateName?: string;
-  /** 是否获取模板预览链接 */
+  /** 是否获取模板预览链接，默认false-不获取true-获取 */
   WithPreviewUrl?: boolean;
-  /** 是否获取模板的PDF文件链接- 第三方应用集成需要开启白名单时才能使用。 */
+  /** 是否获取模板的PDF文件链接。默认false-不获取true-获取请联系客户经理开白后使用。 */
   WithPdfUrl?: boolean;
   /** 对应第三方应用平台企业的模板ID */
   ChannelTemplateId?: string;
@@ -1688,13 +1688,13 @@ declare interface DescribeTemplatesRequest {
 }
 
 declare interface DescribeTemplatesResponse {
-  /** 模板详情 */
+  /** 模板列表 */
   Templates?: TemplateInfo[];
-  /** 查询总数 */
+  /** 查询到的总数 */
   TotalCount?: number;
-  /** 查询数量 */
+  /** 每页多少条数据 */
   Limit?: number;
-  /** 查询起始偏移 */
+  /** 查询结果分页返回，此处指定第几页。页码从0开始，即首页为0。 */
   Offset?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1765,14 +1765,14 @@ declare interface OperateChannelTemplateRequest {
   OperateType: string;
   /** 第三方应用平台模板库模板唯一标识 */
   TemplateId: string;
-  /** 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔 */
+  /** 合作企业方第三方机构唯一标识数据.支持多个， 用","进行分隔 */
   ProxyOrganizationOpenIds?: string;
   /** 模板可见性, 全部可见-"all", 部分可见-"part" */
   AuthTag?: string;
-  /** 暂未开放 */
-  Operator?: UserInfo;
   /** 当OperateType=UPADATE时，可以通过设置此字段对模板启停用状态进行操作。若此字段值为0，则不会修改模板Available，1为启用模板，2为停用模板。启用后模板可以正常领取。停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。如果Available更新失败，会直接返回错误。 */
   Available?: number;
+  /** 暂未开放 */
+  Operator?: UserInfo;
 }
 
 declare interface OperateChannelTemplateResponse {
@@ -1780,7 +1780,7 @@ declare interface OperateChannelTemplateResponse {
   AppId?: string | null;
   /** 第三方应用平台模板库模板唯一标识 */
   TemplateId?: string | null;
-  /** 描述模板可见性更改的结果，和参数中Available无关，全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示。 */
+  /** 描述模板可见性更改的结果，和参数中Available无关。全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"，失败的会在FailMessageList中展示。 */
   OperateResult?: string | null;
   /** 模板可见性, 全部可见-"all", 部分可见-"part" */
   AuthTag?: string | null;

@@ -1246,6 +1246,14 @@ declare interface VpcEndpointInfo {
   VpcDataStreamEndpointStatus?: string | null;
 }
 
+/** vpc信息（由UniqVpcId和UniqSubnetId组成） */
+declare interface VpcInfo {
+  /** vpc信息 */
+  VpcId: string;
+  /** 子网信息 */
+  SubnetId: string;
+}
+
 declare interface AcknowledgeMessageRequest {
   /** 用作标识消息的唯一的ID（可从 receiveMessage 的返回值中获得） */
   MessageId: string;
@@ -1586,6 +1594,30 @@ declare interface CreateRocketMQTopicRequest {
 }
 
 declare interface CreateRocketMQTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRocketMQVipInstanceRequest {
+  /** 实例名称 */
+  Name: string;
+  /** 实例规格：基础型，rocket-vip-basic-1标准型，rocket-vip-basic-2高阶Ⅰ型，rocket-vip-basic-3高阶Ⅱ型，rocket-vip-basic-4 */
+  Spec: string;
+  /** 节点数量，最小2，最大20 */
+  NodeCount: number;
+  /** 单节点存储空间，GB为单位，最低200GB */
+  StorageSize: number;
+  /** 节点部署的区域ID列表，如广州一区，则是100001，具体可查询腾讯云官网 */
+  ZoneIds: string[];
+  /** VPC信息 */
+  VpcInfo: VpcInfo;
+  /** 购买时长，月为单位 */
+  TimeSpan: number;
+}
+
+declare interface CreateRocketMQVipInstanceResponse {
+  /** 集群ID */
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3303,6 +3335,8 @@ declare interface Tdmq {
   CreateRocketMQNamespace(data: CreateRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQNamespaceResponse>;
   /** 创建RocketMQ主题 {@link CreateRocketMQTopicRequest} {@link CreateRocketMQTopicResponse} */
   CreateRocketMQTopic(data: CreateRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQTopicResponse>;
+  /** 创建RocketMQ专享实例 {@link CreateRocketMQVipInstanceRequest} {@link CreateRocketMQVipInstanceResponse} */
+  CreateRocketMQVipInstance(data: CreateRocketMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQVipInstanceResponse>;
   /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
   /** 创建订阅关系 {@link CreateSubscriptionRequest} {@link CreateSubscriptionResponse} */

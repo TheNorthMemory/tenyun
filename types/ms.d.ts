@@ -2,7 +2,7 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 渠道合作安卓加固App信息 */
+/** 渠道合作Android加固App信息 */
 declare interface AndroidAppInfo {
   /** app文件的md5算法值，需要正确传递，在线加固必输。例如linux环境下执行算法命令md5sum ：#md5sum test.apk d40cc11e4bddd643ecdf29cde729a12b */
   AppMd5?: string;
@@ -12,13 +12,13 @@ declare interface AndroidAppInfo {
   AppUrl?: string;
   /** app名称，非必输 */
   AppName?: string;
-  /** app的包名，本次操作的包名。当安卓是按年收费、免费试用加固时，在线加固和输出工具要求该字段必输，且与AndroidPlan.AppPkgName值相等。 */
+  /** app的包名，本次操作的包名。当Android是按年收费、免费试用加固时，在线加固和输出工具要求该字段必输，且与AndroidPlan.AppPkgName值相等。 */
   AppPkgName?: string;
   /** app的文件名，非必输。 */
   AppFileName?: string;
   /** app版本号，非必输。 */
   AppVersion?: string;
-  /** 安卓app的文件类型，本次加固操作的应用类型 。安卓在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。 */
+  /** Android app的文件类型，本次加固操作的应用类型 。Android在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。 */
   AppType?: string;
 }
 
@@ -579,7 +579,7 @@ declare interface CreateCosSecKeyInstanceResponse {
 }
 
 declare interface CreateEncryptInstanceRequest {
-  /** 平台类型 1.android安卓加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
+  /** 平台类型 1.android加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
   PlatformType: number;
   /** 订单采购类型 1-免费试用 2-按年收费 3-按次收费 */
   OrderType: number;
@@ -587,9 +587,9 @@ declare interface CreateEncryptInstanceRequest {
   EncryptOpType: number;
   /** 本次加固使用的资源id */
   ResourceId: string;
-  /** 渠道合作安卓加固App信息 */
+  /** 渠道合作android加固App信息 */
   AndroidAppInfo?: AndroidAppInfo;
-  /** 渠道合作安卓加固策略信息 */
+  /** 渠道合作android加固策略信息 */
   AndroidPlan?: AndroidPlan;
   /** 小程序加固信息 */
   AppletInfo?: AppletInfo;
@@ -603,11 +603,11 @@ declare interface CreateEncryptInstanceResponse {
 }
 
 declare interface CreateOrderInstanceRequest {
-  /** 平台类型枚举值：1-android安卓加固 ；2-ios源码混淆 ； 3-sdk加固 ； 4-applet小程序加固 */
+  /** 平台类型枚举值：1-android加固 ；2-ios源码混淆 ； 3-sdk加固 ； 4-applet小程序加固 */
   PlatformType: number;
   /** 订单采购类型 1-免费试用 ；2-按年收费 ；3-按次收费 */
   OrderType: number;
-  /** 代表应用包名列表，值为单个包名（例如：“a.b.xxx”）或多个包名用逗号隔开(例如：“a.b.xxx,b.c.xxx”)。当安卓按年收费加固或安卓免费试用加固时，该字段要求非空，即PlatformType=1 并且 OrderType=2时，AppPkgNameList必传值。 */
+  /** 代表应用包名列表，值为单个包名（例如：“a.b.xxx”）或多个包名用逗号隔开(例如：“a.b.xxx,b.c.xxx”)。当android按年收费加固或android免费试用加固时，该字段要求非空，即PlatformType=1 并且 OrderType=2时，AppPkgNameList必传值。 */
   AppPkgNameList?: string;
 }
 
@@ -711,7 +711,7 @@ declare interface DescribeEncryptInstancesRequest {
   OrderField?: string;
   /** 升序（asc）还是降序（desc），默认：desc。 */
   OrderDirection?: string;
-  /** (条件过滤字段) 平台类型 1.android安卓加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
+  /** (条件过滤字段) 平台类型 1.android加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
   PlatformType?: number;
   /** (条件过滤字段) 订单采购类型 1-免费试用 2-按年收费 3-按次收费 */
   OrderType?: number;
@@ -723,9 +723,9 @@ declare interface DescribeEncryptInstancesRequest {
   OrderId?: string;
   /** (条件过滤字段) 查询与资源Id关联的任务 */
   ResourceId?: string;
-  /** (条件过滤字段) 安卓应用类型：安卓-apk; 安卓-aab; */
+  /** (条件过滤字段) 应用类型：android-apk; android-aab; */
   AppType?: string;
-  /** （条件过滤字段）安卓应用的包名 */
+  /** （条件过滤字段）应用的包名 */
   AppPkgName?: string;
   /** 加固结果，0：正在排队；1：加固成功；2：加固中；3：加固失败；5：重试；多记录查询时，根据查询结果进行检索使用。 */
   EncryptState?: number[];
@@ -741,7 +741,7 @@ declare interface DescribeEncryptInstancesResponse {
 }
 
 declare interface DescribeEncryptPlanRequest {
-  /** 平台类型 1.android安卓加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
+  /** 平台类型 1.android加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
   PlatformType: number;
   /** 订单采购类型 1-免费试用 2-按年收费 3-按次收费 */
   OrderType: number;
@@ -749,16 +749,16 @@ declare interface DescribeEncryptPlanRequest {
   EncryptOpType: number;
   /** 本次加固使用的资源id */
   ResourceId: string;
-  /** （条件过滤字段）安卓加固查询时，根据包名查询 */
+  /** （条件过滤字段）加固查询时，根据包名查询 */
   AppPkgName?: string;
-  /** （条件过滤字段）安卓加固查询时，根据应用格式查询，枚举值：“apk”、“aab” */
+  /** （条件过滤字段）加固查询时，根据应用格式查询，枚举值：“apk”、“aab” */
   AppType?: string;
 }
 
 declare interface DescribeEncryptPlanResponse {
   /** 平台类型整型值 */
   PlatformType?: number;
-  /** 平台类型描述 1.android安卓加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
+  /** 平台类型描述 1.android加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
   PlatformTypeDesc?: string;
   /** 1- 在线加固 2-输出工具加固 */
   EncryptOpType?: number;
@@ -770,7 +770,7 @@ declare interface DescribeEncryptPlanResponse {
   OrderTypeDesc?: string;
   /** 资源id */
   ResourceId?: string;
-  /** 上次安卓加固策略 */
+  /** 上次加固策略 */
   AndroidPlan?: AndroidPlan | null;
   /** 上次小程序加固策略 */
   AppletPlan?: AppletPlan | null;
@@ -791,7 +791,7 @@ declare interface DescribeOrderInstancesRequest {
   OrderField?: string;
   /** 升序（asc）还是降序（desc），默认：desc。 */
   OrderDirection?: string;
-  /** （条件过滤字段）平台类型 1.android安卓加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
+  /** （条件过滤字段）平台类型 1.android加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
   PlatformType?: number;
   /** （条件过滤字段）订单采购类型 1-免费试用 2-按年收费 3-按次收费 */
   OrderType?: number;
@@ -803,7 +803,7 @@ declare interface DescribeOrderInstancesRequest {
   OrderId?: string;
   /** （条件过滤字段）资源ID */
   ResourceId?: string;
-  /** （条件过滤字段）安卓包名，查询android安卓加固订单时使用 */
+  /** （条件过滤字段）包名，查询android加固订单时使用 */
   AppPkgName?: string;
 }
 

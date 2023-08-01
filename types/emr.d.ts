@@ -778,6 +778,8 @@ declare interface NodeHardwareInfo {
   DisableApiTermination?: boolean | null;
   /** 0表示老计费，1表示新计费 */
   TradeVersion?: number | null;
+  /** 各组件状态，Zookeeper:STARTED,ResourceManager:STARTED，STARTED已启动，STOPED已停止 */
+  ServicesStatus?: string | null;
 }
 
 /** 资源详情 */

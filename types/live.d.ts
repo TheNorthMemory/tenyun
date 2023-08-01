@@ -188,6 +188,8 @@ declare interface CommonMixInputParam {
   LayoutParams: CommonMixLayoutParams;
   /** 输入流裁剪参数。 */
   CropParams?: CommonMixCropParams;
+  /** 抠图参数。 */
+  PortraitSegmentParams?: MixPortraitSegmentParams;
 }
 
 /** 通用混流布局参数。 */
@@ -576,6 +578,12 @@ declare interface MPSResult {
   AiAsrResults?: string[] | null;
   /** 智能文字识别结果 */
   AiOcrResults?: string[] | null;
+}
+
+/** 混流抠图参数 */
+declare interface MixPortraitSegmentParams {
+  /** 抠图背景颜色，常用的颜色有：红色：0xcc0033。黄色：0xcc9900。绿色：0xcccc33。蓝色：0x99CCFF。黑色：0x000000。白色：0xFFFFFF。灰色：0x999999。 */
+  Color?: string;
 }
 
 /** 监控播放数据 */
@@ -1669,7 +1677,7 @@ declare interface CreateLiveRecordTemplateRequest {
   HlsSpecialParam?: HlsSpecialParam;
   /** Mp3录制参数，开启Mp3录制时设置。 */
   Mp3Param?: RecordParam;
-  /** 是否去除水印，类型为慢直播时此参数无效。 */
+  /** 是否去除水印，类型为慢直播时此参数无效。如果为false，则录制水印流或转码流；如果为true，则录制原始流。 */
   RemoveWatermark?: boolean;
   /** FLV 录制特殊参数。 */
   FlvSpecialParam?: FlvSpecialParam;
@@ -1677,7 +1685,7 @@ declare interface CreateLiveRecordTemplateRequest {
 
 declare interface CreateLiveRecordTemplateResponse {
   /** 模板Id。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

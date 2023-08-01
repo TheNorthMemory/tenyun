@@ -12,6 +12,14 @@ declare interface CCN {
   CcnId: string;
 }
 
+/** {"Clazz": "c1", // java类全路径"Level": "WARN" // 日志级别 TRACE，DEBUG、INFO、WARN、ERROR} */
+declare interface ClazzLevel {
+  /** java类全路径 */
+  Clazz: string | null;
+  /** 日志级别 TRACE，DEBUG、INFO、WARN、ERROR */
+  Level: string | null;
+}
+
 /** 描述用户创建的集群信息 */
 declare interface Cluster {
   /** 集群 ID */
@@ -196,6 +204,16 @@ declare interface DescribeTreeResourcesRsp {
   TotalCount?: number | null;
 }
 
+/** 作业配置 -- 专家模式的详细配置 */
+declare interface ExpertModeConfiguration {
+  /** Job graph */
+  JobGraph?: JobGraph | null;
+  /** Node configuration */
+  NodeConfig?: NodeConfig[] | null;
+  /** Slot sharing groups */
+  SlotSharingGroups?: SlotSharingGroup[] | null;
+}
+
 /** 查询作业列表时的过滤器 */
 declare interface Filter {
   /** 要过滤的字段 */
@@ -248,6 +266,40 @@ declare interface JobConfig {
   AutoRecover: number | null;
   /** 日志级别 */
   LogLevel: string | null;
+  /** 类日志级别 */
+  ClazzLevels?: ClazzLevel[] | null;
+  /** 是否开启专家模式 */
+  ExpertModeOn?: boolean | null;
+  /** 专家模式的配置 */
+  ExpertModeConfiguration?: ExpertModeConfiguration | null;
+}
+
+/** 作业运行图 */
+declare interface JobGraph {
+  /** 运行图的点集合 */
+  Nodes?: JobGraphNode[] | null;
+  /** 运行图的边集合 */
+  Edges?: JobGraphEdge[] | null;
+}
+
+/** Flink Job 运行图的边信息 */
+declare interface JobGraphEdge {
+  /** 边的起始节点ID */
+  Source: number | null;
+  /** 边的目标节点ID */
+  Target: number | null;
+}
+
+/** Flink Job 运行图的点信息 */
+declare interface JobGraphNode {
+  /** 节点ID */
+  Id: number | null;
+  /** 节点描述 */
+  Description: string | null;
+  /** 节点名称 */
+  Name: string | null;
+  /** 节点并行度 */
+  Parallelism: number | null;
 }
 
 /** 搜索启动日志时返回的作业实例 */
@@ -340,6 +392,20 @@ declare interface LogContent {
   PkgLogId: number;
   /** 日志所属的容器名 */
   ContainerName: string | null;
+}
+
+/** 专家模式 计算节点的配置信息 */
+declare interface NodeConfig {
+  /** Node ID */
+  Id: number | null;
+  /** Node parallelism */
+  Parallelism?: number | null;
+  /** Slot sharing group */
+  SlotSharingGroup?: string | null;
+  /** Configuration properties */
+  Configuration?: Property[] | null;
+  /** 节点的状态ttl配置, 多个用 ; 分割 */
+  StateTTL?: string | null;
 }
 
 /** 系统配置属性 */
@@ -558,6 +624,28 @@ declare interface Savepoint {
   PathStatus?: number | null;
 }
 
+/** SlotSharingGroup 描述 */
+declare interface SlotSharingGroup {
+  /** SlotSharingGroup的名字 */
+  Name: string | null;
+  /** SlotSharingGroup的规格 */
+  Spec: SlotSharingGroupSpec | null;
+  /** SlotSharingGroup的描述 */
+  Description?: string | null;
+}
+
+/** SlotSharingGroup的规格描述 */
+declare interface SlotSharingGroupSpec {
+  /** 适用的cpu */
+  CPU: number | null;
+  /** 默认为b, 支持单位有 b, kb, mb, gb */
+  HeapMemory: string | null;
+  /** 默认为b, 支持单位有 b, kb, mb, gb */
+  OffHeapMemory?: string | null;
+  /** 默认为b, 支持单位有 b, kb, mb, gb */
+  ManagedMemory?: string | null;
+}
+
 /** 停止作业的描述信息 */
 declare interface StopJobDescription {
   /** 作业Id */
@@ -759,11 +847,17 @@ declare interface CreateJobConfigRequest {
   LogLevel?: string;
   /** Oceanus 平台恢复作业开关 1:开启 -1: 关闭 */
   AutoRecover?: number;
+  /** 类日志级别 */
+  ClazzLevels?: ClazzLevel[];
+  /** 是否打开专家模式 */
+  ExpertModeOn?: boolean;
+  /** 专家模式的配置 */
+  ExpertModeConfiguration?: ExpertModeConfiguration;
 }
 
 declare interface CreateJobConfigResponse {
   /** 作业配置版本号 */
-  Version: number;
+  Version?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

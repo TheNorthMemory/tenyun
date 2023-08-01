@@ -2189,7 +2189,7 @@ declare interface DescribeApiAppsStatusRequest {
 
 declare interface DescribeApiAppsStatusResponse {
   /** 应用列表。 */
-  Result: ApiAppInfos | null;
+  Result?: ApiAppInfos | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2273,7 +2273,7 @@ declare interface DescribeApiKeysStatusRequest {
 
 declare interface DescribeApiKeysStatusResponse {
   /** 密钥列表。 */
-  Result: ApiKeysStatus | null;
+  Result?: ApiKeysStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2769,7 +2769,7 @@ declare interface DescribeServicesStatusRequest {
 
 declare interface DescribeServicesStatusResponse {
   /** 服务列表查询结果。 */
-  Result: ServicesStatus | null;
+  Result?: ServicesStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

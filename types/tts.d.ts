@@ -87,7 +87,7 @@ declare interface TextToVoiceRequest {
   Text: string;
   /** 一次请求对应一个SessionId，会原样返回，建议传入类似于uuid的字符串防止重复。 */
   SessionId: string;
-  /** 音量大小，范围：[0，10]，分别对应11个等级的音量，默认为0，代表正常音量。没有静音选项。 */
+  /** 音量大小，范围[0，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。 */
   Volume?: number;
   /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5 1.1 1.8等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
   Speed?: number;

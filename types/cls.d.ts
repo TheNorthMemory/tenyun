@@ -195,69 +195,73 @@ declare interface CompressInfo {
 /** 特殊采集规则配置信息 */
 declare interface ConfigExtraInfo {
   /** 采集规则扩展配置ID */
-  ConfigExtraId: string;
+  ConfigExtraId?: string;
   /** 采集规则名称 */
-  Name: string;
+  Name?: string;
   /** 日志主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 类型：container_stdout、container_file、host_file */
-  Type: string;
+  Type?: string;
   /** 节点文件配置信息 */
-  HostFile: HostFileInfo | null;
+  HostFile?: HostFileInfo | null;
   /** 容器文件路径信息 */
-  ContainerFile: ContainerFileInfo | null;
+  ContainerFile?: ContainerFileInfo | null;
   /** 容器标准输出信息 */
-  ContainerStdout: ContainerStdoutInfo | null;
+  ContainerStdout?: ContainerStdoutInfo | null;
   /** 日志格式化方式 */
-  LogFormat: string | null;
+  LogFormat?: string | null;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log */
-  LogType: string | null;
+  LogType?: string | null;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
-  ExtractRule: ExtractRuleInfo | null;
+  ExtractRule?: ExtractRuleInfo | null;
   /** 采集黑名单路径列表 */
-  ExcludePaths: ExcludePathInfo[] | null;
+  ExcludePaths?: ExcludePathInfo[] | null;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 用户自定义解析字符串 */
-  UserDefineRule: string | null;
+  UserDefineRule?: string | null;
   /** 机器组ID */
-  GroupId: string;
+  GroupId?: string;
   /** 自建采集配置标 */
-  ConfigFlag: string | null;
+  ConfigFlag?: string | null;
   /** 日志集ID */
-  LogsetId: string | null;
+  LogsetId?: string | null;
   /** 日志集name */
-  LogsetName: string | null;
+  LogsetName?: string | null;
   /** 日志主题name */
-  TopicName: string | null;
+  TopicName?: string | null;
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
+  AdvancedConfig?: string | null;
 }
 
 /** 采集规则配置信息 */
 declare interface ConfigInfo {
   /** 采集规则配置ID */
-  ConfigId: string;
+  ConfigId?: string;
   /** 采集规则配置名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 日志格式化方式 */
-  LogFormat: string | null;
+  LogFormat?: string | null;
   /** 日志采集路径 */
-  Path: string | null;
+  Path?: string | null;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log */
-  LogType: string | null;
+  LogType?: string | null;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
-  ExtractRule: ExtractRuleInfo | null;
+  ExtractRule?: ExtractRuleInfo | null;
   /** 采集黑名单路径列表 */
-  ExcludePaths: ExcludePathInfo[] | null;
+  ExcludePaths?: ExcludePathInfo[] | null;
   /** 采集配置所属日志主题ID即TopicId */
-  Output: string;
+  Output?: string;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 用户自定义解析字符串 */
-  UserDefineRule: string | null;
+  UserDefineRule?: string | null;
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
+  AdvancedConfig?: string | null;
 }
 
 /** 投递任务出入参 Content */
@@ -1199,7 +1203,7 @@ declare interface CheckRechargeKafkaServerResponse {
 }
 
 declare interface CloseKafkaConsumerRequest {
-  /** CLS对应的topic标识 */
+  /** 日志主题ID */
   FromTopicId: string;
 }
 
@@ -1293,6 +1297,8 @@ declare interface CreateConfigExtraRequest {
   GroupId?: string;
   /** 绑定的机器组id列表 */
   GroupIds?: string[];
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
+  AdvancedConfig?: string;
 }
 
 declare interface CreateConfigExtraResponse {
@@ -1317,7 +1323,7 @@ declare interface CreateConfigRequest {
   ExcludePaths?: ExcludePathInfo[];
   /** 用户自定义采集规则，Json格式序列化的字符串 */
   UserDefineRule?: string;
-  /** 高级采集配置 */
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
   AdvancedConfig?: string;
 }
 
@@ -2010,6 +2016,22 @@ declare interface DescribeIndexResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKafkaConsumerRequest {
+  /** 日志主题ID */
+  FromTopicId: string;
+}
+
+declare interface DescribeKafkaConsumerResponse {
+  /** Kafka协议消费是否打开 */
+  Status?: boolean;
+  /** KafkaConsumer 消费时使用的Topic参数 */
+  TopicID?: string;
+  /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
+  Compression?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeKafkaRechargesRequest {
   /** 日志主题 ID */
   TopicId: string;
@@ -2375,6 +2397,8 @@ declare interface ModifyConfigExtraRequest {
   LogsetName?: string;
   /** 日志主题name */
   TopicName?: string;
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
+  AdvancedConfig?: string;
 }
 
 declare interface ModifyConfigExtraResponse {
@@ -2399,6 +2423,8 @@ declare interface ModifyConfigRequest {
   Output?: string;
   /** 用户自定义解析字符串，Json格式序列化的字符串 */
   UserDefineRule?: string;
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
+  AdvancedConfig?: string;
 }
 
 declare interface ModifyConfigResponse {
@@ -2474,6 +2500,18 @@ declare interface ModifyIndexRequest {
 }
 
 declare interface ModifyIndexResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyKafkaConsumerRequest {
+  /** 日志主题ID */
+  FromTopicId: string;
+  /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
+  Compression?: number;
+}
+
+declare interface ModifyKafkaConsumerResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2641,7 +2679,7 @@ declare interface ModifyTopicResponse {
 }
 
 declare interface OpenKafkaConsumerRequest {
-  /** CLS控制台创建的TopicId */
+  /** 日志主题ID */
   FromTopicId: string;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression?: number;
@@ -2650,7 +2688,7 @@ declare interface OpenKafkaConsumerRequest {
 }
 
 declare interface OpenKafkaConsumerResponse {
-  /** 待消费TopicId */
+  /** KafkaConsumer 消费时使用的Topic参数 */
   TopicID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2877,6 +2915,8 @@ declare interface Cls {
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
   /** 获取索引配置信息 {@link DescribeIndexRequest} {@link DescribeIndexResponse} */
   DescribeIndex(data: DescribeIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexResponse>;
+  /** 获取Kafka协议消费信息 {@link DescribeKafkaConsumerRequest} {@link DescribeKafkaConsumerResponse} */
+  DescribeKafkaConsumer(data: DescribeKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerResponse>;
   /** 获取Kafka数据订阅任务列表 {@link DescribeKafkaRechargesRequest} {@link DescribeKafkaRechargesResponse} */
   DescribeKafkaRecharges(data: DescribeKafkaRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaRechargesResponse>;
   /** 上下文检索 {@link DescribeLogContextRequest} {@link DescribeLogContextResponse} */
@@ -2921,6 +2961,8 @@ declare interface Cls {
   ModifyDataTransform(data: ModifyDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataTransformResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
+  /** 修改Kafka协议消费信息 {@link ModifyKafkaConsumerRequest} {@link ModifyKafkaConsumerResponse} */
+  ModifyKafkaConsumer(data: ModifyKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaConsumerResponse>;
   /** 修改Kafka数据订阅任务 {@link ModifyKafkaRechargeRequest} {@link ModifyKafkaRechargeResponse} */
   ModifyKafkaRecharge(data: ModifyKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaRechargeResponse>;
   /** 修改日志集 {@link ModifyLogsetRequest} {@link ModifyLogsetResponse} */

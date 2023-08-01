@@ -1225,15 +1225,15 @@ declare interface AudioTemplateInfo {
 /** 音频流配置参数 */
 declare interface AudioTemplateInfoForUpdate {
   /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac；libmp3lame。 */
-  Codec?: string;
+  Codec?: string | null;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
-  Bitrate?: number;
+  Bitrate?: number | null;
   /** 音频流的采样率，可选值：320004410048000单位：Hz。 */
-  SampleRate?: number;
+  SampleRate?: number | null;
   /** 音频通道方式，可选值：1：单通道2：双通道6：立体声当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。 */
-  AudioChannel?: number;
+  AudioChannel?: number | null;
   /** 指定输出要保留的音频轨道。默认是全部保留源的。 */
-  StreamSelects?: number[];
+  StreamSelects?: number[] | null;
 }
 
 /** AWS S3 文件是上传触发器。 */
@@ -3138,6 +3138,8 @@ declare interface OverrideTranscodeParameter {
   SubtitleTemplate?: SubtitleTemplate | null;
   /** 外挂音轨参数。 */
   AddonAudioStream?: MediaInputInfo[] | null;
+  /** 转码扩展字段。 */
+  StdExtInfo?: string | null;
 }
 
 /** 语音涉敏任务控制参数 */
@@ -3485,15 +3487,15 @@ declare interface ResilientStreamConf {
 /** AWS S3存储输入 */
 declare interface S3InputInfo {
   /** S3 bucket。 */
-  S3Bucket: string;
+  S3Bucket: string | null;
   /** S3 bucket 对应的区域，目前支持： us-east-1 eu-west-3 */
-  S3Region: string;
+  S3Region: string | null;
   /** S3 bucket 中的媒体资源路径。 */
-  S3Object: string;
+  S3Object: string | null;
   /** AWS 内网访问 媒体资源的秘钥id。 */
-  S3SecretId?: string;
+  S3SecretId?: string | null;
   /** AWS 内网访问 媒体资源的秘钥key。 */
-  S3SecretKey?: string;
+  S3SecretKey?: string | null;
 }
 
 /** AWS S3 输出位置 */
@@ -3775,17 +3777,17 @@ declare interface StreamLinkRegionInfo {
 /** 字幕流配置参数。 */
 declare interface SubtitleTemplate {
   /** 要压制到视频中的字幕文件地址。 */
-  Path?: string;
+  Path?: string | null;
   /** 指定要压制到视频中的字幕轨道，如果有指定Path，则Path 优先级更高。Path 和 StreamIndex 至少指定一个。 */
-  StreamIndex?: number;
+  StreamIndex?: number | null;
   /** 字体类型，hei.ttf：黑体song.ttf：宋体simkai.ttf：楷体arial.ttf：仅支持英文默认hei.ttf */
-  FontType?: string;
+  FontType?: string | null;
   /** 字体大小，格式：Npx，N 为数值，不指定则以字幕文件中为准。 */
-  FontSize?: string;
+  FontSize?: string | null;
   /** 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色） */
-  FontColor?: string;
+  FontColor?: string | null;
   /** 文字透明度，取值范围：(0, 1]0：完全透明1：完全不透明默认值：1。 */
-  FontAlpha?: number;
+  FontAlpha?: number | null;
 }
 
 /** 超分配置 */
@@ -3825,9 +3827,9 @@ declare interface TEHDConfig {
 /** 极速高清参数配置。 */
 declare interface TEHDConfigForUpdate {
   /** 极速高清类型，可选值：TEHD-100：极速高清-100（视频极速高清）。TEHD-200：极速高清-200（音频极速高清）。不填代表不修改。 */
-  Type?: string;
+  Type?: string | null;
   /** 视频码率上限，不填代表不修改。 */
-  MaxVideoBitrate?: number;
+  MaxVideoBitrate?: number | null;
 }
 
 /** 智能标签任务控制参数 */
@@ -4209,25 +4211,25 @@ declare interface VideoTemplateInfo {
 /** 视频流配置参数 */
 declare interface VideoTemplateInfoForUpdate {
   /** 视频流的编码格式，可选值：libx264：H.264 编码libx265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
-  Codec?: string;
+  Codec?: string | null;
   /** 视频帧率，取值范围：[0, 120]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
-  Fps?: number;
+  Fps?: number | null;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
-  Bitrate?: number;
+  Bitrate?: number | null;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。注意：自适应模式时，Width不能小于Height。 */
-  ResolutionAdaptive?: string;
+  ResolutionAdaptive?: string | null;
   /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。 */
-  Width?: number;
+  Width?: number | null;
   /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。 */
-  Height?: number;
+  Height?: number | null;
   /** 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。当填 0 时，系统将自动设置 gop 长度。 */
-  Gop?: number;
+  Gop?: number | null;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。 */
-  FillType?: string;
+  FillType?: string | null;
   /** 视频恒定码率控制因子。取值范围为[0, 51]，填0表示禁用该参数。如果没有特殊需求，不建议指定该参数。 */
-  Vcrf?: number;
+  Vcrf?: number | null;
   /** 内容自适应编码。可选值：0：不开启1：开启默认值: 0. 当开启该参数时，将会自适应生成多个不同分辨率，不同码率的码流， 其中VideoTemplate的宽和高为多个码流中的最大分辨率，VideoTemplate中的码率为多个码流中的最高码率， VideoTemplate中的vcrf为多个码流中的最高质量。 当不设置分辨率、码率和vcrf时， ContentAdaptStream 参数生成的最高分辨率为视频源的分辨率，视频质量为接近vmaf95分。 若要开启该参数或了解计费细节, 请联系您的腾讯云商务。 */
-  ContentAdaptStream?: number;
+  ContentAdaptStream?: number | null;
 }
 
 /** 媒体处理任务中的水印参数类型 */

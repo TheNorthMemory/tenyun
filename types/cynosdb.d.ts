@@ -221,23 +221,29 @@ declare interface BinlogItem {
 /** 集群实例信息 */
 declare interface ClusterInstanceDetail {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 引擎类型 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例状态 */
-  InstanceStatus: string;
+  InstanceStatus?: string;
   /** 实例状态描述 */
-  InstanceStatusDesc: string;
+  InstanceStatusDesc?: string;
   /** cpu核数 */
-  InstanceCpu: number;
+  InstanceCpu?: number;
   /** 内存 */
-  InstanceMemory: number;
+  InstanceMemory?: number;
   /** 硬盘 */
-  InstanceStorage: number;
+  InstanceStorage?: number;
   /** 实例角色 */
-  InstanceRole: string;
+  InstanceRole?: string;
+  /** 执行开始时间(距离0点的秒数) */
+  MaintainStartTime?: number | null;
+  /** 持续的时间(单位：秒) */
+  MaintainDuration?: number | null;
+  /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
+  MaintainWeekDays?: string[] | null;
 }
 
 /** 参数修改记录 */
@@ -1295,9 +1301,9 @@ declare interface RollbackTable {
 /** 回档表信息 */
 declare interface RollbackTableInfo {
   /** 旧表名称 */
-  OldTable: string;
+  OldTable: string | null;
   /** 新表名称 */
-  NewTable: string;
+  NewTable: string | null;
 }
 
 /** 可回档的时间范围 */
@@ -2113,13 +2119,15 @@ declare interface DescribeAccountsRequest {
   Limit?: number;
   /** 偏移量 */
   Offset?: number;
+  /** 模糊匹配关键字(同时匹配AccountName和AccountHost，返回并集结果，支持正则) */
+  AccountRegular?: string;
 }
 
 declare interface DescribeAccountsResponse {
   /** 数据库账号列表 */
-  AccountSet: Account[] | null;
+  AccountSet?: Account[] | null;
   /** 账号总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2355,7 +2363,7 @@ declare interface DescribeClusterDetailRequest {
 
 declare interface DescribeClusterDetailResponse {
   /** 集群详细信息 */
-  Detail: CynosdbClusterDetail;
+  Detail?: CynosdbClusterDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
