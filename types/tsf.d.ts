@@ -2339,65 +2339,65 @@ declare interface ServiceSetting {
 /** 服务统计结果 */
 declare interface ServiceStatisticsResult {
   /** 请求模版路径:type为接口时返回，服务时不返回 */
-  Path: string | null;
+  Path?: string | null;
   /** 请求方法:type为接口时返回，服务时不返回 */
-  Method: string | null;
+  Method?: string | null;
   /** 微服务Id */
-  MicroserviceId: string;
+  MicroserviceId?: string;
   /** 微服务名称 */
-  MicroserviceName: string;
+  MicroserviceName?: string;
   /** 请求数 */
-  RequestCount: number;
+  RequestCount?: number;
   /** 请求错误率，不带百分号 */
-  ErrorRate: number;
+  ErrorRate?: number;
   /** 平均响应耗时ms */
-  AvgTimeConsuming: number;
+  AvgTimeConsuming?: number;
   /** 响应耗时曲线 */
-  MetricDataCurves: MetricDataCurve[];
+  MetricDataCurves?: MetricDataCurve[];
   /** 实例id */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 实例name */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 部署组id */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 部署组name */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 部署组类型 */
-  ClusterType: string | null;
+  ClusterType?: string | null;
   /** 部署组是否存在 */
-  GroupExist: number | null;
+  GroupExist?: number | null;
   /** 实例是否存在，仅限cvm */
-  InstanceExist: number | null;
+  InstanceExist?: number | null;
   /** 应用id */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 微服务类型 */
-  MicroserviceType: string | null;
+  MicroserviceType?: string | null;
   /** cpu使用率 */
-  CpuPercent: number | null;
+  CpuPercent?: number | null;
   /** 已用堆大小,单位KB */
-  HeapUsed: number | null;
+  HeapUsed?: number | null;
   /** 数据库 */
-  DbName: string | null;
+  DbName?: string | null;
   /** Script值 */
-  Script: string | null;
+  Script?: string | null;
   /** 数据库类型 */
-  DbType: string | null;
+  DbType?: string | null;
   /** Apdex值 */
-  Apdex: number | null;
+  Apdex?: number | null;
   /** Qps值 */
-  Qps: number | null;
+  Qps?: number | null;
   /** 实例在线数 */
-  InstanceOnlineCount: number | null;
+  InstanceOnlineCount?: number | null;
   /** 实例总数 */
-  InstanceTotalCount: number | null;
+  InstanceTotalCount?: number | null;
   /** normal/error */
-  Status: string | null;
+  Status?: string | null;
   /** normal/warn/error */
-  ErrorRateLevel: string | null;
+  ErrorRateLevel?: string | null;
   /** normal/warn/error */
-  AvgTimeConsumingLevel: string | null;
+  AvgTimeConsumingLevel?: string | null;
   /** normal/warn/error */
-  ApdexLevel: string | null;
+  ApdexLevel?: string | null;
 }
 
 /** 服务统计结果集 */
@@ -3022,6 +3022,8 @@ declare interface VmGroup {
   WarmupSetting?: WarmupSetting | null;
   /** Envoy网关配置 */
   GatewayConfig?: GatewayConfig | null;
+  /** 批次是否开启健康检查 */
+  EnableBatchHealthCheck?: boolean | null;
 }
 
 /** 虚拟机部署组其他字段 */
@@ -4412,11 +4414,13 @@ declare interface DeployGroupRequest {
   AgentProfileList?: AgentProfile[];
   /** 预热参数配置 */
   WarmupSetting?: WarmupSetting;
+  /** 开启分批健康检查 */
+  EnableBatchHealthCheck?: boolean;
 }
 
 declare interface DeployGroupResponse {
   /** 任务ID */
-  Result: TaskId | null;
+  Result?: TaskId | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

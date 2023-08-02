@@ -287,7 +287,7 @@ declare interface K8SLabel {
 /** Kubernetes污点容忍，使用时请注意您的Kubernetes版本所支持的字段情况。可参考 https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/taint-and-toleration/ */
 declare interface K8SToleration {
   /** 匹配的污点名 */
-  Key: string;
+  Key?: string;
   /** 匹配方式，默认值为: Equal */
   Operator?: string | null;
   /** 执行策略 */

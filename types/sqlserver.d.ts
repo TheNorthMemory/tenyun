@@ -472,6 +472,14 @@ declare interface DealInfo {
   InstanceChargeType: string;
 }
 
+/** 订单号对应的资源ID列表 */
+declare interface DealInstance {
+  /** 实例ID */
+  InstanceId?: string[];
+  /** 订单号 */
+  DealName?: string;
+}
+
 /** 设置实例扩展事件阈值 */
 declare interface EventConfig {
   /** 事件类型，slow-设置慢SQL阈值，blocked-设置阻塞、死锁阈值 */
@@ -2090,6 +2098,18 @@ declare interface DescribeIncrementalMigrationResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceByOrdersRequest {
+  /** 订单号集合 */
+  DealNames: string[];
+}
+
+declare interface DescribeInstanceByOrdersResponse {
+  /** 资源ID集合 */
+  DealInstance?: DealInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceParamRecordsRequest {
   /** 实例 ID，格式如：mssql-dj5i29c5n，与云数据库控制台页面中显示的实例 ID 相同，可使用 DescribeDBInstances 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
@@ -3375,6 +3395,8 @@ declare interface Sqlserver {
   DescribeFlowStatus(data: DescribeFlowStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowStatusResponse>;
   /** 查询增量备份导入任务 {@link DescribeIncrementalMigrationRequest} {@link DescribeIncrementalMigrationResponse} */
   DescribeIncrementalMigration(data: DescribeIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIncrementalMigrationResponse>;
+  /** 根据订单号查询对应的实例ID {@link DescribeInstanceByOrdersRequest} {@link DescribeInstanceByOrdersResponse} */
+  DescribeInstanceByOrders(data: DescribeInstanceByOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByOrdersResponse>;
   /** 查询实例参数修改历史 {@link DescribeInstanceParamRecordsRequest} {@link DescribeInstanceParamRecordsResponse} */
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的可设置参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */

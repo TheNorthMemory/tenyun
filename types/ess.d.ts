@@ -438,7 +438,7 @@ declare interface FlowBrief {
 
 /** 创建流程的签署方信息 */
 declare interface FlowCreateApprover {
-  /** 参与者类型：0：企业1：个人3：企业静默签署注：类型为3（企业静默签署）时，会默认完成该签署方的签署。静默签署仅进行盖章操作，不能是手写签名。 */
+  /** 参与者类型：0：企业1：个人3：企业自动签署注：类型为3（企业自动签署）时，会自动完成该签署方的签署。自动签署仅进行盖章操作，不能是手写签名。本方企业自动签署的签署人会默认是当前的发起人他方企业自动签署的签署人是自动签模板的他方企业授权人 */
   ApproverType: number;
   /** 签署人企业名称当approverType=1 或 approverType=3时，必须指定 */
   OrganizationName?: string;
@@ -554,7 +554,7 @@ declare interface FlowGroupOptions {
   OtherApproverNotifyType?: string;
 }
 
-/** 电子文档的控件填充信息。按照控件类型进行相应的填充。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
+/** 电子文档的控件填充信息。按照控件类型进行相应的填充。当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "文本内容"}```当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "多行文本内容"}```当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "true"}```当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"}```当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"}```当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "选择的内容"}```当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "2023年01月01日"}```当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；```FormFiled输入示例：{ "ComponentId": "componentId1", "ComponentValue": "广东省深圳市福田区"}```【数据表格传参说明】当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
 declare interface FormField {
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
   ComponentValue: string;
@@ -1329,7 +1329,7 @@ declare interface CreateFlowRequest {
   Operator: UserInfo;
   /** 签署流程名称,最大长度200个字符 */
   FlowName: string;
-  /** 签署流程参与者信息，最大限制50方 */
+  /** 签署流程参与者信息，最大限制50方注意 approver中的顺序需要和模板中的顺序保持一致， 否则会导致模板中配置的信息无效。 */
   Approvers: FlowCreateApprover[];
   /** 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符 */
   FlowType?: string;
@@ -1481,9 +1481,9 @@ declare interface CreateMultiFlowSignQRCodeRequest {
   FlowEffectiveDay?: number;
   /** 二维码有效天数 默认7天 最高设置不超过90天 */
   QrEffectiveDay?: number;
-  /** 限制二维码用户条件 */
+  /** 指定的签署人信息指定后，则只允许指定的签署人扫码签署 */
   Restrictions?: ApproverRestriction[];
-  /** 用户自定义字段，回调的时候会进行透传，长度需要小于20480 */
+  /** 用户自定义字段回调的时候会进行透传，长度需要小于20480 */
   UserData?: string;
   /** 回调地址,最大长度1000字符串回调时机：用户通过签署二维码发起签署流程时，企业额度不足导致失败 */
   CallbackUrl?: string;
@@ -1522,6 +1522,24 @@ declare interface CreateOrganizationBatchSignUrlResponse {
   SignUrl?: string;
   /** 链接过期时间戳 */
   ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePersonAuthCertificateImageRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 个人用户名称 */
+  UserName: string;
+  /** 身份证件类型取值：ID_CARD 身居民身份证PASSPORT 护照HONGKONG_AND_MACAO 港澳居民来往内地通行证FOREIGN_ID_CARD 外国人永久居留身份证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  IdCardType: string;
+  /** 身份证件号码 */
+  IdCardNumber: string;
+}
+
+declare interface CreatePersonAuthCertificateImageResponse {
+  /** 个人用户证明证书的下载链接 */
+  AuthCertUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2393,6 +2411,8 @@ declare interface Ess {
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
+  /** 创建个人用户证书证明图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */
+  CreatePersonAuthCertificateImage(data: CreatePersonAuthCertificateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonAuthCertificateImageResponse>;
   /** 获取发起合同web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
   /** 创建导入处方单个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */

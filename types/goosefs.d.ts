@@ -2,6 +2,26 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 客户侧集群管理节点信息 */
+declare interface ClientClusterManagerNodeInfo {
+  /** 客户端节点IP */
+  NodeIp: string;
+  /** 节点Instance Id */
+  NodeInstanceId: string;
+  /** 初始密码 */
+  InitialPassword: string;
+}
+
+/** 客户端节点属性 */
+declare interface ClientNodeAttribute {
+  /** 客户端节点IP */
+  ClientNodeIp: string;
+  /** 客户端节点服务状态, Active(运行中), Adding(添加中), Destroying(销毁中), Down(已停止) */
+  Status: string;
+  /** 客户端节点类型，extend(扩展节点)，manager(管理节点) */
+  ClientType: string;
+}
+
 /** 查询Client Token */
 declare interface ClientToken {
   /** 节点 IP */
@@ -26,12 +46,156 @@ declare interface ClusterRole {
   DirectoryList?: string[];
 }
 
+/** 文件系统属性 */
+declare interface FSAttribute {
+  /** 文件系统类型, 可填goosefs和goosefsx */
+  Type: string;
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** GooseFSx文件系统属性 */
+  GooseFSxAttribute: GooseFSxAttribute | null;
+  /** 文件系统状态 ACTIVE(运行中), CREATING(创建中), DESTROYING(销毁中), FAIL(创建失败),EXPANDING(扩容中),PROBING(容灾中) */
+  Status: string;
+  /** 文件系统名 */
+  Name: string;
+  /** 文件系统备注描述 */
+  Description: string;
+  /** vpc ID */
+  VpcId: string;
+  /** 子网ID */
+  SubnetId: string;
+  /** 子网所在的可用区 */
+  Zone: string;
+  /** Tag数组 */
+  Tag: Tag[] | null;
+  /** 更新属性时间 */
+  ModifyTime: string;
+}
+
+/** GooseFSx文件系统的属性 */
+declare interface GooseFSxAttribute {
+  /** GooseFSx的型号 */
+  Model: string;
+  /** 容量单位是GB, 比如4608(4.5TB) */
+  Capacity: number;
+  /** 要关联映射的bucket列表 */
+  MappedBucketList: MappedBucket[];
+  /** 客户侧管理节点信息 */
+  ClientManagerNodeList: ClientClusterManagerNodeInfo[];
+}
+
+/** GooseFSx创建时候的属性 */
+declare interface GooseFSxBuildElement {
+  /** GooseFSx的型号 */
+  Model: string;
+  /** 容量单位是GB, 比如4608(4.5TB) */
+  Capacity: number;
+  /** 要关联映射的bucket列表 */
+  MappedBucketList: MappedBucket[];
+}
+
+/** 添加删除客户端节点列表 */
+declare interface LinuxNodeAttribute {
+  /** cvmId */
+  InstanceId?: string;
+  /** 节点所属vpcid */
+  VpcId?: string | null;
+  /** 节点所属子网id */
+  SubnetId?: string | null;
+  /** linux客户端节点地址 */
+  LinuxClientNodeIp?: string | null;
+}
+
+/** 关联的对象Bucket, 并将其映射到文件系统某个路径上 */
+declare interface MappedBucket {
+  /** 对象存储Bucket名 */
+  BucketName: string;
+  /** 映射到的文件系统路径, 默认为/ */
+  FileSystemPath: string;
+  /** 数据流动的自动策略, 包含加载与沉降。策略可以是多种的组合按需加载(OnDemandImport)自动加载元数据(AutoImportMeta)自动加载数据(AutoImportData)周期加载(PeriodImport)周期沉降(PeriodExport)立即沉降(ImmediateExport) */
+  DataRepositoryTaskAutoStrategy?: string[] | null;
+  /** 绑定bucket的数据流动策略ID */
+  RuleId?: string | null;
+  /** 规则备注与描述 */
+  RuleDescription?: string | null;
+}
+
 /** 角色凭证 */
 declare interface RoleToken {
   /** 角色名 */
   RoleName?: string;
   /** 用于goosefs client/sdk等 */
   Token?: string | null;
+}
+
+/** vpc子网信息 */
+declare interface SubnetInfo {
+  /** vpc id */
+  VpcId: string | null;
+  /** 子网ID */
+  SubnetId?: string | null;
+}
+
+/** 文件系统关联的标签 */
+declare interface Tag {
+  /** 标签键 */
+  Key: string;
+  /** 标签值 */
+  Value: string;
+}
+
+declare interface AddCrossVpcSubnetSupportForClientNodeRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 子网信息 */
+  SubnetInfo: SubnetInfo;
+}
+
+declare interface AddCrossVpcSubnetSupportForClientNodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AttachFileSystemBucketRequest {
+  /** 无 */
+  FileSystemId: string;
+  /** 关联新Bucket */
+  Bucket: MappedBucket;
+}
+
+declare interface AttachFileSystemBucketResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchAddClientNodesRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 添加客户端节点列表 */
+  ClientNodes: LinuxNodeAttribute[];
+  /** 是否单集群默认是false */
+  SingleClusterFlag?: boolean;
+}
+
+declare interface BatchAddClientNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchDeleteClientNodesRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** 删除的客户端节点列表 */
+  ClientNodes: LinuxNodeAttribute[];
+  /** 是否单集群，默认是false */
+  SingleClusterFlag?: boolean;
+}
+
+declare interface BatchDeleteClientNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateDataRepositoryTaskRequest {
@@ -54,6 +218,64 @@ declare interface CreateDataRepositoryTaskRequest {
 declare interface CreateDataRepositoryTaskResponse {
   /** 任务ID */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFileSystemRequest {
+  /** 文件系统类型, 可填goosefs和goosefsx */
+  Type: string;
+  /** 文件系统名 */
+  Name: string;
+  /** 文件系统备注描述 */
+  Description: string;
+  /** vpc网络ID */
+  VpcId: string;
+  /** 子网ID */
+  SubnetId: string;
+  /** 子网所在的可用区 */
+  Zone: string;
+  /** 文件系统关联的tag */
+  Tag?: Tag[];
+  /** GooseFSx构建时要传递的参数 */
+  GooseFSxBuildElements?: GooseFSxBuildElement;
+}
+
+declare interface CreateFileSystemResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCrossVpcSubnetSupportForClientNodeRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 子网信息 */
+  SubnetInfo: SubnetInfo;
+}
+
+declare interface DeleteCrossVpcSubnetSupportForClientNodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFileSystemRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface DeleteFileSystemResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClientNodesRequest {
+  /** 文件系统Id */
+  FileSystemId: string;
+}
+
+declare interface DescribeClientNodesResponse {
+  /** 客户端节点数组 */
+  ClientNodes: ClientNodeAttribute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -118,11 +340,119 @@ declare interface DescribeDataRepositoryTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFileSystemBucketsRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface DescribeFileSystemBucketsResponse {
+  /** bucket列表 */
+  BucketList?: MappedBucket[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFileSystemsRequest {
+  /** 偏移量 */
+  Offset: number;
+  /** 每页的数量 */
+  Limit: number;
+}
+
+declare interface DescribeFileSystemsResponse {
+  /** 文件系统列表 */
+  FSAttributeList: FSAttribute[];
+  /** 总共的文件系统数量 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DetachFileSystemBucketRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 要解绑的Bucket名 */
+  BucketName: string;
+}
+
+declare interface DetachFileSystemBucketResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExpandCapacityRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 新增扩容的系统容量 */
+  ExpandedCapacity: number;
+}
+
+declare interface ExpandCapacityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDataRepositoryBandwidthRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 带宽, 单位MB/S */
+  Bandwidth: number;
+}
+
+declare interface ModifyDataRepositoryBandwidthResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QueryCrossVpcSubnetSupportForClientNodeRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface QueryCrossVpcSubnetSupportForClientNodeResponse {
+  /** 支持的子网信息集合 */
+  SubnetInfoCollection?: SubnetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QueryDataRepositoryBandwidthRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface QueryDataRepositoryBandwidthResponse {
+  /** 数据流动带宽, 单位MB/s */
+  Bandwidth?: number;
+  /** 带宽状态。1:待扩容;2:运行中;3:扩容中 */
+  BandwidthStatus?: number;
+  /** 能设置的最小带宽, 单位MB/s */
+  MinBandwidth?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Goosefs 数据加速器 GooseFS} */
 declare interface Goosefs {
   (): Versions;
+  /** 为客户端节点添加跨vpc或子网访问能力 {@link AddCrossVpcSubnetSupportForClientNodeRequest} {@link AddCrossVpcSubnetSupportForClientNodeResponse} */
+  AddCrossVpcSubnetSupportForClientNode(data: AddCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddCrossVpcSubnetSupportForClientNodeResponse>;
+  /** 为文件系统关联Bucket {@link AttachFileSystemBucketRequest} {@link AttachFileSystemBucketResponse} */
+  AttachFileSystemBucket(data: AttachFileSystemBucketRequest, config?: AxiosRequestConfig): AxiosPromise<AttachFileSystemBucketResponse>;
+  /** 批量添加客户端节点 {@link BatchAddClientNodesRequest} {@link BatchAddClientNodesResponse} */
+  BatchAddClientNodes(data: BatchAddClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchAddClientNodesResponse>;
+  /** 批量删除客户端节点 {@link BatchDeleteClientNodesRequest} {@link BatchDeleteClientNodesResponse} */
+  BatchDeleteClientNodes(data: BatchDeleteClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteClientNodesResponse>;
   /** 创建数据流通任务 {@link CreateDataRepositoryTaskRequest} {@link CreateDataRepositoryTaskResponse} */
   CreateDataRepositoryTask(data: CreateDataRepositoryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataRepositoryTaskResponse>;
+  /** 创建文件系统 {@link CreateFileSystemRequest} {@link CreateFileSystemResponse} */
+  CreateFileSystem(data: CreateFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileSystemResponse>;
+  /** 为客户端节点删除跨vpc子网访问能力 {@link DeleteCrossVpcSubnetSupportForClientNodeRequest} {@link DeleteCrossVpcSubnetSupportForClientNodeResponse} */
+  DeleteCrossVpcSubnetSupportForClientNode(data: DeleteCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCrossVpcSubnetSupportForClientNodeResponse>;
+  /** 删除文件系统 {@link DeleteFileSystemRequest} {@link DeleteFileSystemResponse} */
+  DeleteFileSystem(data: DeleteFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileSystemResponse>;
+  /** 列出集群中所有的客户端节点 {@link DescribeClientNodesRequest} {@link DescribeClientNodesResponse} */
+  DescribeClientNodes(data: DescribeClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientNodesResponse>;
   /** 查询GooseFS集群客户端凭证 {@link DescribeClusterClientTokenRequest} {@link DescribeClusterClientTokenResponse} */
   DescribeClusterClientToken(data: DescribeClusterClientTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterClientTokenResponse>;
   /** 查询GooseFS集群角色凭证 {@link DescribeClusterRoleTokenRequest} {@link DescribeClusterRoleTokenResponse} */
@@ -131,6 +461,20 @@ declare interface Goosefs {
   DescribeClusterRoles(data: DescribeClusterRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRolesResponse>;
   /** 获取数据流通任务实时状态 {@link DescribeDataRepositoryTaskStatusRequest} {@link DescribeDataRepositoryTaskStatusResponse} */
   DescribeDataRepositoryTaskStatus(data: DescribeDataRepositoryTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRepositoryTaskStatusResponse>;
+  /** 罗列文件系统关联的Bucket映射 {@link DescribeFileSystemBucketsRequest} {@link DescribeFileSystemBucketsResponse} */
+  DescribeFileSystemBuckets(data: DescribeFileSystemBucketsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemBucketsResponse>;
+  /** 列出文件系统 {@link DescribeFileSystemsRequest} {@link DescribeFileSystemsResponse} */
+  DescribeFileSystems(data: DescribeFileSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemsResponse>;
+  /** 解绑文件系统与Bucket的映射 {@link DetachFileSystemBucketRequest} {@link DetachFileSystemBucketResponse} */
+  DetachFileSystemBucket(data: DetachFileSystemBucketRequest, config?: AxiosRequestConfig): AxiosPromise<DetachFileSystemBucketResponse>;
+  /** 扩展文件系统容量 {@link ExpandCapacityRequest} {@link ExpandCapacityResponse} */
+  ExpandCapacity(data: ExpandCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandCapacityResponse>;
+  /** 修改数据流动带宽 {@link ModifyDataRepositoryBandwidthRequest} {@link ModifyDataRepositoryBandwidthResponse} */
+  ModifyDataRepositoryBandwidth(data: ModifyDataRepositoryBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataRepositoryBandwidthResponse>;
+  /** 查询客户端节点跨vpc子网访问能力 {@link QueryCrossVpcSubnetSupportForClientNodeRequest} {@link QueryCrossVpcSubnetSupportForClientNodeResponse} */
+  QueryCrossVpcSubnetSupportForClientNode(data: QueryCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCrossVpcSubnetSupportForClientNodeResponse>;
+  /** 查询数据流动带宽 {@link QueryDataRepositoryBandwidthRequest} {@link QueryDataRepositoryBandwidthResponse} */
+  QueryDataRepositoryBandwidth(data: QueryDataRepositoryBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDataRepositoryBandwidthResponse>;
 }
 
 export declare type Versions = ["2022-05-19"];

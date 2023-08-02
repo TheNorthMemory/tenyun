@@ -211,65 +211,69 @@ declare interface CmqQueue {
 /** cmq订阅返回参数 */
 declare interface CmqSubscription {
   /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
-  SubscriptionName: string | null;
+  SubscriptionName?: string | null;
   /** 订阅 ID。订阅 ID 在拉取监控数据时会用到。 */
-  SubscriptionId: string | null;
+  SubscriptionId?: string | null;
   /** 订阅拥有者的 APPID。 */
-  TopicOwner: number | null;
+  TopicOwner?: number | null;
   /** 该订阅待投递的消息数。 */
-  MsgCount: number | null;
+  MsgCount?: number | null;
   /** 最后一次修改订阅属性的时间。返回 Unix 时间戳，精确到毫秒。 */
-  LastModifyTime: number | null;
+  LastModifyTime?: number | null;
   /** 订阅的创建时间。返回 Unix 时间戳，精确到毫秒。 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 表示订阅接收消息的过滤策略。 */
-  BindingKey: string[] | null;
+  BindingKey?: string[] | null;
   /** 接收通知的 endpoint，根据协议 protocol 区分：对于 HTTP，endpoint 必须以http://开头，host 可以是域名或 IP；对于 queue，则填 queueName。 */
-  Endpoint: string | null;
+  Endpoint?: string | null;
   /** 描述用户创建订阅时选择的过滤策略：filterType = 1表示用户使用 filterTag 标签过滤filterType = 2表示用户使用 bindingKey 过滤。 */
-  FilterTags: string[] | null;
+  FilterTags?: string[] | null;
   /** 订阅的协议，目前支持两种协议：HTTP、queue。使用 HTTP 协议，用户需自己搭建接受消息的 Web Server。使用 queue，消息会自动推送到 CMQ queue，用户可以并发地拉取消息。 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 向 endpoint 推送消息出现错误时，CMQ 推送服务器的重试策略。取值有：（1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息；（2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始 1s，后面是 2s，4s，8s...由于 Topic 消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是 EXPONENTIAL_DECAY_RETRY。 */
-  NotifyStrategy: string | null;
+  NotifyStrategy?: string | null;
   /** 推送内容的格式。取值：（1）JSON；（2）SIMPLIFIED，即 raw 格式。如果 protocol 是 queue，则取值必须为 SIMPLIFIED。如果 protocol 是 HTTP，两个值均可以，默认值是 JSON。 */
-  NotifyContentFormat: string | null;
+  NotifyContentFormat?: string | null;
+  /** 订阅所属的主题名称 */
+  TopicName?: string | null;
 }
 
 /** cmq topic返回信息展示字段 */
 declare interface CmqTopic {
   /** 主题的 ID。 */
-  TopicId: string | null;
+  TopicId?: string | null;
   /** 主题名称。 */
-  TopicName: string | null;
+  TopicName?: string | null;
   /** 消息在主题中最长存活时间，从发送到该主题开始经过此参数指定的时间后，不论消息是否被成功推送给用户都将被删除，单位为秒。固定为一天（86400秒），该属性不能修改。 */
-  MsgRetentionSeconds: number | null;
+  MsgRetentionSeconds?: number | null;
   /** 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为65536。 */
-  MaxMsgSize: number | null;
+  MaxMsgSize?: number | null;
   /** 每秒钟发布消息的条数。 */
-  Qps: number | null;
+  Qps?: number | null;
   /** 描述用户创建订阅时选择的过滤策略：FilterType = 1表示用户使用 FilterTag 标签过滤;FilterType = 2表示用户使用 BindingKey 过滤。 */
-  FilterType: number | null;
+  FilterType?: number | null;
   /** 主题的创建时间。返回 Unix 时间戳，精确到毫秒。 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 最后一次修改主题属性的时间。返回 Unix 时间戳，精确到毫秒。 */
-  LastModifyTime: number | null;
+  LastModifyTime?: number | null;
   /** 当前该主题中消息数目（消息堆积数）。 */
-  MsgCount: number | null;
+  MsgCount?: number | null;
   /** 创建者 Uin，CAM 鉴权 resource 由该字段组合而成。 */
-  CreateUin: number | null;
+  CreateUin?: number | null;
   /** 关联的标签。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 消息轨迹。true表示开启，false表示不开启。 */
-  Trace: boolean | null;
+  Trace?: boolean | null;
   /** 租户id */
-  TenantId: string | null;
+  TenantId?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
-  Status: number | null;
+  Status?: number | null;
   /** 0表示pulsar，1表示rocketmq */
-  BrokerType: number | null;
+  BrokerType?: number | null;
+  /** 订阅数量 */
+  SubscriptionCount?: number | null;
 }
 
 /** cmq TransactionPolicy */
@@ -1862,6 +1866,16 @@ declare interface DeleteRocketMQTopicResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRocketMQVipInstanceRequest {
+  /** 实例的集群ID */
+  ClusterId: string;
+}
+
+declare interface DeleteRocketMQVipInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRolesRequest {
   /** 角色名称数组。 */
   RoleNames: string[];
@@ -2088,20 +2102,24 @@ declare interface DescribeCmqQueuesResponse {
 
 declare interface DescribeCmqSubscriptionDetailRequest {
   /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
-  TopicName: string;
+  TopicName?: string;
   /** 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0 */
   Offset?: number;
   /** 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。 */
   Limit?: number;
   /** 根据SubscriptionName进行模糊搜索 */
   SubscriptionName?: string;
+  /** 队列名称，订阅绑定的endpoint */
+  QueueName?: string;
+  /** 查询类型。取值：（1）topic；（2）queue。默认值是topic。如果 queryType 是 topic，则查询主题下的订阅列表；如果 queryType 是 queue，则查询队列绑定的订阅列表。 */
+  QueryType?: string;
 }
 
 declare interface DescribeCmqSubscriptionDetailResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** Subscription属性集合 */
-  SubscriptionSet: CmqSubscription[] | null;
+  SubscriptionSet?: CmqSubscription[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3369,6 +3387,8 @@ declare interface Tdmq {
   DeleteRocketMQNamespace(data: DeleteRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQNamespaceResponse>;
   /** 删除RocketMQ主题 {@link DeleteRocketMQTopicRequest} {@link DeleteRocketMQTopicResponse} */
   DeleteRocketMQTopic(data: DeleteRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQTopicResponse>;
+  /** 删除RocketMQ专享实例 {@link DeleteRocketMQVipInstanceRequest} {@link DeleteRocketMQVipInstanceResponse} */
+  DeleteRocketMQVipInstance(data: DeleteRocketMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQVipInstanceResponse>;
   /** 删除角色 {@link DeleteRolesRequest} {@link DeleteRolesResponse} */
   DeleteRoles(data: DeleteRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRolesResponse>;
   /** 删除订阅关系 {@link DeleteSubscriptionsRequest} {@link DeleteSubscriptionsResponse} */
@@ -3394,7 +3414,7 @@ declare interface Tdmq {
   /** 查询cmq全量队列 {@link DescribeCmqQueuesRequest} {@link DescribeCmqQueuesResponse} */
   DescribeCmqQueues(data?: DescribeCmqQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueuesResponse>;
   /** 查询cmq订阅详情 {@link DescribeCmqSubscriptionDetailRequest} {@link DescribeCmqSubscriptionDetailResponse} */
-  DescribeCmqSubscriptionDetail(data: DescribeCmqSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqSubscriptionDetailResponse>;
+  DescribeCmqSubscriptionDetail(data?: DescribeCmqSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqSubscriptionDetailResponse>;
   /** 查询cmq主题详情 {@link DescribeCmqTopicDetailRequest} {@link DescribeCmqTopicDetailResponse} */
   DescribeCmqTopicDetail(data?: DescribeCmqTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicDetailResponse>;
   /** 枚举cmq全量主题 {@link DescribeCmqTopicsRequest} {@link DescribeCmqTopicsResponse} */

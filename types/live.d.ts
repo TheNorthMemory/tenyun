@@ -3113,7 +3113,7 @@ declare interface DescribeLiveXP2PDetailInfoListRequest {
 
 declare interface DescribeLiveXP2PDetailInfoListResponse {
   /** P2P流统计信息。 */
-  DataInfoList: XP2PDetailInfo[];
+  DataInfoList?: XP2PDetailInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

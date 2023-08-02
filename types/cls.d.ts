@@ -2050,6 +2050,18 @@ declare interface DescribeKafkaRechargesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKafkaUserRequest {
+  /** kafka消费用户名 */
+  UserName: string;
+}
+
+declare interface DescribeKafkaUserResponse {
+  /** kafka消费用户名 */
+  UserName: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogContextRequest {
   /** 要查询的日志主题ID */
   TopicId: string;
@@ -2919,6 +2931,8 @@ declare interface Cls {
   DescribeKafkaConsumer(data: DescribeKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerResponse>;
   /** 获取Kafka数据订阅任务列表 {@link DescribeKafkaRechargesRequest} {@link DescribeKafkaRechargesResponse} */
   DescribeKafkaRecharges(data: DescribeKafkaRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaRechargesResponse>;
+  /** 获取kafka用户信息 {@link DescribeKafkaUserRequest} {@link DescribeKafkaUserResponse} */
+  DescribeKafkaUser(data: DescribeKafkaUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaUserResponse>;
   /** 上下文检索 {@link DescribeLogContextRequest} {@link DescribeLogContextResponse} */
   DescribeLogContext(data: DescribeLogContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogContextResponse>;
   /** 获取日志数量直方图 {@link DescribeLogHistogramRequest} {@link DescribeLogHistogramResponse} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 237+ 款产品，9736+ 服务数</summary>
+<details><summary>共计 237+ 款产品，9730+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -158,7 +158,7 @@ clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-1
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) | 2021-05-24(22) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(83) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(84) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -169,7 +169,7 @@ csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(94) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(274) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(128) |
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(129) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(51) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
@@ -192,7 +192,7 @@ eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/docum
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(32) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(38) |
-ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(59) |
+ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(60) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(47) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(2) | 2018-12-01(4) |
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(33) |
@@ -200,7 +200,7 @@ fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(103) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(28) |
-goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(5) |
+goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(20) |
 gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 2020-08-20(18) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(8) |
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74) |
@@ -244,7 +244,7 @@ mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(19) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 mvj | 营销价值判断 | 2019-09-26(1) |
-nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(38) |
+nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(27) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
@@ -270,7 +270,7 @@ smpn | [营销号码安全](https://cloud.tencent.com/document/product/1127) | 2
 sms | [短信](https://cloud.tencent.com/document/product/382) | 2021-01-11(18) | 2019-07-11(16) |
 soe | [智聆口语评测](https://cloud.tencent.com/document/product/884) | 2018-07-24(4) |
 solar | 智汇零售 | 2018-10-11(17) |
-sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(111) |
+sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(112) |
 ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(24) |
 ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(52) |
 sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10) |
@@ -295,7 +295,7 @@ tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 20
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(331) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(13) |
-tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(102) |
+tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(103) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(65) | 2022-01-06(5) |

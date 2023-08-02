@@ -3618,6 +3618,14 @@ declare interface OpenClusterPasswordComplexityResponse {
   RequestId?: string;
 }
 
+declare interface OpenClusterReadOnlyInstanceGroupAccessRequest {
+}
+
+declare interface OpenClusterReadOnlyInstanceGroupAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenReadOnlyInstanceExclusiveAccessRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4219,6 +4227,8 @@ declare interface Cynosdb {
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 开启集群密码复杂度 {@link OpenClusterPasswordComplexityRequest} {@link OpenClusterPasswordComplexityResponse} */
   OpenClusterPasswordComplexity(data: OpenClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterPasswordComplexityResponse>;
+  /** 开启只读实例组接入 {@link OpenClusterReadOnlyInstanceGroupAccessRequest} {@link OpenClusterReadOnlyInstanceGroupAccessResponse} */
+  OpenClusterReadOnlyInstanceGroupAccess(data?: OpenClusterReadOnlyInstanceGroupAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
   /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
   OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
   /** 开通外网 {@link OpenWanRequest} {@link OpenWanResponse} */

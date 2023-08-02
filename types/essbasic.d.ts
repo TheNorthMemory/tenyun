@@ -267,27 +267,27 @@ declare interface Filter {
 /** 签署人的流程信息明细 */
 declare interface FlowApproverDetail {
   /** 模板配置时候的签署人id,与控件绑定 */
-  ReceiptId: string;
+  ReceiptId?: string;
   /** 平台企业的第三方id */
-  ProxyOrganizationOpenId: string | null;
+  ProxyOrganizationOpenId?: string | null;
   /** 平台企业操作人的第三方id */
-  ProxyOperatorOpenId: string;
+  ProxyOperatorOpenId?: string;
   /** 平台企业名称 */
-  ProxyOrganizationName: string;
+  ProxyOrganizationName?: string;
   /** 签署人手机号 */
-  Mobile: string;
+  Mobile?: string;
   /** 签署人签署顺序 */
-  SignOrder: number;
+  SignOrder?: number;
   /** 签署人姓名 */
-  ApproveName: string | null;
+  ApproveName?: string | null;
   /** 当前签署人的状态, 状态如下PENDING 待签署	FILLPENDING 待填写FILLACCEPT 填写完成	FILLREJECT 拒绝填写	WAITPICKUP 待领取	ACCEPT 已签署	REJECT 拒签 DEADLINE 过期没人处理 CANCEL 流程已撤回	FORWARD 已经转他人处理STOP 流程已终止	RELIEVED 解除协议（已解除） */
-  ApproveStatus: string | null;
-  /** 签署人信息 */
-  ApproveMessage: string | null;
+  ApproveStatus?: string | null;
+  /** 签署人自定义信息 */
+  ApproveMessage?: string | null;
   /** 签署人签署时间戳，单位秒 */
-  ApproveTime: number;
-  /** 参与者类型 (ORGANIZATION企业/PERSON个人) */
-  ApproveType: string | null;
+  ApproveTime?: number;
+  /** 参与者类型 ORGANIZATION：企业签署人PERSON：个人签署人 */
+  ApproveType?: string | null;
 }
 
 /** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId */
@@ -1105,13 +1105,13 @@ declare interface ChannelCreateMultiFlowSignQRCodeRequest {
   TemplateId: string;
   /** 签署流程名称，最大长度200个字符。 */
   FlowName: string;
-  /** 最大可发起签署流程份数，默认5份；发起签署流程数量超过此上限后，二维码自动失效。 */
+  /** 最大可发起签署流程份数默认5份备注：发起签署流程数量超过此上限后，二维码自动失效。 */
   MaxFlowNum?: number;
   /** 签署流程有效天数 默认7天 最高设置不超过30天 */
   FlowEffectiveDay?: number;
   /** 二维码有效天数 默认7天 最高设置不超过90天 */
   QrEffectiveDay?: number;
-  /** 限制二维码用户条件 */
+  /** 指定的签署二维码签署人指定后，只允许知道的人操作和签署 */
   Restrictions?: ApproverRestriction[];
   /** 回调地址，最大长度1000个字符不传默认使用第三方应用号配置的回调地址回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败 */
   CallbackUrl?: string;
@@ -1621,9 +1621,9 @@ declare interface DescribeExtendedServiceAuthInfoResponse {
 declare interface DescribeFlowDetailInfoRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 合同(流程)编号数组，最多支持100个。（备注：该参数和合同组编号必须二选一, 如果填写FlowGroupId则忽略此FlowIds的入参） */
+  /** 合同(流程)编号数组，最多支持100个。备注：该参数和合同组编号必须二选一, 如果填写FlowGroupId则忽略此FlowIds的入参 */
   FlowIds?: string[];
-  /** 合同组编号（备注：该参数和合同(流程)编号数组必须二选一） */
+  /** 合同组编号备注：该参数和合同(流程)编号数组必须二选一 */
   FlowGroupId?: string;
   /** 暂未开放 */
   Operator?: UserInfo;

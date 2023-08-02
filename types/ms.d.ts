@@ -22,19 +22,19 @@ declare interface AndroidAppInfo {
   AppType?: string;
 }
 
-/** 渠道合作安卓加固策略信息 */
+/** 渠道合作Android加固策略信息 */
 declare interface AndroidPlan {
   /** 非必输字段，PlanId 是指本次加固使用的配置策略Id，可通过载入上次配置接口获取。其值非0时，代表引用对应的策略。 */
   PlanId?: number;
-  /** 本次操作的包名。当收费模式是安卓按年收费和安卓免费试用的在线加固和输出工具加固时，要求该字段必输，且与AndroidAppInfo.AppPkgName值相等。 */
+  /** 本次操作的包名。当收费模式是android按年收费和android免费试用的在线加固和输出工具加固时，要求该字段必输，且与AndroidAppInfo.AppPkgName值相等。 */
   AppPkgName?: string;
-  /** 安卓app的文件类型，本次加固操作的应用类型 。 安卓在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。 */
+  /** android app的文件类型，本次加固操作的应用类型 。 android在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。 */
   AppType?: string;
-  /** 安卓加固必输字段。加固策略，json格式字符串。字段说明（0-关闭，1-开启）： "enable"=1 #DEX整体加固; "antiprotect"=1 #反调试; "antirepack"=1 #防重打包、防篡改; "dexsig"=1 #签名校验; "antimonitor"=1 #防模拟器运行保护; "ptrace"=1 #防动态注入、动态调试; "so"."enable" = 1 #文件加密; "vmp"."enable" = 1 #VMP虚拟化保护; "respro"."assets"."enable" = 1 #assets资源文件加密 "respro"."res"."enable" = 1 #res资源文件加密so文件加密：支持5种架构:apk 格式: /lib/armeabi/libxxx.so,/lib/arm64-v8a/libxxx.so,/lib/armeabi-v7a/libxxx.so,/lib/x86/libxxx.so,/lib/x86_64/libxxx.soaab格式: /base/lib/armeabi/libxxx.so,/base/lib/arm64-v8a/libxxx.so,/base/lib/armeabi-v7a/libxxx.so,/base/lib/x86/libxxx.so,/base/lib/x86_64/libxxx.so请列举 SO 库在 apk 文件解压后的完整有效路径，如:/lib/armeabi/libxxx.so；需要加固的 SO 库需确认为自研的 SO 库，不要加固第三方 SO 库，否则会增加 crash 风险res资源文件加密注意事项：请指定需要加密的文件全路径，如：res/layout/1.xml;res资源文件加密不能加密APP图标res目录文件，不能加密以下后缀规则的文件".wav", ".mp2", ".mp3", ".ogg", ".aac", ".mpg",".mpeg", ".mid", ".midi", ".smf", ".jet", ".rtttl", ".imy", ".xmf", ".mp4", ".m4a", ".m4v", ".3gp",".3gpp", ".3g2", ".3gpp2", ".amr", ".awb", ".wma", ".wmv"assets资源文件加密注意事项:请指定需要加密的文件全路径，如：assets/main.js；可以完整路径，也可以相对路径。如果有通配符需要完整路径 ":all"或者"*"代表所有文件assets资源文件加密不能加密APP图标assets目录文件，不能加密以下后缀规则的文件".wav", ".mp2", ".mp3", ".ogg", ".aac", ".mpg",".mpeg", ".mid", ".midi", ".smf", ".jet", ".rtttl", ".imy", ".xmf", ".mp4", ".m4a", ".m4v", ".3gp",".3gpp", ".3g2", ".3gpp2", ".amr", ".awb", ".wma", ".wmv"apk[dex+so+vmp+res+assets]加固参数示例：‘{ "dex": { "enable": 1, "antiprotect": 1, "antirepack": 1, "dexsig": 1, "antimonitor": 1, "ptrace": 1 }, "so": { "enable": 1, "ver": "1.3.3", "file": [ "/lib/armeabi/libtest.so" ] }, "vmp": { "enable": 1, "ndkpath": "/xxx/android-ndk-r10e", "profile": "/xxx/vmpprofile.txt", "mapping": "/xxx/mapping.txt" }, "respro": { "assets": { "enable": 1, "file": [ "assets/1.js", "assets/2.jpg" ] }, "res": { "enable": 1, "file": [ "res/layout/1.xml", "res/layout/2.xml" ] } }}’aab加固方案一 [dex+res+assets]加固json字符串：‘{ "dex": { "enable": 1, "antiprotect": 1, "antimonitor": 1 }, "respro": { "assets": { "enable": 1, "file": [ "assets/1.js", "assets/2.jpg" ] }, "res": { "enable": 1, "file": [ "res/layout/1.xml", "res/layout/2.xml" ] } }}’aab加固方案二单独vmp加固：‘{ "vmp": { "enable": 1, "ndkpath": "/xxx/android-ndk-r10e", "profile": "/xxx/vmpprofile.txt", "mapping": "/xxx/mapping.txt", "antiprotect": 1, "antimonitor": 1 }}’ */
+  /** android加固必输字段。加固策略，json格式字符串。字段说明（0-关闭，1-开启）： "enable"=1 #DEX整体加固; "antiprotect"=1 #反调试; "antirepack"=1 #防重打包、防篡改; "dexsig"=1 #签名校验; "antimonitor"=1 #防模拟器运行保护; "ptrace"=1 #防动态注入、动态调试; "so"."enable" = 1 #文件加密; "vmp"."enable" = 1 #VMP虚拟化保护; "respro"."assets"."enable" = 1 #assets资源文件加密 "respro"."res"."enable" = 1 #res资源文件加密so文件加密：支持5种架构:apk 格式: /lib/armeabi/libxxx.so,/lib/arm64-v8a/libxxx.so,/lib/armeabi-v7a/libxxx.so,/lib/x86/libxxx.so,/lib/x86_64/libxxx.soaab格式: /base/lib/armeabi/libxxx.so,/base/lib/arm64-v8a/libxxx.so,/base/lib/armeabi-v7a/libxxx.so,/base/lib/x86/libxxx.so,/base/lib/x86_64/libxxx.so请列举 SO 库在 apk 文件解压后的完整有效路径，如:/lib/armeabi/libxxx.so；需要加固的 SO 库需确认为自研的 SO 库，不要加固第三方 SO 库，否则会增加 crash 风险res资源文件加密注意事项：请指定需要加密的文件全路径，如：res/layout/1.xml;res资源文件加密不能加密APP图标res目录文件，不能加密以下后缀规则的文件".wav", ".mp2", ".mp3", ".ogg", ".aac", ".mpg",".mpeg", ".mid", ".midi", ".smf", ".jet", ".rtttl", ".imy", ".xmf", ".mp4", ".m4a", ".m4v", ".3gp",".3gpp", ".3g2", ".3gpp2", ".amr", ".awb", ".wma", ".wmv"assets资源文件加密注意事项:请指定需要加密的文件全路径，如：assets/main.js；可以完整路径，也可以相对路径。如果有通配符需要完整路径 ":all"或者"*"代表所有文件assets资源文件加密不能加密APP图标assets目录文件，不能加密以下后缀规则的文件".wav", ".mp2", ".mp3", ".ogg", ".aac", ".mpg",".mpeg", ".mid", ".midi", ".smf", ".jet", ".rtttl", ".imy", ".xmf", ".mp4", ".m4a", ".m4v", ".3gp",".3gpp", ".3g2", ".3gpp2", ".amr", ".awb", ".wma", ".wmv"apk[dex+so+vmp+res+assets]加固参数示例：‘{ "dex": { "enable": 1, "antiprotect": 1, "antirepack": 1, "dexsig": 1, "antimonitor": 1, "ptrace": 1 }, "so": { "enable": 1, "ver": "1.3.3", "file": [ "/lib/armeabi/libtest.so" ] }, "vmp": { "enable": 1, "ndkpath": "/xxx/android-ndk-r10e", "profile": "/xxx/vmpprofile.txt", "mapping": "/xxx/mapping.txt" }, "respro": { "assets": { "enable": 1, "file": [ "assets/1.js", "assets/2.jpg" ] }, "res": { "enable": 1, "file": [ "res/layout/1.xml", "res/layout/2.xml" ] } }}’aab加固方案一 [dex+res+assets]加固json字符串：‘{ "dex": { "enable": 1, "antiprotect": 1, "antimonitor": 1 }, "respro": { "assets": { "enable": 1, "file": [ "assets/1.js", "assets/2.jpg" ] }, "res": { "enable": 1, "file": [ "res/layout/1.xml", "res/layout/2.xml" ] } }}’aab加固方案二单独vmp加固：‘{ "vmp": { "enable": 1, "ndkpath": "/xxx/android-ndk-r10e", "profile": "/xxx/vmpprofile.txt", "mapping": "/xxx/mapping.txt", "antiprotect": 1, "antimonitor": 1 }}’ */
   EncryptParam?: string;
 }
 
-/** 安卓加固结果 */
+/** Android加固结果 */
 declare interface AndroidResult {
   /** 结果Id,用于查询加固结果 */
   ResultId?: string;
@@ -44,7 +44,7 @@ declare interface AndroidResult {
   ResourceId?: string;
   /** 本次任务发起者 */
   OpUin?: number;
-  /** 应用类型：安卓-apk; 安卓-aab; */
+  /** 应用类型：android-apk; android-aab; */
   AppType?: string;
   /** 应用包名 */
   AppPkgName?: string;
@@ -68,35 +68,35 @@ declare interface AndroidResult {
   EndTime?: string;
   /** 加固耗时（秒单位） */
   CostTime?: number;
-  /** 在线加固-安卓应用原包下载链接 */
+  /** 在线加固-android应用原包下载链接 */
   AppUrl?: string;
-  /** 在线加固-安卓应用文件MD5算法值 */
+  /** 在线加固-android应用文件MD5算法值 */
   AppMd5?: string;
-  /** 在线加固-安卓应用应用名称 */
+  /** 在线加固-android应用应用名称 */
   AppName?: string;
-  /** 在线加固-安卓应用版本； */
+  /** 在线加固-android应用版本； */
   AppVersion?: string;
-  /** 在线加固-安卓应用大小 */
+  /** 在线加固-android应用大小 */
   AppSize?: number;
-  /** 在线加固-安卓加固-腾讯云应用加固工具版本 */
+  /** 在线加固-android加固-腾讯云应用加固工具版本 */
   OnlineToolVersion?: string;
-  /** 在线加固-安卓加固，加固成功后文件md5算法值 */
+  /** 在线加固-android加固，加固成功后文件md5算法值 */
   EncryptAppMd5?: string;
-  /** 在线加固-安卓加固，加固成功后应用大小 */
+  /** 在线加固-android加固，加固成功后应用大小 */
   EncryptAppSize?: number;
-  /** 在线加固-安卓加固，加固包下载链接。 */
+  /** 在线加固-android加固，加固包下载链接。 */
   EncryptPkgUrl?: string;
-  /** 输出工具-安卓加固-腾讯云输出工具版本 */
+  /** 输出工具-android加固-腾讯云输出工具版本 */
   OutputToolVersion?: string;
-  /** 输出工具-安卓加固-工具大小 */
+  /** 输出工具-android加固-工具大小 */
   OutputToolSize?: number;
-  /** 输出工具-安卓加固-工具输出时间 */
+  /** 输出工具-android加固-工具输出时间 */
   ToolOutputTime?: string;
-  /** 输出工具-安卓加固-工具到期时间 */
+  /** 输出工具-android加固-工具到期时间 */
   ToolExpireTime?: string;
-  /** 输出工具-安卓加固-输出工具下载链接 */
+  /** 输出工具-android加固-输出工具下载链接 */
   OutputToolUrl?: string;
-  /** 本次安卓加固策略信息 */
+  /** 本次android加固策略信息 */
   AndroidPlan?: AndroidPlan;
 }
 
@@ -236,9 +236,9 @@ declare interface BindInfo {
 
 /** 渠道合作加固结果信息 */
 declare interface EncryptResults {
-  /** 平台类型枚举值 1-android安卓加固 2-ios源码混淆 3-sdk加固 4-applet小程序加固 */
+  /** 平台类型枚举值 1-android加固 2-ios源码混淆 3-sdk加固 4-applet小程序加固 */
   PlatformType?: number;
-  /** 平台类型描述 1-android安卓加固 2-ios源码混淆 3-sdk加固 4-applet小程序加固 */
+  /** 平台类型描述 1-android加固 2-ios源码混淆 3-sdk加固 4-applet小程序加固 */
   PlatformDesc?: string;
   /** 订单采购类型枚举值， 1-免费试用 2-按年收费 3-按次收费 */
   OrderType?: number;
@@ -252,7 +252,7 @@ declare interface EncryptResults {
   ResourceId?: string;
   /** 与当前任务关联的订单Id */
   OrderId?: string;
-  /** 对应PlatformType平台类型值 1-android安卓加固结果 */
+  /** 对应PlatformType平台类型值 1-android加固结果 */
   AndroidResult?: AndroidResult | null;
   /** 对应PlatformType平台类型值 2-ios源码混淆加固结果 */
   IOSResult?: IOSResult | null;
@@ -298,13 +298,13 @@ declare interface Orders {
   OrderId?: string;
   /** 平台类型整型值 */
   PlatformType?: number;
-  /** 平台类型描述： 1.android安卓加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
+  /** 平台类型描述： 1.android加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
   PlatformTypeDesc?: string;
   /** 订单采购类型整型值 */
   OrderType?: number;
   /** 订单采购类型描述： 1-免费试用 2-按年收费 3-按次收费 */
   OrderTypeDesc?: string;
-  /** 安卓包年收费加固的包名 */
+  /** android包年收费加固的包名 */
   AppPkgName?: string;
   /** 资源号 */
   ResourceId?: string;
@@ -955,15 +955,15 @@ declare interface DescribeUserBaseInfoInstanceResponse {
 /** {@link Ms 移动应用安全} */
 declare interface Ms {
   (): Versions;
-  /** 取消渠道合作加固任务 {@link CancelEncryptTaskRequest} {@link CancelEncryptTaskResponse} */
+  /** @deprecated 取消渠道合作加固任务 {@link CancelEncryptTaskRequest} {@link CancelEncryptTaskResponse} */
   CancelEncryptTask(data: CancelEncryptTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelEncryptTaskResponse>;
   /** 将应用绑定到资源 {@link CreateBindInstanceRequest} {@link CreateBindInstanceResponse} */
   CreateBindInstance(data: CreateBindInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBindInstanceResponse>;
   /** 获取云COS临时密钥 {@link CreateCosSecKeyInstanceRequest} {@link CreateCosSecKeyInstanceResponse} */
   CreateCosSecKeyInstance(data?: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
-  /** 创建渠道合作应用加固任务 {@link CreateEncryptInstanceRequest} {@link CreateEncryptInstanceResponse} */
+  /** @deprecated 创建渠道合作应用加固任务 {@link CreateEncryptInstanceRequest} {@link CreateEncryptInstanceResponse} */
   CreateEncryptInstance(data: CreateEncryptInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptInstanceResponse>;
-  /** 创建渠道合作应用加固订单 {@link CreateOrderInstanceRequest} {@link CreateOrderInstanceResponse} */
+  /** @deprecated 创建渠道合作应用加固订单 {@link CreateOrderInstanceRequest} {@link CreateOrderInstanceResponse} */
   CreateOrderInstance(data: CreateOrderInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderInstanceResponse>;
   /** 创建资源 {@link CreateResourceInstancesRequest} {@link CreateResourceInstancesResponse} */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
@@ -975,11 +975,11 @@ declare interface Ms {
   DeleteShieldInstances(data: DeleteShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShieldInstancesResponse>;
   /** 环境安全检测-apk检测 {@link DescribeApkDetectionResultRequest} {@link DescribeApkDetectionResultResponse} */
   DescribeApkDetectionResult(data: DescribeApkDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApkDetectionResultResponse>;
-  /** 查询渠道合作加固任务 {@link DescribeEncryptInstancesRequest} {@link DescribeEncryptInstancesResponse} */
+  /** @deprecated 查询渠道合作加固任务 {@link DescribeEncryptInstancesRequest} {@link DescribeEncryptInstancesResponse} */
   DescribeEncryptInstances(data?: DescribeEncryptInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptInstancesResponse>;
   /** 载入渠道合作加固上次使用的加固配置 {@link DescribeEncryptPlanRequest} {@link DescribeEncryptPlanResponse} */
   DescribeEncryptPlan(data: DescribeEncryptPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptPlanResponse>;
-  /** 查询渠道合作应用加固订单信息 {@link DescribeOrderInstancesRequest} {@link DescribeOrderInstancesResponse} */
+  /** @deprecated 查询渠道合作应用加固订单信息 {@link DescribeOrderInstancesRequest} {@link DescribeOrderInstancesResponse} */
   DescribeOrderInstances(data?: DescribeOrderInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrderInstancesResponse>;
   /** 获取用户的所有资源信息 {@link DescribeResourceInstancesRequest} {@link DescribeResourceInstancesResponse} */
   DescribeResourceInstances(data?: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;

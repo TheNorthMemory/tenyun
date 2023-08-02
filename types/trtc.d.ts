@@ -1180,7 +1180,7 @@ declare interface DescribeTrtcRoomUsageRequest {
 }
 
 declare interface DescribeTrtcRoomUsageResponse {
-  /** 房间维度用量数据，csv文件格式。 */
+  /** 房间维度用量数据，csv文件格式，单位：秒。 */
   Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
