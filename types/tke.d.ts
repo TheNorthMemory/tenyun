@@ -103,53 +103,53 @@ declare interface CbsVolume {
 /** 集群信息结构体 */
 declare interface Cluster {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群描述 */
-  ClusterDescription: string;
+  ClusterDescription?: string;
   /** 集群版本（默认值为1.10.5） */
-  ClusterVersion: string;
+  ClusterVersion?: string;
   /** 集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64 */
-  ClusterOs: string;
+  ClusterOs?: string;
   /** 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。 */
-  ClusterType: string;
+  ClusterType?: string;
   /** 集群网络相关参数 */
-  ClusterNetworkSettings: ClusterNetworkSettings;
+  ClusterNetworkSettings?: ClusterNetworkSettings;
   /** 集群当前node数量 */
-  ClusterNodeNum: number;
+  ClusterNodeNum?: number;
   /** 集群所属的项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 标签描述列表。 */
-  TagSpecification: TagSpecification[] | null;
+  TagSpecification?: TagSpecification[] | null;
   /** 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常) */
-  ClusterStatus: string;
+  ClusterStatus?: string;
   /** 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式)) */
-  Property: string | null;
+  Property?: string | null;
   /** 集群当前master数量 */
-  ClusterMaterNodeNum: number;
+  ClusterMaterNodeNum?: number;
   /** 集群使用镜像id */
-  ImageId: string | null;
+  ImageId?: string | null;
   /** OsCustomizeType 系统定制类型 */
-  OsCustomizeType: string | null;
+  OsCustomizeType?: string | null;
   /** 集群运行环境docker或container */
-  ContainerRuntime: string | null;
+  ContainerRuntime?: string | null;
   /** 创建时间 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 删除保护开关 */
-  DeletionProtection: boolean | null;
+  DeletionProtection?: boolean | null;
   /** 集群是否开启第三方节点支持 */
-  EnableExternalNode: boolean | null;
+  EnableExternalNode?: boolean | null;
   /** 集群等级，针对托管集群生效 */
-  ClusterLevel: string | null;
+  ClusterLevel?: string | null;
   /** 自动变配集群等级，针对托管集群生效 */
-  AutoUpgradeClusterLevel: boolean | null;
+  AutoUpgradeClusterLevel?: boolean | null;
   /** 是否开启QGPU共享 */
-  QGPUShareEnable: boolean | null;
+  QGPUShareEnable?: boolean | null;
   /** 运行时版本 */
-  RuntimeVersion: string | null;
+  RuntimeVersion?: string | null;
   /** 集群当前etcd数量 */
-  ClusterEtcdNodeNum: number | null;
+  ClusterEtcdNodeNum?: number | null;
 }
 
 /** 集群高级配置 */

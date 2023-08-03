@@ -1749,15 +1749,15 @@ declare interface BindZoneToPlanResponse {
 }
 
 declare interface CheckCnameStatusRequest {
-  /** 站点ID。 */
+  /** 站点 ID。 */
   ZoneId: string;
-  /** 记录名称列表。 */
+  /** 加速域名列表。 */
   RecordNames: string[];
 }
 
 declare interface CheckCnameStatusResponse {
-  /** 域名Cname状态信息列表。 */
-  CnameStatus: CnameStatus[];
+  /** 加速域名 CNAME 状态信息列表。 */
+  CnameStatus?: CnameStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

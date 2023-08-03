@@ -1769,7 +1769,7 @@ declare interface OperateChannelTemplateRequest {
   ProxyOrganizationOpenIds?: string;
   /** 模板可见性, 全部可见-"all", 部分可见-"part" */
   AuthTag?: string;
-  /** 当OperateType=UPADATE时，可以通过设置此字段对模板启停用状态进行操作。若此字段值为0，则不会修改模板Available，1为启用模板，2为停用模板。启用后模板可以正常领取。停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。如果Available更新失败，会直接返回错误。 */
+  /** 当OperateType=UPDATE时，可以通过设置此字段对模板启停用状态进行操作。若此字段值为0，则不会修改模板Available，1为启用模板，2为停用模板。启用后模板可以正常领取。停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。如果Available更新失败，会直接返回错误。 */
   Available?: number;
   /** 暂未开放 */
   Operator?: UserInfo;

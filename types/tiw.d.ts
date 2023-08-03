@@ -240,7 +240,7 @@ declare interface RunningTaskItem {
 
 /** 板书文件存储cos参数 */
 declare interface SnapshotCOS {
-  /** cos所在腾讯云帐号uin */
+  /** cos所在腾讯云账号uin */
   Uin: number;
   /** cos所在地区 */
   Region: string;
@@ -1675,7 +1675,7 @@ declare interface Tiw {
   DescribeTIWRoomDailyUsage(data: DescribeTIWRoomDailyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTIWRoomDailyUsageResponse>;
   /** 查询文档转码任务 {@link DescribeTranscodeRequest} {@link DescribeTranscodeResponse} */
   DescribeTranscode(data: DescribeTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeResponse>;
-  /** 通过文档URL查询转码任务 {@link DescribeTranscodeByUrlRequest} {@link DescribeTranscodeByUrlResponse} */
+  /** 通过文档URL查询转码任务状态 {@link DescribeTranscodeByUrlRequest} {@link DescribeTranscodeByUrlResponse} */
   DescribeTranscodeByUrl(data: DescribeTranscodeByUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeByUrlResponse>;
   /** 查询文档转码回调地址 {@link DescribeTranscodeCallbackRequest} {@link DescribeTranscodeCallbackResponse} */
   DescribeTranscodeCallback(data: DescribeTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeCallbackResponse>;

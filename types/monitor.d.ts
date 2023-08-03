@@ -1963,21 +1963,21 @@ declare interface ReceiverInfo {
 /** Prometheus 聚合规则响应结构体内信息 */
 declare interface RecordingRuleSet {
   /** 规则 ID */
-  RuleId: string;
+  RuleId?: string;
   /** 规则状态码 */
-  RuleState: number;
+  RuleState?: number;
   /** 分组名称 */
-  Name: string;
+  Name?: string;
   /** 规则内容组 */
-  Group: string;
+  Group?: string;
   /** 规则数量 */
-  Total: number;
+  Total?: number;
   /** 规则创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 规则最近更新时间 */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** 规则名称 */
-  RuleName: string | null;
+  RuleName?: string | null;
 }
 
 /** Prometheus 服务发现信息 */
@@ -2583,7 +2583,7 @@ declare interface CreateRecordingRuleRequest {
 
 declare interface CreateRecordingRuleResponse {
   /** 规则 ID */
-  RuleId: string | null;
+  RuleId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

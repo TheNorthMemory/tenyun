@@ -1205,7 +1205,7 @@ declare interface CreateBlackWhiteIpListResponse {
 }
 
 declare interface CreateBoundIPRequest {
-  /** 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包） */
+  /** DDoS防护子产品代号（bgp表示独享包；bgp-multip表示共享包） */
   Business: string;
   /** 资源实例ID */
   Id: string;
@@ -1405,7 +1405,7 @@ declare interface CreateL7RuleCertsResponse {
 declare interface CreateNewL7RulesRequest {
   /** 规则列表 */
   Rules: L7RuleEntry[];
-  /** 大禹子产品代号（bgpip表示高防IP） */
+  /** DDoS防护子产品代号（bgpip表示高防IP） */
   Business: string;
   /** 资源ID列表 */
   IdList: string[];
@@ -1415,7 +1415,7 @@ declare interface CreateNewL7RulesRequest {
 
 declare interface CreateNewL7RulesResponse {
   /** 成功码 */
-  Success: SuccessCode;
+  Success?: SuccessCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1685,7 +1685,7 @@ declare interface DescribeBasicDeviceStatusResponse {
 }
 
 declare interface DescribeBgpBizTrendRequest {
-  /** 大禹子产品代号（bgp-multip表示高防包） */
+  /** DDoS防护子产品代号（bgp-multip表示高防包） */
   Business: string;
   /** 统计开始时间。 例：“2020-09-22 00:00:00” */
   StartTime: string;
@@ -1701,13 +1701,13 @@ declare interface DescribeBgpBizTrendRequest {
 
 declare interface DescribeBgpBizTrendResponse {
   /** 曲线图各个时间点的值 */
-  DataList: number[];
+  DataList?: number[];
   /** 曲线图取值个数 */
-  Total: number;
+  Total?: number;
   /** 统计纬度 */
-  MetricName: string;
+  MetricName?: string;
   /** 返回数组最大值 */
-  MaxData: number;
+  MaxData?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1715,7 +1715,7 @@ declare interface DescribeBgpBizTrendResponse {
 declare interface DescribeBizHttpStatusRequest {
   /** 统计方式，仅支持sum */
   Statistics: string;
-  /** 大禹子产品代号（bgpip表示高防IP） */
+  /** DDoS防护子产品代号（bgpip表示高防IP） */
   Business: string;
   /** 统计周期，可取值60，300，1800，3600， 21600，86400，单位秒 */
   Period: number;
@@ -1733,13 +1733,13 @@ declare interface DescribeBizHttpStatusRequest {
 
 declare interface DescribeBizHttpStatusResponse {
   /** 业务流量http状态码统计数据 */
-  HttpStatusMap: HttpStatusMap;
+  HttpStatusMap?: HttpStatusMap;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBizMonitorTrendRequest {
-  /** 大禹子产品代号（bgpip表示高防IP） */
+  /** DDoS防护子产品代号（bgpip表示高防IP） */
   Business: string;
   /** 统计开始时间。 例：“2020-09-22 00:00:00” */
   StartTime: string;
@@ -1767,7 +1767,7 @@ declare interface DescribeBizMonitorTrendResponse {
 declare interface DescribeBizTrendRequest {
   /** 统计方式，可取值max, min, avg, sum, 如统计纬度是流量速率或包量速率，仅可取值max */
   Statistics: string;
-  /** 大禹子产品代号（bgpip表示高防IP） */
+  /** DDoS防护子产品代号（bgpip表示高防IP） */
   Business: string;
   /** 统计周期，可取值60，300，1800，3600，21600，86400，单位秒 */
   Period: number;
@@ -1813,7 +1813,7 @@ declare interface DescribeBlackWhiteIpListResponse {
 }
 
 declare interface DescribeCCLevelListRequest {
-  /** 大禹子产品代号（bgp-multip表示高防包） */
+  /** DDoS防护子产品代号（bgp-multip表示高防包） */
   Business: string;
   /** 页起始偏移，取值为(页码-1)*一页条数 */
   Offset: number;
@@ -1825,9 +1825,9 @@ declare interface DescribeCCLevelListRequest {
 
 declare interface DescribeCCLevelListResponse {
   /** 分级策略列表总数 */
-  Total: number;
+  Total?: number;
   /** 分级策略列表总数 */
-  LevelList: CCLevelPolicy[];
+  LevelList?: CCLevelPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1851,7 +1851,7 @@ declare interface DescribeCCLevelPolicyResponse {
 }
 
 declare interface DescribeCCPrecisionPlyListRequest {
-  /** 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP） */
+  /** DDoS防护子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP） */
   Business: string;
   /** 页起始偏移，取值为(页码-1)*一页条数 */
   Offset: number;
@@ -1869,15 +1869,15 @@ declare interface DescribeCCPrecisionPlyListRequest {
 
 declare interface DescribeCCPrecisionPlyListResponse {
   /** 策略列表总数 */
-  Total: number;
+  Total?: number;
   /** 策略列表详情 */
-  PrecisionPolicyList: CCPrecisionPolicy[];
+  PrecisionPolicyList?: CCPrecisionPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCCReqLimitPolicyListRequest {
-  /** 大禹子产品代号（bgp-multip表示高防包，bgpip表示高防IP） */
+  /** DDoS防护子产品代号（bgp-multip表示高防包，bgpip表示高防IP） */
   Business: string;
   /** 页起始偏移，取值为(页码-1)*一页条数 */
   Offset: number;
@@ -1895,15 +1895,15 @@ declare interface DescribeCCReqLimitPolicyListRequest {
 
 declare interface DescribeCCReqLimitPolicyListResponse {
   /** 频率限制列表总数 */
-  Total: number;
+  Total?: number;
   /** 频率限制列表详情 */
-  RequestLimitPolicyList: CCReqLimitPolicy[];
+  RequestLimitPolicyList?: CCReqLimitPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCCThresholdListRequest {
-  /** 大禹子产品代号（bgp-multip表示高防包） */
+  /** DDoS防护子产品代号（bgp-multip表示高防包） */
   Business: string;
   /** 页起始偏移，取值为(页码-1)*一页条数 */
   Offset: number;
@@ -1915,15 +1915,15 @@ declare interface DescribeCCThresholdListRequest {
 
 declare interface DescribeCCThresholdListResponse {
   /** 清洗阈值策略列表总数 */
-  Total: number;
+  Total?: number;
   /** 清洗阈值策略列表详情 */
-  ThresholdList: CCThresholdPolicy[];
+  ThresholdList?: CCThresholdPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCCTrendRequest {
-  /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
   Business: string;
   /** 资源的IP */
   Ip: string;
@@ -1943,29 +1943,29 @@ declare interface DescribeCCTrendRequest {
 
 declare interface DescribeCCTrendResponse {
   /** 值个数 */
-  Count: number;
+  Count?: number;
   /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
-  Business: string;
+  Business?: string;
   /** 资源的IP */
-  Ip: string;
+  Ip?: string;
   /** 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)] */
-  Period: number;
+  Period?: number;
   /** 统计开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 统计结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 值数组 */
-  Data: number[];
+  Data?: number[];
   /** 资源ID */
-  Id: string | null;
+  Id?: string | null;
   /** 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))，incount(请求次数), dropcount(攻击次数)] */
-  MetricName: string;
+  MetricName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCcBlackWhiteIpListRequest {
-  /** 大禹子产品代号（bgp-multip：表示高防包；bgpip：表示高防IP） */
+  /** DDoS防护子产品代号（bgp-multip：表示高防包；bgpip：表示高防IP） */
   Business: string;
   /** 指定特定实例Id */
   InstanceId: string;
@@ -1987,15 +1987,15 @@ declare interface DescribeCcBlackWhiteIpListRequest {
 
 declare interface DescribeCcBlackWhiteIpListResponse {
   /** CC四层黑白名单策略列表总数 */
-  Total: number;
+  Total?: number;
   /** CC四层黑白名单策略列表详情 */
-  CcBlackWhiteIpList: CcBlackWhiteIpPolicy[];
+  CcBlackWhiteIpList?: CcBlackWhiteIpPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCcGeoIPBlockConfigListRequest {
-  /** 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP） */
+  /** DDoS防护子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP） */
   Business: string;
   /** 页起始偏移，取值为(页码-1)*一页条数 */
   Offset: number;
@@ -2013,9 +2013,9 @@ declare interface DescribeCcGeoIPBlockConfigListRequest {
 
 declare interface DescribeCcGeoIPBlockConfigListResponse {
   /** CC地域封禁策略列表总数 */
-  Total: number;
+  Total?: number;
   /** CC地域封禁策略列表详情 */
-  CcGeoIpPolicyList: CcGeoIpPolicyNew[];
+  CcGeoIpPolicyList?: CcGeoIpPolicyNew[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2457,7 +2457,7 @@ declare interface DescribeListWaterPrintConfigResponse {
 }
 
 declare interface DescribeNewL7RulesErrHealthRequest {
-  /** 大禹子产品代号(bgpip表示高防IP) */
+  /** DDoS防护子产品代号(bgpip表示高防IP) */
   Business: string;
   /** 规则Id列表 */
   RuleIdList?: string[];
@@ -2465,15 +2465,15 @@ declare interface DescribeNewL7RulesErrHealthRequest {
 
 declare interface DescribeNewL7RulesErrHealthResponse {
   /** 异常规则列表，返回值说明: Key值为规则ID，Value值为异常IP及错误信息，多个IP用","分割 */
-  ErrHealths: KeyValue[];
+  ErrHealths?: KeyValue[];
   /** 异常规则的总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeNewL7RulesRequest {
-  /** 大禹子产品代号（bgpip表示高防IP） */
+  /** DDoS防护子产品代号（bgpip表示高防IP） */
   Business: string;
   /** 状态搜索，选填，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)] */
   StatusList?: number[];
@@ -2543,7 +2543,7 @@ declare interface DescribeOverviewCCTrendRequest {
   EndTime: string;
   /** 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))，incount(请求次数), dropcount(攻击次数)] */
   MetricName: string;
-  /** 大禹子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护） */
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护） */
   Business?: string;
   /** 资源的IP */
   IpList?: string[];
@@ -2591,7 +2591,7 @@ declare interface DescribeOverviewDDoSTrendRequest {
   EndTime: string;
   /** 指标，取值[bps(攻击流量带宽，pps(攻击包速率))] */
   MetricName: string;
-  /** 大禹子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护） */
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护） */
   Business?: string;
   /** 资源实例的IP列表 */
   IpList?: string[];
@@ -2785,7 +2785,7 @@ declare interface ModifyDDoSGeoIPBlockConfigResponse {
 declare interface ModifyDDoSLevelRequest {
   /** 资源ID */
   Id: string;
-  /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版） */
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版） */
   Business: string;
   /** =get表示读取防护等级；=set表示修改防护等级 */
   Method: string;
@@ -2795,9 +2795,9 @@ declare interface ModifyDDoSLevelRequest {
 
 declare interface ModifyDDoSLevelResponse {
   /** 防护等级，取值[low,middle,high] */
-  DDoSLevel: string;
+  DDoSLevel?: string;
   /** 资源ID */
-  Id: string;
+  Id?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2819,7 +2819,7 @@ declare interface ModifyDDoSThresholdRequest {
   Threshold: number;
   /** 资源ID */
   Id: string;
-  /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版） */
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版） */
   Business: string;
   /** 配置其他阈值标志位，1表示配置其他阈值 */
   OtherThresholdFlag?: number;
@@ -2847,7 +2847,7 @@ declare interface ModifyDDoSThresholdRequest {
 
 declare interface ModifyDDoSThresholdResponse {
   /** 成功码 */
-  Success: SuccessCode;
+  Success?: SuccessCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2865,7 +2865,7 @@ declare interface ModifyDomainUsrNameResponse {
 }
 
 declare interface ModifyNewDomainRulesRequest {
-  /** 大禹子产品代号（bgpip表示高防IP） */
+  /** DDoS防护子产品代号（bgpip表示高防IP） */
   Business: string;
   /** 资源ID */
   Id: string;
@@ -2875,7 +2875,7 @@ declare interface ModifyNewDomainRulesRequest {
 
 declare interface ModifyNewDomainRulesResponse {
   /** 成功码 */
-  Success: SuccessCode;
+  Success?: SuccessCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

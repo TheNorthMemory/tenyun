@@ -966,7 +966,7 @@ declare interface RuleTagInfo {
 declare interface ScheduledSqlResouceInfo {
   /** 目标主题id */
   TopicId: string;
-  /** 主题的的地域信息 */
+  /** 主题的地域信息 */
   Region?: string;
   /** 主题类型：0为日志主题，1为指标主题 */
   BizType?: number;
@@ -2028,6 +2028,8 @@ declare interface DescribeKafkaConsumerResponse {
   TopicID?: string;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression?: number;
+  /** kafka协议消费数据格式 */
+  ConsumerContent?: KafkaConsumerContent;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2521,6 +2523,8 @@ declare interface ModifyKafkaConsumerRequest {
   FromTopicId: string;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression?: number;
+  /** kafka协议消费数据格式 */
+  ConsumerContent?: KafkaConsumerContent;
 }
 
 declare interface ModifyKafkaConsumerResponse {

@@ -2165,11 +2165,11 @@ declare interface BusinessCardOCRRequest {
 
 declare interface BusinessCardOCRResponse {
   /** 名片识别结果，具体内容请点击左侧链接。 */
-  BusinessCardInfos: BusinessCardInfo[];
+  BusinessCardInfos?: BusinessCardInfo[];
   /** 返回图像预处理后的图片，图像预处理未开启时返回内容为空。 */
-  RetImageBase64: string;
+  RetImageBase64?: string;
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
-  Angle: number;
+  Angle?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

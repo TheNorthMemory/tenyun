@@ -722,12 +722,12 @@ declare interface RabbitMQPrivateNode {
   ProcessNumber?: number | null;
 }
 
-/** RabbitMQ专享版虚拟机 */
+/** RabbitMQ专享版云服务器 */
 declare interface RabbitMQPrivateVirtualHost {
   /** 虚拟主机的名字 */
-  VirtualHostName: string | null;
+  VirtualHostName?: string | null;
   /** 虚拟主机的描述 */
-  Description: string | null;
+  Description?: string | null;
 }
 
 /** RabbitMQ用户实体详情 */
