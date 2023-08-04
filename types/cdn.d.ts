@@ -4021,9 +4021,9 @@ declare interface ListTopDDoSDataResponse {
 }
 
 declare interface ListTopDataRequest {
-  /** 查询起始日期：yyyy-MM-dd HH:mm:ss仅支持按天粒度的数据查询，取入参中的天信息作为起始日期返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04 10:40:00，返回数据的起始时间为2018-09-04 00:00:00仅支持 90 天内数据查询 */
+  /** 查询起始时间：yyyy-MM-dd HH:mm:ss仅支持按分钟粒度的数据查询，按入参抹去秒位作为起始时间，如 StartTime为2018-09-04 10:40:23，返回数据的起始时间为2018-09-04 10:40:00仅支持 90 天内数据查询 */
   StartTime: string;
-  /** 查询结束日期：yyyy-MM-dd HH:mm:ss仅支持按天粒度的数据查询，取入参中的天信息作为结束日期返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59EndTime 需要大于等于 StartTime */
+  /** 查询结束时间：yyyy-MM-dd HH:mm:ss仅支持按天粒度的数据查询，取入参中的天信息作为结束日期 返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59EndTime 需要大于等于 StartTime */
   EndTime: string;
   /** 排序对象，支持以下几种形式：url：访问 URL 排序（无参数的URL），支持的 Filter 为 flux、requestdistrict：省份、国家/地区排序，支持的 Filter 为 flux、requestisp：运营商排序，支持的 Filter 为 flux、requesthost：域名访问数据排序，支持的 Filter 为：flux、request、bandwidth、fluxHitRate、2XX、3XX、4XX、5XX、statusCodeoriginHost：域名回源数据排序，支持的 Filter 为 flux、request、bandwidth、origin_2XX、origin_3XX、origin_4XX、origin_5XX、OriginStatusCode */
   Metric: string;
@@ -4049,7 +4049,7 @@ declare interface ListTopDataRequest {
 
 declare interface ListTopDataResponse {
   /** 各个资源的Top 访问数据详情。 */
-  Data: TopData[];
+  Data?: TopData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

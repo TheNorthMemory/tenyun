@@ -1,0 +1,2228 @@
+/// <reference types="node" />
+
+import { AxiosPromise, AxiosRequestConfig } from "axios";
+
+/** AI分析配置 */
+declare interface AIConfig {
+  /** AI 分析类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和Car(车辆车牌识别)等 */
+  DetectType: string;
+  /** 截图频率。可选值1～20秒 */
+  TimeInterval: number;
+  /** 模板生效的时间段。最多包含5组时间段 */
+  OperTimeSlot: OperTimeSlot[];
+}
+
+/** AI任务信息 */
+declare interface AITaskInfo {
+  /** AI 任务 ID */
+  TaskId?: string;
+  /** AI 任务名称 */
+  Name?: string;
+  /** AI 任务描述 */
+  Desc?: string;
+  /** AI 任务状态。"on"代表开启了 AI 分析任务，"off"代表停止 AI 分析任务 */
+  Status?: string;
+  /** 通道 ID 列表 */
+  ChannelList?: string[];
+  /** AI 结果回调地址 */
+  CallbackUrl?: string;
+  /** AI 配置列表 */
+  Templates?: AITemplates[];
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+}
+
+/** AI分析结果详情 */
+declare interface AITaskResultInfo {
+  /** 人体识别结果列表 */
+  Body?: BodyAIResultInfo[] | null;
+  /** 宠物识别结果列表 */
+  Pet?: PetAIResultInfo[] | null;
+  /** 车辆车牌识别结果列表 */
+  Car?: CarAIResultInfo[] | null;
+  /** 厨师帽结果列表 */
+  ChefHat?: ChefHatAIResultInfo[] | null;
+  /** 厨师服结果列表 */
+  ChefCloth?: ChefClothAIResultInfo[] | null;
+  /** 口罩识别结果列表 */
+  FaceMask?: FaceMaskAIResultInfo[] | null;
+  /** 抽烟检测结果列表 */
+  Smoking?: SmokingAIResultInfo[] | null;
+  /** 接打电话识别结果列表 */
+  PhoneCall?: PhoneCallAIResultInfo[] | null;
+}
+
+/** AI模板信息 */
+declare interface AITemplates {
+  /** AI 类别。可选值 AI(AI 分析)和 Snapshot(截图)，Templates 列表中只能出现一种类型。 */
+  Tag: string;
+  /** AI 分析配置。和"SnapshotConfig"二选一。 */
+  AIConfig?: AIConfig;
+  /** 截图配置。和"AIConfig"二选一。 */
+  SnapshotConfig?: SnapshotConfig;
+}
+
+/** 通用AI识别结果信息 */
+declare interface BaseAIResultInfo {
+  /** 名称。返回值有人体识别结果名称(person)、宠物识别结果名称(cat和dog) 、车辆车牌识别结果名称(vehicle) */
+  Name?: string;
+  /** 置信度 */
+  Score?: number;
+  /** 截图中坐标信息 */
+  Location?: Location;
+}
+
+/** 人体识别结果详情 */
+declare interface BodyAIResultInfo {
+  /** 时间字符串 */
+  Time?: string;
+  /** 截图 URL */
+  Url?: string;
+  /** 人体信息 */
+  BodyInfo?: BaseAIResultInfo[];
+}
+
+/** 车辆车牌识别结果信息 */
+declare interface CarAIResultInfo {
+  /** 车系 */
+  Serial?: string;
+  /** 车辆品牌 */
+  Brand?: string;
+  /** 车辆类型 */
+  Type?: string;
+  /** 车辆颜色 */
+  Color?: string;
+  /** 置信度，0 - 100 */
+  Confidence?: number;
+  /** 年份，识别不出年份时返回0 */
+  Year?: number;
+  /** 车牌信息 */
+  PlateContent?: PlateContent;
+  /** 截图中坐标信息 */
+  Location?: Location;
+}
+
+/** 通道及通道所属设备信息 */
+declare interface ChannelInfo {
+  /** 通道所属的设备ID */
+  DeviceId: string;
+  /** 设备通道ID，一个设备通道只允许被一个上云计划添加 */
+  ChannelId: string;
+}
+
+/** 厨师服识别结果详情 */
+declare interface ChefClothAIResultInfo {
+  /** 时间字符串 */
+  Time?: string;
+  /** 截图 URL */
+  Url?: string;
+  /** 厨师服信息 */
+  ChefClothInfoInfo?: BaseAIResultInfo[];
+}
+
+/** 厨师帽识别结果详情 */
+declare interface ChefHatAIResultInfo {
+  /** 时间字符串 */
+  Time?: string;
+  /** 截图 URL */
+  Url?: string;
+  /** 厨师帽信息 */
+  ChefHatInfo?: BaseAIResultInfo[];
+}
+
+/** 查询设备可接入集群信息 */
+declare interface DescribeDeviceRegion {
+  /** 服务节点描述 */
+  Label?: string | null;
+  /** 服务节点 ID（对应为其他接口中所需的 ClusterId） */
+  Value?: string | null;
+  /** 地域信息 */
+  Region?: string | null;
+}
+
+/** 查询网关监控信息返回结果 */
+declare interface DescribeGatewayMonitor {
+  /** 设备接入总数 */
+  DeviceTotal?: number | null;
+  /** 设备在线数 */
+  DeviceOnline?: number | null;
+  /** 设备离线数 */
+  DeviceOffline?: number | null;
+  /** 视频通道总数 */
+  ChannelTotal?: number | null;
+  /** 视频通道在线数 */
+  ChannelOnline?: number | null;
+  /** 视频通道离线数 */
+  ChannelOffline?: number | null;
+  /** 网关上行流量,单位kbps */
+  UpFlow?: number | null;
+  /** 流在传输中的通道数 */
+  ChannelPull?: number | null;
+  /** 流未传输中的通道数 */
+  ChannelUnPull?: number | null;
+}
+
+/** 查询网关服务版本信息返回数据 */
+declare interface DescribeGatewayVersion {
+  /** 服务名 */
+  Name?: string | null;
+  /** 服务版本 */
+  Version?: string | null;
+  /** 服务最新版本 */
+  LatestVersion?: string | null;
+  /** 是否需要更新 */
+  IsUpdate?: boolean | null;
+  /** 升级信息 */
+  UpgradeInfo?: string[] | null;
+}
+
+/** 口罩识别结果详情 */
+declare interface FaceMaskAIResultInfo {
+  /** 时间字符串 */
+  Time?: string;
+  /** 截图 URL */
+  Url?: string;
+  /** 口罩信息 */
+  FaceMaskInfo?: BaseAIResultInfo[];
+}
+
+/** 网关详情版本信息 */
+declare interface GatewayVersion {
+  /** 服务名称 */
+  Name?: string | null;
+  /** 服务版本 */
+  Version?: string | null;
+}
+
+/** 查询网关列表返回结果 */
+declare interface GatewaysData {
+  /** 网关索引ID */
+  GatewayId?: string | null;
+  /** 网关编码 */
+  GwId?: string | null;
+  /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
+  Name?: string | null;
+  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Description?: string | null;
+  /** 网关所属服务节点ID */
+  ClusterId?: string | null;
+  /** 网关所属服务节点名称 */
+  ClusterName?: string | null;
+  /** 网关所属地域 */
+  Region?: string | null;
+  /** 网关状态，0：离线，1:在线 */
+  Status?: number | null;
+  /** 网关激活时间 */
+  CreatedAt?: string | null;
+  /** 所属网关设备数量 */
+  DeviceNum?: number | null;
+}
+
+/** 生命周期，云文件生命周期设置，管理文件冷、热存储的时间 */
+declare interface LifeCycleData {
+  /** 云文件热存储时长，单位天，最小1天，最大3650天 */
+  Transition: number;
+  /** 云文件冷存储时长， 单位天，0表示不设置，设置时最小60天，Expiration字段加Transition字段不超过3650天 */
+  Expiration: number;
+}
+
+/** 获取AI任务列表的数据 */
+declare interface ListAITaskData {
+  /** AI任务列表 */
+  List?: AITaskInfo[] | null;
+}
+
+/** 获取设备列表的响应 */
+declare interface ListDeviceInfo {
+  /** 设备 ID */
+  DeviceId?: string;
+  /** 设备国标编码 */
+  Code?: string;
+  /** 设备状态。0:未注册，1:在线，2:离线，3:禁用 */
+  Status?: number;
+  /** 设备流传输协议。1:UDP,2:TCP */
+  TransportProtocol?: number;
+  /** 设备名称 */
+  Name?: string;
+  /** 设备类型。1:IPC,2:NVR */
+  Type?: number;
+  /** 设备密码 */
+  Password?: string;
+  /** 描述 */
+  Description?: string;
+  /** 设备接入服务节点 ID */
+  ClusterId?: string;
+  /** 服务节点名称 */
+  ClusterName?: string;
+  /** 接入协议。1:RTMP,2:GB,3:GW */
+  AccessProtocol?: number;
+  /** 设备所属组织 ID */
+  OrganizationId?: string;
+  /** 通道数量 */
+  ChannelNum?: number;
+}
+
+/** AI识别结果在画面中坐标 */
+declare interface Location {
+  /** 左上角 X 坐标轴 */
+  X?: number;
+  /** 左上角 Y 坐标轴 */
+  Y?: number;
+  /** 方框宽 */
+  Width?: number;
+  /** 方框高 */
+  Height?: number;
+}
+
+/** AI分析的时间段配置 */
+declare interface OperTimeSlot {
+  /** 开始时间。格式为"hh:mm:ss"，且 Start 必须小于 End */
+  Start: string;
+  /** 结束时间。格式为"hh:mm:ss"，且 Start 必须小于 End */
+  End: string;
+}
+
+/** 组织目录下的通道信息 */
+declare interface OrganizationChannelInfo {
+  /** 设备通道所属的设备ID */
+  DeviceId?: string;
+  /** 设备通道所属的设备名称 */
+  DeviceName?: string | null;
+  /** 设备通道ID */
+  ChannelId?: string;
+  /** 设备通道名称 */
+  ChannelName?: string | null;
+  /** 该通道是否在上云计划中，如果是，则不能在添加到其他上云计划|true：在上云计划中，false：不在上云计划中 */
+  InPlan?: boolean;
+}
+
+/** 宠物识别结果详情 */
+declare interface PetAIResultInfo {
+  /** 时间字符串 */
+  Time?: string;
+  /** 截图 URL */
+  Url?: string;
+  /** 宠物信息 */
+  PetInfo?: BaseAIResultInfo[];
+}
+
+/** 打电话识别结果详情 */
+declare interface PhoneCallAIResultInfo {
+  /** 时间字符串 */
+  Time?: string;
+  /** 截图 URL */
+  Url?: string;
+  /** 打电话信息 */
+  PhoneCallInfo?: BaseAIResultInfo[];
+}
+
+/** AI车牌信息 */
+declare interface PlateContent {
+  /** 车牌号信息 */
+  Plate?: string;
+  /** 车牌的颜色 */
+  Color?: string;
+  /** 车牌的种类，例如普通蓝牌 */
+  Type?: string;
+  /** 截图中坐标信息 */
+  Location?: Location;
+}
+
+/** 实时上云计划基础信息 */
+declare interface RecordPlanBaseInfo {
+  /** 上云计划ID */
+  PlanId?: string;
+  /** 上云计划名称 */
+  PlanName?: string;
+  /** 上云模板ID */
+  TemplateId?: string;
+  /** 上云计划描述 */
+  Describe?: string | null;
+  /** 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义 */
+  StreamType?: string | null;
+  /** 云文件生命周期 */
+  LifeCycle?: LifeCycleData;
+  /** 录像计划状态，1:正常使用中，0:删除中，无法使用 */
+  Status?: number;
+  /** 通道总数 */
+  ChannelCount?: number;
+}
+
+/** 计划下的设备通道信息 */
+declare interface RecordPlanChannelInfo {
+  /** 设备通道所属的设备ID */
+  DeviceId?: string;
+  /** 设备通道所属的设备名称 */
+  DeviceName?: string | null;
+  /** 设备通道ID */
+  ChannelId?: string;
+  /** 设备通道名称 */
+  ChannelName?: string | null;
+  /** 所属组织名称 */
+  OrganizationName?: string | null;
+}
+
+/** 云录像回放url */
+declare interface RecordPlaybackUrl {
+  /** hls回放url */
+  Hls?: string;
+}
+
+/** 取回任务通道信息 */
+declare interface RecordRetrieveTaskChannelInfo {
+  /** 设备通道所属的设备ID */
+  DeviceId?: string;
+  /** 设备通道所属的设备名称 */
+  DeviceName?: string;
+  /** 设备通道ID */
+  ChannelId?: string;
+  /** 设备通道名称 */
+  ChannelName?: string;
+  /** 任务状态，0:已取回，1:取回中，2:待取回, 3:无归档录像 */
+  Status?: number;
+}
+
+/** 录像取回任务详情基础信息 */
+declare interface RecordRetrieveTaskDetailsInfo {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 取回录像的开始时间 */
+  StartTime?: number;
+  /** 取回录像的结束时间 */
+  EndTime?: number;
+  /** 取回模式，1:极速模式，其他暂不支持 */
+  Mode?: number;
+  /** 副本有效期 */
+  Expiration?: number;
+  /** 任务状态， 0:已取回，1:取回中，2:待取回 */
+  Status?: number;
+  /** 取回容量，单位MB */
+  Capacity?: number;
+  /** 任务描述 */
+  Describe?: string | null;
+  /** 任务通道数量 */
+  ChannelCount?: number;
+}
+
+/** 实时上云模板信息数据 */
+declare interface RecordTemplateInfo {
+  /** 模板ID */
+  TemplateId?: string;
+  /** 模板名称 */
+  TemplateName?: string;
+  /** 上云时间段，按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟 */
+  TimeSections?: RecordTemplateTimeSections[];
+}
+
+/** 上云模板的时间片段数据格式 */
+declare interface RecordTemplateTimeSections {
+  /** 周日期，取值范围1～7（对应周一～周日 */
+  DayOfWeek: number;
+  /** 开始时间，格式：HH:MM:SS，范围：[00:00:00～23:59:59] */
+  StartTime: string;
+  /** 结束时间，格式：HH:MM:SS，范围：[00:00:00～23:59:59] */
+  EndTime: string;
+}
+
+/** 云录像时间片段 */
+declare interface RecordTimeLine {
+  /** 时间片段开始时间，UTC秒数，例如：1662114146 */
+  Begin?: number;
+  /** 时间片段结束时间，UTC秒数，例如：1662114146 */
+  End?: number;
+}
+
+/** 抽烟识别结果详情 */
+declare interface SmokingAIResultInfo {
+  /** 时间字符串 */
+  Time?: string;
+  /** 截图 URL */
+  Url?: string;
+  /** 抽烟信息 */
+  SmokingInfo?: BaseAIResultInfo[];
+}
+
+/** 截图配置 */
+declare interface SnapshotConfig {
+  /** 截图频率。可选值1～20秒 */
+  TimeInterval: number;
+  /** 模板生效的时间段。最多包含5组时间段 */
+  OperTimeSlot: OperTimeSlot[];
+}
+
+/** 时间片段结构体 */
+declare interface Timeline {
+  /** 分片起始时间 */
+  Begin?: number | null;
+  /** 分片结束时间 */
+  End?: number | null;
+}
+
+/** 修改录像上云计划数据结构 */
+declare interface UpdateRecordBackupPlanModify {
+  /** 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段） */
+  PlanName?: string;
+  /** 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段） */
+  TemplateId?: string;
+  /** 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段） */
+  Describe?: string;
+  /** 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段） */
+  LifeCycle?: LifeCycleData;
+  /** 要新增的设备通道（Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量） */
+  Add?: string;
+  /** 要删除的设备通道（Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段） */
+  Del?: string;
+  /** 添加组织目录下所有设备通道（Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量）） */
+  OrganizationId?: string;
+}
+
+/** 修改录像上云模板数据结构 */
+declare interface UpdateRecordBackupTemplateModify {
+  /** 模板名称（不修改名称时，不需要带该字段） */
+  TemplateName?: string | null;
+  /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  TimeSections?: RecordTemplateTimeSections[] | null;
+  /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  /** 上云倍速（支持1，2，4倍速） */
+  Scale?: number | null;
+}
+
+/** 修改实时上云录像计划的数据 */
+declare interface UpdateRecordPlanData {
+  /** 上云计划名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段 */
+  PlanName?: string;
+  /** 上云模板ID，不修改模板ID时，不需要该字段 */
+  TemplateId?: string;
+  /** 上云计划描述，仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段 */
+  Describe?: string;
+  /** 码流类型，default:不指定码流类型，以设备默认推送类型为主， main:主码流，sub:子码流，其他根据设备能力集自定义，长度不能超过32个字节 */
+  StreamType?: string;
+  /** 生命周期，文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段 */
+  LifeCycle?: LifeCycleData;
+  /** 要新增的设备通道,Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量 */
+  Add?: ChannelInfo[];
+  /** 要删除的设备通道，Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段 */
+  Del?: string[];
+  /** 组织目录ID，添加组织目录下所有设备通道，Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量） */
+  OrganizationId?: string[];
+}
+
+/** 修改实时上云模板的请求数据结构 */
+declare interface UpdateRecordTemplateData {
+  /** 模板名称， 不修改名称时，不需要带该字段 */
+  TemplateName?: string;
+  /** 上云时间段，不修改名称时，不需要带该字段 */
+  TimeSections?: RecordTemplateTimeSections[];
+}
+
+declare interface AITaskResultResponse {
+  /** AI 任务 ID */
+  TaskId?: string;
+  /** 在 BeginTime 和 EndTime 时间之内，有识别结果的 AI 调用次数（分页依据此数值） */
+  AIResultCount?: number;
+  /** AI 任务执行结果详情 */
+  AIResults?: AITaskResultInfo | null;
+}
+
+declare interface AddAITaskRequest {
+  /** AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符 */
+  Name: string;
+  /** 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。 */
+  ChannelList: string[];
+  /** AI 配置列表 */
+  Templates: AITemplates[];
+  /** AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Desc?: string;
+  /** AI 结果回调地址。类似 "http://ip:port/xxx或者https://domain/xxx */
+  CallbackUrl?: string;
+  /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
+  IsStartTheTask?: boolean;
+}
+
+declare interface AddAITaskResponse {
+  /** AI任务信息 */
+  Data?: AITaskInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddDeviceResponse {
+  /** 设备iD */
+  DeviceId?: string | null;
+  /** 设备编码（即我们为设备生成的20位国标编码） */
+  Code?: string | null;
+  /** 设备名称 */
+  Name?: string | null;
+  /** 设备接入协议，1:RTMP,2:GB,3:GW */
+  AccessProtocol?: number | null;
+  /** 设备类型，1:IPC,2:NVR */
+  Type?: number | null;
+  /** 设备接入服务节点ID */
+  ClusterId?: string | null;
+  /** 设备接入服务节点名称 */
+  ClusterName?: string | null;
+  /** 设备流传输协议，1:UDP,2:TCP */
+  TransportProtocol?: number | null;
+  /** 设备密码 */
+  Password?: string | null;
+  /** 设备描述 */
+  Description?: string | null;
+  /** 设备状态，0:未注册,1:在线,2:离线,3:禁用 */
+  Status?: number | null;
+  /** 设备所属组织ID */
+  OrganizationId?: number | null;
+  /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
+  GatewayId?: string | null;
+  /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  ProtocolType?: number | null;
+  /** 设备接入IP（仅网关接入需要） */
+  Ip?: string | null;
+  /** 设备Port（仅网关接入需要） */
+  Port?: number | null;
+  /** 设备用户名（仅网关接入需要） */
+  Username?: string | null;
+  /** 用户ID */
+  AppId?: number | null;
+}
+
+declare interface AddOrgResponse {
+  /** 组织 ID */
+  OrganizationId?: string | null;
+  /** 组织名称 */
+  Name?: string | null;
+  /** 组织父节点 ID */
+  ParentId?: string | null;
+  /** 组织层级 */
+  Level?: number | null;
+  /** 用户ID */
+  AppId?: number | null;
+  /** 组织结构 */
+  ParentIds?: string | null;
+  /** 设备总数 */
+  Total?: number | null;
+  /** 设备在线数量 */
+  Online?: number | null;
+}
+
+declare interface AddOrganizationRequest {
+  /** 组织名称（仅支持中文、英文、数字、_、-的组合，长度不超过16个字符，且组织名称不能重复） */
+  Name: string;
+  /** 组织父节点 ID（从查询组织接口DescribeOrganization中获取，填0代表根组织） */
+  ParentId: string;
+}
+
+declare interface AddOrganizationResponse {
+  /** 增加组织接口返回数据 */
+  Data?: AddOrgResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddRecordBackupPlanRequest {
+  /** 录制模板ID（录像计划关联的模板ID，从查询录像上云模板列表接口ListRecordBackupTemplates中获取） */
+  TemplateId: string;
+  /** 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复） */
+  PlanName: string;
+  /** 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符） */
+  Describe: string;
+  /** 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间） */
+  LifeCycle: LifeCycleData;
+  /** 通道及通道所属设备（添加录像的设备的通道信息，一次添加通道总数不超过5000个，包括组织目录下的通道数量） */
+  Channels?: ChannelInfo[];
+  /** 添加组织目录下所有设备通道（Json数组，可以为空，通道总数量不超过5000个（包括Channel字段的数量）） */
+  OrganizationId?: string[];
+}
+
+declare interface AddRecordBackupPlanResponse {
+  /** 录像上云计划ID */
+  PlanId?: string;
+  /** 录像上云计划名称 */
+  PlanName?: string;
+  /** 录像上云模板ID */
+  TemplateId?: string;
+  /** 录像上云计划描述 */
+  Describe?: string;
+  /** 云文件生命周期 */
+  LifeCycle?: LifeCycleData;
+  /** 录像上云计划状态，1:正常使用中，0:删除中，无法使用 */
+  Status?: number;
+  /** 通道数量 */
+  ChannelCount?: number;
+  /** 创建时间 */
+  CreateAt?: string;
+  /** 修改时间 */
+  UpdateAt?: string;
+}
+
+declare interface AddRecordBackupTemplateRequest {
+  /** 模板名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，模板名称全局唯一，不能为空，不能重复） */
+  TemplateName: string;
+  /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  TimeSections: RecordTemplateTimeSections[];
+  /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  DevTimeSections: RecordTemplateTimeSections[];
+  /** 上云倍速（支持1，2，4倍速） */
+  Scale: number;
+}
+
+declare interface AddRecordBackupTemplateResponse {
+  /** 模板ID */
+  TemplateId?: string | null;
+  /** 模板名称 */
+  TemplateName?: string | null;
+  /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  TimeSections?: RecordTemplateTimeSections[] | null;
+  /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  /** 上云倍速（支持1，2，4倍速） */
+  Scale?: number | null;
+  /** 创建时间 */
+  CreateAt?: string | null;
+  /** 更新时间 */
+  UpdateAt?: string | null;
+}
+
+declare interface AddRecordPlanRequest {
+  /** 实时上云计划名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复 */
+  PlanName: string;
+  /** 实时上云模板ID */
+  TemplateId: string;
+  /** 生命周期 */
+  LifeCycle: LifeCycleData;
+  /** 上云计划描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Describe?: string;
+  /** 码流类型，default:不指定码流类型，以设备默认推送类型为主， main:主码流，sub:子码流，其他根据设备能力集自定义，不填按默认类型处理，长度不能超过32个字节 */
+  StreamType?: string;
+  /** 添加录像的设备的通道信息，一次添加通道总数不超过5000个，包括组织目录下的通道数量 */
+  Channels?: ChannelInfo[];
+  /** 添加组织目录下所有设备通道，Json数组，可以为空，通道总数量不超过5000个（包括Channel字段的数量） */
+  OrganizationId?: string[];
+}
+
+declare interface AddRecordPlanResponse {
+  /** 返回结果 */
+  Data?: RecordPlanOptResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddRecordRetrieveTaskRequest {
+  /** 任务名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，模板名称全局唯一，不能为空，不能重复 */
+  TaskName: string;
+  /** 取回录像的开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天 */
+  StartTime: number;
+  /** 取回录像的结束时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天 */
+  EndTime: number;
+  /** 取回模式， 1:极速模式，其他暂不支持 */
+  Mode: number;
+  /** 取回录像副本有效期，最小为1天，最大为365天 */
+  Expiration: number;
+  /** 设备通道，一个任务最多32个设备通道 */
+  Channels: ChannelInfo[];
+  /** 取回任务描述 */
+  Describe?: string;
+}
+
+declare interface AddRecordRetrieveTaskResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 取回录像的开始时间 */
+  StartTime?: number;
+  /** 取回录像的结束时间 */
+  EndTime?: number;
+  /** 取回模式，1:极速模式，其他暂不支持 */
+  Mode?: number;
+  /** 副本有效期 */
+  Expiration?: number;
+  /** 任务状态，0:已取回，1:取回中，2:待取回 */
+  Status?: number;
+  /** 取回容量，单位MB */
+  Capacity?: number;
+  /** 任务描述 */
+  Describe?: string | null;
+}
+
+declare interface AddRecordTemplateRequest {
+  /** 模板名称， 仅支持中文、英文、数字、_、-，长度不超过32个字符，模板名称全局唯一，不能为空，不能重复 */
+  TemplateName: string;
+  /** 上云时间段，按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟 */
+  TimeSections: RecordTemplateTimeSections[];
+}
+
+declare interface AddRecordTemplateResponse {
+  /** 返回结果 */
+  Data?: RecordTemplateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddStreamAuthRequest {
+  /** 鉴权配置ID（uuid） */
+  Id: string;
+  /** 是否开播放鉴权（1:开启,0:关闭） */
+  PullState: number;
+  /** 播放密钥（仅支持字母数字，长度0-10位） */
+  PullSecret: string;
+  /** 播放过期时间（单位：分钟） */
+  PullExpired: number;
+  /** 是否开启推流鉴权（1:开启,0:关闭） */
+  PushState: number;
+  /** 推流密钥（仅支持字母数字，长度0-10位） */
+  PushSecret: string;
+  /** 推流过期时间（单位：分钟） */
+  PushExpired: number;
+}
+
+declare interface AddStreamAuthResponse {
+  /** 鉴权配置ID（uuid） */
+  Id?: string | null;
+  /** 是否开播放鉴权（1:开启,0:关闭） */
+  PullState?: number | null;
+  /** 播放密钥（仅支持字母数字，长度0-10位） */
+  PullSecret?: string | null;
+  /** 播放过期时间（单位：分钟） */
+  PullExpired?: number | null;
+  /** 是否开启推流鉴权（1:开启,0:关闭） */
+  PushState?: number | null;
+  /** 推流密钥（仅支持字母数字，长度0-10位） */
+  PushSecret?: string | null;
+  /** 推流过期时间（单位：分钟） */
+  PushExpired?: number | null;
+  /** 用户ID */
+  AppId?: number | null;
+}
+
+declare interface AddUserDeviceRequest {
+  /** 设备名称，仅支持中文、英文、数字、_、-，长度不超过32个字符；（设备名称无需全局唯一，可以重复） */
+  Name: string;
+  /** 设备接入协议（1:RTMP,2:GB,3:GW） */
+  AccessProtocol: number;
+  /** 设备类型，1:IPC,2:NVR；（若设备接入协议选择RTMP，则设备类型只能选择IPC） */
+  Type: number;
+  /** 设备所属组织ID，从查询组织接口DescribeOrganization中获取 */
+  OrganizationId: string;
+  /** 设备接入服务节点ID（从查询设备可用服务节点接口DescribeDeviceRegion中获取的Value字段） */
+  ClusterId: string;
+  /** 设备流传输协议，1:UDP,2:TCP；(国标设备有效，不填写则默认UDP协议) */
+  TransportProtocol?: number;
+  /** 设备密码（国标，网关设备必填，仅支持数字组合，长度为1-64个字符） */
+  Password?: string;
+  /** 设备描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Description?: string;
+  /** 设备接入网关ID，从查询网关列表接口中ListGateways获取（仅网关接入需要） */
+  GatewayId?: string;
+  /** 网关接入协议类型（从查询网关接入协议接口DescribeGatewayProtocol中获取）1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  ProtocolType?: number;
+  /** 设备接入IP（仅网关接入需要） */
+  Ip?: string;
+  /** 设备端口（仅网关接入需要） */
+  Port?: number;
+  /** 设备用户名（仅网关接入需要） */
+  Username?: string;
+}
+
+declare interface AddUserDeviceResponse {
+  /** 增加设备返回数据 */
+  Data?: AddDeviceResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckDomainRequest {
+  /** 播放域名 */
+  PlayDomain: string;
+  /** CNAME 记录值 */
+  InternalDomain: string;
+}
+
+declare interface CheckDomainResponse {
+  /** 是否备案 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ControlDevicePTZRequest {
+  /** 通道 ID（从通道查询接口DescribeDeviceChannel中获取） */
+  ChannelId: string;
+  /** 命令类型（上:up,下:down,左:left,右:right上左:leftup,上右:rightup,下左:leftdown,下右:rightdown放大:zoomin,缩小:zoomout聚焦远:focusfar,聚焦近:focusnear光圈放大:irisin,光圈缩小:irisout） */
+  Type: string;
+  /** 命令描述（速度值范围1-8） */
+  Speed: number;
+}
+
+declare interface ControlDevicePTZResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ControlDevicePresetRequest {
+  /** 通道 ID（从通道查询接口DescribeDeviceChannel中获取） */
+  ChannelId: string;
+  /** 命令（goto:预置位调用；set:预置位设置；del:预置位删除） */
+  Cmd: string;
+  /** 预置位索引（只支持1-10的索引位置，超出报错） */
+  Index: number;
+}
+
+declare interface ControlDevicePresetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ControlDeviceStreamRequest {
+  /** 通道 ID（从通道查询接口DescribeDeviceChannel中获取） */
+  ChannelId: string;
+  /** 流类型（1:主码流；2:子码流（不可以和 Resolution 同时下发）） */
+  StreamType?: string;
+  /** 分辨率（1:QCIF；2:CIF；3:4CIF；4:D1；5:720P；6:1080P/I；自定义的19201080等等（需设备支持）（不可以和 StreamType 同时下发）） */
+  Resolution?: string;
+}
+
+declare interface ControlDeviceStreamResponse {
+  /** flv 流地址 */
+  Flv?: string | null;
+  /** hls 流地址 */
+  Hls?: string | null;
+  /** rtmp 流地址 */
+  Rtmp?: string | null;
+}
+
+declare interface ControlRecordRequest {
+  /** 通道ID（录像播放地址格式 https://${domain}/live/${ChannelId}@${Session}） */
+  ChannelId: string;
+  /** 录像会话 ID （ 录像播放地址格式 https://${domain}/live/${ChannelId}@${Session}） */
+  Session: string;
+  /** 录像操作类型 （play:播放；pause:暂停 ；stop:关闭） */
+  ControlAction: string;
+  /** 跳转进度 （ 参数应大于等于0，跳转到录像开始时间的相对时间（单位秒），例如0就是跳转到录像开始的时间,不可以和 Scale 参数同时出现） */
+  Position?: number;
+  /** 速度 （ 范围（0.25,0.5,1,2,4,8），不可以和 Pos 参数同时出现） */
+  Scale?: number;
+}
+
+declare interface ControlRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ControlRecordTimelineRequest {
+  /** 通道 ID（从通道查询接口DescribeDeviceChannel中获取） */
+  ChannelId: string;
+  /** 起始时间 */
+  Start: number;
+  /** 结束时间 */
+  End: number;
+}
+
+declare interface ControlRecordTimelineResponse {
+  /** 返回数据 */
+  Data?: Timeline[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAITaskRequest {
+  /** AI任务ID */
+  TaskId: string;
+}
+
+declare interface DeleteAITaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDomainRequest {
+  /** 域名 ID */
+  Id: string;
+}
+
+declare interface DeleteDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGatewayRequest {
+  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
+  GatewayId: string;
+}
+
+declare interface DeleteGatewayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOrganizationRequest {
+  /** 组织ID（从查询组织接口DescribeOrganization中获取） */
+  OrganizationId: string;
+}
+
+declare interface DeleteOrganizationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordBackupPlanRequest {
+  /** 录像上云计划ID（从查询录像上云计划列表接口ListRecordBackupPlans中获取） */
+  PlanId: string;
+}
+
+declare interface DeleteRecordBackupPlanResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordBackupTemplateRequest {
+  /** 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取） */
+  TemplateId: string;
+}
+
+declare interface DeleteRecordBackupTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordPlanRequest {
+  /** 上云计划ID */
+  PlanId: string;
+}
+
+declare interface DeleteRecordPlanResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordRetrieveTaskRequest {
+  /** 取回任务ID */
+  TaskId: string;
+}
+
+declare interface DeleteRecordRetrieveTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordTemplateRequest {
+  /** 模板ID */
+  TemplateId: string;
+}
+
+declare interface DeleteRecordTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserDeviceRequest {
+  /** 设备ID（从获取设备列表ListDevices接口中获取） */
+  DeviceId: string;
+}
+
+declare interface DeleteUserDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAITaskRequest {
+  /** AI任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeAITaskResponse {
+  /** AI任务详情 */
+  Data?: AITaskInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAITaskResultRequest {
+  /** AI 任务 ID */
+  TaskId: string;
+  /** 通道ID */
+  ChannelId: string;
+  /** 桶内文件的路径。 */
+  Object?: string;
+  /** AI 任务识别类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和 Car(车辆车牌识别) */
+  DetectType?: string;
+  /** 开始时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天 */
+  BeginTime?: string;
+  /** 结束时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天 */
+  EndTime?: string;
+  /** 页码。默认为1 */
+  PageNumber?: number;
+  /** 每页 AI 识别结果数量。可选值1～100，默认为10（按时间倒序显示识别结果） */
+  PageSize?: number;
+}
+
+declare interface DescribeAITaskResultResponse {
+  /** AI识别结果 */
+  Data?: AITaskResultResponse | null;
+  /** AI识别结果数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCNAMERequest {
+  /** 服务节点 ID（从查询域名可绑定服务节点接口DescribeDomainRegion中获取） */
+  ClusterId: string;
+}
+
+declare interface DescribeCNAMEResponse {
+  /** CNAME 记录值 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceChannelRequest {
+  /** 设备ID（从获取设备列表接口ListDevices中获取） */
+  DeviceId: string;
+}
+
+declare interface DescribeDeviceChannelResponse {
+  /** 设备 ID */
+  DeviceId?: string | null;
+  /** 通道 ID */
+  ChannelId?: string | null;
+  /** 通道编码 */
+  ChannelCode?: string | null;
+  /** 通道名称 */
+  Name?: string | null;
+  /** 流状态（0:未传输,1:传输中） */
+  Status?: number | null;
+  /** 是否可控 Ptz（0:不可控,1:可控） */
+  PTZType?: number | null;
+  /** 通道厂商 */
+  Manufacturer?: string | null;
+  /** 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480）） */
+  Resolution?: string | null;
+  /** 通道在离线状态（0:离线,1:在线） */
+  State?: number | null;
+  /** 所在地域 */
+  Region?: string | null;
+}
+
+declare interface DescribeDevicePresetRequest {
+  /** 通道ID（从通道查询接口DescribeDeviceChannel中获取） */
+  ChannelId: string;
+}
+
+declare interface DescribeDevicePresetResponse {
+  /** 预置位索引 只支持1-10的索引 */
+  Index?: number | null;
+  /** 预置位名称 */
+  Name?: string | null;
+}
+
+declare interface DescribeDeviceRegionRequest {
+}
+
+declare interface DescribeDeviceRegionResponse {
+  /** 返回数据 */
+  Data?: DescribeDeviceRegion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceResponse {
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 设备编码（即我们为设备生成的20位国标编码） */
+  Code?: string | null;
+  /** 设备名称 */
+  Name?: string | null;
+  /** 设备接入协议，1:RTMP,2:GB,3:GW */
+  AccessProtocol?: number | null;
+  /** 设备类型，1:IPC,2:NVR */
+  Type?: number | null;
+  /** 设备接入服务节点id */
+  ClusterId?: string | null;
+  /** 设备接入服务节点名称 */
+  ClusterName?: string | null;
+  /** 设备流传输协议，1:UDP,2:TCP */
+  TransportProtocol?: number | null;
+  /** 设备密码 */
+  Password?: string | null;
+  /** 设备描述 */
+  Description?: string | null;
+  /** sip服务ID */
+  SipId?: string | null;
+  /** sip服务域 */
+  SipDomain?: string | null;
+  /** sip服务IP地址 */
+  SipIp?: string | null;
+  /** sip服务端口 */
+  SipPort?: number | null;
+  /** Rtmp设备推流地址(仅rtmp设备有效) */
+  PushStreamUrl?: string | null;
+  /** 设备状态，0:未注册,1:在线,2:离线,3:禁用 */
+  Status?: number | null;
+  /** 设备所属组织ID */
+  OrganizationId?: string | null;
+  /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
+  GatewayId?: string | null;
+  /** 设备所属网关名称 */
+  GatewayName?: string | null;
+  /** 设备网关协议名称 */
+  ProtocolTypeName?: string | null;
+  /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  ProtocolType?: number | null;
+  /** 设备接入IP */
+  Ip?: string | null;
+  /** 设备Port */
+  Port?: number | null;
+  /** 设备用户名 */
+  Username?: string | null;
+  /** 设备地域 */
+  Region?: string | null;
+  /** 设备厂商 */
+  Manufacturer?: string | null;
+}
+
+declare interface DescribeDomainRegionRequest {
+}
+
+declare interface DescribeDomainRegionResponse {
+  /** 服务节点描述 */
+  Label?: string | null;
+  /** 服务节点 ID（对应为其他接口中所需的 ClusterId） */
+  Value?: string | null;
+  /** 地域信息 */
+  Region?: string | null;
+}
+
+declare interface DescribeDomainRequest {
+}
+
+declare interface DescribeDomainResponse {
+  /** 域名ID */
+  Id?: string | null;
+  /** 播放域名 */
+  PlayDomain?: string | null;
+  /** CNAME 记录值 */
+  InternalDomain?: string | null;
+  /** 是否上传证书（0：否，1：是） */
+  HaveCert?: number | null;
+  /** 服务节点 ID */
+  ClusterId?: string | null;
+  /** 服务节点名称 */
+  ClusterName?: string | null;
+  /** 用户ID */
+  AppId?: number | null;
+}
+
+declare interface DescribeGatewayMonitorRequest {
+  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
+  GatewayId: string;
+}
+
+declare interface DescribeGatewayMonitorResponse {
+  /** 返回数据 */
+  Data?: DescribeGatewayMonitor;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGatewayProtocolRequest {
+}
+
+declare interface DescribeGatewayProtocolResponse {
+  /** 接入协议的字典码 */
+  TypeCode?: string | null;
+  /** 接入协议类型值 */
+  Value?: number | null;
+  /** 接入协议的类型描述 */
+  Label?: string | null;
+}
+
+declare interface DescribeGatewayRequest {
+  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
+  GatewayId: string;
+}
+
+declare interface DescribeGatewayResponse {
+  /** 网关索引ID，用于网关查询，更新，删除操作 */
+  GatewayId?: string | null;
+  /** 网关编码，由网关设备生成的唯一编码 */
+  GwId?: string | null;
+  /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
+  Name?: string | null;
+  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Description?: string | null;
+  /** 服务节点id */
+  ClusterId?: string | null;
+  /** 服务节点名称 */
+  ClusterName?: string | null;
+  /** 网关状态，0：离线，1:在线 */
+  Status?: number | null;
+  /** 网关版本 */
+  Version?: GatewayVersion[] | null;
+  /** 网关下挂设备数量 */
+  DeviceNum?: number | null;
+  /** 激活时间 */
+  CreatedAt?: string | null;
+  /** 所属地域 */
+  Region?: string | null;
+}
+
+declare interface DescribeGatewayVersionRequest {
+  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
+  GatewayId: string;
+}
+
+declare interface DescribeGatewayVersionResponse {
+  /** 网关服务列表 */
+  Services?: DescribeGatewayVersion[] | null;
+}
+
+declare interface DescribeOrganizationRequest {
+}
+
+declare interface DescribeOrganizationResponse {
+  /** 组织 ID */
+  OrganizationId?: string | null;
+  /** 组织名称 */
+  Name?: string | null;
+  /** 组织父节点 ID */
+  ParentId?: string | null;
+  /** 组织层级 */
+  Level?: number | null;
+  /** 用户id */
+  AppId?: number | null;
+  /** 组织结构 */
+  ParentIds?: string | null;
+  /** 设备总数 */
+  Total?: number | null;
+  /** 设备在线数量 */
+  Online?: number | null;
+}
+
+declare interface DescribeRecordBackupPlanRequest {
+  /** 录像上云计划ID（从查询录像上云计划列表接口ListRecordBackupPlans中获取） */
+  PlanId: string;
+}
+
+declare interface DescribeRecordBackupPlanResponse {
+  /** 录像上云计划ID */
+  PlanId?: string;
+  /** 录像上云计划名称 */
+  PlanName?: string;
+  /** 录像上云模板ID */
+  TemplateId?: string;
+  /** 录像上云计划描述 */
+  Describe?: string;
+  /** 云文件生命周期 */
+  LifeCycle?: LifeCycleData;
+  /** 录像上云计划状态，1:正常使用中，0:删除中，无法使用 */
+  Status?: number;
+  /** 通道数量 */
+  ChannelCount?: number;
+  /** 创建时间 */
+  CreateAt?: string;
+  /** 修改时间 */
+  UpdateAt?: string;
+}
+
+declare interface DescribeRecordBackupTemplateRequest {
+  /** 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取） */
+  TemplateId: string;
+}
+
+declare interface DescribeRecordBackupTemplateResponse {
+  /** 模板ID */
+  TemplateId?: string | null;
+  /** 模板名称 */
+  TemplateName?: string | null;
+  /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  TimeSections?: RecordTemplateTimeSections[] | null;
+  /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  /** 上云倍速（支持1，2，4倍速） */
+  Scale?: number | null;
+  /** 创建时间 */
+  CreateAt?: string | null;
+  /** 更新时间 */
+  UpdateAt?: string | null;
+}
+
+declare interface DescribeRecordFileRequest {
+  /** 通道所属设备ID */
+  DeviceId: string;
+  /** 通道ID */
+  ChannelId: string;
+  /** 检索开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天 */
+  StartTime: number;
+  /** 检索结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天 */
+  EndTime: number;
+}
+
+declare interface DescribeRecordFileResponse {
+  /** 提示类型，0:时间段内无归档录像，1:时间段内有归档录像 */
+  Tips: number;
+  /** 存在为数组格式，不存在字段内容为空 */
+  List?: RecordTimeLine[] | null;
+}
+
+declare interface DescribeRecordPlanRequest {
+  /** 实时上云计划ID */
+  PlanId: string;
+}
+
+declare interface DescribeRecordPlanResponse {
+  /** 返回结果 */
+  Data?: RecordPlanBaseInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordPlaybackUrlRequest {
+  /** 设备通道ID */
+  ChannelId: string;
+  /** 回放开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天 */
+  StartTime: number;
+  /** 回放结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天 */
+  EndTime: number;
+}
+
+declare interface DescribeRecordPlaybackUrlResponse {
+  /** 返回结果 */
+  Data?: RecordPlaybackUrl;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordRetrieveTaskRequest {
+  /** 云录像取回任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeRecordRetrieveTaskResponse {
+  /** 取回任务ID */
+  TaskId?: string;
+  /** 取回任务名称 */
+  TaskName?: string;
+  /** 取回录像的开始时间 */
+  StartTime?: number;
+  /** 取回录像的结束时间 */
+  EndTime?: number;
+  /** 取回模式，1:极速模式，其他暂不支持 */
+  Mode?: number;
+  /** 副本有效期 */
+  Expiration?: number;
+  /** 任务状态，0:已取回，1:取回中，2:待取回 */
+  Status?: number;
+  /** 取回容量，单位MB */
+  Capacity?: number;
+  /** 任务的设备通道id */
+  Channels?: RecordRetrieveTaskChannelInfo[];
+  /** 任务描述 */
+  Describe?: string | null;
+  /** 任务通道数量 */
+  ChannelCount?: number;
+}
+
+declare interface DescribeRecordTemplateRequest {
+  /** 模板ID */
+  TemplateId: string;
+}
+
+declare interface DescribeRecordTemplateResponse {
+  /** 返回结果 */
+  Data?: RecordTemplateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamAuthRequest {
+}
+
+declare interface DescribeStreamAuthResponse {
+  /** 鉴权配置ID（uuid） */
+  Id?: string | null;
+  /** 是否开播放鉴权（1:开启,0:关闭） */
+  PullState?: number | null;
+  /** 播放密钥（仅支持字母数字，长度0-10位） */
+  PullSecret?: string | null;
+  /** 播放过期时间（单位：分钟） */
+  PullExpired?: number | null;
+  /** 是否开启推流鉴权（1:开启,0:关闭） */
+  PushState?: number | null;
+  /** 推流密钥（仅支持字母数字，长度0-10位） */
+  PushSecret?: string | null;
+  /** 推流过期时间（单位：分钟） */
+  PushExpired?: number | null;
+  /** 用户ID */
+  AppId?: number | null;
+}
+
+declare interface DescribeUserDeviceRequest {
+  /** 设备ID（从获取设备列表接口ListDevices中获取） */
+  DeviceId: string;
+}
+
+declare interface DescribeUserDeviceResponse {
+  /** 返回结果 */
+  Data?: DescribeDeviceResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVideoDownloadUrlRequest {
+  /** 通道 ID */
+  ChannelId: string;
+  /** 下载的开始时间，UTC 秒数，开始和结束时间段最长为30分钟，且不能跨天 */
+  BeginTime: string;
+  /** 下载的结束时间，UTC 秒数，开始和结束时间段最长为30分钟，且不能跨天 */
+  EndTime: string;
+  /** 文件格式，"mp4"：mp4格式，"ts"：ts文件格式 */
+  FileType: string;
+  /** 响应data中是否携带实际下载录像的开始时间与结束时间 */
+  IsRespActualTime?: boolean;
+}
+
+declare interface DescribeVideoDownloadUrlResponse {
+  /** 录像文件下载 URL注意：URL 有效期是10分钟，过期后将拒绝访问，若需再用请重新获取 录像文件下载采用分块传输编码，响应头Transfer-Encoding:chunked 下载文件命名格式为{ChannelId}-{BeginTime}-{EndTime}.{FileType} */
+  Url?: string;
+  /** 实际下载录像的开始时间注意：当请求中指定IsRespActualTime参数为true时，才有该字段 */
+  ActualBeginTime?: string;
+  /** 实际下载录像的结束时间注意：当请求中指定IsRespActualTime参数为true时，才有该字段 */
+  ActualEndTime?: string;
+}
+
+declare interface ListAITasksRequest {
+  /** 是否包含通道列表。"true"代表包含通道列表，"false"代表不包含通道列表，默认为 false */
+  IsContainChannelList?: boolean;
+  /** 是否包含AI配置。"true"代表包含任务配置，"false"代表不包含任务配置，默认为 false。 */
+  IsContainTemplate?: boolean;
+  /** 页码。默认为1 */
+  PageNumber?: number;
+  /** 每页数量。可选值1～200，默认为20 */
+  PageSize?: number;
+}
+
+declare interface ListAITasksResponse {
+  /** AI 任务数量 */
+  TotalCount?: number;
+  /** AI任务列表 */
+  Data?: ListAITaskData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListDevicesRequest {
+  /** 组织ID */
+  OrganizationId: string;
+  /** 是否获取当前层级及子层级的设备列表，默认false */
+  IsContainSubLevel?: boolean;
+  /** 设备接入协议。1:RTMP，2:GB，3:GW */
+  AccessProtocol?: number;
+  /** 设备类型。1:IPC，2:NVR */
+  Type?: number;
+  /** 设备状态。0:未注册，1:在线，2:离线，3:禁用 */
+  Status?: number;
+  /** 服务节点ID */
+  ClusterId?: string;
+  /** 模糊搜索设备关键字 */
+  Keyword?: string;
+  /** 当前用户Uin */
+  CurrentUin?: number;
+  /** 页码，默认为1。 */
+  PageNumber?: number;
+  /** 每页数量，默认为20。 */
+  PageSize?: number;
+}
+
+declare interface ListDevicesResponse {
+  /** 设备列表详情 */
+  Data?: ListDeviceInfo[] | null;
+  /** 设备总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListGatewaysRequest {
+  /** 页码，默认为1 */
+  PageNumber?: number;
+  /** 每页数量，默认为20 */
+  PageSize?: number;
+  /** 网关名称 */
+  Name?: string;
+  /** 服务节点ID */
+  ClusterId?: string;
+  /** 网关状态（0：离线，1 ：在线） */
+  Status?: number;
+}
+
+declare interface ListGatewaysResponse {
+  /** 网关列表 */
+  List?: GatewaysData[] | null;
+  /** 网关数量 */
+  TotalCount?: number | null;
+}
+
+declare interface ListOrganizationChannelNumbersRequest {
+  /** 组织ID，json数组格式，最多一次支持10个组织 */
+  OrganizationId: string[];
+}
+
+declare interface ListOrganizationChannelNumbersResponse {
+  /** 组织下通道总数 */
+  TotalCount: number;
+  /** 组织下未添加到计划的通道总数 */
+  NotInPlanCount?: number;
+}
+
+declare interface ListOrganizationChannelsRequest {
+  /** 组织ID */
+  OrganizationId: string;
+  /** 每页最大数量 */
+  PageSize: number;
+  /** 第几页 */
+  PageNumber: number;
+  /** 查询条件，则按照设备名称查询查询条件同时只有一个生效。长度不超过32字节 */
+  DeviceName?: string;
+  /** 查询条件，则按照通道名称查询查询条件同时只有一个生效。长度不超过32字节 */
+  ChannelName?: string;
+}
+
+declare interface ListOrganizationChannelsResponse {
+  /** 第几页 */
+  PageNumber?: number;
+  /** 当前页的设备数量 */
+  PageSize?: number;
+  /** 本次查询的设备通道总数 */
+  TotalCount?: number;
+  /** 设备通道信息列表 */
+  List?: OrganizationChannelInfo[] | null;
+}
+
+declare interface ListRecordBackupPlanDevicesRequest {
+  /** 录像计划ID（从查询录像上云计划列表接口ListRecordBackupPlans中获取） */
+  PlanId: string;
+  /** 按照设备名称查询（为空时，不参考该参数） */
+  DeviceName?: string;
+  /** 按照通道名称查询（为空时，不参考该参数） */
+  ChannelName?: string;
+  /** 按照组织名称查询（为空时，不参考该参数） */
+  OrganizationName?: string;
+  /** 每页最大数量 */
+  PageSize?: string;
+  /** 第几页 */
+  PageNumber?: string;
+}
+
+declare interface ListRecordBackupPlanDevicesResponse {
+  /** 第几页 */
+  PageNumber?: number | null;
+  /** 当前页的设备数量 */
+  PageSize?: number | null;
+  /** 本次查询的设备通道总数 */
+  TotalCount?: number | null;
+  /** 设备通道信息列表 */
+  List?: RecordPlanChannelInfo | null;
+}
+
+declare interface ListRecordBackupPlanResponse {
+  /** 录像上云计划ID */
+  PlanId?: string;
+  /** 录像上云计划名称 */
+  PlanName?: string;
+  /** 录像上云模板ID */
+  TemplateId?: string;
+  /** 录像上云计划描述 */
+  Describe?: string;
+  /** 云文件生命周期 */
+  LifeCycle?: LifeCycleData;
+  /** 录像上云计划状态，1:正常使用中，0:删除中，无法使用 */
+  Status?: number;
+  /** 通道数量 */
+  ChannelCount?: number;
+  /** 创建时间 */
+  CreateAt?: string;
+  /** 修改时间 */
+  UpdateAt?: string;
+}
+
+declare interface ListRecordBackupPlansRequest {
+}
+
+declare interface ListRecordBackupPlansResponse {
+  /** 返回数据 */
+  Data?: ListRecordBackupPlanResponse[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListRecordBackupTemplatesRequest {
+}
+
+declare interface ListRecordBackupTemplatesResponse {
+  /** 模板ID */
+  TemplateId?: string | null;
+  /** 模板名称 */
+  TemplateName?: string | null;
+  /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  TimeSections?: RecordTemplateTimeSections[] | null;
+  /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  /** 上云倍速（支持1，2，4倍速） */
+  Scale?: number | null;
+  /** 创建时间 */
+  CreateAt?: string | null;
+  /** 更新时间 */
+  UpdateAt?: string | null;
+}
+
+declare interface ListRecordPlanChannelsRequest {
+}
+
+declare interface ListRecordPlanChannelsResponse {
+  /** 用户所有计划下通道id，存在通道是为数组格式，不存在时，字段数据为空 */
+  List?: string[] | null;
+}
+
+declare interface ListRecordPlanDevicesRequest {
+  /** 上云计划ID */
+  PlanId: string;
+  /** 每页最大数量 */
+  PageSize: number;
+  /** 第几页 */
+  PageNumber: number;
+  /** 按照设备名称查询，为空时，不参考该参数通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节 */
+  DeviceName?: string;
+  /** 按照通道名称查询，为空时，不参考该参数通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节 */
+  ChannelName?: string;
+  /** 按照组织名称查询|，为空时，不参考该参数通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节 */
+  OrganizationName?: string;
+}
+
+declare interface ListRecordPlanDevicesResponse {
+  /** 第几页 */
+  PageNumber?: number;
+  /** 当前页的设备数量 */
+  PageSize?: number;
+  /** 本次查询的设备通道总数 */
+  TotalCount?: number;
+  /** 设备通道信息列表 */
+  List?: RecordPlanChannelInfo[] | null;
+}
+
+declare interface ListRecordPlansRequest {
+}
+
+declare interface ListRecordPlansResponse {
+  /** 返回结果，存在计划时，为Json数组格式，不存在计划时，字段数据为空 */
+  Data?: RecordPlanBaseInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListRecordRetrieveTasksRequest {
+}
+
+declare interface ListRecordRetrieveTasksResponse {
+  /** 返回结果 */
+  Data?: RecordRetrieveTaskDetailsInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListRecordTemplatesRequest {
+}
+
+declare interface ListRecordTemplatesResponse {
+  /** 返回结果，存在模板时，为Json数组格式，不存在模板时，字段数据为空 */
+  Data?: RecordTemplateInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PlayRecordRequest {
+  /** 通道 ID（从查询通道DescribeDeviceChannel接口中获取） */
+  ChannelId: string;
+  /** 起始时间 */
+  Start: number;
+  /** 结束时间 */
+  End: number;
+  /** 流类型（1:主码流；2:子码流（不可以和 Resolution 同时下发）） */
+  StreamType?: number;
+  /** 分辨率（1:QCIF；2:CIF； 3:4CIF； 4:D1； 5:720P； 6:1080P/I； 自定义的19201080等等（需设备支持）（不可以和 StreamType 同时下发）） */
+  Resolution?: string;
+}
+
+declare interface PlayRecordResponse {
+  /** 录像播放地址 */
+  Flv?: string | null;
+}
+
+declare interface RecordPlanOptResponse {
+  /** 上云计划ID */
+  PlanId?: string;
+  /** 上云计划名称 */
+  PlanName?: string;
+  /** 上云模板ID */
+  TemplateId?: string;
+  /** 上云计划描述 */
+  Describe?: string | null;
+  /** 云文件生命周期 */
+  LifeCycle?: LifeCycleData;
+  /** 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义 */
+  StreamType?: string | null;
+}
+
+declare interface RefreshDeviceChannelRequest {
+  /** 设备 ID（从获取设备列表ListDevices接口中获取） */
+  DeviceId: string;
+}
+
+declare interface RefreshDeviceChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateAITaskRequest {
+  /** AI 任务 ID */
+  TaskId: string;
+  /** AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符 */
+  Name?: string;
+  /** AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Desc?: string;
+  /** 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。 */
+  ChannelList?: string[];
+  /** AI 结果回调地址。类似 "http://ip:port/xxx或者https://domain/xxx */
+  CallbackUrl?: string;
+  /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
+  IsStartTheTask?: boolean;
+  /** AI 配置列表 */
+  Templates?: AITemplates[];
+}
+
+declare interface UpdateAITaskResponse {
+  /** AI任务信息 */
+  Data?: AITaskInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateAITaskStatusRequest {
+  /** AI 任务 ID */
+  TaskId: string;
+  /** AI 任务状态。"on"代表开启了 AI 分析任务，"off"代表停止AI分析任务 */
+  Status: string;
+}
+
+declare interface UpdateAITaskStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateDeviceOrganizationRequest {
+  /** 设备 ID 数组（从获取设备列表接口ListDevices中获取） */
+  DeviceIds: string[];
+  /** 组织 ID（从查询组织接口DescribeOrganization中获取） */
+  OrganizationId: string;
+}
+
+declare interface UpdateDeviceOrganizationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateDeviceResponse {
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 设备编码（即我们为设备生成的20位国标编码） */
+  Code?: string | null;
+  /** 设备名称 */
+  Name?: string | null;
+  /** 设备接入协议，1:RTMP,2:GB,3:GW */
+  AccessProtocol?: number | null;
+  /** 设备类型，1:IPC,2:NVR */
+  Type?: number | null;
+  /** 设备接入服务节点ID */
+  ClusterId?: string | null;
+  /** 设备接入服务节点名称 */
+  ClusterName?: string | null;
+  /** 设备流传输协议，1:UDP,2:TCP */
+  TransportProtocol?: number | null;
+  /** 设备密码 */
+  Password?: string | null;
+  /** 设备描述 */
+  Description?: string | null;
+  /** 设备状态，0:未注册,1:在线,2:离线,3:禁用 */
+  Status?: number | null;
+  /** 设备所属组织ID */
+  OrganizationId?: number | null;
+  /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
+  GatewayId?: string | null;
+  /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  ProtocolType?: number | null;
+  /** 设备接入IP */
+  Ip?: string | null;
+  /** 设备Port */
+  Port?: number | null;
+  /** 设备用户名 */
+  Username?: string | null;
+  /** 用户Id */
+  AppId?: number | null;
+}
+
+declare interface UpdateDeviceStatusRequest {
+  /** 设备 ID（从获取设备列表接口ListDevices中获取） */
+  DeviceId: string;
+  /** 禁用启用状态码（2：启用，3:禁用） */
+  Status: number;
+}
+
+declare interface UpdateDeviceStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateGatewayRequest {
+  /** 网关索引ID（从获取网关列表ListGateways接口中获取） */
+  GatewayId: string;
+  /** 仅支持中文、英文、数网关名称，字、_、-，长度不超过32个字符 */
+  Name?: string;
+  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Description?: string;
+}
+
+declare interface UpdateGatewayResponse {
+  /** 网关索引ID */
+  GatewayId?: string | null;
+  /** 网关编码 */
+  GwId?: string | null;
+  /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
+  Name?: string | null;
+  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  Description?: string | null;
+  /** 服务节点ID */
+  ClusterId?: string | null;
+  /** 服务节点名称 */
+  ClusterName?: string | null;
+  /** 网关状态，0：离线，1:在线 */
+  Status?: number | null;
+  /** 激活时间 */
+  CreatedAt?: number | null;
+  /** 网关密钥 */
+  Secret?: string | null;
+  /** 网关版本信息 */
+  Version?: string | null;
+}
+
+declare interface UpdateOrgResponse {
+  /** 组织 ID */
+  OrganizationId?: string | null;
+  /** 组织名称 */
+  Name?: string | null;
+  /** 组织父节点 ID */
+  ParentId?: string | null;
+  /** 组织层级 */
+  Level?: number | null;
+  /** 用户ID */
+  AppId?: number | null;
+  /** 组织结构 */
+  ParentIds?: string | null;
+  /** 设备总数 */
+  Total?: number | null;
+  /** 设备在线数量 */
+  Online?: number | null;
+}
+
+declare interface UpdateOrganizationRequest {
+  /** 组织ID（从查询组织接口DescribeOrganization中获取） */
+  OrganizationId: string;
+  /** 组织名称 */
+  Name: string;
+}
+
+declare interface UpdateOrganizationResponse {
+  /** 返回结果 */
+  Data?: UpdateOrgResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateRecordBackupPlanRequest {
+  /** 计划ID */
+  PlanId: string;
+  /** 修改的内容 */
+  Mod: UpdateRecordBackupPlanModify;
+}
+
+declare interface UpdateRecordBackupPlanResponse {
+  /** 录像上云计划ID */
+  PlanId?: string;
+  /** 录像上云计划名称 */
+  PlanName?: string;
+  /** 录像上云模板ID */
+  TemplateId?: string;
+  /** 录像上云计划描述 */
+  Describe?: string;
+  /** 云文件生命周期 */
+  LifeCycle?: LifeCycleData;
+  /** 录像上云计划状态，1:正常使用中，0:删除中，无法使用 */
+  Status?: number;
+  /** 通道数量 */
+  ChannelCount?: number;
+  /** 创建时间 */
+  CreateAt?: string;
+  /** 修改时间 */
+  UpdateAt?: string;
+}
+
+declare interface UpdateRecordBackupTemplateRequest {
+  /** 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取） */
+  TemplateId: string;
+  /** 修改录像上云模板数据 */
+  Mod: UpdateRecordBackupTemplateModify;
+}
+
+declare interface UpdateRecordBackupTemplateResponse {
+  /** 模板ID */
+  TemplateId?: string | null;
+  /** 模板名称 */
+  TemplateName?: string | null;
+  /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  TimeSections?: RecordTemplateTimeSections[] | null;
+  /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
+  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  /** 上云倍速（支持1，2，4倍速） */
+  Scale?: number | null;
+  /** 创建时间 */
+  CreateAt?: string | null;
+  /** 更新时间 */
+  UpdateAt?: string | null;
+}
+
+declare interface UpdateRecordPlanRequest {
+  /** 计划ID */
+  PlanId: string;
+  /** 修改计划的内容 */
+  Mod: UpdateRecordPlanData;
+}
+
+declare interface UpdateRecordPlanResponse {
+  /** 返回结果 */
+  Data?: RecordPlanOptResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateRecordTemplateRequest {
+  /** 模板ID */
+  TemplateId: string;
+  /** 修改内容 */
+  Mod: UpdateRecordTemplateData;
+}
+
+declare interface UpdateRecordTemplateResponse {
+  /** 返回结果 */
+  Data?: RecordTemplateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateUserDeviceRequest {
+  /** 设备ID（从获取设备列表接口ListDevices中获取） */
+  DeviceId: string;
+  /** 设备名称（仅支持中文、英文、数字、_、-，长度不超过32个字符） */
+  Name?: string;
+  /** 设备流传输协议，仅国标设备有效，填0则不做更改（1:UDP,2:TCP） */
+  TransportProtocol?: number;
+  /** 设备密码（仅国标，网关设备支持） */
+  Password?: string;
+  /** 设备描述（仅支持中文、英文、数字、_、-，长度不超过128位） */
+  Description?: string;
+  /** 设备接入Ip（仅网关接入支持） */
+  Ip?: string;
+  /** 设备Port（仅网关接入支持） */
+  Port?: number;
+  /** 设备用户名（仅网关接入支持） */
+  Username?: string;
+}
+
+declare interface UpdateUserDeviceResponse {
+  /** 返回数据 */
+  Data?: UpdateDeviceResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpgradeGatewayRequest {
+  /** 网关索引ID（从获取网关列表ListGateways接口中获取） */
+  GatewayId: string;
+}
+
+declare interface UpgradeGatewayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+/** {@link Iss 智能视图计算平台} */
+declare interface Iss {
+  (): Versions;
+  /** 添加AI任务 {@link AddAITaskRequest} {@link AddAITaskResponse} */
+  AddAITask(data: AddAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<AddAITaskResponse>;
+  /** 新增组织 {@link AddOrganizationRequest} {@link AddOrganizationResponse} */
+  AddOrganization(data: AddOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationResponse>;
+  /** 新增录像上云计划 {@link AddRecordBackupPlanRequest} {@link AddRecordBackupPlanResponse} */
+  AddRecordBackupPlan(data: AddRecordBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<AddRecordBackupPlanResponse>;
+  /** 新增录像上云模板 {@link AddRecordBackupTemplateRequest} {@link AddRecordBackupTemplateResponse} */
+  AddRecordBackupTemplate(data: AddRecordBackupTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<AddRecordBackupTemplateResponse>;
+  /** 新增实时上云计划 {@link AddRecordPlanRequest} {@link AddRecordPlanResponse} */
+  AddRecordPlan(data: AddRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<AddRecordPlanResponse>;
+  /** 新建取回任务 {@link AddRecordRetrieveTaskRequest} {@link AddRecordRetrieveTaskResponse} */
+  AddRecordRetrieveTask(data: AddRecordRetrieveTaskRequest, config?: AxiosRequestConfig): AxiosPromise<AddRecordRetrieveTaskResponse>;
+  /** 新增实时上云模板 {@link AddRecordTemplateRequest} {@link AddRecordTemplateResponse} */
+  AddRecordTemplate(data: AddRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<AddRecordTemplateResponse>;
+  /** 设置推拉流鉴权配置 {@link AddStreamAuthRequest} {@link AddStreamAuthResponse} */
+  AddStreamAuth(data: AddStreamAuthRequest, config?: AxiosRequestConfig): AxiosPromise<AddStreamAuthResponse>;
+  /** 新增设备 {@link AddUserDeviceRequest} {@link AddUserDeviceResponse} */
+  AddUserDevice(data: AddUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserDeviceResponse>;
+  /** 检测域名是否备案 {@link CheckDomainRequest} {@link CheckDomainResponse} */
+  CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
+  /** ptz 控制 {@link ControlDevicePTZRequest} {@link ControlDevicePTZResponse} */
+  ControlDevicePTZ(data: ControlDevicePTZRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDevicePTZResponse>;
+  /** 预置位操作 {@link ControlDevicePresetRequest} {@link ControlDevicePresetResponse} */
+  ControlDevicePreset(data: ControlDevicePresetRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDevicePresetResponse>;
+  /** 获取开流地址 {@link ControlDeviceStreamRequest} {@link ControlDeviceStreamResponse} */
+  ControlDeviceStream(data: ControlDeviceStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceStreamResponse>;
+  /** 本地录像回放控制 {@link ControlRecordRequest} {@link ControlRecordResponse} */
+  ControlRecord(data: ControlRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordResponse>;
+  /** 查询本地录像时间轴 {@link ControlRecordTimelineRequest} {@link ControlRecordTimelineResponse} */
+  ControlRecordTimeline(data: ControlRecordTimelineRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordTimelineResponse>;
+  /** 删除AI任务 {@link DeleteAITaskRequest} {@link DeleteAITaskResponse} */
+  DeleteAITask(data: DeleteAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAITaskResponse>;
+  /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
+  DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
+  /** 删除网关 {@link DeleteGatewayRequest} {@link DeleteGatewayResponse} */
+  DeleteGateway(data: DeleteGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayResponse>;
+  /** 删除组织 {@link DeleteOrganizationRequest} {@link DeleteOrganizationResponse} */
+  DeleteOrganization(data: DeleteOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationResponse>;
+  /** 删除录像上云计划 {@link DeleteRecordBackupPlanRequest} {@link DeleteRecordBackupPlanResponse} */
+  DeleteRecordBackupPlan(data: DeleteRecordBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordBackupPlanResponse>;
+  /** 删除录像上云模板 {@link DeleteRecordBackupTemplateRequest} {@link DeleteRecordBackupTemplateResponse} */
+  DeleteRecordBackupTemplate(data: DeleteRecordBackupTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordBackupTemplateResponse>;
+  /** 删除实时上云计划 {@link DeleteRecordPlanRequest} {@link DeleteRecordPlanResponse} */
+  DeleteRecordPlan(data: DeleteRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordPlanResponse>;
+  /** 删除取回任务 {@link DeleteRecordRetrieveTaskRequest} {@link DeleteRecordRetrieveTaskResponse} */
+  DeleteRecordRetrieveTask(data: DeleteRecordRetrieveTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordRetrieveTaskResponse>;
+  /** 删除实时上云模板 {@link DeleteRecordTemplateRequest} {@link DeleteRecordTemplateResponse} */
+  DeleteRecordTemplate(data: DeleteRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordTemplateResponse>;
+  /** 删除设备 {@link DeleteUserDeviceRequest} {@link DeleteUserDeviceResponse} */
+  DeleteUserDevice(data: DeleteUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserDeviceResponse>;
+  /** 获取AI任务详情 {@link DescribeAITaskRequest} {@link DescribeAITaskResponse} */
+  DescribeAITask(data: DescribeAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITaskResponse>;
+  /** 获取AI任务识别结果 {@link DescribeAITaskResultRequest} {@link DescribeAITaskResultResponse} */
+  DescribeAITaskResult(data: DescribeAITaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITaskResultResponse>;
+  /** 根据服务节点获取 CNAME {@link DescribeCNAMERequest} {@link DescribeCNAMEResponse} */
+  DescribeCNAME(data: DescribeCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNAMEResponse>;
+  /** 通道查询 {@link DescribeDeviceChannelRequest} {@link DescribeDeviceChannelResponse} */
+  DescribeDeviceChannel(data: DescribeDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceChannelResponse>;
+  /** 预置位查询 {@link DescribeDevicePresetRequest} {@link DescribeDevicePresetResponse} */
+  DescribeDevicePreset(data: DescribeDevicePresetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePresetResponse>;
+  /** 查询设备可用服务节点 {@link DescribeDeviceRegionRequest} {@link DescribeDeviceRegionResponse} */
+  DescribeDeviceRegion(data?: DescribeDeviceRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceRegionResponse>;
+  /** 查询域名 {@link DescribeDomainRequest} {@link DescribeDomainResponse} */
+  DescribeDomain(data?: DescribeDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainResponse>;
+  /** 查询域名可绑定服务节点 {@link DescribeDomainRegionRequest} {@link DescribeDomainRegionResponse} */
+  DescribeDomainRegion(data?: DescribeDomainRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainRegionResponse>;
+  /** 获取网关详情 {@link DescribeGatewayRequest} {@link DescribeGatewayResponse} */
+  DescribeGateway(data: DescribeGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayResponse>;
+  /** 获取网关监控信息 {@link DescribeGatewayMonitorRequest} {@link DescribeGatewayMonitorResponse} */
+  DescribeGatewayMonitor(data: DescribeGatewayMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayMonitorResponse>;
+  /** 查询网关接入协议 {@link DescribeGatewayProtocolRequest} {@link DescribeGatewayProtocolResponse} */
+  DescribeGatewayProtocol(data?: DescribeGatewayProtocolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayProtocolResponse>;
+  /** 查询网关服务版本 {@link DescribeGatewayVersionRequest} {@link DescribeGatewayVersionResponse} */
+  DescribeGatewayVersion(data: DescribeGatewayVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayVersionResponse>;
+  /** 查询组织 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */
+  DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
+  /** 查询录像上云计划详情 {@link DescribeRecordBackupPlanRequest} {@link DescribeRecordBackupPlanResponse} */
+  DescribeRecordBackupPlan(data: DescribeRecordBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordBackupPlanResponse>;
+  /** 查询录像上云模板详情 {@link DescribeRecordBackupTemplateRequest} {@link DescribeRecordBackupTemplateResponse} */
+  DescribeRecordBackupTemplate(data: DescribeRecordBackupTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordBackupTemplateResponse>;
+  /** 查询云端录像时间轴 {@link DescribeRecordFileRequest} {@link DescribeRecordFileResponse} */
+  DescribeRecordFile(data: DescribeRecordFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordFileResponse>;
+  /** 查询实时上云计划详情 {@link DescribeRecordPlanRequest} {@link DescribeRecordPlanResponse} */
+  DescribeRecordPlan(data: DescribeRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordPlanResponse>;
+  /** 获取云端录像URL地址 {@link DescribeRecordPlaybackUrlRequest} {@link DescribeRecordPlaybackUrlResponse} */
+  DescribeRecordPlaybackUrl(data: DescribeRecordPlaybackUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordPlaybackUrlResponse>;
+  /** 查询取回任务详情 {@link DescribeRecordRetrieveTaskRequest} {@link DescribeRecordRetrieveTaskResponse} */
+  DescribeRecordRetrieveTask(data: DescribeRecordRetrieveTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordRetrieveTaskResponse>;
+  /** 查询实时上云模板详情 {@link DescribeRecordTemplateRequest} {@link DescribeRecordTemplateResponse} */
+  DescribeRecordTemplate(data: DescribeRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTemplateResponse>;
+  /** 查询推拉流鉴权配置 {@link DescribeStreamAuthRequest} {@link DescribeStreamAuthResponse} */
+  DescribeStreamAuth(data?: DescribeStreamAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamAuthResponse>;
+  /** 查询设备详情 {@link DescribeUserDeviceRequest} {@link DescribeUserDeviceResponse} */
+  DescribeUserDevice(data: DescribeUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDeviceResponse>;
+  /** 获取云端录像下载URL地址 {@link DescribeVideoDownloadUrlRequest} {@link DescribeVideoDownloadUrlResponse} */
+  DescribeVideoDownloadUrl(data: DescribeVideoDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoDownloadUrlResponse>;
+  /** 获取AI任务列表 {@link ListAITasksRequest} {@link ListAITasksResponse} */
+  ListAITasks(data?: ListAITasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListAITasksResponse>;
+  /** 获取设备列表 {@link ListDevicesRequest} {@link ListDevicesResponse} */
+  ListDevices(data: ListDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDevicesResponse>;
+  /** 获取网关列表 {@link ListGatewaysRequest} {@link ListGatewaysResponse} */
+  ListGateways(data?: ListGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<ListGatewaysResponse>;
+  /** 查询组织目录下的未添加到实时上云计划中的通道数量 {@link ListOrganizationChannelNumbersRequest} {@link ListOrganizationChannelNumbersResponse} */
+  ListOrganizationChannelNumbers(data: ListOrganizationChannelNumbersRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationChannelNumbersResponse>;
+  /** 查询组织目录下的通道列表 {@link ListOrganizationChannelsRequest} {@link ListOrganizationChannelsResponse} */
+  ListOrganizationChannels(data: ListOrganizationChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationChannelsResponse>;
+  /** 查询录像上云计划下的设备通道列表 {@link ListRecordBackupPlanDevicesRequest} {@link ListRecordBackupPlanDevicesResponse} */
+  ListRecordBackupPlanDevices(data: ListRecordBackupPlanDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordBackupPlanDevicesResponse>;
+  /** 查询录像上云计划列表 {@link ListRecordBackupPlansRequest} {@link ListRecordBackupPlansResponse} */
+  ListRecordBackupPlans(data?: ListRecordBackupPlansRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordBackupPlansResponse>;
+  /** 查询录像上云模板列表 {@link ListRecordBackupTemplatesRequest} {@link ListRecordBackupTemplatesResponse} */
+  ListRecordBackupTemplates(data?: ListRecordBackupTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordBackupTemplatesResponse>;
+  /** 查询用户下所有实时上云计划中的通道列表 {@link ListRecordPlanChannelsRequest} {@link ListRecordPlanChannelsResponse} */
+  ListRecordPlanChannels(data?: ListRecordPlanChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordPlanChannelsResponse>;
+  /** 查询实时上云计划下的设备通道列表 {@link ListRecordPlanDevicesRequest} {@link ListRecordPlanDevicesResponse} */
+  ListRecordPlanDevices(data: ListRecordPlanDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordPlanDevicesResponse>;
+  /** 查询实时上云计划列表 {@link ListRecordPlansRequest} {@link ListRecordPlansResponse} */
+  ListRecordPlans(data?: ListRecordPlansRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordPlansResponse>;
+  /** 查询取回任务列表 {@link ListRecordRetrieveTasksRequest} {@link ListRecordRetrieveTasksResponse} */
+  ListRecordRetrieveTasks(data?: ListRecordRetrieveTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordRetrieveTasksResponse>;
+  /** 查询实时上云模板列表 {@link ListRecordTemplatesRequest} {@link ListRecordTemplatesResponse} */
+  ListRecordTemplates(data?: ListRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordTemplatesResponse>;
+  /** 获取本地录像URL地址 {@link PlayRecordRequest} {@link PlayRecordResponse} */
+  PlayRecord(data: PlayRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PlayRecordResponse>;
+  /** 刷新设备通道 {@link RefreshDeviceChannelRequest} {@link RefreshDeviceChannelResponse} */
+  RefreshDeviceChannel(data: RefreshDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDeviceChannelResponse>;
+  /** 更新AI任务 {@link UpdateAITaskRequest} {@link UpdateAITaskResponse} */
+  UpdateAITask(data: UpdateAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAITaskResponse>;
+  /** 更新 AI 任务状态 {@link UpdateAITaskStatusRequest} {@link UpdateAITaskStatusResponse} */
+  UpdateAITaskStatus(data: UpdateAITaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAITaskStatusResponse>;
+  /** 批量修改设备组织 {@link UpdateDeviceOrganizationRequest} {@link UpdateDeviceOrganizationResponse} */
+  UpdateDeviceOrganization(data: UpdateDeviceOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceOrganizationResponse>;
+  /** 禁用-启用设备 {@link UpdateDeviceStatusRequest} {@link UpdateDeviceStatusResponse} */
+  UpdateDeviceStatus(data: UpdateDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceStatusResponse>;
+  /** 修改网关信息 {@link UpdateGatewayRequest} {@link UpdateGatewayResponse} */
+  UpdateGateway(data: UpdateGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGatewayResponse>;
+  /** 修改组织 {@link UpdateOrganizationRequest} {@link UpdateOrganizationResponse} */
+  UpdateOrganization(data: UpdateOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationResponse>;
+  /** 修改录像上云计划 {@link UpdateRecordBackupPlanRequest} {@link UpdateRecordBackupPlanResponse} */
+  UpdateRecordBackupPlan(data: UpdateRecordBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordBackupPlanResponse>;
+  /** 修改录像上云模板 {@link UpdateRecordBackupTemplateRequest} {@link UpdateRecordBackupTemplateResponse} */
+  UpdateRecordBackupTemplate(data: UpdateRecordBackupTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordBackupTemplateResponse>;
+  /** 修改实时上云计划 {@link UpdateRecordPlanRequest} {@link UpdateRecordPlanResponse} */
+  UpdateRecordPlan(data: UpdateRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordPlanResponse>;
+  /** 修改实时上云模板 {@link UpdateRecordTemplateRequest} {@link UpdateRecordTemplateResponse} */
+  UpdateRecordTemplate(data: UpdateRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordTemplateResponse>;
+  /** 修改设备 {@link UpdateUserDeviceRequest} {@link UpdateUserDeviceResponse} */
+  UpdateUserDevice(data: UpdateUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserDeviceResponse>;
+  /** 网关升级 {@link UpgradeGatewayRequest} {@link UpgradeGatewayResponse} */
+  UpgradeGateway(data: UpgradeGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGatewayResponse>;
+}
+
+export declare type Versions = ["2023-05-17"];
+
+export default Iss;

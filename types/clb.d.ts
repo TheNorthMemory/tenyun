@@ -426,7 +426,7 @@ declare interface HealthCheck {
   HttpCode?: number | null;
   /** 健康检查路径（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。 */
   HttpCheckPath?: string | null;
-  /** 健康检查域名（仅适用于HTTP/HTTPS监听器和TCP监听器的HTTP健康检查方式。针对TCP监听器，当使用HTTP健康检查方式时，建议该参数配置为必填项）。 */
+  /** 健康检查域名（仅适用于HTTP/HTTPS监听器和TCP监听器的HTTP健康检查方式。针对TCP监听器，当使用HTTP健康检查方式时，该参数为必填项）。 */
   HttpCheckDomain?: string | null;
   /** 健康检查方法（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式），默认值：HEAD，可选值HEAD或GET。 */
   HttpCheckMethod?: string | null;
@@ -876,7 +876,7 @@ declare interface ResourceAvailability {
 declare interface RewriteLocationMap {
   /** 源转发规则ID */
   SourceLocationId: string;
-  /** 重定向至的目标转发规则ID */
+  /** 重定向目标转发规则的ID */
   TargetLocationId: string;
   /** 重定向状态码，可取值301,302,307 */
   RewriteCode?: number;
@@ -1303,7 +1303,7 @@ declare interface CloneLoadBalancerRequest {
   ZoneId?: string;
   /** 仅适用于公网负载均衡。负载均衡的网络计费模式。 */
   InternetAccessible?: InternetAccessible;
-  /** 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 */
+  /** 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 */
   VipIsp?: string;
   /** 指定Vip申请负载均衡。 */
   Vip?: string;
@@ -1413,7 +1413,7 @@ declare interface CreateLoadBalancerRequest {
   AddressIPVersion?: string;
   /** 创建负载均衡的个数，默认值 1。 */
   Number?: number;
-  /** 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。 */
+  /** 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。目前仅广州、上海、南京、北京、中国香港、首尔地域的 IPv4 版本的 CLB 支持主备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。 */
   MasterZoneId?: string;
   /** 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。 */
   ZoneId?: string;

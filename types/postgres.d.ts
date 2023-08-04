@@ -1582,6 +1582,26 @@ declare interface DescribeDBInstanceAttributeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBInstanceHAConfigRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+}
+
+declare interface DescribeDBInstanceHAConfigResponse {
+  /** 主从同步方式：Semi-sync：半同步Async：异步 */
+  SyncMode?: string;
+  /** 高可用备机最大延迟数据量。备节点延迟数据量小于等于该值，且备节点延迟时间小于等于MaxStandbyLag时，可以切换为主节点。单位：byte参数范围：[1073741824, 322122547200] */
+  MaxStandbyLatency?: number;
+  /** 高可用备机最大延迟时间。备节点延迟时间小于等于该值，且备节点延迟数据量小于等于MaxStandbyLatency时，可以切换为主节点。单位：s参数范围：[5, 10] */
+  MaxStandbyLag?: number;
+  /** 同步备机最大延迟数据量。备机延迟数据量小于等于该值，且该备机延迟时间小于等于MaxSyncStandbyLag时，则该备机采用同步复制；否则，采用异步复制。该参数值针对SyncMode设置为Semi-sync的实例有效。异步实例该字段返回null。半同步实例禁止退化为异步复制时，该字段返回null。 */
+  MaxSyncStandbyLatency?: number | null;
+  /** 同步备机最大延迟时间。备机延迟时间小于等于该值，且该备机延迟数据量小于等于MaxSyncStandbyLatency时，则该备机采用同步复制；否则，采用异步复制。该参数值针对SyncMode设置为Semi-sync的实例有效。异步实例不返回该字段。半同步实例禁止退化为异步复制时，不返回该字段。 */
+  MaxSyncStandbyLag?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBInstanceParametersRequest {
   /** 实例ID */
   DBInstanceId: string;
@@ -2200,6 +2220,26 @@ declare interface ModifyDBInstanceDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceHAConfigRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 主从同步方式：Semi-sync：半同步Async：异步 */
+  SyncMode: string;
+  /** 高可用备机最大延迟数据量。备节点延迟数据量小于等于该值，且备节点延迟时间小于等于MaxStandbyLag时，可以切换为主节点。单位：byte参数范围：[1073741824, 322122547200] */
+  MaxStandbyLatency: number;
+  /** 高可用备机最大延迟时间。备节点延迟时间小于等于该值，且备节点延迟数据量小于等于MaxStandbyLatency时，可以切换为主节点。单位：s参数范围：[5, 10] */
+  MaxStandbyLag: number;
+  /** 同步备机最大延迟数据量。备机延迟数据量小于等于该值，且该备机延迟时间小于等于MaxSyncStandbyLag时，则该备机采用同步复制；否则，采用异步复制。该参数值针对SyncMode设置为Semi-sync的实例有效。半同步实例禁止退化为异步复制时，不设置MaxSyncStandbyLatency、MaxSyncStandbyLag。半同步实例允许退化异步复制时，PostgreSQL 9版本的实例须设置MaxSyncStandbyLatency且不设置MaxSyncStandbyLag，PostgreSQL 10及以上版本的实例须设置MaxSyncStandbyLatency、MaxSyncStandbyLag。 */
+  MaxSyncStandbyLatency?: number;
+  /** 同步备机最大延迟时间。备机延迟时间小于等于该值，且该备机延迟数据量小于等于MaxSyncStandbyLatency时，则该备机采用同步复制；否则，采用异步复制。该参数值针对SyncMode设置为Semi-sync的实例有效。半同步实例禁止退化为异步复制时，不设置MaxSyncStandbyLatency、MaxSyncStandbyLag。半同步实例允许退化异步复制时，PostgreSQL 9版本的实例须设置MaxSyncStandbyLatency且不设置MaxSyncStandbyLag，PostgreSQL 10及以上版本的实例须设置MaxSyncStandbyLatency、MaxSyncStandbyLag， */
+  MaxSyncStandbyLag?: number;
+}
+
+declare interface ModifyDBInstanceHAConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNameRequest {
   /** 数据库实例ID，形如postgres-6fego161 */
   DBInstanceId: string;
@@ -2460,6 +2500,24 @@ declare interface SetAutoRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface SwitchDBInstancePrimaryRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 是否强制切换。强制切换时只要备节点可访问，无论主备延迟多大都会发起切换。只有SwitchTag为0时，才可使用立即切换。默认：false */
+  Force?: boolean;
+  /** 指定实例配置完成变更后的切换时间。0：立即切换 1：指定时间切换2：维护时间窗口内切换默认值：0 */
+  SwitchTag?: number;
+  /** 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。 */
+  SwitchStartTime?: string;
+  /** 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。 */
+  SwitchEndTime?: string;
+}
+
+declare interface SwitchDBInstancePrimaryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeDBInstanceKernelVersionRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -2579,6 +2637,8 @@ declare interface Postgres {
   DescribeDBErrlogs(data: DescribeDBErrlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBErrlogsResponse>;
   /** 查询实例详情 {@link DescribeDBInstanceAttributeRequest} {@link DescribeDBInstanceAttributeResponse} */
   DescribeDBInstanceAttribute(data: DescribeDBInstanceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceAttributeResponse>;
+  /** 查询实例HA配置 {@link DescribeDBInstanceHAConfigRequest} {@link DescribeDBInstanceHAConfigResponse} */
+  DescribeDBInstanceHAConfig(data: DescribeDBInstanceHAConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceHAConfigResponse>;
   /** 查询实例参数 {@link DescribeDBInstanceParametersRequest} {@link DescribeDBInstanceParametersResponse} */
   DescribeDBInstanceParameters(data: DescribeDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParametersResponse>;
   /** 查询实例安全组 {@link DescribeDBInstanceSecurityGroupsRequest} {@link DescribeDBInstanceSecurityGroupsResponse} */
@@ -2647,6 +2707,8 @@ declare interface Postgres {
   ModifyDBInstanceChargeType(data: ModifyDBInstanceChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceChargeTypeResponse>;
   /** 修改实例部署方式 {@link ModifyDBInstanceDeploymentRequest} {@link ModifyDBInstanceDeploymentResponse} */
   ModifyDBInstanceDeployment(data: ModifyDBInstanceDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeploymentResponse>;
+  /** 修改实例HA配置信息 {@link ModifyDBInstanceHAConfigRequest} {@link ModifyDBInstanceHAConfigResponse} */
+  ModifyDBInstanceHAConfig(data: ModifyDBInstanceHAConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceHAConfigResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** 修改实例参数 {@link ModifyDBInstanceParametersRequest} {@link ModifyDBInstanceParametersResponse} */
@@ -2681,6 +2743,8 @@ declare interface Postgres {
   RestartDBInstance(data: RestartDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstanceResponse>;
   /** 设置自动续费 {@link SetAutoRenewFlagRequest} {@link SetAutoRenewFlagResponse} */
   SetAutoRenewFlag(data: SetAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoRenewFlagResponse>;
+  /** 切换实例主备关系 {@link SwitchDBInstancePrimaryRequest} {@link SwitchDBInstancePrimaryResponse} */
+  SwitchDBInstancePrimary(data: SwitchDBInstancePrimaryRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDBInstancePrimaryResponse>;
   /** 升级实例配置（废弃） {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
   /** 升级实例内核版本号 {@link UpgradeDBInstanceKernelVersionRequest} {@link UpgradeDBInstanceKernelVersionResponse} */

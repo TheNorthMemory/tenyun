@@ -36,7 +36,7 @@ declare interface AccelerationDomain {
 
 /** 精准防护条件 */
 declare interface AclCondition {
-  /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；app_proto：应用层协议；sip_proto：网络层协议；uabot：UA 特征规则，仅bot自定义规则可用；idcid：IDC 规则，仅bot自定义规则可用；sipbot：搜索引擎规则，仅bot自定义规则可用；portrait：画像分析，仅bot自定义规则可用；header_seq：请求头顺序，仅bot自定义规则可用。 */
+  /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；app_proto：应用层协议；sip_proto：网络层协议；uabot：UA 特征规则，仅bot自定义规则可用；idcid：IDC 规则，仅bot自定义规则可用；sipbot：搜索引擎规则，仅bot自定义规则可用；portrait：画像分析，仅bot自定义规则可用；header_seq：请求头顺序，仅bot自定义规则可用；hdr：请求正文，仅Web防护自定义规则可用。 */
   MatchFrom: string;
   /** 匹配字符串。当 MatchFrom 为 header 时，可以填入 header 的 key 作为参数。 */
   MatchParam: string;
@@ -826,34 +826,42 @@ declare interface Ipv6 {
 
 /** 离线日志详细信息 */
 declare interface L4OfflineLog {
+  /** 四层代理实例 ID。 */
+  ProxyId?: string;
+  /** 日志所属区域，取值有：mainland：中国大陆境内;overseas：全球（不含中国大陆）。 */
+  Area?: string;
+  /** 离线日志数据包名。 */
+  LogPacketName?: string;
+  /** 离线日志下载地址。 */
+  Url?: string;
+  /** 日志打包时间，此参数已经废弃。 */
+  LogTime?: number;
   /** 日志打包开始时间。 */
-  LogTime: number;
-  /** 四层实例ID。 */
-  ProxyId: string | null;
-  /** 原始大小 单位byte。 */
-  Size: number;
-  /** 下载地址。 */
-  Url: string;
-  /** 日志数据包名。 */
-  LogPacketName: string;
-  /** 加速区域，取值有：mainland：中国大陆境内;overseas：全球（不含中国大陆）。 */
-  Area: string;
+  LogStartTime?: string;
+  /** 日志打包结束时间。 */
+  LogEndTime?: string;
+  /** 日志大小，单位为 Byte。 */
+  Size?: number;
 }
 
-/** 离线日志详细信息 */
+/** 七层离线日志详细信息。 */
 declare interface L7OfflineLog {
+  /** 离线日志域名。 */
+  Domain?: string;
+  /** 日志所属区域，取值有：mainland：中国大陆境内; overseas：全球（不含中国大陆）。 */
+  Area?: string;
+  /** 离线日志数据包名。 */
+  LogPacketName?: string;
+  /** 离线日志下载地址。 */
+  Url?: string;
+  /** 日志打包时间，此参数已经废弃。 */
+  LogTime?: number;
   /** 日志打包开始时间。 */
-  LogTime: number;
-  /** 子域名。 */
-  Domain: string;
-  /** 原始大小，单位byte。 */
-  Size: number;
-  /** 下载地址。 */
-  Url: string;
-  /** 日志数据包名。 */
-  LogPacketName: string;
-  /** 加速区域，取值有：mainland：中国大陆境内; overseas：全球（不含中国大陆）。 */
-  Area: string;
+  LogStartTime?: string;
+  /** 日志打包结束时间。 */
+  LogEndTime?: string;
+  /** 日志原始大小，单位 Byte。 */
+  Size?: number;
 }
 
 /** 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态 */
@@ -1130,7 +1138,7 @@ declare interface RateLimitUserRule {
   Period: number;
   /** 规则名，只能以英文字符，数字，下划线组合，且不能以下划线开头。 */
   RuleName: string;
-  /** 处置动作，取值有：monitor：观察；drop：拦截；alg：JavaScript挑战。 */
+  /** 处置动作，取值有： monitor：观察； drop：拦截； alg：JavaScript挑战。 */
   Action: string;
   /** 惩罚时长，0-2天。 */
   PunishTime: number;
@@ -1142,38 +1150,38 @@ declare interface RateLimitUserRule {
   AclConditions: AclCondition[];
   /** 规则权重，取值范围0-100。 */
   RulePriority: number;
-  /** 规则id。仅出参使用。 */
+  /** 规则 Id。仅出参使用。 */
   RuleID?: number | null;
   /** 过滤词，取值有：sip：客户端ip。 */
   FreqFields?: string[] | null;
   /** 更新时间。 */
   UpdateTime?: string | null;
-  /** 统计范围，字段为null时，代表source_to_eo。取值有：source_to_eo：（响应）源站到EdgeOne。client_to_eo：（请求）客户端到EdgeOne； */
+  /** 统计范围，字段为 null 时，代表 source_to_eo。取值有：source_to_eo：（响应）源站到EdgeOne。client_to_eo：（请求）客户端到EdgeOne； */
   FreqScope?: string[] | null;
 }
 
 /** 计费资源 */
 declare interface Resource {
   /** 资源 ID。 */
-  Id: string;
+  Id?: string;
   /** 付费模式，取值有：0：后付费。 */
-  PayMode: number;
+  PayMode?: number;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 生效时间。 */
-  EnableTime: string;
+  EnableTime?: string;
   /** 失效时间。 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 套餐状态，取值有：normal：正常；isolated：隔离；destroyed：销毁。 */
-  Status: string;
+  Status?: string;
   /** 询价参数。 */
-  Sv: Sv[];
+  Sv?: Sv[];
   /** 是否自动续费，取值有：0：默认状态；1：自动续费；2：不自动续费。 */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 套餐关联资源 ID。 */
-  PlanId: string;
+  PlanId?: string;
   /** 地域，取值有：mainland：国内；overseas：海外。global：全球。 */
-  Area: string;
+  Area?: string;
   /** 资源类型，取值有：plan：套餐类型；pay-as-you-go：后付费类型。value-added：增值服务类型。 */
   Group?: string | null;
   /** 当前资源绑定的站点数量。 */
@@ -2635,21 +2643,21 @@ declare interface DownloadL4LogsRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 站点集合，不填默认选择全部站点。 */
+  /** 站点集合，此参数必填，不填默认查询为空。 */
   ZoneIds?: string[];
-  /** 四层实例ID集合。 */
+  /** 四层实例 ID 集合。 */
   ProxyIds?: string[];
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
+  /** 分页查询的限制数目，默认值为 20，最大查询条目为 1000。 */
   Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
+  /** 分页的偏移量，默认值为 0。 */
   Offset?: number;
 }
 
 declare interface DownloadL4LogsResponse {
-  /** 四层离线日志数据列表。 */
-  Data: L4OfflineLog[] | null;
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
+  /** 四层离线日志数据列表。 */
+  Data?: L4OfflineLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2659,21 +2667,21 @@ declare interface DownloadL7LogsRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 站点集合，不填默认选择全部站点。 */
+  /** 站点集合，此参数必填，不填默认查询为空。 */
   ZoneIds?: string[];
   /** 子域名集合，不填默认选择全部子域名。 */
   Domains?: string[];
-  /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
+  /** 分页查询的限制数目，默认值为 20，最大查询条目为 1000。 */
   Limit?: number;
-  /** 分页的偏移量，默认值为0。 */
+  /** 分页的偏移量，默认值为 0。 */
   Offset?: number;
 }
 
 declare interface DownloadL7LogsResponse {
-  /** 七层离线日志数据列表。 */
-  Data: L7OfflineLog[] | null;
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
+  /** 七层离线日志数据列表。 */
+  Data?: L7OfflineLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -31,6 +31,8 @@ declare interface BRIRequest {
   Wechat?: string;
   /** 微信号的可疑标签 */
   WechatTag?: string;
+  /** 子客户ID */
+  SubAppid?: string;
 }
 
 declare interface BRIResponse {

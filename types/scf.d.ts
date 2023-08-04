@@ -412,6 +412,8 @@ declare interface NamespaceResourceEnvTKE {
   Tolerations?: K8SToleration[] | null;
   /** scf组件将占用的节点端口起始号 */
   Port?: number | null;
+  /** yaml格式的pod patch内容，例如metadata: labels: key: value */
+  PodTemplatePatch?: string | null;
 }
 
 /** 名称空间已使用信息 */

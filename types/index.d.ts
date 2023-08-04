@@ -126,6 +126,7 @@ import Iottid, { Versions as IottidVersions } from "./iottid";
 import Iotvideo, { Versions as IotvideoVersions } from "./iotvideo";
 import Iotvideoindustry, { Versions as IotvideoindustryVersions } from "./iotvideoindustry";
 import Irp, { Versions as IrpVersions } from "./irp";
+import Iss, { Versions as IssVersions } from "./iss";
 import Ivld, { Versions as IvldVersions } from "./ivld";
 import Keewidb, { Versions as KeewidbVersions } from "./keewidb";
 import Kms, { Versions as KmsVersions } from "./kms";
@@ -367,6 +368,7 @@ export declare type SERVICE_VERSIONS = {
   iotvideo: IotvideoVersions,
   iotvideoindustry: IotvideoindustryVersions,
   irp: IrpVersions,
+  iss: IssVersions,
   ivld: IvldVersions,
   keewidb: KeewidbVersions,
   kms: KmsVersions,
@@ -745,6 +747,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   iotvideoindustry: Iotvideoindustry,
   /** {@link Irp 智能推荐平台} */
   irp: Irp,
+  /** {@link Iss 智能视图计算平台} */
+  iss: Iss,
   /** {@link Ivld 媒体智能标签} */
   ivld: Ivld,
   /** {@link Keewidb 云数据库 KeeWiDB} */

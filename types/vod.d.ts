@@ -8779,7 +8779,7 @@ declare interface ReviewAudioVideoRequest {
   SubAppId?: number;
   /** 审核的内容，可选值有：Media：原始音视频；Cover：封面。不填或填空数组时，默认为审核 Media。 */
   ReviewContents?: string[];
-  /** 审核模板 ID，默认值为 10。取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴力（Terror）和不适宜的信息（Polity）。 */
+  /** 审核模板 ID，默认值为 10。取值范围：10：[预置模板](https://cloud.tencent.com/document/product/266/33476))，支持检测的违规标签包括色情（Porn）、暴力（Terror）、不适宜的信息（Polity）和娇喘（Moan）。 */
   Definition?: number;
   /** 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
   TasksPriority?: number;

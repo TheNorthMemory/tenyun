@@ -235,110 +235,110 @@ declare interface DBDetail {
 /** 实例详细信息 */
 declare interface DBInstance {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  Name: string;
+  Name?: string;
   /** 实例所在项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 实例所在地域ID */
-  RegionId: number;
+  RegionId?: number;
   /** 实例所在可用区ID */
-  ZoneId: number;
+  ZoneId?: number;
   /** 实例所在私有网络ID，基础网络时为 0 */
-  VpcId: number;
+  VpcId?: number;
   /** 实例所在私有网络子网ID，基础网络时为 0 */
-  SubnetId: number;
+  SubnetId?: number;
   /** 实例状态。取值范围： 1：申请中 2：运行中 3：受限运行中 (主备切换中) 4：已隔离 5：回收中 6：已回收 7：任务执行中 (实例做备份、回档等操作) 8：已下线 9：实例扩容中 10：实例迁移中 11：只读 12：重启中 13：实例修改中且待切换 14：订阅发布创建中 15：订阅发布修改中 16：实例修改中且切换中 17：创建RO副本中 */
-  Status: number;
+  Status?: number;
   /** 实例访问IP */
-  Vip: string;
+  Vip?: string;
   /** 实例访问端口 */
-  Vport: number;
+  Vport?: number;
   /** 实例创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 实例更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 实例计费开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 实例计费结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 实例隔离时间 */
-  IsolateTime: string;
+  IsolateTime?: string;
   /** 实例内存大小，单位G */
-  Memory: number;
+  Memory?: number;
   /** 实例已经使用存储空间大小，单位G */
-  UsedStorage: number;
+  UsedStorage?: number;
   /** 实例存储空间大小，单位G */
-  Storage: number;
+  Storage?: number;
   /** 实例版本 */
-  VersionName: string;
+  VersionName?: string;
   /** 实例续费标记，0-正常续费，1-自动续费，2-到期不续费 */
-  RenewFlag: number;
+  RenewFlag?: number;
   /** 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，9-自研机房 */
-  Model: number;
+  Model?: number;
   /** 实例所在地域名称，如 ap-guangzhou */
-  Region: string;
+  Region?: string;
   /** 实例所在可用区名称，如 ap-guangzhou-1 */
-  Zone: string;
+  Zone?: string;
   /** 备份时间点 */
-  BackupTime: string;
+  BackupTime?: string;
   /** 实例付费模式， 0-按量计费，1-包年包月 */
-  PayMode: number;
+  PayMode?: number;
   /** 实例唯一UID */
-  Uid: string;
+  Uid?: string;
   /** 实例cpu核心数 */
-  Cpu: number;
+  Cpu?: number;
   /** 实例版本代号 */
-  Version: string;
+  Version?: string;
   /** 物理机代号 */
-  Type: string;
+  Type?: string;
   /** 计费ID */
-  Pid: number;
+  Pid?: number;
   /** 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串 */
-  UniqVpcId: string;
+  UniqVpcId?: string;
   /** 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串 */
-  UniqSubnetId: string;
+  UniqSubnetId?: string;
   /** 实例隔离操作 */
-  IsolateOperator: string | null;
+  IsolateOperator?: string | null;
   /** 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例 */
-  SubFlag: string | null;
+  SubFlag?: string | null;
   /** 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例 */
-  ROFlag: string | null;
+  ROFlag?: string | null;
   /** 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例 */
-  HAFlag: string | null;
+  HAFlag?: string | null;
   /** 实例绑定的标签列表 */
-  ResourceTags: ResourceTag[] | null;
+  ResourceTags?: ResourceTag[] | null;
   /** 备份模式，master_pkg-主节点打包备份(默认) ；master_no_pkg-主节点不打包备份；slave_pkg-从节点打包备份(always on集群有效)；slave_no_pkg-从节点不打包备份(always on集群有效)；只读副本对该值无效。 */
-  BackupModel: string | null;
+  BackupModel?: string | null;
   /** 实例备份信息 */
-  InstanceNote: string | null;
+  InstanceNote?: string | null;
   /** 备份周期 */
-  BackupCycle: number[];
+  BackupCycle?: number[];
   /** 备份周期类型，[daily、weekly、monthly] */
-  BackupCycleType: string;
+  BackupCycleType?: string;
   /** 数据(日志)备份保留时间 */
-  BackupSaveDays: number;
+  BackupSaveDays?: number;
   /** 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 跨地域备份目的地域，如果为空，则表示未开启跨地域备份 */
-  CrossRegions: string[];
+  CrossRegions?: string[];
   /** 跨地域备份状态 enable-开启，disable-关闭 */
-  CrossBackupEnabled: string;
+  CrossBackupEnabled?: string;
   /** 跨地域备份保留天数，则默认7天 */
-  CrossBackupSaveDays: number;
+  CrossBackupSaveDays?: number;
   /** 外网地址域名 */
-  DnsPodDomain: string;
+  DnsPodDomain?: string;
   /** 外网端口号 */
-  TgwWanVPort: number;
+  TgwWanVPort?: number;
   /** 系统字符集排序规则，默认：Chinese_PRC_CI_AS */
-  Collation: string;
+  Collation?: string;
   /** 系统时区，默认：China Standard Time */
-  TimeZone: string;
+  TimeZone?: string;
   /** 是否跨AZ */
-  IsDrZone: boolean;
+  IsDrZone?: boolean;
   /** 备可用区信息 */
-  SlaveZones: SlaveZones | null;
-  /** 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点 */
+  SlaveZones?: SlaveZones | null;
+  /** 架构标识，SINGLE-单节点 DOUBLE-双节点 */
   Architecture?: string | null;
   /** 类型标识，EXCLUSIVE-独享型，SHARED-共享型 */
   Style?: string | null;
@@ -2427,9 +2427,9 @@ declare interface DescribeRollbackTimeResponse {
 declare interface DescribeSlowlogsRequest {
   /** 实例ID，形如mssql-k8voqdlz */
   InstanceId: string;
-  /** 查询开始时间 */
+  /** 开始时间(yyyy-MM-dd HH:mm:ss) */
   StartTime: string;
-  /** 查询结束时间 */
+  /** 结束时间(yyyy-MM-dd HH:mm:ss) */
   EndTime: string;
   /** 分页返回，每页返回的数目，取值为1-100，默认值为20 */
   Limit?: number;
@@ -2439,9 +2439,9 @@ declare interface DescribeSlowlogsRequest {
 
 declare interface DescribeSlowlogsResponse {
   /** 查询总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 慢查询日志信息列表 */
-  Slowlogs: SlowlogInfo[];
+  Slowlogs?: SlowlogInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2509,9 +2509,9 @@ declare interface DescribeXEventsRequest {
   InstanceId: string;
   /** 事件类型，slow-慢SQL事件，blocked-阻塞事件，deadlock-死锁事件 */
   EventType: string;
-  /** 扩展文件生成开始时间 */
+  /** 扩展文件生成开始时间(yyyy-MM-dd HH:mm:ss) */
   StartTime: string;
-  /** 扩展文件生成结束时间 */
+  /** 扩展文件生成结束时间(yyyy-MM-dd HH:mm:ss) */
   EndTime: string;
   /** 分页返回，页编号，默认值为第0页 */
   Offset?: number;
@@ -2907,7 +2907,7 @@ declare interface ModifyIncrementalMigrationResponse {
 declare interface ModifyInstanceEncryptAttributesRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，默认self。 */
+  /** 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，默认取值self。 */
   CertificateAttribution: string;
   /** 引用的其他主账号ID，当CertificateAttribution 为others时必填。 */
   QuoteUin?: string;
@@ -3087,7 +3087,7 @@ declare interface RenewDBInstanceRequest {
   InstanceId: string;
   /** 续费多少个月，取值范围为1-48，默认为1 */
   Period?: number;
-  /** 是否自动使用代金券，0-不使用；1-使用；默认不实用 */
+  /** 是否自动使用代金券，0-不使用；1-使用；默认不使用 */
   AutoVoucher?: number;
   /** 代金券ID数组，目前只支持使用1张代金券 */
   VoucherIds?: string[];
@@ -3097,7 +3097,7 @@ declare interface RenewDBInstanceRequest {
 
 declare interface RenewDBInstanceResponse {
   /** 订单名称 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3289,7 +3289,7 @@ declare interface UpgradeDBInstanceRequest {
   DBVersion?: string;
   /** 升级sqlserver的高可用架构,从镜像容灾升级到always on集群容灾，仅支持2017及以上版本且支持always on高可用的实例，不支持降级到镜像方式容灾，CLUSTER-升级为always on容灾，不填则不修改高可用架构 */
   HAType?: string;
-  /** 修改实例是否为跨可用区容灾，SameZones-修改为同可用区 MultiZones-修改为夸可用区 */
+  /** 修改实例是否为跨可用区容灾，SameZones-修改为同可用区 MultiZones-修改为跨可用区 */
   MultiZones?: string;
   /** 执行变配的方式，默认为 1。支持值包括：0 - 立刻执行，1 - 维护时间窗执行 */
   WaitSwitch?: number;
@@ -3297,7 +3297,7 @@ declare interface UpgradeDBInstanceRequest {
 
 declare interface UpgradeDBInstanceResponse {
   /** 订单名称 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

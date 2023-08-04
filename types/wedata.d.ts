@@ -32,6 +32,16 @@ declare interface AdhocRecord {
   InstanceId: string | null;
 }
 
+/** Agent采集器状态统计 */
+declare interface AgentStatus {
+  /** 运行中的数量 */
+  Running?: number | null;
+  /** 异常的数量 */
+  Abnormal?: number | null;
+  /** 操作中的数量 */
+  InOperation?: number | null;
+}
+
 /** 告警事件详情 */
 declare interface AlarmEventInfo {
   /** 告警ID */
@@ -1976,6 +1986,12 @@ declare interface IntegrationTaskInfo {
   RunningCu?: number | null;
   /** 该任务关联的告警规则 */
   TaskAlarmRegularList?: string[] | null;
+  /** 资源分层情况： 0：进行中,1：成功 ,2：失败 */
+  SwitchResource?: number | null;
+  /** 读取阶段：0：全部全量,1：部分全量,2：全部增量 */
+  ReadPhase?: number | null;
+  /** 版本号 */
+  InstanceVersion?: number | null;
 }
 
 /** 标签类型 */
@@ -4302,6 +4318,22 @@ declare interface TaskTypeOpsDto {
   TypeSort?: string | null;
 }
 
+/** 任务实例基本信息 */
+declare interface TaskVersionInstance {
+  /** 实例版本号 */
+  InstanceVersion?: number | null;
+  /** 实例描述 */
+  VersionDesc?: string | null;
+  /** 0, "新增"，1, "修改" */
+  ChangeType?: number | null;
+  /** 版本提交人UIN */
+  SubmitterUin?: string | null;
+  /** 提交日期 */
+  InstanceDate?: string | null;
+  /** 0, "未启用"，1, "启用(生产态)" */
+  InstanceStatus?: number | null;
+}
+
 /** 数据质量阈值 */
 declare interface ThresholdValue {
   /** 阈值类型 1.低阈值 2.高阈值 3.普通阈值 4.枚举值 */
@@ -4638,15 +4670,17 @@ declare interface BatchDeleteIntegrationTasksRequest {
   TaskType: number;
   /** 项目id */
   ProjectId: string;
+  /** 是否删除开发态任务。默认不删除开发态，为 0 不删除 , 为 1 删除 */
+  DeleteKFFlag?: number;
 }
 
 declare interface BatchDeleteIntegrationTasksResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number | null;
+  SuccessCount?: number | null;
   /** 操作失败的任务数 */
-  FailedCount: number | null;
+  FailedCount?: number | null;
   /** 任务总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5123,6 +5157,10 @@ declare interface CommitIntegrationTaskRequest {
   TaskType?: number;
   /** 额外参数 */
   ExtConfig?: RecordField[];
+  /** 提交版本描述 */
+  VersionDesc?: string;
+  /** 提交版本号 */
+  InstanceVersion?: number;
 }
 
 declare interface CommitIntegrationTaskResponse {
@@ -5872,7 +5910,11 @@ declare interface DeleteIntegrationTaskRequest {
 
 declare interface DeleteIntegrationTaskResponse {
   /** 任务删除成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
+  /** 任务删除成功与否标识0表示删除成功1 表示失败，失败原因见 DeleteErrInfo100 表示running or suspend task can't be deleted失败，失败原因也会写到DeleteErrInfo里面 */
+  DeleteFlag?: number | null;
+  /** 删除失败原因 */
+  DeleteErrInfo?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7451,11 +7493,17 @@ declare interface DescribeIntegrationTaskRequest {
   ProjectId: string;
   /** 任务类型：201. stream, 202. offline */
   TaskType?: number;
+  /** 提交版本号 */
+  InstanceVersion?: number;
 }
 
 declare interface DescribeIntegrationTaskResponse {
   /** 任务信息 */
-  TaskInfo: IntegrationTaskInfo | null;
+  TaskInfo?: IntegrationTaskInfo | null;
+  /** 采集器统计信息 */
+  AgentStatus?: AgentStatus | null;
+  /** 任务版本信息 */
+  TaskVersion?: TaskVersionInstance | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11292,7 +11340,7 @@ declare interface Wedata {
   DescribeIntegrationStatisticsTaskStatus(data: DescribeIntegrationStatisticsTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsTaskStatusResponse>;
   /** 数据集成大屏任务状态统计趋势 {@link DescribeIntegrationStatisticsTaskStatusTrendRequest} {@link DescribeIntegrationStatisticsTaskStatusTrendResponse} */
   DescribeIntegrationStatisticsTaskStatusTrend(data: DescribeIntegrationStatisticsTaskStatusTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsTaskStatusTrendResponse>;
-  /** 查询集成任务 {@link DescribeIntegrationTaskRequest} {@link DescribeIntegrationTaskResponse} */
+  /** 查询集成任务详情 {@link DescribeIntegrationTaskRequest} {@link DescribeIntegrationTaskResponse} */
   DescribeIntegrationTask(data: DescribeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationTaskResponse>;
   /** 查询集成任务列表 {@link DescribeIntegrationTasksRequest} {@link DescribeIntegrationTasksResponse} */
   DescribeIntegrationTasks(data: DescribeIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationTasksResponse>;
