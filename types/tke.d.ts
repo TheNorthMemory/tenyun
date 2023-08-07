@@ -418,6 +418,12 @@ declare interface ClusterNetworkSettings {
   CiliumMode: string | null;
 }
 
+/** 集群属性 */
+declare interface ClusterProperty {
+  /** 节点hostname命名模式 */
+  NodeNameType?: string | null;
+}
+
 /** 弹性容器集群公网访问负载均衡信息 */
 declare interface ClusterPublicLB {
   /** 是否开启公网访问LB */
@@ -5165,21 +5171,25 @@ declare interface ModifyClusterAttributeRequest {
   AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
   /** 是否开启QGPU共享 */
   QGPUShareEnable?: boolean;
+  /** 集群属性 */
+  ClusterProperty?: ClusterProperty;
 }
 
 declare interface ModifyClusterAttributeResponse {
   /** 集群所属项目 */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 集群描述 */
-  ClusterDesc: string | null;
+  ClusterDesc?: string | null;
   /** 集群等级 */
-  ClusterLevel: string | null;
+  ClusterLevel?: string | null;
   /** 自动变配集群等级 */
-  AutoUpgradeClusterLevel: AutoUpgradeClusterLevel | null;
+  AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel | null;
   /** 是否开启QGPU共享 */
-  QGPUShareEnable: boolean | null;
+  QGPUShareEnable?: boolean | null;
+  /** 集群属性 */
+  ClusterProperty?: ClusterProperty | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

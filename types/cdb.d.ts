@@ -2035,7 +2035,7 @@ declare interface CreateDBInstanceRequest {
   MasterInstanceId?: string;
   /** MySQL 版本，值包括：5.5、5.6 、5.7和8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。 */
   EngineVersion?: string;
-  /** 设置 root 帐号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
+  /** 设置 root 账号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
   Password?: string;
   /** 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。 */
   ProtectMode?: number;
@@ -2067,7 +2067,7 @@ declare interface CreateDBInstanceRequest {
   DeviceType?: string;
   /** 参数模板id。 */
   ParamTemplateId?: number;
-  /** 告警策略id数组。云监控DescribeAlarmPolicy接口返回的OriginId。 */
+  /** 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。 */
   AlarmPolicyList?: number[];
   /** 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。 */
   InstanceNodes?: number;
@@ -2704,6 +2704,22 @@ declare interface DescribeCloneListResponse {
   TotalCount?: number;
   /** 克隆任务列表。 */
   Items?: CloneItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCpuExpandStrategyRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+}
+
+declare interface DescribeCpuExpandStrategyResponse {
+  /** 策略类型。可选值 auto、manual。 */
+  Type?: string | null;
+  /** 手动扩容的 CPU 。Type为 manual 时有效。 */
+  ExpandCpu?: string | null;
+  /** 自动扩容策略。Type 为 auto 时有效 */
+  AutoStrategy?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4238,6 +4254,16 @@ declare interface StartBatchRollbackResponse {
   RequestId?: string;
 }
 
+declare interface StartCpuExpandRequest {
+}
+
+declare interface StartCpuExpandResponse {
+  /** 异步任务 ID 。可以调用DescribeAsyncRequest 传入该 ID ，进行任务执行进度的查询 */
+  AsyncRequestId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartReplicationRequest {
   /** 实例 ID。仅支持只读实例。 */
   InstanceId: string;
@@ -4246,6 +4272,18 @@ declare interface StartReplicationRequest {
 declare interface StartReplicationResponse {
   /** 异步任务 ID。 */
   AsyncRequestId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopCpuExpandRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+}
+
+declare interface StopCpuExpandResponse {
+  /** 异步任务 ID 。可以调用DescribeAsyncRequest 传入该 ID ，进行任务执行进度的查询 */
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4545,6 +4583,8 @@ declare interface Cdb {
   DescribeCdbZoneConfig(data?: DescribeCdbZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbZoneConfigResponse>;
   /** 查询克隆任务列表 {@link DescribeCloneListRequest} {@link DescribeCloneListResponse} */
   DescribeCloneList(data: DescribeCloneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneListResponse>;
+  /** 查询实例的 CPU 弹性扩容策略 {@link DescribeCpuExpandStrategyRequest} {@link DescribeCpuExpandStrategyResponse} */
+  DescribeCpuExpandStrategy(data: DescribeCpuExpandStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpuExpandStrategyResponse>;
   /** 查询实例版本属性 {@link DescribeDBFeaturesRequest} {@link DescribeDBFeaturesResponse} */
   DescribeDBFeatures(data: DescribeDBFeaturesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBFeaturesResponse>;
   /** 查询数据库导入任务记录 {@link DescribeDBImportRecordsRequest} {@link DescribeDBImportRecordsResponse} */
@@ -4705,8 +4745,12 @@ declare interface Cdb {
   RestartDBInstances(data: RestartDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstancesResponse>;
   /** 回档数据库表 {@link StartBatchRollbackRequest} {@link StartBatchRollbackResponse} */
   StartBatchRollback(data: StartBatchRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<StartBatchRollbackResponse>;
+  /** 开启CPU弹性扩容 {@link StartCpuExpandRequest} {@link StartCpuExpandResponse} */
+  StartCpuExpand(data?: StartCpuExpandRequest, config?: AxiosRequestConfig): AxiosPromise<StartCpuExpandResponse>;
   /** 开启复制 {@link StartReplicationRequest} {@link StartReplicationResponse} */
   StartReplication(data: StartReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StartReplicationResponse>;
+  /** 关闭 CPU 弹性扩容 {@link StopCpuExpandRequest} {@link StopCpuExpandResponse} */
+  StopCpuExpand(data: StopCpuExpandRequest, config?: AxiosRequestConfig): AxiosPromise<StopCpuExpandResponse>;
   /** 终止数据导入任务 {@link StopDBImportJobRequest} {@link StopDBImportJobResponse} */
   StopDBImportJob(data: StopDBImportJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopDBImportJobResponse>;
   /** 停止复制 {@link StopReplicationRequest} {@link StopReplicationResponse} */

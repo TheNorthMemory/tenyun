@@ -2258,6 +2258,14 @@ declare interface AcceptAttachCcnInstancesResponse {
   RequestId?: string;
 }
 
+declare interface AcceptVpcPeeringConnectionRequest {
+}
+
+declare interface AcceptVpcPeeringConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddBandwidthPackageResourcesRequest {
   /** 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx' */
   ResourceIds: string[];
@@ -3352,6 +3360,14 @@ declare interface CreateVpcEndPointServiceWhiteListResponse {
   RequestId?: string;
 }
 
+declare interface CreateVpcPeeringConnectionRequest {
+}
+
+declare interface CreateVpcPeeringConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateVpcRequest {
   /** vpc名称，最大长度不能超过60个字节。 */
   VpcName: string;
@@ -3868,6 +3884,14 @@ declare interface DeleteVpcEndPointServiceWhiteListRequest {
 }
 
 declare interface DeleteVpcEndPointServiceWhiteListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVpcPeeringConnectionRequest {
+}
+
+declare interface DeleteVpcPeeringConnectionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5322,6 +5346,26 @@ declare interface DescribeVpcLimitsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVpcPeeringConnectionsRequest {
+  /** 对等连接唯一ID数组。 */
+  PeeringConnectionIds?: string[];
+  /** 过滤条件，参数不支持同时指定PeeringConnectionIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。state String - （过滤条件）对等连接状态，可选值有：PENDING，投放中；ACTIVE，使用中；EXPIRED，已过期；REJECTED，拒绝。peering-connection-name - String - （过滤条件）对等连接名称。 */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 请求对象个数。 */
+  Limit?: number;
+  /** 排序字段，可选值有：CreatedTime，PeeringConnectionName。 */
+  OrderField?: string;
+  /** 排序方式：DESC，降序；ASC，升序。 */
+  OrderDirection?: string;
+}
+
+declare interface DescribeVpcPeeringConnectionsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVpcPrivateIpAddressesRequest {
   /** `VPC`实例`ID`，形如：`vpc-f49l6u0z`。 */
   VpcId: string;
@@ -6624,6 +6668,14 @@ declare interface ModifyVpcEndPointServiceWhiteListResponse {
   RequestId?: string;
 }
 
+declare interface ModifyVpcPeeringConnectionRequest {
+}
+
+declare interface ModifyVpcPeeringConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVpnConnectionAttributeRequest {
   /** VPN通道实例ID。形如：vpnx-f49l6u0z。 */
   VpnConnectionId: string;
@@ -6736,6 +6788,14 @@ declare interface RejectAttachCcnInstancesRequest {
 }
 
 declare interface RejectAttachCcnInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RejectVpcPeeringConnectionRequest {
+}
+
+declare interface RejectVpcPeeringConnectionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7099,6 +7159,8 @@ declare interface Vpc {
   (): Versions;
   /** 云联网接受关联实例 {@link AcceptAttachCcnInstancesRequest} {@link AcceptAttachCcnInstancesResponse} */
   AcceptAttachCcnInstances(data: AcceptAttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptAttachCcnInstancesResponse>;
+  /** 接受对等连接 {@link AcceptVpcPeeringConnectionRequest} {@link AcceptVpcPeeringConnectionResponse} */
+  AcceptVpcPeeringConnection(data?: AcceptVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptVpcPeeringConnectionResponse>;
   /** 添加带宽包资源 {@link AddBandwidthPackageResourcesRequest} {@link AddBandwidthPackageResourcesResponse} */
   AddBandwidthPackageResources(data: AddBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<AddBandwidthPackageResourcesResponse>;
   /** 添加IPV6转换规则 {@link AddIp6RulesRequest} {@link AddIp6RulesResponse} */
@@ -7225,6 +7287,8 @@ declare interface Vpc {
   CreateVpcEndPointService(data: CreateVpcEndPointServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcEndPointServiceResponse>;
   /** 创建终端服务白名单 {@link CreateVpcEndPointServiceWhiteListRequest} {@link CreateVpcEndPointServiceWhiteListResponse} */
   CreateVpcEndPointServiceWhiteList(data: CreateVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcEndPointServiceWhiteListResponse>;
+  /** 创建私有网络对等连接 {@link CreateVpcPeeringConnectionRequest} {@link CreateVpcPeeringConnectionResponse} */
+  CreateVpcPeeringConnection(data?: CreateVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcPeeringConnectionResponse>;
   /** 创建VPN通道 {@link CreateVpnConnectionRequest} {@link CreateVpnConnectionResponse} */
   CreateVpnConnection(data: CreateVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpnConnectionResponse>;
   /** 创建VPN网关 {@link CreateVpnGatewayRequest} {@link CreateVpnGatewayResponse} */
@@ -7303,6 +7367,8 @@ declare interface Vpc {
   DeleteVpcEndPointService(data: DeleteVpcEndPointServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcEndPointServiceResponse>;
   /** 删除终端节点服务白名单 {@link DeleteVpcEndPointServiceWhiteListRequest} {@link DeleteVpcEndPointServiceWhiteListResponse} */
   DeleteVpcEndPointServiceWhiteList(data: DeleteVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcEndPointServiceWhiteListResponse>;
+  /** 删除私有网络对等连接 {@link DeleteVpcPeeringConnectionRequest} {@link DeleteVpcPeeringConnectionResponse} */
+  DeleteVpcPeeringConnection(data?: DeleteVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcPeeringConnectionResponse>;
   /** 删除VPN通道 {@link DeleteVpnConnectionRequest} {@link DeleteVpnConnectionResponse} */
   DeleteVpnConnection(data: DeleteVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnConnectionResponse>;
   /** 删除VPN网关 {@link DeleteVpnGatewayRequest} {@link DeleteVpnGatewayResponse} */
@@ -7459,6 +7525,8 @@ declare interface Vpc {
   DescribeVpcIpv6Addresses(data: DescribeVpcIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcIpv6AddressesResponse>;
   /** 获取私有网络配额 {@link DescribeVpcLimitsRequest} {@link DescribeVpcLimitsResponse} */
   DescribeVpcLimits(data: DescribeVpcLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcLimitsResponse>;
+  /** 查询私有网络对等连接 {@link DescribeVpcPeeringConnectionsRequest} {@link DescribeVpcPeeringConnectionsResponse} */
+  DescribeVpcPeeringConnections(data?: DescribeVpcPeeringConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcPeeringConnectionsResponse>;
   /** 查询VPC内网IP信息 {@link DescribeVpcPrivateIpAddressesRequest} {@link DescribeVpcPrivateIpAddressesResponse} */
   DescribeVpcPrivateIpAddresses(data: DescribeVpcPrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcPrivateIpAddressesResponse>;
   /** 查看VPC资源信息 {@link DescribeVpcResourceDashboardRequest} {@link DescribeVpcResourceDashboardResponse} */
@@ -7641,6 +7709,8 @@ declare interface Vpc {
   ModifyVpcEndPointServiceAttribute(data: ModifyVpcEndPointServiceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcEndPointServiceAttributeResponse>;
   /** 修改终端节点服务白名单属性 {@link ModifyVpcEndPointServiceWhiteListRequest} {@link ModifyVpcEndPointServiceWhiteListResponse} */
   ModifyVpcEndPointServiceWhiteList(data: ModifyVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcEndPointServiceWhiteListResponse>;
+  /** 修改私有网络对等连接属性 {@link ModifyVpcPeeringConnectionRequest} {@link ModifyVpcPeeringConnectionResponse} */
+  ModifyVpcPeeringConnection(data?: ModifyVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcPeeringConnectionResponse>;
   /** 修改VPN通道 {@link ModifyVpnConnectionAttributeRequest} {@link ModifyVpnConnectionAttributeResponse} */
   ModifyVpnConnectionAttribute(data: ModifyVpnConnectionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnConnectionAttributeResponse>;
   /** 修改VPN网关属性 {@link ModifyVpnGatewayAttributeRequest} {@link ModifyVpnGatewayAttributeResponse} */
@@ -7655,6 +7725,8 @@ declare interface Vpc {
   RefreshDirectConnectGatewayRouteToNatGateway(data: RefreshDirectConnectGatewayRouteToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDirectConnectGatewayRouteToNatGatewayResponse>;
   /** 云联网拒绝关联实例 {@link RejectAttachCcnInstancesRequest} {@link RejectAttachCcnInstancesResponse} */
   RejectAttachCcnInstances(data: RejectAttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RejectAttachCcnInstancesResponse>;
+  /** 驳回对等连接 {@link RejectVpcPeeringConnectionRequest} {@link RejectVpcPeeringConnectionResponse} */
+  RejectVpcPeeringConnection(data?: RejectVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<RejectVpcPeeringConnectionResponse>;
   /** 释放弹性公网IP {@link ReleaseAddressesRequest} {@link ReleaseAddressesResponse} */
   ReleaseAddresses(data: ReleaseAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseAddressesResponse>;
   /** 释放弹性公网IPv6地址带宽 {@link ReleaseIp6AddressesBandwidthRequest} {@link ReleaseIp6AddressesBandwidthResponse} */

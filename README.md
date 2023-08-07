@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 238+ 款产品，9808+ 服务数</summary>
+<details><summary>共计 238+ 款产品，9818+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -140,7 +140,7 @@ casb | [云访问安全代理](https://cloud.tencent.com/document/product/1303) 
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(11) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(41) |
 ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(39) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(145) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(148) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
@@ -177,7 +177,7 @@ dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/pro
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(90) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(91) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(68) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(27) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
@@ -326,7 +326,7 @@ ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(160) |
-vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(307) |
+vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(313) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(53) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |

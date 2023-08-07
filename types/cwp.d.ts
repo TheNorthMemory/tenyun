@@ -4913,9 +4913,9 @@ declare interface DescribeAttackLogsRequest {
 
 declare interface DescribeAttackLogsResponse {
   /** 日志列表 */
-  AttackLogs: DefendAttackLog[] | null;
+  AttackLogs?: DefendAttackLog[] | null;
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8821,7 +8821,7 @@ declare interface Cwp {
   DescribeAssetWebServiceProcessList(data: DescribeAssetWebServiceProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceProcessListResponse>;
   /** 网络攻击日志详情 {@link DescribeAttackLogInfoRequest} {@link DescribeAttackLogInfoResponse} */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
-  /** 网络攻击日志列表 {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
+  /** 网络攻击日志列表(待下线,请使用DescribeAttackEvents代替) {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
   /** 获取网络攻击威胁类型列表 {@link DescribeAttackVulTypeListRequest} {@link DescribeAttackVulTypeListResponse} */
   DescribeAttackVulTypeList(data?: DescribeAttackVulTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackVulTypeListResponse>;

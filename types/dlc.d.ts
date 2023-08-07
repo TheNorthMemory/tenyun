@@ -106,6 +106,14 @@ declare interface CommonMetrics {
   ProcessedRows?: number | null;
 }
 
+/** cos权限描述 */
+declare interface CosPermission {
+  /** cos路径 */
+  CosPath?: string | null;
+  /** 权限【"read","write"】 */
+  Permissions?: string[] | null;
+}
+
 /** 定时启停策略信息 */
 declare interface CrontabResumeSuspendStrategy {
   /** 定时拉起时间：如：周一8点 */
@@ -1196,6 +1204,30 @@ declare interface UserMessage {
   CreateTime: string;
   /** 用户别名 */
   UserAlias: string;
+}
+
+/** 用户角色 */
+declare interface UserRole {
+  /** 角色ID */
+  RoleId?: number;
+  /** 用户app ID */
+  AppId?: string;
+  /** 用户ID */
+  Uin?: string;
+  /** 角色权限 */
+  Arn?: string;
+  /** 最近修改时间戳 */
+  ModifyTime?: number;
+  /** 角色描述信息 */
+  Desc?: string;
+  /** 角色名称 */
+  RoleName?: string | null;
+  /** 创建者UIN */
+  Creator?: string | null;
+  /** cos授权路径列表 */
+  CosPermissionList?: CosPermission[] | null;
+  /** cam策略json */
+  PermissionJson?: string | null;
 }
 
 /** 视图基本配置信息 */
@@ -2662,6 +2694,28 @@ declare interface DescribeTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserRolesRequest {
+  /** 列举的数量限制 */
+  Limit: number;
+  /** 列举的偏移位置 */
+  Offset: number;
+  /** 按照arn模糊列举 */
+  Fuzzy?: string;
+  /** 返回结果按照该字段排序 */
+  SortBy?: string;
+  /** 正序或者倒序，例如：desc */
+  Sorting?: string;
+}
+
+declare interface DescribeUserRolesResponse {
+  /** 符合列举条件的总数量 */
+  Total?: number;
+  /** 用户角色信息 */
+  UserRoles?: UserRole[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUsersRequest {
   /** 指定查询的子用户uin，用户需要通过CreateUser接口创建。 */
   UserId?: string;
@@ -3225,6 +3279,8 @@ declare interface Dlc {
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  /** 列举用户角色信息 {@link DescribeUserRolesRequest} {@link DescribeUserRolesResponse} */
+  DescribeUserRoles(data: DescribeUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRolesResponse>;
   /** 获取用户列表信息 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
   /** 查询视图列表 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
