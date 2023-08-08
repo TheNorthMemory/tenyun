@@ -219,6 +219,7 @@ import Tms, { Versions as TmsVersions } from "./tms";
 import Tmt, { Versions as TmtVersions } from "./tmt";
 import Tourism, { Versions as TourismVersions } from "./tourism";
 import Trdp, { Versions as TrdpVersions } from "./trdp";
+import Trocket, { Versions as TrocketVersions } from "./trocket";
 import Trp, { Versions as TrpVersions } from "./trp";
 import Trro, { Versions as TrroVersions } from "./trro";
 import Trtc, { Versions as TrtcVersions } from "./trtc";
@@ -461,6 +462,7 @@ export declare type SERVICE_VERSIONS = {
   tmt: TmtVersions,
   tourism: TourismVersions,
   trdp: TrdpVersions,
+  trocket: TrocketVersions,
   trp: TrpVersions,
   trro: TrroVersions,
   trtc: TrtcVersions,
@@ -932,6 +934,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tourism: Tourism,
   /** {@link Trdp 流量风险决策平台} */
   trdp: Trdp,
+  /** {@link Trocket 消息队列 RocketMQ 版} */
+  trocket: Trocket,
   /** {@link Trp T-Sec-安心平台(RP)} */
   trp: Trp,
   /** {@link Trro 远程实时操控} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 238+ 款产品，9818+ 服务数</summary>
+<details><summary>共计 239+ 款产品，9822+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -115,7 +115,7 @@ ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
 apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(96) |
 apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(8) |
-asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(24) |
+asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(25) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
 as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(50) |
 ba | [网站备案](https://cloud.tencent.com/document/product/243) | 2020-07-20(3) |
@@ -139,7 +139,7 @@ car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-
 casb | [云访问安全代理](https://cloud.tencent.com/document/product/1303) | 2020-05-07(1) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(11) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(41) |
-ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(39) |
+ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(40) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(148) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
@@ -315,6 +315,7 @@ tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 20
 tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(7) |
 tourism | [文旅客情平台](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/1604) | 2022-07-26(1) |
+trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(2) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(50) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(36) |

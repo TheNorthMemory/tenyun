@@ -253,6 +253,7 @@ export const SERVICE_VERSIONS = {
   tmt: ['2018-03-21'],
   tourism: ['2023-02-15'],
   trdp: ['2022-07-26'],
+  trocket: ['2023-03-08'],
   trp: ['2021-05-15'],
   trro: ['2022-03-25'],
   trtc: ['2019-07-22'],
