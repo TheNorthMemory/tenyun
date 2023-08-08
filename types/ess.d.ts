@@ -588,7 +588,7 @@ declare interface GroupOrganization {
   LicenseExpireTime?: number | null;
   /** 成员企业加入集团时间，时间戳，单位秒 */
   JoinTime?: number | null;
-  /** 是否使用审批流引擎，true-是，false-否 */
+  /** 是否使用自建审批流引擎（即不是企微审批流引擎），true-是，false-否 */
   FlowEngineEnable?: boolean | null;
 }
 
@@ -742,11 +742,11 @@ declare interface Recipient {
 declare interface RecipientComponentInfo {
   /** 参与方Id */
   RecipientId?: string | null;
-  /** 参与方填写状态 */
+  /** 参与方填写状态0-未填写1-已填写 */
   RecipientFillStatus?: string | null;
-  /** 是否发起方 */
+  /** 是否为发起方 */
   IsPromoter?: boolean | null;
-  /** 填写控件内容 */
+  /** 填写控件列表 */
   Components?: FilledComponent[] | null;
 }
 
@@ -1453,9 +1453,9 @@ declare interface CreateIntegrationEmployeesResponse {
 declare interface CreateIntegrationUserRolesRequest {
   /** 操作人信息，UserId必填 */
   Operator: UserInfo;
-  /** 绑定角色的用户id列表 */
+  /** 绑定角色的用户id列表，不能重复，不能大于 100 个 */
   UserIds: string[];
-  /** 绑定角色的角色id列表 */
+  /** 绑定角色的角色id列表，不能重复，不能大于 100，可以通过DescribeIntegrationRoles接口获取 */
   RoleIds: string[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
@@ -1613,6 +1613,8 @@ declare interface CreatePreparedPersonalEsignRequest {
   ProcessSeal?: boolean;
   /** 印章图片文件 id取值：填写的FileId通过UploadFiles接口上传文件获取。 */
   FileId?: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreatePreparedPersonalEsignResponse {
@@ -1653,19 +1655,19 @@ declare interface CreateSchemeUrlRequest {
   Name?: string;
   /** 手机号，大陆手机号11位 */
   Mobile?: string;
-  /** 链接类型HTTP：跳转电子签小程序的http_url，APP：第三方APP或小程序跳转电子签小程序的path。默认为HTTP类型 */
+  /** 要跳转的链接类型- HTTP：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 (默认)- APP： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型 */
   EndPoint?: string;
   /** 签署流程编号 (PathType=1时必传) */
   FlowId?: string;
   /** 合同组ID */
   FlowGroupId?: string;
-  /** 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页 */
+  /** 要跳转到的页面类型 - 0: 不传, 主页 (默认)- 1: 小程序合同详情 - 2: 小程序合同列表页 */
   PathType?: number;
   /** 是否自动回跳true：是，false：否。该参数只针对"APP" 类型的签署链接有效 */
   AutoJumpBack?: boolean;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
-  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下0:合同签署页面更多操作按钮1:合同签署页面更多操作的拒绝签署按钮2:合同签署页面更多操作的转他人处理按钮3:签署成功页的查看详情按钮 */
+  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下- 0:合同签署页面更多操作按钮- 1:合同签署页面更多操作的拒绝签署按钮- 2:合同签署页面更多操作的转他人处理按钮- 3:签署成功页的查看详情按钮 */
   Hides?: number[];
 }
 
@@ -1791,7 +1793,7 @@ declare interface CreateWebThemeConfigResponse {
 declare interface DeleteIntegrationDepartmentRequest {
   /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
   Operator: UserInfo;
-  /** 电子签中的部门id */
+  /** 电子签中的部门id,通过DescribeIntegrationDepartments接口可获得 */
   DeptId: string;
   /** 交接部门ID。待删除部门中的合同、印章和模板数据，交接至该部门ID下，未填写交接至公司根部门。 */
   ReceiveDeptId?: string;
@@ -1805,7 +1807,7 @@ declare interface DeleteIntegrationDepartmentResponse {
 declare interface DeleteIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
-  /** 待移除员工的信息，userId和openId二选一，必填一个 */
+  /** 待移除员工的信息，userId和openId二选一，必填一个，如果需要指定交接人的话，ReceiveUserId或者ReceiveOpenId字段二选一 */
   Employees: Staff[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id */
   Agent?: Agent;
@@ -1823,7 +1825,7 @@ declare interface DeleteIntegrationRoleUsersRequest {
   Operator: UserInfo;
   /** 角色id */
   RoleId: string;
-  /** 用户信息 */
+  /** 用户信息,最多 200 个用户，并且 UserId 和 OpenId 二选一，其他字段不需要传 */
   Users: UserInfo[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
@@ -1923,14 +1925,14 @@ declare interface DescribeFlowBriefsResponse {
 declare interface DescribeFlowComponentsRequest {
   /** 操作者信息 */
   Operator: UserInfo;
-  /** 电子签流程的Id */
+  /** 流程(合同)的编号 */
   FlowId: string;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
 declare interface DescribeFlowComponentsResponse {
-  /** 流程关联的填写控件信息 */
+  /** 流程关联的填写控件信息，按照参与方进行分类返回。 */
   RecipientComponentInfos?: RecipientComponentInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2029,22 +2031,22 @@ declare interface DescribeIntegrationDepartmentsResponse {
 declare interface DescribeIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
-  /** 返回最大数量，最大为20 */
+  /** 指定每页多少条数据，单页最大20 */
   Limit: number;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...] */
   Filters?: Filter[];
-  /** 偏移量，默认为0，最大为20000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000 */
   Offset?: number;
 }
 
 declare interface DescribeIntegrationEmployeesResponse {
   /** 员工数据列表 */
   Employees?: Staff[] | null;
-  /** 偏移量，默认为0，最大为20000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000 */
   Offset?: number | null;
-  /** 返回最大数量，最大为20 */
+  /** 指定每页多少条数据，单页最大20 */
   Limit?: number;
   /** 符合条件的员工数量 */
   TotalCount?: number;
@@ -2067,20 +2069,20 @@ declare interface DescribeIntegrationMainOrganizationUserResponse {
 declare interface DescribeIntegrationRolesRequest {
   /** 操作人信息，UserId必填 */
   Operator: UserInfo;
-  /** 返回最大数量，最大为200 */
+  /** 指定每页多少条数据，单页最大200 */
   Limit: number;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 查询的关键字段:Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色 */
   Filters?: Filter[];
-  /** 偏移量，默认为0，最大为2000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000 */
   Offset?: number;
 }
 
 declare interface DescribeIntegrationRolesResponse {
-  /** 偏移量，默认为0，最大为2000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000 */
   Offset?: number;
-  /** 返回最大数量，最大为200 */
+  /** 指定每页多少条数据，单页最大200 */
   Limit?: number;
   /** 符合查询条件的总的角色数 */
   TotalCount?: number;
@@ -2093,9 +2095,9 @@ declare interface DescribeIntegrationRolesResponse {
 declare interface DescribeOrganizationGroupOrganizationsRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
-  /** 单次查询成员企业最大返回数量 */
+  /** 指定每页多少条数据，单页最大1000 */
   Limit: number;
-  /** 页面偏移量 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0 */
   Offset: number;
   /** 查询成员企业的企业名，模糊匹配 */
   Name?: string;
@@ -2103,7 +2105,7 @@ declare interface DescribeOrganizationGroupOrganizationsRequest {
   Status?: number;
   /** 是否导出当前成员企业数据 */
   Export?: boolean;
-  /** 成员企业id */
+  /** 成员企业机构 ID，在PC控制台 集团管理可获取 */
   Id?: string;
 }
 
@@ -2114,7 +2116,7 @@ declare interface DescribeOrganizationGroupOrganizationsResponse {
   JoinedTotal?: number | null;
   /** 已加入的企业数量(废弃,请使用ActivatedTotal) */
   ActivedTotal?: number | null;
-  /** 导出文件的url */
+  /** 如果入参Export为 true 时使用，表示导出Excel的url */
   ExportUrl?: string | null;
   /** 成员企业信息列表 */
   List?: GroupOrganization[] | null;
@@ -2247,9 +2249,9 @@ declare interface ModifyApplicationCallbackInfoResponse {
 declare interface ModifyIntegrationDepartmentRequest {
   /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
   Operator: UserInfo;
-  /** 电子签部门ID */
+  /** 电子签部门ID,通过DescribeIntegrationDepartments接口可以获取 */
   DeptId: string;
-  /** 电子签父部门ID */
+  /** 电子签父部门ID，通过DescribeIntegrationDepartments接口可以获取 */
   ParentDeptId?: string;
   /** 部门名称，不超过50个字符 */
   DeptName?: string;
@@ -2303,7 +2305,7 @@ declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
 }
 
 declare interface UpdateIntegrationEmployeesRequest {
-  /** 当前用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为YUFU； */
+  /** 当前用户信息，UserId必填 */
   Operator: UserInfo;
   /** 员工信息，不超过100个。根据UserId或OpenId更新员工，必填一个，优先UserId。可更新Mobile、DisplayName、Email和Department.DepartmentId字段，其他字段暂不支持 */
   Employees: Staff[];

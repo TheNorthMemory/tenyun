@@ -142,6 +142,12 @@ declare interface VoicePrintBaseData {
   SpeakerNick?: string | null;
 }
 
+/** 统计返回注册数量结构 */
+declare interface VoicePrintCountData {
+  /** 总数 */
+  Total?: number | null;
+}
+
 /** 说话人验证数据 */
 declare interface VoicePrintVerifyData {
   /** 说话人id */
@@ -540,6 +546,16 @@ declare interface UpdateAsrVocabResponse {
   RequestId?: string;
 }
 
+declare interface VoicePrintCountRequest {
+}
+
+declare interface VoicePrintCountResponse {
+  /** 统计数据 */
+  Data?: VoicePrintCountData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VoicePrintDeleteRequest {
   /** 说话人id，说话人唯一标识 */
   VoicePrintId: string;
@@ -651,6 +667,8 @@ declare interface Asr {
   SetVocabState(data: SetVocabStateRequest, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateResponse>;
   /** 更新热词表 {@link UpdateAsrVocabRequest} {@link UpdateAsrVocabResponse} */
   UpdateAsrVocab(data: UpdateAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAsrVocabResponse>;
+  /** 说话人注册数量统计 {@link VoicePrintCountRequest} {@link VoicePrintCountResponse} */
+  VoicePrintCount(data?: VoicePrintCountRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintCountResponse>;
   /** 说话人删除 {@link VoicePrintDeleteRequest} {@link VoicePrintDeleteResponse} */
   VoicePrintDelete(data: VoicePrintDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintDeleteResponse>;
   /** 说话人注册 {@link VoicePrintEnrollRequest} {@link VoicePrintEnrollResponse} */

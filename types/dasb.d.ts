@@ -1039,6 +1039,8 @@ declare interface DescribeDevicesRequest {
   ResourceIdSet?: string[];
   /** 可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer */
   KindSet?: number[];
+  /** 资产是否包含托管账号。1，包含；0，不包含 */
+  ManagedAccount?: string;
   /** 过滤条件，可按照部门ID进行过滤 */
   DepartmentId?: string;
   /** 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系 */
@@ -1049,9 +1051,9 @@ declare interface DescribeDevicesRequest {
 
 declare interface DescribeDevicesResponse {
   /** 资产总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 资产信息列表 */
-  DeviceSet: Device[];
+  DeviceSet?: Device[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

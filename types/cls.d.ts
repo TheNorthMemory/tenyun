@@ -464,6 +464,18 @@ declare interface DynamicIndex {
   Status?: boolean | null;
 }
 
+/** Windows事件日志采集配置 */
+declare interface EventLog {
+  /** 事件通道，支持Application，Security，Setup，System，ALL */
+  EventChannel: string;
+  /** 时间类型，1:用户自定义，2:当前时间 */
+  TimeType: number;
+  /** 时间，用户选择自定义时间类型时，需要指定时间 */
+  Timestamp?: number;
+  /** 事件ID过滤列表 */
+  EventIDs?: string[];
+}
+
 /** 黑名单path信息 */
 declare interface ExcludePathInfo {
   /** 类型，选填File或Path */
@@ -540,6 +552,8 @@ declare interface ExtractRuleInfo {
   PathRegex?: string | null;
   /** 用户自定义元数据信息，MetadataType为2时必填 */
   MetaTags?: MetaTagInfo[];
+  /** windows事件日志采集 */
+  EventLogRules?: EventLog[];
 }
 
 /** 过滤器 */
@@ -816,6 +830,8 @@ declare interface MachineGroupInfo {
   ServiceLogging: boolean | null;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
+  /** 操作系统类型，0: Linux，1: windows */
+  OSType?: number;
 }
 
 /** 机器组类型描述 */
@@ -1511,6 +1527,8 @@ declare interface CreateMachineGroupRequest {
   ServiceLogging?: boolean;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
+  /** 系统类型，默认0，0：Linux，1: windows */
+  OSType?: number;
 }
 
 declare interface CreateMachineGroupResponse {
@@ -2147,7 +2165,7 @@ declare interface DescribeMachineGroupConfigsResponse {
 }
 
 declare interface DescribeMachineGroupsRequest {
-  /** machineGroupName- 按照【机器组名称】进行过滤。- 类型：String- 必选：否machineGroupId- 按照【机器组ID】进行过滤。- 类型：String- 必选：否tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** machineGroupName- 按照【机器组名称】进行过滤。- 类型：String- 必选：否machineGroupId- 按照【机器组ID】进行过滤。- 类型：String- 必选：否osType- 按照【操作系统类型】进行过滤。- 类型：Int- 必选：否tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;

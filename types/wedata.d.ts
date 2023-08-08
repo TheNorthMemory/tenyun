@@ -846,6 +846,14 @@ declare interface DescribeBatchOperateTaskDTO {
   UpdateTime?: string | null;
   /** 创造时间 */
   CreateTime?: string | null;
+  /** 周期类型 */
+  CycleUnit?: string | null;
+  /** 调度计划 */
+  ScheduleDesc?: string | null;
+  /** 数据源ID */
+  DatasourceId?: string | null;
+  /** 数据源类型 */
+  DatasourceType?: string | null;
 }
 
 /** 批量操作任务列表分页 */
@@ -6378,6 +6386,14 @@ declare interface DescribeBatchOperateTaskRequest {
   OwnerId?: string;
   /** 1 */
   TenantId?: string;
+  /** 数据源ID列表 */
+  DatasourceIdList?: string[];
+  /** 数据源类型列表 */
+  DatasourceTypeList?: string[];
+  /** 调度单位类型列表 */
+  CycleUnitList?: string[];
+  /** 是否筛选出可提交的任务 */
+  CanSubmit?: boolean;
 }
 
 declare interface DescribeBatchOperateTaskResponse {

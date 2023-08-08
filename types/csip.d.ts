@@ -42,6 +42,8 @@ declare interface AssetClusterPod {
   PrivateIp?: string | null;
   /** 是否核心：1:核心，2:非核心 */
   IsCore?: number | null;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
 }
 
 /** 资产视角的端口风险对象 */
@@ -258,6 +260,8 @@ declare interface CVMAssetVO {
   RiskExposure?: number | null;
   /** 模拟攻击工具状态。0代表未安装，1代表已安装，2代表已离线 */
   BASAgentStatus?: number | null;
+  /** 1新资产；0 非新资产 */
+  IsNewAsset?: number | null;
 }
 
 /** db资产输出字段 */
@@ -306,6 +310,8 @@ declare interface DBAssetVO {
   Status?: number | null;
   /** 是否核心 */
   IsCore?: number | null;
+  /** 是否新资产: 1新 */
+  IsNewAsset?: number | null;
 }
 
 /** db资产详情 */
@@ -404,6 +410,14 @@ declare interface DomainAssetVO {
   WebAttack?: number | null;
   /** 风险服务暴露数量 */
   ServiceRisk?: number | null;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
+  /** 待确认资产的随机三级域名 */
+  VerifyDomain?: string | null;
+  /** 待确认资产的TXT记录内容 */
+  VerifyTXTRecord?: string | null;
+  /** 待确认资产的认证状态，0-待认证，1-认证成功，2-认证中，3-txt认证失败，4-人工认证失败 */
+  VerifyStatus?: number | null;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */
@@ -500,6 +514,10 @@ declare interface IpAssetListVO {
   MemberId?: string | null;
   /** 风险服务暴露 */
   RiskExposure?: number | null;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
+  /** 资产认证状态，0-待认证，1-认证成功，2-认证中，3+-认证失败 */
+  VerifyStatus?: number | null;
 }
 
 /** 扫描任务详情 */
@@ -568,6 +586,8 @@ declare interface SubnetAsset {
   LastScanTime?: string;
   /** 是否核心 */
   IsCore?: number | null;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
 }
 
 /** 标签 */
@@ -656,16 +676,20 @@ declare interface Vpc {
   Uin?: string;
   /** 昵称 */
   Nick?: string;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
+  /** 是否核心资产1是 2不是 */
+  IsCore?: number | null;
 }
 
 /** 过滤条件 */
 declare interface WhereFilter {
   /** 过滤的项 */
-  Name: string | null;
+  Name: string;
   /** 过滤的值 */
-  Values: string[] | null;
-  /** 精确匹配填 7 模糊匹配填9 ， 兼容 中台定的结构 */
-  OperatorType?: number | null;
+  Values: string[];
+  /** 中台定义：1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与精确匹配填 7 模糊匹配填9 兼容 中台定的结构 */
+  OperatorType?: number;
 }
 
 declare interface AddNewBindRoleUserRequest {
@@ -756,7 +780,7 @@ declare interface CreateRiskCenterScanTaskRequest {
   TaskName: string;
   /** 0-全扫，1-指定资产扫，2-排除资产扫，3-手动填写扫；1和2则Assets字段必填，3则SelfDefiningAssets必填 */
   ScanAssetType: number;
-  /** 扫描项目；port/poc/weakpass/webcontent/configrisk */
+  /** 扫描项目；port/poc/weakpass/webcontent/configrisk/exposedserver */
   ScanItem: string[];
   /** 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填 */
   ScanPlanType: number;
@@ -775,6 +799,10 @@ declare interface CreateRiskCenterScanTaskRequest {
 declare interface CreateRiskCenterScanTaskResponse {
   /** 任务id */
   TaskId?: string;
+  /** 0,任务创建成功；小于0失败；-1为存在资产未认证 */
+  Status?: number;
+  /** 未认证资产列表 */
+  UnAuthAsset?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

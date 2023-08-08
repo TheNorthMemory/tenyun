@@ -1225,11 +1225,11 @@ declare interface ChannelCreateSealPolicyResponse {
 declare interface ChannelCreateUserRolesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 绑定角色的角色id列表 */
+  /** 绑定角色的角色id列表，最多 100 个 */
   RoleIds: string[];
-  /** 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数 */
+  /** 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数，最多 100 个 */
   UserIds?: string[];
-  /** 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数 */
+  /** 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数，最多 100 个 */
   OpenIds?: string[];
   /** 操作者信息 */
   Operator?: UserInfo;
@@ -1261,11 +1261,11 @@ declare interface ChannelDeleteRoleUsersRequest {
   Agent: Agent;
   /** 角色Id（非超管或法人角色Id） */
   RoleId: string;
-  /** 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数 */
+  /** 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数，最多两百 */
   UserIds?: string[];
   /** 操作人信息 */
   Operator?: UserInfo;
-  /** 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数 */
+  /** 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数，最多两百 */
   OpenIds?: string[];
 }
 
@@ -1295,13 +1295,13 @@ declare interface ChannelDeleteSealPoliciesResponse {
 }
 
 declare interface ChannelDescribeEmployeesRequest {
-  /** 返回最大数量，最大为20 */
-  Limit: number;
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
-  Agent?: Agent;
+  Agent: Agent;
+  /** 指定每页多少条数据，单页最大20 */
+  Limit: number;
   /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]查询离职员工时，Key为Status，Values为["QuiteJob"] */
   Filters?: Filter[];
-  /** 偏移量，默认为0，最大为20000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0,最大为20000 */
   Offset?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1310,9 +1310,9 @@ declare interface ChannelDescribeEmployeesRequest {
 declare interface ChannelDescribeEmployeesResponse {
   /** 员工数据列表 */
   Employees?: Staff[] | null;
-  /** 偏移量，默认为0，最大为20000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000 */
   Offset?: number | null;
-  /** 返回最大数量，最大为20 */
+  /** 指定每页多少条数据，单页最大20 */
   Limit?: number;
   /** 符合条件的员工数量 */
   TotalCount?: number;
@@ -1328,7 +1328,7 @@ declare interface ChannelDescribeFlowComponentsRequest {
 }
 
 declare interface ChannelDescribeFlowComponentsResponse {
-  /** 流程关联的填写控件信息 */
+  /** 流程关联的填写控件信息，控件会按照参与方进行分类。 */
   RecipientComponentInfos?: RecipientComponentInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1361,9 +1361,9 @@ declare interface ChannelDescribeOrganizationSealsResponse {
 declare interface ChannelDescribeRolesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 查询起始偏移，最大2000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000 */
   Offset: number;
-  /** 查询数量，最大200 */
+  /** 指定每页多少条数据，单页最大200 */
   Limit: string;
   /** 查询的关键字段:Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色 */
   Filters?: Filter[];
@@ -1372,9 +1372,9 @@ declare interface ChannelDescribeRolesRequest {
 }
 
 declare interface ChannelDescribeRolesResponse {
-  /** 页面偏移量，最大2000 */
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000 */
   Offset?: number;
-  /** 查询数量，最大200 */
+  /** 指定每页多少条数据，单页最大200 */
   Limit?: number;
   /** 查询角色的总数量 */
   TotalCount?: number;

@@ -40,10 +40,10 @@ declare interface AccountParam {
 
 /** 数据库地址 */
 declare interface Addr {
-  /** IP */
-  IP: string;
+  /** IP地址 */
+  IP?: string;
   /** 端口 */
-  Port: number;
+  Port?: number;
 }
 
 /** 审计日志详细信息 */
@@ -359,97 +359,97 @@ declare interface CynosdbCluster {
 /** 集群详情详细信息 */
 declare interface CynosdbClusterDetail {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 物理可用区 */
-  PhysicalZone: string | null;
+  PhysicalZone?: string | null;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 状态描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 当Db类型为SERVERLESS时，serverless集群状态，可选值:resumeresumingpausepausing */
-  ServerlessStatus: string;
+  ServerlessStatus?: string;
   /** 存储Id */
-  StorageId: string | null;
+  StorageId?: string | null;
   /** 存储大小，单位为G */
-  Storage: number | null;
+  Storage?: number | null;
   /** 最大存储规格，单位为G */
-  MaxStorageSize: number | null;
+  MaxStorageSize?: number | null;
   /** 最小存储规格，单位为G */
-  MinStorageSize: number | null;
+  MinStorageSize?: number | null;
   /** 存储付费类型，1为包年包月，0为按量计费 */
-  StoragePayMode: number | null;
+  StoragePayMode?: number | null;
   /** VPC名称 */
-  VpcName: string;
+  VpcName?: string;
   /** vpc唯一id */
-  VpcId: string;
+  VpcId?: string;
   /** 子网名称 */
-  SubnetName: string;
+  SubnetName?: string;
   /** 子网ID */
-  SubnetId: string;
+  SubnetId?: string;
   /** 字符集 */
-  Charset: string;
+  Charset?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 数据库类型 */
-  DbType: string;
+  DbType?: string;
   /** 数据库类型，normal，serverless */
-  DbMode: string | null;
+  DbMode?: string | null;
   /** 数据库版本 */
-  DbVersion: string;
+  DbVersion?: string;
   /** 存储空间上限 */
-  StorageLimit: number | null;
+  StorageLimit?: number | null;
   /** 使用容量 */
-  UsedStorage: number;
+  UsedStorage?: number;
   /** vip地址 */
-  Vip: string;
+  Vip?: string;
   /** vport端口 */
-  Vport: number;
-  /** 读写分离Vport */
-  RoAddr: Addr[];
+  Vport?: number;
+  /** 集群只读实例的vip地址和vport端口 */
+  RoAddr?: Addr[];
   /** 集群支持的功能 */
-  Ability: Ability | null;
+  Ability?: Ability | null;
   /** cynos版本 */
-  CynosVersion: string | null;
+  CynosVersion?: string | null;
   /** 商业类型 */
-  BusinessType: string | null;
+  BusinessType?: string | null;
   /** 是否有从可用区 */
-  HasSlaveZone: string | null;
+  HasSlaveZone?: string | null;
   /** 是否冻结 */
-  IsFreeze: string | null;
+  IsFreeze?: string | null;
   /** 任务列表 */
-  Tasks: ObjectTask[] | null;
+  Tasks?: ObjectTask[] | null;
   /** 主可用区 */
-  MasterZone: string | null;
+  MasterZone?: string | null;
   /** 从可用区列表 */
-  SlaveZones: string[] | null;
+  SlaveZones?: string[] | null;
   /** 实例信息 */
-  InstanceSet: ClusterInstanceDetail[];
+  InstanceSet?: ClusterInstanceDetail[];
   /** 付费模式 */
-  PayMode: number;
+  PayMode?: number;
   /** 到期时间 */
-  PeriodEndTime: string;
+  PeriodEndTime?: string;
   /** 项目id */
-  ProjectID: number;
+  ProjectID?: number;
   /** 实例绑定的tag数组信息 */
-  ResourceTags: Tag[];
+  ResourceTags?: Tag[];
   /** Proxy状态 */
-  ProxyStatus: string | null;
+  ProxyStatus?: string | null;
   /** binlog开关，可选值：ON, OFF */
-  LogBin: string | null;
+  LogBin?: string | null;
   /** 是否跳过交易 */
-  IsSkipTrade: string | null;
+  IsSkipTrade?: string | null;
   /** pitr类型，可选值：normal, redo_pitr */
-  PitrType: string | null;
+  PitrType?: string | null;
   /** 是否打开密码复杂度 */
-  IsOpenPasswordComplexity: string | null;
+  IsOpenPasswordComplexity?: string | null;
   /** 网络类型 */
-  NetworkStatus: string | null;
+  NetworkStatus?: string | null;
   /** 集群绑定的资源包信息 */
   ResourcePackages?: ResourcePackage[] | null;
   /** 自动续费标识，1为自动续费，0为到期不续 */
@@ -1505,7 +1505,7 @@ declare interface ActivateInstanceRequest {
 
 declare interface ActivateInstanceResponse {
   /** 任务流id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1771,9 +1771,9 @@ declare interface CreateClustersRequest {
   ProjectId?: number;
   /** 当DbMode为NORMAL或不填时必选普通实例Cpu核数 */
   Cpu?: number;
-  /** 当DbMode为NORMAL或不填时必选普通实例内存,单位G */
+  /** 当DbMode为NORMAL或不填时必选普通实例内存,单位GB */
   Memory?: number;
-  /** 该参数无实际意义，已废弃。存储大小，单位G。 */
+  /** 该参数无实际意义，已废弃。存储大小，单位GB。 */
   Storage?: number;
   /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
   ClusterName?: string;
@@ -3859,7 +3859,7 @@ declare interface SwitchClusterVpcRequest {
 
 declare interface SwitchClusterVpcResponse {
   /** 异步任务id。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

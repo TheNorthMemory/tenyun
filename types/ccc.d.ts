@@ -616,6 +616,20 @@ declare interface BindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
+declare interface CreateAdminURLRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 管理员账号 */
+  SeatUserId: string;
+}
+
+declare interface CreateAdminURLResponse {
+  /** 登录链接 */
+  URL?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAutoCalloutTaskRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1357,6 +1371,8 @@ declare interface Ccc {
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定坐席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
+  /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */
+  CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;
   /** 创建自动外呼任务 {@link CreateAutoCalloutTaskRequest} {@link CreateAutoCalloutTaskResponse} */
   CreateAutoCalloutTask(data: CreateAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoCalloutTaskResponse>;
   /** 创建技能组 {@link CreateCCCSkillGroupRequest} {@link CreateCCCSkillGroupResponse} */

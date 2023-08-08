@@ -24,6 +24,8 @@ declare interface AbstractRuntimeMC {
   RuntimeClass: number;
   /** 是否已在当前环境发布 */
   Deployed: boolean | null;
+  /** 环境扩展组件是否满足应用要求：0=true, 1=false 表示该应用需要扩展组件0(cdc)以及1(java)，但是独立环境有cdc无java，不满足发布要求 */
+  MatchExtensions?: string | null;
 }
 
 /** GetMonitorMetricResponse */
@@ -64,20 +66,20 @@ declare interface RuntimeDeployedInstanceMC {
 
 /** 运行环境扩展组件 */
 declare interface RuntimeExtensionMC {
-  /** 扩展组件类型：0:cdc */
+  /** 扩展组件类型：0:cdc 1:dataway-java */
   Type: number;
   /** 部署规格vcore数 */
-  Size: number;
+  Size?: number;
   /** 副本数 */
-  Replica: number;
+  Replica?: number;
   /** 扩展组件名称 */
-  Name: string;
+  Name?: string;
   /** 状态 1:未启用 2:已启用 */
-  Status: number;
+  Status?: number;
   /** 创建时间 */
-  CreatedAt: number;
+  CreatedAt?: number;
   /** 修改时间 */
-  UpdatedAt: number;
+  UpdatedAt?: number;
 }
 
 /** 运行时详细信息 */
@@ -124,7 +126,7 @@ declare interface RuntimeMC {
   WorkerExtensions: RuntimeExtensionMC[] | null;
   /** 环境类型：0: sandbox, 1:shared, 2:private 3: trial */
   RuntimeType: number | null;
-  /** 环境运行类型：0:运行时类型、1:api类型 */
+  /** 环境运行类型：0:运行时类型、1:api类型、2:etl环境 */
   RuntimeClass: number | null;
   /** 已使用出带宽 Mbps */
   BandwidthOutUsed: number | null;
@@ -181,6 +183,8 @@ declare interface ListDeployableRuntimesMCRequest {
   InstanceId?: number;
   /** 版本类型 0-pro 1-lite */
   PlanType?: number;
+  /** 0：应用集成，1：API，2：ETL */
+  RuntimeClass?: number;
 }
 
 declare interface ListDeployableRuntimesMCResponse {
