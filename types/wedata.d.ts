@@ -1775,15 +1775,19 @@ declare interface InstanceSearchCondition {
 /** 运维大屏实例状态统计和实例状态趋势 */
 declare interface InstanceStatisticInfo {
   /** 实例状态趋势状态统计 */
-  CountList: number[] | null;
+  CountList?: number[] | null;
   /** 实例状态趋势时间分割 */
-  TimeList: string[] | null;
+  TimeList?: string[] | null;
   /** 实例状态标识：WAITING_RUNNING、KILLING、FAILED、FAILED_TRYING、SUCCEED 分别表示等待执行、正在终止、失败、失败重试、成功，用于实例状态分布和实例状态趋势 */
-  InstanceStatus: string;
+  InstanceStatus?: string;
   /** 用于实例状态分布计数 */
-  InstanceCount: number;
+  InstanceCount?: number;
   /** 当前展示时间 */
-  ShowTime: string | null;
+  ShowTime?: string | null;
+  /** 1 */
+  ReportTime?: string | null;
+  /** 1 */
+  Count?: number | null;
 }
 
 /** 实例日志信息 */
@@ -3722,6 +3726,10 @@ declare interface TaskByStatus {
   Status?: string | null;
   /** 周期单位 */
   CycleUnit?: string | null;
+  /** 1 */
+  ReportTime?: string;
+  /** 1 */
+  Count?: number;
 }
 
 /** 任务信息 */
@@ -8537,6 +8545,12 @@ declare interface DescribeSchedulerInstanceStatusRequest {
   ExecutionGroupId?: string;
   /** 执行资源组名字 */
   ExecutionGroupName?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 责任人 */
+  InCharge?: string;
 }
 
 declare interface DescribeSchedulerInstanceStatusResponse {
@@ -8557,6 +8571,10 @@ declare interface DescribeSchedulerRunTimeInstanceCntByStatusRequest {
   StartTime?: string;
   /** 结束日前：2023-03-20 */
   EndTime?: string;
+  /** 1 */
+  TaskType?: number;
+  /** 1 */
+  InCharge?: string;
 }
 
 declare interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
@@ -8573,6 +8591,8 @@ declare interface DescribeSchedulerTaskCntByStatusRequest {
   TypeName?: string;
   /** 111 */
   ProjectId?: string;
+  /** 1 */
+  InCharge?: string;
 }
 
 declare interface DescribeSchedulerTaskCntByStatusResponse {
@@ -8585,6 +8605,8 @@ declare interface DescribeSchedulerTaskCntByStatusResponse {
 declare interface DescribeSchedulerTaskTypeCntRequest {
   /** 项目ID */
   ProjectId: string;
+  /** 1 */
+  InCharge?: string;
 }
 
 declare interface DescribeSchedulerTaskTypeCntResponse {
@@ -8671,6 +8693,16 @@ declare interface DescribeStatisticInstanceStatusTrendOpsRequest {
   ExecutionGroupId?: string;
   /** 资源组名称 */
   ExecutionGroupName?: string;
+  /** 1 */
+  InCharge?: string;
+  /** 1 */
+  TaskType?: number;
+  /** 1 */
+  StateList?: number[];
+  /** D代表天，H代表小时 */
+  AggregationUnit?: string;
+  /** 1 */
+  AverageWindowSize?: number;
 }
 
 declare interface DescribeStatisticInstanceStatusTrendOpsResponse {
@@ -8877,6 +8909,8 @@ declare interface DescribeTaskByCycleReportResponse {
 declare interface DescribeTaskByCycleRequest {
   /** 项目ID */
   ProjectId: string;
+  /** 1 */
+  InCharge?: string;
 }
 
 declare interface DescribeTaskByCycleResponse {
@@ -8899,6 +8933,14 @@ declare interface DescribeTaskByStatusReportRequest {
   StartTime?: string;
   /** 结束时间 */
   EndTime?: string;
+  /** 无 */
+  AggregationUnit?: string;
+  /** 无 */
+  CycleUnit?: string;
+  /** 无 */
+  Status?: string;
+  /** 无 */
+  InCharge?: string;
 }
 
 declare interface DescribeTaskByStatusReportResponse {

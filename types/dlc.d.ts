@@ -1721,6 +1721,8 @@ declare interface CreateNotebookSessionRequest {
   ExecutorMaxNumbers?: number;
   /** 指定spark版本名称，当前任务使用该spark镜像运行 */
   SparkImage?: string;
+  /** 是否继承集群的资源类配置：0：自定义（默认），1：继承集群； */
+  IsInherit?: number;
 }
 
 declare interface CreateNotebookSessionResponse {
@@ -1905,6 +1907,8 @@ declare interface CreateSparkSessionBatchSQLRequest {
   SessionName?: string;
   /** Session相关配置，当前支持：1.dlc.eni：用户配置的eni网关信息，可以用过该字段设置；2.dlc.role.arn：用户配置的roleArn鉴权策略配置信息，可以用过该字段设置；3.dlc.sql.set.config：用户配置的集群配置信息，可以用过该字段设置； */
   Arguments?: KVPair[];
+  /** 是否继承集群的资源类配置：0：自定义（默认），1：继承集群； */
+  IsInherit?: number;
 }
 
 declare interface CreateSparkSessionBatchSQLResponse {

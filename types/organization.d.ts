@@ -270,6 +270,18 @@ declare interface CancelOrganizationMemberAuthAccountResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrganizationMemberAuthIdentityRequest {
+  /** 成员uin列表。最多10个 */
+  MemberUins: number[];
+  /** 身份Id列表。最多5个 */
+  IdentityIds: number[];
+}
+
+declare interface CreateOrganizationMemberAuthIdentityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOrganizationMemberPolicyRequest {
   /** 成员Uin。 */
   MemberUin: number;
@@ -314,6 +326,16 @@ declare interface CreateOrganizationMemberRequest {
 declare interface CreateOrganizationMemberResponse {
   /** 成员Uin。 */
   Uin: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOrganizationMembersPolicyRequest {
+  /** 访问策略ID。 */
+  PolicyId: number;
+}
+
+declare interface DeleteOrganizationMembersPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1023,10 +1045,14 @@ declare interface Organization {
   CancelOrganizationMemberAuthAccount(data: CancelOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationMemberAuthAccountResponse>;
   /** 创建组织成员 {@link CreateOrganizationMemberRequest} {@link CreateOrganizationMemberResponse} */
   CreateOrganizationMember(data: CreateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberResponse>;
+  /** 添加组织成员访问授权 {@link CreateOrganizationMemberAuthIdentityRequest} {@link CreateOrganizationMemberAuthIdentityResponse} */
+  CreateOrganizationMemberAuthIdentity(data: CreateOrganizationMemberAuthIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberAuthIdentityResponse>;
   /** 创建组织成员访问授权策略 {@link CreateOrganizationMemberPolicyRequest} {@link CreateOrganizationMemberPolicyResponse} */
   CreateOrganizationMemberPolicy(data: CreateOrganizationMemberPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberPolicyResponse>;
   /** 批量删除企业组织成员 {@link DeleteOrganizationMembersRequest} {@link DeleteOrganizationMembersResponse} */
   DeleteOrganizationMembers(data: DeleteOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersResponse>;
+  /** 删除组织成员访问策略 {@link DeleteOrganizationMembersPolicyRequest} {@link DeleteOrganizationMembersPolicyResponse} */
+  DeleteOrganizationMembersPolicy(data: DeleteOrganizationMembersPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersPolicyResponse>;
   /** 批量删除企业组织节点 {@link DeleteOrganizationNodesRequest} {@link DeleteOrganizationNodesResponse} */
   DeleteOrganizationNodes(data: DeleteOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationNodesResponse>;
   /** 获取企业组织信息 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */

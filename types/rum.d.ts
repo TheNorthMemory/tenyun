@@ -1163,11 +1163,13 @@ declare interface DescribeDataPvUrlStatisticsRequest {
   Browser?: string;
   /** 环境 */
   Env?: string;
+  /** group by 参数值枚举1:1m 2:5m 3:30m 4:1h 5:1d */
+  GroupByType?: number;
 }
 
 declare interface DescribeDataPvUrlStatisticsResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -39,21 +39,23 @@ declare interface BrokerSubscribe {
 /** CLS日志 */
 declare interface CLSLogItem {
   /** 日志内容 */
-  Content: string;
+  Content?: string;
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 请求ID */
-  RequestId: string;
+  RequestId?: string;
   /** 结果 */
-  Result: string;
+  Result?: string;
   /** 模块 */
-  Scene: string;
+  Scene?: string;
   /** 日志时间 */
-  Time: string;
+  Time?: string;
   /** 腾讯云账号 */
-  Userid: string;
+  Userid?: string;
+  /** 腾讯云账号 */
+  UserId?: string;
 }
 
 /** X509证书信息 */
@@ -79,55 +81,57 @@ declare interface CertInfo {
 /** 设备详细信息 */
 declare interface DeviceInfo {
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 设备是否在线，0不在线，1在线 */
-  Online: number;
+  Online?: number;
   /** 设备登录时间 */
-  LoginTime: number;
+  LoginTime?: number;
   /** 设备版本 */
-  Version: string;
+  Version?: string;
   /** 设备证书，证书加密的设备返回 */
-  DeviceCert: string;
+  DeviceCert?: string;
   /** 设备密钥，密钥加密的设备返回 */
-  DevicePsk: string;
+  DevicePsk?: string;
   /** 设备属性 */
-  Tags: DeviceTag[];
+  Tags?: DeviceTag[];
   /** 设备类型 */
-  DeviceType: number;
+  DeviceType?: number;
   /** 国际移动设备识别码 IMEI */
-  Imei: string;
+  Imei?: string;
   /** 运营商类型 */
-  Isp: number;
+  Isp?: number;
   /** NB IOT运营商处的DeviceID */
-  NbiotDeviceID: string;
+  NbiotDeviceID?: string;
   /** IP地址 */
-  ConnIP: number;
+  ConnIP?: number;
   /** 设备最后更新时间 */
-  LastUpdateTime: number;
+  LastUpdateTime?: number;
   /** LoRa设备的dev eui */
-  LoraDevEui: string;
+  LoraDevEui?: string;
   /** LoRa设备的Mote type */
-  LoraMoteType: number;
+  LoraMoteType?: number;
   /** 首次上线时间 */
-  FirstOnlineTime: number | null;
+  FirstOnlineTime?: number | null;
   /** 最近下线时间 */
-  LastOfflineTime: number | null;
+  LastOfflineTime?: number | null;
   /** 设备创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 设备日志级别 */
-  LogLevel: number | null;
+  LogLevel?: number | null;
   /** 设备证书获取状态, 1 已获取过设备密钥，0 未获取过设备密钥 */
-  CertState: number | null;
+  CertState?: number | null;
   /** 设备可用状态，0禁用，1启用 */
-  EnableState: number | null;
+  EnableState?: number | null;
   /** 设备标签 */
-  Labels: DeviceLabel[] | null;
+  Labels?: DeviceLabel[] | null;
   /** MQTT客户端IP地址 */
-  ClientIP: string | null;
+  ClientIP?: string | null;
   /** ota最后更新时间 */
-  FirmwareUpdateTime: number | null;
+  FirmwareUpdateTime?: number | null;
   /** 创建者 Uin */
-  CreateUserId: number | null;
+  CreateUserId?: number | null;
+  /** NB IOT运营商处的DeviceID */
+  NBIoTDeviceID?: string;
 }
 
 /** 设备标签 */
@@ -312,6 +316,8 @@ declare interface ProductProperties {
   DeviceLimit?: number;
   /** 产品禁用状态 */
   ForbiddenStatus?: number;
+  /** LoRa产品运营侧APPEUI，只有LoRa产品需要填写 */
+  AppEUI?: string;
 }
 
 /** 产品资源详细信息 */
@@ -777,55 +783,57 @@ declare interface DescribeDeviceResourcesResponse {
 
 declare interface DescribeDeviceResponse {
   /** 设备名 */
-  DeviceName: string;
-  /** 设备是否在线，0不在线，1在线 */
-  Online: number;
+  DeviceName?: string;
+  /** 设备是否在线，0不在线，1在线，3未激活 */
+  Online?: number;
   /** 设备登录时间 */
-  LoginTime: number;
+  LoginTime?: number;
   /** 设备固件版本 */
-  Version: string;
+  Version?: string;
   /** 设备最后更新时间 */
-  LastUpdateTime: number;
+  LastUpdateTime?: number;
   /** 设备证书 */
-  DeviceCert: string;
+  DeviceCert?: string;
   /** 设备密钥 */
-  DevicePsk: string;
+  DevicePsk?: string;
   /** 设备属性 */
-  Tags: DeviceTag[];
+  Tags?: DeviceTag[];
   /** 设备类型 */
-  DeviceType: number;
+  DeviceType?: number;
   /** 国际移动设备识别码 IMEI */
-  Imei: string;
+  Imei?: string;
   /** 运营商类型 */
-  Isp: number;
+  Isp?: number;
   /** IP地址 */
-  ConnIP: number;
+  ConnIP?: number;
   /** NB IoT运营商处的DeviceID */
-  NbiotDeviceID: string;
+  NbiotDeviceID?: string;
   /** Lora设备的dev eui */
-  LoraDevEui: string;
+  LoraDevEui?: string;
   /** Lora设备的mote type */
-  LoraMoteType: number;
+  LoraMoteType?: number;
   /** 设备的sdk日志等级 */
-  LogLevel: number | null;
+  LogLevel?: number | null;
   /** 首次上线时间 */
-  FirstOnlineTime: number | null;
+  FirstOnlineTime?: number | null;
   /** 最近下线时间 */
-  LastOfflineTime: number | null;
+  LastOfflineTime?: number | null;
   /** 设备创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 设备证书获取状态，0 未获取过设备密钥, 1 已获取过设备密钥 */
-  CertState: number | null;
+  CertState?: number | null;
   /** 设备启用状态 */
-  EnableState: number | null;
+  EnableState?: number | null;
   /** 设备标签 */
-  Labels: DeviceLabel[] | null;
+  Labels?: DeviceLabel[] | null;
   /** MQTT客户端IP地址 */
-  ClientIP: string | null;
+  ClientIP?: string | null;
   /** 设备固件更新时间 */
-  FirmwareUpdateTime: number | null;
+  FirmwareUpdateTime?: number | null;
   /** 创建者账号ID */
-  CreateUserId: number | null;
+  CreateUserId?: number | null;
+  /** NB IoT运营商处的DeviceID */
+  NBIoTDeviceID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

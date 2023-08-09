@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 239+ 款产品，9822+ 服务数</summary>
+<details><summary>共计 239+ 款产品，9825+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -164,7 +164,7 @@ cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-
 cms | 内容安全 | 2019-03-21(6) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(220) |
 cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2018-03-21(28) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(15) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(16) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(94) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(274) |
@@ -219,7 +219,7 @@ iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(72) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(90) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
-iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(97) | 2020-12-15(79)<br/>2019-11-26(66) |
+iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(98) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
 iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(75) |
@@ -248,10 +248,10 @@ mvj | 营销价值判断 | 2019-09-26(1) |
 nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(27) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(81) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(12) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
-organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(24) | 2018-12-25(20) |
+organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(26) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(19) |
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(89) |
@@ -307,7 +307,7 @@ ticm | [智能鉴黄](https://cloud.tencent.com/document/product/864) | 2018-11-
 tics | [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) | 2018-11-15(4) |
 tiems | [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) | 2019-04-16(25) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(23) |
-tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(68) | 2019-10-22(23) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(69) | 2019-10-22(23) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(64) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(203) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |

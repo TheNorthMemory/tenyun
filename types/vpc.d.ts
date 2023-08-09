@@ -2259,6 +2259,8 @@ declare interface AcceptAttachCcnInstancesResponse {
 }
 
 declare interface AcceptVpcPeeringConnectionRequest {
+  /** 对等连接唯一ID。 */
+  PeeringConnectionId: string;
 }
 
 declare interface AcceptVpcPeeringConnectionResponse {
@@ -3889,6 +3891,8 @@ declare interface DeleteVpcEndPointServiceWhiteListResponse {
 }
 
 declare interface DeleteVpcPeeringConnectionRequest {
+  /** 对等连接唯一ID。 */
+  PeeringConnectionId: string;
 }
 
 declare interface DeleteVpcPeeringConnectionResponse {
@@ -7160,7 +7164,7 @@ declare interface Vpc {
   /** 云联网接受关联实例 {@link AcceptAttachCcnInstancesRequest} {@link AcceptAttachCcnInstancesResponse} */
   AcceptAttachCcnInstances(data: AcceptAttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptAttachCcnInstancesResponse>;
   /** 接受对等连接 {@link AcceptVpcPeeringConnectionRequest} {@link AcceptVpcPeeringConnectionResponse} */
-  AcceptVpcPeeringConnection(data?: AcceptVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptVpcPeeringConnectionResponse>;
+  AcceptVpcPeeringConnection(data: AcceptVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptVpcPeeringConnectionResponse>;
   /** 添加带宽包资源 {@link AddBandwidthPackageResourcesRequest} {@link AddBandwidthPackageResourcesResponse} */
   AddBandwidthPackageResources(data: AddBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<AddBandwidthPackageResourcesResponse>;
   /** 添加IPV6转换规则 {@link AddIp6RulesRequest} {@link AddIp6RulesResponse} */
@@ -7368,7 +7372,7 @@ declare interface Vpc {
   /** 删除终端节点服务白名单 {@link DeleteVpcEndPointServiceWhiteListRequest} {@link DeleteVpcEndPointServiceWhiteListResponse} */
   DeleteVpcEndPointServiceWhiteList(data: DeleteVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcEndPointServiceWhiteListResponse>;
   /** 删除私有网络对等连接 {@link DeleteVpcPeeringConnectionRequest} {@link DeleteVpcPeeringConnectionResponse} */
-  DeleteVpcPeeringConnection(data?: DeleteVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcPeeringConnectionResponse>;
+  DeleteVpcPeeringConnection(data: DeleteVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcPeeringConnectionResponse>;
   /** 删除VPN通道 {@link DeleteVpnConnectionRequest} {@link DeleteVpnConnectionResponse} */
   DeleteVpnConnection(data: DeleteVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnConnectionResponse>;
   /** 删除VPN网关 {@link DeleteVpnGatewayRequest} {@link DeleteVpnGatewayResponse} */

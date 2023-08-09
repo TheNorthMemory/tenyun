@@ -458,6 +458,18 @@ declare interface Endpoint {
   EncryptConn?: string | null;
   /** 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC； */
   DatabaseNetEnv?: string | null;
+  /** 数据库为跨账号云联网下的实例时、表示云联网所属主账号 */
+  CcnOwnerUin?: string | null;
+}
+
+/** 错误信息及其解决方案 */
+declare interface ErrInfo {
+  /** 错误原因 */
+  Reason?: string;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 解决方案 */
+  Solution?: string | null;
 }
 
 /** 任务错误信息 */
@@ -510,6 +522,8 @@ declare interface JobItem {
   Tags: TagItem[] | null;
   /** 自动重试时间段信息 */
   AutoRetryTimeRangeMinutes: number | null;
+  /** 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传 */
+  DumperResumeCtrl?: string | null;
 }
 
 /** 目标端为kakfa时添加的同步选项字段 */
@@ -624,6 +638,10 @@ declare interface Options {
   DdlOptions?: DdlOption[] | null;
   /** kafka同步选项 */
   KafkaOption?: KafkaOption | null;
+  /** 任务限速信息、该字段仅用作出参、入参该字段无效 */
+  RateLimitOption?: RateLimitOption | null;
+  /** 自动重试的时间窗口设置 */
+  AutoRetryTimeRangeMinutes?: number | null;
 }
 
 /** 任务步骤信息 */
@@ -650,6 +668,32 @@ declare interface ProcessStepTip {
   Solution: string | null;
   /** 文档提示 */
   HelpDoc: string | null;
+}
+
+/** 迁移和同步任务限速的详细信息 */
+declare interface RateLimitOption {
+  /** 当前生效的全量导出线程数 */
+  CurrentDumpThread: number | null;
+  /** 默认的全量导出线程数 */
+  DefaultDumpThread: number | null;
+  /** 当前生效的全量导出Rps */
+  CurrentDumpRps: number | null;
+  /** 默认的全量导出Rps */
+  DefaultDumpRps: number | null;
+  /** 当前生效的全量导入线程数 */
+  CurrentLoadThread: number | null;
+  /** 默认的全量导入线程数 */
+  DefaultLoadThread: number | null;
+  /** 当前生效的全量导入Rps */
+  CurrentLoadRps: number | null;
+  /** 默认的全量导入Rps */
+  DefaultLoadRps: number | null;
+  /** 当前生效的增量导入线程数 */
+  CurrentSinkerThread: number | null;
+  /** 默认的增量导入线程数 */
+  DefaultSinkerThread: number | null;
+  /** enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速 */
+  HasUserSetRateLimit: string | null;
 }
 
 /** 角色对象，postgresql独有参数 */
@@ -749,23 +793,25 @@ declare interface SyncDBEndpointInfos {
 /** 同步任务的步骤信息 */
 declare interface SyncDetailInfo {
   /** 总步骤数 */
-  StepAll: number | null;
+  StepAll?: number | null;
   /** 当前步骤 */
-  StepNow: number | null;
+  StepNow?: number | null;
   /** 总体进度 */
-  Progress: number | null;
-  /** 当前步骤进度 */
-  CurrentStepProgress: number | null;
+  Progress?: number | null;
+  /** 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度 */
+  CurrentStepProgress?: number | null;
   /** 同步两端数据量差距 */
-  MasterSlaveDistance: number | null;
+  MasterSlaveDistance?: number | null;
   /** 同步两端时间差距 */
-  SecondsBehindMaster: number | null;
+  SecondsBehindMaster?: number | null;
   /** 总体描述信息 */
-  Message: string | null;
+  Message?: string | null;
   /** 详细步骤信息 */
-  StepInfos: StepInfo[] | null;
+  StepInfos?: StepInfo[] | null;
   /** 不能发起一致性校验的原因 */
   CauseOfCompareDisable?: string | null;
+  /** 任务的错误和解决方案信息 */
+  ErrInfo?: ErrInfo | null;
 }
 
 /** 同步任务信息 */
@@ -800,6 +846,10 @@ declare interface SyncJobInfo {
   SrcAccessType: string | null;
   /** 源端信息，单节点数据库使用 */
   SrcInfo: Endpoint | null;
+  /** 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster */
+  SrcNodeType?: string | null;
+  /** 源端信息，多节点数据库使用 */
+  SrcInfos?: SyncDBEndpointInfos | null;
   /** 目标端地域，如：ap-guangzhou等 */
   DstRegion: string | null;
   /** 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等 */
@@ -808,6 +858,10 @@ declare interface SyncJobInfo {
   DstAccessType: string | null;
   /** 目标端信息，单节点数据库使用 */
   DstInfo: Endpoint | null;
+  /** 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster */
+  DstNodeType?: string | null;
+  /** 目标端信息，多节点数据库使用 */
+  DstInfos?: SyncDBEndpointInfos | null;
   /** 创建时间，格式为 yyyy-mm-dd hh:mm:ss */
   CreateTime: string | null;
   /** 开始时间，格式为 yyyy-mm-dd hh:mm:ss */
@@ -830,6 +884,8 @@ declare interface SyncJobInfo {
   OfflineTime: string | null;
   /** 自动重试时间段设置 */
   AutoRetryTimeRangeMinutes: number | null;
+  /** 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传 */
+  DumperResumeCtrl?: string | null;
 }
 
 /** 数据同步库表信息描述 */
@@ -973,7 +1029,7 @@ declare interface ConfigureSyncJobRequest {
   DstInfos?: SyncDBEndpointInfos;
   /** 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster */
   DstNodeType?: string;
-  /** 同步任务选项 */
+  /** 同步任务选项；该字段下的RateLimitOption暂时无法生效、如果需要修改限速、可通过ModifySyncRateLimit接口完成限速 */
   Options?: Options;
   /** 自动重试的时间段、可设置5至720分钟、0表示不重试 */
   AutoRetryTimeRangeMinutes?: number;
@@ -1296,6 +1352,10 @@ declare interface DescribeMigrationDetailResponse {
   TradeInfo?: TradeInfo | null;
   /** 任务错误信息 */
   ErrorInfo?: ErrorInfoItem[] | null;
+  /** 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传 */
+  DumperResumeCtrl?: string;
+  /** 任务的限速信息 */
+  RateLimitOption?: RateLimitOption | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1501,7 +1561,7 @@ declare interface ModifyMigrationJobRequest {
   JobId: string;
   /** 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行) */
   RunMode: string;
-  /** 迁移任务配置选项，描述任务如何执行迁移等一系列配置信息 */
+  /** 迁移任务配置选项，描述任务如何执行迁移等一系列配置信息；字段下的RateLimitOption不可配置、如果需要修改任务的限速信息、请在任务运行后通过ModifyMigrateRateLimit接口修改 */
   MigrateOption: MigrateOption;
   /** 源实例信息 */
   SrcInfo: DBEndpointInfo;

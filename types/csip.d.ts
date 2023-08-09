@@ -264,6 +264,34 @@ declare interface CVMAssetVO {
   IsNewAsset?: number | null;
 }
 
+/** clb实例和监听器信息 */
+declare interface ClbListenerListInfo {
+  /** 监听器id */
+  ListenerId?: string | null;
+  /** 监听器名称 */
+  ListenerName?: string | null;
+  /** 负载均衡Id */
+  LoadBalancerId?: string | null;
+  /** 负载均衡名称 */
+  LoadBalancerName?: string | null;
+  /** 协议 */
+  Protocol?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 负载均衡ip */
+  Vip?: string | null;
+  /** 端口 */
+  VPort?: number | null;
+  /** 区域 */
+  Zone?: string | null;
+  /** 私有网络id */
+  NumericalVpcId?: number | null;
+  /** 负载均衡类型 */
+  LoadBalancerType?: string | null;
+  /** 监听器域名 */
+  Domain?: string | null;
+}
+
 /** db资产输出字段 */
 declare interface DBAssetVO {
   /** 资产id */
@@ -929,6 +957,20 @@ declare interface DescribeDomainAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeListenerListRequest {
+  /** - */
+  Filter?: Filter;
+}
+
+declare interface DescribeListenerListResponse {
+  /** 总数 */
+  Total?: number | null;
+  /** 监听器列表 */
+  Data?: ClbListenerListInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePublicIpAssetsRequest {
   /** filte过滤条件 */
   Filter?: Filter;
@@ -1082,6 +1124,8 @@ declare interface Csip {
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;
+  /** 查询clb监听器列表 {@link DescribeListenerListRequest} {@link DescribeListenerListResponse} */
+  DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 获取资产视角的端口风险列表 {@link DescribeRiskCenterAssetViewPortRiskListRequest} {@link DescribeRiskCenterAssetViewPortRiskListResponse} */

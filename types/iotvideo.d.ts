@@ -2200,6 +2200,20 @@ declare interface ReportAliveDeviceResponse {
   RequestId?: string;
 }
 
+declare interface ResetCloudStorageEventRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 用户ID */
+  UserId?: string;
+}
+
+declare interface ResetCloudStorageEventResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetCloudStorageRequest {
   /** 产品ID */
   ProductId: string;
@@ -5835,6 +5849,8 @@ declare interface Iotvideo {
   ReportAliveDevice(data: ReportAliveDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ReportAliveDeviceResponse>;
   /** 重置云存服务 {@link ResetCloudStorageRequest} {@link ResetCloudStorageResponse} */
   ResetCloudStorage(data: ResetCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageResponse>;
+  /** 重置云存事件 {@link ResetCloudStorageEventRequest} {@link ResetCloudStorageEventResponse} */
+  ResetCloudStorageEvent(data: ResetCloudStorageEventRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageEventResponse>;
   /** 重试设备升级任务 {@link RetryDeviceFirmwareTaskRequest} {@link RetryDeviceFirmwareTaskResponse} */
   RetryDeviceFirmwareTask(data: RetryDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDeviceFirmwareTaskResponse>;
   /** 设置转发权限 {@link SetForwardAuthRequest} {@link SetForwardAuthResponse} */

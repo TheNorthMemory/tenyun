@@ -440,6 +440,8 @@ declare interface MediaCastDestinationStatus {
 declare interface MediaCastOutputMediaSetting {
   /** 视频配置。 */
   VideoSetting: MediaCastVideoSetting;
+  /** 视频配置是否和第一个输入源的视频配置相同，默认值：false。如果 FollowSourceInfo 的值为 true，忽略 VideoSetting 参数。 */
+  FollowSourceInfo?: boolean;
 }
 
 /** 点播转直播播放信息。 */

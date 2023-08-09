@@ -34,10 +34,10 @@ declare interface ApproverInfo {
   OrganizationName?: string;
   /** 签署人的签署控件列表 */
   SignComponents?: Component[];
-  /** 签署人的身份证号 */
-  ApproverIdCardNumber?: string;
-  /** 签署人的身份证件类型 ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  /** 签署人的证件类型ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他（需要使用该类型请先联系运营经理） */
   ApproverIdCardType?: string;
+  /** 签署人证件号（长度不超过18位） */
+  ApproverIdCardNumber?: string;
   /** 签署通知类型：sms--短信，none--不通知 */
   NotifyType?: string;
   /** 签署人角色类型：1--收款人、2--开具人、3--见证人 */
@@ -446,9 +446,9 @@ declare interface FlowCreateApprover {
   ApproverName?: string;
   /** 签署方经办人手机号码在未指定签署人电子签UserId情况下，为必填参数 */
   ApproverMobile?: string;
-  /** 签署方经办人证件类型ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  /** 签署人的证件类型ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他（需要使用该类型请先联系运营经理） */
   ApproverIdCardType?: string;
-  /** 签署方经办人证件号码 */
+  /** 签署人证件号（长度不超过18位） */
   ApproverIdCardNumber?: string;
   /** 签署方经办人在模板中的参与方ID模板发起合同时，该参数为必填项文件发起合同是，该参数无序传值 */
   RecipientId?: string;

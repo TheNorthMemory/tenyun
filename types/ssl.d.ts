@@ -237,41 +237,47 @@ declare interface DdosInstanceDetail {
 /** 部署记录详情 */
 declare interface DeployRecordDetail {
   /** 部署记录详情ID */
-  Id: number;
+  Id?: number;
   /** 部署证书ID */
-  CertId: string;
+  CertId?: string;
   /** 原绑定证书ID */
-  OldCertId: string | null;
+  OldCertId?: string | null;
   /** 部署实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 部署实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 部署监听器ID */
-  ListenerId: string | null;
+  ListenerId?: string | null;
   /** 部署域名列表 */
-  Domains: string[];
+  Domains?: string[];
   /** 部署监听器协议 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 部署状态 */
-  Status: number;
+  Status?: number;
   /** 部署错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 部署记录详情创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 部署记录详情最后一次更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 部署监听器名称 */
-  ListenerName: string;
+  ListenerName?: string;
   /** 是否开启SNI */
-  SniSwitch: number;
+  SniSwitch?: number;
   /** COS存储桶名称 */
-  Bucket: string | null;
+  Bucket?: string | null;
   /** 命名空间名称 */
-  Namespace: string | null;
+  Namespace?: string | null;
   /** secret名称 */
-  SecretName: string | null;
+  SecretName?: string | null;
   /** 端口 */
   Port?: number | null;
+  /** TCB环境ID */
+  EnvId?: string | null;
+  /** 部署的TCB类型 */
+  TCBType?: string | null;
+  /** 部署的TCB地域 */
+  Region?: string | null;
 }
 
 /** 部署记录信息 */
@@ -637,45 +643,49 @@ declare interface TkeSecretDetail {
 /** 更新记录详情 */
 declare interface UpdateRecordDetail {
   /** 详情记录id */
-  Id: number;
+  Id?: number;
   /** 新证书ID */
-  CertId: string;
+  CertId?: string;
   /** 旧证书ID */
-  OldCertId: string;
+  OldCertId?: string;
   /** 部署域名列表 */
-  Domains: string[] | null;
+  Domains?: string[] | null;
   /** 部署资源类型 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 部署地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 部署状态 */
-  Status: number;
+  Status?: number;
   /** 部署错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 部署时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后一次更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 部署实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 部署实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 部署监听器ID（CLB专用） */
-  ListenerId: string | null;
+  ListenerId?: string | null;
   /** 部署监听器名称（CLB专用） */
-  ListenerName: string | null;
+  ListenerName?: string | null;
   /** 协议 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 是否开启SNI（CLB专用） */
-  SniSwitch: number | null;
+  SniSwitch?: number | null;
   /** bucket名称（COS专用） */
-  Bucket: string | null;
+  Bucket?: string | null;
   /** 端口 */
   Port?: number | null;
   /** 命名空间（TKE专用） */
   Namespace?: string | null;
   /** secret名称（TKE专用） */
   SecretName?: string | null;
+  /** 环境ID */
+  EnvId?: string | null;
+  /** TCB部署类型 */
+  TCBType?: string | null;
 }
 
 /** 更新记录详情列表 */
@@ -1165,6 +1175,8 @@ declare interface DescribeCertificatesRequest {
   IsSM?: number;
   /** 筛选证书是否即将过期，传1是筛选，0不筛选 */
   FilterExpiring?: number;
+  /** 是否可托管，可选值：1 = 可托管，0 = 不可托管。 */
+  Hostable?: number;
 }
 
 declare interface DescribeCertificatesResponse {
@@ -1343,7 +1355,7 @@ declare interface DescribeHostDdosInstanceListResponse {
 }
 
 declare interface DescribeHostDeployRecordDetailRequest {
-  /** 待部署的证书ID */
+  /** 部署记录ID */
   DeployRecordId: string;
   /** 分页偏移量，从0开始。 */
   Offset?: number;
@@ -1353,15 +1365,15 @@ declare interface DescribeHostDeployRecordDetailRequest {
 
 declare interface DescribeHostDeployRecordDetailResponse {
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 证书部署记录列表 */
-  DeployRecordDetailList: DeployRecordDetail[] | null;
+  DeployRecordDetailList?: DeployRecordDetail[] | null;
   /** 成功总数 */
-  SuccessTotalCount: number | null;
+  SuccessTotalCount?: number | null;
   /** 失败总数 */
-  FailedTotalCount: number | null;
+  FailedTotalCount?: number | null;
   /** 部署中总数 */
-  RunningTotalCount: number | null;
+  RunningTotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1481,7 +1493,7 @@ declare interface DescribeHostTkeInstanceListResponse {
 }
 
 declare interface DescribeHostUpdateRecordDetailRequest {
-  /** 待部署的证书ID */
+  /** 一键更新记录ID */
   DeployRecordId: string;
   /** 每页数量，默认10。 */
   Limit?: string;
@@ -1859,7 +1871,7 @@ declare interface UpdateCertificateInstanceRequest {
   CertificateId: string;
   /** 一键更新原证书ID */
   OldCertificateId: string;
-  /** 需要部署的资源类型 */
+  /** 需要部署的资源类型，参数值可选：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb */
   ResourceTypes: string[];
   /** 需要部署的地域列表（废弃） */
   Regions?: string[];
@@ -1913,6 +1925,8 @@ declare interface UploadCertificateRequest {
   ProjectId?: number;
   /** 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS” */
   CertificateUse?: string;
+  /** 标签列表 */
+  Tags?: Tags[];
   /** 相同的证书是否允许重复上传 */
   Repeatable?: boolean;
 }

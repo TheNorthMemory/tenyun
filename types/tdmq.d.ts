@@ -802,6 +802,14 @@ declare interface RabbitMQVirtualHostInfo {
   ModifyTime?: string | null;
   /** vhost概览统计信息 */
   VirtualHostStatistics?: RabbitMQVirtualHostStatistics | null;
+  /** vhost状态，与原生控制台对应，有running、partial、stopped、unknown */
+  Status?: string | null;
+  /** 消息堆积数 */
+  MessageHeapCount?: number | null;
+  /** 输入消息速率 */
+  MessageRateIn?: number | null;
+  /** 输出消息速率 */
+  MessageRateOut?: number | null;
 }
 
 /** vhost概览统计信息 */
@@ -2479,6 +2487,10 @@ declare interface DescribeRabbitMQVirtualHostRequest {
   Limit?: number;
   /** search-virtual-host：vhost名称模糊查询，之前前缀和后缀匹配 */
   Filters?: Filter;
+  /** 排序依据的字段：MessageHeapCount - 消息堆积数；MessageRateInOut - 生产消费速率之和；MessageRateIn - 生产速率；MessageRateOut - 消费速率； */
+  SortElement?: string;
+  /** 排序顺序，ascend 或 descend */
+  SortOrder?: string;
 }
 
 declare interface DescribeRabbitMQVirtualHostResponse {
