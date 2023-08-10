@@ -290,6 +290,8 @@ declare interface TRTCJoinRoomInput {
   SdkAppId: string;
   /** 用户唯一标识。 */
   UserId: string;
+  /** TRTC房间号的类型：Integer：数字类型String：字符串类型默认为：Integer 。 */
+  RoomIdType?: string | null;
 }
 
 /** 时间范围 */

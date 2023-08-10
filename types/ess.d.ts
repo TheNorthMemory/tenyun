@@ -2280,7 +2280,7 @@ declare interface StartFlowRequest {
 }
 
 declare interface StartFlowResponse {
-  /** 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务 */
+  /** 发起成功之后返回状态，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

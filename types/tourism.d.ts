@@ -46,7 +46,7 @@ declare interface DescribeDrawResourceListResponse {
   RequestId?: string;
 }
 
-/** {@link Tourism 文旅客情平台} */
+/** {@link Tourism 文旅客情大数据} */
 declare interface Tourism {
   (): Versions;
   /** 查询所有用户的资源接口 {@link DescribeDrawResourceListRequest} {@link DescribeDrawResourceListResponse} */

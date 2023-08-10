@@ -165,13 +165,15 @@ declare interface GetRuntimeResourceMonitorMetricMCRequest {
   Interval?: number;
   /** 环境运行类型：0:运行时类型、1:api类型 */
   RuntimeClass?: number;
+  /** 资源指标聚合类型：0: 环境维度 1:执行引擎维度 2:datatwaypy维度 3.datawayjava维度 */
+  AggregationType?: number;
 }
 
 declare interface GetRuntimeResourceMonitorMetricMCResponse {
   /** 指标名称，K8sWorkloadCpuCoreUsed，K8sWorkloadMemUsageBytes，K8sWorkloadNetworkReceiveBytesBw，K8sWorkloadNetworkTransmitBytesBw */
-  MetricType: string;
+  MetricType?: string;
   /** metric数值列表 */
-  Values: MetricValueMC[];
+  Values?: MetricValueMC[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -213,13 +215,15 @@ declare interface ListRuntimeDeployedInstancesMCRequest {
   GroupId?: number;
   /** -2: 不按状态筛选，获取所有0: 运行中2: 已停止 */
   Status?: number;
+  /** 0: 应用集成1: API管理2: ETL */
+  RuntimeClass?: number;
 }
 
 declare interface ListRuntimeDeployedInstancesMCResponse {
   /** 运行时所部属的应用实例列表 */
-  Instances: RuntimeDeployedInstanceMC[];
+  Instances?: RuntimeDeployedInstanceMC[];
   /** 满足条件的记录总数，用于分页器 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -5418,7 +5418,7 @@ declare interface CreateHiveTableRequest {
   DatasourceId: string;
   /** 数据库 */
   Database: string;
-  /** 建hive表ddl */
+  /** base64转码之后的建表语句 */
   DDLSql: string;
   /** 表权限 ，默认为0:项目共享;1:仅个人与管理员 */
   Privilege: number;
@@ -5430,7 +5430,7 @@ declare interface CreateHiveTableRequest {
 
 declare interface CreateHiveTableResponse {
   /** 建表是否成功 */
-  IsSuccess: boolean;
+  IsSuccess?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7101,7 +7101,7 @@ declare interface DescribeInLongTkeClusterListRequest {
   TkeRegion: string;
   /** 集群名称。多个名称用逗号连接。 */
   ClusterName?: string;
-  /** TKE集群状态 (Running 运行中 Creating 创建中 Idling 闲置中 Abnormal 异常 Failed 异常 Deleting 删除中 Scaling 规模调整中 Upgrading 升级中 Isolated 欠费隔离中 NodeUpgrading 节点升级中 Recovering 唤醒中 Activating 激活中 MasterScaling Master扩缩容中 Waiting 等待注册 ClusterLevelUpgrading 调整规格中 ResourceIsolate 隔离中 ResourceIsolated 已隔离 ResourceReverse 冲正中 Trading 集群开通中 ResourceReversal 集群冲正 ClusterLevelTrading 集群变配交易中)多个状态用逗号连接。 */
+  /** TKE集群状态 (Running 运行中 Creating 创建中 Idling 闲置中 Abnormal 异常 Failed 失败 Deleting 删除中 Scaling 规模调整中 Upgrading 升级中 Isolated 欠费隔离中 NodeUpgrading 节点升级中 Recovering 唤醒中 Activating 激活中 MasterScaling Master扩缩容中 Waiting 等待注册 ClusterLevelUpgrading 调整规格中 ResourceIsolate 隔离中 ResourceIsolated 已隔离 ResourceReverse 冲正中 Trading 集群开通中 ResourceReversal 集群冲正 ClusterLevelTrading 集群变配交易中)多个状态用逗号连接。 */
   Status?: string;
   /** 是否安装Agent，true: 是，false: 否 */
   HasAgent?: boolean;
@@ -7115,15 +7115,15 @@ declare interface DescribeInLongTkeClusterListRequest {
 
 declare interface DescribeInLongTkeClusterListResponse {
   /** TKE集群信息 */
-  Items: InLongTkeDetail[];
+  Items?: InLongTkeDetail[];
   /** 页码 */
-  PageIndex: number;
+  PageIndex?: number;
   /** 每页记录数 */
-  PageSize: number;
+  PageSize?: number;
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 总页数 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7169,7 +7169,7 @@ declare interface DescribeInstanceLastLogRequest {
 
 declare interface DescribeInstanceLastLogResponse {
   /** 日志 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7179,7 +7179,7 @@ declare interface DescribeInstanceListRequest {
   ProjectId: string;
   /** 页码 */
   PageIndex: number;
-  /** 页大小 */
+  /** 一页展示的条数 */
   PageSize: number;
   /** 周期列表（如天，一次性），可选 */
   CycleList: string[];
@@ -7191,7 +7191,7 @@ declare interface DescribeInstanceListRequest {
   Sort: string;
   /** 排序列（costTime 运行耗时，startTime 开始时间，state 实例状态，curRunDate 数据时间） */
   SortCol: string;
-  /** 类型列表（如35 shell任务），可选 */
+  /** 类型列表（如python任务类型：30pyspark任务类型：31hivesql任务类型：34shell任务类型：35sparksql任务类型：36 jdbcsql任务类型：21 dlc任务类型：32），可选 */
   TaskTypeList: number[];
   /** 状态列表（如成功 2，正在执行 1），可选 */
   StateList: number[];
@@ -11366,7 +11366,7 @@ declare interface Wedata {
   DescribeInstanceByCycle(data?: DescribeInstanceByCycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByCycleResponse>;
   /** 实例状态周期增长趋势 {@link DescribeInstanceByCycleReportRequest} {@link DescribeInstanceByCycleReportResponse} */
   DescribeInstanceByCycleReport(data: DescribeInstanceByCycleReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByCycleReportResponse>;
-  /** 日志获取详情页面 {@link DescribeInstanceLastLogRequest} {@link DescribeInstanceLastLogResponse} */
+  /** 获取日志详情页面 {@link DescribeInstanceLastLogRequest} {@link DescribeInstanceLastLogResponse} */
   DescribeInstanceLastLog(data: DescribeInstanceLastLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLastLogResponse>;
   /** 获取离线运维实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;

@@ -29,9 +29,9 @@ declare interface EmbedTokenInfo {
   /** 备用 */
   ExtraParam?: string | null;
   /** 嵌出类型 */
-  Scope: string | null;
+  Scope?: string | null;
   /** 过期时间，分钟为单位，最大240 */
-  ExpireTime: number | null;
+  ExpireTime?: number | null;
 }
 
 declare interface ApplyEmbedIntervalRequest {
@@ -59,7 +59,7 @@ declare interface ApplyEmbedIntervalResponse {
 }
 
 declare interface CreateEmbedTokenRequest {
-  /** 分享项目id，必选 */
+  /** 分享项目id */
   ProjectId?: number;
   /** 分享页面id，嵌出看板时此为空值0 */
   PageId?: number;
@@ -73,11 +73,11 @@ declare interface CreateEmbedTokenRequest {
 
 declare interface CreateEmbedTokenResponse {
   /** 额外信息 */
-  Extra: string | null;
+  Extra?: string | null;
   /** 数据 */
-  Data: EmbedTokenInfo | null;
+  Data?: EmbedTokenInfo | null;
   /** 结果描述 */
-  Msg: string | null;
+  Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

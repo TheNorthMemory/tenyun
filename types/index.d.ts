@@ -930,7 +930,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   tms: Tms,
   /** {@link Tmt 机器翻译} */
   tmt: Tmt,
-  /** {@link Tourism 文旅客情平台} */
+  /** {@link Tourism 文旅客情大数据} */
   tourism: Tourism,
   /** {@link Trdp 流量风险决策平台} */
   trdp: Trdp,

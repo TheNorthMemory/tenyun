@@ -2887,7 +2887,7 @@ declare interface Cls {
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
   /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
-  /** 创建ScheduledSql任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
+  /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
@@ -2919,7 +2919,7 @@ declare interface Cls {
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
   /** 删除机器组信息 {@link DeleteMachineGroupInfoRequest} {@link DeleteMachineGroupInfoResponse} */
   DeleteMachineGroupInfo(data: DeleteMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupInfoResponse>;
-  /** 删除ScheduledSql任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
+  /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
   /** 删除投递COS任务 {@link DeleteShipperRequest} {@link DeleteShipperResponse} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
@@ -2969,7 +2969,7 @@ declare interface Cls {
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
   /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
-  /** 获取ScheduledSql任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
+  /** 获取定时SQL分析任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
   DescribeScheduledSqlInfo(data?: DescribeScheduledSqlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledSqlInfoResponse>;
   /** 获取投递任务列表 {@link DescribeShipperTasksRequest} {@link DescribeShipperTasksResponse} */
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
@@ -3005,7 +3005,7 @@ declare interface Cls {
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
   /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */
   ModifyMachineGroup(data: ModifyMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineGroupResponse>;
-  /** 修改ScheduledSql任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
+  /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
   /** 修改投递COS任务 {@link ModifyShipperRequest} {@link ModifyShipperResponse} */
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;

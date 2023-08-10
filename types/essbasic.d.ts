@@ -48,6 +48,22 @@ declare interface AuthorizedUser {
   OpenId: string;
 }
 
+/** 自动签开启、签署相关配置 */
+declare interface AutoSignConfig {
+  /** 自动签开通个人用户的三要素 */
+  UserInfo: UserThreeFactor;
+  /** 是否回调证书信息 */
+  CertInfoCallback?: boolean;
+  /** 是否支持用户自定义签名印章 */
+  UserDefineSeal?: boolean;
+  /** 是否需要回调的时候返回印章(签名) 图片的 base64 */
+  SealImgCallback?: boolean;
+  /** 回调链接，如果渠道已经配置了，可以不传 */
+  CallbackUrl?: string;
+  /** 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。 */
+  VerifyChannels?: string[];
+}
+
 /** 基础流程信息 */
 declare interface BaseFlowInfo {
   /** 合同流程名称 */
@@ -816,6 +832,16 @@ declare interface UserInfo {
   ProxyIp?: string;
 }
 
+/** 用户的三要素：姓名，证件号，证件类型 */
+declare interface UserThreeFactor {
+  /** 姓名 */
+  Name: string;
+  /** 证件类型: ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  IdCardType: string;
+  /** 证件号，如果有 X 请大写 */
+  IdCardNumber: string;
+}
+
 /** 主题配置 */
 declare interface WebThemeConfig {
   /** 页面底部是否显示电子签logotrue：允许在页面底部隐藏电子签logo 默认false，不允许允许在页面底部隐藏电子签logo */
@@ -872,6 +898,22 @@ declare interface ChannelCancelMultiFlowSignQRCodeRequest {
 }
 
 declare interface ChannelCancelMultiFlowSignQRCodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCancelUserAutoSignEnableUrlRequest {
+  /** 渠道应用相关信息 */
+  Agent: Agent;
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 指定撤销链接的用户信息，包含姓名、证件类型、证件号码。 */
+  UserInfo: UserThreeFactor;
+}
+
+declare interface ChannelCancelUserAutoSignEnableUrlResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -957,22 +999,22 @@ declare interface ChannelCreateFlowByFilesRequest {
   Agent?: Agent;
   /** 签署流程名称，长度不超过200个字符 */
   FlowName?: string;
+  /** 签署流程的描述，长度不超过1000个字符 */
+  FlowDescription?: string;
   /** 签署流程签约方列表，最多不超过50个参与方 */
   FlowApprovers?: FlowApproverInfo[];
   /** 签署文件资源Id列表，目前仅支持单个文件 */
   FileIds?: string[];
   /** 签署文件中的发起方的填写控件，需要在发起的时候进行填充 */
   Components?: Component[];
-  /** 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年 */
+  /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后不能早于当前时间 */
   Deadline?: number;
-  /** 签署流程回调地址，长度不超过255个字符 */
+  /** 签署流程回调地址，长度不超过255个字符如果不传递回调地址， 则默认是配置应用号时候使用的回调地址 */
   CallbackUrl?: string;
-  /** 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署。有序签署时以传入FlowApprovers数组的顺序作为签署顺序 */
+  /** 合同签署顺序类型true - 无序签,false - 顺序签，默认为false，即有序签署。有序签署时以传入FlowApprovers数组的顺序作为签署顺序 */
   Unordered?: boolean;
   /** 签署流程的类型，长度不超过255个字符 */
   FlowType?: string;
-  /** 签署流程的描述，长度不超过1000个字符 */
-  FlowDescription?: string;
   /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
   CustomShowMap?: string;
   /** 业务信息，最大长度1000个字符。 */
@@ -1222,6 +1264,42 @@ declare interface ChannelCreateSealPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateUserAutoSignEnableUrlRequest {
+  /** 渠道应用相关信息 */
+  Agent: Agent;
+  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 操作人信息 */
+  Operator?: UserInfo;
+  /** 自动签开通，签署相关配置 */
+  AutoSignConfig?: AutoSignConfig;
+  /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
+  UrlType?: string;
+  /** 通知类型，默认不填为不通知开通方，填写 SMS 为短信通知。 */
+  NotifyType?: string;
+  /** 若上方填写为 SMS，则此处为手机号 */
+  NotifyAddress?: string;
+  /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。 */
+  ExpiredTime?: number;
+}
+
+declare interface ChannelCreateUserAutoSignEnableUrlResponse {
+  /** 跳转短链 */
+  Url?: string;
+  /** 小程序AppId */
+  AppId?: string;
+  /** 小程序 原始 Id */
+  AppOriginalId?: string;
+  /** 跳转路径 */
+  Path?: string;
+  /** base64格式跳转二维码 */
+  QrCode?: string;
+  /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
+  UrlType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelCreateUserRolesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
@@ -1380,6 +1458,44 @@ declare interface ChannelDescribeRolesResponse {
   TotalCount?: number;
   /** 角色信息 */
   ChannelRoles?: ChannelRole[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDescribeUserAutoSignStatusRequest {
+  /** 渠道应用相关信息 */
+  Agent: Agent;
+  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 查询开启状态的用户信息 */
+  UserInfo: UserThreeFactor;
+  /** 操作人信息 */
+  Operator?: UserInfo;
+}
+
+declare interface ChannelDescribeUserAutoSignStatusResponse {
+  /** 是否开通 */
+  IsOpen?: boolean;
+  /** 自动签许可生效时间。当且仅当已开通自动签时有值。 */
+  LicenseFrom?: number;
+  /** 自动签许可到期时间。当且仅当已开通自动签时有值。 */
+  LicenseTo?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDisableUserAutoSignRequest {
+  /** 渠道应用相关信息 */
+  Agent: Agent;
+  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 关闭自动签的个人的三要素 */
+  UserInfo: UserThreeFactor;
+  /** 操作人信息 */
+  Operator?: UserInfo;
+}
+
+declare interface ChannelDisableUserAutoSignResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3411,6 +3527,8 @@ declare interface Essbasic {
   ChannelCancelFlow(data: ChannelCancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelFlowResponse>;
   /** 取消一码多扫二维码 {@link ChannelCancelMultiFlowSignQRCodeRequest} {@link ChannelCancelMultiFlowSignQRCodeResponse} */
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
+  /** 撤销自动签开通链接 {@link ChannelCancelUserAutoSignEnableUrlRequest} {@link ChannelCancelUserAutoSignEnableUrlResponse} */
+  ChannelCancelUserAutoSignEnableUrl(data: ChannelCancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelUserAutoSignEnableUrlResponse>;
   /** 根据签署流程id创建批量撤销url {@link ChannelCreateBatchCancelFlowUrlRequest} {@link ChannelCreateBatchCancelFlowUrlResponse} */
   ChannelCreateBatchCancelFlowUrl(data: ChannelCreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchCancelFlowUrlResponse>;
   /** 领取未归属的合同 {@link ChannelCreateBoundFlowsRequest} {@link ChannelCreateBoundFlowsResponse} */
@@ -3441,6 +3559,8 @@ declare interface Essbasic {
   ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;
   /** 创建印章授权 {@link ChannelCreateSealPolicyRequest} {@link ChannelCreateSealPolicyResponse} */
   ChannelCreateSealPolicy(data: ChannelCreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateSealPolicyResponse>;
+  /** 获取个人用户自动签开启链接 {@link ChannelCreateUserAutoSignEnableUrlRequest} {@link ChannelCreateUserAutoSignEnableUrlResponse} */
+  ChannelCreateUserAutoSignEnableUrl(data: ChannelCreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserAutoSignEnableUrlResponse>;
   /** 绑定员工角色 {@link ChannelCreateUserRolesRequest} {@link ChannelCreateUserRolesResponse} */
   ChannelCreateUserRoles(data: ChannelCreateUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserRolesResponse>;
   /** 生成页面主题配置 {@link ChannelCreateWebThemeConfigRequest} {@link ChannelCreateWebThemeConfigResponse} */
@@ -3457,6 +3577,10 @@ declare interface Essbasic {
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
   /** 查询角色列表 {@link ChannelDescribeRolesRequest} {@link ChannelDescribeRolesResponse} */
   ChannelDescribeRoles(data: ChannelDescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeRolesResponse>;
+  /** 查询个人用户开通自动签状态 {@link ChannelDescribeUserAutoSignStatusRequest} {@link ChannelDescribeUserAutoSignStatusResponse} */
+  ChannelDescribeUserAutoSignStatus(data: ChannelDescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeUserAutoSignStatusResponse>;
+  /** 关闭个人自动签功能 {@link ChannelDisableUserAutoSignRequest} {@link ChannelDisableUserAutoSignResponse} */
+  ChannelDisableUserAutoSign(data: ChannelDisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDisableUserAutoSignResponse>;
   /** 查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
   /** 更新印章状态 {@link ChannelUpdateSealStatusRequest} {@link ChannelUpdateSealStatusResponse} */

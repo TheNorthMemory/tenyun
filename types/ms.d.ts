@@ -955,15 +955,15 @@ declare interface DescribeUserBaseInfoInstanceResponse {
 /** {@link Ms 移动应用安全} */
 declare interface Ms {
   (): Versions;
-  /** @deprecated 取消渠道合作加固任务 {@link CancelEncryptTaskRequest} {@link CancelEncryptTaskResponse} */
+  /** 取消渠道合作加固任务 {@link CancelEncryptTaskRequest} {@link CancelEncryptTaskResponse} */
   CancelEncryptTask(data: CancelEncryptTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelEncryptTaskResponse>;
   /** 将应用绑定到资源 {@link CreateBindInstanceRequest} {@link CreateBindInstanceResponse} */
   CreateBindInstance(data: CreateBindInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBindInstanceResponse>;
   /** 获取云COS临时密钥 {@link CreateCosSecKeyInstanceRequest} {@link CreateCosSecKeyInstanceResponse} */
   CreateCosSecKeyInstance(data?: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
-  /** @deprecated 创建渠道合作应用加固任务 {@link CreateEncryptInstanceRequest} {@link CreateEncryptInstanceResponse} */
+  /** 创建渠道合作应用加固任务 {@link CreateEncryptInstanceRequest} {@link CreateEncryptInstanceResponse} */
   CreateEncryptInstance(data: CreateEncryptInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptInstanceResponse>;
-  /** @deprecated 创建渠道合作应用加固订单 {@link CreateOrderInstanceRequest} {@link CreateOrderInstanceResponse} */
+  /** 创建渠道合作应用加固订单 {@link CreateOrderInstanceRequest} {@link CreateOrderInstanceResponse} */
   CreateOrderInstance(data: CreateOrderInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderInstanceResponse>;
   /** 创建资源 {@link CreateResourceInstancesRequest} {@link CreateResourceInstancesResponse} */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
@@ -975,11 +975,11 @@ declare interface Ms {
   DeleteShieldInstances(data: DeleteShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShieldInstancesResponse>;
   /** 环境安全检测-apk检测 {@link DescribeApkDetectionResultRequest} {@link DescribeApkDetectionResultResponse} */
   DescribeApkDetectionResult(data: DescribeApkDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApkDetectionResultResponse>;
-  /** @deprecated 查询渠道合作加固任务 {@link DescribeEncryptInstancesRequest} {@link DescribeEncryptInstancesResponse} */
+  /** 查询渠道合作加固任务 {@link DescribeEncryptInstancesRequest} {@link DescribeEncryptInstancesResponse} */
   DescribeEncryptInstances(data?: DescribeEncryptInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptInstancesResponse>;
   /** 载入渠道合作加固上次使用的加固配置 {@link DescribeEncryptPlanRequest} {@link DescribeEncryptPlanResponse} */
   DescribeEncryptPlan(data: DescribeEncryptPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptPlanResponse>;
-  /** @deprecated 查询渠道合作应用加固订单信息 {@link DescribeOrderInstancesRequest} {@link DescribeOrderInstancesResponse} */
+  /** 查询渠道合作应用加固订单信息 {@link DescribeOrderInstancesRequest} {@link DescribeOrderInstancesResponse} */
   DescribeOrderInstances(data?: DescribeOrderInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrderInstancesResponse>;
   /** 获取用户的所有资源信息 {@link DescribeResourceInstancesRequest} {@link DescribeResourceInstancesResponse} */
   DescribeResourceInstances(data?: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;
