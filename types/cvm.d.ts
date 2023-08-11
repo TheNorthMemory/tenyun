@@ -1865,9 +1865,9 @@ declare interface DescribeLaunchTemplatesRequest {
 
 declare interface DescribeLaunchTemplatesResponse {
   /** 符合条件的实例模板数量。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 实例详细信息列表。 */
-  LaunchTemplateSet: LaunchTemplateInfo[] | null;
+  LaunchTemplateSet?: LaunchTemplateInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

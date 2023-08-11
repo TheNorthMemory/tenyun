@@ -558,6 +558,24 @@ declare interface CreateGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateMessageReceiverRequest {
+  /** 消息接收人的用户名 */
+  Name: string;
+  /** 手机号国际区号，国内为86 */
+  CountryCode: string;
+  /** 手机号码, 例如：132****2492 */
+  PhoneNumber: string;
+  /** 邮箱，例如：57*****@qq.com */
+  Email: string;
+  /** 消息接收人的备注，选填 */
+  Remark?: string;
+}
+
+declare interface CreateMessageReceiverResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOIDCConfigRequest {
   /** 身份提供商URL */
   IdentityUrl: string;
@@ -1837,6 +1855,8 @@ declare interface Cam {
   CreateAccessKey(data?: CreateAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeyResponse>;
   /** 创建用户组 {@link CreateGroupRequest} {@link CreateGroupResponse} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
+  /** 创建消息接收人 {@link CreateMessageReceiverRequest} {@link CreateMessageReceiverResponse} */
+  CreateMessageReceiver(data: CreateMessageReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMessageReceiverResponse>;
   /** 创建角色OIDC配置 {@link CreateOIDCConfigRequest} {@link CreateOIDCConfigResponse} */
   CreateOIDCConfig(data: CreateOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOIDCConfigResponse>;
   /** 创建策略 {@link CreatePolicyRequest} {@link CreatePolicyResponse} */

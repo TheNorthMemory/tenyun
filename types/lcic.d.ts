@@ -584,7 +584,7 @@ declare interface CreateRoomRequest {
   RTCAudienceNumber?: number;
   /** 观看类型。互动观看 （默认） */
   AudienceType?: number;
-  /** 录制布局。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
+  /** 录制模板。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;
   /** 房间绑定的群组ID,非空时限制组成员进入 */
   GroupId?: string;
@@ -987,6 +987,8 @@ declare interface DescribeRoomResponse {
   IsGradingRequiredPostClass?: number;
   /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
   RoomType?: number;
+  /** 录制时长 */
+  VideoDuration?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -24,13 +24,13 @@ declare interface Agent {
 
 /** 参与者信息 */
 declare interface ApproverInfo {
-  /** 参与者类型：0：企业1：个人3：企业静默签署注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。 */
+  /** 参与者类型：0：企业1：个人3：企业静默签署注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。7: 个人自动签署，适用于个人自动签场景。注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。 */
   ApproverType: number;
   /** 签署人的姓名 */
   ApproverName: string;
   /** 签署人的手机号，11位数字 */
   ApproverMobile: string;
-  /** 如果签署方是企业签署方，则为企业名 */
+  /** 如果签署方是企业签署方(approverType = 1 或者 approverType = 3)，则企业名称必填 */
   OrganizationName?: string;
   /** 签署人的签署控件列表 */
   SignComponents?: Component[];
@@ -46,9 +46,9 @@ declare interface ApproverInfo {
   VerifyChannel?: string[];
   /** 合同的强制预览时间：3~300s，未指定则按合同页数计算 */
   PreReadTime?: number;
-  /** 签署人userId，传此字段则不用传姓名、手机号 */
+  /** 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得若传此字段 则以userid的信息为主，会覆盖传递过来的签署人基本信息， 包括姓名，手机号，证件类型等信息 */
   UserId?: string;
-  /** 签署人用户来源，企微侧用户请传入：WEWORKAPP */
+  /** 签署人用户来源，此参数仅针对企微用户开放企微侧用户请传入：WEWORKAPP */
   ApproverSource?: string;
   /** 企业签署方或签标识，客户自定义，64位长度。用于发起含有或签签署人的合同。或签参与人必须有此字段。合同内不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP */
   CustomApproverTag?: string;
@@ -438,7 +438,7 @@ declare interface FlowBrief {
 
 /** 创建流程的签署方信息 */
 declare interface FlowCreateApprover {
-  /** 参与者类型：0：企业1：个人3：企业自动签署注：类型为3（企业自动签署）时，会自动完成该签署方的签署。自动签署仅进行盖章操作，不能是手写签名。本方企业自动签署的签署人会默认是当前的发起人他方企业自动签署的签署人是自动签模板的他方企业授权人 */
+  /** 参与者类型：0：企业1：个人3：企业自动签署注：类型为3（企业自动签署）时，会自动完成该签署方的签署。自动签署仅进行盖章操作，不能是手写签名。本方企业自动签署的签署人会默认是当前的发起人他方企业自动签署的签署人是自动签模板的他方企业授权人7: 个人自动签署，适用于个人自动签场景。注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。 */
   ApproverType: number;
   /** 签署人企业名称当approverType=1 或 approverType=3时，必须指定 */
   OrganizationName?: string;
@@ -460,11 +460,11 @@ declare interface FlowCreateApprover {
   IsFullText?: boolean;
   /** 合同的强制预览时间：3~300s，未指定则按合同页数计算 */
   PreReadTime?: number;
-  /** 签署方经办人的电子签用户ID当未指定签署人姓名+手机号的情况下，该字段毕传 */
+  /** 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得若传此字段 则以userid的信息为主，会覆盖传递过来的签署人基本信息， 包括姓名，手机号，证件类型等信息 */
   UserId?: string;
   /** 当前只支持true，默认为true */
   Required?: boolean;
-  /** 签署人用户来源企微侧用户请传入：WEWORKAPP */
+  /** 签署人用户来源，此参数仅针对企微用户开放企微侧用户请传入：WEWORKAPP */
   ApproverSource?: string;
   /** 企业签署方或签标识，客户自定义，64位长度用于发起含有或签签署人的合同。或签参与人必须有此字段。合同内不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP */
   CustomApproverTag?: string;
@@ -478,9 +478,9 @@ declare interface FlowCreateApprover {
   SignId?: string;
   /** 当前签署方进行签署操作是否需要企业内部审批true 则为需要false,无序企业内部审批（默认）为个人签署方时则由发起方企业审核。 */
   ApproverNeedSignReview?: boolean;
-  /** 签署人签署控件文件发起时，可通过该参数为签署人指定签署控件类型以及位置 */
+  /** 签署人签署控件， 此参数仅针对文件发起（CreateFlowByFiles）生效文件发起时，可通过该参数为签署人指定签署控件类型以及位置 */
   SignComponents?: Component[];
-  /** 签署人填写控件文件发起时，可通过该参数为签署人指定填写控件类型以及位置 */
+  /** 签署人填写控件 此参数仅针对文件发起（CreateFlowByFiles）生效文件发起时，可通过该参数为签署人指定填写控件类型以及位置 */
   Components?: Component[];
   /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
   ComponentLimitType?: string[];

@@ -3736,12 +3736,12 @@ declare interface ProductInstance {
 
 /** 资源包中包含的资源。 */
 declare interface ProductInstanceRecource {
-  /** 资源类型。Storage：存储资源包。Traffic：流量资源包。Transcode：普通转码资源包。TESHD：极速高清转码资源包。Review：音视频审核转码资源包。 */
-  ResourceType: string;
-  /** 资源包额度。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。 */
-  Amount: number;
-  /** 资源包余量。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。 */
-  Left: number;
+  /** 资源类型。Storage：存储资源包。Traffic：流量资源包。Transcode：普通转码资源包。TESHD：极速高清转码资源包。Review：音视频审核转码资源包。MediaProcess：媒体处理时长资源包。 */
+  ResourceType?: string;
+  /** 资源包额度。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。媒体处理时长资源包，单位为秒。 */
+  Amount?: number;
+  /** 资源包余量。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。媒体处理时长资源包，单位为秒。 */
+  Left?: number;
 }
 
 /** 语音违禁任务控制参数 */
@@ -4914,7 +4914,7 @@ declare interface TaskSimpleInfo {
 
 /** 视频处理任务统计数据。 */
 declare interface TaskStatData {
-  /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
+  /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
   TaskType: string;
   /** 任务数统计数据概览，用量单位为秒。 */
   Summary: TaskStatDataItem[];
@@ -7007,7 +7007,7 @@ declare interface DescribeMediaProcessUsageDataRequest {
   EndTime: string;
   /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
-  /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
+  /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
   Type?: string;
 }
 

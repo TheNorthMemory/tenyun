@@ -883,7 +883,7 @@ declare interface UpdateScanRoomsRequest {
   BizId: number;
   /** 需要送检的所有房间号。多个房间号之间用","分隔。示例："0001,0002,0003" */
   RoomIdString?: string;
-  /** 符合此正则表达式规则的房间号将被送检。示例：["^6.*"] 表示所有以6开头的房间号将被送检 */
+  /** 符合此正则表达式规则的房间号将被送检。示例：^6.*（表示所有以6开头的房间号将被送检） */
   RoomIdRegex?: string[];
 }
 

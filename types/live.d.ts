@@ -206,7 +206,7 @@ declare interface CommonMixLayoutParams {
   LocationX?: number;
   /** 输入在输出画面的Y偏移。取值范围：像素：[0，2000]百分比：[0.01，0.99]不填默认为0。相对于大主播背景画面左上角的纵向偏移。 使用百分比时，期望输出为（百分比 * 背景宽） */
   LocationY?: number;
-  /** 当InputType为3(画布)时，该值表示画布的颜色。常用的颜色有：红色：0xcc0033。黄色：0xcc9900。绿色：0xcccc33。蓝色：0x99CCFF。黑色：0x000000。白色：0xFFFFFF。灰色：0x999999。 */
+  /** 当InputType为3(画布)时，该值表示画布的颜色。常用的颜色有：红色：0xCC0033。黄色：0xCC9900。绿色：0xCCCC33。蓝色：0x99CCFF。黑色：0x000000。白色：0xFFFFFF。灰色：0x999999。 */
   Color?: string;
   /** 当InputType为2(图片)时，该值是水印ID。 */
   WatermarkId?: number;

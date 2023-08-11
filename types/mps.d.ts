@@ -4190,7 +4190,7 @@ declare interface VideoEnhanceConfig {
 declare interface VideoTemplateInfo {
   /** 视频流的编码格式，可选值：libx264：H.264 编码libx265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
   Codec: string;
-  /** 视频帧率，取值范围：[0, 100]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
   Fps: number;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate: number;

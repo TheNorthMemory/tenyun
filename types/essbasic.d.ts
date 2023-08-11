@@ -324,7 +324,7 @@ declare interface FlowApproverInfo {
   OpenId?: string;
   /** 企业签署方在同一第三方平台应用下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符； */
   OrganizationOpenId?: string;
-  /** 签署人类型PERSON-个人/自然人；PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。 */
+  /** 签署人类型PERSON-个人/自然人；PERSON_AUTO_SIGN-个人自动签署，适用于个人自动签场景注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。 */
   ApproverType?: string;
   /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
   RecipientId?: string;

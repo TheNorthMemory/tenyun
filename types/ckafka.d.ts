@@ -994,6 +994,8 @@ declare interface EsParam {
   RecordMappingList?: EsRecordMapping[];
   /** 消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射 */
   DateField?: string;
+  /** 用来区分当前索引映射，属于新建索引还是存量索引。"EXIST_MAPPING"：从存量索引中选择；"NEW_MAPPING"：新建索引 */
+  RecordMappingMode?: string;
 }
 
 /** 消息字段与 es 索引的映射关系 */
@@ -1814,6 +1816,14 @@ declare interface Region {
   Ipv6: number | null;
   /** 是否支持跨可用区, 0：表示不支持，1：表示支持 */
   MultiZone: number | null;
+}
+
+/** RenewCkafkaInstance接口出参bigDealIds */
+declare interface RenewCkafkaInstanceResp {
+  /** 订单号 */
+  BigDealId?: string | null;
+  /** 子订单号 */
+  DealName?: string | null;
 }
 
 /** 数据处理——Value处理参数——替换参数 */
@@ -3812,6 +3822,8 @@ declare interface InstanceAttributesResponse {
   RemainingTopics: number | null;
   /** 动态硬盘扩容策略 */
   DynamicDiskConfig: DynamicDiskConfig | null;
+  /** 实例计费类型 */
+  InstanceChargeType?: string | null;
 }
 
 declare interface InstanceDetailResponse {
@@ -4089,10 +4101,10 @@ declare interface RenewCkafkaInstanceRequest {
 }
 
 declare interface RenewCkafkaInstanceResponse {
-  /** 订单号 */
-  BigDealId?: string | null;
-  /** 子订单号 */
-  DealName?: string | null;
+  /** 返回值 */
+  Result?: RenewCkafkaInstanceResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface RouteResponse {

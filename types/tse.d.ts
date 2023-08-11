@@ -315,7 +315,7 @@ declare interface KongRoutePreview {
   /** 目的端口 */
   DestinationPorts?: number[] | null;
   /** 路由的Headers */
-  Headers?: KVMapping | null;
+  Headers?: KVMapping[] | null;
 }
 
 /** 云原生网关服务详细信息 */

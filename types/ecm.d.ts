@@ -2487,7 +2487,7 @@ declare interface DescribeHaVipsResponse {
 }
 
 declare interface DescribeImageRequest {
-  /** 过滤条件，每次请求的Filters的上限为10，详细的过滤条件如下：image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行过滤image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：PRIVATE_IMAGE: 私有镜像 (本帐户创建的镜像) PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)instance-type -String - 是否必填: 否 - (过滤条件) 按机型过滤支持的镜像image-name - String - 是否必填：否 - (过滤条件) 按镜像的名称模糊匹配，只能提供一个值image-os - String - 是否必填：否 - (过滤条件) 按镜像系统的名称模糊匹配，只能提供一个值 */
+  /** 过滤条件，每次请求的Filters的上限为10，详细的过滤条件如下：image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行过滤image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像) PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)instance-type -String - 是否必填: 否 - (过滤条件) 按机型过滤支持的镜像image-name - String - 是否必填：否 - (过滤条件) 按镜像的名称模糊匹配，只能提供一个值image-os - String - 是否必填：否 - (过滤条件) 按镜像系统的名称模糊匹配，只能提供一个值 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset?: number;
@@ -2497,9 +2497,9 @@ declare interface DescribeImageRequest {
 
 declare interface DescribeImageResponse {
   /** 镜像总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 镜像数组 */
-  ImageSet: Image[] | null;
+  ImageSet?: Image[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3727,7 +3727,7 @@ declare interface ResetInstancesRequest {
   ImageId?: string;
   /** 密码设置，若未指定，则后续将以站内信的形式通知密码。 */
   Password?: string;
-  /** 是否开启云监控和云镜服务，未指定时默认开启。 */
+  /** 是否开启腾讯云可观测平台和主机安全服务，未指定时默认开启。 */
   EnhancedService?: EnhancedService;
   /** 是否保留数据盘数据，取值"true"/"false"。默认为"true" */
   KeepData?: string;
