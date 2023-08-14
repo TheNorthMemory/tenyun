@@ -1030,6 +1030,34 @@ declare interface ScheduledSqlTaskInfo {
   SyntaxRule?: number | null;
 }
 
+/** 多日志主题检索错误信息 */
+declare interface SearchLogErrors {
+  /** 日志主题ID */
+  TopicId?: string | null;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 错误码 */
+  ErrorCodeStr?: string | null;
+}
+
+/** 多日志主题检索topic信息 */
+declare interface SearchLogInfos {
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志存储生命周期 */
+  Period?: number;
+  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时 */
+  Context?: string | null;
+}
+
+/** 多主题检索返回信息 */
+declare interface SearchLogTopics {
+  /** 多日志主题检索对应的错误信息 */
+  Errors?: SearchLogErrors[] | null;
+  /** 多日志主题检索各日志主题信息 */
+  Infos?: SearchLogInfos[] | null;
+}
+
 /** 投递规则 */
 declare interface ShipperInfo {
   /** 投递规则ID */
@@ -2783,7 +2811,7 @@ declare interface SearchLogRequest {
   TopicId?: string;
   /** 表示单次查询返回的原始日志条数，最大值为1000，获取后续日志需使用Context参数注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法 */
   Limit?: number;
-  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时注意：* 透传该参数时，请勿修改除该参数外的其它参数* 仅当检索分析语句(Query)不包含SQL时有效* SQL获取后续结果参考SQL LIMIT语法 */
+  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。注意：* 透传该参数时，请勿修改除该参数外的其它参数* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考SQL LIMIT语法 */
   Context?: string;
   /** 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果排序方式参考SQL ORDER BY语法 */
   Sort?: string;
@@ -2798,7 +2826,7 @@ declare interface SearchLogRequest {
 }
 
 declare interface SearchLogResponse {
-  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时 */
+  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。注意：* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context */
   Context?: string;
   /** 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志注意：仅当检索分析语句(Query)不包含SQL时有效 */
   ListOver?: boolean;
@@ -2816,6 +2844,8 @@ declare interface SearchLogResponse {
   Columns?: Column[] | null;
   /** 本次统计分析使用的采样率 */
   SamplingRate?: number | null;
+  /** 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。 */
+  Topics?: SearchLogTopics | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

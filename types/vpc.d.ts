@@ -1829,63 +1829,63 @@ declare interface SslClientConfig {
 /** SSL-VPN-CLIENT 出参 */
 declare interface SslVpnClient {
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** SSL-VPN-SERVER 实例ID。 */
-  SslVpnServerId: string;
+  SslVpnServerId?: string;
   /** 证书状态。0:创建中1:正常2:已停用3.已过期4.创建出错 */
-  CertStatus: number;
+  CertStatus?: number;
   /** SSL-VPN-CLIENT 实例ID。 */
-  SslVpnClientId: string;
+  SslVpnClientId?: string;
   /** 证书开始时间。 */
-  CertBeginTime: string;
+  CertBeginTime?: string;
   /** 证书到期时间。 */
-  CertEndTime: string;
+  CertEndTime?: string;
   /** CLIENT NAME。 */
-  Name: string;
-  /** 创建CLIENT 状态。0 创建中1 创建出错2 更新中3 更新出错4 销毁中5 销毁出粗6 已连通7 未知 */
-  State: string;
+  Name?: string;
+  /** 创建CLIENT 状态。0 创建中1 创建出错2 更新中3 更新出错4 销毁中5 销毁出错6 已连通7 未知 */
+  State?: string;
 }
 
-/** SSL-VPN-SERVER 信息 SET */
+/** SSL-VPN-SERVER 出参 */
 declare interface SslVpnSever {
   /** VPC实例ID. */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** SSL-VPN-SERVER 实例ID。 */
-  SslVpnServerId: string;
+  SslVpnServerId?: string;
   /** VPN 实例ID。 */
-  VpnGatewayId: string;
+  VpnGatewayId?: string;
   /** SSL-VPN-SERVER name。 */
-  SslVpnServerName: string;
+  SslVpnServerName?: string;
   /** 本端地址段。 */
-  LocalAddress: string[];
+  LocalAddress?: string[];
   /** 客户端地址段。 */
-  RemoteAddress: string;
+  RemoteAddress?: string;
   /** 客户端最大连接数。 */
-  MaxConnection: number;
+  MaxConnection?: number;
   /** SSL-VPN 网关公网IP。 */
-  WanIp: string;
+  WanIp?: string;
   /** SSL VPN服务端监听协议 */
-  SslVpnProtocol: string;
+  SslVpnProtocol?: string;
   /** SSL VPN服务端监听协议端口 */
-  SslVpnPort: number;
+  SslVpnPort?: number;
   /** 加密算法。 */
-  EncryptAlgorithm: string;
+  EncryptAlgorithm?: string;
   /** 认证算法。 */
-  IntegrityAlgorithm: string;
+  IntegrityAlgorithm?: string;
   /** 是否支持压缩。 */
-  Compress: number;
+  Compress?: number;
   /** 创建时间。 */
-  CreateTime: string;
-  /** SSL-VPN-SERVER 创建状态。0 创建中1 创建出错2 更新中3 更新出错4 销毁中5 销毁出粗6 已连通7 未知 */
-  State: number;
+  CreateTime?: string;
+  /** SSL-VPN-SERVER 创建状态。0 创建中1 创建出错2 更新中3 更新出错4 销毁中5 销毁出错6 已连通7 未知 */
+  State?: number;
   /** 是否开启SSO认证。1：开启 0： 不开启 */
-  SsoEnabled: number;
+  SsoEnabled?: number;
   /** EIAM应用ID */
-  EiamApplicationId: string;
+  EiamApplicationId?: string;
   /** 是否开启策略控制。0：不开启 1： 开启 */
-  AccessPolicyEnabled: number;
+  AccessPolicyEnabled?: number;
   /** 策略信息 */
-  AccessPolicy: AccessPolicy[];
+  AccessPolicy?: AccessPolicy[];
 }
 
 /** 子网对象 */

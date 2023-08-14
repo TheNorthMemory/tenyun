@@ -1750,6 +1750,20 @@ declare interface DescribeFlowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLogFileRetentionPeriodRequest {
+  /** 实例 ID，形如：tdsql-ow728lmc。 */
+  InstanceId: string;
+}
+
+declare interface DescribeLogFileRetentionPeriodResponse {
+  /** 实例 ID，形如：tdsql-ow728lmc。 */
+  InstanceId: string;
+  /** 日志备份天数 */
+  Days: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrdersRequest {
   /** 待查询的长订单号列表，创建实例、续费实例、扩容实例接口返回。 */
   DealNames: string[];
@@ -2431,6 +2445,8 @@ declare interface Dcdb {
   DescribeFileDownloadUrl(data: DescribeFileDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileDownloadUrlResponse>;
   /** 查询流程状态 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
+  /** 查看备份日志备份天数 {@link DescribeLogFileRetentionPeriodRequest} {@link DescribeLogFileRetentionPeriodResponse} */
+  DescribeLogFileRetentionPeriod(data: DescribeLogFileRetentionPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogFileRetentionPeriodResponse>;
   /** 查询订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */

@@ -193,35 +193,41 @@ declare interface ClickHouseModifyConnectParam {
 /** ClickHouse类型入参 */
 declare interface ClickHouseParam {
   /** ClickHouse的集群 */
-  Cluster: string;
+  Cluster: string | null;
   /** ClickHouse的数据库名 */
-  Database: string;
+  Database: string | null;
   /** ClickHouse的数据表名 */
-  Table: string;
+  Table: string | null;
   /** ClickHouse的schema */
-  Schema: ClickHouseSchema[];
+  Schema: ClickHouseSchema[] | null;
   /** 实例资源 */
-  Resource: string;
+  Resource: string | null;
   /** ClickHouse的连接ip */
-  Ip?: string;
+  Ip?: string | null;
   /** ClickHouse的连接port */
-  Port?: number;
+  Port?: number | null;
   /** ClickHouse的用户名 */
-  UserName?: string;
+  UserName?: string | null;
   /** ClickHouse的密码 */
-  Password?: string;
+  Password?: string | null;
   /** 实例vip */
-  ServiceVip?: string;
+  ServiceVip?: string | null;
   /** 实例的vpcId */
-  UniqVpcId?: string;
+  UniqVpcId?: string | null;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean;
+  SelfBuilt?: boolean | null;
   /** ClickHouse是否抛弃解析失败的消息，默认为true */
-  DropInvalidMessage?: boolean;
+  DropInvalidMessage?: boolean | null;
   /** ClickHouse 类型，emr-clickhouse : "emr";cdw-clickhouse : "cdwch";自建 : "" */
-  Type?: string;
+  Type?: string | null;
   /** 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效 */
-  DropCls?: DropCls;
+  DropCls?: DropCls | null;
+  /** 每批次投递到 ClickHouse 表消息数量，默认为 1000 条。提高该参数值，有利于减少往 ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。 */
+  BatchSize?: number | null;
+  /** 每次从 topic 中拉取消息大小，默认为 1MB，即至少要从 topic 中批量拉取 1MB 消息，才进行数据投递到 ClickHouse 操作。提高该参数值，有利于减少往 ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。 */
+  ConsumerFetchMinBytes?: number | null;
+  /** 每次从 topic 拉取消息最大等待时间，当超过当前最大等待时间时，即使没有拉取到 ConsumerFetchMinBytes 大小，也将进行 ClickHouse 投递操作。提高该参数值，有利于减少往 ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。 */
+  ConsumerFetchMaxWaitMs?: number | null;
 }
 
 /** ClickHouse的Schema */

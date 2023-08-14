@@ -2334,6 +2334,70 @@ declare interface ReverseShellWhiteListInfo {
   Id?: string;
 }
 
+/** 恶意请求事件信息 */
+declare interface RiskDnsEventInfo {
+  /** 事件ID */
+  EventID: number;
+  /** 事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP */
+  EventType: string;
+  /** 恶意请求域名/IP */
+  Address: string;
+  /** 容器ID */
+  ContainerID: string;
+  /** 容器名称 */
+  ContainerName: string;
+  /** 隔离状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败	ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
+  ContainerNetStatus: string;
+  /** 容器状态正在运行: RUNNING暂停: PAUSED停止: STOPPED已经创建: CREATED已经销毁: DESTROYED正在重启中: RESTARTING迁移中: REMOVING */
+  ContainerStatus: string;
+  /** 容器子状态"AGENT_OFFLINE" //Agent离线"NODE_DESTROYED" //节点已销毁"CONTAINER_EXITED" //容器已退出"CONTAINER_DESTROYED" //容器已销毁"SHARED_HOST" // 容器与主机共享网络"RESOURCE_LIMIT" //隔离操作资源超限"UNKNOW" // 原因未知 */
+  ContainerNetSubStatus: string;
+  /** 容器隔离操作来源 */
+  ContainerIsolateOperationSrc: string;
+  /** 镜像ID */
+  ImageID: string;
+  /** 镜像名称 */
+  ImageName: string;
+  /** 首次发现时间 */
+  FoundTime: string;
+  /** 最近生成时间 */
+  LatestFoundTime: string;
+  /** 事件状态EVENT_UNDEAL： 待处理EVENT_DEALED：已处理EVENT_IGNORE： 已忽略EVENT_ADD_WHITE：已加白 */
+  EventStatus: string;
+  /** 恶意请求次数 */
+  EventCount: number;
+  /** 事件描述 */
+  Description: string;
+  /** 解决方案 */
+  Solution: string;
+  /** 恶意IP所属城市 */
+  City: string;
+  /** 主机名称 */
+  HostName: string;
+  /** 主机ID */
+  HostID: string;
+  /** 内网IP */
+  HostIP: string;
+  /** 外网IP */
+  PublicIP: string;
+  /** 节点类型：NORMAL普通节点、SUPER超级节点 */
+  NodeType?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** pod ip */
+  PodIP?: string;
+  /** pod 名称 */
+  PodName?: string;
+  /** 集群ID */
+  ClusterID?: string;
+  /** 节点id */
+  NodeID?: string;
+  /** 节点唯一id */
+  NodeUniqueID?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+}
+
 /** 运行时容器高危系统调用事件描述信息 */
 declare interface RiskSyscallEventDescription {
   /** 描述信息 */
@@ -7548,6 +7612,146 @@ declare interface DescribeReverseShellWhiteListsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskDnsEventDetailRequest {
+  /** 事件ID */
+  EventID: number;
+}
+
+declare interface DescribeRiskDnsEventDetailResponse {
+  /** 事件ID */
+  EventID?: number;
+  /** 事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP */
+  EventType?: string;
+  /** 恶意请求次数 */
+  EventCount?: number;
+  /** 首次发现时间 */
+  FoundTime?: string;
+  /** 最近生成时间 */
+  LatestFoundTime?: string;
+  /** 容器ID */
+  ContainerID?: string;
+  /** 容器名称 */
+  ContainerName?: string;
+  /** 隔离状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败	ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
+  ContainerNetStatus?: string;
+  /** 容器状态正在运行: RUNNING暂停: PAUSED停止: STOPPED已经创建: CREATED已经销毁: DESTROYED正在重启中: RESTARTING迁移中: REMOVING */
+  ContainerStatus?: string;
+  /** 容器子状态"AGENT_OFFLINE" //Agent离线"NODE_DESTROYED" //节点已销毁"CONTAINER_EXITED" //容器已退出"CONTAINER_DESTROYED" //容器已销毁"SHARED_HOST" // 容器与主机共享网络"RESOURCE_LIMIT" //隔离操作资源超限"UNKNOW" // 原因未知 */
+  ContainerNetSubStatus?: string;
+  /** 容器隔离操作来源 */
+  ContainerIsolateOperationSrc?: string;
+  /** 镜像ID */
+  ImageID?: string;
+  /** 镜像名称 */
+  ImageName?: string;
+  /** 主机名称 */
+  HostName?: string;
+  /** 内网IP */
+  HostIP?: string;
+  /** 外网IP */
+  PublicIP?: string;
+  /** 节点名称 */
+  PodName?: string;
+  /** 事件描述 */
+  Description?: string;
+  /** 解决方案 */
+  Solution?: string;
+  /** 参考链接 */
+  Reference?: string[];
+  /** 恶意域名或IP */
+  Address?: string | null;
+  /** 恶意IP所属城市 */
+  City?: string | null;
+  /** 命中规则类型SYSTEM：系统规则 USER：用户自定义 */
+  MatchRuleType?: string;
+  /** 标签特征 */
+  FeatureLabel?: string;
+  /** 进程权限 */
+  ProcessAuthority?: string;
+  /** 进程md5 */
+  ProcessMd5?: string;
+  /** 进程启动用户 */
+  ProcessStartUser?: string;
+  /** 进程用户组 */
+  ProcessUserGroup?: string;
+  /** 进程路径 */
+  ProcessPath?: string;
+  /** 进程树 */
+  ProcessTree?: string;
+  /** 进程命令行参数 */
+  ProcessParam?: string;
+  /** 父进程启动用户 */
+  ParentProcessStartUser?: string;
+  /** 父进程用户组 */
+  ParentProcessUserGroup?: string;
+  /** 父进程路径 */
+  ParentProcessPath?: string;
+  /** 父进程命令行参数 */
+  ParentProcessParam?: string;
+  /** 祖先进程启动用户 */
+  AncestorProcessStartUser?: string;
+  /** 祖先进程用户组 */
+  AncestorProcessUserGroup?: string;
+  /** 祖先进程路径 */
+  AncestorProcessPath?: string;
+  /** 祖先进程命令行参数 */
+  AncestorProcessParam?: string;
+  /** 主机ID */
+  HostID?: string;
+  /** 事件状态EVENT_UNDEAL： 待处理EVENT_DEALED：已处理EVENT_IGNORE： 已忽略EVENT_ADD_WHITE：已加白 */
+  EventStatus?: string;
+  /** 操作时间 */
+  OperationTime?: string | null;
+  /** 备注 */
+  Remark?: string;
+  /** 节点类型 */
+  NodeType?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 节点子网ID */
+  NodeSubNetID?: string;
+  /** 节点子网名称 */
+  NodeSubNetName?: string;
+  /** 节点子网网段 */
+  NodeSubNetCIDR?: string;
+  /** 集群ID */
+  ClusterID?: string;
+  /** podip */
+  PodIP?: string;
+  /** pod状态 */
+  PodStatus?: string;
+  /** 节点唯一id */
+  NodeUniqueID?: string;
+  /** 节点ID名称 */
+  NodeID?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskDnsListRequest {
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。EventStatus- String - 是否必填：否 - 事件状态，待处理：EVENT_UNDEAL，EVENT_DEALED：已处理，已忽略：EVENT_IGNORE， EVENT_ADD_WHITE：已加白ContainerStatus- String - 是否必填：否 - 容器运行状态筛选，已创建：CREATED,正常运行：RUNNING, 暂定运行：PAUSED, 停止运行：	STOPPED，重启中：RESTARTING, 迁移中：REMOVING, 销毁：DESTROYED ContainerNetStatus- String -是否必填: 否 - 容器网络状态筛选 未隔离：NORMAL，已隔离：ISOLATED，隔离失败：ISOLATE_FAILED，解除隔离失败：RESTORE_FAILED，解除隔离中：RESTORING，隔离中：ISOLATINGEventType - String -是否必填: 否 - 事件类型，恶意域名请求：DOMAIN，恶意IP请求：IPTimeRange- String -是否必填: 否 - 时间范围，第一个值表示开始时间，第二个值表示结束时间 RiskDns- string - 是否必填：否 - 恶意域名。RiskIP- string - 是否必填：否 - 恶意IP。ContainerName- string - 是否必填：否 - 容器名称。ContainerID- string - 是否必填：否 - 容器ID。ImageName- string - 是否必填：否 - 镜像名称。ImageID- string - 是否必填：否 - 镜像ID。HostName- string - 是否必填：否 - 主机名称。HostIP- string - 是否必填：否 - 内网IP。PublicIP- string - 是否必填：否 - 外网IP。 */
+  Filters?: RunTimeFilters[];
+  /** 排序方式：asc/desc */
+  Order?: string;
+  /** 排序字段：告警数量：EventCount，最近生成时间：LatestFoundTime */
+  By?: string;
+}
+
+declare interface DescribeRiskDnsListResponse {
+  /** 恶意请求事件列表 */
+  List?: RiskDnsEventInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRiskListRequest {
   /** 要查询的集群ID，如果不指定，则查询用户所有的风险项 */
   ClusterId?: string;
@@ -10237,6 +10441,10 @@ declare interface Tcss {
   DescribeReverseShellWhiteListDetail(data: DescribeReverseShellWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListDetailResponse>;
   /** 运行时反弹shell白名单列表 {@link DescribeReverseShellWhiteListsRequest} {@link DescribeReverseShellWhiteListsResponse} */
   DescribeReverseShellWhiteLists(data?: DescribeReverseShellWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListsResponse>;
+  /** 查询恶意请求事件详情 {@link DescribeRiskDnsEventDetailRequest} {@link DescribeRiskDnsEventDetailResponse} */
+  DescribeRiskDnsEventDetail(data: DescribeRiskDnsEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsEventDetailResponse>;
+  /** 查询恶意请求事件列表 {@link DescribeRiskDnsListRequest} {@link DescribeRiskDnsListResponse} */
+  DescribeRiskDnsList(data?: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
   /** 查询集群风险项列表 {@link DescribeRiskListRequest} {@link DescribeRiskListResponse} */
   DescribeRiskList(data?: DescribeRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskListResponse>;
   /** 运行时高危系统调用事件详细信息 {@link DescribeRiskSyscallDetailRequest} {@link DescribeRiskSyscallDetailResponse} */
