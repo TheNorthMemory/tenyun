@@ -249,17 +249,17 @@ declare interface PackSpec {
 /** 环节数据 */
 declare interface PhaseData {
   /** 启用头 */
-  HeadEnabled?: boolean;
+  HeadEnabled?: boolean | null;
   /** 标题 */
-  HeadTitle?: string;
+  HeadTitle?: string | null;
   /** 标识符 */
-  Key?: string;
+  Key?: string | null;
   /** 小程序AppId */
-  AppId?: string;
+  AppId?: string | null;
   /** 小程序AppPath */
-  AppPath?: string;
+  AppPath?: string | null;
   /** 小程序名称AppName */
-  AppName?: string;
+  AppName?: string | null;
 }
 
 /** 商品信息 */
@@ -961,13 +961,17 @@ declare interface DescribeCodePacksRequest {
   CorpId?: number;
   /** 是否有流水码 0:无 1:有 */
   SerialType?: number;
+  /** 资源类型 batch:批次, order_in 入库, order_out: 出入 */
+  ResType?: string;
+  /** 资源ID ResType是 batch 时对应是批次ID, 是 order_in, order_out时，则是订单ID */
+  ResId?: string;
 }
 
 declare interface DescribeCodePacksResponse {
   /** 码列表 */
-  CodePacks: CodePack[] | null;
+  CodePacks?: CodePack[] | null;
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

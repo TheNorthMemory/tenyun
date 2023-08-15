@@ -285,15 +285,15 @@ declare interface DomainInfo {
 /** clb-waf 域名扩展套餐 */
 declare interface DomainPackageNew {
   /** 资源ID */
-  ResourceIds: string;
+  ResourceIds: string | null;
   /** 过期时间 */
-  ValidTime: string;
+  ValidTime: string | null;
   /** 是否自动续费，1：自动续费，0：不自动续费 */
-  RenewFlag: number;
+  RenewFlag: number | null;
   /** 套餐购买个数 */
-  Count: number;
+  Count: number | null;
   /** 套餐购买地域，clb-waf暂时没有用到 */
-  Region: string;
+  Region: string | null;
 }
 
 /** saas域名详情 */
@@ -356,6 +356,8 @@ declare interface DomainsPartInfo {
   Weights?: string[] | null;
   /** IsCdn=3时，表示自定义header */
   IpHeaders: string[] | null;
+  /** 0:关闭xff重置；1:开启xff重置 */
+  XFFReset?: number | null;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -532,7 +534,7 @@ declare interface InstanceInfo {
   ElasticBilling?: number | null;
   /** 攻击日志投递开关 */
   AttackLogPost?: number | null;
-  /** 带宽峰值 */
+  /** 带宽峰值，单位为B/s(字节每秒) */
   MaxBandwidth?: number | null;
   /** api安全是否购买 */
   APISecurity?: number;
@@ -544,6 +546,8 @@ declare interface InstanceInfo {
   Status?: number | null;
   /** 实例沙箱值 */
   SandboxQps?: number | null;
+  /** 是否api 安全试用 */
+  IsAPISecurityTrial?: number | null;
 }
 
 /** 数据封装 */
@@ -717,15 +721,15 @@ declare interface PortItem {
 /** clb-waf QPS套餐 New */
 declare interface QPSPackageNew {
   /** 资源ID */
-  ResourceIds: string;
+  ResourceIds: string | null;
   /** 过期时间 */
-  ValidTime: string;
+  ValidTime: string | null;
   /** 是否自动续费，1：自动续费，0：不自动续费 */
-  RenewFlag: number;
+  RenewFlag: number | null;
   /** 套餐购买个数 */
-  Count: number;
+  Count: number | null;
   /** 套餐购买地域，clb-waf暂时没有用到 */
-  Region: string;
+  Region: string | null;
   /** 计费项 */
   BillingItem?: string | null;
 }
@@ -915,9 +919,9 @@ declare interface AddSpartaProtectionRequest {
   UpstreamType: number;
   /** 是否开启WebSocket支持，1表示开启，0不开启 */
   IsWebsocket: number;
-  /** 负载均衡策略，0表示轮徇，1表示IP hash */
+  /** 负载均衡策略，0表示轮询，1表示IP hash */
   LoadBalance: string;
-  /** CertType=1时，需要填次参数，表示证书内容 */
+  /** 值为1时，需要填次参数，表示证书内容 */
   Cert?: string;
   /** CertType=1时，需要填次参数，表示证书的私钥 */
   PrivateKey?: string;
@@ -971,6 +975,8 @@ declare interface AddSpartaProtectionRequest {
   SniHost?: string;
   /** is_cdn=3时，需要填此参数，表示自定义header */
   IpHeaders?: string[];
+  /** 0:关闭xff重置；1:开启xff重置 */
+  XFFReset?: number;
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -1349,7 +1355,7 @@ declare interface DescribeFlowTrendResponse {
 }
 
 declare interface DescribeInstancesRequest {
-  /** 偏移 */
+  /** 偏移量 */
   Offset: number;
   /** 容量 */
   Limit: number;
@@ -1755,7 +1761,7 @@ declare interface ModifySpartaProtectionRequest {
   TLSVersion?: number;
   /** 加密套件信息 */
   Ciphers?: number[];
-  /** 0:不支持选择：默认模版 1:通用型模版 2:安全型模版 3:自定义模版 */
+  /** 0:不支持选择：默认模板 1:通用型模板 2:安全型模板 3:自定义模板 */
   CipherTemplate?: number;
   /** 300s */
   ProxyReadTimeout?: number;
@@ -1767,6 +1773,8 @@ declare interface ModifySpartaProtectionRequest {
   SniHost?: string;
   /** IsCdn=3时，需要填此参数，表示自定义header */
   IpHeaders?: string[];
+  /** 0:关闭xff重置；1:开启xff重置 */
+  XFFReset?: number;
 }
 
 declare interface ModifySpartaProtectionResponse {

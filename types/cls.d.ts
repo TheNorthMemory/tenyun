@@ -1437,7 +1437,7 @@ declare interface CreateDataTransformRequest {
   TaskType: number;
   /** 任务启动状态. 默认为1:开启, 2:关闭 */
   EnableFlag?: number;
-  /** 加工任务目的topic_id以及别名 */
+  /** 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写 */
   DstResources?: DataTransformResouceInfo[];
   /** 用于预览加工结果的测试数据 */
   PreviewLogStatistics?: PreviewLogStatistic[];

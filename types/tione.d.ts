@@ -3112,6 +3112,28 @@ declare interface RestartModelAccelerateTaskResponse {
   RequestId?: string;
 }
 
+declare interface SendChatMessageRequest {
+  /** 会话id，标识一组对话的唯一id，id变更则重置会话 */
+  SessionId: string;
+  /** 问题描述 */
+  Question: string;
+  /** 会话模型版本，不同的会话模型调用到不同的模型后台。注: 多行业多场景大模型填写 tj_llm_clm-v1 */
+  ModelVersion?: string;
+  /** 使用模式(仅部分模型支持)。General 通用问答；WithSearchPlugin 搜索增强问答 */
+  Mode?: string;
+  /** 搜索来源。仅当Mode未WithSearchPlugin时生效。Preset 预置文稿库；Custom 自定义。 */
+  SearchSource?: string;
+}
+
+declare interface SendChatMessageResponse {
+  /** 答案 */
+  Answer?: string;
+  /** 会话id,返回请求的会话id */
+  SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartNotebookRequest {
   /** notebook id */
   Id: string;
@@ -4041,6 +4063,8 @@ declare interface Tione {
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 重启模型加速任务 {@link RestartModelAccelerateTaskRequest} {@link RestartModelAccelerateTaskResponse} */
   RestartModelAccelerateTask(data: RestartModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartModelAccelerateTaskResponse>;
+  /** LLM模型对话请求 {@link SendChatMessageRequest} {@link SendChatMessageResponse} */
+  SendChatMessage(data: SendChatMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendChatMessageResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */
   StartNotebook(data: StartNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StartNotebookResponse>;
   /** 启动模型训练任务 {@link StartTrainingTaskRequest} {@link StartTrainingTaskResponse} */

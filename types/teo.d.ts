@@ -2809,6 +2809,8 @@ declare interface ModifyApplicationProxyRuleRequest {
   SessionPersistTime?: number;
   /** 源站端口，支持格式：单端口：80；端口段：81-90，81至90端口。 */
   OriginPort?: string;
+  /** 规则标签。不填保持原有值。 */
+  RuleTag?: string;
 }
 
 declare interface ModifyApplicationProxyRuleResponse {

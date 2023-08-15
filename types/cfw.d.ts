@@ -191,45 +191,45 @@ declare interface DatabaseWhiteListRuleData {
 /** 访问控制列表对象 */
 declare interface DescAcItem {
   /** 访问源 */
-  SourceContent: string | null;
+  SourceContent?: string | null;
   /** 访问目的 */
-  TargetContent: string | null;
+  TargetContent?: string | null;
   /** 协议 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 端口 */
-  Port: string | null;
+  Port?: string | null;
   /** 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察 */
-  RuleAction: string | null;
+  RuleAction?: string | null;
   /** 描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 命中次数 */
-  Count: number;
+  Count?: number;
   /** 执行顺序 */
-  OrderIndex: number;
+  OrderIndex?: number;
   /** 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag */
-  SourceType: string | null;
+  SourceType?: string | null;
   /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location */
-  TargetType: string | null;
+  TargetType?: string | null;
   /** 规则对应的唯一id */
-  Uuid: number | null;
+  Uuid?: number | null;
   /** 规则有效性 */
-  Invalid: number | null;
+  Invalid?: number | null;
   /** 0为正常规则,1为地域规则 */
-  IsRegion: number | null;
+  IsRegion?: number | null;
   /** 国家id */
-  CountryCode: number | null;
+  CountryCode?: number | null;
   /** 城市id */
-  CityCode: number | null;
+  CityCode?: number | null;
   /** 国家名称 */
-  CountryName: string | null;
+  CountryName?: string | null;
   /** 省名称 */
-  CityName: string | null;
+  CityName?: string | null;
   /** 云厂商code */
-  CloudCode: string | null;
+  CloudCode?: string | null;
   /** 0为正常规则,1为云厂商规则 */
-  IsCloud: number | null;
+  IsCloud?: number | null;
   /** 规则状态，true表示启用，false表示禁用 */
-  Enable: string | null;
+  Enable?: string | null;
   /** 规则方向：1，入向；0，出向 */
   Direction?: number | null;
   /** 实例名称 */
@@ -240,6 +240,10 @@ declare interface DescAcItem {
   Status?: number | null;
   /** 关联任务详情 */
   BetaList?: BetaInfoByACL[] | null;
+  /** 生效范围：serial，串行；side，旁路；all，全局 */
+  Scope?: string | null;
+  /** 互联网边界防火墙使用的内部规则id */
+  InternetBorderUuid?: string | null;
 }
 
 /** 设置nat防火墙的vpc dns 接入开关 */
@@ -367,39 +371,43 @@ declare interface NatFwInstance {
 /** Nat实例卡片详细信息 */
 declare interface NatInstanceInfo {
   /** nat实例id */
-  NatinsId: string;
+  NatinsId?: string;
   /** nat实例名称 */
-  NatinsName: string;
+  NatinsName?: string;
   /** 实例所在地域 */
-  Region: string;
+  Region?: string;
   /** 0: 新增模式，1:接入模式 */
-  FwMode: number;
+  FwMode?: number;
   /** 实例带宽大小 Mbps */
-  BandWidth: number;
+  BandWidth?: number;
   /** 入向带宽峰值 bps */
-  InFlowMax: number;
+  InFlowMax?: number;
   /** 出向带宽峰值 bps */
-  OutFlowMax: number;
+  OutFlowMax?: number;
   /** 地域中文信息 */
-  RegionZh: string;
+  RegionZh?: string;
   /** 公网ip数组 */
-  EipAddress: string[] | null;
+  EipAddress?: string[] | null;
   /** 内外使用ip数组 */
-  VpcIp: string[] | null;
+  VpcIp?: string[] | null;
   /** 实例关联子网数组 */
-  Subnets: string[] | null;
+  Subnets?: string[] | null;
   /** 0 :正常 1：正在初始化 */
-  Status: number | null;
+  Status?: number | null;
   /** 地域区域信息 */
-  RegionDetail: string | null;
+  RegionDetail?: string | null;
   /** 实例所在可用区 */
-  ZoneZh: string | null;
+  ZoneZh?: string | null;
   /** 实例所在可用区 */
-  ZoneZhBak: string | null;
+  ZoneZhBak?: string | null;
   /** 已使用规则数 */
   RuleUsed?: number | null;
   /** 实例的规则限制最大规格数 */
   RuleMax?: number | null;
+  /** 实例引擎版本 */
+  EngineVersion?: string | null;
+  /** 引擎是否可升级：0，不可升级；1，可升级 */
+  UpdateEnable?: number | null;
 }
 
 /** 新增模式传递参数 */
@@ -760,6 +768,10 @@ declare interface VpcDnsInfo {
   NatInsName: string | null;
   /** 0：开关关闭 ， 1: 开关打开 */
   SwitchStatus: number;
+  /** 0：未防护， 1: 已防护，2：忽略此字段 */
+  ProtectedStatus?: number | null;
+  /** 是否支持DNS FW，0-不支持、1-支持 */
+  SupportDNSFW?: number | null;
 }
 
 /** vpc区域数据详情 */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 239+ 款产品，9835+ 服务数</summary>
+<details><summary>共计 239+ 款产品，9838+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -154,7 +154,7 @@ cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 20
 cim |  | 2019-03-18(1) |
 cis |  | 2018-04-08(7) |
 ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) | 2019-08-19(80) |
-clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(79) |
+clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(80) |
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) | 2021-05-24(22) |
@@ -292,7 +292,7 @@ tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020
 tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(1) |
 tci | 腾讯智学课堂分析 | 2019-03-18(41) |
 tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-13(12) |
-tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(112) |
+tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(113) |
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(333) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(13) |
@@ -307,7 +307,7 @@ ticm | [智能鉴黄](https://cloud.tencent.com/document/product/864) | 2018-11-
 tics | [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) | 2018-11-15(4) |
 tiems | [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) | 2019-04-16(25) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(23) |
-tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(69) | 2019-10-22(23) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(70) | 2019-10-22(23) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(64) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(203) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |

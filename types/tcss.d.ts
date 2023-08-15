@@ -335,7 +335,7 @@ declare interface AffectedNodeItem {
   /** 检查结果的验证信息 */
   VerifyInfo: string;
   /** 节点名称 */
-  NodeName?: string;
+  NodeName: string;
 }
 
 /** 集群安全检查受影响的工作负载Item */
@@ -565,45 +565,55 @@ declare interface ClusterCustomParameters {
 /** 集群资产返回的结构体 */
 declare interface ClusterInfoItem {
   /** 集群id */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名字 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群版本 */
-  ClusterVersion: string;
+  ClusterVersion?: string;
   /** 集群操作系统 */
-  ClusterOs: string;
+  ClusterOs?: string;
   /** 集群类型 */
-  ClusterType: string;
+  ClusterType?: string;
   /** 集群节点数 */
-  ClusterNodeNum: number;
+  ClusterNodeNum?: number;
   /** 集群区域 */
-  Region: string;
+  Region?: string;
   /** 监控组件的状态，为Defender_Uninstall、Defender_Normal、Defender_Error、Defender_Installing */
-  DefenderStatus: string;
+  DefenderStatus?: string;
   /** 集群状态 */
-  ClusterStatus: string;
+  ClusterStatus?: string;
   /** 集群的检测模式，为Cluster_Normal或者Cluster_Actived. */
-  ClusterCheckMode: string;
+  ClusterCheckMode?: string;
   /** 是否自动定期检测 */
-  ClusterAutoCheck: boolean;
+  ClusterAutoCheck?: boolean;
   /** 防护容器部署失败原因，为UserDaemonSetNotReady时,和UnreadyNodeNum转成"N个节点防御容器为就绪"，其他错误直接展示 */
-  DefenderErrorReason: string;
+  DefenderErrorReason?: string;
   /** 防御容器没有ready状态的节点数量 */
-  UnreadyNodeNum: number;
+  UnreadyNodeNum?: number;
   /** 严重风险检查项的数量 */
-  SeriousRiskCount: number;
+  SeriousRiskCount?: number;
   /** 高风险检查项的数量 */
-  HighRiskCount: number;
+  HighRiskCount?: number;
   /** 中风险检查项的数量 */
-  MiddleRiskCount: number;
+  MiddleRiskCount?: number;
   /** 提示风险检查项的数量 */
-  HintRiskCount: number;
+  HintRiskCount?: number;
   /** 检查失败原因 */
-  CheckFailReason: string;
+  CheckFailReason?: string;
   /** 检查状态,为Task_Running, NoRisk, HasRisk, Uncheck, Task_Error */
-  CheckStatus: string;
+  CheckStatus?: string;
   /** 任务创建时间,检查时间 */
-  TaskCreateTime: string;
+  TaskCreateTime?: string;
+  /** 接入状态 */
+  AccessedStatus?: string | null;
+  /** 接入失败原因 */
+  AccessedSubStatus?: string | null;
+  /** 节点总数 */
+  NodeCount?: number | null;
+  /** 离线节点数 */
+  OffLineNodeCount?: number | null;
+  /** 未安装agent节点数 */
+  UnInstallAgentNodeCount?: number | null;
 }
 
 /** 风险项是检查完之后，有问题的检测项，并且加了一些检查结果信息。 */
@@ -1299,41 +1309,45 @@ declare interface FileAttributeInfo {
 /** 容器安全主机列表 */
 declare interface HostInfo {
   /** 主机id */
-  HostID: string;
+  HostID?: string;
   /** 主机ip即内网ip */
-  HostIP: string;
+  HostIP?: string;
   /** 主机名称 */
-  HostName: string;
+  HostName?: string;
   /** 业务组 */
-  Group: string;
+  Group?: string;
   /** docker 版本 */
-  DockerVersion: string;
+  DockerVersion?: string;
   /** docker 文件系统类型 */
-  DockerFileSystemDriver: string;
+  DockerFileSystemDriver?: string;
   /** 镜像个数 */
-  ImageCnt: number;
+  ImageCnt?: number;
   /** 容器个数 */
-  ContainerCnt: number;
+  ContainerCnt?: number;
   /** agent运行状态 */
-  Status: string;
+  Status?: string;
   /** 是否是Containerd */
-  IsContainerd: boolean;
+  IsContainerd?: boolean;
   /** 主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器； */
-  MachineType: string;
+  MachineType?: string;
   /** 外网ip */
-  PublicIp: string;
+  PublicIp?: string;
   /** 主机uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 主机实例ID */
-  InstanceID: string;
+  InstanceID?: string;
   /** 地域ID */
-  RegionID: number;
+  RegionID?: number;
   /** 所属项目 */
-  Project: ProjectInfo | null;
+  Project?: ProjectInfo | null;
   /** 标签 */
-  Tags: TagInfo[] | null;
+  Tags?: TagInfo[] | null;
   /** 集群id */
   ClusterID?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群接入状态 */
+  ClusterAccessedStatus?: string;
 }
 
 /** 镜像自动授权任务信息 */
@@ -3931,9 +3945,11 @@ declare interface CreateClusterCheckTaskRequest {
 
 declare interface CreateClusterCheckTaskResponse {
   /** 返回创建的集群检查任务的ID，为0表示创建失败。 */
-  TaskId: number;
+  TaskId?: number;
   /** 创建检查任务的结果，"Succ"为成功，其他的为失败原因 */
-  CreateResult: string;
+  CreateResult?: string;
+  /** 返回创建的集群新任务ID */
+  NewTaskID?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5336,6 +5352,12 @@ declare interface DescribeAssetHostDetailResponse {
   Project?: ProjectInfo;
   /** 标签 */
   Tags?: TagInfo[];
+  /** 集群ID */
+  ClusterID?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群接入状态 */
+  ClusterAccessedStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6314,6 +6336,12 @@ declare interface DescribeClusterSummaryResponse {
   NotImportedClusterCount?: number;
   /** eks集群数量 */
   ServerlessClusterCount?: number;
+  /** TKE集群数量 */
+  TkeClusterCount?: number | null;
+  /** 用户自建腾讯云集群数量 */
+  UserCreateTencentClusterCount?: number | null;
+  /** 用户自建集群混合云数量 */
+  UserCreateHybridClusterCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7503,11 +7531,13 @@ declare interface DescribePurchaseStateInfoResponse {
 declare interface DescribeRefreshTaskRequest {
   /** 任务ID */
   TaskId: number;
+  /** 新任务ID */
+  NewTaskID?: string;
 }
 
 declare interface DescribeRefreshTaskResponse {
   /** 刷新任务状态，可能为：Task_New,Task_Running,Task_Finish,Task_Error,Task_NoExist */
-  TaskStatus: string;
+  TaskStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8243,9 +8273,11 @@ declare interface DescribeUnfinishRefreshTaskRequest {
 
 declare interface DescribeUnfinishRefreshTaskResponse {
   /** 返回最近的一次任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 任务状态，为Task_New,Task_Running,Task_Finish,Task_Error,Task_NoExist.Task_New,Task_Running表示有任务存在，不允许新下发 */
-  TaskStatus: string;
+  TaskStatus?: string;
+  /** 新任务ID */
+  NewTaskID?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8265,9 +8297,9 @@ declare interface DescribeUserClusterRequest {
 
 declare interface DescribeUserClusterResponse {
   /** 集群总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群的详细信息 */
-  ClusterInfoList: ClusterInfoItem[];
+  ClusterInfoList?: ClusterInfoItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

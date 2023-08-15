@@ -2362,6 +2362,30 @@ declare interface DuplicateImagePersonalResponse {
   RequestId?: string;
 }
 
+declare interface DuplicateImageRequest {
+  /** 实例id */
+  RegistryId: string;
+  /** 源命名空间名称 */
+  SourceNamespace: string;
+  /** 源镜像仓库名称 */
+  SourceRepo: string;
+  /** 源镜像tag或digest值，目前仅支持tag */
+  SourceReference: string;
+  /** 目标镜像版本 */
+  DestinationTag: string;
+  /** 目标命名空间，不填默认与源一致 */
+  DestinationNamespace?: string;
+  /** 目标镜像仓库，不填默认与源一致 */
+  DestinationRepo?: string;
+  /** 是否覆盖 */
+  Override?: boolean;
+}
+
+declare interface DuplicateImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ManageExternalEndpointRequest {
   /** 实例Id */
   RegistryId: string;
@@ -2901,6 +2925,8 @@ declare interface Tcr {
   DescribeWebhookTriggerLog(data: DescribeWebhookTriggerLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebhookTriggerLogResponse>;
   /** 下载Helm Chart {@link DownloadHelmChartRequest} {@link DownloadHelmChartResponse} */
   DownloadHelmChart(data: DownloadHelmChartRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadHelmChartResponse>;
+  /** 复制企业版仓库镜像版本 {@link DuplicateImageRequest} {@link DuplicateImageResponse} */
+  DuplicateImage(data: DuplicateImageRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateImageResponse>;
   /** 复制个人版仓库镜像版本 {@link DuplicateImagePersonalRequest} {@link DuplicateImagePersonalResponse} */
   DuplicateImagePersonal(data: DuplicateImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateImagePersonalResponse>;
   /** 管理实例公网访问 {@link ManageExternalEndpointRequest} {@link ManageExternalEndpointResponse} */

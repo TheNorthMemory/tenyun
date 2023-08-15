@@ -1777,23 +1777,23 @@ declare interface PrivateLinkParam {
 /** record 与数据库表的映射关系 */
 declare interface RecordMapping {
   /** 消息的 key 名称 */
-  JsonKey?: string;
+  JsonKey?: string | null;
   /** 消息类型 */
-  Type?: string;
+  Type?: string | null;
   /** 消息是否允许为空 */
-  AllowNull?: boolean;
+  AllowNull?: boolean | null;
   /** 对应映射列名称 */
-  ColumnName?: string;
+  ColumnName?: string | null;
   /** 数据库表额外字段 */
-  ExtraInfo?: string;
+  ExtraInfo?: string | null;
   /** 当前列大小 */
-  ColumnSize?: string;
+  ColumnSize?: string | null;
   /** 当前列精度 */
-  DecimalDigits?: string;
+  DecimalDigits?: string | null;
   /** 是否为自增列 */
-  AutoIncrement?: boolean;
+  AutoIncrement?: boolean | null;
   /** 数据库表默认参数 */
-  DefaultValue?: string;
+  DefaultValue?: string | null;
 }
 
 /** 数据处理——Value处理参数——正则替换参数 */

@@ -92,20 +92,20 @@ declare interface CallBackTemplateInfo {
 
 /** 回调事件信息 */
 declare interface CallbackEventInfo {
-  /** 事件时间 */
-  EventTime: string;
+  /** 事件时间。数据时间点，接口返回支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见ISO日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
+  EventTime?: string;
   /** 事件类型 */
-  EventType: number;
+  EventType?: number;
   /** 回调请求 */
-  Request: string;
+  Request?: string;
   /** 回调响应 */
-  Response: string;
+  Response?: string;
   /** 客户接口响应时间 */
-  ResponseTime: string;
+  ResponseTime?: string;
   /** 回调结果 */
-  ResultCode: number;
+  ResultCode?: number;
   /** 流名称 */
-  StreamId: string;
+  StreamId?: string;
 }
 
 /** 下行播放统计指标 */
@@ -244,16 +244,16 @@ declare interface ConcurrentRecordStreamNum {
 
 /** 流播放信息 */
 declare interface DayStreamPlayInfo {
-  /** 数据时间点，接口返回支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
-  Time: string;
+  /** 数据时间点，接口返回支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见ISO日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
+  Time?: string;
   /** 带宽（单位Mbps）。 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 流量 （单位MB）。 */
-  Flux: number;
+  Flux?: number;
   /** 请求数。 */
-  Request: number;
+  Request?: number;
   /** 在线人数。 */
-  Online: number;
+  Online?: number;
 }
 
 /** 延播信息。 */

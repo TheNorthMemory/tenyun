@@ -2410,6 +2410,18 @@ declare interface ModifyLoadBalancerSlaResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLoadBalancersProjectRequest {
+  /** 一个或多个待操作的负载均衡实例ID。 */
+  LoadBalancerIds: string[];
+  /** 项目ID。 */
+  ProjectId: number;
+}
+
+declare interface ModifyLoadBalancersProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRuleRequest {
   /** 负载均衡实例 ID。 */
   LoadBalancerId: string;
@@ -2789,6 +2801,8 @@ declare interface Clb {
   ModifyLoadBalancerMixIpTarget(data: ModifyLoadBalancerMixIpTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerMixIpTargetResponse>;
   /** 升级为性能容量型实例 {@link ModifyLoadBalancerSlaRequest} {@link ModifyLoadBalancerSlaResponse} */
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;
+  /** 修改负载均衡所属项目 {@link ModifyLoadBalancersProjectRequest} {@link ModifyLoadBalancersProjectResponse} */
+  ModifyLoadBalancersProject(data: ModifyLoadBalancersProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancersProjectResponse>;
   /** 修改负载均衡七层监听器的转发规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 修改目标组属性 {@link ModifyTargetGroupAttributeRequest} {@link ModifyTargetGroupAttributeResponse} */
