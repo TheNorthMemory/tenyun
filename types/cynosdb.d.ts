@@ -196,12 +196,14 @@ declare interface BillingResourceInfo {
 
 /** 资源包绑定的实例信息 */
 declare interface BindInstanceInfo {
-  /** 绑定的实例ID */
+  /** 绑定的集群ID */
   InstanceId?: string | null;
   /** 绑定的实例所在的地域 */
   InstanceRegion?: string | null;
   /** 绑定的实例类型 */
   InstanceType?: string | null;
+  /** 绑定集群下的实例ID */
+  ExtendIds?: string[] | null;
 }
 
 /** Binlog描述 */
@@ -244,6 +246,8 @@ declare interface ClusterInstanceDetail {
   MaintainDuration?: number | null;
   /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
   MaintainWeekDays?: string[] | null;
+  /** serverless实例子状态 */
+  ServerlessStatus?: string | null;
 }
 
 /** 参数修改记录 */
@@ -792,6 +796,14 @@ declare interface InstanceInitInfo {
   InstanceType: string;
   /** 实例个数,范围[1,15] */
   InstanceCount: number;
+  /** Serverless实例个数最小值，范围[1,15] */
+  MinRoCount?: number;
+  /** Serverless实例个数最大值，范围[1,15] */
+  MaxRoCount?: number;
+  /** Serverless实例最小规格 */
+  MinRoCpu?: number;
+  /** Serverless实例最大规格 */
+  MaxRoCpu?: number;
 }
 
 /** 实例网络信息 */
@@ -2779,7 +2791,7 @@ declare interface DescribeProxySpecsResponse {
 declare interface DescribeResourcePackageDetailRequest {
   /** 资源包唯一ID */
   PackageId: string;
-  /** 实例ID */
+  /** 集群ID */
   ClusterIds?: string[];
   /** 开始时间 */
   StartTime?: string;
@@ -2789,10 +2801,12 @@ declare interface DescribeResourcePackageDetailRequest {
   Offset?: string;
   /** 限制 */
   Limit?: string;
+  /** 实例D */
+  InstanceIds?: string[];
 }
 
 declare interface DescribeResourcePackageDetailResponse {
-  /** 总使用明细数 */
+  /** 资源包抵扣总数 */
   Total?: number;
   /** 资源包明细说明 */
   Detail?: PackageDetail[];

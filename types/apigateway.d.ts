@@ -1543,7 +1543,7 @@ declare interface AttachPluginRequest {
 
 declare interface AttachPluginResponse {
   /** 绑定操作是否成功。 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1709,7 +1709,7 @@ declare interface CreateApiKeyResponse {
 declare interface CreateApiRequest {
   /** API 所在的服务唯一 ID。 */
   ServiceId: string;
-  /** API 的后端服务类型。支持HTTP、MOCK、TSF、SCF、WEBSOCKET、TARGET（内测）。 */
+  /** API 的后端服务类型。支持HTTP、MOCK、TSF、SCF、EB、TARGET、VPC、UPSTREAM、GRPC、COS、WEBSOCKET。 */
   ServiceType: string;
   /** API 的后端服务超时时间，单位是秒。 */
   ServiceTimeout: number;

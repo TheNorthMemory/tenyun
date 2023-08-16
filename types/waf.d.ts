@@ -1017,7 +1017,7 @@ declare interface CreateHostRequest {
 
 declare interface CreateHostResponse {
   /** 新增防护域名ID */
-  DomainId: string;
+  DomainId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

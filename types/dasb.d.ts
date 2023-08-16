@@ -2,62 +2,76 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 权限控制模版对象 */
+declare interface ACTemplate {
+  /** 模版id */
+  TemplateId?: string | null;
+  /** 模版名称 */
+  TemplateName?: string | null;
+  /** 模版描述 */
+  Description?: string | null;
+}
+
 /** 访问权限 */
 declare interface Acl {
   /** 访问权限ID */
-  Id: number;
+  Id?: number;
   /** 访问权限名称 */
-  Name: string;
+  Name?: string;
   /** 是否开启磁盘映射 */
-  AllowDiskRedirect: boolean;
+  AllowDiskRedirect?: boolean;
   /** 是否开启剪贴板文件上行 */
-  AllowClipFileUp: boolean;
+  AllowClipFileUp?: boolean;
   /** 是否开启剪贴板文件下行 */
-  AllowClipFileDown: boolean;
+  AllowClipFileDown?: boolean;
   /** 是否开启剪贴板文本（目前含图片）上行 */
-  AllowClipTextUp: boolean;
+  AllowClipTextUp?: boolean;
   /** 是否开启剪贴板文本（目前含图片）下行 */
-  AllowClipTextDown: boolean;
+  AllowClipTextDown?: boolean;
   /** 是否开启文件传输上传 */
-  AllowFileUp: boolean;
+  AllowFileUp?: boolean;
   /** 文件传输上传大小限制（预留参数，暂未启用） */
-  MaxFileUpSize: number;
+  MaxFileUpSize?: number;
   /** 是否开启文件传输下载 */
-  AllowFileDown: boolean;
+  AllowFileDown?: boolean;
   /** 文件传输下载大小限制（预留参数，暂未启用） */
-  MaxFileDownSize: number;
+  MaxFileDownSize?: number;
   /** 是否允许任意账号登录 */
-  AllowAnyAccount: boolean;
+  AllowAnyAccount?: boolean;
   /** 关联的用户列表 */
-  UserSet: User[];
+  UserSet?: User[];
   /** 关联的用户组列表 */
-  UserGroupSet: Group[];
+  UserGroupSet?: Group[];
   /** 关联的资产列表 */
-  DeviceSet: Device[];
+  DeviceSet?: Device[];
   /** 关联的资产组列表 */
-  DeviceGroupSet: Group[];
+  DeviceGroupSet?: Group[];
   /** 关联的账号列表 */
-  AccountSet: string[];
+  AccountSet?: string[];
   /** 关联的高危命令模板列表 */
-  CmdTemplateSet: CmdTemplate[];
+  CmdTemplateSet?: CmdTemplate[];
   /** 是否开启 RDP 磁盘映射文件上传 */
-  AllowDiskFileUp: boolean;
+  AllowDiskFileUp?: boolean;
   /** 是否开启 RDP 磁盘映射文件下载 */
-  AllowDiskFileDown: boolean;
+  AllowDiskFileDown?: boolean;
   /** 是否开启 rz sz 文件上传 */
-  AllowShellFileUp: boolean;
+  AllowShellFileUp?: boolean;
   /** 是否开启 rz sz 文件下载 */
-  AllowShellFileDown: boolean;
+  AllowShellFileDown?: boolean;
   /** 是否开启 SFTP 文件删除 */
-  AllowFileDel: boolean;
+  AllowFileDel?: boolean;
   /** 访问权限生效时间，如:"2021-09-22T00:00:00+00:00"生效、失效时间不填则访问权限长期有效 */
-  ValidateFrom: string;
+  ValidateFrom?: string;
   /** 访问权限失效时间，如:"2021-09-23T00:00:00+00:00"生效、失效时间不填则访问权限长期有效 */
-  ValidateTo: string;
+  ValidateTo?: string;
   /** 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期 */
-  Status: number;
+  Status?: number;
   /** 所属部门的信息 */
-  Department: Department | null;
+  Department?: Department | null;
+  /** 是否允许使用访问串，默认允许 */
+  AllowAccessCredential?: boolean | null;
+  /** 关联的数据库高危命令列表 */
+  ACTemplateSet?: ACTemplate[] | null;
 }
 
 /** 资产同步状态 */
@@ -148,6 +162,16 @@ declare interface Department {
   Name?: string;
   /** 部门管理员账号ID */
   Managers?: string[] | null;
+  /** 管理员用户 */
+  ManagerUsers?: DepartmentManagerUser[] | null;
+}
+
+/** 部门管理员信息 */
+declare interface DepartmentManagerUser {
+  /** 管理员Id */
+  ManagerId?: string | null;
+  /** 管理员姓名 */
+  ManagerName?: string | null;
 }
 
 /** 资产信息 */
@@ -528,6 +552,12 @@ declare interface User {
   Department?: Department | null;
   /** 用户所属部门（用于入参） */
   DepartmentId?: string | null;
+  /** 激活状态 0 - 未激活 1 - 激活 */
+  ActiveStatus?: number | null;
+  /** 锁定状态 0 - 未锁定 1 - 锁定 */
+  LockStatus?: number | null;
+  /** 状态 与Filter中一致 */
+  Status?: string | null;
 }
 
 declare interface AddDeviceGroupMembersRequest {
@@ -645,6 +675,8 @@ declare interface CreateAclRequest {
   ValidateTo?: string;
   /** 访问权限所属部门的ID */
   DepartmentId?: string;
+  /** 是否允许使用访问串，默认允许 */
+  AllowAccessCredential?: boolean;
 }
 
 declare interface CreateAclResponse {
@@ -1201,6 +1233,8 @@ declare interface DescribeUsersRequest {
   AuthTypeSet?: number[];
   /** 部门ID，用于过滤属于某个部门的用户 */
   DepartmentId?: string;
+  /** 参数过滤数组 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeUsersResponse {
@@ -1277,6 +1311,8 @@ declare interface ModifyAclRequest {
   ValidateTo?: string;
   /** 权限所属部门的ID，如：1.2.3 */
   DepartmentId?: string;
+  /** 是否允许使用访问串 */
+  AllowAccessCredential?: boolean;
 }
 
 declare interface ModifyAclResponse {

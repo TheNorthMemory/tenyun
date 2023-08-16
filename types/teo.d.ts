@@ -252,6 +252,8 @@ declare interface ApplicationProxyRule {
   SessionPersistTime?: number | null;
   /** 源站端口，支持格式：单端口，如：80。端口段：81-82，表示81，82两个端口。 */
   OriginPort?: string;
+  /** 规则标签。 */
+  RuleTag?: string | null;
 }
 
 /** 站点归属信息 */
@@ -1853,6 +1855,8 @@ declare interface CreateApplicationProxyRuleRequest {
   SessionPersistTime?: number;
   /** 源站端口，支持格式：单端口：80；端口段：81-90，81至90端口。 */
   OriginPort?: string;
+  /** 规则标签。默认值为空字符串。 */
+  RuleTag?: string;
 }
 
 declare interface CreateApplicationProxyRuleResponse {
@@ -2147,15 +2151,15 @@ declare interface DescribeApplicationProxiesRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：proxy-id 按照【代理ID】进行过滤。代理ID形如：proxy-ev2sawbwfd。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-vawer2vadg。 类型：String 必选：否 */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：proxy-id 按照【代理ID】进行过滤。代理ID形如：proxy-ev2sawbwfd。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-vawer2vadg。 类型：String 必选：否rule-tag 按照【规则标签】对应用代理下的规则进行过滤。规则标签形如：rule-service-1。 类型：String 必选：否 */
   Filters?: Filter[];
 }
 
 declare interface DescribeApplicationProxiesResponse {
   /** 应用代理列表。 */
-  ApplicationProxies: ApplicationProxy[];
+  ApplicationProxies?: ApplicationProxy[];
   /** 记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

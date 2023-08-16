@@ -616,6 +616,26 @@ declare interface MetaDbInfo {
   MetaDBInfo: CustomMetaInfo;
 }
 
+/** 强制修改标签 */
+declare interface ModifyResourceTags {
+  /** 集群id 或者 cvm id */
+  ResourceId: string;
+  /** 资源6段式表达式 */
+  Resource: string;
+  /** 资源前缀 */
+  ResourcePrefix: string;
+  /** ap-beijing */
+  ResourceRegion: string;
+  /** emr */
+  ServiceType: string;
+  /** 删除的标签列表 */
+  DeleteTags?: Tag[];
+  /** 添加的标签列表 */
+  AddTags?: Tag[];
+  /** 修改的标签列表 */
+  ModifyTags?: Tag[];
+}
+
 /** 多云盘参数 */
 declare interface MultiDisk {
   /** 云盘类型CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_HSSD：表示增强型SSD云硬盘。 */
@@ -2084,6 +2104,24 @@ declare interface ModifyResourceSchedulerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyResourcesTagsRequest {
+  /** 标签类型，取值Cluster或者Node */
+  ModifyType: string;
+  /** 标签信息 */
+  ModifyResourceTagsInfoList: ModifyResourceTags[];
+}
+
+declare interface ModifyResourcesTagsResponse {
+  /** 成功的资源id列表 */
+  SuccessList?: string[] | null;
+  /** 失败的资源id列表 */
+  FailList?: string[] | null;
+  /** 部分成功的资源id列表 */
+  PartSuccessList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunJobFlowRequest {
   /** 作业名称。 */
   Name: string;
@@ -2365,6 +2403,8 @@ declare interface Emr {
   ModifyResourceScheduleConfig(data: ModifyResourceScheduleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceScheduleConfigResponse>;
   /** 修改YARN的资源调度器 {@link ModifyResourceSchedulerRequest} {@link ModifyResourceSchedulerResponse} */
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
+  /** 强制修改标签 {@link ModifyResourcesTagsRequest} {@link ModifyResourcesTagsResponse} */
+  ModifyResourcesTags(data: ModifyResourcesTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagsResponse>;
   /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
   /** 扩容集群节点 {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */

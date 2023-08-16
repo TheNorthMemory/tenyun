@@ -4943,7 +4943,7 @@ declare interface DescribeSecurityGroupReferencesResponse {
 declare interface DescribeSecurityGroupsRequest {
   /** 安全组实例ID，例如：sg-33ocnj9n。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。 */
   SecurityGroupIds?: string[];
-  /** 过滤条件，参数不支持同时指定SecurityGroupIds和Filters。security-group-id - String - （过滤条件）安全组ID。project-id - Integer - （过滤条件）项目ID。security-group-name - String - （过滤条件）安全组名称。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3。 */
+  /** 过滤条件，参数不支持同时指定SecurityGroupIds和Filters。security-group-id - String - （过滤条件）安全组ID。project-id - Integer - （过滤条件）项目ID。security-group-name - String - （过滤条件）安全组名称。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 其中 tag-key 请使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;
