@@ -1672,7 +1672,7 @@ declare interface CreateSchemeUrlRequest {
 }
 
 declare interface CreateSchemeUrlResponse {
-  /** 小程序链接地址，有效期5分钟 */
+  /** 小程序链接地址，有效期30天 */
   SchemeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

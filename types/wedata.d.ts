@@ -8785,11 +8785,13 @@ declare interface DescribeTableLineageRequest {
   ExtParams?: LineageParamRecord[];
   /** 是否过滤临时表,默认true */
   IgnoreTemp?: boolean;
+  /** 是否递归查询二级节点数目，默认为true */
+  RecursiveSecond?: boolean;
 }
 
 declare interface DescribeTableLineageResponse {
   /** 表血缘信息 */
-  TableLineage: TableLineageInfo | null;
+  TableLineage?: TableLineageInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

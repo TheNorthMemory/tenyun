@@ -336,6 +336,10 @@ declare interface PackageInfo {
   CreatedAt?: number | null;
   /** 云存套餐更新时间 */
   UpdatedAt?: number | null;
+  /** 套餐id */
+  PackageId?: string | null;
+  /** 订单id */
+  OrderId?: string | null;
 }
 
 /** 产品模型定义 */
@@ -727,6 +731,8 @@ declare interface CreateCloudStorageRequest {
   Override?: number;
   /** 套餐列表顺序：PackageQueue=front会立即使用新购买的套餐，新购套餐结束后，列表中下一个未过期的套餐继续生效；PackageQueue=end会等设备当前所有已购买套餐过期后才会生效新购套餐。与Override参数不能同时使用。 */
   PackageQueue?: string;
+  /** 订单id */
+  OrderId?: string;
 }
 
 declare interface CreateCloudStorageResponse {

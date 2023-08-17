@@ -952,6 +952,74 @@ declare interface DescribeUserBaseInfoInstanceResponse {
   RequestId?: string;
 }
 
+declare interface RequestLocalTaskRequest {
+  /** Client Id */
+  ClientId: string;
+}
+
+declare interface RequestLocalTaskResponse {
+  /** 返回的任务id */
+  Sid?: string;
+  /** 任务文件的mk5 */
+  SrcFileMd5?: string;
+  /** 文件大小，可不传 */
+  SrcFileSize?: number;
+  /** 任务文件的下载地址，必须无鉴权可下载 */
+  SrcFileUrl?: string;
+  /** release: 需要INFO-PLIST文件，会生成工具部署安装包，并带有license文件，绑定机器；nobind不需要INFO-PLIST文件，不绑定机器 */
+  SrcFileType?: string;
+  /** enterprisetrial */
+  SrcFileVersion?: string;
+  /** 补充字段 */
+  EncryptParam?: string;
+  /** 任务状态 */
+  EncryptState?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateClientStateRequest {
+  /** Client Id */
+  ClientId: string;
+  /** Ip addr */
+  Ip: string;
+  /** 内部分组 */
+  Internal: number;
+  /** Client Version */
+  ServerVersion: string;
+  /** 主机 */
+  Hostname: string;
+  /** 系统 */
+  Os: string;
+}
+
+declare interface UpdateClientStateResponse {
+  /** 返回值 */
+  ResultCode?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateLocalTaskResultRequest {
+  /** 任务id */
+  Sid: string;
+  /** 一级任务code。标记任务状态 */
+  ResultCode: number;
+  /** 二级错误码 */
+  SubCode: number;
+  /** 二级错误信息 */
+  ErrMsg: string;
+  /** 结果 */
+  Result: string;
+}
+
+declare interface UpdateLocalTaskResultResponse {
+  /** 标记成功 */
+  ResultCode?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ms 移动应用安全} */
 declare interface Ms {
   (): Versions;
@@ -993,6 +1061,12 @@ declare interface Ms {
   DescribeUrlDetectionResult(data: DescribeUrlDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlDetectionResultResponse>;
   /** 获取用户基础信息 {@link DescribeUserBaseInfoInstanceRequest} {@link DescribeUserBaseInfoInstanceResponse} */
   DescribeUserBaseInfoInstance(data?: DescribeUserBaseInfoInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserBaseInfoInstanceResponse>;
+  /** client任务请求地址 {@link RequestLocalTaskRequest} {@link RequestLocalTaskResponse} */
+  RequestLocalTask(data: RequestLocalTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RequestLocalTaskResponse>;
+  /** 更新client状态 {@link UpdateClientStateRequest} {@link UpdateClientStateResponse} */
+  UpdateClientState(data: UpdateClientStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateClientStateResponse>;
+  /** 更新本地任务结果 {@link UpdateLocalTaskResultRequest} {@link UpdateLocalTaskResultResponse} */
+  UpdateLocalTaskResult(data: UpdateLocalTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLocalTaskResultResponse>;
 }
 
 export declare type Versions = ["2018-04-08"];

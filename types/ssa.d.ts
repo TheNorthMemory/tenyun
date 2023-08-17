@@ -1417,13 +1417,13 @@ declare interface DescribeSocAlertListRequest {
   Filter?: QueryFilter[];
   /** 排序参数 */
   Sorter?: QuerySort[];
-  /** 是否导出 */
+  /** 是否导出；默认为否，如量级超过1000，则使用单独的导出接口 */
   ExportFlag?: boolean;
 }
 
 declare interface DescribeSocAlertListResponse {
   /** 业务数据 */
-  Data: AlertListData;
+  Data?: AlertListData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
