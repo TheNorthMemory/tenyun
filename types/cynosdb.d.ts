@@ -2771,9 +2771,9 @@ declare interface DescribeProxyNodesRequest {
 
 declare interface DescribeProxyNodesResponse {
   /** 数据库代理节点总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 数据库代理节点列表 */
-  ProxyNodeInfos: ProxyNodeInfo[];
+  ProxyNodeInfos?: ProxyNodeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

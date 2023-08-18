@@ -5290,8 +5290,10 @@ declare interface DescribeVpcEndPointServiceWhiteListRequest {
 }
 
 declare interface DescribeVpcEndPointServiceWhiteListResponse {
-  /** 白名单对象数组。 */
+  /** 白名单对象数组。已废弃 */
   VpcEndpointServiceUserSet?: VpcEndPointServiceUser[];
+  /** 白名单对象数组。 */
+  VpcEndPointServiceUserSet?: VpcEndPointServiceUser[];
   /** 符合条件的白名单个数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */

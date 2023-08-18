@@ -279,27 +279,27 @@ declare interface PolicyVersionItem {
 /** 角色详细信息 */
 declare interface RoleInfo {
   /** 角色ID */
-  RoleId: string;
+  RoleId?: string;
   /** 角色名称 */
-  RoleName: string;
+  RoleName?: string;
   /** 角色的策略文档 */
-  PolicyDocument: string;
+  PolicyDocument?: string;
   /** 角色描述 */
-  Description: string;
+  Description?: string;
   /** 角色的创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 角色的最近一次时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 角色是否允许登录 */
-  ConsoleLogin: number;
+  ConsoleLogin?: number;
   /** 角色类型，取user、system或service_linked */
-  RoleType: string | null;
+  RoleType?: string | null;
   /** 有效时间 */
-  SessionDuration: number | null;
+  SessionDuration?: number | null;
   /** 服务相关角色删除TaskId */
-  DeletionTaskId: string | null;
+  DeletionTaskId?: string | null;
   /** 标签 */
-  Tags: RoleTags[] | null;
+  Tags?: RoleTags[] | null;
 }
 
 /** 角色标签类型 */

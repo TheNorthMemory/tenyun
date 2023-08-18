@@ -2163,6 +2163,8 @@ declare interface CreateVpcRequest {
   Tags?: Tag[];
   /** 描述信息 */
   Description?: string;
+  /** 网络运营商类型 取值范围:'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调 */
+  ISPTypes?: ISPTypeItem[];
 }
 
 declare interface CreateVpcResponse {

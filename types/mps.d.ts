@@ -146,6 +146,8 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   SubStreamObjectName?: string;
   /** 转自适应码流（仅 HLS）后，分片文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`。 */
   SegmentObjectName?: string;
+  /** 要插入的字幕文件。 */
+  AddOnSubtitles?: AddOnSubtitle[] | null;
 }
 
 /** 转自适应码流模板详情 */
@@ -182,6 +184,14 @@ declare interface AdaptiveStreamTemplate {
   RemoveAudio?: number;
   /** 是否移除视频流，取值范围：0：否，1：是。 */
   RemoveVideo?: number;
+}
+
+/** 外挂字幕。 */
+declare interface AddOnSubtitle {
+  /** 插入形式，可选值：subtitle-stream：插入字幕轨道close-caption：编码到SEI帧 */
+  Type?: string | null;
+  /** 字幕文件。 */
+  Subtitle?: MediaInputInfo | null;
 }
 
 /** 智能分析结果 */
@@ -2615,13 +2625,13 @@ declare interface MediaAnimatedGraphicsItem {
 /** 点播文件音频流信息 */
 declare interface MediaAudioStreamItem {
   /** 音频流的码率，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 音频流的采样率，单位：hz。 */
-  SamplingRate: number;
+  SamplingRate?: number;
   /** 音频流的编码格式，例如 aac。 */
-  Codec: string;
+  Codec?: string;
   /** 音频声道数，例如 2。 */
-  Channel: number | null;
+  Channel?: number | null;
   /** 音频Codecs。 */
   Codecs?: string | null;
   /** 音频响度。 */
@@ -2977,23 +2987,23 @@ declare interface MediaTranscodeItem {
 /** 点播文件视频流信息 */
 declare interface MediaVideoStreamItem {
   /** 视频流的码率，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 视频流的高度，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 视频流的宽度，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 视频流的编码格式，例如 h264。 */
-  Codec: string;
+  Codec?: string;
   /** 帧率，单位：hz。 */
-  Fps: number;
+  Fps?: number;
   /** 色彩空间。 */
-  ColorPrimaries: string | null;
+  ColorPrimaries?: string | null;
   /** 色彩空间。 */
-  ColorSpace: string | null;
+  ColorSpace?: string | null;
   /** 色彩空间。 */
-  ColorTransfer: string | null;
+  ColorTransfer?: string | null;
   /** HDR类型。 */
-  HdrType: string | null;
+  HdrType?: string | null;
   /** 视频Codecs。 */
   Codecs?: string | null;
 }
@@ -3140,6 +3150,8 @@ declare interface OverrideTranscodeParameter {
   AddonAudioStream?: MediaInputInfo[] | null;
   /** 转码扩展字段。 */
   StdExtInfo?: string | null;
+  /** 要插入的字幕文件。 */
+  AddOnSubtitles?: AddOnSubtitle[] | null;
 }
 
 /** 语音涉敏任务控制参数 */
@@ -3501,13 +3513,13 @@ declare interface S3InputInfo {
 /** AWS S3 输出位置 */
 declare interface S3OutputStorage {
   /** S3 bucket。 */
-  S3Bucket: string;
+  S3Bucket: string | null;
   /** S3 bucket 对应的区域。 */
-  S3Region: string;
+  S3Region: string | null;
   /** AWS 内网上传 媒体资源的秘钥id。 */
-  S3SecretId?: string;
+  S3SecretId?: string | null;
   /** AWS 内网上传 媒体资源的秘钥key。 */
-  S3SecretKey?: string;
+  S3SecretKey?: string | null;
 }
 
 /** 转推的目标地址信息。 */

@@ -259,9 +259,9 @@ declare interface CreatePrivateZoneRequest {
 
 declare interface CreatePrivateZoneResponse {
   /** 私有域ID, zone-xxxxxx */
-  ZoneId: string;
+  ZoneId?: string;
   /** 私有域名 */
-  Domain: string;
+  Domain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -525,11 +525,11 @@ declare interface ModifyPrivateZoneVpcRequest {
 
 declare interface ModifyPrivateZoneVpcResponse {
   /** 私有域ID, zone-xxxxxx */
-  ZoneId: string;
+  ZoneId?: string;
   /** 解析域关联的VPC列表 */
-  VpcSet: VpcInfo[];
+  VpcSet?: VpcInfo[];
   /** 私有域账号关联的全部VPC列表 */
-  AccountVpcSet: AccountVpcInfoOutput[];
+  AccountVpcSet?: AccountVpcInfoOutput[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

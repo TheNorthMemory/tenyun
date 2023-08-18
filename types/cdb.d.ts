@@ -524,12 +524,6 @@ declare interface DBSwitchInfo {
   SwitchType: string;
 }
 
-/** 数据库表名 */
-declare interface DatabaseName {
-  /** 数据库表名 */
-  DatabaseName: string;
-}
-
 /** 数据库权限 */
 declare interface DatabasePrivilege {
   /** 权限信息 */
@@ -2482,28 +2476,6 @@ declare interface DescribeBackupConfigResponse {
   EnableBinlogStandby?: string;
   /** 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数 */
   BinlogStandbyDays?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBackupDatabasesRequest {
-  /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
-  InstanceId: string;
-  /** 开始时间，格式为：2017-07-12 10:29:20。 */
-  StartTime: string;
-  /** 要查询的数据库名前缀。 */
-  SearchDatabase?: string;
-  /** 分页偏移量。 */
-  Offset?: number;
-  /** 分页大小，最小值为1，最大值为2000。 */
-  Limit?: number;
-}
-
-declare interface DescribeBackupDatabasesResponse {
-  /** 返回的数据个数。 */
-  TotalCount: number;
-  /** 符合查询条件的数据库数组。 */
-  Items: DatabaseName[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4559,8 +4531,6 @@ declare interface Cdb {
   DescribeAuditRules(data?: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
   /** 查询云数据库备份配置信息 {@link DescribeBackupConfigRequest} {@link DescribeBackupConfigResponse} */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
-  /** @deprecated 查询备份数据库列表 {@link DescribeBackupDatabasesRequest} {@link DescribeBackupDatabasesResponse} */
-  DescribeBackupDatabases(data: DescribeBackupDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDatabasesResponse>;
   /** 查询备份文件解密密钥 {@link DescribeBackupDecryptionKeyRequest} {@link DescribeBackupDecryptionKeyResponse} */
   DescribeBackupDecryptionKey(data: DescribeBackupDecryptionKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDecryptionKeyResponse>;
   /** 查询备份文件下载源限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */

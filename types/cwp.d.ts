@@ -6089,7 +6089,7 @@ declare interface DescribeLicenseBindListRequest {
   LicenseType: number;
   /** 资源ID */
   ResourceId: string;
-  /** Keywords 机器别名/公私IP 模糊查询 */
+  /** InstanceID、IP、MachineName 模糊查询 */
   Filters?: Filters[];
   /** 限制条数,默认10. */
   Limit?: number;
@@ -6099,9 +6099,9 @@ declare interface DescribeLicenseBindListRequest {
 
 declare interface DescribeLicenseBindListResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 绑定机器列表信息 */
-  List: LicenseBindDetail[];
+  List?: LicenseBindDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

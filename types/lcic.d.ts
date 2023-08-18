@@ -701,6 +701,16 @@ declare interface DeleteSupervisorResponse {
   RequestId?: string;
 }
 
+declare interface DeleteUserRequest {
+  /** 待删除用户的ID */
+  UserId: string;
+}
+
+declare interface DeleteUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAnswerListRequest {
   /** 问题ID */
   QuestionId: string;
@@ -1446,6 +1456,8 @@ declare interface Lcic {
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
   /** 删除巡课 {@link DeleteSupervisorRequest} {@link DeleteSupervisorResponse} */
   DeleteSupervisor(data: DeleteSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSupervisorResponse>;
+  /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
+  DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 获取房间答题详情 {@link DescribeAnswerListRequest} {@link DescribeAnswerListResponse} */
   DescribeAnswerList(data: DescribeAnswerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnswerListResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */

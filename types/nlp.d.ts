@@ -96,6 +96,30 @@ declare interface SentencePair {
   TargetText: string | null;
 }
 
+/** TextGenerationChoices */
+declare interface TextGenerationChoices {
+  /** 内容 */
+  Message?: TextGenerationMessage | null;
+}
+
+/** TextGenerationMessage */
+declare interface TextGenerationMessage {
+  /** 角色支持 system, user, assistant。默认为user。 */
+  Role?: string | null;
+  /** 消息的内容。 */
+  Content?: string | null;
+}
+
+/** TextGenerationUsage */
+declare interface TextGenerationUsage {
+  /** 输入tokens数量 */
+  PromptTokens?: number;
+  /** 输出tokens数量 */
+  CompletionTokens?: number;
+  /** 总token数量 */
+  TotalTokens?: number;
+}
+
 /** 文本续写结果 */
 declare interface Writing {
   /** 续写的文本。 */
@@ -262,6 +286,42 @@ declare interface SentenceCorrectionResponse {
   RequestId?: string;
 }
 
+declare interface TestingTextGenerationRequest {
+  /** 会话内容,按对话时间从旧到新在数组中排列。 */
+  Messages: TextGenerationMessage[];
+  /** 模型名称，当前固定为TestingModel */
+  Model?: string;
+  /** 会话id。 */
+  QueryId?: string;
+  /** 超参数temperature, 该参数用于控制生成文本中重复内容。取值区间为[0.0, 2.0], 非必要不建议使用, 不合理的取值会影响效果。默认为1.0。 */
+  Temperature?: number;
+  /** 超参数top_p, 该参数用于控制生成文本的多样性。较小的"top_p"值会限制模型的选择范围，使生成的文本更加一致和确定性。较大的"top_p"值会扩大选择范围，使生成的文本更加多样化和随机。取值区间为[0.0, 1.0], 非必要不建议使用, 不合理的取值会影响效果。默认值为1.0。 */
+  TopP?: number;
+  /** 超参数top_k,该参数用于控制生成文本的多样性和可控性，较小的"top_k"值会限制模型的选择范围，使生成的文本更加一致和确定性。较大的"top_k"值会扩大选择范围，使生成的文本更加多样化和随机。取值区间为[1, 100]，默认值 40。 */
+  TopK?: number;
+  /** 重复惩罚项,该参数用于用于控制生成文本中重复内容。建议范围[1.0, 1.05]非必要不建议使用, 不合理的取值会影响效果。默认为1。 */
+  RepetitionPenalty?: number;
+  /** 输出结果最大tokens数量。取值区间为(0, 1024]。默认值为768。 */
+  OutputSeqLen?: number;
+  /** 输入文本的最大 tokens 数量。取值区间为(0, 1024]。默认值为256。 */
+  MaxInputSeqLen?: number;
+}
+
+declare interface TestingTextGenerationResponse {
+  /** 结果 */
+  Choices?: TextGenerationChoices[];
+  /** unix时间戳的字符串 */
+  Created?: number;
+  /** 会话id */
+  Id?: string;
+  /** 模型名 */
+  Model?: string;
+  /** token数量 */
+  Usage?: TextGenerationUsage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TextEmbellishRequest {
   /** 待润色的文本。中文文本长度需<=50字符；英文文本长度需<=30个单词。 */
   Text: string;
@@ -323,6 +383,8 @@ declare interface Nlp {
   RetrieveSimilarWords(data: RetrieveSimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveSimilarWordsResponse>;
   /** 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */
   SentenceCorrection(data: SentenceCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceCorrectionResponse>;
+  /** 文案创作（内测版） {@link TestingTextGenerationRequest} {@link TestingTextGenerationResponse} */
+  TestingTextGeneration(data: TestingTextGenerationRequest, config?: AxiosRequestConfig): AxiosPromise<TestingTextGenerationResponse>;
   /** 文本润色 {@link TextEmbellishRequest} {@link TextEmbellishResponse} */
   TextEmbellish(data: TextEmbellishRequest, config?: AxiosRequestConfig): AxiosPromise<TextEmbellishResponse>;
   /** 文本补全 {@link TextWritingRequest} {@link TextWritingResponse} */

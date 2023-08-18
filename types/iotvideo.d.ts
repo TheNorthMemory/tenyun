@@ -1174,6 +1174,24 @@ declare interface DescribeCloudStorageEventsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudStorageOrderRequest {
+  /** 订单id */
+  OrderId: string;
+}
+
+declare interface DescribeCloudStorageOrderResponse {
+  /** 云存套餐开始时间 */
+  StartTime?: number | null;
+  /** 云存套餐过期时间 */
+  ExpireTime?: number | null;
+  /** 套餐id */
+  PackageId?: string | null;
+  /** 套餐状态0：等待生效1: 已过期2:生效 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudStoragePackageConsumeDetailsRequest {
   /** 开始日期 */
   StartDate: string;
@@ -5747,6 +5765,8 @@ declare interface Iotvideo {
   DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
   /** 拉取云存事件列表 {@link DescribeCloudStorageEventsRequest} {@link DescribeCloudStorageEventsResponse} */
   DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
+  /** 查询云存服务详情 {@link DescribeCloudStorageOrderRequest} {@link DescribeCloudStorageOrderResponse} */
+  DescribeCloudStorageOrder(data: DescribeCloudStorageOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageOrderResponse>;
   /** 获取云存套餐包消耗详细记录 {@link DescribeCloudStoragePackageConsumeDetailsRequest} {@link DescribeCloudStoragePackageConsumeDetailsResponse} */
   DescribeCloudStoragePackageConsumeDetails(data: DescribeCloudStoragePackageConsumeDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeDetailsResponse>;
   /** 获取云存套餐包消耗统计 {@link DescribeCloudStoragePackageConsumeStatsRequest} {@link DescribeCloudStoragePackageConsumeStatsResponse} */
