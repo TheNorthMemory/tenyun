@@ -509,9 +509,9 @@ declare interface Cache {
 /** 启发式自定义时间缓存配置 */
 declare interface CacheConfig {
   /** 启发式自定义时间缓存配置开关，取值有：on：开启off：关闭 */
-  HeuristicCacheTimeSwitch: string;
+  HeuristicCacheTimeSwitch: string | null;
   /** 单位 秒. */
-  HeuristicCacheTime: number;
+  HeuristicCacheTime: number | null;
 }
 
 /** 路径缓存缓存配置 */
@@ -1159,9 +1159,9 @@ declare interface HeaderKey {
 /** 启发式缓存配置 */
 declare interface HeuristicCache {
   /** 启发式缓存配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
+  Switch: string | null;
   /** 自定义启发式缓存时间配置 */
-  CacheConfig?: CacheConfig;
+  CacheConfig?: CacheConfig | null;
 }
 
 /** HSTS 配置。 */

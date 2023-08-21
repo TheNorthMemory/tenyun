@@ -1411,7 +1411,7 @@ declare interface CreateCmqTopicRequest {
 
 declare interface CreateCmqTopicResponse {
   /** 主题id */
-  TopicId: string;
+  TopicId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

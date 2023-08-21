@@ -1556,6 +1556,26 @@ declare interface ModifyMigrateNameResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMigrateRateLimitRequest {
+  /** 迁移任务ID */
+  JobId: string;
+  /** 迁移任务全量导出线程数、有效值为 1-16 */
+  DumpThread?: number;
+  /** 迁移全量导出的 Rps 限制、需要大于 0 */
+  DumpRps?: number;
+  /** 迁移任务全量导入线程数、有效值为 1-16 */
+  LoadThread?: number;
+  /** 迁移任务增量导入线程数、有效值为 1-128 */
+  SinkerThread?: number;
+  /** 全量导入Rps限制 */
+  LoadRps?: number;
+}
+
+declare interface ModifyMigrateRateLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMigrationJobRequest {
   /** 任务id */
   JobId: string;
@@ -1592,6 +1612,26 @@ declare interface ModifySyncJobConfigRequest {
 }
 
 declare interface ModifySyncJobConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySyncRateLimitRequest {
+  /** 迁移任务ID */
+  JobId: string;
+  /** 同步任务全量导出线程数、有效值为 1-16 */
+  DumpThread?: number;
+  /** 同步任务全量导出的 Rps 限制、需要大于 0 */
+  DumpRps?: number;
+  /** 同步任务全量导入线程数、有效值为 1-16 */
+  LoadThread?: number;
+  /** 同步任务增量导入线程数、有效值为 1-128 */
+  SinkerThread?: number;
+  /** 同步任务全量导入的Rps */
+  LoadRps?: number;
+}
+
+declare interface ModifySyncRateLimitResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2531,10 +2571,14 @@ declare interface Dts {
   ModifyMigrateJobSpec(data: ModifyMigrateJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateJobSpecResponse>;
   /** 修改迁移名称 {@link ModifyMigrateNameRequest} {@link ModifyMigrateNameResponse} */
   ModifyMigrateName(data: ModifyMigrateNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateNameResponse>;
+  /** 修改迁移任务的传输速率 {@link ModifyMigrateRateLimitRequest} {@link ModifyMigrateRateLimitResponse} */
+  ModifyMigrateRateLimit(data: ModifyMigrateRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateRateLimitResponse>;
   /** 配置迁移服务 {@link ModifyMigrationJobRequest} {@link ModifyMigrationJobResponse} */
   ModifyMigrationJob(data: ModifyMigrationJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationJobResponse>;
   /** 修改同步任务配置 {@link ModifySyncJobConfigRequest} {@link ModifySyncJobConfigResponse} */
   ModifySyncJobConfig(data: ModifySyncJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySyncJobConfigResponse>;
+  /** 修改同步任务的传输速率 {@link ModifySyncRateLimitRequest} {@link ModifySyncRateLimitResponse} */
+  ModifySyncRateLimit(data: ModifySyncRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySyncRateLimitResponse>;
   /** 暂停迁移任务 {@link PauseMigrateJobRequest} {@link PauseMigrateJobResponse} */
   PauseMigrateJob(data: PauseMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<PauseMigrateJobResponse>;
   /** 暂停同步任务 {@link PauseSyncJobRequest} {@link PauseSyncJobResponse} */

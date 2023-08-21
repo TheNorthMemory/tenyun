@@ -1115,35 +1115,37 @@ declare interface WxGatewayCustomConfig {
 /** 安全网关路由 */
 declare interface WxGatewayRountItem {
   /** 安全网关路由名称 */
-  GatewayRouteName: string;
+  GatewayRouteName?: string;
   /** 安全网关路由协议 */
-  GatewayRouteProtocol: string;
+  GatewayRouteProtocol?: string;
   /** 安全网关路由地址 */
-  GatewayRouteAddr: string;
+  GatewayRouteAddr?: string;
   /** 安全网关路由描述 */
-  GatewayRouteDesc: string;
+  GatewayRouteDesc?: string;
   /** 安全网关后端集群id，如果是外网服务，该id与GatewayRountName相同 */
-  GatewayRouteClusterId: string;
+  GatewayRouteClusterId?: string;
   /** 安全网关创建时间 */
-  GatewayRouteCreateTime: string;
+  GatewayRouteCreateTime?: string;
   /** 安全网关路由限制 */
-  FrequencyLimitConfig: FrequencyLimitConfig[] | null;
+  FrequencyLimitConfig?: FrequencyLimitConfig[] | null;
   /** ip代表绑定后端ip。cbr代表云托管服务 */
-  GatewayRouteServerType: string | null;
+  GatewayRouteServerType?: string | null;
   /** 服务名 */
-  GatewayRouteServerName: string | null;
+  GatewayRouteServerName?: string | null;
   /** ip */
-  GatewayRewriteHost: string | null;
+  GatewayRewriteHost?: string | null;
   /** 网关版本 */
-  GatewayVersion: string | null;
+  GatewayVersion?: string | null;
   /** 请求路径 */
-  GatewayRoutePath: string | null;
+  GatewayRoutePath?: string | null;
   /** 请求模式 */
-  GatewayRouteMethod: string | null;
+  GatewayRouteMethod?: string | null;
   /** 4层端口 */
-  GatewayRoutePort: number | null;
+  GatewayRoutePort?: number | null;
   /** 路由环境ID */
   GatewayRouteEnvId?: string | null;
+  /** 路径匹配类型，支持prefix(前缀匹配)，regex(正则匹配)， 默认prefix */
+  GatewayRoutePathMatchType?: string | null;
 }
 
 declare interface BindEnvGatewayRequest {

@@ -1413,10 +1413,12 @@ declare interface CreateFlowSignUrlResponse {
 }
 
 declare interface CreateIntegrationDepartmentRequest {
-  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 部门名称，不超过50个字符 */
   DeptName: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
   /** 电子签父部门ID，与ParentDeptOpenId二选一,优先ParentDeptId,都为空时自动填充至根节点下 */
   ParentDeptId?: string;
   /** 第三方平台中父部门ID,与ParentDeptId二选一,优先ParentDeptId,都为空时自动填充至根节点下 */
@@ -1791,10 +1793,12 @@ declare interface CreateWebThemeConfigResponse {
 }
 
 declare interface DeleteIntegrationDepartmentRequest {
-  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 电子签中的部门id,通过DescribeIntegrationDepartments接口可获得 */
   DeptId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
   /** 交接部门ID。待删除部门中的合同、印章和模板数据，交接至该部门ID下，未填写交接至公司根部门。 */
   ReceiveDeptId?: string;
 }
@@ -2011,10 +2015,12 @@ declare interface DescribeFlowTemplatesResponse {
 }
 
 declare interface DescribeIntegrationDepartmentsRequest {
-  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 查询类型 0-查询单个部门节点 1-单个部门节点及一级子节点部门列表 */
   QueryType: number;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
   /** 部门ID,与DeptOpenId二选一,优先DeptId,都为空时获取根节点数据 */
   DeptId?: string;
   /** 客户系统部门ID,与DeptId二选一,优先DeptId,都为空时获取根节点数据 */
@@ -2247,10 +2253,12 @@ declare interface ModifyApplicationCallbackInfoResponse {
 }
 
 declare interface ModifyIntegrationDepartmentRequest {
-  /** 操作人信息，UserId必填且需拥有组织架构管理权限 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 电子签部门ID,通过DescribeIntegrationDepartments接口可以获取 */
   DeptId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
   /** 电子签父部门ID，通过DescribeIntegrationDepartments接口可以获取 */
   ParentDeptId?: string;
   /** 部门名称，不超过50个字符 */
