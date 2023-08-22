@@ -284,6 +284,36 @@ declare interface FirmwareInfo {
   CreatorNickName: string | null;
 }
 
+/** 实例信息公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效 */
+declare interface InstanceDetail {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例类型（0 公共实例 1 标准企业实例 2专享企业实例） */
+  InstanceType: number;
+  /** 地域字母缩写 */
+  Region: string;
+  /** 区域全拼 */
+  ZoneId: string;
+  /** 支持设备总数 */
+  TotalDeviceNum: number;
+  /** 以注册设备数 */
+  UsedDeviceNum: number;
+  /** 项目数 */
+  ProjectNum: number;
+  /** 产品数 */
+  ProductNum: number;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 过期时间，公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效 */
+  ExpireTime: string;
+  /** 总设备数 */
+  TotalDevice: number | null;
+  /** 激活设备数 */
+  ActivateDevice: number | null;
+}
+
 /** LoRa自定义频点信息 */
 declare interface LoRaFrequencyEntry {
   /** 频点唯一ID */
@@ -1342,6 +1372,24 @@ declare interface DescribeGatewaySubProductsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 附加查询返回包含字段值，不传返回0，有效值 ProductNum、ProjectNum、UsedDeviceNum、TotalDevice、ActivateDevice */
+  Include?: string[];
+  /** 项目ID */
+  ProjectId?: string;
+  /** 产品ID，-1 代表全部产品 */
+  ProductId?: string;
+}
+
+declare interface DescribeInstanceResponse {
+  /** 实例信息 */
+  Data: InstanceDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLoRaFrequencyRequest {
   /** 频点唯一ID */
   FreqId?: string;
@@ -2275,6 +2323,8 @@ declare interface Iotexplorer {
   DescribeGatewaySubDeviceList(data: DescribeGatewaySubDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubDeviceListResponse>;
   /** 获取网关可操作的子产品 {@link DescribeGatewaySubProductsRequest} {@link DescribeGatewaySubProductsResponse} */
   DescribeGatewaySubProducts(data: DescribeGatewaySubProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubProductsResponse>;
+  /** 获取实例详情 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
+  DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取LoRa自定义频点详情 {@link DescribeLoRaFrequencyRequest} {@link DescribeLoRaFrequencyResponse} */
   DescribeLoRaFrequency(data?: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
   /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */

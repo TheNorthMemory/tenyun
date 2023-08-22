@@ -2886,6 +2886,8 @@ declare interface RuleGroup {
   TableOwnerUserId?: number | null;
   /** 实例ID */
   InstanceId?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
 }
 
 /** 规则组执行结果 */

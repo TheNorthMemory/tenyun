@@ -188,7 +188,7 @@ declare interface AdaptiveStreamTemplate {
 
 /** 外挂字幕。 */
 declare interface AddOnSubtitle {
-  /** 插入形式，可选值：subtitle-stream：插入字幕轨道close-caption：编码到SEI帧 */
+  /** 插入形式，可选值：subtitle-stream：插入字幕轨道close-caption-708：CEA-708字幕编码到SEI帧close-caption-608：CEA-608字幕编码到SEI帧 */
   Type?: string | null;
   /** 字幕文件。 */
   Subtitle?: MediaInputInfo | null;
@@ -2288,20 +2288,22 @@ declare interface LiveStreamAiRecognitionResultInfo {
 
 /** 直播流 AI 识别结果 */
 declare interface LiveStreamAiRecognitionResultItem {
-  /** 结果的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。TransTextRecognition：语音翻译。 */
-  Type: string;
+  /** 结果的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。TransTextRecognition：语音翻译。TagRecognition：精彩打点。 */
+  Type?: string;
   /** 人脸识别结果，当 Type 为FaceRecognition 时有效。 */
-  FaceRecognitionResultSet: LiveStreamFaceRecognitionResult[];
+  FaceRecognitionResultSet?: LiveStreamFaceRecognitionResult[];
   /** 语音关键词识别结果，当 Type 为AsrWordsRecognition 时有效。 */
-  AsrWordsRecognitionResultSet: LiveStreamAsrWordsRecognitionResult[];
+  AsrWordsRecognitionResultSet?: LiveStreamAsrWordsRecognitionResult[];
   /** 文本关键词识别结果，当 Type 为OcrWordsRecognition 时有效。 */
-  OcrWordsRecognitionResultSet: LiveStreamOcrWordsRecognitionResult[];
+  OcrWordsRecognitionResultSet?: LiveStreamOcrWordsRecognitionResult[];
   /** 语音全文识别结果，当 Type 为AsrFullTextRecognition 时有效。 */
-  AsrFullTextRecognitionResultSet: LiveStreamAsrFullTextRecognitionResult[];
+  AsrFullTextRecognitionResultSet?: LiveStreamAsrFullTextRecognitionResult[];
   /** 文本全文识别结果，当 Type 为OcrFullTextRecognition 时有效。 */
-  OcrFullTextRecognitionResultSet: LiveStreamOcrFullTextRecognitionResult[];
+  OcrFullTextRecognitionResultSet?: LiveStreamOcrFullTextRecognitionResult[];
   /** 翻译结果，当Type 为 TransTextRecognition 时有效。 */
-  TransTextRecognitionResultSet: LiveStreamTransTextRecognitionResult[];
+  TransTextRecognitionResultSet?: LiveStreamTransTextRecognitionResult[];
+  /** 打点结果，当Type 为 TagRecognition 时有效。 */
+  TagRecognitionResultSet?: LiveStreamTagRecognitionResult[] | null;
 }
 
 /** 直播 AI 内容审核图片敏感结果 */
@@ -2492,6 +2494,18 @@ declare interface LiveStreamProcessTask {
   Message: string;
   /** 直播流 URL。 */
   Url: string;
+}
+
+/** 直播 AI 打点识别结果 */
+declare interface LiveStreamTagRecognitionResult {
+  /** 打点事件。 */
+  Id?: string;
+  /** 识别片段起始的 PTS 时间，单位：秒。 */
+  StartPtsTime?: number;
+  /** 识别片段终止的 PTS 时间，单位：秒。 */
+  EndPtsTime?: number;
+  /** 识别片段置信度。取值：0~100。 */
+  Confidence?: number;
 }
 
 /** 任务处理的事件通知配置。 */

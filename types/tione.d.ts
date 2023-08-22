@@ -618,6 +618,10 @@ declare interface ImageInfo {
   RegistryRegion?: string | null;
   /** TCR镜像对应的实例id */
   RegistryId?: string | null;
+  /** 是否允许导出全部内容 */
+  AllowSaveAllContent?: boolean | null;
+  /** 镜像名称 */
+  ImageName?: string | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -1969,12 +1973,12 @@ declare interface CreateModelServiceResponse {
 }
 
 declare interface CreateNotebookImageRequest {
-  /** 要保存的kernel数组 */
-  Kernels: string[];
   /** 镜像信息 */
   ImageInfo: ImageInfo;
   /** notebook id */
   NotebookId: string;
+  /** 要保存的kernel数组 */
+  Kernels?: string[];
 }
 
 declare interface CreateNotebookImageResponse {

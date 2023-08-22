@@ -104,6 +104,14 @@ declare interface EventDataInfo {
   RoomId?: number | null;
   /** 事件发生的用户。 */
   UserId?: string | null;
+  /** 用户设备类型。0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program. */
+  Device?: number | null;
+  /** 录制时长。单位：秒 */
+  Duration?: number | null;
+  /** 录制文件大小 */
+  RecordSize?: number | null;
+  /** 录制url */
+  RecordUrl?: string | null;
 }
 
 /** 房间事件信息。 */
@@ -290,7 +298,7 @@ declare interface RoomItem {
   ReplayUrl?: string | null;
   /** 录制地址（协议为https)。仅在房间结束后存在。 */
   RecordUrl?: string | null;
-  /** 最高房间内人数（包括老师），0表示不限制，默认为0 */
+  /** 最高房间内人数（不包括老师），0表示不限制，默认为0 */
   MaxMicNumber?: number | null;
   /** 打开学生麦克风/摄像头的授权开关 */
   EnableDirectControl?: number | null;

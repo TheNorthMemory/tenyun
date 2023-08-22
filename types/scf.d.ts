@@ -1756,6 +1756,32 @@ declare interface UpdateNamespaceResponse {
   RequestId?: string;
 }
 
+declare interface UpdateTriggerRequest {
+  /** 函数名称 */
+  FunctionName: string;
+  /** 触发器名称 */
+  TriggerName: string;
+  /** 触发器类型 */
+  Type: string;
+  /** 触发器开启或关闭，传参为OPEN为开启，CLOSE为关闭 */
+  Enable?: string;
+  /** 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149)方便后续进行版本的灰度发布。 */
+  Qualifier?: string;
+  /** 函数的命名空间 */
+  Namespace?: string;
+  /** TriggerDesc参数 */
+  TriggerDesc?: string;
+  /** 触发器描述 */
+  Description?: string;
+  /** 用户附加信息 */
+  CustomArgument?: string;
+}
+
+declare interface UpdateTriggerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateTriggerStatusRequest {
   /** 触发器的初始是能状态OPEN表示开启 CLOSE表示关闭 */
   Enable: string;
@@ -1869,6 +1895,8 @@ declare interface Scf {
   UpdateFunctionEventInvokeConfig(data: UpdateFunctionEventInvokeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionEventInvokeConfigResponse>;
   /** 更新命名空间 {@link UpdateNamespaceRequest} {@link UpdateNamespaceResponse} */
   UpdateNamespace(data: UpdateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNamespaceResponse>;
+  /** 更新触发器 {@link UpdateTriggerRequest} {@link UpdateTriggerResponse} */
+  UpdateTrigger(data: UpdateTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTriggerResponse>;
   /** 更新触发器状态 {@link UpdateTriggerStatusRequest} {@link UpdateTriggerStatusResponse} */
   UpdateTriggerStatus(data: UpdateTriggerStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTriggerStatusResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */

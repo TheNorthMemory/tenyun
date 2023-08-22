@@ -511,69 +511,73 @@ declare interface Config {
 /** 配置项发布信息 */
 declare interface ConfigRelease {
   /** 配置项发布ID */
-  ConfigReleaseId: string | null;
+  ConfigReleaseId?: string | null;
   /** 配置项ID */
-  ConfigId: string | null;
+  ConfigId?: string | null;
   /** 配置项名称 */
-  ConfigName: string | null;
+  ConfigName?: string | null;
   /** 配置项版本 */
-  ConfigVersion: string | null;
+  ConfigVersion?: string | null;
   /** 发布时间 */
-  ReleaseTime: string | null;
+  ReleaseTime?: string | null;
   /** 部署组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 部署组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 发布描述 */
-  ReleaseDesc: string | null;
+  ReleaseDesc?: string | null;
   /** 应用ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
+  /** 配置中心发布情况 */
+  ConfigCenters?: TsfConfigCenter[] | null;
 }
 
 /** 配置项发布日志 */
 declare interface ConfigReleaseLog {
   /** 配置项发布日志ID */
-  ConfigReleaseLogId: string | null;
+  ConfigReleaseLogId?: string | null;
   /** 配置项ID */
-  ConfigId: string | null;
+  ConfigId?: string | null;
   /** 配置项名称 */
-  ConfigName: string | null;
+  ConfigName?: string | null;
   /** 配置项版本 */
-  ConfigVersion: string | null;
+  ConfigVersion?: string | null;
   /** 部署组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 部署组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 发布时间 */
-  ReleaseTime: string | null;
+  ReleaseTime?: string | null;
   /** 发布描述 */
-  ReleaseDesc: string | null;
+  ReleaseDesc?: string | null;
   /** 发布状态 */
-  ReleaseStatus: string | null;
+  ReleaseStatus?: string | null;
   /** 上次发布的配置项ID */
-  LastConfigId: string | null;
+  LastConfigId?: string | null;
   /** 上次发布的配置项名称 */
-  LastConfigName: string | null;
+  LastConfigName?: string | null;
   /** 上次发布的配置项版本 */
-  LastConfigVersion: string | null;
+  LastConfigVersion?: string | null;
   /** 回滚标识 */
-  RollbackFlag: boolean | null;
+  RollbackFlag?: boolean | null;
+  /** 发布成功的配置中心 ALL/EXCLUSIVE/SHARE/NONE全部发布成功，独占发布成功，共享发布成功，全部发布失败 */
+  ReleasedConfigCenter?: string | null;
 }
 
 /** 配置模板对象 */
@@ -2630,6 +2634,20 @@ declare interface ThreadPicture {
   ThreadActive: CurvePoint[];
   /** 守护线程数 */
   DeamonThreadCount: CurvePoint[];
+}
+
+/** 配置中心 */
+declare interface TsfConfigCenter {
+  /** 配置中心类型 */
+  ConfigType?: string | null;
+  /** 配置中心实例id */
+  ConfigCenterInstanceId?: string | null;
+  /** 配置中心实例名称 */
+  ConfigCenterInstanceName?: string | null;
+  /** 实例地域id */
+  RegionId?: string | null;
+  /** 命名空间id */
+  NamespaceId?: string | null;
 }
 
 /** ApiDetailInfo 翻页对象 */

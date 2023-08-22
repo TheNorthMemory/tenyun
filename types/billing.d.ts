@@ -37,55 +37,77 @@ declare interface ApplicableProducts {
 /** 账单明细数据对象 */
 declare interface BillDetail {
   /** 产品名称：用户所采购的各类云产品，例如：云服务器 CVM */
-  BusinessCodeName: string;
+  BusinessCodeName?: string;
   /** 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1 */
-  ProductCodeName: string;
+  ProductCodeName?: string;
   /** 计费模式：资源的计费模式，区分为包年包月和按量计费 */
-  PayModeName: string;
+  PayModeName?: string;
   /** 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目 */
-  ProjectName: string;
+  ProjectName?: string;
   /** 地域：资源所属地域，如华南地区（广州） */
-  RegionName: string;
+  RegionName?: string;
   /** 可用区：资源所属可用区，如广州三区 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 交易类型，如包年包月新购、包年包月续费、按量计费扣费等类型 */
-  ActionTypeName: string;
+  ActionTypeName?: string;
   /** 订单ID：包年包月计费模式下订购的订单号 */
-  OrderId: string;
+  OrderId?: string;
   /** 交易ID：结算扣费单号 */
-  BillId: string;
+  BillId?: string;
   /** 扣费时间：结算扣费时间 */
-  PayTime: string;
+  PayTime?: string;
   /** 开始使用时间：产品服务开始使用时间 */
-  FeeBeginTime: string;
+  FeeBeginTime?: string;
   /** 结束使用时间：产品服务结束使用时间 */
-  FeeEndTime: string;
+  FeeEndTime?: string;
   /** 组件列表 */
-  ComponentSet: BillDetailComponent[];
+  ComponentSet?: BillDetailComponent[];
   /** 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识 */
-  PayerUin: string;
+  PayerUin?: string;
   /** 使用者UIN：实际使用资源的账号 ID */
-  OwnerUin: string;
+  OwnerUin?: string;
   /** 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ） */
-  OperateUin: string;
+  OperateUin?: string;
   /** 标签信息 */
-  Tags: BillTagInfo[] | null;
+  Tags?: BillTagInfo[] | null;
   /** 产品编码 */
-  BusinessCode: string | null;
+  BusinessCode?: string | null;
   /** 子产品编码 */
-  ProductCode: string | null;
+  ProductCode?: string | null;
   /** 交易类型编码 */
-  ActionType: string | null;
+  ActionType?: string | null;
   /** 地域ID */
-  RegionId: string | null;
+  RegionId?: string | null;
   /** 项目ID */
-  ProjectId: number;
-  /** 价格属性 */
+  ProjectId?: number;
+  /** 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息 */
   PriceInfo?: string[] | null;
+  /** 关联交易单据ID：和本笔交易关联单据 ID，如，冲销订单，记录原订单、重结订单，退费单记录对应的原购买订单号 */
+  AssociatedOrder?: BillDetailAssociatedOrder | null;
+  /** 计算说明：特殊交易类型计费结算的详细计算说明，如退费及变配 */
+  Formula?: string | null;
+  /** 计费规则：各产品详细的计费规则官网说明链接 */
+  FormulaUrl?: string | null;
+}
+
+/** 明细账单关联单据信息 */
+declare interface BillDetailAssociatedOrder {
+  /** 新购订单 */
+  PrepayPurchase?: string | null;
+  /** 续费订单 */
+  PrepayRenew?: string | null;
+  /** 升配订单 */
+  PrepayModifyUp?: string | null;
+  /** 冲销订单 */
+  ReverseOrder?: string | null;
+  /** 优惠调整后订单 */
+  NewOrder?: string | null;
+  /** 优惠调整前订单 */
+  Original?: string | null;
 }
 
 /** 账单明细组件对象 */
@@ -148,6 +170,16 @@ declare interface BillDetailComponent {
   OriginalCostWithSP?: string | null;
   /** 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价 */
   BlendedDiscount?: string | null;
+  /** 配置描述：资源配置规格信息 */
+  ComponentConfig?: BillDetailComponentConfig[] | null;
+}
+
+/** 明细账单配置描述结构 */
+declare interface BillDetailComponentConfig {
+  /** 配置描述名称 */
+  Name?: string | null;
+  /** 配置描述值 */
+  Value?: string | null;
 }
 
 /** 账单资源汇总数据对象 */
@@ -909,15 +941,15 @@ declare interface DescribeBillDetailRequest {
   PeriodType?: string;
   /** 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。 */
   Month?: string;
-  /** 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。(不支持跨月查询) */
+  /** 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。 */
   BeginTime?: string;
-  /** 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。（不支持跨月查询） */
+  /** 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。 */
   EndTime?: string;
   /** 是否需要访问列表的总记录数，用于前端分页1-表示需要， 0-表示不需要 */
   NeedRecordNum?: number;
   /** 已废弃参数，未开放 */
   ProductCode?: string;
-  /** 付费模式 prePay/postPay */
+  /** 付费模式 prePay(表示包年包月)/postPay(表示按时按量) */
   PayMode?: string;
   /** 查询指定资源信息 */
   ResourceId?: string;

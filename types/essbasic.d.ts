@@ -62,6 +62,8 @@ declare interface AutoSignConfig {
   CallbackUrl?: string;
   /** 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。 */
   VerifyChannels?: string[];
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
+  LicenseType?: number;
 }
 
 /** 基础流程信息 */
@@ -1249,6 +1251,8 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   Mobile?: string;
   /** 是否开通自动签，该功能需联系运营工作人员开通后使用 */
   EnableAutoSign?: boolean;
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
+  LicenseType?: number;
 }
 
 declare interface ChannelCreatePreparedPersonalEsignResponse {
@@ -1265,7 +1269,7 @@ declare interface ChannelCreateReleaseFlowRequest {
   NeedRelievedFlowId: string;
   /** 解除协议内容 */
   ReliveInfo: RelieveInfo;
-  /** 非必须，解除协议的本企业签署人列表，默认使用原流程的签署人列表；当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业的其他签署人来替换原流程中的原签署人，注意需要指明ApproverNumber来代表需要替换哪一个签署人，解除协议的签署人数量不能多于原流程的签署人数量 */
+  /** 非必须，解除协议的本企业签署人列表，默认使用原流程的签署人列表；当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业的其他签署人来替换原流程中的原签署人，注意需要指明ApproverNumber来代表需要替换哪一个签署人，已转发的签署人不包含在内，解除协议的签署人数量不能多于原流程的签署人数量 */
   ReleasedApprovers?: ReleasedApprover[];
   /** 签署完回调url，最大长度1000个字符 */
   CallbackUrl?: string;
@@ -1520,6 +1524,8 @@ declare interface ChannelDescribeUserAutoSignStatusResponse {
   LicenseFrom?: number;
   /** 自动签许可到期时间。当且仅当已开通自动签时有值。 */
   LicenseTo?: number;
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
+  LicenseType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

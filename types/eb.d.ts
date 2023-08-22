@@ -327,6 +327,10 @@ declare interface Transformation {
 }
 
 declare interface CheckRuleRequest {
+  /** Event信息 */
+  Event: string;
+  /** EventPattern信息 */
+  EventPattern: string;
 }
 
 declare interface CheckRuleResponse {
@@ -854,7 +858,7 @@ declare interface UpdateTransformationResponse {
 declare interface Eb {
   (): Versions;
   /** 检验规则 {@link CheckRuleRequest} {@link CheckRuleResponse} */
-  CheckRule(data?: CheckRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRuleResponse>;
+  CheckRule(data: CheckRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRuleResponse>;
   /** 检查转换器 {@link CheckTransformationRequest} {@link CheckTransformationResponse} */
   CheckTransformation(data: CheckTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTransformationResponse>;
   /** 创建事件连接器 {@link CreateConnectionRequest} {@link CreateConnectionResponse} */

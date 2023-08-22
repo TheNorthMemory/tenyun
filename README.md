@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 239+ 款产品，9855+ 服务数</summary>
+<details><summary>共计 239+ 款产品，9858+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -217,7 +217,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 intlpartnersmgt | 国际合作伙伴管理 | 2022-09-28(11) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(72) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(90) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(91) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(99) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
@@ -263,7 +263,7 @@ region | [地域管理系统](https://cloud.tencent.com/document/product/1596) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(65) |
-scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(45+7) |
+scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(46+7) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(26) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10) |
 smop | [腾讯安心用户运营平台](https://cloud.tencent.com/document/product/1310) | 2020-12-03(1) |
@@ -329,7 +329,7 @@ vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(160) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(313) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(53) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(54) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(296) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

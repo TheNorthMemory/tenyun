@@ -1161,49 +1161,51 @@ declare interface Tag {
 /** 主题实例 */
 declare interface Topic {
   /** 最后一次间隔内发布消息的平均byte大小。 */
-  AverageMsgSize: string | null;
+  AverageMsgSize?: string | null;
   /** 消费者数量。 */
-  ConsumerCount: string | null;
+  ConsumerCount?: string | null;
   /** 被记录下来的消息总数。 */
-  LastConfirmedEntry: string | null;
+  LastConfirmedEntry?: string | null;
   /** 最后一个ledger创建的时间。 */
-  LastLedgerCreatedTimestamp: string | null;
+  LastLedgerCreatedTimestamp?: string | null;
   /** 本地和复制的发布者每秒发布消息的速率。 */
-  MsgRateIn: string | null;
+  MsgRateIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的数量之和。 */
-  MsgRateOut: string | null;
+  MsgRateOut?: string | null;
   /** 本地和复制的发布者每秒发布消息的byte。 */
-  MsgThroughputIn: string | null;
+  MsgThroughputIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的byte。 */
-  MsgThroughputOut: string | null;
+  MsgThroughputOut?: string | null;
   /** 被记录下来的消息总数。 */
-  NumberOfEntries: string | null;
+  NumberOfEntries?: string | null;
   /** 分区数<=0：topic下无子分区。 */
-  Partitions: number | null;
+  Partitions?: number | null;
   /** 生产者数量。 */
-  ProducerCount: string | null;
+  ProducerCount?: string | null;
   /** 以byte计算的所有消息存储总量。 */
-  TotalSize: string | null;
+  TotalSize?: string | null;
   /** 分区topic里面的子分区。 */
-  SubTopicSets: PartitionsTopic[] | null;
+  SubTopicSets?: PartitionsTopic[] | null;
   /** topic类型描述：0：普通消息；1：全局顺序消息；2：局部顺序消息；3：重试队列；4：死信队列；5：事务消息。 */
-  TopicType: number | null;
+  TopicType?: number | null;
   /** 环境（命名空间）名称。 */
-  EnvironmentId: string | null;
+  EnvironmentId?: string | null;
   /** 主题名称。 */
-  TopicName: string | null;
+  TopicName?: string | null;
   /** 说明，128个字符以内。 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 最近修改时间。 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 生产者上限。 */
-  ProducerLimit: string | null;
+  ProducerLimit?: string | null;
   /** 消费者上限。 */
-  ConsumerLimit: string | null;
+  ConsumerLimit?: string | null;
   /** 0: 非持久非分区1: 非持久分区2: 持久非分区3: 持久分区 */
-  PulsarTopicType: number | null;
+  PulsarTopicType?: number | null;
+  /** 未消费消息过期时间，单位：秒 */
+  MsgTTL?: number | null;
 }
 
 /** 主题关键信息 */
@@ -1697,6 +1699,8 @@ declare interface CreateTopicRequest {
   ClusterId?: string;
   /** Pulsar 主题类型0: 非持久非分区1: 非持久分区2: 持久非分区3: 持久分区 */
   PulsarTopicType?: number;
+  /** 未消费消息过期时间，单位：秒，取值范围：60秒~15天。 */
+  MsgTTL?: number;
 }
 
 declare interface CreateTopicResponse {
@@ -3091,13 +3095,15 @@ declare interface ModifyTopicRequest {
   Remark?: string;
   /** Pulsar 集群的ID */
   ClusterId?: string;
+  /** 未消费消息过期时间，单位：秒，取值范围：60秒~15天。 */
+  MsgTTL?: number;
 }
 
 declare interface ModifyTopicResponse {
   /** 分区数 */
-  Partitions: number;
+  Partitions?: number;
   /** 备注，128字符以内。 */
-  Remark: string;
+  Remark?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

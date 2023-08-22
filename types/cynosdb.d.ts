@@ -2929,9 +2929,9 @@ declare interface DescribeSupportProxyVersionRequest {
 
 declare interface DescribeSupportProxyVersionResponse {
   /** 支持的数据库代理版本集合 */
-  SupportProxyVersions: string[] | null;
+  SupportProxyVersions?: string[] | null;
   /** 当前proxy版本号 */
-  CurrentProxyVersion: string | null;
+  CurrentProxyVersion?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

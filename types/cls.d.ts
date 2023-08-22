@@ -5,41 +5,43 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 告警多维分析一些配置信息 */
 declare interface AlarmAnalysisConfig {
   /** 键 */
-  Key: string;
+  Key: string | null;
   /** 值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 告警策略描述 */
 declare interface AlarmInfo {
   /** 告警策略名称。 */
-  Name: string;
+  Name?: string;
   /** 监控对象列表。 */
-  AlarmTargets: AlarmTargetInfo[];
+  AlarmTargets?: AlarmTargetInfo[];
   /** 监控任务运行时间点。 */
-  MonitorTime: MonitorTime;
+  MonitorTime?: MonitorTime;
   /** 触发条件。 */
-  Condition: string;
+  Condition?: string;
   /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。 */
-  TriggerCount: number;
+  TriggerCount?: number;
   /** 告警重复的周期。单位是min。取值范围是0~1440。 */
-  AlarmPeriod: number;
+  AlarmPeriod?: number;
   /** 关联的告警通知模板列表。 */
-  AlarmNoticeIds: string[];
+  AlarmNoticeIds?: string[];
   /** 开启状态。 */
-  Status: boolean;
+  Status?: boolean;
   /** 告警策略ID。 */
-  AlarmId: string;
+  AlarmId?: string;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 自定义通知模板 */
-  MessageTemplate: string | null;
+  MessageTemplate?: string | null;
   /** 自定义回调模板 */
-  CallBack: CallBackInfo | null;
+  CallBack?: CallBackInfo | null;
   /** 多维分析设置 */
-  Analysis: AnalysisDimensional[] | null;
+  Analysis?: AnalysisDimensional[] | null;
+  /** 多触发条件。 */
+  MultiConditions?: MultiCondition[] | null;
 }
 
 /** 告警通知模板类型 */
@@ -58,44 +60,46 @@ declare interface AlarmNotice {
   CreateTime?: string | null;
   /** 最近更新时间。 */
   UpdateTime?: string | null;
+  /** 通知规则。 */
+  NoticeRules?: NoticeRule[] | null;
 }
 
 /** 告警对象 */
 declare interface AlarmTarget {
   /** 日志主题ID。 */
-  TopicId: string;
+  TopicId: string | null;
   /** 查询语句。 */
-  Query: string;
+  Query: string | null;
   /** 告警对象序号；从1开始递增。 */
-  Number: number;
+  Number: number | null;
   /** 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。 */
-  StartTimeOffset: number;
+  StartTimeOffset: number | null;
   /** 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。 */
-  EndTimeOffset: number;
+  EndTimeOffset: number | null;
   /** 日志集ID。 */
-  LogsetId: string;
+  LogsetId: string | null;
   /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
-  SyntaxRule?: number;
+  SyntaxRule?: number | null;
 }
 
 /** 告警对象 */
 declare interface AlarmTargetInfo {
   /** 日志集ID。 */
-  LogsetId: string;
+  LogsetId?: string;
   /** 日志集名称。 */
-  LogsetName: string;
+  LogsetName?: string;
   /** 日志主题ID。 */
-  TopicId: string;
+  TopicId?: string;
   /** 日志主题名称。 */
-  TopicName: string;
+  TopicName?: string;
   /** 查询语句。 */
-  Query: string;
+  Query?: string;
   /** 告警对象序号。 */
-  Number: number;
+  Number?: number;
   /** 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
 }
 
 /** 告警通知渠道组详情 */
@@ -286,6 +290,8 @@ declare interface ContainerFileInfo {
   LogPath: string;
   /** 日志名称 */
   FilePattern: string;
+  /** 日志文件信息 */
+  FilePaths?: FilePathInfo[];
   /** pod标签信息 */
   IncludeLabels?: string[] | null;
   /** 工作负载信息 */
@@ -294,6 +300,8 @@ declare interface ContainerFileInfo {
   ExcludeNamespace?: string | null;
   /** 需要排除的pod标签信息 */
   ExcludeLabels?: string[] | null;
+  /** metadata信息 */
+  CustomLabels?: string[] | null;
 }
 
 /** 自建k8s-容器标准输出信息 */
@@ -312,6 +320,8 @@ declare interface ContainerStdoutInfo {
   ExcludeNamespace?: string | null;
   /** 需要排除的pod标签信息 */
   ExcludeLabels?: string[] | null;
+  /** metadata信息 */
+  CustomLabels?: string[] | null;
 }
 
 /** 自建k8s-工作负载信息 */
@@ -554,6 +564,14 @@ declare interface ExtractRuleInfo {
   MetaTags?: MetaTagInfo[];
   /** windows事件日志采集 */
   EventLogRules?: EventLog[];
+}
+
+/** 文件路径信息 */
+declare interface FilePathInfo {
+  /** 文件路径 */
+  Path?: string;
+  /** 文件名称 */
+  File?: string;
 }
 
 /** 过滤器 */
@@ -878,6 +896,14 @@ declare interface MonitorTime {
   Time: number;
 }
 
+/** 多触发条件。 */
+declare interface MultiCondition {
+  /** 触发条件。 */
+  Condition?: string | null;
+  /** 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。 不填则默认为0。 */
+  AlarmLevel?: number | null;
+}
+
 /** 多日志主题检索相关信息 */
 declare interface MultiTopicSearchInformation {
   /** 要检索分析的日志主题ID */
@@ -900,6 +926,16 @@ declare interface NoticeReceiver {
   EndTime?: string;
   /** 位序 */
   Index?: number;
+}
+
+/** 通知规则 */
+declare interface NoticeRule {
+  /** 告警通知模板接收者信息。 */
+  NoticeReceivers?: NoticeReceiver[] | null;
+  /** 告警通知模板回调信息。 */
+  WebCallbacks?: WebCallback[] | null;
+  /** 匹配规则。 */
+  Rule?: string | null;
 }
 
 /** Parquet内容 */
@@ -1260,11 +1296,13 @@ declare interface CreateAlarmNoticeRequest {
   /** 通知渠道组名称。 */
   Name: string;
   /** 通知类型。可选值： Trigger - 告警触发 Recovery - 告警恢复 All - 告警触发和告警恢复 */
-  Type: string;
+  Type?: string;
   /** 通知接收对象。 */
   NoticeReceivers?: NoticeReceiver[];
   /** 接口回调信息（包括企业微信）。 */
   WebCallbacks?: WebCallback[];
+  /** 通知规则。 注意: - Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。 */
+  NoticeRules?: NoticeRule[];
 }
 
 declare interface CreateAlarmNoticeResponse {
@@ -1281,14 +1319,16 @@ declare interface CreateAlarmRequest {
   AlarmTargets: AlarmTarget[];
   /** 监控任务运行时间点。 */
   MonitorTime: MonitorTime;
-  /** 触发条件。 */
-  Condition: string;
   /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。 */
   TriggerCount: number;
   /** 告警重复的周期。单位是分钟。取值范围是0~1440。 */
   AlarmPeriod: number;
   /** 关联的告警通知模板列表。 */
   AlarmNoticeIds: string[];
+  /** 触发条件。 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  Condition?: string;
+  /** 多触发条件。 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  MultiConditions?: MultiCondition[];
   /** 是否开启告警策略。默认值为true */
   Status?: boolean;
   /** 用户自定义告警内容 */
@@ -2383,6 +2423,8 @@ declare interface ModifyAlarmNoticeRequest {
   NoticeReceivers?: NoticeReceiver[];
   /** 接口回调信息（包括企业微信）。 */
   WebCallbacks?: WebCallback[];
+  /** 通知规则。注意: - Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。- 传其中一组数据，则另一组数据置空。 */
+  NoticeRules?: NoticeRule[];
 }
 
 declare interface ModifyAlarmNoticeResponse {
@@ -2397,8 +2439,12 @@ declare interface ModifyAlarmRequest {
   Name?: string;
   /** 监控任务运行时间点。 */
   MonitorTime?: MonitorTime;
-  /** 触发条件。 */
+  /** 触发条件。注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   Condition?: string;
+  /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  AlarmLevel?: number;
+  /** 多触发条件。 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  MultiConditions?: MultiCondition[];
   /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。 */
   TriggerCount?: number;
   /** 告警重复的周期。单位是分钟。取值范围是0~1440。 */
