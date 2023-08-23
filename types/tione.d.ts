@@ -927,55 +927,57 @@ declare interface NotebookImageRecord {
 /** Notebook列表元素 */
 declare interface NotebookSetItem {
   /** notebook ID */
-  Id: string;
+  Id?: string;
   /** notebook 名称 */
-  Name: string;
+  Name?: string;
   /** 计费模式 */
-  ChargeType: string;
+  ChargeType?: string;
   /** 资源配置 */
-  ResourceConf: ResourceConf;
+  ResourceConf?: ResourceConf;
   /** 预付费资源组 */
-  ResourceGroupId: string | null;
+  ResourceGroupId?: string | null;
   /** 存储卷大小 */
-  VolumeSizeInGB: number | null;
+  VolumeSizeInGB?: number | null;
   /** 计费金额信息，eg：2.00元/小时 (for后付费) */
-  BillingInfos: string[] | null;
+  BillingInfos?: string[] | null;
   /** 标签配置 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 启动时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 运行时间 */
-  RuntimeInSeconds: number | null;
+  RuntimeInSeconds?: number | null;
   /** 计费状态 */
-  ChargeStatus: string | null;
+  ChargeStatus?: string | null;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 错误原因 */
-  FailureReason: string | null;
+  FailureReason?: string | null;
   /** 结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** Pod名称 */
-  PodName: string | null;
+  PodName?: string | null;
   /** 后付费资源规格名称 */
-  InstanceTypeAlias: string | null;
+  InstanceTypeAlias?: string | null;
   /** 预付费资源组名称 */
-  ResourceGroupName: string | null;
+  ResourceGroupName?: string | null;
   /** 是否自动终止 */
-  AutoStopping: boolean;
+  AutoStopping?: boolean;
   /** 自动停止时间 */
-  AutomaticStopTime: number | null;
+  AutomaticStopTime?: number | null;
   /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
-  VolumeSourceType: string | null;
+  VolumeSourceType?: string | null;
   /** CFS存储的配置 */
-  VolumeSourceCFS: CFSConfig | null;
+  VolumeSourceCFS?: CFSConfig | null;
   /** notebook 信息 */
-  Message: string | null;
+  Message?: string | null;
   /** notebook用户类型 */
   UserTypes?: string[] | null;
+  /** SSH配置 */
+  SSHConfig?: SSHConfig | null;
 }
 
 /** OCR场景标签列表 */
@@ -1030,6 +1032,8 @@ declare interface PodInfo {
   Name?: string | null;
   /** pod的IP */
   IP?: string | null;
+  /** pod状态 */
+  Status?: string | null;
 }
 
 /** 点信息描述 */
@@ -1130,6 +1134,18 @@ declare interface RowValue {
   Name: string;
   /** 列值 */
   Value: string | null;
+}
+
+/** notebook ssh端口配置 */
+declare interface SSHConfig {
+  /** 是否开启ssh */
+  Enable?: boolean | null;
+  /** 公钥信息 */
+  PublicKey?: string | null;
+  /** 端口号 */
+  Port?: number | null;
+  /** 登录命令 */
+  LoginCommand?: string | null;
 }
 
 /** 定时的事务和行为 */
@@ -1595,135 +1611,135 @@ declare interface TrainingModelVersionDTO {
 /** 训练任务详情 */
 declare interface TrainingTaskDetail {
   /** 训练任务ID */
-  Id: string;
+  Id?: string;
   /** 训练任务名称 */
-  Name: string;
+  Name?: string;
   /** 主账号uin */
-  Uin: string;
+  Uin?: string;
   /** 子账号uin */
-  SubUin: string;
+  SubUin?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH */
-  FrameworkName: string | null;
+  FrameworkName?: string | null;
   /** 训练框架版本 */
-  FrameworkVersion: string | null;
+  FrameworkVersion?: string | null;
   /** 框架运行环境 */
-  FrameworkEnvironment: string | null;
+  FrameworkEnvironment?: string | null;
   /** 计费模式 */
-  ChargeType: string;
+  ChargeType?: string;
   /** 预付费专用资源组 */
-  ResourceGroupId: string | null;
+  ResourceGroupId?: string | null;
   /** 资源配置 */
-  ResourceConfigInfos: ResourceConfigInfo[];
+  ResourceConfigInfos?: ResourceConfigInfo[];
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD */
-  TrainingMode: string | null;
+  TrainingMode?: string | null;
   /** 代码包 */
-  CodePackagePath: CosPathInfo;
+  CodePackagePath?: CosPathInfo;
   /** 启动命令信息 */
-  StartCmdInfo: StartCmdInfo;
+  StartCmdInfo?: StartCmdInfo;
   /** 数据来源，eg：DATASET、COS */
-  DataSource: string | null;
+  DataSource?: string | null;
   /** 数据配置 */
-  DataConfigs: DataConfig[] | null;
+  DataConfigs?: DataConfig[] | null;
   /** 调优参数 */
-  TuningParameters: string | null;
+  TuningParameters?: string | null;
   /** 训练输出 */
-  Output: CosPathInfo;
+  Output?: CosPathInfo;
   /** 是否上报日志 */
-  LogEnable: boolean;
+  LogEnable?: boolean;
   /** 日志配置 */
-  LogConfig: LogConfig | null;
+  LogConfig?: LogConfig | null;
   /** VPC ID */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 自定义镜像信息 */
-  ImageInfo: ImageInfo | null;
+  ImageInfo?: ImageInfo | null;
   /** 运行时长 */
-  RuntimeInSeconds: number | null;
+  RuntimeInSeconds?: number | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 训练开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
-  ChargeStatus: string;
+  ChargeStatus?: string;
   /** 最近一次实例ID */
-  LatestInstanceId: string | null;
+  LatestInstanceId?: string | null;
   /** TensorBoard ID */
-  TensorBoardId: string | null;
+  TensorBoardId?: string | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 失败原因 */
-  FailureReason: string | null;
+  FailureReason?: string | null;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 训练结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 计费金额信息，eg：2.00元/小时 (按量计费) */
-  BillingInfo: string | null;
+  BillingInfo?: string | null;
   /** 预付费专用资源组名称 */
-  ResourceGroupName: string | null;
+  ResourceGroupName?: string | null;
   /** 任务信息 */
-  Message: string | null;
+  Message?: string | null;
   /** 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
-  Status: string;
+  Status?: string;
   /** 回调地址 */
-  CallbackUrl: string | null;
+  CallbackUrl?: string | null;
 }
 
 /** 出参类型 */
 declare interface TrainingTaskSetItem {
   /** 训练任务ID */
-  Id: string;
+  Id?: string;
   /** 训练任务名称 */
-  Name: string;
+  Name?: string;
   /** 框架名称 */
-  FrameworkName: string | null;
+  FrameworkName?: string | null;
   /** 训练框架版本 */
-  FrameworkVersion: string | null;
+  FrameworkVersion?: string | null;
   /** 框架运行环境 */
-  FrameworkEnvironment: string | null;
+  FrameworkEnvironment?: string | null;
   /** 计费模式 */
-  ChargeType: string;
+  ChargeType?: string;
   /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
-  ChargeStatus: string;
+  ChargeStatus?: string;
   /** 预付费专用资源组 */
-  ResourceGroupId: string | null;
+  ResourceGroupId?: string | null;
   /** 资源配置 */
-  ResourceConfigInfos: ResourceConfigInfo[];
+  ResourceConfigInfos?: ResourceConfigInfo[];
   /** 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD */
-  TrainingMode: string | null;
+  TrainingMode?: string | null;
   /** 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
-  Status: string;
+  Status?: string;
   /** 运行时长 */
-  RuntimeInSeconds: number | null;
+  RuntimeInSeconds?: number | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 训练开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 训练结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 训练输出 */
-  Output: CosPathInfo;
+  Output?: CosPathInfo;
   /** 失败原因 */
-  FailureReason: string | null;
+  FailureReason?: string | null;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 计费金额信息，eg：2.00元/小时 (按量计费) */
-  BillingInfo: string;
+  BillingInfo?: string;
   /** 预付费专用资源组名称 */
-  ResourceGroupName: string;
+  ResourceGroupName?: string;
   /** 自定义镜像信息 */
-  ImageInfo: ImageInfo | null;
+  ImageInfo?: ImageInfo | null;
   /** 任务信息 */
-  Message: string | null;
+  Message?: string | null;
   /** 标签配置 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 回调地址 */
-  CallbackUrl: string | null;
+  CallbackUrl?: string | null;
 }
 
 /** 大模型生成Token统计 */
@@ -2031,6 +2047,8 @@ declare interface CreateNotebookRequest {
   ImageInfo?: ImageInfo;
   /** 镜像类型 */
   ImageType?: string;
+  /** SSH配置信息 */
+  SSHConfig?: SSHConfig;
 }
 
 declare interface CreateNotebookResponse {
@@ -2127,14 +2145,6 @@ declare interface CreateTrainingTaskRequest {
   ChargeType: string;
   /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}] */
   ResourceConfigInfos: ResourceConfigInfo[];
-  /** COS代码包路径 */
-  CodePackagePath: CosPathInfo;
-  /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
-  TrainingMode: string;
-  /** COS训练输出路径 */
-  Output: CosPathInfo;
-  /** 是否上报日志 */
-  LogEnable: boolean;
   /** 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH */
   FrameworkName?: string;
   /** 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9 */
@@ -2147,18 +2157,26 @@ declare interface CreateTrainingTaskRequest {
   Tags?: Tag[];
   /** 自定义镜像信息 */
   ImageInfo?: ImageInfo;
+  /** COS代码包路径 */
+  CodePackagePath?: CosPathInfo;
   /** 启动命令信息，默认为sh start.sh */
   StartCmdInfo?: StartCmdInfo;
+  /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
+  TrainingMode?: string;
   /** 数据配置，依赖DataSource字段 */
   DataConfigs?: DataConfig[];
   /** VPC Id */
   VpcId?: string;
   /** 子网Id */
   SubnetId?: string;
+  /** COS训练输出路径 */
+  Output?: CosPathInfo;
   /** CLS日志配置 */
   LogConfig?: LogConfig;
   /** 调优参数 */
   TuningParameters?: string;
+  /** 是否上报日志 */
+  LogEnable?: boolean;
   /** 备注，最多500个字 */
   Remark?: string;
   /** 数据来源，eg：DATASET、COS、CFS、HDFS */
@@ -2881,7 +2899,7 @@ declare interface DescribeTrainingTaskRequest {
 
 declare interface DescribeTrainingTaskResponse {
   /** 训练任务详情 */
-  TrainingTaskDetail: TrainingTaskDetail;
+  TrainingTaskDetail?: TrainingTaskDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3025,6 +3043,8 @@ declare interface ModifyNotebookRequest {
   ImageInfo?: ImageInfo;
   /** 镜像类型 */
   ImageType?: string;
+  /** SSH配置 */
+  SSHConfig?: SSHConfig;
 }
 
 declare interface ModifyNotebookResponse {

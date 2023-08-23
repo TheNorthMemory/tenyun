@@ -454,6 +454,66 @@ declare interface FirewallRuleInfo {
   FirewallRuleDescription: string;
 }
 
+/** 防火墙模板信息。 */
+declare interface FirewallTemplate {
+  /** 模板Id。 */
+  TemplateId?: string;
+  /** 模板名称。 */
+  TemplateName?: string;
+  /** 模板类型。 */
+  TemplateType?: string;
+  /** 模板状态。 */
+  TemplateState?: string;
+  /** 模板创建时间。 */
+  CreatedTime?: string;
+}
+
+/** 防火墙模板应用记录。 */
+declare interface FirewallTemplateApplyRecord {
+  /** 任务ID。 */
+  TaskId?: string;
+  /** 应用模板的时间。 */
+  ApplyTime?: string;
+  /** 模板规则列表。 */
+  TemplateRuleSet?: FirewallTemplateRule[];
+  /** 应用模板的执行状态。 */
+  ApplyState?: string;
+  /** 应用成功的实例数量。 */
+  SuccessCount?: number;
+  /** 应用失败的实例数量。 */
+  FailedCount?: number;
+  /** 正在应用中的实例数量。 */
+  RunningCount?: number;
+  /** 应用模板的执行细节。 */
+  ApplyDetailSet?: FirewallTemplateApplyRecordDetail[];
+}
+
+/** 防火墙模板应用记录详情。 */
+declare interface FirewallTemplateApplyRecordDetail {
+  /** 实例标识信息。 */
+  Instance?: InstanceIdentifier;
+  /** 防火墙模板应用状态。 */
+  ApplyState?: string;
+  /** 防火墙模板应用错误信息。 */
+  ErrorMessage?: string;
+}
+
+/** 防火墙模板规则信息 */
+declare interface FirewallTemplateRule {
+  /** 防火墙模板规则ID。 */
+  TemplateRuleId?: string;
+  /** 防火墙规则。 */
+  FirewallRule?: FirewallRule;
+}
+
+/** 防火墙模板规则信息 */
+declare interface FirewallTemplateRuleInfo {
+  /** 防火墙模板规则ID。 */
+  TemplateRuleId?: string;
+  /** 防火墙规则信息。 */
+  FirewallRuleInfo?: FirewallRuleInfo;
+}
+
 /** 描述通用资源配额信息。 */
 declare interface GeneralResourceQuota {
   /** 资源名称。 */
@@ -536,6 +596,14 @@ declare interface InstanceDeniedActions {
   InstanceId: string | null;
   /** 操作限制列表。 */
   DeniedActions: DeniedAction[];
+}
+
+/** 实例标识信息。 */
+declare interface InstanceIdentifier {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 实例地域。 */
+  Region: string;
 }
 
 /** 关于Lighthouse Instance实例的价格信息 */
@@ -838,6 +906,20 @@ declare interface ApplyDiskBackupResponse {
   RequestId?: string;
 }
 
+declare interface ApplyFirewallTemplateRequest {
+  /** 模板ID。 */
+  TemplateId: string;
+  /** 应用防火墙模板的实例列表。 */
+  ApplyInstances: InstanceIdentifier[];
+}
+
+declare interface ApplyFirewallTemplateResponse {
+  /** 任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ApplyInstanceSnapshotRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -960,6 +1042,34 @@ declare interface CreateFirewallRulesResponse {
   RequestId?: string;
 }
 
+declare interface CreateFirewallTemplateRequest {
+  /** 模板名称。 */
+  TemplateName: string;
+  /** 防火墙规则列表。 */
+  TemplateRules?: FirewallRule[];
+}
+
+declare interface CreateFirewallTemplateResponse {
+  /** 防火墙模板ID。 */
+  TemplateId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFirewallTemplateRulesRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+  /** 防火墙模板规则列表。 */
+  TemplateRules: FirewallRule[];
+}
+
+declare interface CreateFirewallTemplateRulesResponse {
+  /** 规则ID列表。 */
+  TemplateRuleIdSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstanceSnapshotRequest {
   /** 需要创建快照的实例 ID。 */
   InstanceId: string;
@@ -997,6 +1107,8 @@ declare interface CreateInstancesRequest {
   Containers?: DockerContainerConfiguration[];
   /** 是否自动使用代金券。默认不使用。 */
   AutoVoucher?: boolean;
+  /** 防火墙模版ID。若不指定该参数，则使用默认防火墙策略。 */
+  FirewallTemplateId?: string;
 }
 
 declare interface CreateInstancesResponse {
@@ -1048,6 +1160,28 @@ declare interface DeleteFirewallRulesRequest {
 }
 
 declare interface DeleteFirewallRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFirewallTemplateRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+}
+
+declare interface DeleteFirewallTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFirewallTemplateRulesRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+  /** 防火墙模板规则ID列表。 */
+  TemplateRuleIds: string[];
+}
+
+declare interface DeleteFirewallTemplateRulesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1388,6 +1522,86 @@ declare interface DescribeFirewallRulesTemplateResponse {
   TotalCount: number;
   /** 防火墙规则详细信息列表。 */
   FirewallRuleSet: FirewallRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFirewallTemplateApplyRecordsRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+  /** 应用任务ID列表。 */
+  TaskIds?: string[];
+}
+
+declare interface DescribeFirewallTemplateApplyRecordsResponse {
+  /** 防火墙模板应用记录列表。 */
+  ApplyRecordSet?: FirewallTemplateApplyRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFirewallTemplateQuotaRequest {
+}
+
+declare interface DescribeFirewallTemplateQuotaResponse {
+  /** 当前可用配额。 */
+  Available?: number;
+  /** 总配额。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFirewallTemplateRuleQuotaRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+}
+
+declare interface DescribeFirewallTemplateRuleQuotaResponse {
+  /** 当前可用配额。 */
+  Available?: number;
+  /** 总配额。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFirewallTemplateRulesRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+  /** 防火墙模板规则ID列表。 */
+  TemplateRuleIds?: string[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeFirewallTemplateRulesResponse {
+  /** 防火墙模板规则总数量。 */
+  TotalCount?: number;
+  /** 防火墙模板规则信息列表。 */
+  TemplateRuleSet?: FirewallTemplateRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFirewallTemplatesRequest {
+  /** 防火墙模板ID列表。 */
+  TemplateIds?: string[];
+  /** 过滤器列表。template-id按照【防火墙模版所属的ID】进行过滤。类型：String必选：否template-name按照【防火墙模版所属的名称】进行过滤。类型：String必选：否template-type按照【防火墙模版的类型】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 TemplateIds 和 Filters。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeFirewallTemplatesResponse {
+  /** 模板总数量。 */
+  TotalCount?: number;
+  /** 防火墙模板列表。 */
+  TemplateSet?: FirewallTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1906,6 +2120,18 @@ declare interface ModifyFirewallRulesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyFirewallTemplateRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+  /** 模板名称。 */
+  TemplateName?: string;
+}
+
+declare interface ModifyFirewallTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstancesAttributeRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
@@ -2038,6 +2264,20 @@ declare interface RenewInstancesResponse {
   RequestId?: string;
 }
 
+declare interface ReplaceFirewallTemplateRuleRequest {
+  /** 防火墙模板ID。 */
+  TemplateId: string;
+  /** 防火墙模板规则ID。 */
+  TemplateRuleId: string;
+  /** 替换后的防火墙模板规则。 */
+  TemplateRule: FirewallRule;
+}
+
+declare interface ReplaceFirewallTemplateRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RerunDockerContainerRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2060,6 +2300,20 @@ declare interface ResetAttachCcnRequest {
 }
 
 declare interface ResetAttachCcnResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetFirewallTemplateRulesRequest {
+  /** 模板ID。 */
+  TemplateId: string;
+  /** 重置后的防火墙模板规则列表。 */
+  TemplateRules: FirewallRule[];
+}
+
+declare interface ResetFirewallTemplateRulesResponse {
+  /** 重置后的规则ID列表。 */
+  TemplateRuleIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2191,6 +2445,8 @@ declare interface Lighthouse {
   (): Versions;
   /** 回滚云硬盘备份点 {@link ApplyDiskBackupRequest} {@link ApplyDiskBackupResponse} */
   ApplyDiskBackup(data: ApplyDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyDiskBackupResponse>;
+  /** 应用防火墙模板 {@link ApplyFirewallTemplateRequest} {@link ApplyFirewallTemplateResponse} */
+  ApplyFirewallTemplate(data: ApplyFirewallTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFirewallTemplateResponse>;
   /** 回滚实例快照 {@link ApplyInstanceSnapshotRequest} {@link ApplyInstanceSnapshotResponse} */
   ApplyInstanceSnapshot(data: ApplyInstanceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyInstanceSnapshotResponse>;
   /** 绑定密钥对 {@link AssociateInstancesKeyPairsRequest} {@link AssociateInstancesKeyPairsResponse} */
@@ -2207,6 +2463,10 @@ declare interface Lighthouse {
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** 添加防火墙规则 {@link CreateFirewallRulesRequest} {@link CreateFirewallRulesResponse} */
   CreateFirewallRules(data: CreateFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirewallRulesResponse>;
+  /** 创建防火墙模板 {@link CreateFirewallTemplateRequest} {@link CreateFirewallTemplateResponse} */
+  CreateFirewallTemplate(data: CreateFirewallTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirewallTemplateResponse>;
+  /** 创建防火墙模板规则 {@link CreateFirewallTemplateRulesRequest} {@link CreateFirewallTemplateRulesResponse} */
+  CreateFirewallTemplateRules(data: CreateFirewallTemplateRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirewallTemplateRulesResponse>;
   /** 创建实例快照 {@link CreateInstanceSnapshotRequest} {@link CreateInstanceSnapshotResponse} */
   CreateInstanceSnapshot(data: CreateInstanceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceSnapshotResponse>;
   /** 创建实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
@@ -2219,6 +2479,10 @@ declare interface Lighthouse {
   DeleteDiskBackups(data: DeleteDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDiskBackupsResponse>;
   /** 删除防火墙规则 {@link DeleteFirewallRulesRequest} {@link DeleteFirewallRulesResponse} */
   DeleteFirewallRules(data: DeleteFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirewallRulesResponse>;
+  /** 删除防火墙模板 {@link DeleteFirewallTemplateRequest} {@link DeleteFirewallTemplateResponse} */
+  DeleteFirewallTemplate(data: DeleteFirewallTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirewallTemplateResponse>;
+  /** 删除防火墙模板规则 {@link DeleteFirewallTemplateRulesRequest} {@link DeleteFirewallTemplateRulesResponse} */
+  DeleteFirewallTemplateRules(data: DeleteFirewallTemplateRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirewallTemplateRulesResponse>;
   /** 删除密钥对 {@link DeleteKeyPairsRequest} {@link DeleteKeyPairsResponse} */
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
   /** 删除快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
@@ -2261,6 +2525,16 @@ declare interface Lighthouse {
   DescribeFirewallRules(data: DescribeFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesResponse>;
   /** 查询防火墙规则模板 {@link DescribeFirewallRulesTemplateRequest} {@link DescribeFirewallRulesTemplateResponse} */
   DescribeFirewallRulesTemplate(data?: DescribeFirewallRulesTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesTemplateResponse>;
+  /** 查询防火墙模板应用记录列表 {@link DescribeFirewallTemplateApplyRecordsRequest} {@link DescribeFirewallTemplateApplyRecordsResponse} */
+  DescribeFirewallTemplateApplyRecords(data: DescribeFirewallTemplateApplyRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplateApplyRecordsResponse>;
+  /** 查询防火墙模板配额 {@link DescribeFirewallTemplateQuotaRequest} {@link DescribeFirewallTemplateQuotaResponse} */
+  DescribeFirewallTemplateQuota(data?: DescribeFirewallTemplateQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplateQuotaResponse>;
+  /** 查询防火墙模板规则配额 {@link DescribeFirewallTemplateRuleQuotaRequest} {@link DescribeFirewallTemplateRuleQuotaResponse} */
+  DescribeFirewallTemplateRuleQuota(data: DescribeFirewallTemplateRuleQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplateRuleQuotaResponse>;
+  /** 查询防火墙模板规则列表 {@link DescribeFirewallTemplateRulesRequest} {@link DescribeFirewallTemplateRulesResponse} */
+  DescribeFirewallTemplateRules(data: DescribeFirewallTemplateRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplateRulesResponse>;
+  /** 查询防火墙模板列表 {@link DescribeFirewallTemplatesRequest} {@link DescribeFirewallTemplatesResponse} */
+  DescribeFirewallTemplates(data?: DescribeFirewallTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplatesResponse>;
   /** 查询通用资源配额信息 {@link DescribeGeneralResourceQuotasRequest} {@link DescribeGeneralResourceQuotasResponse} */
   DescribeGeneralResourceQuotas(data: DescribeGeneralResourceQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralResourceQuotasResponse>;
   /** 查询实例默认登录密钥属性 {@link DescribeInstanceLoginKeyPairAttributeRequest} {@link DescribeInstanceLoginKeyPairAttributeResponse} */
@@ -2329,6 +2603,8 @@ declare interface Lighthouse {
   ModifyFirewallRuleDescription(data: ModifyFirewallRuleDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRuleDescriptionResponse>;
   /** 修改防火墙规则 {@link ModifyFirewallRulesRequest} {@link ModifyFirewallRulesResponse} */
   ModifyFirewallRules(data: ModifyFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRulesResponse>;
+  /** 修改防火墙模板 {@link ModifyFirewallTemplateRequest} {@link ModifyFirewallTemplateResponse} */
+  ModifyFirewallTemplate(data: ModifyFirewallTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallTemplateResponse>;
   /** 修改实例的属性 {@link ModifyInstancesAttributeRequest} {@link ModifyInstancesAttributeResponse} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
   /** 变更实例套餐 {@link ModifyInstancesBundleRequest} {@link ModifyInstancesBundleResponse} */
@@ -2349,10 +2625,14 @@ declare interface Lighthouse {
   RenewDisks(data: RenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDisksResponse>;
   /** 续费实例 {@link RenewInstancesRequest} {@link RenewInstancesResponse} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
+  /** 替换防火墙模板规则 {@link ReplaceFirewallTemplateRuleRequest} {@link ReplaceFirewallTemplateRuleResponse} */
+  ReplaceFirewallTemplateRule(data: ReplaceFirewallTemplateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceFirewallTemplateRuleResponse>;
   /** 重新创建并运行Docker容器 {@link RerunDockerContainerRequest} {@link RerunDockerContainerResponse} */
   RerunDockerContainer(data: RerunDockerContainerRequest, config?: AxiosRequestConfig): AxiosPromise<RerunDockerContainerResponse>;
   /** 重新申请关联云联网 {@link ResetAttachCcnRequest} {@link ResetAttachCcnResponse} */
   ResetAttachCcn(data: ResetAttachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAttachCcnResponse>;
+  /** 重置防火墙模板规则 {@link ResetFirewallTemplateRulesRequest} {@link ResetFirewallTemplateRulesResponse} */
+  ResetFirewallTemplateRules(data: ResetFirewallTemplateRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetFirewallTemplateRulesResponse>;
   /** 重装系统 {@link ResetInstanceRequest} {@link ResetInstanceResponse} */
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
   /** 重置实例密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */

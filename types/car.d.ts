@@ -29,7 +29,7 @@ declare interface CreateSessionRequest {
   ClientSession?: string;
   /** 云端运行模式。RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运行默认值（空）：要求必须有客户端连接才会保持云端 App 运行。 */
   RunMode?: string;
-  /** 应用启动参数。如果请求的是多应用共享项目，此参数生效；如果请求的是关闭预启动的单应用独享项目，此参数生效；如果请求的是开启预启动的单应用独享项目，此参数失效。 */
+  /** 应用启动参数。如果请求的是多应用共享项目，此参数生效；如果请求的是关闭预启动的单应用独享项目，此参数生效；如果请求的是开启预启动的单应用独享项目，此参数失效。注意：在此参数生效的情况下，将会被追加到控制台应用或项目配置的启动参数的后面。例如，对于某关闭预启动的单应用独享项目，若在控制台中项目配置的启动参数为bar=0，而ApplicationParameters参数为foo=1，则实际应用启动参数为bar=0 foo=1。 */
   ApplicationParameters?: string;
   /** 【多人互动】房主用户ID，在多人互动模式下为必填字段。如果该用户是房主，HostUserId需要和UserId保持一致；如果该用户非房主，HostUserId需要填写房主的HostUserId。 */
   HostUserId?: string;
@@ -57,6 +57,8 @@ declare interface DestroySessionResponse {
 declare interface StartPublishStreamRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（UserId将作为StreamId进行推流，比如绑定推流域名为abc.livepush.myqcloud.com，那么推流地址为rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx） */
   UserId: string;
+  /** 推流参数，推流时携带自定义参数。 */
+  PublishStreamArgs?: string;
 }
 
 declare interface StartPublishStreamResponse {

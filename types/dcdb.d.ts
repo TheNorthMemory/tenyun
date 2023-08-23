@@ -678,30 +678,6 @@ declare interface SplitShardConfig {
   ShardStorage: number;
 }
 
-/** 描述一条sql日志的详细信息。 */
-declare interface SqlLogItem {
-  /** 本条日志在消息队列中的偏移量。 */
-  Offset: number;
-  /** 执行本条sql的用户。 */
-  User: string;
-  /** 执行本条sql的客户端IP+端口。 */
-  Client: string;
-  /** 数据库名称。 */
-  DbName: string;
-  /** 执行的sql语句。 */
-  Sql: string;
-  /** 返回的数据行数。 */
-  SelectRowNum: number;
-  /** 影响行数。 */
-  AffectRowNum: number;
-  /** Sql执行时间戳。 */
-  Timestamp: number;
-  /** Sql耗时，单位为毫秒。 */
-  TimeCostMs: number;
-  /** Sql返回码，0为成功。 */
-  ResultCode: number;
-}
-
 /** 数据库列信息 */
 declare interface TableColumn {
   /** 列名称 */
@@ -1814,32 +1790,6 @@ declare interface DescribeShardSpecResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSqlLogsRequest {
-  /** 实例 ID，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。 */
-  InstanceId: string;
-  /** SQL日志偏移。 */
-  Offset?: number;
-  /** 拉取数量（0-10000，为0时拉取总数信息）。 */
-  Limit?: number;
-}
-
-declare interface DescribeSqlLogsResponse {
-  /** 当前消息队列中的sql日志条目数。 */
-  TotalCount: number;
-  /** 消息队列中的sql日志起始偏移。 */
-  StartOffset: number;
-  /** 消息队列中的sql日志结束偏移。 */
-  EndOffset: number;
-  /** 返回的第一条sql日志的偏移。 */
-  Offset: number;
-  /** 返回的sql日志数量。 */
-  Count: number;
-  /** Sql日志列表。 */
-  SqlItems: SqlLogItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeUserTasksRequest {
   /** 任务的状态列表。0-任务启动中；1-任务运行中；2-任务成功；3-任务失败 */
   Statuses?: number[];
@@ -2455,8 +2405,6 @@ declare interface Dcdb {
   DescribeProjects(data?: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 查询分布式数据库可售卖分片规格 {@link DescribeShardSpecRequest} {@link DescribeShardSpecResponse} */
   DescribeShardSpec(data?: DescribeShardSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShardSpecResponse>;
-  /** @deprecated 获取SQL日志 {@link DescribeSqlLogsRequest} {@link DescribeSqlLogsResponse} */
-  DescribeSqlLogs(data: DescribeSqlLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlLogsResponse>;
   /** 拉取用户任务列表 {@link DescribeUserTasksRequest} {@link DescribeUserTasksResponse} */
   DescribeUserTasks(data?: DescribeUserTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserTasksResponse>;
   /** 销毁已隔离的TDSQL包年包月实例 {@link DestroyDCDBInstanceRequest} {@link DestroyDCDBInstanceResponse} */

@@ -86,6 +86,7 @@ import Dnspod, { Versions as DnspodVersions } from "./dnspod";
 import Domain, { Versions as DomainVersions } from "./domain";
 import Drm, { Versions as DrmVersions } from "./drm";
 import Ds, { Versions as DsVersions } from "./ds";
+import Dsgc, { Versions as DsgcVersions } from "./dsgc";
 import Dtf, { Versions as DtfVersions } from "./dtf";
 import Dts, { Versions as DtsVersions } from "./dts";
 import Eb, { Versions as EbVersions } from "./eb";
@@ -329,6 +330,7 @@ export declare type SERVICE_VERSIONS = {
   domain: DomainVersions,
   drm: DrmVersions,
   ds: DsVersions,
+  dsgc: DsgcVersions,
   dtf: DtfVersions,
   dts: DtsVersions,
   eb: EbVersions,
@@ -670,6 +672,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   drm: Drm,
   /** {@link Ds 文档服务} */
   ds: Ds,
+  /** {@link Dsgc 数据安全中心} */
+  dsgc: Dsgc,
   /** {@link Dtf 分布式事务} */
   dtf: Dtf,
   /** {@link Dts 数据传输服务} */

@@ -264,18 +264,20 @@ declare interface TaskListItem {
 
 /** 监控指标 */
 declare interface TaskMonitor {
+  /** 演练监控指标ID */
+  TaskMonitorId?: number;
   /** 监控指标ID */
-  TaskMonitorId: number;
+  MetricId?: number | null;
   /** 监控指标对象类型ID */
-  TaskMonitorObjectTypeId: number;
+  TaskMonitorObjectTypeId?: number;
   /** 指标名称 */
-  MetricName: string;
+  MetricName?: string;
   /** 实例ID列表 */
-  InstancesIds: string[];
+  InstancesIds?: string[];
   /** 中文指标 */
-  MetricChineseName: string | null;
+  MetricChineseName?: string | null;
   /** 单位 */
-  Unit: string | null;
+  Unit?: string | null;
 }
 
 /** 演练报告状态信息 */
@@ -408,14 +410,16 @@ declare interface TemplateListItem {
 
 /** 监控指标 */
 declare interface TemplateMonitor {
+  /** pk */
+  MonitorId?: number;
   /** 监控指标ID */
-  MonitorId: number;
+  MetricId?: number | null;
   /** 监控指标对象类型ID */
-  ObjectTypeId: number;
+  ObjectTypeId?: number;
   /** 指标名称 */
-  MetricName: string;
+  MetricName?: string;
   /** 中文指标 */
-  MetricChineseName: string | null;
+  MetricChineseName?: string | null;
 }
 
 /** 保护策略 */

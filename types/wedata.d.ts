@@ -4381,43 +4381,43 @@ declare interface TopTableStatItem {
 /** 用户文件信息 */
 declare interface UserFileDTO {
   /** 资源ID */
-  ResourceId: string | null;
+  ResourceId?: string | null;
   /** 文件名 */
-  FileName: string | null;
+  FileName?: string | null;
   /** 文件类型，如 jar zip 等 */
-  FileExtensionType: string | null;
+  FileExtensionType?: string | null;
   /** 文件上传类型，资源管理为 resource */
-  FileUploadType: string | null;
+  FileUploadType?: string | null;
   /** 文件MD5值 */
-  Md5Value: string | null;
-  /** 创建时间，秒级别的时间戳 */
-  CreateTime: number | null;
-  /** 更新时间，秒级别的时间戳 */
-  UpdateTime: number | null;
+  Md5Value?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
   /** 文件大小，单位为字节 */
-  Size: number | null;
+  Size?: number | null;
   /** 本地路径 */
-  LocalPath: string | null;
+  LocalPath?: string | null;
   /** 本地临时路径 */
-  LocalTmpPath: string | null;
+  LocalTmpPath?: string | null;
   /** 远程路径 */
-  RemotePath: string | null;
+  RemotePath?: string | null;
   /** 文件拥有者名字 */
-  OwnerName: string | null;
+  OwnerName?: string | null;
   /** 文件拥有者uin */
-  Owner: string | null;
+  Owner?: string | null;
   /** 文件深度 */
-  PathDepth: string | null;
+  PathDepth?: string | null;
   /** 项目ID */
-  ProjectId: string | null;
+  ProjectId?: string | null;
   /** 附加信息 */
-  ExtraInfo: string | null;
+  ExtraInfo?: string | null;
   /** 本地临时压缩文件绝对路径 */
-  ZipPath: string | null;
+  ZipPath?: string | null;
   /** 文件所属存储桶 */
-  Bucket: string | null;
+  Bucket?: string | null;
   /** 文件所属存储桶的地域 */
-  Region: string | null;
+  Region?: string | null;
 }
 
 /** 开发空间-获取数据开发脚本信息响应体 */

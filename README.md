@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 239+ 款产品，9858+ 服务数</summary>
+<details><summary>共计 240+ 款产品，9871+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -176,12 +176,13 @@ dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(54) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
-dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(74) |
+dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(91) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(68) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(27) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
+dsgc | [数据安全中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(1) |
 dtf | [分布式事务](https://cloud.tencent.com/document/product/1224) | 2020-05-06(1) |
 dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 2021-12-06(48) | 2018-03-30(23) |
 eb | [事件总线](https://cloud.tencent.com/document/product/1359) | 2021-04-16(28) |
@@ -227,7 +228,7 @@ ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
 lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(55) |
-lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(92) |
+lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(105) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(149) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |

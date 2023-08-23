@@ -357,13 +357,13 @@ declare interface DescribeDashboardRequest {
 
 declare interface DescribeDashboardResponse {
   /** 私有域解析总数 */
-  ZoneTotal: number;
+  ZoneTotal?: number;
   /** 私有域关联VPC数量 */
-  ZoneVpcCount: number;
+  ZoneVpcCount?: number;
   /** 历史请求量总数 */
-  RequestTotalCount: number;
+  RequestTotalCount?: number;
   /** 流量包用量 */
-  FlowUsage: FlowUsage[];
+  FlowUsage?: FlowUsage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -397,9 +397,9 @@ declare interface DescribePrivateZoneListRequest {
 
 declare interface DescribePrivateZoneListResponse {
   /** 私有域数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 私有域列表 */
-  PrivateZoneSet: PrivateZone[];
+  PrivateZoneSet?: PrivateZone[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -417,9 +417,9 @@ declare interface DescribePrivateZoneRecordListRequest {
 
 declare interface DescribePrivateZoneRecordListResponse {
   /** 解析记录数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 解析记录列表 */
-  RecordSet: PrivateZoneRecord[];
+  RecordSet?: PrivateZoneRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -431,7 +431,7 @@ declare interface DescribePrivateZoneRequest {
 
 declare interface DescribePrivateZoneResponse {
   /** 私有域详情 */
-  PrivateZone: PrivateZone;
+  PrivateZone?: PrivateZone;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -441,7 +441,7 @@ declare interface DescribePrivateZoneServiceRequest {
 
 declare interface DescribePrivateZoneServiceResponse {
   /** 私有域解析服务开通状态。ENABLED已开通，DISABLED未开通 */
-  ServiceStatus: string;
+  ServiceStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -559,7 +559,7 @@ declare interface SubscribePrivateZoneServiceRequest {
 
 declare interface SubscribePrivateZoneServiceResponse {
   /** 私有域解析服务开通状态 */
-  ServiceStatus: string;
+  ServiceStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

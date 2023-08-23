@@ -747,6 +747,8 @@ declare interface CreateSDKLoginTokenRequest {
   SdkAppId: number;
   /** 座席账号。 */
   SeatUserId: string;
+  /** 生成的token是否一次性校验 */
+  OnlyOnce?: boolean;
 }
 
 declare interface CreateSDKLoginTokenResponse {

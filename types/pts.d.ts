@@ -1799,6 +1799,8 @@ declare interface UpdateScenarioRequest {
   NotificationHooks?: Notification[];
   /** 创建人名 */
   Owner?: string;
+  /** 环境ID */
+  EnvId?: string;
 }
 
 declare interface UpdateScenarioResponse {

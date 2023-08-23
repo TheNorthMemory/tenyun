@@ -3405,9 +3405,9 @@ declare interface DescribeSlowLogsRequest {
 
 declare interface DescribeSlowLogsResponse {
   /** 符合查询条件的慢查询日志总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合查询条件的慢查询日志详情。 */
-  Items: SlowLogInfo[];
+  Items?: SlowLogInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
