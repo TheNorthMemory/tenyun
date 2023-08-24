@@ -21,39 +21,41 @@ declare interface AutomationAgentInfo {
 /** 命令详情。 */
 declare interface Command {
   /** 命令ID。 */
-  CommandId: string;
+  CommandId?: string;
   /** 命令名称。 */
-  CommandName: string;
+  CommandName?: string;
   /** 命令描述。 */
-  Description: string;
+  Description?: string;
   /** Base64编码后的命令内容。 */
-  Content: string;
+  Content?: string;
   /** 命令类型。 */
-  CommandType: string;
+  CommandType?: string;
   /** 命令执行路径。 */
-  WorkingDirectory: string;
+  WorkingDirectory?: string;
   /** 命令超时时间。 */
-  Timeout: number;
+  Timeout?: number;
   /** 命令创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 命令更新时间。 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** 是否启用自定义参数功能。 */
-  EnableParameter: boolean;
+  EnableParameter?: boolean;
   /** 自定义参数的默认取值。 */
-  DefaultParameters: string;
+  DefaultParameters?: string;
+  /** 自定义参数的默认取值。 */
+  DefaultParameterConfs?: DefaultParameterConf[] | null;
   /** 命令的结构化描述。公共命令有值，用户命令为空字符串。 */
-  FormattedDescription: string;
+  FormattedDescription?: string;
   /** 命令创建者。TAT 代表公共命令，USER 代表个人命令。 */
-  CreatedBy: string;
+  CreatedBy?: string;
   /** 命令关联的标签列表。 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** 在实例上执行命令的用户名。 */
-  Username: string;
+  Username?: string;
   /** 日志上传的cos bucket 地址。 */
-  OutputCOSBucketUrl: string;
+  OutputCOSBucketUrl?: string;
   /** 日志在cos bucket中的目录。 */
-  OutputCOSKeyPrefix: string;
+  OutputCOSKeyPrefix?: string;
 }
 
 /** 命令执行详情。 */
@@ -72,6 +74,16 @@ declare interface CommandDocument {
   OutputCOSBucketUrl?: string;
   /** 保存输出的文件名称前缀。 */
   OutputCOSKeyPrefix?: string;
+}
+
+/** 自定义参数。 */
+declare interface DefaultParameterConf {
+  /** 参数名。 */
+  ParameterName: string | null;
+  /** 参数默认值。 */
+  ParameterValue: string | null;
+  /** 参数描述。 */
+  ParameterDescription?: string | null;
 }
 
 /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。>> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：```Filters.0.Name=zone&Filters.0.Values.0=ap-guangzhou-1&Filters.1.Name=instance-charge-type&Filters.1.Values.0=PREPAID&Filters.1.Values.1=POSTPAID_BY_HOUR``` */
@@ -216,6 +228,56 @@ declare interface RegionInfo {
   RegionState: string;
 }
 
+/** 注册码信息。 */
+declare interface RegisterCodeInfo {
+  /** 注册码ID。 */
+  RegisterCodeId?: string | null;
+  /** 注册码描述。 */
+  Description?: string | null;
+  /** 注册实例名称前缀。 */
+  InstanceNamePrefix?: string | null;
+  /** 该注册码允许注册的实列数目。 */
+  RegisterLimit?: number | null;
+  /** 该注册码的过期时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
+  ExpiredTime?: string | null;
+  /** 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。 */
+  IpAddressRange?: string | null;
+  /** 该注册码是否可用。 */
+  Enabled?: boolean | null;
+  /** 该注册码已注册数目。 */
+  RegisteredCount?: number | null;
+  /** 注册码创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
+  CreatedTime?: string | null;
+  /** 注册码最近一次更新时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
+  UpdatedTime?: string | null;
+}
+
+/** 注册实例信息。 */
+declare interface RegisterInstanceInfo {
+  /** 注册码ID。 */
+  RegisterCodeId?: string | null;
+  /** 实例ID。 */
+  InstanceId?: string | null;
+  /** 实例名。 */
+  InstanceName?: string | null;
+  /** 机器ID。 */
+  MachineId?: string | null;
+  /** 系统名。 */
+  SystemName?: string | null;
+  /** 主机IP。 */
+  HostName?: string | null;
+  /** 内网IP。 */
+  LocalIp?: string | null;
+  /** 公钥。 */
+  PublicKey?: string | null;
+  /** 托管状态。返回Online表示实例正在托管，返回Offline表示实例未托管。 */
+  Status?: string;
+  /** 创建时间。 */
+  CreatedTime?: string | null;
+  /** 上次更新时间。 */
+  UpdatedTime?: string | null;
+}
+
 /** 周期执行器设置。 */
 declare interface ScheduleSettings {
   /** 执行策略：ONCE：单次执行RECURRENCE：周期执行 */
@@ -322,6 +384,28 @@ declare interface CreateInvokerResponse {
   RequestId?: string;
 }
 
+declare interface CreateRegisterCodeRequest {
+  /** 注册码描述。 */
+  Description?: string;
+  /** 注册实列名称前缀。 */
+  InstanceNamePrefix?: string;
+  /** 该注册码允许注册的实列数目。默认限制为10个。 */
+  RegisterLimit?: number;
+  /** 该注册码的有效时间，单位为小时。默认为4小时。 */
+  EffectiveTime?: number;
+  /** 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。默认不做限制。 */
+  IpAddressRange?: string;
+}
+
+declare interface CreateRegisterCodeResponse {
+  /** 注册码ID。 */
+  RegisterCodeId?: string;
+  /** 注册码值。 */
+  RegisterCodeValue?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCommandRequest {
   /** 待删除的命令ID。 */
   CommandId: string;
@@ -338,6 +422,26 @@ declare interface DeleteInvokerRequest {
 }
 
 declare interface DeleteInvokerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRegisterCodesRequest {
+  /** 注册码ID列表。限制输入的注册码ID数量大于0小于100。 */
+  RegisterCodeIds: string[];
+}
+
+declare interface DeleteRegisterCodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRegisterInstanceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+}
+
+declare interface DeleteRegisterInstanceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -474,12 +578,60 @@ declare interface DescribeRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRegisterCodesRequest {
+  /** 注册码ID。 */
+  RegisterCodeIds?: string[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeRegisterCodesResponse {
+  /** 查询到的注册码总数。 */
+  TotalCount?: number;
+  /** 注册码信息列表。 */
+  RegisterCodeSet?: RegisterCodeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegisterInstancesRequest {
+  /** 实例id。 */
+  InstanceIds?: string[];
+  /** 过滤器列表。- instance-name按照【实例名称】进行过滤。类型：String必选：否- instance-id按照【实例ID】进行过滤。类型：String必选：否- register-code-id按照【注册码ID】进行过滤。类型：String必选：否 */
+  Filters?: Filter[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeRegisterInstancesResponse {
+  /** 该实例注册过的注册码总数。 */
+  TotalCount?: number;
+  /** 被托管的实例信息的列表。 */
+  RegisterInstanceSet?: RegisterInstanceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableInvokerRequest {
   /** 待停止的执行器ID。 */
   InvokerId: string;
 }
 
 declare interface DisableInvokerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisableRegisterCodesRequest {
+  /** 注册码ID。 */
+  RegisterCodeIds: string[];
+}
+
+declare interface DisableRegisterCodesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -574,6 +726,18 @@ declare interface ModifyInvokerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRegisterInstanceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 实例名。 */
+  InstanceName: string;
+}
+
+declare interface ModifyRegisterInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PreviewReplacedCommandContentRequest {
   /** 本次预览采用的自定义参数。字段类型为 json encoded string，如：{\"varA\": \"222\"}。key 为自定义参数名称，value 为该参数的取值。kv 均为字符串型。自定义参数最多 20 个。自定义参数名称需符合以下规范：字符数目上限 64，可选范围【a-zA-Z0-9-_】。如果将预览的 CommandId 设置过 DefaultParameters，本参数可以为空。 */
   Parameters?: string;
@@ -641,10 +805,16 @@ declare interface Tat {
   CreateCommand(data: CreateCommandRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommandResponse>;
   /** 创建执行器 {@link CreateInvokerRequest} {@link CreateInvokerResponse} */
   CreateInvoker(data: CreateInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInvokerResponse>;
+  /** 创建注册码 {@link CreateRegisterCodeRequest} {@link CreateRegisterCodeResponse} */
+  CreateRegisterCode(data?: CreateRegisterCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRegisterCodeResponse>;
   /** 删除命令 {@link DeleteCommandRequest} {@link DeleteCommandResponse} */
   DeleteCommand(data: DeleteCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCommandResponse>;
   /** 删除执行器 {@link DeleteInvokerRequest} {@link DeleteInvokerResponse} */
   DeleteInvoker(data: DeleteInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInvokerResponse>;
+  /** 批量删除注册码 {@link DeleteRegisterCodesRequest} {@link DeleteRegisterCodesResponse} */
+  DeleteRegisterCodes(data: DeleteRegisterCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegisterCodesResponse>;
+  /** 删除托管实例 {@link DeleteRegisterInstanceRequest} {@link DeleteRegisterInstanceResponse} */
+  DeleteRegisterInstance(data: DeleteRegisterInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegisterInstanceResponse>;
   /** 查询客户端状态 {@link DescribeAutomationAgentStatusRequest} {@link DescribeAutomationAgentStatusResponse} */
   DescribeAutomationAgentStatus(data?: DescribeAutomationAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutomationAgentStatusResponse>;
   /** 查询命令详情 {@link DescribeCommandsRequest} {@link DescribeCommandsResponse} */
@@ -659,8 +829,14 @@ declare interface Tat {
   DescribeInvokers(data?: DescribeInvokersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokersResponse>;
   /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
+  /** 查询注册码 {@link DescribeRegisterCodesRequest} {@link DescribeRegisterCodesResponse} */
+  DescribeRegisterCodes(data?: DescribeRegisterCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegisterCodesResponse>;
+  /** 查询托管实例 {@link DescribeRegisterInstancesRequest} {@link DescribeRegisterInstancesResponse} */
+  DescribeRegisterInstances(data?: DescribeRegisterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegisterInstancesResponse>;
   /** 停用执行器 {@link DisableInvokerRequest} {@link DisableInvokerResponse} */
   DisableInvoker(data: DisableInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DisableInvokerResponse>;
+  /** 批量禁用注册码 {@link DisableRegisterCodesRequest} {@link DisableRegisterCodesResponse} */
+  DisableRegisterCodes(data: DisableRegisterCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRegisterCodesResponse>;
   /** 启用执行器 {@link EnableInvokerRequest} {@link EnableInvokerResponse} */
   EnableInvoker(data: EnableInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<EnableInvokerResponse>;
   /** 触发命令 {@link InvokeCommandRequest} {@link InvokeCommandResponse} */
@@ -669,6 +845,8 @@ declare interface Tat {
   ModifyCommand(data: ModifyCommandRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCommandResponse>;
   /** 修改执行器 {@link ModifyInvokerRequest} {@link ModifyInvokerResponse} */
   ModifyInvoker(data: ModifyInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInvokerResponse>;
+  /** 修改托管实例 {@link ModifyRegisterInstanceRequest} {@link ModifyRegisterInstanceResponse} */
+  ModifyRegisterInstance(data: ModifyRegisterInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRegisterInstanceResponse>;
   /** 命令预览 {@link PreviewReplacedCommandContentRequest} {@link PreviewReplacedCommandContentResponse} */
   PreviewReplacedCommandContent(data?: PreviewReplacedCommandContentRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewReplacedCommandContentResponse>;
   /** 执行命令 {@link RunCommandRequest} {@link RunCommandResponse} */

@@ -3387,9 +3387,9 @@ declare interface DescribeSlowLogDataRequest {
 
 declare interface DescribeSlowLogDataResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 查询到的记录。 */
-  Items: SlowLogItem[] | null;
+  Items?: SlowLogItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，9871+ 服务数</summary>
+<details><summary>共计 240+ 款产品，9901+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -281,7 +281,7 @@ sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 20
 taf | [流量反欺诈](https://cloud.tencent.com/document/product/1031) | 2020-02-10(3) |
 tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(31) |
 tan | [碳引擎](https://cloud.tencent.com/document/product/1498) | 2022-04-20(1) |
-tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(19) |
+tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(26) |
 tav | 文件检测 | 2019-01-18(4) |
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(21) |
 tbm |  | 2018-01-29(9) |
@@ -330,7 +330,7 @@ vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(160) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(313) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(54) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(77) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(296) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

@@ -30,7 +30,7 @@ declare interface ApproverInfo {
   ApproverName: string;
   /** 本企业的签署方经办人的员工UserId可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。注: `若传该字段，则签署方经办人的其他信息（如签署方经办人的姓名、证件号码、手机号码等）将被忽略。` */
   ApproverMobile: string;
-  /** 组织机构名称。如果签署方是企业签署方(approverType = 1 或者 approverType = 3)， 则企业名称必填。注: `请确认该名称与企业营业执照中注册的名称一致 ; 如果名称中包含英文括号()，请使用中文括号（）代替。` */
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。 */
   OrganizationName?: string;
   /** 合同中的签署控件列表，列表中可支持下列多种签署控件,控件的详细定义参考开发者中心的Component结构体 个人签名/印章 企业印章 骑缝章等签署控件 */
   SignComponents?: Component[];
@@ -1709,17 +1709,17 @@ declare interface CreateSealPolicyResponse {
 }
 
 declare interface CreateSealRequest {
-  /** 操作人信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 电子印章名字 */
+  /** 电子印章名字，1-50个中文字符。 */
   SealName: string;
-  /** 应用相关信息 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 本接口支持上传图片印章及系统直接生成印章；如果要使用系统生成印章，此值传：SealGenerateSourceSystem；如果要使用图片上传请传字段 Image */
   GenerateSource?: string;
-  /** 电子印章类型，OFFICIAL-公章,CONTRACT-合同专用章 */
+  /** 电子印章类型：OFFICIAL-公章；CONTRACT-合同专用章;FINANCE-合财务专用章;PERSONNEL-人事专用章. */
   SealType?: string;
-  /** 电子印章图片文件名称 */
+  /** 电子印章图片文件名称，1-50个中文字符。 */
   FileName?: string;
   /** 电子印章图片base64编码参数Image,FileToken或GenerateSource=SealGenerateSourceSystem三选一。 */
   Image?: string;
@@ -1729,7 +1729,7 @@ declare interface CreateSealRequest {
   Height?: number;
   /** 电子印章印章颜色(默认红色RED),RED-红色系统目前只支持红色印章创建。 */
   Color?: string;
-  /** 暂时不支持横向文字设置 */
+  /** 企业印章横向文字，最多可填15个汉字（若超过印章最大宽度，优先压缩字间距，其次缩小字号） */
   SealHorizontalText?: string;
   /** 暂时不支持下弦文字设置 */
   SealChordText?: string;
@@ -1737,6 +1737,10 @@ declare interface CreateSealRequest {
   SealCentralType?: string;
   /** 通过文件上传时，服务端生成的电子印章上传图片的token */
   FileToken?: string;
+  /** 印章样式:cycle:圆形印章;ellipse:椭圆印章;注：默认圆形印章 */
+  SealStyle?: string;
+  /** 印章尺寸取值描述：42_42 圆形企业公章直径42mm；40_40 圆形企业印章直径40mm；45_30 椭圆形印章45mm x 30mm; */
+  SealSize?: string;
 }
 
 declare interface CreateSealResponse {
@@ -2441,7 +2445,7 @@ declare interface Ess {
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
   /** 获取小程序签署链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
-  /** 创建电子印章 {@link CreateSealRequest} {@link CreateSealResponse} */
+  /** 创建企业电子印章 {@link CreateSealRequest} {@link CreateSealResponse} */
   CreateSeal(data: CreateSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealResponse>;
   /** 创建印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;

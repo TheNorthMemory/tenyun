@@ -1023,17 +1023,17 @@ declare interface CreateInstancesRequest {
   AdminName: string;
   /** 实例根账号用户名对应的密码，长度8 ~ 32位，推荐使用12位以上的密码;不能以" / "开头;必须包含以下四项，字符种类:小写字母： [a ~ z]大写字母：[A ～ Z]数字：0 - 9特殊字符：()`~!@#$%^&*-+=_|{}[]:;'<>,.?/ */
   AdminPassword: string;
-  /** PostgreSQL大版本号，版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取，目前支持10，11，12，13，14，15这几个大版本。当只输入该参数时，会基于此大版本号创建对应的最新小版本的最新内核版本号实例。该参数和DBVersion、DBKernelVersion需要至少指定一个，如无指定购买内核小版本需求时，只传入该参数即可。 */
+  /** PostgreSQL大版本号（该参数当前必传），版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取。目前支持10，11，12，13，14，15这几个大版本，详情见[内核版本概述](https://cloud.tencent.com/document/product/409/67018)。输入该参数时，会基于此大版本号创建对应的最新小版本的最新内核版本号实例。 */
   DBMajorVersion?: string;
-  /** PostgreSQL社区大版本+小版本号，如12.4，版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取。当只输入该参数时，会基于此社区小版本号创建对应的最新内核版本实例。该参数和DBMajorVersion、DBKernelVersion需要至少指定一个。 */
+  /** PostgreSQL社区大版本+小版本号。一般场景不推荐传入该参数。如需指定，只能传当前大版本号下最新小版本号。 */
   DBVersion?: string;
-  /** PostgreSQL内核版本号，如v12.7_r1.8，版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取。当只输入该参数时，会创建指定的内核版本实例。只针对内核版本需要指定时使用，一般场景不推荐传入该参数。 */
+  /** PostgreSQL内核版本号。一般场景不推荐传入该参数。如需指定，只能传当前大版本号下最新内核版本号。 */
   DBKernelVersion?: string;
   /** 实例计费类型，目前支持：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：后付费，即按量计费默认值：PREPAID */
   InstanceChargeType?: string;
-  /** 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。 */
+  /** 私有网络ID，形如vpc-xxxxxxxx（该参数当前必传）。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。 */
   VpcId?: string;
-  /** 私有网络子网ID，形如subnet-xxxxxxxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。 */
+  /** 私有网络子网ID，形如subnet-xxxxxxxx（该参数当前必传）。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。 */
   SubnetId?: string;
   /** 实例节点部署信息，支持多可用区部署时需要指定每个节点的部署可用区信息。可用区信息可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/409/16769) 接口的返回值中的Zone字段来获取。 */
   DBNodeSet?: DBNode[];

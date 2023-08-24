@@ -194,6 +194,58 @@ declare interface CdcRegion {
   Clusters: CdcCluster[] | null;
 }
 
+/** clb域名详情 */
+declare interface ClbDomainsInfo {
+  /** 域名 */
+  Domain: string;
+  /** 域名id */
+  DomainId: string;
+  /** 实例id */
+  InstanceId: string;
+  /** 实例名 */
+  InstanceName: string;
+  /** waf类型 */
+  Edition: string;
+  /** 是否是cdn */
+  IsCdn: number;
+  /** 负载均衡算法 */
+  LoadBalancerSet: LoadBalancerPackageNew[];
+  /** 镜像模式 */
+  FlowMode: number;
+  /** 绑定clb状态 */
+  State: number | null;
+  /** 负载均衡类型，clb或者apisix */
+  AlbType: string | null;
+  /** IsCdn=3时，表示自定义header */
+  IpHeaders: string[] | null;
+  /** cdc类型会增加集群信息 */
+  CdcClusters: string | null;
+}
+
+/** CLB查询对应绑定的WAF状态的结果参数 */
+declare interface ClbHostResult {
+  /** WAF绑定的监听器实例 */
+  LoadBalancer: LoadBalancer;
+  /** WAF绑定的域名 */
+  Domain: string;
+  /** WAF绑定的实例ID */
+  DomainId: string;
+  /** 是否有绑定WAF，1：绑定了WAF，0：没有绑定WAF */
+  Status: number;
+  /** 绑定了WAF的情况下，WAF流量模式，1：清洗模式，0：镜像模式（默认） */
+  FlowMode: number;
+}
+
+/** CLB回调WAF接口（获取、删除）的参数 */
+declare interface ClbHostsParams {
+  /** 负载均衡实例ID，如果不传次参数则默认认为操作的是整个AppId的监听器，如果此参数不为空则认为操作的是对应负载均衡实例。 */
+  LoadBalancerId: string;
+  /** 负载均衡监听器ID，，如果不传次参数则默认认为操作的是整个负载均衡实例，如果此参数不为空则认为操作的是对应负载均衡监听器。 */
+  ListenerId?: string;
+  /** WAF实例ID，，如果不传次参数则默认认为操作的是整个负载均衡监听器实例，如果此参数不为空则认为操作的是对应负载均衡监听器的某一个具体的域名。 */
+  DomainId?: string;
+}
+
 /** DescribeCustomRules接口回包中的复杂类型 */
 declare interface DescribeCustomRulesRspRuleListItem {
   /** 动作类型 */
@@ -294,6 +346,14 @@ declare interface DomainPackageNew {
   Count: number | null;
   /** 套餐购买地域，clb-waf暂时没有用到 */
   Region: string | null;
+}
+
+/** 唯一定位Domain */
+declare interface DomainURI {
+  /** 域名 */
+  Domain: string;
+  /** 版本 */
+  Edition: string;
 }
 
 /** saas域名详情 */
@@ -414,6 +474,14 @@ declare interface ExportAccessInfo {
   CreateTime: string;
 }
 
+/** 失败描述 */
+declare interface FailedInfo {
+  /** 域名 */
+  Domain?: string | null;
+  /** 失败信息 */
+  Message?: string | null;
+}
+
 /** 过滤数组 */
 declare interface FiltersItemNew {
   /** 字段名 */
@@ -422,6 +490,26 @@ declare interface FiltersItemNew {
   Values: string[];
   /** 是否精确查找 */
   ExactMatch: boolean;
+}
+
+/** 域名列表 */
+declare interface FindAllDomainDetail {
+  /** 用户id */
+  Appid: number;
+  /** 域名 */
+  Domain: string;
+  /** 域名ip */
+  Ips: string[];
+  /** 发现时间 */
+  FindTime: string;
+  /** 实例id */
+  InstanceId: string;
+  /** 域名id */
+  DomainId: string;
+  /** waf类型 */
+  Edition: string;
+  /** 是否接入waf */
+  IsWafDomain: number;
 }
 
 /** 业务安全资源信息 */
@@ -442,6 +530,16 @@ declare interface FraudPkg {
   UsedNum?: number | null;
   /** 续费标志 */
   RenewFlag?: number | null;
+}
+
+/** CLB-WAF删除域名参数 */
+declare interface HostDel {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId: string;
+  /** 实例类型 */
+  InstanceID?: string;
 }
 
 /** clb-waf防护域名 */
@@ -482,6 +580,18 @@ declare interface HostRecord {
   IpHeaders?: string[] | null;
   /** 规则引擎类型， 1: menshen, 2:tiga */
   EngineType?: number | null;
+}
+
+/** 设置WAF状态的结构体 */
+declare interface HostStatus {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId: string;
+  /** WAF的开关，1：开，0：关 */
+  Status: number;
+  /** 实例ID */
+  InstanceID?: string;
 }
 
 /** 一个实例的详细信息 */
@@ -758,6 +868,16 @@ declare interface RuleList {
   Status: number;
 }
 
+/** 接入列表查询复杂条件 */
+declare interface SearchItem {
+  /** 日志开关 */
+  ClsStatus?: string;
+  /** waf开关 */
+  Status?: string;
+  /** 流量模式 */
+  FlowMode?: string;
+}
+
 /** waf斯巴达-编辑防护域名中的端口结构 */
 declare interface SpartaProtectionPort {
   /** nginx Id */
@@ -782,6 +902,46 @@ declare interface Strategy {
   Content: string | null;
   /** 匹配参数 */
   Arg: string | null;
+}
+
+/** TLS 加密套件 */
+declare interface TLSCiphers {
+  /** TLS版本ID */
+  VersionId: number | null;
+  /** 加密套件ID */
+  CipherId: number | null;
+  /** 加密套件 */
+  CipherName: string | null;
+}
+
+/** TLS信息 */
+declare interface TLSVersion {
+  /** TLSVERSION的ID */
+  VersionId: number | null;
+  /** TLSVERSION的NAME */
+  VersionName: string | null;
+}
+
+/** saas和clb信息 */
+declare interface UserDomainInfo {
+  /** 用户id */
+  Appid: number;
+  /** 域名 */
+  Domain: string;
+  /** 域名id */
+  DomainId: string;
+  /** 实例id */
+  InstanceId: string;
+  /** 实例名 */
+  InstanceName: string;
+  /** waf类型 */
+  Edition: string;
+  /** 版本 */
+  Level: string | null;
+  /** 指定域名访问日志字段的开关 */
+  WriteConfig: string | null;
+  /** 指定域名是否写cls的开关 1:写 0:不写 */
+  Cls: number | null;
 }
 
 /** Vip信息 */
@@ -908,6 +1068,16 @@ declare interface AddDomainWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface AddSpartaProtectionAutoRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface AddSpartaProtectionAutoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddSpartaProtectionRequest {
   /** 需要防御的域名 */
   Domain: string;
@@ -980,6 +1150,18 @@ declare interface AddSpartaProtectionRequest {
 }
 
 declare interface AddSpartaProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddSpartaProtectionsAutoRequest {
+  /** 多域名 */
+  Domain: string;
+}
+
+declare interface AddSpartaProtectionsAutoResponse {
+  /** 失败原因 */
+  FailedInfos?: FailedInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1082,6 +1264,18 @@ declare interface DeleteDownloadRecordResponse {
   RequestId?: string;
 }
 
+declare interface DeleteHostRequest {
+  /** 删除的域名列表 */
+  HostsDel: HostDel[];
+}
+
+declare interface DeleteHostResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success?: ResponseCode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteIpAccessControlRequest {
   /** 域名 */
   Domain: string;
@@ -1112,6 +1306,20 @@ declare interface DeleteSessionRequest {
 declare interface DeleteSessionResponse {
   /** 结果 */
   Data: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSpartaProtectionRequest {
+  /** 域名列表 */
+  Domains: string[];
+  /** 版本 */
+  Edition?: string;
+  /** 实例id */
+  InstanceID?: string;
+}
+
+declare interface DeleteSpartaProtectionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1256,6 +1464,16 @@ declare interface DescribeAutoDenyIPResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCiphersDetailRequest {
+}
+
+declare interface DescribeCiphersDetailResponse {
+  /** 加密套件信息 */
+  Ciphers: TLSCiphers[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCustomWhiteRuleRequest {
   /** 域名 */
   Domain: string;
@@ -1276,6 +1494,40 @@ declare interface DescribeCustomWhiteRuleResponse {
   RuleList?: DescribeCustomRulesRspRuleListItem[];
   /** 规则条数 */
   TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDomainCountInfoRequest {
+}
+
+declare interface DescribeDomainCountInfoResponse {
+  /** 域名总数 */
+  AllDomain: number;
+  /** 最近发现时间 */
+  UpdateTime: string;
+  /** 接入域名总数 */
+  WafDomainCount: number;
+  /** 剩下配额 */
+  LeftDomainCount: number;
+  /** 开启防护域名数 */
+  OpenWafDomain: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDomainDetailsClbRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名id */
+  DomainId: string;
+  /** 实例id */
+  InstanceId: string;
+}
+
+declare interface DescribeDomainDetailsClbResponse {
+  /** clb域名详情 */
+  DomainsClbPartInfo: ClbDomainsInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1338,6 +1590,30 @@ declare interface DescribeDomainsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFindDomainListRequest {
+  /** 分页 */
+  Offset: number;
+  /** 每页容量 */
+  Limit: number;
+  /** 过滤条件 */
+  Key: string;
+  /** 是否接入waf */
+  IsWafDomain: string;
+  /** 排序参数 */
+  By?: string;
+  /** 排序方式 */
+  Order?: string;
+}
+
+declare interface DescribeFindDomainListResponse {
+  /** 域名总数 */
+  Total: number;
+  /** 域名信息列表 */
+  List: FindAllDomainDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFlowTrendRequest {
   /** 需要获取流量趋势的域名, all表示所有域名 */
   Domain: string;
@@ -1350,6 +1626,60 @@ declare interface DescribeFlowTrendRequest {
 declare interface DescribeFlowTrendResponse {
   /** 流量趋势数据 */
   Data: BotStatPointItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostLimitRequest {
+  /** 添加的域名 */
+  Domain: string;
+  /** 实例id */
+  InstanceID?: string;
+  /** 流量来源 */
+  AlbType?: string;
+}
+
+declare interface DescribeHostLimitResponse {
+  /** 成功返回的状态码 */
+  Success?: ResponseCode | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId: string;
+  /** 实例ID */
+  InstanceID?: string;
+}
+
+declare interface DescribeHostResponse {
+  /** 域名详情 */
+  Host: HostRecord;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostsRequest {
+  /** 防护域名，如果是要查询某一具体的防护域名则传入此参数，要求是准确的域名，此参数不支持模糊搜索 */
+  Domain?: string;
+  /** 防护域名ID，如果是要查询某一具体的防护域名则传入此参数，要求是准确的域名ID，此参数不支持模糊搜索 */
+  DomainId?: string;
+  /** 搜索条件，根据此参数对域名做模糊搜索 */
+  Search?: string;
+  /** 复杂的搜索条件 */
+  Item?: SearchItem;
+  /** 实例id */
+  InstanceID?: string;
+}
+
+declare interface DescribeHostsResponse {
+  /** 防护域名列表的长度 */
+  TotalCount: number;
+  /** 防护域名的列表 */
+  HostList: HostRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1520,6 +1850,16 @@ declare interface DescribeRuleLimitResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTlsVersionRequest {
+}
+
+declare interface DescribeTlsVersionResponse {
+  /** TLS key value */
+  TLS: TLSVersion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserCdcClbWafRegionsRequest {
 }
 
@@ -1536,6 +1876,16 @@ declare interface DescribeUserClbWafRegionsRequest {
 declare interface DescribeUserClbWafRegionsResponse {
   /** 地域（标准的ap-格式）列表 */
   Data: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserDomainInfoRequest {
+}
+
+declare interface DescribeUserDomainInfoResponse {
+  /** saas和clb域名信息 */
+  UsersInfo: UserDomainInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1576,6 +1926,20 @@ declare interface DescribeWafAutoDenyStatusRequest {
 declare interface DescribeWafAutoDenyStatusResponse {
   /** WAF 自动封禁详情 */
   WafAutoDenyDetails?: AutoDenyDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWafInfoRequest {
+  /** CLB回调WAF接口（获取、删除）的参数 */
+  Params: ClbHostsParams[];
+}
+
+declare interface DescribeWafInfoResponse {
+  /** 返回的WAF信息数组的长度，为0则表示没有查询到对应的信息 */
+  Total?: number;
+  /** 对应的WAF信息的数组。 */
+  HostList?: ClbHostResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1706,6 +2070,24 @@ declare interface ModifyCustomWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDomainIpv6StatusRequest {
+  /** 需要修改的域名所属的实例ID */
+  InstanceId: string;
+  /** 需要修改的域名 */
+  Domain: string;
+  /** 需要修改的域名ID */
+  DomainId: string;
+  /** 修改域名的Ipv6开关为Status （0:关闭 1:开启） */
+  Status: number;
+}
+
+declare interface ModifyDomainIpv6StatusResponse {
+  /** 返回的状态 （0: 操作失败 1:操作成功 2:企业版以上不支持 3:企业版以下不支持 ） */
+  Ipv6Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDomainWhiteRuleRequest {
   /** 需要更改的规则的域名 */
   Domain?: string;
@@ -1722,6 +2104,114 @@ declare interface ModifyDomainWhiteRuleRequest {
 }
 
 declare interface ModifyDomainWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDomainsCLSStatusRequest {
+  /** 需要修改的域名列表 */
+  Domains: DomainURI[];
+  /** 修改域名的访问日志开关为Status */
+  Status: number;
+}
+
+declare interface ModifyDomainsCLSStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHostFlowModeRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId: string;
+  /** WAF流量模式，1：清洗模式，0：镜像模式（默认） */
+  FlowMode: number;
+  /** 实例ID */
+  InstanceID?: string;
+}
+
+declare interface ModifyHostFlowModeResponse {
+  /** 成功的状态码 */
+  Success: ResponseCode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHostModeRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId: string;
+  /** 防护状态：10：规则观察&&AI关闭模式，11：规则观察&&AI观察模式，12：规则观察&&AI拦截模式20：规则拦截&&AI关闭模式，21：规则拦截&&AI观察模式，22：规则拦截&&AI拦截模式 */
+  Mode: number;
+  /** 0:修改防护模式，1:修改AI */
+  Type?: number;
+  /** 实例ID */
+  InstanceID?: string;
+  /** 实例类型 */
+  Edition?: string;
+}
+
+declare interface ModifyHostModeResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success: ResponseCode | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHostRequest {
+  /** 编辑的域名配置信息 */
+  Host: HostRecord;
+  /** 实例id */
+  InstanceID?: string;
+}
+
+declare interface ModifyHostResponse {
+  /** 编辑的域名ID */
+  DomainId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHostStatusRequest {
+  /** 域名状态列表 */
+  HostsStatus: HostStatus[];
+}
+
+declare interface ModifyHostStatusResponse {
+  /** 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码） */
+  Success?: ResponseCode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProtectionStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 状态 */
+  Status: number;
+  /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
+  Edition?: string;
+}
+
+declare interface ModifyProtectionStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySpartaProtectionModeRequest {
+  /** 域名 */
+  Domain: string;
+  /** 防护状态：10：规则观察&&AI关闭模式，11：规则观察&&AI观察模式，12：规则观察&&AI拦截模式20：规则拦截&&AI关闭模式，21：规则拦截&&AI观察模式，22：规则拦截&&AI拦截模式 */
+  Mode: number;
+  /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
+  Edition?: string;
+  /** 0是修改规则引擎状态，1是修改AI的状态 */
+  Type?: number;
+}
+
+declare interface ModifySpartaProtectionModeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1868,6 +2358,16 @@ declare interface PostAttackDownloadTaskResponse {
   RequestId?: string;
 }
 
+declare interface RefreshAccessCheckResultRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface RefreshAccessCheckResultResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchAccessLogRequest {
   /** 客户要查询的日志主题ID，每个客户都有对应的一个主题，新版本此字段填空字符串 */
   TopicId: string;
@@ -1985,6 +2485,10 @@ declare interface Waf {
   AddDomainWhiteRule(data?: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
   /** 添加SAAS-WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
+  /** 自动添加Saaswaf {@link AddSpartaProtectionAutoRequest} {@link AddSpartaProtectionAutoResponse} */
+  AddSpartaProtectionAuto(data: AddSpartaProtectionAutoRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionAutoResponse>;
+  /** 批量添加域名 {@link AddSpartaProtectionsAutoRequest} {@link AddSpartaProtectionsAutoResponse} */
+  AddSpartaProtectionsAuto(data: AddSpartaProtectionsAutoRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionsAutoResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
   /** 添加防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
@@ -1999,10 +2503,14 @@ declare interface Waf {
   DeleteDomainWhiteRules(data?: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
   /** 删除访问日志下载记录 {@link DeleteDownloadRecordRequest} {@link DeleteDownloadRecordResponse} */
   DeleteDownloadRecord(data: DeleteDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDownloadRecordResponse>;
+  /** 删除CLB-WAF防护域名 {@link DeleteHostRequest} {@link DeleteHostResponse} */
+  DeleteHost(data: DeleteHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostResponse>;
   /** Waf IP黑白名单Delete接口 {@link DeleteIpAccessControlRequest} {@link DeleteIpAccessControlResponse} */
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
+  /** waf斯巴达-删除防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
+  DeleteSpartaProtection(data: DeleteSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpartaProtectionResponse>;
   /** 获取访问日志导出列表 {@link DescribeAccessExportsRequest} {@link DescribeAccessExportsResponse} */
   DescribeAccessExports(data: DescribeAccessExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessExportsResponse>;
   /** 访问日志快速分析统计 {@link DescribeAccessFastAnalysisRequest} {@link DescribeAccessFastAnalysisResponse} */
@@ -2015,16 +2523,30 @@ declare interface Waf {
   DescribeAttackOverview(data: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
   /** @deprecated 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
+  /** 查询加密套件信息 {@link DescribeCiphersDetailRequest} {@link DescribeCiphersDetailResponse} */
+  DescribeCiphersDetail(data?: DescribeCiphersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCiphersDetailResponse>;
   /** 查询精准白名单规则 {@link DescribeCustomWhiteRuleRequest} {@link DescribeCustomWhiteRuleResponse} */
   DescribeCustomWhiteRule(data: DescribeCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomWhiteRuleResponse>;
+  /** 获取域名概况 {@link DescribeDomainCountInfoRequest} {@link DescribeDomainCountInfoResponse} */
+  DescribeDomainCountInfo(data?: DescribeDomainCountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainCountInfoResponse>;
+  /** 获取一个clb域名详情 {@link DescribeDomainDetailsClbRequest} {@link DescribeDomainDetailsClbResponse} */
+  DescribeDomainDetailsClb(data: DescribeDomainDetailsClbRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsClbResponse>;
   /** 查询单个saas域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */
   DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
   /** 获取域名的规则白名单 {@link DescribeDomainWhiteRulesRequest} {@link DescribeDomainWhiteRulesResponse} */
   DescribeDomainWhiteRules(data: DescribeDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhiteRulesResponse>;
   /** 获取域名列表 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
+  /** 获取发现域名列表接口 {@link DescribeFindDomainListRequest} {@link DescribeFindDomainListResponse} */
+  DescribeFindDomainList(data: DescribeFindDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFindDomainListResponse>;
   /** 获取waf流量访问趋势 {@link DescribeFlowTrendRequest} {@link DescribeFlowTrendResponse} */
   DescribeFlowTrend(data: DescribeFlowTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTrendResponse>;
+  /** 获取防护域名详情 {@link DescribeHostRequest} {@link DescribeHostResponse} */
+  DescribeHost(data: DescribeHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostResponse>;
+  /** 验证添加的域名是否已经存在 {@link DescribeHostLimitRequest} {@link DescribeHostLimitResponse} */
+  DescribeHostLimit(data: DescribeHostLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLimitResponse>;
+  /** 获取防护域名列表 {@link DescribeHostsRequest} {@link DescribeHostsResponse} */
+  DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
   /** 查询用户所有实例的详细信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** Waf ip黑白名单查询 {@link DescribeIpAccessControlRequest} {@link DescribeIpAccessControlResponse} */
@@ -2039,16 +2561,22 @@ declare interface Waf {
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
+  /** 查询用户TLS版本 {@link DescribeTlsVersionRequest} {@link DescribeTlsVersionResponse} */
+  DescribeTlsVersion(data?: DescribeTlsVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTlsVersionResponse>;
   /** 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域 {@link DescribeUserCdcClbWafRegionsRequest} {@link DescribeUserCdcClbWafRegionsResponse} */
   DescribeUserCdcClbWafRegions(data?: DescribeUserCdcClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCdcClbWafRegionsResponse>;
   /** 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域 {@link DescribeUserClbWafRegionsRequest} {@link DescribeUserClbWafRegionsResponse} */
   DescribeUserClbWafRegions(data?: DescribeUserClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClbWafRegionsResponse>;
+  /** 查询saas和clb的域名信息 {@link DescribeUserDomainInfoRequest} {@link DescribeUserDomainInfoResponse} */
+  DescribeUserDomainInfo(data?: DescribeUserDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDomainInfoResponse>;
   /** 查询VIP信息 {@link DescribeVipInfoRequest} {@link DescribeVipInfoResponse} */
   DescribeVipInfo(data: DescribeVipInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVipInfoResponse>;
   /** 查询ip惩罚规则 {@link DescribeWafAutoDenyRulesRequest} {@link DescribeWafAutoDenyRulesResponse} */
   DescribeWafAutoDenyRules(data: DescribeWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyRulesResponse>;
   /** 描述WAF自动封禁模块详情 {@link DescribeWafAutoDenyStatusRequest} {@link DescribeWafAutoDenyStatusResponse} */
   DescribeWafAutoDenyStatus(data?: DescribeWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyStatusResponse>;
+  /** 获取负载均衡绑定的WAF信息 {@link DescribeWafInfoRequest} {@link DescribeWafInfoResponse} */
+  DescribeWafInfo(data: DescribeWafInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafInfoResponse>;
   /** 描述WAF威胁情报封禁模块配置详情 {@link DescribeWafThreatenIntelligenceRequest} {@link DescribeWafThreatenIntelligenceResponse} */
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
   /** 查询下载攻击日志任务记录列表 {@link GetAttackDownloadRecordsRequest} {@link GetAttackDownloadRecordsResponse} */
@@ -2065,10 +2593,26 @@ declare interface Waf {
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
   /** 编辑精准白名单 {@link ModifyCustomWhiteRuleRequest} {@link ModifyCustomWhiteRuleResponse} */
   ModifyCustomWhiteRule(data: ModifyCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleResponse>;
+  /** 修改ipv6开关 {@link ModifyDomainIpv6StatusRequest} {@link ModifyDomainIpv6StatusResponse} */
+  ModifyDomainIpv6Status(data: ModifyDomainIpv6StatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainIpv6StatusResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
   ModifyDomainWhiteRule(data?: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
+  /** 修改域名列表的访问日志开关 {@link ModifyDomainsCLSStatusRequest} {@link ModifyDomainsCLSStatusResponse} */
+  ModifyDomainsCLSStatus(data: ModifyDomainsCLSStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainsCLSStatusResponse>;
+  /** 编辑防护域名 {@link ModifyHostRequest} {@link ModifyHostResponse} */
+  ModifyHost(data: ModifyHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostResponse>;
+  /** 设置防护域名的流量模式 {@link ModifyHostFlowModeRequest} {@link ModifyHostFlowModeResponse} */
+  ModifyHostFlowMode(data: ModifyHostFlowModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostFlowModeResponse>;
+  /** 设置防护域名防护状态 {@link ModifyHostModeRequest} {@link ModifyHostModeResponse} */
+  ModifyHostMode(data: ModifyHostModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostModeResponse>;
+  /** 设置防护域名WAF开关 {@link ModifyHostStatusRequest} {@link ModifyHostStatusResponse} */
+  ModifyHostStatus(data: ModifyHostStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostStatusResponse>;
+  /** waf斯巴达-waf开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
+  ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 修改域名配置 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */
   ModifySpartaProtection(data: ModifySpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionResponse>;
+  /** 设置waf防护状态 {@link ModifySpartaProtectionModeRequest} {@link ModifySpartaProtectionModeResponse} */
+  ModifySpartaProtectionMode(data: ModifySpartaProtectionModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionModeResponse>;
   /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
   /** 配置WAF自动封禁模块状态 {@link ModifyWafAutoDenyStatusRequest} {@link ModifyWafAutoDenyStatusResponse} */
@@ -2077,6 +2621,8 @@ declare interface Waf {
   ModifyWafThreatenIntelligence(data?: ModifyWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafThreatenIntelligenceResponse>;
   /** 创建搜索下载攻击日志任务 {@link PostAttackDownloadTaskRequest} {@link PostAttackDownloadTaskResponse} */
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
+  /** 刷新接入检查的结果 {@link RefreshAccessCheckResultRequest} {@link RefreshAccessCheckResultResponse} */
+  RefreshAccessCheckResult(data: RefreshAccessCheckResultRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshAccessCheckResultResponse>;
   /** 搜索访问日志 {@link SearchAccessLogRequest} {@link SearchAccessLogResponse} */
   SearchAccessLog(data: SearchAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAccessLogResponse>;
   /** 搜索CLS新版本攻击日志 {@link SearchAttackLogRequest} {@link SearchAttackLogResponse} */

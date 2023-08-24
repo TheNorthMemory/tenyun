@@ -914,11 +914,11 @@ declare interface NetAddr {
 
 /** x08新创建的账号 */
 declare interface NewAccount {
-  /** 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-16 */
+  /** 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-30 */
   AccountName: string;
   /** 密码，密码长度范围为8到64个字符 */
   AccountPassword: string;
-  /** 主机 */
+  /** 主机(%或ipv4地址) */
   Host: string;
   /** 描述 */
   Description?: string;
@@ -1665,15 +1665,15 @@ declare interface CloseWanResponse {
 }
 
 declare interface CopyClusterPasswordComplexityRequest {
-  /** 复制集群ID数组 */
+  /** 复制集群ID数组，例如["cynosdbmysql-bzxxrmtq","cynosdbmysql-qwer"] */
   ClusterIds: string[];
-  /** 集群id */
+  /** 集群id，例如"cynosdbmysql-bzxxrmtq" */
   SourceClusterId: string;
 }
 
 declare interface CopyClusterPasswordComplexityResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2115,7 +2115,7 @@ declare interface DescribeAccountPrivilegesRequest {
 
 declare interface DescribeAccountPrivilegesResponse {
   /** 权限列表，示例值为：["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"] */
-  Privileges: string[];
+  Privileges?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3085,15 +3085,15 @@ declare interface InquirePriceRenewRequest {
 
 declare interface InquirePriceRenewResponse {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 实例ID列表 */
-  InstanceIds: string[];
+  InstanceIds?: string[];
   /** 对应的询价结果数组 */
-  Prices: TradePrice[];
+  Prices?: TradePrice[];
   /** 续费计算节点的总价格 */
-  InstanceRealTotalPrice: number;
+  InstanceRealTotalPrice?: number;
   /** 续费存储节点的总价格 */
-  StorageRealTotalPrice: number;
+  StorageRealTotalPrice?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3107,9 +3107,9 @@ declare interface IsolateClusterRequest {
 
 declare interface IsolateClusterResponse {
   /** 任务流ID */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 退款订单号 */
-  DealNames: string[] | null;
+  DealNames?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3117,7 +3117,7 @@ declare interface IsolateClusterResponse {
 declare interface IsolateInstanceRequest {
   /** 集群ID */
   ClusterId: string;
-  /** 实例ID数组 */
+  /** 实例ID数组，例如["cynosdbbmysql-ins-asd","cynosdbmysql-ins-zxc"] */
   InstanceIdList: string[];
   /** 该参数已废弃 */
   DbType?: string;
@@ -3125,9 +3125,9 @@ declare interface IsolateInstanceRequest {
 
 declare interface IsolateInstanceResponse {
   /** 任务流id */
-  FlowId: number;
+  FlowId?: number;
   /** 隔离实例的订单id（预付费实例） */
-  DealNames: string[] | null;
+  DealNames?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3477,9 +3477,9 @@ declare interface ModifyProxyDescResponse {
 }
 
 declare interface ModifyProxyRwSplitRequest {
-  /** 集群ID */
+  /** 集群ID，例如cynosdbmysql-asd123 */
   ClusterId: string;
-  /** 数据库代理组ID */
+  /** 数据库代理组ID，例如cynosdbmysql-proxy-qwe123 */
   ProxyGroupId: string;
   /** 一致性类型；“eventual"-最终一致性, "session"-会话一致性, "global"-全局一致性 */
   ConsistencyType?: string;
@@ -3561,7 +3561,7 @@ declare interface ModifyVipVportRequest {
 
 declare interface ModifyVipVportResponse {
   /** 异步任务id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3755,7 +3755,7 @@ declare interface RestartInstanceRequest {
 
 declare interface RestartInstanceResponse {
   /** 异步任务id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3843,7 +3843,7 @@ declare interface SearchClusterTablesRequest {
 
 declare interface SearchClusterTablesResponse {
   /** 数据表列表 */
-  Tables: DatabaseTables[] | null;
+  Tables?: DatabaseTables[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3913,7 +3913,7 @@ declare interface SwitchProxyVpcRequest {
 
 declare interface SwitchProxyVpcResponse {
   /** 异步任务id。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3941,7 +3941,7 @@ declare interface UpgradeClusterVersionRequest {
 
 declare interface UpgradeClusterVersionResponse {
   /** 异步任务id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1423,10 +1423,10 @@ declare interface CreateEnvironmentRequest {
   EnvironmentId: string;
   /** 未消费消息过期时间，单位：秒，取值范围：60秒~15天。 */
   MsgTTL: number;
+  /** Pulsar 集群的ID */
+  ClusterId: string;
   /** 说明，128个字符以内。 */
   Remark?: string;
-  /** Pulsar 集群的ID */
-  ClusterId?: string;
   /** 消息保留策略 */
   RetentionPolicy?: RetentionPolicy;
   /** 是否开启自动创建订阅 */
