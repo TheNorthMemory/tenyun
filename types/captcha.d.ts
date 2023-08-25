@@ -378,10 +378,10 @@ declare interface DescribeCaptchaMiniResultRequest {
 }
 
 declare interface DescribeCaptchaMiniResultResponse {
-  /** 1 ticket verification succeeded 票据验证成功7 CaptchaAppId does not match 票据与验证码应用APPID不匹配8 ticket expired 票据超时10 ticket format error 票据格式不正确15 ticket decryption failed 票据解密失败16 CaptchaAppId wrong format 检查验证码应用APPID错误21 ticket error 票据验证错误25 invalid ticket 无效票据26 system internal error 系统内部错误31 UnauthorizedOperation.Unauthorized	无有效套餐包/账户已欠费100 param err 参数校验错误 */
-  CaptchaCode: number;
+  /** 1 ticket verification succeeded 票据验证成功7 CaptchaAppId does not match 票据与验证码应用APPID不匹配8 ticket expired 票据超时10 ticket format error 票据格式不正确15 ticket decryption failed 票据解密失败16 CaptchaAppId wrong format 检查验证码应用APPID错误21 (1)ticket error 票据验证错误 (2)diff 一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理25 invalid ticket 无效票据26 system internal error 系统内部错误31 UnauthorizedOperation.Unauthorized 无有效套餐包/账户已欠费100 param err 参数校验错误 */
+  CaptchaCode?: number;
   /** 状态描述及验证错误信息 */
-  CaptchaMsg: string | null;
+  CaptchaMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

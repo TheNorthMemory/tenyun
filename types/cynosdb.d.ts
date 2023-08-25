@@ -968,7 +968,7 @@ declare interface Package {
   PackageTotalSpec?: number | null;
   /** 资源包已使用量 */
   PackageUsedSpec?: number | null;
-  /** 资源包已使用量 */
+  /** 是否还有库存余量 */
   HasQuota?: boolean | null;
   /** 绑定实例信息 */
   BindInstanceInfos?: BindInstanceInfo[] | null;
@@ -2733,7 +2733,7 @@ declare interface DescribeProjectSecurityGroupsResponse {
 }
 
 declare interface DescribeProxiesRequest {
-  /** 集群ID */
+  /** 集群ID（该参数必传，例如cynosdbmysql-xxxxxx） */
   ClusterId?: string;
   /** 返回数量，默认为 20，最大值为 100 */
   Limit?: number;
@@ -2838,7 +2838,7 @@ declare interface DescribeResourcePackageListRequest {
 }
 
 declare interface DescribeResourcePackageListResponse {
-  /** 总配置数 */
+  /** 资源包总数 */
   Total?: number;
   /** 资源包明细 */
   Detail?: Package[] | null;
@@ -3375,11 +3375,11 @@ declare interface ModifyClusterStorageRequest {
 
 declare interface ModifyClusterStorageResponse {
   /** 冻结流水ID */
-  TranId: string | null;
+  TranId?: string | null;
   /** 大订单号 */
-  BigDealIds: string[] | null;
+  BigDealIds?: string[] | null;
   /** 订单号 */
-  DealNames: string[] | null;
+  DealNames?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3573,7 +3573,7 @@ declare interface OfflineClusterRequest {
 
 declare interface OfflineClusterResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3587,7 +3587,7 @@ declare interface OfflineInstanceRequest {
 
 declare interface OfflineInstanceResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3629,7 +3629,7 @@ declare interface OpenClusterPasswordComplexityRequest {
 
 declare interface OpenClusterPasswordComplexityResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3825,7 +3825,7 @@ declare interface SearchClusterDatabasesRequest {
 
 declare interface SearchClusterDatabasesResponse {
   /** 数据库列表 */
-  Databases: string[] | null;
+  Databases?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3969,11 +3969,11 @@ declare interface UpgradeInstanceRequest {
 
 declare interface UpgradeInstanceResponse {
   /** 冻结流水ID */
-  TranId: string | null;
+  TranId?: string | null;
   /** 大订单号 */
-  BigDealIds: string[] | null;
+  BigDealIds?: string[] | null;
   /** 订单号 */
-  DealNames: string[];
+  DealNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4035,7 +4035,7 @@ declare interface Cynosdb {
   ActivateInstance(data: ActivateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateInstanceResponse>;
   /** 增加从可用区 {@link AddClusterSlaveZoneRequest} {@link AddClusterSlaveZoneResponse} */
   AddClusterSlaveZone(data: AddClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterSlaveZoneResponse>;
-  /** 集群添加实例 {@link AddInstancesRequest} {@link AddInstancesResponse} */
+  /** 购买实例 {@link AddInstancesRequest} {@link AddInstancesResponse} */
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
@@ -4061,7 +4061,7 @@ declare interface Cynosdb {
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
   /** 创建数据库 {@link CreateClusterDatabaseRequest} {@link CreateClusterDatabaseResponse} */
   CreateClusterDatabase(data: CreateClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterDatabaseResponse>;
-  /** 创建集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
+  /** 购买新集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
   /** 创建参数模板 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
@@ -4109,7 +4109,7 @@ declare interface Cynosdb {
   DescribeBinlogSaveDays(data: DescribeBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogSaveDaysResponse>;
   /** 查询Binlog列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
-  /** 集群详情 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
+  /** 集群信息描述 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 查询数据库列表 {@link DescribeClusterDetailDatabasesRequest} {@link DescribeClusterDetailDatabasesResponse} */
   DescribeClusterDetailDatabases(data: DescribeClusterDetailDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailDatabasesResponse>;
@@ -4213,7 +4213,7 @@ declare interface Cynosdb {
   ModifyClusterPasswordComplexity(data: ModifyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPasswordComplexityResponse>;
   /** 修改从可用区 {@link ModifyClusterSlaveZoneRequest} {@link ModifyClusterSlaveZoneResponse} */
   ModifyClusterSlaveZone(data: ModifyClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterSlaveZoneResponse>;
-  /** 升级预付费存储 {@link ModifyClusterStorageRequest} {@link ModifyClusterStorageResponse} */
+  /** 调整包年包月存储容量 {@link ModifyClusterStorageRequest} {@link ModifyClusterStorageResponse} */
   ModifyClusterStorage(data: ModifyClusterStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterStorageResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
@@ -4235,13 +4235,13 @@ declare interface Cynosdb {
   ModifyResourcePackageName(data: ModifyResourcePackageNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackageNameResponse>;
   /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
   ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;
-  /** 下线集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */
+  /** 销毁集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */
   OfflineCluster(data: OfflineClusterRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineClusterResponse>;
-  /** 下线实例 {@link OfflineInstanceRequest} {@link OfflineInstanceResponse} */
+  /** 销毁实例 {@link OfflineInstanceRequest} {@link OfflineInstanceResponse} */
   OfflineInstance(data: OfflineInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineInstanceResponse>;
   /** 实例开通审计服务 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
-  /** 开启集群密码复杂度 {@link OpenClusterPasswordComplexityRequest} {@link OpenClusterPasswordComplexityResponse} */
+  /** 开启自定义密码复杂度功能 {@link OpenClusterPasswordComplexityRequest} {@link OpenClusterPasswordComplexityResponse} */
   OpenClusterPasswordComplexity(data: OpenClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterPasswordComplexityResponse>;
   /** 开启只读实例组接入 {@link OpenClusterReadOnlyInstanceGroupAccessRequest} {@link OpenClusterReadOnlyInstanceGroupAccessResponse} */
   OpenClusterReadOnlyInstanceGroupAccess(data?: OpenClusterReadOnlyInstanceGroupAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
@@ -4281,9 +4281,9 @@ declare interface Cynosdb {
   SwitchProxyVpc(data: SwitchProxyVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyVpcResponse>;
   /** cynos解绑资源包 {@link UnbindClusterResourcePackagesRequest} {@link UnbindClusterResourcePackagesResponse} */
   UnbindClusterResourcePackages(data: UnbindClusterResourcePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindClusterResourcePackagesResponse>;
-  /** 更新集群Cynos内核版本 {@link UpgradeClusterVersionRequest} {@link UpgradeClusterVersionResponse} */
+  /** 更新内核小版本 {@link UpgradeClusterVersionRequest} {@link UpgradeClusterVersionResponse} */
   UpgradeClusterVersion(data: UpgradeClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeClusterVersionResponse>;
-  /** 升级实例 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
+  /** 实例变配 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
   /** 升级数据库代理配置 {@link UpgradeProxyRequest} {@link UpgradeProxyResponse} */
   UpgradeProxy(data: UpgradeProxyRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeProxyResponse>;

@@ -140,6 +140,84 @@ declare interface CloudNativeAPIGatewayRateLimitDetail {
   LineUpTime?: number;
 }
 
+/** 网关实例策略 */
+declare interface CloudNativeAPIGatewayStrategy {
+  /** 策略ID */
+  StrategyId: string;
+  /** 策略名称 */
+  StrategyName: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  ModifyTime: string | null;
+  /** 策略描述 */
+  Description: string | null;
+  /** 弹性伸缩配置 */
+  Config: CloudNativeAPIGatewayStrategyAutoScalerConfig | null;
+  /** 网关实例ID */
+  GatewayId: string | null;
+  /** 定时伸缩配置 */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig | null;
+  /** 最大节点数 */
+  MaxReplicas?: number | null;
+}
+
+/** 弹性伸缩策略 */
+declare interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
+  /** 最大副本数 */
+  MaxReplicas?: number | null;
+  /** 指标列表 */
+  Metrics?: CloudNativeAPIGatewayStrategyAutoScalerConfigMetric[] | null;
+  /** 是否开启指标伸缩 */
+  Enabled?: boolean | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 弹性策略ID */
+  StrategyId?: string | null;
+  /** 指标配置ID */
+  AutoScalerId?: string | null;
+}
+
+/** 弹性伸缩配置指标 */
+declare interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
+  /** 指标类型 */
+  Type?: string | null;
+  /** 指标资源名称 */
+  ResourceName?: string | null;
+  /** 指标目标类型 */
+  TargetType?: string | null;
+  /** 指标目标值 */
+  TargetValue?: number | null;
+}
+
+/** 定时伸缩策略配置 */
+declare interface CloudNativeAPIGatewayStrategyCronScalerConfig {
+  /** 是否开启定时伸缩 */
+  Enabled?: boolean | null;
+  /** 定时伸缩配置参数列表 */
+  Params?: CloudNativeAPIGatewayStrategyCronScalerConfigParam[] | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 弹性策略ID */
+  StrategyId?: string | null;
+}
+
+/** 定时伸缩配置参数 */
+declare interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
+  /** 定时伸缩周期 */
+  Period?: string | null;
+  /** 定时伸缩开始时间 */
+  StartAt?: string | null;
+  /** 定时伸缩目标节点数 */
+  TargetReplicas?: number | null;
+  /** 定时伸缩cron表达式 */
+  Crontab?: string | null;
+}
+
 /** 云原生API网关vpc配置。 */
 declare interface CloudNativeAPIGatewayVpcConfig {
   /** 私有网络ID。 */
@@ -614,6 +692,42 @@ declare interface NacosReplica {
 declare interface NacosServerInterface {
   /** 接口名 */
   Interface: string | null;
+}
+
+/** 云原生网关分组信息 */
+declare interface NativeGatewayServerGroup {
+  /** 云原生网关分组唯一id */
+  GroupId?: string;
+  /** 分组名 */
+  Name?: string;
+  /** 描述信息 */
+  Description?: string;
+  /** 节点规格、节点数信息 */
+  NodeConfig?: CloudNativeAPIGatewayNodeConfig;
+  /** 网关分组状态。 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 是否是默认分组。0：否。1：是。 */
+  IsFirstGroup?: number;
+  /** 关联策略信息 */
+  BindingStrategy?: CloudNativeAPIGatewayStrategy | null;
+  /** 网关实例 id */
+  GatewayId?: string | null;
+  /** 带宽 */
+  InternetMaxBandwidthOut?: number | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 子网id */
+  SubnetIds?: string | null;
+}
+
+/** 网关分组列表 */
+declare interface NativeGatewayServerGroups {
+  /** 总数 */
+  TotalCount: number;
+  /** 分组信息数组。 */
+  GatewayGroupList: NativeGatewayServerGroup[];
 }
 
 /** 查询Limiter的接入地址 */
@@ -1250,6 +1364,24 @@ declare interface DescribeNacosServerInterfacesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNativeGatewayServerGroupsRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 翻页从第几个开始获取 */
+  Offset?: number;
+  /** 翻页获取多少个 */
+  Limit?: number;
+  /** 过滤参数 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeNativeGatewayServerGroupsResponse {
+  /** 分组列表信息 */
+  Result: NativeGatewayServerGroups;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOneCloudNativeAPIGatewayServiceRequest {
   /** 网关ID */
   GatewayId: string;
@@ -1592,6 +1724,8 @@ declare interface Tse {
   DescribeNacosReplicas(data: DescribeNacosReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosReplicasResponse>;
   /** 查询nacos服务接口列表 {@link DescribeNacosServerInterfacesRequest} {@link DescribeNacosServerInterfacesResponse} */
   DescribeNacosServerInterfaces(data?: DescribeNacosServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosServerInterfacesResponse>;
+  /** 查询云原生网关分组信息 {@link DescribeNativeGatewayServerGroupsRequest} {@link DescribeNativeGatewayServerGroupsResponse} */
+  DescribeNativeGatewayServerGroups(data: DescribeNativeGatewayServerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeGatewayServerGroupsResponse>;
   /** 获取云原生网关服务详情 {@link DescribeOneCloudNativeAPIGatewayServiceRequest} {@link DescribeOneCloudNativeAPIGatewayServiceResponse} */
   DescribeOneCloudNativeAPIGatewayService(data: DescribeOneCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOneCloudNativeAPIGatewayServiceResponse>;
   /** 查询引擎实例访问地址 {@link DescribeSREInstanceAccessAddressRequest} {@link DescribeSREInstanceAccessAddressResponse} */

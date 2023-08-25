@@ -1454,7 +1454,7 @@ declare interface CreateEnvironmentRoleRequest {
   /** 授权项，最多只能包含produce、consume两项的非空字符串数组。 */
   Permissions: string[];
   /** 必填字段，集群的ID */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface CreateEnvironmentRoleResponse {
@@ -1667,10 +1667,10 @@ declare interface CreateSubscriptionRequest {
   SubscriptionName: string;
   /** 是否幂等创建，若否不允许创建同名的订阅关系。 */
   IsIdempotent: boolean;
+  /** Pulsar 集群的ID */
+  ClusterId: string;
   /** 备注，128个字符以内。 */
   Remark?: string;
-  /** Pulsar 集群的ID */
-  ClusterId?: string;
   /** 是否自动创建死信和重试主题，True 表示创建，False表示不创建，默认自动创建死信和重试主题。 */
   AutoCreatePolicyTopic?: boolean;
   /** 指定死信和重试主题名称规范，LEGACY表示历史命名规则，COMMUNITY表示Pulsar社区命名规范 */
@@ -1679,7 +1679,7 @@ declare interface CreateSubscriptionRequest {
 
 declare interface CreateSubscriptionResponse {
   /** 创建结果。 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1691,12 +1691,12 @@ declare interface CreateTopicRequest {
   TopicName: string;
   /** 入参为1，即是创建非分区topic，无分区；入参大于1，表示分区topic的分区数，最大不允许超过128。 */
   Partitions: number;
+  /** Pulsar 集群的ID */
+  ClusterId: string;
   /** 备注，128字符以内。 */
   Remark?: string;
   /** 该入参将逐步弃用，可切换至PulsarTopicType参数0： 普通消息；1 ：全局顺序消息；2 ：局部顺序消息；3 ：重试队列；4 ：死信队列。 */
   TopicType?: number;
-  /** Pulsar 集群的ID */
-  ClusterId?: string;
   /** Pulsar 主题类型0: 非持久非分区1: 非持久分区2: 持久非分区3: 持久分区 */
   PulsarTopicType?: number;
   /** 未消费消息过期时间，单位：秒，取值范围：60秒~15天。 */
@@ -1768,7 +1768,7 @@ declare interface DeleteEnvironmentRolesRequest {
   /** 角色名称数组。 */
   RoleNames: string[];
   /** 必填字段，集群的ID */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface DeleteEnvironmentRolesResponse {
@@ -1780,12 +1780,12 @@ declare interface DeleteEnvironmentsRequest {
   /** 环境（命名空间）数组，每次最多删除20个。 */
   EnvironmentIds: string[];
   /** Pulsar 集群的ID */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface DeleteEnvironmentsResponse {
   /** 成功删除的环境（命名空间）数组。 */
-  EnvironmentIds: string[];
+  EnvironmentIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1892,12 +1892,12 @@ declare interface DeleteRolesRequest {
   /** 角色名称数组。 */
   RoleNames: string[];
   /** 必填字段，集群Id */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface DeleteRolesResponse {
   /** 成功删除的角色名称数组。 */
-  RoleNames: string[];
+  RoleNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1924,7 +1924,7 @@ declare interface DeleteTopicsRequest {
   /** 主题集合，每次最多删除20个。 */
   TopicSets: TopicRecord[];
   /** pulsar集群Id。 */
-  ClusterId?: string;
+  ClusterId: string;
   /** 环境（命名空间）名称。 */
   EnvironmentId?: string;
   /** 是否强制删除，默认为false */
@@ -1933,7 +1933,7 @@ declare interface DeleteTopicsRequest {
 
 declare interface DeleteTopicsResponse {
   /** 被删除的主题数组。 */
-  TopicSets: TopicRecord[];
+  TopicSets?: TopicRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2176,26 +2176,26 @@ declare interface DescribeEnvironmentAttributesRequest {
   /** 环境（命名空间）名称。 */
   EnvironmentId: string;
   /** Pulsar 集群的ID */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface DescribeEnvironmentAttributesResponse {
   /** 未消费消息过期时间，单位：秒，最大1296000（15天）。 */
-  MsgTTL: number;
+  MsgTTL?: number;
   /** 消费速率限制，单位：byte/秒，0：不限速。 */
-  RateInByte: number;
+  RateInByte?: number;
   /** 消费速率限制，单位：个数/秒，0：不限速。 */
-  RateInSize: number;
+  RateInSize?: number;
   /** 已消费消息保存策略，单位：小时，0：消费完马上删除。 */
-  RetentionHours: number;
+  RetentionHours?: number;
   /** 已消费消息保存策略，单位：G，0：消费完马上删除。 */
-  RetentionSize: number;
+  RetentionSize?: number;
   /** 环境（命名空间）名称。 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 副本数。 */
-  Replicas: number;
+  Replicas?: number;
   /** 备注。 */
-  Remark: string;
+  Remark?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2225,23 +2225,23 @@ declare interface DescribeEnvironmentRolesResponse {
 }
 
 declare interface DescribeEnvironmentsRequest {
+  /** Pulsar 集群的ID */
+  ClusterId: string;
   /** 命名空间名称，模糊搜索。 */
   EnvironmentId?: string;
   /** 起始下标，不填默认为0。 */
   Offset?: number;
   /** 返回数量，不填则默认为10，最大值为20。 */
   Limit?: number;
-  /** Pulsar 集群的ID */
-  ClusterId?: string;
   /** * EnvironmentId按照名称空间进行过滤，精确查询。类型：String必选：否 */
   Filters?: Filter[];
 }
 
 declare interface DescribeEnvironmentsResponse {
   /** 命名空间记录数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 命名空间集合数组。 */
-  EnvironmentSet: Environment[];
+  EnvironmentSet?: Environment[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2691,23 +2691,23 @@ declare interface DescribeRocketMQVipInstancesResponse {
 }
 
 declare interface DescribeRolesRequest {
+  /** 必填字段，集群Id */
+  ClusterId: string;
   /** 角色名称，模糊查询 */
   RoleName?: string;
   /** 起始下标，不填默认为0。 */
   Offset?: number;
   /** 返回数量，不填则默认为10，最大值为20。 */
   Limit?: number;
-  /** 必填字段，集群Id */
-  ClusterId?: string;
   /** * RoleName按照角色名进行过滤，精确查询。类型：String必选：否 */
   Filters?: Filter[];
 }
 
 declare interface DescribeRolesResponse {
   /** 记录数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 角色数组。 */
-  RoleSets: Role[];
+  RoleSets?: Role[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2717,6 +2717,8 @@ declare interface DescribeSubscriptionsRequest {
   EnvironmentId: string;
   /** 主题名称。 */
   TopicName: string;
+  /** Pulsar 集群的ID */
+  ClusterId: string;
   /** 起始下标，不填默认为0。 */
   Offset?: number;
   /** 返回数量，不填则默认为10，最大值为20。 */
@@ -2725,15 +2727,13 @@ declare interface DescribeSubscriptionsRequest {
   SubscriptionName?: string;
   /** 数据过滤条件。 */
   Filters?: FilterSubscription[];
-  /** Pulsar 集群的ID */
-  ClusterId?: string;
 }
 
 declare interface DescribeSubscriptionsResponse {
   /** 订阅者集合数组。 */
-  SubscriptionSets: Subscription[];
+  SubscriptionSets?: Subscription[];
   /** 数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2879,10 +2879,10 @@ declare interface ModifyEnvironmentAttributesRequest {
   EnvironmentId: string;
   /** 未消费消息过期时间，单位：秒，范围60秒~15天。 */
   MsgTTL: number;
+  /** 集群ID */
+  ClusterId: string;
   /** 备注，字符串最长不超过128。 */
   Remark?: string;
-  /** 集群ID */
-  ClusterId?: string;
   /** 消息保留策略 */
   RetentionPolicy?: RetentionPolicy;
   /** 是否开启自动创建订阅 */
@@ -2910,7 +2910,7 @@ declare interface ModifyEnvironmentRoleRequest {
   /** 授权项，最多只能包含produce、consume两项的非空字符串数组。 */
   Permissions: string[];
   /** 必填字段，集群的ID */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface ModifyEnvironmentRoleResponse {
@@ -3069,17 +3069,21 @@ declare interface ModifyRocketMQTopicResponse {
 declare interface ModifyRoleRequest {
   /** 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。 */
   RoleName: string;
+  /** 必填字段，集群Id */
+  ClusterId: string;
   /** 备注说明，长度必须大等于0且小等于128。 */
   Remark?: string;
-  /** 必填字段，集群Id */
-  ClusterId?: string;
+  /** 批量绑定名字空间信息 */
+  EnvironmentRoleSets?: EnvironmentRoleSet[];
+  /** 全部解绑名字空间，设置为 true */
+  UnbindAllEnvironment?: boolean;
 }
 
 declare interface ModifyRoleResponse {
   /** 角色名称 */
-  RoleName: string;
+  RoleName?: string;
   /** 备注说明 */
-  Remark: string;
+  Remark?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3091,10 +3095,10 @@ declare interface ModifyTopicRequest {
   TopicName: string;
   /** 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过128个分区。 */
   Partitions: number;
+  /** Pulsar 集群的ID */
+  ClusterId: string;
   /** 备注，128字符以内。 */
   Remark?: string;
-  /** Pulsar 集群的ID */
-  ClusterId?: string;
   /** 未消费消息过期时间，单位：秒，取值范围：60秒~15天。 */
   MsgTTL?: number;
 }
@@ -3442,7 +3446,7 @@ declare interface Tdmq {
   /** 获取命名空间角色列表 {@link DescribeEnvironmentRolesRequest} {@link DescribeEnvironmentRolesResponse} */
   DescribeEnvironmentRoles(data?: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
   /** 获取命名空间列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
-  DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 运营端获取命名空间bundle列表 {@link DescribeNamespaceBundlesOptRequest} {@link DescribeNamespaceBundlesOptResponse} */
   DescribeNamespaceBundlesOpt(data: DescribeNamespaceBundlesOptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespaceBundlesOptResponse>;
   /** 运营端获节点健康状态 {@link DescribeNodeHealthOptRequest} {@link DescribeNodeHealthOptResponse} */
@@ -3484,7 +3488,7 @@ declare interface Tdmq {
   /** 查询RocketMQ专享实例列表 {@link DescribeRocketMQVipInstancesRequest} {@link DescribeRocketMQVipInstancesResponse} */
   DescribeRocketMQVipInstances(data?: DescribeRocketMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstancesResponse>;
   /** 获取角色列表 {@link DescribeRolesRequest} {@link DescribeRolesResponse} */
-  DescribeRoles(data?: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
+  DescribeRoles(data: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
   /** 获取消费订阅列表 {@link DescribeSubscriptionsRequest} {@link DescribeSubscriptionsResponse} */
   DescribeSubscriptions(data: DescribeSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionsResponse>;
   /** 查询主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */

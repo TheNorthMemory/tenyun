@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，9901+ 服务数</summary>
+<details><summary>共计 240+ 款产品，10051+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -158,7 +158,7 @@ clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-1
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) | 2021-05-24(22) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(84) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(85) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -182,7 +182,7 @@ dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(27) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
-dsgc | [数据安全中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(1) |
+dsgc | [数据安全中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(146) |
 dtf | [分布式事务](https://cloud.tencent.com/document/product/1224) | 2020-05-06(1) |
 dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 2021-12-06(48) | 2018-03-30(23) |
 eb | [事件总线](https://cloud.tencent.com/document/product/1359) | 2021-04-16(28) |
@@ -223,7 +223,7 @@ iottid | [物联网设备身份认证](https://cloud.tencent.com/document/produc
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(99) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
-iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(75) |
+iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(76) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
@@ -320,7 +320,7 @@ trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(50) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(36) |
-tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(41) |
+tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(42) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(219) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
@@ -330,7 +330,7 @@ vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(160) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(313) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(77) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(79) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(296) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

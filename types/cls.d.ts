@@ -2846,6 +2846,38 @@ declare interface RetryShipperTaskResponse {
   RequestId?: string;
 }
 
+declare interface SearchCosRechargeInfoRequest {
+  /** 日志主题 ID */
+  TopicId: string;
+  /** 日志集ID */
+  LogsetId: string;
+  /** 投递任务名称 */
+  Name: string;
+  /** 存储桶 */
+  Bucket: string;
+  /** 存储桶所在地域 */
+  BucketRegion: string;
+  /** cos文件所在文件夹的前缀 */
+  Prefix: string;
+  /** 压缩模式: "", "gzip", "lzop", "snappy”; 默认"" */
+  Compress?: string;
+}
+
+declare interface SearchCosRechargeInfoResponse {
+  /** 匹配到的存储桶下的某个文件的前几行数据 */
+  Data: string[] | null;
+  /** 匹配到的存储桶下的文件个数 */
+  Sum: number;
+  /** 当前预览文件路径 */
+  Path: string | null;
+  /** 预览获取数据失败原因 */
+  Msg: string | null;
+  /** 状态 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchLogRequest {
   /** 要检索分析的日志的起始时间，Unix时间戳（毫秒） */
   From: number;
@@ -3093,6 +3125,8 @@ declare interface Cls {
   PreviewKafkaRecharge(data: PreviewKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewKafkaRechargeResponse>;
   /** 重试失败的投递任务 {@link RetryShipperTaskRequest} {@link RetryShipperTaskResponse} */
   RetryShipperTask(data: RetryShipperTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryShipperTaskResponse>;
+  /** 预览cos导入信息 {@link SearchCosRechargeInfoRequest} {@link SearchCosRechargeInfoResponse} */
+  SearchCosRechargeInfo(data: SearchCosRechargeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SearchCosRechargeInfoResponse>;
   /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */
   SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
   /** 分裂主题分区 {@link SplitPartitionRequest} {@link SplitPartitionResponse} */

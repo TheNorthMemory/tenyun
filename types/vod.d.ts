@@ -2514,6 +2514,16 @@ declare interface LiveRealTimeClipStreamInfo {
   TemplateId?: number;
 }
 
+/** 直播录制信息 */
+declare interface LiveRecordInfo {
+  /** 直播录制流 ID。 */
+  StreamId?: string;
+  /** 录制起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  RecordStartTime?: string;
+  /** 录制结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  RecordEndTime?: string;
+}
+
 /** 低光照增强控制 */
 declare interface LowLightEnhanceInfo {
   /** 低光照增强控制开关，可选值：ON：开启低光照增强；OFF：关闭低光照增强。 */
@@ -3150,12 +3160,16 @@ declare interface MediaSnapshotByTimePicInfoItem {
 
 /** 来源文件信息 */
 declare interface MediaSourceData {
-  /** 媒体文件的来源类别：Record：来自录制。如直播录制、直播时移录制等。Upload：来自上传。如拉取上传、服务端上传、客户端 UGC 上传等。VideoProcessing：来自视频处理。如视频拼接、视频剪辑等。WebPageRecord：来自全景录制。Unknown：未知来源。 */
-  SourceType: string;
-  /** 用户创建文件时透传的字段 */
-  SourceContext: string;
-  /** TRTC 伴生录制信息。 */
-  TrtcRecordInfo: TrtcRecordInfo | null;
+  /** 媒体文件的来源类别：Record：来自录制。如直播录制、直播时移录制等。Upload：来自上传。如拉取上传、服务端上传、客户端 UGC 上传等。VideoProcessing：来自视频处理。如视频拼接、视频剪辑等。TrtcRecord：来自TRTC 伴生录制。WebPageRecord：来自全景录制。Unknown：未知来源。 */
+  SourceType?: string;
+  /** 用户创建文件时透传的字段。 */
+  SourceContext?: string;
+  /** 直播录制信息，当文件来源为 Record 时有效。 */
+  LiveRecordInfo?: LiveRecordInfo | null;
+  /** TRTC 伴生录制信息，当文件来源为 TrtcRecord 时有效。 */
+  TrtcRecordInfo?: TrtcRecordInfo | null;
+  /** 全景录制信息，当文件来源为 WebPageRecord 时有效。 */
+  WebPageRecordInfo?: WebPageRecordInfo | null;
 }
 
 /** 转自适应码流子流信息。 */
@@ -5414,6 +5428,14 @@ declare interface WatermarkTemplate {
   UpdateTime: string;
   /** 原点位置，可选值：topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。； */
   CoordinateOrigin: string;
+}
+
+/** 全景录制信息 */
+declare interface WebPageRecordInfo {
+  /** 全景录制地址。 */
+  RecordUrl?: string;
+  /** 全景录制任务 ID。 */
+  RecordTaskId?: string;
 }
 
 /** 微信小程序发布任务信息 */

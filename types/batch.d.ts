@@ -58,6 +58,8 @@ declare interface Application {
   PackagePath?: string | null;
   /** 应用使用Docker的相关配置。在使用Docker配置的情况下，DeliveryForm 为 LOCAL 表示直接使用Docker镜像内部的应用软件，通过Docker方式运行；DeliveryForm 为 PACKAGE，表示将远程应用包注入到Docker镜像后，通过Docker方式运行。为避免Docker不同版本的兼容性问题，Docker安装包及相关依赖由Batch统一负责，对于已安装Docker的自定义镜像，请卸载后再使用Docker特性。 */
   Docker?: Docker | null;
+  /** 任务执行命令信息。与Command不能同时指定。 */
+  Commands?: CommandLine[] | null;
 }
 
 /** 授权认证信息 */
@@ -68,6 +70,12 @@ declare interface Authentication {
   SecretId: string;
   /** SecretKey */
   SecretKey: string;
+}
+
+/** 任务执行信息描述。 */
+declare interface CommandLine {
+  /** 任务执行命令。 */
+  Command: string | null;
 }
 
 /** 计算环境创建信息。 */

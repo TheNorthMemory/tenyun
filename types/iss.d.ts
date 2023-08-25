@@ -632,6 +632,28 @@ declare interface FaceMaskAIResultInfo {
   FaceMaskInfo?: BaseAIResultInfo[];
 }
 
+/** 网关设备数据 */
+declare interface GatewayDevice {
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 网关接入协议类型 */
+  ProtocolType?: number | null;
+  /** 网关接入协议名称 */
+  ProtocolTypeName?: string | null;
+  /** 设备名称 */
+  Name?: string | null;
+  /** 设备类型 */
+  Type?: number | null;
+  /** 设备内网IP */
+  Ip?: string | null;
+  /** 设备端口 */
+  Port?: number | null;
+  /** 设备下通道数 */
+  ChannelNum?: number | null;
+  /** 设备状态 */
+  Status?: number | null;
+}
+
 /** 网关详情版本信息 */
 declare interface GatewayVersion {
   /** 服务名称 */
@@ -706,6 +728,14 @@ declare interface ListDeviceInfo {
   OrganizationId?: string;
   /** 通道数量 */
   ChannelNum?: number;
+}
+
+/** 查询网关设备列表返回数据 */
+declare interface ListGatewayDevicesData {
+  /** 网关下设备列表 */
+  List?: GatewayDevice[] | null;
+  /** 网关下设备总数 */
+  TotalCount?: number | null;
 }
 
 /** 查询网关列表返回结果 */
@@ -1948,6 +1978,18 @@ declare interface ListDevicesResponse {
   RequestId?: string;
 }
 
+declare interface ListGatewayDevicesRequest {
+  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
+  GatewayId: string;
+}
+
+declare interface ListGatewayDevicesResponse {
+  /** 返回数据 */
+  Data?: ListGatewayDevicesData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListGatewaysRequest {
   /** 页码，默认为1 */
   PageNumber?: number;
@@ -2419,6 +2461,8 @@ declare interface Iss {
   ListAITasks(data?: ListAITasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListAITasksResponse>;
   /** 获取设备列表 {@link ListDevicesRequest} {@link ListDevicesResponse} */
   ListDevices(data: ListDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDevicesResponse>;
+  /** 查询网关下设备列表 {@link ListGatewayDevicesRequest} {@link ListGatewayDevicesResponse} */
+  ListGatewayDevices(data: ListGatewayDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListGatewayDevicesResponse>;
   /** 获取网关列表 {@link ListGatewaysRequest} {@link ListGatewaysResponse} */
   ListGateways(data?: ListGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<ListGatewaysResponse>;
   /** 查询组织目录下的未添加到实时上云计划中的通道数量 {@link ListOrganizationChannelNumbersRequest} {@link ListOrganizationChannelNumbersResponse} */

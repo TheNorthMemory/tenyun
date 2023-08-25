@@ -1888,6 +1888,8 @@ declare interface IntegrationNodeSchema {
   Properties?: RecordField[] | null;
   /** schema别名 */
   Alias?: string | null;
+  /** 字段备注 */
+  Comment?: string | null;
 }
 
 /** 集成节点schema映射 */

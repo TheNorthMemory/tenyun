@@ -922,6 +922,14 @@ declare interface TLSVersion {
   VersionName: string | null;
 }
 
+/** 需要开启/关闭API安全的 实例+域名 组合实体 */
+declare interface TargetEntity {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 域名 */
+  Domain?: string;
+}
+
 /** saas和clb信息 */
 declare interface UserDomainInfo {
   /** 用户id */
@@ -1426,6 +1434,8 @@ declare interface DescribeAttackOverviewResponse {
   BotCount?: number;
   /** api资产总数 */
   ApiAssetsCount?: number;
+  /** api风险事件数量 */
+  ApiRiskEventCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1573,7 +1583,7 @@ declare interface DescribeDomainWhiteRulesResponse {
 }
 
 declare interface DescribeDomainsRequest {
-  /** 数据偏移量，从1开始。 */
+  /** 分页偏移量，取Limit整数倍。最小值为0，最大值= Total/Limit向上取整 */
   Offset: number;
   /** 返回域名的数量 */
   Limit: number;
@@ -2016,6 +2026,28 @@ declare interface ModifyAccessPeriodResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApiAnalyzeStatusRequest {
+  /** 开关状态 */
+  Status: number;
+  /** 域名 */
+  Domain?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 需要批量开启的实体列表 */
+  TargetList?: TargetEntity[];
+}
+
+declare interface ModifyApiAnalyzeStatusResponse {
+  /** 已经开启的数量,如果返回值为3（大于支持的域名开启数量），则表示开启失败 */
+  Count?: number | null;
+  /** 不支持开启的域名列表 */
+  UnSupportedList?: string[] | null;
+  /** 开启/关闭失败的域名列表 */
+  FailDomainList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAreaBanStatusRequest {
   /** 需要修改的域名 */
   Domain: string;
@@ -2024,6 +2056,28 @@ declare interface ModifyAreaBanStatusRequest {
 }
 
 declare interface ModifyAreaBanStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBotStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 类别 */
+  Category: string;
+  /** 状态 */
+  Status: string;
+  /** 实例id */
+  InstanceID?: string;
+  /** 是否是bot4.0版本 */
+  IsVersionFour?: boolean;
+  /** 传入Bot版本号，场景化版本为"4.1.0" */
+  BotVersion?: string;
+}
+
+declare interface ModifyBotStatusResponse {
+  /** 正常情况为null */
+  Data: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2587,8 +2641,12 @@ declare interface Waf {
   GetAttackTotalCount(data: GetAttackTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackTotalCountResponse>;
   /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
+  /** api分析页面开关 {@link ModifyApiAnalyzeStatusRequest} {@link ModifyApiAnalyzeStatusResponse} */
+  ModifyApiAnalyzeStatus(data: ModifyApiAnalyzeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAnalyzeStatusResponse>;
   /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
+  /** Bot_V2 bot总开关更新 {@link ModifyBotStatusRequest} {@link ModifyBotStatusResponse} */
+  ModifyBotStatus(data: ModifyBotStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotStatusResponse>;
   /** 开启或禁用访问控制（自定义策略） {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
   /** 编辑精准白名单 {@link ModifyCustomWhiteRuleRequest} {@link ModifyCustomWhiteRuleResponse} */

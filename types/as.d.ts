@@ -1804,7 +1804,7 @@ declare interface As {
   StartAutoScalingInstances(data: StartAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartAutoScalingInstancesResponse>;
   /** 关闭伸缩组内 CVM 实例 {@link StopAutoScalingInstancesRequest} {@link StopAutoScalingInstancesResponse} */
   StopAutoScalingInstances(data: StopAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoScalingInstancesResponse>;
-  /** 升级启动配置 {@link UpgradeLaunchConfigurationRequest} {@link UpgradeLaunchConfigurationResponse} */
+  /** @deprecated 升级启动配置 {@link UpgradeLaunchConfigurationRequest} {@link UpgradeLaunchConfigurationResponse} */
   UpgradeLaunchConfiguration(data: UpgradeLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLaunchConfigurationResponse>;
   /** 升级生命周期挂钩 {@link UpgradeLifecycleHookRequest} {@link UpgradeLifecycleHookResponse} */
   UpgradeLifecycleHook(data: UpgradeLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLifecycleHookResponse>;
