@@ -1234,6 +1234,20 @@ declare interface DeleteAttackDownloadRecordResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCustomRuleRequest {
+  /** 删除的域名 */
+  Domain: string;
+  /** 删除的规则ID */
+  RuleId: string;
+  /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
+  Edition?: string;
+}
+
+declare interface DeleteCustomRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCustomWhiteRuleRequest {
   /** 删除的域名 */
   Domain: string;
@@ -1480,6 +1494,30 @@ declare interface DescribeCiphersDetailRequest {
 declare interface DescribeCiphersDetailResponse {
   /** 加密套件信息 */
   Ciphers: TLSCiphers[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCustomRuleListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 偏移 */
+  Offset: number;
+  /** 容量 */
+  Limit: number;
+  /** 过滤数组,name可以是如下的值： RuleID,RuleName,Match */
+  Filters?: FiltersItemNew[];
+  /** asc或者desc */
+  Order?: string;
+  /** exp_ts或者mod_ts */
+  By?: string;
+}
+
+declare interface DescribeCustomRuleListResponse {
+  /** 规则详情 */
+  RuleList: DescribeCustomRulesRspRuleListItem[];
+  /** 规则条数 */
+  TotalCount: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2082,6 +2120,34 @@ declare interface ModifyBotStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCustomRuleRequest {
+  /** 编辑的域名 */
+  Domain: string;
+  /** 编辑的规则ID */
+  RuleId: number;
+  /** 编辑的规则名称 */
+  RuleName: string;
+  /** 执行动作，0：放行、1：阻断、2：人机识别、3：观察、4：重定向 */
+  RuleAction: string;
+  /** 匹配条件数组 */
+  Strategies: Strategy[];
+  /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
+  Edition?: string;
+  /** 动作为重定向的时候重定向URL，默认为"/" */
+  Redirect?: string;
+  /** 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。默认是"geoip,cc,owasp,ai,antileakage" */
+  Bypass?: string;
+  /** 优先级，1~100的整数，数字越小，代表这条规则的执行优先级越高。默认是100 */
+  SortId?: number;
+  /** 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。默认是0 */
+  ExpireTime?: number;
+}
+
+declare interface ModifyCustomRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomRuleStatusRequest {
   /** 域名 */
   Domain: string;
@@ -2551,6 +2617,8 @@ declare interface Waf {
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
   /** 删除攻击日志下载任务记录 {@link DeleteAttackDownloadRecordRequest} {@link DeleteAttackDownloadRecordResponse} */
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
+  /** 删除自定义规则 {@link DeleteCustomRuleRequest} {@link DeleteCustomRuleResponse} */
+  DeleteCustomRule(data: DeleteCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomRuleResponse>;
   /** 删除精准白名单规则 {@link DeleteCustomWhiteRuleRequest} {@link DeleteCustomWhiteRuleResponse} */
   DeleteCustomWhiteRule(data: DeleteCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomWhiteRuleResponse>;
   /** 删除域名规则白名单 {@link DeleteDomainWhiteRulesRequest} {@link DeleteDomainWhiteRulesResponse} */
@@ -2579,6 +2647,8 @@ declare interface Waf {
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** 查询加密套件信息 {@link DescribeCiphersDetailRequest} {@link DescribeCiphersDetailResponse} */
   DescribeCiphersDetail(data?: DescribeCiphersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCiphersDetailResponse>;
+  /** 查询访问控制规则 {@link DescribeCustomRuleListRequest} {@link DescribeCustomRuleListResponse} */
+  DescribeCustomRuleList(data: DescribeCustomRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRuleListResponse>;
   /** 查询精准白名单规则 {@link DescribeCustomWhiteRuleRequest} {@link DescribeCustomWhiteRuleResponse} */
   DescribeCustomWhiteRule(data: DescribeCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomWhiteRuleResponse>;
   /** 获取域名概况 {@link DescribeDomainCountInfoRequest} {@link DescribeDomainCountInfoResponse} */
@@ -2647,6 +2717,8 @@ declare interface Waf {
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** Bot_V2 bot总开关更新 {@link ModifyBotStatusRequest} {@link ModifyBotStatusResponse} */
   ModifyBotStatus(data: ModifyBotStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotStatusResponse>;
+  /** 编辑自定义规则 {@link ModifyCustomRuleRequest} {@link ModifyCustomRuleResponse} */
+  ModifyCustomRule(data: ModifyCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleResponse>;
   /** 开启或禁用访问控制（自定义策略） {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
   /** 编辑精准白名单 {@link ModifyCustomWhiteRuleRequest} {@link ModifyCustomWhiteRuleResponse} */

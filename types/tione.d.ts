@@ -624,6 +624,12 @@ declare interface ImageInfo {
   ImageName?: string | null;
 }
 
+/** 推理代码的信息 */
+declare interface InferCodeInfo {
+  /** 推理代码所在的cos详情 */
+  CosPathInfo?: CosPathInfo | null;
+}
+
 /** 服务的调用信息，服务组下唯一 */
 declare interface InferGatewayCallInfo {
   /** 内网http调用地址 */
@@ -1179,63 +1185,63 @@ declare interface SegmentationInfo {
 /** 描述在线服务 */
 declare interface Service {
   /** 服务组id */
-  ServiceGroupId: string;
+  ServiceGroupId?: string;
   /** 服务id */
-  ServiceId: string;
+  ServiceId?: string;
   /** 服务组名 */
-  ServiceGroupName: string;
+  ServiceGroupName?: string;
   /** 服务描述 */
-  ServiceDescription: string | null;
+  ServiceDescription?: string | null;
   /** 服务的详细信息 */
-  ServiceInfo: ServiceInfo | null;
+  ServiceInfo?: ServiceInfo | null;
   /** 集群id */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 命名空间 */
-  Namespace: string | null;
+  Namespace?: string | null;
   /** 付费类型 */
-  ChargeType: string | null;
+  ChargeType?: string | null;
   /** 包年包月服务的资源组id，按量计费的服务为空 */
-  ResourceGroupId: string | null;
+  ResourceGroupId?: string | null;
   /** 包年包月服务对应的资源组名字 */
-  ResourceGroupName: string | null;
+  ResourceGroupName?: string | null;
   /** 服务的标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 服务所在的 ingress 的 name */
-  IngressName: string | null;
+  IngressName?: string | null;
   /** 创建者 */
-  CreatedBy: string | null;
+  CreatedBy?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 主账号 */
-  Uin: string | null;
+  Uin?: string | null;
   /** 子账号 */
-  SubUin: string | null;
+  SubUin?: string | null;
   /** app_id */
-  AppId: number | null;
+  AppId?: number | null;
   /** 服务的业务状态 */
-  BusinessStatus: string | null;
+  BusinessStatus?: string | null;
   /** 已废弃 */
-  ServiceLimit: ServiceLimit | null;
+  ServiceLimit?: ServiceLimit | null;
   /** 已废弃 */
-  ScheduledAction: ScheduledAction | null;
+  ScheduledAction?: ScheduledAction | null;
   /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
-  CreateFailedReason: string | null;
+  CreateFailedReason?: string | null;
   /** 服务状态CREATING 创建中CREATE_FAILED 创建失败Normal	正常运行中Stopped 已停止Stopping 停止中Abnormal 异常Pending 启动中Waiting 就绪中 */
-  Status: string | null;
+  Status?: string | null;
   /** 费用信息 */
-  BillingInfo: string | null;
+  BillingInfo?: string | null;
   /** 模型权重 */
-  Weight: number | null;
+  Weight?: number | null;
   /** 服务的创建来源AUTO_ML: 来自自动学习的一键发布DEFAULT: 其他来源 */
-  CreateSource: string | null;
+  CreateSource?: string | null;
   /** 版本号 */
-  Version: string | null;
+  Version?: string | null;
   /** 服务组下服务的最高版本号 */
-  LatestVersion: string | null;
+  LatestVersion?: string | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -1360,6 +1366,12 @@ declare interface ServiceInfo {
   ServiceLimit?: ServiceLimit | null;
   /** 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。 */
   ModelTurboEnable?: boolean | null;
+  /** 挂载 */
+  VolumeMount?: VolumeMount | null;
+  /** 推理代码信息 */
+  InferCodeInfo?: InferCodeInfo | null;
+  /** 服务的启动命令 */
+  Command?: string | null;
 }
 
 /** 服务的限流限速等配置 */
@@ -1426,6 +1438,8 @@ declare interface StatefulSetCondition {
   Type: string | null;
   /** 上次更新的时间 */
   LastTransitionTime: string | null;
+  /** 上次更新的时间 */
+  LastUpdateTime?: string | null;
 }
 
 /** 描述腾讯云标签 */
@@ -1756,7 +1770,7 @@ declare interface Usage {
 declare interface VolumeMount {
   /** cfs的配置信息 */
   CFSConfig: CFSConfig;
-  /** 挂载源类型 */
+  /** 挂载源类型，CFS、COS，默认为CFS */
   VolumeSourceType?: string;
 }
 
@@ -1979,6 +1993,8 @@ declare interface CreateModelServiceRequest {
   ModelTurboEnable?: boolean;
   /** 服务分类 */
   ServiceCategory?: string;
+  /** 服务的启动命令 */
+  Command?: string;
 }
 
 declare interface CreateModelServiceResponse {
@@ -2987,6 +3003,8 @@ declare interface ModifyModelServiceRequest {
   VolumeMount?: VolumeMount;
   /** 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。默认不开启 */
   ModelTurboEnable?: boolean;
+  /** 服务的启动命令 */
+  Command?: string;
 }
 
 declare interface ModifyModelServiceResponse {

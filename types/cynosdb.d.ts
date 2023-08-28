@@ -699,9 +699,9 @@ declare interface CynosdbInstanceGrp {
 /** 数据库权限列表 */
 declare interface DatabasePrivileges {
   /** 数据库 */
-  Db: string;
+  Db: string | null;
   /** 权限列表 */
-  Privileges: string[];
+  Privileges: string[] | null;
 }
 
 /** 数据库表信息 */
@@ -1437,11 +1437,11 @@ declare interface SlowQueriesItem {
 /** mysql表权限 */
 declare interface TablePrivileges {
   /** 数据库名 */
-  Db: string;
+  Db: string | null;
   /** 表名 */
-  TableName: string;
+  TableName: string | null;
   /** 权限列表 */
-  Privileges: string[];
+  Privileges: string[] | null;
 }
 
 /** 集群绑定的标签信息，包含标签键TagKey和标签值TagValue */
@@ -1533,7 +1533,7 @@ declare interface AddClusterSlaveZoneRequest {
 
 declare interface AddClusterSlaveZoneResponse {
   /** 异步FlowId */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2087,13 +2087,13 @@ declare interface DescribeAccountAllGrantPrivilegesRequest {
 
 declare interface DescribeAccountAllGrantPrivilegesResponse {
   /** 权限语句 */
-  PrivilegeStatements: string[] | null;
+  PrivilegeStatements?: string[] | null;
   /** 全局权限 */
-  GlobalPrivileges: string[] | null;
+  GlobalPrivileges?: string[] | null;
   /** 数据库权限 */
-  DatabasePrivileges: DatabasePrivileges[] | null;
+  DatabasePrivileges?: DatabasePrivileges[] | null;
   /** 数据库表权限 */
-  TablePrivileges: TablePrivileges[] | null;
+  TablePrivileges?: TablePrivileges[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2413,9 +2413,9 @@ declare interface DescribeClusterParamLogsRequest {
 
 declare interface DescribeClusterParamLogsResponse {
   /** 记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数修改记录 */
-  ClusterParamLogs: ClusterParamModifyLog[] | null;
+  ClusterParamLogs?: ClusterParamModifyLog[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2559,7 +2559,7 @@ declare interface DescribeInstanceParamsRequest {
 
 declare interface DescribeInstanceParamsResponse {
   /** 实例参数列表 */
-  Items: InstanceParamItem[];
+  Items?: InstanceParamItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2589,9 +2589,9 @@ declare interface DescribeInstanceSlowQueriesRequest {
 
 declare interface DescribeInstanceSlowQueriesResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 慢查询记录 */
-  SlowQueries: SlowQueriesItem[];
+  SlowQueries?: SlowQueriesItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2889,11 +2889,11 @@ declare interface DescribeRollbackTimeRangeRequest {
 
 declare interface DescribeRollbackTimeRangeResponse {
   /** 有效回归时间范围开始时间点（已废弃） */
-  TimeRangeStart: string | null;
+  TimeRangeStart?: string | null;
   /** 有效回归时间范围结束时间点（已废弃） */
-  TimeRangeEnd: string | null;
+  TimeRangeEnd?: string | null;
   /** 可回档时间范围 */
-  RollbackTimeRanges: RollbackTimeRange[];
+  RollbackTimeRanges?: RollbackTimeRange[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3357,7 +3357,7 @@ declare interface ModifyClusterSlaveZoneRequest {
 
 declare interface ModifyClusterSlaveZoneResponse {
   /** 异步FlowId */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3727,7 +3727,7 @@ declare interface RemoveClusterSlaveZoneRequest {
 
 declare interface RemoveClusterSlaveZoneResponse {
   /** 异步FlowId */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3809,7 +3809,7 @@ declare interface RollBackClusterRequest {
 
 declare interface RollBackClusterResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3893,7 +3893,7 @@ declare interface SwitchClusterZoneRequest {
 
 declare interface SwitchClusterZoneResponse {
   /** 异步FlowId */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4033,7 +4033,7 @@ declare interface Cynosdb {
   (): Versions;
   /** 恢复实例访问 {@link ActivateInstanceRequest} {@link ActivateInstanceResponse} */
   ActivateInstance(data: ActivateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateInstanceResponse>;
-  /** 增加从可用区 {@link AddClusterSlaveZoneRequest} {@link AddClusterSlaveZoneResponse} */
+  /** 开启多可用区部署 {@link AddClusterSlaveZoneRequest} {@link AddClusterSlaveZoneResponse} */
   AddClusterSlaveZone(data: AddClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterSlaveZoneResponse>;
   /** 购买实例 {@link AddInstancesRequest} {@link AddInstancesResponse} */
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
@@ -4051,7 +4051,7 @@ declare interface Cynosdb {
   CloseWan(data: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
   /** 复制集群密码复杂度 {@link CopyClusterPasswordComplexityRequest} {@link CopyClusterPasswordComplexityResponse} */
   CopyClusterPasswordComplexity(data: CopyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<CopyClusterPasswordComplexityResponse>;
-  /** 创建账号 {@link CreateAccountsRequest} {@link CreateAccountsResponse} */
+  /** 创建用户账号 {@link CreateAccountsRequest} {@link CreateAccountsResponse} */
   CreateAccounts(data: CreateAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountsResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
   CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
@@ -4071,7 +4071,7 @@ declare interface Cynosdb {
   CreateProxyEndPoint(data: CreateProxyEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyEndPointResponse>;
   /** 新购资源包 {@link CreateResourcePackageRequest} {@link CreateResourcePackageResponse} */
   CreateResourcePackage(data: CreateResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourcePackageResponse>;
-  /** 删除账号 {@link DeleteAccountsRequest} {@link DeleteAccountsResponse} */
+  /** 删除用户账号 {@link DeleteAccountsRequest} {@link DeleteAccountsResponse} */
   DeleteAccounts(data: DeleteAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountsResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
@@ -4083,11 +4083,11 @@ declare interface Cynosdb {
   DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
-  /** 账号所有权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
+  /** 查询账号所有可授予权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
   DescribeAccountAllGrantPrivileges(data: DescribeAccountAllGrantPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAllGrantPrivilegesResponse>;
   /** 查询账号已有权限 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
-  /** 查询数据库管理账号 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
+  /** 查询数据库账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
@@ -4115,7 +4115,7 @@ declare interface Cynosdb {
   DescribeClusterDetailDatabases(data: DescribeClusterDetailDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailDatabasesResponse>;
   /** 查询实例组 {@link DescribeClusterInstanceGrpsRequest} {@link DescribeClusterInstanceGrpsResponse} */
   DescribeClusterInstanceGrps(data: DescribeClusterInstanceGrpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGrpsResponse>;
-  /** 查询参数修改日志 {@link DescribeClusterParamLogsRequest} {@link DescribeClusterParamLogsResponse} */
+  /** 查询参数修改记录 {@link DescribeClusterParamLogsRequest} {@link DescribeClusterParamLogsResponse} */
   DescribeClusterParamLogs(data: DescribeClusterParamLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamLogsResponse>;
   /** 查询集群参数 {@link DescribeClusterParamsRequest} {@link DescribeClusterParamsResponse} */
   DescribeClusterParams(data: DescribeClusterParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamsResponse>;
@@ -4131,9 +4131,9 @@ declare interface Cynosdb {
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 查询错误日志列表 {@link DescribeInstanceErrorLogsRequest} {@link DescribeInstanceErrorLogsResponse} */
   DescribeInstanceErrorLogs(data: DescribeInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceErrorLogsResponse>;
-  /** 查询实例参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
+  /** 查询实例参数 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
-  /** 查询实例慢查询日志 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
+  /** 查询实例慢日志详情 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
   /** 查询实例规格 {@link DescribeInstanceSpecsRequest} {@link DescribeInstanceSpecsResponse} */
   DescribeInstanceSpecs(data: DescribeInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsResponse>;
@@ -4159,9 +4159,9 @@ declare interface Cynosdb {
   DescribeResourcePackageList(data?: DescribeResourcePackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePackageListResponse>;
   /** 查询资源包规格 {@link DescribeResourcePackageSaleSpecRequest} {@link DescribeResourcePackageSaleSpecResponse} */
   DescribeResourcePackageSaleSpec(data: DescribeResourcePackageSaleSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePackageSaleSpecResponse>;
-  /** 根据订单id查询资源信息 {@link DescribeResourcesByDealNameRequest} {@link DescribeResourcesByDealNameResponse} */
+  /** 查询订单关联实例 {@link DescribeResourcesByDealNameRequest} {@link DescribeResourcesByDealNameResponse} */
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
-  /** 查询有效回滚时间范围 {@link DescribeRollbackTimeRangeRequest} {@link DescribeRollbackTimeRangeResponse} */
+  /** 查询回档时间范围 {@link DescribeRollbackTimeRangeRequest} {@link DescribeRollbackTimeRangeResponse} */
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
   /** 查询指定时间是否可回滚 {@link DescribeRollbackTimeValidityRequest} {@link DescribeRollbackTimeValidityResponse} */
   DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
@@ -4189,9 +4189,9 @@ declare interface Cynosdb {
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
   /** 修改账号主机 {@link ModifyAccountHostRequest} {@link ModifyAccountHostResponse} */
   ModifyAccountHost(data: ModifyAccountHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountHostResponse>;
-  /** 修改账号参数 {@link ModifyAccountParamsRequest} {@link ModifyAccountParamsResponse} */
+  /** 修改账号配置 {@link ModifyAccountParamsRequest} {@link ModifyAccountParamsResponse} */
   ModifyAccountParams(data: ModifyAccountParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountParamsResponse>;
-  /** 修改账号权限 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */
+  /** 修改账号库表权限 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
   /** 修改审计规则模版 {@link ModifyAuditRuleTemplatesRequest} {@link ModifyAuditRuleTemplatesResponse} */
   ModifyAuditRuleTemplates(data: ModifyAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleTemplatesResponse>;
@@ -4211,11 +4211,11 @@ declare interface Cynosdb {
   ModifyClusterParam(data: ModifyClusterParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterParamResponse>;
   /** 修改集群密码复杂度 {@link ModifyClusterPasswordComplexityRequest} {@link ModifyClusterPasswordComplexityResponse} */
   ModifyClusterPasswordComplexity(data: ModifyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPasswordComplexityResponse>;
-  /** 修改从可用区 {@link ModifyClusterSlaveZoneRequest} {@link ModifyClusterSlaveZoneResponse} */
+  /** 变更备可用区 {@link ModifyClusterSlaveZoneRequest} {@link ModifyClusterSlaveZoneResponse} */
   ModifyClusterSlaveZone(data: ModifyClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterSlaveZoneResponse>;
   /** 调整包年包月存储容量 {@link ModifyClusterStorageRequest} {@link ModifyClusterStorageResponse} */
   ModifyClusterStorage(data: ModifyClusterStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterStorageResponse>;
-  /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
+  /** 修改实例绑定安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
@@ -4255,9 +4255,9 @@ declare interface Cynosdb {
   RefundResourcePackage(data: RefundResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<RefundResourcePackageResponse>;
   /** 负载均衡数据库代理 {@link ReloadBalanceProxyNodeRequest} {@link ReloadBalanceProxyNodeResponse} */
   ReloadBalanceProxyNode(data: ReloadBalanceProxyNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadBalanceProxyNodeResponse>;
-  /** 删除从可用区 {@link RemoveClusterSlaveZoneRequest} {@link RemoveClusterSlaveZoneResponse} */
+  /** 关闭多可用区部署 {@link RemoveClusterSlaveZoneRequest} {@link RemoveClusterSlaveZoneResponse} */
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
-  /** 重置数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
+  /** 修改数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
   /** 重启实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */
   RestartInstance(data: RestartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInstanceResponse>;
@@ -4265,7 +4265,7 @@ declare interface Cynosdb {
   ResumeServerless(data: ResumeServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeServerlessResponse>;
   /** 批量回收账号权限 {@link RevokeAccountPrivilegesRequest} {@link RevokeAccountPrivilegesResponse} */
   RevokeAccountPrivileges(data: RevokeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeAccountPrivilegesResponse>;
-  /** 回档集群 {@link RollBackClusterRequest} {@link RollBackClusterResponse} */
+  /** 集群回档 {@link RollBackClusterRequest} {@link RollBackClusterResponse} */
   RollBackCluster(data: RollBackClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RollBackClusterResponse>;
   /** 搜索集群database列表 {@link SearchClusterDatabasesRequest} {@link SearchClusterDatabasesResponse} */
   SearchClusterDatabases(data: SearchClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterDatabasesResponse>;
@@ -4275,7 +4275,7 @@ declare interface Cynosdb {
   SetRenewFlag(data: SetRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewFlagResponse>;
   /** 更换集群vpc {@link SwitchClusterVpcRequest} {@link SwitchClusterVpcResponse} */
   SwitchClusterVpc(data: SwitchClusterVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterVpcResponse>;
-  /** 切换到从可用区 {@link SwitchClusterZoneRequest} {@link SwitchClusterZoneResponse} */
+  /** 主备可用区切换 {@link SwitchClusterZoneRequest} {@link SwitchClusterZoneResponse} */
   SwitchClusterZone(data: SwitchClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterZoneResponse>;
   /** 更换数据库代理vpc {@link SwitchProxyVpcRequest} {@link SwitchProxyVpcResponse} */
   SwitchProxyVpc(data: SwitchProxyVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyVpcResponse>;

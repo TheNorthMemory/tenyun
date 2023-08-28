@@ -1375,7 +1375,7 @@ declare interface AddDelayLiveStreamRequest {
   StreamName: string;
   /** 延播时间，单位：秒，上限：600秒。 */
   DelayTime: number;
-  /** 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：1. 默认7天后过期，且最长支持7天内生效。2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：1. 默认7天后过期，且最长支持7天内生效。2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。 */
   ExpireTime?: string;
 }
 
@@ -3677,7 +3677,7 @@ declare interface ForbidLiveStreamRequest {
   DomainName: string;
   /** 流名称。 */
   StreamName: string;
-  /** 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：1. 默认禁推7天，且最长支持禁推90天。2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：1. 默认禁推7天，且最长支持禁推90天。2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。 */
   ResumeTime?: string;
   /** 禁推原因。注明：请务必填写禁推原因，防止误操作。长度限制：2048字节。 */
   Reason?: string;
@@ -3817,9 +3817,9 @@ declare interface ModifyLivePullStreamTaskRequest {
   Operator: string;
   /** 拉流源url列表。SourceType为直播（PullLivePushLive）只可以填1个，SourceType为点播（PullVodPushLive）可以填多个，上限30个。 */
   SourceUrls?: string[];
-  /** 开始时间。使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 开始时间。使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。 */
   StartTime?: string;
-  /** 结束时间，注意：1. 结束时间必须大于开始时间；2. 结束时间和开始时间必须大于当前时间；3. 结束时间 和 开始时间 间隔必须小于七天。使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 结束时间，注意：1. 结束时间必须大于开始时间；2. 结束时间和开始时间必须大于当前时间；3. 结束时间 和 开始时间 间隔必须小于七天。使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。 */
   EndTime?: string;
   /** 点播拉流转推循环次数。-1：无限循环，直到任务结束。0：不循环。>0：具体循环次数。次数和时间以先结束的为准。注意：拉流源为点播，该配置生效。 */
   VodLoopTimes?: number;

@@ -226,6 +226,12 @@ declare interface BaseAIResultInfo {
   Location?: Location;
 }
 
+/** 批量操作设备返回结果 */
+declare interface BatchOperateDeviceData {
+  /** 任务 ID（用于在查询任务的子任务列表接口ListSubTasks中查询任务进度） */
+  TaskId?: string | null;
+}
+
 /** 人体识别结果详情 */
 declare interface BodyAIResultInfo {
   /** 时间字符串 */
@@ -836,6 +842,22 @@ declare interface ListRecordPlanDevicesData {
   List?: RecordPlanChannelInfo[] | null;
 }
 
+/** 列举子任务列表 */
+declare interface ListSubTasksData {
+  /** 子任务列表 */
+  List?: SubTaskData[];
+  /** 子任务数量 */
+  TotalCount?: number;
+}
+
+/** 查询任务列表 */
+declare interface ListTasksData {
+  /** 任务列表 */
+  List?: TaskData[] | null;
+  /** 任务数量 */
+  TotalCount?: number | null;
+}
+
 /** AI识别结果在画面中坐标 */
 declare interface Location {
   /** 左上角 X 坐标轴 */
@@ -1046,6 +1068,68 @@ declare interface SnapshotConfig {
   TimeInterval: number;
   /** 模板生效的时间段。最多包含5组时间段 */
   OperTimeSlot: OperTimeSlot[];
+}
+
+/** 子任务详情 */
+declare interface SubTaskData {
+  /** 子任务ID */
+  SubTaskId?: string;
+  /** 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED */
+  Status?: number;
+  /** 任务失败原因 */
+  FailReason?: string | null;
+  /** 任务进度 */
+  Progress?: number;
+  /** 操作类型 */
+  Action?: string;
+  /** 操作类型中文描述 */
+  ActionZhDesc?: string;
+  /** 资源ID */
+  ResourceId?: string;
+  /** 启动任务时间 */
+  StartedAt?: string;
+  /** 创建任务时间 */
+  CreatedAt?: string;
+  /** 更新任务时间 */
+  UpdatedAt?: string;
+  /** 任务运行时间，单位ms */
+  Runtime?: number;
+}
+
+/** 查询复杂任务详情返回结果 */
+declare interface TaskData {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED */
+  Status?: number;
+  /** 失败原因 */
+  FailReason?: string | null;
+  /** 进度（0-1） */
+  Progress?: number;
+  /** 任务操作类型，批量任务类型以Batch开头 */
+  Action?: string;
+  /** 操作类型中文描述 */
+  ActionZhDesc?: string;
+  /** 任务类型 1.简单 2.复杂 3.子任务 */
+  TaskType?: number;
+  /** 任务资源id（复杂任务该字段无效） */
+  ResourceId?: string;
+  /** 总任务数（仅复杂任务有效） */
+  Total?: number;
+  /** 成功任务数（仅复杂任务有效） */
+  SuccessCount?: number;
+  /** 失败任务数（仅复杂任务有效） */
+  FailCount?: number;
+  /** 运行任务数（仅复杂任务有效） */
+  RunningCount?: number;
+  /** 启动任务时间 */
+  StartedAt?: string;
+  /** 创建任务时间 */
+  CreatedAt?: string;
+  /** 更新任务时间 */
+  UpdatedAt?: string;
+  /** 任务运行时间，单位ms */
+  Runtime?: number;
 }
 
 /** 时间片段结构体 */
@@ -1432,6 +1516,20 @@ declare interface AddUserDeviceRequest {
 declare interface AddUserDeviceResponse {
   /** 增加设备返回数据 */
   Data?: AddDeviceData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchOperateDeviceRequest {
+  /** 设备 ID 数组（从获取设备列表接口ListDevices中获取） */
+  DeviceIds: string[];
+  /** 操作命令（enable：启用；disable：禁用；delete：删除） */
+  Cmd: string;
+}
+
+declare interface BatchOperateDeviceResponse {
+  /** 返回结果 */
+  Data?: BatchOperateDeviceData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1894,6 +1992,18 @@ declare interface DescribeStreamAuthResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskRequest {
+  /** 简单任务或复杂任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeTaskResponse {
+  /** 任务详情 */
+  Data?: TaskData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserDeviceRequest {
   /** 设备ID（从获取设备列表接口ListDevices中获取） */
   DeviceId: string;
@@ -1981,6 +2091,10 @@ declare interface ListDevicesResponse {
 declare interface ListGatewayDevicesRequest {
   /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
   GatewayId: string;
+  /** 分页页数 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
 }
 
 declare interface ListGatewayDevicesResponse {
@@ -2142,6 +2256,42 @@ declare interface ListRecordTemplatesRequest {
 declare interface ListRecordTemplatesResponse {
   /** 返回结果，存在模板时，为Json数组格式，不存在模板时，字段数据为空 */
   Data?: RecordTemplateInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListSubTasksRequest {
+  /** 复杂任务ID */
+  TaskId: string;
+  /** 页码，默认为1 */
+  PageNumber?: number;
+  /** 每页数量，默认为10 */
+  PageSize?: number;
+  /** 默认不对该字段进行筛选，否则根据任务状态进行筛选。状态码：1-NEW，2-RUNNING，3-COMPLETED，4-FAILED */
+  Status?: number;
+}
+
+declare interface ListSubTasksResponse {
+  /** 返回数据 */
+  Data?: ListSubTasksData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTasksRequest {
+  /** 页码，默认为1 */
+  PageNumber?: number;
+  /** 每页数量，默认为10 */
+  PageSize?: number;
+  /** 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，对应任务的Action字段，批量任务操作类型以Batch开头。目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，DeleteUserDevice，DisableDevice，EnableDevice */
+  Operation?: string;
+  /** 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-NEW，2-RUNNING，3-COMPLETED，4-FAILED */
+  Status?: number;
+}
+
+declare interface ListTasksResponse {
+  /** 返回数据 */
+  Data?: ListTasksData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2379,6 +2529,8 @@ declare interface Iss {
   AddStreamAuth(data: AddStreamAuthRequest, config?: AxiosRequestConfig): AxiosPromise<AddStreamAuthResponse>;
   /** 新增设备 {@link AddUserDeviceRequest} {@link AddUserDeviceResponse} */
   AddUserDevice(data: AddUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserDeviceResponse>;
+  /** 批量操作设备 {@link BatchOperateDeviceRequest} {@link BatchOperateDeviceResponse} */
+  BatchOperateDevice(data: BatchOperateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateDeviceResponse>;
   /** 检测域名是否备案 {@link CheckDomainRequest} {@link CheckDomainResponse} */
   CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
   /** ptz 控制 {@link ControlDevicePTZRequest} {@link ControlDevicePTZResponse} */
@@ -2453,6 +2605,8 @@ declare interface Iss {
   DescribeRecordTemplate(data: DescribeRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTemplateResponse>;
   /** 查询推拉流鉴权配置 {@link DescribeStreamAuthRequest} {@link DescribeStreamAuthResponse} */
   DescribeStreamAuth(data?: DescribeStreamAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamAuthResponse>;
+  /** 查询任务详情 {@link DescribeTaskRequest} {@link DescribeTaskResponse} */
+  DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
   /** 查询设备详情 {@link DescribeUserDeviceRequest} {@link DescribeUserDeviceResponse} */
   DescribeUserDevice(data: DescribeUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDeviceResponse>;
   /** 获取云端录像下载URL地址 {@link DescribeVideoDownloadUrlRequest} {@link DescribeVideoDownloadUrlResponse} */
@@ -2485,6 +2639,10 @@ declare interface Iss {
   ListRecordRetrieveTasks(data?: ListRecordRetrieveTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordRetrieveTasksResponse>;
   /** 查询实时上云模板列表 {@link ListRecordTemplatesRequest} {@link ListRecordTemplatesResponse} */
   ListRecordTemplates(data?: ListRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRecordTemplatesResponse>;
+  /** 查询任务的子任务列表 {@link ListSubTasksRequest} {@link ListSubTasksResponse} */
+  ListSubTasks(data: ListSubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSubTasksResponse>;
+  /** 查询任务列表 {@link ListTasksRequest} {@link ListTasksResponse} */
+  ListTasks(data?: ListTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTasksResponse>;
   /** 获取本地录像URL地址 {@link PlayRecordRequest} {@link PlayRecordResponse} */
   PlayRecord(data: PlayRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PlayRecordResponse>;
   /** 刷新设备通道 {@link RefreshDeviceChannelRequest} {@link RefreshDeviceChannelResponse} */
