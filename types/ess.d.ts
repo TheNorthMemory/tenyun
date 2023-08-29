@@ -22,7 +22,7 @@ declare interface Agent {
   ProxyOperator?: string | null;
 }
 
-/** 参与者信息 */
+/** 参与者信息。 */
 declare interface ApproverInfo {
   /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:**0**：企业**1**：个人**3**：企业静默签署注：`类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。`**7**: 个人自动签署，适用于个人自动签场景。注: `个人自动签场景为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverType: number;
@@ -416,25 +416,25 @@ declare interface FlowApproverUrlInfo {
   LongUrl?: string | null;
 }
 
-/** 流程信息摘要 */
+/** 合同流程的基础信息 */
 declare interface FlowBrief {
-  /** 流程的编号ID */
+  /** 合同流程ID，为32位字符串。 */
   FlowId?: string;
-  /** 流程的名称 */
+  /** 合同流程的名称。 */
   FlowName?: string;
-  /** 流程的描述信息 */
+  /** 合同流程描述信息。 */
   FlowDescription?: string | null;
-  /** 流程的类型 */
+  /** 合同流程的类别分类（如销售合同/入职合同等）。 */
   FlowType?: string;
-  /** 流程状态- 0 还没有发起- 1 待签署- 2 部分签署- 3 已拒签- 4 已签署- 5 已过期- 6 已撤销- 7 还没有预发起- 8 等待填写- 9 部分填写- 10 拒填- 21 已解除 */
+  /** 合同流程当前的签署状态, 会存在下列的状态值 **0** : 未开启流程(合同中不存在填写环节) **1** : 待签署 **2** : 部分签署 **3** : 已拒签 **4** : 已签署 **5** : 已过期 **6** : 已撤销 **7** : 未开启流程(合同中存在填写环节) **8** : 等待填写 **9** : 部分填写 **10** : 已拒填 **21** : 已解除 */
   FlowStatus?: number | null;
-  /** 流程创建的时间戳，单位秒 */
+  /** 合同流程创建时间，格式为Unix标准时间戳（秒）。 */
   CreatedOn?: number | null;
-  /** 当合同被拒签或者取消后(当FlowStatus=3或者FlowStatus=6的时候)此字段展示拒签或者取消的原因描述 */
+  /** 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。 */
   FlowMessage?: string | null;
-  /** 合同发起人userId */
+  /** 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。 */
   Creator?: string | null;
-  /** 合同过期时间，时间戳，单位秒 */
+  /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒）。 */
   Deadline?: number | null;
 }
 
@@ -614,6 +614,8 @@ declare interface IntegrateRole {
   IsGroupRole?: boolean | null;
   /** 管辖的子企业列表 */
   SubOrgIdList?: string[] | null;
+  /** 权限树 */
+  PermissionGroups?: PermissionGroup[] | null;
 }
 
 /** 部门信息 */
@@ -708,6 +710,44 @@ declare interface PdfVerifyResult {
   ComponentHeight?: number;
   /** 签名域所在页码，1～N */
   ComponentPage?: number;
+}
+
+/** 权限树节点权限 */
+declare interface Permission {
+  /** 权限名称 */
+  Name?: string | null;
+  /** 权限key */
+  Key?: string | null;
+  /** 权限类型 1前端，2后端 */
+  Type?: number | null;
+  /** 是否隐藏 */
+  Hide?: number | null;
+  /** 数据权限标签 1:表示根节点，2:表示叶子结点 */
+  DataLabel?: number | null;
+  /** 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权 */
+  DataType?: number | null;
+  /** 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己 */
+  DataRange?: number | null;
+  /** 关联权限, 表示这个功能权限要受哪个数据权限管控 */
+  DataTo?: string | null;
+  /** 父级权限key */
+  ParentKey?: string | null;
+  /** 是否选中 */
+  IsChecked?: boolean | null;
+  /** 子权限集合 */
+  Children?: Permission[] | null;
+}
+
+/** 权限树中的权限组 */
+declare interface PermissionGroup {
+  /** 权限组名称 */
+  GroupName?: string | null;
+  /** 权限组key */
+  GroupKey?: string | null;
+  /** 是否隐藏分组，0否1是 */
+  Hide?: number | null;
+  /** 权限集合 */
+  Permissions?: Permission[] | null;
 }
 
 /** 流程中参与方的信息结构 */
@@ -1109,7 +1149,7 @@ declare interface CreateConvertTaskApiRequest {
   ResourceId: string;
   /** 调用方用户信息，userId 必填 */
   Operator?: UserInfo;
-  /** 应用号信息 */
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 暂未开放 */
   Organization?: OrganizationInfo;
@@ -1489,9 +1529,9 @@ declare interface CreateMultiFlowSignQRCodeRequest {
   Restrictions?: ApproverRestriction[];
   /** 用户自定义字段回调的时候会进行透传，长度需要小于20480 */
   UserData?: string;
-  /** 回调地址,最大长度1000字符串回调时机：用户通过签署二维码发起签署流程时，企业额度不足导致失败 */
+  /** 已废弃，回调配置统一使用企业应用管理-应用集成-企业版应用中的配置 通过一码多扫二维码发起的合同，回调消息可参考文档 https://qian.tencent.com/developers/company/callback_types_contracts_sign 用户通过签署二维码发起合同时，因企业额度不足导致失败 会触发签署二维码相关回调,具体参考文档 https://qian.tencent.com/developers/company/callback_types_commons#%E7%AD%BE%E7%BD%B2%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9B%B8%E5%85%B3%E5%9B%9E%E8%B0%83 */
   CallbackUrl?: string;
-  /** 应用信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 限制二维码用户条件（已弃用） */
   ApproverRestrictions?: ApproverRestriction;
@@ -1539,6 +1579,8 @@ declare interface CreatePersonAuthCertificateImageRequest {
   IdCardType: string;
   /** 身份证件号码 */
   IdCardNumber: string;
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
 }
 
 declare interface CreatePersonAuthCertificateImageResponse {
@@ -1907,7 +1949,7 @@ declare interface DescribeFileUrlsRequest {
   CcToken?: string;
   /** 暂不开放 */
   Scene?: string;
-  /** 应用相关信息 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
@@ -2089,7 +2131,7 @@ declare interface DescribeIntegrationRolesRequest {
   Limit: number;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
-  /** 查询的关键字段:Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色 */
+  /** 查询的关键字段:Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色Key:"IsGroupRole"，Values:["0"]:查询非集团角色，Values:["1"]表示查询集团角色Key:"IsReturnPermissionGroup"，Values:["0"]:表示接口不返回角色对应的权限树字段，Values:["1"]表示接口返回角色对应的权限树字段 */
   Filters?: Filter[];
   /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000 */
   Offset?: number;
@@ -2157,6 +2199,8 @@ declare interface DescribeOrganizationSealsRequest {
   SealTypes?: string[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 查询的印章状态列表。取值为空，只查询启用状态的印章；取值ALL，查询所有状态的印章；取值CHECKING，查询待审核的印章；取值SUCCESS，查询启用状态的印章；取值FAIL，查询印章审核拒绝的印章；取值DISABLE，查询已停用的印章；取值STOPPED，查询已终止的印章；取值VOID，查询已作废的印章；取值INVALID，查询以失效的印章； */
+  SealStatuses?: string[];
 }
 
 declare interface DescribeOrganizationSealsResponse {
@@ -2229,7 +2273,7 @@ declare interface GetTaskResultApiRequest {
   TaskId: string;
   /** 操作人信息,UserId必填 */
   Operator?: UserInfo;
-  /** 应用号信息 */
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 暂未开放 */
   Organization?: OrganizationInfo;
@@ -2378,7 +2422,7 @@ declare interface VerifyPdfRequest {
 declare interface VerifyPdfResponse {
   /** 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误 */
   VerifyResult?: number;
-  /** 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
+  /** 验签结果详情，每个签名域对应的验签结果。状态值：1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
   PdfVerifyResults?: PdfVerifyResult[];
   /** 验签序列号 */
   VerifySerialNo?: string;

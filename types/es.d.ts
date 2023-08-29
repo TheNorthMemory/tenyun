@@ -201,167 +201,171 @@ declare interface IndexSettingsField {
 /** 实例详细信息 */
 declare interface InstanceInfo {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 用户ID */
-  AppId: number;
+  AppId?: number;
   /** 用户UIN */
-  Uin: string;
+  Uin?: string;
   /** 实例所属VPC的UID */
-  VpcUid: string;
+  VpcUid?: string;
   /** 实例所属子网的UID */
-  SubnetUid: string;
+  SubnetUid?: string;
   /** 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁, 2:创建集群时初始化中 */
-  Status: number;
+  Status?: number;
   /** 自动续费标识。取值范围：RENEW_FLAG_AUTO：自动续费 RENEW_FLAG_MANUAL：不自动续费默认取值：RENEW_FLAG_DEFAULT：不自动续费若该参数指定为 RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。 */
-  RenewFlag: string;
+  RenewFlag?: string;
   /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。 */
-  ChargeType: string;
+  ChargeType?: string;
   /** 包年包月购买时长,单位:月 */
-  ChargePeriod: number;
+  ChargePeriod?: number;
   /** 节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
-  NodeType: string;
+  NodeType?: string;
   /** 节点个数 */
-  NodeNum: number;
+  NodeNum?: number;
   /** 节点CPU核数 */
-  CpuNum: number;
+  CpuNum?: number;
   /** 节点内存大小，单位GB */
-  MemSize: number;
+  MemSize?: number;
   /** 节点磁盘类型 */
-  DiskType: string;
+  DiskType?: string;
   /** 节点磁盘大小，单位GB */
-  DiskSize: number;
+  DiskSize?: number;
   /** ES域名 */
-  EsDomain: string;
+  EsDomain?: string;
   /** ES VIP */
-  EsVip: string;
+  EsVip?: string;
   /** ES端口 */
-  EsPort: number;
+  EsPort?: number;
   /** Kibana访问url */
-  KibanaUrl: string;
+  KibanaUrl?: string;
   /** ES版本号 */
-  EsVersion: string;
+  EsVersion?: string;
   /** ES配置项 */
-  EsConfig: string;
+  EsConfig?: string;
   /** Kibana访问控制配置 */
-  EsAcl: EsAcl;
+  EsAcl?: EsAcl;
   /** 实例创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 实例最后修改操作时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 实例到期时间 */
-  Deadline: string;
+  Deadline?: string;
   /** 实例类型（实例类型标识，当前只有1,2两种） */
-  InstanceType: number;
+  InstanceType?: number;
   /** Ik分词器配置 */
-  IkConfig: EsDictionaryInfo;
+  IkConfig?: EsDictionaryInfo;
   /** 专用主节点配置 */
-  MasterNodeInfo: MasterNodeInfo;
+  MasterNodeInfo?: MasterNodeInfo;
   /** cos自动备份配置 */
-  CosBackup: CosBackup;
+  CosBackup?: CosBackup;
   /** 是否允许cos自动备份 */
-  AllowCosBackup: boolean;
+  AllowCosBackup?: boolean;
   /** 实例拥有的标签列表 */
-  TagList: TagInfo[];
+  TagList?: TagInfo[];
   /** License类型oss：开源版basic：基础版platinum：白金版默认值platinum */
-  LicenseType: string;
+  LicenseType?: string;
   /** 是否为冷热集群true: 冷热集群false: 非冷热集群 */
-  EnableHotWarmMode: boolean | null;
+  EnableHotWarmMode?: boolean | null;
   /** 温节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
-  WarmNodeType: string | null;
+  WarmNodeType?: string | null;
   /** 温节点个数 */
-  WarmNodeNum: number | null;
+  WarmNodeNum?: number | null;
   /** 温节点CPU核数 */
-  WarmCpuNum: number | null;
+  WarmCpuNum?: number | null;
   /** 温节点内存内存大小，单位GB */
-  WarmMemSize: number | null;
+  WarmMemSize?: number | null;
   /** 温节点磁盘类型 */
-  WarmDiskType: string | null;
+  WarmDiskType?: string | null;
   /** 温节点磁盘大小，单位GB */
-  WarmDiskSize: number | null;
+  WarmDiskSize?: number | null;
   /** 集群节点信息列表 */
-  NodeInfoList: NodeInfo[] | null;
+  NodeInfoList?: NodeInfo[] | null;
   /** Es公网地址 */
-  EsPublicUrl: string | null;
+  EsPublicUrl?: string | null;
   /** 多可用区网络信息 */
-  MultiZoneInfo: ZoneDetail[] | null;
+  MultiZoneInfo?: ZoneDetail[] | null;
   /** 部署模式0：单可用区1：多可用区 */
-  DeployMode: number | null;
+  DeployMode?: number | null;
   /** ES公网访问状态OPEN：开启CLOSE：关闭 */
-  PublicAccess: string | null;
+  PublicAccess?: string | null;
   /** ES公网访问控制配置 */
-  EsPublicAcl: EsAcl;
+  EsPublicAcl?: EsAcl;
   /** Kibana内网地址 */
-  KibanaPrivateUrl: string | null;
+  KibanaPrivateUrl?: string | null;
   /** Kibana公网访问状态OPEN：开启CLOSE：关闭 */
-  KibanaPublicAccess: string | null;
+  KibanaPublicAccess?: string | null;
   /** Kibana内网访问状态OPEN：开启CLOSE：关闭 */
-  KibanaPrivateAccess: string | null;
+  KibanaPrivateAccess?: string | null;
   /** 6.8（及以上版本）基础版是否开启xpack security认证1：不开启2：开启 */
-  SecurityType: number | null;
+  SecurityType?: number | null;
   /** 场景化模板类型：0、不开启；1、通用场景；2、日志场景；3、搜索场景 */
-  SceneType: number | null;
+  SceneType?: number | null;
   /** Kibana配置项 */
-  KibanaConfig: string | null;
+  KibanaConfig?: string | null;
   /** Kibana节点信息 */
-  KibanaNodeInfo: KibanaNodeInfo | null;
+  KibanaNodeInfo?: KibanaNodeInfo | null;
   /** 可视化节点配置 */
-  WebNodeTypeInfo: WebNodeTypeInfo | null;
+  WebNodeTypeInfo?: WebNodeTypeInfo | null;
   /** JDK类型，oracle或kona */
-  Jdk: string | null;
+  Jdk?: string | null;
   /** 集群网络通讯协议 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 安全组id */
-  SecurityGroups: string[] | null;
+  SecurityGroups?: string[] | null;
   /** 冷节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
-  ColdNodeType: string | null;
+  ColdNodeType?: string | null;
   /** 冷节点个数 */
-  ColdNodeNum: number | null;
+  ColdNodeNum?: number | null;
   /** 冷节点CPU核数 */
-  ColdCpuNum: number | null;
+  ColdCpuNum?: number | null;
   /** 冷节点内存大小，单位GB */
-  ColdMemSize: number | null;
+  ColdMemSize?: number | null;
   /** 冷节点磁盘类型 */
-  ColdDiskType: string | null;
+  ColdDiskType?: string | null;
   /** 冷节点磁盘大小，单位GB */
-  ColdDiskSize: number | null;
+  ColdDiskSize?: number | null;
   /** 冻节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
-  FrozenNodeType: string | null;
+  FrozenNodeType?: string | null;
   /** 冻节点个数 */
-  FrozenNodeNum: number | null;
+  FrozenNodeNum?: number | null;
   /** 冻节点CPU核数 */
-  FrozenCpuNum: number | null;
+  FrozenCpuNum?: number | null;
   /** 冻节点内存大小，单位GB */
-  FrozenMemSize: number | null;
+  FrozenMemSize?: number | null;
   /** 冻节点磁盘类型 */
-  FrozenDiskType: string | null;
+  FrozenDiskType?: string | null;
   /** 冻节点磁盘大小，单位GB */
-  FrozenDiskSize: number | null;
+  FrozenDiskSize?: number | null;
   /** 集群健康状态 -1 未知；0 Green; 1 Yellow; 2 Red */
-  HealthStatus: number | null;
+  HealthStatus?: number | null;
   /** https集群内网url */
-  EsPrivateUrl: string | null;
+  EsPrivateUrl?: string | null;
   /** https集群内网域名 */
-  EsPrivateDomain: string | null;
+  EsPrivateDomain?: string | null;
   /** 集群的配置组信息 */
-  EsConfigSets: EsConfigSetInfo[] | null;
+  EsConfigSets?: EsConfigSetInfo[] | null;
   /** 集群可维护时间段 */
-  OperationDuration: OperationDuration | null;
+  OperationDuration?: OperationDuration | null;
   /** web节点列表 */
-  OptionalWebServiceInfos: OptionalWebServiceInfo[] | null;
+  OptionalWebServiceInfos?: OptionalWebServiceInfo[] | null;
   /** 自治索引开关 */
-  AutoIndexEnabled: boolean | null;
+  AutoIndexEnabled?: boolean | null;
   /** 是否支持存储计算分离 */
-  EnableHybridStorage: boolean | null;
+  EnableHybridStorage?: boolean | null;
   /** 流程进度 */
-  ProcessPercent: number | null;
+  ProcessPercent?: number | null;
   /** Kibana的altering外网告警策略OPEN：开启CLOSE：关闭 */
-  KibanaAlteringPublicAccess: string | null;
+  KibanaAlteringPublicAccess?: string | null;
+  /** 本月是否有内核可以更新：false-无，true-有 */
+  HasKernelUpgrade?: boolean | null;
+  /** cdcId，使用cdc子网时传递 */
+  CdcId?: string | null;
 }
 
 /** ES集群日志详细信息 */
@@ -823,7 +827,7 @@ declare interface CreateInstanceRequest {
   RenewFlag?: string;
   /** 已废弃请使用NodeInfoList节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
   NodeType?: string;
-  /** 已废弃请使用NodeInfoList节点磁盘类型CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高硬能云硬盘默认值CLOUD_SSD */
+  /** 已废弃请使用NodeInfoList节点磁盘类型CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高性能云硬盘默认值CLOUD_SSD */
   DiskType?: string;
   /** 已废弃请使用NodeInfoList节点磁盘容量（单位GB） */
   DiskSize?: number;
@@ -869,13 +873,15 @@ declare interface CreateInstanceRequest {
   DiskEnhance?: number;
   /** 是否开启智能巡检 */
   EnableDiagnose?: boolean;
+  /** cdcId，使用cdc子网时传递 */
+  CdcId?: string;
 }
 
 declare interface CreateInstanceResponse {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 订单号 */
-  DealName: string | null;
+  DealName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1109,9 +1115,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 返回的实例个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息列表 */
-  InstanceList: InstanceInfo[];
+  InstanceList?: InstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

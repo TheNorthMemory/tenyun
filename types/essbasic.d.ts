@@ -90,6 +90,8 @@ declare interface BaseFlowInfo {
   CcInfos?: CcInfo[];
   /** 是否需要开启发起方发起前审核true：开启发起方发起前审核false：不开启发起方发起前审核当指定NeedCreateReview=true，则提交审核后，需要使用接口：ChannelCreateFlowSignReview，来完成发起前审核，审核通过后，可以继续查看，签署合同 */
   NeedCreateReview?: boolean;
+  /** 填写控件：文件发起使用 */
+  Components?: Component[];
 }
 
 /** 抄送信息 */
@@ -150,6 +152,8 @@ declare interface CommonFlowApprover {
   NotifyType?: string;
   /** 签署人配置 */
   ApproverOption?: CommonApproverOption;
+  /** 签署控件：文件发起使用 */
+  SignComponents?: Component[];
 }
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
@@ -308,7 +312,7 @@ declare interface FlowApproverDetail {
   ApproveType?: string | null;
 }
 
-/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId */
+/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。 */
 declare interface FlowApproverInfo {
   /** 签署人姓名，最大长度50个字符 */
   Name?: string;
@@ -1167,7 +1171,7 @@ declare interface ChannelCreateMultiFlowSignQRCodeRequest {
   QrEffectiveDay?: number;
   /** 指定的签署二维码签署人指定后，只允许知道的人操作和签署 */
   Restrictions?: ApproverRestriction[];
-  /** 回调地址，最大长度1000个字符不传默认使用第三方应用号配置的回调地址回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败 */
+  /** 已废弃，回调配置统一使用企业应用管理-应用集成-第三方应用中的配置 通过一码多扫二维码发起的合同，回调消息可参考文档 https://qian.tencent.com/developers/partner/callback_types_contracts_sign 用户通过签署二维码发起合同时，因企业额度不足导致失败 会触发签署二维码相关回调,具体参考文档 https://qian.tencent.com/developers/partner/callback_types_commons#%E7%AD%BE%E7%BD%B2%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9B%B8%E5%85%B3%E5%9B%9E%E8%B0%83 */
   CallbackUrl?: string;
   /** 限制二维码用户条件（已弃用） */
   ApproverRestrictions?: ApproverRestriction;
@@ -1201,7 +1205,7 @@ declare interface ChannelCreateOrganizationModifyQrCodeResponse {
 declare interface ChannelCreatePrepareFlowRequest {
   /** 资源id，与ResourceType对应 */
   ResourceId: string;
-  /** 资源类型，1：模板，目前仅支持模板，与ResourceId对应 */
+  /** 资源类型，与ResourceId对应1：模板 2: 文件 */
   ResourceType: number;
   /** 合同流程基础信息 */
   FlowInfo: BaseFlowInfo;
@@ -3603,7 +3607,7 @@ declare interface Essbasic {
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
   /** 生成渠道子客编辑企业信息二维码 {@link ChannelCreateOrganizationModifyQrCodeRequest} {@link ChannelCreateOrganizationModifyQrCodeResponse} */
   ChannelCreateOrganizationModifyQrCode(data: ChannelCreateOrganizationModifyQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateOrganizationModifyQrCodeResponse>;
-  /** 获取模板发起合同web页面 {@link ChannelCreatePrepareFlowRequest} {@link ChannelCreatePrepareFlowResponse} */
+  /** 获取发起合同web页面 {@link ChannelCreatePrepareFlowRequest} {@link ChannelCreatePrepareFlowResponse} */
   ChannelCreatePrepareFlow(data: ChannelCreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePrepareFlowResponse>;
   /** 创建导入处方单个人印章 {@link ChannelCreatePreparedPersonalEsignRequest} {@link ChannelCreatePreparedPersonalEsignResponse} */
   ChannelCreatePreparedPersonalEsign(data: ChannelCreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePreparedPersonalEsignResponse>;

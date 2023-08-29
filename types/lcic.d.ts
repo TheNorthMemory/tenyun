@@ -334,6 +334,8 @@ declare interface UserInfo {
   Name?: string | null;
   /** 用户头像Url。 */
   Avatar?: string | null;
+  /** 用户在客户系统的Id */
+  OriginId?: string | null;
 }
 
 /** 水印配置 */
@@ -1088,13 +1090,15 @@ declare interface DescribeUserRequest {
 
 declare interface DescribeUserResponse {
   /** 应用Id。 */
-  SdkAppId: number;
+  SdkAppId?: number;
   /** 用户Id。 */
-  UserId: string;
+  UserId?: string;
   /** 用户昵称。 */
-  Name: string;
+  Name?: string;
   /** 用户头像Url。 */
-  Avatar: string;
+  Avatar?: string;
+  /** 用户在客户系统的Id */
+  OriginId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

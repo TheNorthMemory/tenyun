@@ -468,22 +468,22 @@ declare interface InstanceTagInfo {
 
 /** 公网负载均衡配置 */
 declare interface InternetConfig {
-  /** 公网地址版本，可选："IPV4" | "IPV6-NAT64" 。不填默认 IPV4 。 */
+  /** 公网地址版本，可选："IPV4" | "IPV6" 。不填默认 IPV4 。 */
   InternetAddressVersion?: string;
   /** 公网付费类型，当前仅可选："BANDWIDTH"。不填默认为 "BANDWIDTH" */
   InternetPayMode?: string;
   /** 公网带宽。 */
   InternetMaxBandwidthOut?: number;
   /** 负载均衡描述 */
-  Description?: string | null;
+  Description?: string;
   /** 负载均衡的规格类型，传 "SLA" 表示性能容量型，不传为共享型。 */
-  SlaType?: string | null;
+  SlaType?: string;
   /** 负载均衡是否多可用区 */
-  MultiZoneFlag?: boolean | null;
+  MultiZoneFlag?: boolean;
   /** 主可用区 */
-  MasterZoneId?: string | null;
+  MasterZoneId?: string;
   /** 备可用区 */
-  SlaveZoneId?: string | null;
+  SlaveZoneId?: string;
 }
 
 /** 键值对 */
@@ -1631,7 +1631,7 @@ declare interface ModifyNativeGatewayServerGroupResponse {
 declare interface RateLimitResponse {
   /** 自定义响应体 */
   Body?: string | null;
-  /** headrs */
+  /** Headers */
   Headers?: KVMapping[] | null;
   /** http状态码 */
   HttpStatus?: number | null;

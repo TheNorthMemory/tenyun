@@ -249,17 +249,17 @@ declare interface IntentionQuestionResult {
 /** 意愿核身相关结果 */
 declare interface IntentionVerifyData {
   /** 意愿确认环节中录制的视频（base64）。若不存在则为空字符串。 */
-  IntentionVerifyVideo: string | null;
+  IntentionVerifyVideo?: string | null;
   /** 意愿确认环节中用户语音转文字的识别结果。若不存在则为空字符串。 */
-  AsrResult: string | null;
+  AsrResult?: string | null;
   /** 意愿确认环节的结果码。当该结果码为0时，语音朗读的视频与语音识别结果才会返回。 */
-  ErrorCode: number | null;
+  ErrorCode?: number | null;
   /** 意愿确认环节的结果信息。 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
   /** 意愿确认环节中录制视频的最佳帧（base64）。若不存在则为空字符串。 */
-  IntentionVerifyBestFrame: string | null;
+  IntentionVerifyBestFrame?: string | null;
   /** 本次流程用户语音与传入文本比对的相似度分值，取值范围 [0.00, 100.00]。只有配置了相似度阈值后才进行语音校验并返回相似度分值。 */
-  AsrResultSimilarity: string | null;
+  AsrResultSimilarity?: string | null;
 }
 
 /** RuleId相关配置 */

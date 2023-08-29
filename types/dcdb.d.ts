@@ -1057,7 +1057,7 @@ declare interface CreateHourDCDBInstanceRequest {
   ShardCpu?: number;
   /** 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。 */
   DbVersionId?: string;
-  /** 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。 */
+  /** 分片节点可用区分布，可填写多个可用区。 */
   Zones?: string[];
   /** 安全组id */
   SecurityGroupId?: string;
@@ -1079,6 +1079,8 @@ declare interface CreateHourDCDBInstanceRequest {
   RollbackTime?: string;
   /** 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数 */
   SecurityGroupIds?: string[];
+  /** DCN同步模式，0：普通DCN同步，1：一致性同步 */
+  DcnSyncMode?: number;
 }
 
 declare interface CreateHourDCDBInstanceResponse {
