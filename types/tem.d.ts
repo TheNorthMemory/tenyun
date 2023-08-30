@@ -1277,7 +1277,7 @@ declare interface DeleteApplicationRequest {
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
-  /** 来源渠道 */
+  /** 来源渠道(用户不需要关心此参数) */
   SourceChannel?: number;
   /** 当服务没有任何运行版本时，是否删除此服务 */
   DeleteApplicationIfNoRunningVersion?: boolean;
@@ -1285,7 +1285,7 @@ declare interface DeleteApplicationRequest {
 
 declare interface DeleteApplicationResponse {
   /** 返回结果 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1869,7 +1869,7 @@ declare interface ModifyApplicationInfoResponse {
 }
 
 declare interface ModifyApplicationReplicasRequest {
-  /** 服务id */
+  /** 应用id */
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
@@ -1881,7 +1881,7 @@ declare interface ModifyApplicationReplicasRequest {
 
 declare interface ModifyApplicationReplicasResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2009,13 +2009,13 @@ declare interface RestartApplicationRequest {
   ApplicationId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 环境ID */
+  /** 环境ID/命名空间ID */
   EnvironmentId?: string;
 }
 
 declare interface RestartApplicationResponse {
   /** 返回结果 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2085,13 +2085,13 @@ declare interface StopApplicationRequest {
   ApplicationId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 环境ID */
+  /** 环境ID/命名空间ID */
   EnvironmentId?: string;
 }
 
 declare interface StopApplicationResponse {
   /** 返回结果 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

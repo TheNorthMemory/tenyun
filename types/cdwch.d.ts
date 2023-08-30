@@ -389,6 +389,14 @@ declare interface ActionAlterCkUserResponse {
 }
 
 declare interface CreateBackUpScheduleRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 策略类型 meta(元数据) data (表数据) */
+  ScheduleType: string;
+  /** 操作类型 create(创建) update(编辑修改) */
+  OperationType: string;
+  /** 保留天数 例如7 */
+  RetainDays?: number;
   /** 编辑时需要传 */
   ScheduleId?: number;
   /** 选择的星期 逗号分隔，例如 2 代表周二 */
@@ -400,6 +408,8 @@ declare interface CreateBackUpScheduleRequest {
 }
 
 declare interface CreateBackUpScheduleResponse {
+  /** 错误描述 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -778,7 +788,7 @@ declare interface Cdwch {
   /** 新增、修改ck用户接口 {@link ActionAlterCkUserRequest} {@link ActionAlterCkUserResponse} */
   ActionAlterCkUser(data: ActionAlterCkUserRequest, config?: AxiosRequestConfig): AxiosPromise<ActionAlterCkUserResponse>;
   /** 创建或者修改备份策略 {@link CreateBackUpScheduleRequest} {@link CreateBackUpScheduleResponse} */
-  CreateBackUpSchedule(data?: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
+  CreateBackUpSchedule(data: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
   /** 创建集群openApi {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
   /** 查询备份策略信息 {@link DescribeBackUpScheduleRequest} {@link DescribeBackUpScheduleResponse} */

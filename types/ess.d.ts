@@ -28,7 +28,7 @@ declare interface ApproverInfo {
   ApproverType: number;
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   ApproverName: string;
-  /** 本企业的签署方经办人的员工UserId可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。注: `若传该字段，则签署方经办人的其他信息（如签署方经办人的姓名、证件号码、手机号码等）将被忽略。` */
+  /** 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此合同签署方。 */
   ApproverMobile: string;
   /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。 */
   OrganizationName?: string;
@@ -442,7 +442,7 @@ declare interface FlowBrief {
 declare interface FlowCreateApprover {
   /** 参与者类型：0：企业1：个人3：企业自动签署注：类型为3（企业自动签署）时，会自动完成该签署方的签署。自动签署仅进行盖章操作，不能是手写签名。本方企业自动签署的签署人会默认是当前的发起人他方企业自动签署的签署人是自动签模板的他方企业授权人7: 个人自动签署，适用于个人自动签场景。注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。 */
   ApproverType: number;
-  /** 签署人企业名称当approverType=1 或 approverType=3时，必须指定 */
+  /** 签署人企业名称当approverType=0 或 approverType=3时，必须指定 */
   OrganizationName?: string;
   /** 签署方经办人姓名在未指定签署人电子签UserId情况下，为必填参数 */
   ApproverName?: string;
@@ -486,9 +486,9 @@ declare interface FlowCreateApprover {
   Components?: Component[];
   /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
   ComponentLimitType?: string[];
-  /** 合同查看方式默认1 -实名查看 2-短信验证码查看(企业签署方暂不支持该方式) */
+  /** 合同查看方式默认1 -实名查看 2-短信验证码查看(企业签署方暂不支持该方式)> 注意:此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主. */
   ApproverVerifyTypes?: number[];
-  /** 合同签署方式(默认1,2) 1-人脸认证 2-签署密码 3-运营商三要素 */
+  /** 合同签署方式(默认1,2) 1-人脸认证 2-签署密码 3-运营商三要素> 注意:此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主. */
   ApproverSignTypes?: number[];
 }
 
@@ -1494,6 +1494,30 @@ declare interface CreateIntegrationEmployeesResponse {
   RequestId?: string;
 }
 
+declare interface CreateIntegrationRoleRequest {
+  /** 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。 */
+  Name: string;
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 角色描述，最大长度为50个字符 */
+  Description?: string;
+  /** 角色类型，0:saas角色，1:集团角色默认0，saas角色 */
+  IsGroupRole?: number;
+  /** 权限树 */
+  PermissionGroups?: PermissionGroup[];
+  /** 集团角色的话，需要传递集团子企业列表，如果是全选，则传1 */
+  SubOrganizationIds?: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateIntegrationRoleResponse {
+  /** 角色id */
+  RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateIntegrationUserRolesRequest {
   /** 操作人信息，UserId必填 */
   Operator: UserInfo;
@@ -1586,6 +1610,14 @@ declare interface CreatePersonAuthCertificateImageRequest {
 declare interface CreatePersonAuthCertificateImageResponse {
   /** 个人用户证明证书的下载链接 */
   AuthCertUrl?: string;
+  /** 证书图片上的证书编号，20位数字 */
+  ImageCertId?: string | null;
+  /** 图片证明对应的CA证书序列号 */
+  SerialNumber?: string | null;
+  /** CA证书颁发时间戳 */
+  ValidFrom?: number | null;
+  /** CA证书有效截止时间戳 */
+  ValidTo?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1593,7 +1625,7 @@ declare interface CreatePersonAuthCertificateImageResponse {
 declare interface CreatePrepareFlowRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 资源Id，通过多文件上传（UploadFiles）接口获得 */
+  /** 资源id，与ResourceType对应 */
   ResourceId: string;
   /** 合同名称 */
   FlowName: string;
@@ -1601,13 +1633,15 @@ declare interface CreatePrepareFlowRequest {
   Unordered?: boolean;
   /** 签署流程的签署截止时间。值为unix时间戳,精确到秒不传默认为当前时间一年后 */
   Deadline?: number;
-  /** 用户自定义合同类型Id该id为电子签企业内的合同类型id */
+  /** 用户自定义合同类型Id该id为电子签企业内的合同类型id， 可以在自定义合同类型处获取 */
   UserFlowTypeId?: string;
+  /** 合同类型名称该字段用于客户自定义合同类型建议使用时指定合同类型，便于之后合同分类以及查看如果合同类型与自定义的合同类型描述一致，会自动归类到自定义的合同类型处，如果不一致，则会创建一个新的自定义合同类型 */
+  FlowType?: string;
   /** 签署流程参与者信息，最大限制50方 */
   Approvers?: FlowCreateApprover[];
-  /** 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE" */
+  /** 打开智能添加填写区默认开启，打开:"OPEN" 关闭："CLOSE" */
   IntelligentStatus?: string;
-  /** 资源类型，1：文件，2：模板不传默认为1：文件目前仅支持文件 */
+  /** 资源类型，1：模板2：文件，不传默认为2：文件 */
   ResourceType?: number;
   /** 发起方填写控件该类型控件由发起方完成填写 */
   Components?: Component;
@@ -1621,8 +1655,6 @@ declare interface CreatePrepareFlowRequest {
   UserData?: string;
   /** 合同id,用于通过已web页面发起的合同id快速生成一个web发起合同链接 */
   FlowId?: string;
-  /** 合同类型名称该字段用于客户自定义合同类型建议使用时指定合同类型，便于之后合同分类以及查看 */
-  FlowType?: string;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
@@ -2330,6 +2362,30 @@ declare interface ModifyIntegrationDepartmentResponse {
   RequestId?: string;
 }
 
+declare interface ModifyIntegrationRoleRequest {
+  /** 角色Id，可通过接口 DescribeIntegrationRoles 查询获取 */
+  RoleId: string;
+  /** 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。 */
+  Name: string;
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 角色描述，最大长度为50个字符 */
+  Description?: string;
+  /** 权限树 */
+  PermissionGroups?: PermissionGroup[];
+  /** 集团角色的话，需要传递集团子企业列表，如果是全选，则传1 */
+  SubOrganizationIds?: string[];
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface ModifyIntegrationRoleResponse {
+  /** 角色id */
+  RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartFlowRequest {
   /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
@@ -2473,6 +2529,8 @@ declare interface Ess {
   CreateIntegrationDepartment(data: CreateIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationDepartmentResponse>;
   /** 创建企业员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
+  /** 创建企业角色 {@link CreateIntegrationRoleRequest} {@link CreateIntegrationRoleResponse} */
+  CreateIntegrationRole(data: CreateIntegrationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationRoleResponse>;
   /** 绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 创建一码多扫流程签署二维码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
@@ -2543,6 +2601,8 @@ declare interface Ess {
   ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
   /** 更新企业部门 {@link ModifyIntegrationDepartmentRequest} {@link ModifyIntegrationDepartmentResponse} */
   ModifyIntegrationDepartment(data: ModifyIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationDepartmentResponse>;
+  /** 更新企业角色 {@link ModifyIntegrationRoleRequest} {@link ModifyIntegrationRoleResponse} */
+  ModifyIntegrationRole(data: ModifyIntegrationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationRoleResponse>;
   /** 模板发起合同-发起签署流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
   /** 员工userid与客户系统openid解绑 {@link UnbindEmployeeUserIdWithClientOpenIdRequest} {@link UnbindEmployeeUserIdWithClientOpenIdResponse} */

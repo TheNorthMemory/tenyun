@@ -834,6 +834,16 @@ declare interface SummaryTotal {
   TotalCost: string | null;
 }
 
+/** 标签信息 */
+declare interface TagDataInfo {
+  /** 分账标签键 */
+  TagKey?: string;
+  /** 标签类型，0普通标签，1分账标签 */
+  Status?: number;
+  /** 设置分账标签时间，普通标签不返回 */
+  UpdateTime?: string | null;
+}
+
 /** 按标签汇总消费详情 */
 declare interface TagSummaryOverviewItem {
   /** 标签值 */
@@ -896,6 +906,26 @@ declare interface VoucherInfos {
   ApplicableProducts: ApplicableProducts | null;
   /** 不适用商品信息 */
   ExcludedProducts: ExcludedProducts[] | null;
+}
+
+declare interface CreateAllocationTagRequest {
+  /** 用户分账标签键 */
+  TagKey: string[];
+}
+
+declare interface CreateAllocationTagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAllocationTagRequest {
+  /** 用户分账标签键 */
+  TagKey: string[];
+}
+
+declare interface DeleteAllocationTagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeAccountBalanceRequest {
@@ -1043,6 +1073,10 @@ declare interface DescribeBillResourceSummaryRequest {
   BusinessCode?: string;
   /** 支付者的账号 ID（账号 ID 是用户在腾讯云的唯一账号标识），默认查询本账号账单，如集团管理账号需查询成员账号自付的账单，该字段需入参成员账号UIN */
   PayerUin?: string;
+  /** 分账标签键，用户自定义（支持2021-01以后账单查询） */
+  TagKey?: string;
+  /** 分账标签值，该参数为空表示该标签键下未设置标签值的记录（支持2021-01以后账单查询） */
+  TagValue?: string;
 }
 
 declare interface DescribeBillResourceSummaryResponse {
@@ -1390,6 +1424,28 @@ declare interface DescribeDosageDetailByDateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTagListRequest {
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  Limit: number;
+  /** 数量，最大值为1000 */
+  Offset: number;
+  /** 分账标签键，用作模糊搜索 */
+  TagKey?: string;
+  /** 标签类型，枚举值：0普通标签，1分账标签，用作筛选，不传获取全部标签键 */
+  Status?: number;
+  /** 排序方式，枚举值：asc排升序，desc排降序 */
+  OrderType?: string;
+}
+
+declare interface DescribeTagListResponse {
+  /** 总记录数 */
+  RecordNum?: number;
+  /** 标签信息 */
+  Data?: TagDataInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVoucherInfoRequest {
   /** 一页多少条数据，默认是20条，最大不超过1000 */
   Limit: number;
@@ -1481,6 +1537,10 @@ declare interface PayDealsResponse {
 /** {@link Billing 费用中心} */
 declare interface Billing {
   (): Versions;
+  /** 批量设置分账标签 {@link CreateAllocationTagRequest} {@link CreateAllocationTagResponse} */
+  CreateAllocationTag(data: CreateAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationTagResponse>;
+  /** 批量取消设置分账标签 {@link DeleteAllocationTagRequest} {@link DeleteAllocationTagResponse} */
+  DeleteAllocationTag(data: DeleteAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationTagResponse>;
   /** 获取账户余额 {@link DescribeAccountBalanceRequest} {@link DescribeAccountBalanceResponse} */
   DescribeAccountBalance(data?: DescribeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountBalanceResponse>;
   /** 查询账单明细数据 {@link DescribeBillDetailRequest} {@link DescribeBillDetailResponse} */
@@ -1517,6 +1577,8 @@ declare interface Billing {
   DescribeDosageCosDetailByDate(data: DescribeDosageCosDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageCosDetailByDateResponse>;
   /** 按日期获取产品用量明细 {@link DescribeDosageDetailByDateRequest} {@link DescribeDosageDetailByDateResponse} */
   DescribeDosageDetailByDate(data: DescribeDosageDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailByDateResponse>;
+  /** 获取分账标签 {@link DescribeTagListRequest} {@link DescribeTagListResponse} */
+  DescribeTagList(data: DescribeTagListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagListResponse>;
   /** 获取代金券相关信息 {@link DescribeVoucherInfoRequest} {@link DescribeVoucherInfoResponse} */
   DescribeVoucherInfo(data: DescribeVoucherInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherInfoResponse>;
   /** 获取代金券使用记录 {@link DescribeVoucherUsageDetailsRequest} {@link DescribeVoucherUsageDetailsResponse} */

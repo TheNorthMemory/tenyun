@@ -803,7 +803,7 @@ declare interface ListRecordBackupPlanDevicesData {
   /** 本次查询的设备通道总数 */
   TotalCount?: number | null;
   /** 设备通道信息列表 */
-  List?: RecordPlanChannelInfo | null;
+  List?: RecordPlanChannelInfo[] | null;
 }
 
 /** 查询录像上云模板列表返回数据 */
@@ -2166,9 +2166,9 @@ declare interface ListRecordBackupPlanDevicesRequest {
   /** 按照组织名称查询（为空时，不参考该参数） */
   OrganizationName?: string;
   /** 每页最大数量 */
-  PageSize?: string;
-  /** 第几页 */
-  PageNumber?: string;
+  PageSize?: number;
+  /** 分页页数 */
+  PageNumber?: number;
 }
 
 declare interface ListRecordBackupPlanDevicesResponse {

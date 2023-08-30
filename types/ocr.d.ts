@@ -2112,9 +2112,9 @@ declare interface BizLicenseOCRResponse {
   ComposingForm?: string;
   /** 成立日期 */
   SetDate?: string;
-  /** Code 告警码列表和释义：-9102 黑白复印件告警 */
+  /** Code 告警码列表和释义：-9102 黑白复印件告警-9104 翻拍件告警 */
   RecognizeWarnCode?: number[];
-  /** 告警码说明：WARN_COPY_CARD 黑白复印件告警 */
+  /** 告警码说明：WARN_COPY_CARD 黑白复印件告警WARN_RESHOOT_SCREENED_CARD 翻拍件告警 */
   RecognizeWarnMsg?: string[];
   /** 是否为副本。1为是，-1为不是。 */
   IsDuplication?: number;

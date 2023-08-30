@@ -247,11 +247,13 @@ declare interface HostResource {
   /** 专用宿主机实例可用磁盘大小（单位为:GiB） */
   DiskAvailable?: number;
   /** 专用宿主机实例磁盘类型 */
-  DiskType: string;
+  DiskType?: string;
   /** 专用宿主机实例总GPU卡数 */
   GpuTotal?: number;
   /** 专用宿主机实例可用GPU卡数 */
   GpuAvailable?: number;
+  /** CDH owner */
+  ExclusiveOwner?: string | null;
 }
 
 /** 高性能计算集群 */

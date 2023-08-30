@@ -19,11 +19,13 @@ declare interface ApiGatewayInstanceDetail {
 /** CDN实例详情 */
 declare interface CdnInstanceDetail {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 已部署证书ID */
-  CertId: string;
+  CertId?: string;
   /** 域名状态 */
-  Status: string;
+  Status?: string;
+  /** 域名计费状态 */
+  HttpsBillingSwitch?: string;
 }
 
 /** 云资源配置详情 */
@@ -41,9 +43,13 @@ declare interface CertHostingInfo {
 /** CLB证书详情 */
 declare interface Certificate {
   /** 证书ID */
-  CertId: string;
+  CertId?: string;
   /** 证书绑定的域名 */
-  DnsNames: string[];
+  DnsNames?: string[];
+  /** 根证书ID */
+  CertCaId?: string | null;
+  /** 证书认证模式：UNIDIRECTIONAL单向认证，MUTUAL双向认证 */
+  SSLMode?: string | null;
 }
 
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 数组下，key为CertificateExtra 的内容。 */
@@ -613,11 +619,15 @@ declare interface TkeIngressDetail {
 /** tke实例详情 */
 declare interface TkeInstanceDetail {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群命名空间列表 */
-  NamespaceList: TkeNameSpaceDetail[];
+  NamespaceList?: TkeNameSpaceDetail[];
+  /** 集群类型 */
+  ClusterType?: string;
+  /** 集群版本 */
+  ClusterVersion?: string;
 }
 
 /** tke namespace详情 */

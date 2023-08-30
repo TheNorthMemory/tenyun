@@ -1711,35 +1711,37 @@ declare interface BashEventsInfoNew {
 /** 高危命令规则 */
 declare interface BashRule {
   /** 规则ID */
-  Id: number;
+  Id?: number;
   /** 客户端ID */
-  Uuid: string;
+  Uuid?: string;
   /** 规则名称 */
-  Name: string;
+  Name?: string;
   /** 危险等级(0 ：无 1: 高危 2:中危 3: 低危) */
-  Level: number;
+  Level?: number;
   /** 正则表达式 */
-  Rule: string;
+  Rule?: string;
   /** 规则描述 */
-  Decription: string;
+  Decription?: string;
   /** 操作人 */
-  Operator: string;
+  Operator?: string;
   /** 是否全局规则 */
-  IsGlobal: number;
+  IsGlobal?: number;
   /** 状态 (0: 有效 1: 无效) */
-  Status: number;
+  Status?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 主机IP */
-  Hostip: string;
+  Hostip?: string;
   /** 生效服务器的uuid数组 */
-  Uuids: string[] | null;
+  Uuids?: string[] | null;
   /** 0=黑名单 1=白名单 */
-  White: number | null;
+  White?: number | null;
   /** 是否处理之前的事件 0: 不处理 1:处理 */
-  DealOldEvents: number | null;
+  DealOldEvents?: number | null;
+  /** 规则描述 */
+  Description?: string | null;
 }
 
 /** 密码破解列表实体 */

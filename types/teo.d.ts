@@ -1929,7 +1929,7 @@ declare interface CreatePurgeTaskRequest {
   ZoneId: string;
   /** 节点缓存清除类型，取值有：purge_url：URL刷新；purge_prefix：目录刷新；purge_host：Hostname 刷新；purge_all：站点下全部缓存刷新；purge_cache_tag：cache-tag 刷新。缓存清除类型详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。 */
   Type: string;
-  /** 节点缓存清除方法，仅对目录刷新类型有效，取值有： invalidate：仅刷新目录下产生了更新的资源； delete：无论目录下资源是否更新都刷新节点资源。注意：使用目录刷新时，默认值： invalidate。 */
+  /** 节点缓存清除方法，针对目录刷新、Hostname刷新以及刷新全部缓存 类型有效，取值有： invalidate：仅刷新目录下产生了更新的资源； delete：无论目录下资源是否更新都刷新节点资源。注意：使用目录刷新时，默认值： invalidate。 */
   Method?: string;
   /** 要清除缓存的资源列表。每个元素格式依据清除缓存类型而定，可参考接口示例。EO 默认针对内容含有非 ASCII 字符集的字符进行转义，编码规则遵循 RFC3986；单次提交的任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
   Targets?: string[];

@@ -733,6 +733,8 @@ declare interface CreateCloudStorageRequest {
   PackageQueue?: string;
   /** 订单id */
   OrderId?: string;
+  /** 通道ID */
+  ChannelId?: number;
 }
 
 declare interface CreateCloudStorageResponse {
@@ -1129,11 +1131,13 @@ declare interface DescribeCloudStorageDateRequest {
   DeviceName: string;
   /** 用户ID */
   UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
 }
 
 declare interface DescribeCloudStorageDateResponse {
   /** 云存日期数组，["2021-01-05","2021-01-06"] */
-  Data: string[];
+  Data?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1161,15 +1165,15 @@ declare interface DescribeCloudStorageEventsRequest {
 
 declare interface DescribeCloudStorageEventsResponse {
   /** 云存事件列表 */
-  Events: CloudStorageEvent[];
+  Events?: CloudStorageEvent[];
   /** 请求上下文, 用作查询游标 */
-  Context: string;
+  Context?: string;
   /** 拉取结果是否已经结束 */
-  Listover: boolean;
+  Listover?: boolean;
   /** 内部结果数量，并不等同于事件总数。 */
-  Total: number;
+  Total?: number;
   /** 视频播放URL */
-  VideoURL: string;
+  VideoURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1291,11 +1295,13 @@ declare interface DescribeCloudStorageTimeRequest {
   EndTime?: number;
   /** 用户ID */
   UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
 }
 
 declare interface DescribeCloudStorageTimeResponse {
   /** 接口返回数据 */
-  Data: CloudStorageTimeData;
+  Data?: CloudStorageTimeData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3320,19 +3326,21 @@ declare namespace V20201215 {
     DeviceName: string;
     /** 云存用户ID */
     UserId?: string;
+    /** 通道ID 非NVR设备不填 NVR设备必填 默认为无 */
+    ChannelId?: number;
   }
 
   interface DescribeCloudStorageResponse {
     /** 云存开启状态，1为开启，0为未开启或已过期 */
-    Status: number;
+    Status?: number;
     /** 云存类型，1为全时云存，2为事件云存 */
-    Type: number;
+    Type?: number;
     /** 云存套餐过期时间 */
-    ExpireTime: number;
+    ExpireTime?: number;
     /** 云存回看时长 */
-    ShiftDuration: number;
+    ShiftDuration?: number;
     /** 云存用户ID */
-    UserId: string | null;
+    UserId?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

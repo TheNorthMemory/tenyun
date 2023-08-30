@@ -20,7 +20,7 @@ declare interface Context {
   ExpectedHighThreshold?: ExpectedThreshold;
 }
 
-/** 移动网络加速目标地址结构体 */
+/** 多网聚合加速目标地址结构体 */
 declare interface DestAddressInfo {
   /** 加速业务目标 ip 地址数组 */
   DestIp: string[];

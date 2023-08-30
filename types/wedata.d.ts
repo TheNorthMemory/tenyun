@@ -2027,23 +2027,23 @@ declare interface LineageParamRecord {
 /** 任务依赖边详情 */
 declare interface LinkOpsDto {
   /** 边的id */
-  Id?: string | null;
+  Id: string | null;
   /** 边的key */
-  LinkKey?: string | null;
+  LinkKey: string | null;
   /** 边的源节点 */
-  TaskFrom?: string | null;
+  TaskFrom: string | null;
   /** 边的目标节点 */
-  TaskTo?: string | null;
+  TaskTo: string | null;
   /** 责任人 */
-  InCharge?: string | null;
+  InCharge: string | null;
   /** 父子任务之间的依赖关系 */
-  LinkDependencyType?: string | null;
+  LinkDependencyType: string | null;
   /** 父子任务之间依赖偏移量 */
-  Offset?: string | null;
+  Offset: string | null;
   /** 边的类型 */
-  LinkType?: string | null;
+  LinkType: string | null;
   /** 工作流id */
-  WorkflowId?: string | null;
+  WorkflowId: string | null;
 }
 
 /** 实时任务日志内容 */
@@ -4115,165 +4115,165 @@ declare interface TaskLockStatus {
 /** 任务运维详情 */
 declare interface TaskOpsDto {
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId: string | null;
   /** 虚拟任务id */
-  VirtualTaskId?: string | null;
+  VirtualTaskId: string | null;
   /** 虚拟任务标记 */
-  VirtualFlag?: boolean | null;
+  VirtualFlag: boolean | null;
   /** 任务名 */
-  TaskName?: string | null;
+  TaskName: string | null;
   /** 工作流id */
-  WorkflowId?: string | null;
+  WorkflowId: string | null;
   /** 任务为虚拟任务时，任务所在的真实工作流Id */
-  RealWorkflowId?: string | null;
+  RealWorkflowId: string | null;
   /** 工作流名称 */
-  WorkflowName?: string | null;
+  WorkflowName: string | null;
   /** 文件夹id */
-  FolderId?: string | null;
+  FolderId: string | null;
   /** 文件夹名字 */
-  FolderName?: string | null;
+  FolderName: string | null;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime: string | null;
   /** 最近更新时间 */
-  LastUpdate?: string | null;
+  LastUpdate: string | null;
   /** 任务状态 */
-  Status?: string | null;
+  Status: string | null;
   /** 责任人 */
-  InCharge?: string | null;
+  InCharge: string | null;
   /** 责任人用户id */
-  InChargeId?: string | null;
+  InChargeId: string | null;
   /** 调度生效日期 */
-  StartTime?: string | null;
+  StartTime: string | null;
   /** 调度结束日期 */
-  EndTime?: string | null;
+  EndTime: string | null;
   /** 执行时间左闭区间 */
-  ExecutionStartTime?: string | null;
+  ExecutionStartTime: string | null;
   /** 执行时间右闭区间 */
-  ExecutionEndTime?: string | null;
+  ExecutionEndTime: string | null;
   /** 周期类型 */
-  CycleType?: string | null;
+  CycleType: string | null;
   /** 步长 */
-  CycleStep?: number | null;
+  CycleStep: number | null;
   /** 调度cron表达式 */
-  CrontabExpression?: string | null;
+  CrontabExpression: string | null;
   /** 延时执行时间，unit=分钟 */
-  DelayTime?: number | null;
+  DelayTime: number | null;
   /** 开始执行时间 */
-  StartupTime?: number | null;
+  StartupTime: number | null;
   /** 重试等待时间, unit=分钟 */
-  RetryWait?: number | null;
+  RetryWait: number | null;
   /** 是否可重试，1 代表可以重试 */
-  RetryAble?: number | null;
+  RetryAble: number | null;
   /** 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为'0,3,4' */
-  TaskAction?: string | null;
+  TaskAction: string | null;
   /** 运行次数限制 */
-  TryLimit?: number | null;
+  TryLimit: number | null;
   /** 运行优先级 */
-  RunPriority?: number | null;
+  RunPriority: number | null;
   /** 任务类型 */
-  TaskType?: TaskTypeOpsDto | null;
+  TaskType: TaskTypeOpsDto | null;
   /** 指定的运行节点 */
-  BrokerIp?: string | null;
+  BrokerIp: string | null;
   /** 集群name */
-  ClusterId?: string | null;
+  ClusterId: string | null;
   /** 最小数据时间 */
-  MinDateTime?: string | null;
+  MinDateTime: string | null;
   /** 最大数据时间 */
-  MaxDateTime?: string | null;
+  MaxDateTime: string | null;
   /** 运行耗时超时时间 */
-  ExecutionTTL?: number | null;
+  ExecutionTTL: number | null;
   /** 自依赖类型 */
-  SelfDepend?: string | null;
+  SelfDepend: string | null;
   /** 左侧坐标 */
-  LeftCoordinate?: number | null;
+  LeftCoordinate: number | null;
   /** 顶部坐标 */
-  TopCoordinate?: number | null;
+  TopCoordinate: number | null;
   /** 任务备注 */
-  Notes?: string | null;
+  Notes: string | null;
   /** 任务初始化策略 */
-  InstanceInitStrategy?: string | null;
+  InstanceInitStrategy: string | null;
   /** 计算队列 */
-  YarnQueue?: string | null;
+  YarnQueue: string | null;
   /** 最新调度提交时间 */
-  LastSchedulerCommitTime?: string | null;
+  LastSchedulerCommitTime: string | null;
   /** 按cron表达式计算的任务开始执行时间 */
-  NormalizedJobStartTime?: string | null;
+  NormalizedJobStartTime: string | null;
   /** 调度计划描述 */
-  SchedulerDesc?: string | null;
+  SchedulerDesc: string | null;
   /** 计算资源组 */
-  ResourceGroup?: string | null;
+  ResourceGroup: string | null;
   /** 任务创建人 */
-  Creator?: string | null;
+  Creator: string | null;
   /** 任务依赖类型 and、or */
-  DependencyRel?: string | null;
+  DependencyRel: string | null;
   /** 任务工作流依赖 yes、no */
-  DependencyWorkflow?: string | null;
+  DependencyWorkflow: string | null;
   /** 事件监听配置 */
-  EventListenerConfig?: string | null;
+  EventListenerConfig: string | null;
   /** 事件驱动配置 */
-  EventPublisherConfig?: string | null;
+  EventPublisherConfig: string | null;
   /** 虚拟任务状态 */
-  VirtualTaskStatus?: string | null;
+  VirtualTaskStatus: string | null;
   /** 任务依赖边详情 */
-  TaskLinkInfo?: LinkOpsDto | null;
+  TaskLinkInfo: LinkOpsDto | null;
   /** 任务产品类型 */
-  ProductName?: string | null;
+  ProductName: string | null;
   /** 项目id */
-  ProjectId?: string | null;
+  ProjectId: string | null;
   /** 项目标识 */
-  ProjectIdent?: string | null;
+  ProjectIdent: string | null;
   /** 项目名称 */
-  ProjectName?: string | null;
+  ProjectName: string | null;
   /** 主账户userId */
-  OwnId?: string | null;
+  OwnId: string | null;
   /** 用户userId */
-  UserId?: string | null;
+  UserId: string | null;
   /** 租户id */
-  TenantId?: string | null;
+  TenantId: string | null;
   /** 更新人昵称 */
-  UpdateUser?: string | null;
+  UpdateUser: string | null;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime: string | null;
   /** 更新人userId */
-  UpdateUserId?: string | null;
+  UpdateUserId: string | null;
   /** 任务类型id */
-  TaskTypeId?: number | null;
+  TaskTypeId: number | null;
   /** 任务类型描述 */
-  TaskTypeDesc?: string | null;
+  TaskTypeDesc: string | null;
   /** 是否展示工作流 */
-  ShowWorkflow?: boolean | null;
+  ShowWorkflow: boolean | null;
   /** 首次提交时间 */
-  FirstSubmitTime?: string | null;
+  FirstSubmitTime: string | null;
   /** 首次运行时间 */
-  FirstRunTime?: string | null;
+  FirstRunTime: string | null;
   /** 调度描述 */
-  ScheduleDesc?: string | null;
+  ScheduleDesc: string | null;
   /** 周期 */
-  CycleNum?: number | null;
+  CycleNum: number | null;
   /** 表达式 */
-  Crontab?: string | null;
+  Crontab: string | null;
   /** 开始日期 */
-  StartDate?: string | null;
+  StartDate: string | null;
   /** 结束日期 */
-  EndDate?: string | null;
+  EndDate: string | null;
   /** 周期单位 */
-  CycleUnit?: string | null;
+  CycleUnit: string | null;
   /** 初始化策略 */
-  InitStrategy?: string | null;
+  InitStrategy: string | null;
   /** 层级 */
-  Layer?: string | null;
+  Layer: string | null;
   /** 来源数据源ID */
-  SourceServiceId?: string | null;
+  SourceServiceId: string | null;
   /** 来源数据源类型 */
-  SourceServiceType?: string | null;
+  SourceServiceType: string | null;
   /** 目标数据源ID */
-  TargetServiceId?: string | null;
+  TargetServiceId: string | null;
   /** 目标数据源类型 */
-  TargetServiceType?: string | null;
+  TargetServiceType: string | null;
   /** 子任务列表 */
-  TasksStr?: string | null;
+  TasksStr: string | null;
   /** 任务版本是否已提交 */
-  Submit?: boolean | null;
+  Submit: boolean | null;
 }
 
 /** 离线任务统计指标明细 */
@@ -9140,7 +9140,7 @@ declare interface DescribeTaskRunHistoryRequest {
   /** 分页大小 */
   PageSize: number;
   /** 分页页码 */
-  PageNumber: string;
+  PageNumber: number;
 }
 
 declare interface DescribeTaskRunHistoryResponse {
