@@ -2930,7 +2930,7 @@ declare interface UnitRuleItem {
   Description?: string | null;
   /** 规则标签列表 */
   UnitRuleTagList?: UnitRuleTag[] | null;
-  /** 项目id */
+  /** 规则项索引 */
   ItemIndex?: number | null;
   /** 创建时间 */
   CreatedTime?: string | null;
@@ -2940,7 +2940,7 @@ declare interface UnitRuleItem {
 
 /** 微服务网关单元化规则标签 */
 declare interface UnitRuleTag {
-  /** 标签类型 : U(用户标签) */
+  /** 标签类型 : U(用户标签)/S(系统标签) */
   TagType: string;
   /** 标签名 */
   TagField: string;

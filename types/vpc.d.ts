@@ -1226,13 +1226,11 @@ declare interface NetworkAcl {
 
 /** 网络ACL规则。 */
 declare interface NetworkAclEntry {
-  /** 修改时间。 */
-  ModifyTime: string;
   /** 协议, 取值: TCP,UDP, ICMP, ALL。 */
   Protocol?: string;
   /** 端口(all, 单个port, range)。当Protocol为ALL或ICMP时，不能指定Port。 */
   Port?: string;
-  /** 网段或IP(互斥)。 */
+  /** 网段或IP(互斥)。增量创建ACL规则时，CidrBlock和Ipv6CidrBlock至少提供一个。 */
   CidrBlock?: string;
   /** 网段或IPv6(互斥)。 */
   Ipv6CidrBlock?: string;
@@ -1240,6 +1238,14 @@ declare interface NetworkAclEntry {
   Action?: string;
   /** 规则描述，最大长度100。 */
   Description?: string;
+  /** 修改时间。 */
+  ModifyTime?: string;
+  /** 优先级，从1开始。 */
+  Priority?: number;
+  /** IPv4网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryID至少提供一个。 */
+  NetworkAclIpv4EntryId?: string | null;
+  /** IPv6网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryId至少提供一个。 */
+  NetworkAclIpv6EntryId?: string | null;
 }
 
 /** 网络ACL规则集合 */
@@ -2757,7 +2763,7 @@ declare interface CreateAssistantCidrResponse {
 declare interface CreateBandwidthPackageRequest {
   /** 带宽包类型, 默认值: BGP, 可选值:BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包 */
   NetworkType?: string;
-  /** 带宽包计费类型, 默认为: TOP5_POSTPAID_BY_MONTH, 可选值:TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费FIXED_PREPAID_BY_MONTH: 包月预付费计费 */
+  /** 带宽包计费类型, 默认为: TOP5_POSTPAID_BY_MONTH, 可选值:TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费FIXED_PREPAID_BY_MONTH: 包月预付费计费ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费 */
   ChargeType?: string;
   /** 带宽包名称。 */
   BandwidthPackageName?: string;
@@ -3064,6 +3070,18 @@ declare interface CreateNetDetectRequest {
 declare interface CreateNetDetectResponse {
   /** 网络探测（NetDetect）对象。 */
   NetDetect?: NetDetect;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateNetworkAclEntriesRequest {
+  /** 网络ACL实例ID。例如：acl-12345678。 */
+  NetworkAclId: string;
+  /** 网络三元组ACL规则集。 */
+  NetworkAclEntrySet: NetworkAclEntrySet;
+}
+
+declare interface CreateNetworkAclEntriesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3714,6 +3732,18 @@ declare interface DeleteNetDetectRequest {
 }
 
 declare interface DeleteNetDetectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNetworkAclEntriesRequest {
+  /** 三元组网络ACL实例ID。例如：acl-12345678。 */
+  NetworkAclId: string;
+  /** 三元组网络ACL规则集。 */
+  NetworkAclEntrySet?: NetworkAclEntrySet;
+}
+
+declare interface DeleteNetworkAclEntriesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6437,6 +6467,8 @@ declare interface ModifyNetworkAclEntriesRequest {
   NetworkAclEntrySet?: NetworkAclEntrySet;
   /** 网络ACL五元组规则集。NetworkAclEntrySet和NetworkAclQuintupleSet只能输入一个。 */
   NetworkAclQuintupleSet?: NetworkAclQuintupleEntries;
+  /** 三元组的增量更新。该接口的默认语义为全量覆盖。当需要实现增量更新语义时，设置该参数为True。 */
+  EnableUpdateAclEntries?: boolean;
 }
 
 declare interface ModifyNetworkAclEntriesResponse {
@@ -7259,6 +7291,8 @@ declare interface Vpc {
   CreateNetDetect(data: CreateNetDetectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetDetectResponse>;
   /** 创建网络ACL {@link CreateNetworkAclRequest} {@link CreateNetworkAclResponse} */
   CreateNetworkAcl(data: CreateNetworkAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkAclResponse>;
+  /** 增量添加网络ACL三元组规则接口 {@link CreateNetworkAclEntriesRequest} {@link CreateNetworkAclEntriesResponse} */
+  CreateNetworkAclEntries(data: CreateNetworkAclEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkAclEntriesResponse>;
   /** 增量添加网络ACL五元组规则接口 {@link CreateNetworkAclQuintupleEntriesRequest} {@link CreateNetworkAclQuintupleEntriesResponse} */
   CreateNetworkAclQuintupleEntries(data: CreateNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkAclQuintupleEntriesResponse>;
   /** 创建弹性网卡 {@link CreateNetworkInterfaceRequest} {@link CreateNetworkInterfaceResponse} */
@@ -7341,6 +7375,8 @@ declare interface Vpc {
   DeleteNetDetect(data: DeleteNetDetectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetDetectResponse>;
   /** 删除网络ACL {@link DeleteNetworkAclRequest} {@link DeleteNetworkAclResponse} */
   DeleteNetworkAcl(data: DeleteNetworkAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkAclResponse>;
+  /** 删除ACL三元组单条规则 {@link DeleteNetworkAclEntriesRequest} {@link DeleteNetworkAclEntriesResponse} */
+  DeleteNetworkAclEntries(data: DeleteNetworkAclEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkAclEntriesResponse>;
   /** 删除网络ACL五元组指定的部分条目接口。 {@link DeleteNetworkAclQuintupleEntriesRequest} {@link DeleteNetworkAclQuintupleEntriesResponse} */
   DeleteNetworkAclQuintupleEntries(data: DeleteNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkAclQuintupleEntriesResponse>;
   /** 删除弹性网卡 {@link DeleteNetworkInterfaceRequest} {@link DeleteNetworkInterfaceResponse} */

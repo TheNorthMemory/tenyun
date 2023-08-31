@@ -182,12 +182,14 @@ declare interface GetEidTokenConfig {
   InputType?: string;
   /** 是否使用意愿核身，默认不使用。注意：如开启使用，则计费标签按【意愿核身】计费标签计价；如不开启，则计费标签按【E证通】计费标签计价，价格详见：[价格说明](https://cloud.tencent.com/document/product/1007/56804)。 */
   UseIntentionVerify?: boolean;
-  /** 意愿核身模式。枚举值：1( 朗读模式)，2（问答模式） 。默认值1 */
+  /** 意愿核身模式。枚举值：1( 语音朗读模式)，2（语音问答模式） ，3（点头确认模式）。默认值为1。 */
   IntentionMode?: string;
   /** 意愿核身朗读模式使用的文案，若未使用意愿核身朗读功能，该字段无需传入。默认为空，最长可接受120的字符串长度。 */
   IntentionVerifyText?: string;
   /** 意愿核身问答模式的配置列表。当前仅支持一个问答。 */
   IntentionQuestions?: IntentionQuestion[];
+  /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。默认为空，最长可接受150的字符串长度。 */
+  IntentionActions?: IntentionActionConfig[];
   /** 意愿核身过程中识别用户的回答意图，开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过，默认不开启。 */
   IntentionRecognition?: boolean;
   /** 是否支持港澳台居住证识别 */
@@ -597,17 +599,19 @@ declare interface GetEidResultRequest {
 
 declare interface GetEidResultResponse {
   /** 文本类信息。（基于对敏感信息的保护，验证使用的姓名和身份证号统一通过加密后从Eidinfo参数中返回，如需获取请在控制台申请返回身份信息，详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)） */
-  Text: DetectInfoText | null;
+  Text?: DetectInfoText | null;
   /** 身份证照片信息。 */
-  IdCardData: DetectInfoIdCardData | null;
+  IdCardData?: DetectInfoIdCardData | null;
   /** 最佳帧信息。 */
-  BestFrame: DetectInfoBestFrame | null;
+  BestFrame?: DetectInfoBestFrame | null;
   /** Eid信息。（包括商户下用户唯一标识以及加密后的姓名、身份证号信息。解密方式详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)） */
-  EidInfo: EidInfo | null;
+  EidInfo?: EidInfo | null;
   /** 意愿核身朗读模式相关信息。若未使用意愿核身朗读功能，该字段返回值可以不处理。 */
-  IntentionVerifyData: IntentionVerifyData | null;
+  IntentionVerifyData?: IntentionVerifyData | null;
   /** 意愿核身问答模式相关信息。若未使用意愿核身问答模式功能，该字段返回值可以不处理。 */
-  IntentionQuestionResult: IntentionQuestionResult | null;
+  IntentionQuestionResult?: IntentionQuestionResult | null;
+  /** 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。 */
+  IntentionActionResult?: IntentionActionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

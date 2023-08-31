@@ -3727,29 +3727,41 @@ declare interface ProcedureTemplate {
 /** 预付费商品实例 */
 declare interface ProductInstance {
   /** 预付费商品实例类型，取值有：StarterPackage：点播新手包。MiniProgramPlugin：点播小程序插件。ResourcePackage：点播资源包。 */
-  ProductType: string;
+  ProductType?: string;
   /** 资源包实例起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  StartTime: string;
+  StartTime?: string;
   /** 资源包实例过期日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 资源包实例ID。对应每个资源包，系统会分配相应的资源。续费或者升级资源包时，需要带上这个资源ID。 */
-  ProductInstanceId: string;
+  ProductInstanceId?: string;
   /** 系统最近一次扣除资源包的日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  LastConsumeDate: string;
+  LastConsumeDate?: string;
   /** 资源包绑定 License 状态，取值有：0：未绑定。1：已绑定。 */
-  BindStatus: number;
+  BindStatus?: number;
   /** 预付费资源包实例中包含的资源包列表。 */
-  ProductInstanceResourceSet: ProductInstanceRecource[];
+  ProductInstanceResourceSet?: ProductInstanceRecource[];
+  /** 预付费资源包实例中包含的资源包列表。 */
+  ResourceSet?: ProductInstanceResource[];
   /** 资源包实例的状态，取值有：Effective：生效，可用于计费抵扣。Isolated：隔离，不可用于计费抵扣。 */
-  ProductInstanceStatus: string;
+  ProductInstanceStatus?: string;
   /** 资源包实例的可退还状态，取值有：FullRefund：可全额退款。Denied：不可退款。 */
-  RefundStatus: string;
+  RefundStatus?: string;
   /** 自动续费状态，取值有：Never：不自动续费。Expire：到期自动续费。ExpireOrUseOut：到期或用完自动续费。NotSupport：不支持。 */
-  RenewStatus: string;
+  RenewStatus?: string;
 }
 
 /** 资源包中包含的资源。 */
 declare interface ProductInstanceRecource {
+  /** 资源类型。Storage：存储资源包。Traffic：流量资源包。Transcode：普通转码资源包。TESHD：极速高清转码资源包。Review：音视频审核转码资源包。MediaProcess：媒体处理时长资源包。 */
+  ResourceType?: string;
+  /** 资源包额度。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。媒体处理时长资源包，单位为秒。 */
+  Amount?: number;
+  /** 资源包余量。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。媒体处理时长资源包，单位为秒。 */
+  Left?: number;
+}
+
+/** 资源包中包含的资源。 */
+declare interface ProductInstanceResource {
   /** 资源类型。Storage：存储资源包。Traffic：流量资源包。Transcode：普通转码资源包。TESHD：极速高清转码资源包。Review：音视频审核转码资源包。MediaProcess：媒体处理时长资源包。 */
   ResourceType?: string;
   /** 资源包额度。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。媒体处理时长资源包，单位为秒。 */

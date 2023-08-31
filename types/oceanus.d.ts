@@ -23,77 +23,83 @@ declare interface ClazzLevel {
 /** 描述用户创建的集群信息 */
 declare interface Cluster {
   /** 集群 ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  Name: string;
+  Name?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 用户 AppID */
-  AppId: number;
+  AppId?: number;
   /** 主账号 UIN */
-  OwnerUin: string;
+  OwnerUin?: string;
   /** 创建者 UIN */
-  CreatorUin: string;
+  CreatorUin?: string;
   /** 集群状态, 1 未初始化,，3 初始化中，2 运行中 */
-  Status: number;
+  Status?: number;
   /** 描述 */
-  Remark: string;
+  Remark?: string;
   /** 集群创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后一次操作集群的时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** CU 数量 */
-  CuNum: number;
+  CuNum?: number;
   /** CU 内存规格 */
-  CuMem: number;
+  CuMem?: number;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 状态描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 网络 */
-  CCNs: CCN[];
+  CCNs?: CCN[];
   /** 网络 */
-  NetEnvironmentType: number;
+  NetEnvironmentType?: number;
   /** 空闲 CU */
-  FreeCuNum: number;
+  FreeCuNum?: number;
   /** 集群绑定的标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 集群隔离时间; 没隔离时间，则为 - */
-  IsolatedTime: string | null;
+  IsolatedTime?: string | null;
   /** 集群过期时间; 没过期概念，则为 - */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 距离过期还有多少秒; 没过期概念，则为 - */
-  SecondsUntilExpiry: string | null;
+  SecondsUntilExpiry?: string | null;
   /** 自动续费标记，0 表示默认状态 (用户未设置，即初始状态，用户开通了预付费不停服特权会进行自动续费)， 1 表示自动续费，2表示明确不自动续费(用户设置) */
-  AutoRenewFlag: number | null;
+  AutoRenewFlag?: number | null;
   /** 集群的默认 COS 存储桶 */
-  DefaultCOSBucket: string | null;
+  DefaultCOSBucket?: string | null;
   /** 集群的CLS 日志集 LogSet */
-  CLSLogSet: string | null;
+  CLSLogSet?: string | null;
   /** 集群的CLS 日志主题 TopicId */
-  CLSTopicId: string | null;
+  CLSTopicId?: string | null;
   /** 集群的CLS 日志集 名字 */
-  CLSLogName: string | null;
+  CLSLogName?: string | null;
   /** 集群的CLS 日志主题 名字 */
-  CLSTopicName: string | null;
+  CLSTopicName?: string | null;
   /** 集群的版本信息 */
-  Version: ClusterVersion | null;
+  Version?: ClusterVersion | null;
   /** 细粒度资源下的空闲CU */
-  FreeCu: number | null;
+  FreeCu?: number | null;
   /** 集群的默认日志采集配置 */
-  DefaultLogCollectConf: string | null;
+  DefaultLogCollectConf?: string | null;
   /** 取值：0-没有设置，1-已设置，2-不允许设置 */
-  CustomizedDNSEnabled: number | null;
+  CustomizedDNSEnabled?: number | null;
   /** 空间信息 */
-  Correlations: WorkSpaceClusterItem[] | null;
+  Correlations?: WorkSpaceClusterItem[] | null;
   /** 运行CU */
-  RunningCu: number | null;
+  RunningCu?: number | null;
   /** 0 后付费,1 预付费 */
-  PayMode: number | null;
+  PayMode?: number | null;
   /** 前端区分 集群是否需要2CU逻辑 因为历史集群 变配不需要, default 1 新集群都需要 */
-  IsNeedManageNode: number | null;
+  IsNeedManageNode?: number | null;
   /** session集群信息 */
   ClusterSessions?: ClusterSession[] | null;
+  /** V3版本 = 2 */
+  ArchGeneration?: number | null;
+  /** 0:TKE, 1:EKS */
+  ClusterType?: number | null;
+  /** 订单信息 */
+  Orders?: Order[] | null;
 }
 
 /** 工作空间集群组信息 */
@@ -406,6 +412,20 @@ declare interface NodeConfig {
   Configuration?: Property[] | null;
   /** 节点的状态ttl配置, 多个用 ; 分割 */
   StateTTL?: string | null;
+}
+
+/** 集群购买、扩缩容、续费订单信息 */
+declare interface Order {
+  /** 创建、续费、扩缩容 1 2 3 */
+  Type?: number | null;
+  /** 自动续费 1 */
+  AutoRenewFlag?: number | null;
+  /** 操作人的UIN */
+  OperateUin?: string | null;
+  /** 最终集群的CU数量 */
+  ComputeCu?: number | null;
+  /** 订单的时间 */
+  OrderTime?: string | null;
 }
 
 /** 系统配置属性 */

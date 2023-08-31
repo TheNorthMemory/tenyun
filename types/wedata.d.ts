@@ -675,65 +675,67 @@ declare interface DataCheckStat {
 /** 数据源对象 */
 declare interface DataSourceInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
-  DatabaseName: string | null;
+  DatabaseName?: string | null;
   /** 数据源描述信息 */
-  Description: string | null;
+  Description?: string | null;
   /** 数据源ID */
-  ID: number | null;
+  ID?: number | null;
   /** 数据源引擎的实例ID，如CDB实例ID */
-  Instance: string | null;
+  Instance?: string | null;
   /** 数据源名称，在相同SpaceName下，数据源名称不能为空 */
-  Name: string | null;
+  Name?: string | null;
   /** 数据源引擎所属区域 */
-  Region: string | null;
+  Region?: string | null;
   /** 数据源类型:枚举值 */
-  Type: string | null;
+  Type?: string | null;
   /** 数据源所属的集群id */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 应用ID AppId */
-  AppId: number | null;
+  AppId?: number | null;
   /** 业务侧数据源的配置信息扩展 */
-  BizParams: string | null;
+  BizParams?: string | null;
   /** 数据源类别：绑定引擎、绑定数据库 */
-  Category: string | null;
+  Category?: string | null;
   /** 数据源展示名，为了可视化查看 */
-  Display: string | null;
+  Display?: string | null;
   /** 数据源责任人账号ID */
-  OwnerAccount: string | null;
+  OwnerAccount?: string | null;
   /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同 */
-  Params: string | null;
+  Params?: string | null;
   /** 数据源数据源的可见性，1为可见、0为不可见。默认为1 */
-  Status: number | null;
+  Status?: number | null;
   /** 数据源责任人账号名称 */
-  OwnerAccountName: string | null;
+  OwnerAccountName?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 归属项目ID */
-  OwnerProjectId: string | null;
+  OwnerProjectId?: string | null;
   /** 归属项目Name */
-  OwnerProjectName: string | null;
+  OwnerProjectName?: string | null;
   /** 归属项目标识 */
-  OwnerProjectIdent: string | null;
+  OwnerProjectIdent?: string | null;
   /** 授权项目 */
-  AuthorityProjectName: string | null;
+  AuthorityProjectName?: string | null;
   /** 授权用户 */
-  AuthorityUserName: string | null;
+  AuthorityUserName?: string | null;
   /** 是否有编辑权限 */
-  Edit: boolean | null;
+  Edit?: boolean | null;
   /** 是否有授权权限 */
-  Author: boolean | null;
+  Author?: boolean | null;
   /** 是否有转交权限 */
-  Deliver: boolean | null;
+  Deliver?: boolean | null;
   /** 数据源状态 */
-  DataSourceStatus: string | null;
+  DataSourceStatus?: string | null;
   /** 时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** Params json字符串 */
-  ParamsString: string | null;
+  ParamsString?: string | null;
   /** BizParams json字符串 */
-  BizParamsString: string | null;
+  BizParamsString?: string | null;
   /** 修改时间 */
   ModifiedTime?: number | null;
+  /** 数据源页面展示类型，与Type对应 */
+  ShowType?: string | null;
 }
 
 /** 查询数据源分页列表 */

@@ -290,6 +290,8 @@ declare interface ClbListenerListInfo {
   LoadBalancerType?: string | null;
   /** 监听器域名 */
   Domain?: string | null;
+  /** 负载均衡域名 */
+  LoadBalancerDomain?: string | null;
 }
 
 /** db资产输出字段 */

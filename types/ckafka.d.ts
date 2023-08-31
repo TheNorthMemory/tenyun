@@ -150,6 +150,16 @@ declare interface BrokerTopicData {
   DataSize?: number | null;
 }
 
+/** broker维度topic 流量排行指标 */
+declare interface BrokerTopicFlowData {
+  /** Topic 名称 */
+  TopicName?: string | null;
+  /** Topic Id */
+  TopicId?: string | null;
+  /** Topic 流量(MB) */
+  TopicTraffic?: string | null;
+}
+
 /** ClickHouse连接源参数 */
 declare interface ClickHouseConnectParam {
   /** ClickHouse的连接port */
@@ -2109,15 +2119,17 @@ declare interface TopicFlowRanking {
 /** topic 生产消息数据，消费者数据 */
 declare interface TopicFlowRankingResult {
   /** Topic 流量数组 */
-  TopicFlow: TopicFlowRanking[];
+  TopicFlow?: TopicFlowRanking[];
   /** 消费者组消费速度排行速度 */
-  ConsumeSpeed: ConsumerGroupSpeed[];
+  ConsumeSpeed?: ConsumerGroupSpeed[];
   /** Topic 消息堆积/占用磁盘排行 */
-  TopicMessageHeap: TopicMessageHeapRanking[] | null;
+  TopicMessageHeap?: TopicMessageHeapRanking[] | null;
   /** Broker Ip 列表 */
   BrokerIp?: string[] | null;
   /** 单个broker 节点 Topic占用的数据大小 */
   BrokerTopicData?: BrokerTopicData[] | null;
+  /** 单个Broker 节点Topic 流量的大小(单位MB) */
+  BrokerTopicFlowData?: BrokerTopicFlowData[];
 }
 
 /** topic副本及详细信息 */
@@ -2329,23 +2341,25 @@ declare interface VipEntity {
 /** zone信息实体 */
 declare interface ZoneInfo {
   /** zone的id */
-  ZoneId: string;
+  ZoneId?: string;
   /** 是否内部APP */
-  IsInternalApp: number;
+  IsInternalApp?: number;
   /** app id */
-  AppId: number;
+  AppId?: number;
   /** 标识 */
-  Flag: boolean;
+  Flag?: boolean;
   /** zone名称 */
-  ZoneName: string;
+  ZoneName?: string;
   /** zone状态 */
-  ZoneStatus: number;
+  ZoneStatus?: number;
   /** 额外标识 */
-  Exflag: string;
+  Exflag?: string;
   /** json对象，key为机型，value true为售罄，false为未售罄 */
-  SoldOut: string;
+  SoldOut?: string;
   /** 标准版售罄信息 */
-  SalesInfo: SaleInfo[] | null;
+  SalesInfo?: SaleInfo[] | null;
+  /** 额外标识 */
+  ExtraFlag?: string;
 }
 
 declare interface AclResponse {
@@ -2749,6 +2763,8 @@ declare interface CreateInstancePreRequest {
   PublicNetworkMonthly?: number;
   /** 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例 */
   InstanceNum?: number;
+  /** 是否自动选择代金券:1-是;0否。默认为0 */
+  AutoVoucher?: number;
 }
 
 declare interface CreateInstancePreResponse {

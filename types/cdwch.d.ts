@@ -14,6 +14,24 @@ declare interface AttachCBSSpec {
   DiskDesc?: string;
 }
 
+/** 备份任务详情 */
+declare interface BackUpJobDisplay {
+  /** 备份任务id */
+  JobId: number;
+  /** 备份任务名 */
+  Snapshot: string;
+  /** 任务类型(元数据),(数据) */
+  BackUpType: string;
+  /** 备份数据量 */
+  BackUpSize: number;
+  /** 任务创建时间 */
+  BackUpTime: string;
+  /** 任务过期时间 */
+  ExpireTime: string;
+  /** 任务状态 */
+  JobStatus: string;
+}
+
 /** 备份表信息 */
 declare interface BackupTableContent {
   /** 数据库 */
@@ -456,6 +474,54 @@ declare interface CreateInstanceNewResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBackUpDataRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId?: number;
+  /** 是否删除所有数据 */
+  IsDeleteAll?: boolean;
+}
+
+declare interface DeleteBackUpDataResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackUpJobDetailRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId: number;
+}
+
+declare interface DescribeBackUpJobDetailResponse {
+  /** 备份表详情 */
+  TableContents: BackupTableContent[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackUpJobRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 页号 */
+  PageNum?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+declare interface DescribeBackUpJobResponse {
+  /** 任务列表 */
+  BackUpJobs: BackUpJobDisplay[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackUpScheduleRequest {
   /** 集群id */
   InstanceId: string;
@@ -487,11 +553,13 @@ declare interface DescribeCkSqlApisRequest {
   Cluster?: string;
   /** 用户名称，api与user相关的必填 */
   UserName?: string;
+  /** 账户的类型 */
+  UserType?: string;
 }
 
 declare interface DescribeCkSqlApisResponse {
   /** 返回的查询数据，大部分情况是list，也可能是bool */
-  ReturnData: string | null;
+  ReturnData?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -712,6 +780,18 @@ declare interface OpenBackUpResponse {
   RequestId?: string;
 }
 
+declare interface RecoverBackUpJobRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId: number;
+}
+
+declare interface RecoverBackUpJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResizeDiskRequest {
   /** 实例唯一ID */
   InstanceId: string;
@@ -791,6 +871,12 @@ declare interface Cdwch {
   CreateBackUpSchedule(data: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
   /** 创建集群openApi {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
+  /** 删除备份数据 {@link DeleteBackUpDataRequest} {@link DeleteBackUpDataResponse} */
+  DeleteBackUpData(data: DeleteBackUpDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackUpDataResponse>;
+  /** 查询备份任务列表 {@link DescribeBackUpJobRequest} {@link DescribeBackUpJobResponse} */
+  DescribeBackUpJob(data: DescribeBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpJobResponse>;
+  /** 查询备份任务详情 {@link DescribeBackUpJobDetailRequest} {@link DescribeBackUpJobDetailResponse} */
+  DescribeBackUpJobDetail(data: DescribeBackUpJobDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpJobDetailResponse>;
   /** 查询备份策略信息 {@link DescribeBackUpScheduleRequest} {@link DescribeBackUpScheduleResponse} */
   DescribeBackUpSchedule(data: DescribeBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpScheduleResponse>;
   /** 查询集群用户相关信息 {@link DescribeCkSqlApisRequest} {@link DescribeCkSqlApisResponse} */
@@ -821,6 +907,8 @@ declare interface Cdwch {
   ModifyUserNewPrivilege(data?: ModifyUserNewPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserNewPrivilegeResponse>;
   /** 开启或者关闭策略 {@link OpenBackUpRequest} {@link OpenBackUpResponse} */
   OpenBackUp(data: OpenBackUpRequest, config?: AxiosRequestConfig): AxiosPromise<OpenBackUpResponse>;
+  /** 备份恢复 {@link RecoverBackUpJobRequest} {@link RecoverBackUpJobResponse} */
+  RecoverBackUpJob(data: RecoverBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverBackUpJobResponse>;
   /** 扩容磁盘容量 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
   /** 水平调整实例节点 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */

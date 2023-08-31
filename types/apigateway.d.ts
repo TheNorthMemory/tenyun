@@ -1879,7 +1879,7 @@ declare interface CreateServiceRequest {
   Tags?: Tag[];
   /** 独享实例id */
   InstanceId?: string;
-  /** vpc属性 */
+  /** vpc属性，选择VPC后不可修改，为服务选择VPC后，可对接该VPC下的后端资源 */
   UniqVpcId?: string;
 }
 
@@ -1905,7 +1905,7 @@ declare interface CreateServiceResponse {
 }
 
 declare interface CreateUpstreamRequest {
-  /** 后端协议，取值范围：HTTP, HTTPS */
+  /** 后端协议，取值范围：HTTP, HTTPS,gRPC，gRPCs */
   Scheme: string;
   /** 负载均衡算法，取值范围：ROUND-ROBIN */
   Algorithm: string;
@@ -2708,6 +2708,8 @@ declare interface DescribeServiceResponse {
   DeploymentType?: string | null;
   /** 特殊用途, NULL和DEFAULT表示无特殊用途，其他用途如HTTP_DNS等 */
   SpecialUse?: string | null;
+  /** vpc属性，存量可能为空字符串 */
+  UniqVpcId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3197,6 +3199,8 @@ declare interface ModifyServiceRequest {
   Protocol?: string;
   /** 网络类型列表，用于指定支持的访问类型，INNER为内网访问，OUTER为外网访问。默认为OUTER。 */
   NetTypes?: string[];
+  /** vpc属性，选择VPC后不可修改。为服务选择VPC后，可对接该VPC下的后端资源 */
+  UniqVpcId?: string;
 }
 
 declare interface ModifyServiceResponse {

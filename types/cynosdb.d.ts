@@ -3415,9 +3415,9 @@ declare interface ModifyInstanceParamRequest {
   ClusterId: string;
   /** 实例ID */
   InstanceIds?: string[];
-  /** 集群参数列表 */
+  /** 集群参数列表，例如 [{ "CurrentValue":"2", "ParamName":"innodb_stats_transient_sample_pages"}] */
   ClusterParamList?: ModifyParamItem[];
-  /** 实例参数列表 */
+  /** 实例参数列表，例如[{ "CurrentValue":"2", "ParamName":"innodb_stats_transient_sample_pages"}] */
   InstanceParamList?: ModifyParamItem[];
   /** yes：在运维时间窗内修改，no：立即执行（默认值） */
   IsInMaintainPeriod?: string;
@@ -3425,7 +3425,7 @@ declare interface ModifyInstanceParamRequest {
 
 declare interface ModifyInstanceParamResponse {
   /** 任务ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

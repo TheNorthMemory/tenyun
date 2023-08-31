@@ -45,41 +45,43 @@ declare interface AssessmentControlItem {
 /** DSPA评估风险项 */
 declare interface AssessmentRisk {
   /** 风险项Id */
-  RiskId: string;
+  RiskId?: string;
   /** 风险项描述 */
-  RiskDescription: string | null;
+  RiskDescription?: string | null;
   /** 评估模版Id */
-  TemplateId: string;
+  TemplateId?: string;
   /** 评估模版名称 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 评估项Id */
-  ControlItemId: string;
+  ControlItemId?: string;
   /** 评估项名称 */
-  ControlItemName: string;
+  ControlItemName?: string;
   /** 评估描述 */
-  ControlItemDesc: string;
+  ControlItemDesc?: string;
   /** 风险等级，取值（high，medium，low） */
-  RiskLevel: string;
+  RiskLevel?: string;
   /** 风险缓解措施 */
-  RiskMitigation: string;
+  RiskMitigation?: string;
   /** 风险处理状态。(waiting待处理, processing处理中, finished已处理) */
-  Status: string;
+  Status?: string;
   /** 风险生成时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 风险负责人 */
-  RiskOwner: string;
+  RiskOwner?: string;
   /** 风险涉及资产 */
-  RelatedAsset: string;
+  RelatedAsset?: string;
   /** 风险涉及资产id */
-  DataSourceId: string | null;
+  DataSourceId?: string | null;
   /** 风险涉及资产名称 */
-  DataSourceName: string | null;
+  DataSourceName?: string | null;
   /** 资产名称 */
   AssetName?: string | null;
   /** 建议使用安全产品 */
   SecurityProduct?: SecurityProduct[] | null;
   /** 风险类型 */
   RiskType?: string | null;
+  /** 风险面 */
+  RiskSide?: string | null;
 }
 
 /** 风险项列表详细数据 */
@@ -98,6 +100,10 @@ declare interface AssessmentRiskItem {
   ReferTemplateCount?: number | null;
   /** 支持的数据源 */
   SupportDataSource?: string[] | null;
+  /** 风险面 */
+  RiskSide?: string | null;
+  /** 关联模版列表 */
+  ReferTemplateList?: TemplateInfo[] | null;
 }
 
 /** DSPA评估任务 */
@@ -143,25 +149,27 @@ declare interface AssessmentTemplate {
   /** id */
   Id?: number | null;
   /** 评估模版Id */
-  TemplateId: string;
+  TemplateId?: string;
   /** 评估模版名称 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 描述信息 */
-  Description: string | null;
+  Description?: string | null;
   /** 模版来源，内置/用户自定，取值（system，user） */
-  Source: string;
+  Source?: string;
   /** 模版类型，自动化/半自动化/问卷，取值（auto，semi-auto，law）等 */
-  UseType: string;
+  UseType?: string;
   /** 评估模版创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 模版关联的评估项数量 */
-  ControlItemCount: number;
+  ControlItemCount?: number;
   /** 模版已启用的评估项数量 */
-  AppliedItemCount: number;
+  AppliedItemCount?: number;
   /** 模版启用状态，草稿/已启用，取值draft / launched */
-  Status: string;
+  Status?: string;
   /** 支持的数据源类型 */
   SupportDataSource?: string[] | null;
+  /** 是否包含攻击面风险 */
+  IsASMTemplate?: boolean | null;
 }
 
 /** 数据资产报告-cos的资产详情 */
@@ -1298,6 +1306,8 @@ declare interface ESTaskResultDetail {
   LevelId?: number | null;
   /** 分级名称 */
   LevelName?: string | null;
+  /** 分级分数 */
+  LevelRiskScore?: number | null;
 }
 
 /** 错误信息描述 */
@@ -1320,6 +1330,10 @@ declare interface Filter {
 declare interface HighRiskAssetsDetail {
   /** 实例id */
   InstanceId?: string | null;
+  /** 数据源类型 */
+  DataSourceType?: string | null;
+  /** 数据源名称 */
+  DataSourceName?: string | null;
   /** 资产对象名称 */
   AssetsName?: string | null;
   /** 高风险个数 */
@@ -1328,6 +1342,10 @@ declare interface HighRiskAssetsDetail {
   RiskType?: string | null;
   /** 总的风险个数 */
   TotalRiskCount?: number | null;
+  /** 风险面 */
+  RiskSide?: string | null;
+  /** 地域 */
+  ResourceRegion?: string | null;
 }
 
 /** 某个分级单个信息 */
@@ -1493,9 +1511,11 @@ declare interface ReportInfo {
 /** 待处理风险项数量信息 */
 declare interface RiskCountInfo {
   /** 风险等级 */
-  RiskLevel: string;
+  RiskLevel?: string;
   /** 该等级风险项数量 */
-  Count: number;
+  Count?: number;
+  /** 风险等级名称 */
+  RiskLevelName?: string | null;
 }
 
 /** 风险趋势项 */
@@ -1528,6 +1548,8 @@ declare interface RiskItemInfo {
   DataSourceName?: string | null;
   /** 数据源类型 */
   DataSourceType?: string | null;
+  /** 资源地域 */
+  ResourceRegion?: string | null;
   /** 资产名称 */
   AssetName?: string | null;
   /** 风险类型 */
@@ -1552,6 +1574,8 @@ declare interface RiskItemInfo {
   IdentifyComplianceId?: number | null;
   /** 类型 */
   ItemSubType?: string | null;
+  /** 风险面 */
+  RiskSide?: string | null;
 }
 
 /** 风险级别详情的矩阵 */
@@ -1604,6 +1628,14 @@ declare interface RiskMatrixLevel {
   Id?: number | null;
   /** 分数 */
   Score?: number | null;
+}
+
+/** 风险面的分布 */
+declare interface RiskSideDistributed {
+  /** 风险面 */
+  AssessmentRiskSide?: Note | null;
+  /** 风险类型 */
+  AssessmentRisk?: Note[] | null;
 }
 
 /** 数据资产报告-rdb的敏感数据规则分布 */
@@ -1702,6 +1734,14 @@ declare interface SuggestRiskLevelMatrixItem {
   RiskName?: string | null;
   /** 分数 */
   RiskScore?: number | null;
+}
+
+/** 评估模版的详情数据 */
+declare interface TemplateInfo {
+  /** 模版id */
+  TemplateId?: number | null;
+  /** 模版名称 */
+  TemplateName?: string | null;
 }
 
 /** 数据资产报告-涉敏top的资产 */
@@ -1879,8 +1919,6 @@ declare interface CreateDSPAAssessmentTaskRequest {
   Name: string;
   /** 评估模版Id，格式“template-xxxxxxxx” */
   TemplateId: string;
-  /** 敏感数据扫描数据源条件。 */
-  DiscoveryCondition: DiscoveryCondition;
   /** 评估业务名称。1-60个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字 */
   BusinessName?: string;
   /** 业务所属部门。1-60个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字 */
@@ -1889,6 +1927,8 @@ declare interface CreateDSPAAssessmentTaskRequest {
   BusinessOwner?: string;
   /** 分类分级模版Id */
   ComplianceId?: number;
+  /** 敏感数据扫描数据源条件。 */
+  DiscoveryCondition?: DiscoveryCondition;
   /** 说明 */
   Description?: string;
 }
@@ -2465,6 +2505,8 @@ declare interface DescribeDSPAAssessmentHighRiskTop10OverviewRequest {
   DspaId: string;
   /** 评估模版id */
   TemplateId: number;
+  /** 过滤条件， rdb（数据库）cos（对象存储）不传就是全部 */
+  Filter?: string;
 }
 
 declare interface DescribeDSPAAssessmentHighRiskTop10OverviewResponse {
@@ -2549,6 +2591,8 @@ declare interface DescribeDSPAAssessmentLatestRiskListRequest {
   EndTime?: string;
   /** 风险等级筛选 */
   RiskLevel?: string;
+  /** 风险面筛选 */
+  RiskSide?: string[];
 }
 
 declare interface DescribeDSPAAssessmentLatestRiskListResponse {
@@ -2683,6 +2727,8 @@ declare interface DescribeDSPAAssessmentRiskDistributionOverviewRequest {
   DspaId: string;
   /** 评估模版id */
   TemplateId: number;
+  /** 风险资产分布的过滤条件（rdb，cos，不传就筛选全部） */
+  Filter?: string;
 }
 
 declare interface DescribeDSPAAssessmentRiskDistributionOverviewResponse {
@@ -2798,6 +2844,34 @@ declare interface DescribeDSPAAssessmentRiskProcessHistoryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDSPAAssessmentRiskSideDistributedRequest {
+  /** DSPA实例ID */
+  DspaId: string;
+  /** 评估模版id */
+  TemplateId: number;
+}
+
+declare interface DescribeDSPAAssessmentRiskSideDistributedResponse {
+  /** 风险面的分布 */
+  RiskSideDistributed?: RiskSideDistributed[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDSPAAssessmentRiskSideListRequest {
+  /** DSPA实例ID */
+  DspaId: string;
+  /** 评估模版id */
+  TemplateId: number;
+}
+
+declare interface DescribeDSPAAssessmentRiskSideListResponse {
+  /** 风险面列表 */
+  RiskSideItmeList?: Note[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDSPAAssessmentRiskTemplateDetailRequest {
   /** dspa实例id */
   DspaId: string;
@@ -2841,6 +2915,8 @@ declare interface DescribeDSPAAssessmentRiskTemplateVulnerableListRequest {
   RiskType?: string;
   /** 风险名称 */
   RiskName?: string;
+  /** 风险面 */
+  RiskSide?: string;
 }
 
 declare interface DescribeDSPAAssessmentRiskTemplateVulnerableListResponse {
@@ -3435,6 +3511,8 @@ declare interface DescribeDSPAESDiscoveryTaskResultDetailRequest {
   CategoryIdList?: number[];
   /** 敏感数据分级ID */
   LevelId?: number;
+  /** 索引名称 */
+  DbName?: string;
 }
 
 declare interface DescribeDSPAESDiscoveryTaskResultDetailResponse {
@@ -3933,6 +4011,8 @@ declare interface ModifyDSPAAssessmentRiskLatestRequest {
   Note?: string;
   /** 处置人 */
   ProcessPeople?: string;
+  /** 批量处理的列表 */
+  BathRiskIdList?: number[];
 }
 
 declare interface ModifyDSPAAssessmentRiskLatestResponse {
@@ -4511,6 +4591,10 @@ declare interface Dsgc {
   DescribeDSPAAssessmentRiskOverview(data: DescribeDSPAAssessmentRiskOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskOverviewResponse>;
   /** 查询风险的处理历史 {@link DescribeDSPAAssessmentRiskProcessHistoryRequest} {@link DescribeDSPAAssessmentRiskProcessHistoryResponse} */
   DescribeDSPAAssessmentRiskProcessHistory(data: DescribeDSPAAssessmentRiskProcessHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskProcessHistoryResponse>;
+  /** 查询风险评估风险面的分布 {@link DescribeDSPAAssessmentRiskSideDistributedRequest} {@link DescribeDSPAAssessmentRiskSideDistributedResponse} */
+  DescribeDSPAAssessmentRiskSideDistributed(data: DescribeDSPAAssessmentRiskSideDistributedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskSideDistributedResponse>;
+  /** 查询风险评估风险面的列表 {@link DescribeDSPAAssessmentRiskSideListRequest} {@link DescribeDSPAAssessmentRiskSideListResponse} */
+  DescribeDSPAAssessmentRiskSideList(data: DescribeDSPAAssessmentRiskSideListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskSideListResponse>;
   /** 查看评估模版详情 {@link DescribeDSPAAssessmentRiskTemplateDetailRequest} {@link DescribeDSPAAssessmentRiskTemplateDetailResponse} */
   DescribeDSPAAssessmentRiskTemplateDetail(data: DescribeDSPAAssessmentRiskTemplateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskTemplateDetailResponse>;
   /** 查询风险模版中的脆弱项配置 {@link DescribeDSPAAssessmentRiskTemplateVulnerableListRequest} {@link DescribeDSPAAssessmentRiskTemplateVulnerableListResponse} */

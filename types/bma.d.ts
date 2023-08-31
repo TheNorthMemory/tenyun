@@ -182,6 +182,8 @@ declare interface WhiteListData {
   AssetsType?: number | null;
   /** 白名单 */
   WhiteList?: string | null;
+  /** 白名单备注 */
+  Remark?: string | null;
   /** 新增时间 */
   InsertTime?: string | null;
 }
@@ -293,6 +295,8 @@ declare interface CreateBPWhiteListRequest {
   WhiteListType: number;
   /** 白名单名称 */
   WhiteLists: string[];
+  /** 白名单备注 */
+  Remark?: string;
 }
 
 declare interface CreateBPWhiteListResponse {

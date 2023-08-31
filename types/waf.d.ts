@@ -128,6 +128,32 @@ declare interface AutoDenyDetail {
   LastUpdateTime?: string;
 }
 
+/** 多域名黑白名单describe返回 */
+declare interface BatchIpAccessControlData {
+  /** 总数 */
+  TotalCount: number;
+  /** 黑白名单条目 */
+  Res: BatchIpAccessControlItem[];
+}
+
+/** 多域名黑白名单列表Ip */
+declare interface BatchIpAccessControlItem {
+  /** 黑名单42或白名单40 */
+  ActionType: number;
+  /** 黑白名单的IP */
+  Ip: string;
+  /** 备注 */
+  Note: string;
+  /** 添加路径 */
+  Source: string;
+  /** 修改时间 */
+  TsVersion: number;
+  /** 超时时间 */
+  ValidTs: number;
+  /** 域名列表 */
+  Hosts: string[];
+}
+
 /** Bot资源信息 */
 declare interface BotPkg {
   /** 资源id */
@@ -176,6 +202,74 @@ declare interface BotStatPointItem {
   Value: number;
   /** Key对应的页面展示内容 */
   Label: string;
+}
+
+/** 数据封装 */
+declare interface CCRuleData {
+  /** cc规则 */
+  Res: CCRuleItem[];
+  /** 规则数目 */
+  TotalCount: number;
+}
+
+/** cc规则 */
+declare interface CCRuleItem {
+  /** 动作 */
+  ActionType: number;
+  /** 高级模式 */
+  Advance: number;
+  /** 时间周期 */
+  Interval: number;
+  /** 限制次数 */
+  Limit: number;
+  /** 匹配方法 */
+  MatchFunc: number;
+  /** 名称 */
+  Name: string;
+  /** 优先级 */
+  Priority: number;
+  /** 状态 */
+  Status: number;
+  /** 更新时间戳 */
+  TsVersion: number;
+  /** 匹配url */
+  Url: string;
+  /** 策略动作有效时间 */
+  ValidTime: number;
+  /** 高级参数 */
+  OptionsArr: string | null;
+}
+
+/** 防篡改url元素 */
+declare interface CacheUrlItem {
+  /** Id */
+  Id: string;
+  /** 名称 */
+  Name: string;
+  /** 域名 */
+  Domain: string;
+  /** uri */
+  Uri: string;
+  /** 协议 */
+  Protocol: string;
+  /** 状态 */
+  Status: string;
+}
+
+/** 防篡改url元素 */
+declare interface CacheUrlItems {
+  /** 标识 */
+  Id: number;
+  /** 名字 */
+  Name: string;
+  /** 域名 */
+  Domain: string;
+  /** 网址 */
+  Uri: string;
+  /** 协议 */
+  Protocol: string;
+  /** 状态 */
+  Status: number;
 }
 
 /** CDC场景下负载均衡WAF的集群信息 */
@@ -244,6 +338,50 @@ declare interface ClbHostsParams {
   ListenerId?: string;
   /** WAF实例ID，，如果不传次参数则默认认为操作的是整个负载均衡监听器实例，如果此参数不为空则认为操作的是对应负载均衡监听器的某一个具体的域名。 */
   DomainId?: string;
+}
+
+/** DescribeAntiInfoLeakRules返回的规则列表元素 */
+declare interface DescribeAntiInfoLeakRulesRuleItem {
+  /** 规则ID */
+  RuleId: string;
+  /** 规则名称 */
+  Name: string;
+  /** 规则状态 */
+  Status: string;
+  /** 规则动作类型 */
+  ActionType: string;
+  /** 规则创建时间 */
+  CreateTime: string;
+  /** 详细的规则 */
+  Strategies: DescribeAntiInfoLeakRulesStrategyItem[];
+}
+
+/** DescribeAntiInfoLeakRules返回的规则元素中的具体的规则元素 */
+declare interface DescribeAntiInfoLeakRulesStrategyItem {
+  /** 字段 */
+  Field: string;
+  /** 条件 */
+  CompareFunc: string;
+  /** 内容 */
+  Content: string;
+}
+
+/** 出参 */
+declare interface DescribeAntiLeakageItem {
+  /** 规则ID */
+  RuleId: number;
+  /** 名称 */
+  Name: string;
+  /** 状态值 */
+  Status: number;
+  /** 动作 */
+  Action: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 匹配条件 */
+  Strategies: DescribeAntiInfoLeakRulesStrategyItem[] | null;
+  /** 匹配的URL */
+  Uri: string | null;
 }
 
 /** DescribeCustomRules接口回包中的复杂类型 */
@@ -768,6 +906,14 @@ declare interface LogHistogramInfo {
   TimeStamp: number;
 }
 
+/** 公共翻页参数 */
+declare interface PageInfo {
+  /** 页码 */
+  PageNumber: string;
+  /** 页条目数量 */
+  PageSize: string;
+}
+
 /** PeakPoints数组项 */
 declare interface PeakPointsItem {
   /** 秒级别时间戳 */
@@ -878,6 +1024,30 @@ declare interface SearchItem {
   FlowMode?: string;
 }
 
+/** 参数包装 */
+declare interface SessionData {
+  /** session定义 */
+  Res: SessionItem[];
+}
+
+/** session定义 */
+declare interface SessionItem {
+  /** 匹配类型 */
+  Category: string;
+  /** 起始模式 */
+  KeyOrStartMat: string;
+  /** 结束模式 */
+  EndMat: string;
+  /** 起始偏移 */
+  StartOffset: string;
+  /** 结束偏移 */
+  EndOffset: string;
+  /** 数据源 */
+  Source: string;
+  /** 更新时间戳 */
+  TsVersion: string;
+}
+
 /** waf斯巴达-编辑防护域名中的端口结构 */
 declare interface SpartaProtectionPort {
   /** nginx Id */
@@ -902,6 +1072,16 @@ declare interface Strategy {
   Content: string | null;
   /** 匹配参数 */
   Arg: string | null;
+}
+
+/** 防信息泄露的匹配条件结构体 */
+declare interface StrategyForAntiInfoLeak {
+  /** 匹配字段 */
+  Field: string;
+  /** 逻辑符号 */
+  CompareFunc: string;
+  /** 匹配内容 */
+  Content: string;
 }
 
 /** TLS 加密套件 */
@@ -998,6 +1178,40 @@ declare interface WafThreatenIntelligenceDetails {
   DefenseStatus?: number;
   /** 最后更新时间 */
   LastUpdateTime?: string;
+}
+
+declare interface AddAntiFakeUrlRequest {
+  /** 域名 */
+  Domain: string;
+  /** 名称 */
+  Name: string;
+  /** uri */
+  Uri: string;
+}
+
+declare interface AddAntiFakeUrlResponse {
+  /** 结果 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddAntiInfoLeakRulesRequest {
+  /** 域名 */
+  Domain: string;
+  /** 名称 */
+  Name: string;
+  /** 动作 */
+  ActionType: number;
+  /** 策略详情 */
+  Strategies: StrategyForAntiInfoLeak[];
+  /** 网址 */
+  Uri?: string;
+}
+
+declare interface AddAntiInfoLeakRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface AddCustomRuleRequest {
@@ -1224,12 +1438,52 @@ declare interface DeleteAccessExportResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAntiFakeUrlRequest {
+  /** 域名 */
+  Domain: string;
+  /** Id */
+  Id: number;
+}
+
+declare interface DeleteAntiFakeUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAntiInfoLeakRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则id */
+  RuleId: number;
+}
+
+declare interface DeleteAntiInfoLeakRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAttackDownloadRecordRequest {
   /** 下载任务记录唯一标记 */
   Id: number;
 }
 
 declare interface DeleteAttackDownloadRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCCRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则名称 */
+  Name: string;
+  /** clb-waf或者sparta-waf */
+  Edition?: string;
+}
+
+declare interface DeleteCCRuleResponse {
+  /** 一般为null */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1420,6 +1674,76 @@ declare interface DescribeAccessIndexResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAntiFakeRulesRequest {
+  /** 域名 */
+  Domain: string;
+  /** 偏移 */
+  Offset: number;
+  /** 容量 */
+  Limit: number;
+  /** 过滤数组,name可以是如下的值： RuleID,ParamName,Url,Action,Method,Source,Status */
+  Filters?: FiltersItemNew[];
+  /** asc或者desc */
+  Order?: string;
+  /** 目前支持根据ts排序 */
+  By?: string;
+}
+
+declare interface DescribeAntiFakeRulesResponse {
+  /** 返回值 */
+  Data: CacheUrlItems[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAntiFakeUrlRequest {
+  /** 域名 */
+  Domain: string;
+  /** 翻页参数 */
+  PageInfo: PageInfo;
+}
+
+declare interface DescribeAntiFakeUrlResponse {
+  /** 总数 */
+  Total?: string;
+  /** 信息 */
+  List?: CacheUrlItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAntiInfoLeakRulesRequest {
+  /** 域名 */
+  Domain: string;
+  /** 动作类型 */
+  ActionType?: number;
+  /** 翻页 */
+  PageInfo?: PageInfo;
+}
+
+declare interface DescribeAntiInfoLeakRulesResponse {
+  /** 记录条数 */
+  TotalCount?: string;
+  /** 规则列表 */
+  RuleList?: DescribeAntiInfoLeakRulesRuleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAntiInfoLeakageRulesRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeAntiInfoLeakageRulesResponse {
+  /** 记录条数 */
+  Total: number;
+  /** 规则列表 */
+  RuleList: DescribeAntiLeakageItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAttackOverviewRequest {
   /** 查询开始时间 */
   FromTime: string;
@@ -1484,6 +1808,54 @@ declare interface DescribeAutoDenyIPRequest {
 declare interface DescribeAutoDenyIPResponse {
   /** 查询IP封禁状态返回结果 */
   Data?: IpHitItemsData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBatchIpAccessControlRequest {
+  /** 筛选条件，支持 ActionType 40/42，Ip：ip地址，Domain：域名三类 */
+  Filters: FiltersItemNew[];
+  /** 偏移 */
+  OffSet?: number;
+  /** 限制 */
+  Limit?: number;
+  /** 排序参数 */
+  Sort?: string;
+}
+
+declare interface DescribeBatchIpAccessControlResponse {
+  /** 输出 */
+  Data: BatchIpAccessControlData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCCRuleListRequest {
+}
+
+declare interface DescribeCCRuleListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCCRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 页码 */
+  Offset: number;
+  /** 页的数目 */
+  Limit: number;
+  /** 排序参数 */
+  Sort?: string;
+  /** clb-waf 或者 sparta-waf */
+  Edition?: string;
+  /** 过滤条件 */
+  Name?: string;
+}
+
+declare interface DescribeCCRuleResponse {
+  /** 结果 */
+  Data?: CCRuleData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1898,6 +2270,20 @@ declare interface DescribeRuleLimitResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSessionRequest {
+  /** 域名 */
+  Domain: string;
+  /** clb-waf或者sparta-waf */
+  Edition?: string;
+}
+
+declare interface DescribeSessionResponse {
+  /** 返回结果 */
+  Data?: SessionData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTlsVersionRequest {
 }
 
@@ -2064,6 +2450,70 @@ declare interface ModifyAccessPeriodResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAntiFakeUrlRequest {
+  /** 域名 */
+  Domain: string;
+  /** 名称 */
+  Name: string;
+  /** uri */
+  Uri: string;
+  /** ID */
+  Id: number;
+}
+
+declare interface ModifyAntiFakeUrlResponse {
+  /** 结果 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAntiFakeUrlStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 状态 */
+  Status: number;
+  /** Id列表 */
+  Ids: number[];
+}
+
+declare interface ModifyAntiFakeUrlStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAntiInfoLeakRuleStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则 */
+  RuleId: number;
+  /** 状态 */
+  Status: number;
+}
+
+declare interface ModifyAntiInfoLeakRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAntiInfoLeakRulesRequest {
+  /** 规则ID */
+  RuleId: number;
+  /** 规则名称 */
+  Name: string;
+  /** 域名 */
+  Domain: string;
+  /** Action 值 */
+  ActionType: number;
+  /** 策略数组 */
+  Strategies: StrategyForAntiInfoLeak[];
+}
+
+declare interface ModifyAntiInfoLeakRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyApiAnalyzeStatusRequest {
   /** 开关状态 */
   Status: number;
@@ -2186,6 +2636,22 @@ declare interface ModifyCustomWhiteRuleRequest {
 declare interface ModifyCustomWhiteRuleResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
   Success?: ResponseCode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCustomWhiteRuleStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则ID */
+  RuleId: number;
+  /** 开关的状态，1是开启、0是关闭 */
+  Status: number;
+}
+
+declare interface ModifyCustomWhiteRuleStatusResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2574,6 +3040,46 @@ declare interface SwitchDomainRulesResponse {
   RequestId?: string;
 }
 
+declare interface UpsertCCRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 名称 */
+  Name: string;
+  /** 状态 */
+  Status: number;
+  /** 高级模式 */
+  Advance: string;
+  /** CC检测阈值 */
+  Limit: string;
+  /** CC检测周期 */
+  Interval: string;
+  /** 检测Url */
+  Url: string;
+  /** 匹配方法 */
+  MatchFunc: number;
+  /** 动作 */
+  ActionType: string;
+  /** 优先级 */
+  Priority: number;
+  /** 动作有效时间 */
+  ValidTime: number;
+  /** 附加参数 */
+  OptionsArr?: string;
+  /** waf版本 */
+  Edition?: string;
+  /** 操作类型 */
+  Type?: number;
+  /** 添加规则的来源事件id */
+  EventId?: string;
+}
+
+declare interface UpsertCCRuleResponse {
+  /** 一般为null */
+  Data: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpsertIpAccessControlRequest {
   /** 域名 */
   Domain: string;
@@ -2594,9 +3100,39 @@ declare interface UpsertIpAccessControlResponse {
   RequestId?: string;
 }
 
+declare interface UpsertSessionRequest {
+  /** 域名 */
+  Domain: string;
+  /** session来源位置 */
+  Source: string;
+  /** 提取类别 */
+  Category: string;
+  /** 提取key或者起始匹配模式 */
+  KeyOrStartMat: string;
+  /** 结束匹配模式 */
+  EndMat: string;
+  /** 起始偏移位置 */
+  StartOffset: string;
+  /** 结束偏移位置 */
+  EndOffset: string;
+  /** 版本 */
+  Edition?: string;
+}
+
+declare interface UpsertSessionResponse {
+  /** 结果 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Waf Web 应用防火墙} */
 declare interface Waf {
   (): Versions;
+  /** 添加防篡改url {@link AddAntiFakeUrlRequest} {@link AddAntiFakeUrlResponse} */
+  AddAntiFakeUrl(data: AddAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<AddAntiFakeUrlResponse>;
+  /** 添加信息防泄漏规则 {@link AddAntiInfoLeakRulesRequest} {@link AddAntiInfoLeakRulesResponse} */
+  AddAntiInfoLeakRules(data: AddAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddAntiInfoLeakRulesResponse>;
   /** 增加访问控制（自定义策略） {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
   /** 添加精准白名单规则 {@link AddCustomWhiteRuleRequest} {@link AddCustomWhiteRuleResponse} */
@@ -2615,8 +3151,14 @@ declare interface Waf {
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
+  /** 删除防篡改url {@link DeleteAntiFakeUrlRequest} {@link DeleteAntiFakeUrlResponse} */
+  DeleteAntiFakeUrl(data: DeleteAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAntiFakeUrlResponse>;
+  /** 信息防泄漏删除规则 {@link DeleteAntiInfoLeakRuleRequest} {@link DeleteAntiInfoLeakRuleResponse} */
+  DeleteAntiInfoLeakRule(data: DeleteAntiInfoLeakRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAntiInfoLeakRuleResponse>;
   /** 删除攻击日志下载任务记录 {@link DeleteAttackDownloadRecordRequest} {@link DeleteAttackDownloadRecordResponse} */
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
+  /** Waf CC V2 Delete接口 {@link DeleteCCRuleRequest} {@link DeleteCCRuleResponse} */
+  DeleteCCRule(data: DeleteCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCRuleResponse>;
   /** 删除自定义规则 {@link DeleteCustomRuleRequest} {@link DeleteCustomRuleResponse} */
   DeleteCustomRule(data: DeleteCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomRuleResponse>;
   /** 删除精准白名单规则 {@link DeleteCustomWhiteRuleRequest} {@link DeleteCustomWhiteRuleResponse} */
@@ -2641,10 +3183,24 @@ declare interface Waf {
   DescribeAccessHistogram(data: DescribeAccessHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessHistogramResponse>;
   /** 获取访问日志索引配置信息 {@link DescribeAccessIndexRequest} {@link DescribeAccessIndexResponse} */
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
+  /** 获取防篡改信息 {@link DescribeAntiFakeRulesRequest} {@link DescribeAntiFakeRulesResponse} */
+  DescribeAntiFakeRules(data: DescribeAntiFakeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeRulesResponse>;
+  /** 获取防篡改url {@link DescribeAntiFakeUrlRequest} {@link DescribeAntiFakeUrlResponse} */
+  DescribeAntiFakeUrl(data: DescribeAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeUrlResponse>;
+  /** @deprecated 获取信息防泄漏规则列表【老接口】 {@link DescribeAntiInfoLeakRulesRequest} {@link DescribeAntiInfoLeakRulesResponse} */
+  DescribeAntiInfoLeakRules(data: DescribeAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakRulesResponse>;
+  /** 获取信息防泄漏规则列表 {@link DescribeAntiInfoLeakageRulesRequest} {@link DescribeAntiInfoLeakageRulesResponse} */
+  DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */
   DescribeAttackOverview(data: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
   /** @deprecated 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
+  /** Waf 多域名ip黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
+  DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
+  /** Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
+  DescribeCCRule(data: DescribeCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleResponse>;
+  /** 查询CC规则 {@link DescribeCCRuleListRequest} {@link DescribeCCRuleListResponse} */
+  DescribeCCRuleList(data?: DescribeCCRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleListResponse>;
   /** 查询加密套件信息 {@link DescribeCiphersDetailRequest} {@link DescribeCiphersDetailResponse} */
   DescribeCiphersDetail(data?: DescribeCiphersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCiphersDetailResponse>;
   /** 查询访问控制规则 {@link DescribeCustomRuleListRequest} {@link DescribeCustomRuleListResponse} */
@@ -2685,6 +3241,8 @@ declare interface Waf {
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
+  /** Waf 会话定义查询接口 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */
+  DescribeSession(data: DescribeSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionResponse>;
   /** 查询用户TLS版本 {@link DescribeTlsVersionRequest} {@link DescribeTlsVersionResponse} */
   DescribeTlsVersion(data?: DescribeTlsVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTlsVersionResponse>;
   /** 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域 {@link DescribeUserCdcClbWafRegionsRequest} {@link DescribeUserCdcClbWafRegionsResponse} */
@@ -2711,6 +3269,14 @@ declare interface Waf {
   GetAttackTotalCount(data: GetAttackTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackTotalCountResponse>;
   /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
+  /** 编辑防篡改url {@link ModifyAntiFakeUrlRequest} {@link ModifyAntiFakeUrlResponse} */
+  ModifyAntiFakeUrl(data: ModifyAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAntiFakeUrlResponse>;
+  /** 切换防篡改开关 {@link ModifyAntiFakeUrlStatusRequest} {@link ModifyAntiFakeUrlStatusResponse} */
+  ModifyAntiFakeUrlStatus(data: ModifyAntiFakeUrlStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAntiFakeUrlStatusResponse>;
+  /** 信息防泄漏切换规则开关 {@link ModifyAntiInfoLeakRuleStatusRequest} {@link ModifyAntiInfoLeakRuleStatusResponse} */
+  ModifyAntiInfoLeakRuleStatus(data: ModifyAntiInfoLeakRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAntiInfoLeakRuleStatusResponse>;
+  /** 编辑信息防泄漏规则 {@link ModifyAntiInfoLeakRulesRequest} {@link ModifyAntiInfoLeakRulesResponse} */
+  ModifyAntiInfoLeakRules(data: ModifyAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAntiInfoLeakRulesResponse>;
   /** api分析页面开关 {@link ModifyApiAnalyzeStatusRequest} {@link ModifyApiAnalyzeStatusResponse} */
   ModifyApiAnalyzeStatus(data: ModifyApiAnalyzeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAnalyzeStatusResponse>;
   /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */
@@ -2723,6 +3289,8 @@ declare interface Waf {
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
   /** 编辑精准白名单 {@link ModifyCustomWhiteRuleRequest} {@link ModifyCustomWhiteRuleResponse} */
   ModifyCustomWhiteRule(data: ModifyCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleResponse>;
+  /** 开启或禁用精准白名单 {@link ModifyCustomWhiteRuleStatusRequest} {@link ModifyCustomWhiteRuleStatusResponse} */
+  ModifyCustomWhiteRuleStatus(data: ModifyCustomWhiteRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleStatusResponse>;
   /** 修改ipv6开关 {@link ModifyDomainIpv6StatusRequest} {@link ModifyDomainIpv6StatusResponse} */
   ModifyDomainIpv6Status(data: ModifyDomainIpv6StatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainIpv6StatusResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
@@ -2759,8 +3327,12 @@ declare interface Waf {
   SearchAttackLog(data: SearchAttackLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAttackLogResponse>;
   /** 切换域名的规则开关 {@link SwitchDomainRulesRequest} {@link SwitchDomainRulesResponse} */
   SwitchDomainRules(data?: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
+  /** Waf CC V2 Upsert接口 {@link UpsertCCRuleRequest} {@link UpsertCCRuleResponse} */
+  UpsertCCRule(data: UpsertCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCRuleResponse>;
   /** Waf IP黑白名单Upsert接口 {@link UpsertIpAccessControlRequest} {@link UpsertIpAccessControlResponse} */
   UpsertIpAccessControl(data: UpsertIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertIpAccessControlResponse>;
+  /** Waf 会话定义 Upsert接口 {@link UpsertSessionRequest} {@link UpsertSessionResponse} */
+  UpsertSession(data: UpsertSessionRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertSessionResponse>;
 }
 
 export declare type Versions = ["2018-01-25"];

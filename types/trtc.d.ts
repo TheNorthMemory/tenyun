@@ -1371,7 +1371,7 @@ declare interface DescribeUserInfoResponse {
 declare interface DismissRoomByStrRoomIdRequest {
   /** TRTC的SDKAppId。 */
   SdkAppId: number;
-  /** 房间号。 */
+  /** 字符串类型房间号。本接口仅支持解散字符串类型房间号，如需解散数字类型房间号，请使用：DismissRoom */
   RoomId: string;
 }
 

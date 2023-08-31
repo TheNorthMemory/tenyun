@@ -6423,13 +6423,17 @@ declare interface DescribeMaliciousRequestWhiteListRequest {
   Offset: number;
   /** 过滤条件。Domain - String - 基线名称 */
   Filters?: Filters[];
+  /** 排序方式 [asc:升序|desc:降序] */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
 }
 
 declare interface DescribeMaliciousRequestWhiteListResponse {
   /** 白名单信息列表 */
-  List: MaliciousRequestWhiteListInfo[] | null;
+  List?: MaliciousRequestWhiteListInfo[] | null;
   /** 分页查询记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
