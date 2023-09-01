@@ -664,6 +664,18 @@ declare interface InferTemplateGroup {
   InferTemplates: InferTemplate[] | null;
 }
 
+/** 私有连接通道信息 */
+declare interface IngressPrivateLinkInfo {
+  /** 用户VpcId */
+  VpcId?: string | null;
+  /** 用户子网ID */
+  SubnetId?: string | null;
+  /** 内网http调用地址 */
+  InnerHttpAddr?: string[] | null;
+  /** 内网https调用地址 */
+  InnerHttpsAddr?: string[] | null;
+}
+
 /** 资源组节点信息 */
 declare interface Instance {
   /** 资源组节点id */
@@ -686,6 +698,14 @@ declare interface Instance {
   SpecId: string;
   /** 计费项别名 */
   SpecAlias: string;
+}
+
+/** 内网调用信息 */
+declare interface IntranetCallInfo {
+  /** 私有连接通道信息 */
+  IngressPrivateLinkInfo?: IngressPrivateLinkInfo | null;
+  /** 共享弹性网卡信息 */
+  ServiceEIPInfo?: ServiceEIPInfo[] | null;
 }
 
 /** 日志配置 */
@@ -1262,6 +1282,26 @@ declare interface ServiceCallInfo {
   AppSecret: string | null;
 }
 
+/** 服务共享弹性网卡设置 */
+declare interface ServiceEIP {
+  /** 是否开启TIONE内网到外部的访问 */
+  EnableEIP?: boolean | null;
+  /** 用户VpcId */
+  VpcId?: string | null;
+  /** 用户subnetId */
+  SubnetId?: string | null;
+}
+
+/** 共享弹性网卡信息 */
+declare interface ServiceEIPInfo {
+  /** 服务ID */
+  ServiceId?: string | null;
+  /** 用户VpcId */
+  VpcId?: string | null;
+  /** 用户子网Id */
+  SubnetId?: string | null;
+}
+
 /** 在线服务一个服务组的信息 */
 declare interface ServiceGroup {
   /** 服务组id */
@@ -1372,6 +1412,8 @@ declare interface ServiceInfo {
   InferCodeInfo?: InferCodeInfo | null;
   /** 服务的启动命令 */
   Command?: string | null;
+  /** 开启TIONE内网访问外部设置 */
+  ServiceEIP?: ServiceEIP | null;
 }
 
 /** 服务的限流限速等配置 */
@@ -1440,6 +1482,16 @@ declare interface StatefulSetCondition {
   LastTransitionTime: string | null;
   /** 上次更新的时间 */
   LastUpdateTime?: string | null;
+}
+
+/** 太极服务的调用信息 */
+declare interface TJCallInfo {
+  /** 调用地址 */
+  HttpAddr?: string | null;
+  /** token */
+  Token?: string | null;
+  /** 调用示例 */
+  CallExample?: string | null;
 }
 
 /** 描述腾讯云标签 */
@@ -1545,13 +1597,13 @@ declare interface TrainingMetric {
 /** 模型列表 */
 declare interface TrainingModelDTO {
   /** 模型id */
-  TrainingModelId: string;
+  TrainingModelId?: string;
   /** 模型名称 */
-  TrainingModelName: string;
+  TrainingModelName?: string;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 模型创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 模型版本列表。默认不返回，仅在指定请求参数开启时返回。 */
   TrainingModelVersions?: TrainingModelVersionDTO[] | null;
 }
@@ -1559,57 +1611,57 @@ declare interface TrainingModelDTO {
 /** 模型版本列表 */
 declare interface TrainingModelVersionDTO {
   /** 模型id */
-  TrainingModelId: string;
+  TrainingModelId?: string;
   /** 模型版本id */
-  TrainingModelVersionId: string;
+  TrainingModelVersionId?: string;
   /** 模型版本 */
-  TrainingModelVersion: string;
+  TrainingModelVersion?: string;
   /** 模型来源 */
-  TrainingModelSource: string;
+  TrainingModelSource?: string;
   /** 创建时间 */
-  TrainingModelCreateTime: string;
+  TrainingModelCreateTime?: string;
   /** 创建人uin */
-  TrainingModelCreator: string;
+  TrainingModelCreator?: string;
   /** 算法框架 */
-  AlgorithmFramework: string;
+  AlgorithmFramework?: string;
   /** 推理环境 */
-  ReasoningEnvironment: string;
+  ReasoningEnvironment?: string;
   /** 推理环境来源 */
-  ReasoningEnvironmentSource: string;
+  ReasoningEnvironmentSource?: string;
   /** 模型指标 */
-  TrainingModelIndex: string;
+  TrainingModelIndex?: string;
   /** 训练任务名称 */
-  TrainingJobName: string;
+  TrainingJobName?: string;
   /** 模型cos路径 */
-  TrainingModelCosPath: CosPathInfo;
+  TrainingModelCosPath?: CosPathInfo;
   /** 模型名称 */
-  TrainingModelName: string;
+  TrainingModelName?: string;
   /** 训练任务id */
-  TrainingJobId: string;
+  TrainingJobId?: string;
   /** 自定义推理环境 */
-  ReasoningImageInfo: ImageInfo;
+  ReasoningImageInfo?: ImageInfo;
   /** 模型版本创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模型处理状态STATUS_SUCCESS：导入成功，STATUS_FAILED：导入失败 ，STATUS_RUNNING：导入中 */
-  TrainingModelStatus: string | null;
+  TrainingModelStatus?: string | null;
   /** 模型处理进度 */
-  TrainingModelProgress: number | null;
+  TrainingModelProgress?: number | null;
   /** 模型错误信息 */
-  TrainingModelErrorMsg: string | null;
+  TrainingModelErrorMsg?: string | null;
   /** 模型格式 */
-  TrainingModelFormat: string | null;
+  TrainingModelFormat?: string | null;
   /** 模型版本类型 */
-  VersionType: string | null;
+  VersionType?: string | null;
   /** GPU类型 */
-  GPUType: string | null;
+  GPUType?: string | null;
   /** 模型自动清理开关 */
-  AutoClean: string | null;
+  AutoClean?: string | null;
   /** 模型清理周期 */
-  ModelCleanPeriod: number | null;
+  ModelCleanPeriod?: number | null;
   /** 模型数量保留上限 */
-  MaxReservedModels: number | null;
+  MaxReservedModels?: number | null;
   /** 模型热更新目录 */
-  ModelHotUpdatePath: CosPathInfo | null;
+  ModelHotUpdatePath?: CosPathInfo | null;
   /** 推理环境id */
   ReasoningEnvironmentId?: string | null;
   /** 训练任务版本 */
@@ -1805,15 +1857,15 @@ declare interface WorkloadStatus {
 }
 
 declare interface ChatCompletionRequest {
-  /** 部署好的模型服务Id。 */
+  /** 对话的目标模型ID。多行业多场景大模型在线体验聊天：tj_llm_clm-v1。自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-xxyyzz。 */
   Model: string;
   /** 输入对话历史。旧的对话在前，数组中最后一项应该为这次的问题。 */
   Messages: Message[];
-  /** 采样随机值，默认值为1.0，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。 */
+  /** 仅当模型为自行部署的开源大模型时生效。采样随机值，默认值为1.0，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。 */
   Temperature?: number;
-  /** 核采样，默认值为1，取值范围[0,1]。指的是预先设置一个概率界限 p，然后将所有可能生成的token，根据概率大小从高到低排列，依次选取。当这些选取的token的累积概率大于或等于 p 值时停止，然后从已经选取的token中进行采样，生成下一个token。例如top_p为0.1时意味着模型只考虑累积概率为10%的token。建议仅修改此参数或Temperature，不建议两者都修改。 */
+  /** 仅当模型为自行部署的开源大模型时生效。核采样，默认值为1，取值范围[0,1]。指的是预先设置一个概率界限 p，然后将所有可能生成的token，根据概率大小从高到低排列，依次选取。当这些选取的token的累积概率大于或等于 p 值时停止，然后从已经选取的token中进行采样，生成下一个token。例如top_p为0.1时意味着模型只考虑累积概率为10%的token。建议仅修改此参数或Temperature，不建议两者都修改。 */
   TopP?: number;
-  /** 最大生成的token数目。默认为无限大。 */
+  /** 仅当模型为自行部署的开源大模型时生效。最大生成的token数目。默认为无限大。 */
   MaxTokens?: number;
 }
 
@@ -2093,8 +2145,6 @@ declare interface CreateOptimizedModelResponse {
 declare interface CreateTrainingModelRequest {
   /** 导入方式MODEL：导入新模型VERSION：导入新版本EXIST：导入现有版本 */
   ImportMethod: string;
-  /** 模型来源cos目录，以/结尾 */
-  TrainingModelCosPath: CosPathInfo;
   /** 推理环境来源（SYSTEM/CUSTOM） */
   ReasoningEnvironmentSource: string;
   /** 模型名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
@@ -2103,6 +2153,8 @@ declare interface CreateTrainingModelRequest {
   Tags?: Tag[];
   /** 训练任务名称 */
   TrainingJobName?: string;
+  /** 模型来源cos目录，以/结尾 */
+  TrainingModelCosPath?: CosPathInfo;
   /** 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML/MMDETECTION) */
   AlgorithmFramework?: string;
   /** 推理环境 */
@@ -2147,9 +2199,9 @@ declare interface CreateTrainingModelRequest {
 
 declare interface CreateTrainingModelResponse {
   /** 模型ID，TrainingModel ID */
-  Id: string;
+  Id?: string;
   /** 模型版本ID */
-  TrainingModelVersionId: string;
+  TrainingModelVersionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2255,6 +2307,8 @@ declare interface DeleteModelServiceGroupResponse {
 declare interface DeleteModelServiceRequest {
   /** 服务id */
   ServiceId: string;
+  /** 服务分类 */
+  ServiceCategory?: string;
 }
 
 declare interface DeleteModelServiceResponse {
@@ -2551,14 +2605,14 @@ declare interface DescribeLatestTrainingMetricsResponse {
 declare interface DescribeLogsRequest {
   /** 查询哪个服务的事件（可选值为TRAIN, NOTEBOOK, INFER） */
   Service: string;
-  /** 查询哪个Pod的日志（支持结尾通配符*) */
-  PodName: string;
   /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
   StartTime?: string;
   /** 日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间 */
   EndTime?: string;
   /** 日志查询条数，默认值100，最大值100 */
   Limit?: number;
+  /** 查询哪个Pod的日志（支持结尾通配符*) */
+  PodName?: string;
   /** 排序方向（可选值为ASC, DESC ），默认为DESC */
   Order?: string;
   /** 按哪个字段排序（可选值为Timestamp），默认值为Timestamp */
@@ -2571,9 +2625,9 @@ declare interface DescribeLogsRequest {
 
 declare interface DescribeLogsResponse {
   /** 分页的游标 */
-  Context: string | null;
+  Context?: string | null;
   /** 日志数组 */
-  Content: LogIdentity[] | null;
+  Content?: LogIdentity[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2633,6 +2687,8 @@ declare interface DescribeModelAccelerateTasksResponse {
 declare interface DescribeModelServiceCallInfoRequest {
   /** 服务组id */
   ServiceGroupId: string;
+  /** 服务分类 */
+  ServiceCategory?: string;
 }
 
 declare interface DescribeModelServiceCallInfoResponse {
@@ -2642,6 +2698,10 @@ declare interface DescribeModelServiceCallInfoResponse {
   InferGatewayCallInfo?: InferGatewayCallInfo | null;
   /** 默认nginx网关的调用信息 */
   DefaultNginxGatewayCallInfo?: DefaultNginxGatewayCallInfo | null;
+  /** 太极服务的调用信息 */
+  TJCallInfo?: TJCallInfo | null;
+  /** 内网调用信息 */
+  IntranetCallInfo?: IntranetCallInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2649,11 +2709,13 @@ declare interface DescribeModelServiceCallInfoResponse {
 declare interface DescribeModelServiceGroupRequest {
   /** 服务组ID */
   ServiceGroupId: string;
+  /** 服务分类 */
+  ServiceCategory?: string;
 }
 
 declare interface DescribeModelServiceGroupResponse {
   /** 服务组信息 */
-  ServiceGroup: ServiceGroup | null;
+  ServiceGroup?: ServiceGroup | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2671,13 +2733,15 @@ declare interface DescribeModelServiceGroupsRequest {
   Filters?: Filter[];
   /** 标签过滤参数 */
   TagFilters?: TagFilter[];
+  /** 服务分类 */
+  ServiceCategory?: string;
 }
 
 declare interface DescribeModelServiceGroupsResponse {
   /** 推理服务组数量。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 服务组信息 */
-  ServiceGroups: ServiceGroup[] | null;
+  ServiceGroups?: ServiceGroup[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2715,11 +2779,13 @@ declare interface DescribeModelServiceHotUpdatedResponse {
 declare interface DescribeModelServiceRequest {
   /** 服务id */
   ServiceId: string;
+  /** 服务分类 */
+  ServiceCategory?: string;
 }
 
 declare interface DescribeModelServiceResponse {
   /** 服务信息 */
-  Service: Service;
+  Service?: Service;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2861,7 +2927,7 @@ declare interface DescribeTrainingModelVersionsRequest {
 
 declare interface DescribeTrainingModelVersionsResponse {
   /** 模型版本列表 */
-  TrainingModelVersions: TrainingModelVersionDTO[];
+  TrainingModelVersions?: TrainingModelVersionDTO[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3159,11 +3225,11 @@ declare interface SendChatMessageRequest {
   SessionId: string;
   /** 问题描述 */
   Question: string;
-  /** 会话模型版本，不同的会话模型调用到不同的模型后台。注: 多行业多场景大模型填写 tj_llm_clm-v1 */
+  /** 会话模型版本。多行业多场景大模型：填写 tj_llm_clm-v1。多行业客服大模型：填写demo_big_model_version_id。默认为demo_big_model_version_id，即多行业客服大模型。 */
   ModelVersion?: string;
-  /** 使用模式(仅部分模型支持)。General 通用问答；WithSearchPlugin 搜索增强问答 */
+  /** 使用模式(仅多场景客服大模型支持)。通用问答：填写General。搜索增强问答：填写WithSearchPlugin。默认为General，即通用问答。 */
   Mode?: string;
-  /** 搜索来源。仅当Mode未WithSearchPlugin时生效。Preset 预置文稿库；Custom 自定义。 */
+  /** 搜索来源。仅当Mode为WithSearchPlugin时生效。预置文稿库：填写Preset。自定义：填写Custom。 */
   SearchSource?: string;
 }
 
@@ -3981,7 +4047,7 @@ declare namespace V20191022 {
 /** {@link Tione TI-ONE 训练平台} */
 declare interface Tione {
   (): Versions;
-  /** 大模型聊天 {@link ChatCompletionRequest} {@link ChatCompletionResponse} */
+  /** 与大模型聊天 {@link ChatCompletionRequest} {@link ChatCompletionResponse} */
   ChatCompletion(data: ChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionResponse>;
   /** 批量创建模型加速任务 {@link CreateBatchModelAccTasksRequest} {@link CreateBatchModelAccTasksResponse} */
   CreateBatchModelAccTasks(data: CreateBatchModelAccTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchModelAccTasksResponse>;
@@ -4105,7 +4171,7 @@ declare interface Tione {
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 重启模型加速任务 {@link RestartModelAccelerateTaskRequest} {@link RestartModelAccelerateTaskResponse} */
   RestartModelAccelerateTask(data: RestartModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartModelAccelerateTaskResponse>;
-  /** LLM模型对话请求 {@link SendChatMessageRequest} {@link SendChatMessageResponse} */
+  /** 大模型聊天体验 {@link SendChatMessageRequest} {@link SendChatMessageResponse} */
   SendChatMessage(data: SendChatMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendChatMessageResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */
   StartNotebook(data: StartNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StartNotebookResponse>;

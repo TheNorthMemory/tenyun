@@ -148,6 +148,8 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   SegmentObjectName?: string;
   /** 要插入的字幕文件。 */
   AddOnSubtitles?: AddOnSubtitle[] | null;
+  /** Drm信息。 */
+  DrmInfo?: DrmInfo | null;
 }
 
 /** 转自适应码流模板详情 */
@@ -1808,6 +1810,14 @@ declare interface DiagnoseResult {
   DateTime?: string | null;
   /** 诊断出的异常级别。 */
   SeverityLevel?: string | null;
+}
+
+/** Drm 加密信息。 */
+declare interface DrmInfo {
+  /** 加密类型： simpleaes: aes-128 加密 */
+  Type: string | null;
+  /** SimpleAes 加密信息。 */
+  SimpleAesDrm?: SimpleAesDrm | null;
 }
 
 /** 编辑点播视频文件信息 */
@@ -3748,6 +3758,16 @@ declare interface SharpEnhanceConfig {
   Switch?: string;
   /** 强度，取值范围：0.0~1.0。默认：0.0。 */
   Intensity?: number | null;
+}
+
+/** SimpleAes 加密信息。 */
+declare interface SimpleAesDrm {
+  /** 请求解密秘钥uri地址。 */
+  Uri: string | null;
+  /** 加密key(32字节字符串)。 */
+  Key: string | null;
+  /** 加密初始化向量(32字节字符串)。 */
+  Vector?: string | null;
 }
 
 /** 对视频按指定时间点截图任务输入参数类型 */

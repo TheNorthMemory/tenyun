@@ -30,6 +30,14 @@ declare interface CheckStepInfo {
   Progress: ProcessProgress | null;
 }
 
+/** 数据同步中的列信息 */
+declare interface Column {
+  /** 列名 */
+  ColumnName?: string | null;
+  /** 新列名 */
+  NewColumnName?: string | null;
+}
+
 /** 一致性校验摘要信息 */
 declare interface CompareAbstractInfo {
   /** 校验配置参数 */
@@ -62,6 +70,12 @@ declare interface CompareAbstractInfo {
   FinishedAt: string | null;
 }
 
+/** 列选项 */
+declare interface CompareColumnItem {
+  /** 列名 */
+  ColumnName?: string | null;
+}
+
 /** 一致性校验详细信息 */
 declare interface CompareDetailInfo {
   /** 数据不一致的表详情 */
@@ -92,9 +106,9 @@ declare interface CompareObjectItem {
   TableMode?: string | null;
   /** 用于一致性校验的表配置，当 TableMode 为 partial 时，需要填写 */
   Tables?: CompareTableItem[] | null;
-  /** 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象 */
+  /** 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象(一致性校验不校验视图，当前参数未启作用) */
   ViewMode?: string | null;
-  /** 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写 */
+  /** 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写(一致性校验不校验视图，当前参数未启作用) */
   Views?: CompareViewItem[] | null;
 }
 
@@ -112,6 +126,10 @@ declare interface CompareOptions {
 declare interface CompareTableItem {
   /** 表名称 */
   TableName?: string | null;
+  /** column 模式，all 为全部，partial 表示部分(该参数仅对数据同步任务有效) */
+  ColumnMode?: string | null;
+  /** 当 ColumnMode 为 partial 时必填(该参数仅对数据同步任务有效) */
+  Columns?: CompareColumnItem[] | null;
 }
 
 /** 数据一致性校验结果 */
@@ -896,6 +914,10 @@ declare interface Table {
   NewTableName?: string | null;
   /** 过滤条件 */
   FilterCondition?: string | null;
+  /** 是否同步表中所有列，All：当前表下的所有列,Partial(ModifySyncJobConfig接口里的对应字段ColumnMode暂不支持Partial)：当前表下的部分列，通过填充Columns字段详细表信息 */
+  ColumnMode?: string | null;
+  /** 同步的的列信息，当ColumnMode为Partial时，必填 */
+  Columns?: Column[] | null;
   /** 同步临时表，注意此配置与NewTableName互斥，只能使用其中一种。当配置的同步对象为表级别且TableEditMode为pt时此项有意义，针对pt-osc等工具在同步过程中产生的临时表进行同步，需要提前将可能的临时表配置在这里，否则不会同步任何临时表。示例，如要对t1进行pt-osc操作，此项配置应该为["\_t1\_new","\_t1\_old"]；如要对t1进行gh-ost操作，此项配置应该为["\_t1\_ghc","\_t1\_gho","\_t1\_del"]，pt-osc与gh-ost产生的临时表可同时配置。 */
   TmpTables?: string[] | null;
   /** 编辑表类型，rename(表映射)，pt(同步附加表) */

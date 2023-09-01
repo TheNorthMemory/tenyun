@@ -1155,31 +1155,31 @@ declare interface NatGatewayDestinationIpPortTranslationNatRule {
 /** 网络探测对象。 */
 declare interface NetDetect {
   /** `VPC`实例`ID`。形如：`vpc-12345678` */
-  VpcId: string;
+  VpcId?: string;
   /** `VPC`实例名称。 */
-  VpcName: string;
+  VpcName?: string;
   /** 子网实例ID。形如：subnet-12345678。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 子网实例名称。 */
-  SubnetName: string;
+  SubnetName?: string;
   /** 网络探测实例ID。形如：netd-12345678。 */
-  NetDetectId: string;
+  NetDetectId?: string;
   /** 网络探测名称，最大长度不能超过60个字节。 */
-  NetDetectName: string;
+  NetDetectName?: string;
   /** 探测目的IPv4地址数组，最多两个。 */
-  DetectDestinationIp: string[];
+  DetectDestinationIp?: string[];
   /** 系统自动分配的探测源IPv4数组。长度为2。 */
-  DetectSourceIp: string[];
+  DetectSourceIp?: string[];
   /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关；NONEXTHOP：无下一跳； */
-  NextHopType: string;
-  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
-  NextHopDestination: string;
+  NextHopType?: string;
+  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测，添加和修改时，不需要指定值，查询时值为空字符串； */
+  NextHopDestination?: string;
   /** 下一跳网关名称。 */
-  NextHopName: string | null;
+  NextHopName?: string | null;
   /** 网络探测描述。 */
-  NetDetectDescription: string | null;
+  NetDetectDescription?: string | null;
   /** 创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
 }
 
 /** 网络探测目的IP的验证结果。 */
@@ -1569,23 +1569,23 @@ declare interface RouteConflict {
 /** 路由表对象 */
 declare interface RouteTable {
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
-  RouteTableId: string;
+  RouteTableId?: string;
   /** 路由表名称。 */
-  RouteTableName: string;
+  RouteTableName?: string;
   /** 路由表关联关系。 */
-  AssociationSet: RouteTableAssociation[];
+  AssociationSet?: RouteTableAssociation[];
   /** IPv4路由策略集合。 */
-  RouteSet: Route[];
+  RouteSet?: Route[];
   /** 是否默认路由表。 */
-  Main: boolean;
+  Main?: boolean;
   /** 创建时间。 */
   CreatedTime?: string;
   /** 标签键值对。 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** local路由是否发布云联网。 */
-  LocalCidrForCcn: CidrForCcn[] | null;
+  LocalCidrForCcn?: CidrForCcn[] | null;
 }
 
 /** 路由表关联关系 */
@@ -2445,6 +2445,8 @@ declare interface AssignPrivateIpAddressesRequest {
   SecondaryPrivateIpAddressCount?: number;
   /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
   QosLevel?: string;
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
 }
 
 declare interface AssignPrivateIpAddressesResponse {
@@ -2579,6 +2581,8 @@ declare interface AttachNetworkInterfaceRequest {
   InstanceId: string;
   /** 网卡的挂载类型：0 标准型，1扩展型，默认值0。 */
   AttachType?: number;
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
 }
 
 declare interface AttachNetworkInterfaceResponse {
@@ -2737,6 +2741,8 @@ declare interface CreateAndAttachNetworkInterfaceRequest {
   Tags?: Tag[];
   /** 绑定类型：0 标准型 1 扩展型。 */
   AttachType?: number;
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
 }
 
 declare interface CreateAndAttachNetworkInterfaceResponse {
@@ -3137,6 +3143,8 @@ declare interface CreateNetworkInterfaceRequest {
   Tags?: Tag[];
   /** 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。 */
   TrunkingFlag?: string;
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
 }
 
 declare interface CreateNetworkInterfaceResponse {
@@ -3195,7 +3203,7 @@ declare interface CreateSecurityGroupRequest {
   GroupName: string;
   /** 安全组备注，最多100个字符。 */
   GroupDescription: string;
-  /** 项目ID，默认0。可在qcloud控制台项目管理页面查询到。 */
+  /** 项目ID，默认0。可在控制台项目管理页面查询到。 */
   ProjectId?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
@@ -3213,7 +3221,7 @@ declare interface CreateSecurityGroupWithPoliciesRequest {
   GroupName: string;
   /** 安全组备注，最多100个字符。 */
   GroupDescription: string;
-  /** 项目ID，默认0。可在qcloud控制台项目管理页面查询到。 */
+  /** 项目ID，默认0。可在控制台项目管理页面查询到。 */
   ProjectId?: string;
   /** 安全组规则集合。 */
   SecurityGroupPolicySet?: SecurityGroupPolicySet;
@@ -4909,7 +4917,7 @@ declare interface DescribeRouteTablesRequest {
   RouteTableIds?: string[];
   /** 偏移量。 */
   Offset?: string;
-  /** 请求对象个数。 */
+  /** 返回数量，默认为20，最大值为100。 */
   Limit?: string;
 }
 
@@ -5615,6 +5623,8 @@ declare interface DetachNetworkInterfaceRequest {
   NetworkInterfaceId: string;
   /** CVM实例ID。形如：ins-r8hr2upy。 */
   InstanceId: string;
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
 }
 
 declare interface DetachNetworkInterfaceResponse {

@@ -1277,7 +1277,7 @@ declare interface DescribeDBSpaceStatusResponse {
 declare interface DescribeDiagDBInstancesRequest {
   /** 是否是DBbrain支持的实例，固定传 true。 */
   IsSupported: boolean;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。 */
   Product: string;
   /** 分页参数，偏移量。 */
   Offset: number;
@@ -1293,11 +1293,11 @@ declare interface DescribeDiagDBInstancesRequest {
 
 declare interface DescribeDiagDBInstancesResponse {
   /** 实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 全实例巡检状态：0：开启全实例巡检；1：未开启全实例巡检。 */
-  DbScanStatus: number;
+  DbScanStatus?: number;
   /** 实例相关信息。 */
-  Items: InstanceInfo[];
+  Items?: InstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1896,6 +1896,34 @@ declare interface OpenAuditServiceRequest {
 declare interface OpenAuditServiceResponse {
   /** taskId 为0表示开通审计成功，否则开通失败 */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateAgentSwitchRequest {
+  /** Agent标识。 */
+  AgentId: string;
+  /** 停止或重连Agent，支持值包括："on" - 重连Agent， "off" - 停止Agent。 */
+  Switch: string;
+  /** 服务产品类型，仅支持 "dbbrain-mysql" - 自建MySQL。 */
+  Product: string;
+}
+
+declare interface UpdateAgentSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateMonitorSwitchRequest {
+  /** 停止或重连Agent实例，支持值包括："on" - 重连实例， "off" - 停止实例。 */
+  Switch: string;
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 服务产品类型，仅支持 "dbbrain-mysql" - 自建MySQL。 */
+  Product: string;
+}
+
+declare interface UpdateMonitorSwitchResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3097,6 +3125,10 @@ declare interface Dbbrain {
   ModifySqlFilters(data: ModifySqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySqlFiltersResponse>;
   /** 开通数据库审计 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
+  /** 更新Agent状态 {@link UpdateAgentSwitchRequest} {@link UpdateAgentSwitchResponse} */
+  UpdateAgentSwitch(data: UpdateAgentSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAgentSwitchResponse>;
+  /** 更新Agent实例状态 {@link UpdateMonitorSwitchRequest} {@link UpdateMonitorSwitchResponse} */
+  UpdateMonitorSwitch(data: UpdateMonitorSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateMonitorSwitchResponse>;
   /** 验证用户数据库账号权限 {@link VerifyUserAccountRequest} {@link VerifyUserAccountResponse} */
   VerifyUserAccount(data: VerifyUserAccountRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyUserAccountResponse>;
   /** 添加联系人信息 {@link V20191016.AddUserContactRequest} {@link V20191016.AddUserContactResponse} */

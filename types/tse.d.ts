@@ -20,6 +20,34 @@ declare interface ApolloEnvParam {
   EnvDesc?: string;
 }
 
+/** 指标伸缩行为 */
+declare interface AutoScalerBehavior {
+  /** 扩容行为配置 */
+  ScaleUp?: AutoScalerRules | null;
+  /** 缩容行为配置 */
+  ScaleDown?: AutoScalerRules | null;
+}
+
+/** 扩容策略 */
+declare interface AutoScalerPolicy {
+  /** 类型，Pods或Percent */
+  Type?: string | null;
+  /** 数量 */
+  Value?: number | null;
+  /** 扩容周期 */
+  PeriodSeconds?: number | null;
+}
+
+/** 指标伸缩的规则 */
+declare interface AutoScalerRules {
+  /** 稳定窗口时间 */
+  StabilizationWindowSeconds?: number | null;
+  /** 选择策略依据 */
+  SelectPolicy?: string | null;
+  /** 扩容策略 */
+  Policies?: AutoScalerPolicy[] | null;
+}
+
 /** 服务治理引擎绑定的kubernetes信息 */
 declare interface BoundK8SInfo {
   /** 绑定的kubernetes集群ID */
@@ -143,19 +171,19 @@ declare interface CloudNativeAPIGatewayRateLimitDetail {
 /** 网关实例策略 */
 declare interface CloudNativeAPIGatewayStrategy {
   /** 策略ID */
-  StrategyId: string;
+  StrategyId?: string;
   /** 策略名称 */
-  StrategyName: string | null;
+  StrategyName?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 策略描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 弹性伸缩配置 */
-  Config: CloudNativeAPIGatewayStrategyAutoScalerConfig | null;
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig | null;
   /** 网关实例ID */
-  GatewayId: string | null;
+  GatewayId?: string | null;
   /** 定时伸缩配置 */
   CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig | null;
   /** 最大节点数 */
@@ -178,6 +206,8 @@ declare interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
   StrategyId?: string | null;
   /** 指标配置ID */
   AutoScalerId?: string | null;
+  /** 指标伸缩行为配置 */
+  Behavior?: AutoScalerBehavior | null;
 }
 
 /** 弹性伸缩配置指标 */

@@ -46,6 +46,30 @@ declare interface AssetClusterPod {
   IsNewAsset?: number | null;
 }
 
+/** 资产扫描结构细节 */
+declare interface AssetInfoDetail {
+  /** 用户appid */
+  AppID?: string | null;
+  /** CVE编号 */
+  CVEId?: string | null;
+  /** 是扫描，0默认未扫描，1正在扫描，2扫描完成，3扫描出错 */
+  IsScan?: number | null;
+  /** 影响资产数目 */
+  InfluenceAsset?: number | null;
+  /** 未修复资产数目 */
+  NotRepairAsset?: number | null;
+  /** 未防护资产数目 */
+  NotProtectAsset?: number | null;
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务百分比 */
+  TaskPercent?: number | null;
+  /** 任务时间 */
+  TaskTime?: number | null;
+  /** 扫描时间 */
+  ScanTime?: string | null;
+}
+
 /** 资产视角的端口风险对象 */
 declare interface AssetViewPortRisk {
   /** 端口 */
@@ -156,6 +180,50 @@ declare interface AssetViewVULRisk {
   Payload?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
   EMGCVulType?: number | null;
+}
+
+/** 漏洞详细信息 */
+declare interface BugInfoDetail {
+  /** 漏洞编号 */
+  Id?: number | null;
+  /** 漏洞对应pocId */
+  PatchId?: string | null;
+  /** 漏洞名称 */
+  VULName?: string | null;
+  /** 漏洞严重性：high,middle，low，info */
+  Level?: string | null;
+  /** cvss评分 */
+  CVSSScore?: string | null;
+  /** cve编号 */
+  CVEId?: string | null;
+  /** 漏洞标签 */
+  Tag?: string | null;
+  /** 漏洞种类，1:web应用，2:系统组件漏洞，3:配置风险 */
+  VULCategory?: number | null;
+  /** 漏洞影响系统 */
+  ImpactOs?: string | null;
+  /** 漏洞影响组件 */
+  ImpactCOMPENT?: string | null;
+  /** 漏洞影响版本 */
+  ImpactVersion?: string | null;
+  /** 链接 */
+  Reference?: string | null;
+  /** 漏洞描述 */
+  VULDescribe?: string | null;
+  /** 修复建议 */
+  Fix?: string | null;
+  /** 产品支持状态，实时返回 */
+  ProSupport?: number | null;
+  /** 是否公开，0为未发布，1为发布 */
+  IsPublish?: number | null;
+  /** 释放时间 */
+  ReleaseTime?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 漏洞子类别 */
+  SubCategory?: string | null;
 }
 
 /** 主机资产信息 */
@@ -342,6 +410,26 @@ declare interface DBAssetVO {
   IsCore?: number | null;
   /** 是否新资产: 1新 */
   IsNewAsset?: number | null;
+}
+
+/** 漏洞和资产信息 */
+declare interface DataSearchBug {
+  /** 返回查询状态 */
+  StateCode?: string;
+  /** 无 */
+  DataBug?: BugInfoDetail[] | null;
+  /** 无 */
+  DataAsset?: AssetInfoDetail[] | null;
+  /** true支持扫描。false不支持扫描 */
+  VSSScan?: boolean | null;
+  /** 0不支持，1支持 */
+  CWPScan?: string | null;
+  /** 1支持虚拟补丁，0或空不支持 */
+  CFWPatch?: string | null;
+  /** 0不支持，1支持 */
+  WafPatch?: number | null;
+  /** 0不支持，1支持 */
+  CWPFix?: number | null;
 }
 
 /** db资产详情 */
@@ -550,6 +638,12 @@ declare interface IpAssetListVO {
   VerifyStatus?: number | null;
 }
 
+/** 报告项key */
+declare interface ReportItemKey {
+  /** 日志Id列表 */
+  TaskLogList: string[] | null;
+}
+
 /** 扫描任务详情 */
 declare interface ScanTaskInfo {
   /** 任务日志Id */
@@ -576,6 +670,88 @@ declare interface ScanTaskInfo {
   UIN?: string | null;
   /** 用户名称 */
   UserName?: string | null;
+}
+
+/** 扫描任务列表展示信息 */
+declare interface ScanTaskInfoList {
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 任务开始时间 */
+  StartTime?: string | null;
+  /** 任务结束时间 */
+  EndTime?: string | null;
+  /** corn */
+  ScanPlanContent?: string | null;
+  /** 0-周期任务,1-立即扫描,2-定时扫描,3-自定义 */
+  TaskType?: number | null;
+  /** 创建时间 */
+  InsertTime?: string | null;
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 排除扫描资产信息 */
+  SelfDefiningAssets?: string[] | null;
+  /** 预估时间 */
+  PredictTime?: number | null;
+  /** 预估完成时间 */
+  PredictEndTime?: string | null;
+  /** 报告数量 */
+  ReportNumber?: number | null;
+  /** 资产数量 */
+  AssetNumber?: number | null;
+  /** 扫描状态 0 初始值 1正在扫描 2扫描完成 3扫描出错 */
+  ScanStatus?: number | null;
+  /** 任务进度 */
+  Percent?: number | null;
+  /** port/poc/weakpass/webcontent/configrisk */
+  ScanItem?: string | null;
+  /** 0-全扫，1-指定资产扫，2-排除资产扫 */
+  ScanAssetType?: number | null;
+  /** vss子任务id */
+  VSSTaskId?: string | null;
+  /** cspm子任务id */
+  CSPMTaskId?: string | null;
+  /** 主机漏扫子任务id */
+  CWPPOCId?: string | null;
+  /** 主机基线子任务id */
+  CWPBlId?: string | null;
+  /** vss子任务进度 */
+  VSSTaskProcess?: number | null;
+  /** cspm子任务进度 */
+  CSPMTaskProcess?: number | null;
+  /** 主机漏扫子任务进度 */
+  CWPPOCProcess?: number | null;
+  /** 主机基线子任务进度 */
+  CWPBlProcess?: number | null;
+  /** 异常状态码 */
+  ErrorCode?: number | null;
+  /** 异常信息 */
+  ErrorInfo?: string | null;
+  /** 周期任务开始的天数 */
+  StartDay?: number | null;
+  /** 扫描频率,单位天,1-每天,7-每周,30-月,0-扫描一次 */
+  Frequency?: number | null;
+  /** 完成次数 */
+  CompleteNumber?: number | null;
+  /** 已完成资产个数 */
+  CompleteAssetNumber?: number | null;
+  /** 风险数 */
+  RiskCount?: number | null;
+  /** 资产 */
+  Assets?: TaskAssetObject[] | null;
+  /** 用户Appid */
+  AppId?: string | null;
+  /** 用户主账户ID */
+  UIN?: string | null;
+  /** 用户名称 */
+  UserName?: string | null;
+  /** 体检模式，0-标准模式，1-快速模式，2-高级模式 */
+  TaskMode?: number | null;
+  /** 扫描来源 */
+  ScanFrom?: string | null;
+  /** 是否限免体检0不是，1是 */
+  IsFree?: number | null;
+  /** 是否可以删除，1-可以，0-不可以，对应多账户管理使用 */
+  IsDelete?: number | null;
 }
 
 /** 子网资产 */
@@ -676,6 +852,46 @@ declare interface TaskCenterWeakPwdRiskInputParam {
   CheckItemId: number | null;
   /** 是否开启，0-不开启，1-开启 */
   Enable: number | null;
+}
+
+/** 任务报告信息 */
+declare interface TaskLogInfo {
+  /** 报告名称 */
+  TaskLogName?: string | null;
+  /** 报告ID */
+  TaskLogId?: string;
+  /** 关联资产个数 */
+  AssetsNumber?: number | null;
+  /** 安全风险数量 */
+  RiskNumber?: number | null;
+  /** 报告生成时间,任务结束时间 */
+  Time?: string | null;
+  /** 任务状态码：0 初始值 1正在扫描 2扫描完成 3扫描出错，4停止，5暂停，6该任务已被重启过 */
+  Status?: number | null;
+  /** 关联任务名称 */
+  TaskName?: string | null;
+  /** 扫描开始时间 */
+  StartTime?: string | null;
+  /** 任务中心扫描任务ID */
+  TaskCenterTaskId?: string | null;
+  /** 租户ID */
+  AppId?: string | null;
+  /** 主账户ID */
+  UIN?: string | null;
+  /** 用户名称 */
+  UserName?: string | null;
+}
+
+/** 报告pdf下载的临时链接 */
+declare interface TaskLogURL {
+  /** 报告下载临时链接 */
+  URL?: string | null;
+  /** 任务报告id */
+  LogId?: string | null;
+  /** 任务报告名称 */
+  TaskLogName?: string | null;
+  /** APP ID */
+  AppId?: string | null;
 }
 
 /** vpc列表数据 */
@@ -1063,6 +1279,42 @@ declare interface DescribeScanReportListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScanTaskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeScanTaskListResponse {
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 任务日志列表 */
+  Data?: ScanTaskInfoList[] | null;
+  /** 主账户ID列表 */
+  UINList?: string[] | null;
+  /** 体检模式过滤列表 */
+  TaskModeList?: FilterDataObject[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSearchBugInfoRequest {
+  /** 无 */
+  Id: string;
+  /** id=3时传入该参数 */
+  CVEId?: string;
+}
+
+declare interface DescribeSearchBugInfoResponse {
+  /** 漏洞信息和资产信息 */
+  Data?: DataSearchBug | null;
+  /** 状态值，0：查询成功，非0：查询失败 */
+  ReturnCode?: number;
+  /** 状态信息，success：查询成功，fail：查询失败 */
+  ReturnMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubnetAssetsRequest {
   /** 过滤参数 */
   Filter?: Filter;
@@ -1081,6 +1333,36 @@ declare interface DescribeSubnetAssetsResponse {
   AppIdList?: FilterDataObject[];
   /** 可用区列表 */
   ZoneList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTaskLogListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeTaskLogListResponse {
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 报告列表 */
+  Data?: TaskLogInfo[] | null;
+  /** 待查看数量 */
+  NotViewNumber?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTaskLogURLRequest {
+  /** 任务报告Id 列表 */
+  ReportItemKeyList: ReportItemKey[];
+  /** 0: 预览， 1: 下载 */
+  Type: number;
+}
+
+declare interface DescribeTaskLogURLResponse {
+  /** 返回报告临时下载url */
+  Data?: TaskLogURL[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1136,8 +1418,16 @@ declare interface Csip {
   DescribeRiskCenterAssetViewVULRiskList(data?: DescribeRiskCenterAssetViewVULRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewVULRiskListResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
+  /** 获取扫描任务列表 {@link DescribeScanTaskListRequest} {@link DescribeScanTaskListResponse} */
+  DescribeScanTaskList(data?: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
+  /** 查询漏洞信息 {@link DescribeSearchBugInfoRequest} {@link DescribeSearchBugInfoResponse} */
+  DescribeSearchBugInfo(data: DescribeSearchBugInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchBugInfoResponse>;
   /** 子网列表 {@link DescribeSubnetAssetsRequest} {@link DescribeSubnetAssetsResponse} */
   DescribeSubnetAssets(data?: DescribeSubnetAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetAssetsResponse>;
+  /** 获取任务扫描报告列表 {@link DescribeTaskLogListRequest} {@link DescribeTaskLogListResponse} */
+  DescribeTaskLogList(data?: DescribeTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogListResponse>;
+  /** 获取报告下载的临时链接 {@link DescribeTaskLogURLRequest} {@link DescribeTaskLogURLResponse} */
+  DescribeTaskLogURL(data: DescribeTaskLogURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogURLResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
 }

@@ -1625,7 +1625,7 @@ declare interface Tiw {
   ApplyTiwTrial(data?: ApplyTiwTrialRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyTiwTrialResponse>;
   /** 创建白板应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
-  /** 创建课后录制任务 {@link CreateOfflineRecordRequest} {@link CreateOfflineRecordResponse} */
+  /** @deprecated 创建课后录制任务 {@link CreateOfflineRecordRequest} {@link CreateOfflineRecordResponse} */
   CreateOfflineRecord(data: CreateOfflineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineRecordResponse>;
   /** 创建PPT检测任务 {@link CreatePPTCheckTaskRequest} {@link CreatePPTCheckTaskResponse} */
   CreatePPTCheckTask(data: CreatePPTCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePPTCheckTaskResponse>;
@@ -1645,9 +1645,9 @@ declare interface Tiw {
   DescribeBoardSDKLog(data: DescribeBoardSDKLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBoardSDKLogResponse>;
   /** 查询可用的IM应用列表 {@link DescribeIMApplicationsRequest} {@link DescribeIMApplicationsResponse} */
   DescribeIMApplications(data?: DescribeIMApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMApplicationsResponse>;
-  /** 查询课后录制任务 {@link DescribeOfflineRecordRequest} {@link DescribeOfflineRecordResponse} */
+  /** @deprecated 查询课后录制任务 {@link DescribeOfflineRecordRequest} {@link DescribeOfflineRecordResponse} */
   DescribeOfflineRecord(data: DescribeOfflineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineRecordResponse>;
-  /** 查询回调地址 {@link DescribeOfflineRecordCallbackRequest} {@link DescribeOfflineRecordCallbackResponse} */
+  /** @deprecated 查询回调地址 {@link DescribeOfflineRecordCallbackRequest} {@link DescribeOfflineRecordCallbackResponse} */
   DescribeOfflineRecordCallback(data: DescribeOfflineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineRecordCallbackResponse>;
   /** 查询实时录制任务 {@link DescribeOnlineRecordRequest} {@link DescribeOnlineRecordResponse} */
   DescribeOnlineRecord(data: DescribeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordResponse>;
@@ -1717,7 +1717,7 @@ declare interface Tiw {
   PauseOnlineRecord(data: PauseOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOnlineRecordResponse>;
   /** 恢复实时录制 {@link ResumeOnlineRecordRequest} {@link ResumeOnlineRecordResponse} */
   ResumeOnlineRecord(data: ResumeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeOnlineRecordResponse>;
-  /** 设置回调地址 {@link SetOfflineRecordCallbackRequest} {@link SetOfflineRecordCallbackResponse} */
+  /** @deprecated 设置回调地址 {@link SetOfflineRecordCallbackRequest} {@link SetOfflineRecordCallbackResponse} */
   SetOfflineRecordCallback(data: SetOfflineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOfflineRecordCallbackResponse>;
   /** 设置实时录制回调地址 {@link SetOnlineRecordCallbackRequest} {@link SetOnlineRecordCallbackResponse} */
   SetOnlineRecordCallback(data: SetOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackResponse>;

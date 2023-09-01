@@ -2605,25 +2605,25 @@ declare interface MediaAnimatedGraphicsInfo {
 /** 视频转动图结果信息 */
 declare interface MediaAnimatedGraphicsItem {
   /** 转动图的文件地址。 */
-  Url: string;
+  Url?: string;
   /** 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/266/33481)。 */
-  Definition: number;
+  Definition?: number;
   /** 动图格式，如 gif。 */
-  Container: string;
+  Container?: string;
   /** 动图的高度，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 动图的宽度，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 动图码率，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 动图大小，单位：字节。 */
-  Size: number;
+  Size?: number;
   /** 动图的md5值。 */
-  Md5: string;
+  Md5?: string;
   /** 动图在视频中的起始时间偏移，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 动图在视频中的结束时间偏移，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
 }
 
 /** 点播文件音频流信息 */
@@ -2787,17 +2787,17 @@ declare interface MediaImageSpriteInfo {
 /** 雪碧图信息 */
 declare interface MediaImageSpriteItem {
   /** 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
-  Definition: number;
+  Definition?: number;
   /** 雪碧图小图的高度。 */
-  Height: number;
+  Height?: number;
   /** 雪碧图小图的宽度。 */
-  Width: number;
+  Width?: number;
   /** 每一张雪碧图大图里小图的数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 每一张雪碧图大图的地址。 */
-  ImageUrlSet: string[];
+  ImageUrlSet?: string[];
   /** 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。 */
-  WebVttUrl: string;
+  WebVttUrl?: string;
 }
 
 /** 点播文件信息 */
@@ -2901,15 +2901,15 @@ declare interface MediaMiniProgramReviewInfo {
 /** 小程序音视频审核信息单元 */
 declare interface MediaMiniProgramReviewInfoItem {
   /** 模板id。小程序视频发布的视频所对应的转码模板ID，为0代表原始视频。 */
-  Definition: number;
+  Definition?: number;
   /** 视频元信息。 */
   MetaData?: MediaMetaData;
   /** 小程序音视频审核视频播放地址。 */
-  Url: string;
+  Url?: string;
   /** 小程序视频发布状态：Pass：成功。Rejected：未通过。 */
-  ReviewResult: string;
+  ReviewResult?: string;
   /** 小程序音视频审核元素。 */
-  ReviewSummary: MediaMiniProgramReviewElem[];
+  ReviewSummary?: MediaMiniProgramReviewElem[];
 }
 
 /** 视频处理输出文件信息参数。 */
@@ -3123,15 +3123,15 @@ declare interface MediaSampleSnapshotInfo {
 /** 采样截图信息 */
 declare interface MediaSampleSnapshotItem {
   /** 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
-  Definition: number;
+  Definition?: number;
   /** 采样方式，取值范围：Percent：根据百分比间隔采样。Time：根据时间间隔采样。 */
-  SampleType: string;
+  SampleType?: string;
   /** 采样间隔当 SampleType 为 Percent 时，该值表示多少百分比一张图。当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。 */
-  Interval: number;
+  Interval?: number;
   /** 生成的截图 url 列表。 */
-  ImageUrlSet: string[];
+  ImageUrlSet?: string[];
   /** 截图如果被打上了水印，被打水印的模板 ID 列表。 */
-  WaterMarkDefinition: number[];
+  WaterMarkDefinition?: number[];
 }
 
 /** 点播文件指定时间点截图信息 */
@@ -3143,9 +3143,9 @@ declare interface MediaSnapshotByTimeOffsetInfo {
 /** 点播文件指定时间点截图信息 */
 declare interface MediaSnapshotByTimeOffsetItem {
   /** 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
-  Definition: number;
+  Definition?: number;
   /** 同一规格的截图信息集合，每个元素代表一张截图。 */
-  PicInfoSet: MediaSnapshotByTimePicInfoItem[];
+  PicInfoSet?: MediaSnapshotByTimePicInfoItem[];
 }
 
 /** 指定时间点截图信息 */

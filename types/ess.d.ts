@@ -832,14 +832,14 @@ declare interface RelieveInfo {
   OtherDeals?: string | null;
 }
 
-/** 催办接口返回详细信息 */
+/** 催办接口返回的详细信息。 */
 declare interface RemindFlowRecords {
-  /** 是否能够催办，true-是，false-否 */
-  CanRemind: boolean;
-  /** 合同id */
-  FlowId: string;
-  /** 催办详情信息 */
-  RemindMessage: string;
+  /** 合同流程是否可以催办：true - 可以，false - 不可以。若无法催办，将返回RemindMessage以解释原因。 */
+  CanRemind?: boolean;
+  /** 合同流程ID，为32位字符串。 */
+  FlowId?: string;
+  /** 在合同流程无法催办的情况下，系统将返回RemindMessage以阐述原因。 */
+  RemindMessage?: string;
 }
 
 /** 关注方信息 */
@@ -1287,20 +1287,20 @@ declare interface CreateFlowByFilesResponse {
 }
 
 declare interface CreateFlowEvidenceReportRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 签署流程编号 */
+  /** 合同流程ID，为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface CreateFlowEvidenceReportResponse {
-  /** 出证报告 ID，用于查询出证报告DescribeFlowEvidenceReport接口时用到 */
+  /** 出证报告 ID，可用于DescribeFlowEvidenceReport接口查询出证PDF的下载地址 */
   ReportId?: string | null;
-  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  /** 出证任务执行的状态, 可能会有以下状态：EvidenceStatusExecuting： 出证任务在执行中EvidenceStatusSuccess： 出证任务执行成功EvidenceStatusFailed ： 出征任务执行失败 */
   Status?: string;
-  /** 废除，字段无效 */
+  /** 此字段已经废除,不再使用.出证的PDF下载地址请调用DescribeChannelFlowEvidenceReport接口获取 */
   ReportUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1351,16 +1351,16 @@ declare interface CreateFlowGroupByTemplatesResponse {
 }
 
 declare interface CreateFlowRemindsRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 需要执行催办的签署流程id数组，最多100个 */
+  /** 需执行催办的签署流程ID数组，最多包含100个。 */
   FlowIds: string[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface CreateFlowRemindsResponse {
-  /** 催办合同详情列表 */
+  /** 合同催办结果的详细信息列表。 */
   RemindFlowRecords?: RemindFlowRecords[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1373,6 +1373,8 @@ declare interface CreateFlowRequest {
   FlowName: string;
   /** 签署流程参与者信息，最大限制50方注意 approver中的顺序需要和模板中的顺序保持一致， 否则会导致模板中配置的信息无效。 */
   Approvers: FlowCreateApprover[];
+  /** 签署流程描述,最大长度1000个字符 */
+  FlowDescription?: string;
   /** 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符 */
   FlowType?: string;
   /** 客户端Token，保持接口幂等性,最大长度64个字符 */
@@ -1383,8 +1385,6 @@ declare interface CreateFlowRequest {
   RemindedOn?: number;
   /** 用户自定义字段，回调的时候会进行透传，长度需要小于20480 */
   UserData?: string;
-  /** 签署流程描述,最大长度1000个字符 */
-  FlowDescription?: string;
   /** 发送类型：true：无序签false：有序签注：默认为false（有序签），请和模板中的配置保持一致 */
   Unordered?: boolean;
   /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
@@ -1404,7 +1404,7 @@ declare interface CreateFlowRequest {
 }
 
 declare interface CreateFlowResponse {
-  /** 签署流程编号 */
+  /** 签署流程编号，返回的流程编号，需要在CreateDocument，StartFlow中使用，注意：这三个接口（CreateFlow，CreateDocument，StartFlow）要一并调用，才算发起成功 */
   FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

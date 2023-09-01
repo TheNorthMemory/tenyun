@@ -749,11 +749,17 @@ declare interface DescribeBucketListResponse {
 declare interface DescribeCfsFileSystemClientsRequest {
   /** 文件系统 ID。 */
   FileSystemId: string;
+  /** Offset 分页码 */
+  Offset?: number;
+  /** Limit 页面大小 */
+  Limit?: number;
 }
 
 declare interface DescribeCfsFileSystemClientsResponse {
   /** 客户端列表 */
-  ClientList: FileSystemClient[];
+  ClientList?: FileSystemClient[];
+  /** 文件系统总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

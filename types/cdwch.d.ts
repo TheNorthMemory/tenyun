@@ -401,7 +401,7 @@ declare interface ActionAlterCkUserRequest {
 
 declare interface ActionAlterCkUserResponse {
   /** 错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -865,7 +865,7 @@ declare interface ScaleUpInstanceResponse {
 /** {@link Cdwch 云数据仓库 ClickHouse} */
 declare interface Cdwch {
   (): Versions;
-  /** 新增、修改ck用户接口 {@link ActionAlterCkUserRequest} {@link ActionAlterCkUserResponse} */
+  /** 新增、修改集群用户接口 {@link ActionAlterCkUserRequest} {@link ActionAlterCkUserResponse} */
   ActionAlterCkUser(data: ActionAlterCkUserRequest, config?: AxiosRequestConfig): AxiosPromise<ActionAlterCkUserResponse>;
   /** 创建或者修改备份策略 {@link CreateBackUpScheduleRequest} {@link CreateBackUpScheduleResponse} */
   CreateBackUpSchedule(data: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
@@ -903,7 +903,7 @@ declare interface Cdwch {
   ModifyClusterConfigs(data: ModifyClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterConfigsResponse>;
   /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
   ModifyInstanceKeyValConfigs(data: ModifyInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceKeyValConfigsResponse>;
-  /** 新增、修改ck账号cluster权限（新版） {@link ModifyUserNewPrivilegeRequest} {@link ModifyUserNewPrivilegeResponse} */
+  /** 新增、修改集群账号cluster权限（新版） {@link ModifyUserNewPrivilegeRequest} {@link ModifyUserNewPrivilegeResponse} */
   ModifyUserNewPrivilege(data?: ModifyUserNewPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserNewPrivilegeResponse>;
   /** 开启或者关闭策略 {@link OpenBackUpRequest} {@link OpenBackUpResponse} */
   OpenBackUp(data: OpenBackUpRequest, config?: AxiosRequestConfig): AxiosPromise<OpenBackUpResponse>;
