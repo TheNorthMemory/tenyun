@@ -8091,7 +8091,7 @@ declare interface ModifyMediaInfoResponse {
 }
 
 declare interface ModifyMediaStorageClassRequest {
-  /** 媒体文件唯一标识列表。 */
+  /** 媒体文件唯一标识列表，最大长度：100。 */
   FileIds: string[];
   /** 目标存储类型。可选值有： STANDARD：标准存储。 STANDARD_IA：低频存储。 ARCHIVE：归档存储。 DEEP_ARCHIVE：深度归档存储。 */
   StorageClass: string;

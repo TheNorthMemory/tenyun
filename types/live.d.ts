@@ -860,6 +860,18 @@ declare interface PushDataInfo {
   MetaFps: number;
 }
 
+/** 推流域名日志信息。 */
+declare interface PushLogInfo {
+  /** 日志名称。 */
+  LogName: string;
+  /** 日志下载地址。 */
+  LogUrl: string;
+  /** 日志时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：1. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  LogTime: string;
+  /** 文件大小，单位字节。 */
+  FileSize: number;
+}
+
 /** 某条流的推流质量详情数据。 */
 declare interface PushQualityData {
   /** 数据时间，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -2346,6 +2358,18 @@ declare interface DescribeDeliverBandwidthListRequest {
 declare interface DescribeDeliverBandwidthListResponse {
   /** 转推计费带宽数据 */
   DataInfoList?: BandwidthInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeliverLogDownListRequest {
+}
+
+declare interface DescribeDeliverLogDownListResponse {
+  /** 日志信息列表。 */
+  LogInfoList?: PushLogInfo[];
+  /** 总条数。 */
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4313,6 +4337,8 @@ declare interface Live {
   DescribeConcurrentRecordStreamNum(data: DescribeConcurrentRecordStreamNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrentRecordStreamNumResponse>;
   /** 查询直播转推计费带宽 {@link DescribeDeliverBandwidthListRequest} {@link DescribeDeliverBandwidthListResponse} */
   DescribeDeliverBandwidthList(data: DescribeDeliverBandwidthListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliverBandwidthListResponse>;
+  /** 批量获取转推日志的URL {@link DescribeDeliverLogDownListRequest} {@link DescribeDeliverLogDownListResponse} */
+  DescribeDeliverLogDownList(data?: DescribeDeliverLogDownListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliverLogDownListResponse>;
   /** 查询按省份和运营商分组的下行播放数据 {@link DescribeGroupProIspPlayInfoListRequest} {@link DescribeGroupProIspPlayInfoListResponse} */
   DescribeGroupProIspPlayInfoList(data: DescribeGroupProIspPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupProIspPlayInfoListResponse>;
   /** 查询播放http状态码明细数据 {@link DescribeHttpStatusInfoListRequest} {@link DescribeHttpStatusInfoListResponse} */

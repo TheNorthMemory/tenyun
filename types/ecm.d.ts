@@ -1594,7 +1594,7 @@ declare interface ZoneInstanceCountISP {
   Zone: string;
   /** 在当前可用区创建的实例数目。 */
   InstanceCount: number;
-  /** 运营商如下：CTCC：中国电信CUCC：中国联通CMCC：中国移动多个运营商用英文分号连接";"，例如："CMCC;CUCC;CTCC"。多运营商需要开通白名单，请直接联系腾讯云客服。 */
+  /** 运营商如下：CTCC：中国电信CUCC：中国联通CMCC：中国移动CMCC;CUCC;CTCC：三网；三网需要开通白名单，请直接联系腾讯云客服。 */
   ISP: string;
   /** 指定私有网络编号，SubnetId与VpcId必须同时指定或不指定 */
   VpcId?: string;
@@ -1604,7 +1604,7 @@ declare interface ZoneInstanceCountISP {
   PrivateIpAddresses?: string[];
   /** 为弹性网卡指定随机生成的IPv6地址数量，单网情况下是1，单网需要ISP 只能为单网运营商，三网情况3 */
   Ipv6AddressCount?: number;
-  /** 指定创建三网ipv6地址，使用的subnet数组，单独ipv4和单网ipv6子网依然使用SubnetId字段 */
+  /** 指定创建三网ipv6地址，使用的subnet数组，只创建ipv4不创建ipv6和单网ipv6子网依然使用SubnetId字段；该数组必须且仅支持传入三个不同的子网，并且这三个子网各自分配了电信、联通、移动三个运营商的其中一个IPV6 CIDR网段 */
   Ipv6SubnetIds?: string[];
 }
 

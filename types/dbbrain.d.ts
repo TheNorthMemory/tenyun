@@ -2,6 +2,54 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 通知模板 */
+declare interface AlarmProfileList {
+  /** 0-不是 1-是 */
+  IsWebHook?: number | null;
+  /** 接收告警用户数量 */
+  ReceiveUinCount?: number | null;
+  /** 语言 */
+  Lang?: string | null;
+  /** 模板类型 */
+  TemplateType?: string | null;
+  /** 备注 */
+  Remark?: string | null;
+  /** 接收组数量 */
+  ReceiveGroupCount?: number | null;
+  /** 更新用户的uin */
+  UpdateUin?: number | null;
+  /** 接收类型 */
+  ReceiveType?: number[] | null;
+  /** 接收用户信息 */
+  ReceiveInfo?: ReceiveInfo[] | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 模板名 */
+  TemplateName?: string | null;
+  /** 发送渠道 */
+  SendChannel?: number[] | null;
+  /** 模板id */
+  TemplateId?: number | null;
+  /** webhook数量 */
+  WebHookCount?: number | null;
+}
+
+/** 告警规则 */
+declare interface AlarmsRules {
+  /** 间隔 */
+  Interval: number;
+  /** 告警名 */
+  Name: string;
+  /** 指标 */
+  Metric: string;
+  /** 操作符 */
+  Operator: string;
+  /** 等级 fatal-致命critical-严重warning-告警information-通知 */
+  Severity: string;
+  /** 指标值 */
+  Value?: number;
+}
+
 /** 实例详细信息 */
 declare interface AuditInstance {
   /** 审计状态，已开通审计为：YES，未开通审计为：ON。 */
@@ -228,6 +276,12 @@ declare interface InstanceConfs {
   KeyDelimiters?: string[] | null;
 }
 
+/** 实例id */
+declare interface InstanceID {
+  /** 实例id */
+  InstanceId?: string;
+}
+
 /** 查询实例列表，返回实例的相关信息的对象。 */
 declare interface InstanceInfo {
   /** 实例ID。 */
@@ -398,6 +452,30 @@ declare interface ProfileInfo {
   Language: string;
   /** 邮件模板的内容。 */
   MailConfiguration: MailConfiguration;
+}
+
+/** 接收组信息 */
+declare interface ReceiveInfo {
+  /** 接收组 */
+  ReceiveGroup?: number[] | null;
+  /** 最后接收时间 */
+  EndReceiveTime?: string | null;
+  /** 接收名 */
+  ReceiveName?: string | null;
+  /** 推送渠道 */
+  SendChannel?: number[] | null;
+  /** 开始时间 */
+  StartReceiveTime?: string | null;
+  /** 接收用户列表 */
+  ReceiveUin?: ReceiveUin[] | null;
+}
+
+/** 接收用户 */
+declare interface ReceiveUin {
+  /** 用户名 */
+  UinName?: string | null;
+  /** 用户id */
+  Uin?: string | null;
 }
 
 /** redis key空间信息。 */
@@ -728,6 +806,14 @@ declare interface TaskInfo {
   Progress: number;
   /** 实例 ID。 */
   InstanceId: string;
+}
+
+/** 通知模板 */
+declare interface TemplateInfo {
+  /** 模板id */
+  TemplateId: string;
+  /** 模板名 */
+  TemplateName: string;
 }
 
 /** 单位时间间隔内的慢日志统计 */
@@ -1062,6 +1148,26 @@ declare interface DeleteSqlFiltersRequest {
 }
 
 declare interface DeleteSqlFiltersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAlarmTemplateRequest {
+  /** 搜索字段 */
+  TemplateNameRegexp: string;
+  /** 返回限制长度 */
+  Limit: number;
+  /** 偏置 */
+  Offset: number;
+  /** mysql - mysqlcynosdb - tdsql-c */
+  Product?: string;
+}
+
+declare interface DescribeAlarmTemplateResponse {
+  /** 模板列表 */
+  ProfileList?: AlarmProfileList[];
+  /** 模板总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1822,6 +1928,38 @@ declare interface KillMySqlThreadsResponse {
   Threads?: number[];
   /** 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。 */
   SqlExecId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAlarmPolicyRequest {
+  /** 类型 */
+  ApplyType: string;
+  /** 开启策略 */
+  Enable: number;
+  /** 列表 */
+  InstanceIds: InstanceID[];
+  /** User-动态关联该用户所有实例Instance-关联实例列表的实例 */
+  NewProfileLevel: string;
+  /** 新策略名 */
+  NewProfileName: string;
+  /** 旧策略名 */
+  ProfileName: string;
+  /** 策略类型 */
+  ProfileType: string;
+  /** 备注 */
+  Remark: string;
+  /** 规则类型 0-快速，1-自定义 若值为0，则QuickRule不能为空，若值为1，则Rules 不能为空 */
+  RuleType: number;
+  /** 接受模板 */
+  TemplateInfo: TemplateInfo[];
+  /** 快速规则 支持包括fatal-致命, critical-严重,warning-告警,information-通知 */
+  QuickRule?: string;
+  /** 自定义规则 */
+  Rules?: AlarmsRules[];
+}
+
+declare interface ModifyAlarmPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3053,6 +3191,8 @@ declare interface Dbbrain {
   DeleteSecurityAuditLogExportTasks(data: DeleteSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityAuditLogExportTasksResponse>;
   /** 删除实例SQL限流任务 {@link DeleteSqlFiltersRequest} {@link DeleteSqlFiltersResponse} */
   DeleteSqlFilters(data: DeleteSqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSqlFiltersResponse>;
+  /** 通知模板查询 {@link DescribeAlarmTemplateRequest} {@link DescribeAlarmTemplateResponse} */
+  DescribeAlarmTemplate(data: DescribeAlarmTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmTemplateResponse>;
   /** 获取邮件发送中联系人信息 {@link DescribeAllUserContactRequest} {@link DescribeAllUserContactResponse} */
   DescribeAllUserContact(data: DescribeAllUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUserContactResponse>;
   /** 获取邮件发送中联系组信息 {@link DescribeAllUserGroupRequest} {@link DescribeAllUserGroupResponse} */
@@ -3117,6 +3257,8 @@ declare interface Dbbrain {
   DescribeUserSqlAdvice(data: DescribeUserSqlAdviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSqlAdviceResponse>;
   /** 中断MySql会话线程 {@link KillMySqlThreadsRequest} {@link KillMySqlThreadsResponse} */
   KillMySqlThreads(data: KillMySqlThreadsRequest, config?: AxiosRequestConfig): AxiosPromise<KillMySqlThreadsResponse>;
+  /** 修改告警策略 {@link ModifyAlarmPolicyRequest} {@link ModifyAlarmPolicyResponse} */
+  ModifyAlarmPolicy(data: ModifyAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyResponse>;
   /** 修改审计配置 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
   ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改实例巡检开关状态 {@link ModifyDiagDBInstanceConfRequest} {@link ModifyDiagDBInstanceConfResponse} */

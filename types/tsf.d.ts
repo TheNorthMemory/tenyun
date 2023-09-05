@@ -6366,7 +6366,7 @@ declare interface ExecuteTaskFlowResponse {
 }
 
 declare interface ExecuteTaskRequest {
-  /** 任务 ID。 */
+  /** 任务 ID */
   TaskId: string;
 }
 
@@ -7577,7 +7577,7 @@ declare interface Tsf {
   EnableUnitRoute(data: EnableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRouteResponse>;
   /** 启用单元化规则 {@link EnableUnitRuleRequest} {@link EnableUnitRuleResponse} */
   EnableUnitRule(data: EnableUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRuleResponse>;
-  /** 手动执行一次任务。 {@link ExecuteTaskRequest} {@link ExecuteTaskResponse} */
+  /** 手动执行一次任务 {@link ExecuteTaskRequest} {@link ExecuteTaskResponse} */
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
   /** 执行一次工作流 {@link ExecuteTaskFlowRequest} {@link ExecuteTaskFlowResponse} */
   ExecuteTaskFlow(data?: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;

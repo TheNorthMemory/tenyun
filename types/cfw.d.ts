@@ -316,6 +316,22 @@ declare interface InstanceInfo {
   RegionKey?: string | null;
 }
 
+/** 入侵防御封禁列表、放通列表添加规则入参 */
+declare interface IntrusionDefenseRule {
+  /** 规则方向，0出站，1入站，3内网间 */
+  Direction: number;
+  /** 规则结束时间，格式：2006-01-02 15:04:05，必须大于当前时间 */
+  EndTime: string;
+  /** 规则IP地址，IP与Domain必填其中之一 */
+  IP?: string;
+  /** 规则域名，IP与Domain必填其中之一 */
+  Domain?: string;
+  /** 备注信息，长度不能超过50 */
+  Comment?: string;
+  /** 规则开始时间 */
+  StartTime?: string;
+}
+
 /** 黑白名单IOC列表 */
 declare interface IocListData {
   /** 待处置IP地址，IP/Domain字段二选一 */
@@ -466,6 +482,8 @@ declare interface RuleInfoData {
   CityName?: string;
   /** 国家名 */
   CountryName?: string;
+  /** 国家二位iso代码或者省份缩写代码 */
+  RegionIso?: string;
 }
 
 /** 新手引导扫描信息 */
@@ -614,11 +632,11 @@ declare interface SecurityGroupOrderIndexData {
 
 /** 安全组规则 */
 declare interface SecurityGroupRule {
-  /** 访问源示例：net：IP/CIDR(192.168.0.2)template：参数模板(ipm-dyodhpby)instance：资产实例(ins-123456)resourcegroup：资产分组(/全部分组/分组1/子分组1)tag：资源标签({"Key":"标签key值","Value":"标签Value值"})region：地域(ap-gaungzhou) */
+  /** 访问源示例：net：IP/CIDR(192.168.0.2)template：参数模板id(ipm-dyodhpby)instance：资产实例id(ins-123456)resourcegroup：资产分组id(cfwrg-xxxx)tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})region：地域(ap-gaungzhou) */
   SourceContent: string;
   /** 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region */
   SourceType: string;
-  /** 访问目的示例：net：IP/CIDR(192.168.0.2)template：参数模板(ipm-dyodhpby)instance：资产实例(ins-123456)resourcegroup：资产分组(/全部分组/分组1/子分组1)tag：资源标签({"Key":"标签key值","Value":"标签Value值"})region：地域(ap-gaungzhou) */
+  /** 访问目的示例：net：IP/CIDR(192.168.0.2)template：参数模板id(ipm-dyodhpby)instance：资产实例id(ins-123456)resourcegroup：资产分组id(cfwrg-xxxx)tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})region：地域(ap-gaungzhou) */
   DestContent: string;
   /** 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region */
   DestType: string;
@@ -626,7 +644,7 @@ declare interface SecurityGroupRule {
   RuleAction: string;
   /** 描述 */
   Description: string;
-  /** 规则顺序，-1表示最低，1表示最高 */
+  /** 规则顺序，-1表示最低，1表示最高，请勿和外层Type冲突（和外层的Type配合使用，当中间插入时，指定添加位置） */
   OrderIndex: string;
   /** 协议；TCP/UDP/ICMP/ANY */
   Protocol?: string | null;
@@ -634,9 +652,9 @@ declare interface SecurityGroupRule {
   Port?: string | null;
   /** 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥 */
   ServiceTemplateId?: string | null;
-  /** 规则对应的唯一id */
+  /** （入参时无需填写，自动生成）规则对应的唯一id */
   Id?: string;
-  /** 规则状态，true表示启用，false表示禁用 */
+  /** （入参时、Enable已弃用；由通用配置中新增规则启用状态控制）规则状态，true表示启用，false表示禁用 */
   Enable?: string;
 }
 
@@ -896,6 +914,18 @@ declare interface CreateAddressTemplateRequest {
 declare interface CreateAddressTemplateResponse {
   /** 创建结果,0成功 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBlockIgnoreRuleListRequest {
+  /** 规则列表 */
+  Rules: IntrusionDefenseRule[];
+  /** 规则类型，1封禁，2放通，不支持域名封禁 */
+  RuleType: number;
+}
+
+declare interface CreateBlockIgnoreRuleListResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1850,6 +1880,28 @@ declare interface ModifyBlockTopResponse {
   RequestId?: string;
 }
 
+declare interface ModifyEWRuleStatusRequest {
+  /** vpc规则必填，边id */
+  EdgeId: string;
+  /** 是否开关开启，0：未开启，1：开启 */
+  Status: number;
+  /** 规则方向，0：出站，1：入站，默认1 */
+  Direction: number;
+  /** 更改的规则当前执行顺序 */
+  RuleSequence: number;
+  /** 规则类型，vpc：VPC间规则、nat：Nat边界规则 */
+  RuleType: string;
+}
+
+declare interface ModifyEWRuleStatusResponse {
+  /** 状态值，0：修改成功，非0：修改失败 */
+  ReturnCode: number;
+  /** 状态信息，success：查询成功，fail：查询失败 */
+  ReturnMsg: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyEnterpriseSecurityDispatchStatusRequest {
   /** 0：打开立即下发开关；1：关闭立即下发开关；2：关闭立即下发开关情况下，触发开始下发 */
   Status: number;
@@ -2195,6 +2247,8 @@ declare interface Cfw {
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
   /** 创建地址模板规则 {@link CreateAddressTemplateRequest} {@link CreateAddressTemplateResponse} */
   CreateAddressTemplate(data: CreateAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAddressTemplateResponse>;
+  /** 批量添加入侵防御封禁列表、放通列表规则 {@link CreateBlockIgnoreRuleListRequest} {@link CreateBlockIgnoreRuleListResponse} */
+  CreateBlockIgnoreRuleList(data: CreateBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockIgnoreRuleListResponse>;
   /** 创建、选择vpc {@link CreateChooseVpcsRequest} {@link CreateChooseVpcsResponse} */
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
   /** 创建暴露数据库白名单规则 {@link CreateDatabaseWhiteListRulesRequest} {@link CreateDatabaseWhiteListRulesResponse} */
@@ -2291,6 +2345,8 @@ declare interface Cfw {
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
   /** 取消阻断记录置顶接口 {@link ModifyBlockTopRequest} {@link ModifyBlockTopResponse} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;
+  /** 启用停用VPC间规则或Nat边界规则 {@link ModifyEWRuleStatusRequest} {@link ModifyEWRuleStatusResponse} */
+  ModifyEWRuleStatus(data: ModifyEWRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEWRuleStatusResponse>;
   /** 修改企业安全组下发状态 {@link ModifyEnterpriseSecurityDispatchStatusRequest} {@link ModifyEnterpriseSecurityDispatchStatusResponse} */
   ModifyEnterpriseSecurityDispatchStatus(data: ModifyEnterpriseSecurityDispatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnterpriseSecurityDispatchStatusResponse>;
   /** 编辑新企业安全组规则 {@link ModifyEnterpriseSecurityGroupRuleRequest} {@link ModifyEnterpriseSecurityGroupRuleResponse} */

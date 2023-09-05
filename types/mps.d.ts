@@ -1222,6 +1222,42 @@ declare interface AsrWordsConfigureInfoForUpdate {
   LabelSet?: string[];
 }
 
+/** 音量美化配置 */
+declare interface AudioBeautifyConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 类型，可多选，可选值：declick：杂音去除deesser：齿音压制默认值：declick。 */
+  Types?: string[] | null;
+}
+
+/** 音频降噪配置 */
+declare interface AudioDenoiseConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+}
+
+/** 音频增强配置 */
+declare interface AudioEnhanceConfig {
+  /** 音频降噪配置。 */
+  Denoise?: AudioDenoiseConfig | null;
+  /** 音频分离配置。 */
+  Separate?: AudioSeparateConfig | null;
+  /** 音量均衡配置。 */
+  VolumeBalance?: VolumeBalanceConfig | null;
+  /** 音频美化配置。 */
+  Beautify?: AudioBeautifyConfig | null;
+}
+
+/** 音频分离配置 */
+declare interface AudioSeparateConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 场景类型，可选值：normal：人声背景声场景music：演唱伴奏场景默认值：normal。 */
+  Type?: string | null;
+  /** 输出音轨，可选值：vocal：输出人声background：应用场景为normal时输出背景声，应用场景为music时输出伴奏默认值：vocal。 */
+  Track?: string | null;
+}
+
 /** 音频流配置参数 */
 declare interface AudioTemplateInfo {
   /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv。当外层参数 Container 为 hls 时，可选值为：libfdk_aac；libmp3lame。 */
@@ -1874,6 +1910,8 @@ declare interface EditMediaTaskOutput {
 declare interface EnhanceConfig {
   /** 视频增强配置。 */
   VideoEnhance?: VideoEnhanceConfig | null;
+  /** 音频增强配置。 */
+  AudioEnhance?: AudioEnhanceConfig | null;
 }
 
 /** 表情识别参数配置 */
@@ -4051,33 +4089,33 @@ declare interface TranscodeTaskInput {
 /** 转码模板详情 */
 declare interface TranscodeTemplate {
   /** 转码模板唯一标识。 */
-  Definition: string;
+  Definition?: string;
   /** 封装格式，取值：mp4、flv、hls、mp3、flac、ogg。 */
-  Container: string;
+  Container?: string;
   /** 转码模板名称。 */
-  Name: string;
+  Name?: string;
   /** 模板描述信息。 */
-  Comment: string;
+  Comment?: string;
   /** 模板类型，取值：Preset：系统预置模板；Custom：用户自定义模板。 */
-  Type: string;
+  Type?: string;
   /** 是否去除视频数据，取值：0：保留；1：去除。 */
-  RemoveVideo: number;
+  RemoveVideo?: number;
   /** 是否去除音频数据，取值：0：保留；1：去除。 */
-  RemoveAudio: number;
+  RemoveAudio?: number;
   /** 视频流配置参数，仅当 RemoveVideo 为 0，该字段有效。 */
-  VideoTemplate: VideoTemplateInfo;
+  VideoTemplate?: VideoTemplateInfo;
   /** 音频流配置参数，仅当 RemoveAudio 为 0，该字段有效 。 */
-  AudioTemplate: AudioTemplateInfo;
+  AudioTemplate?: AudioTemplateInfo;
   /** 极速高清转码参数。 */
-  TEHDConfig: TEHDConfig | null;
+  TEHDConfig?: TEHDConfig | null;
   /** 封装格式过滤条件，可选值：Video：视频格式，可以同时包含视频流和音频流的封装格式；PureAudio：纯音频格式，只能包含音频流的封装格式板。 */
-  ContainerType: string;
+  ContainerType?: string;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 音视频增强配置。 */
-  EnhanceConfig: EnhanceConfig | null;
+  EnhanceConfig?: EnhanceConfig | null;
 }
 
 /** 语音翻译任务控制参数 */
@@ -4276,6 +4314,14 @@ declare interface VideoTemplateInfoForUpdate {
   Vcrf?: number | null;
   /** 内容自适应编码。可选值：0：不开启1：开启默认值: 0. 当开启该参数时，将会自适应生成多个不同分辨率，不同码率的码流， 其中VideoTemplate的宽和高为多个码流中的最大分辨率，VideoTemplate中的码率为多个码流中的最高码率， VideoTemplate中的vcrf为多个码流中的最高质量。 当不设置分辨率、码率和vcrf时， ContentAdaptStream 参数生成的最高分辨率为视频源的分辨率，视频质量为接近vmaf95分。 若要开启该参数或了解计费细节, 请联系您的腾讯云商务。 */
   ContentAdaptStream?: number | null;
+}
+
+/** 音量均衡配置 */
+declare interface VolumeBalanceConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 类型，可选值：loudNorm：响度标准化gainControl：减小突变默认值：loudNorm。 */
+  Type?: string | null;
 }
 
 /** 媒体处理任务中的水印参数类型 */
@@ -4757,7 +4803,7 @@ declare interface CreateTranscodeTemplateRequest {
 
 declare interface CreateTranscodeTemplateResponse {
   /** 转码模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
