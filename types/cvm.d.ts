@@ -483,49 +483,49 @@ declare interface InstanceTypeConfigStatus {
 /** 描述实例机型配额信息。 */
 declare interface InstanceTypeQuotaItem {
   /** 可用区。 */
-  Zone: string;
+  Zone?: string;
   /** 实例机型。 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月POSTPAID_BY_HOUR：表示后付费，即按量计费CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。`SPOTPAID`：表示竞价实例付费。 */
-  InstanceChargeType: string;
+  InstanceChargeType?: string;
   /** 网卡类型，例如：25代表25G网卡 */
-  NetworkCard: number;
+  NetworkCard?: number;
   /** 扩展属性。 */
-  Externals: Externals | null;
+  Externals?: Externals | null;
   /** 实例的CPU核数，单位：核。 */
-  Cpu: number;
+  Cpu?: number;
   /** 实例内存容量，单位：`GB`。 */
-  Memory: number;
+  Memory?: number;
   /** 实例机型系列。 */
-  InstanceFamily: string;
+  InstanceFamily?: string;
   /** 机型名称。 */
-  TypeName: string;
+  TypeName?: string;
   /** 本地磁盘规格列表。当该参数返回为空值时，表示当前情况下无法创建本地盘。 */
-  LocalDiskTypeList: LocalDiskType[];
+  LocalDiskTypeList?: LocalDiskType[];
   /** 实例是否售卖。取值范围： SELL：表示实例可购买SOLD_OUT：表示实例已售罄。 */
-  Status: string;
+  Status?: string;
   /** 实例的售卖价格。 */
-  Price: ItemPrice;
+  Price?: ItemPrice;
   /** 售罄原因。 */
-  SoldOutReason: string | null;
+  SoldOutReason?: string | null;
   /** 内网带宽，单位Gbps。 */
-  InstanceBandwidth: number;
+  InstanceBandwidth?: number;
   /** 网络收发包能力，单位万PPS。 */
-  InstancePps: number;
+  InstancePps?: number;
   /** 本地存储块数量。 */
-  StorageBlockAmount: number;
+  StorageBlockAmount?: number;
   /** 处理器型号。 */
-  CpuType: string;
+  CpuType?: string;
   /** 实例的GPU数量。 */
-  Gpu: number;
+  Gpu?: number;
   /** 实例的FPGA数量。 */
-  Fpga: number;
+  Fpga?: number;
   /** 实例备注信息。 */
-  Remark: string;
+  Remark?: string;
   /** 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。 */
-  GpuCount: number;
+  GpuCount?: number;
   /** 实例的CPU主频信息 */
-  Frequency: string;
+  Frequency?: string;
 }
 
 /** 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等 */
@@ -772,8 +772,6 @@ declare interface Placement {
   ProjectId?: number;
   /** 实例所属的专用宿主机ID列表，仅用于入参。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。 */
   HostIds?: string[];
-  /** 指定母机IP生产子机 */
-  HostIps?: string[];
   /** 实例所属的专用宿主机ID，仅用于出参。 */
   HostId?: string;
 }
@@ -2422,7 +2420,7 @@ declare interface ModifyInstancesAttributeRequest {
   SecurityGroups?: string[];
   /** 给实例绑定用户角色，传空值为解绑操作 */
   CamRoleName?: string;
-  /** 实例的主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：主机名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 */
+  /** 实例的主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：主机名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 注意点：修改主机名后实例会立即重启，重启后新的主机名生效。 */
   HostName?: string;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
   DisableApiTermination?: boolean;

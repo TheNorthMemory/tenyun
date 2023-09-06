@@ -379,9 +379,9 @@ declare interface DBRenameRes {
 /** 开启、关闭TDE数据库加密 */
 declare interface DBTDEEncrypt {
   /** 数据库名称 */
-  DBName?: string | null;
-  /** enable-开启加密，disable-关闭加密 */
-  Encryption?: string | null;
+  DBName?: string;
+  /** enable-开启数据库TDE加密，disable-关闭数据库TDE加密 */
+  Encryption?: string;
 }
 
 /** 该数据结构表示具有发布订阅关系的两个数据库。 */
@@ -1351,7 +1351,7 @@ declare interface CreateCloudReadOnlyDBInstancesRequest {
   ReadOnlyGroupMinInGroup?: number;
   /** 付费模式，取值支持 PREPAID（预付费），POSTPAID（后付费）。 */
   InstanceChargeType?: string;
-  /** 本次购买几个只读实例，默认值为2。 */
+  /** 本次即将购买的实例数量，默认取值2。 */
   GoodsNum?: number;
   /** VPC子网ID，形如subnet-bdoe83fa；SubnetId和VpcId需同时设置或者同时不设置 */
   SubnetId?: string;
@@ -2569,7 +2569,7 @@ declare interface InquiryPriceCreateDBInstancesRequest {
   DBVersion?: string;
   /** 预购买实例的CPU核心数 */
   Cpu?: number;
-  /** 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-新版高可用,cvmRO-新版只读 */
+  /** 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-虚拟机双机高可用,cvmRO-虚拟机只读 */
   InstanceType?: string;
   /** 购买实例的宿主机类型，PM-物理机, CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘,CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘 */
   MachineType?: string;

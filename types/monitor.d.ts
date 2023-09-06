@@ -1025,43 +1025,43 @@ declare interface GrafanaChannel {
 /** 查询 Grafana 实例时的实例类型 */
 declare interface GrafanaInstanceInfo {
   /** 实例名 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例 ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** VPC ID */
-  VpcId: string;
+  VpcId?: string;
   /** 子网 ID 数组 */
-  SubnetIds: string[];
-  /** Grafana 内网地址 */
-  InternetUrl: string;
+  SubnetIds?: string[];
   /** Grafana 公网地址 */
-  InternalUrl: string;
+  InternetUrl?: string;
+  /** Grafana 内网地址 */
+  InternalUrl?: string;
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:停机中； 6:已停机； 7: 已删除） */
-  InstanceStatus: number;
+  InstanceStatus?: number;
   /** 实例的标签 */
-  TagSpecification: PrometheusTag[];
+  TagSpecification?: PrometheusTag[];
   /** 实例的可用区 */
-  Zone: string;
+  Zone?: string;
   /** 计费模式（1:包年包月） */
-  InstanceChargeType: number;
+  InstanceChargeType?: number;
   /** VPC 名称 */
-  VpcName: string;
+  VpcName?: string;
   /** 子网名称 */
-  SubnetName: string;
+  SubnetName?: string;
   /** 地域 ID */
-  RegionId: number;
+  RegionId?: number;
   /** 可访问此实例的完整 URL */
-  RootUrl: string;
+  RootUrl?: string;
   /** 是否开启 SSO */
-  EnableSSO: boolean;
+  EnableSSO?: boolean;
   /** 版本号 */
-  Version: string;
+  Version?: string;
   /** SSO登录时是否开启cam鉴权 */
-  EnableSSOCamCheck: boolean;
+  EnableSSOCamCheck?: boolean;
 }
 
 /** Grafana 集成实例配置 */
@@ -1786,6 +1786,24 @@ declare interface PrometheusRecordRuleYamlItem {
   Id?: string | null;
   /** 规则数量 */
   Count?: number | null;
+}
+
+/** DescribePrometheusRegions 响应结构体 */
+declare interface PrometheusRegionItem {
+  /** 区域 */
+  Region: string;
+  /** 区域 ID */
+  RegionId: number;
+  /** 区域状态( 0: 不可用；1: 可用) */
+  RegionState: number;
+  /** 区域名(中文) */
+  RegionName: string;
+  /** 区域名(英文缩写) */
+  RegionShortName: string;
+  /** 区域所在大区名 */
+  Area: string;
+  /** 1-仅支持预付费，2-仅支持后付费，3-支持两种计费模式实例 */
+  RegionPayMode: number;
 }
 
 /** prometheus 报警规则 KV 参数 */
@@ -3932,6 +3950,18 @@ declare interface DescribePrometheusRecordRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrometheusRegionsRequest {
+  /** 1-预付费，2-后付费，3-全地域（不填默认全地域） */
+  PayMode?: number;
+}
+
+declare interface DescribePrometheusRegionsResponse {
+  /** 区域列表 */
+  RegionSet: PrometheusRegionItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrometheusScrapeJobsRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -5065,6 +5095,8 @@ declare interface Monitor {
   DescribePrometheusRecordRuleYaml(data: DescribePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRuleYamlResponse>;
   /** 获取聚合规则列表，包含关联集群内的资源 {@link DescribePrometheusRecordRulesRequest} {@link DescribePrometheusRecordRulesResponse} */
   DescribePrometheusRecordRules(data: DescribePrometheusRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRulesResponse>;
+  /** 列出 Prometheus 服务所有可用的地域 {@link DescribePrometheusRegionsRequest} {@link DescribePrometheusRegionsResponse} */
+  DescribePrometheusRegions(data?: DescribePrometheusRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRegionsResponse>;
   /** 列出 Prometheus 抓取任务 {@link DescribePrometheusScrapeJobsRequest} {@link DescribePrometheusScrapeJobsResponse} */
   DescribePrometheusScrapeJobs(data: DescribePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusScrapeJobsResponse>;
   /** 获取targets信息 {@link DescribePrometheusTargetsTMPRequest} {@link DescribePrometheusTargetsTMPResponse} */

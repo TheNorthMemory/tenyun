@@ -106,16 +106,16 @@ declare interface AutoSignConfig {
   LicenseType?: number;
 }
 
-/** 应用回调信息 */
+/** 企业应用回调信息 */
 declare interface CallbackInfo {
-  /** 回调url */
+  /** 回调url,。请确保回调地址能够接收并处理 HTTP POST 请求，并返回状态码 200 以表示处理正常。 */
   CallbackUrl: string;
   /** 回调加密key，已废弃 */
   Token?: string;
-  /** 回调加密key */
-  CallbackKey?: string | null;
-  /** 回调验签token */
-  CallbackToken?: string | null;
+  /** 回调加密key，用于回调消息加解密。 */
+  CallbackKey?: string;
+  /** 回调验签token，用于回调通知校验。 */
+  CallbackToken?: string;
 }
 
 /** 此结构体 (Caller) 用于描述调用方属性。 */
@@ -254,19 +254,19 @@ declare interface EmbedUrlOption {
   ShowTemplateComponent?: boolean;
 }
 
-/** 授权服务信息 */
+/** 扩展服务开通和授权的详细信息 */
 declare interface ExtendAuthInfo {
-  /** 授权服务类型OPEN_SERVER_SIGN：开通企业静默签署OVERSEA_SIGN：企业与港澳台居民签署合同MOBILE_CHECK_APPROVER：使用手机号验证签署方身份PAGING_SEAL：骑缝章BATCH_SIGN：批量签署 */
+  /** 扩展服务的类型，可能是以下值：OPEN_SERVER_SIGN：企业静默签署OVERSEA_SIGN：企业与港澳台居民签署合同MOBILE_CHECK_APPROVER：使用手机号验证签署方身份PAGING_SEAL：骑缝章BATCH_SIGN：批量签署 */
   Type?: string;
-  /** 授权服务名称 */
+  /** 扩展服务的名称 */
   Name?: string;
-  /** 授权服务状态，ENABLE：开通DISABLE：未开通 */
+  /** 扩展服务的开通状态：ENABLE：开通DISABLE：未开通 */
   Status?: string;
-  /** 授权人用户id */
+  /** 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。 */
   OperatorUserId?: string | null;
-  /** 授权时间戳，单位秒 */
+  /** 扩展服务的操作时间，格式为Unix标准时间戳（秒）。 */
   OperateOn?: number | null;
-  /** 被授权用户列表 */
+  /** 该扩展服务若可以授权，此参数对应授权人员的列表 */
   HasAuthUserList?: HasAuthUser[] | null;
 }
 
@@ -400,6 +400,8 @@ declare interface FlowApproverDetail {
   OrganizationId?: string | null;
   /** 签署方企业名称 */
   OrganizationName?: string | null;
+  /** 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。 */
+  SignId?: string | null;
 }
 
 /** 签署链接信息 */
@@ -594,11 +596,11 @@ declare interface GroupOrganization {
   FlowEngineEnable?: boolean | null;
 }
 
-/** 被授权用户信息 */
+/** 被授权的用户信息 */
 declare interface HasAuthUser {
-  /** 用户id */
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。 */
   UserId?: string | null;
-  /** 用户归属MainOrg：主企业CurrentOrg：当前企业 */
+  /** 当前员工的归属情况，可能值是：MainOrg：在集团企业的场景下，返回此值代表是归属主企业CurrentOrg：在普通企业场景下返回此值；或者在集团企业的场景下，返回此值代表归属子企业 */
   BelongTo?: string | null;
 }
 
@@ -860,24 +862,24 @@ declare interface SealInfo {
   SealName?: string | null;
 }
 
-/** 一码多扫签署二维码对象 */
+/** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
 declare interface SignQrCode {
-  /** 二维码id */
-  QrCodeId: string;
-  /** 二维码url */
-  QrCodeUrl: string;
-  /** 二维码过期时间戳，单位秒 */
-  ExpiredTime: number;
+  /** 二维码ID，为32位字符串。 */
+  QrCodeId?: string;
+  /** 二维码URL，可通过转换二维码的工具或代码组件将此URL转化为二维码，以便用户扫描进行流程签署。 */
+  QrCodeUrl?: string;
+  /** 二维码的有截止时间，格式为Unix标准时间戳（秒）。一旦超过二维码的有效期限，该二维码将自动失效。 */
+  ExpiredTime?: number;
 }
 
-/** 一码多扫签署二维码签署信息 */
+/** 流程签署二维码的签署信息，适用于客户系统整合二维码功能。通过链接，用户可直接访问电子签名小程序并签署合同。 */
 declare interface SignUrl {
-  /** 小程序签署链接 */
-  AppSignUrl: string;
-  /** 签署链接有效时间 */
-  EffectiveTime: string;
-  /** 移动端签署链接 */
-  HttpSignUrl: string;
+  /** 跳转至电子签名小程序签署的链接地址。适用于客户端APP及小程序直接唤起电子签名小程序。 */
+  AppSignUrl?: string;
+  /** 签署链接有效时间，格式类似"2022-08-05 15:55:01" */
+  EffectiveTime?: string;
+  /** 跳转至电子签名小程序签署的链接地址，格式类似于https://essurl.cn/xxx。打开此链接将会展示H5中间页面，随后唤起电子签名小程序以进行合同签署。 */
+  HttpSignUrl?: string;
 }
 
 /** 企业员工信息 */
@@ -1537,34 +1539,34 @@ declare interface CreateIntegrationUserRolesResponse {
 }
 
 declare interface CreateMultiFlowSignQRCodeRequest {
-  /** 用户信息，其中UserId为必填参数 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 模板ID */
+  /** 合同模板ID，为32位字符串。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId: string;
-  /** 签署流程名称，最大长度不超过200字符 */
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
   FlowName: string;
-  /** 最大可发起签署流程份数，默认5份 发起流程数量超过此上限后二维码自动失效 */
+  /** 通过此二维码可发起的流程最大限额，如未明确指定，默认为5份。一旦发起流程数超越该限制，该二维码将自动失效。 */
   MaxFlowNum?: number;
-  /** 签署流程有效天数 默认7天 最高设置不超过30天 */
-  FlowEffectiveDay?: number;
-  /** 二维码有效天数 默认7天 最高设置不超过90天 */
+  /** 二维码的有效期限，默认为7天，最高设定不得超过90天。一旦超过二维码的有效期限，该二维码将自动失效。 */
   QrEffectiveDay?: number;
-  /** 指定的签署人信息指定后，则只允许指定的签署人扫码签署 */
+  /** 合同流程的签署有效期限，若未设定签署截止日期，则默认为自合同流程创建起的7天内截止。若在签署截止日期前未完成签署，合同状态将变更为已过期，从而导致合同无效。最长设定期限不得超过30天。 */
+  FlowEffectiveDay?: number;
+  /** 指定签署人信息。在指定签署人后，仅允许特定签署人通过扫描二维码进行签署。 */
   Restrictions?: ApproverRestriction[];
-  /** 用户自定义字段回调的时候会进行透传，长度需要小于20480 */
+  /** 调用方自定义的个性化字段(可自定义此字段的值)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
   /** 已废弃，回调配置统一使用企业应用管理-应用集成-企业版应用中的配置 通过一码多扫二维码发起的合同，回调消息可参考文档 https://qian.tencent.com/developers/company/callback_types_contracts_sign 用户通过签署二维码发起合同时，因企业额度不足导致失败 会触发签署二维码相关回调,具体参考文档 https://qian.tencent.com/developers/company/callback_types_commons#%E7%AD%BE%E7%BD%B2%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9B%B8%E5%85%B3%E5%9B%9E%E8%B0%83 */
   CallbackUrl?: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 限制二维码用户条件（已弃用） */
   ApproverRestrictions?: ApproverRestriction;
 }
 
 declare interface CreateMultiFlowSignQRCodeResponse {
-  /** 签署二维码对象 */
+  /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
   QrCode?: SignQrCode;
-  /** 签署链接对象 */
+  /** 流程签署二维码的签署信息，适用于客户系统整合二维码功能。通过链接，用户可直接访问电子签名小程序并签署合同。 */
   SignUrls?: SignUrl;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1727,32 +1729,32 @@ declare interface CreateReleaseFlowResponse {
 }
 
 declare interface CreateSchemeUrlRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息, userId 必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 企业名称 */
+  /** 合同流程签署方的组织机构名称。如果名称中包含英文括号()，请使用中文括号（）代替。 */
   OrganizationName?: string;
-  /** 姓名,最大长度50个字符 */
+  /** 合同流程里边签署方经办人的姓名。 */
   Name?: string;
-  /** 手机号，大陆手机号11位 */
+  /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 */
   Mobile?: string;
-  /** 要跳转的链接类型- HTTP：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 (默认)，此时返回长链- HTTP_SHORT_URL：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链- APP： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型 */
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链**APP**： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型 */
   EndPoint?: string;
-  /** 签署流程编号 (PathType=1时必传) */
+  /** 合同流程ID 注: `如果准备跳转到合同流程签署的详情页面(即PathType=1时)必传, 跳转其他页面可不传` */
   FlowId?: string;
-  /** 合同组ID */
+  /** 合同流程组的组ID, 在合同流程组场景下，生成合同流程组的签署链接时需要赋值 */
   FlowGroupId?: string;
-  /** 要跳转到的页面类型 - 0: 不传, 主页 (默认)- 1: 小程序合同详情 - 2: 小程序合同列表页 */
+  /** 要跳转到的页面类型 **0** : 腾讯电子签小程序个人首页 (默认) **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面) **2** : 腾讯电子签小程序合同列表页 */
   PathType?: number;
-  /** 是否自动回跳true：是，false：否。该参数只针对"APP" 类型的签署链接有效 */
+  /** 签署完成后是否自动回跳**false**：否, 签署完成不会自动跳转回来(默认)**true**：是, 签署完成会自动跳转回来注: ` 该参数只针对"APP" 类型的签署链接有效` */
   AutoJumpBack?: boolean;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下- 0:合同签署页面更多操作按钮- 1:合同签署页面更多操作的拒绝签署按钮- 2:合同签署页面更多操作的转他人处理按钮- 3:签署成功页的查看详情按钮 */
+  /** 生成的签署链接在签署页面隐藏的按钮列表，可设置如下： **0** :合同签署页面更多操作按钮 **1** :合同签署页面更多操作的拒绝签署按钮 **2** :合同签署页面更多操作的转他人处理按钮 **3** :签署成功页的查看详情按钮注: `字段为数组, 可以传值隐藏多个按钮` */
   Hides?: number[];
 }
 
 declare interface CreateSchemeUrlResponse {
-  /** 小程序链接地址，有效期90天。如果EndPoint是App，得到的链接Path如’weixin://dl/business/?t= *TICKET*‘，用于客户APP、小程序直接拉起电子签小程序；其他EndPoint得到的https链接如'https://essurl.cn/xxx'，点击链接会打开一个H5页面，然后拉起电子签小程序。 */
+  /** 腾讯电子签小程序的签署链接。如果EndPoint是**APP**，得到的链接类似于`pages/guide?from=default&where=mini&id=yDwJSUUirqauh***7jNSxwdirTSGuH&to=CONTRACT_DETAIL&name=&phone=&shortKey=yDw***k1xFc5`, 用法可以参加接口描述中的"跳转到小程序的实现"如果EndPoint是**HTTP**，得到的链接类似于 `https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?where=mini&from=SFY&id=yDwfEUUw**4rV6Avz&to=MVP_CONTRACT_COVER&name=%E9%83%**5%86%9B`，点击后会跳转到腾讯电子签小程序进行签署如果EndPoint是**HTTP_SHORT_URL**，得到的链接类似于 `https://essurl.cn/2n**42Nd`，点击后会跳转到腾讯电子签小程序进行签署 */
   SchemeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1945,16 +1947,16 @@ declare interface DeleteSealPoliciesResponse {
 }
 
 declare interface DescribeExtendedServiceAuthInfosRequest {
-  /** 操作人信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 代理相关应用信息，如集团主企业代子企业操作 */
-  Agent?: Agent;
-  /** 扩展服务类型，默认为空，查询目前支持的所有扩展服务信息，单个指定则查询单个扩展服务开通信息，取值：OPEN_SERVER_SIGN：开通企业静默签署OVERSEA_SIGN：企业与港澳台居民签署合同MOBILE_CHECK_APPROVER：使用手机号验证签署方身份PAGING_SEAL：骑缝章BATCH_SIGN：批量签署 */
+  /** 要查询的扩展服务类型。默认为空，即查询当前支持的所有扩展服务信息。若需查询单个扩展服务的开通情况，请传递相应的值，如下所示：OPEN_SERVER_SIGN：企业静默签署OVERSEA_SIGN：企业与港澳台居民签署合同MOBILE_CHECK_APPROVER：使用手机号验证签署方身份PAGING_SEAL：骑缝章BATCH_SIGN：批量签署 */
   ExtendServiceType?: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
 }
 
 declare interface DescribeExtendedServiceAuthInfosResponse {
-  /** 授权服务信息列表 */
+  /** 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。 */
   AuthInfoList?: ExtendAuthInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2325,13 +2327,13 @@ declare interface GetTaskResultApiResponse {
 }
 
 declare interface ModifyApplicationCallbackInfoRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 操作类型：1-新增，2-删除 */
+  /** 操作类型：1-新增2-删除 */
   OperateType: number;
-  /** 回调信息 */
+  /** 企业应用回调信息 */
   CallbackInfo: CallbackInfo;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
@@ -2387,20 +2389,20 @@ declare interface ModifyIntegrationRoleResponse {
 }
 
 declare interface StartFlowRequest {
-  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 签署流程编号，由CreateFlow接口返回 */
+  /** 合同流程ID，为32位字符串。此处需要传入[创建签署流程接口](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)得到的FlowId。 */
   FlowId: string;
   /** 客户端Token，保持接口幂等性,最大长度64个字符 */
   ClientToken?: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
+  /** 若在创建签署流程时指定了关注人CcInfos，此参数可设定向关注人发送短信通知的类型：0 - 合同发起时通知（默认）1 - 签署完成后通知 */
   CcNotifyType?: number;
 }
 
 declare interface StartFlowResponse {
-  /** 发起成功之后返回状态，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务 */
+  /** 发起成功后返回的状态，根据合同流程的不同，返回不同状态：START - 发起成功REVIEW - 提交审核成功EXECUTING - 已提交发起任务 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2545,7 +2547,7 @@ declare interface Ess {
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
-  /** 获取小程序签署链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
+  /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
   /** 创建企业电子印章 {@link CreateSealRequest} {@link CreateSealResponse} */
   CreateSeal(data: CreateSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealResponse>;

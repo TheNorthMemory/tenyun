@@ -96,6 +96,8 @@ declare interface DocumentInfo {
   Height?: number | null;
   /** 封面，仅转码的课件会生成封面 */
   Cover?: string | null;
+  /** 课件预览地址 */
+  Preview?: string | null;
 }
 
 /** 房间事件对应的信息。 */
@@ -272,6 +274,8 @@ declare interface RoomInfo {
   IsGradingRequiredPostClass?: number;
   /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
   RoomType?: number;
+  /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
+  EndDelayTime?: number;
 }
 
 /** 房间列表 */
@@ -310,6 +314,8 @@ declare interface RoomItem {
   IsGradingRequiredPostClass?: number | null;
   /** 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展） */
   RoomType?: number | null;
+  /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
+  EndDelayTime?: number | null;
 }
 
 /** 场景配置 */
@@ -608,6 +614,8 @@ declare interface CreateRoomRequest {
   IsGradingRequiredPostClass?: number;
   /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
   RoomType?: number;
+  /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
+  EndDelayTime?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -1009,6 +1017,8 @@ declare interface DescribeRoomResponse {
   RoomType?: number;
   /** 录制时长 */
   VideoDuration?: number;
+  /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
+  EndDelayTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1314,6 +1324,8 @@ declare interface ModifyRoomRequest {
   RoomType?: number;
   /** 录制模板。仅可修改还未开始的房间。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;
+  /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
+  EndDelayTime?: number;
 }
 
 declare interface ModifyRoomResponse {

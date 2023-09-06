@@ -608,6 +608,8 @@ declare interface KongServicePreview {
   CreatedTime?: string | null;
   /** 是否可编辑 */
   Editable?: boolean | null;
+  /** 请求路径 */
+  Path?: string | null;
 }
 
 /** kong服务路由列表 */

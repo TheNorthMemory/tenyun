@@ -1060,6 +1060,12 @@ declare interface PodInfo {
   IP?: string | null;
   /** pod状态 */
   Status?: string | null;
+  /** pod启动时间 */
+  StartTime?: string | null;
+  /** pod结束时间 */
+  EndTime?: string | null;
+  /** pod资源配置 */
+  ResourceConfigInfo?: ResourceConfigInfo | null;
 }
 
 /** 点信息描述 */
@@ -1427,15 +1433,23 @@ declare interface ServiceLimit {
 /** 计费项内容 */
 declare interface Spec {
   /** 计费项标签 */
-  SpecId: string;
+  SpecId?: string;
   /** 计费项名称 */
-  SpecName: string;
+  SpecName?: string;
   /** 计费项显示名称 */
-  SpecAlias: string;
+  SpecAlias?: string;
   /** 是否售罄 */
-  Available: boolean;
+  Available?: boolean;
   /** 当前资源售罄时，可用的区域有哪些 */
-  AvailableRegion: string[];
+  AvailableRegion?: string[];
+  /** 当前计费项支持的特性 */
+  SpecFeatures?: string[] | null;
+  /** 计费项类型 */
+  SpecType?: string | null;
+  /** GPU类型 */
+  GpuType?: string | null;
+  /** 计费项CategoryId */
+  CategoryId?: string | null;
 }
 
 /** 计费项询价结果 */
@@ -2047,6 +2061,8 @@ declare interface CreateModelServiceRequest {
   ServiceCategory?: string;
   /** 服务的启动命令 */
   Command?: string;
+  /** 是否开启TIONE内网访问外部 */
+  ServiceEIP?: ServiceEIP;
 }
 
 declare interface CreateModelServiceResponse {
@@ -3071,6 +3087,8 @@ declare interface ModifyModelServiceRequest {
   ModelTurboEnable?: boolean;
   /** 服务的启动命令 */
   Command?: string;
+  /** 是否开启TIONE内网访问外部 */
+  ServiceEIP?: ServiceEIP;
 }
 
 declare interface ModifyModelServiceResponse {

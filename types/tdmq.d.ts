@@ -992,6 +992,26 @@ declare interface RocketMQMessageTrack {
   ExceptionDesc: string | null;
 }
 
+/** rocketmq消息日志 */
+declare interface RocketMQMsgLog {
+  /** 消息id */
+  MsgId?: string;
+  /** 消息tag */
+  MsgTag?: string | null;
+  /** 消息key */
+  MsgKey?: string | null;
+  /** 客户端地址 */
+  ProducerAddr?: string;
+  /** 消息发送时间 */
+  ProduceTime?: string;
+  /** pulsar消息id */
+  PulsarMsgId?: string;
+  /** 死信重发次数 */
+  DeadLetterResendTimes?: number | null;
+  /** 死信重发成功次数 */
+  ResendSuccessCount?: number | null;
+}
+
 /** RocketMQ命名空间信息 */
 declare interface RocketMQNamespace {
   /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
@@ -1216,6 +1236,14 @@ declare interface TopicRecord {
   TopicName: string;
 }
 
+/** 消息轨迹结果 */
+declare interface TraceResult {
+  /** 阶段 */
+  Stage: string;
+  /** 内容详情 */
+  Data: string;
+}
+
 /** vhost使用配额信息 */
 declare interface VirtualHostQuota {
   /** 允许创建最大vhost数 */
@@ -1307,7 +1335,7 @@ declare interface ClearCmqSubscriptionFilterTagsResponse {
 }
 
 declare interface CreateClusterRequest {
-  /** 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过16个字符。 */
+  /** 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。 */
   ClusterName: string;
   /** 用户专享物理集群ID，如果不传，则默认在公共集群上创建用户集群资源。 */
   BindClusterId?: number;
@@ -1321,7 +1349,7 @@ declare interface CreateClusterRequest {
 
 declare interface CreateClusterResponse {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2614,6 +2642,30 @@ declare interface DescribeRocketMQMsgResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQMsgTraceRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 命名空间 */
+  EnvironmentId: string;
+  /** 主题，rocketmq查询死信时值为groupId */
+  TopicName: string;
+  /** 消息id */
+  MsgId: string;
+  /** 消费组、订阅 */
+  GroupName?: string;
+  /** 查询死信时该值为true */
+  QueryDLQMsg?: boolean;
+}
+
+declare interface DescribeRocketMQMsgTraceResponse {
+  /** [ { "Stage": "produce", "Data": { "ProducerName": "生产者名", "ProduceTime": "消息生产时间", "ProducerAddr": "客户端地址", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "persist", "Data": { "PersistTime": "存储时间", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "consume", "Data": { "TotalCount": 2, "RocketMqConsumeLogs": [ { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" }, { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" } ] } }] */
+  Result?: TraceResult[];
+  /** 消息轨迹页展示的topic名称 */
+  ShowTopicName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQNamespacesRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2630,6 +2682,44 @@ declare interface DescribeRocketMQNamespacesResponse {
   Namespaces: RocketMQNamespace[];
   /** 总条数 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRocketMQTopicMsgsRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 命名空间 */
+  EnvironmentId: string;
+  /** 主题名称，查询死信时为groupId */
+  TopicName: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 消息 ID */
+  MsgId?: string;
+  /** 消息 key */
+  MsgKey?: string;
+  /** 查询偏移 */
+  Offset?: number;
+  /** 查询限额 */
+  Limit?: number;
+  /** 标志一次分页事务 */
+  TaskRequestId?: string;
+  /** 死信查询时该值为true，只对Rocketmq有效 */
+  QueryDlqMsg?: boolean;
+  /** 查询最近N条消息 最大不超过1024，默认-1为其他查询条件 */
+  NumOfLatestMsg?: number;
+}
+
+declare interface DescribeRocketMQTopicMsgsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 消息列表 */
+  TopicMsgLogSets?: RocketMQMsgLog[];
+  /** 标志一次分页事务 */
+  TaskRequestId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3479,8 +3569,12 @@ declare interface Tdmq {
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
   /** rocketmq消息详情 {@link DescribeRocketMQMsgRequest} {@link DescribeRocketMQMsgResponse} */
   DescribeRocketMQMsg(data: DescribeRocketMQMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgResponse>;
+  /** 查询RocketMQ消息轨迹 {@link DescribeRocketMQMsgTraceRequest} {@link DescribeRocketMQMsgTraceResponse} */
+  DescribeRocketMQMsgTrace(data: DescribeRocketMQMsgTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgTraceResponse>;
   /** 获取RocketMQ命名空间列表 {@link DescribeRocketMQNamespacesRequest} {@link DescribeRocketMQNamespacesResponse} */
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
+  /** rocketmq 消息查询 {@link DescribeRocketMQTopicMsgsRequest} {@link DescribeRocketMQTopicMsgsResponse} */
+  DescribeRocketMQTopicMsgs(data: DescribeRocketMQTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicMsgsResponse>;
   /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */
   DescribeRocketMQTopics(data: DescribeRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicsResponse>;
   /** 获取单个RocketMQ专享集群信息 {@link DescribeRocketMQVipInstanceDetailRequest} {@link DescribeRocketMQVipInstanceDetailResponse} */

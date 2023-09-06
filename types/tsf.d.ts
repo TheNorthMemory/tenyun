@@ -4414,7 +4414,7 @@ declare interface DeployGroupRequest {
   DeployBetaEnable?: boolean;
   /** 滚动发布每个批次参与的实例比率 */
   DeployBatch?: number[];
-  /** 滚动发布的执行方式 */
+  /** 滚动发布的执行方式，auto表示自动， manual表示手动 */
   DeployExeMode?: string;
   /** 滚动发布每个批次的时间间隔 */
   DeployWaitTime?: number;
@@ -4426,7 +4426,7 @@ declare interface DeployGroupRequest {
   IncrementalDeployment?: boolean;
   /** JDK名称: konaJDK或openJDK */
   JdkName?: string;
-  /** JDK版本: 8或11 (openJDK只支持8) */
+  /** konaJDK版本：8、11和17openJDK版本：8、17 */
   JdkVersion?: string;
   /** 部署agent的类型、版本 */
   AgentProfileList?: AgentProfile[];
@@ -7195,7 +7195,7 @@ declare interface UpdateGatewayApiResponse {
 declare interface UpdateHealthCheckSettingsRequest {
   /** 部署组ID */
   GroupId: string;
-  /** 是否能使健康检查 */
+  /** 是否开启健康检查 */
   EnableHealthCheck?: boolean;
   /** 健康检查配置 */
   HealthCheckSettings?: HealthCheckSettings;

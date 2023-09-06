@@ -692,32 +692,32 @@ declare interface SignUrl {
 
 /** 签署链接内容 */
 declare interface SignUrlInfo {
-  /** 签署链接，过期时间为30天 */
-  SignUrl: string | null;
+  /** 签署链接，过期时间为90天 */
+  SignUrl?: string | null;
   /** 合同过期时间戳，单位秒 */
-  Deadline: number | null;
+  Deadline?: number | null;
   /** 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选 */
-  SignOrder: number | null;
+  SignOrder?: number | null;
   /** 签署人编号 */
-  SignId: string | null;
+  SignId?: string | null;
   /** 自定义用户编号 */
   CustomUserId?: string | null;
   /** 用户姓名 */
-  Name: string | null;
+  Name?: string | null;
   /** 用户手机号码 */
-  Mobile: string | null;
+  Mobile?: string | null;
   /** 签署参与者机构名字 */
-  OrganizationName: string | null;
+  OrganizationName?: string | null;
   /** 参与者类型:ORGANIZATION 企业经办人PERSON 自然人 */
-  ApproverType: string | null;
+  ApproverType?: string | null;
   /** 经办人身份证号 */
-  IdCardNumber: string | null;
+  IdCardNumber?: string | null;
   /** 签署链接对应流程Id */
-  FlowId: string | null;
+  FlowId?: string | null;
   /** 企业经办人 用户在渠道的编号 */
-  OpenId: string | null;
+  OpenId?: string | null;
   /** 合同组签署链接对应的合同组id */
-  FlowGroupId: string | null;
+  FlowGroupId?: string | null;
 }
 
 /** 企业员工信息 */
@@ -1717,19 +1717,19 @@ declare interface CreateSealByImageResponse {
 declare interface CreateSignUrlsRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 签署流程编号数组，最多支持100个。(备注：该参数和合同组编号必须二选一) */
+  /** 流程(合同)的编号列表，最多支持100个。(备注：该参数和合同组编号必须二选一) */
   FlowIds?: string[];
   /** 合同组编号(备注：该参数和合同(流程)编号数组必须二选一) */
   FlowGroupId?: string;
-  /** 签署链接类型：“WEIXINAPP”-短链直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；"LONGURL2WEIXINAPP"-长链接跳转小程序；默认“WEIXINAPP”类型，即跳转至小程序； */
+  /** 签署链接类型,可以设置的参数如下- WEIXINAPP:短链直接跳小程序 (默认类型)- CHANNEL:跳转H5页面- APP:第三方APP或小程序跳转电子签小程序- LONGURL2WEIXINAPP:长链接跳转小程序 */
   Endpoint?: string;
-  /** 签署链接生成类型，默认是 "ALL"；"ALL"：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接；"CHANNEL"：第三方平台子客企业企业；"NOT_CHANNEL"：非第三方平台子客企业企业；"PERSON"：个人；"FOLLOWER"：关注方，目前是合同抄送方； */
+  /** 签署链接生成类型，可以选择的类型如下- ALL：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接(默认类型)- CHANNEL：第三方平台子客企业企业- NOT_CHANNEL：非第三方平台子客企业企业- PERSON：个人- FOLLOWER：关注方，目前是合同抄送方 */
   GenerateType?: string;
   /** 非第三方平台子客企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填 */
   OrganizationName?: string;
-  /** 参与人姓名，GenerateType为"PERSON"时必填 */
+  /** 参与人姓名GenerateType为"PERSON"(即个人签署方)时必填 */
   Name?: string;
-  /** 参与人手机号；GenerateType为"PERSON"或"FOLLOWER"时必填 */
+  /** 参与人手机号GenerateType为"PERSON"或"FOLLOWER"时必填 */
   Mobile?: string;
   /** 第三方平台子客企业的企业OpenId，GenerateType为"CHANNEL"时必填 */
   OrganizationOpenId?: string;
@@ -1741,7 +1741,7 @@ declare interface CreateSignUrlsRequest {
   JumpUrl?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
-  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下0:合同签署页面更多操作按钮1:合同签署页面更多操作的拒绝签署按钮2:合同签署页面更多操作的转他人处理按钮3:签署成功页的查看详情按钮 */
+  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下- 0:合同签署页面更多操作按钮- 1:合同签署页面更多操作的拒绝签署按钮- 2:合同签署页面更多操作的转他人处理按钮- 3:签署成功页的查看详情按钮 */
   Hides?: number[];
 }
 

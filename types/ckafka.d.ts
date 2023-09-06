@@ -2404,8 +2404,8 @@ declare interface BatchCreateAclRequest {
 }
 
 declare interface BatchCreateAclResponse {
-  /** 状态码 */
-  Result: number;
+  /** 状态码：0-修改成功，否则修改失败 */
+  Result?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2845,7 +2845,7 @@ declare interface CreateRouteRequest {
   VpcId?: string;
   /** vpc子网id */
   SubnetId?: string;
-  /** 访问类型 */
+  /** 访问类型：0-plaintext；1-sasl_plaintext；2-ssl；3-sasl_ssl */
   AccessType?: number;
   /** 是否需要权限管理 */
   AuthFlag?: number;
@@ -2859,7 +2859,7 @@ declare interface CreateRouteRequest {
 
 declare interface CreateRouteResponse {
   /** 返回结果 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

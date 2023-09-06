@@ -108,6 +108,16 @@ declare interface ConfigSubmitContext {
   FilePath?: string;
 }
 
+/** 数据库权限信息 */
+declare interface DatabasePrivilegeInfo {
+  /** 数据库名称 */
+  DatabaseName: string;
+  /** //库表权限，SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE、CREATE_TABLE、DROP_DATABASE */
+  DatabasePrivileges?: string[] | null;
+  /** // 库下面的表权限 */
+  TablePrivilegeList?: TablePrivilegeInfo[] | null;
+}
+
 /** 磁盘规格描述 */
 declare interface DiskSpec {
   /** 磁盘类型，例如“CLOUD_SSD", "LOCAL_SSD"等 */
@@ -382,6 +392,14 @@ declare interface ServiceInfo {
   Name?: string | null;
   /** 服务的版本 */
   Version?: string | null;
+}
+
+/** 表权限 */
+declare interface TablePrivilegeInfo {
+  /** 表名称 */
+  TableName: string;
+  /** 表权限列表 SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE 查询、插入、设置、清空表、删除表 */
+  TablePrivileges: string[];
 }
 
 /** 标签描述 */
@@ -759,6 +777,18 @@ declare interface ModifyInstanceKeyValConfigsResponse {
 }
 
 declare interface ModifyUserNewPrivilegeRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** cluster名称 */
+  Cluster: string;
+  /** 用户名 */
+  UserName: string;
+  /** 是否所有数据库表 */
+  AllDatabase: boolean;
+  /** 全局权限 */
+  GlobalPrivileges?: string[];
+  /** 数据库表权限 */
+  DatabasePrivilegeList?: DatabasePrivilegeInfo[];
 }
 
 declare interface ModifyUserNewPrivilegeResponse {
@@ -904,7 +934,7 @@ declare interface Cdwch {
   /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
   ModifyInstanceKeyValConfigs(data: ModifyInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceKeyValConfigsResponse>;
   /** 新增、修改集群账号cluster权限（新版） {@link ModifyUserNewPrivilegeRequest} {@link ModifyUserNewPrivilegeResponse} */
-  ModifyUserNewPrivilege(data?: ModifyUserNewPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserNewPrivilegeResponse>;
+  ModifyUserNewPrivilege(data: ModifyUserNewPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserNewPrivilegeResponse>;
   /** 开启或者关闭策略 {@link OpenBackUpRequest} {@link OpenBackUpResponse} */
   OpenBackUp(data: OpenBackUpRequest, config?: AxiosRequestConfig): AxiosPromise<OpenBackUpResponse>;
   /** 备份恢复 {@link RecoverBackUpJobRequest} {@link RecoverBackUpJobResponse} */

@@ -811,25 +811,25 @@ declare interface WhoisContactAddress {
 /** Whois信息 */
 declare interface WhoisInfo {
   /** 联系信息 */
-  Contacts: WhoisContact | null;
+  Contacts?: WhoisContact | null;
   /** 域名注册时间 */
-  CreationDate: string | null;
+  CreationDate?: string | null;
   /** 域名到期时间 */
-  ExpirationDate: string | null;
+  ExpirationDate?: string | null;
   /** 是否是在腾讯云注册的域名 */
-  IsQcloud: boolean | null;
-  /** 是否当前操作帐号注册的域名 */
-  IsQcloudOwner: boolean | null;
+  IsQcloud?: boolean | null;
+  /** 是否当前操作账号注册的域名 */
+  IsQcloudOwner?: boolean | null;
   /** 域名配置的NS */
-  NameServers: string[] | null;
+  NameServers?: string[] | null;
   /** Whois原始信息 */
-  Raw: string[] | null;
+  Raw?: string[] | null;
   /** 域名注册商 */
-  Registrar: string[] | null;
+  Registrar?: string[] | null;
   /** 状态 */
-  Status: string[] | null;
+  Status?: string[] | null;
   /** 更新日期 */
-  UpdatedDate: string | null;
+  UpdatedDate?: string | null;
 }
 
 declare interface CheckRecordSnapshotRollbackRequest {

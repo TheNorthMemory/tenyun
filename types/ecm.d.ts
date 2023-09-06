@@ -2139,6 +2139,8 @@ declare interface CreateSubnetRequest {
   EcmRegion: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
   Tags?: Tag[];
+  /** IPv6 CIDR */
+  IPv6CidrBlock?: string;
 }
 
 declare interface CreateSubnetResponse {

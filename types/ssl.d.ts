@@ -16,6 +16,32 @@ declare interface ApiGatewayInstanceDetail {
   Protocol: string;
 }
 
+/** apigateway实例详情 - 异步关联云资源数据结构 */
+declare interface ApiGatewayInstanceList {
+  /** 地域 */
+  Region?: string;
+  /** apigateway实例详情 */
+  InstanceList?: ApiGatewayInstanceDetail[] | null;
+  /** 该地域下apigateway实例总数 */
+  TotalCount?: number;
+}
+
+/** 绑定资源地域结果 */
+declare interface BindResourceRegionResult {
+  /** 地域 */
+  Region?: string | null;
+  /** 关联资源总数 */
+  TotalCount?: number;
+}
+
+/** 绑定资源结果 */
+declare interface BindResourceResult {
+  /** 资源类型：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne） */
+  ResourceType?: string;
+  /** 绑定资源地域结果 */
+  BindResourceRegionResult?: BindResourceRegionResult[];
+}
+
 /** CDN实例详情 */
 declare interface CdnInstanceDetail {
   /** 域名 */
@@ -28,6 +54,14 @@ declare interface CdnInstanceDetail {
   HttpsBillingSwitch?: string;
 }
 
+/** cdn实例详情 - 异步关联云资源数据结构 */
+declare interface CdnInstanceList {
+  /** 该地域下CDN域名总数 */
+  TotalCount?: number;
+  /** cdn域名详情 */
+  InstanceList?: CdnInstanceDetail[] | null;
+}
+
 /** 云资源配置详情 */
 declare interface CertHostingInfo {
   /** 证书ID */
@@ -38,6 +72,14 @@ declare interface CertHostingInfo {
   ResourceType: string | null;
   /** 创建时间 */
   CreateTime: string | null;
+}
+
+/** 证书异步任务ID */
+declare interface CertTaskId {
+  /** 证书ID */
+  CertId?: string;
+  /** 异步任务ID */
+  TaskId?: string;
 }
 
 /** CLB证书详情 */
@@ -158,6 +200,16 @@ declare interface ClbInstanceDetail {
   Listeners: ClbListener[] | null;
 }
 
+/** clb实例详情 - 异步关联云资源数据结构 */
+declare interface ClbInstanceList {
+  /** 地域 */
+  Region?: string;
+  /** clb实例详情 */
+  InstanceList?: ClbInstanceDetail[] | null;
+  /** 该地域下Clb实例总数 */
+  TotalCount?: number;
+}
+
 /** CLB实例监听器 */
 declare interface ClbListener {
   /** 监听器ID */
@@ -238,6 +290,14 @@ declare interface DdosInstanceDetail {
   CertId: string | null;
   /** 转发端口 */
   VirtualPort: string;
+}
+
+/** ddos实例详情 - 异步关联云资源数据结构 */
+declare interface DdosInstanceList {
+  /** 该地域下ddos域名总数 */
+  TotalCount?: number;
+  /** ddos实例详情 */
+  InstanceList?: DdosInstanceDetail[] | null;
 }
 
 /** 部署记录详情 */
@@ -350,6 +410,14 @@ declare interface DvAuths {
   DvAuthVerifyType: string | null;
 }
 
+/** 错误异常 */
+declare interface Error {
+  /** 异常错误码 */
+  Code?: string | null;
+  /** 异常错误信息 */
+  Message?: string | null;
+}
+
 /** 过滤参数列表 */
 declare interface Filter {
   /** 过滤参数key */
@@ -378,6 +446,14 @@ declare interface LiveInstanceDetail {
   CertId: string | null;
   /** -1：域名未关联证书。1： 域名https已开启。0： 域名https已关闭。 */
   Status: number;
+}
+
+/** live实例详情 - 异步关联云资源数据结构 */
+declare interface LiveInstanceList {
+  /** 该地域下live实例总数 */
+  TotalCount?: number;
+  /** live实例详情 */
+  InstanceList?: LiveInstanceDetail[] | null;
 }
 
 /** 管理人信息 */
@@ -586,6 +662,94 @@ declare interface SubmittedData {
   VerifyType?: string | null;
 }
 
+/** 异步任务证书关联云资源结果 */
+declare interface SyncTaskBindResourceResult {
+  /** 任务ID */
+  TaskId?: string;
+  /** 关联云资源结果 */
+  BindResourceResult?: BindResourceResult[] | null;
+  /** 关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因 */
+  Status?: number;
+  /** 关联云资源错误信息 */
+  Error?: Error | null;
+  /** 当前结果缓存时间 */
+  CacheTime?: string;
+}
+
+/** TCB访问服务实例 */
+declare interface TCBAccessInstance {
+  /** 域名 */
+  Domain?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 统一域名状态 */
+  UnionStatus?: number | null;
+  /** 是否被抢占, 被抢占表示域名被其他环境绑定了，需要解绑或者重新绑定。 */
+  IsPreempted?: boolean | null;
+  /** icp黑名单封禁状态，0-未封禁，1-封禁 */
+  ICPStatus?: number | null;
+  /** 已绑定证书ID */
+  OldCertificateId?: string | null;
+}
+
+/** TCB访问服务列表 */
+declare interface TCBAccessService {
+  /** 实例列表 */
+  InstanceList?: TCBAccessInstance[] | null;
+  /** 数量 */
+  TotalCount?: number | null;
+}
+
+/** TCB环境 */
+declare interface TCBEnvironment {
+  /** 唯一ID */
+  ID?: string | null;
+  /** 来源 */
+  Source?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 状态 */
+  Status?: string | null;
+}
+
+/** tcb环境实例详情 - 异步关联云资源数据结构 */
+declare interface TCBEnvironments {
+  /** tcb环境 */
+  Environment?: TCBEnvironment | null;
+  /** 访问服务 */
+  AccessService?: TCBAccessService | null;
+  /** 静态托管 */
+  HostService?: TCBHostService | null;
+}
+
+/** TCB静态托管服务实例 */
+declare interface TCBHostInstance {
+  /** 域名 */
+  Domain?: string | null;
+  /** 状态 */
+  Status?: string | null;
+  /** 解析状态 */
+  DNSStatus?: string | null;
+  /** 已绑定证书ID */
+  OldCertificateId?: string | null;
+}
+
+/** TCB静态托管服务列表 */
+declare interface TCBHostService {
+  /** 实例列表 */
+  InstanceList?: TCBHostInstance[] | null;
+  /** 数量 */
+  TotalCount?: number | null;
+}
+
+/** tcb地域实例详情 - 异步关联云资源数据结构 */
+declare interface TCBInstanceList {
+  /** 地域 */
+  Region?: string;
+  /** tcb环境实例详情 */
+  Environments?: TCBEnvironments[] | null;
+}
+
 /** 标签 */
 declare interface Tags {
   /** 标签键 */
@@ -604,6 +768,14 @@ declare interface TeoInstanceDetail {
   ZoneId?: string | null;
   /** 域名状态 */
   Status?: string;
+}
+
+/** edgeone实例详情 - 异步关联云资源数据结构 */
+declare interface TeoInstanceList {
+  /** edgeone实例详情 */
+  InstanceList?: TeoInstanceDetail[] | null;
+  /** edgeone实例总数 */
+  TotalCount?: number;
 }
 
 /** tke ingress实例详情 */
@@ -628,6 +800,16 @@ declare interface TkeInstanceDetail {
   ClusterType?: string;
   /** 集群版本 */
   ClusterVersion?: string;
+}
+
+/** tke实例详情 - 异步关联云资源数据结构 */
+declare interface TkeInstanceList {
+  /** 地域 */
+  Region?: string;
+  /** tke实例详情 */
+  InstanceList?: TkeInstanceDetail[] | null;
+  /** 该地域下tke实例总数 */
+  TotalCount?: number;
 }
 
 /** tke namespace详情 */
@@ -728,12 +910,40 @@ declare interface UpdateRecordInfo {
   UpdateTime: string;
 }
 
+/** vod实例详情 - 异步关联云资源数据结构 */
+declare interface VODInstanceList {
+  /** vod实例详情 */
+  InstanceList?: VodInstanceDetail[] | null;
+  /** 该地域下vod实例总数 */
+  TotalCount?: number;
+}
+
 /** Vod实例 */
 declare interface VodInstanceDetail {
   /** 域名 */
   Domain: string;
   /** 证书ID */
   CertId: string;
+}
+
+/** waf实例详情 */
+declare interface WafInstanceDetail {
+  /** 域名 */
+  Domain?: string;
+  /** 证书ID */
+  CertId?: string | null;
+  /** 是否保持长连接，1是，0 否 */
+  Keepalive?: number | null;
+}
+
+/** waf实例详情 - 异步关联云资源数据结构 */
+declare interface WafInstanceList {
+  /** 地域 */
+  Region?: string;
+  /** waf实例详情 */
+  InstanceList?: WafInstanceDetail[] | null;
+  /** 该地域下waf实例总数 */
+  TotalCount?: number;
 }
 
 declare interface ApplyCertificateRequest {
@@ -826,6 +1036,20 @@ declare interface CompleteCertificateRequest {
 declare interface CompleteCertificateResponse {
   /** 证书ID */
   CertificateId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCertificateBindResourceSyncTaskRequest {
+  /** 证书ID列表，总数不能超过100 */
+  CertificateIds: string[];
+  /** 是否使用缓存， 1使用缓存，0不使用缓存； 默认为1使用缓存； 若当前证书ID存在半小时已完成的任务， 则使用缓存的情况下， 会读取半小时内离当前时间最近的查询结果 */
+  IsCache: number;
+}
+
+declare interface CreateCertificateBindResourceSyncTaskResponse {
+  /** 证书关联云资源异步任务ID列表 */
+  CertTaskIds?: CertTaskId[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -958,6 +1182,60 @@ declare interface DeployCertificateRecordRollbackRequest {
 declare interface DeployCertificateRecordRollbackResponse {
   /** 回滚部署记录ID */
   DeployRecordId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCertificateBindResourceTaskDetailRequest {
+  /** 任务ID，根据任务ID查询绑定云资源结果 */
+  TaskId: string;
+  /** 每页展示数量， 默认10，最大值100; 分页总数为云资源地域下实例总数， 即第一页会拉群每个云资源的地域下面Limit数量实例 */
+  Limit?: string;
+  /** 当前偏移量 */
+  Offset?: string;
+  /** 查询资源类型的结果详情， 不传则查询所有 */
+  ResourceTypes?: string[];
+  /** 查询地域列表的数据，CLB、TKE、WAF、APIGATEWAY、TCB支持地域查询， 其他资源类型不支持 */
+  Regions?: string[];
+}
+
+declare interface DescribeCertificateBindResourceTaskDetailResponse {
+  /** 关联clb资源详情 */
+  CLB?: ClbInstanceList[] | null;
+  /** 关联cdn资源详情 */
+  CDN?: CdnInstanceList[] | null;
+  /** 关联waf资源详情 */
+  WAF?: WafInstanceList[] | null;
+  /** 关联ddos资源详情 */
+  DDOS?: DdosInstanceList[] | null;
+  /** 关联live资源详情 */
+  LIVE?: LiveInstanceList[] | null;
+  /** 关联vod资源详情 */
+  VOD?: VODInstanceList[] | null;
+  /** 关联tke资源详情 */
+  TKE?: TkeInstanceList[] | null;
+  /** 关联apigateway资源详情 */
+  APIGATEWAY?: ApiGatewayInstanceList[] | null;
+  /** 关联tcb资源详情 */
+  TCB?: TCBInstanceList[] | null;
+  /** 关联teo资源详情 */
+  TEO?: TeoInstanceList[] | null;
+  /** 关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因 */
+  Status?: number;
+  /** 当前结果缓存时间 */
+  CacheTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCertificateBindResourceTaskResultRequest {
+  /** 任务ID，根据任务ID查询绑定云资源结果， 最大支持100个 */
+  TaskIds: string[];
+}
+
+declare interface DescribeCertificateBindResourceTaskResultResponse {
+  /** 异步任务绑定关联云资源结果列表 */
+  SyncTaskBindResourceResult?: SyncTaskBindResourceResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2013,6 +2291,8 @@ declare interface Ssl {
   CompleteCertificate(data: CompleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteCertificateResponse>;
   /** 创建付费证书 {@link CreateCertificateRequest} {@link CreateCertificateResponse} */
   CreateCertificate(data: CreateCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateResponse>;
+  /** 创建证书关联云资源异步任务 {@link CreateCertificateBindResourceSyncTaskRequest} {@link CreateCertificateBindResourceSyncTaskResponse} */
+  CreateCertificateBindResourceSyncTask(data: CreateCertificateBindResourceSyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateBindResourceSyncTaskResponse>;
   /** 使用权益点创建证书 {@link CreateCertificateByPackageRequest} {@link CreateCertificateByPackageResponse} */
   CreateCertificateByPackage(data: CreateCertificateByPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateByPackageResponse>;
   /** 删除证书 {@link DeleteCertificateRequest} {@link DeleteCertificateResponse} */
@@ -2027,6 +2307,10 @@ declare interface Ssl {
   DeployCertificateRecordRollback(data?: DeployCertificateRecordRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeployCertificateRecordRollbackResponse>;
   /** 获取证书信息 {@link DescribeCertificateRequest} {@link DescribeCertificateResponse} */
   DescribeCertificate(data: DescribeCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateResponse>;
+  /** 查询证书关联云资源任务结果 - 返回关联详情 {@link DescribeCertificateBindResourceTaskDetailRequest} {@link DescribeCertificateBindResourceTaskDetailResponse} */
+  DescribeCertificateBindResourceTaskDetail(data: DescribeCertificateBindResourceTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateBindResourceTaskDetailResponse>;
+  /** 查询证书关联云资源任务结果 - 仅返回总数 {@link DescribeCertificateBindResourceTaskResultRequest} {@link DescribeCertificateBindResourceTaskResultResponse} */
+  DescribeCertificateBindResourceTaskResult(data: DescribeCertificateBindResourceTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateBindResourceTaskResultResponse>;
   /** 获取证书详情 {@link DescribeCertificateDetailRequest} {@link DescribeCertificateDetailResponse} */
   DescribeCertificateDetail(data: DescribeCertificateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateDetailResponse>;
   /** 获取证书操作日志 {@link DescribeCertificateOperateLogsRequest} {@link DescribeCertificateOperateLogsResponse} */

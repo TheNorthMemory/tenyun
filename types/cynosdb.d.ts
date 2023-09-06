@@ -1545,7 +1545,7 @@ declare interface AddInstancesRequest {
   Cpu: number;
   /** 内存，单位为GB */
   Memory: number;
-  /** 新增只读实例数，取值范围为[0,4] */
+  /** 新增只读实例数，取值范围为(0,15] */
   ReadOnlyCount: number;
   /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。当前版本已废弃。 */
   InstanceGrpId?: string;
@@ -1817,7 +1817,7 @@ declare interface CreateClustersRequest {
   TimeSpan?: number;
   /** 包年包月购买时长单位，['s','d','m','y'] */
   TimeUnit?: string;
-  /** 包年包月购买是否自动续费，默认为0 */
+  /** 包年包月购买是否自动续费，默认为0。0标识默认续费方式，1表示自动续费，2表示手不自动续费。 */
   AutoRenewFlag?: number;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher?: number;
@@ -2114,7 +2114,7 @@ declare interface DescribeAccountPrivilegesRequest {
 }
 
 declare interface DescribeAccountPrivilegesResponse {
-  /** 权限列表，示例值为：["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"] */
+  /** 权限列表，示例值为：["","select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"] */
   Privileges?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2869,9 +2869,9 @@ declare interface DescribeResourcePackageSaleSpecResponse {
 }
 
 declare interface DescribeResourcesByDealNameRequest {
-  /** 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功） */
+  /** 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。DealName与DealNames至少应输入一项，两者都传时以DealName为准。 */
   DealName?: string;
-  /** 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功） */
+  /** 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。DealName与DealNames至少应输入一项，两者都传时以DealName为准。 */
   DealNames?: string[];
 }
 
@@ -3317,7 +3317,7 @@ declare interface ModifyClusterParamRequest {
 
 declare interface ModifyClusterParamResponse {
   /** 异步请求Id，用于查询结果 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3415,7 +3415,7 @@ declare interface ModifyInstanceParamRequest {
   ClusterId: string;
   /** 实例ID */
   InstanceIds?: string[];
-  /** 集群参数列表，例如 [{ "CurrentValue":"2", "ParamName":"innodb_stats_transient_sample_pages"}] */
+  /** 集群参数列表，例如 [{ "CurrentValue":"2", "ParamName":"auto_increment_increment"}] */
   ClusterParamList?: ModifyParamItem[];
   /** 实例参数列表，例如[{ "CurrentValue":"2", "ParamName":"innodb_stats_transient_sample_pages"}] */
   InstanceParamList?: ModifyParamItem[];

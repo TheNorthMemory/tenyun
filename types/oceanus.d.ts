@@ -600,16 +600,18 @@ declare interface RunJobDescription {
   JobId: string;
   /** 运行类型，1：启动，2：恢复 */
   RunType: number;
-  /** 兼容旧版 SQL 类型作业启动参数：指定数据源消费起始时间点（例:T1557394288000） */
+  /** 兼容旧版 SQL 类型作业启动参数：指定数据源消费起始时间点（建议传值）保证参数为 LATEST、EARLIEST、T+Timestamp （例:T1557394288000） */
   StartMode?: string;
-  /** 当前作业的某个版本 */
+  /** 当前作业的某个版本（不传默认为非草稿的作业版本） */
   JobConfigVersion?: number;
   /** Savepoint路径 */
   SavepointPath?: string;
   /** Savepoint的Id */
   SavepointId?: string;
   /** 使用历史版本系统依赖 */
-  UseOldSystemConnector?: boolean | null;
+  UseOldSystemConnector?: boolean;
+  /** 自定义时间戳 */
+  CustomTimestamp?: number;
 }
 
 /** 描述Savepoint信息 */

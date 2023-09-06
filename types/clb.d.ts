@@ -245,51 +245,53 @@ declare interface ClassicalTargetInfo {
 /** 集群的详细信息，如集群ID，名称，类型，可用区，标签等 */
 declare interface Cluster {
   /** 集群唯一ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群类型，如TGW，STGW，VPCGW */
-  ClusterType: string;
+  ClusterType?: string;
   /** 集群标签，只有STGW集群有标签 */
-  ClusterTag: string | null;
+  ClusterTag?: string | null;
   /** 集群所在可用区，如ap-guangzhou-1 */
-  Zone: string;
+  Zone?: string;
   /** 集群网络类型，如Public，Private */
-  Network: string;
+  Network?: string;
   /** 最大连接数 */
-  MaxConn: number | null;
+  MaxConn?: number | null;
   /** 最大入带宽 */
-  MaxInFlow: number | null;
+  MaxInFlow?: number | null;
   /** 最大入包量 */
-  MaxInPkg: number | null;
+  MaxInPkg?: number | null;
   /** 最大出带宽 */
-  MaxOutFlow: number | null;
+  MaxOutFlow?: number | null;
   /** 最大出包量 */
-  MaxOutPkg: number | null;
+  MaxOutPkg?: number | null;
   /** 最大新建连接数 */
-  MaxNewConn: number | null;
+  MaxNewConn?: number | null;
   /** http最大新建连接数 */
-  HTTPMaxNewConn: number | null;
+  HTTPMaxNewConn?: number | null;
   /** https最大新建连接数 */
-  HTTPSMaxNewConn: number | null;
+  HTTPSMaxNewConn?: number | null;
   /** http QPS */
-  HTTPQps: number | null;
+  HTTPQps?: number | null;
   /** https QPS */
-  HTTPSQps: number | null;
+  HTTPSQps?: number | null;
   /** 集群内资源总数目 */
-  ResourceCount: number;
+  ResourceCount?: number;
   /** 集群内空闲资源数目 */
-  IdleResourceCount: number | null;
+  IdleResourceCount?: number | null;
   /** 集群内转发机的数目 */
-  LoadBalanceDirectorCount: number | null;
+  LoadBalanceDirectorCount?: number | null;
   /** 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。 */
-  Isp: string | null;
+  Isp?: string | null;
   /** 集群所在的可用区 */
-  ClustersZone: ClustersZone | null;
+  ClustersZone?: ClustersZone | null;
   /** 集群版本 */
-  ClustersVersion: string | null;
+  ClustersVersion?: string | null;
   /** 集群容灾类型，如SINGLE-ZONE，DISASTER-RECOVERY，MUTUAL-DISASTER-RECOVERY */
-  DisasterRecoveryType: string | null;
+  DisasterRecoveryType?: string | null;
+  /** 网络出口 */
+  Egress?: string | null;
 }
 
 /** 独占集群信息 */
@@ -726,86 +728,90 @@ declare interface LoadBalancer {
   AttributeFlags?: string[] | null;
   /** 负载均衡实例的域名。 */
   LoadBalancerDomain?: string | null;
+  /** 网络出口 */
+  Egress?: string | null;
 }
 
 /** 负载均衡详细信息 */
 declare interface LoadBalancerDetail {
   /** 负载均衡实例 ID。 */
-  LoadBalancerId: string;
+  LoadBalancerId?: string;
   /** 负载均衡实例的名称。 */
-  LoadBalancerName: string;
+  LoadBalancerName?: string;
   /** 负载均衡实例的网络类型：Public：公网属性， Private：内网属性。 */
-  LoadBalancerType: string | null;
+  LoadBalancerType?: string | null;
   /** 负载均衡实例的状态，包括0：创建中，1：正常运行。 */
-  Status: number | null;
+  Status?: number | null;
   /** 负载均衡实例的 VIP 。 */
-  Address: string | null;
+  Address?: string | null;
   /** 负载均衡实例 VIP 的IPv6地址。 */
-  AddressIPv6: string | null;
+  AddressIPv6?: string | null;
   /** 负载均衡实例IP版本，IPv4 | IPv6。 */
-  AddressIPVersion: string | null;
+  AddressIPVersion?: string | null;
   /** 负载均衡实例IPv6地址类型，IPv6Nat64 | IPv6FullChain。 */
-  IPv6Mode: string | null;
+  IPv6Mode?: string | null;
   /** 负载均衡实例所在可用区。 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 负载均衡实例IP地址所属的ISP。 */
-  AddressIsp: string | null;
+  AddressIsp?: string | null;
   /** 负载均衡实例所属私有网络的 ID。 */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 负载均衡实例所属的项目 ID， 0 表示默认项目。 */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 负载均衡实例的创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 负载均衡实例的计费类型。 */
-  ChargeType: string | null;
+  ChargeType?: string | null;
   /** 负载均衡实例的网络属性。 */
-  NetworkAttributes: InternetAccessible | null;
+  NetworkAttributes?: InternetAccessible | null;
   /** 负载均衡实例的预付费相关属性。 */
-  PrepaidAttributes: LBChargePrepaid | null;
+  PrepaidAttributes?: LBChargePrepaid | null;
   /** 暂做保留，一般用户无需关注。 */
-  ExtraInfo: ExtraInfo | null;
+  ExtraInfo?: ExtraInfo | null;
   /** 负载均衡维度的个性化配置ID，多个配置用逗号隔开。 */
-  ConfigId: string | null;
+  ConfigId?: string | null;
   /** 负载均衡实例的标签信息。 */
-  Tags: TagInfo[] | null;
+  Tags?: TagInfo[] | null;
   /** 负载均衡监听器 ID。 */
-  ListenerId: string | null;
+  ListenerId?: string | null;
   /** 监听器协议。 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 监听器端口。 */
-  Port: number | null;
+  Port?: number | null;
   /** 转发规则的 ID。 */
-  LocationId: string | null;
+  LocationId?: string | null;
   /** 转发规则的域名。 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 转发规则的路径。 */
-  Url: string | null;
+  Url?: string | null;
   /** 后端目标ID。 */
-  TargetId: string | null;
+  TargetId?: string | null;
   /** 后端目标的IP地址。 */
-  TargetAddress: string | null;
+  TargetAddress?: string | null;
   /** 后端目标监听端口。 */
-  TargetPort: number | null;
+  TargetPort?: number | null;
   /** 后端目标转发权重。 */
-  TargetWeight: number | null;
+  TargetWeight?: number | null;
   /** 0：表示未被隔离，1：表示被隔离。 */
-  Isolation: number | null;
+  Isolation?: number | null;
   /** 负载均衡绑定的安全组列表。 */
-  SecurityGroup: string[] | null;
+  SecurityGroup?: string[] | null;
   /** 负载均衡安全组上移特性是否开启标识。 */
-  LoadBalancerPassToTarget: number | null;
+  LoadBalancerPassToTarget?: number | null;
   /** 后端目标健康状态。 */
-  TargetHealth: string | null;
+  TargetHealth?: string | null;
   /** 转发规则的域名列表。 */
-  Domains: string | null;
+  Domains?: string | null;
   /** 多可用区负载均衡实例所选备区 */
-  SlaveZone: string[] | null;
+  SlaveZone?: string[] | null;
   /** 内网负载均衡实例所在可用区，由白名单CLB_Internal_Zone控制 */
-  Zones: string[] | null;
+  Zones?: string[] | null;
   /** 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）。 */
-  SniSwitch: number | null;
+  SniSwitch?: number | null;
   /** 负载均衡实例的域名。 */
   LoadBalancerDomain?: string | null;
+  /** 网络出口 */
+  Egress?: string | null;
 }
 
 /** 负载均衡实例的健康检查状态 */
@@ -1203,21 +1209,23 @@ declare interface ZoneInfo {
 /** 可用区资源列表 */
 declare interface ZoneResource {
   /** 主可用区，如"ap-guangzhou-1"。 */
-  MasterZone: string;
+  MasterZone?: string;
   /** 资源列表。 */
-  ResourceSet: Resource[] | null;
+  ResourceSet?: Resource[] | null;
   /** 备可用区，如"ap-guangzhou-2"，单可用区时，备可用区为null。 */
-  SlaveZone: string | null;
+  SlaveZone?: string | null;
   /** IP版本，如IPv4，IPv6，IPv6_Nat。 */
-  IPVersion: string;
+  IPVersion?: string;
   /** 可用区所属地域，如：ap-guangzhou */
-  ZoneRegion: string;
+  ZoneRegion?: string;
   /** 可用区是否是LocalZone可用区，如：false */
-  LocalZone: boolean;
+  LocalZone?: boolean;
   /** 可用区资源的类型，SHARED表示共享资源，EXCLUSIVE表示独占资源。 */
-  ZoneResourceType: string;
+  ZoneResourceType?: string;
   /** 可用区是否是EdgeZone可用区，如：false */
-  EdgeZone: boolean;
+  EdgeZone?: boolean;
+  /** 网络出口 */
+  Egress?: string | null;
 }
 
 declare interface AssociateTargetGroupsRequest {

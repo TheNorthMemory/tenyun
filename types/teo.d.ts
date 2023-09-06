@@ -1980,6 +1980,22 @@ declare interface CreateSecurityIPGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateSharedCNAMERequest {
+  /** 共享 CNAME 所属站点的 ID。 */
+  ZoneId: string;
+  /** 共享 CNAME 前缀。请输入合法的域名前缀，例如"test-api"、"test-api.com"，限制输入 50 个字符。共享 CNAME 完整格式为：<自定义前缀>++"share.eo.dnse[0-5].com"。例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.eo.dns2.com示例值：example.com */
+  SharedCNAMEPrefix: string;
+  /** 描述。可输入 1-50 个任意字符。 */
+  Description?: string;
+}
+
+declare interface CreateSharedCNAMEResponse {
+  /** 共享 CNAME。格式为：<自定义前缀>++"share.eo.dnse[0-5].com" */
+  SharedCNAME?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateZoneRequest {
   /** 站点名称。 */
   ZoneName?: string;
@@ -3289,6 +3305,8 @@ declare interface Teo {
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建安全 IP 组 {@link CreateSecurityIPGroupRequest} {@link CreateSecurityIPGroupResponse} */
   CreateSecurityIPGroup(data: CreateSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityIPGroupResponse>;
+  /** 创建共享 CNAME {@link CreateSharedCNAMERequest} {@link CreateSharedCNAMEResponse} */
+  CreateSharedCNAME(data: CreateSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<CreateSharedCNAMEResponse>;
   /** 创建站点 {@link CreateZoneRequest} {@link CreateZoneResponse} */
   CreateZone(data?: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
   /** 批量删除加速域名 {@link DeleteAccelerationDomainsRequest} {@link DeleteAccelerationDomainsResponse} */
