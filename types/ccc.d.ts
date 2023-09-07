@@ -464,6 +464,14 @@ declare interface StaffInfo {
   LastModifyTimestamp: number | null;
 }
 
+/** 座席绑定技能组列表 */
+declare interface StaffSkillGroupList {
+  /** 技能组ID */
+  SkillGroupId: number;
+  /** 座席在技能组中的优先级（1为最高，5最低，默认3） */
+  Priority?: number;
+}
+
 /** 坐席状态补充信息 */
 declare interface StaffStatusExtra {
   /** im - 文本 | tel - 电话 | all - 全媒体 */
@@ -605,10 +613,12 @@ declare interface BindNumberCallOutSkillGroupResponse {
 declare interface BindStaffSkillGroupListRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
-  /** 坐席邮箱 */
+  /** 座席邮箱 */
   StaffEmail: string;
   /** 绑定技能组列表 */
-  SkillGroupList: number[];
+  SkillGroupList?: number[];
+  /** 绑定技能组列表(必填) */
+  StaffSkillGroupList?: StaffSkillGroupList[];
 }
 
 declare interface BindStaffSkillGroupListResponse {
@@ -1371,7 +1381,7 @@ declare interface Ccc {
   (): Versions;
   /** 绑定号码外呼技能组 {@link BindNumberCallOutSkillGroupRequest} {@link BindNumberCallOutSkillGroupResponse} */
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
-  /** 绑定坐席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
+  /** 绑定座席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
   /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;

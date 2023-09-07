@@ -2388,6 +2388,20 @@ declare interface DescribeWafThreatenIntelligenceResponse {
   RequestId?: string;
 }
 
+declare interface FreshAntiFakeUrlRequest {
+  /** 域名 */
+  Domain: string;
+  /** Id */
+  Id: number;
+}
+
+declare interface FreshAntiFakeUrlResponse {
+  /** 结果成功与否 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetAttackDownloadRecordsRequest {
 }
 
@@ -3261,6 +3275,8 @@ declare interface Waf {
   DescribeWafInfo(data: DescribeWafInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafInfoResponse>;
   /** 描述WAF威胁情报封禁模块配置详情 {@link DescribeWafThreatenIntelligenceRequest} {@link DescribeWafThreatenIntelligenceResponse} */
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
+  /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
+  FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
   /** 查询下载攻击日志任务记录列表 {@link GetAttackDownloadRecordsRequest} {@link GetAttackDownloadRecordsResponse} */
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
   /** 攻击日志统计 {@link GetAttackHistogramRequest} {@link GetAttackHistogramResponse} */

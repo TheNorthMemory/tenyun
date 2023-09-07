@@ -1550,6 +1550,8 @@ declare interface Organ {
   Operation?: BlockInfo | null;
   /** 器官在报告图片中的坐标 */
   Coords?: Coord[] | null;
+  /** 峡部厚度 */
+  IsthmusThickness?: Size | null;
 }
 
 /** 其他信息 */
@@ -1658,6 +1660,8 @@ declare interface ParagraphBlock {
   SpecialistExaminationText?: string | null;
   /** 治疗结果 */
   TreatmentResultText?: string | null;
+  /** 月经史 */
+  MenstrualHistoryText?: string | null;
 }
 
 /** 母亲或父亲信息 */
@@ -1979,55 +1983,57 @@ declare interface Report {
 /** 报告基本信息 */
 declare interface ReportInfo {
   /** 医院名称 */
-  Hospital: string | null;
+  Hospital?: string | null;
   /** 科室名称 */
-  DepartmentName: string | null;
+  DepartmentName?: string | null;
   /** 申请时间 */
-  BillingTime: string | null;
+  BillingTime?: string | null;
   /** 报告时间 */
-  ReportTime: string | null;
+  ReportTime?: string | null;
   /** 检查时间 */
-  InspectTime: string | null;
+  InspectTime?: string | null;
   /** 检查号 */
-  CheckNum: string | null;
+  CheckNum?: string | null;
   /** 影像号 */
-  ImageNum: string | null;
+  ImageNum?: string | null;
   /** 放射号 */
-  RadiationNum: string | null;
+  RadiationNum?: string | null;
   /** 检验号 */
-  TestNum: string | null;
+  TestNum?: string | null;
   /** 门诊号 */
-  OutpatientNum: string | null;
+  OutpatientNum?: string | null;
   /** 病理号 */
-  PathologyNum: string | null;
+  PathologyNum?: string | null;
   /** 住院号 */
-  InHospitalNum: string | null;
+  InHospitalNum?: string | null;
   /** 样本号 */
-  SampleNum: string | null;
+  SampleNum?: string | null;
   /** 标本种类 */
-  SampleType: string | null;
+  SampleType?: string | null;
   /** 病历号 */
-  MedicalRecordNum: string | null;
+  MedicalRecordNum?: string | null;
   /** 报告名称 */
-  ReportName: string | null;
+  ReportName?: string | null;
   /** 超声号 */
-  UltraNum: string | null;
+  UltraNum?: string | null;
   /** 临床诊断 */
-  Diagnose: string | null;
+  Diagnose?: string | null;
   /** 检查项目 */
-  CheckItem: string | null;
+  CheckItem?: string | null;
   /** 检查方法 */
-  CheckMethod: string | null;
+  CheckMethod?: string | null;
   /** 诊断时间 */
-  DiagnoseTime: string | null;
+  DiagnoseTime?: string | null;
   /** 体检号 */
-  HealthCheckupNum: string | null;
+  HealthCheckupNum?: string | null;
   /** 其它时间 */
-  OtherTime: string | null;
+  OtherTime?: string | null;
   /** 打印时间 */
-  PrintTime: string | null;
+  PrintTime?: string | null;
   /** 未归类时间 */
-  Times: Time[] | null;
+  Times?: Time[] | null;
+  /** 床号 */
+  BedNo?: string | null;
 }
 
 /** 指定报告类型选用其结构化版本 */
@@ -2566,6 +2572,8 @@ declare interface TuberInfo {
   ImageFeature?: BlockInfo | null;
   /** 在报告图片中的坐标 */
   Coords?: Coord[] | null;
+  /** 峡部厚度 */
+  IsthmusThickness?: Size | null;
 }
 
 /** 免疫接种记录 */
