@@ -200,6 +200,30 @@ declare interface OutputStructParam {
   ValueType: string;
 }
 
+/** 平台事件名称 */
+declare interface PlatformEventDetail {
+  /** 事件名称 */
+  EventName?: string | null;
+  /** 事件类型 */
+  EventType?: string | null;
+}
+
+/** 平台事件匹配规则 */
+declare interface PlatformEventSummary {
+  /** 平台事件名称 */
+  EventName?: string | null;
+  /** 平台事件匹配规则 */
+  EventPattern?: string | null;
+}
+
+/** 平台产品基础信息 */
+declare interface PlatformProduct {
+  /** 平台产品名称 */
+  ProductName?: string;
+  /** 平台产品类型 */
+  ProductType?: string;
+}
+
 /** 用来描述一个ckafka投递目标的重试策略 */
 declare interface RetryPolicy {
   /** 重试间隔 单位:秒 */
@@ -568,6 +592,18 @@ declare interface GetEventBusResponse {
   RequestId?: string;
 }
 
+declare interface GetPlatformEventTemplateRequest {
+  /** 平台产品事件类型 */
+  EventType: string;
+}
+
+declare interface GetPlatformEventTemplateResponse {
+  /** 平台产品事件模板 */
+  EventTemplate?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetRuleRequest {
   /** 事件集ID */
   EventBusId: string;
@@ -654,6 +690,40 @@ declare interface ListEventBusesResponse {
   EventBuses?: EventBus[];
   /** 事件集总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListPlatformEventNamesRequest {
+  /** 平台产品类型 */
+  ProductType: string;
+}
+
+declare interface ListPlatformEventNamesResponse {
+  /** 平台产品列表 */
+  EventNames?: PlatformEventDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListPlatformEventPatternsRequest {
+  /** 平台产品类型 */
+  ProductType: string;
+}
+
+declare interface ListPlatformEventPatternsResponse {
+  /** 平台产品事件匹配规则 */
+  EventPatterns?: PlatformEventSummary[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListPlatformProductsRequest {
+}
+
+declare interface ListPlatformProductsResponse {
+  /** 平台产品列表 */
+  PlatformProducts?: PlatformProduct[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -885,6 +955,8 @@ declare interface Eb {
   DescribeLogTagValue(data: DescribeLogTagValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTagValueResponse>;
   /** 获取事件集详情 {@link GetEventBusRequest} {@link GetEventBusResponse} */
   GetEventBus(data: GetEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<GetEventBusResponse>;
+  /** 获取平台产品事件模板 {@link GetPlatformEventTemplateRequest} {@link GetPlatformEventTemplateResponse} */
+  GetPlatformEventTemplate(data: GetPlatformEventTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<GetPlatformEventTemplateResponse>;
   /** 获取事件规则详情 {@link GetRuleRequest} {@link GetRuleResponse} */
   GetRule(data: GetRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuleResponse>;
   /** 获取转换器详情 {@link GetTransformationRequest} {@link GetTransformationResponse} */
@@ -893,6 +965,12 @@ declare interface Eb {
   ListConnections(data: ListConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListConnectionsResponse>;
   /** 获取事件集列表 {@link ListEventBusesRequest} {@link ListEventBusesResponse} */
   ListEventBuses(data?: ListEventBusesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventBusesResponse>;
+  /** 获取平台产品事件名称 {@link ListPlatformEventNamesRequest} {@link ListPlatformEventNamesResponse} */
+  ListPlatformEventNames(data: ListPlatformEventNamesRequest, config?: AxiosRequestConfig): AxiosPromise<ListPlatformEventNamesResponse>;
+  /** 获取平台产品事件匹配规则 {@link ListPlatformEventPatternsRequest} {@link ListPlatformEventPatternsResponse} */
+  ListPlatformEventPatterns(data: ListPlatformEventPatternsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPlatformEventPatternsResponse>;
+  /** 获取平台产品列表 {@link ListPlatformProductsRequest} {@link ListPlatformProductsResponse} */
+  ListPlatformProducts(data?: ListPlatformProductsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPlatformProductsResponse>;
   /** 获取事件规则列表 {@link ListRulesRequest} {@link ListRulesResponse} */
   ListRules(data: ListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRulesResponse>;
   /** 获取事件目标列表 {@link ListTargetsRequest} {@link ListTargetsResponse} */

@@ -562,6 +562,18 @@ declare interface DescribeBackUpScheduleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackUpTablesRequest {
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DescribeBackUpTablesResponse {
+  /** 可备份表列表 */
+  AvailableTables: BackupTableContent[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCkSqlApisRequest {
   /** 实例id */
   InstanceId: string;
@@ -909,6 +921,8 @@ declare interface Cdwch {
   DescribeBackUpJobDetail(data: DescribeBackUpJobDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpJobDetailResponse>;
   /** 查询备份策略信息 {@link DescribeBackUpScheduleRequest} {@link DescribeBackUpScheduleResponse} */
   DescribeBackUpSchedule(data: DescribeBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpScheduleResponse>;
+  /** 获取可备份表信息 {@link DescribeBackUpTablesRequest} {@link DescribeBackUpTablesResponse} */
+  DescribeBackUpTables(data: DescribeBackUpTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpTablesResponse>;
   /** 查询集群用户相关信息 {@link DescribeCkSqlApisRequest} {@link DescribeCkSqlApisResponse} */
   DescribeCkSqlApis(data: DescribeCkSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkSqlApisResponse>;
   /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */

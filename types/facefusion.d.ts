@@ -373,7 +373,7 @@ declare interface Facefusion {
   DescribeMaterialList(data: V20181201.DescribeMaterialListRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.DescribeMaterialListResponse>;
   /** 人脸融合 {@link V20181201.FaceFusionRequest} {@link V20181201.FaceFusionResponse} */
   FaceFusion(data: V20181201.FaceFusionRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.FaceFusionResponse>;
-  /** 人脸融合活动专用版 {@link V20181201.FaceFusionLiteRequest} {@link V20181201.FaceFusionLiteResponse} */
+  /** @deprecated 人脸融合活动专用版 {@link V20181201.FaceFusionLiteRequest} {@link V20181201.FaceFusionLiteResponse} */
   FaceFusionLite(data: V20181201.FaceFusionLiteRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.FaceFusionLiteResponse>;
   /** 选脸融合 {@link V20181201.FuseFaceRequest} {@link V20181201.FuseFaceResponse} */
   FuseFace(data: V20181201.FuseFaceRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.FuseFaceResponse>;

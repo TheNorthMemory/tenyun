@@ -612,14 +612,6 @@ declare interface ExportAccessInfo {
   CreateTime: string;
 }
 
-/** 失败描述 */
-declare interface FailedInfo {
-  /** 域名 */
-  Domain?: string | null;
-  /** 失败信息 */
-  Message?: string | null;
-}
-
 /** 过滤数组 */
 declare interface FiltersItemNew {
   /** 字段名 */
@@ -1290,16 +1282,6 @@ declare interface AddDomainWhiteRuleResponse {
   RequestId?: string;
 }
 
-declare interface AddSpartaProtectionAutoRequest {
-  /** 域名 */
-  Domain: string;
-}
-
-declare interface AddSpartaProtectionAutoResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface AddSpartaProtectionRequest {
   /** 需要防御的域名 */
   Domain: string;
@@ -1372,18 +1354,6 @@ declare interface AddSpartaProtectionRequest {
 }
 
 declare interface AddSpartaProtectionResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface AddSpartaProtectionsAutoRequest {
-  /** 多域名 */
-  Domain: string;
-}
-
-declare interface AddSpartaProtectionsAutoResponse {
-  /** 失败原因 */
-  FailedInfos?: FailedInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1964,6 +1934,22 @@ declare interface DescribeDomainDetailsSaasRequest {
 declare interface DescribeDomainDetailsSaasResponse {
   /** 域名详情 */
   DomainsPartInfo?: DomainsPartInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDomainVerifyResultRequest {
+  /** 域名 */
+  Domain: string;
+  /** 实例id */
+  InstanceID: string;
+}
+
+declare interface DescribeDomainVerifyResultResponse {
+  /** 结果描述；如果可以添加返回空字符串 */
+  Msg?: string;
+  /** 检验状态：0表示可以添加，大于0为不能添加 */
+  VerifyCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3155,10 +3141,6 @@ declare interface Waf {
   AddDomainWhiteRule(data?: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
   /** 添加SAAS-WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
-  /** 自动添加Saaswaf {@link AddSpartaProtectionAutoRequest} {@link AddSpartaProtectionAutoResponse} */
-  AddSpartaProtectionAuto(data: AddSpartaProtectionAutoRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionAutoResponse>;
-  /** 批量添加域名 {@link AddSpartaProtectionsAutoRequest} {@link AddSpartaProtectionsAutoResponse} */
-  AddSpartaProtectionsAuto(data: AddSpartaProtectionsAutoRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionsAutoResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
   /** 添加防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
@@ -3227,6 +3209,8 @@ declare interface Waf {
   DescribeDomainDetailsClb(data: DescribeDomainDetailsClbRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsClbResponse>;
   /** 查询单个saas域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */
   DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
+  /** 获取添加域名操作的结果 {@link DescribeDomainVerifyResultRequest} {@link DescribeDomainVerifyResultResponse} */
+  DescribeDomainVerifyResult(data: DescribeDomainVerifyResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainVerifyResultResponse>;
   /** 获取域名的规则白名单 {@link DescribeDomainWhiteRulesRequest} {@link DescribeDomainWhiteRulesResponse} */
   DescribeDomainWhiteRules(data: DescribeDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhiteRulesResponse>;
   /** 获取域名列表 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
