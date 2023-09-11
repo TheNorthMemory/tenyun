@@ -1012,6 +1012,20 @@ declare interface StepDetail {
   Name: string;
 }
 
+/** 主备切换日志 */
+declare interface SwitchLog {
+  /** 切换事件ID */
+  EventId?: string | null;
+  /** 切换模式 0-系统自动切换，1-手动切换 */
+  SwitchType?: number | null;
+  /** 切换开始时间 */
+  StartTime?: string | null;
+  /** 切换结束时间 */
+  EndTime?: string | null;
+  /** 机器故障导致自动切换 */
+  Reason?: string | null;
+}
+
 /** TDE透明数据加密配置 */
 declare interface TDEConfigAttribute {
   /** 是否已开通TDE加密，enable-已开通，disable-未开通 */
@@ -2064,6 +2078,30 @@ declare interface DescribeFlowStatusRequest {
 declare interface DescribeFlowStatusResponse {
   /** 流程状态，0：成功，1：失败，2：运行中 */
   Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHASwitchLogRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开始时间(yyyy-MM-dd HH:mm:ss) */
+  StartTime: string;
+  /** 结束时间(yyyy-MM-dd HH:mm:ss) */
+  EndTime: string;
+  /** 切换模式 0-系统自动切换，1-手动切换，不填默认查全部。 */
+  SwitchType?: number;
+  /** 分页，页大小 */
+  Limit?: number;
+  /** 分页,页数 */
+  Offset?: number;
+}
+
+declare interface DescribeHASwitchLogResponse {
+  /** 日志总数量 */
+  TotalCount?: number;
+  /** 主备切换日志 */
+  SwitchLog?: SwitchLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3262,6 +3300,20 @@ declare interface StopMigrationResponse {
   RequestId?: string;
 }
 
+declare interface SwitchCloudInstanceHARequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 切换执行方式，0-立刻执行，1-时间窗内执行，默认取值为0。 */
+  WaitSwitch?: number;
+}
+
+declare interface SwitchCloudInstanceHAResponse {
+  /** 异步任务流程ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateDBInstanceRequest {
   /** 主动销毁的实例ID列表，格式如：[mssql-3l3fgqn7]。与云数据库控制台页面中显示的实例ID相同 */
   InstanceIdSet: string[];
@@ -3393,6 +3445,8 @@ declare interface Sqlserver {
   DescribeDBsNormal(data: DescribeDBsNormalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsNormalResponse>;
   /** 查询流程状态 {@link DescribeFlowStatusRequest} {@link DescribeFlowStatusResponse} */
   DescribeFlowStatus(data: DescribeFlowStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowStatusResponse>;
+  /** 查询主备切换日志 {@link DescribeHASwitchLogRequest} {@link DescribeHASwitchLogResponse} */
+  DescribeHASwitchLog(data: DescribeHASwitchLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHASwitchLogResponse>;
   /** 查询增量备份导入任务 {@link DescribeIncrementalMigrationRequest} {@link DescribeIncrementalMigrationResponse} */
   DescribeIncrementalMigration(data: DescribeIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIncrementalMigrationResponse>;
   /** 根据订单号查询对应的实例ID {@link DescribeInstanceByOrdersRequest} {@link DescribeInstanceByOrdersResponse} */
@@ -3525,6 +3579,8 @@ declare interface Sqlserver {
   StartMigrationCheck(data: StartMigrationCheckRequest, config?: AxiosRequestConfig): AxiosPromise<StartMigrationCheckResponse>;
   /** 中止迁移任务 {@link StopMigrationRequest} {@link StopMigrationResponse} */
   StopMigration(data: StopMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrationResponse>;
+  /** 实例手动主备切换 {@link SwitchCloudInstanceHARequest} {@link SwitchCloudInstanceHAResponse} */
+  SwitchCloudInstanceHA(data: SwitchCloudInstanceHARequest, config?: AxiosRequestConfig): AxiosPromise<SwitchCloudInstanceHAResponse>;
   /** 主动隔离实例 {@link TerminateDBInstanceRequest} {@link TerminateDBInstanceResponse} */
   TerminateDBInstance(data: TerminateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDBInstanceResponse>;
   /** 升级实例 {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */

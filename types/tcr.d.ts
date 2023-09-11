@@ -234,7 +234,7 @@ declare interface PeerReplicationOption {
 declare interface Permission {
   /** 资源路径，目前仅支持Namespace */
   Resource: string | null;
-  /** 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository */
+  /** 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository、tcr:CreateRepository、tcr:CreateHelmChart、tcr:DescribeHelmCharts */
   Actions: string[] | null;
 }
 
@@ -290,6 +290,8 @@ declare interface Registry {
   PayMod: number | null;
   /** 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知 */
   RenewFlag: number | null;
+  /** 是否开启实例删除保护，false表示不开启 */
+  DeletionProtection?: boolean;
 }
 
 /** 实例预付费模式 */
@@ -559,9 +561,9 @@ declare interface ServiceAccount {
 /** 云标签Tag */
 declare interface Tag {
   /** 云标签的key */
-  Key: string;
+  Key: string | null;
   /** 云标签的值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 镜像tag信息 */
@@ -2183,7 +2185,7 @@ declare interface DescribeServiceAccountsRequest {
   RegistryId: string;
   /** 列出所有服务级账号 */
   All?: boolean;
-  /** 是否填充策略 */
+  /** 是否填充权限信息 */
   EmbedPermission?: boolean;
   /** 过滤条件 */
   Filters?: Filter[];
@@ -2196,7 +2198,7 @@ declare interface DescribeServiceAccountsRequest {
 declare interface DescribeServiceAccountsResponse {
   /** 服务级账号列表 */
   ServiceAccounts?: ServiceAccount[] | null;
-  /** 自定义账户数量 */
+  /** 服务级账户数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

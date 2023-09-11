@@ -590,6 +590,44 @@ declare interface NatInstanceInfo {
   UpdateEnable?: number | null;
 }
 
+/** NAT防火墙开关列表数据 */
+declare interface NatSwitchListData {
+  /** 列表ID */
+  Id?: number;
+  /** 子网ID */
+  SubnetId?: string | null;
+  /** 子网名称 */
+  SubnetName?: string | null;
+  /** IPv4 CIDR */
+  SubnetCidr?: string | null;
+  /** 关联路由ID */
+  RouteId?: string | null;
+  /** 关联路由名称 */
+  RouteName?: string | null;
+  /** 云服务器个数 */
+  CvmNum?: number | null;
+  /** 所属VPC ID */
+  VpcId?: string | null;
+  /** 所属VPC名称 */
+  VpcName?: string | null;
+  /** 是否生效 */
+  Enable?: number | null;
+  /** 开关状态 */
+  Status?: number | null;
+  /** NAT网关ID */
+  NatId?: string | null;
+  /** NAT网关名称 */
+  NatName?: string | null;
+  /** NAT防火墙实例ID */
+  NatInsId?: string | null;
+  /** NAT防火墙实例名称 */
+  NatInsName?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 开关是否异常,0:正常,1:异常 */
+  Abnormal?: number | null;
+}
+
 /** 网络实例信息 */
 declare interface NetInstancesInfo {
   /** 网络实例ID */
@@ -920,6 +958,26 @@ declare interface TLogInfo {
   BanNum: number;
   /** 暴力破解 */
   BruteForceNum: number;
+}
+
+/** 地址模版列表数据 */
+declare interface TemplateListInfo {
+  /** 模版ID */
+  Uuid: string | null;
+  /** 模版名称 */
+  Name: string | null;
+  /** 描述 */
+  Detail: string | null;
+  /** IP模版 */
+  IpString: string | null;
+  /** 插入时间 */
+  InsertTime: string | null;
+  /** 修改时间 */
+  UpdateTime: string | null;
+  /** 模版类型 */
+  Type: number | null;
+  /** 关联规则条数 */
+  RulesNum: number | null;
 }
 
 /** 未处置事件详情 */
@@ -1624,6 +1682,46 @@ declare interface DescribeAclRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAddressTemplateListRequest {
+  /** 偏移量，分页用 */
+  Offset?: number;
+  /** 条数，分页用 */
+  Limit?: number;
+  /** 排序字段，取值 'UpdateTime' | 'RulesNum' */
+  By?: string;
+  /** 排序，取值 'asc'|'desc' */
+  Order?: string;
+  /** 搜索值 */
+  SearchValue?: string;
+  /** 检索地址模板唯一id */
+  Uuid?: string;
+}
+
+declare interface DescribeAddressTemplateListResponse {
+  /** 模板总数 */
+  Total?: number;
+  /** 模板列表数据 */
+  Data?: TemplateListInfo[];
+  /** 模板名称列表 */
+  NameList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAssetSyncRequest {
+}
+
+declare interface DescribeAssetSyncResponse {
+  /** 返回状态1 更新中2 更新完成3 更新失败4 更新失败 */
+  Status?: number;
+  /** success 成功其他失败 */
+  ReturnMsg?: string;
+  /** 0 成功非0 失败 */
+  ReturnCode?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAssociatedInstanceListRequest {
   /** 列表偏移量 */
   Offset: number;
@@ -1872,6 +1970,18 @@ declare interface DescribeFwGroupInstanceInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFwSyncStatusRequest {
+  /** 查询的同步状态类型：Route,同步路由状态 */
+  SyncType?: string;
+}
+
+declare interface DescribeFwSyncStatusResponse {
+  /** 同步状态：1，同步中；0，同步完成 */
+  SyncStatus?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGuideScanInfoRequest {
 }
 
@@ -2028,6 +2138,34 @@ declare interface DescribeNatFwVpcDnsLstResponse {
   ReturnMsg: string | null;
   /** 开关总条数 */
   Total: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNatSwitchListRequest {
+  /** 偏移量，分页用 */
+  Offset: number;
+  /** 条数，分页用 */
+  Limit: number;
+  /** 搜索值 */
+  SearchValue?: string;
+  /** 开关，1打开，0关闭 */
+  Status?: number;
+  /** 筛选NAT防火墙子网开关所属VPC */
+  VpcId?: string;
+  /** 筛选NAT防火墙子网开关所属NAT网关 */
+  NatId?: string;
+  /** 筛选NAT防火墙子网开关所属NAT防火墙实例 */
+  NatInsId?: string;
+  /** 筛选NAT防火墙子网开关所属地域 */
+  Area?: string;
+}
+
+declare interface DescribeNatSwitchListResponse {
+  /** 总数 */
+  Total?: number;
+  /** NAT边界防火墙开关列表数据 */
+  Data?: NatSwitchListData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2354,6 +2492,28 @@ declare interface ModifyAclRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAddressTemplateRequest {
+  /** 地址模板唯一Id */
+  Uuid: string;
+  /** 模板名称 */
+  Name: string;
+  /** 模板描述 */
+  Detail: string;
+  /** Type为1，ip模板eg：1.1.1.1,2.2.2.2；Type为5，域名模板eg：www.qq.com,www.tencent.com */
+  IpString: string;
+  /** 1 ip模板5 域名模板 */
+  Type: number;
+}
+
+declare interface ModifyAddressTemplateResponse {
+  /** 创建结果,0成功 */
+  Status?: number;
+  /** 唯一Id */
+  Uuid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAllPublicIPSwitchStatusRequest {
   /** 状态，0：关闭，1：开启 */
   Status: number;
@@ -2422,6 +2582,20 @@ declare interface ModifyAssetScanResponse {
   ReturnCode: number | null;
   /** 状态值 0：成功，1 执行扫描中,其他：失败 */
   Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAssetSyncRequest {
+}
+
+declare interface ModifyAssetSyncResponse {
+  /** 返回状态0 请求成功2 请求失败3 请求失败-频率限制 */
+  Status?: number;
+  /** success 成功其他失败 */
+  ReturnMsg?: string;
+  /** 0 成功非0 失败 */
+  ReturnCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2608,6 +2782,22 @@ declare interface ModifyNatFwVpcDnsSwitchRequest {
 declare interface ModifyNatFwVpcDnsSwitchResponse {
   /** 修改成功 */
   ReturnMsg: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNatInstanceRequest {
+  /** NAT防火墙实例名称 */
+  InstanceName: string;
+  /** NAT防火墙实例ID */
+  NatInstanceId?: string;
+}
+
+declare interface ModifyNatInstanceResponse {
+  /** 0 正常-1 异常 */
+  Status?: number;
+  /** nat实例唯一ID */
+  NatInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2928,6 +3118,18 @@ declare interface StopSecurityGroupRuleDispatchResponse {
   RequestId?: string;
 }
 
+declare interface SyncFwOperateRequest {
+  /** 同步操作类型：Route，同步防火墙路由 */
+  SyncType: string;
+  /** 防火墙类型；nat,nat防火墙;ew,vpc间防火墙 */
+  FwType?: string;
+}
+
+declare interface SyncFwOperateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cfw 云防火墙} */
 declare interface Cfw {
   (): Versions;
@@ -2981,6 +3183,10 @@ declare interface Cfw {
   DescribeAcLists(data?: DescribeAcListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAcListsResponse>;
   /** 查询互联网边界访问控制列表 {@link DescribeAclRuleRequest} {@link DescribeAclRuleResponse} */
   DescribeAclRule(data: DescribeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclRuleResponse>;
+  /** 查询地址模板列表 {@link DescribeAddressTemplateListRequest} {@link DescribeAddressTemplateListResponse} */
+  DescribeAddressTemplateList(data?: DescribeAddressTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplateListResponse>;
+  /** 资产同步状态查询 {@link DescribeAssetSyncRequest} {@link DescribeAssetSyncResponse} */
+  DescribeAssetSync(data?: DescribeAssetSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncResponse>;
   /** 获取安全组关联实例列表 {@link DescribeAssociatedInstanceListRequest} {@link DescribeAssociatedInstanceListResponse} */
   DescribeAssociatedInstanceList(data: DescribeAssociatedInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssociatedInstanceListResponse>;
   /** 告警中心阻断IP折线图 {@link DescribeBlockByIpTimesListRequest} {@link DescribeBlockByIpTimesListResponse} */
@@ -3001,6 +3207,8 @@ declare interface Cfw {
   DescribeFwEdgeIps(data?: DescribeFwEdgeIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwEdgeIpsResponse>;
   /** 获取租户所有VPC防火墙(组)及VPC防火墙实例卡片信息 {@link DescribeFwGroupInstanceInfoRequest} {@link DescribeFwGroupInstanceInfoResponse} */
   DescribeFwGroupInstanceInfo(data: DescribeFwGroupInstanceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwGroupInstanceInfoResponse>;
+  /** 获取防火墙同步状态 {@link DescribeFwSyncStatusRequest} {@link DescribeFwSyncStatusResponse} */
+  DescribeFwSyncStatus(data?: DescribeFwSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwSyncStatusResponse>;
   /** 新手引导扫描接口信息 {@link DescribeGuideScanInfoRequest} {@link DescribeGuideScanInfoResponse} */
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
   /** ip防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
@@ -3019,6 +3227,8 @@ declare interface Cfw {
   DescribeNatFwInstancesInfo(data?: DescribeNatFwInstancesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstancesInfoResponse>;
   /** 展示当前natfw 实例对应的vpc dns开关 {@link DescribeNatFwVpcDnsLstRequest} {@link DescribeNatFwVpcDnsLstResponse} */
   DescribeNatFwVpcDnsLst(data: DescribeNatFwVpcDnsLstRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwVpcDnsLstResponse>;
+  /** 查询NAT边界防火墙开关列表 {@link DescribeNatSwitchListRequest} {@link DescribeNatSwitchListResponse} */
+  DescribeNatSwitchList(data: DescribeNatSwitchListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatSwitchListResponse>;
   /** 资产中心资产树信息查询 {@link DescribeResourceGroupRequest} {@link DescribeResourceGroupResponse} */
   DescribeResourceGroup(data: DescribeResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupResponse>;
   /** 资产中心资产树信息查询new {@link DescribeResourceGroupNewRequest} {@link DescribeResourceGroupNewResponse} */
@@ -3049,6 +3259,8 @@ declare interface Cfw {
   ModifyAcRule(data: ModifyAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAcRuleResponse>;
   /** 修改互联网边界访问控制规则 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */
   ModifyAclRule(data: ModifyAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclRuleResponse>;
+  /** 修改地址模板 {@link ModifyAddressTemplateRequest} {@link ModifyAddressTemplateResponse} */
+  ModifyAddressTemplate(data: ModifyAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressTemplateResponse>;
   /** 互联网边界防火墙一键开关 {@link ModifyAllPublicIPSwitchStatusRequest} {@link ModifyAllPublicIPSwitchStatusResponse} */
   ModifyAllPublicIPSwitchStatus(data: ModifyAllPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllPublicIPSwitchStatusResponse>;
   /** 启用停用全部规则 {@link ModifyAllRuleStatusRequest} {@link ModifyAllRuleStatusResponse} */
@@ -3057,6 +3269,8 @@ declare interface Cfw {
   ModifyAllVPCSwitchStatus(data: ModifyAllVPCSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllVPCSwitchStatusResponse>;
   /** 资产扫描 {@link ModifyAssetScanRequest} {@link ModifyAssetScanResponse} */
   ModifyAssetScan(data: ModifyAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetScanResponse>;
+  /** 资产同步 {@link ModifyAssetSyncRequest} {@link ModifyAssetSyncResponse} */
+  ModifyAssetSync(data?: ModifyAssetSyncRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetSyncResponse>;
   /** 封禁列表和放通列表批量操作接口 {@link ModifyBlockIgnoreListRequest} {@link ModifyBlockIgnoreListResponse} */
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
   /** 编辑单条入侵防御封禁列表、放通列表规则 {@link ModifyBlockIgnoreRuleRequest} {@link ModifyBlockIgnoreRuleResponse} */
@@ -3081,6 +3295,8 @@ declare interface Cfw {
   ModifyNatFwSwitch(data: ModifyNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwSwitchResponse>;
   /** nat 防火墙VPC DNS 开关切换 {@link ModifyNatFwVpcDnsSwitchRequest} {@link ModifyNatFwVpcDnsSwitchResponse} */
   ModifyNatFwVpcDnsSwitch(data: ModifyNatFwVpcDnsSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwVpcDnsSwitchResponse>;
+  /** 编辑NAT防火墙 {@link ModifyNatInstanceRequest} {@link ModifyNatInstanceResponse} */
+  ModifyNatInstance(data: ModifyNatInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatInstanceResponse>;
   /** NAT防火墙规则快速排序 {@link ModifyNatSequenceRulesRequest} {@link ModifyNatSequenceRulesResponse} */
   ModifyNatSequenceRules(data: ModifyNatSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatSequenceRulesResponse>;
   /** 单个修改互联网边界防火墙开关 {@link ModifyPublicIPSwitchStatusRequest} {@link ModifyPublicIPSwitchStatusResponse} */
@@ -3125,6 +3341,8 @@ declare interface Cfw {
   SetNatFwEip(data: SetNatFwEipRequest, config?: AxiosRequestConfig): AxiosPromise<SetNatFwEipResponse>;
   /** 中止安全组规则下发 {@link StopSecurityGroupRuleDispatchRequest} {@link StopSecurityGroupRuleDispatchResponse} */
   StopSecurityGroupRuleDispatch(data?: StopSecurityGroupRuleDispatchRequest, config?: AxiosRequestConfig): AxiosPromise<StopSecurityGroupRuleDispatchResponse>;
+  /** 同步防火墙操作 {@link SyncFwOperateRequest} {@link SyncFwOperateResponse} */
+  SyncFwOperate(data: SyncFwOperateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncFwOperateResponse>;
 }
 
 export declare type Versions = ["2019-09-04"];
