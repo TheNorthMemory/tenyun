@@ -4035,6 +4035,8 @@ declare interface DescribeAddressTemplateGroupsRequest {
   Offset?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: string;
+  /** 是否查询IP地址模板成员标识。 */
+  NeedMemberInfo?: boolean;
 }
 
 declare interface DescribeAddressTemplateGroupsResponse {
@@ -4053,6 +4055,8 @@ declare interface DescribeAddressTemplatesRequest {
   Offset?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: string;
+  /** 是否获取IP地址模板成员标识。 */
+  NeedMemberInfo?: boolean;
 }
 
 declare interface DescribeAddressTemplatesResponse {
@@ -5009,6 +5013,8 @@ declare interface DescribeServiceTemplateGroupsRequest {
   Offset?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: string;
+  /** 是否获取协议端口模板成员标识。 */
+  NeedMemberInfo?: boolean;
 }
 
 declare interface DescribeServiceTemplateGroupsResponse {
@@ -5027,6 +5033,8 @@ declare interface DescribeServiceTemplatesRequest {
   Offset?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: string;
+  /** 是否获取协议端口成员标识。 */
+  NeedMemberInfo?: boolean;
 }
 
 declare interface DescribeServiceTemplatesResponse {

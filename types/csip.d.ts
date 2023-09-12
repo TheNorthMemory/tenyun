@@ -536,6 +536,8 @@ declare interface DomainAssetVO {
   VerifyTXTRecord?: string | null;
   /** 待确认资产的认证状态，0-待认证，1-认证成功，2-认证中，3-txt认证失败，4-人工认证失败 */
   VerifyStatus?: number | null;
+  /** bot访问数据 */
+  BotAccessCount?: number | null;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */

@@ -80,6 +80,38 @@ declare interface IpRule {
   Remark: string | null;
 }
 
+/** 主题与消费组的订阅关系数据 */
+declare interface SubscriptionData {
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 主题名称 */
+  Topic?: string | null;
+  /** 主题类型 */
+  TopicType?: string | null;
+  /** 单个节点上主题队列数 */
+  TopicQueueNum?: number | null;
+  /** 消费组名称 */
+  ConsumerGroup?: string | null;
+  /** 是否在线 */
+  IsOnline?: boolean | null;
+  /** 消费类型 */
+  ConsumeType?: string | null;
+  /** 订阅规则 */
+  SubString?: string | null;
+  /** 过滤类型 */
+  ExpressionType?: string | null;
+  /** 订阅一致性 */
+  Consistency?: number | null;
+  /** 消费堆积 */
+  ConsumerLag?: number | null;
+  /** 最后消费进度更新时间，秒为单位 */
+  LastUpdateTime?: number | null;
+  /** 最大重试次数 */
+  MaxRetryTimes?: number | null;
+  /** 是否顺序消费 */
+  ConsumeMessageOrderly?: boolean | null;
+}
+
 /** 标签数据 */
 declare interface Tag {
   /** 标签名称 */
@@ -118,6 +150,30 @@ declare interface VpcInfo {
   SubnetId: string;
 }
 
+declare interface CreateConsumerGroupRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 消费组名称 */
+  ConsumerGroup: string;
+  /** 最大重试次数 */
+  MaxRetryTimes: number;
+  /** 是否开启消费 */
+  ConsumeEnable: boolean;
+  /** 顺序投递：true并发投递：false */
+  ConsumeMessageOrderly: boolean;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateConsumerGroupResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 消费组 */
+  ConsumerGroup?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstanceRequest {
   /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
   InstanceType: string;
@@ -148,12 +204,88 @@ declare interface CreateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateTopicRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 主题 */
+  Topic: string;
+  /** 主题类型UNSPECIFIED:未指定,NORMAL:普通消息,FIFO:顺序消息,DELAY:延时消息,TRANSACTION:事务消息 */
+  TopicType: string;
+  /** 队列数量 */
+  QueueNum: number;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateTopicResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 主题 */
+  Topic?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteConsumerGroupRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 消费组名称 */
+  ConsumerGroup: string;
+}
+
+declare interface DeleteConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteInstanceRequest {
   /** 实例ID */
   InstanceId: string;
 }
 
 declare interface DeleteInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTopicRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 主题 */
+  Topic: string;
+}
+
+declare interface DeleteTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumerGroupRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+}
+
+declare interface DescribeConsumerGroupResponse {
+  /** 在线消费者数量 */
+  ConsumerNum?: number;
+  /** TPS */
+  Tps?: number;
+  /** 消息堆积数量 */
+  ConsumerLag?: number;
+  /** 消费者类型 */
+  ConsumeType?: string;
+  /** 创建时间，秒为单位 */
+  CreatedTime?: number;
+  /** 顺序投递：true并发投递：false */
+  ConsumeMessageOrderly?: boolean;
+  /** 是否开启消费 */
+  ConsumeEnable?: boolean;
+  /** 最大重试次数 */
+  MaxRetryTimes?: number;
+  /** 备注 */
+  Remark?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -254,6 +386,70 @@ declare interface DescribeTopicListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopicRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 主题 */
+  Topic: string;
+  /** 查询起始位置 */
+  Offset: number;
+  /** 查询结果限制数量 */
+  Limit: number;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeTopicResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 主题名称 */
+  Topic?: string;
+  /** 主题类型UNSPECIFIED:未指定,NORMAL:普通消息,FIFO:顺序消息,DELAY:延时消息,TRANSACTION:事务消息 */
+  TopicType?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 创建时间，秒为单位 */
+  CreatedTime?: number;
+  /** 最后写入时间，秒为单位 */
+  LastUpdateTime?: number;
+  /** 订阅数量 */
+  SubscriptionCount?: number;
+  /** 订阅关系列表 */
+  SubscriptionData?: SubscriptionData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopicStatsOpRequest {
+  /** 主题 */
+  Topic: string;
+}
+
+declare interface DescribeTopicStatsOpResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyConsumerGroupRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 是否开启消费 */
+  ConsumeEnable?: boolean;
+  /** 顺序投递：true并发投递：false */
+  ConsumeMessageOrderly?: boolean;
+  /** 最大重试次数 */
+  MaxRetryTimes?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -276,21 +472,55 @@ declare interface ModifyInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTopicRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 主题 */
+  Topic: string;
+  /** 队列数量 */
+  QueueNum?: number;
+  /** 备注信息 */
+  Remark?: string;
+}
+
+declare interface ModifyTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trocket 消息队列 RocketMQ 版} */
 declare interface Trocket {
   (): Versions;
+  /** 创建消费组 {@link CreateConsumerGroupRequest} {@link CreateConsumerGroupResponse} */
+  CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 购买实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
+  /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
+  CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
+  /** 删除消费组 {@link DeleteConsumerGroupRequest} {@link DeleteConsumerGroupResponse} */
+  DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 删除实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
+  /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
+  DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
+  /** 查询消费组详情 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
+  DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
   /** 查询实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
+  /** 查询主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
+  DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
+  /** 运营端查询topicStata {@link DescribeTopicStatsOpRequest} {@link DescribeTopicStatsOpResponse} */
+  DescribeTopicStatsOp(data: DescribeTopicStatsOpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicStatsOpResponse>;
+  /** 修改消费组属性 {@link ModifyConsumerGroupRequest} {@link ModifyConsumerGroupResponse} */
+  ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;
   /** 修改实例属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** 修改主题属性 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
+  ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
 }
 
 export declare type Versions = ["2023-03-08"];

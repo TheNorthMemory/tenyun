@@ -1804,6 +1804,16 @@ declare interface CreateImageSpriteTask2017 {
   WebVttUrl: string;
 }
 
+/** DNS解析验证信息 */
+declare interface DNSVerifyInfo {
+  /** 子解析。 */
+  SubDomain?: string;
+  /** 解析值。 */
+  Record?: string;
+  /** 解析类型。 */
+  RecordType?: string;
+}
+
 /** 播放统计信息。 */
 declare interface DailyPlayStatInfo {
   /** 播放媒体文件的日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -2222,6 +2232,16 @@ declare interface FileUploadTask {
   ReviewAudioVideoTaskId?: string;
   /** 元信息。包括大小、时长、视频流信息、音频流信息等。 */
   MetaData?: MediaMetaData | null;
+}
+
+/** 文件验证信息 */
+declare interface FileVerifyInfo {
+  /** 文件验证 URL 指引。 */
+  FileVerifyUrl?: string;
+  /** 文件校验域名列表。 */
+  FileVerifyDomains?: string[];
+  /** 文件校验文件名。 */
+  FileVerifyName?: string | null;
 }
 
 /** 智能按帧标签任务控制参数 */
@@ -4975,7 +4995,7 @@ declare interface TerrorismConfigureInfo {
   /** 画面鉴别涉及令人不安全的信息的任务控制参数。 */
   ImgReviewInfo?: TerrorismImgReviewTemplateInfo | null;
   /** 文字鉴别涉及令人不安全的信息的任务控制参数。 */
-  OcrReviewInfo: TerrorismOcrReviewTemplateInfo | null;
+  OcrReviewInfo?: TerrorismOcrReviewTemplateInfo | null;
 }
 
 /** 鉴别涉及令人不安全的信息的任务控制参数。 */
@@ -5772,6 +5792,18 @@ declare interface CreateContentReviewTemplateRequest {
 declare interface CreateContentReviewTemplateResponse {
   /** 音视频内容审核模板唯一标识。 */
   Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDomainVerifyRecordRequest {
+}
+
+declare interface CreateDomainVerifyRecordResponse {
+  /** DNS解析信息 */
+  DNSVerifyInfo?: DNSVerifyInfo;
+  /** 文件验证信息 */
+  FileVerifyInfo?: FileVerifyInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8992,6 +9024,32 @@ declare interface SplitMediaResponse {
   RequestId?: string;
 }
 
+declare interface VerifyDomainOwnershipForConsoleRequest {
+  /** 需要接入点播的域名。 */
+  Domain: string;
+  /** 需要开启加速的区域： Mainland: 中国大陆地区 Internation: 海外地区及港澳台 Global: 全球 不填会根据用户注册腾讯云时的地域信息自动判断 Mainland 或 Internation */
+  AccelerateArea: string;
+}
+
+declare interface VerifyDomainOwnershipForConsoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VerifyDomainRecordRequest {
+  /** 需要接入点播的加速域名。 */
+  Domain: string;
+  /** 验证方式：dns：DNS 解析验证；fIle：文件验证。默认值：dns。 */
+  VerifyType?: string;
+}
+
+declare interface VerifyDomainRecordResponse {
+  /** 是否验证成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface WeChatMiniProgramPublishRequest {
   /** 媒体文件 ID。 */
   FileId: string;
@@ -9033,6 +9091,8 @@ declare interface Vod {
   CreateClass(data: CreateClassRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassResponse>;
   /** 创建音视频内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
+  /** 生成域名解析记录 {@link CreateDomainVerifyRecordRequest} {@link CreateDomainVerifyRecordResponse} */
+  CreateDomainVerifyRecord(data?: CreateDomainVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainVerifyRecordResponse>;
   /** 创建音画质重生模板 {@link CreateEnhanceMediaTemplateRequest} {@link CreateEnhanceMediaTemplateResponse} */
   CreateEnhanceMediaTemplate(data: CreateEnhanceMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnhanceMediaTemplateResponse>;
   /** 创建片头片尾模板 {@link CreateHeadTailTemplateRequest} {@link CreateHeadTailTemplateResponse} */
@@ -9329,6 +9389,10 @@ declare interface Vod {
   SimpleHlsClip(data: SimpleHlsClipRequest, config?: AxiosRequestConfig): AxiosPromise<SimpleHlsClipResponse>;
   /** 视频拆条 {@link SplitMediaRequest} {@link SplitMediaResponse} */
   SplitMedia(data: SplitMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SplitMediaResponse>;
+  /** 控制台验证域名归属 {@link VerifyDomainOwnershipForConsoleRequest} {@link VerifyDomainOwnershipForConsoleResponse} */
+  VerifyDomainOwnershipForConsole(data: VerifyDomainOwnershipForConsoleRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainOwnershipForConsoleResponse>;
+  /** 验证域名解析 {@link VerifyDomainRecordRequest} {@link VerifyDomainRecordResponse} */
+  VerifyDomainRecord(data: VerifyDomainRecordRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainRecordResponse>;
   /** 微信小程序视频发布 {@link WeChatMiniProgramPublishRequest} {@link WeChatMiniProgramPublishResponse} */
   WeChatMiniProgramPublish(data: WeChatMiniProgramPublishRequest, config?: AxiosRequestConfig): AxiosPromise<WeChatMiniProgramPublishResponse>;
 }

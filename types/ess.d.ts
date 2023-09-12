@@ -60,6 +60,8 @@ declare interface ApproverInfo {
   ApproverSignTypes?: number[];
   /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：**false**：（默认）不需要审批，直接签署。**true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
   ApproverNeedSignReview?: boolean;
+  /** [用PDF文件创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowByFiles)时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID）或签名方式。注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。` */
+  AddSignComponentsLimits?: ComponentLimit[];
 }
 
 /** 签署人个性化能力信息 */
@@ -198,6 +200,14 @@ declare interface Component {
   LockComponentValue?: boolean | null;
   /** 是否禁止移动和删除控件默认false，不禁止移动和删除控件 */
   ForbidMoveAndDelete?: boolean | null;
+}
+
+/** 签署控件的类型和范围限制条件，用于控制文件发起后签署人拖拽签署区时可使用的控件类型和具体的印章或签名方式。 */
+declare interface ComponentLimit {
+  /** 控件类型，支持以下类型SIGN_SEAL : 印章控件SIGN_PAGING_SEAL : 骑缝章控件SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件SIGN_SIGNATURE : 用户签名控件 */
+  ComponentType: string;
+  /** 签署控件类型的值(可选)，用与限制签署时印章或者签名的选择范围1.当ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时可传入企业印章Id（支持多个）2.当ComponentType 是 SIGN_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 手写签名OCR_ESIGN : OCR印章（智慧手写签名）ESIGN : 个人印章SYSTEM_ESIGN : 系统印章3.当ComponentType 是 SIGN_LEGAL_PERSON_SEAL 时无需传递此参数。 */
+  ComponentValue?: string[];
 }
 
 /** 创建合同个性化参数 */
@@ -816,22 +826,22 @@ declare interface ReleasedApprover {
   ApproverType?: string;
   /** 签署控件类型，支持自定义企业签署方的签署控件类型 **SIGN_SEAL**：默认为印章控件类型（默认值） **SIGN_SIGNATURE**：手写签名控件类型 */
   ApproverSignComponentType?: string;
-  /** 参与方在合同中的角色是按照创建合同的时候来排序的; 解除协议默认会将第一个参与人叫甲方, 第二个叫乙方,第三个叫丙方，以此类推。如果您需要改动参与人的角色名字, 可以设置此签署方自定义控件别名字段，最大20个字。 */
+  /** 参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫`甲方`,第二个叫`乙方`, 第三个叫`丙方`，以此类推。如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。 */
   ApproverSignRole?: string;
 }
 
 /** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。 */
 declare interface RelieveInfo {
-  /** 解除理由，最大支持200个字 */
-  Reason: string | null;
-  /** 解除后仍然有效的条款，保留条款，最大支持200个字 */
-  RemainInForceItem?: string | null;
-  /** 原合同事项处理-费用结算，最大支持200个字 */
-  OriginalExpenseSettlement?: string | null;
-  /** 原合同事项处理-其他事项，最大支持200个字 */
-  OriginalOtherSettlement?: string | null;
-  /** 其他约定，最大支持200个字 */
-  OtherDeals?: string | null;
+  /** 解除理由，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
+  Reason: string;
+  /** 解除后仍然有效的条款，保留条款，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
+  RemainInForceItem?: string;
+  /** 原合同事项处理-费用结算，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
+  OriginalExpenseSettlement?: string;
+  /** 原合同事项处理-其他事项，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
+  OriginalOtherSettlement?: string;
+  /** 其他约定，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
+  OtherDeals?: string;
 }
 
 /** 催办接口返回的详细信息。 */
@@ -1599,28 +1609,28 @@ declare interface CreateOrganizationBatchSignUrlResponse {
 }
 
 declare interface CreatePersonAuthCertificateImageRequest {
-  /** 操作人信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 个人用户名称 */
   UserName: string;
-  /** 身份证件类型取值：ID_CARD 身居民身份证PASSPORT 护照HONGKONG_AND_MACAO 港澳居民来往内地通行证FOREIGN_ID_CARD 外国人永久居留身份证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型 ID_CARD : 居民身份证 (默认值) PASSPORT : 护照 FOREIGN_ID_CARD : 外国人永久居留身份证 HONGKONG_AND_MACAO : 港澳居民来往内地通行证 HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   IdCardType: string;
-  /** 身份证件号码 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
-  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface CreatePersonAuthCertificateImageResponse {
-  /** 个人用户证明证书的下载链接 */
+  /** 个人用户认证证书图片下载URL，`有效期为5分钟`，超过有效期后将无法再下载。 */
   AuthCertUrl?: string;
-  /** 证书图片上的证书编号，20位数字 */
+  /** 个人用户认证证书的编号, 为20位数字组成的字符串, 由腾讯电子签下发此编号 。该编号会合成到个人用户证书证明图片。注: `个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动` */
   ImageCertId?: string | null;
-  /** 图片证明对应的CA证书序列号 */
+  /** CA供应商下发给用户的证书编号，在证书到期后自动续期后此证书编号会发生变动，且不会合成到个人用户证书证明图片中。注意：`腾讯电子签接入多家CA供应商以提供容灾能力，不同CA下发的证书编号区别较大，但基本都是由数字和字母组成，长度在200以下。` */
   SerialNumber?: string | null;
-  /** CA证书颁发时间戳 */
+  /** CA证书颁发时间，格式为Unix标准时间戳（秒） 该时间格式化后会合成到个人用户证书证明图片 */
   ValidFrom?: number | null;
-  /** CA证书有效截止时间戳 */
+  /** CA证书有效截止时间，格式为Unix标准时间戳（秒）该时间格式化后会合成到个人用户证书证明图片 */
   ValidTo?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1713,11 +1723,11 @@ declare interface CreateReleaseFlowRequest {
   Operator: UserInfo;
   /** 待解除的签署流程编号（即原签署流程的编号）。 */
   NeedRelievedFlowId: string;
-  /** 解除协议内容。 */
+  /** 解除协议内容, 包括解除理由等信息。 */
   ReliveInfo: RelieveInfo;
   /** 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent?: Agent;
-  /** 解除协议的签署人列表(如不指定该参数，默认使用原流程的签署人列表)。 如需更换原合同中的签署人，可通过指定该签署人的RecipientId编号更换此签署人。(可通过接口DescribeFlowInfo查询签署人的RecipientId编号)解除协议的签署人数量不能多于原流程的签署人数量。`注意：只能更换同企业的签署人。``注意：不支持更换个人类型的签署人。` */
+  /** 替换解除协议的签署人， 如不指定替换签署人, 则使用原流程的签署人。 如需更换原合同中的企业端签署人，可通过指定该签署人的RecipientId编号更换此企业端签署人。(可通过接口DescribeFlowInfo查询签署人的RecipientId编号)注意：`只能更换自己企业的签署人, 不支持更换个人类型或者其他企业的签署人。``可以不指定替换签署人, 使用原流程的签署人 ` */
   ReleasedApprovers?: ReleasedApprover[];
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的7天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。 */
   Deadline?: number;
@@ -2001,16 +2011,16 @@ declare interface DescribeFileUrlsResponse {
 }
 
 declare interface DescribeFlowBriefsRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 需要查询的流程ID列表，限制最大100个 */
+  /** 查询的合同流程ID列表最多支持100个流程ID。 如果某个合同流程ID不存在，系统会跳过此ID的查询，继续查询剩余存在的合同流程。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowIds: string[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface DescribeFlowBriefsResponse {
-  /** 流程列表 */
+  /** 合同流程基础信息列表，包含流程的名称、状态、创建日期等基本信息。 注：`与入参 FlowIds 的顺序可能存在不一致的情况。` */
   FlowBriefs?: FlowBrief[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2131,7 +2141,7 @@ declare interface DescribeIntegrationEmployeesRequest {
   Limit: number;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
-  /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...] */
+  /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]，查询过滤未实名用户，Key为Status，Values为["NotVerified"]查询某个部门的用户，Key为DepartmentId，Values为["DepartmentId"]根据用户Id查询员工时，Key为UserId，Values为["UserId"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...] */
   Filters?: Filter[];
   /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000 */
   Offset?: number;
@@ -2251,16 +2261,16 @@ declare interface DescribeOrganizationSealsResponse {
 }
 
 declare interface DescribeThirdPartyAuthCodeRequest {
-  /** 电子签小程序跳转客户小程序时携带的授权查看码 */
+  /** 腾讯电子签小程序跳转客户企业小程序时携带的授权查看码，AuthCode由腾讯电子签小程序生成。 */
   AuthCode: string;
-  /** 操作人信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface DescribeThirdPartyAuthCodeResponse {
-  /** 用户是否实名，VERIFIED 为实名，UNVERIFIED 未实名 */
+  /** AuthCode 中对应个人用户是否实名 **VERIFIED** : 此个人已实名 **UNVERIFIED**: 此个人未实名 */
   VerifyStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2543,7 +2553,7 @@ declare interface Ess {
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
-  /** 创建个人用户证书证明图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */
+  /** 获取个人用户认证证书图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */
   CreatePersonAuthCertificateImage(data: CreatePersonAuthCertificateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonAuthCertificateImageResponse>;
   /** 获取发起合同web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
@@ -2573,7 +2583,7 @@ declare interface Ess {
   DescribeExtendedServiceAuthInfos(data: DescribeExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfosResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
-  /** 查询流程摘要 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */
+  /** 查询流程基础信息 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */
   DescribeFlowBriefs(data: DescribeFlowBriefsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowBriefsResponse>;
   /** 查询流程填写控件内容 {@link DescribeFlowComponentsRequest} {@link DescribeFlowComponentsResponse} */
   DescribeFlowComponents(data: DescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowComponentsResponse>;
@@ -2595,7 +2605,7 @@ declare interface Ess {
   DescribeOrganizationGroupOrganizations(data: DescribeOrganizationGroupOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationGroupOrganizationsResponse>;
   /** 查询企业电子印章 {@link DescribeOrganizationSealsRequest} {@link DescribeOrganizationSealsResponse} */
   DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
-  /** 通过AuthCode查询用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */
+  /** 通过AuthCode查询个人用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** 获取个人用户自动签的开通状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */
   DescribeUserAutoSignStatus(data: DescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAutoSignStatusResponse>;

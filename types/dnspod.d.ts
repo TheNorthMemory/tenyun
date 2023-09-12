@@ -1728,7 +1728,7 @@ declare interface DescribeUserDetailRequest {
 }
 
 declare interface DescribeUserDetailResponse {
-  /** 帐户信息 */
+  /** 账户信息 */
   UserInfo?: UserInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2207,7 +2207,7 @@ declare interface Dnspod {
   DescribeSnapshotRollbackTask(data: DescribeSnapshotRollbackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotRollbackTaskResponse>;
   /** 子域名解析量统计 {@link DescribeSubdomainAnalyticsRequest} {@link DescribeSubdomainAnalyticsResponse} */
   DescribeSubdomainAnalytics(data: DescribeSubdomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubdomainAnalyticsResponse>;
-  /** 获取帐户信息 {@link DescribeUserDetailRequest} {@link DescribeUserDetailResponse} */
+  /** 获取账户信息 {@link DescribeUserDetailRequest} {@link DescribeUserDetailResponse} */
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
   /** 获取域名增值服务用量 {@link DescribeVASStatisticRequest} {@link DescribeVASStatisticResponse} */
   DescribeVASStatistic(data: DescribeVASStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVASStatisticResponse>;

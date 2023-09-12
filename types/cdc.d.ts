@@ -198,6 +198,14 @@ declare interface DedicatedClusterTypeInfo {
   Count: number;
 }
 
+/** 带有时间的详细数据。 */
+declare interface DetailData {
+  /** 时间戳 */
+  Timestamps?: number[] | null;
+  /** 对应的具体值 */
+  Values?: number[] | null;
+}
+
 /** CDC宿主机的详细信息 */
 declare interface HostInfo {
   /** 宿主机IP */
@@ -227,15 +235,29 @@ declare interface HostInfo {
 /** CDC集群内宿主机的统计信息 */
 declare interface HostStatistic {
   /** 宿主机规格 */
-  HostType: string;
+  HostType?: string;
   /** 宿主机机型系列 */
-  HostFamily: string;
+  HostFamily?: string;
   /** 宿主机的CPU核数，单位：核 */
-  Cpu: number;
+  Cpu?: number;
   /** 宿主机内存大小，单位：GB */
-  Memory: number;
+  Memory?: number;
   /** 该规格宿主机的数量 */
-  Count: number;
+  Count?: number;
+  /** 平均cpu负载百分比 */
+  CpuAverage?: number | null;
+  /** 平均内存使用率百分比 */
+  MemAverage?: number | null;
+  /** 平均网络流量 */
+  NetAverage?: number | null;
+  /** cpu详细监控数据 */
+  CpuDetailData?: DetailData | null;
+  /** 内存详细数据 */
+  MemDetailData?: DetailData | null;
+  /** 网络速率详细数据 */
+  NetRateDetailData?: DetailData | null;
+  /** 网速包详细数据 */
+  NetPacketDetailData?: DetailData | null;
 }
 
 /** 入带宽数据 */
@@ -489,6 +511,14 @@ declare interface DescribeDedicatedClusterCosCapacityResponse {
 declare interface DescribeDedicatedClusterHostStatisticsRequest {
   /** 查询的专用集群id */
   DedicatedClusterId: string;
+  /** 宿主机id */
+  HostId?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 时间范围精度，1分钟/5分钟 */
+  Period?: string;
 }
 
 declare interface DescribeDedicatedClusterHostStatisticsResponse {

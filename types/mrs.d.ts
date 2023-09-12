@@ -130,6 +130,60 @@ declare interface BirthPlaceBlock {
   Value?: string | null;
 }
 
+/** 结构化信息 */
+declare interface Block {
+  /** 诊断信息 */
+  Check?: Check[] | null;
+  /** 病理报告 */
+  Pathology?: PathologyReport[] | null;
+  /** 医学资料 */
+  MedDoc?: MedDoc[] | null;
+  /** 诊断证明 */
+  DiagCert?: DiagCert[] | null;
+  /** 病案首页 */
+  FirstPage?: FirstPage[] | null;
+  /** 检验报告 */
+  Indicator?: Indicator[] | null;
+  /** 门诊病历信息 */
+  MedicalRecordInfo?: MedicalRecordInfo[] | null;
+  /** 出入院信息 */
+  Hospitalization?: Hospitalization[] | null;
+  /** 手术记录 */
+  Surgery?: Surgery[] | null;
+  /** 处方单 */
+  Prescription?: Prescription[] | null;
+  /** 免疫接种证明 */
+  VaccineCertificate?: VaccineCertificate[] | null;
+  /** 心电图 */
+  Electrocardiogram?: Electrocardiogram[] | null;
+  /** 病理报告v2 */
+  PathologyV2?: PathologyV2[] | null;
+  /** 内窥镜报告 */
+  Endoscopy?: Endoscopy[] | null;
+  /** C14检验报告 */
+  C14?: Indicator[] | null;
+  /** 体检结论 */
+  Exame?: Exame[] | null;
+  /** 出入院结构体 */
+  MedDocV2?: DischargeInfoBlock[] | null;
+  /** 检验报告v3 */
+  IndicatorV3?: IndicatorV3[] | null;
+  /** 孕产报告 */
+  Maternity?: Maternity[] | null;
+  /** 时间轴 */
+  Timeline?: TimelineInformation[] | null;
+  /** 核酸报告结论 */
+  Covid?: CovidItemsInfo[] | null;
+  /** 眼科报告结构体 */
+  Eye?: EyeItemsInfo[] | null;
+  /** 出生证明结构化信息 */
+  BirthCert?: BirthCert[] | null;
+  /** 文本类型列表 */
+  TextTypeListBlocks?: TextTypeListBlock[] | null;
+  /** 体检报告信息 */
+  PhysicalExamination?: PhysicalExaminationV1 | null;
+}
+
 /** 块信息 */
 declare interface BlockInfo {
   /** 原文位置 */
@@ -180,6 +234,22 @@ declare interface BloodPressureBlock {
   NormSystolic?: string | null;
 }
 
+/** 体检报告血压检测信息 */
+declare interface BloodPressureItem {
+  /** 类型 */
+  Name?: string | null;
+  /** 项目原文 */
+  Item?: PhysicalBaseItem | null;
+  /** 数值 */
+  Result?: PhysicalBaseItem | null;
+  /** 单位 */
+  Unit?: PhysicalBaseItem | null;
+  /** 第几次 */
+  Times?: PhysicalBaseItem | null;
+  /** 左右手臂 */
+  Location?: PhysicalBaseItem | null;
+}
+
 /** 查体 */
 declare interface BodyExaminationBlock {
   /** 体温 */
@@ -212,6 +282,20 @@ declare interface Check {
   Desc: Desc | null;
   /** 结论 */
   Summary: Summary | null;
+}
+
+/** 体检报告-胸围信息 */
+declare interface ChestCircumferenceItem {
+  /** 类型 */
+  Name?: string | null;
+  /** 项目原文 */
+  Item?: PhysicalBaseItem | null;
+  /** 数值 */
+  Result?: PhysicalBaseItem | null;
+  /** 单位 */
+  Unit?: PhysicalBaseItem | null;
+  /** 呼吸状态 */
+  State?: PhysicalBaseItem | null;
 }
 
 /** 主诉 */
@@ -806,6 +890,82 @@ declare interface Fp2NdItem {
   AnesthesiaMethod?: BaseItem | null;
 }
 
+/** 体检报告-一般检测信息 */
+declare interface GeneralExaminationBaseItem {
+  /** 生命体征 */
+  VitalSign?: GeneralExaminationVitalSign | null;
+  /** 其他 */
+  Others?: GeneralExaminationOthers | null;
+  /** 小结 */
+  BriefSummary?: GeneralExaminationBriefSummary | null;
+}
+
+/** 体检报告-小结 */
+declare interface GeneralExaminationBriefSummary {
+  /** 一般检查小结 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-其他项 */
+declare interface GeneralExaminationOthers {
+  /** 面容与表情 */
+  Countenance?: KeyValueItem | null;
+  /** 精神状态 */
+  MentalStatus?: KeyValueItem | null;
+  /** 发育及营养状况 */
+  DevelopmentCondition?: KeyValueItem | null;
+  /** 记忆力 */
+  Memory?: KeyValueItem | null;
+  /** 臀围 */
+  Hipline?: ValueUnitItem | null;
+  /** 腰臀比 */
+  WaistHipRatio?: ValueUnitItem | null;
+  /** 生活嗜好 */
+  Addiction?: KeyValueItem | null;
+  /** 生活能力评定 */
+  AbilityOfLifeADL?: KeyValueItem | null;
+  /** 一般检查其他 */
+  Others?: KeyValueItem[] | null;
+  /** 胸围 */
+  ChestCircumference?: ChestCircumferenceItem | null;
+}
+
+/** 生命体征 */
+declare interface GeneralExaminationVitalSign {
+  /** 生命体征总体描述 */
+  Text?: ValueUnitItem | null;
+  /** 体温 */
+  BodyTemperature?: ValueUnitItem | null;
+  /** 脉率 */
+  Pulse?: ValueUnitItem | null;
+  /** 心率 */
+  HeartRate?: ValueUnitItem | null;
+  /** 呼吸频率 */
+  BreathingRate?: ValueUnitItem | null;
+  /** 身高 */
+  BodyHeight?: ValueUnitItem | null;
+  /** 体重 */
+  BodyWeight?: ValueUnitItem | null;
+  /** 体质指数 */
+  BodyMassIndex?: ValueUnitItem | null;
+  /** 腰围 */
+  Waistline?: ValueUnitItem | null;
+  /** 血压 */
+  BloodPressure?: GeneralExaminationVitalSignBloodPressure | null;
+}
+
+/** 血压 */
+declare interface GeneralExaminationVitalSignBloodPressure {
+  /** 血压 */
+  Text?: BloodPressureItem | null;
+  /** 收缩压/舒张压 */
+  SystolicDiastolicPressure?: BloodPressureItem[] | null;
+  /** 收缩压 */
+  SystolicPressure?: BloodPressureItem[] | null;
+  /** 舒张压 */
+  DiastolicPressure?: BloodPressureItem[] | null;
+}
+
 /** 家族遗传史 */
 declare interface GeneticHistoryBlock {
   /** 名称 */
@@ -816,6 +976,76 @@ declare interface GeneticHistoryBlock {
   GeneticList?: string | null;
   /** 对外输出值 */
   Value?: string | null;
+}
+
+/** 体检报告-妇科-子宫附件 */
+declare interface GynaecologyAdnexal {
+  /** 子宫附件总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-妇科 */
+declare interface GynaecologyBaseItem {
+  /** 外阴 */
+  Vulva?: GynaecologyVulva | null;
+  /** 阴道 */
+  Vagina?: GynaecologyVagina | null;
+  /** 子宫颈 */
+  Cervix?: GynaecologyCervix | null;
+  /** 子宫 */
+  Uterus?: GynaecologyUterus | null;
+  /** 子宫附件 */
+  Adnexal?: GynaecologyAdnexal | null;
+  /** 盆腔 */
+  PelvicCavity?: GynaecologyPelvicCavity | null;
+  /** 妇科其他 */
+  Others?: KeyValueItem[] | null;
+  /** 月经史 */
+  MenstrualHistory?: GynaecologyMenstrualHistory | null;
+  /** 小结 */
+  BriefSummary?: GynaecologyBriefSummary | null;
+}
+
+/** 体检报告-妇科-小结 */
+declare interface GynaecologyBriefSummary {
+  /** 小结 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-妇科-子宫颈 */
+declare interface GynaecologyCervix {
+  /** 子宫颈总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-妇科-月经史 */
+declare interface GynaecologyMenstrualHistory {
+  /** 妇科月经史总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-妇科-盆腔 */
+declare interface GynaecologyPelvicCavity {
+  /** 盆腔总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-妇科-子宫 */
+declare interface GynaecologyUterus {
+  /** 子宫总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-妇科-阴道 */
+declare interface GynaecologyVagina {
+  /** 阴道总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-妇科-外阴 */
+declare interface GynaecologyVulva {
+  /** 外阴总体描述 */
+  Text?: KeyValueItem | null;
 }
 
 /** 图片处理参数 */
@@ -836,6 +1066,18 @@ declare interface HandleParam {
   ImageOriginalSize?: number;
   /** 采用后台默认值(2048Kb) */
   ScaleTargetSize?: number;
+}
+
+/** 听力信息 */
+declare interface HearingItem {
+  /** 类型 */
+  Name?: string | null;
+  /** 项目原文 */
+  Item?: PhysicalBaseItem | null;
+  /** 方位 */
+  Location?: PhysicalBaseItem | null;
+  /** 描述 */
+  Result?: PhysicalBaseItem | null;
 }
 
 /** 组织学类 */
@@ -1040,6 +1282,162 @@ declare interface IndicatorV3 {
   Version?: string | null;
 }
 
+/** 体检报告-内科-腹部 */
+declare interface InternalMedicineAbdomen {
+  /** 内科腹部小结 */
+  Text?: KeyValueItem | null;
+  /** 肝脏 */
+  Liver?: InternalMedicineAbdomenLiver | null;
+  /** 胆囊 */
+  GallBladder?: InternalMedicineAbdomenGallBladder | null;
+  /** 胰腺 */
+  Pancreas?: InternalMedicineAbdomenPancreas | null;
+  /** 脾脏 */
+  Spleen?: InternalMedicineAbdomenSpleen | null;
+  /** 肾脏 */
+  Kidney?: InternalMedicineAbdomenKidney | null;
+  /** 腹部其他 */
+  Others?: KeyValueItem[] | null;
+}
+
+/** 体检报告-内科-腹部-胆囊 */
+declare interface InternalMedicineAbdomenGallBladder {
+  /** 胆囊总体描述 */
+  Src?: KeyValueItem | null;
+  /** 胆囊大小 */
+  Size?: KeyValueItem | null;
+  /** 胆囊触诊 */
+  Palpation?: KeyValueItem | null;
+  /** 胆囊叩诊 */
+  Percussion?: KeyValueItem | null;
+  /** 胆囊压痛 */
+  Tenderness?: KeyValueItem | null;
+  /** 胆囊质地 */
+  Consistency?: KeyValueItem | null;
+}
+
+/** 体检报告-内科-腹部-肾脏 */
+declare interface InternalMedicineAbdomenKidney {
+  /** 肾脏总体描述 */
+  Src?: KeyValueItem | null;
+  /** 肾脏大小 */
+  Size?: KeyValueItem | null;
+  /** 肾脏触诊 */
+  Palpation?: KeyValueItem | null;
+  /** 肾脏叩诊 */
+  Percussion?: KeyValueItem | null;
+  /** 肾脏压痛 */
+  Tenderness?: KeyValueItem | null;
+  /** 肾脏质地 */
+  Consistency?: KeyValueItem | null;
+}
+
+/** 体检报告-内科-腹部-肝脏 */
+declare interface InternalMedicineAbdomenLiver {
+  /** 肝脏总体描述 */
+  Src?: KeyValueItem | null;
+  /** 肝脏大小 */
+  Size?: KeyValueItem | null;
+  /** 肝脏触诊 */
+  Palpation?: KeyValueItem | null;
+  /** 肝脏叩诊 */
+  Percussion?: KeyValueItem | null;
+  /** 肝脏压痛 */
+  Tenderness?: KeyValueItem | null;
+  /** 肝脏质地 */
+  Consistency?: KeyValueItem | null;
+}
+
+/** 体检报告-内科-腹部-胰腺 */
+declare interface InternalMedicineAbdomenPancreas {
+  /** 胰腺总体描述 */
+  Src?: KeyValueItem | null;
+  /** 胰腺大小 */
+  Size?: KeyValueItem | null;
+  /** 胰腺触诊 */
+  Palpation?: KeyValueItem | null;
+  /** 胰腺叩诊 */
+  Percussion?: KeyValueItem | null;
+  /** 肝脏压痛 */
+  Tenderness?: KeyValueItem | null;
+  /** 胰腺质地 */
+  Consistency?: KeyValueItem | null;
+}
+
+/** 体检报告-内科-腹部-脾脏 */
+declare interface InternalMedicineAbdomenSpleen {
+  /** 脾脏总体描述 */
+  Src?: KeyValueItem | null;
+  /** 脾脏大小 */
+  Size?: KeyValueItem | null;
+  /** 脾脏触诊 */
+  Palpation?: KeyValueItem | null;
+  /** 脾脏叩诊 */
+  Percussion?: KeyValueItem | null;
+  /** 脾脏压痛 */
+  Tenderness?: KeyValueItem | null;
+  /** 脾脏质地 */
+  Consistency?: KeyValueItem | null;
+}
+
+/** 体检报告-内科 */
+declare interface InternalMedicineBaseItem {
+  /** 体检报告-内科-腹部 */
+  Abdomen?: InternalMedicineAbdomen | null;
+  /** 体检报告-内科-心脏 */
+  Heart?: InternalMedicineHeart | null;
+  /** 体检报告-内科-血管 */
+  Vessel?: InternalMedicineVessel | null;
+  /** 体检报告-内科-呼吸系统 */
+  RespiratorySystem?: InternalMedicineRespiratorySystem | null;
+  /** 体检报告-内科-内科其他 */
+  Others?: KeyValueItem[] | null;
+  /** 体检报告-内科-小结 */
+  BriefSummary?: InternalMedicineBriefSummary | null;
+}
+
+/** 体检报告-内科-内科小结 */
+declare interface InternalMedicineBriefSummary {
+  /** 内科小结 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-内科-心脏 */
+declare interface InternalMedicineHeart {
+  /** 心脏总体描述 */
+  Text?: KeyValueItem | null;
+  /** 心律 */
+  HeartRhythm?: KeyValueItem | null;
+  /** 心率 */
+  HeartRate?: ValueUnitItem | null;
+  /** 心脏听诊 */
+  HeartAuscultation?: KeyValueItem | null;
+}
+
+/** 体检报告-内科-呼吸系统 */
+declare interface InternalMedicineRespiratorySystem {
+  /** 呼吸系统总体描述 */
+  Text?: KeyValueItem | null;
+  /** 胸廓 */
+  Thoracic?: KeyValueItem | null;
+  /** 痰量 */
+  Sputum?: KeyValueItem | null;
+  /** 肺部叩诊 */
+  LungPercussion?: KeyValueItem | null;
+  /** 肺部听诊其他 */
+  LungAuscultation?: KeyValueItem[] | null;
+}
+
+/** 体检报告-内科-血管 */
+declare interface InternalMedicineVessel {
+  /** 血管总体描述 */
+  Text?: KeyValueItem | null;
+  /** 血管杂音 */
+  VascularMurmur?: KeyValueItem | null;
+  /** 外周血管 */
+  PeripheralVessel?: KeyValueItem | null;
+}
+
 /** 侵犯扩散 */
 declare interface Invas {
   /** 原文位置 */
@@ -1074,6 +1472,16 @@ declare interface IssueInfo {
   IssuedAuthority?: string | null;
   /** 签发日期 */
   IssuedDate?: string | null;
+}
+
+/** 体检报告信息 */
+declare interface KeyValueItem {
+  /** 类型 */
+  Name?: string | null;
+  /** 项目原文 */
+  Item?: PhysicalBaseItem | null;
+  /** 结果 */
+  Result?: PhysicalBaseItem | null;
 }
 
 /** 末次月经 */
@@ -1474,6 +1882,60 @@ declare interface ObstetricalHistoryBlock {
   FertilityHistory?: FertilityHistoryBlock | null;
 }
 
+/** 体检报告-眼科-裸眼视力 */
+declare interface OphthalmologyBareEyeSight {
+  /** 左眼视力 */
+  LeftEyeVisual?: KeyValueItem | null;
+  /** 裸眼视力 */
+  Text?: KeyValueItem | null;
+  /** 右眼视力 */
+  RightEyeVisual?: KeyValueItem | null;
+}
+
+/** 体检报告-眼科 */
+declare interface OphthalmologyBaseItem {
+  /** 裸眼视力 */
+  BareEyeSight?: OphthalmologyBareEyeSight | null;
+  /** 矫正视力 */
+  CorrectedVisualAcuity?: OphthalmologyCorrectedVisualAcuity | null;
+  /** 色觉 */
+  ColourVision?: OphthalmologyColourVision | null;
+  /** 眼底 */
+  Fundoscopy?: OphthalmologyFundoscopy | null;
+  /** 眼科其他 */
+  Others?: KeyValueItem[] | null;
+  /** 眼科小结 */
+  BriefSummary?: OphthalmologyBriefSummary | null;
+}
+
+/** 体检报告-眼科-小结 */
+declare interface OphthalmologyBriefSummary {
+  /** 眼科小结 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-眼科-色觉 */
+declare interface OphthalmologyColourVision {
+  /** 色觉总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-眼科-矫正视力 */
+declare interface OphthalmologyCorrectedVisualAcuity {
+  /** 左眼矫正视力 */
+  LeftEyeVisual?: KeyValueItem | null;
+  /** 矫正视力 */
+  Text?: KeyValueItem | null;
+  /** 右眼矫正视力 */
+  RightEyeVisual?: KeyValueItem | null;
+}
+
+/** 体检报告-眼科-眼底 */
+declare interface OphthalmologyFundoscopy {
+  /** 眼底检查总体描述 */
+  Text?: KeyValueItem | null;
+}
+
 /** 器官 */
 declare interface Organ {
   /** 部位 */
@@ -1568,6 +2030,46 @@ declare interface OtherInfo {
   EndTime?: SurgeryAttr | null;
   /** 手术结束时间 */
   StartTime?: SurgeryAttr | null;
+}
+
+/** 体检报告-耳鼻喉科 */
+declare interface OtolaryngologyBaseItem {
+  /** 耳朵 */
+  Ear?: OtolaryngologyEar | null;
+  /** 鼻 */
+  Nose?: OtolaryngologyNose | null;
+  /** 喉 */
+  Larynx?: OtolaryngologyLarynx | null;
+  /** 耳鼻喉其他 */
+  Others?: KeyValueItem[] | null;
+  /** 小结 */
+  BriefSummary?: OtolaryngologyBriefSummary | null;
+}
+
+/** 体检报告-耳鼻喉科-小结 */
+declare interface OtolaryngologyBriefSummary {
+  /** 耳鼻喉小结 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-耳鼻喉科-耳朵 */
+declare interface OtolaryngologyEar {
+  /** 耳总体描述 */
+  Text?: KeyValueItem | null;
+  /** 听力 */
+  Hearing?: HearingItem | null;
+}
+
+/** 体检报告-耳鼻喉科-喉 */
+declare interface OtolaryngologyLarynx {
+  /** 喉总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-耳鼻喉科-鼻 */
+declare interface OtolaryngologyNose {
+  /** 鼻总体描述 */
+  Text?: KeyValueItem | null;
 }
 
 /** pTNM */
@@ -1842,6 +2344,14 @@ declare interface PatientInfo {
   BedNo: string | null;
 }
 
+/** 体检报告PDF信息 */
+declare interface PdfInfo {
+  /** pdf文件url链接(暂不支持) */
+  Url?: string;
+  /** pdf文件base64编码字符串 */
+  Base64?: string;
+}
+
 /** 个人史 */
 declare interface PersonalHistoryBlock {
   /** 出生地 */
@@ -1874,6 +2384,46 @@ declare interface PersonalMedicalHistory {
   SmokeHistory: string | null;
   /** 饮酒史 */
   AlcoholicHistory: string | null;
+}
+
+/** 体检报告基础信息 */
+declare interface PhysicalBaseItem {
+  /** 类型 */
+  Name?: string | null;
+  /** 原始文本 */
+  Src?: string | null;
+  /** 归一化后值 */
+  Value?: string | null;
+  /** 四点坐标 */
+  Coords?: Coord[] | null;
+}
+
+/** 体检报告综合信息 */
+declare interface PhysicalExamination {
+  /** 一般检查 */
+  GeneralExamination?: GeneralExaminationBaseItem | null;
+  /** 内科 */
+  InternalMedicine?: InternalMedicineBaseItem | null;
+  /** 外科 */
+  Surgery?: SurgeryBaseItem | null;
+  /** 口腔科 */
+  Stomatology?: StomatologyBaseItem | null;
+  /** 眼科 */
+  Ophthalmology?: OphthalmologyBaseItem | null;
+  /** 耳鼻喉科 */
+  Otolaryngology?: OtolaryngologyBaseItem | null;
+  /** 妇科 */
+  Gynaecology?: GynaecologyBaseItem | null;
+  /** 未标准化 */
+  Unclassified?: KeyValueItem[] | null;
+}
+
+/** 体检报告V1版本 */
+declare interface PhysicalExaminationV1 {
+  /** 体检报告信息 */
+  PhysicalExaminationMulti?: PhysicalExamination | null;
+  /** 版本 */
+  Version?: string | null;
 }
 
 /** 点坐标 */
@@ -2086,6 +2636,44 @@ declare interface SmokeHistoryBlock {
   Value?: string | null;
 }
 
+/** 体检报告-口腔科 */
+declare interface StomatologyBaseItem {
+  /** 龋齿 */
+  ToothDecay?: StomatologyToothDecay | null;
+  /** 牙龈 */
+  Gingiva?: StomatologyGingiva | null;
+  /** 牙周 */
+  Periodontics?: StomatologyPeriodontics | null;
+  /** 口腔其他 */
+  Others?: KeyValueItem[] | null;
+  /** 小结 */
+  BriefSummary?: StomatologyBriefSummary | null;
+}
+
+/** 体检报告-口腔科-小结 */
+declare interface StomatologyBriefSummary {
+  /** 口腔小结 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-口腔科-牙龈 */
+declare interface StomatologyGingiva {
+  /** 牙龈总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-口腔科-牙周 */
+declare interface StomatologyPeriodontics {
+  /** 牙周总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-口腔科-龋齿 */
+declare interface StomatologyToothDecay {
+  /** 龋齿总体描述 */
+  Text?: KeyValueItem | null;
+}
+
 /** 结论 */
 declare interface Summary {
   /** 症状 */
@@ -2112,12 +2700,58 @@ declare interface Surgery {
   OtherInfo?: OtherInfo | null;
 }
 
+/** 体检报告-外科-肛门直肠 */
+declare interface SurgeryAnorectal {
+  /** 肛门直肠总体描述 */
+  Text?: KeyValueItem | null;
+  /** 直肠指检 */
+  DigitalRectalExamination?: KeyValueItem | null;
+  /** 痔疮 */
+  Hemorrhoid?: KeyValueItem | null;
+}
+
 /** 手术记录属性 */
 declare interface SurgeryAttr {
   /** 名称 */
   Name: string | null;
   /** 值 */
   Value: string | null;
+}
+
+/** 体检报告-外科 */
+declare interface SurgeryBaseItem {
+  /** 体检报告-外科-头颈部 */
+  HeadNeck?: SurgeryHeadNeck | null;
+  /** 体检报告-外科-甲状腺 */
+  Thyroid?: SurgeryThyroid | null;
+  /** 体检报告-外科-乳房 */
+  Breast?: SurgeryBreast | null;
+  /** 体检报告-外科-浅表淋巴结 */
+  LymphNode?: SurgeryLymphNode | null;
+  /** 体检报告-外科-脊柱 */
+  SpinalExtremities?: SurgerySpinalExtremities | null;
+  /** 体检报告-外科-皮肤 */
+  Skin?: SurgerySkin | null;
+  /** 体检报告-外科-肛门直肠 */
+  Anorectal?: SurgeryAnorectal | null;
+  /** 体检报告-外科-泌尿生殖系统 */
+  UrogenitalSystem?: SurgeryUrogenitalSystem | null;
+  /** 体检报告-外科-外科其他 */
+  Others?: KeyValueItem[] | null;
+  /** 体检报告-外科-小结 */
+  BriefSummary?: SurgeryBriefSummary | null;
+}
+
+/** 体检报告-外科-乳房 */
+declare interface SurgeryBreast {
+  /** 乳房总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-外科-小结 */
+declare interface SurgeryBriefSummary {
+  /** 外科小结 */
+  Text?: KeyValueItem | null;
 }
 
 /** 手术经过 */
@@ -2130,6 +2764,12 @@ declare interface SurgeryConditionBlock {
   SurgeryList?: SurgeryListBlock[] | null;
   /** 对外输出值 */
   Value?: string | null;
+}
+
+/** 体检报告-外科-头颈部 */
+declare interface SurgeryHeadNeck {
+  /** 头颈部总体描述 */
+  Text?: KeyValueItem | null;
 }
 
 /** 手术史 */
@@ -2170,6 +2810,52 @@ declare interface SurgeryListBlock {
   Name?: string[] | null;
   /** 部位 */
   Part?: string | null;
+}
+
+/** 体检报告-外科-浅表淋巴结 */
+declare interface SurgeryLymphNode {
+  /** 浅表淋巴结总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-外科-皮肤 */
+declare interface SurgerySkin {
+  /** 皮肤总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-外科-脊柱 */
+declare interface SurgerySpinalExtremities {
+  /** 脊柱四肢总体描述 */
+  Text?: KeyValueItem | null;
+  /** 脊柱 */
+  SpinalColumn?: KeyValueItem | null;
+  /** 四肢和关节 */
+  LimbJoint?: KeyValueItem | null;
+  /** 平跛足 */
+  Foot?: KeyValueItem | null;
+  /** 骨骼 */
+  Bone?: KeyValueItem | null;
+  /** 步态 */
+  Gait?: KeyValueItem | null;
+  /** 残疾或畸形 */
+  Deformity?: KeyValueItem | null;
+}
+
+/** 体检报告-外科-甲状腺 */
+declare interface SurgeryThyroid {
+  /** 甲状腺总体描述 */
+  Text?: KeyValueItem | null;
+}
+
+/** 体检报告-外科-泌尿生殖系统 */
+declare interface SurgeryUrogenitalSystem {
+  /** 泌尿生殖系统总体描述 */
+  Text?: KeyValueItem | null;
+  /** 前列腺 */
+  Prostate?: KeyValueItem | null;
+  /** 外生殖器（男性） */
+  ExternalReproductiveOrgans?: KeyValueItem | null;
 }
 
 /** 病症描述信息 */
@@ -2268,6 +2954,12 @@ declare interface TextType {
   Level: number | null;
   /** 类别名 */
   Name: string | null;
+}
+
+/** 文本类型列表块 */
+declare interface TextTypeListBlock {
+  /** 文本类型列表 */
+  TextTypeList?: TextType[] | null;
 }
 
 /** 时间 */
@@ -2626,6 +3318,18 @@ declare interface ValueBlock {
   Positive?: string | null;
 }
 
+/** 体检报告信息-包含单位 */
+declare interface ValueUnitItem {
+  /** 类型 */
+  Name?: string | null;
+  /** 项目原文 */
+  Item?: PhysicalBaseItem | null;
+  /** 数值 */
+  Result?: PhysicalBaseItem | null;
+  /** 单位 */
+  Unit?: PhysicalBaseItem | null;
+}
+
 declare interface ImageToClassRequest {
   /** 图片列表，允许传入多张图片，支持传入图片的base64编码，暂不支持图片url */
   ImageInfoList: ImageInfo[];
@@ -2702,6 +3406,24 @@ declare interface TextToObjectResponse {
   RequestId?: string;
 }
 
+declare interface TurnPDFToObjectRequest {
+  /** 体检报告PDF文件信息, 目前只支持传PDF文件的Base64编码字符 */
+  PdfInfo: PdfInfo;
+}
+
+declare interface TurnPDFToObjectResponse {
+  /** 报告结构化结果 */
+  Template?: Template;
+  /** 多级分类结果 */
+  TextTypeList?: TextType[];
+  /** 报告结构化结果 */
+  Block?: Block;
+  /** 是否使用Block字段 */
+  IsBlock?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Mrs 医疗报告结构化} */
 declare interface Mrs {
   (): Versions;
@@ -2713,6 +3435,8 @@ declare interface Mrs {
   TextToClass(data: TextToClassRequest, config?: AxiosRequestConfig): AxiosPromise<TextToClassResponse>;
   /** 文本结构化接口 {@link TextToObjectRequest} {@link TextToObjectResponse} */
   TextToObject(data: TextToObjectRequest, config?: AxiosRequestConfig): AxiosPromise<TextToObjectResponse>;
+  /** 体检报告PDF文件结构化 {@link TurnPDFToObjectRequest} {@link TurnPDFToObjectResponse} */
+  TurnPDFToObject(data: TurnPDFToObjectRequest, config?: AxiosRequestConfig): AxiosPromise<TurnPDFToObjectResponse>;
 }
 
 export declare type Versions = ["2020-09-10"];

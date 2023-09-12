@@ -154,6 +154,10 @@ declare interface CommonFlowApprover {
   ApproverOption?: CommonApproverOption;
   /** 签署控件：文件发起使用 */
   SignComponents?: Component[];
+  /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式) 如果不传默认为1 查看合同的认证方式 Flow层级的优先于approver层级的 （当手写签名方式为OCR_ESIGN时，合同认证方式2无效，因为这种签名方式依赖实名认证） */
+  ApproverVerifyTypes?: number[];
+  /** 签署人签署合同时的认证方式 1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2) */
+  ApproverSignTypes?: number[];
 }
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
@@ -208,6 +212,18 @@ declare interface Component {
   KeywordIndexes?: number[];
   /** 填写提示的内容 */
   Placeholder?: string | null;
+  /** 是否锁定控件值不允许编辑（嵌入式发起使用） 默认false：不锁定控件值，允许在页面编辑控件值 */
+  LockComponentValue?: boolean | null;
+  /** 是否禁止移动和删除控件 默认false，不禁止移动和删除控件 */
+  ForbidMoveAndDelete?: boolean | null;
+}
+
+/** 签署控件的类型和范围限制条件，用于控制文件发起后签署人拖拽签署区时可使用的控件类型和具体的印章或签名方式。 */
+declare interface ComponentLimit {
+  /** 控件类型，支持以下类型SIGN_SEAL : 印章控件SIGN_PAGING_SEAL : 骑缝章控件SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件SIGN_SIGNATURE : 用户签名控件 */
+  ComponentType: string;
+  /** 签署控件类型的值(可选)，用与限制签署时印章或者签名的选择范围1.当ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时可传入企业印章Id（支持多个）2.当ComponentType 是 SIGN_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 手写签名OCR_ESIGN : OCR印章（智慧手写签名）ESIGN : 个人印章SYSTEM_ESIGN : 系统印章3.当ComponentType 是 SIGN_LEGAL_PERSON_SEAL 时无需传递此参数。 */
+  ComponentValue?: string[];
 }
 
 /** 创建合同个性化参数 */
@@ -358,6 +374,8 @@ declare interface FlowApproverInfo {
   SignId?: string;
   /** SMS: 短信(需确保“电子签短信通知签署方”功能是开启状态才能生效); NONE: 不发信息默认为SMS(签署方为子客时该字段不生效) */
   NotifyType?: string;
+  /** [通过文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID）或签名方式。注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。` */
+  AddSignComponentsLimits?: ComponentLimit[];
 }
 
 /** 签署人签署链接信息 */

@@ -113,81 +113,87 @@ declare interface CertificateExtra {
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 的内容。 */
 declare interface Certificates {
   /** 用户 UIN。 */
-  OwnerUin: string | null;
+  OwnerUin?: string | null;
   /** 项目 ID。 */
-  ProjectId: string | null;
+  ProjectId?: string | null;
   /** 证书来源。 */
-  From: string | null;
+  From?: string | null;
   /** 证书套餐类型：null = 用户上传证书（没有套餐类型），1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。 */
-  PackageType: string | null;
+  PackageType?: string | null;
   /** 证书类型：CA = 客户端证书，SVR = 服务器证书。 */
-  CertificateType: string | null;
+  CertificateType?: string | null;
   /** 颁发者。 */
-  ProductZhName: string | null;
+  ProductZhName?: string | null;
   /** 主域名。 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 备注名称。 */
-  Alias: string | null;
+  Alias?: string | null;
   /** 状态。0：审核中，1：已通过，2：审核失败，3：已过期，4：验证方式为 DNS_AUTO 类型的证书， 已添加DNS记录，5：企业证书，待提交，6：订单取消中，7：已取消，8：已提交资料， 待上传确认函，9：证书吊销中，10：已吊销，11：重颁发中，12：待上传吊销确认函，13：免费证书待提交资料状态，14：已退款， */
-  Status: number | null;
+  Status?: number | null;
   /** 证书扩展信息。 */
-  CertificateExtra: CertificateExtra | null;
+  CertificateExtra?: CertificateExtra | null;
   /** 漏洞扫描状态：INACTIVE = 未开启，ACTIVE = 已开启 */
-  VulnerabilityStatus: string | null;
+  VulnerabilityStatus?: string | null;
   /** 状态信息。 */
-  StatusMsg: string | null;
+  StatusMsg?: string | null;
   /** 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。 */
-  VerifyType: string | null;
+  VerifyType?: string | null;
   /** 证书生效时间。 */
-  CertBeginTime: string | null;
+  CertBeginTime?: string | null;
   /** 证书过期时间。 */
-  CertEndTime: string | null;
+  CertEndTime?: string | null;
   /** 证书有效期，单位（月）。 */
-  ValidityPeriod: string | null;
+  ValidityPeriod?: string | null;
   /** 创建时间。 */
-  InsertTime: string | null;
+  InsertTime?: string | null;
   /** 证书 ID。 */
-  CertificateId: string | null;
+  CertificateId?: string | null;
   /** 证书包含的多个域名（包含主域名）。 */
-  SubjectAltName: string[] | null;
+  SubjectAltName?: string[] | null;
   /** 证书类型名称。 */
-  PackageTypeName: string | null;
+  PackageTypeName?: string | null;
   /** 状态名称。 */
-  StatusName: string | null;
+  StatusName?: string | null;
   /** 是否为 VIP 客户。 */
-  IsVip: boolean | null;
+  IsVip?: boolean | null;
   /** 是否为 DV 版证书。 */
-  IsDv: boolean | null;
+  IsDv?: boolean | null;
   /** 是否为泛域名证书。 */
-  IsWildcard: boolean | null;
+  IsWildcard?: boolean | null;
   /** 是否启用了漏洞扫描功能。 */
-  IsVulnerability: boolean | null;
+  IsVulnerability?: boolean | null;
   /** 是否可重颁发证书。 */
-  RenewAble: boolean | null;
+  RenewAble?: boolean | null;
   /** 项目信息。 */
-  ProjectInfo: ProjectInfo | null;
+  ProjectInfo?: ProjectInfo | null;
   /** 关联的云资源，暂不可用 */
-  BoundResource: string[] | null;
+  BoundResource?: string[] | null;
   /** 是否可部署。 */
-  Deployable: boolean | null;
+  Deployable?: boolean | null;
   /** 标签列表 */
-  Tags: Tags[] | null;
+  Tags?: Tags[] | null;
   /** 是否已忽略到期通知 */
-  IsIgnore: boolean | null;
+  IsIgnore?: boolean | null;
   /** 是否国密证书 */
-  IsSM: boolean | null;
+  IsSM?: boolean | null;
   /** 证书算法 */
-  EncryptAlgorithm: string | null;
+  EncryptAlgorithm?: string | null;
   /** 上传CA证书的加密算法 */
-  CAEncryptAlgorithms: string[] | null;
+  CAEncryptAlgorithms?: string[] | null;
   /** 上传CA证书的过期时间 */
-  CAEndTimes: string[] | null;
+  CAEndTimes?: string[] | null;
   /** 上传CA证书的通用名称 */
-  CACommonNames: string[] | null;
+  CACommonNames?: string[] | null;
   /** 证书预审核信息 */
-  PreAuditInfo: PreAuditInfo | null;
+  PreAuditInfo?: PreAuditInfo | null;
   /** 是否自动续费 */
-  AutoRenewFlag: number | null;
+  AutoRenewFlag?: number | null;
+  /** 托管状态，0，托管中，5，资源替换中， 10， 托管完成， -1未托管 */
+  HostingStatus?: number | null;
+  /** 托管完成时间 */
+  HostingCompleteTime?: string | null;
+  /** 托管新证书ID */
+  HostingRenewCertId?: string | null;
 }
 
 /** clb实例详情 */
@@ -1737,6 +1743,12 @@ declare interface DescribeHostTeoInstanceListRequest {
   Filters?: Filter[];
   /** 已部署的证书ID */
   OldCertificateId?: string;
+  /** 分页偏移量，从0开始。 */
+  Offset?: number;
+  /** 每页数量，默认10。 */
+  Limit?: number;
+  /** 是否异步 */
+  AsyncCache?: number;
 }
 
 declare interface DescribeHostTeoInstanceListResponse {

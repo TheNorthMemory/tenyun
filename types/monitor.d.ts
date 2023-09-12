@@ -3907,9 +3907,9 @@ declare interface DescribePrometheusInstancesRequest {
 
 declare interface DescribePrometheusInstancesResponse {
   /** 实例详细信息列表。 */
-  InstanceSet: PrometheusInstancesItem[] | null;
+  InstanceSet?: PrometheusInstancesItem[] | null;
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

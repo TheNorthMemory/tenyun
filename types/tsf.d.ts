@@ -1142,10 +1142,14 @@ declare interface GatewayPlugin {
 declare interface GatewayPluginBoundParam {
   /** 插件id */
   PluginId: string;
-  /** 插件绑定到的对象类型:group/api */
+  /** 插件绑定到的对象类型:group/api/all */
   ScopeType: string;
   /** 插件绑定到的对象主键值，例如分组的ID/API的ID */
   ScopeValue: string;
+  /** 创建关联的服务id，关联envoy网关时使用 */
+  MicroserviceId?: string | null;
+  /** 网关id */
+  GatewayInstanceId?: string | null;
 }
 
 /** 网关部署组、分组、API列表数据 */
@@ -3276,7 +3280,7 @@ declare interface BindPluginRequest {
 
 declare interface BindPluginResponse {
   /** 返回结果，成功失败 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4011,7 +4015,7 @@ declare interface CreateUnitRuleWithDetailRespRequest {
 }
 
 declare interface CreateUnitRuleWithDetailRespResponse {
-  /** 单元化规则 ID */
+  /** 单元化规则信息 */
   Result?: UnitRule | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4908,7 +4912,7 @@ declare interface DescribeContainerGroupsResponse {
 }
 
 declare interface DescribeCreateGatewayApiStatusRequest {
-  /** 请求方法 */
+  /** 所属分组ID */
   GroupId?: string;
   /** 微服务ID */
   MicroserviceId?: string;
@@ -4952,6 +4956,10 @@ declare interface DescribeDeliveryConfigsRequest {
   Offset?: number;
   /** 搜索条数 */
   Limit?: number;
+  /** 数据集idList */
+  ProgramIdList?: string[];
+  /** ConfigIdList */
+  ConfigIdList?: string[];
 }
 
 declare interface DescribeDeliveryConfigsResponse {
@@ -5078,11 +5086,13 @@ declare interface DescribeGatewayApisRequest {
   SearchWord?: string;
   /** 部署组ID */
   GatewayDeployGroupId?: string;
+  /** 发布状态, drafted(未发布)/released(已发布)/releasing(发布中)/failed(发布失败) */
+  ReleaseStatus?: string;
 }
 
 declare interface DescribeGatewayApisResponse {
   /** 翻页结构 */
-  Result: TsfPageApiDetailInfo;
+  Result?: TsfPageApiDetailInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5260,12 +5270,12 @@ declare interface DescribeGroupsResponse {
 declare interface DescribeGroupsWithPluginRequest {
   /** 插件ID */
   PluginId: string;
-  /** 绑定/未绑定: true / false */
-  Bound: boolean;
   /** 翻页偏移量 */
   Offset: number;
   /** 每页记录数量 */
   Limit: number;
+  /** 绑定/未绑定: true / false */
+  Bound?: boolean;
   /** 搜索关键字 */
   SearchWord?: string;
   /** 网关实体ID */
@@ -5274,7 +5284,7 @@ declare interface DescribeGroupsWithPluginRequest {
 
 declare interface DescribeGroupsWithPluginResponse {
   /** API分组信息列表 */
-  Result: TsfPageApiGroupInfo;
+  Result?: TsfPageApiGroupInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5491,9 +5501,9 @@ declare interface DescribeJvmMonitorResponse {
 
 declare interface DescribeLaneRulesRequest {
   /** 每页展示的条数 */
-  Limit: number;
+  Limit?: number;
   /** 翻页偏移量 */
-  Offset: number;
+  Offset?: number;
   /** 搜索关键词 */
   SearchWord?: string;
   /** 泳道规则ID（用于精确搜索） */
@@ -5504,7 +5514,7 @@ declare interface DescribeLaneRulesRequest {
 
 declare interface DescribeLaneRulesResponse {
   /** 泳道规则列表 */
-  Result: LaneRules | null;
+  Result?: LaneRules | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5676,12 +5686,12 @@ declare interface DescribePkgsResponse {
 declare interface DescribePluginInstancesRequest {
   /** 分组或者API的ID */
   ScopeValue: string;
-  /** 绑定: true; 未绑定: false */
-  Bound: boolean;
   /** 翻页偏移量 */
   Offset: number;
   /** 每页展示的条数 */
   Limit: number;
+  /** 绑定: true; 未绑定: false */
+  Bound?: boolean;
   /** 插件类型 */
   Type?: string;
   /** 搜索关键字 */
@@ -5690,7 +5700,7 @@ declare interface DescribePluginInstancesRequest {
 
 declare interface DescribePluginInstancesResponse {
   /** 插件信息列表 */
-  Result: TsfPageGatewayPlugin;
+  Result?: TsfPageGatewayPlugin;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7081,7 +7091,7 @@ declare interface UpdateApiGroupRequest {
   GroupName?: string;
   /** Api 分组描述 */
   Description?: string;
-  /** 鉴权类型 */
+  /** 鉴权类型。 secret： 密钥鉴权； none:无鉴权 */
   AuthType?: string;
   /** 分组上下文 */
   GroupContext?: string;
@@ -7097,7 +7107,7 @@ declare interface UpdateApiGroupRequest {
 
 declare interface UpdateApiGroupResponse {
   /** 返回结果，true: 成功, false: 失败 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7484,7 +7494,7 @@ declare interface Tsf {
   /** 查询java实例jvm监控数据 {@link DescribeJvmMonitorRequest} {@link DescribeJvmMonitorResponse} */
   DescribeJvmMonitor(data: DescribeJvmMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJvmMonitorResponse>;
   /** 查询泳道规则列表 {@link DescribeLaneRulesRequest} {@link DescribeLaneRulesResponse} */
-  DescribeLaneRules(data: DescribeLaneRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaneRulesResponse>;
+  DescribeLaneRules(data?: DescribeLaneRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaneRulesResponse>;
   /** 查询泳道列表 {@link DescribeLanesRequest} {@link DescribeLanesResponse} */
   DescribeLanes(data?: DescribeLanesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLanesResponse>;
   /** 查询微服务详情 {@link DescribeMicroserviceRequest} {@link DescribeMicroserviceResponse} */

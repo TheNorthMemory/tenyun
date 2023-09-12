@@ -4147,7 +4147,7 @@ declare interface PurgePathCacheRequest {
 
 declare interface PurgePathCacheResponse {
   /** 刷新任务 ID，同一批次提交的目录共用一个任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4163,7 +4163,7 @@ declare interface PurgeUrlsCacheRequest {
 
 declare interface PurgeUrlsCacheResponse {
   /** 刷新任务 ID，同一批次提交的 URL 共用一个任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

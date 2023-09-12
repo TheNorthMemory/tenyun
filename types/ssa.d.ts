@@ -10,6 +10,12 @@ declare interface AggregationObj {
   Bucket: Bucket[];
 }
 
+/** 用户威胁告警信息 */
+declare interface AlarmInfoRsp {
+  /** 近7天威胁告警 */
+  AttackEvent?: AttackEvent[] | null;
+}
+
 /** 告警详情 */
 declare interface AlertDetail {
   /** 告警基础信息 */
@@ -298,6 +304,26 @@ declare interface AssetTypeStatistic {
   AssetType: string | null;
   /** 统计计数 */
   AssetCount: number | null;
+}
+
+/** 攻击事件 */
+declare interface AttackEvent {
+  /** 来源ip */
+  SsaSrcIp?: string | null;
+  /** 目标ip */
+  SsaDstIp?: string | null;
+  /** 目标省份 */
+  SsaDstProvince?: string | null;
+  /** 目标城市 */
+  SsaDstCity?: string | null;
+  /** 目标国家 */
+  SsaDstCountry?: string | null;
+  /** 来源省份 */
+  SsaSrcProvince?: string | null;
+  /** 来源国家 */
+  SsaSrcCountry?: string | null;
+  /** 来源城市 */
+  SsaSrcCity?: string | null;
 }
 
 /** es聚合数据类型 */
@@ -1102,6 +1128,20 @@ declare interface VulList {
   Total: number;
 }
 
+declare interface DescribeAlarmStatRequest {
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+declare interface DescribeAlarmStatResponse {
+  /** 威胁告警信息 */
+  Data?: AlarmInfoRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAssetDetailListRequest {
   /** 查询条件，可支持的查询字段：AssetUniqid,AssetName,AssetIpAll,AssetVpcid,Tag */
   Filter?: AssetQueryFilter[];
@@ -1613,6 +1653,8 @@ declare interface SaEventPubResponse {
 /** {@link Ssa 安全运营中心} */
 declare interface Ssa {
   (): Versions;
+  /** 用户威胁告警信息 {@link DescribeAlarmStatRequest} {@link DescribeAlarmStatResponse} */
+  DescribeAlarmStat(data?: DescribeAlarmStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmStatResponse>;
   /** 资产安全页资产详情 {@link DescribeAssetDetailRequest} {@link DescribeAssetDetailResponse} */
   DescribeAssetDetail(data: DescribeAssetDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDetailResponse>;
   /** 获取资产列表 {@link DescribeAssetDetailListRequest} {@link DescribeAssetDetailListResponse} */

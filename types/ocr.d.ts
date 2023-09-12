@@ -2262,6 +2262,10 @@ declare interface DriverLicenseOCRResponse {
   State?: string;
   /** 累积记分（仅电子驾驶证支持返回该字段） */
   CumulativeScore?: string;
+  /** 当前时间（仅电子驾驶证支持返回该字段） */
+  CurrentTime?: string;
+  /** 生成时间（仅电子驾驶证支持返回该字段） */
+  GenerateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

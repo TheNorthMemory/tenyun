@@ -1404,6 +1404,8 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   IPv6InternetAccessible?: IPv6InternetAccessible;
   /** 置放群组id，仅支持指定一个。 */
   DisasterRecoverGroupIds?: string[];
+  /** 实例登录设置，包括密码、密钥或保持镜像的原始登录设置。请注意，指定新的登录设置会覆盖原有登录设置。例如，如果您之前使用密码登录，使用该参数将登录设置修改为密钥，则原有密码被清除。 */
+  LoginSettings?: LoginSettings;
 }
 
 declare interface ModifyLaunchConfigurationAttributesResponse {
