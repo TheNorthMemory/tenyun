@@ -2584,7 +2584,7 @@ declare interface DescribeSparkSessionBatchSqlLogRequest {
 }
 
 declare interface DescribeSparkSessionBatchSqlLogResponse {
-  /** 状态：0：初始化、1：成功、2：失败、3：取消、4：异常； */
+  /** 状态：0：运行中、1：成功、2：失败、3：取消、4：超时； */
   State?: number;
   /** 日志信息列表 */
   LogSet?: SparkSessionBatchLog[] | null;
@@ -3271,7 +3271,7 @@ declare interface Dlc {
   DescribeSparkAppJobs(data?: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
   /** 查询spark应用的运行任务实例列表 {@link DescribeSparkAppTasksRequest} {@link DescribeSparkAppTasksResponse} */
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
-  /** 获取SparkSQL批任务日志 {@link DescribeSparkSessionBatchSqlLogRequest} {@link DescribeSparkSessionBatchSqlLogResponse} */
+  /** 查询Spark SQL批任务日志 {@link DescribeSparkSessionBatchSqlLogRequest} {@link DescribeSparkSessionBatchSqlLogResponse} */
   DescribeSparkSessionBatchSqlLog(data: DescribeSparkSessionBatchSqlLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSqlLogResponse>;
   /** 查询结果存储位置 {@link DescribeStoreLocationRequest} {@link DescribeStoreLocationResponse} */
   DescribeStoreLocation(data?: DescribeStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStoreLocationResponse>;

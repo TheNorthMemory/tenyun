@@ -223,7 +223,9 @@ declare interface HostItem {
   /** 专用宿主机实例资源信息 */
   HostResource?: HostResource;
   /** 专用宿主机所属的围笼ID。该字段仅对金融专区围笼内的专用宿主机有效。 */
-  CageId: string | null;
+  CageId?: string | null;
+  /** 专用宿主机关联的标签列表。 */
+  Tags?: Tag[] | null;
 }
 
 /** cdh相关价格信息 */

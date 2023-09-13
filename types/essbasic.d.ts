@@ -1715,19 +1715,31 @@ declare interface CreateFlowsByTemplatesResponse {
 }
 
 declare interface CreateSealByImageRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent: Agent;
   /** 印章名称，最大长度不超过50字符 */
   SealName: string;
   /** 印章图片base64，大小不超过10M（原始图片不超过7.6M） */
-  SealImage: string;
+  SealImage?: string;
   /** 操作者的信息 */
   Operator?: UserInfo;
+  /** 本接口支持上传图片印章及系统直接生成印章； 如果要使用系统生成印章，此值传：SealGenerateSourceSystem； 如果要使用图片上传请传字段 SealImage */
+  GenerateSource?: string;
+  /** 电子印章类型：OFFICIAL-公章CONTRACT-合同专用章;FINANCE-合财务专用章;PERSONNEL-人事专用章默认：OFFICIAL */
+  SealType?: string;
+  /** 企业印章横向文字，最多可填15个汉字（若超过印章最大宽度，优先压缩字间距，其次缩小字号 */
+  SealHorizontalText?: string;
+  /** 印章样式:cycle:圆形印章ellipse:椭圆印章 注：默认圆形印章 */
+  SealStyle?: string;
+  /** 印章尺寸取值描述： 42_42 圆形企业公章直径42mm 40_40 圆形企业印章直径40mm 45_30 椭圆形印章45mm x 30mm */
+  SealSize?: string;
 }
 
 declare interface CreateSealByImageResponse {
-  /** 印章id */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId?: string;
+  /** 电子印章预览链接地址，地址默认失效时间为24小时。 */
+  ImageUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

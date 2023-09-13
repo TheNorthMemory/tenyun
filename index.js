@@ -271,6 +271,7 @@ export const SERVICE_VERSIONS = {
   waf: ['2018-01-25'],
   wav: ['2021-01-29'],
   wedata: ['2021-08-20'],
+  weilingwith : ['2023-04-27'],
   wss: ['2018-04-26'],
   yinsuda: ['2022-05-27'],
   youmall: ['2018-02-28'],

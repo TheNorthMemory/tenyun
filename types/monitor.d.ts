@@ -80,6 +80,8 @@ declare interface AlarmHistory {
   MetricsInfo: AlarmHistoryMetric[] | null;
   /** 告警实例的维度信息 */
   Dimensions: string | null;
+  /** 告警等级 */
+  AlarmLevel?: string | null;
 }
 
 /** 告警历史的指标信息 */

@@ -9024,18 +9024,6 @@ declare interface SplitMediaResponse {
   RequestId?: string;
 }
 
-declare interface VerifyDomainOwnershipForConsoleRequest {
-  /** 需要接入点播的域名。 */
-  Domain: string;
-  /** 需要开启加速的区域： Mainland: 中国大陆地区 Internation: 海外地区及港澳台 Global: 全球 不填会根据用户注册腾讯云时的地域信息自动判断 Mainland 或 Internation */
-  AccelerateArea: string;
-}
-
-declare interface VerifyDomainOwnershipForConsoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface VerifyDomainRecordRequest {
   /** 需要接入点播的加速域名。 */
   Domain: string;
@@ -9389,8 +9377,6 @@ declare interface Vod {
   SimpleHlsClip(data: SimpleHlsClipRequest, config?: AxiosRequestConfig): AxiosPromise<SimpleHlsClipResponse>;
   /** 视频拆条 {@link SplitMediaRequest} {@link SplitMediaResponse} */
   SplitMedia(data: SplitMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SplitMediaResponse>;
-  /** 控制台验证域名归属 {@link VerifyDomainOwnershipForConsoleRequest} {@link VerifyDomainOwnershipForConsoleResponse} */
-  VerifyDomainOwnershipForConsole(data: VerifyDomainOwnershipForConsoleRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainOwnershipForConsoleResponse>;
   /** 验证域名解析 {@link VerifyDomainRecordRequest} {@link VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: VerifyDomainRecordRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainRecordResponse>;
   /** 微信小程序视频发布 {@link WeChatMiniProgramPublishRequest} {@link WeChatMiniProgramPublishResponse} */

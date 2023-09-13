@@ -13,6 +13,18 @@ declare interface Aspect {
 }
 
 /** 图像识别批改接口返回的作文文本信息或批改信息 */
+declare interface CompositionContext {
+  /** 作文内容 */
+  Content: string;
+  /** 批改结果 */
+  CorrectData: CorrectData | null;
+  /** 任务 id，用于查询接口 */
+  TaskId: string | null;
+  /** 图像识别唯一标识，一次识别一个 SessionId */
+  SessionId: string | null;
+}
+
+/** 图像识别批改接口返回的作文文本信息或批改信息 */
 declare interface CompostionContext {
   /** 作文内容 */
   Content: string;
@@ -122,6 +134,8 @@ declare interface CorrectMultiImageRequest {
 declare interface CorrectMultiImageResponse {
   /** 接口返回数据 */
   Data?: CompostionContext;
+  /** 接口返回数据 */
+  ResultData?: CompositionContext;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -202,6 +216,8 @@ declare interface EHOCRRequest {
 declare interface EHOCRResponse {
   /** 接口返回数据 */
   Data?: CompostionContext;
+  /** 接口返回数据 */
+  ResultData?: CompositionContext;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

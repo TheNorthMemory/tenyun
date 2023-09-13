@@ -2244,6 +2244,22 @@ declare interface DescribePolicyStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribePortsRequest {
+  /** 版本 */
+  Edition?: string;
+  /** 实例ID */
+  InstanceID?: string;
+}
+
+declare interface DescribePortsResponse {
+  /** http端口列表 */
+  HttpPorts: string[];
+  /** https端口列表 */
+  HttpsPorts: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRuleLimitRequest {
   /** 域名 */
   Domain: string;
@@ -3237,6 +3253,8 @@ declare interface Waf {
   DescribePeakValue(data: DescribePeakValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakValueResponse>;
   /** 获取防护状态以及生效的实例id {@link DescribePolicyStatusRequest} {@link DescribePolicyStatusResponse} */
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
+  /** 获取非标端口列表 {@link DescribePortsRequest} {@link DescribePortsResponse} */
+  DescribePorts(data?: DescribePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortsResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
   /** Waf 会话定义查询接口 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */

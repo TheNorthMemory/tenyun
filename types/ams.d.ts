@@ -347,7 +347,7 @@ declare interface CreateAudioModerationTaskRequest {
 
 declare interface CreateAudioModerationTaskResponse {
   /** 该字段用于返回任务创建的结果，具体输出内容请参见TaskResult数据结构的详细描述。 */
-  Results: TaskResult[] | null;
+  Results?: TaskResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

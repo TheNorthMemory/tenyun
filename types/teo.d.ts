@@ -948,15 +948,15 @@ declare interface OriginGroup {
 
 /** 加速域名源站信息。 */
 declare interface OriginInfo {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6或域名类型源站；COS：COS源。ORIGIN_GROUP：源站组类型源站。AWS_S3：AWS S3对象存储源站。SPACE：Edgeone源站Space存储，Space存储不允许配置该类型源站。 */
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：COS 源；ORIGIN_GROUP：源站组类型源站；AWS_S3：S3兼容对象存储源站；LB: 负载均衡类型源站；SPACE：EdgeOne Shield Space 存储。 */
   OriginType: string;
-  /** 源站地址，当OriginType参数指定为ORIGIN_GROUP时，该参数填写源站组ID，其他情况下填写源站地址。 */
+  /** 源站地址，当 OriginType 参数指定为 ORIGIN_GROUP 时，该参数填写源站组 ID，其他情况下填写源站地址。 */
   Origin: string;
-  /** 备用源站组ID，该参数在OriginType参数指定为ORIGIN_GROUP时生效，为空表示不使用备用源站。 */
+  /** 备用源站组 ID，该参数在 OriginType 参数指定为 ORIGIN_GROUP 时生效，为空表示不使用备用源站。 */
   BackupOrigin?: string;
-  /** 指定是否允许访问私有对象存储源站，当源站类型OriginType=COS或AWS_S3时有效，取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为：off。 */
+  /** 指定是否允许访问私有对象存储源站，当源站类型 OriginType=COS 或 AWS_S3 时有效，取值有：on：使用私有鉴权；off：不使用私有鉴权。默认值：off。 */
   PrivateAccess?: string;
-  /** 私有鉴权使用参数，当源站类型PrivateAccess=on时有效。 */
+  /** 私有鉴权使用参数，当源站类型 PrivateAccess=on 时有效。 */
   PrivateParameters?: PrivateParameter[];
 }
 
