@@ -2667,7 +2667,7 @@ declare interface DownloadL4LogsRequest {
   ZoneIds?: string[];
   /** 四层实例 ID 集合。 */
   ProxyIds?: string[];
-  /** 分页查询的限制数目，默认值为 20，最大查询条目为 1000。 */
+  /** 分页查询的限制数目，默认值为 20，最大查询条目为 300。 */
   Limit?: number;
   /** 分页的偏移量，默认值为 0。 */
   Offset?: number;
@@ -2691,7 +2691,7 @@ declare interface DownloadL7LogsRequest {
   ZoneIds?: string[];
   /** 子域名集合，不填默认选择全部子域名。 */
   Domains?: string[];
-  /** 分页查询的限制数目，默认值为 20，最大查询条目为 1000。 */
+  /** 分页查询的限制数目，默认值为 20，最大查询条目为 300。 */
   Limit?: number;
   /** 分页的偏移量，默认值为 0。 */
   Offset?: number;

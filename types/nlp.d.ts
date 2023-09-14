@@ -383,7 +383,7 @@ declare interface Nlp {
   RetrieveSimilarWords(data: RetrieveSimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveSimilarWordsResponse>;
   /** 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */
   SentenceCorrection(data: SentenceCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceCorrectionResponse>;
-  /** 文案创作（内测版） {@link TestingTextGenerationRequest} {@link TestingTextGenerationResponse} */
+  /** @deprecated 文案创作（内测版） {@link TestingTextGenerationRequest} {@link TestingTextGenerationResponse} */
   TestingTextGeneration(data: TestingTextGenerationRequest, config?: AxiosRequestConfig): AxiosPromise<TestingTextGenerationResponse>;
   /** 文本润色 {@link TextEmbellishRequest} {@link TextEmbellishResponse} */
   TextEmbellish(data: TextEmbellishRequest, config?: AxiosRequestConfig): AxiosPromise<TextEmbellishResponse>;

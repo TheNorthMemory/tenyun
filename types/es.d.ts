@@ -112,7 +112,7 @@ declare interface EsDictionaryInfo {
   UpdateType: string;
 }
 
-/** ES公网访问访问控制信息 */
+/** ES公网访问控制信息 */
 declare interface EsPublicAcl {
   /** 访问黑名单 */
   BlackIpList?: string[];
@@ -672,6 +672,8 @@ declare interface Operation {
   Tasks: TaskDetail[];
   /** 操作进度 */
   Progress: number;
+  /** 操作者Uin */
+  SubAccountUin?: string | null;
 }
 
 /** 操作详情 */
@@ -726,6 +728,18 @@ declare interface OptionalWebServiceInfo {
   Version: string | null;
 }
 
+/** 任务进度详情 */
+declare interface ProcessDetail {
+  /** 已完成数量 */
+  Completed?: number | null;
+  /** 剩余数量 */
+  Remain?: number | null;
+  /** 总数量 */
+  Total?: number | null;
+  /** 任务类型：60：重启型任务70：分片迁移型任务80：节点变配任务 */
+  TaskType?: number | null;
+}
+
 /** 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项） */
 declare interface SubTaskDetail {
   /** 子任务名 */
@@ -766,6 +780,8 @@ declare interface TaskDetail {
   SubTasks: SubTaskDetail[];
   /** 任务花费时间 */
   ElapsedTime: number | null;
+  /** 任务进度详情 */
+  ProcessInfo?: ProcessDetail | null;
 }
 
 /** 可视化节点配置 */
@@ -1367,7 +1383,7 @@ declare interface UpdateDiagnoseSettingsRequest {
   InstanceId: string;
   /** 0：开启智能运维；-1：关闭智能运维 */
   Status?: number;
-  /** 智能运维每天定时巡检时间 */
+  /** 智能运维每天定时巡检时间，时间格式为HH:00:00，例如15:00:00 */
   CronTime?: string;
 }
 
@@ -1379,13 +1395,13 @@ declare interface UpdateDiagnoseSettingsResponse {
 declare interface UpdateDictionariesRequest {
   /** ES实例ID */
   InstanceId: string;
-  /** IK分词主词典COS地址 */
+  /** 安装时填IK分词主词典COS地址，删除时填词典名如test.dic */
   IkMainDicts?: string[];
-  /** IK分词停用词词典COS地址 */
+  /** 安装时填IK分词停用词词典COS地址，删除时填词典名如test.dic */
   IkStopwords?: string[];
-  /** 同义词词典COS地址 */
+  /** 安装时填同义词词典COS地址，删除时填词典名如test.dic */
   Synonym?: string[];
-  /** QQ分词词典COS地址 */
+  /** 安装时填QQ分词词典COS地址，删除时填词典名如test.dic */
   QQDict?: string[];
   /** 0：安装；1：删除。默认值0 */
   UpdateType?: number;
@@ -1489,7 +1505,7 @@ declare interface UpdateInstanceRequest {
 
 declare interface UpdateInstanceResponse {
   /** 订单号 */
-  DealName: string | null;
+  DealName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1585,7 +1601,7 @@ declare interface UpdateRequestTargetNodeTypesResponse {
 declare interface UpgradeInstanceRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1" */
+  /** 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1", "7.10.1", "7.14.2" */
   EsVersion: string;
   /** 是否只做升级检查，默认值为false */
   CheckOnly?: boolean;
@@ -1615,7 +1631,7 @@ declare interface UpgradeLicenseRequest {
   AutoVoucher?: number;
   /** 代金券ID列表（目前仅支持指定一张代金券） */
   VoucherIds?: string[];
-  /** 6.8（及以上版本）基础版是否开启xpack security认证1：不开启2：开启 */
+  /** 6.8（及以上版本）基础版是否开启xpack security认证1：不开启2：开启不传参时会默认维持原状，传参时需注意只能由不开启变为开启，无法由开启变为不开启 */
   BasicSecurityType?: number;
   /** 是否强制重启true强制重启false不强制重启 默认值false */
   ForceRestart?: boolean;
@@ -1623,7 +1639,7 @@ declare interface UpgradeLicenseRequest {
 
 declare interface UpgradeLicenseResponse {
   /** 订单号 */
-  DealName: string | null;
+  DealName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

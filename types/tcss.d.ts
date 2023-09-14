@@ -1009,45 +1009,45 @@ declare interface ConnDetectConfig {
 /** 容器列表集合 */
 declare interface ContainerInfo {
   /** 容器id */
-  ContainerID: string;
+  ContainerID?: string;
   /** 容器名称 */
-  ContainerName: string;
+  ContainerName?: string;
   /** 容器运行状态 */
-  Status: string;
+  Status?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 运行用户 */
-  RunAs: string;
+  RunAs?: string;
   /** 命令行 */
-  Cmd: string;
+  Cmd?: string;
   /** CPU使用率 *1000 */
-  CPUUsage: number;
+  CPUUsage?: number;
   /** 内存使用 kb */
-  RamUsage: number;
+  RamUsage?: number;
   /** 镜像名称 */
-  ImageName: string;
+  ImageName?: string;
   /** 镜像id */
-  ImageID: string;
+  ImageID?: string;
   /** 镜像id */
-  POD: string;
+  POD?: string;
   /** 主机id */
-  HostID: string;
+  HostID?: string;
   /** 主机ip */
-  HostIP: string;
+  HostIP?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 主机名称 */
-  HostName: string;
+  HostName?: string;
   /** 外网ip */
-  PublicIp: string;
+  PublicIp?: string;
   /** 网络状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败	ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
-  NetStatus: string;
+  NetStatus?: string;
   /** 网络子状态 */
-  NetSubStatus: string;
+  NetSubStatus?: string;
   /** 隔离来源 */
-  IsolateSource: string | null;
+  IsolateSource?: string | null;
   /** 隔离时间 */
-  IsolateTime: string | null;
+  IsolateTime?: string | null;
   /** 超级节点id */
   NodeID?: string;
   /** podip */
@@ -1062,6 +1062,12 @@ declare interface ContainerInfo {
   PodCpu?: number;
   /** 所属Pod的内存 */
   PodMem?: number;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群ID */
+  ClusterID?: string;
+  /** pod uid */
+  PodUid?: string | null;
 }
 
 /** 容器挂载信息 */
@@ -1447,73 +1453,91 @@ declare interface ImageProgress {
 /** 容器安全镜像仓库列表 */
 declare interface ImageRepoInfo {
   /** 镜像Digest */
-  ImageDigest: string;
+  ImageDigest?: string;
   /** 镜像仓库地址 */
-  ImageRepoAddress: string;
+  ImageRepoAddress?: string;
   /** 仓库类型 */
-  RegistryType: string;
+  RegistryType?: string;
   /** 镜像名称 */
-  ImageName: string;
+  ImageName?: string;
   /** 镜像版本 */
-  ImageTag: string;
+  ImageTag?: string;
   /** 镜像大小 */
-  ImageSize: number;
+  ImageSize?: number;
   /** 最近扫描时间 */
-  ScanTime: string;
+  ScanTime?: string;
   /** 扫描状态 */
-  ScanStatus: string;
+  ScanStatus?: string;
   /** 安全漏洞数 */
-  VulCnt: number;
+  VulCnt?: number;
   /** 木马病毒数 */
-  VirusCnt: number;
+  VirusCnt?: number;
   /** 风险行为数 */
-  RiskCnt: number;
+  RiskCnt?: number;
   /** 敏感信息数 */
-  SentiveInfoCnt: number;
+  SentiveInfoCnt?: number;
   /** 是否可信镜像 */
-  IsTrustImage: boolean;
+  IsTrustImage?: boolean;
   /** 镜像系统 */
-  OsName: string;
+  OsName?: string;
   /** 木马扫描错误 */
-  ScanVirusError: string | null;
+  ScanVirusError?: string | null;
   /** 漏洞扫描错误 */
-  ScanVulError: string | null;
+  ScanVulError?: string | null;
   /** 实例id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 命名空间 */
-  Namespace: string;
+  Namespace?: string;
   /** 高危扫描错误 */
-  ScanRiskError: string | null;
+  ScanRiskError?: string | null;
   /** 敏感信息扫描进度 */
-  ScanVirusProgress: number | null;
+  ScanVirusProgress?: number | null;
   /** 木马扫描进度 */
-  ScanVulProgress: number | null;
+  ScanVulProgress?: number | null;
   /** 漏洞扫描进度 */
-  ScanRiskProgress: number | null;
+  ScanRiskProgress?: number | null;
   /** 剩余扫描时间秒 */
-  ScanRemainTime: number | null;
+  ScanRemainTime?: number | null;
   /** cve扫描状态 */
-  CveStatus: string | null;
+  CveStatus?: string | null;
   /** 高危扫描状态 */
-  RiskStatus: string | null;
+  RiskStatus?: string | null;
   /** 木马扫描状态 */
-  VirusStatus: string | null;
+  VirusStatus?: string | null;
   /** 总进度 */
-  Progress: number | null;
+  Progress?: number | null;
   /** 授权状态 */
-  IsAuthorized: number;
+  IsAuthorized?: number;
   /** 仓库区域 */
-  RegistryRegion: string;
+  RegistryRegion?: string;
   /** 列表id */
-  Id: number;
+  Id?: number;
   /** 镜像Id */
-  ImageId: string | null;
+  ImageId?: string | null;
   /** 镜像创建的时间 */
-  ImageCreateTime: string | null;
+  ImageCreateTime?: string | null;
   /** 是否为镜像的最新版本 */
-  IsLatestImage: boolean | null;
+  IsLatestImage?: boolean | null;
+  /** low级别漏洞个数 */
+  LowLevelVulCnt?: number;
+  /** medium级别漏洞个数 */
+  MediumLevelVulCnt?: number;
+  /** high级别漏洞个数 */
+  HighLevelVulCnt?: number;
+  /** critical级别漏洞个数 */
+  CriticalLevelVulCnt?: number;
+  /** 关联容器数 */
+  ContainerCnt?: number;
+  /** 组件数 */
+  ComponentCnt?: number;
+  /** 是否运行中 */
+  IsRunning?: boolean;
+  /** 是否存在必修漏洞 */
+  HasNeedFixVul?: boolean;
+  /** 敏感信息 */
+  SensitiveInfoCnt?: number | null;
 }
 
 /** 容器安全镜像高危行为信息 */
@@ -1627,43 +1651,45 @@ declare interface ImageVirusInfo {
 /** 容器安全镜像漏洞信息 */
 declare interface ImageVul {
   /** 漏洞id */
-  CVEID: string | null;
+  CVEID?: string | null;
   /** 观点验证程序id */
-  POCID: string | null;
+  POCID?: string | null;
   /** 漏洞名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 涉及组件信息 */
-  Components: ComponentsInfo[] | null;
+  Components?: ComponentsInfo[] | null;
   /** 分类 */
-  Category: string | null;
+  Category?: string | null;
   /** 分类2 */
-  CategoryType: string | null;
+  CategoryType?: string | null;
   /** 风险等级 */
-  Level: string | null;
+  Level?: string | null;
   /** 描述 */
-  Des: string | null;
+  Des?: string | null;
   /** 解决方案 */
-  OfficialSolution: string | null;
+  OfficialSolution?: string | null;
   /** 引用 */
-  Reference: string | null;
+  Reference?: string | null;
   /** 防御方案 */
-  DefenseSolution: string | null;
+  DefenseSolution?: string | null;
   /** 提交时间 */
-  SubmitTime: string | null;
+  SubmitTime?: string | null;
   /** Cvss分数 */
-  CvssScore: string | null;
+  CvssScore?: string | null;
   /** Cvss信息 */
-  CvssVector: string | null;
+  CvssVector?: string | null;
   /** 是否建议修复 */
-  IsSuggest: string | null;
+  IsSuggest?: string | null;
   /** 修复版本号 */
-  FixedVersions: string | null;
+  FixedVersions?: string | null;
   /** 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp" */
-  Tag: string[] | null;
+  Tag?: string[] | null;
   /** 组件名 */
-  Component: string | null;
+  Component?: string | null;
   /** 组件版本 */
-  Version: string | null;
+  Version?: string | null;
+  /** 攻击热度 0-3 */
+  AttackLevel?: number | null;
 }
 
 /** 查询镜像绑定的运行时规则信息 */
@@ -1930,6 +1956,18 @@ declare interface ModifyIgnoreVul {
   ImageIDs?: string[];
   /** 当有镜像时镜像类型: LOCAL 本地镜像 REGISTRY 仓库镜像 */
   ImageType?: string;
+}
+
+/** 返回的命名空间列表信息 */
+declare interface NamespaceInfo {
+  /** 命名空间名称 */
+  Namespace?: string;
+  /** 包含仓库数 */
+  RegistryCnt?: number;
+  /** 包含镜像数 */
+  ImageCnt?: number;
+  /** 包含风险镜像数 */
+  RiskImageCnt?: number;
 }
 
 /** 网络集群资产审计返回结构体 */
@@ -3813,7 +3851,7 @@ declare interface CreateAccessControlsRuleExportJobResponse {
 }
 
 declare interface CreateAssetImageRegistryScanTaskOneKeyRequest {
-  /** 是否扫描全部镜像 */
+  /** 是否扫描全部镜像(废弃) */
   All?: boolean;
   /** 扫描的镜像列表 */
   Images?: ImageInfo[];
@@ -3821,6 +3859,18 @@ declare interface CreateAssetImageRegistryScanTaskOneKeyRequest {
   ScanType?: string[];
   /** 扫描的镜像列表Id */
   Id?: number[];
+  /** 是否最新镜像 */
+  IsLatest?: boolean;
+  /** 扫描范围 0全部镜像，1自选镜像，2推荐扫描镜像 */
+  ScanScope?: number;
+  /** 仓库类型 */
+  RegistryType?: string[];
+  /** 命名空间 */
+  Namespace?: string[];
+  /** 是否存在运行中的容器 */
+  ContainerRunning?: boolean;
+  /** 任务超时时长单位s */
+  Timeout?: number;
 }
 
 declare interface CreateAssetImageRegistryScanTaskOneKeyResponse {
@@ -5551,69 +5601,71 @@ declare interface DescribeAssetImageRegistryDetailRequest {
 
 declare interface DescribeAssetImageRegistryDetailResponse {
   /** 镜像Digest */
-  ImageDigest: string | null;
+  ImageDigest?: string | null;
   /** 镜像地址 */
-  ImageRepoAddress: string | null;
+  ImageRepoAddress?: string | null;
   /** 镜像类型 */
-  RegistryType: string | null;
+  RegistryType?: string | null;
   /** 仓库名称 */
-  ImageName: string | null;
+  ImageName?: string | null;
   /** 镜像版本 */
-  ImageTag: string | null;
+  ImageTag?: string | null;
   /** 扫描时间 */
-  ScanTime: string | null;
+  ScanTime?: string | null;
   /** 扫描状态 */
-  ScanStatus: string | null;
+  ScanStatus?: string | null;
   /** 安全漏洞数 */
-  VulCnt: number | null;
+  VulCnt?: number | null;
   /** 木马病毒数 */
-  VirusCnt: number | null;
+  VirusCnt?: number | null;
   /** 风险行为数 */
-  RiskCnt: number | null;
+  RiskCnt?: number | null;
   /** 敏感信息数 */
-  SentiveInfoCnt: number | null;
+  SentiveInfoCnt?: number | null;
   /** 镜像系统 */
-  OsName: string | null;
+  OsName?: string | null;
   /** 木马扫描错误 */
-  ScanVirusError: string | null;
+  ScanVirusError?: string | null;
   /** 漏洞扫描错误 */
-  ScanVulError: string | null;
+  ScanVulError?: string | null;
   /** 层文件信息 */
-  LayerInfo: string | null;
+  LayerInfo?: string | null;
   /** 实例id */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 命名空间 */
-  Namespace: string | null;
+  Namespace?: string | null;
   /** 高危扫描错误 */
-  ScanRiskError: string | null;
+  ScanRiskError?: string | null;
   /** 木马信息扫描进度 */
-  ScanVirusProgress: number | null;
+  ScanVirusProgress?: number | null;
   /** 漏洞扫描进度 */
-  ScanVulProgress: number | null;
+  ScanVulProgress?: number | null;
   /** 敏感扫描进度 */
-  ScanRiskProgress: number | null;
+  ScanRiskProgress?: number | null;
   /** 剩余扫描时间秒 */
-  ScanRemainTime: number | null;
+  ScanRemainTime?: number | null;
   /** cve扫描状态 */
-  CveStatus: string | null;
+  CveStatus?: string | null;
   /** 高危扫描状态 */
-  RiskStatus: string | null;
+  RiskStatus?: string | null;
   /** 木马扫描状态 */
-  VirusStatus: string | null;
+  VirusStatus?: string | null;
   /** 总进度 */
-  Progress: number | null;
+  Progress?: number | null;
   /** 授权状态 */
-  IsAuthorized: number | null;
+  IsAuthorized?: number | null;
   /** 镜像大小 */
-  ImageSize: number | null;
+  ImageSize?: number | null;
   /** 镜像Id */
-  ImageId: string | null;
+  ImageId?: string | null;
   /** 镜像区域 */
-  RegistryRegion: string | null;
+  RegistryRegion?: string | null;
   /** 镜像创建的时间 */
-  ImageCreateTime: string | null;
+  ImageCreateTime?: string | null;
+  /** 敏感信息数 */
+  SensitiveInfoCnt?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5655,13 +5707,15 @@ declare interface DescribeAssetImageRegistryListRequest {
   Order?: string;
   /** 是否仅展示各repository最新的镜像, 默认为false */
   OnlyShowLatest?: boolean;
+  /** 是否仅展示运行中容器镜像 */
+  IsRunning?: boolean;
 }
 
 declare interface DescribeAssetImageRegistryListResponse {
   /** 镜像仓库列表 */
-  List: ImageRepoInfo[] | null;
+  List?: ImageRepoInfo[] | null;
   /** 总数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5789,6 +5843,8 @@ declare interface DescribeAssetImageRegistryScanStatusOneKeyResponse {
 }
 
 declare interface DescribeAssetImageRegistrySummaryRequest {
+  /** 过滤字段 */
+  Filters?: AssetFilters[];
 }
 
 declare interface DescribeAssetImageRegistrySummaryResponse {
@@ -6946,10 +7002,12 @@ declare interface DescribeImageRegistryNamespaceListRequest {
 }
 
 declare interface DescribeImageRegistryNamespaceListResponse {
-  /** 可返回的项目空间的总量。 */
-  TotalCount: number;
-  /** 返回的项目空间列表 */
-  NamespaceList: string[];
+  /** 可返回的命令空间的总量。 */
+  TotalCount?: number;
+  /** 返回的命令空间列表 */
+  NamespaceList?: string[];
+  /** 返回的命令空间详细信息列表 */
+  NamespaceDetail?: NamespaceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6974,6 +7032,16 @@ declare interface DescribeImageRegistryTimingScanTaskResponse {
   Id?: number[] | null;
   /** 是否扫描最新版本镜像 */
   Latest?: boolean | null;
+  /** 扫描结束时间 */
+  ScanEndTime?: string | null;
+  /** 仓库类型 tcr,ccr,harbor */
+  RegistryType?: string[];
+  /** 是否存在运行中的容器 */
+  ContainerRunning?: boolean;
+  /** 扫描范围 0全部镜像，1自选镜像，2推荐扫描镜像 */
+  ScanScope?: number;
+  /** 命名空间 */
+  Namespace?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9997,6 +10065,16 @@ declare interface UpdateImageRegistryTimingScanTaskRequest {
   Id?: number[];
   /** 是否扫描最新版本 */
   Latest?: boolean;
+  /** 是否存在运行中的容器 */
+  ContainerRunning?: boolean;
+  /** 扫描结束时间 */
+  ScanEndTime?: string;
+  /** 扫描范围 0全部镜像，1自选镜像，2推荐扫描镜像 */
+  ScanScope?: number;
+  /** 仓库类型 tcr,ccr,harbor */
+  RegistryType?: string[];
+  /** 命名空间 */
+  Namespace?: string[];
 }
 
 declare interface UpdateImageRegistryTimingScanTaskResponse {
@@ -10397,7 +10475,7 @@ declare interface Tcss {
   DescribeImageAutoAuthorizedTaskList(data: DescribeImageAutoAuthorizedTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedTaskListResponse>;
   /** 查询本地镜像组件列表 {@link DescribeImageComponentListRequest} {@link DescribeImageComponentListResponse} */
   DescribeImageComponentList(data: DescribeImageComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageComponentListResponse>;
-  /** 查询用户镜像仓库下的项目名称列表 {@link DescribeImageRegistryNamespaceListRequest} {@link DescribeImageRegistryNamespaceListResponse} */
+  /** 查询用户镜像仓库下的命令空间列表 {@link DescribeImageRegistryNamespaceListRequest} {@link DescribeImageRegistryNamespaceListResponse} */
   DescribeImageRegistryNamespaceList(data?: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
   /** 镜像仓库查看定时任务 {@link DescribeImageRegistryTimingScanTaskRequest} {@link DescribeImageRegistryTimingScanTaskResponse} */
   DescribeImageRegistryTimingScanTask(data?: DescribeImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryTimingScanTaskResponse>;

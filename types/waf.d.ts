@@ -496,6 +496,22 @@ declare interface DomainURI {
 
 /** saas域名详情 */
 declare interface DomainsPartInfo {
+  /** 域名 */
+  Domain?: string;
+  /** 域名id */
+  DomainId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 类型 */
+  Edition?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 证书 */
+  Cert?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** AI防御模式 */
+  Engine?: number;
   /** 是否开启httpRewrite */
   HttpsRewrite?: number;
   /** https回源端口 */
@@ -982,6 +998,20 @@ declare interface QPSPackageNew {
   BillingItem?: string | null;
 }
 
+/** 获取弹性qps的默认相关值 */
+declare interface QpsData {
+  /** 弹性qps默认值 */
+  ElasticBillingDefault?: number | null;
+  /** 弹性qps最小值 */
+  ElasticBillingMin?: number | null;
+  /** 弹性qps最大值 */
+  ElasticBillingMax?: number | null;
+  /** 业务扩展包最大qps */
+  QPSExtendMax?: number | null;
+  /** 海外业务扩展包最大qps */
+  QPSExtendIntlMax?: number | null;
+}
+
 /** 响应体的返回码 */
 declare interface ResponseCode {
   /** 如果成功则返回Success，失败则返回云api定义的错误码 */
@@ -1056,13 +1086,13 @@ declare interface SpartaProtectionPort {
 
 /** 自定义规则的匹配条件结构体 */
 declare interface Strategy {
-  /** 匹配字段 有以下枚举值：IP-来源IP	IPV6-来源IPv6	Referer-Referer	URL-请求路径UserAgent-UserAgent	HTTP_METHOD-HTTP请求方法	QUERY_STRING-请求字符串	GET-GET参数值	GET_PARAMS_NAMES-GET参数名	POST-POST参数值	GET_POST_NAMES-POST参数名	POST_BODY-完整BODY	COOKIE-Cookie	GET_COOKIES_NAMES-Cookie参数名	ARGS_COOKIE-Cookie参数值	GET_HEADERS_NAMES-Header参数名	ARGS_HEADER-Header参数值 */
+  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内 */
   Field: string | null;
-  /** 逻辑符号 有以下枚举值：empty - 内容为空 null - 不存在 eq - 等于 neq - 不等于 contains - 包含 ncontains - 不包含 strprefix - 前缀匹配 strsuffix - 后缀匹配 len_eq - 长度等于 len_gt - 长度大于 len_lt - 长度小于 ipmatch - 属于 ipnmatch - 不属于 */
+  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
   CompareFunc: string | null;
-  /** 匹配内容目前 只有匹配字段为COOKIE-Cookie时，才不需要输入 匹配内容其他都需要 */
+  /** 匹配内容 目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要 */
   Content: string | null;
-  /** 匹配参数目前 只有匹配字段为以下4个时，匹配参数才能选择，否则置灰无法选择	GET-GET参数值	POST-POST参数值	ARGS_COOKIE-Cookie参数值	ARGS_HEADER-Header参数值 */
+  /** 匹配参数 配置参数一共分2种类型 不支持参数与支持参数 当匹配字段为以下4个时，匹配参数才能录入，否则不支持该参数 GET（GET参数值） POST（POST参数值） ARGS_COOKIE（Cookie参数值） ARGS_HEADER（Header参数值） */
   Arg: string | null;
 }
 
@@ -1323,7 +1353,7 @@ declare interface AddSpartaProtectionRequest {
   Ports?: PortItem[];
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF，cdn-waf表示CDN上的Web防护能力 */
   Edition?: string;
-  /** 是否开启长连接，仅IP回源时可以用填次参数，域名回源时这个参数无效 */
+  /** 是否开启长连接，0 短连接，1 长连接 */
   IsKeepAlive?: string;
   /** 实例id，上线之后带上此字段 */
   InstanceID?: string;
@@ -2454,6 +2484,20 @@ declare interface GetAttackTotalCountResponse {
   RequestId?: string;
 }
 
+declare interface GetInstanceQpsLimitRequest {
+  /** 套餐实例id */
+  InstanceId: string;
+  /** 套餐类型 */
+  Type?: string;
+}
+
+declare interface GetInstanceQpsLimitResponse {
+  /** 弹性qps相关值集合 */
+  QpsData?: QpsData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAccessPeriodRequest {
   /** 访问日志保存期限，范围为[1, 30] */
   Period: number;
@@ -3285,6 +3329,8 @@ declare interface Waf {
   GetAttackHistogram(data: GetAttackHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackHistogramResponse>;
   /** 攻击总次数 {@link GetAttackTotalCountRequest} {@link GetAttackTotalCountResponse} */
   GetAttackTotalCount(data: GetAttackTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackTotalCountResponse>;
+  /** 获取套餐实例的弹性qps上限 {@link GetInstanceQpsLimitRequest} {@link GetInstanceQpsLimitResponse} */
+  GetInstanceQpsLimit(data: GetInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceQpsLimitResponse>;
   /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
   /** 编辑防篡改url {@link ModifyAntiFakeUrlRequest} {@link ModifyAntiFakeUrlResponse} */

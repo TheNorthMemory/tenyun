@@ -852,6 +852,14 @@ declare interface InstanceInfo {
   DealName?: string | null;
   /** 资源ID同唯一id */
   ResourceId?: string;
+  /** 公网IP列表 */
+  OuterIpList?: string[] | null;
+  /** 内网IP列表 */
+  InnerIpList?: string[] | null;
+  /** 专享实例计费信息 */
+  InstanceChargePrepaid?: InstanceChargePrepaid | null;
+  /** 所属vpc */
+  UniqVpcId?: string | null;
 }
 
 /** 独享实例参数信息 */

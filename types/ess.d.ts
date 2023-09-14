@@ -104,7 +104,7 @@ declare interface AutoSignConfig {
   CallbackUrl?: string;
   /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸认别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不使用个人自动签账号许可进行开通 */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人` */
   LicenseType?: number;
 }
 
@@ -530,41 +530,41 @@ declare interface FlowDetailInfo {
 
 /** 此结构体(FlowGroupInfo)描述的是合同组(流程组)的单个合同(流程)信息 */
 declare interface FlowGroupInfo {
-  /** 合同（流程）的名称 */
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
   FlowName: string;
-  /** 合同（流程）的签署方信息 */
+  /** 签署流程参与者信息，最大限制50方注意 approver中的顺序需要和模板中的顺序保持一致， 否则会导致模板中配置的信息无效。 */
   Approvers: ApproverInfo[];
-  /** 发起合同（流程）的资源Id,此资源必须是PDF文件,来自UploadFiles,使用文件发起合同(流程)组时必传 */
+  /** 文件资源ID，通过多文件上传[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获得，为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。 */
   FileIds?: string[];
-  /** 发起合同（流程）的模板Id,用模板发起合同（流程）组时必填 */
+  /** 合同模板ID，为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId?: string;
-  /** 合同（流程）的类型 */
+  /** 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符示例值：劳务合同 */
   FlowType?: string;
-  /** 合同（流程）的描述 */
+  /** 签署流程描述,最大长度1000个字符 */
   FlowDescription?: string;
-  /** 合同（流程）的截止时间戳，单位秒。默认是一年 */
+  /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后示例值：1604912664 */
   Deadline?: number;
   /** 合同（流程）的回调地址 */
   CallbackUrl?: string;
-  /** 第三方平台传递过来的信息, 限制1024字符 格式必须是base64的 */
+  /** 调用方自定义的个性化字段(可自定义此字段的值)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
-  /** 合同（流程）的签署是否是无序签, true - 无序。 false - 有序, 默认 */
+  /** 发送类型：true：无序签false：有序签注：默认为false（有序签），请和模板中的配置保持一致示例值：true */
   Unordered?: boolean;
-  /** 合同（流程）发起方的填写控件, 由发起方进行在发起时进行填充 */
+  /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体单行文本控件多行文本控件勾选框控件数字控件图片控件动态表格等填写控件 */
   Components?: Component[];
-  /** 本企业（发起方）是否需要签署审批，若需要审批则只允许查看不允许签署，需要您调用接口CreateFlowSignReview提交审批结果。 */
+  /** 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。若设置为true，审核结果需通过接口 [CreateFlowSignReview](https://qian.tencent.com/developers/companyApis/operateFlows/CreateFlowSignReview) 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。示例值：true */
   NeedSignReview?: boolean;
-  /** 本企业（发起方）自动签署，需要您在发起合同时给印章控件指定自动签的印章。 */
+  /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN示例值：E_PRESCRIPTION_AUTO_SIGN */
   AutoSignScene?: string;
 }
 
 /** 此结构体(FlowGroupOptions)描述的是合同组的个性化配置，支持控制是否发送短信、未实名个人签署方查看合同组时是否需要实名认证（仅在合同组文件发起配置时生效） */
 declare interface FlowGroupOptions {
-  /** 发起合同（流程）组的合同（流程）签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证参数说明：此参数仅在合同组文件发起有效，可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
+  /** 签署人校验方式,支持以下类型VerifyCheck : 人脸识别 (默认值)MobileCheck : 手机号验证参数说明：此参数仅在合同组文件发起有效，可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
   ApproverVerifyType?: string;
-  /** 发起合同（流程）组本方企业经办人通知方式签署通知类型：sms--短信，none--不通知 */
+  /** 发起合同（流程）组本方企业经办人通知方式签署通知类型，支持以下类型sms : 短信 (默认值)none : 不通知 */
   SelfOrganizationApproverNotifyType?: string;
-  /** 发起合同（流程）组他方经办人通知方式签署通知类型：sms--短信，none--不通知 */
+  /** 发起合同（流程）组他方经办人通知方式签署通知类型，支持以下类型sms : 短信 (默认值)none : 不通知 */
   OtherApproverNotifyType?: string;
 }
 
@@ -1050,7 +1050,7 @@ declare interface UserThreeFactor {
 declare interface WebThemeConfig {
   /** 是否显示页面底部电子签logo，取值如下： **true**：页面底部显示电子签logo **false**：页面底部不显示电子签logo（默认） */
   DisplaySignBrandLogo?: boolean;
-  /** 主题颜色支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65) */
+  /** 主题颜色：支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65) */
   WebEmbedThemeColor?: string;
 }
 
@@ -1294,9 +1294,9 @@ declare interface CreateFlowEvidenceReportRequest {
 }
 
 declare interface CreateFlowEvidenceReportResponse {
-  /** 出证报告 ID，可用于DescribeFlowEvidenceReport接口查询出证PDF的下载地址 */
+  /** 出证报告 ID，可用于获取出证报告任务执行结果查询出证任务结果和出证PDF的下载URL */
   ReportId?: string | null;
-  /** 出证任务执行的状态, 可能会有以下状态：EvidenceStatusExecuting： 出证任务在执行中EvidenceStatusSuccess： 出证任务执行成功EvidenceStatusFailed ： 出征任务执行失败 */
+  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
   Status?: string;
   /** 此字段已经废除,不再使用.出证的PDF下载地址请调用DescribeChannelFlowEvidenceReport接口获取 */
   ReportUrl?: string | null;
@@ -1305,15 +1305,15 @@ declare interface CreateFlowEvidenceReportResponse {
 }
 
 declare interface CreateFlowGroupByFilesRequest {
-  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 合同（流程）组名称,最大长度200个字符 */
+  /** 合同（流程）组名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowGroupName: string;
   /** 合同（流程）组的子合同信息，支持2-50个子合同 */
   FlowGroupInfos: FlowGroupInfo[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 合同（流程）组的配置项信息。包括是否通知本企业签署方，是否通知其他签署方 */
+  /** 合同（流程）组的配置项信息。其中包括：是否通知本企业签署方是否通知其他签署方 */
   FlowGroupOptions?: FlowGroupOptions;
 }
 
@@ -1577,7 +1577,7 @@ declare interface CreateOrganizationBatchSignUrlRequest {
   Agent?: Agent;
   /** 员工在腾讯电子签平台的独特身份标识，为32位字符串。您可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查阅某位员工的UserId（在页面中显示为用户ID）。UserId必须是传入合同（FlowId）中的签署人。- 1. 若UserId为空，Name和Mobile 必须提供。- 2. 若UserId 与 Name，Mobile均存在，将优先采用UserId对应的员工。 */
   UserId?: string;
-  /** 员工姓名，必须与手机号码一起使用。 如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。 */
+  /** 员工姓名，必须与手机号码一起使用。如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。 */
   Name?: string;
   /** 员工手机号，必须与姓名一起使用。 如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。 */
   Mobile?: string;
@@ -1861,13 +1861,13 @@ declare interface CreateUserAutoSignEnableUrlResponse {
 }
 
 declare interface CreateWebThemeConfigRequest {
-  /** 操作人信息 */
+  /** 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 主题类型EMBED_WEB_THEME：嵌入式主题目前只支持EMBED_WEB_THEME，web页面嵌入的主题风格配置 */
+  /** 主题类型，取值如下： **EMBED_WEB_THEME**：嵌入式主题（默认），web页面嵌入的主题风格配置 */
   ThemeType: string;
   /** 主题配置 */
   WebThemeConfig: WebThemeConfig;
-  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
@@ -2029,16 +2029,16 @@ declare interface DescribeFlowComponentsResponse {
 declare interface DescribeFlowEvidenceReportRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 签署报告编号 */
+  /** 签署报告编号, 由提交申请出证报告任务产生 */
   ReportId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface DescribeFlowEvidenceReportResponse {
-  /** 出证报告PDF的下载 URL */
+  /** 出证报告PDF的下载 URL，`有效期为5分钟`，超过有效期后将无法再下载。 */
   ReportUrl?: string | null;
-  /** 签署报告出证任务的状态EvidenceStatusExecuting : 出证任务在执行中EvidenceStatusSuccess : 出证任务执行成功EvidenceStatusFailed : 出证任务执行失败 */
+  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2278,7 +2278,7 @@ declare interface DescribeUserAutoSignStatusResponse {
   LicenseFrom?: number;
   /** 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。值为unix时间戳,单位为秒。 */
   LicenseTo?: number;
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不使用个人自动签账号许可进行开通 */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人` */
   LicenseType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2511,7 +2511,7 @@ declare interface Ess {
   CreateFlowApprovers(data: CreateFlowApproversRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowApproversResponse>;
   /** 用PDF文件创建签署流程 {@link CreateFlowByFilesRequest} {@link CreateFlowByFilesResponse} */
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;
-  /** 创建并返回出证报告 {@link CreateFlowEvidenceReportRequest} {@link CreateFlowEvidenceReportResponse} */
+  /** 提交申请出证报告任务 {@link CreateFlowEvidenceReportRequest} {@link CreateFlowEvidenceReportResponse} */
   CreateFlowEvidenceReport(data: CreateFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowEvidenceReportResponse>;
   /** 通过多文件创建合同组签署流程 {@link CreateFlowGroupByFilesRequest} {@link CreateFlowGroupByFilesResponse} */
   CreateFlowGroupByFiles(data: CreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupByFilesResponse>;
@@ -2569,7 +2569,7 @@ declare interface Ess {
   DescribeFlowBriefs(data: DescribeFlowBriefsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowBriefsResponse>;
   /** 查询流程填写控件内容 {@link DescribeFlowComponentsRequest} {@link DescribeFlowComponentsResponse} */
   DescribeFlowComponents(data: DescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowComponentsResponse>;
-  /** 查询签署报告 {@link DescribeFlowEvidenceReportRequest} {@link DescribeFlowEvidenceReportResponse} */
+  /** 获取出证报告任务执行结果 {@link DescribeFlowEvidenceReportRequest} {@link DescribeFlowEvidenceReportResponse} */
   DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;
   /** 查询合同详情 {@link DescribeFlowInfoRequest} {@link DescribeFlowInfoResponse} */
   DescribeFlowInfo(data?: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;

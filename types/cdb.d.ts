@@ -86,6 +86,8 @@ declare interface AuditLog {
   NsTime?: number | null;
   /** 事物持续时间，微秒。 */
   TrxLivingTime?: number | null;
+  /** 日志命中规则模板的基本信息 */
+  TemplateInfo?: LogRuleTemplateInfo[] | null;
 }
 
 /** 审计日志分析结果 */
@@ -688,7 +690,7 @@ declare interface Inbound {
 
 /** 审计日志搜索过滤器 */
 declare interface InstanceAuditLogFilters {
-  /** 过滤项。目前支持以下搜索条件：包含、不包含、包含（分词维度）、不包含（分词维度）:sql - SQL详情等于、不等于、包含、不包含：host - 客户端地址；user - 用户名；dbName - 数据库名称；等于、不等于：sqlType - SQL类型；errCode - 错误码；threadId - 线程ID；范围搜索（时间类型统一为微秒）：execTime - 执行时间；lockWaitTime - 执行时间；ioWaitTime - IO等待时间；trxLivingTime - 事物持续时间；cpuTime - cpu时间；checkRows - 扫描行数；affectRows - 影响行数；sentRows - 返回行数。 */
+  /** 过滤项。目前支持以下搜索条件：包含、不包含、包含（分词维度）、不包含（分词维度）:sql - SQL详情；alarmLevel - 告警等级；ruleTemplateId - 规则模板Id等于、不等于、包含、不包含：host - 客户端地址；user - 用户名；dbName - 数据库名称；等于、不等于：sqlType - SQL类型；errCode - 错误码；threadId - 线程ID；范围搜索（时间类型统一为微秒）：execTime - 执行时间；lockWaitTime - 执行时间；ioWaitTime - IO等待时间；trxLivingTime - 事物持续时间；cpuTime - cpu时间；checkRows - 扫描行数；affectRows - 影响行数；sentRows - 返回行数。 */
   Type?: string;
   /** 过滤条件。支持以下条件：WINC-包含（分词维度），WEXC-不包含（分词维度）,INC - 包含,EXC - 不包含,EQS - 等于,NEQ - 不等于,RA - 范围。 */
   Compare?: string;
@@ -826,6 +828,18 @@ declare interface LocalBinlogConfigDefault {
   SaveHours: number;
   /** 本地binlog空间使用率，可取值范围：[30,50]。 */
   MaxUsage: number;
+}
+
+/** 审计日志命中规则模板的基本信息 */
+declare interface LogRuleTemplateInfo {
+  /** 模板ID。 */
+  RuleTemplateId?: string | null;
+  /** 规则模板名 */
+  RuleTemplateName?: string | null;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: string | null;
+  /** 规则模板变更状态：0-未变更；1-已变更；2-已删除 */
+  RuleTemplateStatus?: number | null;
 }
 
 /** 主实例信息 */
@@ -2351,9 +2365,9 @@ declare interface DescribeAuditLogFilesRequest {
 
 declare interface DescribeAuditLogFilesResponse {
   /** 符合条件的审计日志文件个数。 */
-  TotalCount?: number;
+  TotalCount: number;
   /** 审计日志文件详情。 */
-  Items?: AuditLogFile[];
+  Items: AuditLogFile[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4105,8 +4119,10 @@ declare interface OpenAuditServiceRequest {
   HighLogExpireDay?: number;
   /** 审计规则。同RuleTemplateIds都不填是全审计。 */
   AuditRuleFilters?: AuditRuleFilters[];
-  /** 规则模版ID。同AuditRuleFilters都不填是全审计。 */
+  /** 规则模板ID。同AuditRuleFilters都不填是全审计。 */
   RuleTemplateIds?: string[];
+  /** 审计类型。true-全审计；默认false-规则审计。 */
+  AuditAll?: boolean;
 }
 
 declare interface OpenAuditServiceResponse {

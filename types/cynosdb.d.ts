@@ -458,6 +458,8 @@ declare interface CynosdbClusterDetail {
   ResourcePackages?: ResourcePackage[] | null;
   /** 自动续费标识，1为自动续费，0为到期不续 */
   RenewFlag?: number | null;
+  /** 节点网络类型 */
+  NetworkType?: string | null;
 }
 
 /** 实例错误日志返回类型 */
@@ -1503,11 +1505,11 @@ declare interface UserHostPrivilege {
 /** 可用区库存信息 */
 declare interface ZoneStockInfo {
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 是否有库存 */
-  HasStock: boolean;
+  HasStock?: boolean;
   /** 库存数量 */
-  StockCount: number;
+  StockCount?: number;
 }
 
 declare interface ActivateInstanceRequest {
@@ -4135,7 +4137,7 @@ declare interface Cynosdb {
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
   /** 查询实例慢日志详情 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
-  /** 查询实例规格 {@link DescribeInstanceSpecsRequest} {@link DescribeInstanceSpecsResponse} */
+  /** 查询购买页可购买的实例规格 {@link DescribeInstanceSpecsRequest} {@link DescribeInstanceSpecsResponse} */
   DescribeInstanceSpecs(data: DescribeInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsResponse>;
   /** 查询实例的列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;

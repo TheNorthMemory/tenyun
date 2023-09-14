@@ -112,6 +112,50 @@ declare interface CloudNativeAPIGatewayCanaryRuleCondition {
   GlobalConfigName?: string | null;
 }
 
+/** 云原生API网关配置信息。 */
+declare interface CloudNativeAPIGatewayConfig {
+  /** 控制台类型。 */
+  ConsoleType?: string;
+  /** HTTP链接地址。 */
+  HttpUrl?: string | null;
+  /** HTTPS链接地址。 */
+  HttpsUrl?: string;
+  /** 网络类型, Open|Internal。 */
+  NetType?: string;
+  /** 管理员用户名。 */
+  AdminUser?: string | null;
+  /** 管理员密码。 */
+  AdminPassword?: string | null;
+  /** 网络状态, Open|Closed|Updating */
+  Status?: string | null;
+  /** 网络访问策略 */
+  AccessControl?: NetworkAccessControl | null;
+  /** 内网子网 ID */
+  SubnetId?: string | null;
+  /** 内网VPC ID */
+  VpcId?: string | null;
+  /** 负载均衡的描述 */
+  Description?: string | null;
+  /** 负载均衡的规格类型，传 "SLA" 表示性能容量型，返回空为共享型 */
+  SlaType?: string | null;
+  /** clb vip */
+  Vip?: string | null;
+  /** 带宽 */
+  InternetMaxBandwidthOut?: number | null;
+  /** 是否多可用区 */
+  MultiZoneFlag?: boolean | null;
+  /** 主可用区 */
+  MasterZoneId?: string | null;
+  /** 备可用区 */
+  SlaveZoneId?: string | null;
+  /** 主可用区名称 */
+  MasterZoneName?: string | null;
+  /** 备可用区名称 */
+  SlaveZoneName?: string | null;
+  /** 网络 id */
+  NetworkId?: string | null;
+}
+
 /** 云原生API网关节点信息。 */
 declare interface CloudNativeAPIGatewayNode {
   /** 云原生网关节点 id */
@@ -296,6 +340,20 @@ declare interface DeleteNativeGatewayServerGroupResult {
   Status?: string;
   /** 任务ID */
   TaskId?: string | null;
+}
+
+/** 获取云原生API网关实例网络配置结果。 */
+declare interface DescribeCloudNativeAPIGatewayConfigResult {
+  /** 网关实例ID。 */
+  GatewayId?: string;
+  /** 分组网络配置列表。 */
+  ConfigList?: CloudNativeAPIGatewayConfig[];
+  /** 分组子网信息 */
+  GroupSubnetId?: string | null;
+  /** 分组VPC信息 */
+  GroupVpcId?: string | null;
+  /** 分组ID */
+  GroupId?: string | null;
 }
 
 /** 获取网关节点信息 */
@@ -760,6 +818,16 @@ declare interface NativeGatewayServerGroups {
   TotalCount: number;
   /** 分组信息数组。 */
   GatewayGroupList: NativeGatewayServerGroup[];
+}
+
+/** 网络访问策略 */
+declare interface NetworkAccessControl {
+  /** 访问模式：Whitelist|Blacklist */
+  Mode: string;
+  /** 白名单列表 */
+  CidrWhiteList?: string[];
+  /** 黑名单列表 */
+  CidrBlackList?: string[];
 }
 
 /** 查询Limiter的接入地址 */
@@ -1230,6 +1298,20 @@ declare interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
 declare interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
   /** 灰度规则列表 */
   Result?: CloudAPIGatewayCanaryRuleList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConfigRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 分组id，不填时为默认分组 */
+  GroupId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConfigResponse {
+  /** 获取云原生API网关响应结果。 */
+  Result?: DescribeCloudNativeAPIGatewayConfigResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1738,6 +1820,8 @@ declare interface Tse {
   DescribeCloudNativeAPIGateway(data: DescribeCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayResponse>;
   /** 查询云原生网关灰度规则列表 {@link DescribeCloudNativeAPIGatewayCanaryRulesRequest} {@link DescribeCloudNativeAPIGatewayCanaryRulesResponse} */
   DescribeCloudNativeAPIGatewayCanaryRules(data: DescribeCloudNativeAPIGatewayCanaryRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCanaryRulesResponse>;
+  /** 获取云原生API网关实例网络配置信息 {@link DescribeCloudNativeAPIGatewayConfigRequest} {@link DescribeCloudNativeAPIGatewayConfigResponse} */
+  DescribeCloudNativeAPIGatewayConfig(data: DescribeCloudNativeAPIGatewayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConfigResponse>;
   /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */
   DescribeCloudNativeAPIGatewayNodes(data: DescribeCloudNativeAPIGatewayNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayNodesResponse>;
   /** 获取云原生API网关实例端口信息 {@link DescribeCloudNativeAPIGatewayPortsRequest} {@link DescribeCloudNativeAPIGatewayPortsResponse} */

@@ -2,30 +2,8 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 评估项信息 */
-declare interface DescribeStrategie {
-  /** 评估项ID */
-  StrategyId: number | null;
-  /** 评估项名称 */
-  Name: string | null;
-  /** 评估项描述 */
-  Desc: string | null;
-  /** 评估项对应产品ID */
-  Product: string | null;
-  /** 评估项对应产品名称 */
-  ProductDesc: string | null;
-  /** 评估项优化建议 */
-  Repair: string | null;
-  /** 评估项类别ID */
-  GroupId: number | null;
-  /** 评估项类别名称 */
-  GroupName: string | null;
-  /** 评估项风险列表 */
-  Conditions: DescribeStrategiesCondition[] | null;
-}
-
 /** 评估项警告条件 */
-declare interface DescribeStrategiesCondition {
+declare interface Conditions {
   /** 警告条件ID */
   ConditionId: number | null;
   /** 警告级别，2:中风险，3:高风险 */
@@ -56,12 +34,34 @@ declare interface RiskFieldsDesc {
   FieldDict: KeyValue[] | null;
 }
 
+/** 评估项信息 */
+declare interface Strategies {
+  /** 评估项ID */
+  StrategyId?: number | null;
+  /** 评估项名称 */
+  Name?: string | null;
+  /** 评估项描述 */
+  Desc?: string | null;
+  /** 评估项对应产品ID */
+  Product?: string | null;
+  /** 评估项对应产品名称 */
+  ProductDesc?: string | null;
+  /** 评估项优化建议 */
+  Repair?: string | null;
+  /** 评估项类别ID */
+  GroupId?: number | null;
+  /** 评估项类别名称 */
+  GroupName?: string | null;
+  /** 评估项风险列表 */
+  Conditions?: Conditions[] | null;
+}
+
 declare interface DescribeStrategiesRequest {
 }
 
 declare interface DescribeStrategiesResponse {
   /** 评估项列表 */
-  Strategies: DescribeStrategie[] | null;
+  Strategies?: Strategies[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

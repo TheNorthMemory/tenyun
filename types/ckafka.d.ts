@@ -3042,6 +3042,18 @@ declare interface DeleteGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteInstancePostRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DeleteInstancePostResponse {
+  /** 返回的结果集 */
+  Result?: InstanceDeleteResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteInstancePreRequest {
   /** 实例id */
   InstanceId: string;
@@ -3850,6 +3862,11 @@ declare interface InstanceAttributesResponse {
   InstanceChargeType?: string | null;
 }
 
+declare interface InstanceDeleteResponse {
+  /** 删除实例返回的任务Id */
+  FlowId: number | null;
+}
+
 declare interface InstanceDetailResponse {
   /** 符合条件的实例总数 */
   TotalCount: number;
@@ -4284,6 +4301,8 @@ declare interface Ckafka {
   DeleteDatahubTopic(data: DeleteDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTopicResponse>;
   /** 删除消费组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
+  /** 删除后付费实例 {@link DeleteInstancePostRequest} {@link DeleteInstancePostResponse} */
+  DeleteInstancePost(data: DeleteInstancePostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancePostResponse>;
   /** 删除预付费实例 {@link DeleteInstancePreRequest} {@link DeleteInstancePreResponse} */
   DeleteInstancePre(data: DeleteInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancePreResponse>;
   /** 删除路由 {@link DeleteRouteRequest} {@link DeleteRouteResponse} */
