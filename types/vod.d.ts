@@ -373,27 +373,27 @@ declare interface AiAnalysisTaskTagResult {
 /** 音视频审核结果 */
 declare interface AiContentReviewResult {
   /** 任务的类型，可以取的值有：Porn：图片鉴别是否涉及令人反感的信息Terrorism：图片鉴别是否涉及令人不安全的信息Political：图片鉴别是否涉及令人不适宜的信息Porn.Asr：Asr 文字（ 音频中的文字）鉴别是否涉及令人反感的信息Porn.Ocr：Ocr 文字鉴别是否涉及令人反感的信息Political.Asr：Asr 文字（ 音频中的文字）鉴别是否涉及令人不适宜的信息Political.Ocr：Ocr 文字鉴别是否涉及令人不适宜的信息Terrorism.Ocr：Ocr 文字鉴别是否涉及令人不安全的信息Prohibited.Asr：Asr 文字（ 音频中的文字）鉴违禁Prohibited.Ocr：Ocr 文字鉴违禁 */
-  Type: string;
+  Type?: string;
   /** 视频音视频审核任务（画面涉及令人反感的信息）的查询结果，当任务类型为 Porn 时有效。 */
-  PornTask: AiReviewTaskPornResult | null;
+  PornTask?: AiReviewTaskPornResult | null;
   /** 视频音视频审核任务（画面涉及令人不安全的信息）的查询结果，当任务类型为 Terrorism 时有效。 */
-  TerrorismTask: AiReviewTaskTerrorismResult | null;
+  TerrorismTask?: AiReviewTaskTerrorismResult | null;
   /** 视频音视频审核任务（画面涉及令人不适宜的信息）的查询结果，当任务类型为 Political 时有效。 */
-  PoliticalTask: AiReviewTaskPoliticalResult | null;
+  PoliticalTask?: AiReviewTaskPoliticalResult | null;
   /** 视频音视频审核任务（Asr 文字涉及令人反感的信息）的查询结果，当任务类型为 Porn.Asr 时有效。 */
-  PornAsrTask: AiReviewTaskPornAsrResult | null;
+  PornAsrTask?: AiReviewTaskPornAsrResult | null;
   /** 视频音视频审核任务（Ocr 文字涉及令人反感的信息）的查询结果，当任务类型为 Porn.Ocr 时有效。 */
-  PornOcrTask: AiReviewTaskPornOcrResult | null;
+  PornOcrTask?: AiReviewTaskPornOcrResult | null;
   /** 视频音视频审核任务（Asr 文字涉及令人不适宜的信息）的查询结果，当任务类型为 Political.Asr 时有效。 */
-  PoliticalAsrTask: AiReviewTaskPoliticalAsrResult | null;
+  PoliticalAsrTask?: AiReviewTaskPoliticalAsrResult | null;
   /** 视频音视频审核任务（Ocr 文字涉及令人不适宜的信息）的查询结果，当任务类型为 Political.Ocr 时有效。 */
-  PoliticalOcrTask: AiReviewTaskPoliticalOcrResult | null;
+  PoliticalOcrTask?: AiReviewTaskPoliticalOcrResult | null;
   /** 视频音视频审核任务（ Ocr 文字涉及令人不安全的信息）的查询结果，当任务类型为 Terrorism.Ocr 时有效。 */
-  TerrorismOcrTask: AiReviewTaskTerrorismOcrResult | null;
+  TerrorismOcrTask?: AiReviewTaskTerrorismOcrResult | null;
   /** 视频音视频审核 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。 */
-  ProhibitedOcrTask: AiReviewTaskProhibitedOcrResult | null;
+  ProhibitedOcrTask?: AiReviewTaskProhibitedOcrResult | null;
   /** 视频音视频审核 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。 */
-  ProhibitedAsrTask: AiReviewTaskProhibitedAsrResult | null;
+  ProhibitedAsrTask?: AiReviewTaskProhibitedAsrResult | null;
 }
 
 /** 音视频审核任务类型 */
@@ -653,19 +653,19 @@ declare interface AiRecognitionTaskInput {
 /** 物体识别结果。 */
 declare interface AiRecognitionTaskObjectResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 物体识别任务输入信息。 */
-  Input: AiRecognitionTaskObjectResultInput;
+  Input?: AiRecognitionTaskObjectResultInput;
   /** 物体识别任务输出信息。 */
-  Output: AiRecognitionTaskObjectResultOutput | null;
+  Output?: AiRecognitionTaskObjectResultOutput | null;
   /** 物体识别任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
   /** 物体识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   BeginProcessTime?: string;
   /** 物体识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -903,15 +903,15 @@ declare interface AiReviewPoliticalAsrTaskInput {
 /** Asr 文字涉及令人不适宜的信息 */
 declare interface AiReviewPoliticalAsrTaskOutput {
   /** Asr 文字涉及令人不适宜的信息、违规评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Asr 文字涉及令人不适宜的信息、违规结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Asr 文字有涉及令人不适宜的信息、违规嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewAsrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewAsrTextSegmentItem[];
   /** Asr 文字有涉及令人不适宜的信息、违规嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** Asr 文字有涉及令人不适宜的信息、违规嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务输入参数类型 */
@@ -923,15 +923,15 @@ declare interface AiReviewPoliticalOcrTaskInput {
 /** Ocr 文字涉及令人不适宜的信息 */
 declare interface AiReviewPoliticalOcrTaskOutput {
   /** Ocr 文字涉及令人不适宜的信息、违规评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Ocr 文字涉及令人不适宜的信息、违规结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Ocr 文字有涉及令人不适宜的信息、违规嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewOcrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewOcrTextSegmentItem[];
   /** Ocr 文字有涉及令人不适宜的信息、违规嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** Ocr 文字有涉及令人不适宜的信息、违规嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核涉及令人不适宜信息的任务输入参数类型 */
@@ -943,17 +943,17 @@ declare interface AiReviewPoliticalTaskInput {
 /** 涉及令人不适宜的信息 */
 declare interface AiReviewPoliticalTaskOutput {
   /** 视频涉及令人不适宜信息的评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 涉及令人不适宜信息的结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频涉及令人不适宜信息的结果标签。音视频审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/266/31773)里 LabelSet 参数与此参数取值范围的对应关系：violation_photo：violation_photo：违规图标。其他（即 politician/entertainment/sport/entrepreneur/scholar/celebrity/military）：politician：相关人物。 */
-  Label: string;
+  Label?: string;
   /** 有涉及令人不适宜信息嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewPoliticalSegmentItem[];
+  SegmentSet?: MediaContentReviewPoliticalSegmentItem[];
   /** 有涉及令人不适宜的信息嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** 有涉及令人不适宜的信息嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核 Asr 文字涉及令人反感的信息的任务输入参数类型 */
@@ -965,15 +965,15 @@ declare interface AiReviewPornAsrTaskInput {
 /** Asr 文字涉及令人反感的信息 */
 declare interface AiReviewPornAsrTaskOutput {
   /** Asr 文字涉及令人反感的信息的评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Asr 文字涉及令人反感的信息的结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Asr 文字有涉及令人反感的信息的嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewAsrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewAsrTextSegmentItem[];
   /** Asr 文字有涉及令人反感的信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** Asr 文字有涉及令人反感的信息的嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核 Ocr 文字涉及令人反感的信息的任务输入参数类型 */
@@ -985,15 +985,15 @@ declare interface AiReviewPornOcrTaskInput {
 /** Ocr 文字涉及令人反感的信息 */
 declare interface AiReviewPornOcrTaskOutput {
   /** Ocr 文字涉及令人反感的信息的评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Ocr 文字涉及令人反感的信息的结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Ocr 文字有涉及令人反感的信息的嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewOcrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewOcrTextSegmentItem[];
   /** Ocr 文字有涉及令人反感的信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** Ocr 文字有涉及令人反感的信息的嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核涉及令人反感的信息的任务输入参数类型 */
@@ -1005,17 +1005,17 @@ declare interface AiReviewPornTaskInput {
 /** 鉴别涉及令人反感的信息的结果信息 */
 declare interface AiReviewPornTaskOutput {
   /** 视频鉴别涉及令人反感的信息的评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 鉴别涉及令人反感的信息的结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频鉴别涉及令人反感的信息的结果标签，取值范围：porn：色情。sexy：性感。vulgar：低俗。intimacy：亲密行为。 */
-  Label: string;
+  Label?: string;
   /** 有涉及令人反感的信息的嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewSegmentItem[];
+  SegmentSet?: MediaContentReviewSegmentItem[];
   /** 涉及令人反感的信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** 涉及令人反感的信息的嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核 Asr 文字鉴违禁任务输入参数类型 */
@@ -1027,15 +1027,15 @@ declare interface AiReviewProhibitedAsrTaskInput {
 /** Asr 文字涉违禁信息 */
 declare interface AiReviewProhibitedAsrTaskOutput {
   /** Asr 文字涉违禁评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Asr 文字涉违禁结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Asr 文字有涉违禁嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewAsrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewAsrTextSegmentItem[];
   /** Asr 文字有涉违禁嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** Asr 文字有涉违禁嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核 Ocr 文字鉴违禁任务输入参数类型 */
@@ -1047,49 +1047,49 @@ declare interface AiReviewProhibitedOcrTaskInput {
 /** Ocr 文字涉违禁信息 */
 declare interface AiReviewProhibitedOcrTaskOutput {
   /** Ocr 文字涉违禁评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Ocr 文字涉违禁结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Ocr 文字有涉违禁嫌疑的视频片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-  SegmentSet: MediaContentReviewOcrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewOcrTextSegmentItem[];
   /** Ocr 文字有涉违禁嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-  SegmentSetFileUrl: string;
+  SegmentSetFileUrl?: string;
   /** Ocr 文字有涉违禁嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  SegmentSetFileUrlExpireTime: string;
+  SegmentSetFileUrlExpireTime?: string;
 }
 
 /** 音视频审核 Asr 文字涉及令人不适宜信息、违规任务结果类型 */
 declare interface AiReviewTaskPoliticalAsrResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核 Asr 文字涉及令人不适宜信息的任务输入。 */
-  Input: AiReviewPoliticalAsrTaskInput;
+  Input?: AiReviewPoliticalAsrTaskInput;
   /** 音视频审核 Asr 文字涉及令人不适宜信息的任务输出。 */
-  Output: AiReviewPoliticalAsrTaskOutput;
+  Output?: AiReviewPoliticalAsrTaskOutput;
   /** 音视频审核 Asr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核 Ocr 文字涉及令人不适宜信息、违规任务结果类型 */
 declare interface AiReviewTaskPoliticalOcrResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务输入。 */
-  Input: AiReviewPoliticalOcrTaskInput;
+  Input?: AiReviewPoliticalOcrTaskInput;
   /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务输出。 */
-  Output: AiReviewPoliticalOcrTaskOutput | null;
+  Output?: AiReviewPoliticalOcrTaskOutput | null;
   /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
   Progress?: number;
 }
@@ -1097,127 +1097,127 @@ declare interface AiReviewTaskPoliticalOcrResult {
 /** 音视频审核涉及令人不适宜信息的任务结果类型 */
 declare interface AiReviewTaskPoliticalResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核涉及令人不适宜信息的任务输入。 */
-  Input: AiReviewPoliticalTaskInput;
+  Input?: AiReviewPoliticalTaskInput;
   /** 音视频审核涉及令人不适宜信息的任务输出。 */
-  Output: AiReviewPoliticalTaskOutput | null;
+  Output?: AiReviewPoliticalTaskOutput | null;
   /** 音视频审核涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核 Asr 文字涉及令人反感的信息的任务结果类型 */
 declare interface AiReviewTaskPornAsrResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核 Asr 文字涉及令人反感的信息的任务输入。 */
-  Input: AiReviewPornAsrTaskInput;
+  Input?: AiReviewPornAsrTaskInput;
   /** 音视频审核 Asr 文字涉及令人反感的信息的任务输出。 */
-  Output: AiReviewPornAsrTaskOutput | null;
+  Output?: AiReviewPornAsrTaskOutput | null;
   /** 音视频审核 Asr 文字涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核 Ocr 文字涉及令人反感的信息的任务结果类型 */
 declare interface AiReviewTaskPornOcrResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核 Ocr 文字涉及令人反感的信息的任务输入。 */
-  Input: AiReviewPornOcrTaskInput;
+  Input?: AiReviewPornOcrTaskInput;
   /** Ocr 文字音视频审核涉及令人反感的信息的任务输出。 */
-  Output: AiReviewPornOcrTaskOutput | null;
+  Output?: AiReviewPornOcrTaskOutput | null;
   /** Ocr 文字音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核涉及令人反感的信息的任务结果类型 */
 declare interface AiReviewTaskPornResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核涉及令人反感的信息的任务输入。 */
-  Input: AiReviewPornTaskInput;
+  Input?: AiReviewPornTaskInput;
   /** 音视频审核涉及令人反感的信息的任务输出。 */
-  Output: AiReviewPornTaskOutput | null;
+  Output?: AiReviewPornTaskOutput | null;
   /** 音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核 Asr 文字鉴违禁任务结果类型 */
 declare interface AiReviewTaskProhibitedAsrResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核 Asr 文字鉴违禁任务输入。 */
-  Input: AiReviewProhibitedAsrTaskInput;
+  Input?: AiReviewProhibitedAsrTaskInput;
   /** 音视频审核 Asr 文字鉴违禁任务输出。 */
-  Output: AiReviewProhibitedAsrTaskOutput | null;
+  Output?: AiReviewProhibitedAsrTaskOutput | null;
   /** 音视频审核 Asr 文字鉴违禁任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核 Ocr 文字鉴违禁任务结果类型 */
 declare interface AiReviewTaskProhibitedOcrResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核 Ocr 文字鉴违禁任务输入。 */
-  Input: AiReviewProhibitedOcrTaskInput;
+  Input?: AiReviewProhibitedOcrTaskInput;
   /** 音视频审核 Ocr 文字鉴违禁任务输出。 */
-  Output: AiReviewProhibitedOcrTaskOutput | null;
+  Output?: AiReviewProhibitedOcrTaskOutput | null;
   /** 音视频审核 Ocr 文字鉴违禁任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核 Ocr 文字鉴别涉及令人不安全的信息的任务结果类型 */
 declare interface AiReviewTaskTerrorismOcrResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务输入。 */
-  Input: AiReviewTerrorismOcrTaskInput;
+  Input?: AiReviewTerrorismOcrTaskInput;
   /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务输出。 */
-  Output: AiReviewTerrorismOcrTaskOutput | null;
+  Output?: AiReviewTerrorismOcrTaskOutput | null;
   /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
 }
 
 /** 音视频审核涉及令人不安全的信息的任务结果类型 */
@@ -1425,7 +1425,7 @@ declare interface AsrFullTextConfigureInfoForUpdate {
   /** 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。注意：此字段已废弃，建议使用 SubtitleFormatsOperation。 */
   SubtitleFormat?: string;
   /** 媒体源语言，取值范围：zh：中文普通话；en：英语；ja：日语；zh-ca：粤语。 */
-  SrcLanguage?: string | null;
+  SrcLanguage?: string;
 }
 
 /** 语音关键词识别控制参数。 */
@@ -1707,47 +1707,47 @@ declare interface ContentReviewOcrResult {
 /** 图片智能内容识别任务结果 */
 declare interface ContentReviewResult {
   /** 结果类型，取值范围：Porn.Image：图片画面中的鉴别令人反感的信息结果；Terrorism.Image：图片画面中的鉴别令人不安全的信息结果；Political.Image：图片画面中的鉴别令人不适宜信息结果；Porn.Ocr：图片 OCR 文字中的鉴别令人反感的信息结果；Terrorism.Ocr：图片 OCR 文字中的鉴别令人不安全的信息结果；Political.Ocr：图片 OCR 文字中的鉴别令人不适宜信息结果。 */
-  Type: string;
+  Type?: string;
   /** 图片画面中的鉴别令人反感的信息结果，当 Type 为 Porn.Image 时有效。 */
-  PornImageResult: PornImageResult | null;
+  PornImageResult?: PornImageResult | null;
   /** 图片画面中的鉴别令人不安全的信息结果，当 Type 为 Terrorism.Image 时有效。 */
-  TerrorismImageResult: TerrorismImageResult | null;
+  TerrorismImageResult?: TerrorismImageResult | null;
   /** 图片画面中的鉴别令人不适宜信息结果，当 Type 为 Political.Image 时有效。 */
-  PoliticalImageResult: PoliticalImageResult | null;
+  PoliticalImageResult?: PoliticalImageResult | null;
   /** 图片 OCR 文字中的鉴别令人反感的信息结果，当 Type 为 Porn.Ocr 时有效。 */
-  PornOcrResult: ContentReviewOcrResult | null;
+  PornOcrResult?: ContentReviewOcrResult | null;
   /** 图片 OCR 中的鉴别令人不安全的信息结果，当 Type 为 Terrorism.Ocr 时有效。 */
-  TerrorismOcrResult: ContentReviewOcrResult | null;
+  TerrorismOcrResult?: ContentReviewOcrResult | null;
   /** 图片 OCR 文字中的鉴别令人不适宜信息结果，当 Type 为 Political.Ocr 时有效。 */
-  PoliticalOcrResult: ContentReviewOcrResult | null;
+  PoliticalOcrResult?: ContentReviewOcrResult | null;
 }
 
 /** 音视频审核模板详情 */
 declare interface ContentReviewTemplateItem {
   /** 音视频审核模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 音视频审核模板名称，长度限制：64 个字符。 */
-  Name: string;
+  Name?: string;
   /** 音视频审核模板描述信息，长度限制：256 个字符。 */
-  Comment: string;
+  Comment?: string;
   /** 鉴别涉及令人反感的信息的控制参数。 */
-  PornConfigure: PornConfigureInfo | null;
+  PornConfigure?: PornConfigureInfo | null;
   /** 鉴别涉及令人不安全的信息的控制参数。 */
-  TerrorismConfigure: TerrorismConfigureInfo | null;
+  TerrorismConfigure?: TerrorismConfigureInfo | null;
   /** 鉴别涉及令人不适宜的信息的控制参数。 */
-  PoliticalConfigure: PoliticalConfigureInfo | null;
+  PoliticalConfigure?: PoliticalConfigureInfo | null;
   /** 违禁控制参数。违禁内容包括：谩骂；涉毒违法。 */
-  ProhibitedConfigure: ProhibitedConfigureInfo | null;
+  ProhibitedConfigure?: ProhibitedConfigureInfo | null;
   /** 用户自定义音视频审核控制参数。 */
-  UserDefineConfigure: UserDefineConfigureInfo | null;
+  UserDefineConfigure?: UserDefineConfigureInfo | null;
   /** 音视频审核结果是否进入音视频审核墙（对音视频审核结果进行人工复核）的开关。ON：是；OFF：否。 */
-  ReviewWallSwitch: string;
+  ReviewWallSwitch?: string;
   /** 截帧间隔，单位为秒。当不填时，默认截帧间隔为 1 秒，最小值为 0.5 秒。 */
-  ScreenshotInterval: number;
+  ScreenshotInterval?: number;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 版权水印参数 */
@@ -1875,19 +1875,19 @@ declare interface DescribeFileAttributesTaskOutput {
 /** 域名信息 */
 declare interface DomainDetailInfo {
   /** 域名名称。 */
-  Domain: string;
+  Domain?: string;
   /** 加速地区信息。 */
-  AccelerateAreaInfos: AccelerateAreaInfo[] | null;
+  AccelerateAreaInfos?: AccelerateAreaInfo[] | null;
   /** 部署状态，取值有：Online：上线；Deploying：部署中；Locked: 锁定中，出现该状态时，无法对该域名进行部署变更。 */
-  DeployStatus: string;
+  DeployStatus?: string;
   /** HTTPS 配置信息。 */
-  HTTPSConfig: DomainHTTPSConfig | null;
+  HTTPSConfig?: DomainHTTPSConfig | null;
   /** [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)配置信息。 */
-  UrlSignatureAuthPolicy: UrlSignatureAuthPolicy | null;
+  UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy | null;
   /** [Referer 防盗链](https://cloud.tencent.com/document/product/266/14046)配置信息。 */
-  RefererAuthPolicy: RefererAuthPolicy | null;
+  RefererAuthPolicy?: RefererAuthPolicy | null;
   /** 域名添加到腾讯云点播系统中的时间。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 域名 QUIC 配置信息。 */
   QUICConfig?: DomainQUICConfig | null;
 }
@@ -2959,19 +2959,19 @@ declare interface MediaOutputInfo {
 /** 对视频转自适应码流任务结果类型 */
 declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 转自适应码流任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
   /** 对视频转自适应码流任务的输入。 */
-  Input: AdaptiveDynamicStreamingTaskInput;
+  Input?: AdaptiveDynamicStreamingTaskInput;
   /** 对视频转自适应码流任务的输出。 */
-  Output: AdaptiveDynamicStreamingInfoItem;
+  Output?: AdaptiveDynamicStreamingInfoItem;
   /** 转自适应码流任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   BeginProcessTime?: string;
   /** 转自适应码流任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -3129,23 +3129,23 @@ declare interface MediaProcessTaskSnapshotByTimeOffsetResult {
 /** 转码任务结果类型 */
 declare interface MediaProcessTaskTranscodeResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 转码任务的输入。 */
-  Input: TranscodeTaskInput;
+  Input?: TranscodeTaskInput;
   /** 转码任务的输出。 */
-  Output: MediaTranscodeItem | null;
+  Output?: MediaTranscodeItem | null;
   /** 转码进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
   /** 转码任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  BeginProcessTime: string;
+  BeginProcessTime?: string;
   /** 转码任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  FinishTime: string;
+  FinishTime?: string;
 }
 
 /** 点播文件采样截图信息 */
@@ -3697,41 +3697,41 @@ declare interface ProcedureReviewAudioVideoTaskInput {
 /** 音视频处理任务信息 */
 declare interface ProcedureTask {
   /** 音视频处理任务 ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 已弃用，请使用各个具体任务的 ErrCode。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 已弃用，请使用各个具体任务的 Message。 */
-  Message: string;
+  Message?: string;
   /** 媒体文件 ID若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773) 的 FileId；若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773) 的 Id。 */
-  FileId: string;
+  FileId?: string;
   /** 媒体文件名称若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773) 的 BasicInfo.Name；若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773) 的 Name。 */
-  FileName: string;
+  FileName?: string;
   /** 媒体文件地址若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773) 的 BasicInfo.MediaUrl；若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773) 的 Url。 */
-  FileUrl: string;
+  FileUrl?: string;
   /** 原始音视频的元信息。 */
-  MetaData: MediaMetaData | null;
+  MetaData?: MediaMetaData | null;
   /** 音视频处理任务的执行状态与结果。 */
-  MediaProcessResultSet: MediaProcessTaskResult[];
+  MediaProcessResultSet?: MediaProcessTaskResult[];
   /** 音视频审核任务的执行状态与结果。 */
-  AiContentReviewResultSet: AiContentReviewResult[];
+  AiContentReviewResultSet?: AiContentReviewResult[];
   /** 音视频内容分析任务的执行状态与结果。 */
-  AiAnalysisResultSet: AiAnalysisResult[];
+  AiAnalysisResultSet?: AiAnalysisResult[];
   /** 音视频内容识别任务的执行状态与结果。 */
-  AiRecognitionResultSet: AiRecognitionResult[];
+  AiRecognitionResultSet?: AiRecognitionResult[];
   /** 任务流的优先级，取值范围为 [-10, 10]。 */
-  TasksPriority: number;
+  TasksPriority?: number;
   /** 任务流状态变更通知模式。Finish：只有当任务流全部执行完毕时，才发起一次事件通知；Change：只要任务流中每个子任务的状态发生变化，都进行事件通知；None：不接受该任务流回调。 */
-  TasksNotifyMode: string;
+  TasksNotifyMode?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
-  SessionContext: string;
+  SessionContext?: string;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
-  SessionId: string;
+  SessionId?: string;
   /** 操作者。取值范围：System: 表示系统触发。 */
-  Operator: string;
+  Operator?: string;
   /** 操作类型。取值范围：TSC: 表示使用极速高清进行智能降码。 */
-  OperationType: string;
+  OperationType?: string;
 }
 
 /** 任务流模板详情 */
@@ -5567,17 +5567,17 @@ declare interface ApplyUploadRequest {
 
 declare interface ApplyUploadResponse {
   /** 存储桶，用于上传接口 URL 的 bucket_name。 */
-  StorageBucket: string;
+  StorageBucket?: string;
   /** 存储园区，用于上传接口 Host 的 Region。 */
-  StorageRegion: string;
+  StorageRegion?: string;
   /** 点播会话，用于确认上传接口的参数 VodSessionKey。 */
-  VodSessionKey: string;
+  VodSessionKey?: string;
   /** 媒体存储路径，用于上传接口存储媒体的对象键（Key）。 */
-  MediaStoragePath: string;
+  MediaStoragePath?: string;
   /** 封面存储路径，用于上传接口存储封面的对象键（Key）。 */
-  CoverStoragePath: string;
+  CoverStoragePath?: string;
   /** 临时凭证，用于上传接口的权限验证。 */
-  TempCertificate: TempCertificate;
+  TempCertificate?: TempCertificate;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5675,7 +5675,7 @@ declare interface CreateAIAnalysisTemplateRequest {
 
 declare interface CreateAIAnalysisTemplateResponse {
   /** 音视频内容分析模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5723,7 +5723,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   SubAppId?: number;
   /** 模板名称，长度限制：64 个字符。 */
   Name?: string;
-  /** DRM 方案类型，取值范围：SimpleAESWidevineFairPlay如果取值为空字符串，代表不对视频做 DRM 保护。 */
+  /** DRM 方案类型，取值范围：SimpleAESWidevineFairPlay默认值为空字符串，如果取值为空字符串，代表不对视频做 DRM 保护。 */
   DrmType?: string;
   /** DRM 的密钥提供商，取值范围：SDMC：华曦达；VOD：云点播。默认为 VOD 。 */
   DrmKeyProvider?: string;
@@ -5739,7 +5739,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
 
 declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   /** 自适应转码模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5767,7 +5767,7 @@ declare interface CreateAnimatedGraphicsTemplateRequest {
 
 declare interface CreateAnimatedGraphicsTemplateResponse {
   /** 转动图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5905,9 +5905,9 @@ declare interface CreateImageSpriteTemplateRequest {
   SampleType: string;
   /** 采样间隔。当 SampleType 为 Percent 时，指定采样间隔的百分比。当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。 */
   SampleInterval: number;
-  /** 雪碧图中小图的行数。 */
+  /** 雪碧图中小图的行数。注意：小图的行数会影响最终大图的高度，大图的高度最大为15000像素，其中大图的高度为小图行数与小图高度的乘积。 */
   RowCount: number;
-  /** 雪碧图中小图的列数。 */
+  /** 雪碧图中小图的列数。注意：小图的列数会影响最终大图的宽度，大图的宽度最大为15000像素，其中大图的宽度为小图列数与小图宽度的乘积。 */
   ColumnCount: number;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -5917,9 +5917,9 @@ declare interface CreateImageSpriteTemplateRequest {
   Comment?: string;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。默认值：black 。 */
   FillType?: string;
-  /** 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  /** 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。注意：小图的宽度会影响最终大图的宽度，大图的宽度最大为15000像素，其中大图的宽度为小图列数与小图宽度的乘积。 */
   Width?: number;
-  /** 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  /** 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。注意：小图的高度会影响最终大图的高度，大图的高度最大为15000像素，其中大图的高度为小图行数与小图高度的乘积。 */
   Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
   ResolutionAdaptive?: string;
@@ -5929,7 +5929,7 @@ declare interface CreateImageSpriteTemplateRequest {
 
 declare interface CreateImageSpriteTemplateResponse {
   /** 雪碧图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5951,9 +5951,9 @@ declare interface CreatePersonSampleRequest {
 
 declare interface CreatePersonSampleResponse {
   /** 素材信息。 */
-  Person: AiSamplePerson;
+  Person?: AiSamplePerson;
   /** 处理失败的五官定位信息。 */
-  FailFaceInfoSet: AiSampleFailFaceInfo[];
+  FailFaceInfoSet?: AiSampleFailFaceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6117,7 +6117,7 @@ declare interface CreateSampleSnapshotTemplateRequest {
 
 declare interface CreateSampleSnapshotTemplateResponse {
   /** 采样截图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6143,7 +6143,7 @@ declare interface CreateSnapshotByTimeOffsetTemplateRequest {
 
 declare interface CreateSnapshotByTimeOffsetTemplateResponse {
   /** 时间点截图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6239,10 +6239,10 @@ declare interface CreateTranscodeTemplateResponse {
 declare interface CreateVodDomainRequest {
   /** 需要接入点播的加速域名。注意：不支持填写泛域名。 */
   Domain: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
-  SubAppId?: number;
   /** 需要开启 CDN 加速的区域：Chinese Mainland：中国境内（不包含港澳台）。Outside Chinese Mainland: 中国境外。Global: 全球范围。如果没有设置 AccelerateArea， 点播会根据用户在腾讯云设置的地域信息自动开通中国境内或者中国境外的 CDN 加速。开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。 */
   AccelerateArea?: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
 }
 
 declare interface CreateVodDomainResponse {
@@ -6275,9 +6275,9 @@ declare interface CreateWatermarkTemplateRequest {
 
 declare interface CreateWatermarkTemplateResponse {
   /** 水印模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 水印图片地址，仅当 Type 为 image，该字段有效。 */
-  ImageUrl: string;
+  ImageUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6753,11 +6753,11 @@ declare interface DescribeCdnLogsRequest {
 
 declare interface DescribeCdnLogsResponse {
   /** 日志下载链接总数量。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 海外CDN节点的日志下载列表。如果域名没有开启海外加速，忽略该参数。 */
-  OverseaCdnLogs: CdnLogInfo[] | null;
+  OverseaCdnLogs?: CdnLogInfo[] | null;
   /** 国内CDN节点的日志下载列表。 */
-  DomesticCdnLogs: CdnLogInfo[] | null;
+  DomesticCdnLogs?: CdnLogInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6775,7 +6775,7 @@ declare interface DescribeClientUploadAccelerationUsageDataRequest {
 
 declare interface DescribeClientUploadAccelerationUsageDataResponse {
   /** 客户端上传加速统计数据。 */
-  ClientUploadAccelerationUsageDataSet: StatDataItem[];
+  ClientUploadAccelerationUsageDataSet?: StatDataItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6813,7 +6813,7 @@ declare interface DescribeDailyMediaPlayStatRequest {
 
 declare interface DescribeDailyMediaPlayStatResponse {
   /** 播放统计数据。 */
-  DailyPlayStatInfoSet: DailyPlayStatInfo[];
+  DailyPlayStatInfoSet?: DailyPlayStatInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6847,7 +6847,7 @@ declare interface DescribeDailyPlayStatFileListRequest {
 
 declare interface DescribeDailyPlayStatFileListResponse {
   /** 播放统计文件列表。 */
-  PlayStatFileSet: PlayStatFileInfo[];
+  PlayStatFileSet?: PlayStatFileInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6873,7 +6873,7 @@ declare interface DescribeDrmKeyProviderInfoRequest {
 
 declare interface DescribeDrmKeyProviderInfoResponse {
   /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
-  SDMCInfo: SDMCDrmKeyProviderInfo | null;
+  SDMCInfo?: SDMCDrmKeyProviderInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6925,7 +6925,7 @@ declare interface DescribeEventsStateRequest {
 
 declare interface DescribeEventsStateResponse {
   /** 待进行拉取的事件通知数，为近似值，约5秒延迟。 */
-  CountOfEventsToPull: number;
+  CountOfEventsToPull?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7005,7 +7005,7 @@ declare interface DescribeImageReviewUsageDataRequest {
 
 declare interface DescribeImageReviewUsageDataResponse {
   /** 图片审核次数统计数据，展示查询时间范围内的图片审核次数的概览数据。 */
-  ImageReviewUsageDataSet: ImageReviewUsageDataItem[];
+  ImageReviewUsageDataSet?: ImageReviewUsageDataItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7045,7 +7045,7 @@ declare interface DescribeLicenseUsageDataRequest {
 
 declare interface DescribeLicenseUsageDataResponse {
   /** License 查询次数统计数据，展示所查询 License 次数的明细数据。 */
-  LicenseUsageDataSet: LicenseUsageDataItem[];
+  LicenseUsageDataSet?: LicenseUsageDataItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7125,9 +7125,9 @@ declare interface DescribePersonSamplesRequest {
 
 declare interface DescribePersonSamplesResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 人物信息。 */
-  PersonSet: AiSamplePerson[];
+  PersonSet?: AiSamplePerson[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7137,7 +7137,7 @@ declare interface DescribePrepaidProductsRequest {
 
 declare interface DescribePrepaidProductsResponse {
   /** 购买的预付费商品实例列表。 */
-  ProductInstanceSet: ProductInstance[];
+  ProductInstanceSet?: ProductInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7407,9 +7407,9 @@ declare interface DescribeSuperPlayerConfigsRequest {
 
 declare interface DescribeSuperPlayerConfigsResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 播放器配置数组。 */
-  PlayerConfigSet: PlayerConfig[];
+  PlayerConfigSet?: PlayerConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7589,9 +7589,9 @@ declare interface DescribeWordSamplesRequest {
 
 declare interface DescribeWordSamplesResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 关键词信息。 */
-  WordSet: AiSampleWord[];
+  WordSet?: AiSampleWord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7623,7 +7623,7 @@ declare interface EditMediaRequest {
 
 declare interface EditMediaResponse {
   /** 编辑视频的任务 ID，可以通过该 ID 查询编辑任务（任务类型为 EditMedia）的状态。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7675,7 +7675,7 @@ declare interface ExecuteFunctionRequest {
 
 declare interface ExecuteFunctionResponse {
   /** 处理结果打包后的字符串，具体与后台一同协调。 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7799,15 +7799,15 @@ declare interface LiveRealTimeClipRequest {
 
 declare interface LiveRealTimeClipResponse {
   /** 剪辑后的视频播放 URL。 */
-  Url: string;
+  Url?: string;
   /** 剪辑固化后的视频的媒体文件的唯一标识。 */
-  FileId: string;
+  FileId?: string;
   /** 剪辑固化后的视频任务流 ID。 */
-  VodTaskId: string;
+  VodTaskId?: string;
   /** 剪辑后的视频元信息。 */
-  MetaData: MediaMetaData | null;
+  MetaData?: MediaMetaData | null;
   /** 剪辑后的视频片段信息。 */
-  SegmentSet: LiveRealTimeClipMediaSegmentInfo[];
+  SegmentSet?: LiveRealTimeClipMediaSegmentInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8137,9 +8137,9 @@ declare interface ModifyMediaInfoRequest {
 
 declare interface ModifyMediaInfoResponse {
   /** 新的视频封面 URL。* 注意：仅当请求携带 CoverData 时此返回值有效。 * */
-  CoverUrl: string;
+  CoverUrl?: string;
   /** 新增的字幕信息。 */
-  AddedSubtitleSet: MediaSubtitleItem[];
+  AddedSubtitleSet?: MediaSubtitleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8179,9 +8179,9 @@ declare interface ModifyPersonSampleRequest {
 
 declare interface ModifyPersonSampleResponse {
   /** 素材信息。 */
-  Person: AiSamplePerson;
+  Person?: AiSamplePerson;
   /** 处理失败的五官信息。 */
-  FailFaceInfoSet: AiSampleFailFaceInfo[] | null;
+  FailFaceInfoSet?: AiSampleFailFaceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8547,7 +8547,7 @@ declare interface ProcessImageRequest {
 
 declare interface ProcessImageResponse {
   /** 图片内容智能识别任务结果。 */
-  ContentReviewResultSet: ContentReviewResult[];
+  ContentReviewResultSet?: ContentReviewResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8605,7 +8605,7 @@ declare interface ProcessMediaByUrlRequest {
 
 declare interface ProcessMediaByUrlResponse {
   /** 任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8780,7 +8780,7 @@ declare interface RebuildMediaRequest {
 }
 
 declare interface RebuildMediaResponse {
-  /** 视频重生的任务 ID，可以通过该 ID 查询视频重生任务的状态。 */
+  /** 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -8847,12 +8847,12 @@ declare interface ResetProcedureTemplateResponse {
 declare interface RestoreMediaRequest {
   /** 媒体文件唯一标识列表，最大长度：100。 */
   FileIds: string[];
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
   /** 解冻出的临时媒体文件的可访问持续时长，必须大于0，单位为“天”。 */
   RestoreDay?: number;
   /** 解冻模式。当媒体文件当前的存储类型为归档存储时，有以下取值：极速模式：Expedited，解冻任务在5分钟后完成。标准模式：Standard，解冻任务在5小时后完成 。批量模式：Bulk，，解冻任务在12小时后完成。当媒体文件的存储类型为深度归档存储时，有以下取值：标准模式：Standard，解冻任务在24小时后完成。批量模式：Bulk，解冻任务在48小时后完成。 */
   RestoreTier?: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
-  SubAppId?: number;
 }
 
 declare interface RestoreMediaResponse {
@@ -9041,7 +9041,7 @@ declare interface SplitMediaRequest {
 
 declare interface SplitMediaResponse {
   /** 视频拆条的任务 ID，可以通过该 ID 查询拆条任务（任务类型为 SplitMedia）的状态。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9375,7 +9375,7 @@ declare interface Vod {
   PullUpload(data: PullUploadRequest, config?: AxiosRequestConfig): AxiosPromise<PullUploadResponse>;
   /** 预热URL {@link PushUrlCacheRequest} {@link PushUrlCacheResponse} */
   PushUrlCache(data: PushUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlCacheResponse>;
-  /** 发起视频重生 {@link RebuildMediaRequest} {@link RebuildMediaResponse} */
+  /** 发起音画质重生 {@link RebuildMediaRequest} {@link RebuildMediaResponse} */
   RebuildMedia(data: RebuildMediaRequest, config?: AxiosRequestConfig): AxiosPromise<RebuildMediaResponse>;
   /** 使用模板发起视频重生 {@link RebuildMediaByTemplateRequest} {@link RebuildMediaByTemplateResponse} */
   RebuildMediaByTemplate(data: RebuildMediaByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<RebuildMediaByTemplateResponse>;

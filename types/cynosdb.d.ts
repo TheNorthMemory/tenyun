@@ -88,6 +88,8 @@ declare interface AuditLog {
   TrxLivingTime?: number | null;
   /** 开始时间，与timestamp构成一个精确到纳秒的时间。 */
   NsTime?: number | null;
+  /** 日志命中规则模板的基本信息 */
+  TemplateInfo?: LogRuleTemplateInfo[] | null;
 }
 
 /** 审计日志文件 */
@@ -139,21 +141,31 @@ declare interface AuditLogFilter {
 /** 规则审计的过滤条件 */
 declare interface AuditRuleFilters {
   /** 单条审计规则。 */
-  RuleFilters: RuleFilters[];
+  RuleFilters: RuleFilters[] | null;
 }
 
-/** 审计规则模版的详情 */
+/** 审计规则模板的详情 */
 declare interface AuditRuleTemplateInfo {
-  /** 规则模版ID。 */
-  RuleTemplateId: string;
-  /** 规则模版名称。 */
-  RuleTemplateName: string;
-  /** 规则模版的过滤条件 */
-  RuleFilters: RuleFilters[];
-  /** 规则模版描述。 */
-  Description: string | null;
-  /** 规则模版创建时间。 */
-  CreateAt: string;
+  /** 规则模板ID。 */
+  RuleTemplateId?: string;
+  /** 规则模板名称。 */
+  RuleTemplateName?: string;
+  /** 规则模板的过滤条件 */
+  RuleFilters?: RuleFilters[];
+  /** 规则模板描述。 */
+  Description?: string | null;
+  /** 规则模板创建时间。 */
+  CreateAt?: string;
+  /** 规则模板修改时间。 */
+  UpdateAt?: string | null;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number | null;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number | null;
+  /** 模版状态。0-无任务 ，1-修改中。 */
+  Status?: number | null;
+  /** 规则模板应用在哪些在实例。 */
+  AffectedInstances?: string[] | null;
 }
 
 /** 备份文件信息 */
@@ -770,7 +782,7 @@ declare interface InputAccount {
 
 /** 审计日志搜索条件 */
 declare interface InstanceAuditLogFilter {
-  /** 过滤项。目前支持以下搜索条件：包含、不包含、包含（分词维度）、不包含（分词维度）:sql - SQL详情等于、不等于、包含、不包含：host - 客户端地址；user - 用户名；dbName - 数据库名称；等于、不等于：sqlType - SQL类型；errCode - 错误码；threadId - 线程ID；范围搜索（时间类型统一为微妙）：execTime - 执行时间；lockWaitTime - 锁等待时间；ioWaitTime - IO等待时间；trxLivingTime - 事物持续时间；cpuTime - cpu时间；checkRows - 扫描行数；affectRows - 影响行数；sentRows - 返回行数。 */
+  /** 过滤项。目前支持以下搜索条件：包含、不包含、包含（分词维度）、不包含（分词维度）: sql - SQL详情；alarmLevel - 告警等级；ruleTemplateId - 规则模板Id等于、不等于、包含、不包含： host - 客户端地址； user - 用户名； dbName - 数据库名称；等于、不等于： sqlType - SQL类型； errCode - 错误码； threadId - 线程ID；范围搜索（时间类型统一为微秒）： execTime - 执行时间； lockWaitTime - 执行时间； ioWaitTime - IO等待时间； trxLivingTime - 事物持续时间； cpuTime - cpu时间； checkRows - 扫描行数； affectRows - 影响行数； sentRows - 返回行数。 */
   Type: string;
   /** 过滤条件。支持以下条件：WINC-包含（分词维度），WEXC-不包含（分词维度）,INC - 包含,EXC - 不包含,EQS - 等于,NEQ - 不等于,RA - 范围。 */
   Compare: string;
@@ -778,14 +790,18 @@ declare interface InstanceAuditLogFilter {
   Value: string[];
 }
 
-/** 实例的审计规则详情，DescribeAuditRuleWithInstanceIds接口的出参。 */
+/** 实例的审计规则详情。 */
 declare interface InstanceAuditRule {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 是否是规则审计。true-规则审计，false-全审计。 */
-  AuditRule: boolean | null;
+  AuditRule?: boolean | null;
   /** 审计规则详情。仅当AuditRule=true时有效。 */
-  AuditRuleFilters: AuditRuleFilters[] | null;
+  AuditRuleFilters?: AuditRuleFilters[] | null;
+  /** 是否是审计策略 */
+  OldRule?: boolean | null;
+  /** 实例应用的规则模板详情 */
+  RuleTemplates?: RuleTemplateInfo[] | null;
 }
 
 /** 实例初始化配置信息 */
@@ -864,6 +880,18 @@ declare interface InstanceSpec {
   ZoneStockInfos: ZoneStockInfo[] | null;
   /** 库存数量 */
   StockCount: number | null;
+}
+
+/** 审计日志命中规则模板的基本信息 */
+declare interface LogRuleTemplateInfo {
+  /** 模板ID */
+  RuleTemplateId?: string | null;
+  /** 规则模板名 */
+  RuleTemplateName?: string | null;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: string | null;
+  /** 规则模板变更状态：0-未变更；1-已变更；2-已删除 */
+  RuleTemplateStatus?: number | null;
 }
 
 /** 参数是否可修改的详细信息 */
@@ -1340,6 +1368,22 @@ declare interface RuleFilters {
   Value: string[];
 }
 
+/** 规则模板内容 */
+declare interface RuleTemplateInfo {
+  /** 规则模板ID。 */
+  RuleTemplateId?: string | null;
+  /** 规则模板名称。 */
+  RuleTemplateName?: string | null;
+  /** 规则内容。 */
+  RuleFilters?: RuleFilters[] | null;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number | null;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number | null;
+  /** 规则描述。 */
+  Description?: string | null;
+}
+
 /** 资源包明细说明 */
 declare interface SalePackageSpec {
   /** 资源包使用地域 */
@@ -1719,15 +1763,19 @@ declare interface CreateAuditLogFileResponse {
 declare interface CreateAuditRuleTemplateRequest {
   /** 审计规则。 */
   RuleFilters: RuleFilters[];
-  /** 规则模版名称。 */
+  /** 规则模板名称。 */
   RuleTemplateName: string;
-  /** 规则模版描述。 */
+  /** 规则模板描述。 */
   Description?: string;
+  /** 告警等级。1-低风险，2-中风险，3-高风险 */
+  AlarmLevel?: number;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number;
 }
 
 declare interface CreateAuditRuleTemplateResponse {
-  /** 生成的规则模版ID。 */
-  RuleTemplateId: string | null;
+  /** 生成的规则模板ID。 */
+  RuleTemplateId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2035,7 +2083,7 @@ declare interface DeleteAuditLogFileResponse {
 }
 
 declare interface DeleteAuditRuleTemplatesRequest {
-  /** 审计规则模版ID。 */
+  /** 审计规则模板ID。 */
   RuleTemplateIds: string[];
 }
 
@@ -2161,9 +2209,9 @@ declare interface DescribeAuditLogFilesRequest {
 
 declare interface DescribeAuditLogFilesResponse {
   /** 符合条件的审计日志文件个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 审计日志文件详情。 */
-  Items: AuditLogFile[];
+  Items?: AuditLogFile[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2199,21 +2247,25 @@ declare interface DescribeAuditLogsResponse {
 }
 
 declare interface DescribeAuditRuleTemplatesRequest {
-  /** 规则模版ID。 */
+  /** 规则模板ID。 */
   RuleTemplateIds?: string[];
-  /** 规则模版名称 */
+  /** 规则模板名称 */
   RuleTemplateNames?: string[];
   /** 单次请求返回的数量。默认值20。 */
   Limit?: number;
   /** 偏移量，默认值为 0。 */
   Offset?: number;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number;
 }
 
 declare interface DescribeAuditRuleTemplatesResponse {
   /** 符合查询条件的实例总数。 */
-  TotalCount: number;
-  /** 规则模版详细信息列表。 */
-  Items: AuditRuleTemplateInfo[] | null;
+  TotalCount?: number;
+  /** 规则模板详细信息列表。 */
+  Items?: AuditRuleTemplateInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2225,9 +2277,9 @@ declare interface DescribeAuditRuleWithInstanceIdsRequest {
 
 declare interface DescribeAuditRuleWithInstanceIdsResponse {
   /** 无 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例审计规则信息。 */
-  Items: InstanceAuditRule[] | null;
+  Items?: InstanceAuditRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3197,14 +3249,18 @@ declare interface ModifyAccountPrivilegesResponse {
 }
 
 declare interface ModifyAuditRuleTemplatesRequest {
-  /** 审计规则模版ID。 */
+  /** 审计规则模板ID。 */
   RuleTemplateIds: string[];
   /** 修改后的审计规则。 */
   RuleFilters?: RuleFilters[];
-  /** 修改后的规则模版名称。 */
+  /** 修改后的规则模板名称。 */
   RuleTemplateName?: string;
-  /** 修改后的规则模版描述。 */
+  /** 修改后的规则模板描述。 */
   Description?: string;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number;
 }
 
 declare interface ModifyAuditRuleTemplatesResponse {
@@ -3223,7 +3279,7 @@ declare interface ModifyAuditServiceRequest {
   AuditAll?: boolean;
   /** 规则审计。 */
   AuditRuleFilters?: AuditRuleFilters[];
-  /** 规则模版ID。 */
+  /** 规则模板ID。 */
   RuleTemplateIds?: string[];
 }
 
@@ -3603,8 +3659,10 @@ declare interface OpenAuditServiceRequest {
   HighLogExpireDay?: number;
   /** 审计规则。同RuleTemplateIds都不填是全审计。 */
   AuditRuleFilters?: AuditRuleFilters[];
-  /** 规则模版ID。同AuditRuleFilters都不填是全审计。 */
+  /** 规则模板ID。同AuditRuleFilters都不填是全审计。 */
   RuleTemplateIds?: string[];
+  /** 审计类型。true-全审计；默认false-规则审计。 */
+  AuditAll?: boolean;
 }
 
 declare interface OpenAuditServiceResponse {
@@ -4057,7 +4115,7 @@ declare interface Cynosdb {
   CreateAccounts(data: CreateAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountsResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
   CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
-  /** 创建审计规则模版 {@link CreateAuditRuleTemplateRequest} {@link CreateAuditRuleTemplateResponse} */
+  /** 创建审计规则模板 {@link CreateAuditRuleTemplateRequest} {@link CreateAuditRuleTemplateResponse} */
   CreateAuditRuleTemplate(data: CreateAuditRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleTemplateResponse>;
   /** 创建手动备份 {@link CreateBackupRequest} {@link CreateBackupResponse} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
@@ -4077,7 +4135,7 @@ declare interface Cynosdb {
   DeleteAccounts(data: DeleteAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountsResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
-  /** 删除审计规则模版 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
+  /** 删除审计规则模板 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
   DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
   /** 删除手动备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
@@ -4095,7 +4153,7 @@ declare interface Cynosdb {
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 查询数据库审计日志 {@link DescribeAuditLogsRequest} {@link DescribeAuditLogsResponse} */
   DescribeAuditLogs(data: DescribeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogsResponse>;
-  /** 查询审计规则模版 {@link DescribeAuditRuleTemplatesRequest} {@link DescribeAuditRuleTemplatesResponse} */
+  /** 查询审计规则模板 {@link DescribeAuditRuleTemplatesRequest} {@link DescribeAuditRuleTemplatesResponse} */
   DescribeAuditRuleTemplates(data?: DescribeAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleTemplatesResponse>;
   /** 获取实例的审计规则 {@link DescribeAuditRuleWithInstanceIdsRequest} {@link DescribeAuditRuleWithInstanceIdsResponse} */
   DescribeAuditRuleWithInstanceIds(data: DescribeAuditRuleWithInstanceIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleWithInstanceIdsResponse>;
@@ -4195,7 +4253,7 @@ declare interface Cynosdb {
   ModifyAccountParams(data: ModifyAccountParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountParamsResponse>;
   /** 修改账号库表权限 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
-  /** 修改审计规则模版 {@link ModifyAuditRuleTemplatesRequest} {@link ModifyAuditRuleTemplatesResponse} */
+  /** 修改审计规则模板 {@link ModifyAuditRuleTemplatesRequest} {@link ModifyAuditRuleTemplatesResponse} */
   ModifyAuditRuleTemplates(data: ModifyAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleTemplatesResponse>;
   /** 实例修改审计服务 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
   ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;

@@ -70,6 +70,8 @@ declare interface Address {
   DeadlineDate?: string | null;
   /** EIP绑定的实例类型。 */
   InstanceType?: string | null;
+  /** 静态单线IP网络出口 */
+  Egress?: string | null;
   /** 高防包ID,当EIP类型为高防EIP时，返回EIP绑定的高防包ID. */
   AntiDDoSPackageId?: string;
 }
@@ -1079,45 +1081,49 @@ declare interface NatDirectConnectGatewayRoute {
 /** NAT网关对象。 */
 declare interface NatGateway {
   /** NAT网关的ID。 */
-  NatGatewayId: string;
+  NatGatewayId?: string;
   /** NAT网关的名称。 */
-  NatGatewayName: string;
+  NatGatewayName?: string;
   /** NAT网关创建的时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** NAT网关的状态。 'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中，'UPDATING'：升级中，‘FAILED’：失败。 */
-  State: string;
+  State?: string;
   /** 网关最大外网出带宽(单位:Mbps)。 */
-  InternetMaxBandwidthOut: number;
+  InternetMaxBandwidthOut?: number;
   /** 网关并发连接上限。 */
-  MaxConcurrentConnection: number;
+  MaxConcurrentConnection?: number;
   /** 绑定NAT网关的公网IP对象数组。 */
-  PublicIpAddressSet: NatGatewayAddress[];
+  PublicIpAddressSet?: NatGatewayAddress[];
   /** NAT网关网络状态。“AVAILABLE”:运行中, “UNAVAILABLE”:不可用, “INSUFFICIENT”:欠费停服。 */
-  NetworkState: string;
+  NetworkState?: string;
   /** NAT网关的端口转发规则。 */
-  DestinationIpPortTranslationNatRuleSet: DestinationIpPortTranslationNatRule[];
+  DestinationIpPortTranslationNatRuleSet?: DestinationIpPortTranslationNatRule[];
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** NAT网关所在的可用区。 */
-  Zone: string;
+  Zone?: string;
   /** 绑定的专线网关ID。 */
-  DirectConnectGatewayIds: string[] | null;
+  DirectConnectGatewayIds?: string[] | null;
   /** 所属子网ID。 */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 标签键值对。 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** NAT网关绑定的安全组列表 */
-  SecurityGroupSet: string[] | null;
+  SecurityGroupSet?: string[] | null;
   /** NAT网关的SNAT转发规则。 */
-  SourceIpTranslationNatRuleSet: SourceIpTranslationNatRule[] | null;
+  SourceIpTranslationNatRuleSet?: SourceIpTranslationNatRule[] | null;
   /** 是否独享型NAT。 */
-  IsExclusive: boolean | null;
+  IsExclusive?: boolean | null;
   /** 独享型NAT所在的网关集群的带宽(单位:Mbps)，当IsExclusive为false时无此字段。 */
-  ExclusiveGatewayBandwidth: number | null;
+  ExclusiveGatewayBandwidth?: number | null;
   /** NAT网关是否被封禁。“NORMAL”：未被封禁，“RESTRICTED”：已被封禁。 */
-  RestrictState: string | null;
+  RestrictState?: string | null;
   /** NAT网关大版本号，传统型=1，标准型=2 */
-  NatProductVersion: number | null;
+  NatProductVersion?: number | null;
+  /** 是否启用根据目的网段选择SNAT使用的EIP功能 */
+  SmartScheduleMode?: boolean | null;
+  /** NAT实例归属的专属集群id */
+  DedicatedClusterId?: string | null;
 }
 
 /** NAT网关绑定的弹性IP */
@@ -1128,6 +1134,8 @@ declare interface NatGatewayAddress {
   PublicIpAddress?: string;
   /** 资源封堵状态。true表示弹性ip处于封堵状态，false表示弹性ip处于未封堵状态。 */
   IsBlocked?: boolean;
+  /** 资源封堵类型。NORMAL表示未封禁，SECURITY表示安全封禁，USER表示用户封禁，OTHER表示其他封禁，多个原因封禁时用&连接，比如：SECURITY&USER&OTHER。 */
+  BlockType?: string;
 }
 
 /** NAT网关的端口转发规则 */
@@ -2357,7 +2365,7 @@ declare interface AllocateAddressesRequest {
   BandwidthPackageId?: string;
   /** EIP名称，用于申请EIP时用户自定义该EIP的个性化名称，默认值：未命名 */
   AddressName?: string;
-  /** 网络出口，默认是：center_egress1 */
+  /** 静态单线IP网络出口，默认值：center_egress1 */
   Egress?: string;
   /** 高防包ID， 申请高防IP时，该字段必传。 */
   AntiDDoSPackageId?: string;

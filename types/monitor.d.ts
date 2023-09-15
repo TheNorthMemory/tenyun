@@ -2973,13 +2973,15 @@ declare interface DescribeAlarmHistoriesRequest {
   ReceiverGroups?: number[];
   /** 根据告警策略 Id 列表搜索 */
   PolicyIds?: string[];
+  /** 告警等级 */
+  AlarmLevels?: string[];
 }
 
 declare interface DescribeAlarmHistoriesResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 告警历史列表 */
-  Histories: AlarmHistory[];
+  Histories?: AlarmHistory[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

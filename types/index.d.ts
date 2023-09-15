@@ -590,7 +590,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   cat: Cat,
   /** {@link Cbs 云硬盘} */
   cbs: Cbs,
-  /** {@link Ccc 云呼叫中心} */
+  /** {@link Ccc 云联络中心} */
   ccc: Ccc,
   /** {@link Cdb 云数据库 MySQL} */
   cdb: Cdb,

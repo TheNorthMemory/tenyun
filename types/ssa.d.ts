@@ -950,6 +950,16 @@ declare interface SaDivulgeDataQueryPubList {
   List: SaDivulgeDataQueryPub[];
 }
 
+/** 设置_泄露监测产品监测扫描规则策略 */
+declare interface SaDivulgeScanRuleSetList {
+  /** Value */
+  Value: string;
+  /** Code */
+  Code: number;
+  /** Message */
+  Message: string;
+}
+
 /** 安全放回状态 */
 declare interface SecurityStatus {
 }
@@ -1618,6 +1628,32 @@ declare interface SaDivulgeDataQueryPubResponse {
   RequestId?: string;
 }
 
+declare interface SaDivulgeScanRuleMutateRequest {
+  /** Id */
+  Id: string;
+  /** DivulgeSoure */
+  DivulgeSoure: string;
+  /** DivulgeSoureUrl */
+  DivulgeSoureUrl: string;
+  /** RuleName */
+  RuleName: string;
+  /** RuleWord */
+  RuleWord: string;
+  /** ScanStatus */
+  ScanStatus: string;
+  /** DivulgeType */
+  DivulgeType?: string;
+  /** RepairAdvice */
+  RepairAdvice?: string;
+}
+
+declare interface SaDivulgeScanRuleMutateResponse {
+  /** Data */
+  Data?: SaDivulgeScanRuleSetList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SaEventPubRequest {
   /** 受影响资产 */
   Asset: string;
@@ -1701,6 +1737,8 @@ declare interface Ssa {
   DescribeVulList(data: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
   /** 查询【通用字段】【泄露监测数据列表】 {@link SaDivulgeDataQueryPubRequest} {@link SaDivulgeDataQueryPubResponse} */
   SaDivulgeDataQueryPub(data: SaDivulgeDataQueryPubRequest, config?: AxiosRequestConfig): AxiosPromise<SaDivulgeDataQueryPubResponse>;
+  /** 设置【泄露监测产品监测扫描规则策略】 {@link SaDivulgeScanRuleMutateRequest} {@link SaDivulgeScanRuleMutateResponse} */
+  SaDivulgeScanRuleMutate(data: SaDivulgeScanRuleMutateRequest, config?: AxiosRequestConfig): AxiosPromise<SaDivulgeScanRuleMutateResponse>;
   /** 【安全事件】【通用字段信息】 {@link SaEventPubRequest} {@link SaEventPubResponse} */
   SaEventPub(data: SaEventPubRequest, config?: AxiosRequestConfig): AxiosPromise<SaEventPubResponse>;
 }

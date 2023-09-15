@@ -1376,7 +1376,7 @@ declare interface UnbindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
-/** {@link Ccc 云呼叫中心} */
+/** {@link Ccc 云联络中心} */
 declare interface Ccc {
   (): Versions;
   /** 绑定号码外呼技能组 {@link BindNumberCallOutSkillGroupRequest} {@link BindNumberCallOutSkillGroupResponse} */

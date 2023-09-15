@@ -3070,6 +3070,26 @@ declare interface ModifyWorkGroupResponse {
   RequestId?: string;
 }
 
+declare interface QueryResultRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** lastReadFile为上一次读取的文件，lastReadOffset为上一次读取到的位置 */
+  NextToken?: string;
+}
+
+declare interface QueryResultResponse {
+  /** 任务Id */
+  TaskId: string;
+  /** 结果数据 */
+  ResultSet: string;
+  /** schema */
+  ResultSchema: Column[];
+  /** 分页信息 */
+  NextToken: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReportHeartbeatMetaDataRequest {
   /** 数据源名称 */
   DatasourceConnectionName?: string;
@@ -3317,6 +3337,8 @@ declare interface Dlc {
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 修改工作组信息 {@link ModifyWorkGroupRequest} {@link ModifyWorkGroupResponse} */
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
+  /** 获取任务结果查询 {@link QueryResultRequest} {@link QueryResultResponse} */
+  QueryResult(data: QueryResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResultResponse>;
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */

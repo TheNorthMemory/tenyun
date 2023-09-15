@@ -340,6 +340,14 @@ declare interface ClbHostsParams {
   DomainId?: string;
 }
 
+/** 计费下单响应实体 */
+declare interface DealData {
+  /** 订单号列表，元素个数与请求包的goods数组的元素个数一致，商品详情与订单按顺序对应 */
+  DealNames?: string[];
+  /** 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单[{},{}] */
+  BigDealId?: string;
+}
+
 /** DescribeAntiInfoLeakRules返回的规则列表元素 */
 declare interface DescribeAntiInfoLeakRulesRuleItem {
   /** 规则ID */
@@ -676,6 +684,44 @@ declare interface FraudPkg {
   UsedNum?: number | null;
   /** 续费标志 */
   RenewFlag?: number | null;
+}
+
+/** 计费下单接口出入参Goods */
+declare interface GoodNews {
+  /** 商品数量 */
+  GoodsNum: number;
+  /** 商品明细 */
+  GoodsDetail: GoodsDetailNew;
+  /** 订单类型ID，用来唯一标识一个业务的一种场景（总共三种场景：新购、配置变更、续费）高级版: 102375(新购),102376(续费),102377(变配)企业版 : 102378(新购),102379(续费),102380(变配)旗舰版 : 102369(新购),102370(续费),102371(变配)高级版-CLB: 新购 101198 续费 101199 变配 101200企业版-CLB 101204(新购),101205(续费),101206(变配)旗舰版-CLB : 101201(新购),101202(续费),101203(变配) */
+  GoodsCategoryId?: number | null;
+  /** 购买waf实例区域ID1 表示购买大陆资源2表示购买非中国大陆资源 */
+  RegionId?: number | null;
+}
+
+/** 产品明细 */
+declare interface GoodsDetailNew {
+  /** 时间间隔 */
+  TimeSpan?: number | null;
+  /** 单位，支持m、y、d */
+  TimeUnit?: string | null;
+  /** 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面高级版 ：sp_wsm_waf_premium企业版 ：sp_wsm_waf_enterprise旗舰版 ：sp_wsm_waf_ultimate高级版-CLB:sp_wsm_waf_premium_clb企业版-CLB : sp_wsm_waf_enterprise_clb旗舰版-CLB:sp_wsm_waf_ultimate_clb */
+  SubProductCode?: string | null;
+  /** 业务产品申请的pid（对应一个定价公式），通过pid计费查询到定价模型高级版 ：1000827企业版 ：1000830旗舰版 ：1000832高级版-CLB:1001150企业版-CLB : 1001152旗舰版-CLB:1001154 */
+  Pid?: number | null;
+  /** waf实例名 */
+  InstanceName?: string | null;
+  /** 1:自动续费，0:不自动续费 */
+  AutoRenewFlag?: number | null;
+  /** waf购买的实际地域信息 */
+  RealRegion?: number | null;
+  /** 计费细项标签数组 */
+  LabelTypes?: string[] | null;
+  /** 计费细项标签数量，一般和SvLabelType一一对应 */
+  LabelCounts?: number[] | null;
+  /** 变配使用，实例到期时间 */
+  CurDeadline?: string | null;
+  /** 对存在的实例购买bot 或api 安全 */
+  InstanceId?: string | null;
 }
 
 /** CLB-WAF删除域名参数 */
@@ -1098,11 +1144,11 @@ declare interface Strategy {
 
 /** 防信息泄露的匹配条件结构体 */
 declare interface StrategyForAntiInfoLeak {
-  /** 匹配字段 */
+  /** 匹配条件，returncode（响应码）、keywords（关键字）、information（敏感信息） */
   Field: string;
-  /** 逻辑符号 */
+  /** 逻辑符号，固定取值为contains */
   CompareFunc: string;
-  /** 匹配内容 */
+  /** 匹配内容。以下三个对应Field为information时可取的匹配内容：idcard（身份证）、phone（手机号）、bankcard（银行卡）。以下为对应Field为returncode时可取的匹配内容：400（状态码400）、403（状态码403）、404（状态码404）、4xx（其它4xx状态码）、500（状态码500）、501（状态码501）、502（状态码502）、504（状态码504）、5xx（其它5xx状态码）。当对应Field为keywords时由用户自己输入匹配内容。 */
   Content: string;
 }
 
@@ -2434,6 +2480,24 @@ declare interface FreshAntiFakeUrlResponse {
   RequestId?: string;
 }
 
+declare interface GenerateDealsAndPayNewRequest {
+  /** 计费下单入参 */
+  Goods: GoodNews[];
+}
+
+declare interface GenerateDealsAndPayNewResponse {
+  /** 计费下单响应结构体 */
+  Data?: DealData | null;
+  /** 1:成功，0:失败 */
+  Status?: number;
+  /** 返回message */
+  ReturnMessage?: string | null;
+  /** 购买的实例ID */
+  InstanceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetAttackDownloadRecordsRequest {
 }
 
@@ -3323,6 +3387,8 @@ declare interface Waf {
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
   /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
   FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
+  /** 计费资源购买、续费下单接口 {@link GenerateDealsAndPayNewRequest} {@link GenerateDealsAndPayNewResponse} */
+  GenerateDealsAndPayNew(data: GenerateDealsAndPayNewRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateDealsAndPayNewResponse>;
   /** 查询下载攻击日志任务记录列表 {@link GetAttackDownloadRecordsRequest} {@link GetAttackDownloadRecordsResponse} */
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
   /** 攻击日志统计 {@link GetAttackHistogramRequest} {@link GetAttackHistogramResponse} */

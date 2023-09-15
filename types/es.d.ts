@@ -807,7 +807,7 @@ declare interface CreateIndexRequest {
   IndexType: string;
   /** 创建的索引名 */
   IndexName: string;
-  /** 创建的索引元数据JSON，如mappings、settings */
+  /** 【必填】创建的索引元数据JSON，如mappings、settings */
   IndexMetaJson?: string;
   /** 集群访问用户名 */
   Username?: string;
@@ -1019,15 +1019,15 @@ declare interface DescribeIndexListRequest {
   OrderBy?: string;
   /** 过滤索引状态 */
   IndexStatusList?: string[];
-  /** 排序顺序，支持asc、desc */
+  /** 排序顺序，支持asc、desc，默认为desc 数据格式"asc","desc" */
   Order?: string;
 }
 
 declare interface DescribeIndexListResponse {
   /** 索引元数据字段 */
-  IndexMetaFields: IndexMetaField[] | null;
+  IndexMetaFields?: IndexMetaField[] | null;
   /** 查询总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1047,7 +1047,7 @@ declare interface DescribeIndexMetaRequest {
 
 declare interface DescribeIndexMetaResponse {
   /** 索引元数据字段 */
-  IndexMetaField: IndexMetaField | null;
+  IndexMetaField?: IndexMetaField | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

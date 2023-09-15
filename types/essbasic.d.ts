@@ -114,6 +114,8 @@ declare interface ChannelRole {
   RoleName?: string | null;
   /** 角色状态：1-启用；2-禁用 */
   RoleStatus?: number | null;
+  /** 权限树 */
+  PermissionGroups?: PermissionGroup[] | null;
 }
 
 /** 签署人配置信息 */
@@ -578,6 +580,44 @@ declare interface PdfVerifyResult {
   ComponentPage: number;
 }
 
+/** 权限树节点权限 */
+declare interface Permission {
+  /** 权限名称 */
+  Name?: string | null;
+  /** 权限key */
+  Key?: string | null;
+  /** 权限类型 1前端，2后端 */
+  Type?: number | null;
+  /** 是否隐藏 */
+  Hide?: number | null;
+  /** 数据权限标签 1:表示根节点，2:表示叶子结点 */
+  DataLabel?: number | null;
+  /** 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权 */
+  DataType?: number | null;
+  /** 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己 */
+  DataRange?: number | null;
+  /** 关联权限, 表示这个功能权限要受哪个数据权限管控 */
+  DataTo?: string | null;
+  /** 父级权限key */
+  ParentKey?: string | null;
+  /** 是否选中 */
+  IsChecked?: boolean | null;
+  /** 子权限集合 */
+  Children?: Permission[] | null;
+}
+
+/** 权限树中的权限组 */
+declare interface PermissionGroup {
+  /** 权限组名称 */
+  GroupName?: string | null;
+  /** 权限组key */
+  GroupKey?: string | null;
+  /** 是否隐藏分组，0否1是 */
+  Hide?: number | null;
+  /** 权限集合 */
+  Permissions?: Permission[] | null;
+}
+
 /** 合作企业经办人列表信息 */
 declare interface ProxyOrganizationOperator {
   /** 对应Agent-ProxyOperator-OpenId。第三方应用平台自定义，对子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串 */
@@ -876,9 +916,9 @@ declare interface UserThreeFactor {
 
 /** 主题配置 */
 declare interface WebThemeConfig {
-  /** 页面底部是否显示电子签logotrue：允许在页面底部隐藏电子签logo 默认false，不允许允许在页面底部隐藏电子签logo */
+  /** 是否显示页面底部电子签logo，取值如下： **true**：页面底部显示电子签logo **false**：页面底部不显示电子签logo（默认） */
   DisplaySignBrandLogo?: boolean;
-  /** 嵌入式主题颜色支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65) */
+  /** 主题颜色：支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65) */
   WebEmbedThemeColor?: string;
 }
 
@@ -1310,6 +1350,24 @@ declare interface ChannelCreateReleaseFlowResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateRoleRequest {
+  /** 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。 */
+  Name: string;
+  /** 代理企业和员工的信息。 */
+  Agent: Agent;
+  /** 角色描述，最大长度为50个字符 */
+  Description?: string;
+  /** 权限树，权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出 */
+  PermissionGroups?: PermissionGroup[];
+}
+
+declare interface ChannelCreateRoleResponse {
+  /** 角色id */
+  RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelCreateSealPolicyRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
@@ -1396,6 +1454,18 @@ declare interface ChannelCreateWebThemeConfigRequest {
 }
 
 declare interface ChannelCreateWebThemeConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDeleteRoleRequest {
+  /** 代理企业和员工的信息。 */
+  Agent: Agent;
+  /** 角色id，最多20个 */
+  RoleIds: string[];
+}
+
+declare interface ChannelDeleteRoleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1505,12 +1575,12 @@ declare interface ChannelDescribeOrganizationSealsResponse {
 declare interface ChannelDescribeRolesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000 */
-  Offset: number;
   /** 指定每页多少条数据，单页最大200 */
   Limit: string;
-  /** 查询的关键字段:Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色 */
+  /** 查询的关键字段:Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色Key:"IsReturnPermissionGroup"，Values:["0"]:表示接口不返回角色对应的权限树字段，Values:["1"]表示接口返回角色对应的权限树字段 */
   Filters?: Filter[];
+  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000 */
+  Offset?: number;
   /** 操作人信息 */
   Operator?: UserInfo;
 }
@@ -1590,6 +1660,26 @@ declare interface ChannelGetTaskResultApiResponse {
   ResourceId?: string;
   /** 预览文件Url，有效期30分钟 当前字段返回为空，发起的时候，将ResourceId 放入发起即可 */
   PreviewUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelModifyRoleRequest {
+  /** 代理企业和员工的信息。 */
+  Agent: Agent;
+  /** 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。 */
+  Name: string;
+  /** 角色Id，可通过接口 ChannelDescribeRoles 查询获取 */
+  RoleId: string;
+  /** 角色描述，最大长度为50个字符 */
+  Description?: string;
+  /** 权限树，权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出 */
+  PermissionGroups?: PermissionGroup[];
+}
+
+declare interface ChannelModifyRoleResponse {
+  /** 角色id */
+  RoleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3643,14 +3733,18 @@ declare interface Essbasic {
   ChannelCreatePreparedPersonalEsign(data: ChannelCreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */
   ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;
+  /** 创建角色 {@link ChannelCreateRoleRequest} {@link ChannelCreateRoleResponse} */
+  ChannelCreateRole(data: ChannelCreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateRoleResponse>;
   /** 创建印章授权 {@link ChannelCreateSealPolicyRequest} {@link ChannelCreateSealPolicyResponse} */
   ChannelCreateSealPolicy(data: ChannelCreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateSealPolicyResponse>;
   /** 获取个人用户自动签开启链接 {@link ChannelCreateUserAutoSignEnableUrlRequest} {@link ChannelCreateUserAutoSignEnableUrlResponse} */
   ChannelCreateUserAutoSignEnableUrl(data: ChannelCreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserAutoSignEnableUrlResponse>;
   /** 绑定员工角色 {@link ChannelCreateUserRolesRequest} {@link ChannelCreateUserRolesResponse} */
   ChannelCreateUserRoles(data: ChannelCreateUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserRolesResponse>;
-  /** 生成页面主题配置 {@link ChannelCreateWebThemeConfigRequest} {@link ChannelCreateWebThemeConfigResponse} */
+  /** 创建页面主题配置 {@link ChannelCreateWebThemeConfigRequest} {@link ChannelCreateWebThemeConfigResponse} */
   ChannelCreateWebThemeConfig(data: ChannelCreateWebThemeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateWebThemeConfigResponse>;
+  /** 删除角色 {@link ChannelDeleteRoleRequest} {@link ChannelDeleteRoleResponse} */
+  ChannelDeleteRole(data: ChannelDeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteRoleResponse>;
   /** 删除员工绑定角色 {@link ChannelDeleteRoleUsersRequest} {@link ChannelDeleteRoleUsersResponse} */
   ChannelDeleteRoleUsers(data: ChannelDeleteRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteRoleUsersResponse>;
   /** 删除印章授权 {@link ChannelDeleteSealPoliciesRequest} {@link ChannelDeleteSealPoliciesResponse} */
@@ -3669,6 +3763,8 @@ declare interface Essbasic {
   ChannelDisableUserAutoSign(data: ChannelDisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDisableUserAutoSignResponse>;
   /** 查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
+  /** 更新角色 {@link ChannelModifyRoleRequest} {@link ChannelModifyRoleResponse} */
+  ChannelModifyRole(data: ChannelModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelModifyRoleResponse>;
   /** 更新印章状态 {@link ChannelUpdateSealStatusRequest} {@link ChannelUpdateSealStatusResponse} */
   ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
   /** 流程文件验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */

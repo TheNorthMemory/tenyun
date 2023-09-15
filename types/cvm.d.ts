@@ -2221,7 +2221,7 @@ declare interface InquiryPriceResetInstancesTypeRequest {
 
 declare interface InquiryPriceResetInstancesTypeResponse {
   /** 该参数表示调整成对应机型实例的价格。 */
-  Price: Price;
+  Price?: Price;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

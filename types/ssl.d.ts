@@ -990,6 +990,18 @@ declare interface ApplyCertificateResponse {
   RequestId?: string;
 }
 
+declare interface CancelAuditCertificateRequest {
+  /** 证书ID */
+  CertificateId: string;
+}
+
+declare interface CancelAuditCertificateResponse {
+  /** 操作是否成功 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelCertificateOrderRequest {
   /** 证书 ID。 */
   CertificateId: string;
@@ -2042,6 +2054,18 @@ declare interface ModifyCertificateProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCertificateResubmitRequest {
+  /** 证书ID。 */
+  CertificateId: string;
+}
+
+declare interface ModifyCertificateResubmitResponse {
+  /** 证书ID。 */
+  CertificateId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCertificatesExpiringNotificationSwitchRequest {
   /** 证书ID列表。最多50个 */
   CertificateIds: string[];
@@ -2293,6 +2317,8 @@ declare interface Ssl {
   (): Versions;
   /** 免费证书申请 {@link ApplyCertificateRequest} {@link ApplyCertificateResponse} */
   ApplyCertificate(data: ApplyCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCertificateResponse>;
+  /** 取消证书审核 {@link CancelAuditCertificateRequest} {@link CancelAuditCertificateResponse} */
+  CancelAuditCertificate(data: CancelAuditCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAuditCertificateResponse>;
   /** 取消证书订单 {@link CancelCertificateOrderRequest} {@link CancelCertificateOrderResponse} */
   CancelCertificateOrder(data: CancelCertificateOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCertificateOrderResponse>;
   /** 检查证书链完整性 {@link CheckCertificateChainRequest} {@link CheckCertificateChainResponse} */
@@ -2377,6 +2403,8 @@ declare interface Ssl {
   ModifyCertificateAlias(data: ModifyCertificateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAliasResponse>;
   /** 修改证书所属项目 {@link ModifyCertificateProjectRequest} {@link ModifyCertificateProjectResponse} */
   ModifyCertificateProject(data: ModifyCertificateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateProjectResponse>;
+  /** 证书重新发起申请 {@link ModifyCertificateResubmitRequest} {@link ModifyCertificateResubmitResponse} */
+  ModifyCertificateResubmit(data: ModifyCertificateResubmitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateResubmitResponse>;
   /** 修改是否忽略证书到期通知 {@link ModifyCertificatesExpiringNotificationSwitchRequest} {@link ModifyCertificatesExpiringNotificationSwitchResponse} */
   ModifyCertificatesExpiringNotificationSwitch(data: ModifyCertificatesExpiringNotificationSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificatesExpiringNotificationSwitchResponse>;
   /** 重颁发证书 {@link ReplaceCertificateRequest} {@link ReplaceCertificateResponse} */
