@@ -6729,9 +6729,9 @@ declare interface DescribeCDNUsageDataRequest {
 
 declare interface DescribeCDNUsageDataResponse {
   /** 时间粒度，单位：分钟。 */
-  DataInterval: number;
+  DataInterval?: number;
   /** CDN 统计数据。 */
-  Data: StatDataItem[];
+  Data?: StatDataItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7347,7 +7347,7 @@ declare interface DescribeStorageDetailsRequest {
   SubAppId?: number;
   /** 统计时间粒度，有效值：Minute：以5分钟为粒度。Day：以天为粒度。默认按时间跨度决定，小于等于1天以5分钟为粒度，大于1天则以天为粒度。 */
   Interval?: string;
-  /** 查询的存储类型，有效值：TotalStorage：存储总量，标准、低频、归档和深度归档存储量之和，不含提前删除量。StandardStorage：标准存储。InfrequentStorage：低频存储。ArchiveStorage：归档存储。DeepArchiveStorage：深度归档存储。DeletedInfrequentStorage：低频存储提前删除量。DeletedArchiveStorage：归档提前删除量。DeletedDeepArchiveStorage：深度归档提前删除量。ArchiveStandardRetrieval：归档标准取回量。ArchiveExpeditedRetrieval：归档快速取回量。ArchiveBulkRetrieval：归档批量取回量。DeepArchiveStandardRetrieval：深度归档标准取回量。DeepArchiveBulkRetrieval：深度归档批量取回量。默认值为 TotalStorage。 */
+  /** 查询的存储类型，有效值：TotalStorage：存储总量，标准、低频、归档和深度归档存储量之和，不含提前删除量。StandardStorage：标准存储。InfrequentStorage：低频存储。ArchiveStorage：归档存储。DeepArchiveStorage：深度归档存储。DeletedInfrequentStorage：低频存储提前删除量。DeletedArchiveStorage：归档提前删除量。DeletedDeepArchiveStorage：深度归档提前删除量。ArchiveStandardRetrieval：归档标准取回量。ArchiveExpeditedRetrieval：归档快速取回量。ArchiveBulkRetrieval：归档批量取回量。DeepArchiveStandardRetrieval：深度归档标准取回量。DeepArchiveBulkRetrieval：深度归档批量取回量。InfrequentRetrieval：低频存储取回量。默认值为 TotalStorage。 */
   StorageType?: string;
   /** 查询的存储区域，有效值：Chinese Mainland：中国境内（不包含港澳台）。Outside Chinese Mainland：中国境外。默认值为 Chinese Mainland。 */
   Area?: string;
@@ -7355,7 +7355,7 @@ declare interface DescribeStorageDetailsRequest {
 
 declare interface DescribeStorageDetailsResponse {
   /** 存储统计数据，每5分钟或每天一条数据。 */
-  Data: StatDataItem[];
+  Data?: StatDataItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

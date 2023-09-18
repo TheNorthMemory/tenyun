@@ -6,7 +6,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface Admin {
   /** 超管名 */
   Name?: string | null;
-  /** 超管手机号 */
+  /** 超管手机号，打码显示示例值：138****1569 */
   Mobile?: string | null;
 }
 
@@ -248,11 +248,11 @@ declare interface DeleteStaffsResult {
   FailedEmployeeData: FailedDeleteStaffData[] | null;
 }
 
-/** 集成版员工部门信息 */
+/** 集成版员工部门信息。 */
 declare interface Department {
-  /** 部门id */
+  /** 部门ID。 */
   DepartmentId?: string;
-  /** 部门名称 */
+  /** 部门名称。 */
   DepartmentName?: string;
 }
 
@@ -314,11 +314,11 @@ declare interface FailedDeleteStaffData {
 declare interface FailedUpdateStaffData {
   /** 用户传入的名称 */
   DisplayName?: string;
-  /** 用户传入的手机号 */
+  /** 用户传入的手机号，明文展示 */
   Mobile?: string;
   /** 失败原因 */
   Reason?: string;
-  /** 用户Id */
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserId?: string;
   /** 员工在第三方平台的openId */
   OpenId?: string;
@@ -584,11 +584,11 @@ declare interface GroupOrganization {
   Name?: string | null;
   /** 成员企业别名 */
   Alias?: string | null;
-  /** 成员企业id */
+  /** 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取 */
   OrganizationId?: string | null;
-  /** 更新时间，时间戳，单位秒 */
+  /** 记录更新时间， unix时间戳，单位秒 */
   UpdateTime?: number | null;
-  /** 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入 */
+  /** 成员企业加入集团的当前状态 **1**：待授权 **2**：已授权待激活 **3**：拒绝授权 **4**：已解除 **5**：已加入 */
   Status?: number | null;
   /** 是否为集团主企业 */
   IsMainOrganization?: boolean | null;
@@ -596,13 +596,13 @@ declare interface GroupOrganization {
   IdCardNumber?: string | null;
   /** 企业超管信息 */
   AdminInfo?: Admin | null;
-  /** 企业许可证 */
+  /** 企业许可证Id，此字段暂时不需要关注 */
   License?: string | null;
-  /** 企业许可证过期时间，时间戳，单位秒 */
+  /** 企业许可证过期时间，unix时间戳，单位秒 */
   LicenseExpireTime?: number | null;
-  /** 成员企业加入集团时间，时间戳，单位秒 */
+  /** 成员企业加入集团时间，unix时间戳，单位秒 */
   JoinTime?: number | null;
-  /** 是否使用自建审批流引擎（即不是企微审批流引擎），true-是，false-否 */
+  /** 是否使用自建审批流引擎（即不是企微审批流引擎） **true**：是 **false**：否 */
   FlowEngineEnable?: boolean | null;
 }
 
@@ -632,15 +632,15 @@ declare interface IntegrateRole {
 
 /** 部门信息 */
 declare interface IntegrationDepartment {
-  /** 部门ID */
+  /** 部门ID。 */
   DeptId?: string | null;
-  /** 部门名 */
+  /** 部门名。 */
   DeptName?: string | null;
   /** 父部门ID */
   ParentDeptId?: string | null;
   /** 客户系统部门ID */
   DeptOpenId?: string | null;
-  /** 序列号 */
+  /** 序列号。 */
   OrderNo?: number | null;
 }
 
@@ -882,43 +882,43 @@ declare interface SignUrl {
   HttpSignUrl?: string;
 }
 
-/** 企业员工信息 */
+/** 企业员工信息。 */
 declare interface Staff {
-  /** 用户在电子签平台的id注：创建和更新场景无需填写 */
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。注：`创建和更新场景无需填写。` */
   UserId?: string;
-  /** 显示的用户名/昵称 */
+  /** 显示的用户名/昵称。 */
   DisplayName?: string;
-  /** 用户手机号 */
+  /** 用户手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 */
   Mobile?: string;
-  /** 用户邮箱 */
+  /** 用户邮箱。 */
   Email?: string | null;
-  /** 用户在第三方平台id，如需在此接口提醒员工实名，该参数不传 */
+  /** 用户在第三方平台ID。注：`如需在此接口提醒员工实名，该参数不传。` */
   OpenId?: string | null;
-  /** 员工角色注：创建和更新场景无需填写 */
+  /** 员工角色信息。注：`创建和更新场景无需填写。` */
   Roles?: StaffRole[] | null;
-  /** 员工部门 */
+  /** 员工部门信息。 */
   Department?: Department | null;
-  /** 员工是否实名注：创建和更新场景无需填写 */
+  /** 员工是否实名。注：`创建和更新场景无需填写。` */
   Verified?: boolean;
-  /** 员工创建时间戳，单位秒注：创建和更新场景无需填写 */
+  /** 员工创建时间戳，单位秒。注：`创建和更新场景无需填写。` */
   CreatedOn?: number;
-  /** 员工实名时间戳，单位秒注：创建和更新场景无需填写 */
+  /** 员工实名时间戳，单位秒。注：`创建和更新场景无需填写。` */
   VerifiedOn?: number | null;
-  /** 员工是否离职：0-未离职，1-离职注：创建和更新场景无需填写 */
+  /** 员工是否离职：**0**：未离职**1**：离职注：`创建和更新场景无需填写。` */
   QuiteJob?: number | null;
-  /** 员工离职交接人用户id注：创建和更新场景无需填写 */
+  /** 员工离职交接人用户ID。注：`创建和更新场景无需填写。` */
   ReceiveUserId?: string;
-  /** 员工离职交接人用户OpenId注：创建和更新场景无需填写 */
+  /** 员工离职交接人用户OpenId。注：`创建和更新场景无需填写。` */
   ReceiveOpenId?: string;
-  /** 企业微信用户账号ID注：仅企微类型的企业创建员工接口支持该字段 */
+  /** 企业微信用户账号ID。注：`仅企微类型的企业创建员工接口支持该字段。` */
   WeworkOpenId?: string | null;
 }
 
-/** 集成版企业角色信息 */
+/** 集成版企业角色信息。 */
 declare interface StaffRole {
-  /** 角色id */
+  /** 角色ID。 */
   RoleId?: string | null;
-  /** 角色名称 */
+  /** 角色名称。 */
   RoleName?: string | null;
 }
 
@@ -950,9 +950,9 @@ declare interface SuccessDeleteStaffData {
 declare interface SuccessUpdateStaffData {
   /** 传入的用户名称 */
   DisplayName?: string;
-  /** 传入的手机号 */
+  /** 传入的手机号，没有打码 */
   Mobile?: string;
-  /** 用户Id */
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserId?: string;
 }
 
@@ -1045,18 +1045,18 @@ declare interface WebThemeConfig {
 }
 
 declare interface BindEmployeeUserIdWithClientOpenIdRequest {
-  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定。（参数参考示例） */
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 电子签系统员工UserId */
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)；或者通过DescribeIntegrationEmployees接口获取。 */
   UserId: string;
-  /** 客户系统OpenId */
+  /** 员工在贵司业务系统中的唯一身份标识，用于与腾讯电子签账号进行映射，确保在同一企业内不会出现重复。 该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。 */
   OpenId: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface BindEmployeeUserIdWithClientOpenIdResponse {
-  /** 绑定是否成功，1表示成功，0表示失败 */
+  /** 绑定是否成功。**0**：失败**1**：成功 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1445,38 +1445,38 @@ declare interface CreateFlowSignUrlResponse {
 declare interface CreateIntegrationDepartmentRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 部门名称，不超过50个字符 */
+  /** 部门名称，最大长度为50个字符。 */
   DeptName: string;
-  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 电子签父部门ID，与ParentDeptOpenId二选一,优先ParentDeptId,都为空时自动填充至根节点下 */
+  /** 电子签父部门ID。注：`如果同时指定了ParentDeptId与ParentDeptOpenId参数，系统将优先使用ParentDeptId。当二者都未指定时，创建的新部门将自动填充至根节点部门下。` */
   ParentDeptId?: string;
-  /** 第三方平台中父部门ID,与ParentDeptId二选一,优先ParentDeptId,都为空时自动填充至根节点下 */
+  /** 第三方平台中父部门ID。注：`如果同时指定了ParentDeptId与ParentDeptOpenId参数，系统将优先使用ParentDeptId。当二者都未指定时，创建的新部门将自动填充至根节点部门下。` */
   ParentDeptOpenId?: string;
-  /** 客户系统部门ID，不超过64个字符 */
+  /** 客户系统部门ID，最大长度为64个字符。 */
   DeptOpenId?: string;
-  /** 排序号,1~30000范围内 */
+  /** 排序号，支持设置的数值范围为1~30000。同一父部门下，排序号越大，部门顺序越靠前。 */
   OrderNo?: number;
 }
 
 declare interface CreateIntegrationDepartmentResponse {
-  /** 电子签部门ID */
+  /** 电子签部门ID。建议开发者保存此部门ID，方便后续查询或修改部门信息。 */
   DeptId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateIntegrationEmployeesRequest {
-  /** 操作人信息，userId必填 */
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 待创建员工的信息，不超过20个。所有类型的企业支持的入参：Mobile和DisplayName必填,OpenId、Email和Department.DepartmentId选填，其他字段暂不支持。企微类型的企业特有支持的入参：WeworkOpenId，传入此字段无需在传入其他信息 */
+  /** 待创建员工的信息，最多不超过20个。其中入参Mobile和DisplayName必填，OpenId、Email和Department.DepartmentId选填，其他字段暂不支持设置。在创建企微企业员工场景下，只需传入WeworkOpenId，无需再传其他信息。 */
   Employees: Staff[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface CreateIntegrationEmployeesResponse {
-  /** 创建员工的结果 */
+  /** 创建员工的结果。包含创建成功的数据与创建失败数据。 */
   CreateEmployeeResult?: CreateStaffResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1869,11 +1869,11 @@ declare interface CreateWebThemeConfigResponse {
 declare interface DeleteIntegrationDepartmentRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 电子签中的部门id,通过DescribeIntegrationDepartments接口可获得 */
+  /** 电子签中的部门ID，通过DescribeIntegrationDepartments接口可获得。 */
   DeptId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 交接部门ID。待删除部门中的合同、印章和模板数据，交接至该部门ID下，未填写交接至公司根部门。 */
+  /** 交接部门ID。待删除部门中的合同、印章和模板数据，将会被交接至该部门ID下；若未填写则交接至公司根部门。 */
   ReceiveDeptId?: string;
 }
 
@@ -1883,16 +1883,16 @@ declare interface DeleteIntegrationDepartmentResponse {
 }
 
 declare interface DeleteIntegrationEmployeesRequest {
-  /** 操作人信息，userId必填 */
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 待移除员工的信息，userId和openId二选一，必填一个，如果需要指定交接人的话，ReceiveUserId或者ReceiveOpenId字段二选一 */
+  /** 待移除员工的信息。应符合以下规则：UserId和OpenId不可同时为空。若需要进行离职交接，交接人信息ReceiveUserId和ReceiveOpenId不可同时为空。否则视为不进行离职交接。 */
   Employees: Staff[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface DeleteIntegrationEmployeesResponse {
-  /** 员工删除数据 */
+  /** 员工删除结果。包含成功数据与失败数据。**成功数据**：展示员工姓名、手机号与电子签平台UserId**失败数据**：展示员工电子签平台UserId、第三方平台OpenId和失败原因 */
   DeleteEmployeeResult?: DeleteStaffsResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2091,44 +2091,44 @@ declare interface DescribeFlowTemplatesResponse {
 declare interface DescribeIntegrationDepartmentsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 查询类型 0-查询单个部门节点 1-单个部门节点及一级子节点部门列表 */
+  /** 查询类型，支持以下类型：**0**：查询单个部门节点列表，不包含子节点部门信息**1**：查询单个部门节点级一级子节点部门信息列表 */
   QueryType: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 部门ID,与DeptOpenId二选一,优先DeptId,都为空时获取根节点数据 */
+  /** 查询的部门ID。注：`如果同时指定了DeptId与DeptOpenId参数，系统将优先使用DeptId参数进行查询。当二者都未指定时，系统将返回根节点部门数据。` */
   DeptId?: string;
-  /** 客户系统部门ID,与DeptId二选一,优先DeptId,都为空时获取根节点数据 */
+  /** 查询的客户系统部门ID。注：`如果同时指定了DeptId与DeptOpenId参数，系统将优先使用DeptId参数进行查询。当二者都未指定时，系统将返回根节点部门数据。` */
   DeptOpenId?: string;
 }
 
 declare interface DescribeIntegrationDepartmentsResponse {
-  /** 部门列表 */
+  /** 部门信息列表。部门信息根据部门排序号OrderNo降序排列，根据部门创建时间升序排列。 */
   Departments?: IntegrationDepartment[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeIntegrationEmployeesRequest {
-  /** 操作人信息，userId必填 */
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 指定每页多少条数据，单页最大20 */
+  /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit: number;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]，查询过滤未实名用户，Key为Status，Values为["NotVerified"]查询某个部门的用户，Key为DepartmentId，Values为["DepartmentId"]根据用户Id查询员工时，Key为UserId，Values为["UserId"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...] */
+  /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，根据实名状态查询员工，Values可选： **["IsVerified"]**：查询已实名的员工**["NotVerified"]**：查询未实名的员工 Key:**"DepartmentId"**，根据部门ID查询部门下的员工，Values为指定的部门ID：**["DepartmentId"]** Key:**"UserId"**，根据用户ID查询员工，Values为指定的用户ID：**["UserId"]** Key:**"UserWeWorkOpenId"**，根据用户企微账号ID查询员工，Values为指定用户的企微账号ID：**["UserWeWorkOpenId"]** Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]** */
   Filters?: Filter[];
-  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000 */
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number;
 }
 
 declare interface DescribeIntegrationEmployeesResponse {
-  /** 员工数据列表 */
+  /** 员工信息列表。 */
   Employees?: Staff[] | null;
-  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000 */
+  /** 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number | null;
-  /** 指定每页多少条数据，单页最大20 */
+  /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit?: number;
-  /** 符合条件的员工数量 */
+  /** 符合条件的员工数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2161,26 +2161,26 @@ declare interface DescribeIntegrationRolesResponse {
 }
 
 declare interface DescribeOrganizationGroupOrganizationsRequest {
-  /** 操作人信息，userId必填 */
+  /** 执行本接口操作的员工信息,userId必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 指定每页多少条数据，单页最大1000 */
+  /** 指定分页每页返回的数据条数，单页最大1000 */
   Limit: number;
-  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0 */
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
   Offset: number;
   /** 查询成员企业的企业名，模糊匹配 */
   Name?: string;
-  /** 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入 */
+  /** 成员企业加入集团的当前状态 **1**：待授权 **2**：已授权待激活 **3**：拒绝授权 **4**：已解除 **5**：已加入 */
   Status?: number;
-  /** 是否导出当前成员企业数据 */
+  /** 是否导出当前成员企业数据 **false**：不导出（默认值） **true**：导出 */
   Export?: boolean;
-  /** 成员企业机构 ID，在PC控制台 集团管理可获取 */
+  /** 成员企业机构 ID，32 位字符串，在PC控制台 集团管理可获取 */
   Id?: string;
 }
 
 declare interface DescribeOrganizationGroupOrganizationsResponse {
-  /** 查询到的符合条件的成员企业总数量 */
+  /** 符合查询条件的资源实例总数量。 */
   Total?: number | null;
-  /** 已授权待激活的企业数量 */
+  /** 已授权待激活的子企业总数量 */
   JoinedTotal?: number | null;
   /** 已加入的企业数量(废弃,请使用ActivatedTotal) */
   ActivedTotal?: number | null;
@@ -2188,7 +2188,7 @@ declare interface DescribeOrganizationGroupOrganizationsResponse {
   ExportUrl?: string | null;
   /** 成员企业信息列表 */
   List?: GroupOrganization[] | null;
-  /** 已加入的企业数量 */
+  /** 已加入的子企业总数量 */
   ActivatedTotal?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2321,17 +2321,17 @@ declare interface ModifyApplicationCallbackInfoResponse {
 declare interface ModifyIntegrationDepartmentRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 电子签部门ID,通过DescribeIntegrationDepartments接口可以获取 */
+  /** 电子签部门ID，通过DescribeIntegrationDepartments接口获得。 */
   DeptId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 电子签父部门ID，通过DescribeIntegrationDepartments接口可以获取 */
+  /** 电子签父部门ID，通过DescribeIntegrationDepartments接口获得。 */
   ParentDeptId?: string;
-  /** 部门名称，不超过50个字符 */
+  /** 部门名称，最大长度为50个字符。 */
   DeptName?: string;
-  /** 客户系统部门ID，不超过64个字符 */
+  /** 客户系统部门ID，最大长度为64个字符。 */
   DeptOpenId?: string;
-  /** 排序号,1~30000范围内 */
+  /** 排序号，支持设置的数值范围为1~30000。同一父部门下，排序号越大，部门顺序越靠前。 */
   OrderNo?: number;
 }
 
@@ -2385,29 +2385,29 @@ declare interface StartFlowResponse {
 }
 
 declare interface UnbindEmployeeUserIdWithClientOpenIdRequest {
-  /** 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定(参数用法参考示例) */
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 电子签系统员工UserId */
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserId: string;
-  /** 客户系统OpenId */
+  /** 员工在贵司业务系统中的唯一身份标识，用于与腾讯电子签账号进行映射，确保在同一企业内不会出现重复。该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。 */
   OpenId: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
-  /** 解绑是否成功，1表示成功，0表示失败 */
+  /** 解绑是否成功。 **0**：失败 **1**：成功 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface UpdateIntegrationEmployeesRequest {
-  /** 当前用户信息，UserId必填 */
+  /** 执行本接口操作的员工信息,UserId必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 员工信息，不超过100个。根据UserId或OpenId更新员工，必填一个，优先UserId。可更新Mobile、DisplayName、Email和Department.DepartmentId字段，其他字段暂不支持 */
   Employees: Staff[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
@@ -2467,7 +2467,7 @@ declare interface VerifyPdfResponse {
 /** {@link Ess 腾讯电子签企业版} */
 declare interface Ess {
   (): Versions;
-  /** 员工userid与客户系统openid绑定 {@link BindEmployeeUserIdWithClientOpenIdRequest} {@link BindEmployeeUserIdWithClientOpenIdResponse} */
+  /** 员工Userid与客户系统Openid绑定 {@link BindEmployeeUserIdWithClientOpenIdRequest} {@link BindEmployeeUserIdWithClientOpenIdResponse} */
   BindEmployeeUserIdWithClientOpenId(data: BindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<BindEmployeeUserIdWithClientOpenIdResponse>;
   /** 撤销单个签署流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
@@ -2553,9 +2553,9 @@ declare interface Ess {
   DescribeFlowInfo(data?: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
   /** 查询模板 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
-  /** 获取企业部门列表 {@link DescribeIntegrationDepartmentsRequest} {@link DescribeIntegrationDepartmentsResponse} */
+  /** 获取企业部门信息列表 {@link DescribeIntegrationDepartmentsRequest} {@link DescribeIntegrationDepartmentsResponse} */
   DescribeIntegrationDepartments(data: DescribeIntegrationDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationDepartmentsResponse>;
-  /** 查询企业员工列表 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
+  /** 查询企业员工信息列表 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
   /** 查询企业角色列表 {@link DescribeIntegrationRolesRequest} {@link DescribeIntegrationRolesResponse} */
   DescribeIntegrationRoles(data: DescribeIntegrationRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationRolesResponse>;
@@ -2573,13 +2573,13 @@ declare interface Ess {
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
   /** 修改企业回调配置 {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */
   ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
-  /** 更新企业部门 {@link ModifyIntegrationDepartmentRequest} {@link ModifyIntegrationDepartmentResponse} */
+  /** 更新企业部门信息 {@link ModifyIntegrationDepartmentRequest} {@link ModifyIntegrationDepartmentResponse} */
   ModifyIntegrationDepartment(data: ModifyIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationDepartmentResponse>;
   /** 更新企业角色 {@link ModifyIntegrationRoleRequest} {@link ModifyIntegrationRoleResponse} */
   ModifyIntegrationRole(data: ModifyIntegrationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationRoleResponse>;
   /** 模板发起合同-发起签署流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
-  /** 员工userid与客户系统openid解绑 {@link UnbindEmployeeUserIdWithClientOpenIdRequest} {@link UnbindEmployeeUserIdWithClientOpenIdResponse} */
+  /** 解除员工UserId与客户系统OpenId的绑定 {@link UnbindEmployeeUserIdWithClientOpenIdRequest} {@link UnbindEmployeeUserIdWithClientOpenIdResponse} */
   UnbindEmployeeUserIdWithClientOpenId(data: UnbindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEmployeeUserIdWithClientOpenIdResponse>;
   /** 更新企业员工信息 {@link UpdateIntegrationEmployeesRequest} {@link UpdateIntegrationEmployeesResponse} */
   UpdateIntegrationEmployees(data: UpdateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIntegrationEmployeesResponse>;

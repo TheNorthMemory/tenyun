@@ -58,6 +58,12 @@ declare interface BoundK8SInfo {
   SyncMode?: string | null;
 }
 
+/** 证书信息 */
+declare interface CertificateInfo {
+  /** 唯一id */
+  Id?: string | null;
+}
+
 /** 灰度规则列表 */
 declare interface CloudAPIGatewayCanaryRuleList {
   /** 灰度规则 */
@@ -590,6 +596,48 @@ declare interface KVPair {
   Value: string;
 }
 
+/** 云原生网关证书 */
+declare interface KongCertificate {
+  /** 无 */
+  Cert?: KongCertificatesPreview | null;
+}
+
+/** kong证书列表 */
+declare interface KongCertificatesList {
+  /** 证书列表总数 */
+  Total?: number | null;
+  /** 无 */
+  CertificatesList?: KongCertificatesPreview[] | null;
+  /** 证书列表总页数 */
+  Pages?: number | null;
+}
+
+/** 云原生网关证书预览信息 */
+declare interface KongCertificatesPreview {
+  /** 证书名称 */
+  Name?: string | null;
+  /** Id */
+  Id: string | null;
+  /** 绑定的域名 */
+  BindDomains?: string[] | null;
+  /** 证书状态：expired(已过期) active(生效中) */
+  Status?: string | null;
+  /** 证书pem格式 */
+  Crt?: string | null;
+  /** 证书私钥 */
+  Key?: string | null;
+  /** 证书过期时间 */
+  ExpireTime?: string | null;
+  /** 证书上传时间 */
+  CreateTime?: string | null;
+  /** 证书签发时间 */
+  IssueTime?: string | null;
+  /** 证书来源：native(kong自定义证书) ssl(ssl平台证书) */
+  CertSource?: string | null;
+  /** ssl平台证书Id */
+  CertId?: string | null;
+}
+
 /** 云原生网关路由信息 */
 declare interface KongRoutePreview {
   /** 服务ID */
@@ -994,6 +1042,28 @@ declare interface CreateCloudNativeAPIGatewayCanaryRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudNativeAPIGatewayCertificateRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 绑定的域名 */
+  BindDomains: string[];
+  /** ssl平台证书 Id */
+  CertId: string;
+  /** 证书名称 */
+  Name?: string;
+  /** 证书私钥 */
+  Key?: string;
+  /** 证书pem格式 */
+  Crt?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayCertificateResponse {
+  /** 创建证书结果 */
+  Result?: CertificateInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudNativeAPIGatewayRequest {
   /** 云原生API网关名字, 最多支持60个字符。 */
   Name: string;
@@ -1198,6 +1268,18 @@ declare interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudNativeAPIGatewayCertificateRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 证书Id */
+  Id: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudNativeAPIGatewayRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -1298,6 +1380,38 @@ declare interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
 declare interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
   /** 灰度规则列表 */
   Result?: CloudAPIGatewayCanaryRuleList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayCertificateDetailsRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 证书Id */
+  Id: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
+  /** 无 */
+  Result?: KongCertificate | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayCertificatesRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 列表数量 */
+  Limit?: number;
+  /** 列表offset */
+  Offset?: number;
+  /** 过滤条件，多个过滤条件之间是与的关系，支持BindDomain ，Name */
+  Filters?: ListFilter[];
+}
+
+declare interface DescribeCloudNativeAPIGatewayCertificatesResponse {
+  /** 无 */
+  Result?: KongCertificatesList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1751,6 +1865,22 @@ declare interface RateLimitResponse {
   HttpStatus?: number | null;
 }
 
+declare interface UpdateCloudNativeAPIGatewayCertificateInfoRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 证书id */
+  Id: string;
+  /** 绑定的域名列表 */
+  BindDomains: string[];
+  /** 证书名称 */
+  Name?: string;
+}
+
+declare interface UpdateCloudNativeAPIGatewayCertificateInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateCloudNativeAPIGatewaySpecRequest {
   /** 云原生API网关实例ID。只支持后付费实例 */
   GatewayId: string;
@@ -1788,6 +1918,8 @@ declare interface Tse {
   CreateCloudNativeAPIGateway(data: CreateCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayResponse>;
   /** 创建云原生网关的灰度规则 {@link CreateCloudNativeAPIGatewayCanaryRuleRequest} {@link CreateCloudNativeAPIGatewayCanaryRuleResponse} */
   CreateCloudNativeAPIGatewayCanaryRule(data: CreateCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayCanaryRuleResponse>;
+  /** 创建云原生网关证书 {@link CreateCloudNativeAPIGatewayCertificateRequest} {@link CreateCloudNativeAPIGatewayCertificateResponse} */
+  CreateCloudNativeAPIGatewayCertificate(data: CreateCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayCertificateResponse>;
   /** 创建云原生网关路由 {@link CreateCloudNativeAPIGatewayRouteRequest} {@link CreateCloudNativeAPIGatewayRouteResponse} */
   CreateCloudNativeAPIGatewayRoute(data: CreateCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayRouteResponse>;
   /** 创建云原生网关限流插件(路由) {@link CreateCloudNativeAPIGatewayRouteRateLimitRequest} {@link CreateCloudNativeAPIGatewayRouteRateLimitResponse} */
@@ -1804,6 +1936,8 @@ declare interface Tse {
   DeleteCloudNativeAPIGateway(data: DeleteCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayResponse>;
   /** 删除云原生网关的灰度规则 {@link DeleteCloudNativeAPIGatewayCanaryRuleRequest} {@link DeleteCloudNativeAPIGatewayCanaryRuleResponse} */
   DeleteCloudNativeAPIGatewayCanaryRule(data: DeleteCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
+  /** 删除云原生网关证书 {@link DeleteCloudNativeAPIGatewayCertificateRequest} {@link DeleteCloudNativeAPIGatewayCertificateResponse} */
+  DeleteCloudNativeAPIGatewayCertificate(data: DeleteCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCertificateResponse>;
   /** 删除云原生网关路由 {@link DeleteCloudNativeAPIGatewayRouteRequest} {@link DeleteCloudNativeAPIGatewayRouteResponse} */
   DeleteCloudNativeAPIGatewayRoute(data: DeleteCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayRouteResponse>;
   /** 删除云原生网关的限流插件(路由) {@link DeleteCloudNativeAPIGatewayRouteRateLimitRequest} {@link DeleteCloudNativeAPIGatewayRouteRateLimitResponse} */
@@ -1820,6 +1954,10 @@ declare interface Tse {
   DescribeCloudNativeAPIGateway(data: DescribeCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayResponse>;
   /** 查询云原生网关灰度规则列表 {@link DescribeCloudNativeAPIGatewayCanaryRulesRequest} {@link DescribeCloudNativeAPIGatewayCanaryRulesResponse} */
   DescribeCloudNativeAPIGatewayCanaryRules(data: DescribeCloudNativeAPIGatewayCanaryRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCanaryRulesResponse>;
+  /** 查询云原生网关单个证书详情 {@link DescribeCloudNativeAPIGatewayCertificateDetailsRequest} {@link DescribeCloudNativeAPIGatewayCertificateDetailsResponse} */
+  DescribeCloudNativeAPIGatewayCertificateDetails(data: DescribeCloudNativeAPIGatewayCertificateDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCertificateDetailsResponse>;
+  /** 查询云原生网关证书列表 {@link DescribeCloudNativeAPIGatewayCertificatesRequest} {@link DescribeCloudNativeAPIGatewayCertificatesResponse} */
+  DescribeCloudNativeAPIGatewayCertificates(data: DescribeCloudNativeAPIGatewayCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCertificatesResponse>;
   /** 获取云原生API网关实例网络配置信息 {@link DescribeCloudNativeAPIGatewayConfigRequest} {@link DescribeCloudNativeAPIGatewayConfigResponse} */
   DescribeCloudNativeAPIGatewayConfig(data: DescribeCloudNativeAPIGatewayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConfigResponse>;
   /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */
@@ -1866,6 +2004,8 @@ declare interface Tse {
   ModifyCloudNativeAPIGatewayServiceRateLimit(data: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 修改云原生API网关实例分组基础信息 {@link ModifyNativeGatewayServerGroupRequest} {@link ModifyNativeGatewayServerGroupResponse} */
   ModifyNativeGatewayServerGroup(data: ModifyNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServerGroupResponse>;
+  /** 修改云原生网关证书信息 {@link UpdateCloudNativeAPIGatewayCertificateInfoRequest} {@link UpdateCloudNativeAPIGatewayCertificateInfoResponse} */
+  UpdateCloudNativeAPIGatewayCertificateInfo(data: UpdateCloudNativeAPIGatewayCertificateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewayCertificateInfoResponse>;
   /** 修改云原生API网关实例的节点规格 {@link UpdateCloudNativeAPIGatewaySpecRequest} {@link UpdateCloudNativeAPIGatewaySpecResponse} */
   UpdateCloudNativeAPIGatewaySpec(data: UpdateCloudNativeAPIGatewaySpecRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewaySpecResponse>;
   /** 修改引擎公网访问配置 {@link UpdateEngineInternetAccessRequest} {@link UpdateEngineInternetAccessResponse} */

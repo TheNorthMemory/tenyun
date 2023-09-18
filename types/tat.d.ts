@@ -303,9 +303,9 @@ declare interface TaskResult {
   /** Base64编码后的命令输出。最大长度24KB。 */
   Output: string;
   /** 命令执行开始时间。 */
-  ExecStartTime: string;
+  ExecStartTime: string | null;
   /** 命令执行结束时间。 */
-  ExecEndTime: string;
+  ExecEndTime: string | null;
   /** 命令最终输出被截断的字节数。 */
   Dropped: number;
   /** 日志在cos中的地址 */
@@ -343,6 +343,8 @@ declare interface CreateCommandRequest {
   EnableParameter?: boolean;
   /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
+  /** 自定义参数数组。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。自定义参数最多20个。 */
+  DefaultParameterConfs?: DefaultParameterConf[];
   /** 为命令关联的标签，列表长度不超过10。 */
   Tags?: Tag[];
   /** 在 CVM 或 Lighthouse 实例中执行命令的用户名称。使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在 Linux 实例中以 root 用户执行命令；在Windows 实例中以 System 用户执行命令。 */
@@ -355,7 +357,7 @@ declare interface CreateCommandRequest {
 
 declare interface CreateCommandResponse {
   /** 命令ID。 */
-  CommandId: string;
+  CommandId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -649,7 +651,7 @@ declare interface EnableInvokerResponse {
 declare interface InvokeCommandRequest {
   /** 待触发的命令ID。 */
   CommandId: string;
-  /** 待执行命令的实例ID列表，上限100。 */
+  /** 待执行命令的实例ID列表，上限200。 */
   InstanceIds: string[];
   /** Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   Parameters?: string;
@@ -667,7 +669,7 @@ declare interface InvokeCommandRequest {
 
 declare interface InvokeCommandResponse {
   /** 执行活动ID。 */
-  InvocationId: string;
+  InvocationId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -689,6 +691,8 @@ declare interface ModifyCommandRequest {
   Timeout?: number;
   /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。采取整体全覆盖式修改，即修改时必须提供所有新默认值。必须 Command 的 EnableParameter 为 true 时，才允许修改这个值。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
+  /** 自定义参数数组。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。自定义参数最多20个。 */
+  DefaultParameterConfs?: DefaultParameterConf[];
   /** 在 CVM 或 Lighthouse 实例中执行命令的用户名称。使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。 */
   Username?: string;
   /** 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。 */
@@ -757,7 +761,7 @@ declare interface PreviewReplacedCommandContentResponse {
 declare interface RunCommandRequest {
   /** Base64编码后的命令内容，长度不可超过64KB。 */
   Content: string;
-  /** 待执行命令的实例ID列表，上限100。支持实例类型： CVM LIGHTHOUSE */
+  /** 待执行命令的实例ID列表，上限200。支持实例类型： CVM LIGHTHOUSE */
   InstanceIds: string[];
   /** 命令名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。 */
   CommandName?: string;
@@ -769,12 +773,14 @@ declare interface RunCommandRequest {
   WorkingDirectory?: string;
   /** 命令超时时间，默认60秒。取值范围[1, 86400]。 */
   Timeout?: number;
-  /** 是否保存命令，取值范围： True：保存 False：不保存默认为 False。 */
+  /** 是否保存命令，取值范围： true：保存 false：不保存默认为 false。 */
   SaveCommand?: boolean;
-  /** 是否启用自定义参数功能。一旦创建，此值不提供修改。默认值：false。 */
+  /** 是否启用自定义参数功能。一旦创建，此值不提供修改。取值范围： true：启用 false：不启用默认值：false。 */
   EnableParameter?: boolean;
   /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果 Parameters 未提供，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
+  /** 自定义参数数组。 如果 Parameters 未提供，将使用这里的默认值进行替换。 自定义参数最多20个。 */
+  DefaultParameterConfs?: DefaultParameterConf[];
   /** Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果未提供该参数取值，将使用 DefaultParameters 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   Parameters?: string;
   /** 如果保存命令，可为命令设置标签。列表长度不超过10。 */
@@ -789,9 +795,9 @@ declare interface RunCommandRequest {
 
 declare interface RunCommandResponse {
   /** 命令ID。 */
-  CommandId: string;
+  CommandId?: string;
   /** 执行活动ID。 */
-  InvocationId: string;
+  InvocationId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

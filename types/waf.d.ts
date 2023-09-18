@@ -692,9 +692,9 @@ declare interface GoodNews {
   GoodsNum: number;
   /** 商品明细 */
   GoodsDetail: GoodsDetailNew;
-  /** 订单类型ID，用来唯一标识一个业务的一种场景（总共三种场景：新购、配置变更、续费）高级版: 102375(新购),102376(续费),102377(变配)企业版 : 102378(新购),102379(续费),102380(变配)旗舰版 : 102369(新购),102370(续费),102371(变配)高级版-CLB: 新购 101198 续费 101199 变配 101200企业版-CLB 101204(新购),101205(续费),101206(变配)旗舰版-CLB : 101201(新购),101202(续费),101203(变配) */
+  /** 订单类型ID，用来唯一标识一个业务的一种场景（总共三种场景：新购、配置变更、续费）高级版: 102375(新购),102376(续费),102377(变配)企业版 : 102378(新购),102379(续费),102380(变配)旗舰版 : 102369(新购),102370(续费),102371(变配)域名包 : 102372(新购),102373(续费),102374(变配)业务扩展包 : 101040(新购),101041(续费),101042(变配)高级版-CLB: 新购 101198 续费 101199 变配 101200企业版-CLB 101204(新购),101205(续费),101206(变配)旗舰版-CLB : 101201(新购),101202(续费),101203(变配)域名包-CLB: 101207(新购),101208(续费),101209(变配)业务扩展包-CLB: 101210(新购),101211(续费),101212(变配) */
   GoodsCategoryId?: number | null;
-  /** 购买waf实例区域ID1 表示购买大陆资源2表示购买非中国大陆资源 */
+  /** 购买waf实例区域ID1 表示购买大陆资源;9表示购买非中国大陆资源 */
   RegionId?: number | null;
 }
 
@@ -702,11 +702,11 @@ declare interface GoodNews {
 declare interface GoodsDetailNew {
   /** 时间间隔 */
   TimeSpan?: number | null;
-  /** 单位，支持m、y、d */
+  /** 单位，支持购买d、m、y 即（日、月、年） */
   TimeUnit?: string | null;
-  /** 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面高级版 ：sp_wsm_waf_premium企业版 ：sp_wsm_waf_enterprise旗舰版 ：sp_wsm_waf_ultimate高级版-CLB:sp_wsm_waf_premium_clb企业版-CLB : sp_wsm_waf_enterprise_clb旗舰版-CLB:sp_wsm_waf_ultimate_clb */
+  /** 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面Saas 高级版 ：sp_wsm_waf_premiumSaas企业版 ：sp_wsm_waf_enterpriseSaas旗舰版 ：sp_wsm_waf_ultimateSaas 业务扩展包：sp_wsm_waf_qpsepSaas 域名扩展包：sp_wsm_waf_domain高级版-CLB:sp_wsm_waf_premium_clb企业版-CLB : sp_wsm_waf_enterprise_clb旗舰版-CLB:sp_wsm_waf_ultimate_clb 业务扩展包-CLB：sp_wsm_waf_qpsep_clb域名扩展包-CLB：sp_wsm_waf_domain_clb */
   SubProductCode?: string | null;
-  /** 业务产品申请的pid（对应一个定价公式），通过pid计费查询到定价模型高级版 ：1000827企业版 ：1000830旗舰版 ：1000832高级版-CLB:1001150企业版-CLB : 1001152旗舰版-CLB:1001154 */
+  /** 业务产品申请的pid（对应一个定价公式），通过pid计费查询到定价模型高级版 ：1000827企业版 ：1000830旗舰版 ：1000832域名包 : 1000834业务扩展包 : 1000481高级版-CLB:1001150企业版-CLB : 1001152旗舰版-CLB:1001154域名包-CLB: 1001156业务扩展包-CLB : 1001160 */
   Pid?: number | null;
   /** waf实例名 */
   InstanceName?: string | null;
@@ -714,7 +714,7 @@ declare interface GoodsDetailNew {
   AutoRenewFlag?: number | null;
   /** waf购买的实际地域信息 */
   RealRegion?: number | null;
-  /** 计费细项标签数组 */
+  /** 计费细项标签数组Saas 高级版 sv_wsm_waf_package_premium Saas 企业版 sv_wsm_waf_package_enterpriseSaas 旗舰版 sv_wsm_waf_package_ultimate Saas 非中国大陆高级版 sv_wsm_waf_package_premium_intlSaas 非中国大陆企业版 sv_wsm_waf_package_enterprise_intlSaas 非中国大陆旗舰版 sv_wsm_waf_package_ultimate _intlSaas 业务扩展包 sv_wsm_waf_qps_epSaas 域名扩展包 sv_wsm_waf_domain高级版CLB sv_wsm_waf_package_premium_clb企业版CLB sv_wsm_waf_package_enterprise_clb旗舰版CLB sv_wsm_waf_package_ultimate_clb非中国大陆高级版 CLB sv_wsm_waf_package_premium_clb_intl非中国大陆企业版CLB sv_wsm_waf_package_premium_clb_intl非中国大陆旗舰版CLB sv_wsm_waf_package_ultimate_clb _intl业务扩展包CLB sv_wsm_waf_qps_ep_clb域名扩展包CLB sv_wsm_waf_domain_clb */
   LabelTypes?: string[] | null;
   /** 计费细项标签数量，一般和SvLabelType一一对应 */
   LabelCounts?: number[] | null;
@@ -2896,6 +2896,56 @@ declare interface ModifyHostStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceElasticModeRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 弹性计费开关 */
+  Mode: number;
+}
+
+declare interface ModifyInstanceElasticModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceNameRequest {
+  /** 实例id */
+  InstanceID: string;
+  /** 版本 */
+  Edition: string;
+}
+
+declare interface ModifyInstanceNameResponse {
+  /** 修改状态：0为成功 */
+  ModifyCode?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceQpsLimitRequest {
+  /** 套餐实例id */
+  InstanceId: string;
+  /** qps上限 */
+  QpsLimit: number;
+}
+
+declare interface ModifyInstanceQpsLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceRenewFlagRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 续费开关 */
+  RenewFlag: number;
+}
+
+declare interface ModifyInstanceRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProtectionStatusRequest {
   /** 域名 */
   Domain: string;
@@ -3293,7 +3343,7 @@ declare interface Waf {
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
-  /** waf斯巴达-删除防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
+  /** 删除SAASWAF防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
   DeleteSpartaProtection(data: DeleteSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpartaProtectionResponse>;
   /** 获取访问日志导出列表 {@link DescribeAccessExportsRequest} {@link DescribeAccessExportsResponse} */
   DescribeAccessExports(data: DescribeAccessExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessExportsResponse>;
@@ -3435,6 +3485,14 @@ declare interface Waf {
   ModifyHostMode(data: ModifyHostModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostModeResponse>;
   /** 设置防护域名WAF开关 {@link ModifyHostStatusRequest} {@link ModifyHostStatusResponse} */
   ModifyHostStatus(data: ModifyHostStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostStatusResponse>;
+  /** 修改实例的QPS弹性计费开关 {@link ModifyInstanceElasticModeRequest} {@link ModifyInstanceElasticModeResponse} */
+  ModifyInstanceElasticMode(data: ModifyInstanceElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceElasticModeResponse>;
+  /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
+  ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
+  /** 设置套餐实例的弹性qps上限 {@link ModifyInstanceQpsLimitRequest} {@link ModifyInstanceQpsLimitResponse} */
+  ModifyInstanceQpsLimit(data: ModifyInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceQpsLimitResponse>;
+  /** 修改实例的自动续费开关 {@link ModifyInstanceRenewFlagRequest} {@link ModifyInstanceRenewFlagResponse} */
+  ModifyInstanceRenewFlag(data: ModifyInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceRenewFlagResponse>;
   /** waf斯巴达-waf开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
   ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 修改域名配置 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */

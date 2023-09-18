@@ -32,6 +32,10 @@ declare interface EmbedTokenInfo {
   Scope?: string | null;
   /** 过期时间，分钟为单位，最大240 */
   ExpireTime?: number | null;
+  /** 使用者企业Id(仅用于多用户) */
+  UserCorpId?: string | null;
+  /** 使用者Id(仅用于多用户) */
+  UserId?: string | null;
 }
 
 declare interface ApplyEmbedIntervalRequest {
@@ -69,6 +73,10 @@ declare interface CreateEmbedTokenRequest {
   ExpireTime?: string;
   /** 备用字段 */
   ExtraParam?: string;
+  /** 使用者企业Id(仅用于多用户) */
+  UserCorpId?: string;
+  /** 使用者Id(仅用于多用户) */
+  UserId?: string;
 }
 
 declare interface CreateEmbedTokenResponse {

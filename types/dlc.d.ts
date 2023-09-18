@@ -380,6 +380,24 @@ declare interface DataGovernPolicy {
   GovernEngine?: string | null;
 }
 
+/** 数据源详细信息 */
+declare interface DataSourceInfo {
+  /** 数据源实例的唯一ID */
+  InstanceId?: string | null;
+  /** 数据源的名称 */
+  InstanceName?: string | null;
+  /** 数据源的JDBC访问链接 */
+  JdbcUrl?: string | null;
+  /** 用于访问数据源的用户名 */
+  User?: string | null;
+  /** 数据源访问密码，需要base64编码 */
+  Password?: string | null;
+  /** 数据源的VPC和子网信息 */
+  Location?: DatasourceConnectionLocation | null;
+  /** 默认数据库名 */
+  DbName?: string | null;
+}
+
 /** 数据库对象 */
 declare interface DatabaseInfo {
   /** 数据库名称，长度0~128，支持数字、字母下划线，不允许数字大头，统一转换为小写。 */
@@ -416,6 +434,96 @@ declare interface DatabaseResponseInfo {
   DatabaseId: string | null;
 }
 
+/** 数据源属性 */
+declare interface DatasourceConnectionConfig {
+  /** Mysql数据源连接的属性 */
+  Mysql?: MysqlInfo | null;
+  /** Hive数据源连接的属性 */
+  Hive?: HiveInfo | null;
+  /** Kafka数据源连接的属性 */
+  Kafka?: KafkaInfo | null;
+  /** 其他数据源连接的属性 */
+  OtherDatasourceConnection?: OtherDatasourceConnection | null;
+  /** PostgreSQL数据源连接的属性 */
+  PostgreSql?: DataSourceInfo | null;
+  /** SQLServer数据源连接的属性 */
+  SqlServer?: DataSourceInfo | null;
+  /** ClickHouse数据源连接的属性 */
+  ClickHouse?: DataSourceInfo | null;
+  /** Elasticsearch数据源连接的属性 */
+  Elasticsearch?: ElasticsearchInfo | null;
+  /** TDSQL-PostgreSQL数据源连接的属性 */
+  TDSQLPostgreSql?: DataSourceInfo | null;
+}
+
+/** 数据源信息 */
+declare interface DatasourceConnectionInfo {
+  /** 数据源数字Id */
+  Id: number;
+  /** 数据源字符串Id */
+  DatasourceConnectionId: string;
+  /** 数据源名称 */
+  DatasourceConnectionName: string;
+  /** 数据源描述 */
+  DatasourceConnectionDesc: string;
+  /** 数据源类型，支持DataLakeCatalog、IcebergCatalog、Result、Mysql、HiveCos、HiveHdfs */
+  DatasourceConnectionType: string;
+  /** 数据源属性 */
+  DatasourceConnectionConfig: DatasourceConnectionConfig | null;
+  /** 数据源状态：0（初始化）、1（成功）、-1（已删除）、-2（失败）、-3（删除中） */
+  State: number;
+  /** 地域 */
+  Region: string;
+  /** 用户AppId */
+  AppId: string;
+  /** 数据源创建时间 */
+  CreateTime: string;
+  /** 数据源最近一次更新时间 */
+  UpdateTime: string;
+  /** 数据源同步失败原因 */
+  Message: string;
+  /** 数据源绑定的计算引擎信息 */
+  DataEngines?: DataEngineInfo[] | null;
+  /** 创建人 */
+  UserAlias?: string | null;
+  /** 网络配置列表 */
+  NetworkConnectionSet?: NetworkConnection[] | null;
+  /** 连通性状态：0（未测试，默认）、1（正常）、2（失败） */
+  ConnectivityState?: number | null;
+  /** 连通性测试提示信息 */
+  ConnectivityTips?: string | null;
+}
+
+/** 数据源连接的网络信息 */
+declare interface DatasourceConnectionLocation {
+  /** 数据连接所在Vpc实例Id，如“vpc-azd4dt1c”。 */
+  VpcId: string;
+  /** Vpc的IPv4 CIDR */
+  VpcCidrBlock: string;
+  /** 数据连接所在子网的实例Id，如“subnet-bthucmmy” */
+  SubnetId: string;
+  /** Subnet的IPv4 CIDR */
+  SubnetCidrBlock: string;
+}
+
+/** Elasticsearch数据源的详细信息 */
+declare interface ElasticsearchInfo {
+  /** 数据源ID */
+  InstanceId?: string | null;
+  /** 数据源名称 */
+  InstanceName?: string | null;
+  /** 用户名 */
+  User?: string | null;
+  /** 密码，需要base64编码 */
+  Password?: string | null;
+  /** 数据源的VPC和子网信息 */
+  Location?: DatasourceConnectionLocation | null;
+  /** 默认数据库名称 */
+  DbName?: string | null;
+  /** 访问Elasticsearch的ip、端口信息 */
+  ServiceInfo?: IpPortPair[] | null;
+}
+
 /** SQL语句对象 */
 declare interface Execution {
   /** 自动生成SQL语句。 */
@@ -428,6 +536,44 @@ declare interface Filter {
   Name: string;
   /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
   Values: string[];
+}
+
+/** hive类型数据源的信息 */
+declare interface HiveInfo {
+  /** hive metastore的地址 */
+  MetaStoreUrl: string;
+  /** hive数据源类型，代表数据储存的位置，COS或者HDFS */
+  Type: string;
+  /** 数据源所在的私有网络信息 */
+  Location: DatasourceConnectionLocation;
+  /** 如果类型为HDFS，需要传一个用户名 */
+  User?: string;
+  /** 如果类型为HDFS，需要选择是否高可用 */
+  HighAvailability?: boolean;
+  /** 如果类型为COS，需要填写COS桶连接 */
+  BucketUrl?: string;
+  /** json字符串。如果类型为HDFS，需要填写该字段 */
+  HdfsProperties?: string;
+  /** Hive的元数据库信息 */
+  Mysql?: MysqlInfo | null;
+  /** emr集群Id */
+  InstanceId?: string | null;
+  /** emr集群名称 */
+  InstanceName?: string | null;
+  /** EMR集群中hive组件的版本号 */
+  HiveVersion?: string | null;
+  /** Kerberos详细信息 */
+  KerberosInfo?: KerberosInfo | null;
+  /** 是否开启Kerberos */
+  KerberosEnable?: boolean | null;
+}
+
+/** ip端口对信息 */
+declare interface IpPortPair {
+  /** ip信息 */
+  Ip?: string | null;
+  /** 端口信息 */
+  Port?: number | null;
 }
 
 /** 日志详情 */
@@ -452,6 +598,24 @@ declare interface KVPair {
   Value: string | null;
 }
 
+/** Kafka连接信息 */
+declare interface KafkaInfo {
+  /** kakfa实例Id */
+  InstanceId: string;
+  /** kakfa数据源的网络信息 */
+  Location: DatasourceConnectionLocation;
+}
+
+/** Kerberos详细信息 */
+declare interface KerberosInfo {
+  /** Krb5Conf文件值 */
+  Krb5Conf?: string;
+  /** KeyTab文件值 */
+  KeyTab?: string;
+  /** 服务主体 */
+  ServicePrincipal?: string;
+}
+
 /** 元数据加锁内容 */
 declare interface LockComponentInfo {
   /** 数据库名称 */
@@ -470,6 +634,24 @@ declare interface LockComponentInfo {
   IsAcid?: boolean;
   /** 是否动态分区写 */
   IsDynamicPartitionWrite?: boolean;
+}
+
+/** Mysql类型数据源信息 */
+declare interface MysqlInfo {
+  /** 连接mysql的jdbc url */
+  JdbcUrl: string;
+  /** 用户名 */
+  User: string;
+  /** mysql密码 */
+  Password: string;
+  /** mysql数据源的网络信息 */
+  Location: DatasourceConnectionLocation;
+  /** 数据库名称 */
+  DbName?: string;
+  /** 数据库实例ID，和数据库侧保持一致 */
+  InstanceId?: string | null;
+  /** 数据库实例名称，和数据库侧保持一致 */
+  InstanceName?: string | null;
 }
 
 /** 网络配置 */
@@ -620,6 +802,12 @@ declare interface NotebookSessions {
 declare interface Other {
   /** 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。 */
   Format: string;
+}
+
+/** 其他数据源 */
+declare interface OtherDatasourceConnection {
+  /** 网络参数 */
+  Location: DatasourceConnectionLocation;
 }
 
 /** 数据表分块信息。 */
@@ -2308,6 +2496,38 @@ declare interface DescribeDatabasesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDatasourceConnectionRequest {
+  /** 连接ID列表，指定要查询的连接ID */
+  DatasourceConnectionIds?: string[];
+  /** 过滤条件，当前支持的过滤键为：DatasourceConnectionName（数据源连接名）。DatasourceConnectionType （数据源连接连接类型） */
+  Filters?: Filter[];
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回数量，默认20，最大值100 */
+  Limit?: number;
+  /** 排序字段，支持如下字段类型，create-time（默认，创建时间）、update-time（更新时间） */
+  SortBy?: string;
+  /** 排序方式，desc表示正序，asc表示反序， 默认为desc */
+  Sorting?: string;
+  /** 筛选字段：起始时间 */
+  StartTime?: string;
+  /** 筛选字段：截止时间 */
+  EndTime?: string;
+  /** 连接名称列表，指定要查询的连接名称 */
+  DatasourceConnectionNames?: string[];
+  /** 连接类型，支持Mysql/HiveCos/Kafka/DataLakeCatalog */
+  DatasourceConnectionTypes?: string[];
+}
+
+declare interface DescribeDatasourceConnectionResponse {
+  /** 数据连接总数 */
+  TotalCount: number;
+  /** 数据连接对象集合 */
+  ConnectionSet: DatasourceConnectionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEngineUsageInfoRequest {
   /** 数据引擎ID */
   DataEngineId: string;
@@ -3261,6 +3481,8 @@ declare interface Dlc {
   DescribeDataEngines(data?: DescribeDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  /** 查询数据源信息 {@link DescribeDatasourceConnectionRequest} {@link DescribeDatasourceConnectionResponse} */
+  DescribeDatasourceConnection(data?: DescribeDatasourceConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceConnectionResponse>;
   /** 查询数据引擎资源使用情况 {@link DescribeEngineUsageInfoRequest} {@link DescribeEngineUsageInfoResponse} */
   DescribeEngineUsageInfo(data: DescribeEngineUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineUsageInfoResponse>;
   /** 查询被禁用的表属性列表（新） {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
