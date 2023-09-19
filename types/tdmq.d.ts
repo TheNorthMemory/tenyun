@@ -490,6 +490,16 @@ declare interface PrometheusEndpointInfo {
   VpcEndpointInfo?: VpcEndpointInfo | null;
 }
 
+/** 公网访问安全规则 */
+declare interface PublicAccessRule {
+  /** ip网段信息 */
+  IpRule: string;
+  /** 允许或者拒绝 */
+  Allow: boolean;
+  /** 备注信息 */
+  Remark?: string | null;
+}
+
 /** 生产者信息 */
 declare interface Publisher {
   /** 生产者id */
@@ -2686,6 +2696,28 @@ declare interface DescribeRocketMQNamespacesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQPublicAccessPointRequest {
+  /** 集群ID，当前只支持专享集群 */
+  InstanceId: string;
+}
+
+declare interface DescribeRocketMQPublicAccessPointResponse {
+  /** 公网接入点状态：0， 已开启1， 已关闭2，开启中3，关闭中4，修改中 */
+  Status: number;
+  /** 支付状态：0, 未知1，正常2，欠费 */
+  PayStatus: number;
+  /** 接入点地址 */
+  AccessUrl: string | null;
+  /** 安全访问规则列表 */
+  Rules: PublicAccessRule[] | null;
+  /** 带宽 */
+  Bandwidth: number | null;
+  /** 付费模式 */
+  PayMode: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQTopicMsgsRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -3004,6 +3036,28 @@ declare interface ModifyEnvironmentRoleRequest {
 }
 
 declare interface ModifyEnvironmentRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPublicNetworkAccessPointRequest {
+  /** 集群名字 */
+  ClusterId: string;
+  /** 是否开启 */
+  PublicNetworkAccessPointStatus: boolean;
+  /** 必填，公网控制台的开关/Vpc控制台的开关，示例值，Public/Vpc */
+  SwitchOwner?: string;
+  /** Vpc */
+  VpcId?: string;
+  /** 子网 */
+  SubnetId?: string;
+  /** 子网下面指定ip作为vpc接入点 */
+  SelectIp?: string;
+}
+
+declare interface ModifyPublicNetworkAccessPointResponse {
+  /** 修改结果 */
+  ModifyResult?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3420,6 +3474,24 @@ declare interface SendRocketMQMessageResponse {
   RequestId?: string;
 }
 
+declare interface SetRocketMQPublicAccessPointRequest {
+  /** 集群ID，当前只支持专享集群 */
+  InstanceId: string;
+  /** 开启或关闭访问 */
+  Enabled: boolean;
+  /** 带宽大小，开启或者调整公网时必须指定，Mbps为单位 */
+  Bandwidth?: number;
+  /** 付费模式，开启公网时必须指定，0为按小时计费，1为包年包月，当前只支持按小时计费 */
+  PayMode?: number;
+  /** 公网访问安全规则列表，Enabled为true时必须传入 */
+  Rules?: PublicAccessRule[];
+}
+
+declare interface SetRocketMQPublicAccessPointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindCmqDeadLetterRequest {
   /** 死信策略源队列名称，调用本接口会清空该队列的死信队列策略。 */
   SourceQueueName: string;
@@ -3573,6 +3645,8 @@ declare interface Tdmq {
   DescribeRocketMQMsgTrace(data: DescribeRocketMQMsgTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgTraceResponse>;
   /** 获取RocketMQ命名空间列表 {@link DescribeRocketMQNamespacesRequest} {@link DescribeRocketMQNamespacesResponse} */
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
+  /** 查询RocketMQ实例公网接入点信息 {@link DescribeRocketMQPublicAccessPointRequest} {@link DescribeRocketMQPublicAccessPointResponse} */
+  DescribeRocketMQPublicAccessPoint(data: DescribeRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessPointResponse>;
   /** rocketmq 消息查询 {@link DescribeRocketMQTopicMsgsRequest} {@link DescribeRocketMQTopicMsgsResponse} */
   DescribeRocketMQTopicMsgs(data: DescribeRocketMQTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicMsgsResponse>;
   /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */
@@ -3601,6 +3675,8 @@ declare interface Tdmq {
   ModifyEnvironmentAttributes(data: ModifyEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentAttributesResponse>;
   /** 修改环境角色授权 {@link ModifyEnvironmentRoleRequest} {@link ModifyEnvironmentRoleResponse} */
   ModifyEnvironmentRole(data: ModifyEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentRoleResponse>;
+  /** RabbitMQ专享版修改公网管控台，vpc15672开关 {@link ModifyPublicNetworkAccessPointRequest} {@link ModifyPublicNetworkAccessPointResponse} */
+  ModifyPublicNetworkAccessPoint(data: ModifyPublicNetworkAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicNetworkAccessPointResponse>;
   /** 修改RabbitMQ的用户 {@link ModifyRabbitMQUserRequest} {@link ModifyRabbitMQUserResponse} */
   ModifyRabbitMQUser(data: ModifyRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQUserResponse>;
   /** 修改RabbitMQ专享版实例 {@link ModifyRabbitMQVipInstanceRequest} {@link ModifyRabbitMQVipInstanceResponse} */
@@ -3641,6 +3717,8 @@ declare interface Tdmq {
   SendMsg(data: SendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendMsgResponse>;
   /** 发送RocketMQ消息 {@link SendRocketMQMessageRequest} {@link SendRocketMQMessageResponse} */
   SendRocketMQMessage(data: SendRocketMQMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendRocketMQMessageResponse>;
+  /** 设置RocketMQ实例公网访问接入点 {@link SetRocketMQPublicAccessPointRequest} {@link SetRocketMQPublicAccessPointResponse} */
+  SetRocketMQPublicAccessPoint(data: SetRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<SetRocketMQPublicAccessPointResponse>;
   /** 解绑cmq死信队列 {@link UnbindCmqDeadLetterRequest} {@link UnbindCmqDeadLetterResponse} */
   UnbindCmqDeadLetter(data: UnbindCmqDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCmqDeadLetterResponse>;
 }

@@ -204,6 +204,26 @@ declare interface VpcInfo {
   Region: string;
 }
 
+declare interface AddSpecifyPrivateZoneVpcRequest {
+  /** 私有域id */
+  ZoneId: string;
+  /** 本次新增的vpc信息 */
+  VpcSet?: VpcInfo[];
+  /** 本次新增关联账户vpc信息 */
+  AccountVpcSet?: AccountVpcInfo[];
+}
+
+declare interface AddSpecifyPrivateZoneVpcResponse {
+  /** zone id */
+  ZoneId?: string;
+  /** 本次新增的vpc */
+  VpcSet?: VpcInfo[];
+  /** 本次新增的关联账号vpc */
+  AccountVpcSet?: AccountVpcInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePrivateDNSAccountRequest {
   /** 私有域解析账号 */
   Account: PrivateDNSAccount;
@@ -308,6 +328,26 @@ declare interface DeletePrivateZoneRequest {
 }
 
 declare interface DeletePrivateZoneResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSpecifyPrivateZoneVpcRequest {
+  /** 私有域id */
+  ZoneId: string;
+  /** 本次删除的VPC */
+  VpcSet?: VpcInfo[];
+  /** 本次删除的关联账户VPC */
+  AccountVpcSet?: AccountVpcInfo[];
+}
+
+declare interface DeleteSpecifyPrivateZoneVpcResponse {
+  /** 私有域id */
+  ZoneId?: string;
+  /** 本次删除的VPC */
+  VpcSet?: VpcInfo[];
+  /** 本次删除的关联账户的VPC */
+  AccountVpcSet?: AccountVpcInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -567,6 +607,8 @@ declare interface SubscribePrivateZoneServiceResponse {
 /** {@link Privatedns 私有域解析 Private DNS} */
 declare interface Privatedns {
   (): Versions;
+  /** 追加与私有域关联的VPC {@link AddSpecifyPrivateZoneVpcRequest} {@link AddSpecifyPrivateZoneVpcResponse} */
+  AddSpecifyPrivateZoneVpc(data: AddSpecifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpecifyPrivateZoneVpcResponse>;
   /** 创建私有域解析账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
   /** 创建私有域 {@link CreatePrivateZoneRequest} {@link CreatePrivateZoneResponse} */
@@ -581,6 +623,8 @@ declare interface Privatedns {
   DeletePrivateZone(data?: DeletePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneResponse>;
   /** 删除私有域解析记录 {@link DeletePrivateZoneRecordRequest} {@link DeletePrivateZoneRecordResponse} */
   DeletePrivateZoneRecord(data?: DeletePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneRecordResponse>;
+  /** 删除与私有域关联的VPC {@link DeleteSpecifyPrivateZoneVpcRequest} {@link DeleteSpecifyPrivateZoneVpcResponse} */
+  DeleteSpecifyPrivateZoneVpc(data: DeleteSpecifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpecifyPrivateZoneVpcResponse>;
   /** 获取私有域解析账号的VPC列表 {@link DescribeAccountVpcListRequest} {@link DescribeAccountVpcListResponse} */
   DescribeAccountVpcList(data: DescribeAccountVpcListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountVpcListResponse>;
   /** 获取操作日志列表 {@link DescribeAuditLogRequest} {@link DescribeAuditLogResponse} */

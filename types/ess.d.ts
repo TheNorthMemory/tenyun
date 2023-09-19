@@ -1128,6 +1128,40 @@ declare interface CreateBatchCancelFlowUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateBatchSignUrlRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：`请确保和合同中填入的一致` */
+  Name: string;
+  /** 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此业务通知方。注：`请确保和合同中填入的一致, 若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息` */
+  Mobile: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)注：`请确保和合同中填入的一致` */
+  IdCardType?: string;
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`请确保和合同中填入的一致` */
+  IdCardNumber?: string;
+  /** 通知用户方式：**NONE** : 不通知（默认）**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号） */
+  NotifyType?: string;
+  /** 本次需要批量签署的合同流程ID列表。可以不传, 如不传则是发给对方的所有待签署合同流程。 */
+  FlowIds?: string[];
+  /** 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。 */
+  OrganizationName?: string;
+  /** 是否直接跳转至合同内容页面进行签署**false**: 会跳转至批量合同流程的列表, 点击需要批量签署合同后进入合同内容页面进行签署(默认)**true**: 跳过合同流程列表, 直接进入合同内容页面进行签署 */
+  JumpToDetail?: boolean;
+}
+
+declare interface CreateBatchSignUrlResponse {
+  /** 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。注: `非小程序和APP集成使用` */
+  SignUrl?: string;
+  /** 链接过期时间以 Unix 时间戳格式表示，默认生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
+  ExpiredTime?: number;
+  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径注: `小程序和APP集成使用` */
+  MiniAppPath?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConvertTaskApiRequest {
   /** 需要进行转换的资源文件类型支持的文件类型如下：docdocxxlsxlsxjpgjpegpngbmptxt */
   ResourceType: string;
@@ -1399,19 +1433,19 @@ declare interface CreateFlowResponse {
 }
 
 declare interface CreateFlowSignReviewRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 签署流程编号 */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 企业内部审核结果PASS: 通过 REJECT: 拒绝 */
+  /** 企业审核结果PASS: 通过 REJECT: 拒绝 */
   ReviewType: string;
-  /** 审核原因 当ReviewType 是REJECT 时此字段必填,字符串长度不超过200 */
+  /** 审核结果原因，字符串长度不超过200当ReviewType 是拒绝（REJECT） 时此字段必填。 */
   ReviewMessage?: string;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
-  /** 审核签署节点使用 非必填 如果填写则审核该签署节点。给个人审核时必填。 */
+  /** 审核签署节点人标识，用来标识审核的签署方。如果签署审核节点是个人， 此参数必填。 */
   RecipientId?: string;
-  /** 操作类型：（接口通过该字段区分操作类型）SignReview:签署审核CreateReview:发起审核默认：SignReview；SignReview:签署审核该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若发起个人审核，则指定该字段为：SignReview */
+  /** 操作类型：（接口通过该字段区分不同的操作类型）SignReview: 签署审核（默认）CreateReview: 创建审核如果审核节点是个人，则操作类型只能为SignReview。 */
   OperateType?: string;
 }
 
@@ -2477,6 +2511,8 @@ declare interface Ess {
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 批量撤销签署流程 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
+  /** 获取小程序批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
+  CreateBatchSignUrl(data: CreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchSignUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
@@ -2497,7 +2533,7 @@ declare interface Ess {
   CreateFlowGroupByTemplates(data: CreateFlowGroupByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupByTemplatesResponse>;
   /** 合同催办 {@link CreateFlowRemindsRequest} {@link CreateFlowRemindsResponse} */
   CreateFlowReminds(data: CreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowRemindsResponse>;
-  /** 提交企业签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
+  /** 提交签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
   /** 获取个人用户H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;

@@ -82,6 +82,8 @@ declare interface AssessmentRisk {
   RiskType?: string | null;
   /** 风险面 */
   RiskSide?: string | null;
+  /** 数据源类型 */
+  DataSourceType?: string | null;
 }
 
 /** 风险项列表详细数据 */
@@ -110,6 +112,8 @@ declare interface AssessmentRiskItem {
 declare interface AssessmentTask {
   /** 评估任务Id */
   TaskId: string;
+  /** 评估任务的自增ID */
+  TaskUid: number | null;
   /** 评估任务名称 */
   TaskName: string;
   /** 业务名称 */
@@ -142,6 +146,10 @@ declare interface AssessmentTask {
   DiscoveryCondition: DiscoveryCondition | null;
   /** 评估任务失败信息 */
   ErrorInfo: string;
+  /** 模版主键id */
+  TemplateUid: number | null;
+  /** 进度百分比 */
+  ProgressPercent: number | null;
 }
 
 /** DSPA评估模版 */
@@ -170,6 +178,8 @@ declare interface AssessmentTemplate {
   SupportDataSource?: string[] | null;
   /** 是否包含攻击面风险 */
   IsASMTemplate?: boolean | null;
+  /** 合规组id */
+  IdentifyComplianceId?: number | null;
 }
 
 /** 数据资产报告-cos的资产详情 */
@@ -1576,6 +1586,10 @@ declare interface RiskItemInfo {
   ItemSubType?: string | null;
   /** 风险面 */
   RiskSide?: string | null;
+  /** API安全风险链接 */
+  APIRiskLinkURL?: string | null;
+  /** 备注 */
+  Remark?: string | null;
 }
 
 /** 风险级别详情的矩阵 */
@@ -2593,6 +2607,8 @@ declare interface DescribeDSPAAssessmentLatestRiskListRequest {
   RiskLevel?: string;
   /** 风险面筛选 */
   RiskSide?: string[];
+  /** ASC 正序，DESC倒叙 */
+  TimeSort?: string;
 }
 
 declare interface DescribeDSPAAssessmentLatestRiskListResponse {

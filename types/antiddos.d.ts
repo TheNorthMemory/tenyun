@@ -3007,7 +3007,7 @@ declare interface Antiddos {
   DescribeBizMonitorTrend(data: DescribeBizMonitorTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizMonitorTrendResponse>;
   /** 获取高防IP业务流量曲线 {@link DescribeBizTrendRequest} {@link DescribeBizTrendResponse} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
-  /** 获取DDoS防护的IP黑白名单 {@link DescribeBlackWhiteIpListRequest} {@link DescribeBlackWhiteIpListResponse} */
+  /** @deprecated 获取DDoS防护的IP黑白名单 {@link DescribeBlackWhiteIpListRequest} {@link DescribeBlackWhiteIpListResponse} */
   DescribeBlackWhiteIpList(data: DescribeBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlackWhiteIpListResponse>;
   /** 获取CC防护等级列表 {@link DescribeCCLevelListRequest} {@link DescribeCCLevelListResponse} */
   DescribeCCLevelList(data: DescribeCCLevelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCLevelListResponse>;
@@ -3055,7 +3055,7 @@ declare interface Antiddos {
   DescribeListPacketFilterConfig(data: DescribeListPacketFilterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListPacketFilterConfigResponse>;
   /** 获取DDoS防护的端口acl策略列表 {@link DescribeListPortAclListRequest} {@link DescribeListPortAclListResponse} */
   DescribeListPortAclList(data: DescribeListPortAclListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListPortAclListResponse>;
-  /** 获取防护阈值配置列表 {@link DescribeListProtectThresholdConfigRequest} {@link DescribeListProtectThresholdConfigResponse} */
+  /** @deprecated 获取防护阈值配置列表 {@link DescribeListProtectThresholdConfigRequest} {@link DescribeListProtectThresholdConfigResponse} */
   DescribeListProtectThresholdConfig(data: DescribeListProtectThresholdConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListProtectThresholdConfigResponse>;
   /** 获取DDoS防护的协议封禁配置列表 {@link DescribeListProtocolBlockConfigRequest} {@link DescribeListProtocolBlockConfigResponse} */
   DescribeListProtocolBlockConfig(data: DescribeListProtocolBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListProtocolBlockConfigResponse>;

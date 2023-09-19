@@ -2077,7 +2077,7 @@ declare interface CreateSparkAppTaskResponse {
 declare interface CreateSparkSessionBatchSQLRequest {
   /** DLC Spark作业引擎名称 */
   DataEngineName: string;
-  /** 运行sql */
+  /** 运行sql，需要base64编码。 */
   ExecuteSQL: string;
   /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
   DriverSize?: string;
@@ -2095,7 +2095,7 @@ declare interface CreateSparkSessionBatchSQLRequest {
   SessionName?: string;
   /** Session相关配置，当前支持：1.dlc.eni：用户配置的eni网关信息，可以用过该字段设置；2.dlc.role.arn：用户配置的roleArn鉴权策略配置信息，可以用过该字段设置；3.dlc.sql.set.config：用户配置的集群配置信息，可以用过该字段设置； */
   Arguments?: KVPair[];
-  /** 是否继承集群的资源类配置：0：自定义（默认），1：继承集群； */
+  /** 是否继承集群的资源类配置：0：不继承（默认），1：继承集群； */
   IsInherit?: number;
 }
 
