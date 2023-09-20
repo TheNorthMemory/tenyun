@@ -1739,9 +1739,9 @@ declare interface DescribeInstancesModificationRequest {
 
 declare interface DescribeInstancesModificationResponse {
   /** 实例调整的机型配置的数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例支持调整的机型配置列表。 */
-  InstanceTypeConfigStatusSet: InstanceTypeConfigStatus[];
+  InstanceTypeConfigStatusSet?: InstanceTypeConfigStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

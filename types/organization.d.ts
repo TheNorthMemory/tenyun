@@ -684,6 +684,16 @@ declare interface MoveOrganizationNodeMembersResponse {
   RequestId?: string;
 }
 
+declare interface QuitOrganizationRequest {
+  /** 企业组织ID */
+  OrgId: number;
+}
+
+declare interface QuitOrganizationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateOrganizationMemberEmailBindRequest {
   /** 成员Uin */
   MemberUin: number;
@@ -1119,6 +1129,8 @@ declare interface Organization {
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
   /** 移动成员到指定企业组织节点 {@link MoveOrganizationNodeMembersRequest} {@link MoveOrganizationNodeMembersResponse} */
   MoveOrganizationNodeMembers(data: MoveOrganizationNodeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<MoveOrganizationNodeMembersResponse>;
+  /** 退出企业组织 {@link QuitOrganizationRequest} {@link QuitOrganizationResponse} */
+  QuitOrganization(data: QuitOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<QuitOrganizationResponse>;
   /** 更新组织成员信息 {@link UpdateOrganizationMemberRequest} {@link UpdateOrganizationMemberResponse} */
   UpdateOrganizationMember(data: UpdateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationMemberResponse>;
   /** 修改绑定成员邮箱 {@link UpdateOrganizationMemberEmailBindRequest} {@link UpdateOrganizationMemberEmailBindResponse} */

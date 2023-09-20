@@ -1320,6 +1320,22 @@ declare interface ModifyAclResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCmdTemplateRequest {
+  /** 模板名，最长32字符，不能包含空白字符 */
+  Name: string;
+  /** 命令列表，\n分隔，最长32768字节 */
+  CmdList: string;
+  /** 命令模板ID */
+  Id: number;
+  /** CmdList字段前端是否base64传值。0：否，1：是 */
+  Encoding?: number;
+}
+
+declare interface ModifyCmdTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeviceGroupRequest {
   /** 资产组名，最大长度32字符，不能为空 */
   Name: string;
@@ -1697,6 +1713,8 @@ declare interface Dasb {
   ImportExternalDevice(data: ImportExternalDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ImportExternalDeviceResponse>;
   /** 修改访问权限 {@link ModifyAclRequest} {@link ModifyAclResponse} */
   ModifyAcl(data: ModifyAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclResponse>;
+  /** 修改高危命令模板 {@link ModifyCmdTemplateRequest} {@link ModifyCmdTemplateResponse} */
+  ModifyCmdTemplate(data: ModifyCmdTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmdTemplateResponse>;
   /** 修改资产信息 {@link ModifyDeviceRequest} {@link ModifyDeviceResponse} */
   ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
   /** 修改资产组 {@link ModifyDeviceGroupRequest} {@link ModifyDeviceGroupResponse} */

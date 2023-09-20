@@ -480,6 +480,22 @@ declare interface InternetAccessible {
   BandwidthpkgSubType?: string | null;
 }
 
+/** 描述了单项的价格信息 */
+declare interface ItemPrice {
+  /** 后付费单价，单位：元。 */
+  UnitPrice: number | null;
+  /** 后续计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）；GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。 */
+  ChargeUnit: string | null;
+  /** 预支费用的原价，单位：元。 */
+  OriginalPrice: number | null;
+  /** 预支费用的折扣价，单位：元。 */
+  DiscountPrice: number | null;
+  /** 后付费的折扣单价，单位:元 */
+  UnitPriceDiscount: number | null;
+  /** 折扣，如20.0代表2折。 */
+  Discount: number | null;
+}
+
 /** lb实例包年包月相关配置属性 */
 declare interface LBChargePrepaid {
   /** 续费类型：AUTO_RENEW 自动续费， MANUAL_RENEW 手动续费 */
@@ -846,6 +862,16 @@ declare interface MultiCertInfo {
   SSLMode: string;
   /** 监听器或规则证书列表，单双向认证，多本服务端证书算法类型不能重复;若SSLMode为双向认证，证书列表必须包含一本ca证书。 */
   CertList: CertInfo[];
+}
+
+/** 表示负载均衡的价格 */
+declare interface Price {
+  /** 描述了实例价格。 */
+  InstancePrice?: ItemPrice | null;
+  /** 描述了网络价格。 */
+  BandwidthPrice?: ItemPrice | null;
+  /** 描述了lcu价格。 */
+  LcuPrice?: ItemPrice | null;
 }
 
 /** 描述配额信息，所有配额均指当前地域下的配额。 */
@@ -2216,6 +2242,74 @@ declare interface DisassociateTargetGroupsResponse {
   RequestId?: string;
 }
 
+declare interface InquiryPriceCreateLoadBalancerRequest {
+  /** 询价的负载均衡类型，OPEN为公网类型，INTERNAL为内网类型 */
+  LoadBalancerType: string;
+  /** 询价的收费类型，POSTPAID为按量计费，"PREPAID"为预付费包年包月 */
+  LoadBalancerChargeType: string;
+  /** 询价的收费周期 */
+  LoadBalancerChargePrepaid?: LBChargePrepaid;
+  /** 询价的网络计费方式 */
+  InternetAccessible?: InternetAccessible;
+  /** 询价的负载均衡实例个数，默认为1 */
+  GoodsNum?: number;
+  /** 指定可用区询价。如：ap-guangzhou-1 */
+  ZoneId?: string;
+  /** 包年包月询价时传性能容量型规格，如：clb.c3.small。按量付费询价时传SLA */
+  SlaType?: string;
+  /** IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。 */
+  AddressIPVersion?: string;
+  /** 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。 */
+  VipIsp?: string;
+}
+
+declare interface InquiryPriceCreateLoadBalancerResponse {
+  /** 该参数表示对应的价格。 */
+  Price?: Price;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquiryPriceModifyLoadBalancerRequest {
+  /** 负载均衡实例ID */
+  LoadBalancerId: string;
+  /** 修改后的网络带宽信息 */
+  InternetAccessible: InternetAccessible;
+}
+
+declare interface InquiryPriceModifyLoadBalancerResponse {
+  /** 描述价格信息 */
+  Price?: Price;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquiryPriceRefundLoadBalancerRequest {
+  /** 负载均衡实例ID */
+  LoadBalancerId: string;
+}
+
+declare interface InquiryPriceRefundLoadBalancerResponse {
+  /** 该参数表示对应的价格。 */
+  Price?: Price;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquiryPriceRenewLoadBalancerRequest {
+  /** 负载均衡实例ID */
+  LoadBalancerId: string;
+  /** 续费周期 */
+  LoadBalancerChargePrepaid: LBChargePrepaid;
+}
+
+declare interface InquiryPriceRenewLoadBalancerResponse {
+  /** 表示续费价格 */
+  Price?: Price;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ManualRewriteRequest {
   /** 负载均衡实例 ID。 */
   LoadBalancerId: string;
@@ -2791,6 +2885,14 @@ declare interface Clb {
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 解除规则的目标组关联关系 {@link DisassociateTargetGroupsRequest} {@link DisassociateTargetGroupsResponse} */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
+  /** 创建负载均衡实例询价 {@link InquiryPriceCreateLoadBalancerRequest} {@link InquiryPriceCreateLoadBalancerResponse} */
+  InquiryPriceCreateLoadBalancer(data: InquiryPriceCreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateLoadBalancerResponse>;
+  /** 修改负载均衡配置询价 {@link InquiryPriceModifyLoadBalancerRequest} {@link InquiryPriceModifyLoadBalancerResponse} */
+  InquiryPriceModifyLoadBalancer(data: InquiryPriceModifyLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceModifyLoadBalancerResponse>;
+  /** 退还负载均衡实例询价 {@link InquiryPriceRefundLoadBalancerRequest} {@link InquiryPriceRefundLoadBalancerResponse} */
+  InquiryPriceRefundLoadBalancer(data: InquiryPriceRefundLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRefundLoadBalancerResponse>;
+  /** 续费预付费负载均衡实例询价 {@link InquiryPriceRenewLoadBalancerRequest} {@link InquiryPriceRenewLoadBalancerResponse} */
+  InquiryPriceRenewLoadBalancer(data: InquiryPriceRenewLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewLoadBalancerResponse>;
   /** 手动添加负载均衡转发规则的重定向关系 {@link ManualRewriteRequest} {@link ManualRewriteResponse} */
   ManualRewrite(data: ManualRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ManualRewriteResponse>;
   /** 传统型负载均衡迁移成(原应用型)负载均衡 {@link MigrateClassicalLoadBalancersRequest} {@link MigrateClassicalLoadBalancersResponse} */

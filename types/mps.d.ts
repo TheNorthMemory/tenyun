@@ -4262,6 +4262,8 @@ declare interface TaskNotifyConfig {
   QueueName?: string;
   /** AWS SQS 回调，NotifyType为 AWS-SQS 时必填。 */
   AwsSQS?: AwsSQS | null;
+  /** 用于生成回调签名的key。 */
+  NotifyKey?: string | null;
 }
 
 /** 媒体处理输出对象信息。 */

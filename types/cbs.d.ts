@@ -100,10 +100,10 @@ declare interface Cdc {
 
 /** 显示独享集群的大小 */
 declare interface CdcSize {
-  /** 独享集群的可用容量大小，单位GiB */
-  DiskAavilable: number;
   /** 独享集群的总容量大小，单位GiB */
-  DiskTotal: number;
+  DiskTotal?: number;
+  /** 独享集群的可用容量大小，单位GiB */
+  DiskAvailable?: number | null;
 }
 
 /** 描述购买云盘时的费用明细。 */

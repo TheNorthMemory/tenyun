@@ -1024,6 +1024,14 @@ declare interface RecordRetrieveTaskDetailsInfo {
   ChannelCount?: number;
 }
 
+/** 录像切片信息 */
+declare interface RecordSliceInfo {
+  /** 计划ID */
+  PlanId?: string;
+  /** 录像切片开始和结束时间列表 */
+  List?: RecordTimeLine[];
+}
+
 /** 实时上云模板信息数据 */
 declare interface RecordTemplateInfo {
   /** 模板ID */
@@ -1970,6 +1978,22 @@ declare interface DescribeRecordRetrieveTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordSliceRequest {
+  /** 通道ID */
+  ChannelId: string;
+  /** 检索开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天 */
+  StartTime: number;
+  /** 检索结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天 */
+  EndTime: number;
+}
+
+declare interface DescribeRecordSliceResponse {
+  /** 云录像切片信息列表 */
+  Data?: RecordSliceInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRecordTemplateRequest {
   /** 模板ID */
   TemplateId: string;
@@ -2601,6 +2625,8 @@ declare interface Iss {
   DescribeRecordPlaybackUrl(data: DescribeRecordPlaybackUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordPlaybackUrlResponse>;
   /** 查询取回任务详情 {@link DescribeRecordRetrieveTaskRequest} {@link DescribeRecordRetrieveTaskResponse} */
   DescribeRecordRetrieveTask(data: DescribeRecordRetrieveTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordRetrieveTaskResponse>;
+  /** 查询云端录像切片信息列表 {@link DescribeRecordSliceRequest} {@link DescribeRecordSliceResponse} */
+  DescribeRecordSlice(data: DescribeRecordSliceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordSliceResponse>;
   /** 查询实时上云模板详情 {@link DescribeRecordTemplateRequest} {@link DescribeRecordTemplateResponse} */
   DescribeRecordTemplate(data: DescribeRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTemplateResponse>;
   /** 查询推拉流鉴权配置 {@link DescribeStreamAuthRequest} {@link DescribeStreamAuthResponse} */

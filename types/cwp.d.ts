@@ -1744,6 +1744,22 @@ declare interface BashRule {
   Description?: string | null;
 }
 
+/** 安全播报列表 */
+declare interface Broadcasts {
+  /** 文章名字 */
+  Title: string | null;
+  /** 类型：0=紧急通知，1=功能更新，2=行业荣誉，3=版本发布 */
+  Type: number | null;
+  /** 副标题 */
+  Subtitle: string;
+  /** 发布时间 */
+  CreateTime: string;
+  /** 文章唯一id */
+  Id: number;
+  /** 危险程度 0：无， 1：严重， 2: 高危， 3:中危， 4: 低危 */
+  Level: number;
+}
+
 /** 密码破解列表实体 */
 declare interface BruteAttackInfo {
   /** 唯一Id */
@@ -2632,6 +2648,44 @@ declare interface MonthInspectionReport {
   ReportPath: string;
   /** 巡检报告更新时间 */
   ModifyTime: string;
+}
+
+/** 网络攻击事件 */
+declare interface NetAttackEvent {
+  /** 日志ID */
+  Id?: number;
+  /** 客户端ID */
+  Uuid?: string;
+  /** 目标端口 */
+  DstPort?: number;
+  /** 来源IP */
+  SrcIP?: string;
+  /** 来源地 */
+  Location?: string;
+  /** 漏洞id */
+  VulId?: number;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** 攻击时间 */
+  MergeTime?: string;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
+  /** 攻击状态，0: 尝试攻击 1: 实锤攻击(攻击成功) */
+  Type?: number;
+  /** 处理状态，0 待处理 1 已处理 2 已加白 3 已忽略 4 已删除 5: 已开启防御 */
+  Status?: number;
+  /** 漏洞是否支持防御，0:不支持 1:支持 */
+  VulSupportDefense?: number;
+  /** 是否开启漏洞防御，0关1开 */
+  VulDefenceStatus?: number;
+  /** 机器付费版本，0 基础版，1专业版，2旗舰版，3普惠版 */
+  PayVersion?: number;
+  /** cvm uuid */
+  Quuid?: string;
+  /** 攻击次数 */
+  Count?: number;
+  /** 是否今日新增主机 */
+  New?: boolean;
 }
 
 /** 端口统计列表 */
@@ -4858,6 +4912,28 @@ declare interface DescribeAssetWebServiceProcessListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAttackEventsRequest {
+  /** 返回数量，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。Type - String 攻击状态 0: 尝试攻击 1: 攻击成功 - 是否必填: 否Status - String 事件处理状态 0：待处理 1：已处理 2： 已加白 3： 已忽略 4：已删除 - 是否必填: 否SrcIP - String 来源IP - 是否必填: 否Uuids - String 主机安全uuid - 是否必填: 否Quuids - String cvm uuid - 是否必填: 否DstPort - String 攻击目标端口 - 是否必填: 否MachineName - String 主机名称 - 是否必填: 否InstanceID - String 主机实例ID - 是否必填: 否AttackTimeBegin - String 攻击开始时间 - 是否必填: 否AttackTimeEnd - String 攻击结束时间 - 是否必填: 否VulSupportDefense - String 漏洞是否支持防御 0不支持，1支持 - 是否必填: 否 */
+  Filters?: Filter[];
+  /** 排序 */
+  By?: string;
+  /** 排序方式 ASC,DESC */
+  Order?: string;
+}
+
+declare interface DescribeAttackEventsResponse {
+  /** 攻击事件列表 */
+  List?: NetAttackEvent[] | null;
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAttackLogInfoRequest {
   /** 日志ID */
   Id: number;
@@ -6370,6 +6446,30 @@ declare interface DescribeMachineRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMachineRiskCntRequest {
+  /** 过滤条件。Uuids- String - 是否必填：否 - 主机uuid */
+  Filters?: Filter[];
+}
+
+declare interface DescribeMachineRiskCntResponse {
+  /** 异地登录 */
+  HostLogin: number;
+  /** 密码破解 */
+  BruteAttack: number;
+  /** 恶意请求 */
+  MaliciousRequest: number;
+  /** 反弹shell */
+  ReverseShell: number;
+  /** 高危命令 */
+  Bash: number;
+  /** 本地提权 */
+  PrivilegeEscalation: number;
+  /** 木马 */
+  Malware: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMachinesRequest {
   /** 机器所属专区类型 CVM 云服务器BM 黑石ECM 边缘计算LH 轻量应用服务器Other 混合云专区 */
   MachineType: string;
@@ -7012,6 +7112,28 @@ declare interface DescribeSearchTemplatesResponse {
   TotalCount: number;
   /** 模板列表 */
   List: SearchTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityBroadcastsRequest {
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 需要返回的数量，默认为10 ，0=全部 */
+  Limit?: number;
+  /** 筛选发布日期：开始时间 */
+  BeginDate?: string;
+  /** 筛选发布日期：结束时间 */
+  EndDate?: string;
+  /** 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布 */
+  BroadcastType?: string;
+}
+
+declare interface DescribeSecurityBroadcastsResponse {
+  /** 列表 */
+  List: Broadcasts[];
+  /** 总共多少条 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8274,6 +8396,26 @@ declare interface ModifyLicenseBindsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLicenseOrderRequest {
+  /** 资源ID */
+  ResourceId: string;
+  /** 预期值,如果当前为10,扩容则输入原来大的值, 缩容则比原来小的值(缩容时不允许预期值比使用量小),如果保持不变则填写原值, */
+  InquireNum?: number;
+  /** 项目ID,不修改则输入原值. */
+  ProjectId?: number;
+  /** 资源别名,不修改则输入原值. */
+  Alias?: string;
+}
+
+declare interface ModifyLicenseOrderResponse {
+  /** 订单号 */
+  DealNames?: string[];
+  /** 资源ID */
+  ResourceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLicenseUnBindsRequest {
   /** 资源ID */
   ResourceId: string;
@@ -8825,6 +8967,8 @@ declare interface Cwp {
   DescribeAssetWebServiceInfoList(data?: DescribeAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceInfoListResponse>;
   /** 获取Web服务关联进程列表 {@link DescribeAssetWebServiceProcessListRequest} {@link DescribeAssetWebServiceProcessListResponse} */
   DescribeAssetWebServiceProcessList(data: DescribeAssetWebServiceProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceProcessListResponse>;
+  /** 网络攻击检测事件列表 {@link DescribeAttackEventsRequest} {@link DescribeAttackEventsResponse} */
+  DescribeAttackEvents(data?: DescribeAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventsResponse>;
   /** 网络攻击日志详情 {@link DescribeAttackLogInfoRequest} {@link DescribeAttackLogInfoResponse} */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
   /** 网络攻击日志列表(待下线,请使用DescribeAttackEvents代替) {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
@@ -8977,6 +9121,8 @@ declare interface Cwp {
   DescribeMachineOsList(data?: DescribeMachineOsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineOsListResponse>;
   /** 获取机器地域列表 {@link DescribeMachineRegionsRequest} {@link DescribeMachineRegionsResponse} */
   DescribeMachineRegions(data?: DescribeMachineRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineRegionsResponse>;
+  /** 查询主机入侵检测事件统计 {@link DescribeMachineRiskCntRequest} {@link DescribeMachineRiskCntResponse} */
+  DescribeMachineRiskCnt(data?: DescribeMachineRiskCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineRiskCntResponse>;
   /** 获取区域主机列表 {@link DescribeMachinesRequest} {@link DescribeMachinesResponse} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
   /** 获取木马列表 {@link DescribeMalWareListRequest} {@link DescribeMalWareListResponse} */
@@ -9043,6 +9189,8 @@ declare interface Cwp {
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
   /** 获取快速检索列表 {@link DescribeSearchTemplatesRequest} {@link DescribeSearchTemplatesResponse} */
   DescribeSearchTemplates(data?: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
+  /** 安全播报列表 {@link DescribeSecurityBroadcastsRequest} {@link DescribeSecurityBroadcastsResponse} */
+  DescribeSecurityBroadcasts(data?: DescribeSecurityBroadcastsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityBroadcastsResponse>;
   /** 获取安全事件动态消息 {@link DescribeSecurityDynamicsRequest} {@link DescribeSecurityDynamicsResponse} */
   DescribeSecurityDynamics(data?: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
   /** 获取安全事件统计 {@link DescribeSecurityEventStatRequest} {@link DescribeSecurityEventStatResponse} */
@@ -9187,6 +9335,8 @@ declare interface Cwp {
   ModifyBruteAttackRules(data: ModifyBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBruteAttackRulesResponse>;
   /** 授权批量绑定 {@link ModifyLicenseBindsRequest} {@link ModifyLicenseBindsResponse} */
   ModifyLicenseBinds(data: ModifyLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseBindsResponse>;
+  /** 编辑授权订单 {@link ModifyLicenseOrderRequest} {@link ModifyLicenseOrderResponse} */
+  ModifyLicenseOrder(data: ModifyLicenseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseOrderResponse>;
   /** 授权批量解绑 {@link ModifyLicenseUnBindsRequest} {@link ModifyLicenseUnBindsResponse} */
   ModifyLicenseUnBinds(data: ModifyLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseUnBindsResponse>;
   /** 修改日志存储配置 {@link ModifyLogStorageConfigRequest} {@link ModifyLogStorageConfigResponse} */

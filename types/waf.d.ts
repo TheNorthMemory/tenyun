@@ -1369,73 +1369,73 @@ declare interface AddDomainWhiteRuleResponse {
 }
 
 declare interface AddSpartaProtectionRequest {
-  /** 需要防御的域名 */
+  /** 需要防护的域名 */
   Domain: string;
-  /** 证书类型，0表示没有证书，CertType=1表示自有证书,2 为托管证书 */
+  /** 证书类型。0：仅配置HTTP监听端口，没有证书1：证书来源为自有证书2：证书来源为托管证书 */
   CertType: number;
-  /** 表示是否开启了CDN代理，1：有部署CDN，0：未部署CDN */
+  /** waf前是否部署有七层代理服务。0：没有部署代理服务1：有部署代理服务，waf将使用XFF获取客户端IP2：有部署代理服务，waf将使用remote_addr获取客户端IP3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP */
   IsCdn: number;
-  /** 回源类型，0表示通过IP回源,1 表示通过域名回源 */
+  /** 回源类型。0：通过IP回源1：通过域名回源 */
   UpstreamType: number;
-  /** 是否开启WebSocket支持，1表示开启，0不开启 */
+  /** 是否开启WebSocket支持。0：关闭1：开启 */
   IsWebsocket: number;
-  /** 负载均衡策略，0表示轮询，1表示IP hash */
+  /** 回源负载均衡策略。0：轮询1：IP hash2：加权轮询 */
   LoadBalance: string;
-  /** 值为1时，需要填次参数，表示证书内容 */
+  /** CertType为1时，需要填充此参数，表示自有证书的证书链 */
   Cert?: string;
-  /** CertType=1时，需要填次参数，表示证书的私钥 */
+  /** CertType为1时，需要填充此参数，表示自有证书的私钥 */
   PrivateKey?: string;
-  /** CertType=2时，需要填次参数，表示证书的ID */
+  /** CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
   SSLId?: string;
-  /** Waf的资源ID */
+  /** 待废弃，可不填。Waf的资源ID。 */
   ResourceId?: string;
-  /** HTTPS回源协议，填http或者https */
+  /** IsCdn为3时，需要填此参数，表示自定义header */
+  IpHeaders?: string[];
+  /** 服务配置有HTTPS端口时，HTTPS的回源协议。http：使用http协议回源，和HttpsUpstreamPort配合使用https：使用https协议回源 */
   UpstreamScheme?: string;
   /** HTTPS回源端口,仅UpstreamScheme为http时需要填当前字段 */
   HttpsUpstreamPort?: string;
-  /** 是否开启灰度，0表示不开启灰度 */
+  /** 待废弃，可不填。是否开启灰度，0表示不开启灰度。 */
   IsGray?: number;
-  /** 灰度的地区 */
+  /** 待废弃，可不填。灰度的地区 */
   GrayAreas?: string[];
-  /** UpstreamType=1时，填次字段表示回源域名 */
-  UpstreamDomain?: string;
-  /** UpstreamType=0时，填次字段表示回源IP */
-  SrcList?: string[];
-  /** 是否开启HTTP2,开启HTTP2需要HTTPS支持 */
-  IsHttp2?: number;
-  /** 表示是否强制跳转到HTTPS，1强制跳转Https，0不强制跳转 */
+  /** 是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转 */
   HttpsRewrite?: number;
-  /** 服务有多端口需要设置此字段 */
+  /** 域名回源时的回源域名。UpstreamType为1时，需要填充此字段 */
+  UpstreamDomain?: string;
+  /** IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段 */
+  SrcList?: string[];
+  /** 是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
+  IsHttp2?: number;
+  /** 服务端口列表配置。NginxServerId：新增域名时填'0'Port：监听端口号Protocol：端口协议UpstreamPort：与Port相同UpstreamProtocol：与Protocol相同 */
   Ports?: PortItem[];
-  /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF，cdn-waf表示CDN上的Web防护能力 */
+  /** 待废弃，可不填。WAF实例类型。sparta-waf：SAAS型WAFclb-waf：负载均衡型WAFcdn-waf：CDN上的Web防护能力 */
   Edition?: string;
-  /** 是否开启长连接，0 短连接，1 长连接 */
+  /** 是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive?: string;
-  /** 实例id，上线之后带上此字段 */
+  /** 域名所属实例id */
   InstanceID?: string;
-  /** anycast IP类型开关： 0 普通IP 1 Anycast IP */
+  /** 待废弃，目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
   Anycast?: number;
-  /** src权重 */
+  /** 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 [] */
   Weights?: number[];
-  /** 是否开启主动健康检测，1表示开启，0表示不开启 */
+  /** 是否开启主动健康检测。0：不开启1：开启 */
   ActiveCheck?: number;
   /** TLS版本信息 */
   TLSVersion?: number;
-  /** 加密套件信息 */
-  Ciphers?: number[];
-  /** 0:不支持选择：默认模版 1:通用型模版 2:安全型模版 3:自定义模版 */
+  /** 加密套件模板。0：不支持选择，使用默认模版 1：通用型模版 2：安全型模版 3：自定义模版 */
   CipherTemplate?: number;
-  /** 300s */
+  /** 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。 */
+  Ciphers?: number[];
+  /** WAF与源站的读超时时间，默认300s。 */
   ProxyReadTimeout?: number;
-  /** 300s */
+  /** WAF与源站的写超时时间，默认300s。 */
   ProxySendTimeout?: number;
-  /** 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost； */
+  /** WAF回源时的SNI类型。0：关闭SNI，不配置client_hello中的server_name1：开启SNI，client_hello中的server_name为防护域名2：开启SNI，SNI为域名回源时的源站域名3：开启SNI，SNI为自定义域名 */
   SniType?: number;
-  /** SniType=3时，需要填此参数，表示自定义的host； */
+  /** SniType为3时，需要填此参数，表示自定义的SNI； */
   SniHost?: string;
-  /** is_cdn=3时，需要填此参数，表示自定义header */
-  IpHeaders?: string[];
-  /** 0:关闭xff重置；1:开启xff重置 */
+  /** 是否开启XFF重置。0：关闭1：开启 */
   XFFReset?: number;
 }
 
@@ -1645,7 +1645,7 @@ declare interface DeleteSessionResponse {
 declare interface DeleteSpartaProtectionRequest {
   /** 域名列表 */
   Domains: string[];
-  /** 版本 */
+  /** 实例类型 */
   Edition?: string;
   /** 实例id */
   InstanceID?: string;
@@ -1921,7 +1921,7 @@ declare interface DescribeCiphersDetailRequest {
 
 declare interface DescribeCiphersDetailResponse {
   /** 加密套件信息 */
-  Ciphers: TLSCiphers[] | null;
+  Ciphers?: TLSCiphers[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2003,7 +2003,7 @@ declare interface DescribeDomainDetailsClbRequest {
 
 declare interface DescribeDomainDetailsClbResponse {
   /** clb域名详情 */
-  DomainsClbPartInfo: ClbDomainsInfo;
+  DomainsClbPartInfo?: ClbDomainsInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2331,17 +2331,17 @@ declare interface DescribePolicyStatusResponse {
 }
 
 declare interface DescribePortsRequest {
-  /** 版本 */
-  Edition?: string;
   /** 实例ID */
   InstanceID?: string;
+  /** 实例类型 */
+  Edition?: string;
 }
 
 declare interface DescribePortsResponse {
   /** http端口列表 */
-  HttpPorts: string[];
+  HttpPorts?: string[];
   /** https端口列表 */
-  HttpsPorts: string[];
+  HttpsPorts?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2387,7 +2387,7 @@ declare interface DescribeUserCdcClbWafRegionsRequest {
 
 declare interface DescribeUserCdcClbWafRegionsResponse {
   /** CdcRegion的类型描述 */
-  Data: CdcRegion[] | null;
+  Data?: CdcRegion[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2397,7 +2397,7 @@ declare interface DescribeUserClbWafRegionsRequest {
 
 declare interface DescribeUserClbWafRegionsResponse {
   /** 地域（标准的ap-格式）列表 */
-  Data: string[] | null;
+  Data?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2803,7 +2803,7 @@ declare interface ModifyDomainIpv6StatusRequest {
 
 declare interface ModifyDomainIpv6StatusResponse {
   /** 返回的状态 （0: 操作失败 1:操作成功 2:企业版以上不支持 3:企业版以下不支持 ） */
-  Ipv6Status: number;
+  Ipv6Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3226,6 +3226,20 @@ declare interface SwitchDomainRulesResponse {
   RequestId?: string;
 }
 
+declare interface SwitchElasticModeRequest {
+  /** 版本，只能是sparta-waf, clb-waf, cdn-waf */
+  Edition: string;
+  /** 0代表关闭，1代表打开 */
+  Mode: number;
+  /** 实例id */
+  InstanceID?: string;
+}
+
+declare interface SwitchElasticModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpsertCCRuleRequest {
   /** 域名 */
   Domain: string;
@@ -3325,11 +3339,11 @@ declare interface Waf {
   AddCustomWhiteRule(data: AddCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomWhiteRuleResponse>;
   /** 增加域名规则白名单 {@link AddDomainWhiteRuleRequest} {@link AddDomainWhiteRuleResponse} */
   AddDomainWhiteRule(data?: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
-  /** 添加SAAS-WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
+  /** 添加SaaS型WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
-  /** 添加防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
+  /** 添加负载均衡型WAF防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
@@ -3355,7 +3369,7 @@ declare interface Waf {
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
-  /** 删除SAASWAF防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
+  /** 删除Saas型WAF防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
   DeleteSpartaProtection(data: DeleteSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpartaProtectionResponse>;
   /** 获取访问日志导出列表 {@link DescribeAccessExportsRequest} {@link DescribeAccessExportsResponse} */
   DescribeAccessExports(data: DescribeAccessExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessExportsResponse>;
@@ -3391,9 +3405,9 @@ declare interface Waf {
   DescribeCustomWhiteRule(data: DescribeCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomWhiteRuleResponse>;
   /** 获取域名概况 {@link DescribeDomainCountInfoRequest} {@link DescribeDomainCountInfoResponse} */
   DescribeDomainCountInfo(data?: DescribeDomainCountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainCountInfoResponse>;
-  /** 获取一个clb域名详情 {@link DescribeDomainDetailsClbRequest} {@link DescribeDomainDetailsClbResponse} */
+  /** 获取负载均衡型WAF域名详情 {@link DescribeDomainDetailsClbRequest} {@link DescribeDomainDetailsClbResponse} */
   DescribeDomainDetailsClb(data: DescribeDomainDetailsClbRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsClbResponse>;
-  /** 查询单个saas域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */
+  /** 查询单个Saas型WAF域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */
   DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
   /** 获取添加域名操作的结果 {@link DescribeDomainVerifyResultRequest} {@link DescribeDomainVerifyResultResponse} */
   DescribeDomainVerifyResult(data: DescribeDomainVerifyResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainVerifyResultResponse>;
@@ -3423,7 +3437,7 @@ declare interface Waf {
   DescribePeakValue(data: DescribePeakValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakValueResponse>;
   /** 获取防护状态以及生效的实例id {@link DescribePolicyStatusRequest} {@link DescribePolicyStatusResponse} */
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
-  /** 获取非标端口列表 {@link DescribePortsRequest} {@link DescribePortsResponse} */
+  /** 获取Saas型WAF防护端口列表 {@link DescribePortsRequest} {@link DescribePortsResponse} */
   DescribePorts(data?: DescribePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortsResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
@@ -3483,7 +3497,7 @@ declare interface Waf {
   ModifyCustomWhiteRule(data: ModifyCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleResponse>;
   /** 开启或禁用精准白名单 {@link ModifyCustomWhiteRuleStatusRequest} {@link ModifyCustomWhiteRuleStatusResponse} */
   ModifyCustomWhiteRuleStatus(data: ModifyCustomWhiteRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomWhiteRuleStatusResponse>;
-  /** 修改ipv6开关 {@link ModifyDomainIpv6StatusRequest} {@link ModifyDomainIpv6StatusResponse} */
+  /** 切换ipv6开关 {@link ModifyDomainIpv6StatusRequest} {@link ModifyDomainIpv6StatusResponse} */
   ModifyDomainIpv6Status(data: ModifyDomainIpv6StatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainIpv6StatusResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
   ModifyDomainWhiteRule(data?: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
@@ -3527,6 +3541,8 @@ declare interface Waf {
   SearchAttackLog(data: SearchAttackLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAttackLogResponse>;
   /** 切换域名的规则开关 {@link SwitchDomainRulesRequest} {@link SwitchDomainRulesResponse} */
   SwitchDomainRules(data?: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
+  /** 切换弹性QPS的开关 {@link SwitchElasticModeRequest} {@link SwitchElasticModeResponse} */
+  SwitchElasticMode(data: SwitchElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchElasticModeResponse>;
   /** Waf CC V2 Upsert接口 {@link UpsertCCRuleRequest} {@link UpsertCCRuleResponse} */
   UpsertCCRule(data: UpsertCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCRuleResponse>;
   /** Waf IP黑白名单Upsert接口 {@link UpsertIpAccessControlRequest} {@link UpsertIpAccessControlResponse} */

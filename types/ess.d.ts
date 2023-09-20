@@ -212,23 +212,23 @@ declare interface ComponentLimit {
 
 /** 创建合同个性化参数 */
 declare interface CreateFlowOption {
-  /** 是否允许修改发起合同时确认弹窗的合同信息（合同名称、合同类型、签署截止时间），若不允许编辑，则表单字段将被禁止输入。true：允许编辑（默认），false：不允许编辑默认：false：不允许编辑 */
+  /** 是否允许修改发起合同时确认弹窗的合同信息（合同名称、合同类型、签署截止时间），若不允许编辑，则表单字段将被禁止输入。true：允许编辑false：不允许编辑（默认值） */
   CanEditFlow?: boolean;
-  /** 是否允许编辑模板控件true:允许编辑模板控件信息false:不允许编辑模板控件信息默认false:不允许编辑模板控件信息 */
+  /** 是否允许编辑模板控件true:允许编辑模板控件信息false:不允许编辑模板控件信息（默认值） */
   CanEditFormField?: boolean;
-  /** 发起页面隐藏合同名称展示true:发起页面隐藏合同名称展示false:发起页面不隐藏合同名称展示默认false:发起页面不隐藏合同名称展示 */
+  /** 发起页面隐藏合同名称展示true:发起页面隐藏合同名称展示false:发起页面不隐藏合同名称展示（默认值） */
   HideShowFlowName?: boolean;
-  /** 发起页面隐藏合同类型展示true:发起页面隐藏合同类型展示false:发起页面不隐藏合同类型展示默认false:发起页面不隐藏合同类型展示 */
+  /** 发起页面隐藏合同类型展示true:发起页面隐藏合同类型展示false:发起页面不隐藏合同类型展示（默认值） */
   HideShowFlowType?: boolean;
-  /** 发起页面隐藏合同截止日期展示true:发起页面隐藏合同截止日期展示false:发起页面不隐藏合同截止日期展示默认false:发起页面不隐藏合同截止日期展示 */
+  /** 发起页面隐藏合同截止日期展示true:发起页面隐藏合同截止日期展示false:发起页面不隐藏合同截止日期展示（默认值） */
   HideShowDeadline?: boolean;
-  /** 发起页面允许跳过添加签署人环节true:发起页面允许跳过添加签署人环节false:发起页面不允许跳过添加签署人环节默认false:发起页面不允许跳过添加签署人环节 */
+  /** 发起页面允许跳过添加签署人环节true:发起页面允许跳过添加签署人环节false:发起页面不允许跳过添加签署人环节（默认值） */
   CanSkipAddApprover?: boolean;
-  /** 文件发起页面跳过文件上传步骤true:文件发起页面跳过文件上传步骤false:文件发起页面不跳过文件上传步骤默认false:文件发起页面不跳过文件上传步骤 */
+  /** 文件发起页面跳过文件上传步骤true:文件发起页面跳过文件上传步骤false:文件发起页面不跳过文件上传步骤（默认值） */
   SkipUploadFile?: boolean;
-  /** 禁止编辑填写控件true:禁止编辑填写控件false:允许编辑填写控件默认false:允许编辑填写控件 */
+  /** 禁止编辑填写控件true:禁止编辑填写控件false:允许编辑填写控件（默认值） */
   ForbidEditFillComponent?: boolean;
-  /** 定制化发起合同弹窗的描述信息，描述信息最长500 */
+  /** 定制化发起合同弹窗的描述信息，描述信息最长500字符 */
   CustomCreateFlowDescription?: string;
 }
 
@@ -506,25 +506,25 @@ declare interface FlowCreateApprover {
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
 declare interface FlowDetailInfo {
-  /** 合同(流程)的ID */
+  /** 合同流程ID，为32位字符串。 */
   FlowId?: string;
-  /** 合同(流程)的名字 */
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName?: string;
-  /** 合同(流程)的类型 */
+  /** 合同流程的类别分类（如销售合同/入职合同等）。 */
   FlowType?: string | null;
-  /** 流程状态- 0 还没有发起- 1 待签署- 2 部分签署- 3 已拒签- 4 已签署- 5 已过期- 6 已撤销- 7 还没有预发起- 8 等待填写- 9 部分填写- 10 拒填- 21 已解除 */
+  /** 合同流程当前的签署状态, 会存在下列的状态值 **0** : 未开启流程(合同中不存在填写环节) **1** : 待签署 **2** : 部分签署 **3** : 已拒签 **4** : 已签署 **5** : 已过期 **6** : 已撤销 **7** : 未开启流程(合同中存在填写环节) **8** : 等待填写 **9** : 部分填写 **10** : 已拒填 **21** : 已解除 */
   FlowStatus?: number;
-  /** 合同(流程)的信息 */
+  /** 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。 */
   FlowMessage?: string | null;
-  /** 流程的描述 */
+  /** 合同流程描述信息。 */
   FlowDescription?: string | null;
-  /** 合同(流程)的创建时间戳，单位秒 */
+  /** 合同流程的创建时间戳，格式为Unix标准时间戳（秒）。 */
   CreatedOn?: number;
-  /** 合同(流程)的签署方数组 */
+  /** 合同流程的签署方数组 */
   FlowApproverInfos?: FlowApproverDetail[];
-  /** 合同(流程)的关注方信息列表 */
+  /** 合同流程的关注方信息数组 */
   CcInfos?: FlowApproverDetail[];
-  /** 合同发起人UserId */
+  /** 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。 */
   Creator?: string | null;
 }
 
@@ -788,7 +788,7 @@ declare interface RecipientComponentInfo {
   RecipientId?: string | null;
   /** 参与方填写状态0-未填写1-已填写 */
   RecipientFillStatus?: string | null;
-  /** 是否为发起方 */
+  /** 是否为发起方true-发起方false-参与方 */
   IsPromoter?: boolean | null;
   /** 填写控件列表 */
   Components?: FilledComponent[] | null;
@@ -1195,7 +1195,7 @@ declare interface CreateDocumentRequest {
   FileNames?: string[];
   /** 电子文档的填写控件的填充内容。具体方式可以参考FormField结构体的定义。 */
   FormFields?: FormField[];
-  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 */
+  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容` */
   NeedPreview?: boolean;
   /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
   PreviewType?: number;
@@ -1208,7 +1208,7 @@ declare interface CreateDocumentRequest {
 declare interface CreateDocumentResponse {
   /** 合同流程的底层电子文档ID，为32位字符串。注:后续需用同样的FlowId再次调用发起签署流程，合同才能进入签署环节 */
   DocumentId?: string;
-  /** 合同预览链接URL。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL */
+  /** 合同预览链接URL。注: `1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL``2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容` */
   PreviewFileUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1645,44 +1645,46 @@ declare interface CreatePersonAuthCertificateImageResponse {
 }
 
 declare interface CreatePrepareFlowRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 资源id，与ResourceType对应 */
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id */
   ResourceId: string;
-  /** 合同名称 */
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName: string;
-  /** 是否顺序签署true:无序签false:顺序签 */
+  /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制 */
   Unordered?: boolean;
-  /** 签署流程的签署截止时间。值为unix时间戳,精确到秒不传默认为当前时间一年后 */
+  /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。 */
   Deadline?: number;
-  /** 用户自定义合同类型Id该id为电子签企业内的合同类型id， 可以在自定义合同类型处获取 */
+  /** 用户自定义合同类型Id该id为电子签企业内的合同类型id， 可以在控制台-合同-自定义合同类型处获取注: `该参数如果和FlowType同时传，以该参数优先生效` */
   UserFlowTypeId?: string;
-  /** 合同类型名称该字段用于客户自定义合同类型建议使用时指定合同类型，便于之后合同分类以及查看如果合同类型与自定义的合同类型描述一致，会自动归类到自定义的合同类型处，如果不一致，则会创建一个新的自定义合同类型 */
+  /** 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。 */
   FlowType?: string;
-  /** 签署流程参与者信息，最大限制50方 */
+  /** 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的ApproverInfo结构体。如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序，请确保列表中参与人的顺序符合实际签署顺序。 */
   Approvers?: FlowCreateApprover[];
-  /** 打开智能添加填写区默认开启，打开:"OPEN" 关闭："CLOSE" */
+  /** 开启或者关闭智能添加填写区： **OPEN**：开启（默认值） **CLOSE**：关闭 */
   IntelligentStatus?: string;
-  /** 资源类型，1：模板2：文件，不传默认为2：文件 */
+  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） */
   ResourceType?: number;
-  /** 发起方填写控件该类型控件由发起方完成填写 */
+  /** 该字段已废弃，请使用InitiatorComponents */
   Components?: Component;
   /** 发起合同个性化参数用于满足创建及页面操作过程中的个性化要求具体定制化内容详见数据接口说明 */
   FlowOption?: CreateFlowOption;
-  /** 是否开启发起方签署审核true:开启发起方签署审核false:不开启发起方签署审核默认false:不开启发起方签署审核 */
+  /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下： **false**：（默认）不需要审批，直接签署。 **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
   NeedSignReview?: boolean;
-  /** 开启发起方发起合同审核true:开启发起方发起合同审核false:不开启发起方发起合同审核默认false:不开启发起方发起合同审核 */
+  /** 发起方企业的签署人进行发起操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。若设置为true，发起审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行发起操作，否则会阻塞其发起操作。 */
   NeedCreateReview?: boolean;
-  /** 用户自定义参数 */
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
-  /** 合同id,用于通过已web页面发起的合同id快速生成一个web发起合同链接 */
+  /** 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接注: `该参数必须是一个待发起审核的合同id，并且还未审核通过` */
   FlowId?: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体 */
+  InitiatorComponents?: Component[];
 }
 
 declare interface CreatePrepareFlowResponse {
-  /** 快速发起预览链接，有效期5分钟 */
+  /** 发起流程的web页面链接，有效期5分钟 */
   Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1691,13 +1693,13 @@ declare interface CreatePrepareFlowResponse {
 declare interface CreatePreparedPersonalEsignRequest {
   /** 个人用户姓名 */
   UserName: string;
-  /** 身份证件号码 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
-  /** 印章名称 */
+  /** 印章名称，长度1-50个字。 */
   SealName: string;
-  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 身份证件类型:ID_CARD 身份证PASSPORT 护照HONGKONG_AND_MACAO 中国香港FOREIGN_ID_CARD 境外身份HONGKONG_MACAO_AND_TAIWAN 中国台湾 */
+  /** 证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   IdCardType?: string;
   /** 印章图片的base64注：已废弃请先通过UploadFiles接口上传文件，获取 FileId */
   SealImage?: string;
@@ -1709,18 +1711,18 @@ declare interface CreatePreparedPersonalEsignRequest {
   EnableAutoSign?: boolean;
   /** 印章颜色（参数ProcessSeal=true时生效）默认值：BLACK黑色取值: BLACK 黑色,RED 红色,BLUE 蓝色。 */
   SealColor?: string;
-  /** 是否处理印章默认不做印章处理。取值：false：不做任何处理；true：做透明化处理和颜色增强。 */
+  /** 是否处理印章，默认不做印章处理。取值如下：false：不做任何处理；true：做透明化处理和颜色增强。 */
   ProcessSeal?: boolean;
   /** 印章图片文件 id取值：填写的FileId通过UploadFiles接口上传文件获取。 */
   FileId?: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
   LicenseType?: number;
 }
 
 declare interface CreatePreparedPersonalEsignResponse {
-  /** 导入生成的印章ID */
+  /** 导入生成的印章ID，为32位字符串。建议开发者保存此印章ID，开头实名认证后，通过此 ID查询导入的印章。 */
   SealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1783,11 +1785,11 @@ declare interface CreateSchemeUrlResponse {
 }
 
 declare interface CreateSealPolicyRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用 */
   Users: UserInfo[];
-  /** 印章ID */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId: string;
   /** 授权有效期。时间戳秒级 */
   Expired: number;
@@ -1795,12 +1797,12 @@ declare interface CreateSealPolicyRequest {
   UserIds?: string[];
   /** 印章授权内容 */
   Policy?: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface CreateSealPolicyResponse {
-  /** 最终授权成功的。其他的跳过的是已经授权了的 */
+  /** 最终授权成功的用户ID，在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1835,14 +1837,14 @@ declare interface CreateSealRequest {
   SealCentralType?: string;
   /** 通过文件上传时，服务端生成的电子印章上传图片的token */
   FileToken?: string;
-  /** 印章样式:cycle:圆形印章;ellipse:椭圆印章;注：默认圆形印章 */
+  /** 印章样式，取值如下:cycle:圆形印章;ellipse:椭圆印章;注：默认圆形印章 */
   SealStyle?: string;
   /** 印章尺寸取值描述：42_42 圆形企业公章直径42mm；40_40 圆形企业印章直径40mm；45_30 椭圆形印章45mm x 30mm; */
   SealSize?: string;
 }
 
 declare interface CreateSealResponse {
-  /** 电子印章编号 */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1889,7 +1891,7 @@ declare interface CreateWebThemeConfigRequest {
   Operator: UserInfo;
   /** 主题类型，取值如下： **EMBED_WEB_THEME**：嵌入式主题（默认），web页面嵌入的主题风格配置 */
   ThemeType: string;
-  /** 主题配置 */
+  /** 电子签logo是否展示，主体颜色等配置项 */
   WebThemeConfig: WebThemeConfig;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -1951,15 +1953,15 @@ declare interface DeleteIntegrationRoleUsersResponse {
 }
 
 declare interface DeleteSealPoliciesRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 印章授权编码数组。这个参数跟下面的SealId其中一个必填，另外一个可选填 */
   PolicyIds?: string[];
-  /** 印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填 */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。注：印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填。 */
   SealId?: string;
-  /** 待授权的员工ID */
+  /** 待授权的员工ID，员工在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserIds?: string[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
@@ -1985,19 +1987,19 @@ declare interface DescribeExtendedServiceAuthInfosResponse {
 }
 
 declare interface DescribeFileUrlsRequest {
-  /** 调用方用户信息，UserId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 文件对应的业务类型，目前支持：- 流程 "FLOW"，如需下载合同文件请选择此项- 模板 "TEMPLATE"- 文档 "DOCUMENT"- 印章 “SEAL” */
+  /** 文件对应的业务类型，目前支持：FLOW 如需下载合同文件请选择此项TEMPLATE 如需下载模板文件请选择此项DOCUMENT 如需下载文档文件请选择此项SEAL 如需下载印章图片请选择此项 */
   BusinessType: string;
-  /** 业务编号的数组，如流程编号、模板编号、文档编号、印章编号。如需下载合同文件请传入FlowId最大支持20个资源 */
+  /** 业务编号的数组，取值如下：流程编号模板编号文档编号印章编号如需下载合同文件请传入FlowId，最大支持20个资源 */
   BusinessIds: string[];
   /** 下载后的文件命名，只有FileType为zip的时候生效 */
   FileName?: string;
-  /** 文件类型，"JPG", "PDF","ZIP"等 */
+  /** 要下载的文件类型，取值如下：JPGPDFZIP */
   FileType?: string;
-  /** 指定资源起始偏移量，默认0 */
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 1000。 */
   Offset?: number;
-  /** 指定资源数量，查询全部资源则传入-1 */
+  /** 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 100。 */
   Limit?: number;
   /** 下载url过期时间，单位秒。0: 按默认值5分钟，允许范围：1s~24x60x60s(1天) */
   UrlTtl?: number;
@@ -2035,16 +2037,16 @@ declare interface DescribeFlowBriefsResponse {
 }
 
 declare interface DescribeFlowComponentsRequest {
-  /** 操作者信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 流程(合同)的编号 */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface DescribeFlowComponentsResponse {
-  /** 流程关联的填写控件信息，按照参与方进行分类返回。 */
+  /** 合同流程关联的填写控件信息，按照参与方进行分类返回。 */
   RecipientComponentInfos?: RecipientComponentInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2069,11 +2071,11 @@ declare interface DescribeFlowEvidenceReportResponse {
 }
 
 declare interface DescribeFlowInfoRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
   /** 需要查询的流程ID列表，限制最大100个如果查询合同组的信息,不要传此参数 */
   FlowIds?: string[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 合同组ID, 如果传此参数会忽略FlowIds入参 所以如传此参数不要传FlowIds参数 */
   FlowGroupId?: string;
@@ -2082,7 +2084,7 @@ declare interface DescribeFlowInfoRequest {
 declare interface DescribeFlowInfoResponse {
   /** 签署流程信息 */
   FlowDetailInfos?: FlowDetailInfo[];
-  /** 合同组ID */
+  /** 合同组ID，为32位字符串 */
   FlowGroupId?: string;
   /** 合同组名称 */
   FlowGroupName?: string;
@@ -2091,19 +2093,19 @@ declare interface DescribeFlowInfoResponse {
 }
 
 declare interface DescribeFlowTemplatesRequest {
-  /** 调用方员工/经办人信息UserId 必填，在企业控制台组织架构中可以查到员工的UserId注：请保证员工有相关的角色权限 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 代理相关应用信息如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 查询内容类型0-模板列表及详情（默认）1-仅模板列表 */
+  /** 查询内容控制**0**：模板列表及详情（默认）**1**：仅模板列表 */
   ContentType?: number;
-  /** 搜索条件，本字段用于指定模板Id进行查询。Key：template-idValues：需要查询的模板Id列表 */
+  /** 搜索条件，本字段用于指定模板Id进行查询。Key：template-id Values：需要查询的模板Id列表 */
   Filters?: Filter[];
-  /** 查询结果分页返回，此处指定第几页，如果不传默从第一页返回。页码从0开始，即首页为0。 */
+  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。注：`1.offset从0开始，即第一页为0。``2.默认从第一页返回。` */
   Offset?: number;
-  /** 指定每页多少条数据，如果不传默认为20，单页最大200。 */
+  /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为200。` */
   Limit?: number;
-  /** 用于查询指定应用号下单模板列表。ApplicationId不为空，查询指定应用下的模板列表ApplicationId为空，查询所有应用下的模板列表 */
+  /** 指定查询的应用号，指定后查询该应用号下的模板列表。注：`1.ApplicationId为空时，查询所有应用下的模板列表。` */
   ApplicationId?: string;
   /** 默认为false，查询SaaS模板库列表；为true，查询第三方应用集成平台企业模板库管理列表 */
   IsChannel?: boolean;
@@ -2114,9 +2116,9 @@ declare interface DescribeFlowTemplatesRequest {
 }
 
 declare interface DescribeFlowTemplatesResponse {
-  /** 模板详情列表 */
+  /** 模板详情列表数据 */
   Templates?: TemplateInfo[];
-  /** 查询到的总数 */
+  /** 查询到的模板总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2229,21 +2231,21 @@ declare interface DescribeOrganizationGroupOrganizationsResponse {
 }
 
 declare interface DescribeOrganizationSealsRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 返回最大数量，最大为100 */
+  /** 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 200。 */
   Limit: number;
-  /** 偏移量，默认为0，最大为20000 */
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 20000。 */
   Offset?: number;
-  /** 查询信息类型，为0时不返回授权用户，为1时返回 */
+  /** 查询信息类型，取值如下：0不返回授权用户1返回授权用户信息 */
   InfoType?: number;
   /** 印章id（没有输入返回所有） */
   SealId?: string;
   /** 印章类型列表（都是组织机构印章）。为空时查询所有类型的印章。目前支持以下类型：OFFICIAL：企业公章；CONTRACT：合同专用章；ORGANIZATION_SEAL：企业印章(图片上传创建)；LEGAL_PERSON_SEAL：法定代表人章 */
   SealTypes?: string[];
-  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 查询的印章状态列表。取值为空，只查询启用状态的印章；取值ALL，查询所有状态的印章；取值CHECKING，查询待审核的印章；取值SUCCESS，查询启用状态的印章；取值FAIL，查询印章审核拒绝的印章；取值DISABLE，查询已停用的印章；取值STOPPED，查询已终止的印章；取值VOID，查询已作废的印章；取值INVALID，查询已失效的印章； */
+  /** 查询的印章状态列表。空，只查询启用状态的印章；ALL，查询所有状态的印章；CHECKING，查询待审核的印章；SUCCESS，查询启用状态的印章；FAIL，查询印章审核拒绝的印章；DISABLE，查询已停用的印章；STOPPED，查询已终止的印章；VOID，查询已作废的印章；INVALID，查询已失效的印章； */
   SealStatuses?: string[];
 }
 
@@ -2481,18 +2483,20 @@ declare interface UploadFilesResponse {
 }
 
 declare interface VerifyPdfRequest {
-  /** 流程ID */
+  /** 合同流程ID，为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 调用方用户信息，userId 必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
 }
 
 declare interface VerifyPdfResponse {
-  /** 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误 */
+  /** 验签结果代码，代码的含义如下：**1**：文件未被篡改，全部签名在腾讯电子签完成。**2**：文件未被篡改，部分签名在腾讯电子签完成。**3**：文件被篡改。**4**：异常：文件内没有签名域。**5**：异常：文件签名格式错误。 */
   VerifyResult?: number;
-  /** 验签结果详情，每个签名域对应的验签结果。状态值：1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
+  /** 验签结果详情，每个签名域对应的验签结果。状态值如下 **1** :验签成功，在电子签签署 **2** :验签成功，在其他平台签署 **3** :验签失败 **4** :pdf文件没有签名域 **5** :文件签名格式错误 */
   PdfVerifyResults?: PdfVerifyResult[];
-  /** 验签序列号 */
+  /** 验签序列号, 为11为数组组成的字符串 */
   VerifySerialNo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2511,7 +2515,7 @@ declare interface Ess {
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 批量撤销签署流程 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
-  /** 获取小程序批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
+  /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
   CreateBatchSignUrl(data: CreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchSignUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
@@ -2551,7 +2555,7 @@ declare interface Ess {
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
   /** 获取个人用户认证证书图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */
   CreatePersonAuthCertificateImage(data: CreatePersonAuthCertificateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonAuthCertificateImageResponse>;
-  /** 获取发起合同web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
+  /** 创建发起流程web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
   /** 创建导入处方单个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
@@ -2561,11 +2565,11 @@ declare interface Ess {
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
   /** 创建企业电子印章 {@link CreateSealRequest} {@link CreateSealResponse} */
   CreateSeal(data: CreateSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealResponse>;
-  /** 创建印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
+  /** 创建企业员工印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
   /** 获取个人用户自动签的开通链接 {@link CreateUserAutoSignEnableUrlRequest} {@link CreateUserAutoSignEnableUrlResponse} */
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
-  /** 创建页面主题配置 {@link CreateWebThemeConfigRequest} {@link CreateWebThemeConfigResponse} */
+  /** 设置本企业嵌入式页面主题配置 {@link CreateWebThemeConfigRequest} {@link CreateWebThemeConfigResponse} */
   CreateWebThemeConfig(data: CreateWebThemeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebThemeConfigResponse>;
   /** 删除企业部门 {@link DeleteIntegrationDepartmentRequest} {@link DeleteIntegrationDepartmentResponse} */
   DeleteIntegrationDepartment(data: DeleteIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationDepartmentResponse>;
@@ -2573,7 +2577,7 @@ declare interface Ess {
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
   /** 解绑员工角色 {@link DeleteIntegrationRoleUsersRequest} {@link DeleteIntegrationRoleUsersResponse} */
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
-  /** 撤销印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
+  /** 撤销企业员工的印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
   DescribeExtendedServiceAuthInfos(data: DescribeExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfosResponse>;
@@ -2585,7 +2589,7 @@ declare interface Ess {
   DescribeFlowComponents(data: DescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowComponentsResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeFlowEvidenceReportRequest} {@link DescribeFlowEvidenceReportResponse} */
   DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;
-  /** 查询合同详情 {@link DescribeFlowInfoRequest} {@link DescribeFlowInfoResponse} */
+  /** 查询合同流程的详情信息 {@link DescribeFlowInfoRequest} {@link DescribeFlowInfoResponse} */
   DescribeFlowInfo(data?: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
   /** 查询模板 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;

@@ -2723,7 +2723,7 @@ declare interface CreateDiagnoseUrlRequest {
 
 declare interface CreateDiagnoseUrlResponse {
   /** 系统生成的诊断链接，一个诊断链接最多可访问10次，有效期为24h。 */
-  DiagnoseLink: string;
+  DiagnoseLink?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3025,9 +3025,9 @@ declare interface DescribeCdnOriginIpRequest {
 
 declare interface DescribeCdnOriginIpResponse {
   /** 回源节点IP详情。 */
-  Ips: OriginIp[];
+  Ips?: OriginIp[];
   /** 回源节点IP总个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3077,23 +3077,23 @@ declare interface DescribeDiagnoseReportRequest {
 
 declare interface DescribeDiagnoseReportResponse {
   /** 诊断报告基础信息 */
-  BaskInfo: DiagnoseData;
+  BaskInfo?: DiagnoseData;
   /** CNAME检测信息 */
-  CnameInfo: DiagnoseData;
+  CnameInfo?: DiagnoseData;
   /** 客户端检测信息 */
-  ClientInfo: DiagnoseData;
+  ClientInfo?: DiagnoseData;
   /** DNS检测信息 */
-  DnsInfo: DiagnoseData;
+  DnsInfo?: DiagnoseData;
   /** 网络检测信息 */
-  NetworkInfo: DiagnoseData;
+  NetworkInfo?: DiagnoseData;
   /** 边缘节点检测信息 */
-  OcNodeInfo: DiagnoseData;
+  OcNodeInfo?: DiagnoseData;
   /** 中间源节点检测信息 */
-  MidNodeInfo: DiagnoseData;
+  MidNodeInfo?: DiagnoseData;
   /** 源站检测信息 */
-  OriginInfo: DiagnoseData;
+  OriginInfo?: DiagnoseData;
   /** 刷新检测信息 */
-  PurgeInfo: DiagnoseData | null;
+  PurgeInfo?: DiagnoseData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3715,9 +3715,9 @@ declare interface DisableCachesRequest {
 
 declare interface DisableCachesResponse {
   /** 提交结果 */
-  CacheOptResult: CacheOptResult | null;
+  CacheOptResult?: CacheOptResult | null;
   /** 任务ID */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3757,9 +3757,9 @@ declare interface EnableCachesRequest {
 
 declare interface EnableCachesResponse {
   /** 结果列表 */
-  CacheOptResult: CacheOptResult | null;
+  CacheOptResult?: CacheOptResult | null;
   /** 任务ID */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3797,9 +3797,9 @@ declare interface GetDisableRecordsRequest {
 
 declare interface GetDisableRecordsResponse {
   /** 封禁历史记录 */
-  UrlRecordList: UrlRecord[] | null;
+  UrlRecordList?: UrlRecord[] | null;
   /** 任务总数，用于分页 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3859,7 +3859,7 @@ declare interface ListDiagnoseReportRequest {
 
 declare interface ListDiagnoseReportResponse {
   /** 诊断信息。 */
-  Data: DiagnoseInfo[];
+  Data?: DiagnoseInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4447,7 +4447,7 @@ declare interface Cdn {
   AddCdnDomain(data: AddCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddCdnDomainResponse>;
   /** 创建日志主题 {@link CreateClsLogTopicRequest} {@link CreateClsLogTopicResponse} */
   CreateClsLogTopic(data: CreateClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogTopicResponse>;
-  /** 添加诊断URL(即将下线) {@link CreateDiagnoseUrlRequest} {@link CreateDiagnoseUrlResponse} */
+  /** 添加诊断URL(已废弃) {@link CreateDiagnoseUrlRequest} {@link CreateDiagnoseUrlResponse} */
   CreateDiagnoseUrl(data: CreateDiagnoseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiagnoseUrlResponse>;
   /** 动态打包任务提交 {@link CreateEdgePackTaskRequest} {@link CreateEdgePackTaskResponse} */
   CreateEdgePackTask(data: CreateEdgePackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgePackTaskResponse>;
@@ -4475,13 +4475,13 @@ declare interface Cdn {
   DescribeCdnDomainLogs(data: DescribeCdnDomainLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnDomainLogsResponse>;
   /** IP 归属查询 {@link DescribeCdnIpRequest} {@link DescribeCdnIpResponse} */
   DescribeCdnIp(data: DescribeCdnIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnIpResponse>;
-  /** 查询回源节点 {@link DescribeCdnOriginIpRequest} {@link DescribeCdnOriginIpResponse} */
+  /** 查询回源节点(已废弃) {@link DescribeCdnOriginIpRequest} {@link DescribeCdnOriginIpResponse} */
   DescribeCdnOriginIp(data?: DescribeCdnOriginIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnOriginIpResponse>;
   /** 获取SSL证书中的可用域名 {@link DescribeCertDomainsRequest} {@link DescribeCertDomainsResponse} */
   DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
   /** DDoS统计数据查询 {@link DescribeDDoSDataRequest} {@link DescribeDDoSDataResponse} */
   DescribeDDoSData(data: DescribeDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDataResponse>;
-  /** 获取诊断报告(即将下线) {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
+  /** 获取诊断报告(已废弃) {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
   DescribeDiagnoseReport(data: DescribeDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseReportResponse>;
   /** 地区运营商明细查询 {@link DescribeDistrictIspDataRequest} {@link DescribeDistrictIspDataResponse} */
   DescribeDistrictIspData(data: DescribeDistrictIspDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistrictIspDataResponse>;
@@ -4535,23 +4535,23 @@ declare interface Cdn {
   DescribeUrlViolations(data?: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
   /** Waf统计数据查询 {@link DescribeWafDataRequest} {@link DescribeWafDataResponse} */
   DescribeWafData(data: DescribeWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafDataResponse>;
-  /** 禁用 URL {@link DisableCachesRequest} {@link DisableCachesResponse} */
+  /** 禁用 URL(已废弃) {@link DisableCachesRequest} {@link DisableCachesResponse} */
   DisableCaches(data: DisableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCachesResponse>;
   /** 停止日志主题投递 {@link DisableClsLogTopicRequest} {@link DisableClsLogTopicResponse} */
   DisableClsLogTopic(data: DisableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClsLogTopicResponse>;
   /** 拷贝域名 {@link DuplicateDomainConfigRequest} {@link DuplicateDomainConfigResponse} */
   DuplicateDomainConfig(data: DuplicateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateDomainConfigResponse>;
-  /** 解禁 URL {@link EnableCachesRequest} {@link EnableCachesResponse} */
+  /** 解禁 URL(已废弃) {@link EnableCachesRequest} {@link EnableCachesResponse} */
   EnableCaches(data: EnableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableCachesResponse>;
   /** 启动日志主题投递 {@link EnableClsLogTopicRequest} {@link EnableClsLogTopicResponse} */
   EnableClsLogTopic(data: EnableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClsLogTopicResponse>;
-  /** 禁用历史查询 {@link GetDisableRecordsRequest} {@link GetDisableRecordsResponse} */
+  /** 禁用历史查询(已废弃) {@link GetDisableRecordsRequest} {@link GetDisableRecordsResponse} */
   GetDisableRecords(data?: GetDisableRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDisableRecordsResponse>;
   /** 显示日志主题列表 {@link ListClsLogTopicsRequest} {@link ListClsLogTopicsResponse} */
   ListClsLogTopics(data?: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
   /** 获取日志主题下绑定的域名 {@link ListClsTopicDomainsRequest} {@link ListClsTopicDomainsResponse} */
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
-  /** 获取诊断任务列表(即将下线) {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
+  /** 获取诊断任务列表(已废弃) {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
   ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
   /** 查询SCDN域名列表 {@link ListScdnDomainsRequest} {@link ListScdnDomainsResponse} */
   ListScdnDomains(data?: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;
