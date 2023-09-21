@@ -62,6 +62,8 @@ declare interface TagInfo {
   TagKey: string;
   /** 标签值 */
   TagValue: string;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string | null;
 }
 
 /** tag过滤数组多个是与的关系 */
@@ -81,27 +83,31 @@ declare interface TagKeyObject {
 /** 标签键值对以及资源ID */
 declare interface TagResource {
   /** 标签键 */
-  TagKey: string;
+  TagKey?: string;
   /** 标签值 */
-  TagValue: string;
+  TagValue?: string;
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 标签键MD5值 */
-  TagKeyMd5: string;
+  TagKeyMd5?: string;
   /** 标签值MD5值 */
-  TagValueMd5: string;
+  TagValueMd5?: string;
   /** 资源类型 */
-  ServiceType: string | null;
+  ServiceType?: string | null;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 */
+  Category?: string | null;
 }
 
 /** 表示一个标签键值对以及是否允许删除 */
 declare interface TagWithDelete {
   /** 标签键 */
-  TagKey: string;
+  TagKey?: string;
   /** 标签值 */
-  TagValue: string;
+  TagValue?: string;
   /** 是否可以删除 */
-  CanDelete: number;
+  CanDelete?: number;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string | null;
 }
 
 declare interface AddProjectRequest {
@@ -241,6 +247,8 @@ declare interface DescribeResourceTagsByResourceIdsRequest {
   Offset?: number;
   /** 每页大小，默认为 15 */
   Limit?: number;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string;
 }
 
 declare interface DescribeResourceTagsByResourceIdsResponse {
@@ -415,10 +423,12 @@ declare interface DescribeTagKeysRequest {
   CreateUin?: number;
   /** 数据偏移量，默认为 0, 必须为Limit参数的整数倍 */
   Offset?: number;
-  /** 每页大小，默认为 15 */
+  /** 每页大小，默认为 15，最大1000 */
   Limit?: number;
   /** 是否展现项目 */
   ShowProject?: number;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string;
 }
 
 declare interface DescribeTagKeysResponse {
@@ -443,6 +453,8 @@ declare interface DescribeTagValuesRequest {
   Offset?: number;
   /** 每页大小，默认为 15 */
   Limit?: number;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string;
 }
 
 declare interface DescribeTagValuesResponse {
@@ -501,13 +513,13 @@ declare interface DescribeTagsRequest {
 
 declare interface DescribeTagsResponse {
   /** 结果总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 数据位移偏量 */
-  Offset: number;
+  Offset?: number;
   /** 每页大小 */
-  Limit: number;
+  Limit?: number;
   /** 标签列表 */
-  Tags: TagWithDelete[];
+  Tags?: TagWithDelete[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -585,13 +597,15 @@ declare interface GetTagKeysRequest {
   PaginationToken?: string;
   /** 每一页返回的数据最大条数，最大1000。缺省值：50。 */
   MaxResults?: number;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string;
 }
 
 declare interface GetTagKeysResponse {
   /** 获取的下一页的Token值 */
-  PaginationToken: string;
+  PaginationToken?: string;
   /** 标签键信息。 */
-  TagKeys: string[];
+  TagKeys?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -603,13 +617,15 @@ declare interface GetTagValuesRequest {
   PaginationToken?: string;
   /** 每一页返回的数据最大条数，最大1000。缺省值：50。 */
   MaxResults?: number;
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string;
 }
 
 declare interface GetTagValuesResponse {
   /** 获取的下一页的Token值 */
-  PaginationToken: string;
+  PaginationToken?: string;
   /** 标签列表。 */
-  Tags: TagInfo[];
+  Tags?: TagInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -621,13 +637,15 @@ declare interface GetTagsRequest {
   MaxResults?: number;
   /** 标签键。返回所有标签键列表对应的标签。最大长度：20 */
   TagKeys?: string[];
+  /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
+  Category?: string;
 }
 
 declare interface GetTagsResponse {
   /** 获取的下一页的Token值 */
-  PaginationToken: string;
+  PaginationToken?: string;
   /** 标签列表。 */
-  Tags: TagInfo[];
+  Tags?: TagInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -667,7 +685,7 @@ declare interface ModifyResourcesTagValueResponse {
 }
 
 declare interface TagResourcesRequest {
-  /** 资源六段式列表。腾讯云使用资源六段式描述一个资源。可参考[访问管理](https://cloud.tencent.com/document/product/598/67350)-概览-接口列表-资源六段式信息例如：ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}。N取值范围：0~9 */
+  /** 待绑定的云资源，用标准的资源六段式表示。正确的资源六段式请参考：[标准的资源六段式](https://cloud.tencent.com/document/product/598/10606)和[支持标签的云产品及资源描述方式](https://cloud.tencent.com/document/product/651/89122)。N取值范围：0~9 */
   ResourceList: string[];
   /** 标签键和标签值。如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。如果标签不存在会为您自动创建标签。N取值范围：0~9 */
   Tags: TagInfo[];

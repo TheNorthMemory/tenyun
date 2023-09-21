@@ -541,49 +541,49 @@ declare interface LbRsTargets {
 /** 监听器的信息 */
 declare interface Listener {
   /** 负载均衡监听器 ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器端口 */
-  Port: number;
+  Port?: number;
   /** 监听器绑定的证书信息 */
-  Certificate: CertificateOutput | null;
+  Certificate?: CertificateOutput | null;
   /** 监听器的健康检查信息 */
-  HealthCheck: HealthCheck | null;
+  HealthCheck?: HealthCheck | null;
   /** 请求的调度方式 */
-  Scheduler: string | null;
+  Scheduler?: string | null;
   /** 会话保持时间 */
-  SessionExpireTime: number | null;
-  /** 是否开启SNI特性（本参数仅对于HTTPS监听器有意义） */
-  SniSwitch: number | null;
+  SessionExpireTime?: number | null;
+  /** 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义） */
+  SniSwitch?: number | null;
   /** 监听器下的全部转发规则（本参数仅对于HTTP/HTTPS监听器有意义） */
-  Rules: RuleOutput[] | null;
+  Rules?: RuleOutput[] | null;
   /** 监听器的名称 */
-  ListenerName: string | null;
+  ListenerName?: string | null;
   /** 监听器的创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 端口段结束端口 */
-  EndPort: number | null;
+  EndPort?: number | null;
   /** 后端服务器类型 */
-  TargetType: string | null;
+  TargetType?: string | null;
   /** 绑定的目标组基本信息；当监听器绑定目标组时，会返回该字段 */
-  TargetGroup: BasicTargetGroupInfo | null;
+  TargetGroup?: BasicTargetGroupInfo | null;
   /** 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。 */
-  SessionType: string | null;
+  SessionType?: string | null;
   /** 是否开启长连接，1开启，0关闭，（本参数仅对于HTTP/HTTPS监听器有意义） */
-  KeepaliveEnable: number | null;
+  KeepaliveEnable?: number | null;
   /** 仅支持Nat64 CLB TCP监听器 */
-  Toa: boolean | null;
+  Toa?: boolean | null;
   /** 解绑后端目标时，是否发RST给客户端，（此参数仅对于TCP监听器有意义）。 */
-  DeregisterTargetRst: boolean | null;
+  DeregisterTargetRst?: boolean | null;
   /** 监听器的属性 */
-  AttrFlags: string[] | null;
+  AttrFlags?: string[] | null;
   /** 绑定的目标组列表 */
-  TargetGroupList: BasicTargetGroupInfo[] | null;
+  TargetGroupList?: BasicTargetGroupInfo[] | null;
   /** 监听器最大连接数，-1表示监听器维度不限速。 */
-  MaxConn: number | null;
+  MaxConn?: number | null;
   /** 监听器最大新增连接数，-1表示监听器维度不限速。 */
-  MaxCps: number | null;
+  MaxCps?: number | null;
   /** 空闲连接超时时间，仅支持TCP监听器。默认值:900；共享型实例和独占型实例取值范围：300～900，性能容量型实例取值范围:300～1980。 */
   IdleConnectTimeout?: number | null;
 }
@@ -822,7 +822,7 @@ declare interface LoadBalancerDetail {
   SlaveZone?: string[] | null;
   /** 内网负载均衡实例所在可用区，由白名单CLB_Internal_Zone控制 */
   Zones?: string[] | null;
-  /** 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）。 */
+  /** 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）。 */
   SniSwitch?: number | null;
   /** 负载均衡实例的域名。 */
   LoadBalancerDomain?: string | null;

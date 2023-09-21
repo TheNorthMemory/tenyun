@@ -174,6 +174,68 @@ declare interface QueryMetricItem {
   Compares?: string[];
 }
 
+/** Span对象 */
+declare interface Span {
+  /** Trace Id */
+  TraceID?: string | null;
+  /** 日志 */
+  Logs?: SpanLog[] | null;
+  /** 标签 */
+  Tags?: SpanTag[] | null;
+  /** 上报应用服务信息 */
+  Process?: SpanProcess | null;
+  /** 产生时间戳(毫秒) */
+  Timestamp?: number | null;
+  /** Span名称 */
+  OperationName?: string | null;
+  /** 关联关系 */
+  References?: SpanReference[] | null;
+  /** 产生时间戳(微秒) */
+  StartTime?: number | null;
+  /** 持续耗时(微妙) */
+  Duration?: number | null;
+  /** Span Id */
+  SpanID?: string | null;
+  /** 产生时间戳(毫秒) */
+  StartTimeMillis?: number | null;
+}
+
+/** Span日志部分 */
+declare interface SpanLog {
+  /** 日志时间戳 */
+  Timestamp: number;
+  /** 标签 */
+  Fields: SpanTag[];
+}
+
+/** 服务相关信息 */
+declare interface SpanProcess {
+  /** 应用服务名称 */
+  ServiceName: string;
+  /** Tags 标签数组 */
+  Tags: SpanTag[];
+}
+
+/** Span上下游关联关系 */
+declare interface SpanReference {
+  /** 关联关系类型 */
+  RefType: string;
+  /** Span ID */
+  SpanID: string;
+  /** Trace ID */
+  TraceID: string;
+}
+
+/** 标签 */
+declare interface SpanTag {
+  /** 标签类型 */
+  Type: string;
+  /** 标签Key */
+  Key: string;
+  /** 标签值 */
+  Value: string;
+}
+
 declare interface CreateApmInstanceRequest {
   /** 实例名 */
   Name: string;
@@ -260,6 +322,34 @@ declare interface DescribeGeneralMetricDataRequest {
 declare interface DescribeGeneralMetricDataResponse {
   /** 指标结果集 */
   Records: Line[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGeneralSpanListRequest {
+  /** 分页 */
+  Offset: number;
+  /** 列表项个数 */
+  Limit: number;
+  /** 排序 */
+  OrderBy?: OrderBy;
+  /** span查询开始时间戳（单位:秒） */
+  StartTime?: number;
+  /** 实例名 */
+  InstanceId?: string;
+  /** 通用过滤参数 */
+  Filters?: Filter[];
+  /** 业务自身服务名 */
+  BusinessName?: string;
+  /** span查询结束时间戳（单位:秒） */
+  EndTime?: number;
+}
+
+declare interface DescribeGeneralSpanListResponse {
+  /** 总数量 */
+  TotalCount: number;
+  /** Span分页列表 */
+  Spans: Span[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -393,6 +483,8 @@ declare interface Apm {
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
   /** 获取指标数据通用接口 {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
   DescribeGeneralMetricData(data: DescribeGeneralMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralMetricDataResponse>;
+  /** 通用查询调用链列表 {@link DescribeGeneralSpanListRequest} {@link DescribeGeneralSpanListResponse} */
+  DescribeGeneralSpanList(data: DescribeGeneralSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralSpanListResponse>;
   /** 通用指标列表接口 {@link DescribeMetricRecordsRequest} {@link DescribeMetricRecordsResponse} */
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
   /** 获取服务概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */

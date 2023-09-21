@@ -498,7 +498,7 @@ declare interface FlowResourceUrlInfo {
 
 /** 此结构 (FormField) 用于描述内容控件填充结构。 */
 declare interface FormField {
-  /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo */
+  /** 控件填充值，ComponentType和传入值格式对应关系如下：TEXT - 普通文本控件，需输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，需输入文本字符串；CHECK_BOX - 勾选框控件，若选中需填写ComponentValue，填写 true或者 false 字符串；FILL_IMAGE - 图片控件，需填写ComponentValue为图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件，需填写ComponentValue为附件图片的资源 ID列表，以逗号分割；DATE - 日期控件；格式为 xxxx年xx月xx日 字符串；DISTRICT - 省市区行政区控件，需填写ComponentValue为省市区行政区字符串内容； */
   ComponentValue: string;
   /** 表单域或控件的ID，跟ComponentName二选一，不能全为空；CreateFlowsByTemplates 接口不使用此字段。 */
   ComponentId?: string | null;

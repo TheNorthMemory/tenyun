@@ -1725,7 +1725,7 @@ declare interface UpdatePolicyRequest {
 
 declare interface UpdatePolicyResponse {
   /** 策略id，入参是PolicyName时，才会返回 */
-  PolicyId: number | null;
+  PolicyId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

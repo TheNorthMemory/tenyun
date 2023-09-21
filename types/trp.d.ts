@@ -85,45 +85,53 @@ declare interface CodeItem {
 /** 码包类型 */
 declare interface CodePack {
   /** 码id */
-  PackId: string | null;
+  PackId?: string | null;
   /** 企业id */
-  CorpId: number | null;
+  CorpId?: number | null;
   /** 商户id */
-  MerchantId: string | null;
+  MerchantId?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 制码状态 init: 初始化, pending: 执行中, done: 完成, error: 失败 */
-  Status: string | null;
+  Status?: string | null;
   /** 执行日志 */
-  Log: string | null;
+  Log?: string | null;
   /** 创建人 */
-  CreateUser: string | null;
+  CreateUser?: string | null;
   /** 码数 */
-  Amount: number | null;
+  Amount?: number | null;
   /** 防伪码长度 */
-  CodeLength: number | null;
+  CodeLength?: number | null;
   /** 码类型 */
-  CodeType: string | null;
+  CodeType?: string | null;
   /** 是否暗码 */
-  Cipher: number | null;
+  Cipher?: number | null;
   /** [弃用] 文字码地址，通过另一个接口查 */
-  TextUrl: string | null;
+  TextUrl?: string | null;
   /** [弃用] 二维码地址，通过另一个接口查 */
-  PackUrl: string | null;
+  PackUrl?: string | null;
   /** 商户名 */
-  MerchantName: string | null;
+  MerchantName?: string | null;
   /** 码规则类型 0: 默认, 1: 自定义 */
-  RuleType: number | null;
+  RuleType?: number | null;
   /** 自定义码规则ID */
-  CustomId: string | null;
+  CustomId?: string | null;
   /** 码包类型 0: 普通码包 1: 层级码包 */
-  PackType: number | null;
+  PackType?: number | null;
   /** 生码层级 */
-  PackLevel: number | null;
+  PackLevel?: number | null;
   /** 层级码配置 */
-  PackSpec: PackSpec[] | null;
+  PackSpec?: PackSpec[] | null;
+  /** 商品名称 */
+  ProductName?: string | null;
+  /** 商品规格 */
+  ProductSpecification?: string | null;
+  /** 商品ID */
+  ProductId?: string | null;
+  /** 码关系是否预关联0:否, 1:是 */
+  RelateType?: number;
 }
 
 /** 码段配置 */
@@ -587,11 +595,15 @@ declare interface CreateCodePackRequest {
   BatchId?: string;
   /** 是否有流水码 0:无 1:有 */
   SerialType?: number;
+  /** 关联产品ID */
+  ProductId?: string;
+  /** 层级码时是否提前生成关联关系，默认为 1 */
+  RelateType?: number;
 }
 
 declare interface CreateCodePackResponse {
   /** 码包ID */
-  PackId: string;
+  PackId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -645,11 +657,15 @@ declare interface CreateCustomPackRequest {
   BatchId?: string;
   /** 是否有流水码 0:无 1:有 */
   SerialType?: number;
+  /** 产品ID */
+  ProductId?: string;
+  /** 是否预生成码关系0: 否, 1:是默认为1，仅对层级码有效 */
+  RelateType?: number;
 }
 
 declare interface CreateCustomPackResponse {
   /** 码包ID */
-  PackId: string;
+  PackId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

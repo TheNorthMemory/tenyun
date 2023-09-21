@@ -10042,44 +10042,6 @@ declare interface RegisterBillSupportWithdrawResponse {
   RequestId?: string;
 }
 
-declare interface RevResigterBillSupportWithdrawRequest {
-  /** String(22)，商户号（签约客户号） */
-  MrchCode: string;
-  /** STRING(32)，交易网会员代码 */
-  TranNetMemberCode: string;
-  /** STRING(30)，原订单号（RegisterBillSupportWithdraw接口中的订单号） */
-  OldOrderNo: string;
-  /** STRING(20)，撤销金额（支持部分撤销，不能大于原订单可用金额，包含交易费用） */
-  CancelAmt: string;
-  /** STRING(20)，交易费用（暂未使用，默认传0.0） */
-  TranFee: string;
-  /** STRING(300)，备注 */
-  Remark?: string;
-  /** STRING(300)，保留域1 */
-  ReservedMsgOne?: string;
-  /** STRING(300)，保留域2 */
-  ReservedMsgTwo?: string;
-  /** STRING(300)，保留域3 */
-  ReservedMsgThree?: string;
-  /** STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod" */
-  Profile?: string;
-}
-
-declare interface RevResigterBillSupportWithdrawResponse {
-  /** String(20)，返回码 */
-  TxnReturnCode?: string;
-  /** String(100)，返回信息 */
-  TxnReturnMsg?: string;
-  /** String(22)，交易流水号 */
-  CnsmrSeqNo?: string;
-  /** STRING(52)，见证系统流水号 */
-  FrontSeqNo?: string | null;
-  /** STRING(1027)，保留域 */
-  ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ReviseMbrPropertyRequest {
   /** String(22)，商户号（签约客户号） */
   MrchCode: string;
@@ -11325,8 +11287,6 @@ declare interface Cpdp {
   RegisterBill(data: RegisterBillRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBillResponse>;
   /** 云鉴-登记挂账 {@link RegisterBillSupportWithdrawRequest} {@link RegisterBillSupportWithdrawResponse} */
   RegisterBillSupportWithdraw(data: RegisterBillSupportWithdrawRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBillSupportWithdrawResponse>;
-  /** 云鉴-登记挂账撤销 {@link RevResigterBillSupportWithdrawRequest} {@link RevResigterBillSupportWithdrawResponse} */
-  RevResigterBillSupportWithdraw(data: RevResigterBillSupportWithdrawRequest, config?: AxiosRequestConfig): AxiosPromise<RevResigterBillSupportWithdrawResponse>;
   /** 云鉴-修改会员属性-普通商户子账户 {@link ReviseMbrPropertyRequest} {@link ReviseMbrPropertyResponse} */
   ReviseMbrProperty(data: ReviseMbrPropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ReviseMbrPropertyResponse>;
   /** 云鉴-撤销会员在途充值(经第三方支付渠道) {@link RevokeMemberRechargeThirdPayRequest} {@link RevokeMemberRechargeThirdPayResponse} */

@@ -911,17 +911,19 @@ declare interface ParamInfo {
 /** 参数修改记录 */
 declare interface ParamRecord {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 参数名称 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数修改前的值 */
-  OldValue: string;
+  OldValue?: string;
   /** 参数修改后的值 */
-  NewValue: string;
+  NewValue?: string;
   /** 参数是否修改成功 */
-  IsSucess: boolean;
+  IsSucess?: boolean;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
+  /** 参数是否修改成功 */
+  IsSuccess?: boolean;
 }
 
 /** 参数模板信息 */

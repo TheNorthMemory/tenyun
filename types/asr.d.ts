@@ -243,13 +243,13 @@ declare interface CreateRecTaskRequest {
   ChannelNum: number;
   /** 识别结果返回样式0：基础识别结果（仅包含有效人声时间戳，无词粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824)）；1：基础识别结果之上，增加词粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824)（包含词级别时间戳、语速值，**不含标点**）；2：基础识别结果之上，增加词粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824)（包含词级别时间戳、语速值和标点）；3：基础识别结果之上，增加词粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824)（包含词级别时间戳、语速值和标点），且识别结果按标点符号分段，**适用字幕场景**；4：**【增值付费功能】**基础识别结果之上，增加词粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824)（包含词级别时间戳、语速值和标点），且识别结果按nlp语义分段，**适用会议、庭审记录转写等场景**，仅支持8k_zh/16k_zh引擎注意：如果传入参数值4，需确保账号已购买[语义分段资源包](https://cloud.tencent.com/document/product/1093/35686)，或账号开启后付费；**若当前账号已开启后付费功能，并传入参数值4，将[自动计费](https://cloud.tencent.com/document/product/1093/35686)）** */
   ResTextFormat: number;
-  /** 语音数据来源0：语音 URL；1：语音数据（post body） */
+  /** 音频数据来源0：音频URL；1：音频数据（post body） */
   SourceType: number;
-  /** 语音数据base64编码**当 SourceType 值为 1 时须填写该字段，为 0 时不需要填写**注意：音频数据要小于5MB（含） */
+  /** 音频数据base64编码**当 SourceType 值为 1 时须填写该字段，为 0 时不需要填写**注意：音频数据要小于5MB（含） */
   Data?: string;
   /** 数据长度（此数据长度为数据未进行base64编码时的长度） */
   DataLen?: number;
-  /** 语音URL的地址（需要公网环境浏览器可下载）**当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写**注意：1. 请确保录音文件时长在5个小时（含）之内，否则可能识别失败；2. 请保证文件的下载速度，否则可能下载失败 */
+  /** 音频URL的地址（需要公网环境浏览器可下载）**当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写**注意：1. 请确保录音文件时长在5个小时（含）之内，否则可能识别失败；2. 请保证文件的下载速度，否则可能下载失败 */
   Url?: string;
   /** 回调 URL用户自行搭建的用于接收识别结果的服务URL回调格式和内容详见：[录音识别回调说明](https://cloud.tencent.com/document/product/1093/52632)注意：如果用户使用轮询方式获取识别结果，则无需提交该参数 */
   CallbackUrl?: string;

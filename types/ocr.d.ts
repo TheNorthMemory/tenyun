@@ -2459,6 +2459,8 @@ declare interface GeneralAccurateOCRRequest {
   IsPdf?: boolean;
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
   PdfPageNumber?: number;
+  /** 文本检测开关，默认为true。设置为false可直接进行单行识别，适用于仅包含正向单行文本的图片场景。 */
+  EnableDetectText?: boolean;
 }
 
 declare interface GeneralAccurateOCRResponse {
@@ -2466,6 +2468,8 @@ declare interface GeneralAccurateOCRResponse {
   TextDetections?: TextDetection[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angel?: number;
+  /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
+  Angle?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

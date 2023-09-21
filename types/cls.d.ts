@@ -2838,6 +2838,46 @@ declare interface PreviewKafkaRechargeResponse {
   RequestId?: string;
 }
 
+declare interface QueryMetricRequest {
+  /** 查询语句，使用PromQL语法 */
+  Query: string;
+  /** 指标主题ID */
+  TopicId: string;
+  /** 查询时间，秒级Unix时间戳 */
+  Time?: number;
+}
+
+declare interface QueryMetricResponse {
+  /** 指标查询结果类型 */
+  ResultType?: string;
+  /** 指标查询结果 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QueryRangeMetricRequest {
+  /** 指标主题ID */
+  TopicId: string;
+  /** 查询语句，使用PromQL语法 */
+  Query: string;
+  /** 查询起始时间，秒级Unix时间戳 */
+  Start: number;
+  /** 查询结束时间，秒级Unix时间戳 */
+  End: number;
+  /** 查询时间间隔，单位秒 */
+  Step: number;
+}
+
+declare interface QueryRangeMetricResponse {
+  /** 指标查询结果类型 */
+  ResultType?: string;
+  /** 指标查询结果 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RetryShipperTaskRequest {
   /** 投递规则ID */
   ShipperId: string;
@@ -3127,6 +3167,10 @@ declare interface Cls {
   OpenKafkaConsumer(data: OpenKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenKafkaConsumerResponse>;
   /** Kafka数据订阅日志预览 {@link PreviewKafkaRechargeRequest} {@link PreviewKafkaRechargeResponse} */
   PreviewKafkaRecharge(data: PreviewKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewKafkaRechargeResponse>;
+  /** 指标查询（最新值查询） {@link QueryMetricRequest} {@link QueryMetricResponse} */
+  QueryMetric(data: QueryMetricRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMetricResponse>;
+  /** 指标查询（范围查询） {@link QueryRangeMetricRequest} {@link QueryRangeMetricResponse} */
+  QueryRangeMetric(data: QueryRangeMetricRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRangeMetricResponse>;
   /** 重试失败的投递任务 {@link RetryShipperTaskRequest} {@link RetryShipperTaskResponse} */
   RetryShipperTask(data: RetryShipperTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryShipperTaskResponse>;
   /** 预览cos导入信息 {@link SearchCosRechargeInfoRequest} {@link SearchCosRechargeInfoResponse} */

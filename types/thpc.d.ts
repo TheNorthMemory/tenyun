@@ -122,6 +122,16 @@ declare interface DataDisk {
   DiskType?: string | null;
 }
 
+/** 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent */
+declare interface EnhancedService {
+  /** 开启云安全服务。若不指定该参数，则默认开启云安全服务。 */
+  SecurityService?: RunSecurityServiceEnabled | null;
+  /** 开启云监控服务。若不指定该参数，则默认开启云监控服务。 */
+  MonitorService?: RunMonitorServiceEnabled | null;
+  /** 开启云自动化助手服务（TencentCloud Automation Tools，TAT）。若不指定该参数，默认开启云自动化助手服务。 */
+  AutomationService?: RunAutomationServiceEnabled | null;
+}
+
 /** 弹性扩容节点配置信息。 */
 declare interface ExpansionNodeConfig {
   /** 扩容实例所在的位置。 */
@@ -354,6 +364,8 @@ declare interface QueueConfig {
   MaxNodesPerCycle?: number;
   /** 扩容过程中，作业的内存在匹配实例机型时增大比例（不会影响作业提交的内存大小，只影响匹配计算过程）。针对场景：由于实例机型的总内存会大于实例内部的可用内存，16GB内存规格的实例，实例操作系统内的可用内存只有约14.9GB内存。假设此时提交一个需要15GB内存的作业，- 当ScaleUpMemRatio=0时，会匹配到16GB内存规格的实例,但是由于操作系统内的可用内存为14.9GB小于作业所需的15GB，扩容出来的实例作业无法运行起来。- 当ScaleUpMemRatio=10时，匹配实例规格会按照15*(1+10%)=16.5GB来进行实例规格匹配，则不会匹配到16GB的实例，而是更大内存规格的实例来保证作业能够被运行起来。 */
   ScaleUpMemRatio?: number;
+  /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务、自动化助手服务。 */
+  EnhancedService?: EnhancedService;
 }
 
 /** 扩容队列配置概览。 */
@@ -386,6 +398,24 @@ declare interface QueueConfigOverview {
 declare interface QueueOverview {
   /** 队列名称。 */
   QueueName?: string | null;
+}
+
+/** 描述了 “云自动化助手” 服务相关的信息。 */
+declare interface RunAutomationServiceEnabled {
+  /** 是否开启云自动化助手。取值范围：TRUE：表示开启云自动化助手服务FALSE：表示不开启云自动化助手服务默认取值：TRUE。 */
+  Enabled?: boolean;
+}
+
+/** 描述了 “云监控” 服务相关的信息。 */
+declare interface RunMonitorServiceEnabled {
+  /** 是否开启[云监控](/document/product/248)服务。取值范围：TRUE：表示开启云监控服务FALSE：表示不开启云监控服务默认取值：TRUE。 */
+  Enabled?: boolean | null;
+}
+
+/** 描述了 “云安全” 服务相关的信息。 */
+declare interface RunSecurityServiceEnabled {
+  /** 是否开启[云安全](/document/product/296)服务。取值范围：TRUE：表示开启云安全服务FALSE：表示不开启云安全服务默认取值：TRUE。 */
+  Enabled?: boolean;
 }
 
 /** 描述集群文件系统选项 */

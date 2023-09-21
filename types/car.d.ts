@@ -66,6 +66,18 @@ declare interface StartPublishStreamResponse {
   RequestId?: string;
 }
 
+declare interface StartPublishStreamWithURLRequest {
+  /** 唯一用户身份标识，由业务方自定义，平台不予理解。 */
+  UserId: string;
+  /** 推流地址，仅支持rtmp协议。 */
+  PublishStreamURL: string;
+}
+
+declare interface StartPublishStreamWithURLResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopPublishStreamRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
@@ -87,6 +99,8 @@ declare interface Car {
   DestroySession(data: DestroySessionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySessionResponse>;
   /** 开始云端推流 {@link StartPublishStreamRequest} {@link StartPublishStreamResponse} */
   StartPublishStream(data: StartPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamResponse>;
+  /** 开始云端推流到指定URL {@link StartPublishStreamWithURLRequest} {@link StartPublishStreamWithURLResponse} */
+  StartPublishStreamWithURL(data: StartPublishStreamWithURLRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamWithURLResponse>;
   /** 停止云端推流 {@link StopPublishStreamRequest} {@link StopPublishStreamResponse} */
   StopPublishStream(data: StopPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishStreamResponse>;
 }
