@@ -589,13 +589,13 @@ declare interface CreateTranscodeRequest {
   Priority?: string;
   /** 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率。分辨率越高，效果越清晰，转出来的图片资源体积会越大，课件加载耗时会变长，请根据实际使用场景配置此参数。示例：1280x720，注意分辨率宽高中间为英文字母"xyz"的"x" */
   MinScaleResolution?: string;
-  /** 是否对不支持元素开启自动处理的功能。默认不开启。在开启自动处理的情况下，会自动进行如下处理：1. 墨迹：移除不支持的墨迹（比如使用WPS画的）2. 自动翻页：移除PPT上所有的自动翻页设置，并设置为单击鼠标翻页3. 已损坏音视频：移除PPT上对损坏音视频的引用 */
+  /** 此参数仅对动态转码生效。是否对不支持元素开启自动处理的功能。默认不开启。在开启自动处理的情况下，会自动进行如下处理：1. 墨迹：移除不支持的墨迹（比如使用WPS画的）2. 自动翻页：移除PPT上所有的自动翻页设置，并设置为单击鼠标翻页3. 已损坏音视频：移除PPT上对损坏音视频的引用 */
   AutoHandleUnsupportedElement?: boolean;
 }
 
 declare interface CreateTranscodeResponse {
   /** 文档转码任务的唯一标识Id，用于查询该任务的进度以及转码结果 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

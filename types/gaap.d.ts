@@ -1663,6 +1663,8 @@ declare interface DescribeCrossBorderProxiesResponse {
 }
 
 declare interface DescribeCustomHeaderRequest {
+  /** 规则ID */
+  RuleId: string;
 }
 
 declare interface DescribeCustomHeaderResponse {
@@ -2878,7 +2880,7 @@ declare interface Gaap {
   /** 查询跨境通道实例列表 {@link DescribeCrossBorderProxiesRequest} {@link DescribeCrossBorderProxiesResponse} */
   DescribeCrossBorderProxies(data?: DescribeCrossBorderProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderProxiesResponse>;
   /** 查询自定义header列表 {@link DescribeCustomHeaderRequest} {@link DescribeCustomHeaderResponse} */
-  DescribeCustomHeader(data?: DescribeCustomHeaderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomHeaderResponse>;
+  DescribeCustomHeader(data: DescribeCustomHeaderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomHeaderResponse>;
   /** 查询源站区域 {@link DescribeDestRegionsRequest} {@link DescribeDestRegionsResponse} */
   DescribeDestRegions(data?: DescribeDestRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDestRegionsResponse>;
   /** 查询目前定制域名的错误响应 {@link DescribeDomainErrorPageInfoRequest} {@link DescribeDomainErrorPageInfoResponse} */

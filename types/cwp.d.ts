@@ -4240,6 +4240,40 @@ declare interface DescribeAccountStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAgentInstallCommandRequest {
+  /** 是否腾讯云 */
+  IsCloud: boolean;
+  /** 网络类型：basic-基础网络，private-VPC, public-公网，direct-专线 */
+  NetType: string;
+  /** 地域标示, NetType=direct时必填 */
+  RegionCode?: string;
+  /** VpcId, NetType=direct时必填 */
+  VpcId?: string;
+  /** 标签ID列表，IsCloud=false时才会生效 */
+  TagIds?: number[];
+  /** 命令有效期，非腾讯云时必填 */
+  ExpireDate?: string;
+  /** 代理方式接入的vip */
+  Vip?: string;
+}
+
+declare interface DescribeAgentInstallCommandResponse {
+  /** linux系统安装命令 */
+  LinuxCommand: string;
+  /** windows系统安装命令（windows2008及以上） */
+  WindowsCommand: string;
+  /** windows系统安装命令第一步（windows2003） */
+  WindowsStepOne: string;
+  /** windows系统安装命令第二步（windows2003） */
+  WindowsStepTwo: string;
+  /** windows版agent下载链接 */
+  WindowsDownloadUrl: string;
+  /** Arm安装命令 */
+  ARMCommand: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAlarmIncidentNodesRequest {
   /** 机器uuid */
   Uuid: string;
@@ -6479,7 +6513,7 @@ declare interface DescribeMachinesRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Ips - String - 是否必填：否 - 通过ip查询 Names - String - 是否必填：否 - 通过实例名查询 InstanceIds - String - 是否必填：否 - 通过实例id查询 Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）Risk - String 是否必填: 否 - 风险主机( yes ) Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )每个过滤条件只支持一个值，暂不支持多个值“或”关系查询Quuid - String - 是否必填: 否 - 云服务器uuid 最大100条.AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) */
+  /** 过滤条件。Ips - String - 是否必填：否 - 通过ip查询 Names - String - 是否必填：否 - 通过实例名查询 InstanceIds - String - 是否必填：否 - 通过实例id查询 Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）Risk - String 是否必填: 否 - 风险主机( yes ) Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )每个过滤条件只支持一个值，暂不支持多个值“或”关系查询Quuid - String - 是否必填: 否 - 云服务器uuid 最大100条.AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) TagId- String 是否必填: 否 - 查询指定标签关联的主机列表 */
   Filters?: Filter[];
   /** 机器所属业务ID列表 */
   ProjectIds?: number[];
@@ -6487,9 +6521,9 @@ declare interface DescribeMachinesRequest {
 
 declare interface DescribeMachinesResponse {
   /** 主机列表 */
-  Machines: Machine[];
+  Machines?: Machine[];
   /** 主机数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8907,6 +8941,8 @@ declare interface Cwp {
   DeleteWebPageEventLog(data?: DeleteWebPageEventLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebPageEventLogResponse>;
   /** 获取帐号统计列表数据 {@link DescribeAccountStatisticsRequest} {@link DescribeAccountStatisticsResponse} */
   DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
+  /** 获取agent安装命令 {@link DescribeAgentInstallCommandRequest} {@link DescribeAgentInstallCommandResponse} */
+  DescribeAgentInstallCommand(data: DescribeAgentInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentInstallCommandResponse>;
   /** 获取告警点所在事件的所有节点信息 {@link DescribeAlarmIncidentNodesRequest} {@link DescribeAlarmIncidentNodesResponse} */
   DescribeAlarmIncidentNodes(data: DescribeAlarmIncidentNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmIncidentNodesResponse>;
   /** 查询告警点id列表 {@link DescribeAlarmVertexIdRequest} {@link DescribeAlarmVertexIdResponse} */

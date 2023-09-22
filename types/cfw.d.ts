@@ -3299,7 +3299,7 @@ declare interface Cfw {
   ModifyNatInstance(data: ModifyNatInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatInstanceResponse>;
   /** NAT防火墙规则快速排序 {@link ModifyNatSequenceRulesRequest} {@link ModifyNatSequenceRulesResponse} */
   ModifyNatSequenceRules(data: ModifyNatSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatSequenceRulesResponse>;
-  /** 单个修改互联网边界防火墙开关 {@link ModifyPublicIPSwitchStatusRequest} {@link ModifyPublicIPSwitchStatusResponse} */
+  /** @deprecated 单个修改互联网边界防火墙开关 {@link ModifyPublicIPSwitchStatusRequest} {@link ModifyPublicIPSwitchStatusResponse} */
   ModifyPublicIPSwitchStatus(data: ModifyPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicIPSwitchStatusResponse>;
   /** 资产中心资产组信息修改 {@link ModifyResourceGroupRequest} {@link ModifyResourceGroupResponse} */
   ModifyResourceGroup(data: ModifyResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceGroupResponse>;

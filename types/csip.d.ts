@@ -640,6 +640,12 @@ declare interface IpAssetListVO {
   VerifyStatus?: number | null;
 }
 
+/** 公网IP和域名资产列表key */
+declare interface PublicIpDomainListKey {
+  /** 资产值 */
+  Asset: string | null;
+}
+
 /** 报告项key */
 declare interface ReportItemKey {
   /** 日志Id列表 */
@@ -856,6 +862,12 @@ declare interface TaskCenterWeakPwdRiskInputParam {
   Enable: number | null;
 }
 
+/** 任务ID列表Key */
+declare interface TaskIdListKey {
+  /** 任务ID */
+  TaskId: string | null;
+}
+
 /** 任务报告信息 */
 declare interface TaskLogInfo {
   /** 报告名称 */
@@ -1051,6 +1063,32 @@ declare interface CreateRiskCenterScanTaskResponse {
   Status?: number;
   /** 未认证资产列表 */
   UnAuthAsset?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDomainAndIpRequest {
+  /** - */
+  Content: PublicIpDomainListKey[];
+  /** 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留 */
+  RetainPath?: number;
+  /** 以后是否忽略该资产，，1：忽略，其他：不忽略，默认不传为忽略 */
+  IgnoreAsset?: number;
+}
+
+declare interface DeleteDomainAndIpResponse {
+  /** 删除的资产数量 */
+  Data?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRiskScanTaskRequest {
+  /** 任务id 列表 */
+  TaskIdList: TaskIdListKey[];
+}
+
+declare interface DeleteRiskScanTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1389,6 +1427,18 @@ declare interface DescribeVpcAssetsResponse {
   RequestId?: string;
 }
 
+declare interface StopRiskCenterTaskRequest {
+  /** 任务id 列表 */
+  TaskIdList: TaskIdListKey[];
+}
+
+declare interface StopRiskCenterTaskResponse {
+  /** Status为0， 停止成功 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Csip 云安全一体化平台} */
 declare interface Csip {
   (): Versions;
@@ -1398,6 +1448,10 @@ declare interface Csip {
   CreateDomainAndIp(data: CreateDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAndIpResponse>;
   /** 创建风险中心扫描任务 {@link CreateRiskCenterScanTaskRequest} {@link CreateRiskCenterScanTaskResponse} */
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
+  /** 删除域名和ip请求 {@link DeleteDomainAndIpRequest} {@link DeleteDomainAndIpResponse} */
+  DeleteDomainAndIp(data: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
+  /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
+  DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */
@@ -1432,6 +1486,8 @@ declare interface Csip {
   DescribeTaskLogURL(data: DescribeTaskLogURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogURLResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
+  /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
+  StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
 }
 
 export declare type Versions = ["2022-11-21"];

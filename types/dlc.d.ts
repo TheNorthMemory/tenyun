@@ -34,6 +34,16 @@ declare interface Asset {
   DatasourceId?: number;
 }
 
+/** SparkSQL批任务信息 */
+declare interface BatchSqlTask {
+  /** SQL子任务唯一标识 */
+  TaskId?: string | null;
+  /** 运行SQL */
+  ExecuteSQL?: string | null;
+  /** 任务信息，成功则返回：Task Success!，失败则返回异常信息 */
+  Message?: string | null;
+}
+
 /** CSV类型数据格式 */
 declare interface CSV {
   /** 压缩格式，["Snappy", "Gzip", "None"选一]。 */
@@ -2798,6 +2808,22 @@ declare interface DescribeSparkAppTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSparkSessionBatchSQLRequest {
+  /** SparkSQL唯一标识 */
+  BatchId: string;
+}
+
+declare interface DescribeSparkSessionBatchSQLResponse {
+  /** 状态：0：运行中、1：成功、2：失败、3：取消、4：超时； */
+  State?: number;
+  /** SQL子任务列表，仅展示运行完成的子任务，若某个任务运行失败，后续其它子任务不返回 */
+  Tasks?: BatchSqlTask[] | null;
+  /** 非sql运行的异常事件信息，包含资源创建失败、调度异常，JOB超时等，正常运行下该Event值为空 */
+  Event?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSparkSessionBatchSqlLogRequest {
   /** SparkSQL唯一标识 */
   BatchId: string;
@@ -3513,6 +3539,8 @@ declare interface Dlc {
   DescribeSparkAppJobs(data?: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
   /** 查询spark应用的运行任务实例列表 {@link DescribeSparkAppTasksRequest} {@link DescribeSparkAppTasksResponse} */
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
+  /** 获取Spark SQL批任务运行状态 {@link DescribeSparkSessionBatchSQLRequest} {@link DescribeSparkSessionBatchSQLResponse} */
+  DescribeSparkSessionBatchSQL(data: DescribeSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSQLResponse>;
   /** 查询Spark SQL批任务日志 {@link DescribeSparkSessionBatchSqlLogRequest} {@link DescribeSparkSessionBatchSqlLogResponse} */
   DescribeSparkSessionBatchSqlLog(data: DescribeSparkSessionBatchSqlLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSqlLogResponse>;
   /** 查询结果存储位置 {@link DescribeStoreLocationRequest} {@link DescribeStoreLocationResponse} */

@@ -967,15 +967,15 @@ declare interface ModifyUpstreamResultInfo {
 /** 独享实例网络配置 */
 declare interface NetworkConfig {
   /** 最大出带宽 */
-  InternetMaxBandwidthOut: number;
+  InternetMaxBandwidthOut?: number;
   /** EnableInternetInbound信息 */
-  EnableInternetInbound: boolean;
+  EnableInternetInbound?: boolean;
   /** EnableInternetOutbound信息 */
-  EnableInternetOutbound: boolean;
+  EnableInternetOutbound?: boolean;
   /** InboundIpAddresses信息 */
-  InboundIpAddresses: string[];
+  InboundIpAddresses?: string[];
   /** OutboundIpAddresses信息 */
-  OutboundIpAddresses: string[];
+  OutboundIpAddresses?: string[];
 }
 
 /** Oauth授权配置信息 */

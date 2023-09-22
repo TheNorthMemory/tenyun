@@ -679,25 +679,27 @@ declare interface IngressPrivateLinkInfo {
 /** 资源组节点信息 */
 declare interface Instance {
   /** 资源组节点id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 节点已用资源 */
-  UsedResource: ResourceInfo | null;
+  UsedResource?: ResourceInfo | null;
   /** 节点总资源 */
-  TotalResource: ResourceInfo | null;
+  TotalResource?: ResourceInfo | null;
   /** 节点状态 注意：此字段为枚举值说明: DEPLOYING: 部署中RUNNING: 运行中 DEPLOY_FAILED: 部署失败 RELEASING 释放中 RELEASED：已释放 EXCEPTION：异常 */
-  InstanceStatus: string | null;
+  InstanceStatus?: string | null;
   /** 创建人 */
-  SubUin: string;
+  SubUin?: string;
   /** 创建时间: 注意：北京时间，比如: 2021-12-01 12:00:00 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 到期时间注意：北京时间，比如：2021-12-11 12:00:00 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 自动续费标识注意：此字段为枚举值说明：NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期通知NOTIFY_AND_AUTO_RENEW：自动续费且到期通知DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不通知 */
-  AutoRenewFlag: string | null;
+  AutoRenewFlag?: string | null;
   /** 计费项ID */
-  SpecId: string;
+  SpecId?: string;
   /** 计费项别名 */
-  SpecAlias: string;
+  SpecAlias?: string;
+  /** 计费项特性列表 */
+  SpecFeatures?: string[] | null;
 }
 
 /** 内网调用信息 */

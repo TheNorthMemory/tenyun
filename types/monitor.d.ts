@@ -2963,7 +2963,7 @@ declare interface DescribeAlarmHistoriesRequest {
   Namespaces?: MonitorTypeNamespace[];
   /** 根据指标名过滤 */
   MetricNames?: string[];
-  /** 根据策略名称模糊搜索 */
+  /** 根据策略名称模糊搜索,不支持大小写区分 */
   PolicyName?: string;
   /** 根据告警内容模糊搜索 */
   Content?: string;
@@ -2973,7 +2973,7 @@ declare interface DescribeAlarmHistoriesRequest {
   ReceiverGroups?: number[];
   /** 根据告警策略 Id 列表搜索 */
   PolicyIds?: string[];
-  /** 告警等级 */
+  /** 告警等级,取值范围：Remind、Serious、Warn */
   AlarmLevels?: string[];
 }
 

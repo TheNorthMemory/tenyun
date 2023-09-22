@@ -22,6 +22,14 @@ declare interface Agent {
   ProxyOperator?: string | null;
 }
 
+/** 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式 */
+declare interface ApproverComponentLimitType {
+  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。 */
+  RecipientId: string;
+  /** 签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式，可多选签名方式：HANDWRITE-手写签名ESIGN-个人印章类型OCR_ESIGN-AI智能识别手写签名SYSTEM_ESIGN-系统签名 */
+  Values: string[];
+}
+
 /** 参与者信息。 */
 declare interface ApproverInfo {
   /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:**0**：企业**1**：个人**3**：企业静默签署注：`类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。`**7**: 个人自动签署，适用于个人自动签场景。注: `个人自动签场景为白名单功能，使用前请联系对接的客户经理沟通。` */
@@ -1351,7 +1359,7 @@ declare interface CreateFlowGroupByFilesResponse {
 }
 
 declare interface CreateFlowGroupByTemplatesRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 合同（流程）组名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowGroupName: string;
@@ -1581,6 +1589,8 @@ declare interface CreateMultiFlowSignQRCodeRequest {
   Agent?: Agent;
   /** 限制二维码用户条件（已弃用） */
   ApproverRestrictions?: ApproverRestriction;
+  /** 指定签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式：自由书写、正楷临摹、系统签名、个人印章。 */
+  ApproverComponentLimitTypes?: ApproverComponentLimitType[];
 }
 
 declare interface CreateMultiFlowSignQRCodeResponse {
@@ -2073,20 +2083,20 @@ declare interface DescribeFlowEvidenceReportResponse {
 declare interface DescribeFlowInfoRequest {
   /** 执行本接口操作的员工信息。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 需要查询的流程ID列表，限制最大100个如果查询合同组的信息,不要传此参数 */
+  /** 需要查询的流程ID列表，最多可传入100个ID。如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。 */
   FlowIds?: string[];
   /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 合同组ID, 如果传此参数会忽略FlowIds入参 所以如传此参数不要传FlowIds参数 */
+  /** 需要查询的流程组ID，如果传入此参数，则会忽略 FlowIds 参数。该合同组由通过多文件创建合同组签署流程等接口创建。 */
   FlowGroupId?: string;
 }
 
 declare interface DescribeFlowInfoResponse {
-  /** 签署流程信息 */
+  /** 合同流程的详细信息。如果查询的是合同组信息，则返回的是组内所有子合同流程的详细信息。 */
   FlowDetailInfos?: FlowDetailInfo[];
-  /** 合同组ID，为32位字符串 */
+  /** 合同组ID，只有在查询合同组信息时才会返回。 */
   FlowGroupId?: string;
-  /** 合同组名称 */
+  /** 合同组名称，只有在查询合同组信息时才会返回。 */
   FlowGroupName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2254,6 +2264,24 @@ declare interface DescribeOrganizationSealsResponse {
   TotalCount?: number;
   /** 查询到的印章结果数组 */
   Seals?: OccupiedSeal[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePersonCertificateRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 个人用户的三要素信息：姓名证件号证件类型 */
+  UserInfo: UserThreeFactor;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 证书使用场景，可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  SceneKey?: string;
+}
+
+declare interface DescribePersonCertificateResponse {
+  /** 证书的Base64 */
+  Cert?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2603,6 +2631,8 @@ declare interface Ess {
   DescribeOrganizationGroupOrganizations(data: DescribeOrganizationGroupOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationGroupOrganizationsResponse>;
   /** 查询企业电子印章 {@link DescribeOrganizationSealsRequest} {@link DescribeOrganizationSealsResponse} */
   DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
+  /** 查询个人证书接口 {@link DescribePersonCertificateRequest} {@link DescribePersonCertificateResponse} */
+  DescribePersonCertificate(data: DescribePersonCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonCertificateResponse>;
   /** 通过AuthCode查询个人用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** 获取个人用户自动签的开通状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */

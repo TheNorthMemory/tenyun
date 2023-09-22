@@ -14,10 +14,14 @@ declare interface AuthNode {
 
 /** 组织身份策略 */
 declare interface IdentityPolicy {
-  /** 策略ID */
-  PolicyId: number;
-  /** 策略名称 */
-  PolicyName: string;
+  /** CAM预设策略ID。PolicyType 为预设策略时有效且必选 */
+  PolicyId?: number;
+  /** CAM预设策略名称。PolicyType 为预设策略时有效且必选 */
+  PolicyName?: string;
+  /** 策略类型。取值 1-自定义策略 2-预设策略；默认值2 */
+  PolicyType?: number | null;
+  /** 自定义策略内容，遵循CAM策略语法。PolicyType 为自定义策略时有效且必选 */
+  PolicyDocument?: string | null;
 }
 
 /** 成员管理身份 */
@@ -51,17 +55,17 @@ declare interface OrgFinancialByMonth {
 /** 组织身份 */
 declare interface OrgIdentity {
   /** 身份ID。 */
-  IdentityId: number | null;
+  IdentityId?: number | null;
   /** 身份名称。 */
-  IdentityAliasName: string | null;
+  IdentityAliasName?: string | null;
   /** 描述。 */
-  Description: string | null;
+  Description?: string | null;
   /** 身份策略。 */
-  IdentityPolicy: IdentityPolicy[] | null;
+  IdentityPolicy?: IdentityPolicy[] | null;
   /** 身份类型。 1-预设、 2-自定义 */
-  IdentityType: number | null;
+  IdentityType?: number | null;
   /** 更新时间。 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 企业组织成员 */
@@ -127,19 +131,25 @@ declare interface OrgMemberAuthAccount {
 /** 组织成员可授权的身份 */
 declare interface OrgMemberAuthIdentity {
   /** 身份ID。 */
-  IdentityId: number | null;
+  IdentityId?: number | null;
   /** 身份的角色名。 */
-  IdentityRoleName: string | null;
+  IdentityRoleName?: string | null;
   /** 身份的角色别名。 */
-  IdentityRoleAliasName: string | null;
-  /** 描述。 */
-  Description: string | null;
-  /** 创建时间。 */
-  CreateTime: string | null;
-  /** 更新时间。 */
-  UpdateTime: string | null;
-  /** 身份类型。取值： 1-预设 2-自定义 */
+  IdentityRoleAliasName?: string | null;
+  /** 身份描述。 */
+  Description?: string | null;
+  /** 首次配置成功的时间。 */
+  CreateTime?: string | null;
+  /** 最后一次配置成功的时间。 */
+  UpdateTime?: string | null;
+  /** 身份类型。取值： 1-预设身份 2-自定义身份 */
   IdentityType?: number | null;
+  /** 配置状态。取值：1-配置完成 2-需重新配置 */
+  Status?: number | null;
+  /** 成员Uin。 */
+  MemberUin?: number | null;
+  /** 成员名称。 */
+  MemberName?: string | null;
 }
 
 /** 组织成员财务信息。 */
@@ -222,6 +232,8 @@ declare interface AddOrganizationMemberEmailRequest {
 }
 
 declare interface AddOrganizationMemberEmailResponse {
+  /** 绑定Id */
+  BindId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -505,8 +517,10 @@ declare interface DescribeOrganizationMemberAuthIdentitiesRequest {
   Offset: number;
   /** 限制数目。取值范围：1~50，默认值：10 */
   Limit: number;
-  /** 组织成员Uin。 */
-  MemberUin: number;
+  /** 组织成员Uin。入参MemberUin与IdentityId至少填写一个 */
+  MemberUin?: number;
+  /** 身份ID。入参MemberUin与IdentityId至少填写一个 */
+  IdentityId?: number;
 }
 
 declare interface DescribeOrganizationMemberAuthIdentitiesResponse {
@@ -1115,7 +1129,7 @@ declare interface Organization {
   DescribeOrganizationFinancialByProduct(data: DescribeOrganizationFinancialByProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationFinancialByProductResponse>;
   /** 获取组织成员被绑定授权关系的子账号列表 {@link DescribeOrganizationMemberAuthAccountsRequest} {@link DescribeOrganizationMemberAuthAccountsResponse} */
   DescribeOrganizationMemberAuthAccounts(data: DescribeOrganizationMemberAuthAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthAccountsResponse>;
-  /** 获取组织成员可被管理的身份列表 {@link DescribeOrganizationMemberAuthIdentitiesRequest} {@link DescribeOrganizationMemberAuthIdentitiesResponse} */
+  /** 获取组织成员访问授权列表 {@link DescribeOrganizationMemberAuthIdentitiesRequest} {@link DescribeOrganizationMemberAuthIdentitiesResponse} */
   DescribeOrganizationMemberAuthIdentities(data: DescribeOrganizationMemberAuthIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthIdentitiesResponse>;
   /** 查询成员邮箱绑定详细信息 {@link DescribeOrganizationMemberEmailBindRequest} {@link DescribeOrganizationMemberEmailBindResponse} */
   DescribeOrganizationMemberEmailBind(data: DescribeOrganizationMemberEmailBindRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberEmailBindResponse>;

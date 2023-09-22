@@ -47,25 +47,27 @@ declare interface Model {
 /** 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。 */
 declare interface SentenceDetail {
   /** 单句最终识别结果 */
-  FinalSentence: string | null;
+  FinalSentence?: string | null;
   /** 单句中间识别结果，使用空格拆分为多个词 */
-  SliceSentence: string | null;
+  SliceSentence?: string | null;
+  /** 口语转书面语结果，开启改功能才有值 */
+  WrittenText?: string | null;
   /** 单句开始时间（毫秒） */
-  StartMs: number | null;
+  StartMs?: number | null;
   /** 单句结束时间（毫秒） */
-  EndMs: number | null;
+  EndMs?: number | null;
   /** 单句中词个数 */
-  WordsNum: number | null;
+  WordsNum?: number | null;
   /** 单句中词详情 */
-  Words: SentenceWords[] | null;
+  Words?: SentenceWords[] | null;
   /** 单句语速，单位：字数/秒 */
-  SpeechSpeed: number | null;
+  SpeechSpeed?: number | null;
   /** 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道） */
-  SpeakerId: number | null;
+  SpeakerId?: number | null;
   /** 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。 */
-  EmotionalEnergy: number | null;
+  EmotionalEnergy?: number | null;
   /** 本句与上一句之间的静音时长 */
-  SilenceTime: number | null;
+  SilenceTime?: number | null;
   /** 情绪类型（可能为空） */
   EmotionType?: string[] | null;
 }

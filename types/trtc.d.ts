@@ -58,7 +58,7 @@ declare interface AudioParams {
 
 /** 第三方云存储的账号信息。 */
 declare interface CloudStorage {
-  /** 第三方云储存的供应商:0：腾讯云存储 COS，暂不支持其他家。 */
+  /** 第三方云储存的供应商:0：腾讯云存储 COS。【*注意】：目前第三方仅支持腾讯云存储COS，暂不支持AWS等其他第三方云存储。 */
   Vendor: number;
   /** 第三方云存储的地域信息。 */
   Region: string;
