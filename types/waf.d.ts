@@ -442,9 +442,9 @@ declare interface DomainInfo {
   FlowMode: number;
   /** waf开关,0关闭 1开启 */
   Status: number;
-  /** 规则防御模式,0观察模式 1拦截模式 */
+  /** 规则引擎防护模式,0观察模式 1拦截模式 */
   Mode: number;
-  /** AI防御模式,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式 */
+  /** 规则引擎和AI引擎防护模式联合状态,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式 */
   Engine: number;
   /** CC列表 */
   CCList: string[];
@@ -480,6 +480,8 @@ declare interface DomainInfo {
   SgState?: number | null;
   /** 安全组状态的详细解释 */
   SgDetail?: string | null;
+  /** 域名类型:hybrid表示混合云域名，public表示公有云域名 */
+  CloudType?: string | null;
 }
 
 /** clb-waf 域名扩展套餐 */
@@ -2797,7 +2799,7 @@ declare interface ModifyDomainIpv6StatusRequest {
   Domain: string;
   /** 需要修改的域名ID */
   DomainId: string;
-  /** 修改域名的Ipv6开关为Status （0:关闭 1:开启） */
+  /** 修改域名的Ipv6开关为Status （1:开启 2:关闭） */
   Status: number;
 }
 

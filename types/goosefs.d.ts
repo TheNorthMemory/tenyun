@@ -120,6 +120,12 @@ declare interface MappedBucket {
   RuleId?: string | null;
   /** 规则备注与描述 */
   RuleDescription?: string | null;
+  /** 桶关联状态 0：关联中 1：关联完成 */
+  Status?: number;
+  /** 是否使用全球加速域名 */
+  AccelerateFlag?: boolean | null;
+  /** 桶所在的园区 */
+  BucketRegion?: string | null;
 }
 
 /** 角色凭证 */

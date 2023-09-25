@@ -70,6 +70,50 @@ declare interface AssetInfoDetail {
   ScanTime?: string | null;
 }
 
+/** 资产视角配置风险 */
+declare interface AssetViewCFGRisk {
+  /** 唯一id */
+  Id?: string;
+  /** 配置名 */
+  CFGName?: string;
+  /** 检查类型 */
+  CheckType?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 实例类型 */
+  InstanceType?: string;
+  /** 影响资产 */
+  AffectAsset?: string;
+  /** 风险等级 */
+  Level?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 来源 */
+  From?: string;
+  /** 状态 */
+  Status?: number;
+  /** - */
+  CFGSTD?: string;
+  /** 配置详情 */
+  CFGDescribe?: string;
+  /** 修复建议 */
+  CFGFix?: string;
+  /** 帮助文档链接 */
+  CFGHelpURL?: string;
+  /** 前端使用索引 */
+  Index?: string;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户uin */
+  Uin?: string | null;
+}
+
 /** 资产视角的端口风险对象 */
 declare interface AssetViewPortRisk {
   /** 端口 */
@@ -180,6 +224,52 @@ declare interface AssetViewVULRisk {
   Payload?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
   EMGCVulType?: number | null;
+}
+
+/** 资产视角的弱口令风险 */
+declare interface AssetViewWeakPassRisk {
+  /** 影响资产 */
+  AffectAsset?: string;
+  /** 风险等级 */
+  Level?: string;
+  /** 资产类型 */
+  InstanceType?: string;
+  /** 组件 */
+  Component?: string;
+  /** 服务 */
+  Service?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 状态，0未处理、1已处置、2已忽略 */
+  Status?: number;
+  /** 资产唯一id */
+  Id?: string;
+  /** 前端索引 */
+  Index?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 弱口令类型 */
+  PasswordType?: string;
+  /** 来源 */
+  From?: string;
+  /** 漏洞类型 */
+  VULType?: string;
+  /** 漏洞url */
+  VULURL?: string;
+  /** 修复建议 */
+  Fix?: string;
+  /** 负载 */
+  Payload?: string;
 }
 
 /** 漏洞详细信息 */
@@ -762,6 +852,68 @@ declare interface ScanTaskInfoList {
   IsDelete?: number | null;
 }
 
+/** 服务风险 */
+declare interface ServerRisk {
+  /** 测绘标签 */
+  ServiceTag?: string;
+  /** 端口 */
+  Port?: number | null;
+  /** 影响资产 */
+  AffectAsset?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 资产类型 */
+  InstanceType?: string;
+  /** 风险等级 */
+  Level?: string;
+  /** 协议 */
+  Protocol?: string;
+  /** 组件 */
+  Component?: string;
+  /** 服务 */
+  Service?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 风险详情 */
+  RiskDetails?: string | null;
+  /** 处置建议 */
+  Suggestion?: string;
+  /** 状态，0未处理、1已处置、2已忽略 */
+  Status?: number;
+  /** 资产唯一id */
+  Id?: string;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 服务快照 */
+  ServiceSnapshot?: string | null;
+  /** 服务访问的url */
+  Url?: string | null;
+  /** 列表索引值 */
+  Index?: string | null;
+  /** 风险列表 */
+  RiskList?: ServerRiskSuggestion[] | null;
+  /** 建议列表 */
+  SuggestionList?: ServerRiskSuggestion[] | null;
+  /** HTTP响应状态码 */
+  StatusCode?: string | null;
+}
+
+/** 风险详情 */
+declare interface ServerRiskSuggestion {
+  /** 标题 */
+  Title?: string | null;
+  /** 详情 */
+  Body?: string | null;
+}
+
 /** 子网资产 */
 declare interface SubnetAsset {
   /** appid */
@@ -940,6 +1092,48 @@ declare interface Vpc {
   IsNewAsset?: number | null;
   /** 是否核心资产1是 2不是 */
   IsCore?: number | null;
+}
+
+/** 网站风险对象 */
+declare interface WebsiteRisk {
+  /** 影响资产 */
+  AffectAsset?: string;
+  /** 风险等级 */
+  Level?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 状态，0未处理、1已处置、2已忽略 */
+  Status?: number;
+  /** 资产唯一id */
+  Id?: string;
+  /** 前端索引 */
+  Index?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 风险链接 */
+  URL?: string;
+  /** 风险文件地址 */
+  URLPath?: string;
+  /** 实例类型 */
+  InstanceType?: string;
+  /** 类型 */
+  DetectEngine?: string;
+  /** 结果描述 */
+  ResultDescribe?: string;
+  /** 源地址url */
+  SourceURL?: string;
+  /** 源文件地址 */
+  SourceURLPath?: string;
 }
 
 /** 过滤条件 */
@@ -1255,6 +1449,32 @@ declare interface DescribePublicIpAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskCenterAssetViewCFGRiskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCenterAssetViewCFGRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 资产视角的配置风险列表 */
+  Data?: AssetViewCFGRisk[];
+  /** 状态列表 */
+  StatusLists?: FilterDataObject[];
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 配置名列表 */
+  CFGNameLists?: FilterDataObject[];
+  /** 检查类型列表 */
+  CheckTypeLists?: FilterDataObject[];
+  /** 资产类型列表 */
+  InstanceTypeLists?: FilterDataObject[];
+  /** 来源列表 */
+  FromLists?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRiskCenterAssetViewPortRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
@@ -1299,6 +1519,68 @@ declare interface DescribeRiskCenterAssetViewVULRiskListResponse {
   VULTypeLists?: FilterDataObject[];
   /** 资产类型列表 */
   InstanceTypeLists?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 风险列表 */
+  Data?: AssetViewWeakPassRisk[];
+  /** 状态列表 */
+  StatusLists?: FilterDataObject[];
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 来源列表 */
+  FromLists?: FilterDataObject[];
+  /** 资产类型列表 */
+  InstanceTypeLists?: FilterDataObject[];
+  /** 弱口令类型列表 */
+  PasswordTypeLists?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskCenterServerRiskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCenterServerRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 风险服务列表 */
+  Data?: ServerRisk[];
+  /** 资产类型枚举 */
+  InstanceTypeLists?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskCenterWebsiteRiskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCenterWebsiteRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 资产视角的端口风险列表 */
+  Data?: WebsiteRisk[];
+  /** 状态列表 */
+  StatusLists?: FilterDataObject[];
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 资产类型列表 */
+  InstanceTypeLists?: FilterDataObject[];
+  /** 风险类型列表 */
+  DetectEngineLists?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1468,10 +1750,18 @@ declare interface Csip {
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
+  /** 获取资产视角的配置风险列表 {@link DescribeRiskCenterAssetViewCFGRiskListRequest} {@link DescribeRiskCenterAssetViewCFGRiskListResponse} */
+  DescribeRiskCenterAssetViewCFGRiskList(data?: DescribeRiskCenterAssetViewCFGRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewCFGRiskListResponse>;
   /** 获取资产视角的端口风险列表 {@link DescribeRiskCenterAssetViewPortRiskListRequest} {@link DescribeRiskCenterAssetViewPortRiskListResponse} */
   DescribeRiskCenterAssetViewPortRiskList(data?: DescribeRiskCenterAssetViewPortRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewPortRiskListResponse>;
   /** 获取资产视角的漏洞风险列表 {@link DescribeRiskCenterAssetViewVULRiskListRequest} {@link DescribeRiskCenterAssetViewVULRiskListResponse} */
   DescribeRiskCenterAssetViewVULRiskList(data?: DescribeRiskCenterAssetViewVULRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewVULRiskListResponse>;
+  /** 获取资产视角的弱口令风险列表 {@link DescribeRiskCenterAssetViewWeakPasswordRiskListRequest} {@link DescribeRiskCenterAssetViewWeakPasswordRiskListResponse} */
+  DescribeRiskCenterAssetViewWeakPasswordRiskList(data?: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewWeakPasswordRiskListResponse>;
+  /** 获取风险服务列表 {@link DescribeRiskCenterServerRiskListRequest} {@link DescribeRiskCenterServerRiskListResponse} */
+  DescribeRiskCenterServerRiskList(data?: DescribeRiskCenterServerRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterServerRiskListResponse>;
+  /** 获取网站风险列表 {@link DescribeRiskCenterWebsiteRiskListRequest} {@link DescribeRiskCenterWebsiteRiskListResponse} */
+  DescribeRiskCenterWebsiteRiskList(data?: DescribeRiskCenterWebsiteRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterWebsiteRiskListResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
   /** 获取扫描任务列表 {@link DescribeScanTaskListRequest} {@link DescribeScanTaskListResponse} */

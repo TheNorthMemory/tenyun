@@ -1663,7 +1663,7 @@ declare interface MySQLParam {
   /** 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix */
   IsTableRegular?: boolean;
   /** 信号表 */
-  SignalTable?: string | null;
+  SignalTable?: string;
 }
 
 /** 操作类型返回的Data结构 */

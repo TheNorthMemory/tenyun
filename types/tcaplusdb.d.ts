@@ -252,9 +252,9 @@ declare interface IdlFileInfoWithoutContent {
 
 /** ckafka地址信息 */
 declare interface KafkaInfo {
-  /** kafaka address */
+  /** Kafka address */
   Address: string;
-  /** kafaka topic */
+  /** Kafka topic */
   Topic: string;
   /** kafka username */
   User: string;

@@ -2,21 +2,21 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 音频流异步识别任务信息 */
+/** [音频流异步识别](https://cloud.tencent.com/document/api/1093/37824)任务信息 */
 declare interface AsyncRecognitionTaskInfo {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 音频流Url */
-  Url: string;
+  Url?: string;
 }
 
-/** 音频流异步识别任务列表 */
+/** [音频流异步识别任务列表](https://cloud.tencent.com/document/product/1093/52060) */
 declare interface AsyncRecognitionTasks {
   /** 任务列表 */
-  Tasks: AsyncRecognitionTaskInfo[] | null;
+  Tasks?: AsyncRecognitionTaskInfo[] | null;
 }
 
-/** 热词的词和权重 */
+/** [热词的词和权重](https://cloud.tencent.com/document/product/1093/41111) */
 declare interface HotWord {
   /** 热词 */
   Word: string | null;
@@ -24,24 +24,24 @@ declare interface HotWord {
   Weight: number | null;
 }
 
-/** 自学习模型信息 */
+/** [自学习模型信息](https://cloud.tencent.com/document/product/1093/90813) */
 declare interface Model {
   /** 模型名称 */
-  ModelName: string;
+  ModelName?: string;
   /** 模型文件名称 */
-  DictName: string;
+  DictName?: string;
   /** 模型Id */
-  ModelId: string;
+  ModelId?: string;
   /** 模型类型，“8k”或者”16k“ */
-  ModelType: string;
+  ModelType?: string;
   /** 服务类型 */
-  ServiceType: string;
+  ServiceType?: string;
   /** 模型状态：-2：模型训练失败；-1：已下线；0：训练中；1：已上线；3：上线中；4：下线中； */
-  ModelState: number;
+  ModelState?: number;
   /** 最后更新时间 */
-  AtUpdated: string;
+  AtUpdated?: string;
   /** 标签信息 */
-  TagInfos: string[] | null;
+  TagInfos?: string[] | null;
 }
 
 /** 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。 */
@@ -72,14 +72,14 @@ declare interface SentenceDetail {
   EmotionType?: string[] | null;
 }
 
-/** 一句话识别返回的词时间戳 */
+/** [一句话识别](https://cloud.tencent.com/document/product/1093/35646)返回的词时间戳 */
 declare interface SentenceWord {
   /** 词结果 */
-  Word: string;
+  Word?: string;
   /** 词在音频中的开始时间 */
-  StartTime: number;
+  StartTime?: number;
   /** 词在音频中的结束时间 */
-  EndTime: number;
+  EndTime?: number;
 }
 
 /** 识别结果中词文本，以及对应时间偏移 */
@@ -92,51 +92,51 @@ declare interface SentenceWords {
   OffsetEndMs: number | null;
 }
 
-/** 录音文件识别、实时语音异步识别请求的返回数据 */
+/** [录音文件识别](https://cloud.tencent.com/document/product/1093/37823)、[实时语音异步识别](https://cloud.tencent.com/document/product/1093/52061)请求的返回数据 */
 declare interface Task {
   /** 任务ID，可通过此ID在轮询接口获取识别状态与结果。注意：TaskId数据类型为uint64 */
-  TaskId: number;
+  TaskId?: number;
 }
 
-/** 获取录音识别结果的返回参数 */
+/** [获取录音识别结果的返回参数](https://cloud.tencent.com/document/product/1093/37822) */
 declare interface TaskStatus {
   /** 任务标识。注意：TaskId数据类型为uint64。 */
-  TaskId: number;
+  TaskId?: number;
   /** 任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。 */
-  Status: number;
+  Status?: number;
   /** 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。 */
-  StatusStr: string;
+  StatusStr?: string;
   /** 识别结果。 */
-  Result: string;
+  Result?: string;
   /** 失败原因说明。 */
-  ErrorMsg: string;
+  ErrorMsg?: string;
   /** 识别结果详情，包含每个句子中的词时间偏移，一般用于生成字幕的场景。(录音识别请求中ResTextFormat=1时该字段不为空) */
-  ResultDetail: SentenceDetail[] | null;
+  ResultDetail?: SentenceDetail[] | null;
   /** 音频时长(秒)。 */
-  AudioDuration: number | null;
+  AudioDuration?: number | null;
 }
 
-/** 词表内容 */
+/** [词表内容](https://cloud.tencent.com/document/product/1093/41484) */
 declare interface Vocab {
   /** 热词表名称 */
-  Name: string;
+  Name?: string;
   /** 热词表描述 */
-  Description: string;
+  Description?: string;
   /** 热词表ID */
-  VocabId: string;
+  VocabId?: string;
   /** 词权重列表 */
-  WordWeights: HotWord[];
+  WordWeights?: HotWord[];
   /** 词表创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 词表更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 热词表状态，1为默认状态即在识别时默认加载该热词表进行识别，0为初始状态 */
-  State: number;
+  State?: number;
   /** 标签数组 */
-  TagInfos: string[] | null;
+  TagInfos?: string[] | null;
 }
 
-/** 说话人基础数据，包括说话人id和说话人昵称 */
+/** [说话人基础数据](https://cloud.tencent.com/document/product/1093/94483)，包括说话人id和说话人昵称 */
 declare interface VoicePrintBaseData {
   /** 说话人id */
   VoicePrintId?: string | null;
@@ -144,13 +144,13 @@ declare interface VoicePrintBaseData {
   SpeakerNick?: string | null;
 }
 
-/** 统计返回注册数量结构 */
+/** 统计返回[说话人注册数量](https://cloud.tencent.com/document/product/1093/96061) */
 declare interface VoicePrintCountData {
   /** 总数 */
   Total?: number | null;
 }
 
-/** 说话人验证数据 */
+/** [说话人验证数据](https://cloud.tencent.com/document/product/1093/94481) */
 declare interface VoicePrintVerifyData {
   /** 说话人id */
   VoicePrintId?: string | null;

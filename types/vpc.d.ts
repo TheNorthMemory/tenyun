@@ -171,21 +171,23 @@ declare interface BackupPolicy {
 /** 描述带宽包信息的结构 */
 declare interface BandwidthPackage {
   /** 带宽包唯一标识Id */
-  BandwidthPackageId: string;
+  BandwidthPackageId?: string;
   /** 带宽包类型，包括'BGP','SINGLEISP','ANYCAST','SINGLEISP_CMCC','SINGLEISP_CTCC','SINGLEISP_CUCC' */
-  NetworkType: string;
+  NetworkType?: string;
   /** 带宽包计费类型，包括'TOP5_POSTPAID_BY_MONTH'和'PERCENT95_POSTPAID_BY_MONTH' */
-  ChargeType: string;
+  ChargeType?: string;
   /** 带宽包名称 */
-  BandwidthPackageName: string;
+  BandwidthPackageName?: string;
   /** 带宽包创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 带宽包状态，包括'CREATING','CREATED','DELETING','DELETED' */
-  Status: string;
+  Status?: string;
   /** 带宽包资源信息 */
-  ResourceSet: Resource[];
+  ResourceSet?: Resource[];
   /** 带宽包限速大小。单位：Mbps，-1表示不限速。 */
-  Bandwidth: number;
+  Bandwidth?: number;
+  /** 网络出口 */
+  Egress?: string | null;
 }
 
 /** 后付费共享带宽包的当前计费用量 */
@@ -2775,7 +2777,7 @@ declare interface CreateAssistantCidrResponse {
 }
 
 declare interface CreateBandwidthPackageRequest {
-  /** 带宽包类型, 默认值: BGP, 可选值:BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包 */
+  /** 带宽包类型, 默认值: BGP, 可选值:BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包SINGLEISP_CMCC: 中国移动共享带宽包SINGLEISP_CTCC: 中国电信共享带宽包SINGLEISP_CUCC: 中国联通共享带宽包 */
   NetworkType?: string;
   /** 带宽包计费类型, 默认为: TOP5_POSTPAID_BY_MONTH, 可选值:TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费FIXED_PREPAID_BY_MONTH: 包月预付费计费ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费 */
   ChargeType?: string;
@@ -2791,6 +2793,8 @@ declare interface CreateBandwidthPackageRequest {
   Protocol?: string;
   /** 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。 */
   TimeSpan?: number;
+  /** 网络出口，默认值：center_egress1 */
+  Egress?: string;
 }
 
 declare interface CreateBandwidthPackageResponse {
