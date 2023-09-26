@@ -80,6 +80,26 @@ declare interface IpRule {
   Remark: string | null;
 }
 
+/** 角色信息 */
+declare interface RoleItem {
+  /** 角色名称 */
+  RoleName?: string;
+  /** Access Key */
+  AccessKey?: string;
+  /** Secret Key */
+  SecretKey?: string;
+  /** 是否开启消费 */
+  PermRead?: boolean;
+  /** 是否开启生产 */
+  PermWrite?: boolean;
+  /** 备注信息 */
+  Remark?: string;
+  /** 创建时间，秒为单位 */
+  CreatedTime?: number;
+  /** 修改时间，秒为单位 */
+  ModifiedTime?: number;
+}
+
 /** 主题与消费组的订阅关系数据 */
 declare interface SubscriptionData {
   /** 实例ID */
@@ -204,6 +224,26 @@ declare interface CreateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateRoleRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 角色名称 */
+  Role: string;
+  /** 备注 */
+  Remark: string;
+  /** 是否开启生产权限 */
+  PermWrite: boolean;
+  /** 是否开启消费权限 */
+  PermRead: boolean;
+}
+
+declare interface CreateRoleResponse {
+  /** 角色名 */
+  Role?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTopicRequest {
   /** 实例ID */
   InstanceId: string;
@@ -244,6 +284,18 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRoleRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 角色名称 */
+  Role: string;
+}
+
+declare interface DeleteRoleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -366,6 +418,26 @@ declare interface DescribeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRoleListRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 查询起始位置 */
+  Offset: number;
+  /** 查询结果限制数量 */
+  Limit: number;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRoleListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 角色信息列表 */
+  Data?: RoleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicListRequest {
   /** 实例ID */
   InstanceId: string;
@@ -472,6 +544,24 @@ declare interface ModifyInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRoleRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 角色名称 */
+  Role: string;
+  /** 是否开启消费 */
+  PermRead: boolean;
+  /** 是否开启生产 */
+  PermWrite: boolean;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTopicRequest {
   /** 实例ID */
   InstanceId: string;
@@ -495,12 +585,16 @@ declare interface Trocket {
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 购买实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
+  /** 添加角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
+  CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 删除消费组 {@link DeleteConsumerGroupRequest} {@link DeleteConsumerGroupResponse} */
   DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 删除实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
+  /** 删除角色 {@link DeleteRoleRequest} {@link DeleteRoleResponse} */
+  DeleteRole(data: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
   /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 查询消费组详情 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
@@ -509,6 +603,8 @@ declare interface Trocket {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
+  /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */
+  DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
   /** 查询主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
@@ -519,6 +615,8 @@ declare interface Trocket {
   ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;
   /** 修改实例属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** 修改角色 {@link ModifyRoleRequest} {@link ModifyRoleResponse} */
+  ModifyRole(data: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
   /** 修改主题属性 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
 }

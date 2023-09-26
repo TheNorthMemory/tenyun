@@ -16,22 +16,24 @@ declare interface AccelerateType {
 
 /** 加速域名 */
 declare interface AccelerationDomain {
-  /** 源站信息。 */
-  OriginDetail?: OriginDetail | null;
-  /** 创建时间。 */
-  CreatedOn?: string;
-  /** 加速域名名称。 */
-  DomainName?: string;
-  /** 修改时间。 */
-  ModifiedOn?: string;
   /** 站点 ID。 */
   ZoneId?: string;
+  /** 加速域名名称。 */
+  DomainName?: string;
   /** 加速域名状态，取值有：online：已生效；process：部署中；offline：已停用；forbidden：已封禁；init：未生效，待激活站点； */
   DomainStatus?: string;
+  /** 源站信息。 */
+  OriginDetail?: OriginDetail | null;
   /** CNAME 地址。 */
   Cname?: string;
   /** 加速域名归属权验证状态，取值有： pending：待验证； finished：已完成验证。 */
   IdentificationStatus?: string | null;
+  /** 创建时间。 */
+  CreatedOn?: string;
+  /** 修改时间。 */
+  ModifiedOn?: string;
+  /** 当域名需要进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。 */
+  OwnershipVerification?: OwnershipVerification | null;
 }
 
 /** 精准防护条件 */
@@ -566,6 +568,16 @@ declare interface DiffIPWhitelist {
   NoChangeIPWhitelist: IPWhitelist;
 }
 
+/** CNAME 接入，使用 DNS 解析验证时所需的信息。 */
+declare interface DnsVerification {
+  /** 主机记录。 */
+  Subdomain?: string;
+  /** 记录类型。 */
+  RecordType?: string;
+  /** 记录值。 */
+  RecordValue?: string;
+}
+
 /** 拦截页面的总体配置，用于配置各个模块的拦截后行为。 */
 declare interface DropPageConfig {
   /** 配置开关，取值有：on：开启；off：关闭。 */
@@ -654,6 +666,14 @@ declare interface FileAscriptionInfo {
   IdentifyPath: string;
   /** 文件校验内容。 */
   IdentifyContent: string;
+}
+
+/** CNAME 接入，使用文件验证时所需的信息。 */
+declare interface FileVerification {
+  /** EdgeOne 后台服务器将通过 Scheme + Host + URL Path 的格式（例如 https://www.example.com/.well-known/teo-verification/z12h416twn.txt）获取文件验证信息。该字段为您需要创建的 URL Path 部分。 */
+  Path?: string;
+  /** 验证文件的内容。该字段的内容需要您填写至 Path 字段返回的 txt 文件中。 */
+  Content?: string;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等。若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -888,6 +908,12 @@ declare interface NormalAction {
   Parameters: RuleNormalActionParams[];
 }
 
+/** NS 接入，切换 DNS 服务器所需的信息。 */
+declare interface NsVerification {
+  /** NS 接入时，分配给用户的 DNS 服务器地址，需要将域名的 NameServer 切换至该地址。 */
+  NameServers?: string[];
+}
+
 /** 离线缓存是否开启 */
 declare interface OfflineCache {
   /** 离线缓存是否开启，取值有：on：开启；off：关闭。 */
@@ -998,6 +1024,16 @@ declare interface OriginRecord {
   Private?: boolean;
   /** 当源站类型Private=true时有效，表示私有鉴权使用参数。 */
   PrivateParameters?: PrivateParameter[];
+}
+
+/** 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。 */
+declare interface OwnershipVerification {
+  /** CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。 */
+  DnsVerification?: DnsVerification | null;
+  /** CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。 */
+  FileVerification?: FileVerification | null;
+  /** NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。 */
+  NsVerification?: NsVerification | null;
 }
 
 /** 例外规则的详细模块配置。 */
@@ -1654,46 +1690,48 @@ declare interface WebSocket {
 
 /** 站点信息 */
 declare interface Zone {
-  /** 站点ID。 */
-  ZoneId: string;
+  /** 站点 ID。 */
+  ZoneId?: string;
   /** 站点名称。 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 站点当前使用的 NS 列表。 */
-  OriginalNameServers: string[];
+  OriginalNameServers?: string[];
   /** 腾讯云分配的 NS 列表。 */
-  NameServers: string[];
-  /** 站点状态，取值有： active：NS 已切换； pending：NS 未切换； moved：NS 已切走； deactivated：被封禁。 */
-  Status: string;
-  /** 站点接入方式，取值有 full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入。 */
-  Type: string;
+  NameServers?: string[];
+  /** 站点状态，取值有： active：NS 已切换； pending：NS 未切换； moved：NS 已切走； deactivated：被封禁。 initializing：待绑定套餐。 */
+  Status?: string;
+  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入； vodeo：vodeo默认站点。 */
+  Type?: string;
   /** 站点是否关闭。 */
-  Paused: boolean;
+  Paused?: boolean;
   /** 是否开启 CNAME 加速，取值有： enabled：开启； disabled：关闭。 */
-  CnameSpeedUp: string;
+  CnameSpeedUp?: string;
   /** CNAME 接入状态，取值有： finished：站点已验证； pending：站点验证中。 */
-  CnameStatus: string;
+  CnameStatus?: string;
   /** 资源标签列表。 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** 计费资源列表。 */
-  Resources: Resource[];
+  Resources?: Resource[];
   /** 站点创建时间。 */
-  CreatedOn: string;
+  CreatedOn?: string;
   /** 站点修改时间。 */
-  ModifiedOn: string;
+  ModifiedOn?: string;
   /** 站点接入地域，取值有： global：全球； mainland：中国大陆； overseas：境外区域。 */
-  Area: string;
+  Area?: string;
   /** 用户自定义 NS 信息。 */
-  VanityNameServers: VanityNameServers | null;
+  VanityNameServers?: VanityNameServers | null;
   /** 用户自定义 NS IP 信息。 */
-  VanityNameServersIps: VanityNameServersIps[] | null;
+  VanityNameServersIps?: VanityNameServersIps[] | null;
   /** 展示状态，取值有： active：已启用； inactive：未生效； paused：已停用。 */
-  ActiveStatus: string;
+  ActiveStatus?: string;
   /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
-  AliasZoneName: string | null;
+  AliasZoneName?: string | null;
   /** 是否伪站点，取值有： 0：非伪站点； 1：伪站点。 */
-  IsFake: number;
-  /** 锁定状态，取值有： enable：正常，允许进行修改操作； disable：锁定中，不允许进行修改操作。 */
+  IsFake?: number;
+  /** 锁定状态，取值有： enable：正常，允许进行修改操作； disable：锁定中，不允许进行修改操作； plan_migrate：套餐迁移中，不允许进行修改操作。 */
   LockStatus?: string;
+  /** 归属权验证信息。 */
+  OwnershipVerification?: OwnershipVerification | null;
 }
 
 /** 站点配置。 */
@@ -1773,15 +1811,17 @@ declare interface CheckCnameStatusResponse {
 }
 
 declare interface CreateAccelerationDomainRequest {
-  /** 加速域名所属站点ID。 */
+  /** 加速域名所属站点 ID。 */
   ZoneId: string;
-  /** 加速域名名称。 */
+  /** 加速域名。 */
   DomainName: string;
   /** 源站信息。 */
   OriginInfo: OriginInfo;
 }
 
 declare interface CreateAccelerationDomainResponse {
+  /** 当您的站点未进行归属权验证时，您可通过该参数返回的信息单独对域名进行归属权校验。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。 */
+  OwnershipVerification?: OwnershipVerification | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1997,23 +2037,29 @@ declare interface CreateSharedCNAMEResponse {
 }
 
 declare interface CreateZoneRequest {
-  /** 站点名称。 */
-  ZoneName?: string;
-  /** 接入方式，取值有： full：NS接入； partial：CNAME接入，请先调用认证站点API（IdentifyZone）进行站点归属权校验，校验通过后继续调用本接口创建站点；noDomainAccess：无域名接入，取此值时仅Tags字段有效。不填写使用默认值full。 */
+  /** 站点接入类型。该参数取值如下，不填写时默认为 partial：partial：CNAME 接入； full：NS 接入；noDomainAccess：无域名接入。 */
   Type?: string;
-  /** 是否跳过站点现有的DNS记录扫描。默认值：false。 */
-  JumpStart?: boolean;
-  /** 资源标签。 */
+  /** 站点名称。CNAME/NS 接入的时，请传入二级域名（example.com）作为站点名称；无域名接入时，该值请保留为空。 */
+  ZoneName?: string;
+  /** Type 取值为 partial/full 时，七层域名的加速区域。以下为该参数取值，不填写时该值默认为 overseas。Type 取值为 noDomainAccess 时该值请保留为空： global: 全球可用区； mainland: 中国大陆可用区； overseas: 全球可用区（不含中国大陆）。 */
+  Area?: string;
+  /** 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，请前往控制台购买套餐完成站点创建。 */
+  PlanId?: string;
+  /** 同名站点标识。限制输入数字、英文、- 和 _ 组合，长度 20 个字符以内。详情参考 [同名站点标识]()，无此使用场景时，该字段保留为空即可。 */
+  AliasZoneName?: string;
+  /** 标签。该参数用于对站点进行分权限管控、分账。需要先前往 [标签控制台](https://console.cloud.tencent.com/tag/taglist) 创建对应的标签才可以在此处传入对应的标签键和标签值。 */
   Tags?: Tag[];
   /** 是否允许重复接入。 true：允许重复接入； false：不允许重复接入。不填写使用默认值false。 */
   AllowDuplicates?: boolean;
-  /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
-  AliasZoneName?: string;
+  /** 是否跳过站点现有的DNS记录扫描。默认值：false。 */
+  JumpStart?: boolean;
 }
 
 declare interface CreateZoneResponse {
-  /** 站点ID。 */
+  /** 站点 ID。 */
   ZoneId?: string;
+  /** 站点归属权验证信息。站点完成创建后，您还需要完成归属权校验，站点才能正常服务。Type = partial 时，您需要参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789) 前往您的域名解析服务商添加 TXT 记录或者前往根域名服务器添加文件，再调用接口 [VerifyOwnership]() 完成验证；Type = full 时，您需要参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452) 切换 DNS 服务器即可，可通过接口 [VerifyOwnership]() 查询 DNS 是否切换成功；Type = noDomainAccess 时，该值为空，不需要进行任何操作。 */
+  OwnershipVerification?: OwnershipVerification | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2117,26 +2163,26 @@ declare interface DeleteZoneResponse {
 }
 
 declare interface DescribeAccelerationDomainsRequest {
-  /** 加速域名所属站点ID。 */
+  /** 加速域名所属站点 ID。 */
   ZoneId: string;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：domain-name 按照【加速域名名称】进行过滤。 类型：String 必选：否origin-type 按照【源站类型】进行过滤。 类型：String 必选：否origin 按照【主源站地址】进行过滤。 类型：String 必选：否backup-origin 按照【备用源站地址】进行过滤。 类型：String 必选：否domain-cname 按照【加速CNAME名】进行过滤。 类型：String 必选：否share-cname 按照【共享CNAME名】进行过滤。 类型：String 必选：否 */
-  Filters?: AdvancedFilter[];
-  /** 列表排序方式，取值有：asc：升序排列；desc：降序排列。默认值为asc。 */
-  Direction?: string;
-  /** 匹配方式，取值有：all：返回匹配所有查询条件的加速域名；any：返回匹配任意一个查询条件的加速域名。默认值为all。 */
-  Match?: string;
-  /** 分页查询限制数目，默认值：20，上限：200。 */
-  Limit?: number;
   /** 分页查询偏移量，默认为 0。 */
   Offset?: number;
-  /** 排序依据，取值有：created_on：加速域名创建时间；domain-name：加速域名名称；默认根据domain-name属性排序。 */
+  /** 分页查询限制数目，默认值：20，上限：200。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有域名信息。详细的过滤条件如下：domain-name：按照加速域名进行过滤；origin-type：按照源站类型进行过滤；origin：按照主源站地址进行过滤；backup-origin： 按照备用源站地址进行过滤；domain-cname：按照 CNAME 进行过滤；share-cname：按照共享 CNAME 进行过滤； */
+  Filters?: AdvancedFilter[];
+  /** 可根据该字段对返回结果进行排序，取值有：created_on：加速域名创建时间；domain-name：加速域名。不填写时，默认对返回结果按照 domain-name 排序。 */
   Order?: string;
+  /** 排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ascill 码的大小排序。取值有：asc：升序排列；desc：降序排列。不填写使用默认值 asc。 */
+  Direction?: string;
+  /** 匹配方式，取值有：all：返回匹配所有查询条件的加速域名；any：返回匹配任意一个查询条件的加速域名。不填写时默认值为 all。 */
+  Match?: string;
 }
 
 declare interface DescribeAccelerationDomainsResponse {
-  /** 加速域名总数。 */
+  /** 符合查询条件的加速域名个数。 */
   TotalCount?: number;
-  /** 加速域名列表。 */
+  /** 符合查询条件的所有加速域名的信息。 */
   AccelerationDomains?: AccelerationDomain[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2639,21 +2685,21 @@ declare interface DescribeZoneSettingResponse {
 declare interface DescribeZonesRequest {
   /** 分页查询偏移量。默认值：0。 */
   Offset?: number;
-  /** 分页查询限制数目。默认值：20，最大值：1000。 */
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-name 按照【站点名称】进行过滤。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-xxx。 类型：String 必选：否status 按照【站点状态】进行过滤。 类型：String 必选：否tag-key 按照【标签键】进行过滤。 类型：String 必选：否tag-value 按照【标签值】进行过滤。 类型：String 必选：否模糊查询时仅支持过滤字段名为zone-name。 */
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-id：按照站点 ID进行过滤。站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤；tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤。模糊查询时仅支持过滤字段名为 zone-name。 */
   Filters?: AdvancedFilter[];
-  /** 排序字段，取值有： type：接入类型； area：加速区域； create-time：创建时间； zone-name：站点名称； use-time：最近使用时间； active-status：生效状态。不填写使用默认值create-time。 */
+  /** 可根据该字段对返回结果进行排序，取值有： type：接入类型； area：加速区域； create-time：创建时间； zone-name：站点名称； use-time：最近使用时间； active-status：生效状态。不填写时对返回结果默认按照 create-time 排序。 */
   Order?: string;
-  /** 排序方向，取值有： asc：从小到大排序； desc：从大到小排序。不填写使用默认值desc。 */
+  /** 排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ascill 码的大小排序。取值有： asc：从小到大排序； desc：从大到小排序。不填写使用默认值 desc。 */
   Direction?: string;
 }
 
 declare interface DescribeZonesResponse {
   /** 符合条件的站点个数。 */
-  TotalCount: number;
-  /** 站点详细信息列表。 */
-  Zones: Zone[];
+  TotalCount?: number;
+  /** 站点详细信息。 */
+  Zones?: Zone[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2871,11 +2917,13 @@ declare interface ModifyApplicationProxyStatusResponse {
 declare interface ModifyHostsCertificateRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 本次变更的域名列表。 */
+  /** 需要修改证书配置的加速域名。 */
   Hosts: string[];
-  /** 证书信息, 只需要传入 CertId 即可, 如果为空, 则使用默认证书。 */
+  /** 配置证书的模式，取值有：disable：不配置证书；eofreecert：配置 EdgeOne 免费证书；sslcert：配置 SSL 证书。不填时默认取值为 disable。 */
+  Mode?: string;
+  /** SSL 证书配置，本参数仅在 mode = sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。 */
   ServerCertInfo?: ServerCertInfo[];
-  /** 托管类型，取值有：apply：托管EO；none：不托管EO；不填，默认取值为none。 */
+  /** 托管类型，取值有：none：不托管EO；apply：托管EO不填，默认取值为none。 */
   ApplyType?: string;
 }
 
@@ -3373,7 +3421,7 @@ declare interface Teo {
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
   /** 查询站点配置 {@link DescribeZoneSettingRequest} {@link DescribeZoneSettingResponse} */
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
-  /** 查询用户站点信息列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
+  /** 查询站点列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 下载四层离线日志 {@link DownloadL4LogsRequest} {@link DownloadL4LogsResponse} */
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
@@ -3397,7 +3445,7 @@ declare interface Teo {
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
   /** 修改应用代理的状态 {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
-  /** 修改域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
+  /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;

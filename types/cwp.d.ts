@@ -338,6 +338,8 @@ declare interface AssetInitServiceBaseInfo {
   MachineWanIp?: string;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 开机自启动[0:否|1:是] */
+  IsAutoRun?: number;
 }
 
 /** 资产管理jar包列表 */
@@ -4531,7 +4533,7 @@ declare interface DescribeAssetInitServiceListRequest {
   Uuid?: string;
   /** 服务器Quuid */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户Status- string - 是否必填：否 - 默认启用状态：0未启用， 1启用 仅linuxType- string - 是否必填：否 - 类型：类型 仅windows：1:编码器2:IE插件3:网络提供者4:镜像劫持5:LSA提供者6:KnownDLLs7:启动执行8:WMI9:计划任务10:Winsock提供者11:打印监控器12:资源管理器13:驱动服务14:登录 */
+  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户IsAutoRun - string - 是否必填：否 - 是否开机自启动：0否，1是Status- string - 是否必填：否 - 默认启用状态：0未启用， 1启用 仅linuxType- string - 是否必填：否 - 类型：类型 仅windows：1:编码器2:IE插件3:网络提供者4:镜像劫持5:LSA提供者6:KnownDLLs7:启动执行8:WMI9:计划任务10:Winsock提供者11:打印监控器12:资源管理器13:驱动服务14:登录 */
   Filters?: AssetFilters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -4545,9 +4547,9 @@ declare interface DescribeAssetInitServiceListRequest {
 
 declare interface DescribeAssetInitServiceListResponse {
   /** 列表 */
-  Services: AssetInitServiceBaseInfo[] | null;
+  Services?: AssetInitServiceBaseInfo[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

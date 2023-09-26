@@ -71,37 +71,39 @@ declare interface BetaInfoByACL {
 /** 入侵防御放通封禁规则 */
 declare interface BlockIgnoreRule {
   /** 域名 */
-  Domain: string | null;
+  Domain?: string | null;
+  /** IP */
+  IP?: string | null;
   /** 规则ip */
-  Ioc: string | null;
+  Ioc?: string | null;
   /** 危险等级 */
-  Level: string | null;
+  Level?: string | null;
   /** 来源事件名称 */
-  EventName: string | null;
+  EventName?: string | null;
   /** 方向：1入站，0出站 */
-  Direction: number | null;
+  Direction?: number | null;
   /** 协议 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 地理位置 */
-  Address: string | null;
+  Address?: string | null;
   /** 规则类型：1封禁，2放通 */
-  Action: number | null;
+  Action?: number | null;
   /** 规则生效开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 规则生效结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 忽略原因 */
-  IgnoreReason: string | null;
+  IgnoreReason?: string | null;
   /** 安全事件来源 */
-  Source: string | null;
+  Source?: string | null;
   /** 规则id */
-  UniqueId: string | null;
+  UniqueId?: string | null;
   /** 规则命中次数 */
-  MatchTimes: number | null;
+  MatchTimes?: number | null;
   /** 国家 */
-  Country: string | null;
+  Country?: string | null;
   /** 备注 */
-  Comment: string | null;
+  Comment?: string | null;
 }
 
 /** NAT防火墙Dnat规则 */
@@ -330,6 +332,8 @@ declare interface EdgeIpInfo {
   EndpointIp?: string | null;
   /** 0 : 旁路1 : 串行2 : 正在模式切换 */
   SwitchMode?: number;
+  /** 开关权重 */
+  SwitchWeight?: number | null;
 }
 
 /** 开启、关闭 防火墙互联网边界开关 */
@@ -588,6 +592,8 @@ declare interface NatInstanceInfo {
   EngineVersion?: string | null;
   /** 引擎是否可升级：0，不可升级；1，可升级 */
   UpdateEnable?: number | null;
+  /** 是的需要升级引擎 支持 nat拨测 1需要 0不需要 */
+  NeedProbeEngineUpdate?: number | null;
 }
 
 /** NAT防火墙开关列表数据 */
@@ -1355,6 +1361,8 @@ declare interface CreateBlockIgnoreRuleListRequest {
   Rules: IntrusionDefenseRule[];
   /** 规则类型，1封禁，2放通，不支持域名封禁 */
   RuleType: number;
+  /** 是否覆盖重复数据，1覆盖，非1不覆盖，跳过重复数据 */
+  CoverDuplicate?: number;
 }
 
 declare interface CreateBlockIgnoreRuleListResponse {
@@ -2669,10 +2677,14 @@ declare interface ModifyEWRuleStatusResponse {
 }
 
 declare interface ModifyEdgeIpSwitchRequest {
-  /** 0 关闭开关1 打开开关 */
-  Enable: number;
+  /** 0 关闭开关1 打开开关2 不操作开关，此次切换模式 */
+  Enable?: number;
   /** 操作开关详情 */
   EdgeIpSwitchLst?: EdgeIpSwitch[];
+  /** 0 不自动选择子网1 自动选择子网创建私有连接 */
+  AutoChooseSubnet?: number;
+  /** 0 切换为旁路1 切换为串行2 不切换模式，此次操作开关 */
+  SwitchMode?: number;
 }
 
 declare interface ModifyEdgeIpSwitchResponse {
@@ -3280,7 +3292,7 @@ declare interface Cfw {
   /** 启用停用VPC间规则或Nat边界规则 {@link ModifyEWRuleStatusRequest} {@link ModifyEWRuleStatusResponse} */
   ModifyEWRuleStatus(data: ModifyEWRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEWRuleStatusResponse>;
   /** 修改边界防火墙开关(旁路、串行) {@link ModifyEdgeIpSwitchRequest} {@link ModifyEdgeIpSwitchResponse} */
-  ModifyEdgeIpSwitch(data: ModifyEdgeIpSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeIpSwitchResponse>;
+  ModifyEdgeIpSwitch(data?: ModifyEdgeIpSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeIpSwitchResponse>;
   /** 修改企业安全组下发状态 {@link ModifyEnterpriseSecurityDispatchStatusRequest} {@link ModifyEnterpriseSecurityDispatchStatusResponse} */
   ModifyEnterpriseSecurityDispatchStatus(data: ModifyEnterpriseSecurityDispatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnterpriseSecurityDispatchStatusResponse>;
   /** 编辑新企业安全组规则 {@link ModifyEnterpriseSecurityGroupRuleRequest} {@link ModifyEnterpriseSecurityGroupRuleResponse} */

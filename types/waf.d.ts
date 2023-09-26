@@ -138,20 +138,22 @@ declare interface BatchIpAccessControlData {
 
 /** 多域名黑白名单列表Ip */
 declare interface BatchIpAccessControlItem {
+  /** mongo表自增Id */
+  Id?: string | null;
   /** 黑名单42或白名单40 */
-  ActionType: number;
+  ActionType?: number;
   /** 黑白名单的IP */
-  Ip: string;
+  Ip?: string;
   /** 备注 */
-  Note: string;
+  Note?: string;
   /** 添加路径 */
-  Source: string;
+  Source?: string;
   /** 修改时间 */
-  TsVersion: number;
+  TsVersion?: number;
   /** 超时时间 */
-  ValidTs: number;
+  ValidTs?: number;
   /** 域名列表 */
-  Hosts: string[];
+  Hosts?: string[];
 }
 
 /** Bot资源信息 */
@@ -792,6 +794,26 @@ declare interface HostStatus {
   InstanceID?: string;
 }
 
+/** 混合云节点资源信息 */
+declare interface HybridPkg {
+  /** 资源id */
+  ResourceIds?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 地域 */
+  Region?: number | null;
+  /** 开始时间 */
+  BeginTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 申请数量 */
+  InquireNum?: number | null;
+  /** 使用数量 */
+  UsedNum?: number | null;
+  /** 续费标志 */
+  RenewFlag?: number | null;
+}
+
 /** 一个实例的详细信息 */
 declare interface InstanceInfo {
   /** id */
@@ -856,6 +878,10 @@ declare interface InstanceInfo {
   SandboxQps?: number | null;
   /** 是否api 安全试用 */
   IsAPISecurityTrial?: number | null;
+  /** 重保包 */
+  MajorEventsPkg?: MajorEventsPkg | null;
+  /** 混合云子节点包 */
+  HybridPkg?: HybridPkg | null;
 }
 
 /** 数据封装 */
@@ -868,18 +894,22 @@ declare interface IpAccessControlData {
 
 /** ip黑白名单 */
 declare interface IpAccessControlItem {
+  /** mongo表自增Id */
+  Id?: string | null;
   /** 动作 */
-  ActionType: number;
+  ActionType?: number;
   /** ip */
-  Ip: string;
+  Ip?: string;
   /** 备注 */
-  Note: string;
+  Note?: string;
   /** 来源 */
-  Source: string;
+  Source?: string;
   /** 更新时间戳 */
-  TsVersion: number | null;
+  TsVersion?: number | null;
   /** 有效截止时间戳 */
-  ValidTs: number;
+  ValidTs?: number;
+  /** 生效状态 */
+  ValidStatus?: number | null;
 }
 
 /** ip封堵状态数据 */
@@ -970,6 +1000,30 @@ declare interface LogHistogramInfo {
   TimeStamp: number;
 }
 
+/** 重保防护资源信息 */
+declare interface MajorEventsPkg {
+  /** 资源id */
+  ResourceIds?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 地域 */
+  Region?: number | null;
+  /** 开始时间 */
+  BeginTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 申请数量 */
+  InquireNum?: number | null;
+  /** 使用数量 */
+  UsedNum?: number | null;
+  /** 续费标志 */
+  RenewFlag?: number | null;
+  /** 计费项 */
+  BillingItem?: string | null;
+  /** 护网包状态 */
+  HWState?: number | null;
+}
+
 /** 公共翻页参数 */
 declare interface PageInfo {
   /** 页码 */
@@ -981,33 +1035,41 @@ declare interface PageInfo {
 /** PeakPoints数组项 */
 declare interface PeakPointsItem {
   /** 秒级别时间戳 */
-  Time: number;
+  Time?: number;
   /** QPS */
-  Access: number;
+  Access?: number;
   /** 上行带宽峰值，单位B */
-  Up: number;
+  Up?: number;
   /** 下行带宽峰值，单位B */
-  Down: number;
+  Down?: number;
   /** Web攻击次数 */
-  Attack: number;
+  Attack?: number;
   /** CC攻击次数 */
-  Cc: number;
+  Cc?: number;
   /** Bot qps */
-  BotAccess: number;
-  /** WAF返回给客户端状态码次数 */
-  StatusServerError: number | null;
-  /** WAF返回给客户端状态码次数 */
-  StatusClientError: number | null;
-  /** WAF返回给客户端状态码次数 */
-  StatusRedirect: number | null;
-  /** WAF返回给客户端状态码次数 */
-  StatusOk: number | null;
-  /** 源站返回给WAF状态码次数 */
-  UpstreamServerError: number | null;
-  /** 源站返回给WAF状态码次数 */
-  UpstreamClientError: number | null;
-  /** 源站返回给WAF状态码次数 */
-  UpstreamRedirect: number | null;
+  BotAccess?: number;
+  /** WAF返回给客户端状态码5xx次数 */
+  StatusServerError?: number | null;
+  /** WAF返回给客户端状态码4xx次数 */
+  StatusClientError?: number | null;
+  /** WAF返回给客户端状态码302次数 */
+  StatusRedirect?: number | null;
+  /** WAF返回给客户端状态码202次数 */
+  StatusOk?: number | null;
+  /** 源站返回给WAF状态码5xx次数 */
+  UpstreamServerError?: number | null;
+  /** 源站返回给WAF状态码4xx次数 */
+  UpstreamClientError?: number | null;
+  /** 源站返回给WAF状态码302次数 */
+  UpstreamRedirect?: number | null;
+  /** 黑名单次数 */
+  BlackIP?: number | null;
+  /** 防篡改次数 */
+  Tamper?: number | null;
+  /** 信息防泄露次数 */
+  Leak?: number | null;
+  /** 访问控制 */
+  ACL?: number | null;
 }
 
 /** 服务端口配置 */
@@ -1272,6 +1334,8 @@ declare interface AddAntiFakeUrlRequest {
 declare interface AddAntiFakeUrlResponse {
   /** 结果 */
   Result?: string;
+  /** 规则ID */
+  Id?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1279,9 +1343,9 @@ declare interface AddAntiFakeUrlResponse {
 declare interface AddAntiInfoLeakRulesRequest {
   /** 域名 */
   Domain: string;
-  /** 名称 */
+  /** 规则名称 */
   Name: string;
-  /** 动作 */
+  /** 动作，0（告警）、1（替换）、2（仅显示前四位）、3（仅显示后四位）、4（阻断） */
   ActionType: number;
   /** 策略详情 */
   Strategies: StrategyForAntiInfoLeak[];
@@ -1290,6 +1354,8 @@ declare interface AddAntiInfoLeakRulesRequest {
 }
 
 declare interface AddAntiInfoLeakRulesResponse {
+  /** 规则ID */
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1537,11 +1603,15 @@ declare interface DeleteCCRuleRequest {
   Name: string;
   /** clb-waf或者sparta-waf */
   Edition?: string;
+  /** 规则Id */
+  RuleId?: number;
 }
 
 declare interface DeleteCCRuleResponse {
   /** 一般为null */
   Data?: string | null;
+  /** 操作的规则Id */
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1615,6 +1685,8 @@ declare interface DeleteIpAccessControlRequest {
   Domain: string;
   /** 删除的ip数组 */
   Items: string[];
+  /** 若IsId字段为True，则Items列表元素需为Id，否则为IP */
+  IsId?: boolean;
   /** 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单 */
   DeleteAll?: boolean;
   /** 是否为多域名黑白名单 */
@@ -1635,11 +1707,13 @@ declare interface DeleteSessionRequest {
   Domain: string;
   /** clb-waf 或者 sprta-waf */
   Edition?: string;
+  /** 要删除的SessionID */
+  SessionID?: number;
 }
 
 declare interface DeleteSessionResponse {
   /** 结果 */
-  Data: string | null;
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1687,6 +1761,10 @@ declare interface DescribeAccessFastAnalysisRequest {
   Query: string;
   /** 需要分析统计的字段名 */
   FieldName: string;
+  /** 排序字段,升序asc,降序desc，默认降序desc */
+  Sort?: string;
+  /** 返回的top数，默认返回top5 */
+  Count?: number;
 }
 
 declare interface DescribeAccessFastAnalysisResponse {
@@ -1832,6 +1910,12 @@ declare interface DescribeAttackOverviewResponse {
   ApiAssetsCount?: number;
   /** api风险事件数量 */
   ApiRiskEventCount?: number | null;
+  /** 黑名单总数 */
+  IPBlackCount?: number | null;
+  /** 防篡改总数 */
+  TamperCount?: number | null;
+  /** 信息泄露总数 */
+  LeakCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2221,6 +2305,8 @@ declare interface DescribeIpAccessControlRequest {
   Sort?: string;
   /** ip */
   Ip?: string;
+  /** 生效状态 */
+  ValidStatus?: number;
 }
 
 declare interface DescribeIpAccessControlResponse {
@@ -2275,13 +2361,13 @@ declare interface DescribePeakPointsRequest {
   Edition?: string;
   /** WAF实例ID，不传则不过滤 */
   InstanceID?: string;
-  /** 十三个值可选：access-峰值qps趋势图botAccess- bot峰值qps趋势图down-下行峰值带宽趋势图up-上行峰值带宽趋势图attack-Web攻击总数趋势图cc-CC攻击总数趋势图StatusServerError-WAF返回给客户端状态码次数趋势图StatusClientError-WAF返回给客户端状态码次数趋势图StatusRedirect-WAF返回给客户端状态码次数趋势图StatusOk-WAF返回给客户端状态码次数趋势图UpstreamServerError-源站返回给WAF状态码次数趋势图UpstreamClientError-源站返回给WAF状态码次数趋势图UpstreamRedirect-源站返回给WAF状态码次数趋势图 */
+  /** 十一个值可选：access-峰值qps趋势图botAccess- bot峰值qps趋势图down-下行峰值带宽趋势图up-上行峰值带宽趋势图attack-Web攻击总数趋势图cc-CC攻击总数趋势图bw-黑IP攻击总数趋势图tamper-防篡改攻击总数趋势图leak-防泄露攻击总数趋势图acl-访问控制攻击总数趋势图http_status-状态码各次数趋势图 */
   MetricName?: string;
 }
 
 declare interface DescribePeakPointsResponse {
   /** 数据点 */
-  Points: PeakPointsItem[];
+  Points?: PeakPointsItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2351,11 +2437,13 @@ declare interface DescribePortsResponse {
 declare interface DescribeRuleLimitRequest {
   /** 域名 */
   Domain: string;
+  /** 实例Id */
+  InstanceId?: string;
 }
 
 declare interface DescribeRuleLimitResponse {
   /** waf模块的规格 */
-  Res: WafRuleLimit;
+  Res?: WafRuleLimit;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2429,17 +2517,21 @@ declare interface DescribeVipInfoResponse {
 declare interface DescribeWafAutoDenyRulesRequest {
   /** 域名 */
   Domain: string;
+  /** 实例Id */
+  InstanceId?: string;
 }
 
 declare interface DescribeWafAutoDenyRulesResponse {
   /** 攻击次数阈值 */
-  AttackThreshold: number;
+  AttackThreshold?: number;
   /** 攻击时间阈值 */
-  TimeThreshold: number;
+  TimeThreshold?: number;
   /** 自动封禁时间 */
-  DenyTimeThreshold: number;
+  DenyTimeThreshold?: number;
   /** 自动封禁状态 */
-  DefenseStatus: number;
+  DefenseStatus?: number;
+  /** 重保护网域名状态 */
+  HWState?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3273,11 +3365,17 @@ declare interface UpsertCCRuleRequest {
   Type?: number;
   /** 添加规则的来源事件id */
   EventId?: string;
+  /** 规则需要启用的SessionID */
+  SessionApplied?: number[];
+  /** 规则ID，新增时填0 */
+  RuleId?: number;
 }
 
 declare interface UpsertCCRuleResponse {
   /** 一般为null */
-  Data: string | null;
+  Data?: string | null;
+  /** 操作的RuleId */
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3287,6 +3385,8 @@ declare interface UpsertIpAccessControlRequest {
   Domain: string;
   /** ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
   Items: string[];
+  /** 实例Id */
+  InstanceId?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
   /** 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空 */
@@ -3319,6 +3419,10 @@ declare interface UpsertSessionRequest {
   EndOffset: string;
   /** 版本 */
   Edition?: string;
+  /** Session名 */
+  SessionName?: string;
+  /** Session对应ID */
+  SessionID?: number;
 }
 
 declare interface UpsertSessionResponse {
