@@ -2045,7 +2045,7 @@ declare interface CreateZoneRequest {
   Area?: string;
   /** 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，请前往控制台购买套餐完成站点创建。 */
   PlanId?: string;
-  /** 同名站点标识。限制输入数字、英文、- 和 _ 组合，长度 20 个字符以内。详情参考 [同名站点标识]()，无此使用场景时，该字段保留为空即可。 */
+  /** 同名站点标识。限制输入数字、英文、- 和 _ 组合，长度 20 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。 */
   AliasZoneName?: string;
   /** 标签。该参数用于对站点进行分权限管控、分账。需要先前往 [标签控制台](https://console.cloud.tencent.com/tag/taglist) 创建对应的标签才可以在此处传入对应的标签键和标签值。 */
   Tags?: Tag[];
@@ -3088,6 +3088,20 @@ declare interface ModifyZoneStatusResponse {
   RequestId?: string;
 }
 
+declare interface VerifyOwnershipRequest {
+  /** 站点或者加速域名。 */
+  Domain: string;
+}
+
+declare interface VerifyOwnershipResponse {
+  /** 归属权验证结果。success：验证成功；fail：验证失败。 */
+  Status?: string;
+  /** 当验证结果为不通过时，该字段会返回原因，协助您排查问题。 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare namespace V20220106 {
   type VersionHeader = { headers: { 'X-TC-Version': '2022-01-06' } }
 
@@ -3461,6 +3475,8 @@ declare interface Teo {
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
   /** 切换站点状态 {@link ModifyZoneStatusRequest} {@link ModifyZoneStatusResponse} */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
+  /** 验证归属权 {@link VerifyOwnershipRequest} {@link VerifyOwnershipResponse} */
+  VerifyOwnership(data: VerifyOwnershipRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOwnershipResponse>;
   /** 创建预热任务 {@link V20220106.CreatePrefetchTaskRequest} {@link V20220106.CreatePrefetchTaskResponse} */
   CreatePrefetchTask(data: V20220106.CreatePrefetchTaskRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePrefetchTaskResponse>;
   /** 创建清除缓存任务 {@link V20220106.CreatePurgeTaskRequest} {@link V20220106.CreatePurgeTaskResponse} */

@@ -24,10 +24,22 @@ declare interface ApproverComponentLimitType {
   Values?: string[];
 }
 
+/** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
+declare interface ApproverItem {
+  /** 签署方唯一编号 */
+  SignId?: string | null;
+  /** 签署方角色编号 */
+  RecipientId?: string | null;
+  /** 签署方角色名称 */
+  ApproverRoleName?: string | null;
+}
+
 /** 签署人个性化能力信息 */
 declare interface ApproverOption {
   /** 是否隐藏一键签署 默认false-不隐藏true-隐藏 */
   HideOneKeySign?: boolean;
+  /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息） */
+  FillType?: number;
 }
 
 /** 指定签署人限制项 */
@@ -336,6 +348,8 @@ declare interface FlowApproverDetail {
   ApproveTime?: number;
   /** 参与者类型 ORGANIZATION：企业签署人PERSON：个人签署人 */
   ApproveType?: string | null;
+  /** 自定义签署人角色 */
+  ApproverRoleName?: string | null;
 }
 
 /** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。 */
@@ -386,6 +400,16 @@ declare interface FlowApproverInfo {
   NotifyType?: string;
   /** [通过文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID）或签名方式。注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。` */
   AddSignComponentsLimits?: ComponentLimit[];
+  /** 自定义签署方角色名称 */
+  ApproverRoleName?: string;
+}
+
+/** 签署方信息，如角色ID、角色名称等 */
+declare interface FlowApproverItem {
+  /** 合同编号 */
+  FlowId?: string | null;
+  /** 签署方信息，如角色ID、角色名称等 */
+  Approvers?: ApproverItem[] | null;
 }
 
 /** 签署人签署链接信息 */
@@ -784,6 +808,8 @@ declare interface SignUrlInfo {
   OpenId?: string | null;
   /** 合同组签署链接对应的合同组id */
   FlowGroupId?: string | null;
+  /** 二维码，在生成动态签署人跳转封面页链接时返回 */
+  SignQrcodeUrl?: string | null;
 }
 
 /** 企业员工信息 */
@@ -1152,6 +1178,8 @@ declare interface ChannelCreateFlowByFilesRequest {
 declare interface ChannelCreateFlowByFilesResponse {
   /** 合同签署流程ID */
   FlowId?: string | null;
+  /** 签署方信息，如角色ID、角色名称等 */
+  Approvers?: ApproverItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1844,6 +1872,8 @@ declare interface CreateFlowsByTemplatesResponse {
   PreviewUrls?: string[];
   /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
   TaskInfos?: TaskInfo[];
+  /** 签署方信息，如角色ID、角色名称等 */
+  FlowApprovers?: FlowApproverItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1907,6 +1937,8 @@ declare interface CreateSignUrlsRequest {
   Operator?: UserInfo;
   /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下- 0:合同签署页面更多操作按钮- 1:合同签署页面更多操作的拒绝签署按钮- 2:合同签署页面更多操作的转他人处理按钮- 3:签署成功页的查看详情按钮 */
   Hides?: number[];
+  /** 签署节点ID，用于补充动态签署人，使用此参数需要与flow_ids数量一致 */
+  RecipientIds?: string[];
 }
 
 declare interface CreateSignUrlsResponse {
@@ -2079,6 +2111,8 @@ declare interface ModifyExtendedServiceRequest {
   ServiceType: string;
   /** 操作类型 OPEN:开通 CLOSE:关闭 */
   Operate: string;
+  /** 链接跳转类型，支持以下类型WEIXINAPP : 短链直接跳转到电子签小程序 (默认值)APP : 第三方APP或小程序跳转电子签小程序 */
+  Endpoint?: string;
 }
 
 declare interface ModifyExtendedServiceResponse {

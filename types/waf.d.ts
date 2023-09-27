@@ -176,6 +176,10 @@ declare interface BotPkg {
   Type?: string | null;
   /** 续费标志 */
   RenewFlag?: number | null;
+  /** 购买页bot6折 */
+  BotCPWaf?: number | null;
+  /** 控制台买bot5折 */
+  BotNPWaf?: number | null;
 }
 
 /** bot的qps详情 */

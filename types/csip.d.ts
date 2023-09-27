@@ -778,7 +778,7 @@ declare interface ScanTaskInfoList {
   StartTime?: string | null;
   /** 任务结束时间 */
   EndTime?: string | null;
-  /** corn */
+  /** cron格式 */
   ScanPlanContent?: string | null;
   /** 0-周期任务,1-立即扫描,2-定时扫描,3-自定义 */
   TaskType?: number | null;
@@ -796,7 +796,7 @@ declare interface ScanTaskInfoList {
   ReportNumber?: number | null;
   /** 资产数量 */
   AssetNumber?: number | null;
-  /** 扫描状态 0 初始值 1正在扫描 2扫描完成 3扫描出错 */
+  /** 扫描状态, 0-初始值，1-正在扫描，2-扫描完成，3-扫描出错，4-停止扫描 */
   ScanStatus?: number | null;
   /** 任务进度 */
   Percent?: number | null;
@@ -850,6 +850,8 @@ declare interface ScanTaskInfoList {
   IsFree?: number | null;
   /** 是否可以删除，1-可以，0-不可以，对应多账户管理使用 */
   IsDelete?: number | null;
+  /** 任务源类型，0-默认，1-小助手，2-体检项 */
+  SourceType?: number | null;
 }
 
 /** 服务风险 */
@@ -986,6 +988,8 @@ declare interface TaskAssetObject {
   Asset?: string;
   /** 地域 */
   Region?: string | null;
+  /** 多云资产唯一id */
+  Arn?: string | null;
 }
 
 /** 配置风险高级配置 */
@@ -1017,7 +1021,7 @@ declare interface TaskCenterWeakPwdRiskInputParam {
 /** 任务ID列表Key */
 declare interface TaskIdListKey {
   /** 任务ID */
-  TaskId: string | null;
+  TaskId: string;
 }
 
 /** 任务报告信息 */
@@ -1368,6 +1372,8 @@ declare interface DescribeDbAssetInfoResponse {
 declare interface DescribeDbAssetsRequest {
   /** - */
   Filter?: Filter;
+  /** 资产类型:MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS */
+  AssetTypes?: string[];
 }
 
 declare interface DescribeDbAssetsResponse {
@@ -1742,7 +1748,7 @@ declare interface Csip {
   DescribeClusterPodAssets(data?: DescribeClusterPodAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPodAssetsResponse>;
   /** db资产详情 {@link DescribeDbAssetInfoRequest} {@link DescribeDbAssetInfoResponse} */
   DescribeDbAssetInfo(data: DescribeDbAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetInfoResponse>;
-  /** 资产列表 {@link DescribeDbAssetsRequest} {@link DescribeDbAssetsResponse} */
+  /** 数据库资产列表 {@link DescribeDbAssetsRequest} {@link DescribeDbAssetsResponse} */
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;

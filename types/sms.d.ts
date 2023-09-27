@@ -39,9 +39,9 @@ declare interface CallbackStatusStatistics {
 /** 删除签名响应 */
 declare interface DeleteSignStatus {
   /** 删除状态信息。 */
-  DeleteStatus: string;
+  DeleteStatus: string | null;
   /** 删除时间，UNIX 时间戳（单位：秒）。 */
-  DeleteTime: number;
+  DeleteTime: number | null;
 }
 
 /** 删除模板响应 */
@@ -55,24 +55,24 @@ declare interface DeleteTemplateStatus {
 /** 获取短信签名信息响应 */
 declare interface DescribeSignListStatus {
   /** 签名ID。 */
-  SignId: number;
+  SignId?: number;
   /** 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信。 */
-  International: number;
+  International?: number;
   /** 申请签名状态，其中0表示审核通过，1表示审核中。-1：表示审核未通过或审核失败。 */
-  StatusCode: number;
+  StatusCode?: number;
   /** 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。 */
-  ReviewReply: string;
+  ReviewReply?: string;
   /** 签名名称。 */
-  SignName: string;
+  SignName?: string;
   /** 提交审核时间，UNIX 时间戳（单位：秒）。 */
-  CreateTime: number;
+  CreateTime?: number;
 }
 
 /** 获取短信模板信息响应 */
 declare interface DescribeTemplateListStatus {
   /** 模板ID。 */
   TemplateId?: number;
-  /** 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信。 */
+  /** 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信，3表示该模板既支持国内短信也支持国际/港澳台短信。 */
   International?: number;
   /** 申请模板状态，其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。注：只有状态值为0时该模板才能使用。 */
   StatusCode?: number;
@@ -229,7 +229,7 @@ declare interface AddSmsSignRequest {
 
 declare interface AddSmsSignResponse {
   /** 添加签名响应 */
-  AddSignStatus: AddSignStatus;
+  AddSignStatus?: AddSignStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -249,7 +249,7 @@ declare interface AddSmsTemplateRequest {
 
 declare interface AddSmsTemplateResponse {
   /** 添加短信模板响应包体 */
-  AddTemplateStatus: AddTemplateStatus;
+  AddTemplateStatus?: AddTemplateStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -269,7 +269,7 @@ declare interface CallbackStatusStatisticsRequest {
 
 declare interface CallbackStatusStatisticsResponse {
   /** 回执数据统计响应包体。 */
-  CallbackStatusStatistics: CallbackStatusStatistics;
+  CallbackStatusStatistics?: CallbackStatusStatistics;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -281,7 +281,7 @@ declare interface DeleteSmsSignRequest {
 
 declare interface DeleteSmsSignResponse {
   /** 删除签名响应 */
-  DeleteSignStatus: DeleteSignStatus;
+  DeleteSignStatus?: DeleteSignStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -293,7 +293,7 @@ declare interface DeleteSmsTemplateRequest {
 
 declare interface DeleteSmsTemplateResponse {
   /** 删除模板响应 */
-  DeleteTemplateStatus: DeleteTemplateStatus;
+  DeleteTemplateStatus?: DeleteTemplateStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -319,7 +319,7 @@ declare interface DescribeSmsSignListRequest {
 
 declare interface DescribeSmsSignListResponse {
   /** 获取签名信息响应 */
-  DescribeSignListStatusSet: DescribeSignListStatus[];
+  DescribeSignListStatusSet?: DescribeSignListStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -337,7 +337,7 @@ declare interface DescribeSmsTemplateListRequest {
 
 declare interface DescribeSmsTemplateListResponse {
   /** 获取短信模板信息响应 */
-  DescribeTemplateStatusSet: DescribeTemplateListStatus[];
+  DescribeTemplateStatusSet?: DescribeTemplateListStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -387,7 +387,7 @@ declare interface ModifySmsTemplateRequest {
 
 declare interface ModifySmsTemplateResponse {
   /** 修改模板参数响应 */
-  ModifyTemplateStatus: ModifyTemplateStatus;
+  ModifyTemplateStatus?: ModifyTemplateStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -409,7 +409,7 @@ declare interface PullSmsReplyStatusByPhoneNumberRequest {
 
 declare interface PullSmsReplyStatusByPhoneNumberResponse {
   /** 回复状态响应集合。 */
-  PullSmsReplyStatusSet: PullSmsReplyStatus[];
+  PullSmsReplyStatusSet?: PullSmsReplyStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -423,7 +423,7 @@ declare interface PullSmsReplyStatusRequest {
 
 declare interface PullSmsReplyStatusResponse {
   /** 回复状态响应集合。 */
-  PullSmsReplyStatusSet: PullSmsReplyStatus[];
+  PullSmsReplyStatusSet?: PullSmsReplyStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -445,7 +445,7 @@ declare interface PullSmsSendStatusByPhoneNumberRequest {
 
 declare interface PullSmsSendStatusByPhoneNumberResponse {
   /** 下发状态响应集合。 */
-  PullSmsSendStatusSet: PullSmsSendStatus[];
+  PullSmsSendStatusSet?: PullSmsSendStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -459,7 +459,7 @@ declare interface PullSmsSendStatusRequest {
 
 declare interface PullSmsSendStatusResponse {
   /** 下发状态响应集合。 */
-  PullSmsSendStatusSet: PullSmsSendStatus[];
+  PullSmsSendStatusSet?: PullSmsSendStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -475,7 +475,7 @@ declare interface ReportConversionRequest {
 
 declare interface ReportConversionResponse {
   /** 转化率上报响应包体。 */
-  ReportConversionStatus: ReportConversionStatus;
+  ReportConversionStatus?: ReportConversionStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -521,7 +521,7 @@ declare interface SendStatusStatisticsRequest {
 
 declare interface SendStatusStatisticsResponse {
   /** 发送数据统计响应包体。 */
-  SendStatusStatistics: SendStatusStatistics;
+  SendStatusStatistics?: SendStatusStatistics;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

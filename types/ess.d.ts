@@ -50,6 +50,8 @@ declare interface ApproverInfo {
   NotifyType?: string;
   /** 收据场景设置签署人角色类型, 可以设置如下****类型****: **1** :收款人 **2** :开具人 **3** :见证人注: `收据场景为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverRole?: number;
+  /** 自定义签署人角色名：收款人、开具人、见证人 */
+  ApproverRoleName?: string;
   /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 将要废弃, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
   VerifyChannel?: string[];
   /** 签署方在签署合同之前，需要强制阅读合同的时长，可指定为3秒至300秒之间的任意值。若未指定阅读时间，则会按照合同页数大小计算阅读时间，计算规则如下：合同页数少于等于2页，阅读时间为3秒；合同页数为3到5页，阅读时间为5秒；合同页数大于等于6页，阅读时间为10秒。 */
@@ -72,12 +74,24 @@ declare interface ApproverInfo {
   AddSignComponentsLimits?: ComponentLimit[];
 }
 
+/** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
+declare interface ApproverItem {
+  /** 签署方唯一编号 */
+  SignId?: string | null;
+  /** 签署方角色编号 */
+  RecipientId?: string | null;
+  /** 签署方角色名称 */
+  ApproverRoleName?: string | null;
+}
+
 /** 签署人个性化能力信息 */
 declare interface ApproverOption {
   /** 签署方是否可以拒签 **false** : ( 默认)可以拒签 **true** :不可以拒签 */
   NoRefuse?: boolean;
   /** 签署方是否可以转他人处理 **false** : ( 默认)可以转他人处理 **true** :不可以转他人处理 */
   NoTransfer?: boolean;
+  /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息） */
+  FillType?: number;
 }
 
 /** 指定签署人限制项 */
@@ -364,6 +378,8 @@ declare interface FillApproverInfo {
   ApproverName?: string;
   /** 补充企业签署人员工手机号 */
   ApproverMobile?: string;
+  /** 补充企业动态签署人时，需要指定对应企业名称 */
+  OrganizationName?: string;
 }
 
 /** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
@@ -420,6 +436,8 @@ declare interface FlowApproverDetail {
   OrganizationName?: string | null;
   /** 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。 */
   SignId?: string | null;
+  /** 自定义签署人角色 */
+  ApproverRoleName?: string | null;
 }
 
 /** 签署链接信息 */
@@ -1073,9 +1091,9 @@ declare interface BindEmployeeUserIdWithClientOpenIdResponse {
 declare interface CancelFlowRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 合同流程ID, 为32位字符串。建议开发者保存此流程ID方便后续其他操作。 */
+  /** 合同流程ID, 为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 撤销此合同(流程)的原因，最长200个字。 */
+  /** 撤销此合同流程的原因，最多支持200个字符长度。只能由中文、字母、数字、中文标点和英文标点组成（不支持表情）。 */
   CancelMessage: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -1218,6 +1236,8 @@ declare interface CreateDocumentResponse {
   DocumentId?: string;
   /** 合同预览链接URL。注: `1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL``2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容` */
   PreviewFileUrl?: string | null;
+  /** 签署方信息，如角色ID、角色名称等 */
+  Approvers?: ApproverItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1255,6 +1275,8 @@ declare interface CreateFlowApproversRequest {
   Initiator?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 签署人信息补充方式**0**: 补充或签人，支持补充多个企业经办签署人（默认）注: `不可补充个人签署人`**1**: 补充动态签署人，可补充企业和个人签署人。注: `每个签署方节点签署人是唯一的，一个节点只支持传入一个签署人信息` */
+  FillApproverType?: number;
 }
 
 declare interface CreateFlowApproversResponse {
@@ -1312,6 +1334,8 @@ declare interface CreateFlowByFilesResponse {
   FlowId?: string;
   /** 合同预览链接URL。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL */
   PreviewUrl?: string | null;
+  /** 签署方信息，如角色ID、角色名称等 */
+  Approvers?: ApproverItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1785,11 +1809,15 @@ declare interface CreateSchemeUrlRequest {
   Agent?: Agent;
   /** 生成的签署链接在签署页面隐藏的按钮列表，可设置如下： **0** :合同签署页面更多操作按钮 **1** :合同签署页面更多操作的拒绝签署按钮 **2** :合同签署页面更多操作的转他人处理按钮 **3** :签署成功页的查看详情按钮注: `字段为数组, 可以传值隐藏多个按钮` */
   Hides?: number[];
+  /** 签署节点ID，用于生成动态签署人链接完成领取 */
+  RecipientId?: string;
 }
 
 declare interface CreateSchemeUrlResponse {
   /** 腾讯电子签小程序的签署链接。如果EndPoint是**APP**，得到的链接类似于`pages/guide?from=default&where=mini&id=yDwJSUUirqauh***7jNSxwdirTSGuH&to=CONTRACT_DETAIL&name=&phone=&shortKey=yDw***k1xFc5`, 用法可以参加接口描述中的"跳转到小程序的实现"如果EndPoint是**HTTP**，得到的链接类似于 `https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?where=mini&from=SFY&id=yDwfEUUw**4rV6Avz&to=MVP_CONTRACT_COVER&name=%E9%83%**5%86%9B`，点击后会跳转到腾讯电子签小程序进行签署如果EndPoint是**HTTP_SHORT_URL**，得到的链接类似于 `https://essurl.cn/2n**42Nd`，点击后会跳转到腾讯电子签小程序进行签署 */
   SchemeUrl?: string;
+  /** 二维码，在生成动态签署人跳转封面页链接时返回 */
+  SchemeQrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1999,7 +2027,7 @@ declare interface DescribeExtendedServiceAuthInfosResponse {
 declare interface DescribeFileUrlsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 文件对应的业务类型，目前支持：FLOW 如需下载合同文件请选择此项TEMPLATE 如需下载模板文件请选择此项DOCUMENT 如需下载文档文件请选择此项SEAL 如需下载印章图片请选择此项 */
+  /** 文件对应的业务类型，目前支持：**FLOW ** : 如需下载合同文件请选择此项**TEMPLATE ** : 如需下载模板文件请选择此项**DOCUMENT **: 如需下载文档文件请选择此项**SEAL **: 如需下载印章图片请选择此项 */
   BusinessType: string;
   /** 业务编号的数组，取值如下：流程编号模板编号文档编号印章编号如需下载合同文件请传入FlowId，最大支持20个资源 */
   BusinessIds: string[];
@@ -2022,7 +2050,7 @@ declare interface DescribeFileUrlsRequest {
 }
 
 declare interface DescribeFileUrlsResponse {
-  /** 文件URL信息；链接不是永久链接，有效期5分钟后链接失效。 */
+  /** 文件URL信息；链接不是永久链接, 过期时间收UrlTtl入参的影响, 默认有效期5分钟后, 到期后链接失效。 */
   FileUrls?: FileUrl[];
   /** URL数量 */
   TotalCount?: number;
@@ -2343,11 +2371,11 @@ declare interface DisableUserAutoSignResponse {
 }
 
 declare interface GetTaskResultApiRequest {
-  /** 任务Id，通过接口CreateConvertTaskApi或CreateMergeFileTask得到的返回任务id */
+  /** 转换任务Id，通过接口创建文件转换任务接口或创建多文件转换任务接口得到的转换任务id */
   TaskId: string;
-  /** 操作人信息,UserId必填 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
-  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 暂未开放 */
   Organization?: OrganizationInfo;
@@ -2356,9 +2384,9 @@ declare interface GetTaskResultApiRequest {
 declare interface GetTaskResultApiResponse {
   /** 任务Id */
   TaskId?: string;
-  /** 任务状态，需要关注的状态0 :NeedTranform - 任务已提交4 :Processing - 文档转换中8 :TaskEnd - 任务处理完成-2 :DownloadFailed - 下载失败-6 :ProcessFailed - 转换失败-13:ProcessTimeout - 转换文件超时 */
+  /** 任务状态，需要关注的状态**0** :NeedTranform - 任务已提交**4** :Processing - 文档转换中**8** :TaskEnd - 任务处理完成**-2** :DownloadFailed - 下载失败**-6** :ProcessFailed - 转换失败**-13**:ProcessTimeout - 转换文件超时 */
   TaskStatus?: number;
-  /** 状态描述，需要关注的状态NeedTranform - 任务已提交Processing - 文档转换中TaskEnd - 任务处理完成DownloadFailed - 下载失败ProcessFailed - 转换失败ProcessTimeout - 转换文件超时 */
+  /** 状态描述，需要关注的状态 **NeedTranform** : 任务已提交 **Processing** : 文档转换中 **TaskEnd** : 任务处理完成 **DownloadFailed** : 下载失败 **ProcessFailed** : 转换失败 **ProcessTimeout** : 转换文件超时 */
   TaskMessage?: string;
   /** 资源Id，也是FileId，用于文件发起时使用 */
   ResourceId?: string;
@@ -2485,24 +2513,26 @@ declare interface UpdateIntegrationEmployeesResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png */
+  /** 文件对应业务类型,可以选择的类型如下 **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用于合同图片控件的填充，文件类型支持.jpg/.png **SEAL** : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png */
   BusinessType: string;
-  /** 调用方信息，其中OperatorId为必填字段，即用户的UserId */
+  /** 执行本接口操作的员工信息。其中OperatorId为必填字段，即用户的UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Caller?: Caller;
-  /** 上传文件内容数组，最多支持20个文件 */
+  /** 上传文件内容数组，最多支持上传20个文件。 */
   FileInfos?: UploadFile[];
-  /** 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF */
+  /** 文件类型， 默认通过文件内容和文件后缀一起解析得到文件类型，调用接口时可以显示的指定上传文件的类型。可支持的指定类型如下:pdfdocdocxxlsxlsxhtmljpgjpegpng如：pdf 表示上传的文件 张三入职合同.pdf的文件类型是 pdf */
   FileType?: string;
-  /** 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白true--是，处理置白默认为false--否，不处理 */
+  /** 此参数仅对上传的PDF文件有效。其主要作用是确定是否将PDF中的灰色矩阵置为白色。**true**：将灰色矩阵置为白色。**false**：无需处理，不会将灰色矩阵置为白色（默认）。注: `该参数仅在关键字定位时，需要去除关键字所在的灰框场景下使用。` */
   CoverRect?: boolean;
-  /** 用户自定义ID数组，与上传文件一一对应 */
+  /** 用户自定义ID数组，与上传文件一一对应注: `历史遗留问题，已经废弃，调用接口时不用赋值` */
   CustomIds?: string[];
   /** 不再使用，上传文件链接数组，最多支持20个URL */
   FileUrls?: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
 }
 
 declare interface UploadFilesResponse {
-  /** 文件id数组 */
+  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。 */
   FileIds?: string[];
   /** 上传成功文件数量 */
   TotalCount?: number;
@@ -2535,7 +2565,7 @@ declare interface Ess {
   (): Versions;
   /** 员工Userid与客户系统Openid绑定 {@link BindEmployeeUserIdWithClientOpenIdRequest} {@link BindEmployeeUserIdWithClientOpenIdResponse} */
   BindEmployeeUserIdWithClientOpenId(data: BindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<BindEmployeeUserIdWithClientOpenIdResponse>;
-  /** 撤销单个签署流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
+  /** 撤销单个合同流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
   /** 取消一码多扫流程签署二维码 {@link CancelMultiFlowSignQRCodeRequest} {@link CancelMultiFlowSignQRCodeResponse} */
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
@@ -2553,7 +2583,7 @@ declare interface Ess {
   CreateEmbedWebUrl(data: CreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedWebUrlResponse>;
   /** 模板发起合同-创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
   CreateFlow(data: CreateFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowResponse>;
-  /** 补充签署流程企业签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
+  /** 补充签署流程签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
   CreateFlowApprovers(data: CreateFlowApproversRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowApproversResponse>;
   /** 用PDF文件创建签署流程 {@link CreateFlowByFilesRequest} {@link CreateFlowByFilesResponse} */
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;
@@ -2653,7 +2683,7 @@ declare interface Ess {
   UnbindEmployeeUserIdWithClientOpenId(data: UnbindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEmployeeUserIdWithClientOpenIdResponse>;
   /** 更新企业员工信息 {@link UpdateIntegrationEmployeesRequest} {@link UpdateIntegrationEmployeesResponse} */
   UpdateIntegrationEmployees(data: UpdateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIntegrationEmployeesResponse>;
-  /** 多文件上传 {@link UploadFilesRequest} {@link UploadFilesResponse} */
+  /** 上传文件 {@link UploadFilesRequest} {@link UploadFilesResponse} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
   /** 流程文件验签 {@link VerifyPdfRequest} {@link VerifyPdfResponse} */
   VerifyPdf(data: VerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPdfResponse>;

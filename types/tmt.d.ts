@@ -206,7 +206,7 @@ declare interface TextTranslateRequest {
 declare interface TextTranslateResponse {
   /** 翻译后的文本 */
   TargetText?: string;
-  /** 源语言，详见入参Target */
+  /** 源语言，详见入参Source */
   Source?: string;
   /** 目标语言，详见入参Target */
   Target?: string;

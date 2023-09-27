@@ -153,9 +153,9 @@ declare interface InvocationTask {
   /** 执行结果。 */
   TaskResult: TaskResult;
   /** 执行任务开始时间。 */
-  StartTime: string;
+  StartTime: string | null;
   /** 执行任务结束时间。 */
-  EndTime: string;
+  EndTime: string | null;
   /** 创建时间。 */
   CreatedTime: string;
   /** 更新时间。 */
@@ -497,15 +497,15 @@ declare interface DescribeInvocationTasksRequest {
   Limit?: number;
   /** 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
-  /** 是否隐藏输出，取值范围：True：隐藏输出 False：不隐藏 默认为 True。 */
+  /** 是否隐藏输出，取值范围：true：隐藏输出 false：不隐藏 默认为 false。 */
   HideOutput?: boolean;
 }
 
 declare interface DescribeInvocationTasksResponse {
   /** 符合条件的执行任务总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 执行任务列表。 */
-  InvocationTaskSet: InvocationTask[];
+  InvocationTaskSet?: InvocationTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

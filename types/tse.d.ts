@@ -1569,9 +1569,9 @@ declare interface DescribeNacosReplicasRequest {
 
 declare interface DescribeNacosReplicasResponse {
   /** 引擎实例副本信息 */
-  Replicas: NacosReplica[];
+  Replicas?: NacosReplica[];
   /** 副本个数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1587,9 +1587,9 @@ declare interface DescribeNacosServerInterfacesRequest {
 
 declare interface DescribeNacosServerInterfacesResponse {
   /** 接口总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 接口列表 */
-  Content: NacosServerInterface[];
+  Content?: NacosServerInterface[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1693,9 +1693,9 @@ declare interface DescribeZookeeperReplicasRequest {
 
 declare interface DescribeZookeeperReplicasResponse {
   /** 注册引擎实例副本信息 */
-  Replicas: ZookeeperReplica[];
+  Replicas?: ZookeeperReplica[];
   /** 副本个数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

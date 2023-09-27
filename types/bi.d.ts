@@ -968,6 +968,32 @@ declare interface ModifyUserRoleProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserRoleRequest {
+  /** 用户ID */
+  UserId?: string;
+  /** 角色ID 列表 */
+  RoleIdList?: number[];
+  /** 邮箱 */
+  Email?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 手机号 */
+  PhoneNumber?: string;
+  /** 手机区号 */
+  AreaCode?: string;
+}
+
+declare interface ModifyUserRoleResponse {
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Bi 商业智能分析 BI} */
 declare interface Bi {
   (): Versions;
@@ -1009,6 +1035,8 @@ declare interface Bi {
   ModifyDatasourceCloud(data: ModifyDatasourceCloudRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatasourceCloudResponse>;
   /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
+  /** 修改用户角色信息 {@link ModifyUserRoleRequest} {@link ModifyUserRoleResponse} */
+  ModifyUserRole(data?: ModifyUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserRoleResponse>;
   /** 项目-修改用户角色信息 {@link ModifyUserRoleProjectRequest} {@link ModifyUserRoleProjectResponse} */
   ModifyUserRoleProject(data?: ModifyUserRoleProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserRoleProjectResponse>;
 }
