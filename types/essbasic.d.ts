@@ -1812,6 +1812,14 @@ declare interface CreateChannelFlowEvidenceReportResponse {
   RequestId?: string;
 }
 
+declare interface CreateChannelOrganizationInfoChangeUrlRequest {
+}
+
+declare interface CreateChannelOrganizationInfoChangeUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConsoleLoginUrlRequest {
   /** 应用信息此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填 */
   Agent: Agent;
@@ -3851,6 +3859,8 @@ declare interface Essbasic {
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
   /** 创建并返回出证报告 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
+  /** 创建子客企业信息变更链接 {@link CreateChannelOrganizationInfoChangeUrlRequest} {@link CreateChannelOrganizationInfoChangeUrlResponse} */
+  CreateChannelOrganizationInfoChangeUrl(data?: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
   /** 使用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */

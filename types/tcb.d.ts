@@ -546,6 +546,12 @@ declare interface CodeSource {
   ProjectName?: string | null;
 }
 
+/** 安全网关自定义头部 */
+declare interface CustomHeader {
+  /** 请求添加头部配置 */
+  RequestToAddList?: CustomRequestToAdd[] | null;
+}
+
 /** 安全网关自定义日志配置 */
 declare interface CustomLogConfig {
   /** 是否需要请求体 */
@@ -560,6 +566,16 @@ declare interface CustomLogConfig {
   LogSetId?: string;
   /** cls topicId */
   LogTopicId?: string;
+}
+
+/** 安全网关请求自定义头部 */
+declare interface CustomRequestToAdd {
+  /** Header名称 */
+  Key?: string | null;
+  /** Header值 */
+  Value?: string | null;
+  /** Header类型 */
+  AppendAction?: string | null;
 }
 
 /** 数据库资源信息 */
@@ -1146,6 +1162,8 @@ declare interface WxGatewayRountItem {
   GatewayRouteEnvId?: string | null;
   /** 路径匹配类型，支持prefix(前缀匹配)，regex(正则匹配)， 默认prefix */
   GatewayRoutePathMatchType?: string | null;
+  /** 安全网关自定义头部 */
+  CustomHeader?: CustomHeader | null;
 }
 
 declare interface BindEnvGatewayRequest {

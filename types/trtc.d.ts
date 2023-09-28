@@ -1627,7 +1627,7 @@ declare interface Trtc {
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
   /** 查询历史房间和用户数 {@link DescribeScaleInfoRequest} {@link DescribeScaleInfoResponse} */
   DescribeScaleInfo(data: DescribeScaleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScaleInfoResponse>;
-  /** 查询TRTC数据大盘质量数据 {@link DescribeTRTCMarketQualityDataRequest} {@link DescribeTRTCMarketQualityDataResponse} */
+  /** 查询TRTC数据大盘质量相关数据 {@link DescribeTRTCMarketQualityDataRequest} {@link DescribeTRTCMarketQualityDataResponse} */
   DescribeTRTCMarketQualityData(data: DescribeTRTCMarketQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityDataResponse>;
   /** 查询TRTC数据大盘质量指标 {@link DescribeTRTCMarketQualityMetricDataRequest} {@link DescribeTRTCMarketQualityMetricDataResponse} */
   DescribeTRTCMarketQualityMetricData(data: DescribeTRTCMarketQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityMetricDataResponse>;

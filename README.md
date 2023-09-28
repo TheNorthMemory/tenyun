@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 241+ 款产品，10252+ 服务数</summary>
+<details><summary>共计 242+ 款产品，10275+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -117,7 +117,7 @@ apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018
 apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(9) |
 asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(25) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
-as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(50) |
+as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(57) |
 ba | [网站备案](https://cloud.tencent.com/document/product/243) | 2020-07-20(3) |
 batch | [批量计算](https://cloud.tencent.com/document/product/599) | 2017-03-12(31) |
 bda | [人体分析](https://cloud.tencent.com/document/product/1208) | 2020-03-24(18) |
@@ -145,6 +145,7 @@ cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 20
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(26) |
+cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(2) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(42) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(105) |
@@ -173,7 +174,7 @@ cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(52) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(58) | 2019-10-16(27) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(61) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
@@ -193,8 +194,8 @@ eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/docum
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(33) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(38) |
-ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(62) |
-essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(56) | 2020-12-22(53) |
+ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(63) |
+essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(57) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(2) | 2018-12-01(4) |
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(33) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10) |
@@ -310,7 +311,7 @@ tiems | [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(23) |
 tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(70) | 2019-10-22(23) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(64) |
-tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(203) |
+tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(212) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |
 tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 2020-12-29(1) | 2020-07-13(4) |
 tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(7) |

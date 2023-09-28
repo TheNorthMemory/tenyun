@@ -34,6 +34,16 @@ declare interface AccelerationDomain {
   ModifiedOn?: string;
   /** 当域名需要进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。 */
   OwnershipVerification?: OwnershipVerification | null;
+  /** 域名证书信息 */
+  Certificate?: AccelerationDomainCertificate | null;
+}
+
+/** 加速域名所对应的证书信息。 */
+declare interface AccelerationDomainCertificate {
+  /** 配置证书的模式，取值有： disable：不配置证书； eofreecert：配置 EdgeOne 免费证书； sslcert：配置 SSL 证书。 */
+  Mode?: string;
+  /** 证书列表。 */
+  List?: CertificateInfo[] | null;
 }
 
 /** 精准防护条件 */
@@ -396,6 +406,24 @@ declare interface CachePrefresh {
   Switch: string;
   /** 缓存预刷新百分比，取值范围：1-99。 */
   Percent?: number | null;
+}
+
+/** https 服务端证书配置 */
+declare interface CertificateInfo {
+  /** 服务器证书 ID。 */
+  CertId?: string;
+  /** 证书备注名。 */
+  Alias?: string;
+  /** 证书类型，取值有：default：默认证书；upload：用户上传；managed：腾讯云托管。 */
+  Type?: string;
+  /** 证书过期时间。 */
+  ExpireTime?: string;
+  /** 证书部署时间。 */
+  DeployTime?: string;
+  /** 签名算法。 */
+  SignAlgo?: string;
+  /** 证书状态，取值有：deployed：已部署；processing：部署中；applying：申请中；failed：申请失败；issued：绑定失败。 */
+  Status?: string;
 }
 
 /** 回源时携带客户端IP所属地域信息，值的格式为ISO-3166-1两位字母代码。 */

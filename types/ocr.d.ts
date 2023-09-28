@@ -381,13 +381,13 @@ declare interface Key {
 /** 全部车牌信息 */
 declare interface LicensePlateInfo {
   /** 识别出的车牌号码。 */
-  Number: string;
+  Number?: string;
   /** 置信度，0 - 100 之间。 */
-  Confidence: number;
+  Confidence?: number;
   /** 文本行在原图片中的像素坐标框。 */
-  Rect: Rect;
-  /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”。 */
-  Color: string;
+  Rect?: Rect;
+  /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。 */
+  Color?: string;
 }
 
 /** 按行输出，行序号 */
@@ -2782,7 +2782,7 @@ declare interface LicensePlateOCRResponse {
   Confidence?: number;
   /** 文本行在原图片中的像素坐标框。 */
   Rect?: Rect;
-  /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”。 */
+  /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。 */
   Color?: string;
   /** 全部车牌信息。 */
   LicensePlateInfos?: LicensePlateInfo[];

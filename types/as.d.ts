@@ -502,12 +502,82 @@ declare interface NotificationTarget {
   TopicName?: string;
 }
 
+/** 实例刷新活动。 */
+declare interface RefreshActivity {
+  /** 伸缩组 ID。 */
+  AutoScalingGroupId?: string;
+  /** 刷新活动 ID。 */
+  RefreshActivityId?: string;
+  /** 原始刷新活动ID，仅在回滚刷新活动中存在。 */
+  OriginRefreshActivityId?: string | null;
+  /** 刷新批次信息列表。 */
+  RefreshBatchSet?: RefreshBatch[];
+  /** 刷新模式。 */
+  RefreshMode?: string;
+  /** 实例更新设置参数。 */
+  RefreshSettings?: RefreshSettings;
+  /** 刷新活动类型。取值如下：NORMAL：正常刷新活动ROLLBACK：回滚刷新活动 */
+  ActivityType?: string;
+  /** 刷新活动状态。取值如下：INIT：初始化中RUNNING：运行中SUCCESSFUL：活动成功FAILED_PAUSE：因刷新批次失败暂停AUTO_PAUSE：因暂停策略自动暂停MANUAL_PAUSE：手动暂停CANCELLED：活动取消FAILED：活动失败 */
+  Status?: string;
+  /** 当前刷新批次序号。例如，2 表示当前活动正在刷新第二批次的实例。 */
+  CurrentRefreshBatchNum?: number | null;
+  /** 刷新活动开始时间。 */
+  StartTime?: string | null;
+  /** 刷新活动结束时间。 */
+  EndTime?: string | null;
+  /** 刷新活动创建时间。 */
+  CreatedTime?: string | null;
+}
+
+/** 实例刷新批次信息，包含该批次的刷新状态、实例、起止时间等信息。 */
+declare interface RefreshBatch {
+  /** 刷新批次序号。例如，2 表示当前批次实例会在第二批次进行实例刷新。 */
+  RefreshBatchNum?: number;
+  /** 刷新批次状态。取值如下：WAITING：待刷新INIT：初始化中RUNNING：刷新中FAILED: 刷新失败PARTIALLY_SUCCESSFUL：批次部分成功CANCELLED：已取消SUCCESSFUL：刷新成功 */
+  RefreshBatchStatus?: string;
+  /** 刷新批次关联实例列表。 */
+  RefreshBatchRelatedInstanceSet?: RefreshBatchRelatedInstance[];
+  /** 刷新批次开始时间。 */
+  StartTime?: string | null;
+  /** 刷新批次结束时间。 */
+  EndTime?: string | null;
+}
+
+/** 刷新批次关联实例，包含单个实例的刷新活动状态、对应伸缩活动等信息。 */
+declare interface RefreshBatchRelatedInstance {
+  /** 实例 ID。 */
+  InstanceId?: string;
+  /** 刷新实例状态。如果在刷新时实例被移出或销毁，状态会更新为 NOT_FOUND。取值如下：WAITING：待刷新INIT：初始化中RUNNING：刷新中FAILED：刷新失败CANCELLED：已取消SUCCESSFUL：刷新成功NOT_FOUND：实例不存在 */
+  InstanceStatus?: string;
+  /** 实例刷新中最近一次伸缩活动 ID，可通过 DescribeAutoScalingActivities 接口查询。需注意伸缩活动与实例刷新活动不同，一次实例刷新活动可能包括多次伸缩活动。 */
+  LastActivityId?: string | null;
+  /** 实例刷新状态信息。 */
+  InstanceStatusMessage?: string | null;
+}
+
+/** 实例刷新设置。 */
+declare interface RefreshSettings {
+  /** 滚动更新设置参数。RefreshMode 为滚动更新该参数必须填写。 */
+  RollingUpdateSettings: RollingUpdateSettings | null;
+  /** 实例后端服务健康状态检查，默认为 FALSE。仅针对绑定应用型负载均衡器的伸缩组生效，开启该检查后，如刷新后实例未通过检查，负载均衡器端口权重始终为 0，且标记为刷新失败。取值范围如下：TRUE：开启检查FALSE：不开启检查 */
+  CheckInstanceTargetHealth?: boolean;
+}
+
 /** 与本次伸缩活动相关的实例信息。 */
 declare interface RelatedInstance {
   /** 实例ID。 */
   InstanceId?: string;
   /** 实例在伸缩活动中的状态。取值如下：INIT：初始化中RUNNING：实例操作中SUCCESSFUL：活动成功FAILED：活动失败 */
   InstanceStatus?: string;
+}
+
+/** 滚动更新设置。 */
+declare interface RollingUpdateSettings {
+  /** 批次数量。批次数量为大于 0 的正整数，但不能大于待刷新实例数量。 */
+  BatchNumber: number;
+  /** 批次间暂停策略。默认值为 Automatic，取值范围如下：FIRST_BATCH_PAUSE：第一批次更新完成后暂停BATCH_INTERVAL_PAUSE：批次间暂停AUTOMATIC：不暂停 */
+  BatchPause?: string;
 }
 
 /** 描述了 “自动化助手” 服务相关的信息 */
@@ -668,6 +738,18 @@ declare interface AttachLoadBalancersRequest {
 declare interface AttachLoadBalancersResponse {
   /** 伸缩活动ID */
   ActivityId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelInstanceRefreshRequest {
+  /** 伸缩组ID。 */
+  AutoScalingGroupId: string;
+  /** 刷新活动ID。 */
+  RefreshActivityId: string;
+}
+
+declare interface CancelInstanceRefreshResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1180,6 +1262,26 @@ declare interface DescribeNotificationConfigurationsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRefreshActivitiesRequest {
+  /** 刷新活动ID列表。ID形如：`asr-5l2ejpfo`。每次请求的上限为100。参数不支持同时指定`RefreshActivityIds`和`Filters`。 */
+  RefreshActivityIds?: string[];
+  /** 过滤条件。 auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。 refresh-activity-status-code - String - 是否必填：否 -（过滤条件）按照刷新活动状态过滤。（INIT：初始化中 | RUNNING：运行中 | SUCCESSFUL：活动成功 | FAILED_PAUSE：失败暂停 | AUTO_PAUSE：自动暂停 | MANUAL_PAUSE：手动暂停 | CANCELLED：活动取消 | FAILED：活动失败） refresh-activity-type - String - 是否必填：否 -（过滤条件）按照刷新活动类型过滤。（NORMAL：正常刷新活动 | ROLLBACK：回滚刷新活动） refresh-activity-id - String - 是否必填：否 -（过滤条件）按照刷新活动ID过滤。 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定RefreshActivityIds和Filters。 */
+  Filters?: Filter[];
+  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit?: number;
+  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset?: number;
+}
+
+declare interface DescribeRefreshActivitiesResponse {
+  /** 符合条件的刷新活动数量。 */
+  TotalCount?: number;
+  /** 符合条件的刷新活动信息集合。 */
+  RefreshActivitySet?: RefreshActivity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScalingPoliciesRequest {
   /** 按照一个或者多个告警策略ID查询。告警策略ID形如：asp-i9vkg894。每次请求的实例的上限为100。参数不支持同时指定`AutoScalingPolicyIds`和`Filters`。 */
   AutoScalingPolicyIds?: string[];
@@ -1282,6 +1384,20 @@ declare interface ExecuteScalingPolicyRequest {
 declare interface ExecuteScalingPolicyResponse {
   /** 伸缩活动ID */
   ActivityId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExitStandbyRequest {
+  /** 伸缩组 ID。 */
+  AutoScalingGroupId: string;
+  /** 备用中状态 CVM 实例列表。 */
+  InstanceIds: string[];
+}
+
+declare interface ExitStandbyResponse {
+  /** 伸缩活动ID。 */
+  ActivityId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1557,6 +1673,38 @@ declare interface RemoveInstancesResponse {
   RequestId?: string;
 }
 
+declare interface ResumeInstanceRefreshRequest {
+  /** 伸缩组ID。 */
+  AutoScalingGroupId: string;
+  /** 刷新活动ID。 */
+  RefreshActivityId: string;
+  /** 当前批次刷新失败实例的恢复方式，如不存在失败实例，该参数无效。默认值为RETRY，取值范围如下：RETRY: 重试当前批次刷新失败实例CONTINUE: 跳过当前批次刷新失败实例 */
+  ResumeMode?: string;
+}
+
+declare interface ResumeInstanceRefreshResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RollbackInstanceRefreshRequest {
+  /** 伸缩组ID。 */
+  AutoScalingGroupId: string;
+  /** 刷新设置。 */
+  RefreshSettings: RefreshSettings;
+  /** 原始刷新活动 ID。 */
+  OriginRefreshActivityId: string;
+  /** 刷新模式，目前仅支持滚动更新，默认值为 ROLLING_UPDATE_RESET。 */
+  RefreshMode?: string;
+}
+
+declare interface RollbackInstanceRefreshResponse {
+  /** 刷新活动 ID。 */
+  RefreshActivityId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ScaleInInstancesRequest {
   /** 伸缩组ID。 */
   AutoScalingGroupId: string;
@@ -1613,6 +1761,22 @@ declare interface StartAutoScalingInstancesResponse {
   RequestId?: string;
 }
 
+declare interface StartInstanceRefreshRequest {
+  /** 伸缩组ID。 */
+  AutoScalingGroupId: string;
+  /** 刷新设置。 */
+  RefreshSettings: RefreshSettings;
+  /** 刷新模式，目前仅支持滚动更新，默认值为 ROLLING_UPDATE_RESET。 */
+  RefreshMode?: string;
+}
+
+declare interface StartInstanceRefreshResponse {
+  /** 刷新活动 ID。 */
+  RefreshActivityId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopAutoScalingInstancesRequest {
   /** 伸缩组ID */
   AutoScalingGroupId: string;
@@ -1625,6 +1789,18 @@ declare interface StopAutoScalingInstancesRequest {
 declare interface StopAutoScalingInstancesResponse {
   /** 伸缩活动ID */
   ActivityId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopInstanceRefreshRequest {
+  /** 伸缩组ID。 */
+  AutoScalingGroupId: string;
+  /** 刷新活动ID。 */
+  RefreshActivityId: string;
+}
+
+declare interface StopInstanceRefreshResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1714,6 +1890,8 @@ declare interface As {
   AttachInstances(data: AttachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachInstancesResponse>;
   /** 添加负载均衡器 {@link AttachLoadBalancersRequest} {@link AttachLoadBalancersResponse} */
   AttachLoadBalancers(data: AttachLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<AttachLoadBalancersResponse>;
+  /** 取消实例刷新 {@link CancelInstanceRefreshRequest} {@link CancelInstanceRefreshResponse} */
+  CancelInstanceRefresh(data: CancelInstanceRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<CancelInstanceRefreshResponse>;
   /** 清除启动配置属性 {@link ClearLaunchConfigurationAttributesRequest} {@link ClearLaunchConfigurationAttributesResponse} */
   ClearLaunchConfigurationAttributes(data: ClearLaunchConfigurationAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ClearLaunchConfigurationAttributesResponse>;
   /** 完成生命周期动作 {@link CompleteLifecycleActionRequest} {@link CompleteLifecycleActionResponse} */
@@ -1762,6 +1940,8 @@ declare interface As {
   DescribeLifecycleHooks(data?: DescribeLifecycleHooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleHooksResponse>;
   /** 查询通知 {@link DescribeNotificationConfigurationsRequest} {@link DescribeNotificationConfigurationsResponse} */
   DescribeNotificationConfigurations(data?: DescribeNotificationConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotificationConfigurationsResponse>;
+  /** 查询实例刷新活动 {@link DescribeRefreshActivitiesRequest} {@link DescribeRefreshActivitiesResponse} */
+  DescribeRefreshActivities(data?: DescribeRefreshActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRefreshActivitiesResponse>;
   /** 查询告警触发策略 {@link DescribeScalingPoliciesRequest} {@link DescribeScalingPoliciesResponse} */
   DescribeScalingPolicies(data?: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
   /** 查询定时任务 {@link DescribeScheduledActionsRequest} {@link DescribeScheduledActionsResponse} */
@@ -1776,6 +1956,8 @@ declare interface As {
   EnableAutoScalingGroup(data: EnableAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<EnableAutoScalingGroupResponse>;
   /** 触发伸缩策略 {@link ExecuteScalingPolicyRequest} {@link ExecuteScalingPolicyResponse} */
   ExecuteScalingPolicy(data: ExecuteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteScalingPolicyResponse>;
+  /** 实例退出备用中状态 {@link ExitStandbyRequest} {@link ExitStandbyResponse} */
+  ExitStandby(data: ExitStandbyRequest, config?: AxiosRequestConfig): AxiosPromise<ExitStandbyResponse>;
   /** 修改伸缩组 {@link ModifyAutoScalingGroupRequest} {@link ModifyAutoScalingGroupResponse} */
   ModifyAutoScalingGroup(data: ModifyAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScalingGroupResponse>;
   /** 修改期望实例数 {@link ModifyDesiredCapacityRequest} {@link ModifyDesiredCapacityResponse} */
@@ -1796,6 +1978,10 @@ declare interface As {
   ModifyScheduledAction(data: ModifyScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledActionResponse>;
   /** 从伸缩组中删除 CVM 实例 {@link RemoveInstancesRequest} {@link RemoveInstancesResponse} */
   RemoveInstances(data: RemoveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveInstancesResponse>;
+  /** 恢复实例刷新 {@link ResumeInstanceRefreshRequest} {@link ResumeInstanceRefreshResponse} */
+  ResumeInstanceRefresh(data: ResumeInstanceRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeInstanceRefreshResponse>;
+  /** 回滚实例刷新 {@link RollbackInstanceRefreshRequest} {@link RollbackInstanceRefreshResponse} */
+  RollbackInstanceRefresh(data: RollbackInstanceRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackInstanceRefreshResponse>;
   /** 指定数量缩容实例 {@link ScaleInInstancesRequest} {@link ScaleInInstancesResponse} */
   ScaleInInstances(data: ScaleInInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleInInstancesResponse>;
   /** 指定数量扩容实例 {@link ScaleOutInstancesRequest} {@link ScaleOutInstancesResponse} */
@@ -1804,8 +1990,12 @@ declare interface As {
   SetInstancesProtection(data: SetInstancesProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstancesProtectionResponse>;
   /** 开启伸缩组内 CVM 实例 {@link StartAutoScalingInstancesRequest} {@link StartAutoScalingInstancesResponse} */
   StartAutoScalingInstances(data: StartAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartAutoScalingInstancesResponse>;
+  /** 启动实例刷新 {@link StartInstanceRefreshRequest} {@link StartInstanceRefreshResponse} */
+  StartInstanceRefresh(data: StartInstanceRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstanceRefreshResponse>;
   /** 关闭伸缩组内 CVM 实例 {@link StopAutoScalingInstancesRequest} {@link StopAutoScalingInstancesResponse} */
   StopAutoScalingInstances(data: StopAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoScalingInstancesResponse>;
+  /** 暂停实例刷新 {@link StopInstanceRefreshRequest} {@link StopInstanceRefreshResponse} */
+  StopInstanceRefresh(data: StopInstanceRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceRefreshResponse>;
   /** @deprecated 升级启动配置 {@link UpgradeLaunchConfigurationRequest} {@link UpgradeLaunchConfigurationResponse} */
   UpgradeLaunchConfiguration(data: UpgradeLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLaunchConfigurationResponse>;
   /** 升级生命周期挂钩 {@link UpgradeLifecycleHookRequest} {@link UpgradeLifecycleHookResponse} */

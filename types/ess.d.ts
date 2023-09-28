@@ -1650,6 +1650,24 @@ declare interface CreateOrganizationBatchSignUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrganizationInfoChangeUrlRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 企业信息变更类型，可选类型如下：**1**：企业超管变更**2**：企业基础信息变更 */
+  ChangeType: number;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateOrganizationInfoChangeUrlResponse {
+  /** 创建的企业信息变更链接。 */
+  Url?: string;
+  /** 链接过期时间。链接7天有效。 */
+  ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePersonAuthCertificateImageRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -2611,6 +2629,8 @@ declare interface Ess {
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
+  /** 创建企业信息变更链接 {@link CreateOrganizationInfoChangeUrlRequest} {@link CreateOrganizationInfoChangeUrlResponse} */
+  CreateOrganizationInfoChangeUrl(data: CreateOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationInfoChangeUrlResponse>;
   /** 获取个人用户认证证书图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */
   CreatePersonAuthCertificateImage(data: CreatePersonAuthCertificateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonAuthCertificateImageResponse>;
   /** 创建发起流程web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */

@@ -108,6 +108,14 @@ declare interface ClusterExternalServiceInfo {
   ClusterStatus: number | null;
 }
 
+/** 集群id与流程id的mapping */
+declare interface ClusterIDToFlowID {
+  /** 集群id */
+  ClusterId?: string | null;
+  /** 流程id */
+  FlowId?: number | null;
+}
+
 /** 集群实例信息 */
 declare interface ClusterInstancesInfo {
   /** ID号 */
@@ -1551,7 +1559,7 @@ declare interface CreateInstanceRequest {
   DisasterRecoverGroupIds?: string[];
   /** 集群维度CBS加密盘，默认0表示不加密，1表示加密 */
   CbsEncrypt?: number;
-  /** hive共享元数据库类型。取值范围：EMR_NEW_META：表示集群默认创建EMR_EXIT_META：表示集群使用指定EMR-MetaDB。USER_CUSTOM_META：表示集群使用自定义MetaDB。 */
+  /** hive共享元数据库类型。取值范围：EMR_DEFAULT_META：表示集群默认创建EMR_EXIST_META：表示集群使用指定EMR-MetaDB。USER_CUSTOM_META：表示集群使用自定义MetaDB。 */
   MetaType?: string;
   /** EMR-MetaDB实例 */
   UnifyMetaInstanceId?: string;
@@ -1573,7 +1581,7 @@ declare interface CreateInstanceRequest {
 
 declare interface CreateInstanceResponse {
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2118,6 +2126,8 @@ declare interface ModifyResourcesTagsResponse {
   FailList?: string[] | null;
   /** 部分成功的资源id列表 */
   PartSuccessList?: string[] | null;
+  /** 集群id与流程id的映射列表 */
+  ClusterToFlowIdList?: ClusterIDToFlowID[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** mongodb慢查模板概览明细 */
+declare interface Aggregation {
+  /** 平均执行时间（ms）。 */
+  AvgExecTime?: number;
+  /** 平均扫描行数。 */
+  AvgDocsExamined?: number;
+  /** 产生慢查次数（/天）。 */
+  SlowLogCount?: number;
+  /** 内存排序次数。 */
+  SortCount?: number;
+  /** 慢查模板概览。 */
+  SlowLogs?: string[] | null;
+}
+
 /** 通知模板 */
 declare interface AlarmProfileList {
   /** 0-不是 1-是 */
@@ -250,6 +264,38 @@ declare interface HealthStatus {
   ScoreDetails: ScoreDetail[] | null;
 }
 
+/** 推荐的索引 */
+declare interface IndexesToBuild {
+  /** 索引id，唯一标识一个索引。 */
+  Id?: number;
+  /** 创建索引命令。 */
+  IndexCommand?: string;
+  /** 索引字符串。 */
+  IndexStr?: string;
+  /** 优化级别，1-4，优先级从高到低。 */
+  Level?: number;
+  /** 索引得分。 */
+  Score?: number;
+  /** 签名。 */
+  Signs?: string[];
+  /** 0-待创建；1-创建中。 */
+  Status?: number;
+}
+
+/** 无效索引 */
+declare interface IndexesToDrop {
+  /** 索引字符串。 */
+  IndexStr?: string;
+  /** 索引得分。 */
+  Score?: number;
+  /** 无效原因。 */
+  Reason?: string;
+  /** 删除索引命令。 */
+  IndexCommand?: string;
+  /** 索引名。 */
+  IndexName?: string;
+}
+
 /** 实例基础信息。 */
 declare interface InstanceBasicInfo {
   /** 实例ID。 */
@@ -380,6 +426,24 @@ declare interface MailConfiguration {
   ContactGroup?: number[];
 }
 
+/** Mongodb索引项 */
+declare interface MongoDBIndex {
+  /** 实例id。 */
+  ClusterId?: string;
+  /** 表名。 */
+  Collection?: string;
+  /** 库名。 */
+  Db?: string;
+  /** 优化级别，1-4，优先级从高到低。 */
+  Level?: number;
+  /** 得分。 */
+  Score?: number;
+  /** 推荐索引列表。 */
+  IndexesToBuild?: IndexesToBuild[] | null;
+  /** 无效索引列表。 */
+  IndexesToDrop?: IndexesToDrop[] | null;
+}
+
 /** 监控数据（浮点型） */
 declare interface MonitorFloatMetric {
   /** 指标名称。 */
@@ -434,6 +498,26 @@ declare interface MySqlProcess {
   Time: string;
   /** 线程的操作语句。 */
   Info: string;
+}
+
+/** 实时会话详情。 */
+declare interface Process {
+  /** 会话 ID。 */
+  Id?: number;
+  /** 访问来源，IP 地址和端口号。 */
+  Address?: string;
+  /** 文件描述符。 */
+  FileDescriptor?: number;
+  /** 会话名称，使用 CLIENT SETNAME 命令设置。 */
+  Name?: string;
+  /** 最后一次执行的命令。 */
+  LastCommand?: string;
+  /** 会话存活时间，单位：秒。 */
+  Age?: number;
+  /** 最后一次执行命令后空闲的时间，单位：秒。 */
+  Idle?: number;
+  /** 会话所属的 Proxy节点 ID。 */
+  ProxyId?: string;
 }
 
 /** 实时会话统计详情。 */
@@ -1424,6 +1508,50 @@ declare interface DescribeHealthScoreResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIndexRecommendAggregationSlowLogsRequest {
+  /** 服务产品类型，支持值包括："mongodb" - 云数据库 。 */
+  Product: string;
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 数据库名称。 */
+  Db: string;
+  /** 表明。 */
+  Collection: string;
+  /** 签名。 */
+  Signs: string[];
+}
+
+declare interface DescribeIndexRecommendAggregationSlowLogsResponse {
+  /** 查询实例慢查询聚合结果。 */
+  Aggregation?: Aggregation | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIndexRecommendInfoRequest {
+  /** 服务产品类型，支持值包括："mongodb" - 云数据库 。 */
+  Product: string;
+  /** 实例ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeIndexRecommendInfoResponse {
+  /** 索引推荐的集合数量。 */
+  CollectionNum?: number;
+  /** 索引推荐的索引数量。 */
+  IndexNum?: number;
+  /** 索引项。 */
+  Items?: MongoDBIndex[];
+  /** 优化级别，1-4，优先级从高到低。 */
+  Level?: number;
+  /** 历史优化数。 */
+  Optimized?: number;
+  /** 累计优化条数。 */
+  OptimizedCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMailProfileRequest {
   /** 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。 */
   ProfileType: string;
@@ -1544,6 +1672,26 @@ declare interface DescribeProxySessionKillTasksResponse {
   Tasks: TaskInfo[];
   /** 任务总数。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisProcessListRequest {
+  /** Redis 实例ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 查询的Proxy节点数量上限，默认值为20，最大值为50。 */
+  Limit?: number;
+  /** Proxy节点的偏移量，默认值为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeRedisProcessListResponse {
+  /** 该实例的Proxy节点数量，可用于分页查询。 */
+  ProxyCount?: number;
+  /** 实时会话详情列表。 */
+  Processes?: Process[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3215,6 +3363,10 @@ declare interface Dbbrain {
   DescribeDiagDBInstances(data: DescribeDiagDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagDBInstancesResponse>;
   /** 获取健康得分 {@link DescribeHealthScoreRequest} {@link DescribeHealthScoreResponse} */
   DescribeHealthScore(data: DescribeHealthScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthScoreResponse>;
+  /** 慢查模板概览 {@link DescribeIndexRecommendAggregationSlowLogsRequest} {@link DescribeIndexRecommendAggregationSlowLogsResponse} */
+  DescribeIndexRecommendAggregationSlowLogs(data: DescribeIndexRecommendAggregationSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexRecommendAggregationSlowLogsResponse>;
+  /** 查询实例的索引推荐信息 {@link DescribeIndexRecommendInfoRequest} {@link DescribeIndexRecommendInfoResponse} */
+  DescribeIndexRecommendInfo(data: DescribeIndexRecommendInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexRecommendInfoResponse>;
   /** 获取邮件配置 {@link DescribeMailProfileRequest} {@link DescribeMailProfileResponse} */
   DescribeMailProfile(data: DescribeMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMailProfileResponse>;
   /** 查询实时线程列表 {@link DescribeMySqlProcessListRequest} {@link DescribeMySqlProcessListResponse} */
@@ -3225,6 +3377,8 @@ declare interface Dbbrain {
   DescribeProxyProcessStatistics(data: DescribeProxyProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyProcessStatisticsResponse>;
   /** 查询代理节点 kill 会话任务执行状态 {@link DescribeProxySessionKillTasksRequest} {@link DescribeProxySessionKillTasksResponse} */
   DescribeProxySessionKillTasks(data: DescribeProxySessionKillTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySessionKillTasksResponse>;
+  /** 获取Redis实例proxy实时会话详情 {@link DescribeRedisProcessListRequest} {@link DescribeRedisProcessListResponse} */
+  DescribeRedisProcessList(data: DescribeRedisProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisProcessListResponse>;
   /** 查询redis实例大key列表 {@link DescribeRedisTopBigKeysRequest} {@link DescribeRedisTopBigKeysResponse} */
   DescribeRedisTopBigKeys(data: DescribeRedisTopBigKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopBigKeysResponse>;
   /** 查询redis实例top key前缀列表 {@link DescribeRedisTopKeyPrefixListRequest} {@link DescribeRedisTopKeyPrefixListResponse} */

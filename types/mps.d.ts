@@ -1656,6 +1656,8 @@ declare interface CreateInput {
   HLSPullSettings?: CreateInputHLSPullSettings;
   /** 延播平滑吐流配置信息。 */
   ResilientStream?: ResilientStreamConf;
+  /** 绑定的输入安全组 ID。 */
+  SecurityGroupIds?: string[];
 }
 
 /** 创建的输入HLS拉流的配置信息。 */
@@ -1725,7 +1727,9 @@ declare interface CreateOutputInfo {
   /** IP白名单列表，格式为CIDR，如0.0.0.0/0。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
   AllowIpList?: string[];
   /** 最大拉流并发数，最大4，默认4。 */
-  MaxConcurrent?: number | null;
+  MaxConcurrent?: number;
+  /** 绑定的输入安全组 ID。 */
+  SecurityGroupIds?: string[];
 }
 
 /** 创建媒体传输流的输出的RTP配置。 */
@@ -1845,35 +1849,37 @@ declare interface DescribeHLSPullSourceAddress {
 /** 查询输入配置信息。 */
 declare interface DescribeInput {
   /** 输入Id。 */
-  InputId: string;
+  InputId?: string;
   /** 输入名称。 */
-  InputName: string;
+  InputName?: string;
   /** 输入描述。 */
-  Description: string | null;
+  Description?: string | null;
   /** 输入协议。 */
-  Protocol: string;
+  Protocol?: string;
   /** 输入地址列表。 */
-  InputAddressList: InputAddress[];
+  InputAddressList?: InputAddress[];
   /** 输入IP白名单列表。 */
-  AllowIpList: string[];
+  AllowIpList?: string[];
   /** 输入的SRT配置信息。 */
-  SRTSettings: DescribeInputSRTSettings | null;
+  SRTSettings?: DescribeInputSRTSettings | null;
   /** 输入的RTP配置信息。 */
-  RTPSettings: DescribeInputRTPSettings | null;
+  RTPSettings?: DescribeInputRTPSettings | null;
   /** 输入的地区。 */
-  InputRegion: string;
+  InputRegion?: string;
   /** 输入的RTMP配置信息。 */
-  RTMPSettings: DescribeInputRTMPSettings;
+  RTMPSettings?: DescribeInputRTMPSettings;
   /** 输入的主备开关。 */
-  FailOver: string | null;
+  FailOver?: string | null;
   /** 输入的RTMP_PULL配置信息。 */
-  RTMPPullSettings: DescribeInputRTMPPullSettings | null;
+  RTMPPullSettings?: DescribeInputRTMPPullSettings | null;
   /** 输入的RTSP_PULL配置信息。 */
-  RTSPPullSettings: DescribeInputRTSPPullSettings | null;
+  RTSPPullSettings?: DescribeInputRTSPPullSettings | null;
   /** 输入的HLS_PULL配置信息。 */
-  HLSPullSettings: DescribeInputHLSPullSettings | null;
+  HLSPullSettings?: DescribeInputHLSPullSettings | null;
   /** 延播平滑吐流配置信息。 */
-  ResilientStream: ResilientStreamConf | null;
+  ResilientStream?: ResilientStreamConf | null;
+  /** 绑定的输入安全组 ID。 */
+  SecurityGroupIds?: string[] | null;
 }
 
 /** 查询输入的HLS配置信息。 */
@@ -1935,35 +1941,37 @@ declare interface DescribeInputSRTSettings {
 /** 查询输出的配置信息。 */
 declare interface DescribeOutput {
   /** 输出Id。 */
-  OutputId: string;
+  OutputId?: string;
   /** 输出名称。 */
-  OutputName: string;
+  OutputName?: string;
   /** 输出类型。 */
-  OutputType: string;
+  OutputType?: string;
   /** 输出描述。 */
-  Description: string | null;
+  Description?: string | null;
   /** 输出协议。 */
-  Protocol: string;
+  Protocol?: string;
   /** 输出的出口地址信息列表。 */
-  OutputAddressList: OutputAddress[];
+  OutputAddressList?: OutputAddress[];
   /** 输出的地区。 */
-  OutputRegion: string | null;
+  OutputRegion?: string | null;
   /** 输出的SRT配置信息。 */
-  SRTSettings: DescribeOutputSRTSettings | null;
+  SRTSettings?: DescribeOutputSRTSettings | null;
   /** 输出的RTP配置信息。 */
-  RTPSettings: DescribeOutputRTPSettings | null;
+  RTPSettings?: DescribeOutputRTPSettings | null;
   /** 输出的RTMP配置信息。 */
-  RTMPSettings: DescribeOutputRTMPSettings | null;
+  RTMPSettings?: DescribeOutputRTMPSettings | null;
   /** 输出的RTMP拉流配置信息。 */
-  RTMPPullSettings: DescribeOutputRTMPPullSettings | null;
+  RTMPPullSettings?: DescribeOutputRTMPPullSettings | null;
   /** CIDR白名单列表。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
-  AllowIpList: string[] | null;
+  AllowIpList?: string[] | null;
   /** 输出的RTSP拉流配置信息。 */
-  RTSPPullSettings: DescribeOutputRTSPPullSettings | null;
+  RTSPPullSettings?: DescribeOutputRTSPPullSettings | null;
   /** 输出的HLS拉流配置信息。 */
-  HLSPullSettings: DescribeOutputHLSPullSettings | null;
+  HLSPullSettings?: DescribeOutputHLSPullSettings | null;
   /** 最大拉流并发数，最大为4，默认4。 */
   MaxConcurrent?: number;
+  /** 绑定的安全组 ID。 */
+  SecurityGroupIds?: string[] | null;
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -3410,6 +3418,8 @@ declare interface ModifyInput {
   HLSPullSettings?: CreateInputHLSPullSettings;
   /** 延播平滑吐流配置信息。 */
   ResilientStream?: ResilientStreamConf;
+  /** 绑定的输入安全组 ID。 仅支持关联一组安全组。 */
+  SecurityGroupIds?: string[];
 }
 
 /** 修改Output配置。 */
@@ -3431,7 +3441,9 @@ declare interface ModifyOutputInfo {
   /** IP白名单列表，格式为CIDR，如0.0.0.0/0。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
   AllowIpList?: string[];
   /** 最大拉流并发数，最大4，默认4。 */
-  MaxConcurrent?: number | null;
+  MaxConcurrent?: number;
+  /** 绑定的安全组 ID。 仅支持关联一组安全组。 */
+  SecurityGroupIds?: string[];
 }
 
 /** 媒体处理任务中的马赛克参数类型 */
@@ -3501,9 +3513,9 @@ declare interface OutputAddress {
 /** SRT输出的监听地址。 */
 declare interface OutputSRTSourceAddressResp {
   /** 监听IP。 */
-  Ip: string;
+  Ip: string | null;
   /** 监听端口。 */
-  Port: number;
+  Port: number | null;
 }
 
 /** 自定义转码的规格参数。用于覆盖模板中对应参数值。 */
@@ -3917,9 +3929,9 @@ declare interface SRTSourceAddressReq {
 /** SRT输入源地址。 */
 declare interface SRTSourceAddressResp {
   /** 对端IP。 */
-  Ip: string;
+  Ip: string | null;
   /** 对端端口。 */
-  Port: number;
+  Port: number | null;
 }
 
 /** 对视频做采样截图任务输入参数类型。 */

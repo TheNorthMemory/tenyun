@@ -3861,6 +3861,8 @@ declare interface ModifyLivePullStreamTaskRequest {
   FileIndex?: number;
   /** 指定播放文件偏移。注意：1. 单位：秒，配合FileIndex使用。 */
   OffsetTime?: number;
+  /** 目标 Url。换目标地址，会断流重推到新地址。 */
+  ToUrl?: string;
   /** 任务备注。 */
   Comment?: string;
   /** 备源的类型：PullLivePushLive -直播，PullVodPushLive -点播。注意：1. 仅当主源类型为直播源时，备源才会生效。2. 将该参数置为空，则可将任务去除备源信息。3. 主直播源拉流中断时，自动使用备源进行拉流。4. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。 */

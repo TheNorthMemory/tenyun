@@ -75,13 +75,13 @@ declare interface BackupStorageLocation {
 /** cuDNN的版本信息 */
 declare interface CUDNN {
   /** cuDNN的版本 */
-  Version: string;
+  Version: string | null;
   /** cuDNN的名字 */
-  Name: string;
+  Name: string | null;
   /** cuDNN的Doc名字 */
-  DocName?: string;
+  DocName?: string | null;
   /** cuDNN的Dev名字 */
-  DevName?: string;
+  DevName?: string | null;
 }
 
 /** cloudrun安全特性能力 */
@@ -591,9 +591,9 @@ declare interface DnsServerConf {
 /** GPU驱动和CUDA的版本信息 */
 declare interface DriverVersion {
   /** GPU驱动或者CUDA的版本 */
-  Version: string;
+  Version: string | null;
   /** GPU驱动或者CUDA的名字 */
-  Name: string;
+  Name: string | null;
 }
 
 /** ECM增强服务 */
@@ -1104,6 +1104,14 @@ declare interface InstanceAdvancedSettings {
   ExtraArgs?: InstanceExtraArgs | null;
 }
 
+/** 包年包月配置 */
+declare interface InstanceChargePrepaid {
+  /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。 */
+  Period: number;
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
+  RenewFlag?: string;
+}
+
 /** CVM实例数据盘挂载配置 */
 declare interface InstanceDataDiskMountSetting {
   /** CVM实例类型 */
@@ -1349,45 +1357,57 @@ declare interface NodeCountSummary {
 /** 节点池描述 */
 declare interface NodePool {
   /** NodePoolId 资源池id */
-  NodePoolId: string;
+  NodePoolId?: string;
   /** Name 资源池名称 */
-  Name: string;
+  Name?: string;
   /** ClusterInstanceId 集群实例id */
-  ClusterInstanceId: string;
+  ClusterInstanceId?: string;
   /** LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted */
-  LifeState: string;
+  LifeState?: string;
   /** LaunchConfigurationId 配置 */
-  LaunchConfigurationId: string;
+  LaunchConfigurationId?: string;
   /** AutoscalingGroupId 分组id */
-  AutoscalingGroupId: string;
+  AutoscalingGroupId?: string;
   /** Labels 标签 */
-  Labels: Label[];
+  Labels?: Label[];
   /** Taints 污点标记 */
-  Taints: Taint[];
+  Taints?: Taint[];
   /** NodeCountSummary 节点列表 */
-  NodeCountSummary: NodeCountSummary;
+  NodeCountSummary?: NodeCountSummary;
   /** 状态信息 */
-  AutoscalingGroupStatus: string | null;
+  AutoscalingGroupStatus?: string | null;
   /** 最大节点数量 */
-  MaxNodesNum: number | null;
+  MaxNodesNum?: number | null;
   /** 最小节点数量 */
-  MinNodesNum: number | null;
+  MinNodesNum?: number | null;
   /** 期望的节点数量 */
-  DesiredNodesNum: number | null;
+  DesiredNodesNum?: number | null;
   /** 节点池osName */
-  NodePoolOs: string | null;
+  NodePoolOs?: string | null;
   /** 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值) */
-  OsCustomizeType: string | null;
+  OsCustomizeType?: string | null;
   /** 镜像id */
-  ImageId: string | null;
+  ImageId?: string | null;
   /** 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性 */
-  DesiredPodNum: number | null;
+  DesiredPodNum?: number | null;
   /** 用户自定义脚本 */
-  UserScript: string | null;
+  UserScript?: string | null;
   /** 资源标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 删除保护开关 */
-  DeletionProtection: boolean | null;
+  DeletionProtection?: boolean | null;
+  /** 节点配置 */
+  ExtraArgs?: InstanceExtraArgs | null;
+  /** GPU驱动相关参数 */
+  GPUArgs?: GPUArgs | null;
+  /** dockerd --graph 指定值, 默认为 /var/lib/docker */
+  DockerGraphPath?: string | null;
+  /** 多盘数据盘挂载信息：新建节点时请确保购买CVM的参数传递了购买多个数据盘的信息，如CreateClusterInstances API的RunInstancesPara下的DataDisks也需要设置购买多个数据盘, 具体可以参考CreateClusterInstances接口的添加集群节点(多块数据盘)样例；添加已有节点时，请确保填写的分区信息在节点上真实存在 */
+  DataDisks?: DataDisk[] | null;
+  /** 是否不可调度 */
+  Unschedulable?: number | null;
+  /** 用户自定义脚本,在UserScript前执行 */
+  PreStartUserScript?: string | null;
 }
 
 /** 加入存量节点时的节点池选项 */
@@ -1428,6 +1448,22 @@ declare interface PendingRelease {
   UpdatedTime: string | null;
 }
 
+/** 可被预留券抵扣的 Pod 某种规格的抵扣率 */
+declare interface PodDeductionRate {
+  /** Pod的 CPU */
+  Cpu?: number | null;
+  /** Pod 的内存 */
+  Memory?: number | null;
+  /** Pod 的类型 */
+  Type?: string | null;
+  /** Pod 的 GPU 卡数，Pod 类型为 GPU 时有效。 */
+  GpuNum?: string | null;
+  /** 这种规格的 Pod总数 */
+  TotalNum?: number | null;
+  /** 这种规格的 Pod被预留券抵扣的数量 */
+  DeductionNum?: number | null;
+}
+
 /** 某机型可支持的最大 VPC-CNI 模式的 Pod 数量 */
 declare interface PodLimitsByType {
   /** TKE共享网卡非固定IP模式可支持的Pod数量 */
@@ -1448,6 +1484,20 @@ declare interface PodLimitsInstance {
   InstanceType: string | null;
   /** 机型可支持的最大VPC-CNI模式Pod数量信息 */
   PodLimits: PodLimitsByType | null;
+}
+
+/** Pod所在的节点信息 */
+declare interface PodNodeInfo {
+  /** 集群 ID */
+  ClusterId?: string | null;
+  /** 节点名称 */
+  NodeName?: string | null;
+  /** 可用区 */
+  Zone?: string | null;
+  /** 命名空间 */
+  Namespace?: string | null;
+  /** Pod 名称 */
+  Name?: string | null;
 }
 
 /** 健康检查探测参数 */
@@ -1910,6 +1960,32 @@ declare interface PrometheusTemplateSyncTarget {
   ClusterName?: string | null;
 }
 
+/** 预留券抵扣详情 */
+declare interface RIUtilizationDetail {
+  /** 预留券ID */
+  ReservedInstanceId: string;
+  /** Pod唯一ID */
+  EksId: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** Pod的名称 */
+  Name: string;
+  /** Pod的命名空间 */
+  Namespace: string;
+  /** 工作负载类型 */
+  Kind: string;
+  /** 工作负载名称 */
+  KindName: string;
+  /** Pod的uid */
+  Uid: string;
+  /** 用量开始时间 */
+  StartTime: string;
+  /** 用量结束时间 */
+  EndTime: string;
+  /** 抵扣资源所属产品 */
+  Product: string;
+}
+
 /** 地域属性信息 */
 declare interface RegionInstance {
   /** 地域名称 */
@@ -2008,6 +2084,66 @@ declare interface ReleaseValues {
   RawOriginal: string;
   /** 自定义参数值类型 */
   ValuesType: string;
+}
+
+/** 预留实例 */
+declare interface ReservedInstance {
+  /** 预留实例ID */
+  ReservedInstanceId: string;
+  /** 预留实例名称 */
+  ReservedInstanceName: string;
+  /** 预留券状态 */
+  Status: string;
+  /** 有效期，单位：月 */
+  TimeSpan: number;
+  /** 抵扣资源类型 */
+  ResourceType: string;
+  /** 资源核数 */
+  Cpu: number;
+  /** 资源内存，单位：Gi */
+  Memory: number;
+  /** 预留券的范围，默认值region。 */
+  Scope: string;
+  /** 创建时间 */
+  CreatedAt: string;
+  /** 生效时间 */
+  ActiveAt: string;
+  /** 过期时间 */
+  ExpireAt: string;
+  /** GPU卡数 */
+  GpuCount: string;
+  /** 自动续费标记 */
+  AutoRenewFlag: number;
+  /** 集群 ID */
+  ClusterId?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 上个周期预留券的抵扣状态，Deduct、NotDeduct */
+  DeductStatus?: string;
+}
+
+/** 预留券抵扣范围的描述信息，当抵扣范围为 Region 时，表示地域抵扣，其他参数不需要传；当抵扣范围为 Zone 时，表示可用区抵扣，Zone 参数必传；当抵扣范围为 Node 时，表示节点抵扣，参数 Zone、ClusterId和NodeName均必传。 */
+declare interface ReservedInstanceScope {
+  /** 抵扣范围，取值：Region、Zone 和 Node */
+  Scope: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 集群 ID */
+  ClusterId?: string;
+  /** 节点名称 */
+  NodeName?: string;
+}
+
+/** 预留券规格 */
+declare interface ReservedInstanceSpec {
+  /** 资源类型：common、amd、v100、t4、a10\*gnv4、a10\*gnv4v、a10\*pnv4、windows-common、windows-amd，common表示通用类型。 */
+  Type: string;
+  /** 核数 */
+  Cpu: number;
+  /** 内存 */
+  Memory: number;
+  /** GPU卡数，当Type为GPU类型时设置。 */
+  Gpu?: number;
 }
 
 /** 资源删除选项 */
@@ -2136,6 +2272,20 @@ declare interface SubnetInfos {
   Os?: string;
   /** 硬件架构 */
   Arch?: string;
+}
+
+/** 超级节点上的资源统计 */
+declare interface SuperNodeResource {
+  /** 节点名称 */
+  NodeName?: string | null;
+  /** 节点上的资源总数 */
+  Num?: number | null;
+  /** 节点上的总核数 */
+  Cpu?: number | null;
+  /** 节点上的总内存数 */
+  Memory?: number | null;
+  /** 节点上的总 GPU 卡数 */
+  Gpu?: number | null;
 }
 
 /** 标签绑定的资源类型，当前支持类型："cluster" */
@@ -3012,6 +3162,26 @@ declare interface CreatePrometheusTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateReservedInstancesRequest {
+  /** 预留券实例规格。 */
+  ReservedInstanceSpec: ReservedInstanceSpec;
+  /** 购买实例数量，一次最大购买数量为300。 */
+  InstanceCount: number;
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。 */
+  InstanceChargePrepaid: InstanceChargePrepaid;
+  /** 预留券名称。 */
+  InstanceName?: string;
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
+}
+
+declare interface CreateReservedInstancesResponse {
+  /** 预留券实例 ID。 */
+  ReservedInstanceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTKEEdgeClusterRequest {
   /** k8s版本号 */
   K8SVersion: string;
@@ -3394,6 +3564,16 @@ declare interface DeletePrometheusTemplateSyncResponse {
   RequestId?: string;
 }
 
+declare interface DeleteReservedInstancesRequest {
+  /** 预留券实例ID。 */
+  ReservedInstanceIds: string[];
+}
+
+declare interface DeleteReservedInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTKEEdgeClusterRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3725,9 +3905,9 @@ declare interface DescribeClusterNodePoolsRequest {
 
 declare interface DescribeClusterNodePoolsResponse {
   /** NodePools（节点池列表） */
-  NodePoolSet: NodePool[] | null;
+  NodePoolSet?: NodePool[] | null;
   /** 资源总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4284,6 +4464,68 @@ declare interface DescribeImagesResponse {
   RequestId?: string;
 }
 
+declare interface DescribePodDeductionRateRequest {
+  /** 可用区 */
+  Zone?: string;
+  /** 集群 ID */
+  ClusterId?: string;
+  /** 节点名称 */
+  NodeName?: string;
+}
+
+declare interface DescribePodDeductionRateResponse {
+  /** 各个规格的 可被预留券抵扣的Pod 抵扣率 */
+  PodDeductionRateSet?: PodDeductionRate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePodsBySpecRequest {
+  /** 核数 */
+  Cpu: number;
+  /** 内存 */
+  Memory: number;
+  /** 卡数，有0.25、0.5、1、2、4等 */
+  GpuNum?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 集群 ID */
+  ClusterId?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 偏移量，默认0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** pod-type按照**【Pod 类型**】进行过滤。资源类型：intel、amd、v100、t4、a10\*gnv4、a10\*gnv4v等。类型：String必选：否pod-deduct按照**【上个周期抵扣的Pod**】进行过滤。Values可不设置。必选：否pod-not-deduct按照**【上个周期未抵扣的Pod**】进行过滤。Values可不设置。必选：否 */
+  Filters?: Filter[];
+}
+
+declare interface DescribePodsBySpecResponse {
+  /** Pod 总数 */
+  TotalCount?: number;
+  /** Pod 节点信息 */
+  PodSet?: PodNodeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePostNodeResourcesRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点名称 */
+  NodeName?: string;
+}
+
+declare interface DescribePostNodeResourcesResponse {
+  /** Pod详情 */
+  PodSet?: SuperNodeResource[];
+  /** 预留券详情 */
+  ReservedInstanceSet?: SuperNodeResource[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrometheusAgentInstancesRequest {
   /** 集群id可以是tke, eks, edge的集群id */
   ClusterId: string;
@@ -4628,6 +4870,24 @@ declare interface DescribePrometheusTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRIUtilizationDetailRequest {
+  /** 偏移量，默认0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** reserved-instance-id按照**【预留实例ID**】进行过滤。预留实例ID形如：eksri-xxxxxxxx。类型：String必选：否begin-time按照**【抵扣开始时间**】进行过滤。形如：2023-06-28 15:27:40。类型：String必选：否end-time按照**【抵扣结束时间**】进行过滤。形如：2023-06-28 15:27:40。类型：String必选：否 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRIUtilizationDetailResponse {
+  /** 总数。 */
+  TotalCount?: number;
+  /** 详情。 */
+  RIUtilizationDetailSet?: RIUtilizationDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRegionsRequest {
 }
 
@@ -4636,6 +4896,28 @@ declare interface DescribeRegionsResponse {
   TotalCount?: number | null;
   /** 地域列表 */
   RegionInstanceSet?: RegionInstance[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReservedInstancesRequest {
+  /** 偏移量，默认0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** status按照**【状态**】进行过滤。状态：Creating、Active、Expired、Refunded。类型：String必选：否resource-type按照**【资源类型**】进行过滤。资源类型：common、amd、v100、t4、a10\*gnv4、a10\*gnv4v等，common表示通用类型。类型：String必选：否cpu按照**【核数**】进行过滤。类型：String必选：否memory按照**【内存**】进行过滤。类型：String必选：否gpu按照**【GPU卡数**】进行过滤，取值有0.25、0.5、1、2、4等。类型：String必选：否cluster-id按照**【集群ID**】进行过滤。类型：String必选：否node-name按照**【节点名称**】进行过滤。类型：String必选：否scope按照**【可用区**】进行过滤。比如：ap-guangzhou-2，为空字符串表示地域抵扣范围。如果只过滤可用区抵扣范围，需要同时将cluster-id、node-name设置为空字符串。类型：String必选：否reserved-instance-id按照**【预留实例ID**】进行过滤。预留实例ID形如：eksri-xxxxxxxx。类型：String必选：否reserved-instance-name按照**【预留实例名称**】进行过滤。类型：String必选：否reserved-instance-deduct按照**【上个周期抵扣的预留券**】进行过滤。Values可不设置。必选：否reserved-instance-not-deduct按照**【上个周期未抵扣的预留券**】进行过滤。Values可不设置。必选：否 */
+  Filters?: Filter[];
+  /** 排序字段。支持CreatedAt、ActiveAt、ExpireAt。默认值CreatedAt。 */
+  OrderField?: string;
+  /** 排序方法。顺序：ASC，倒序：DESC。默认值DESC。 */
+  OrderDirection?: string;
+}
+
+declare interface DescribeReservedInstancesResponse {
+  /** 总数。 */
+  TotalCount?: number;
+  /** 预留实例列表。 */
+  ReservedInstanceSet?: ReservedInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5259,6 +5541,8 @@ declare interface ModifyClusterNodePoolRequest {
   DeletionProtection?: boolean;
   /** dockerd --graph 指定值, 默认为 /var/lib/docker */
   DockerGraphPath?: string;
+  /** base64编码后的自定义脚本 */
+  PreStartUserScript?: string;
 }
 
 declare interface ModifyClusterNodePoolResponse {
@@ -5424,6 +5708,18 @@ declare interface ModifyPrometheusTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyReservedInstanceScopeRequest {
+  /** 预留券唯一 ID */
+  ReservedInstanceIds: string[];
+  /** 预留券抵扣范围信息 */
+  ReservedInstanceScope: ReservedInstanceScope;
+}
+
+declare interface ModifyReservedInstanceScopeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RemoveNodeFromNodePoolRequest {
   /** 集群id */
   ClusterId: string;
@@ -5434,6 +5730,20 @@ declare interface RemoveNodeFromNodePoolRequest {
 }
 
 declare interface RemoveNodeFromNodePoolResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RenewReservedInstancesRequest {
+  /** 预留券实例ID，每次请求实例的上限为100。 */
+  ReservedInstanceIds: string[];
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。 */
+  InstanceChargePrepaid: InstanceChargePrepaid;
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
+}
+
+declare interface RenewReservedInstancesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5897,6 +6207,8 @@ declare interface Tke {
   CreatePrometheusTemp(data: CreatePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusTempResponse>;
   /** 创建模板 {@link CreatePrometheusTemplateRequest} {@link CreatePrometheusTemplateResponse} */
   CreatePrometheusTemplate(data: CreatePrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusTemplateResponse>;
+  /** 购买预留券实例 {@link CreateReservedInstancesRequest} {@link CreateReservedInstancesResponse} */
+  CreateReservedInstances(data: CreateReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReservedInstancesResponse>;
   /** 创建边缘计算集群 {@link CreateTKEEdgeClusterRequest} {@link CreateTKEEdgeClusterResponse} */
   CreateTKEEdgeCluster(data: CreateTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTKEEdgeClusterResponse>;
   /** 删除addon {@link DeleteAddonRequest} {@link DeleteAddonResponse} */
@@ -5953,6 +6265,8 @@ declare interface Tke {
   DeletePrometheusTemplate(data: DeletePrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTemplateResponse>;
   /** 取消模板同步 {@link DeletePrometheusTemplateSyncRequest} {@link DeletePrometheusTemplateSyncResponse} */
   DeletePrometheusTemplateSync(data: DeletePrometheusTemplateSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTemplateSyncResponse>;
+  /** 退还预留券实例 {@link DeleteReservedInstancesRequest} {@link DeleteReservedInstancesResponse} */
+  DeleteReservedInstances(data: DeleteReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReservedInstancesResponse>;
   /** 删除边缘计算集群 {@link DeleteTKEEdgeClusterRequest} {@link DeleteTKEEdgeClusterResponse} */
   DeleteTKEEdgeCluster(data: DeleteTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTKEEdgeClusterResponse>;
   /** 获取addon列表 {@link DescribeAddonRequest} {@link DescribeAddonResponse} */
@@ -6055,6 +6369,12 @@ declare interface Tke {
   DescribeImageCaches(data?: DescribeImageCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageCachesResponse>;
   /** 获取镜像信息 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */
   DescribeImages(data?: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
+  /** 查询Pod 抵扣率 {@link DescribePodDeductionRateRequest} {@link DescribePodDeductionRateResponse} */
+  DescribePodDeductionRate(data?: DescribePodDeductionRateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePodDeductionRateResponse>;
+  /** 根据规格查询 Pod 信息 {@link DescribePodsBySpecRequest} {@link DescribePodsBySpecResponse} */
+  DescribePodsBySpec(data: DescribePodsBySpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePodsBySpecResponse>;
+  /** 查询按量计费超级节点上的资源详情 {@link DescribePostNodeResourcesRequest} {@link DescribePostNodeResourcesResponse} */
+  DescribePostNodeResources(data: DescribePostNodeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostNodeResourcesResponse>;
   /** 获取关联目标集群的实例列表 {@link DescribePrometheusAgentInstancesRequest} {@link DescribePrometheusAgentInstancesResponse} */
   DescribePrometheusAgentInstances(data: DescribePrometheusAgentInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentInstancesResponse>;
   /** 获取被关联集群列表 {@link DescribePrometheusAgentsRequest} {@link DescribePrometheusAgentsResponse} */
@@ -6093,8 +6413,12 @@ declare interface Tke {
   DescribePrometheusTemplateSync(data: DescribePrometheusTemplateSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTemplateSyncResponse>;
   /** 模板列表 {@link DescribePrometheusTemplatesRequest} {@link DescribePrometheusTemplatesResponse} */
   DescribePrometheusTemplates(data?: DescribePrometheusTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTemplatesResponse>;
+  /** 预留实例用量查询 {@link DescribeRIUtilizationDetailRequest} {@link DescribeRIUtilizationDetailResponse} */
+  DescribeRIUtilizationDetail(data?: DescribeRIUtilizationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRIUtilizationDetailResponse>;
   /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
+  /** 查询预留实例列表 {@link DescribeReservedInstancesRequest} {@link DescribeReservedInstancesResponse} */
+  DescribeReservedInstances(data?: DescribeReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesResponse>;
   /** 获取集群资源使用量 {@link DescribeResourceUsageRequest} {@link DescribeResourceUsageResponse} */
   DescribeResourceUsage(data: DescribeResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageResponse>;
   /** 查询路由表冲突列表 {@link DescribeRouteTableConflictsRequest} {@link DescribeRouteTableConflictsResponse} */
@@ -6191,8 +6515,12 @@ declare interface Tke {
   ModifyPrometheusTemp(data: ModifyPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTempResponse>;
   /** 修改模板 {@link ModifyPrometheusTemplateRequest} {@link ModifyPrometheusTemplateResponse} */
   ModifyPrometheusTemplate(data: ModifyPrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTemplateResponse>;
+  /** 修改预留券的抵扣范围 {@link ModifyReservedInstanceScopeRequest} {@link ModifyReservedInstanceScopeResponse} */
+  ModifyReservedInstanceScope(data: ModifyReservedInstanceScopeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReservedInstanceScopeResponse>;
   /** 移出节点池节点 {@link RemoveNodeFromNodePoolRequest} {@link RemoveNodeFromNodePoolResponse} */
   RemoveNodeFromNodePool(data: RemoveNodeFromNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNodeFromNodePoolResponse>;
+  /** 续费预留券实例 {@link RenewReservedInstancesRequest} {@link RenewReservedInstancesResponse} */
+  RenewReservedInstances(data: RenewReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewReservedInstancesResponse>;
   /** 重启容器实例 {@link RestartEKSContainerInstancesRequest} {@link RestartEKSContainerInstancesResponse} */
   RestartEKSContainerInstances(data: RestartEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartEKSContainerInstancesResponse>;
   /** 集群回滚应用版本 {@link RollbackClusterReleaseRequest} {@link RollbackClusterReleaseResponse} */
