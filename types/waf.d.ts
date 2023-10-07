@@ -732,6 +732,8 @@ declare interface GoodsDetailNew {
   CurDeadline?: string | null;
   /** 对存在的实例购买bot 或api 安全 */
   InstanceId?: string | null;
+  /** 资源id */
+  ResourceId?: string | null;
 }
 
 /** CLB-WAF删除域名参数 */

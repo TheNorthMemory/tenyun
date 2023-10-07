@@ -1813,9 +1813,17 @@ declare interface CreateChannelFlowEvidenceReportResponse {
 }
 
 declare interface CreateChannelOrganizationInfoChangeUrlRequest {
+  /** 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
+  Agent: Agent;
+  /** 企业信息变更类型，可选类型如下：**1**：企业超管变更**2**：企业基础信息变更 */
+  ChangeType: number;
 }
 
 declare interface CreateChannelOrganizationInfoChangeUrlResponse {
+  /** 创建的企业信息变更链接。 */
+  Url?: string;
+  /** 链接过期时间。链接7天有效。 */
+  ExpiredTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3860,7 +3868,7 @@ declare interface Essbasic {
   /** 创建并返回出证报告 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
   /** 创建子客企业信息变更链接 {@link CreateChannelOrganizationInfoChangeUrlRequest} {@link CreateChannelOrganizationInfoChangeUrlResponse} */
-  CreateChannelOrganizationInfoChangeUrl(data?: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
+  CreateChannelOrganizationInfoChangeUrl(data: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
   /** 使用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
