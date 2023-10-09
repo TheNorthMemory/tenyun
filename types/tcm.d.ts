@@ -60,6 +60,8 @@ declare interface CLS {
   Topic?: string;
   /** 是否删除 */
   NeedDelete?: boolean;
+  /** cls 主题创建的地域 */
+  Region?: string | null;
 }
 
 /** Mesh集群信息 */

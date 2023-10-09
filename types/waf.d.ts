@@ -2008,6 +2008,32 @@ declare interface DescribeCCRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCertificateVerifyResultRequest {
+  /** 域名 */
+  Domain: string;
+  /** 证书类型 */
+  CertType: number;
+  /** 证书公钥 */
+  Certificate?: string;
+  /** 证书ID */
+  CertID?: string;
+  /** 私钥信息 */
+  PrivateKey?: string;
+}
+
+declare interface DescribeCertificateVerifyResultResponse {
+  /** 状态码 */
+  Status: number;
+  /** 错误详情 */
+  Detail: string[];
+  /** 过期时间 */
+  NotAfter: string;
+  /** 证书是否改变:1有改变，0没有改变 */
+  Changed: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCiphersDetailRequest {
 }
 
@@ -3509,6 +3535,8 @@ declare interface Waf {
   DescribeCCRule(data: DescribeCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleResponse>;
   /** 查询CC规则 {@link DescribeCCRuleListRequest} {@link DescribeCCRuleListResponse} */
   DescribeCCRuleList(data?: DescribeCCRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleListResponse>;
+  /** 获取证书的检查结果 {@link DescribeCertificateVerifyResultRequest} {@link DescribeCertificateVerifyResultResponse} */
+  DescribeCertificateVerifyResult(data: DescribeCertificateVerifyResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateVerifyResultResponse>;
   /** 查询加密套件信息 {@link DescribeCiphersDetailRequest} {@link DescribeCiphersDetailResponse} */
   DescribeCiphersDetail(data?: DescribeCiphersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCiphersDetailResponse>;
   /** 查询访问控制规则 {@link DescribeCustomRuleListRequest} {@link DescribeCustomRuleListResponse} */

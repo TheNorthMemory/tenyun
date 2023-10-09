@@ -1218,7 +1218,7 @@ declare interface Https {
   SslStatus?: string | null;
   /** Hsts配置 */
   Hsts?: Hsts | null;
-  /** Tls版本设置，仅支持部分Advance域名，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本 */
+  /** Tls版本设置，仅支持部分Advance域名，支持设置 TLSv1, TLSv1.1, TLSv1.2, TLSv1.3，修改时必须开启连续的版本 */
   TlsVersion?: string[] | null;
 }
 

@@ -272,6 +272,28 @@ declare interface DMSTableInfo {
 declare interface DataEngineConfigPair {
 }
 
+/** 集群大版本镜像信息。 */
+declare interface DataEngineImageVersion {
+  /** 镜像大版本ID */
+  ImageVersionId: string;
+  /** 镜像大版本名称 */
+  ImageVersion: string;
+  /** 镜像大版本描述 */
+  Description: string | null;
+  /** 是否为公共版本：1：公共；2：私有 */
+  IsPublic: number;
+  /** 集群类型：SparkSQL/PrestoSQL/SparkBatch */
+  EngineType: string;
+  /** 版本状态：1：初始化；2：上线；3：下线 */
+  IsSharedEngine: number;
+  /** 版本状态：1：初始化；2：上线；3：下线 */
+  State: number;
+  /** 插入时间 */
+  InsertTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+}
+
 /** DataEngine详细信息 */
 declare interface DataEngineInfo {
   /** DataEngine名称 */
@@ -874,6 +896,14 @@ declare interface Policy {
   Id?: number | null;
 }
 
+/** 策略集合 */
+declare interface Policys {
+  /** 策略集合 */
+  PolicySet: Policy[] | null;
+  /** 策略总数 */
+  TotalCount: number | null;
+}
+
 /** Presto监控指标 */
 declare interface PrestoMonitorMetrics {
   /** Alluxio本地缓存命中率 */
@@ -888,6 +918,22 @@ declare interface Property {
   Key: string;
   /** 属性key对应的value。 */
   Value: string;
+}
+
+/** python-spark镜像信息。 */
+declare interface PythonSparkImage {
+  /** spark镜像唯一id */
+  SparkImageId: string;
+  /** 集群小版本镜像id */
+  ChildImageVersionId: string;
+  /** spark镜像名称 */
+  SparkImageVersion: string;
+  /** spark镜像描述信息 */
+  Description: string | null;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
 }
 
 /** SQL查询任务 */
@@ -1360,6 +1406,28 @@ declare interface TextFile {
   Regex: string | null;
 }
 
+/** 用户详细信息 */
+declare interface UserDetailInfo {
+  /** 用户Id */
+  UserId: string | null;
+  /** 返回的信息类型，Group：返回的当前用户的工作组信息；DataAuth：返回的当前用户的数据权限信息；EngineAuth：返回的当前用户的引擎权限信息 */
+  Type: string | null;
+  /** 用户类型：ADMIN：管理员 COMMON：一般用户 */
+  UserType: string | null;
+  /** 用户描述信息 */
+  UserDescription: string | null;
+  /** 数据权限信息集合 */
+  DataPolicyInfo: Policys | null;
+  /** 引擎权限集合 */
+  EnginePolicyInfo: Policys | null;
+  /** 绑定到该用户的工作组集合信息 */
+  WorkGroupInfo: WorkGroups | null;
+  /** 用户别名 */
+  UserAlias: string | null;
+  /** 行过滤集合 */
+  RowFilterInfo: Policys | null;
+}
+
 /** 绑定到同一个工作组的用户Id的集合 */
 declare interface UserIdSetOfWorkGroupId {
   /** 工作组Id */
@@ -1428,6 +1496,14 @@ declare interface UserRole {
   PermissionJson?: string | null;
 }
 
+/** 用户信息集合 */
+declare interface Users {
+  /** 用户信息集合 */
+  UserSet: UserMessage[] | null;
+  /** 用户总数 */
+  TotalCount: number | null;
+}
+
 /** 视图基本配置信息 */
 declare interface ViewBaseInfo {
   /** 该视图所属数据库名字 */
@@ -1452,6 +1528,26 @@ declare interface ViewResponseInfo {
   CreateTime: string;
   /** 视图更新时间。 */
   ModifiedTime: string;
+}
+
+/** 工作组详细信息 */
+declare interface WorkGroupDetailInfo {
+  /** 工作组Id */
+  WorkGroupId: number | null;
+  /** 工作组名称 */
+  WorkGroupName: string | null;
+  /** 包含的信息类型。User：用户信息；DataAuth：数据权限；EngineAuth:引擎权限 */
+  Type: string | null;
+  /** 工作组上绑定的用户集合 */
+  UserInfo: Users | null;
+  /** 数据权限集合 */
+  DataPolicyInfo: Policys | null;
+  /** 引擎权限集合 */
+  EnginePolicyInfo: Policys | null;
+  /** 工作组描述信息 */
+  WorkGroupDescription: string | null;
+  /** 行过滤信息集合 */
+  RowFilterInfo: Policys | null;
 }
 
 /** 同一个用户绑定的工作组集合 */
@@ -1494,6 +1590,14 @@ declare interface WorkGroupMessage {
   Creator: string;
   /** 工作组创建的时间，形如2021-07-28 16:19:32 */
   CreateTime: string;
+}
+
+/** 工作组集合 */
+declare interface WorkGroups {
+  /** 工作组信息集合 */
+  WorkGroupSet: WorkGroupMessage[] | null;
+  /** 工作组总数 */
+  TotalCount: number | null;
 }
 
 declare interface AddDMSPartitionsRequest {
@@ -1670,6 +1774,54 @@ declare interface CancelTaskRequest {
 }
 
 declare interface CancelTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckDataEngineConfigPairsValidityRequest {
+  /** 引擎小版本ID */
+  ChildImageVersionId?: string;
+  /** 用户自定义参数 */
+  DataEngineConfigPairs?: DataEngineConfigPair[];
+  /** 引擎大版本ID，存在小版本ID时仅需传入小版本ID，不存在时会获取当前大版本下最新的小版本ID。 */
+  ImageVersionId?: string;
+}
+
+declare interface CheckDataEngineConfigPairsValidityResponse {
+  /** 参数有效性：ture:有效，false:至少存在一个无效参数； */
+  IsAvailable?: boolean;
+  /** 无效参数集合 */
+  UnavailableConfig?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckDataEngineImageCanBeRollbackRequest {
+  /** 引擎唯一id */
+  DataEngineId: string;
+}
+
+declare interface CheckDataEngineImageCanBeRollbackResponse {
+  /** 回滚后日志记录id */
+  ToRecordId: string;
+  /** 回滚前日志记录id */
+  FromRecordId: string;
+  /** 是否能够回滚 */
+  IsRollback: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckDataEngineImageCanBeUpgradeRequest {
+  /** 集群id */
+  DataEngineId: string;
+}
+
+declare interface CheckDataEngineImageCanBeUpgradeResponse {
+  /** 当前大版本下，可升级的集群镜像小版本id */
+  ChildImageVersionId: string;
+  /** 是否能够升级 */
+  IsUpgrade: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2232,6 +2384,16 @@ declare interface CreateWorkGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDataEngineRequest {
+  /** 删除虚拟集群的名称数组 */
+  DataEngineNames: string[];
+}
+
+declare interface DeleteDataEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNotebookSessionRequest {
   /** Session唯一标识 */
   SessionId: string;
@@ -2444,6 +2606,44 @@ declare interface DescribeDMSTablesResponse {
   TableList: DMSTableInfo[] | null;
   /** 统计值 */
   TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataEngineImageVersionsRequest {
+  /** 引擎类型：SQL、SparkBatch */
+  EngineType: string;
+}
+
+declare interface DescribeDataEngineImageVersionsResponse {
+  /** 集群大版本镜像信息列表 */
+  ImageParentVersions?: DataEngineImageVersion[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataEnginePythonSparkImagesRequest {
+  /** 集群镜像小版本ID */
+  ChildImageVersionId: string;
+}
+
+declare interface DescribeDataEnginePythonSparkImagesResponse {
+  /** PYSPARK镜像信息列表 */
+  PythonSparkImages?: PythonSparkImage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataEngineRequest {
+  /** House名称 */
+  DataEngineName: string;
+}
+
+declare interface DescribeDataEngineResponse {
+  /** 数据引擎详细信息 */
+  DataEngine: DataEngineInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2944,6 +3144,38 @@ declare interface DescribeTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserDataEngineConfigRequest {
+}
+
+declare interface DescribeUserDataEngineConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserInfoRequest {
+  /** 用户Id */
+  UserId?: string;
+  /** 查询的信息类型，Group：工作组 DataAuth：数据权限 EngineAuth:引擎权限 */
+  Type?: string;
+  /** 查询的过滤条件。当Type为Group时，支持Key为workgroup-name的模糊搜索；当Type为DataAuth时，支持key：policy-type：权限类型。policy-source：数据来源。data-name：库表的模糊搜索。当Type为EngineAuth时，支持key：policy-type：权限类型。policy-source：数据来源。engine-name：库表的模糊搜索。 */
+  Filters?: Filter[];
+  /** 排序字段。当Type为Group时，支持create-time、group-name当Type为DataAuth时，支持create-time当Type为EngineAuth时，支持create-time */
+  SortBy?: string;
+  /** 排序方式，desc表示正序，asc表示反序， 默认为asc */
+  Sorting?: string;
+  /** 返回数量，默认20，最大值100 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+}
+
+declare interface DescribeUserInfoResponse {
+  /** 用户详细信息 */
+  UserInfo: UserDetailInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserRolesRequest {
   /** 列举的数量限制 */
   Limit: number;
@@ -2962,6 +3194,18 @@ declare interface DescribeUserRolesResponse {
   Total?: number;
   /** 用户角色信息 */
   UserRoles?: UserRole[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserTypeRequest {
+  /** 用户ID（UIN），如果不填默认为调用方的子UIN */
+  UserId?: string;
+}
+
+declare interface DescribeUserTypeResponse {
+  /** 用户类型。ADMIN：管理员 COMMON：普通用户 */
+  UserType: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3016,6 +3260,30 @@ declare interface DescribeViewsResponse {
   ViewList: ViewResponseInfo[];
   /** 实例总数。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkGroupInfoRequest {
+  /** 工作组Id */
+  WorkGroupId?: number;
+  /** 查询信息类型：User：用户信息 DataAuth：数据权限 EngineAuth：引擎权限 */
+  Type?: string;
+  /** 查询的过滤条件。当Type为User时，支持Key为user-name的模糊搜索；当Type为DataAuth时，支持key：policy-type：权限类型。policy-source：数据来源。data-name：库表的模糊搜索。当Type为EngineAuth时，支持key：policy-type：权限类型。policy-source：数据来源。engine-name：库表的模糊搜索。 */
+  Filters?: Filter[];
+  /** 排序字段。当Type为User时，支持create-time、user-name当Type为DataAuth时，支持create-time当Type为EngineAuth时，支持create-time */
+  SortBy?: string;
+  /** 排序方式，desc表示正序，asc表示反序， 默认为asc */
+  Sorting?: string;
+  /** 返回数量，默认20，最大值100 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+}
+
+declare interface DescribeWorkGroupInfoResponse {
+  /** 工作组详细信息 */
+  WorkGroupInfo: WorkGroupDetailInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3194,6 +3462,18 @@ declare interface LockMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDataEngineDescriptionRequest {
+  /** 要修改的引擎的名称 */
+  DataEngineName: string;
+  /** 引擎的描述信息，最大长度为250 */
+  Message: string;
+}
+
+declare interface ModifyDataEngineDescriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGovernEventRuleRequest {
 }
 
@@ -3304,6 +3584,18 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserTypeRequest {
+  /** 用户ID */
+  UserId: string;
+  /** 用户要修改到的类型，ADMIN：管理员，COMMON：一般用户。 */
+  UserType: string;
+}
+
+declare interface ModifyUserTypeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWorkGroupRequest {
   /** 工作组Id */
   WorkGroupId: number;
@@ -3336,6 +3628,24 @@ declare interface QueryResultResponse {
   RequestId?: string;
 }
 
+declare interface RenewDataEngineRequest {
+  /** CU队列名称 */
+  DataEngineName: string;
+  /** 续费时长，单位月，最少续费1一个月 */
+  TimeSpan: number;
+  /** 付费类型，默认为1，预付费 */
+  PayMode?: number;
+  /** 单位，默认m，仅能填m */
+  TimeUnit?: string;
+  /** 自动续费标志，0，初始状态，默认不自动续费，若用户有预付费不停服特权，自动续费。1：自动续费。2：明确不自动续费。不传该参数默认为0 */
+  RenewFlag?: number;
+}
+
+declare interface RenewDataEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReportHeartbeatMetaDataRequest {
   /** 数据源名称 */
   DatasourceConnectionName?: string;
@@ -3350,6 +3660,22 @@ declare interface ReportHeartbeatMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface RestartDataEngineRequest {
+}
+
+declare interface RestartDataEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RollbackDataEngineImageRequest {
+}
+
+declare interface RollbackDataEngineImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SuspendResumeDataEngineRequest {
   /** 虚拟集群名称 */
   DataEngineName: string;
@@ -3360,6 +3686,14 @@ declare interface SuspendResumeDataEngineRequest {
 declare interface SuspendResumeDataEngineResponse {
   /** 虚拟集群详细信息 */
   DataEngineName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SwitchDataEngineImageRequest {
+}
+
+declare interface SwitchDataEngineImageResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3398,6 +3732,52 @@ declare interface UnlockMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface UpdateDataEngineConfigRequest {
+}
+
+declare interface UpdateDataEngineConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateDataEngineRequest {
+  /** 资源大小 */
+  Size: number;
+  /** 最小资源 */
+  MinClusters: number;
+  /** 最大资源 */
+  MaxClusters: number;
+  /** 开启自动刷新：true：开启、false（默认）：关闭 */
+  AutoResume: boolean;
+  /** 数据引擎名称 */
+  DataEngineName: string;
+  /** 相关信息 */
+  Message: string;
+  /** 是否自定挂起集群：false（默认）：不自动挂起、true：自动挂起 */
+  AutoSuspend?: boolean;
+  /** 定时启停集群策略：0（默认）：关闭定时策略、1：开启定时策略（注：定时启停策略与自动挂起策略互斥） */
+  CrontabResumeSuspend?: number;
+  /** 定时启停策略，复杂类型：包含启停时间、挂起集群策略 */
+  CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy;
+  /** 单个集群最大并发任务数，默认5 */
+  MaxConcurrency?: number;
+  /** 可容忍的排队时间，默认0。当任务排队的时间超过可容忍的时间时可能会触发扩容。如果该参数为0，则表示一旦有任务排队就可能立即触发扩容。 */
+  TolerableQueueTime?: number;
+  /** 集群自动挂起时间 */
+  AutoSuspendTime?: number;
+  /** spark jar 包年包月集群是否开启弹性 */
+  ElasticSwitch?: boolean;
+  /** spark jar 包年包月集群弹性上限 */
+  ElasticLimit?: number;
+  /** Spark批作业集群Session资源配置模板 */
+  SessionResourceTemplate?: SessionResourceTemplate;
+}
+
+declare interface UpdateDataEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateRowFilterRequest {
   /** 行过滤策略的id，此值可以通过DescribeUserInfo或者DescribeWorkGroupInfo接口获取 */
   PolicyId: number;
@@ -3406,6 +3786,22 @@ declare interface UpdateRowFilterRequest {
 }
 
 declare interface UpdateRowFilterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateUserDataEngineConfigRequest {
+}
+
+declare interface UpdateUserDataEngineConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpgradeDataEngineImageRequest {
+}
+
+declare interface UpgradeDataEngineImageResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3437,6 +3833,12 @@ declare interface Dlc {
   CancelSparkSessionBatchSQL(data: CancelSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CancelSparkSessionBatchSQLResponse>;
   /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
+  /** 检查引擎用户自定义参数的有效性 {@link CheckDataEngineConfigPairsValidityRequest} {@link CheckDataEngineConfigPairsValidityResponse} */
+  CheckDataEngineConfigPairsValidity(data?: CheckDataEngineConfigPairsValidityRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineConfigPairsValidityResponse>;
+  /** 查看集群是否能回滚 {@link CheckDataEngineImageCanBeRollbackRequest} {@link CheckDataEngineImageCanBeRollbackResponse} */
+  CheckDataEngineImageCanBeRollback(data: CheckDataEngineImageCanBeRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineImageCanBeRollbackResponse>;
+  /** 查看集群镜像是否能够升级 {@link CheckDataEngineImageCanBeUpgradeRequest} {@link CheckDataEngineImageCanBeUpgradeResponse} */
+  CheckDataEngineImageCanBeUpgrade(data: CheckDataEngineImageCanBeUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineImageCanBeUpgradeResponse>;
   /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
   /** DMS元数据创建库 {@link CreateDMSDatabaseRequest} {@link CreateDMSDatabaseResponse} */
@@ -3483,6 +3885,8 @@ declare interface Dlc {
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 创建工作组 {@link CreateWorkGroupRequest} {@link CreateWorkGroupResponse} */
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
+  /** 删除数据引擎 {@link DeleteDataEngineRequest} {@link DeleteDataEngineResponse} */
+  DeleteDataEngine(data: DeleteDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataEngineResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
   DeleteNotebookSession(data: DeleteNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookSessionResponse>;
   /** 删除sql脚本 {@link DeleteScriptRequest} {@link DeleteScriptResponse} */
@@ -3503,6 +3907,12 @@ declare interface Dlc {
   DescribeDMSTable(data?: DescribeDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTableResponse>;
   /** DMS元数据获取表列表 {@link DescribeDMSTablesRequest} {@link DescribeDMSTablesResponse} */
   DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
+  /** 获取数据引擎详细信息 {@link DescribeDataEngineRequest} {@link DescribeDataEngineResponse} */
+  DescribeDataEngine(data: DescribeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEngineResponse>;
+  /** 获取独享集群大版本镜像列表 {@link DescribeDataEngineImageVersionsRequest} {@link DescribeDataEngineImageVersionsResponse} */
+  DescribeDataEngineImageVersions(data: DescribeDataEngineImageVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEngineImageVersionsResponse>;
+  /** 获取PYSPARK镜像列表 {@link DescribeDataEnginePythonSparkImagesRequest} {@link DescribeDataEnginePythonSparkImagesResponse} */
+  DescribeDataEnginePythonSparkImages(data: DescribeDataEnginePythonSparkImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginePythonSparkImagesResponse>;
   /** 查询DataEngines列表 {@link DescribeDataEnginesRequest} {@link DescribeDataEnginesResponse} */
   DescribeDataEngines(data?: DescribeDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
@@ -3553,12 +3963,20 @@ declare interface Dlc {
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  /** 查询用户自定义引擎参数 {@link DescribeUserDataEngineConfigRequest} {@link DescribeUserDataEngineConfigResponse} */
+  DescribeUserDataEngineConfig(data?: DescribeUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDataEngineConfigResponse>;
+  /** 获取用户详细信息 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
+  DescribeUserInfo(data?: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
   /** 列举用户角色信息 {@link DescribeUserRolesRequest} {@link DescribeUserRolesResponse} */
   DescribeUserRoles(data: DescribeUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRolesResponse>;
+  /** 获取用户类型 {@link DescribeUserTypeRequest} {@link DescribeUserTypeResponse} */
+  DescribeUserType(data?: DescribeUserTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserTypeResponse>;
   /** 获取用户列表信息 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
   /** 查询视图列表 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
+  /** 获取工作组详细信息 {@link DescribeWorkGroupInfoRequest} {@link DescribeWorkGroupInfoResponse} */
+  DescribeWorkGroupInfo(data?: DescribeWorkGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkGroupInfoResponse>;
   /** 获取工作组列表 {@link DescribeWorkGroupsRequest} {@link DescribeWorkGroupsResponse} */
   DescribeWorkGroups(data?: DescribeWorkGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkGroupsResponse>;
   /** 解绑用户鉴权策略 {@link DetachUserPolicyRequest} {@link DetachUserPolicyResponse} */
@@ -3577,6 +3995,8 @@ declare interface Dlc {
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
+  /** 修改引擎描述信息 {@link ModifyDataEngineDescriptionRequest} {@link ModifyDataEngineDescriptionResponse} */
+  ModifyDataEngineDescription(data: ModifyDataEngineDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataEngineDescriptionResponse>;
   /** 修改数据治理事件阈值 {@link ModifyGovernEventRuleRequest} {@link ModifyGovernEventRuleResponse} */
   ModifyGovernEventRule(data?: ModifyGovernEventRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernEventRuleResponse>;
   /** 更新spark作业 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
@@ -3585,22 +4005,40 @@ declare interface Dlc {
   ModifySparkAppBatch(data: ModifySparkAppBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppBatchResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 修改用户类型 {@link ModifyUserTypeRequest} {@link ModifyUserTypeResponse} */
+  ModifyUserType(data: ModifyUserTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserTypeResponse>;
   /** 修改工作组信息 {@link ModifyWorkGroupRequest} {@link ModifyWorkGroupResponse} */
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
   /** 获取任务结果查询 {@link QueryResultRequest} {@link QueryResultResponse} */
   QueryResult(data: QueryResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResultResponse>;
+  /** 续费包年包月数据引擎 {@link RenewDataEngineRequest} {@link RenewDataEngineResponse} */
+  RenewDataEngine(data: RenewDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDataEngineResponse>;
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
+  /** 重启引擎 {@link RestartDataEngineRequest} {@link RestartDataEngineResponse} */
+  RestartDataEngine(data?: RestartDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDataEngineResponse>;
+  /** 回滚引擎镜像版本 {@link RollbackDataEngineImageRequest} {@link RollbackDataEngineImageResponse} */
+  RollbackDataEngineImage(data?: RollbackDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackDataEngineImageResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
   SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
   /** 切换主备集群 {@link SwitchDataEngineRequest} {@link SwitchDataEngineResponse} */
   SwitchDataEngine(data: SwitchDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineResponse>;
+  /** 切换引擎镜像版本 {@link SwitchDataEngineImageRequest} {@link SwitchDataEngineImageResponse} */
+  SwitchDataEngineImage(data?: SwitchDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineImageResponse>;
   /** 解绑用户上的用户组 {@link UnbindWorkGroupsFromUserRequest} {@link UnbindWorkGroupsFromUserResponse} */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
   /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
   UnlockMetaData(data: UnlockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockMetaDataResponse>;
+  /** 更新数据引擎配置 {@link UpdateDataEngineRequest} {@link UpdateDataEngineResponse} */
+  UpdateDataEngine(data: UpdateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineResponse>;
+  /** 修改引擎配置 {@link UpdateDataEngineConfigRequest} {@link UpdateDataEngineConfigResponse} */
+  UpdateDataEngineConfig(data?: UpdateDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineConfigResponse>;
   /** 更新行过滤规则 {@link UpdateRowFilterRequest} {@link UpdateRowFilterResponse} */
   UpdateRowFilter(data: UpdateRowFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRowFilterResponse>;
+  /** 修改用户引擎自定义配置 {@link UpdateUserDataEngineConfigRequest} {@link UpdateUserDataEngineConfigResponse} */
+  UpdateUserDataEngineConfig(data?: UpdateUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserDataEngineConfigResponse>;
+  /** 升级引擎镜像 {@link UpgradeDataEngineImageRequest} {@link UpgradeDataEngineImageResponse} */
+  UpgradeDataEngineImage(data?: UpgradeDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDataEngineImageResponse>;
 }
 
 export declare type Versions = ["2021-01-25"];

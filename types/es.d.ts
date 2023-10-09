@@ -123,33 +123,35 @@ declare interface EsPublicAcl {
 /** 索引元数据字段 */
 declare interface IndexMetaField {
   /** 索引类型 */
-  IndexType: string | null;
+  IndexType?: string | null;
   /** 索引名 */
-  IndexName: string | null;
+  IndexName?: string | null;
+  /** 索引元数据JSON */
+  IndexMetaJson?: string | null;
   /** 索引状态 */
-  IndexStatus: string | null;
+  IndexStatus?: string | null;
   /** 索引存储大小，单位Byte */
-  IndexStorage: number | null;
+  IndexStorage?: number | null;
   /** 索引创建时间 */
-  IndexCreateTime: string | null;
+  IndexCreateTime?: string | null;
   /** 后备索引 */
-  BackingIndices: BackingIndexMetaField[] | null;
+  BackingIndices?: BackingIndexMetaField[] | null;
   /** 索引所属集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 索引所属集群名 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 索引所属集群版本 */
-  ClusterVersion: string | null;
+  ClusterVersion?: string | null;
   /** 索引生命周期字段 */
-  IndexPolicyField: IndexPolicyField | null;
+  IndexPolicyField?: IndexPolicyField | null;
   /** 索引自治字段 */
-  IndexOptionsField: IndexOptionsField | null;
+  IndexOptionsField?: IndexOptionsField | null;
   /** 索引配置字段 */
-  IndexSettingsField: IndexSettingsField | null;
+  IndexSettingsField?: IndexSettingsField | null;
   /** 索引所属集群APP ID */
-  AppId: number | null;
+  AppId?: number | null;
   /** 索引文档数 */
-  IndexDocs: number | null;
+  IndexDocs?: number | null;
 }
 
 /** 索引自治字段 */

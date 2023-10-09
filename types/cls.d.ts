@@ -2367,38 +2367,38 @@ declare interface DescribeTopicsResponse {
 }
 
 declare interface GetAlarmLogRequest {
-  /** 要查询的日志的起始时间，Unix时间戳，单位ms */
+  /** 要查询的执行详情的起始时间，Unix时间戳，单位ms */
   From: number;
-  /** 要查询的日志的结束时间，Unix时间戳，单位ms */
+  /** 要查询的执行详情的结束时间，Unix时间戳，单位ms */
   To: number;
-  /** 查询语句，语句长度最大为1024 */
+  /** 查询过滤条件，例如：- 按告警策略ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"`- 按监控对象ID查询：`monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b") `- 按告警策略ID及监控对象ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b")` */
   Query: string;
-  /** 单次查询返回的日志条数，最大值为1000 */
+  /** 单次查询返回的执行详情条数，最大值为1000 */
   Limit?: number;
-  /** 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容 */
+  /** 加载更多详情时使用，透传上次返回的Context值，获取后续的执行详情 */
   Context?: string;
-  /** 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc */
+  /** 执行详情是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc */
   Sort?: string;
-  /** 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效 */
+  /** 如果Query包含SQL语句，UseNewAnalysis为true时响应参数AnalysisRecords和Columns有效， UseNewAnalysis为false时响应参数AnalysisResults和ColNames有效 */
   UseNewAnalysis?: boolean;
 }
 
 declare interface GetAlarmLogResponse {
-  /** 加载后续内容的Context */
+  /** 加载后续详情的Context */
   Context?: string;
-  /** 日志查询结果是否全部返回 */
+  /** 指定时间范围内的告警执行详情是否完整返回 */
   ListOver?: boolean;
-  /** 返回的是否为分析结果 */
+  /** 返回的结果是否为SQL分析结果 */
   Analysis?: boolean;
   /** 如果Analysis为True，则返回分析结果的列名，否则为空 */
   ColNames?: string[] | null;
-  /** 日志查询结果；当Analysis为True时，可能返回为null */
+  /** 执行详情查询结果；当Analysis为True时，可能返回为null */
   Results?: LogInfo[] | null;
-  /** 日志分析结果；当Analysis为False时，可能返回为null */
+  /** 执行详情统计分析结果；当Analysis为False时，可能返回为null */
   AnalysisResults?: LogItems[] | null;
-  /** 新的日志分析结果; UseNewAnalysis为true有效 */
+  /** 执行详情统计分析结果; UseNewAnalysis为true有效 */
   AnalysisRecords?: string[] | null;
-  /** 日志分析的列属性; UseNewAnalysis为true有效 */
+  /** 分析结果的列名， UseNewAnalysis为true有效 */
   Columns?: Column[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3131,7 +3131,7 @@ declare interface Cls {
   DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
   /** 获取日志主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
-  /** 获取告警任务历史记录 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
+  /** 获取告警策略执行详情 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
   /** 合并分区 {@link MergePartitionRequest} {@link MergePartitionResponse} */
   MergePartition(data: MergePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<MergePartitionResponse>;

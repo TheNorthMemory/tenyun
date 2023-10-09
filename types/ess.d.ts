@@ -1024,6 +1024,8 @@ declare interface TemplateInfo {
   TemplateVersion?: string | null;
   /** 模板是否已发布：true-已发布false-未发布 */
   Published?: boolean | null;
+  /** 分享来源的模板ID。用在集团账号子企业模板里 */
+  ShareTemplateId?: string | null;
   /** 模板内部指定的印章列表 */
   TemplateSeals?: SealInfo[] | null;
   /** 模板内部指定的印章列表 */
@@ -1819,7 +1821,7 @@ declare interface CreateSchemeUrlRequest {
   FlowId?: string;
   /** 合同流程组的组ID, 在合同流程组场景下，生成合同流程组的签署链接时需要赋值 */
   FlowGroupId?: string;
-  /** 要跳转到的页面类型 **0** : 腾讯电子签小程序个人首页 (默认) **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面) **2** : 腾讯电子签小程序合同列表页 */
+  /** 要跳转到的页面类型 **0** : 腾讯电子签小程序个人首页 (默认) **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面) **2** : 腾讯电子签小程序合同列表页 **3** : 腾讯电子签小程序合同封面页注：`生成动态签署人补充链接时，必须指定为封面页` */
   PathType?: number;
   /** 签署完成后是否自动回跳**false**：否, 签署完成不会自动跳转回来(默认)**true**：是, 签署完成会自动跳转回来注: ` 该参数只针对"APP" 类型的签署链接有效` */
   AutoJumpBack?: boolean;
@@ -1827,7 +1829,7 @@ declare interface CreateSchemeUrlRequest {
   Agent?: Agent;
   /** 生成的签署链接在签署页面隐藏的按钮列表，可设置如下： **0** :合同签署页面更多操作按钮 **1** :合同签署页面更多操作的拒绝签署按钮 **2** :合同签署页面更多操作的转他人处理按钮 **3** :签署成功页的查看详情按钮注: `字段为数组, 可以传值隐藏多个按钮` */
   Hides?: number[];
-  /** 签署节点ID，用于生成动态签署人链接完成领取 */
+  /** 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。` */
   RecipientId?: string;
 }
 

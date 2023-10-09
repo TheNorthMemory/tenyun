@@ -2233,7 +2233,7 @@ declare interface DeleteScreenshotTaskResponse {
 }
 
 declare interface DescribeAllStreamPlayInfoListRequest {
-  /** 查询时间点，精确到分钟粒度，支持最近1个月的数据查询，数据延迟为5分钟左右，如果要查询实时的数据，建议传递5分钟前的时间点，格式为yyyy-mm-dd HH:MM:00。（只精确至分钟，秒数填00）。 */
+  /** 查询时间点，精确到分钟粒度，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/267/38543 */
   QueryTime: string;
   /** 播放域名列表，若不填，表示总体数据。 */
   PlayDomains?: string[];

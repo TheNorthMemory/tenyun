@@ -1935,15 +1935,17 @@ declare interface PrometheusTemplateSyncTarget {
 /** PrometheusZoneItem 响应结构体内的地域信息 */
 declare interface PrometheusZoneItem {
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 可用区 ID */
-  ZoneId: number;
+  ZoneId?: number;
   /** 可用区状态( 0: 不可用；1: 可用) */
-  ZoneState: number;
+  ZoneState?: number;
   /** 地域 ID */
-  RegionId: number;
+  RegionId?: number;
   /** 可用区名（目前为中文） */
-  ZoneName: string;
+  ZoneName?: string;
+  /** 可用区资源状态(0:资源不足，不可使用；1:资源足够) */
+  ZoneResourceState?: number | null;
 }
 
 /** 接收人信息 */

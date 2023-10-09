@@ -2397,7 +2397,7 @@ declare interface Ssl {
   DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
   /** 下载证书 {@link DownloadCertificateRequest} {@link DownloadCertificateResponse} */
   DownloadCertificate(data: DownloadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCertificateResponse>;
-  /** 云资源托管 {@link HostCertificateRequest} {@link HostCertificateResponse} */
+  /** @deprecated 云资源托管 {@link HostCertificateRequest} {@link HostCertificateResponse} */
   HostCertificate(data: HostCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<HostCertificateResponse>;
   /** 修改证书备注 {@link ModifyCertificateAliasRequest} {@link ModifyCertificateAliasResponse} */
   ModifyCertificateAlias(data: ModifyCertificateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAliasResponse>;

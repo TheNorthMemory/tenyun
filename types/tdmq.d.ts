@@ -1040,22 +1040,60 @@ declare interface RocketMQNamespace {
   InternalEndpoint?: string | null;
 }
 
+/** RocketMQ消费组订阅信息 */
+declare interface RocketMQSubscription {
+  /** 主题名称 */
+  Topic?: string;
+  /** 主题类型：Normal 普通,GlobalOrder 全局顺序,PartitionedOrder 局部顺序,Transaction 事务消息,DelayScheduled 延时消息,Retry 重试,DeadLetter 死信 */
+  Type?: string | null;
+  /** 分区数 */
+  PartitionNum?: number | null;
+  /** 过滤模式，TAG，SQL */
+  ExpressionType?: string | null;
+  /** 过滤表达式 */
+  SubString?: string | null;
+  /** 订阅状态：0，订阅关系一致1，订阅关系不一致2，未知 */
+  Status?: number | null;
+  /** 消费堆积数量 */
+  ConsumerLag?: number | null;
+  /** 实例ID */
+  ClusterId?: string | null;
+  /** 消费组名称 */
+  ConsumerGroup?: string | null;
+  /** 是否在线 */
+  IsOnline?: boolean | null;
+  /** 消费类型 */
+  ConsumeType?: number | null;
+  /** 订阅一致性 */
+  Consistency?: number | null;
+  /** 最后消费进度更新时间，秒为单位 */
+  LastUpdateTime?: number | null;
+  /** 最大重试次数 */
+  MaxRetryTimes?: number | null;
+}
+
 /** RocketMQ主题信息 */
 declare interface RocketMQTopic {
   /** 主题名称 */
-  Name: string;
+  Name?: string;
   /** 主题的类别，为枚举类型，Normal，GlobalOrder，PartitionedOrder，Transaction，Retry及DeadLetter */
-  Type: string;
+  Type?: string;
   /** 订阅组数量 */
-  GroupNum: number;
+  GroupNum?: number;
   /** 说明 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 读写分区数 */
-  PartitionNum: number;
+  PartitionNum?: number;
   /** 创建时间，以毫秒为单位 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 创建时间，以毫秒为单位 */
-  UpdateTime: number;
+  UpdateTime?: number;
+  /** 最后写入时间，单位为秒 */
+  LastUpdateTime?: number | null;
+  /** 订阅数量 */
+  SubscriptionCount?: number | null;
+  /** 订阅关系列表 */
+  SubscriptionData?: RocketMQSubscription[] | null;
 }
 
 /** RocketMQtopic分布情况 */
@@ -2743,6 +2781,10 @@ declare interface DescribeRocketMQTopicMsgsRequest {
   QueryDlqMsg?: boolean;
   /** 查询最近N条消息 最大不超过1024，默认-1为其他查询条件 */
   NumOfLatestMsg?: number;
+  /** TAG表达式 */
+  Tag?: string;
+  /** 死信查询时该值为true，只对Rocketmq有效 */
+  QueryDeadLetterMessage?: boolean;
 }
 
 declare interface DescribeRocketMQTopicMsgsResponse {

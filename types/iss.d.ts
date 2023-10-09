@@ -156,7 +156,7 @@ declare interface AddRecordBackupPlanData {
   UpdateAt?: string;
 }
 
-/** 新增录像上云模版返回数据 */
+/** 新增录像上云模板返回数据 */
 declare interface AddRecordBackupTemplateData {
   /** 模板ID */
   TemplateId?: string | null;
@@ -546,7 +546,7 @@ declare interface DescribeRecordBackupPlanData {
   UpdateAt?: string;
 }
 
-/** 查询录像上云模版返回数据 */
+/** 查询录像上云模板返回数据 */
 declare interface DescribeRecordBackupTemplateData {
   /** 模板ID */
   TemplateId?: string | null;
@@ -1272,7 +1272,7 @@ declare interface UpdateRecordBackupPlanModify {
   OrganizationId?: string[];
 }
 
-/** 修改录像上云模版返回数据 */
+/** 修改录像上云模板返回数据 */
 declare interface UpdateRecordBackupTemplateData {
   /** 模板ID */
   TemplateId?: string | null;
