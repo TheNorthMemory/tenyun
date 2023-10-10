@@ -1913,7 +1913,7 @@ declare interface CreateClustersRequest {
   ClusterParams?: ParamItem[];
   /** 交易模式，0-下单且支付，1-下单 */
   DealMode?: number;
-  /** 参数模版ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID */
+  /** 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID */
   ParamTemplateId?: number;
   /** 多可用区地址 */
   SlaveZone?: string;

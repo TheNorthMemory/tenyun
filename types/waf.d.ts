@@ -1136,12 +1136,42 @@ declare interface QpsData {
   QPSExtendIntlMax?: number | null;
 }
 
+/** 用户规则更新输出规则子项 */
+declare interface ReqUserRule {
+  /** 特征序号 */
+  Id: string;
+  /** 规则开关0：关1：开2：只告警 */
+  Status: number;
+  /** 修改原因0：无(兼容记录为空)1：业务自身特性误报避免2：规则误报上报3：核心业务规则灰度4：其它 */
+  Reason?: number | null;
+}
+
 /** 响应体的返回码 */
 declare interface ResponseCode {
   /** 如果成功则返回Success，失败则返回云api定义的错误码 */
   Code: string;
   /** 如果成功则返回Success，失败则返回WAF定义的二级错误码 */
   Message: string;
+}
+
+/** 规则列表详情 */
+declare interface Rule {
+  /** 规则id */
+  Id?: number;
+  /** 规则类型 */
+  Type?: string | null;
+  /** 规则等级 */
+  Level?: string;
+  /** 规则描述 */
+  Description?: string | null;
+  /** 规则防护的CVE编号 */
+  CVE?: string | null;
+  /** 规则的状态 */
+  Status?: number;
+  /** 规则修改的时间 */
+  ModifyTime?: string;
+  /** 门神规则新增/更新时间 */
+  AddTime?: string | null;
 }
 
 /** 规则白名单 */
@@ -1280,6 +1310,32 @@ declare interface UserDomainInfo {
   CloudType?: string | null;
 }
 
+/** 用户特征规则描述 */
+declare interface UserSignatureRule {
+  /** 特征ID */
+  ID: string;
+  /** 规则开关 */
+  Status: number;
+  /** 主类ID */
+  MainClassID: string;
+  /** 子类ID */
+  SubClassID: string;
+  /** CVE ID */
+  CveID: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 更新时间 */
+  ModifyTime: string;
+  /** 主类名字，根据Language字段输出中文/英文 */
+  MainClassName: string;
+  /** 子类名字，根据Language字段输出中文/英文，若子类id为00000000，此字段为空 */
+  SubClassName: string;
+  /** 规则描述 */
+  Description: string;
+  /** 0/1 */
+  Reason: number;
+}
+
 /** Vip信息 */
 declare interface VipInfo {
   /** Virtual IP */
@@ -1326,6 +1382,14 @@ declare interface WafThreatenIntelligenceDetails {
   DefenseStatus?: number;
   /** 最后更新时间 */
   LastUpdateTime?: string;
+}
+
+/** 域名的webshell开启状态 */
+declare interface WebshellStatus {
+  /** 域名 */
+  Domain: string;
+  /** webshell开关，1：开。0：关。2：观察 */
+  Status: number;
 }
 
 declare interface AddAntiFakeUrlRequest {
@@ -2142,6 +2206,18 @@ declare interface DescribeDomainDetailsSaasResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainRulesRequest {
+  /** 需要查询的域名 */
+  Domain?: string;
+}
+
+declare interface DescribeDomainRulesResponse {
+  /** 规则列表详情 */
+  Rules?: Rule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainVerifyResultRequest {
   /** 域名 */
   Domain: string;
@@ -2530,6 +2606,30 @@ declare interface DescribeUserDomainInfoRequest {
 declare interface DescribeUserDomainInfoResponse {
   /** saas和clb域名信息 */
   UsersInfo: UserDomainInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserSignatureRuleRequest {
+  /** 需要查询的域名 */
+  Domain: string;
+  /** 分页 */
+  Offset: number;
+  /** 每页容量 */
+  Limit: number;
+  /** 排序字段，支持 signature_id, modify_time */
+  By?: string;
+  /** 排序方式 */
+  Order?: string;
+  /** 筛选条件，支持 MainClassName，SubClassID ,CveID, Status, ID; ID为规则id */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeUserSignatureRuleResponse {
+  /** 规则总数 */
+  Total: number;
+  /** 规则列表 */
+  Rules: UserSignatureRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3084,6 +3184,14 @@ declare interface ModifyInstanceRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface ModifyModuleStatusRequest {
+}
+
+declare interface ModifyModuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProtectionStatusRequest {
   /** 域名 */
   Domain: string;
@@ -3188,6 +3296,34 @@ declare interface ModifySpartaProtectionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserLevelRequest {
+  /** 域名 */
+  Domain: string;
+  /** 防护规则等级 300=standard，400=extended */
+  Level: number;
+}
+
+declare interface ModifyUserLevelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUserSignatureRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 主类id */
+  MainClassID?: string;
+  /** 主类开关0=关闭，1=开启，2=只告警 */
+  Status?: number;
+  /** 下发修改的规则列表 */
+  RuleID?: ReqUserRule[];
+}
+
+declare interface ModifyUserSignatureRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWafAutoDenyRulesRequest {
   /** 域名 */
   Domain: string;
@@ -3228,6 +3364,18 @@ declare interface ModifyWafThreatenIntelligenceRequest {
 declare interface ModifyWafThreatenIntelligenceResponse {
   /** 当前WAF威胁情报封禁模块详情 */
   WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWebshellStatusRequest {
+  /** 域名webshell状态 */
+  Webshell: WebshellStatus;
+}
+
+declare interface ModifyWebshellStatusResponse {
+  /** 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码） */
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3549,6 +3697,8 @@ declare interface Waf {
   DescribeDomainDetailsClb(data: DescribeDomainDetailsClbRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsClbResponse>;
   /** 查询单个Saas型WAF域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */
   DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
+  /** 拉取域名的防护规则列表 {@link DescribeDomainRulesRequest} {@link DescribeDomainRulesResponse} */
+  DescribeDomainRules(data?: DescribeDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainRulesResponse>;
   /** 获取添加域名操作的结果 {@link DescribeDomainVerifyResultRequest} {@link DescribeDomainVerifyResultResponse} */
   DescribeDomainVerifyResult(data: DescribeDomainVerifyResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainVerifyResultResponse>;
   /** 获取域名的规则白名单 {@link DescribeDomainWhiteRulesRequest} {@link DescribeDomainWhiteRulesResponse} */
@@ -3591,6 +3741,8 @@ declare interface Waf {
   DescribeUserClbWafRegions(data?: DescribeUserClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClbWafRegionsResponse>;
   /** 查询saas和clb的域名信息 {@link DescribeUserDomainInfoRequest} {@link DescribeUserDomainInfoResponse} */
   DescribeUserDomainInfo(data?: DescribeUserDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDomainInfoResponse>;
+  /** 获取用户特征规则列表 {@link DescribeUserSignatureRuleRequest} {@link DescribeUserSignatureRuleResponse} */
+  DescribeUserSignatureRule(data: DescribeUserSignatureRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSignatureRuleResponse>;
   /** 查询VIP信息 {@link DescribeVipInfoRequest} {@link DescribeVipInfoResponse} */
   DescribeVipInfo(data: DescribeVipInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVipInfoResponse>;
   /** 查询ip惩罚规则 {@link DescribeWafAutoDenyRulesRequest} {@link DescribeWafAutoDenyRulesResponse} */
@@ -3659,18 +3811,26 @@ declare interface Waf {
   ModifyInstanceQpsLimit(data: ModifyInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceQpsLimitResponse>;
   /** 修改实例的自动续费开关 {@link ModifyInstanceRenewFlagRequest} {@link ModifyInstanceRenewFlagResponse} */
   ModifyInstanceRenewFlag(data: ModifyInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceRenewFlagResponse>;
+  /** 设置某个domain下基础安全模块的开关 {@link ModifyModuleStatusRequest} {@link ModifyModuleStatusResponse} */
+  ModifyModuleStatus(data?: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** waf斯巴达-waf开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
   ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 修改域名配置 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */
   ModifySpartaProtection(data: ModifySpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionResponse>;
   /** 设置waf防护状态 {@link ModifySpartaProtectionModeRequest} {@link ModifySpartaProtectionModeResponse} */
   ModifySpartaProtectionMode(data: ModifySpartaProtectionModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionModeResponse>;
+  /** 修改用户防护规则等级 {@link ModifyUserLevelRequest} {@link ModifyUserLevelResponse} */
+  ModifyUserLevel(data: ModifyUserLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserLevelResponse>;
+  /** 修改用户防护规则 {@link ModifyUserSignatureRuleRequest} {@link ModifyUserSignatureRuleResponse} */
+  ModifyUserSignatureRule(data: ModifyUserSignatureRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserSignatureRuleResponse>;
   /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
   /** 配置WAF自动封禁模块状态 {@link ModifyWafAutoDenyStatusRequest} {@link ModifyWafAutoDenyStatusResponse} */
   ModifyWafAutoDenyStatus(data: ModifyWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyStatusResponse>;
   /** 配置WAF威胁情报封禁模块详情 {@link ModifyWafThreatenIntelligenceRequest} {@link ModifyWafThreatenIntelligenceResponse} */
   ModifyWafThreatenIntelligence(data?: ModifyWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafThreatenIntelligenceResponse>;
+  /** 设置webshell状态 {@link ModifyWebshellStatusRequest} {@link ModifyWebshellStatusResponse} */
+  ModifyWebshellStatus(data: ModifyWebshellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebshellStatusResponse>;
   /** 创建搜索下载攻击日志任务 {@link PostAttackDownloadTaskRequest} {@link PostAttackDownloadTaskResponse} */
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
   /** 刷新接入检查的结果 {@link RefreshAccessCheckResultRequest} {@link RefreshAccessCheckResultResponse} */

@@ -10,6 +10,16 @@ declare interface ActionFilter {
   Values: string[];
 }
 
+/** 应用性能观测产品中应用信息 */
+declare interface ApmServiceInfo {
+  /** 业务ID */
+  InstanceId: string | null;
+  /** 应用名称 */
+  ServiceNameList: string[] | null;
+  /** 地域ID */
+  RegionId?: number | null;
+}
+
 /** 查询-保护策略 */
 declare interface DescribePolicy {
   /** 保护策略ID列表 */
@@ -86,6 +96,14 @@ declare interface Task {
   TaskPlanId?: number | null;
   /** 关联的演练计划名称 */
   TaskPlanTitle?: string | null;
+  /** 关联的应用ID */
+  ApplicationId?: string | null;
+  /** 关联的应用名称 */
+  ApplicationName?: string | null;
+  /** 关联的告警指标 */
+  AlarmPolicy?: string[] | null;
+  /** 关联的APM服务 */
+  ApmServiceList?: ApmServiceInfo[] | null;
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */
@@ -260,6 +278,10 @@ declare interface TaskListItem {
   TaskPreCheckSuccess?: boolean | null;
   /** 演练是否符合预期 1-符合预期 2-不符合预期 */
   TaskExpect?: number | null;
+  /** 关联应用ID */
+  ApplicationId?: string | null;
+  /** 关联应用名称 */
+  ApplicationName?: string | null;
 }
 
 /** 监控指标 */
@@ -330,6 +352,10 @@ declare interface Template {
   Tags?: TagWithDescribe[] | null;
   /** 经验来源 0-自建 1-专家推荐 */
   TemplateSource?: number | null;
+  /** apm应用信息 */
+  ApmServiceList?: ApmServiceInfo[] | null;
+  /** 告警指标 */
+  AlarmPolicy?: string[] | null;
 }
 
 /** 任务分组 */
@@ -491,6 +517,12 @@ declare interface DescribeTaskListRequest {
   Tags?: TagWithDescribe[];
   /** 筛选条件 */
   Filters?: ActionFilter[];
+  /** 演练ID */
+  TaskId?: number[];
+  /** 关联应用ID筛选 */
+  ApplicationId?: string[];
+  /** 关联应用筛选 */
+  ApplicationName?: string[];
 }
 
 declare interface DescribeTaskListResponse {
@@ -509,9 +541,9 @@ declare interface DescribeTaskRequest {
 
 declare interface DescribeTaskResponse {
   /** 任务信息 */
-  Task: Task;
+  Task?: Task;
   /** 任务对应的演练报告信息，null表示未导出报告 */
-  ReportInfo: TaskReportInfo | null;
+  ReportInfo?: TaskReportInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -553,7 +585,7 @@ declare interface DescribeTemplateRequest {
 
 declare interface DescribeTemplateResponse {
   /** 经验库详情 */
-  Template: Template;
+  Template?: Template;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2132,6 +2132,20 @@ declare interface ModifyResourcesTagsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserManagerPwdRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+  /** 用户名 */
+  UserName: string;
+  /** 密码 */
+  PassWord: string;
+}
+
+declare interface ModifyUserManagerPwdResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunJobFlowRequest {
   /** 作业名称。 */
   Name: string;
@@ -2415,6 +2429,8 @@ declare interface Emr {
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
   /** 强制修改标签 {@link ModifyResourcesTagsRequest} {@link ModifyResourcesTagsResponse} */
   ModifyResourcesTags(data: ModifyResourcesTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagsResponse>;
+  /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */
+  ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
   /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
   /** 扩容集群节点 {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */

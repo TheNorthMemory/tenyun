@@ -1554,6 +1554,34 @@ declare interface ChannelCreateUserAutoSignEnableUrlResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateUserAutoSignSealUrlRequest {
+  /** 渠道应用相关信息。 */
+  Agent: Agent;
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  SceneKey: string;
+  /** 自动签开通个人用户信息，包括名字，身份证等。 */
+  UserInfo: UserThreeFactor;
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator?: UserInfo;
+  /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为当前时间往后30天。`如果不传，默认过期时间为当前时间往后7天。` */
+  ExpiredTime?: number;
+}
+
+declare interface ChannelCreateUserAutoSignSealUrlResponse {
+  /** 腾讯电子签小程序的AppId，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用。 */
+  AppId?: string;
+  /** 腾讯电子签小程序的原始Id，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用。 */
+  AppOriginalId?: string;
+  /** 个人用户自动签的开通链接, 短链形式。过期时间受 `ExpiredTime` 参数控制。 */
+  Url?: string;
+  /** 腾讯电子签小程序的跳转路径，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用。 */
+  Path?: string;
+  /** base64格式的跳转二维码图片，可通过微信扫描后跳转到腾讯电子签小程序的开通界面。 */
+  QrCode?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelCreateUserRolesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
@@ -3897,6 +3925,8 @@ declare interface Essbasic {
   ChannelCreateSealPolicy(data: ChannelCreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateSealPolicyResponse>;
   /** 获取个人用户自动签开启链接 {@link ChannelCreateUserAutoSignEnableUrlRequest} {@link ChannelCreateUserAutoSignEnableUrlResponse} */
   ChannelCreateUserAutoSignEnableUrl(data: ChannelCreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserAutoSignEnableUrlResponse>;
+  /** 获取设置自动签印章小程序链接 {@link ChannelCreateUserAutoSignSealUrlRequest} {@link ChannelCreateUserAutoSignSealUrlResponse} */
+  ChannelCreateUserAutoSignSealUrl(data: ChannelCreateUserAutoSignSealUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserAutoSignSealUrlResponse>;
   /** 绑定员工角色 {@link ChannelCreateUserRolesRequest} {@link ChannelCreateUserRolesResponse} */
   ChannelCreateUserRoles(data: ChannelCreateUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserRolesResponse>;
   /** 创建页面主题配置 {@link ChannelCreateWebThemeConfigRequest} {@link ChannelCreateWebThemeConfigResponse} */

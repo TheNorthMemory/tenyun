@@ -1934,28 +1934,6 @@ declare interface CreateApplicationProxyRuleResponse {
   RequestId?: string;
 }
 
-declare interface CreateOriginGroupRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 源站类型，取值有：self：自有源站；third_party：第三方源站；cos：腾讯云COS源站。 */
-  OriginType: string;
-  /** 源站组名称。 */
-  OriginGroupName: string;
-  /** 源站配置类型，当OriginType=self时，取值有：area：按区域配置；weight： 按权重配置；proto： 按HTTP协议配置。当OriginType=third_party/cos时放空。 */
-  ConfigurationType: string;
-  /** 源站记录信息。 */
-  OriginRecords: OriginRecord[];
-  /** 回源Host，仅当OriginType=self时可以设置。 */
-  HostHeader?: string;
-}
-
-declare interface CreateOriginGroupResponse {
-  /** 源站组ID。 */
-  OriginGroupId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreatePlanForZoneRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -2140,18 +2118,6 @@ declare interface DeleteApplicationProxyRuleRequest {
 }
 
 declare interface DeleteApplicationProxyRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteOriginGroupRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 源站组ID。 */
-  OriginGroupId: string;
-}
-
-declare interface DeleteOriginGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2960,28 +2926,6 @@ declare interface ModifyHostsCertificateResponse {
   RequestId?: string;
 }
 
-declare interface ModifyOriginGroupRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 源站组ID。 */
-  OriginGroupId: string;
-  /** 源站类型，取值有：self：自有源站；third_party：第三方源站；cos：腾讯云COS源站。 */
-  OriginType: string;
-  /** 源站组名称。 */
-  OriginGroupName: string;
-  /** 源站配置类型，当OriginType=self时，取值有：area：按区域配置；weight： 按权重配置；proto： 按HTTP协议配置。当OriginType=third_party/cos时放空。 */
-  ConfigurationType: string;
-  /** 源站记录信息。 */
-  OriginRecords: OriginRecord[];
-  /** 回源Host，仅当OriginType=self时可以设置。不填写，表示使用已有配置。 */
-  HostHeader?: string;
-}
-
-declare interface ModifyOriginGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyRuleRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -3383,8 +3327,6 @@ declare interface Teo {
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
   /** 创建应用代理规则 {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
-  /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
-  CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
   /** 为未购买套餐的站点购买套餐 {@link CreatePlanForZoneRequest} {@link CreatePlanForZoneResponse} */
   CreatePlanForZone(data: CreatePlanForZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlanForZoneResponse>;
   /** 创建预热任务 {@link CreatePrefetchTaskRequest} {@link CreatePrefetchTaskResponse} */
@@ -3407,8 +3349,6 @@ declare interface Teo {
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
   /** 删除应用代理规则 {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
-  /** 删除源站组 {@link DeleteOriginGroupRequest} {@link DeleteOriginGroupResponse} */
-  DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
   /** 批量删除规则引擎规则 {@link DeleteRulesRequest} {@link DeleteRulesResponse} */
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
   /** 删除安全 IP 组 {@link DeleteSecurityIPGroupRequest} {@link DeleteSecurityIPGroupResponse} */
@@ -3489,8 +3429,6 @@ declare interface Teo {
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
   /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
-  /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
-  ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
   /** 修改规则引擎规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 修改安全 IP 组 {@link ModifySecurityIPGroupRequest} {@link ModifySecurityIPGroupResponse} */

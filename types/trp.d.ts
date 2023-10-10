@@ -908,6 +908,32 @@ declare interface DescribeCodeBatchByIdResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCodeBatchesRequest {
+  /** 查询商户ID */
+  MerchantId?: string;
+  /** 查询商品ID */
+  ProductId?: string;
+  /** 查询关键字 */
+  Keyword?: string;
+  /** 条数 */
+  PageSize?: number;
+  /** 页数 */
+  PageNumber?: number;
+  /** 批次类型 0:溯源 1:营销 */
+  BatchType?: string;
+  /** 企业ID */
+  CorpId?: number;
+}
+
+declare interface DescribeCodeBatchesResponse {
+  /** 批次列表 */
+  CodeBatches?: CodeBatch[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCodeBatchsRequest {
   /** 查询商户ID */
   MerchantId?: string;
@@ -927,9 +953,9 @@ declare interface DescribeCodeBatchsRequest {
 
 declare interface DescribeCodeBatchsResponse {
   /** 批次列表 */
-  CodeBatchs: CodeBatch[] | null;
+  CodeBatchs?: CodeBatch[] | null;
   /** 总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1581,7 +1607,9 @@ declare interface Trp {
   DescribeAgentCorps(data?: DescribeAgentCorpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentCorpsResponse>;
   /** 查询批次信息 {@link DescribeCodeBatchByIdRequest} {@link DescribeCodeBatchByIdResponse} */
   DescribeCodeBatchById(data?: DescribeCodeBatchByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchByIdResponse>;
-  /** 查询批次列表 {@link DescribeCodeBatchsRequest} {@link DescribeCodeBatchsResponse} */
+  /** 查询批次列表 {@link DescribeCodeBatchesRequest} {@link DescribeCodeBatchesResponse} */
+  DescribeCodeBatches(data?: DescribeCodeBatchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchesResponse>;
+  /** 【废弃】查询批次列表 {@link DescribeCodeBatchsRequest} {@link DescribeCodeBatchsResponse} */
   DescribeCodeBatchs(data?: DescribeCodeBatchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchsResponse>;
   /** 查询码包状态 {@link DescribeCodePackStatusRequest} {@link DescribeCodePackStatusResponse} */
   DescribeCodePackStatus(data: DescribeCodePackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePackStatusResponse>;

@@ -2195,16 +2195,30 @@ declare interface SubmitCertificateInformationResponse {
 }
 
 declare interface UpdateCertificateInstanceRequest {
-  /** 一键更新新证书ID */
-  CertificateId: string;
   /** 一键更新原证书ID */
   OldCertificateId: string;
   /** 需要部署的资源类型，参数值可选：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb */
   ResourceTypes: string[];
+  /** 一键更新新证书ID */
+  CertificateId?: string;
   /** 需要部署的地域列表（废弃） */
   Regions?: string[];
   /** 云资源需要部署的地域列表 */
   ResourceTypesRegions?: ResourceTypeRegions[];
+  /** 证书公钥， 若上传证书公钥， 则CertificateId不用传 */
+  CertificatePublicKey?: string;
+  /** 证书私钥，若上传证书公钥， 则证书私钥必填 */
+  CertificatePrivateKey?: string;
+  /** 旧证书是否忽略到期提醒 0:不忽略通知。1:忽略通知 */
+  ExpiringNotificationSwitch?: number;
+  /** 相同的证书是否允许重复上传，若上传证书公钥， 则可以配置该参数 */
+  Repeatable?: boolean;
+  /** 是否允许下载，若上传证书公钥， 则可以配置该参数 */
+  AllowDownload?: boolean;
+  /** 标签列表，若上传证书公钥， 则可以配置该参数 */
+  Tags?: Tags[];
+  /** 项目 ID，若上传证书公钥， 则可以配置该参数 */
+  ProjectId?: number;
 }
 
 declare interface UpdateCertificateInstanceResponse {

@@ -588,9 +588,9 @@ declare namespace V20190711 {
   /** 删除签名响应 */
   interface DeleteSignStatus {
     /** 删除状态信息。 */
-    DeleteStatus: string;
+    DeleteStatus: string | null;
     /** 删除时间，UNIX 时间戳（单位：秒）。 */
-    DeleteTime: number;
+    DeleteTime: number | null;
   }
 
   /** 删除模板响应 */
@@ -758,7 +758,7 @@ declare namespace V20190711 {
 
   interface AddSmsSignResponse {
     /** 添加签名响应 */
-    AddSignStatus: AddSignStatus;
+    AddSignStatus?: AddSignStatus;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -778,7 +778,7 @@ declare namespace V20190711 {
 
   interface AddSmsTemplateResponse {
     /** 添加短信模板响应包体 */
-    AddTemplateStatus: AddTemplateStatus;
+    AddTemplateStatus?: AddTemplateStatus;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -798,7 +798,7 @@ declare namespace V20190711 {
 
   interface CallbackStatusStatisticsResponse {
     /** 回执数据统计响应包体。 */
-    CallbackStatusStatistics: CallbackStatusStatistics;
+    CallbackStatusStatistics?: CallbackStatusStatistics;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -810,7 +810,7 @@ declare namespace V20190711 {
 
   interface DeleteSmsSignResponse {
     /** 删除签名响应 */
-    DeleteSignStatus: DeleteSignStatus;
+    DeleteSignStatus?: DeleteSignStatus;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -822,7 +822,7 @@ declare namespace V20190711 {
 
   interface DeleteSmsTemplateResponse {
     /** 删除模板响应 */
-    DeleteTemplateStatus: DeleteTemplateStatus;
+    DeleteTemplateStatus?: DeleteTemplateStatus;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -836,7 +836,7 @@ declare namespace V20190711 {
 
   interface DescribeSmsSignListResponse {
     /** 获取签名信息响应 */
-    DescribeSignListStatusSet: DescribeSignListStatus[];
+    DescribeSignListStatusSet?: DescribeSignListStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -850,7 +850,7 @@ declare namespace V20190711 {
 
   interface DescribeSmsTemplateListResponse {
     /** 获取短信模板信息响应 */
-    DescribeTemplateStatusSet: DescribeTemplateListStatus[];
+    DescribeTemplateStatusSet?: DescribeTemplateListStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -900,7 +900,7 @@ declare namespace V20190711 {
 
   interface ModifySmsTemplateResponse {
     /** 修改模板参数响应 */
-    ModifyTemplateStatus: ModifyTemplateStatus;
+    ModifyTemplateStatus?: ModifyTemplateStatus;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -922,7 +922,7 @@ declare namespace V20190711 {
 
   interface PullSmsReplyStatusByPhoneNumberResponse {
     /** 回复状态响应集合。 */
-    PullSmsReplyStatusSet: PullSmsReplyStatus[];
+    PullSmsReplyStatusSet?: PullSmsReplyStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -936,7 +936,7 @@ declare namespace V20190711 {
 
   interface PullSmsReplyStatusResponse {
     /** 回复状态响应集合。 */
-    PullSmsReplyStatusSet: PullSmsReplyStatus[];
+    PullSmsReplyStatusSet?: PullSmsReplyStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -1018,7 +1018,7 @@ declare namespace V20190711 {
 
   interface SendStatusStatisticsResponse {
     /** 发送数据统计响应包体。 */
-    SendStatusStatistics: SendStatusStatistics;
+    SendStatusStatistics?: SendStatusStatistics;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -1034,7 +1034,7 @@ declare namespace V20190711 {
 
   interface SmsPackagesStatisticsResponse {
     /** 发送数据统计响应包体。 */
-    SmsPackagesStatisticsSet: SmsPackagesStatistics[];
+    SmsPackagesStatisticsSet?: SmsPackagesStatistics[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

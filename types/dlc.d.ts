@@ -562,6 +562,18 @@ declare interface Execution {
   SQL: string;
 }
 
+/** FavorInfo */
+declare interface FavorInfo {
+  /** 优先事项 */
+  Priority?: number | null;
+  /** Catalog名称 */
+  Catalog?: string | null;
+  /** DataBase名称 */
+  DataBase?: string | null;
+  /** Table名称 */
+  Table?: string | null;
+}
+
 /** 查询列表过滤条件参数 */
 declare interface Filter {
   /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑或（OR）关系。 */
@@ -936,6 +948,22 @@ declare interface PythonSparkImage {
   UpdateTime: string;
 }
 
+/** ResourceInfo */
+declare interface ResourceInfo {
+  /** 归属类型 */
+  AttributionType?: string | null;
+  /** 资源类型 */
+  ResourceType?: string | null;
+  /** 引擎名称 */
+  Name?: string | null;
+  /** 如资源类型为spark-sql 取值为Name, 如为spark-batch 取值为session app_name */
+  Instance?: string | null;
+  /** 亲和性 */
+  Favor?: FavorInfo[] | null;
+  /** 状态 */
+  Status?: number | null;
+}
+
 /** SQL查询任务 */
 declare interface SQLTask {
   /** base64加密后的SQL语句 */
@@ -970,6 +998,64 @@ declare interface SessionResourceTemplate {
   ExecutorNums?: number | null;
   /** 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums） */
   ExecutorMaxNumbers?: number | null;
+}
+
+/** SmartOptimizerIndexPolicy */
+declare interface SmartOptimizerIndexPolicy {
+  /** 开启索引 */
+  IndexEnable?: string | null;
+}
+
+/** SmartOptimizerLifecyclePolicy */
+declare interface SmartOptimizerLifecyclePolicy {
+  /** 生命周期启用 */
+  LifecycleEnable?: string | null;
+  /** 过期时间 */
+  Expiration?: number | null;
+  /** 是否删表 */
+  DropTable?: boolean | null;
+}
+
+/** SmartOptimizerPolicy */
+declare interface SmartOptimizerPolicy {
+  /** 是否继承 */
+  Inherit?: string | null;
+  /** ResourceInfo */
+  Resources?: ResourceInfo[] | null;
+  /** SmartOptimizerWrittenPolicy */
+  Written?: SmartOptimizerWrittenPolicy | null;
+  /** SmartOptimizerLifecyclePolicy */
+  Lifecycle?: SmartOptimizerLifecyclePolicy | null;
+  /** SmartOptimizerIndexPolicy */
+  Index?: SmartOptimizerIndexPolicy | null;
+}
+
+/** SmartOptimizerWrittenPolicy */
+declare interface SmartOptimizerWrittenPolicy {
+}
+
+/** SmartPolicyRequest */
+declare interface SmartPolicy {
+  /** 基础信息 */
+  BaseInfo?: SmartPolicyBaseInfo | null;
+  /** 策略描述 */
+  Policy?: SmartOptimizerPolicy | null;
+}
+
+/** SmartPolicyBaseInfo */
+declare interface SmartPolicyBaseInfo {
+  /** 用户uin */
+  Uin: string | null;
+  /** Catalog/Database/Table */
+  PolicyType?: string | null;
+  /** Catalog名称 */
+  Catalog?: string | null;
+  /** 数据库名称 */
+  Database?: string | null;
+  /** 表名称 */
+  Table?: string | null;
+  /** 用户appid */
+  AppId?: string | null;
 }
 
 /** spark作业详情。 */
@@ -1188,6 +1274,8 @@ declare interface TableBaseInfo {
   GovernPolicy?: DataGovernPolicy | null;
   /** 库数据治理是否关闭，关闭：true，开启：false */
   DbGovernPolicyIsDisable?: string | null;
+  /** 智能数据治理配置项 */
+  SmartPolicy?: SmartPolicy | null;
 }
 
 /** 返回数据表的相关信息。 */
@@ -3408,6 +3496,18 @@ declare interface GenerateCreateMangedTableSqlResponse {
   RequestId?: string;
 }
 
+declare interface GetOptimizerPolicyRequest {
+  /** 策略描述 */
+  SmartPolicy: SmartPolicy;
+}
+
+declare interface GetOptimizerPolicyResponse {
+  /** 智能优化策略 */
+  SmartOptimizerPolicy?: SmartOptimizerPolicy;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTaskJobLogDetailRequest {
   /** 列表返回的Id */
   TaskId: string;
@@ -3991,6 +4091,8 @@ declare interface Dlc {
   DropDMSTable(data?: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
   /** 生成创建托管表语句 {@link GenerateCreateMangedTableSqlRequest} {@link GenerateCreateMangedTableSqlResponse} */
   GenerateCreateMangedTableSql(data: GenerateCreateMangedTableSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCreateMangedTableSqlResponse>;
+  /** 获取策略 {@link GetOptimizerPolicyRequest} {@link GetOptimizerPolicyResponse} */
+  GetOptimizerPolicy(data: GetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOptimizerPolicyResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
