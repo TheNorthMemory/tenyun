@@ -26,6 +26,44 @@ declare interface ChargeProperties {
   ChargeType?: string;
 }
 
+/** 精简集群信息 */
+declare interface InstanceSimpleInfoNew {
+  /** 1 */
+  ID?: number | null;
+  /** 1 */
+  InstanceId?: string | null;
+  /** 1 */
+  InstanceName?: string | null;
+  /** 1 */
+  Version?: string | null;
+  /** 1 */
+  Region?: string | null;
+  /** 1 */
+  RegionId?: number | null;
+  /** 1 */
+  RegionDesc?: string | null;
+  /** 1 */
+  Zone?: string | null;
+  /** 1 */
+  ZoneId?: number | null;
+  /** 1 */
+  ZoneDesc?: string | null;
+  /** 1 */
+  VpcId?: string | null;
+  /** 1 */
+  SubnetId?: string | null;
+  /** 1 */
+  CreateTime?: string | null;
+  /** 1 */
+  ExpireTime?: string | null;
+  /** 1 */
+  AccessInfo?: string | null;
+  /** 1 */
+  PayMode?: string | null;
+  /** 1 */
+  RenewFlag?: boolean | null;
+}
+
 /** 资源规格 */
 declare interface ResourceSpecNew {
   /** 资源名称 */
@@ -76,6 +114,30 @@ declare interface CreateInstanceByApiResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSimpleInstancesRequest {
+  /** 11 */
+  SearchInstanceId?: string;
+  /** 11 */
+  SearchInstanceName?: string;
+  /** 11 */
+  Offset?: number;
+  /** 11 */
+  Limit?: number;
+  /** 11 */
+  SearchTags?: string[];
+}
+
+declare interface DescribeSimpleInstancesResponse {
+  /** 1 */
+  TotalCount?: number | null;
+  /** 1 */
+  InstancesList?: InstanceSimpleInfoNew[] | null;
+  /** - */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyInstanceByApiRequest {
   /** 实例名称，例如"cdwpg-xxxx" */
   InstanceId: string;
@@ -95,6 +157,8 @@ declare interface Cdwpg {
   (): Versions;
   /** 创建集群 {@link CreateInstanceByApiRequest} {@link CreateInstanceByApiResponse} */
   CreateInstanceByApi(data: CreateInstanceByApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceByApiResponse>;
+  /** 获取集群精简信息列表 {@link DescribeSimpleInstancesRequest} {@link DescribeSimpleInstancesResponse} */
+  DescribeSimpleInstances(data?: DescribeSimpleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleInstancesResponse>;
   /** 销毁集群 {@link DestroyInstanceByApiRequest} {@link DestroyInstanceByApiResponse} */
   DestroyInstanceByApi(data: DestroyInstanceByApiRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstanceByApiResponse>;
 }

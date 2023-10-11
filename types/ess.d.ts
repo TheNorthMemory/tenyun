@@ -382,6 +382,14 @@ declare interface FillApproverInfo {
   OrganizationName?: string;
 }
 
+/** 批量补充签署人时，补充失败的报错说明 */
+declare interface FillError {
+  /** 为签署方经办人在签署合同中的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。与入参中补充的签署人角色ID对应，批量补充部分失败返回对应的错误信息。 */
+  RecipientId?: string | null;
+  /** 补充失败错误说明 */
+  ErrMessage?: string | null;
+}
+
 /** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
 declare interface FilledComponent {
   /** 控件Id */
@@ -490,7 +498,7 @@ declare interface FlowCreateApprover {
   ApproverIdCardType?: string;
   /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
-  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项。文件发起合同是，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
+  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项。文件发起合同时，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
   RecipientId?: string;
   /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 将要废弃, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
   VerifyChannel?: string[];
@@ -1282,6 +1290,8 @@ declare interface CreateFlowApproversRequest {
 }
 
 declare interface CreateFlowApproversResponse {
+  /** 批量补充签署人时，补充失败的报错说明注:`目前仅补充动态签署人时会返回补充失败的原因` */
+  FillError?: FillError[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

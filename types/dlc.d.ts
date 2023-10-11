@@ -268,8 +268,22 @@ declare interface DMSTableInfo {
   Asset: Asset | null;
 }
 
+/** 引擎配置信息 */
+declare interface DataEngineConfigInstanceInfo {
+  /** 引擎ID */
+  DataEngineId?: string | null;
+  /** 用户自定义配置项集合 */
+  DataEngineConfigPairs?: DataEngineConfigPair[];
+  /** 作业集群资源参数配置模版 */
+  SessionResourceTemplate?: SessionResourceTemplate;
+}
+
 /** 引擎配置 */
 declare interface DataEngineConfigPair {
+  /** 配置项 */
+  ConfigItem: string | null;
+  /** 配置值 */
+  ConfigValue: string | null;
 }
 
 /** 集群大版本镜像信息。 */
@@ -3233,9 +3247,23 @@ declare interface DescribeTasksResponse {
 }
 
 declare interface DescribeUserDataEngineConfigRequest {
+  /** 排序方式，desc表示倒序，asc表示正序 */
+  Sorting?: string;
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序字段，支持如下字段类型，create-time */
+  SortBy?: string;
+  /** 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,每种过滤参数支持的过滤值不超过5个。app-id - String - （appid过滤）engine-id - String - （引擎ID过滤） */
+  Filters?: Filter[];
 }
 
 declare interface DescribeUserDataEngineConfigResponse {
+  /** 用户引擎自定义配置项列表。 */
+  DataEngineConfigInstanceInfos?: DataEngineConfigInstanceInfo[] | null;
+  /** 配置项总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3761,6 +3789,10 @@ declare interface ReportHeartbeatMetaDataResponse {
 }
 
 declare interface RestartDataEngineRequest {
+  /** 引擎ID */
+  DataEngineId: string;
+  /** 是否强制重启，忽略任务 */
+  ForcedOperation?: boolean;
 }
 
 declare interface RestartDataEngineResponse {
@@ -3769,6 +3801,12 @@ declare interface RestartDataEngineResponse {
 }
 
 declare interface RollbackDataEngineImageRequest {
+  /** 引擎ID */
+  DataEngineId: string;
+  /** 检查是否能回滚的接口返回的FromRecordId参数 */
+  FromRecordId?: string;
+  /** 检查是否能回滚的接口返回的ToRecordId参数 */
+  ToRecordId?: string;
 }
 
 declare interface RollbackDataEngineImageResponse {
@@ -3791,6 +3829,10 @@ declare interface SuspendResumeDataEngineResponse {
 }
 
 declare interface SwitchDataEngineImageRequest {
+  /** 引擎ID */
+  DataEngineId: string;
+  /** 新镜像版本ID */
+  NewImageVersionId: string;
 }
 
 declare interface SwitchDataEngineImageResponse {
@@ -3833,6 +3875,10 @@ declare interface UnlockMetaDataResponse {
 }
 
 declare interface UpdateDataEngineConfigRequest {
+  /** 引擎ID */
+  DataEngineIds: string[];
+  /** 引擎配置命令，支持UpdateSparkSQLLakefsPath（更新原生表配置）、UpdateSparkSQLResultPath（更新结果路径配置） */
+  DataEngineConfigCommand: string;
 }
 
 declare interface UpdateDataEngineConfigResponse {
@@ -3891,6 +3937,12 @@ declare interface UpdateRowFilterResponse {
 }
 
 declare interface UpdateUserDataEngineConfigRequest {
+  /** 引擎ID */
+  DataEngineId: string;
+  /** 引擎配置项 */
+  DataEngineConfigPairs?: DataEngineConfigPair[];
+  /** 作业引擎资源配置模版 */
+  SessionResourceTemplate?: SessionResourceTemplate;
 }
 
 declare interface UpdateUserDataEngineConfigResponse {
@@ -3899,6 +3951,8 @@ declare interface UpdateUserDataEngineConfigResponse {
 }
 
 declare interface UpgradeDataEngineImageRequest {
+  /** 引擎ID */
+  DataEngineId: string;
 }
 
 declare interface UpgradeDataEngineImageResponse {
@@ -4118,15 +4172,15 @@ declare interface Dlc {
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
   /** 重启引擎 {@link RestartDataEngineRequest} {@link RestartDataEngineResponse} */
-  RestartDataEngine(data?: RestartDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDataEngineResponse>;
+  RestartDataEngine(data: RestartDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDataEngineResponse>;
   /** 回滚引擎镜像版本 {@link RollbackDataEngineImageRequest} {@link RollbackDataEngineImageResponse} */
-  RollbackDataEngineImage(data?: RollbackDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackDataEngineImageResponse>;
+  RollbackDataEngineImage(data: RollbackDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackDataEngineImageResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
   SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
   /** 切换主备集群 {@link SwitchDataEngineRequest} {@link SwitchDataEngineResponse} */
   SwitchDataEngine(data: SwitchDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineResponse>;
   /** 切换引擎镜像版本 {@link SwitchDataEngineImageRequest} {@link SwitchDataEngineImageResponse} */
-  SwitchDataEngineImage(data?: SwitchDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineImageResponse>;
+  SwitchDataEngineImage(data: SwitchDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineImageResponse>;
   /** 解绑用户上的用户组 {@link UnbindWorkGroupsFromUserRequest} {@link UnbindWorkGroupsFromUserResponse} */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
   /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
@@ -4134,13 +4188,13 @@ declare interface Dlc {
   /** 更新数据引擎配置 {@link UpdateDataEngineRequest} {@link UpdateDataEngineResponse} */
   UpdateDataEngine(data: UpdateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineResponse>;
   /** 修改引擎配置 {@link UpdateDataEngineConfigRequest} {@link UpdateDataEngineConfigResponse} */
-  UpdateDataEngineConfig(data?: UpdateDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineConfigResponse>;
+  UpdateDataEngineConfig(data: UpdateDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineConfigResponse>;
   /** 更新行过滤规则 {@link UpdateRowFilterRequest} {@link UpdateRowFilterResponse} */
   UpdateRowFilter(data: UpdateRowFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRowFilterResponse>;
   /** 修改用户引擎自定义配置 {@link UpdateUserDataEngineConfigRequest} {@link UpdateUserDataEngineConfigResponse} */
-  UpdateUserDataEngineConfig(data?: UpdateUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserDataEngineConfigResponse>;
+  UpdateUserDataEngineConfig(data: UpdateUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserDataEngineConfigResponse>;
   /** 升级引擎镜像 {@link UpgradeDataEngineImageRequest} {@link UpgradeDataEngineImageResponse} */
-  UpgradeDataEngineImage(data?: UpgradeDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDataEngineImageResponse>;
+  UpgradeDataEngineImage(data: UpgradeDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDataEngineImageResponse>;
 }
 
 export declare type Versions = ["2021-01-25"];

@@ -1765,7 +1765,7 @@ declare interface CreateTopicRequest {
   EnvironmentId: string;
   /** 主题名，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。 */
   TopicName: string;
-  /** 入参为1，即是创建非分区topic，无分区；入参大于1，表示分区topic的分区数，最大不允许超过128。 */
+  /** 入参为1，即是创建非分区topic，无分区；入参大于1，表示分区topic的分区数，最大不允许超过32。 */
   Partitions: number;
   /** Pulsar 集群的ID */
   ClusterId: string;

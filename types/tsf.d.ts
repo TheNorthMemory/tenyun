@@ -4368,7 +4368,7 @@ declare interface DeployContainerGroupRequest {
   ServiceSetting?: ServiceSetting;
   /** 是否部署 agent 容器。若不指定该参数，则默认不部署 agent 容器。 */
   DeployAgent?: boolean;
-  /** 节点调度策略。若不指定改参数，则默认不使用节点调度策略。 */
+  /** 节点调度策略。若不指定该参数，则默认不使用节点调度策略。 */
   SchedulingStrategy?: SchedulingStrategy;
   /** 是否进行增量部署，默认为false，全量更新 */
   IncrementalDeployment?: boolean;
@@ -4392,7 +4392,7 @@ declare interface DeployContainerGroupRequest {
 
 declare interface DeployContainerGroupResponse {
   /** 部署容器应用是否成功。true：成功。false：失败。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -72,7 +72,7 @@ declare interface AclConfig {
 declare interface AclUserRule {
   /** 规则名。 */
   RuleName: string;
-  /** 处罚动作，取值有：trans：放行；drop：拦截；monitor：观察；ban：IP封禁；redirect：重定向；page：指定页面；alg：Javascript挑战。 */
+  /** 处罚动作，取值有：trans：放行；drop：拦截；monitor：观察；ban：IP 封禁；redirect：重定向；page：指定页面；alg：JavaScript 挑战。 */
   Action: string;
   /** 规则状态，取值有：on：生效；off：失效。 */
   RuleStatus: string;
@@ -80,25 +80,27 @@ declare interface AclUserRule {
   AclConditions: AclCondition[];
   /** 规则优先级，取值范围0-100。 */
   RulePriority: number;
-  /** 规则Id。仅出参使用。 */
-  RuleID?: number | null;
+  /** 规则 Id。仅出参使用。 */
+  RuleID?: number;
   /** 更新时间。仅出参使用。 */
-  UpdateTime?: string | null;
-  /** ip封禁的惩罚时间，取值范围0-2天。默认为0。 */
-  PunishTime?: number | null;
-  /** ip封禁的惩罚时间单位，取值有：second：秒；minutes：分；hour：小时。默认为second。 */
-  PunishTimeUnit?: string | null;
-  /** 自定义返回页面的名称。默认为空字符串。 */
-  Name?: string | null;
-  /** 自定义返回页面的实例id。默认为0。 */
-  PageId?: number | null;
-  /** 重定向时候的地址，必须为本用户接入的站点子域名。默认为空字符串。 */
-  RedirectUrl?: string | null;
-  /** 重定向时候的返回码。默认为0。 */
-  ResponseCode?: number | null;
+  UpdateTime?: string;
+  /** ip 封禁的惩罚时间。Action 是 ban 时必填，且不能为空，取值范围0-2天。 */
+  PunishTime?: number;
+  /** ip 封禁的惩罚时间单位，取值有：second：秒；minutes：分；hour：小时。默认为 second。 */
+  PunishTimeUnit?: string;
+  /** 自定义返回页面的名称。Action 是 page 时必填，且不能为空。 */
+  Name?: string;
+  /** 自定义返回页面的实例 Id。默认为0，代表使用系统默认拦截页面。该参数已废弃。 */
+  PageId?: number;
+  /** 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Action 是 page 时必填，且不能为空。 */
+  CustomResponseId?: string;
+  /** 自定义返回页面的响应码。Action 是 page 时必填，且不能为空，取值: 100~600，不支持 3xx 响应码。默认值：567。 */
+  ResponseCode?: number;
+  /** 重定向时候的地址。Action 是 redirect 时必填，且不能为空。 */
+  RedirectUrl?: string;
 }
 
-/** 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
+/** 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。 */
 declare interface Action {
   /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； SslTlsSecureConf； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)； 修改源站(Origin)。 */
   NormalAction?: NormalAction | null;
@@ -342,24 +344,32 @@ declare interface BotPortraitRule {
 declare interface BotUserRule {
   /** 规则名，只能以英文字符，数字，下划线组合，且不能以下划线开头。 */
   RuleName: string;
-  /** 处置动作，取值有：drop：拦截；monitor：观察；trans：放行；alg：JavaScript挑战；captcha：托管挑战；random：随机处置；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
+  /** 处置动作，取值有：drop：拦截；monitor：观察；trans：放行；redirect：重定向；page：指定页面；alg：JavaScript 挑战；captcha：托管挑战；random：随机处置；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
   Action: string;
-  /** 规则状态，取值有：on：生效；off：不生效。默认on生效。 */
+  /** 规则状态，取值有：on：生效；off：不生效。默认 on 生效。 */
   RuleStatus: string;
   /** 规则详情。 */
   AclConditions: AclCondition[];
   /** 规则权重，取值范围0-100。 */
   RulePriority: number;
-  /** 规则id。仅出参使用。 */
-  RuleID?: number | null;
+  /** 规则 Id。仅出参使用。 */
+  RuleID?: number;
   /** 随机处置的处置方式及占比，非随机处置可不填暂不支持。 */
   ExtendActions?: BotExtendAction[];
-  /** 过滤词，取值有：sip：客户端ip。 */
-  FreqFields?: string[] | null;
-  /** 更新时间。 */
-  UpdateTime?: string | null;
-  /** 统计范围，字段为null时，代表source_to_eo。取值有：source_to_eo：（响应）源站到EdgeOne。client_to_eo：（请求）客户端到EdgeOne； */
-  FreqScope?: string[] | null;
+  /** 过滤词，取值有：sip：客户端 ip。默认为空字符串。 */
+  FreqFields?: string[];
+  /** 更新时间。仅出参使用。 */
+  UpdateTime?: string;
+  /** 统计范围。取值有：source_to_eo：（响应）源站到 EdgeOne；client_to_eo：（请求）客户端到 EdgeOne。默认为 source_to_eo。 */
+  FreqScope?: string[];
+  /** 自定义返回页面的名称。Action 是 page 时必填，且不能为空。 */
+  Name?: string;
+  /** 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Action 是 page 时必填，且不能为空。 */
+  CustomResponseId?: string;
+  /** 自定义返回页面的响应码。Action 是 page 时必填，且不能为空，取值: 100~600，不支持 3xx 响应码。默认值：567。 */
+  ResponseCode?: number;
+  /** 重定向时候的地址。Action 是 redirect 时必填，且不能为空。 */
+  RedirectUrl?: string;
 }
 
 /** cc配置项。 */
@@ -454,7 +464,7 @@ declare interface CnameStatus {
 
 /** 规则引擎带有状态码的动作 */
 declare interface CodeAction {
-  /** 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
+  /** 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。 */
   Action: string;
   /** 操作参数。 */
   Parameters: RuleCodeActionParams[];
@@ -618,14 +628,16 @@ declare interface DropPageConfig {
 
 /** 拦截页面的配置信息 */
 declare interface DropPageDetail {
-  /** 拦截页面的唯一Id。系统默认包含一个自带拦截页面，Id值为0。该Id可通过创建拦截页面接口进行上传获取。如传入0，代表使用系统默认拦截页面。 */
+  /** 拦截页面的唯一 Id。系统默认包含一个自带拦截页面，Id 值为0。该 Id 可通过创建拦截页面接口进行上传获取。如传入0，代表使用系统默认拦截页面。该参数已废弃。 */
   PageId: number;
-  /** 拦截页面的HTTP状态码。状态码范围是100-600。 */
+  /** 拦截页面的 HTTP 状态码。状态码取值：100～600，不支持 3xx 状态码。托管规则拦截页面默认：566，安全防护（除托管规则外）拦截页面默认：567. */
   StatusCode: number;
-  /** 页面文件名或url。 */
+  /** 页面文件名或 url。 */
   Name: string;
-  /** 页面的类型，取值有： file：页面文件内容； url：上传的url地址。 */
+  /** 页面的类型，取值有：page：指定页面。 */
   Type: string;
+  /** 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Type 类型是 page 时必填，且不能为空。 */
+  CustomResponseId?: string;
 }
 
 /** 例外规则，用于配置需要跳过特定场景的规则 */
@@ -930,7 +942,7 @@ declare interface NoCache {
 
 /** 规则引擎常规类型的动作 */
 declare interface NormalAction {
-  /** 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
+  /** 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。 */
   Action: string;
   /** 参数。 */
   Parameters: RuleNormalActionParams[];
@@ -1204,26 +1216,34 @@ declare interface RateLimitUserRule {
   Period: number;
   /** 规则名，只能以英文字符，数字，下划线组合，且不能以下划线开头。 */
   RuleName: string;
-  /** 处置动作，取值有： monitor：观察； drop：拦截； alg：JavaScript挑战。 */
+  /** 处置动作，取值有： monitor：观察； drop：拦截； redirect：重定向； page：指定页面；alg：JavaScript 挑战。 */
   Action: string;
   /** 惩罚时长，0-2天。 */
   PunishTime: number;
   /** 处罚时长单位，取值有：second：秒；minutes：分钟；hour：小时。 */
   PunishTimeUnit: string;
-  /** 规则状态，取值有：on：生效；off：不生效。默认on生效。 */
+  /** 规则状态，取值有：on：生效；off：不生效。默认 on 生效。 */
   RuleStatus: string;
   /** 规则详情。 */
   AclConditions: AclCondition[];
   /** 规则权重，取值范围0-100。 */
   RulePriority: number;
   /** 规则 Id。仅出参使用。 */
-  RuleID?: number | null;
-  /** 过滤词，取值有：sip：客户端ip。 */
-  FreqFields?: string[] | null;
-  /** 更新时间。 */
-  UpdateTime?: string | null;
-  /** 统计范围，字段为 null 时，代表 source_to_eo。取值有：source_to_eo：（响应）源站到EdgeOne。client_to_eo：（请求）客户端到EdgeOne； */
-  FreqScope?: string[] | null;
+  RuleID?: number;
+  /** 过滤词，取值有：sip：客户端 ip。默认为空字符串。 */
+  FreqFields?: string[];
+  /** 更新时间。仅出参使用。修改时默认为当前时间。 */
+  UpdateTime?: string;
+  /** 统计范围。取值有：source_to_eo：（响应）源站到 EdgeOne；client_to_eo：（请求）客户端到 EdgeOne。默认为 source_to_eo。 */
+  FreqScope?: string[];
+  /** 自定义返回页面的名称。Action 是 page 时必填，且不能为空。 */
+  Name?: string;
+  /** 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Action 是 page 时必填，且不能为空。 */
+  CustomResponseId?: string;
+  /** 自定义返回页面的响应码。Action 是 page 时必填，且不能为空，取值: 100~600，不支持 3xx 响应码。默认值：567。 */
+  ResponseCode?: number;
+  /** 重定向时候的地址。Action 是 redirect 时必填，且不能为空。 */
+  RedirectUrl?: string;
 }
 
 /** 计费资源 */
@@ -1256,7 +1276,7 @@ declare interface Resource {
 
 /** 规则引擎HTTP请求头/响应头类型的动作 */
 declare interface RewriteAction {
-  /** 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
+  /** 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。 */
   Action: string;
   /** 参数。 */
   Parameters: RuleRewriteActionParams[];
@@ -1302,7 +1322,7 @@ declare interface RuleChoicePropertiesItem {
 declare interface RuleCodeActionParams {
   /** 状态 Code。 */
   StatusCode: number;
-  /** 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
+  /** 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。 */
   Name: string;
   /** 参数值。 */
   Values: string[];
@@ -1352,7 +1372,7 @@ declare interface RuleItem {
 
 /** 规则引擎条件常规动作参数 */
 declare interface RuleNormalActionParams {
-  /** 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
+  /** 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。 */
   Name: string;
   /** 参数值。 */
   Values: string[];
@@ -1360,7 +1380,7 @@ declare interface RuleNormalActionParams {
 
 /** 规则引擎条件 HTTP 请求/响应头操作动作参数。 */
 declare interface RuleRewriteActionParams {
-  /** 功能参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。现在只有三种取值： add：添加 HTTP 头部； set：重写 HTTP 头部； del：删除 HTTP 头部。 */
+  /** 功能参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。现在只有三种取值： add：添加 HTTP 头部； set：重写 HTTP 头部； del：删除 HTTP 头部。 */
   Action: string;
   /** 参数名称。 */
   Name: string;
@@ -1371,23 +1391,23 @@ declare interface RuleRewriteActionParams {
 /** 规则引擎可应用于匹配请求的设置详细信息。 */
 declare interface RulesProperties {
   /** 值为参数名称。 */
-  Name: string;
+  Name?: string;
   /** 数值参数的最小值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。 */
-  Min: number;
+  Min?: number;
   /** 参数值的可选值。注意：若参数值为用户自定义则该数组为空数组。 */
-  ChoicesValue: string[];
-  /** 参数值类型。 CHOICE：参数值只能在 ChoicesValue 中选择； TOGGLE：参数值为开关类型，可在 ChoicesValue 中选择； OBJECT：参数值为对象类型，ChoiceProperties 为改对象类型关联的属性； CUSTOM_NUM：参数值用户自定义，整型类型； CUSTOM_STRING：参数值用户自定义，字符串类型。注意：当参数类型为 OBJECT 类型时，请注意参考 [示例2 参数为 OBJECT 类型的创建](https://tcloud4api.woa.com/document/product/1657/79382?!preview&!document=1) */
-  Type: string;
+  ChoicesValue?: string[];
+  /** 参数值类型。 CHOICE：参数值只能在 ChoicesValue 中选择； TOGGLE：参数值为开关类型，可在 ChoicesValue 中选择； OBJECT：参数值为对象类型，ChoiceProperties 为改对象类型关联的属性； CUSTOM_NUM：参数值用户自定义，整型类型； CUSTOM_STRING：参数值用户自定义，字符串类型。注意：当参数类型为 OBJECT 类型时，请注意参考 [示例2 参数为 OBJECT 类型的创建](https://cloud.tencent.com/document/product/1552/80622) */
+  Type?: string;
   /** 数值参数的最大值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。 */
-  Max: number;
+  Max?: number;
   /** 参数值是否支持多选或者填写多个。 */
-  IsMultiple: boolean;
+  IsMultiple?: boolean;
   /** 是否允许为空。 */
-  IsAllowEmpty: boolean;
+  IsAllowEmpty?: boolean;
   /** 该参数对应的关联配置参数，属于调用接口的必填参数。注意：如果可选参数无特殊新增参数则该数组为空数组。 */
-  ChoiceProperties: RuleChoicePropertiesItem[];
+  ChoiceProperties?: RuleChoicePropertiesItem[];
   /** 为 NULL：无特殊参数，RuleAction 选择 NormalAction； */
-  ExtraParameter: RuleExtraParameter | null;
+  ExtraParameter?: RuleExtraParameter | null;
 }
 
 /** 规则引擎可应用于匹配请求的设置列表及其详细信息 */
@@ -2567,7 +2587,7 @@ declare interface DescribeTimingL7AnalysisDataRequest {
   ZoneIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
   Interval?: string;
-  /** 过滤条件，详细的过滤条件Key值如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。province 按照【省份】进行过滤，此参数只支持服务区域为中国大陆。isp 按照【运营商】进行过滤，此参数只支持服务区域为中国大陆。 对应的Value可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain 按照【子域名】进行过滤，子域名形如： test.example.com。url 按照【URL Path】进行过滤，URL Path形如：/content或/content/test.jpg。 若只填写url参数，则最多可查询近30天的数据； 若同时填写url+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。referer 按照【Referer头信息】进行过滤, Referer形如：example.com。 若只填写referer参数，则最多可查询近30天的数据； 若同时填写referer+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。resourceType 按照【资源类型】进行过滤，资源类型一般是文件后缀，形如: .jpg, .css。 若只填写resourceType参数，则最多可查询近30天的数据； 若同时填写resourceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。protocol 按照【HTTP协议版本】进行过滤。 对应的Value可选项如下： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。statusCode 按照【状态码】进行过滤。 若只填写statusCode参数，则最多可查询近30天的数据； 若同时填写statusCode+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应的Value可选项如下： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 205：205状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。browserType 按照【浏览器类型】进行过滤。 若只填写browserType参数，则最多可查询近30天的数据； 若同时填写browserType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType 按照【设备类型】进行过滤。 若只填写deviceType参数，则最多可查询近30天的数据； 若同时填写deviceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType 按照【操作系统类型】进行过滤。 若只填写operatingSystemType参数，则最多可查询近30天的数据； 若同时填写operatingSystemType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion 按照【TLS版本】进行过滤。 若只填写tlsVersion参数，则最多可查询近30天的数据； 若同时填写tlsVersion+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TLS1.0：TLS 1.0； TLS1.1：TLS 1.1； TLS1.2：TLS 1.2； TLS1.3：TLS 1.3。ipVersion 按照【IP版本】进行过滤。 对应Value的可选项如下： 4：Ipv4； 6：Ipv6。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
+  /** 过滤条件，详细的过滤条件Key值如下：country 按照【国家/地区】进行过滤，国家/地区遵循 ISO 3166 规范。province 按照【省份】进行过滤，此参数只支持服务区域为中国大陆。isp 按照【运营商】进行过滤，此参数只支持服务区域为中国大陆。 对应的Value可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain 按照【子域名】进行过滤，子域名形如： test.example.com。url 按照【URL Path】进行过滤，URL Path形如：/content或/content/test.jpg。 若只填写url参数，则最多可查询近30天的数据； 若同时填写url+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。referer 按照【Referer头信息】进行过滤, Referer形如：example.com。 若只填写referer参数，则最多可查询近30天的数据； 若同时填写referer+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。resourceType 按照【资源类型】进行过滤，资源类型一般是文件后缀，形如: .jpg, .css。 若只填写resourceType参数，则最多可查询近30天的数据； 若同时填写resourceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。protocol 按照【HTTP协议版本】进行过滤。 对应的Value可选项如下： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。statusCode 按照【状态码】进行过滤。 若只填写statusCode参数，则最多可查询近30天的数据； 若同时填写statusCode+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应的Value可选项如下： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 205：205状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。browserType 按照【浏览器类型】进行过滤。 若只填写browserType参数，则最多可查询近30天的数据； 若同时填写browserType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType 按照【设备类型】进行过滤。 若只填写deviceType参数，则最多可查询近30天的数据； 若同时填写deviceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType 按照【操作系统类型】进行过滤。 若只填写operatingSystemType参数，则最多可查询近30天的数据； 若同时填写operatingSystemType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion 按照【TLS版本】进行过滤。 若只填写tlsVersion参数，则最多可查询近30天的数据； 若同时填写tlsVersion+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TLS1.0：TLS 1.0； TLS1.1：TLS 1.1； TLS1.2：TLS 1.2； TLS1.3：TLS 1.3。ipVersion 按照【IP版本】进行过滤。 对应Value的可选项如下： 4：Ipv4； 6：Ipv6。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
   Filters?: QueryCondition[];
   /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
@@ -2619,7 +2639,7 @@ declare interface DescribeTopL7AnalysisDataRequest {
   ZoneIds?: string[];
   /** 查询前多少个数据，最大值为1000，不填默认默认为: 10， 表示查询前top10的数据。 */
   Limit?: number;
-  /** 过滤条件，详细的过滤条件Key值如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。province 按照【省份】进行过滤，此参数只支持服务区域为中国大陆。isp 按照【运营商】进行过滤，此参数只支持服务区域为中国大陆。 对应的Value可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain 按照【子域名】进行过滤，子域名形如： test.example.com。url 按照【URL Path】进行过滤，URL Path形如：/content或/content/test.jpg。 若只填写url参数，则最多可查询近30天的数据； 若同时填写url+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。referer 按照【Referer头信息】进行过滤, Referer形如：example.com。 若只填写referer参数，则最多可查询近30天的数据； 若同时填写referer+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。resourceType 按照【资源类型】进行过滤，资源类型一般是文件后缀，形如: .jpg, .css。 若只填写resourceType参数，则最多可查询近30天的数据； 若同时填写resourceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。protocol 按照【HTTP协议版本】进行过滤。 对应的Value可选项如下： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。statusCode 按照【状态码】进行过滤。 若只填写statusCode参数，则最多可查询近30天的数据； 若同时填写statusCode+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应的Value可选项如下： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 205：205状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。browserType 按照【浏览器类型】进行过滤。 若只填写browserType参数，则最多可查询近30天的数据； 若同时填写browserType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType 按照【设备类型】进行过滤。 若只填写deviceType参数，则最多可查询近30天的数据； 若同时填写deviceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType 按照【操作系统类型】进行过滤。 若只填写operatingSystemType参数，则最多可查询近30天的数据； 若同时填写operatingSystemType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion 按照【TLS版本】进行过滤。 若只填写tlsVersion参数，则最多可查询近30天的数据； 若同时填写tlsVersion+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TLS1.0：TLS 1.0； TLS1.1：TLS 1.1； TLS1.2：TLS 1.2； TLS1.3：TLS 1.3。ipVersion 按照【IP版本】进行过滤。 对应Value的可选项如下： 4：Ipv4； 6：Ipv6。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
+  /** 过滤条件，详细的过滤条件Key值如下：country 按照【国家/地区】进行过滤，国家/地区遵循 ISO 3166 规范。province 按照【省份】进行过滤，此参数只支持服务区域为中国大陆。isp 按照【运营商】进行过滤，此参数只支持服务区域为中国大陆。 对应的Value可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain 按照【子域名】进行过滤，子域名形如： test.example.com。url 按照【URL Path】进行过滤，URL Path形如：/content或/content/test.jpg。 若只填写url参数，则最多可查询近30天的数据； 若同时填写url+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。referer 按照【Referer头信息】进行过滤, Referer形如：example.com。 若只填写referer参数，则最多可查询近30天的数据； 若同时填写referer+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。resourceType 按照【资源类型】进行过滤，资源类型一般是文件后缀，形如: .jpg, .css。 若只填写resourceType参数，则最多可查询近30天的数据； 若同时填写resourceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。protocol 按照【HTTP协议版本】进行过滤。 对应的Value可选项如下： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。statusCode 按照【状态码】进行过滤。 若只填写statusCode参数，则最多可查询近30天的数据； 若同时填写statusCode+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应的Value可选项如下： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 205：205状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。browserType 按照【浏览器类型】进行过滤。 若只填写browserType参数，则最多可查询近30天的数据； 若同时填写browserType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType 按照【设备类型】进行过滤。 若只填写deviceType参数，则最多可查询近30天的数据； 若同时填写deviceType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType 按照【操作系统类型】进行过滤。 若只填写operatingSystemType参数，则最多可查询近30天的数据； 若同时填写operatingSystemType+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion 按照【TLS版本】进行过滤。 若只填写tlsVersion参数，则最多可查询近30天的数据； 若同时填写tlsVersion+Zonelds参数，则支持的查询数据范围为套餐支持的数据分析最大查询范围与30天两者中的较小值。 对应Value的可选项如下： TLS1.0：TLS 1.0； TLS1.1：TLS 1.1； TLS1.2：TLS 1.2； TLS1.3：TLS 1.3。ipVersion 按照【IP版本】进行过滤。 对应Value的可选项如下： 4：Ipv4； 6：Ipv6。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
   Filters?: QueryCondition[];
   /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;

@@ -917,9 +917,9 @@ declare interface DescribeProductEventListOverView {
 /** 实例对象的维度组合 */
 declare interface Dimension {
   /** 实例维度名称 */
-  Name: string;
+  Name: string | null;
   /** 实例维度值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 策略类型的维度信息 */

@@ -94,6 +94,16 @@ declare interface Filter {
   Values: string[];
 }
 
+/** GeneralResourceQuotaSet数据结构 */
+declare interface GeneralResourceQuotaSet {
+  /** 资源名称 */
+  ResourceName?: string | null;
+  /** 已使用额度 */
+  ResourceQuotaUsed?: number | null;
+  /** 总额度 */
+  ResourceQuotaTotal?: number | null;
+}
+
 /** 执行活动详情。 */
 declare interface Invocation {
   /** 执行活动ID。 */
@@ -418,6 +428,16 @@ declare interface DeleteCommandResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCommandsRequest {
+  /** 待删除命令id */
+  CommandIds: string[];
+}
+
+declare interface DeleteCommandsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteInvokerRequest {
   /** 待删除的执行器ID。 */
   InvokerId: string;
@@ -564,6 +584,18 @@ declare interface DescribeInvokersResponse {
   TotalCount: number;
   /** 执行器信息。 */
   InvokerSet: Invoker[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQuotasRequest {
+  /** 资源名称，目前有"COMMAND","REGISTER_CODE" 这两个指标 */
+  ResourceNames: string[];
+}
+
+declare interface DescribeQuotasResponse {
+  /** 资源额度列表 */
+  GeneralResourceQuotaSet?: GeneralResourceQuotaSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -815,6 +847,8 @@ declare interface Tat {
   CreateRegisterCode(data?: CreateRegisterCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRegisterCodeResponse>;
   /** 删除命令 {@link DeleteCommandRequest} {@link DeleteCommandResponse} */
   DeleteCommand(data: DeleteCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCommandResponse>;
+  /** 批量删除命令 {@link DeleteCommandsRequest} {@link DeleteCommandsResponse} */
+  DeleteCommands(data: DeleteCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCommandsResponse>;
   /** 删除执行器 {@link DeleteInvokerRequest} {@link DeleteInvokerResponse} */
   DeleteInvoker(data: DeleteInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInvokerResponse>;
   /** 批量删除注册码 {@link DeleteRegisterCodesRequest} {@link DeleteRegisterCodesResponse} */
@@ -833,6 +867,8 @@ declare interface Tat {
   DescribeInvokerRecords(data?: DescribeInvokerRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokerRecordsResponse>;
   /** 查询执行器 {@link DescribeInvokersRequest} {@link DescribeInvokersResponse} */
   DescribeInvokers(data?: DescribeInvokersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokersResponse>;
+  /** 获取配额信息 {@link DescribeQuotasRequest} {@link DescribeQuotasResponse} */
+  DescribeQuotas(data: DescribeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotasResponse>;
   /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 查询注册码 {@link DescribeRegisterCodesRequest} {@link DescribeRegisterCodesResponse} */

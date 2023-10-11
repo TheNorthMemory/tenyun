@@ -740,6 +740,18 @@ declare interface CreateDeviceGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateResourceRequest {
+  /** 部署堡垒机的VpcId */
+  VpcId: string;
+  /** 部署堡垒机的SubnetId */
+  SubnetId: string;
+}
+
+declare interface CreateResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserGroupRequest {
   /** 用户组名，最大长度32字符 */
   Name: string;
@@ -1366,6 +1378,32 @@ declare interface ModifyDeviceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyResourceRequest {
+  /** 需要开通服务的资源ID */
+  ResourceId: string;
+  /** 已废弃 */
+  Status?: string;
+  /** 已废弃 */
+  ModuleSet?: string[];
+  /** 实例版本 */
+  ResourceEdition?: string;
+  /** 资源节点数 */
+  ResourceNode?: number;
+  /** 自动续费 */
+  AutoRenewFlag?: number;
+  /** 带宽扩展包个数(4M) */
+  PackageBandwidth?: number;
+  /** 授权点数扩展包个数(50点) */
+  PackageNode?: number;
+  /** 日志投递 */
+  LogDelivery?: number;
+}
+
+declare interface ModifyResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserRequest {
   /** 用户ID */
   Id: number;
@@ -1657,6 +1695,8 @@ declare interface Dasb {
   CreateDeviceAccount(data: CreateDeviceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceAccountResponse>;
   /** 新建资产组 {@link CreateDeviceGroupRequest} {@link CreateDeviceGroupResponse} */
   CreateDeviceGroup(data: CreateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceGroupResponse>;
+  /** 创建堡垒机实例 {@link CreateResourceRequest} {@link CreateResourceResponse} */
+  CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
   /** 新建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 新建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
@@ -1719,6 +1759,8 @@ declare interface Dasb {
   ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
   /** 修改资产组 {@link ModifyDeviceGroupRequest} {@link ModifyDeviceGroupResponse} */
   ModifyDeviceGroup(data: ModifyDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceGroupResponse>;
+  /** 资源变配 {@link ModifyResourceRequest} {@link ModifyResourceResponse} */
+  ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 清除设备账号绑定密码 {@link ResetDeviceAccountPasswordRequest} {@link ResetDeviceAccountPasswordResponse} */

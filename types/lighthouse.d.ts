@@ -1097,13 +1097,13 @@ declare interface CreateInstancesRequest {
   InstanceName?: string;
   /** 购买实例数量。包年包月实例取值范围：[1，30]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量 */
   InstanceCount?: number;
-  /** 可用区列表。默认为随机可用区 */
+  /** 可用区列表。不填此参数，表示为随机可用区。 */
   Zones?: string[];
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例 */
   DryRun?: boolean;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例登录密码信息配置。本字段目前仅支持WINDOWS实例进行密码设置。默认缺失情况下代表用户选择实例创建后设置登录密码。 */
+  /** 实例登录密码信息配置。默认缺失情况下代表用户选择实例创建后设置登录密码。 */
   LoginConfiguration?: LoginConfiguration;
   /** 要创建的容器配置列表。 */
   Containers?: DockerContainerConfiguration[];
@@ -1111,6 +1111,8 @@ declare interface CreateInstancesRequest {
   AutoVoucher?: boolean;
   /** 防火墙模版ID。若不指定该参数，则使用默认防火墙策略。 */
   FirewallTemplateId?: string;
+  /** 标签键和标签值。如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。如果标签不存在会为您自动创建标签。数组最多支持10个元素。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateInstancesResponse {

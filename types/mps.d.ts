@@ -201,17 +201,19 @@ declare interface AddOnSubtitle {
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
   /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦 */
-  Type: string;
+  Type?: string;
   /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
-  ClassificationTask: AiAnalysisTaskClassificationResult | null;
+  ClassificationTask?: AiAnalysisTaskClassificationResult | null;
   /** 视频内容分析智能封面任务的查询结果，当任务类型为 Cover 时有效。 */
-  CoverTask: AiAnalysisTaskCoverResult | null;
+  CoverTask?: AiAnalysisTaskCoverResult | null;
   /** 视频内容分析智能标签任务的查询结果，当任务类型为 Tag 时有效。 */
-  TagTask: AiAnalysisTaskTagResult | null;
+  TagTask?: AiAnalysisTaskTagResult | null;
   /** 视频内容分析智能按帧标签任务的查询结果，当任务类型为 FrameTag 时有效。 */
-  FrameTagTask: AiAnalysisTaskFrameTagResult | null;
+  FrameTagTask?: AiAnalysisTaskFrameTagResult | null;
   /** 视频内容分析集锦任务的查询结果，当任务类型为 Highlight时有效。 */
-  HighlightTask: AiAnalysisTaskHighlightResult | null;
+  HighlightTask?: AiAnalysisTaskHighlightResult | null;
+  /** 视频内容分析去水印任务的查询结果，当任务类型为 DeLogo 时有效。 */
+  DeLogoTask?: AiAnalysisTaskDelLogoResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -270,6 +272,34 @@ declare interface AiAnalysisTaskCoverResult {
   Input?: AiAnalysisTaskCoverInput;
   /** 智能封面任务输出。 */
   Output?: AiAnalysisTaskCoverOutput | null;
+}
+
+/** 智能去水印任务输入类型 */
+declare interface AiAnalysisTaskDelLogoInput {
+  /** 视频智能去水印模板 ID。 */
+  Definition: number;
+}
+
+/** 智能去水印结果信息 */
+declare interface AiAnalysisTaskDelLogoOutput {
+  /** 去水印后文件的路径。 */
+  Path: string;
+  /** 去水印后文件的存储位置。 */
+  OutputStorage: TaskOutputStorage;
+}
+
+/** 智能去水印结果类型 */
+declare interface AiAnalysisTaskDelLogoResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 智能去水印任务输入。 */
+  Input?: AiAnalysisTaskDelLogoInput;
+  /** 智能去水印任务输出。 */
+  Output?: AiAnalysisTaskDelLogoOutput | null;
 }
 
 /** 智能按帧标签任务输入类型 */

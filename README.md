@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 242+ 款产品，10547+ 服务数</summary>
+<details><summary>共计 242+ 款产品，10552+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -145,7 +145,7 @@ cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 20
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(26) |
-cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(2) |
+cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(3) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(42) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(105) |
@@ -171,7 +171,7 @@ cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-1
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(518) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(129) |
-dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(52) |
+dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(54) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(61) | 2019-10-16(27) |
@@ -282,7 +282,7 @@ sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 20
 taf | [流量反欺诈](https://cloud.tencent.com/document/product/1031) | 2020-02-10(3) |
 tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(31) |
 tan | [碳引擎](https://cloud.tencent.com/document/product/1498) | 2022-04-20(1) |
-tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(26) |
+tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(28) |
 tav | 文件检测 | 2019-01-18(4) |
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(21) |
 tbm |  | 2018-01-29(9) |

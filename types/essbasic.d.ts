@@ -320,6 +320,14 @@ declare interface FillApproverInfo {
   NotChannelOrganization?: string;
 }
 
+/** 批量补充签署人时，补充失败的报错说明 */
+declare interface FillError {
+  /** 为签署方经办人在签署合同中的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。与入参中补充的签署人角色ID对应，批量补充部分失败返回对应的错误信息。 */
+  RecipientId?: string | null;
+  /** 补充失败错误说明 */
+  ErrMessage?: string | null;
+}
+
 /** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
 declare interface FilledComponent {
   /** 控件Id */
@@ -1166,6 +1174,8 @@ declare interface ChannelCreateFlowApproversRequest {
 }
 
 declare interface ChannelCreateFlowApproversResponse {
+  /** 批量补充签署人时，补充失败的报错说明 注:`目前仅补充动态签署人时会返回补充失败的原因` */
+  FillError?: FillError[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

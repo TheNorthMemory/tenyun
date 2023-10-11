@@ -958,7 +958,7 @@ declare namespace V20190711 {
 
   interface PullSmsSendStatusByPhoneNumberResponse {
     /** 下发状态响应集合。 */
-    PullSmsSendStatusSet: PullSmsSendStatus[];
+    PullSmsSendStatusSet?: PullSmsSendStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -972,7 +972,7 @@ declare namespace V20190711 {
 
   interface PullSmsSendStatusResponse {
     /** 下发状态响应集合。 */
-    PullSmsSendStatusSet: PullSmsSendStatus[];
+    PullSmsSendStatusSet?: PullSmsSendStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
