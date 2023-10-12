@@ -120,7 +120,6 @@ import Ie, { Versions as IeVersions } from "./ie";
 import Iecp, { Versions as IecpVersions } from "./iecp";
 import Iir, { Versions as IirVersions } from "./iir";
 import Ims, { Versions as ImsVersions } from "./ims";
-import Intlpartnersmgt, { Versions as IntlpartnersmgtVersions } from "./intlpartnersmgt";
 import Iot, { Versions as IotVersions } from "./iot";
 import Iotcloud, { Versions as IotcloudVersions } from "./iotcloud";
 import Iotexplorer, { Versions as IotexplorerVersions } from "./iotexplorer";
@@ -244,7 +243,6 @@ import Yinsuda, { Versions as YinsudaVersions } from "./yinsuda";
 import Youmall, { Versions as YoumallVersions } from "./youmall";
 import Yunjing, { Versions as YunjingVersions } from "./yunjing";
 import Yunsou, { Versions as YunsouVersions } from "./yunsou";
-import Zj, { Versions as ZjVersions } from "./zj";
 
 export declare type LANGUAGES = ["zh-CN", "en-US"];
 
@@ -366,7 +364,6 @@ export declare type SERVICE_VERSIONS = {
   iecp: IecpVersions,
   iir: IirVersions,
   ims: ImsVersions,
-  intlpartnersmgt: IntlpartnersmgtVersions,
   iot: IotVersions,
   iotcloud: IotcloudVersions,
   iotexplorer: IotexplorerVersions,
@@ -490,7 +487,6 @@ export declare type SERVICE_VERSIONS = {
   youmall: YoumallVersions,
   yunjing: YunjingVersions,
   yunsou: YunsouVersions,
-  zj: ZjVersions,
 };
 
 declare interface CloudServiceActions {
@@ -743,8 +739,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   iir: Iir,
   /** {@link Ims 图片内容安全} */
   ims: Ims,
-  /** {@link Intlpartnersmgt 国际合作伙伴管理} */
-  intlpartnersmgt: Intlpartnersmgt,
   /** {@link Iot 加速物联网套件} */
   iot: Iot,
   /** {@link Iotcloud 物联网通信} */
@@ -989,8 +983,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   yunjing: Yunjing,
   /** {@link Yunsou 腾讯云搜TCS} */
   yunsou: Yunsou,
-  /** {@link Zj 珠玑} */
-  zj: Zj,
 };
 
 declare var TenYun: TenYun;

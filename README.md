@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 242+ 款产品，10552+ 服务数</summary>
+<details><summary>共计 240+ 款产品，10526+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -145,7 +145,7 @@ cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 20
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(26) |
-cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(3) |
+cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(5) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(42) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(105) |
@@ -216,7 +216,6 @@ ie | [智能编辑](https://cloud.tencent.com/document/product/1186) | 2020-03-0
 iecp | [物联网边缘计算平台](https://cloud.tencent.com/document/product/1118) | 2021-09-14(102) |
 iir | [智能识图](https://cloud.tencent.com/document/product/1217) | 2020-04-17(1) |
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
-intlpartnersmgt | 国际合作伙伴管理 | 2022-09-28(11) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(72) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(91) |
@@ -224,11 +223,11 @@ iottid | [物联网设备身份认证](https://cloud.tencent.com/document/produc
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(99) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
-iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(81) |
+iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(82) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
-lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(55) |
+lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(56) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(105) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(150) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
@@ -331,7 +330,7 @@ vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(162) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(315) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(117) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(119) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(296) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(5) |
@@ -340,7 +339,6 @@ yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document
 youmall |  | 2018-02-28(31) |
 yunjing | 主机安全 | 2018-02-28(100) |
 yunsou | [腾讯云搜TCS](https://cloud.tencent.com/document/product/270) | 2019-11-15(2) | 2018-05-04(2) |
-zj | 珠玑 | 2019-01-21(21) |
 
 </details>
 
