@@ -656,6 +656,8 @@ declare interface NodeView {
   DiskIds: string[];
   /** 是否为隐藏可用区 */
   Hidden: boolean;
+  /** 是否充当协调节点的角色 */
+  IsCoordinationNode?: boolean;
 }
 
 /** ES集群操作详细信息 */
@@ -945,7 +947,7 @@ declare interface CreateLogstashInstanceRequest {
 
 declare interface CreateLogstashInstanceResponse {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1241,11 +1243,11 @@ declare interface DescribeViewsRequest {
 
 declare interface DescribeViewsResponse {
   /** 集群维度视图 */
-  ClusterView: ClusterView | null;
+  ClusterView?: ClusterView | null;
   /** 节点维度视图 */
-  NodesView: NodeView[] | null;
+  NodesView?: NodeView[] | null;
   /** Kibana维度视图 */
-  KibanasView: KibanaView[] | null;
+  KibanasView?: KibanaView[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

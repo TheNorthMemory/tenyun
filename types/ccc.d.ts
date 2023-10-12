@@ -230,6 +230,8 @@ declare interface NumberInfo {
   Number?: string;
   /** 绑定的外呼技能组 */
   CallOutSkillGroupIds?: number[];
+  /** 号码状态，1-正常，2-欠费停用，4-管理员停用，5-违规停用 */
+  State?: number;
 }
 
 /** PSTN 会话类型。 */
@@ -572,6 +574,8 @@ declare interface TelCdrInfo {
   ProtectedCallee?: string | null;
   /** 客户自定义数据（User-to-User Interface） */
   Uui?: string | null;
+  /** 客户自定义数据（User-to-User Interface） */
+  UUI?: string | null;
   /** IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]） */
   IVRKeyPressedEx?: IVRKeyPressedElement[] | null;
   /** 获取录音ASR文本信息地址 */
@@ -707,6 +711,8 @@ declare interface CreateCallOutSessionRequest {
   IsForceUseMobile?: boolean;
   /** 自定义数据，长度限制 1024 字节 */
   Uui?: string;
+  /** 自定义数据，长度限制 1024 字节 */
+  UUI?: string;
 }
 
 declare interface CreateCallOutSessionResponse {
@@ -1109,9 +1115,11 @@ declare interface DescribeProtectedTelCdrRequest {
 
 declare interface DescribeProtectedTelCdrResponse {
   /** 话单记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 话单记录 */
-  TelCdrs: TelCdrInfo[];
+  TelCdrs?: TelCdrInfo[];
+  /** 话单记录 */
+  TelCdrList?: TelCdrInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1200,6 +1208,8 @@ declare interface DescribeTelCallInfoResponse {
   SeatUsedCount?: number;
   /** 音频套餐包消耗分钟数 */
   VoipCallInCount?: number;
+  /** 音频套餐包消耗分钟数 */
+  VOIPCallInCount?: number;
   /** 离线语音转文字套餐包消耗分钟数 */
   AsrOfflineCount?: number;
   /** 实时语音转文字套餐包消耗分钟数 */
@@ -1233,9 +1243,11 @@ declare interface DescribeTelCdrRequest {
 
 declare interface DescribeTelCdrResponse {
   /** 话单记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 话单记录 */
-  TelCdrs: TelCdrInfo[];
+  TelCdrs?: TelCdrInfo[];
+  /** 话单记录 */
+  TelCdrList?: TelCdrInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

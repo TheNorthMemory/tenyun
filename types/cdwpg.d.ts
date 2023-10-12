@@ -114,6 +114,32 @@ declare interface CreateInstanceByApiResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceStateRequest {
+  /** 集群实例名称 */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceStateResponse {
+  /** 集群状态，例如：Serving */
+  InstanceState?: string;
+  /** 集群操作创建时间 */
+  FlowCreateTime?: string | null;
+  /** 集群操作名称 */
+  FlowName?: string | null;
+  /** 集群操作进度 */
+  FlowProgress?: number | null;
+  /** 集群状态描述，例如：运行中 */
+  InstanceStateDesc?: string | null;
+  /** 集群流程错误信息，例如：“创建失败，资源不足” */
+  FlowMsg?: string | null;
+  /** 当前步骤的名称，例如：”购买资源中“ */
+  ProcessName?: string | null;
+  /** 集群备份任务开启状态 */
+  BackupStatus?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSimpleInstancesRequest {
   /** 11 */
   SearchInstanceId?: string;
@@ -152,15 +178,31 @@ declare interface DestroyInstanceByApiResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 新修改的实例名称 */
+  InstanceName: string;
+}
+
+declare interface ModifyInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cdwpg 云数据仓库 PostgreSQL} */
 declare interface Cdwpg {
   (): Versions;
   /** 创建集群 {@link CreateInstanceByApiRequest} {@link CreateInstanceByApiResponse} */
   CreateInstanceByApi(data: CreateInstanceByApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceByApiResponse>;
+  /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
+  DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
   /** 获取集群精简信息列表 {@link DescribeSimpleInstancesRequest} {@link DescribeSimpleInstancesResponse} */
   DescribeSimpleInstances(data?: DescribeSimpleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleInstancesResponse>;
   /** 销毁集群 {@link DestroyInstanceByApiRequest} {@link DestroyInstanceByApiResponse} */
   DestroyInstanceByApi(data: DestroyInstanceByApiRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstanceByApiResponse>;
+  /** 修改实例信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
+  ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
 }
 
 export declare type Versions = ["2020-12-30"];

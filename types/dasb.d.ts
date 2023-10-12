@@ -741,10 +741,26 @@ declare interface CreateDeviceGroupResponse {
 }
 
 declare interface CreateResourceRequest {
+  /** 部署region */
+  DeployRegion: string;
   /** 部署堡垒机的VpcId */
   VpcId: string;
   /** 部署堡垒机的SubnetId */
   SubnetId: string;
+  /** 资源类型。取值:standard/pro */
+  ResourceEdition: string;
+  /** 资源节点数 */
+  ResourceNode: number;
+  /** 计费周期 */
+  TimeUnit: string;
+  /** 计费时长 */
+  TimeSpan: number;
+  /** 计费模式 1预付费 */
+  PayMode: number;
+  /** 自动续费 */
+  AutoRenewFlag: number;
+  /** 部署zone */
+  DeployZone?: string;
 }
 
 declare interface CreateResourceResponse {

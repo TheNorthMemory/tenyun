@@ -77,20 +77,20 @@ declare interface FSAttribute {
 /** GooseFSx文件系统的属性 */
 declare interface GooseFSxAttribute {
   /** GooseFSx的型号 */
-  Model: string;
-  /** 容量单位是GB, 比如4608(4.5TB) */
-  Capacity: number;
+  Model?: string;
+  /** 容量单位是GB, 例如4608(4.5TB) */
+  Capacity?: number;
   /** 要关联映射的bucket列表 */
-  MappedBucketList: MappedBucket[];
+  MappedBucketList?: MappedBucket[];
   /** 客户侧管理节点信息 */
-  ClientManagerNodeList: ClientClusterManagerNodeInfo[];
+  ClientManagerNodeList?: ClientClusterManagerNodeInfo[];
 }
 
 /** GooseFSx创建时候的属性 */
 declare interface GooseFSxBuildElement {
   /** GooseFSx的型号 */
   Model: string;
-  /** 容量单位是GB, 比如4608(4.5TB) */
+  /** 容量单位是GB, 例如4608(4.5TB) */
   Capacity: number;
   /** 要关联映射的bucket列表 */
   MappedBucketList: MappedBucket[];

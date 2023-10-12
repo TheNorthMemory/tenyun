@@ -1244,6 +1244,10 @@ declare interface TColumn {
   Default?: string;
   /** 字段是否是非空 */
   NotNull?: boolean;
+  /** 表示整个 numeric 的长度,取值1-38 */
+  Precision?: number | null;
+  /** 表示小数部分的长度Scale小于Precision */
+  Scale?: number | null;
 }
 
 /** 表分区字段信息 */

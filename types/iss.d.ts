@@ -232,6 +232,14 @@ declare interface BatchOperateDeviceData {
   TaskId?: string | null;
 }
 
+/** 视频通道码率返回结果 */
+declare interface BitRateInfo {
+  /** 通道Id */
+  ChannelId?: string | null;
+  /** 码率,单位:kbps */
+  Bitrate?: number | null;
+}
+
 /** 人体识别结果详情 */
 declare interface BodyAIResultInfo {
   /** 时间字符串 */
@@ -616,6 +624,12 @@ declare interface DescribeStreamAuthData {
   PushExpired?: number | null;
   /** 用户ID */
   AppId?: number | null;
+}
+
+/** 查询视频通道码率的返回结果列表 */
+declare interface DescribeVideoBitRateList {
+  /** 通道码率列表 */
+  BitRates?: BitRateInfo[] | null;
 }
 
 /** 获取云录像下载URL返回的数据 */
@@ -2040,6 +2054,18 @@ declare interface DescribeUserDeviceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVideoBitRateRequest {
+  /** 通道ID列表 */
+  ChannelIds: string[];
+}
+
+declare interface DescribeVideoBitRateResponse {
+  /** 无 */
+  Data?: DescribeVideoBitRateList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoDownloadUrlRequest {
   /** 通道 ID */
   ChannelId: string;
@@ -2635,6 +2661,8 @@ declare interface Iss {
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
   /** 查询设备详情 {@link DescribeUserDeviceRequest} {@link DescribeUserDeviceResponse} */
   DescribeUserDevice(data: DescribeUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDeviceResponse>;
+  /** 视频通道码率查询 {@link DescribeVideoBitRateRequest} {@link DescribeVideoBitRateResponse} */
+  DescribeVideoBitRate(data: DescribeVideoBitRateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoBitRateResponse>;
   /** 获取云端录像下载URL地址 {@link DescribeVideoDownloadUrlRequest} {@link DescribeVideoDownloadUrlResponse} */
   DescribeVideoDownloadUrl(data: DescribeVideoDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoDownloadUrlResponse>;
   /** 获取AI任务列表 {@link ListAITasksRequest} {@link ListAITasksResponse} */

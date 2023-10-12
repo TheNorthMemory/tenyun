@@ -1004,7 +1004,7 @@ declare interface GrafanaAccountInfo {
 declare interface GrafanaAccountRole {
   /** 组织 */
   Organization?: string;
-  /** 权限 */
+  /** 权限(Admin、Editor、Viewer) */
   Role?: string;
 }
 
@@ -2361,13 +2361,13 @@ declare interface CreateExporterIntegrationResponse {
 declare interface CreateGrafanaInstanceRequest {
   /** 实例名 */
   InstanceName: string;
-  /** VPC ID */
+  /** VPC ID (私有网络 ID) */
   VpcId: string;
-  /** 子网 ID 数组 */
+  /** 子网 ID 数组(VPC ID下的子网 ID，只取第一个) */
   SubnetIds: string[];
   /** 是否启用外网 */
   EnableInternet: boolean;
-  /** Grafana 初始密码 */
+  /** Grafana 初始密码(国际站用户必填，国内站用户可不填，不填时会生成随机密码并给主账号发送通知) */
   GrafanaInitPassword?: string;
   /** 标签 */
   TagSpecification?: PrometheusTag[];
@@ -2383,7 +2383,7 @@ declare interface CreateGrafanaInstanceResponse {
 declare interface CreateGrafanaIntegrationRequest {
   /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
-  /** 集成类型，可在实例详情-云产品集成-集成列表查看。例如：tencent-cloud-prometheus */
+  /** 集成类型(接口DescribeGrafanaIntegrationOverviews返回的集成信息中的Code字段) */
   Kind: string;
   /** 集成配置 */
   Content: string;
@@ -2391,7 +2391,7 @@ declare interface CreateGrafanaIntegrationRequest {
 
 declare interface CreateGrafanaIntegrationResponse {
   /** 集成 ID */
-  IntegrationId: string | null;
+  IntegrationId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2401,9 +2401,9 @@ declare interface CreateGrafanaNotificationChannelRequest {
   InstanceId: string;
   /** 告警通道名称，例如：test */
   ChannelName: string;
-  /** 默认为1，已废弃，请使用 OrganizationIds */
+  /** 默认为1，建议使用 OrganizationIds */
   OrgId: number;
-  /** 接受告警通道 ID 数组 */
+  /** 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID */
   Receivers: string[];
   /** 额外组织 ID 数组，已废弃，请使用 OrganizationIds */
   ExtraOrgIds?: string[];
@@ -2615,7 +2615,7 @@ declare interface CreateSSOAccountRequest {
   InstanceId: string;
   /** 用户账号 ID ，例如：10000000 */
   UserId: string;
-  /** 权限 */
+  /** 权限(只取数组中的第一个，其中 Organization 暂未使用，可不填) */
   Role: GrafanaAccountRole[];
   /** 备注 */
   Notes?: string;
@@ -2623,7 +2623,7 @@ declare interface CreateSSOAccountRequest {
 
 declare interface CreateSSOAccountResponse {
   /** 已添加的用户 UIN */
-  UserId: string;
+  UserId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2705,7 +2705,7 @@ declare interface DeleteExporterIntegrationResponse {
 }
 
 declare interface DeleteGrafanaInstanceRequest {
-  /** 实例名数组 */
+  /** 实例ID数组 */
   InstanceIDs: string[];
 }
 
@@ -2727,7 +2727,7 @@ declare interface DeleteGrafanaIntegrationResponse {
 }
 
 declare interface DeleteGrafanaNotificationChannelRequest {
-  /** 通道 ID 数组。例如：nchannel-abcd1234 */
+  /** 通道 ID 数组。例如：nchannel-abcd1234，通过 DescribeGrafanaChannels 获取 */
   ChannelIDs: string[];
   /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
@@ -3357,13 +3357,13 @@ declare interface DescribeGrafanaChannelsRequest {
   ChannelName?: string;
   /** 告警通道 ID，例如：nchannel-abcd1234 */
   ChannelIds?: string[];
-  /** 告警通道状态 */
+  /** 告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道) */
   ChannelState?: number;
 }
 
 declare interface DescribeGrafanaChannelsResponse {
   /** 告警通道数组 */
-  NotificationChannelSet: GrafanaChannel[];
+  NotificationChannelSet?: GrafanaChannel[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4233,7 +4233,7 @@ declare interface GetPrometheusAgentManagementCommandResponse {
 }
 
 declare interface InstallPluginsRequest {
-  /** 插件信息 */
+  /** 插件信息(可通过 DescribePluginOverviews 接口获取) */
   Plugins: GrafanaPlugin[];
   /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
@@ -4241,7 +4241,7 @@ declare interface InstallPluginsRequest {
 
 declare interface InstallPluginsResponse {
   /** 已安装插件 ID */
-  PluginIds: string[] | null;
+  PluginIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4739,7 +4739,7 @@ declare interface UpdateExporterIntegrationResponse {
 declare interface UpdateGrafanaConfigRequest {
   /** 实例 ID */
   InstanceId: string;
-  /** JSON 编码后的字符串 */
+  /** JSON 编码后的字符串，如 "{"server":{"root_url":"http://custom.domain"}}" */
   Config: string;
 }
 
@@ -4751,7 +4751,7 @@ declare interface UpdateGrafanaConfigResponse {
 declare interface UpdateGrafanaEnvironmentsRequest {
   /** Grafana 实例 ID，例如：grafana-12345678 */
   InstanceId: string;
-  /** 环境变量字符串 */
+  /** JSON 序列化后的环境变量字符串，如 "{\"key1\":\"key2\"}" */
   Envs: string;
 }
 
@@ -4767,7 +4767,7 @@ declare interface UpdateGrafanaIntegrationRequest {
   InstanceId: string;
   /** 集成类型，可在实例详情-云产品集成-集成列表查看。例如：tencent-cloud-prometheus */
   Kind: string;
-  /** 集成内容 */
+  /** 集成内容，请查看示例 */
   Content: string;
 }
 
@@ -4799,7 +4799,7 @@ declare interface UpdateGrafanaNotificationChannelResponse {
 declare interface UpdateGrafanaWhiteListRequest {
   /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
-  /** 白名单数组，输入公网域名 IP ，例如：127.0.0.1，可通过接口 DescribeGrafanaWhiteList 查看 */
+  /** 白名单数组，输入白名单 IP 或 CIDR，如：127.0.0.1或127.0.0.1/24如有多个 IP 可换行输入 */
   Whitelist: string[];
 }
 
@@ -4909,7 +4909,7 @@ declare interface UpgradeGrafanaDashboardResponse {
 declare interface UpgradeGrafanaInstanceRequest {
   /** Grafana 实例 ID，例如：grafana-12345678 */
   InstanceId: string;
-  /** 版本别名，例如：v7.4.2 */
+  /** 版本别名，目前固定为 v9.1.5 */
   Alias: string;
 }
 

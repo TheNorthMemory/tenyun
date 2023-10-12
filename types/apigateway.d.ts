@@ -272,6 +272,8 @@ declare interface ApiInfo {
   IsBase64Trigger?: boolean | null;
   /** Header触发规则，总规则数量不超过10。 */
   Base64EncodedTriggerRules?: Base64EncodedTriggerRule[] | null;
+  /** 是否开启SCF Event异步调用。 */
+  ServiceScfEventIsAsyncCall?: boolean | null;
 }
 
 /** 插件相关的API列表信息。 */
@@ -1811,6 +1813,8 @@ declare interface CreateApiRequest {
   EventBusId?: string;
   /** scf函数类型。当后端类型是SCF时生效。支持事件触发(EVENT)，http直通云函数(HTTP)。 */
   ServiceScfFunctionType?: string;
+  /** 是否开启SCF Event异步调用。 */
+  ServiceScfEventIsAsyncCall?: boolean;
   /** EIAM应用类型。 */
   EIAMAppType?: string;
   /** EIAM应用认证类型，支持仅认证（AuthenticationOnly）、认证和鉴权（Authorization）。 */
@@ -3113,6 +3117,8 @@ declare interface ModifyApiRequest {
   EventBusId?: string;
   /** scf函数类型。当后端类型是SCF时生效。支持事件触发(EVENT)，http直通云函数(HTTP)。 */
   ServiceScfFunctionType?: string;
+  /** 是否开启SCF Event异步调用。 */
+  ServiceScfEventIsAsyncCall?: boolean;
   /** EIAM应用类型。 */
   EIAMAppType?: string;
   /** EIAM应用认证类型，支持仅认证（AuthenticationOnly）、认证和鉴权（Authorization）。 */

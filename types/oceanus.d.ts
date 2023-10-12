@@ -100,6 +100,8 @@ declare interface Cluster {
   ClusterType?: number | null;
   /** 订单信息 */
   Orders?: Order[] | null;
+  /** Gateway信息 */
+  SqlGateways?: SqlGatewayItem[] | null;
 }
 
 /** 工作空间集群组信息 */
@@ -226,6 +228,18 @@ declare interface Filter {
   Name: string;
   /** 字段的过滤值 */
   Values: string[];
+}
+
+/** Gateway引用资源信息 */
+declare interface GatewayRefItem {
+  /** 空间唯一标识 */
+  WorkspaceId: string | null;
+  /** 资源唯一标识 */
+  ResourceId: string | null;
+  /** 版本号 */
+  Version: number | null;
+  /** 引用类型，0:用户资源 */
+  Type: number | null;
 }
 
 /** 作业配置详情 */
@@ -666,6 +680,28 @@ declare interface SlotSharingGroupSpec {
   OffHeapMemory?: string | null;
   /** 默认为b, 支持单位有 b, kb, mb, gb */
   ManagedMemory?: string | null;
+}
+
+/** SqlGateway配置信息 */
+declare interface SqlGatewayItem {
+  /** 唯一标识 */
+  SerialId?: string | null;
+  /** Flink内核版本 */
+  FlinkVersion?: string | null;
+  /** 状态，1.停止 2. 开启中 3. 开启 4. 开启失败 5. 停止中 */
+  Status?: number | null;
+  /** 创建人 */
+  CreatorUin?: string | null;
+  /** 引用资源 */
+  ResourceRefs?: GatewayRefItem[] | null;
+  /** Cu规格 */
+  CuSpec?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 配置参数 */
+  Properties?: Property[] | null;
 }
 
 /** 停止作业的描述信息 */

@@ -58,6 +58,20 @@ declare interface BatchUserInfo {
   OriginId?: string | null;
 }
 
+/** 课堂评分字段 */
+declare interface ClassScoreItem {
+  /** 课堂iD */
+  RoomId?: number | null;
+  /** 用户ID */
+  UserId?: string | null;
+  /** 评分时间 */
+  CreateTime?: number | null;
+  /** 课堂评分 */
+  Score?: number | null;
+  /** 课堂评价 */
+  ScoreMsg?: string | null;
+}
+
 /** 文档信息 */
 declare interface DocumentInfo {
   /** 文档Id */
@@ -1055,6 +1069,24 @@ declare interface DescribeRoomStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScoreListRequest {
+  /** 课堂ID */
+  RoomId: number;
+  /** 分页查询当前页数，从1开始递增 */
+  Page?: number;
+  /** 默认是10条 */
+  Limit?: number;
+}
+
+declare interface DescribeScoreListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 课堂评分列表 */
+  Scores?: ClassScoreItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSdkAppIdUsersRequest {
   /** 应用ID */
   SdkAppId: number;
@@ -1512,6 +1544,8 @@ declare interface Lcic {
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;
+  /** 获取课堂评分列表 {@link DescribeScoreListRequest} {@link DescribeScoreListResponse} */
+  DescribeScoreList(data: DescribeScoreListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScoreListResponse>;
   /** 获取应用ID下用户列表 {@link DescribeSdkAppIdUsersRequest} {@link DescribeSdkAppIdUsersResponse} */
   DescribeSdkAppIdUsers(data: DescribeSdkAppIdUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSdkAppIdUsersResponse>;
   /** 获取巡课列表 {@link DescribeSupervisorsRequest} {@link DescribeSupervisorsResponse} */

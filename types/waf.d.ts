@@ -348,6 +348,40 @@ declare interface ClbHostsParams {
   DomainId?: string;
 }
 
+/** Clb类型防护对象 */
+declare interface ClbObject {
+  /** 对象ID */
+  ObjectId: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 精准域名列表 */
+  PreciseDomains: string[];
+  /** WAF功能开关状态，0关闭1开启 */
+  Status: number;
+  /** WAF日志开关状态，0关闭1开启 */
+  ClsStatus: number;
+  /** CLB对象对应的虚拟域名 */
+  VirtualDomain: string;
+  /** 对象名称 */
+  ObjectName: string;
+  /** 公网地址 */
+  PublicIp: string[];
+  /** 内网地址 */
+  PrivateIp: string[];
+  /** VPC名称 */
+  VpcName: string;
+  /** VPC ID */
+  Vpc: string;
+  /** waf实例等级，如果未绑定实例为0 */
+  InstanceLevel: number;
+  /** clb投递开关 */
+  PostCLSStatus: number;
+  /** kafka投递开关 */
+  PostCKafkaStatus: number;
+}
+
 /** 计费下单响应实体 */
 declare interface DealData {
   /** 订单号列表，元素个数与请求包的goods数组的元素个数一致，商品详情与订单按顺序对应 */
@@ -2458,6 +2492,18 @@ declare interface DescribeIpHitItemsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeObjectsRequest {
+  /** 支持的过滤器:	ObjectId: clb实例ID	VIP: clb实例的公网IP	InstanceId: waf实例ID	Domain: 精准域名	Status: waf防护开关状态: 0关闭，1开启	ClsStatus: waf日志开关: 0关闭，1开启 */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeObjectsResponse {
+  /** 对象列表 */
+  ClbObjects?: ClbObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePeakPointsRequest {
   /** 查询起始时间 */
   FromTime: string;
@@ -3192,6 +3238,22 @@ declare interface ModifyModuleStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyObjectRequest {
+  /** 修改对象标识 */
+  ObjectId: string;
+  /** 改动作类型:Status修改开关，InstanceId绑定实例 */
+  OpType: string;
+  /** 新的Waf开关状态，如果和已有状态相同认为修改成功 */
+  Status?: number;
+  /** 新的实例ID，如果和已绑定的实例相同认为修改成功 */
+  InstanceId?: string;
+}
+
+declare interface ModifyObjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProtectionStatusRequest {
   /** 域名 */
   Domain: string;
@@ -3721,6 +3783,8 @@ declare interface Waf {
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
+  /** 查看防护对象列表 {@link DescribeObjectsRequest} {@link DescribeObjectsResponse} */
+  DescribeObjects(data?: DescribeObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeObjectsResponse>;
   /** 查询业务和攻击概要趋势 {@link DescribePeakPointsRequest} {@link DescribePeakPointsResponse} */
   DescribePeakPoints(data: DescribePeakPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakPointsResponse>;
   /** 获取业务和攻击概览峰值 {@link DescribePeakValueRequest} {@link DescribePeakValueResponse} */
@@ -3813,6 +3877,8 @@ declare interface Waf {
   ModifyInstanceRenewFlag(data: ModifyInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceRenewFlagResponse>;
   /** 设置某个domain下基础安全模块的开关 {@link ModifyModuleStatusRequest} {@link ModifyModuleStatusResponse} */
   ModifyModuleStatus(data?: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
+  /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */
+  ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
   /** waf斯巴达-waf开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
   ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 修改域名配置 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */

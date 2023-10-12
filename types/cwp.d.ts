@@ -6789,7 +6789,7 @@ declare interface DescribeAssetAppCountResponse {
 declare interface DescribeAssetAppListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。AppName- string - 是否必填：否 - 应用名搜索IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Type - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他OsType - uint64 - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。AppName- string - 是否必填：否 - 应用名搜索IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDType - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他OsType - uint64 - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: AssetFilters[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -6803,9 +6803,9 @@ declare interface DescribeAssetAppListRequest {
 
 declare interface DescribeAssetAppListResponse {
   /** 应用列表 */
-  Apps: AssetAppBaseInfo[] | null;
+  Apps?: AssetAppBaseInfo[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6853,7 +6853,7 @@ declare interface DescribeAssetCoreModuleListRequest {
   Uuid?: string;
   /** 服务器Quuid */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户 */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户 */
   Filters?: AssetFilters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6867,9 +6867,9 @@ declare interface DescribeAssetCoreModuleListRequest {
 
 declare interface DescribeAssetCoreModuleListResponse {
   /** 列表 */
-  Modules: AssetCoreModuleBaseInfo[] | null;
+  Modules?: AssetCoreModuleBaseInfo[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6905,7 +6905,7 @@ declare interface DescribeAssetDatabaseInfoResponse {
 declare interface DescribeAssetDatabaseListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选User- string - 是否必填：否 - 运行用户Ip - String - 是否必填：否 - 绑定IPPort - Int - 是否必填：否 - 端口Name - Int - 是否必填：否 - 数据库名称0:全部1:MySQL2:Redis3:Oracle4:MongoDB5:MemCache6:PostgreSQL7:HBase8:DB29:Sybase10:TiDBProto - String - 是否必填：否 - 协议：1:TCP, 2:UDP, 3:未知OsType - String - 是否必填：否 - 操作系统: linux/windowsOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。MachineName- String - 是否必填：否 - 主机别名筛选IP- String - 是否必填：否 - 主机ip筛选InstanceID- String - 是否必填：否 - 主机实例ID筛选User- string - 是否必填：否 - 运行用户Port - Int - 是否必填：否 - 端口Name - Int - 是否必填：否 - 数据库名称0:全部1:MySQL2:Redis3:Oracle4:MongoDB5:MemCache6:PostgreSQL7:HBase8:DB29:Sybase10:TiDBProto - String - 是否必填：否 - 协议：1:TCP, 2:UDP, 3:未知OsType - String - 是否必填：否 - 操作系统: linux/windowsOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: AssetFilters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6919,9 +6919,9 @@ declare interface DescribeAssetDatabaseListRequest {
 
 declare interface DescribeAssetDatabaseListResponse {
   /** 列表 */
-  Databases: AssetDatabaseBaseInfo[] | null;
+  Databases?: AssetDatabaseBaseInfo[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7041,7 +7041,7 @@ declare interface DescribeAssetInitServiceListRequest {
   Uuid?: string;
   /** 服务器Quuid */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户IsAutoRun - string - 是否必填：否 - 是否开机自启动：0否，1是Status- string - 是否必填：否 - 默认启用状态：0未启用， 1启用 仅linuxType- string - 是否必填：否 - 类型：类型 仅windows：1:编码器2:IE插件3:网络提供者4:镜像劫持5:LSA提供者6:KnownDLLs7:启动执行8:WMI9:计划任务10:Winsock提供者11:打印监控器12:资源管理器13:驱动服务14:登录 */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户IsAutoRun - string - 是否必填：否 - 是否开机自启动：0否，1是Status- string - 是否必填：否 - 默认启用状态：0未启用， 1启用 仅linuxType- string - 是否必填：否 - 类型：类型 仅windows：1:编码器2:IE插件3:网络提供者4:镜像劫持5:LSA提供者6:KnownDLLs7:启动执行8:WMI9:计划任务10:Winsock提供者11:打印监控器12:资源管理器13:驱动服务14:登录 */
   Filters?: AssetFilters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7083,7 +7083,7 @@ declare interface DescribeAssetJarListRequest {
   Uuid?: string;
   /** 服务器Quuid */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name- string - 是否必填：否 - 包名Type- uint - 是否必填：否 - 类型	1: 应用程序2 : 系统类库3 : Web服务自带库4 : 其他依赖包Status- string - 是否必填：否 - 是否可执行：0否，1是 */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName- string - 是否必填：否 - 包名Type- uint - 是否必填：否 - 类型	1: 应用程序2 : 系统类库3 : Web服务自带库4 : 其他依赖包Status- string - 是否必填：否 - 是否可执行：0否，1是 */
   Filters?: AssetFilters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7097,9 +7097,9 @@ declare interface DescribeAssetJarListRequest {
 
 declare interface DescribeAssetJarListResponse {
   /** 应用列表 */
-  Jars: AssetJarBaseInfo[] | null;
+  Jars?: AssetJarBaseInfo[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7169,7 +7169,7 @@ declare interface DescribeAssetPlanTaskListRequest {
   Uuid?: string;
   /** 服务器Quuid */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选User- string - 是否必填：否 - 用户Status- int - 是否必填：否 - 默认启用状态：0未启用， 1启用 */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDUser- string - 是否必填：否 - 用户Status- int - 是否必填：否 - 默认启用状态：0未启用， 1启用 */
   Filters?: AssetFilters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7183,9 +7183,9 @@ declare interface DescribeAssetPlanTaskListRequest {
 
 declare interface DescribeAssetPlanTaskListResponse {
   /** 列表 */
-  Tasks: AssetPlanTask[] | null;
+  Tasks?: AssetPlanTask[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7205,7 +7205,7 @@ declare interface DescribeAssetPortCountResponse {
 declare interface DescribeAssetPortInfoListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。Port - uint64 - 是否必填：否 - 端口Ip - String - 是否必填：否 - 绑定IPProcessName - String - 是否必填：否 - 监听进程Pid - uint64 - 是否必填：否 - PIDUser - String - 是否必填：否 - 运行用户Group - String - 是否必填：否 - 所属用户组Ppid - uint64 - 是否必填：否 - PPIDProto - string - 是否必填：否 - tcp/udp或“”(空字符串筛选未知状态)OsType - uint64 - 是否必填：否 - windows/linuxRunTimeStart - String - 是否必填：否 - 运行开始时间RunTimeEnd - String - 是否必填：否 - 运行结束时间Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。Port - uint64 - 是否必填：否 - 端口IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDProcessName - String - 是否必填：否 - 监听进程Pid - uint64 - 是否必填：否 - PIDUser - String - 是否必填：否 - 运行用户Group - String - 是否必填：否 - 所属用户组Ppid - uint64 - 是否必填：否 - PPIDProto - string - 是否必填：否 - tcp/udp或“”(空字符串筛选未知状态)OsType - uint64 - 是否必填：否 - windows/linuxRunTimeStart - String - 是否必填：否 - 运行开始时间RunTimeEnd - String - 是否必填：否 - 运行结束时间Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -7219,9 +7219,9 @@ declare interface DescribeAssetPortInfoListRequest {
 
 declare interface DescribeAssetPortInfoListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 列表 */
-  Ports: AssetPortBaseInfo[] | null;
+  Ports?: AssetPortBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7241,7 +7241,7 @@ declare interface DescribeAssetProcessCountResponse {
 declare interface DescribeAssetProcessInfoListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name - String - 是否必填：否 - 进程名User - String - 是否必填：否 - 进程用户Group - String - 是否必填：否 - 进程用户组Pid - uint64 - 是否必填：否 - 进程IDPpid - uint64 - 是否必填：否 - 父进程IDOsType - uint64 - 是否必填：否 - windows/linuxStatus - string - 是否必填：否 - 进程状态：1:R 可执行2:S 可中断3:D 不可中断4:T 暂停状态或跟踪状态5:Z 僵尸状态6:X 将被销毁RunTimeStart - String - 是否必填：否 - 运行开始时间RunTimeEnd - String - 是否必填：否 - 运行结束时间InstallByPackage - uint64 - 是否必填：否 - 是否包安装：0否，1是Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName - String - 是否必填：否 - 进程名User - String - 是否必填：否 - 进程用户Group - String - 是否必填：否 - 进程用户组Pid - uint64 - 是否必填：否 - 进程IDPpid - uint64 - 是否必填：否 - 父进程IDOsType - uint64 - 是否必填：否 - windows/linuxStatus - string - 是否必填：否 - 进程状态：1:R 可执行2:S 可中断3:D 不可中断4:T 暂停状态或跟踪状态5:Z 僵尸状态6:X 将被销毁RunTimeStart - String - 是否必填：否 - 运行开始时间RunTimeEnd - String - 是否必填：否 - 运行结束时间InstallByPackage - uint64 - 是否必填：否 - 是否包安装：0否，1是Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -7255,9 +7255,9 @@ declare interface DescribeAssetProcessInfoListRequest {
 
 declare interface DescribeAssetProcessInfoListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 列表 */
-  Process: AssetProcessBaseInfo[] | null;
+  Process?: AssetProcessBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7407,7 +7407,7 @@ declare interface DescribeAssetUserKeyListResponse {
 declare interface DescribeAssetUserListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name - String - 是否必填：否 - 账户名（模糊匹配）NameStrict - String - 是否必填：否 - 账户名（严格匹配）Uid - uint64 - 是否必填：否 - UidGuid - uint64 - 是否必填：否 - GuidLoginTimeStart - String - 是否必填：否 - 开始时间，如：2021-01-11LoginTimeEnd - String - 是否必填：否 - 结束时间，如：2021-01-11LoginType - uint64 - 是否必填：否 - 0-不可登录；1-只允许key登录；2只允许密码登录；3-允许key和密码 仅linuxOsType - String - 是否必填：否 - windows或linuxStatus - uint64 - 是否必填：否 - 账号状态：0-禁用；1-启用UserType - uint64 - 是否必填：否 - 账号类型：0访客用户，1标准用户，2管理员用户 仅windowsIsDomain - uint64 - 是否必填：否 - 是否域账号：0 不是，1是 仅windowsIsRoot - uint64 - 是否必填：否 - 是否Root权限：0 不是，1是 仅linuxIsSudo - uint64 - 是否必填：否 - 是否Sudo权限：0 不是，1是 仅linuxIsSshLogin - uint64 - 是否必填：否 - 是否ssh登录：0 不是，1是 仅linuxShellLoginStatus - uint64 - 是否必填：否 - 是否shell登录性，0不是；1是 仅linuxPasswordStatus - uint64 - 是否必填：否 - 密码状态：1正常 2即将过期 3已过期 4已锁定 仅linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName - String - 是否必填：否 - 账户名（模糊匹配）NameStrict - String - 是否必填：否 - 账户名（严格匹配）Uid - uint64 - 是否必填：否 - UidGuid - uint64 - 是否必填：否 - GuidLoginTimeStart - String - 是否必填：否 - 开始时间，如：2021-01-11LoginTimeEnd - String - 是否必填：否 - 结束时间，如：2021-01-11LoginType - uint64 - 是否必填：否 - 0-不可登录；1-只允许key登录；2只允许密码登录；3-允许key和密码 仅linuxOsType - String - 是否必填：否 - windows或linuxStatus - uint64 - 是否必填：否 - 账号状态：0-禁用；1-启用UserType - uint64 - 是否必填：否 - 账号类型：0访客用户，1标准用户，2管理员用户 仅windowsIsDomain - uint64 - 是否必填：否 - 是否域账号：0 不是，1是 仅windowsIsRoot - uint64 - 是否必填：否 - 是否Root权限：0 不是，1是 仅linuxIsSudo - uint64 - 是否必填：否 - 是否Sudo权限：0 不是，1是 仅linuxIsSshLogin - uint64 - 是否必填：否 - 是否ssh登录：0 不是，1是 仅linuxShellLoginStatus - uint64 - 是否必填：否 - 是否shell登录性，0不是；1是 仅linuxPasswordStatus - uint64 - 是否必填：否 - 密码状态：1正常 2即将过期 3已过期 4已锁定 仅linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -7421,9 +7421,9 @@ declare interface DescribeAssetUserListRequest {
 
 declare interface DescribeAssetUserListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 账号列表 */
-  Users: AssetUserBaseInfo[] | null;
+  Users?: AssetUserBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7443,7 +7443,7 @@ declare interface DescribeAssetWebAppCountResponse {
 declare interface DescribeAssetWebAppListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name - String - 是否必填：否 - 应用名Domain - String - 是否必填：否 - 站点域名Type - int - 是否必填：否 - 服务类型：0：全部1:Tomcat2:Apache3:Nginx4:WebLogic5:Websphere6:JBoss7:Jetty8:IHS9:TengineOsType - String - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName - String - 是否必填：否 - 应用名Domain - String - 是否必填：否 - 站点域名Type - int - 是否必填：否 - 服务类型：0：全部1:Tomcat2:Apache3:Nginx4:WebLogic5:Websphere6:JBoss7:Jetty8:IHS9:TengineOsType - String - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7457,9 +7457,9 @@ declare interface DescribeAssetWebAppListRequest {
 
 declare interface DescribeAssetWebAppListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 列表 */
-  WebApps: AssetWebAppBaseInfo[] | null;
+  WebApps?: AssetWebAppBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7501,7 +7501,7 @@ declare interface DescribeAssetWebFrameCountResponse {
 declare interface DescribeAssetWebFrameListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name - String - 是否必填：否 - 框架名NameStrict - String - 是否必填：否 - 框架名（严格匹配）Lang - String - 是否必填：否 - 框架语言:java/pythonType - String - 是否必填：否 - 服务类型：0：全部1:Tomcat2:Apache3:Nginx4:WebLogic5:Websphere6:JBoss7:WildFly8:Jetty9:IHS10:TengineOsType - String - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName - String - 是否必填：否 - 框架名NameStrict - String - 是否必填：否 - 框架名（严格匹配）Lang - String - 是否必填：否 - 框架语言:java/pythonType - String - 是否必填：否 - 服务类型：0：全部1:Tomcat2:Apache3:Nginx4:WebLogic5:Websphere6:JBoss7:WildFly8:Jetty9:IHS10:TengineOsType - String - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7515,9 +7515,9 @@ declare interface DescribeAssetWebFrameListRequest {
 
 declare interface DescribeAssetWebFrameListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 列表 */
-  WebFrames: AssetWebFrameBaseInfo[] | null;
+  WebFrames?: AssetWebFrameBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7553,7 +7553,7 @@ declare interface DescribeAssetWebLocationInfoResponse {
 declare interface DescribeAssetWebLocationListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Name - String - 是否必填：否 - 域名User - String - 是否必填：否 - 运行用户Port - uint64 - 是否必填：否 - 站点端口Proto - uint64 - 是否必填：否 - 站点协议：1:HTTP,2:HTTPSServiceType - uint64 - 是否必填：否 - 服务类型：1:Tomcat2：Apache3:Nginx4:WebLogic5:Websphere6:JBoss7:WildFly8:Jetty9:IHS10:TengineOsType - String - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDName - String - 是否必填：否 - 域名User - String - 是否必填：否 - 运行用户Port - uint64 - 是否必填：否 - 站点端口Proto - uint64 - 是否必填：否 - 站点协议：1:HTTP,2:HTTPSServiceType - uint64 - 是否必填：否 - 服务类型：1:Tomcat2：Apache3:Nginx4:WebLogic5:Websphere6:JBoss7:WildFly8:Jetty9:IHS10:TengineOsType - String - 是否必填：否 - windows/linuxOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7567,9 +7567,9 @@ declare interface DescribeAssetWebLocationListRequest {
 
 declare interface DescribeAssetWebLocationListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 站点列表 */
-  Locations: AssetWebLocationBaseInfo[] | null;
+  Locations?: AssetWebLocationBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12267,7 +12267,7 @@ declare interface EditTagsResponse {
 declare interface ExportAssetAppListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。AppName- string - 是否必填：否 - 应用名搜索IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Type - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他OsType - uint64 - 是否必填：否 - windows/linux */
+  /** 过滤条件。AppName- string - 是否必填：否 - 应用名搜索IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDType - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他OsType - uint64 - 是否必填：否 - windows/linux */
   Filters?: AssetFilters[];
   /** 排序方式，asc升序 或 desc降序 */
   Order?: string;
@@ -12277,7 +12277,7 @@ declare interface ExportAssetAppListRequest {
 
 declare interface ExportAssetAppListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12395,7 +12395,7 @@ declare interface ExportAssetMachineDetailResponse {
 }
 
 declare interface ExportAssetMachineListRequest {
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选OsType - String - 是否必填：否 - windows或linuxCpuLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%DiskLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%MemLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100% */
+  /** 过滤条件。IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDOsType - String - 是否必填：否 - windows或linuxCpuLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%DiskLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%MemLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100% */
   Filters?: Filter[];
   /** 排序方式，asc升序 或 desc降序 */
   Order?: string;
@@ -12405,7 +12405,7 @@ declare interface ExportAssetMachineListRequest {
 
 declare interface ExportAssetMachineListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
