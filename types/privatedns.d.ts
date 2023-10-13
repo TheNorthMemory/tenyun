@@ -309,7 +309,7 @@ declare interface DeletePrivateDNSAccountResponse {
 declare interface DeletePrivateZoneRecordRequest {
   /** 私有域ID */
   ZoneId?: string;
-  /** 记录ID */
+  /** 记录ID（调用DescribePrivateZoneRecordList可获取到RecordId） */
   RecordId?: string;
   /** 记录ID数组，RecordId 优先 */
   RecordIdSet?: string[];

@@ -3279,7 +3279,7 @@ declare interface ModifyTopicRequest {
   EnvironmentId: string;
   /** 主题名。 */
   TopicName: string;
-  /** 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过128个分区。 */
+  /** 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过32个分区。 */
   Partitions: number;
   /** Pulsar 集群的ID */
   ClusterId: string;
@@ -3362,12 +3362,12 @@ declare interface ResetMsgSubOffsetByTimestampRequest {
   /** 时间戳，精确到毫秒。 */
   ToTimestamp: number;
   /** Pulsar 集群的ID */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface ResetMsgSubOffsetByTimestampResponse {
   /** 结果。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

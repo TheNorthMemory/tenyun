@@ -26,6 +26,56 @@ declare interface ChargeProperties {
   ChargeType?: string;
 }
 
+/** 云原生实例详情 */
+declare interface InstanceInfo {
+  /** ID值 */
+  ID: number | null;
+  /** cdwpg-cn或者其他 */
+  InstanceType: string | null;
+  /** cdwpg-cn或者其他 */
+  InstanceName: string | null;
+  /** Running */
+  Status: string | null;
+  /** 运行中 */
+  StatusDesc: string | null;
+  /** 无 */
+  InstanceStateInfo: InstanceStateInfo | null;
+  /** - */
+  InstanceID: string | null;
+  /** 2022-09-05 20:00:01 */
+  CreateTime: string | null;
+  /** ap-chongqing */
+  Region: string | null;
+  /** ap */
+  Zone: string | null;
+  /** region */
+  RegionDesc: string | null;
+  /** zone */
+  ZoneDesc: string | null;
+  /** 标签 */
+  Tags: Tag[] | null;
+  /** v3 */
+  Version: string | null;
+  /** 字符集 */
+  Charset: string | null;
+  /** 引擎版本 */
+  EngineVersion: string | null;
+  /** GTM节点列表 */
+  GTMNodes: InstanceNodeGroup[] | null;
+  /** CN节点列表 */
+  CNNodes: InstanceNodeGroup[] | null;
+  /** DN节点列表 */
+  DNNodes: InstanceNodeGroup[] | null;
+  /** 备份存储 */
+  BackupStorage: InstanceNodeGroup[] | null;
+  /** FN节点列表 */
+  FNNodes: InstanceNodeGroup[] | null;
+}
+
+/** 集群节点信息 */
+declare interface InstanceNodeGroup {
+}
+
 /** 精简集群信息 */
 declare interface InstanceSimpleInfoNew {
   /** 1 */
@@ -62,6 +112,30 @@ declare interface InstanceSimpleInfoNew {
   PayMode?: string | null;
   /** 1 */
   RenewFlag?: boolean | null;
+}
+
+/** 集群状态抽象后的结构体 */
+declare interface InstanceStateInfo {
+  /** 集群状态，例如：Serving */
+  InstanceState: string | null;
+  /** 集群操作创建时间 */
+  FlowCreateTime: string | null;
+  /** 集群操作名称 */
+  FlowName: string | null;
+  /** 集群操作进度 */
+  FlowProgress: number | null;
+  /** 集群状态描述，例如：运行中 */
+  InstanceStateDesc: string | null;
+  /** 集群流程错误信息，例如：“创建失败，资源不足” */
+  FlowMsg: string | null;
+  /** 当前步骤的名称，例如：”购买资源中“ */
+  ProcessName: string | null;
+  /** 集群是否有备份中任务，有为1,无为0 */
+  BackupStatus?: number | null;
+  /** 1 */
+  RequestId?: string | null;
+  /** 1 */
+  BackupOpenStatus?: number | null;
 }
 
 /** 资源规格 */
@@ -110,6 +184,18 @@ declare interface CreateInstanceByApiResponse {
   InstanceId?: string | null;
   /** 错误信息 */
   ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceResponse {
+  /** 实例描述信息 */
+  InstanceInfo: InstanceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -195,6 +281,8 @@ declare interface Cdwpg {
   (): Versions;
   /** 创建集群 {@link CreateInstanceByApiRequest} {@link CreateInstanceByApiResponse} */
   CreateInstanceByApi(data: CreateInstanceByApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceByApiResponse>;
+  /** 描述云原生实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
+  DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
   DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
   /** 获取集群精简信息列表 {@link DescribeSimpleInstancesRequest} {@link DescribeSimpleInstancesResponse} */

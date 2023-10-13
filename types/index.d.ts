@@ -546,7 +546,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   asw: Asw,
   /** {@link As 弹性伸缩} */
   as: As,
-  /** {@link Ba 网站备案} */
+  /** {@link Ba ICP备案} */
   ba: Ba,
   /** {@link Batch 批量计算} */
   batch: Batch,

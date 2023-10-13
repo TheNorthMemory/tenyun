@@ -730,6 +730,42 @@ declare interface IpAssetListVO {
   VerifyStatus?: number | null;
 }
 
+/** 端口视角的端口风险对象 */
+declare interface PortViewPortRisk {
+  /** 影响资产 */
+  NoHandleCount?: number;
+  /** 风险等级 */
+  Level?: string;
+  /** 协议 */
+  Protocol?: string;
+  /** 组件 */
+  Component?: string;
+  /** 端口 */
+  Port?: number;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 处置建议,0保持现状、1限制访问、2封禁端口 */
+  Suggestion?: number;
+  /** 状态，0未处理、1已处置、2已忽略 */
+  AffectAssetCount?: string;
+  /** 资产唯一id */
+  Id?: string;
+  /** 资产子类型 */
+  From?: string;
+  /** 前端索引 */
+  Index?: string;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 服务 */
+  Service?: string;
+}
+
 /** 公网IP和域名资产列表key */
 declare interface PublicIpDomainListKey {
   /** 资产值 */
@@ -740,6 +776,18 @@ declare interface PublicIpDomainListKey {
 declare interface ReportItemKey {
   /** 日志Id列表 */
   TaskLogList: string[] | null;
+}
+
+/** 风险中心状态处理Key */
+declare interface RiskCenterStatusKey {
+  /** 风险ID */
+  Id: string | null;
+  /** APP ID */
+  AppId: string | null;
+  /** 公网IP/域名 */
+  PublicIPDomain?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
 }
 
 /** 扫描任务详情 */
@@ -1062,6 +1110,58 @@ declare interface TaskLogURL {
   TaskLogName?: string | null;
   /** APP ID */
   AppId?: string | null;
+}
+
+/** 漏洞视角的漏洞风险对象 */
+declare interface VULViewVULRisk {
+  /** 端口 */
+  Port?: string;
+  /** 影响资产 */
+  NoHandleCount?: number;
+  /** 风险等级 */
+  Level?: string;
+  /** 组件 */
+  Component?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 状态，0未处理、1已处置、2已忽略 */
+  AffectAssetCount?: number;
+  /** 资产唯一id */
+  Id?: string;
+  /** 资产子类型 */
+  From?: string;
+  /** 前端索引 */
+  Index?: string;
+  /** 漏洞类型 */
+  VULType?: string;
+  /** 漏洞名 */
+  VULName?: string;
+  /** cve */
+  CVE?: string;
+  /** 描述 */
+  Describe?: string;
+  /** 负载 */
+  Payload?: string;
+  /** 版本名 */
+  AppName?: string;
+  /** 相关引用 */
+  References?: string;
+  /** 版本 */
+  AppVersion?: string;
+  /** 漏洞链接 */
+  VULURL?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 修复建议 */
+  Fix?: string | null;
+  /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
+  EMGCVulType?: number | null;
 }
 
 /** vpc列表数据 */
@@ -1553,6 +1653,26 @@ declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskCenterPortViewPortRiskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCenterPortViewPortRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 资产视角的端口风险列表 */
+  Data?: PortViewPortRisk[];
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 处置建议列表 */
+  SuggestionLists?: FilterDataObject[];
+  /** 来源列表 */
+  FromLists?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRiskCenterServerRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
@@ -1565,6 +1685,26 @@ declare interface DescribeRiskCenterServerRiskListResponse {
   Data?: ServerRisk[];
   /** 资产类型枚举 */
   InstanceTypeLists?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskCenterVULViewVULRiskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCenterVULViewVULRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 漏洞产视角的漏洞风险列表 */
+  Data?: VULViewVULRisk[];
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 来源列表 */
+  FromLists?: FilterDataObject[];
+  /** 漏洞类型列表 */
+  VULTypeLists?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1715,6 +1855,20 @@ declare interface DescribeVpcAssetsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRiskCenterRiskStatusRequest {
+  /** 风险资产相关数据 */
+  RiskStatusKeys: RiskCenterStatusKey[];
+  /** 处置状态，1为已处置、2为已忽略，3为取消已处置，4为取消已忽略 */
+  Status: number;
+  /** 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露 */
+  Type: number;
+}
+
+declare interface ModifyRiskCenterRiskStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopRiskCenterTaskRequest {
   /** 任务id 列表 */
   TaskIdList: TaskIdListKey[];
@@ -1764,8 +1918,12 @@ declare interface Csip {
   DescribeRiskCenterAssetViewVULRiskList(data?: DescribeRiskCenterAssetViewVULRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewVULRiskListResponse>;
   /** 获取资产视角的弱口令风险列表 {@link DescribeRiskCenterAssetViewWeakPasswordRiskListRequest} {@link DescribeRiskCenterAssetViewWeakPasswordRiskListResponse} */
   DescribeRiskCenterAssetViewWeakPasswordRiskList(data?: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewWeakPasswordRiskListResponse>;
+  /** 获取端口视角的端口风险列表 {@link DescribeRiskCenterPortViewPortRiskListRequest} {@link DescribeRiskCenterPortViewPortRiskListResponse} */
+  DescribeRiskCenterPortViewPortRiskList(data?: DescribeRiskCenterPortViewPortRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterPortViewPortRiskListResponse>;
   /** 获取风险服务列表 {@link DescribeRiskCenterServerRiskListRequest} {@link DescribeRiskCenterServerRiskListResponse} */
   DescribeRiskCenterServerRiskList(data?: DescribeRiskCenterServerRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterServerRiskListResponse>;
+  /** 获取漏洞视角的漏洞风险列表 {@link DescribeRiskCenterVULViewVULRiskListRequest} {@link DescribeRiskCenterVULViewVULRiskListResponse} */
+  DescribeRiskCenterVULViewVULRiskList(data?: DescribeRiskCenterVULViewVULRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterVULViewVULRiskListResponse>;
   /** 获取网站风险列表 {@link DescribeRiskCenterWebsiteRiskListRequest} {@link DescribeRiskCenterWebsiteRiskListResponse} */
   DescribeRiskCenterWebsiteRiskList(data?: DescribeRiskCenterWebsiteRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterWebsiteRiskListResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
@@ -1782,6 +1940,8 @@ declare interface Csip {
   DescribeTaskLogURL(data: DescribeTaskLogURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogURLResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
+  /** 修改风险中心风险状态 {@link ModifyRiskCenterRiskStatusRequest} {@link ModifyRiskCenterRiskStatusResponse} */
+  ModifyRiskCenterRiskStatus(data: ModifyRiskCenterRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterRiskStatusResponse>;
   /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
   StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
 }

@@ -1370,6 +1370,36 @@ declare interface UserSignatureRule {
   Reason: number;
 }
 
+/** 用户规则白名单 */
+declare interface UserWhiteRule {
+  /** 白名单的id */
+  WhiteRuleId: number;
+  /** 规则id */
+  SignatureId: string;
+  /** 状态 */
+  Status: number;
+  /** 匹配域 */
+  MatchField: string;
+  /** 匹配方法 */
+  MatchMethod: string;
+  /** 匹配内容 */
+  MatchContent: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 修改时间 */
+  ModifyTime: string;
+}
+
+/** 用户规则白名单规则子项 */
+declare interface UserWhiteRuleItem {
+  /** 匹配域 */
+  MatchField: string;
+  /** 匹配方法 */
+  MatchMethod: string;
+  /** 匹配内容 */
+  MatchContent: string;
+}
+
 /** Vip信息 */
 declare interface VipInfo {
   /** Virtual IP */
@@ -1460,6 +1490,26 @@ declare interface AddAntiInfoLeakRulesRequest {
 declare interface AddAntiInfoLeakRulesResponse {
   /** 规则ID */
   RuleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddAttackWhiteRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则Id */
+  SignatureId: string;
+  /** 规则状态 */
+  Status: number;
+  /** 匹配规则项列表 */
+  Rules: UserWhiteRuleItem[];
+  /** 规则序号 */
+  RuleId?: number;
+}
+
+declare interface AddAttackWhiteRuleResponse {
+  /** 规则总数 */
+  RuleId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1696,6 +1746,20 @@ declare interface DeleteAttackDownloadRecordRequest {
 }
 
 declare interface DeleteAttackDownloadRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAttackWhiteRuleRequest {
+  /** 规则序号组 */
+  Ids: number[];
+  /** 用户域名 */
+  Domain: string;
+}
+
+declare interface DeleteAttackWhiteRuleResponse {
+  /** 删除失败的规则序号组 */
+  FailIds: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2020,6 +2084,30 @@ declare interface DescribeAttackOverviewResponse {
   TamperCount?: number | null;
   /** 信息泄露总数 */
   LeakCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAttackWhiteRuleRequest {
+  /** 需要查询的域名 */
+  Domain: string;
+  /** 分页 */
+  Offset: number;
+  /** 每页容量 */
+  Limit: number;
+  /** 排序字段，支持user_id, signature_id, modify_time */
+  By?: string;
+  /** 排序方式 */
+  Order?: string;
+  /** 筛选条件，支持SignatureId, MatchContent */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeAttackWhiteRuleResponse {
+  /** 规则总数 */
+  Total: number;
+  /** 规则白名单列表 */
+  List: UserWhiteRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2954,6 +3042,26 @@ declare interface ModifyAreaBanStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAttackWhiteRuleRequest {
+  /** 规则序号 */
+  RuleId: number;
+  /** 域名 */
+  Domain: string;
+  /** 规则Id */
+  SignatureId: string;
+  /** 规则状态 */
+  Status: number;
+  /** 匹配规则项列表 */
+  Rules: UserWhiteRuleItem[];
+}
+
+declare interface ModifyAttackWhiteRuleResponse {
+  /** 规则总数 */
+  RuleId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBotStatusRequest {
   /** 域名 */
   Domain: string;
@@ -3681,6 +3789,8 @@ declare interface Waf {
   AddAntiFakeUrl(data: AddAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<AddAntiFakeUrlResponse>;
   /** 添加信息防泄漏规则 {@link AddAntiInfoLeakRulesRequest} {@link AddAntiInfoLeakRulesResponse} */
   AddAntiInfoLeakRules(data: AddAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddAntiInfoLeakRulesResponse>;
+  /** 增加规则引擎白名单 {@link AddAttackWhiteRuleRequest} {@link AddAttackWhiteRuleResponse} */
+  AddAttackWhiteRule(data: AddAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAttackWhiteRuleResponse>;
   /** 增加访问控制（自定义策略） {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
   /** 添加精准白名单规则 {@link AddCustomWhiteRuleRequest} {@link AddCustomWhiteRuleResponse} */
@@ -3701,6 +3811,8 @@ declare interface Waf {
   DeleteAntiInfoLeakRule(data: DeleteAntiInfoLeakRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAntiInfoLeakRuleResponse>;
   /** 删除攻击日志下载任务记录 {@link DeleteAttackDownloadRecordRequest} {@link DeleteAttackDownloadRecordResponse} */
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
+  /** 删除规则引擎白名单 {@link DeleteAttackWhiteRuleRequest} {@link DeleteAttackWhiteRuleResponse} */
+  DeleteAttackWhiteRule(data: DeleteAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackWhiteRuleResponse>;
   /** Waf CC V2 Delete接口 {@link DeleteCCRuleRequest} {@link DeleteCCRuleResponse} */
   DeleteCCRule(data: DeleteCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCRuleResponse>;
   /** 删除自定义规则 {@link DeleteCustomRuleRequest} {@link DeleteCustomRuleResponse} */
@@ -3737,6 +3849,8 @@ declare interface Waf {
   DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */
   DescribeAttackOverview(data: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
+  /** 获取用户规则白名单列表 {@link DescribeAttackWhiteRuleRequest} {@link DescribeAttackWhiteRuleResponse} */
+  DescribeAttackWhiteRule(data: DescribeAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackWhiteRuleResponse>;
   /** @deprecated 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** Waf 多域名ip黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
@@ -3843,6 +3957,8 @@ declare interface Waf {
   ModifyApiAnalyzeStatus(data: ModifyApiAnalyzeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAnalyzeStatusResponse>;
   /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
+  /** 修改规则引擎白名单 {@link ModifyAttackWhiteRuleRequest} {@link ModifyAttackWhiteRuleResponse} */
+  ModifyAttackWhiteRule(data: ModifyAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttackWhiteRuleResponse>;
   /** Bot_V2 bot总开关更新 {@link ModifyBotStatusRequest} {@link ModifyBotStatusResponse} */
   ModifyBotStatus(data: ModifyBotStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotStatusResponse>;
   /** 编辑自定义规则 {@link ModifyCustomRuleRequest} {@link ModifyCustomRuleResponse} */

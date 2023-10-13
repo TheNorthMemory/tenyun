@@ -1155,7 +1155,7 @@ declare interface DescribeDataPvUrlStatisticsRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -1165,6 +1165,8 @@ declare interface DescribeDataPvUrlStatisticsRequest {
   Env?: string;
   /** group by 参数值枚举1:1m 2:5m 3:30m 4:1h 5:1d */
   GroupByType?: number;
+  /** 无需关注，是否查询zhiyan */
+  IsNewData?: number;
 }
 
 declare interface DescribeDataPvUrlStatisticsResponse {

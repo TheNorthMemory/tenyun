@@ -1734,6 +1734,30 @@ declare interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloudNativeAPIGatewayCertificateRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 证书id */
+  Id: string;
+  /** 证书名称，即将废弃 */
+  Name?: string;
+  /** 证书私钥，CertSource为native时必填。 */
+  Key?: string;
+  /** 证书pem格式，CertSource为native时必填。 */
+  Crt?: string;
+  /** 绑定的域名，即将废弃 */
+  BindDomains?: string[];
+  /** ssl平台证书 Id，CertSource为ssl时必填。 */
+  CertId?: string;
+  /** 证书来源- ssl (ssl平台证书)，默认值- native (kong自定义证书) */
+  CertSource?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudNativeAPIGatewayRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -1996,6 +2020,8 @@ declare interface Tse {
   ModifyCloudNativeAPIGateway(data: ModifyCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayResponse>;
   /** 修改云原生网关的灰度规则 {@link ModifyCloudNativeAPIGatewayCanaryRuleRequest} {@link ModifyCloudNativeAPIGatewayCanaryRuleResponse} */
   ModifyCloudNativeAPIGatewayCanaryRule(data: ModifyCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayCanaryRuleResponse>;
+  /** 更新云原生网关证书 {@link ModifyCloudNativeAPIGatewayCertificateRequest} {@link ModifyCloudNativeAPIGatewayCertificateResponse} */
+  ModifyCloudNativeAPIGatewayCertificate(data: ModifyCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayCertificateResponse>;
   /** 修改云原生网关路由 {@link ModifyCloudNativeAPIGatewayRouteRequest} {@link ModifyCloudNativeAPIGatewayRouteResponse} */
   ModifyCloudNativeAPIGatewayRoute(data: ModifyCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayRouteResponse>;
   /** 修改云原生网关限流插件(路由) {@link ModifyCloudNativeAPIGatewayRouteRateLimitRequest} {@link ModifyCloudNativeAPIGatewayRouteRateLimitResponse} */

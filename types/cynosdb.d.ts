@@ -162,7 +162,7 @@ declare interface AuditRuleTemplateInfo {
   AlarmLevel?: number | null;
   /** 告警策略。0-不告警，1-告警。 */
   AlarmPolicy?: number | null;
-  /** 模版状态。0-无任务 ，1-修改中。 */
+  /** 模板状态。0-无任务 ，1-修改中。 */
   Status?: number | null;
   /** 规则模板应用在哪些在实例。 */
   AffectedInstances?: string[] | null;
@@ -842,7 +842,7 @@ declare interface InstanceNetInfo {
   Vport?: number | null;
   /** 外网域名 */
   WanDomain?: string | null;
-  /** 外网Ip */
+  /** 外网IP */
   WanIP?: string | null;
   /** 外网端口 */
   WanPort?: number | null;

@@ -46,7 +46,7 @@ declare interface SyncIcpOrderWebInfoResponse {
   RequestId?: string;
 }
 
-/** {@link Ba 网站备案} */
+/** {@link Ba ICP备案} */
 declare interface Ba {
   (): Versions;
   /** 创建渠道备案小程序二维码 {@link CreateWeappQRUrlRequest} {@link CreateWeappQRUrlResponse} */

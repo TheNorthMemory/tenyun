@@ -1038,6 +1038,30 @@ declare interface DescribeExtensionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIMCdrListRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 起始时间（必填），Unix 秒级时间戳 */
+  StartTimestamp: number;
+  /** 结束时间（必填），Unix 秒级时间戳 */
+  EndTimestamp: number;
+  /** 返回记录条数，最大为100默认20 */
+  Limit?: number;
+  /** 返回记录偏移，默认为 0 */
+  Offset?: number;
+  /** 1为全媒体，2为文本客服，不填则查询全部 */
+  Type?: number;
+}
+
+declare interface DescribeIMCdrListResponse {
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 服务记录列表 */
+  IMCdrList?: IMCdrInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIMCdrsRequest {
   /** 起始时间（必填），Unix 秒级时间戳 */
   StartTimestamp: number;
@@ -1060,6 +1084,8 @@ declare interface DescribeIMCdrsResponse {
   TotalCount?: number;
   /** 服务记录列表 */
   IMCdrs?: IMCdrInfo[];
+  /** 服务记录列表 */
+  IMCdrList?: IMCdrInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1435,7 +1461,9 @@ declare interface Ccc {
   DescribeExtension(data: DescribeExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionResponse>;
   /** 查询话机列表信息 {@link DescribeExtensionsRequest} {@link DescribeExtensionsResponse} */
   DescribeExtensions(data: DescribeExtensionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionsResponse>;
-  /** 查询在线客服记录 {@link DescribeIMCdrsRequest} {@link DescribeIMCdrsResponse} */
+  /** 查询在线客服记录 {@link DescribeIMCdrListRequest} {@link DescribeIMCdrListResponse} */
+  DescribeIMCdrList(data: DescribeIMCdrListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrListResponse>;
+  /** 查询在线客服记录(已废弃) {@link DescribeIMCdrsRequest} {@link DescribeIMCdrsResponse} */
   DescribeIMCdrs(data: DescribeIMCdrsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrsResponse>;
   /** 查询号码列表 {@link DescribeNumbersRequest} {@link DescribeNumbersResponse} */
   DescribeNumbers(data: DescribeNumbersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNumbersResponse>;

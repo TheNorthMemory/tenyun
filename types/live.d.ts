@@ -1603,6 +1603,8 @@ declare interface CreateLivePullStreamTaskRequest {
   CallbackUrl?: string;
   /** 其他参数。示例: ignore_region 用于忽略传入地域, 内部按负载分配。 */
   ExtraCmd?: string;
+  /** 自定义任务 ID。注：1. 该自定义 ID 为可选参数，如果传入，请确保该账号下传入的 ID 唯一。2. 该自定义 ID 用于防止重复发起请求时产生重复任务。后面也可以用 SpecifyTaskId 来修改或删除任务。 */
+  SpecifyTaskId?: string;
   /** 任务描述，限制 512 字节。 */
   Comment?: string;
   /** 完整目标 URL 地址。用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空字符串，任务将会使用该 ToUrl 参数指定的目标地址。使用该方式传入目标地址支持的协议有：rtmp、rtmps、rtsp、rtp、srt。注意：签名时间需要超过任务结束时间，避免因签名过期造成任务失败。 */
@@ -3861,6 +3863,8 @@ declare interface ModifyLivePullStreamTaskRequest {
   FileIndex?: number;
   /** 指定播放文件偏移。注意：1. 单位：秒，配合FileIndex使用。 */
   OffsetTime?: number;
+  /** 指定任务 ID 修改任务。注意：该自定义任务 ID 只有在创建任务时指定了，才可在此处修改时使用。否则请使用系统返回的任务 ID。 */
+  SpecifyTaskId?: string;
   /** 目标 Url。换目标地址，会断流重推到新地址。 */
   ToUrl?: string;
   /** 任务备注。 */
