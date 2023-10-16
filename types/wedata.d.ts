@@ -80,6 +80,12 @@ declare interface AlarmEventInfo {
   Operator?: number | null;
   /** 告警规则ID */
   RegularId?: string | null;
+  /** 告警接收人昵称 */
+  AlarmRecipientName?: string | null;
+  /** 告警任务类型 */
+  TaskType?: number | null;
+  /** 发送结果 */
+  SendResult?: string | null;
 }
 
 /** 告警指标 */
@@ -1287,6 +1293,32 @@ declare interface Folder {
 }
 
 /** 文件夹属性 */
+declare interface FolderDsDto {
+  /** 文件夹id */
+  Id?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 文件夹名称 */
+  Name?: string | null;
+  /** 所属项目id */
+  ProjectId?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 父文件夹id */
+  ParentsFolderId?: string | null;
+  /** 工作流总数 */
+  Total?: number | null;
+  /** 工作流列表 */
+  Workflows?: WorkflowCanvasOpsDto[] | null;
+  /** 子文件夹总数 */
+  TotalFolders?: number | null;
+  /** 子文件夹列表 */
+  Folders?: FolderDsDto[] | null;
+  /** 搜索类型 */
+  FindType?: string | null;
+}
+
+/** 文件夹属性 */
 declare interface FolderOpsDto {
   /** 文件夹id */
   Id?: string | null;
@@ -1365,33 +1397,37 @@ declare interface GeneralTaskParam {
 /** 采集器详细信息 */
 declare interface InLongAgentDetail {
   /** Agent ID */
-  AgentId: string;
+  AgentId?: string;
   /** Agent Name */
-  AgentName: string;
+  AgentName?: string;
   /** Agent状态(running运行中，initializing 操作中，failed心跳异常) */
-  Status: string;
+  Status?: string;
   /** Agent状态描述 */
-  StatusDesc: string | null;
+  StatusDesc?: string | null;
   /** 集群类型，1：TKE Agent，2：BOSS SDK，默认：1 */
-  AgentType: number;
+  AgentType?: number;
   /** 采集来源 */
-  Source: string;
+  Source?: string;
   /** VPC */
-  VpcId: string;
+  VpcId?: string;
   /** 集成资源组Id */
-  ExecutorGroupId: string;
+  ExecutorGroupId?: string;
   /** 集成资源组名称 */
-  ExecutorGroupName: string;
+  ExecutorGroupName?: string;
   /** 关联任务数 */
-  TaskCount: number;
+  TaskCount?: number;
   /** 采集器组ID */
-  AgentGroupId: string | null;
+  AgentGroupId?: string | null;
   /** agent状态统计 */
-  CvmAgentStatusList: CvmAgentStatus[] | null;
+  CvmAgentStatusList?: CvmAgentStatus[] | null;
   /** agent数量 */
-  AgentTotal: number | null;
+  AgentTotal?: number | null;
   /** 生命周期 */
   LifeDays?: number | null;
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** agent地域 */
+  AgentRegion?: string | null;
 }
 
 /** 采集器关联的集成任务 */
@@ -1682,6 +1718,10 @@ declare interface InstanceOpsDto {
   TenantId?: string | null;
   /** 实例标识 */
   InstanceKey?: string | null;
+  /** 资源组id */
+  ExecutorGroupId?: string | null;
+  /** 资源组名称 */
+  ExecutorGroupName?: string | null;
 }
 
 /** 任务运行历史分页记录 */
@@ -2474,6 +2514,24 @@ declare interface Partition {
   Name?: string;
   /** 策略参数 */
   TransformArgs?: string[];
+}
+
+/** 数据开发-统一树结构返回属性 */
+declare interface PathNodeDsVO {
+  /** PathNode ID */
+  Id?: string | null;
+  /** PathNode 名称 */
+  Title?: string | null;
+  /** PathNode 类型 */
+  Type?: string | null;
+  /** 父节点唯一标识 */
+  ParentId?: string | null;
+  /** 是否叶子节点 */
+  IsLeaf?: boolean | null;
+  /** 子节点列表 */
+  Children?: PathNodeDsVO[] | null;
+  /** 业务参数 ,base64编译的json串，获取具体参数需要base64反编译 */
+  Params?: string | null;
 }
 
 /** 数据质量生产调度任务业务实体 */
@@ -4276,6 +4334,10 @@ declare interface TaskOpsDto {
   TasksStr: string | null;
   /** 任务版本是否已提交 */
   Submit: boolean | null;
+  /** 资源组id */
+  ExecutorGroupId?: string | null;
+  /** 资源组名称 */
+  ExecutorGroupName?: string | null;
 }
 
 /** 离线任务统计指标明细 */
@@ -5312,9 +5374,9 @@ declare interface CreateBaselineResponse {
 }
 
 declare interface CreateCustomFunctionRequest {
-  /** 类型：HIVE、SPARK */
+  /** 枚举值：HIVE、SPARK、DLC */
   Type: string;
-  /** 分类：窗口函数、聚合函数、日期函数...... */
+  /** 枚举值：ANALYSIS(函数)、ENCRYPTION(加密函数)、AGGREGATE(聚合函数)、LOGIC(逻辑函数)、DATE_AND_TIME(日期与时间函数)、MATH(数学函数)、CONVERSION(转换函数)、STRING(字符串函数)、IP_AND_DOMAIN(IP和域名函数)、WINDOW(窗口函数)、OTHER(其他函数) */
   Kind: string;
   /** 函数名称 */
   Name: string;
@@ -5328,9 +5390,9 @@ declare interface CreateCustomFunctionRequest {
 
 declare interface CreateCustomFunctionResponse {
   /** 函数唯一标识 */
-  FunctionId: string | null;
+  FunctionId?: string | null;
   /** 无 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5375,6 +5437,22 @@ declare interface CreateDataSourceRequest {
 declare interface CreateDataSourceResponse {
   /** 主键ID */
   Data: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDsFolderRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 文件夹名称 */
+  FolderName: string;
+  /** 父文件夹ID */
+  ParentsFolderId?: string;
+}
+
+declare interface CreateDsFolderResponse {
+  /** 文件夹Id，null则创建失败 */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5468,15 +5546,15 @@ declare interface CreateIntegrationNodeRequest {
   NodeInfo: IntegrationNodeInfo;
   /** 项目id */
   ProjectId: string;
-  /** 任务类型 */
+  /** 任务类型，201为实时任务，202为离线任务 */
   TaskType?: number;
 }
 
 declare interface CreateIntegrationNodeResponse {
   /** 节点 */
-  Id: string;
+  Id?: string;
   /** 当前任务id */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5847,6 +5925,20 @@ declare interface DeleteDataSourcesRequest {
 declare interface DeleteDataSourcesResponse {
   /** 是否删除成功 */
   Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDsFolderRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 文件夹ID */
+  FolderId: string;
+}
+
+declare interface DeleteDsFolderResponse {
+  /** true代表删除成功，false代表删除失败 */
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6788,6 +6880,48 @@ declare interface DescribeDrSonInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDsFolderTreeRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 是否一级拉取 */
+  FirstLevelPull?: boolean;
+  /** 文件夹ID */
+  FolderId?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
+  /** 关键字搜索 */
+  Keyword?: string;
+  /** 是否包含工作流 */
+  IncludeWorkflow?: boolean;
+  /** 是否包含任务 */
+  IncludeTask?: boolean;
+}
+
+declare interface DescribeDsFolderTreeResponse {
+  /** 统一树结构返回属性列表 */
+  Data?: PathNodeDsVO[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDsParentFolderTreeRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 文件夹ID */
+  FolderId?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
+  /** 任务id */
+  TaskId?: string;
+}
+
+declare interface DescribeDsParentFolderTreeResponse {
+  /** 统一树结构返回属性列表 */
+  Data?: PathNodeDsVO[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEventCasesRequest {
   /** 项目ID */
   ProjectId: string;
@@ -7707,6 +7841,8 @@ declare interface DescribeOperateOpsTasksRequest {
   TargetServiceType?: string;
   /** 告警类型，多个类型以逗号分隔 */
   AlarmType?: string;
+  /** 资源组id,多个资源组id之间以英文字符逗号分隔 */
+  ExecutorGroupIdList?: string;
 }
 
 declare interface DescribeOperateOpsTasksResponse {
@@ -8001,9 +8137,9 @@ declare interface DescribeRealTimeTaskInstanceNodeInfoResponse {
 }
 
 declare interface DescribeRealTimeTaskMetricOverviewRequest {
-  /** 要查看的实时任务的任务Id */
+  /** 要查看的实时任务的任务ID，可在任务列表页面中获得 */
   TaskId: string;
-  /** 无 */
+  /** 要查看的项目ID */
   ProjectId: string;
   /** 开始时间 */
   StartTime?: number;
@@ -8737,13 +8873,15 @@ declare interface DescribeStreamTaskLogListRequest {
   OrderType?: string;
   /** 作业运行的实例ID */
   RunningOrderId?: number;
+  /** 关键字 */
+  Keyword?: string;
 }
 
 declare interface DescribeStreamTaskLogListResponse {
   /** 是否是全量 */
-  ListOver: boolean | null;
+  ListOver?: boolean | null;
   /** 日志集合 */
-  LogContentList: LogContentInfo[] | null;
+  LogContentList?: LogContentInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9458,6 +9596,18 @@ declare interface EditBaselineResponse {
   RequestId?: string;
 }
 
+declare interface FindAllFolderRequest {
+  /** 项目ID */
+  ProjectId: string;
+}
+
+declare interface FindAllFolderResponse {
+  /** 文件夹列表 */
+  FolderList?: FolderDsDto[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ForceSucInstancesRequest {
   /** 项目Id */
   ProjectId: string;
@@ -9745,6 +9895,8 @@ declare interface InstanceApiOpsRequest {
   TenantId?: string;
   /** 根据当前数据时间或者是下一个数据时间查询, 默认当前数据时间 */
   DataTimeCycle?: string;
+  /** 资源组id,多个资源组id用英文逗号分隔 */
+  ExecutorGroupIdList?: string[];
 }
 
 declare interface KillInstancesRequest {
@@ -10028,6 +10180,24 @@ declare interface ModifyDimensionWeightRequest {
 declare interface ModifyDimensionWeightResponse {
   /** 更新权重是否成功 */
   Data: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDsFolderRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 文件夹名称 */
+  FolderName: string;
+  /** 文件夹Id */
+  FolderId: string;
+  /** 父文件夹ID */
+  ParentsFolderId?: string;
+}
+
+declare interface ModifyDsFolderResponse {
+  /** true代表成功，false代表失败 */
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10679,6 +10849,98 @@ declare interface RobAndLockIntegrationTaskResponse {
   RequestId?: string;
 }
 
+declare interface RunForceSucScheduleInstancesRequest {
+  /** 实例列表 */
+  Instances?: InstanceOpsDto[];
+  /** 检查父任务类型, true: 检查父任务; false: 不检查父任务 */
+  CheckFather?: boolean;
+  /** 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子 */
+  RerunType?: string;
+  /** 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖 */
+  DependentWay?: string;
+  /** 重跑忽略事件监听与否 */
+  SkipEventListening?: boolean;
+  /** 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目 */
+  SonInstanceType?: string;
+  /** 查询条件 */
+  SearchCondition?: InstanceApiOpsRequest;
+  /** 访问类型 */
+  OptType?: string;
+  /** 操作者名称 */
+  OperatorName?: string;
+  /** 操作者id */
+  OperatorId?: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 项目标志 */
+  ProjectIdent?: string;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 索引页码 */
+  PageIndex?: number;
+  /** 页面大小 */
+  PageSize?: number;
+  /** 数据总数 */
+  Count?: number;
+  /** 基础请求信息 */
+  RequestBaseInfo?: ProjectBaseInfoOpsRequest;
+  /** 是否计算总数 */
+  IsCount?: boolean;
+}
+
+declare interface RunForceSucScheduleInstancesResponse {
+  /** 结果 */
+  Data?: BatchOperateResultOpsDto;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunRerunScheduleInstancesRequest {
+  /** 实例列表 */
+  Instances?: InstanceOpsDto[];
+  /** 检查父任务类型, true: 检查父任务; false: 不检查父任务 */
+  CheckFather?: boolean;
+  /** 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子 */
+  RerunType?: string;
+  /** 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖 */
+  DependentWay?: string;
+  /** 重跑忽略事件监听与否 */
+  SkipEventListening?: boolean;
+  /** 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目 */
+  SonInstanceType?: string;
+  /** 查询条件 */
+  SearchCondition?: InstanceApiOpsRequest;
+  /** 访问类型 */
+  OptType?: string;
+  /** 操作者名称 */
+  OperatorName?: string;
+  /** 操作者id */
+  OperatorId?: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 项目标志 */
+  ProjectIdent?: string;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 索引页码 */
+  PageIndex?: number;
+  /** 页面大小 */
+  PageSize?: number;
+  /** 数据总数 */
+  Count?: number;
+  /** 基础请求信息 */
+  RequestBaseInfo?: ProjectBaseInfoOpsRequest;
+  /** 是否计算总数 */
+  IsCount?: boolean;
+}
+
+declare interface RunRerunScheduleInstancesResponse {
+  /** 结果 */
+  Data?: BatchOperateResultOpsDto;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunTaskRequest {
   /** 项目Id */
   ProjectId: string;
@@ -11198,6 +11460,8 @@ declare interface Wedata {
   CreateCustomFunction(data: CreateCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomFunctionResponse>;
   /** 数据源管理-创建数据源【Beta版本】 {@link CreateDataSourceRequest} {@link CreateDataSourceResponse} */
   CreateDataSource(data: CreateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataSourceResponse>;
+  /** 创建文件夹 {@link CreateDsFolderRequest} {@link CreateDsFolderResponse} */
+  CreateDsFolder(data: CreateDsFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDsFolderResponse>;
   /** 创建文件夹【Beta版本】 {@link CreateFolderRequest} {@link CreateFolderResponse} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
   /** 建hive表 {@link CreateHiveTableRequest} {@link CreateHiveTableResponse} */
@@ -11236,6 +11500,8 @@ declare interface Wedata {
   DeleteCustomFunction(data: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
   /** 数据源管理-删除数据源【Beta版本】 {@link DeleteDataSourcesRequest} {@link DeleteDataSourcesResponse} */
   DeleteDataSources(data: DeleteDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourcesResponse>;
+  /** 删除文件夹 {@link DeleteDsFolderRequest} {@link DeleteDsFolderResponse} */
+  DeleteDsFolder(data: DeleteDsFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDsFolderResponse>;
   /** 开发空间-删除文件 {@link DeleteFileRequest} {@link DeleteFileResponse} */
   DeleteFile(data: DeleteFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileResponse>;
   /** 开发空间-批量删除目录和文件 {@link DeleteFilePathRequest} {@link DeleteFilePathResponse} */
@@ -11336,6 +11602,10 @@ declare interface Wedata {
   DescribeDrInstanceScriptContent(data: DescribeDrInstanceScriptContentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrInstanceScriptContentResponse>;
   /** 查询试运行实例子实例列表 {@link DescribeDrSonInstanceRequest} {@link DescribeDrSonInstanceResponse} */
   DescribeDrSonInstance(data: DescribeDrSonInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrSonInstanceResponse>;
+  /** 编排空间-查询目录树 {@link DescribeDsFolderTreeRequest} {@link DescribeDsFolderTreeResponse} */
+  DescribeDsFolderTree(data: DescribeDsFolderTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsFolderTreeResponse>;
+  /** 编排空间-查询父目录树 {@link DescribeDsParentFolderTreeRequest} {@link DescribeDsParentFolderTreeResponse} */
+  DescribeDsParentFolderTree(data: DescribeDsParentFolderTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsParentFolderTreeResponse>;
   /** 查询事件详情 {@link DescribeEventRequest} {@link DescribeEventResponse} */
   DescribeEvent(data: DescribeEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventResponse>;
   /** 查找事件实例 {@link DescribeEventCasesRequest} {@link DescribeEventCasesResponse} */
@@ -11412,7 +11682,7 @@ declare interface Wedata {
   DescribeIntegrationTasks(data: DescribeIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationTasksResponse>;
   /** 查询集成任务版本节点信息 {@link DescribeIntegrationVersionNodesInfoRequest} {@link DescribeIntegrationVersionNodesInfoResponse} */
   DescribeIntegrationVersionNodesInfo(data: DescribeIntegrationVersionNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationVersionNodesInfoResponse>;
-  /** 获取kafka的topic信息 {@link DescribeKafkaTopicInfoRequest} {@link DescribeKafkaTopicInfoResponse} */
+  /** @deprecated 获取kafka的topic信息 {@link DescribeKafkaTopicInfoRequest} {@link DescribeKafkaTopicInfoResponse} */
   DescribeKafkaTopicInfo(data: DescribeKafkaTopicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaTopicInfoResponse>;
   /** 分页查询质量监控组 {@link DescribeMonitorsByPageRequest} {@link DescribeMonitorsByPageResponse} */
   DescribeMonitorsByPage(data?: DescribeMonitorsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsByPageResponse>;
@@ -11590,6 +11860,8 @@ declare interface Wedata {
   DryRunDIOfflineTask(data: DryRunDIOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DryRunDIOfflineTaskResponse>;
   /** 编辑基线 {@link EditBaselineRequest} {@link EditBaselineResponse} */
   EditBaseline(data: EditBaselineRequest, config?: AxiosRequestConfig): AxiosPromise<EditBaselineResponse>;
+  /** 查找全部的文件夹 {@link FindAllFolderRequest} {@link FindAllFolderResponse} */
+  FindAllFolder(data: FindAllFolderRequest, config?: AxiosRequestConfig): AxiosPromise<FindAllFolderResponse>;
   /** 实例批量置成功【Beta版本】 {@link ForceSucInstancesRequest} {@link ForceSucInstancesResponse} */
   ForceSucInstances(data: ForceSucInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ForceSucInstancesResponse>;
   /** 实例强制成功 {@link ForceSucScheduleInstancesRequest} {@link ForceSucScheduleInstancesResponse} */
@@ -11634,6 +11906,8 @@ declare interface Wedata {
   ModifyDataSource(data: ModifyDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataSourceResponse>;
   /** 修改维度权重 {@link ModifyDimensionWeightRequest} {@link ModifyDimensionWeightResponse} */
   ModifyDimensionWeight(data: ModifyDimensionWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDimensionWeightResponse>;
+  /** 文件夹更新 {@link ModifyDsFolderRequest} {@link ModifyDsFolderResponse} */
+  ModifyDsFolder(data: ModifyDsFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDsFolderResponse>;
   /** 更新规则组执行策略 {@link ModifyExecStrategyRequest} {@link ModifyExecStrategyResponse} */
   ModifyExecStrategy(data?: ModifyExecStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExecStrategyResponse>;
   /** 文件夹更新【Beta版本】 {@link ModifyFolderRequest} {@link ModifyFolderResponse} */
@@ -11682,6 +11956,10 @@ declare interface Wedata {
   ResumeIntegrationTask(data: ResumeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeIntegrationTaskResponse>;
   /** 抢占锁定集成任务 {@link RobAndLockIntegrationTaskRequest} {@link RobAndLockIntegrationTaskResponse} */
   RobAndLockIntegrationTask(data: RobAndLockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RobAndLockIntegrationTaskResponse>;
+  /** 实例强制成功-新 {@link RunForceSucScheduleInstancesRequest} {@link RunForceSucScheduleInstancesResponse} */
+  RunForceSucScheduleInstances(data?: RunForceSucScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunForceSucScheduleInstancesResponse>;
+  /** 实例批量重跑-新 {@link RunRerunScheduleInstancesRequest} {@link RunRerunScheduleInstancesResponse} */
+  RunRerunScheduleInstances(data?: RunRerunScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerunScheduleInstancesResponse>;
   /** 运行任务【Beta版本】 {@link RunTaskRequest} {@link RunTaskResponse} */
   RunTask(data: RunTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunTaskResponse>;
   /** 批量启动工作流 {@link RunTasksByMultiWorkflowRequest} {@link RunTasksByMultiWorkflowResponse} */

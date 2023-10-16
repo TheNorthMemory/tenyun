@@ -2206,7 +2206,7 @@ declare interface RouteTableInfo {
 
 /** 描述了 “云自动化助手” 服务相关的信息 */
 declare interface RunAutomationServiceEnabled {
-  /** 是否开启云自动化助手。取值范围：TRUE：表示开启云自动化助手服务FALSE：表示不开启云自动化助手服务默认取值：FALSE。 */
+  /** 是否开启云自动化助手。取值范围：true：表示开启云自动化助手服务false：表示不开启云自动化助手服务默认取值：false。 */
   Enabled?: boolean;
 }
 
@@ -2222,8 +2222,8 @@ declare interface RunInstancesForNode {
 
 /** 描述了 “云监控” 服务相关的信息 */
 declare interface RunMonitorServiceEnabled {
-  /** 是否开启[云监控](/document/product/248)服务。取值范围：TRUE：表示开启云监控服务FALSE：表示不开启云监控服务默认取值：TRUE。 */
-  Enabled?: boolean;
+  /** 是否开启[云监控](/document/product/248)服务。取值范围：true：表示开启云监控服务false：表示不开启云监控服务默认取值：true。 */
+  Enabled?: boolean | null;
 }
 
 /** 描述了 “云安全” 服务相关的信息 */

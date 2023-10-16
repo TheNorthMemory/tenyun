@@ -116,7 +116,7 @@ declare interface DataDisk {
   DeleteWithInstance?: boolean | null;
   /** 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。 */
   SnapshotId?: string | null;
-  /** 数据盘是加密。取值范围：TRUE：加密FALSE：不加密默认取值：FALSE该参数目前仅用于 `RunInstances` 接口。 */
+  /** 数据盘是加密。取值范围：true：加密false：不加密默认取值：false该参数目前仅用于 `RunInstances` 接口。 */
   Encrypt?: boolean | null;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
   KmsKeyId?: string | null;
@@ -1016,14 +1016,14 @@ declare interface ReservedInstancesOffering {
 
 /** 描述了 “云自动化助手” 服务相关的信息 */
 declare interface RunAutomationServiceEnabled {
-  /** 是否开启云自动化助手。取值范围：TRUE：表示开启云自动化助手服务FALSE：表示不开启云自动化助手服务默认取值：FALSE。 */
+  /** 是否开启云自动化助手。取值范围：true：表示开启云自动化助手服务false：表示不开启云自动化助手服务默认取值：false。 */
   Enabled?: boolean;
 }
 
 /** 描述了 “云监控” 服务相关的信息 */
 declare interface RunMonitorServiceEnabled {
-  /** 是否开启[云监控](/document/product/248)服务。取值范围：TRUE：表示开启云监控服务FALSE：表示不开启云监控服务默认取值：TRUE。 */
-  Enabled?: boolean;
+  /** 是否开启[云监控](/document/product/248)服务。取值范围：true：表示开启云监控服务false：表示不开启云监控服务默认取值：true。 */
+  Enabled?: boolean | null;
 }
 
 /** 描述了 “云安全” 服务相关的信息 */
@@ -1122,7 +1122,7 @@ declare interface VirtualPrivateCloud {
   VpcId: string;
   /** 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
   SubnetId: string;
-  /** 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：TRUE：表示用作公网网关FALSE：表示不作为公网网关默认取值：FALSE。 */
+  /** 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：true：表示用作公网网关false：表示不作为公网网关默认取值：false。 */
   AsVpcGateway?: boolean;
   /** 私有网络子网 IP 数组，在创建实例、修改实例vpc属性操作中可使用此参数。当前仅批量创建多台实例时支持传入相同子网的多个 IP。 */
   PrivateIpAddresses?: string[];

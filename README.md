@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，10536+ 服务数</summary>
+<details><summary>共计 240+ 款产品，10546+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -192,7 +192,7 @@ ecdn | [全站加速网络](https://cloud.tencent.com/document/product/570) | 20
 ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 2019-07-19(139) |
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
-emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(34) |
+emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(35) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(38) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(64) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(60) | 2020-12-22(53) |
@@ -218,7 +218,7 @@ iir | [智能识图](https://cloud.tencent.com/document/product/1217) | 2020-04-
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(72) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(91) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(92) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(99) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
@@ -332,7 +332,7 @@ vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-1
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(123) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(296) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(304) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(5) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(17) |

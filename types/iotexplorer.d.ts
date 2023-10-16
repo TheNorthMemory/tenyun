@@ -1644,6 +1644,34 @@ declare interface GetDeviceLocationHistoryResponse {
   RequestId?: string;
 }
 
+declare interface GetDeviceSumStatisticsRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 产品id列表，长度为0则拉取项目内全部产品 */
+  ProductIds?: string[];
+}
+
+declare interface GetDeviceSumStatisticsResponse {
+  /** 激活设备总数 */
+  ActivationCount?: number;
+  /** 在线设备总数 */
+  OnlineCount?: number;
+  /** 前一天激活设备数 */
+  ActivationBeforeDay?: number;
+  /** 前一天活跃设备数 */
+  ActiveBeforeDay?: number;
+  /** 前一周激活设备数 */
+  ActivationWeekDayCount?: number;
+  /** 前一周活跃设备数 */
+  ActiveWeekDayCount?: number;
+  /** 上一周激活设备数 */
+  ActivationBeforeWeekDayCount?: number;
+  /** 上一周活跃设备数 */
+  ActiveBeforeWeekDayCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetFamilyDeviceUserListRequest {
   /** 产品ID */
   ProductId: string;
@@ -2357,6 +2385,8 @@ declare interface Iotexplorer {
   GetDeviceList(data: GetDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceListResponse>;
   /** 获取设备历史位置 {@link GetDeviceLocationHistoryRequest} {@link GetDeviceLocationHistoryResponse} */
   GetDeviceLocationHistory(data: GetDeviceLocationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceLocationHistoryResponse>;
+  /** 拉取设备统计汇总数据 {@link GetDeviceSumStatisticsRequest} {@link GetDeviceSumStatisticsResponse} */
+  GetDeviceSumStatistics(data: GetDeviceSumStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceSumStatisticsResponse>;
   /** 获取设备绑定的用户列表 {@link GetFamilyDeviceUserListRequest} {@link GetFamilyDeviceUserListResponse} */
   GetFamilyDeviceUserList(data: GetFamilyDeviceUserListRequest, config?: AxiosRequestConfig): AxiosPromise<GetFamilyDeviceUserListResponse>;
   /** 获取指定网关设备的子设备列表 {@link GetGatewaySubDeviceListRequest} {@link GetGatewaySubDeviceListResponse} */

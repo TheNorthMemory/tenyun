@@ -1348,6 +1348,8 @@ declare interface CreateRiskCenterScanTaskRequest {
   ScanPlanContent?: string;
   /** ip/域名/url数组 */
   SelfDefiningAssets?: string[];
+  /** 请求发起源，默认为vss表示漏洞扫描服务，云安全中心的用户请填充csip */
+  ScanFrom?: string;
   /** 高级配置 */
   TaskAdvanceCFG?: TaskAdvanceCFG;
   /** 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式 */

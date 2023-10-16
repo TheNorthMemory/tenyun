@@ -42,6 +42,32 @@ declare interface ApplicationStatics {
   CountApps: number;
 }
 
+/** 弹性扩缩容记录 */
+declare interface AutoScaleRecord {
+  /** 扩缩容规则名。 */
+  StrategyName?: string;
+  /** "SCALE_OUT"和"SCALE_IN"，分别表示扩容和缩容。 */
+  ScaleAction?: string;
+  /** 取值为"SUCCESS","FAILED","PART_SUCCESS","IN_PROCESS"，分别表示成功、失败、部分成功和流程中。 */
+  ActionStatus?: string;
+  /** 流程触发时间。 */
+  ActionTime?: string;
+  /** 扩缩容相关描述信息。 */
+  ScaleInfo?: string;
+  /** 只在ScaleAction为SCALE_OUT时有效。 */
+  ExpectScaleNum?: number;
+  /** 流程结束时间。 */
+  EndTime?: string;
+  /** 策略类型，按负载或者按时间，1表示负载伸缩，2表示时间伸缩 */
+  StrategyType?: number;
+  /** 扩容时所使用规格信息。 */
+  SpecInfo?: string;
+  /** 补偿扩容，0表示不开启，1表示开启 */
+  CompensateFlag?: number | null;
+  /** 补偿次数 */
+  CompensateCount?: number | null;
+}
+
 /** 引导脚本 */
 declare interface BootstrapAction {
   /** 脚本位置，支持cos上的文件，且只支持https协议。 */
@@ -604,6 +630,14 @@ declare interface JobResult {
   JobState: string | null;
   /** YARN任务ID */
   ApplicationId?: string | null;
+}
+
+/** 键值对，主要用来做Filter */
+declare interface KeyValue {
+  /** 键 */
+  Key: string | null;
+  /** 值 */
+  Value: string | null;
 }
 
 /** 登录设置 */
@@ -1604,6 +1638,26 @@ declare interface DeleteUserManagerUserListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAutoScaleRecordsRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 记录过滤参数，目前仅能为“StartTime”,“EndTime”和“StrategyName”。StartTime和EndTime支持2006-01-02 15:04:05 或者2006/01/02 15:04:05的时间格式 */
+  Filters?: KeyValue[];
+  /** 分页参数。 */
+  Offset?: number;
+  /** 分页参数。最大支持100 */
+  Limit?: number;
+}
+
+declare interface DescribeAutoScaleRecordsResponse {
+  /** 总扩缩容记录数。 */
+  TotalCount?: number;
+  /** 记录列表。 */
+  RecordList?: AutoScaleRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterNodesRequest {
   /** 集群实例ID,实例ID形如: emr-xxxxxxxx */
   InstanceId: string;
@@ -2387,6 +2441,8 @@ declare interface Emr {
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** 删除用户列表 {@link DeleteUserManagerUserListRequest} {@link DeleteUserManagerUserListResponse} */
   DeleteUserManagerUserList(data: DeleteUserManagerUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserManagerUserListResponse>;
+  /** 获取自动扩缩容记录 {@link DescribeAutoScaleRecordsRequest} {@link DescribeAutoScaleRecordsResponse} */
+  DescribeAutoScaleRecords(data: DescribeAutoScaleRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleRecordsResponse>;
   /** 查询集群节点信息 {@link DescribeClusterNodesRequest} {@link DescribeClusterNodesResponse} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
   /** 查询账户的CVM配额 {@link DescribeCvmQuotaRequest} {@link DescribeCvmQuotaResponse} */
