@@ -56,6 +56,18 @@ declare interface BoundK8SInfo {
   BoundClusterType: string | null;
   /** 服务同步模式，all为全量同步，demand为按需同步 */
   SyncMode?: string | null;
+  /** 绑定的kubernetes集群所在地域 */
+  BindRegion?: string | null;
+}
+
+/** CLB多可用区信息 */
+declare interface CLBMultiRegion {
+  /** 是否启用多可用区 */
+  CLBMultiZoneFlag?: boolean | null;
+  /** 主可用区信息 */
+  CLBMasterZone?: string | null;
+  /** 备可用区信息 */
+  CLBSlaveZone?: string | null;
 }
 
 /** 证书信息 */
@@ -435,15 +447,23 @@ declare interface DescribeGatewayInstancePortResult {
 /** 实例地域信息描述 */
 declare interface DescribeInstanceRegionInfo {
   /** 引擎部署地域信息 */
-  EngineRegion: string | null;
+  EngineRegion?: string | null;
   /** 引擎在该地域的副本数 */
-  Replica: number | null;
+  Replica?: number | null;
   /** 引擎在该地域的规格id */
-  SpecId: string | null;
-  /** 内网的网络信息 */
-  IntranetVpcInfos: VpcInfo[] | null;
+  SpecId?: string | null;
+  /** 客户端内网的网络信息 */
+  IntranetVpcInfos?: VpcInfo[] | null;
+  /** 控制台内网的网络信息 */
+  ConsoleIntranetVpcInfos?: VpcInfo[] | null;
   /** 是否开公网 */
-  EnableClientInternet: boolean | null;
+  EnableClientInternet?: boolean | null;
+  /** 限流客户端内网的网络信息 */
+  LimiterIntranetVpcInfos?: VpcInfo[] | null;
+  /** 是否为主地域，仅在服务治理中心多地域有效 */
+  MainRegion?: boolean | null;
+  /** 该地域所在的EKS集群 */
+  EKSClusterID?: string | null;
 }
 
 /** 引擎的初始管理帐号 */
@@ -459,27 +479,33 @@ declare interface EngineAdmin {
 /** 引擎地域配置详情 */
 declare interface EngineRegionInfo {
   /** 引擎节点所在地域 */
-  EngineRegion: string | null;
+  EngineRegion: string;
   /** 此地域节点分配数量 */
-  Replica: number | null;
+  Replica: number;
   /** 集群网络信息 */
-  VpcInfos: VpcInfo[] | null;
+  VpcInfos: VpcInfo[];
+  /** 是否为主地域 */
+  MainRegion?: boolean;
+  /** 引擎规格ID */
+  SpecId?: string;
 }
 
 /** 多环境网络信息 */
 declare interface EnvAddressInfo {
   /** 环境名 */
-  EnvName: string;
+  EnvName?: string;
   /** 是否开启config公网 */
-  EnableConfigInternet: boolean;
+  EnableConfigInternet?: boolean;
   /** config公网ip */
-  ConfigInternetServiceIp: string;
+  ConfigInternetServiceIp?: string;
   /** config内网访问地址 */
-  ConfigIntranetAddress: string | null;
+  ConfigIntranetAddress?: string | null;
   /** 是否开启config内网clb */
   EnableConfigIntranet?: boolean | null;
   /** 客户端公网带宽 */
   InternetBandWidth?: number | null;
+  /** 客户端公网CLB多可用区信息 */
+  CLBMultiRegion?: CLBMultiRegion | null;
 }
 
 /** 环境具体信息 */
@@ -880,6 +906,18 @@ declare interface NetworkAccessControl {
   CidrBlackList?: string[];
 }
 
+/** 北极星日志主题信息 */
+declare interface PolarisCLSTopicInfo {
+  /** 日志集ID */
+  LogSetId?: string | null;
+  /** 日志集名称 */
+  LogSetName?: string | null;
+  /** 日志主题ID */
+  TopicId?: string | null;
+  /** 日志主题名称 */
+  TopicName?: string | null;
+}
+
 /** 查询Limiter的接入地址 */
 declare interface PolarisLimiterAddress {
   /** VPC接入IP列表 */
@@ -962,6 +1000,8 @@ declare interface SREInstance {
   FeatureVersion?: string | null;
   /** 引擎实例是否开启客户端内网访问地址 */
   EnableClientIntranet?: boolean | null;
+  /** 存储额外配置选项 */
+  StorageOption?: StorageOption[] | null;
 }
 
 /** 服务治理相关的信息 */
@@ -982,6 +1022,18 @@ declare interface ServiceGovernanceInfo {
   PgwVpcInfos?: VpcInfo[];
   /** 服务治理限流server引擎绑定的网络信息 */
   LimiterVpcInfos?: VpcInfo[];
+  /** 引擎关联CLS日志主题信息 */
+  CLSTopics?: PolarisCLSTopicInfo[] | null;
+}
+
+/** 存储的额外选项 */
+declare interface StorageOption {
+  /** 存储对象，分为snap和txn两种 */
+  Name?: string | null;
+  /** 存储类型，分为三类CLOUD_PREMIUM/CLOUD_SSD/CLOUD_SSD_PLUS，分别对应高性能云硬盘、SSD云硬盘、增强型SSD云硬盘 */
+  Type?: string | null;
+  /** 存储容量，[50, 3200]的范围 */
+  Capacity?: number | null;
 }
 
 /** 更新云原生API网关响应结果。 */
@@ -1641,21 +1693,23 @@ declare interface DescribeSREInstanceAccessAddressRequest {
 
 declare interface DescribeSREInstanceAccessAddressResponse {
   /** 内网访问地址 */
-  IntranetAddress: string;
+  IntranetAddress?: string;
   /** 公网访问地址 */
-  InternetAddress: string;
+  InternetAddress?: string;
   /** apollo多环境公网ip */
-  EnvAddressInfos: EnvAddressInfo[];
+  EnvAddressInfos?: EnvAddressInfo[];
   /** 控制台公网访问地址 */
-  ConsoleInternetAddress: string | null;
+  ConsoleInternetAddress?: string | null;
   /** 控制台内网访问地址 */
-  ConsoleIntranetAddress: string | null;
+  ConsoleIntranetAddress?: string | null;
   /** 客户端公网带宽 */
-  InternetBandWidth: number | null;
+  InternetBandWidth?: number | null;
   /** 控制台公网带宽 */
-  ConsoleInternetBandWidth: number | null;
+  ConsoleInternetBandWidth?: number | null;
   /** 北极星限流server节点接入IP */
-  LimiterAddressInfos: PolarisLimiterAddress[] | null;
+  LimiterAddressInfos?: PolarisLimiterAddress[] | null;
+  /** InternetAddress 的公网 CLB 多可用区信息 */
+  CLBMultiRegion?: CLBMultiRegion | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1675,9 +1729,9 @@ declare interface DescribeSREInstancesRequest {
 
 declare interface DescribeSREInstancesResponse {
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例记录 */
-  Content: SREInstance[];
+  Content?: SREInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

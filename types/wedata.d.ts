@@ -2310,6 +2310,10 @@ declare interface OfflineTaskAddParam {
   ExecutionEndTime?: string | null;
   /** 调度执行开始时间 */
   ExecutionStartTime?: string | null;
+  /** 是否自动提交 */
+  TaskAutoSubmit?: boolean | null;
+  /** 实例初始化策略 */
+  InstanceInitStrategy?: string | null;
 }
 
 /** 操作结果 */
@@ -4938,7 +4942,7 @@ declare interface BatchRerunIntegrationTaskInstancesResponse {
 declare interface BatchResumeIntegrationTasksRequest {
   /** 任务id */
   TaskIds: string[];
-  /** 任务类型 */
+  /** 任务类型, 201为实时任务，202为离线任务 */
   TaskType: number;
   /** 项目id */
   ProjectId: string;
@@ -4946,11 +4950,11 @@ declare interface BatchResumeIntegrationTasksRequest {
 
 declare interface BatchResumeIntegrationTasksResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5568,7 +5572,7 @@ declare interface CreateIntegrationTaskRequest {
 
 declare interface CreateIntegrationTaskResponse {
   /** 任务id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6666,7 +6670,7 @@ declare interface DescribeDataSourceWithoutInfoResponse {
 }
 
 declare interface DescribeDataTypesRequest {
-  /** 数据源类型，MYSQL|KAFKA等 */
+  /** 数据源类型，MYSQL|HIVE|KAFKA|POSTGRE|CDW|ORACLE|SQLSERVER|FTP|HDFS|ICEBERG|HBASE|TDSQL|TDSQLC|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DORIS|CKAFKA|MONGODB|FTP_FILE|HDFS_FILE|DTS_KAFKA|REST_API|FILE|TIDB|SYBASE|TCHOUSE_X 等 */
   DatasourceType: string;
   /** 项目ID。 */
   ProjectId: string;
@@ -6674,7 +6678,7 @@ declare interface DescribeDataTypesRequest {
 
 declare interface DescribeDataTypesResponse {
   /** 字段类型列表。 */
-  TypeInfoSet: Label[];
+  TypeInfoSet?: Label[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6682,7 +6686,7 @@ declare interface DescribeDataTypesResponse {
 declare interface DescribeDatabaseInfoListRequest {
   /** 过滤参数 */
   Filters: Filter[];
-  /** 如果是hive这里写rpc，如果是其他类型不传 */
+  /** 连接类型 */
   ConnectionType: string;
 }
 
@@ -7655,7 +7659,7 @@ declare interface DescribeIntegrationTaskRequest {
   TaskId: string;
   /** 项目id */
   ProjectId: string;
-  /** 任务类型：201. stream, 202. offline */
+  /** 任务类型，201: 实时集成任务, 202：离线集成任务，不传默认值为201 实时任务类型 */
   TaskType?: number;
   /** 提交版本号 */
   InstanceVersion?: number;
@@ -8971,11 +8975,11 @@ declare interface DescribeTableSchemaInfoRequest {
   Name: string;
   /** 数据库名称 */
   DatabaseName: string;
-  /** 表类型 */
+  /** 数据源的类型（例如MYSQL、HIVE、KAFKA等） */
   MsType: string;
   /** 数据源id */
   DatasourceId: string;
-  /** HIVE传rpc */
+  /** 连接类型（示例值rpc） */
   ConnectionType?: string;
   /** 元数据Database下的Schema名称 */
   SchemaName?: string;
@@ -8983,7 +8987,7 @@ declare interface DescribeTableSchemaInfoRequest {
 
 declare interface DescribeTableSchemaInfoResponse {
   /** 123 */
-  SchemaInfoList: SchemaDetail[] | null;
+  SchemaInfoList?: SchemaDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1330,6 +1330,14 @@ declare interface DescribeWorkSpacesResponse {
   RequestId?: string;
 }
 
+declare interface FetchSqlGatewayStatementResultRequest {
+}
+
+declare interface FetchSqlGatewayStatementResultResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyJobRequest {
   /** 作业Id */
   JobId: string;
@@ -1356,6 +1364,14 @@ declare interface RunJobsRequest {
 }
 
 declare interface RunJobsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunSqlGatewayStatementRequest {
+}
+
+declare interface RunSqlGatewayStatementResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1443,10 +1459,14 @@ declare interface Oceanus {
   DescribeTreeResources(data?: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
   /** 授权工作空间列表 {@link DescribeWorkSpacesRequest} {@link DescribeWorkSpacesResponse} */
   DescribeWorkSpaces(data?: DescribeWorkSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpacesResponse>;
+  /** 查询Statement执行结果 {@link FetchSqlGatewayStatementResultRequest} {@link FetchSqlGatewayStatementResultResponse} */
+  FetchSqlGatewayStatementResult(data?: FetchSqlGatewayStatementResultRequest, config?: AxiosRequestConfig): AxiosPromise<FetchSqlGatewayStatementResultResponse>;
   /** 更新作业 {@link ModifyJobRequest} {@link ModifyJobResponse} */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
   /** 运行作业 {@link RunJobsRequest} {@link RunJobsResponse} */
   RunJobs(data: RunJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobsResponse>;
+  /** 执行Statement {@link RunSqlGatewayStatementRequest} {@link RunSqlGatewayStatementResponse} */
+  RunSqlGatewayStatement(data?: RunSqlGatewayStatementRequest, config?: AxiosRequestConfig): AxiosPromise<RunSqlGatewayStatementResponse>;
   /** 停止作业 {@link StopJobsRequest} {@link StopJobsResponse} */
   StopJobs(data: StopJobsRequest, config?: AxiosRequestConfig): AxiosPromise<StopJobsResponse>;
   /** 触发Savepoint {@link TriggerJobSavepointRequest} {@link TriggerJobSavepointResponse} */

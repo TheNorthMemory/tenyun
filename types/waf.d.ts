@@ -976,6 +976,14 @@ declare interface IpHitItemsData {
   TotalCount: number;
 }
 
+/** Key-Value的形式，Value为Int */
+declare interface KVInt {
+  /** Key */
+  Key: string;
+  /** Value */
+  Value: number;
+}
+
 /** 负载均衡的监听器 */
 declare interface LoadBalancer {
   /** 负载均衡LD的ID */
@@ -1110,6 +1118,14 @@ declare interface PeakPointsItem {
   Leak?: number | null;
   /** 访问控制 */
   ACL?: number | null;
+}
+
+/** 饼图数据类型 */
+declare interface PiechartItem {
+  /** 类型 */
+  Type: string;
+  /** 数量 */
+  Count: number;
 }
 
 /** 服务端口配置 */
@@ -2088,6 +2104,28 @@ declare interface DescribeAttackOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAttackTypeRequest {
+  /** 起始时间 */
+  FromTime: string;
+  /** 结束时间 */
+  ToTime: string;
+  /** 兼容Host，逐步淘汰Host字段 */
+  Host?: string;
+  /** 只有两个值有效，sparta-waf，clb-waf，不传则不过滤 */
+  Edition?: string;
+  /** WAF实例ID，不传则不过滤 */
+  InstanceID?: string;
+  /** 域名过滤，不传则不过滤，用于替代Host字段，逐步淘汰Host */
+  Domain?: string;
+}
+
+declare interface DescribeAttackTypeResponse {
+  /** 数量 */
+  Piechart: PiechartItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAttackWhiteRuleRequest {
   /** 需要查询的域名 */
   Domain: string;
@@ -2438,6 +2476,32 @@ declare interface DescribeFlowTrendResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHistogramRequest {
+  /** 起始时间 */
+  FromTime: string;
+  /** 结束时间 */
+  ToTime: string;
+  /** 聚类字段，ip为ip聚合，art为响应耗时聚合，url为url聚合，local为ip转化的城市聚合 */
+  QueryField: string;
+  /** 条件，access为访问日志，attack为攻击日志 */
+  Source: string;
+  /** 兼容Host，逐步淘汰Host字段 */
+  Host?: string;
+  /** 只有两个值有效，sparta-waf，clb-waf，不传则不过滤 */
+  Edition?: string;
+  /** WAF实例ID，不传则不过滤 */
+  InstanceID?: string;
+  /** 域名过滤，不传则不过滤，用于替代Host字段，逐步淘汰Host */
+  Domain?: string;
+}
+
+declare interface DescribeHistogramResponse {
+  /** 统计数据 */
+  Histogram: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHostLimitRequest {
   /** 添加的域名 */
   Domain: string;
@@ -2710,6 +2774,28 @@ declare interface DescribeTlsVersionRequest {
 declare interface DescribeTlsVersionResponse {
   /** TLS key value */
   TLS: TLSVersion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopAttackDomainRequest {
+  /** 查询起始时间 */
+  FromTime: string;
+  /** 查询结束时间 */
+  ToTime: string;
+  /** TOP N,可从0-10选择，默认是10 */
+  Count?: number;
+  /** 只有两个值有效，sparta-waf，clb-waf，不传则不过滤 */
+  Edition?: string;
+  /** WAF实例ID，不传则不过滤 */
+  InstanceID?: string;
+}
+
+declare interface DescribeTopAttackDomainResponse {
+  /** CC攻击域名列表 */
+  CC: KVInt[];
+  /** Web攻击域名列表 */
+  Web: KVInt[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3849,6 +3935,8 @@ declare interface Waf {
   DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */
   DescribeAttackOverview(data: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
+  /** 查询TOP N攻击类型 {@link DescribeAttackTypeRequest} {@link DescribeAttackTypeResponse} */
+  DescribeAttackType(data: DescribeAttackTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackTypeResponse>;
   /** 获取用户规则白名单列表 {@link DescribeAttackWhiteRuleRequest} {@link DescribeAttackWhiteRuleResponse} */
   DescribeAttackWhiteRule(data: DescribeAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackWhiteRuleResponse>;
   /** @deprecated 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
@@ -3885,6 +3973,8 @@ declare interface Waf {
   DescribeFindDomainList(data: DescribeFindDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFindDomainListResponse>;
   /** 获取waf流量访问趋势 {@link DescribeFlowTrendRequest} {@link DescribeFlowTrendResponse} */
   DescribeFlowTrend(data: DescribeFlowTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTrendResponse>;
+  /** 查询多种聚类分析 {@link DescribeHistogramRequest} {@link DescribeHistogramResponse} */
+  DescribeHistogram(data: DescribeHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistogramResponse>;
   /** 获取防护域名详情 {@link DescribeHostRequest} {@link DescribeHostResponse} */
   DescribeHost(data: DescribeHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostResponse>;
   /** 验证添加的域名是否已经存在 {@link DescribeHostLimitRequest} {@link DescribeHostLimitResponse} */
@@ -3913,6 +4003,8 @@ declare interface Waf {
   DescribeSession(data: DescribeSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionResponse>;
   /** 查询用户TLS版本 {@link DescribeTlsVersionRequest} {@link DescribeTlsVersionResponse} */
   DescribeTlsVersion(data?: DescribeTlsVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTlsVersionResponse>;
+  /** 查询Top5的攻击域名 {@link DescribeTopAttackDomainRequest} {@link DescribeTopAttackDomainResponse} */
+  DescribeTopAttackDomain(data: DescribeTopAttackDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackDomainResponse>;
   /** 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域 {@link DescribeUserCdcClbWafRegionsRequest} {@link DescribeUserCdcClbWafRegionsResponse} */
   DescribeUserCdcClbWafRegions(data?: DescribeUserCdcClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCdcClbWafRegionsResponse>;
   /** 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域 {@link DescribeUserClbWafRegionsRequest} {@link DescribeUserClbWafRegionsResponse} */

@@ -131,75 +131,77 @@ declare interface AlarmNotice {
 /** 告警策略详情 */
 declare interface AlarmPolicy {
   /** 告警策略 ID */
-  PolicyId: string | null;
+  PolicyId?: string | null;
   /** 告警策略名称 */
-  PolicyName: string | null;
+  PolicyName?: string | null;
   /** 备注信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 监控类型 MT_QCE=云产品监控 */
-  MonitorType: string | null;
+  MonitorType?: string | null;
   /** 启停状态 0=停用 1=启用 */
-  Enable: number | null;
+  Enable?: number | null;
   /** 策略组绑定的实例数 */
-  UseSum: number | null;
+  UseSum?: number | null;
   /** 项目 Id -1=无项目 0=默认项目 */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 项目名 */
-  ProjectName: string | null;
+  ProjectName?: string | null;
   /** 告警策略类型 */
-  Namespace: string | null;
+  Namespace?: string | null;
   /** 触发条件模板 Id */
-  ConditionTemplateId: string | null;
+  ConditionTemplateId?: string | null;
   /** 指标触发条件 */
-  Condition: AlarmPolicyCondition | null;
+  Condition?: AlarmPolicyCondition | null;
   /** 事件触发条件 */
-  EventCondition: AlarmPolicyEventCondition | null;
+  EventCondition?: AlarmPolicyEventCondition | null;
   /** 通知规则 id 列表 */
-  NoticeIds: string[] | null;
+  NoticeIds?: string[] | null;
   /** 通知规则 列表 */
-  Notices: AlarmNotice[] | null;
+  Notices?: AlarmNotice[] | null;
   /** 触发任务列表 */
-  TriggerTasks: AlarmPolicyTriggerTask[] | null;
+  TriggerTasks?: AlarmPolicyTriggerTask[] | null;
   /** 模板策略组 */
-  ConditionsTemp: ConditionsTemp | null;
+  ConditionsTemp?: ConditionsTemp | null;
   /** 最后编辑的用户uin */
-  LastEditUin: string | null;
+  LastEditUin?: string | null;
   /** 更新时间 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
   /** 创建时间 */
-  InsertTime: number | null;
+  InsertTime?: number | null;
   /** 地域 */
-  Region: string[] | null;
+  Region?: string[] | null;
   /** namespace显示名字 */
-  NamespaceShowName: string | null;
+  NamespaceShowName?: string | null;
   /** 是否默认策略，1是，0否 */
-  IsDefault: number | null;
+  IsDefault?: number | null;
   /** 能否设置默认策略，1是，0否 */
-  CanSetDefault: number | null;
+  CanSetDefault?: number | null;
   /** 实例分组ID */
-  InstanceGroupId: number | null;
+  InstanceGroupId?: number | null;
   /** 实例分组总实例数 */
-  InstanceSum: number | null;
+  InstanceSum?: number | null;
   /** 实例分组名称 */
-  InstanceGroupName: string | null;
+  InstanceGroupName?: string | null;
   /** 触发条件类型 STATIC=静态阈值 DYNAMIC=动态类型 */
-  RuleType: string | null;
+  RuleType?: string | null;
   /** 用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID */
-  OriginId: string | null;
+  OriginId?: string | null;
   /** 标签 */
-  TagInstances: TagInstance[] | null;
+  TagInstances?: TagInstance[] | null;
   /** 策略关联的过滤维度信息 */
-  FilterDimensionsParam: string | null;
+  FilterDimensionsParam?: string | null;
   /** 是否为一键告警策略 */
-  IsOneClick: number | null;
+  IsOneClick?: number | null;
   /** 一键告警策略是否开启 */
-  OneClickStatus: number | null;
+  OneClickStatus?: number | null;
   /** 高级指标数量 */
-  AdvancedMetricNumber: number | null;
+  AdvancedMetricNumber?: number | null;
   /** 策略是否是全部对象策略 */
-  IsBindAll: number | null;
+  IsBindAll?: number | null;
   /** 策略标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
+  /** 是否支持告警标签 */
+  IsSupportAlarmTag?: number | null;
 }
 
 /** 告警策略指标触发条件 */

@@ -58,6 +58,14 @@ declare interface Component {
   LicenseExpression: string;
 }
 
+/** 描述组件的一条版本信息。 */
+declare interface ComponentVersion {
+  /** 该组件的PURL */
+  PURL?: PURL | null;
+  /** 该组件版本的许可证表达式 */
+  LicenseExpression?: string | null;
+}
+
 /** 与输入组件相关的漏洞信息摘要信息。 */
 declare interface ComponentVulnerabilitySummary {
   /** 用于匹配漏洞的PURL */
@@ -216,6 +224,18 @@ declare interface DescribeKBComponentResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKBComponentVersionListRequest {
+  /** 要查询的组件 PURL */
+  PURL: PURL;
+}
+
+declare interface DescribeKBComponentVersionListResponse {
+  /** 该组件的版本列表信息 */
+  VersionList?: ComponentVersion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeKBComponentVulnerabilityRequest {
   /** 组件的PURL，其中Name和Version为必填字段 */
   PURL: PURL;
@@ -270,11 +290,33 @@ declare interface MatchKBPURLListResponse {
   RequestId?: string;
 }
 
+declare interface SearchKBComponentRequest {
+  /** 需要搜索的组件名 */
+  Query: string;
+  /** 需要搜索的组件类型 */
+  Protocol?: string;
+  /** 分页参数，从 0 开始 */
+  PageNumber?: number;
+  /** 分页参数，设置每页返回的结果数量 */
+  PageSize?: number;
+}
+
+declare interface SearchKBComponentResponse {
+  /** 满足搜索条件的组件列表 */
+  ComponentList?: Component[];
+  /** 满足搜索条件的总个数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Bsca 二进制软件成分分析} */
 declare interface Bsca {
   (): Versions;
   /** 查询知识库组件信息 {@link DescribeKBComponentRequest} {@link DescribeKBComponentResponse} */
   DescribeKBComponent(data: DescribeKBComponentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentResponse>;
+  /** 查询组件的版本列表 {@link DescribeKBComponentVersionListRequest} {@link DescribeKBComponentVersionListResponse} */
+  DescribeKBComponentVersionList(data: DescribeKBComponentVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentVersionListResponse>;
   /** 查询知识库组件漏洞 {@link DescribeKBComponentVulnerabilityRequest} {@link DescribeKBComponentVulnerabilityResponse} */
   DescribeKBComponentVulnerability(data: DescribeKBComponentVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentVulnerabilityResponse>;
   /** 查询知识库许可证信息 {@link DescribeKBLicenseRequest} {@link DescribeKBLicenseResponse} */
@@ -283,6 +325,8 @@ declare interface Bsca {
   DescribeKBVulnerability(data?: DescribeKBVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBVulnerabilityResponse>;
   /** 匹配知识库组件列表 {@link MatchKBPURLListRequest} {@link MatchKBPURLListResponse} */
   MatchKBPURLList(data?: MatchKBPURLListRequest, config?: AxiosRequestConfig): AxiosPromise<MatchKBPURLListResponse>;
+  /** 搜索组件 {@link SearchKBComponentRequest} {@link SearchKBComponentResponse} */
+  SearchKBComponent(data: SearchKBComponentRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKBComponentResponse>;
 }
 
 export declare type Versions = ["2021-08-11"];

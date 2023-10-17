@@ -194,7 +194,7 @@ declare interface Component {
   ComponentRequired?: boolean;
   /** 控件关联的参与方ID，对应Recipient结构体中的RecipientId */
   ComponentRecipientId?: string;
-  /** 扩展参数：为JSON格式。不同类型的控件会有部分非通用参数ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数：1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐4 FontColor：字符串类型，格式为RGB颜色数字参数样例： "ComponentExtra": "{\"FontColor\":\"255,0,0\",\"FontSize\":12}"TEXT/MULTI_LINE_TEXT控件可以指定1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐例如：{"FontSize":12}ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{"Format":“yyyy m d”,"FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"ComponentType为SIGN_SEAL类型时，支持以下参数：1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例： "ComponentExtra":"{"PageRange":[{"BeginPage":1,"EndPage":-1}]}" */
+  /** 扩展参数：为JSON格式。不同类型的控件会有部分非通用参数ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数：1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐4 FontColor：字符串类型，格式为RGB颜色数字参数样例：{\"FontColor\":\"255,0,0\",\"FontSize\":12}ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{"Format":“yyyy m d”,"FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"ComponentType为SIGN_SEAL类型时，支持以下参数：1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例： "ComponentExtra":"{"PageRange":[{"BeginPage":1,"EndPage":-1}]}" */
   ComponentExtra?: string;
   /** 是否是表单域类型，默认false-不是 */
   IsFormType?: boolean | null;
@@ -1313,7 +1313,7 @@ declare interface CreateFlowByFilesRequest {
   FlowType?: string;
   /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体 单行文本控件 多行文本控件 勾选框控件 数字控件 图片控件 动态表格等填写控件 */
   Components?: Component[];
-  /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。注:`此功能为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。 */
   CcInfos?: CcInfo[];
   /** 可以设置以下时间节点来给抄送人发送短信通知来查看合同内容： **0**：合同发起时通知（默认值） **1**：签署完成后通知 */
   CcNotifyType?: number;

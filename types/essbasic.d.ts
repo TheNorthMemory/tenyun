@@ -26,7 +26,7 @@ declare interface ApproverComponentLimitType {
 
 /** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
 declare interface ApproverItem {
-  /** 签署方唯一编号 */
+  /** 签署方唯一编号在动态签署人场景下，可以用此编号确定参与方 */
   SignId?: string | null;
   /** 签署方角色编号 */
   RecipientId?: string | null;
@@ -208,7 +208,7 @@ declare interface Component {
   ComponentPosX?: number;
   /** 参数控件Y位置，单位px */
   ComponentPosY?: number;
-  /** 扩展参数：为JSON格式。不同类型的控件会有部分非通用参数ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数：1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐4 FontColor：字符串类型，格式为RGB颜色数字参数样例： "ComponentExtra": "{\"FontColor\":\"255,0,0\",\"FontSize\":12}"TEXT/MULTI_LINE_TEXT控件可以指定1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐例如：{"FontSize":12}ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{"Format":“yyyy m d”,"FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"ComponentType为SIGN_SEAL类型时，支持以下参数：1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例： "ComponentExtra":"{"PageRange":[{"BeginPage":1,"EndPage":-1}]}" */
+  /** 扩展参数：为JSON格式。不同类型的控件会有部分非通用参数ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数：1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐4 FontColor：字符串类型，格式为RGB颜色数字参数样例：{\"FontColor\":\"255,0,0\",\"FontSize\":12}ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}ComponentType为SIGN_DATE时，支持以下参数：1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"2 FontSize： 数字类型，范围6-72，默认值为123 FontAlign： 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐4 Format： 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "ComponentExtra": "{"Format":“yyyy m d”,"FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"ComponentType为SIGN_SEAL类型时，支持以下参数：1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例： "ComponentExtra":"{"PageRange":[{"BeginPage":1,"EndPage":-1}]}" */
   ComponentExtra?: string;
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DATE - 默认是格式化为xxxx年xx月xx日DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525)$/签署意见控件： 约束：签署意见最大长度为50字符签署人手机号控件： 约束：国内手机号 13,14,15,16,17,18,19号段长度11位签署人身份证控件： 约束：合法的身份证号码检查控件名称： 约束：控件名称最大长度为20字符单行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号多行文本控件： 约束：只允许输入中文，英文，数字，中英文标点符号勾选框控件： 约束：选择填字符串true，不选填字符串false选择器控件： 约束：同单行文本控件约束，填写选择值中的字符串数字控件： 约束：请输入有效的数字(可带小数点) 检查正则表达式：/^(-|\+)?\d+(\.\d+)?$/日期控件： 约束：格式：yyyy年mm月dd日附件控件： 约束：JPG或PNG图片，上传数量限制，1到6个，最大6个附件图片控件： 约束：JPG或PNG图片，填写上传的图片资源ID邮箱控件： 约束：请输入有效的邮箱地址, w3c标准 检查正则表达式：/^([A-Za-z0-9_\-.!#$%&])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/ 参考：https://emailregex.com/地址控件： 同单行文本控件约束省市区控件： 同单行文本控件约束性别控件： 同单行文本控件约束，填写选择值中的字符串学历控件： 同单行文本控件约束，填写选择值中的字符串 */
   ComponentValue?: string;
@@ -378,29 +378,29 @@ declare interface FlowApproverDetail {
   ApproverRoleName?: string | null;
 }
 
-/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。 */
+/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识，注：`如果发起的是动态签署方（即ApproverOption.FillType指定为1），可以不指定具体签署人信息`1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业(平台企业)：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。 */
 declare interface FlowApproverInfo {
-  /** 签署人姓名，最大长度50个字符 */
+  /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   Name?: string;
-  /** 签署人的证件类型1.ID_CARD 居民身份证2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证3.HONGKONG_AND_MACAO 港澳居民来往内地通行证4.OTHER_CARD_TYPE 其他（需要使用该类型请先联系运营经理） */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE : 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
   IdCardType?: string;
-  /** 签署人证件号（长度不超过18位） */
+  /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;
-  /** 签署人手机号，脱敏显示。大陆手机号为11位，暂不支持海外手机号。 */
+  /** 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)， 不支持海外手机号。请确认手机号所有方为此合同签署方。 */
   Mobile?: string;
-  /** 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符； */
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。 */
   OrganizationName?: string;
-  /** 指定签署人非第三方平台子客企业下员工，在ApproverType为ORGANIZATION时指定。默认为false，即签署人位于同一个第三方平台应用号下；默认为false，即签署人位于同一个第三方应用号下； */
+  /** 指定签署人非第三方平台子客企业下员工还是SaaS平台企业，在ApproverType为ORGANIZATION时指定。false: 默认值，第三方平台子客企业下员工true: SaaS平台企业下的员工 */
   NotChannelOrganization?: boolean;
-  /** 用户侧第三方id，最大长度64个字符当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程 */
+  /** 第三方平台子客企业员工的唯一标识，长度不能超过64，只能由字母和数字组成当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程 */
   OpenId?: string;
-  /** 企业签署方在同一第三方平台应用下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符； */
+  /** 同应用下第三方平台子客企业的唯一标识，定义Agent中的ProxyOrganizationOpenId一样，签署方为非发起方企业场景下必传，最大长度64个字符 */
   OrganizationOpenId?: string;
-  /** 签署人类型PERSON-个人/自然人；PERSON_AUTO_SIGN-个人自动签署，适用于个人自动签场景注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；ENTERPRISESERVER-企业自动签（他方企业自动签署或文件发起时的本方企业自动签）若要实现他方企业（同一应用下）自动签，需要满足3个条件：条件1：ApproverType 设置为ENTERPRISESERVER条件2：子客之间完成授权条件3：联系对接的客户经理沟通 */
+  /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: **PERSON** :个人/自然人 **PERSON_AUTO_SIGN** :个人/自然人自动签署，适用于个人自动签场景 **ORGANIZATION** :企业/企业员工（企业签署方或模板发起时的企业静默签） **ENTERPRISESERVER** :企业/企业员自动签（他方企业自动签署或文件发起时的本方企业自动签）注: `1. 个人自动签场景(PERSON_AUTO_SIGN)为白名单功能, 使用前请联系对接的客户经理沟通。``2. 若要实现他方企业（同一应用下）自动签，需要满足3个条件：`条件1：ApproverType 设置为ENTERPRISESERVER条件2：子客之间完成授权条件3：联系对接的客户经理沟通如何使用 */
   ApproverType?: string;
   /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
   RecipientId?: string;
-  /** 签署截止时间戳，默认一年 */
+  /** 本签署人在此合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。 */
   Deadline?: number;
   /** 签署完回调url，最大长度1000个字符 */
   CallbackUrl?: string;
@@ -408,11 +408,11 @@ declare interface FlowApproverInfo {
   SignComponents?: Component[];
   /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
   ComponentLimitType?: string[];
-  /** 合同的强制预览时间：3~300s，未指定则按合同页数计算 */
+  /** 签署方在签署合同之前，需要强制阅读合同的时长，可指定为3秒至300秒之间的任意值。若未指定阅读时间，则会按照合同页数大小计算阅读时间，计算规则如下：合同页数少于等于2页，阅读时间为3秒；合同页数为3到5页，阅读时间为5秒；合同页数大于等于6页，阅读时间为10秒。 */
   PreReadTime?: number;
   /** 签署完前端跳转的url，此字段的用法场景请联系客户经理确认 */
   JumpUrl?: string;
-  /** 签署人个性化能力值 */
+  /** 可以控制签署方在签署合同时能否进行某些操作，例如拒签、转交他人等。详细操作可以参考开发者中心的ApproverOption结构体。 */
   ApproverOption?: ApproverOption;
   /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要 */
   ApproverNeedSignReview?: boolean;
@@ -422,11 +422,11 @@ declare interface FlowApproverInfo {
   ApproverSignTypes?: number[];
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
   SignId?: string;
-  /** SMS: 短信(需确保“电子签短信通知签署方”功能是开启状态才能生效); NONE: 不发信息默认为SMS(签署方为子客时该字段不生效) */
+  /** 通知签署方经办人的方式, 有以下途径: **SMS** :(默认)短信 **NONE** : 不通知注: `签署方为第三方子客企业时会被置为NONE, 不会发短信通知` */
   NotifyType?: string;
   /** [通过文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID）或签名方式。注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。` */
   AddSignComponentsLimits?: ComponentLimit[];
-  /** 自定义签署方角色名称 */
+  /** 自定义签署人角色名，如收款人、开具人、见证人等 */
   ApproverRoleName?: string;
 }
 
@@ -1181,41 +1181,41 @@ declare interface ChannelCreateFlowApproversResponse {
 }
 
 declare interface ChannelCreateFlowByFilesRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 均必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
   Agent?: Agent;
-  /** 签署流程名称，长度不超过200个字符 */
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName?: string;
-  /** 签署流程的描述，长度不超过1000个字符 */
+  /** 合同流程描述信息(可自定义此描述)，最大长度1000个字符。 */
   FlowDescription?: string;
-  /** 签署流程签约方列表，最多不超过50个参与方 */
+  /** 合同流程的参与方列表, 最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的FlowApproverInfo结构体。如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序, 请确保列表中参与人的顺序符合实际签署顺序。 */
   FlowApprovers?: FlowApproverInfo[];
-  /** 签署文件资源Id列表，目前仅支持单个文件 */
+  /** 本合同流程需包含的PDF文件资源编号列表，通过UploadFiles接口获取PDF文件资源编号。注: `目前，此接口仅支持单个文件发起。` */
   FileIds?: string[];
-  /** 签署文件中的发起方的填写控件，需要在发起的时候进行填充 */
+  /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体单行文本控件多行文本控件勾选框控件数字控件图片控件数据表格等填写控件 */
   Components?: Component[];
-  /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后不能早于当前时间 */
+  /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。 */
   Deadline?: number;
-  /** 签署流程回调地址，长度不超过255个字符如果不传递回调地址， 则默认是配置应用号时候使用的回调地址 */
+  /** 执行结果的回调URL，长度不超过255个字符，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性。腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。回调的相关说明可参考开发者中心的回调通知模块。注:`如果不传递回调地址， 则默认是配置应用号时候使用的回调地址` */
   CallbackUrl?: string;
-  /** 合同签署顺序类型true - 无序签,false - 顺序签，默认为false，即有序签署。有序签署时以传入FlowApprovers数组的顺序作为签署顺序 */
+  /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制注`有序签署时以传入FlowApprovers数组的顺序作为签署顺序` */
   Unordered?: boolean;
-  /** 签署流程的类型，长度不超过255个字符 */
+  /** 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为255个字符，仅限中文、字母、数字和下划线组成。 */
   FlowType?: string;
-  /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
+  /** 您可以自定义腾讯电子签小程序合同列表页展示的合同内容模板，模板中支持以下变量：{合同名称} {发起方企业} {发起方姓名} {签署方N企业}{签署方N姓名}其中，N表示签署方的编号，从1开始，不能超过签署人的数量。例如，如果是腾讯公司张三发给李四名称为“租房合同”的合同，您可以将此字段设置为：`合同名称:{合同名称};发起方: {发起方企业}({发起方姓名});签署方:{签署方1姓名}`，则小程序中列表页展示此合同为以下样子合同名称：租房合同 发起方：腾讯公司(张三) 签署方：李四 */
   CustomShowMap?: string;
-  /** 业务信息，最大长度1000个字符。 */
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1000长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   CustomerData?: string;
-  /** 发起方企业的签署人进行签署操作是否需要企业内部审批。 若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。 */
+  /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下： **false**：（默认）不需要审批，直接签署。 **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过ChannelCreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
   NeedSignReview?: boolean;
   /** 签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
   ApproverVerifyType?: string;
-  /** 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件 */
+  /** 签署方签署控件（印章/签名等）的生成方式： **0**：在合同流程发起时，由发起人指定签署方的签署控件的位置和数量。 **1**：签署方在签署时自行添加签署控件，可以拖动位置和控制数量。注:`发起后添加控件功能不支持添加签批控件` */
   SignBeanTag?: number;
-  /** 被抄送人信息列表 */
+  /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。 */
   CcInfos?: CcInfo[];
-  /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
+  /** 可以设置以下时间节点来给抄送人发送短信通知来查看合同内容： **0**：合同发起时通知（默认值） **1**：签署完成后通知 */
   CcNotifyType?: number;
-  /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  /** 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传： **E_PRESCRIPTION_AUTO_SIGN**：处方单（医疗自动签） 注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。` */
   AutoSignScene?: string;
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
@@ -3905,7 +3905,7 @@ declare interface Essbasic {
   ChannelCreateEmbedWebUrl(data: ChannelCreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateEmbedWebUrlResponse>;
   /** 补充签署流程签署人信息 {@link ChannelCreateFlowApproversRequest} {@link ChannelCreateFlowApproversResponse} */
   ChannelCreateFlowApprovers(data: ChannelCreateFlowApproversRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowApproversResponse>;
-  /** 通过文件创建签署流程 {@link ChannelCreateFlowByFilesRequest} {@link ChannelCreateFlowByFilesResponse} */
+  /** 用PDF文件创建签署流程 {@link ChannelCreateFlowByFilesRequest} {@link ChannelCreateFlowByFilesResponse} */
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
   /** 通过多文件创建合同组签署流程 {@link ChannelCreateFlowGroupByFilesRequest} {@link ChannelCreateFlowGroupByFilesResponse} */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;

@@ -270,6 +270,18 @@ declare interface Filter {
   Value?: string;
 }
 
+/** iOS加固信息	InfoPListUrl string `json:"InfoPListUrl"` //info.plist的url，必须保证不用权限校验就可以下载	InfoPListSize int64 `json:"InfoPListSize"` //info.plist文件的大小	InfoPListMd5 string `json:"InfoPListMd5"` //info.plist文件的md5	BuildType string `json:"BuildType"` //release: 需要INFO-PLIST文件，会生成工具部署安装包，并带有license文件，绑定机器；nobind不需要INFO-PLIST文件，不绑定机器 */
+declare interface IOSInfo {
+  /** info.plist的url，必须保证不用权限校验就可以下载 */
+  InfoPListUrl?: string;
+  /** info.plist文件的大小 */
+  InfoPListSize?: number;
+  /** info.plist文件的md5 */
+  InfoPListMd5?: string;
+  /** release: 需要INFO-PLIST文件，会生成工具部署安装包，并带有license文件，绑定机器；nobind不需要INFO-PLIST文件，不绑定机器 */
+  BuildType?: string;
+}
+
 /** 渠道合作IOS源码混淆配置 */
 declare interface IOSPlan {
   /** 策略id */
@@ -279,7 +291,29 @@ declare interface IOSPlan {
 /** 渠道合作ios源码混淆加固结果 */
 declare interface IOSResult {
   /** 加固任务结果Id */
-  ResultId?: string;
+  ResultId?: string | null;
+  /** 用户uid */
+  OpUin?: number | null;
+  /** 加固类型，这里为ios */
+  EncryptType?: string | null;
+  /** 资源id */
+  ResourceId?: string | null;
+  /** 加固状态 */
+  EncryptState?: number | null;
+  /** 业务错误码 */
+  EncryptErrno?: number | null;
+  /** 业务错误信息 */
+  EncryptErrDesc?: string | null;
+  /** 创建时间 */
+  CreatTime?: string | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 消耗时间 */
+  CostTime?: number | null;
+  /** 加固（混淆）包结果url */
+  EncryptPkgUrl?: string | null;
 }
 
 /** APK检测服务：非广告插件结果列表(SDK、风险插件等) */
@@ -593,6 +627,8 @@ declare interface CreateEncryptInstanceRequest {
   AndroidPlan?: AndroidPlan;
   /** 小程序加固信息 */
   AppletInfo?: AppletInfo;
+  /** iOS混淆信息 */
+  IOSInfo?: IOSInfo;
 }
 
 declare interface CreateEncryptInstanceResponse {

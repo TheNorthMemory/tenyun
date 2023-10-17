@@ -4492,7 +4492,7 @@ declare interface VerifyDSPADiscoveryRuleResponse {
   RequestId?: string;
 }
 
-/** {@link Dsgc 数据安全中心} */
+/** {@link Dsgc 数据安全治理中心} */
 declare interface Dsgc {
   (): Versions;
   /** 授权用户云资源 {@link AuthorizeDSPAMetaResourcesRequest} {@link AuthorizeDSPAMetaResourcesResponse} */

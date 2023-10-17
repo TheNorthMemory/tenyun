@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，10546+ 服务数</summary>
+<details><summary>共计 240+ 款产品，10553+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -131,7 +131,7 @@ bmlb | [黑石负载均衡](https://cloud.tencent.com/document/product/1027) | 2
 bmvpc | [黑石私有网络](https://cloud.tencent.com/document/product/1024) | 2018-06-25(61) |
 bpaas | [商业流程服务](https://cloud.tencent.com/document/product/1083) | 2018-12-17(2) |
 bri | [业务风险情报](https://cloud.tencent.com/document/product/1064) | 2019-03-28(1) |
-bsca | [二进制软件成分分析](https://cloud.tencent.com/document/product/1483) | 2021-08-11(5) |
+bsca | [二进制软件成分分析](https://cloud.tencent.com/document/product/1483) | 2021-08-11(7) |
 btoe | [区块链可信取证](https://cloud.tencent.com/document/product/1259) | 2021-05-14(13) | 2021-03-03(12) |
 cam | [访问管理](https://cloud.tencent.com/document/product/598) | 2019-01-16(87) |
 captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07-22(17) |
@@ -183,7 +183,7 @@ dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(27) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
-dsgc | [数据安全中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(148) |
+dsgc | [数据安全治理中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(148) |
 dtf | [分布式事务](https://cloud.tencent.com/document/product/1224) | 2020-05-06(1) |
 dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 2021-12-06(48) | 2018-03-30(23) |
 eb | [事件总线](https://cloud.tencent.com/document/product/1359) | 2021-04-16(32) |
@@ -248,7 +248,7 @@ msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 201
 mvj | 营销价值判断 | 2019-09-26(1) |
 nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
 npp | 号码保护 | 2019-08-23(8) |
-oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(27) |
+oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(29) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(81) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(12) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
@@ -330,7 +330,7 @@ vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(162) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(315) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(123) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(126) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(304) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(5) |

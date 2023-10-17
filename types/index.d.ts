@@ -674,7 +674,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   drm: Drm,
   /** {@link Ds 文档服务} */
   ds: Ds,
-  /** {@link Dsgc 数据安全中心} */
+  /** {@link Dsgc 数据安全治理中心} */
   dsgc: Dsgc,
   /** {@link Dtf 分布式事务} */
   dtf: Dtf,
