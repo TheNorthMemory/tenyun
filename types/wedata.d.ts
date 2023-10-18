@@ -9784,6 +9784,20 @@ declare interface GenHiveTableDDLSqlResponse {
   RequestId?: string;
 }
 
+declare interface GetFileInfoRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 文件路径 */
+  FilePath: string;
+}
+
+declare interface GetFileInfoResponse {
+  /** 当前脚本信息 */
+  UserFileInfo?: UserFileInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetIntegrationNodeColumnSchemaRequest {
   /** 字段示例（json格式） */
   ColumnContent?: string;
@@ -11880,6 +11894,8 @@ declare interface Wedata {
   FreezeTasksByWorkflowIds(data: FreezeTasksByWorkflowIdsRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksByWorkflowIdsResponse>;
   /** 生成建hive表的sql {@link GenHiveTableDDLSqlRequest} {@link GenHiveTableDDLSqlResponse} */
   GenHiveTableDDLSql(data: GenHiveTableDDLSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenHiveTableDDLSqlResponse>;
+  /** 开发空间-获取数据开发脚本信息 {@link GetFileInfoRequest} {@link GetFileInfoResponse} */
+  GetFileInfo(data: GetFileInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileInfoResponse>;
   /** 提取数据集成节点字段Schema {@link GetIntegrationNodeColumnSchemaRequest} {@link GetIntegrationNodeColumnSchemaResponse} */
   GetIntegrationNodeColumnSchema(data?: GetIntegrationNodeColumnSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<GetIntegrationNodeColumnSchemaResponse>;
   /** 获取离线任务实例列表(新) {@link GetOfflineDIInstanceListRequest} {@link GetOfflineDIInstanceListResponse} */

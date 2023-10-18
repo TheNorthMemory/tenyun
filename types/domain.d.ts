@@ -310,6 +310,22 @@ declare interface CheckDomainResponse {
   RequestId?: string;
 }
 
+declare interface CreateCustomDnsHostRequest {
+  /** 域名实例ID */
+  DomainId: string;
+  /** Dns名称 */
+  DnsName: string;
+  /** IP地址列表 */
+  IpSet: string[];
+}
+
+declare interface CreateCustomDnsHostResponse {
+  /** 异步任务ID */
+  LogId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDomainBatchRequest {
   /** 模板ID。详情请查看：[获取模板列表](https://cloud.tencent.com/document/product/242/48940) */
   TemplateId: string;
@@ -713,6 +729,8 @@ declare interface Domain {
   CheckBatchStatus(data: CheckBatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBatchStatusResponse>;
   /** 域名注册查询 {@link CheckDomainRequest} {@link CheckDomainResponse} */
   CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
+  /** 创建自定义DNS Host {@link CreateCustomDnsHostRequest} {@link CreateCustomDnsHostResponse} */
+  CreateCustomDnsHost(data: CreateCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomDnsHostResponse>;
   /** 批量域名注册 {@link CreateDomainBatchRequest} {@link CreateDomainBatchResponse} */
   CreateDomainBatch(data: CreateDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainBatchResponse>;
   /** 创建赎回订单 {@link CreateDomainRedemptionRequest} {@link CreateDomainRedemptionResponse} */

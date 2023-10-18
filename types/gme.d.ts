@@ -621,7 +621,7 @@ declare interface DescribeApplicationListResponse {
 }
 
 declare interface DescribeRealtimeScanConfigRequest {
-  /** 应用ID */
+  /** 应用ID。 */
   BizId: number;
 }
 
@@ -632,9 +632,9 @@ declare interface DescribeRealtimeScanConfigResponse {
   BizId?: number;
   /** 送检类型，0: 全量送审，1: 自定义送审 */
   AuditType?: number;
-  /** 用户号正则表达式 */
+  /** 用户号正则表达式。符合此正则表达式规则的用户号将被送检。示例：^6.*（表示所有以6开头的用户号将被送检） */
   UserIdRegex?: string[];
-  /** 房间号正则表达式 */
+  /** 房间号正则表达式。符合此正则表达式规则的房间号将被送检。示例：^6.*（表示所有以6开头的房间号将被送检） */
   RoomIdRegex?: string[];
   /** 用户号字符串，逗号分隔，示例："0001,0002,0003" */
   UserIdString?: string;

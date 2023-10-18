@@ -2,6 +2,34 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 主备流详细信息。 */
+declare interface BackupStreamDetailData {
+  /** 推流域名。 */
+  DomainName?: string | null;
+  /** 推流路径。 */
+  AppName?: string | null;
+  /** UTC 格式，例如：2018-06-29T19:00:00Z。注意：和北京时间相差8小时。 */
+  PublishTime?: string | null;
+  /** 推流唯一标识。 */
+  UpstreamSequence?: string | null;
+  /** 推流来源。示例：直推流；拉流转推(1234)；注意：拉流转推来源括号中为拉流转推的任务 ID。 */
+  SourceFrom?: string | null;
+  /** 主备标识。当前流为主流：1，当前流为备流: 0。 */
+  MasterFlag?: number | null;
+}
+
+/** 主备流分组信息。 */
+declare interface BackupStreamGroupInfo {
+  /** 流名称。 */
+  StreamName?: string | null;
+  /** 主备流信息。 */
+  BackupList?: BackupStreamDetailData[] | null;
+  /** 是否对该流开启了择优调度。0 - 未开启。1 - 已开启。 */
+  OptimalEnable?: number | null;
+  /** 域名分组的分组名称。 */
+  HostGroupName?: string | null;
+}
+
 /** 带宽信息 */
 declare interface BandwidthInfo {
   /** 返回格式：使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。根据粒度会有不同程度的缩减。 */
@@ -2266,6 +2294,18 @@ declare interface DescribeAreaBillBandwidthAndFluxListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupStreamListRequest {
+  /** 流名称，用于精确查询。 */
+  StreamName?: string;
+}
+
+declare interface DescribeBackupStreamListResponse {
+  /** 主备流分组信息列表。 */
+  StreamInfoList?: BackupStreamGroupInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBillBandwidthAndFluxListRequest {
   /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
@@ -3688,6 +3728,20 @@ declare interface EnableLiveDomainResponse {
   RequestId?: string;
 }
 
+declare interface EnableOptimalSwitchingRequest {
+  /** 针对该流 ID 启用择优调度。 */
+  StreamName: string;
+  /** 启用开关，默认为启用。0 - 禁用。1 - 启用。 */
+  EnableSwitch?: number;
+  /** 要启用自动择优的流所属的域名分组名称。 */
+  HostGroupName?: string;
+}
+
+declare interface EnableOptimalSwitchingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ForbidLiveDomainRequest {
   /** 待停用的直播域名。 */
   DomainName: string;
@@ -4200,6 +4254,22 @@ declare interface StopScreenshotTaskResponse {
   RequestId?: string;
 }
 
+declare interface SwitchBackupStreamRequest {
+  /** 推流域名。 */
+  PushDomainName: string;
+  /** 应用名称。 */
+  AppName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 查询接口获取到该流所有在推的上行 Sequence。指定要切到的目标上行 Sequence。 */
+  UpstreamSequence: string;
+}
+
+declare interface SwitchBackupStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnBindLiveDomainCertRequest {
   /** 播放域名。 */
   DomainName: string;
@@ -4337,6 +4407,8 @@ declare interface Live {
   DescribeAllStreamPlayInfoList(data: DescribeAllStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllStreamPlayInfoListResponse>;
   /** 海外分区直播播放带宽和流量数据查询 {@link DescribeAreaBillBandwidthAndFluxListRequest} {@link DescribeAreaBillBandwidthAndFluxListResponse} */
   DescribeAreaBillBandwidthAndFluxList(data: DescribeAreaBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBillBandwidthAndFluxListResponse>;
+  /** 查询直播中的主备流 {@link DescribeBackupStreamListRequest} {@link DescribeBackupStreamListResponse} */
+  DescribeBackupStreamList(data?: DescribeBackupStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupStreamListResponse>;
   /** 直播播放带宽和流量数据查询 {@link DescribeBillBandwidthAndFluxListRequest} {@link DescribeBillBandwidthAndFluxListResponse} */
   DescribeBillBandwidthAndFluxList(data: DescribeBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillBandwidthAndFluxListResponse>;
   /** 回调事件查询 {@link DescribeCallbackRecordsListRequest} {@link DescribeCallbackRecordsListResponse} */
@@ -4487,6 +4559,8 @@ declare interface Live {
   DropLiveStream(data: DropLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DropLiveStreamResponse>;
   /** 启用域名 {@link EnableLiveDomainRequest} {@link EnableLiveDomainResponse} */
   EnableLiveDomain(data: EnableLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<EnableLiveDomainResponse>;
+  /** 启用择优调度 {@link EnableOptimalSwitchingRequest} {@link EnableOptimalSwitchingResponse} */
+  EnableOptimalSwitching(data: EnableOptimalSwitchingRequest, config?: AxiosRequestConfig): AxiosPromise<EnableOptimalSwitchingResponse>;
   /** 禁用域名 {@link ForbidLiveDomainRequest} {@link ForbidLiveDomainResponse} */
   ForbidLiveDomain(data: ForbidLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveDomainResponse>;
   /** 禁推直播流 {@link ForbidLiveStreamRequest} {@link ForbidLiveStreamResponse} */
@@ -4537,6 +4611,8 @@ declare interface Live {
   StopRecordTask(data: StopRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordTaskResponse>;
   /** 终止截图任务 {@link StopScreenshotTaskRequest} {@link StopScreenshotTaskResponse} */
   StopScreenshotTask(data: StopScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopScreenshotTaskResponse>;
+  /** 直播备用流切换 {@link SwitchBackupStreamRequest} {@link SwitchBackupStreamResponse} */
+  SwitchBackupStream(data: SwitchBackupStreamRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchBackupStreamResponse>;
   /** 解绑域名证书 {@link UnBindLiveDomainCertRequest} {@link UnBindLiveDomainCertResponse} */
   UnBindLiveDomainCert(data: UnBindLiveDomainCertRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindLiveDomainCertResponse>;
   /** 更新水印 {@link UpdateLiveWatermarkRequest} {@link UpdateLiveWatermarkResponse} */

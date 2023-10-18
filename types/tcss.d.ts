@@ -9415,9 +9415,9 @@ declare interface ModifyAssetImageScanStopResponse {
 }
 
 declare interface ModifyAssetRequest {
-  /** 全部同步 */
+  /** 全部同步，俩参数必选一个 All优先 */
   All?: boolean;
-  /** 要同步的主机列表 两个参数必选一个 All优先 */
+  /** 要同步的主机列表uuid ，俩参数必选一个 All优先 */
   Hosts?: string[];
 }
 

@@ -520,7 +520,7 @@ declare interface AssetMachineDetail {
   MachineWanIp?: string;
   /** Cpu数量 */
   CpuSize?: number;
-  /** Cpu使用率百分比 */
+  /** Cpu负载 */
   CpuLoad?: string;
   /** 防护级别：0基础版，1专业版，2旗舰版，3普惠版 */
   ProtectLevel?: number;
@@ -566,6 +566,10 @@ declare interface AssetMachineDetail {
   UpdateTime?: string | null;
   /** 主机二外信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** CpuLoadVul */
+  CpuLoadVul?: string | null;
+  /** 时间 */
+  FirstTime?: string | null;
 }
 
 /** 资产管理网卡信息 */

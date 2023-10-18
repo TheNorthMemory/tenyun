@@ -204,6 +204,18 @@ declare interface AuditRuleFilters {
   RuleFilters?: RuleFilters[] | null;
 }
 
+/** CPU弹性扩容的自动扩容策略 */
+declare interface AutoStrategy {
+  /** 自动扩容阈值，可选值70、80、90，代表CPU利用率达到70%、80%、90%时后台进行自动扩容 */
+  ExpandThreshold: number;
+  /** 自动扩容观测周期，单位s，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。 */
+  ExpandPeriod: number;
+  /** 自动缩容阈值，可选值10、20、30，代表CPU利用率达到10%、20%、30%时后台进行自动缩容 */
+  ShrinkThreshold: number;
+  /** 自动缩容观测周期，单位s，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。 */
+  ShrinkPeriod: number;
+}
+
 /** ECDB第二个从库的配置信息，只有ECDB实例才有这个字段 */
 declare interface BackupConfig {
   /** 第二个从库复制方式，可能的返回值：async-异步，semisync-半同步 */
@@ -4245,6 +4257,14 @@ declare interface StartBatchRollbackResponse {
 }
 
 declare interface StartCpuExpandRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 扩容类型。可选值：auto：代表进行自动扩容manual：代表进行手动扩容 */
+  Type: string;
+  /** 手动扩容时，扩容的CPU核心数。Type 为 manual 时必传。 */
+  ExpandCpu?: number;
+  /** 自动扩容策略。Type 为 auto 时必传。 */
+  AutoStrategy?: AutoStrategy;
 }
 
 declare interface StartCpuExpandResponse {
@@ -4734,7 +4754,7 @@ declare interface Cdb {
   /** 回档数据库表 {@link StartBatchRollbackRequest} {@link StartBatchRollbackResponse} */
   StartBatchRollback(data: StartBatchRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<StartBatchRollbackResponse>;
   /** 开启CPU弹性扩容 {@link StartCpuExpandRequest} {@link StartCpuExpandResponse} */
-  StartCpuExpand(data?: StartCpuExpandRequest, config?: AxiosRequestConfig): AxiosPromise<StartCpuExpandResponse>;
+  StartCpuExpand(data: StartCpuExpandRequest, config?: AxiosRequestConfig): AxiosPromise<StartCpuExpandResponse>;
   /** 开启复制 {@link StartReplicationRequest} {@link StartReplicationResponse} */
   StartReplication(data: StartReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StartReplicationResponse>;
   /** 关闭 CPU 弹性扩容 {@link StopCpuExpandRequest} {@link StopCpuExpandResponse} */

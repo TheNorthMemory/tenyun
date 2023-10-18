@@ -448,6 +448,20 @@ declare interface InternalTenant {
   PublicAccessEnabled: boolean | null;
 }
 
+/** 迁移topic列表数据 */
+declare interface MigrateTopic {
+  /** 命名空间 */
+  Namespace?: string | null;
+  /** topic名称 */
+  TopicName?: string | null;
+  /** 迁移状态S_RW_D_NA 源集群读写S_RW_D_R 源集群读写目标集群读S_RW_D_RW 源集群读写目标集群读写S_R_D_RW 源集群读目标集群读写S_NA_D_RW 目标集群读写 */
+  MigrationStatus?: string | null;
+  /** 是否完成健康检查 */
+  HealthCheckPassed?: boolean | null;
+  /** 上次健康检查返回的错误信息，仅在HealthCheckPassed为false时有效。NotChecked 未执行检查，Unknown 未知错误,TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入,TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入,TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息, */
+  HealthCheckError?: string | null;
+}
+
 /** 分区topic */
 declare interface PartitionsTopic {
   /** 最后一次间隔内发布消息的平均byte大小。 */
@@ -962,6 +976,34 @@ declare interface RocketMQGroup {
   RetryMaxTimes?: number | null;
 }
 
+/** RocketMQ消费组配置信息 */
+declare interface RocketMQGroupConfig {
+  /** 命名空间 */
+  Namespace: string;
+  /** 消费组名称 */
+  GroupName: string;
+  /** 是否开启广播消费 */
+  ConsumeBroadcastEnable: boolean;
+  /** 是否开启消费 */
+  ConsumeEnable: boolean;
+  /** 备注信息 */
+  Remark?: string;
+  /** 协议类型，支持以下枚举值TCP;HTTP; */
+  ConsumerGroupType?: string;
+}
+
+/** RocketMQ消费组配置信息 */
+declare interface RocketMQGroupConfigOutput {
+  /** 命名空间 */
+  Namespace?: string | null;
+  /** 消费组名称 */
+  GroupName?: string | null;
+  /** 导入状态 */
+  Imported?: boolean | null;
+  /** remark */
+  Remark?: string | null;
+}
+
 /** RocketMQ专享集群实例配置 */
 declare interface RocketMQInstanceConfig {
   /** 单命名空间TPS上线 */
@@ -1002,6 +1044,14 @@ declare interface RocketMQMessageTrack {
   ExceptionDesc: string | null;
 }
 
+/** 迁移主题的阶段分布 */
+declare interface RocketMQMigrationTopicDistribution {
+  /** 迁移主题阶段 */
+  Stage?: string | null;
+  /** 数量 */
+  Count?: number | null;
+}
+
 /** rocketmq消息日志 */
 declare interface RocketMQMsgLog {
   /** 消息id */
@@ -1038,6 +1088,24 @@ declare interface RocketMQNamespace {
   VpcEndpoint: string | null;
   /** 内部接入点地址 */
   InternalEndpoint?: string | null;
+}
+
+/** RocketMQ平滑迁移任务 */
+declare interface RocketMQSmoothMigrationTaskItem {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 源集群名称 */
+  SourceClusterName?: string | null;
+  /** 目标集群ID */
+  ClusterId?: string | null;
+  /** 网络连接类型，PUBLIC 公网VPC 私有网络OTHER 其他 */
+  ConnectionType?: string | null;
+  /** 源集群NameServer地址 */
+  SourceNameServer?: string | null;
+  /** 任务状态Configuration 迁移配置SourceConnecting 连接源集群中MetaDataImport 元数据导入EndpointSetup 切换接入点ServiceMigration 切流中Completed 已完成Cancelled 已取消 */
+  TaskStatus?: string | null;
 }
 
 /** RocketMQ消费组订阅信息 */
@@ -1094,6 +1162,36 @@ declare interface RocketMQTopic {
   SubscriptionCount?: number | null;
   /** 订阅关系列表 */
   SubscriptionData?: RocketMQSubscription[] | null;
+}
+
+/** RocketMQ主题配置信息 */
+declare interface RocketMQTopicConfig {
+  /** 命名空间 */
+  Namespace: string;
+  /** 主题名称 */
+  TopicName: string;
+  /** 主题类型：Normal，普通PartitionedOrder, 分区顺序Transaction，事务消息DelayScheduled，延迟/定时消息 */
+  Type: string;
+  /** 分区个数 */
+  Partitions: number;
+  /** 备注信息 */
+  Remark?: string;
+}
+
+/** RocketMQ主题配置信息 */
+declare interface RocketMQTopicConfigOutput {
+  /** 命名空间 */
+  Namespace?: string | null;
+  /** 主题名称 */
+  TopicName?: string | null;
+  /** 主题类型：Normal，普通GlobalOrder， 全局顺序PartitionedOrder, 分区顺序Transaction，事务消息DelayScheduled，延迟/定时消息 */
+  Type?: string | null;
+  /** 分区个数 */
+  Partitions?: number | null;
+  /** 备注信息 */
+  Remark?: string | null;
+  /** 是否导入 */
+  Imported?: boolean | null;
 }
 
 /** RocketMQtopic分布情况 */
@@ -2656,6 +2754,26 @@ declare interface DescribeRocketMQGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQMigratingTopicListRequest {
+  /** 迁移任务名称 */
+  TaskId: string;
+  /** 分页大小 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 查询过滤器，支持topicname、MigrationStatus查询 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRocketMQMigratingTopicListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 迁移topic列表 */
+  MigrateTopics?: MigrateTopic[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQMsgRequest {
   /** 集群id */
   ClusterId: string;
@@ -2752,6 +2870,104 @@ declare interface DescribeRocketMQPublicAccessPointResponse {
   Bandwidth: number | null;
   /** 付费模式 */
   PayMode: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRocketMQSmoothMigrationTaskListRequest {
+  /** 查询起始偏移量 */
+  Offset: number;
+  /** 查询最大数量 */
+  Limit: number;
+  /** 查询过滤器，支持的字段如下TaskStatus, 支持多选ConnectionType，支持多选ClusterId，精确搜索TaskName，支持模糊搜索 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRocketMQSmoothMigrationTaskListResponse {
+  /** 任务总数 */
+  TotalCount?: number;
+  /** 任务列表 */
+  Data?: RocketMQSmoothMigrationTaskItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRocketMQSmoothMigrationTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeRocketMQSmoothMigrationTaskResponse {
+  /** 任务名称 */
+  TaskName?: string;
+  /** 目标集群ID */
+  ClusterId?: string;
+  /** 源集群名称 */
+  SourceClusterName?: string;
+  /** 网络连接类型，PUBLIC 公网VPC 私有网络OTHER 其它 */
+  ConnectionType?: string;
+  /** 源集群NameServer地址 */
+  SourceClusterNameServer?: string | null;
+  /** 源集群所在私有网络ID */
+  VpcId?: string | null;
+  /** 源集群所在子网ID */
+  SubnetId?: string | null;
+  /** 是否开启ACL */
+  EnableACL?: boolean;
+  /** 源集群AccessKey */
+  AccessKey?: string | null;
+  /** 元集群SecretKey */
+  SecretKey?: string | null;
+  /** 配置源集群时发生的错误TIMEOUT 连接超时，SERVER_ERROR 服务错误，INTERNAL_ERROR 内部错误，CONNECT_NAMESERVER_ERROR 连接nameserver错误CONNECT_BROKER_ERROR 连接broker错误ACL_WRONG ACL信息不正确 */
+  TaskError?: string | null;
+  /** 任务状态Configuration 迁移配置SourceConnecting 连接源集群中SourceConnectionFailure 连接源集群失败MetaDataImport 元数据导入EndpointSetup 切换接入点ServiceMigration 切流中Completed 已完成Cancelled 已取消 */
+  TaskStatus?: string;
+  /** 任务ID */
+  TaskId?: string;
+  /** 主题类型分布情况 */
+  TopicTypeDistribution?: RocketMQTopicDistribution[] | null;
+  /** 主题迁移进度分布情况 */
+  TopicStageDistribution?: RocketMQMigrationTopicDistribution[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRocketMQSourceClusterGroupListRequest {
+  /** 页大小 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 迁移任务名称 */
+  TaskId: string;
+  /** 查询过滤器，支持字段groupName，imported */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRocketMQSourceClusterGroupListResponse {
+  /** group列表 */
+  Groups?: RocketMQGroupConfigOutput[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRocketMQSourceClusterTopicListRequest {
+  /** 分页大小 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 迁移任务名 */
+  TaskId: string;
+  /** 查询过滤器，支持字段如下TopicName,Type，Imported */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRocketMQSourceClusterTopicListResponse {
+  /** topic层列表 */
+  Topics?: RocketMQTopicConfigOutput[];
+  /** 总条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2926,6 +3142,30 @@ declare interface DescribeTopicsResponse {
   TopicSets?: Topic[];
   /** 主题数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportRocketMQConsumerGroupsRequest {
+  /** 导入topic */
+  Groups: RocketMQGroupConfig[];
+  /** 任务id */
+  TaskId: string;
+}
+
+declare interface ImportRocketMQConsumerGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportRocketMQTopicsRequest {
+  /** 导入topic */
+  Topics: RocketMQTopicConfig[];
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface ImportRocketMQTopicsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3681,6 +3921,8 @@ declare interface Tdmq {
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
   /** 获取RocketMQ消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
+  /** 平滑迁移：查询Topic迁移状态列表 {@link DescribeRocketMQMigratingTopicListRequest} {@link DescribeRocketMQMigratingTopicListResponse} */
+  DescribeRocketMQMigratingTopicList(data: DescribeRocketMQMigratingTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMigratingTopicListResponse>;
   /** rocketmq消息详情 {@link DescribeRocketMQMsgRequest} {@link DescribeRocketMQMsgResponse} */
   DescribeRocketMQMsg(data: DescribeRocketMQMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgResponse>;
   /** 查询RocketMQ消息轨迹 {@link DescribeRocketMQMsgTraceRequest} {@link DescribeRocketMQMsgTraceResponse} */
@@ -3689,6 +3931,14 @@ declare interface Tdmq {
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
   /** 查询RocketMQ实例公网接入点信息 {@link DescribeRocketMQPublicAccessPointRequest} {@link DescribeRocketMQPublicAccessPointResponse} */
   DescribeRocketMQPublicAccessPoint(data: DescribeRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessPointResponse>;
+  /** 获取RocketMQ平滑迁移任务详情 {@link DescribeRocketMQSmoothMigrationTaskRequest} {@link DescribeRocketMQSmoothMigrationTaskResponse} */
+  DescribeRocketMQSmoothMigrationTask(data: DescribeRocketMQSmoothMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskResponse>;
+  /** 获取RocketMQ平滑迁移任务列表 {@link DescribeRocketMQSmoothMigrationTaskListRequest} {@link DescribeRocketMQSmoothMigrationTaskListResponse} */
+  DescribeRocketMQSmoothMigrationTaskList(data: DescribeRocketMQSmoothMigrationTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskListResponse>;
+  /** 平滑迁移：获取源集群的group列表 {@link DescribeRocketMQSourceClusterGroupListRequest} {@link DescribeRocketMQSourceClusterGroupListResponse} */
+  DescribeRocketMQSourceClusterGroupList(data: DescribeRocketMQSourceClusterGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterGroupListResponse>;
+  /** 平滑迁移：获取源集群的topic列表 {@link DescribeRocketMQSourceClusterTopicListRequest} {@link DescribeRocketMQSourceClusterTopicListResponse} */
+  DescribeRocketMQSourceClusterTopicList(data: DescribeRocketMQSourceClusterTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterTopicListResponse>;
   /** rocketmq 消息查询 {@link DescribeRocketMQTopicMsgsRequest} {@link DescribeRocketMQTopicMsgsResponse} */
   DescribeRocketMQTopicMsgs(data: DescribeRocketMQTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicMsgsResponse>;
   /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */
@@ -3703,6 +3953,10 @@ declare interface Tdmq {
   DescribeSubscriptions(data: DescribeSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionsResponse>;
   /** 查询主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
+  /** 平滑迁移：导入消费者组列表 {@link ImportRocketMQConsumerGroupsRequest} {@link ImportRocketMQConsumerGroupsResponse} */
+  ImportRocketMQConsumerGroups(data: ImportRocketMQConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQConsumerGroupsResponse>;
+  /** 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */
+  ImportRocketMQTopics(data: ImportRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQTopicsResponse>;
   /** 更新Amqp集群信息 {@link ModifyAMQPClusterRequest} {@link ModifyAMQPClusterResponse} */
   ModifyAMQPCluster(data: ModifyAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPClusterResponse>;
   /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */

@@ -400,22 +400,24 @@ declare interface DataEngineInfo {
   UserUin?: string | null;
   /** SessionResourceTemplate */
   SessionResourceTemplate?: SessionResourceTemplate | null;
+  /** 自动授权开关 */
+  AutoAuthorization?: boolean | null;
 }
 
 /** 数据表数据格式。 */
 declare interface DataFormat {
   /** 文本格式，TextFile。 */
-  TextFile: TextFile | null;
+  TextFile?: TextFile | null;
   /** 文本格式，CSV。 */
-  CSV: CSV | null;
+  CSV?: CSV | null;
   /** 文本格式，Json。 */
-  Json: Other | null;
+  Json?: Other | null;
   /** Parquet格式 */
-  Parquet: Other | null;
+  Parquet?: Other | null;
   /** ORC格式 */
-  ORC: Other | null;
+  ORC?: Other | null;
   /** AVRO格式 */
-  AVRO: Other | null;
+  AVRO?: Other | null;
 }
 
 /** 数据治理规则 */
@@ -459,7 +461,7 @@ declare interface DatabaseInfo {
 /** 数据库对象 */
 declare interface DatabaseResponseInfo {
   /** 数据库名称。 */
-  DatabaseName: string;
+  DatabaseName?: string;
   /** 数据库描述信息，长度 0~256。 */
   Comment?: string | null;
   /** 允许针对数据库的属性元数据信息进行指定。 */
@@ -469,15 +471,15 @@ declare interface DatabaseResponseInfo {
   /** 数据库更新时间戳，单位：s。 */
   ModifiedTime?: string | null;
   /** cos存储路径 */
-  Location: string | null;
+  Location?: string | null;
   /** 建库用户昵称 */
-  UserAlias: string | null;
+  UserAlias?: string | null;
   /** 建库用户ID */
-  UserSubUin: string | null;
+  UserSubUin?: string | null;
   /** 数据治理配置项 */
-  GovernPolicy: DataGovernPolicy | null;
+  GovernPolicy?: DataGovernPolicy | null;
   /** 数据库ID（无效字段） */
-  DatabaseId: string | null;
+  DatabaseId?: string | null;
 }
 
 /** 数据源属性 */
@@ -859,7 +861,7 @@ declare interface NotebookSessions {
 /** 数据格式其它类型。 */
 declare interface Other {
   /** 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。 */
-  Format: string;
+  Format?: string;
 }
 
 /** 其他数据源 */
@@ -871,17 +873,17 @@ declare interface OtherDatasourceConnection {
 /** 数据表分块信息。 */
 declare interface Partition {
   /** 分区列名。 */
-  Name: string;
+  Name?: string;
   /** 分区类型。 */
-  Type: string;
+  Type?: string;
   /** 对分区的描述。 */
-  Comment: string;
+  Comment?: string;
   /** 隐式分区转换策略 */
-  Transform: string | null;
+  Transform?: string | null;
   /** 转换策略参数 */
-  TransformArgs: string[] | null;
+  TransformArgs?: string[] | null;
   /** 创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
 }
 
 /** 权限对象 */
@@ -1313,25 +1315,25 @@ declare interface TableInfo {
 /** 查询表信息对象 */
 declare interface TableResponseInfo {
   /** 数据表基本信息。 */
-  TableBaseInfo: TableBaseInfo;
+  TableBaseInfo?: TableBaseInfo;
   /** 数据表列信息。 */
-  Columns: Column[] | null;
+  Columns?: Column[] | null;
   /** 数据表分块信息。 */
-  Partitions: Partition[] | null;
+  Partitions?: Partition[] | null;
   /** 数据存储路径。 */
-  Location: string | null;
+  Location?: string | null;
   /** 数据表属性信息。 */
-  Properties: Property[] | null;
+  Properties?: Property[] | null;
   /** 数据表更新时间, 单位: ms。 */
-  ModifiedTime: string | null;
+  ModifiedTime?: string | null;
   /** 数据表创建时间,单位: ms。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 数据格式。 */
-  InputFormat: string | null;
+  InputFormat?: string | null;
   /** 数据表存储大小（单位：Byte） */
-  StorageSize: number | null;
+  StorageSize?: number | null;
   /** 数据表行数 */
-  RecordCount: number | null;
+  RecordCount?: number | null;
   /** xxxx */
   MapMaterializedViewName?: string | null;
 }
@@ -1507,9 +1509,9 @@ declare interface TasksOverview {
 /** 文本格式 */
 declare interface TextFile {
   /** 文本类型，本参数取值为TextFile。 */
-  Format: string;
+  Format?: string;
   /** 处理文本用的正则表达式。 */
-  Regex: string | null;
+  Regex?: string | null;
 }
 
 /** 用户详细信息 */
@@ -1909,11 +1911,11 @@ declare interface CheckDataEngineImageCanBeRollbackRequest {
 
 declare interface CheckDataEngineImageCanBeRollbackResponse {
   /** 回滚后日志记录id */
-  ToRecordId: string;
+  ToRecordId?: string;
   /** 回滚前日志记录id */
-  FromRecordId: string;
+  FromRecordId?: string;
   /** 是否能够回滚 */
-  IsRollback: boolean;
+  IsRollback?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1925,9 +1927,9 @@ declare interface CheckDataEngineImageCanBeUpgradeRequest {
 
 declare interface CheckDataEngineImageCanBeUpgradeResponse {
   /** 当前大版本下，可升级的集群镜像小版本id */
-  ChildImageVersionId: string;
+  ChildImageVersionId?: string;
   /** 是否能够升级 */
-  IsUpgrade: boolean;
+  IsUpgrade?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2069,6 +2071,8 @@ declare interface CreateDataEngineRequest {
   ElasticLimit?: number;
   /** spark作业集群session资源配置模板 */
   SessionResourceTemplate?: SessionResourceTemplate;
+  /** 自动授权 */
+  AutoAuthorization?: boolean;
 }
 
 declare interface CreateDataEngineResponse {
@@ -2087,7 +2091,7 @@ declare interface CreateDatabaseRequest {
 
 declare interface CreateDatabaseResponse {
   /** 生成的建库执行语句对象。 */
-  Execution: Execution;
+  Execution?: Execution;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2391,7 +2395,7 @@ declare interface CreateTableRequest {
 
 declare interface CreateTableResponse {
   /** 生成的建表执行语句对象。 */
-  Execution: Execution;
+  Execution?: Execution;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2485,7 +2489,7 @@ declare interface CreateWorkGroupRequest {
 
 declare interface CreateWorkGroupResponse {
   /** 工作组Id，全局唯一 */
-  WorkGroupId: number;
+  WorkGroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2757,7 +2761,7 @@ declare interface DescribeDataEngineResponse {
 declare interface DescribeDataEnginesRequest {
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH） */
+  /** 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu/kyuubi_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH），engine-network-id - String（引擎网络Id） */
   Filters?: Filter[];
   /** 排序字段，支持如下字段类型，create-time */
   SortBy?: string;
@@ -2773,7 +2777,7 @@ declare interface DescribeDataEnginesRequest {
   AccessTypes?: string[];
   /** 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL */
   EngineExecType?: string;
-  /** 引擎类型，有效值：spark/presto */
+  /** 引擎类型，有效值：spark/presto/kyuubi，为空时默认获取非kyuubi引擎（网关引擎） */
   EngineType?: string;
   /** 网络配置列表，若传入该参数，则返回网络配置关联的计算引擎 */
   DatasourceConnectionNameSet?: string[];
@@ -3165,7 +3169,7 @@ declare interface DescribeTableRequest {
 
 declare interface DescribeTableResponse {
   /** 数据表对象 */
-  Table: TableResponseInfo;
+  Table?: TableResponseInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3377,9 +3381,9 @@ declare interface DescribeViewsRequest {
 
 declare interface DescribeViewsResponse {
   /** 视图对象列表。 */
-  ViewList: ViewResponseInfo[];
+  ViewList?: ViewResponseInfo[];
   /** 实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

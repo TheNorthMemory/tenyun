@@ -2616,6 +2616,8 @@ declare interface VerifyPdfResponse {
   PdfVerifyResults?: PdfVerifyResult[];
   /** 验签序列号, 为11为数组组成的字符串 */
   VerifySerialNo?: string;
+  /** 合同文件MD5哈希值 */
+  PdfResourceMd5?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
