@@ -5104,6 +5104,8 @@ declare interface BooleanResponse {
   Success?: boolean;
   /** 失败返回提示信息 */
   Message?: string | null;
+  /** 基线Id */
+  BaselineId?: number | null;
 }
 
 declare interface CheckAlarmRegularNameExistRequest {
@@ -5504,7 +5506,7 @@ declare interface CreateHiveTableByDDLResponse {
 declare interface CreateHiveTableRequest {
   /** 数据源id */
   DatasourceId: string;
-  /** 数据库 */
+  /** 数据库名称 */
   Database: string;
   /** base64转码之后的建表语句 */
   DDLSql: string;

@@ -154,8 +154,10 @@ declare interface CloudNativeAPIGatewayConfig {
   VpcId?: string | null;
   /** 负载均衡的描述 */
   Description?: string | null;
-  /** 负载均衡的规格类型，传 "SLA" 表示性能容量型，返回空为共享型 */
+  /** 负载均衡的规格类型 */
   SlaType?: string | null;
+  /** clb规格名称 */
+  SlaName?: string | null;
   /** clb vip */
   Vip?: string | null;
   /** 带宽 */
@@ -338,6 +340,12 @@ declare interface CreateCloudNativeAPIGatewayServerGroupResult {
   Status?: string | null;
   /** 任务ID */
   TaskId?: string | null;
+}
+
+/** 创建云原生网关服务结果 */
+declare interface CreateGatewayServiceResult {
+  /** 网关服务ID */
+  ServiceId?: string | null;
 }
 
 /** 删除云原生API网关响应结果。 */
@@ -576,6 +584,10 @@ declare interface InstancePort {
   HttpPort?: string | null;
   /** 监听的 https 端口范围。 */
   HttpsPort?: string | null;
+  /** 监听的 tcp 端口范围。 */
+  TcpPort?: string | null;
+  /** 监听的 udp 端口范围。 */
+  UdpPort?: string | null;
 }
 
 /** 引擎实例的标签信息 */
@@ -596,7 +608,7 @@ declare interface InternetConfig {
   InternetMaxBandwidthOut?: number;
   /** 负载均衡描述 */
   Description?: string;
-  /** 负载均衡的规格类型，传 "SLA" 表示性能容量型，不传为共享型。 */
+  /** 负载均衡的规格类型，支持clb.c2.medium、clb.c3.small、clb.c3.medium、clb.c4.small、clb.c4.medium、clb.c4.large、clb.c4.xlarge，不传为共享型。 */
   SlaType?: string;
   /** 负载均衡是否多可用区 */
   MultiZoneFlag?: boolean;
@@ -1238,6 +1250,8 @@ declare interface CreateCloudNativeAPIGatewayServiceRequest {
 }
 
 declare interface CreateCloudNativeAPIGatewayServiceResponse {
+  /** 网关服务创建结果 */
+  Result?: CreateGatewayServiceResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1991,6 +2005,22 @@ declare interface UpdateEngineInternetAccessResponse {
   RequestId?: string;
 }
 
+declare interface UpdateUpstreamTargetsRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 服务名称或ID */
+  Name: string;
+  /** 实例列表 */
+  Targets?: KongTarget[];
+}
+
+declare interface UpdateUpstreamTargetsResponse {
+  /** 是否更新成功 */
+  Result?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Tse 微服务引擎 TSE} */
 declare interface Tse {
   (): Versions;
@@ -2092,6 +2122,8 @@ declare interface Tse {
   UpdateCloudNativeAPIGatewaySpec(data: UpdateCloudNativeAPIGatewaySpecRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewaySpecResponse>;
   /** 修改引擎公网访问配置 {@link UpdateEngineInternetAccessRequest} {@link UpdateEngineInternetAccessResponse} */
   UpdateEngineInternetAccess(data: UpdateEngineInternetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineInternetAccessResponse>;
+  /** 更新网关上游实例列表 {@link UpdateUpstreamTargetsRequest} {@link UpdateUpstreamTargetsResponse} */
+  UpdateUpstreamTargets(data: UpdateUpstreamTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUpstreamTargetsResponse>;
 }
 
 export declare type Versions = ["2020-12-07"];

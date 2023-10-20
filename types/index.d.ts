@@ -761,7 +761,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   keewidb: Keewidb,
   /** {@link Kms 密钥管理系统} */
   kms: Kms,
-  /** {@link Lcic 低代码互动课堂} */
+  /** {@link Lcic 实时互动-教育版} */
   lcic: Lcic,
   /** {@link Lighthouse 轻量应用服务器} */
   lighthouse: Lighthouse,

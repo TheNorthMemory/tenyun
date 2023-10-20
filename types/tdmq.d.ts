@@ -942,6 +942,20 @@ declare interface RocketMQClusterRecentStats {
   AccumulativeMsgNum: number;
 }
 
+/** 在线消费者情况 */
+declare interface RocketMQConsumerConnection {
+  /** 消费者实例ID */
+  ClientId?: string;
+  /** 消费者实例的地址和端口 */
+  ClientAddr?: string;
+  /** 消费者应用的语言版本 */
+  Language?: string;
+  /** 消息堆积量 */
+  Accumulative?: number;
+  /** 消费端版本 */
+  Version?: string;
+}
+
 /** RocketMQ消费组信息 */
 declare interface RocketMQGroup {
   /** 消费组名称 */
@@ -2722,6 +2736,34 @@ declare interface DescribeRocketMQClustersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQConsumerConnectionsRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 命名空间名称 */
+  NamespaceId: string;
+  /** 消费组ID */
+  GroupId: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 限制数目 */
+  Limit: number;
+  /** 对查询结果排序，此为排序字段，目前支持Accumulative（消息堆积量） */
+  SortedBy?: string;
+  /** 查询结果排序规则，ASC为升序，DESC为降序 */
+  SortOrder?: string;
+}
+
+declare interface DescribeRocketMQConsumerConnectionsResponse {
+  /** 总数目 */
+  TotalCount: number;
+  /** 在线消费者信息 */
+  Connections: RocketMQConsumerConnection[];
+  /** 订阅组信息 */
+  GroupDetail: RocketMQGroup | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQGroupsRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3919,6 +3961,8 @@ declare interface Tdmq {
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
   /** 获取RocketMQ集群列表 {@link DescribeRocketMQClustersRequest} {@link DescribeRocketMQClustersResponse} */
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
+  /** 获取指定消费组下当前客户端的连接情况 {@link DescribeRocketMQConsumerConnectionsRequest} {@link DescribeRocketMQConsumerConnectionsResponse} */
+  DescribeRocketMQConsumerConnections(data: DescribeRocketMQConsumerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumerConnectionsResponse>;
   /** 获取RocketMQ消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
   /** 平滑迁移：查询Topic迁移状态列表 {@link DescribeRocketMQMigratingTopicListRequest} {@link DescribeRocketMQMigratingTopicListResponse} */

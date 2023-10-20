@@ -1873,7 +1873,7 @@ declare interface WorkloadStatus {
 }
 
 declare interface ChatCompletionRequest {
-  /** 对话的目标模型ID。多行业多场景大模型在线体验聊天：tj_llm_clm-v1。自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-xxyyzz。 */
+  /** 对话的目标模型ID。自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-xxyyzz。 */
   Model: string;
   /** 输入对话历史。旧的对话在前，数组中最后一项应该为这次的问题。 */
   Messages: Message[];
@@ -3245,7 +3245,7 @@ declare interface SendChatMessageRequest {
   SessionId: string;
   /** 问题描述 */
   Question: string;
-  /** 会话模型版本。多行业多场景大模型：填写 tj_llm_clm-v1。多行业客服大模型：填写demo_big_model_version_id。默认为demo_big_model_version_id，即多行业客服大模型。 */
+  /** 会话模型版本。多行业客服大模型：填写demo_big_model_version_id。默认为demo_big_model_version_id，即多行业客服大模型。 */
   ModelVersion?: string;
   /** 使用模式(仅多场景客服大模型支持)。通用问答：填写General。搜索增强问答：填写WithSearchPlugin。默认为General，即通用问答。 */
   Mode?: string;

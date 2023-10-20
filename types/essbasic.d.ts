@@ -26,9 +26,9 @@ declare interface ApproverComponentLimitType {
 
 /** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
 declare interface ApproverItem {
-  /** 签署方唯一编号在动态签署人场景下，可以用此编号确定参与方 */
+  /** 签署方唯一编号在动态补充签署人场景下，可以用此编号确定参与方 */
   SignId?: string | null;
-  /** 签署方角色编号 */
+  /** 签署方角色编号在动态补充签署人场景下，可以用此编号确定参与方 */
   RecipientId?: string | null;
   /** 签署方角色名称 */
   ApproverRoleName?: string | null;
@@ -40,6 +40,8 @@ declare interface ApproverOption {
   HideOneKeySign?: boolean;
   /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息） */
   FillType?: number;
+  /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
+  FlowReadLimit?: string;
 }
 
 /** 指定签署人限制项 */
@@ -280,17 +282,17 @@ declare interface DownloadFlowInfo {
   FlowIdList: string[];
 }
 
-/** 企业扩展服务授权信息 */
+/** 扩展服务开通和授权的详细信息 */
 declare interface ExtentServiceAuthInfo {
-  /** 扩展服务类型 AUTO_SIGN 企业静默签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制 */
+  /** 扩展服务类型 AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制 */
   Type?: string;
   /** 扩展服务名称 */
   Name?: string;
-  /** 服务状态 ENABLE 开启 DISABLE 关闭 */
+  /** 扩展服务的开通状态： ENABLE：开通 DISABLE：未开通 */
   Status?: string;
-  /** 最近操作人第三方应用平台的用户openid */
+  /** 操作扩展服务的操作人第三方应用平台的用户openid */
   OperatorOpenId?: string | null;
-  /** 最近操作时间戳，单位秒 */
+  /** 扩展服务的操作时间，格式为Unix标准时间戳（秒）。 */
   OperateOn?: number | null;
 }
 
@@ -378,7 +380,7 @@ declare interface FlowApproverDetail {
   ApproverRoleName?: string | null;
 }
 
-/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识，注：`如果发起的是动态签署方（即ApproverOption.FillType指定为1），可以不指定具体签署人信息`1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业(平台企业)：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。 */
+/** 创建签署流程签署人入参。**各种场景传参说明**:场景编号可作为发起方类型可作为签署方的类型签署方传参说明场景一第三方子企业A员工第三方子企业A员工OpenId、OrgName、OrgOpenId必传 ,ApproverType设置为ORGANIZATION场景二第三方子企业A员工第三方子企业B(不指定经办人)OrgName、OrgOpenId必传 ,ApproverType设置为ORGANIZATION场景三第三方子企业A员工第三方子企业B员工OpenId、OrgName、OrgOpenId必传, ApproverType设置为ORGANIZATION场景四第三方子企业A员工个人/自然人Name、Mobile必传, ApproverType设置为PERSON场景五第三方子企业A员工SaaS平台企业员工Name、Mobile、OrgName必传，且NotChannelOrganization=True。 ApproverType设置为ORGANIZATION**注1**: `使用模板发起合同时，RecipientId（模板发起合同时）必传`RecipientId参数获取：从DescribeFlowTemplates接口接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。**注2**: `如果发起的是动态签署方（即ApproverOption.FillType指定为1），可以不指定具体签署人信息`, 动态签署方可以参考此文档 */
 declare interface FlowApproverInfo {
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   Name?: string;
@@ -1169,7 +1171,7 @@ declare interface ChannelCreateFlowApproversRequest {
   Approvers: FillApproverInfo[];
   /** 操作人信息 */
   Operator?: UserInfo;
-  /** 签署人信息补充方式**0**: 补充或签人，支持补充多个企业经办签署人（默认）注: `不可补充个人签署人`**1**: 补充动态签署人，可补充企业和个人签署人。注: `每个签署方节点签署人是唯一的，一个节点只支持传入一个签署人信息` */
+  /** 签署人信息补充方式**1**: 补充动态签署人，可补充企业和个人签署人。注: `每个签署方节点签署人是唯一的，一个节点只支持传入一个签署人信息` */
   FillApproverType?: number;
 }
 
@@ -1197,7 +1199,7 @@ declare interface ChannelCreateFlowByFilesRequest {
   Deadline?: number;
   /** 执行结果的回调URL，长度不超过255个字符，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性。腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。回调的相关说明可参考开发者中心的回调通知模块。注:`如果不传递回调地址， 则默认是配置应用号时候使用的回调地址` */
   CallbackUrl?: string;
-  /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制注`有序签署时以传入FlowApprovers数组的顺序作为签署顺序` */
+  /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制**注**: `有序签署时以传入FlowApprovers数组的顺序作为签署顺序` */
   Unordered?: boolean;
   /** 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为255个字符，仅限中文、字母、数字和下划线组成。 */
   FlowType?: string;
@@ -1209,7 +1211,7 @@ declare interface ChannelCreateFlowByFilesRequest {
   NeedSignReview?: boolean;
   /** 签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
   ApproverVerifyType?: string;
-  /** 签署方签署控件（印章/签名等）的生成方式： **0**：在合同流程发起时，由发起人指定签署方的签署控件的位置和数量。 **1**：签署方在签署时自行添加签署控件，可以拖动位置和控制数量。注:`发起后添加控件功能不支持添加签批控件` */
+  /** 签署方签署控件（印章/签名等）的生成方式： **0**：在合同流程发起时，由发起人指定签署方的签署控件的位置和数量。 **1**：签署方在签署时自行添加签署控件，可以拖动位置和控制数量。**注**: `发起后添加控件功能不支持添加签批控件` */
   SignBeanTag?: number;
   /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。 */
   CcInfos?: CcInfo[];
@@ -1222,7 +1224,7 @@ declare interface ChannelCreateFlowByFilesRequest {
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
-  /** 合同签署流程ID */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 */
   FlowId?: string | null;
   /** 签署方信息，如角色ID、角色名称等 */
   Approvers?: ApproverItem[] | null;
@@ -1893,18 +1895,18 @@ declare interface ChannelVerifyPdfResponse {
 }
 
 declare interface CreateChannelFlowEvidenceReportRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填 */
+  /** 员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
   Agent: Agent;
-  /** 签署流程编号 */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 */
   FlowId: string;
   /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface CreateChannelFlowEvidenceReportResponse {
-  /** 出证报告 ID，可用户DescribeChannelFlowEvidenceReport接口查询出证PDF的下载地址 */
+  /** 出证报告 ID，可用于获取出证报告任务执行结果查询出证任务结果和出证PDF的下载URL */
   ReportId?: string | null;
-  /** 出征任务的执行状态,状态列表如下- EvidenceStatusExecuting : 出征任务正在执行中- EvidenceStatusSuccess : 出征任务执行成功- EvidenceStatusFailed : 出征任务执行失败 */
+  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
   Status?: string;
   /** 废除，字段无效 */
   ReportUrl?: string | null;
@@ -1913,14 +1915,14 @@ declare interface CreateChannelFlowEvidenceReportResponse {
 }
 
 declare interface CreateChannelOrganizationInfoChangeUrlRequest {
-  /** 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
   Agent: Agent;
-  /** 企业信息变更类型，可选类型如下：**1**：企业超管变更**2**：企业基础信息变更 */
+  /** 企业信息变更类型，可选类型如下：**1**：企业超管变更, 可以将超管换成同企业的其他员工**2**：企业基础信息变更, 可以改企业名称 , 所在地址 , 法人名字等信息 */
   ChangeType: number;
 }
 
 declare interface CreateChannelOrganizationInfoChangeUrlResponse {
-  /** 创建的企业信息变更链接。 */
+  /** 创建的企业信息变更链接。需要在移动端打开，会跳转到微信腾讯电子签小程序进行更换。 */
   Url?: string;
   /** 链接过期时间。链接7天有效。 */
   ExpiredTime?: number;
@@ -1965,26 +1967,26 @@ declare interface CreateConsoleLoginUrlResponse {
 }
 
 declare interface CreateFlowsByTemplatesRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 均必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
   Agent: Agent;
   /** 要创建的合同信息列表，最多支持一次创建20个合同 */
   FlowInfos: FlowInfo[];
-  /** 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，不会发起合同，会返回PreviewUrls；预览链接有效期300秒；同时，如果预览的文件中指定了动态表格控件，需要进行异步合成；此时此接口返回的是合成前的文档预览链接，而合成完成后的文档预览链接会通过：回调通知的方式、或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询； */
+  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注:`如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到` */
   NeedPreview?: boolean;
-  /** 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效, */
+  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
   PreviewType?: number;
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
 }
 
 declare interface CreateFlowsByTemplatesResponse {
-  /** 多个合同ID */
+  /** 生成的合同流程ID数组，合同流程ID为32位字符串。建议开发者妥善保存此流程ID数组，以便于顺利进行后续操作。 */
   FlowIds?: string[];
   /** 第三方应用平台的业务信息, 与创建合同的FlowInfos数组中的CustomerData一一对应 */
   CustomerData?: string[];
   /** 创建消息，对应多个合同ID，成功为“”,创建失败则对应失败消息 */
   ErrorMessages?: string[];
-  /** 预览模式下返回的预览文件url数组 */
+  /** 合同预览链接URL数组。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL */
   PreviewUrls?: string[];
   /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
   TaskInfos?: TaskInfo[];
@@ -2085,12 +2087,12 @@ declare interface DescribeChannelFlowEvidenceReportResponse {
 }
 
 declare interface DescribeExtendedServiceAuthInfoRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
   Agent: Agent;
 }
 
 declare interface DescribeExtendedServiceAuthInfoResponse {
-  /** 企业扩展服务授权信息 */
+  /** 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。 */
   AuthInfo?: ExtentServiceAuthInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3971,13 +3973,13 @@ declare interface Essbasic {
   ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
   /** 流程文件验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
-  /** 创建并返回出证报告 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
+  /** 提交申请出证报告任务 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
   /** 创建子客企业信息变更链接 {@link CreateChannelOrganizationInfoChangeUrlRequest} {@link CreateChannelOrganizationInfoChangeUrlResponse} */
   CreateChannelOrganizationInfoChangeUrl(data: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
-  /** 使用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
+  /** 用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
   /** 通过图片为子客企业代创建印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;

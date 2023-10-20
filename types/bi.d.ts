@@ -804,6 +804,26 @@ declare interface DescribeUserRoleListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserRoleProjectListRequest {
+  /** 页码 */
+  PageNo: number;
+  /** 页数 */
+  PageSize: number;
+  /** 项目ID */
+  ProjectId: number;
+}
+
+declare interface DescribeUserRoleProjectListResponse {
+  /** 扩展 */
+  Extra?: string | null;
+  /** 数据 */
+  Data?: UserRoleListData | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDatasourceCloudRequest {
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
@@ -1029,6 +1049,8 @@ declare interface Bi {
   DescribeUserProjectList(data?: DescribeUserProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserProjectListResponse>;
   /** 用户角色列表 {@link DescribeUserRoleListRequest} {@link DescribeUserRoleListResponse} */
   DescribeUserRoleList(data: DescribeUserRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRoleListResponse>;
+  /** 项目内-用户角色列表 {@link DescribeUserRoleProjectListRequest} {@link DescribeUserRoleProjectListResponse} */
+  DescribeUserRoleProjectList(data: DescribeUserRoleProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRoleProjectListResponse>;
   /** 更新数据源 {@link ModifyDatasourceRequest} {@link ModifyDatasourceResponse} */
   ModifyDatasource(data: ModifyDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatasourceResponse>;
   /** 更新云数据库 {@link ModifyDatasourceCloudRequest} {@link ModifyDatasourceCloudResponse} */

@@ -2559,13 +2559,13 @@ declare interface DescribeClustersResponse {
 }
 
 declare interface DescribeDBSecurityGroupsRequest {
-  /** 实例组ID */
+  /** 实例组ID。可以通过接口DescribeClusterInstanceGrps获取。 */
   InstanceId: string;
 }
 
 declare interface DescribeDBSecurityGroupsResponse {
   /** 安全组信息 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

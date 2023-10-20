@@ -1034,6 +1034,48 @@ declare interface CreateResourceResponse {
   RequestId?: string;
 }
 
+declare interface CreateWorkSpaceRequest {
+  /** 工作空间名称 */
+  WorkSpaceName: string;
+  /** 项目空间备注 */
+  Description?: string;
+}
+
+declare interface CreateWorkSpaceResponse {
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFoldersRequest {
+  /** 需删除的文件夹唯一ID */
+  FolderIds: string[];
+  /** 文件夹类型，0是任务文件夹，1是依赖文件夹 */
+  FolderType?: number;
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+}
+
+declare interface DeleteFoldersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteJobConfigsRequest {
+  /** 作业ID */
+  JobId: string;
+  /** 作业配置版本数组 */
+  JobConfigVersions: number[];
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+}
+
+declare interface DeleteJobConfigsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteJobsRequest {
   /** 作业Id列表 */
   JobIds: string[];
@@ -1396,6 +1438,26 @@ declare interface FetchSqlGatewayStatementResultResponse {
   RequestId?: string;
 }
 
+declare interface ModifyFolderRequest {
+  /** 文件夹ID（必填） */
+  SourceFolderId?: string;
+  /** 如需拖拽文件夹，需传入目标文件夹ID */
+  TargetFolderId?: string;
+  /** 如需修改文件夹名，需传入FolderName字段 */
+  FolderName?: string;
+  /** 文件夹类型，0是任务文件夹，1是依赖文件夹 */
+  FolderType?: number;
+  /** 批量移动的作业serial id 列表 */
+  SourceJobIds?: string[];
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+}
+
+declare interface ModifyFolderResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyJobRequest {
   /** 作业Id */
   JobId: string;
@@ -1410,6 +1472,20 @@ declare interface ModifyJobRequest {
 }
 
 declare interface ModifyJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWorkSpaceRequest {
+  /** 工作空间 SerialId */
+  WorkSpaceId: string;
+  /** 待修改的工作空间名称 */
+  WorkSpaceName?: string;
+  /** 待修改的工作空间备注 */
+  Description?: string;
+}
+
+declare interface ModifyWorkSpaceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1497,6 +1573,12 @@ declare interface Oceanus {
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
   /** 创建资源配置接口 {@link CreateResourceConfigRequest} {@link CreateResourceConfigResponse} */
   CreateResourceConfig(data: CreateResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceConfigResponse>;
+  /** 创建工作空间 {@link CreateWorkSpaceRequest} {@link CreateWorkSpaceResponse} */
+  CreateWorkSpace(data: CreateWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkSpaceResponse>;
+  /** 删除文件夹 {@link DeleteFoldersRequest} {@link DeleteFoldersResponse} */
+  DeleteFolders(data: DeleteFoldersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFoldersResponse>;
+  /** 删除作业配置 {@link DeleteJobConfigsRequest} {@link DeleteJobConfigsResponse} */
+  DeleteJobConfigs(data: DeleteJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobConfigsResponse>;
   /** 删除作业 {@link DeleteJobsRequest} {@link DeleteJobsResponse} */
   DeleteJobs(data: DeleteJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobsResponse>;
   /** 删除资源版本 {@link DeleteResourceConfigsRequest} {@link DeleteResourceConfigsResponse} */
@@ -1531,8 +1613,12 @@ declare interface Oceanus {
   DescribeWorkSpaces(data?: DescribeWorkSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpacesResponse>;
   /** 查询Statement执行结果 {@link FetchSqlGatewayStatementResultRequest} {@link FetchSqlGatewayStatementResultResponse} */
   FetchSqlGatewayStatementResult(data: FetchSqlGatewayStatementResultRequest, config?: AxiosRequestConfig): AxiosPromise<FetchSqlGatewayStatementResultResponse>;
+  /** 拖拽文件夹 {@link ModifyFolderRequest} {@link ModifyFolderResponse} */
+  ModifyFolder(data?: ModifyFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFolderResponse>;
   /** 更新作业 {@link ModifyJobRequest} {@link ModifyJobResponse} */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
+  /** 修改工作空间 {@link ModifyWorkSpaceRequest} {@link ModifyWorkSpaceResponse} */
+  ModifyWorkSpace(data: ModifyWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkSpaceResponse>;
   /** 运行作业 {@link RunJobsRequest} {@link RunJobsResponse} */
   RunJobs(data: RunJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobsResponse>;
   /** 执行Statement {@link RunSqlGatewayStatementRequest} {@link RunSqlGatewayStatementResponse} */

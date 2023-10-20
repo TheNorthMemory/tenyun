@@ -26,24 +26,26 @@ declare interface AssociationItem {
 
 /** 监听器绑定的后端服务的详细信息 */
 declare interface Backend {
-  /** 后端服务的类型，可取：CVM、ENI */
-  Type: string;
+  /** 后端服务的类型，可取：CVM、ENI、CCN */
+  Type?: string;
   /** 后端服务的唯一 ID，如 ins-abcd1234 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 后端服务的监听端口 */
-  Port: number;
+  Port?: number;
   /** 后端服务的转发权重，取值范围：[0, 100]，默认为 10。 */
-  Weight: number;
+  Weight?: number;
   /** 后端服务的外网 IP */
-  PublicIpAddresses: string[] | null;
+  PublicIpAddresses?: string[] | null;
   /** 后端服务的内网 IP */
-  PrivateIpAddresses: string[] | null;
+  PrivateIpAddresses?: string[] | null;
   /** 后端服务的实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 后端服务被绑定的时间 */
-  RegisteredTime: string | null;
+  RegisteredTime?: string | null;
   /** 弹性网卡唯一ID，如 eni-1234abcd */
-  EniId: string | null;
+  EniId?: string | null;
+  /** 标签。 */
+  Tag?: string | null;
 }
 
 /** 监听器或者转发规则绑定的目标组基本信息 */
@@ -68,6 +70,8 @@ declare interface BatchTarget {
   Weight?: number;
   /** 七层规则 ID。 */
   LocationId?: string;
+  /** 标签。 */
+  Tag?: string;
 }
 
 /** 绑定关系，包含监听器名字、协议、url、vport。 */
@@ -932,6 +936,18 @@ declare interface RewriteTarget {
   RewriteType: string | null;
 }
 
+/** 修改节点标签的数据类型 */
+declare interface RsTagRule {
+  /** 负载均衡监听器 ID。 */
+  ListenerId: string;
+  /** 要修改标签的后端机器列表。 */
+  Targets: Target[];
+  /** 转发规则的ID，七层规则时需要此参数，4层规则不需要。 */
+  LocationId?: string;
+  /** 后端服务修改后的标签。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694)中的Tag参数，即最终的标签以Target中的Tag参数值为准，仅当Target中的Weight参数为空时，才以RsTagRule中的Tag参数为准。 */
+  Tag?: string;
+}
+
 /** 修改节点权重的数据类型 */
 declare interface RsWeightRule {
   /** 负载均衡监听器 ID。 */
@@ -1114,6 +1130,8 @@ declare interface Target {
   Weight?: number;
   /** 绑定IP时需要传入此参数，支持弹性网卡的IP和其他内网IP，如果是弹性网卡则必须先绑定至CVM，然后才能绑定到负载均衡实例。注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。如果绑定双栈IPV6子机，则必须传该参数。如果是跨地域绑定，则必须传该参数，不支持传InstanceId参数。 */
   EniIp?: string | null;
+  /** 标签。 */
+  Tag?: string | null;
 }
 
 /** 规则与目标组的关联关系 */
@@ -1292,6 +1310,18 @@ declare interface BatchDeregisterTargetsRequest {
 declare interface BatchDeregisterTargetsResponse {
   /** 解绑失败的监听器ID。 */
   FailListenerIdSet: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchModifyTargetTagRequest {
+  /** 负载均衡实例 ID。 */
+  LoadBalancerId: string;
+  /** 要批量修改标签的列表。 */
+  ModifyList: RsTagRule[];
+}
+
+declare interface BatchModifyTargetTagResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1825,15 +1855,15 @@ declare interface DescribeClusterResourcesRequest {
   Limit?: number;
   /** 返回集群中资源列表起始偏移量，默认为0。 */
   Offset?: number;
-  /** 查询集群中资源列表条件，详细的过滤条件如下： cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。 vip - String - 是否必填：否 - （过滤条件）按照vip过滤。 loadblancer-id - String - 是否必填：否 - （过滤条件）按照负载均衡唯一ID过滤。 idle - String 是否必填：否 - （过滤条件）按照是否闲置过滤，如"True","False"。 */
+  /** 查询集群中资源列表条件，详细的过滤条件如下： cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。 vip - String - 是否必填：否 - （过滤条件）按照vip过滤。 loadbalancer-id - String - 是否必填：否 - （过滤条件）按照负载均衡唯一ID过滤。 idle - String 是否必填：否 - （过滤条件）按照是否闲置过滤，如"True","False"。 */
   Filters?: Filter[];
 }
 
 declare interface DescribeClusterResourcesResponse {
   /** 集群中资源列表。 */
-  ClusterResourceSet: ClusterResource[];
+  ClusterResourceSet?: ClusterResource[];
   /** 集群中资源总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2783,6 +2813,8 @@ declare interface Clb {
   AutoRewrite(data: AutoRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<AutoRewriteResponse>;
   /** 批量解绑四七层后端服务 {@link BatchDeregisterTargetsRequest} {@link BatchDeregisterTargetsResponse} */
   BatchDeregisterTargets(data: BatchDeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeregisterTargetsResponse>;
+  /** 批量修改监听器绑定的后端机器的标签 {@link BatchModifyTargetTagRequest} {@link BatchModifyTargetTagResponse} */
+  BatchModifyTargetTag(data: BatchModifyTargetTagRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetTagResponse>;
   /** 批量修改监听器绑定的后端机器的转发权重 {@link BatchModifyTargetWeightRequest} {@link BatchModifyTargetWeightResponse} */
   BatchModifyTargetWeight(data: BatchModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetWeightResponse>;
   /** 批量绑定虚拟主机或弹性网卡 {@link BatchRegisterTargetsRequest} {@link BatchRegisterTargetsResponse} */

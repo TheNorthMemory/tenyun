@@ -94,6 +94,8 @@ declare interface ApproverOption {
   NoTransfer?: boolean;
   /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息） */
   FillType?: number;
+  /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
+  FlowReadLimit?: string;
 }
 
 /** 指定签署人限制项 */

@@ -382,6 +382,18 @@ declare interface ClbObject {
   PostCKafkaStatus: number;
 }
 
+/** Clb-waf地域信息 */
+declare interface ClbWafRegionItem {
+  /** 地域ID */
+  Id?: string | null;
+  /** 地域中文说明 */
+  Text?: string | null;
+  /** 地域英文全拼 */
+  Value?: string | null;
+  /** 地域编码 */
+  Code?: string | null;
+}
+
 /** 计费下单响应实体 */
 declare interface DealData {
   /** 订单号列表，元素个数与请求包的goods数组的元素个数一致，商品详情与订单按顺序对应 */
@@ -544,6 +556,8 @@ declare interface DomainURI {
   Domain: string;
   /** 版本 */
   Edition: string;
+  /** 实例ID */
+  InstanceID?: string | null;
 }
 
 /** saas域名详情 */
@@ -2768,6 +2782,72 @@ declare interface DescribeSessionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSpartaProtectionInfoRequest {
+  /** 域名 */
+  Domain: string;
+  /** 版本 */
+  Edition?: string;
+  /** 实例 */
+  InstanceID?: string;
+}
+
+declare interface DescribeSpartaProtectionInfoResponse {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId: string;
+  /** cname取值 */
+  Cname: string;
+  /** 状态 */
+  Status: string;
+  /** 源IP地址列表 */
+  SrcList: string[];
+  /** 证书类型 */
+  CertType: string;
+  /** 证书 */
+  Cert: string;
+  /** 私有密钥 */
+  PrivateKey: string;
+  /** ssl的id */
+  Sslid: string;
+  /** 是否是cdn */
+  IsCdn: string;
+  /** 灰度区域列表 */
+  GrayAreas: string[];
+  /** 引擎 */
+  Engine: string;
+  /** HTTPS重写 */
+  HttpsRewrite: string;
+  /** upstreamType取值 */
+  UpstreamType: string;
+  /** upstreamDomain取值 */
+  UpstreamDomain: string;
+  /** upstreamScheme取值 */
+  UpstreamScheme: string;
+  /** 是否是HTTP2 */
+  IsHttp2: string;
+  /** 是否含有websocket */
+  IsWebsocket: string;
+  /** loadBalance信息 */
+  LoadBalance: string;
+  /** httpsUpstreamPort取值 */
+  HttpsUpstreamPort: string;
+  /** port信息 */
+  Ports: PortItem[];
+  /** 是否灰度 */
+  IsGray: string;
+  /** 模式 */
+  Mode: string;
+  /** 防御等级,100,200,300 */
+  Level: string;
+  /** 与源站是否保持长连接 */
+  IsKeepAlive: string;
+  /** 0：BGP 1：Anycast */
+  Anycast: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTlsVersionRequest {
 }
 
@@ -2816,6 +2896,8 @@ declare interface DescribeUserClbWafRegionsRequest {
 declare interface DescribeUserClbWafRegionsResponse {
   /** 地域（标准的ap-格式）列表 */
   Data?: string[] | null;
+  /** 包含详细属性的地域信息 */
+  RichDatas?: ClbWafRegionItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2826,6 +2908,18 @@ declare interface DescribeUserDomainInfoRequest {
 declare interface DescribeUserDomainInfoResponse {
   /** saas和clb域名信息 */
   UsersInfo: UserDomainInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserLevelRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeUserLevelResponse {
+  /** 300:正常 400:严格 */
+  Level: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2918,6 +3012,20 @@ declare interface DescribeWafThreatenIntelligenceRequest {
 declare interface DescribeWafThreatenIntelligenceResponse {
   /** WAF 威胁情报封禁信息 */
   WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWebshellStatusRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeWebshellStatusResponse {
+  /** webshell域名 */
+  Domain?: string;
+  /** 开关状态 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4001,6 +4109,8 @@ declare interface Waf {
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
   /** Waf 会话定义查询接口 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */
   DescribeSession(data: DescribeSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionResponse>;
+  /** waf斯巴达-获取防护域名信息 {@link DescribeSpartaProtectionInfoRequest} {@link DescribeSpartaProtectionInfoResponse} */
+  DescribeSpartaProtectionInfo(data: DescribeSpartaProtectionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpartaProtectionInfoResponse>;
   /** 查询用户TLS版本 {@link DescribeTlsVersionRequest} {@link DescribeTlsVersionResponse} */
   DescribeTlsVersion(data?: DescribeTlsVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTlsVersionResponse>;
   /** 查询Top5的攻击域名 {@link DescribeTopAttackDomainRequest} {@link DescribeTopAttackDomainResponse} */
@@ -4011,6 +4121,8 @@ declare interface Waf {
   DescribeUserClbWafRegions(data?: DescribeUserClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClbWafRegionsResponse>;
   /** 查询saas和clb的域名信息 {@link DescribeUserDomainInfoRequest} {@link DescribeUserDomainInfoResponse} */
   DescribeUserDomainInfo(data?: DescribeUserDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDomainInfoResponse>;
+  /** 获取用户防护规则等级 {@link DescribeUserLevelRequest} {@link DescribeUserLevelResponse} */
+  DescribeUserLevel(data: DescribeUserLevelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserLevelResponse>;
   /** 获取用户特征规则列表 {@link DescribeUserSignatureRuleRequest} {@link DescribeUserSignatureRuleResponse} */
   DescribeUserSignatureRule(data: DescribeUserSignatureRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSignatureRuleResponse>;
   /** 查询VIP信息 {@link DescribeVipInfoRequest} {@link DescribeVipInfoResponse} */
@@ -4023,6 +4135,8 @@ declare interface Waf {
   DescribeWafInfo(data: DescribeWafInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafInfoResponse>;
   /** 描述WAF威胁情报封禁模块配置详情 {@link DescribeWafThreatenIntelligenceRequest} {@link DescribeWafThreatenIntelligenceResponse} */
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
+  /** 获取域名webshell状态 {@link DescribeWebshellStatusRequest} {@link DescribeWebshellStatusResponse} */
+  DescribeWebshellStatus(data: DescribeWebshellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebshellStatusResponse>;
   /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
   FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
   /** 计费资源购买、续费下单接口 {@link GenerateDealsAndPayNewRequest} {@link GenerateDealsAndPayNewResponse} */

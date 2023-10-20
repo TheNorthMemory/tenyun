@@ -676,6 +676,20 @@ declare interface KerberosInfo {
   ServicePrincipal?: string;
 }
 
+/** LakeFileSystem使用的临时token */
+declare interface LakeFileSystemToken {
+  /** Token使用的临时秘钥的ID */
+  SecretId: string;
+  /** Token使用的临时秘钥 */
+  SecretKey: string;
+  /** Token信息 */
+  Token: string;
+  /** 过期时间 */
+  ExpiredTime: number;
+  /** 颁布时间 */
+  IssueTime: number;
+}
+
 /** 元数据加锁内容 */
 declare interface LockComponentInfo {
   /** 数据库名称 */
@@ -2888,6 +2902,18 @@ declare interface DescribeLakeFsInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLakeFsTaskResultRequest {
+  /** 需要访问的任务结果路径 */
+  FsPath: string;
+}
+
+declare interface DescribeLakeFsTaskResultResponse {
+  /** 路径的访问实例 */
+  AccessToken?: LakeFileSystemToken;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNotebookSessionLogRequest {
   /** Session唯一标识 */
   SessionId: string;
@@ -4089,6 +4115,8 @@ declare interface Dlc {
   DescribeLakeFsDirSummary(data?: DescribeLakeFsDirSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsDirSummaryResponse>;
   /** 查询用户的托管存储信息 {@link DescribeLakeFsInfoRequest} {@link DescribeLakeFsInfoResponse} */
   DescribeLakeFsInfo(data?: DescribeLakeFsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsInfoResponse>;
+  /** 获取LakeFs上task执行结果访问信息 {@link DescribeLakeFsTaskResultRequest} {@link DescribeLakeFsTaskResultResponse} */
+  DescribeLakeFsTaskResult(data: DescribeLakeFsTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsTaskResultResponse>;
   /** 查询交互式 session详情信息 {@link DescribeNotebookSessionRequest} {@link DescribeNotebookSessionResponse} */
   DescribeNotebookSession(data: DescribeNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionResponse>;
   /** 查询交互式 session日志 {@link DescribeNotebookSessionLogRequest} {@link DescribeNotebookSessionLogResponse} */

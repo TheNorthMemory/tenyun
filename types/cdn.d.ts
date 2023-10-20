@@ -88,7 +88,7 @@ declare interface AdvancedAuthenticationTypeA {
   ExpireTime: number;
   /** 是否必须提供过期时间参数。 */
   ExpireTimeRequired: boolean;
-  /** Url组成格式，如：${private_key}${schema}${host}${full_uri。 */
+  /** URL 组成格式，如：${private_key}${schema}${host}${full_uri}。 */
   Format: string;
   /** 时间格式，dec，hex分别表示十进制，十六进制。 */
   TimeFormat: string;
@@ -228,7 +228,7 @@ declare interface AdvancedScdnAclGroup {
 
 /** 精准访问控制匹配规则 */
 declare interface AdvancedScdnAclRule {
-  /** 匹配关键字：protocol：HTTP协议httpVersion：HTTP版本method：请求方法ip：请求源IPipAsn：请求源IP自治域号ipCountry：请求源IP所在国家ipArea：请求源IP所在大区xForwardFor：请求头X-Forward-Fordirectory：路径index：首页path：文件全路径file：文件扩展名param：请求参数referer：请求头Referercookie：请求头CookieuserAgent：请求头User-Agenthead：自定义请求头 */
+  /** 匹配关键字，可取值有：protocol：HTTP协议httpVersion：HTTP版本method：请求方法ip：请求源IPipAsn：请求源IP自治域号ipCountry：请求源IP所在国家ipArea：请求源IP所在大区xForwardFor：请求头X-Forwarded-Fordirectory：路径index：首页path：文件全路径file：文件扩展名param：请求参数referer：请求头Referercookie：请求头CookieuserAgent：请求头User-Agenthead：自定义请求头 */
   MatchKey: string;
   /** 逻辑操作符，取值如下：不包含：exclude包含：include不等于：notequal等于：equal前缀匹配：matching内容为空或不存在：null */
   LogicOperator: string;
@@ -1067,17 +1067,17 @@ declare interface EdgePackTaskFilter {
 /** 动态打包任务状态 */
 declare interface EdgePackTaskStatus {
   /** APK 名称 */
-  Apk: string;
+  Apk?: string;
   /** 输出目录 */
-  DstDir: string;
+  DstDir?: string;
   /** 上传时间 */
-  UploadTime: string;
+  UploadTime?: string;
   /** 任务状态created: 创建成功processing: 处理中done: 处理完成failed: 处理失败 */
-  Status: string;
+  Status?: string;
   /** 上传目录 */
-  SrcDir: string[];
+  SrcDir?: string[];
   /** 失败任务状态详情 */
-  StatusDesc: string;
+  StatusDesc?: string;
 }
 
 /** 状态码重定向配置，默认为关闭状态 */

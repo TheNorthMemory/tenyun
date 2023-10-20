@@ -140,6 +140,14 @@ declare interface EventInfo {
   EventData?: EventDataInfo | null;
 }
 
+/** 表情消息 */
+declare interface FaceMsgContent {
+  /** 表情索引，用户自定义。 */
+  Index: number;
+  /** 额外数据。 */
+  Data?: string;
+}
+
 /** 批量创建群组基础信息 */
 declare interface GroupBaseInfo {
   /** 待创建群组名 */
@@ -160,6 +168,30 @@ declare interface GroupInfo {
   GroupType?: number | null;
   /** 子群组ID列表，如有。 */
   SubGroupIds?: string | null;
+}
+
+/** 单张图片信息 */
+declare interface ImageInfo {
+  /** 图片类型：1-原图2-大图3-缩略图 */
+  Type: number;
+  /** 图片数据大小，单位：字节。 */
+  Size: number;
+  /** 图片宽度，单位为像素。 */
+  Width: number;
+  /** 图片高度，单位为像素。 */
+  Height: number;
+  /** 图片下载地址。 */
+  URL: string;
+}
+
+/** 图片消息 */
+declare interface ImageMsgContent {
+  /** 图片的唯一标识，客户端用于索引图片的键值。 */
+  UUID: string;
+  /** 图片格式。JPG = 1GIF = 2PNG = 3BMP = 4其他 = 255 */
+  ImageFormat: number;
+  /** 图片信息 */
+  ImageInfoList: ImageInfo[];
 }
 
 /** 成员记录信息。 */
@@ -228,6 +260,18 @@ declare interface MessageList {
   Seq?: number | null;
   /** 历史消息列表 */
   MessageBody?: MessageItem[] | null;
+}
+
+/** 自定义消息结构 */
+declare interface MsgBody {
+  /** TIM 消息对象类型，目前支持的消息对象包括：TIMTextElem（文本消息）TIMFaceElem（表情消息）TIMImageElem（图像消息） */
+  MsgType: string;
+  /** 文本消息，当MsgType 为TIMTextElem（文本消息）必选。 */
+  TextMsgContent?: TextMsgContent;
+  /** 表情消息，当MsgType 为TIMFaceElem（表情消息）必选。 */
+  FaceMsgContent?: FaceMsgContent;
+  /** 图像消息，当MsgType为TIMImageElem（图像消息）必选。 */
+  ImageMsgContent?: ImageMsgContent;
 }
 
 /** 房间问答问题详情 */
@@ -342,6 +386,12 @@ declare interface TextMarkConfig {
   Text?: string | null;
   /** 文字水印颜色 */
   Color?: string | null;
+}
+
+/** 文本消息 */
+declare interface TextMsgContent {
+  /** 文本消息。 */
+  Text: string;
 }
 
 /** 用户信息结构体 */
@@ -1401,6 +1451,38 @@ declare interface RegisterUserResponse {
   RequestId?: string;
 }
 
+declare interface SendRoomNormalMessageRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomId: number;
+  /** 管理员指定消息发送方账号（若需设置 FromAccount 信息，则该参数取值不能为空） */
+  FromAccount: string;
+  /** 自定义消息 */
+  MsgBody: MsgBody[];
+  /** 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）。 */
+  CloudCustomData?: string;
+}
+
+declare interface SendRoomNormalMessageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SendRoomNotificationMessageRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomId: number;
+  /** 消息。 */
+  MsgContent: string;
+}
+
+declare interface SendRoomNotificationMessageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetAppCustomContentRequest {
   /** 自定义内容。 */
   CustomContent: AppCustomContent[];
@@ -1471,7 +1553,7 @@ declare interface UnbindDocumentFromRoomResponse {
   RequestId?: string;
 }
 
-/** {@link Lcic 低代码互动课堂} */
+/** {@link Lcic 实时互动-教育版} */
 declare interface Lcic {
   (): Versions;
   /** 新增成员到群组 {@link AddGroupMemberRequest} {@link AddGroupMemberResponse} */
@@ -1578,6 +1660,10 @@ declare interface Lcic {
   ModifyUserProfile(data: ModifyUserProfileRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserProfileResponse>;
   /** 注册用户 {@link RegisterUserRequest} {@link RegisterUserResponse} */
   RegisterUser(data: RegisterUserRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterUserResponse>;
+  /** 指定用户给房间中发送消息 {@link SendRoomNormalMessageRequest} {@link SendRoomNormalMessageResponse} */
+  SendRoomNormalMessage(data: SendRoomNormalMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendRoomNormalMessageResponse>;
+  /** 房间中发送系统通知 {@link SendRoomNotificationMessageRequest} {@link SendRoomNotificationMessageResponse} */
+  SendRoomNotificationMessage(data: SendRoomNotificationMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendRoomNotificationMessageResponse>;
   /** 设置应用自定义内容 {@link SetAppCustomContentRequest} {@link SetAppCustomContentResponse} */
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
   /** 设置水印 {@link SetWatermarkRequest} {@link SetWatermarkResponse} */

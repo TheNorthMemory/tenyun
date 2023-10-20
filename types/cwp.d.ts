@@ -6239,6 +6239,18 @@ declare interface CreateVulFixResponse {
 }
 
 declare interface CreateWhiteListOrderRequest {
+  /** 授权类型 */
+  LicenseType: number;
+  /** 授权数量,最小为1 最大99999 */
+  LicenseNum: number;
+  /** 到期时间,最小为1 */
+  Deadline: number;
+  /** 规则名称,大资产中心:asset_center */
+  RuleName: string;
+  /** 地域, 1 广州 9新加坡, 默认为 1. 非必要情况不要选9 */
+  RegionId?: number;
+  /** 额外参数,json字符串,包含ResourceId 资源ID,LicenseType 授权类型 */
+  ExtraParam?: string;
 }
 
 declare interface CreateWhiteListOrderResponse {
@@ -9405,6 +9417,8 @@ declare interface DescribeLicenseResponse {
 }
 
 declare interface DescribeLicenseWhiteConfigRequest {
+  /** 规则名称,例如: cwp */
+  RuleName: string;
 }
 
 declare interface DescribeLicenseWhiteConfigResponse {
@@ -14720,7 +14734,7 @@ declare interface Cwp {
   /** 漏洞修护-提交漏洞修护 {@link CreateVulFixRequest} {@link CreateVulFixResponse} */
   CreateVulFix(data: CreateVulFixRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulFixResponse>;
   /** 创建白名单订单 {@link CreateWhiteListOrderRequest} {@link CreateWhiteListOrderResponse} */
-  CreateWhiteListOrder(data?: CreateWhiteListOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteListOrderResponse>;
+  CreateWhiteListOrder(data: CreateWhiteListOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteListOrderResponse>;
   /** 删除全部java内存马事件 {@link DeleteAllJavaMemShellsRequest} {@link DeleteAllJavaMemShellsResponse} */
   DeleteAllJavaMemShells(data?: DeleteAllJavaMemShellsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllJavaMemShellsResponse>;
   /** 删除网络攻击日志 {@link DeleteAttackLogsRequest} {@link DeleteAttackLogsResponse} */
@@ -15092,7 +15106,7 @@ declare interface Cwp {
   /** 获取授权订单列表 {@link DescribeLicenseListRequest} {@link DescribeLicenseListResponse} */
   DescribeLicenseList(data?: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
   /** 查询授权白名单配置 {@link DescribeLicenseWhiteConfigRequest} {@link DescribeLicenseWhiteConfigResponse} */
-  DescribeLicenseWhiteConfig(data?: DescribeLicenseWhiteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseWhiteConfigResponse>;
+  DescribeLicenseWhiteConfig(data: DescribeLicenseWhiteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseWhiteConfigResponse>;
   /** 查询日志投递kafka可选项列表 {@link DescribeLogDeliveryKafkaOptionsRequest} {@link DescribeLogDeliveryKafkaOptionsResponse} */
   DescribeLogDeliveryKafkaOptions(data?: DescribeLogDeliveryKafkaOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDeliveryKafkaOptionsResponse>;
   /** 获取日志下载任务列表 {@link DescribeLogExportsRequest} {@link DescribeLogExportsResponse} */

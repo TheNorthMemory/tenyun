@@ -150,6 +150,16 @@ declare interface ResourceSpecNew {
   Type: string;
 }
 
+/** 列表页搜索的标记列表 */
+declare interface SearchTags {
+  /** 标签的键 */
+  TagKey?: string;
+  /** 标签的值 */
+  TagValue?: string;
+  /** 1表示只输入标签的键，没有输入值；0表示输入键时且输入值 */
+  AllValue?: number;
+}
+
 /** 标签描述 */
 declare interface Tag {
   /** 标签的键 */
@@ -226,6 +236,30 @@ declare interface DescribeInstanceStateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstancesRequest {
+  /** 搜索的集群id名称 */
+  SearchInstanceId?: string;
+  /** 搜索的集群name */
+  SearchInstanceName?: string;
+  /** 分页参数，第一页为0，第二页为10 */
+  Offset?: number;
+  /** 分页参数，分页步长，默认为10 */
+  Limit?: number;
+  /** 搜索标签列表 */
+  SearchTags?: SearchTags[];
+}
+
+declare interface DescribeInstancesResponse {
+  /** 实例总数 */
+  TotalCount: number | null;
+  /** 实例数组 */
+  InstancesList: InstanceInfo[] | null;
+  /** - */
+  ErrorMsg: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSimpleInstancesRequest {
   /** 11 */
   SearchInstanceId?: string;
@@ -285,6 +319,8 @@ declare interface Cdwpg {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
   DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
+  /** 获取云原生实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 获取集群精简信息列表 {@link DescribeSimpleInstancesRequest} {@link DescribeSimpleInstancesResponse} */
   DescribeSimpleInstances(data?: DescribeSimpleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleInstancesResponse>;
   /** 销毁集群 {@link DestroyInstanceByApiRequest} {@link DestroyInstanceByApiResponse} */

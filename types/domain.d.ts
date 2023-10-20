@@ -66,6 +66,14 @@ declare interface ContactInfo {
   Country?: string;
 }
 
+/** 自定义DNS Host */
+declare interface CustomDnsHost {
+  /** DNS名称 */
+  DnsName: string;
+  /** IP地址列表 */
+  IpSet: string[];
+}
+
 /** 获取域名基础信息 */
 declare interface DomainBaseInfo {
   /** 域名资源ID。 */
@@ -396,6 +404,20 @@ declare interface CreateTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCustomDnsHostRequest {
+  /** 域名实例ID */
+  DomainId: string;
+  /** DNS名称 */
+  DnsName: string;
+}
+
+declare interface DeleteCustomDnsHostResponse {
+  /** 异步任务ID */
+  LogId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeletePhoneEmailRequest {
   /** 手机或者邮箱 */
   Code: string;
@@ -448,6 +470,24 @@ declare interface DescribeBatchOperationLogsResponse {
   TotalCount: number;
   /** 日志列表 */
   DomainBatchLogSet: DomainBatchLogSet[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCustomDnsHostSetRequest {
+  /** 域名实例ID */
+  DomainId: string;
+  /** 返回数量，默认为20，取值范围[1,100] */
+  Limit: number;
+  /** 偏移量，默认为0 */
+  Offset: number;
+}
+
+declare interface DescribeCustomDnsHostSetResponse {
+  /** 自定义DNS Host 列表 */
+  DnsHostSet: CustomDnsHost[] | null;
+  /** 自定义DNS Host总数 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -566,6 +606,22 @@ declare interface DescribeTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCustomDnsHostRequest {
+  /** 域名实例ID */
+  DomainId: string;
+  /** DNS名称 */
+  DnsName: string;
+  /** IP地址列表 */
+  IpSet: string[];
+}
+
+declare interface ModifyCustomDnsHostResponse {
+  /** 异步任务ID */
+  LogId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDomainDNSBatchRequest {
   /** 批量操作的域名。 */
   Domains: string[];
@@ -593,6 +649,22 @@ declare interface ModifyDomainOwnerBatchRequest {
 
 declare interface ModifyDomainOwnerBatchResponse {
   /** 日志id */
+  LogId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyIntlCustomDnsHostRequest {
+  /** 域名ID */
+  DomainId: string;
+  /** DNS Host */
+  DnsName: string;
+  /** IP地址 */
+  IpSet: string[];
+}
+
+declare interface ModifyIntlCustomDnsHostResponse {
+  /** 任务ID */
   LogId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -644,6 +716,18 @@ declare interface SetDomainAutoRenewRequest {
 }
 
 declare interface SetDomainAutoRenewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SyncCustomDnsHostRequest {
+  /** 域名实例ID */
+  DomainId: string;
+}
+
+declare interface SyncCustomDnsHostResponse {
+  /** 异步任务ID */
+  LogId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -739,6 +823,8 @@ declare interface Domain {
   CreatePhoneEmail(data: CreatePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePhoneEmailResponse>;
   /** 添加域名信息模板 {@link CreateTemplateRequest} {@link CreateTemplateResponse} */
   CreateTemplate(data: CreateTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTemplateResponse>;
+  /** 删除自定义DNS Host {@link DeleteCustomDnsHostRequest} {@link DeleteCustomDnsHostResponse} */
+  DeleteCustomDnsHost(data: DeleteCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomDnsHostResponse>;
   /** 删除手机邮箱 {@link DeletePhoneEmailRequest} {@link DeletePhoneEmailResponse} */
   DeletePhoneEmail(data: DeletePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePhoneEmailResponse>;
   /** 删除信息模板 {@link DeleteTemplateRequest} {@link DeleteTemplateResponse} */
@@ -747,6 +833,8 @@ declare interface Domain {
   DescribeBatchOperationLogDetails(data: DescribeBatchOperationLogDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogDetailsResponse>;
   /** 批量操作日志列表 {@link DescribeBatchOperationLogsRequest} {@link DescribeBatchOperationLogsResponse} */
   DescribeBatchOperationLogs(data?: DescribeBatchOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogsResponse>;
+  /** 查询自定义DNS Host {@link DescribeCustomDnsHostSetRequest} {@link DescribeCustomDnsHostSetResponse} */
+  DescribeCustomDnsHostSet(data: DescribeCustomDnsHostSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomDnsHostSetResponse>;
   /** 域名基本信息 {@link DescribeDomainBaseInfoRequest} {@link DescribeDomainBaseInfoResponse} */
   DescribeDomainBaseInfo(data: DescribeDomainBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainBaseInfoResponse>;
   /** 我的域名列表 {@link DescribeDomainNameListRequest} {@link DescribeDomainNameListResponse} */
@@ -761,16 +849,22 @@ declare interface Domain {
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
   /** 信息模板列表 {@link DescribeTemplateListRequest} {@link DescribeTemplateListResponse} */
   DescribeTemplateList(data?: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
+  /** 修改自定义DNS Host {@link ModifyCustomDnsHostRequest} {@link ModifyCustomDnsHostResponse} */
+  ModifyCustomDnsHost(data: ModifyCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomDnsHostResponse>;
   /** 批量域名 DNS 修改 {@link ModifyDomainDNSBatchRequest} {@link ModifyDomainDNSBatchResponse} */
   ModifyDomainDNSBatch(data: ModifyDomainDNSBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainDNSBatchResponse>;
   /** 批量账号间转移 {@link ModifyDomainOwnerBatchRequest} {@link ModifyDomainOwnerBatchResponse} */
   ModifyDomainOwnerBatch(data: ModifyDomainOwnerBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerBatchResponse>;
+  /** 修改DNS Host {@link ModifyIntlCustomDnsHostRequest} {@link ModifyIntlCustomDnsHostResponse} */
+  ModifyIntlCustomDnsHost(data: ModifyIntlCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntlCustomDnsHostResponse>;
   /** 批量域名续费 {@link RenewDomainBatchRequest} {@link RenewDomainBatchResponse} */
   RenewDomainBatch(data: RenewDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDomainBatchResponse>;
   /** 发送手机邮箱验证码 {@link SendPhoneEmailCodeRequest} {@link SendPhoneEmailCodeResponse} */
   SendPhoneEmailCode(data: SendPhoneEmailCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendPhoneEmailCodeResponse>;
   /** 域名自动续费 {@link SetDomainAutoRenewRequest} {@link SetDomainAutoRenewResponse} */
   SetDomainAutoRenew(data: SetDomainAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<SetDomainAutoRenewResponse>;
+  /** 同步自定义DNS Host {@link SyncCustomDnsHostRequest} {@link SyncCustomDnsHostResponse} */
+  SyncCustomDnsHost(data: SyncCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<SyncCustomDnsHostResponse>;
   /** 批量域名转入 {@link TransferInDomainBatchRequest} {@link TransferInDomainBatchResponse} */
   TransferInDomainBatch(data: TransferInDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TransferInDomainBatchResponse>;
   /** 批量禁止转移锁 {@link TransferProhibitionBatchRequest} {@link TransferProhibitionBatchResponse} */
