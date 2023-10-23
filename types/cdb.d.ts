@@ -854,6 +854,16 @@ declare interface LogRuleTemplateInfo {
   RuleTemplateStatus?: number | null;
 }
 
+/** DB实例慢日志、错误日志投递CLS配置 */
+declare interface LogToCLSConfig {
+  /** 投递状态打开或者关闭 */
+  Status?: string | null;
+  /** CLS日志集ID */
+  LogSetId?: string | null;
+  /** 日志主题ID */
+  LogTopicId?: string | null;
+}
+
 /** 主实例信息 */
 declare interface MasterInfo {
   /** 地域信息 */
@@ -2842,6 +2852,20 @@ declare interface DescribeDBInstanceInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBInstanceLogToCLSRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeDBInstanceLogToCLSResponse {
+  /** 错误日志投递CLS配置 */
+  ErrorLog?: LogToCLSConfig | null;
+  /** 慢日志投递CLS配置 */
+  SlowLog?: LogToCLSConfig | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBInstanceRebootTimeRequest {
   /** 实例的 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceIds: string[];
@@ -3906,6 +3930,32 @@ declare interface ModifyCdbProxyParamResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceLogToCLSRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志类型：errorLog/slowLog */
+  LogType: string;
+  /** 投递状态：ON/OFF */
+  Status: string;
+  /** 是否需要创建日志集 */
+  CreateLogset?: boolean;
+  /** 需要创建日志集时为日志集名称；选择已有日志集时，为日志集ID */
+  Logset?: string;
+  /** 是否需要创建日志主题 */
+  CreateLogTopic?: boolean;
+  /** 需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题ID */
+  LogTopic?: string;
+  /** 日志主题有效期，不填写时，默认30天 */
+  Period?: number;
+  /** 创建日志主题时，是否创建索引 */
+  CreateIndex?: boolean;
+}
+
+declare interface ModifyDBInstanceLogToCLSResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNameRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
@@ -4605,6 +4655,8 @@ declare interface Cdb {
   DescribeDBInstanceGTID(data: DescribeDBInstanceGTIDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceGTIDResponse>;
   /** 查询实例基本信息 {@link DescribeDBInstanceInfoRequest} {@link DescribeDBInstanceInfoResponse} */
   DescribeDBInstanceInfo(data: DescribeDBInstanceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceInfoResponse>;
+  /** 查询实例日志投递CLS的配置 {@link DescribeDBInstanceLogToCLSRequest} {@link DescribeDBInstanceLogToCLSResponse} */
+  DescribeDBInstanceLogToCLS(data: DescribeDBInstanceLogToCLSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceLogToCLSResponse>;
   /** 查询云数据库实例的预期重启时间 {@link DescribeDBInstanceRebootTimeRequest} {@link DescribeDBInstanceRebootTimeResponse} */
   DescribeDBInstanceRebootTime(data: DescribeDBInstanceRebootTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceRebootTimeResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
@@ -4705,6 +4757,8 @@ declare interface Cdb {
   ModifyCdbProxyAddressVipAndVPort(data: ModifyCdbProxyAddressVipAndVPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCdbProxyAddressVipAndVPortResponse>;
   /** 配置数据库代理参数 {@link ModifyCdbProxyParamRequest} {@link ModifyCdbProxyParamResponse} */
   ModifyCdbProxyParam(data: ModifyCdbProxyParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCdbProxyParamResponse>;
+  /** 开启或关闭CDB日志投递CLS {@link ModifyDBInstanceLogToCLSRequest} {@link ModifyDBInstanceLogToCLSResponse} */
+  ModifyDBInstanceLogToCLS(data: ModifyDBInstanceLogToCLSRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceLogToCLSResponse>;
   /** 修改云数据库实例名 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** 修改云数据库实例的所属项目 {@link ModifyDBInstanceProjectRequest} {@link ModifyDBInstanceProjectResponse} */

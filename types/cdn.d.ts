@@ -2985,17 +2985,17 @@ declare interface DescribeCdnDataResponse {
 declare interface DescribeCdnDomainLogsRequest {
   /** 指定域名查询 */
   Domain: string;
-  /** 开始时间，如 2019-09-04 00:00:00 */
+  /** 开始时间 */
   StartTime: string;
-  /** 结束时间，如 2019-09-04 12:00:00 */
+  /** 结束时间 */
   EndTime: string;
   /** 分页查询偏移量，默认为 0 */
   Offset?: number;
   /** 分页查询限制数目，默认为 100，最大为 1000 */
   Limit?: number;
-  /** 指定区域下载日志mainland：获取境内加速日志包下载链接overseas：获取境外加速日志包下载链接global：同时获取境内、境外加速日志包下载链接（分开打包）不指定时默认为 mainland */
+  /** 指定区域下载日志，默认为 mainland，可取值有：mainland：获取境内加速日志包下载链接overseas：获取境外加速日志包下载链接global：同时获取境内、境外加速日志包下载链接（分开打包） */
   Area?: string;
-  /** 指定下载日志的类型，目前仅支持访问日志（access）。access：访问日志 */
+  /** 指定下载日志的类型，可取值有：access：访问日志 */
   LogType?: string;
 }
 
@@ -3015,7 +3015,7 @@ declare interface DescribeCdnIpRequest {
 
 declare interface DescribeCdnIpResponse {
   /** 查询的节点归属详情。 */
-  Ips: CdnIp[];
+  Ips?: CdnIp[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3179,9 +3179,9 @@ declare interface DescribeEdgePackTaskStatusRequest {
 
 declare interface DescribeEdgePackTaskStatusResponse {
   /** 动态打包任务状态列表 */
-  EdgePackTaskStatusSet: EdgePackTaskStatus[];
+  EdgePackTaskStatusSet?: EdgePackTaskStatus[];
   /** 总数，用于分页查询 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

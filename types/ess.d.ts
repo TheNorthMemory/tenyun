@@ -15,11 +15,11 @@ declare interface Agent {
   /** 代理机构的应用编号,32位字符串，一般不用传 */
   AppId?: string;
   /** 被代理机构的应用号，一般不用传 */
-  ProxyAppId?: string | null;
+  ProxyAppId?: string;
   /** 被代理机构在电子签平台的机构编号，集团代理下场景必传 */
-  ProxyOrganizationId?: string | null;
+  ProxyOrganizationId?: string;
   /** 被代理机构的经办人，一般不用传 */
-  ProxyOperator?: string | null;
+  ProxyOperator?: string;
 }
 
 /** 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式 */

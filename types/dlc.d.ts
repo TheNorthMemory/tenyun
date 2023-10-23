@@ -2580,6 +2580,22 @@ declare interface DeleteWorkGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAdvancedStoreLocationRequest {
+}
+
+declare interface DescribeAdvancedStoreLocationResponse {
+  /** 是否启用高级设置：0-否，1-是 */
+  Enable: number;
+  /** 查询结果保存cos路径 */
+  StoreLocation: string;
+  /** 是否有托管存储权限 */
+  HasLakeFs: boolean;
+  /** 托管存储状态，HasLakeFs等于true时，该值才有意义 */
+  LakeFsStatus: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDMSDatabaseRequest {
   /** 数据库名称 */
   Name?: string;
@@ -3624,6 +3640,18 @@ declare interface LockMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAdvancedStoreLocationRequest {
+  /** 查询结果保存cos路径 */
+  StoreLocation: string;
+  /** 是否启用高级设置：0-否，1-是 */
+  Enable: number;
+}
+
+declare interface ModifyAdvancedStoreLocationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDataEngineDescriptionRequest {
   /** 要修改的引擎的名称 */
   DataEngineName: string;
@@ -4087,6 +4115,8 @@ declare interface Dlc {
   DeleteUsersFromWorkGroup(data: DeleteUsersFromWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersFromWorkGroupResponse>;
   /** 删除工作组 {@link DeleteWorkGroupRequest} {@link DeleteWorkGroupResponse} */
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
+  /** 查询高级设置 {@link DescribeAdvancedStoreLocationRequest} {@link DescribeAdvancedStoreLocationResponse} */
+  DescribeAdvancedStoreLocation(data?: DescribeAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdvancedStoreLocationResponse>;
   /** DMS元数据获取库 {@link DescribeDMSDatabaseRequest} {@link DescribeDMSDatabaseResponse} */
   DescribeDMSDatabase(data?: DescribeDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSDatabaseResponse>;
   /** DMS元数据获取分区 {@link DescribeDMSPartitionsRequest} {@link DescribeDMSPartitionsResponse} */
@@ -4187,6 +4217,8 @@ declare interface Dlc {
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
+  /** 修改高级设置 {@link ModifyAdvancedStoreLocationRequest} {@link ModifyAdvancedStoreLocationResponse} */
+  ModifyAdvancedStoreLocation(data: ModifyAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAdvancedStoreLocationResponse>;
   /** 修改引擎描述信息 {@link ModifyDataEngineDescriptionRequest} {@link ModifyDataEngineDescriptionResponse} */
   ModifyDataEngineDescription(data: ModifyDataEngineDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataEngineDescriptionResponse>;
   /** 修改数据治理事件阈值 {@link ModifyGovernEventRuleRequest} {@link ModifyGovernEventRuleResponse} */

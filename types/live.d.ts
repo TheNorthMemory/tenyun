@@ -3375,9 +3375,9 @@ declare interface DescribePullStreamConfigsResponse {
 }
 
 declare interface DescribePushBandwidthAndFluxListRequest {
-  /** 起始时间点，格式为 yyyy-mm-dd HH:MM:SS。 */
+  /** 查询开始时间点，精确到分钟粒度，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。支持最近三年的查询，查询开始和结束时间跨度不支持超过31天。 */
   StartTime: string;
-  /** 结束时间点，格式为 yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。 */
+  /** 查询结束时间点，精确到分钟粒度，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。支持最近三年的查询，查询开始和结束时间跨度不支持超过31天。 */
   EndTime: string;
   /** 域名，可以填多个，若不填，表示总体数据。 */
   PushDomains?: string[];
@@ -3392,18 +3392,18 @@ declare interface DescribePushBandwidthAndFluxListRequest {
 }
 
 declare interface DescribePushBandwidthAndFluxListResponse {
-  /** 峰值带宽所在时间点，格式为 yyyy-mm-dd HH:MM:SS。 */
-  PeakBandwidthTime: string;
+  /** 峰值带宽所在时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  PeakBandwidthTime?: string;
   /** 峰值带宽，单位是 Mbps。 */
-  PeakBandwidth: number;
-  /** 95峰值带宽所在时间点，格式为 yyyy-mm-dd HH:MM:SS。 */
-  P95PeakBandwidthTime: string;
+  PeakBandwidth?: number;
+  /** 95峰值带宽所在时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  P95PeakBandwidthTime?: string;
   /** 95峰值带宽，单位是 Mbps。 */
-  P95PeakBandwidth: number;
+  P95PeakBandwidth?: number;
   /** 总流量，单位是 MB。 */
-  SumFlux: number;
+  SumFlux?: number;
   /** 明细数据信息。 */
-  DataInfoList: BillDataInfo[];
+  DataInfoList?: BillDataInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

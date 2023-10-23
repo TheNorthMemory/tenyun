@@ -216,6 +216,16 @@ declare interface BlockInfoV2 {
   Code?: string | null;
 }
 
+/** 块标题 */
+declare interface BlockTitle {
+  /** name */
+  Name?: string | null;
+  /** src */
+  Src?: string | null;
+  /** value */
+  Value?: string | null;
+}
+
 /** 血压 */
 declare interface BloodPressureBlock {
   /** 名称 */
@@ -279,9 +289,11 @@ declare interface BodyTemperatureBlock {
 /** 检查报告单 */
 declare interface Check {
   /** 描述 */
-  Desc: Desc | null;
+  Desc?: Desc | null;
   /** 结论 */
-  Summary: Summary | null;
+  Summary?: Summary | null;
+  /** 检查报告块标题 */
+  BlockTitle?: BlockTitle[] | null;
 }
 
 /** 体检报告-胸围信息 */
@@ -1215,7 +1227,9 @@ declare interface ImmunohistochemistryBlock {
 /** 检验报告 */
 declare interface Indicator {
   /** 检验指标项 */
-  Indicators: IndicatorItem[] | null;
+  Indicators?: IndicatorItem[] | null;
+  /** 检验报告块标题 */
+  BlockTitle?: BlockTitle[] | null;
 }
 
 /** 检验指标项 */

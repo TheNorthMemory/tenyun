@@ -441,19 +441,21 @@ declare interface AiQualityControlTaskInput {
 /** 智能识别结果。 */
 declare interface AiRecognitionResult {
   /** 任务的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。TransTextRecognition：语音翻译。 */
-  Type: string;
+  Type?: string;
   /** 人脸识别结果，当 Type 为 FaceRecognition 时有效。 */
-  FaceTask: AiRecognitionTaskFaceResult | null;
+  FaceTask?: AiRecognitionTaskFaceResult | null;
   /** 语音关键词识别结果，当 Type 为 AsrWordsRecognition 时有效。 */
-  AsrWordsTask: AiRecognitionTaskAsrWordsResult | null;
+  AsrWordsTask?: AiRecognitionTaskAsrWordsResult | null;
   /** 语音全文识别结果，当 Type 为 AsrFullTextRecognition 时有效。 */
-  AsrFullTextTask: AiRecognitionTaskAsrFullTextResult | null;
+  AsrFullTextTask?: AiRecognitionTaskAsrFullTextResult | null;
   /** 文本关键词识别结果，当 Type 为 OcrWordsRecognition 时有效。 */
-  OcrWordsTask: AiRecognitionTaskOcrWordsResult | null;
+  OcrWordsTask?: AiRecognitionTaskOcrWordsResult | null;
   /** 文本全文识别结果，当 Type 为 OcrFullTextRecognition 时有效。 */
-  OcrFullTextTask: AiRecognitionTaskOcrFullTextResult | null;
+  OcrFullTextTask?: AiRecognitionTaskOcrFullTextResult | null;
   /** 翻译结果，当 Type 为TransTextRecognition 时有效。 */
-  TransTextTask: AiRecognitionTaskTransTextResult | null;
+  TransTextTask?: AiRecognitionTaskTransTextResult | null;
+  /** 物体识别结果，当Type 为ObjectRecognition 时有效。 */
+  ObjectTask?: AiRecognitionTaskObjectResult | null;
 }
 
 /** 语音全文识别结果。 */
@@ -620,6 +622,52 @@ declare interface AiRecognitionTaskFaceSegmentItem {
 declare interface AiRecognitionTaskInput {
   /** 视频智能识别模板 ID 。 */
   Definition: number;
+}
+
+/** 物体识别结果。 */
+declare interface AiRecognitionTaskObjectResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 物体识别任务输入信息。 */
+  Input?: AiRecognitionTaskObjectResultInput;
+  /** 物体识别任务输出信息。 */
+  Output?: AiRecognitionTaskObjectResultOutput | null;
+}
+
+/** 物体识别任务输入类型。 */
+declare interface AiRecognitionTaskObjectResultInput {
+  /** 物体识别模板 ID。 */
+  Definition: number;
+}
+
+/** 单个物体识别结果。 */
+declare interface AiRecognitionTaskObjectResultItem {
+  /** 识别的物体名称。 */
+  Name: string;
+  /** 物体出现的片段列表。 */
+  SegmentSet: AiRecognitionTaskObjectSeqmentItem[];
+}
+
+/** 智能物体识别输出。 */
+declare interface AiRecognitionTaskObjectResultOutput {
+  /** 智能物体识别结果集。 */
+  ResultSet: AiRecognitionTaskObjectResultItem[];
+}
+
+/** 物体识别结果片段。 */
+declare interface AiRecognitionTaskObjectSeqmentItem {
+  /** 识别片段起始的偏移时间，单位：秒。 */
+  StartTimeOffset: number;
+  /** 识别片段终止的偏移时间，单位：秒。 */
+  EndTimeOffset: number;
+  /** 识别片段置信度。取值：0~100。 */
+  Confidence: number;
+  /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
+  AreaCoordSet: number[];
 }
 
 /** 文本全文识别结果。 */

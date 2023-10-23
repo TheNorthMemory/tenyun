@@ -7149,7 +7149,7 @@ declare interface DescribeAssetMachineDetailResponse {
 }
 
 declare interface DescribeAssetMachineListRequest {
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选OsType - String - 是否必填：否 - windows或linuxCpuLoad - Int - 是否必填：否 - 0: 未知 1: 低负载2: 中负载 3: 高负载DiskLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%MemLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%Quuid：主机QuuidOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。MachineName 主机名称InstanceID 实例ID IP 内网IP或公网IPOsType - String - 是否必填：否 - windows或linuxCpuLoad - Int - 是否必填：否 - 0: 未知 1: 低负载2: 中负载 3: 高负载DiskLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%MemLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%Quuid：主机QuuidOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -7163,9 +7163,9 @@ declare interface DescribeAssetMachineListRequest {
 
 declare interface DescribeAssetMachineListResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 记录列表 */
-  Machines: AssetMachineBaseInfo[] | null;
+  Machines?: AssetMachineBaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

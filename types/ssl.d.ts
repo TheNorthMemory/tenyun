@@ -432,6 +432,20 @@ declare interface Filter {
   FilterValue: string;
 }
 
+/** 云原生网关证书信息 */
+declare interface GatewayCertificate {
+  /** 网关证书ID */
+  Id?: string | null;
+  /** 网关证书名称 */
+  Name?: string | null;
+  /** 绑定域名 */
+  BindDomains?: string[] | null;
+  /** 证书来源 */
+  CertSource?: string | null;
+  /** 当前绑定的SSL证书ID */
+  CertId?: string | null;
+}
+
 /** Lighthouse实例 */
 declare interface LighthouseInstanceDetail {
   /** 实例ID */
@@ -754,6 +768,26 @@ declare interface TCBInstanceList {
   Region?: string;
   /** tcb环境实例详情 */
   Environments?: TCBEnvironments[] | null;
+}
+
+/** tse实例详情 */
+declare interface TSEInstanceDetail {
+  /** 网关ID */
+  GatewayId?: string | null;
+  /** 网关名称 */
+  GatewayName?: string | null;
+  /** 网关证书列表 */
+  CertificateList?: GatewayCertificate[] | null;
+}
+
+/** TSE实例详情 - 异步关联云资源数据结构 */
+declare interface TSEInstanceList {
+  /** TSE实例详情 */
+  InstanceList?: TSEInstanceDetail[] | null;
+  /** 该地域下TSE实例总数 */
+  TotalCount?: number;
+  /** 地域 */
+  Region?: string;
 }
 
 /** 标签 */
@@ -1242,6 +1276,8 @@ declare interface DescribeCertificateBindResourceTaskDetailResponse {
   Status?: number;
   /** 当前结果缓存时间 */
   CacheTime?: string;
+  /** 关联tse资源详情 */
+  TSE?: TSEInstanceList[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

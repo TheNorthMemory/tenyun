@@ -148,6 +148,38 @@ declare interface ClusterGroupSetItem {
 
 /** session集群信息 */
 declare interface ClusterSession {
+  /** 集群SerialId */
+  ClusterGroupSerialId?: string;
+  /** 创建者appId */
+  AppId?: number;
+  /** 创建者主账号 */
+  OwnerUin?: string;
+  /** 创建者账号 */
+  CreatorUin?: string;
+  /** 区域 */
+  Region?: string;
+  /** zone */
+  Zone?: string;
+  /** Session集群状态 */
+  Status?: number;
+  /** Session集群消耗的cu数量 */
+  CuNum?: number;
+  /** Session集群的Flink版本 */
+  FlinkVersion?: string;
+  /** session集群FlinkUi地址 */
+  WebUIUrl?: string;
+  /** session集群高级参数 */
+  Properties?: Property[] | null;
+  /** JobManager的规格 */
+  JobManagerCuSpec?: number;
+  /** TaskManager的规格 */
+  TaskManagerCuSpec?: number;
+  /** TaskManager启动的数量 */
+  TaskManagerNum?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
 }
 
 /** 集群的版本相关信息 */
@@ -1130,6 +1162,18 @@ declare interface DeleteTableConfigResponse {
   RequestId?: string;
 }
 
+declare interface DeleteWorkSpaceRequest {
+  /** 工作空间 SerialId */
+  WorkSpaceId: string;
+}
+
+declare interface DeleteWorkSpaceResponse {
+  /** 是否删除 */
+  Delete: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClustersRequest {
   /** 按照一个或者多个集群 ID 查询，每次请求的集群上限为 100 */
   ClusterIds?: string[];
@@ -1587,6 +1631,8 @@ declare interface Oceanus {
   DeleteResources(data: DeleteResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourcesResponse>;
   /** 删除作业表配置 {@link DeleteTableConfigRequest} {@link DeleteTableConfigResponse} */
   DeleteTableConfig(data: DeleteTableConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableConfigResponse>;
+  /** 删除工作空间 {@link DeleteWorkSpaceRequest} {@link DeleteWorkSpaceResponse} */
+  DeleteWorkSpace(data: DeleteWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkSpaceResponse>;
   /** 查询集群 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询作业配置 {@link DescribeJobConfigsRequest} {@link DescribeJobConfigsResponse} */

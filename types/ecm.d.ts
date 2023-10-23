@@ -321,13 +321,15 @@ declare interface ISP {
 /** 运行商统计信息 */
 declare interface ISPCounter {
   /** 运营商名称 */
-  ProviderName: string;
+  ProviderName?: string;
   /** 节点数量 */
-  ProviderNodeNum: number;
+  ProviderNodeNum?: number;
   /** 实例数量 */
-  ProvederInstanceNum: number;
+  ProvederInstanceNum?: number;
   /** Zone实例信息结构体数组 */
-  ZoneInstanceInfoSet: ZoneInstanceInfo[];
+  ZoneInstanceInfoSet?: ZoneInstanceInfo[];
+  /** 实例数量 */
+  ProviderInstanceNum?: number | null;
 }
 
 /** 多运营商IPv6 Cidr Block */
