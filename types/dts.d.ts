@@ -202,7 +202,7 @@ declare interface DBEndpointInfo {
   AccessType: string | null;
   /** 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等 */
   DatabaseType: string | null;
-  /** 节点类型，为空或者"simple":表示普通节点，"cluster": 集群节点 */
+  /** 节点类型，为空或者"simple"表示普通节点、"cluster"表示集群节点；对于mongo业务，取值为replicaset(mongodb副本集)、standalone(mongodb单节点)、cluster(mongodb集群) */
   NodeType: string | null;
   /** 数据库信息 */
   Info: DBInfo[] | null;
@@ -1598,6 +1598,18 @@ declare interface ModifyMigrateRateLimitResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMigrateRuntimeAttributeRequest {
+  /** 迁移任务id，如：dts-2rgv0f09 */
+  JobId: string;
+  /** 需要修改的属性，此结构设计为通用结构，用于屏蔽多个业务的定制属性。例如对于Redis:{ "Key": "DstWriteMode",	//目标库写入模式 "Value": "normal" //clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(跟正常流程一样，不做额外动作，默认为此值) },{ "Key": "IsDstReadOnly",	//是否在迁移时设置目标库只读 "Value": "true" //true(设置只读)、false(不设置只读) } */
+  OtherOptions: KeyValuePairOption[];
+}
+
+declare interface ModifyMigrateRuntimeAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMigrationJobRequest {
   /** 任务id */
   JobId: string;
@@ -2595,6 +2607,8 @@ declare interface Dts {
   ModifyMigrateName(data: ModifyMigrateNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateNameResponse>;
   /** 修改迁移任务的传输速率 {@link ModifyMigrateRateLimitRequest} {@link ModifyMigrateRateLimitResponse} */
   ModifyMigrateRateLimit(data: ModifyMigrateRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateRateLimitResponse>;
+  /** 修改任务运行时属性 {@link ModifyMigrateRuntimeAttributeRequest} {@link ModifyMigrateRuntimeAttributeResponse} */
+  ModifyMigrateRuntimeAttribute(data: ModifyMigrateRuntimeAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateRuntimeAttributeResponse>;
   /** 配置迁移服务 {@link ModifyMigrationJobRequest} {@link ModifyMigrationJobResponse} */
   ModifyMigrationJob(data: ModifyMigrationJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationJobResponse>;
   /** 修改同步任务配置 {@link ModifySyncJobConfigRequest} {@link ModifySyncJobConfigResponse} */

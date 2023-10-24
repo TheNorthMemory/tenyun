@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 受漏洞影响的组件信息。 */
+declare interface AffectedComponent {
+  /** 受漏洞影响的组件名称 */
+  Name?: string | null;
+  /** 受漏洞影响的版本 */
+  AffectedVersionList?: string[] | null;
+  /** 修复此漏洞的版本 */
+  FixedVersionList?: string[] | null;
+}
+
 /** CVSSv2.0详细信息。 */
 declare interface CVSSV2Info {
   /** CVE评分。 */
@@ -161,47 +171,49 @@ declare interface Qualifier {
 /** 描述漏洞详细信息。 */
 declare interface VulnerabilityDetail {
   /** 漏洞类别 */
-  Category: string;
+  Category?: string;
   /** 漏洞分类 */
-  CategoryType: string;
+  CategoryType?: string;
   /** 漏洞描述 */
-  Description: string;
+  Description?: string;
   /** 漏洞官方解决方案 */
-  OfficialSolution: string;
+  OfficialSolution?: string;
   /** 漏洞信息参考列表 */
-  ReferenceList: string[];
+  ReferenceList?: string[];
   /** 漏洞防御方案 */
-  DefenseSolution: string;
+  DefenseSolution?: string;
   /** 漏洞CVSSv2信息 */
-  CVSSv2Info: CVSSV2Info | null;
+  CVSSv2Info?: CVSSV2Info | null;
   /** 漏洞CVSSv3信息 */
-  CVSSv3Info: CVSSV3Info | null;
+  CVSSv3Info?: CVSSV3Info | null;
   /** 漏洞提交时间 */
-  SubmitTime: string;
+  SubmitTime?: string;
   /** CWE编号 */
-  CWEID: string;
+  CWEID?: string;
   /** 漏洞CVSSv2向量 */
-  CVSSv2Vector: string;
+  CVSSv2Vector?: string;
   /** 漏洞CVSSv3向量 */
-  CVSSv3Vector: string;
+  CVSSv3Vector?: string;
+  /** 漏洞影响的组件列表，仅当查询单个漏洞时有效 */
+  AffectedComponentList?: AffectedComponent[];
 }
 
 /** 描述漏洞的摘要信息。 */
 declare interface VulnerabilitySummary {
   /** 漏洞ID */
-  VulID: string;
+  VulID?: string;
   /** 漏洞所属CVE编号 */
-  CVEID: string;
+  CVEID?: string;
   /** 漏洞所属CNVD编号 */
-  CNVDID: string;
+  CNVDID?: string;
   /** 漏洞所属CNNVD编号 */
-  CNNVDID: string;
+  CNNVDID?: string;
   /** 漏洞名称 */
-  Name: string;
+  Name?: string;
   /** 该漏洞是否是需重点关注的漏洞 */
-  IsSuggest: boolean;
+  IsSuggest?: boolean;
   /** 漏洞风险等级CriticalHighMediumLow */
-  Severity: string;
+  Severity?: string;
 }
 
 /** 描述漏洞的详细信息。 */
@@ -263,15 +275,19 @@ declare interface DescribeKBLicenseResponse {
 }
 
 declare interface DescribeKBVulnerabilityRequest {
-  /** CVE ID列表（不能与Vul ID同时存在） */
+  /** 根据CVE ID查询（不能与其他参数同时存在） */
   CVEID?: string[];
-  /** Vul ID列表（不能与CVE ID 同时存在） */
+  /** 根据Vul ID查询（不能与其他参数同时存在） */
   VulID?: string[];
+  /** 根据CNVD ID查询（不能与其他参数同时存在） */
+  CNVDID?: string[];
+  /** 根据CNNVD ID查询（不能与其他参数同时存在） */
+  CNNVDID?: string[];
 }
 
 declare interface DescribeKBVulnerabilityResponse {
   /** 漏洞详细信息列表 */
-  VulnerabilityDetailList: VulnerabilityUnion[] | null;
+  VulnerabilityDetailList?: VulnerabilityUnion[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

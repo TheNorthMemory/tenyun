@@ -102,6 +102,8 @@ declare interface Cluster {
   Orders?: Order[] | null;
   /** Gateway信息 */
   SqlGateways?: SqlGatewayItem[] | null;
+  /** 0 公网访问 // 1 内网访问 */
+  WebUIType?: number | null;
 }
 
 /** 工作空间集群组信息 */
@@ -228,6 +230,22 @@ declare interface CopyJobResult {
   JobType: number | null;
 }
 
+/** 自定义树结构遍历子节点 */
+declare interface DescribeTreeJobsRsp {
+  /** 父节点ID */
+  ParentId?: string | null;
+  /** 当前文件夹ID */
+  Id?: string | null;
+  /** 当前文件夹名 */
+  Name?: string | null;
+  /** 当前文件夹下的作业集合 */
+  JobSet?: TreeJobSets[] | null;
+  /** 迭代子目录 */
+  Children?: DescribeTreeJobsRsp[] | null;
+  /** 请求ID */
+  RequestId?: string | null;
+}
+
 /** 树状结构资源列表对象 */
 declare interface DescribeTreeResourcesRsp {
   /** 父节点ID */
@@ -277,53 +295,61 @@ declare interface GatewayRefItem {
 /** 作业配置详情 */
 declare interface JobConfig {
   /** 作业Id */
-  JobId: string;
+  JobId?: string;
   /** 主类 */
-  EntrypointClass: string | null;
+  EntrypointClass?: string | null;
   /** 主类入参 */
-  ProgramArgs: string | null;
+  ProgramArgs?: string | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 作业配置创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 作业配置的版本号 */
-  Version: number;
+  Version?: number;
   /** 作业默认并行度 */
-  DefaultParallelism: number | null;
+  DefaultParallelism?: number | null;
   /** 系统参数 */
-  Properties: Property[] | null;
+  Properties?: Property[] | null;
   /** 引用资源 */
-  ResourceRefDetails: ResourceRefDetail[] | null;
+  ResourceRefDetails?: ResourceRefDetail[] | null;
   /** 创建者uin */
-  CreatorUin: string | null;
+  CreatorUin?: string | null;
   /** 作业配置上次启动时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 作业绑定的存储桶 */
-  COSBucket: string | null;
+  COSBucket?: string | null;
   /** 是否启用日志收集，0-未启用，1-已启用，2-历史集群未设置日志集，3-历史集群已开启 */
-  LogCollect: number | null;
+  LogCollect?: number | null;
   /** 作业的最大并行度 */
-  MaxParallelism: number | null;
+  MaxParallelism?: number | null;
   /** JobManager规格 */
-  JobManagerSpec: number | null;
+  JobManagerSpec?: number | null;
   /** TaskManager规格 */
-  TaskManagerSpec: number | null;
+  TaskManagerSpec?: number | null;
   /** CLS日志集ID */
-  ClsLogsetId: string | null;
+  ClsLogsetId?: string | null;
   /** CLS日志主题ID */
-  ClsTopicId: string | null;
+  ClsTopicId?: string | null;
   /** pyflink作业运行的python版本 */
-  PythonVersion: string | null;
+  PythonVersion?: string | null;
   /** Oceanus 平台恢复作业开关 1:开启 -1: 关闭 */
-  AutoRecover: number | null;
+  AutoRecover?: number | null;
   /** 日志级别 */
-  LogLevel: string | null;
+  LogLevel?: string | null;
   /** 类日志级别 */
   ClazzLevels?: ClazzLevel[] | null;
   /** 是否开启专家模式 */
   ExpertModeOn?: boolean | null;
   /** 专家模式的配置 */
   ExpertModeConfiguration?: ExpertModeConfiguration | null;
+  /** trace链路 */
+  TraceModeOn?: boolean | null;
+  /** trace链路配置 */
+  TraceModeConfiguration?: TraceModeConfiguration | null;
+  /** checkpoint保留个数 */
+  CheckpointRetainedNum?: number | null;
+  /** 算子拓扑图 */
+  JobGraph?: JobGraph | null;
 }
 
 /** 作业运行图 */
@@ -806,6 +832,28 @@ declare interface Tag {
   TagValue?: string | null;
 }
 
+/** { "Rate": "0.01", ///如1%转换为0.01 "Operator": "1:OUT,2:IN_AND_OUT,3:IN" ///如1%转换为0.01 }Operator算子ID顺序配置，可以对每个算子配置IN、OUT、IN_AND_OUT三个值，分别表示采集输入数据、采集输出数据、同时采集输入和输出数据，配置示例: */
+declare interface TraceModeConfiguration {
+  /** 如1%转换为0.01 */
+  Rate?: string | null;
+  /** 按照算子ID顺序配置，可以对每个算子配置IN、OUT、IN_AND_OUT三个值，分别表示采集输入数据、采集输出数据、同时采集输入和输出数据 */
+  Operator?: string | null;
+}
+
+/** 自定义树结构出参作业列表 */
+declare interface TreeJobSets {
+  /** 作业Id */
+  JobId?: string | null;
+  /** 作业名 */
+  Name?: string | null;
+  /** 作业类型 */
+  JobType?: number | null;
+  /** 作业占用资源 */
+  RunningCu?: number | null;
+  /** 作业状态 启动或者停止或者暂停 */
+  Status?: number | null;
+}
+
 /** 树状结构资源对象 */
 declare interface TreeResourceItem {
   /** 资源ID */
@@ -981,6 +1029,14 @@ declare interface CreateJobConfigRequest {
   ExpertModeOn?: boolean;
   /** 专家模式的配置 */
   ExpertModeConfiguration?: ExpertModeConfiguration;
+  /** trace链路 */
+  TraceModeOn?: boolean;
+  /** trace链路配置 */
+  TraceModeConfiguration?: TraceModeConfiguration;
+  /** checkpoint保留个数 */
+  CheckpointRetainedNum?: number;
+  /** 算子拓扑图 */
+  JobGraph?: JobGraph;
 }
 
 declare interface CreateJobConfigResponse {
@@ -1233,17 +1289,19 @@ declare interface DescribeJobSavepointRequest {
   Offset: number;
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 2 是checkpoint1 是触发savepoint3 停止触发的savepoint */
+  RecordTypes?: number[];
 }
 
 declare interface DescribeJobSavepointResponse {
   /** 快照列表总数 */
-  TotalNumber: number | null;
+  TotalNumber?: number | null;
   /** 快照列表 */
-  Savepoint: Savepoint[] | null;
+  Savepoint?: Savepoint[] | null;
   /** 进行中的快照列表 */
-  RunningSavepoint: Savepoint[] | null;
+  RunningSavepoint?: Savepoint[] | null;
   /** 进行中的快照列表总数 */
-  RunningTotalNumber: number | null;
+  RunningTotalNumber?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1403,11 +1461,23 @@ declare interface DescribeSystemResourcesResponse {
 }
 
 declare interface DescribeTreeJobsRequest {
+  /** 筛选条件字段 */
+  Filters?: Filter[];
   /** 工作空间 Serialid */
   WorkSpaceId?: string;
 }
 
 declare interface DescribeTreeJobsResponse {
+  /** 父节点ID */
+  ParentId?: string | null;
+  /** 当前文件夹ID */
+  Id?: string | null;
+  /** 当前文件夹名 */
+  Name?: string | null;
+  /** 当前文件夹下的作业列表 */
+  JobSet?: TreeJobSets[] | null;
+  /** 迭代子目录 */
+  Children?: DescribeTreeJobsRsp[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2743,7 +2743,7 @@ declare interface DeleteGrafanaNotificationChannelResponse {
 declare interface DeletePolicyGroupRequest {
   /** 固定值，为"monitor" */
   Module: string;
-  /** 策略组id */
+  /** 策略组id,即1.0的告警策略id,可以从策略详情获取 */
   GroupId: number[];
 }
 

@@ -7711,19 +7711,19 @@ declare interface DescribeIntegrationVersionNodesInfoRequest {
   TaskId: string;
   /** 项目id */
   ProjectId: string;
-  /** task version path */
+  /** 该任务选定版本的存储路径：DescribeDsTaskVersionList 或者 DescribeDsTaskVersionInfo 返回的对应的 TaskInfo.TaskExt.Properties 下 Base64.encode($region | $bucket | $ftp.file.name) 值 */
   TaskVersionPath: string;
-  /** task version */
+  /** 该任务选定版本id：DescribeDsTaskVersionList 或者 DescribeDsTaskVersionInfo 返回的对应的 VersionId 取值 */
   TaskVersion?: string;
 }
 
 declare interface DescribeIntegrationVersionNodesInfoResponse {
   /** 任务节点信息 */
-  Nodes: IntegrationNodeInfo[] | null;
+  Nodes?: IntegrationNodeInfo[] | null;
   /** 任务映射信息 */
-  Mappings: IntegrationNodeMapping[] | null;
+  Mappings?: IntegrationNodeMapping[] | null;
   /** 任务id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

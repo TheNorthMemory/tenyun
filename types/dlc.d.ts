@@ -1204,6 +1204,14 @@ declare interface SparkSessionBatchLogOperate {
   Supplement?: KVPair[] | null;
 }
 
+/** statement信息 */
+declare interface StatementInformation {
+  /** SQL任务唯一ID */
+  TaskId?: string | null;
+  /** SQL内容 */
+  SQL?: string | null;
+}
+
 /** notebook session statement输出信息。 */
 declare interface StatementOutput {
   /** 执行总数 */
@@ -2388,6 +2396,8 @@ declare interface CreateSparkSessionBatchSQLRequest {
 declare interface CreateSparkSessionBatchSQLResponse {
   /** 批任务唯一标识 */
   BatchId?: string;
+  /** Statement任务列表信息 */
+  Statements?: StatementInformation[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

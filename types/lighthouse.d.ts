@@ -284,7 +284,7 @@ declare interface DiskBackupDeniedActions {
 declare interface DiskChargePrepaid {
   /** 新购周期。 */
   Period: number;
-  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。 */
   RenewFlag?: string;
   /** 新购单位. 默认值: "m"。 */
   TimeUnit?: string;
@@ -588,7 +588,7 @@ declare interface Instance {
 declare interface InstanceChargePrepaid {
   /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。 */
   Period: number;
-  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
   RenewFlag?: string;
 }
 
@@ -742,7 +742,7 @@ declare interface RegionInfo {
 declare interface RenewDiskChargePrepaid {
   /** 续费周期。 */
   Period?: number;
-  /** 续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。 */
   RenewFlag?: string;
   /** 周期单位。取值范围：“m”(月)。默认值: "m"。 */
   TimeUnit?: string;
@@ -961,7 +961,7 @@ declare interface AttachDisksRequest {
   DiskIds: string[];
   /** 实例ID。 */
   InstanceId: string;
-  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。 */
   RenewFlag?: string;
 }
 
@@ -2063,7 +2063,7 @@ declare interface ModifyDisksAttributeResponse {
 declare interface ModifyDisksRenewFlagRequest {
   /** 云硬盘ID列表。 */
   DiskIds: string[];
-  /** 续费标识。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
   RenewFlag: string;
 }
 

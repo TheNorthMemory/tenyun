@@ -471,7 +471,7 @@ declare interface DeleteRegisterInstanceResponse {
 declare interface DescribeAutomationAgentStatusRequest {
   /** 待查询的实例ID列表。 */
   InstanceIds?: string[];
-  /** 过滤条件。 agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。 environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux。 instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。 */
+  /** 过滤条件。 agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。 environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。 instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
@@ -481,9 +481,9 @@ declare interface DescribeAutomationAgentStatusRequest {
 
 declare interface DescribeAutomationAgentStatusResponse {
   /** Agent 信息列表。 */
-  AutomationAgentSet: AutomationAgentInfo[];
+  AutomationAgentSet?: AutomationAgentInfo[];
   /** 符合条件的 Agent 总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

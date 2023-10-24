@@ -12,18 +12,28 @@ declare interface CBSSpec {
   DiskCount: number;
 }
 
+/** 磁盘信息 */
+declare interface CBSSpecInfo {
+  /** 盘类型 */
+  DiskType: string | null;
+  /** 大小 */
+  DiskSize: number | null;
+  /** 个数 */
+  DiskCount: number | null;
+}
+
 /** 计费时间参数 */
 declare interface ChargeProperties {
   /** 1-需要自动续期 */
-  RenewFlag: number;
+  RenewFlag: number | null;
   /** 订单时间范围 */
-  TimeSpan: number;
+  TimeSpan: number | null;
   /** 时间单位，一般为h和m */
-  TimeUnit: string;
+  TimeUnit: string | null;
   /** 计费类型0-按量计费，1-包年包月 */
-  PayMode?: number;
+  PayMode?: number | null;
   /** PREPAID、POSTPAID_BY_HOUR */
-  ChargeType?: string;
+  ChargeType?: string | null;
 }
 
 /** 云原生实例详情 */
@@ -138,6 +148,18 @@ declare interface InstanceStateInfo {
   BackupOpenStatus?: number | null;
 }
 
+/** 资源信息 */
+declare interface ResourceInfo {
+  /** 资源名称 */
+  SpecName: string | null;
+  /** 资源数 */
+  Count: number | null;
+  /** 磁盘信息 */
+  DiskSpec: CBSSpecInfo | null;
+  /** 资源类型，DATA */
+  Type: string | null;
+}
+
 /** 资源规格 */
 declare interface ResourceSpecNew {
   /** 资源名称 */
@@ -158,6 +180,42 @@ declare interface SearchTags {
   TagValue?: string;
   /** 1表示只输入标签的键，没有输入值；0表示输入键时且输入值 */
   AllValue?: number;
+}
+
+/** 集群信息 */
+declare interface SimpleInstanceInfo {
+  /** 1 */
+  ID?: number | null;
+  /** 1 */
+  InstanceId?: string | null;
+  /** 1 */
+  InstanceName?: string | null;
+  /** 1 */
+  Version?: string | null;
+  /** 1 */
+  Region?: string | null;
+  /** 1 */
+  Zone?: string | null;
+  /** 1 */
+  UserVPCID?: string | null;
+  /** 1 */
+  UserSubnetID?: string | null;
+  /** 1 */
+  CreateTime?: string | null;
+  /** 1 */
+  ExpireTime?: string | null;
+  /** 1 */
+  AccessInfo?: string | null;
+  /** 1 */
+  RenewFlag?: number | null;
+  /** 1 */
+  ChargeProperties?: ChargeProperties | null;
+  /** 1 */
+  Resources?: ResourceInfo[] | null;
+  /** 1 */
+  Tags?: Tag[] | null;
+  /** 1 */
+  Status?: number | null;
 }
 
 /** 标签描述 */
@@ -194,6 +252,20 @@ declare interface CreateInstanceByApiResponse {
   InstanceId?: string | null;
   /** 错误信息 */
   ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceInfoRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceInfoResponse {
+  /** 1 */
+  SimpleInstanceInfo?: SimpleInstanceInfo;
+  /** 1 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -317,6 +389,8 @@ declare interface Cdwpg {
   CreateInstanceByApi(data: CreateInstanceByApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceByApiResponse>;
   /** 描述云原生实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
+  /** 获取集群信息 {@link DescribeInstanceInfoRequest} {@link DescribeInstanceInfoResponse} */
+  DescribeInstanceInfo(data: DescribeInstanceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceInfoResponse>;
   /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
   DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
   /** 获取云原生实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
