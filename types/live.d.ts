@@ -421,7 +421,7 @@ declare interface GroupProIspDataInfo {
 /** HLS专属录制参数 */
 declare interface HlsSpecialParam {
   /** HLS续流超时时间。取值范围[0，1800]。 */
-  FlowContinueDuration?: number;
+  FlowContinueDuration?: number | null;
 }
 
 /** HTTP返回码和统计数据 */
@@ -1007,29 +1007,29 @@ declare interface RecordTask {
 /** 录制模板信息 */
 declare interface RecordTemplateInfo {
   /** 模板 ID。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 模板名称。 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 描述信息。 */
-  Description: string;
+  Description?: string;
   /** FLV 录制参数。 */
-  FlvParam: RecordParam;
+  FlvParam?: RecordParam;
   /** HLS 录制参数。 */
-  HlsParam: RecordParam;
+  HlsParam?: RecordParam;
   /** MP4 录制参数。 */
-  Mp4Param: RecordParam;
+  Mp4Param?: RecordParam;
   /** AAC 录制参数。 */
-  AacParam: RecordParam;
+  AacParam?: RecordParam;
   /** 0：普通直播，1：慢直播。 */
-  IsDelayLive: number;
+  IsDelayLive?: number;
   /** HLS 录制定制参数。 */
-  HlsSpecialParam: HlsSpecialParam;
+  HlsSpecialParam?: HlsSpecialParam;
   /** MP3 录制参数。 */
-  Mp3Param: RecordParam;
+  Mp3Param?: RecordParam;
   /** 是否去除水印。 */
-  RemoveWatermark: boolean | null;
+  RemoveWatermark?: boolean | null;
   /** FLV 录制定制参数。 */
-  FlvSpecialParam: FlvSpecialParam | null;
+  FlvSpecialParam?: FlvSpecialParam | null;
 }
 
 /** 直播域名Referer黑白名单配置 */

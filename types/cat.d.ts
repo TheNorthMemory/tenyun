@@ -223,6 +223,8 @@ declare interface DescribeDetailedSingleProbeDataRequest {
   ErrorTypes?: string[];
   /** 城市这里实际按拨测结果中的城市来填写即可示例：深圳市武汉市首尔多伦多 */
   City?: string[];
+  /** es scroll查询id */
+  ScrollID?: string;
 }
 
 declare interface DescribeDetailedSingleProbeDataResponse {
@@ -230,6 +232,8 @@ declare interface DescribeDetailedSingleProbeDataResponse {
   DataSet?: DetailedSingleDataDefine[];
   /** 符合条件的数据总数 */
   TotalNumber?: number;
+  /** es scroll查询的id */
+  ScrollID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

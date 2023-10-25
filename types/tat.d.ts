@@ -517,7 +517,7 @@ declare interface DescribeInvocationTasksRequest {
   Limit?: number;
   /** 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
-  /** 是否隐藏输出，取值范围：true：隐藏输出 false：不隐藏 默认为 false。 */
+  /** 是否隐藏输出，取值范围：true：隐藏输出 false：不隐藏 默认为 true。 */
   HideOutput?: boolean;
 }
 

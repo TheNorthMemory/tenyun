@@ -22,6 +22,8 @@ declare interface DetailResults {
   SubLabel: string | null;
   /** 该字段用于返回当前一级标签（Label）下的关键词、子标签及分数。 */
   Tags: Tag[] | null;
+  /** 该字段用于返回违规文本命中信息 */
+  HitInfos: HitInfo[] | null;
 }
 
 /** 用于表示业务用户对应的设备信息 */
@@ -40,6 +42,26 @@ declare interface Device {
   IDFA?: string;
   /** **iOS设备专用**，该字段表示业务用户对应的**IDFV**(应用开发商标识符),这是由苹果公司提供的用于标注应用开发商的标识符，由一串16进制的32位数字和字母组成，可被用于唯一标识设备。 */
   IDFV?: string;
+}
+
+/** 关键词命中位置信息 */
+declare interface HitInfo {
+  /** 标识模型命中还是关键词命中 */
+  Type: string | null;
+  /** 命中关键词 */
+  Keyword: string | null;
+  /** 自定义词库名称 */
+  LibName: string | null;
+  /** 位置信息 */
+  Positions: Positions[] | null;
+}
+
+/** 标识命中的违规关键词位置信息 */
+declare interface Positions {
+  /** 关键词起始位置 */
+  Start: number | null;
+  /** 关键词结束位置 */
+  End: number | null;
 }
 
 /** 账号风险检测结果 */

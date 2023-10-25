@@ -478,9 +478,9 @@ declare interface LoginSettings {
 declare interface MetricAlarm {
   /** 比较运算符，可选值：GREATER_THAN：大于GREATER_THAN_OR_EQUAL_TO：大于或等于LESS_THAN：小于 LESS_THAN_OR_EQUAL_TO：小于或等于 EQUAL_TO：等于 NOT_EQUAL_TO：不等于 */
   ComparisonOperator: string;
-  /** 指标名称，可选字段如下：CPU_UTILIZATION：CPU利用率MEM_UTILIZATION：内存利用率LAN_TRAFFIC_OUT：内网出带宽LAN_TRAFFIC_IN：内网入带宽WAN_TRAFFIC_OUT：外网出带宽WAN_TRAFFIC_IN：外网入带宽 */
+  /** 指标名称，可选字段如下：CPU_UTILIZATION：CPU利用率MEM_UTILIZATION：内存利用率LAN_TRAFFIC_OUT：内网出带宽LAN_TRAFFIC_IN：内网入带宽WAN_TRAFFIC_OUT：外网出带宽WAN_TRAFFIC_IN：外网入带宽TCP_CURR_ESTAB：TCP连接数 */
   MetricName: string;
-  /** 告警阈值：CPU_UTILIZATION：[1, 100]，单位：%MEM_UTILIZATION：[1, 100]，单位：%LAN_TRAFFIC_OUT：>0，单位：Mbps LAN_TRAFFIC_IN：>0，单位：MbpsWAN_TRAFFIC_OUT：>0，单位：MbpsWAN_TRAFFIC_IN：>0，单位：Mbps */
+  /** 告警阈值：CPU_UTILIZATION：[1, 100]，单位：%MEM_UTILIZATION：[1, 100]，单位：%LAN_TRAFFIC_OUT：>0，单位：Mbps LAN_TRAFFIC_IN：>0，单位：MbpsWAN_TRAFFIC_OUT：>0，单位：MbpsWAN_TRAFFIC_IN：>0，单位：MbpsTCP_CURR_ESTAB：>0, 单位：Count */
   Threshold: number;
   /** 时间周期，单位：秒，取值枚举值为60、300。 */
   Period: number;
@@ -488,7 +488,7 @@ declare interface MetricAlarm {
   ContinuousTime: number;
   /** 统计类型，可选字段如下：AVERAGE：平均值MAXIMUM：最大值MINIMUM：最小值 默认取值：AVERAGE */
   Statistic?: string;
-  /** 精确告警阈值，本参数不作为入参输入，仅用作查询接口出参：CPU_UTILIZATION：(0, 100]，单位：%MEM_UTILIZATION：(0, 100]，单位：%LAN_TRAFFIC_OUT：>0，单位：Mbps LAN_TRAFFIC_IN：>0，单位：MbpsWAN_TRAFFIC_OUT：>0，单位：MbpsWAN_TRAFFIC_IN：>0，单位：Mbps */
+  /** 精确告警阈值，本参数不作为入参输入，仅用作查询接口出参：CPU_UTILIZATION：(0, 100]，单位：%MEM_UTILIZATION：(0, 100]，单位：%LAN_TRAFFIC_OUT：>0，单位：Mbps LAN_TRAFFIC_IN：>0，单位：MbpsWAN_TRAFFIC_OUT：>0，单位：MbpsWAN_TRAFFIC_IN：>0，单位：MbpsTCP_CURR_ESTAB：>0, 单位：Count */
   PreciseThreshold?: number;
 }
 

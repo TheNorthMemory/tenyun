@@ -2299,6 +2299,8 @@ declare interface DescribeScheduledSqlInfoRequest {
   Name?: string;
   /** 任务id */
   TaskId?: string;
+  /** srcTopicName按照【源日志主题名称】进行过滤，模糊匹配，类型：String必选：否dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配，类型：String必选：否srcTopicId按照【源日志主题ID】进行过滤。类型：String必选：否dstTopicId按照【目标日志主题ID】进行过滤。类型：String必选：否bizType按照【主题类型】进行过滤,0日志主题1指标主题,，。类型：String必选：否status按照【任务状态】进行过滤。类型：String必选：否taskName按照【任务名称】进行过滤，模糊匹配，。类型：String必选：否taskId按照【任务ID】进行过滤，模糊匹配，。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeScheduledSqlInfoResponse {

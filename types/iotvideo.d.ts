@@ -1229,19 +1229,21 @@ declare interface DescribeCloudStorageRequest {
   DeviceName: string;
   /** 云存用户ID */
   UserId?: string;
+  /** 通道ID 非NVR设备不填 NVR设备必填 默认为无 */
+  ChannelId?: number;
 }
 
 declare interface DescribeCloudStorageResponse {
   /** 云存开启状态，1为开启，0为未开启或已过期 */
-  Status: number;
+  Status?: number;
   /** 云存类型，1为全时云存，2为事件云存 */
-  Type: number;
+  Type?: number;
   /** 云存套餐过期时间 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 云存回看时长 */
-  ShiftDuration: number;
+  ShiftDuration?: number;
   /** 云存用户ID */
-  UserId: string | null;
+  UserId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

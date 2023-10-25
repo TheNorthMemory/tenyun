@@ -1215,23 +1215,23 @@ declare interface NetDetectState {
 /** 网络ACL */
 declare interface NetworkAcl {
   /** `VPC`实例`ID`。 */
-  VpcId: string;
+  VpcId?: string;
   /** 网络ACL实例`ID`。 */
-  NetworkAclId: string;
+  NetworkAclId?: string;
   /** 网络ACL名称，最大长度为60。 */
-  NetworkAclName: string;
+  NetworkAclName?: string;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 网络ACL关联的子网数组。 */
-  SubnetSet: Subnet[];
-  /** 网络ACl入站规则。 */
-  IngressEntries: NetworkAclEntry[];
-  /** 网络ACL出站规则。 */
-  EgressEntries: NetworkAclEntry[];
+  SubnetSet?: Subnet[];
+  /** 该参数仅对三元组ACL有效，网络ACl入站规则。 */
+  IngressEntries?: NetworkAclEntry[];
+  /** 该参数仅对三元组ACL有效，网络ACL出站规则。 */
+  EgressEntries?: NetworkAclEntry[];
   /** 网络ACL类型。三元组：'TRIPLE' 五元组：'QUINTUPLE' */
-  NetworkAclType: string;
+  NetworkAclType?: string;
   /** 标签键值对 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
 }
 
 /** 网络ACL规则。 */
@@ -1947,39 +1947,39 @@ declare interface SslVpnSever {
 /** 子网对象 */
 declare interface Subnet {
   /** `VPC`实例`ID`。 */
-  VpcId: string;
+  VpcId?: string;
   /** 子网实例`ID`，例如：subnet-bthucmmy。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 子网名称。 */
-  SubnetName: string;
+  SubnetName?: string;
   /** 子网的 `IPv4` `CIDR`。 */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** 是否默认子网。 */
-  IsDefault: boolean;
+  IsDefault?: boolean;
   /** 是否开启广播。 */
-  EnableBroadcast: boolean;
+  EnableBroadcast?: boolean;
   /** 可用区。 */
-  Zone: string;
+  Zone?: string;
   /** 路由表实例ID，例如：rtb-l2h8d7c2。 */
-  RouteTableId: string;
+  RouteTableId?: string;
   /** 创建时间。 */
   CreatedTime?: string;
   /** 可用`IPv4`数。 */
-  AvailableIpAddressCount: number;
+  AvailableIpAddressCount?: number;
   /** 子网的 `IPv6` `CIDR`。 */
-  Ipv6CidrBlock: string;
+  Ipv6CidrBlock?: string;
   /** 关联`ACL`ID */
-  NetworkAclId: string;
+  NetworkAclId?: string;
   /** 是否为 `SNAT` 地址池子网。 */
-  IsRemoteVpcSnat: boolean;
+  IsRemoteVpcSnat?: boolean;
   /** 子网`IPv4`总数。 */
-  TotalIpAddressCount: number;
+  TotalIpAddressCount?: number;
   /** 标签键值对。 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** CDC实例ID。 */
-  CdcId: string | null;
+  CdcId?: string | null;
   /** 是否是CDC所属子网。0:否 1:是 */
-  IsCdcSubnet: number | null;
+  IsCdcSubnet?: number | null;
 }
 
 /** 子网对象 */
@@ -4907,6 +4907,10 @@ declare interface DescribeNetworkAclsRequest {
   Offset?: number;
   /** 返回数量，默认为20，最小值为1，最大值为100。 */
   Limit?: number;
+  /** 排序字段。支持：NetworkAclId,NetworkAclName,CreatedTime */
+  OrderField?: string;
+  /** 排序方法。顺序：ASC，倒序：DESC。 */
+  OrderDirection?: string;
 }
 
 declare interface DescribeNetworkAclsResponse {
