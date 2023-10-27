@@ -2228,7 +2228,7 @@ declare interface RunMonitorServiceEnabled {
 
 /** 描述了 “云安全” 服务相关的信息 */
 declare interface RunSecurityServiceEnabled {
-  /** 是否开启[云安全](/document/product/296)服务。取值范围：TRUE：表示开启云安全服务FALSE：表示不开启云安全服务默认取值：TRUE。 */
+  /** 是否开启[云安全](/document/product/296)服务。取值范围：true：表示开启云安全服务false：表示不开启云安全服务默认取值：true。 */
   Enabled?: boolean;
 }
 

@@ -2811,9 +2811,9 @@ declare interface DescribeRegionIpv6AddressesRequest {
 
 declare interface DescribeRegionIpv6AddressesResponse {
   /** 符合条件的 IPV6 数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** IPV6 详细信息列表。 */
-  AddressSet: Address[];
+  AddressSet?: Address[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -6297,15 +6297,15 @@ declare interface DescribeCheckItemListRequest {
   Offset?: number;
   /** 每次查询的最大记录数量 */
   Limit?: number;
-  /** Name 可取值：risk_level风险等级, risk_target检查对象，风险对象,risk_type风险类别,risk_attri检测项所属的风险类型 */
+  /** Name 可取值：Name: 检查项名称RiskType: 风险类别RiskLevel: 风险等级RiskTarget: 检查对象RiskAttribute: 检测项所属分型线类型Enable: 检查项是否开启(0:关闭 1:开启) */
   Filters?: ComplianceFilters[];
 }
 
 declare interface DescribeCheckItemListResponse {
   /** 检查项详情数组 */
-  ClusterCheckItems: ClusterCheckItem[];
+  ClusterCheckItems?: ClusterCheckItem[];
   /** 检查项总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

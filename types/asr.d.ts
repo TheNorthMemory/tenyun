@@ -265,7 +265,7 @@ declare interface CreateRecTaskRequest {
   ReinforceHotword?: number;
   /** 自学习定制模型 id如设置了该参数，将生效对应id的自学习定制模型；点击这里查看[自学习定制模型配置方法](https://cloud.tencent.com/document/product/1093/38416) */
   CustomizationId?: string;
-  /** **【增值付费功能】**情绪识别能力（目前仅支持16k_zh）0：不开启；1：开启情绪识别，但不在文本展示情绪标签；2：开启情绪识别，并且在文本展示情绪标签（**该功能需要设置ResTextFormat 大于0**）默认值为0支持的情绪分类为：高兴、伤心、愤怒注意：1. **本功能为增值服务**，需将参数设置为1或2时方可按对应方式生效；2. 如果传入参数值1或2，需确保账号已购买[情绪识别资源包](https://cloud.tencent.com/document/product/1093/35686)，或账号开启后付费；**若当前账号已开启后付费功能，并传入参数值1或2，将[自动计费](https://cloud.tencent.com/document/product/1093/35686)）**；3. 参数设置为0时，无需购买资源包，也不会消耗情绪识别对应资源 */
+  /** **【增值付费功能】**情绪识别能力（目前仅支持16k_zh,8k_zh）0：不开启；1：开启情绪识别，但不在文本展示情绪标签；2：开启情绪识别，并且在文本展示情绪标签（**该功能需要设置ResTextFormat 大于0**）默认值为0支持的情绪分类为：高兴、伤心、愤怒注意：1. **本功能为增值服务**，需将参数设置为1或2时方可按对应方式生效；2. 如果传入参数值1或2，需确保账号已购买[情绪识别资源包](https://cloud.tencent.com/document/product/1093/35686)，或账号开启后付费；**若当前账号已开启后付费功能，并传入参数值1或2，将[自动计费](https://cloud.tencent.com/document/product/1093/35686)）**；3. 参数设置为0时，无需购买资源包，也不会消耗情绪识别对应资源 */
   EmotionRecognition?: number;
   /** 情绪能量值取值为音量分贝值/10，取值范围：[1,10]，值越高情绪越强烈0：不开启；1：开启；默认值为0 */
   EmotionalEnergy?: number;

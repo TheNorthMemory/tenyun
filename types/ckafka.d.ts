@@ -1613,57 +1613,61 @@ declare interface MySQLModifyConnectParam {
 /** MySQL类型入参 */
 declare interface MySQLParam {
   /** MySQL的数据库名称，"*"为全数据库 */
-  Database: string;
+  Database: string | null;
   /** MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"数据库名\\.数据表名" */
-  Table: string;
+  Table: string | null;
   /** 该MySQL在连接管理内的Id */
-  Resource: string;
+  Resource: string | null;
   /** 复制存量信息(schema_only不复制, initial全量)，默认位initial */
-  SnapshotMode?: string;
+  SnapshotMode?: string | null;
   /** 存放MySQL的Ddl信息的Topic，为空则默认不存放 */
-  DdlTopic?: string;
+  DdlTopic?: string | null;
   /** "TABLE" 表示读取项为 table，"QUERY" 表示读取项为 query */
-  DataSourceMonitorMode?: string;
+  DataSourceMonitorMode?: string | null;
   /** 当 "DataMonitorMode"="TABLE" 时，传入需要读取的 Table；当 "DataMonitorMode"="QUERY" 时，传入需要读取的查询 sql 语句 */
-  DataSourceMonitorResource?: string;
+  DataSourceMonitorResource?: string | null;
   /** "TIMESTAMP" 表示增量列为时间戳类型，"INCREMENT" 表示增量列为自增 id 类型 */
-  DataSourceIncrementMode?: string;
+  DataSourceIncrementMode?: string | null;
   /** 传入需要监听的列名称 */
-  DataSourceIncrementColumn?: string;
+  DataSourceIncrementColumn?: string | null;
   /** "HEAD" 表示复制存量 + 增量数据，"TAIL" 表示只复制增量数据 */
-  DataSourceStartFrom?: string;
+  DataSourceStartFrom?: string | null;
   /** "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入 */
-  DataTargetInsertMode?: string;
+  DataTargetInsertMode?: string | null;
   /** 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键 */
-  DataTargetPrimaryKeyField?: string;
+  DataTargetPrimaryKeyField?: string | null;
   /** 表与消息间的映射关系 */
-  DataTargetRecordMapping?: RecordMapping[];
+  DataTargetRecordMapping?: RecordMapping[] | null;
   /** 事件路由到特定主题的正则表达式，默认为(.*) */
-  TopicRegex?: string;
+  TopicRegex?: string | null;
   /** TopicRegex的引用组，指定$1、$2等 */
-  TopicReplacement?: string;
+  TopicReplacement?: string | null;
   /** 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键 */
-  KeyColumns?: string;
+  KeyColumns?: string | null;
   /** Mysql 是否抛弃解析失败的消息，默认为true */
-  DropInvalidMessage?: boolean;
+  DropInvalidMessage?: boolean | null;
   /** 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效 */
-  DropCls?: DropCls;
+  DropCls?: DropCls | null;
   /** 输出格式，DEFAULT、CANAL_1、CANAL_2 */
-  OutputFormat?: string;
+  OutputFormat?: string | null;
   /** 当Table输入的是前缀时，该项值为true，否则为false */
-  IsTablePrefix?: boolean;
+  IsTablePrefix?: boolean | null;
   /** 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic */
-  IncludeContentChanges?: string;
+  IncludeContentChanges?: string | null;
   /** 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句 */
-  IncludeQuery?: boolean;
+  IncludeQuery?: boolean | null;
   /** 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带 */
-  RecordWithSchema?: boolean;
+  RecordWithSchema?: boolean | null;
   /** 存放信令表的数据库名称 */
-  SignalDatabase?: string;
+  SignalDatabase?: string | null;
   /** 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix */
-  IsTableRegular?: boolean;
+  IsTableRegular?: boolean | null;
   /** 信号表 */
-  SignalTable?: string;
+  SignalTable?: string | null;
+  /** datetime 类型字段转换为时间戳的时区 */
+  DateTimeZone?: string | null;
+  /** 自建 */
+  SelfBuilt?: boolean | null;
 }
 
 /** 操作类型返回的Data结构 */
@@ -3789,75 +3793,75 @@ declare interface InquireCkafkaPriceResponse {
 
 declare interface InstanceAttributesResponse {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 接入点 VIP 列表信息 */
-  VipList: VipEntity[];
+  VipList?: VipEntity[];
   /** 虚拟IP */
-  Vip: string;
+  Vip?: string;
   /** 虚拟端口 */
-  Vport: string;
+  Vport?: string;
   /** 实例的状态。0：创建中，1：运行中，2：删除中 */
-  Status: number;
+  Status?: number;
   /** 实例带宽，单位：Mbps */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 实例的存储大小，单位：GB */
-  DiskSize: number;
+  DiskSize?: number;
   /** 可用区 */
-  ZoneId: number;
+  ZoneId?: number;
   /** VPC 的 ID，为空表示是基础网络 */
-  VpcId: string;
+  VpcId?: string;
   /** 子网 ID， 为空表示基础网络 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 实例健康状态， 1：健康，2：告警，3：异常 */
-  Healthy: number;
+  Healthy?: number;
   /** 实例健康信息，当前会展示磁盘利用率，最大长度为256 */
-  HealthyMessage: string;
+  HealthyMessage?: string;
   /** 创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 消息保存时间,单位为分钟 */
-  MsgRetentionTime: number;
+  MsgRetentionTime?: number;
   /** 自动创建 Topic 配置， 若该字段为空，则表示未开启自动创建 */
-  Config: InstanceConfigDO;
+  Config?: InstanceConfigDO;
   /** 剩余创建分区数 */
-  RemainderPartitions: number;
+  RemainderPartitions?: number;
   /** 剩余创建主题数 */
-  RemainderTopics: number;
+  RemainderTopics?: number;
   /** 当前创建分区数 */
-  CreatedPartitions: number;
+  CreatedPartitions?: number;
   /** 当前创建主题数 */
-  CreatedTopics: number;
+  CreatedTopics?: number;
   /** 标签数组 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 过期时间 */
-  ExpireTime: number | null;
+  ExpireTime?: number | null;
   /** 跨可用区 */
-  ZoneIds: number[] | null;
+  ZoneIds?: number[] | null;
   /** kafka版本信息 */
-  Version: string | null;
+  Version?: string | null;
   /** 最大分组数 */
-  MaxGroupNum: number | null;
+  MaxGroupNum?: number | null;
   /** 售卖类型,0:标准版,1:专业版 */
-  Cvm: number | null;
+  Cvm?: number | null;
   /** 类型 */
-  InstanceType: string | null;
+  InstanceType?: string | null;
   /** 表示该实例支持的特性。FEATURE_SUBNET_ACL:表示acl策略支持设置子网。 */
-  Features: string[] | null;
+  Features?: string[] | null;
   /** 动态消息保留策略 */
-  RetentionTimeConfig: DynamicRetentionTime | null;
+  RetentionTimeConfig?: DynamicRetentionTime | null;
   /** 最大连接数 */
-  MaxConnection: number | null;
+  MaxConnection?: number | null;
   /** 公网带宽 */
-  PublicNetwork: number | null;
+  PublicNetwork?: number | null;
   /** 时间 */
-  DeleteRouteTimestamp: string | null;
+  DeleteRouteTimestamp?: string | null;
   /** 剩余创建分区数 */
-  RemainingPartitions: number | null;
+  RemainingPartitions?: number | null;
   /** 剩余创建主题数 */
-  RemainingTopics: number | null;
+  RemainingTopics?: number | null;
   /** 动态硬盘扩容策略 */
-  DynamicDiskConfig: DynamicDiskConfig | null;
+  DynamicDiskConfig?: DynamicDiskConfig | null;
   /** 实例计费类型 */
   InstanceChargeType?: string | null;
 }
@@ -4242,7 +4246,7 @@ declare interface ZoneResponse {
   PublicNetworkLimit: string | null;
 }
 
-/** {@link Ckafka 消息队列 CKafka} */
+/** {@link Ckafka 消息队列 CKafka 版} */
 declare interface Ckafka {
   (): Versions;
   /** 实例授权token {@link AuthorizeTokenRequest} {@link AuthorizeTokenResponse} */

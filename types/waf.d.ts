@@ -756,6 +756,60 @@ declare interface GoodNews {
   RegionId?: number | null;
 }
 
+/** 计费下单接口出入参Goods */
+declare interface Goods {
+  /** 付费类型，1:预付费，0:后付费 */
+  PayMode: number;
+  /** 商品数量 */
+  GoodsNum: number;
+  /** 商品明细 */
+  GoodsDetail: GoodsDetail;
+  /** 默认为0 */
+  ProjectId: number | null;
+  /** 计费类目ID，对应cid */
+  GoodsCategoryId?: number | null;
+  /** 平台类型，默认1 */
+  Platform?: number | null;
+  /** 购买waf实例区域ID */
+  RegionId?: number | null;
+}
+
+/** 产品明细 */
+declare interface GoodsDetail {
+  /** 时间间隔 */
+  TimeSpan: number;
+  /** 单位，支持m、y、d */
+  TimeUnit: string;
+  /** 产品码 */
+  ProductCode: string;
+  /** 二级产品码 */
+  SubProductCode: string;
+  /** 计费策略id */
+  Pid: number;
+  /** waf产品码 */
+  ProductInfo?: ProductInfo[] | null;
+  /** waf实例名 */
+  InstanceName?: string | null;
+  /** QPS数量 */
+  ElasticQps?: number | null;
+  /** 弹性账单 */
+  FlexBill?: number | null;
+  /** 1:自动续费，0:不自动续费 */
+  AutoRenewFlag?: number | null;
+  /** waf购买的实际地域信息 */
+  RealRegion?: number | null;
+  /** Waf实例对应的二级产品码 */
+  Type?: string | null;
+  /** 计费细项标签数组 */
+  LabelTypes?: string[] | null;
+  /** 计费细项标签数量，一般和SvLabelType一一对应 */
+  LabelCounts?: number[] | null;
+  /** 变配使用，实例到期时间 */
+  CurDeadline?: string | null;
+  /** 对存在的实例购买bot 或api 安全 */
+  InstanceId?: string | null;
+}
+
 /** 产品明细 */
 declare interface GoodsDetailNew {
   /** 时间间隔 */
@@ -1168,6 +1222,14 @@ declare interface PortItem {
   UpstreamProtocol: string;
   /** Nginx的服务器ID */
   NginxServerId: string;
+}
+
+/** waf产品 */
+declare interface ProductInfo {
+  /** 产品名称 */
+  Name?: string | null;
+  /** 版本 */
+  Value?: string | null;
 }
 
 /** clb-waf QPS套餐 New */
@@ -2067,13 +2129,21 @@ declare interface DescribeAntiInfoLeakRulesResponse {
 declare interface DescribeAntiInfoLeakageRulesRequest {
   /** 域名 */
   Domain: string;
+  /** 翻页支持，读取偏移 */
+  Offset?: number;
+  /** 翻页支持，读取长度限制 */
+  Limit?: number;
+  /** 排序方式，asc或者desc */
+  Order?: string;
+  /** 过滤器,可以允许如下的值：RuleId,Match_field,Name,Action,Status */
+  Filters?: FiltersItemNew[];
 }
 
 declare interface DescribeAntiInfoLeakageRulesResponse {
   /** 记录条数 */
-  Total: number;
+  Total?: number;
   /** 规则列表 */
-  RuleList: DescribeAntiLeakageItem[];
+  RuleList?: DescribeAntiLeakageItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3414,6 +3484,22 @@ declare interface ModifyDomainsCLSStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGenerateDealsRequest {
+  /** 计费下单入参 */
+  Goods: Goods[];
+}
+
+declare interface ModifyGenerateDealsResponse {
+  /** 计费下单响应结构体 */
+  Data: DealData | null;
+  /** 1:成功，0:失败 */
+  Status: number;
+  /** 返回message */
+  ReturnMessage: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyHostFlowModeRequest {
   /** 域名 */
   Domain: string;
@@ -4181,6 +4267,8 @@ declare interface Waf {
   ModifyDomainWhiteRule(data?: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
   /** 修改域名列表的访问日志开关 {@link ModifyDomainsCLSStatusRequest} {@link ModifyDomainsCLSStatusResponse} */
   ModifyDomainsCLSStatus(data: ModifyDomainsCLSStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainsCLSStatusResponse>;
+  /** 计费下单接口 {@link ModifyGenerateDealsRequest} {@link ModifyGenerateDealsResponse} */
+  ModifyGenerateDeals(data: ModifyGenerateDealsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGenerateDealsResponse>;
   /** 编辑防护域名 {@link ModifyHostRequest} {@link ModifyHostResponse} */
   ModifyHost(data: ModifyHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostResponse>;
   /** 设置防护域名的流量模式 {@link ModifyHostFlowModeRequest} {@link ModifyHostFlowModeResponse} */

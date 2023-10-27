@@ -270,6 +270,14 @@ declare interface PhaseData {
   AppName?: string | null;
 }
 
+/** 安心计划二维码 */
+declare interface PlanQRCode {
+  /** 二维码 */
+  Url: string | null;
+  /** 状态，0:未激活 1:已激活 2:已冻结 */
+  Status: number | null;
+}
+
 /** 商品信息 */
 declare interface Product {
   /** 商户标识码 */
@@ -1140,6 +1148,30 @@ declare interface DescribeMerchantsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePlanQRCodesRequest {
+  /** 计划ID */
+  PlanId: number;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 页码 */
+  PageNo: number;
+  /** 页大小 */
+  PageSize: number;
+}
+
+declare interface DescribePlanQRCodesResponse {
+  /** 返回码 */
+  Ret?: number;
+  /** 总数 */
+  Total?: number;
+  /** 数据 */
+  Data?: PlanQRCode[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProductByIdRequest {
   /** 商品ID */
   ProductId: string;
@@ -1631,6 +1663,8 @@ declare interface Trp {
   DescribeMerchantById(data: DescribeMerchantByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantByIdResponse>;
   /** 查询商户列表 {@link DescribeMerchantsRequest} {@link DescribeMerchantsResponse} */
   DescribeMerchants(data?: DescribeMerchantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantsResponse>;
+  /** 查询安心计划二维码列表 {@link DescribePlanQRCodesRequest} {@link DescribePlanQRCodesResponse} */
+  DescribePlanQRCodes(data: DescribePlanQRCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlanQRCodesResponse>;
   /** 查询商品信息 {@link DescribeProductByIdRequest} {@link DescribeProductByIdResponse} */
   DescribeProductById(data: DescribeProductByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductByIdResponse>;
   /** 查询商品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */

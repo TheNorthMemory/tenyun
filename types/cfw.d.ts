@@ -395,7 +395,7 @@ declare interface FwGroupSwitch {
 /** VPC防火墙(组)四种开关展示 */
 declare interface FwGroupSwitchShow {
   /** 防火墙开关ID */
-  SwitchId: string;
+  SwitchId?: string;
   /** 防火墙开关NAME */
   SwitchName?: string | null;
   /** 互通模式 */
@@ -424,7 +424,7 @@ declare interface FwGroupSwitchShow {
   CrossEdgeStatus?: number | null;
   /** 网络经过VPC防火墙CVM所在地域 */
   FwInsRegion?: string[] | null;
-  /** 0 观察 1 拦截 2 严格 3 关闭 */
+  /** 0 观察 1 拦截 2 严格 3 关闭 4 不支持ips 前端展示tag */
   IpsAction?: number | null;
   /** 开关关联的防火墙实例列表 */
   FwInsLst?: VpcFwInstanceShow[] | null;
@@ -594,6 +594,12 @@ declare interface NatInstanceInfo {
   UpdateEnable?: number | null;
   /** 是的需要升级引擎 支持 nat拨测 1需要 0不需要 */
   NeedProbeEngineUpdate?: number | null;
+  /** 引擎运行模式，Normal:正常, OnlyRoute:透明模式 */
+  TrafficMode?: string | null;
+  /** 实例主所在可用区 */
+  Zone?: string | null;
+  /** 实例备所在可用区 */
+  ZoneBak?: string | null;
 }
 
 /** NAT防火墙开关列表数据 */
@@ -1048,6 +1054,10 @@ declare interface VpcFwCvmInsInfo {
   ZoneZhBack?: string | null;
   /** 防火墙CVM带宽值 */
   BandWidth?: number | null;
+  /** 实例主机所在可用区 */
+  Zone?: string | null;
+  /** 实例备机所在可用区 */
+  ZoneBak?: string | null;
 }
 
 /** VPC防火墙(组)及防火墙实例详情信息 */
@@ -1138,6 +1148,8 @@ declare interface VpcFwInstanceInfo {
   EngineVersion?: string | null;
   /** 引擎是否可升级：0，不可升级；1，可升级 */
   UpdateEnable?: number | null;
+  /** 引擎运行模式，Normal:正常, OnlyRoute:透明模式 */
+  TrafficMode?: string | null;
 }
 
 /** VPC防火墙实例信息 */
@@ -1352,6 +1364,80 @@ declare interface CreateAddressTemplateResponse {
   Status?: number;
   /** 唯一Id */
   Uuid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAlertCenterIsolateRequest {
+  /** 处置对象,资产列表 */
+  HandleAssetList: string[];
+  /** 处置时间1 1天7 7天-2 永久 */
+  HandleTime: number;
+  /** 当前日志方向： 0 出向 1 入向 */
+  AlertDirection: number;
+  /** 隔离类型 1 互联网入站2 互联网出站4 内网访问 */
+  IsolateType: number[];
+  /** 运维模式 1 IP白名单 2 身份认证 */
+  OmMode?: number;
+}
+
+declare interface CreateAlertCenterIsolateResponse {
+  /** 返回状态码：0 成功非0 失败 */
+  ReturnCode?: number;
+  /** 返回信息：success 成功其他 */
+  ReturnMsg?: string;
+  /** 处置状态码：0 处置成功-1 通用错误，不用处理-3 表示重复，需重新刷新列表其他 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAlertCenterOmitRequest {
+  /** 处置对象,ID列表， IdLists和IpList二选一 */
+  HandleIdList: string[];
+  /** 忽略数据来源：AlertTable 告警中心 InterceptionTable拦截列表 */
+  TableType: string;
+}
+
+declare interface CreateAlertCenterOmitResponse {
+  /** 返回状态码：0 成功非0 失败 */
+  ReturnCode?: number;
+  /** 返回信息：success 成功其他 */
+  ReturnMsg?: string;
+  /** 处置状态码：0 处置成功-1 通用错误，不用处理-3 表示重复，需重新刷新列表其他 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAlertCenterRuleRequest {
+  /** 处置时间1 1天7 7天-2 永久 */
+  HandleTime: number;
+  /** 处置类型当HandleIdList 不为空时：1封禁 2放通 当HandleIpList 不为空时：3放通 4封禁 */
+  HandleType: number;
+  /** 当前日志方向： 0 出向 1 入向 */
+  AlertDirection: number;
+  /** 处置方向： 0出向 1入向 0,1出入向 3内网 */
+  HandleDirection: string;
+  /** 处置对象,ID列表， IdLists和IpList二选一 */
+  HandleIdList?: string[];
+  /** 处置对象,IP列表， IdLists和IpList二选一 */
+  HandleIpList?: string[];
+  /** 处置描述 */
+  HandleComment?: string;
+  /** 放通原因:0默认 1重复 2误报 3紧急放通 */
+  IgnoreReason?: number;
+  /** 封禁域名-保留字段 */
+  BlockDomain?: string;
+}
+
+declare interface CreateAlertCenterRuleResponse {
+  /** 返回状态码：0 成功非0 失败 */
+  ReturnCode?: number;
+  /** 返回信息：success 成功其他 */
+  ReturnMsg?: string;
+  /** 处置状态码：0 处置成功-1 通用错误，不用处理-3 表示重复，需重新刷新列表其他 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3159,6 +3245,12 @@ declare interface Cfw {
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
   /** 创建地址模板规则 {@link CreateAddressTemplateRequest} {@link CreateAddressTemplateResponse} */
   CreateAddressTemplate(data: CreateAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAddressTemplateResponse>;
+  /** 告警中心-隔离处置接口 {@link CreateAlertCenterIsolateRequest} {@link CreateAlertCenterIsolateResponse} */
+  CreateAlertCenterIsolate(data: CreateAlertCenterIsolateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertCenterIsolateResponse>;
+  /** 告警中心-忽略处置接口 {@link CreateAlertCenterOmitRequest} {@link CreateAlertCenterOmitResponse} */
+  CreateAlertCenterOmit(data: CreateAlertCenterOmitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertCenterOmitResponse>;
+  /** 告警中心-封禁、放通处置接口 {@link CreateAlertCenterRuleRequest} {@link CreateAlertCenterRuleResponse} */
+  CreateAlertCenterRule(data: CreateAlertCenterRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertCenterRuleResponse>;
   /** 批量添加入侵防御封禁列表、放通列表规则 {@link CreateBlockIgnoreRuleListRequest} {@link CreateBlockIgnoreRuleListResponse} */
   CreateBlockIgnoreRuleList(data: CreateBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockIgnoreRuleListResponse>;
   /** 创建、选择vpc {@link CreateChooseVpcsRequest} {@link CreateChooseVpcsResponse} */

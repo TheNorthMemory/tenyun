@@ -538,7 +538,7 @@ declare interface InternetAccessible {
   InternetChargeType?: string;
   /** 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](https://cloud.tencent.com/document/product/213/12523)。 */
   InternetMaxBandwidthOut?: number;
-  /** 是否分配公网IP。取值范围：TRUE：表示分配公网IPFALSE：表示不分配公网IP当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。 */
+  /** 是否分配公网IP。取值范围：true：表示分配公网IPfalse：表示不分配公网IP当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。 */
   PublicIpAssigned?: boolean;
   /** 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。 */
   BandwidthPackageId?: string;
@@ -1028,7 +1028,7 @@ declare interface RunMonitorServiceEnabled {
 
 /** 描述了 “云安全” 服务相关的信息 */
 declare interface RunSecurityServiceEnabled {
-  /** 是否开启[云安全](/document/product/296)服务。取值范围：TRUE：表示开启云安全服务FALSE：表示不开启云安全服务默认取值：TRUE。 */
+  /** 是否开启[云安全](/document/product/296)服务。取值范围：true：表示开启云安全服务false：表示不开启云安全服务默认取值：true。 */
   Enabled?: boolean;
 }
 
@@ -1053,9 +1053,9 @@ declare interface Snapshot {
 /** 竞价相关选项 */
 declare interface SpotMarketOptions {
   /** 竞价出价 */
-  MaxPrice: string;
+  MaxPrice: string | null;
   /** 竞价请求类型，当前仅支持类型：one-time */
-  SpotInstanceType?: string;
+  SpotInstanceType?: string | null;
 }
 
 /** 竞价实例配额 */
@@ -2273,7 +2273,7 @@ declare interface InquiryPriceRunInstancesRequest {
   SecurityGroupIds?: string[];
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。 */
   EnhancedService?: EnhancedService;
-  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。更多详细信息请参阅：如何保证幂等性。 */
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
   /** 云服务器的主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：主机名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：主机名字符长度为[2, 30]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 */
   HostName?: string;
@@ -2283,6 +2283,8 @@ declare interface InquiryPriceRunInstancesRequest {
   InstanceMarketOptions?: InstanceMarketOptionsRequest;
   /** 高性能计算集群ID。 */
   HpcClusterId?: string;
+  /** 实例启动模板。 */
+  LaunchTemplate?: LaunchTemplate;
 }
 
 declare interface InquiryPriceRunInstancesResponse {

@@ -24,6 +24,14 @@ declare interface AccelerationDomain {
   DomainStatus?: string;
   /** 源站信息。 */
   OriginDetail?: OriginDetail | null;
+  /** 回源协议，取值有：FOLLOW: 协议跟随；HTTP: HTTP协议回源；HTTPS: HTTPS协议回源。 */
+  OriginProtocol?: string | null;
+  /** HTTP回源端口。 */
+  HttpOriginPort?: number | null;
+  /** HTTPS回源端口。 */
+  HttpsOriginPort?: number | null;
+  /** IPv6状态，取值有：follow：遵循站点IPv6配置；on：开启状态；off：关闭状态。 */
+  IPv6Status?: string | null;
   /** CNAME 地址。 */
   Cname?: string;
   /** 加速域名归属权验证状态，取值有： pending：待验证； finished：已完成验证。 */
@@ -640,6 +648,16 @@ declare interface DropPageDetail {
   CustomResponseId?: string;
 }
 
+/** 安全实例状态。 */
+declare interface EntityStatus {
+  /** 实例名，现在只有子域名。 */
+  Entity?: string;
+  /** 实例配置下发状态，取值有：online：配置已生效；fail：配置失败； process：配置下发中。 */
+  Status?: string;
+  /** 实例配置下发信息提示。 */
+  Message?: string;
+}
+
 /** 例外规则，用于配置需要跳过特定场景的规则 */
 declare interface ExceptConfig {
   /** 配置开关，取值有：on：开启；off：关闭。 */
@@ -992,24 +1010,30 @@ declare interface OriginDetail {
 
 /** 源站组信息 */
 declare interface OriginGroup {
-  /** 站点ID。 */
-  ZoneId?: string;
-  /** 站点名称。 */
-  ZoneName?: string;
   /** 源站组ID。 */
-  OriginGroupId?: string;
-  /** 源站类型，取值有：self：自有源站；third_party：第三方源站；cos：腾讯云COS源站。 */
-  OriginType?: string;
+  GroupId?: string;
   /** 源站组名称。 */
-  OriginGroupName?: string;
-  /** 源站配置类型，当OriginType=self时，取值有：area：按区域配置；weight： 按权重配置。proto： 按HTTP协议配置。当OriginType=third_party/cos时放空。 */
-  ConfigurationType?: string;
+  Name?: string;
+  /** 源站组类型，取值有：GENERAL：通用型源站组；HTTP： HTTP专用型源站组。 */
+  Type?: string;
   /** 源站记录信息。 */
-  OriginRecords?: OriginRecord[];
+  Records?: OriginRecord[];
+  /** 源站组被引用实例列表。 */
+  References?: OriginGroupReference[];
+  /** 源站组创建时间。 */
+  CreateTime?: string;
   /** 源站组更新时间。 */
   UpdateTime?: string;
-  /** 当OriginType=self时，表示回源Host。 */
-  HostHeader?: string | null;
+}
+
+/** 源站组引用服务。 */
+declare interface OriginGroupReference {
+  /** 引用服务类型，取值有：AccelerationDomain: 加速域名；RuleEngine: 规则引擎；Loadbalance: 负载均衡；ApplicationProxy: 四层代理。 */
+  InstanceType?: string;
+  /** 引用类型的实例ID。 */
+  InstanceId?: string;
+  /** 应用类型的实例名称。 */
+  InstanceName?: string;
 }
 
 /** 加速域名源站信息。 */
@@ -1050,19 +1074,15 @@ declare interface OriginProtectionInfo {
 declare interface OriginRecord {
   /** 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。 */
   Record: string;
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6、域名类型源站；COS：COS源。AWS_S3：AWS S3对象存储源站。 */
+  Type?: string;
   /** 源站记录ID。 */
   RecordId?: string;
-  /** 源站端口，取值范围：[1-65535]。 */
-  Port?: number;
-  /** 当源站配置类型ConfigurationType=weight时，表示权重。不配置权重信息时，所有源站组记录统一填写为0或者不填写，表示多个源站轮询回源。配置权重信息时，取值为[1-100]，多个源站权重总和应为100，表示多个源站按照权重回源。当源站配置类型ConfigurationType=proto时，表示权重。不配置权重信息时，所有源站组记录统一填写为0或者不填写，表示多个源站轮询回源。配置权重信息时，取值为[1-100]，源站组内Proto相同的多个源站权重总和应为100，表示多个源站按照权重回源。 */
-  Weight?: number;
-  /** 当源站配置类型ConfigurationType=proto时，表示源站的协议类型，将按照客户端请求协议回到相应的源站，取值有：http：HTTP协议源站；https：HTTPS协议源站。 */
-  Proto?: string;
-  /** 当源站配置类型ConfigurationType=area时，表示区域，为空表示全部地区。取值为iso-3166中alpha-2编码或者大洲区域代码。大洲区域代码取值为：Asia：亚洲；Europe：欧洲；Africa：非洲；Oceania：大洋洲；Americas：美洲。源站组记录中，至少需要有一项为全部地区。 */
-  Area?: string[];
-  /** 当源站类型OriginType=third_part时有效是否私有鉴权，取值有：true：使用私有鉴权；false：不使用私有鉴权。不填写，默认值为：false。 */
+  /** 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。 */
+  Weight?: number | null;
+  /** 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：true：使用私有鉴权；false：不使用私有鉴权。不填写，默认值为：false。 */
   Private?: boolean;
-  /** 当源站类型Private=true时有效，表示私有鉴权使用参数。 */
+  /** 私有鉴权参数，当源站类型Private=true时有效。 */
   PrivateParameters?: PrivateParameter[];
 }
 
@@ -1112,9 +1132,9 @@ declare interface PostMaxSize {
   MaxSize?: number | null;
 }
 
-/** 源站记录私有鉴权参数 */
+/** 对象存储源站记录私有鉴权参数 */
 declare interface PrivateParameter {
-  /** 私有鉴权参数名称，取值有：AccessKeyId：鉴权参数Access Key ID；SecretAccessKey：鉴权参数Secret Access Key。 */
+  /** 私有鉴权参数名称，取值有：AccessKeyId：鉴权参数Access Key ID；SecretAccessKey：鉴权参数Secret Access Key；SignatureVersion：鉴权版本，v2或者v4；Region：存储桶地域。 */
   Name: string;
   /** 私有鉴权参数值。 */
   Value: string;
@@ -1464,6 +1484,14 @@ declare interface SecurityConfig {
   SlowPostConfig?: SlowPostConfig | null;
 }
 
+/** 安全策略模板的绑定关系。 */
+declare interface SecurityTemplateBinding {
+  /** 模板ID */
+  TemplateId?: string;
+  /** 模板绑定状态。 */
+  TemplateScope?: TemplateScope[];
+}
+
 /** 安全类型配置项。 */
 declare interface SecurityType {
   /** 安全类型开关，取值为： on：开启； off：关闭。 */
@@ -1610,6 +1638,14 @@ declare interface TemplateConfig {
   TemplateId: string;
   /** 模板名称。 */
   TemplateName: string;
+}
+
+/** 安全模板绑定域名状态 */
+declare interface TemplateScope {
+  /** 站点ID。 */
+  ZoneId?: string | null;
+  /** 实例状态列表。 */
+  EntityStatus?: EntityStatus[] | null;
 }
 
 /** 统计曲线数据项 */
@@ -1865,6 +1901,14 @@ declare interface CreateAccelerationDomainRequest {
   DomainName: string;
   /** 源站信息。 */
   OriginInfo: OriginInfo;
+  /** 回源协议，取值有：FOLLOW: 协议跟随；HTTP: HTTP协议回源；HTTPS: HTTPS协议回源。不填默认为： FOLLOW。 */
+  OriginProtocol?: string;
+  /** HTTP回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTP时生效, 不填默认为80。 */
+  HttpOriginPort?: number;
+  /** HTTPS回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTPS时生效，不填默认为443。 */
+  HttpsOriginPort?: number;
+  /** IPv6状态，取值有：follow：遵循站点IPv6配置；on：开启状态；off：关闭状态。不填默认为：follow。 */
+  IPv6Status?: string;
 }
 
 declare interface CreateAccelerationDomainResponse {
@@ -1950,6 +1994,26 @@ declare interface CreateApplicationProxyRuleRequest {
 declare interface CreateApplicationProxyRuleResponse {
   /** 规则ID */
   RuleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateOriginGroupRequest {
+  /** 站点 ID */
+  ZoneId: string;
+  /** 源站组名称，可输入1 - 200个字符，允许的字符为 a - z, A - Z, 0 - 9, _, - 。 */
+  Name?: string;
+  /** 源站组类型，此参数必填，取值有：GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡、HTTP 专用型负载均衡引用；HTTP： HTTP 专用型源站组，支持添加 IP/域名、对象存储源站作为源站，无法被四层代理引用，仅支持被添加加速域名、规则引擎-修改源站、HTTP 专用型负载均衡引用。 */
+  Type?: string;
+  /** 源站记录信息，此参数必填。 */
+  Records?: OriginRecord[];
+  /** 回源 Host Header，仅 Type = HTTP 时传入生效，规则引擎修改 Host Header 配置优先级高于源站组的 Host Header。 */
+  HostHeader?: string;
+}
+
+declare interface CreateOriginGroupResponse {
+  /** 源站组ID。 */
+  OriginGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2049,7 +2113,7 @@ declare interface CreateSecurityIPGroupResponse {
 declare interface CreateSharedCNAMERequest {
   /** 共享 CNAME 所属站点的 ID。 */
   ZoneId: string;
-  /** 共享 CNAME 前缀。请输入合法的域名前缀，例如"test-api"、"test-api.com"，限制输入 50 个字符。共享 CNAME 完整格式为：<自定义前缀>++"share.eo.dnse[0-5].com"。例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.eo.dns2.com示例值：example.com */
+  /** 共享 CNAME 前缀。请输入合法的域名前缀，例如"test-api"、"test-api.com"，限制输入 50 个字符。共享 CNAME 完整格式为：<自定义前缀>++"share.eo.dnse[0-5].com"。例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.share.eo.dnse2.com */
   SharedCNAMEPrefix: string;
   /** 描述。可输入 1-50 个任意字符。 */
   Description?: string;
@@ -2138,6 +2202,18 @@ declare interface DeleteApplicationProxyRuleRequest {
 }
 
 declare interface DeleteApplicationProxyRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOriginGroupRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 源站组ID，此参数必填。 */
+  GroupId?: string;
+}
+
+declare interface DeleteOriginGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2411,19 +2487,21 @@ declare interface DescribeIdentificationsResponse {
 }
 
 declare interface DescribeOriginGroupRequest {
-  /** 分页查询偏移量，默认为0。 */
-  Offset: number;
-  /** 分页查询限制数目，默认为10，取值：1-1000。 */
-  Limit: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-id 按照【站点ID】进行过滤。站点ID形如：zone-20hzkd4rdmy0 类型：String 必选：否 模糊查询：不支持origin-group-id 按照【源站组ID】进行过滤。源站组ID形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a 类型：String 必选：否 模糊查询：不支持origin-group-name 按照【源站组名称】进行过滤 类型：String 必选：否 模糊查询：支持。使用模糊查询时，仅支持填写一个源站组名称 */
+  /** 站点ID，此参数必填。 */
+  ZoneId?: string;
+  /** 分页查询偏移量，不填默认为0。 */
+  Offset?: number;
+  /** 分页查询限制数目，不填默认为20，取值：1-1000。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：origin-group-id 按照【源站组ID】进行过滤。源站组ID形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a 模糊查询：不支持origin-group-name 按照【源站组名称】进行过滤 模糊查询：支持。使用模糊查询时，仅支持填写一个源站组名称 */
   Filters?: AdvancedFilter[];
 }
 
 declare interface DescribeOriginGroupResponse {
   /** 记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 源站组信息。 */
-  OriginGroups: OriginGroup[];
+  OriginGroups?: OriginGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2544,6 +2622,20 @@ declare interface DescribeRulesSettingRequest {
 declare interface DescribeRulesSettingResponse {
   /** 规则引擎可应用匹配请求的设置列表及其详细建议配置信息。 */
   Actions: RulesSettingAction[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityTemplateBindingsRequest {
+  /** 要查询的站点 ID。 */
+  ZoneId: string;
+  /** 要查询的策略模板 ID。 */
+  TemplateId: string[];
+}
+
+declare interface DescribeSecurityTemplateBindingsResponse {
+  /** 指定策略模板的绑定关系列表。当某个站点中的域名包含在指定策略模板的绑定关系中时，绑定关系列表 `TemplateScope` 中会包含该站点的 `ZoneId`，和该站点下的和该策略模板有关的域名绑定关系。注意：当没有任何域名正在绑定或已经绑定到指定策略模板时，绑定关系为空。即：返回结构体中，`TemplateScope` 数组长度为 0。绑定关系中，同一域名可能在 `EntityStatus` 列表中重复出现，并标记为不同 `Status` 。例如，正在被绑定到其他策略模板的域名，会同时标记为 `online` 和 `pending` 。 */
+  SecurityTemplate?: SecurityTemplateBinding[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2788,7 +2880,15 @@ declare interface ModifyAccelerationDomainRequest {
   /** 加速域名名称。 */
   DomainName: string;
   /** 源站信息。 */
-  OriginInfo: OriginInfo;
+  OriginInfo?: OriginInfo;
+  /** 回源协议，取值有：FOLLOW: 协议跟随；HTTP: HTTP协议回源；HTTPS: HTTPS协议回源。不填保持原有配置。 */
+  OriginProtocol?: string;
+  /** HTTP回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTP时生效, 不填保持原有配置。 */
+  HttpOriginPort?: number;
+  /** HTTPS回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTPS时生效，不填保持原有配置。 */
+  HttpsOriginPort?: number;
+  /** IPv6状态，取值有：follow：遵循站点IPv6配置；on：开启状态；off：关闭状态。不填保持原有配置。 */
+  IPv6Status?: string;
 }
 
 declare interface ModifyAccelerationDomainResponse {
@@ -2942,6 +3042,26 @@ declare interface ModifyHostsCertificateRequest {
 }
 
 declare interface ModifyHostsCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyOriginGroupRequest {
+  /** 站点 ID */
+  ZoneId: string;
+  /** 源站组 ID，此参数必填。 */
+  GroupId?: string;
+  /** 源站组名称，不填保持原有配置，可输入1 - 200个字符，允许的字符为 a - z, A - Z, 0 - 9, _, - 。 */
+  Name?: string;
+  /** 源站组类型，取值有：GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡引用；HTTP： HTTP专用型源站组，支持添加 IP/域名、对象存储源站，无法被四层代理引用。不填保持原有配置。 */
+  Type?: string;
+  /** 源站记录信息，不填保持原有配置。 */
+  Records?: OriginRecord[];
+  /** 回源 Host Header，仅 Type = HTTP 时生效， 不填或者填空表示不配置回源Host，规则引擎修改 Host Header 配置优先级高于源站组的 Host Header。 */
+  HostHeader?: string;
+}
+
+declare interface ModifyOriginGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3347,6 +3467,8 @@ declare interface Teo {
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
   /** 创建应用代理规则 {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
+  /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
+  CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
   /** 为未购买套餐的站点购买套餐 {@link CreatePlanForZoneRequest} {@link CreatePlanForZoneResponse} */
   CreatePlanForZone(data: CreatePlanForZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlanForZoneResponse>;
   /** 创建预热任务 {@link CreatePrefetchTaskRequest} {@link CreatePrefetchTaskResponse} */
@@ -3369,6 +3491,8 @@ declare interface Teo {
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
   /** 删除应用代理规则 {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
+  /** 删除源站组 {@link DeleteOriginGroupRequest} {@link DeleteOriginGroupResponse} */
+  DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
   /** 批量删除规则引擎规则 {@link DeleteRulesRequest} {@link DeleteRulesResponse} */
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
   /** 删除安全 IP 组 {@link DeleteSecurityIPGroupRequest} {@link DeleteSecurityIPGroupResponse} */
@@ -3398,7 +3522,7 @@ declare interface Teo {
   /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
   /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
-  DescribeOriginGroup(data: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
+  DescribeOriginGroup(data?: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
   /** 查询源站防护信息 {@link DescribeOriginProtectionRequest} {@link DescribeOriginProtectionResponse} */
   DescribeOriginProtection(data?: DescribeOriginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginProtectionResponse>;
   /** 查询监控流量时序数据 {@link DescribeOverviewL7DataRequest} {@link DescribeOverviewL7DataResponse} */
@@ -3411,6 +3535,8 @@ declare interface Teo {
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
   /** 查询规则引擎的设置参数 {@link DescribeRulesSettingRequest} {@link DescribeRulesSettingResponse} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
+  /** 查询指定策略模板的绑定关系列表 {@link DescribeSecurityTemplateBindingsRequest} {@link DescribeSecurityTemplateBindingsResponse} */
+  DescribeSecurityTemplateBindings(data: DescribeSecurityTemplateBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTemplateBindingsResponse>;
   /** 查询四层流量时序数据 {@link DescribeTimingL4DataRequest} {@link DescribeTimingL4DataResponse} */
   DescribeTimingL4Data(data: DescribeTimingL4DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4DataResponse>;
   /** 查询流量分析时序数据 {@link DescribeTimingL7AnalysisDataRequest} {@link DescribeTimingL7AnalysisDataResponse} */
@@ -3449,6 +3575,8 @@ declare interface Teo {
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
   /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
+  /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
+  ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
   /** 修改规则引擎规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 修改安全 IP 组 {@link ModifySecurityIPGroupRequest} {@link ModifySecurityIPGroupResponse} */

@@ -70,6 +70,14 @@ declare interface AssetInfoDetail {
   ScanTime?: string | null;
 }
 
+/** 安全中心资产标签 */
+declare interface AssetTag {
+  /** 标签的key值,可以是字母、数字、下划线 */
+  TagKey?: string | null;
+  /** 标签的vale值,可以是字母、数字、下划线 */
+  TagValue?: string | null;
+}
+
 /** 资产视角配置风险 */
 declare interface AssetViewCFGRisk {
   /** 唯一id */
@@ -769,13 +777,21 @@ declare interface PortViewPortRisk {
 /** 公网IP和域名资产列表key */
 declare interface PublicIpDomainListKey {
   /** 资产值 */
-  Asset: string | null;
+  Asset: string;
 }
 
 /** 报告项key */
 declare interface ReportItemKey {
   /** 日志Id列表 */
   TaskLogList: string[] | null;
+}
+
+/** 报告中的task_id list */
+declare interface ReportTaskIdList {
+  /** 任务id列表 */
+  TaskIdList: string[];
+  /** 租户ID */
+  AppId?: string;
 }
 
 /** 风险中心状态处理Key */
@@ -1012,6 +1028,14 @@ declare interface Tag {
   Name: string;
   /** 标签内容 */
   Value: string;
+}
+
+/** 主机标签信息 */
+declare interface Tags {
+  /** 无 */
+  TagKey?: string | null;
+  /** 无 */
+  TagValue?: string | null;
 }
 
 /** 任务高级配置 */
@@ -1322,8 +1346,10 @@ declare interface AssetBaseInfoResponse {
 }
 
 declare interface CreateDomainAndIpRequest {
-  /** - */
+  /** 公网IP/域名 */
   Content: string[];
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface CreateDomainAndIpResponse {
@@ -1354,6 +1380,8 @@ declare interface CreateRiskCenterScanTaskRequest {
   TaskAdvanceCFG?: TaskAdvanceCFG;
   /** 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式 */
   TaskMode?: number;
+  /** 资产标签 */
+  Tags?: AssetTag;
 }
 
 declare interface CreateRiskCenterScanTaskResponse {
@@ -1369,11 +1397,15 @@ declare interface CreateRiskCenterScanTaskResponse {
 
 declare interface DeleteDomainAndIpRequest {
   /** - */
-  Content: PublicIpDomainListKey[];
+  Content?: PublicIpDomainListKey[];
   /** 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留 */
   RetainPath?: number;
   /** 以后是否忽略该资产，，1：忽略，其他：不忽略，默认不传为忽略 */
   IgnoreAsset?: number;
+  /** 资产标签 */
+  Tags?: AssetTag[];
+  /** 删除类型，取值： ALL， 删除全部，将直接忽略Content的内容； 其他值 ,非全部，则Centent必填， 默认为其他值。 */
+  Type?: string;
 }
 
 declare interface DeleteDomainAndIpResponse {
@@ -1498,6 +1530,8 @@ declare interface DescribeDbAssetsResponse {
 declare interface DescribeDomainAssetsRequest {
   /** - */
   Filter?: Filter;
+  /** 安全中心自定义标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeDomainAssetsResponse {
@@ -1534,6 +1568,8 @@ declare interface DescribeListenerListResponse {
 declare interface DescribePublicIpAssetsRequest {
   /** filte过滤条件 */
   Filter?: Filter;
+  /** 安全中心自定义标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribePublicIpAssetsResponse {
@@ -1560,6 +1596,8 @@ declare interface DescribePublicIpAssetsResponse {
 declare interface DescribeRiskCenterAssetViewCFGRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterAssetViewCFGRiskListResponse {
@@ -1586,6 +1624,8 @@ declare interface DescribeRiskCenterAssetViewCFGRiskListResponse {
 declare interface DescribeRiskCenterAssetViewPortRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterAssetViewPortRiskListResponse {
@@ -1610,6 +1650,8 @@ declare interface DescribeRiskCenterAssetViewPortRiskListResponse {
 declare interface DescribeRiskCenterAssetViewVULRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterAssetViewVULRiskListResponse {
@@ -1634,6 +1676,8 @@ declare interface DescribeRiskCenterAssetViewVULRiskListResponse {
 declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
@@ -1658,6 +1702,8 @@ declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
 declare interface DescribeRiskCenterPortViewPortRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterPortViewPortRiskListResponse {
@@ -1678,6 +1724,8 @@ declare interface DescribeRiskCenterPortViewPortRiskListResponse {
 declare interface DescribeRiskCenterServerRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterServerRiskListResponse {
@@ -1694,6 +1742,8 @@ declare interface DescribeRiskCenterServerRiskListResponse {
 declare interface DescribeRiskCenterVULViewVULRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterVULViewVULRiskListResponse {
@@ -1714,6 +1764,8 @@ declare interface DescribeRiskCenterVULViewVULRiskListResponse {
 declare interface DescribeRiskCenterWebsiteRiskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
 }
 
 declare interface DescribeRiskCenterWebsiteRiskListResponse {
@@ -1752,6 +1804,8 @@ declare interface DescribeScanReportListResponse {
 declare interface DescribeScanTaskListRequest {
   /** 过滤内容 */
   Filter?: Filter;
+  /** 标签 */
+  Tags?: Tags[];
 }
 
 declare interface DescribeScanTaskListResponse {
@@ -1824,10 +1878,12 @@ declare interface DescribeTaskLogListResponse {
 }
 
 declare interface DescribeTaskLogURLRequest {
-  /** 任务报告Id 列表 */
-  ReportItemKeyList: ReportItemKey[];
   /** 0: 预览， 1: 下载 */
   Type: number;
+  /** 任务报告Id 列表 */
+  ReportItemKeyList?: ReportItemKey[];
+  /** 报告中任务id列表 */
+  ReportTaskIdList?: ReportTaskIdList[];
 }
 
 declare interface DescribeTaskLogURLResponse {
@@ -1893,7 +1949,7 @@ declare interface Csip {
   /** 创建风险中心扫描任务 {@link CreateRiskCenterScanTaskRequest} {@link CreateRiskCenterScanTaskResponse} */
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
   /** 删除域名和ip请求 {@link DeleteDomainAndIpRequest} {@link DeleteDomainAndIpResponse} */
-  DeleteDomainAndIp(data: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
+  DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */

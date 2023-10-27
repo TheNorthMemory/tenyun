@@ -2789,7 +2789,7 @@ declare interface Redis {
   KillMasterGroup(data: KillMasterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<KillMasterGroupResponse>;
   /** 手动备份Redis实例 {@link ManualBackupInstanceRequest} {@link ManualBackupInstanceResponse} */
   ManualBackupInstance(data: ManualBackupInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ManualBackupInstanceResponse>;
-  /** 修改Redis密码 {@link ModfiyInstancePasswordRequest} {@link ModfiyInstancePasswordResponse} */
+  /** 修改Redis密码（请使用最新的ModifyInstancePassword接口） {@link ModfiyInstancePasswordRequest} {@link ModfiyInstancePasswordResponse} */
   ModfiyInstancePassword(data: ModfiyInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModfiyInstancePasswordResponse>;
   /** 设置自动备份配置 {@link ModifyAutoBackupConfigRequest} {@link ModifyAutoBackupConfigResponse} */
   ModifyAutoBackupConfig(data: ModifyAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoBackupConfigResponse>;

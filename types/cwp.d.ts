@@ -2054,6 +2054,8 @@ declare interface BruteAttackInfo {
   MachineExtraInfo?: MachineExtraInfo | null;
   /** 地理位置中文名 */
   Location?: string | null;
+  /** 威胁等级：0低危，1中危，2高危 */
+  RiskLevel?: number | null;
 }
 
 /** 标准阻断模式规则 */
@@ -4326,12 +4328,14 @@ declare interface ReverseShell {
   MachineName?: string;
   /** 进程树 */
   ProcTree?: string;
-  /** 检测方法 */
+  /** 检测方法: 0行为分析; 1命令特征检测 */
   DetectBy?: number;
   /** 主机额外信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
   /** 进程id */
   Pid?: number | null;
+  /** 威胁等级：0中危，1高危 */
+  RiskLevel?: number | null;
 }
 
 /** 反弹Shell数据详情 */
@@ -5076,6 +5080,18 @@ declare interface ValueInfo {
   SqlFlag: boolean;
   /** 是否包含中文 */
   ContainZH: boolean;
+}
+
+/** 授权版本白名单配置信息 */
+declare interface VersionWhiteConfig {
+  /** 到期天数 */
+  Deadline?: number;
+  /** 授权数量 */
+  LicenseNum?: number;
+  /** 是否可申请 */
+  IsApplyFor?: boolean;
+  /** 类型 */
+  SourceType?: number;
 }
 
 /** 点详细信息 */
@@ -6194,6 +6210,8 @@ declare interface CreateScanMalwareSettingRequest {
 }
 
 declare interface CreateScanMalwareSettingResponse {
+  /** 任务id */
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9424,6 +9442,12 @@ declare interface DescribeLicenseWhiteConfigRequest {
 }
 
 declare interface DescribeLicenseWhiteConfigResponse {
+  /** 旗舰版 配置信息 */
+  FlagShip?: VersionWhiteConfig;
+  /** 专业版 配置信息 */
+  Professional?: VersionWhiteConfig;
+  /** 普惠版 配置信息 */
+  PrattWhitney?: VersionWhiteConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

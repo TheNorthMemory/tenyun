@@ -1997,30 +1997,30 @@ declare interface CreateFlowsByTemplatesResponse {
 }
 
 declare interface CreateSealByImageRequest {
-  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 印章名称，最大长度不超过50字符 */
+  /** 电子印章名字，1-50个中文字符注:`同一企业下电子印章名字不能相同` */
   SealName: string;
-  /** 印章图片base64，大小不超过10M（原始图片不超过7.6M） */
+  /** 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式注: `通过图片创建的电子印章，需电子签平台人工审核` */
   SealImage?: string;
   /** 操作者的信息 */
   Operator?: UserInfo;
-  /** 本接口支持上传图片印章及系统直接生成印章； 如果要使用系统生成印章，此值传：SealGenerateSourceSystem； 如果要使用图片上传，此字段置空并且传字段 SealImage */
+  /** 电子印章生成方式空值:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片SealGenerateSourceSystem: 系统生成印章, 无需上传SealImage图片 */
   GenerateSource?: string;
-  /** 电子印章类型：OFFICIAL-公章CONTRACT-合同专用章;FINANCE-合财务专用章;PERSONNEL-人事专用章默认：OFFICIAL */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 合财务专用章;**PERSONNEL**: 人事专用章注: `同企业下只能有一个公章, 重复创建会报错` */
   SealType?: string;
-  /** 企业印章横向文字，最多可填15个汉字（若超过印章最大宽度，优先压缩字间距，其次缩小字号 */
+  /** 企业印章横向文字，最多可填15个汉字 (若超过印章最大宽度，优先压缩字间距，其次缩小字号)横向文字的位置如下图中的"印章横向文字在这里"![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage2.png) */
   SealHorizontalText?: string;
-  /** 印章样式:cycle:圆形印章ellipse:椭圆印章 注：默认圆形印章 */
+  /** 印章样式, 可以选择的样式如下: **circle**:(默认)圆形印章**ellipse**:椭圆印章 */
   SealStyle?: string;
-  /** 印章尺寸取值描述： 42_42 圆形企业公章直径42mm 40_40 圆形企业印章直径40mm 45_30 椭圆形印章45mm x 30mm */
+  /** 印章尺寸取值描述, 可以选择的尺寸如下: **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效 **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 */
   SealSize?: string;
 }
 
 declare interface CreateSealByImageResponse {
-  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。 */
   SealId?: string;
-  /** 电子印章预览链接地址，地址默认失效时间为24小时。 */
+  /** 电子印章预览链接地址，地址默认失效时间为24小时。注:`图片上传生成的电子印章无预览链接地址` */
   ImageUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2223,9 +2223,9 @@ declare interface GetDownloadFlowUrlResponse {
 }
 
 declare interface ModifyExtendedServiceRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
   Agent: Agent;
-  /** 扩展服务类型 AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制 */
+  /** 扩展服务类型AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制 */
   ServiceType: string;
   /** 操作类型 OPEN:开通 CLOSE:关闭 */
   Operate: string;
@@ -3915,7 +3915,7 @@ declare interface Essbasic {
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
   /** 通过多文件创建合同组签署流程 {@link ChannelCreateFlowGroupByFilesRequest} {@link ChannelCreateFlowGroupByFilesResponse} */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
-  /** 用模版创建合同组签署流程 {@link ChannelCreateFlowGroupByTemplatesRequest} {@link ChannelCreateFlowGroupByTemplatesResponse} */
+  /** 通过多模板创建合同组签署流程 {@link ChannelCreateFlowGroupByTemplatesRequest} {@link ChannelCreateFlowGroupByTemplatesResponse} */
   ChannelCreateFlowGroupByTemplates(data: ChannelCreateFlowGroupByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByTemplatesResponse>;
   /** 合同催办 {@link ChannelCreateFlowRemindsRequest} {@link ChannelCreateFlowRemindsResponse} */
   ChannelCreateFlowReminds(data: ChannelCreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowRemindsResponse>;
@@ -3981,7 +3981,7 @@ declare interface Essbasic {
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
   /** 用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
-  /** 通过图片为子客企业代创建印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
+  /** 创建企业电子印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转小程序查看或签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
@@ -4003,7 +4003,7 @@ declare interface Essbasic {
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
   /** 操作第三方应用平台企业模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
-  /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
+  /** 准备待发起文件(废弃) {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;
   /** 同步企业信息 {@link SyncProxyOrganizationRequest} {@link SyncProxyOrganizationResponse} */
   SyncProxyOrganization(data: SyncProxyOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<SyncProxyOrganizationResponse>;

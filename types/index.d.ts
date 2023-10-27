@@ -616,7 +616,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   cii: Cii,
   cim: Cim,
   cis: Cis,
-  /** {@link Ckafka 消息队列 CKafka} */
+  /** {@link Ckafka 消息队列 CKafka 版} */
   ckafka: Ckafka,
   /** {@link Clb 负载均衡} */
   clb: Clb,

@@ -830,6 +830,8 @@ declare interface WhoisInfo {
   Status?: string[] | null;
   /** 更新日期 */
   UpdatedDate?: string | null;
+  /** dnssec */
+  Dnssec?: string | null;
 }
 
 declare interface CheckRecordSnapshotRollbackRequest {

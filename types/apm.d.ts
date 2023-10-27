@@ -198,6 +198,8 @@ declare interface Span {
   SpanID?: string | null;
   /** 产生时间戳(毫秒) */
   StartTimeMillis?: number | null;
+  /** Parent Span Id */
+  ParentSpanID?: string | null;
 }
 
 /** Span日志部分 */

@@ -93,27 +93,27 @@ declare interface CallBackRuleInfo {
 /** 回调模板信息。 */
 declare interface CallBackTemplateInfo {
   /** 模板 ID。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 模板名称。 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 描述信息。 */
-  Description: string;
+  Description?: string;
   /** 开播回调 URL。 */
-  StreamBeginNotifyUrl: string;
+  StreamBeginNotifyUrl?: string;
   /** 混流回调 URL。(参数已弃用)。 */
-  StreamMixNotifyUrl: string;
+  StreamMixNotifyUrl?: string;
   /** 断流回调 URL。 */
-  StreamEndNotifyUrl: string;
-  /** 录制回调 URL。 */
-  RecordNotifyUrl: string;
+  StreamEndNotifyUrl?: string;
+  /** 录制文件回调 URL。 */
+  RecordNotifyUrl?: string;
   /** 截图回调 URL。 */
-  SnapshotNotifyUrl: string;
+  SnapshotNotifyUrl?: string;
   /** 鉴黄回调 URL。 */
-  PornCensorshipNotifyUrl: string;
+  PornCensorshipNotifyUrl?: string;
   /** 回调的鉴权 key。 */
-  CallbackKey: string;
+  CallbackKey?: string;
   /** 推流异常回调 URL。 */
-  PushExceptionNotifyUrl: string | null;
+  PushExceptionNotifyUrl?: string | null;
   /** 音频审核回调 URL。 */
   AudioAuditNotifyUrl?: string | null;
 }
@@ -1541,8 +1541,10 @@ declare interface CreateLiveCallbackTemplateRequest {
   StreamBeginNotifyUrl?: string;
   /** 断流回调 URL，相关协议文档：[事件消息通知](/document/product/267/32744)。 */
   StreamEndNotifyUrl?: string;
-  /** 录制回调 URL，相关协议文档：[事件消息通知](/document/product/267/32744)。 */
+  /** 录制文件回调 URL，相关协议文档：[事件消息通知](/document/product/267/32744)。 */
   RecordNotifyUrl?: string;
+  /** 录制状态回调 URL ，相关协议文档：[事件消息通知](/document/product/267/32744)。 */
+  RecordStatusNotifyUrl?: string;
   /** 截图回调 URL，相关协议文档：[事件消息通知](/document/product/267/32744)。 */
   SnapshotNotifyUrl?: string;
   /** 鉴黄回调 URL ，相关协议文档：[事件消息通知](/document/product/267/32741)。 */
@@ -3781,8 +3783,10 @@ declare interface ModifyLiveCallbackTemplateRequest {
   StreamBeginNotifyUrl?: string;
   /** 断流回调 URL。 */
   StreamEndNotifyUrl?: string;
-  /** 录制回调 URL。 */
+  /** 录制文件回调 URL。 */
   RecordNotifyUrl?: string;
+  /** 录制状态回调 URL 。 */
+  RecordStatusNotifyUrl?: string;
   /** 截图回调 URL。 */
   SnapshotNotifyUrl?: string;
   /** 鉴黄回调 URL。 */

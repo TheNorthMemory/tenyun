@@ -929,7 +929,7 @@ declare interface DescribeCallDetailInfoRequest {
   CommId: string;
   /** 查询开始时间，本地unix时间戳，单位为秒（如：1590065777），注意：支持查询14天内的数据。 */
   StartTime: number;
-  /** 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）注意：DataType 不为null ，与StartTime间隔时间不超过1小时；DataType 为null，与StartTime间隔时间不超过4小时。 */
+  /** 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）注意：查询起止时间需小于1小时，超过则返回null，即与StartTime间隔时间不超过1小时。 */
   EndTime: number;
   /** 用户SdkAppId（如：1400xxxxxx）。 */
   SdkAppId: number;
@@ -945,11 +945,11 @@ declare interface DescribeCallDetailInfoRequest {
 
 declare interface DescribeCallDetailInfoResponse {
   /** 返回的用户总条数 */
-  Total: number;
+  Total?: number;
   /** 用户信息列表 */
-  UserList: UserInformation[] | null;
+  UserList?: UserInformation[] | null;
   /** 质量数据 */
-  Data: QualityData[] | null;
+  Data?: QualityData[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

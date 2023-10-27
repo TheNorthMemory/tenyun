@@ -754,6 +754,30 @@ declare interface RabbitMQPrivateVirtualHost {
   Description?: string | null;
 }
 
+/** RabbitMQ队列列表消费者信息 */
+declare interface RabbitMQQueueListConsumerDetailInfo {
+  /** 消费者数量 */
+  ConsumersNumber: number | null;
+}
+
+/** RabbitMQ队列列表成员信息 */
+declare interface RabbitMQQueueListInfo {
+  /** 队列名 */
+  QueueName?: string;
+  /** 备注说明 */
+  Remark?: string | null;
+  /** 消费者信息 */
+  ConsumerDetail?: RabbitMQQueueListConsumerDetailInfo | null;
+  /** 队列类型，取值 "classic"，"quorum" */
+  QueueType?: string | null;
+  /** 消息堆积数 */
+  MessageHeapCount?: number | null;
+  /** 消息生产速率，每秒 */
+  MessageRateIn?: number | null;
+  /** 消息消费速率，每秒 */
+  MessageRateOut?: number | null;
+}
+
 /** RabbitMQ用户实体详情 */
 declare interface RabbitMQUser {
   /** 集群实例Id */
@@ -2584,6 +2608,96 @@ declare interface DescribeRabbitMQNodeListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRabbitMQQueueDetailRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** Vhost参数 */
+  VirtualHost: string;
+  /** 队列名称 */
+  QueueName: string;
+}
+
+declare interface DescribeRabbitMQQueueDetailResponse {
+  /** 队列名称 */
+  InstanceId: string | null;
+  /** Vhost参数 */
+  VirtualHost: string | null;
+  /** 队列名称 */
+  QueueName: string | null;
+  /** 队列类型,取值classic或quorum */
+  QueueType: string | null;
+  /** 在线消费者数量 */
+  Consumers: number | null;
+  /** 持久标记 */
+  Durable: boolean | null;
+  /** 自动清除 */
+  AutoDelete: boolean | null;
+  /** 备注 */
+  Remark: string | null;
+  /** MessageTTL参数,classic类型专用 */
+  MessageTTL: number | null;
+  /** AutoExpire参数 */
+  AutoExpire: number | null;
+  /** MaxLength参数 */
+  MaxLength: number | null;
+  /** MaxLengthBytes参数 */
+  MaxLengthBytes: number | null;
+  /** DeliveryLimit参数,quorum类型专用 */
+  DeliveryLimit: number | null;
+  /** OverflowBehaviour参数,取值为drop-head, reject-publish或reject-publish-dlx */
+  OverflowBehaviour: string | null;
+  /** DeadLetterExchange参数 */
+  DeadLetterExchange: string | null;
+  /** DeadLetterRoutingKey参数 */
+  DeadLetterRoutingKey: string | null;
+  /** SingleActiveConsumer参数 */
+  SingleActiveConsumer: boolean | null;
+  /** MaximumPriority参数,classic类型专用 */
+  MaximumPriority: number | null;
+  /** LazyMode参数,classic类型专用 */
+  LazyMode: boolean | null;
+  /** MasterLocator参数,classic类型专用 */
+  MasterLocator: string | null;
+  /** MaxInMemoryLength参数,quorum类型专用 */
+  MaxInMemoryLength: number | null;
+  /** MaxInMemoryBytes参数,quorum类型专用 */
+  MaxInMemoryBytes: number | null;
+  /** 创建时间戳,单位秒 */
+  CreateTime: number | null;
+  /** 节点 */
+  Node: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRabbitMQQueuesRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** Vhost参数 */
+  VirtualHost: string;
+  /** 分页Offset */
+  Offset?: number;
+  /** 分页Limit */
+  Limit?: number;
+  /** 搜索关键词 */
+  SearchWord?: string;
+  /** 队列类型筛选，不填或 "all"：classic 和 quorum 队列；"classic"：筛选 classic 队列；"quorum"：筛选 quorum 队列 */
+  QueueType?: string;
+  /** 排序依据的字段：MessageHeapCount - 消息堆积数；MessageRateInOut - 生产消费速率之和；MessageRateIn - 生产速率；MessageRateOut - 消费速率； */
+  SortElement?: string;
+  /** 排序顺序，ascend 或 descend */
+  SortOrder?: string;
+}
+
+declare interface DescribeRabbitMQQueuesResponse {
+  /** 列表信息 */
+  QueueInfoList?: RabbitMQQueueListInfo[] | null;
+  /** 数量 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -3947,6 +4061,10 @@ declare interface Tdmq {
   DescribePulsarProInstances(data?: DescribePulsarProInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstancesResponse>;
   /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
+  /** 查询RabbitMQ队列详情 {@link DescribeRabbitMQQueueDetailRequest} {@link DescribeRabbitMQQueueDetailResponse} */
+  DescribeRabbitMQQueueDetail(data: DescribeRabbitMQQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQQueueDetailResponse>;
+  /** 查询RabbitMQ队列列表 {@link DescribeRabbitMQQueuesRequest} {@link DescribeRabbitMQQueuesResponse} */
+  DescribeRabbitMQQueues(data: DescribeRabbitMQQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQQueuesResponse>;
   /** 查询RabbitMQ用户列表 {@link DescribeRabbitMQUserRequest} {@link DescribeRabbitMQUserResponse} */
   DescribeRabbitMQUser(data: DescribeRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQUserResponse>;
   /** 获取单个RabbitMQ专享实例信息 {@link DescribeRabbitMQVipInstanceRequest} {@link DescribeRabbitMQVipInstanceResponse} */

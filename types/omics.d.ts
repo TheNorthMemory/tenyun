@@ -2,12 +2,44 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 应用版本。 */
+declare interface ApplicationVersion {
+  /** 版本类型。 */
+  Type?: string | null;
+  /** 版本ID。 */
+  ApplicationVersionId?: string | null;
+  /** 发布名称。 */
+  Name?: string | null;
+  /** 发布描述。 */
+  Description?: string | null;
+  /** 入口文件。 */
+  Entrypoint?: string | null;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+  /** 创建者名称。 */
+  CreatorName?: string | null;
+  /** 创建者ID。 */
+  CreatorId?: string | null;
+  /** Git信息。 */
+  GitInfo?: string | null;
+}
+
 /** 云服务器配置。 */
 declare interface CVMOption {
   /** 云服务器可用区。 */
   Zone: string | null;
   /** 云服务器实例规格。 */
   InstanceType: string | null;
+}
+
+/** 缓存信息。 */
+declare interface CacheInfo {
+  /** 缓存清理时间(小时)。 */
+  CacheClearDelay?: number | null;
+  /** 缓存清理计划时间。 */
+  CacheClearTime?: string | null;
+  /** 缓存是否已被清理。 */
+  CacheCleared?: boolean | null;
 }
 
 /** 计算集群配置。 */
@@ -82,6 +114,18 @@ declare interface Filter {
   Values: string[] | null;
 }
 
+/** Nextflow选项。 */
+declare interface NFOption {
+  /** Config。 */
+  Config?: string | null;
+  /** Profile。 */
+  Profile?: string | null;
+  /** Report。 */
+  Report?: boolean | null;
+  /** Resume。 */
+  Resume?: boolean | null;
+}
+
 /** 云资源ID。 */
 declare interface ResourceIds {
   /** 私有网络ID。 */
@@ -128,6 +172,8 @@ declare interface Run {
   Option?: RunOption;
   /** 执行时间。 */
   ExecutionTime?: ExecutionTime;
+  /** 缓存信息。 */
+  Cache?: CacheInfo | null;
   /** 错误信息。 */
   ErrorMessage?: string;
   /** 创建时间。 */
@@ -164,8 +210,10 @@ declare interface RunGroup {
   Status?: string;
   /** 任务输入。 */
   Input?: string;
-  /** 运行选项。 */
+  /** WDL运行选项。 */
   Option?: RunOption;
+  /** Nextflow运行选项。 */
+  NFOption?: NFOption | null;
   /** 任务总数量。 */
   TotalRun?: number;
   /** 各状态任务的数量。 */
@@ -178,6 +226,14 @@ declare interface RunGroup {
   CreateTime?: string;
   /** 更新时间。 */
   UpdateTime?: string;
+  /** 创建者。 */
+  Creator?: string | null;
+  /** 创建者ID。 */
+  CreatorId?: string | null;
+  /** 运行结果通知方式。 */
+  ResultNotify?: string | null;
+  /** 应用版本。 */
+  ApplicationVersion?: ApplicationVersion | null;
 }
 
 /** 任务作业详情。 */
@@ -222,6 +278,8 @@ declare interface RunMetadata {
   Stdout?: string | null;
   /** 错误输出。 */
   Stderr?: string | null;
+  /** 其他信息。 */
+  Meta?: string | null;
 }
 
 /** 运行应用选项。 */
@@ -350,7 +408,7 @@ declare interface DescribeEnvironmentsResponse {
 
 declare interface DescribeRunGroupsRequest {
   /** 项目ID。 */
-  ProjectId: string;
+  ProjectId?: string;
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
   /** 偏移量，默认为0。 */
@@ -370,7 +428,7 @@ declare interface DescribeRunGroupsResponse {
 
 declare interface DescribeRunsRequest {
   /** 项目ID。 */
-  ProjectId: string;
+  ProjectId?: string;
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
   /** 偏移量，默认为0。 */
@@ -433,10 +491,10 @@ declare interface DescribeTablesRowsResponse {
 declare interface GetRunCallsRequest {
   /** 任务Uuid。 */
   RunUuid: string;
-  /** 项目ID。 */
-  ProjectId: string;
   /** 作业路径 */
   Path: string;
+  /** 项目ID。 */
+  ProjectId?: string;
 }
 
 declare interface GetRunCallsResponse {
@@ -450,7 +508,7 @@ declare interface GetRunStatusRequest {
   /** 任务Uuid。 */
   RunUuid: string;
   /** 项目ID。 */
-  ProjectId: string;
+  ProjectId?: string;
 }
 
 declare interface GetRunStatusResponse {
@@ -534,9 +592,9 @@ declare interface Omics {
   /** 查询环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询任务批次列表 {@link DescribeRunGroupsRequest} {@link DescribeRunGroupsResponse} */
-  DescribeRunGroups(data: DescribeRunGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunGroupsResponse>;
+  DescribeRunGroups(data?: DescribeRunGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunGroupsResponse>;
   /** 查询任务列表 {@link DescribeRunsRequest} {@link DescribeRunsResponse} */
-  DescribeRuns(data: DescribeRunsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunsResponse>;
+  DescribeRuns(data?: DescribeRunsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunsResponse>;
   /** 查询表格 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询表格行数据 {@link DescribeTablesRowsRequest} {@link DescribeTablesRowsResponse} */

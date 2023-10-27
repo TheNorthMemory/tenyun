@@ -1032,14 +1032,14 @@ declare interface RegionInfo {
   Region: string;
 }
 
-/** 四七层规则的 */
+/** 四七层规则对应实例与IP的关系 */
 declare interface RuleInstanceRelation {
   /** 资源实例的IP */
-  EipList: string[];
+  EipList?: string[];
   /** 资源实例的ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 资源实例的Cname */
-  Cname: string;
+  Cname?: string;
 }
 
 /** 调度域名信息 */

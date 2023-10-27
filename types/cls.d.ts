@@ -40,6 +40,14 @@ declare interface AlarmInfo {
   CallBack?: CallBackInfo | null;
   /** 多维分析设置 */
   Analysis?: AnalysisDimensional[] | null;
+  /** 分组触发状态。1：开启，0：关闭（默认） */
+  GroupTriggerStatus?: boolean | null;
+  /** 分组触发条件。 */
+  GroupTriggerCondition?: string[] | null;
+  /** 监控对象类型。0:执行语句共用监控对象;1:每个执行语句单独选择监控对象。 */
+  MonitorObjectType?: number | null;
+  /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)。 */
+  AlarmLevel?: number | null;
   /** 多触发条件。 */
   MultiConditions?: MultiCondition[] | null;
 }
@@ -441,31 +449,31 @@ declare interface DataTransformResouceInfo {
 /** 数据加工任务基本详情 */
 declare interface DataTransformTaskInfo {
   /** 数据加工任务名称 */
-  Name: string;
+  Name?: string;
   /** 数据加工任务id */
-  TaskId: string;
+  TaskId?: string;
   /** 任务启用状态，默认为1，正常开启, 2关闭 */
-  EnableFlag: number;
+  EnableFlag?: number;
   /** 加工任务类型，1： DSL， 2：SQL */
-  Type: number;
+  Type?: number;
   /** 源日志主题 */
-  SrcTopicId: string;
+  SrcTopicId?: string;
   /** 当前加工任务状态（1准备中/2运行中/3停止中/4已停止） */
-  Status: number;
+  Status?: number;
   /** 加工任务创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 最后启用时间，如果需要重建集群，修改该时间 */
-  LastEnableTime: string;
+  LastEnableTime?: string;
   /** 日志主题名称 */
-  SrcTopicName: string;
+  SrcTopicName?: string;
   /** 日志集id */
-  LogsetId: string;
+  LogsetId?: string;
   /** 加工任务目的topic_id以及别名 */
-  DstResources: DataTransformResouceInfo[];
+  DstResources?: DataTransformResouceInfo[];
   /** 加工逻辑函数 */
-  EtlContent: string;
+  EtlContent?: string;
 }
 
 /** 动态更新索引配置注意：该功能尚处于内测阶段，如需使用请联系技术支持 */
@@ -1331,6 +1339,8 @@ declare interface CreateAlarmRequest {
   AlarmNoticeIds: string[];
   /** 触发条件。 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   Condition?: string;
+  /** 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。注意: - 不填则默认为0。- Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  AlarmLevel?: number;
   /** 多触发条件。 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   MultiConditions?: MultiCondition[];
   /** 是否开启告警策略。默认值为true */
@@ -1341,6 +1351,14 @@ declare interface CreateAlarmRequest {
   CallBack?: CallBackInfo;
   /** 多维分析 */
   Analysis?: AnalysisDimensional[];
+  /** 分组触发状态。默认值false */
+  GroupTriggerStatus?: boolean;
+  /** 分组触发条件。 */
+  GroupTriggerCondition?: string[];
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的告警策略。最大支持10个标签键值对，并且不能有重复的键值对。 */
+  Tags?: Tag[];
+  /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 不填则默认为0。当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
+  MonitorObjectType?: number;
 }
 
 declare interface CreateAlarmResponse {
@@ -2469,6 +2487,12 @@ declare interface ModifyAlarmRequest {
   CallBack?: CallBackInfo;
   /** 多维分析 */
   Analysis?: AnalysisDimensional[];
+  /** 分组触发状态。true：开启，false：关闭（默认） */
+  GroupTriggerStatus?: boolean;
+  /** 分组触发条件。 */
+  GroupTriggerCondition?: string[];
+  /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
+  MonitorObjectType?: number;
 }
 
 declare interface ModifyAlarmResponse {
@@ -2593,6 +2617,8 @@ declare interface ModifyDataTransformRequest {
   EnableFlag?: number;
   /** 加工任务目的topic_id以及别名 */
   DstResources?: DataTransformResouceInfo[];
+  /** 是否开启投递服务日志。1关闭，2开启 */
+  HasServicesLog?: number;
 }
 
 declare interface ModifyDataTransformResponse {

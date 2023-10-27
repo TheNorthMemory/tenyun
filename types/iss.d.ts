@@ -1166,7 +1166,7 @@ declare interface Timeline {
 declare interface UpdateDeviceData {
   /** 设备ID */
   DeviceId?: string | null;
-  /** 设备编码（即我们为设备生成的20位国标编码） */
+  /** 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码） */
   Code?: string | null;
   /** 设备名称 */
   Name?: string | null;
@@ -2539,6 +2539,8 @@ declare interface UpdateUserDeviceRequest {
   Port?: number;
   /** 设备用户名（仅网关接入支持） */
   Username?: string;
+  /** 网关设备接入协议（仅网关接入支持） */
+  ProtocolType?: number;
 }
 
 declare interface UpdateUserDeviceResponse {

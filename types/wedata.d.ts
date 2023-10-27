@@ -4378,6 +4378,14 @@ declare interface TaskScriptContent {
   ScriptContent: string | null;
 }
 
+/** 任务标签，可用于检索任务的条件 */
+declare interface TaskTag {
+  /** 标签名称 */
+  TagName: string;
+  /** 标签值列表 */
+  TagValues: string[];
+}
+
 /** TaskTypeCnt */
 declare interface TaskTypeCnt {
   /** 统计值 */
@@ -7849,6 +7857,8 @@ declare interface DescribeOperateOpsTasksRequest {
   AlarmType?: string;
   /** 资源组id,多个资源组id之间以英文字符逗号分隔 */
   ExecutorGroupIdList?: string;
+  /** 任务标签 */
+  TaskTags?: TaskTag[];
 }
 
 declare interface DescribeOperateOpsTasksResponse {

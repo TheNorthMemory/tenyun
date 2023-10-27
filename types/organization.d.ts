@@ -388,6 +388,16 @@ declare interface CreateOrganizationResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAccountRequest {
+  /** 成员uin。 */
+  MemberUin: number;
+}
+
+declare interface DeleteAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteOrganizationIdentityRequest {
   /** 身份ID */
   IdentityId: number;
@@ -1169,6 +1179,8 @@ declare interface Organization {
   CreateOrganizationMemberPolicy(data: CreateOrganizationMemberPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberPolicyResponse>;
   /** 创建组织成员访问策略 {@link CreateOrganizationMembersPolicyRequest} {@link CreateOrganizationMembersPolicyResponse} */
   CreateOrganizationMembersPolicy(data: CreateOrganizationMembersPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMembersPolicyResponse>;
+  /** 删除成员账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
+  DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
   /** 删除企业组织 {@link DeleteOrganizationRequest} {@link DeleteOrganizationResponse} */
   DeleteOrganization(data?: DeleteOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationResponse>;
   /** 删除组织身份 {@link DeleteOrganizationIdentityRequest} {@link DeleteOrganizationIdentityResponse} */
