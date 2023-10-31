@@ -174,6 +174,8 @@ declare interface OutputManageMarketingRiskValue {
   RiskType?: number[] | null;
   /** 唯一ID */
   ConstId?: string | null;
+  /** 扩展信息 */
+  RiskInformation?: string | null;
 }
 
 /** QQ账号信息。 */

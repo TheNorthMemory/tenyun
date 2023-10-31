@@ -1745,7 +1745,7 @@ declare interface DescribeInstancesRequest {
   BillingMode?: string;
   /** 实例类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
   Type?: number;
-  /** 设置搜索关键字数组，可根据实例ID、实例名称、完整IP地址搜索实例。 */
+  /** 该参数为数组类型，支持配置实例名称、实例 ID、IP地址，其中实例名称为模糊匹配，实例 ID 和 IP 地址精确匹配。- 数组中每一个元素取并集进行匹配查询。- **InstanceId** 与 **SearchKeys** 同时配置，则取二者交集进行匹配查询。 */
   SearchKeys?: string[];
   /** 内部参数，用户可忽略。 */
   TypeList?: number[];

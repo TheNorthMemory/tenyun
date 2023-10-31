@@ -545,15 +545,15 @@ declare interface FlowInfo {
   /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
   CcNotifyType?: number;
   /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
-  AutoSignScene?: string | null;
+  AutoSignScene?: string;
 }
 
 /** 流程对应资源链接信息 */
 declare interface FlowResourceUrlInfo {
-  /** 流程对应Id */
-  FlowId: string | null;
-  /** 流程对应资源链接信息数组 */
-  ResourceUrlInfos: ResourceUrlInfo[] | null;
+  /** 合同流程的ID */
+  FlowId?: string | null;
+  /** 对应的合同流程的PDF下载链接 */
+  ResourceUrlInfos?: ResourceUrlInfo[] | null;
 }
 
 /** 电子文档的控件填充信息。按照控件类型进行相应的填充。当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "文本内容"}```当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "多行文本内容"}```当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "true"}```当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"}```当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"}```当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "选择的内容"}```当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "2023年01月01日"}```当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "广东省深圳市福田区"}```【数据表格传参说明】当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
@@ -781,11 +781,11 @@ declare interface RemindFlowRecords {
 /** 资源链接信息 */
 declare interface ResourceUrlInfo {
   /** 资源链接地址，过期时间5分钟 */
-  Url: string | null;
+  Url?: string | null;
   /** 资源名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 资源类型 */
-  Type: string | null;
+  Type?: string | null;
 }
 
 /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
@@ -826,7 +826,7 @@ declare interface SignUrlInfo {
   Mobile?: string | null;
   /** 签署参与者机构名字 */
   OrganizationName?: string | null;
-  /** 参与者类型:ORGANIZATION 企业经办人PERSON 自然人 */
+  /** 参与者类型, 类型如下:**ORGANIZATION**:企业经办人**PERSON**: 自然人 */
   ApproverType?: string | null;
   /** 经办人身份证号 */
   IdCardNumber?: string | null;
@@ -968,11 +968,11 @@ declare interface UserInfo {
 
 /** 用户的三要素：姓名，证件号，证件类型 */
 declare interface UserThreeFactor {
-  /** 姓名 */
+  /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   Name: string;
-  /** 证件类型: ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   IdCardType: string;
-  /** 证件号，如果有 X 请大写 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
 }
 
@@ -991,7 +991,7 @@ declare interface ChannelBatchCancelFlowsRequest {
   FlowIds: string[];
   /** 撤销理由,不超过200个字符 */
   CancelMessage?: string;
-  /** 撤销理由自定义格式；选项：- 0 默认格式- 1 只保留身份信息：展示为【发起方】- 2 保留身份信息+企业名称：展示为【发起方xxx公司】- 3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
+  /** 撤销理由自定义格式，支持以下格式0 : 默认值1 : 只保留身份信息2 : 保留身份信息+企业名称3 : 保留身份信息+企业名称+经办人名称例如,假设合同的发起方是典子谦示例企业的经办人张三，撤销理由是"合同内容错误，需要修正",合同撤销后，各签署方看到的撤销理由是会是0: 发起方-典子谦示例企业-张三以"合同内容错误，需要修正"的理由撤销当前合同1: 发起方以"合同内容错误，需要修正"的理由撤销当前合同2: 发起方-典子谦示例企业以"合同内容错误，需要修正"的理由撤销当前合同3: 发起方-典子谦示例企业-张三以"合同内容错误，需要修正"的理由撤销当前合同备注:`如果不传递撤销理由，那么默认撤销理由是 "自动撤销（通过接口实现）"` */
   CancelMessageFormat?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1005,13 +1005,13 @@ declare interface ChannelBatchCancelFlowsResponse {
 }
 
 declare interface ChannelCancelFlowRequest {
-  /** 签署流程编号 */
+  /** 要撤销的合同流程ID */
   FlowId: string;
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent?: Agent;
-  /** 撤回原因，最大不超过200字符 */
+  /** 撤回原因，长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   CancelMessage?: string;
-  /** 撤销理由自定义格式；选项：0 默认格式1 只保留身份信息：展示为【发起方】2 保留身份信息+企业名称：展示为【发起方xxx公司】3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
+  /** 撤销理由自定义格式, 会展示在合同预览的界面中, 可以选择下面的组合方式：**0** : 默认格式, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同**1** : 合同封面页面会展示为: 发起方以**CancelMessage**的理由撤销当前合同**2** : 保留企业名称, 合同封面页面会展示为: 发起方-企业名称以**CancelMessage**的理由撤销当前合同**3** : 保留企业名称+经办人名字, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同注: `CancelMessage为撤销当前合同的理由`![image](https://dyn.ess.tencent.cn/guide/capi/channel_ChannelCancelFlow.png) */
   CancelMessageFormat?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1237,7 +1237,7 @@ declare interface ChannelCreateFlowGroupByFilesRequest {
   FlowFileInfos: FlowFileInfo[];
   /** 合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowGroupName: string;
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId子客企业和子客企业中的员工比较走完创建和实名过程 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent?: Agent;
   /** 合同组中签署人校验和认证的方式：**VerifyCheck**：人脸识别（默认）**MobileCheck**：手机号验证注意：`1. MobileCheck 方式，未实名的个人/自然人签署方无需进行人脸识别实名认证即可查看合同（但签署合同时仍然需要人脸实名），企业签署方需经过人脸认证。``2. 合同组的校验和认证的方式会优先使用，会覆盖合同组中单个合同和合同签署方认证方式的限制配置。` */
   ApproverVerifyType?: string;
@@ -1250,14 +1250,14 @@ declare interface ChannelCreateFlowGroupByFilesRequest {
 declare interface ChannelCreateFlowGroupByFilesResponse {
   /** 合同组ID，为32位字符串。建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。 */
   FlowGroupId?: string | null;
-  /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:`此数组的顺序和入参中的FlowGroupInfos顺序回不一致` */
+  /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:`此数组的顺序和入参中的FlowGroupInfos顺序一致` */
   FlowIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelCreateFlowGroupByTemplatesRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId子客企业和子客企业中的员工比较走完创建和实名过程 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
   /** 合同组中每个合同签署流程的信息，合同组中最少包含2个合同，不能超过50个合同。 */
   FlowInfos: FlowInfo[];
@@ -1268,7 +1268,7 @@ declare interface ChannelCreateFlowGroupByTemplatesRequest {
 declare interface ChannelCreateFlowGroupByTemplatesResponse {
   /** 合同组ID，为32位字符串。建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。 */
   FlowGroupId?: string;
-  /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:`此数组的顺序和入参中的FlowInfos顺序回不一致` */
+  /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:`此数组的顺序和入参中的FlowInfos顺序一致` */
   FlowIds?: string[];
   /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
   TaskInfos?: TaskInfo[];
@@ -1769,37 +1769,37 @@ declare interface ChannelDescribeRolesResponse {
 }
 
 declare interface ChannelDescribeUserAutoSignStatusRequest {
-  /** 渠道应用相关信息 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
-  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
   SceneKey: string;
-  /** 查询开启状态的用户信息 */
+  /** 要查询状态的用户信息, 包括名字,身份证等 */
   UserInfo: UserThreeFactor;
-  /** 操作人信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
 }
 
 declare interface ChannelDescribeUserAutoSignStatusResponse {
-  /** 是否开通 */
+  /** 查询用户是否已开通自动签 */
   IsOpen?: boolean;
-  /** 自动签许可生效时间。当且仅当已开通自动签时有值。 */
+  /** 自动签许可生效时间。当且仅当已通过许可开通自动签时有值。值为unix时间戳,单位为秒。 */
   LicenseFrom?: number;
-  /** 自动签许可到期时间。当且仅当已开通自动签时有值。 */
+  /** 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。值为unix时间戳,单位为秒。 */
   LicenseTo?: number;
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人` */
   LicenseType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelDisableUserAutoSignRequest {
-  /** 渠道应用相关信息 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
-  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** 电子处方 */
   SceneKey: string;
-  /** 关闭自动签的个人的三要素 */
+  /** 需要关闭自动签的个人的信息，如姓名，证件信息等。 */
   UserInfo: UserThreeFactor;
-  /** 操作人信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
 }
 
@@ -1931,36 +1931,36 @@ declare interface CreateChannelOrganizationInfoChangeUrlResponse {
 }
 
 declare interface CreateConsoleLoginUrlRequest {
-  /** 应用信息此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId注:`1. 企业激活时, 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识, 建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 ``2. 员工认证时, 此时的Agent.ProxyOrganizationOpenId将会是员工认证加入企业后的唯一标识, 建议开发者保存此员工的penId, 后续各项接口调用皆需要此参数。 ``3. 同渠道应用(Agent.AppId)下,企业唯一标识ProxyOrganizationOpenId需要保持唯一, 员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)` */
   Agent: Agent;
-  /** 子客企业名称，最大长度64个字符注意：1、如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。2、该名称需要与Agent.ProxyOrganizationOpenId相匹配。 */
+  /** 第三方平台子客企业名称，请确认该名称与企业营业执照中注册的名称一致。注: `1. 如果名称中包含英文括号()，请使用中文括号（）代替。` `2、该名称需要与Agent.ProxyOrganizationOpenId相匹配, 企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 ` */
   ProxyOrganizationName: string;
-  /** 子客企业统一社会信用代码，最大长度200个字符注意：1、如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 */
+  /** 子客企业统一社会信用代码，最大长度200个字符注意：`如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效`。 */
   UniformSocialCreditCode?: string;
-  /** 子客企业经办人的姓名，最大长度50个字符注意：1、若经办人已经实名，这里修改经办人名字传入将不会生效。2、该名称需要和Agent. ProxyOperator.OpenId相匹配 */
+  /** 子客企业员工的姓名，最大长度50个字符, 员工的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：`该姓名需要和Agent.ProxyOperator.OpenId相匹配, 当员工完成认证后该姓名会和Agent.ProxyOperator.OpenId一一绑定, 若员工已认证加入企业，这里修改经办人名字传入将不会生效` */
   ProxyOperatorName?: string;
-  /** PC控制台登录后进入该参数指定的模块，如果不传递，将默认进入控制台首页。支持的模块包括：1、DOCUMENT:合同管理模块，2、TEMPLATE:企业模板管理模块，3、SEAL:印章管理模块，4、OPERATOR:组织管理模块，默认将进入企业中心模块注意：1、如果EndPoint选择"CHANNEL"或"APP"，该参数仅支持传递"SEAL"，进入印章管理模块2、该参数仅在企业和员工激活完成，登录控制台场景才生效。 */
+  /** Web控制台登录后进入的功能模块, 支持的模块包括： **空值** :(默认)企业中心模块 **DOCUMENT** :合同管理模块 **TEMPLATE** :企业模板管理模块 **SEAL** :印章管理模块 **OPERATOR** :组织管理模块注意：1、如果EndPoint选择"CHANNEL"或"APP"，该参数仅支持传递"SEAL"，进入印章管理模块2、该参数**仅在企业和员工激活已经完成，登录控制台场景才生效**。 */
   Module?: string;
-  /** 该参数和Module参数配合使用，用于指定模块下的资源Id，指定后链接登录将展示该资源的详情。根据Module参数的不同所代表的含义不同。当前支持：1、如果Module="SEAL"，ModuleId代表印章Id, 登录链接将直接查看指定印章的详情。2、如果Module="TEMPLATE"，ModuleId代表模版Id，登录链接将直接查看指定模版的详情。3、如果Module="1、DOCUMENT"，ModuleId代表合同Id，登录链接将直接查看指定合同的详情。注意：1、该参数仅在企业和员工激活完成，登录控制台场景才生效。2、ModuleId需要和Module对应，ModuleId可以通过API或者控制台获取到。 */
+  /** 该参数和Module参数配合使用，用于指定模块下的资源Id，指定后链接登录将展示该资源的详情。根据Module参数的不同所代表的含义不同(ModuleId需要和Module对应，ModuleId可以通过API或者控制台获取到)。当前支持： Module传值 ModuleId传值 进入的目标页面 SEAL 印章ID 查看指定印章的详情页面 TEMPLATE 合同模板ID 指定模版的详情页面 DOCUMENT 合同ID 指定合同的详情页面 注意：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   ModuleId?: string;
-  /** 是否展示左侧菜单栏 "ENABLE": 是，展示 “DISABLE”: 否，不展示默认值为ENABLE注意：1、该参数仅在企业和员工激活完成，登录控制台场景才生效。 */
+  /** 是否展示左侧菜单栏 **ENABLE** : (默认)进入web控制台展示左侧菜单栏 **DISABLE** : 进入web控制台不展示左侧菜单栏注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   MenuStatus?: string;
-  /** 生成链接的类型："PC"：PC控制台链接"CHANNEL"：H5跳转到电子签小程序链接"APP"：第三方APP或小程序跳转电子签小程序链接默认将生成PC控制台链接 */
+  /** 生成链接的类型：生成链接的类型**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序 */
   Endpoint?: string;
-  /** 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括："VERIFIED":企业认证完成/员工认证完成后跳回原App/小程序 */
+  /** 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括： **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序 */
   AutoJumpBackEvent?: string;
-  /** 可选的企业授权方式: 1：上传授权书 2：转法定代表人授权4：企业实名认证（信任第三方认证源）（此项仅支持单选）未选择信任第三方认证源时，如果是法人进行企业激活，仅支持法人扫脸直接授权，该配置不生效；选择信任第三方认证源时，请先通过“同步企业信息”接口同步信息。该参数仅在企业激活场景生效 */
+  /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书2：转法定代表人授权4：企业实名认证（信任第三方认证源）（此项有排他性, 选择后不能增添其他的方式）注:未选择信任第三方认证源时，如果是法人进行企业激活，仅支持法人扫脸直接授权，该配置不对此法人生效`选择信任第三方认证源时，请先通过同步企业信息接口同步信息。该参数仅在企业未激活时生效 */
   AuthorizationTypes?: number[];
   /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 子客企业Web控制台url注意事项：1. 所有类型的链接在企业未认证/员工未认证完成时，只要在有效期内（一年）都可以访问2. 若企业认证完成且员工认证完成后，重新获取pc端的链接在5分钟之内有效，且只能访问一次3. 若企业认证完成且员工认证完成后，重新获取CHANNEL/APP的链接只要在有效期内（一年）都可以访问4. 此链接仅单次有效，每次登录需要需要重新创建新的链接，尽量不要做链接存储，多次使用。5. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义 */
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP 一年 注： `1.链接仅单次有效，每次登录需要需要重新创建新的链接``2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
   ConsoleUrl?: string;
-  /** 子客企业是否已开通腾讯电子签，true-是，false-否注意：1、企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码 */
+  /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：`企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码` */
   IsActivated?: boolean;
-  /** 当前经办人是否已认证，true-是，false-否注意：1、经办人是否实名是根据Agent.ProxyOperator.OpenId判断，非经办人姓名 */
+  /** 当前经办人是否已认证并加入功能 **true** : 已经认证加入公司 **false** : 还未认证加入公司注意：**员工是否实名是根据Agent.ProxyOperator.OpenId判断，非经办人姓名** */
   ProxyOperatorIsVerified?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1997,7 +1997,7 @@ declare interface CreateFlowsByTemplatesResponse {
 }
 
 declare interface CreateSealByImageRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId第三方平台子客企业和员工必须已经经过实名认证 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
   /** 电子印章名字，1-50个中文字符注:`同一企业下电子印章名字不能相同` */
   SealName: string;
@@ -2007,7 +2007,7 @@ declare interface CreateSealByImageRequest {
   Operator?: UserInfo;
   /** 电子印章生成方式空值:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片SealGenerateSourceSystem: 系统生成印章, 无需上传SealImage图片 */
   GenerateSource?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 合财务专用章;**PERSONNEL**: 人事专用章注: `同企业下只能有一个公章, 重复创建会报错` */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章注: `同企业下只能有一个公章, 重复创建会报错` */
   SealType?: string;
   /** 企业印章横向文字，最多可填15个汉字 (若超过印章最大宽度，优先压缩字间距，其次缩小字号)横向文字的位置如下图中的"印章横向文字在这里"![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage2.png) */
   SealHorizontalText?: string;
@@ -2027,25 +2027,25 @@ declare interface CreateSealByImageResponse {
 }
 
 declare interface CreateSignUrlsRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 流程(合同)的编号列表，最多支持100个。(备注：该参数和合同组编号必须二选一) */
+  /** 合同流程ID数组，最多支持100个。注: `该参数和合同组编号必须二选一` */
   FlowIds?: string[];
-  /** 合同组编号(备注：该参数和合同(流程)编号数组必须二选一) */
+  /** 合同组编号注：`该参数和合同流程ID数组必须二选一` */
   FlowGroupId?: string;
-  /** 签署链接类型,可以设置的参数如下- WEIXINAPP:短链直接跳小程序 (默认类型)- CHANNEL:跳转H5页面- APP:第三方APP或小程序跳转电子签小程序- LONGURL2WEIXINAPP:长链接跳转小程序 */
+  /** 签署链接类型,可以设置的参数如下 **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链 **CHANNEL** :带有H5引导页的跳转电子签小程序的链接 **APP** :第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型 **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下** */
   Endpoint?: string;
-  /** 签署链接生成类型，可以选择的类型如下- ALL：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接(默认类型)- CHANNEL：第三方平台子客企业企业- NOT_CHANNEL：非第三方平台子客企业企业- PERSON：个人- FOLLOWER：关注方，目前是合同抄送方- RECIPIENT：获取RecipientId对应的签署链接，可用于生成动态签署人补充链接 */
+  /** 签署链接生成类型，可以选择的类型如下**ALL**：(默认)全部签署方签署链接，此时不会给自动签署(静默签署)的签署方创建签署链接**CHANNEL**：第三方子企业员工签署方**NOT_CHANNEL**：SaaS平台企业员工签署方**PERSON**：个人/自然人签署方**FOLLOWER**：关注方，目前是合同抄送方**RECIPIENT**：获取RecipientId对应的签署链接，可用于生成动态签署人补充链接 */
   GenerateType?: string;
-  /** 非第三方平台子客企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填 */
+  /** SaaS平台企业员工签署方的企业名称如果名称中包含英文括号()，请使用中文括号（）代替。注: `GenerateType为"NOT_CHANNEL"时必填` */
   OrganizationName?: string;
-  /** 参与人姓名GenerateType为"PERSON"(即个人签署方)时必填 */
+  /** 合同流程里边参与方的姓名。注: `GenerateType为"PERSON"(即个人签署方)时必填` */
   Name?: string;
-  /** 参与人手机号GenerateType为"PERSON"或"FOLLOWER"时必填 */
+  /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。注: `GenerateType为"PERSON"或"FOLLOWER"时必填` */
   Mobile?: string;
-  /** 第三方平台子客企业的企业OpenId，GenerateType为"CHANNEL"时必填 */
+  /** 第三方平台子客企业的企业的标识, 即OrganizationOpenId注: `GenerateType为"CHANNEL"时必填` */
   OrganizationOpenId?: string;
-  /** 第三方平台子客企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息 */
+  /** 第三方平台子客企业员工的标识OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息 */
   OpenId?: string;
   /** Endpoint为"APP" 类型的签署链接，可以设置此值；支持调用方小程序打开签署链接，在电子签小程序完成签署后自动回跳至调用方小程序 */
   AutoJumpBack?: boolean;
@@ -2053,9 +2053,9 @@ declare interface CreateSignUrlsRequest {
   JumpUrl?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
-  /** 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下- 0:合同签署页面更多操作按钮- 1:合同签署页面更多操作的拒绝签署按钮- 2:合同签署页面更多操作的转他人处理按钮- 3:签署成功页的查看详情按钮 */
+  /** 生成的签署链接在签署页面隐藏的按钮列表，可设置如下： **0** :合同签署页面更多操作按钮 **1** :合同签署页面更多操作的拒绝签署按钮 **2** :合同签署页面更多操作的转他人处理按钮 **3** :签署成功页的查看详情按钮注: `字段为数组, 可以传值隐藏多个按钮` */
   Hides?: number[];
-  /** 签署节点ID，用于补充动态签署人，使用此参数需要与flow_ids数量一致并且一一对应 */
+  /** 参与方角色ID，用于生成动态签署人链接完成领取。注：`使用此参数需要与flow_ids数量一致并且一一对应, 表示在对应同序号的流程中的参与角色ID`， */
   RecipientIds?: string[];
 }
 
@@ -2125,18 +2125,18 @@ declare interface DescribeFlowDetailInfoResponse {
 }
 
 declare interface DescribeResourceUrlsByFlowsRequest {
-  /** 应用相关信息。此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 查询资源所对应的签署流程Id，最多支持50个 */
+  /** 需要下载的合同流程的ID, 至少需要1个, 做多50个 */
   FlowIds?: string[];
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
 }
 
 declare interface DescribeResourceUrlsByFlowsResponse {
-  /** 签署流程资源对应链接信息 */
+  /** 合同流程PDF下载链接 */
   FlowResourceUrlInfos?: FlowResourceUrlInfo[];
-  /** 创建消息，对应多个合同ID，成功为“”,创建失败则对应失败消息 */
+  /** 如果某个序号的合同流程生成PDF下载链接成功, 对应序号的值为空如果某个序号的合同流程生成PDF下载链接失败, 对应序号的值为错误的原因 */
   ErrorMessages?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2207,16 +2207,16 @@ declare interface DescribeUsageResponse {
 }
 
 declare interface GetDownloadFlowUrlRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 文件夹数组，签署流程总数不能超过50个，一个文件夹下，不能超过20个签署流程 */
+  /** 流程合同ID列表, 可将这些流程ID组织成合同组的形式, 下载时候每个文件夹会是一个zip压缩包, 每个文件夹对多20个合同, 所有文件夹最多50个合同如下列组织形式, 控制台下载页面点击下载按钮后, 会生成**2023采购合同.zip**和**2023入职合同.zip** 两个下载任务(注:`部分浏览器需要授权或不支持创建多下载任务`)**2023采购合同.zip**压缩包会有`yDwivUUckpor6wtoUuogwQHCAB0ES0pQ`和`yDwi8UUckpo5fz9cUqI6nGwcuTvt9YSh`两个合同的文件**2023入职合同.zip** 压缩包会有`yDwivUUckpor6wobUuogwQHvdGfvDi5K`的文件![image](	https://dyn.ess.tencent.cn/guide/capi/channel_GetDownloadFlowUrl_DownLoadFlows.png) */
   DownLoadFlows?: DownloadFlowInfo[];
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
 }
 
 declare interface GetDownloadFlowUrlResponse {
-  /** 合同（流程）下载地址 */
+  /** 跳转控制台合同下载页面链接 , 5分钟之内有效，且只能访问一次 */
   DownLoadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2337,22 +2337,22 @@ declare interface SyncProxyOrganizationResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 应用相关信息，若是第三方应用集成调用 若是第三方应用集成调用,Agent.AppId 和 Agent.ProxyOrganizationOpenId 必填 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html */
+  /** 文件对应业务类型,可以选择的类型如下 **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html，如果非pdf文件需要通过创建文件转换任务转换后才能使用 */
   BusinessType: string;
-  /** 上传文件内容数组，最多支持20个文件 */
+  /** 上传文件内容数组，最多支持上传20个文件。 */
   FileInfos?: UploadFile[];
   /** 操作者的信息 */
   Operator?: UserInfo;
 }
 
 declare interface UploadFilesResponse {
-  /** 上传成功文件数量 */
+  /** 上传成功文件数量注: `如果一个文件上传失败, 则全部文件皆上传失败` */
   TotalCount?: number;
-  /** 文件id数组，有效期一个小时；有效期内此文件id可以反复使用 */
+  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。注:`有效期一个小时, 有效期内此文件id可以反复使用, 超过有效期无法使用` */
   FileIds?: string[];
-  /** 文件Url */
+  /** 对应上传文件的下载链接，过期时间5分钟 */
   FileUrls?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3893,7 +3893,7 @@ declare interface Essbasic {
   (): Versions;
   /** 根据签署流程id批量撤销合同 {@link ChannelBatchCancelFlowsRequest} {@link ChannelBatchCancelFlowsResponse} */
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
-  /** 撤销签署流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */
+  /** 撤销合同流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */
   ChannelCancelFlow(data: ChannelCancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelFlowResponse>;
   /** 取消一码多扫二维码 {@link ChannelCancelMultiFlowSignQRCodeRequest} {@link ChannelCancelMultiFlowSignQRCodeResponse} */
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
@@ -3983,7 +3983,7 @@ declare interface Essbasic {
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
   /** 创建企业电子印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
-  /** 获取跳转小程序查看或签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
+  /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
   /** 查询出证报告 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
@@ -3991,13 +3991,13 @@ declare interface Essbasic {
   DescribeExtendedServiceAuthInfo(data: DescribeExtendedServiceAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfoResponse>;
   /** 查询合同(签署流程)的详细信息 {@link DescribeFlowDetailInfoRequest} {@link DescribeFlowDetailInfoResponse} */
   DescribeFlowDetailInfo(data: DescribeFlowDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowDetailInfoResponse>;
-  /** 根据签署流程信息批量获取资源下载链接 {@link DescribeResourceUrlsByFlowsRequest} {@link DescribeResourceUrlsByFlowsResponse} */
+  /** 获取合同PDF下载链接 {@link DescribeResourceUrlsByFlowsRequest} {@link DescribeResourceUrlsByFlowsResponse} */
   DescribeResourceUrlsByFlows(data: DescribeResourceUrlsByFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUrlsByFlowsResponse>;
   /** 查询模板信息列表 {@link DescribeTemplatesRequest} {@link DescribeTemplatesResponse} */
   DescribeTemplates(data: DescribeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplatesResponse>;
   /** 合同用量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
-  /** 获取合同（流程）批量下载链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
+  /** 获取控制台下载合同页面跳转链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
   /** 修改企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;

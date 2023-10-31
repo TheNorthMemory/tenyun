@@ -340,14 +340,16 @@ declare interface InvoiceItem {
   SingleInvoiceInfos?: SingleInvoiceItem;
   /** 发票处于识别图片或PDF文件中的页教，默认从1开始。 */
   Page?: number;
-  /** 发票详细类型，详见上方 SubType 返回值说明 */
+  /** 发票详细类型，详见票据识别（高级版）接口文档说明中 SubType 返回值说明 */
   SubType?: string;
-  /** 发票类型描述，详见上方 TypeDescription 返回值说明 */
+  /** 发票类型描述，详见票据识别（高级版）接口文档说明中 TypeDescription 返回值说明 */
   TypeDescription?: string;
   /** 切割单图文件，Base64编码后的切图后的图片文件，开启 EnableCutImage 后进行返回 */
   CutImage?: string;
   /** 发票详细类型描述，详见上方 SubType 返回值说明 */
   SubTypeDescription?: string;
+  /** 该发票中所有字段坐标信息。包括字段英文名称、字段值所在位置四点坐标、字段所属行号，具体内容请点击左侧链接。 */
+  ItemPolygon?: ItemPolygonInfo[];
 }
 
 /** 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
@@ -368,6 +370,16 @@ declare interface ItemInfo {
   Key?: Key | null;
   /** Value信息组 */
   Value?: Value | null;
+}
+
+/** 发票字段坐标信息。包括字段英文名称、字段值所在位置的四点坐标、字段所属行号，具体内容请点击左侧链接。 */
+declare interface ItemPolygonInfo {
+  /** 发票的英文字段名称（如Title） */
+  Key?: string;
+  /** 字段值所在位置的四点坐标 */
+  Polygon?: Polygon;
+  /** 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。 */
+  Row?: number;
 }
 
 /** key信息组 */
@@ -2225,12 +2237,12 @@ declare interface DriverLicenseOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
   ImageUrl?: string;
-  /** FRONT 为驾驶证主页正面（有红色印章的一面），BACK 为驾驶证副页正面（有档案编号的一面）。默认值为：FRONT。 */
+  /** FRONT 为驾驶证主页正面（有红色印章的一面），BACK 为驾驶证副页正面（有档案编号的一面）。DOUBLE 支持自动识别驾驶证正副页单面，和正副双面同框识别默认值为：FRONT。 */
   CardSide?: string;
 }
 
 declare interface DriverLicenseOCRResponse {
-  /** 姓名 */
+  /** 驾驶证正页姓名 */
   Name?: string;
   /** 性别 */
   Sex?: string;
@@ -2248,7 +2260,7 @@ declare interface DriverLicenseOCRResponse {
   StartDate?: string;
   /** 有效期截止时间（新版驾驶证返回 YYYY-MM-DD，老版驾驶证返回有效期限 X年） */
   EndDate?: string;
-  /** 证号 */
+  /** 驾驶证正页证号 */
   CardCode?: string;
   /** 档案编号 */
   ArchivesCode?: string;
@@ -2268,6 +2280,10 @@ declare interface DriverLicenseOCRResponse {
   CurrentTime?: string;
   /** 生成时间（仅电子驾驶证支持返回该字段） */
   GenerateTime?: string;
+  /** 驾驶证副页姓名 */
+  BackPageName?: string;
+  /** 驾驶证副页证号 */
+  BackPageCardCode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3159,6 +3175,8 @@ declare interface RecognizeGeneralInvoiceRequest {
   EnableMultiplePage?: boolean;
   /** 是否返回切割图片base64，默认值为false。 */
   EnableCutImage?: boolean;
+  /** 是否打开字段坐标返回。默认为false。 */
+  EnableItemPolygon?: boolean;
 }
 
 declare interface RecognizeGeneralInvoiceResponse {

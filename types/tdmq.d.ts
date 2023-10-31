@@ -3128,6 +3128,28 @@ declare interface DescribeRocketMQSourceClusterTopicListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQSubscriptionsRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 命名空间名称 */
+  Namespace: string;
+  /** 消费组名称 */
+  Group: string;
+  /** 查询起始位置 */
+  Offset: number;
+  /** 查询限制条数 */
+  Limit: number;
+}
+
+declare interface DescribeRocketMQSubscriptionsResponse {
+  /** 总条数 */
+  TotalCount: number;
+  /** 订阅关系列表 */
+  Subscriptions: RocketMQSubscription[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQTopicMsgsRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -4101,6 +4123,8 @@ declare interface Tdmq {
   DescribeRocketMQSourceClusterGroupList(data: DescribeRocketMQSourceClusterGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterGroupListResponse>;
   /** 平滑迁移：获取源集群的topic列表 {@link DescribeRocketMQSourceClusterTopicListRequest} {@link DescribeRocketMQSourceClusterTopicListResponse} */
   DescribeRocketMQSourceClusterTopicList(data: DescribeRocketMQSourceClusterTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterTopicListResponse>;
+  /** 获取RocketMQ消费组订阅关系 {@link DescribeRocketMQSubscriptionsRequest} {@link DescribeRocketMQSubscriptionsResponse} */
+  DescribeRocketMQSubscriptions(data: DescribeRocketMQSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSubscriptionsResponse>;
   /** rocketmq 消息查询 {@link DescribeRocketMQTopicMsgsRequest} {@link DescribeRocketMQTopicMsgsResponse} */
   DescribeRocketMQTopicMsgs(data: DescribeRocketMQTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicMsgsResponse>;
   /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */

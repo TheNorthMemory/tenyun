@@ -2537,6 +2537,8 @@ declare interface ModifyLoadBalancerMixIpTargetResponse {
 declare interface ModifyLoadBalancerSlaRequest {
   /** 负载均衡实例信息。 */
   LoadBalancerSla: SlaUpdateParam[];
+  /** 是否强制升级，默认否。 */
+  Force?: boolean;
 }
 
 declare interface ModifyLoadBalancerSlaResponse {

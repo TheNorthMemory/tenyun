@@ -1136,6 +1136,38 @@ declare interface TaskLogURL {
   AppId?: string | null;
 }
 
+/** 漏洞风险高级配置列表 */
+declare interface VULRiskAdvanceCFGList {
+  /** 风险ID */
+  RiskId?: string;
+  /** 漏洞名称 */
+  VULName?: string;
+  /** 风险等级 */
+  RiskLevel?: string;
+  /** 识别来源 */
+  CheckFrom?: string;
+  /** 是否启用，1-启用，0-禁用 */
+  Enable?: number | null;
+  /** 风险类型 */
+  VULType?: string;
+  /** 影响版本 */
+  ImpactVersion?: string;
+  /** CVE */
+  CVE?: string | null;
+  /** 漏洞标签 */
+  VULTag?: string[];
+  /** 修复方式 */
+  FixMethod?: string[] | null;
+  /** 披露时间 */
+  ReleaseTime?: string | null;
+  /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
+  EMGCVulType?: number | null;
+  /** 漏洞描述 */
+  VULDescribe?: string | null;
+  /** 影响组件 */
+  ImpactComponent?: string | null;
+}
+
 /** 漏洞视角的漏洞风险对象 */
 declare interface VULViewVULRisk {
   /** 端口 */
@@ -1893,6 +1925,28 @@ declare interface DescribeTaskLogURLResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVULRiskAdvanceCFGListRequest {
+  /** 任务ID */
+  TaskId?: string;
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeVULRiskAdvanceCFGListResponse {
+  /** 配置项列表 */
+  Data?: VULRiskAdvanceCFGList[] | null;
+  /** 总数 */
+  TotalCount?: number;
+  /** 风险等级过滤列表 */
+  RiskLevelLists?: FilterDataObject[] | null;
+  /** 漏洞类型过滤列表 */
+  VULTypeLists?: FilterDataObject[] | null;
+  /** 识别来源过滤列表 */
+  CheckFromLists?: FilterDataObject[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVpcAssetsRequest {
   /** 过滤参数 */
   Filter?: Filter;
@@ -1996,6 +2050,8 @@ declare interface Csip {
   DescribeTaskLogList(data?: DescribeTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogListResponse>;
   /** 获取报告下载的临时链接 {@link DescribeTaskLogURLRequest} {@link DescribeTaskLogURLResponse} */
   DescribeTaskLogURL(data: DescribeTaskLogURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogURLResponse>;
+  /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */
+  DescribeVULRiskAdvanceCFGList(data?: DescribeVULRiskAdvanceCFGListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskAdvanceCFGListResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
   /** 修改风险中心风险状态 {@link ModifyRiskCenterRiskStatusRequest} {@link ModifyRiskCenterRiskStatusResponse} */

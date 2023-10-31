@@ -287,43 +287,61 @@ declare interface DatabaseView {
 /** DCN详情条目 */
 declare interface DcnDetailItem {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例地域 */
-  Region: string;
+  Region?: string;
   /** 实例可用区 */
-  Zone: string;
+  Zone?: string;
   /** 实例IP地址 */
-  Vip: string;
+  Vip?: string;
   /** 实例IPv6地址 */
-  Vipv6: string;
+  Vipv6?: string;
   /** 实例端口 */
-  Vport: number;
+  Vport?: number;
   /** 实例状态 */
-  Status: number;
+  Status?: number;
   /** 实例状态描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 实例DCN标志，1-主，2-备 */
-  DcnFlag: number;
+  DcnFlag?: number;
   /** 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开 */
-  DcnStatus: number;
+  DcnStatus?: number;
   /** 实例CPU核数 */
-  Cpu: number;
+  Cpu?: number;
   /** 实例内存大小，单位 GB */
-  Memory: number;
+  Memory?: number;
   /** 实例存储大小，单位 GB */
-  Storage: number;
+  Storage?: number;
   /** 付费模式 */
-  PayMode: number;
+  PayMode?: number;
   /** 实例创建时间，格式为 2006-01-02 15:04:05 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 实例到期时间，格式为 2006-01-02 15:04:05 */
-  PeriodEndTime: string;
+  PeriodEndTime?: string;
   /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
-  InstanceType: number;
+  InstanceType?: number;
   /** 是否开启了 kms */
-  EncryptStatus: number;
+  EncryptStatus?: number;
+  /** 实例DCN状态描述信息 */
+  DcnStatusDesc?: string;
+  /** DCN实例绑定的北极星服务所属的北极星实例Id，若未绑定则为空 */
+  PolarisInstanceId?: string;
+  /** DCN实例绑定的北极星服务所属的北极星实例名，若未绑定则为空 */
+  PolarisInstanceName?: string;
+  /** DCN实例绑定的北极星服务所属的北极星命名空间，若未绑定则为空 */
+  PolarisNamespace?: string;
+  /** DCN实例绑定的北极星服务，若未绑定则为空 */
+  PolarisService?: string;
+  /** DCN实例在北极星服务中的状态 0:未开启; 1:已开启; 2:已隔离; 3:切换中 */
+  PolarisServiceStatus?: number;
+  /** DCN实例在北极星服务中的状态的描述信息 */
+  PolarisServiceStatusDesc?: string;
+  /** 北极星管控地域 */
+  PolarisRegion?: string;
+  /** 是否支持DCN切换 */
+  IsDcnSwitchSupported?: number;
 }
 
 /** 订单信息 */
@@ -911,7 +929,7 @@ declare interface CreateAccountResponse {
 }
 
 declare interface CreateDCDBInstanceRequest {
-  /** 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。注意当前可售卖的可用区需要通过DescribeDCDBSaleInfo接口拉取。 */
+  /** 分片节点可用区分布，可填写多个可用区。注意当前可售卖的可用区需要通过DescribeDCDBSaleInfo接口拉取。 */
   Zones: string[];
   /** 欲购买的时长，单位：月。 */
   Period: number;
@@ -955,6 +973,8 @@ declare interface CreateDCDBInstanceRequest {
   AutoRenewFlag?: number;
   /** 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数 */
   SecurityGroupIds?: string[];
+  /** DCN同步模式，0：异步， 1：强同步 */
+  DcnSyncMode?: number;
 }
 
 declare interface CreateDCDBInstanceResponse {
@@ -1025,6 +1045,8 @@ declare interface CreateDedicatedClusterDCDBInstanceRequest {
   RollbackInstanceId?: string;
   /** 回档时间 */
   RollbackTime?: string;
+  /** DCN同步模式，0：异步， 1：强同步 */
+  DcnSyncMode?: number;
 }
 
 declare interface CreateDedicatedClusterDCDBInstanceResponse {
@@ -1079,7 +1101,7 @@ declare interface CreateHourDCDBInstanceRequest {
   RollbackTime?: string;
   /** 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数 */
   SecurityGroupIds?: string[];
-  /** DCN同步模式，0：普通DCN同步，1：一致性同步 */
+  /** DCN同步模式，0：异步， 1：强同步 */
   DcnSyncMode?: number;
 }
 
@@ -1448,6 +1470,10 @@ declare interface DescribeDCDBInstanceDetailResponse {
   ReservedNetResources?: ReservedNetResource[];
   /** 是否支持物理复制 */
   IsPhysicalReplicationSupported?: boolean;
+  /** 是否支持强同步DCN */
+  IsDcnStrongSyncSupported?: number;
+  /** 是否支持DCN切换 */
+  IsDcnSwitchSupported?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

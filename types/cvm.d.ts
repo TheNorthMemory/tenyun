@@ -1171,7 +1171,7 @@ declare interface AssociateInstancesKeyPairsRequest {
   InstanceIds: string[];
   /** 一个或多个待操作的密钥对ID，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-3glfot13`。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的`KeyId`获取密钥对ID。 */
   KeyIds: string[];
-  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：TRUE：表示在正常关机失败后进行强制关机。FALSE：表示在正常关机失败后不进行强制关机。默认取值：FALSE。 */
+  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：true：表示在正常关机失败后进行强制关机。false：表示在正常关机失败后不进行强制关机。默认取值：false。 */
   ForceStop?: boolean;
 }
 
@@ -1273,15 +1273,15 @@ declare interface CreateImageRequest {
   InstanceId?: string;
   /** 镜像描述 */
   ImageDescription?: string;
-  /** 是否执行强制关机以制作镜像。取值范围：TRUE：表示关机之后制作镜像FALSE：表示开机状态制作镜像默认取值：FALSE。开机状态制作镜像，可能导致部分数据未备份，影响数据安全。 */
+  /** 是否执行强制关机以制作镜像。取值范围：true：表示关机之后制作镜像false：表示开机状态制作镜像默认取值：false。开机状态制作镜像，可能导致部分数据未备份，影响数据安全。 */
   ForcePoweroff?: string;
-  /** 创建Windows镜像时是否启用Sysprep。取值范围：TRUE或FALSE，默认取值为FALSE。关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)。 */
+  /** 创建Windows镜像时是否启用Sysprep。取值范围：true或false，传true表示启用Sysprep，传false表示不启用，默认取值为false。关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)。 */
   Sysprep?: string;
   /** 基于实例创建整机镜像时，指定包含在镜像里的数据盘ID */
   DataDiskIds?: string[];
   /** 基于快照创建镜像，指定快照ID，必须包含一个系统盘快照。不可与InstanceId同时传入。 */
   SnapshotIds?: string[];
-  /** 检测本次请求的是否成功，但不会对操作的资源产生任何影响 */
+  /** 检测本次请求的是否成功，但不会对操作的资源产生任何影响。默认取值为false。 */
   DryRun?: boolean;
   /** 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。 */
   TagSpecification?: TagSpecification[];
@@ -2009,7 +2009,7 @@ declare interface DisassociateInstancesKeyPairsRequest {
   InstanceIds: string[];
   /** 密钥对ID列表，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-11112222`。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。 */
   KeyIds: string[];
-  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：TRUE：表示在正常关机失败后进行强制关机。FALSE：表示在正常关机失败后不进行强制关机。默认取值：FALSE。 */
+  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：true：表示在正常关机失败后进行强制关机。false：表示在正常关机失败后不进行强制关机。默认取值：false。 */
   ForceStop?: boolean;
 }
 
@@ -2021,7 +2021,7 @@ declare interface DisassociateInstancesKeyPairsResponse {
 declare interface DisassociateSecurityGroupsRequest {
   /** 要解绑的`安全组ID`，类似sg-efil73jd，只支持解绑单个安全组。 */
   SecurityGroupIds: string[];
-  /** 被解绑的`实例ID`，类似ins-lesecurk，支持指定多个实例 。 */
+  /** 被解绑的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。 */
   InstanceIds: string[];
 }
 

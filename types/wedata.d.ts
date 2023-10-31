@@ -11226,13 +11226,15 @@ declare interface SubmitSqlTaskRequest {
   RunParams?: string;
   /** 高级设置 */
   ConfParams?: string;
+  /** 脚本内容是否base64加密 */
+  ScriptEncryption?: boolean;
 }
 
 declare interface SubmitSqlTaskResponse {
   /** 任务提交记录 */
-  Record: AdhocRecord;
+  Record?: AdhocRecord;
   /** 子任务记录列表 */
-  Details: AdhocDetail[];
+  Details?: AdhocDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

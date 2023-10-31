@@ -1784,7 +1784,7 @@ declare interface Zone {
   NameServers?: string[];
   /** 站点状态，取值有： active：NS 已切换； pending：NS 未切换； moved：NS 已切走； deactivated：被封禁。 initializing：待绑定套餐。 */
   Status?: string;
-  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入； vodeo：vodeo默认站点。 */
+  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入； */
   Type?: string;
   /** 站点是否关闭。 */
   Paused?: boolean;
@@ -1866,6 +1866,24 @@ declare interface ZoneSetting {
   AccelerateMainland?: AccelerateMainland | null;
   /** 标准 Debug 配置。 */
   StandardDebug?: StandardDebug | null;
+}
+
+declare interface BindSecurityTemplateToEntityRequest {
+  /** 需要绑定或解绑的策略模板所属站点 ID。 */
+  ZoneId: string;
+  /** 绑定至策略模板（或者从策略模板解绑）的域名列表。 */
+  Entities: string[];
+  /** 绑定或解绑操作选项，取值有：bind：绑定域名至策略模板；unbind-keep-policy：将域名从策略模板解绑，解绑时保留当前策略；unbind-use-default：将域名从策略模板解绑，并使用默认空白策略。注意：解绑操作当前仅支持单个域名解绑。即：当 Operate 参数取值为 unbind-keep-policy 或 unbind-use-default 时，Entities 参数列表仅支持填写一个域名。 */
+  Operate: string;
+  /** 指定绑定或解绑的策略模板 ID 。 */
+  TemplateId: string;
+  /** 如指定的域名已经绑定了策略模板，是否替换该模板。支持下列取值：true： 替换域名当前绑定的模板；false：不替换域名当前绑定的模板。注意：当选择不替换已有策略模板时，若指定域名已经绑定策略模板，API 将返回错误。 */
+  OverWrite?: boolean;
+}
+
+declare interface BindSecurityTemplateToEntityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BindZoneToPlanRequest {
@@ -3455,6 +3473,8 @@ declare namespace V20220106 {
 /** {@link Teo 边缘安全加速平台} */
 declare interface Teo {
   (): Versions;
+  /** 绑定或解绑安全策略模板 {@link BindSecurityTemplateToEntityRequest} {@link BindSecurityTemplateToEntityResponse} */
+  BindSecurityTemplateToEntity(data: BindSecurityTemplateToEntityRequest, config?: AxiosRequestConfig): AxiosPromise<BindSecurityTemplateToEntityResponse>;
   /** 为站点绑定套餐 {@link BindZoneToPlanRequest} {@link BindZoneToPlanResponse} */
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
   /** 校验域名 CNAME 状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */

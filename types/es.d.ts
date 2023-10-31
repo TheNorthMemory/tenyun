@@ -72,6 +72,76 @@ declare interface CosBackup {
   BackupTime: string;
 }
 
+/** 插件信息 */
+declare interface DescribeInstancePluginInfo {
+  /** 插件名 */
+  PluginName: string;
+  /** 插件版本 */
+  PluginVersion: string;
+  /** 插件描述 */
+  PluginDesc: string;
+  /** 插件状态：-2 已卸载 -1 卸载中 0 安装中 1 已安装 */
+  Status: number;
+  /** 插件是否可卸载 */
+  Removable: boolean;
+  /** 0：系统插件 */
+  PluginType: number;
+  /** 插件变更时间 */
+  PluginUpdateTime: string;
+}
+
+/** 智能运维支持的诊断项和元信息 */
+declare interface DiagnoseJobMeta {
+  /** 智能运维诊断项英文名 */
+  JobName: string;
+  /** 智能运维诊断项中文名 */
+  JobZhName: string;
+  /** 智能运维诊断项描述 */
+  JobDescription: string;
+}
+
+/** 智能运维诊断项结果 */
+declare interface DiagnoseJobResult {
+  /** 诊断项名 */
+  JobName: string;
+  /** 诊断项状态：-2失败，-1待重试，0运行中，1成功 */
+  Status: number;
+  /** 诊断项得分 */
+  Score: number;
+  /** 诊断摘要 */
+  Summary: string;
+  /** 诊断建议 */
+  Advise: string;
+  /** 诊断详情 */
+  Detail: string;
+  /** 诊断指标详情 */
+  MetricDetails: MetricDetail[] | null;
+  /** 诊断日志详情 */
+  LogDetails: LogDetail[] | null;
+  /** 诊断配置详情 */
+  SettingDetails: SettingDetail[] | null;
+}
+
+/** 智能运维诊断结果 */
+declare interface DiagnoseResult {
+  /** ES实例ID */
+  InstanceId: string;
+  /** 诊断报告ID */
+  RequestId: string;
+  /** 诊断触发时间 */
+  CreateTime: string;
+  /** 诊断是否完成 */
+  Completed: boolean;
+  /** 诊断总得分 */
+  Score: number;
+  /** 诊断类型，2 定时诊断，3 客户手动触发诊断 */
+  JobType: number;
+  /** 诊断参数，如诊断时间，诊断索引等 */
+  JobParam: JobParam;
+  /** 诊断项结果列表 */
+  JobResults: DiagnoseJobResult[];
+}
+
 /** ik插件词典信息 */
 declare interface DictInfo {
   /** 词典键值 */
@@ -80,6 +150,14 @@ declare interface DictInfo {
   Name: string;
   /** 词典大小，单位B */
   Size: number;
+}
+
+/** 智能运维指标维度 */
+declare interface Dimension {
+  /** 智能运维指标维度Key */
+  Key: string;
+  /** 智能运维指标维度值 */
+  Value: string;
 }
 
 /** ES集群配置项 */
@@ -384,6 +462,16 @@ declare interface InstanceLog {
   NodeID?: string;
 }
 
+/** 智能运维诊断参数 */
+declare interface JobParam {
+  /** 诊断项列表 */
+  Jobs: string[] | null;
+  /** 诊断索引 */
+  Indices: string;
+  /** 历史诊断时间 */
+  Interval: number;
+}
+
 /** OperationDetail使用此结构的数组描述新旧配置 */
 declare interface KeyValue {
   /** 键 */
@@ -438,6 +526,16 @@ declare interface LocalDiskInfo {
   LocalDiskSize: number;
   /** 本地盘块数 */
   LocalDiskCount: number;
+}
+
+/** 智能运维日志详情 */
+declare interface LogDetail {
+  /** 日志异常名 */
+  Key: string;
+  /** 日志异常处理建议 */
+  Advise: string;
+  /** 日志异常名出现次数 */
+  Count: number;
 }
 
 /** Logstash绑定的ES集群信息 */
@@ -594,6 +692,22 @@ declare interface MasterNodeInfo {
   MasterNodeDiskType: string;
 }
 
+/** 智能运维指标 */
+declare interface Metric {
+  /** 指标维度族 */
+  Dimensions: Dimension[];
+  /** 指标值 */
+  Value: number;
+}
+
+/** 智能运维指标详情 */
+declare interface MetricDetail {
+  /** 指标详情名 */
+  Key: string;
+  /** 指标详情值 */
+  Metrics: Metric[];
+}
+
 /** 集群中一种节点类型（如热数据节点，冷数据节点，专用主节点等）的规格描述信息，包括节点类型，节点个数，节点规格，磁盘类型，磁盘大小等, Type不指定时默认为热数据节点；如果节点为master节点，则DiskType和DiskSize参数会被忽略（主节点无数据盘） */
 declare interface NodeInfo {
   /** 节点数量 */
@@ -742,6 +856,16 @@ declare interface ProcessDetail {
   Total?: number | null;
   /** 任务类型：60：重启型任务70：分片迁移型任务80：节点变配任务 */
   TaskType?: number | null;
+}
+
+/** 智能运维集群配置详情 */
+declare interface SettingDetail {
+  /** 配置key */
+  Key: string;
+  /** 配置当前值 */
+  Value: string;
+  /** 配置处理建议 */
+  Advise: string;
 }
 
 /** 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项） */
@@ -1004,6 +1128,24 @@ declare interface DeleteLogstashPipelinesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDiagnoseRequest {
+  /** ES实例ID */
+  InstanceId: string;
+  /** 报告日期，格式20210301 */
+  Date?: string;
+  /** 报告返回份数 */
+  Limit?: number;
+}
+
+declare interface DescribeDiagnoseResponse {
+  /** 诊断报告个数 */
+  Total?: number;
+  /** 诊断报告列表 */
+  DiagnoseResults?: DiagnoseResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIndexListRequest {
   /** 索引类型。auto：自治索引；normal：普通索引 */
   IndexType: string;
@@ -1102,6 +1244,30 @@ declare interface DescribeInstanceOperationsResponse {
   TotalCount?: number;
   /** 操作记录 */
   Operations?: Operation[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstancePluginListRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 分页起始值, 默认值0 */
+  Offset?: number;
+  /** 分页大小，默认值10 */
+  Limit?: number;
+  /** 排序字段1：插件名 pluginName */
+  OrderBy?: string;
+  /** 排序方式0：升序 asc1：降序 desc */
+  OrderByType?: string;
+  /** 0：系统插件 */
+  PluginType?: number;
+}
+
+declare interface DescribeInstancePluginListResponse {
+  /** 返回的插件个数 */
+  TotalCount?: number;
+  /** 插件信息列表 */
+  PluginList?: DescribeInstancePluginInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1262,6 +1428,26 @@ declare interface DiagnoseInstanceRequest {
 }
 
 declare interface DiagnoseInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetDiagnoseSettingsRequest {
+  /** ES实例ID */
+  InstanceId: string;
+}
+
+declare interface GetDiagnoseSettingsResponse {
+  /** 智能运维诊断项和元信息 */
+  DiagnoseJobMetas?: DiagnoseJobMeta[];
+  /** 0：开启智能运维；-1：关闭智能运维 */
+  Status?: number;
+  /** 智能运维每天定时巡检时间 */
+  CronTime?: string;
+  /** 智能运维当天已手动触发诊断次数 */
+  Count?: number;
+  /** 智能运维每天最大可手动触发次数 */
+  MaxCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1665,6 +1851,8 @@ declare interface Es {
   DeleteLogstashInstance(data: DeleteLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashInstanceResponse>;
   /** 删除Logstash管道 {@link DeleteLogstashPipelinesRequest} {@link DeleteLogstashPipelinesResponse} */
   DeleteLogstashPipelines(data: DeleteLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashPipelinesResponse>;
+  /** 查询智能运维诊断结果报告 {@link DescribeDiagnoseRequest} {@link DescribeDiagnoseResponse} */
+  DescribeDiagnose(data: DescribeDiagnoseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseResponse>;
   /** 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
   DescribeIndexList(data: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
   /** 获取索引元数据 {@link DescribeIndexMetaRequest} {@link DescribeIndexMetaResponse} */
@@ -1673,6 +1861,8 @@ declare interface Es {
   DescribeInstanceLogs(data: DescribeInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogsResponse>;
   /** 查询实例操作记录 {@link DescribeInstanceOperationsRequest} {@link DescribeInstanceOperationsResponse} */
   DescribeInstanceOperations(data: DescribeInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOperationsResponse>;
+  /** 查询实例插件列表 {@link DescribeInstancePluginListRequest} {@link DescribeInstancePluginListResponse} */
+  DescribeInstancePluginList(data: DescribeInstancePluginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancePluginListResponse>;
   /** 查询ES集群实例 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询Logstash实例日志 {@link DescribeLogstashInstanceLogsRequest} {@link DescribeLogstashInstanceLogsResponse} */
@@ -1687,6 +1877,8 @@ declare interface Es {
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
   /** 智能运维诊断集群 {@link DiagnoseInstanceRequest} {@link DiagnoseInstanceResponse} */
   DiagnoseInstance(data: DiagnoseInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseInstanceResponse>;
+  /** 查看智能运维配置 {@link GetDiagnoseSettingsRequest} {@link GetDiagnoseSettingsResponse} */
+  GetDiagnoseSettings(data: GetDiagnoseSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDiagnoseSettingsResponse>;
   /** 获取接收客户端请求的节点类型 {@link GetRequestTargetNodeTypesRequest} {@link GetRequestTargetNodeTypesResponse} */
   GetRequestTargetNodeTypes(data: GetRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestTargetNodeTypesResponse>;
   /** 修改集群VIP绑定的安全组 {@link ModifyEsVipSecurityGroupRequest} {@link ModifyEsVipSecurityGroupResponse} */

@@ -2007,15 +2007,15 @@ declare interface CreateLoadBalancerResponse {
 declare interface CreateModuleRequest {
   /** 模块名称，如视频直播模块。限制：模块名称不得以空格开头，长度不得超过60个字符。 */
   ModuleName: string;
-  /** 默认带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。 */
+  /** 默认带宽，单位：Mbps。范围不得超过带宽上下限，详看DescribeConfig。 */
   DefaultBandWidth: number;
-  /** 默认镜像，如img-qsdf3ff2。 */
+  /** 默认镜像。 */
   DefaultImageId: string;
   /** 机型ID。 */
   InstanceType: string;
-  /** 默认系统盘大小，单位：G，默认大小为50G。范围不得超过系统盘上下限制，详看DescribeConfig。 */
+  /** 默认系统盘大小，单位：GB，默认大小为50GB。范围不得超过系统盘上下限制，详看DescribeConfig。 */
   DefaultSystemDiskSize: number;
-  /** 默认数据盘大小，单位：G。范围不得超过数据盘范围大小，详看DescribeConfig。 */
+  /** 默认数据盘大小，单位：GB。范围不得超过数据盘范围大小，详看DescribeConfig。 */
   DefaultDataDiskSize: number;
   /** 是否关闭IP直通。取值范围：true：表示关闭IP直通false：表示开通IP直通 */
   CloseIpDirect?: boolean;
@@ -2023,7 +2023,7 @@ declare interface CreateModuleRequest {
   TagSpecification?: TagSpecification[];
   /** 模块默认安全组列表 */
   SecurityGroups?: string[];
-  /** 默认入带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。 */
+  /** 默认入带宽，单位：Mbps。范围不得超过带宽上下限，详看DescribeConfig。 */
   DefaultBandWidthIn?: number;
   /** 是否禁止分配外网IP */
   DisableWanIp?: boolean;
@@ -2035,7 +2035,7 @@ declare interface CreateModuleRequest {
 
 declare interface CreateModuleResponse {
   /** 模块ID，创建模块成功后分配给该模块的ID。 */
-  ModuleId: string;
+  ModuleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

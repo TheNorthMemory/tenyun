@@ -114,6 +114,20 @@ declare interface Filter {
   Values: string[] | null;
 }
 
+/** Git信息。 */
+declare interface GitInfo {
+  /** Git地址。 */
+  GitHttpPath: string;
+  /** Git用户名。 */
+  GitUserName?: string;
+  /** Git密码或者Token。 */
+  GitTokenOrPassword?: string;
+  /** 分支。 */
+  Branch?: string;
+  /** 标签。 */
+  Tag?: string;
+}
+
 /** Nextflow选项。 */
 declare interface NFOption {
   /** Config。 */
@@ -407,7 +421,7 @@ declare interface DescribeEnvironmentsResponse {
 }
 
 declare interface DescribeRunGroupsRequest {
-  /** 项目ID。 */
+  /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -427,7 +441,7 @@ declare interface DescribeRunGroupsResponse {
 }
 
 declare interface DescribeRunsRequest {
-  /** 项目ID。 */
+  /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -493,7 +507,7 @@ declare interface GetRunCallsRequest {
   RunUuid: string;
   /** 作业路径 */
   Path: string;
-  /** 项目ID。 */
+  /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
 }
 
@@ -504,10 +518,26 @@ declare interface GetRunCallsResponse {
   RequestId?: string;
 }
 
+declare interface GetRunMetadataFileRequest {
+  /** 任务Uuid。 */
+  RunUuid: string;
+  /** 需要获取的文件名。默认支持以下文件：- nextflow.log提交时NFOption中report指定为true时，额外支持以下文件：- execution_report.html- execution_timeline.html- execution_trace.txt- pipeline_dag.html */
+  Key: string;
+  /** 项目ID。（不填使用指定地域下的默认项目） */
+  ProjectId?: string;
+}
+
+declare interface GetRunMetadataFileResponse {
+  /** 文件预签名链接，一分钟内有效。 */
+  CosSignedUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetRunStatusRequest {
   /** 任务Uuid。 */
   RunUuid: string;
-  /** 项目ID。 */
+  /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
 }
 
@@ -582,6 +612,48 @@ declare interface RunApplicationResponse {
   RequestId?: string;
 }
 
+declare interface RunWorkflowRequest {
+  /** 任务批次名称。 */
+  Name: string;
+  /** 投递环境ID。 */
+  EnvironmentId: string;
+  /** 工作流Git仓库信息。 */
+  GitSource: GitInfo;
+  /** 工作流类型。支持类型：- NEXTFLOW */
+  Type: string;
+  /** Nextflow选项。 */
+  NFOption: NFOption;
+  /** 项目ID。（不填使用指定地域下的默认项目） */
+  ProjectId?: string;
+  /** 任务批次描述。 */
+  Description?: string;
+  /** 任务输入JSON。需要进行base64编码。（InputBase64和InputCosUri必选其一） */
+  InputBase64?: string;
+  /** 任务输入COS地址。（InputBase64和InputCosUri必选其一） */
+  InputCosUri?: string;
+  /** 任务缓存清理时间。不填表示不清理。 */
+  CacheClearDelay?: number;
+}
+
+declare interface RunWorkflowResponse {
+  /** 任务批次ID。 */
+  RunGroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TerminateRunGroupRequest {
+  /** 任务批次ID。 */
+  RunGroupId: string;
+  /** 项目ID。（不填使用指定地域下的默认项目） */
+  ProjectId?: string;
+}
+
+declare interface TerminateRunGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Omics 腾讯健康组学平台} */
 declare interface Omics {
   (): Versions;
@@ -601,6 +673,8 @@ declare interface Omics {
   DescribeTablesRows(data: DescribeTablesRowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesRowsResponse>;
   /** 查询作业详情 {@link GetRunCallsRequest} {@link GetRunCallsResponse} */
   GetRunCalls(data: GetRunCallsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunCallsResponse>;
+  /** 查询任务详情文件 {@link GetRunMetadataFileRequest} {@link GetRunMetadataFileResponse} */
+  GetRunMetadataFile(data: GetRunMetadataFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunMetadataFileResponse>;
   /** 查询任务详情 {@link GetRunStatusRequest} {@link GetRunStatusResponse} */
   GetRunStatus(data: GetRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunStatusResponse>;
   /** 导入表格文件 {@link ImportTableFileRequest} {@link ImportTableFileResponse} */
@@ -609,6 +683,10 @@ declare interface Omics {
   RetryRuns(data: RetryRunsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRunsResponse>;
   /** 运行应用 {@link RunApplicationRequest} {@link RunApplicationResponse} */
   RunApplication(data: RunApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RunApplicationResponse>;
+  /** 运行工作流 {@link RunWorkflowRequest} {@link RunWorkflowResponse} */
+  RunWorkflow(data: RunWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<RunWorkflowResponse>;
+  /** 终止任务批次 {@link TerminateRunGroupRequest} {@link TerminateRunGroupResponse} */
+  TerminateRunGroup(data: TerminateRunGroupRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateRunGroupResponse>;
 }
 
 export declare type Versions = ["2022-11-28"];

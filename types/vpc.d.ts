@@ -208,6 +208,30 @@ declare interface BatchModifySnapshotPolicy {
   KeepTime?: number;
 }
 
+/** BgpConfig */
+declare interface BgpConfig {
+  /** BGP隧道网段。 */
+  TunnelCidr: string;
+  /** 云端BGP地址。必须从BGP隧道网段内分配。 */
+  LocalBgpIp: string;
+  /** 用户端BGP地址。必须从BGP隧道网段内分配。 */
+  RemoteBgpIp: string;
+}
+
+/** VPN通道BGP配置 */
+declare interface BgpConfigAndAsn {
+  /** BGP通道CIDR */
+  TunnelCidr?: string | null;
+  /** 本端BGP IP */
+  LocalBgpIp?: string | null;
+  /** 对端BGP IP */
+  RemoteBgpIp?: string | null;
+  /** 本端BGP ASN号 */
+  LocalBgpAsn?: string | null;
+  /** 对端BGP ASN号 */
+  RemoteBgpAsn?: string | null;
+}
+
 /** 云联网（CCN）对象 */
 declare interface CCN {
   /** 云联网唯一ID */
@@ -438,6 +462,14 @@ declare interface ConflictSource {
   ConflictItemSet: ConflictItem[];
 }
 
+/** 创建路由添加的指向此通道的路由 */
+declare interface CreateVpnConnRoute {
+  /** 目的端IDC网段 */
+  DestinationCidrBlock: string;
+  /** 优先级；可选值0，100。 */
+  Priority?: number;
+}
+
 /** 合规化审批单 */
 declare interface CrossBorderCompliance {
   /** 服务商，可选值：`UNICOM`。 */
@@ -508,6 +540,8 @@ declare interface CustomerGateway {
   IpAddress: string;
   /** 创建时间 */
   CreatedTime: string;
+  /** BGP ASN。 */
+  BgpAsn?: number;
 }
 
 /** 对端网关厂商信息对象。 */
@@ -841,43 +875,43 @@ declare interface HaVip {
 /** IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议 */
 declare interface IKEOptionsSpecification {
   /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC */
-  PropoEncryAlgorithm?: string;
+  PropoEncryAlgorithm?: string | null;
   /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5 */
-  PropoAuthenAlgorithm?: string;
+  PropoAuthenAlgorithm?: string | null;
   /** 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN */
-  ExchangeMode?: string;
+  ExchangeMode?: string | null;
   /** 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS */
-  LocalIdentity?: string;
+  LocalIdentity?: string | null;
   /** 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS */
-  RemoteIdentity?: string;
+  RemoteIdentity?: string | null;
   /** 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP */
-  LocalAddress?: string;
+  LocalAddress?: string | null;
   /** 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填 */
-  RemoteAddress?: string;
+  RemoteAddress?: string | null;
   /** 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填 */
-  LocalFqdnName?: string;
+  LocalFqdnName?: string | null;
   /** 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填 */
-  RemoteFqdnName?: string;
+  RemoteFqdnName?: string | null;
   /** DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'， */
-  DhGroupName?: string;
+  DhGroupName?: string | null;
   /** IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800 */
-  IKESaLifetimeSeconds?: number;
+  IKESaLifetimeSeconds?: number | null;
   /** IKE版本 */
-  IKEVersion?: string;
+  IKEVersion?: string | null;
 }
 
 /** IPSec配置，腾讯云提供IPSec安全会话设置 */
 declare interface IPSECOptionsSpecification {
   /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'， 默认为AES-CBC-128 */
-  EncryptAlgorithm?: string;
+  EncryptAlgorithm?: string | null;
   /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为 */
-  IntegrityAlgorith?: string;
+  IntegrityAlgorith?: string | null;
   /** IPsec SA lifetime(s)：单位秒，取值范围：180-604800 */
-  IPSECSaLifetimeSeconds?: number;
+  IPSECSaLifetimeSeconds?: number | null;
   /** PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL */
-  PfsDhGroup?: string;
+  PfsDhGroup?: string | null;
   /** IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800 */
-  IPSECSaLifetimeTraffic?: number;
+  IPSECSaLifetimeTraffic?: number | null;
 }
 
 /** 预付费（包年包月）计费对象。 */
@@ -1745,9 +1779,9 @@ declare interface SecurityGroupPolicySet {
 /** SecurityPolicyDatabase策略 */
 declare interface SecurityPolicyDatabase {
   /** 本端网段 */
-  LocalCidrBlock: string;
+  LocalCidrBlock: string | null;
   /** 对端网段 */
-  RemoteCidrBlock: string[];
+  RemoteCidrBlock: string[] | null;
 }
 
 /** 协议端口模板 */
@@ -2159,53 +2193,55 @@ declare interface VpcTaskResultDetailInfo {
 /** VPN通道对象。 */
 declare interface VpnConnection {
   /** 通道实例ID。 */
-  VpnConnectionId: string;
+  VpnConnectionId?: string;
   /** 通道名称。 */
-  VpnConnectionName: string;
+  VpnConnectionName?: string;
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** VPN网关实例ID。 */
-  VpnGatewayId: string;
+  VpnGatewayId?: string;
   /** 对端网关实例ID。 */
-  CustomerGatewayId: string;
+  CustomerGatewayId?: string;
   /** 预共享密钥。 */
-  PreShareKey: string;
+  PreShareKey?: string;
   /** 通道传输协议。 */
-  VpnProto: string;
+  VpnProto?: string;
   /** 通道加密协议。 */
-  EncryptProto: string;
+  EncryptProto?: string;
   /** 路由类型。 */
-  RouteType: string;
+  RouteType?: string;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 通道的生产状态，PENDING：生产中，AVAILABLE：运行中，DELETING：删除中。 */
-  State: string;
+  State?: string;
   /** 通道连接状态，AVAILABLE：已连接。 */
-  NetStatus: string;
+  NetStatus?: string;
   /** SPD。 */
-  SecurityPolicyDatabaseSet: SecurityPolicyDatabase[];
+  SecurityPolicyDatabaseSet?: SecurityPolicyDatabase[];
   /** IKE选项。 */
-  IKEOptionsSpecification: IKEOptionsSpecification;
+  IKEOptionsSpecification?: IKEOptionsSpecification;
   /** IPSEC选择。 */
-  IPSECOptionsSpecification: IPSECOptionsSpecification;
+  IPSECOptionsSpecification?: IPSECOptionsSpecification;
   /** 是否支持健康状态探测 */
-  EnableHealthCheck: boolean;
+  EnableHealthCheck?: boolean;
   /** 本端探测ip */
-  HealthCheckLocalIp: string;
+  HealthCheckLocalIp?: string;
   /** 对端探测ip */
-  HealthCheckRemoteIp: string;
+  HealthCheckRemoteIp?: string;
   /** 通道健康检查状态，AVAILABLE：正常，UNAVAILABLE：不正常。 未配置健康检查不返回该对象 */
-  HealthCheckStatus: string;
+  HealthCheckStatus?: string;
   /** DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启） */
-  DpdEnable: number | null;
+  DpdEnable?: number | null;
   /** DPD超时时间。即探测确认对端不存在需要的时间。 */
-  DpdTimeout: string | null;
+  DpdTimeout?: string | null;
   /** DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试） */
-  DpdAction: string | null;
+  DpdAction?: string | null;
   /** 标签键值对数组 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** 协商类型 */
-  NegotiationType: string | null;
+  NegotiationType?: string | null;
+  /** Bgp配置信息 */
+  BgpConfig?: BgpConfigAndAsn | null;
 }
 
 /** VPN网关对象。 */
@@ -2875,6 +2911,8 @@ declare interface CreateCustomerGatewayRequest {
   IpAddress: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
   Tags?: Tag[];
+  /** BGP ASN。ASN取值范围为1- 4294967295，其中139341、45090和58835不可用。 */
+  BgpAsn?: number;
 }
 
 declare interface CreateCustomerGatewayResponse {
@@ -3527,6 +3565,10 @@ declare interface CreateVpnConnectionRequest {
   DpdTimeout?: string;
   /** DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试） */
   DpdAction?: string;
+  /** 创建通道路由信息。 */
+  Route?: CreateVpnConnRoute;
+  /** BGP配置。 */
+  BgpConfig?: BgpConfig;
 }
 
 declare interface CreateVpnConnectionResponse {
@@ -6898,6 +6940,38 @@ declare interface ModifyVpnGatewayRoutesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyVpnGatewaySslServerRequest {
+  /** SSL-VPN SERVER 实例ID */
+  SslVpnServerId: string;
+  /** SSL-VPN SERVER NAME */
+  SslVpnServerName?: string;
+  /** 本端地址 */
+  LocalAddress?: string[];
+  /** 客户端地址 */
+  RemoteAddress?: string;
+  /** SSL VPN服务端监听协议。当前仅支持 UDP。默认UDP */
+  SslVpnProtocol?: string;
+  /** SSL VPN服务端监听协议端口。 */
+  SslVpnPort?: number;
+  /** 加密算法。可选 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'NONE'。默认NONE */
+  EncryptAlgorithm?: string;
+  /** 认证算法。可选 'SHA1', 'MD5', 'NONE'。默认NONE */
+  IntegrityAlgorithm?: string;
+  /** 是否支持压缩。当前仅支持不支持压缩。默认False */
+  Compress?: boolean;
+  /** 是否开启SSO认证，默认False */
+  SsoEnabled?: boolean;
+  /** SAML-DATA */
+  SamlData?: string;
+}
+
+declare interface ModifyVpnGatewaySslServerResponse {
+  /** 异步任务TASKID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface NotifyRoutesRequest {
   /** 路由表唯一ID。 */
   RouteTableId: string;
@@ -7871,6 +7945,8 @@ declare interface Vpc {
   ModifyVpnGatewayCcnRoutes(data: ModifyVpnGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayCcnRoutesResponse>;
   /** 修改VPN路由状态 {@link ModifyVpnGatewayRoutesRequest} {@link ModifyVpnGatewayRoutesResponse} */
   ModifyVpnGatewayRoutes(data: ModifyVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayRoutesResponse>;
+  /** 修改SSL-VPN 服务端属性 {@link ModifyVpnGatewaySslServerRequest} {@link ModifyVpnGatewaySslServerResponse} */
+  ModifyVpnGatewaySslServer(data: ModifyVpnGatewaySslServerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewaySslServerResponse>;
   /** 发布路由至云联网 {@link NotifyRoutesRequest} {@link NotifyRoutesResponse} */
   NotifyRoutes(data: NotifyRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<NotifyRoutesResponse>;
   /** 刷新专线直连NAT路由 {@link RefreshDirectConnectGatewayRouteToNatGatewayRequest} {@link RefreshDirectConnectGatewayRouteToNatGatewayResponse} */
