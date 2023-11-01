@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，10625+ 服务数</summary>
+<details><summary>共计 240+ 款产品，10629+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -242,7 +242,7 @@ mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 20
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(36) | 2018-04-08(13) |
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(150) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(100) |
-mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(5) |
+mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(7) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(22) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 mvj | 营销价值判断 | 2019-09-26(1) |
@@ -308,7 +308,7 @@ ticm | [智能鉴黄](https://cloud.tencent.com/document/product/864) | 2018-11-
 tics | [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) | 2018-11-15(4) |
 tiems | [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) | 2019-04-16(25) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(23) |
-tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(70) | 2019-10-22(23) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(71) | 2019-10-22(23) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(64) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(212) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |
@@ -332,7 +332,7 @@ vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-1
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(130) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(305) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(306) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(5) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(17) |

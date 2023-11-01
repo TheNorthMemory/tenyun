@@ -822,6 +822,8 @@ declare interface DescribePPTCheckResponse {
   Status?: string;
   /** 当前进度,取值范围为0~100 */
   Progress?: number;
+  /** 错误列表 */
+  Errs?: PPTErr[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

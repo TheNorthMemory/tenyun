@@ -778,6 +778,48 @@ declare interface DatabaseInfo {
   OriginSchemaName?: string | null;
 }
 
+/** 数据源元数据 */
+declare interface DatabaseMeta {
+  /** 项目Id */
+  ProjectId: string | null;
+  /** 技术类型 */
+  MetastoreType: string | null;
+  /** 数据源名称 */
+  DatasourceName: string | null;
+  /** 数据源Id */
+  DatasourceId: number | null;
+  /** 项目英文名 */
+  ProjectName: string | null;
+  /** 数据源类别：绑定引擎、绑定数据库,可用值:DB,ENGINE */
+  Category: string | null;
+  /** 数据源描述信息 */
+  Description: string | null;
+  /** 数据源引擎的实例ID，如CDB实例ID */
+  Instance: string | null;
+  /** 数据源引擎所属区域 */
+  Region: string | null;
+  /** 数据源数据源的可见性，1为可见、0为不可见。默认为1 */
+  Status: number | null;
+  /** db名称 */
+  DatabaseName: string | null;
+  /** 项目中文名 */
+  ProjectDisplayName: string | null;
+  /** 责任人名称 */
+  OwnerAccountName: string | null;
+  /** 数据来源展示名称 */
+  DisplayName: string | null;
+  /** 数据库ID */
+  DatabaseId: string | null;
+  /** 数据来源类型：hive/mysql/hbase等 */
+  Catalog: string | null;
+  /** 存储量大小,单位为 byte */
+  StorageSize: number | null;
+  /** 格式化后的存储量大小，带单位，如 12B */
+  StorageSizeWithUnit: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+}
+
 /** 数据源对象 */
 declare interface DatasourceBaseInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
@@ -6707,6 +6749,20 @@ declare interface DescribeDatabaseInfoListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDatabaseMetasRequest {
+  /** 过滤字段，projectIds/msTypes/createTime/modifiedTime */
+  Filters?: Filter[];
+  /** 排序字段，如name */
+  OrderFields?: OrderField[];
+}
+
+declare interface DescribeDatabaseMetasResponse {
+  /** 无 */
+  DatabaseMeta: DatabaseMeta[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDatasourceRequest {
   /** 对象唯一ID */
   Id: number;
@@ -11614,6 +11670,8 @@ declare interface Wedata {
   DescribeDataTypes(data: DescribeDataTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataTypesResponse>;
   /** 获取数据库信息 {@link DescribeDatabaseInfoListRequest} {@link DescribeDatabaseInfoListResponse} */
   DescribeDatabaseInfoList(data: DescribeDatabaseInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseInfoListResponse>;
+  /** 查询数据库列表 {@link DescribeDatabaseMetasRequest} {@link DescribeDatabaseMetasResponse} */
+  DescribeDatabaseMetas(data?: DescribeDatabaseMetasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseMetasResponse>;
   /** 数据源管理-数据源详情【Beta版本】 {@link DescribeDatasourceRequest} {@link DescribeDatasourceResponse} */
   DescribeDatasource(data: DescribeDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceResponse>;
   /** 获取下游依赖任务列表 {@link DescribeDependOpsTaskListRequest} {@link DescribeDependOpsTaskListResponse} */

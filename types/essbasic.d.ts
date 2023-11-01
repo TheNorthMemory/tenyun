@@ -72,19 +72,19 @@ declare interface AuthorizedUser {
 
 /** 自动签开启、签署相关配置 */
 declare interface AutoSignConfig {
-  /** 自动签开通个人用户的三要素 */
+  /** 自动签开通个人用户信息, 包括名字,身份证等 */
   UserInfo: UserThreeFactor;
-  /** 是否回调证书信息 */
+  /** 是否回调证书信息:**false**: 不需要(默认)**true**:需要 */
   CertInfoCallback?: boolean;
-  /** 是否支持用户自定义签名印章 */
+  /** 是否支持用户自定义签名印章:**false**: 不能自己定义(默认)**true**: 可以自己定义 */
   UserDefineSeal?: boolean;
-  /** 是否需要回调的时候返回印章(签名) 图片的 base64 */
+  /** 回调中是否需要自动签将要使用的印章（签名）图片的 base64:**false**: 不需要(默认)**true**: 需要 */
   SealImgCallback?: boolean;
   /** 回调链接，如果渠道已经配置了，可以不传 */
   CallbackUrl?: string;
-  /** 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。 */
+  /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸认别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人` */
   LicenseType?: number;
 }
 
@@ -420,7 +420,7 @@ declare interface FlowApproverInfo {
   ApproverNeedSignReview?: boolean;
   /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式) 如果不传默认为1查看合同的认证方式 Flow层级的优先于approver层级的（当手写签名方式为OCR_ESIGN时，合同认证方式2无效，因为这种签名方式依赖实名认证） */
   ApproverVerifyTypes?: number[];
-  /** 签署人签署合同时的认证方式1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2) */
+  /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素默认为1(人脸认证 ),2(签署密码)注: `用模版创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在此创建合同指定无效` */
   ApproverSignTypes?: number[];
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
   SignId?: string;
@@ -1679,26 +1679,26 @@ declare interface ChannelDeleteSealPoliciesResponse {
 }
 
 declare interface ChannelDescribeEmployeesRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 指定每页多少条数据，单页最大20 */
+  /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit: number;
-  /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]查询离职员工时，Key为Status，Values为["QuiteJob"] */
+  /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，根据实名状态查询员工，Values可选： **["IsVerified"]**：查询已实名的员工**["QuiteJob"]**：查询离职员工 Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]** */
   Filters?: Filter[];
-  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0,最大为20000 */
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface ChannelDescribeEmployeesResponse {
-  /** 员工数据列表 */
+  /** 员工信息列表。 */
   Employees?: Staff[] | null;
-  /** 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000 */
+  /** 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number | null;
-  /** 指定每页多少条数据，单页最大20 */
+  /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit?: number;
-  /** 符合条件的员工数量 */
+  /** 符合条件的员工数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1941,7 +1941,7 @@ declare interface CreateConsoleLoginUrlRequest {
   ProxyOperatorName?: string;
   /** Web控制台登录后进入的功能模块, 支持的模块包括： **空值** :(默认)企业中心模块 **DOCUMENT** :合同管理模块 **TEMPLATE** :企业模板管理模块 **SEAL** :印章管理模块 **OPERATOR** :组织管理模块注意：1、如果EndPoint选择"CHANNEL"或"APP"，该参数仅支持传递"SEAL"，进入印章管理模块2、该参数**仅在企业和员工激活已经完成，登录控制台场景才生效**。 */
   Module?: string;
-  /** 该参数和Module参数配合使用，用于指定模块下的资源Id，指定后链接登录将展示该资源的详情。根据Module参数的不同所代表的含义不同(ModuleId需要和Module对应，ModuleId可以通过API或者控制台获取到)。当前支持： Module传值 ModuleId传值 进入的目标页面 SEAL 印章ID 查看指定印章的详情页面 TEMPLATE 合同模板ID 指定模版的详情页面 DOCUMENT 合同ID 指定合同的详情页面 注意：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
+  /** 该参数和Module参数配合使用，用于指定模块下的资源Id，指定后链接登录将展示该资源的详情。根据Module参数的不同所代表的含义不同(ModuleId需要和Module对应，ModuleId可以通过API或者控制台获取到)。当前支持： Module传值 ModuleId传值 进入的目标页面 SEAL 印章ID 查看指定印章的详情页面 TEMPLATE 合同模板ID 指定模板的详情页面 DOCUMENT 合同ID 指定合同的详情页面 注意：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   ModuleId?: string;
   /** 是否展示左侧菜单栏 **ENABLE** : (默认)进入web控制台展示左侧菜单栏 **DISABLE** : 进入web控制台不展示左侧菜单栏注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   MenuStatus?: string;
@@ -2027,13 +2027,13 @@ declare interface CreateSealByImageResponse {
 }
 
 declare interface CreateSignUrlsRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
   /** 合同流程ID数组，最多支持100个。注: `该参数和合同组编号必须二选一` */
   FlowIds?: string[];
   /** 合同组编号注：`该参数和合同流程ID数组必须二选一` */
   FlowGroupId?: string;
-  /** 签署链接类型,可以设置的参数如下 **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链 **CHANNEL** :带有H5引导页的跳转电子签小程序的链接 **APP** :第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型 **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下** */
+  /** 签署链接类型,可以设置的参数如下 **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链 **CHANNEL** :带有H5引导页的跳转电子签小程序的链接 **APP** :第三方App或小程序跳转电子签小程序的path, App或者小程序跳转适合此类型 **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下** */
   Endpoint?: string;
   /** 签署链接生成类型，可以选择的类型如下**ALL**：(默认)全部签署方签署链接，此时不会给自动签署(静默签署)的签署方创建签署链接**CHANNEL**：第三方子企业员工签署方**NOT_CHANNEL**：SaaS平台企业员工签署方**PERSON**：个人/自然人签署方**FOLLOWER**：关注方，目前是合同抄送方**RECIPIENT**：获取RecipientId对应的签署链接，可用于生成动态签署人补充链接 */
   GenerateType?: string;

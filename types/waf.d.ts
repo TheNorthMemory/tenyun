@@ -4101,7 +4101,7 @@ declare interface Waf {
   DeleteCustomWhiteRule(data: DeleteCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomWhiteRuleResponse>;
   /** 删除域名规则白名单 {@link DeleteDomainWhiteRulesRequest} {@link DeleteDomainWhiteRulesResponse} */
   DeleteDomainWhiteRules(data?: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
-  /** 删除访问日志下载记录 {@link DeleteDownloadRecordRequest} {@link DeleteDownloadRecordResponse} */
+  /** @deprecated 删除访问日志下载记录 {@link DeleteDownloadRecordRequest} {@link DeleteDownloadRecordResponse} */
   DeleteDownloadRecord(data: DeleteDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDownloadRecordResponse>;
   /** 删除CLB-WAF防护域名 {@link DeleteHostRequest} {@link DeleteHostResponse} */
   DeleteHost(data: DeleteHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostResponse>;

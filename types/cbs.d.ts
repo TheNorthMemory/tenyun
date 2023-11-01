@@ -729,6 +729,8 @@ declare interface DescribeDiskConfigQuotaRequest {
   DiskUsage?: string;
   /** 实例CPU核数。 */
   CPU?: number;
+  /** 专用集群ID。 */
+  DedicatedClusterId?: string;
 }
 
 declare interface DescribeDiskConfigQuotaResponse {

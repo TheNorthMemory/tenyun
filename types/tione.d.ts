@@ -1156,6 +1156,18 @@ declare interface ResourceInfo {
   RealGpuDetailSet?: GpuDetail[];
 }
 
+/** 资源组节点运行任务信息 */
+declare interface ResourceInstanceRunningJobInfo {
+  /** pod名称 */
+  PodName?: string | null;
+  /** 任务类型 */
+  TaskType?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 任务自定义名称 */
+  TaskName?: string | null;
+}
+
 /** 文本行信息 */
 declare interface RowItem {
   /** rowValue 数组 */
@@ -2482,6 +2494,20 @@ declare interface DescribeBillingResourceGroupsResponse {
   TotalCount: number;
   /** 资源组详情 */
   ResourceGroupSet: ResourceGroup[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBillingResourceInstanceRunningJobsRequest {
+  /** 资源组id */
+  ResourceGroupId: string;
+  /** 资源组节点id */
+  ResourceInstanceId: string;
+}
+
+declare interface DescribeBillingResourceInstanceRunningJobsResponse {
+  /** 资源组节点运行中的任务信息 */
+  ResourceInstanceRunningJobInfos?: ResourceInstanceRunningJobInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4117,6 +4143,8 @@ declare interface Tione {
   DescribeBatchTasks(data?: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
   /** 查询资源组详情 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
   DescribeBillingResourceGroups(data: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
+  /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */
+  DescribeBillingResourceInstanceRunningJobs(data: DescribeBillingResourceInstanceRunningJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceInstanceRunningJobsResponse>;
   /** 查询计费项列表 {@link DescribeBillingSpecsRequest} {@link DescribeBillingSpecsResponse} */
   DescribeBillingSpecs(data: DescribeBillingSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsResponse>;
   /** 查询计费项价格 {@link DescribeBillingSpecsPriceRequest} {@link DescribeBillingSpecsPriceResponse} */

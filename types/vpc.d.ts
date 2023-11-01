@@ -431,9 +431,9 @@ declare interface CcnRoute {
 /** 用于发布云联网的cidr信息 */
 declare interface CidrForCcn {
   /** local cidr值。 */
-  Cidr: string | null;
+  Cidr?: string | null;
   /** 是否发布到了云联网。 */
-  PublishedToVbc: boolean | null;
+  PublishedToVbc?: boolean | null;
 }
 
 /** 私有网络和基础网络互通设备 */
@@ -1618,7 +1618,7 @@ declare interface Route {
   DestinationCidrBlock: string;
   /** 下一跳类型，目前我们支持的类型有：CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：NAT网关; NORMAL_CVM：普通云服务器；EIP：云服务器的公网IP；LOCAL_GATEWAY：本地网关。 */
   GatewayType: string;
-  /** 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。特殊说明：GatewayType为NORMAL_CVM时，GatewayId填写实例的内网IP。 */
+  /** 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。特殊说明：GatewayType为NORMAL_CVM时，GatewayId填写实例的内网IP。GatewayType为EIP时，GatewayId填写0。 */
   GatewayId: string;
   /** 路由策略ID。IPv4路由策略ID是有意义的值，IPv6路由策略是无意义的值0。后续建议完全使用字符串唯一ID `RouteItemId`操作路由策略。该字段在删除时必填，其他字段无需填写。 */
   RouteId?: number;
@@ -1631,7 +1631,7 @@ declare interface Route {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId?: string;
   /** 目的IPv6网段，取值不能在私有网络网段内，例如：2402:4e00:1000:810b::/64。 */
-  DestinationIpv6CidrBlock?: string;
+  DestinationIpv6CidrBlock?: string | null;
   /** 路由唯一策略ID。 */
   RouteItemId?: string;
   /** 路由策略是否发布到云联网。 */

@@ -698,6 +698,10 @@ declare interface RabbitMQClusterInfo {
   ExceptionInformation?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
   ClusterStatus?: number;
+  /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
+  AutoRenewFlag?: number | null;
+  /** 是否开启镜像队列策略。1表示开启，0表示没开启。 */
+  MirrorQueuePolicyFlag?: number | null;
 }
 
 /** RabbitMQ集群规格信息 */
