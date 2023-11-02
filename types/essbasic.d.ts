@@ -36,6 +36,8 @@ declare interface ApproverItem {
 
 /** 签署人个性化能力信息 */
 declare interface ApproverOption {
+  /** 是否可以拒签 默认false-可以拒签 true-不可以拒签 */
+  NoRefuse?: boolean;
   /** 是否隐藏一键签署 默认false-不隐藏true-隐藏 */
   HideOneKeySign?: boolean;
   /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息） */
@@ -418,7 +420,7 @@ declare interface FlowApproverInfo {
   ApproverOption?: ApproverOption;
   /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要 */
   ApproverNeedSignReview?: boolean;
-  /** 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式) 如果不传默认为1查看合同的认证方式 Flow层级的优先于approver层级的（当手写签名方式为OCR_ESIGN时，合同认证方式2无效，因为这种签名方式依赖实名认证） */
+  /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式 */
   ApproverVerifyTypes?: number[];
   /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素默认为1(人脸认证 ),2(签署密码)注: `用模版创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在此创建合同指定无效` */
   ApproverSignTypes?: number[];
@@ -428,7 +430,7 @@ declare interface FlowApproverInfo {
   NotifyType?: string;
   /** [通过文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID）或签名方式。注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。` */
   AddSignComponentsLimits?: ComponentLimit[];
-  /** 自定义签署人角色名，如收款人、开具人、见证人等 */
+  /** 可以自定义签署人角色名：收款人、开具人、见证人等，长度不能超过20，只能由中文、字母、数字和下划线组成。注: `如果是用模板发起, 优先使用此处上传的, 如果不传则用模板的配置的` */
   ApproverRoleName?: string;
 }
 
@@ -518,33 +520,33 @@ declare interface FlowGroupOptions {
 
 /** 此结构体 (FlowInfo) 用于描述签署流程信息。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时（ 第三方应用集成或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || widthPercent | Integer | 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35 || content | String | 表头单元格内容，字数不超过100 | */
 declare interface FlowInfo {
-  /** 合同名字，最大长度200个字符 */
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName: string;
-  /** 签署截止时间戳，超过有效签署时间则该签署流程失败，默认一年 */
+  /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。示例值：1604912664 */
   Deadline: number;
-  /** 模板ID */
+  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。可以通过生成子客登录链接登录企业控制台, 在**企业模板**中得到合同模板ID。 */
   TemplateId?: string;
   /** 多个签署人信息，最大支持50个签署方 */
   FlowApprovers?: FlowApproverInfo[];
   /** 表单K-V对列表 */
   FormFields?: FormField[];
-  /** 回调地址，最大长度1000个字符 */
+  /** 合同状态变动结的通知回调URL，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性，最大长度1000个字符。腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。回调的相关说明可参考开发者中心的回调通知模块 */
   CallbackUrl?: string;
-  /** 合同类型，如：1. “劳务”；2. “销售”；3. “租赁”；4. “其他”，最大长度200个字符 */
+  /** 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。 */
   FlowType?: string;
-  /** 合同描述，最大长度1000个字符 */
+  /** 合同流程描述信息(可自定义此描述)，最大长度1000个字符。 */
   FlowDescription?: string;
-  /** 第三方应用平台的业务信息，最大长度1000个字符。 */
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为1000长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   CustomerData?: string;
-  /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
+  /** 您可以自定义腾讯电子签小程序合同列表页展示的合同内容模板，模板中支持以下变量：{合同名称} {发起方企业} {发起方姓名} {签署方N企业}{签署方N姓名}其中，N表示签署方的编号，从1开始，不能超过签署人的数量。例如，如果是腾讯公司张三发给李四名称为“租房合同”的合同，您可以将此字段设置为：`合同名称:{合同名称};发起方: {发起方企业}({发起方姓名});签署方:{签署方1姓名}`，则小程序中列表页展示此合同为以下样子合同名称：租房合同 发起方：腾讯公司(张三) 签署方：李四 */
   CustomShowMap?: string;
-  /** 被抄送人的信息列表，抄送功能暂不开放 */
+  /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。注:`此功能为白名单功能，使用前请联系对接的客户经理沟通。` */
   CcInfos?: CcInfo[];
-  /** 发起方企业的签署人进行签署操作是否需要企业内部审批。若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。 */
+  /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下： **false**：（默认）不需要审批，直接签署。 **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
   NeedSignReview?: boolean;
-  /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
+  /** 若在创建签署流程时指定了关注人CcInfos，此参数可设定向关注人发送短信通知的类型： **0** :合同发起时通知通知对方来查看合同（默认） **1** : 签署完成后通知对方来查看合同 */
   CcNotifyType?: number;
-  /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  /** 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传： **E_PRESCRIPTION_AUTO_SIGN**：处方单（医疗自动签） 注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。` */
   AutoSignScene?: string;
 }
 
@@ -1072,6 +1074,28 @@ declare interface ChannelCreateBatchCancelFlowUrlResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateBatchQuickSignUrlRequest {
+  /** 批量签署的合同流程ID数组。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
+  FlowIds: string[];
+  /** 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。注:`1. ApproverType目前只支持个人类型的签署人。``2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。``3. 当需要通过短信验证码签署时，手机号ApproverMobile需要与发起合同时填写的用户手机号一致。` */
+  FlowApproverInfo: FlowApproverInfo;
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
+  Agent?: Agent;
+  /** 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议) */
+  JumpUrl?: string;
+  /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。 */
+  SignatureTypes?: number[];
+  /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸认证您可以传递多种值，表示可用多种认证校验方式。 */
+  ApproverSignTypes?: number[];
+}
+
+declare interface ChannelCreateBatchQuickSignUrlResponse {
+  /** 签署人签署链接信息 */
+  FlowApproverUrlInfo?: FlowApproverUrlInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelCreateBatchSignUrlRequest {
   /** 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
@@ -1121,13 +1145,13 @@ declare interface ChannelCreateBoundFlowsResponse {
 }
 
 declare interface ChannelCreateConvertTaskApiRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 资源类型 支持doc,docx,html,xls,xlsx,jpg,jpeg,png,bmp文件类型 */
+  /** 需要进行转换的资源文件类型支持的文件类型如下：docdocxxlsxlsxjpgjpegpngbmptxt */
   ResourceType: string;
-  /** 资源名称，长度限制为256字符 */
+  /** 需要进行转换操作的文件资源名称，带资源后缀名。注: `资源名称长度限制为256个字符` */
   ResourceName: string;
-  /** 文件Id，通过UploadFiles获取 */
+  /** 需要进行转换操作的文件资源Id，通过UploadFiles接口获取文件资源Id。注: `目前，此接口仅支持单个文件进行转换。` */
   ResourceId: string;
   /** 调用方用户信息，不用传 */
   Operator?: UserInfo;
@@ -1136,7 +1160,7 @@ declare interface ChannelCreateConvertTaskApiRequest {
 }
 
 declare interface ChannelCreateConvertTaskApiResponse {
-  /** 任务id */
+  /** 接口返回的文件转换任务Id，可以调用接口查询转换任务状态获取转换任务的状态和转换后的文件资源Id。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1809,9 +1833,9 @@ declare interface ChannelDisableUserAutoSignResponse {
 }
 
 declare interface ChannelGetTaskResultApiRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 均必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 任务Id，通过ChannelCreateConvertTaskApi接口获得 */
+  /** 转换任务Id，通过接口创建文件转换任务接口得到的转换任务id */
   TaskId: string;
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
@@ -1822,11 +1846,11 @@ declare interface ChannelGetTaskResultApiRequest {
 declare interface ChannelGetTaskResultApiResponse {
   /** 任务Id */
   TaskId?: string;
-  /** 任务状态，需要关注的状态0 :NeedTranform - 任务已提交4 :Processing - 文档转换中8 :TaskEnd - 任务处理完成-2 :DownloadFailed - 下载失败-6 :ProcessFailed - 转换失败-13:ProcessTimeout - 转换文件超时 */
+  /** 任务状态，需要关注的状态**0** :NeedTranform - 任务已提交**4** :Processing - 文档转换中**8** :TaskEnd - 任务处理完成**-2** :DownloadFailed - 下载失败**-6** :ProcessFailed - 转换失败**-13**:ProcessTimeout - 转换文件超时 */
   TaskStatus?: number;
-  /** 状态描述，需要关注的状态NeedTranform - 任务已提交Processing - 文档转换中TaskEnd - 任务处理完成DownloadFailed - 下载失败ProcessFailed - 转换失败ProcessTimeout - 转换文件超时 */
+  /** 状态描述，需要关注的状态 **NeedTranform** : 任务已提交 **Processing** : 文档转换中 **TaskEnd** : 任务处理完成 **DownloadFailed** : 下载失败 **ProcessFailed** : 转换失败 **ProcessTimeout** : 转换文件超时 */
   TaskMessage?: string;
-  /** 资源Id，也是FileId，用于文件发起使用 */
+  /** 资源Id，也是FileId，用于文件发起时使用 */
   ResourceId?: string;
   /** 预览文件Url，有效期30分钟 当前字段返回为空，发起的时候，将ResourceId 放入发起即可 */
   PreviewUrl?: string | null;
@@ -2143,36 +2167,38 @@ declare interface DescribeResourceUrlsByFlowsResponse {
 }
 
 declare interface DescribeTemplatesRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 模板唯一标识，查询单个模板时使用 */
+  /** 合同模板ID，为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。 */
   TemplateId?: string;
-  /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
+  /** 查询内容控制**0**：模板列表及详情（默认）**1**：仅模板列表 */
   ContentType?: number;
-  /** 指定每页多少条数据，如果不传默认为20，单页最大100。 */
+  /** 合同模板ID数组，每一个合同模板ID为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。```注意: 1. 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。2. 请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。3. 最多支持200个模板。4. 若传递此参数，分页参数(Limit,Offset)无效``` */
+  TemplateIds?: string[];
+  /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为200。` */
   Limit?: number;
-  /** 查询结果分页返回，此处指定第几页，如果不传默从第一页返回。页码从0开始，即首页为0。 */
+  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。注：`1.offset从0开始，即第一页为0。``2.默认从第一页返回。` */
   Offset?: number;
-  /** 是否返回所有组件信息。默认false，只返回发起方控件；true，返回所有签署方控件 */
-  QueryAllComponents?: boolean;
-  /** 模糊搜索模板名称，最大长度200 */
+  /** 模糊搜索的模板名称，注意是模板名的连续部分，最大长度200 */
   TemplateName?: string;
-  /** 是否获取模板预览链接，默认false-不获取true-获取 */
-  WithPreviewUrl?: boolean;
-  /** 是否获取模板的PDF文件链接。默认false-不获取true-获取请联系客户经理开白后使用。 */
-  WithPdfUrl?: boolean;
-  /** 对应第三方应用平台企业的模板ID */
+  /** 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。 */
   ChannelTemplateId?: string;
+  /** 是否返回所有控件信息。**false**：只返回发起方控件（默认）**true**：返回所有签署方控件 */
+  QueryAllComponents?: boolean;
+  /** 是否获取模板预览链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。（此功能开放需要联系客户经理） */
+  WithPreviewUrl?: boolean;
+  /** 是否获取模板的PDF文件链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟。（此功能开放需要联系客户经理） */
+  WithPdfUrl?: boolean;
   /** 操作者的信息 */
   Operator?: UserInfo;
 }
 
 declare interface DescribeTemplatesResponse {
-  /** 模板列表 */
+  /** 模板详情列表数据 */
   Templates?: TemplateInfo[];
-  /** 查询到的总数 */
+  /** 查询到的模板总数 */
   TotalCount?: number;
-  /** 每页多少条数据 */
+  /** 每页返回的数据条数 */
   Limit?: number;
   /** 查询结果分页返回，此处指定第几页。页码从0开始，即首页为0。 */
   Offset?: number;
@@ -3901,6 +3927,8 @@ declare interface Essbasic {
   ChannelCancelUserAutoSignEnableUrl(data: ChannelCancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelUserAutoSignEnableUrlResponse>;
   /** 根据签署流程id创建批量撤销url {@link ChannelCreateBatchCancelFlowUrlRequest} {@link ChannelCreateBatchCancelFlowUrlResponse} */
   ChannelCreateBatchCancelFlowUrl(data: ChannelCreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchCancelFlowUrlResponse>;
+  /** 创建H5批量签署链接 {@link ChannelCreateBatchQuickSignUrlRequest} {@link ChannelCreateBatchQuickSignUrlResponse} */
+  ChannelCreateBatchQuickSignUrl(data: ChannelCreateBatchQuickSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchQuickSignUrlResponse>;
   /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link ChannelCreateBatchSignUrlRequest} {@link ChannelCreateBatchSignUrlResponse} */
   ChannelCreateBatchSignUrl(data: ChannelCreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchSignUrlResponse>;
   /** 领取未归属的合同 {@link ChannelCreateBoundFlowsRequest} {@link ChannelCreateBoundFlowsResponse} */
@@ -4003,7 +4031,7 @@ declare interface Essbasic {
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
   /** 操作第三方应用平台企业模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
-  /** 准备待发起文件(废弃) {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
+  /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;
   /** 同步企业信息 {@link SyncProxyOrganizationRequest} {@link SyncProxyOrganizationResponse} */
   SyncProxyOrganization(data: SyncProxyOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<SyncProxyOrganizationResponse>;

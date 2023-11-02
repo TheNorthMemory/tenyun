@@ -298,6 +298,26 @@ declare interface Consumer {
   Partition: number | null;
 }
 
+/** 消费详情 */
+declare interface ConsumerStats {
+  /** 主题名 */
+  TopicName?: string | null;
+  /** 所属Broker */
+  BrokerName?: string | null;
+  /** 队列编号 */
+  QueueId?: number | null;
+  /** 消费者ID */
+  ConsumerClientId?: string | null;
+  /** 消费位点 */
+  ConsumerOffset?: number | null;
+  /** 服务端位点 */
+  BrokerOffset?: number | null;
+  /** 消息堆积条数 */
+  DiffTotal?: number | null;
+  /** 最近消费时间 */
+  LastTimestamp?: number | null;
+}
+
 /** 消费进度详情 */
 declare interface ConsumersSchedule {
   /** 当前分区id。 */
@@ -2854,6 +2874,22 @@ declare interface DescribeRocketMQClustersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQConsumeStatsRequest {
+  /** 实例ID */
+  ClusterId: string;
+  /** 命名空间 */
+  NamespaceId: string;
+  /** 消费组 */
+  ConsumerGroup: string;
+}
+
+declare interface DescribeRocketMQConsumeStatsResponse {
+  /** 消费详情列表 */
+  ConsumerStatsList?: ConsumerStats[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQConsumerConnectionsRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3966,6 +4002,26 @@ declare interface UnbindCmqDeadLetterResponse {
   RequestId?: string;
 }
 
+declare interface VerifyRocketMQConsumeRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 命名空间 */
+  NamespaceId: string;
+  /** 消费组ID */
+  GroupId: string;
+  /** 消息id */
+  MsgId: string;
+  /** 客户端ID */
+  ClientId: string;
+  /** topic名称 */
+  TopicName: string;
+}
+
+declare interface VerifyRocketMQConsumeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Tdmq 消息队列 TDMQ} */
 declare interface Tdmq {
   (): Versions;
@@ -4105,6 +4161,8 @@ declare interface Tdmq {
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
   /** 获取RocketMQ集群列表 {@link DescribeRocketMQClustersRequest} {@link DescribeRocketMQClustersResponse} */
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
+  /** 获取消费详情列表 {@link DescribeRocketMQConsumeStatsRequest} {@link DescribeRocketMQConsumeStatsResponse} */
+  DescribeRocketMQConsumeStats(data: DescribeRocketMQConsumeStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumeStatsResponse>;
   /** 获取指定消费组下当前客户端的连接情况 {@link DescribeRocketMQConsumerConnectionsRequest} {@link DescribeRocketMQConsumerConnectionsResponse} */
   DescribeRocketMQConsumerConnections(data: DescribeRocketMQConsumerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumerConnectionsResponse>;
   /** 获取RocketMQ消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
@@ -4207,6 +4265,8 @@ declare interface Tdmq {
   SetRocketMQPublicAccessPoint(data: SetRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<SetRocketMQPublicAccessPointResponse>;
   /** 解绑cmq死信队列 {@link UnbindCmqDeadLetterRequest} {@link UnbindCmqDeadLetterResponse} */
   UnbindCmqDeadLetter(data: UnbindCmqDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCmqDeadLetterResponse>;
+  /** Rocketmq消费验证 {@link VerifyRocketMQConsumeRequest} {@link VerifyRocketMQConsumeResponse} */
+  VerifyRocketMQConsume(data: VerifyRocketMQConsumeRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyRocketMQConsumeResponse>;
 }
 
 export declare type Versions = ["2020-02-17"];

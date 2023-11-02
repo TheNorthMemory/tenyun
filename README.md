@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，10629+ 服务数</summary>
+<details><summary>共计 240+ 款产品，10634+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -181,7 +181,7 @@ dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(119) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(68) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(33) |
-drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
+drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(10) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
 dsgc | [数据安全治理中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(148) |
 dtf | [分布式事务](https://cloud.tencent.com/document/product/1224) | 2020-05-06(1) |
@@ -194,8 +194,8 @@ eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/docum
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(35) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(41) |
-ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(66) |
-essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(60) | 2020-12-22(53) |
+ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(67) |
+essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(61) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(2) | 2018-12-01(4) |
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(33) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10) |
@@ -297,7 +297,7 @@ tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 20
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(333) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(13) |
-tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(119) |
+tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(121) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(69) | 2022-01-06(5) |

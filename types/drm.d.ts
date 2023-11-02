@@ -170,6 +170,26 @@ declare interface DescribeAllKeysResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDRMLicenseRequest {
+  /** 使用的DRM方案类型，接口取值 NORMALAES 。 */
+  DrmType: string;
+  /** 加密的track列表，接口取值 SD 。 */
+  Tracks: string[];
+  /** 一个加密内容的唯一标识。 */
+  ContentId: string;
+  /** 内容类型。接口取值 LiveVideo 。 */
+  ContentType: string;
+}
+
+declare interface DescribeDRMLicenseResponse {
+  /** 内容ID。 */
+  ContentId: string;
+  /** 加密密钥。 */
+  TXEncryptionToken: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFairPlayPemRequest {
   /** 委托者Id,适用于托管自身证书的客户。普通客户无需填该字段。 */
   BailorId?: number;
@@ -267,6 +287,8 @@ declare interface Drm {
   DeleteFairPlayPem(data?: DeleteFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFairPlayPemResponse>;
   /** 查询所有加密密钥列表 {@link DescribeAllKeysRequest} {@link DescribeAllKeysResponse} */
   DescribeAllKeys(data: DescribeAllKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllKeysResponse>;
+  /** 获取 FLV 加密的密钥字段。 {@link DescribeDRMLicenseRequest} {@link DescribeDRMLicenseResponse} */
+  DescribeDRMLicense(data: DescribeDRMLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDRMLicenseResponse>;
   /** 查询所设置的FairPlay私钥 {@link DescribeFairPlayPemRequest} {@link DescribeFairPlayPemResponse} */
   DescribeFairPlayPem(data?: DescribeFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFairPlayPemResponse>;
   /** 查询加密密钥列表 {@link DescribeKeysRequest} {@link DescribeKeysResponse} */

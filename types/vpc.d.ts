@@ -174,7 +174,7 @@ declare interface BandwidthPackage {
   BandwidthPackageId?: string;
   /** 带宽包类型，包括'BGP','SINGLEISP','ANYCAST','SINGLEISP_CMCC','SINGLEISP_CTCC','SINGLEISP_CUCC' */
   NetworkType?: string;
-  /** 带宽包计费类型，包括'TOP5_POSTPAID_BY_MONTH'和'PERCENT95_POSTPAID_BY_MONTH' */
+  /** 带宽包计费类型，包括:'TOP5_POSTPAID_BY_MONTH':按月后付费TOP5计费 'PERCENT95_POSTPAID_BY_MONTH':按月后付费月95计费'ENHANCED95_POSTPAID_BY_MONTH':按月后付费增强型95计费'FIXED_PREPAID_BY_MONTH':包月预付费计费‘PEAK_BANDWIDTH_POSTPAID_BY_DAY’: 后付费日结按带宽计费 */
   ChargeType?: string;
   /** 带宽包名称 */
   BandwidthPackageName?: string;
@@ -188,6 +188,8 @@ declare interface BandwidthPackage {
   Bandwidth?: number;
   /** 网络出口 */
   Egress?: string | null;
+  /** 带宽包到期时间，只有预付费会返回，按量计费返回为null */
+  Deadline?: string | null;
 }
 
 /** 后付费共享带宽包的当前计费用量 */
@@ -4269,7 +4271,7 @@ declare interface DescribeBandwidthPackageResourcesResponse {
 declare interface DescribeBandwidthPackagesRequest {
   /** 带宽包唯一ID列表 */
   BandwidthPackageIds?: string[];
-  /** 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下： bandwidth-package_id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。 bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。 network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。类型包括'HIGH_QUALITY_BGP','BGP','SINGLEISP'和'ANYCAST'。 charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型包括'TOP5_POSTPAID_BY_MONTH'和'PERCENT95_POSTPAID_BY_MONTH'。 resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance' resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx' resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。 tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
+  /** 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下： bandwidth-package_id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。 bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。 network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。类型包括'HIGH_QUALITY_BGP','BGP','SINGLEISP'和'ANYCAST'。 charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型包括: 'TOP5_POSTPAID_BY_MONTH':按月后付费TOP5计费 'PERCENT95_POSTPAID_BY_MONTH':按月后付费月95计费'ENHANCED95_POSTPAID_BY_MONTH':按月后付费增强型95计费'FIXED_PREPAID_BY_MONTH':包月预付费计费‘PEAK_BANDWIDTH_POSTPAID_BY_DAY’: 后付费日结按带宽计费 resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance' resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx' resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。 tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 查询带宽包偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。 */
   Offset?: number;
@@ -4279,9 +4281,9 @@ declare interface DescribeBandwidthPackagesRequest {
 
 declare interface DescribeBandwidthPackagesResponse {
   /** 符合条件的带宽包数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 描述带宽包详细信息 */
-  BandwidthPackageSet: BandwidthPackage[];
+  BandwidthPackageSet?: BandwidthPackage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

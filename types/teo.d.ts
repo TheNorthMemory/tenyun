@@ -1024,6 +1024,8 @@ declare interface OriginGroup {
   CreateTime?: string;
   /** 源站组更新时间。 */
   UpdateTime?: string;
+  /** 回源Host Header。 */
+  HostHeader?: string | null;
 }
 
 /** 源站组引用服务。 */

@@ -50,7 +50,7 @@ declare interface ApproverInfo {
   NotifyType?: string;
   /** 收据场景设置签署人角色类型, 可以设置如下****类型****: **1** :收款人 **2** :开具人 **3** :见证人注: `收据场景为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverRole?: number;
-  /** 自定义签署人角色名：收款人、开具人、见证人 */
+  /** 可以自定义签署人角色名：收款人、开具人、见证人等，长度不能超过20，只能由中文、字母、数字和下划线组成。注: `如果是用模板发起, 优先使用此处上传的, 如果不传则用模板的配置的` */
   ApproverRoleName?: string;
   /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 将要废弃, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
   VerifyChannel?: string[];
@@ -64,7 +64,7 @@ declare interface ApproverInfo {
   CustomApproverTag?: string;
   /** 可以控制签署方在签署合同时能否进行某些操作，例如拒签、转交他人等。详细操作可以参考开发者中心的ApproverOption结构体。 */
   ApproverOption?: ApproverOption;
-  /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段不可传多个校验方式 */
+  /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式 */
   ApproverVerifyTypes?: number[];
   /** 您可以指定签署方签署合同的认证校验方式，可传递以下值：**1**：人脸认证，需进行人脸识别成功后才能签署合同；**2**：签署密码，需输入与用户在腾讯电子签设置的密码一致才能校验成功进行合同签署；**3**：运营商三要素，需到运营商处比对手机号实名信息（名字、手机号、证件号）校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸认证和签署密码两种形式；您可以传递多种值，表示可用多种认证校验方式。 */
   ApproverSignTypes?: number[];
@@ -536,7 +536,7 @@ declare interface FlowCreateApprover {
   Components?: Component[];
   /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
   ComponentLimitType?: string[];
-  /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段不可传多个校验方式`此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主`. */
+  /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式`此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主`. */
   ApproverVerifyTypes?: number[];
   /** 您可以指定签署方签署合同的认证校验方式，可传递以下值：**1**：人脸认证，需进行人脸识别成功后才能签署合同；**2**：签署密码，需输入与用户在腾讯电子签设置的密码一致才能校验成功进行合同签署；**3**：运营商三要素，需到运营商处比对手机号实名信息（名字、手机号、证件号）校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸认证和签署密码两种形式；您可以传递多种值，表示可用多种认证校验方式。注:`此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主` */
   ApproverSignTypes?: number[];
@@ -1164,6 +1164,30 @@ declare interface CreateBatchCancelFlowUrlResponse {
   FailMessages?: string[];
   /** 签署连接过期时间字符串：年月日-时分秒例如:2023-07-28 17:25:59 */
   UrlExpireOn?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchQuickSignUrlRequest {
+  /** 批量签署的合同流程ID数组。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
+  FlowIds: string[];
+  /** 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。注:`1. ApproverType目前只支持个人类型的签署人。``2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。``3. 当需要通过短信验证码签署时，手机号ApproverMobile需要与发起合同时填写的用户手机号一致。` */
+  FlowApproverInfo: FlowCreateApprover;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId(子企业的组织ID)为必填项。 */
+  Agent?: Agent;
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator?: UserInfo;
+  /** 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议) */
+  JumpUrl?: string;
+  /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。 */
+  SignatureTypes?: number[];
+  /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸认证您可以传递多种值，表示可用多种认证校验方式。 */
+  ApproverSignTypes?: number[];
+}
+
+declare interface CreateBatchQuickSignUrlResponse {
+  /** 签署人签署链接信息 */
+  FlowApproverUrlInfo?: FlowApproverUrlInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2671,6 +2695,8 @@ declare interface Ess {
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 批量撤销签署流程 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
+  /** 创建H5批量签署链接 {@link CreateBatchQuickSignUrlRequest} {@link CreateBatchQuickSignUrlResponse} */
+  CreateBatchQuickSignUrl(data: CreateBatchQuickSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchQuickSignUrlResponse>;
   /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
   CreateBatchSignUrl(data: CreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchSignUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
