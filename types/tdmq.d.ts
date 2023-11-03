@@ -482,6 +482,18 @@ declare interface MigrateTopic {
   HealthCheckError?: string | null;
 }
 
+/** 消息日志 */
+declare interface MsgLog {
+  /** 消息ID。 */
+  MsgId: string;
+  /** 生产者名称。 */
+  ProducerName: string;
+  /** 生产时间。 */
+  ProduceTime: string;
+  /** 生产客户端地址。 */
+  ProducerAddr: string;
+}
+
 /** 分区topic */
 declare interface PartitionsTopic {
   /** 最后一次间隔内发布消息的平均byte大小。 */
@@ -2753,19 +2765,19 @@ declare interface DescribeRabbitMQVipInstanceRequest {
 
 declare interface DescribeRabbitMQVipInstanceResponse {
   /** 集群信息 */
-  ClusterInfo: RabbitMQClusterInfo;
+  ClusterInfo?: RabbitMQClusterInfo;
   /** 集群规格信息 */
-  ClusterSpecInfo: RabbitMQClusterSpecInfo;
+  ClusterSpecInfo?: RabbitMQClusterSpecInfo;
   /** 集群访问 */
-  ClusterNetInfo: RabbitMQClusterAccessInfo | null;
+  ClusterNetInfo?: RabbitMQClusterAccessInfo | null;
   /** 集群白名单 */
-  ClusterWhiteListInfo: RabbitMQClusterWhiteListInfo | null;
+  ClusterWhiteListInfo?: RabbitMQClusterWhiteListInfo | null;
   /** vhost配额信息 */
-  VirtualHostQuota: VirtualHostQuota;
+  VirtualHostQuota?: VirtualHostQuota;
   /** exchange配额信息 */
-  ExchangeQuota: ExchangeQuota;
+  ExchangeQuota?: ExchangeQuota;
   /** queue配额信息 */
-  QueueQuota: QueueQuota;
+  QueueQuota?: QueueQuota;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3332,6 +3344,34 @@ declare interface DescribeSubscriptionsResponse {
   SubscriptionSets?: Subscription[];
   /** 数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopicMsgsRequest {
+  /** 环境（命名空间）名称。 */
+  EnvironmentId: string;
+  /** 主题名。 */
+  TopicName: string;
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 起始下标，不填默认为0。 */
+  Offset?: number;
+  /** 返回数量，不填则默认为10，最大值为20。 */
+  Limit?: number;
+  /** 消息ID。 */
+  MsgId?: string;
+  /** Pulsar 集群的ID */
+  ClusterId?: string;
+}
+
+declare interface DescribeTopicMsgsResponse {
+  /** 总记录数。 */
+  TotalCount: number;
+  /** 消息日志列表。 */
+  TopicMsgLogSets: MsgLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4199,6 +4239,8 @@ declare interface Tdmq {
   DescribeRoles(data: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
   /** 获取消费订阅列表 {@link DescribeSubscriptionsRequest} {@link DescribeSubscriptionsResponse} */
   DescribeSubscriptions(data: DescribeSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionsResponse>;
+  /** 消息查询 {@link DescribeTopicMsgsRequest} {@link DescribeTopicMsgsResponse} */
+  DescribeTopicMsgs(data: DescribeTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicMsgsResponse>;
   /** 查询主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 平滑迁移：导入消费者组列表 {@link ImportRocketMQConsumerGroupsRequest} {@link ImportRocketMQConsumerGroupsResponse} */

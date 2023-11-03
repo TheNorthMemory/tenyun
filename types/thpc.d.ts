@@ -279,7 +279,7 @@ declare interface ManagerNode {
   /** 节点显示名称。不指定节点显示名称则默认显示‘未命名’。购买多个节点，如果指定模式串`{R:x}`，表示生成数字[`[x, x+n-1]`，其中`n`表示购买节点的数量，例如`server_{R:3}`，购买1个时，节点显示名称为`server_3`；购买2个时，节点显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。购买多个节点，如果不指定模式串，则在节点显示名称添加后缀`1、2...n`，其中`n`表示购买节点的数量，例如`server_`，购买2个时，节点显示名称分别为`server_1`，`server_2`。最多支持60个字符（包含模式串）。 */
   InstanceName?: string;
   /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
-  ProjectId?: number | null;
+  ProjectId?: number;
 }
 
 /** 管控节点概览。 */

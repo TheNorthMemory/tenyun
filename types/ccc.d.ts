@@ -362,6 +362,8 @@ declare interface SeatUserInfo {
   UserId?: string;
   /** 坐席关联的技能组列表 */
   SkillGroupNameList?: string[] | null;
+  /** 1:管理员2:质检员3:普通座席else:自定义角色ID */
+  Role?: number | null;
 }
 
 /** 参与者信息 */
@@ -532,6 +534,8 @@ declare interface TelCdrInfo {
   Duration?: number;
   /** 录音信息 */
   RecordURL?: string;
+  /** 录音 ID */
+  RecordId?: string | null;
   /** 坐席信息 */
   SeatUser?: SeatUserInfo;
   /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无坐席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区 */

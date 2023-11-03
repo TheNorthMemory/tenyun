@@ -213,27 +213,27 @@ declare interface Choice {
 /** 容器信息 */
 declare interface Container {
   /** 名字 */
-  Name?: string | null;
+  Name: string | null;
   /** id */
-  ContainerId?: string | null;
+  ContainerId: string | null;
   /** 镜像地址 */
-  Image?: string | null;
+  Image: string | null;
   /** 容器状态 */
-  Status?: ContainerStatus | null;
+  Status: ContainerStatus | null;
 }
 
 /** 容器状态 */
 declare interface ContainerStatus {
   /** 重启次数 */
-  RestartCount?: number | null;
+  RestartCount: number | null;
   /** 状态 */
-  State?: string | null;
+  State: string | null;
   /** 是否就绪 */
-  Ready?: boolean | null;
+  Ready: boolean | null;
   /** 状态原因 */
-  Reason?: string | null;
+  Reason: string | null;
   /** 容器的错误信息 */
-  Message?: string | null;
+  Message: string | null;
 }
 
 /** cos的路径信息 */
@@ -270,6 +270,14 @@ declare interface CronScaleJob {
   MaxReplicas?: number | null;
   /** 例外时间，Cron表达式，在对应时间内不执行任务。最多支持3条。 */
   ExcludeDates?: string[] | null;
+}
+
+/** 跨租户弹性网卡下Pod调用信息 */
+declare interface CrossTenantENIInfo {
+  /** Pod IP */
+  PrimaryIP?: string | null;
+  /** Pod Port */
+  Port?: string | null;
 }
 
 /** 自定义指标 */
@@ -1052,6 +1060,8 @@ declare interface Pod {
   Containers?: Container | null;
   /** 容器列表 */
   ContainerInfos?: Container[] | null;
+  /** 容器调用信息 */
+  CrossTenantENIInfo?: CrossTenantENIInfo | null;
 }
 
 /** 任务建模Pod信息 */

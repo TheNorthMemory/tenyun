@@ -1122,6 +1122,10 @@ declare interface TaskLogInfo {
   UIN?: string | null;
   /** 用户名称 */
   UserName?: string | null;
+  /** 报告类型： 1安全体检 2日报 3周报 4月报 */
+  ReportType?: number | null;
+  /** 报告模板id */
+  TemplateId?: number | null;
 }
 
 /** 报告pdf下载的临时链接 */
@@ -1905,6 +1909,8 @@ declare interface DescribeTaskLogListResponse {
   Data?: TaskLogInfo[] | null;
   /** 待查看数量 */
   NotViewNumber?: number | null;
+  /** 报告模板数 */
+  ReportTemplateNumber?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

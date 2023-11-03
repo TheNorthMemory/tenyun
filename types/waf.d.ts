@@ -4121,7 +4121,7 @@ declare interface Waf {
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
   /** 获取防篡改信息 {@link DescribeAntiFakeRulesRequest} {@link DescribeAntiFakeRulesResponse} */
   DescribeAntiFakeRules(data: DescribeAntiFakeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeRulesResponse>;
-  /** 获取防篡改url {@link DescribeAntiFakeUrlRequest} {@link DescribeAntiFakeUrlResponse} */
+  /** @deprecated 获取防篡改url {@link DescribeAntiFakeUrlRequest} {@link DescribeAntiFakeUrlResponse} */
   DescribeAntiFakeUrl(data: DescribeAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeUrlResponse>;
   /** @deprecated 获取信息防泄漏规则列表【老接口】 {@link DescribeAntiInfoLeakRulesRequest} {@link DescribeAntiInfoLeakRulesResponse} */
   DescribeAntiInfoLeakRules(data: DescribeAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakRulesResponse>;
@@ -4137,7 +4137,7 @@ declare interface Waf {
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** Waf 多域名ip黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
-  /** Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
+  /** @deprecated Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
   DescribeCCRule(data: DescribeCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleResponse>;
   /** 查询CC规则 {@link DescribeCCRuleListRequest} {@link DescribeCCRuleListResponse} */
   DescribeCCRuleList(data?: DescribeCCRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleListResponse>;

@@ -1568,7 +1568,7 @@ declare interface SmartRouting {
 declare interface StandardDebug {
   /** Debug 功能开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 允许的客户端来源。支持填写 IPV4 以及 IPV6 的 IP/IP 段，不填则表示允许任意客户端 IP。 */
+  /** 允许的客户端来源。支持填写 IPV4 以及 IPV6 的 IP/IP 段。 */
   AllowClientIPList: string[];
   /** Debug 功能到期时间。超出设置的时间，则功能失效。 */
   ExpireTime: string;

@@ -144,6 +144,20 @@ declare interface CreateRecordBatchRecord {
   Weight?: number | null;
 }
 
+/** 自定义线路详情 */
+declare interface CustomLineInfo {
+  /** 域名ID */
+  DomainId: number;
+  /** 自定义线路名称 */
+  Name: string;
+  /** 自定义线路IP段 */
+  Area: string;
+  /** 已使用IP段个数 */
+  UseCount: number;
+  /** 允许使用IP段最大个数 */
+  MaxCount: number;
+}
+
 /** 子订单号列表 */
 declare interface Deals {
   /** 子订单ID */
@@ -940,6 +954,22 @@ declare interface CreateDomainBatchResponse {
   RequestId?: string;
 }
 
+declare interface CreateDomainCustomLineRequest {
+  /** 域名 */
+  Domain: string;
+  /** 自定义线路名称 */
+  Name: string;
+  /** 自定义线路IP段，用-分割 */
+  Area: string;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface CreateDomainCustomLineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDomainGroupRequest {
   /** 域名分组 */
   GroupName: string;
@@ -1074,6 +1104,20 @@ declare interface DeleteDomainBatchResponse {
   JobId?: number;
   /** 任务详情数组 */
   DetailList?: DeleteDomainBatchDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDomainCustomLineRequest {
+  /** 域名 */
+  Domain: string;
+  /** 自定义线路名称 */
+  Name: string;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface DeleteDomainCustomLineResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1216,6 +1260,22 @@ declare interface DescribeDomainAnalyticsResponse {
   Info?: DomainAnalyticsInfo;
   /** 域名别名解析量统计信息 */
   AliasData?: DomainAliasAnalyticsItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDomainCustomLineListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface DescribeDomainCustomLineListResponse {
+  /** 自定义线路列表 */
+  LineList?: CustomLineInfo[];
+  /** 可添加的自定义线路条数 */
+  AvailableCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1764,6 +1824,24 @@ declare interface DownloadSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDomainCustomLineRequest {
+  /** 域名 */
+  Domain: string;
+  /** 修改后的自定义线路名称，如果不修改名称，需要和PreName保持一致 */
+  Name: string;
+  /** 自定义线路IP段，用-分割 */
+  Area: string;
+  /** 修改前的自定义线路名称 */
+  PreName: string;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface ModifyDomainCustomLineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDomainLockRequest {
   /** 域名 */
   Domain: string;
@@ -2131,6 +2209,8 @@ declare interface Dnspod {
   CreateDomainAlias(data: CreateDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAliasResponse>;
   /** 批量添加域名 {@link CreateDomainBatchRequest} {@link CreateDomainBatchResponse} */
   CreateDomainBatch(data: CreateDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainBatchResponse>;
+  /** 创建域名的自定义线路 {@link CreateDomainCustomLineRequest} {@link CreateDomainCustomLineResponse} */
+  CreateDomainCustomLine(data: CreateDomainCustomLineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainCustomLineResponse>;
   /** 创建域名分组 {@link CreateDomainGroupRequest} {@link CreateDomainGroupResponse} */
   CreateDomainGroup(data: CreateDomainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainGroupResponse>;
   /** 添加记录 {@link CreateRecordRequest} {@link CreateRecordResponse} */
@@ -2147,6 +2227,8 @@ declare interface Dnspod {
   DeleteDomainAlias(data: DeleteDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAliasResponse>;
   /** 批量删除域名 {@link DeleteDomainBatchRequest} {@link DeleteDomainBatchResponse} */
   DeleteDomainBatch(data: DeleteDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainBatchResponse>;
+  /** 删除域名的自定义线路 {@link DeleteDomainCustomLineRequest} {@link DeleteDomainCustomLineResponse} */
+  DeleteDomainCustomLine(data: DeleteDomainCustomLineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainCustomLineResponse>;
   /** 删除记录 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 批量删除解析记录 {@link DeleteRecordBatchRequest} {@link DeleteRecordBatchResponse} */
@@ -2165,6 +2247,8 @@ declare interface Dnspod {
   DescribeDomainAliasList(data: DescribeDomainAliasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAliasListResponse>;
   /** 域名解析量统计 {@link DescribeDomainAnalyticsRequest} {@link DescribeDomainAnalyticsResponse} */
   DescribeDomainAnalytics(data: DescribeDomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAnalyticsResponse>;
+  /** 获取域名的自定义线路列表 {@link DescribeDomainCustomLineListRequest} {@link DescribeDomainCustomLineListResponse} */
+  DescribeDomainCustomLineList(data: DescribeDomainCustomLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainCustomLineListResponse>;
   /** 获取域名筛选列表 {@link DescribeDomainFilterListRequest} {@link DescribeDomainFilterListResponse} */
   DescribeDomainFilterList(data: DescribeDomainFilterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainFilterListResponse>;
   /** 获取域名分组列表 {@link DescribeDomainGroupListRequest} {@link DescribeDomainGroupListResponse} */
@@ -2215,6 +2299,8 @@ declare interface Dnspod {
   DescribeVASStatistic(data: DescribeVASStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVASStatisticResponse>;
   /** 下载快照 {@link DownloadSnapshotRequest} {@link DownloadSnapshotResponse} */
   DownloadSnapshot(data: DownloadSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadSnapshotResponse>;
+  /** 修改域名的自定义线路 {@link ModifyDomainCustomLineRequest} {@link ModifyDomainCustomLineResponse} */
+  ModifyDomainCustomLine(data: ModifyDomainCustomLineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainCustomLineResponse>;
   /** 锁定域名 {@link ModifyDomainLockRequest} {@link ModifyDomainLockResponse} */
   ModifyDomainLock(data: ModifyDomainLockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainLockResponse>;
   /** 域名过户 {@link ModifyDomainOwnerRequest} {@link ModifyDomainOwnerResponse} */
