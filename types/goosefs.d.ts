@@ -449,7 +449,7 @@ declare interface Goosefs {
   BatchAddClientNodes(data: BatchAddClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchAddClientNodesResponse>;
   /** 批量删除客户端节点 {@link BatchDeleteClientNodesRequest} {@link BatchDeleteClientNodesResponse} */
   BatchDeleteClientNodes(data: BatchDeleteClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteClientNodesResponse>;
-  /** 创建数据流通任务 {@link CreateDataRepositoryTaskRequest} {@link CreateDataRepositoryTaskResponse} */
+  /** 创建数据流动任务 {@link CreateDataRepositoryTaskRequest} {@link CreateDataRepositoryTaskResponse} */
   CreateDataRepositoryTask(data: CreateDataRepositoryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataRepositoryTaskResponse>;
   /** 创建文件系统 {@link CreateFileSystemRequest} {@link CreateFileSystemResponse} */
   CreateFileSystem(data: CreateFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileSystemResponse>;
@@ -465,7 +465,7 @@ declare interface Goosefs {
   DescribeClusterRoleToken(data: DescribeClusterRoleTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRoleTokenResponse>;
   /** 查询GooseFS集群角色 {@link DescribeClusterRolesRequest} {@link DescribeClusterRolesResponse} */
   DescribeClusterRoles(data: DescribeClusterRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRolesResponse>;
-  /** 获取数据流通任务实时状态 {@link DescribeDataRepositoryTaskStatusRequest} {@link DescribeDataRepositoryTaskStatusResponse} */
+  /** 获取数据流动任务实时状态 {@link DescribeDataRepositoryTaskStatusRequest} {@link DescribeDataRepositoryTaskStatusResponse} */
   DescribeDataRepositoryTaskStatus(data: DescribeDataRepositoryTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRepositoryTaskStatusResponse>;
   /** 罗列文件系统关联的Bucket映射 {@link DescribeFileSystemBucketsRequest} {@link DescribeFileSystemBucketsResponse} */
   DescribeFileSystemBuckets(data: DescribeFileSystemBucketsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemBucketsResponse>;

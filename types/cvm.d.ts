@@ -913,19 +913,19 @@ declare interface ReservedInstancePrice {
 /** 基于付费类型的预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。 */
 declare interface ReservedInstancePriceItem {
   /** 付费类型，如："All Upfront","Partial Upfront","No Upfront" */
-  OfferingType: string;
+  OfferingType?: string;
   /** 预支合计费用，单位：元。 */
-  FixedPrice: number;
+  FixedPrice?: number;
   /** 后续合计费用，单位：元/小时 */
-  UsagePrice: number;
+  UsagePrice?: number;
   /** 预留实例配置ID */
-  ReservedInstancesOfferingId: string;
+  ReservedInstancesOfferingId?: string;
   /** 预留实例计费可购买的可用区。 */
-  Zone: string;
+  Zone?: string;
   /** 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。计量单位：秒 */
-  Duration: number;
+  Duration?: number;
   /** 预留实例计费的平台描述（即操作系统）。形如：Linux。返回项： Linux 。 */
-  ProductDescription: string;
+  ProductDescription?: string;
 }
 
 /** 预留实例类型信息。预留实例当前只针对国际站白名单用户开放。 */
@@ -2936,7 +2936,7 @@ declare interface Cvm {
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 列出已购买的预留实例 {@link DescribeReservedInstancesRequest} {@link DescribeReservedInstancesResponse} */
   DescribeReservedInstances(data?: DescribeReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesResponse>;
-  /** 查询预留实例机型配置参数。 {@link DescribeReservedInstancesConfigInfosRequest} {@link DescribeReservedInstancesConfigInfosResponse} */
+  /** 查询预留实例机型配置参数 {@link DescribeReservedInstancesConfigInfosRequest} {@link DescribeReservedInstancesConfigInfosResponse} */
   DescribeReservedInstancesConfigInfos(data?: DescribeReservedInstancesConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesConfigInfosResponse>;
   /** 列出可购买的预留实例配置 {@link DescribeReservedInstancesOfferingsRequest} {@link DescribeReservedInstancesOfferingsResponse} */
   DescribeReservedInstancesOfferings(data?: DescribeReservedInstancesOfferingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesOfferingsResponse>;

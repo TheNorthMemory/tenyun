@@ -409,43 +409,45 @@ declare interface DatabaseTupleStatus {
 /** 数据库配置信息 */
 declare interface DbNormalDetail {
   /** 是否已订阅 0：否 1：是 */
-  IsSubscribed: string;
+  IsSubscribed?: string;
   /** 数据库排序规则 */
-  CollationName: string;
+  CollationName?: string;
   /** 开启CT之后是否自动清理 0：否 1：是 */
-  IsAutoCleanupOn: string;
+  IsAutoCleanupOn?: string;
   /** 是否已启用代理 0：否 1：是 */
-  IsBrokerEnabled: string;
+  IsBrokerEnabled?: string;
   /** 是否已开启/关闭CDC 0：关闭 1：开启 */
-  IsCdcEnabled: string;
+  IsCdcEnabled?: string;
   /** 是否已启用/ 禁用CT 0：禁用 1：启用 */
-  IsDbChainingOn: string;
+  IsDbChainingOn?: string;
   /** 是否加密 0：否 1：是 */
-  IsEncrypted: string;
+  IsEncrypted?: string;
   /** 是否全文启用 0：否 1：是 */
-  IsFulltextEnabled: string;
+  IsFulltextEnabled?: string;
   /** 是否是镜像 0：否 1：是 */
-  IsMirroring: string;
+  IsMirroring?: string;
   /** 是否已发布 0：否 1：是 */
-  IsPublished: string;
+  IsPublished?: string;
   /** 是否开启快照 0：否 1：是 */
-  IsReadCommittedSnapshotOn: string;
+  IsReadCommittedSnapshotOn?: string;
   /** 是否可信任 0：否 1：是 */
-  IsTrustworthyOn: string;
+  IsTrustworthyOn?: string;
   /** 镜像状态 */
-  MirroringState: string;
+  MirroringState?: string;
   /** 数据库名称 */
-  Name: string;
+  Name?: string;
   /** 恢复模式 */
-  RecoveryModelDesc: string;
+  RecoveryModelDesc?: string;
   /** 保留天数 */
-  RetentionPeriod: string;
+  RetentionPeriod?: string;
   /** 数据库状态 */
-  StateDesc: string;
+  StateDesc?: string;
   /** 用户类型 */
-  UserAccessDesc: string;
+  UserAccessDesc?: string;
   /** 数据库创建时间 */
   CreateTime?: string;
+  /** 是否全文启用 0：否 1：是 */
+  IsFullTextEnabled?: string | null;
 }
 
 /** 数据库可回档时间范围信息 */
@@ -946,6 +948,26 @@ declare interface SlaveZones {
   SlaveZone: string;
   /** 备可用区 */
   SlaveZoneName: string;
+}
+
+/** 慢查询日志文件信息 */
+declare interface SlowLog {
+  /** 慢查询日志文件唯一标识 */
+  Id: number;
+  /** 文件生成的开始时间 */
+  StartTime: string;
+  /** 文件生成的结束时间 */
+  EndTime: string;
+  /** 文件大小（KB） */
+  Size: number;
+  /** 文件中log条数 */
+  Count: number;
+  /** 内网下载地址 */
+  InternalAddr: string;
+  /** 外网下载地址 */
+  ExternalAddr: string;
+  /** 状态（1成功 2失败） */
+  Status: number | null;
 }
 
 /** 慢查询日志文件信息 */
@@ -2488,6 +2510,8 @@ declare interface DescribeSlowlogsResponse {
   TotalCount?: number;
   /** 慢查询日志信息列表 */
   Slowlogs?: SlowlogInfo[];
+  /** 慢查询日志信息列表 */
+  SlowLogs?: SlowLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2501,21 +2525,23 @@ declare interface DescribeUploadBackupInfoRequest {
 
 declare interface DescribeUploadBackupInfoResponse {
   /** 存储桶名称 */
-  BucketName: string;
+  BucketName?: string;
   /** 存储桶地域信息 */
-  Region: string;
+  Region?: string;
   /** 存储路径 */
-  Path: string;
+  Path?: string;
   /** 临时密钥ID */
-  TmpSecretId: string;
+  TmpSecretId?: string;
   /** 临时密钥Key */
-  TmpSecretKey: string;
+  TmpSecretKey?: string;
   /** 临时密钥Token */
-  XCosSecurityToken: string;
+  XCosSecurityToken?: string;
   /** 临时密钥开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 临时密钥到期时间 */
-  ExpiredTime: string;
+  ExpiredTime?: string;
+  /** 临时密钥Token */
+  CosSecurityToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2531,21 +2557,23 @@ declare interface DescribeUploadIncrementalInfoRequest {
 
 declare interface DescribeUploadIncrementalInfoResponse {
   /** 存储桶名称 */
-  BucketName: string;
+  BucketName?: string;
   /** 存储桶地域信息 */
-  Region: string;
+  Region?: string;
   /** 存储路径 */
-  Path: string;
+  Path?: string;
   /** 临时密钥ID */
-  TmpSecretId: string;
+  TmpSecretId?: string;
   /** 临时密钥Key */
-  TmpSecretKey: string;
+  TmpSecretKey?: string;
   /** 临时密钥Token */
-  XCosSecurityToken: string;
+  XCosSecurityToken?: string;
   /** 临时密钥开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 临时密钥到期时间 */
-  ExpiredTime: string;
+  ExpiredTime?: string;
+  /** 临时密钥Token */
+  CosSecurityToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2763,9 +2791,11 @@ declare interface ModifyBackupStrategyRequest {
 
 declare interface ModifyBackupStrategyResponse {
   /** 返回错误码 */
-  Errno: number;
+  Errno?: number;
   /** 返回错误信息 */
-  Msg: string;
+  Msg?: string;
+  /** 返回错误码 */
+  Code?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2925,7 +2955,7 @@ declare interface ModifyDatabaseMdfRequest {
 
 declare interface ModifyDatabaseMdfResponse {
   /** 流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3447,9 +3477,9 @@ declare interface Sqlserver {
   DescribeDBInstancesAttribute(data: DescribeDBInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesAttributeResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
-  /** 查询数据库列表 {@link DescribeDBsRequest} {@link DescribeDBsResponse} */
+  /** 查询数据库列表（已废弃） {@link DescribeDBsRequest} {@link DescribeDBsResponse} */
   DescribeDBs(data: DescribeDBsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsResponse>;
-  /** 查询数据库配置信息 {@link DescribeDBsNormalRequest} {@link DescribeDBsNormalResponse} */
+  /** 查询数据库配置信息（已废弃） {@link DescribeDBsNormalRequest} {@link DescribeDBsNormalResponse} */
   DescribeDBsNormal(data: DescribeDBsNormalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsNormalResponse>;
   /** 查询流程状态 {@link DescribeFlowStatusRequest} {@link DescribeFlowStatusResponse} */
   DescribeFlowStatus(data: DescribeFlowStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowStatusResponse>;
@@ -3537,7 +3567,7 @@ declare interface Sqlserver {
   ModifyDatabaseCDC(data: ModifyDatabaseCDCRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseCDCResponse>;
   /** 启用&禁用数据库CT {@link ModifyDatabaseCTRequest} {@link ModifyDatabaseCTResponse} */
   ModifyDatabaseCT(data: ModifyDatabaseCTRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseCTResponse>;
-  /** 收缩数据库mdf {@link ModifyDatabaseMdfRequest} {@link ModifyDatabaseMdfResponse} */
+  /** 收缩数据库mdf (已废弃） {@link ModifyDatabaseMdfRequest} {@link ModifyDatabaseMdfResponse} */
   ModifyDatabaseMdf(data: ModifyDatabaseMdfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseMdfResponse>;
   /** 修改增量备份导入任务 {@link ModifyIncrementalMigrationRequest} {@link ModifyIncrementalMigrationResponse} */
   ModifyIncrementalMigration(data: ModifyIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIncrementalMigrationResponse>;

@@ -298,6 +298,32 @@ declare interface Consumer {
   Partition: number | null;
 }
 
+/** 消费日志 */
+declare interface ConsumerLog {
+  /** 消息ID。 */
+  MsgId: string;
+  /** 消费组。 */
+  ConsumerGroup: string;
+  /** 消费组名称。 */
+  ConsumerName: string;
+  /** 消费时间。 */
+  ConsumeTime: string;
+  /** 消费者客户端地址。 */
+  ConsumerAddr: string;
+  /** 消费耗时（毫秒）。 */
+  ConsumeUseTime: number;
+  /** 消费状态。 */
+  Status: string;
+}
+
+/** 消费信息 */
+declare interface ConsumerLogs {
+  /** 记录数。 */
+  TotalCount: number | null;
+  /** 消费日志。 */
+  ConsumerLogSets: ConsumerLog[] | null;
+}
+
 /** 消费详情 */
 declare interface ConsumerStats {
   /** 主题名 */
@@ -522,6 +548,22 @@ declare interface PartitionsTopic {
   TotalSize: string | null;
   /** topic类型描述。 */
   TopicType: number | null;
+}
+
+/** 消息生产信息 */
+declare interface ProducerLog {
+  /** 消息ID。 */
+  MsgId: string;
+  /** 生产者名称。 */
+  ProducerName: string;
+  /** 消息生产时间。 */
+  ProduceTime: string;
+  /** 生产者客户端。 */
+  ProducerAddr: string;
+  /** 生产耗时（秒）。 */
+  ProduceUseTime: number;
+  /** 状态。 */
+  Status: string;
 }
 
 /** rabbitmq Prometheus信息 */
@@ -1326,6 +1368,14 @@ declare interface Role {
   CreateTime: string;
   /** 更新时间。 */
   UpdateTime: string;
+}
+
+/** 服务方信息 */
+declare interface ServerLog {
+  /** 存储时间。 */
+  SaveTime: string;
+  /** 状态。 */
+  Status: string;
 }
 
 /** 排序器 */
@@ -2490,6 +2540,34 @@ declare interface DescribeEnvironmentsResponse {
   TotalCount?: number;
   /** 命名空间集合数组。 */
   EnvironmentSet?: Environment[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMsgTraceRequest {
+  /** 环境（命名空间）。 */
+  EnvironmentId: string;
+  /** 消息ID。 */
+  MsgId: string;
+  /** 消息生产时间。 */
+  ProduceTime: string;
+  /** 起始下标，不填默认为0。 */
+  Offset?: number;
+  /** 返回数量，不填则默认为10，最大值为20。 */
+  Limit?: number;
+  /** 消费组名称模糊匹配。 */
+  SubscriptionName?: string;
+  /** Pulsar 集群的ID */
+  ClusterId?: string;
+}
+
+declare interface DescribeMsgTraceResponse {
+  /** 生产信息。 */
+  ProducerLog: ProducerLog | null;
+  /** 服务方信息。 */
+  ServerLog: ServerLog | null;
+  /** 消费信息。 */
+  ConsumerLogs: ConsumerLogs | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4169,6 +4247,8 @@ declare interface Tdmq {
   DescribeEnvironmentRoles(data?: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
   /** 获取命名空间列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  /** 消息轨迹 {@link DescribeMsgTraceRequest} {@link DescribeMsgTraceResponse} */
+  DescribeMsgTrace(data: DescribeMsgTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsgTraceResponse>;
   /** 运营端获取命名空间bundle列表 {@link DescribeNamespaceBundlesOptRequest} {@link DescribeNamespaceBundlesOptResponse} */
   DescribeNamespaceBundlesOpt(data: DescribeNamespaceBundlesOptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespaceBundlesOptResponse>;
   /** 运营端获节点健康状态 {@link DescribeNodeHealthOptRequest} {@link DescribeNodeHealthOptResponse} */
