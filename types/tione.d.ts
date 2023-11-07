@@ -3023,7 +3023,7 @@ declare interface DescribeTrainingTaskPodsResponse {
   /** 数量 */
   TotalCount?: number;
   /** pod详细信息 */
-  PodInfoList?: PodInfo;
+  PodInfoList?: PodInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

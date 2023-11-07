@@ -100,6 +100,34 @@ declare interface AccessValueInfo {
   ContainZH: boolean | null;
 }
 
+/** API安全资源信息 */
+declare interface ApiPkg {
+  /** 资源id */
+  ResourceIds?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 地域 */
+  Region?: number | null;
+  /** 开始时间 */
+  BeginTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 申请数量 */
+  InquireNum?: number | null;
+  /** 使用数量 */
+  UsedNum?: number | null;
+  /** 续费标志 */
+  RenewFlag?: number | null;
+  /** 计费项 */
+  BillingItem?: string | null;
+  /** 1 API安全6折 */
+  APICPWaf?: number | null;
+  /** 1 表示5折折扣2 表示4折折扣 */
+  APINPWaf?: number | null;
+  /** api安全7天试用标识。1试用。0没试用 */
+  IsAPISecurityTrial?: number | null;
+}
+
 /** 攻击日志详情 */
 declare interface AttackLogInfo {
   /** 攻击日志的详情内容 */
@@ -180,6 +208,8 @@ declare interface BotPkg {
   BotCPWaf?: number | null;
   /** 控制台买bot5折 */
   BotNPWaf?: number | null;
+  /** 7天bot试用标识 1 试用 0 没有试用 */
+  IsBotTrial?: number | null;
 }
 
 /** bot的qps详情 */
@@ -990,6 +1020,8 @@ declare interface InstanceInfo {
   MajorEventsPkg?: MajorEventsPkg | null;
   /** 混合云子节点包 */
   HybridPkg?: HybridPkg | null;
+  /** API安全资源包 */
+  ApiPkg?: ApiPkg | null;
 }
 
 /** 数据封装 */
@@ -2728,6 +2760,14 @@ declare interface DescribeIpHitItemsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModuleStatusRequest {
+}
+
+declare interface DescribeModuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeObjectsRequest {
   /** 支持的过滤器:	ObjectId: clb实例ID	VIP: clb实例的公网IP	InstanceId: waf实例ID	Domain: 精准域名	Status: waf防护开关状态: 0关闭，1开启	ClsStatus: waf日志开关: 0关闭，1开启 */
   Filters?: FiltersItemNew[];
@@ -4181,6 +4221,8 @@ declare interface Waf {
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
+  /** 查询waf各个模块接口的开关状态 {@link DescribeModuleStatusRequest} {@link DescribeModuleStatusResponse} */
+  DescribeModuleStatus(data?: DescribeModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleStatusResponse>;
   /** 查看防护对象列表 {@link DescribeObjectsRequest} {@link DescribeObjectsResponse} */
   DescribeObjects(data?: DescribeObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeObjectsResponse>;
   /** 查询业务和攻击概要趋势 {@link DescribePeakPointsRequest} {@link DescribePeakPointsResponse} */

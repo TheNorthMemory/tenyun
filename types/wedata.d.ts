@@ -5976,11 +5976,13 @@ declare interface DeleteCustomFunctionResponse {
 declare interface DeleteDataSourcesRequest {
   /** id列表 */
   Ids: number[];
+  /** 项目id */
+  ProjectId?: string;
 }
 
 declare interface DeleteDataSourcesResponse {
   /** 是否删除成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6965,6 +6967,8 @@ declare interface DescribeDsFolderTreeRequest {
   IncludeWorkflow?: boolean;
   /** 是否包含任务 */
   IncludeTask?: boolean;
+  /** 是否包含虚拟任务，当 IncludeTask 为 true 的时候，该参数才生效，默认为 true */
+  IncludeVirtualTask?: boolean;
 }
 
 declare interface DescribeDsFolderTreeResponse {
@@ -10245,11 +10249,13 @@ declare interface ModifyDataSourceRequest {
   COSBucket?: string;
   /** cos region */
   COSRegion?: string;
+  /** 操作项目id */
+  ProjectId?: string;
 }
 
 declare interface ModifyDataSourceResponse {
   /** 是否成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

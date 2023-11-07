@@ -970,6 +970,18 @@ declare interface AttachDisksResponse {
   RequestId?: string;
 }
 
+declare interface CancelShareBlueprintAcrossAccountsRequest {
+  /** 镜像ID, 可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。 */
+  BlueprintId: string;
+  /** 接收共享镜像的账号ID列表。帐号ID不同于QQ号，查询用户帐号ID请查看帐号信息中的帐号ID栏。账号个数取值最大为10。 */
+  AccountIds: string[];
+}
+
+declare interface CancelShareBlueprintAcrossAccountsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBlueprintRequest {
   /** 镜像名称。最大长度60。 */
   BlueprintName: string;
@@ -2376,6 +2388,18 @@ declare interface RunDockerContainersResponse {
   RequestId?: string;
 }
 
+declare interface ShareBlueprintAcrossAccountsRequest {
+  /** 镜像ID, 可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。 */
+  BlueprintId: string;
+  /** 接收共享镜像的账号Id列表。帐号ID不同于QQ号，查询用户帐号ID请查看帐号信息中的帐号ID栏。账号个数取值最大为10。 */
+  AccountIds: string[];
+}
+
+declare interface ShareBlueprintAcrossAccountsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartDockerContainersRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2459,6 +2483,8 @@ declare interface Lighthouse {
   AttachCcn(data: AttachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnResponse>;
   /** 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
+  /** 取消镜像跨账号共享 {@link CancelShareBlueprintAcrossAccountsRequest} {@link CancelShareBlueprintAcrossAccountsResponse} */
+  CancelShareBlueprintAcrossAccounts(data: CancelShareBlueprintAcrossAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CancelShareBlueprintAcrossAccountsResponse>;
   /** 创建镜像 {@link CreateBlueprintRequest} {@link CreateBlueprintResponse} */
   CreateBlueprint(data: CreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlueprintResponse>;
   /** 创建云硬盘备份点 {@link CreateDiskBackupRequest} {@link CreateDiskBackupResponse} */
@@ -2645,6 +2671,8 @@ declare interface Lighthouse {
   RestartDockerContainers(data: RestartDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDockerContainersResponse>;
   /** 创建并运行Docker容器 {@link RunDockerContainersRequest} {@link RunDockerContainersResponse} */
   RunDockerContainers(data: RunDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RunDockerContainersResponse>;
+  /** 跨账号共享镜像 {@link ShareBlueprintAcrossAccountsRequest} {@link ShareBlueprintAcrossAccountsResponse} */
+  ShareBlueprintAcrossAccounts(data: ShareBlueprintAcrossAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<ShareBlueprintAcrossAccountsResponse>;
   /** 启动Docker容器 {@link StartDockerContainersRequest} {@link StartDockerContainersResponse} */
   StartDockerContainers(data: StartDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<StartDockerContainersResponse>;
   /** 启动实例 {@link StartInstancesRequest} {@link StartInstancesResponse} */
