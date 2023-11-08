@@ -2319,6 +2319,18 @@ declare interface DescribeBatchIpAccessControlResponse {
 }
 
 declare interface DescribeCCRuleListRequest {
+  /** 需要查询的API所属的域名 */
+  Domain: string;
+  /** 偏移 */
+  Offset: number;
+  /** 容量 */
+  Limit: number;
+  /** 目前支持根据ts_version排序 */
+  By: string;
+  /** 过滤数组,name可以是如下的值： RuleID,ParamName,Url,Action,Method,Source,Status */
+  Filters?: FiltersItemNew[];
+  /** asc或者desc */
+  Order?: string;
 }
 
 declare interface DescribeCCRuleListResponse {
@@ -4180,7 +4192,7 @@ declare interface Waf {
   /** @deprecated Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
   DescribeCCRule(data: DescribeCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleResponse>;
   /** 查询CC规则 {@link DescribeCCRuleListRequest} {@link DescribeCCRuleListResponse} */
-  DescribeCCRuleList(data?: DescribeCCRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleListResponse>;
+  DescribeCCRuleList(data: DescribeCCRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleListResponse>;
   /** 获取证书的检查结果 {@link DescribeCertificateVerifyResultRequest} {@link DescribeCertificateVerifyResultResponse} */
   DescribeCertificateVerifyResult(data: DescribeCertificateVerifyResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateVerifyResultResponse>;
   /** 查询加密套件信息 {@link DescribeCiphersDetailRequest} {@link DescribeCiphersDetailResponse} */

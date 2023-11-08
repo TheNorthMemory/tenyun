@@ -288,6 +288,14 @@ declare interface AscriptionInfo {
   RecordValue: string;
 }
 
+/** 共享 CNAME 和接入域名的绑定关系 */
+declare interface BindSharedCNAMEMap {
+  /** 需要绑定或解绑的共享 CNAME。 */
+  SharedCNAME: string;
+  /** 加速域名，可传递多个，最多20个。 */
+  DomainNames: string[];
+}
+
 /** 安全Bot配置 */
 declare interface BotConfig {
   /** bot开关，取值有：on：开启；off：关闭。 */
@@ -1888,6 +1896,20 @@ declare interface BindSecurityTemplateToEntityResponse {
   RequestId?: string;
 }
 
+declare interface BindSharedCNAMERequest {
+  /** 加速域名所属站点 ID。 */
+  ZoneId: string;
+  /** 绑定类型，取值有：bind：绑定；unbind：解绑。 */
+  BindType: string;
+  /** 接入域名与共享 CNAME 的绑定关系。 */
+  BindSharedCNAMEMaps: BindSharedCNAMEMap[];
+}
+
+declare interface BindSharedCNAMEResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindZoneToPlanRequest {
   /** 未绑定套餐的站点ID。 */
   ZoneId: string;
@@ -2133,14 +2155,14 @@ declare interface CreateSecurityIPGroupResponse {
 declare interface CreateSharedCNAMERequest {
   /** 共享 CNAME 所属站点的 ID。 */
   ZoneId: string;
-  /** 共享 CNAME 前缀。请输入合法的域名前缀，例如"test-api"、"test-api.com"，限制输入 50 个字符。共享 CNAME 完整格式为：<自定义前缀>++"share.eo.dnse[0-5].com"。例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.share.eo.dnse2.com */
+  /** 共享 CNAME 前缀。请输入合法的域名前缀，例如"test-api"、"test-api.com"，限制输入 50 个字符。共享 CNAME 完整格式为：<自定义前缀>++"share.dnse[0-5].com"。例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.share.dnse2.com。 */
   SharedCNAMEPrefix: string;
   /** 描述。可输入 1-50 个任意字符。 */
   Description?: string;
 }
 
 declare interface CreateSharedCNAMEResponse {
-  /** 共享 CNAME。格式为：<自定义前缀>++"share.eo.dnse[0-5].com" */
+  /** 共享 CNAME。格式为：<自定义前缀>++"share.dnse[0-5].com"。 */
   SharedCNAME?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2258,6 +2280,18 @@ declare interface DeleteSecurityIPGroupRequest {
 }
 
 declare interface DeleteSecurityIPGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSharedCNAMERequest {
+  /** 共享 CNAME 所属站点 ID。 */
+  ZoneId: string;
+  /** 需要删除的共享 CNAME。 */
+  SharedCNAME: string;
+}
+
+declare interface DeleteSharedCNAMEResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3477,6 +3511,8 @@ declare interface Teo {
   (): Versions;
   /** 绑定或解绑安全策略模板 {@link BindSecurityTemplateToEntityRequest} {@link BindSecurityTemplateToEntityResponse} */
   BindSecurityTemplateToEntity(data: BindSecurityTemplateToEntityRequest, config?: AxiosRequestConfig): AxiosPromise<BindSecurityTemplateToEntityResponse>;
+  /** 绑定共享CNAME {@link BindSharedCNAMERequest} {@link BindSharedCNAMEResponse} */
+  BindSharedCNAME(data: BindSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<BindSharedCNAMEResponse>;
   /** 为站点绑定套餐 {@link BindZoneToPlanRequest} {@link BindZoneToPlanResponse} */
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
   /** 校验域名 CNAME 状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */
@@ -3519,6 +3555,8 @@ declare interface Teo {
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
   /** 删除安全 IP 组 {@link DeleteSecurityIPGroupRequest} {@link DeleteSecurityIPGroupResponse} */
   DeleteSecurityIPGroup(data: DeleteSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityIPGroupResponse>;
+  /** 删除共享CNAME {@link DeleteSharedCNAMERequest} {@link DeleteSharedCNAMEResponse} */
+  DeleteSharedCNAME(data: DeleteSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSharedCNAMEResponse>;
   /** 删除站点 {@link DeleteZoneRequest} {@link DeleteZoneResponse} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
   /** 查询加速域名列表 {@link DescribeAccelerationDomainsRequest} {@link DescribeAccelerationDomainsResponse} */

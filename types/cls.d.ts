@@ -1274,6 +1274,24 @@ declare interface ApplyConfigToMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface CheckFunctionRequest {
+  /** 用户输入的加工语句 */
+  EtlContent: string;
+  /** 加工任务目的topic_id以及别名 */
+  DstResources?: DataTransformResouceInfo[];
+  /** 数据加工目标主题的类型. 1 固定主题 2动态创建 */
+  FuncType?: number;
+}
+
+declare interface CheckFunctionResponse {
+  /** 失败错误码 */
+  ErrorCode?: number;
+  /** 失败错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckRechargeKafkaServerRequest {
   /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
   KafkaType: number;
@@ -3041,6 +3059,8 @@ declare interface Cls {
   AddMachineGroupInfo(data: AddMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddMachineGroupInfoResponse>;
   /** 应用采集配置到指定机器组 {@link ApplyConfigToMachineGroupRequest} {@link ApplyConfigToMachineGroupResponse} */
   ApplyConfigToMachineGroup(data: ApplyConfigToMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConfigToMachineGroupResponse>;
+  /** 语法校验接口 {@link CheckFunctionRequest} {@link CheckFunctionResponse} */
+  CheckFunction(data: CheckFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFunctionResponse>;
   /** Kafka服务集群连通性校验 {@link CheckRechargeKafkaServerRequest} {@link CheckRechargeKafkaServerResponse} */
   CheckRechargeKafkaServer(data: CheckRechargeKafkaServerRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRechargeKafkaServerResponse>;
   /** 关闭Kafka协议消费 {@link CloseKafkaConsumerRequest} {@link CloseKafkaConsumerResponse} */

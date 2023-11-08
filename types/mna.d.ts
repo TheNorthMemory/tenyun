@@ -124,6 +124,16 @@ declare interface FlowDetails {
   TotalValue?: number | null;
 }
 
+/** 流量监控指标 */
+declare interface MonitorData {
+  /** 时间点：s */
+  Time: string;
+  /** 业务指标（bps/ms/%） */
+  BusinessMetrics: number | null;
+  /** 网卡状态信息 */
+  SlotNetInfo: SlotNetInfo[] | null;
+}
+
 /** 网络详细信息 */
 declare interface NetDetails {
   /** 流量值（bit） */
@@ -142,6 +152,16 @@ declare interface NetworkData {
   Jitter: number;
   /** 10位秒级时间戳 */
   Timestamp: number;
+}
+
+/** 网卡流量指标数据 */
+declare interface SlotNetInfo {
+  /** 网卡名 */
+  NetInfoName: string | null;
+  /** 公网IP */
+  PublicIP: string | null;
+  /** 指标数据（bps/ms/%） */
+  Current: number | null;
 }
 
 /** 移动网络加速源地址结构体 */
@@ -356,6 +376,24 @@ declare interface GetMultiFlowStatisticResponse {
   RequestId?: string;
 }
 
+declare interface GetNetMonitorRequest {
+  /** 设备id */
+  DeviceId: string;
+  /** 开始时间 */
+  BeginTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms） */
+  Metrics: string;
+}
+
+declare interface GetNetMonitorResponse {
+  /** 监控数据 */
+  MonitorData?: MonitorData[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetPublicKeyRequest {
 }
 
@@ -423,6 +461,8 @@ declare interface Mna {
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
   /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
   GetMultiFlowStatistic(data: GetMultiFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetMultiFlowStatisticResponse>;
+  /** 获取流量监控信息 {@link GetNetMonitorRequest} {@link GetNetMonitorResponse} */
+  GetNetMonitor(data: GetNetMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<GetNetMonitorResponse>;
   /** 获取公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
   GetPublicKey(data?: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
   /** 下载用量统计数据 {@link GetStatisticDataRequest} {@link GetStatisticDataResponse} */

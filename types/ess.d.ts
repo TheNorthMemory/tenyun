@@ -134,6 +134,32 @@ declare interface AutoSignConfig {
   LicenseType?: number;
 }
 
+/** 用户计费使用情况详情 */
+declare interface BillUsageDetail {
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId?: string | null;
+  /** 经办人名称 */
+  OperatorName?: string | null;
+  /** 发起方组织机构名称 */
+  CreateOrganizationName?: string | null;
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
+  FlowName?: string | null;
+  /** 0 还没有发起 1等待签署 2部分签署 3拒签 4已签署 5已过期 6已撤销 7还没有预发起 8等待填写 9部分填写 10拒填 11已解除 */
+  Status?: number | null;
+  /** 套餐类型 */
+  QuotaType?: string | null;
+  /** 合同使用量 */
+  UseCount?: number | null;
+  /** 消耗的时间戳 */
+  CostTime?: number | null;
+  /** 套餐名称 */
+  QuotaName?: string | null;
+  /** 消耗类型	1.扣费 2.撤销返还 */
+  CostType?: number | null;
+  /** 备注 */
+  Remark?: string | null;
+}
+
 /** 企业应用回调信息 */
 declare interface CallbackInfo {
   /** 回调url,。请确保回调地址能够接收并处理 HTTP POST 请求，并返回状态码 200 以表示处理正常。 */
@@ -1929,7 +1955,7 @@ declare interface CreateSealRequest {
   Agent?: Agent;
   /** 电子印章生成方式空值:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片SealGenerateSourceSystem: 系统生成印章, 无需上传SealImage图片 */
   GenerateSource?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 合财务专用章;**PERSONNEL**: 人事专用章注: `同企业下只能有一个公章, 重复创建会报错` */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章注: `同企业下只能有一个公章, 重复创建会报错` */
   SealType?: string;
   /** 电子印章图片文件名称，1-50个中文字符。 */
   FileName?: string;
@@ -2126,6 +2152,30 @@ declare interface DeleteSealPoliciesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBillUsageDetailRequest {
+  /** 查询开始时间，时间跨度不能大于31天 */
+  StartTime: string;
+  /** 查询结束时间，时间跨度不能大于31天 */
+  EndTime: string;
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
+  Offset: number;
+  /** 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。 */
+  Limit?: number;
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
+  QuotaType?: string;
+  /** 非必填，查询某个渠道企业的消耗情况。关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeBillUsageDetailResponse {
+  /** 总数 */
+  Total?: number;
+  /** 消耗详情 */
+  Details?: BillUsageDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExtendedServiceAuthInfosRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -2309,7 +2359,7 @@ declare interface DescribeIntegrationEmployeesRequest {
   Limit: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，根据实名状态查询员工，Values可选： **["IsVerified"]**：查询已实名的员工**["NotVerified"]**：查询未实名的员工 Key:**"DepartmentId"**，根据部门ID查询部门下的员工，Values为指定的部门ID：**["DepartmentId"]** Key:**"UserId"**，根据用户ID查询员工，Values为指定的用户ID：**["UserId"]** Key:**"UserWeWorkOpenId"**，根据用户企微账号ID查询员工，Values为指定用户的企微账号ID：**["UserWeWorkOpenId"]** Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]** */
+  /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，根据实名状态查询员工，Values可选： **["IsVerified"]**：查询已实名的员工**["NotVerified"]**：查询未实名的员工 Key:**"DepartmentId"**，根据部门ID查询部门下的员工，Values为指定的部门ID：**["DepartmentId"]** Key:**"UserId"**，根据用户ID查询员工，Values为指定的用户ID：**["UserId"]** Key:**"UserWeWorkOpenId"**，根据用户企微账号ID查询员工，Values为指定用户的企微账号ID：**["UserWeWorkOpenId"]** Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]** Key:**"RoleId"**，根据电子签角色ID查询员工，Values为指定的角色ID，满足其中任意一个角色即可：**["RoleId1","RoleId2",...]** */
   Filters?: Filter[];
   /** 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number;
@@ -2769,6 +2819,8 @@ declare interface Ess {
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
   /** 撤销企业员工的印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
+  /** 查询企业计费使用情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
+  DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
   DescribeExtendedServiceAuthInfos(data: DescribeExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfosResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */

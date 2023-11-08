@@ -616,7 +616,7 @@ declare interface PdfVerifyResult {
   VerifyResult?: number;
   /** 签署平台如果文件是在腾讯电子签平台签署，则为**腾讯电子签**，如果文件不在腾讯电子签平台签署，则为**其他平台**。 */
   SignPlatform?: string;
-  /** 申请证书的主体的名字如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下**企业**: ESS@企业名称@编码**个人**: ESS@个人姓名@证件号@808854如果在其他平台签署的, 主体的名字参考其他平台的说明 */
+  /** 申请证书的主体的名字如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下**企业**: ESS@企业名称@平台生成的数字编码**个人**: ESS@个人姓名@证件号@平台生成的数字编码如果在其他平台签署的, 主体的名字参考其他平台的说明 */
   SignerName?: string;
   /** 签署时间的Unix时间戳，单位毫秒 */
   SignTime?: number;
@@ -1709,7 +1709,7 @@ declare interface ChannelDescribeEmployeesRequest {
   Agent: Agent;
   /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit: number;
-  /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，根据实名状态查询员工，Values可选： **["IsVerified"]**：查询已实名的员工**["QuiteJob"]**：查询离职员工 Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]** */
+  /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，Values: **["IsVerified"]**, 查询已实名的员工 Key:**"Status"**，Values: **["QuiteJob"]**, 查询离职员工 Key:**"StaffOpenId"**，Values: **["OpenId1","OpenId2",...]**, 根据第三方系统用户OpenId查询员工注: `同名字的Key的过滤条件会冲突, 只能填写一个` */
   Filters?: Filter[];
   /** 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number;
@@ -2341,22 +2341,24 @@ declare interface SyncProxyOrganizationOperatorsResponse {
 }
 
 declare interface SyncProxyOrganizationRequest {
-  /** 应用信息此接口Agent.AppId、Agent.ProxyOrganizationOpenId必填 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId */
   Agent: Agent;
-  /** 第三方平台子客企业名称，最大长度64个字符 */
+  /** 第三方平台子客企业名称，请确认该名称与企业营业执照中注册的名称一致。注: `如果名称中包含英文括号()，请使用中文括号（）代替。` */
   ProxyOrganizationName: string;
   /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
   BusinessLicense?: string;
   /** 第三方平台子客企业统一社会信用代码，最大长度200个字符 */
   UniformSocialCreditCode?: string;
-  /** 第三方平台子客企业法人/负责人姓名 */
+  /** 第三方平台子客企业法定代表人的名字 */
   ProxyLegalName?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
-  /** 第三方平台子客企业法人/负责人证件类型，默认居民身份证（ID_CARD）类型，暂不支持其他类型 */
+  /** 第三方平台子客企业法定代表人的证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)注: `现在仅支持ID_CARD居民身份证类型` */
   ProxyLegalIdCardType?: string;
-  /** 第三方平台子客企业法人/负责人证件号 */
+  /** 第三方平台子客企业法定代表人的证件号码, 应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。 */
   ProxyLegalIdCardNumber?: string;
+  /** 第三方平台子客企业详细住所，最大长度500个字符注：`需要符合省市区详情的格式例如： XX省XX市XX区街道具体地址` */
+  ProxyAddress?: string;
 }
 
 declare interface SyncProxyOrganizationResponse {
@@ -3983,7 +3985,7 @@ declare interface Essbasic {
   ChannelDeleteRoleUsers(data: ChannelDeleteRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteRoleUsersResponse>;
   /** 删除印章授权 {@link ChannelDeleteSealPoliciesRequest} {@link ChannelDeleteSealPoliciesResponse} */
   ChannelDeleteSealPolicies(data: ChannelDeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteSealPoliciesResponse>;
-  /** 查询企业员工 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
+  /** 查询企业员工列表 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
   /** 查询流程填写控件内容 {@link ChannelDescribeFlowComponentsRequest} {@link ChannelDescribeFlowComponentsResponse} */
   ChannelDescribeFlowComponents(data: ChannelDescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeFlowComponentsResponse>;

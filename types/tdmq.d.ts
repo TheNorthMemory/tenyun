@@ -982,6 +982,8 @@ declare interface RocketMQClusterConfig {
   MaxLatencyTime?: number;
   /** 单个主题最大队列数 */
   MaxQueuesPerTopic?: number | null;
+  /** topic分布 */
+  TopicDistribution?: RocketMQTopicDistribution[] | null;
 }
 
 /** 租户RocketMQ集群详细信息 */
@@ -1030,6 +1032,18 @@ declare interface RocketMQClusterInfo {
   InternalEndpoint?: string | null;
   /** HTTP协议内部接入地址 */
   HttpInternalEndpoint?: string | null;
+  /** 是否开启ACL鉴权，专享实例支持关闭 */
+  AclEnabled?: boolean | null;
+  /** 公网CLB实例ID */
+  PublicClbId?: string | null;
+  /** vip */
+  Vip?: string | null;
+  /** 所属VPC */
+  VpcId?: string | null;
+  /** 是否支持迁移 */
+  SupportMigration?: boolean | null;
+  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败 */
+  InstanceStatus?: number | null;
 }
 
 /** RocketMQ近期使用量 */
@@ -1443,9 +1457,9 @@ declare interface SubscriptionTopic {
 /** 标签的key/value的类型 */
 declare interface Tag {
   /** 标签的key的值 */
-  TagKey: string;
+  TagKey: string | null;
   /** 标签的Value的值 */
-  TagValue: string;
+  TagValue: string | null;
 }
 
 /** 主题实例 */
@@ -2929,11 +2943,11 @@ declare interface DescribeRocketMQClusterRequest {
 
 declare interface DescribeRocketMQClusterResponse {
   /** 集群信息 */
-  ClusterInfo: RocketMQClusterInfo;
+  ClusterInfo?: RocketMQClusterInfo;
   /** 集群配置 */
-  ClusterConfig: RocketMQClusterConfig;
-  /** 集群最近使用量 */
-  ClusterStats: RocketMQClusterRecentStats | null;
+  ClusterConfig?: RocketMQClusterConfig;
+  /** 集群最近使用量，即将废弃，请使用云监控获取相关数据。 */
+  ClusterStats?: RocketMQClusterRecentStats | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
