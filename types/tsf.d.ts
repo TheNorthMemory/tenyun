@@ -667,81 +667,87 @@ declare interface ContainerEvent {
 /** 获取部署组 */
 declare interface ContainerGroupDeploy {
   /** 部署组id */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 分组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 实例总数 */
-  InstanceNum: number | null;
+  InstanceNum?: number | null;
   /** 已启动实例总数 */
-  CurrentNum: number | null;
+  CurrentNum?: number | null;
   /** 镜像server */
-  Server: string | null;
+  Server?: string | null;
   /** 镜像名，如/tsf/nginx */
-  Reponame: string | null;
+  Reponame?: string | null;
   /** 镜像版本名称 */
-  TagName: string | null;
+  TagName?: string | null;
   /** 业务容器初始分配的 CPU 核数，对应 K8S request */
-  CpuRequest: string | null;
+  CpuRequest?: string | null;
   /** 业务容器最大分配的 CPU 核数，对应 K8S limit */
-  CpuLimit: string | null;
+  CpuLimit?: string | null;
   /** 业务容器初始分配的内存 MiB 数，对应 K8S request */
-  MemRequest: string | null;
+  MemRequest?: string | null;
   /** 业务容器最大分配的内存 MiB 数，对应 K8S limit */
-  MemLimit: string | null;
+  MemLimit?: string | null;
   /** 0:公网 1:集群内访问 2：NodePort */
-  AccessType: number | null;
+  AccessType?: number | null;
   /** 端口映射 */
-  ProtocolPorts: ProtocolPort[] | null;
+  ProtocolPorts?: ProtocolPort[] | null;
   /** 更新方式：0:快速更新 1:滚动更新 */
-  UpdateType: number | null;
+  UpdateType?: number | null;
   /** 更新间隔,单位秒 */
-  UpdateIvl: number | null;
+  UpdateIvl?: number | null;
   /** jvm参数 */
-  JvmOpts: string | null;
+  JvmOpts?: string | null;
   /** 子网id */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** agent容器初始分配的 CPU 核数，对应 K8S request */
-  AgentCpuRequest: string | null;
+  AgentCpuRequest?: string | null;
   /** agent容器最大分配的 CPU 核数，对应 K8S limit */
-  AgentCpuLimit: string | null;
+  AgentCpuLimit?: string | null;
   /** agent容器初始分配的内存 MiB 数，对应 K8S request */
-  AgentMemRequest: string | null;
+  AgentMemRequest?: string | null;
   /** agent容器最大分配的内存 MiB 数，对应 K8S limit */
-  AgentMemLimit: string | null;
+  AgentMemLimit?: string | null;
   /** istioproxy容器初始分配的 CPU 核数，对应 K8S request */
-  IstioCpuRequest: string | null;
+  IstioCpuRequest?: string | null;
   /** istioproxy容器最大分配的 CPU 核数，对应 K8S limit */
-  IstioCpuLimit: string | null;
+  IstioCpuLimit?: string | null;
   /** istioproxy容器初始分配的内存 MiB 数，对应 K8S request */
-  IstioMemRequest: string | null;
+  IstioMemRequest?: string | null;
   /** istioproxy容器最大分配的内存 MiB 数，对应 K8S limit */
-  IstioMemLimit: string | null;
+  IstioMemLimit?: string | null;
   /** 部署组的环境变量数组，这里没有展示 tsf 使用的环境变量，只展示了用户设置的环境变量。 */
-  Envs: Env[] | null;
+  Envs?: Env[] | null;
   /** 健康检查配置信息，若不指定该参数，则默认不设置健康检查。 */
-  HealthCheckSettings: HealthCheckSettings | null;
+  HealthCheckSettings?: HealthCheckSettings | null;
   /** 是否部署Agent容器 */
-  DeployAgent: boolean | null;
+  DeployAgent?: boolean | null;
   /** 部署组备注 */
-  Alias: string | null;
+  Alias?: string | null;
   /** 是否创建 k8s service */
-  DisableService: boolean | null;
+  DisableService?: boolean | null;
   /** service 是否为 headless 类型 */
-  HeadlessService: boolean | null;
+  HeadlessService?: boolean | null;
   /** TcrRepoInfo值 */
-  TcrRepoInfo: TcrRepoInfo | null;
+  TcrRepoInfo?: TcrRepoInfo | null;
   /** 数据卷信息，list */
-  VolumeInfos: VolumeInfo[] | null;
+  VolumeInfos?: VolumeInfo[] | null;
   /** 数据卷挂载信息，list */
-  VolumeMountInfos: VolumeMountInfo[] | null;
+  VolumeMountInfos?: VolumeMountInfo[] | null;
   /** KubeInjectEnable值 */
-  KubeInjectEnable: boolean | null;
+  KubeInjectEnable?: boolean | null;
   /** 仓库类型 (person, tcr) */
-  RepoType: string | null;
+  RepoType?: string | null;
   /** 预热配置设置 */
-  WarmupSetting: WarmupSetting | null;
+  WarmupSetting?: WarmupSetting | null;
   /** Envoy网关服务配置 */
-  GatewayConfig: GatewayConfig | null;
+  GatewayConfig?: GatewayConfig | null;
+  /** 容器名称 */
+  ContainerName?: string | null;
+  /** 附加容器列表 */
+  AdditionalContainerList?: GroupContainerInfo[] | null;
+  /** 内部容器列表 */
+  InternalContainerList?: GroupContainerInfo[] | null;
 }
 
 /** 容器部署组详情 */
@@ -1172,6 +1178,42 @@ declare interface GroupApiUseStatistics {
   TopTimeCost: ApiUseStatisticsEntity[] | null;
   /** 分位值对象 */
   Quantile: QuantileEntity | null;
+}
+
+/** 部署组容器信息 */
+declare interface GroupContainerInfo {
+  /** 镜像版本名称 */
+  TagName: string;
+  /** 容器名字 */
+  ContainerName?: string | null;
+  /** 镜像名 */
+  RepoName?: string | null;
+  /** 仓库类型,tcr，address，personal，默认personal */
+  RepoType?: string | null;
+  /** tcr仓库信息 */
+  TcrRepoInfo?: TcrRepoInfo | null;
+  /** 镜像server */
+  Server?: string | null;
+  /** 凭证名字 */
+  SecretName?: string | null;
+  /** jvm 参数 */
+  JvmOpts?: string | null;
+  /** 容器最大的 CPU 核数，对应 K8S 的 limit */
+  CpuLimit?: string | null;
+  /** 容器分配的 CPU 核数，对应 K8S 的 request */
+  CpuRequest?: string | null;
+  /** 容器分配的内存 MiB 数，对应 K8S 的 request */
+  MemRequest?: string | null;
+  /** 容器最大的内存 MiB 数，对应 K8S 的 limit */
+  MemLimit?: string | null;
+  /** 健康检查配置信息 */
+  HealthCheckSettings?: HealthCheckSettings | null;
+  /** 环境变量 */
+  Envs?: Env[] | null;
+  /** 环境变量,作为入参时不用填 */
+  UserEnvs?: Env[] | null;
+  /** 数据卷挂载点信息 */
+  VolumeMountInfoList?: VolumeMountInfo[] | null;
 }
 
 /** 分组日使用统计对象 */
@@ -5302,18 +5344,20 @@ declare interface DescribeImageRepositoryRequest {
   ApplicationId?: string;
   /** TcrRepoInfo值 */
   TcrRepoInfo?: TcrRepoInfo;
+  /** 镜像仓库 */
+  RepoName?: string;
 }
 
 declare interface DescribeImageRepositoryResponse {
   /** 查询的权限数据对象 */
-  Result: ImageRepositoryResult;
+  Result?: ImageRepositoryResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeImageTagsRequest {
   /** 应用Id */
-  ApplicationId: string;
+  ApplicationId?: string;
   /** 偏移量，取值从0开始 */
   Offset?: number;
   /** 分页个数，默认为20， 取值应为1~100 */
@@ -5326,11 +5370,13 @@ declare interface DescribeImageTagsRequest {
   RepoType?: string;
   /** TcrRepoInfo值 */
   TcrRepoInfo?: TcrRepoInfo;
+  /** 仓库名 */
+  RepoName?: string;
 }
 
 declare interface DescribeImageTagsResponse {
   /** 查询的权限数据对象 */
-  Result: ImageTagsResult;
+  Result?: ImageTagsResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7475,10 +7521,10 @@ declare interface Tsf {
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
   /** 查询某个插件下绑定或未绑定的API分组 {@link DescribeGroupsWithPluginRequest} {@link DescribeGroupsWithPluginResponse} */
   DescribeGroupsWithPlugin(data: DescribeGroupsWithPluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsWithPluginResponse>;
-  /** 镜像仓库列表 {@link DescribeImageRepositoryRequest} {@link DescribeImageRepositoryResponse} */
+  /** 查询镜像仓库列表 {@link DescribeImageRepositoryRequest} {@link DescribeImageRepositoryResponse} */
   DescribeImageRepository(data?: DescribeImageRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRepositoryResponse>;
-  /** 镜像版本列表 {@link DescribeImageTagsRequest} {@link DescribeImageTagsResponse} */
-  DescribeImageTags(data: DescribeImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTagsResponse>;
+  /** 查询镜像版本列表 {@link DescribeImageTagsRequest} {@link DescribeImageTagsResponse} */
+  DescribeImageTags(data?: DescribeImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTagsResponse>;
   /** 查询调用监控指标 {@link DescribeInovcationIndicatorsRequest} {@link DescribeInovcationIndicatorsResponse} */
   DescribeInovcationIndicators(data: DescribeInovcationIndicatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInovcationIndicatorsResponse>;
   /** 查询机器列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */

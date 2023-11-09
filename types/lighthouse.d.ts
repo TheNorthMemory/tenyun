@@ -1121,7 +1121,7 @@ declare interface CreateInstancesRequest {
   Containers?: DockerContainerConfiguration[];
   /** 是否自动使用代金券。默认不使用。 */
   AutoVoucher?: boolean;
-  /** 防火墙模版ID。若不指定该参数，则使用默认防火墙策略。 */
+  /** 防火墙模板ID。若不指定该参数，则使用默认防火墙策略。 */
   FirewallTemplateId?: string;
   /** 标签键和标签值。如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。如果标签不存在会为您自动创建标签。数组最多支持10个元素。 */
   Tags?: Tag[];
@@ -1605,7 +1605,7 @@ declare interface DescribeFirewallTemplateRulesResponse {
 declare interface DescribeFirewallTemplatesRequest {
   /** 防火墙模板ID列表。 */
   TemplateIds?: string[];
-  /** 过滤器列表。template-id按照【防火墙模版所属的ID】进行过滤。类型：String必选：否template-name按照【防火墙模版所属的名称】进行过滤。类型：String必选：否template-type按照【防火墙模版的类型】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 TemplateIds 和 Filters。 */
+  /** 过滤器列表。template-id按照【防火墙模板所属的ID】进行过滤。类型：String必选：否template-name按照【防火墙模板所属的名称】进行过滤。类型：String必选：否template-type按照【防火墙模板的类型】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 TemplateIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;

@@ -2773,9 +2773,23 @@ declare interface DescribeIpHitItemsResponse {
 }
 
 declare interface DescribeModuleStatusRequest {
+  /** 要查询状态的域名 */
+  Domain: string;
 }
 
 declare interface DescribeModuleStatusResponse {
+  /** WEB安全规则是否开启 */
+  WebSecurity?: number;
+  /** 访问控制规则是否开启 */
+  AccessControl?: number;
+  /** CC防护是否开启 */
+  CcProtection?: number;
+  /** 网页防篡改是否开启 */
+  AntiTamper?: number;
+  /** 信息防泄漏是否开启 */
+  AntiLeakage?: number;
+  /** API安全是否开启 */
+  ApiProtection?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3671,6 +3685,20 @@ declare interface ModifyInstanceRenewFlagResponse {
 }
 
 declare interface ModifyModuleStatusRequest {
+  /** 需要设置的domain */
+  Domain: string;
+  /** WEB 安全模块开关，0或1 */
+  WebSecurity: number;
+  /** 访问控制模块开关，0或者1 */
+  AccessControl: number;
+  /** CC模块开关，0或者1 */
+  CcProtection: number;
+  /** API安全模块开关，0或者1 */
+  ApiProtection: number;
+  /** 防篡改模块开关，0或者1 */
+  AntiTamper?: number;
+  /** 防泄漏模块开关，0或者1 */
+  AntiLeakage?: number;
 }
 
 declare interface ModifyModuleStatusResponse {
@@ -4185,7 +4213,7 @@ declare interface Waf {
   DescribeAttackType(data: DescribeAttackTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackTypeResponse>;
   /** 获取用户规则白名单列表 {@link DescribeAttackWhiteRuleRequest} {@link DescribeAttackWhiteRuleResponse} */
   DescribeAttackWhiteRule(data: DescribeAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackWhiteRuleResponse>;
-  /** @deprecated 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
+  /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** Waf 多域名ip黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
@@ -4234,7 +4262,7 @@ declare interface Waf {
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
   /** 查询waf各个模块接口的开关状态 {@link DescribeModuleStatusRequest} {@link DescribeModuleStatusResponse} */
-  DescribeModuleStatus(data?: DescribeModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleStatusResponse>;
+  DescribeModuleStatus(data: DescribeModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleStatusResponse>;
   /** 查看防护对象列表 {@link DescribeObjectsRequest} {@link DescribeObjectsResponse} */
   DescribeObjects(data?: DescribeObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeObjectsResponse>;
   /** 查询业务和攻击概要趋势 {@link DescribePeakPointsRequest} {@link DescribePeakPointsResponse} */
@@ -4340,7 +4368,7 @@ declare interface Waf {
   /** 修改实例的自动续费开关 {@link ModifyInstanceRenewFlagRequest} {@link ModifyInstanceRenewFlagResponse} */
   ModifyInstanceRenewFlag(data: ModifyInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceRenewFlagResponse>;
   /** 设置某个domain下基础安全模块的开关 {@link ModifyModuleStatusRequest} {@link ModifyModuleStatusResponse} */
-  ModifyModuleStatus(data?: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
+  ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */
   ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
   /** waf斯巴达-waf开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */

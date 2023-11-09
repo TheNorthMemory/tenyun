@@ -274,6 +274,14 @@ declare interface MsgBody {
   ImageMsgContent?: ImageMsgContent;
 }
 
+/** 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间） */
+declare interface MutedAccountList {
+  /** 用户 ID */
+  MemberAccount?: string | null;
+  /** 禁言到的时间（使用 UTC 时间，即世界协调时间） */
+  MutedUntil?: number | null;
+}
+
 /** 房间问答问题详情 */
 declare interface QuestionInfo {
   /** 问题ID */
@@ -1051,6 +1059,20 @@ declare interface DescribeQuestionListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRoomForbiddenUserRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomId: number;
+}
+
+declare interface DescribeRoomForbiddenUserResponse {
+  /** 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间） */
+  MutedAccountList?: MutedAccountList[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoomRequest {
   /** 房间Id。 */
   RoomId: number;
@@ -1227,6 +1249,22 @@ declare interface EndRoomRequest {
 }
 
 declare interface EndRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ForbidSendMsgRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomId: number;
+  /** 需要禁言的用户账号，最多支持500个账号 */
+  MembersAccount: string[];
+  /** 需禁言时间，单位为秒，为0时表示取消禁言，4294967295为永久禁言。 */
+  MuteTime: number;
+}
+
+declare interface ForbidSendMsgResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1492,6 +1530,8 @@ declare interface SendRoomNormalMessageRequest {
   MsgBody: MsgBody[];
   /** 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）。 */
   CloudCustomData?: string;
+  /** 昵称，当FromAccount没有在房间中，需要填写NickName，当FromAccount在房间中，填写NickName无意义 */
+  NickName?: string;
 }
 
 declare interface SendRoomNormalMessageResponse {
@@ -1654,6 +1694,8 @@ declare interface Lcic {
   DescribeQuestionList(data: DescribeQuestionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionListResponse>;
   /** 获取房间配置信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
+  /** 获取房间中被禁言成员列表 {@link DescribeRoomForbiddenUserRequest} {@link DescribeRoomForbiddenUserResponse} */
+  DescribeRoomForbiddenUser(data: DescribeRoomForbiddenUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomForbiddenUserResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;
   /** 获取课堂评分列表 {@link DescribeScoreListRequest} {@link DescribeScoreListResponse} */
@@ -1666,6 +1708,8 @@ declare interface Lcic {
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
   /** 结束房间 {@link EndRoomRequest} {@link EndRoomResponse} */
   EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
+  /** 禁言和取消禁言 {@link ForbidSendMsgRequest} {@link ForbidSendMsgResponse} */
+  ForbidSendMsg(data: ForbidSendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidSendMsgResponse>;
   /** 获取房间事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */
   GetRoomEvent(data: GetRoomEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomEventResponse>;
   /** 获取房间历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */

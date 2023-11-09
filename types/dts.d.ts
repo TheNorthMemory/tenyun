@@ -90,7 +90,7 @@ declare interface CompareObject {
   ObjectMode: string | null;
   /** 对象列表 */
   ObjectItems?: CompareObjectItem[] | null;
-  /** 高级对象类型，如account(账号),index(索引),shardkey(片建，后面可能会调整),schema(库表结构) */
+  /** 高级对象类型，如account(账号),index(索引),shardkey(片键，后面可能会调整),schema(库表结构) */
   AdvancedObjects?: string[] | null;
 }
 

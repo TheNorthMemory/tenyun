@@ -2,15 +2,15 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 应用相关信息 */
+/** 应用相关信息, 整体应用的层级图如下注: 1. `不同的业务系统可以采用不同的应用，不同应用下的数据是隔离的, 应用A中的某个企业已经实名, 在应用B中此企业还需要重新认证` */
 declare interface Agent {
-  /** 应用的唯一标识。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。 */
+  /** 应用的唯一标识(由电子签平台自动生成)。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。位置如下:![image](https://qcloudimg.tencent-cloud.cn/raw/fac77e0d3f28aaec56669f67e65c8db8.png) */
   AppId: string;
   /** 第三方应用平台自定义，对应第三方平台子客企业的唯一标识。一个第三方平台子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要第三方应用平台保存），最大64位字符串 */
   ProxyOrganizationOpenId?: string;
   /** 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。 */
   ProxyOperator?: UserInfo;
-  /** 非必需参数，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。 */
+  /** **不用填写**，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。 */
   ProxyAppId?: string;
   /** 内部参数，暂未开放使用 */
   ProxyOrganizationId?: string;
@@ -116,6 +116,32 @@ declare interface BaseFlowInfo {
   NeedCreateReview?: boolean;
   /** 填写控件：文件发起使用 */
   Components?: Component[];
+}
+
+/** 用户计费使用情况详情 */
+declare interface BillUsageDetail {
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 */
+  FlowId?: string | null;
+  /** 合同经办人名称如果有多个经办人用分号隔开。 */
+  OperatorName?: string | null;
+  /** 发起方组织机构名称 */
+  CreateOrganizationName?: string | null;
+  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
+  FlowName?: string | null;
+  /** 当前合同状态,如下是状态码对应的状态。0-还没有发起1-等待签署2-部分签署 3-拒签4-已签署 5-已过期 6-已撤销 7-还没有预发起8-等待填写9-部分填写 10-拒填11-已解除 */
+  Status?: number | null;
+  /** 套餐类型对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
+  QuotaType?: string | null;
+  /** 合同使用量 */
+  UseCount?: number | null;
+  /** 消耗的时间戳，格式为Unix标准时间戳（秒）。 */
+  CostTime?: number | null;
+  /** 消耗的套餐名称 */
+  QuotaName?: string | null;
+  /** 消耗类型1.扣费 2.撤销返还 */
+  CostType?: number | null;
+  /** 备注 */
+  Remark?: string | null;
 }
 
 /** 抄送信息 */
@@ -356,29 +382,29 @@ declare interface Filter {
 
 /** 签署人的流程信息明细 */
 declare interface FlowApproverDetail {
-  /** 模板配置时候的签署人id,与控件绑定 */
+  /** 模板配置时候的签署人角色ID(用PDF文件发起也可以指定,如果不指定则自动生成此角色ID), 所有的填写控件和签署控件都归属不同的角色 */
   ReceiptId?: string;
-  /** 平台企业的第三方id */
+  /** 第三方平台子客企业的唯一标识，定义Agent中的ProxyOrganizationOpenId一样, 可以参考Agent结构体 */
   ProxyOrganizationOpenId?: string | null;
-  /** 平台企业操作人的第三方id */
+  /** 第三方平台子客企业员工的唯一标识 */
   ProxyOperatorOpenId?: string;
-  /** 平台企业名称 */
+  /** 第三方平台子客企业名称，与企业营业执照中注册的名称一致。 */
   ProxyOrganizationName?: string;
   /** 签署人手机号 */
   Mobile?: string;
-  /** 签署人签署顺序 */
+  /** 签署顺序，如果是有序签署，签署顺序从小到大 */
   SignOrder?: number;
-  /** 签署人姓名 */
+  /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   ApproveName?: string | null;
-  /** 当前签署人的状态, 状态如下PENDING 待签署	FILLPENDING 待填写FILLACCEPT 填写完成	FILLREJECT 拒绝填写	WAITPICKUP 待领取	ACCEPT 已签署	REJECT 拒签 DEADLINE 过期没人处理 CANCEL 流程已撤回	FORWARD 已经转他人处理STOP 流程已终止	RELIEVED 解除协议（已解除） */
+  /** 当前签署人的状态, 状态如下 **PENDING** :待签署 **FILLPENDING** :待填写 **FILLACCEPT** :填写完成 **FILLREJECT** :拒绝填写 **WAITPICKUP** :待领取 **ACCEPT** :已签署 **REJECT** :拒签 **DEADLINE** :过期没人处理 **CANCEL** :流程已撤回 **FORWARD** :已经转他人处理 **STOP** :流程已终止 **RELIEVED** :解除协议（已解除） */
   ApproveStatus?: string | null;
-  /** 签署人自定义信息 */
+  /** 签署人拒签等情况的时候填写的原因 */
   ApproveMessage?: string | null;
   /** 签署人签署时间戳，单位秒 */
   ApproveTime?: number;
-  /** 参与者类型 ORGANIZATION：企业签署人PERSON：个人签署人 */
+  /** 参与者类型 **ORGANIZATION** :企业签署人 **PERSON** :个人签署人 */
   ApproveType?: string | null;
-  /** 自定义签署人角色 */
+  /** 自定义签署人的角色名, 如: 收款人、开具人、见证人等 */
   ApproverRoleName?: string | null;
 }
 
@@ -734,13 +760,13 @@ declare interface RecipientComponentInfo {
 declare interface ReleasedApprover {
   /** 签署人在原合同签署人列表中的顺序序号(从0开始，按顺序依次递增)。可以通过DescribeFlowDetailInfo接口查看原流程中的签署人列表。 */
   ApproverNumber: number;
-  /** 指定签署人类型，目前支持 **ORGANIZATION**：企业（默认值） **ENTERPRISESERVER**：企业静默签 */
+  /** 指定签署人类型，目前支持 **ORGANIZATION**：企业(默认值) **ENTERPRISESERVER**：企业静默签 */
   ApproverType: string;
   /** 签署人姓名，最大长度50个字。 */
   Name?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 居民身份证(默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   IdCardType?: string;
-  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母(但“I”、“O”除外)，后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;
   /** 签署人手机号。 */
   Mobile?: string;
@@ -954,9 +980,9 @@ declare interface UsageDetail {
   FlowChannel: string | null;
 }
 
-/** 接口调用者信息 */
+/** 接口调用的员工信息 */
 declare interface UserInfo {
-  /** 第三方应用平台自定义，对应第三方平台子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串 */
+  /** 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。注意:1. OpenId在子客企业对应一个真实员工，**本应用唯一, 不可重复使用**，最大64位字符串2. 可使用用户在贵方企业系统中的Userid或者hash值作为子客企业的员工OpenId3. **员工加入企业后**, 可以通过生成子客登录链接登录子客控制台后, 在**组织架构**模块查看员工们的OpenId, 样式如下图![image](https://qcloudimg.tencent-cloud.cn/raw/bb67fb66c926759df3a0af5838fdafd5.png) */
   OpenId?: string;
   /** 内部参数，暂未开放使用 */
   Channel?: string;
@@ -1301,9 +1327,9 @@ declare interface ChannelCreateFlowGroupByTemplatesResponse {
 }
 
 declare interface ChannelCreateFlowRemindsRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 需执行催办的签署流程ID数组，最多包含100个。 */
+  /** 需执行催办的合同流程ID数组，最多支持100个。 */
   FlowIds: string[];
 }
 
@@ -1459,19 +1485,19 @@ declare interface ChannelCreatePrepareFlowResponse {
 }
 
 declare interface ChannelCreatePreparedPersonalEsignRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
   /** 个人用户姓名 */
   UserName: string;
-  /** 身份证件号码 */
+  /** 证件号码, 应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
-  /** 印章名称 */
+  /** 电子印章名字，1-50个中文字符注:`同一企业下电子印章名字不能相同` */
   SealName: string;
-  /** 印章图片的base64，最大不超过 8M */
+  /** 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式。 */
   SealImage: string;
-  /** 操作者信息 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 身份证件类型 */
+  /** 证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE : 其他注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
   IdCardType?: string;
   /** 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。 */
   SealImageCompress?: boolean;
@@ -1484,7 +1510,7 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
 }
 
 declare interface ChannelCreatePreparedPersonalEsignResponse {
-  /** 导入的印章 ID */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1497,7 +1523,7 @@ declare interface ChannelCreateReleaseFlowRequest {
   NeedRelievedFlowId: string;
   /** 解除协议内容, 包括解除理由等信息。 */
   ReliveInfo: RelieveInfo;
-  /** 替换解除协议的签署人， 如不指定替换签署人, 则使用原流程的签署人。 如需更换原合同中的企业端签署人，可通过指定该签署人的RecipientId编号更换此企业端签署人。(可通过接口DescribeFlowInfo查询签署人的RecipientId编号)注意：只能更换自己企业的签署人, 不支持更换个人类型或者其他企业的签署人可以不指定替换签署人, 使用原流程的签署人 */
+  /** 指定解除协议的签署人，如不指定，则默认使用原流程的签署人。 如需更换原合同中的企业端签署人，可通过指定该签署人在原合同列表中的ApproverNumber编号来更换此企业端签署人。(可通过接口DescribeFlowDetailInfo查询签署人的ApproverNumber编号，默认从0开始，顺序递增)注意：只能更换自己企业的签署人，不支持更换个人类型或者其他企业的签署人可以不指定替换签署人，使用原流程的签署人 */
   ReleasedApprovers?: ReleasedApprover[];
   /** 签署完回调url，最大长度1000个字符 */
   CallbackUrl?: string;
@@ -1537,11 +1563,11 @@ declare interface ChannelCreateRoleResponse {
 }
 
 declare interface ChannelCreateSealPolicyRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证。 */
   Agent: Agent;
-  /** 指定印章ID */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId: string;
-  /** 指定待授权的用户ID数组,电子签的用户ID可以填写OpenId，系统会通过组织+渠道+OpenId查询得到UserId进行授权。 */
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。员工在贵司业务系统中的唯一身份标识，用于与腾讯电子签账号进行映射，确保在同一企业内不会出现重复。该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。指定待授权的用户ID数组,电子签的用户ID可以填写OpenId，系统会通过组织+渠道+OpenId查询得到UserId进行授权。 */
   UserIds: string[];
   /** 操作人（用户）信息，不用传 */
   Operator?: UserInfo;
@@ -2090,6 +2116,30 @@ declare interface CreateSignUrlsResponse {
   SignUrlInfos?: SignUrlInfo[];
   /** 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致 */
   ErrorMessages?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBillUsageDetailRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
+  Agent: Agent;
+  /** 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
+  StartTime: string;
+  /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
+  EndTime: string;
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
+  QuotaType?: string;
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
+  Offset?: number;
+  /** 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。 */
+  Limit?: number;
+}
+
+declare interface DescribeBillUsageDetailResponse {
+  /** 返回查询记录总数 */
+  Total?: number;
+  /** 消耗记录详情 */
+  Details?: BillUsageDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4017,6 +4067,8 @@ declare interface Essbasic {
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
+  /** 查询计费消耗情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
+  DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfoRequest} {@link DescribeExtendedServiceAuthInfoResponse} */

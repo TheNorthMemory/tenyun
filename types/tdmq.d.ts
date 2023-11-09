@@ -1774,6 +1774,40 @@ declare interface CreateEnvironmentRoleResponse {
   RequestId?: string;
 }
 
+declare interface CreateProClusterRequest {
+  /** 多可用区部署选择三个可用区，示例"200002","200003","200004"单可用区部署选择一个可用区，示例"200002" */
+  ZoneIds: string;
+  /** 集群规格代号参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
+  ProductName: string;
+  /** 存储规格参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
+  StorageSize: number;
+  /** 1: true，开启自动按月续费0: false，关闭自动按月续费 */
+  AutoRenewFlag: number;
+  /** 购买时长，取值范围：1～50 */
+  TimeSpan: number;
+  /** 集群的标签列表(已废弃) */
+  Tags: Tag[];
+  /** 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。 */
+  ClusterName: string;
+  /** 是否自动选择代金券 1是 0否 默认为0 */
+  AutoVoucher: number;
+  /** vpc网络标签 */
+  Vpcs?: VpcInfo;
+}
+
+declare interface CreateProClusterResponse {
+  /** 子订单号 */
+  DealName?: string;
+  /** 订单号 */
+  BigDealId?: string;
+  /** 集群Id */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -4175,6 +4209,8 @@ declare interface Tdmq {
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
   /** 创建环境角色授权 {@link CreateEnvironmentRoleRequest} {@link CreateEnvironmentRoleResponse} */
   CreateEnvironmentRole(data: CreateEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentRoleResponse>;
+  /** 创建专业集群 {@link CreateProClusterRequest} {@link CreateProClusterResponse} */
+  CreateProCluster(data: CreateProClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProClusterResponse>;
   /** 创建RabbitMQ的用户 {@link CreateRabbitMQUserRequest} {@link CreateRabbitMQUserResponse} */
   CreateRabbitMQUser(data: CreateRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQUserResponse>;
   /** 创建RabbitMQ专享版实例 {@link CreateRabbitMQVipInstanceRequest} {@link CreateRabbitMQVipInstanceResponse} */

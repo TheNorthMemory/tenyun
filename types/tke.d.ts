@@ -2416,14 +2416,14 @@ declare interface VirtualNodePool {
   Taints: Taint[] | null;
 }
 
-/** 虚拟节点 */
+/** 超级节点 */
 declare interface VirtualNodeSpec {
   /** 节点展示名称 */
   DisplayName: string;
   /** 子网ID */
   SubnetId: string;
   /** 腾讯云标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 数据卷挂载路径信息 */
@@ -2841,7 +2841,7 @@ declare interface CreateClusterVirtualNodeRequest {
 
 declare interface CreateClusterVirtualNodeResponse {
   /** 虚拟节点名称 */
-  NodeName: string;
+  NodeName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4081,9 +4081,9 @@ declare interface DescribeClusterVirtualNodePoolsRequest {
 
 declare interface DescribeClusterVirtualNodePoolsResponse {
   /** 节点池总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 虚拟节点池列表 */
-  NodePoolSet: VirtualNodePool[] | null;
+  NodePoolSet?: VirtualNodePool[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6173,9 +6173,9 @@ declare interface Tke {
   CreateClusterRoute(data: CreateClusterRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterRouteResponse>;
   /** 创建集群路由表 {@link CreateClusterRouteTableRequest} {@link CreateClusterRouteTableResponse} */
   CreateClusterRouteTable(data: CreateClusterRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterRouteTableResponse>;
-  /** 创建虚拟节点 {@link CreateClusterVirtualNodeRequest} {@link CreateClusterVirtualNodeResponse} */
+  /** 创建按量计费超级节点 {@link CreateClusterVirtualNodeRequest} {@link CreateClusterVirtualNodeResponse} */
   CreateClusterVirtualNode(data: CreateClusterVirtualNodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterVirtualNodeResponse>;
-  /** 创建虚拟节点池 {@link CreateClusterVirtualNodePoolRequest} {@link CreateClusterVirtualNodePoolResponse} */
+  /** 创建超级节点池 {@link CreateClusterVirtualNodePoolRequest} {@link CreateClusterVirtualNodePoolResponse} */
   CreateClusterVirtualNodePool(data: CreateClusterVirtualNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterVirtualNodePoolResponse>;
   /** 创建边缘计算ECM机器 {@link CreateECMInstancesRequest} {@link CreateECMInstancesResponse} */
   CreateECMInstances(data: CreateECMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateECMInstancesResponse>;
@@ -6231,9 +6231,9 @@ declare interface Tke {
   DeleteClusterRoute(data: DeleteClusterRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterRouteResponse>;
   /** 删除集群路由表 {@link DeleteClusterRouteTableRequest} {@link DeleteClusterRouteTableResponse} */
   DeleteClusterRouteTable(data: DeleteClusterRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterRouteTableResponse>;
-  /** 删除虚拟节点 {@link DeleteClusterVirtualNodeRequest} {@link DeleteClusterVirtualNodeResponse} */
+  /** 删除超级节点 {@link DeleteClusterVirtualNodeRequest} {@link DeleteClusterVirtualNodeResponse} */
   DeleteClusterVirtualNode(data: DeleteClusterVirtualNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterVirtualNodeResponse>;
-  /** 删除虚拟节点池 {@link DeleteClusterVirtualNodePoolRequest} {@link DeleteClusterVirtualNodePoolResponse} */
+  /** 删除超级节点池 {@link DeleteClusterVirtualNodePoolRequest} {@link DeleteClusterVirtualNodePoolResponse} */
   DeleteClusterVirtualNodePool(data: DeleteClusterVirtualNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterVirtualNodePoolResponse>;
   /** 删除ECM实例 {@link DeleteECMInstancesRequest} {@link DeleteECMInstancesResponse} */
   DeleteECMInstances(data: DeleteECMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteECMInstancesResponse>;
@@ -6325,9 +6325,9 @@ declare interface Tke {
   DescribeClusterSecurity(data: DescribeClusterSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterSecurityResponse>;
   /** 查看集群状态列表 {@link DescribeClusterStatusRequest} {@link DescribeClusterStatusResponse} */
   DescribeClusterStatus(data?: DescribeClusterStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStatusResponse>;
-  /** 查看虚拟节点列表 {@link DescribeClusterVirtualNodeRequest} {@link DescribeClusterVirtualNodeResponse} */
+  /** 查看超级节点列表 {@link DescribeClusterVirtualNodeRequest} {@link DescribeClusterVirtualNodeResponse} */
   DescribeClusterVirtualNode(data: DescribeClusterVirtualNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterVirtualNodeResponse>;
-  /** 查看虚拟节点池列表 {@link DescribeClusterVirtualNodePoolsRequest} {@link DescribeClusterVirtualNodePoolsResponse} */
+  /** 查看超级节点池列表 {@link DescribeClusterVirtualNodePoolsRequest} {@link DescribeClusterVirtualNodePoolsResponse} */
   DescribeClusterVirtualNodePools(data: DescribeClusterVirtualNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterVirtualNodePoolsResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
@@ -6447,7 +6447,7 @@ declare interface Tke {
   DisableEventPersistence(data: DisableEventPersistenceRequest, config?: AxiosRequestConfig): AxiosPromise<DisableEventPersistenceResponse>;
   /** 关闭附加的VPC-CNI网络能力 {@link DisableVpcCniNetworkTypeRequest} {@link DisableVpcCniNetworkTypeResponse} */
   DisableVpcCniNetworkType(data: DisableVpcCniNetworkTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DisableVpcCniNetworkTypeResponse>;
-  /** 驱逐虚拟节点 {@link DrainClusterVirtualNodeRequest} {@link DrainClusterVirtualNodeResponse} */
+  /** 驱逐超级节点 {@link DrainClusterVirtualNodeRequest} {@link DrainClusterVirtualNodeResponse} */
   DrainClusterVirtualNode(data: DrainClusterVirtualNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DrainClusterVirtualNodeResponse>;
   /** 开启集群审计 {@link EnableClusterAuditRequest} {@link EnableClusterAuditResponse} */
   EnableClusterAudit(data: EnableClusterAuditRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterAuditResponse>;
@@ -6493,7 +6493,7 @@ declare interface Tke {
   ModifyClusterEndpointSP(data: ModifyClusterEndpointSPRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterEndpointSPResponse>;
   /** 编辑节点池 {@link ModifyClusterNodePoolRequest} {@link ModifyClusterNodePoolResponse} */
   ModifyClusterNodePool(data: ModifyClusterNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNodePoolResponse>;
-  /** 修改虚拟节点池 {@link ModifyClusterVirtualNodePoolRequest} {@link ModifyClusterVirtualNodePoolResponse} */
+  /** 修改超级节点池 {@link ModifyClusterVirtualNodePoolRequest} {@link ModifyClusterVirtualNodePoolResponse} */
   ModifyClusterVirtualNodePool(data: ModifyClusterVirtualNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterVirtualNodePoolResponse>;
   /** 修改节点池关联伸缩组的期望实例数 {@link ModifyNodePoolDesiredCapacityAboutAsgRequest} {@link ModifyNodePoolDesiredCapacityAboutAsgResponse} */
   ModifyNodePoolDesiredCapacityAboutAsg(data: ModifyNodePoolDesiredCapacityAboutAsgRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolDesiredCapacityAboutAsgResponse>;

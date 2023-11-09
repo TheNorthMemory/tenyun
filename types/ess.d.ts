@@ -138,23 +138,23 @@ declare interface AutoSignConfig {
 declare interface BillUsageDetail {
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId?: string | null;
-  /** 经办人名称 */
+  /** 合同经办人名称如果有多个经办人用分号隔开。 */
   OperatorName?: string | null;
   /** 发起方组织机构名称 */
   CreateOrganizationName?: string | null;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
   FlowName?: string | null;
-  /** 0 还没有发起 1等待签署 2部分签署 3拒签 4已签署 5已过期 6已撤销 7还没有预发起 8等待填写 9部分填写 10拒填 11已解除 */
+  /** 当前合同状态,如下是状态码对应的状态。0-还没有发起1-等待签署2-部分签署 3-拒签4-已签署 5-已过期 6-已撤销 7-还没有预发起8-等待填写9-部分填写 10-拒填11-已解除 */
   Status?: number | null;
-  /** 套餐类型 */
+  /** 套餐类型对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
   QuotaType?: string | null;
   /** 合同使用量 */
   UseCount?: number | null;
-  /** 消耗的时间戳 */
+  /** 消耗的时间戳，格式为Unix标准时间戳（秒）。 */
   CostTime?: number | null;
-  /** 套餐名称 */
+  /** 消耗的套餐名称 */
   QuotaName?: string | null;
-  /** 消耗类型	1.扣费 2.撤销返还 */
+  /** 消耗类型1.扣费 2.撤销返还 */
   CostType?: number | null;
   /** 备注 */
   Remark?: string | null;
@@ -1820,6 +1820,8 @@ declare interface CreatePrepareFlowRequest {
 declare interface CreatePrepareFlowResponse {
   /** 发起流程的web页面链接，有效期5分钟 */
   Url?: string;
+  /** 创建的合同id（还未实际发起），每次调用会生成新的id，用户可以记录此字段对应后续页面发起的合同，若在页面上未成功发起，则此字段无效。 */
+  FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2153,17 +2155,17 @@ declare interface DeleteSealPoliciesResponse {
 }
 
 declare interface DescribeBillUsageDetailRequest {
-  /** 查询开始时间，时间跨度不能大于31天 */
+  /** 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
   StartTime: string;
-  /** 查询结束时间，时间跨度不能大于31天 */
+  /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
   EndTime: string;
   /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
-  Offset: number;
+  Offset?: number;
   /** 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。 */
   Limit?: number;
   /** 查询的套餐类型 （选填 ）不传则查询所有套餐；对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
   QuotaType?: string;
-  /** 非必填，查询某个渠道企业的消耗情况。关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
@@ -2833,7 +2835,7 @@ declare interface Ess {
   DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;
   /** 查询合同流程的详情信息 {@link DescribeFlowInfoRequest} {@link DescribeFlowInfoResponse} */
   DescribeFlowInfo(data?: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
-  /** 查询模板 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
+  /** 查询模板信息 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
   /** 获取企业部门信息列表 {@link DescribeIntegrationDepartmentsRequest} {@link DescribeIntegrationDepartmentsResponse} */
   DescribeIntegrationDepartments(data: DescribeIntegrationDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationDepartmentsResponse>;

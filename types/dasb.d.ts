@@ -123,13 +123,13 @@ declare interface CmdTemplate {
 /** 命令集合 */
 declare interface Command {
   /** 命令 */
-  Cmd: string;
+  Cmd?: string;
   /** 命令输入的时间 */
-  Time: string;
+  Time?: string;
   /** 命令执行时间相对于所属会话开始时间的偏移量，单位ms */
-  TimeOffset: number;
+  TimeOffset?: number;
   /** 命令执行情况，1--允许，2--拒绝，3--确认 */
-  Action: number;
+  Action?: number;
   /** 会话id */
   Sid?: string | null;
   /** 用户名 */
@@ -140,6 +140,8 @@ declare interface Command {
   InstanceId?: string | null;
   /** source ip */
   FromIp?: string | null;
+  /** 该命令所属会话的会话开始时间 */
+  SessionTime?: string | null;
   /** 该命令所属会话的会话开始时间 */
   SessTime?: string | null;
   /** 复核时间 */
@@ -359,32 +361,34 @@ declare interface Resource {
 /** 命令执行检索结果 */
 declare interface SearchCommandResult {
   /** 命令输入的时间 */
-  Time: string;
+  Time?: string;
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 姓名 */
-  RealName: string;
+  RealName?: string;
   /** 资产ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 资产名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 资产公网IP */
-  PublicIp: string;
+  PublicIp?: string;
   /** 资产内网IP */
-  PrivateIp: string;
+  PrivateIp?: string;
   /** 命令 */
-  Cmd: string;
+  Cmd?: string;
   /** 命令执行情况，1--允许，2--拒绝 */
-  Action: number;
+  Action?: number;
   /** 命令所属的会话ID */
-  Sid: string;
+  Sid?: string;
   /** 命令执行时间相对于所属会话开始时间的偏移量，单位ms */
-  TimeOffset: number;
+  TimeOffset?: number;
   /** 账号 */
   Account?: string | null;
   /** source ip */
   FromIp?: string | null;
   /** 该命令所属会话的会话开始时间 */
+  SessionTime?: string | null;
+  /** 该命令所属会话的会话开始时间（废弃，使用SessionTime） */
   SessTime?: string | null;
   /** 复核时间 */
   ConfirmTime?: string | null;
@@ -764,6 +768,8 @@ declare interface CreateResourceRequest {
 }
 
 declare interface CreateResourceResponse {
+  /** 实例Id */
+  ResourceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1280,6 +1286,8 @@ declare interface ImportExternalDeviceRequest {
 }
 
 declare interface ImportExternalDeviceResponse {
+  /** 资产ID列表 */
+  DeviceIdSet?: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1162,6 +1162,18 @@ declare interface UpdateCfsSnapshotAttributeResponse {
   RequestId?: string;
 }
 
+declare interface UpdateFileSystemBandwidthLimitRequest {
+  /** 文件系统 ID */
+  FileSystemId: string;
+  /** 文件系统带宽，仅吞吐型可填。单位MiB/s，最小为1GiB/s，最大200GiB/s。 */
+  BandwidthLimit: number;
+}
+
+declare interface UpdateFileSystemBandwidthLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cfs 文件存储} */
 declare interface Cfs {
   (): Versions;
@@ -1249,6 +1261,8 @@ declare interface Cfs {
   UpdateCfsRule(data: UpdateCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsRuleResponse>;
   /** 更新文件系统快照信息 {@link UpdateCfsSnapshotAttributeRequest} {@link UpdateCfsSnapshotAttributeResponse} */
   UpdateCfsSnapshotAttribute(data: UpdateCfsSnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsSnapshotAttributeResponse>;
+  /** 更新文件系统带宽 {@link UpdateFileSystemBandwidthLimitRequest} {@link UpdateFileSystemBandwidthLimitResponse} */
+  UpdateFileSystemBandwidthLimit(data: UpdateFileSystemBandwidthLimitRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFileSystemBandwidthLimitResponse>;
 }
 
 export declare type Versions = ["2019-07-19"];
