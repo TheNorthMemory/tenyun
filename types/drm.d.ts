@@ -230,6 +230,26 @@ declare interface DescribeKeysResponse {
   RequestId?: string;
 }
 
+declare interface GenerateTDRMKeyRequest {
+  /** 使用的DRM方案类型，接口取值 NORMALAES 。 */
+  DrmType: string;
+  /** 加密的track列表，接口取值 SD 。 */
+  Tracks: string[];
+  /** 一个加密内容的唯一标识。 */
+  ContentId: string;
+  /** 内容类型。接口取值 LiveVideo 。 */
+  ContentType: string;
+}
+
+declare interface GenerateTDRMKeyResponse {
+  /** 内容ID。 */
+  ContentId?: string;
+  /** 加密密钥。 */
+  TXEncryptionToken?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFairPlayPemRequest {
   /** 加密后的fairplay方案申请时使用的私钥。请使用腾讯云DRM 提供的公钥，使用rsa加密算法，PKCS1填充方式对私钥文件中的字段进行加密，并对加密结果进行base64编码。 */
   Pem: string;
@@ -293,6 +313,8 @@ declare interface Drm {
   DescribeFairPlayPem(data?: DescribeFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFairPlayPemResponse>;
   /** 查询加密密钥列表 {@link DescribeKeysRequest} {@link DescribeKeysResponse} */
   DescribeKeys(data: DescribeKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeysResponse>;
+  /** 获取 FLV 加密的密钥字段。不存在时新增。 {@link GenerateTDRMKeyRequest} {@link GenerateTDRMKeyResponse} */
+  GenerateTDRMKey(data: GenerateTDRMKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateTDRMKeyResponse>;
   /** 设置fairplay方案所需私钥 {@link ModifyFairPlayPemRequest} {@link ModifyFairPlayPemResponse} */
   ModifyFairPlayPem(data: ModifyFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFairPlayPemResponse>;
   /** 启动DRM加密(该接口已下线) {@link StartEncryptionRequest} {@link StartEncryptionResponse} */

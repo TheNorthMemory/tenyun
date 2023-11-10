@@ -104,6 +104,8 @@ declare interface Task {
   AlarmPolicy?: string[] | null;
   /** 关联的APM服务 */
   ApmServiceList?: ApmServiceInfo[] | null;
+  /** 关联的隐患验证项ID */
+  VerifyId?: number | null;
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */
@@ -282,24 +284,28 @@ declare interface TaskListItem {
   ApplicationId?: string | null;
   /** 关联应用名称 */
   ApplicationName?: string | null;
+  /** 验证项ID */
+  VerifyId?: number | null;
+  /** 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止 */
+  TaskStatusType?: number | null;
 }
 
 /** 监控指标 */
 declare interface TaskMonitor {
   /** 演练监控指标ID */
-  TaskMonitorId?: number;
+  TaskMonitorId: number;
   /** 监控指标ID */
-  MetricId?: number | null;
+  MetricId: number | null;
   /** 监控指标对象类型ID */
-  TaskMonitorObjectTypeId?: number;
+  TaskMonitorObjectTypeId: number;
   /** 指标名称 */
-  MetricName?: string;
+  MetricName: string;
   /** 实例ID列表 */
-  InstancesIds?: string[];
+  InstancesIds: string[];
   /** 中文指标 */
-  MetricChineseName?: string | null;
+  MetricChineseName: string | null;
   /** 单位 */
-  Unit?: string | null;
+  Unit: string | null;
 }
 
 /** 演练报告状态信息 */
@@ -513,6 +519,8 @@ declare interface DescribeTaskListRequest {
   TaskStartTime?: string;
   /** 结束时间，固定格式%Y-%m-%d %H:%M:%S */
   TaskEndTime?: string;
+  /** 更新时间，固定格式%Y-%m-%d %H:%M:%S */
+  TaskUpdateTime?: string;
   /** 标签对 */
   Tags?: TagWithDescribe[];
   /** 筛选条件 */
@@ -523,6 +531,8 @@ declare interface DescribeTaskListRequest {
   ApplicationId?: string[];
   /** 关联应用筛选 */
   ApplicationName?: string[];
+  /** 任务状态筛选--支持多选 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束) */
+  TaskStatusList?: number[];
 }
 
 declare interface DescribeTaskListResponse {

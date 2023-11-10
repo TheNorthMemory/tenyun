@@ -5311,19 +5311,19 @@ declare interface CommitIntegrationTaskResponse {
 }
 
 declare interface CommitRuleGroupExecResultRequest {
-  /** preject id */
+  /** 项目ID */
   ProjectId: string;
-  /** rule group exec id */
+  /** 规则组执行ID */
   RuleGroupExecId: number;
-  /** group exec state */
+  /** 规则组执行状态 */
   RuleGroupState: string;
-  /** runner rule exec result list */
+  /** 规则执行结果集合 */
   RuleExecResults: RunnerRuleExecResult[];
 }
 
 declare interface CommitRuleGroupExecResultResponse {
   /** 无 */
-  Data: string | null;
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9399,7 +9399,7 @@ declare interface DescribeTasksByPageResponse {
 }
 
 declare interface DescribeTemplateDimCountRequest {
-  /** 模版类型 */
+  /** 模板类型 */
   Type?: number;
   /** 项目ID */
   ProjectId?: string;
@@ -9407,7 +9407,7 @@ declare interface DescribeTemplateDimCountRequest {
 
 declare interface DescribeTemplateDimCountResponse {
   /** 维度统计结果 */
-  Data: DimensionCount[] | null;
+  Data?: DimensionCount[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9425,7 +9425,7 @@ declare interface DescribeTemplateHistoryRequest {
 
 declare interface DescribeTemplateHistoryResponse {
   /** 分页记录 */
-  Data: RuleTemplateHistoryPage | null;
+  Data?: RuleTemplateHistoryPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10449,7 +10449,7 @@ declare interface ModifyRuleRequest {
   RuleTemplateId?: number;
   /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
   Type?: number;
-  /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
   QualityDim?: number;
   /** 源字段详细类型，int、string */
   SourceObjectDataTypeName?: string;
@@ -10491,11 +10491,11 @@ declare interface ModifyRuleResponse {
 }
 
 declare interface ModifyRuleTemplateRequest {
-  /** 模版ID */
+  /** 模板ID */
   TemplateId?: number;
-  /** 模版类型 1.系统模版 2.自定义模版 */
+  /** 模板类型 1.系统模板 2.自定义模板 */
   Type?: number;
-  /** 模版名称 */
+  /** 模板名称 */
   Name?: string;
   /** 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性 */
   QualityDim?: number;
@@ -10517,7 +10517,7 @@ declare interface ModifyRuleTemplateRequest {
 
 declare interface ModifyRuleTemplateResponse {
   /** 修改成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11928,9 +11928,9 @@ declare interface Wedata {
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
   /** 根据工作流分页查询任务【Beta版本】 {@link DescribeTasksByPageRequest} {@link DescribeTasksByPageResponse} */
   DescribeTasksByPage(data: DescribeTasksByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksByPageResponse>;
-  /** 查询规则模版维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
+  /** 查询规则模板维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
   DescribeTemplateDimCount(data?: DescribeTemplateDimCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateDimCountResponse>;
-  /** 查询规则模版操作记录 {@link DescribeTemplateHistoryRequest} {@link DescribeTemplateHistoryResponse} */
+  /** 查询规则模板操作记录 {@link DescribeTemplateHistoryRequest} {@link DescribeTemplateHistoryResponse} */
   DescribeTemplateHistory(data?: DescribeTemplateHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateHistoryResponse>;
   /** 获取第三方运行日志 {@link DescribeThirdTaskRunLogRequest} {@link DescribeThirdTaskRunLogResponse} */
   DescribeThirdTaskRunLog(data: DescribeThirdTaskRunLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdTaskRunLogResponse>;
@@ -12020,7 +12020,7 @@ declare interface Wedata {
   ModifyRule(data?: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 更新规则组订阅信息 {@link ModifyRuleGroupSubscriptionRequest} {@link ModifyRuleGroupSubscriptionResponse} */
   ModifyRuleGroupSubscription(data?: ModifyRuleGroupSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleGroupSubscriptionResponse>;
-  /** 编辑规则模版 {@link ModifyRuleTemplateRequest} {@link ModifyRuleTemplateResponse} */
+  /** 编辑规则模板 {@link ModifyRuleTemplateRequest} {@link ModifyRuleTemplateResponse} */
   ModifyRuleTemplate(data?: ModifyRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleTemplateResponse>;
   /** 修改任务告警规则 {@link ModifyTaskAlarmRegularRequest} {@link ModifyTaskAlarmRegularResponse} */
   ModifyTaskAlarmRegular(data: ModifyTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskAlarmRegularResponse>;

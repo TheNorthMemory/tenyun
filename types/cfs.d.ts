@@ -136,9 +136,9 @@ declare interface FileSystemInfo {
   FileSystemId?: string;
   /** 文件系统状态。取值范围：- creating:创建中- mounting:挂载中- create_failed:创建失败- available:可使用- unserviced:停服中- upgrading:升级中 */
   LifeCycleState?: string;
-  /** 文件系统已使用容量,单位Byte */
+  /** 文件系统已使用容量。单位：Byte */
   SizeByte?: number;
-  /** 文件系统最大空间限制,GiB */
+  /** 文件系统最大空间限制。单位:GiB */
   SizeLimit?: number;
   /** 区域 ID */
   ZoneId?: number;
@@ -164,7 +164,7 @@ declare interface FileSystemInfo {
   AppId?: number;
   /** 文件系统吞吐上限，吞吐上限是根据文件系统当前已使用存储量、绑定的存储资源包以及吞吐资源包一同确定. 单位MiB/s */
   BandwidthLimit?: number;
-  /** 文件系统总容量 */
+  /** 文件系统总容量单位:GiB */
   Capacity?: number;
   /** 文件系统标签列表 */
   Tags?: TagInfo[];

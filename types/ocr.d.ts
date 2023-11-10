@@ -14,6 +14,60 @@ declare interface AdvertiseTextDetection {
   AdvancedInfo: string;
 }
 
+/** 航空运输电子客票行程单信息 */
+declare interface AirTicketInfo {
+  /** 旅客姓名 */
+  PassengerName?: string;
+  /** 有效身份证件号码 */
+  ValidIdNumber?: string;
+  /** 签注 */
+  Endorsement?: string;
+  /** GP单号 */
+  NumberOfGPOrder?: string;
+  /** 发票号码 */
+  ElectronicInvoiceAirTransportReceiptNumber?: string;
+  /** 机票详细信息元组 */
+  DetailInformationOfAirTicketTuple?: DetailInformationOfAirTicketTupleList[];
+  /** 票价 */
+  Fare?: string;
+  /** 燃油附加费 */
+  FuelSurcharge?: string;
+  /** 增值税税率 */
+  VatRate?: string;
+  /** 增值税税额 */
+  VatTaxAmount?: string;
+  /** 民航发展基金 */
+  CivilAviationDevelopmentFund?: string;
+  /** 其他税费 */
+  OtherTaxes?: string;
+  /** 合计 */
+  TotalAmount?: string;
+  /** 电子客票号码 */
+  ElectronicTicketNum?: string;
+  /** 验证码 */
+  VerificationCode?: string;
+  /** 提示信息 */
+  PromptInformation?: string;
+  /** 保险费 */
+  Insurance?: string;
+  /** 销售网点代号 */
+  AgentCode?: string;
+  /** 填开单位 */
+  IssueParty?: string;
+  /** 填开时间 */
+  IssueDate?: string;
+  /** 开具状态 */
+  IssuingStatus?: string;
+  /** 国内国际标识 */
+  MarkingOfDomesticOrInternational?: string;
+  /** 购买方名称 */
+  NameOfPurchaser?: string;
+  /** 销售方名称 */
+  NameOfSeller?: string;
+  /** 统一社会信用代码 */
+  UnifiedSocialCreditCodeOfPurchaser?: string;
+}
+
 /** 机票行程单 */
 declare interface AirTransport {
   /** 发票名称 */
@@ -184,6 +238,34 @@ declare interface Coord {
   X: number;
   /** 纵坐标 */
   Y: number;
+}
+
+/** 机票详细信息元组 */
+declare interface DetailInformationOfAirTicketTupleList {
+  /** 出发站（自） */
+  DepartureStation?: string;
+  /** 目的地（至） */
+  DestinationStation?: string;
+  /** 航班 */
+  FlightSegment?: string;
+  /** 航班 */
+  Carrier?: string;
+  /** 航班号 */
+  Flight?: string;
+  /** 座位等级 */
+  SeatClass?: string;
+  /** 日期 */
+  CarrierDate?: string;
+  /** 时间 */
+  DepartureTime?: string;
+  /** 客票级别/客票类别 */
+  FareBasis?: string;
+  /** 客票生效日期 */
+  EffectiveDate?: string;
+  /** 有效截止日期 */
+  ExpirationDate?: string;
+  /** 免费行李 */
+  FreeBaggageAllowance?: string;
 }
 
 /** 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。 */
@@ -838,6 +920,60 @@ declare interface QuotaInvoice {
   QRCodeMark?: number;
   /** 是否有公司印章（0：没有，1：有） */
   CompanySealMark?: number;
+}
+
+/** 铁路电子客票信息 */
+declare interface RailwayTicketInfo {
+  /** 电子发票类型 */
+  TypeOfVoucher?: string;
+  /** 电子客票号 */
+  ElectronicTicketNum?: string;
+  /** 开票日期 */
+  DateOfIssue?: string;
+  /** 售票或退票类型 */
+  TypeOfBusiness?: string;
+  /** 始发站 */
+  DepartureStation?: string;
+  /** 始发站英文 */
+  PhonicsOfDepartureStation?: string;
+  /** 到达站 */
+  DestinationStation?: string;
+  /** 到达站英文 */
+  PhonicsOfDestinationStation?: string;
+  /** 火车号 */
+  TrainNumber?: string;
+  /** 火车出发日期 */
+  TravelDate?: string;
+  /** 始发时间 */
+  DepartureTime?: string;
+  /** 空调特点 */
+  AirConditioningCharacteristics?: string;
+  /** 座位类型 */
+  SeatLevel?: string;
+  /** 火车第几车 */
+  Carriage?: string;
+  /** 座位号 */
+  Seat?: string;
+  /** 票价 */
+  Fare?: string;
+  /** 发票号码 */
+  ElectronicInvoiceRailwayETicketNumber?: string;
+  /** 身份证号 */
+  IdNumber?: string;
+  /** 姓名 */
+  Name?: string;
+  /** 金额 */
+  TotalAmountExcludingTax?: string;
+  /** 税率 */
+  TaxRate?: string;
+  /** 税额 */
+  TaxAmount?: string;
+  /** 购买方名称 */
+  NameOfPurchaser?: string;
+  /** 统一社会信用代码 */
+  UnifiedSocialCreditCodeOfPurchaser?: string;
+  /** 原发票号码 */
+  NumberOfOriginalInvoice?: string;
 }
 
 /** 矩形坐标 */
@@ -4106,6 +4242,10 @@ declare interface VerifyOfdVatInvoiceOCRResponse {
   Note?: string;
   /** 货物或服务清单 */
   GoodsInfos?: VatInvoiceGoodsInfo[];
+  /** 航空运输电子客票行程单信息 */
+  AirTicketInfo?: AirTicketInfo;
+  /** 铁路电子客票 */
+  RailwayTicketInfo?: RailwayTicketInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

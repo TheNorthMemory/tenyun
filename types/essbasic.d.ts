@@ -156,6 +156,32 @@ declare interface CcInfo {
   CcPermission?: number | null;
 }
 
+/** 用户计费使用情况详情 */
+declare interface ChannelBillUsageDetail {
+  /** 合同流程ID，为32位字符串。 */
+  FlowId?: string;
+  /** 合同经办人名称如果有多个经办人用分号隔开。 */
+  OperatorName?: string;
+  /** 发起方组织机构名称 */
+  CreateOrganizationName?: string;
+  /** 合同流程的名称。 */
+  FlowName?: string;
+  /** 合同流程当前的签署状态, 会存在下列的状态值**INIT**: 合同创建**PART**: 合同签署中(至少有一个签署方已经签署)**REJECT**: 合同拒签**ALL**: 合同签署完成**DEADLINE**: 合同流签(合同过期)**CANCEL**: 合同撤回**RELIEVED**: 解除协议（已解除）**WILLEXPIRE**: 合同即将过期**EXCEPTION**: 合同异常 */
+  FlowStatus?: string;
+  /** 查询的套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  QuotaType?: string;
+  /** 合同使用量注: `如果消耗类型是撤销返还，此值为负值代表返还的合同数量` */
+  UseCount?: number;
+  /** 消耗的时间戳，格式为Unix标准时间戳（秒）。 */
+  CostTime?: number;
+  /** 消耗的套餐名称 */
+  QuotaName?: string;
+  /** 消耗类型**1**.扣费 **2**.撤销返还 */
+  CostType?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
 /** 渠道角色信息 */
 declare interface ChannelRole {
   /** 角色id */
@@ -360,16 +386,16 @@ declare interface FillError {
 
 /** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
 declare interface FilledComponent {
-  /** 控件Id */
-  ComponentId?: string | null;
+  /** 填写控件ID */
+  ComponentId?: string;
   /** 控件名称 */
-  ComponentName?: string | null;
-  /** 控件填写状态；0-未填写；1-已填写 */
-  ComponentFillStatus?: string | null;
+  ComponentName?: string;
+  /** 此填写控件的填写状态 **0** : 此填写控件**未填写****1** : 此填写控件**已填写** */
+  ComponentFillStatus?: string;
   /** 控件填写内容 */
-  ComponentValue?: string | null;
-  /** 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。 */
-  ImageUrl?: string | null;
+  ComponentValue?: string;
+  /** 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。注: `链接不是永久链接, 默认有效期5分钟后, 到期后链接失效` */
+  ImageUrl?: string;
 }
 
 /** 此结构体 (Filter) 用于描述查询过滤条件。 */
@@ -746,13 +772,13 @@ declare interface Recipient {
 
 /** 参与方填写控件信息 */
 declare interface RecipientComponentInfo {
-  /** 参与方Id */
-  RecipientId?: string | null;
-  /** 参与方填写状态 */
-  RecipientFillStatus?: string | null;
-  /** 是否发起方 */
+  /** 参与方的角色ID */
+  RecipientId?: string;
+  /** 参与方填写状态 **0** : 还没有填写 **1** : 已经填写 */
+  RecipientFillStatus?: string;
+  /** 此角色是否是发起方角色 **true** : 是发起方角色 **false** : 不是发起方角色 */
   IsPromoter?: boolean | null;
-  /** 填写控件内容 */
+  /** 此角色的填写控件列表 */
   Components?: FilledComponent[] | null;
 }
 
@@ -818,11 +844,11 @@ declare interface ResourceUrlInfo {
 
 /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
 declare interface SignQrCode {
-  /** 二维码ID，为32位字符串。 */
+  /** 二维码ID，为32位字符串。	注: 需要保留此二维码ID, 用于后序通过取消一码多扫二维码关闭这个二维码的签署功能。 */
   QrCodeId?: string;
   /** 二维码URL，可通过转换二维码的工具或代码组件将此URL转化为二维码，以便用户扫描进行流程签署。 */
   QrCodeUrl?: string;
-  /** 二维码的有截止时间，格式为Unix标准时间戳（秒）。 一旦超过二维码的有效期限，该二维码将自动失效。 */
+  /** 二维码的有截止时间，格式为Unix标准时间戳（秒），可以通过入参的QrEffectiveDay来设置有效期，默认为7天有效期。 一旦超过二维码的有效期限，该二维码将自动失效。 */
   ExpiredTime?: number;
 }
 
@@ -966,18 +992,18 @@ declare interface UploadFile {
 
 /** 用量明细 */
 declare interface UsageDetail {
-  /** 子客企业唯一标识 */
-  ProxyOrganizationOpenId: string;
+  /** 子客企业标识 */
+  ProxyOrganizationOpenId?: string;
   /** 子客企业名 */
-  ProxyOrganizationName: string | null;
-  /** 日期，当需要汇总数据时日期为空 */
-  Date: string | null;
-  /** 消耗数量 */
-  Usage: number;
-  /** 撤回数量 */
-  Cancel: number | null;
+  ProxyOrganizationName?: string | null;
+  /** 对应的消耗日期, **如果是汇总数据则为1970-01-01** */
+  Date?: string | null;
+  /** 消耗合同数量 */
+  Usage?: number;
+  /** 撤回合同数量 */
+  Cancel?: number | null;
   /** 消耗渠道 */
-  FlowChannel: string | null;
+  FlowChannel?: string | null;
 }
 
 /** 接口调用的员工信息 */
@@ -1051,9 +1077,9 @@ declare interface ChannelCancelFlowResponse {
 }
 
 declare interface ChannelCancelMultiFlowSignQRCodeRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 二维码ID，为32位字符串。 */
+  /** 需要取消签署的二维码ID，为32位字符串。由[创建一码多扫流程签署二维码](https://qian.tencent.com/developers/partnerApis/templates/ChannelCreateMultiFlowSignQRCode)返回 */
   QrCodeId: string;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1157,9 +1183,9 @@ declare interface ChannelCreateBatchSignUrlResponse {
 }
 
 declare interface ChannelCreateBoundFlowsRequest {
-  /** 应用信息此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证, 合同会领取给对应的Agent.ProxyOperator.OpenId指定的员工来处理 */
   Agent: Agent;
-  /** 领取的合同id列表 */
+  /** 需要领取的合同流程的ID列表 */
   FlowIds?: string[];
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1383,9 +1409,9 @@ declare interface ChannelCreateFlowSignUrlResponse {
 }
 
 declare interface ChannelCreateMultiFlowSignQRCodeRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 合同模板ID，为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。 */
+  /** 合同模板ID，为32位字符串。 */
   TemplateId: string;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 该名称还将用于合同签署完成后的下载文件名。 */
   FlowName: string;
@@ -1730,6 +1756,30 @@ declare interface ChannelDeleteSealPoliciesResponse {
   RequestId?: string;
 }
 
+declare interface ChannelDescribeBillUsageDetailRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
+  StartTime: string;
+  /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
+  EndTime: string;
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  QuotaType?: string;
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
+  Offset?: number;
+  /** 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。 */
+  Limit?: number;
+}
+
+declare interface ChannelDescribeBillUsageDetailResponse {
+  /** 返回查询记录总数 */
+  Total?: number;
+  /** 消耗记录详情 */
+  Details?: ChannelBillUsageDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelDescribeEmployeesRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -1757,15 +1807,15 @@ declare interface ChannelDescribeEmployeesResponse {
 }
 
 declare interface ChannelDescribeFlowComponentsRequest {
-  /** 应用相关信息。此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 电子签流程的Id */
+  /** 需要获取填写控件填写内容的合同流程ID */
   FlowId: string;
 }
 
 declare interface ChannelDescribeFlowComponentsResponse {
-  /** 流程关联的填写控件信息，控件会按照参与方进行分类。 */
-  RecipientComponentInfos?: RecipientComponentInfo[] | null;
+  /** 合同填写控件信息列表，填写控件会按照参与方角色进行分类。 */
+  RecipientComponentInfos?: RecipientComponentInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2259,17 +2309,17 @@ declare interface DescribeTemplatesResponse {
 }
 
 declare interface DescribeUsageRequest {
-  /** 应用信息，此接口Agent.AppId必填 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId */
   Agent: Agent;
-  /** 开始时间，例如：2021-03-21 */
+  /** 查询日期范围的开始时间, 查询会包含此日期的数据 , 格式为yyyy-mm-dd (例如：2021-03-21)注: `查询日期范围区间长度大于90天`。 */
   StartDate: string;
-  /** 结束时间，例如：2021-06-21；开始时间到结束时间的区间长度小于等于90天。 */
+  /** 查询日期范围的结束时间, 查询会包含此日期的数据 , 格式为yyyy-mm-dd (例如：2021-04-21)注: `查询日期范围区间长度大于90天`。 */
   EndDate: string;
-  /** 是否汇总数据，默认不汇总。不汇总：返回在统计区间内第三方平台下所有企业的每日明细，即每个企业N条数据，N为统计天数；汇总：返回在统计区间内第三方平台下所有企业的汇总后数据，即每个企业一条数据； */
+  /** 是否汇总数据，默认不汇总。 **true** : 汇总数据, 即每个企业一条数据, 对日志范围内的数据相加 **false** : 不会总数据, 返回企业每日明细, 按日期返回每个企业的数据(如果企业对应天数没有操作则无此企业此日期的数据) */
   NeedAggregate?: boolean;
-  /** 单次返回的最多条目数量。默认为1000，且不能超过1000。 */
+  /** 指定每页返回的数据条数，和Offset参数配合使用。注: `默认值为1000，单页做大值为1000` */
   Limit?: number;
-  /** 偏移量，默认是0。 */
+  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。注：`offset从0开始，即第一页为0。` */
   Offset?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -4035,9 +4085,11 @@ declare interface Essbasic {
   ChannelDeleteRoleUsers(data: ChannelDeleteRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteRoleUsersResponse>;
   /** 删除印章授权 {@link ChannelDeleteSealPoliciesRequest} {@link ChannelDeleteSealPoliciesResponse} */
   ChannelDeleteSealPolicies(data: ChannelDeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteSealPoliciesResponse>;
+  /** 查询渠道计费消耗情况 {@link ChannelDescribeBillUsageDetailRequest} {@link ChannelDescribeBillUsageDetailResponse} */
+  ChannelDescribeBillUsageDetail(data: ChannelDescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeBillUsageDetailResponse>;
   /** 查询企业员工列表 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
-  /** 查询流程填写控件内容 {@link ChannelDescribeFlowComponentsRequest} {@link ChannelDescribeFlowComponentsResponse} */
+  /** 获取合同填写控件内容 {@link ChannelDescribeFlowComponentsRequest} {@link ChannelDescribeFlowComponentsResponse} */
   ChannelDescribeFlowComponents(data: ChannelDescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeFlowComponentsResponse>;
   /** 查询子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
@@ -4067,7 +4119,7 @@ declare interface Essbasic {
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
-  /** 查询计费消耗情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
+  /** [废弃]查询计费消耗情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
@@ -4079,7 +4131,7 @@ declare interface Essbasic {
   DescribeResourceUrlsByFlows(data: DescribeResourceUrlsByFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUrlsByFlowsResponse>;
   /** 查询模板信息列表 {@link DescribeTemplatesRequest} {@link DescribeTemplatesResponse} */
   DescribeTemplates(data: DescribeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplatesResponse>;
-  /** 合同用量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
+  /** 合同消耗数量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
   /** 获取控制台下载合同页面跳转链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;

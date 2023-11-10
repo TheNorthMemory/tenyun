@@ -136,28 +136,28 @@ declare interface AutoSignConfig {
 
 /** 用户计费使用情况详情 */
 declare interface BillUsageDetail {
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
-  FlowId?: string | null;
+  /** 合同流程ID，为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId?: string;
   /** 合同经办人名称如果有多个经办人用分号隔开。 */
-  OperatorName?: string | null;
+  OperatorName?: string;
   /** 发起方组织机构名称 */
-  CreateOrganizationName?: string | null;
-  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
-  FlowName?: string | null;
-  /** 当前合同状态,如下是状态码对应的状态。0-还没有发起1-等待签署2-部分签署 3-拒签4-已签署 5-已过期 6-已撤销 7-还没有预发起8-等待填写9-部分填写 10-拒填11-已解除 */
-  Status?: number | null;
-  /** 套餐类型对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
-  QuotaType?: string | null;
-  /** 合同使用量 */
-  UseCount?: number | null;
+  CreateOrganizationName?: string;
+  /** 合同流程的名称。 */
+  FlowName?: string;
+  /** 当前合同状态,如下是状态码对应的状态。**0**: 还没有发起**1**: 等待签署**2**: 部分签署 **3**: 拒签**4**: 已签署 **5**: 已过期 **6**: 已撤销 **7**: 还没有预发起**8**: 等待填写**9**: 部分填写 **10**: 拒填**11**: 已解除 */
+  Status?: number;
+  /** 查询的套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  QuotaType?: string;
+  /** 合同使用量注: `如果消耗类型是撤销返还，此值为负值代表返还的合同数量` */
+  UseCount?: number;
   /** 消耗的时间戳，格式为Unix标准时间戳（秒）。 */
-  CostTime?: number | null;
+  CostTime?: number;
   /** 消耗的套餐名称 */
-  QuotaName?: string | null;
-  /** 消耗类型1.扣费 2.撤销返还 */
-  CostType?: number | null;
+  QuotaName?: string;
+  /** 消耗类型**1**.扣费**2**.撤销返还 */
+  CostType?: number;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** 企业应用回调信息 */
@@ -2163,7 +2163,7 @@ declare interface DescribeBillUsageDetailRequest {
   Offset?: number;
   /** 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。 */
   Limit?: number;
-  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
   QuotaType?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

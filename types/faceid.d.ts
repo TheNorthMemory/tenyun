@@ -29,33 +29,33 @@ declare interface ChargeDetail {
 /** 活体一比一详情 */
 declare interface DetectDetail {
   /** 请求时间戳。 */
-  ReqTime: string | null;
+  ReqTime?: string | null;
   /** 本次活体一比一请求的唯一标记。 */
-  Seq: string | null;
+  Seq?: string | null;
   /** 参与本次活体一比一的身份证号。 */
-  Idcard: string | null;
+  Idcard?: string | null;
   /** 参与本次活体一比一的姓名。 */
-  Name: string | null;
+  Name?: string | null;
   /** 本次活体一比一的相似度。 */
-  Sim: string | null;
+  Sim?: string | null;
   /** 本次活体一比一是否收费 */
-  IsNeedCharge: boolean | null;
+  IsNeedCharge?: boolean | null;
   /** 本次活体一比一最终结果。0为成功 */
-  Errcode: number | null;
+  Errcode?: number | null;
   /** 本次活体一比一最终结果描述。（仅描述用，文案更新时不会通知。） */
-  Errmsg: string | null;
+  Errmsg?: string | null;
   /** 本次活体结果。0为成功 */
-  Livestatus: number | null;
+  Livestatus?: number | null;
   /** 本次活体结果描述。（仅描述用，文案更新时不会通知。） */
-  Livemsg: string | null;
+  Livemsg?: string | null;
   /** 本次一比一结果。0为成功 */
-  Comparestatus: number | null;
+  Comparestatus?: number | null;
   /** 本次一比一结果描述。（仅描述用，文案更新时不会通知。） */
-  Comparemsg: string | null;
+  Comparemsg?: string | null;
   /** 比对库源类型。包括：公安商业库；业务方自有库（用户上传照片、客户的混合库、混合部署库）；二次验证库；人工审核库； */
-  CompareLibType: string | null;
+  CompareLibType?: string | null;
   /** 枚举活体检测类型：0：未知1：数字活体2：动作活体3：静默活体4：一闪活体（动作+光线） */
-  LivenessMode: number | null;
+  LivenessMode?: number | null;
 }
 
 /** 核身最佳帧信息 */
@@ -87,55 +87,55 @@ declare interface DetectInfoIdCardData {
 /** 核身文本信息 */
 declare interface DetectInfoText {
   /** 本次流程最终验证结果。0为成功 */
-  ErrCode: number | null;
+  ErrCode?: number | null;
   /** 本次流程最终验证结果描述。（仅描述用，文案更新时不会通知。） */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 本次验证使用的身份证号。 */
-  IdCard: string | null;
+  IdCard?: string | null;
   /** 用户认证时使用的证件号码类型：0：二代身份证的证件号码1：港澳台居住证的证件号码2：其他（核验使用的证件号码非合法身份号码） */
-  UseIDType: number | null;
+  UseIDType?: number | null;
   /** 本次验证使用的姓名。 */
-  Name: string | null;
+  Name?: string | null;
   /** 身份校验环节识别结果：民族。 */
-  OcrNation: string | null;
+  OcrNation?: string | null;
   /** 身份校验环节识别结果：家庭住址。 */
-  OcrAddress: string | null;
+  OcrAddress?: string | null;
   /** 身份校验环节识别结果：生日。格式为：YYYY/M/D */
-  OcrBirth: string | null;
+  OcrBirth?: string | null;
   /** 身份校验环节识别结果：签发机关。 */
-  OcrAuthority: string | null;
+  OcrAuthority?: string | null;
   /** 身份校验环节识别结果：有效日期。格式为：YYYY.MM.DD-YYYY.MM.DD */
-  OcrValidDate: string | null;
+  OcrValidDate?: string | null;
   /** 身份校验环节识别结果：姓名。 */
-  OcrName: string | null;
+  OcrName?: string | null;
   /** 身份校验环节识别结果：身份证号。 */
-  OcrIdCard: string | null;
+  OcrIdCard?: string | null;
   /** 身份校验环节识别结果：性别。 */
-  OcrGender: string | null;
+  OcrGender?: string | null;
   /** 身份校验环节采用的信息上传方式。取值有"NFC"、"OCR"、"手动输入"、"其他" */
   IdInfoFrom?: string | null;
   /** 本次流程最终活体结果。0为成功 */
-  LiveStatus: number | null;
+  LiveStatus?: number | null;
   /** 本次流程最终活体结果描述。（仅描述用，文案更新时不会通知。） */
-  LiveMsg: string | null;
+  LiveMsg?: string | null;
   /** 本次流程最终一比一结果。0为成功 */
-  Comparestatus: number | null;
+  Comparestatus?: number | null;
   /** 本次流程最终一比一结果描述。（仅描述用，文案更新时不会通知。） */
-  Comparemsg: string | null;
+  Comparemsg?: string | null;
   /** 本次流程活体一比一的分数，取值范围 [0.00, 100.00]。相似度大于等于70时才判断为同一人，也可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一） */
-  Sim: string | null;
+  Sim?: string | null;
   /** 地理位置经纬度。 */
-  Location: string | null;
+  Location?: string | null;
   /** Auth接口带入额外信息。 */
-  Extra: string | null;
+  Extra?: string | null;
   /** 本次流程进行的活体一比一流水。 */
-  LivenessDetail: DetectDetail[] | null;
+  LivenessDetail?: DetectDetail[] | null;
   /** 手机号码。 */
-  Mobile: string | null;
+  Mobile?: string | null;
   /** 本次流程最终比对库源类型。包括：权威库；业务方自有库（用户上传照片、客户的混合库、混合部署库）；二次验证库；人工审核库； */
-  CompareLibType: string | null;
+  CompareLibType?: string | null;
   /** 本次流程最终活体类型。包括：0：未知1：数字活体2：动作活体3：静默活体4：一闪活体（动作+光线） */
-  LivenessMode: number | null;
+  LivenessMode?: number | null;
   /** nfc重复计费requestId列表 */
   NFCRequestIds?: string[] | null;
   /** nfc重复计费计数 */

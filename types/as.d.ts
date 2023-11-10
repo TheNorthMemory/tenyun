@@ -71,67 +71,69 @@ declare interface AutoScalingAdvice {
 /** 伸缩组 */
 declare interface AutoScalingGroup {
   /** 伸缩组ID */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 伸缩组名称 */
-  AutoScalingGroupName: string;
+  AutoScalingGroupName?: string;
   /** 伸缩组当前状态。取值范围：NORMAL：正常CVM_ABNORMAL：启动配置异常LB_ABNORMAL：负载均衡器异常LB_LISTENER_ABNORMAL：负载均衡器监听器异常LB_LOCATION_ABNORMAL：负载均衡器监听器转发配置异常VPC_ABNORMAL：VPC网络异常SUBNET_ABNORMAL：VPC子网异常INSUFFICIENT_BALANCE：余额不足LB_BACKEND_REGION_NOT_MATCH：CLB实例后端地域与AS服务所在地域不匹配LB_BACKEND_VPC_NOT_MATCH：CLB实例VPC与伸缩组VPC不匹配 */
-  AutoScalingGroupStatus: string;
+  AutoScalingGroupStatus?: string;
   /** 创建时间，采用UTC标准计时 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 默认冷却时间，单位秒 */
-  DefaultCooldown: number;
+  DefaultCooldown?: number;
   /** 期望实例数 */
-  DesiredCapacity: number;
+  DesiredCapacity?: number;
   /** 启用状态，取值包括`ENABLED`和`DISABLED` */
-  EnabledStatus: string;
+  EnabledStatus?: string;
   /** 应用型负载均衡器列表 */
-  ForwardLoadBalancerSet: ForwardLoadBalancer[];
+  ForwardLoadBalancerSet?: ForwardLoadBalancer[];
   /** 实例数量 */
-  InstanceCount: number;
+  InstanceCount?: number;
   /** 状态为`IN_SERVICE`实例的数量 */
-  InServiceInstanceCount: number;
+  InServiceInstanceCount?: number;
   /** 启动配置ID */
-  LaunchConfigurationId: string;
+  LaunchConfigurationId?: string;
   /** 启动配置名称 */
-  LaunchConfigurationName: string;
+  LaunchConfigurationName?: string;
   /** 传统型负载均衡器ID列表 */
-  LoadBalancerIdSet: string[];
+  LoadBalancerIdSet?: string[];
   /** 最大实例数 */
-  MaxSize: number;
+  MaxSize?: number;
   /** 最小实例数 */
-  MinSize: number;
+  MinSize?: number;
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 子网ID列表 */
-  SubnetIdSet: string[];
+  SubnetIdSet?: string[];
   /** 销毁策略 */
-  TerminationPolicySet: string[];
+  TerminationPolicySet?: string[];
   /** VPC标识 */
-  VpcId: string;
+  VpcId?: string;
   /** 可用区列表 */
-  ZoneSet: string[];
+  ZoneSet?: string[];
   /** 重试策略 */
-  RetryPolicy: string;
+  RetryPolicy?: string;
   /** 伸缩组是否处于伸缩活动中，`IN_ACTIVITY`表示处于伸缩活动中，`NOT_IN_ACTIVITY`表示不处于伸缩活动中。 */
-  InActivityStatus: string;
+  InActivityStatus?: string;
   /** 伸缩组标签列表 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** 服务设置 */
-  ServiceSettings: ServiceSettings;
+  ServiceSettings?: ServiceSettings;
   /** 实例具有IPv6地址数量的配置 */
-  Ipv6AddressCount: number;
+  Ipv6AddressCount?: number;
   /** 多可用区/子网策略。 PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。 EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。 */
-  MultiZoneSubnetPolicy: string;
+  MultiZoneSubnetPolicy?: string;
   /** 伸缩组实例健康检查类型，取值如下：CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097) */
-  HealthCheckType: string;
+  HealthCheckType?: string;
   /** CLB健康检查宽限期 */
-  LoadBalancerHealthCheckGracePeriod: number;
+  LoadBalancerHealthCheckGracePeriod?: number;
   /** 实例分配策略，取值包括 LAUNCH_CONFIGURATION 和 SPOT_MIXED。 LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。 SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。 */
-  InstanceAllocationPolicy: string;
+  InstanceAllocationPolicy?: string;
   /** 竞价混合模式下，各计费类型实例的分配策略。仅当 InstanceAllocationPolicy 取 SPOT_MIXED 时才会返回有效值。 */
-  SpotMixedAllocationPolicy: SpotMixedAllocationPolicy;
+  SpotMixedAllocationPolicy?: SpotMixedAllocationPolicy;
   /** 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围： TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。 FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。 */
-  CapacityRebalance: boolean;
+  CapacityRebalance?: boolean;
+  /** 实例名称序号相关设置。 */
+  InstanceNameIndexSettings?: InstanceNameIndexSettings | null;
 }
 
 /** 伸缩组简明信息。 */
@@ -296,6 +298,14 @@ declare interface InstanceChargePrepaid {
   Period: number;
   /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
   RenewFlag?: string;
+}
+
+/** 实例名称序号相关设置。 */
+declare interface InstanceNameIndexSettings {
+  /** 是否开启实例创建序号，默认不开启。取值范围：TRUE：表示开启实例创建序号FALSE：表示不开启实例创建序号 */
+  Enabled?: boolean | null;
+  /** 初始序号，取值范围为 [0, 99999999]。当序号递增后超出取值范围时，扩容活动会失败。首次开启实例名称序号：默认值为 0。非首次开启实例名称序号：若不指定该参数，沿用历史序号。下调初始序号可能会造成伸缩组内实例名称序号重复。 */
+  BeginIndex?: number | null;
 }
 
 /** 云服务器实例名称（InstanceName）的相关设置 */
@@ -859,6 +869,8 @@ declare interface CreateAutoScalingGroupRequest {
   SpotMixedAllocationPolicy?: SpotMixedAllocationPolicy;
   /** 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围： TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。 FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。默认取 FALSE。 */
   CapacityRebalance?: boolean;
+  /** 实例名称序号相关设置。若不指定该参数，则默认不开启。开启后为伸缩组内自动创建的实例名称添加递增的数字序号。 */
+  InstanceNameIndexSettings?: InstanceNameIndexSettings;
 }
 
 declare interface CreateAutoScalingGroupResponse {
@@ -1454,6 +1466,8 @@ declare interface ModifyAutoScalingGroupRequest {
   SpotMixedAllocationPolicy?: SpotMixedAllocationPolicy;
   /** 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围： TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。 FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。 */
   CapacityRebalance?: boolean;
+  /** 实例名称序号相关设置。开启后为伸缩组内自动创建的实例名称添加递增的数字序号。 */
+  InstanceNameIndexSettings?: InstanceNameIndexSettings;
 }
 
 declare interface ModifyAutoScalingGroupResponse {

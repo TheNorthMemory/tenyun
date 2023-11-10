@@ -476,7 +476,7 @@ declare interface DataTransformTaskInfo {
   EtlContent?: string;
 }
 
-/** 动态更新索引配置注意：该功能尚处于内测阶段，如需使用请联系技术支持 */
+/** 动态索引配置，启用后将自动把日志内的字段添加到键值索引字段列表中，包括日志中新增的字段。 */
 declare interface DynamicIndex {
   /** 动态索引配置开关 */
   Status?: boolean | null;
@@ -1006,7 +1006,7 @@ declare interface RuleInfo {
   KeyValue?: RuleKeyValueInfo | null;
   /** 元字段索引配置，如果为空时代表未开启元字段索引 */
   Tag?: RuleTagInfo | null;
-  /** 动态索引配置，如果为空时代表未开启动态段索引注意：该功能尚处于内测阶段，如需使用请联系技术支持 */
+  /** 动态索引配置，为空时代表未开启动态索引。启用后将自动把日志内的字段添加到键值索引字段列表中，包括日志中新增的字段。 */
   DynamicIndex?: DynamicIndex | null;
 }
 
@@ -1921,7 +1921,7 @@ declare interface DeleteTopicResponse {
 }
 
 declare interface DescribeAlarmNoticesRequest {
-  /** name按照【通知渠道组名称】进行过滤。类型：String必选：否 alarmNoticeId按照【通知渠道组ID】进行过滤。类型：String必选：否 uid按照【接收用户ID】进行过滤。类型：String必选：否 groupId按照【接收用户组ID】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** name按照【通知渠道组名称】进行过滤。类型：String必选：否 alarmNoticeId按照【通知渠道组ID】进行过滤。类型：String必选：否 uid按照【接收用户ID】进行过滤。类型：String必选：否 groupId按照【接收用户组ID】进行过滤。类型：String必选：否 deliverFlag按照【投递状态】进行过滤。类型：String必选：否可选值： "1":未启用, "2": 已启用, "3":投递异常每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -1931,9 +1931,9 @@ declare interface DescribeAlarmNoticesRequest {
 
 declare interface DescribeAlarmNoticesResponse {
   /** 告警通知模板列表。 */
-  AlarmNotices: AlarmNotice[] | null;
+  AlarmNotices?: AlarmNotice[] | null;
   /** 符合条件的告警通知模板总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
