@@ -628,6 +628,16 @@ declare interface HiveInfo {
   KerberosEnable?: boolean | null;
 }
 
+/** 集群事件日志 */
+declare interface HouseEventsInfo {
+  /** 事件时间 */
+  Time: string[] | null;
+  /** 事件类型 */
+  EventsAction: string[] | null;
+  /** 集群信息 */
+  ClusterInfo: string[] | null;
+}
+
 /** ip端口对信息 */
 declare interface IpPortPair {
   /** ip信息 */
@@ -2760,6 +2770,30 @@ declare interface DescribeDMSTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataEngineEventsRequest {
+  /** 虚拟集群名称 */
+  DataEngineName: string;
+  /** 返回数量，默认为10，最大为100 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+}
+
+declare interface DescribeDataEngineEventsResponse {
+  /** 事件详细信息 */
+  Events: HouseEventsInfo[] | null;
+  /** 分页号 */
+  Page: number | null;
+  /** 分页大小 */
+  Size: number | null;
+  /** 总页数 */
+  TotalPages: number | null;
+  /** 总条数 */
+  TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataEngineImageVersionsRequest {
   /** 引擎类型：SQL、SparkBatch */
   EngineType: string;
@@ -4139,6 +4173,8 @@ declare interface Dlc {
   DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
   /** 获取数据引擎详细信息 {@link DescribeDataEngineRequest} {@link DescribeDataEngineResponse} */
   DescribeDataEngine(data: DescribeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEngineResponse>;
+  /** 查询扩缩容日志 {@link DescribeDataEngineEventsRequest} {@link DescribeDataEngineEventsResponse} */
+  DescribeDataEngineEvents(data: DescribeDataEngineEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEngineEventsResponse>;
   /** 获取独享集群大版本镜像列表 {@link DescribeDataEngineImageVersionsRequest} {@link DescribeDataEngineImageVersionsResponse} */
   DescribeDataEngineImageVersions(data: DescribeDataEngineImageVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEngineImageVersionsResponse>;
   /** 获取PYSPARK镜像列表 {@link DescribeDataEnginePythonSparkImagesRequest} {@link DescribeDataEnginePythonSparkImagesResponse} */

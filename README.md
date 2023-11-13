@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，10707+ 服务数</summary>
+<details><summary>共计 241+ 款产品，10710+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -178,7 +178,7 @@ dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/pro
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(119) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(120) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(72) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(33) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -207,6 +207,7 @@ gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 20
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(8) |
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74) |
 habo |  | 2018-12-03(2) |
+hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(1) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
 iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(35) | 2018-03-01(33) |
@@ -316,7 +317,7 @@ tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 20
 tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(7) |
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/1604) | 2022-07-26(1) |
-trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(19) |
+trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(20) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(52) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(40) |

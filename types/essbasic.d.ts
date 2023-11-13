@@ -189,7 +189,7 @@ declare interface ChannelRole {
   /** 角色名 */
   RoleName?: string | null;
   /** 角色状态：1-启用；2-禁用 */
-  RoleStatus?: number | null;
+  RoleStatus?: number;
   /** 权限树 */
   PermissionGroups?: PermissionGroup[] | null;
 }
@@ -338,11 +338,11 @@ declare interface DownloadFlowInfo {
 
 /** 扩展服务开通和授权的详细信息 */
 declare interface ExtentServiceAuthInfo {
-  /** 扩展服务类型 AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制 */
+  /** 扩展服务类型AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制 */
   Type?: string;
   /** 扩展服务名称 */
   Name?: string;
-  /** 扩展服务的开通状态： ENABLE：开通 DISABLE：未开通 */
+  /** 扩展服务的开通状态**ENABLE**：开通 **DISABLE**：未开通 */
   Status?: string;
   /** 操作扩展服务的操作人第三方应用平台的用户openid */
   OperatorOpenId?: string | null;
@@ -1239,9 +1239,9 @@ declare interface ChannelCreateEmbedWebUrlResponse {
 }
 
 declare interface ChannelCreateFlowApproversRequest {
-  /** 渠道应用相关信息 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 合同唯一编号 */
+  /** 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
   /** 补充企业签署人信息。- 如果发起方指定的补充签署人是企业签署人，则需要提供企业名称或者企业OpenId；- 如果不指定，则使用姓名和手机号进行补充。 */
   Approvers: FillApproverInfo[];
@@ -1465,7 +1465,7 @@ declare interface ChannelCreateOrganizationBatchSignUrlResponse {
 }
 
 declare interface ChannelCreateOrganizationModifyQrCodeRequest {
-  /** 应用相关信息。 此接口Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
 }
 
@@ -1573,7 +1573,7 @@ declare interface ChannelCreateReleaseFlowResponse {
 declare interface ChannelCreateRoleRequest {
   /** 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。 */
   Name: string;
-  /** 代理企业和员工的信息。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
   /** 角色描述，最大长度为50个字符 */
   Description?: string;
@@ -1707,7 +1707,7 @@ declare interface ChannelCreateWebThemeConfigResponse {
 }
 
 declare interface ChannelDeleteRoleRequest {
-  /** 代理企业和员工的信息。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
   /** 角色id，最多20个 */
   RoleIds: string[];
@@ -1845,7 +1845,7 @@ declare interface ChannelDescribeOrganizationSealsResponse {
 }
 
 declare interface ChannelDescribeRolesRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
   /** 指定每页多少条数据，单页最大200 */
   Limit: string;
@@ -4119,7 +4119,7 @@ declare interface Essbasic {
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
-  /** [废弃]查询计费消耗情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
+  /** @deprecated [废弃]查询计费消耗情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;

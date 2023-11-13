@@ -146,7 +146,7 @@ declare interface AssetViewPortRisk {
   Suggestion?: number;
   /** 状态，0未处理、1已处置、2已忽略 */
   Status?: number;
-  /** 资产唯一id */
+  /** 风险ID */
   Id?: string;
   /** 前端索引 */
   Index?: string;
@@ -160,7 +160,7 @@ declare interface AssetViewPortRisk {
   Nick?: string | null;
   /** 用户uin */
   Uin?: string | null;
-  /** 来源 */
+  /** 识别来源，详细看枚举返回。 */
   From?: string;
 }
 

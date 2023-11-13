@@ -111,6 +111,7 @@ import Gpm, { Versions as GpmVersions } from "./gpm";
 import Gs, { Versions as GsVersions } from "./gs";
 import Gse, { Versions as GseVersions } from "./gse";
 import Habo, { Versions as HaboVersions } from "./habo";
+import Hai, { Versions as HaiVersions } from "./hai";
 import Hasim, { Versions as HasimVersions } from "./hasim";
 import Hcm, { Versions as HcmVersions } from "./hcm";
 import Iai, { Versions as IaiVersions } from "./iai";
@@ -355,6 +356,7 @@ export declare type SERVICE_VERSIONS = {
   gs: GsVersions,
   gse: GseVersions,
   habo: HaboVersions,
+  hai: HaiVersions,
   hasim: HasimVersions,
   hcm: HcmVersions,
   iai: IaiVersions,
@@ -721,6 +723,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   /** {@link Gse 游戏服务器伸缩} */
   gse: Gse,
   habo: Habo,
+  /** {@link Hai 高性能应用服务} */
+  hai: Hai,
   /** {@link Hasim 高可用物联网卡} */
   hasim: Hasim,
   /** {@link Hcm 数学作业批改} */

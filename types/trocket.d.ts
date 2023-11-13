@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 消费组信息 */
+declare interface ConsumeGroupItem {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 是否开启消费 */
+  ConsumeEnable?: boolean;
+  /** 顺序投递：true并发投递：false */
+  ConsumeMessageOrderly?: boolean;
+  /** 最大重试次数 */
+  MaxRetryTimes?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
 /** 接入点信息 */
 declare interface Endpoint {
   /** 接入点类型，VPC，PUBLIC 公网 */
@@ -312,6 +328,28 @@ declare interface DeleteTopicResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConsumerGroupListRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 查询起始位置 */
+  Offset: number;
+  /** 查询结果限制数量 */
+  Limit: number;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 查询指定主题下的消费组 */
+  FromTopic?: string;
+}
+
+declare interface DescribeConsumerGroupListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 消费组列表 */
+  Data?: ConsumeGroupItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConsumerGroupRequest {
   /** 实例ID */
   InstanceId: string;
@@ -599,6 +637,8 @@ declare interface Trocket {
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 查询消费组详情 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
+  /** 查询消费组列表 {@link DescribeConsumerGroupListRequest} {@link DescribeConsumerGroupListResponse} */
+  DescribeConsumerGroupList(data: DescribeConsumerGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupListResponse>;
   /** 查询实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
