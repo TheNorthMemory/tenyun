@@ -3933,7 +3933,7 @@ declare interface ModifyCdbProxyParamResponse {
 declare interface ModifyDBInstanceLogToCLSRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 日志类型：errorLog/slowLog */
+  /** 日志类型：error/slowLog */
   LogType: string;
   /** 投递状态：ON/OFF */
   Status: string;

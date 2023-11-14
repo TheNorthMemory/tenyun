@@ -3404,6 +3404,36 @@ declare interface ScriptRequestInfo {
   FileExtensionType?: string | null;
 }
 
+/** 表字段信息 */
+declare interface SearchColumnDocVO {
+  /** 字段名称 */
+  Name?: string | null;
+  /** 字段中文名称 */
+  ChineseName?: string | null;
+  /** 字段类型 */
+  Type?: string | null;
+  /** 字段类型长度 */
+  Length?: number | null;
+  /** 字段类型精度 */
+  Precision?: number | null;
+  /** 字段类型scale */
+  Scale?: number | null;
+  /** 字段默认值 */
+  DefaultValue?: string | null;
+  /** 字段描述 */
+  Description?: string | null;
+  /** 字段的顺序 */
+  Position?: number | null;
+  /** 是否为分区字段 */
+  IsPartition?: boolean | null;
+  /** 列上的索引类型 主键: PRI,唯一索引: UNI,一般索引: MUL */
+  ColumnKey?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  ModifiedTime?: string | null;
+}
+
 /** 查询实例条件 */
 declare interface SearchCondition {
   /** 查询框架，必选 */
@@ -3658,6 +3688,18 @@ declare interface TableConfig {
   FieldConfig?: FieldConfig[] | null;
 }
 
+/** 过去七天（不算当天）表的热度值 */
+declare interface TableHeat {
+  /** 表ID */
+  TableId: string | null;
+  /** 统计日期 */
+  DayTime: string | null;
+  /** 表热度 */
+  Heat: number | null;
+  /** 表热度最大值 */
+  MaxHeat: number | null;
+}
+
 /** 元数据表详细信息 */
 declare interface TableInfo {
   /** 表Id */
@@ -3710,6 +3752,124 @@ declare interface TableLineageInfo {
   ModifyTime?: string | null;
   /** 修改血缘的任务id列表 */
   Tasks?: string[] | null;
+}
+
+/** 表的元数据信息 */
+declare interface TableMeta {
+  /** 表的全局唯一ID */
+  TableId: string | null;
+  /** 表名称 */
+  TableName: string | null;
+  /** 责任人 */
+  TableOwnerName: string | null;
+  /** 数据源全局唯一ID */
+  DatasourceId: number | null;
+  /** 所属集群名称 */
+  ClusterName: string | null;
+  /** 数据源名 */
+  DatasourceName: string | null;
+  /** 数据库名 */
+  DatabaseName: string | null;
+  /** 表路径 */
+  TablePath: string | null;
+  /** 表中文名 */
+  TableNameCn: string | null;
+  /** 元数据租户ID */
+  MetastoreId: number | null;
+  /** 技术类型，可用值:HIVE,MYSQL,KAFKA, HBASE */
+  MetastoreType: string | null;
+  /** 表描述 */
+  Description: string | null;
+  /** 列分隔符 */
+  ColumnSeparator: string | null;
+  /** 存储格式 */
+  StorageFormat: string | null;
+  /** 存储量，字节数 */
+  StorageSize: number | null;
+  /** 表类型，如hive MANAGED_TABLE;EXTERNAL_TABLE */
+  TableType: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 最近数据变更时间 */
+  ModifyTime: string | null;
+  /** 最近DDL变更时间 */
+  DdlModifyTime: string | null;
+  /** 数据最后访问时间 */
+  LastAccessTime: string | null;
+  /** 所属项目英文名 */
+  ProjectName: string | null;
+  /** 所属数据目录id（可能多个） */
+  BizCatalogIds: string[] | null;
+  /** 所属数据目录（可能多个） */
+  BizCatalogNames: string[] | null;
+  /** true已收藏/false表示未收藏状态 */
+  HasFavorite: boolean | null;
+  /** 生命周期 */
+  LifeCycleTime: number | null;
+  /** 存储量，已转为适合的单位展示 */
+  StorageSizeWithUnit: string | null;
+  /** 数据源引擎的实例ID：如EMR集群实例ID/数据源实例ID */
+  InstanceId: string | null;
+  /** 数据来源技术类型：HIVE/MYSQL/HBASE/KAFKA等 */
+  TechnologyType: string | null;
+  /** 表英文名 */
+  TableNameEn: string | null;
+  /** 项目Id */
+  ProjectId: string | null;
+  /** Kafka Topic 分区数 */
+  Partitions: string | null;
+  /** Kafka Topic 副本数 */
+  ReplicationFactor: string | null;
+  /** 所属项目英中文名 */
+  ProjectDisplayName: string | null;
+  /** 数据最后修改时间 */
+  DataModifyTime: string | null;
+  /** 集群ID */
+  ClusterId: string | null;
+  /** 当前用户是否有管理员权限 */
+  HasAdminAuthority: boolean | null;
+  /** 数据源展示名称 */
+  DatasourceDisplayName: string | null;
+  /** 数据库ID */
+  DatabaseId: string | null;
+  /** 租户下对表的收藏总次数 */
+  FavoriteCount: number | null;
+  /** 租户下对表的点赞总次数 */
+  LikeCount: number | null;
+  /** true已点赞/false表示未点赞状态 */
+  HasLike: boolean | null;
+  /** 表的资产评分 */
+  TablePropertyScore: TablePropertyScore | null;
+  /** 表的热度值 */
+  TableHeat: TableHeat | null;
+  /** 数据源ownerProjectId */
+  OwnerProjectId: string | null;
+  /** 表负责人ID */
+  TableOwnerId: string | null;
+  /** 系统源-CLUSTER, DB-自定义源 */
+  DataSourceCategory?: string | null;
+  /** 表字段信息 */
+  Columns?: SearchColumnDocVO[] | null;
+}
+
+/** 按天更新的表的资产评分 */
+declare interface TablePropertyScore {
+  /** 表ID */
+  TableId: string;
+  /** 统计日期 */
+  DayTime: string;
+  /** 表完整性评分 */
+  Integrity: number;
+  /** 表保障性评分 */
+  Safety: number;
+  /** 表及时性评分 */
+  Timeliness: number;
+  /** 表稳定性评分 */
+  Stability: number;
+  /** 表规范性评分 */
+  Normative: number;
+  /** 资产评分平均分 */
+  Average: number;
 }
 
 /** 表质量详情 */
@@ -9016,6 +9176,26 @@ declare interface DescribeTableLineageResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTableMetasRequest {
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤字段 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderField[];
+}
+
+declare interface DescribeTableMetasResponse {
+  /** 表元数据 */
+  TableMetas: TableMeta[] | null;
+  /** 总条数 */
+  TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTableQualityDetailsRequest {
   /** 统计日期 */
   StatisticsDate: number;
@@ -11894,6 +12074,8 @@ declare interface Wedata {
   DescribeTableInfoList(data: DescribeTableInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableInfoListResponse>;
   /** 列出表血缘信息 {@link DescribeTableLineageRequest} {@link DescribeTableLineageResponse} */
   DescribeTableLineage(data: DescribeTableLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableLineageResponse>;
+  /** 获取表元数据list {@link DescribeTableMetasRequest} {@link DescribeTableMetasResponse} */
+  DescribeTableMetas(data?: DescribeTableMetasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableMetasResponse>;
   /** 查询表质量详情 {@link DescribeTableQualityDetailsRequest} {@link DescribeTableQualityDetailsResponse} */
   DescribeTableQualityDetails(data: DescribeTableQualityDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableQualityDetailsResponse>;
   /** 获取表schema信息 {@link DescribeTableSchemaInfoRequest} {@link DescribeTableSchemaInfoResponse} */

@@ -2428,6 +2428,28 @@ declare interface DescribeBinlogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterDatabasesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 分页限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeClusterDatabasesResponse {
+  /** 总条数 */
+  TotalCount: number;
+  /** 分页偏移 */
+  Offset: number;
+  /** 数据库列表 */
+  Databases: string[];
+  /** 分页限制数 */
+  Limit: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterDetailDatabasesRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4197,6 +4219,8 @@ declare interface Cynosdb {
   DescribeBinlogSaveDays(data: DescribeBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogSaveDaysResponse>;
   /** 查询Binlog列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
+  /** 获取database列表 {@link DescribeClusterDatabasesRequest} {@link DescribeClusterDatabasesResponse} */
+  DescribeClusterDatabases(data: DescribeClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDatabasesResponse>;
   /** 集群信息描述 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 查询数据库列表 {@link DescribeClusterDetailDatabasesRequest} {@link DescribeClusterDetailDatabasesResponse} */

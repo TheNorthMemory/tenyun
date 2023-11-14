@@ -602,6 +602,8 @@ declare interface ProxyInfo {
   InBanBlacklist?: number | null;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
   FeatureBitmap?: number | null;
+  /** 是否是开启了auto scale的通道，0表示否，1表示是。 */
+  IsAutoScaleProxy?: number | null;
 }
 
 /** 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息 */

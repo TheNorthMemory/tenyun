@@ -1253,7 +1253,7 @@ declare interface CreateBatchSignUrlResponse {
 }
 
 declare interface CreateConvertTaskApiRequest {
-  /** 需要进行转换的资源文件类型支持的文件类型如下：docdocxxlsxlsxjpgjpegpngbmptxt */
+  /** 需要进行转换的资源文件类型支持的文件类型如下：docdocxxlsxlsxjpgjpegpnghtmlbmptxt */
   ResourceType: string;
   /** 需要进行转换操作的文件资源名称，带资源后缀名。注: `资源名称长度限制为256个字符` */
   ResourceName: string;

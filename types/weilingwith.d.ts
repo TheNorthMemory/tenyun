@@ -2,6 +2,64 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 应用描述 */
+declare interface ApplicationInfo {
+  /** 应用分配的appId */
+  ApplicationId?: string | null;
+  /** 应用中文名 */
+  Name?: string | null;
+  /** 应用地址 */
+  Address?: string | null;
+  /** 应用logo */
+  ApplicationLogo?: ApplicationLogo | null;
+  /** 应用类型，0:saas应用 1:平台应用 */
+  Type?: number | null;
+  /** engine */
+  EnglishName?: string | null;
+  /** 能源管理应用 */
+  Description?: string | null;
+}
+
+/** 应用列表 */
+declare interface ApplicationList {
+  /** 应用列表 */
+  ApplicationInfoList?: ApplicationInfo[] | null;
+  /** 当前查询条件命中的数据总条数 */
+  TotalCount?: string | null;
+}
+
+/** 应用logo */
+declare interface ApplicationLogo {
+  /** logo图片对应的fileId */
+  FileId?: string | null;
+  /** logo图片地址 */
+  Url?: string | null;
+}
+
+/** 设备影子信息 */
+declare interface DeviceShadowInfo {
+  /** 设备ID */
+  WID?: string | null;
+  /** 设备影子数据,返回有效数据为"x-json:"后字段 */
+  DeviceShadow?: string | null;
+  /** 设备影子更新时间 */
+  DeviceShadowUpdateTime?: string | null;
+}
+
+/** 设备影子查询列表 */
+declare interface DeviceShadowRes {
+  /** 第几页 */
+  PageNumber?: number | null;
+  /** 每页条数 */
+  PageSize?: number | null;
+  /** 总页数 */
+  TotalPage?: number | null;
+  /** 总条数 */
+  TotalRow?: number | null;
+  /** 设备影子列表 */
+  Set?: DeviceShadowInfo[] | null;
+}
+
 /** 部门用户 */
 declare interface SsoDepartment {
   /** 部门ID */
@@ -26,7 +84,7 @@ declare interface SsoTeamUser {
   UserId?: string | null;
   /** 用户名称 */
   RealName?: string | null;
-  /** 用户类型 */
+  /** 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户 */
   UserType?: string | null;
   /** 所属租户ID */
   TenantId?: string | null;
@@ -62,7 +120,7 @@ declare interface SsoUser {
   UserName?: string | null;
   /** 用户名称 */
   RealName?: string | null;
-  /** 用户类型 */
+  /** 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户 */
   UserType?: string | null;
   /** 所属租户ID */
   TenantId?: string | null;
@@ -72,17 +130,17 @@ declare interface SsoUser {
   Email?: string | null;
   /** 电话 */
   Phone?: string | null;
-  /** 用户状态 */
+  /** 用户状态，0待审核，1正常启用，2禁用 */
   Status?: number | null;
   /** 创建时间 */
   CreateAt?: number | null;
   /** 更新时间 */
   UpdateAt?: number | null;
-  /** 是否属于团队 */
+  /** 是否属于团队，0不可用，1属于，2不属 */
   BelongTeam?: number | null;
-  /** ID */
+  /** 部门ID */
   DepartmentId?: string | null;
-  /** 名称 */
+  /** 部门名称 */
   DepartmentName?: string | null;
   /** 子账户ID */
   DepartmentUserId?: number | null;
@@ -211,9 +269,21 @@ declare interface DescribeAlarmTypeListResponse {
 }
 
 declare interface DescribeApplicationListRequest {
+  /** 项目空间id，本次查询返回的应用均关联至该空间 */
+  WorkspaceId: number;
+  /** 应用token */
+  ApplicationToken: string;
+  /** 应用id数组，可选，填了则表示根据id批量查询 */
+  ApplicationId?: number[];
+  /** 请求页号 */
+  PageNumber?: number;
+  /** 页容量，默认为10 */
+  PageSize?: number;
 }
 
 declare interface DescribeApplicationListResponse {
+  /** 应用列表 */
+  Result?: ApplicationList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -267,9 +337,29 @@ declare interface DescribeDeviceListResponse {
 }
 
 declare interface DescribeDeviceShadowListRequest {
+  /** 工作空间id */
+  WorkspaceId: number;
+  /** WID */
+  WIDSet: string[];
+  /** 分页查询，第几页 */
+  PageNumber: number;
+  /** 每页条数 */
+  PageSize: number;
+  /** 应用token */
+  ApplicationToken: string;
+  /** 设备类型code */
+  DeviceTypeSet?: string[];
+  /** 产品 pid */
+  ProductIdSet?: number[];
+  /** 空间层级，（支持空间多层，比如具体建筑、具体楼层） */
+  SpaceCodeSet?: string[];
+  /** 设备标签名 */
+  DeviceTagSet?: string[];
 }
 
 declare interface DescribeDeviceShadowListResponse {
+  /** 获取设备影子结果 */
+  Result?: DeviceShadowRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -531,6 +621,24 @@ declare interface DescribeVideoLiveStreamResponse {
 }
 
 declare interface DescribeVideoRecordStreamRequest {
+  /** 设备唯一标识 */
+  WID: string;
+  /** 枚举如下：flvshrtmphlswebrtcraw (视频原始帧) */
+  Protocol: string;
+  /** 开始时间（精确到毫秒） */
+  StartTime: number;
+  /** 结束时间（精确到毫秒） */
+  EndTime: number;
+  /** 倍速 0.5、1、2、4 */
+  PlayBackRate: number;
+  /** 工作空间id */
+  WorkspaceId: number;
+  /** 应用token */
+  ApplicationToken: string;
+  /** 流的唯一标识，播放链接尾缀 */
+  Stream?: string;
+  /** 公有云私有化项目传0或者不传；混合云项目一般传空间id */
+  Env?: string;
 }
 
 declare interface DescribeVideoRecordStreamResponse {
@@ -640,7 +748,7 @@ declare interface Weilingwith {
   /** 告警类型获取 {@link DescribeAlarmTypeListRequest} {@link DescribeAlarmTypeListResponse} */
   DescribeAlarmTypeList(data?: DescribeAlarmTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmTypeListResponse>;
   /** 查询应用列表 {@link DescribeApplicationListRequest} {@link DescribeApplicationListResponse} */
-  DescribeApplicationList(data?: DescribeApplicationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationListResponse>;
+  DescribeApplicationList(data: DescribeApplicationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationListResponse>;
   /** 查询建筑列表 {@link DescribeBuildingListRequest} {@link DescribeBuildingListResponse} */
   DescribeBuildingList(data?: DescribeBuildingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildingListResponse>;
   /** 查询建筑三维模型 {@link DescribeBuildingModelRequest} {@link DescribeBuildingModelResponse} */
@@ -654,7 +762,7 @@ declare interface Weilingwith {
   /** 设备列表查询 {@link DescribeDeviceListRequest} {@link DescribeDeviceListResponse} */
   DescribeDeviceList(data?: DescribeDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceListResponse>;
   /** 获取设备影子数据 {@link DescribeDeviceShadowListRequest} {@link DescribeDeviceShadowListResponse} */
-  DescribeDeviceShadowList(data?: DescribeDeviceShadowListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceShadowListResponse>;
+  DescribeDeviceShadowList(data: DescribeDeviceShadowListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceShadowListResponse>;
   /** 设备状态获取 {@link DescribeDeviceStatusListRequest} {@link DescribeDeviceStatusListResponse} */
   DescribeDeviceStatusList(data?: DescribeDeviceStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceStatusListResponse>;
   /** 设备状态统计 {@link DescribeDeviceStatusStatRequest} {@link DescribeDeviceStatusStatResponse} */
@@ -710,7 +818,7 @@ declare interface Weilingwith {
   /** 实时流接口 {@link DescribeVideoLiveStreamRequest} {@link DescribeVideoLiveStreamResponse} */
   DescribeVideoLiveStream(data?: DescribeVideoLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoLiveStreamResponse>;
   /** 历史流接口 {@link DescribeVideoRecordStreamRequest} {@link DescribeVideoRecordStreamResponse} */
-  DescribeVideoRecordStream(data?: DescribeVideoRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoRecordStreamResponse>;
+  DescribeVideoRecordStream(data: DescribeVideoRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoRecordStreamResponse>;
   /** 查询项目空间楼栋数量与建筑面积 {@link DescribeWorkSpaceBuildingCountAndAreaRequest} {@link DescribeWorkSpaceBuildingCountAndAreaResponse} */
   DescribeWorkSpaceBuildingCountAndArea(data?: DescribeWorkSpaceBuildingCountAndAreaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpaceBuildingCountAndAreaResponse>;
   /** 获取租户下的空间列表 {@link DescribeWorkspaceListRequest} {@link DescribeWorkspaceListResponse} */

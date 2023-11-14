@@ -1145,7 +1145,7 @@ declare interface CreateAccountRequest {
 
 declare interface CreateAccountResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2705,7 +2705,7 @@ declare interface ModifyAccountPrivilegeRequest {
 
 declare interface ModifyAccountPrivilegeResponse {
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2751,7 +2751,7 @@ declare interface ModifyBackupNameRequest {
   InstanceId: string;
   /** 修改的备份名称 */
   BackupName: string;
-  /** 要修改名称的备份ID，可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943) 接口获取。 */
+  /** 备份ID 可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943) 接口获取。当GroupId为空时，BackupId必填。 */
   BackupId?: number;
   /** 备份任务组ID，在单库备份文件模式下，可通过[DescribeBackups](https://cloud.tencent.com/document/product/238/19943) 接口获得。 BackupId 和 GroupId 同时存在，按照BackupId进行修改。 */
   GroupId?: string;
@@ -2771,11 +2771,11 @@ declare interface ModifyBackupStrategyRequest {
   BackupTime?: number;
   /** BackupType取值为daily时，表示备份间隔天数。当前取值只能为1 */
   BackupDay?: number;
-  /** 备份模式，master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。 */
+  /** 备份模式（必填），master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。 */
   BackupModel?: string;
   /** BackupType取值为weekly时，表示每周的星期N做备份。（如果数据备份保留时间=7天，则备份周期取值至少是一周的任意2天） */
   BackupCycle?: number[];
-  /** 数据(日志)备份保留时间，取值[3-1830]天，默认7天 */
+  /** 数据(日志)备份保留天数（必填），取值[3-1830]天，默认7天 */
   BackupSaveDays?: number;
   /** 定期备份状态 enable-开启，disable-关闭，默认关闭 */
   RegularBackupEnable?: string;
@@ -3145,11 +3145,11 @@ declare interface RecycleReadOnlyGroupResponse {
 declare interface RemoveBackupsRequest {
   /** 实例ID，形如mssql-j8kv137v */
   InstanceId: string;
-  /** 待删除的备份名称，备份名称可通过DescribeBackups接口的FileName字段获得。单次请求批量删除备份数不能超过10个。 */
+  /** 待删除的备份名称，备份名称可通过DescribeBackups接口的FileName字段获得，单次请求批量删除备份数不能超过10个。当StartTime、EndTime为空时，此字段必填。 */
   BackupNames?: string[];
-  /** 批量删除手动备份起始时间 */
+  /** 批量删除手动备份起始时间。当BackupNames为空时，此字段必填。 */
   StartTime?: string;
-  /** 批量删除手动备份截止时间 */
+  /** 批量删除手动备份截止时间。当BackupNames为空时，此字段必填。 */
   EndTime?: string;
 }
 
@@ -3209,7 +3209,7 @@ declare interface RestartDBInstanceRequest {
 
 declare interface RestartDBInstanceResponse {
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

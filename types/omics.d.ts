@@ -45,9 +45,13 @@ declare interface CacheInfo {
 /** 计算集群配置。 */
 declare interface ClusterOption {
   /** 计算集群可用区。 */
-  Zone: string | null;
+  Zone: string;
   /** 计算集群类型，取值范围：- KUBERNETES */
-  Type: string | null;
+  Type: string;
+  /** 资源配额。 */
+  ResourceQuota?: ResourceQuota;
+  /** 限制范围。 */
+  LimitRange?: LimitRange;
 }
 
 /** 数据库配置。 */
@@ -85,15 +89,17 @@ declare interface Environment {
 /** 环境配置。 */
 declare interface EnvironmentConfig {
   /** 私有网络配置。 */
-  VPCOption: VPCOption | null;
+  VPCOption: VPCOption;
   /** 计算集群配置。 */
-  ClusterOption: ClusterOption | null;
+  ClusterOption: ClusterOption;
   /** 数据库配置。 */
-  DatabaseOption: DatabaseOption | null;
+  DatabaseOption: DatabaseOption;
   /** 存储配置。 */
-  StorageOption: StorageOption | null;
+  StorageOption: StorageOption;
   /** 云服务器配置。 */
-  CVMOption: CVMOption | null;
+  CVMOption: CVMOption;
+  /** 安全组配置。 */
+  SecurityGroupOption?: SecurityGroupOption;
 }
 
 /** 执行时间。 */
@@ -128,6 +134,14 @@ declare interface GitInfo {
   Tag?: string;
 }
 
+/** 资源限制范围。 */
+declare interface LimitRange {
+  /** 最大CPU设置 */
+  MaxCPU?: string | null;
+  /** 最大内存设置（单位：Mi，Gi，Ti，M，G，T） */
+  MaxMemory?: string | null;
+}
+
 /** Nextflow选项。 */
 declare interface NFOption {
   /** Config。 */
@@ -158,6 +172,16 @@ declare interface ResourceIds {
   CVMId?: string | null;
   /** 弹性容器集群ID。 */
   EKSId?: string | null;
+}
+
+/** 资源配额。 */
+declare interface ResourceQuota {
+  /** CPU Limit设置。 */
+  CPULimit?: string | null;
+  /** 内存Limit设置（单位：Mi，Gi，Ti，M，G，T） */
+  MemoryLimit?: string | null;
+  /** Pods数量设置 */
+  Pods?: string | null;
 }
 
 /** 任务。 */
@@ -318,6 +342,12 @@ declare interface RunStatusCount {
   Count?: number;
 }
 
+/** 安全组配置。 */
+declare interface SecurityGroupOption {
+  /** 安全组ID。 */
+  SecurityGroupId: string;
+}
+
 /** 文件存储配置。 */
 declare interface StorageOption {
   /** 文件存储类型，取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
@@ -364,12 +394,16 @@ declare interface TableRow {
 
 /** 私有网络配置。 */
 declare interface VPCOption {
+  /** 私有网络ID（VPCId和VPCCIDRBlock必选其一。若使用VPCId，则使用现用私有网络；若使用VPCCIDRBlock，则创建新的私有网络） */
+  VPCId?: string;
+  /** 子网ID（SubnetId和SubnetZone&SubnetCIDRBlock必选其一。若使用SubnetId，则使用现用子网；若使用SubnetZone&SubnetCIDRBlock，则创建新的子网） */
+  SubnetId?: string;
   /** 子网可用区。 */
-  SubnetZone: string | null;
+  SubnetZone?: string;
   /** 私有网络CIDR。 */
-  VPCCIDRBlock: string | null;
+  VPCCIDRBlock?: string;
   /** 子网CIDR。 */
-  SubnetCIDRBlock: string | null;
+  SubnetCIDRBlock?: string;
 }
 
 declare interface CreateEnvironmentRequest {
@@ -379,6 +413,8 @@ declare interface CreateEnvironmentRequest {
   Config: EnvironmentConfig;
   /** 环境描述。 */
   Description?: string;
+  /** 是否为默认环境。 */
+  IsDefault?: boolean;
 }
 
 declare interface CreateEnvironmentResponse {

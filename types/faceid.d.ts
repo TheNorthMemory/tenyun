@@ -2,6 +2,12 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 疑似攻击风险详情 */
+declare interface AttackRiskDetail {
+  /** 疑似的攻击痕迹类型SuspectedSpoofingAttack：翻拍攻击SuspectedSynthesisImage：疑似合成图片SuspectedSynthesisVideo：疑似合成视频SuspectedeAnomalyAttack：人脸特征疑似非真人SuspectedAdversarialAttack：疑似对抗样本攻击SuspectedBlackIndustry：疑似黑产攻击SuspectedWatermark：疑似存在水印 */
+  Type?: string | null;
+}
+
 /** 计费详情 */
 declare interface ChargeDetail {
   /** 一比一时间时间戳，13位。 */
@@ -464,6 +470,22 @@ declare interface CheckPhoneAndNameResponse {
   RequestId?: string;
 }
 
+declare interface DetectAIFakeFacesRequest {
+  /** 传入需要进行检测的带有人脸的图片或视频，使用base64编码的形式。图片的Base64值：建议整体图像480x640的分辨率，脸部 大小 100X100 以上；Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。视频的Base64值：Base64编码后的大小不超过8M，支持mp4、avi、flv格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
+  FaceInput: string;
+  /** 传入的类型1- 传入的是图片类型2- 传入的是视频类型其他 - 返回错误码InvalidParameter */
+  FaceInputType: number;
+}
+
+declare interface DetectAIFakeFacesResponse {
+  /** 检测到的图片是否存在攻击：Low：无攻击风险Mid：中度疑似攻击High：高度疑似攻击 */
+  AttackRiskLevel?: string;
+  /** 检测到疑似的攻击痕迹列表说明：未检测到攻击痕迹时，返回空数组此出参仅作为结果判断的参考，实际应用仍建议使用AttackRiskLevel的结果。 */
+  AttackRiskDetailList?: AttackRiskDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DetectAuthRequest {
   /** 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行咨询。 */
   RuleId: string;
@@ -551,6 +573,8 @@ declare interface GetDetectInfoEnhancedRequest {
   IsEncrypt?: boolean;
   /** 是否需要对返回中的敏感信息进行加密。仅指定加密算法Algorithm即可，其余字段传入默认值。其中敏感信息包括：Response.Text.IdCard、Response.Text.Name、Response.Text.OcrIdCard、Response.Text.OcrName */
   Encryption?: Encryption;
+  /** 是否对回包整体进行加密 */
+  IsEncryptResponse?: boolean;
 }
 
 declare interface GetDetectInfoEnhancedResponse {
@@ -570,6 +594,8 @@ declare interface GetDetectInfoEnhancedResponse {
   IntentionQuestionResult?: IntentionQuestionResult | null;
   /** 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。 */
   IntentionActionResult?: IntentionActionResult | null;
+  /** 加密后的数据 */
+  EncryptedBody?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1121,6 +1147,8 @@ declare interface Faceid {
   CheckIdNameDate(data: CheckIdNameDateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdNameDateResponse>;
   /** 手机号二要素核验 {@link CheckPhoneAndNameRequest} {@link CheckPhoneAndNameResponse} */
   CheckPhoneAndName(data: CheckPhoneAndNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckPhoneAndNameResponse>;
+  /** AI人脸防护盾 {@link DetectAIFakeFacesRequest} {@link DetectAIFakeFacesResponse} */
+  DetectAIFakeFaces(data: DetectAIFakeFacesRequest, config?: AxiosRequestConfig): AxiosPromise<DetectAIFakeFacesResponse>;
   /** 实名核身鉴权 {@link DetectAuthRequest} {@link DetectAuthResponse} */
   DetectAuth(data: DetectAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DetectAuthResponse>;
   /** 运营商三要素核验（加密） {@link EncryptedPhoneVerificationRequest} {@link EncryptedPhoneVerificationResponse} */

@@ -1649,6 +1649,8 @@ declare interface CreateLivePullStreamTaskRequest {
   VodLocalMode?: number;
   /** 录制模板 ID。 */
   RecordTemplateId?: string;
+  /** 新的目标地址，用于任务同时推两路场景。 */
+  BackupToUrl?: string;
 }
 
 declare interface CreateLivePullStreamTaskResponse {
@@ -3935,6 +3937,8 @@ declare interface ModifyLivePullStreamTaskRequest {
   WatermarkList?: PullPushWatermarkInfo[];
   /** 点播源是否启用本地推流模式，默认0，不启用。0 - 不启用。1 - 启用。注意：启用本地模式后，会将源列表中的 MP4 文件进行本地下载，优先使用本地已下载文件进行推流，提高点播源推流稳定性。使用本地下载文件推流时，会产生增值费用。 */
   VodLocalMode?: number;
+  /** 新的目标地址。传空值，则取消该地址的推流。传入新值，则替换原有地址。 */
+  BackupToUrl?: string;
 }
 
 declare interface ModifyLivePullStreamTaskResponse {

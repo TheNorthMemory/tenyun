@@ -109,7 +109,7 @@ declare interface CreateVRSTaskRequest {
   CallbackUrl?: string;
   /** 模型类型 1:在线 2:离线 默认为1 */
   ModelType?: number;
-  /** 任务类型 0:默认类型 1:轻量级复刻默认为0 */
+  /** 任务类型 0:轻量版复刻默认为0 */
   TaskType?: number;
   /** 校验音频ID */
   VPRAudioId?: string;

@@ -566,6 +566,18 @@ declare interface MachinePrintedInvoice {
   GeneralMachineItems?: GeneralMachineItem[];
 }
 
+/** 港澳台来往内地通行证背面字段信息 */
+declare interface MainlandTravelPermitBackInfos {
+  /** String	证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。 */
+  Type?: string | null;
+  /** 卡证背面的中文姓名 */
+  Name?: string | null;
+  /** 卡证背面的身份证号码 */
+  IDNumber?: string | null;
+  /** 历史通行证号码 */
+  HistoryNumber?: string | null;
+}
+
 /** 医疗票据信息 */
 declare interface MedicalInvoice {
   /** 发票名称 */
@@ -3031,6 +3043,8 @@ declare interface MainlandPermitOCRRequest {
   ImageUrl?: string;
   /** 是否返回头像。默认不返回。 */
   RetProfile?: boolean;
+  /** 图片正反面FRONT：正面、BACK：反面，默认为FRONT */
+  CardSide?: string;
 }
 
 declare interface MainlandPermitOCRResponse {
@@ -3056,6 +3070,8 @@ declare interface MainlandPermitOCRResponse {
   Type?: string;
   /** RetProfile为True时返回头像字段， Base64编码 */
   Profile?: string;
+  /** 背面字段信息 */
+  MainlandTravelPermitBackInfos?: MainlandTravelPermitBackInfos;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
