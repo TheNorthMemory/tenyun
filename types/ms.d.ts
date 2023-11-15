@@ -385,37 +385,43 @@ declare interface PlanDetailInfo {
 /** 加固策略信息 */
 declare interface PlanInfo {
   /** apk大小优化，0关闭，1开启 */
-  ApkSizeOpt: number;
+  ApkSizeOpt?: number;
   /** Dex加固，0关闭，1开启 */
-  Dex: number;
+  Dex?: number;
   /** So加固，0关闭，1开启 */
-  So: number;
+  So?: number;
   /** 数据收集，0关闭，1开启 */
-  Bugly: number;
+  Bugly?: number;
   /** 防止重打包，0关闭，1开启 */
-  AntiRepack: number;
+  AntiRepack?: number;
   /** Dex分离，0关闭，1开启 */
-  SeperateDex: number;
+  SeperateDex?: number;
   /** 内存保护，0关闭，1开启 */
-  Db: number;
+  Db?: number;
   /** Dex签名校验，0关闭，1开启 */
-  DexSig: number;
+  DexSig?: number;
   /** So文件信息 */
-  SoInfo: SoInfo;
+  SoInfo?: SoInfo;
   /** vmp，0关闭，1开启 */
-  AntiVMP: number;
+  AntiVMP?: number;
   /** 保护so的强度， */
-  SoType: string[];
+  SoType?: string[];
   /** 防日志泄漏，0关闭，1开启 */
-  AntiLogLeak: number;
+  AntiLogLeak?: number;
   /** root检测，0关闭，1开启 */
-  AntiQemuRoot: number;
+  AntiQemuRoot?: number;
   /** 资源防篡改，0关闭，1开启 */
-  AntiAssets: number;
+  AntiAssets?: number;
   /** 防止截屏，0关闭，1开启 */
-  AntiScreenshot: number;
+  AntiScreenshot?: number;
   /** SSL证书防窃取，0关闭，1开启 */
-  AntiSSL: number;
+  AntiSSL?: number;
+  /** Dex分离，0关闭，1开启 */
+  SetFile?: string | null;
+  /** Dex签名校验，0关闭，1开启 */
+  FileSign?: string | null;
+  /** root检测，0关闭，1开启 */
+  AntiRoot?: string | null;
 }
 
 /** APK检测服务：广告插件结果结构体 */

@@ -6377,6 +6377,8 @@ declare interface ModifyCustomerGatewayAttributeRequest {
   CustomerGatewayId: string;
   /** 对端网关名称，可任意命名，但不得超过60个字符。 */
   CustomerGatewayName: string;
+  /** BGP ASN。只有开启BGP白名单才可以修改此参数。 */
+  BgpAsn?: number;
 }
 
 declare interface ModifyCustomerGatewayAttributeResponse {

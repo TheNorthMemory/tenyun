@@ -402,6 +402,10 @@ declare interface DataEngineInfo {
   SessionResourceTemplate?: SessionResourceTemplate | null;
   /** 自动授权开关 */
   AutoAuthorization?: boolean | null;
+  /** 引擎版本，支持Native/SuperSQL */
+  EngineGeneration?: string | null;
+  /** 引擎详细类型，支持：SparkSQL/SparkBatch/PrestoSQL/Kyuubi */
+  EngineTypeDetail?: string | null;
 }
 
 /** 数据表数据格式。 */

@@ -120,10 +120,6 @@ declare interface ApiPkg {
   RenewFlag?: number | null;
   /** 计费项 */
   BillingItem?: string | null;
-  /** 1 API安全6折 */
-  APICPWaf?: number | null;
-  /** 1 表示5折折扣2 表示4折折扣 */
-  APINPWaf?: number | null;
   /** api安全7天试用标识。1试用。0没试用 */
   IsAPISecurityTrial?: number | null;
 }
@@ -274,6 +270,48 @@ declare interface CCRuleItem {
   ValidTime: number;
   /** 高级参数 */
   OptionsArr: string | null;
+}
+
+/** CC规则详情 */
+declare interface CCRuleItems {
+  /** 名字 */
+  Name?: string;
+  /** 状态 */
+  Status?: number;
+  /** 模式 */
+  Advance?: number;
+  /** 限制 */
+  Limit?: number;
+  /** 范围 */
+  Interval?: number;
+  /** 网址 */
+  Url?: string;
+  /** 匹配类型 */
+  MatchFunc?: number;
+  /** 动作 */
+  ActionType?: number;
+  /** 优先级 */
+  Priority?: number;
+  /** 有效时间 */
+  ValidTime?: number;
+  /** 版本 */
+  TsVersion?: number;
+  /** 规则详情 */
+  Options?: string;
+  /** 规则ID */
+  RuleId?: number;
+  /** 事件id */
+  EventId?: string | null;
+  /** 关联的Session规则 */
+  SessionApplied?: number[] | null;
+}
+
+/** CC规则总览 */
+declare interface CCRuleLists {
+  /** 总数 */
+  TotalCount: number;
+  /** 规则 */
+  Res: CCRuleItems[] | null;
 }
 
 /** 防篡改url元素 */
@@ -2318,6 +2356,18 @@ declare interface DescribeBatchIpAccessControlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCCAutoStatusRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeCCAutoStatusResponse {
+  /** 配置状态 */
+  AutoCCSwitch?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCCRuleListRequest {
   /** 需要查询的API所属的域名 */
   Domain: string;
@@ -2334,6 +2384,8 @@ declare interface DescribeCCRuleListRequest {
 }
 
 declare interface DescribeCCRuleListResponse {
+  /** 查询到的CC规则的列表 */
+  Data?: CCRuleLists | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3874,18 +3926,6 @@ declare interface ModifyWafAutoDenyRulesResponse {
   RequestId?: string;
 }
 
-declare interface ModifyWafAutoDenyStatusRequest {
-  /** WAF 自动封禁配置项 */
-  WafAutoDenyDetails: AutoDenyDetail;
-}
-
-declare interface ModifyWafAutoDenyStatusResponse {
-  /** WAF 自动封禁配置项 */
-  WafAutoDenyDetails?: AutoDenyDetail;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyWafThreatenIntelligenceRequest {
   /** 配置WAF威胁情报封禁模块详情 */
   WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
@@ -4040,6 +4080,22 @@ declare interface SwitchElasticModeRequest {
 }
 
 declare interface SwitchElasticModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpsertCCAutoStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 状态值 */
+  Value: number;
+  /** 版本：clb-waf, spart-waf */
+  Edition?: string;
+}
+
+declare interface UpsertCCAutoStatusResponse {
+  /** 正常情况为null */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4217,7 +4273,9 @@ declare interface Waf {
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** Waf 多域名ip黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
-  /** @deprecated Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
+  /** Waf 斯巴达版本查询cc自动封堵状态 {@link DescribeCCAutoStatusRequest} {@link DescribeCCAutoStatusResponse} */
+  DescribeCCAutoStatus(data: DescribeCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCAutoStatusResponse>;
+  /** Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
   DescribeCCRule(data: DescribeCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleResponse>;
   /** 查询CC规则 {@link DescribeCCRuleListRequest} {@link DescribeCCRuleListResponse} */
   DescribeCCRuleList(data: DescribeCCRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleListResponse>;
@@ -4383,8 +4441,6 @@ declare interface Waf {
   ModifyUserSignatureRule(data: ModifyUserSignatureRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserSignatureRuleResponse>;
   /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
-  /** 配置WAF自动封禁模块状态 {@link ModifyWafAutoDenyStatusRequest} {@link ModifyWafAutoDenyStatusResponse} */
-  ModifyWafAutoDenyStatus(data: ModifyWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyStatusResponse>;
   /** 配置WAF威胁情报封禁模块详情 {@link ModifyWafThreatenIntelligenceRequest} {@link ModifyWafThreatenIntelligenceResponse} */
   ModifyWafThreatenIntelligence(data?: ModifyWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafThreatenIntelligenceResponse>;
   /** 设置webshell状态 {@link ModifyWebshellStatusRequest} {@link ModifyWebshellStatusResponse} */
@@ -4401,6 +4457,8 @@ declare interface Waf {
   SwitchDomainRules(data?: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
   /** 切换弹性QPS的开关 {@link SwitchElasticModeRequest} {@link SwitchElasticModeResponse} */
   SwitchElasticMode(data: SwitchElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchElasticModeResponse>;
+  /** Waf 斯巴达版本更新cc自动封堵状态 {@link UpsertCCAutoStatusRequest} {@link UpsertCCAutoStatusResponse} */
+  UpsertCCAutoStatus(data: UpsertCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCAutoStatusResponse>;
   /** Waf CC V2 Upsert接口 {@link UpsertCCRuleRequest} {@link UpsertCCRuleResponse} */
   UpsertCCRule(data: UpsertCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCRuleResponse>;
   /** Waf IP黑白名单Upsert接口 {@link UpsertIpAccessControlRequest} {@link UpsertIpAccessControlResponse} */

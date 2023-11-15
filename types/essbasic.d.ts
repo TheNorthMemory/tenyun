@@ -184,15 +184,15 @@ declare interface ChannelBillUsageDetail {
   Remark?: string;
 }
 
-/** 渠道角色信息 */
+/** 角色信息 */
 declare interface ChannelRole {
-  /** 角色id */
+  /** 角色ID,为32位字符串 */
   RoleId?: string | null;
-  /** 角色名 */
+  /** 角色的名称 */
   RoleName?: string | null;
-  /** 角色状态：1-启用；2-禁用 */
+  /** 此角色状态1: 已经启用2: 已经禁用 */
   RoleStatus?: number;
-  /** 权限树 */
+  /** 此角色对应的权限列表 */
   PermissionGroups?: PermissionGroup[] | null;
 }
 
@@ -1047,7 +1047,7 @@ declare interface ChannelBatchCancelFlowsRequest {
   FlowIds: string[];
   /** 撤回原因，长度不能超过200，只能由中文、字母、数字和下划线组成。备注:`如果不传递撤回原因，那么默认撤回原因是 "自动撤销（通过接口实现）"` */
   CancelMessage?: string;
-  /** 撤销理由自定义格式, 会展示在合同预览的界面中, 可以选择下面的组合方式：**0** : 默认格式, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同**1** : 合同封面页面会展示为: 发起方以**CancelMessage**的理由撤销当前合同**2** : 保留企业名称, 合同封面页面会展示为: 发起方-企业名称以**CancelMessage**的理由撤销当前合同**3** : 保留企业名称+经办人名字, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同注: `CancelMessage为撤销当前合同的理由`![image](https://dyn.ess.tencent.cn/guide/capi/channel_ChannelCancelFlow.png) */
+  /** 撤销理由自定义格式, 会展示在合同预览的界面中, 可以选择下面的组合方式：**0** : 默认格式, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同**1** : 合同封面页面会展示为: 发起方以**CancelMessage**的理由撤销当前合同**2** : 保留企业名称, 合同封面页面会展示为: 发起方-企业名称以**CancelMessage**的理由撤销当前合同**3** : 保留企业名称+经办人名字, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同注: `CancelMessage为撤销当前合同的理由`![image](https://qcloudimg.tencent-cloud.cn/raw/f16cf37dbb3a09d6569877f093b92204/channel_ChannelCancelFlow.png) */
   CancelMessageFormat?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1139,7 +1139,7 @@ declare interface ChannelCreateBatchQuickSignUrlRequest {
   JumpUrl?: string;
   /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。 */
   SignatureTypes?: number[];
-  /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸认证您可以传递多种值，表示可用多种认证校验方式。 */
+  /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**2**：密码认证(默认)，需校验成功后才能签署合同**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸和密码认证您可以传递多种值，表示可用多种认证校验方式。 */
   ApproverSignTypes?: number[];
 }
 
@@ -2071,7 +2071,7 @@ declare interface CreateConsoleLoginUrlResponse {
 }
 
 declare interface CreateFlowsByTemplatesRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId */
   Agent: Agent;
   /** 要创建的合同信息列表，最多支持一次创建20个合同 */
   FlowInfos: FlowInfo[];
@@ -2275,7 +2275,7 @@ declare interface DescribeTemplatesRequest {
   Agent: Agent;
   /** 合同模板ID，为32位字符串。可以通过生成子客登录链接登录企业控制台, 在企业模板中得到合同模板ID。 */
   TemplateId?: string;
-  /** 查询模版的内容**0**：（默认）模板列表及详情**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息 */
+  /** 查询模板的内容**0**：（默认）模板列表及详情**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息 */
   ContentType?: number;
   /** 合同模板ID数组，每一个合同模板ID为32位字符串, 最多支持200个模板的批量查询。注意: 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`4. `若传递此参数，分页参数(Limit,Offset)无效` */
   TemplateIds?: string[];
@@ -2373,30 +2373,30 @@ declare interface ModifyExtendedServiceResponse {
 declare interface OperateChannelTemplateRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。第三方平台子客企业中的员工标识: Agent.AppId */
   Agent: Agent;
-  /** 操作类型，查询:"SELECT"删除:"DELETE"更新:"UPDATE" */
+  /** 操作类型，可取值如下:SELECT: 查询DELETE: 删除UPDATE: 更新 */
   OperateType: string;
-  /** 合同模板ID，为32位字符串。此处为第三方应用平台模板库模板ID，非子客模板ID。 */
+  /** 合同模板ID，为32位字符串。注: ` 此处为第三方应用平台模板库模板ID，非子客模板ID` */
   TemplateId: string;
-  /** 第三方平台子客企业的唯一标识，长度不能超过64，只能由字母和数字组成。开发者可自定义此字段的值，并需要保存此 ID 以便进行后续操作。一个第三方平台子客企业主体与子客企业 ProxyOrganizationOpenId 是一一对应的，不可更改，不可重复使用。例如，可以使用企业名称的哈希值，或者社会统一信用代码的哈希值，或者随机哈希值。 */
+  /** 第三方平台子客企业的唯一标识，支持批量(用,分割)， */
   ProxyOrganizationOpenIds?: string;
-  /** 模板可见性, 全部可见-"all"部分可见-"part" */
+  /** 模板可见范围, 可以设置的值如下:**all**: 所有本第三方应用合作企业可见**part**: 指定的本第三方应用合作企业对应控制台的位置![image](https://qcloudimg.tencent-cloud.cn/raw/68b97812c68d6af77a5991e3bff5c790.png) */
   AuthTag?: string;
-  /** 当OperateType=UPDATE时，可以通过设置此字段对模板启停用状态进行操作。若此字段值为0，则不会修改模板Available1为启用模板2为停用模板启用后模板可以正常领取。停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。如果Available更新失败，会直接返回错误。 */
+  /** 当OperateType=UPDATE时，可以通过设置此字段对模板启停用状态进行操作。0: 不修改模板可用状态1: 启用模板2: 停用模板启用后模板可以正常领取。停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。如果Available更新失败，会直接返回错误。 */
   Available?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface OperateChannelTemplateResponse {
-  /** 腾讯电子签颁发给第三方应用平台的应用ID */
+  /** 第三方应用平台的应用ID */
   AppId?: string | null;
-  /** 合同模板ID，为32位字符串。此处为第三方应用平台模板库模板ID，非子客模板ID。 */
+  /** 合同模板ID */
   TemplateId?: string | null;
-  /** 描述模板可见性更改的结果，和参数中Available无关。全部成功-"all-success"部分成功-"part-success"全部失败-"fail"，失败的会在FailMessageList中展示 */
+  /** 描述模板可见性更改的结果。all-success: 全部成功part-success: 部分成功,失败的会在FailMessageList中展示fail:全部失败, 失败的会在FailMessageList中展示 */
   OperateResult?: string | null;
-  /** 模板可见性, 全部可见-"all"部分可见-"part" */
+  /** 模板可见范围:**all**: 所有本第三方应用合作企业可见**part**: 指定的本第三方应用合作企业 */
   AuthTag?: string | null;
-  /** 第三方平台子客企业的唯一标识，长度不能超过64，只能由字母和数字组成。开发者可自定义此字段的值，并需要保存此 ID 以便进行后续操作。一个第三方平台子客企业主体与子客企业 ProxyOrganizationOpenId 是一一对应的，不可更改，不可重复使用。例如，可以使用企业名称的哈希值，或者社会统一信用代码的哈希值，或者随机哈希值。 */
+  /** 第三方平台子客企业标识列表 */
   ProxyOrganizationOpenIds?: string[] | null;
   /** 操作失败信息数组 */
   FailMessageList?: AuthFailMessage[] | null;
@@ -4139,7 +4139,7 @@ declare interface Essbasic {
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
   /** 修改企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
-  /** 操作第三方应用平台企业模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
+  /** 第三方应用模板库管理 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
   /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;

@@ -334,6 +334,8 @@ declare interface EdgeIpInfo {
   SwitchMode?: number;
   /** 开关权重 */
   SwitchWeight?: number | null;
+  /** 域名化CLB的域名 */
+  Domain?: string | null;
 }
 
 /** 开启、关闭 防火墙互联网边界开关 */
@@ -975,21 +977,25 @@ declare interface TLogInfo {
 /** 地址模版列表数据 */
 declare interface TemplateListInfo {
   /** 模版ID */
-  Uuid: string | null;
+  Uuid?: string | null;
   /** 模版名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 描述 */
-  Detail: string | null;
+  Detail?: string | null;
   /** IP模版 */
-  IpString: string | null;
+  IpString?: string | null;
   /** 插入时间 */
-  InsertTime: string | null;
+  InsertTime?: string | null;
   /** 修改时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 模版类型 */
-  Type: number | null;
+  Type?: number | null;
   /** 关联规则条数 */
-  RulesNum: number | null;
+  RulesNum?: number | null;
+  /** 模板Id */
+  TemplateId?: string | null;
+  /** 协议端口模板，协议类型，4:4层协议，7:7层协议 */
+  ProtocolType?: string | null;
 }
 
 /** 未处置事件详情 */
@@ -1355,8 +1361,10 @@ declare interface CreateAddressTemplateRequest {
   Detail: string;
   /** Type为1，ip模板eg：1.1.1.1,2.2.2.2；Type为5，域名模板eg：www.qq.com,www.tencent.com */
   IpString: string;
-  /** 1 ip模板5 域名模板 */
+  /** 1 ip模板5 域名模板6 协议端口模板 */
   Type: number;
+  /** 协议端口模板，协议类型，4:4层协议，7:7层协议，Type=6时必填 */
+  ProtocolType?: string;
 }
 
 declare interface CreateAddressTemplateResponse {
@@ -1789,6 +1797,10 @@ declare interface DescribeAddressTemplateListRequest {
   SearchValue?: string;
   /** 检索地址模板唯一id */
   Uuid?: string;
+  /** 1：ip模板，5：域名模板，6：协议端口模板 */
+  TemplateType?: string;
+  /** 模板Id */
+  TemplateId?: string;
 }
 
 declare interface DescribeAddressTemplateListResponse {
@@ -1798,6 +1810,12 @@ declare interface DescribeAddressTemplateListResponse {
   Data?: TemplateListInfo[];
   /** 模板名称列表 */
   NameList?: string[];
+  /** Ip地址模板数量 */
+  IpTemplateCount?: number;
+  /** 域名地址模板数量 */
+  DomainTemplateCount?: number;
+  /** 协议端口模板数量 */
+  PortTemplateCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2597,6 +2615,8 @@ declare interface ModifyAddressTemplateRequest {
   IpString: string;
   /** 1 ip模板5 域名模板 */
   Type: number;
+  /** 协议端口模板，协议类型，4:4层协议，7:7层协议。Type=6时必填。 */
+  ProtocolType?: string;
 }
 
 declare interface ModifyAddressTemplateResponse {

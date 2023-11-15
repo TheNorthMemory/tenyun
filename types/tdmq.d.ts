@@ -2136,6 +2136,20 @@ declare interface DeleteEnvironmentsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteProClustersRequest {
+  /** 集群Id列表 */
+  ClusterIds: string[];
+}
+
+declare interface DeleteProClustersResponse {
+  /** 退还实例订单号 */
+  DealNames?: string[];
+  /** 集群ID */
+  ClusterIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -4245,6 +4259,8 @@ declare interface Tdmq {
   DeleteEnvironmentRoles(data: DeleteEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentRolesResponse>;
   /** 删除命名空间 {@link DeleteEnvironmentsRequest} {@link DeleteEnvironmentsResponse} */
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
+  /** 删除专业集群 {@link DeleteProClustersRequest} {@link DeleteProClustersResponse} */
+  DeleteProClusters(data: DeleteProClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClustersResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
   DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;
   /** 删除RabbitMQ专享版实例 {@link DeleteRabbitMQVipInstanceRequest} {@link DeleteRabbitMQVipInstanceResponse} */

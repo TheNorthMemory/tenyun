@@ -634,6 +634,16 @@ declare interface KVPair {
   Value: string;
 }
 
+/** Kong网关主动健康检查配置 */
+declare interface KongActiveHealthCheck {
+  /** 主动健康检查健康探测间隔，单位：秒，0表示不开启 */
+  HealthyInterval?: number | null;
+  /** 主动健康检查异常探测间隔，单位：秒，0表示不开启 */
+  UnHealthyInterval?: number | null;
+  /** 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。 */
+  HttpPath?: string | null;
+}
+
 /** 云原生网关证书 */
 declare interface KongCertificate {
   /** 无 */
@@ -674,6 +684,12 @@ declare interface KongCertificatesPreview {
   CertSource?: string | null;
   /** ssl平台证书Id */
   CertId?: string | null;
+}
+
+/** Kong网关被动健康检查配置 */
+declare interface KongPassiveHealthCheck {
+  /** 后端target协议类型，被动健康检查支持http和tcp，主动健康检查支持http */
+  Type?: string | null;
 }
 
 /** 云原生网关路由信息 */
@@ -830,6 +846,22 @@ declare interface KongUpstreamInfo {
   RealSourceType?: string | null;
   /** upstream健康状态HEALTHY（健康）, UNHEALTHY（异常）, HEALTHCHECKS_OFF（未开启）和NONE（不支持健康检查） */
   HealthStatus?: string | null;
+}
+
+/** kong后端upstream列表 */
+declare interface KongUpstreamList {
+  /** 无 */
+  UpstreamList?: KongUpstreamPreview[] | null;
+}
+
+/** 云原生网关Upstream信息 */
+declare interface KongUpstreamPreview {
+  /** 服务ID */
+  ID: string | null;
+  /** 服务名字 */
+  Name?: string | null;
+  /** 后端配置 */
+  Target?: KongTarget[] | null;
 }
 
 /** 获取云原生API网关实例列表响应结果。 */
@@ -1056,6 +1088,28 @@ declare interface UpdateCloudNativeAPIGatewayResult {
   Status?: string;
   /** 任务ID */
   TaskId?: string | null;
+}
+
+/** 云原生网关健康检查配置 */
+declare interface UpstreamHealthCheckConfig {
+  /** 开启主动健康检查 */
+  EnableActiveHealthCheck?: boolean | null;
+  /** 主动健康检查配置 */
+  ActiveHealthCheck?: KongActiveHealthCheck | null;
+  /** 开启被动健康检查 */
+  EnablePassiveHealthCheck?: boolean | null;
+  /** 被动健康检查配置 */
+  PassiveHealthCheck?: KongPassiveHealthCheck | null;
+  /** 连续健康阈值，单位：次 */
+  Successes?: number | null;
+  /** 连续异常阈值，单位：次 */
+  Failures?: number | null;
+  /** 超时阈值，单位：次 */
+  Timeouts?: number | null;
+  /** 健康HTTP状态码 */
+  HealthyHttpStatuses?: number[] | null;
+  /** 异常HTTP状态码 */
+  UnhealthyHttpStatuses?: number[] | null;
 }
 
 /** 私有网络信息 */
@@ -1608,6 +1662,20 @@ declare interface DescribeCloudNativeAPIGatewayServicesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayUpstreamRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 服务名字 */
+  ServiceName: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayUpstreamResponse {
+  /** 无 */
+  Result?: KongUpstreamList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewaysRequest {
   /** 返回数量，默认为 20，最大值为 100。 */
   Limit?: number;
@@ -1746,6 +1814,20 @@ declare interface DescribeSREInstancesResponse {
   TotalCount?: number;
   /** 实例记录 */
   Content?: SREInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUpstreamHealthCheckConfigRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 网关服务名称 */
+  Name: string;
+}
+
+declare interface DescribeUpstreamHealthCheckConfigResponse {
+  /** 健康检查配置 */
+  Result?: UpstreamHealthCheckConfig | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1950,6 +2032,26 @@ declare interface ModifyNativeGatewayServerGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUpstreamNodeStatusRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 服务名称 */
+  ServiceName: string;
+  /** 访问IP地址或域名 */
+  Host: string;
+  /** 访问端口 */
+  Port: number;
+  /** HEALTHY或UNHEALTHY */
+  Status: string;
+}
+
+declare interface ModifyUpstreamNodeStatusResponse {
+  /** 是否成功 */
+  Result?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RateLimitResponse {
   /** 自定义响应体 */
   Body?: string | null;
@@ -2001,6 +2103,22 @@ declare interface UpdateEngineInternetAccessRequest {
 }
 
 declare interface UpdateEngineInternetAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateUpstreamHealthCheckConfigRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 网关服务名称 */
+  Name: string;
+  /** 健康检查配置 */
+  HealthCheckConfig: UpstreamHealthCheckConfig;
+}
+
+declare interface UpdateUpstreamHealthCheckConfigResponse {
+  /** 是否成功 */
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2082,6 +2200,8 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayServiceRateLimit(data: DescribeCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 查询云原生网关服务列表 {@link DescribeCloudNativeAPIGatewayServicesRequest} {@link DescribeCloudNativeAPIGatewayServicesResponse} */
   DescribeCloudNativeAPIGatewayServices(data: DescribeCloudNativeAPIGatewayServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServicesResponse>;
+  /** 获取云原生网关服务详情下的Upstream列表 {@link DescribeCloudNativeAPIGatewayUpstreamRequest} {@link DescribeCloudNativeAPIGatewayUpstreamResponse} */
+  DescribeCloudNativeAPIGatewayUpstream(data: DescribeCloudNativeAPIGatewayUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayUpstreamResponse>;
   /** 获取云原生网关实例列表 {@link DescribeCloudNativeAPIGatewaysRequest} {@link DescribeCloudNativeAPIGatewaysResponse} */
   DescribeCloudNativeAPIGateways(data?: DescribeCloudNativeAPIGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaysResponse>;
   /** 查询Nacos类型引擎实例副本信息 {@link DescribeNacosReplicasRequest} {@link DescribeNacosReplicasResponse} */
@@ -2096,6 +2216,8 @@ declare interface Tse {
   DescribeSREInstanceAccessAddress(data?: DescribeSREInstanceAccessAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstanceAccessAddressResponse>;
   /** 查询引擎实例列表 {@link DescribeSREInstancesRequest} {@link DescribeSREInstancesResponse} */
   DescribeSREInstances(data?: DescribeSREInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstancesResponse>;
+  /** 获取网关服务健康检查配置 {@link DescribeUpstreamHealthCheckConfigRequest} {@link DescribeUpstreamHealthCheckConfigResponse} */
+  DescribeUpstreamHealthCheckConfig(data: DescribeUpstreamHealthCheckConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpstreamHealthCheckConfigResponse>;
   /** 查询Zookeeper类型注册引擎实例副本信息 {@link DescribeZookeeperReplicasRequest} {@link DescribeZookeeperReplicasResponse} */
   DescribeZookeeperReplicas(data: DescribeZookeeperReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperReplicasResponse>;
   /** 查询zookeeper服务接口列表 {@link DescribeZookeeperServerInterfacesRequest} {@link DescribeZookeeperServerInterfacesResponse} */
@@ -2116,12 +2238,16 @@ declare interface Tse {
   ModifyCloudNativeAPIGatewayServiceRateLimit(data: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 修改云原生API网关实例分组基础信息 {@link ModifyNativeGatewayServerGroupRequest} {@link ModifyNativeGatewayServerGroupResponse} */
   ModifyNativeGatewayServerGroup(data: ModifyNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServerGroupResponse>;
+  /** 修改云原生网关上游实例节点健康状态 {@link ModifyUpstreamNodeStatusRequest} {@link ModifyUpstreamNodeStatusResponse} */
+  ModifyUpstreamNodeStatus(data: ModifyUpstreamNodeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUpstreamNodeStatusResponse>;
   /** 修改云原生网关证书信息 {@link UpdateCloudNativeAPIGatewayCertificateInfoRequest} {@link UpdateCloudNativeAPIGatewayCertificateInfoResponse} */
   UpdateCloudNativeAPIGatewayCertificateInfo(data: UpdateCloudNativeAPIGatewayCertificateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewayCertificateInfoResponse>;
   /** 修改云原生API网关实例的节点规格 {@link UpdateCloudNativeAPIGatewaySpecRequest} {@link UpdateCloudNativeAPIGatewaySpecResponse} */
   UpdateCloudNativeAPIGatewaySpec(data: UpdateCloudNativeAPIGatewaySpecRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewaySpecResponse>;
   /** 修改引擎公网访问配置 {@link UpdateEngineInternetAccessRequest} {@link UpdateEngineInternetAccessResponse} */
   UpdateEngineInternetAccess(data: UpdateEngineInternetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineInternetAccessResponse>;
+  /** 更新网关服务健康检查配置 {@link UpdateUpstreamHealthCheckConfigRequest} {@link UpdateUpstreamHealthCheckConfigResponse} */
+  UpdateUpstreamHealthCheckConfig(data: UpdateUpstreamHealthCheckConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUpstreamHealthCheckConfigResponse>;
   /** 更新网关上游实例列表 {@link UpdateUpstreamTargetsRequest} {@link UpdateUpstreamTargetsResponse} */
   UpdateUpstreamTargets(data: UpdateUpstreamTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUpstreamTargetsResponse>;
 }

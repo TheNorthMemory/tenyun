@@ -34,11 +34,25 @@ declare interface RunInstancesResponse {
   RequestId?: string;
 }
 
+declare interface TerminateInstancesRequest {
+  /** 实例ID列表 */
+  InstanceIds: string[];
+  /** 默认为False，True代表只验证接口连通性 */
+  DryRun?: boolean;
+}
+
+declare interface TerminateInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Hai 高性能应用服务} */
 declare interface Hai {
   (): Versions;
   /** 创建实例 {@link RunInstancesRequest} {@link RunInstancesResponse} */
   RunInstances(data: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
+  /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
+  TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
 }
 
 export declare type Versions = ["2023-08-12"];

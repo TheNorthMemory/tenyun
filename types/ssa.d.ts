@@ -520,46 +520,6 @@ declare interface ConcernInfo {
   EventSubType?: string | null;
 }
 
-/** 资产测绘对象 */
-declare interface DataAssetMapping {
-  /** 资产主IP地址(公网IP) */
-  AssetIp: string | null;
-  /** 资产名称 */
-  AssetName: string | null;
-  /** 资产ID(各模块间通用) */
-  Instid: string | null;
-  /** 资产类型 */
-  AssetType: string | null;
-  /** 资产可用区(英文) */
-  AssetRegionEn: string | null;
-  /** 资产可用区(中文) */
-  AssetRegionCn: string | null;
-  /** 资产所属网络 */
-  AssetNetwork: string | null;
-  /** 资产运行状态(英文) */
-  AssetStatusEn: string | null;
-  /** 资产运行状态(中文) */
-  AssetStatusCn: string | null;
-  /** 是否白名单：“True”为白名单不测绘，默认“False”正常测绘 */
-  IsWhite: string | null;
-  /** 资产测绘状态(“unstart”未开始/“running”测绘中/“finish”已完成/“abandoned”任务中止) */
-  Status: string | null;
-  /** 最近更新时间 */
-  Time: string | null;
-  /** 资产标签 */
-  Tag: Tag[] | null;
-  /** 资产组 */
-  Group: string[] | null;
-  /** 端口和服务信息 */
-  Port: string | null;
-  /** 组件信息 */
-  Component: string | null;
-  /** 资产实例类型 */
-  AssetInstanceType: string | null;
-  /** 资产是否是内网类型 */
-  IsIntranet: number | null;
-}
-
 /** 检查项详情对象 */
 declare interface DataCheck {
   /** 检查项唯一标识符uuid */
@@ -620,80 +580,6 @@ declare interface DataCompliance {
   AssetTotal: number | null;
   /** 忽略内容 */
   Remarks: string | null;
-}
-
-/** 事件列表对象 */
-declare interface DataEvent {
-  /** Md5值 */
-  OldIdMd5: string | null;
-  /** 事件名称 */
-  EventName: string | null;
-  /** 事件类型一级分类 */
-  EventType1: number | null;
-  /** 事件类型二级分类 */
-  EventType2: number | null;
-  /** 事件等级 */
-  Level: number | null;
-  /** 处理状态 */
-  Status: number | null;
-  /** 源ip */
-  SrcIp: string | null;
-  /** 目的ip */
-  DstIp: string | null;
-  /** 事件发生时间 */
-  Time: string | null;
-  /** 目的端口 */
-  Dstport: number | null;
-  /** 资产ip */
-  AssetIp: string | null;
-  /** 资产名称 */
-  AssetName: string | null;
-  /** 安全事件唯一标识符 */
-  SsaEventUniqid: string | null;
-  /** 资产id */
-  AssetId: string | null;
-  /** 事件来源 */
-  Source: string | null;
-  /** 索引 */
-  Index: string | null;
-  /** 索引中的唯一标识符 */
-  Id: string | null;
-  /** 受影响资产是否已下线 */
-  IsAssetDeleted: string | null;
-  /** 源ip所属地 */
-  SsaSrcCountry: string | null;
-  /** 目的ip所属地 */
-  SsaDstCountry: string | null;
-  /** 木马类型的描述信息 */
-  SsaDescription: string | null;
-  /** 供给链类型 */
-  SsaAttackChain: string | null;
-  /** 受影响组件 */
-  RuleComponents: string;
-  /** 资产ip */
-  AssetIpAll: string[] | null;
-  /** 资产类型 */
-  AssetType: string | null;
-  /** cvm类型资产的公网ip */
-  PublicIpAddresses: string[] | null;
-  /** cvm类型资产的内网ip */
-  PrivateIpAddresses: string[];
-  /** 事件响应状态 */
-  SoarResponseStatus: number | null;
-  /** 事件最近响应时间 */
-  SoarResponseTime: number | null;
-  /** 事件建议处理状态 */
-  SoarSuggestStatus: number | null;
-  /** 事件剧本类型 */
-  SoarPlaybookType: string | null;
-  /** 剧本任务Id */
-  SoarRunId: string | null;
-  /** 事件Id */
-  SsaEventId: string | null;
-  /** 是否新接入的云防事件 */
-  IsNewCfwEvent: boolean | null;
-  /** 出入站方向 */
-  Direction: string | null;
 }
 
 /** 云安全配置检查项列表 */
@@ -904,50 +790,6 @@ declare interface Results {
   TaskCount: number | null;
   /** 最大测绘任务数 */
   TaskMaxCount: number | null;
-}
-
-/** 查询_通用字段 */
-declare interface SaDivulgeDataQueryPub {
-  /** Id信息 */
-  Id: string;
-  /** 用户Uin */
-  Uin: string;
-  /** 用户AppId */
-  AppId: string;
-  /** 事件名称 */
-  EventName: string;
-  /** 监控源 0:全部 1:GitHub 2:暗网 默认值1 */
-  DivulgeSoure: string;
-  /** 受影响资产 */
-  Asset: string;
-  /** 命中主题集下的规则topic名称 */
-  RuleName: string;
-  /** 命中主题集下的规则topic唯一id */
-  RuleId: string;
-  /** 命中主题集下的自定义规则策略 */
-  RuleWord: string;
-  /** 扫描监测url */
-  ScanUrl: string;
-  /** 扫描监测命中次数 */
-  ScanCount: string;
-  /** 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重 */
-  Level: string;
-  /** 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任 */
-  Status: string;
-  /** 安全事件发生时间 */
-  EventTime: string;
-  /** 事件插入时间 */
-  InsertTime: string;
-  /** 事件更新时间 */
-  UpdateTime: string;
-}
-
-/** 自定义泄露事件列表 */
-declare interface SaDivulgeDataQueryPubList {
-  /** 数据条数 */
-  Count: number;
-  /** 自定义泄露事件列表 */
-  List: SaDivulgeDataQueryPub[];
 }
 
 /** 设置_泄露监测产品监测扫描规则策略 */
@@ -1204,22 +1046,6 @@ declare interface DescribeAssetListResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAssetsMappingListRequest {
-  /** 请求参数 */
-  Params: string;
-}
-
-declare interface DescribeAssetsMappingListResponse {
-  /** 资产测绘列表 */
-  Data?: DataAssetMapping[];
-  /** 资产测绘总数 */
-  TotalCount?: number;
-  /** 类型分类统计数量 */
-  CountByType?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeCheckConfigAssetListRequest {
   /** 检查项UUID */
   Id: string;
@@ -1414,34 +1240,6 @@ declare interface DescribeMappingResultsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSafetyEventListRequest {
-  /** 搜索过滤查询参数 */
-  Filter: string;
-  /** 限制数目 */
-  Limit: number;
-  /** 页偏移 */
-  Offset: number;
-  /** 排序列名 */
-  Order?: string;
-  /** 排序升降：desc-降序 asc-升序 */
-  By?: string;
-  /** 开始查询时间 */
-  StartTime?: string;
-  /** 结束查询时间 */
-  EndTime?: string;
-  /** 是否过滤响应时间 */
-  IsFilterResponseTime?: boolean;
-}
-
-declare interface DescribeSafetyEventListResponse {
-  /** 事件列表 */
-  List?: DataEvent[];
-  /** 事件总条数 */
-  Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeSocAlertDetailsRequest {
   /** 告警id */
   AlertId: string;
@@ -1594,40 +1392,6 @@ declare interface DescribeVulListResponse {
   RequestId?: string;
 }
 
-declare interface SaDivulgeDataQueryPubRequest {
-  /** 模糊查询字段(针对appid或者uin) */
-  QueryKey: string;
-  /** 安全事件名称 */
-  EventName: string;
-  /** 监控源 0:全部 1:GitHub 2:暗网 默认值1 */
-  DivulgeSoure: string;
-  /** 受影响资产 */
-  Asset: string;
-  /** 命中主题集下的规则topic名称 */
-  RuleName: string;
-  /** 命中主题集下的规则topic唯一id */
-  RuleId: string;
-  /** 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重 */
-  Level: string;
-  /** 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任 */
-  Status: string;
-  /** 起始时间 */
-  StartTime: string;
-  /** 结束时间 */
-  EndTime: string;
-  /** 查询起始地址 */
-  Offset: string;
-  /** 查询个数 */
-  Limit: string;
-}
-
-declare interface SaDivulgeDataQueryPubResponse {
-  /** 自定义泄露事件列表 */
-  Data: SaDivulgeDataQueryPubList;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SaDivulgeScanRuleMutateRequest {
   /** Id */
   Id: string;
@@ -1697,8 +1461,6 @@ declare interface Ssa {
   DescribeAssetDetailList(data?: DescribeAssetDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDetailListResponse>;
   /** 资产安全资产列表 {@link DescribeAssetListRequest} {@link DescribeAssetListResponse} */
   DescribeAssetList(data: DescribeAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetListResponse>;
-  /** 资产测绘-测绘列表 {@link DescribeAssetsMappingListRequest} {@link DescribeAssetsMappingListResponse} */
-  DescribeAssetsMappingList(data: DescribeAssetsMappingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetsMappingListResponse>;
   /** 云安全配置管理资产组列表 {@link DescribeCheckConfigAssetListRequest} {@link DescribeCheckConfigAssetListResponse} */
   DescribeCheckConfigAssetList(data: DescribeCheckConfigAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckConfigAssetListResponse>;
   /** 云安全配置检查项详情 {@link DescribeCheckConfigDetailRequest} {@link DescribeCheckConfigDetailResponse} */
@@ -1719,8 +1481,6 @@ declare interface Ssa {
   DescribeLeakDetectionList(data: DescribeLeakDetectionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeakDetectionListResponse>;
   /** 获取测绘列表 {@link DescribeMappingResultsRequest} {@link DescribeMappingResultsResponse} */
   DescribeMappingResults(data?: DescribeMappingResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMappingResultsResponse>;
-  /** 获取安全事件列表 {@link DescribeSafetyEventListRequest} {@link DescribeSafetyEventListResponse} */
-  DescribeSafetyEventList(data: DescribeSafetyEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafetyEventListResponse>;
   /** 告警详情 {@link DescribeSocAlertDetailsRequest} {@link DescribeSocAlertDetailsResponse} */
   DescribeSocAlertDetails(data: DescribeSocAlertDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocAlertDetailsResponse>;
   /** 告警列表 {@link DescribeSocAlertListRequest} {@link DescribeSocAlertListResponse} */
@@ -1735,8 +1495,6 @@ declare interface Ssa {
   DescribeVulDetail(data: DescribeVulDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDetailResponse>;
   /** 漏洞管理-漏洞列表 {@link DescribeVulListRequest} {@link DescribeVulListResponse} */
   DescribeVulList(data: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
-  /** 查询【通用字段】【泄露监测数据列表】 {@link SaDivulgeDataQueryPubRequest} {@link SaDivulgeDataQueryPubResponse} */
-  SaDivulgeDataQueryPub(data: SaDivulgeDataQueryPubRequest, config?: AxiosRequestConfig): AxiosPromise<SaDivulgeDataQueryPubResponse>;
   /** 设置【泄露监测产品监测扫描规则策略】 {@link SaDivulgeScanRuleMutateRequest} {@link SaDivulgeScanRuleMutateResponse} */
   SaDivulgeScanRuleMutate(data: SaDivulgeScanRuleMutateRequest, config?: AxiosRequestConfig): AxiosPromise<SaDivulgeScanRuleMutateResponse>;
   /** 【安全事件】【通用字段信息】 {@link SaEventPubRequest} {@link SaEventPubResponse} */

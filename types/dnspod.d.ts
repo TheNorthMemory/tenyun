@@ -2235,7 +2235,7 @@ declare interface Dnspod {
   DeleteRecordBatch(data: DeleteRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordBatchResponse>;
   /** 删除记录分组 {@link DeleteRecordGroupRequest} {@link DeleteRecordGroupResponse} */
   DeleteRecordGroup(data: DeleteRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordGroupResponse>;
-  /** 删除域名共享 {@link DeleteShareDomainRequest} {@link DeleteShareDomainResponse} */
+  /** 按账号删除域名共享 {@link DeleteShareDomainRequest} {@link DeleteShareDomainResponse} */
   DeleteShareDomain(data: DeleteShareDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareDomainResponse>;
   /** 删除快照 {@link DeleteSnapshotRequest} {@link DeleteSnapshotResponse} */
   DeleteSnapshot(data: DeleteSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotResponse>;

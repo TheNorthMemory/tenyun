@@ -808,24 +808,24 @@ declare interface RiskCenterStatusKey {
 
 /** 扫描任务详情 */
 declare interface ScanTaskInfo {
-  /** 任务日志Id */
-  TaskId: string | null;
-  /** 任务日志名称 */
-  TaskName: string | null;
+  /** 任务Id */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
   /** 任务状态码：1等待开始 2正在扫描 3扫描出错 4扫描完成 */
-  Status: number | null;
+  Status?: number | null;
   /** 任务进度 */
-  Progress: number | null;
-  /** 对应的展示时间 */
-  TaskTime: string | null;
-  /** 报表id */
-  ReportId: string | null;
-  /** 报表名称 */
-  ReportName: string | null;
+  Progress?: number | null;
+  /** 任务完成时间 */
+  TaskTime?: string | null;
+  /** 报告ID */
+  ReportId?: string | null;
+  /** 报告名称 */
+  ReportName?: string | null;
   /** 扫描计划，0-周期任务,1-立即扫描,2-定时扫描,3-自定义 */
-  ScanPlan: number | null;
+  ScanPlan?: number | null;
   /** 关联的资产数 */
-  AssetCount: number | null;
+  AssetCount?: number | null;
   /** APP ID */
   AppId?: string | null;
   /** 用户主账户ID */
@@ -1106,7 +1106,7 @@ declare interface TaskLogInfo {
   AssetsNumber?: number | null;
   /** 安全风险数量 */
   RiskNumber?: number | null;
-  /** 报告生成时间,任务结束时间 */
+  /** 报告生成时间 */
   Time?: string | null;
   /** 任务状态码：0 初始值 1正在扫描 2扫描完成 3扫描出错，4停止，5暂停，6该任务已被重启过 */
   Status?: number | null;
@@ -1186,11 +1186,11 @@ declare interface VULViewVULRisk {
   RecentTime?: string;
   /** 首次识别时间 */
   FirstTime?: string;
-  /** 状态，0未处理、1已处置、2已忽略 */
+  /** 影响资产数量 */
   AffectAssetCount?: number;
-  /** 资产唯一id */
+  /** 风险ID */
   Id?: string;
-  /** 资产子类型 */
+  /** 扫描来源，具体看接口返回枚举类型 */
   From?: string;
   /** 前端索引 */
   Index?: string;
@@ -1202,15 +1202,15 @@ declare interface VULViewVULRisk {
   CVE?: string;
   /** 描述 */
   Describe?: string;
-  /** 负载 */
+  /** 漏洞payload */
   Payload?: string;
-  /** 版本名 */
+  /** 漏洞影响组件 */
   AppName?: string;
-  /** 相关引用 */
+  /** 技术参考 */
   References?: string;
-  /** 版本 */
+  /** 漏洞影响版本 */
   AppVersion?: string;
-  /** 漏洞链接 */
+  /** 风险点 */
   VULURL?: string;
   /** 用户昵称 */
   Nick?: string | null;
