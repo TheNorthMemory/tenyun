@@ -268,6 +268,28 @@ declare interface DMSTableInfo {
   Asset: Asset | null;
 }
 
+/** DataEngine基本信息 */
+declare interface DataEngineBasicInfo {
+  /** DataEngine名称 */
+  DataEngineName: string;
+  /** 数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中 */
+  State?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 返回信息 */
+  Message?: string | null;
+  /** 引擎id */
+  DataEngineId?: string;
+  /** 引擎类型，有效值：PrestoSQL/SparkSQL/SparkBatch */
+  DataEngineType?: string | null;
+  /** 用户ID */
+  AppId?: number | null;
+  /** 账号ID */
+  UserUin?: string | null;
+}
+
 /** 引擎配置信息 */
 declare interface DataEngineConfigInstanceInfo {
   /** 引擎ID */
@@ -2071,7 +2093,7 @@ declare interface CreateDataEngineRequest {
   Size?: number;
   /** 计费类型，后付费：0，预付费：1。当前只支持后付费，不填默认为后付费。 */
   PayMode?: number;
-  /** 资源使用时长，后付费：固定填3600，预付费：最少填1，代表购买资源一个月，最长不超过120。默认3600 */
+  /** 资源使用时长，后付费：固定填3600，预付费：最少填1，代表购买资源一个月，最长不超过120。默认1 */
   TimeSpan?: number;
   /** 资源使用时长的单位，后付费：s，预付费：m。默认为s */
   TimeUnit?: string;
@@ -2109,6 +2131,10 @@ declare interface CreateDataEngineRequest {
   SessionResourceTemplate?: SessionResourceTemplate;
   /** 自动授权 */
   AutoAuthorization?: boolean;
+  /** 引擎网络ID */
+  EngineNetworkId?: string;
+  /** 引擎世代，SuperSQL：代表supersql引擎，Native：代表标准引擎。默认值为SuperSQL */
+  EngineGeneration?: string;
 }
 
 declare interface CreateDataEngineResponse {
@@ -2859,6 +2885,10 @@ declare interface DescribeDataEnginesRequest {
   EngineType?: string;
   /** 网络配置列表，若传入该参数，则返回网络配置关联的计算引擎 */
   DatasourceConnectionNameSet?: string[];
+  /** 引擎版本，有效值：Native/SuperSQL，为空时默认获取SuperSQL引擎 */
+  EngineGeneration?: string;
+  /** 引擎类型，支持：SparkSQL、SparkBatch、PrestoSQL、Kyuubi */
+  EngineTypeDetail?: string;
 }
 
 declare interface DescribeDataEnginesResponse {
@@ -3342,6 +3372,20 @@ declare interface DescribeTasksResponse {
   TotalCount?: number;
   /** 任务概览信息 */
   TasksOverview?: TasksOverview | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUpdatableDataEnginesRequest {
+  /** 引擎配置操作命令，UpdateSparkSQLLakefsPath 更新托管表路径，UpdateSparkSQLResultPath 更新结果桶路径 */
+  DataEngineConfigCommand: string;
+}
+
+declare interface DescribeUpdatableDataEnginesResponse {
+  /** 集群基础信息 */
+  DataEngineBasicInfos?: DataEngineBasicInfo[];
+  /** 集群个数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4235,6 +4279,8 @@ declare interface Dlc {
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  /** 查询可更新配置的引擎列表 {@link DescribeUpdatableDataEnginesRequest} {@link DescribeUpdatableDataEnginesResponse} */
+  DescribeUpdatableDataEngines(data: DescribeUpdatableDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpdatableDataEnginesResponse>;
   /** 查询用户自定义引擎参数 {@link DescribeUserDataEngineConfigRequest} {@link DescribeUserDataEngineConfigResponse} */
   DescribeUserDataEngineConfig(data?: DescribeUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDataEngineConfigResponse>;
   /** 获取用户详细信息 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */

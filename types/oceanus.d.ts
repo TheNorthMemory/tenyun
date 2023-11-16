@@ -1483,8 +1483,14 @@ declare interface DescribeTreeJobsResponse {
 }
 
 declare interface DescribeTreeResourcesRequest {
+  /** 筛选条件字段 */
+  Filters?: Filter[];
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 分页游标 */
+  Offset?: number;
+  /** 单页显示数 */
+  Limit?: number;
 }
 
 declare interface DescribeTreeResourcesResponse {

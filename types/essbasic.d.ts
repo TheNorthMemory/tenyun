@@ -454,7 +454,7 @@ declare interface FlowApproverInfo {
   OpenId?: string;
   /** 同应用下第三方平台子客企业的唯一标识，定义Agent中的ProxyOrganizationOpenId一样，签署方为非发起方企业场景下必传，最大长度64个字符 */
   OrganizationOpenId?: string;
-  /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: **PERSON** :个人/自然人 **PERSON_AUTO_SIGN** :个人/自然人自动签署，适用于个人自动签场景 **ORGANIZATION** :企业/企业员工（企业签署方或模板发起时的企业静默签） **ENTERPRISESERVER** :企业/企业员自动签（他方企业自动签署或文件发起时的本方企业自动签）注: `1. 个人自动签场景(PERSON_AUTO_SIGN)为白名单功能, 使用前请联系对接的客户经理沟通。``2. 若要实现他方企业（同一应用下）自动签，需要满足3个条件：`条件1：ApproverType 设置为ENTERPRISESERVER条件2：子客之间完成授权条件3：联系对接的客户经理沟通如何使用 */
+  /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: **PERSON** :个人/自然人 **PERSON_AUTO_SIGN** :个人/自然人自动签署，适用于个人自动签场景 **ORGANIZATION** :企业/企业员工（企业签署方或模板发起时的企业静默签） **ENTERPRISESERVER** :企业/企业员工自动签（他方企业自动签署或文件发起时的本方企业自动签）注: `1. 个人自动签场景(PERSON_AUTO_SIGN)为白名单功能, 使用前请联系对接的客户经理沟通。``2. 若要实现他方企业（同一应用下）自动签，需要满足3个条件：`条件1：ApproverType 设置为ENTERPRISESERVER条件2：子客之间完成授权条件3：联系对接的客户经理沟通如何使用 */
   ApproverType?: string;
   /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
   RecipientId?: string;
@@ -4111,7 +4111,7 @@ declare interface Essbasic {
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
   /** 提交申请出证报告任务 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
-  /** 创建子客企业信息变更链接 {@link CreateChannelOrganizationInfoChangeUrlRequest} {@link CreateChannelOrganizationInfoChangeUrlResponse} */
+  /** 获取变更企业信息电子签小程序链接 {@link CreateChannelOrganizationInfoChangeUrlRequest} {@link CreateChannelOrganizationInfoChangeUrlResponse} */
   CreateChannelOrganizationInfoChangeUrl(data: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;

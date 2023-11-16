@@ -482,6 +482,26 @@ declare interface EnvVar {
   Value?: string | null;
 }
 
+/** K8s的Event */
+declare interface Event {
+  /** 事件的id */
+  Id: string | null;
+  /** 事件的具体信息 */
+  Message: string | null;
+  /** 事件第一次发生的时间 */
+  FirstTimestamp: string | null;
+  /** 事件最后一次发生的时间 */
+  LastTimestamp: string | null;
+  /** 事件发生的次数 */
+  Count: number | null;
+  /** 事件的类型 */
+  Type: string | null;
+  /** 事件关联的资源的类型 */
+  ResourceKind: string | null;
+  /** 事件关联的资源的名字 */
+  ResourceName: string | null;
+}
+
 /** 过滤器 */
 declare interface Filter {
   /** 过滤字段名称 */
@@ -2632,6 +2652,36 @@ declare interface DescribeDatasetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEventsRequest {
+  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
+  Service: string;
+  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
+  ServiceId?: string;
+  /** 查询事件最早发生的时间（RFC3339格式的时间字符串），默认值为当前时间的前一天 */
+  StartTime?: string;
+  /** 查询事件最晚发生的时间（RFC3339格式的时间字符串），默认值为当前时间 */
+  EndTime?: string;
+  /** 分页Limit，默认值为100，最大值为100 */
+  Limit?: number;
+  /** 分页Offset，默认值为0 */
+  Offset?: number;
+  /** 排列顺序（可选值为ASC, DESC ），默认为DESC */
+  Order?: string;
+  /** 排序的依据字段（可选值为FirstTimestamp, LastTimestamp），默认值为LastTimestamp */
+  OrderField?: string;
+  /** 过滤条件注意: 1. Filter.Name：目前支持ResourceKind（按事件关联的资源类型过滤）；Type（按事件类型过滤）2. Filter.Values：对于Name为ResourceKind，Values的可选取值为Deployment, Replicaset, Pod等K8S资源类型；对于Name为Type，Values的可选取值仅为Normal或者Warning；Values为多个的时候表示同时满足3. Filter. Negative和Filter. Fuzzy没有使用 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeEventsResponse {
+  /** 事件的列表 */
+  Events?: Event[] | null;
+  /** 此次查询的事件的个数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInferTemplatesRequest {
 }
 
@@ -2657,7 +2707,7 @@ declare interface DescribeLatestTrainingMetricsResponse {
 }
 
 declare interface DescribeLogsRequest {
-  /** 查询哪个服务的事件（可选值为TRAIN, NOTEBOOK, INFER） */
+  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
   Service: string;
   /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
   StartTime?: string;
@@ -2665,7 +2715,9 @@ declare interface DescribeLogsRequest {
   EndTime?: string;
   /** 日志查询条数，默认值100，最大值100 */
   Limit?: number;
-  /** 查询哪个Pod的日志（支持结尾通配符*) */
+  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
+  ServiceId?: string;
+  /** Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList注：支持结尾通配符* */
   PodName?: string;
   /** 排序方向（可选值为ASC, DESC ），默认为DESC */
   Order?: string;
@@ -4165,6 +4217,8 @@ declare interface Tione {
   DescribeDatasetDetailUnstructured(data?: DescribeDatasetDetailUnstructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailUnstructuredResponse>;
   /** 查询数据集列表 {@link DescribeDatasetsRequest} {@link DescribeDatasetsResponse} */
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
+  /** 获取事件 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
+  DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
   /** 查询最近上报的训练自定义指标 {@link DescribeLatestTrainingMetricsRequest} {@link DescribeLatestTrainingMetricsResponse} */

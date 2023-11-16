@@ -262,7 +262,7 @@ declare interface McuPassThrough {
 
 /** 转推参数。 */
 declare interface McuPublishCdnParam {
-  /** CDN转推URL。 */
+  /** CDN转推URL。注：若更新转推时，URL有任何变化，都会断流重推。 */
   PublishCdnUrl: string;
   /** 是否是腾讯云CDN，0为转推非腾讯云CDN，1为转推腾讯CDN，不携带该参数默认为1。注意：1，为避免误产生转推费用，该参数建议明确填写，转推非腾讯云CDN时会产生转推费用，详情参见接口文档说明；2，国内站默认只支持转推腾讯云CDN，如您有转推第三方CDN需求，请联系腾讯云技术支持。 */
   IsTencentCdn?: number;
@@ -312,6 +312,8 @@ declare interface McuWaterMarkImage {
   LocationY: number;
   /** 水印在输出时的层级，不填默认为0。 */
   ZOrder?: number;
+  /** 动态水印类型，默认为0。0:关闭；1:随机位置，每秒变动一次；2:边界扫描反弹，每帧变动一次。 */
+  DynamicPosType?: number;
 }
 
 /** 水印参数。 */
@@ -337,11 +339,13 @@ declare interface McuWaterMarkText {
   /** 水印在输出时的Y偏移。单位为像素值。 */
   LocationY: number;
   /** 字体大小 */
-  FontSize: number | null;
+  FontSize: number;
   /** 字体颜色，默认为白色。常用的颜色有： 红色：0xcc0033。 黄色：0xcc9900。 绿色：0xcccc33。 蓝色：0x99CCFF。 黑色：0x000000。 白色：0xFFFFFF。 灰色：0x999999。 */
-  FontColor?: string | null;
+  FontColor?: string;
   /** 字体背景色，不配置默认为透明。常用的颜色有： 红色：0xcc0033。 黄色：0xcc9900。 绿色：0xcccc33。 蓝色：0x99CCFF。 黑色：0x000000。 白色：0xFFFFFF。 灰色：0x999999。 */
-  BackGroundColor?: string | null;
+  BackGroundColor?: string;
+  /** 动态水印类型，默认为0。0:关闭；1:随机位置，每秒变动一次；2:边界扫描反弹，每帧变动一次。 */
+  DynamicPosType?: number;
 }
 
 /** 用户自定义混流布局参数列表。 */

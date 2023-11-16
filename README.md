@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 241+ 款产品，10717+ 服务数</summary>
+<details><summary>共计 241+ 款产品，10732+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -171,14 +171,14 @@ cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-1
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(518) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(130) |
-dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(54) |
+dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(55) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(61) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(120) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(121) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(72) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(33) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -207,7 +207,7 @@ gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 20
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(8) |
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74) |
 habo |  | 2018-12-03(2) |
-hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(2) |
+hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(9) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
 iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(35) | 2018-03-01(33) |
@@ -309,7 +309,7 @@ ticm | [智能鉴黄](https://cloud.tencent.com/document/product/864) | 2018-11-
 tics | [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) | 2018-11-15(4) |
 tiems | [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) | 2019-04-16(25) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(23) |
-tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(71) | 2019-10-22(23) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(72) | 2019-10-22(23) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(64) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(212) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |
@@ -328,9 +328,9 @@ tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-
 ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) | 2020-09-18(17) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
-vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(162) |
+vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(166) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(316) |
-vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(6) |
+vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(7) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(132) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(307) |

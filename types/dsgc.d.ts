@@ -1087,41 +1087,47 @@ declare interface DspaRDBDataAssetCount {
 /** 关系型数据库资产详情 */
 declare interface DspaRDBDataAssetDetail {
   /** 数据源ID */
-  DataSourceId: string;
+  DataSourceId?: string;
   /** 数据库类型 */
-  DbType: string;
+  DbType?: string;
   /** 数据库名称 */
-  DbName: string;
+  DbName?: string;
   /** 数据库表名称 */
-  TableName: string;
+  TableName?: string;
   /** 数据库表字段名称 */
-  FieldName: string;
+  FieldName?: string;
   /** 规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** 数据分类 */
-  CategoryName: string;
+  CategoryName?: string;
   /** 敏感等级 */
-  LevelRiskName: string;
+  LevelRiskName?: string;
   /** 分级风险分数，1-10，最小值为1，最大值为10 */
-  LevelRiskScore: number | null;
+  LevelRiskScore?: number | null;
   /** 可信分 */
-  TrustedScore: string | null;
+  TrustedScore?: string | null;
   /** 资源所在地域 */
-  ResourceRegion: string | null;
+  ResourceRegion?: string | null;
   /** 字段扫描结果ID */
-  FieldResultId: string | null;
+  FieldResultId?: string | null;
   /** 规则ID */
-  RuleId: number | null;
+  RuleId?: number | null;
   /** 分级ID */
-  LevelId: number | null;
+  LevelId?: number | null;
   /** 分类ID */
-  CategoryId: number | null;
+  CategoryId?: number | null;
   /** 数据源名称 */
-  DataSourceName: string | null;
+  DataSourceName?: string | null;
   /** 保护措施 */
-  SafeGuard: DspaSafeGuard | null;
+  SafeGuard?: DspaSafeGuard | null;
   /** 分类路径 */
-  CategoryFullPath: string | null;
+  CategoryFullPath?: string | null;
+  /** 0.系统识别，1人工打标 */
+  IdentifyType?: number | null;
+  /** 0未核查 1已核查 */
+  CheckStatus?: number | null;
+  /** 0非敏感，1敏感 */
+  IsSensitiveData?: number | null;
 }
 
 /** 资源账户信息 */
@@ -1278,6 +1284,10 @@ declare interface ESDataAssetDetail {
   RuleId?: number | null;
   /** 规则名称 */
   RuleName?: string | null;
+  /** 0系统识别，1人工打标 */
+  IdentifyType?: number;
+  /** 0未核查，1已核查 */
+  CheckStatus?: number;
 }
 
 /** 创建评估任务的ES详情 */
@@ -3487,6 +3497,8 @@ declare interface DescribeDSPAESDataAssetDetailRequest {
   Limit: number;
   /** 过滤条件 */
   Filters?: Filter[];
+  /** 可信分排序，ASC升序DESC降序 */
+  CreditScore?: string;
 }
 
 declare interface DescribeDSPAESDataAssetDetailResponse {
@@ -3593,13 +3605,15 @@ declare interface DescribeDSPARDBDataAssetDetailRequest {
   DspaId: string;
   /** 合规组Id */
   ComplianceId: number;
+  /** 可信分排序，ASC-升序DESC降序 */
+  CreditScore?: string;
 }
 
 declare interface DescribeDSPARDBDataAssetDetailResponse {
   /** RDB关系数据库敏感数据资产详情列表 */
-  Details: DspaRDBDataAssetDetail[] | null;
+  Details?: DspaRDBDataAssetDetail[] | null;
   /** 符合条件的RDB关系数据库敏感数据资产数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4277,6 +4291,14 @@ declare interface ModifyDSPAESTaskResultRequest {
   DestCategoryId?: number;
   /** 调整后新的分级ID */
   DestLevelId?: number;
+  /** 调整前的规则id（系统识别的id） */
+  SrcRuleId?: number;
+  /** 调整前的规则id（系统识别的id） */
+  SrcCategoryId?: number;
+  /** 调整前的等级id */
+  SrcLevelId?: number;
+  /** 0系统识别，1人工打标 */
+  IdentifyType?: number;
 }
 
 declare interface ModifyDSPAESTaskResultResponse {
@@ -4299,6 +4321,14 @@ declare interface ModifyDSPATaskResultRequest {
   DestCategoryId?: number;
   /** 调整后新的分级ID */
   DestLevelId?: number;
+  /** 调整前的规则ID */
+  SrcRuleId?: number;
+  /** 调整之前的分类id */
+  SrcCategoryId?: number;
+  /** 调整之前的分级id */
+  SrcLevelId?: number;
+  /** 识别方式0-系统识别，1-人工打标 */
+  IdentifyType?: number;
 }
 
 declare interface ModifyDSPATaskResultResponse {

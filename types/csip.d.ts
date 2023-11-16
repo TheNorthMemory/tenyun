@@ -182,7 +182,7 @@ declare interface AssetViewVULRisk {
   FirstTime?: string;
   /** 状态，0未处理、1已处置、2已忽略 */
   Status?: number;
-  /** 资产唯一id */
+  /** 风险ID */
   Id?: string;
   /** 前端索引 */
   Index?: string;
@@ -200,25 +200,25 @@ declare interface AssetViewVULRisk {
   VULType?: string;
   /** 端口 */
   Port?: string;
-  /** 描述 */
+  /** 漏洞描述 */
   Describe?: string;
-  /** 版本名 */
+  /** 漏洞影响组件 */
   AppName?: string;
-  /** 相关信息 */
+  /** 技术参考 */
   References?: string;
-  /** 版本 */
+  /** 漏洞影响版本 */
   AppVersion?: string;
-  /** 漏洞url */
+  /** 风险点 */
   VULURL?: string;
   /** 漏洞名称 */
   VULName?: string;
   /** cve */
   CVE?: string;
-  /** 修复建议 */
+  /** 修复方案 */
   Fix?: string;
   /** pocid */
   POCId?: string;
-  /** 来源 */
+  /** 扫描来源 */
   From?: string;
   /** 主机版本 */
   CWPVersion?: number;
@@ -228,7 +228,7 @@ declare interface AssetViewVULRisk {
   IsSupportDetect?: boolean;
   /** 实例uuid */
   InstanceUUID?: string;
-  /** 负载 */
+  /** 攻击载荷 */
   Payload?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
   EMGCVulType?: number | null;
@@ -850,7 +850,7 @@ declare interface ScanTaskInfoList {
   InsertTime?: string | null;
   /** 任务ID */
   TaskId?: string | null;
-  /** 排除扫描资产信息 */
+  /** 自定义指定扫描资产信息 */
   SelfDefiningAssets?: string[] | null;
   /** 预估时间 */
   PredictTime?: number | null;
@@ -866,7 +866,7 @@ declare interface ScanTaskInfoList {
   Percent?: number | null;
   /** port/poc/weakpass/webcontent/configrisk */
   ScanItem?: string | null;
-  /** 0-全扫，1-指定资产扫，2-排除资产扫 */
+  /** 0-全扫，1-指定资产扫，2-排除资产扫，3-自定义指定资产扫描 */
   ScanAssetType?: number | null;
   /** vss子任务id */
   VSSTaskId?: string | null;
@@ -1745,7 +1745,7 @@ declare interface DescribeRiskCenterPortViewPortRiskListRequest {
 declare interface DescribeRiskCenterPortViewPortRiskListResponse {
   /** 总条数 */
   TotalCount?: number;
-  /** 资产视角的端口风险列表 */
+  /** 端口视角的端口风险列表 */
   Data?: PortViewPortRisk[];
   /** 危险等级列表 */
   LevelLists?: FilterDataObject[];
@@ -1807,7 +1807,7 @@ declare interface DescribeRiskCenterWebsiteRiskListRequest {
 declare interface DescribeRiskCenterWebsiteRiskListResponse {
   /** 总条数 */
   TotalCount?: number;
-  /** 资产视角的端口风险列表 */
+  /** 内容风险列表 */
   Data?: WebsiteRisk[];
   /** 状态列表 */
   StatusLists?: FilterDataObject[];
@@ -2042,7 +2042,7 @@ declare interface Csip {
   DescribeRiskCenterServerRiskList(data?: DescribeRiskCenterServerRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterServerRiskListResponse>;
   /** 获取漏洞视角的漏洞风险列表 {@link DescribeRiskCenterVULViewVULRiskListRequest} {@link DescribeRiskCenterVULViewVULRiskListResponse} */
   DescribeRiskCenterVULViewVULRiskList(data?: DescribeRiskCenterVULViewVULRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterVULViewVULRiskListResponse>;
-  /** 获取网站风险列表 {@link DescribeRiskCenterWebsiteRiskListRequest} {@link DescribeRiskCenterWebsiteRiskListResponse} */
+  /** 获取内容风险列表 {@link DescribeRiskCenterWebsiteRiskListRequest} {@link DescribeRiskCenterWebsiteRiskListResponse} */
   DescribeRiskCenterWebsiteRiskList(data?: DescribeRiskCenterWebsiteRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterWebsiteRiskListResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;

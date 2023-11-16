@@ -143,33 +143,33 @@ declare interface CompareTaskInfo {
 /** 一致性校验对象信息 */
 declare interface CompareTaskItem {
   /** 任务id */
-  JobId: string | null;
+  JobId?: string | null;
   /** 对比任务 Id */
-  CompareTaskId: string | null;
+  CompareTaskId?: string | null;
   /** 对比任务名称 */
-  TaskName: string | null;
+  TaskName?: string | null;
   /** 对比任务状态, 可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止 */
-  Status: string | null;
+  Status?: string | null;
   /** 对比任务配置 */
-  Config: CompareObject | null;
+  Config?: CompareObject | null;
   /** 对比任务校验详情 */
-  CheckProcess: ProcessProgress | null;
+  CheckProcess?: ProcessProgress | null;
   /** 对比任务运行详情 */
-  CompareProcess: ProcessProgress | null;
+  CompareProcess?: ProcessProgress | null;
   /** 对比结果, 可能的值：same - 一致；different - 不一致；skipAll - 跳过 */
-  Conclusion: string | null;
+  Conclusion?: string | null;
   /** 任务创建时间 */
-  CreatedAt: string | null;
+  CreatedAt?: string | null;
   /** 任务启动时间 */
-  StartedAt: string | null;
+  StartedAt?: string | null;
   /** 对比结束时间 */
-  FinishedAt: string | null;
+  FinishedAt?: string | null;
   /** 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比) */
-  Method: string | null;
+  Method?: string | null;
   /** 对比配置信息 */
-  Options: CompareOptions | null;
+  Options?: CompareOptions | null;
   /** 一致性校验提示信息 */
-  Message: string | null;
+  Message?: string | null;
 }
 
 /** 用于一致性校验的视图配置 */

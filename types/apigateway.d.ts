@@ -5,43 +5,47 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** API文档基本信息 */
 declare interface APIDoc {
   /** API文档ID */
-  ApiDocId: string;
+  ApiDocId?: string;
   /** API文档名称 */
-  ApiDocName: string;
+  ApiDocName?: string;
   /** API文档构建状态 */
-  ApiDocStatus: string;
+  ApiDocStatus?: string;
+  /** 标签 */
+  Tags?: Tag[] | null;
 }
 
 /** API文档详细信息 */
 declare interface APIDocInfo {
   /** API文档ID */
-  ApiDocId: string;
+  ApiDocId?: string;
   /** API文档名称 */
-  ApiDocName: string;
+  ApiDocName?: string;
   /** API文档构建状态 */
-  ApiDocStatus: string;
+  ApiDocStatus?: string;
   /** API文档API数量 */
-  ApiCount: number;
+  ApiCount?: number;
   /** API文档查看次数 */
-  ViewCount: number;
+  ViewCount?: number;
   /** API文档发布次数 */
-  ReleaseCount: number;
+  ReleaseCount?: number;
   /** API文档访问URI */
-  ApiDocUri: string;
+  ApiDocUri?: string;
   /** API文档分享密码 */
-  SharePassword: string;
+  SharePassword?: string;
   /** API文档更新时间 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** 服务ID */
-  ServiceId: string;
+  ServiceId?: string;
   /** 环境信息 */
-  Environment: string;
+  Environment?: string;
   /** 生成API文档的API ID */
-  ApiIds: string[];
+  ApiIds?: string[];
   /** 服务名称 */
-  ServiceName: string;
+  ServiceName?: string;
   /** 生成API文档的API名称 */
-  ApiNames: string[];
+  ApiNames?: string[];
+  /** 标签 */
+  Tags?: Tag[] | null;
 }
 
 /** API文档列表 */
@@ -287,19 +291,21 @@ declare interface ApiInfoSummary {
 /** 密钥详情 */
 declare interface ApiKey {
   /** 创建的 API 密钥 ID 。 */
-  AccessKeyId: string;
+  AccessKeyId?: string;
   /** 创建的 API 密钥 Key。 */
-  AccessKeySecret: string;
+  AccessKeySecret?: string;
   /** 密钥类型，auto 或者 manual。 */
-  AccessKeyType: string;
+  AccessKeyType?: string;
   /** 用户自定义密钥名称。 */
-  SecretName: string;
+  SecretName?: string;
   /** 最后一次修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  ModifiedTime: string;
+  ModifiedTime?: string;
   /** 密钥状态。0表示禁用，1表示启用。 */
-  Status: number;
+  Status?: number;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string;
+  CreatedTime?: string;
+  /** 标签 */
+  Tags?: Tag[] | null;
 }
 
 /** 密钥列表 */
@@ -321,35 +327,37 @@ declare interface ApiRequestConfig {
 /** api或service绑定使用计划详情 */
 declare interface ApiUsagePlan {
   /** 服务唯一ID。 */
-  ServiceId: string | null;
+  ServiceId?: string | null;
   /** API 唯一 ID。 */
-  ApiId: string | null;
+  ApiId?: string | null;
   /** API 名称。 */
-  ApiName: string | null;
+  ApiName?: string | null;
   /** API 路径。 */
-  Path: string | null;
+  Path?: string | null;
   /** API 方法。 */
-  Method: string | null;
+  Method?: string | null;
   /** 使用计划的唯一 ID。 */
-  UsagePlanId: string | null;
+  UsagePlanId?: string | null;
   /** 使用计划的名称。 */
-  UsagePlanName: string | null;
+  UsagePlanName?: string | null;
   /** 使用计划的描述。 */
-  UsagePlanDesc: string | null;
+  UsagePlanDesc?: string | null;
   /** 使用计划绑定的服务环境。 */
-  Environment: string | null;
+  Environment?: string | null;
   /** 已经使用的配额。 */
-  InUseRequestNum: number | null;
+  InUseRequestNum?: number | null;
   /** 请求配额总量，-1表示没有限制。 */
-  MaxRequestNum: number | null;
+  MaxRequestNum?: number | null;
   /** 请求 QPS 上限，-1 表示没有限制。 */
-  MaxRequestNumPreSec: number | null;
+  MaxRequestNumPreSec?: number | null;
   /** 使用计划创建时间。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 使用计划最后修改时间。 */
-  ModifiedTime: string | null;
+  ModifiedTime?: string | null;
   /** 服务名称。 */
-  ServiceName: string | null;
+  ServiceName?: string | null;
+  /** 标签 */
+  Tags?: Tag[] | null;
 }
 
 /** api绑定使用计划列表 */
@@ -1483,45 +1491,49 @@ declare interface UsagePlanEnvironmentStatus {
 /** 使用计划详情。 */
 declare interface UsagePlanInfo {
   /** 使用计划唯一 ID。 */
-  UsagePlanId: string | null;
+  UsagePlanId?: string | null;
   /** 使用计划名称。 */
-  UsagePlanName: string | null;
+  UsagePlanName?: string | null;
   /** 使用计划描述。 */
-  UsagePlanDesc: string | null;
+  UsagePlanDesc?: string | null;
   /** 每秒请求限制数。 */
-  MaxRequestNumPreSec: number | null;
+  MaxRequestNumPreSec?: number | null;
   /** 最大调用次数。 */
-  MaxRequestNum: number | null;
+  MaxRequestNum?: number | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  ModifiedTime: string | null;
+  ModifiedTime?: string | null;
   /** 绑定密钥的数量。 */
-  BindSecretIdTotalCount: number | null;
+  BindSecretIdTotalCount?: number | null;
   /** 绑定密钥的详情。 */
-  BindSecretIds: string[] | null;
+  BindSecretIds?: string[] | null;
   /** 绑定环境数量。 */
-  BindEnvironmentTotalCount: number | null;
+  BindEnvironmentTotalCount?: number | null;
   /** 绑定环境详情。 */
-  BindEnvironments: UsagePlanBindEnvironment[] | null;
+  BindEnvironments?: UsagePlanBindEnvironment[] | null;
+  /** 标签 */
+  Tags?: Tag[] | null;
 }
 
 /** 用于使用计划列表展示 */
 declare interface UsagePlanStatusInfo {
   /** 使用计划唯一 ID。 */
-  UsagePlanId: string | null;
+  UsagePlanId?: string | null;
   /** 用户自定义的使用计划名称。 */
-  UsagePlanName: string | null;
+  UsagePlanName?: string | null;
   /** 用户自定义的使用计划描述。 */
-  UsagePlanDesc: string | null;
+  UsagePlanDesc?: string | null;
   /** 每秒最大请求次数。 */
-  MaxRequestNumPreSec: number | null;
+  MaxRequestNumPreSec?: number | null;
   /** 请求配额总量，-1表示没有限制。 */
-  MaxRequestNum: number | null;
+  MaxRequestNum?: number | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  ModifiedTime: string | null;
+  ModifiedTime?: string | null;
+  /** 标签 */
+  Tags?: Tag[] | null;
 }
 
 /** 使用计划列表 */
@@ -1675,11 +1687,13 @@ declare interface CreateAPIDocRequest {
   Environment: string;
   /** 生成文档的API列表 */
   ApiIds: string[];
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateAPIDocResponse {
   /** API文档基本信息 */
-  Result: APIDoc;
+  Result?: APIDoc;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1707,11 +1721,13 @@ declare interface CreateApiKeyRequest {
   AccessKeyId?: string;
   /** 用户自定义密钥 Key，AccessKeyType 为 manual 时必传。长度为10 - 50字符，由字母、数字、英文下划线。 */
   AccessKeySecret?: string;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateApiKeyResponse {
   /** 新增的密钥详情。 */
-  Result: ApiKey | null;
+  Result?: ApiKey | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1959,6 +1975,8 @@ declare interface CreateUsagePlanRequest {
   MaxRequestNum?: number;
   /** 每秒请求限制数，取值范围为-1或者[1, 2000]，默认-1，表示不开启。 */
   MaxRequestNumPreSec?: number;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateUsagePlanResponse {

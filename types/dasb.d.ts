@@ -1428,6 +1428,20 @@ declare interface ModifyResourceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserGroupRequest {
+  /** 用户组ID */
+  Id: number;
+  /** 用户组名 */
+  Name: string;
+  /** 用户组所属的部门ID，如：1.2.3 */
+  DepartmentId?: string;
+}
+
+declare interface ModifyUserGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserRequest {
   /** 用户ID */
   Id: number;
@@ -1787,6 +1801,8 @@ declare interface Dasb {
   ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 修改用户组 {@link ModifyUserGroupRequest} {@link ModifyUserGroupResponse} */
+  ModifyUserGroup(data: ModifyUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupResponse>;
   /** 清除设备账号绑定密码 {@link ResetDeviceAccountPasswordRequest} {@link ResetDeviceAccountPasswordResponse} */
   ResetDeviceAccountPassword(data: ResetDeviceAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceAccountPasswordResponse>;
   /** 清除设备账号绑定的密钥 {@link ResetDeviceAccountPrivateKeyRequest} {@link ResetDeviceAccountPrivateKeyResponse} */

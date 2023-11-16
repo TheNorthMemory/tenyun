@@ -2524,6 +2524,20 @@ declare interface JitterConfigureInfoForUpdate {
   Switch?: string;
 }
 
+/** 即时转码模板详情。 */
+declare interface JustInTimeTranscodeTemplate {
+  /** 模板类型。 */
+  Type?: string;
+  /** 模板名。 */
+  Name?: string;
+  /** 模板描述。 */
+  Comment?: string;
+  /** 视频参数配置。 */
+  VideoConfigure?: VideoConfigureInfo | null;
+  /** 水印参数配置。 */
+  WatermarkConfigure?: WatermarkConfigureData | null;
+}
+
 /** License 请求次数统计数据。 */
 declare interface LicenseUsageDataItem {
   /** 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。 */
@@ -5328,6 +5342,30 @@ declare interface UserDefineOcrTextReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** 即时转码视频模板配置。 */
+declare interface VideoConfigureInfo {
+  /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  Width?: number;
+  /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1920]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  Height?: number;
+  /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
+  ResolutionAdaptive?: string;
+  /** 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+  Bitrate?: number;
+}
+
+/** 即时转码视频模板更新配置。 */
+declare interface VideoConfigureInfoForUpdate {
+  /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  Width?: number;
+  /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1920]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  Height?: number;
+  /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
+  ResolutionAdaptive?: string;
+  /** 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+  Bitrate?: number;
+}
+
 /** 视频降噪控制参数 */
 declare interface VideoDenoiseInfo {
   /** 视频降噪控制开关，可选值：ON：开启视频降噪；OFF：关闭视频降噪。 */
@@ -5432,6 +5470,54 @@ declare interface VoiceConfigureInfo {
 declare interface VoiceConfigureInfoForUpdate {
   /** 音频（静音、低音、爆音）检测开关，可选值：ON：开启；OFF：关闭。 */
   Switch?: string;
+}
+
+/** 即时转码水印模板配置。 */
+declare interface WatermarkConfigureData {
+  /** 是否启用水印。可取值：ON：表示启用水印；OFF：表示关闭水印。 */
+  Switch?: string;
+  /** 水印 Url。 */
+  Url?: string;
+  /** 水印的宽度。字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%； */
+  Width?: string;
+  /** 水印的高度。字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%； */
+  Height?: string;
+  /** 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%； */
+  XPos?: string;
+  /** 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。 */
+  YPos?: string;
+}
+
+/** 即时转码水印模板配置。 */
+declare interface WatermarkConfigureInfo {
+  /** 是否启用水印。可取值：ON：表示启用水印；OFF：表示关闭水印。 */
+  Switch: string;
+  /** 水印图片 Base64 编码后的字符串。支持 jpeg、png 图片格式。 */
+  ImageContent?: string;
+  /** 水印的宽度。字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%； */
+  Width?: string;
+  /** 水印的高度。字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%； */
+  Height?: string;
+  /** 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%； */
+  XPos?: string;
+  /** 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。 */
+  YPos?: string;
+}
+
+/** 即时转码水印模板更新配置。 */
+declare interface WatermarkConfigureInfoForUpdate {
+  /** 是否启用水印。可取值：ON：表示启用水印；OFF：表示关闭水印。 */
+  Switch?: string;
+  /** 水印图片 Base64 编码后的字符串。支持 jpeg、png 图片格式。 */
+  ImageContent?: string;
+  /** 水印的宽度。字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%； */
+  Width?: string;
+  /** 水印的高度。字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%； */
+  Height?: string;
+  /** 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%； */
+  XPos?: string;
+  /** 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。 */
+  YPos?: string;
 }
 
 /** 水印周期配置。 */
@@ -5936,6 +6022,24 @@ declare interface CreateImageSpriteTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateJustInTimeTranscodeTemplateRequest {
+  /** 模板名字，长度限制64个字符。 */
+  Name: string;
+  /** 视频参数配置。 */
+  VideoConfigure: VideoConfigureInfo;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 水印参数配置。 */
+  WatermarkConfigure?: WatermarkConfigureInfo;
+  /** 模板描述，长度限制256个字符。 */
+  Comment?: string;
+}
+
+declare interface CreateJustInTimeTranscodeTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePersonSampleRequest {
   /** 素材名称，长度限制：20 个字符。 */
   Name: string;
@@ -6414,6 +6518,18 @@ declare interface DeleteImageSpriteTemplateRequest {
 }
 
 declare interface DeleteImageSpriteTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteJustInTimeTranscodeTemplateRequest {
+  /** 模板名字。 */
+  Name: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+}
+
+declare interface DeleteJustInTimeTranscodeTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7030,6 +7146,28 @@ declare interface DescribeImageSpriteTemplatesResponse {
   TotalCount: number;
   /** 雪碧图模板详情列表。 */
   ImageSpriteTemplateSet: ImageSpriteTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJustInTimeTranscodeTemplatesRequest {
+  /** 模板名过滤条件，数组长度限制：100。 */
+  Names?: string[];
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 模板类型过滤条件，可选值：Preset：系统预置任务流模板；Custom：用户自定义任务流模板。 */
+  Type?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeJustInTimeTranscodeTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 模板详情列表。 */
+  JustInTimeTranscodeTemplateSet?: JustInTimeTranscodeTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8102,6 +8240,24 @@ declare interface ModifyImageSpriteTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyJustInTimeTranscodeTemplateRequest {
+  /** 模板名字。 */
+  Name: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 视频参数配置。 */
+  VideoConfigure?: VideoConfigureInfoForUpdate;
+  /** 水印参数配置。 */
+  WatermarkConfigure?: WatermarkConfigureInfoForUpdate;
+  /** 模板描述，长度限制256个字符。 */
+  Comment?: string;
+}
+
+declare interface ModifyJustInTimeTranscodeTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMediaInfoRequest {
   /** 媒体文件唯一标识。 */
   FileId: string;
@@ -9113,6 +9269,8 @@ declare interface Vod {
   CreateImageProcessingTemplate(data: CreateImageProcessingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageProcessingTemplateResponse>;
   /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
+  /** 创建即时转码模板 {@link CreateJustInTimeTranscodeTemplateRequest} {@link CreateJustInTimeTranscodeTemplateResponse} */
+  CreateJustInTimeTranscodeTemplate(data: CreateJustInTimeTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJustInTimeTranscodeTemplateResponse>;
   /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建任务流模板 {@link CreateProcedureTemplateRequest} {@link CreateProcedureTemplateResponse} */
@@ -9163,6 +9321,8 @@ declare interface Vod {
   DeleteImageProcessingTemplate(data: DeleteImageProcessingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageProcessingTemplateResponse>;
   /** 删除雪碧图模板 {@link DeleteImageSpriteTemplateRequest} {@link DeleteImageSpriteTemplateResponse} */
   DeleteImageSpriteTemplate(data: DeleteImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSpriteTemplateResponse>;
+  /** 删除即时转码模板 {@link DeleteJustInTimeTranscodeTemplateRequest} {@link DeleteJustInTimeTranscodeTemplateResponse} */
+  DeleteJustInTimeTranscodeTemplate(data: DeleteJustInTimeTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJustInTimeTranscodeTemplateResponse>;
   /** 删除媒体 {@link DeleteMediaRequest} {@link DeleteMediaResponse} */
   DeleteMedia(data: DeleteMediaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMediaResponse>;
   /** 删除素材样本 {@link DeletePersonSampleRequest} {@link DeletePersonSampleResponse} */
@@ -9237,6 +9397,8 @@ declare interface Vod {
   DescribeImageReviewUsageData(data: DescribeImageReviewUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageReviewUsageDataResponse>;
   /** 获取雪碧图模板列表 {@link DescribeImageSpriteTemplatesRequest} {@link DescribeImageSpriteTemplatesResponse} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
+  /** 获取即时转码模板列表 {@link DescribeJustInTimeTranscodeTemplatesRequest} {@link DescribeJustInTimeTranscodeTemplatesResponse} */
+  DescribeJustInTimeTranscodeTemplates(data?: DescribeJustInTimeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJustInTimeTranscodeTemplatesResponse>;
   /** 查询 License 请求数统计数据 {@link DescribeLicenseUsageDataRequest} {@link DescribeLicenseUsageDataResponse} */
   DescribeLicenseUsageData(data: DescribeLicenseUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseUsageDataResponse>;
   /** 获取媒体详细信息 {@link DescribeMediaInfosRequest} {@link DescribeMediaInfosResponse} */
@@ -9327,6 +9489,8 @@ declare interface Vod {
   ModifyHeadTailTemplate(data: ModifyHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHeadTailTemplateResponse>;
   /** 修改雪碧图模板 {@link ModifyImageSpriteTemplateRequest} {@link ModifyImageSpriteTemplateResponse} */
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
+  /** 修改即时转码模板 {@link ModifyJustInTimeTranscodeTemplateRequest} {@link ModifyJustInTimeTranscodeTemplateResponse} */
+  ModifyJustInTimeTranscodeTemplate(data: ModifyJustInTimeTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJustInTimeTranscodeTemplateResponse>;
   /** 修改媒体文件属性 {@link ModifyMediaInfoRequest} {@link ModifyMediaInfoResponse} */
   ModifyMediaInfo(data: ModifyMediaInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaInfoResponse>;
   /** 修改媒体文件存储类型 {@link ModifyMediaStorageClassRequest} {@link ModifyMediaStorageClassResponse} */
