@@ -1405,19 +1405,27 @@ declare interface SessionData {
 /** session定义 */
 declare interface SessionItem {
   /** 匹配类型 */
-  Category: string;
+  Category?: string;
   /** 起始模式 */
-  KeyOrStartMat: string;
+  KeyOrStartMat?: string;
   /** 结束模式 */
-  EndMat: string;
+  EndMat?: string;
   /** 起始偏移 */
-  StartOffset: string;
+  StartOffset?: string;
   /** 结束偏移 */
-  EndOffset: string;
+  EndOffset?: string;
   /** 数据源 */
-  Source: string;
+  Source?: string;
   /** 更新时间戳 */
-  TsVersion: string;
+  TsVersion?: string;
+  /** SessionID */
+  SessionId?: number | null;
+  /** Session名 */
+  SessionName?: string | null;
+  /** Session是否正在被启用 */
+  SessionInUsed?: boolean | null;
+  /** Session关联的CC规则ID */
+  RelatedRuleID?: number[] | null;
 }
 
 /** waf斯巴达-编辑防护域名中的端口结构 */

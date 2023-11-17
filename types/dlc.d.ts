@@ -3296,6 +3296,40 @@ declare interface DescribeTableResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTablesNameRequest {
+  /** 列出该数据库下所属数据表。 */
+  DatabaseName: string;
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 数据偏移量，从0开始，默认为0。 */
+  Offset?: number;
+  /** 过滤条件，如下支持的过滤类型，传参Name应为其一table-name - String - （过滤条件）数据表名称,形如：table-001。table-id - String - （过滤条件）table id形如：12342。 */
+  Filters?: Filter[];
+  /** 指定查询的数据源名称，默认为DataLakeCatalog */
+  DatasourceConnectionName?: string;
+  /** 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS */
+  StartTime?: string;
+  /** 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS */
+  EndTime?: string;
+  /** 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序） */
+  Sort?: string;
+  /** 排序字段，false：降序（默认）；true：升序 */
+  Asc?: boolean;
+  /** table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW */
+  TableType?: string;
+  /** 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它； */
+  TableFormat?: string;
+}
+
+declare interface DescribeTablesNameResponse {
+  /** 数据表名称对象列表。 */
+  TableNameList?: string[];
+  /** 实例总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTablesRequest {
   /** 列出该数据库下所属数据表。 */
   DatabaseName: string;
@@ -4275,6 +4309,8 @@ declare interface Dlc {
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
   /** 查询数据表列表 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
+  /** 查询数据表名称列表 {@link DescribeTablesNameRequest} {@link DescribeTablesNameResponse} */
+  DescribeTablesName(data: DescribeTablesNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesNameResponse>;
   /** 查询任务结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */

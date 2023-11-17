@@ -69,17 +69,17 @@ declare interface TrainingTexts {
 /** 复刻音色详情 */
 declare interface VoiceTypeInfo {
   /** 音色id */
-  VoiceType?: number | null;
+  VoiceType?: number;
   /** 音色名称 */
-  VoiceName?: string | null;
+  VoiceName?: string;
   /** 音色性别: 1-male 2-female */
-  VoiceGender?: number | null;
+  VoiceGender?: number;
   /** 复刻类型: 0-轻量版复刻 1-基础版复刻 */
-  TaskType?: number | null;
+  TaskType?: number;
   /** 复刻任务 ID */
-  TaskID?: string | null;
+  TaskID?: string;
   /** 创建时间 */
-  DateCreated?: string | null;
+  DateCreated?: string;
 }
 
 /** 音色信息列表 */
@@ -202,7 +202,7 @@ declare interface GetVRSVoiceTypesRequest {
 }
 
 declare interface GetVRSVoiceTypesResponse {
-  /** 数据 */
+  /** 复刻音色信息 */
   Data?: VoiceTypeListData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

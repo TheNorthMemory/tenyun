@@ -14403,7 +14403,7 @@ declare interface ScanVulRequest {
 
 declare interface ScanVulResponse {
   /** 任务id */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15699,7 +15699,7 @@ declare interface Cwp {
   ScanBaseline(data?: ScanBaselineRequest, config?: AxiosRequestConfig): AxiosPromise<ScanBaselineResponse>;
   /** 重新开始扫描任务 {@link ScanTaskAgainRequest} {@link ScanTaskAgainResponse} */
   ScanTaskAgain(data: ScanTaskAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanTaskAgainResponse>;
-  /** 一键检测 {@link ScanVulRequest} {@link ScanVulResponse} */
+  /** 漏洞一键检测 {@link ScanVulRequest} {@link ScanVulResponse} */
   ScanVul(data: ScanVulRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulResponse>;
   /** 漏洞管理-重新检测接口 {@link ScanVulAgainRequest} {@link ScanVulAgainResponse} */
   ScanVulAgain(data: ScanVulAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulAgainResponse>;

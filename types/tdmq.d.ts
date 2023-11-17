@@ -1268,6 +1268,8 @@ declare interface RocketMQSubscription {
   LastUpdateTime?: number | null;
   /** 最大重试次数 */
   MaxRetryTimes?: number | null;
+  /** 协议类型 */
+  ClientProtocol?: string | null;
 }
 
 /** RocketMQ主题信息 */
@@ -1335,39 +1337,43 @@ declare interface RocketMQTopicDistribution {
 /** RocketMQ专享实例信息 */
 declare interface RocketMQVipInstance {
   /** 实例id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例版本 */
-  InstanceVersion: string | null;
+  InstanceVersion?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败 */
-  Status: number;
+  Status?: number;
   /** 节点数量 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 实例配置规格名称 */
-  ConfigDisplay: string;
+  ConfigDisplay?: string;
   /** 峰值TPS */
-  MaxTps: number;
+  MaxTps?: number;
   /** 峰值带宽，Mbps为单位 */
-  MaxBandWidth: number;
+  MaxBandWidth?: number;
   /** 存储容量，GB为单位 */
-  MaxStorage: number;
+  MaxStorage?: number;
   /** 实例到期时间，毫秒为单位 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 0-后付费，1-预付费 */
-  PayMode: number;
+  PayMode?: number;
   /** 备注信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 实例配置ID */
-  SpecName: string;
+  SpecName?: string;
   /** 最大可设置消息保留时间，小时为单位 */
   MaxRetention?: number | null;
   /** 最小可设置消息保留时间，小时为单位 */
   MinRetention?: number | null;
   /** 实例消息保留时间，小时为单位 */
   Retention?: number | null;
+  /** 是否开启ACL鉴权 */
+  AclEnabled?: boolean | null;
+  /** 销毁时间 */
+  DestroyTime?: number | null;
 }
 
 /** 角色实例 */

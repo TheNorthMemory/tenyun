@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 241+ 款产品，10732+ 服务数</summary>
+<details><summary>共计 241+ 款产品，10742+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -178,7 +178,7 @@ dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/pro
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(121) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(122) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(72) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(33) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -273,7 +273,7 @@ smpn | [营销号码安全](https://cloud.tencent.com/document/product/1127) | 2
 sms | [短信](https://cloud.tencent.com/document/product/382) | 2021-01-11(18) | 2019-07-11(16) |
 soe | [智聆口语评测](https://cloud.tencent.com/document/product/884) | 2018-07-24(4) |
 solar | 智汇零售 | 2018-10-11(17) |
-sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(114) |
+sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(123) |
 ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(23) |
 ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(57) |
 sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10) |

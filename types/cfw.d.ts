@@ -931,31 +931,31 @@ declare interface StaticInfo {
 /** 防火墙开关列表对象 */
 declare interface SwitchListsData {
   /** 公网IP */
-  PublicIp: string | null;
+  PublicIp?: string | null;
   /** 内网IP */
-  IntranetIp: string | null;
+  IntranetIp?: string | null;
   /** 实例名 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 资产类型 */
-  AssetType: string;
+  AssetType?: string;
   /** 地域 */
-  Area: string | null;
+  Area?: string | null;
   /** 防火墙开关 */
-  Switch: number;
+  Switch?: number;
   /** id值 */
-  Id: number;
+  Id?: number;
   /** 公网 IP 类型 */
-  PublicIpType: number | null;
+  PublicIpType?: number | null;
   /** 风险端口数 */
-  PortTimes: number | null;
+  PortTimes?: number | null;
   /** 最近扫描时间 */
-  LastTime: string | null;
+  LastTime?: string | null;
   /** 扫描深度 */
-  ScanMode: string | null;
+  ScanMode?: string | null;
   /** 扫描状态 */
-  ScanStatus: number | null;
+  ScanStatus?: number | null;
 }
 
 /** 告警中心概览数据 */
@@ -2415,15 +2415,15 @@ declare interface DescribeSwitchListsRequest {
 
 declare interface DescribeSwitchListsResponse {
   /** 总条数 */
-  Total: number;
+  Total?: number;
   /** 列表数据 */
-  Data: SwitchListsData[];
+  Data?: SwitchListsData[];
   /** 区域列表 */
-  AreaLists: string[];
+  AreaLists?: string[];
   /** 打开个数 */
-  OnNum: number | null;
+  OnNum?: number | null;
   /** 关闭个数 */
-  OffNum: number | null;
+  OffNum?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3363,7 +3363,7 @@ declare interface Cfw {
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
   /** 查询资产组全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
-  /** 防火墙开关列表 {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
+  /** 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;
   /** 告警中心概况 {@link DescribeTLogInfoRequest} {@link DescribeTLogInfoResponse} */
   DescribeTLogInfo(data: DescribeTLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogInfoResponse>;

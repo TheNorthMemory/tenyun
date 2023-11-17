@@ -2,13 +2,13 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 权限控制模版对象 */
+/** 权限控制模板对象 */
 declare interface ACTemplate {
-  /** 模版id */
+  /** 模板id */
   TemplateId?: string | null;
-  /** 模版名称 */
+  /** 模板名称 */
   TemplateName?: string | null;
-  /** 模版描述 */
+  /** 模板描述 */
   Description?: string | null;
 }
 

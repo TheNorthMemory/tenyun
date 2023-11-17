@@ -608,7 +608,7 @@ declare interface DomainAssetVO {
   SubDomain?: string | null;
   /** 解析ip */
   SeverIp?: string[] | null;
-  /** boi访问数量 */
+  /** bot攻击数量 */
   BotCount?: number | null;
   /** 弱口令风险 */
   WeakPassword?: number | null;
@@ -634,7 +634,7 @@ declare interface DomainAssetVO {
   VerifyTXTRecord?: string | null;
   /** 待确认资产的认证状态，0-待认证，1-认证成功，2-认证中，3-txt认证失败，4-人工认证失败 */
   VerifyStatus?: number | null;
-  /** bot访问数据 */
+  /** bot访问数量 */
   BotAccessCount?: number | null;
 }
 
@@ -1306,7 +1306,7 @@ declare interface WhereFilter {
   Name: string;
   /** 过滤的值 */
   Values: string[];
-  /** 中台定义：1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与精确匹配填 7 模糊匹配填9 兼容 中台定的结构 */
+  /** 中台定义：1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与精确匹配填 7 模糊匹配填9 */
   OperatorType?: number;
 }
 

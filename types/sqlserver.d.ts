@@ -202,6 +202,38 @@ declare interface CrossRegionStatus {
   CrossStatus: number;
 }
 
+/** 跨地域备份实时统计列表项 */
+declare interface CrossSummaryDetailRes {
+  /** 实例状态 */
+  Status: number;
+  /** 实例所属地域 */
+  Region: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例名称 */
+  Name: string;
+  /** 跨地域备份状态 enable-开启，disable-关闭 */
+  CrossBackupEnabled: string;
+  /** 跨地域备份目标地域 */
+  CrossRegions: string[];
+  /** 最新备份开始时间 */
+  LastBackupStartTime: string;
+  /** 跨地域备份保留天数 */
+  CrossBackupSaveDays: number;
+  /** 跨地域数据备份总空间 */
+  DataBackupSpace: number;
+  /** 跨地域数据备份文件总个数 */
+  DataBackupCount: number;
+  /** 跨地域日志备份总空间 */
+  LogBackupSpace: number;
+  /** 跨地域日志备份文件总个数 */
+  LogBackupCount: number;
+  /** 跨地域备份总空间 */
+  ActualUsedSpace: number;
+  /** 跨地域备份总个数 */
+  ActualUsedCount: number;
+}
+
 /** 数据库创建信息 */
 declare interface DBCreateInfo {
   /** 数据库名 */
@@ -1036,6 +1068,38 @@ declare interface StepDetail {
   Name: string;
 }
 
+/** 备份概览实时统计项 */
+declare interface SummaryDetailRes {
+  /** 地域标识 */
+  RegionId: number;
+  /** 实例状态。1：申请中2：运行中3：受限运行中 (主备切换中)4：已隔离5：回收中6：已回收7：任务执行中 (实例做备份、回档等操作)8：已下线9：实例扩容中10：实例迁移中 */
+  Status: number;
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例名称 */
+  Name: string;
+  /** 备份空间 */
+  ActualUsedSpace: number;
+  /** 数据备份空间 */
+  DataBackupSpace: number;
+  /** 数据备份文件总个数 */
+  DataBackupCount: number;
+  /** 日志备份空间 */
+  LogBackupSpace: number;
+  /** 日志备份文件总个数 */
+  LogBackupCount: number;
+  /** 自动备份空间 */
+  AutoBackupSpace: number;
+  /** 自动备份文件总个数 */
+  AutoBackupCount: number;
+  /** 手动备份空间 */
+  ManualBackupSpace: number;
+  /** 手动备份文件总个数 */
+  ManualBackupCount: number;
+  /** 实例所属地域码 */
+  Region: string;
+}
+
 /** 主备切换日志 */
 declare interface SwitchLog {
   /** 切换事件ID */
@@ -1842,6 +1906,108 @@ declare interface DescribeBackupMigrationResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupMonitorRequest {
+  /** 备份空间使用详情开始时间 */
+  StartTime: string;
+  /** 备份空间使用详情结束时间 */
+  EndTime: string;
+  /** 备份趋势查询类型，local-本地备份，cross-跨地域备份 */
+  Type?: string;
+}
+
+declare interface DescribeBackupMonitorResponse {
+  /** 备份趋势图时间轴 */
+  TimeStamp: string[];
+  /** 免费备份空间 */
+  FreeSpace: number[];
+  /** 实际总备份空间 */
+  ActualUsedSpace: number[];
+  /** 日志备份空间 */
+  LogBackupSpace: number[];
+  /** 数据备份空间 */
+  DataBackupSpace: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupStatisticalRequest {
+  /** 分页返回，每页返回的数目，取值为1-100，默认值为100 */
+  Limit: number;
+  /** 分页返回，页编号，默认值为第0页。 */
+  Offset: number;
+  /** 一个或者多个实例ID。实例ID，格式如：mssql-si2823jyl。 */
+  InstanceIdSet?: string[];
+  /** 实例名称列表，模糊查询。 */
+  InstanceNameSet?: string[];
+  /** 排序字段，默认default，则按照备份空间降序。default 按照备份空间排序data 数据备份排序log 日志备份排序auto 自动备份排序manual 手动备份排序 */
+  OrderBy?: string;
+  /** 默认降序，[desc-降序，asc-升序]。 */
+  OrderByType?: string;
+}
+
+declare interface DescribeBackupStatisticalResponse {
+  /** 符合条件的实例总数。分页返回的话，这个值指的是所有符合条件的实例的个数，而非当前根据Limit和Offset值返回的实例个数。 */
+  TotalCount: number;
+  /** 实例列表。 */
+  Items: SummaryDetailRes[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupSummaryRequest {
+}
+
+declare interface DescribeBackupSummaryResponse {
+  /** 实际免费总空间，单位(KB)。 */
+  FreeSpace: number;
+  /** 备份实际使用空间，单位(KB)。 */
+  ActualUsedSpace: number;
+  /** 备份文件总个数。 */
+  BackupFilesTotal: number;
+  /** 备份占用收费空间，单位(KB)。 */
+  BillingSpace: number;
+  /** 数据备份使用空间，单位(KB)。 */
+  DataBackupSpace: number;
+  /** 数据备份文件总个数。 */
+  DataBackupCount: number;
+  /** 数据备份中手动备份使用空间，单位(KB)。 */
+  ManualBackupSpace: number;
+  /** 数据备份中手动备份文件总个数。 */
+  ManualBackupCount: number;
+  /** 数据备份中自动备份使用空间，单位(KB)。 */
+  AutoBackupSpace: number;
+  /** 数据备份中自动备份文件总个数。 */
+  AutoBackupCount: number;
+  /** 日志备份使用空间，单位(KB)。 */
+  LogBackupSpace: number;
+  /** 日志备份文件总个数。 */
+  LogBackupCount: number;
+  /** 预估收费金额，单位（元/小时）。 */
+  EstimatedAmount: number;
+  /** 本地备份文件总个数 */
+  LocalBackupFilesTotal: number;
+  /** 跨地域备份文件总个数 */
+  CrossBackupFilesTotal: number;
+  /** 跨地域备份占用收费空间，单位（KB） */
+  CrossBillingSpace: number;
+  /** 跨地域自动数据备份使用空间，单位（KB） */
+  CrossAutoBackupSpace: number;
+  /** 跨地域自动数据备份文件总个数 */
+  CrossAutoBackupCount: number;
+  /** 本地日志备份使用空间，单位（KB） */
+  LocalLogBackupSpace: number;
+  /** 本地日志备份文件总个数 */
+  LocalLogBackupCount: number;
+  /** 跨地域日志备份使用空间，单位（KB） */
+  CrossLogBackupSpace: number;
+  /** 跨地域日志备份文件总个数 */
+  CrossLogBackupCount: number;
+  /** 跨地域备份预估收费金额，单位（元/小时） */
+  CrossEstimatedAmount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupUploadSizeRequest {
   /** 导入目标实例ID */
   InstanceId: string;
@@ -1922,6 +2088,34 @@ declare interface DescribeBusinessIntelligenceFileResponse {
   TotalCount: number;
   /** 文件部署任务集合 */
   BackupMigrationSet: BusinessIntelligenceFile[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCrossBackupStatisticalRequest {
+  /** 分页,页数 */
+  Offset: number;
+  /** 分页，页大小 */
+  Limit: number;
+  /** 实例ID列表 */
+  InstanceIdSet?: string[];
+  /** 实例名称列表 */
+  InstanceNameSet?: string[];
+  /** 跨地域备份状态，enable-开启，disable-关闭 */
+  CrossBackupStatus?: string;
+  /** 跨地域备份目标地域 */
+  CrossRegion?: string;
+  /** 排序字段，默认default-按照备份空间降序排序，data-按照数据备份排序，log-按照日志备份培训 */
+  OrderBy?: string;
+  /** 排序规则（desc-降序，asc-升序），默认desc */
+  OrderByType?: string;
+}
+
+declare interface DescribeCrossBackupStatisticalResponse {
+  /** 跨地域备份概览实时统计总条数 */
+  TotalCount: number;
+  /** 跨地域备份概览实时统计列表 */
+  Items: CrossSummaryDetailRes[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2092,6 +2286,44 @@ declare interface DescribeDBsRequest {
 }
 
 declare interface DescribeDBsResponse {
+  /** 数据库数量 */
+  TotalCount?: number;
+  /** 实例数据库列表 */
+  DBInstances?: InstanceDBDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatabasesNormalRequest {
+  /** 实例ID，形如mssql-7vfv3rk3 */
+  InstanceId: string;
+}
+
+declare interface DescribeDatabasesNormalResponse {
+  /** 表示当前实例下的数据库总个数 */
+  TotalCount?: number;
+  /** 返回数据库的详细配置信息，例如：数据库是否开启CDC、CT等 */
+  DBList?: DbNormalDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatabasesRequest {
+  /** 实例ID */
+  InstanceIdSet: string[];
+  /** 分页返回，每页返回的数目，取值为1-100，默认值为20 */
+  Limit?: number;
+  /** 分页返回，页编号，默认值为第0页 */
+  Offset?: number;
+  /** 数据库名称 */
+  Name?: string;
+  /** 排序规则（desc-降序，asc-升序），默认desc */
+  OrderByType?: string;
+  /** 是否已开启TDE加密，enable-已加密，disable-未加密 */
+  Encryption?: string;
+}
+
+declare interface DescribeDatabasesResponse {
   /** 数据库数量 */
   TotalCount?: number;
   /** 实例数据库列表 */
@@ -2478,6 +2710,30 @@ declare interface DescribeRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRegularBackupPlanRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 定期备份保留天数 [90 - 3650]天，默认365天 */
+  RegularBackupSaveDays: number;
+  /** 定期备份策略 years-每年，quarters-每季度，months-每月，默认months */
+  RegularBackupStrategy: string;
+  /** 定期备份保留个数，默认1个 */
+  RegularBackupCounts: number;
+  /** 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期 */
+  RegularBackupStartTime: string;
+  /** 常规备份周期 */
+  BackupCycle: number[];
+}
+
+declare interface DescribeRegularBackupPlanResponse {
+  /** 常规备份计划 */
+  SaveModePeriod: string[];
+  /** 定期备份计划 */
+  SaveModeRegular: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRollbackTimeRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2800,6 +3056,26 @@ declare interface ModifyBackupStrategyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCrossBackupStrategyRequest {
+  /** 跨地域备份开关(数据备份&日志备份) enable-开启，disable-关闭 */
+  CrossBackupEnabled: string;
+  /** 实例Id */
+  InstanceId?: string;
+  /** 实例ID列表 */
+  InstanceIdSet?: string[];
+  /** 跨地域备份保留天数，取值：7~1830，默认7天 */
+  CrossBackupSaveDays?: number;
+  /** 跨地域备份的目标地域ID，最多两个，最少一个 */
+  CrossBackupRegion?: string[];
+  /** 是否立即清理跨地域备份(数据备份&日志备份) ，只有在BackupEnabled = disable时有效。1-是，0-否，默认：0 */
+  CleanUpCrossBackup?: number;
+}
+
+declare interface ModifyCrossBackupStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBEncryptAttributesRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2954,6 +3230,20 @@ declare interface ModifyDatabaseMdfRequest {
 }
 
 declare interface ModifyDatabaseMdfResponse {
+  /** 流程ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDatabaseShrinkMDFRequest {
+  /** 数据库名数组 */
+  DBNames: string[];
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface ModifyDatabaseShrinkMDFResponse {
   /** 流程ID */
   FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3459,12 +3749,20 @@ declare interface Sqlserver {
   DescribeBackupFiles(data: DescribeBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupFilesResponse>;
   /** 查询备份导入任务 {@link DescribeBackupMigrationRequest} {@link DescribeBackupMigrationResponse} */
   DescribeBackupMigration(data: DescribeBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupMigrationResponse>;
+  /** 查询备份空间使用详情 {@link DescribeBackupMonitorRequest} {@link DescribeBackupMonitorResponse} */
+  DescribeBackupMonitor(data: DescribeBackupMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupMonitorResponse>;
+  /** 查询备份实时统计列表 {@link DescribeBackupStatisticalRequest} {@link DescribeBackupStatisticalResponse} */
+  DescribeBackupStatistical(data: DescribeBackupStatisticalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupStatisticalResponse>;
+  /** 查询数据库备份概览信息 {@link DescribeBackupSummaryRequest} {@link DescribeBackupSummaryResponse} */
+  DescribeBackupSummary(data?: DescribeBackupSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupSummaryResponse>;
   /** 查询上传的备份文件大小 {@link DescribeBackupUploadSizeRequest} {@link DescribeBackupUploadSizeResponse} */
   DescribeBackupUploadSize(data: DescribeBackupUploadSizeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupUploadSizeResponse>;
   /** 查询备份列表 {@link DescribeBackupsRequest} {@link DescribeBackupsResponse} */
   DescribeBackups(data: DescribeBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupsResponse>;
   /** 查询商业智能服务需要的文件 {@link DescribeBusinessIntelligenceFileRequest} {@link DescribeBusinessIntelligenceFileResponse} */
   DescribeBusinessIntelligenceFile(data: DescribeBusinessIntelligenceFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessIntelligenceFileResponse>;
+  /** 查询跨地域备份实时统计列表 {@link DescribeCrossBackupStatisticalRequest} {@link DescribeCrossBackupStatisticalResponse} */
+  DescribeCrossBackupStatistical(data: DescribeCrossBackupStatisticalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBackupStatisticalResponse>;
   /** 查询备机的容灾地域和可用区 {@link DescribeCrossRegionZoneRequest} {@link DescribeCrossRegionZoneResponse} */
   DescribeCrossRegionZone(data: DescribeCrossRegionZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossRegionZoneResponse>;
   /** 查询数据库字符集 {@link DescribeDBCharsetsRequest} {@link DescribeDBCharsetsResponse} */
@@ -3481,6 +3779,10 @@ declare interface Sqlserver {
   DescribeDBs(data: DescribeDBsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsResponse>;
   /** 查询数据库配置信息（已废弃） {@link DescribeDBsNormalRequest} {@link DescribeDBsNormalResponse} */
   DescribeDBsNormal(data: DescribeDBsNormalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsNormalResponse>;
+  /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
+  DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  /** 查询数据库配置信息 {@link DescribeDatabasesNormalRequest} {@link DescribeDatabasesNormalResponse} */
+  DescribeDatabasesNormal(data: DescribeDatabasesNormalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesNormalResponse>;
   /** 查询流程状态 {@link DescribeFlowStatusRequest} {@link DescribeFlowStatusResponse} */
   DescribeFlowStatus(data: DescribeFlowStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowStatusResponse>;
   /** 查询主备切换日志 {@link DescribeHASwitchLogRequest} {@link DescribeHASwitchLogResponse} */
@@ -3517,6 +3819,8 @@ declare interface Sqlserver {
   DescribeReadOnlyGroupList(data: DescribeReadOnlyGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupListResponse>;
   /** 查询售卖地域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
+  /** 查询实例定期备份保留计划 {@link DescribeRegularBackupPlanRequest} {@link DescribeRegularBackupPlanResponse} */
+  DescribeRegularBackupPlan(data: DescribeRegularBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegularBackupPlanResponse>;
   /** 查询实例可回档时间范围 {@link DescribeRollbackTimeRequest} {@link DescribeRollbackTimeResponse} */
   DescribeRollbackTime(data: DescribeRollbackTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeResponse>;
   /** 获取慢查询日志文件信息 {@link DescribeSlowlogsRequest} {@link DescribeSlowlogsResponse} */
@@ -3547,6 +3851,8 @@ declare interface Sqlserver {
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
   /** 设置备份策略 {@link ModifyBackupStrategyRequest} {@link ModifyBackupStrategyResponse} */
   ModifyBackupStrategy(data: ModifyBackupStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupStrategyResponse>;
+  /** 开启、关闭跨地域备份策略 {@link ModifyCrossBackupStrategyRequest} {@link ModifyCrossBackupStrategyResponse} */
+  ModifyCrossBackupStrategy(data: ModifyCrossBackupStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCrossBackupStrategyResponse>;
   /** 开启、关闭数据库的TDE加密功能 {@link ModifyDBEncryptAttributesRequest} {@link ModifyDBEncryptAttributesResponse} */
   ModifyDBEncryptAttributes(data: ModifyDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBEncryptAttributesResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
@@ -3569,6 +3875,8 @@ declare interface Sqlserver {
   ModifyDatabaseCT(data: ModifyDatabaseCTRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseCTResponse>;
   /** 收缩数据库mdf (已废弃） {@link ModifyDatabaseMdfRequest} {@link ModifyDatabaseMdfResponse} */
   ModifyDatabaseMdf(data: ModifyDatabaseMdfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseMdfResponse>;
+  /** 收缩数据库mdf {@link ModifyDatabaseShrinkMDFRequest} {@link ModifyDatabaseShrinkMDFResponse} */
+  ModifyDatabaseShrinkMDF(data: ModifyDatabaseShrinkMDFRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseShrinkMDFResponse>;
   /** 修改增量备份导入任务 {@link ModifyIncrementalMigrationRequest} {@link ModifyIncrementalMigrationResponse} */
   ModifyIncrementalMigration(data: ModifyIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIncrementalMigrationResponse>;
   /** 开通实例的TDE加密功能 {@link ModifyInstanceEncryptAttributesRequest} {@link ModifyInstanceEncryptAttributesResponse} */

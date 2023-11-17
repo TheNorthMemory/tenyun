@@ -2515,9 +2515,9 @@ declare interface DescribeHostsSettingRequest {
 
 declare interface DescribeHostsSettingResponse {
   /** 域名列表。 */
-  DetailHosts: DetailHost[];
+  DetailHosts?: DetailHost[];
   /** 域名数量。 */
-  TotalNumber: number;
+  TotalNumber?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2837,7 +2837,7 @@ declare interface DescribeZoneSettingRequest {
 
 declare interface DescribeZoneSettingResponse {
   /** 站点配置。 */
-  ZoneSetting: ZoneSetting | null;
+  ZoneSetting?: ZoneSetting | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

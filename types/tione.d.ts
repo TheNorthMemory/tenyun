@@ -1108,6 +1108,14 @@ declare interface PointInfo {
   Y: number | null;
 }
 
+/** 太极任务预训练模型信息 */
+declare interface PreTrainModel {
+  /** 模型ID */
+  ModelId?: string | null;
+  /** 模型名称 */
+  ModelName?: string | null;
+}
+
 /** RDMA配置 */
 declare interface RDMAConfig {
   /** 是否开启RDMA */
@@ -2311,6 +2319,8 @@ declare interface CreateTrainingTaskRequest {
   DataSource?: string;
   /** 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292) */
   CallbackUrl?: string;
+  /** 太极预训练模型ID */
+  PreTrainModel?: PreTrainModel;
 }
 
 declare interface CreateTrainingTaskResponse {

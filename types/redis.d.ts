@@ -124,12 +124,12 @@ declare interface Groups {
 
 /** 热Key详细信息 */
 declare interface HotKeyInfo {
-  /** 热Key */
-  Key: string;
-  /** 类型 */
-  Type: string;
-  /** 数量 */
-  Count: number;
+  /** 热 Key 的名称。 */
+  Key?: string;
+  /** Key 类型。 */
+  Type?: string;
+  /** 某段时间内热 Key 的访问次数 */
+  Count?: number;
 }
 
 /** 安全组入站规则 */
