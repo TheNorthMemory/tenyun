@@ -42,6 +42,38 @@ declare interface AgentStatus {
   InOperation?: number | null;
 }
 
+/** 告警信息 */
+declare interface AlarmDsVO {
+  /** 告警策略id */
+  AlarmId?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 告警是否生效 */
+  Status?: number | null;
+  /** 告警类别，目前支持失败告警，超时告警 */
+  AlarmType?: string | null;
+  /** 告警方式 ，目前支持email提醒，短信提醒 */
+  AlarmWay?: string | null;
+  /** 告警创建人 */
+  Creator?: string | null;
+  /** 告警接收人 */
+  AlarmRecipient?: string | null;
+  /** 告警接收人ID */
+  AlarmRecipientId?: string | null;
+  /** 告警修改时间 */
+  ModifyTime?: string | null;
+  /** 最近失败告警实例数据时间 */
+  LastFailTime?: string | null;
+  /** 最近超时告警实例数据时间 */
+  LastOverTime?: string | null;
+  /** 最新告警时间 */
+  LastAlarmTime?: string | null;
+  /** AlarmExt信息 */
+  AlarmExt?: AlarmExtDsVO[] | null;
+  /** 告警创建时间 */
+  CreateTime?: string | null;
+}
+
 /** 告警事件详情 */
 declare interface AlarmEventInfo {
   /** 告警ID */
@@ -86,6 +118,20 @@ declare interface AlarmEventInfo {
   TaskType?: number | null;
   /** 发送结果 */
   SendResult?: string | null;
+}
+
+/** AlarmExtVO信息 */
+declare interface AlarmExtDsVO {
+  /** 告警策略ID */
+  AlarmId?: string | null;
+  /** 扩展字段key */
+  PropName?: string | null;
+  /** 扩展字段value */
+  PropValue?: string | null;
+  /** 告警创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
 }
 
 /** 告警指标 */
@@ -164,6 +210,52 @@ declare interface AlarmRuleDto {
   AlarmRuleId?: string;
   /** 重要;紧急;普通 */
   AlarmLevelType?: string;
+}
+
+/** 审批列表信息 */
+declare interface Apply {
+  /** 申请人id */
+  ApplicantId: string;
+  /** 申请人名称 */
+  ApplicantName?: string;
+  /** 审批备注 */
+  Remark: string | null;
+  /** 审批分类key */
+  ApproveClassification: string;
+  /** 审批单id */
+  ApproveId?: string;
+  /** 审批类型key */
+  ApproveType: string;
+  /** 申请原因 */
+  Reason: string | null;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 审批时间 */
+  ApproveTime: string | null;
+  /** 审批分类名称 */
+  ApproveClassificationName: string;
+  /** 状态 */
+  Status: string;
+  /** 审批类型名称 */
+  ApproveTypeName: string;
+}
+
+/** 修改审批单状态 */
+declare interface ApproveModify {
+  /** 审批单id */
+  ApproveId: string;
+  /** 是否修改成功 */
+  Success: boolean;
+}
+
+/** AttributeItemVO参数 */
+declare interface AttributeItemDsVO {
+  /** Key值 */
+  Key?: string | null;
+  /** Value值 */
+  Value?: string | null;
+  /** 描述 */
+  Description?: string | null;
 }
 
 /** 基线实例 */
@@ -384,6 +476,26 @@ declare interface BaselineTaskInstanceDto {
   AppId?: string | null;
 }
 
+/** BatchCreateTaskVersion使用，描述任务信息 */
+declare interface BatchCreateTaskVersionDTO {
+  /** 任务ID */
+  TaskId: string | null;
+  /** VersionRemark */
+  VersionRemark?: string | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+}
+
+/** BatchCreateTaskVersionDs使用的TaskVersionDsDTO */
+declare interface BatchCreateTaskVersionDsDTOLite {
+  /** 任务id */
+  TaskId?: string | null;
+  /** 版本备注 */
+  VersionRemark?: string | null;
+  /** 任务信息 */
+  TaskInfo?: TaskDsDTOLiteV2 | null;
+}
+
 /** 批量操作的结果返回 */
 declare interface BatchOperateResult {
   /** 批量操作成功数 */
@@ -392,6 +504,16 @@ declare interface BatchOperateResult {
   FailedCount: number;
   /** 批量操作的总数 */
   TotalCount: number;
+}
+
+/** BatchOperateResultDs */
+declare interface BatchOperateResultDs {
+  /** result */
+  Result?: boolean | null;
+  /** errorId */
+  ErrorId?: string | null;
+  /** errorDesc */
+  ErrorDesc?: string | null;
 }
 
 /** 实例批量操作结果类 */
@@ -444,6 +566,14 @@ declare interface BytesSpeed {
   NodeName: string | null;
   /** 速度值列表 */
   Values: SpeedValue[] | null;
+}
+
+/** CandidateDsDTo */
+declare interface CandidateDsDTo {
+  /** 取值 */
+  Value?: string | null;
+  /** 取值描述 */
+  ValueDesc?: string | null;
 }
 
 /** 画布所需的信息 */
@@ -864,6 +994,40 @@ declare interface DependencyConfig {
   ParentTask?: TaskInnerInfo | null;
   /** 子任务信息 */
   SonTask?: TaskInnerInfo | null;
+}
+
+/** 依赖配置无循环递归属性 */
+declare interface DependencyConfigDsDTONoRecurV2 {
+  /** ParentTask任务 */
+  ParentTask?: TaskDsDTONoRecurV2 | null;
+  /** SonTask任务 */
+  SonTask?: TaskDsDTONoRecurV2 | null;
+  /** the dependency config */
+  MainCyclicConfig?: string | null;
+  /** SubordinateCyclicConfig配置 */
+  SubordinateCyclicConfig?: string | null;
+  /** DependencyStrategy策略 */
+  DependencyStrategy?: DependencyStrategyDs | null;
+}
+
+/** 依赖配置策略 */
+declare interface DependencyStrategyDs {
+  /** 等待（默认策略）或 执行 */
+  PollingNullStrategy?: string | null;
+}
+
+/** 申请列表 */
+declare interface DescribeApply {
+  /** 申请列表详情 */
+  Rows: Apply[];
+  /** 总分页页码 */
+  TotalPageNumber: number;
+  /** 总个数 */
+  TotalCount: number;
+  /** 分页页码 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
 }
 
 /** 批量操作任务列表 */
@@ -1314,6 +1478,14 @@ declare interface FieldConfig {
 
 /** 通用过滤器 */
 declare interface Filter {
+  /** 过滤字段名称 */
+  Name?: string;
+  /** 过滤值列表 */
+  Values?: string[];
+}
+
+/** 通用过滤器 */
+declare interface FilterOptional {
   /** 过滤字段名称 */
   Name?: string;
   /** 过滤值列表 */
@@ -2490,6 +2662,14 @@ declare interface OrderField {
   Direction: string;
 }
 
+/** 通用排序字段 */
+declare interface OrderFieldOptional {
+  /** 排序字段名称 */
+  Name?: string;
+  /** 排序方向：ASC|DESC */
+  Direction?: string;
+}
+
 /** 包含层级信息的函数 */
 declare interface OrganizationalFunction {
   /** 名称 */
@@ -2550,6 +2730,80 @@ declare interface ParamInfo {
   ParamKey: string;
   /** 参数值 */
   ParamValue: string;
+}
+
+/** 参数参数 */
+declare interface ParamInfoDs {
+  /** 参数名 */
+  ParamKey: string;
+  /** 参数值 */
+  ParamValue: string;
+}
+
+/** 任务参数Dto */
+declare interface ParameterTaskDsDto {
+  /** 任务id */
+  TaskId?: string | null;
+  /** 参数名 */
+  ParamKey?: string | null;
+  /** 参数定义 */
+  ParamDefine?: string | null;
+  /** 参数值 */
+  ParamValue?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+}
+
+/** 查询任务输入参数Dto */
+declare interface ParameterTaskInDsDto {
+  /** 唯一标识 */
+  Id: number | null;
+  /** 任务id */
+  TaskId: string | null;
+  /** 参数名 */
+  ParamKey: string | null;
+  /** 参数描述 */
+  ParamDesc: string | null;
+  /** 父任务id */
+  FromTaskId: string | null;
+  /** 父任务参数key */
+  FromParamKey: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 升级时间 */
+  UpdateTime: string | null;
+  /** 父任务名 */
+  FromTaskName: string | null;
+  /** 父任务项目id */
+  FromProjectId: string | null;
+  /** 父任务项目名 */
+  FromProjectName: string | null;
+}
+
+/** 任务参数输出dto */
+declare interface ParameterTaskOutDsDto {
+  /** 唯一标识 */
+  Id: number | null;
+  /** 任务id */
+  TaskId: string | null;
+  /** 参数名 */
+  ParamKey: string | null;
+  /** 参数描述 */
+  ParamDesc: string | null;
+  /** 参数定义 */
+  ParamDefine: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 任务名 */
+  TaskName: string | null;
+  /** 项目id */
+  ProjectId: string | null;
+  /** 项目名 */
+  ProjectName: string | null;
 }
 
 /** 分区参数 */
@@ -4074,6 +4328,382 @@ declare interface TaskCanvasInfo {
   TenantId?: string | null;
 }
 
+/** TaskDsDTO 减少嵌套层数 */
+declare interface TaskDsDTOLiteV2 {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 虚拟任务标记 */
+  VirtualTaskId?: string | null;
+  /** 虚拟任务标记 */
+  VirtualFlag?: boolean | null;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 真实工作流id */
+  RealWorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 文件夹id */
+  FolderId?: string | null;
+  /** 文件夹名字 */
+  FolderName?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  LastUpdate?: string | null;
+  /** 任务状态 */
+  Status?: string | null;
+  /** 责任人 */
+  InCharge?: string | null;
+  /** 责任人用户id */
+  InChargeId?: string | null;
+  /** 生效日期 */
+  StartTime?: string | null;
+  /** 结束日期 */
+  EndTime?: string | null;
+  /** 执行时间左闭区间 */
+  ExecutionStartTime?: string | null;
+  /** 执行时间右闭区间 */
+  ExecutionEndTime?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目标识 */
+  ProjectIdent?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
+  /** 步长 */
+  CycleStep?: number | null;
+  /** 对于crontab类型调度配置其为用户输入 对于周期类型调度配置其为系统计算 */
+  CrontabExpression?: string | null;
+  /** 延时调度 */
+  DelayTime?: number | null;
+  /** 延时执行时间 */
+  StartupTime?: number | null;
+  /** 重试等待时间,单位分钟 */
+  RetryWait?: number | null;
+  /** 是否可重试 */
+  Retriable?: number | null;
+  /** 调度扩展信息 */
+  TaskAction?: string | null;
+  /** 运行次数限制 */
+  TryLimit?: number | null;
+  /** 运行优先级 */
+  RunPriority?: number | null;
+  /** 任务类型 */
+  TaskType?: TaskTypeDsVO | null;
+  /** 指定的运行节点 */
+  BrokerIp?: string | null;
+  /** 集群name */
+  ClusterId?: string | null;
+  /** 最小数据时间 */
+  MinDateTime?: string | null;
+  /** 最大数据时间 */
+  MaxDateTime?: string | null;
+  /** 运行耗时超时时间 */
+  ExecutionTTL?: number | null;
+  /** 是否自身依赖 是1 否2 并行3 */
+  SelfDepend?: string | null;
+  /** LeftCoordinate坐标 */
+  LeftCoordinate?: number | null;
+  /** TopCoordinate坐标 */
+  TopCoordinate?: number | null;
+  /** TaskExt信息 */
+  TaskExt?: TaskExtDsVO | null;
+  /** taskExt 导入导出json使用 private Map properties; */
+  Properties?: string | null;
+  /** 任务备注 */
+  Notes?: string | null;
+  /** 实例生成策略 T+1 表示当前周期生成上一周期数据时间任务实例 默认T+1 T+0 表示当前周期生成当前周期数据时间任务实例 T-1 * 表示当前周期生成下一周期数据时间任务实例 * * service不做默认策略处理, 下沉到数据初始化默认T+1, service涉及到多个更新task的路径 */
+  InstanceInitStrategy?: string | null;
+  /** 资源池队列名称 */
+  YarnQueue?: string | null;
+  /** 任务告警信息 */
+  Alarms?: AlarmDsVO[] | null;
+  /** alarmDTO 导入导出json使用 */
+  Alarm?: string | null;
+  /** 任务脚本是否发生变化 */
+  ScriptChange?: boolean | null;
+  /** 任务版本是否已提交 */
+  Submit?: boolean | null;
+  /** 最新调度计划变更时间 仅生产态 */
+  LastSchedulerCommitTime?: string | null;
+  /** 仅生产态存储于生产态序列化任务信息, 减少base CPU重复密集计算 */
+  NormalizedJobStartTime?: string | null;
+  /** 启动暂停的任务时，选择不补录中间实例，通过此字段来标识从哪个时间开始生成实例 */
+  RecoverFreezeStartTime?: string | null;
+  /** 源数据源 */
+  SourceServer?: string | null;
+  /** 目标数据源 */
+  TargetServer?: string | null;
+  /** 父子节点树 */
+  Tasks?: TaskDsDTONoRecurV2[] | null;
+  /** 创建者 */
+  Creater?: string | null;
+  /** 分支，依赖关系，and/or, 默认and */
+  DependencyRel?: string | null;
+  /** 是否支持工作流依赖 yes / no 默认 no */
+  DependencyWorkflow?: string | null;
+  /** 支持事件监听器配置导入导出 */
+  EventListenerConfig?: string | null;
+  /** 支持事件触发器配置导入导出 */
+  EventPublisherConfig?: string | null;
+  /** 依赖配置 */
+  DependencyConfigList?: DependencyConfigDsDTONoRecurV2[] | null;
+  /** 虚拟任务状态 */
+  VirtualTaskStatus?: string | null;
+  /** 回收站还原提示语 */
+  RecycleTips?: string | null;
+  /** 回收站所属用户 */
+  RecycleUser?: string | null;
+  /** 新增 或 修改 */
+  NewOrUpdate?: string | null;
+  /** 任务上游依赖信息 用于发布管理导入导出 */
+  Params?: ParameterTaskDsDto[] | null;
+  /** 任务上游依赖信息 用于发布管理导入导出 */
+  TaskLinkInfo?: TaskLinkDsDTO[] | null;
+  /** 导入结果 */
+  ImportResult?: boolean | null;
+  /** 导入失败原因 */
+  ImportErrMsg?: string | null;
+  /** 任务内容 全部内容 配置内容 资源内容 */
+  ContentType?: string | null;
+  /** 是否导入提交运行 */
+  TaskAutoSubmit?: boolean | null;
+  /** 上层产品 数据质量 / 数据开发 / ... */
+  ProductName?: string | null;
+  /** 创建者帐号 */
+  OwnId?: string | null;
+  /** 子账号 */
+  UserId?: string | null;
+  /** 租户id */
+  TenantId?: string | null;
+  /** 最后修改的人 */
+  UpdateUser?: string | null;
+  /** 最后修改时间 */
+  UpdateTime?: string | null;
+  /** 最后修改的人的ID */
+  UpdateUserId?: string | null;
+  /** 调度计划 */
+  SchedulerDesc?: string | null;
+  /** 资源组 */
+  ResourceGroup?: string | null;
+  /** 版本提交说明 */
+  VersionDesc?: string | null;
+  /** 编排-删除添加的链接 */
+  LinkId?: string | null;
+  /** 脚本引用关系 */
+  UserFileId?: string | null;
+  /** 来源数据源ID */
+  SourceServiceId?: string | null;
+  /** 来源数据源类型 */
+  SourceServiceType?: string | null;
+  /** 去向数据源ID（离线同步） */
+  TargetServiceId?: string | null;
+  /** 去向数据源类型（离线同步） */
+  TargetServiceType?: string | null;
+  /** TaskInputParam输入参数 */
+  ParamInList?: ParameterTaskInDsDto[] | null;
+  /** TaskOutputParam输出参数 */
+  ParamOutList?: ParameterTaskOutDsDto[] | null;
+}
+
+/** 任务信息无循环递归属性 */
+declare interface TaskDsDTONoRecurV2 {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 虚拟任务标记 */
+  VirtualTaskId?: string | null;
+  /** 虚拟任务标记 */
+  VirtualFlag?: boolean | null;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 真实工作流id */
+  RealWorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 文件夹id */
+  FolderId?: string | null;
+  /** 文件夹名字 */
+  FolderName?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  LastUpdate?: string | null;
+  /** 任务状态 */
+  Status?: string | null;
+  /** 责任人 */
+  InCharge?: string | null;
+  /** 责任人用户id */
+  InChargeId?: string | null;
+  /** 生效日期 */
+  StartTime?: string | null;
+  /** 结束日期 */
+  EndTime?: string | null;
+  /** 执行时间左闭区间 */
+  ExecutionStartTime?: string | null;
+  /** 执行时间右闭区间 */
+  ExecutionEndTime?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目标识 */
+  ProjectIdent?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
+  /** 步长 */
+  CycleStep?: number | null;
+  /** 对于crontab类型调度配置其为用户输入 对于周期类型调度配置其为系统计算 */
+  CrontabExpression?: string | null;
+  /** 延时调度 */
+  DelayTime?: number | null;
+  /** 延时执行时间 */
+  StartupTime?: number | null;
+  /** 重试等待时间,单位分钟 */
+  RetryWait?: number | null;
+  /** 是否可重试 */
+  Retriable?: number | null;
+  /** 调度扩展信息 */
+  TaskAction?: string | null;
+  /** 运行次数限制 */
+  TryLimit?: number | null;
+  /** 运行优先级 */
+  RunPriority?: number | null;
+  /** 任务类型 */
+  TaskType?: TaskTypeDsVO | null;
+  /** 指定的运行节点 */
+  BrokerIp?: string | null;
+  /** 集群name */
+  ClusterId?: string | null;
+  /** 最小数据时间 */
+  MinDateTime?: string | null;
+  /** 最大数据时间 */
+  MaxDateTime?: string | null;
+  /** 运行耗时超时时间 */
+  ExecutionTTL?: number | null;
+  /** 是否自身依赖 是1 否2 并行3 */
+  SelfDepend?: number | null;
+  /** LeftCoordinate坐标 */
+  LeftCoordinate?: number | null;
+  /** TopCoordinate坐标 */
+  TopCoordinate?: number | null;
+  /** TaskExt信息 */
+  TaskExt?: TaskExtDsVO | null;
+  /** taskExt 导入导出json使用 private Map properties; */
+  Properties?: string | null;
+  /** 任务备注 */
+  Notes?: string | null;
+  /** 实例生成策略 T+1 表示当前周期生成上一周期数据时间任务实例 默认T+1 T+0 表示当前周期生成当前周期数据时间任务实例 T-1 * 表示当前周期生成下一周期数据时间任务实例 * * service不做默认策略处理, 下沉到数据初始化默认T+1, service涉及到多个更新task的路径 */
+  InstanceInitStrategy?: string | null;
+  /** 资源池队列名称 */
+  YarnQueue?: string | null;
+  /** 任务告警信息 */
+  Alarms?: AlarmDsVO[] | null;
+  /** alarmDTO 导入导出json使用 */
+  Alarm?: string | null;
+  /** 任务脚本是否发生变化 */
+  ScriptChange?: boolean | null;
+  /** 任务版本是否已提交 */
+  Submit?: boolean | null;
+  /** 最新调度计划变更时间 仅生产态 */
+  LastSchedulerCommitTime?: string | null;
+  /** 仅生产态存储于生产态序列化任务信息, 减少base CPU重复密集计算 */
+  NormalizedJobStartTime?: string | null;
+  /** 启动暂停的任务时，选择不补录中间实例，通过此字段来标识从哪个时间开始生成实例 */
+  RecoverFreezeStartTime?: string | null;
+  /** 源数据源 */
+  SourceServer?: string | null;
+  /** 目标数据源 */
+  TargetServer?: string | null;
+  /** 父子节点树 */
+  Tasks?: string[] | null;
+  /** 创建者 */
+  Creater?: string | null;
+  /** 分支，依赖关系，and/or, 默认and */
+  DependencyRel?: string | null;
+  /** 是否支持工作流依赖 yes / no 默认 no */
+  DependencyWorkflow?: string | null;
+  /** 支持事件监听器配置导入导出 */
+  EventListenerConfig?: string | null;
+  /** 支持事件触发器配置导入导出 */
+  EventPublisherConfig?: string | null;
+  /** 依赖配置 */
+  DependencyConfigList?: string[] | null;
+  /** 虚拟任务状态 */
+  VirtualTaskStatus?: string | null;
+  /** 回收站还原提示语 */
+  RecycleTips?: string | null;
+  /** 回收站所属用户 */
+  RecycleUser?: string | null;
+  /** 新增 或 修改 */
+  NewOrUpdate?: string | null;
+  /** 任务上游依赖信息 用于发布管理导入导出 */
+  Params?: ParameterTaskDsDto[] | null;
+  /** 任务上游依赖信息 用于发布管理导入导出 */
+  TaskLinkInfo?: TaskLinkDsDTO[] | null;
+  /** 导入结果 */
+  ImportResult?: boolean | null;
+  /** 导入失败原因 */
+  ImportErrMsg?: string | null;
+  /** 任务内容 全部内容 配置内容 资源内容 */
+  ContentType?: string | null;
+  /** 是否导入提交运行 */
+  TaskAutoSubmit?: boolean | null;
+  /** 上层产品 数据质量 / 数据开发 / ... */
+  ProductName?: string | null;
+  /** 创建者帐号 */
+  OwnId?: string | null;
+  /** 子账号 */
+  UserId?: string | null;
+  /** 租户id */
+  TenantId?: string | null;
+  /** 最后修改的人 */
+  UpdateUser?: string | null;
+  /** 最后修改时间 */
+  UpdateTime?: string | null;
+  /** 最后修改的人的ID */
+  UpdateUserId?: string | null;
+  /** 调度计划 */
+  SchedulerDesc?: string | null;
+  /** 资源组 */
+  ResourceGroup?: string | null;
+  /** 版本提交说明 */
+  VersionDesc?: string | null;
+  /** 编排-删除添加的链接 */
+  LinkId?: string | null;
+  /** 脚本引用关系 */
+  UserFileId?: string | null;
+  /** 来源数据源ID */
+  SourceServiceId?: string | null;
+  /** 来源数据源类型 */
+  SourceServiceType?: string | null;
+  /** 去向数据源ID */
+  TargetServiceId?: string | null;
+  /** 去向数据源类型 */
+  TargetServiceType?: string | null;
+  /** 输入参数 */
+  ParamInList?: ParameterTaskInDsDto[] | null;
+  /** 输出参数 */
+  ParamOutList?: ParameterTaskOutDsDto[] | null;
+}
+
+/** 属性配置 */
+declare interface TaskExtDsVO {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务属性 */
+  Properties?: ParamInfoDs[] | null;
+  /** 任务试运行扩展业务属性 */
+  DryRunExtAttributes?: AttributeItemDsVO[] | null;
+  /** 任务试运行动态传参 */
+  DryRunParameter?: AttributeItemDsVO[] | null;
+}
+
 /** 任务扩展信息 */
 declare interface TaskExtInfo {
   /** 键 */
@@ -4354,6 +4984,42 @@ declare interface TaskInstanceInfo {
   CostTime: string | null;
 }
 
+/** Task Link 信息 */
+declare interface TaskLinkDsDTO {
+  /** TaskTo信息 */
+  TaskTo?: string | null;
+  /** TaskFrom信息 */
+  TaskFrom?: string | null;
+  /** LinkType信息 */
+  LinkType?: string | null;
+  /** key */
+  LinkKey?: string | null;
+  /** LinkId信息 */
+  Id?: string | null;
+  /** 责任人 */
+  InCharge?: string | null;
+  /** 父子任务之间的依赖关系 */
+  LinkDependencyType?: string | null;
+  /** 父子任务之间依赖偏移量 */
+  Offset?: number | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 实体任务id */
+  RealFromTaskId?: string | null;
+  /** 实体任务名 */
+  RealFromTaskName?: string | null;
+  /** 实体任务所属工作流 */
+  RealFromWorkflowId?: string | null;
+  /** 实体任务所属工作流名称 */
+  RealFromWorkflowName?: string | null;
+  /** 实体任务所属项目id */
+  RealProjectId?: string | null;
+  /** 实体任务所属项目标识 */
+  RealProjectIdent?: string | null;
+  /** 实体任务所属项目名 */
+  RealProjectName?: string | null;
+}
+
 /** 任务依赖的边信息 */
 declare interface TaskLinkInfo {
   /** 下游任务id */
@@ -4596,6 +5262,108 @@ declare interface TaskTypeCnt {
   TaskType?: string | null;
   /** 类型名称 */
   TypeName?: string | null;
+}
+
+/** 任务类型 */
+declare interface TaskTypeDsVO {
+  /** 任务类型id */
+  TypeId?: number | null;
+  /** TypeDesc描述 */
+  TypeDesc?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 服务器类型 */
+  SourceServerType?: string | null;
+  /** 目标服务器类型 */
+  TargetServerType?: string | null;
+  /** RunJarName名称 */
+  RunJarName?: string | null;
+  /** Killable参数 */
+  KillAble?: number | null;
+  /** TypeSort类型 */
+  TypeSort?: string | null;
+  /** InCharge参数 */
+  InCharge?: string | null;
+  /** 节点对应任务类型运行上限（暂时不考虑） */
+  BrokerParallelism?: number | null;
+  /** 每个任务运行上限（暂时不考虑 */
+  TaskParallelism?: number | null;
+  /** 补录和重跑上限 */
+  DoRedoParallelism?: number | null;
+  /** 0 为不可创建任务; >0 可创建任务 */
+  DowngradePriorityTries?: number | null;
+  /** 重试等待时间 */
+  RetryWait?: number | null;
+  /** 重试次数（在任务属性配置中设置） */
+  RetryLimit?: number | null;
+  /** DefaultAliveWait参数 */
+  DefaultAliveWait?: number | null;
+  /** PollingSeconds秒数 */
+  PollingSeconds?: number | null;
+  /** 参数列表xml */
+  ParamList?: string | null;
+  /** TaskTypeExts参数 */
+  TaskTypeExtension?: TaskTypeExtParamDsVO[] | null;
+  /** 对应文件类型 */
+  FileType?: string | null;
+  /** 是否选择脚本路径 */
+  SelectFilePath?: boolean | null;
+  /** classpath是否要排除掉common-lib，默认是0不排除 */
+  ExcludeCommonLib?: boolean | null;
+  /** runner任务完成后需要触发的hook */
+  PostHooks?: string | null;
+}
+
+/** 属性类型扩展 */
+declare interface TaskTypeExtDsVO {
+  /** 类型ID */
+  TypeId: number | null;
+  /** 属性名 */
+  PropName: string | null;
+  /** 属性标签(ui展示用) */
+  PropLabel: string | null;
+  /** 缺省标志 */
+  DefaultFlag: number | null;
+  /** 可视标志 */
+  VisibleFlag: number | null;
+  /** 属性描述 */
+  PropDesc: string | null;
+  /** 排列id */
+  RankId: number | null;
+  /** 控件类型 */
+  InputType: string | null;
+  /** 值类型(integer，string) */
+  ValueType: string | null;
+  /** 缺省值 */
+  DefaultValue: string | null;
+  /** 候选值列表(，分隔) */
+  CandidateValues: string | null;
+  /** 是否必填 */
+  IsMandatory: number | null;
+  /** 最大值 */
+  MaxValue: number | null;
+  /** 最小值 */
+  MinValue: number | null;
+  /** 配置等级(1-普通，2-高级，3-管理员) */
+  ConfLevel: number | null;
+  /** 候选文本列表(，分隔) */
+  CandidateTexts: string | null;
+  /** 复制时是否需要修改 */
+  CopyKey: number | null;
+  /** 字段正则表达式校验 */
+  Regex: string | null;
+  /** 字段正则表达式校验证提示tip */
+  Tip: string | null;
+  /** 可选值 */
+  Candidates?: CandidateDsDTo[] | null;
+}
+
+/** TaskTypeExts参数 */
+declare interface TaskTypeExtParamDsVO {
+  /** TaskTypeExts的Key */
+  TaskTypeExtKey?: string | null;
+  /** TaskTypeExts的Value */
+  TaskTypeExtValue?: TaskTypeExtDsVO | null;
 }
 
 /** 任务类型map */
@@ -4957,6 +5725,26 @@ declare interface BatchCreateIntegrationTaskAlarmsResponse {
   FailedCount: number | null;
   /** 任务总数 */
   TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchCreateTaskVersionDsRequest {
+  /** 任务版本信息 */
+  TaskVersionDTOs: BatchCreateTaskVersionDsDTOLite[];
+  /** 项目ID */
+  ProjectId: string;
+  /** 是否自动运行 */
+  AutoRun?: boolean;
+  /** 告警方式:email-邮件;sms-短信;wecom-企业微信 */
+  AlarmWays?: string;
+  /** 告警对象:1-项目管理员，2-任务责任人 */
+  AlarmRecipientTypes?: string;
+}
+
+declare interface BatchCreateTaskVersionDsResponse {
+  /** 1 */
+  Data?: BatchOperateResultDs | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6039,6 +6827,28 @@ declare interface CreateTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateTaskVersionDsRequest {
+  /** 任务id */
+  Task: BatchCreateTaskVersionDTO;
+  /** 是否需要校验父任务已经提交到调度 */
+  NeedCheckParentSubmitted: boolean;
+  /** 是否自动运行 */
+  AutoRun: boolean;
+  /** 项目ID */
+  ProjectId: string;
+  /** 告警方式:email-邮件;sms-短信;wecom-企业微信 */
+  AlarmWays?: string;
+  /** 告警对象:1-项目管理员，2-任务责任人 */
+  AlarmRecipientTypes?: string;
+}
+
+declare interface CreateTaskVersionDsResponse {
+  /** 1 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWorkflowRequest {
   /** 项目Id */
   ProjectId: string;
@@ -6565,6 +7375,26 @@ declare interface DescribeAllUsedVersionSonRequest {
 declare interface DescribeAllUsedVersionSonResponse {
   /** 结果 */
   Data?: CollectionTaskOpsDto;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApproveListRequest {
+  /** 审批分类key */
+  ApproveClassification: string;
+  /** 分页大小 */
+  PageSize: number;
+  /** 分页数 */
+  PageNumber: number;
+  /** 自定义条件查询 */
+  Filters?: FilterOptional[];
+  /** 排序字段 */
+  OrderFields?: OrderFieldOptional[];
+}
+
+declare interface DescribeApproveListResponse {
+  /** 待审批列表详情 */
+  Data: DescribeApply | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10360,6 +11190,22 @@ declare interface ModifyAlarmRuleRequest {
   ExtInfo?: string | null;
 }
 
+declare interface ModifyApproveStatusRequest {
+  /** 审批单ids */
+  ApproveIds?: string[];
+  /** 审批备注 */
+  Remark?: string;
+  /** 状态 */
+  Status?: string;
+}
+
+declare interface ModifyApproveStatusResponse {
+  /** 修改审批单状态 */
+  Data: ApproveModify[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBaselineAlarmStatusRequest {
   /** 是否告警. 取值范围:- true: 开启告警;- false: 关闭告警 */
   IsAlarm: string;
@@ -11668,6 +12514,8 @@ declare interface Wedata {
   (): Versions;
   /** 批量创建任务告警规则 {@link BatchCreateIntegrationTaskAlarmsRequest} {@link BatchCreateIntegrationTaskAlarmsResponse} */
   BatchCreateIntegrationTaskAlarms(data: BatchCreateIntegrationTaskAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateIntegrationTaskAlarmsResponse>;
+  /** 批量创建任务版本Ds {@link BatchCreateTaskVersionDsRequest} {@link BatchCreateTaskVersionDsResponse} */
+  BatchCreateTaskVersionDs(data: BatchCreateTaskVersionDsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateTaskVersionDsResponse>;
   /** 批量删除集成任务 {@link BatchDeleteIntegrationTasksRequest} {@link BatchDeleteIntegrationTasksResponse} */
   BatchDeleteIntegrationTasks(data: BatchDeleteIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteIntegrationTasksResponse>;
   /** 智能运维-批量删除任务 {@link BatchDeleteOpsTasksRequest} {@link BatchDeleteOpsTasksResponse} */
@@ -11764,6 +12612,8 @@ declare interface Wedata {
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
   /** 创建任务告警规则 {@link CreateTaskAlarmRegularRequest} {@link CreateTaskAlarmRegularResponse} */
   CreateTaskAlarmRegular(data: CreateTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskAlarmRegularResponse>;
+  /** 创建任务版本 {@link CreateTaskVersionDsRequest} {@link CreateTaskVersionDsResponse} */
+  CreateTaskVersionDs(data: CreateTaskVersionDsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskVersionDsResponse>;
   /** 创建工作流【Beta版本】 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
   /** 拉取dag实例 {@link DagInstancesRequest} {@link DagInstancesResponse} */
@@ -11820,6 +12670,8 @@ declare interface Wedata {
   DescribeAllTaskType(data?: DescribeAllTaskTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllTaskTypeResponse>;
   /** 根据任务Id查找生产态子任务 {@link DescribeAllUsedVersionSonRequest} {@link DescribeAllUsedVersionSonResponse} */
   DescribeAllUsedVersionSon(data: DescribeAllUsedVersionSonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUsedVersionSonResponse>;
+  /** 获取待审批列表 {@link DescribeApproveListRequest} {@link DescribeApproveListResponse} */
+  DescribeApproveList(data: DescribeApproveListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApproveListResponse>;
   /** 查询基线DAG {@link DescribeBaselineAllTaskDagRequest} {@link DescribeBaselineAllTaskDagResponse} */
   DescribeBaselineAllTaskDag(data: DescribeBaselineAllTaskDagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineAllTaskDagResponse>;
   /** 拉取基线列表ById {@link DescribeBaselineByIdRequest} {@link DescribeBaselineByIdResponse} */
@@ -12178,6 +13030,8 @@ declare interface Wedata {
   MakeUpTasksNew(data: MakeUpTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<MakeUpTasksNewResponse>;
   /** 工作流任务补录【Beta版本】 {@link MakeUpWorkflowNewRequest} {@link MakeUpWorkflowNewResponse} */
   MakeUpWorkflowNew(data: MakeUpWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<MakeUpWorkflowNewResponse>;
+  /** 修改审批单状态 {@link ModifyApproveStatusRequest} {@link ModifyApproveStatusResponse} */
+  ModifyApproveStatus(data?: ModifyApproveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApproveStatusResponse>;
   /** 编辑基线告警状态 {@link ModifyBaselineAlarmStatusRequest} {@link ModifyBaselineAlarmStatusResponse} */
   ModifyBaselineAlarmStatus(data: ModifyBaselineAlarmStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselineAlarmStatusResponse>;
   /** 编辑基线实例中任务告警状态 {@link ModifyBaselineTaskAlarmStatusRequest} {@link ModifyBaselineTaskAlarmStatusResponse} */

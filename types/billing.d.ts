@@ -1843,9 +1843,9 @@ declare interface DescribeSavingPlanUsageResponse {
 }
 
 declare interface DescribeTagListRequest {
-  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
-  Limit: number;
   /** 数量，最大值为1000 */
+  Limit: number;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
   Offset: number;
   /** 分账标签键，用作模糊搜索 */
   TagKey?: string;

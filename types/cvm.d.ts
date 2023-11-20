@@ -467,9 +467,9 @@ declare interface InstanceTypeConfig {
   /** 内存容量，单位：`GB`。 */
   Memory?: number;
   /** FPGA核数，单位：核。 */
-  FPGA: number;
+  FPGA?: number;
   /** 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。 */
-  GpuCount: number;
+  GpuCount?: number;
 }
 
 /** 描述实例机型配置信息及状态信息 */
@@ -1733,7 +1733,7 @@ declare interface DescribeInstanceVncUrlResponse {
 }
 
 declare interface DescribeInstancesModificationRequest {
-  /** 一个或多个待查询的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为20。 */
+  /** 一个或多个待查询的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为20。 */
   InstanceIds: string[];
   /** status按照【配置规格状态】进行过滤。配置规格状态形如：SELL、UNAVAILABLE。类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为2。 */
   Filters?: Filter[];
@@ -2694,11 +2694,11 @@ declare interface ResetInstancesPasswordResponse {
 }
 
 declare interface ResetInstancesTypeRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口目前仅支持每次操作1个实例。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。本接口目前仅支持每次操作1个实例。 */
   InstanceIds: string[];
-  /** 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口[`DescribeInstanceTypeConfigs`](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。 */
+  /** 调整后的实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口[`DescribeInstanceTypeConfigs`](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。 */
   InstanceType: string;
-  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机。取值范围：TRUE：表示在正常关机失败后进行强制关机FALSE：表示在正常关机失败后不进行强制关机默认取值：FALSE。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
+  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机。取值范围：true：表示在正常关机失败后进行强制关机false：表示在正常关机失败后不进行强制关机默认取值：false。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
   ForceStop?: boolean;
 }
 
