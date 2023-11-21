@@ -76,6 +76,22 @@ declare interface SignCertCsr {
   SignCsrContent: string;
 }
 
+/** 交易显示概述信息 */
+declare interface Transaction {
+  /** 交易ID */
+  TxId?: string | null;
+  /** 合约名称 */
+  ChaincodeName?: string | null;
+  /** 交易发送者 */
+  Sender?: string | null;
+  /** 交易创建时间 */
+  CreateTime?: string | null;
+  /** 交易所在区块高度 */
+  BlockHeight?: number | null;
+  /** 交易在区块中的序号 */
+  TxIndex?: number | null;
+}
+
 /** 交易列表项信息 */
 declare interface TransactionItem {
   /** 交易ID */
@@ -136,6 +152,66 @@ declare interface ApplyUserCertResponse {
   CertId?: number;
   /** 证书DN */
   CertDn?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFabricBlockRequest {
+  /** 网络ID，可在区块链网络详情或列表中获取 */
+  ClusterId: string;
+  /** 通道ID，可在通道列表或通道详情获取 */
+  ChannelId: string;
+  /** 区块高度，从0开始 */
+  BlockHeight: number;
+}
+
+declare interface DescribeFabricBlockResponse {
+  /** 区块高度 */
+  BlockHeight?: number;
+  /** 区块Hash */
+  BlockHash?: string;
+  /** 前置区块Hash */
+  PreBlockHash?: string;
+  /** 区块中交易数量 */
+  TxCount?: number;
+  /** 区块中交易列表 */
+  TransactionList?: Transaction[];
+  /** 创建时间戳 */
+  CreateTimestamp?: string;
+  /** 提案组织 */
+  ProposerOrg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFabricTransactionRequest {
+  /** 网络ID，可在区块链网络详情或列表中获取 */
+  ClusterId: string;
+  /** 通道ID，可在通道列表或通道详情获取 */
+  ChannelId: string;
+  /** 交易ID */
+  TxId: string;
+}
+
+declare interface DescribeFabricTransactionResponse {
+  /** 交易ID */
+  TxId?: string;
+  /** 交易Hash */
+  TxHash?: string;
+  /** 交易状态 */
+  TxStatus?: string;
+  /** 参与的组织列表 */
+  JoinOrgList?: string[];
+  /** 交易发送者 */
+  Sender?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 区块高度 */
+  BlockHeight?: number;
+  /** 交易所属合约 */
+  ChaincodeName?: string;
+  /** 交易数据，base64编码，解码后为json化的字符串 */
+  TransactionData?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -456,6 +532,32 @@ declare interface InvokeChainMakerDemoContractResponse {
   RequestId?: string;
 }
 
+declare interface InvokeFabricChaincodeRequest {
+  /** 网络ID，可在区块链网络详情获取 */
+  ClusterId: string;
+  /** 通道ID，可在通道列表或通道详情获取 */
+  ChannelId: string;
+  /** 合约名称，可在合约列表或合约详情获取 */
+  ChaincodeName: string;
+  /** 合约方法 */
+  FuncName: string;
+  /** 合约方法入参 */
+  FuncParam?: string[];
+  /** 是否异步执行，如果异步执行，可使用返回值中的交易TxID查询执行结果 */
+  WithAsyncResult?: boolean;
+}
+
+declare interface InvokeFabricChaincodeResponse {
+  /** 交易ID */
+  TxId?: string;
+  /** 交易状态 */
+  TxStatus?: string;
+  /** 交易结果 */
+  TxResult?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InvokeRequest {
   /** 模块名，固定字段：transaction */
   Module: string;
@@ -604,6 +706,30 @@ declare interface QueryChainMakerTransactionResponse {
   RequestId?: string;
 }
 
+declare interface QueryFabricChaincodeRequest {
+  /** 网络ID，可在区块链网络详情获取 */
+  ClusterId: string;
+  /** 通道ID，可在通道列表或通道详情获取 */
+  ChannelId: string;
+  /** 合约名称，可在合约列表或合约详情获取 */
+  ChaincodeName: string;
+  /** 合约方法 */
+  FuncName: string;
+  /** 合约方法入参 */
+  FuncParam?: string[];
+}
+
+declare interface QueryFabricChaincodeResponse {
+  /** 交易ID */
+  TxId?: string;
+  /** 交易状态 */
+  TxStatus?: string;
+  /** 交易结果 */
+  TxResult?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryRequest {
   /** 模块名，固定字段：transaction */
   Module: string;
@@ -659,6 +785,10 @@ declare interface Tbaas {
   ApplyChainMakerBatchUserCert(data: ApplyChainMakerBatchUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyChainMakerBatchUserCertResponse>;
   /** 申请用户证书 {@link ApplyUserCertRequest} {@link ApplyUserCertResponse} */
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
+  /** 获取Fabric某区块的详细信息 {@link DescribeFabricBlockRequest} {@link DescribeFabricBlockResponse} */
+  DescribeFabricBlock(data: DescribeFabricBlockRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFabricBlockResponse>;
+  /** 获取Fabric交易的详细信息 {@link DescribeFabricTransactionRequest} {@link DescribeFabricTransactionResponse} */
+  DescribeFabricTransaction(data: DescribeFabricTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFabricTransactionResponse>;
   /** 下载用户证书 {@link DownloadUserCertRequest} {@link DownloadUserCertResponse} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
   /** 查询区块列表 {@link GetBlockListRequest} {@link GetBlockListResponse} */
@@ -681,6 +811,8 @@ declare interface Tbaas {
   InvokeChainMakerContract(data: InvokeChainMakerContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerContractResponse>;
   /** 调用长安链体验网络合约执行交易 {@link InvokeChainMakerDemoContractRequest} {@link InvokeChainMakerDemoContractResponse} */
   InvokeChainMakerDemoContract(data: InvokeChainMakerDemoContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerDemoContractResponse>;
+  /** 调用Fabric用户合约执行交易 {@link InvokeFabricChaincodeRequest} {@link InvokeFabricChaincodeResponse} */
+  InvokeFabricChaincode(data: InvokeFabricChaincodeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeFabricChaincodeResponse>;
   /** 查询交易 {@link QueryRequest} {@link QueryResponse} */
   Query(data: QueryRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResponse>;
   /** 查询长安链指定高度区块的交易 {@link QueryChainMakerBlockTransactionRequest} {@link QueryChainMakerBlockTransactionResponse} */
@@ -695,6 +827,8 @@ declare interface Tbaas {
   QueryChainMakerDemoTransaction(data: QueryChainMakerDemoTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerDemoTransactionResponse>;
   /** 通过交易ID查询长安链交易 {@link QueryChainMakerTransactionRequest} {@link QueryChainMakerTransactionResponse} */
   QueryChainMakerTransaction(data: QueryChainMakerTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerTransactionResponse>;
+  /** 调用Fabric用户合约查询 {@link QueryFabricChaincodeRequest} {@link QueryFabricChaincodeResponse} */
+  QueryFabricChaincode(data: QueryFabricChaincodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFabricChaincodeResponse>;
   /** trustsql服务统一接口 {@link SrvInvokeRequest} {@link SrvInvokeResponse} */
   SrvInvoke(data: SrvInvokeRequest, config?: AxiosRequestConfig): AxiosPromise<SrvInvokeResponse>;
 }

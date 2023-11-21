@@ -18,6 +18,8 @@ declare interface AccessHistogramItem {
   BTime?: number;
   /** 日志条数 */
   Count?: number;
+  /** 时间，单位ms */
+  BeginTime?: number;
 }
 
 /** 用于 DescribeAccessIndex 的出参 */
@@ -419,35 +421,39 @@ declare interface ClbHostsParams {
 /** Clb类型防护对象 */
 declare interface ClbObject {
   /** 对象ID */
-  ObjectId: string;
+  ObjectId?: string;
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 精准域名列表 */
-  PreciseDomains: string[];
+  PreciseDomains?: string[];
   /** WAF功能开关状态，0关闭1开启 */
-  Status: number;
+  Status?: number;
   /** WAF日志开关状态，0关闭1开启 */
-  ClsStatus: number;
+  ClsStatus?: number;
   /** CLB对象对应的虚拟域名 */
-  VirtualDomain: string;
+  VirtualDomain?: string;
   /** 对象名称 */
-  ObjectName: string;
+  ObjectName?: string;
   /** 公网地址 */
-  PublicIp: string[];
+  PublicIp?: string[];
   /** 内网地址 */
-  PrivateIp: string[];
+  PrivateIp?: string[];
   /** VPC名称 */
-  VpcName: string;
+  VpcName?: string;
   /** VPC ID */
-  Vpc: string;
+  Vpc?: string;
   /** waf实例等级，如果未绑定实例为0 */
-  InstanceLevel: number;
+  InstanceLevel?: number;
   /** clb投递开关 */
-  PostCLSStatus: number;
+  PostCLSStatus?: number;
   /** kafka投递开关 */
-  PostCKafkaStatus: number;
+  PostCKafkaStatus?: number;
+  /** 对象类型：CLB:负载均衡器，TSE:云原生网关 */
+  Type?: string | null;
+  /** 对象地域 */
+  Region?: string | null;
 }
 
 /** Clb-waf地域信息 */
@@ -517,27 +523,33 @@ declare interface DescribeAntiLeakageItem {
 /** DescribeCustomRules接口回包中的复杂类型 */
 declare interface DescribeCustomRulesRspRuleListItem {
   /** 动作类型 */
-  ActionType: string;
+  ActionType?: string;
   /** 跳过的策略 */
-  Bypass: string;
+  Bypass?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 过期时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 策略名称 */
-  Name: string;
+  Name?: string;
   /** 重定向地址 */
-  Redirect: string;
+  Redirect?: string;
   /** 策略ID */
-  RuleId: string;
+  RuleId?: string;
   /** 优先级 */
-  SortId: string;
+  SortId?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 策略详情 */
-  Strategies: Strategy[];
+  Strategies?: Strategy[];
   /** 事件id */
-  EventId: string | null;
+  EventId?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 生效状态 */
+  ValidStatus?: number | null;
+  /** 来源 */
+  Source?: string | null;
 }
 
 /** domain列表 */
@@ -1256,6 +1268,8 @@ declare interface PeakPointsItem {
   Leak?: number | null;
   /** 访问控制 */
   ACL?: number | null;
+  /** 小程序 qps */
+  WxAccess?: number | null;
 }
 
 /** 饼图数据类型 */
@@ -2789,6 +2803,10 @@ declare interface DescribeIpAccessControlRequest {
   Ip?: string;
   /** 生效状态 */
   ValidStatus?: number;
+  /** 最小有效时间的时间戳 */
+  ValidTimeStampMin?: string;
+  /** 最大有效时间的时间戳 */
+  ValidTimeStampMax?: string;
 }
 
 declare interface DescribeIpAccessControlResponse {
@@ -2823,6 +2841,10 @@ declare interface DescribeIpHitItemsRequest {
   Sort?: string;
   /** IP */
   Ip?: string;
+  /** 有效时间最小时间戳 */
+  ValidTimeStampMin?: number;
+  /** 有效时间最大时间戳 */
+  ValidTimeStampMax?: number;
 }
 
 declare interface DescribeIpHitItemsResponse {
@@ -2850,6 +2872,8 @@ declare interface DescribeModuleStatusResponse {
   AntiLeakage?: number;
   /** API安全是否开启 */
   ApiProtection?: number;
+  /** 限流模块开关 */
+  RateLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2877,7 +2901,7 @@ declare interface DescribePeakPointsRequest {
   Edition?: string;
   /** WAF实例ID，不传则不过滤 */
   InstanceID?: string;
-  /** 十一个值可选：access-峰值qps趋势图botAccess- bot峰值qps趋势图down-下行峰值带宽趋势图up-上行峰值带宽趋势图attack-Web攻击总数趋势图cc-CC攻击总数趋势图bw-黑IP攻击总数趋势图tamper-防篡改攻击总数趋势图leak-防泄露攻击总数趋势图acl-访问控制攻击总数趋势图http_status-状态码各次数趋势图 */
+  /** 十二个值可选：access-峰值qps趋势图botAccess- bot峰值qps趋势图down-下行峰值带宽趋势图up-上行峰值带宽趋势图attack-Web攻击总数趋势图cc-CC攻击总数趋势图bw-黑IP攻击总数趋势图tamper-防篡改攻击总数趋势图leak-防泄露攻击总数趋势图acl-访问控制攻击总数趋势图http_status-状态码各次数趋势图wx_access-微信小程序峰值qps趋势图 */
   MetricName?: string;
 }
 
@@ -3323,9 +3347,9 @@ declare interface GetInstanceQpsLimitResponse {
 }
 
 declare interface ModifyAccessPeriodRequest {
-  /** 访问日志保存期限，范围为[1, 30] */
+  /** 访问日志保存期限，范围为[1, 180] */
   Period: number;
-  /** 日志主题 */
+  /** 日志主题，新版本不需要再传 */
   TopicId: string;
 }
 
@@ -3759,6 +3783,8 @@ declare interface ModifyModuleStatusRequest {
   AntiTamper?: number;
   /** 防泄漏模块开关，0或者1 */
   AntiLeakage?: number;
+  /** 限流模块开关，0或1 */
+  RateLimit?: number;
 }
 
 declare interface ModifyModuleStatusResponse {
@@ -4172,6 +4198,8 @@ declare interface UpsertIpAccessControlResponse {
   FailedItems?: string | null;
   /** 添加或修改失败的数目 */
   FailedCount?: number | null;
+  /** 添加或修改的IP数据Id列表 */
+  Ids?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4202,6 +4230,8 @@ declare interface UpsertSessionRequest {
 declare interface UpsertSessionResponse {
   /** 结果 */
   Data?: string | null;
+  /** SessionID */
+  SessionID?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4383,7 +4413,7 @@ declare interface Waf {
   GetAttackTotalCount(data: GetAttackTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackTotalCountResponse>;
   /** 获取套餐实例的弹性qps上限 {@link GetInstanceQpsLimitRequest} {@link GetInstanceQpsLimitResponse} */
   GetInstanceQpsLimit(data: GetInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceQpsLimitResponse>;
-  /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
+  /** 修改访问日志保存期限等字段信息 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
   /** 编辑防篡改url {@link ModifyAntiFakeUrlRequest} {@link ModifyAntiFakeUrlResponse} */
   ModifyAntiFakeUrl(data: ModifyAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAntiFakeUrlResponse>;

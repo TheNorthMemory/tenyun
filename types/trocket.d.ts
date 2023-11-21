@@ -116,6 +116,38 @@ declare interface RoleItem {
   ModifiedTime?: number;
 }
 
+/** 消费组配置信息 */
+declare interface SourceClusterGroupConfig {
+  /** 消费组名称 */
+  GroupName: string | null;
+  /** 备注信息 */
+  Remark?: string | null;
+  /** 是否已导入，作为入参时无效 */
+  Imported?: boolean | null;
+  /** 命名空间，仅4.x集群有效 */
+  Namespace?: string | null;
+  /** 导入状态Unknown 未知Success 成功Failure 失败AlreadyExists 已存在 */
+  ImportStatus?: string | null;
+}
+
+/** 源集群主题配置 */
+declare interface SourceClusterTopicConfig {
+  /** 主题名称 */
+  TopicName: string | null;
+  /** 主题类型，5.x版本UNSPECIFIED 未指定NORMAL 普通消息FIFO 顺序消息DELAY 延迟消息TRANSACTION 事务消息4.x版本Normal 普通消息PartitionedOrder 分区顺序消息Transaction 事务消息DelayScheduled 延时消息 */
+  TopicType: string | null;
+  /** 队列数 */
+  QueueNum: number | null;
+  /** 备注信息 */
+  Remark?: string | null;
+  /** 是否已导入，作为入参时无效 */
+  Imported?: boolean | null;
+  /** 命名空间，仅4.x集群有效 */
+  Namespace?: string | null;
+  /** 导入状态，Unknown 未知，AlreadyExists 已存在，Success 成功，Failure 失败 */
+  ImportStatus?: string | null;
+}
+
 /** 主题与消费组的订阅关系数据 */
 declare interface SubscriptionData {
   /** 实例ID */
@@ -540,6 +572,30 @@ declare interface DescribeTopicStatsOpResponse {
   RequestId?: string;
 }
 
+declare interface ImportSourceClusterConsumerGroupsRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 待导入的消费组列表 */
+  GroupList: SourceClusterGroupConfig[];
+}
+
+declare interface ImportSourceClusterConsumerGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportSourceClusterTopicsRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 待导入的主题列表 */
+  TopicList: SourceClusterTopicConfig[];
+}
+
+declare interface ImportSourceClusterTopicsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConsumerGroupRequest {
   /** 实例ID */
   InstanceId: string;
@@ -651,6 +707,10 @@ declare interface Trocket {
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
   /** 运营端查询topicStata {@link DescribeTopicStatsOpRequest} {@link DescribeTopicStatsOpResponse} */
   DescribeTopicStatsOp(data: DescribeTopicStatsOpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicStatsOpResponse>;
+  /** 平滑迁移：导入消费者组列表 {@link ImportSourceClusterConsumerGroupsRequest} {@link ImportSourceClusterConsumerGroupsResponse} */
+  ImportSourceClusterConsumerGroups(data: ImportSourceClusterConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterConsumerGroupsResponse>;
+  /** 平滑迁移：导入topic列表 {@link ImportSourceClusterTopicsRequest} {@link ImportSourceClusterTopicsResponse} */
+  ImportSourceClusterTopics(data: ImportSourceClusterTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterTopicsResponse>;
   /** 修改消费组属性 {@link ModifyConsumerGroupRequest} {@link ModifyConsumerGroupResponse} */
   ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;
   /** 修改实例属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */

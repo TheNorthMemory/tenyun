@@ -1542,6 +1542,8 @@ declare interface ImageRepoInfo {
   HasNeedFixVul?: boolean;
   /** 敏感信息 */
   SensitiveInfoCnt?: number | null;
+  /** 是否推荐处置 */
+  RecommendedFix?: boolean;
 }
 
 /** 容器安全镜像高危行为信息 */
@@ -1694,6 +1696,16 @@ declare interface ImageVul {
   Version?: string | null;
   /** 攻击热度 0-3 */
   AttackLevel?: number | null;
+  /** 镜像层信息列表 */
+  LayerInfos?: ImageVulLayerInfo[] | null;
+}
+
+/** 漏洞列表中的层信息 */
+declare interface ImageVulLayerInfo {
+  /** 层id */
+  LayerId?: string | null;
+  /** 层cmd */
+  LayerCmd?: string | null;
 }
 
 /** 查询镜像绑定的运行时规则信息 */
@@ -1717,85 +1729,99 @@ declare interface ImagesBindRuleInfo {
 /** 容器安全镜像列表 */
 declare interface ImagesInfo {
   /** 镜像id */
-  ImageID: string;
+  ImageID?: string;
   /** 镜像名称 */
-  ImageName: string;
+  ImageName?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 镜像大小 */
-  Size: number;
+  Size?: number;
   /** 主机个数 */
-  HostCnt: number;
+  HostCnt?: number;
   /** 容器个数 */
-  ContainerCnt: number;
+  ContainerCnt?: number;
   /** 扫描时间 */
-  ScanTime: string;
+  ScanTime?: string;
   /** 漏洞个数 */
-  VulCnt: number;
+  VulCnt?: number;
   /** 病毒个数 */
-  VirusCnt: number;
+  VirusCnt?: number;
   /** 敏感信息个数 */
-  RiskCnt: number;
+  RiskCnt?: number;
   /** 是否信任镜像 */
-  IsTrustImage: boolean;
+  IsTrustImage?: boolean;
   /** 镜像系统 */
-  OsName: string;
+  OsName?: string;
   /** agent镜像扫描错误 */
-  AgentError: string;
+  AgentError?: string;
   /** 后端镜像扫描错误 */
-  ScanError: string;
+  ScanError?: string;
   /** 扫描状态 */
-  ScanStatus: string;
+  ScanStatus?: string;
   /** 木马扫描错误信息 */
-  ScanVirusError: string;
+  ScanVirusError?: string;
   /** 漏洞扫描错误信息 */
-  ScanVulError: string;
+  ScanVulError?: string;
   /** 风险扫描错误信息 */
-  ScanRiskError: string;
+  ScanRiskError?: string;
   /** 是否是重点关注镜像，为0不是，非0是 */
-  IsSuggest: number;
+  IsSuggest?: number;
   /** 是否授权，1是0否 */
-  IsAuthorized: number;
+  IsAuthorized?: number;
   /** 组件个数 */
-  ComponentCnt: number;
+  ComponentCnt?: number;
+  /** 严重漏洞数 */
+  CriticalLevelVulCnt?: number;
+  /** 高危漏洞数 */
+  HighLevelVulCnt?: number;
+  /** 中危漏洞数 */
+  MediumLevelVulCnt?: number;
+  /** 低危漏洞数 */
+  LowLevelVulCnt?: number;
+  /** 是否最新版本镜像 */
+  IsLatestImage?: boolean;
+  /** 是否推荐处置 */
+  RecommendedFix?: boolean;
 }
 
 /** 容器安全镜像漏洞 */
 declare interface ImagesVul {
   /** 漏洞id */
-  CVEID: string;
+  CVEID?: string;
   /** 漏洞名称 */
-  Name: string;
+  Name?: string;
   /** 组件 */
-  Component: string;
+  Component?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 分类 */
-  Category: string;
+  Category?: string;
   /** 分类2 */
-  CategoryType: string;
+  CategoryType?: string;
   /** 风险等级 */
-  Level: number;
+  Level?: number;
   /** 描述 */
-  Des: string;
+  Des?: string;
   /** 解决方案 */
-  OfficialSolution: string;
+  OfficialSolution?: string;
   /** 引用 */
-  Reference: string;
+  Reference?: string;
   /** 防御方案 */
-  DefenseSolution: string;
+  DefenseSolution?: string;
   /** 提交时间 */
-  SubmitTime: string;
+  SubmitTime?: string;
   /** CVSS V3分数 */
-  CVSSV3Score: number;
+  CVSSV3Score?: number;
   /** CVSS V3描述 */
-  CVSSV3Desc: string;
+  CVSSV3Desc?: string;
   /** 是否是重点关注：true：是，false：不是 */
-  IsSuggest: boolean;
+  IsSuggest?: boolean;
   /** 修复版本号 */
-  FixedVersions: string | null;
+  FixedVersions?: string | null;
   /** 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp" */
-  Tag: string[] | null;
+  Tag?: string[] | null;
+  /** 攻击热度 */
+  AttackLevel?: number | null;
 }
 
 /** k8sApi异常事件详情 */
@@ -3575,6 +3601,8 @@ declare interface AddAssetImageRegistryRegistryDetailRequest {
   Insecure?: number;
   /** 联通性检测的记录ID */
   ConnDetectConfig?: ConnDetectConfig[];
+  /** ”授权&扫描"开关 */
+  NeedScan?: boolean;
 }
 
 declare interface AddAssetImageRegistryRegistryDetailResponse {
@@ -3659,6 +3687,10 @@ declare interface AddEditImageAutoAuthorizedRuleRequest {
   HostIdFilters?: AssetFilters[];
   /** 根据条件过滤而且排除指定主机id */
   ExcludeHostIdSet?: string[];
+  /** 自动扫描开关 */
+  AutoScanEnabled?: number;
+  /** 自动扫描范围 */
+  ScanType?: string[];
 }
 
 declare interface AddEditImageAutoAuthorizedRuleResponse {
@@ -3911,7 +3943,7 @@ declare interface CreateAssetImageRegistryScanTaskResponse {
 declare interface CreateAssetImageScanSettingRequest {
   /** 开关 */
   Enable: boolean;
-  /** 扫描时间 */
+  /** 扫描开始时间01:00 时分 */
   ScanTime: string;
   /** 扫描周期 */
   ScanPeriod: number;
@@ -3922,9 +3954,15 @@ declare interface CreateAssetImageScanSettingRequest {
   /** 扫描漏洞 */
   ScanVul: boolean;
   /** 全部镜像 */
-  All: boolean;
+  All?: boolean;
   /** 自定义镜像 */
   Images?: string[];
+  /** 镜像是否存在运行中的容器 */
+  ContainerRunning?: boolean;
+  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 */
+  ScanScope?: number;
+  /** 扫描结束时间02:00 时分 */
+  ScanEndTime?: string;
 }
 
 declare interface CreateAssetImageScanSettingResponse {
@@ -3947,11 +3985,17 @@ declare interface CreateAssetImageScanTaskRequest {
   Filters?: AssetFilters[];
   /** 根据过滤条件筛选出镜像，再排除个别镜像 */
   ExcludeImageIds?: string[];
+  /** 镜像是否存在运行中的容器 */
+  ContainerRunning?: boolean;
+  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 */
+  ScanScope?: number;
+  /** 任务超时时长单位秒，默认1小时 */
+  Timeout?: number;
 }
 
 declare interface CreateAssetImageScanTaskResponse {
   /** 任务id */
-  TaskID: string;
+  TaskID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5473,61 +5517,63 @@ declare interface DescribeAssetImageDetailRequest {
 
 declare interface DescribeAssetImageDetailResponse {
   /** 镜像ID */
-  ImageID: string;
+  ImageID?: string;
   /** 镜像名称 */
-  ImageName: string;
+  ImageName?: string;
+  /** 镜像摘要 */
+  ImageDigest?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 镜像大小 */
-  Size: number;
+  Size?: number;
   /** 关联主机个数 */
-  HostCnt: number | null;
+  HostCnt?: number | null;
   /** 关联容器个数 */
-  ContainerCnt: number | null;
+  ContainerCnt?: number | null;
   /** 最近扫描时间 */
-  ScanTime: string | null;
+  ScanTime?: string | null;
   /** 漏洞个数 */
-  VulCnt: number | null;
+  VulCnt?: number | null;
   /** 风险行为数 */
-  RiskCnt: number | null;
+  RiskCnt?: number | null;
   /** 敏感信息数 */
-  SensitiveInfoCnt: number | null;
+  SensitiveInfoCnt?: number | null;
   /** 是否信任镜像 */
-  IsTrustImage: boolean;
+  IsTrustImage?: boolean;
   /** 镜像系统 */
-  OsName: string;
+  OsName?: string;
   /** agent镜像扫描错误 */
-  AgentError: string | null;
+  AgentError?: string | null;
   /** 后端镜像扫描错误 */
-  ScanError: string | null;
+  ScanError?: string | null;
   /** 系统架构 */
-  Architecture: string | null;
+  Architecture?: string | null;
   /** 作者 */
-  Author: string | null;
+  Author?: string | null;
   /** 构建历史 */
-  BuildHistory: string | null;
+  BuildHistory?: string | null;
   /** 木马扫描进度 */
-  ScanVirusProgress: number | null;
+  ScanVirusProgress?: number | null;
   /** 漏洞扫进度 */
-  ScanVulProgress: number | null;
+  ScanVulProgress?: number | null;
   /** 敏感信息扫描进度 */
-  ScanRiskProgress: number | null;
+  ScanRiskProgress?: number | null;
   /** 木马扫描错误 */
-  ScanVirusError: string | null;
+  ScanVirusError?: string | null;
   /** 漏洞扫描错误 */
-  ScanVulError: string | null;
+  ScanVulError?: string | null;
   /** 敏感信息错误 */
-  ScanRiskError: string | null;
+  ScanRiskError?: string | null;
   /** 镜像扫描状态 */
-  ScanStatus: string | null;
+  ScanStatus?: string | null;
   /** 木马病毒数 */
-  VirusCnt: number | null;
+  VirusCnt?: number | null;
   /** 镜像扫描状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 剩余扫描时间 */
-  RemainScanTime: number | null;
+  RemainScanTime?: number | null;
   /** 授权为：1，未授权为：0 */
-  IsAuthorized: number;
+  IsAuthorized?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5997,21 +6043,27 @@ declare interface DescribeAssetImageScanSettingRequest {
 
 declare interface DescribeAssetImageScanSettingResponse {
   /** 开关 */
-  Enable: boolean;
+  Enable?: boolean;
   /** 扫描时刻(完整时间;后端按0时区解析时分秒) */
-  ScanTime: string;
+  ScanTime?: string;
   /** 扫描间隔 */
-  ScanPeriod: number;
+  ScanPeriod?: number;
   /** 扫描木马 */
-  ScanVirus: boolean;
+  ScanVirus?: boolean;
   /** 扫描敏感信息 */
-  ScanRisk: boolean;
+  ScanRisk?: boolean;
   /** 扫描漏洞 */
-  ScanVul: boolean;
+  ScanVul?: boolean;
   /** 扫描全部镜像 */
-  All: boolean;
+  All?: boolean;
   /** 自定义扫描镜像 */
-  Images: string[];
+  Images?: string[];
+  /** 镜像是否存在运行中的容器 */
+  ContainerRunning?: boolean;
+  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 */
+  ScanScope?: number;
+  /** 扫描结束时间 02:00 时分 */
+  ScanEndTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6244,6 +6296,14 @@ declare interface DescribeAssetSummaryResponse {
   SuperNodeCnt?: number;
   /** 超级节点运行个数 */
   SuperNodeRunningCnt?: number;
+  /** 今日新增镜像个数 */
+  TodayNewImageCnt?: number;
+  /** 今日新增风险镜像个数 */
+  TodayUnsafeImageCnt?: number;
+  /** 推荐处置镜像个数 */
+  RecommendedFixImageCnt?: number;
+  /** 已扫描镜像个数 */
+  ScannedImageCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6947,15 +7007,19 @@ declare interface DescribeImageAutoAuthorizedRuleRequest {
 
 declare interface DescribeImageAutoAuthorizedRuleResponse {
   /** 规则是否生效，0:不生效，1:已生效 */
-  IsEnabled: number;
+  IsEnabled?: number;
   /** 授权范围类别，MANUAL:自选主机节点，ALL:全部镜像 */
-  RangeType: string | null;
+  RangeType?: string | null;
   /** 授权范围是自选主机时的主机数量 */
-  HostCount: number | null;
+  HostCount?: number | null;
   /** 每天最大的镜像授权数限制, 0表示无限制 */
-  MaxDailyCount: number | null;
+  MaxDailyCount?: number | null;
   /** 规则id，用未设置时为0 */
-  RuleId: number | null;
+  RuleId?: number | null;
+  /** 自动扫描开关，0：关闭，1：开启 */
+  AutoScanEnabled?: number;
+  /** 自动扫描范围 */
+  ScanType?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9845,6 +9909,10 @@ declare interface RenewImageAuthorizeStateRequest {
   AllImages: boolean;
   /** 镜像ids */
   ImageIds?: string[];
+  /** 是否授权后自动扫描 */
+  NeedScan?: boolean;
+  /** 扫描类型 */
+  ScanType?: string[];
 }
 
 declare interface RenewImageAuthorizeStateResponse {
@@ -9971,6 +10039,10 @@ declare interface SwitchImageAutoAuthorizedRuleResponse {
 }
 
 declare interface SyncAssetImageRegistryAssetRequest {
+  /** 是否同步所有镜像仓库 */
+  All?: boolean;
+  /** 需要同步的部分镜像仓库 */
+  RegistryIds?: number[];
 }
 
 declare interface SyncAssetImageRegistryAssetResponse {

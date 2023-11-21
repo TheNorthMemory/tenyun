@@ -80,6 +80,8 @@ declare interface VoiceTypeInfo {
   TaskID?: string;
   /** 创建时间 */
   DateCreated?: string;
+  /** 部署状态。若已部署，则可通过语音合成接口调用该音色 */
+  IsDeployed?: boolean;
 }
 
 /** 音色信息列表 */

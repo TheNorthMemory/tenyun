@@ -1351,12 +1351,12 @@ declare interface CreateFlowApproversRequest {
   FlowId: string;
   /** 补充企业签署人信息。- 如果发起方指定的补充签署人是企业微信签署人（ApproverSource=WEWORKAPP），则需要提供企业微信UserId进行补充；- 如果不指定，则使用姓名和手机号进行补充。 */
   Approvers: FillApproverInfo[];
+  /** 签署人信息补充方式**0**: 添加或签人候选人，或签支持一个节点传多个签署人，不传值默认或签。注: `或签只支持企业签署方`**1**: 表示往未指定签署人的节点，添加一个明确的签署人，支持企业或个人签署方。 */
+  FillApproverType?: number;
   /** 在可定制的企业微信通知中，发起人可以根据具体需求进行自定义设置。 */
   Initiator?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 签署人信息补充方式**0**: 补充或签人，支持补充多个企业经办签署人（默认）注: `不可补充个人签署人`**1**: 补充动态签署人，可补充企业和个人签署人。注: `每个签署方节点签署人是唯一的，一个节点只支持传入一个签署人信息` */
-  FillApproverType?: number;
 }
 
 declare interface CreateFlowApproversResponse {

@@ -470,7 +470,7 @@ declare interface FlowApproverInfo {
   PreReadTime?: number;
   /** 签署完前端跳转的url，此字段的用法场景请联系客户经理确认 */
   JumpUrl?: string;
-  /** 可以控制签署方在签署合同时能否进行某些操作，例如拒签、转交他人等。详细操作可以参考开发者中心的ApproverOption结构体。 */
+  /** 可以控制签署方在签署合同时能否进行某些操作，例如拒签、转交他人、是否为动态补充签署人等。详细操作可以参考开发者中心的ApproverOption结构体。 */
   ApproverOption?: ApproverOption;
   /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要 */
   ApproverNeedSignReview?: boolean;
@@ -1247,10 +1247,10 @@ declare interface ChannelCreateFlowApproversRequest {
   FlowId: string;
   /** 补充企业签署人信息。- 如果发起方指定的补充签署人是企业签署人，则需要提供企业名称或者企业OpenId；- 如果不指定，则使用姓名和手机号进行补充。 */
   Approvers: FillApproverInfo[];
+  /** 签署人信息补充方式**1**: 表示往未指定签署人的节点，添加一个明确的签署人，支持企业或个人签署方。 */
+  FillApproverType?: number;
   /** 操作人信息 */
   Operator?: UserInfo;
-  /** 签署人信息补充方式**1**: 补充动态签署人，可补充企业和个人签署人。注: `每个签署方节点签署人是唯一的，一个节点只支持传入一个签署人信息` */
-  FillApproverType?: number;
 }
 
 declare interface ChannelCreateFlowApproversResponse {
@@ -2077,7 +2077,7 @@ declare interface CreateFlowsByTemplatesRequest {
   FlowInfos: FlowInfo[];
   /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注:`如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到` */
   NeedPreview?: boolean;
-  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
+  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
   PreviewType?: number;
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;

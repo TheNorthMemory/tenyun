@@ -176,6 +176,22 @@ declare interface BusinessIntelligenceFile {
   Action: FileAction;
 }
 
+/** 实例变配检查条目 */
+declare interface CheckItem {
+  /** 检查项目名称，CK_CPU-变配后CPU风险检查；CK_MASTER_STORAGE-只读副本变配下，只读副本磁盘空间不小于主实例空间检查；CK_MEMORY-变配后内存风险检查；CK_STORAGE-变配后磁盘空间风险检查；CK_UPGRATE-变配是否需要迁移检查； */
+  CheckName: string | null;
+  /** 检查项目返回值，CK_CPU-当前CPU近7天最大的使用率(%) ；CK_MASTER_STORAGE-主实例的磁盘空间(GB)；CK_MEMORY-当前内存近7天最大的使用值（GB)；CK_STORAGE-当前磁盘近7天最大的使用值（GB)；CK_UPGRATE- 当前变配检查是否需要迁移，MIGRATE需要迁移变配，LOCAL本地变配； */
+  CurrentValue: string;
+  /** 检查条目是否通过 0-不通过，不能变配； 1-通过，可以变配 */
+  Passed: number;
+  /** 本条目变配是否对实例有影响 0-没有影响 1-有影响 */
+  IsAffect: number;
+  /** 有影响或者不通过的情况下的必要描述 */
+  Msg: string;
+  /** 描述对应的代码 */
+  MsgCode: number;
+}
+
 /** 查询已经上传的备份文件大小。 */
 declare interface CosUploadBackupFile {
   /** 备份名称 */
@@ -570,6 +586,26 @@ declare interface InstanceRenewInfo {
   RenewFlag: number;
 }
 
+/** 实例异步任务 */
+declare interface InstanceTask {
+  /** 唯一id */
+  Id: number;
+  /** Job类型 */
+  Type: number;
+  /** Job状态 */
+  Status: number;
+  /** 进度百分比0~100 */
+  Progress: number;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 错误代码 */
+  ErrorCode: number;
+  /** 错误信息描述 */
+  Message: string;
+}
+
 /** 互通组内实例信息详情 */
 declare interface InterInstance {
   /** 实例ID */
@@ -752,6 +788,16 @@ declare interface MigrationStep {
   Status: number;
 }
 
+/** 要修改的数据库订阅发布关系集合 */
+declare interface ModifyDataBaseTuple {
+  /** 要修改的订阅关系 */
+  DatabaseTuple: DatabaseTuple;
+  /** 修改后的订阅关系。DeleteDataBasesTuple为false时有效 */
+  NewDatabaseTuple?: DatabaseTuple;
+  /** 是否删除订阅关系。此选项为true时，NewDatabaseTuple无效 */
+  DeleteDataBasesTuple?: boolean;
+}
+
 /** 实例参数修改记录 */
 declare interface ParamRecord {
   /** 实例ID */
@@ -798,6 +844,28 @@ declare interface ParameterDetail {
   EnumValue: string[];
   /** 参数状态 0-状态正常 1-在修改中 */
   Status: number;
+}
+
+/** 参考价格，该价格为CPU、内存规格价格，不包括磁盘用量，实际价格以询价接口为准。 */
+declare interface Price {
+  /** 包年包月参考价格，单位-分 */
+  PrepaidPrice: number | null;
+  /** 包年包月价格单位，M-月 */
+  PrepaidPriceUnit: string | null;
+  /** 按量付费价格，单位-分 */
+  PostpaidPrice: number | null;
+  /** 按量付费价格单位，H-小时 */
+  PostpaidPriceUnit: string | null;
+}
+
+/** 包括地域的产品规格配置 */
+declare interface ProductSpec {
+  /** 地域ID */
+  RegionId: number;
+  /** 可用区ID */
+  ZoneId: number;
+  /** 配置信息 */
+  Info: SpecInfo[];
 }
 
 /** 发布订阅对象 */
@@ -942,6 +1010,32 @@ declare interface ResourceTag {
   TagValue?: string;
 }
 
+/** 回档任务记录 */
+declare interface RestoreTask {
+  /** 目标实例ID */
+  TargetInstanceId?: string;
+  /** 目标实例名称 */
+  TargetInstanceName?: string;
+  /** 目标实例状态。取值范围：1：申请中2：运行中3：受限运行中 (主备切换中)4：已隔离5：回收中6：已回收7：任务执行中 (实例做备份、回档等操作)8：已下线9：实例扩容中10：实例迁移中11：只读12：重启中 */
+  TargetInstanceStatus?: number;
+  /** 目标实例所在地域 */
+  TargetRegion?: string;
+  /** 回档记录ID */
+  RestoreId?: number;
+  /** 回档到目标实例的类型，0-当前实例，1-已有实例，2-全新实例 */
+  TargetType?: number;
+  /** 回档方式，0-按照时间点回档，1-按照备份集回档 */
+  RestoreType?: number;
+  /** 回档目标时间 */
+  RestoreTime?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 回档状态，0-初始化，1-运行中，2-成功，3-失败 */
+  Status?: number;
+}
+
 /** 安全组 */
 declare interface SecurityGroup {
   /** 项目ID */
@@ -1058,6 +1152,32 @@ declare interface SpecInfo {
   MultiZonesStatus: string;
 }
 
+/** 售卖配置状态 */
+declare interface SpecSellStatus {
+  /** 可售卖的规格唯一ID */
+  Id: string;
+  /** 实例规格ID */
+  SpecId: number;
+  /** 此规格下支持的付费模式，POST-仅支持按量计费 PRE-仅支持包年包月 ALL-支持所有 */
+  PayModeStatus: string;
+  /** 产品类型 */
+  InstanceType: string;
+  /** 该规格支持的是否跨可用去，MultiZones-只支持跨可用区，SameZones-只支持同可用区，ALL-支持所有 */
+  MultiZonesStatus: string;
+  /** 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点 */
+  Architecture: string;
+  /** 类型标识，EXCLUSIVE-独享型，SHARED-共享型 */
+  Style: string;
+  /** 数据库版本信息 */
+  Version: string;
+  /** 每个可用区的售卖状态集合 */
+  ZoneStatusSet: ZoneStatus[];
+  /** 规格的参考价格，实际价格以询价接口为准 */
+  Price: Price;
+  /** 规格售卖状态 1-正常 2-关闭售卖但是可以升级 3-完全关闭售卖 */
+  Status: number;
+}
+
 /** 进度步骤详情 */
 declare interface StepDetail {
   /** 具体步骤返回信息 */
@@ -1138,6 +1258,16 @@ declare interface ZoneInfo {
   Version: string;
 }
 
+/** 某个地域可用区下的规格售卖状态。 */
+declare interface ZoneStatus {
+  /** 规格地域 */
+  Zone: string;
+  /** 规格可用区 */
+  Region: string;
+  /** 规格在该可用区的售卖状态 1-正常 2-关闭售卖但是可以升级 3-完全关闭售卖 */
+  Status: number;
+}
+
 declare interface AssociateSecurityGroupsRequest {
   /** 安全组ID。 */
   SecurityGroupId: string;
@@ -1146,6 +1276,18 @@ declare interface AssociateSecurityGroupsRequest {
 }
 
 declare interface AssociateSecurityGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BalanceReadOnlyGroupRequest {
+  /** 主实例ID，格式如：mssql-3l3fgqn7 */
+  InstanceId: string;
+  /** 只读组ID，格式如：mssqlrg-dj5i29c5n */
+  ReadOnlyGroupId: string;
+}
+
+declare interface BalanceReadOnlyGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1766,6 +1908,40 @@ declare interface DeletePublishSubscribeResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRestoreTaskRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 回档任务记录ID集合，一次最多删除10条 */
+  RestoreIds: number[];
+}
+
+declare interface DeleteRestoreTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccountPrivilegeByDBRequest {
+  /** 实例ID，形如mssql-njj2mtpl */
+  InstanceId: string;
+  /** 数据库名称 */
+  DBName: string;
+  /** 数据库属于账号名称 */
+  AccountName?: string;
+  /** 分页返回，每页返回的数目，取值为1-100，默认值为20 */
+  Limit?: number;
+  /** 分页返回，页编号，默认值为第0页 */
+  Offset?: number;
+}
+
+declare interface DescribeAccountPrivilegeByDBResponse {
+  /** 账号总数量 */
+  TotalCount?: number;
+  /** 账号权限列表 */
+  Accounts?: AccountPrivilege[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccountsRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2092,6 +2268,20 @@ declare interface DescribeBusinessIntelligenceFileResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCollationTimeZoneRequest {
+  /** 购买实例的宿主机类型，PM-物理机, CLOUD_PREMIUM-虚拟机高性能云盘，	CLOUD_SSD-虚拟机SSD云盘,CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘,CLOUD_BASIC-虚拟机云硬盘，默认取值PM */
+  MachineType?: string;
+}
+
+declare interface DescribeCollationTimeZoneResponse {
+  /** 系统字符集排序规则列表 */
+  Collation?: string[];
+  /** 系统时区列表 */
+  TimeZone?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCrossBackupStatisticalRequest {
   /** 分页,页数 */
   Offset: number;
@@ -2130,6 +2320,16 @@ declare interface DescribeCrossRegionZoneResponse {
   Region: string;
   /** 备机所在可用区的字符串ID，形如：ap-guangzhou-1 */
   Zone: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCrossRegionsRequest {
+}
+
+declare interface DescribeCrossRegionsResponse {
+  /** 支持跨地域备份的目标地域集合 */
+  Regions: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2244,6 +2444,50 @@ declare interface DescribeDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBPrivilegeByAccountRequest {
+  /** 实例ID，形如mssql-njj2mtpl */
+  InstanceId: string;
+  /** 账号名称 */
+  AccountName: string;
+  /** 账号关联的数据库名称 */
+  DBName?: string;
+  /** 分页返回，每页返回的数目，取值为1-100，默认值为20 */
+  Limit?: number;
+  /** 分页返回，页编号，默认值为第0页 */
+  Offset?: number;
+}
+
+declare interface DescribeDBPrivilegeByAccountResponse {
+  /** 数据总库数量 */
+  TotalCount?: number;
+  /** 数据库权限列表 */
+  DBList?: DBPrivilege[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBRestoreTimeRequest {
+  /** 原实例ID */
+  InstanceId: string;
+  /** 回档的目标实例ID，不填则回档到原实例ID */
+  TargetInstanceId?: string;
+  /** 按时间点查询可回档数据库，时间格式 YYYY-MM-DD HH:MM:SS。BackupId，Time二选一，不能同时为空 */
+  Time?: string;
+  /** 按备份集ID查询可回档数据库，可通过DescribeBackups接口获取。BackupId，Time二选一不能同时为空 */
+  BackupId?: number;
+  /** 数据库名称 */
+  DBName?: string;
+}
+
+declare interface DescribeDBRestoreTimeResponse {
+  /** 可回档数据库总数量 */
+  TotalCount?: number;
+  /** 可回档数据库列表 */
+  Details?: DBRenameRes[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBSecurityGroupsRequest {
   /** 实例ID，格式如：mssql-c1nl9rpv或者mssqlro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。 */
   InstanceId: string;
@@ -2290,6 +2534,22 @@ declare interface DescribeDBsResponse {
   TotalCount?: number;
   /** 实例数据库列表 */
   DBInstances?: InstanceDBDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatabaseNamesRequest {
+  /** 实例ID，形如mssql-rljoi3bf */
+  InstanceId: string;
+  /** 账户名称 */
+  AccountName: string;
+}
+
+declare interface DescribeDatabaseNamesResponse {
+  /** 账户关联的数据库总数 */
+  TotalCount: number;
+  /** 数据库名称集合 */
+  DatabaseNameSet: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2398,6 +2658,36 @@ declare interface DescribeIncrementalMigrationResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInquiryPriceParameterRequest {
+  /** 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。 */
+  Zone: string;
+  /** 内存大小，单位：GB */
+  Memory: number;
+  /** 实例容量大小，单位：GB。 */
+  Storage: number;
+  /** 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-新版高可用,cvmRO-新版只读 */
+  InstanceType: string;
+  /** 计费类型，取值支持 PREPAID，POSTPAID。 */
+  InstanceChargeType?: string;
+  /** 预购买实例的CPU核心数 */
+  Cpu?: number;
+  /** 购买时长，单位：月。取值为1到48，默认为1 */
+  Period?: number;
+  /** 一次性购买的实例数量。取值1-100，默认取值为1 */
+  GoodsNum?: number;
+  /** sqlserver版本，目前所有支持的版本有：2008R2 (SQL Server 2008 R2 Enterprise)，2012SP3 (SQL Server 2012 Enterprise)，201202 (SQL Server 2012 Standard)，2014SP2 (SQL Server 2014 Enterprise)，201402 (SQL Server 2014 Standard)，2016SP1 (SQL Server 2016 Enterprise)，201602 (SQL Server 2016 Standard)，2017 (SQL Server 2017 Enterprise)，201702 (SQL Server 2017 Standard)，2019 (SQL Server 2019 Enterprise)，201902 (SQL Server 2019 Standard)。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2008R2。 */
+  DBVersion?: string;
+  /** 购买实例的宿主机类型，PM-物理机, CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘,CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘 */
+  MachineType?: string;
+}
+
+declare interface DescribeInquiryPriceParameterResponse {
+  /** 计费参数 */
+  Parameter?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceByOrdersRequest {
   /** 订单号集合 */
   DealNames: string[];
@@ -2438,6 +2728,80 @@ declare interface DescribeInstanceParamsResponse {
   TotalCount: number;
   /** 参数详情 */
   Items: ParameterDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceTasksRequest {
+  /** 数据库实例ID，形如mssql-njj2mtpl */
+  InstanceId: string;
+  /** 分页大小 */
+  Limit: number;
+  /** 异步任务状态 1-运行中，2-运行成功，3-运行失败 */
+  Status?: number;
+  /** 分页偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeInstanceTasksResponse {
+  /** 异步任务总条数 */
+  TotalCount: number;
+  /** 异步任务信息数组 */
+  InstanceTaskSet: InstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceTradeParameterRequest {
+  /** 实例可用区，类似ap-guangzhou-1（广州一区）；实例可售卖区域可以通过接口DescribeZones获取 */
+  Zone: string;
+  /** 实例核心数 */
+  Cpu: number;
+  /** 实例内存大小，单位GB */
+  Memory: number;
+  /** 实例磁盘大小，单位GB */
+  Storage: number;
+  /** 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,BI-商业智能服务,cvmHA-新版高可用,cvmRO-新版只读 */
+  InstanceType: string;
+  /** 购买实例的宿主机磁盘类型,CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘 */
+  MachineType: string;
+  /** 付费模式，取值支持 PREPAID（预付费），POSTPAID（后付费）。 */
+  InstanceChargeType?: string;
+  /** 项目ID */
+  ProjectId?: number;
+  /** 本次购买几个实例，默认值为1。取值不超过10 */
+  GoodsNum?: number;
+  /** sqlserver版本，目前所有支持的版本有：2008R2 (SQL Server 2008 R2 Enterprise)，2012SP3 (SQL Server 2012 Enterprise)，201202 (SQL Server 2012 Standard)，2014SP2 (SQL Server 2014 Enterprise)，201402 (SQL Server 2014 Standard)，2016SP1 (SQL Server 2016 Enterprise)，201602 (SQL Server 2016 Standard)，2017 (SQL Server 2017 Enterprise)，201702 (SQL Server 2017 Standard)，2019 (SQL Server 2019 Enterprise)，201902 (SQL Server 2019 Standard)。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2008R2。 */
+  DBVersion?: string;
+  /** VPC子网ID，形如subnet-bdoe83fa；SubnetId和VpcId需同时设置或者同时不设置 */
+  SubnetId?: string;
+  /** VPC网络ID，形如vpc-dsp338hz；SubnetId和VpcId需同时设置或者同时不设置 */
+  VpcId?: string;
+  /** 购买实例周期，默认取值为1，表示一个月。取值不超过48 */
+  Period?: number;
+  /** 安全组列表，填写形如sg-xxx的安全组ID */
+  SecurityGroupList?: string[];
+  /** 自动续费标志：0-正常续费 1-自动续费，默认为1自动续费。只在购买预付费实例时有效。 */
+  AutoRenewFlag?: number;
+  /** 可维护时间窗配置，以周为单位，表示周几允许维护，1-7分别代表周一到周末 */
+  Weekly?: number[];
+  /** 可维护时间窗配置，每天可维护的开始时间 */
+  StartTime?: string;
+  /** 可维护时间窗配置，持续时间，单位：小时 */
+  Span?: number;
+  /** 是否跨可用区部署，默认值为false */
+  MultiZones?: boolean;
+  /** 新建实例绑定的标签集合 */
+  ResourceTags?: ResourceTag[];
+  /** 系统时区，默认：China Standard Time */
+  TimeZone?: string;
+  /** 系统字符集排序规则，默认：Chinese_PRC_CI_AS */
+  Collation?: string;
+}
+
+declare interface DescribeInstanceTradeParameterResponse {
+  /** 计费参数 */
+  Parameter?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2568,6 +2932,18 @@ declare interface DescribeProductConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProductSpecRequest {
+}
+
+declare interface DescribeProductSpecResponse {
+  /** 配置地域分的个数 */
+  TotalCount?: number;
+  /** 规格信息数组 */
+  SpecInfoList?: ProductSpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProjectSecurityGroupsRequest {
   /** 项目ID，可通过控制台项目管理中查看 */
   ProjectId: number;
@@ -2606,6 +2982,46 @@ declare interface DescribePublishSubscribeResponse {
   TotalCount: number;
   /** 发布订阅列表 */
   PublishSubscribeSet: PublishSubscribe[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReadOnlyGroupAutoWeightRequest {
+  /** 主实例ID，格式如：mssql-3l3fgqn7 */
+  InstanceId: string;
+  /** 只读组ID，格式如：mssqlro-3l3fgqn7 */
+  ReadOnlyGroupId: string;
+}
+
+declare interface DescribeReadOnlyGroupAutoWeightResponse {
+  /** 只读组ID，格式如：mssqlro-3l3fgqn7 */
+  ReadOnlyGroupId: string;
+  /** 只读组名称 */
+  ReadOnlyGroupName: string;
+  /** 只读组的地域ID，与主实例相同 */
+  RegionId: string;
+  /** 只读组的可用区，与主实例相同 */
+  ZoneId: string;
+  /** 是否启动超时剔除功能，1-开启，0-不开启 */
+  IsOfflineDelay: number;
+  /** 启动超时剔除功能后，使用的超时阈值(秒) */
+  ReadOnlyMaxDelayTime: number;
+  /** 启动超时剔除功能后，至少只读组保留的只读副本数 */
+  MinReadOnlyInGroup: number;
+  /** 只读组vip */
+  Vip: string;
+  /** 只读组vport */
+  Vport: number;
+  /** 只读组在私有网络ID */
+  VpcId: string;
+  /** 只读组在私有网络子网ID */
+  SubnetId: string;
+  /** 只读实例副本集合 */
+  ReadOnlyInstanceSet: ReadOnlyInstance[];
+  /** 只读组状态: 1-申请成功运行中，5-申请中 */
+  Status: number;
+  /** 主实例ID，形如mssql-sgeshe3th */
+  MasterInstanceId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2734,6 +3150,40 @@ declare interface DescribeRegularBackupPlanResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRestoreTaskRequest {
+  /** 源实例ID */
+  InstanceId: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 回档方式，0-按照时间点回档，1-按照备份集回档 */
+  RestoreType?: number;
+  /** 回档的目标实例所在地域 */
+  TargetRegion?: string;
+  /** 回档到目标实例的类型，0-当前实例，1-已有实例，2-全新实例 */
+  TargetType?: number;
+  /** 回档状态，0-初始化，1-运行中，2-成功，3-失败 */
+  Status?: number;
+  /** 分页返回，每页返回的数目，取值为1-100，默认值为20 */
+  Offset?: number;
+  /** 分页返回，页编号，默认值为第0页 */
+  Limit?: number;
+  /** 排序字段，restoreTime-回档时间，startTime-任务开始时间，endTime-任务结束时间，默认按照任务开始时间降序 */
+  OrderBy?: string;
+  /** 排序规则（desc-降序，asc-升序），默认desc */
+  OrderByType?: string;
+}
+
+declare interface DescribeRestoreTaskResponse {
+  /** 回档任务总数量 */
+  TotalCount?: number;
+  /** 回档任务记录列表 */
+  Tasks?: RestoreTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRollbackTimeRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2768,6 +3218,58 @@ declare interface DescribeSlowlogsResponse {
   Slowlogs?: SlowlogInfo[];
   /** 慢查询日志信息列表 */
   SlowLogs?: SlowLog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSpecSellStatusRequest {
+  /** 可用区英文ID，形如ap-guangzhou-3 */
+  Zone: string;
+  /** 实例规格ID，可通过DescribeProductConfig接口获取。 */
+  SpecIdSet: number[];
+  /** 数据库版本信息，可通过DescribeProductConfig接口获取。 */
+  DBVersion: string;
+  /** 产品ID，可通过DescribeProductConfig接口获取。 */
+  Pid: number;
+  /** 付费模式，POST-按量计费 PRE-包年包月 */
+  PayMode: string;
+  /** 付费模式，CNY-人民币 USD-美元 */
+  Currency: string;
+}
+
+declare interface DescribeSpecSellStatusResponse {
+  /** 规格在不同地域状态集合 */
+  DescribeSpecSellStatusSet?: SpecSellStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUpgradeInstanceCheckRequest {
+  /** 数据库实例ID，形如mssql-njj2mtpl */
+  InstanceId: string;
+  /** 实例变配后的CPU核心数，不填则不修改 */
+  Cpu?: number;
+  /** 实例变配后内存大小，单位GB，不填则不修改 */
+  Memory?: number;
+  /** 实例变配后磁盘大小，单位GB，不填则不修改 */
+  Storage?: number;
+  /** 实例版本，不填则不修改 */
+  DBVersion?: string;
+  /** 实例变配后的类型，可选值：CLUSTER-集群，不填则不修改 */
+  HAType?: string;
+  /** 实例变配后的跨可用区类型，可选值： SameZones-修改为同可用区 MultiZones-修改为跨可用区，不填则不修改 */
+  MultiZones?: string;
+}
+
+declare interface DescribeUpgradeInstanceCheckResponse {
+  /** 本变配是否对实例有影响，0-没有影响 1-有影响 */
+  IsAffect: number;
+  /** 本变配是否可以执行 0-不通过，不能变配 1-通过，可以变配 */
+  Passed: number;
+  /** 本变配是升配还是降配，down-降配 up-升配 */
+  ModifyMode: string;
+  /** 检查项列表 */
+  CheckItems: CheckItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3056,6 +3558,18 @@ declare interface ModifyBackupStrategyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloseWanIpRequest {
+  /** 实例资源ID */
+  InstanceId: string;
+}
+
+declare interface ModifyCloseWanIpResponse {
+  /** 关闭外网流程Id */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCrossBackupStrategyRequest {
   /** 跨地域备份开关(数据备份&日志备份) enable-开启，disable-关闭 */
   CrossBackupEnabled: string;
@@ -3118,6 +3632,18 @@ declare interface ModifyDBInstanceNetworkRequest {
 declare interface ModifyDBInstanceNetworkResponse {
   /** 实例转网流程id，可通过[DescribeFlowStatus](https://cloud.tencent.com/document/product/238/19967)接口查询流程状态 */
   FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBInstanceNoteRequest {
+  /** 数据库实例ID，形如mssql-njj2mtpl */
+  InstanceId: string;
+  /** 实例备注信息 */
+  InstanceNote: string;
+}
+
+declare interface ModifyDBInstanceNoteResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3340,6 +3866,18 @@ declare interface ModifyMigrationResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOpenWanIpRequest {
+  /** 实例资源ID */
+  InstanceId: string;
+}
+
+declare interface ModifyOpenWanIpResponse {
+  /** 开通外网流程Id */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPublishSubscribeNameRequest {
   /** 发布订阅ID */
   PublishSubscribeId: number;
@@ -3348,6 +3886,22 @@ declare interface ModifyPublishSubscribeNameRequest {
 }
 
 declare interface ModifyPublishSubscribeNameResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPublishSubscribeRequest {
+  /** 实例ID，例如：mssql-dg32dcv */
+  InstanceId: string;
+  /** 发布订阅ID */
+  PublishSubscribeId: number;
+  /** 修改的数据库订阅发布关系集合 */
+  DatabaseTupleSet: ModifyDataBaseTuple[];
+}
+
+declare interface ModifyPublishSubscribeResponse {
+  /** 任务流id */
+  FlowId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3687,6 +4241,8 @@ declare interface Sqlserver {
   (): Versions;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
+  /** 平衡只读实例的路由权重 {@link BalanceReadOnlyGroupRequest} {@link BalanceReadOnlyGroupResponse} */
+  BalanceReadOnlyGroup(data: BalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BalanceReadOnlyGroupResponse>;
   /** 克隆数据库 {@link CloneDBRequest} {@link CloneDBResponse} */
   CloneDB(data: CloneDBRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBResponse>;
   /** 关闭实例互通 {@link CloseInterCommunicationRequest} {@link CloseInterCommunicationResponse} */
@@ -3739,6 +4295,10 @@ declare interface Sqlserver {
   DeleteMigration(data: DeleteMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMigrationResponse>;
   /** 删除发布订阅 {@link DeletePublishSubscribeRequest} {@link DeletePublishSubscribeResponse} */
   DeletePublishSubscribe(data: DeletePublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePublishSubscribeResponse>;
+  /** 删除回档任务记录 {@link DeleteRestoreTaskRequest} {@link DeleteRestoreTaskResponse} */
+  DeleteRestoreTask(data: DeleteRestoreTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRestoreTaskResponse>;
+  /** 查询数据库关联的账号和权限信息 {@link DescribeAccountPrivilegeByDBRequest} {@link DescribeAccountPrivilegeByDBResponse} */
+  DescribeAccountPrivilegeByDB(data: DescribeAccountPrivilegeByDBRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegeByDBResponse>;
   /** 拉取实例账户列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 根据流程ID查询备份信息 {@link DescribeBackupByFlowIdRequest} {@link DescribeBackupByFlowIdResponse} */
@@ -3761,10 +4321,14 @@ declare interface Sqlserver {
   DescribeBackups(data: DescribeBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupsResponse>;
   /** 查询商业智能服务需要的文件 {@link DescribeBusinessIntelligenceFileRequest} {@link DescribeBusinessIntelligenceFileResponse} */
   DescribeBusinessIntelligenceFile(data: DescribeBusinessIntelligenceFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessIntelligenceFileResponse>;
+  /** 查询实例支持的字符集和时区 {@link DescribeCollationTimeZoneRequest} {@link DescribeCollationTimeZoneResponse} */
+  DescribeCollationTimeZone(data?: DescribeCollationTimeZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCollationTimeZoneResponse>;
   /** 查询跨地域备份实时统计列表 {@link DescribeCrossBackupStatisticalRequest} {@link DescribeCrossBackupStatisticalResponse} */
   DescribeCrossBackupStatistical(data: DescribeCrossBackupStatisticalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBackupStatisticalResponse>;
   /** 查询备机的容灾地域和可用区 {@link DescribeCrossRegionZoneRequest} {@link DescribeCrossRegionZoneResponse} */
   DescribeCrossRegionZone(data: DescribeCrossRegionZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossRegionZoneResponse>;
+  /** 查询跨地域备份的目标地域 {@link DescribeCrossRegionsRequest} {@link DescribeCrossRegionsResponse} */
+  DescribeCrossRegions(data?: DescribeCrossRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossRegionsResponse>;
   /** 查询数据库字符集 {@link DescribeDBCharsetsRequest} {@link DescribeDBCharsetsResponse} */
   DescribeDBCharsets(data: DescribeDBCharsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCharsetsResponse>;
   /** 查询互通实例的信息 {@link DescribeDBInstanceInterRequest} {@link DescribeDBInstanceInterResponse} */
@@ -3773,12 +4337,18 @@ declare interface Sqlserver {
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 查询实例附属属性 {@link DescribeDBInstancesAttributeRequest} {@link DescribeDBInstancesAttributeResponse} */
   DescribeDBInstancesAttribute(data: DescribeDBInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesAttributeResponse>;
+  /** 查询账号关联的数据库和权限信息 {@link DescribeDBPrivilegeByAccountRequest} {@link DescribeDBPrivilegeByAccountResponse} */
+  DescribeDBPrivilegeByAccount(data: DescribeDBPrivilegeByAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBPrivilegeByAccountResponse>;
+  /** 查询可回档的数据库 {@link DescribeDBRestoreTimeRequest} {@link DescribeDBRestoreTimeResponse} */
+  DescribeDBRestoreTime(data: DescribeDBRestoreTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBRestoreTimeResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询数据库列表（已废弃） {@link DescribeDBsRequest} {@link DescribeDBsResponse} */
   DescribeDBs(data: DescribeDBsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsResponse>;
   /** 查询数据库配置信息（已废弃） {@link DescribeDBsNormalRequest} {@link DescribeDBsNormalResponse} */
   DescribeDBsNormal(data: DescribeDBsNormalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsNormalResponse>;
+  /** 查询账户关联的数据库名称 {@link DescribeDatabaseNamesRequest} {@link DescribeDatabaseNamesResponse} */
+  DescribeDatabaseNames(data: DescribeDatabaseNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseNamesResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询数据库配置信息 {@link DescribeDatabasesNormalRequest} {@link DescribeDatabasesNormalResponse} */
@@ -3789,12 +4359,18 @@ declare interface Sqlserver {
   DescribeHASwitchLog(data: DescribeHASwitchLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHASwitchLogResponse>;
   /** 查询增量备份导入任务 {@link DescribeIncrementalMigrationRequest} {@link DescribeIncrementalMigrationResponse} */
   DescribeIncrementalMigration(data: DescribeIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIncrementalMigrationResponse>;
+  /** 查询实例询价计费参数 {@link DescribeInquiryPriceParameterRequest} {@link DescribeInquiryPriceParameterResponse} */
+  DescribeInquiryPriceParameter(data: DescribeInquiryPriceParameterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInquiryPriceParameterResponse>;
   /** 根据订单号查询对应的实例ID {@link DescribeInstanceByOrdersRequest} {@link DescribeInstanceByOrdersResponse} */
   DescribeInstanceByOrders(data: DescribeInstanceByOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByOrdersResponse>;
   /** 查询实例参数修改历史 {@link DescribeInstanceParamRecordsRequest} {@link DescribeInstanceParamRecordsResponse} */
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的可设置参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查询异步任务列表 {@link DescribeInstanceTasksRequest} {@link DescribeInstanceTasksResponse} */
+  DescribeInstanceTasks(data: DescribeInstanceTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTasksResponse>;
+  /** 查询实例的计费参数 {@link DescribeInstanceTradeParameterRequest} {@link DescribeInstanceTradeParameterResponse} */
+  DescribeInstanceTradeParameter(data: DescribeInstanceTradeParameterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTradeParameterResponse>;
   /** 查询该实例的可维护时间窗 {@link DescribeMaintenanceSpanRequest} {@link DescribeMaintenanceSpanResponse} */
   DescribeMaintenanceSpan(data: DescribeMaintenanceSpanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceSpanResponse>;
   /** 查询迁移数据库列表 {@link DescribeMigrationDatabasesRequest} {@link DescribeMigrationDatabasesResponse} */
@@ -3807,10 +4383,14 @@ declare interface Sqlserver {
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询售卖规格配置 {@link DescribeProductConfigRequest} {@link DescribeProductConfigResponse} */
   DescribeProductConfig(data: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
+  /** 查询全地域售卖规格配置 {@link DescribeProductSpecRequest} {@link DescribeProductSpecResponse} */
+  DescribeProductSpec(data?: DescribeProductSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSpecResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */
   DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
   /** 查询订阅发布 {@link DescribePublishSubscribeRequest} {@link DescribePublishSubscribeResponse} */
   DescribePublishSubscribe(data: DescribePublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishSubscribeResponse>;
+  /** 查询只读组的自动权重 {@link DescribeReadOnlyGroupAutoWeightRequest} {@link DescribeReadOnlyGroupAutoWeightResponse} */
+  DescribeReadOnlyGroupAutoWeight(data: DescribeReadOnlyGroupAutoWeightRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupAutoWeightResponse>;
   /** 通过只读实例查询只读组 {@link DescribeReadOnlyGroupByReadOnlyInstanceRequest} {@link DescribeReadOnlyGroupByReadOnlyInstanceResponse} */
   DescribeReadOnlyGroupByReadOnlyInstance(data: DescribeReadOnlyGroupByReadOnlyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupByReadOnlyInstanceResponse>;
   /** 查询只读组详情 {@link DescribeReadOnlyGroupDetailsRequest} {@link DescribeReadOnlyGroupDetailsResponse} */
@@ -3821,10 +4401,16 @@ declare interface Sqlserver {
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 查询实例定期备份保留计划 {@link DescribeRegularBackupPlanRequest} {@link DescribeRegularBackupPlanResponse} */
   DescribeRegularBackupPlan(data: DescribeRegularBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegularBackupPlanResponse>;
+  /** 查询回档任务列表 {@link DescribeRestoreTaskRequest} {@link DescribeRestoreTaskResponse} */
+  DescribeRestoreTask(data: DescribeRestoreTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRestoreTaskResponse>;
   /** 查询实例可回档时间范围 {@link DescribeRollbackTimeRequest} {@link DescribeRollbackTimeResponse} */
   DescribeRollbackTime(data: DescribeRollbackTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeResponse>;
   /** 获取慢查询日志文件信息 {@link DescribeSlowlogsRequest} {@link DescribeSlowlogsResponse} */
   DescribeSlowlogs(data: DescribeSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowlogsResponse>;
+  /** 查询售卖规格状态信息 {@link DescribeSpecSellStatusRequest} {@link DescribeSpecSellStatusResponse} */
+  DescribeSpecSellStatus(data: DescribeSpecSellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecSellStatusResponse>;
+  /** 实例变配检查 {@link DescribeUpgradeInstanceCheckRequest} {@link DescribeUpgradeInstanceCheckResponse} */
+  DescribeUpgradeInstanceCheck(data: DescribeUpgradeInstanceCheckRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpgradeInstanceCheckResponse>;
   /** 查询备份上传权限 {@link DescribeUploadBackupInfoRequest} {@link DescribeUploadBackupInfoResponse} */
   DescribeUploadBackupInfo(data: DescribeUploadBackupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadBackupInfoResponse>;
   /** 查询增量备份上传权限 {@link DescribeUploadIncrementalInfoRequest} {@link DescribeUploadIncrementalInfoResponse} */
@@ -3851,6 +4437,8 @@ declare interface Sqlserver {
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
   /** 设置备份策略 {@link ModifyBackupStrategyRequest} {@link ModifyBackupStrategyResponse} */
   ModifyBackupStrategy(data: ModifyBackupStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupStrategyResponse>;
+  /** 关闭实例外网 {@link ModifyCloseWanIpRequest} {@link ModifyCloseWanIpResponse} */
+  ModifyCloseWanIp(data: ModifyCloseWanIpRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloseWanIpResponse>;
   /** 开启、关闭跨地域备份策略 {@link ModifyCrossBackupStrategyRequest} {@link ModifyCrossBackupStrategyResponse} */
   ModifyCrossBackupStrategy(data: ModifyCrossBackupStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCrossBackupStrategyResponse>;
   /** 开启、关闭数据库的TDE加密功能 {@link ModifyDBEncryptAttributesRequest} {@link ModifyDBEncryptAttributesResponse} */
@@ -3859,6 +4447,8 @@ declare interface Sqlserver {
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** 修改实例网络 {@link ModifyDBInstanceNetworkRequest} {@link ModifyDBInstanceNetworkResponse} */
   ModifyDBInstanceNetwork(data: ModifyDBInstanceNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNetworkResponse>;
+  /** 修改实例备注信息 {@link ModifyDBInstanceNoteRequest} {@link ModifyDBInstanceNoteResponse} */
+  ModifyDBInstanceNote(data: ModifyDBInstanceNoteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNoteResponse>;
   /** 修改数据库实例所属项目 {@link ModifyDBInstanceProjectRequest} {@link ModifyDBInstanceProjectResponse} */
   ModifyDBInstanceProject(data: ModifyDBInstanceProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceProjectResponse>;
   /** 修改实例续费标记 {@link ModifyDBInstanceRenewFlagRequest} {@link ModifyDBInstanceRenewFlagResponse} */
@@ -3887,6 +4477,10 @@ declare interface Sqlserver {
   ModifyMaintenanceSpan(data: ModifyMaintenanceSpanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceSpanResponse>;
   /** 修改迁移任务 {@link ModifyMigrationRequest} {@link ModifyMigrationResponse} */
   ModifyMigration(data: ModifyMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationResponse>;
+  /** 开通实例外网 {@link ModifyOpenWanIpRequest} {@link ModifyOpenWanIpResponse} */
+  ModifyOpenWanIp(data: ModifyOpenWanIpRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOpenWanIpResponse>;
+  /** 修改发布订阅关系 {@link ModifyPublishSubscribeRequest} {@link ModifyPublishSubscribeResponse} */
+  ModifyPublishSubscribe(data: ModifyPublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublishSubscribeResponse>;
   /** 修改发布订阅的名称 {@link ModifyPublishSubscribeNameRequest} {@link ModifyPublishSubscribeNameResponse} */
   ModifyPublishSubscribeName(data: ModifyPublishSubscribeNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublishSubscribeNameResponse>;
   /** 修改只读组详情 {@link ModifyReadOnlyGroupDetailsRequest} {@link ModifyReadOnlyGroupDetailsResponse} */

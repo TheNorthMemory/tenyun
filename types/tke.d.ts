@@ -2260,6 +2260,20 @@ declare interface ServiceAccountAuthenticationOptions {
   AutoCreateDiscoveryAnonymousAuth?: boolean | null;
 }
 
+/** 执行步骤信息 */
+declare interface Step {
+  /** 名称 */
+  Name?: string;
+  /** 开始时间 */
+  StartAt?: string | null;
+  /** 结束时间 */
+  EndAt?: string | null;
+  /** 当前状态 */
+  Status?: string | null;
+  /** 执行信息 */
+  Message?: string | null;
+}
+
 /** 子网信息 */
 declare interface SubnetInfos {
   /** 子网id */
@@ -3786,6 +3800,20 @@ declare interface DescribeClusterEndpointsResponse {
   ClusterIntranetDomain?: string | null;
   /** 外网安全组 */
   SecurityGroup?: string | null;
+  /** 内网访问所属子网 */
+  ClusterIntranetSubnetId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterExtraArgsRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterExtraArgsResponse {
+  /** 集群自定义参数 */
+  ClusterExtraArgs?: ClusterExtraArgs | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4426,6 +4454,64 @@ declare interface DescribeExternalClusterSpecResponse {
   Spec: string;
   /** agent.yaml文件过期时间字符串，时区UTC */
   Expiration: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExternalNodeSupportConfigRequest {
+  /** 集群Id */
+  ClusterId: string;
+}
+
+declare interface DescribeExternalNodeSupportConfigResponse {
+  /** 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。 */
+  ClusterCIDR?: string | null;
+  /** 集群网络插件类型，支持：CiliumBGP、CiliumVXLan */
+  NetworkType?: string | null;
+  /** 子网ID */
+  SubnetId?: string | null;
+  /** 是否开启第三方节点专线连接支持 */
+  Enabled?: boolean | null;
+  /** 节点所属交换机的BGP AS 号 */
+  AS?: string | null;
+  /** 节点所属交换机的交换机 IP */
+  SwitchIP?: string | null;
+  /** 开启第三方节点池状态 */
+  Status?: string;
+  /** 如果开启失败原因 */
+  FailedReason?: string | null;
+  /** 内网访问地址 */
+  Master?: string | null;
+  /** 镜像仓库代理地址 */
+  Proxy?: string | null;
+  /** 用于记录开启第三方节点的过程进行到哪一步了 */
+  Progress?: Step[] | null;
+  /** 是否开启第三方节点公网连接支持 */
+  EnabledPublicConnect?: boolean;
+  /** 公网连接地址 */
+  PublicConnectUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIPAMDRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeIPAMDResponse {
+  /** 是否安装了eniipamd组件 */
+  EnableIPAMD: boolean;
+  /** 是否开启自定义podcidr，默认为false，已安装eniipamd组件才意义 */
+  EnableCustomizedPodCidr: boolean | null;
+  /** 是否不开启vpccni模式，默认为false，已安装eniipamd组件才意义 */
+  DisableVpcCniMode: boolean | null;
+  /** 组件状态，已安装eniipamd组件才会有值 */
+  Phase: string | null;
+  /** 错误信息，已安装eniipamd组件且状态为非running才会有错误信息 */
+  Reason: string | null;
+  /** 子网信息，已安装eniipamd组件才会有值 */
+  SubnetIds: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6295,6 +6381,8 @@ declare interface Tke {
   DescribeClusterEndpointVipStatus(data: DescribeClusterEndpointVipStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointVipStatusResponse>;
   /** 获取集群访问地址 {@link DescribeClusterEndpointsRequest} {@link DescribeClusterEndpointsResponse} */
   DescribeClusterEndpoints(data: DescribeClusterEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointsResponse>;
+  /** 查询集群自定义参数 {@link DescribeClusterExtraArgsRequest} {@link DescribeClusterExtraArgsResponse} */
+  DescribeClusterExtraArgs(data: DescribeClusterExtraArgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterExtraArgsResponse>;
   /** 查询集群巡检结果概览信息 {@link DescribeClusterInspectionResultsOverviewRequest} {@link DescribeClusterInspectionResultsOverviewResponse} */
   DescribeClusterInspectionResultsOverview(data?: DescribeClusterInspectionResultsOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInspectionResultsOverviewResponse>;
   /** 查询集群节点信息 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
@@ -6365,6 +6453,10 @@ declare interface Tke {
   DescribeExistedInstances(data?: DescribeExistedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExistedInstancesResponse>;
   /** 获取导入第三方集群YAML定义 {@link DescribeExternalClusterSpecRequest} {@link DescribeExternalClusterSpecResponse} */
   DescribeExternalClusterSpec(data: DescribeExternalClusterSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalClusterSpecResponse>;
+  /** 查看开启第三方节点池配置信息 {@link DescribeExternalNodeSupportConfigRequest} {@link DescribeExternalNodeSupportConfigResponse} */
+  DescribeExternalNodeSupportConfig(data: DescribeExternalNodeSupportConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalNodeSupportConfigResponse>;
+  /** 获取eniipamd组件信息 {@link DescribeIPAMDRequest} {@link DescribeIPAMDResponse} */
+  DescribeIPAMD(data: DescribeIPAMDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPAMDResponse>;
   /** 查询镜像缓存信息 {@link DescribeImageCachesRequest} {@link DescribeImageCachesResponse} */
   DescribeImageCaches(data?: DescribeImageCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageCachesResponse>;
   /** 获取镜像信息 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */

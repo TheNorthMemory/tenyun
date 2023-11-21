@@ -215,29 +215,39 @@ declare interface AlarmRuleDto {
 /** 审批列表信息 */
 declare interface Apply {
   /** 申请人id */
-  ApplicantId: string;
+  ApplicantId?: string;
   /** 申请人名称 */
   ApplicantName?: string;
   /** 审批备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 审批分类key */
-  ApproveClassification: string;
+  ApproveClassification?: string;
   /** 审批单id */
   ApproveId?: string;
   /** 审批类型key */
-  ApproveType: string;
+  ApproveType?: string;
   /** 申请原因 */
-  Reason: string | null;
+  Reason?: string | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 审批时间 */
-  ApproveTime: string | null;
+  ApproveTime?: string | null;
   /** 审批分类名称 */
-  ApproveClassificationName: string;
+  ApproveClassificationName?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 审批类型名称 */
-  ApproveTypeName: string;
+  ApproveTypeName?: string;
+  /** 审批异常或者失败信息 */
+  ErrorMessage?: string;
+  /** 申请名称 */
+  ApplyName?: string | null;
+  /** 审批人id */
+  ApproverId?: string | null;
+  /** 审批人名称 */
+  ApproverName?: string | null;
+  /** 审批所属项目 */
+  ApproveProjectName?: string | null;
 }
 
 /** 修改审批单状态 */
@@ -246,6 +256,16 @@ declare interface ApproveModify {
   ApproveId: string;
   /** 是否修改成功 */
   Success: boolean;
+}
+
+/** 审批分类 */
+declare interface ApproveType {
+  /** 申请分类key */
+  Type: string;
+  /** 类型名称 */
+  TypeName: string;
+  /** 申请类型key */
+  Classification: string;
 }
 
 /** AttributeItemVO参数 */
@@ -7394,7 +7414,19 @@ declare interface DescribeApproveListRequest {
 
 declare interface DescribeApproveListResponse {
   /** 待审批列表详情 */
-  Data: DescribeApply | null;
+  Data?: DescribeApply | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApproveTypeListRequest {
+  /** 类型key */
+  Classification: string;
+}
+
+declare interface DescribeApproveTypeListResponse {
+  /** 获取审批分类列表 */
+  Data: ApproveType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12672,6 +12704,8 @@ declare interface Wedata {
   DescribeAllUsedVersionSon(data: DescribeAllUsedVersionSonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUsedVersionSonResponse>;
   /** 获取待审批列表 {@link DescribeApproveListRequest} {@link DescribeApproveListResponse} */
   DescribeApproveList(data: DescribeApproveListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApproveListResponse>;
+  /** 获取审批分类列表 {@link DescribeApproveTypeListRequest} {@link DescribeApproveTypeListResponse} */
+  DescribeApproveTypeList(data: DescribeApproveTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApproveTypeListResponse>;
   /** 查询基线DAG {@link DescribeBaselineAllTaskDagRequest} {@link DescribeBaselineAllTaskDagResponse} */
   DescribeBaselineAllTaskDag(data: DescribeBaselineAllTaskDagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineAllTaskDagResponse>;
   /** 拉取基线列表ById {@link DescribeBaselineByIdRequest} {@link DescribeBaselineByIdResponse} */

@@ -1791,14 +1791,14 @@ declare interface CreateProClusterRequest {
   AutoRenewFlag: number;
   /** 购买时长，取值范围：1～50 */
   TimeSpan: number;
-  /** 集群的标签列表(已废弃) */
-  Tags: Tag[];
   /** 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。 */
   ClusterName: string;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher: number;
   /** vpc网络标签 */
   Vpcs?: VpcInfo;
+  /** 集群的标签列表(已废弃) */
+  Tags?: Tag[];
 }
 
 declare interface CreateProClusterResponse {

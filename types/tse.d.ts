@@ -802,6 +802,10 @@ declare interface KongTarget {
   CreatedTime?: string | null;
   /** Target的来源 */
   Source?: string | null;
+  /** CVM实例ID */
+  CvmInstanceId?: string | null;
+  /** CVM实例名称 */
+  CvmInstanceName?: string | null;
 }
 
 /** 服务的后端配置 */
@@ -979,67 +983,67 @@ declare interface QpsThreshold {
 /** 微服务注册引擎实例 */
 declare interface SREInstance {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 版本号 */
-  Edition: string;
+  Edition?: string;
   /** 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail */
-  Status: string;
+  Status?: string;
   /** 规格ID */
-  SpecId: string;
+  SpecId?: string;
   /** 副本数 */
-  Replica: number;
+  Replica?: number;
   /** 类型 */
-  Type: string;
+  Type?: string;
   /** Vpc iD */
-  VpcId: string;
+  VpcId?: string;
   /** 子网ID */
-  SubnetIds: string[] | null;
+  SubnetIds?: string[] | null;
   /** 是否开启持久化存储 */
-  EnableStorage: boolean | null;
+  EnableStorage?: boolean | null;
   /** 数据存储方式 */
-  StorageType: string | null;
+  StorageType?: string | null;
   /** 云硬盘容量 */
-  StorageCapacity: number | null;
+  StorageCapacity?: number | null;
   /** 计费方式 */
-  Paymode: string | null;
+  Paymode?: string | null;
   /** EKS集群的ID */
-  EKSClusterID: string | null;
+  EKSClusterID?: string | null;
   /** 集群创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 环境配置信息列表 */
-  EnvInfos: EnvInfo[] | null;
+  EnvInfos?: EnvInfo[] | null;
   /** 引擎所在的区域 */
-  EngineRegion: string | null;
+  EngineRegion?: string | null;
   /** 注册引擎是否开启公网 */
-  EnableInternet: boolean | null;
+  EnableInternet?: boolean | null;
   /** 私有网络列表信息 */
-  VpcInfos: VpcInfo[] | null;
+  VpcInfos?: VpcInfo[] | null;
   /** 服务治理相关信息列表 */
-  ServiceGovernanceInfos: ServiceGovernanceInfo[] | null;
+  ServiceGovernanceInfos?: ServiceGovernanceInfo[] | null;
   /** 实例的标签信息 */
-  Tags: KVPair[] | null;
+  Tags?: KVPair[] | null;
   /** 引擎实例是否开启控制台公网访问地址 */
-  EnableConsoleInternet: boolean | null;
+  EnableConsoleInternet?: boolean | null;
   /** 引擎实例是否开启控制台内网访问地址 */
-  EnableConsoleIntranet: boolean | null;
+  EnableConsoleIntranet?: boolean | null;
   /** 引擎实例是否展示参数配置页面 */
-  ConfigInfoVisible: boolean | null;
+  ConfigInfoVisible?: boolean | null;
   /** 引擎实例控制台默认密码 */
-  ConsoleDefaultPwd: string | null;
+  ConsoleDefaultPwd?: string | null;
   /** 交易付费类型，0后付费/1预付费 */
-  TradeType: number | null;
+  TradeType?: number | null;
   /** 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费 */
-  AutoRenewFlag: number | null;
+  AutoRenewFlag?: number | null;
   /** 预付费到期时间 */
-  CurDeadline: string | null;
+  CurDeadline?: string | null;
   /** 隔离开始时间 */
-  IsolateTime: string | null;
+  IsolateTime?: string | null;
   /** 实例地域相关的描述信息 */
-  RegionInfos: DescribeInstanceRegionInfo[] | null;
+  RegionInfos?: DescribeInstanceRegionInfo[] | null;
   /** 所在EKS环境，分为common和yunti */
-  EKSType: string | null;
+  EKSType?: string | null;
   /** 引擎的产品版本 */
   FeatureVersion?: string | null;
   /** 引擎实例是否开启客户端内网访问地址 */

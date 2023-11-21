@@ -2529,9 +2529,9 @@ declare interface DescribeClusterParamsRequest {
 
 declare interface DescribeClusterParamsResponse {
   /** 参数个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例参数列表 */
-  Items: ParamInfo[] | null;
+  Items?: ParamInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2575,9 +2575,9 @@ declare interface DescribeClustersRequest {
 
 declare interface DescribeClustersResponse {
   /** 集群数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群列表 */
-  ClusterSet: CynosdbCluster[];
+  ClusterSet?: CynosdbCluster[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3821,9 +3821,9 @@ declare interface ReloadBalanceProxyNodeRequest {
 
 declare interface ReloadBalanceProxyNodeResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 异步任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -62,7 +62,7 @@ declare interface Instance {
   CreateTime?: string | null;
   /** 公网出带宽上限，默认5Mbps */
   MaxOutBandwidth?: string | null;
-  /** 每月免费流量，默认1000G */
+  /** 每月免费流量，默认500G */
   MaxFreeTraffic?: string | null;
   /** 应用配置环境 */
   ConfigurationEnvironment?: string | null;
@@ -185,7 +185,7 @@ declare interface DescribeInstanceNetworkStatusResponse {
 declare interface DescribeInstancesRequest {
   /** 实例元组 */
   InstanceIds?: string[];
-  /** 描述键值对过滤器，用于条件过滤查询。 */
+  /** 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态 */
   Filters?: Filter[];
   /** 偏移量，默认为0 */
   Offset?: number;
@@ -213,12 +213,12 @@ declare interface DescribeRegionsResponse {
 }
 
 declare interface DescribeScenesRequest {
-  /** ["sc-abcdefgh"] */
+  /** 场景id列表 */
   SceneIds?: string[];
 }
 
 declare interface DescribeScenesResponse {
-  /** scene info */
+  /** 场景详情 */
   SceneSet?: SceneInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

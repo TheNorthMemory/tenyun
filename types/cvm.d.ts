@@ -1369,7 +1369,7 @@ declare interface CreateLaunchTemplateRequest {
 
 declare interface CreateLaunchTemplateResponse {
   /** 当通过本接口来创建实例启动模板时会返回该参数，表示创建成功的实例启动模板`ID`。 */
-  LaunchTemplateId: string;
+  LaunchTemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1435,7 +1435,7 @@ declare interface CreateLaunchTemplateVersionRequest {
 
 declare interface CreateLaunchTemplateVersionResponse {
   /** 新创建的实例启动模板版本号。 */
-  LaunchTemplateVersionNumber: number;
+  LaunchTemplateVersionNumber?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2440,13 +2440,13 @@ declare interface ModifyInstancesAttributeResponse {
 }
 
 declare interface ModifyInstancesChargeTypeRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为30。 */
+  /** 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为30。 */
   InstanceIds: string[];
-  /** 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月。POSTPAID_BY_HOUR：后付费，即按量付费。 */
+  /** 修改后实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月。POSTPAID_BY_HOUR：后付费，即按量付费。 */
   InstanceChargeType: string;
-  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</dx-alert> */
+  /** 修改后预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</dx-alert> */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 是否同时切换弹性数据云盘计费模式。取值范围：TRUE：表示切换弹性数据云盘计费模式FALSE：表示不切换弹性数据云盘计费模式默认取值：FALSE。 */
+  /** 是否同时切换弹性数据云盘计费模式。取值范围：true：表示切换弹性数据云盘计费模式false：表示不切换弹性数据云盘计费模式默认取值：false。 */
   ModifyPortableDataDisk?: boolean;
 }
 
@@ -2468,7 +2468,7 @@ declare interface ModifyInstancesProjectResponse {
 }
 
 declare interface ModifyInstancesRenewFlagRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
+  /** 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
   InstanceIds: string[];
   /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
   RenewFlag: string;
@@ -2480,7 +2480,7 @@ declare interface ModifyInstancesRenewFlagResponse {
 }
 
 declare interface ModifyInstancesVpcAttributeRequest {
-  /** 待操作的实例ID数组。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。 */
+  /** 待操作的实例ID数组。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceIds: string[];
   /** 私有网络相关信息配置，通过该参数指定私有网络的ID，子网ID，私有网络ip等信息。当指定私有网络ID和子网ID（子网必须在实例所在的可用区）与指定实例所在私有网络不一致时，会将实例迁移至指定的私有网络的子网下。可通过`PrivateIpAddresses`指定私有网络子网IP，若需指定则所有已指定的实例均需要指定子网IP，此时`InstanceIds`与`PrivateIpAddresses`一一对应。不指定`PrivateIpAddresses`时随机分配私有网络子网IP。 */
   VirtualPrivateCloud: VirtualPrivateCloud;
@@ -2558,9 +2558,9 @@ declare interface PurchaseReservedInstancesOfferingResponse {
 }
 
 declare interface RebootInstancesRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
-  /** 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常重启失败后选择强制重启实例。取值范围：TRUE：表示在正常重启失败后进行强制重启FALSE：表示在正常重启失败后不进行强制重启默认取值：FALSE。 */
+  /** 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常重启失败后选择强制重启实例。取值范围：true：表示在正常重启失败后进行强制重启false：表示在正常重启失败后不进行强制重启默认取值：false。 */
   ForceReboot?: boolean;
   /** 关机类型。取值范围：SOFT：表示软关机HARD：表示硬关机SOFT_FIRST：表示优先软关机，失败再执行硬关机默认取值：SOFT。 */
   StopType?: string;
@@ -2604,11 +2604,11 @@ declare interface RenewHostsResponse {
 }
 
 declare interface RenewInstancesRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。</dx-alert> */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 是否续费弹性数据盘。取值范围：TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘默认取值：TRUE。 */
+  /** 是否续费弹性数据盘。取值范围：true：表示续费包年包月实例同时续费其挂载的弹性数据盘false：表示续费包年包月实例同时不再续费其挂载的弹性数据盘默认取值：true。 */
   RenewPortableDataDisk?: boolean;
 }
 
@@ -2678,13 +2678,13 @@ declare interface ResetInstancesInternetMaxBandwidthResponse {
 }
 
 declare interface ResetInstancesPasswordRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
+  /** 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
   InstanceIds: string[];
-  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：小写字母：[a-z]大写字母：[A-Z]数字：0-9特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/Windows 实例密码必须12\~30位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符小写字母：[a-z]大写字母：[A-Z]数字： 0-9特殊字符：()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/如果实例即包含 `Linux` 实例又包含 `Windows` 实例，则密码复杂度限制按照 `Windows` 实例的限制。 */
+  /** 重置后的实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：小写字母：[a-z]大写字母：[A-Z]数字：0-9特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/Windows 实例密码必须12\~30位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符小写字母：[a-z]大写字母：[A-Z]数字： 0-9特殊字符：()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/如果实例即包含 `Linux` 实例又包含 `Windows` 实例，则密码复杂度限制按照 `Windows` 实例的限制。 */
   Password: string;
   /** 待重置密码的实例操作系统的用户名。不得超过64个字符。 */
   UserName?: string;
-  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：TRUE：表示在正常关机失败后进行强制关机FALSE：表示在正常关机失败后不进行强制关机默认取值：FALSE。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
+  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：true：表示在正常关机失败后进行强制关机false：表示在正常关机失败后不进行强制关机默认取值：false。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
   ForceStop?: boolean;
 }
 
@@ -2802,9 +2802,9 @@ declare interface StartInstancesResponse {
 }
 
 declare interface StopInstancesRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
-  /** 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常关闭失败后选择强制关闭实例。取值范围：TRUE：表示在正常关闭失败后进行强制关闭FALSE：表示在正常关闭失败后不进行强制关闭默认取值：FALSE。 */
+  /** 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常关闭失败后选择强制关闭实例。取值范围：true：表示在正常关闭失败后进行强制关闭false：表示在正常关闭失败后不进行强制关闭默认取值：false。 */
   ForceStop?: boolean;
   /** 实例的关闭模式。取值范围：SOFT_FIRST：表示在正常关闭失败后进行强制关闭HARD：直接强制关闭SOFT：仅软关机默认取值：SOFT。 */
   StopType?: string;

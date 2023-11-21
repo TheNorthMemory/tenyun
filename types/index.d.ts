@@ -40,7 +40,6 @@ import Btoe, { Versions as BtoeVersions } from "./btoe";
 import Cam, { Versions as CamVersions } from "./cam";
 import Captcha, { Versions as CaptchaVersions } from "./captcha";
 import Car, { Versions as CarVersions } from "./car";
-import Casb, { Versions as CasbVersions } from "./casb";
 import Cat, { Versions as CatVersions } from "./cat";
 import Cbs, { Versions as CbsVersions } from "./cbs";
 import Ccc, { Versions as CccVersions } from "./ccc";
@@ -285,7 +284,6 @@ export declare type SERVICE_VERSIONS = {
   cam: CamVersions,
   captcha: CaptchaVersions,
   car: CarVersions,
-  casb: CasbVersions,
   cat: CatVersions,
   cbs: CbsVersions,
   ccc: CccVersions,
@@ -584,8 +582,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   captcha: Captcha,
   /** {@link Car 应用云渲染} */
   car: Car,
-  /** {@link Casb 云访问安全代理} */
-  casb: Casb,
   /** {@link Cat 云拨测} */
   cat: Cat,
   /** {@link Cbs 云硬盘} */
