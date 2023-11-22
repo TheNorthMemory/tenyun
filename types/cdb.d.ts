@@ -48,6 +48,28 @@ declare interface AuditFilter {
   Value: string;
 }
 
+/** 查询审计实例的过滤条件 */
+declare interface AuditInstanceFilters {
+  /** 过滤条件名。支持InstanceId-实例ID，InstanceName-实例名称，ProjectId-项目ID，TagKey-标签键，Tag-标签（以竖线分割，例：Tagkey|Tagvalue）。 */
+  Name: string | null;
+  /** true表示精确查找，false表示模糊匹配。 */
+  ExactMatch: boolean | null;
+  /** 筛选值 */
+  Values: string[] | null;
+}
+
+/** 审计实例详情 */
+declare interface AuditInstanceInfo {
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 标签信息 */
+  TagList?: TagInfoUnit[] | null;
+  /** 数据库内核类型 */
+  DbType?: string | null;
+  /** 数据库内核版本 */
+  DbVersion?: string | null;
+}
+
 /** 审计日志详细信息 */
 declare interface AuditLog {
   /** 影响行数。 */
@@ -202,6 +224,30 @@ declare interface AuditRule {
 declare interface AuditRuleFilters {
   /** 单条审计规则。 */
   RuleFilters?: RuleFilters[] | null;
+}
+
+/** 审计规则模板的详情 */
+declare interface AuditRuleTemplateInfo {
+  /** 规则模板ID。 */
+  RuleTemplateId?: string;
+  /** 规则模板名称。 */
+  RuleTemplateName?: string;
+  /** 规则模板的过滤条件。 */
+  RuleFilters?: RuleFilters[];
+  /** 规则模板描述。 */
+  Description?: string | null;
+  /** 规则模板创建时间。 */
+  CreateAt?: string;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number | null;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number | null;
+  /** 规则模板应用在哪些在实例。 */
+  AffectedInstances?: string[] | null;
+  /** 模板状态。0-无任务 ，1-修改中。 */
+  Status?: number | null;
+  /** 模板更新时间。 */
+  UpdateAt?: string | null;
 }
 
 /** CPU弹性扩容的自动扩容策略 */
@@ -710,100 +756,136 @@ declare interface InstanceAuditLogFilters {
   Value?: string[];
 }
 
+/** 实例审计详情信息 */
+declare interface InstanceDbAuditStatus {
+  /** 实例ID。 */
+  InstanceId?: string;
+  /** 审计状态。ON-表示审计已开启，OFF-表示审计关闭 */
+  AuditStatus?: string;
+  /** 任务状态。0-无任务；1-审计开启中，2-审计关闭中。 */
+  AuditTask?: number | null;
+  /** 日志保留时长。 */
+  LogExpireDay?: number | null;
+  /** 高频存储时长。 */
+  HighLogExpireDay?: number | null;
+  /** 低频存储时长。 */
+  LowLogExpireDay?: number | null;
+  /** 日志存储量。 */
+  BillingAmount?: number | null;
+  /** 高频存储量。 */
+  HighRealStorage?: number | null;
+  /** 低频存储量。 */
+  LowRealStorage?: number | null;
+  /** 是否为全审计。true-表示全审计。 */
+  AuditAll?: boolean | null;
+  /** 审计开通时间。 */
+  CreateAt?: string | null;
+  /** 实例相关信息 */
+  InstanceInfo?: AuditInstanceInfo | null;
+  /** 总存储量。 */
+  RealStorage?: number | null;
+  /** 是否包含审计策略 */
+  OldRule?: boolean | null;
+  /** 实例所应用的规则模板。 */
+  RuleTemplateIds?: string[] | null;
+}
+
 /** 实例详细信息 */
 declare interface InstanceInfo {
   /** 外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网 */
-  WanStatus: number;
+  WanStatus?: number;
   /** 可用区信息 */
-  Zone: string;
+  Zone?: string;
   /** 初始化标志，可能的返回值为：0-未初始化；1-已初始化 */
-  InitFlag: number;
+  InitFlag?: number;
   /** 只读vip信息。单独开通只读实例访问的只读实例才有该字段 */
-  RoVipInfo: RoVipInfo | null;
+  RoVipInfo?: RoVipInfo | null;
   /** 内存容量，单位为 MB */
-  Memory: number;
+  Memory?: number;
   /** 实例状态，可能的返回值：0-创建中；1-运行中；4-正在进行隔离操作；5-已隔离 */
-  Status: number;
+  Status?: number;
   /** 私有网络 ID，例如：51102 */
-  VpcId: number;
+  VpcId?: number;
   /** 备机信息 */
-  SlaveInfo: SlaveInfo | null;
+  SlaveInfo?: SlaveInfo | null;
   /** 实例 ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 硬盘容量，单位为 GB */
-  Volume: number;
+  Volume?: number;
   /** 自动续费标志，可能的返回值：0-未开通自动续费；1-已开通自动续费；2-已关闭自动续费 */
-  AutoRenew: number;
+  AutoRenew?: number;
   /** 数据复制方式。0 - 异步复制；1 - 半同步复制；2 - 强同步复制 */
-  ProtectMode: number;
+  ProtectMode?: number;
   /** 只读组详细信息 */
-  RoGroups: RoGroup[] | null;
+  RoGroups?: RoGroup[] | null;
   /** 子网 ID，例如：2333 */
-  SubnetId: number;
+  SubnetId?: number;
   /** 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例 */
-  InstanceType: number;
+  InstanceType?: number;
   /** 项目 ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 地域信息 */
-  Region: string;
+  Region?: string;
   /** 实例到期时间 */
-  DeadlineTime: string;
+  DeadlineTime?: string;
   /** 可用区部署方式。可能的值为：0 - 单可用区；1 - 多可用区 */
-  DeployMode: number;
+  DeployMode?: number;
   /** 实例任务状态。0 - 没有任务 ,1 - 升级中,2 - 数据导入中,3 - 开放Slave中,4 - 外网访问开通中,5 - 批量操作执行中,6 - 回档中,7 - 外网访问关闭中,8 - 密码修改中,9 - 实例名修改中,10 - 重启中,12 - 自建迁移中,13 - 删除库表中,14 - 灾备实例创建同步中,15 - 升级待切换,16 - 升级切换中,17 - 升级切换完成 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 主实例详细信息 */
   MasterInfo?: MasterInfo | null;
   /** 实例类型 */
-  DeviceType: string;
+  DeviceType?: string;
   /** 内核版本 */
-  EngineVersion: string;
+  EngineVersion?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 灾备实例详细信息 */
-  DrInfo: DrInfo[] | null;
+  DrInfo?: DrInfo[] | null;
   /** 外网域名 */
-  WanDomain: string;
+  WanDomain?: string;
   /** 外网端口号 */
-  WanPort: number;
+  WanPort?: number;
   /** 付费类型，可能的返回值：0-包年包月；1-按量计费 */
-  PayType: number;
+  PayType?: number;
   /** 实例创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 实例 IP */
-  Vip: string;
+  Vip?: string;
   /** 端口号 */
-  Vport: number;
+  Vport?: number;
   /** 磁盘写入是否被锁定（实例数据写入量已经超过磁盘配额）。0 -未被锁定 1 -已被锁定 */
-  CdbError: number;
+  CdbError?: number;
   /** 私有网络描述符，例如：“vpc-5v8wn9mg” */
-  UniqVpcId: string;
+  UniqVpcId?: string;
   /** 子网描述符，例如：“subnet-1typ0s7d” */
-  UniqSubnetId: string;
+  UniqSubnetId?: string;
   /** 物理 ID */
-  PhysicalId: string;
+  PhysicalId?: string;
   /** 核心数 */
-  Cpu: number;
+  Cpu?: number;
   /** 每秒查询数量 */
-  Qps: number;
+  Qps?: number;
   /** 可用区中文名称 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 物理机型 */
-  DeviceClass: string | null;
+  DeviceClass?: string | null;
   /** 置放群组 ID */
-  DeployGroupId: string | null;
+  DeployGroupId?: string | null;
   /** 可用区 ID */
-  ZoneId: number | null;
+  ZoneId?: number | null;
   /** 节点数 */
-  InstanceNodes: number;
+  InstanceNodes?: number;
   /** 标签列表 */
-  TagList: TagInfoItem[] | null;
+  TagList?: TagInfoItem[] | null;
   /** 引擎类型 */
-  EngineType: string | null;
+  EngineType?: string | null;
   /** 最大延迟阈值 */
-  MaxDelayTime: number | null;
+  MaxDelayTime?: number | null;
   /** 实例磁盘类型，仅云盘版实例才返回该值。可能的值为 CLOUD_SSD：SSD云硬盘， CLOUD_HSSD：增强型SSD云硬盘 */
-  DiskType: string;
+  DiskType?: string;
+  /** 当前扩容的CPU核心数。 */
+  ExpandCpu?: number | null;
 }
 
 /** 实例预期重启时间 */
@@ -1350,6 +1432,38 @@ declare interface RuleFilters {
   Value: string[];
 }
 
+/** 规则模板内容 */
+declare interface RuleTemplateInfo {
+  /** 规则模板ID。 */
+  RuleTemplateId?: string | null;
+  /** 规则模板名称。 */
+  RuleTemplateName?: string | null;
+  /** 规则内容。 */
+  RuleFilters?: RuleFilters[] | null;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number | null;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number | null;
+  /** 规则描述。 */
+  Description?: string | null;
+}
+
+/** 规则模板变更记录信息 */
+declare interface RuleTemplateRecordInfo {
+  /** 任务ID */
+  TaskId?: number | null;
+  /** 修改前规则模板的详情。 */
+  ModifyBeforeInfo?: RuleTemplateInfo | null;
+  /** 修改后规则模板的详情。 */
+  ModifyAfterInfo?: RuleTemplateInfo | null;
+  /** 影响的实例。 */
+  AffectedInstances?: string[] | null;
+  /** 操作人，账号uin。 */
+  Operator?: string | null;
+  /** 变更的时间。 */
+  UpdateTime?: string | null;
+}
+
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
@@ -1676,6 +1790,16 @@ declare interface BalanceRoGroupLoadResponse {
   RequestId?: string;
 }
 
+declare interface CloseAuditServiceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+}
+
+declare interface CloseAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseCDBProxyRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1790,6 +1914,26 @@ declare interface CreateAuditRuleRequest {
 declare interface CreateAuditRuleResponse {
   /** 审计规则 ID。 */
   RuleId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAuditRuleTemplateRequest {
+  /** 审计规则 */
+  RuleFilters: RuleFilters[];
+  /** 规则模板名称 */
+  RuleTemplateName: string;
+  /** 规则模板描述 */
+  Description?: string;
+  /** 告警等级。1-低风险，2-中风险，3-高风险 */
+  AlarmLevel?: number;
+  /** 告警策略。0-不告警，1-告警 */
+  AlarmPolicy?: number;
+}
+
+declare interface CreateAuditRuleTemplateResponse {
+  /** 生成的规则模板ID。 */
+  RuleTemplateId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2258,6 +2402,16 @@ declare interface DeleteAuditRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuditRuleTemplatesRequest {
+  /** 审计规则模版ID。 */
+  RuleTemplateIds: string[];
+}
+
+declare interface DeleteAuditRuleTemplatesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteBackupRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -2266,6 +2420,18 @@ declare interface DeleteBackupRequest {
 }
 
 declare interface DeleteBackupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDatabaseRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 数据库名称。 */
+  DBName: string;
+}
+
+declare interface DeleteDatabaseResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2376,6 +2542,28 @@ declare interface DescribeAuditConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAuditInstanceListRequest {
+  /** 实例审计开启的状态。1-已开启审计；0-未开启审计。 */
+  AuditSwitch?: number;
+  /** 查询实例列表的过滤条件。 */
+  Filters?: AuditInstanceFilters[];
+  /** 实例的审计规则模式。1-规则审计；0-全审计。 */
+  AuditMode?: number;
+  /** 单次请求返回的数量。默认值为30，最大值为 20000。 */
+  Limit?: number;
+  /** 偏移量，默认值为 0。 */
+  Offset?: number;
+}
+
+declare interface DescribeAuditInstanceListResponse {
+  /** 符合查询条件的实例总数。 */
+  TotalCount?: number;
+  /** 审计实例详细信息列表。 */
+  Items?: InstanceDbAuditStatus[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAuditLogFilesRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -2446,6 +2634,54 @@ declare interface DescribeAuditPoliciesResponse {
   TotalCount: number;
   /** 审计策略详情。 */
   Items: AuditPolicy[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditRuleTemplateModifyHistoryRequest {
+  /** 模板ID */
+  RuleTemplateIds?: string[];
+  /** 查询范围的开始时间。 */
+  StartTime?: string;
+  /** 查询范围的结束时间。 */
+  EndTime?: string;
+  /** 返回条数。 */
+  Limit?: number;
+  /** 偏移量。 */
+  Offset?: number;
+  /** 排序方式。DESC-按修改时间倒排，ASC-正序。 */
+  Order?: string;
+}
+
+declare interface DescribeAuditRuleTemplateModifyHistoryResponse {
+  /** 总的条数。 */
+  TotalCount?: number | null;
+  /** 变更详情。 */
+  Items?: RuleTemplateRecordInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditRuleTemplatesRequest {
+  /** 规则模板ID。 */
+  RuleTemplateIds?: string[];
+  /** 规则模板名称。 */
+  RuleTemplateNames?: string[];
+  /** 单次请求返回的数量。默认值20。 */
+  Limit?: number;
+  /** 偏移量，默认值为 0。 */
+  Offset?: number;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number;
+}
+
+declare interface DescribeAuditRuleTemplatesResponse {
+  /** 符合查询条件的实例总数。 */
+  TotalCount?: number;
+  /** 规则模板详细信息列表。 */
+  Items?: AuditRuleTemplateInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3273,9 +3509,9 @@ declare interface DescribeProjectSecurityGroupsRequest {
 
 declare interface DescribeProjectSecurityGroupsResponse {
   /** 安全组详情。 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 安全组规则数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3786,6 +4022,46 @@ declare interface ModifyAuditRuleRequest {
 }
 
 declare interface ModifyAuditRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAuditRuleTemplatesRequest {
+  /** 审计规则模板ID。 */
+  RuleTemplateIds: string[];
+  /** 修改后的审计规则。 */
+  RuleFilters?: RuleFilters[];
+  /** 修改后的规则模板名称。 */
+  RuleTemplateName?: string;
+  /** 修改后的规则模板描述。 */
+  Description?: string;
+  /** 告警等级。1-低风险，2-中风险，3-高风险。 */
+  AlarmLevel?: number;
+  /** 告警策略。0-不告警，1-告警。 */
+  AlarmPolicy?: number;
+}
+
+declare interface ModifyAuditRuleTemplatesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAuditServiceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 日志保留时长。 */
+  LogExpireDay?: number;
+  /** 高频日志保留时长。 */
+  HighLogExpireDay?: number;
+  /** 修改实例审计规则为全审计。 */
+  AuditAll?: boolean;
+  /** 审计规则。 */
+  AuditRuleFilters?: AuditRuleFilters[];
+  /** 规则模版ID。 */
+  RuleTemplateIds?: string[];
+}
+
+declare interface ModifyAuditServiceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4551,6 +4827,8 @@ declare interface Cdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 均衡RO组内实例的负载 {@link BalanceRoGroupLoadRequest} {@link BalanceRoGroupLoadResponse} */
   BalanceRoGroupLoad(data: BalanceRoGroupLoadRequest, config?: AxiosRequestConfig): AxiosPromise<BalanceRoGroupLoadResponse>;
+  /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
+  CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭数据库代理 {@link CloseCDBProxyRequest} {@link CloseCDBProxyResponse} */
   CloseCDBProxy(data: CloseCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseCDBProxyResponse>;
   /** 关闭数据库代理地址 {@link CloseCdbProxyAddressRequest} {@link CloseCdbProxyAddressResponse} */
@@ -4565,6 +4843,8 @@ declare interface Cdb {
   CreateAuditPolicy(data: CreateAuditPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditPolicyResponse>;
   /** 创建审计规则 {@link CreateAuditRuleRequest} {@link CreateAuditRuleResponse} */
   CreateAuditRule(data: CreateAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleResponse>;
+  /** 创建审计规则模板 {@link CreateAuditRuleTemplateRequest} {@link CreateAuditRuleTemplateResponse} */
+  CreateAuditRuleTemplate(data: CreateAuditRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleTemplateResponse>;
   /** 创建云数据库备份 {@link CreateBackupRequest} {@link CreateBackupResponse} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
   /** 创建数据库代理 {@link CreateCdbProxyRequest} {@link CreateCdbProxyResponse} */
@@ -4595,8 +4875,12 @@ declare interface Cdb {
   DeleteAuditPolicy(data: DeleteAuditPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditPolicyResponse>;
   /** 删除审计规则 {@link DeleteAuditRuleRequest} {@link DeleteAuditRuleResponse} */
   DeleteAuditRule(data: DeleteAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleResponse>;
+  /** 删除审计规则模版 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
+  DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
   /** 删除云数据库备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
+  /** 删除数据库 {@link DeleteDatabaseRequest} {@link DeleteDatabaseResponse} */
+  DeleteDatabase(data: DeleteDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatabaseResponse>;
   /** 删除置放群组 {@link DeleteDeployGroupsRequest} {@link DeleteDeployGroupsResponse} */
   DeleteDeployGroups(data: DeleteDeployGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeployGroupsResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
@@ -4611,12 +4895,18 @@ declare interface Cdb {
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
   /** 查询审计服务配置 {@link DescribeAuditConfigRequest} {@link DescribeAuditConfigResponse} */
   DescribeAuditConfig(data: DescribeAuditConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditConfigResponse>;
+  /** 获取审计实例列表 {@link DescribeAuditInstanceListRequest} {@link DescribeAuditInstanceListResponse} */
+  DescribeAuditInstanceList(data?: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 查询数据库审计日志 {@link DescribeAuditLogsRequest} {@link DescribeAuditLogsResponse} */
   DescribeAuditLogs(data: DescribeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogsResponse>;
   /** 查询审计策略 {@link DescribeAuditPoliciesRequest} {@link DescribeAuditPoliciesResponse} */
   DescribeAuditPolicies(data?: DescribeAuditPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditPoliciesResponse>;
+  /** 查询规则模板变更记录 {@link DescribeAuditRuleTemplateModifyHistoryRequest} {@link DescribeAuditRuleTemplateModifyHistoryResponse} */
+  DescribeAuditRuleTemplateModifyHistory(data?: DescribeAuditRuleTemplateModifyHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleTemplateModifyHistoryResponse>;
+  /** 查询审计规则模板 {@link DescribeAuditRuleTemplatesRequest} {@link DescribeAuditRuleTemplatesResponse} */
+  DescribeAuditRuleTemplates(data?: DescribeAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleTemplatesResponse>;
   /** 查询审计规则 {@link DescribeAuditRulesRequest} {@link DescribeAuditRulesResponse} */
   DescribeAuditRules(data?: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
   /** 查询云数据库备份配置信息 {@link DescribeBackupConfigRequest} {@link DescribeBackupConfigResponse} */
@@ -4745,6 +5035,10 @@ declare interface Cdb {
   ModifyAuditConfig(data: ModifyAuditConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditConfigResponse>;
   /** 修改审计规则 {@link ModifyAuditRuleRequest} {@link ModifyAuditRuleResponse} */
   ModifyAuditRule(data: ModifyAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleResponse>;
+  /** 修改审计规则模板 {@link ModifyAuditRuleTemplatesRequest} {@link ModifyAuditRuleTemplatesResponse} */
+  ModifyAuditRuleTemplates(data: ModifyAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleTemplatesResponse>;
+  /** 实例修改审计服务 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
+  ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改云数据库实例的自动续费标记 {@link ModifyAutoRenewFlagRequest} {@link ModifyAutoRenewFlagResponse} */
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
   /** 修改数据库备份配置 {@link ModifyBackupConfigRequest} {@link ModifyBackupConfigResponse} */

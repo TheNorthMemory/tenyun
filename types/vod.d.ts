@@ -3920,6 +3920,56 @@ declare interface QRCodeConfigureInfoForUpdate {
   Switch?: string;
 }
 
+/** 音画质重生任务 */
+declare interface QualityEnhanceTask {
+  /** 任务 ID。 */
+  TaskId?: string;
+  /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+  Status?: string;
+  /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
+  ErrCodeExt?: string;
+  /** 音画质重生任务进度，取值范围 [0-100] 。 */
+  Progress?: number;
+  /** 音画质重生任务的输入。 */
+  Input?: QualityEnhanceTaskInput | null;
+  /** 音画质重生任务的输出。 */
+  Output?: QualityEnhanceTaskOutput | null;
+  /** 音画质重生输出视频的元信息。 */
+  MetaData?: MediaMetaData | null;
+  /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+}
+
+/** 音画质重生任务的输入。 */
+declare interface QualityEnhanceTaskInput {
+  /** 媒体文件 ID。 */
+  FileId?: string;
+  /** 音画质重生模板 ID。 */
+  Definition?: number;
+}
+
+/** 音画质重生任务输出 */
+declare interface QualityEnhanceTaskOutput {
+  /** 文件类型，例如 mp4、flv 等。 */
+  FileType?: string;
+  /** 媒体文件播放地址。 */
+  FileUrl?: string;
+  /** 媒体文件 ID。 */
+  FileId?: string;
+  /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+  MediaName?: string;
+  /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+  ClassId?: number;
+  /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  ExpireTime?: string;
+}
+
 /** 视频画面质量评价的控制参数。 */
 declare interface QualityEvaluationConfigureInfo {
   /** 视频画面质量评价检测开关，可选值：ON：开启；OFF：关闭。 */
@@ -4929,7 +4979,7 @@ declare interface SvgWatermarkInputForUpdate {
   /** 水印的高度，支持 px，%，W%，H%，S%，L% 六种格式：当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素；当填 0px 且 Width 不为 0px 时，表示水印的高度按原始 SVG 图像等比缩放；当 Width、Height 都填 0px 时，表示水印的高度取原始 SVG 图像的高度；当字符串以 W% 结尾，表示水印 Height 为视频宽度的百分比大小，如 10W% 表示 Height 为视频宽度的 10%；当字符串以 H% 结尾，表示水印 Height 为视频高度的百分比大小，如 10H% 表示 Height 为视频高度的 10%；当字符串以 S% 结尾，表示水印 Height 为视频短边的百分比大小，如 10S% 表示 Height 为视频短边的 10%；当字符串以 L% 结尾，表示水印 Height 为视频长边的百分比大小，如 10L% 表示 Height 为视频长边的 10%；当字符串以 % 结尾时，含义同 H%。默认值为 0px。 */
   Height?: string;
   /** 水印周期配置，用于配置水印周期性地显示与隐藏。主要使用场景是：为了视频防遮标，在视频多个地方设置水印，这些水印按固定顺序周期性地显示与隐藏。例如，设置 A、B、C、D 4 个水印分别位于视频的左上角、右上角、右下角、左下角处，视频开始时，{ A 显示 5 秒 -> B 显示 5 秒 -> C 显示 5 秒 -> D 显示 5 秒 } -> A 显示 5 秒 -> B 显示 5 秒 -> ...，任何时刻只显示一处水印。花括号 {} 表示由 A、B、C、D 4 个水印组成的大周期，可以看出每个大周期持续 20 秒。可以看出，A、B、C、D 都是周期性地显示 5 秒、隐藏 15 秒，且四者有固定的显示顺序。此配置项即用来描述单个水印的周期配置。 */
-  CycleConfig?: WatermarkCycleConfigForUpdate;
+  CycleConfig?: WatermarkCycleConfigForUpdate | null;
 }
 
 /** 极速高清参数配置。 */
@@ -7562,7 +7612,7 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务。 */
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务。 */
   TaskType?: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status?: string;
@@ -7612,6 +7662,8 @@ declare interface DescribeTaskDetailResponse {
   DescribeFileAttributesTask?: DescribeFileAttributesTask | null;
   /** 音画质检测任务信息，仅当 TaskType 为 QualityInspect 时该字段有值。 */
   QualityInspectTask?: QualityInspectTask | null;
+  /** 音画质重生任务信息，仅当 TaskType 为 QualityEnhance，该字段有值。 */
+  QualityEnhanceTask?: QualityEnhanceTask | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

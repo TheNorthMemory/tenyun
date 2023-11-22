@@ -67,59 +67,63 @@ declare interface BundleSetOpt {
 /** 集群信息集合 */
 declare interface Cluster {
   /** 集群Id。 */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称。 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 说明信息。 */
-  Remark: string;
+  Remark?: string;
   /** 接入点数量 */
-  EndPointNum: number;
+  EndPointNum?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 集群是否健康，1表示健康，0表示异常 */
-  Healthy: number;
+  Healthy?: number;
   /** 集群健康信息 */
-  HealthyInfo: string | null;
+  HealthyInfo?: string | null;
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
-  Status: number;
+  Status?: number;
   /** 最大命名空间数量 */
-  MaxNamespaceNum: number;
+  MaxNamespaceNum?: number;
   /** 最大Topic数量 */
-  MaxTopicNum: number;
+  MaxTopicNum?: number;
   /** 最大QPS */
-  MaxQps: number;
+  MaxQps?: number;
   /** 最大消息保留时间，秒为单位 */
-  MessageRetentionTime: number;
+  MessageRetentionTime?: number;
   /** 最大存储容量 */
-  MaxStorageCapacity: number;
+  MaxStorageCapacity?: number;
   /** 集群版本 */
-  Version: string | null;
+  Version?: string | null;
   /** 公网访问接入点 */
-  PublicEndPoint: string | null;
+  PublicEndPoint?: string | null;
   /** VPC访问接入点 */
-  VpcEndPoint: string | null;
+  VpcEndPoint?: string | null;
   /** 命名空间数量 */
-  NamespaceNum: number | null;
+  NamespaceNum?: number | null;
   /** 已使用存储限制，MB为单位 */
-  UsedStorageBudget: number | null;
+  UsedStorageBudget?: number | null;
   /** 最大生产消息速率，以条数为单位 */
-  MaxPublishRateInMessages: number | null;
+  MaxPublishRateInMessages?: number | null;
   /** 最大推送消息速率，以条数为单位 */
-  MaxDispatchRateInMessages: number | null;
+  MaxDispatchRateInMessages?: number | null;
   /** 最大生产消息速率，以字节为单位 */
-  MaxPublishRateInBytes: number | null;
+  MaxPublishRateInBytes?: number | null;
   /** 最大推送消息速率，以字节为单位 */
-  MaxDispatchRateInBytes: number | null;
+  MaxDispatchRateInBytes?: number | null;
   /** 已创建主题数 */
-  TopicNum: number | null;
+  TopicNum?: number | null;
   /** 最长消息延时，以秒为单位 */
-  MaxMessageDelayInSeconds: number | null;
+  MaxMessageDelayInSeconds?: number | null;
   /** 是否开启公网访问，不填时默认开启 */
-  PublicAccessEnabled: boolean | null;
+  PublicAccessEnabled?: boolean | null;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 计费模式：0: 按量计费1: 包年包月 */
-  PayMode: number | null;
+  PayMode?: number | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 项目名字 */
+  ProjectName?: string | null;
 }
 
 /** cmq DeadLetterPolicy */
@@ -1796,7 +1800,7 @@ declare interface CreateProClusterRequest {
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher: number;
   /** vpc网络标签 */
-  Vpcs?: VpcInfo;
+  Vpc?: VpcInfo;
   /** 集群的标签列表(已废弃) */
   Tags?: Tag[];
 }

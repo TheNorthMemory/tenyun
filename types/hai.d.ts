@@ -146,6 +146,8 @@ declare interface SystemDisk {
   DiskType?: string | null;
   /** 系统盘大小，单位：GB。默认值为 80 */
   DiskSize?: number | null;
+  /** 系统盘分区盘符 */
+  DiskName?: string | null;
 }
 
 declare interface DescribeApplicationsRequest {

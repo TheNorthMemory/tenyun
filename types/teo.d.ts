@@ -2585,15 +2585,15 @@ declare interface DescribeOverviewL7DataRequest {
   EndTime: string;
   /** 查询的指标，取值有：l7Flow_outFlux: Edegone响应流量；l7Flow_inFlux: Edgeone请求流量；l7Flow_outBandwidth: Edegone响应带宽；l7Flow_inBandwidth: Edegone请求带宽；l7Flow_hit_outFlux: 缓存命中流量；l7Flow_request: 访问请求数；l7Flow_flux: 访问请求上行+下行流量；l7Flow_bandwidth：访问请求上行+下行带宽。 */
   MetricNames: string[];
-  /** 站点集合。若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的数据分析最大查询范围。 */
+  /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
-  /** 查询的域名集合，不填默认查询所有子域名。 */
+  /** 查询的域名集合，此参数已经废弃。 */
   Domains?: string[];
   /** 查询的协议类型，取值有：http: http协议；https: https协议；http2: http2协议；all: 所有协议。不填默认为all，此参数暂未生效。 */
   Protocol?: string;
   /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
   Interval?: string;
-  /** 过滤条件，详细的过滤条件Key值如下：socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
+  /** 过滤条件，详细的过滤条件Key值如下：socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。domain 按照【域名】进行过滤。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
   Filters?: QueryCondition[];
   /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
@@ -2609,6 +2609,8 @@ declare interface DescribeOverviewL7DataResponse {
 }
 
 declare interface DescribePrefetchTasksRequest {
+  /** 站点ID。必填参数。 */
+  ZoneId?: string;
   /** 查询起始时间。 */
   StartTime?: string;
   /** 查询结束时间。 */
@@ -2617,21 +2619,21 @@ declare interface DescribePrefetchTasksRequest {
   Offset?: number;
   /** 分页查询限制数目，默认值：20，上限：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-id 按照【站点 ID】进行过滤。zone-id形如：zone-1379afjk91u32h，暂不支持多值。 类型：String 必选：否。 模糊查询：不支持。job-id 按照【任务ID】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。 类型：String 必选：否。 模糊查询：不支持。target 按照【目标资源信息】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。 类型：String 必选：否。 模糊查询：不支持。domains 按照【域名】进行过滤。domains形如：www.qq.com。 类型：String 必选：否。 模糊查询：不支持。statuses 按照【任务状态】进行过滤。 必选：否 模糊查询：不支持。 可选项： processing：处理中 success：成功 failed：失败 timeout：超时 */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：job-id 按照【任务ID】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。 类型：String 必选：否。 模糊查询：不支持。target 按照【目标资源信息】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。 类型：String 必选：否。 模糊查询：不支持。domains 按照【域名】进行过滤。domains形如：www.qq.com。 类型：String 必选：否。 模糊查询：不支持。statuses 按照【任务状态】进行过滤。 必选：否 模糊查询：不支持。 可选项： processing：处理中 success：成功 failed：失败 timeout：超时 */
   Filters?: AdvancedFilter[];
 }
 
 declare interface DescribePrefetchTasksResponse {
   /** 该查询条件总共条目数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务结果列表。 */
-  Tasks: Task[];
+  Tasks?: Task[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribePurgeTasksRequest {
-  /** 字段已废弃，请使用Filters中的zone-id。 */
+  /** 站点ID。必填参数。 */
   ZoneId?: string;
   /** 查询起始时间。 */
   StartTime?: string;
@@ -2641,15 +2643,15 @@ declare interface DescribePurgeTasksRequest {
   Offset?: number;
   /** 分页查限制数目，默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-id 按照【站点 ID】进行过滤。zone-id形如：zone-xxx，暂不支持多值 类型：String 必选：否 模糊查询：不支持job-id 按照【任务ID】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。 类型：String 必选：否 模糊查询：不支持target 按照【目标资源信息】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值 类型：String 必选：否 模糊查询：不支持domains 按照【域名】进行过滤，domains形如：www.qq.com 类型：String 必选：否 模糊查询：不支持。statuses 按照【任务状态】进行过滤 必选：否 模糊查询：不支持。 可选项： processing：处理中 success：成功 failed：失败 timeout：超时type 按照【清除缓存类型】进行过滤，暂不支持多值。 类型：String 必选：否 模糊查询：不支持 可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname purge_cache_tag：CacheTag */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：job-id 按照【任务ID】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。 类型：String 必选：否 模糊查询：不支持target 按照【目标资源信息】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值 类型：String 必选：否 模糊查询：不支持domains 按照【域名】进行过滤，domains形如：www.qq.com 类型：String 必选：否 模糊查询：不支持。statuses 按照【任务状态】进行过滤 必选：否 模糊查询：不支持。 可选项： processing：处理中 success：成功 failed：失败 timeout：超时type 按照【清除缓存类型】进行过滤，暂不支持多值。 类型：String 必选：否 模糊查询：不支持 可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname purge_cache_tag：CacheTag */
   Filters?: AdvancedFilter[];
 }
 
 declare interface DescribePurgeTasksResponse {
   /** 该查询条件总共条目数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务结果列表。 */
-  Tasks: Task[];
+  Tasks?: Task[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2699,9 +2701,9 @@ declare interface DescribeTimingL4DataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 查询指标，取值有：l4Flow_connections: 访问连接数；l4Flow_flux: 访问总流量；l4Flow_inFlux: 访问入流量；l4Flow_outFlux: 访问出流量； l4Flow_outPkt: 访问出包量。 */
+  /** 查询指标，取值有：l4Flow_connections: 访问连接数；l4Flow_flux: 访问总流量；l4Flow_inFlux: 访问入流量；l4Flow_outFlux: 访问出流量。 */
   MetricNames: string[];
-  /** 站点集合。若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的数据分析最大查询范围。 */
+  /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
   /** 四层实例列表, 不填表示选择全部实例。 */
   ProxyIds?: string[];
@@ -2715,9 +2717,9 @@ declare interface DescribeTimingL4DataRequest {
 
 declare interface DescribeTimingL4DataResponse {
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 四层时序流量数据列表。 */
-  Data: TimingDataRecord[] | null;
+  Data?: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2727,9 +2729,9 @@ declare interface DescribeTimingL7AnalysisDataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 指标列表，取值有:l7Flow_outFlux: Edgeone响应流量；l7Flow_inFlux: Edgeone请求流量；l7Flow_outBandwidth: Edgeone响应带宽；l7Flow_inBandwidth：Edgeone请求带宽；l7Flow_request: 访问请求数；l7Flow_flux: 访问请求上行+下行流量；l7Flow_bandwidth：访问请求上行+下行带宽。 */
+  /** 指标列表，取值有:l7Flow_outFlux: Edgeone 响应流量；l7Flow_inFlux: Edgeone 请求流量；l7Flow_outBandwidth: Edgeone 响应带宽；l7Flow_inBandwidth：Edgeone 请求带宽；l7Flow_request: 访问请求数；l7Flow_flux: 访问请求上行+下行流量；l7Flow_bandwidth：访问请求上行+下行带宽。 */
   MetricNames: string[];
-  /** 站点集合。若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的数据分析最大查询范围。 */
+  /** 站点 ID 集合, 此参数必填。 */
   ZoneIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
   Interval?: string;
@@ -2755,7 +2757,7 @@ declare interface DescribeTimingL7CacheDataRequest {
   EndTime: string;
   /** 查询的指标，取值有：l7Cache_outFlux：响应流量；l7Cache_request：响应请求数； l7Cache_outBandwidth：响应带宽。 */
   MetricNames: string[];
-  /** 站点集合，不填默认选择全部站点。 */
+  /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
   /** 过滤条件，详细的过滤条件如下：domain 按照【子域名】进行过滤，子域名形如： test.example.com。 类型：String 必选：否url 按照【URL】进行过滤，此参数只支持30天的时间范围，URL形如：/content。 类型：String 必选：否resourceType 按照【资源类型】进行过滤，此参数只支持30天的时间范围，资源类型形如：jpg，png。 类型：String 必选：否cacheType 按照【缓存类型】进行过滤。 类型：String 必选：否 可选项： hit：命中缓存； dynamic：资源不可缓存； miss：未命中缓存。statusCode 按照【状态码】进行过滤，此参数只支持30天的时间范围。 类型：String 必选：否 可选项： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 100：100状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
@@ -2767,9 +2769,9 @@ declare interface DescribeTimingL7CacheDataRequest {
 
 declare interface DescribeTimingL7CacheDataResponse {
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 七层缓存分析时序类流量数据列表。 */
-  Data: TimingDataRecord[] | null;
+  Data?: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2781,7 +2783,7 @@ declare interface DescribeTopL7AnalysisDataRequest {
   EndTime: string;
   /** 查询的指标，取值有： l7Flow_outFlux_country：按国家/地区维度统计流量指标； l7Flow_outFlux_statusCode：按状态码维度统计流量指标； l7Flow_outFlux_domain：按域名维度统计流量指标； l7Flow_outFlux_url：按URL维度统计流量指标; l7Flow_outFlux_resourceType：按资源类型维度统计流量指标； l7Flow_outFlux_sip：按客户端的源IP维度统计流量指标； l7Flow_outFlux_referers：按refer信息维度统计流量指标； l7Flow_outFlux_ua_device：按设备类型维度统计流量指标; l7Flow_outFlux_ua_browser：按浏览器类型维度统计流量指标； l7Flow_outFlux_us_os：按操作系统类型维度统计流量指标； l7Flow_request_country：按国家/地区维度统计请求数指标； l7Flow_request_statusCode：按状态码维度统计请求数指标； l7Flow_request_domain：按域名维度统计请求数指标； l7Flow_request_url：按URL维度统计请求数指标; l7Flow_request_resourceType：按资源类型维度统计请求数指标； l7Flow_request_sip：按客户端的源IP维度统计请求数指标； l7Flow_request_referer：按refer信息维度统计请求数指标； l7Flow_request_ua_device：按设备类型维度统计请求数指标; l7Flow_request_ua_browser：按浏览器类型维度统计请求数指标； l7Flow_request_us_os：按操作系统类型维度统计请求数指标。 */
   MetricName: string;
-  /** 站点集合，此参数必填，不填默认查询为空。 */
+  /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
   /** 查询前多少个数据，最大值为1000，不填默认默认为: 10， 表示查询前top10的数据。 */
   Limit?: number;
@@ -2809,7 +2811,7 @@ declare interface DescribeTopL7CacheDataRequest {
   EndTime: string;
   /** 查询的指标，取值有： l7Cache_outFlux_domain：host/域名； l7Cache_outFlux_url：url地址； l7Cache_outFlux_resourceType：资源类型； l7Cache_outFlux_statusCode：状态码。 */
   MetricName: string;
-  /** 站点id集合，不填默认选择全部站点。 */
+  /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
   /** 查询前多少个数据，最大值为1000，不填默认默认为10， 表示查询前top 10的数据。 */
   Limit?: number;
@@ -2823,9 +2825,9 @@ declare interface DescribeTopL7CacheDataRequest {
 
 declare interface DescribeTopL7CacheDataResponse {
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 七层缓存TopN流量数据列表。 */
-  Data: TopDataRecord[] | null;
+  Data?: TopDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2869,7 +2871,7 @@ declare interface DownloadL4LogsRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 站点集合，此参数必填，不填默认查询为空。 */
+  /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
   /** 四层实例 ID 集合。 */
   ProxyIds?: string[];
@@ -2893,7 +2895,7 @@ declare interface DownloadL7LogsRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 站点集合，此参数必填，不填默认查询为空。 */
+  /** 站点ID集合，此参数必填。 */
   ZoneIds?: string[];
   /** 子域名集合，不填默认选择全部子域名。 */
   Domains?: string[];
@@ -3585,7 +3587,7 @@ declare interface Teo {
   DescribeOriginGroup(data?: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
   /** 查询源站防护信息 {@link DescribeOriginProtectionRequest} {@link DescribeOriginProtectionResponse} */
   DescribeOriginProtection(data?: DescribeOriginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginProtectionResponse>;
-  /** 查询监控流量时序数据 {@link DescribeOverviewL7DataRequest} {@link DescribeOverviewL7DataResponse} */
+  /** 查询监控流量时序数据（待废弃） {@link DescribeOverviewL7DataRequest} {@link DescribeOverviewL7DataResponse} */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
   /** 查询预热任务状态 {@link DescribePrefetchTasksRequest} {@link DescribePrefetchTasksResponse} */
   DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;

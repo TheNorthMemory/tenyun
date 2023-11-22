@@ -1152,6 +1152,20 @@ declare interface ZookeeperServerInterface {
   Interface: string | null;
 }
 
+declare interface CloseWafProtectionRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 防护资源的类型。- Global 实例- Service 服务- Route 路由- Object 对象 */
+  Type: string;
+  /** 当资源类型 Type 是 Service 或 Route 的时候，传入的服务或路由的列表 */
+  List?: string[];
+}
+
+declare interface CloseWafProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
   /** 网关 ID */
   GatewayId: string;
@@ -1376,6 +1390,18 @@ declare interface CreateNativeGatewayServerGroupRequest {
 declare interface CreateNativeGatewayServerGroupResponse {
   /** 网关分组创建信息 */
   Result?: CreateCloudNativeAPIGatewayServerGroupResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWafDomainsRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** WAF 防护域名列表 */
+  Domains: string[];
+}
+
+declare interface CreateWafDomainsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2056,6 +2082,20 @@ declare interface ModifyUpstreamNodeStatusResponse {
   RequestId?: string;
 }
 
+declare interface OpenWafProtectionRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 防护资源的类型。- Global 实例- Service 服务- Route 路由- Object 对象（接口暂不支持） */
+  Type: string;
+  /** 当资源类型 Type 是 Service 或 Route 的时候，传入的服务或路由的列表 */
+  List?: string[];
+}
+
+declare interface OpenWafProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RateLimitResponse {
   /** 自定义响应体 */
   Body?: string | null;
@@ -2146,6 +2186,8 @@ declare interface UpdateUpstreamTargetsResponse {
 /** {@link Tse 微服务引擎 TSE} */
 declare interface Tse {
   (): Versions;
+  /** 关闭 WAF 防护 {@link CloseWafProtectionRequest} {@link CloseWafProtectionResponse} */
+  CloseWafProtection(data: CloseWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWafProtectionResponse>;
   /** 创建云原生API网关实例 {@link CreateCloudNativeAPIGatewayRequest} {@link CreateCloudNativeAPIGatewayResponse} */
   CreateCloudNativeAPIGateway(data: CreateCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayResponse>;
   /** 创建云原生网关的灰度规则 {@link CreateCloudNativeAPIGatewayCanaryRuleRequest} {@link CreateCloudNativeAPIGatewayCanaryRuleResponse} */
@@ -2164,6 +2206,8 @@ declare interface Tse {
   CreateEngine(data: CreateEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEngineResponse>;
   /** 创建云原生网关引擎分组 {@link CreateNativeGatewayServerGroupRequest} {@link CreateNativeGatewayServerGroupResponse} */
   CreateNativeGatewayServerGroup(data: CreateNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServerGroupResponse>;
+  /** 新建 WAF 防护域名 {@link CreateWafDomainsRequest} {@link CreateWafDomainsResponse} */
+  CreateWafDomains(data: CreateWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWafDomainsResponse>;
   /** 删除云原生API网关实例 {@link DeleteCloudNativeAPIGatewayRequest} {@link DeleteCloudNativeAPIGatewayResponse} */
   DeleteCloudNativeAPIGateway(data: DeleteCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayResponse>;
   /** 删除云原生网关的灰度规则 {@link DeleteCloudNativeAPIGatewayCanaryRuleRequest} {@link DeleteCloudNativeAPIGatewayCanaryRuleResponse} */
@@ -2244,6 +2288,8 @@ declare interface Tse {
   ModifyNativeGatewayServerGroup(data: ModifyNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServerGroupResponse>;
   /** 修改云原生网关上游实例节点健康状态 {@link ModifyUpstreamNodeStatusRequest} {@link ModifyUpstreamNodeStatusResponse} */
   ModifyUpstreamNodeStatus(data: ModifyUpstreamNodeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUpstreamNodeStatusResponse>;
+  /** 开启 WAF 防护 {@link OpenWafProtectionRequest} {@link OpenWafProtectionResponse} */
+  OpenWafProtection(data: OpenWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWafProtectionResponse>;
   /** 修改云原生网关证书信息 {@link UpdateCloudNativeAPIGatewayCertificateInfoRequest} {@link UpdateCloudNativeAPIGatewayCertificateInfoResponse} */
   UpdateCloudNativeAPIGatewayCertificateInfo(data: UpdateCloudNativeAPIGatewayCertificateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewayCertificateInfoResponse>;
   /** 修改云原生API网关实例的节点规格 {@link UpdateCloudNativeAPIGatewaySpecRequest} {@link UpdateCloudNativeAPIGatewaySpecResponse} */

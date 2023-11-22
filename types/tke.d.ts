@@ -4501,17 +4501,19 @@ declare interface DescribeIPAMDRequest {
 
 declare interface DescribeIPAMDResponse {
   /** 是否安装了eniipamd组件 */
-  EnableIPAMD: boolean;
+  EnableIPAMD?: boolean;
   /** 是否开启自定义podcidr，默认为false，已安装eniipamd组件才意义 */
-  EnableCustomizedPodCidr: boolean | null;
+  EnableCustomizedPodCidr?: boolean | null;
   /** 是否不开启vpccni模式，默认为false，已安装eniipamd组件才意义 */
-  DisableVpcCniMode: boolean | null;
+  DisableVpcCniMode?: boolean | null;
   /** 组件状态，已安装eniipamd组件才会有值 */
-  Phase: string | null;
+  Phase?: string | null;
   /** 错误信息，已安装eniipamd组件且状态为非running才会有错误信息 */
-  Reason: string | null;
+  Reason?: string | null;
   /** 子网信息，已安装eniipamd组件才会有值 */
-  SubnetIds: string[] | null;
+  SubnetIds?: string[] | null;
+  /** 固定ip回收时间，已安装eniipamd组件才会有值 */
+  ClaimExpiredDuration?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -32,6 +32,20 @@ declare interface DescribePolicy {
   TaskPolicyDealType: number | null;
 }
 
+/** 护栏策略触发日志 */
+declare interface PolicyTriggerLog {
+  /** 演练ID */
+  TaskId?: number | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 类型，0--触发，1--恢复 */
+  TriggerType?: number | null;
+  /** 内容 */
+  Content?: string | null;
+  /** 触发时间 */
+  CreatTime?: string | null;
+}
+
 /** 用于传入创建、编辑标签 */
 declare interface TagWithCreate {
   /** 标签键 */
@@ -544,6 +558,22 @@ declare interface DescribeTaskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskPolicyTriggerLogRequest {
+  /** 演练ID */
+  TaskId: number;
+  /** 页码 */
+  Page: number;
+  /** 页数量 */
+  PageSize: number;
+}
+
+declare interface DescribeTaskPolicyTriggerLogResponse {
+  /** 触发日志 */
+  TriggerLogs?: PolicyTriggerLog[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskRequest {
   /** 任务ID */
   TaskId: number;
@@ -646,6 +676,26 @@ declare interface ModifyTaskRunStatusResponse {
   RequestId?: string;
 }
 
+declare interface TriggerPolicyRequest {
+  /** 混沌演练ID */
+  TaskId: number;
+  /** 名称 */
+  Name: string;
+  /** 触发内容 */
+  Content: string;
+  /** 触发类型，0--触发；1--恢复 */
+  TriggerType: number;
+}
+
+declare interface TriggerPolicyResponse {
+  /** 演练ID */
+  TaskId?: number;
+  /** 是否触发成功 */
+  Success?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cfg 混沌演练平台} */
 declare interface Cfg {
   (): Versions;
@@ -659,6 +709,8 @@ declare interface Cfg {
   DescribeTaskExecuteLogs(data: DescribeTaskExecuteLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskExecuteLogsResponse>;
   /** 查询任务列表 {@link DescribeTaskListRequest} {@link DescribeTaskListResponse} */
   DescribeTaskList(data: DescribeTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskListResponse>;
+  /** 获取护栏触发日志 {@link DescribeTaskPolicyTriggerLogRequest} {@link DescribeTaskPolicyTriggerLogResponse} */
+  DescribeTaskPolicyTriggerLog(data: DescribeTaskPolicyTriggerLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskPolicyTriggerLogResponse>;
   /** 查询经验库 {@link DescribeTemplateRequest} {@link DescribeTemplateResponse} */
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
   /** 查询经验库列表 {@link DescribeTemplateListRequest} {@link DescribeTemplateListResponse} */
@@ -669,6 +721,8 @@ declare interface Cfg {
   ExecuteTaskInstance(data: ExecuteTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskInstanceResponse>;
   /** 修改任务运行状态 {@link ModifyTaskRunStatusRequest} {@link ModifyTaskRunStatusResponse} */
   ModifyTaskRunStatus(data: ModifyTaskRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskRunStatusResponse>;
+  /** 触发护栏策略 {@link TriggerPolicyRequest} {@link TriggerPolicyResponse} */
+  TriggerPolicy(data: TriggerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerPolicyResponse>;
 }
 
 export declare type Versions = ["2021-08-20"];

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 240+ 款产品，10753+ 服务数</summary>
+<details><summary>共计 241+ 款产品，10769+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -139,13 +139,13 @@ car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(11) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(41) |
 ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(41) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(149) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(158) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(26) |
 cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(8) |
-cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
+cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(12) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(43) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(108) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
@@ -162,6 +162,7 @@ cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-1
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
+config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(2) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
 cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2018-03-21(28) |
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(31) |
@@ -320,7 +321,7 @@ trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(52) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(40) |
-tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(54) |
+tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(57) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(219) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
