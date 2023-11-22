@@ -279,7 +279,6 @@ export const SERVICE_VERSIONS = {
   youmall: ['2018-02-28'],
   yunjing: ['2018-02-28'],
   yunsou: ['2019-11-15', '2018-05-04'],
-  zj: ['2019-01-21'],
 };
 
 const hash = { [SHA256]: (thing) => createHash(SHA256).update(thing).digest(HEX) };
