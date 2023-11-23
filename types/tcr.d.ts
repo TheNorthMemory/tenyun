@@ -2757,7 +2757,7 @@ declare interface Tcr {
   CheckInstanceName(data: CheckInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstanceNameResponse>;
   /** 创建应用更新触发器 {@link CreateApplicationTriggerPersonalRequest} {@link CreateApplicationTriggerPersonalResponse} */
   CreateApplicationTriggerPersonal(data: CreateApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationTriggerPersonalResponse>;
-  /** 创建自定义账户 {@link CreateCustomAccountRequest} {@link CreateCustomAccountResponse} */
+  /** @deprecated 创建自定义账户 {@link CreateCustomAccountRequest} {@link CreateCustomAccountResponse} */
   CreateCustomAccount(data: CreateCustomAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomAccountResponse>;
   /** 创建镜像加速服务 {@link CreateImageAccelerationServiceRequest} {@link CreateImageAccelerationServiceResponse} */
   CreateImageAccelerationService(data: CreateImageAccelerationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAccelerationServiceResponse>;
@@ -2801,7 +2801,7 @@ declare interface Tcr {
   CreateWebhookTrigger(data: CreateWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebhookTriggerResponse>;
   /** 删除应用更新触发器 {@link DeleteApplicationTriggerPersonalRequest} {@link DeleteApplicationTriggerPersonalResponse} */
   DeleteApplicationTriggerPersonal(data: DeleteApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationTriggerPersonalResponse>;
-  /** 删除自定义账号 {@link DeleteCustomAccountRequest} {@link DeleteCustomAccountResponse} */
+  /** @deprecated 删除自定义账号 {@link DeleteCustomAccountRequest} {@link DeleteCustomAccountResponse} */
   DeleteCustomAccount(data: DeleteCustomAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomAccountResponse>;
   /** 删除指定镜像 {@link DeleteImageRequest} {@link DeleteImageResponse} */
   DeleteImage(data: DeleteImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageResponse>;
@@ -2851,7 +2851,7 @@ declare interface Tcr {
   DescribeApplicationTriggerPersonal(data?: DescribeApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerPersonalResponse>;
   /** 查询Chart包下载信息 {@link DescribeChartDownloadInfoRequest} {@link DescribeChartDownloadInfoResponse} */
   DescribeChartDownloadInfo(data: DescribeChartDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChartDownloadInfoResponse>;
-  /** 查询自定义账号 {@link DescribeCustomAccountsRequest} {@link DescribeCustomAccountsResponse} */
+  /** @deprecated 查询自定义账号 {@link DescribeCustomAccountsRequest} {@link DescribeCustomAccountsResponse} */
   DescribeCustomAccounts(data: DescribeCustomAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomAccountsResponse>;
   /** 查询实例公网访问入口状态 {@link DescribeExternalEndpointStatusRequest} {@link DescribeExternalEndpointStatusResponse} */
   DescribeExternalEndpointStatus(data: DescribeExternalEndpointStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalEndpointStatusResponse>;
@@ -2941,7 +2941,7 @@ declare interface Tcr {
   ManageReplication(data: ManageReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ManageReplicationResponse>;
   /** 修改应用更新触发器 {@link ModifyApplicationTriggerPersonalRequest} {@link ModifyApplicationTriggerPersonalResponse} */
   ModifyApplicationTriggerPersonal(data?: ModifyApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationTriggerPersonalResponse>;
-  /** 更新自定义账户 {@link ModifyCustomAccountRequest} {@link ModifyCustomAccountResponse} */
+  /** @deprecated 更新自定义账户 {@link ModifyCustomAccountRequest} {@link ModifyCustomAccountResponse} */
   ModifyCustomAccount(data: ModifyCustomAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomAccountResponse>;
   /** 更新镜像不可变规则 {@link ModifyImmutableTagRulesRequest} {@link ModifyImmutableTagRulesResponse} */
   ModifyImmutableTagRules(data: ModifyImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImmutableTagRulesResponse>;

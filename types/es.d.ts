@@ -370,7 +370,7 @@ declare interface InstanceInfo {
   EsPublicUrl?: string | null;
   /** 多可用区网络信息 */
   MultiZoneInfo?: ZoneDetail[] | null;
-  /** 部署模式0：单可用区1：多可用区 */
+  /** 部署模式0：单可用区1：多可用区，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制） */
   DeployMode?: number | null;
   /** ES公网访问状态OPEN：开启CLOSE：关闭 */
   PublicAccess?: string | null;
@@ -440,12 +440,16 @@ declare interface InstanceInfo {
   EnableHybridStorage?: boolean | null;
   /** 流程进度 */
   ProcessPercent?: number | null;
-  /** Kibana的altering外网告警策略OPEN：开启CLOSE：关闭 */
+  /** Kibana的alerting外网告警策略OPEN：开启CLOSE：关闭 */
   KibanaAlteringPublicAccess?: string | null;
   /** 本月是否有内核可以更新：false-无，true-有 */
   HasKernelUpgrade?: boolean | null;
   /** cdcId，使用cdc子网时传递 */
   CdcId?: string | null;
+  /** kibana内网vip */
+  KibanaPrivateVip?: string | null;
+  /** 自定义kibana内网url */
+  CustomKibanaPrivateUrl?: string | null;
 }
 
 /** ES集群日志详细信息 */
@@ -831,19 +835,23 @@ declare interface OperationDurationUpdated {
 /** 可选web组件信息 */
 declare interface OptionalWebServiceInfo {
   /** 类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 公网url */
-  PublicUrl: string | null;
+  PublicUrl?: string | null;
   /** 内网url */
-  PrivateUrl: string | null;
+  PrivateUrl?: string | null;
   /** 公网访问权限 */
-  PublicAccess: string | null;
+  PublicAccess?: string | null;
   /** 内网访问权限 */
-  PrivateAccess: string | null;
+  PrivateAccess?: string | null;
   /** 版本号 */
-  Version: string | null;
+  Version?: string | null;
+  /** web服务内网vip */
+  PrivateVip?: string | null;
+  /** 自定义cerebro内网url */
+  CustomPrivateUrl?: string | null;
 }
 
 /** 任务进度详情 */
@@ -1483,6 +1491,8 @@ declare interface RestartInstanceRequest {
   ForceRestart?: boolean;
   /** 重启模式：0 滚动重启； 1 全量重启 */
   RestartMode?: number;
+  /** 重启时选择是否升级内核patch版本 */
+  UpgradeKernel?: boolean;
 }
 
 declare interface RestartInstanceResponse {
@@ -1691,6 +1701,10 @@ declare interface UpdateInstanceRequest {
   OperationDuration?: OperationDurationUpdated;
   /** 是否开启Alerting 外网告警输出：OPEN 开启CLOSE 关闭 */
   KibanaAlteringPublicAccess?: string;
+  /** kibana内网自定义域名 */
+  KibanaPrivateDomain?: string;
+  /** cerebro内网自定义域名 */
+  CerebroPrivateDomain?: string;
 }
 
 declare interface UpdateInstanceResponse {

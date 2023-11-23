@@ -718,6 +718,26 @@ declare interface ColumnLineageInfo {
   ExtParams?: LineageParamRecord[] | null;
 }
 
+/** 列的元数据 */
+declare interface ColumnMeta {
+  /** 字段英文名称 */
+  NameEn: string | null;
+  /** 字段中文名称 */
+  NameCn: string | null;
+  /** 字段类型 */
+  Type: string | null;
+  /** 字段描述 */
+  Description: string | null;
+  /** 字段序号 */
+  Position: number | null;
+  /** 是否为分区字段 */
+  IsPartition: boolean | null;
+  /** 字段名 */
+  Name: string | null;
+  /** HBase列簇属性集合 */
+  ColumnFamiliesFieldSet: Pair[] | null;
+}
+
 /** 内容详情 */
 declare interface CommonContent {
   /** 详情内容 */
@@ -2734,6 +2754,14 @@ declare interface OrganizationalFunction {
   DbName: string | null;
   /** 提交失败错误信息 */
   SubmitErrorMsg: string | null;
+}
+
+/** 键值对 */
+declare interface Pair {
+  /** 键名 */
+  Key: string;
+  /** 值 */
+  Value: string;
 }
 
 /** 键值对 */
@@ -7633,6 +7661,30 @@ declare interface DescribeColumnLineageRequest {
 declare interface DescribeColumnLineageResponse {
   /** 字段血缘信息 */
   ColumnAggregationLineage: ColumnAggregationLineage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeColumnsMetaRequest {
+  /** 表ID */
+  TableId: string;
+  /** 页码 */
+  PageNumber: number;
+  /** 每页大小 */
+  PageSize: number;
+  /** 过滤器 */
+  FilterSet?: Filter[];
+  /** 排序字段 */
+  OrderFieldSet?: OrderField[];
+  /** 是否查询分区字段，默认false */
+  IsPartitionQuery?: boolean;
+}
+
+declare interface DescribeColumnsMetaResponse {
+  /** 分页返回的 */
+  ColumnMetaSet: ColumnMeta[] | null;
+  /** 总记录数 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12726,6 +12778,8 @@ declare interface Wedata {
   DescribeClusterNamespaceList(data: DescribeClusterNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNamespaceListResponse>;
   /** 列出字段血缘信息 {@link DescribeColumnLineageRequest} {@link DescribeColumnLineageResponse} */
   DescribeColumnLineage(data: DescribeColumnLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeColumnLineageResponse>;
+  /** 查询表的所有列元数据 {@link DescribeColumnsMetaRequest} {@link DescribeColumnsMetaResponse} */
+  DescribeColumnsMeta(data: DescribeColumnsMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeColumnsMetaResponse>;
   /** 查询数据来源列表 {@link DescribeDataBasesRequest} {@link DescribeDataBasesResponse} */
   DescribeDataBases(data?: DescribeDataBasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataBasesResponse>;
   /** 数据质量数据监测情况接口 {@link DescribeDataCheckStatRequest} {@link DescribeDataCheckStatResponse} */

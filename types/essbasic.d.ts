@@ -42,7 +42,7 @@ declare interface ApproverOption {
   NoTransfer?: boolean;
   /** 是否隐藏一键签署 默认false-不隐藏true-隐藏 */
   HideOneKeySign?: boolean;
-  /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息） */
+  /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充` */
   FillType?: number;
   /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
   FlowReadLimit?: string;
@@ -374,8 +374,8 @@ declare interface FillApproverInfo {
   OrganizationName?: string;
   /** 企业OpenId */
   OrganizationOpenId?: string;
-  /** 签署企业非渠道子客，默认为false，即表示同一渠道下的企业；如果为true，则目前表示接收方企业为SaaS企业, 为渠道子客时，organization_open_id+open_id 必传 */
-  NotChannelOrganization?: string;
+  /** 签署企业非渠道子客，默认为false，即表示同一渠道下的企业；如果为true，则目前表示接收方企业为SaaS企业, 为渠道子客时，OrganizationOpenId 必传 */
+  NotChannelOrganization?: boolean;
 }
 
 /** 批量补充签署人时，补充失败的报错说明 */
@@ -476,7 +476,7 @@ declare interface FlowApproverInfo {
   ApproverNeedSignReview?: boolean;
   /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式 */
   ApproverVerifyTypes?: number[];
-  /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素默认为1(人脸认证 ),2(签署密码)注: `用模版创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在此创建合同指定无效` */
+  /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素默认为1(人脸认证 ),2(签署密码)注: 1. 用模版创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在创建合同重新指定无效2. 运营商三要素认证方式对手机号运营商及前缀有限制,可以参考[运营商支持列表类](https://qian.tencent.com/developers/partner/mobile_support)得到具体的支持说明 */
   ApproverSignTypes?: number[];
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
   SignId?: string;
@@ -2147,6 +2147,10 @@ declare interface CreateSignUrlsRequest {
   Name?: string;
   /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。注: `GenerateType为"PERSON"或"FOLLOWER"时必填` */
   Mobile?: string;
+  /** 证件类型，支持以下类型ID_CARD : 居民身份证(默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  IdCardType?: string;
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母(但“I”、“O”除外)，后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  IdCardNumber?: string;
   /** 第三方平台子客企业的企业的标识, 即OrganizationOpenId注: `GenerateType为"CHANNEL"时必填` */
   OrganizationOpenId?: string;
   /** 第三方平台子客企业员工的标识OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息 */

@@ -1576,7 +1576,7 @@ declare interface SmartRouting {
 declare interface StandardDebug {
   /** Debug 功能开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 允许的客户端来源。支持填写 IPV4 以及 IPV6 的 IP/IP 段。 */
+  /** 允许的客户端来源。支持填写 IPv4 以及 IPv6 的 IP/IP 段。0.0.0.0/0 表示允许所有 IPv4 客户端进行调试，::/0 表示允许所有 IPv6 客户端进行调试。 */
   AllowClientIPList: string[];
   /** Debug 功能到期时间。超出设置的时间，则功能失效。 */
   ExpireTime: string;
@@ -2665,9 +2665,9 @@ declare interface DescribeRulesRequest {
 
 declare interface DescribeRulesResponse {
   /** 站点 ID。 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 规则列表，按规则执行顺序从先往后排序。 */
-  RuleItems: RuleItem[];
+  RuleItems?: RuleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3009,7 +3009,7 @@ declare interface ModifyApplicationProxyRequest {
   ProxyName: string;
   /** 会话保持时间，取值范围：30-3600，单位：秒。不填写保持原有配置。 */
   SessionPersistTime?: number;
-  /** 四层代理模式，取值有：hostname：表示子域名模式；instance：表示实例模式。不填写保持原有配置。 */
+  /** 四层代理模式，取值有：instance：表示实例模式。不填写使用默认值instance。 */
   ProxyType?: string;
   /** Ipv6 访问配置，不填写保持原有配置。 */
   Ipv6?: Ipv6;

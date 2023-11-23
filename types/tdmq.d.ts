@@ -3004,7 +3004,7 @@ declare interface DescribeRocketMQClusterResponse {
   ClusterInfo?: RocketMQClusterInfo;
   /** 集群配置 */
   ClusterConfig?: RocketMQClusterConfig;
-  /** 集群最近使用量，即将废弃，请使用云监控获取相关数据。 */
+  /** 集群最近使用量，即将废弃，请使用腾讯云可观测平台获取相关数据。 */
   ClusterStats?: RocketMQClusterRecentStats | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

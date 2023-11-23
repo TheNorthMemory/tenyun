@@ -474,6 +474,24 @@ declare interface DescribeInstanceRegionInfo {
   EKSClusterID?: string | null;
 }
 
+/** 获取WAF保护域名列表 */
+declare interface DescribeWafDomainsResult {
+  /** WAF防护域名列表 */
+  Domains?: string[] | null;
+}
+
+/** 获取WAF保护资源状态 */
+declare interface DescribeWafProtectionResult {
+  /** 全局防护状态 */
+  GlobalStatus?: string | null;
+  /** 服务防护状态 */
+  ServicesStatus?: ServiceWafStatus[] | null;
+  /** 路由防护状态 */
+  RouteStatus?: RouteWafStatus[] | null;
+  /** 对象防护状态 */
+  ObjectStatus?: string | null;
+}
+
 /** 引擎的初始管理帐号 */
 declare interface EngineAdmin {
   /** 控制台初始用户名 */
@@ -980,6 +998,26 @@ declare interface QpsThreshold {
   Max: number;
 }
 
+/** 路由 WAF 状态 */
+declare interface RouteWafStatus {
+  /** 路由的名字 */
+  Name?: string | null;
+  /** 路由的 ID */
+  Id?: string | null;
+  /** 路由是否开启 WAF 防护 */
+  Status?: string | null;
+  /** 方法 */
+  Methods?: string[] | null;
+  /** 路径 */
+  Paths?: string[] | null;
+  /** 域名 */
+  Hosts?: string[] | null;
+  /** 路由对应服务的名字 */
+  ServiceName?: string | null;
+  /** 路由对应服务的ID */
+  ServiceId?: string | null;
+}
+
 /** 微服务注册引擎实例 */
 declare interface SREInstance {
   /** 实例ID */
@@ -1072,6 +1110,18 @@ declare interface ServiceGovernanceInfo {
   LimiterVpcInfos?: VpcInfo[];
   /** 引擎关联CLS日志主题信息 */
   CLSTopics?: PolarisCLSTopicInfo[] | null;
+}
+
+/** 服务的 WAF 状态 */
+declare interface ServiceWafStatus {
+  /** 服务的名字 */
+  Name?: string | null;
+  /** 服务的 ID */
+  Id?: string | null;
+  /** 服务的类型 */
+  Type?: string | null;
+  /** 服务是否开启 WAF 防护 */
+  Status?: string | null;
 }
 
 /** 存储的额外选项 */
@@ -1518,6 +1568,18 @@ declare interface DeleteNativeGatewayServerGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteWafDomainsRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** WAF 防护域名列表 */
+  Domains: string[];
+}
+
+declare interface DeleteWafDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
   /** 网关ID */
   GatewayId: string;
@@ -1858,6 +1920,34 @@ declare interface DescribeUpstreamHealthCheckConfigRequest {
 declare interface DescribeUpstreamHealthCheckConfigResponse {
   /** 健康检查配置 */
   Result?: UpstreamHealthCheckConfig | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWafDomainsRequest {
+  /** 网关ID */
+  GatewayId: string;
+}
+
+declare interface DescribeWafDomainsResponse {
+  /** 已被 WAF 防护域名 */
+  Result?: DescribeWafDomainsResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWafProtectionRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 防护资源的类型。- Global 实例- Service 服务- Route 路由- Object 对象 */
+  Type?: string;
+  /** 防护资源类型列表，支持查询多个类型（Global、Service、Route、Object）。为空时，默认查询Global类型。 */
+  TypeList?: string[];
+}
+
+declare interface DescribeWafProtectionResponse {
+  /** 保护状态 */
+  Result?: DescribeWafProtectionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2226,6 +2316,8 @@ declare interface Tse {
   DeleteEngine(data: DeleteEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEngineResponse>;
   /** 删除网关实例分组 {@link DeleteNativeGatewayServerGroupRequest} {@link DeleteNativeGatewayServerGroupResponse} */
   DeleteNativeGatewayServerGroup(data: DeleteNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeGatewayServerGroupResponse>;
+  /** 删除 WAF 防护域名 {@link DeleteWafDomainsRequest} {@link DeleteWafDomainsResponse} */
+  DeleteWafDomains(data: DeleteWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWafDomainsResponse>;
   /** 获取云原生API网关实例信息 {@link DescribeCloudNativeAPIGatewayRequest} {@link DescribeCloudNativeAPIGatewayResponse} */
   DescribeCloudNativeAPIGateway(data: DescribeCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayResponse>;
   /** 查询云原生网关灰度规则列表 {@link DescribeCloudNativeAPIGatewayCanaryRulesRequest} {@link DescribeCloudNativeAPIGatewayCanaryRulesResponse} */
@@ -2266,6 +2358,10 @@ declare interface Tse {
   DescribeSREInstances(data?: DescribeSREInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstancesResponse>;
   /** 获取网关服务健康检查配置 {@link DescribeUpstreamHealthCheckConfigRequest} {@link DescribeUpstreamHealthCheckConfigResponse} */
   DescribeUpstreamHealthCheckConfig(data: DescribeUpstreamHealthCheckConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpstreamHealthCheckConfigResponse>;
+  /** 获取 WAF 防护域名 {@link DescribeWafDomainsRequest} {@link DescribeWafDomainsResponse} */
+  DescribeWafDomains(data: DescribeWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafDomainsResponse>;
+  /** 获取 WAF 防护状态 {@link DescribeWafProtectionRequest} {@link DescribeWafProtectionResponse} */
+  DescribeWafProtection(data: DescribeWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafProtectionResponse>;
   /** 查询Zookeeper类型注册引擎实例副本信息 {@link DescribeZookeeperReplicasRequest} {@link DescribeZookeeperReplicasResponse} */
   DescribeZookeeperReplicas(data: DescribeZookeeperReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperReplicasResponse>;
   /** 查询zookeeper服务接口列表 {@link DescribeZookeeperServerInterfacesRequest} {@link DescribeZookeeperServerInterfacesResponse} */
