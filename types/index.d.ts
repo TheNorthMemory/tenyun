@@ -114,6 +114,7 @@ import Habo, { Versions as HaboVersions } from "./habo";
 import Hai, { Versions as HaiVersions } from "./hai";
 import Hasim, { Versions as HasimVersions } from "./hasim";
 import Hcm, { Versions as HcmVersions } from "./hcm";
+import Hunyuan, { Versions as HunyuanVersions } from "./hunyuan";
 import Iai, { Versions as IaiVersions } from "./iai";
 import Ic, { Versions as IcVersions } from "./ic";
 import Icr, { Versions as IcrVersions } from "./icr";
@@ -359,6 +360,7 @@ export declare type SERVICE_VERSIONS = {
   hai: HaiVersions,
   hasim: HasimVersions,
   hcm: HcmVersions,
+  hunyuan: HunyuanVersions,
   iai: IaiVersions,
   ic: IcVersions,
   icr: IcrVersions,
@@ -729,6 +731,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   hasim: Hasim,
   /** {@link Hcm 数学作业批改} */
   hcm: Hcm,
+  /** {@link Hunyuan 腾讯混元大模型} */
+  hunyuan: Hunyuan,
   /** {@link Iai 人脸识别} */
   iai: Iai,
   /** {@link Ic 图片瘦身} */
