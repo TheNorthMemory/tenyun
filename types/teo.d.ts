@@ -494,6 +494,24 @@ declare interface Compression {
   Algorithms?: string[] | null;
 }
 
+/** 配置组版本信息。 */
+declare interface ConfigGroupVersionInfo {
+  /** 版本 ID。 */
+  VersionId: string;
+  /** 版本号。 */
+  VersionNumber?: string;
+  /** 配置组 ID。 */
+  GroupId?: string;
+  /** 配置组类型。取值有：l7_acceleration ：七层加速配置组。edge_functions ：边缘函数配置组。 */
+  GroupType?: string;
+  /** 版本描述。 */
+  Description?: string;
+  /** 版本状态，取值有：creating：创建中；inactive：未生效；active：已生效。 */
+  Status?: string;
+  /** 版本创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  CreateTime?: string;
+}
+
 /** DDoS配置 */
 declare interface DDoS {
   /** 开关，取值有：on：开启；off：关闭。 */
@@ -558,6 +576,22 @@ declare interface DefaultServerCertInfo {
   Message?: string | null;
   /** 证书算法。 */
   SignAlgo?: string | null;
+}
+
+/** 配置组版本发布记录详情。 */
+declare interface DeployRecord {
+  /** 发布版本的详细信息。 */
+  ConfigGroupVersionInfos?: ConfigGroupVersionInfo[];
+  /** 发布时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  DeployTime?: string;
+  /** 发布状态，取值有： deploying ：发布中；failure ：发布失败；success： 发布成功。 */
+  Status?: string;
+  /** 发布结果信息。 */
+  Message?: string;
+  /** 发布记录 ID。 */
+  RecordId?: string | null;
+  /** 变更说明。 */
+  Description?: string;
 }
 
 /** 域名配置信息 */
@@ -664,6 +698,24 @@ declare interface EntityStatus {
   Status?: string;
   /** 实例配置下发信息提示。 */
   Message?: string;
+}
+
+/** 环境信息。 */
+declare interface EnvInfo {
+  /** 环境 ID。 */
+  EnvId?: string;
+  /** 环境类型，取值有：production: 生产环境；staging: 测试环境。 */
+  EnvType?: string;
+  /** 环境状态，取值有：creating：创建中；running：稳定运行中，可进行版本变更；version_deploying：版本部署中，不能进行新的变更。 */
+  Status?: string;
+  /** 当前环境的配置生效范围：当 EnvType 取值为 production 时，该参数值为 ["ALL"]，代表全网生效；当 EnvType 取值为 staging 时，会返回测试节点 IP，可用于绑定 host 测试。 */
+  Scope?: string[];
+  /** 当前环境中各配置组实际生效的版本，根据 Status 的取值有以下两种情况：当 Status 取值为 version_deploying 时，本字段返回的值为执行变更动作之前生效的版本，即新版本部署期间，实际生效的版本为执行变更动作之前的版本；当 Status 取值为 running 时，本字段返回的值即为当前实际生效的版本。 */
+  CurrentConfigGroupVersionInfos?: ConfigGroupVersionInfo[];
+  /** 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  CreateTime?: string;
+  /** 更新时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  UpdateTime?: string;
 }
 
 /** 例外规则，用于配置需要跳过特定场景的规则 */
@@ -2040,6 +2092,24 @@ declare interface CreateApplicationProxyRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateConfigGroupVersionRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 待新建版本的配置组 ID。 */
+  GroupId: string;
+  /** 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置文件内容可参考下方示例。 */
+  Content: string;
+  /** 版本描述，可输入最大长度为 50 个字符，可以通过本字段填写该版本的使用场景等。 */
+  Description?: string;
+}
+
+declare interface CreateConfigGroupVersionResponse {
+  /** 版本 ID。 */
+  VersionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOriginGroupRequest {
   /** 站点 ID */
   ZoneId: string;
@@ -2306,6 +2376,24 @@ declare interface DeleteZoneResponse {
   RequestId?: string;
 }
 
+declare interface DeployConfigGroupVersionRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 环境 ID。请填写版本需要发布到的环境 ID。 */
+  EnvId: string;
+  /** 需要发布的版本信息。可以同时变更多个不同配置组的版本，每个配置组一次仅支持变更一个版本。 */
+  ConfigGroupVersionInfos: ConfigGroupVersionInfo[];
+  /** 变更说明。用于描述此次变更的内容、原因，最大支持 100 个字符。 */
+  Description: string;
+}
+
+declare interface DeployConfigGroupVersionResponse {
+  /** 发布记录 ID。 */
+  RecordId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccelerationDomainsRequest {
   /** 加速域名所属站点 ID。 */
   ZoneId: string;
@@ -2376,6 +2464,44 @@ declare interface DescribeAvailablePlansRequest {
 declare interface DescribeAvailablePlansResponse {
   /** 当前账户可购买套餐类型及相关信息。 */
   PlanInfo: PlanInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigGroupVersionDetailRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 版本 ID。 */
+  VersionId: string;
+}
+
+declare interface DescribeConfigGroupVersionDetailResponse {
+  /** 版本信息。 */
+  ConfigGroupVersionInfo?: ConfigGroupVersionInfo;
+  /** 版本文件的内容。以 JSON 格式返回。 */
+  Content?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigGroupVersionsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 配置组 ID。 */
+  GroupId: string;
+  /** 过滤条件，Filters.Values 的上限为 20，该参数不填写时，返回所选配置组下的所有版本信息。详细的过滤条件如下：version-id：按照版本 ID 进行过滤； */
+  Filters?: AdvancedFilter[];
+  /** 分页查询偏移量。默认值为 0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeConfigGroupVersionsResponse {
+  /** 版本总数。 */
+  TotalCount?: number;
+  /** 版本信息列表。 */
+  ConfigGroupVersionInfos?: ConfigGroupVersionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2498,6 +2624,38 @@ declare interface DescribeDefaultCertificatesResponse {
   TotalCount: number;
   /** 默认证书列表。 */
   DefaultServerCertInfo: DefaultServerCertInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeployHistoryRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 环境 ID。 */
+  EnvId: string;
+  /** 过滤条件，Filters.Values 的上限为 20，详细的过滤条件如下：record-id：按照发布记录 ID 进行过滤进行过滤。 */
+  Filters?: AdvancedFilter[];
+}
+
+declare interface DescribeDeployHistoryResponse {
+  /** 发布记录总数。 */
+  TotalCount?: number;
+  /** 发布记录详情。 */
+  Records?: DeployRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEnvironmentsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DescribeEnvironmentsResponse {
+  /** 环境总数。 */
+  TotalCount?: number;
+  /** 环境列表。 */
+  EnvInfos?: EnvInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3527,6 +3685,8 @@ declare interface Teo {
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
   /** 创建应用代理规则 {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
+  /** 创建配置组版本 {@link CreateConfigGroupVersionRequest} {@link CreateConfigGroupVersionResponse} */
+  CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
   /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
   CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
   /** 为未购买套餐的站点购买套餐 {@link CreatePlanForZoneRequest} {@link CreatePlanForZoneResponse} */
@@ -3561,6 +3721,8 @@ declare interface Teo {
   DeleteSharedCNAME(data: DeleteSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSharedCNAMEResponse>;
   /** 删除站点 {@link DeleteZoneRequest} {@link DeleteZoneResponse} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
+  /** 发布配置组版本 {@link DeployConfigGroupVersionRequest} {@link DeployConfigGroupVersionResponse} */
+  DeployConfigGroupVersion(data: DeployConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeployConfigGroupVersionResponse>;
   /** 查询加速域名列表 {@link DescribeAccelerationDomainsRequest} {@link DescribeAccelerationDomainsResponse} */
   DescribeAccelerationDomains(data: DescribeAccelerationDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccelerationDomainsResponse>;
   /** 查询别称域名信息列表 {@link DescribeAliasDomainsRequest} {@link DescribeAliasDomainsResponse} */
@@ -3569,6 +3731,10 @@ declare interface Teo {
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
   /** 查询当前账户可购买套餐信息列表 {@link DescribeAvailablePlansRequest} {@link DescribeAvailablePlansResponse} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
+  /** 查询配置组版本详情 {@link DescribeConfigGroupVersionDetailRequest} {@link DescribeConfigGroupVersionDetailResponse} */
+  DescribeConfigGroupVersionDetail(data: DescribeConfigGroupVersionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigGroupVersionDetailResponse>;
+  /** 查询配置组版本列表 {@link DescribeConfigGroupVersionsRequest} {@link DescribeConfigGroupVersionsResponse} */
+  DescribeConfigGroupVersions(data: DescribeConfigGroupVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigGroupVersionsResponse>;
   /** 查询内容管理接口配额 {@link DescribeContentQuotaRequest} {@link DescribeContentQuotaResponse} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
   /** 查询DDoS攻击时序数据 {@link DescribeDDoSAttackDataRequest} {@link DescribeDDoSAttackDataResponse} */
@@ -3579,6 +3745,10 @@ declare interface Teo {
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
   /** 查询默认证书列表 {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */
   DescribeDefaultCertificates(data: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
+  /** 查询版本发布历史 {@link DescribeDeployHistoryRequest} {@link DescribeDeployHistoryResponse} */
+  DescribeDeployHistory(data: DescribeDeployHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployHistoryResponse>;
+  /** 查询环境信息 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
+  DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询域名详细配置 {@link DescribeHostsSettingRequest} {@link DescribeHostsSettingResponse} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
   /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */

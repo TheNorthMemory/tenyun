@@ -728,6 +728,8 @@ declare interface Instance {
   SpecAlias?: string;
   /** 计费项特性列表 */
   SpecFeatures?: string[] | null;
+  /** 纳管cvmid */
+  CvmInstanceId?: string;
 }
 
 /** 内网调用信息 */

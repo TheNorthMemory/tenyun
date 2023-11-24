@@ -91,35 +91,37 @@ declare interface NodeDefineExt {
 /** 拨测任务 */
 declare interface ProbeTask {
   /** 任务名 */
-  Name: string | null;
+  Name?: string | null;
   /** 任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 拨测类型1 = 页面浏览 2 =文件上传 3 = 文件下载 4 = 端口性能 5 = 网络质量 6 =流媒体 即时拨测只支持页面浏览，网络质量，文件下载 */
-  TaskType: number;
+  TaskType?: number;
   /** 拨测节点列表 */
-  Nodes: string[];
+  Nodes?: string[];
+  /** 拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6 */
+  NodeIpType?: number | null;
   /** 拨测间隔 */
-  Interval: number;
+  Interval?: number;
   /** 拨测参数 */
-  Parameters: string;
+  Parameters?: string;
   /** 任务状态1 = 创建中 2 = 运行中 3 = 运行异常 4 = 暂停中 5 = 暂停异常 6 = 任务暂停 7 = 任务删除中 8 = 任务删除异常 9 = 任务删除 10 = 定时任务暂停中 */
-  Status: number;
+  Status?: number;
   /** 目标地址 */
-  TargetAddress: string;
+  TargetAddress?: string;
   /** 付费模式1 = 试用版本 2 = 付费版本 */
-  PayMode: number;
+  PayMode?: number;
   /** 订单状态1 = 正常 2 = 欠费 */
-  OrderState: number;
+  OrderState?: number;
   /** 任务分类1 = PC 2 = Mobile */
-  TaskCategory: number;
+  TaskCategory?: number;
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 定时任务cron表达式 */
-  Cron: string | null;
+  Cron?: string | null;
   /** 定时任务启动状态1 = 定时任务表达式生效 2 = 定时任务表达式未生效（一般为任务手动暂停） */
-  CronState: number | null;
+  CronState?: number | null;
   /** 任务当前绑定的标签 */
-  TagInfoList: KeyValuePair[] | null;
+  TagInfoList?: KeyValuePair[] | null;
 }
 
 /** 拨测任务基础配置 */
@@ -128,6 +130,26 @@ declare interface ProbeTaskBasicConfiguration {
   Name: string;
   /** 拨测目标地址 */
   TargetAddress: string;
+}
+
+/** 单个即时拨测任务信息 */
+declare interface SingleInstantTask {
+  /** 任务ID */
+  TaskId: string;
+  /** 任务地址 */
+  TargetAddress: string;
+  /** 任务类型 */
+  TaskType: number;
+  /** 测试时间 */
+  ProbeTime: number;
+  /** 任务状态 */
+  Status: string;
+  /** 成功率 */
+  SuccessRate: number;
+  /** 节点数量 */
+  NodeCount: number;
+  /** 节点类型 */
+  TaskCategory: number;
 }
 
 /** 资源的标签，通过标签对资源进行划分用于支持细粒度的鉴权、分账等场景 */
@@ -151,13 +173,13 @@ declare interface TaskResult {
 declare interface CreateProbeTasksRequest {
   /** 批量任务名-地址 */
   BatchTasks: ProbeTaskBasicConfiguration[];
-  /** 任务类型 */
+  /** 任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois */
   TaskType: number;
-  /** 拨测节点 */
+  /** 拨测节点，如10001，具体拨测地域运营商对应的拨测点编号可联系云拨测确认。 */
   Nodes: string[];
   /** 拨测间隔 */
   Interval: number;
-  /** 拨测参数 */
+  /** 拨测参数，如{}，详细可参考云拨测官方文档。 */
   Parameters: string;
   /** 任务分类1 = PC 2 = Mobile */
   TaskCategory: number;
@@ -165,17 +187,19 @@ declare interface CreateProbeTasksRequest {
   Cron?: string;
   /** 资源标签值 */
   Tag?: Tag[];
-  /** 测试类型，包含定时测试与即时测试 */
+  /** 测试类型，包含定时测试与即时测试。1-定时拨测，其它表示即时拨测。 */
   ProbeType?: number;
-  /** 插件类型 */
+  /** 插件类型，如CDN，详情参考云拨测官方文档。 */
   PluginSource?: string;
   /** 客户端ID */
   ClientNum?: string;
+  /** 拨测点IP类型：0-不限制IP类型，1-IPv4，2-IPv6 */
+  NodeIpType?: number;
 }
 
 declare interface CreateProbeTasksResponse {
   /** 任务ID列表 */
-  TaskIDs: string[];
+  TaskIDs?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -234,6 +258,22 @@ declare interface DescribeDetailedSingleProbeDataResponse {
   TotalNumber?: number;
   /** es scroll查询的id */
   ScrollID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstantTasksRequest {
+  /** 数量 */
+  Limit: number;
+  /** 起始位置 */
+  Offset: number;
+}
+
+declare interface DescribeInstantTasksResponse {
+  /** 任务 */
+  Tasks: SingleInstantTask[] | null;
+  /** 总数 */
+  Total: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -385,18 +425,20 @@ declare interface UpdateProbeTaskAttributesResponse {
 }
 
 declare interface UpdateProbeTaskConfigurationListRequest {
-  /** 任务 ID */
+  /** 任务 ID，如task-n1wchki8 */
   TaskIds: string[];
-  /** 拨测节点 */
+  /** 拨测节点，如10001，详细地区运营商拨测编号请联系云拨测。 */
   Nodes: string[];
-  /** 拨测间隔 */
+  /** 拨测间隔，如30，单位为分钟。 */
   Interval: number;
-  /** 拨测参数 */
+  /** 拨测参数，详细参数配置可参考云拨测官网文档。 */
   Parameters: string;
   /** 定时任务cron表达式 */
   Cron?: string;
   /** 预付费套餐id需要与taskId对应 */
   ResourceIDs?: string[];
+  /** 拨测节点的IP类型，0-不限，1-IPv4，2-IPv6 */
+  NodeIpType?: number;
 }
 
 declare interface UpdateProbeTaskConfigurationListResponse {
@@ -413,6 +455,8 @@ declare interface Cat {
   DeleteProbeTask(data: DeleteProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProbeTaskResponse>;
   /** 列出单次拨测详情数据 {@link DescribeDetailedSingleProbeDataRequest} {@link DescribeDetailedSingleProbeDataResponse} */
   DescribeDetailedSingleProbeData(data: DescribeDetailedSingleProbeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSingleProbeDataResponse>;
+  /** 获取历史即时拨测任务 {@link DescribeInstantTasksRequest} {@link DescribeInstantTasksResponse} */
+  DescribeInstantTasks(data: DescribeInstantTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstantTasksResponse>;
   /** 获取拨测节点 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
   DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 列出云拨测指标详细数据 {@link DescribeProbeMetricDataRequest} {@link DescribeProbeMetricDataResponse} */

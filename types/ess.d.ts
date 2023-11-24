@@ -130,7 +130,7 @@ declare interface AutoSignConfig {
   CallbackUrl?: string;
   /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸认别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人` */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起 */
   LicenseType?: number;
 }
 
@@ -548,7 +548,7 @@ declare interface FlowCreateApprover {
   CustomApproverTag?: string;
   /** 已经废弃, 快速注册相关信息 */
   RegisterInfo?: RegisterInfo;
-  /** 签署人个性化能力值，如是否可以转发他人处理、是否可以拒签等功能开关。 */
+  /** 签署人个性化能力值，如是否可以转发他人处理、是否可以拒签、是否为动态补充签署人等功能开关。 */
   ApproverOption?: ApproverOption;
   /** 签署完前端跳转的url，暂未使用 */
   JumpUrl?: string;
@@ -676,6 +676,8 @@ declare interface HasAuthUser {
   UserId?: string | null;
   /** 当前员工的归属情况，可能值是：MainOrg：在集团企业的场景下，返回此值代表是归属主企业CurrentOrg：在普通企业场景下返回此值；或者在集团企业的场景下，返回此值代表归属子企业 */
   BelongTo?: string | null;
+  /** 集团主企业id，当前企业为集团子企业时，该字段有值 */
+  MainOrganizationId?: string | null;
 }
 
 /** 企业角色数据信息 */
@@ -1161,7 +1163,7 @@ declare interface CancelMultiFlowSignQRCodeResponse {
 declare interface CancelUserAutoSignEnableUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 预撤销链接的用户信息，包含姓名、证件类型、证件号码等信息。 */
   UserInfo: UserThreeFactor;
@@ -1277,17 +1279,17 @@ declare interface CreateConvertTaskApiResponse {
 declare interface CreateDocumentRequest {
   /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
-  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由创建签署流程接口创建得到。 */
+  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。 */
   FlowId: string;
   /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId: string;
   /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。 */
   FileNames?: string[];
-  /** 电子文档的填写控件的填充内容。具体方式可以参考FormField结构体的定义。 */
+  /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。 */
   FormFields?: FormField[];
   /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容，动态表格合成完后会触发文档合成完成的回调通知` */
   NeedPreview?: boolean;
-  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子。注: `1.此参数在NeedPreview 为true时有效``2.动态表格控件不支持H5链接方式预览` */
+  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子。注: `1.此参数在NeedPreview 为true时有效``2.动态表格控件不支持H5链接方式预览` */
   PreviewType?: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -1296,7 +1298,7 @@ declare interface CreateDocumentRequest {
 }
 
 declare interface CreateDocumentResponse {
-  /** 合同流程的底层电子文档ID，为32位字符串。注:后续需用同样的FlowId再次调用发起签署流程，合同才能进入签署环节 */
+  /** 合同流程的底层电子文档ID，为32位字符串。注:后续需用同样的FlowId再次调用[发起签署流程](https://qian.tencent.com/developers/companyApis/startFlows/StartFlow)，合同才能进入签署环节 */
   DocumentId?: string;
   /** 合同预览链接URL。注: `1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL``2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容` */
   PreviewFileUrl?: string | null;
@@ -1373,7 +1375,7 @@ declare interface CreateFlowByFilesRequest {
   FlowName: string;
   /** 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的ApproverInfo结构体。如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序，请确保列表中参与人的顺序符合实际签署顺序。 */
   Approvers: ApproverInfo[];
-  /** 本合同流程需包含的PDF文件资源编号列表，通过UploadFiles接口获取PDF文件资源编号。注: `目前，此接口仅支持单个文件发起。` */
+  /** 本合同流程需包含的PDF文件资源编号列表，通过[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获取PDF文件资源编号。注: `目前，此接口仅支持单个文件发起。` */
   FileIds: string[];
   /** 合同流程描述信息(可自定义此描述)，最大长度1000个字符。 */
   FlowDescription?: string;
@@ -1387,7 +1389,7 @@ declare interface CreateFlowByFilesRequest {
   CcNotifyType?: number;
   /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 */
   NeedPreview?: boolean;
-  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
+  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
   PreviewType?: number;
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。 */
   Deadline?: number;
@@ -1399,7 +1401,7 @@ declare interface CreateFlowByFilesRequest {
   CustomShowMap?: string;
   /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下： **false**：（默认）不需要审批，直接签署。 **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
   NeedSignReview?: boolean;
-  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
   UserData?: string;
   /** 指定个人签署方查看合同的校验方式 **VerifyCheck** :（默认）人脸识别,人脸识别后才能合同内容 **MobileCheck** : 手机号验证, 用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证） */
   ApproverVerifyType?: string;
@@ -1755,12 +1757,14 @@ declare interface CreatePersonAuthCertificateImageRequest {
   Operator: UserInfo;
   /** 个人用户名称 */
   UserName: string;
-  /** 证件类型，支持以下类型 ID_CARD : 居民身份证 (默认值) PASSPORT : 护照 FOREIGN_ID_CARD : 外国人永久居留身份证 HONGKONG_AND_MACAO : 港澳居民来往内地通行证 HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型 ID_CARD : 居民身份证 (默认值) HONGKONG_AND_MACAO : 港澳居民来往内地通行证 HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   IdCardType: string;
   /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景注: `不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN` */
+  SceneKey?: string;
 }
 
 declare interface CreatePersonAuthCertificateImageResponse {
@@ -1855,6 +1859,8 @@ declare interface CreatePreparedPersonalEsignRequest {
   Agent?: Agent;
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
   LicenseType?: number;
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景注: `不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN` */
+  SceneKey?: string;
 }
 
 declare interface CreatePreparedPersonalEsignResponse {
@@ -1897,7 +1903,7 @@ declare interface CreateSchemeUrlRequest {
   Name?: string;
   /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 */
   Mobile?: string;
-  /** 证件类型，支持以下类型ID_CARD : 居民身份证(默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型ID_CARD : 居民身份证HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   IdCardType?: string;
   /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母(但“I”、“O”除外)，后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;
@@ -1997,7 +2003,7 @@ declare interface CreateSealResponse {
 declare interface CreateUserAutoSignEnableUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 自动签开通配置信息, 包括开通的人员的信息等 */
   AutoSignConfig: AutoSignConfig;
@@ -2033,7 +2039,7 @@ declare interface CreateUserAutoSignEnableUrlResponse {
 declare interface CreateUserAutoSignSealUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 自动签开通个人用户信息, 包括名字,身份证等。 */
   UserInfo: UserThreeFactor;
@@ -2224,7 +2230,7 @@ declare interface DescribeFileUrlsRequest {
 }
 
 declare interface DescribeFileUrlsResponse {
-  /** 文件URL信息；链接不是永久链接, 过期时间收UrlTtl入参的影响, 默认有效期5分钟后, 到期后链接失效。 */
+  /** 文件URL信息；链接不是永久链接, 过期时间受UrlTtl入参的影响, 默认有效期5分钟后, 到期后链接失效。 */
   FileUrls?: FileUrl[];
   /** URL数量 */
   TotalCount?: number;
@@ -2479,7 +2485,7 @@ declare interface DescribePersonCertificateRequest {
   UserInfo: UserThreeFactor;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 证书使用场景，可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 证书使用场景，可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey?: string;
 }
 
@@ -2509,7 +2515,7 @@ declare interface DescribeThirdPartyAuthCodeResponse {
 declare interface DescribeUserAutoSignStatusRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 要查询状态的用户信息, 包括名字,身份证等 */
   UserInfo: UserThreeFactor;
@@ -2533,7 +2539,7 @@ declare interface DescribeUserAutoSignStatusResponse {
 declare interface DisableUserAutoSignRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** 电子处方 */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 需要关闭自动签的个人的信息，如姓名，证件信息等。 */
   UserInfo: UserThreeFactor;

@@ -10,6 +10,14 @@ declare interface AlarmAnalysisConfig {
   Value: string | null;
 }
 
+/** 告警分类信息 */
+declare interface AlarmClassification {
+  /** 分类键 */
+  Key: string;
+  /** 分类值 */
+  Value: string;
+}
+
 /** 告警策略描述 */
 declare interface AlarmInfo {
   /** 告警策略名称。 */
@@ -727,19 +735,19 @@ declare interface KeyValueInfo {
 /** 日志上下文信息 */
 declare interface LogContextInfo {
   /** 日志来源设备 */
-  Source: string;
+  Source?: string;
   /** 采集路径 */
-  Filename: string;
+  Filename?: string;
   /** 日志内容 */
-  Content: string;
+  Content?: string;
   /** 日志包序号 */
-  PkgId: string;
+  PkgId?: string;
   /** 日志包内一条日志的序号 */
-  PkgLogId: number;
+  PkgLogId?: number;
   /** 日志时间戳 */
-  BTime: number;
+  BTime?: number;
   /** 日志来源主机名称 */
-  HostName: string | null;
+  HostName?: string | null;
   /** 原始日志(仅在日志创建索引异常时有值) */
   RawLog?: string | null;
   /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
@@ -900,6 +908,14 @@ declare interface MetaTagInfo {
   Value?: string;
 }
 
+/** 过滤器 */
+declare interface MetricLabel {
+  /** 指标名称 */
+  Key: string | null;
+  /** 指标内容 */
+  Value: string | null;
+}
+
 /** 告警策略中监控任务的执行时间点 */
 declare interface MonitorTime {
   /** 可选值： Period - 周期执行 Fixed - 定期执行 */
@@ -1036,6 +1052,14 @@ declare interface ScheduledSqlResouceInfo {
   BizType?: number;
   /** 指标名称 */
   MetricName?: string;
+  /** 指标名称BizType为1时，优先使用MetricNames字段信息。多指标只能填充到MetricNames字段，单指标建议填充到MetricNames字段 */
+  MetricNames?: string[];
+  /** 指标项 */
+  MetricLabels?: string[];
+  /** 自定义时间 */
+  CustomTime?: string;
+  /** 自定义标签 */
+  CustomMetricLabels?: MetricLabel[];
 }
 
 /** ScheduledSql任务详情 */
@@ -1189,37 +1213,41 @@ declare interface TopicIdAndRegion {
 /** 日志主题信息 */
 declare interface TopicInfo {
   /** 日志集ID */
-  LogsetId: string;
+  LogsetId?: string;
   /** 日志主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 日志主题名称 */
-  TopicName: string;
+  TopicName?: string;
   /** 主题分区个数 */
-  PartitionCount: number;
+  PartitionCount?: number;
   /** 是否开启索引 */
-  Index: boolean;
+  Index?: boolean;
   /** 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
-  AssumerName: string | null;
+  AssumerName?: string | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 日主主题是否开启采集 */
-  Status: boolean;
+  Status?: boolean;
   /** 日志主题绑定的标签信息 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 该主题是否开启自动分裂 */
-  AutoSplit: boolean | null;
+  AutoSplit?: boolean | null;
   /** 若开启自动分裂的话，该主题能够允许的最大分区数 */
-  MaxSplitPartitions: number | null;
+  MaxSplitPartitions?: number | null;
   /** 日主题的存储类型 */
-  StorageType: string | null;
+  StorageType?: string | null;
   /** 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存 */
-  Period: number | null;
+  Period?: number | null;
   /** 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。 */
-  SubAssumerName: string | null;
+  SubAssumerName?: string | null;
   /** 日志主题描述 */
-  Describes: string | null;
+  Describes?: string | null;
   /** 开启日志沉降，热存储的生命周期， hotPeriod < Period。热存储为 hotPeriod, 冷存储则为 Period-hotPeriod。 */
-  HotPeriod: number | null;
+  HotPeriod?: number | null;
+  /** 主题类型。- 0: 日志主题 - 1: 指标主题 */
+  BizType?: number | null;
+  /** 免鉴权开关。- false: 关闭- true: 开启 */
+  IsWebTracking?: boolean | null;
 }
 
 /** 需要开启键值索引的字段的索引描述信息 */
@@ -1363,6 +1391,8 @@ declare interface CreateAlarmRequest {
   MultiConditions?: MultiCondition[];
   /** 是否开启告警策略。默认值为true */
   Status?: boolean;
+  /** 是否开启告警策略。默认值为true */
+  Enable?: boolean;
   /** 用户自定义告警内容 */
   MessageTemplate?: string;
   /** 用户自定义回调 */
@@ -1377,6 +1407,8 @@ declare interface CreateAlarmRequest {
   Tags?: Tag[];
   /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 不填则默认为0。当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
   MonitorObjectType?: number;
+  /** 告警附加分类信息列表。Classifications元素个数不能超过20个。Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，字符规则 ^[a-z]([a-z0-9_]{0,49})$。Classifications元素的Value长度不能超过200个字符。 */
+  Classifications?: AlarmClassification[];
 }
 
 declare interface CreateAlarmResponse {
@@ -1741,7 +1773,7 @@ declare interface CreateTopicRequest {
   Describes?: string;
   /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效 */
   HotPeriod?: number;
-  /** webtracking开关； false: 关闭 true： 开启 */
+  /** 免鉴权开关； false: 关闭 true： 开启 */
   IsWebTracking?: boolean;
 }
 
@@ -2499,6 +2531,8 @@ declare interface ModifyAlarmRequest {
   AlarmTargets?: AlarmTarget[];
   /** 是否开启告警策略。 */
   Status?: boolean;
+  /** 是否开启告警策略。默认值为true */
+  Enable?: boolean;
   /** 用户自定义告警内容 */
   MessageTemplate?: string;
   /** 用户自定义回调 */
@@ -2509,8 +2543,12 @@ declare interface ModifyAlarmRequest {
   GroupTriggerStatus?: boolean;
   /** 分组触发条件。 */
   GroupTriggerCondition?: string[];
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的告警策略。最大支持10个标签键值对，并且不能有重复的键值对。 */
+  Tags?: Tag[];
   /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
   MonitorObjectType?: number;
+  /** 告警附加分类信息列表。Classifications元素个数不能超过20个。Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，符合正则 `^[a-z]([a-z0-9_]{0,49})$`。Classifications元素的Value长度不能超过200个字符。 */
+  Classifications?: AlarmClassification[];
 }
 
 declare interface ModifyAlarmResponse {

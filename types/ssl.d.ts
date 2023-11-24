@@ -97,17 +97,19 @@ declare interface Certificate {
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 数组下，key为CertificateExtra 的内容。 */
 declare interface CertificateExtra {
   /** 证书可配置域名数量。 */
-  DomainNumber: string | null;
+  DomainNumber?: string | null;
   /** 原始证书 ID。 */
-  OriginCertificateId: string | null;
+  OriginCertificateId?: string | null;
   /** 重颁发证书原始 ID。 */
-  ReplacedBy: string | null;
+  ReplacedBy?: string | null;
   /** 重颁发证书新 ID。 */
-  ReplacedFor: string | null;
+  ReplacedFor?: string | null;
   /** 新订单证书 ID。 */
-  RenewOrder: string | null;
+  RenewOrder?: string | null;
   /** 是否是国密证书 */
   SMCert?: number | null;
+  /** 公司类型 */
+  CompanyType?: number | null;
 }
 
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 的内容。 */
@@ -162,7 +164,7 @@ declare interface Certificates {
   IsWildcard?: boolean | null;
   /** 是否启用了漏洞扫描功能。 */
   IsVulnerability?: boolean | null;
-  /** 是否可重颁发证书。 */
+  /** 是否可续费。 */
   RenewAble?: boolean | null;
   /** 项目信息。 */
   ProjectInfo?: ProjectInfo | null;
@@ -194,6 +196,22 @@ declare interface Certificates {
   HostingCompleteTime?: string | null;
   /** 托管新证书ID */
   HostingRenewCertId?: string | null;
+  /** 存在的续费证书ID */
+  HasRenewOrder?: string | null;
+  /** 重颁发证书原证书是否删除 */
+  ReplaceOriCertIsDelete?: boolean | null;
+  /** 是否即将过期， 证书即将到期的30天内为即将过期 */
+  IsExpiring?: boolean | null;
+  /** DV证书添加验证截止时间 */
+  DVAuthDeadline?: string | null;
+  /** 域名验证通过时间 */
+  ValidationPassedTime?: string | null;
+  /** 证书关联的多域名 */
+  CertSANs?: string[] | null;
+  /** 域名验证驳回信息 */
+  AwaitingValidationMsg?: string | null;
+  /** 是否允许下载 */
+  AllowDownload?: boolean | null;
 }
 
 /** clb实例详情 */

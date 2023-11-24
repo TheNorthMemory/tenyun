@@ -120,6 +120,8 @@ declare interface Task {
   ApmServiceList?: ApmServiceInfo[] | null;
   /** 关联的隐患验证项ID */
   VerifyId?: number | null;
+  /** 护栏处理方式，1--顺序回滚，2--演练暂停 */
+  PolicyDealType?: number | null;
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */
@@ -136,6 +138,8 @@ declare interface TaskConfig {
   TaskPauseDuration?: number;
   /** 演练标签信息，不填则默认取经验标签 */
   Tags?: TagWithCreate[];
+  /** 护栏处理方式，1--顺序回滚，2--演练暂停 */
+  PolicyDealType?: number;
 }
 
 /** 任务分组 */
@@ -376,6 +380,8 @@ declare interface Template {
   ApmServiceList?: ApmServiceInfo[] | null;
   /** 告警指标 */
   AlarmPolicy?: string[] | null;
+  /** 护栏处理方式，1--顺序回滚，2--演练暂停 */
+  PolicyDealType?: number | null;
 }
 
 /** 任务分组 */

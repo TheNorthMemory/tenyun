@@ -264,7 +264,7 @@ declare interface ImageConfig {
   Args?: string | null;
   /** 镜像加速开关，默认False */
   ContainerImageAccelerate?: boolean | null;
-  /** 镜像函数端口设置-1: 无端口镜像函数0: 默认端口，当前默认端口是9000其他: 特殊端口 */
+  /** 镜像函数端口设置默认值: 9000-1: 无端口镜像函数其他: 取值范围 0 ~ 65535 */
   ImagePort?: number | null;
 }
 
@@ -274,6 +274,14 @@ declare interface InstanceConcurrencyConfig {
   DynamicEnabled?: string | null;
   /** 单实例并发数最大值。取值范围 [1,100] */
   MaxConcurrency?: number | null;
+}
+
+/** 内网配置 */
+declare interface IntranetConfigOut {
+  /** 是否启用固定内网IPENABLE 为启用DISABLE 为不启用 */
+  IpFixed?: string;
+  /** 若已启用固定内网IP，则该字段返回使用的IP列表 */
+  IpAddress?: string[] | null;
 }
 
 /** k8s label */
@@ -1178,10 +1186,16 @@ declare interface GetFunctionResponse {
   AsyncRunEnable?: string | null;
   /** 是否开启事件追踪 */
   TraceEnable?: string | null;
+  /** 镜像配置 */
+  ImageConfig?: ImageConfig | null;
   /** HTTP函数支持的访问协议。当前支持WebSockets协议。 */
   ProtocolType?: string | null;
   /** HTTP函数配置ProtocolType访问协议，当前协议配置的参数 */
   ProtocolParams?: ProtocolParams | null;
+  /** 是否开启DNS缓存 */
+  DnsCache?: string | null;
+  /** 内网访问配置 */
+  IntranetConfig?: IntranetConfigOut | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

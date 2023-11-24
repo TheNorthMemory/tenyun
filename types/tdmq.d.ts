@@ -4269,7 +4269,7 @@ declare interface Tdmq {
   DeleteEnvironmentRoles(data: DeleteEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentRolesResponse>;
   /** 删除命名空间 {@link DeleteEnvironmentsRequest} {@link DeleteEnvironmentsResponse} */
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
-  /** 删除专业集群 {@link DeleteProClustersRequest} {@link DeleteProClustersResponse} */
+  /** @deprecated 删除专业集群 {@link DeleteProClustersRequest} {@link DeleteProClustersResponse} */
   DeleteProClusters(data: DeleteProClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClustersResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
   DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;

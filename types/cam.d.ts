@@ -665,7 +665,7 @@ declare interface CreateSAMLProviderResponse {
 }
 
 declare interface CreateServiceLinkedRoleRequest {
-  /** 授权服务，附加了此角色的腾讯云服务主体。 */
+  /** 填写此角色的腾讯云服务载体，具体可查询文档（角色载体）字段https://cloud.tencent.com/document/product/598/85165 */
   QCSServiceName: string[];
   /** 自定义后缀，根据您提供的字符串，与服务提供的前缀组合在一起以形成完整的角色名称。 */
   CustomSuffix?: string;
@@ -677,7 +677,7 @@ declare interface CreateServiceLinkedRoleRequest {
 
 declare interface CreateServiceLinkedRoleResponse {
   /** 角色ID */
-  RoleId: string;
+  RoleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

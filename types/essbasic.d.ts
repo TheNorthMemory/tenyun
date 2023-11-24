@@ -88,7 +88,7 @@ declare interface AutoSignConfig {
   CallbackUrl?: string;
   /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸认别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人` */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起 */
   LicenseType?: number;
 }
 
@@ -578,7 +578,7 @@ declare interface FlowInfo {
   FlowName: string;
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。示例值：1604912664 */
   Deadline: number;
-  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。可以通过生成子客登录链接登录企业控制台, 在**企业模板**中得到合同模板ID。 */
+  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。如果使用模板发起接口，此参数为必填。可以通过生成子客登录链接登录企业控制台, 在**企业模板**中得到合同模板ID。 */
   TemplateId?: string;
   /** 多个签署人信息，最大支持50个签署方 */
   FlowApprovers?: FlowApproverInfo[];
@@ -1097,7 +1097,7 @@ declare interface ChannelCancelUserAutoSignEnableUrlRequest {
   Agent: Agent;
   /** 操作人信息 */
   Operator: UserInfo;
-  /** 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 指定撤销链接的用户信息，包含姓名、证件类型、证件号码。 */
   UserInfo: UserThreeFactor;
@@ -1613,7 +1613,7 @@ declare interface ChannelCreateSealPolicyResponse {
 declare interface ChannelCreateUserAutoSignEnableUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
@@ -1649,7 +1649,7 @@ declare interface ChannelCreateUserAutoSignEnableUrlResponse {
 declare interface ChannelCreateUserAutoSignSealUrlRequest {
   /** 渠道应用相关信息。 */
   Agent: Agent;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 自动签开通个人用户信息，包括名字，身份证等。 */
   UserInfo: UserThreeFactor;
@@ -1875,7 +1875,7 @@ declare interface ChannelDescribeRolesResponse {
 declare interface ChannelDescribeUserAutoSignStatusRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景注: `现在仅支持电子处方场景` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 要查询状态的用户信息, 包括名字,身份证等 */
   UserInfo: UserThreeFactor;
@@ -1899,7 +1899,7 @@ declare interface ChannelDescribeUserAutoSignStatusResponse {
 declare interface ChannelDisableUserAutoSignRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** 电子处方 */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
   /** 需要关闭自动签的个人的信息，如姓名，证件信息等。 */
   UserInfo: UserThreeFactor;
@@ -2147,7 +2147,7 @@ declare interface CreateSignUrlsRequest {
   Name?: string;
   /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。注: `GenerateType为"PERSON"或"FOLLOWER"时必填` */
   Mobile?: string;
-  /** 证件类型，支持以下类型ID_CARD : 居民身份证(默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型ID_CARD : 居民身份证HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   IdCardType?: string;
   /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母(但“I”、“O”除外)，后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;

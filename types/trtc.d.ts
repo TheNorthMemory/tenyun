@@ -46,6 +46,16 @@ declare interface AudioEncode {
   Codec?: number;
 }
 
+/** 音频转码参数 */
+declare interface AudioEncodeParams {
+  /** 音频采样率，取值为[48000, 44100]，单位是Hz。 */
+  SampleRate: number;
+  /** 音频声道数，取值范围[1,2]，1表示音频为单声道，2表示音频为双声道。 */
+  Channel: number;
+  /** 音频码率，取值范围[8,500]，单位为kbps。 */
+  BitRate: number;
+}
+
 /** 录制音频转码参数。 */
 declare interface AudioParams {
   /** 音频采样率枚举值:(注意1 代表48000HZ, 2 代表44100HZ, 3 代表16000HZ)1：48000Hz（默认）;2：44100Hz3：16000Hz。 */
@@ -762,6 +772,20 @@ declare interface VideoEncode {
   Gop: number;
 }
 
+/** 视频转码参数 */
+declare interface VideoEncodeParams {
+  /** 宽。取值范围[0,1920]，单位为像素值。 */
+  Width: number;
+  /** 高。取值范围[0,1080]，单位为像素值。 */
+  Height: number;
+  /** 帧率。取值范围[1,60]，表示帧率可选范围为1到60fps。 */
+  Fps: number;
+  /** 码率。取值范围[1,10000]，单位为kbps。 */
+  BitRate: number;
+  /** gop。取值范围[1,2]，单位为秒。 */
+  Gop: number;
+}
+
 /** 录制视频转码参数。 */
 declare interface VideoParams {
   /** 视频的宽度值，单位为像素，默认值360。不能超过1920，与height的乘积不能超过1920*1080。 */
@@ -1106,6 +1130,20 @@ declare interface DescribeScaleInfoResponse {
   Total?: number;
   /** 返回的数据 */
   ScaleList?: ScaleInfomation[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamIngestRequest {
+  /** TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同 */
+  SdkAppId: number;
+  /** 任务的唯一Id，在启动任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DescribeStreamIngestResponse {
+  /** 任务的状态信息。InProgress：表示当前任务正在进行中。NotExist：表示当前任务不存在。示例值：InProgress */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1534,6 +1572,34 @@ declare interface StartPublishCdnStreamResponse {
   RequestId?: string;
 }
 
+declare interface StartStreamIngestRequest {
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和录制的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，录制的TRTC房间所对应的RoomId。 */
+  RoomId: string;
+  /** TRTC房间号的类型。【*注意】必须和录制的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认） */
+  RoomIdType: number;
+  /** 拉流转推机器人的UserId，用于进房发起拉流转推任务。 */
+  UserId: string;
+  /** 拉流转推机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910)的方案。 */
+  UserSig: string;
+  /** 源流URL。示例值：https://a.b/test.mp4 */
+  SourceUrl: string[];
+  /** TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 */
+  PrivateMapKey?: string;
+  /** 视频编码参数。可选，如果不填，保持原始流的参数。 */
+  VideoEncodeParams?: VideoEncodeParams;
+  /** 音频编码参数。可选，如果不填，保持原始流的参数。 */
+  AudioEncodeParams?: AudioEncodeParams;
+}
+
+declare interface StartStreamIngestResponse {
+  /** 拉流转推的任务 ID。任务 ID 是对一次拉流转推生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopMCUMixTranscodeByStrRoomIdRequest {
   /** TRTC的SDKAppId。 */
   SdkAppId: number;
@@ -1568,6 +1634,18 @@ declare interface StopPublishCdnStreamRequest {
 declare interface StopPublishCdnStreamResponse {
   /** 转推任务唯一的String Id */
   TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopStreamIngestRequest {
+  /** TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 任务的唯一Id，在启动任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface StopStreamIngestResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1631,6 +1709,8 @@ declare interface Trtc {
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
   /** 查询历史房间和用户数 {@link DescribeScaleInfoRequest} {@link DescribeScaleInfoResponse} */
   DescribeScaleInfo(data: DescribeScaleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScaleInfoResponse>;
+  /** 查询转推任务 {@link DescribeStreamIngestRequest} {@link DescribeStreamIngestResponse} */
+  DescribeStreamIngest(data: DescribeStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamIngestResponse>;
   /** 查询TRTC数据大盘质量相关数据 {@link DescribeTRTCMarketQualityDataRequest} {@link DescribeTRTCMarketQualityDataResponse} */
   DescribeTRTCMarketQualityData(data: DescribeTRTCMarketQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityDataResponse>;
   /** 查询TRTC数据大盘质量指标 {@link DescribeTRTCMarketQualityMetricDataRequest} {@link DescribeTRTCMarketQualityMetricDataResponse} */
@@ -1677,12 +1757,16 @@ declare interface Trtc {
   StartMCUMixTranscodeByStrRoomId(data: StartMCUMixTranscodeByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeByStrRoomIdResponse>;
   /** 启动转推任务 {@link StartPublishCdnStreamRequest} {@link StartPublishCdnStreamResponse} */
   StartPublishCdnStream(data: StartPublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishCdnStreamResponse>;
+  /** 开始拉流转推 {@link StartStreamIngestRequest} {@link StartStreamIngestResponse} */
+  StartStreamIngest(data: StartStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamIngestResponse>;
   /** 结束云端混流（旧） {@link StopMCUMixTranscodeRequest} {@link StopMCUMixTranscodeResponse} */
   StopMCUMixTranscode(data: StopMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeResponse>;
   /** 结束云端混流（字符串房间号） {@link StopMCUMixTranscodeByStrRoomIdRequest} {@link StopMCUMixTranscodeByStrRoomIdResponse} */
   StopMCUMixTranscodeByStrRoomId(data: StopMCUMixTranscodeByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeByStrRoomIdResponse>;
   /** 停止转推任务 {@link StopPublishCdnStreamRequest} {@link StopPublishCdnStreamResponse} */
   StopPublishCdnStream(data: StopPublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishCdnStreamResponse>;
+  /** 停止拉流转推 {@link StopStreamIngestRequest} {@link StopStreamIngestResponse} */
+  StopStreamIngest(data: StopStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamIngestResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
 }

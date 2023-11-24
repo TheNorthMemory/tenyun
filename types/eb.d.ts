@@ -76,10 +76,18 @@ declare interface ConnectionDescription {
   CkafkaParams?: CkafkaParams | null;
   /** data transfer service (DTS)参数 */
   DTSParams?: DTSParams | null;
+  /** tdmq参数 */
+  TDMQParams?: TDMQParams | null;
 }
 
 /** Data Transfer Service参数 */
 declare interface DTSParams {
+  /** Consumer Group Name */
+  ConsumerGroupName: string;
+  /** 账户名 */
+  Account: string;
+  /** 密码 */
+  Password: string | null;
 }
 
 /** rule对应的dlq配置 */
@@ -284,6 +292,14 @@ declare interface SearchLogResult {
   Region?: string | null;
   /** 事件状态 */
   Status?: string | null;
+}
+
+/** TDMQ参数详情 */
+declare interface TDMQParams {
+  /** 集群类型 */
+  ClusterType?: string | null;
+  /** 集群支撑网接入点 */
+  ClusterEndPoint?: string | null;
 }
 
 /** Target信息 */
