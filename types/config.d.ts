@@ -72,6 +72,20 @@ declare interface ConfigRule {
   ManageTriggerType?: string[];
 }
 
+/** 自定义规则评估结果 */
+declare interface Evaluation {
+  /** 已评估资源ID。长度为0~256个字符 */
+  ComplianceResourceId: string | null;
+  /** 已评估资源类型。支持:QCS::CVM::Instance、 QCS::CBS::Disk、QCS::VPC::Vpc、QCS::VPC::Subnet、QCS::VPC::SecurityGroup、 QCS::CAM::User、QCS::CAM::Group、QCS::CAM::Policy、QCS::CAM::Role、QCS::COS::Bucket */
+  ComplianceResourceType: string | null;
+  /** 已评估资源地域。长度为0~32个字符 */
+  ComplianceRegion: string | null;
+  /** 合规类型。取值：COMPLIANT：合规、NON_COMPLIANT：不合规 */
+  ComplianceType: string | null;
+  /** 不合规资源的补充信息。 */
+  Annotation?: Annotation | null;
+}
+
 /** 参数值 */
 declare interface InputParameter {
   /** 参数名 */
@@ -182,6 +196,18 @@ declare interface ListConfigRulesResponse {
   RequestId?: string;
 }
 
+declare interface PutEvaluationsRequest {
+  /** 回调令牌。从自定义规则所选的scf云函数Context中取参数ResultToken值 */
+  ResultToken: string;
+  /** 自定义规则评估结果信息。 */
+  Evaluations: Evaluation[];
+}
+
+declare interface PutEvaluationsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Config 配置审计} */
 declare interface Config {
   (): Versions;
@@ -189,6 +215,8 @@ declare interface Config {
   ListAggregateConfigRules(data: ListAggregateConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateConfigRulesResponse>;
   /** 获取规则列表 {@link ListConfigRulesRequest} {@link ListConfigRulesResponse} */
   ListConfigRules(data: ListConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListConfigRulesResponse>;
+  /** 上报自定义规则评估结果 {@link PutEvaluationsRequest} {@link PutEvaluationsResponse} */
+  PutEvaluations(data: PutEvaluationsRequest, config?: AxiosRequestConfig): AxiosPromise<PutEvaluationsResponse>;
 }
 
 export declare type Versions = ["2022-08-02"];

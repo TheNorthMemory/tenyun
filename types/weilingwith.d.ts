@@ -2667,7 +2667,7 @@ declare interface Weilingwith {
   BatchCreateDevice(data: BatchCreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateDeviceResponse>;
   /** 批量消警 {@link BatchKillAlarmRequest} {@link BatchKillAlarmResponse} */
   BatchKillAlarm(data: BatchKillAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<BatchKillAlarmResponse>;
-  /** 批量消息上报 {@link BatchReportAppMessageRequest} {@link BatchReportAppMessageResponse} */
+  /** 批量上报应用消息 {@link BatchReportAppMessageRequest} {@link BatchReportAppMessageResponse} */
   BatchReportAppMessage(data: BatchReportAppMessageRequest, config?: AxiosRequestConfig): AxiosPromise<BatchReportAppMessageResponse>;
   /** 变更告警状态 {@link ChangeAlarmStatusRequest} {@link ChangeAlarmStatusResponse} */
   ChangeAlarmStatus(data: ChangeAlarmStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeAlarmStatusResponse>;
@@ -2769,7 +2769,7 @@ declare interface Weilingwith {
   DescribeWorkspaceUserList(data: DescribeWorkspaceUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceUserListResponse>;
   /** 批量修改设备名字 {@link ModifyDeviceNameRequest} {@link ModifyDeviceNameResponse} */
   ModifyDeviceName(data: ModifyDeviceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceNameResponse>;
-  /** 单条消息上报 {@link ReportAppMessageRequest} {@link ReportAppMessageResponse} */
+  /** 上报应用消息 {@link ReportAppMessageRequest} {@link ReportAppMessageResponse} */
   ReportAppMessage(data: ReportAppMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ReportAppMessageResponse>;
   /** 断流接口 {@link StopVideoStreamingRequest} {@link StopVideoStreamingResponse} */
   StopVideoStreaming(data: StopVideoStreamingRequest, config?: AxiosRequestConfig): AxiosPromise<StopVideoStreamingResponse>;

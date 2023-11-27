@@ -1607,7 +1607,7 @@ declare interface AcknowledgeMessageResponse {
 }
 
 declare interface ClearCmqQueueRequest {
-  /** 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   QueueName: string;
 }
 
@@ -1617,9 +1617,9 @@ declare interface ClearCmqQueueResponse {
 }
 
 declare interface ClearCmqSubscriptionFilterTagsRequest {
-  /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
   TopicName: string;
-  /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   SubscriptionName: string;
 }
 
@@ -1693,9 +1693,9 @@ declare interface CreateCmqQueueResponse {
 }
 
 declare interface CreateCmqSubscribeRequest {
-  /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
   TopicName: string;
-  /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   SubscriptionName: string;
   /** 订阅的协议，目前支持两种协议：http、queue。使用http协议，用户需自己搭建接受消息的web server。使用queue，消息会自动推送到CMQ queue，用户可以并发地拉取消息。 */
   Protocol: string;
@@ -1713,13 +1713,13 @@ declare interface CreateCmqSubscribeRequest {
 
 declare interface CreateCmqSubscribeResponse {
   /** 订阅id */
-  SubscriptionId: string;
+  SubscriptionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateCmqTopicRequest {
-  /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
   TopicName: string;
   /** 消息最大长度。取值范围 1024-65536 Byte（即1-64K），默认值 65536。 */
   MaxMsgSize?: number;
@@ -2087,7 +2087,7 @@ declare interface DeleteClusterResponse {
 }
 
 declare interface DeleteCmqQueueRequest {
-  /** 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   QueueName: string;
 }
 
@@ -2097,9 +2097,9 @@ declare interface DeleteCmqQueueResponse {
 }
 
 declare interface DeleteCmqSubscribeRequest {
-  /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   TopicName: string;
-  /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   SubscriptionName: string;
 }
 
@@ -2109,7 +2109,7 @@ declare interface DeleteCmqSubscribeResponse {
 }
 
 declare interface DeleteCmqTopicRequest {
-  /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   TopicName: string;
 }
 
@@ -3611,7 +3611,7 @@ declare interface ModifyClusterResponse {
 }
 
 declare interface ModifyCmqQueueAttributeRequest {
-  /** 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   QueueName: string;
   /** 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。 */
   MaxMsgHeapNum?: number;
@@ -3651,7 +3651,7 @@ declare interface ModifyCmqQueueAttributeResponse {
 }
 
 declare interface ModifyCmqSubscriptionAttributeRequest {
-  /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
   TopicName: string;
   /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   SubscriptionName: string;
@@ -3671,7 +3671,7 @@ declare interface ModifyCmqSubscriptionAttributeResponse {
 }
 
 declare interface ModifyCmqTopicAttributeRequest {
-  /** 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   TopicName: string;
   /** 消息最大长度。取值范围1024 - 65536 Byte（即1 - 64K），默认值65536。 */
   MaxMsgSize?: number;
@@ -4041,7 +4041,7 @@ declare interface ResetRocketMQConsumerOffSetResponse {
 }
 
 declare interface RewindCmqQueueRequest {
-  /** 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   QueueName: string;
   /** 设定该时间，则（Batch）receiveMessage接口，会按照生产消息的先后顺序消费该时间戳以后的消息。 */
   StartConsumeTime: number;

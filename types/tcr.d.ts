@@ -930,36 +930,6 @@ declare interface CreateApplicationTriggerPersonalResponse {
   RequestId?: string;
 }
 
-declare interface CreateCustomAccountRequest {
-  /** 实例Id */
-  RegistryId: string;
-  /** 自定义的账户名 */
-  Name: string;
-  /** 策略列表 */
-  Permissions: Permission[];
-  /** 自定义的账户描述 */
-  Description?: string;
-  /** 有效期(单位：天)，从当前时间开始计算，优先级高于ExpiresAt */
-  Duration?: number;
-  /** 自定义的账户过期时间（时间戳，单位:毫秒） */
-  ExpiresAt?: number;
-  /** 是否禁用自定义的账户 */
-  Disable?: boolean;
-}
-
-declare interface CreateCustomAccountResponse {
-  /** 自定义用户名（会自动加上前缀tcr$） */
-  Name?: string;
-  /** 自定义用户密码，仅展示一次，请注意留存 */
-  Password?: string;
-  /** 自定义用户失效时间（时间戳） */
-  ExpiresAt?: number;
-  /** 自定义用户创建时间 */
-  CreateTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateImageAccelerationServiceRequest {
   /** 实例Id */
   RegistryId: string;
@@ -1326,18 +1296,6 @@ declare interface DeleteApplicationTriggerPersonalRequest {
 }
 
 declare interface DeleteApplicationTriggerPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteCustomAccountRequest {
-  /** 实例Id */
-  RegistryId: string;
-  /** 自定义的账户名 */
-  Name: string;
-}
-
-declare interface DeleteCustomAccountResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2486,28 +2444,6 @@ declare interface ModifyApplicationTriggerPersonalResponse {
   RequestId?: string;
 }
 
-declare interface ModifyCustomAccountRequest {
-  /** 实例Id */
-  RegistryId: string;
-  /** 自定义的账户名 */
-  Name: string;
-  /** 自定义的账户描述 */
-  Description?: string;
-  /** 有效期(单位：天)，从当前时间开始计算，优先级高于ExpiresAt */
-  Duration?: number;
-  /** 自定义的账户过期时间（时间戳） */
-  ExpiresAt?: number;
-  /** 是否禁用自定义的账户 */
-  Disable?: boolean;
-  /** 策略列表 */
-  Permissions?: Permission[];
-}
-
-declare interface ModifyCustomAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyImmutableTagRulesRequest {
   /** 实例 Id */
   RegistryId: string;
@@ -2757,8 +2693,6 @@ declare interface Tcr {
   CheckInstanceName(data: CheckInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstanceNameResponse>;
   /** 创建应用更新触发器 {@link CreateApplicationTriggerPersonalRequest} {@link CreateApplicationTriggerPersonalResponse} */
   CreateApplicationTriggerPersonal(data: CreateApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationTriggerPersonalResponse>;
-  /** @deprecated 创建自定义账户 {@link CreateCustomAccountRequest} {@link CreateCustomAccountResponse} */
-  CreateCustomAccount(data: CreateCustomAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomAccountResponse>;
   /** 创建镜像加速服务 {@link CreateImageAccelerationServiceRequest} {@link CreateImageAccelerationServiceResponse} */
   CreateImageAccelerationService(data: CreateImageAccelerationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAccelerationServiceResponse>;
   /** 创建镜像不可变规则 {@link CreateImmutableTagRulesRequest} {@link CreateImmutableTagRulesResponse} */
@@ -2801,8 +2735,6 @@ declare interface Tcr {
   CreateWebhookTrigger(data: CreateWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebhookTriggerResponse>;
   /** 删除应用更新触发器 {@link DeleteApplicationTriggerPersonalRequest} {@link DeleteApplicationTriggerPersonalResponse} */
   DeleteApplicationTriggerPersonal(data: DeleteApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationTriggerPersonalResponse>;
-  /** @deprecated 删除自定义账号 {@link DeleteCustomAccountRequest} {@link DeleteCustomAccountResponse} */
-  DeleteCustomAccount(data: DeleteCustomAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomAccountResponse>;
   /** 删除指定镜像 {@link DeleteImageRequest} {@link DeleteImageResponse} */
   DeleteImage(data: DeleteImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageResponse>;
   /** 删除镜像加速服务 {@link DeleteImageAccelerateServiceRequest} {@link DeleteImageAccelerateServiceResponse} */
@@ -2941,8 +2873,6 @@ declare interface Tcr {
   ManageReplication(data: ManageReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ManageReplicationResponse>;
   /** 修改应用更新触发器 {@link ModifyApplicationTriggerPersonalRequest} {@link ModifyApplicationTriggerPersonalResponse} */
   ModifyApplicationTriggerPersonal(data?: ModifyApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationTriggerPersonalResponse>;
-  /** @deprecated 更新自定义账户 {@link ModifyCustomAccountRequest} {@link ModifyCustomAccountResponse} */
-  ModifyCustomAccount(data: ModifyCustomAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomAccountResponse>;
   /** 更新镜像不可变规则 {@link ModifyImmutableTagRulesRequest} {@link ModifyImmutableTagRulesResponse} */
   ModifyImmutableTagRules(data: ModifyImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImmutableTagRulesResponse>;
   /** 更新实例信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */

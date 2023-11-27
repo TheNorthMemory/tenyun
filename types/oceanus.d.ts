@@ -350,6 +350,10 @@ declare interface JobConfig {
   CheckpointRetainedNum?: number | null;
   /** 算子拓扑图 */
   JobGraph?: JobGraph | null;
+  /** es索引 */
+  EsServerlessIndex?: string | null;
+  /** es空间 */
+  EsServerlessSpace?: string | null;
 }
 
 /** 作业运行图 */
@@ -1091,7 +1095,7 @@ declare interface CreateResourceConfigRequest {
 
 declare interface CreateResourceConfigResponse {
   /** 资源版本ID */
-  Version: number;
+  Version?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1115,9 +1119,9 @@ declare interface CreateResourceRequest {
 
 declare interface CreateResourceResponse {
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源版本 */
-  Version: number;
+  Version?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1273,9 +1277,9 @@ declare interface DescribeJobConfigsRequest {
 
 declare interface DescribeJobConfigsResponse {
   /** 总的配置版本数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 作业配置列表 */
-  JobConfigSet: JobConfig[];
+  JobConfigSet?: JobConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1327,17 +1331,17 @@ declare interface DescribeJobSubmissionLogRequest {
 
 declare interface DescribeJobSubmissionLogResponse {
   /** 日志搜索的游标，需要搜索更多时透传这个值 */
-  Cursor: string;
+  Cursor?: string;
   /** 是否返回了所有的日志记录 */
-  ListOver: boolean;
+  ListOver?: boolean;
   /** 作业启动的requestId */
-  JobRequestId: string | null;
+  JobRequestId?: string | null;
   /** 该时间段内符合关键字的所有的作业实例列表 */
-  JobInstanceList: JobInstanceForSubmissionLog[] | null;
+  JobInstanceList?: JobInstanceForSubmissionLog[] | null;
   /** 废弃，请使用LogContentList */
-  LogList: string[] | null;
+  LogList?: string[] | null;
   /** 日志列表 */
-  LogContentList: LogContent[] | null;
+  LogContentList?: LogContent[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1383,9 +1387,9 @@ declare interface DescribeResourceConfigsRequest {
 
 declare interface DescribeResourceConfigsResponse {
   /** 资源配置描述数组 */
-  ResourceConfigSet: ResourceConfigItem[];
+  ResourceConfigSet?: ResourceConfigItem[];
   /** 资源配置数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1429,9 +1433,9 @@ declare interface DescribeResourcesRequest {
 
 declare interface DescribeResourcesResponse {
   /** 资源详细信息集合 */
-  ResourceSet: ResourceItem[];
+  ResourceSet?: ResourceItem[];
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1665,13 +1669,13 @@ declare interface TriggerJobSavepointRequest {
 
 declare interface TriggerJobSavepointResponse {
   /** 是否成功 */
-  SavepointTrigger: boolean;
+  SavepointTrigger?: boolean;
   /** 错误消息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 快照路径 */
-  FinalSavepointPath: string | null;
+  FinalSavepointPath?: string | null;
   /** 快照 ID */
-  SavepointId: string | null;
+  SavepointId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

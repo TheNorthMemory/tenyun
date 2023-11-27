@@ -2514,6 +2514,32 @@ declare interface DescribeBatchTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBillingResourceGroupRequest {
+  /** 资源组id, 取值为创建资源组接口(CreateBillingResourceGroup)响应中的ResourceGroupId */
+  ResourceGroupId: string;
+  /** 过滤条件注意: 1. Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)2. Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询3. 每次请求的Filters的上限为10，Filter.Values的上限为100 */
+  Filters?: Filter[];
+  /** 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10....即每页左边为闭区间; 默认0 */
+  Offset?: number;
+  /** 分页查询每页大小，最大30; 默认20 */
+  Limit?: number;
+  /** 排序方向; 枚举值: ASC | DESC；默认DESC */
+  Order?: string;
+  /** 排序字段; 枚举值: CreateTime (创建时间) ｜ ExpireTime (到期时间)；默认CreateTime */
+  OrderField?: string;
+}
+
+declare interface DescribeBillingResourceGroupResponse {
+  /** 资源组节点总数； 注意接口是分页拉取的，total是指资源组节点总数，不是本次返回中InstanceSet数组的大小 */
+  TotalCount?: number | null;
+  /** 资源组节点信息 */
+  InstanceSet?: Instance[] | null;
+  /** 资源组纳管类型 */
+  ResourceGroupSWType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBillingResourceGroupsRequest {
   /** 资源组类型; 枚举值 TRAIN:训练 INFERENCE:推理 */
   Type: string;
@@ -4215,6 +4241,8 @@ declare interface Tione {
   DescribeBatchTaskInstances(data: DescribeBatchTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskInstancesResponse>;
   /** 跑批任务列表 {@link DescribeBatchTasksRequest} {@link DescribeBatchTasksResponse} */
   DescribeBatchTasks(data?: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
+  /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
+  DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
   /** 查询资源组详情 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
   DescribeBillingResourceGroups(data: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */

@@ -27,16 +27,16 @@ declare interface DescribeTtsTaskStatusRespData {
 /** 时间戳信息。 */
 declare interface Subtitle {
   /** ⽂本信息。 */
-  Text: string;
+  Text?: string;
   /** ⽂本对应tts语⾳开始时间戳，单位ms。 */
-  BeginTime: number;
+  BeginTime?: number;
   /** ⽂本对应tts语⾳结束时间戳，单位ms。 */
-  EndTime: number;
-  /** 该字在整句中的开始位置，从0开始。 */
-  BeginIndex: number;
-  /** 该字在整句中的结束位置，从0开始。 */
-  EndIndex: number;
-  /** 该字的音素 */
+  EndTime?: number;
+  /** 该文本在时间戳数组中的开始位置，从0开始。 */
+  BeginIndex?: number;
+  /** 该文本在时间戳数组中的结束位置，从0开始。 */
+  EndIndex?: number;
+  /** 该字的音素。 */
   Phoneme?: string | null;
 }
 
@@ -47,7 +47,7 @@ declare interface CreateTtsTaskRequest {
   ModelType: number;
   /** 音量大小，范围：[0，10]，分别对应11个等级的音量，默认为0，代表正常音量。没有静音选项。 */
   Volume?: number;
-  /** 语速，范围：[-2，2]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5 1.1 1.8等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
+  /** 语速，范围：[-2，2]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
   Speed?: number;
   /** 项目id，用户自定义，默认为0。 */
   ProjectId?: number;
@@ -97,7 +97,7 @@ declare interface TextToVoiceRequest {
   SessionId: string;
   /** 音量大小，范围[0，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。 */
   Volume?: number;
-  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5 1.1 1.8等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
+  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
   Speed?: number;
   /** 项目id，用户自定义，默认为0。 */
   ProjectId?: number;

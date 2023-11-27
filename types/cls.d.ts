@@ -1562,6 +1562,26 @@ declare interface CreateDataTransformResponse {
   RequestId?: string;
 }
 
+declare interface CreateDeliverCloudFunctionRequest {
+  /** 投递规则属于的 topic id */
+  TopicId: string;
+  /** 投递的云函数名字 */
+  FunctionName: string;
+  /** 命名空间 */
+  Namespace: string;
+  /** 函数版本 */
+  Qualifier: string;
+  /** 投递最长等待时间，单位：秒 */
+  Timeout?: number;
+  /** 投递最大消息数 */
+  MaxMsgNum?: number;
+}
+
+declare interface CreateDeliverCloudFunctionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExportRequest {
   /** 日志主题ID */
   TopicId: string;
@@ -3117,6 +3137,8 @@ declare interface Cls {
   CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
   /** 创建数据加工任务 {@link CreateDataTransformRequest} {@link CreateDataTransformResponse} */
   CreateDataTransform(data: CreateDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataTransformResponse>;
+  /** 创建投递SCF任务 {@link CreateDeliverCloudFunctionRequest} {@link CreateDeliverCloudFunctionResponse} */
+  CreateDeliverCloudFunction(data: CreateDeliverCloudFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeliverCloudFunctionResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */

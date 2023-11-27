@@ -221,7 +221,7 @@ declare interface Vrs {
   DescribeVRSTaskStatus(data: DescribeVRSTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVRSTaskStatusResponse>;
   /** 环境检测和音频质量检测 {@link DetectEnvAndSoundQualityRequest} {@link DetectEnvAndSoundQualityResponse} */
   DetectEnvAndSoundQuality(data: DetectEnvAndSoundQualityRequest, config?: AxiosRequestConfig): AxiosPromise<DetectEnvAndSoundQualityResponse>;
-  /** 下载声音复刻离线模型 {@link DownloadVRSModelRequest} {@link DownloadVRSModelResponse} */
+  /** 下载声音复刻离线模型（暂未开放） {@link DownloadVRSModelRequest} {@link DownloadVRSModelResponse} */
   DownloadVRSModel(data: DownloadVRSModelRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadVRSModelResponse>;
   /** 获取声音复刻训练文本 {@link GetTrainingTextRequest} {@link GetTrainingTextResponse} */
   GetTrainingText(data?: GetTrainingTextRequest, config?: AxiosRequestConfig): AxiosPromise<GetTrainingTextResponse>;
