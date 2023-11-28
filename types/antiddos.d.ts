@@ -1675,6 +1675,8 @@ declare interface DescribeBasicDeviceStatusRequest {
   IdList?: string[];
   /** 地域名称 */
   FilterRegion?: number;
+  /** cnameWaf资源 */
+  CnameWafIdList?: string[];
 }
 
 declare interface DescribeBasicDeviceStatusResponse {
@@ -1682,6 +1684,8 @@ declare interface DescribeBasicDeviceStatusResponse {
   Data?: KeyValue[];
   /** 域名化资产的名称 */
   CLBData?: KeyValue[] | null;
+  /** cnamewaf资源状态 */
+  CnameWafData?: KeyValue[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

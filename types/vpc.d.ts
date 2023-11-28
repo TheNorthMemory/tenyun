@@ -711,57 +711,61 @@ declare interface DirectConnectSubnet {
 /** 终端节点详情。 */
 declare interface EndPoint {
   /** 终端节点ID。 */
-  EndPointId: string;
+  EndPointId?: string;
   /** VPCID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 子网ID。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** APPID。 */
-  EndPointOwner: string;
+  EndPointOwner?: string;
   /** 终端节点名称。 */
-  EndPointName: string;
+  EndPointName?: string;
   /** 终端节点服务的VPCID。 */
-  ServiceVpcId: string;
+  ServiceVpcId?: string;
   /** 终端节点服务的VIP。 */
-  ServiceVip: string;
+  ServiceVip?: string;
   /** 终端节点服务的ID。 */
-  EndPointServiceId: string;
+  EndPointServiceId?: string;
   /** 终端节点的VIP。 */
-  EndPointVip: string;
+  EndPointVip?: string;
   /** 终端节点状态，ACTIVE：可用，PENDING：待接受，ACCEPTING：接受中，REJECTED：已拒绝，FAILED：失败。 */
-  State: string;
+  State?: string;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 终端节点绑定的安全组实例ID列表。 */
-  GroupSet: string[];
+  GroupSet?: string[];
   /** 终端节点服务名称。 */
-  ServiceName: string | null;
+  ServiceName?: string | null;
 }
 
 /** 终端节点服务对象。 */
 declare interface EndPointService {
   /** 终端节点服务ID */
-  EndPointServiceId: string;
+  EndPointServiceId?: string;
   /** VPCID。 */
-  VpcId: string;
+  VpcId?: string;
   /** APPID。 */
-  ServiceOwner: string;
+  ServiceOwner?: string;
   /** 终端节点服务名称。 */
-  ServiceName: string;
+  ServiceName?: string;
   /** 后端服务的VIP。 */
-  ServiceVip: string;
+  ServiceVip?: string;
   /** 后端服务的ID，比如lb-xxx。 */
-  ServiceInstanceId: string;
+  ServiceInstanceId?: string;
   /** 是否自动接受。 */
-  AutoAcceptFlag: boolean;
+  AutoAcceptFlag?: boolean;
   /** 关联的终端节点个数。 */
-  EndPointCount: number | null;
+  EndPointCount?: number | null;
   /** 终端节点对象数组。 */
-  EndPointSet: EndPoint[] | null;
+  EndPointSet?: EndPoint[] | null;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 挂载的PAAS服务类型，CLB,CDB,CRS */
-  ServiceType: string;
+  ServiceType?: string;
+  /** Uin */
+  ServiceUin?: string | null;
+  /** 服务IP类型 */
+  BusinessIpType?: number | null;
 }
 
 /** 过滤器 */
@@ -5435,7 +5439,7 @@ declare interface DescribeVpcEndPointServiceRequest {
   Limit?: number;
   /** 终端节点服务ID。不支持同时传入参数 EndPointServiceIds and Filters。 */
   EndPointServiceIds?: string[];
-  /** 不支持同时传入参数 Filters 。 列出授权给当前账号的的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，那些终端节点服务授权了该账户。 */
+  /** 不支持同时传入参数 Filters 。 列出授权给当前账号的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，那些终端节点服务授权了该账户。 */
   IsListAuthorizedEndPointService?: boolean;
 }
 

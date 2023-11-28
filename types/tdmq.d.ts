@@ -1785,8 +1785,8 @@ declare interface CreateEnvironmentRoleResponse {
 }
 
 declare interface CreateProClusterRequest {
-  /** 多可用区部署选择三个可用区，示例"200002","200003","200004"单可用区部署选择一个可用区，示例"200002" */
-  ZoneIds: string;
+  /** 多可用区部署选择三个可用区，示例[200002,200003,200004]单可用区部署选择一个可用区，示例[200002] */
+  ZoneIds: number[];
   /** 集群规格代号参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
   ProductName: string;
   /** 存储规格参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
@@ -2142,6 +2142,18 @@ declare interface DeleteEnvironmentsRequest {
 declare interface DeleteEnvironmentsResponse {
   /** 成功删除的环境（命名空间）数组。 */
   EnvironmentIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProClusterRequest {
+  /** 集群Id */
+  ClusterId: string;
+}
+
+declare interface DeleteProClusterResponse {
+  /** 退还实例订单号 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4269,6 +4281,8 @@ declare interface Tdmq {
   DeleteEnvironmentRoles(data: DeleteEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentRolesResponse>;
   /** 删除命名空间 {@link DeleteEnvironmentsRequest} {@link DeleteEnvironmentsResponse} */
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
+  /** 删除专业集群实例 {@link DeleteProClusterRequest} {@link DeleteProClusterResponse} */
+  DeleteProCluster(data: DeleteProClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClusterResponse>;
   /** @deprecated 删除专业集群 {@link DeleteProClustersRequest} {@link DeleteProClustersResponse} */
   DeleteProClusters(data: DeleteProClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClustersResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */

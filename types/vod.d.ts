@@ -1896,6 +1896,8 @@ declare interface DomainDetailInfo {
 declare interface DomainHTTPSConfig {
   /** 证书过期时间。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   CertExpireTime: string;
+  /** 腾讯云 SSL 产品中的证书 ID。 */
+  CloudCertId?: string;
 }
 
 /** 域名 QUIC 配置信息 */
@@ -2718,7 +2720,7 @@ declare interface MediaBasicInfo {
   Vid?: string;
   /** 文件类型：Video: 视频文件Audio: 音频文件Image: 图片文件 */
   Category?: string;
-  /** 文件状态：Normal：正常，Forbidden：封禁。*注意：此字段暂不支持。 */
+  /** 文件状态：Normal：正常，Forbidden：封禁。 */
   Status?: string;
   /** 媒体文件的存储类别： STANDARD：标准存储。 STANDARD_IA：低频存储。 ARCHIVE：归档存储。 DEEP_ARCHIVE：深度归档存储。 */
   StorageClass?: string;

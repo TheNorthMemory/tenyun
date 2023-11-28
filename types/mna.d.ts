@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 激活设备 */
+declare interface ActivateHardware {
+  /** 厂商名称 */
+  Vendor: string | null;
+  /** 设备SN序列号 */
+  SN: string;
+  /** 设备名称 */
+  DeviceName: string | null;
+  /** 备注 */
+  Description?: string | null;
+  /** 设备密钥 */
+  DataKey?: string;
+}
+
 /** 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间 */
 declare interface Capacity {
   /** 电信鉴权的Token。要加速的电信手机终端访问 http://qos.189.cn/qos-api/getToken?appid=TencentCloud 页面，获取返回结果中result的值 */
@@ -124,6 +138,40 @@ declare interface FlowDetails {
   TotalValue?: number | null;
 }
 
+/** 新建Hardware入参 */
+declare interface Hardware {
+  /** 硬件序列号 */
+  SN: string | null;
+  /** license计费模式：1，租户月付费2，厂商月付费3，license永久授权 */
+  LicenseChargingMode: number | null;
+  /** 设备描述 */
+  Description?: string | null;
+  /** 硬件ID，入参无需传递 */
+  HardwareId?: string | null;
+}
+
+/** 硬件信息 */
+declare interface HardwareInfo {
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 设备名称 */
+  DeviceName?: string | null;
+  /** 激活时间 */
+  ActiveTime?: string | null;
+  /** 最后在线时间 */
+  LastOnlineTime?: string | null;
+  /** 备注 */
+  Description?: string | null;
+  /** 厂商备注 */
+  VendorDescription?: string | null;
+  /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权 */
+  LicenseChargingMode?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 硬件序列号 */
+  SN?: string | null;
+}
+
 /** 流量监控指标 */
 declare interface MonitorData {
   /** 时间点：s */
@@ -188,6 +236,40 @@ declare interface UpdateNetInfo {
   NetInfoName?: string;
 }
 
+/** 厂商硬件详细信息 */
+declare interface VendorHardware {
+  /** 硬件id */
+  HardwareId?: string | null;
+  /** 硬件序列号 */
+  SN?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 激活状态， 空：全部； 1:待激活； 2:已激活 */
+  Status?: number | null;
+  /** 激活时间 */
+  ActiveTime?: string | null;
+  /** 厂商备注 */
+  Description?: string | null;
+  /** 设备id */
+  DeviceId?: string | null;
+  /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权 */
+  LicenseChargingMode?: number | null;
+  /** 最后在线时间 */
+  LastOnlineTime?: string | null;
+}
+
+declare interface ActivateHardwareRequest {
+  /** 待激活的设备列表 */
+  Hardware: ActivateHardware[];
+}
+
+declare interface ActivateHardwareResponse {
+  /** 完成激活的设备信息 */
+  HardwareInfo?: ActivateHardware[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddDeviceRequest {
   /** 新建设备的名称 */
   DeviceName: string;
@@ -206,6 +288,18 @@ declare interface AddDeviceResponse {
   DeviceId: string;
   /** 签名字符串 */
   Signature: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddHardwareRequest {
+  /** 硬件列表 */
+  Hardware: Hardware[];
+}
+
+declare interface AddHardwareResponse {
+  /** 硬件设备 */
+  Hardware?: Hardware[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -356,6 +450,26 @@ declare interface GetFlowStatisticResponse {
   RequestId?: string;
 }
 
+declare interface GetHardwareListRequest {
+  /** 页码 */
+  PageNumber: number;
+  /** 页面设备数量 */
+  PageSize: number;
+  /** 关键字 */
+  Keyword?: string;
+}
+
+declare interface GetHardwareListResponse {
+  /** 硬件信息列表 */
+  HardwareInfos?: HardwareInfo[];
+  /** 硬件总数 */
+  Length?: number;
+  /** 总页数 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetMultiFlowStatisticRequest {
   /** 设备id列表，单次最多请求10个设备 */
   DeviceIds: string[];
@@ -422,6 +536,28 @@ declare interface GetStatisticDataResponse {
   RequestId?: string;
 }
 
+declare interface GetVendorHardwareRequest {
+  /** 页码 */
+  PageNumber: number;
+  /** 页面数量 */
+  PageSize: number;
+  /** 关键字 */
+  Keyword?: string;
+  /** 激活状态，空：全部；1:待激活；2:已激活； */
+  Status?: number;
+}
+
+declare interface GetVendorHardwareResponse {
+  /** 硬件信息列表 */
+  VendorHardware?: VendorHardware[];
+  /** 设备总数 */
+  Length?: number;
+  /** 总页数 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDeviceRequest {
   /** 设备id */
   DeviceId: string;
@@ -438,11 +574,29 @@ declare interface UpdateDeviceResponse {
   RequestId?: string;
 }
 
+declare interface UpdateHardwareRequest {
+  /** 硬件ID */
+  HardwareId: string;
+  /** 硬件序列号 */
+  SN?: string;
+  /** 设备备注 */
+  Description?: string;
+}
+
+declare interface UpdateHardwareResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Mna 多网聚合加速} */
 declare interface Mna {
   (): Versions;
+  /** 批量激活硬件设备 {@link ActivateHardwareRequest} {@link ActivateHardwareResponse} */
+  ActivateHardware(data: ActivateHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateHardwareResponse>;
   /** 新建设备 {@link AddDeviceRequest} {@link AddDeviceResponse} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
+  /** 添加硬件设备 {@link AddHardwareRequest} {@link AddHardwareResponse} */
+  AddHardware(data: AddHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<AddHardwareResponse>;
   /** 设置或更新密钥 {@link CreateEncryptedKeyRequest} {@link CreateEncryptedKeyResponse} */
   CreateEncryptedKey(data?: CreateEncryptedKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptedKeyResponse>;
   /** 发起Qos加速过程 {@link CreateQosRequest} {@link CreateQosResponse} */
@@ -459,6 +613,8 @@ declare interface Mna {
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
   /** 获取数据流量统计数据 {@link GetFlowStatisticRequest} {@link GetFlowStatisticResponse} */
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
+  /** 租户获取厂商硬件列表 {@link GetHardwareListRequest} {@link GetHardwareListResponse} */
+  GetHardwareList(data: GetHardwareListRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareListResponse>;
   /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
   GetMultiFlowStatistic(data: GetMultiFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetMultiFlowStatisticResponse>;
   /** 获取流量监控信息 {@link GetNetMonitorRequest} {@link GetNetMonitorResponse} */
@@ -467,8 +623,12 @@ declare interface Mna {
   GetPublicKey(data?: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
   /** 下载用量统计数据 {@link GetStatisticDataRequest} {@link GetStatisticDataResponse} */
   GetStatisticData(data: GetStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataResponse>;
+  /** 获取厂商硬件设备列表 {@link GetVendorHardwareRequest} {@link GetVendorHardwareResponse} */
+  GetVendorHardware(data: GetVendorHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<GetVendorHardwareResponse>;
   /** 更新设备 {@link UpdateDeviceRequest} {@link UpdateDeviceResponse} */
   UpdateDevice(data: UpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceResponse>;
+  /** 更新硬件信息 {@link UpdateHardwareRequest} {@link UpdateHardwareResponse} */
+  UpdateHardware(data: UpdateHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateHardwareResponse>;
 }
 
 export declare type Versions = ["2021-01-19"];

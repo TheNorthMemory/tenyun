@@ -13739,7 +13739,7 @@ declare interface ModifyLogKafkaAccessResponse {
 declare interface ModifyLogKafkaDeliverTypeRequest {
   /** 安全模块类型 1: 入侵检测 2: 漏洞管理 3: 基线管理 4: 高级防御 5:客户端相关 6: 资产指纹 */
   SecurityType: number;
-  /** 安全模块下的日志类型，http://tapd.woa.com/Teneyes/markdown_wikis/show/#1210131751002328905 */
+  /** 安全模块下的日志类型， */
   LogType: number[];
   /** 投递开关 0关闭 1开启 */
   Switch: number;
