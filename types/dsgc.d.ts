@@ -1852,7 +1852,7 @@ declare interface CopyDSPATemplateRequest {
 }
 
 declare interface CopyDSPATemplateResponse {
-  /** 模版id */
+  /** 模板id */
   TemplateId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1905,7 +1905,7 @@ declare interface CreateDSPAAssessmentRiskLevelRequest {
   DspaId: string;
   /** 风险等级名称 */
   RiskLevelName: string;
-  /** 识别模版 */
+  /** 识别模板 */
   IdentifyComplianceId: number;
   /** 风险等级矩阵 */
   RiskLevelRule: RiskLevelMatrix[];
@@ -1941,7 +1941,7 @@ declare interface CreateDSPAAssessmentTaskRequest {
   DspaId: string;
   /** 评估任务名称。1-20个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字 */
   Name: string;
-  /** 评估模版Id，格式“template-xxxxxxxx” */
+  /** 评估模板Id，格式“template-xxxxxxxx” */
   TemplateId: string;
   /** 评估业务名称。1-60个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字 */
   BusinessName?: string;
@@ -1949,7 +1949,7 @@ declare interface CreateDSPAAssessmentTaskRequest {
   BusinessDept?: string;
   /** 业务负责人。1-60个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字 */
   BusinessOwner?: string;
-  /** 分类分级模版Id */
+  /** 分类分级模板Id */
   ComplianceId?: number;
   /** 敏感数据扫描数据源条件。 */
   DiscoveryCondition?: DiscoveryCondition;
@@ -2527,7 +2527,7 @@ declare interface DescribeClassificationRuleCountResponse {
 declare interface DescribeDSPAAssessmentHighRiskTop10OverviewRequest {
   /** dspa实例Id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
   /** 过滤条件， rdb（数据库）cos（对象存储）不传就是全部 */
   Filter?: string;
@@ -2543,7 +2543,7 @@ declare interface DescribeDSPAAssessmentHighRiskTop10OverviewResponse {
 declare interface DescribeDSPAAssessmentLatestRiskDetailInfoRequest {
   /** dspa实例Id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
   /** 风险id */
   RiskId: number;
@@ -2556,9 +2556,9 @@ declare interface DescribeDSPAAssessmentLatestRiskDetailInfoResponse {
   DataSourceName?: string | null;
   /** 资产对象名称 */
   AssetName?: string | null;
-  /** 风险评估模版id */
+  /** 风险评估模板id */
   AssessmentTemplateId?: number | null;
-  /** 分类分级的模版id */
+  /** 分类分级的模板id */
   IdentifyTemplateId?: number | null;
   /** 风险类型 */
   RiskType?: string | null;
@@ -2595,7 +2595,7 @@ declare interface DescribeDSPAAssessmentLatestRiskDetailInfoResponse {
 declare interface DescribeDSPAAssessmentLatestRiskListRequest {
   /** dspa实例Id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
   /** 限制条数 */
   Limit?: number;
@@ -2633,7 +2633,7 @@ declare interface DescribeDSPAAssessmentLatestRiskListResponse {
 declare interface DescribeDSPAAssessmentNewDiscoveredRiskOverviewRequest {
   /** dspa实例id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
 }
 
@@ -2651,7 +2651,7 @@ declare interface DescribeDSPAAssessmentNewDiscoveredRiskOverviewResponse {
 declare interface DescribeDSPAAssessmentPendingRiskOverviewRequest {
   /** dspa实例id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
 }
 
@@ -2669,7 +2669,7 @@ declare interface DescribeDSPAAssessmentPendingRiskOverviewResponse {
 declare interface DescribeDSPAAssessmentProcessingRiskOverviewRequest {
   /** dspa实例id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
 }
 
@@ -2687,7 +2687,7 @@ declare interface DescribeDSPAAssessmentProcessingRiskOverviewResponse {
 declare interface DescribeDSPAAssessmentRiskAmountOverviewRequest {
   /** dspa实例id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
 }
 
@@ -2737,7 +2737,7 @@ declare interface DescribeDSPAAssessmentRiskDealedTrendRequest {
   StartTime: string;
   /** 结束日期 */
   EndTime: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId?: string;
 }
 
@@ -2751,7 +2751,7 @@ declare interface DescribeDSPAAssessmentRiskDealedTrendResponse {
 declare interface DescribeDSPAAssessmentRiskDistributionOverviewRequest {
   /** dspa实例Id */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
   /** 风险资产分布的过滤条件（rdb，cos，不传就筛选全部） */
   Filter?: string;
@@ -2794,7 +2794,7 @@ declare interface DescribeDSPAAssessmentRiskLevelDetailResponse {
   RiskLevelDescription?: string | null;
   /** 分类分级id */
   IdentifyComplianceId?: number | null;
-  /** 分类分级模版名称 */
+  /** 分类分级模板名称 */
   IdentifyComplianceName?: string;
   /** 风险数据 */
   RiskLevelMatrix?: RiskLevelMatrix[] | null;
@@ -2827,7 +2827,7 @@ declare interface DescribeDSPAAssessmentRiskLevelTrendRequest {
   StartTime: string;
   /** 结束时日期 */
   EndTime: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId?: string;
 }
 
@@ -2873,7 +2873,7 @@ declare interface DescribeDSPAAssessmentRiskProcessHistoryResponse {
 declare interface DescribeDSPAAssessmentRiskSideDistributedRequest {
   /** DSPA实例ID */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
 }
 
@@ -2887,7 +2887,7 @@ declare interface DescribeDSPAAssessmentRiskSideDistributedResponse {
 declare interface DescribeDSPAAssessmentRiskSideListRequest {
   /** DSPA实例ID */
   DspaId: string;
-  /** 评估模版id */
+  /** 评估模板id */
   TemplateId: number;
 }
 
@@ -2901,7 +2901,7 @@ declare interface DescribeDSPAAssessmentRiskSideListResponse {
 declare interface DescribeDSPAAssessmentRiskTemplateDetailRequest {
   /** dspa实例id */
   DspaId: string;
-  /** 模版id */
+  /** 模板id */
   TemplateId: number;
   /** 限制条数 */
   Limit: number;
@@ -2910,11 +2910,11 @@ declare interface DescribeDSPAAssessmentRiskTemplateDetailRequest {
 }
 
 declare interface DescribeDSPAAssessmentRiskTemplateDetailResponse {
-  /** 模版id */
+  /** 模板id */
   TemplateId?: number;
-  /** 模版名称 */
+  /** 模板名称 */
   TemplateName?: string;
-  /** 模版的描述 */
+  /** 模板的描述 */
   TemplateDescription?: string | null;
   /** 风险等级 */
   RiskLevelId?: number;
@@ -2999,7 +2999,7 @@ declare interface DescribeDSPAAssessmentTasksResponse {
 declare interface DescribeDSPAAssessmentTemplateControlItemsRequest {
   /** DSPA实例Id。格式“dspa-xxxxxxxx” */
   DspaId: string;
-  /** 评估模版Id。格式“template-xxxxxxxx” */
+  /** 评估模板Id。格式“template-xxxxxxxx” */
   TemplateId: string;
   /** 偏移量。默认为0 */
   Offset?: number;
@@ -3011,9 +3011,9 @@ declare interface DescribeDSPAAssessmentTemplateControlItemsRequest {
 
 declare interface DescribeDSPAAssessmentTemplateControlItemsResponse {
   /** 符合条件的评估项数目 */
-  TotalCount: number;
-  /** 模版关联的评估项列表 */
-  Items: AssessmentControlItem[];
+  TotalCount?: number;
+  /** 模板关联的评估项列表 */
+  Items?: AssessmentControlItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3031,9 +3031,9 @@ declare interface DescribeDSPAAssessmentTemplatesRequest {
 
 declare interface DescribeDSPAAssessmentTemplatesResponse {
   /** 符合条件的模板数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 模板列表。 */
-  Items: AssessmentTemplate[];
+  Items?: AssessmentTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3938,7 +3938,7 @@ declare interface GetUserQuotaInfoResponse {
   DbRemainQuota?: number;
   /** 用户可用的COS存储量配额。 */
   CosRemainQuota?: number;
-  /** COS存储量单位，比如TB。 */
+  /** COS存储量单位，例如TB。 */
   CosQuotaUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4087,11 +4087,11 @@ declare interface ModifyDSPAAssessmentRiskResponse {
 declare interface ModifyDSPAAssessmentRiskTemplateRequest {
   /** dspa实例id */
   DspaId: string;
-  /** 模版名称 */
+  /** 模板名称 */
   TemplateName: string;
-  /** 模版的描述 */
+  /** 模板的描述 */
   TemplateDescription: string;
-  /** 模版id */
+  /** 模板id */
   TemplateId: number;
   /** 修改的风险等级id */
   RiskLevelId: number;
@@ -4531,7 +4531,7 @@ declare interface Dsgc {
   BindDSPAResourceCosBuckets(data: BindDSPAResourceCosBucketsRequest, config?: AxiosRequestConfig): AxiosPromise<BindDSPAResourceCosBucketsResponse>;
   /** 绑定或解绑数据库实例DB {@link BindDSPAResourceDatabasesRequest} {@link BindDSPAResourceDatabasesResponse} */
   BindDSPAResourceDatabases(data: BindDSPAResourceDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<BindDSPAResourceDatabasesResponse>;
-  /** 复制合规组模版 {@link CopyDSPATemplateRequest} {@link CopyDSPATemplateResponse} */
+  /** 复制合规组模板 {@link CopyDSPATemplateRequest} {@link CopyDSPATemplateResponse} */
   CopyDSPATemplate(data: CopyDSPATemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CopyDSPATemplateResponse>;
   /** 创建资产梳理报表导出重试任务 {@link CreateAssetSortingReportRetryTaskRequest} {@link CreateAssetSortingReportRetryTaskResponse} */
   CreateAssetSortingReportRetryTask(data: CreateAssetSortingReportRetryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetSortingReportRetryTaskResponse>;
@@ -4541,7 +4541,7 @@ declare interface Dsgc {
   CreateClassificationRule(data?: CreateClassificationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassificationRuleResponse>;
   /** 创建风险等级 {@link CreateDSPAAssessmentRiskLevelRequest} {@link CreateDSPAAssessmentRiskLevelResponse} */
   CreateDSPAAssessmentRiskLevel(data: CreateDSPAAssessmentRiskLevelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDSPAAssessmentRiskLevelResponse>;
-  /** 创建评估模版 {@link CreateDSPAAssessmentRiskTemplateRequest} {@link CreateDSPAAssessmentRiskTemplateResponse} */
+  /** 创建评估模板 {@link CreateDSPAAssessmentRiskTemplateRequest} {@link CreateDSPAAssessmentRiskTemplateResponse} */
   CreateDSPAAssessmentRiskTemplate(data: CreateDSPAAssessmentRiskTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDSPAAssessmentRiskTemplateResponse>;
   /** 新建DSPA评估任务 {@link CreateDSPAAssessmentTaskRequest} {@link CreateDSPAAssessmentTaskResponse} */
   CreateDSPAAssessmentTask(data: CreateDSPAAssessmentTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDSPAAssessmentTaskResponse>;
@@ -4641,15 +4641,15 @@ declare interface Dsgc {
   DescribeDSPAAssessmentRiskSideDistributed(data: DescribeDSPAAssessmentRiskSideDistributedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskSideDistributedResponse>;
   /** 查询风险评估风险面的列表 {@link DescribeDSPAAssessmentRiskSideListRequest} {@link DescribeDSPAAssessmentRiskSideListResponse} */
   DescribeDSPAAssessmentRiskSideList(data: DescribeDSPAAssessmentRiskSideListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskSideListResponse>;
-  /** 查看评估模版详情 {@link DescribeDSPAAssessmentRiskTemplateDetailRequest} {@link DescribeDSPAAssessmentRiskTemplateDetailResponse} */
+  /** 查看评估模板详情 {@link DescribeDSPAAssessmentRiskTemplateDetailRequest} {@link DescribeDSPAAssessmentRiskTemplateDetailResponse} */
   DescribeDSPAAssessmentRiskTemplateDetail(data: DescribeDSPAAssessmentRiskTemplateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskTemplateDetailResponse>;
-  /** 查询风险模版中的脆弱项配置 {@link DescribeDSPAAssessmentRiskTemplateVulnerableListRequest} {@link DescribeDSPAAssessmentRiskTemplateVulnerableListResponse} */
+  /** 查询风险中的脆弱项配置 {@link DescribeDSPAAssessmentRiskTemplateVulnerableListRequest} {@link DescribeDSPAAssessmentRiskTemplateVulnerableListResponse} */
   DescribeDSPAAssessmentRiskTemplateVulnerableList(data: DescribeDSPAAssessmentRiskTemplateVulnerableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRiskTemplateVulnerableListResponse>;
   /** 获取DSPA评估风险项列表 {@link DescribeDSPAAssessmentRisksRequest} {@link DescribeDSPAAssessmentRisksResponse} */
   DescribeDSPAAssessmentRisks(data: DescribeDSPAAssessmentRisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentRisksResponse>;
   /** 获取DSPA评估任务列表 {@link DescribeDSPAAssessmentTasksRequest} {@link DescribeDSPAAssessmentTasksResponse} */
   DescribeDSPAAssessmentTasks(data: DescribeDSPAAssessmentTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentTasksResponse>;
-  /** 获取DSPA评估模版关联控制项列表 {@link DescribeDSPAAssessmentTemplateControlItemsRequest} {@link DescribeDSPAAssessmentTemplateControlItemsResponse} */
+  /** 获取DSPA评估模板关联控制项列表 {@link DescribeDSPAAssessmentTemplateControlItemsRequest} {@link DescribeDSPAAssessmentTemplateControlItemsResponse} */
   DescribeDSPAAssessmentTemplateControlItems(data: DescribeDSPAAssessmentTemplateControlItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentTemplateControlItemsResponse>;
   /** 获取DSPA评估模板列表 {@link DescribeDSPAAssessmentTemplatesRequest} {@link DescribeDSPAAssessmentTemplatesResponse} */
   DescribeDSPAAssessmentTemplates(data: DescribeDSPAAssessmentTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentTemplatesResponse>;
@@ -4771,7 +4771,7 @@ declare interface Dsgc {
   ModifyDSPAAssessmentRiskLatest(data: ModifyDSPAAssessmentRiskLatestRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDSPAAssessmentRiskLatestResponse>;
   /** 修改风险等级的详情数据 {@link ModifyDSPAAssessmentRiskLevelRequest} {@link ModifyDSPAAssessmentRiskLevelResponse} */
   ModifyDSPAAssessmentRiskLevel(data: ModifyDSPAAssessmentRiskLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDSPAAssessmentRiskLevelResponse>;
-  /** 修改风险模版页面 {@link ModifyDSPAAssessmentRiskTemplateRequest} {@link ModifyDSPAAssessmentRiskTemplateResponse} */
+  /** 修改风险模板页面 {@link ModifyDSPAAssessmentRiskTemplateRequest} {@link ModifyDSPAAssessmentRiskTemplateResponse} */
   ModifyDSPAAssessmentRiskTemplate(data: ModifyDSPAAssessmentRiskTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDSPAAssessmentRiskTemplateResponse>;
   /** 修改COS分类分级任务信息 {@link ModifyDSPACOSDiscoveryTaskRequest} {@link ModifyDSPACOSDiscoveryTaskResponse} */
   ModifyDSPACOSDiscoveryTask(data: ModifyDSPACOSDiscoveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDSPACOSDiscoveryTaskResponse>;

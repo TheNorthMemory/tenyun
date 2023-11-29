@@ -3779,7 +3779,7 @@ declare interface RunInstancesRequest {
   HostName?: string;
   /** 用于保证请求幂等性的字符串。目前为保留参数，请勿使用。 */
   ClientToken?: string;
-  /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务 */
+  /** 增强服务。通过该参数可以指定是否开启云安全、腾讯云可观测平台等服务。若不指定该参数，则默认公共镜像开启腾讯云可观测平台、云安全服务 */
   EnhancedService?: EnhancedService;
   /** 标签列表 */
   TagSpecification?: TagSpecification[];

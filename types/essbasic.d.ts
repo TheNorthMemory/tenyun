@@ -2224,6 +2224,20 @@ declare interface DescribeChannelFlowEvidenceReportResponse {
   RequestId?: string;
 }
 
+declare interface DescribeChannelSealPolicyWorkflowUrlRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 用印审批单的ID，可通过用印申请回调获取。 */
+  WorkflowInstanceId: string;
+}
+
+declare interface DescribeChannelSealPolicyWorkflowUrlResponse {
+  /** 用印审批小程序链接，链接类型（通过H5唤起小程序方式查看），一年内有效。 */
+  WorkflowUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExtendedServiceAuthInfoRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
   Agent: Agent;
@@ -4135,6 +4149,8 @@ declare interface Essbasic {
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
+  /** 生成渠道子客用印申请审批链接 {@link DescribeChannelSealPolicyWorkflowUrlRequest} {@link DescribeChannelSealPolicyWorkflowUrlResponse} */
+  DescribeChannelSealPolicyWorkflowUrl(data: DescribeChannelSealPolicyWorkflowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelSealPolicyWorkflowUrlResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfoRequest} {@link DescribeExtendedServiceAuthInfoResponse} */
   DescribeExtendedServiceAuthInfo(data: DescribeExtendedServiceAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfoResponse>;
   /** 获取合同信息 {@link DescribeFlowDetailInfoRequest} {@link DescribeFlowDetailInfoResponse} */

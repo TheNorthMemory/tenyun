@@ -74,6 +74,8 @@ declare interface Address {
   Egress?: string | null;
   /** 高防包ID,当EIP类型为高防EIP时，返回EIP绑定的高防包ID. */
   AntiDDoSPackageId?: string;
+  /** 当前EIP是否自动续费，只有按月带宽预付费的EIP才会显示该字段，具体值示例如下:NOTIFY_AND_MANUAL_RENEW:正常续费NOTIFY_AND_AUTO_RENEW:自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW:到期不续费 */
+  RenewFlag?: string;
 }
 
 /** 用于描述弹性公网IP的费用对象 */

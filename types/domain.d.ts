@@ -799,7 +799,7 @@ declare interface UploadImageRequest {
 
 declare interface UploadImageResponse {
   /** 资质照片地址。 */
-  AccessUrl: string;
+  AccessUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

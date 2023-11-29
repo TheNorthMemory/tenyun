@@ -422,6 +422,14 @@ declare interface TRTCParams {
   PrivateMapKey?: string | null;
 }
 
+/** 缩略图信息 */
+declare interface ThumbnailURLInfoList {
+  /** 缩略图访问地址 */
+  ThumbnailURL?: string | null;
+  /** 缩略图访问地址的过期时间 */
+  ExpireTime?: number | null;
+}
+
 /** 批次元数据 */
 declare interface VideoBatch {
   /** 批次ID */
@@ -1262,6 +1270,22 @@ declare interface DescribeCloudStorageStreamDataResponse {
   VideoStream: string;
   /** 图片流音频地址 */
   AudioStream: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageThumbnailListRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 缩略图文件名列表 */
+  ThumbnailList: string[];
+}
+
+declare interface DescribeCloudStorageThumbnailListResponse {
+  /** 缩略图访问地址 */
+  ThumbnailURLInfoList?: ThumbnailURLInfoList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5787,6 +5811,8 @@ declare interface Iotvideo {
   DescribeCloudStorageStreamData(data: DescribeCloudStorageStreamDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageStreamDataResponse>;
   /** 拉取云存事件缩略图 {@link DescribeCloudStorageThumbnailRequest} {@link DescribeCloudStorageThumbnailResponse} */
   DescribeCloudStorageThumbnail(data: DescribeCloudStorageThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageThumbnailResponse>;
+  /** 批量拉取云存事件缩略图 {@link DescribeCloudStorageThumbnailListRequest} {@link DescribeCloudStorageThumbnailListResponse} */
+  DescribeCloudStorageThumbnailList(data: DescribeCloudStorageThumbnailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageThumbnailListResponse>;
   /** 获取某一天云存时间轴 {@link DescribeCloudStorageTimeRequest} {@link DescribeCloudStorageTimeResponse} */
   DescribeCloudStorageTime(data: DescribeCloudStorageTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageTimeResponse>;
   /** 拉取云存用户列表 {@link DescribeCloudStorageUsersRequest} {@link DescribeCloudStorageUsersResponse} */

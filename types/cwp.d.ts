@@ -9475,9 +9475,9 @@ declare interface DescribeLogExportsRequest {
 
 declare interface DescribeLogExportsResponse {
   /** 总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志导出列表 */
-  Exports: ExportInfo[];
+  Exports?: ExportInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1011,9 +1011,9 @@ declare interface DescribeMixTranscodingUsageRequest {
 
 declare interface DescribeMixTranscodingUsageResponse {
   /** 用量类型，与UsageValue中各个位置的值对应。 */
-  UsageKey: string[];
+  UsageKey?: string[];
   /** 各个时间点用量明细。 */
-  UsageList: TrtcUsage[];
+  UsageList?: TrtcUsage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1067,9 +1067,9 @@ declare interface DescribeRecordingUsageRequest {
 
 declare interface DescribeRecordingUsageResponse {
   /** 用量类型，与UsageValue中各个位置的值对应。 */
-  UsageKey: string[];
+  UsageKey?: string[];
   /** 各个时间点用量明细。 */
-  UsageList: TrtcUsage[];
+  UsageList?: TrtcUsage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1085,9 +1085,9 @@ declare interface DescribeRelayUsageRequest {
 
 declare interface DescribeRelayUsageResponse {
   /** 用量类型，与UsageValue中各个位置的值对应。 */
-  UsageKey: string[];
+  UsageKey?: string[];
   /** 各个时间点用量明细。 */
-  UsageList: TrtcUsage[];
+  UsageList?: TrtcUsage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1335,9 +1335,9 @@ declare interface DescribeTrtcUsageRequest {
 
 declare interface DescribeTrtcUsageResponse {
   /** 用量类型，与UsageValue中各个位置的值对应。 */
-  UsageKey: string[];
+  UsageKey?: string[];
   /** 各个时间点用量明细。 */
-  UsageList: TrtcUsage[];
+  UsageList?: TrtcUsage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2670,6 +2670,10 @@ declare interface RunTimeEventBaseInfo {
   NodeUniqueID?: string;
   /** uuid */
   HostID?: string;
+  /** Namespace */
+  Namespace?: string;
+  /** WorkloadType */
+  WorkloadType?: string;
 }
 
 /** 容器安全描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -3197,75 +3201,75 @@ declare interface VulDefenceEvent {
 /** 漏洞防御事件详情 */
 declare interface VulDefenceEventDetail {
   /** 漏洞CVEID */
-  CVEID: string;
+  CVEID?: string;
   /** 漏洞名称 */
-  VulName: string;
+  VulName?: string;
   /** 漏洞PocID */
-  PocID: string;
+  PocID?: string;
   /** 入侵状态 */
-  EventType: string;
+  EventType?: string;
   /** 攻击源IP */
-  SourceIP: string;
+  SourceIP?: string;
   /** 攻击源ip地址所在城市 */
-  City: string;
+  City?: string;
   /** 事件数量 */
-  EventCount: number;
+  EventCount?: number;
   /** 容器ID */
-  ContainerID: string;
+  ContainerID?: string;
   /** 容器名称 */
-  ContainerName: string;
+  ContainerName?: string;
   /** 镜像ID */
-  ImageID: string;
+  ImageID?: string;
   /** 镜像名称 */
-  ImageName: string;
+  ImageName?: string;
   /** 处理状态 */
-  Status: string;
+  Status?: string;
   /** 攻击源端口 */
-  SourcePort: string[];
+  SourcePort?: string[];
   /** 事件ID */
-  EventID: number;
+  EventID?: number;
   /** 主机名称/超级节点名称 */
-  HostName: string;
+  HostName?: string;
   /** 主机内网IP */
-  HostIP: string;
+  HostIP?: string;
   /** 主机外网IP */
-  PublicIP: string;
+  PublicIP?: string;
   /** Pod名称 */
-  PodName: string;
+  PodName?: string;
   /** 危害描述 */
-  Description: string;
+  Description?: string;
   /** 修复建议 */
-  OfficialSolution: string;
+  OfficialSolution?: string;
   /** 攻击包 */
-  NetworkPayload: string;
+  NetworkPayload?: string;
   /** 进程PID */
-  PID: number | null;
+  PID?: number | null;
   /** 进程主类名 */
-  MainClass: string | null;
+  MainClass?: string | null;
   /** 堆栈信息 */
-  StackTrace: string | null;
+  StackTrace?: string | null;
   /** 监听账号 */
-  ServerAccount: string | null;
+  ServerAccount?: string | null;
   /** 监听端口 */
-  ServerPort: string | null;
+  ServerPort?: string | null;
   /** 进程路径 */
-  ServerExe: string | null;
+  ServerExe?: string | null;
   /** 进程命令行参数 */
-  ServerArg: string | null;
+  ServerArg?: string | null;
   /** 主机QUUID/超级节点ID */
-  QUUID: string | null;
+  QUUID?: string | null;
   /** 隔离状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败	ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
-  ContainerNetStatus: string | null;
+  ContainerNetStatus?: string | null;
   /** 容器子状态"AGENT_OFFLINE" //Agent离线	"NODE_DESTROYED" //节点已销毁	"CONTAINER_EXITED" //容器已退出	"CONTAINER_DESTROYED" //容器已销毁	"SHARED_HOST" // 容器与主机共享网络	"RESOURCE_LIMIT" //隔离操作资源超限	"UNKNOW" // 原因未知 */
-  ContainerNetSubStatus: string | null;
+  ContainerNetSubStatus?: string | null;
   /** 容器隔离操作来源 */
-  ContainerIsolateOperationSrc: string | null;
+  ContainerIsolateOperationSrc?: string | null;
   /** 容器状态正在运行: RUNNING暂停: PAUSED停止: STOPPED已经创建: CREATED已经销毁: DESTROYED正在重启中: RESTARTING迁移中: REMOVING */
-  ContainerStatus: string | null;
+  ContainerStatus?: string | null;
   /** 接口Url */
-  JNDIUrl: string | null;
+  JNDIUrl?: string | null;
   /** rasp detail */
-  RaspDetail: RaspInfo[] | null;
+  RaspDetail?: RaspInfo[] | null;
   /** 超级节点子网名称 */
   NodeSubNetName?: string;
   /** 超级节点子网网段 */
@@ -3284,6 +3288,10 @@ declare interface VulDefenceEventDetail {
   ClusterID?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** Namespace */
+  Namespace?: string;
+  /** 工作负载 */
+  WorkloadType?: string;
 }
 
 /** 漏洞防御攻击事件趋势 */
@@ -6313,7 +6321,11 @@ declare interface DescribeAssetSyncLastTimeRequest {
 
 declare interface DescribeAssetSyncLastTimeResponse {
   /** 资产最近同步时间 */
-  AssetSyncLastTime: string;
+  AssetSyncLastTime?: string;
+  /** 任务状态PENDING:待处理PROCESSING:处理中PROCESSED:已完成 */
+  TaskStatus?: string;
+  /** 任务进度(百分比) */
+  TaskProcess?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7902,6 +7914,10 @@ declare interface DescribeRiskDnsEventDetailResponse {
   NodeID?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** Namespace */
+  Namespace?: string;
+  /** 工作负载类型 */
+  WorkloadType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8662,6 +8678,10 @@ declare interface DescribeVirusDetailResponse {
   NodeID?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** Namespace */
+  Namespace?: string;
+  /** 工作负载类型 */
+  WorkloadType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

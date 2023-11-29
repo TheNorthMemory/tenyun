@@ -4181,7 +4181,7 @@ declare interface UpsertCCRuleResponse {
 }
 
 declare interface UpsertIpAccessControlRequest {
-  /** 域名 */
+  /** 具体域名如：test.qcloudwaf.com全局域名为：global */
   Domain: string;
   /** ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
   Items: string[];

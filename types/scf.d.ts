@@ -277,6 +277,12 @@ declare interface InstanceConcurrencyConfig {
 }
 
 /** 内网配置 */
+declare interface IntranetConfigIn {
+  /** 是否开启固定内网IPENABLE 为开启DISABLE 为不开启 */
+  IpFixed: string;
+}
+
+/** 内网配置 */
 declare interface IntranetConfigOut {
   /** 是否启用固定内网IPENABLE 为启用DISABLE 为不启用 */
   IpFixed?: string;
@@ -823,6 +829,10 @@ declare interface CreateFunctionRequest {
   ProtocolParams?: ProtocolParams;
   /** 单实例多并发配置。只支持Web函数。 */
   InstanceConcurrencyConfig?: InstanceConcurrencyConfig;
+  /** 是否开启Dns缓存能力。只支持EVENT函数。默认为FALSE，TRUE 为开启，FALSE为关闭 */
+  DnsCache?: string;
+  /** 内网访问配置 */
+  IntranetConfig?: IntranetConfigIn;
 }
 
 declare interface CreateFunctionResponse {
