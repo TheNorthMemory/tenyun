@@ -292,6 +292,100 @@ declare interface DutyPaidProofInfo {
   Rect: Rect;
 }
 
+/** 电子发票（机票行程单） */
+declare interface ElectronicFlightTicketFull {
+  /** 旅客姓名 */
+  UserName?: string;
+  /** 有效身份证件号码 */
+  UserID?: string;
+  /** 签注 */
+  Endorsement?: string;
+  /** GP单号 */
+  GPOrder?: string;
+  /** 发票号码 */
+  Number?: string;
+  /** 票价 */
+  Fare?: string;
+  /** 燃油附加费 */
+  FuelSurcharge?: string;
+  /** 增值税税率 */
+  TaxRate?: string;
+  /** 增值税税额 */
+  Tax?: string;
+  /** 民航发展基金 */
+  DevelopmentFund?: string;
+  /** 其他税费 */
+  OtherTax?: string;
+  /** 合计 */
+  Total?: string;
+  /** 电子客票号码 */
+  ElectronicTicketNum?: string;
+  /** 验证码 */
+  VerificationCode?: string;
+  /** 提示信息 */
+  PromptInformation?: string;
+  /** 保险费 */
+  Insurance?: string;
+  /** 填开单位 */
+  Issuer?: string;
+  /** 填开时间 */
+  Date?: string;
+  /** 国内国际标识 */
+  DomesticInternationalTag?: string;
+  /** 购买方名称 */
+  Buyer?: string;
+  /** 销售方名称 */
+  Seller?: string;
+  /** 统一社会信用代码 */
+  BuyerTaxID?: string;
+  /** 机票详细信息元组 */
+  FlightItems?: FlightItemInfo[];
+}
+
+/** 电子发票（火车票） */
+declare interface ElectronicTrainTicketFull {
+  /** 电子发票类型 */
+  TypeOfVoucher?: string;
+  /** 电子客票号 */
+  ElectronicTicketNum?: string;
+  /** 开票日期 */
+  Date?: string;
+  /** 始发站 */
+  StationGetOn?: string;
+  /** 到达站 */
+  StationGetOff?: string;
+  /** 火车号 */
+  TrainNumber?: string;
+  /** 乘车日期 */
+  DateGetOn?: string;
+  /** 始发时间 */
+  TimeGetOn?: string;
+  /** 座位类型 */
+  Seat?: string;
+  /** 座位号 */
+  SeatNumber?: string;
+  /** 票价 */
+  Fare?: string;
+  /** 发票号码 */
+  Number?: string;
+  /** 身份证号 */
+  UserID?: string;
+  /** 乘车人姓名 */
+  UserName?: string;
+  /** 金额 */
+  Total?: string;
+  /** 税率 */
+  TaxRate?: string;
+  /** 税额 */
+  Tax?: string;
+  /** 购买方名称 */
+  Buyer?: string;
+  /** 统一社会信用代码 */
+  BuyerTaxID?: string;
+  /** 原发票号码 */
+  OriginalNumber?: string;
+}
+
 /** 企业证照单个字段的内容 */
 declare interface EnterpriseLicenseInfo {
   /** 识别出的字段名称（关键字），不同证件类型可能不同，证件类型包含企业登记证书、许可证书、企业执照、三证合一类证书；支持以下字段：统一社会信用代码、法定代表人、公司名称、公司地址、注册资金、企业类型、经营范围、成立日期、有效期、开办资金、经费来源、举办单位等； */
@@ -350,6 +444,28 @@ declare interface FlightItem {
   Allow?: string;
   /** 客票级别/客票类别 */
   FareBasis?: string;
+}
+
+/** 机票详细信息元组 */
+declare interface FlightItemInfo {
+  /** 出发站 */
+  TerminalGetOn?: string;
+  /** 到达站 */
+  TerminalGetOff?: string;
+  /** 承运人 */
+  Carrier?: string;
+  /** 航班号 */
+  FlightNumber?: string;
+  /** 座位等级 */
+  Seat?: string;
+  /** 乘机日期 */
+  DateGetOn?: string;
+  /** 乘机时间 */
+  TimeGetOn?: string;
+  /** 客票级别/客票类别 */
+  FareBasis?: string;
+  /** 免费行李额 */
+  Allow?: string;
 }
 
 /** 通用机打发票条目 */
@@ -1152,6 +1268,10 @@ declare interface SingleInvoiceItem {
   MedicalHospitalizedInvoice?: MedicalInvoice | null;
   /** 增值税销货清单 */
   VatSalesList?: VatInvoiceInfo | null;
+  /** 电子发票（火车票） */
+  ElectronicTrainTicketFull?: ElectronicTrainTicketFull | null;
+  /** 电子发票（机票行程单） */
+  ElectronicFlightTicketFull?: ElectronicFlightTicketFull | null;
 }
 
 /** 智慧表单上传文件信息 */

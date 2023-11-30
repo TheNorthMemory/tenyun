@@ -556,6 +556,18 @@ declare interface BatchOperationOpsDto {
   TotalCount: number | null;
 }
 
+/** 批量操作结果，带失败原因 */
+declare interface BatchOpsDTO {
+  /** 总数量 */
+  TotalCount?: number | null;
+  /** 成功数量 */
+  SuccessCount?: number | null;
+  /** 失败数量 */
+  FailCount?: number | null;
+  /** 失败原因 */
+  FailMessageList?: FailMessage[] | null;
+}
+
 /** 批量操作结果 */
 declare interface BatchResult {
   /** 正在运行的任务数 */
@@ -1382,6 +1394,22 @@ declare interface EventCaseConsumeLogOptDtoCollection {
   Items?: EventCaseConsumeLogOptDto[] | null;
 }
 
+/** 事件实例信息 */
+declare interface EventCaseDTO {
+  /** 事件实例id */
+  CaseId?: string;
+  /** 事件名 */
+  Name?: string;
+  /** 事件格式 */
+  Dimension?: string;
+  /** 创建时间 */
+  CreationTs?: string;
+  /** 消费者id */
+  ConsumerId?: string;
+  /** 描述信息 */
+  Description?: string;
+}
+
 /** EventCaseOpsDto */
 declare interface EventCaseOpsDto {
   /** 案例ID */
@@ -1504,6 +1532,14 @@ declare interface ExportTaskInfo {
   SchedulerCurRunDate?: string | null;
   /** 文件相对路径 */
   FilePath?: string | null;
+}
+
+/** 错误处理结果信息 */
+declare interface FailMessage {
+  /** 数据唯一标识 */
+  Key?: string | null;
+  /** 失败原因 */
+  ErrorMessage?: string | null;
 }
 
 /** 字段变量 */
@@ -11285,7 +11321,7 @@ declare interface ModifyApproveStatusRequest {
 
 declare interface ModifyApproveStatusResponse {
   /** 修改审批单状态 */
-  Data: ApproveModify[];
+  Data?: ApproveModify[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12515,6 +12551,20 @@ declare interface TaskLogResponse {
   RequestId?: string;
 }
 
+declare interface TriggerDsEventRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 事件实例信息 */
+  EventCaseList: EventCaseDTO[];
+}
+
+declare interface TriggerDsEventResponse {
+  /** 操作结果 */
+  Data?: BatchOpsDTO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TriggerEventRequest {
   /** 项目Id */
   ProjectId: string;
@@ -13212,6 +13262,8 @@ declare interface Wedata {
   SuspendIntegrationTask(data: SuspendIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendIntegrationTaskResponse>;
   /** 管控日志接口 {@link TaskLogRequest} {@link TaskLogResponse} */
   TaskLog(data: TaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<TaskLogResponse>;
+  /** 触发事件 {@link TriggerDsEventRequest} {@link TriggerDsEventResponse} */
+  TriggerDsEvent(data: TriggerDsEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerDsEventResponse>;
   /** 触发事件【Beta版本】 {@link TriggerEventRequest} {@link TriggerEventResponse} */
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
   /** 解锁集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */

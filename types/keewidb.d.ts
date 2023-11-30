@@ -670,8 +670,12 @@ declare interface DescribeConnectionConfigResponse {
   InNetLimit?: number;
   /** 单分片出流量带宽限制，单位：MB。 */
   OutNetLimit?: number;
-  /** 单分片连接数限制。 */
+  /** 实例当前单分片连接数限制。 */
   ClientLimit?: number;
+  /** 单分片连接数限制最小值。 */
+  ClientLimitMin?: number | null;
+  /** 单分片连接数限制最大值。 */
+  ClientLimitMax?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1191,13 +1195,15 @@ declare interface ModifyNetworkConfigRequest {
 
 declare interface ModifyNetworkConfigResponse {
   /** 执行状态。true：执行成功。false：执行失败。 */
-  Status: boolean;
+  Status?: boolean;
   /** 修改后的子网 ID。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 修改后的私有网络 ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 修改后的 VIP 地址。 */
-  Vip: string;
+  Vip?: string;
+  /** 任务ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

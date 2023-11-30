@@ -3671,7 +3671,7 @@ declare interface Teo {
   (): Versions;
   /** 绑定或解绑安全策略模板 {@link BindSecurityTemplateToEntityRequest} {@link BindSecurityTemplateToEntityResponse} */
   BindSecurityTemplateToEntity(data: BindSecurityTemplateToEntityRequest, config?: AxiosRequestConfig): AxiosPromise<BindSecurityTemplateToEntityResponse>;
-  /** 绑定共享CNAME {@link BindSharedCNAMERequest} {@link BindSharedCNAMEResponse} */
+  /** 绑定共享 CNAME {@link BindSharedCNAMERequest} {@link BindSharedCNAMEResponse} */
   BindSharedCNAME(data: BindSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<BindSharedCNAMEResponse>;
   /** 为站点绑定套餐 {@link BindZoneToPlanRequest} {@link BindZoneToPlanResponse} */
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
@@ -3717,7 +3717,7 @@ declare interface Teo {
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
   /** 删除安全 IP 组 {@link DeleteSecurityIPGroupRequest} {@link DeleteSecurityIPGroupResponse} */
   DeleteSecurityIPGroup(data: DeleteSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityIPGroupResponse>;
-  /** 删除共享CNAME {@link DeleteSharedCNAMERequest} {@link DeleteSharedCNAMEResponse} */
+  /** 删除共享 CNAME {@link DeleteSharedCNAMERequest} {@link DeleteSharedCNAMEResponse} */
   DeleteSharedCNAME(data: DeleteSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSharedCNAMEResponse>;
   /** 删除站点 {@link DeleteZoneRequest} {@link DeleteZoneResponse} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;

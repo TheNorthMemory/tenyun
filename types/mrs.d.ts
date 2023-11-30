@@ -1147,21 +1147,23 @@ declare interface HistologyTypeV2 {
 /** 出入院信息 */
 declare interface Hospitalization {
   /** 入院时间 */
-  AdmissionTime: string | null;
+  AdmissionTime?: string | null;
   /** 出院时间 */
-  DischargeTime: string | null;
+  DischargeTime?: string | null;
   /** 住院天数 */
-  AdmissionDays: string | null;
+  AdmissionDays?: string | null;
   /** 入院诊断 */
-  AdmissionDignosis: string | null;
+  AdmissionDignosis?: string | null;
   /** 入院情况 */
-  AdmissionCondition: string | null;
+  AdmissionCondition?: string | null;
   /** 诊疗经过 */
-  DiagnosisTreatment: string | null;
+  DiagnosisTreatment?: string | null;
   /** 出院诊断 */
-  DischargeDiagnosis: string | null;
+  DischargeDiagnosis?: string | null;
   /** 出院医嘱 */
-  DischargeInstruction: string | null;
+  DischargeInstruction?: string | null;
+  /** 入院诊断 */
+  AdmissionDiagnosis?: string | null;
 }
 
 /** IHC块 */
@@ -1294,6 +1296,8 @@ declare interface IndicatorV3 {
   TableIndictors?: TableIndicators[] | null;
   /** 版本号 */
   Version?: string | null;
+  /** 检验报告V3结论 */
+  TableIndicators?: TableIndicators[] | null;
 }
 
 /** 体检报告-内科-腹部 */
@@ -3025,59 +3029,61 @@ declare interface TransfusionHistoryBlock {
 /** 病历 */
 declare interface TreatmentRecord {
   /** 入院 */
-  DmissionCondition: string | null;
+  DmissionCondition?: string | null;
   /** 主诉 */
-  ChiefComplaint: string | null;
+  ChiefComplaint?: string | null;
   /** 现病史 */
-  DiseasePresent: string | null;
+  DiseasePresent?: string | null;
   /** 主要症状体征 */
-  SymptomsAndSigns: string | null;
+  SymptomsAndSigns?: string | null;
   /** 辅助检查 */
-  AuxiliaryExamination: string | null;
+  AuxiliaryExamination?: string | null;
   /** 体格检查 */
-  BodyExamination: string | null;
+  BodyExamination?: string | null;
   /** 专科检查 */
-  SpecialistExamination: string | null;
+  SpecialistExamination?: string | null;
   /** 精神检查 */
-  MentalExamination: string | null;
+  MentalExamination?: string | null;
   /** 检查记录 */
-  CheckRecord: string | null;
+  CheckRecord?: string | null;
   /** 化验结果 */
-  InspectResult: string | null;
+  InspectResult?: string | null;
   /** 切口愈合情况 */
-  IncisionHealing: string | null;
+  IncisionHealing?: string | null;
   /** 处理意见 */
-  TreatmentSuggestion: string | null;
+  TreatmentSuggestion?: string | null;
   /** 门诊随访要求 */
-  FollowUpRequirements: string | null;
+  FollowUpRequirements?: string | null;
   /** 诊疗经过 */
-  CheckAndTreatmentProcess: string | null;
+  CheckAndTreatmentProcess?: string | null;
   /** 手术经过 */
-  SurgeryCondition: string | null;
+  SurgeryCondition?: string | null;
   /** 入院情况 */
-  ConditionChanges: string | null;
+  ConditionChanges?: string | null;
   /** 出院情况 */
-  DischargeCondition: string | null;
+  DischargeCondition?: string | null;
   /** pTNM信息 */
-  PTNM: string | null;
+  PTNM?: string | null;
   /** pTNMM信息 */
-  PTNMM: string | null;
+  PTNMM?: string | null;
   /** pTNMN信息 */
-  PTNMN: string | null;
+  PTNMN?: string | null;
   /** pTNMT信息 */
-  PTNMT: string | null;
+  PTNMT?: string | null;
   /** ECOG信息 */
-  ECOG: string | null;
+  ECOG?: string | null;
   /** NRS信息 */
-  NRS: string | null;
+  NRS?: string | null;
   /** KPS信息 */
-  KPS: string | null;
+  KPS?: string | null;
   /** 死亡日期 */
-  DeathDate: string | null;
+  DeathDate?: string | null;
   /** 复发日期 */
-  RelapseDate: string | null;
+  RelapseDate?: string | null;
   /** 观测天数 */
-  ObservationDays: string | null;
+  ObservationDays?: string | null;
+  /** 入院 */
+  AdmissionCondition?: string | null;
 }
 
 /** 治疗记录 */

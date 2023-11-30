@@ -1866,6 +1866,24 @@ declare interface AlterDMSTableResponse {
   RequestId?: string;
 }
 
+declare interface AssignMangedTablePropertiesRequest {
+  /** 表基本信息 */
+  TableBaseInfo: TableBaseInfo;
+  /** 表字段信息 */
+  Columns: TColumn[];
+  /** 表分区信息 */
+  Partitions?: TPartition[];
+  /** 表属性信息 */
+  Properties?: Property[];
+  /** V2 upsert表 upsert键 */
+  UpsertKeys?: string[];
+}
+
+declare interface AssignMangedTablePropertiesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AttachUserPolicyRequest {
   /** 用户Id，和子用户uin相同，需要先使用CreateUser接口创建用户。可以使用DescribeUsers接口查看。 */
   UserId: string;
@@ -4163,6 +4181,8 @@ declare interface Dlc {
   AlterDMSPartition(data: AlterDMSPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSPartitionResponse>;
   /** DMS元数据更新表 {@link AlterDMSTableRequest} {@link AlterDMSTableResponse} */
   AlterDMSTable(data: AlterDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSTableResponse>;
+  /** 分配原生表表属性 {@link AssignMangedTablePropertiesRequest} {@link AssignMangedTablePropertiesResponse} */
+  AssignMangedTableProperties(data: AssignMangedTablePropertiesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignMangedTablePropertiesResponse>;
   /** 绑定鉴权策略到用户 {@link AttachUserPolicyRequest} {@link AttachUserPolicyResponse} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
   /** 绑定鉴权策略到工作组 {@link AttachWorkGroupPolicyRequest} {@link AttachWorkGroupPolicyResponse} */

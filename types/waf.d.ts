@@ -1829,7 +1829,7 @@ declare interface AddSpartaProtectionRequest {
   ActiveCheck?: number;
   /** TLS版本信息 */
   TLSVersion?: number;
-  /** 加密套件模板。0：不支持选择，使用默认模版 1：通用型模版 2：安全型模版 3：自定义模版 */
+  /** 加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
   CipherTemplate?: number;
   /** 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。 */
   Ciphers?: number[];

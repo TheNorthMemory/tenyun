@@ -600,7 +600,7 @@ declare interface CreateDocumentRequest {
   DocumentName: string;
   /** 文档所有者的Id */
   Owner: string;
-  /** 转码类型，可以有如下取值：0 无需转码（默认）1 需要转码的文档，ppt，pptx，pdf，doc，docx2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等2 需要转码的音频，mp3，wav，wma，aac，flac，opus */
+  /** 转码类型，可以有如下取值：0 无需转码（默认），bmp，jpg，jpeg，png，gif1 需要转码的文档，ppt，pptx，pdf，doc，docx，xls，xlsx2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等2 需要转码的音频，mp3，wav，wma，aac，flac，opus */
   TranscodeType?: number;
   /** 权限，可以有如下取值：0 私有文档（默认）1 公共文档 */
   Permission?: number;

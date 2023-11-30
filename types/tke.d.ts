@@ -2302,6 +2302,36 @@ declare interface SuperNodeResource {
   Gpu?: number | null;
 }
 
+/** 集群日志开关集合 */
+declare interface Switch {
+  /** 集群ID */
+  ClusterId: string;
+  /** 审计开关的详细信息 */
+  Audit: SwitchInfo | null;
+  /** 事件开关的详细信息 */
+  Event: SwitchInfo | null;
+  /** 普通日志的详细信息 */
+  Log: SwitchInfo | null;
+  /** master 日志详细信息 */
+  MasterLog?: SwitchInfo | null;
+}
+
+/** 日志开关详细信息 */
+declare interface SwitchInfo {
+  /** 开启标识符 true代表开启 */
+  Enable?: boolean | null;
+  /** CLS日志集ID */
+  LogsetId?: string | null;
+  /** CLS日志主题ID */
+  TopicId?: string | null;
+  /** 当前log-agent版本 */
+  Version?: string | null;
+  /** 是否可升级 */
+  UpgradeAble?: boolean | null;
+  /** CLS日志主题所属region */
+  TopicRegion?: string | null;
+}
+
 /** 标签绑定的资源类型，当前支持类型："cluster" */
 declare interface Tag {
   /** 标签键 */
@@ -4552,6 +4582,20 @@ declare interface DescribeImagesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLogSwitchesRequest {
+  /** 集群ID列表 */
+  ClusterIds: string[];
+  /** 集群类型，tke 或eks */
+  ClusterType?: string;
+}
+
+declare interface DescribeLogSwitchesResponse {
+  /** 集群日志开关集合 */
+  SwitchSet?: Switch[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePodDeductionRateRequest {
   /** 可用区 */
   Zone?: string;
@@ -6463,6 +6507,8 @@ declare interface Tke {
   DescribeImageCaches(data?: DescribeImageCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageCachesResponse>;
   /** 获取镜像信息 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */
   DescribeImages(data?: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
+  /** 查询集群日志开关列表 {@link DescribeLogSwitchesRequest} {@link DescribeLogSwitchesResponse} */
+  DescribeLogSwitches(data: DescribeLogSwitchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSwitchesResponse>;
   /** 查询Pod 抵扣率 {@link DescribePodDeductionRateRequest} {@link DescribePodDeductionRateResponse} */
   DescribePodDeductionRate(data?: DescribePodDeductionRateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePodDeductionRateResponse>;
   /** 根据规格查询 Pod 信息 {@link DescribePodsBySpecRequest} {@link DescribePodsBySpecResponse} */

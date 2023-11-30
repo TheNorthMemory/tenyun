@@ -2229,10 +2229,12 @@ declare interface DescribeChannelSealPolicyWorkflowUrlRequest {
   Agent: Agent;
   /** 用印审批单的ID，可通过用印申请回调获取。 */
   WorkflowInstanceId: string;
+  /** 生成链接的类型：生成链接的类型**LongLink**：(默认)长链接，H5跳转到电子签小程序链接，链接有效期为1年**ShortLink**：H5跳转到电子签小程序链接，一般用于发送短信中带的链接，打开后进入腾讯电子签小程序，链接有效期为7天**App**：第三方APP或小程序跳转电子签小程序链接，一般用于贵方小程序或者APP跳转过来，打开后进入腾讯电子签小程序，链接有效期为1年 */
+  Endpoint?: string;
 }
 
 declare interface DescribeChannelSealPolicyWorkflowUrlResponse {
-  /** 用印审批小程序链接，链接类型（通过H5唤起小程序方式查看），一年内有效。 */
+  /** 用印审批小程序链接，链接类型（通过H5唤起小程序或通过APP跳转方式查看）。 */
   WorkflowUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

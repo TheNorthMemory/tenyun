@@ -212,6 +212,14 @@ declare interface Certificates {
   AwaitingValidationMsg?: string | null;
   /** 是否允许下载 */
   AllowDownload?: boolean | null;
+  /** 证书域名是否全部在DNSPOD托管解析 */
+  IsDNSPODResolve?: boolean | null;
+  /** 是否是权益点购买的证书 */
+  IsPackage?: boolean | null;
+  /** 是否存在私钥密码 */
+  KeyPasswordCustomFlag?: boolean | null;
+  /** 支持下载的WEB服务器类型： nginx、apache、iis、tomcat、jks、root、other */
+  SupportDownloadType?: SupportDownloadType | null;
 }
 
 /** clb实例详情 */
@@ -700,6 +708,24 @@ declare interface SubmittedData {
   VerifyType?: string | null;
 }
 
+/** 支持下载的类型 */
+declare interface SupportDownloadType {
+  /** 是否可以下载nginx可用格式 */
+  NGINX?: boolean;
+  /** 是否可以下载apache可用格式 */
+  APACHE?: boolean;
+  /** 是否可以下载tomcat可用格式 */
+  TOMCAT?: boolean;
+  /** 是否可以下载iis可用格式 */
+  IIS?: boolean;
+  /** 是否可以下载JKS可用格式 */
+  JKS?: boolean;
+  /** 是否可以下载其他格式 */
+  OTHER?: boolean;
+  /** 是否可以下载根证书 */
+  ROOT?: boolean;
+}
+
 /** 异步任务证书关联云资源结果 */
 declare interface SyncTaskBindResourceResult {
   /** 任务ID */
@@ -966,6 +992,28 @@ declare interface UpdateRecordInfo {
   CreateTime: string;
   /** 最后一次更新时间 */
   UpdateTime: string;
+}
+
+/** 更新异步任务进度 */
+declare interface UpdateSyncProgress {
+  /** 资源类型 */
+  ResourceType?: string | null;
+  /** 地域结果列表 */
+  UpdateSyncProgressRegions?: UpdateSyncProgressRegion[] | null;
+  /** 异步更新进度状态：0， 待处理， 1 已处理， 3 处理中 */
+  Status?: number | null;
+}
+
+/** 更新异步任务进度 */
+declare interface UpdateSyncProgressRegion {
+  /** 资源类型 */
+  Region?: string | null;
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 执行完成数量 */
+  OffsetCount?: number | null;
+  /** 异步更新进度状态：0， 待处理， 1 已处理， 3 处理中 */
+  Status?: number | null;
 }
 
 /** vod实例详情 - 异步关联云资源数据结构 */
@@ -2249,29 +2297,29 @@ declare interface SubmitCertificateInformationResponse {
 }
 
 declare interface UpdateCertificateInstanceRequest {
-  /** 一键更新原证书ID */
+  /** 一键更新原证书ID， 查询绑定该证书的云资源然后进行证书更新 */
   OldCertificateId: string;
-  /** 需要部署的资源类型，参数值可选：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb */
+  /** 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse */
   ResourceTypes: string[];
-  /** 一键更新新证书ID */
+  /** 一键更新新证书ID，不传该则证书公钥和私钥必传 */
   CertificateId?: string;
   /** 需要部署的地域列表（废弃） */
   Regions?: string[];
-  /** 云资源需要部署的地域列表 */
+  /** 云资源需要部署的地域列表，支持地域的云资源类型必传，如：clb、tke、apigateway、waf、tcb、tse等 */
   ResourceTypesRegions?: ResourceTypeRegions[];
   /** 证书公钥， 若上传证书公钥， 则CertificateId不用传 */
   CertificatePublicKey?: string;
-  /** 证书私钥，若上传证书公钥， 则证书私钥必填 */
+  /** 证书私钥，若上传证书公钥， 则CertificateId不用传 */
   CertificatePrivateKey?: string;
-  /** 旧证书是否忽略到期提醒 0:不忽略通知。1:忽略通知 */
+  /** 旧证书是否忽略到期提醒 0:不忽略通知。1:忽略通知，忽略OldCertificateId到期提醒 */
   ExpiringNotificationSwitch?: number;
-  /** 相同的证书是否允许重复上传，若上传证书公钥， 则可以配置该参数 */
+  /** 相同的证书是否允许重复上传，若选择上传证书， 则可以配置该参数 */
   Repeatable?: boolean;
-  /** 是否允许下载，若上传证书公钥， 则可以配置该参数 */
+  /** 是否允许下载，若选择上传证书， 则可以配置该参数 */
   AllowDownload?: boolean;
-  /** 标签列表，若上传证书公钥， 则可以配置该参数 */
+  /** 标签列表，若选择上传证书， 则可以配置该参数 */
   Tags?: Tags[];
-  /** 项目 ID，若上传证书公钥， 则可以配置该参数 */
+  /** 项目 ID，若选择上传证书， 则可以配置该参数 */
   ProjectId?: number;
 }
 
@@ -2280,6 +2328,8 @@ declare interface UpdateCertificateInstanceResponse {
   DeployRecordId?: number | null;
   /** 部署状态，1表示部署成功，0表示部署失败 */
   DeployStatus?: number;
+  /** 更新异步创建任务进度详情 */
+  UpdateSyncProgress?: UpdateSyncProgress[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

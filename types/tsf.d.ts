@@ -1797,19 +1797,19 @@ declare interface LaneRule {
 /** 泳道规则标签 */
 declare interface LaneRuleTag {
   /** 标签ID */
-  TagId: string | null;
+  TagId?: string | null;
   /** 标签名 */
-  TagName: string | null;
+  TagName?: string | null;
   /** 标签操作符 */
-  TagOperator: string | null;
+  TagOperator?: string | null;
   /** 标签值 */
-  TagValue: string | null;
+  TagValue?: string | null;
   /** 泳道规则ID */
-  LaneRuleId: string | null;
+  LaneRuleId?: string | null;
   /** 创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 更新时间 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
 }
 
 /** 泳道规则分页查询 */
@@ -2017,35 +2017,35 @@ declare interface MultiValueDataPoints {
 /** 命名空间 */
 declare interface Namespace {
   /** 命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 命名空间编码 */
-  NamespaceCode: string | null;
+  NamespaceCode?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 命名空间描述 */
-  NamespaceDesc: string | null;
+  NamespaceDesc?: string | null;
   /** 默认命名空间 */
-  IsDefault: string | null;
+  IsDefault?: string | null;
   /** 命名空间状态 */
-  NamespaceStatus: string | null;
+  NamespaceStatus?: string | null;
   /** 删除标识 */
-  DeleteFlag: boolean | null;
+  DeleteFlag?: boolean | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 集群数组，仅携带集群ID，集群名称，集群类型等基础信息。 */
-  ClusterList: Cluster[] | null;
+  ClusterList?: Cluster[] | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 集群资源类型 */
-  NamespaceResourceType: string | null;
+  NamespaceResourceType?: string | null;
   /** 命名空间类型 */
-  NamespaceType: string | null;
+  NamespaceType?: string | null;
   /** 是否开启高可用 */
-  IsHaEnable: string | null;
+  IsHaEnable?: string | null;
   /** KubeInjectEnable值 */
-  KubeInjectEnable: boolean | null;
+  KubeInjectEnable?: boolean | null;
 }
 
 /** 提供给前端，控制按钮是否显示 */
@@ -3792,7 +3792,7 @@ declare interface CreateLaneRuleRequest {
 
 declare interface CreateLaneRuleResponse {
   /** 泳道规则Id */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4196,7 +4196,7 @@ declare interface DeleteImageTagsRequest {
 
 declare interface DeleteImageTagsResponse {
   /** 批量删除操作是否成功。true：成功。false：失败。 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4207,7 +4207,7 @@ declare interface DeleteLaneRequest {
 }
 
 declare interface DeleteLaneResponse {
-  /** true / false */
+  /** 删除成功: true / 删除失败: false */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4658,13 +4658,13 @@ declare interface DescribeApplicationsResponse {
 }
 
 declare interface DescribeBasicResourceUsageRequest {
-  /** 是否无视权限查询全租户的，默认 true。注：无论 true 还是 false，PackageSpaceUsed 和 ConsulInstanceCount 都是全租户的 */
+  /** 是否拥有权限查询全租户的，默认 true。注：无论 true 还是 false，PackageSpaceUsed 和 ConsulInstanceCount 都是全租户的 */
   All?: boolean;
 }
 
 declare interface DescribeBasicResourceUsageResponse {
   /** TSF基本资源信息 */
-  Result: OverviewBasicResourceUsage | null;
+  Result?: OverviewBasicResourceUsage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6030,7 +6030,7 @@ declare interface DescribeSimpleNamespacesRequest {
   NamespaceTypeList?: string[];
   /** 通过命名空间名精确过滤 */
   NamespaceName?: string;
-  /** 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认，命名空间。1：非默认命名空间 */
+  /** 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认命名空间。1：非默认命名空间 */
   IsDefault?: string;
   /** 无 */
   DisableProgramAuthCheck?: boolean;
@@ -6038,7 +6038,7 @@ declare interface DescribeSimpleNamespacesRequest {
 
 declare interface DescribeSimpleNamespacesResponse {
   /** 命名空间分页列表 */
-  Result: TsfPageNamespace | null;
+  Result?: TsfPageNamespace | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6461,8 +6461,8 @@ declare interface ModifyApplicationRequest {
 }
 
 declare interface ModifyApplicationResponse {
-  /** true/false */
-  Result: boolean | null;
+  /** true：操作成功false：操作失败 */
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6551,7 +6551,7 @@ declare interface ModifyLaneRequest {
 }
 
 declare interface ModifyLaneResponse {
-  /** 操作状态 */
+  /** 编辑成功: true / 编辑失败: false */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
