@@ -627,7 +627,7 @@ declare interface RunApplicationRequest {
   EnvironmentId: string;
   /** 任务输入JSON。需要进行base64编码。 */
   InputBase64: string;
-  /** 任务缓存清理时间。不填表示不清理。 */
+  /** 任务缓存清理时间（小时）。不填表示不清理。 */
   CacheClearDelay: number;
   /** 运行选项。 */
   Option: RunOption;
@@ -667,7 +667,7 @@ declare interface RunWorkflowRequest {
   InputBase64?: string;
   /** 任务输入COS地址。（InputBase64和InputCosUri必选其一） */
   InputCosUri?: string;
-  /** 任务缓存清理时间。不填表示不清理。 */
+  /** 任务缓存清理时间（小时）。不填表示不清理。 */
   CacheClearDelay?: number;
 }
 

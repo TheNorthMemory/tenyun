@@ -326,6 +326,8 @@ declare interface CreateFlowOption {
   CustomCreateFlowDescription?: string;
   /** 禁止编辑填写控件**true**：禁止编辑填写控件**false**：（默认）允许编辑填写控件 */
   ForbidEditFillComponent?: boolean;
+  /** 跳过上传文件步骤**true**：跳过**false**：（默认）不跳过，需要传ResourceId */
+  SkipUploadFile?: string;
 }
 
 /** 第三方应用集成员工部门信息 */
@@ -1237,6 +1239,8 @@ declare interface ChannelCreateEmbedWebUrlRequest {
   HiddenComponents?: boolean;
   /** 渠道操作者信息 */
   Operator?: UserInfo;
+  /** 用户自定义参数目前仅支持EmbedType=CREATE_TEMPLATE时传入指定后，创建，编辑，删除模版时，回调都会携带该userData支持的格式：json字符串的BASE64编码字符串示例： json字符串：{"ComeFrom":"xxx"}，BASE64编码：eyJDb21lRnJvbSI6Inh4eCJ9 eyJDb21lRnJvbSI6Inh4eCJ9，为符合要求的userData数据格式 */
+  UserData?: string;
 }
 
 declare interface ChannelCreateEmbedWebUrlResponse {
@@ -1487,9 +1491,9 @@ declare interface ChannelCreateOrganizationModifyQrCodeResponse {
 }
 
 declare interface ChannelCreatePrepareFlowRequest {
-  /** 合同模板ID，为32位字符串。 */
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id */
   ResourceId: string;
-  /** 资源类型，此接口固定为**1**表示为用模板发起 */
+  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） */
   ResourceType: number;
   /** 要创建的合同信息 */
   FlowInfo: BaseFlowInfo;
@@ -1499,7 +1503,7 @@ declare interface ChannelCreatePrepareFlowRequest {
   FlowOption?: CreateFlowOption;
   /** 合同签署人信息 */
   FlowApproverList?: CommonFlowApprover[];
-  /** 用过去已经通过此接口发起的合同的ID复制个新的合同创建链接 */
+  /** 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接注: `该参数必须是一个待发起审核的合同id，并且还未审核通过` */
   FlowId?: string;
   /** 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL */
   NeedPreview?: boolean;

@@ -920,6 +920,8 @@ declare interface IPSECOptionsSpecification {
   PfsDhGroup?: string | null;
   /** IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800 */
   IPSECSaLifetimeTraffic?: number | null;
+  /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为 */
+  IntegrityAlgorithm?: string | null;
 }
 
 /** 预付费（包年包月）计费对象。 */

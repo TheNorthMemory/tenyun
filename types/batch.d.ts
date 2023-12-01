@@ -194,15 +194,15 @@ declare interface CpmVirtualPrivateCloud {
 declare interface DataDisk {
   /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
   DiskSize: number;
-  /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CLOUD_HSSD：增强型SSD云硬盘CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC。该参数对`ResizeInstanceDisk`接口无效。 */
+  /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围： LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘 LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定 LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定 CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘 CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC。该参数对`ResizeInstanceDisk`接口无效。 */
   DiskType?: string;
   /** 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
-  /** 数据盘是否随子机销毁。取值范围：TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘FALSE：子机销毁时，保留数据盘默认取值：TRUE该参数目前仅用于 `RunInstances` 接口。 */
+  /** 数据盘是否随子机销毁。取值范围：TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘 FALSE：子机销毁时，保留数据盘 默认取值：TRUE 该参数目前仅用于 `RunInstances` 接口。 */
   DeleteWithInstance?: boolean | null;
   /** 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。 */
   SnapshotId?: string | null;
-  /** 数据盘是加密。取值范围：true：加密false：不加密默认取值：false该参数目前仅用于 `RunInstances` 接口。 */
+  /** 数据盘是加密。取值范围：true：加密 false：不加密 默认取值：false 该参数目前仅用于 `RunInstances` 接口。 */
   Encrypt?: boolean | null;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
   KmsKeyId?: string | null;
@@ -210,6 +210,8 @@ declare interface DataDisk {
   ThroughputPerformance?: number | null;
   /** 所属的独享集群ID。 */
   CdcId?: string | null;
+  /** 突发性能 注：内测中。 */
+  BurstPerformance?: boolean | null;
 }
 
 /** 依赖关系 */

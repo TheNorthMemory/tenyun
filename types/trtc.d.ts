@@ -815,21 +815,23 @@ declare interface WaterMark {
 /** 自定义文字水印数据结构 */
 declare interface WaterMarkChar {
   /** 文字水印的起始坐标Y值，从左上角开始 */
-  Top: number | null;
+  Top: number;
   /** 文字水印的起始坐标X值，从左上角开始 */
-  Left: number | null;
+  Left: number;
   /** 文字水印的宽度，单位像素值 */
-  Width: number | null;
+  Width: number;
   /** 文字水印的高度，单位像素值 */
-  Height: number | null;
+  Height: number;
   /** 水印文字的内容 */
-  Chars: string | null;
+  Chars: string;
   /** 水印文字的大小，单位像素，默认14 */
-  FontSize?: number | null;
+  FontSize?: number;
   /** 水印文字的颜色，默认白色 */
-  FontColor?: string | null;
+  FontColor?: string;
   /** 水印文字的背景色，为空代表背景透明，默认为空 */
-  BackGroundColor?: string | null;
+  BackGroundColor?: string;
+  /** 文字水印的字体，支持设置以下值：1. Tencent （默认）2. SourceHanSans */
+  Font?: string;
 }
 
 /** 水印类型为图片的参数列表 */
@@ -865,9 +867,11 @@ declare interface WaterMarkParams {
 /** 时间戳水印数据结构 */
 declare interface WaterMarkTimestamp {
   /** 时间戳的位置，取值范围0-6，分别代表上左，上右，下左，下右，上居中，下居中，居中 */
-  Pos: number | null;
+  Pos: number;
   /** 显示时间戳的时区，默认东八区 */
-  TimeZone?: number | null;
+  TimeZone?: number;
+  /** 文字水印的字体，支持设置以下值：1. Tencent （默认）2. SourceHanSans */
+  Font?: string;
 }
 
 declare interface CreateCloudRecordingRequest {

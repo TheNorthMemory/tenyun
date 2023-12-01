@@ -1036,6 +1036,16 @@ declare interface RestoreTask {
   Status?: number;
 }
 
+/** SSL加密配置 */
+declare interface SSLConfig {
+  /** SSL加密状态，enable-已开启disable-未开启enable_doing-开启中disable_doing-关闭中renew_doing-更新中wait_doing-等待维护时间内执行 */
+  Encryption?: string | null;
+  /** SSL证书有效期，时间格式 YYYY-MM-DD HH:MM:SS */
+  SSLValidityPeriod?: string | null;
+  /** SSL证书有效性，0-无效，1-有效 */
+  SSLValidity?: number | null;
+}
+
 /** 安全组 */
 declare interface SecurityGroup {
   /** 项目ID */
@@ -2394,6 +2404,8 @@ declare interface DescribeDBInstancesAttributeResponse {
   EventSaveDays?: number;
   /** TDE透明数据加密配置 */
   TDEConfig?: TDEConfigAttribute;
+  /** SSL加密 */
+  SSLConfig?: SSLConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3674,6 +3686,22 @@ declare interface ModifyDBInstanceRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceSSLRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 操作类型。enable-开启SSL，disable-关闭SSL，renew-更新证书有效期 */
+  Type: string;
+  /** 操作设置。0-立即执行，1- 维护时间内执行，默认取值0。 */
+  WaitSwitch: number;
+}
+
+declare interface ModifyDBInstanceSSLResponse {
+  /** 异步任务流程ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceSecurityGroupsRequest {
   /** 实例 ID，格式如：mssql-c1nl9rpv 或者 mssqlro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -4453,6 +4481,8 @@ declare interface Sqlserver {
   ModifyDBInstanceProject(data: ModifyDBInstanceProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceProjectResponse>;
   /** 修改实例续费标记 {@link ModifyDBInstanceRenewFlagRequest} {@link ModifyDBInstanceRenewFlagResponse} */
   ModifyDBInstanceRenewFlag(data: ModifyDBInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceRenewFlagResponse>;
+  /** 开启\关闭\更新SSL加密 {@link ModifyDBInstanceSSLRequest} {@link ModifyDBInstanceSSLResponse} */
+  ModifyDBInstanceSSL(data: ModifyDBInstanceSSLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSSLResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 更新数据库名 {@link ModifyDBNameRequest} {@link ModifyDBNameResponse} */

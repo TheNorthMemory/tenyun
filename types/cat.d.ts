@@ -187,7 +187,7 @@ declare interface CreateProbeTasksRequest {
   Cron?: string;
   /** 资源标签值 */
   Tag?: Tag[];
-  /** 测试类型，包含定时测试与即时测试。1-定时拨测，其它表示即时拨测。 */
+  /** 测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。 */
   ProbeType?: number;
   /** 插件类型，如CDN，详情参考云拨测官方文档。 */
   PluginSource?: string;

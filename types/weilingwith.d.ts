@@ -142,6 +142,16 @@ declare interface AlarmLevelInfo {
   LevelName?: string | null;
 }
 
+/** 告警状态返回结构体 */
+declare interface AlarmStatusData {
+  /** 告警状态ID */
+  StatusID?: string | null;
+  /** 告警状态名称 */
+  StatusName?: string | null;
+  /** 告警状态类型 */
+  StatusType?: string | null;
+}
+
 /** 告警类型详情信息 */
 declare interface AlarmTypeDetailInfo {
   /** 告警类型id */
@@ -452,6 +462,12 @@ declare interface DescribeAlarmListRes {
   TotalRow?: number | null;
   /** 告警列表集合 */
   AlarmInfoSet?: AlarmInfo[] | null;
+}
+
+/** 告警状态列表返回 */
+declare interface DescribeAlarmStatusListRes {
+  /** 告警状态返回结构 */
+  List?: AlarmStatusData[] | null;
 }
 
 /** 告警类型列表回包 */
@@ -1745,9 +1761,15 @@ declare interface DescribeAlarmListResponse {
 }
 
 declare interface DescribeAlarmStatusListRequest {
+  /** 应用token */
+  ApplicationToken: string;
+  /** 工作空间ID */
+  WorkspaceId: string;
 }
 
 declare interface DescribeAlarmStatusListResponse {
+  /** 告警状态返回结构 */
+  Result?: DescribeAlarmStatusListRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2686,7 +2708,7 @@ declare interface Weilingwith {
   /** 告警列表查询 {@link DescribeAlarmListRequest} {@link DescribeAlarmListResponse} */
   DescribeAlarmList(data: DescribeAlarmListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmListResponse>;
   /** 告警状态列表查询 {@link DescribeAlarmStatusListRequest} {@link DescribeAlarmStatusListResponse} */
-  DescribeAlarmStatusList(data?: DescribeAlarmStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmStatusListResponse>;
+  DescribeAlarmStatusList(data: DescribeAlarmStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmStatusListResponse>;
   /** 告警类型获取 {@link DescribeAlarmTypeListRequest} {@link DescribeAlarmTypeListResponse} */
   DescribeAlarmTypeList(data: DescribeAlarmTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmTypeListResponse>;
   /** 查询应用列表 {@link DescribeApplicationListRequest} {@link DescribeApplicationListResponse} */

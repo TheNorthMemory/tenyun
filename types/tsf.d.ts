@@ -4836,12 +4836,12 @@ declare interface DescribeConfigSummaryResponse {
 }
 
 declare interface DescribeConfigTemplateRequest {
-  /** 无 */
+  /** 配置模板Id */
   ConfigTemplateId: string;
 }
 
 declare interface DescribeConfigTemplateResponse {
-  /** Result */
+  /** 导入结果 */
   Result?: ConfigTemplate | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -6551,7 +6551,7 @@ declare interface ModifyLaneRequest {
 }
 
 declare interface ModifyLaneResponse {
-  /** 编辑成功: true / 编辑失败: false */
+  /** 更新成功: true / 更新失败: false */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -7220,7 +7220,7 @@ declare interface UpdateConfigTemplateRequest {
 }
 
 declare interface UpdateConfigTemplateResponse {
-  /** 结果true：成功；false：失败； */
+  /** 更新成功: true / 更新失败: false */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

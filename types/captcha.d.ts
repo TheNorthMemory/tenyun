@@ -136,6 +136,26 @@ declare interface OutputManageMarketingRiskValue {
   RiskType: number[] | null;
 }
 
+/** 验证码拼装Rce结果，Rce结果部分 */
+declare interface RceResult {
+  /** 用户ID */
+  UserId?: string | null;
+  /** 操作时间戳 */
+  PostTime?: number | null;
+  /** 业务参数 */
+  AssociateAccount?: string | null;
+  /** 用户Ip */
+  UserIp?: string | null;
+  /** 风险等级 */
+  RiskLevel?: string | null;
+  /** 风险类型 */
+  RiskType?: number[] | null;
+  /** 设备唯一ID */
+  ConstId?: string | null;
+  /** 风险扩展参数 */
+  RiskInformation?: string | null;
+}
+
 /** 验证码请求趋势图obj */
 declare interface RequestTrendObj {
   /** 时间参数 */
@@ -444,6 +464,50 @@ declare interface DescribeCaptchaOperDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCaptchaRceResultRequest {
+  /** 固定填值：9。可在控制台配置不同验证码类型。 */
+  CaptchaType: number;
+  /** 前端回调函数返回的用户验证票据 */
+  Ticket: string;
+  /** 业务侧获取到的验证码使用者的外网IP */
+  UserIp: string;
+  /** 前端回调函数返回的随机字符串 */
+  Randstr: string;
+  /** 验证码应用ID。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到CaptchaAppId。 */
+  CaptchaAppId: number;
+  /** 验证码应用密钥。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到AppSecretKey。AppSecretKey属于服务器端校验验证码票据的密钥，请妥善保密，请勿泄露给第三方。 */
+  AppSecretKey: string;
+  /** 预留字段 */
+  BusinessId?: number;
+  /** 预留字段 */
+  SceneId?: number;
+  /** mac 地址或设备唯一标识 */
+  MacAddress?: string;
+  /** 手机设备号 */
+  Imei?: string;
+  /** 是否返回前端获取验证码时间，取值1：需要返回 */
+  NeedGetCaptchaTime?: number;
+}
+
+declare interface DescribeCaptchaRceResultResponse {
+  /** 1 OK 验证通过7 captcha no match 传入的Randstr不合法，请检查Randstr是否与前端返回的Randstr一致8 ticket expired 传入的Ticket已过期（Ticket有效期5分钟），请重新生成Ticket、Randstr进行校验9 ticket reused 传入的Ticket被重复使用，请重新生成Ticket、Randstr进行校验15 decrypt fail 传入的Ticket不合法，请检查Ticket是否与前端返回的Ticket一致16 appid-ticket mismatch 传入的CaptchaAppId错误，请检查CaptchaAppId是否与前端传入的CaptchaAppId一致，并且保障CaptchaAppId是从验证码控制台【验证管理】->【基础配置】中获取21 diff 票据校验异常，可能的原因是（1）若Ticket包含terror前缀，一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理。（2）若Ticket不包含terror前缀，则是由于验证码风控系统发现请求有安全风险，业务侧可根据需要进行拦截。100 appid-secretkey-ticket mismatch 参数校验错误，（1）请检查CaptchaAppId与AppSecretKey是否正确，CaptchaAppId、AppSecretKey需要在验证码控制台【验证管理】>【基础配置】中获取（2）请检查传入的Ticket是否由传入的CaptchaAppId生成 */
+  CaptchaCode?: number;
+  /** 状态描述及验证错误信息 */
+  CaptchaMsg?: string | null;
+  /** 无感验证模式下，该参数返回验证结果：EvilLevel=0 请求无恶意EvilLevel=100 请求有恶意 */
+  EvilLevel?: number | null;
+  /** 前端获取验证码时间，时间戳格式 */
+  GetCaptchaTime?: number | null;
+  /** 拦截类型 */
+  EvilBitmap?: number | null;
+  /** 提交验证码时间 */
+  SubmitCaptchaTime?: number;
+  /** rce检测结果 */
+  RceResult?: RceResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCaptchaResultRequest {
   /** 固定填值：9。可在控制台配置不同验证码类型。 */
   CaptchaType: number;
@@ -663,6 +727,8 @@ declare interface Captcha {
   DescribeCaptchaMiniRiskResult(data: DescribeCaptchaMiniRiskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniRiskResultResponse>;
   /** 安全验证码用户操作数据查询 {@link DescribeCaptchaOperDataRequest} {@link DescribeCaptchaOperDataResponse} */
   DescribeCaptchaOperData(data: DescribeCaptchaOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaOperDataResponse>;
+  /** Rce融合验证核查验证码票据结果(Web及APP) {@link DescribeCaptchaRceResultRequest} {@link DescribeCaptchaRceResultResponse} */
+  DescribeCaptchaRceResult(data: DescribeCaptchaRceResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaRceResultResponse>;
   /** 核查验证码票据结果(Web及APP) {@link DescribeCaptchaResultRequest} {@link DescribeCaptchaResultResponse} */
   DescribeCaptchaResult(data: DescribeCaptchaResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaResultResponse>;
   /** 安全验证码用户操作票据数据查询 {@link DescribeCaptchaTicketDataRequest} {@link DescribeCaptchaTicketDataResponse} */

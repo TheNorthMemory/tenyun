@@ -68,6 +68,14 @@ declare interface Detail {
   Value: number;
 }
 
+/** Excel转码相关参数 */
+declare interface ExcelParam {
+  /** 表格转码纸张（画布）大小，默认为0。0 -- A41 -- A2 2 -- A0注：当设置的值超出合法取值范围时，将采用默认值。 */
+  PaperSize?: number;
+  /** 表格文件转换纸张方向，默认为0。0 -- 代表垂直方向非0 -- 代表水平方向 */
+  PaperDirection?: number;
+}
+
 /** 实时录制中出现的用户视频流断流次数统计 */
 declare interface Interrupt {
   /** 用户ID */
@@ -514,24 +522,6 @@ declare interface CreateApplicationResponse {
   RequestId?: string;
 }
 
-declare interface CreateOfflineRecordRequest {
-  /** 客户的SdkAppId */
-  SdkAppId: number;
-  /** 录制任务对应的房间号 */
-  RoomId: number;
-  /** 录制任务对应的群组Id */
-  GroupId?: string;
-  /** 混流参数配置目前课后录制暂未支持自定义混流布局Custom参数 */
-  MixStream?: MixStream;
-  /** 白板参数配置 */
-  Whiteboard?: Whiteboard;
-}
-
-declare interface CreateOfflineRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreatePPTCheckTaskRequest {
   /** 客户的SdkAppId */
   SdkAppId: number;
@@ -591,6 +581,8 @@ declare interface CreateTranscodeRequest {
   MinScaleResolution?: string;
   /** 此参数仅对动态转码生效。是否对不支持元素开启自动处理的功能。默认不开启。在开启自动处理的情况下，会自动进行如下处理：1. 墨迹：移除不支持的墨迹（比如使用WPS画的）2. 自动翻页：移除PPT上所有的自动翻页设置，并设置为单击鼠标翻页3. 已损坏音视频：移除PPT上对损坏音视频的引用 */
   AutoHandleUnsupportedElement?: boolean;
+  /** Excel表格转码参数，可设置转码时表格纸张大小及纸张方向等参数（仅对转码文件为Excel表格文件的静态转码任务生效） */
+  ExcelParam?: ExcelParam;
 }
 
 declare interface CreateTranscodeResponse {
@@ -708,28 +700,6 @@ declare interface DescribeIMApplicationsRequest {
 }
 
 declare interface DescribeIMApplicationsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeOfflineRecordCallbackRequest {
-  /** 应用的SdkAppId */
-  SdkAppId: number;
-}
-
-declare interface DescribeOfflineRecordCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeOfflineRecordRequest {
-  /** 客户的SdkAppId */
-  SdkAppId: number;
-  /** 课后录制任务的Id */
-  TaskId: string;
-}
-
-declare interface DescribeOfflineRecordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1354,18 +1324,6 @@ declare interface ResumeOnlineRecordResponse {
   RequestId?: string;
 }
 
-declare interface SetOfflineRecordCallbackRequest {
-  /** 客户的SdkAppId */
-  SdkAppId: number;
-  /** 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头 */
-  Callback: string;
-}
-
-declare interface SetOfflineRecordCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SetOnlineRecordCallbackKeyRequest {
   /** 应用的SdkAppId */
   SdkAppId: number;
@@ -1633,8 +1591,6 @@ declare interface Tiw {
   ApplyTiwTrial(data?: ApplyTiwTrialRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyTiwTrialResponse>;
   /** 创建白板应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
-  /** @deprecated 创建课后录制任务 {@link CreateOfflineRecordRequest} {@link CreateOfflineRecordResponse} */
-  CreateOfflineRecord(data: CreateOfflineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineRecordResponse>;
   /** 创建PPT检测任务 {@link CreatePPTCheckTaskRequest} {@link CreatePPTCheckTaskResponse} */
   CreatePPTCheckTask(data: CreatePPTCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePPTCheckTaskResponse>;
   /** 创建白板板书生成任务 {@link CreateSnapshotTaskRequest} {@link CreateSnapshotTaskResponse} */
@@ -1653,10 +1609,6 @@ declare interface Tiw {
   DescribeBoardSDKLog(data: DescribeBoardSDKLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBoardSDKLogResponse>;
   /** 查询可用的IM应用列表 {@link DescribeIMApplicationsRequest} {@link DescribeIMApplicationsResponse} */
   DescribeIMApplications(data?: DescribeIMApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMApplicationsResponse>;
-  /** @deprecated 查询课后录制任务 {@link DescribeOfflineRecordRequest} {@link DescribeOfflineRecordResponse} */
-  DescribeOfflineRecord(data: DescribeOfflineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineRecordResponse>;
-  /** @deprecated 查询回调地址 {@link DescribeOfflineRecordCallbackRequest} {@link DescribeOfflineRecordCallbackResponse} */
-  DescribeOfflineRecordCallback(data: DescribeOfflineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineRecordCallbackResponse>;
   /** 查询实时录制任务 {@link DescribeOnlineRecordRequest} {@link DescribeOnlineRecordResponse} */
   DescribeOnlineRecord(data: DescribeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordResponse>;
   /** 查询实时录制回调地址 {@link DescribeOnlineRecordCallbackRequest} {@link DescribeOnlineRecordCallbackResponse} */
@@ -1725,8 +1677,6 @@ declare interface Tiw {
   PauseOnlineRecord(data: PauseOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOnlineRecordResponse>;
   /** 恢复实时录制 {@link ResumeOnlineRecordRequest} {@link ResumeOnlineRecordResponse} */
   ResumeOnlineRecord(data: ResumeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeOnlineRecordResponse>;
-  /** @deprecated 设置回调地址 {@link SetOfflineRecordCallbackRequest} {@link SetOfflineRecordCallbackResponse} */
-  SetOfflineRecordCallback(data: SetOfflineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOfflineRecordCallbackResponse>;
   /** 设置实时录制回调地址 {@link SetOnlineRecordCallbackRequest} {@link SetOnlineRecordCallbackResponse} */
   SetOnlineRecordCallback(data: SetOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackResponse>;
   /** 设置实时录制回调密钥 {@link SetOnlineRecordCallbackKeyRequest} {@link SetOnlineRecordCallbackKeyResponse} */

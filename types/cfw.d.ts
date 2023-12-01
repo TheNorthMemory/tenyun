@@ -1490,6 +1490,30 @@ declare interface CreateDatabaseWhiteListRulesResponse {
   RequestId?: string;
 }
 
+declare interface CreateIdsWhiteRuleRequest {
+  /** 入侵防御规则ID */
+  IdsRuleId: string;
+  /** 白名单类型：src 针对源放通dst 针对目的放通srcdst 针对源和目的放通 */
+  WhiteRuleType: string;
+  /** 白名单生效防火墙范围：1 边界防火墙2 nat防火墙4 vpc防火墙7 = 1+2+4 所有防火墙 */
+  FwType: number;
+  /** 源IP */
+  SrcIp?: string;
+  /** 目的IP */
+  DstIp?: string;
+}
+
+declare interface CreateIdsWhiteRuleResponse {
+  /** 返回状态码：0 成功非0 失败 */
+  ReturnCode?: number;
+  /** 返回信息：success 成功其他 */
+  ReturnMsg?: string;
+  /** 返回状态码：0 处置成功-1 通用错误，不用处理 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNatFwInstanceRequest {
   /** 防火墙实例名称 */
   Name: string;
@@ -1652,6 +1676,22 @@ declare interface DeleteBlockIgnoreRuleListRequest {
 }
 
 declare interface DeleteBlockIgnoreRuleListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteIdsWhiteRuleRequest {
+  /** 入侵防御白名单id参考DescribeIdsWhiteRule接口返回的Id字段 */
+  Id: number;
+}
+
+declare interface DeleteIdsWhiteRuleResponse {
+  /** 返回状态码：0 成功非0 失败 */
+  ReturnCode?: number;
+  /** 返回信息：success 成功其他 */
+  ReturnMsg?: string;
+  /** 返回状态码：0 处置成功-1 通用错误，不用处理 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2116,6 +2156,30 @@ declare interface DescribeIPStatusListResponse {
   ReturnCode: number;
   /** 状态信息 */
   ReturnMsg: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIdsWhiteRuleRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 偏移值 */
+  Offset: number;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeIdsWhiteRuleResponse {
+  /** 总条数 */
+  Total?: number;
+  /** 返回状态码 0 成功 非0不成功 */
+  ReturnCode?: number;
+  /** 返回信息 success 成功 其他 不成功 */
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3279,6 +3343,8 @@ declare interface Cfw {
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
   /** 创建暴露数据库白名单规则 {@link CreateDatabaseWhiteListRulesRequest} {@link CreateDatabaseWhiteListRulesResponse} */
   CreateDatabaseWhiteListRules(data: CreateDatabaseWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseWhiteListRulesResponse>;
+  /** 创建入侵防御规则白名单接口 {@link CreateIdsWhiteRuleRequest} {@link CreateIdsWhiteRuleResponse} */
+  CreateIdsWhiteRule(data: CreateIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIdsWhiteRuleResponse>;
   /** 创建NAT防火墙实例（Region参数必填） {@link CreateNatFwInstanceRequest} {@link CreateNatFwInstanceResponse} */
   CreateNatFwInstance(data: CreateNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwInstanceResponse>;
   /** 创建防火墙实例和接入域名（Region参数必填） {@link CreateNatFwInstanceWithDomainRequest} {@link CreateNatFwInstanceWithDomainResponse} */
@@ -3295,6 +3361,8 @@ declare interface Cfw {
   DeleteAllAccessControlRule(data?: DeleteAllAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllAccessControlRuleResponse>;
   /** 批量删除入侵防御封禁列表、放通列表规则 {@link DeleteBlockIgnoreRuleListRequest} {@link DeleteBlockIgnoreRuleListResponse} */
   DeleteBlockIgnoreRuleList(data: DeleteBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleListResponse>;
+  /** 删除入侵防御规则白名单接口 {@link DeleteIdsWhiteRuleRequest} {@link DeleteIdsWhiteRuleResponse} */
+  DeleteIdsWhiteRule(data: DeleteIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIdsWhiteRuleResponse>;
   /** 销毁防火墙实例 {@link DeleteNatFwInstanceRequest} {@link DeleteNatFwInstanceResponse} */
   DeleteNatFwInstance(data: DeleteNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatFwInstanceResponse>;
   /** 资产中心资产组删除 {@link DeleteResourceGroupRequest} {@link DeleteResourceGroupResponse} */
@@ -3339,6 +3407,8 @@ declare interface Cfw {
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
   /** ip防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
+  /** 查询入侵防御规则白名单接口 {@link DescribeIdsWhiteRuleRequest} {@link DescribeIdsWhiteRuleResponse} */
+  DescribeIdsWhiteRule(data: DescribeIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdsWhiteRuleResponse>;
   /** 日志审计日志查询 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */

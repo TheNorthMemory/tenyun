@@ -580,7 +580,7 @@ declare interface ExtractRuleInfo {
   PathRegex?: string | null;
   /** 用户自定义元数据信息，MetadataType为2时必填 */
   MetaTags?: MetaTagInfo[];
-  /** windows事件日志采集 */
+  /** Windows事件日志采集 */
   EventLogRules?: EventLog[];
 }
 
@@ -1689,7 +1689,7 @@ declare interface CreateMachineGroupRequest {
   ServiceLogging?: boolean;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
-  /** 系统类型，默认0，0：Linux，1: windows */
+  /** 系统类型，默认0，0：Linux，1: Windows */
   OSType?: number;
 }
 

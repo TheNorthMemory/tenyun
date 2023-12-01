@@ -114,6 +114,18 @@ declare interface DeviceNetInfo {
   UpRate?: number | null;
 }
 
+/** 设备付费模式信息 */
+declare interface DevicePayModeInfo {
+  /** 设备ID */
+  DeviceId?: string;
+  /** 付费模式。1：预付费流量包0：按流量后付费 */
+  PayMode?: number;
+  /** 付费模式描述 */
+  PayModeDesc?: string;
+  /** 流量包ID，仅当付费模式为流量包类型时才有。 */
+  ResourceId?: string | null;
+}
+
 /** 用户期望门限 */
 declare interface ExpectedThreshold {
   /** 期望发起加速的时延阈值 */
@@ -136,6 +148,30 @@ declare interface FlowDetails {
   AvgValue?: number | null;
   /** 流量总值（单位：bytes） */
   TotalValue?: number | null;
+}
+
+/** 流量包信息 */
+declare interface FlowPackageInfo {
+  /** 流量包的唯一资源ID */
+  ResourceId?: string;
+  /** 流量包所属的用户AppId */
+  AppId?: number;
+  /** 流量包规格类型。可取值如下：DEVICE_1_FLOW_20G、DEVICE_2_FLOW_50G、DEVICE_3_FLOW_100G、DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。档位也影响流量包可绑定的设备数量上限：20G：最多绑定1个设备50G：最多绑定2个设备100G：最多绑定3个设备500G：最多绑定5个设备 */
+  PackageType?: string;
+  /** 流量包状态，0：未生效，1：有效期内，2：已过期 */
+  Status?: number;
+  /** 生效时间，Unix时间戳格式，单位：秒 */
+  ActiveTime?: number;
+  /** 过期时间，Unix时间戳格式，单位：秒 */
+  ExpireTime?: number;
+  /** 流量包绑定的设备ID列表 */
+  DeviceList?: string[];
+  /** 流量包总容量，单位：MB */
+  CapacitySize?: number;
+  /** 流量包余量，单位：MB */
+  CapacityRemain?: number;
+  /** 自动续费标识。true代表自动续费，false代表不自动续费 */
+  RenewFlag?: boolean;
 }
 
 /** 新建Hardware入参 */
@@ -390,6 +426,18 @@ declare interface DescribeQosResponse {
   RequestId?: string;
 }
 
+declare interface GetDevicePayModeRequest {
+  /** 设备ID列表 */
+  DeviceIdList: string[];
+}
+
+declare interface GetDevicePayModeResponse {
+  /** 结果信息 */
+  Result?: DevicePayModeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetDeviceRequest {
   /** 搜索指定设备的id */
   DeviceId: string;
@@ -420,6 +468,28 @@ declare interface GetDevicesResponse {
   Length?: number;
   /** 总页数 */
   TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetFlowPackagesRequest {
+  /** 页码，从1开始 */
+  PageNumber: number;
+  /** 每页个数 */
+  PageSize: number;
+  /** 流量包的唯一资源ID */
+  ResourceId?: string;
+  /** 流量包绑定的设备ID */
+  DeviceId?: string;
+  /** 流量包状态，0：未生效，1：有效期内，2：已过期 */
+  Status?: number;
+}
+
+declare interface GetFlowPackagesResponse {
+  /** 流量包列表 */
+  PackageList?: FlowPackageInfo[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -558,6 +628,36 @@ declare interface GetVendorHardwareResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPackageRenewFlagRequest {
+  /** 流量包的唯一资源ID */
+  ResourceId: string;
+  /** 自动续费标识。true代表自动续费，false代表不自动续费 */
+  RenewFlag: boolean;
+}
+
+declare interface ModifyPackageRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OrderFlowPackageRequest {
+  /** 流量包规格类型。可取值如下：DEVICE_1_FLOW_20G、DEVICE_2_FLOW_50G、DEVICE_3_FLOW_100G、DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。档位也影响流量包可绑定的设备数量上限：20G：最多绑定1个设备50G：最多绑定2个设备100G：最多绑定3个设备500G：最多绑定5个设备 */
+  PackageType: string;
+  /** 流量包绑定的设备ID列表。捆绑设备个数上限取决于包的规格档位：20G：最多绑定1个设备50G：最多绑定2个设备100G：最多绑定3个设备500G：最多绑定5个设备 */
+  DeviceList: string[];
+  /** 是否自动续费 */
+  AutoRenewFlag: boolean;
+  /** 区域标识，0：国内，1：国外 */
+  PackageRegion: number;
+}
+
+declare interface OrderFlowPackageResponse {
+  /** 流量包的唯一资源ID */
+  ResourceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDeviceRequest {
   /** 设备id */
   DeviceId: string;
@@ -609,11 +709,15 @@ declare interface Mna {
   DescribeQos(data: DescribeQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQosResponse>;
   /** 获取设备详细信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;
+  /** 获取设备付费模式 {@link GetDevicePayModeRequest} {@link GetDevicePayModeResponse} */
+  GetDevicePayMode(data: GetDevicePayModeRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicePayModeResponse>;
   /** 设备信息列表 {@link GetDevicesRequest} {@link GetDevicesResponse} */
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
+  /** 获取流量包列表 {@link GetFlowPackagesRequest} {@link GetFlowPackagesResponse} */
+  GetFlowPackages(data: GetFlowPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowPackagesResponse>;
   /** 获取数据流量统计数据 {@link GetFlowStatisticRequest} {@link GetFlowStatisticResponse} */
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
-  /** 租户获取厂商硬件列表 {@link GetHardwareListRequest} {@link GetHardwareListResponse} */
+  /** 获取厂商硬件列表 {@link GetHardwareListRequest} {@link GetHardwareListResponse} */
   GetHardwareList(data: GetHardwareListRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareListResponse>;
   /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
   GetMultiFlowStatistic(data: GetMultiFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetMultiFlowStatisticResponse>;
@@ -625,6 +729,10 @@ declare interface Mna {
   GetStatisticData(data: GetStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataResponse>;
   /** 获取厂商硬件设备列表 {@link GetVendorHardwareRequest} {@link GetVendorHardwareResponse} */
   GetVendorHardware(data: GetVendorHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<GetVendorHardwareResponse>;
+  /** 修改流量包自动续费标识 {@link ModifyPackageRenewFlagRequest} {@link ModifyPackageRenewFlagResponse} */
+  ModifyPackageRenewFlag(data: ModifyPackageRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageRenewFlagResponse>;
+  /** 订购流量包 {@link OrderFlowPackageRequest} {@link OrderFlowPackageResponse} */
+  OrderFlowPackage(data: OrderFlowPackageRequest, config?: AxiosRequestConfig): AxiosPromise<OrderFlowPackageResponse>;
   /** 更新设备 {@link UpdateDeviceRequest} {@link UpdateDeviceResponse} */
   UpdateDevice(data: UpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceResponse>;
   /** 更新硬件信息 {@link UpdateHardwareRequest} {@link UpdateHardwareResponse} */
