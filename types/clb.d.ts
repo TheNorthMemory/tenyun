@@ -1273,7 +1273,7 @@ declare interface ZoneResource {
 }
 
 declare interface AssociateTargetGroupsRequest {
-  /** 绑定的关系数组。 */
+  /** 绑定的关系数组。一次请求最多支持20个。 */
   Associations: TargetGroupAssociation[];
 }
 

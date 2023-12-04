@@ -397,67 +397,67 @@ declare interface JobInstanceForSubmissionLog {
 /** Job详细信息 */
 declare interface JobV1 {
   /** 作业ID */
-  JobId: string | null;
+  JobId?: string | null;
   /** 地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 用户AppId */
-  AppId: number | null;
+  AppId?: number | null;
   /** 用户UIN */
-  OwnerUin: string | null;
+  OwnerUin?: string | null;
   /** 创建者UIN */
-  CreatorUin: string | null;
+  CreatorUin?: string | null;
   /** 作业名字 */
-  Name: string | null;
+  Name?: string | null;
   /** 作业类型，1：sql作业，2：Jar作业 */
-  JobType: number | null;
+  JobType?: number | null;
   /** 作业状态，1：未初始化，2：未发布，3：操作中，4：运行中，5：停止，6：暂停，-1：故障 */
-  Status: number | null;
+  Status?: number | null;
   /** 作业创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 作业启动时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 作业停止时间 */
-  StopTime: string | null;
+  StopTime?: string | null;
   /** 作业更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 作业累计运行时间 */
-  TotalRunMillis: number | null;
+  TotalRunMillis?: number | null;
   /** 备注信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 操作错误提示信息 */
-  LastOpResult: string | null;
+  LastOpResult?: string | null;
   /** 集群名字 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 最新配置版本号 */
-  LatestJobConfigVersion: number | null;
+  LatestJobConfigVersion?: number | null;
   /** 已发布的配置版本 */
-  PublishedJobConfigVersion: number | null;
+  PublishedJobConfigVersion?: number | null;
   /** 运行的CU数量 */
-  RunningCuNum: number | null;
+  RunningCuNum?: number | null;
   /** 作业内存规格 */
-  CuMem: number | null;
+  CuMem?: number | null;
   /** 作业状态描述 */
-  StatusDesc: string | null;
+  StatusDesc?: string | null;
   /** 运行状态时表示单次运行时间 */
-  CurrentRunMillis: number | null;
+  CurrentRunMillis?: number | null;
   /** 作业所在的集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 作业管理WEB UI 入口 */
-  WebUIUrl: string | null;
+  WebUIUrl?: string | null;
   /** 作业所在集群类型 */
-  SchedulerType: number | null;
+  SchedulerType?: number | null;
   /** 作业所在集群状态 */
-  ClusterStatus: number | null;
+  ClusterStatus?: number | null;
   /** 细粒度下的运行的CU数量 */
-  RunningCu: number | null;
+  RunningCu?: number | null;
   /** 作业运行的 Flink 版本 */
-  FlinkVersion: string | null;
+  FlinkVersion?: string | null;
   /** 工作空间 SerialId */
-  WorkSpaceId: string | null;
+  WorkSpaceId?: string | null;
   /** 工作空间名称 */
-  WorkSpaceName: string | null;
+  WorkSpaceName?: string | null;
   /** 作业标签 */
   Tags?: Tag[] | null;
 }
@@ -1255,9 +1255,9 @@ declare interface DescribeClustersRequest {
 
 declare interface DescribeClustersResponse {
   /** 集群总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群列表 */
-  ClusterSet: Cluster[];
+  ClusterSet?: Cluster[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1365,9 +1365,9 @@ declare interface DescribeJobsRequest {
 
 declare interface DescribeJobsResponse {
   /** 作业总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 作业列表 */
-  JobSet: JobV1[];
+  JobSet?: JobV1[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
