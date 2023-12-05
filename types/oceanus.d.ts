@@ -812,6 +812,14 @@ declare interface StopJobDescription {
   StopType: number;
 }
 
+/** 子目录信息 */
+declare interface SubFolderInfo {
+  /** folder id */
+  FolderId?: string;
+  /** folder name */
+  FolderName?: string;
+}
+
 /** 系统资源返回值 */
 declare interface SystemResourceItem {
   /** 资源ID */
@@ -1258,6 +1266,32 @@ declare interface DescribeClustersResponse {
   TotalCount?: number;
   /** 集群列表 */
   ClusterSet?: Cluster[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFolderRequest {
+  /** folder id */
+  FolderId: string;
+  /** workspace id */
+  WorkSpaceId: string;
+  /** 1:资源文件夹其他:作业文件夹 */
+  FolderType: number;
+}
+
+declare interface DescribeFolderResponse {
+  /** folder id */
+  FolderId?: string;
+  /** folder name */
+  FolderName?: string;
+  /** 父文件夹id */
+  ParentId?: string;
+  /** 文件夹类型 */
+  FolderType?: number;
+  /** workspace id */
+  WorkSpaceId?: string;
+  /** 子文件夹信息 */
+  SubFolderInfo?: SubFolderInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1719,6 +1753,8 @@ declare interface Oceanus {
   DeleteWorkSpace(data: DeleteWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkSpaceResponse>;
   /** 查询集群 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  /** 查询文件夹 {@link DescribeFolderRequest} {@link DescribeFolderResponse} */
+  DescribeFolder(data: DescribeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderResponse>;
   /** 查询作业配置 {@link DescribeJobConfigsRequest} {@link DescribeJobConfigsResponse} */
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
   /** 查找Savepoint列表 {@link DescribeJobSavepointRequest} {@link DescribeJobSavepointResponse} */

@@ -208,28 +208,28 @@ declare interface DetailData {
 
 /** CDC宿主机的详细信息 */
 declare interface HostInfo {
-  /** 宿主机IP */
-  HostIp: string;
+  /** 宿主机IP（废弃） */
+  HostIp?: string;
   /** 云服务类型 */
-  ServiceType: string;
+  ServiceType?: string;
   /** 宿主机运行状态 */
-  HostStatus: string;
+  HostStatus?: string;
   /** 宿主机类型 */
-  HostType: string;
+  HostType?: string;
   /** cpu可用数 */
-  CpuAvailable: number;
+  CpuAvailable?: number;
   /** cpu总数 */
-  CpuTotal: number;
+  CpuTotal?: number;
   /** 内存可用数 */
-  MemAvailable: number;
+  MemAvailable?: number;
   /** 内存总数 */
-  MemTotal: number;
+  MemTotal?: number;
   /** 运行时间 */
-  RunTime: string;
+  RunTime?: string;
   /** 到期时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 宿主机id */
-  HostId: string | null;
+  HostId?: string | null;
 }
 
 /** CDC集群内宿主机的统计信息 */

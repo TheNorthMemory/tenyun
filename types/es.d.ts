@@ -979,7 +979,7 @@ declare interface CreateInstanceRequest {
   RenewFlag?: string;
   /** 已废弃请使用NodeInfoList节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
   NodeType?: string;
-  /** 已废弃请使用NodeInfoList节点磁盘类型CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高性能云硬盘默认值CLOUD_SSD */
+  /** 已废弃请使用NodeInfoList节点磁盘类型CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高性能云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_BSSD：通用型SSD云硬盘默认值CLOUD_SSD */
   DiskType?: string;
   /** 已废弃请使用NodeInfoList节点磁盘容量（单位GB） */
   DiskSize?: number;
@@ -999,7 +999,7 @@ declare interface CreateInstanceRequest {
   MasterNodeDiskSize?: number;
   /** 集群配置文件中的ClusterName（系统默认配置为实例ID，暂不支持自定义） */
   ClusterNameInConf?: string;
-  /** 集群部署方式0：单可用区部署1：多可用区部署默认为0 */
+  /** 集群部署方式0：单可用区部署1：多可用区部署，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制）默认为0 */
   DeployMode?: number;
   /** 多可用区部署时可用区的详细信息(DeployMode为1时必传) */
   MultiZoneInfo?: ZoneDetail[];
@@ -1472,6 +1472,24 @@ declare interface GetRequestTargetNodeTypesResponse {
   RequestId?: string;
 }
 
+declare interface InquirePriceRenewInstanceRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+}
+
+declare interface InquirePriceRenewInstanceResponse {
+  /** 刊例价，即集群原始价格 */
+  OriginalPrice?: number;
+  /** 折后价 */
+  DiscountPrice?: number;
+  /** 折扣，如65折 */
+  Discount?: number;
+  /** 货币，如CNY代表人民币 */
+  Currency?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyEsVipSecurityGroupRequest {
   /** es集群的实例id */
   InstanceId: string;
@@ -1895,6 +1913,8 @@ declare interface Es {
   GetDiagnoseSettings(data: GetDiagnoseSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDiagnoseSettingsResponse>;
   /** 获取接收客户端请求的节点类型 {@link GetRequestTargetNodeTypesRequest} {@link GetRequestTargetNodeTypesResponse} */
   GetRequestTargetNodeTypes(data: GetRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestTargetNodeTypesResponse>;
+  /** 集群续费询价 {@link InquirePriceRenewInstanceRequest} {@link InquirePriceRenewInstanceResponse} */
+  InquirePriceRenewInstance(data: InquirePriceRenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewInstanceResponse>;
   /** 修改集群VIP绑定的安全组 {@link ModifyEsVipSecurityGroupRequest} {@link ModifyEsVipSecurityGroupResponse} */
   ModifyEsVipSecurityGroup(data: ModifyEsVipSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEsVipSecurityGroupResponse>;
   /** 重启ES集群实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */

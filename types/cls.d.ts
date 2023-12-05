@@ -2041,9 +2041,9 @@ declare interface DescribeConfigExtrasRequest {
 
 declare interface DescribeConfigExtrasResponse {
   /** 采集配置列表 */
-  Configs: ConfigExtraInfo[] | null;
+  Configs?: ConfigExtraInfo[] | null;
   /** 过滤到的总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2055,7 +2055,7 @@ declare interface DescribeConfigMachineGroupsRequest {
 
 declare interface DescribeConfigMachineGroupsResponse {
   /** 采集规则配置绑定的机器组列表 */
-  MachineGroups: MachineGroupInfo[] | null;
+  MachineGroups?: MachineGroupInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2127,9 +2127,9 @@ declare interface DescribeDashboardsRequest {
 
 declare interface DescribeDashboardsResponse {
   /** 仪表盘的数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 仪表盘详细明细 */
-  DashboardInfos: DashboardInfo[];
+  DashboardInfos?: DashboardInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2321,7 +2321,7 @@ declare interface DescribeMachineGroupConfigsRequest {
 
 declare interface DescribeMachineGroupConfigsResponse {
   /** 采集规则配置列表 */
-  Configs: ConfigInfo[] | null;
+  Configs?: ConfigInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

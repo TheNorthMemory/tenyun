@@ -189,17 +189,17 @@ declare interface DetailPrice {
 /** 套餐折扣详情（仅用于控制台调用询价相关接口返回）。 */
 declare interface DiscountDetail {
   /** 计费时长。 */
-  TimeSpan: number;
+  TimeSpan?: number;
   /** 计费单元。 */
-  TimeUnit: string;
+  TimeUnit?: string;
   /** 总价。 */
-  TotalCost: number;
+  TotalCost?: number;
   /** 折后总价。 */
-  RealTotalCost: number;
+  RealTotalCost?: number;
   /** 折扣。 */
-  Discount: number;
+  Discount?: number;
   /** 具体折扣详情。 */
-  PolicyDetail: PolicyDetail;
+  PolicyDetail?: PolicyDetail;
 }
 
 /** 磁盘信息 */
@@ -249,27 +249,27 @@ declare interface Disk {
 /** 描述了云硬盘备份点相关信息。 */
 declare interface DiskBackup {
   /** 云硬盘备份点ID。 */
-  DiskBackupId: string;
+  DiskBackupId?: string;
   /** 创建此云硬盘备份点的云硬盘类型。取值：DATA_DISK：数据盘 */
-  DiskUsage: string;
+  DiskUsage?: string;
   /** 创建此云硬盘备份点的云硬盘 ID。 */
-  DiskId: string;
+  DiskId?: string;
   /** 创建此云硬盘备份点的云硬盘大小，单位 GB。 */
-  DiskSize: number;
+  DiskSize?: number;
   /** 云硬盘备份点名称，用户自定义的云硬盘备份点别名。 */
-  DiskBackupName: string;
+  DiskBackupName?: string;
   /** 云硬盘备份点的状态。取值范围：NORMAL：正常。 CREATING：创建中。ROLLBACKING：回滚中。DELETING：删除中。 */
-  DiskBackupState: string;
+  DiskBackupState?: string;
   /** 创建或回滚云硬盘备份点进度百分比，成功后此字段取值为 100。 */
-  Percent: number;
+  Percent?: number;
   /** 上一次操作 */
-  LatestOperation: string | null;
+  LatestOperation?: string | null;
   /** 上一次操作状态 */
-  LatestOperationState: string | null;
+  LatestOperationState?: string | null;
   /** 上一次请求ID */
-  LatestOperationRequestId: string | null;
+  LatestOperationRequestId?: string | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string;
+  CreatedTime?: string;
 }
 
 /** 云硬盘备份点操作限制列表。 */
@@ -647,9 +647,9 @@ declare interface InstanceReturnable {
 /** 实例流量包详情 */
 declare interface InstanceTrafficPackage {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 流量包详情列表。 */
-  TrafficPackageSet: TrafficPackage[];
+  TrafficPackageSet?: TrafficPackage[];
 }
 
 /** 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。 */
@@ -783,27 +783,27 @@ declare interface SceneInfo {
 /** 描述了快照相关信息。 */
 declare interface Snapshot {
   /** 快照 ID。 */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 创建此快照的磁盘类型。取值：SYSTEM_DISK：系统盘 */
-  DiskUsage: string;
+  DiskUsage?: string;
   /** 创建此快照的磁盘 ID。 */
-  DiskId: string;
+  DiskId?: string;
   /** 创建此快照的磁盘大小，单位 GB。 */
-  DiskSize: number;
+  DiskSize?: number;
   /** 快照名称，用户自定义的快照别名。 */
-  SnapshotName: string;
+  SnapshotName?: string;
   /** 快照的状态。取值范围：NORMAL：正常 CREATING：创建中ROLLBACKING：回滚中。 */
-  SnapshotState: string;
+  SnapshotState?: string;
   /** 创建或回滚快照进度百分比，成功后此字段取值为 100。 */
-  Percent: number;
+  Percent?: number;
   /** 快照的最新操作，只有创建、回滚快照时记录。取值如 CreateInstanceSnapshot，RollbackInstanceSnapshot。 */
-  LatestOperation: string | null;
+  LatestOperation?: string | null;
   /** 快照的最新操作状态，只有创建、回滚快照时记录。取值范围：SUCCESS：表示操作成功OPERATING：表示操作执行中FAILED：表示操作失败 */
-  LatestOperationState: string | null;
+  LatestOperationState?: string | null;
   /** 快照最新操作的唯一请求 ID，只有创建、回滚快照时记录。 */
-  LatestOperationRequestId: string | null;
+  LatestOperationRequestId?: string | null;
   /** 快照的创建时间。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
 }
 
 /** 快照操作限制列表。 */
@@ -867,23 +867,23 @@ declare interface TotalPrice {
 /** 流量包详情 */
 declare interface TrafficPackage {
   /** 流量包ID。 */
-  TrafficPackageId: string;
+  TrafficPackageId?: string;
   /** 流量包生效周期内已使用流量，单位字节。 */
-  TrafficUsed: number;
+  TrafficUsed?: number;
   /** 流量包生效周期内的总流量，单位字节。 */
-  TrafficPackageTotal: number;
+  TrafficPackageTotal?: number;
   /** 流量包生效周期内的剩余流量，单位字节。 */
-  TrafficPackageRemaining: number;
+  TrafficPackageRemaining?: number;
   /** 流量包生效周期内超出流量包额度的流量，单位字节。 */
-  TrafficOverflow: number;
+  TrafficOverflow?: number;
   /** 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  Deadline: string | null;
+  Deadline?: string | null;
   /** 流量包状态：NETWORK_NORMAL：正常OVERDUE_NETWORK_DISABLED：欠费断网 */
-  Status: string;
+  Status?: string;
 }
 
 /** 可用区详细信息 */
@@ -1733,9 +1733,9 @@ declare interface DescribeInstancesTrafficPackagesRequest {
 
 declare interface DescribeInstancesTrafficPackagesResponse {
   /** 符合条件的实例流量包详情数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例流量包详情列表。 */
-  InstanceTrafficPackageSet: InstanceTrafficPackage[];
+  InstanceTrafficPackageSet?: InstanceTrafficPackage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

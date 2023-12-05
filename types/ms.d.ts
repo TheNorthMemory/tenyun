@@ -994,6 +994,26 @@ declare interface DescribeUserBaseInfoInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DestroyResourceInstancesRequest {
+  /** ResourceId 资源id，在创建订单时，返回的resourceId */
+  ResourceId: string;
+  /** 资源绑定的包名，为了防止误删除，需要指定绑定时的包名 */
+  AppPkgName: string;
+}
+
+declare interface DestroyResourceInstancesResponse {
+  /** 资源id */
+  ResourceId?: string;
+  /** 返回状态 */
+  Result?: string;
+  /** 平台类型 1.android安卓加固 2.ios源码混淆 3.sdk加固 4.applet小程序加固 */
+  PlatformType?: number;
+  /** 订单采购类型 1-免费试用 2-按年收费 3-按次收费 */
+  OrderType?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RequestLocalTaskRequest {
   /** Client Id */
   ClientId: string;
@@ -1103,6 +1123,8 @@ declare interface Ms {
   DescribeUrlDetectionResult(data: DescribeUrlDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlDetectionResultResponse>;
   /** 获取用户基础信息 {@link DescribeUserBaseInfoInstanceRequest} {@link DescribeUserBaseInfoInstanceResponse} */
   DescribeUserBaseInfoInstance(data?: DescribeUserBaseInfoInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserBaseInfoInstanceResponse>;
+  /** 渠道订单：资源销毁 {@link DestroyResourceInstancesRequest} {@link DestroyResourceInstancesResponse} */
+  DestroyResourceInstances(data: DestroyResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyResourceInstancesResponse>;
   /** client任务请求地址 {@link RequestLocalTaskRequest} {@link RequestLocalTaskResponse} */
   RequestLocalTask(data: RequestLocalTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RequestLocalTaskResponse>;
   /** 更新client状态 {@link UpdateClientStateRequest} {@link UpdateClientStateResponse} */

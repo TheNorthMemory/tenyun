@@ -250,11 +250,11 @@ declare interface DBInfo {
   AccountRole?: string | null;
   /** 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源) */
   AccountMode?: string | null;
-  /** 临时密钥Id */
+  /** 临时密钥Id，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195 */
   TmpSecretId?: string | null;
-  /** 临时密钥Key */
+  /** 临时密钥Key，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195 */
   TmpSecretKey?: string | null;
-  /** 临时Token */
+  /** 临时Token，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195 */
   TmpToken?: string | null;
 }
 
@@ -346,7 +346,7 @@ declare interface DatabaseTableObject {
   ObjectMode: string | null;
   /** 迁移对象，当 ObjectMode 为 partial 时，不为空 */
   Databases?: DBItem[] | null;
-  /** 高级对象类型，如trigger、function、procedure、event */
+  /** 高级对象类型，如trigger、function、procedure、event。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型 */
   AdvancedObjects?: string[] | null;
 }
 
@@ -466,11 +466,11 @@ declare interface Endpoint {
   AccountRole?: string | null;
   /** 外部角色id */
   RoleExternalId?: string | null;
-  /** 临时密钥Id，如果为跨账号实例此项必填 */
+  /** 临时密钥Id，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，如果为跨账号实例此项必填 */
   TmpSecretId?: string | null;
-  /** 临时密钥Key，如果为跨账号实例此项必填 */
+  /** 临时密钥Key，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填 */
   TmpSecretKey?: string | null;
-  /** 临时Token，如果为跨账号实例此项必填 */
+  /** 临时Token，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填 */
   TmpToken?: string | null;
   /** 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted */
   EncryptConn?: string | null;
@@ -626,7 +626,7 @@ declare interface Objects {
   Mode?: string | null;
   /** 同步对象，当 Mode 为 Partial 时，不为空 */
   Databases?: Database[] | null;
-  /** 高级对象类型，如function、procedure，当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full */
+  /** 高级对象类型，如function、procedure。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型。当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full */
   AdvancedObjects?: string[] | null;
   /** OnlineDDL类型，冗余字段不做配置用途 */
   OnlineDDL?: OnlineDDL | null;

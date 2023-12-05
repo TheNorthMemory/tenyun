@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 242+ 款产品，10803+ 服务数</summary>
+<details><summary>共计 242+ 款产品，10806+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -193,7 +193,7 @@ ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 20
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(35) |
-es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(41) |
+es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(42) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(68) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(64) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(2) | 2018-12-01(4) |
@@ -245,12 +245,12 @@ mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240)
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(150) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(100) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(7) |
-ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(22) |
+ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 mvj | 营销价值判断 | 2019-09-26(1) |
 nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
 npp | 号码保护 | 2019-08-23(8) |
-oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(35) |
+oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(36) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(81) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(15) |
 open | 腾讯云 OAuth | 2018-12-25(2) |

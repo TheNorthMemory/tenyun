@@ -33,55 +33,71 @@ declare interface AlarmHierarchicalValue {
 /** 告警历史数据 */
 declare interface AlarmHistory {
   /** 告警历史Id */
-  AlarmId: string;
+  AlarmId?: string;
   /** 监控类型 */
-  MonitorType: string;
+  MonitorType?: string;
   /** 策略类型 */
-  Namespace: string;
+  Namespace?: string;
   /** 告警对象 */
-  AlarmObject: string;
+  AlarmObject?: string;
   /** 告警内容 */
-  Content: string;
+  Content?: string;
   /** 时间戳，首次出现时间 */
-  FirstOccurTime: number;
+  FirstOccurTime?: number;
   /** 时间戳，最后出现时间 */
-  LastOccurTime: number;
+  LastOccurTime?: number;
   /** 告警状态，ALARM=未恢复 OK=已恢复 NO_CONF=已失效 NO_DATA=数据不足 */
-  AlarmStatus: string;
+  AlarmStatus?: string;
   /** 告警策略 Id */
-  PolicyId: string;
+  PolicyId?: string;
   /** 策略名称 */
-  PolicyName: string;
+  PolicyName?: string;
   /** 基础产品告警的告警对象所属网络 */
-  VPC: string;
+  VPC?: string;
   /** 项目 Id */
-  ProjectId: number;
+  ProjectId?: number;
   /** 项目名字 */
-  ProjectName: string;
+  ProjectName?: string;
   /** 告警对象所属实例组 */
-  InstanceGroup: InstanceGroups[];
+  InstanceGroup?: InstanceGroups[];
   /** 接收人列表 */
-  ReceiverUids: number[];
+  ReceiverUids?: number[];
   /** 接收组列表 */
-  ReceiverGroups: number[];
+  ReceiverGroups?: number[];
   /** 告警渠道列表 SMS=短信 EMAIL=邮件 CALL=电话 WECHAT=微信 */
-  NoticeWays: string[];
+  NoticeWays?: string[];
   /** 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID */
-  OriginId: string;
+  OriginId?: string;
   /** 告警类型 */
-  AlarmType: string;
+  AlarmType?: string;
   /** 事件Id */
-  EventId: number;
+  EventId?: number;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 策略是否存在 0=不存在 1=存在 */
-  PolicyExists: number;
+  PolicyExists?: number;
   /** 指标信息 */
-  MetricsInfo: AlarmHistoryMetric[] | null;
+  MetricsInfo?: AlarmHistoryMetric[] | null;
   /** 告警实例的维度信息 */
-  Dimensions: string | null;
+  Dimensions?: string | null;
   /** 告警等级 */
   AlarmLevel?: string | null;
+  /** 是否有配置告警屏蔽规则 */
+  ShieldFlag?: number | null;
+  /** 屏蔽类型（英文） */
+  AlarmShieldingType?: string | null;
+  /** 屏蔽时间（英文） */
+  AlarmShieldingTime?: string | null;
+  /** 屏蔽类型（中文） */
+  AlarmShieldingShowType?: string | null;
+  /** 屏蔽时间（中文） */
+  AlarmShieldingShowTime?: string | null;
+  /** 屏蔽原因 */
+  AlarmShieldReason?: string | null;
+  /** 告警实例的维度信息 */
+  InternalDimensions?: string | null;
+  /** 指标名称 */
+  MetricName?: string | null;
 }
 
 /** 告警历史的指标信息 */
@@ -2403,10 +2419,10 @@ declare interface CreateGrafanaNotificationChannelRequest {
   InstanceId: string;
   /** 告警通道名称，例如：test */
   ChannelName: string;
-  /** 默认为1，建议使用 OrganizationIds */
-  OrgId: number;
   /** 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID */
   Receivers: string[];
+  /** 默认为1，建议使用 OrganizationIds */
+  OrgId?: number;
   /** 额外组织 ID 数组，已废弃，请使用 OrganizationIds */
   ExtraOrgIds?: string[];
   /** 生效的所有组织 ID 数组，默认为 ["1"] */
@@ -2953,7 +2969,7 @@ declare interface DescribeAlarmHistoriesRequest {
   StartTime?: number;
   /** 结束时间，默认当前时间戳。对应 `FirstOccurTime` 告警首次出现时间，告警历史的 `FirstOccurTime` 早于 `EndTime` 才可能被搜索到。 */
   EndTime?: number;
-  /** 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能观测；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测 */
+  /** 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能监控；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测 */
   MonitorTypes?: string[];
   /** 根据告警对象过滤 字符串模糊搜索 */
   AlarmObject?: string;
@@ -4783,10 +4799,10 @@ declare interface UpdateGrafanaNotificationChannelRequest {
   ChannelId: string;
   /** Grafana 实例 ID，例如：grafana-12345678 */
   InstanceId: string;
-  /** 告警通道名称，例如：test */
-  ChannelName: string;
   /** 接受告警通道 ID 数组 */
   Receivers: string[];
+  /** 告警通道名称，已废弃，名称不可修改。 */
+  ChannelName?: string;
   /** 已废弃，请使用 OrganizationIds */
   ExtraOrgIds?: string[];
   /** 生效的组织 ID 数组 */
