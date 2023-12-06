@@ -166,6 +166,8 @@ declare interface EmbedTokenInfo {
   UserCorpId?: string | null;
   /** 使用者Id(仅用于多用户) */
   UserId?: string | null;
+  /** 访问次数限制，限制范围1-99999，为空则不设置访问次数限制 */
+  TicketNum?: number | null;
 }
 
 /** 仅包含id的对象 */
@@ -453,6 +455,8 @@ declare interface CreateDatasourceCloudRequest {
   DataOriginProjectId?: string;
   /** 第三方数据源id */
   DataOriginDatasourceId?: string;
+  /** 集群id */
+  ClusterId?: string;
 }
 
 declare interface CreateDatasourceCloudResponse {
@@ -533,6 +537,8 @@ declare interface CreateEmbedTokenRequest {
   UserCorpId?: string;
   /** 使用者Id(仅用于多用户) */
   UserId?: string;
+  /** 访问次数限制，限制范围1-99999，为空则不设置访问次数限制 */
+  TicketNum?: number;
 }
 
 declare interface CreateEmbedTokenResponse {
@@ -865,6 +871,8 @@ declare interface ModifyDatasourceCloudRequest {
   DataOriginProjectId?: string;
   /** 第三方数据源id */
   DataOriginDatasourceId?: string;
+  /** 集群id */
+  ClusterId?: string;
 }
 
 declare interface ModifyDatasourceCloudResponse {

@@ -919,7 +919,7 @@ declare interface UpdateScanUsersResponse {
 /** {@link Gme 游戏多媒体引擎} */
 declare interface Gme {
   (): Versions;
-  /** 提交年龄语音识别任务 {@link CreateAgeDetectTaskRequest} {@link CreateAgeDetectTaskResponse} */
+  /** @deprecated 提交年龄语音识别任务 {@link CreateAgeDetectTaskRequest} {@link CreateAgeDetectTaskResponse} */
   CreateAgeDetectTask(data: CreateAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgeDetectTaskResponse>;
   /** 创建GME应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
@@ -933,7 +933,7 @@ declare interface Gme {
   DeleteRoomMember(data: DeleteRoomMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomMemberResponse>;
   /** 删除自定义送检用户 {@link DeleteScanUserRequest} {@link DeleteScanUserResponse} */
   DeleteScanUser(data: DeleteScanUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanUserResponse>;
-  /** 查询年龄语音识别任务结果 {@link DescribeAgeDetectTaskRequest} {@link DescribeAgeDetectTaskResponse} */
+  /** @deprecated 查询年龄语音识别任务结果 {@link DescribeAgeDetectTaskRequest} {@link DescribeAgeDetectTaskResponse} */
   DescribeAgeDetectTask(data: DescribeAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgeDetectTaskResponse>;
   /** 获取应用用量统计数据 {@link DescribeAppStatisticsRequest} {@link DescribeAppStatisticsResponse} */
   DescribeAppStatistics(data: DescribeAppStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppStatisticsResponse>;

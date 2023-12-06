@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 242+ 款产品，10806+ 服务数</summary>
+<details><summary>共计 242+ 款产品，10807+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -197,7 +197,7 @@ es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(68) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(64) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(2) | 2018-12-01(4) |
-faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(34) |
+faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(35) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(103) |

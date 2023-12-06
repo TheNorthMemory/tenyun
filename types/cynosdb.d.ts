@@ -1024,6 +1024,8 @@ declare interface Package {
   StartTime?: string | null;
   /** 失效时间：2022-08-01 00:00:00 */
   ExpireTime?: string | null;
+  /** 资源包历史绑定（已解绑）实例信息 */
+  HistoryBindResourceInfos?: BindInstanceInfo[] | null;
 }
 
 /** 资源包明细说明 */

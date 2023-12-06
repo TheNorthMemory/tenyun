@@ -1052,20 +1052,26 @@ declare interface Origin {
 
 /** 加速域名源站信息。 */
 declare interface OriginDetail {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6或域名类型源站；COS：COS源。ORIGIN_GROUP：源站组类型源站。AWS_S3：AWS S3对象存储源站。 */
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站； VODEO：云点播（混合云版）；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
   OriginType?: string;
-  /** 源站地址，当OriginType参数指定为ORIGIN_GROUP时，该参数填写源站组ID，其他情况下填写源站地址。 */
+  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；当 OriginType = VODEO 时，如果 VodeoDistributionRange = ALL，则该参数为 "all-buckets-in-vodeo-application"；如果 VodeoDistributionRange = Bucket，则该参数为对应存储桶域名。 */
   Origin?: string;
-  /** 备用源站组ID，该参数在OriginType参数指定为ORIGIN_GROUP时生效，为空表示不使用备用源站。 */
+  /** 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 且配置了备源站组时会生效。 */
   BackupOrigin?: string;
-  /** 主源源站组名称，当OriginType参数指定为ORIGIN_GROUP时该参数生效。 */
+  /** 主源源站组名称，当 OriginType = ORIGIN_GROUP 时该参数会返回值。 */
   OriginGroupName?: string;
-  /** 备用源站源站组名称，当OriginType参数指定为ORIGIN_GROUP，且用户指定了被用源站时该参数生效。 */
+  /** 备用源站组名称，该参数仅当 OriginType = ORIGIN_GROUP 且配置了备用源站组时会生效。 */
   BackOriginGroupName?: string;
-  /** 指定是否允许访问私有对象存储源站。当源站类型OriginType=COS或AWS_S3时有效 取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为off。 */
+  /** 指定是否允许访问私有对象存储源站，该参数仅当源站类型 OriginType = COS 或 AWS_S3 时会生效，取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为off。 */
   PrivateAccess?: string;
-  /** 私有鉴权使用参数，当源站类型PrivateAccess=on时有效。 */
+  /** 私有鉴权使用参数，该参数仅当源站类型 PrivateAccess = on 时会生效。 */
   PrivateParameters?: PrivateParameter[] | null;
+  /** MO 子应用 ID */
+  VodeoSubAppId?: number;
+  /** MO 分发范围，取值有： All：全部 Bucket：存储桶 */
+  VodeoDistributionRange?: string;
+  /** MO 存储桶 ID，分发范围(DistributionRange)为存储桶(Bucket)时必填 */
+  VodeoBucketId?: string;
 }
 
 /** 源站组信息 */
@@ -1110,6 +1116,12 @@ declare interface OriginInfo {
   PrivateAccess?: string;
   /** 私有鉴权使用参数，当源站类型 PrivateAccess=on 时有效。 */
   PrivateParameters?: PrivateParameter[];
+  /** MO 子应用 ID */
+  VodeoSubAppId?: number;
+  /** MO 分发范围，取值有： All：全部 Bucket：存储桶 */
+  VodeoDistributionRange?: string;
+  /** MO 存储桶 ID，分发范围(DistributionRange)为存储桶(Bucket)时必填 */
+  VodeoBucketId?: string;
 }
 
 /** 源站防护信息 */
@@ -1354,6 +1366,8 @@ declare interface Resource {
   Group?: string | null;
   /** 当前资源绑定的站点数量。 */
   ZoneNumber?: number | null;
+  /** 资源标记类型，取值有：vodeo：vodeo资源。 */
+  Type?: string;
 }
 
 /** 规则引擎HTTP请求头/响应头类型的动作 */
@@ -2401,7 +2415,7 @@ declare interface DescribeAccelerationDomainsRequest {
   Offset?: number;
   /** 分页查询限制数目，默认值：20，上限：200。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有域名信息。详细的过滤条件如下：domain-name：按照加速域名进行过滤；origin-type：按照源站类型进行过滤；origin：按照主源站地址进行过滤；backup-origin： 按照备用源站地址进行过滤；domain-cname：按照 CNAME 进行过滤；share-cname：按照共享 CNAME 进行过滤； */
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有域名信息。详细的过滤条件如下：domain-name：按照加速域名进行过滤；origin-type：按照源站类型进行过滤；origin：按照主源站地址进行过滤；backup-origin： 按照备用源站地址进行过滤；domain-cname：按照 CNAME 进行过滤；share-cname：按照共享 CNAME 进行过滤；vodeo-sub-app-id：按照【 vodeo 子应用 ID】进行过滤；vodeo-distribution-range：按照【 vodeo 分发范围】进行过滤；vodeo-bucket-id：按照【vodeo 存储桶 ID】进行过滤； */
   Filters?: AdvancedFilter[];
   /** 可根据该字段对返回结果进行排序，取值有：created_on：加速域名创建时间；domain-name：加速域名。不填写时，默认对返回结果按照 domain-name 排序。 */
   Order?: string;
