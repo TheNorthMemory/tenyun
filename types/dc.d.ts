@@ -46,7 +46,7 @@ declare interface BGPStatus {
 
 /** bgp参数，包括Asn，AuthKey */
 declare interface BgpPeer {
-  /** 用户侧，BGP Asn */
+  /** 用户侧BGP ASN */
   Asn?: number;
   /** 用户侧BGP密钥 */
   AuthKey?: string;
@@ -431,51 +431,51 @@ declare interface CreateDirectConnectResponse {
 }
 
 declare interface CreateDirectConnectTunnelRequest {
-  /** 专线 ID，例如：dc-kd7d06of */
+  /** 物理专线ID，例如：dc-kd7d06of。 */
   DirectConnectId: string;
-  /** 专用通道名称 */
+  /** 专用通道名称。 */
   DirectConnectTunnelName: string;
-  /** 物理专线 owner，缺省为当前客户（物理专线 owner）共享专线时这里需要填写共享专线的开发商账号 ID */
+  /** 物理专线owner，缺省为当前客户（物理专线 owner）共享专线时这里需要填写共享专线的开发商账号 ID。 */
   DirectConnectOwnerAccount?: string;
-  /** 网络类型，分别为VPC、BMVPC，CCN，默认是VPCVPC：私有网络BMVPC：黑石网络CCN：云联网 */
+  /** 网络类型，枚举：VPC、BMVPC、CCN；默认为VPC。VPC：私有网络；BMVPC：黑石网络；CCN：云联网）。 */
   NetworkType?: string;
-  /** 网络地域 */
+  /** 网络地域。 */
   NetworkRegion?: string;
-  /** 私有网络统一 ID 或者黑石网络统一 ID */
+  /** 私有网络统一ID或黑石网络统一ID。 */
   VpcId?: string;
-  /** 专线网关 ID，例如 dcg-d545ddf */
+  /** 专线网关ID，例如 dcg-d545ddf。 */
   DirectConnectGatewayId?: string;
-  /** 专线带宽，单位：Mbps默认是物理专线带宽值 */
+  /** 专线带宽，单位：Mbps；默认是物理专线带宽值。 */
   Bandwidth?: number;
-  /** BGP ：BGP路由STATIC：静态默认为 BGP 路由 */
+  /** 路由类型，枚举：BGP、STATIC；默认为BGP 。（BGP ：BGP路由；STATIC：静态）。 */
   RouteType?: string;
-  /** BgpPeer，用户侧bgp信息，包括Asn和AuthKey */
+  /** BgpPeer，用户侧bgp信息，包括Asn和AuthKey。 */
   BgpPeer?: BgpPeer;
-  /** 静态路由，用户IDC的网段地址 */
+  /** 静态路由，用户IDC的网段地址。 */
   RouteFilterPrefixes?: RouteFilterPrefix[];
-  /** vlan，范围：0 ~ 30000：不开启子接口默认值是非0 */
+  /** vlan，范围：0 ~ 3000。0：不开启子接口，默认值是非0。 */
   Vlan?: number;
-  /** TencentAddress，腾讯侧互联 IP */
+  /** TencentAddress，腾讯侧互联 IP。 */
   TencentAddress?: string;
-  /** CustomerAddress，用户侧互联 IP */
+  /** CustomerAddress，用户侧互联 IP。 */
   CustomerAddress?: string;
-  /** TencentBackupAddress，腾讯侧备用互联 IP */
+  /** TencentBackupAddress，腾讯侧备用互联 IP。 */
   TencentBackupAddress?: string;
-  /** 高速上云服务ID */
+  /** 高速上云服务ID。 */
   CloudAttachId?: string;
-  /** 是否开启BFD */
+  /** 是否开启BFD。 */
   BfdEnable?: number;
-  /** 是否开启NQA */
+  /** 是否开启NQA。 */
   NqaEnable?: number;
-  /** BFD配置信息 */
+  /** BFD配置信息。 */
   BfdInfo?: BFDInfo;
-  /** NQA配置信息 */
+  /** NQA配置信息。 */
   NqaInfo?: NQAInfo;
 }
 
 declare interface CreateDirectConnectTunnelResponse {
-  /** 专用通道ID */
-  DirectConnectTunnelIdSet: string[];
+  /** 专用通道ID。 */
+  DirectConnectTunnelIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

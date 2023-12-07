@@ -200,7 +200,7 @@ declare interface AddOnSubtitle {
 
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
-  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦 */
+  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能去水印Description：大模型摘要 */
   Type?: string;
   /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
   ClassificationTask?: AiAnalysisTaskClassificationResult | null;
@@ -214,6 +214,8 @@ declare interface AiAnalysisResult {
   HighlightTask?: AiAnalysisTaskHighlightResult | null;
   /** 视频内容分析去水印任务的查询结果，当任务类型为 DeLogo 时有效。 */
   DeLogoTask?: AiAnalysisTaskDelLogoResult | null;
+  /** 视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。 */
+  DescriptionTask?: AiAnalysisTaskDescriptionResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -300,6 +302,32 @@ declare interface AiAnalysisTaskDelLogoResult {
   Input?: AiAnalysisTaskDelLogoInput;
   /** 智能去水印任务输出。 */
   Output?: AiAnalysisTaskDelLogoOutput | null;
+}
+
+/** 智能分类任务输入类型 */
+declare interface AiAnalysisTaskDescriptionInput {
+  /** 视频智能描述模板 ID。 */
+  Definition: number;
+}
+
+/** 智能描述结果信息 */
+declare interface AiAnalysisTaskDescriptionOutput {
+  /** 视频智能描述列表。 */
+  DescriptionSet: MediaAiAnalysisDescriptionItem[];
+}
+
+/** 智能描述结果类型 */
+declare interface AiAnalysisTaskDescriptionResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 智能描述任务输入。 */
+  Input?: AiAnalysisTaskDescriptionInput;
+  /** 智能描述任务输出。 */
+  Output?: AiAnalysisTaskDescriptionOutput | null;
 }
 
 /** 智能按帧标签任务输入类型 */
@@ -428,6 +456,16 @@ declare interface AiContentReviewResult {
 declare interface AiContentReviewTaskInput {
   /** 视频内容审核模板 ID。 */
   Definition: number;
+}
+
+/** 分段信息。 */
+declare interface AiParagraphInfo {
+  /** 分段摘要 */
+  Summary?: string | null;
+  /** 分段起始时间点，秒 */
+  StartTimeOffset?: number | null;
+  /** 分段结束时间点，秒 */
+  EndTimeOffset?: number | null;
 }
 
 /** 视频质检输入参数类型 */
@@ -3016,6 +3054,16 @@ declare interface MediaAiAnalysisCoverItem {
   CoverPath: string;
   /** 智能封面的可信度，取值范围是 0 到 100。 */
   Confidence: number;
+}
+
+/** 智能描述信息 */
+declare interface MediaAiAnalysisDescriptionItem {
+  /** 智能描述。 */
+  Description?: string;
+  /** 智能描述的可信度，取值范围是 0 到 100。 */
+  Confidence?: number;
+  /** 分段结果。 */
+  Paragraphs?: AiParagraphInfo[] | null;
 }
 
 /** 智能按帧标签结果信息 */

@@ -223,7 +223,7 @@ declare interface BotQPS {
   /** 使用qps的最大值 */
   MaxBotQPS: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag: number | null;
 }
 
 /** bot的趋势图对象 */
@@ -1004,39 +1004,39 @@ declare interface HybridPkg {
 
 /** 一个实例的详细信息 */
 declare interface InstanceInfo {
-  /** id */
+  /** 实例唯一ID */
   InstanceId: string;
-  /** Name */
+  /** 实例名称 */
   InstanceName: string;
-  /** 资源id */
+  /** 实例对应资源ID，计费使用 */
   ResourceIds: string;
-  /** 地域 */
+  /** 实例所属地域 */
   Region: string;
   /** 付费模式 */
   PayMode: number;
-  /** 自动续费 */
+  /** 自动续费标识。0：关闭1：开启 */
   RenewFlag: number;
-  /** 弹性计费 */
+  /** 弹性计费开关。0：关闭1：开启 */
   Mode: number;
-  /** 套餐版本 */
+  /** 实例套餐版本。101：小微版102：超轻版2：高级版3：企业版4：旗舰版6：独享版 */
   Level: number;
-  /** 过期时间 */
+  /** 实例过期时间 */
   ValidTime: string;
-  /** 开始时间 */
+  /** 实例开始时间 */
   BeginTime: string;
-  /** 已用 */
+  /** 已配置域名个数 */
   DomainCount: number;
-  /** 上限 */
+  /** 域名数量上限 */
   SubDomainLimit: number;
-  /** 已用 */
+  /** 已配置主域名个数 */
   MainDomainCount: number;
-  /** 上限 */
+  /** 主域名数量上限 */
   MainDomainLimit: number;
-  /** 峰值 */
+  /** 实例30天内QPS峰值 */
   MaxQPS: number;
-  /** qps套餐 */
+  /** qps扩展包信息 */
   QPS: QPSPackageNew;
-  /** 域名套餐 */
+  /** 域名扩展包信息 */
   DomainPkg: DomainPackageNew;
   /** 用户appid */
   AppId: number;
@@ -1062,7 +1062,7 @@ declare interface InstanceInfo {
   BandwidthStandard?: number | null;
   /** 实例状态 */
   Status?: number | null;
-  /** 实例沙箱值 */
+  /** 实例沙箱qps值 */
   SandboxQps?: number | null;
   /** 是否api 安全试用 */
   IsAPISecurityTrial?: number | null;
@@ -1072,6 +1072,12 @@ declare interface InstanceInfo {
   HybridPkg?: HybridPkg | null;
   /** API安全资源包 */
   ApiPkg?: ApiPkg | null;
+  /** 小程序安全加速包 */
+  MiniPkg?: MiniPkg | null;
+  /** 小程序qps规格 */
+  MiniQpsStandard?: number | null;
+  /** 小程序qps峰值 */
+  MiniMaxQPS?: number | null;
 }
 
 /** 数据封装 */
@@ -1220,6 +1226,26 @@ declare interface MajorEventsPkg {
   BillingItem?: string | null;
   /** 护网包状态 */
   HWState?: number | null;
+}
+
+/** API安全资源信息 */
+declare interface MiniPkg {
+  /** 资源id */
+  ResourceIds?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 地域 */
+  Region?: number | null;
+  /** 开始时间 */
+  BeginTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 购买数量 */
+  Count?: number | null;
+  /** 续费标志 */
+  RenewFlag?: number | null;
+  /** 计费项 */
+  BillingItem?: string | null;
 }
 
 /** 公共翻页参数 */

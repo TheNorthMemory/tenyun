@@ -1498,11 +1498,11 @@ declare interface PrometheusAgent {
 
 /** 托管Prometheus agent信息 */
 declare interface PrometheusAgentInfo {
-  /** 集群类型 */
+  /** 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群 */
   ClusterType: string;
-  /** 集群id */
+  /** 集成容器服务中关联的集群ID */
   ClusterId: string;
-  /** 备注 */
+  /** 该参数未使用，不需要填写 */
   Describe?: string;
 }
 
@@ -2863,7 +2863,7 @@ declare interface DeletePrometheusTempSyncResponse {
 }
 
 declare interface DeleteRecordingRulesRequest {
-  /** 规则 ID 列表 */
+  /** 规则 ID 列表(规则 ID 可通过 DescribeRecordingRules 接口获取) */
   RuleIds: string[];
   /** Prometheus 实例 ID */
   InstanceId: string;
@@ -3347,11 +3347,11 @@ declare interface DescribeDNSConfigResponse {
 declare interface DescribeExporterIntegrationsRequest {
   /** 实例 ID */
   InstanceId: string;
-  /** Kubernetes 集群类型，取值如下： 1= 容器集群(TKE) 2=弹性集群 3= Prometheus管理的弹性集群 */
+  /** Kubernetes 集群类型，可不填。取值如下： 1= 容器集群(TKE) 2=弹性集群(EKS) 3= Prometheus管理的弹性集群(MEKS) */
   KubeType?: number;
-  /** 集群 ID */
+  /** 集群 ID，可不填 */
   ClusterId?: string;
-  /** 类型 */
+  /** 类型(不填返回全部集成。可通过 DescribePrometheusIntegrations 接口获取，取每一项中的 ExporterType 字段) */
   Kind?: string;
   /** 名字 */
   Name?: string;
@@ -4681,31 +4681,31 @@ declare interface UninstallGrafanaPluginsResponse {
 }
 
 declare interface UpdateAlertRuleRequest {
-  /** Prometheus 报警规则 ID */
+  /** Prometheus 高警规则 ID */
   RuleId: string;
   /** Prometheus 实例 ID */
   InstanceId: string;
   /** 规则状态码，取值如下：1=RuleDeleted2=RuleEnabled3=RuleDisabled默认状态码为 2 启用。 */
   RuleState: number;
-  /** 报警规则名称 */
+  /** 告警规则名称 */
   RuleName: string;
-  /** 报警规则表达式 */
+  /** 告警规则表达式 */
   Expr: string;
-  /** 报警规则持续时间 */
+  /** 告警规则持续时间 */
   Duration: string;
-  /** 报警规则接收组列表 */
+  /** 告警规则接收组列表(当前规则绑定的接收组列表可通过 DescribeAlertRules 接口获取；用户已有的接收组列表可通过 DescribeAlarmNotices 接口获取) */
   Receivers: string[];
   /** 报警规则标签列表 */
   Labels?: PrometheusRuleKV[];
   /** 报警规则注释列表。告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description。 */
   Annotations?: PrometheusRuleKV[];
-  /** 报警策略模板分类 */
+  /** 报警策略模板分类(自定义，可不填) */
   Type?: string;
 }
 
 declare interface UpdateAlertRuleResponse {
   /** 规则 ID */
-  RuleId: string;
+  RuleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4737,15 +4737,15 @@ declare interface UpdateDNSConfigResponse {
 }
 
 declare interface UpdateExporterIntegrationRequest {
-  /** 实例 ID */
+  /** Prometheus 实例 ID */
   InstanceId: string;
-  /** 类型 */
+  /** 类型(可通过 DescribeExporterIntegrations 获取对应集成的 Kind) */
   Kind: string;
-  /** 配置内容 */
+  /** 配置内容(可通过 DescribeExporterIntegrations 接口获取对应集成的 Content，并在此基础上做修改) */
   Content: string;
-  /** Kubernetes 集群类型，取值如下： 1= 容器集群(TKE) 2=弹性集群 3= Prometheus管理的弹性集群 */
+  /** Kubernetes 集群类型，可不填。取值如下： 1= 容器集群(TKE) 2=弹性集群(EKS) 3= Prometheus管理的弹性集群(MEKS) */
   KubeType?: number;
-  /** 集群 ID */
+  /** 集群 ID，可不填 */
   ClusterId?: string;
 }
 
@@ -4841,13 +4841,13 @@ declare interface UpdatePrometheusAgentStatusResponse {
 }
 
 declare interface UpdatePrometheusScrapeJobRequest {
-  /** Prometheus 实例 ID，例如：prom-abcd1234 */
+  /** Prometheus 实例 ID(可通过 DescribePrometheusInstances 接口获取) */
   InstanceId: string;
-  /** Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取 */
+  /** Agent ID(可通过DescribePrometheusAgents 接口获取) */
   AgentId: string;
-  /** 抓取任务 ID，例如：job-abcd1234，可在控制台 Agent 管理-抓取任务配置中获取 */
+  /** 抓取任务 ID(可通过 DescribePrometheusScrapeJobs 接口获取) */
   JobId: string;
-  /** 抓取任务配置，格式：job_name:xx */
+  /** 抓取任务配置 */
   Config: string;
 }
 
@@ -4861,9 +4861,9 @@ declare interface UpdateRecordingRuleRequest {
   Name: string;
   /** 聚合规则组内容，格式为 yaml，通过 base64 进行编码。 */
   Group: string;
-  /** Prometheus 实例 ID */
+  /** Prometheus 实例 ID(可通过 DescribePrometheusInstances 接口获取) */
   InstanceId: string;
-  /** Prometheus 聚合规则 ID */
+  /** Prometheus 聚合规则 ID(可通过 DescribeRecordingRules 接口获取) */
   RuleId: string;
   /** 规则状态码，取值如下：1=RuleDeleted2=RuleEnabled3=RuleDisabled默认状态码为 2 启用。 */
   RuleState?: number;
@@ -4871,7 +4871,7 @@ declare interface UpdateRecordingRuleRequest {
 
 declare interface UpdateRecordingRuleResponse {
   /** 规则 ID */
-  RuleId: string | null;
+  RuleId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5207,7 +5207,7 @@ declare interface Monitor {
   UninstallGrafanaDashboard(data: UninstallGrafanaDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallGrafanaDashboardResponse>;
   /** 删除已安装的插件 {@link UninstallGrafanaPluginsRequest} {@link UninstallGrafanaPluginsResponse} */
   UninstallGrafanaPlugins(data: UninstallGrafanaPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallGrafanaPluginsResponse>;
-  /** 更新报警规则 {@link UpdateAlertRuleRequest} {@link UpdateAlertRuleResponse} */
+  /** 更新告警规则 {@link UpdateAlertRuleRequest} {@link UpdateAlertRuleResponse} */
   UpdateAlertRule(data: UpdateAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertRuleResponse>;
   /** 更新报警策略状态 {@link UpdateAlertRuleStateRequest} {@link UpdateAlertRuleStateResponse} */
   UpdateAlertRuleState(data: UpdateAlertRuleStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertRuleStateResponse>;
@@ -5227,7 +5227,7 @@ declare interface Monitor {
   UpdateGrafanaWhiteList(data: UpdateGrafanaWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaWhiteListResponse>;
   /** 更新 Prometheus CVM Agent 状态 {@link UpdatePrometheusAgentStatusRequest} {@link UpdatePrometheusAgentStatusResponse} */
   UpdatePrometheusAgentStatus(data: UpdatePrometheusAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusAgentStatusResponse>;
-  /** 更新 Prometheus 抓取任务 {@link UpdatePrometheusScrapeJobRequest} {@link UpdatePrometheusScrapeJobResponse} */
+  /** 更新 Prometheus Agent 抓取任务 {@link UpdatePrometheusScrapeJobRequest} {@link UpdatePrometheusScrapeJobResponse} */
   UpdatePrometheusScrapeJob(data: UpdatePrometheusScrapeJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusScrapeJobResponse>;
   /** 更新预聚合规则 {@link UpdateRecordingRuleRequest} {@link UpdateRecordingRuleResponse} */
   UpdateRecordingRule(data: UpdateRecordingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordingRuleResponse>;

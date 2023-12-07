@@ -327,7 +327,7 @@ declare interface CreateFlowOption {
   /** 禁止编辑填写控件**true**：禁止编辑填写控件**false**：（默认）允许编辑填写控件 */
   ForbidEditFillComponent?: boolean;
   /** 跳过上传文件步骤**true**：跳过**false**：（默认）不跳过，需要传ResourceId */
-  SkipUploadFile?: string;
+  SkipUploadFile?: boolean;
 }
 
 /** 第三方应用集成员工部门信息 */

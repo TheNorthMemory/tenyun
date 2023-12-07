@@ -211,6 +211,8 @@ declare interface AddSpecifyPrivateZoneVpcRequest {
   VpcSet?: VpcInfo[];
   /** 本次新增关联账户vpc信息 */
   AccountVpcSet?: AccountVpcInfo[];
+  /** 是否为同步操作 */
+  Sync?: boolean;
 }
 
 declare interface AddSpecifyPrivateZoneVpcResponse {
@@ -220,6 +222,8 @@ declare interface AddSpecifyPrivateZoneVpcResponse {
   VpcSet?: VpcInfo[];
   /** 本次新增的关联账号vpc */
   AccountVpcSet?: AccountVpcInfo[];
+  /** 唯一id */
+  UniqId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -339,6 +343,8 @@ declare interface DeleteSpecifyPrivateZoneVpcRequest {
   VpcSet?: VpcInfo[];
   /** 本次删除的关联账户VPC */
   AccountVpcSet?: AccountVpcInfo[];
+  /** 是否为同步操作 */
+  Sync?: boolean;
 }
 
 declare interface DeleteSpecifyPrivateZoneVpcResponse {
@@ -348,6 +354,8 @@ declare interface DeleteSpecifyPrivateZoneVpcResponse {
   VpcSet?: VpcInfo[];
   /** 本次删除的关联账户的VPC */
   AccountVpcSet?: AccountVpcInfo[];
+  /** 唯一id */
+  UniqId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

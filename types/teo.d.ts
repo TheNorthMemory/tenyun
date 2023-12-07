@@ -884,6 +884,14 @@ declare interface IPGroup {
   Content: string[];
 }
 
+/** IP 归属信息查询 */
+declare interface IPRegionInfo {
+  /** IP 地址，IPV4 或 IPV6。 */
+  IP?: string;
+  /** IP 是否属于 EdgeOne 节点，取值有：yes：该 IP 属于 EdgeOne 节点；no：该 IP 不属于 EdgeOne 节点。 */
+  IsEdgeOneIP?: string;
+}
+
 /** 源站防护IP白名单 */
 declare interface IPWhitelist {
   /** IPv4列表。 */
@@ -2694,6 +2702,18 @@ declare interface DescribeHostsSettingResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIPRegionRequest {
+  /** 待查询的 IP 列表，支持 IPV4 和 IPV6，最大可查询 100 条。 */
+  IPs: string[];
+}
+
+declare interface DescribeIPRegionResponse {
+  /** IP 归属信息列表。 */
+  IPRegionInfo?: IPRegionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIdentificationsRequest {
   /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-name 按照【站点名称】进行过滤。 类型：String 必选：是 */
   Filters: Filter[];
@@ -3765,6 +3785,8 @@ declare interface Teo {
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询域名详细配置 {@link DescribeHostsSettingRequest} {@link DescribeHostsSettingResponse} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
+  /** 查询 IP 归属信息 {@link DescribeIPRegionRequest} {@link DescribeIPRegionResponse} */
+  DescribeIPRegion(data: DescribeIPRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPRegionResponse>;
   /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
   /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
