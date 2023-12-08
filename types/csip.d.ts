@@ -664,6 +664,68 @@ declare interface FilterDataObject {
   Text?: string;
 }
 
+/** 网关资产 */
+declare interface GateWayAsset {
+  /** appid */
+  AppId?: string;
+  /** uin */
+  Uin?: string;
+  /** 资产ID */
+  AssetId?: string;
+  /** 资产名 */
+  AssetName?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 私有ip */
+  PrivateIp?: string;
+  /** 公网ip */
+  PublicIp?: string;
+  /** 区域 */
+  Region?: string;
+  /** 私有网络id */
+  VpcId?: string;
+  /** 私有网络名 */
+  VpcName?: string;
+  /** 标签 */
+  Tag?: Tag[] | null;
+  /** 出向峰值带宽 */
+  OutboundPeakBandwidth?: string;
+  /** 入向峰值带宽 */
+  InboundPeakBandwidth?: string;
+  /** 出站累计流量 */
+  OutboundCumulativeFlow?: string;
+  /** 入站累计流量 */
+  InboundCumulativeFlow?: string;
+  /** 网络攻击 */
+  NetworkAttack?: number;
+  /** 暴露端口 */
+  ExposedPort?: number;
+  /** 暴露漏洞 */
+  ExposedVUL?: number;
+  /** 配置风险 */
+  ConfigureRisk?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 任务数 */
+  ScanTask?: number;
+  /** 最后扫描时间 */
+  LastScanTime?: string;
+  /** 昵称 */
+  Nick?: string;
+  /** ipv6地址 */
+  AddressIPV6?: string | null;
+  /** 是否核心 */
+  IsCore?: number | null;
+  /** 风险服务暴露 */
+  RiskExposure?: number | null;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
+  /** 网关状态 */
+  Status?: string | null;
+  /** TSE的网关真实地域 */
+  EngineRegion?: string | null;
+}
+
 /** ip列表 */
 declare interface IpAssetListVO {
   /** 资产id */
@@ -1587,6 +1649,28 @@ declare interface DescribeDomainAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGatewayAssetsRequest {
+  /** 过滤参数 */
+  Filter?: Filter;
+}
+
+declare interface DescribeGatewayAssetsResponse {
+  /** 列表 */
+  Data?: GateWayAsset[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 地域列表 */
+  RegionList?: FilterDataObject[];
+  /** 资产类型列表 */
+  AssetTypeList?: FilterDataObject[];
+  /** vpc列表 */
+  VpcList?: FilterDataObject[];
+  /** appid列表 */
+  AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeListenerListRequest {
   /** - */
   Filter?: Filter;
@@ -2024,6 +2108,8 @@ declare interface Csip {
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;
+  /** 网关列表 {@link DescribeGatewayAssetsRequest} {@link DescribeGatewayAssetsResponse} */
+  DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
   /** 查询clb监听器列表 {@link DescribeListenerListRequest} {@link DescribeListenerListResponse} */
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */

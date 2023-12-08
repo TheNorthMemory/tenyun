@@ -1537,27 +1537,29 @@ declare interface TextVatInvoice {
 /** 行驶证副页正面的识别结果 */
 declare interface TextVehicleBack {
   /** 号牌号码 */
-  PlateNo: string | null;
+  PlateNo?: string | null;
   /** 档案编号 */
-  FileNo: string | null;
+  FileNo?: string | null;
   /** 核定人数 */
-  AllowNum: string | null;
+  AllowNum?: string | null;
   /** 总质量 */
-  TotalMass: string | null;
+  TotalMass?: string | null;
   /** 整备质量 */
-  CurbWeight: string | null;
+  CurbWeight?: string | null;
   /** 核定载质量 */
-  LoadQuality: string | null;
+  LoadQuality?: string | null;
   /** 外廓尺寸 */
-  ExternalSize: string | null;
+  ExternalSize?: string | null;
   /** 备注 */
-  Marks: string | null;
+  Marks?: string | null;
   /** 检验记录 */
-  Record: string | null;
+  Record?: string | null;
   /** 准牵引总质量 */
-  TotalQuasiMass: string | null;
+  TotalQuasiMass?: string | null;
   /** 副页编码 */
   SubPageCode?: string | null;
+  /** 燃料种类 */
+  FuelType?: string | null;
 }
 
 /** 行驶证主页正面的识别结果 */

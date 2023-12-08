@@ -2455,9 +2455,9 @@ declare interface DescribeAliasDomainsRequest {
 
 declare interface DescribeAliasDomainsResponse {
   /** 符合条件的别称域名个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 别称域名详细信息列表。 */
-  AliasDomains: AliasDomain[];
+  AliasDomains?: AliasDomain[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

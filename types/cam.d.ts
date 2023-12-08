@@ -406,7 +406,7 @@ declare interface SubAccountUser {
   UserType: number;
   /** 最近登录IP */
   LastLoginIp: string;
-  /** 最近登录时间 */
+  /** 最近登录时间，回参为空，即为未登录过控制台 */
   LastLoginTime: string | null;
 }
 
@@ -939,7 +939,7 @@ declare interface DescribeSubAccountsRequest {
 
 declare interface DescribeSubAccountsResponse {
   /** 子用户列表 */
-  SubAccounts: SubAccountUser[];
+  SubAccounts?: SubAccountUser[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -106,6 +106,10 @@ declare interface ApmInstanceDetail {
   MetricDuration?: number | null;
   /** 用户自定义展示标签列表 */
   CustomShowTags?: string[] | null;
+  /** 实例计费模式1为预付费0为按量付费 */
+  PayMode?: number | null;
+  /** 实例计费模式是否生效 */
+  PayModeEffective?: boolean | null;
 }
 
 /** 指标列表单元 */
@@ -249,11 +253,13 @@ declare interface CreateApmInstanceRequest {
   Tags?: ApmTag[];
   /** 实例上报额度值 */
   SpanDailyCounters?: number;
+  /** 实例的计费模式 */
+  PayMode?: number;
 }
 
 declare interface CreateApmInstanceResponse {
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -457,6 +463,8 @@ declare interface ModifyApmInstanceRequest {
   LogSource?: string;
   /** 用户自定义展示标签列表 */
   CustomShowTags?: string[];
+  /** 修改计费模式1为预付费0为按量付费 */
+  PayMode?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

@@ -1216,6 +1216,18 @@ declare interface ImageInfo {
   Base64?: string;
 }
 
+/** 图片脱敏选项不填默认敏感信息都脱敏 */
+declare interface ImageMaskFlags {
+  /** 是否对医院信息进行脱敏 */
+  HospitalFlag?: boolean;
+  /** 是否对医生信息进行脱敏 */
+  DoctorFlag?: boolean;
+  /** 是否对患者信息进行脱敏 */
+  PatientFlag?: boolean;
+  /** 是否对二维码信息进行脱敏 */
+  BarFlag?: boolean;
+}
+
 /** 免疫组化 */
 declare interface ImmunohistochemistryBlock {
   /** 名称 */
@@ -3350,6 +3362,20 @@ declare interface ValueUnitItem {
   Unit?: PhysicalBaseItem | null;
 }
 
+declare interface ImageMaskRequest {
+  /** 图片信息,目前只支持传图片base64 */
+  Image: ImageInfo;
+  /** 图片脱敏选项, 不传默认都脱敏 */
+  MaskFlag?: ImageMaskFlags;
+}
+
+declare interface ImageMaskResponse {
+  /** 脱敏后图片的Base64信息 */
+  MaskedImage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImageToClassRequest {
   /** 图片列表，允许传入多张图片，支持传入图片的base64编码，暂不支持图片url */
   ImageInfoList: ImageInfo[];
@@ -3477,6 +3503,8 @@ declare interface TurnPDFToObjectResponse {
 /** {@link Mrs 医疗报告结构化} */
 declare interface Mrs {
   (): Versions;
+  /** 医疗报告图片脱敏接口 {@link ImageMaskRequest} {@link ImageMaskResponse} */
+  ImageMask(data: ImageMaskRequest, config?: AxiosRequestConfig): AxiosPromise<ImageMaskResponse>;
   /** 图片分类接口 {@link ImageToClassRequest} {@link ImageToClassResponse} */
   ImageToClass(data: ImageToClassRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToClassResponse>;
   /** 图片结构化接口 {@link ImageToObjectRequest} {@link ImageToObjectResponse} */

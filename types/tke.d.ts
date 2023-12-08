@@ -2148,10 +2148,12 @@ declare interface ReservedInstanceSpec {
 
 /** 资源删除选项 */
 declare interface ResourceDeleteOption {
-  /** 资源类型，例如CBS */
+  /** 资源类型，例如CBS、CLB、CVM */
   ResourceType: string;
-  /** 集群删除时资源的删除模式：terminate（销毁），retain （保留） */
+  /** 集群删除时CBS资源的删除模式：terminate（销毁），retain （保留）。其他资源默认为销毁。 */
   DeleteMode: string;
+  /** 是否跳过开启删除保护的资源，默认false，设置为true时不清理开启了删除保护的资源，clb有终端节点的情况也属于开了删除保护。 */
+  SkipDeletionProtection?: boolean;
 }
 
 /** 集群资源使用量 */
