@@ -212,6 +212,8 @@ declare interface LoginActionFlag {
   Wechat?: number;
   /** 自定义 */
   Custom?: number;
+  /** 邮箱 */
+  Mail?: number;
 }
 
 /** 登录和敏感操作flag */

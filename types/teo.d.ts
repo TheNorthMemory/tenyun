@@ -2753,7 +2753,7 @@ declare interface DescribeOriginGroupResponse {
 }
 
 declare interface DescribeOriginProtectionRequest {
-  /** 查询的站点集合，不填默认查询所有站点。 */
+  /** 查询的站点ID集合。该参数必填。 */
   ZoneIds?: string[];
   /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：need-update 按照【站点是否需要更新源站防护IP白名单】进行过滤。 类型：String 必选：否 可选项： true：需要更新 false：无需更新plan-support 按照【站点套餐是否支持源站防护】进行过滤。 类型：String 必选：否 可选项： true：支持 false：不支持 */
   Filters?: Filter[];

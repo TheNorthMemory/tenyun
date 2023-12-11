@@ -184,6 +184,32 @@ declare interface ChannelBillUsageDetail {
   Remark?: string;
 }
 
+/** 渠道企业信息 */
+declare interface ChannelOrganizationInfo {
+  /** 电子签企业Id */
+  OrganizationId?: string | null;
+  /** 电子签企业OpenId */
+  OrganizationOpenId?: string | null;
+  /** 企业名称 */
+  OrganizationName?: string | null;
+  /** 企业信用代码 */
+  UnifiedSocialCreditCode?: string | null;
+  /** 法人姓名 */
+  LegalName?: string | null;
+  /** 法人OpenId */
+  LegalOpenId?: string | null;
+  /** 超管姓名 */
+  AdminName?: string | null;
+  /** 超管OpenId */
+  AdminOpenId?: string | null;
+  /** 超管手机号，脱敏后返回 */
+  AdminMobile?: string | null;
+  /** 企业认证状态字段。值如下： **"UNVERIFIED"**： 未认证的企业 **"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业 **"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业 **"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业 **"VERIFYING"**： 认证中的企业 **"VERIFIED"**： 已认证的企业 */
+  AuthorizationStatus?: string | null;
+  /** 企业认证方式字段。值如下： **"AuthorizationInit"**： 暂未选择授权方式 **"AuthorizationFile"**： 授权书 **"AuthorizationLegalPerson"**： 法人授权超管 **"AuthorizationLegalIdentity"**： 法人直接认证 */
+  AuthorizationType?: string | null;
+}
+
 /** 角色信息 */
 declare interface ChannelRole {
   /** 角色ID,为32位字符串 */
@@ -2232,6 +2258,32 @@ declare interface DescribeChannelFlowEvidenceReportResponse {
   RequestId?: string;
 }
 
+declare interface DescribeChannelOrganizationsRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 指定分页每页返回的数据条数，单页最大支持 200。 */
+  Limit: number;
+  /** 子客OrganizationOpenId，定向查询某个子客的企业数据。 */
+  OrganizationOpenId?: string;
+  /** 企业认证状态过滤字段。可值如下： **"UNVERIFIED"**： 未认证的企业 **"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业 **"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业 **"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业 **"VERIFYING"**： 认证中的企业 **"VERIFIED"**： 已认证的企业 */
+  AuthorizationStatusList?: string[];
+  /** 指定分页返回第几页的数据，如果不传默认返回第一页。 页码从 0 开始，即首页为 0，最大20000。 */
+  Offset?: number;
+}
+
+declare interface DescribeChannelOrganizationsResponse {
+  /** 企业企业信息列表。 */
+  ChannelOrganizationInfos?: ChannelOrganizationInfo[];
+  /** 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。 */
+  Offset?: number;
+  /** 指定分页每页返回的数据条数，单页最大支持 200。 */
+  Limit?: number;
+  /** 符合条件的企业数量。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeChannelSealPolicyWorkflowUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -4159,6 +4211,8 @@ declare interface Essbasic {
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
+  /** 查询渠道子客企业信息 {@link DescribeChannelOrganizationsRequest} {@link DescribeChannelOrganizationsResponse} */
+  DescribeChannelOrganizations(data: DescribeChannelOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelOrganizationsResponse>;
   /** 生成渠道子客用印申请审批链接 {@link DescribeChannelSealPolicyWorkflowUrlRequest} {@link DescribeChannelSealPolicyWorkflowUrlResponse} */
   DescribeChannelSealPolicyWorkflowUrl(data: DescribeChannelSealPolicyWorkflowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelSealPolicyWorkflowUrlResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfoRequest} {@link DescribeExtendedServiceAuthInfoResponse} */

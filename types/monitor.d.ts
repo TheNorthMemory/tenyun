@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 策略过滤条件 */
+declare interface AlarmConditionFilter {
+  /** 类型 */
+  Type?: string | null;
+  /** 表达式 */
+  Expression?: string | null;
+  /** 过滤条件 */
+  Dimensions?: string | null;
+}
+
 /** 告警事件 */
 declare interface AlarmEvent {
   /** 事件名 */
@@ -10,6 +20,14 @@ declare interface AlarmEvent {
   Description: string;
   /** 告警策略类型 */
   Namespace: string;
+}
+
+/** 聚合条件 */
+declare interface AlarmGroupByItem {
+  /** Item Id */
+  Id?: string | null;
+  /** 名称 */
+  Name?: string | null;
 }
 
 /** 通知模板ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警 */
@@ -204,6 +222,10 @@ declare interface AlarmPolicy {
   OriginId?: string | null;
   /** 标签 */
   TagInstances?: TagInstance[] | null;
+  /** 过滤条件 */
+  Filter?: AlarmConditionFilter | null;
+  /** 聚合条件 */
+  GroupBy?: AlarmGroupByItem[] | null;
   /** 策略关联的过滤维度信息 */
   FilterDimensionsParam?: string | null;
   /** 是否为一键告警策略 */

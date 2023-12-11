@@ -602,6 +602,20 @@ declare interface ModifyRecordsStatusResponse {
   RequestId?: string;
 }
 
+declare interface QueryAsyncBindVpcStatusRequest {
+  /** 唯一ID */
+  UniqId: string;
+}
+
+declare interface QueryAsyncBindVpcStatusResponse {
+  /** processing 处理中，success 执行成功，fail 执行失败 */
+  Status?: string;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubscribePrivateZoneServiceRequest {
 }
 
@@ -661,6 +675,8 @@ declare interface Privatedns {
   ModifyPrivateZoneVpc(data: ModifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneVpcResponse>;
   /** 修改解析记录状态 {@link ModifyRecordsStatusRequest} {@link ModifyRecordsStatusResponse} */
   ModifyRecordsStatus(data: ModifyRecordsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordsStatusResponse>;
+  /** 查询异步绑定vpc操作状态 {@link QueryAsyncBindVpcStatusRequest} {@link QueryAsyncBindVpcStatusResponse} */
+  QueryAsyncBindVpcStatus(data: QueryAsyncBindVpcStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAsyncBindVpcStatusResponse>;
   /** 开通私有域解析 {@link SubscribePrivateZoneServiceRequest} {@link SubscribePrivateZoneServiceResponse} */
   SubscribePrivateZoneService(data?: SubscribePrivateZoneServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SubscribePrivateZoneServiceResponse>;
 }

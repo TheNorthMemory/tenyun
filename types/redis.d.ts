@@ -1692,6 +1692,20 @@ declare interface DescribeInstanceShardsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceSupportFeatureRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。示例值：crs-asdasdas */
+  InstanceId: string;
+  /** 功能特性名称- read-local-node-only 就近接入功能- multi-account 多账号功能 */
+  FeatureName: string;
+}
+
+declare interface DescribeInstanceSupportFeatureResponse {
+  /** 是否支持 */
+  Support?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceZoneInfoRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId?: string;
@@ -2316,6 +2330,22 @@ declare interface ModifyInstanceAccountResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceAvailabilityZonesRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****，请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 切换时间。- 1：维护时间窗切换。- 2：立即切换。 */
+  SwitchOption: number;
+  /** 实例的节点信息，包含节点 ID、节点类型、节点可用区 ID等。具体信息，请参见[RedisNodeInfo ](https://cloud.tencent.com/document/product/239/20022)。单可用区实例无需传NodeId，多可用区实例NodeId必传 */
+  NodeSet: RedisNodeInfo[];
+}
+
+declare interface ModifyInstanceAvailabilityZonesResponse {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceParamsRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2536,6 +2566,16 @@ declare interface StartupInstanceResponse {
   RequestId?: string;
 }
 
+declare interface SwitchAccessNewInstanceRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。示例值：crs-asdasdas */
+  InstanceId: string;
+}
+
+declare interface SwitchAccessNewInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SwitchInstanceVipRequest {
   /** 源实例ID */
   SrcInstanceId: string;
@@ -2739,6 +2779,8 @@ declare interface Redis {
   DescribeInstanceSecurityGroup(data: DescribeInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSecurityGroupResponse>;
   /** 获取集群版实例分片信息 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
+  /** 查询实例支持的功能特性 {@link DescribeInstanceSupportFeatureRequest} {@link DescribeInstanceSupportFeatureResponse} */
+  DescribeInstanceSupportFeature(data: DescribeInstanceSupportFeatureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSupportFeatureResponse>;
   /** 查询Redis节点详细信息 {@link DescribeInstanceZoneInfoRequest} {@link DescribeInstanceZoneInfoResponse} */
   DescribeInstanceZoneInfo(data?: DescribeInstanceZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceZoneInfoResponse>;
   /** 查询Redis实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
@@ -2803,6 +2845,8 @@ declare interface Redis {
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
   /** 修改实例子账号 {@link ModifyInstanceAccountRequest} {@link ModifyInstanceAccountResponse} */
   ModifyInstanceAccount(data: ModifyInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAccountResponse>;
+  /** 修改实例可用区 {@link ModifyInstanceAvailabilityZonesRequest} {@link ModifyInstanceAvailabilityZonesResponse} */
+  ModifyInstanceAvailabilityZones(data: ModifyInstanceAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAvailabilityZonesResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 设置实例输入模式 {@link ModifyInstanceReadOnlyRequest} {@link ModifyInstanceReadOnlyResponse} */
@@ -2827,6 +2871,8 @@ declare interface Redis {
   RestoreInstance(data: RestoreInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreInstanceResponse>;
   /** 实例解隔离 {@link StartupInstanceRequest} {@link StartupInstanceResponse} */
   StartupInstance(data: StartupInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartupInstanceResponse>;
+  /** 立即切换操作 {@link SwitchAccessNewInstanceRequest} {@link SwitchAccessNewInstanceResponse} */
+  SwitchAccessNewInstance(data: SwitchAccessNewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchAccessNewInstanceResponse>;
   /** 交换实例VIP {@link SwitchInstanceVipRequest} {@link SwitchInstanceVipResponse} */
   SwitchInstanceVip(data: SwitchInstanceVipRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchInstanceVipResponse>;
   /** Proxy模拟故障接口 {@link SwitchProxyRequest} {@link SwitchProxyResponse} */

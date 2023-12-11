@@ -669,37 +669,41 @@ declare interface PulsarProClusterSpecInfo {
 /** Pulsar专业版实例信息 */
 declare interface PulsarProInstance {
   /** 实例id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例版本 */
-  InstanceVersion: string;
+  InstanceVersion?: string;
   /** 实例状态，0-创建中，1-正常，2-隔离中，3-已销毁，4 - 异常, 5 - 发货失败，6-变配中，7-变配失败 */
-  Status: number;
+  Status?: number;
   /** 实例配置规格名称 */
-  ConfigDisplay: string;
+  ConfigDisplay?: string;
   /** 峰值TPS */
-  MaxTps: number;
+  MaxTps?: number;
   /** 存储容量，GB为单位 */
-  MaxStorage: number;
+  MaxStorage?: number;
   /** 实例到期时间，毫秒为单位 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 0-后付费，1-预付费 */
-  PayMode: number;
+  PayMode?: number;
   /** 备注信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 实例配置ID */
-  SpecName: string;
+  SpecName?: string;
   /** 规格外弹性TPS */
-  ScalableTps: number | null;
+  ScalableTps?: number | null;
   /** VPC的id */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网id */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 峰值带宽。单位：mbps */
-  MaxBandWidth: number;
+  MaxBandWidth?: number;
+  /** 集群的标签列表 */
+  Tags?: Tag[] | null;
+  /** 集群创建时间 */
+  CreateTime?: string | null;
 }
 
 /** queue使用配额信息 */
