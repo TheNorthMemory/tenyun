@@ -800,6 +800,60 @@ declare interface IpAssetListVO {
   VerifyStatus?: number | null;
 }
 
+/** 网卡资产 */
+declare interface NICAsset {
+  /** appid */
+  AppId?: string;
+  /** uin */
+  Uin?: string;
+  /** 资产ID */
+  AssetId?: string;
+  /** 资产名 */
+  AssetName?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 私有ip */
+  PrivateIp?: string;
+  /** 公网ip */
+  PublicIp?: string;
+  /** 区域 */
+  Region?: string;
+  /** 私有网络id */
+  VpcId?: string;
+  /** 私有网络名 */
+  VpcName?: string;
+  /** 标签 */
+  Tag?: Tag[] | null;
+  /** 出向峰值带宽 */
+  OutboundPeakBandwidth?: string;
+  /** 入向峰值带宽 */
+  InboundPeakBandwidth?: string;
+  /** 出站累计流量 */
+  OutboundCumulativeFlow?: string;
+  /** 入站累计流量 */
+  InboundCumulativeFlow?: string;
+  /** 网络攻击 */
+  NetworkAttack?: number;
+  /** 暴露端口 */
+  ExposedPort?: number;
+  /** 暴露漏洞 */
+  ExposedVUL?: number;
+  /** 配置风险 */
+  ConfigureRisk?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 任务数 */
+  ScanTask?: number;
+  /** 最后扫描时间 */
+  LastScanTime?: string;
+  /** 昵称 */
+  Nick?: string;
+  /** 是否核心 */
+  IsCore?: number | null;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
+}
+
 /** 端口视角的端口风险对象 */
 declare interface PortViewPortRisk {
   /** 影响资产 */
@@ -1685,6 +1739,28 @@ declare interface DescribeListenerListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNICAssetsRequest {
+  /** 过滤参数 */
+  Filter?: Filter;
+}
+
+declare interface DescribeNICAssetsResponse {
+  /** 列表 */
+  Data?: NICAsset[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 地域列表 */
+  RegionList?: FilterDataObject[];
+  /** 资产类型列表 */
+  AssetTypeList?: FilterDataObject[];
+  /** vpc列表 */
+  VpcList?: FilterDataObject[];
+  /** appid列表 */
+  AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePublicIpAssetsRequest {
   /** filte过滤条件 */
   Filter?: Filter;
@@ -2112,6 +2188,8 @@ declare interface Csip {
   DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
   /** 查询clb监听器列表 {@link DescribeListenerListRequest} {@link DescribeListenerListResponse} */
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
+  /** 网卡列表 {@link DescribeNICAssetsRequest} {@link DescribeNICAssetsResponse} */
+  DescribeNICAssets(data?: DescribeNICAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNICAssetsResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 获取资产视角的配置风险列表 {@link DescribeRiskCenterAssetViewCFGRiskListRequest} {@link DescribeRiskCenterAssetViewCFGRiskListResponse} */

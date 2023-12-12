@@ -608,7 +608,7 @@ declare interface QueryAsyncBindVpcStatusRequest {
 }
 
 declare interface QueryAsyncBindVpcStatusResponse {
-  /** processing 处理中，success 执行成功，fail 执行失败 */
+  /** processing 处理中，success 执行成功，failed 执行失败 */
   Status?: string;
   /** 错误信息 */
   ErrorMsg?: string | null;

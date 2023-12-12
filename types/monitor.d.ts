@@ -2381,19 +2381,19 @@ declare interface CreateAlertRuleResponse {
 declare interface CreateExporterIntegrationRequest {
   /** 实例 ID */
   InstanceId: string;
-  /** 类型 */
+  /** 类型(可通过 DescribePrometheusIntegrations 接口获取，取每一项中的 ExporterType 字段) */
   Kind: string;
   /** 集成配置 */
   Content: string;
-  /** Kubernetes 集群类型，取值如下： 1= 容器集群(TKE) 2=弹性集群 3= Prometheus管理的弹性集群 */
+  /** Kubernetes 集群类型，可不填，取值如下： 1= 容器集群(TKE) 2=弹性集群(EKS) 3= Prometheus管理的弹性集群(MEKS) */
   KubeType?: number;
-  /** 集群 ID */
+  /** 集群 ID，可不填 */
   ClusterId?: string;
 }
 
 declare interface CreateExporterIntegrationResponse {
   /** 返回创建成功的集成名称列表 */
-  Names: string[];
+  Names?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2569,13 +2569,13 @@ declare interface CreatePrometheusGlobalNotificationResponse {
 declare interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
   /** 实例名 */
   InstanceName: string;
-  /** VPC ID */
+  /** VPC ID(可通过 vpc:DescribeVpcs 接口获取，与实例同地域) */
   VpcId: string;
-  /** 子网 ID */
+  /** 子网 ID(可通过 vpc:DescribeSubnets 接口获取) */
   SubnetId: string;
   /** 数据存储时间（单位天），限制值为15，30，45之一 */
   DataRetentionTime: number;
-  /** 可用区 */
+  /** 可用区(与子网同可用区) */
   Zone: string;
   /** 实例的标签 */
   TagSpecification?: PrometheusTag[];
@@ -2585,7 +2585,7 @@ declare interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
 
 declare interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
   /** 实例 ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2605,17 +2605,17 @@ declare interface CreatePrometheusRecordRuleYamlResponse {
 }
 
 declare interface CreatePrometheusScrapeJobRequest {
-  /** Prometheus 实例 ID，例如：prom-abcd1234 */
+  /** Prometheus 实例 ID */
   InstanceId: string;
-  /** Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取 */
+  /** Agent ID(可通过DescribePrometheusAgents 接口获取) */
   AgentId: string;
-  /** 抓取任务配置，格式：job_name:xx */
+  /** 抓取任务配置 */
   Config?: string;
 }
 
 declare interface CreatePrometheusScrapeJobResponse {
   /** 成功创建抓取任务 Id */
-  JobId: string;
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2635,7 +2635,7 @@ declare interface CreatePrometheusTempResponse {
 declare interface CreateRecordingRuleRequest {
   /** 聚合规则名称 */
   Name: string;
-  /** 聚合规则组内容，格式为 yaml */
+  /** 聚合规则组内容，格式为 yaml，通过 base64 进行编码。 */
   Group: string;
   /** Prometheus 实例 ID */
   InstanceId: string;
@@ -2729,13 +2729,13 @@ declare interface DeleteAlertRulesResponse {
 declare interface DeleteExporterIntegrationRequest {
   /** 实例 ID */
   InstanceId: string;
-  /** 类型 */
+  /** 类型(可通过 DescribeExporterIntegrations获取) */
   Kind: string;
   /** 名字 */
   Name: string;
-  /** Kubernetes 集群类型，取值如下： 1= 容器集群(TKE) 2=弹性集群 3= Prometheus管理的弹性集群 */
+  /** Kubernetes 集群类型，取值如下： 1= 容器集群(TKE) 2=弹性集群(EKS) 3= Prometheus管理的弹性集群(MEKS) */
   KubeType?: number;
-  /** 集群 ID */
+  /** 集群 ID，可不填 */
   ClusterId?: string;
 }
 
@@ -2851,9 +2851,9 @@ declare interface DeletePrometheusRecordRuleYamlResponse {
 declare interface DeletePrometheusScrapeJobsRequest {
   /** 实例 ID */
   InstanceId: string;
-  /** Agent ID */
+  /** Agent ID(可通过 DescribePrometheusAgents 接口获取) */
   AgentId: string;
-  /** 任务 ID 列表 */
+  /** 任务 ID 列表(可通过 DescribePrometheusScrapeJobs 接口获取) */
   JobIds: string[];
 }
 
@@ -4937,7 +4937,7 @@ declare interface UpdateServiceDiscoveryResponse {
 declare interface UpgradeGrafanaDashboardRequest {
   /** 实例 ID */
   InstanceId: string;
-  /** Prometheus 集成项 Code，升级对应的 Dashboard，取值如下：spring_mvcmysqlgoredisjvmpgsqlmongokafkaesflinkblackboxconsulememcachedzktpsistioetcd */
+  /** Prometheus 集成项 Code，升级对应的 Dashboard，取值如下：qcloudcvm_process_exportercvm_node_exportercvmkubernetescdwchrocketmqspring_mvcmysqlgoredisjvmpgsqlmongokafkaesflinkblackboxconsulememcachedzktpsistioetcdptskong */
   IntegrationCodes?: string[];
 }
 

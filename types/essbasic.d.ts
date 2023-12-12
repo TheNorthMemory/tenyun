@@ -186,28 +186,28 @@ declare interface ChannelBillUsageDetail {
 
 /** 渠道企业信息 */
 declare interface ChannelOrganizationInfo {
-  /** 电子签企业Id */
-  OrganizationId?: string | null;
-  /** 电子签企业OpenId */
-  OrganizationOpenId?: string | null;
-  /** 企业名称 */
-  OrganizationName?: string | null;
-  /** 企业信用代码 */
-  UnifiedSocialCreditCode?: string | null;
-  /** 法人姓名 */
-  LegalName?: string | null;
-  /** 法人OpenId */
-  LegalOpenId?: string | null;
-  /** 超管姓名 */
-  AdminName?: string | null;
-  /** 超管OpenId */
-  AdminOpenId?: string | null;
-  /** 超管手机号，脱敏后返回 */
-  AdminMobile?: string | null;
+  /** 电子签平台给企业分配的ID（在不同应用下同一个企业会分配通用的ID） */
+  OrganizationId?: string;
+  /** 第三方平台子客企业的唯一标识 */
+  OrganizationOpenId?: string;
+  /** 第三方平台子客企业名称 */
+  OrganizationName?: string;
+  /** 企业的统一社会信用代码 */
+  UnifiedSocialCreditCode?: string;
+  /** 企业法定代表人的姓名 */
+  LegalName?: string;
+  /** 企业法定代表人作为第三方平台子客企业员工的唯一标识 */
+  LegalOpenId?: string;
+  /** 企业超级管理员的姓名 */
+  AdminName?: string;
+  /** 企业超级管理员作为第三方平台子客企业员工的唯一标识 */
+  AdminOpenId?: string;
+  /** 企业超级管理员的手机号码**注**：`手机号码脱敏（隐藏部分用*替代）` */
+  AdminMobile?: string;
   /** 企业认证状态字段。值如下： **"UNVERIFIED"**： 未认证的企业 **"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业 **"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业 **"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业 **"VERIFYING"**： 认证中的企业 **"VERIFIED"**： 已认证的企业 */
-  AuthorizationStatus?: string | null;
+  AuthorizationStatus?: string;
   /** 企业认证方式字段。值如下： **"AuthorizationInit"**： 暂未选择授权方式 **"AuthorizationFile"**： 授权书 **"AuthorizationLegalPerson"**： 法人授权超管 **"AuthorizationLegalIdentity"**： 法人直接认证 */
-  AuthorizationType?: string | null;
+  AuthorizationType?: string;
 }
 
 /** 角色信息 */
@@ -646,7 +646,7 @@ declare interface FlowResourceUrlInfo {
   ResourceUrlInfos?: ResourceUrlInfo[] | null;
 }
 
-/** 电子文档的控件填充信息。按照控件类型进行相应的填充。当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "文本内容"}```当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "多行文本内容"}```当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "true"}```当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"}```当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"}```当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "选择的内容"}```当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "2023年01月01日"}```当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "广东省深圳市福田区"}```【数据表格传参说明】当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例3（表格设置字体加粗颜色）：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "CENTER"} }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "LEFT"} }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789", "style": {"color": "#b500bf", "fontSize": 12,"bold": false,"align": "RIGHT"} } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 || cells.N.style | String | 单元格字体风格配置 ，风格配置的json字符串 如： {"font":"黑体","fontSize":12,"color":"FFFFFF","bold":true,"align":"CENTER"} |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF 字符串形如： "FFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER */
+/** 电子文档的控件填充信息。按照控件类型进行相应的填充。当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "文本内容"}```当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "多行文本内容"}```当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "true"}```当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"}```当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"}```当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "选择的内容"}```当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "2023年01月01日"}```当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "广东省深圳市福田区"}```【数据表格传参说明】当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例3（表格设置字体加粗颜色）：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "CENTER"} }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "LEFT"} }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789", "style": {"color": "#b500bf", "fontSize": 12,"bold": false,"align": "RIGHT"} } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 || cells.N.style | String | 单元格字体风格配置 ，风格配置的json字符串 如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"} |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF 字符串形如： "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER */
 declare interface FormField {
   /** 控件填充值，ComponentType和传入值格式对应关系如下：TEXT - 普通文本控件，需输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，需输入文本字符串；CHECK_BOX - 勾选框控件，若选中需填写ComponentValue，填写 true或者 false 字符串；FILL_IMAGE - 图片控件，需填写ComponentValue为图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件，需填写ComponentValue为附件图片的资源 ID列表，以逗号分割；DATE - 日期控件；格式为 xxxx年xx月xx日 字符串；DISTRICT - 省市区行政区控件，需填写ComponentValue为省市区行政区字符串内容； */
   ComponentValue: string;
@@ -1167,12 +1167,14 @@ declare interface ChannelCreateBatchCancelFlowUrlResponse {
 }
 
 declare interface ChannelCreateBatchQuickSignUrlRequest {
-  /** 批量签署的合同流程ID数组。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
-  FlowIds: string[];
   /** 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。注:`1. ApproverType目前只支持个人类型的签署人。``2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。``3. 当需要通过短信验证码签署时，手机号ApproverMobile需要与发起合同时填写的用户手机号一致。` */
   FlowApproverInfo: FlowApproverInfo;
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent?: Agent;
+  /** 批量签署的合同流程ID数组。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
+  FlowIds?: string[];
+  /** 合同组编号注：`该参数和合同流程ID数组必须二选一` */
+  FlowGroupId?: string;
   /** 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议) */
   JumpUrl?: string;
   /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。 */
@@ -1205,7 +1207,7 @@ declare interface ChannelCreateBatchSignUrlRequest {
   NotifyType?: string;
   /** 本次需要批量签署的合同流程ID列表。可以不传, 如不传则是发给对方的所有待签署合同流程。 */
   FlowIds?: string[];
-  /** 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。 */
+  /** 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。若为子客企业，请确保员工已经加入企业。 */
   OrganizationName?: string;
   /** 是否直接跳转至合同内容页面进行签署**false**: 会跳转至批量合同流程的列表, 点击需要批量签署合同后进入合同内容页面进行签署(默认)**true**: 跳过合同流程列表, 直接进入合同内容页面进行签署 */
   JumpToDetail?: boolean;
@@ -1575,6 +1577,8 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   EnableAutoSign?: boolean;
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
   LicenseType?: number;
+  /** **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
+  SceneKey?: string;
 }
 
 declare interface ChannelCreatePreparedPersonalEsignResponse {
@@ -2263,22 +2267,22 @@ declare interface DescribeChannelOrganizationsRequest {
   Agent: Agent;
   /** 指定分页每页返回的数据条数，单页最大支持 200。 */
   Limit: number;
-  /** 子客OrganizationOpenId，定向查询某个子客的企业数据。 */
+  /** 该字段是指第三方平台子客企业的唯一标识，用于查询单独某个子客的企业数据。**注**：`如果需要批量查询本应用下的所有企业的信息，则该字段不需要赋值` */
   OrganizationOpenId?: string;
-  /** 企业认证状态过滤字段。可值如下： **"UNVERIFIED"**： 未认证的企业 **"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业 **"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业 **"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业 **"VERIFYING"**： 认证中的企业 **"VERIFIED"**： 已认证的企业 */
+  /** 可以按照当前企业的认证状态进行过滤。可值如下：**"UNVERIFIED"**： 未认证的企业 **"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业 **"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业 **"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业 **"VERIFYING"**： 认证进行中的企业 **"VERIFIED"**： 已认证完成的企业 */
   AuthorizationStatusList?: string[];
   /** 指定分页返回第几页的数据，如果不传默认返回第一页。 页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number;
 }
 
 declare interface DescribeChannelOrganizationsResponse {
-  /** 企业企业信息列表。 */
+  /** 满足查询条件的企业信息列表。 */
   ChannelOrganizationInfos?: ChannelOrganizationInfo[];
   /** 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。 */
   Offset?: number;
   /** 指定分页每页返回的数据条数，单页最大支持 200。 */
   Limit?: number;
-  /** 符合条件的企业数量。 */
+  /** 满足查询条件的企业总数量。 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4211,7 +4215,7 @@ declare interface Essbasic {
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
-  /** 查询渠道子客企业信息 {@link DescribeChannelOrganizationsRequest} {@link DescribeChannelOrganizationsResponse} */
+  /** 查询企业信息 {@link DescribeChannelOrganizationsRequest} {@link DescribeChannelOrganizationsResponse} */
   DescribeChannelOrganizations(data: DescribeChannelOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelOrganizationsResponse>;
   /** 生成渠道子客用印申请审批链接 {@link DescribeChannelSealPolicyWorkflowUrlRequest} {@link DescribeChannelSealPolicyWorkflowUrlResponse} */
   DescribeChannelSealPolicyWorkflowUrl(data: DescribeChannelSealPolicyWorkflowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelSealPolicyWorkflowUrlResponse>;

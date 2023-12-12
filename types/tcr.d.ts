@@ -44,24 +44,6 @@ declare interface CVEWhitelistItem {
   CVEID?: string | null;
 }
 
-/** 自定义账户 */
-declare interface CustomAccount {
-  /** 自定义账户名 */
-  Name?: string | null;
-  /** 描述 */
-  Description?: string | null;
-  /** 是否禁用 */
-  Disable?: boolean | null;
-  /** 过期时间 */
-  ExpiresAt?: number | null;
-  /** 创建时间 */
-  CreateTime?: string | null;
-  /** 更新时间 */
-  UpdateTime?: string | null;
-  /** 策略 */
-  Permissions?: Permission[] | null;
-}
-
 /** 自定义域名信息 */
 declare interface CustomizedDomainInfo {
   /** 实例ID */
@@ -1632,30 +1614,6 @@ declare interface DescribeChartDownloadInfoResponse {
   RequestId?: string;
 }
 
-declare interface DescribeCustomAccountsRequest {
-  /** 实例Id */
-  RegistryId: string;
-  /** 列出所有自定义账户 */
-  All?: boolean;
-  /** 填充策略 */
-  EmbedPermission?: boolean;
-  /** 过滤条件 */
-  Filters?: Filter[];
-  /** 偏移量,默认0 */
-  Offset?: number;
-  /** 最大输出条数，默认20，最大为100 */
-  Limit?: number;
-}
-
-declare interface DescribeCustomAccountsResponse {
-  /** 自定义账户列表 */
-  CustomAccounts?: CustomAccount[] | null;
-  /** 自定义账户数量 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeExternalEndpointStatusRequest {
   /** 实例Id */
   RegistryId: string;
@@ -2783,8 +2741,6 @@ declare interface Tcr {
   DescribeApplicationTriggerPersonal(data?: DescribeApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerPersonalResponse>;
   /** 查询Chart包下载信息 {@link DescribeChartDownloadInfoRequest} {@link DescribeChartDownloadInfoResponse} */
   DescribeChartDownloadInfo(data: DescribeChartDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChartDownloadInfoResponse>;
-  /** @deprecated 查询自定义账号 {@link DescribeCustomAccountsRequest} {@link DescribeCustomAccountsResponse} */
-  DescribeCustomAccounts(data: DescribeCustomAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomAccountsResponse>;
   /** 查询实例公网访问入口状态 {@link DescribeExternalEndpointStatusRequest} {@link DescribeExternalEndpointStatusResponse} */
   DescribeExternalEndpointStatus(data: DescribeExternalEndpointStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalEndpointStatusResponse>;
   /** 查询个人收藏仓库 {@link DescribeFavorRepositoryPersonalRequest} {@link DescribeFavorRepositoryPersonalResponse} */

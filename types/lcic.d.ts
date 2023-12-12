@@ -356,7 +356,7 @@ declare interface RoomItem {
   Name?: string | null;
   /** 房间ID */
   RoomId?: number | null;
-  /** 房间状态。0 未开始 ；1进行中 ；2 已结束 */
+  /** 房间状态。0 未开始 ；1进行中 ；2 已结束；3已过期 */
   Status?: number | null;
   /** 开始时间 */
   StartTime?: number | null;
@@ -394,6 +394,8 @@ declare interface RoomItem {
   RecordLiveUrl?: string | null;
   /** 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效 */
   EnableAutoStart?: number | null;
+  /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
+  RecordBackground?: string | null;
 }
 
 /** 场景配置 */

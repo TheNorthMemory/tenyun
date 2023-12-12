@@ -4167,7 +4167,7 @@ declare interface UpsertCCRuleRequest {
   Name: string;
   /** 状态 */
   Status: number;
-  /** 高级模式 */
+  /** 高级模式（是否使用Session检测），0表示不启用，1表示启用 */
   Advance: string;
   /** CC检测阈值 */
   Limit: string;
@@ -4175,9 +4175,9 @@ declare interface UpsertCCRuleRequest {
   Interval: string;
   /** 检测Url */
   Url: string;
-  /** 匹配方法 */
+  /** 匹配方法，0表示等于，1表示前缀匹配，2表示包含 */
   MatchFunc: number;
-  /** 动作 */
+  /** 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截 */
   ActionType: string;
   /** 优先级 */
   Priority: number;
@@ -4185,7 +4185,7 @@ declare interface UpsertCCRuleRequest {
   ValidTime: number;
   /** 附加参数 */
   OptionsArr?: string;
-  /** waf版本 */
+  /** waf版本，sparta-waf或者clb-waf */
   Edition?: string;
   /** 操作类型 */
   Type?: number;

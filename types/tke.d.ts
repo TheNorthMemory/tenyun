@@ -2662,6 +2662,22 @@ declare interface CreateBackupStorageLocationResponse {
   RequestId?: string;
 }
 
+declare interface CreateCLSLogConfigRequest {
+  /** 日志采集配置的json表达 */
+  LogConfig: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** CLS日志集ID */
+  LogsetId?: string;
+  /** 当前集群类型支持tke、eks */
+  ClusterType?: string;
+}
+
+declare interface CreateCLSLogConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateClusterEndpointRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3042,6 +3058,22 @@ declare interface CreateEdgeLogConfigRequest {
 }
 
 declare interface CreateEdgeLogConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateEksLogConfigRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 日志采集配置的json表达 */
+  LogConfig: string;
+  /** 日志集ID */
+  LogsetId?: string;
+}
+
+declare interface CreateEksLogConfigResponse {
+  /** 日志采集topicid */
+  TopicId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6291,6 +6323,8 @@ declare interface Tke {
   CheckInstancesUpgradeAble(data: CheckInstancesUpgradeAbleRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstancesUpgradeAbleResponse>;
   /** 创建备份仓库 {@link CreateBackupStorageLocationRequest} {@link CreateBackupStorageLocationResponse} */
   CreateBackupStorageLocation(data: CreateBackupStorageLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupStorageLocationResponse>;
+  /** 创建日志采集配置 {@link CreateCLSLogConfigRequest} {@link CreateCLSLogConfigResponse} */
+  CreateCLSLogConfig(data: CreateCLSLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSLogConfigResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建集群访问端口 {@link CreateClusterEndpointRequest} {@link CreateClusterEndpointResponse} */
@@ -6321,6 +6355,8 @@ declare interface Tke {
   CreateEdgeCVMInstances(data: CreateEdgeCVMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeCVMInstancesResponse>;
   /** 创建边缘集群日志采集配置 {@link CreateEdgeLogConfigRequest} {@link CreateEdgeLogConfigResponse} */
   CreateEdgeLogConfig(data: CreateEdgeLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeLogConfigResponse>;
+  /** 弹性集群创建日志采集配置 {@link CreateEksLogConfigRequest} {@link CreateEksLogConfigResponse} */
+  CreateEksLogConfig(data: CreateEksLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEksLogConfigResponse>;
   /** 创建镜像缓存 {@link CreateImageCacheRequest} {@link CreateImageCacheResponse} */
   CreateImageCache(data: CreateImageCacheRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageCacheResponse>;
   /** 创建告警策略 {@link CreatePrometheusAlertPolicyRequest} {@link CreatePrometheusAlertPolicyResponse} */
