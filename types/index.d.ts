@@ -48,6 +48,7 @@ import Cdc, { Versions as CdcVersions } from "./cdc";
 import Cdn, { Versions as CdnVersions } from "./cdn";
 import Cds, { Versions as CdsVersions } from "./cds";
 import Cdwch, { Versions as CdwchVersions } from "./cdwch";
+import Cdwdoris, { Versions as CdwdorisVersions } from "./cdwdoris";
 import Cdwpg, { Versions as CdwpgVersions } from "./cdwpg";
 import Cfg, { Versions as CfgVersions } from "./cfg";
 import Cfs, { Versions as CfsVersions } from "./cfs";
@@ -294,6 +295,7 @@ export declare type SERVICE_VERSIONS = {
   cdn: CdnVersions,
   cds: CdsVersions,
   cdwch: CdwchVersions,
+  cdwdoris: CdwdorisVersions,
   cdwpg: CdwpgVersions,
   cfg: CfgVersions,
   cfs: CfsVersions,
@@ -602,6 +604,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   cds: Cds,
   /** {@link Cdwch 云数据仓库 ClickHouse} */
   cdwch: Cdwch,
+  /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
+  cdwdoris: Cdwdoris,
   /** {@link Cdwpg 云数据仓库 PostgreSQL} */
   cdwpg: Cdwpg,
   /** {@link Cfg 混沌演练平台} */
