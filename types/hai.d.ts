@@ -288,6 +288,36 @@ declare interface RunInstancesResponse {
   RequestId?: string;
 }
 
+declare interface StartInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 默认为False，True代表只验证接口连通性 */
+  DryRun?: boolean;
+}
+
+declare interface StartInstanceResponse {
+  /** task任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** hai实例关机的模式，目前仅支持关机不收费：STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源的费用。注意：默认值为STOP_CHARGE */
+  StopMode?: string;
+  /** 默认为False，True代表只验证接口连通性 */
+  DryRun?: boolean;
+}
+
+declare interface StopInstanceResponse {
+  /** task任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateInstancesRequest {
   /** 实例ID列表 */
   InstanceIds: string[];
@@ -319,6 +349,10 @@ declare interface Hai {
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
   /** 创建实例 {@link RunInstancesRequest} {@link RunInstancesResponse} */
   RunInstances(data: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
+  /** 启动hai实例 {@link StartInstanceRequest} {@link StartInstanceResponse} */
+  StartInstance(data: StartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstanceResponse>;
+  /** 关闭hai实例 {@link StopInstanceRequest} {@link StopInstanceResponse} */
+  StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
   /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
 }

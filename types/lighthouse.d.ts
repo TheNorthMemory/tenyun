@@ -165,11 +165,11 @@ declare interface DataDiskPrice {
 /** 限制操作。 */
 declare interface DeniedAction {
   /** 限制操作名。 */
-  Action: string;
+  Action?: string;
   /** 限制操作消息码。 */
-  Code: string;
+  Code?: string;
   /** 限制操作消息。 */
-  Message: string;
+  Message?: string;
 }
 
 /** 计费项目明细。 */
@@ -331,31 +331,31 @@ declare interface DiskPrice {
 /** 可退还云硬盘详细信息 */
 declare interface DiskReturnable {
   /** 云硬盘ID。 */
-  DiskId: string;
+  DiskId?: string;
   /** 云硬盘是否可退还。 */
-  IsReturnable: boolean;
+  IsReturnable?: boolean;
   /** 云硬盘退还失败错误码。 */
-  ReturnFailCode: number;
+  ReturnFailCode?: number;
   /** 云硬盘退还失败错误信息。 */
-  ReturnFailMessage: string;
+  ReturnFailMessage?: string;
 }
 
 /** Docker活动信息 */
 declare interface DockerActivity {
   /** 活动ID。 */
-  ActivityId: string;
+  ActivityId?: string;
   /** 活动名称。 */
-  ActivityName: string;
+  ActivityName?: string;
   /** 活动状态。取值范围： INIT：表示初始化，活动尚未执行OPERATING：表示活动执行中SUCCESS：表示活动执行成功FAILED：表示活动执行失败 */
-  ActivityState: string;
+  ActivityState?: string;
   /** 活动执行的命令输出，以base64编码。 */
-  ActivityCommandOutput: string;
+  ActivityCommandOutput?: string;
   /** 容器ID列表。 */
-  ContainerIds: string[];
+  ContainerIds?: string[];
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 */
-  EndTime: string | null;
+  EndTime?: string | null;
 }
 
 /** Docker容器信息 */
@@ -595,9 +595,9 @@ declare interface InstanceChargePrepaid {
 /** 实例操作限制列表。 */
 declare interface InstanceDeniedActions {
   /** 实例 ID。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 操作限制列表。 */
-  DeniedActions: DeniedAction[];
+  DeniedActions?: DeniedAction[];
 }
 
 /** 实例标识信息。 */
@@ -665,17 +665,17 @@ declare interface InternetAccessible {
 /** 描述密钥对信息。 */
 declare interface KeyPair {
   /** 密钥对 ID ，是密钥对的唯一标识。 */
-  KeyId: string;
+  KeyId?: string;
   /** 密钥对名称。 */
-  KeyName: string;
+  KeyName?: string;
   /** 密钥对的纯文本公钥。 */
-  PublicKey: string;
+  PublicKey?: string;
   /** 密钥对关联的实例 ID 列表。 */
-  AssociatedInstanceIds: string[] | null;
+  AssociatedInstanceIds?: string[] | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 密钥对私钥。 */
-  PrivateKey: string | null;
+  PrivateKey?: string | null;
 }
 
 /** 实例密码登录配置信息。 */
@@ -809,9 +809,9 @@ declare interface Snapshot {
 /** 快照操作限制列表。 */
 declare interface SnapshotDeniedActions {
   /** 快照 ID。 */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 操作限制列表。 */
-  DeniedActions: DeniedAction[];
+  DeniedActions?: DeniedAction[];
 }
 
 /** 描述镜像软件信息。 */
@@ -1453,9 +1453,9 @@ declare interface DescribeDockerActivitiesRequest {
 
 declare interface DescribeDockerActivitiesResponse {
   /** 总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** Docker活动列表。 */
-  DockerActivitySet: DockerActivity[];
+  DockerActivitySet?: DockerActivity[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2339,6 +2339,10 @@ declare interface ResetInstanceRequest {
   InstanceId: string;
   /** 镜像 ID。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。 */
   BlueprintId?: string;
+  /** 要创建的容器配置列表。 */
+  Containers?: DockerContainerConfiguration[];
+  /** 实例登录信息配置。默认缺失情况下代表用户选择实例创建后设置登录密码或绑定密钥。 */
+  LoginConfiguration?: LoginConfiguration;
 }
 
 declare interface ResetInstanceResponse {

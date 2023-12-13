@@ -131,19 +131,19 @@ declare interface DataDisk {
 /** 容灾组信息 */
 declare interface DisasterRecoverGroup {
   /** 分散置放群组id。 */
-  DisasterRecoverGroupId: string;
+  DisasterRecoverGroupId?: string;
   /** 分散置放群组名称，长度1-60个字符。 */
-  Name: string;
+  Name?: string;
   /** 分散置放群组类型，取值范围：HOST：物理机SW：交换机RACK：机架 */
-  Type: string;
+  Type?: string;
   /** 分散置放群组内最大容纳云服务器数量。 */
-  CvmQuotaTotal: number;
+  CvmQuotaTotal?: number;
   /** 分散置放群组内云服务器当前数量。 */
-  CurrentNum: number;
+  CurrentNum?: number;
   /** 分散置放群组内，云服务器id列表。 */
-  InstanceIds: string[] | null;
+  InstanceIds?: string[] | null;
   /** 分散置放群组创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
 }
 
 /** 置放群组配置数据 */
@@ -1585,9 +1585,9 @@ declare interface DescribeDisasterRecoverGroupsRequest {
 
 declare interface DescribeDisasterRecoverGroupsResponse {
   /** 分散置放群组信息列表。 */
-  DisasterRecoverGroupSet: DisasterRecoverGroup[];
+  DisasterRecoverGroupSet?: DisasterRecoverGroup[];
   /** 用户置放群组总量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2844,9 +2844,9 @@ declare interface SyncImagesResponse {
 }
 
 declare interface TerminateInstancesRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
-  /** 释放实例挂载的包年包月数据盘。 */
+  /** 释放实例挂载的包年包月数据盘。true表示销毁实例同时释放包年包月数据盘，false表示只销毁实例。 */
   ReleasePrepaidDataDisks?: boolean;
 }
 

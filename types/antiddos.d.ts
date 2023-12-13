@@ -628,6 +628,22 @@ declare interface InstanceRelation {
   InstanceId: string;
 }
 
+/** IP封堵记录 */
+declare interface IpBlockData {
+  /** 状态（Blocked：被封堵；UnBlocking：解封中；UnBlockFailed：解封失败） */
+  Status: string;
+  /** 资源IP */
+  Ip: string;
+  /** 封堵时间 */
+  BlockTime: string;
+  /** 解封时间（预计解封时间） */
+  UnBlockTime: string;
+  /** 解封类型（user：自助解封；auto：自动解封； update：升级解封；bind：绑定高防包解封） */
+  ActionType: string;
+  /** 高防标记，0：非高防，1：高防 */
+  ProtectFlag: number;
+}
+
 /** ip段数据结构 */
 declare interface IpSegment {
   /** ip地址 */
@@ -2114,6 +2130,16 @@ declare interface DescribeDefaultAlarmThresholdResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIpBlockListRequest {
+}
+
+declare interface DescribeIpBlockListResponse {
+  /** IP封堵列表 */
+  List: IpBlockData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeL7RulesBySSLCertIdRequest {
   /** 域名状态，可取bindable, binded, opened, closed, all，all表示全部状态 */
   Status: string;
@@ -2943,7 +2969,7 @@ declare interface Antiddos {
   CreateCCReqLimitPolicy(data: CreateCCReqLimitPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCReqLimitPolicyResponse>;
   /** 新建CC四层黑白名单 {@link CreateCcBlackWhiteIpListRequest} {@link CreateCcBlackWhiteIpListResponse} */
   CreateCcBlackWhiteIpList(data: CreateCcBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcBlackWhiteIpListResponse>;
-  /** 新建cc防护的地域封禁配置 {@link CreateCcGeoIPBlockConfigRequest} {@link CreateCcGeoIPBlockConfigResponse} */
+  /** 新建CC防护的地域封禁配置 {@link CreateCcGeoIPBlockConfigRequest} {@link CreateCcGeoIPBlockConfigResponse} */
   CreateCcGeoIPBlockConfig(data: CreateCcGeoIPBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcGeoIPBlockConfigResponse>;
   /** 设置DDoS防护的AI防护开关 {@link CreateDDoSAIRequest} {@link CreateDDoSAIResponse} */
   CreateDDoSAI(data: CreateDDoSAIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSAIResponse>;
@@ -3039,6 +3065,8 @@ declare interface Antiddos {
   DescribeDDoSTrend(data: DescribeDDoSTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSTrendResponse>;
   /** 获取单IP默认告警阈值配置 {@link DescribeDefaultAlarmThresholdRequest} {@link DescribeDefaultAlarmThresholdResponse} */
   DescribeDefaultAlarmThreshold(data: DescribeDefaultAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultAlarmThresholdResponse>;
+  /** 获取IP封堵列表 {@link DescribeIpBlockListRequest} {@link DescribeIpBlockListResponse} */
+  DescribeIpBlockList(data?: DescribeIpBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpBlockListResponse>;
   /** 查询与证书ID匹配的七层规则 {@link DescribeL7RulesBySSLCertIdRequest} {@link DescribeL7RulesBySSLCertIdResponse} */
   DescribeL7RulesBySSLCertId(data: DescribeL7RulesBySSLCertIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7RulesBySSLCertIdResponse>;
   /** 获取高防IP资产实例列表 {@link DescribeListBGPIPInstancesRequest} {@link DescribeListBGPIPInstancesResponse} */

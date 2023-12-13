@@ -557,15 +557,19 @@ declare interface GetRunCallsResponse {
 declare interface GetRunMetadataFileRequest {
   /** 任务Uuid。 */
   RunUuid: string;
-  /** 需要获取的文件名。默认支持以下文件：- nextflow.log提交时NFOption中report指定为true时，额外支持以下文件：- execution_report.html- execution_timeline.html- execution_trace.txt- pipeline_dag.html */
-  Key: string;
   /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
+  /** 需要获取的文件名。默认支持以下文件：- nextflow.log提交时NFOption中report指定为true时，额外支持以下文件：- execution_report.html- execution_timeline.html- execution_trace.txt- pipeline_dag.html */
+  Key?: string;
+  /** 需要批量获取的文件名。默认支持以下文件：- nextflow.log提交时NFOption中report指定为true时，额外支持以下文件：- execution_report.html- execution_timeline.html- execution_trace.txt- pipeline_dag.html */
+  Keys?: string[];
 }
 
 declare interface GetRunMetadataFileResponse {
   /** 文件预签名链接，一分钟内有效。 */
   CosSignedUrl?: string;
+  /** 批量文件预签名链接，一分钟内有效。 */
+  CosSignedUrls?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -709,7 +713,7 @@ declare interface Omics {
   DescribeTablesRows(data: DescribeTablesRowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesRowsResponse>;
   /** 查询作业详情 {@link GetRunCallsRequest} {@link GetRunCallsResponse} */
   GetRunCalls(data: GetRunCallsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunCallsResponse>;
-  /** 查询任务详情文件 {@link GetRunMetadataFileRequest} {@link GetRunMetadataFileResponse} */
+  /** 获取任务详情文件 {@link GetRunMetadataFileRequest} {@link GetRunMetadataFileResponse} */
   GetRunMetadataFile(data: GetRunMetadataFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunMetadataFileResponse>;
   /** 查询任务详情 {@link GetRunStatusRequest} {@link GetRunStatusResponse} */
   GetRunStatus(data: GetRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunStatusResponse>;
