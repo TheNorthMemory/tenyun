@@ -2093,7 +2093,7 @@ declare interface CreateConsoleLoginUrlRequest {
   ModuleId?: string;
   /** 是否展示左侧菜单栏 **ENABLE** : (默认)进入web控制台展示左侧菜单栏 **DISABLE** : 进入web控制台不展示左侧菜单栏注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   MenuStatus?: string;
-  /** 生成链接的类型：生成链接的类型**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序 */
+  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序 */
   Endpoint?: string;
   /** 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括： **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序 */
   AutoJumpBackEvent?: string;
@@ -2104,7 +2104,7 @@ declare interface CreateConsoleLoginUrlRequest {
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP 一年 注： `1.链接仅单次有效，每次登录需要需要重新创建新的链接``2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP 一年 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP 一年 注： `1.链接仅单次有效，每次登录需要需要重新创建新的链接``2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
   ConsoleUrl?: string;
   /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：`企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码` */
   IsActivated?: boolean;
@@ -2155,7 +2155,7 @@ declare interface CreateSealByImageRequest {
   Operator?: UserInfo;
   /** 电子印章生成方式空值:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片SealGenerateSourceSystem: 系统生成印章, 无需上传SealImage图片 */
   GenerateSource?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章注: `同企业下只能有一个公章, 重复创建会报错` */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章注: `同企业下只能有一个公章, 重复创建会报错` */
   SealType?: string;
   /** 企业印章横向文字，最多可填15个汉字 (若超过印章最大宽度，优先压缩字间距，其次缩小字号)横向文字的位置如下图中的"印章横向文字在这里"![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage2.png) */
   SealHorizontalText?: string;
@@ -2163,6 +2163,8 @@ declare interface CreateSealByImageRequest {
   SealStyle?: string;
   /** 印章尺寸取值描述, 可以选择的尺寸如下: **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效 **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 */
   SealSize?: string;
+  /** 企业税号注: `1.印章类型SealType是INVOICE类型时，此参数才会生效``2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号` */
+  TaxIdentifyCode?: string;
 }
 
 declare interface CreateSealByImageResponse {

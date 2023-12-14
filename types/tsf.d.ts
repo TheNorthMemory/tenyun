@@ -4973,7 +4973,7 @@ declare interface DescribeDeliveryConfigByGroupIdRequest {
 }
 
 declare interface DescribeDeliveryConfigByGroupIdResponse {
-  /** 投递kafak配置项 */
+  /** 投递kafka配置项 */
   Result?: SimpleKafkaDeliveryConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5506,17 +5506,17 @@ declare interface DescribeInvocationMetricScatterPlotRequest {
   EndTime?: string;
   /** 查询时间粒度，单位秒。可选值：60、3600、86400。 */
   Period?: number;
-  /** 查询指标维度 */
+  /** 查询指标维度, 不能为空。可选 NamespaceId, GroupId, InstanceId, OperationName, ServiceName, PeerServiceName, PeerOperationName */
   MetricDimensions?: MetricDimension[];
-  /** 查询指标名 */
+  /** 查询指标名， 不能为空。仅支持 range_count_duratioin 为 key 下的 sum 方法 */
   Metrics?: Metric[];
   /** 视图视角。可选值：SERVER, CLIENT。默认为SERVER */
   Kind?: string;
 }
 
 declare interface DescribeInvocationMetricScatterPlotResponse {
-  /** 多值时间抽统计指标 */
-  Result: InvocationMetricScatterPlot | null;
+  /** 多值时间统计指标 */
+  Result?: InvocationMetricScatterPlot | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

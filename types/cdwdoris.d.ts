@@ -215,9 +215,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例数组 */
-  InstancesList: InstanceInfo[];
+  InstancesList?: InstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -229,7 +229,7 @@ declare interface Cdwdoris {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取实例节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
   DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
-  /** 获取实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
+  /** 获取集群列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
 }
 

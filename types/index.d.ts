@@ -123,6 +123,7 @@ import Ie, { Versions as IeVersions } from "./ie";
 import Iecp, { Versions as IecpVersions } from "./iecp";
 import Iir, { Versions as IirVersions } from "./iir";
 import Ims, { Versions as ImsVersions } from "./ims";
+import Ioa, { Versions as IoaVersions } from "./ioa";
 import Iot, { Versions as IotVersions } from "./iot";
 import Iotcloud, { Versions as IotcloudVersions } from "./iotcloud";
 import Iotexplorer, { Versions as IotexplorerVersions } from "./iotexplorer";
@@ -370,6 +371,7 @@ export declare type SERVICE_VERSIONS = {
   iecp: IecpVersions,
   iir: IirVersions,
   ims: ImsVersions,
+  ioa: IoaVersions,
   iot: IotVersions,
   iotcloud: IotcloudVersions,
   iotexplorer: IotexplorerVersions,
@@ -751,6 +753,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   iir: Iir,
   /** {@link Ims 图片内容安全} */
   ims: Ims,
+  /** {@link Ioa iOA 零信任安全管理系统} */
+  ioa: Ioa,
   /** {@link Iot 加速物联网套件} */
   iot: Iot,
   /** {@link Iotcloud 物联网通信} */

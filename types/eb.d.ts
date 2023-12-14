@@ -403,13 +403,13 @@ declare interface CreateConnectionRequest {
   Description?: string;
   /** 使能开关 */
   Enable?: boolean;
-  /** 类型 */
+  /** 连接器类型，目前支持以下类型:apigw/ckafka/dts/tdmq */
   Type?: string;
 }
 
 declare interface CreateConnectionResponse {
   /** 连接器ID */
-  ConnectionId: string;
+  ConnectionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
