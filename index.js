@@ -158,6 +158,7 @@ export const SERVICE_VERSIONS = {
   iir: ['2020-04-17'],
   ims: ['2020-12-29', '2020-07-13'],
   intlpartnersmgt: ['2022-09-28'],
+  ioa: ['2022-06-01'],
   iot: ['2018-01-23'],
   iotcloud: ['2021-04-08', '2018-06-14'],
   iotexplorer: ['2019-04-23'],
