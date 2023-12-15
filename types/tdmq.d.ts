@@ -1082,6 +1082,22 @@ declare interface RocketMQConsumerConnection {
   Version?: string;
 }
 
+/** 消费者详情中的主题信息 */
+declare interface RocketMQConsumerTopic {
+  /** 主题名称 */
+  Topic: string;
+  /** 主题类型，Default表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信 */
+  Type: string;
+  /** 分区数 */
+  PartitionNum: number;
+  /** 消息堆积数 */
+  Accumulative: number;
+  /** 最后消费时间，以毫秒为单位 */
+  LastConsumptionTime: number;
+  /** 订阅规则 */
+  SubRule: string | null;
+}
+
 /** RocketMQ消费组信息 */
 declare interface RocketMQGroup {
   /** 消费组名称 */
@@ -3070,6 +3086,32 @@ declare interface DescribeRocketMQConsumeStatsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQConsumerConnectionDetailRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 命名空间名称 */
+  NamespaceId: string;
+  /** 消费组名称 */
+  GroupId: string;
+  /** 消费端实例ID */
+  ClientId: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 限制数目 */
+  Limit: number;
+  /** 按主题类型过滤查询结果，可选择Normal, GlobalOrder, PartitionedOrder, Retry, Transaction, DeadLetter */
+  FilterType?: string[];
+}
+
+declare interface DescribeRocketMQConsumerConnectionDetailResponse {
+  /** 总条数 */
+  TotalCount: number;
+  /** 消费端主题信息列表 */
+  Details: RocketMQConsumerTopic[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQConsumerConnectionsRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4379,6 +4421,8 @@ declare interface Tdmq {
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
   /** 获取消费详情列表 {@link DescribeRocketMQConsumeStatsRequest} {@link DescribeRocketMQConsumeStatsResponse} */
   DescribeRocketMQConsumeStats(data: DescribeRocketMQConsumeStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumeStatsResponse>;
+  /** 获取在线消费端详情 {@link DescribeRocketMQConsumerConnectionDetailRequest} {@link DescribeRocketMQConsumerConnectionDetailResponse} */
+  DescribeRocketMQConsumerConnectionDetail(data: DescribeRocketMQConsumerConnectionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumerConnectionDetailResponse>;
   /** 获取指定消费组下当前客户端的连接情况 {@link DescribeRocketMQConsumerConnectionsRequest} {@link DescribeRocketMQConsumerConnectionsResponse} */
   DescribeRocketMQConsumerConnections(data: DescribeRocketMQConsumerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumerConnectionsResponse>;
   /** 获取RocketMQ消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */

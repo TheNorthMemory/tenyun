@@ -110,6 +110,8 @@ declare interface DomainBaseInfo {
 declare interface DomainBatchDetailSet {
   /** 详情ID */
   Id: number;
+  /** 类型 new: 注册域名 batch_transfer_prohibition_on:开启禁止转移 batch_transfer_prohibition_off:关闭禁止转移 batch_update_prohibition_on:开启禁止更新 batch_update_prohibition_off:关闭禁止更新 */
+  Action: string;
   /** 域名 */
   Domain: string;
   /** 执行状态：doing 执行中。failed 操作失败。success 操作成功。 */
@@ -120,6 +122,8 @@ declare interface DomainBatchDetailSet {
   CreatedOn: string;
   /** 更新时间 */
   UpdatedOn: string;
+  /** 订单号 */
+  BigDealId?: string | null;
 }
 
 /** 批量操作记录 */
@@ -132,6 +136,12 @@ declare interface DomainBatchLogSet {
   Status: string;
   /** 提交时间 */
   CreatedOn: string;
+  /** 批量操作成功个数 */
+  Success?: number;
+  /** 批量操作处理中个数 */
+  Doing?: number;
+  /** 批量操作失败个数 */
+  Failed?: number;
 }
 
 /** 域名列表 */
@@ -275,7 +285,7 @@ declare interface CheckBatchStatusRequest {
 
 declare interface CheckBatchStatusResponse {
   /** 批量任务状态集 */
-  StatusSet: BatchStatus[];
+  StatusSet?: BatchStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -361,7 +371,7 @@ declare interface CreateDomainBatchRequest {
 
 declare interface CreateDomainBatchResponse {
   /** 批量日志ID */
-  LogId: number | null;
+  LogId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -451,9 +461,9 @@ declare interface DescribeBatchOperationLogDetailsRequest {
 
 declare interface DescribeBatchOperationLogDetailsResponse {
   /** 总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志详情列表。 */
-  DomainBatchDetailSet: DomainBatchDetailSet[] | null;
+  DomainBatchDetailSet?: DomainBatchDetailSet[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -467,9 +477,9 @@ declare interface DescribeBatchOperationLogsRequest {
 
 declare interface DescribeBatchOperationLogsResponse {
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志列表 */
-  DomainBatchLogSet: DomainBatchLogSet[] | null;
+  DomainBatchLogSet?: DomainBatchLogSet[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -485,9 +495,9 @@ declare interface DescribeCustomDnsHostSetRequest {
 
 declare interface DescribeCustomDnsHostSetResponse {
   /** 自定义DNS Host 列表 */
-  DnsHostSet: CustomDnsHost[] | null;
+  DnsHostSet?: CustomDnsHost[] | null;
   /** 自定义DNS Host总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -499,9 +509,9 @@ declare interface DescribeDomainBaseInfoRequest {
 
 declare interface DescribeDomainBaseInfoResponse {
   /** 域名信息 */
-  DomainInfo: DomainBaseInfo;
+  DomainInfo?: DomainBaseInfo;
   /** 用户Uin */
-  Uin: string | null;
+  Uin?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -515,9 +525,9 @@ declare interface DescribeDomainNameListRequest {
 
 declare interface DescribeDomainNameListResponse {
   /** 域名信息集合 */
-  DomainSet: DomainList[] | null;
+  DomainSet?: DomainList[] | null;
   /** 域名总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -665,7 +675,7 @@ declare interface ModifyIntlCustomDnsHostRequest {
 
 declare interface ModifyIntlCustomDnsHostResponse {
   /** 任务ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

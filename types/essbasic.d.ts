@@ -684,6 +684,14 @@ declare interface OccupiedSeal {
   AuthorizedUsers: AuthorizedUser[];
 }
 
+/** 企业批量注册链接信息 */
+declare interface OrganizationAuthUrl {
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC 5分钟 企业未激活 员工未认证 CHANNEL/SHORT_URL/APP 一年 企业已激活 员工未认证 PC 5分钟 企业已激活 员工未认证 CHANNEL/SHORT_URL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/SHORT_URL/APP 一年 注： `1.链接仅单次有效，每次登录需要需要重新创建新的链接``2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
+  AuthUrl?: string;
+  /** 企业批量注册的错误信息，例如：企业三要素不通过 */
+  ErrorMessage?: string;
+}
+
 /** 机构信息 */
 declare interface OrganizationInfo {
   /** 用户在渠道的机构编号 */
@@ -820,6 +828,28 @@ declare interface RecipientComponentInfo {
   IsPromoter?: boolean | null;
   /** 此角色的填写控件列表 */
   Components?: FilledComponent[] | null;
+}
+
+/** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
+declare interface RegistrationOrganizationInfo {
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。 */
+  OrganizationName: string;
+  /** 机构在贵司业务系统中的唯一标识，用于与腾讯电子签企业账号进行映射，确保在同一应用内不会出现重复。该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。 */
+  OrganizationOpenId: string;
+  /** 员工在贵司业务系统中的唯一身份标识，用于与腾讯电子签账号进行映射，确保在同一应用内不会出现重复。该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。 */
+  OpenId: string;
+  /** 组织机构企业统一社会信用代码。请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。 */
+  UniformSocialCreditCode: string;
+  /** 组织机构法人的姓名。请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
+  LegalName: string;
+  /** 组织机构企业注册地址。请确认该企业注册地址与企业营业执照中注册的地址一致。 */
+  Address: string;
+  /** 组织机构超管姓名。在注册流程中，必须是超管本人进行操作。如果法人做为超管管理组织机构,超管姓名就是法人姓名 */
+  AdminName?: string;
+  /** 组织机构超管姓名。在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。 */
+  AdminMobile?: string;
+  /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书+对公打款2：法人授权/认证 会根据当前操作人的身份判定,如果当前操作人是法人,则是法人认证, 如果当前操作人不是法人,则走法人授权注:`1. 当前仅支持一种认证方式``2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款` */
+  AuthorizationTypes?: number[];
 }
 
 /** 解除协议的签署人，如不指定，默认使用待解除流程(原流程)中的签署人。`注意`: - 不支持更换C端(个人身份类型)签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。 - 目前不支持替换C端(个人身份类型)签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。 - 当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只传参数ApproverSignRole。如果需要指定B端(企业身份类型)签署人，其中ReleasedApprover需要传递的参数如下：`ApproverNumber`, `OrganizationName`, `ApproverType`必传。对于其他身份标识：- **子客企业指定经办人**：OpenId必传，OrganizationOpenId必传；- **非子客企业经办人**：Name、Mobile必传。 */
@@ -2042,6 +2072,24 @@ declare interface ChannelVerifyPdfResponse {
   RequestId?: string;
 }
 
+declare interface CreateBatchOrganizationRegistrationTasksRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 当前应用下子客的组织机构注册信息。一次最多支持10条认证流 */
+  RegistrationOrganizations: RegistrationOrganizationInfo[];
+  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序示例值：PC */
+  Endpoint?: string;
+}
+
+declare interface CreateBatchOrganizationRegistrationTasksResponse {
+  /** 生成注册链接的任务Id，根据这个id， 调用DescribeBatchOrganizationRegistrationUrls 获取生成的链接，进入认证流程若存在其中任意一条链接错误，则返回具体的错误描述, 不会返回TaskId */
+  TaskId?: string;
+  /** 批量生成企业认证链接的详细错误信息，顺序与输入参数保持一致。若企业认证均成功生成，则不返回错误信息；若存在任何错误，则返回具体的错误描述。 */
+  ErrorMessages?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateChannelFlowEvidenceReportRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -2218,6 +2266,20 @@ declare interface CreateSignUrlsResponse {
   SignUrlInfos?: SignUrlInfo[];
   /** 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致 */
   ErrorMessages?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBatchOrganizationRegistrationUrlsRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 通过接口CreateBatchOrganizationRegistrationTasks创建企业批量认证链接任得到的任务Id */
+  TaskId: string;
+}
+
+declare interface DescribeBatchOrganizationRegistrationUrlsResponse {
+  /** 企业批量注册链接信息 */
+  OrganizationAuthUrls?: OrganizationAuthUrl[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4201,6 +4263,8 @@ declare interface Essbasic {
   ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
   /** 合同验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
+  /** 创建企业批量认证链接 {@link CreateBatchOrganizationRegistrationTasksRequest} {@link CreateBatchOrganizationRegistrationTasksResponse} */
+  CreateBatchOrganizationRegistrationTasks(data: CreateBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationRegistrationTasksResponse>;
   /** 提交申请出证报告任务 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
   /** 获取变更企业信息电子签小程序链接 {@link CreateChannelOrganizationInfoChangeUrlRequest} {@link CreateChannelOrganizationInfoChangeUrlResponse} */
@@ -4213,6 +4277,8 @@ declare interface Essbasic {
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
+  /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */
+  DescribeBatchOrganizationRegistrationUrls(data: DescribeBatchOrganizationRegistrationUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationUrlsResponse>;
   /** @deprecated [废弃]查询计费消耗情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
