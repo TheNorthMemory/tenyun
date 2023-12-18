@@ -854,6 +854,54 @@ declare interface NICAsset {
   IsNewAsset?: number | null;
 }
 
+/** 集团账号成员详情 */
+declare interface OrganizationUserInfo {
+  /** 成员账号Uin */
+  Uin?: string | null;
+  /** 成员账号名称 */
+  NickName?: string | null;
+  /** 部门节点名称，账号所属部门 */
+  NodeName?: string | null;
+  /** 资产数量 */
+  AssetCount?: number | null;
+  /** 风险数量 */
+  RiskCount?: number | null;
+  /** 攻击数量 */
+  AttackCount?: number | null;
+  /** Member/Admin/;成员或者管理员 */
+  Role?: string | null;
+  /** 成员账号id */
+  MemberId?: string | null;
+  /** 成员账号Appid */
+  AppId?: string | null;
+  /** 账号加入方式,create/invite */
+  JoinType?: string | null;
+  /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
+  CFWProtect?: string | null;
+  /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
+  WAFProtect?: string | null;
+  /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
+  CWPProtect?: string | null;
+  /** 1启用，0未启用 */
+  Enable?: number | null;
+  /** "Free" //免费版 "Advanced" //高级版 "Enterprise" //企业版 "Ultimate" //旗舰版 */
+  CSIPProtect?: string | null;
+  /** 1为配额消耗者 */
+  QuotaConsumer?: number | null;
+  /** 账户类型，0为腾讯云账户，1为AWS账户 */
+  CloudType?: number | null;
+  /** 0为缺省值，1为10分钟，2为1小时，3为24小时 */
+  SyncFrequency?: number | null;
+  /** 多云账户是否过期 */
+  IsExpired?: boolean | null;
+  /** 多云账户 权限列表 */
+  PermissionList?: string[] | null;
+  /** 1 */
+  AuthType?: number | null;
+  /** 0 腾讯云集团账户1 腾讯云接入账户2 非腾讯云 */
+  TcMemberType?: number | null;
+}
+
 /** 端口视角的端口风险对象 */
 declare interface PortViewPortRisk {
   /** 影响资产 */
@@ -1761,6 +1809,22 @@ declare interface DescribeNICAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOrganizationUserInfoRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+  /** 不支持多云 */
+  NotSupportCloud?: boolean;
+}
+
+declare interface DescribeOrganizationUserInfoResponse {
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 集团用户列表 */
+  Data?: OrganizationUserInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePublicIpAssetsRequest {
   /** filte过滤条件 */
   Filter?: Filter;
@@ -2190,6 +2254,8 @@ declare interface Csip {
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 网卡列表 {@link DescribeNICAssetsRequest} {@link DescribeNICAssetsResponse} */
   DescribeNICAssets(data?: DescribeNICAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNICAssetsResponse>;
+  /** 查询集团账号用户列表 {@link DescribeOrganizationUserInfoRequest} {@link DescribeOrganizationUserInfoResponse} */
+  DescribeOrganizationUserInfo(data?: DescribeOrganizationUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationUserInfoResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 获取资产视角的配置风险列表 {@link DescribeRiskCenterAssetViewCFGRiskListRequest} {@link DescribeRiskCenterAssetViewCFGRiskListResponse} */

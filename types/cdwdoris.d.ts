@@ -181,9 +181,9 @@ declare interface DescribeInstanceNodesRequest {
 
 declare interface DescribeInstanceNodesResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例节点总数 */
-  InstanceNodesList: InstanceNode[] | null;
+  InstanceNodesList?: InstanceNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -195,7 +195,7 @@ declare interface DescribeInstanceRequest {
 
 declare interface DescribeInstanceResponse {
   /** 实例描述信息 */
-  InstanceInfo: InstanceInfo;
+  InstanceInfo?: InstanceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -225,9 +225,9 @@ declare interface DescribeInstancesResponse {
 /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
 declare interface Cdwdoris {
   (): Versions;
-  /** 描述实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
+  /** 获取集群描述信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
-  /** 获取实例节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
+  /** 获取集群节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
   DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
   /** 获取集群列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;

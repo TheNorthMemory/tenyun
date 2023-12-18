@@ -68,6 +68,22 @@ declare interface AuthFailMessage {
   Message?: string;
 }
 
+/** 企业扩展服务授权列表详情 */
+declare interface AuthInfoDetail {
+  /** 扩展服务类型，和入参一致 */
+  Type?: string | null;
+  /** 扩展服务名称 */
+  Name?: string | null;
+  /** 授权员工列表 */
+  HasAuthUserList?: HasAuthUser[] | null;
+  /** 授权企业列表（企业自动签时，该字段有值） */
+  HasAuthOrganizationList?: HasAuthOrganization[] | null;
+  /** 授权员工列表总数 */
+  AuthUserTotal?: number | null;
+  /** 授权企业列表总数 */
+  AuthOrganizationTotal?: number | null;
+}
+
 /** 授权用户 */
 declare interface AuthorizedUser {
   /** 第三方应用平台的用户openid */
@@ -112,7 +128,7 @@ declare interface BaseFlowInfo {
   NeedSignReview?: boolean;
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为1000长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
-  /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。注:`此功能为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。 */
   CcInfos?: CcInfo[];
   /** 发起方企业的签署人进行发起操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。若设置为true，发起审核结果需通过接口 [提交企业签署流程审批结果](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateFlowSignReview)通知电子签，审核通过后，发起方企业签署人方可进行发起操作，否则会阻塞其发起操作。 */
   NeedCreateReview?: boolean;
@@ -520,6 +536,8 @@ declare interface FlowApproverInfo {
   AddSignComponentsLimits?: ComponentLimit[];
   /** 可以自定义签署人角色名：收款人、开具人、见证人等，长度不能超过20，只能由中文、字母、数字和下划线组成。注: `如果是用模板发起, 优先使用此处上传的, 如果不传则用模板的配置的` */
   ApproverRoleName?: string;
+  /** 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。注：`不指定该值时，默认为签署方自行选择。` */
+  SignTypeSelector?: number;
 }
 
 /** 签署方信息，如角色ID、角色名称等 */
@@ -656,6 +674,26 @@ declare interface FormField {
   ComponentName?: string | null;
   /** 是否锁定模板控件值，锁定后无法修改（用于嵌入式发起合同），true-锁定，false-不锁定 */
   LockComponentValue?: boolean | null;
+}
+
+/** 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”） */
+declare interface HasAuthOrganization {
+  /** 授权企业openid， */
+  OrganizationOpenId?: string | null;
+  /** 授权企业名称 */
+  OrganizationName?: string | null;
+  /** 被授权企业openid， */
+  AuthorizedOrganizationOpenId?: string | null;
+  /** 被授权企业名称 */
+  AuthorizedOrganizationName?: string | null;
+  /** 授权时间，格式为时间戳，单位s */
+  AuthorizeTime?: number | null;
+}
+
+/** 被授权的用户信息 */
+declare interface HasAuthUser {
+  /** 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。 */
+  OpenId?: string | null;
 }
 
 /** 持有的电子印章信息 */
@@ -1211,6 +1249,8 @@ declare interface ChannelCreateBatchQuickSignUrlRequest {
   SignatureTypes?: number[];
   /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**2**：密码认证(默认)，需输入与用户在腾讯电子签设置的密码一致才能校验成功进行合同签署**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸和密码认证您可以传递多种值，表示可用多种认证校验方式。 */
   ApproverSignTypes?: number[];
+  /** 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。注：`不指定该值时，默认为签署方自行选择。` */
+  SignTypeSelector?: number;
 }
 
 declare interface ChannelCreateBatchQuickSignUrlResponse {
@@ -2192,6 +2232,26 @@ declare interface CreateFlowsByTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface CreatePartnerAutoSignAuthUrlRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 被授企业id，和AuthorizedOrganizationName二选一，不能同时为空注：`被授权企业必须和当前企业在同一应用号下` */
+  AuthorizedOrganizationId?: string;
+  /** 被授权企业名，和AuthorizedOrganizationId二选一，不能同时为空注：`被授权企业必须和当前企业在同一应用号下` */
+  AuthorizedOrganizationName?: string;
+}
+
+declare interface CreatePartnerAutoSignAuthUrlResponse {
+  /** 授权链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。 */
+  Url?: string | null;
+  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径 */
+  MiniAppPath?: string;
+  /** 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
+  ExpireTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSealByImageRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -2209,7 +2269,7 @@ declare interface CreateSealByImageRequest {
   SealHorizontalText?: string;
   /** 印章样式, 可以选择的样式如下: **circle**:(默认)圆形印章**ellipse**:椭圆印章 */
   SealStyle?: string;
-  /** 印章尺寸取值描述, 可以选择的尺寸如下: **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效 **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 */
+  /** 印章尺寸取值描述, 可以选择的尺寸如下: **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效 **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效 */
   SealSize?: string;
   /** 企业税号注: `1.印章类型SealType是INVOICE类型时，此参数才会生效``2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号` */
   TaxIdentifyCode?: string;
@@ -2364,6 +2424,24 @@ declare interface DescribeChannelSealPolicyWorkflowUrlRequest {
 declare interface DescribeChannelSealPolicyWorkflowUrlResponse {
   /** 用印审批小程序链接，链接类型（通过H5唤起小程序或通过APP跳转方式查看）。 */
   WorkflowUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExtendedServiceAuthDetailRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 要查询的扩展服务类型。如下所示： AUTO_SIGN：企业静默签署BATCH_SIGN：批量签署 */
+  ExtendServiceType: string;
+  /** 指定每页返回的数据条数，和Offset参数配合使用。 注：`1.默认值为20，单页做大值为200。` */
+  Limit?: number;
+  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：`1.offset从0开始，即第一页为0。` `2.默认从第一页返回。` */
+  Offset?: number;
+}
+
+declare interface DescribeExtendedServiceAuthDetailResponse {
+  /** 服务授权的信息列表，根据查询类型返回特定扩展服务的开通和授权状况。 */
+  AuthInfoDetail?: AuthInfoDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4273,6 +4351,8 @@ declare interface Essbasic {
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
   /** 用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
+  /** 创建他方企业自动签授权链接 {@link CreatePartnerAutoSignAuthUrlRequest} {@link CreatePartnerAutoSignAuthUrlResponse} */
+  CreatePartnerAutoSignAuthUrl(data: CreatePartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartnerAutoSignAuthUrlResponse>;
   /** 创建企业电子印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
@@ -4287,6 +4367,8 @@ declare interface Essbasic {
   DescribeChannelOrganizations(data: DescribeChannelOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelOrganizationsResponse>;
   /** 生成渠道子客用印申请审批链接 {@link DescribeChannelSealPolicyWorkflowUrlRequest} {@link DescribeChannelSealPolicyWorkflowUrlResponse} */
   DescribeChannelSealPolicyWorkflowUrl(data: DescribeChannelSealPolicyWorkflowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelSealPolicyWorkflowUrlResponse>;
+  /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
+  DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfoRequest} {@link DescribeExtendedServiceAuthInfoResponse} */
   DescribeExtendedServiceAuthInfo(data: DescribeExtendedServiceAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfoResponse>;
   /** 获取合同信息 {@link DescribeFlowDetailInfoRequest} {@link DescribeFlowDetailInfoResponse} */

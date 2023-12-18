@@ -1899,13 +1899,13 @@ declare interface CreateClustersRequest {
   ResourceTags?: Tag[];
   /** Db类型当DbType为MYSQL时可选(默认NORMAL)：NORMALSERVERLESS */
   DbMode?: string;
-  /** 当DbMode为SEVERLESS时必填cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  /** 当DbMode为SERVERLESS时必填cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
   MinCpu?: number;
-  /** 当DbMode为SEVERLESS时必填：cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  /** 当DbMode为SERVERLESS时必填：cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
   MaxCpu?: number;
-  /** 当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围yesno默认值:yes */
+  /** 当DbMode为SERVERLESS时，指定集群是否自动暂停，可选范围yesno默认值:yes */
   AutoPause?: string;
-  /** 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]默认值:600 */
+  /** 当DbMode为SERVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]默认值:600 */
   AutoPauseDelay?: number;
   /** 集群存储计费模式，按量计费：0，包年包月：1。默认按量计费当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费回档与克隆均不支持包年包月存储 */
   StoragePayMode?: number;

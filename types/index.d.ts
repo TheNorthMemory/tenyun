@@ -628,7 +628,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   ckafka: Ckafka,
   /** {@link Clb 负载均衡} */
   clb: Clb,
-  /** {@link Cloudaudit 云审计} */
+  /** {@link Cloudaudit 操作审计} */
   cloudaudit: Cloudaudit,
   /** {@link Cloudhsm 云加密机} */
   cloudhsm: Cloudhsm,

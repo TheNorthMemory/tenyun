@@ -5,15 +5,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 自动化助手客户端信息 */
 declare interface AutomationAgentInfo {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** Agent 版本号。 */
-  Version: string;
+  Version?: string;
   /** 上次心跳时间 */
-  LastHeartbeatTime: string;
-  /** Agent状态，取值范围： Online：在线 Offline：离线 */
-  AgentStatus: string;
-  /** Agent运行环境，取值范围： Linux：Linux实例 Windows：Windows实例 */
-  Environment: string;
+  LastHeartbeatTime?: string;
+  /** Agent状态，取值范围：Online：在线，Offline：离线 */
+  AgentStatus?: string;
+  /** Agent运行环境，取值范围：Linux：Linux实例Windows：Windows实例 */
+  Environment?: string;
   /** Agent 支持的功能列表。 */
   SupportFeatures?: string[];
 }
@@ -61,15 +61,15 @@ declare interface Command {
 /** 命令执行详情。 */
 declare interface CommandDocument {
   /** Base64 编码后的执行命令。 */
-  Content: string;
+  Content?: string;
   /** 命令类型。 */
-  CommandType: string;
+  CommandType?: string;
   /** 超时时间。 */
-  Timeout: number;
+  Timeout?: number;
   /** 执行路径。 */
-  WorkingDirectory: string;
+  WorkingDirectory?: string;
   /** 执行用户。 */
-  Username: string;
+  Username?: string;
   /** 保存输出的 COS Bucket 链接。 */
   OutputCOSBucketUrl?: string;
   /** 保存输出的文件名称前缀。 */
@@ -94,7 +94,7 @@ declare interface Filter {
   Values: string[];
 }
 
-/** GeneralResourceQuotaSet数据结构 */
+/** 用户配额信息。 */
 declare interface GeneralResourceQuotaSet {
   /** 资源名称 */
   ResourceName?: string | null;
@@ -107,75 +107,75 @@ declare interface GeneralResourceQuotaSet {
 /** 执行活动详情。 */
 declare interface Invocation {
   /** 执行活动ID。 */
-  InvocationId: string;
+  InvocationId?: string;
   /** 命令ID。 */
-  CommandId: string;
+  CommandId?: string;
   /** 执行任务状态。取值范围： PENDING：等待下发 RUNNING：命令运行中 SUCCESS：命令成功 FAILED：命令失败 TIMEOUT：命令超时 PARTIAL_FAILED：命令部分失败 */
-  InvocationStatus: string;
+  InvocationStatus?: string;
   /** 执行任务信息列表。 */
-  InvocationTaskBasicInfoSet: InvocationTaskBasicInfo[];
+  InvocationTaskBasicInfoSet?: InvocationTaskBasicInfo[];
   /** 执行活动描述。 */
-  Description: string;
+  Description?: string;
   /** 执行活动开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 执行活动结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 执行活动创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 执行活动更新时间。 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** 自定义参数取值。 */
-  Parameters: string;
+  Parameters?: string;
   /** 自定义参数的默认取值。 */
-  DefaultParameters: string;
+  DefaultParameters?: string;
   /** 执行命令的实例类型，取值范围：CVM、LIGHTHOUSE。 */
-  InstanceKind: string;
+  InstanceKind?: string;
   /** 在实例上执行命令时使用的用户名。 */
-  Username: string;
+  Username?: string;
   /** 调用来源。 */
-  InvocationSource: string;
+  InvocationSource?: string;
   /** base64编码的命令内容 */
-  CommandContent: string;
+  CommandContent?: string;
   /** 命令类型 */
-  CommandType: string;
+  CommandType?: string;
   /** 执行命令过期时间， 单位秒 */
-  Timeout: number;
+  Timeout?: number;
   /** 执行命令的工作路径 */
-  WorkingDirectory: string;
+  WorkingDirectory?: string;
   /** 日志上传的cos bucket 地址。 */
-  OutputCOSBucketUrl: string;
+  OutputCOSBucketUrl?: string;
   /** 日志在cos bucket中的目录。 */
-  OutputCOSKeyPrefix: string;
+  OutputCOSKeyPrefix?: string;
 }
 
 /** 执行任务。 */
 declare interface InvocationTask {
   /** 执行活动ID。 */
-  InvocationId: string;
+  InvocationId?: string;
   /** 执行任务ID。 */
-  InvocationTaskId: string;
+  InvocationTaskId?: string;
   /** 命令ID。 */
-  CommandId: string;
+  CommandId?: string;
   /** 执行任务状态。取值范围： PENDING：等待下发 DELIVERING：下发中 DELIVER_DELAYED：延时下发 DELIVER_FAILED：下发失败 START_FAILED：命令启动失败 RUNNING：命令运行中 SUCCESS：命令成功 FAILED：命令执行失败，执行完退出码不为 0 TIMEOUT：命令超时 TASK_TIMEOUT：执行任务超时 CANCELLING：取消中 CANCELLED：已取消（命令启动前就被取消） TERMINATED：已中止（命令执行期间被取消） */
-  TaskStatus: string;
+  TaskStatus?: string;
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 执行结果。 */
-  TaskResult: TaskResult;
+  TaskResult?: TaskResult;
   /** 执行任务开始时间。 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 执行任务结束时间。 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 更新时间。 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** 执行任务所执行的命令详情。 */
-  CommandDocument: CommandDocument;
+  CommandDocument?: CommandDocument;
   /** 执行任务失败时的错误信息。 */
-  ErrorInfo: string;
+  ErrorInfo?: string;
   /** 调用来源。 */
-  InvocationSource: string;
+  InvocationSource?: string;
 }
 
 /** 执行活动任务简介。 */
@@ -274,7 +274,7 @@ declare interface RegisterInstanceInfo {
   MachineId?: string | null;
   /** 系统名。 */
   SystemName?: string | null;
-  /** 主机IP。 */
+  /** 主机名。 */
   HostName?: string | null;
   /** 内网IP。 */
   LocalIp?: string | null;
@@ -309,19 +309,19 @@ declare interface Tag {
 /** 任务结果。 */
 declare interface TaskResult {
   /** 命令执行ExitCode。 */
-  ExitCode: number;
+  ExitCode?: number;
   /** Base64编码后的命令输出。最大长度24KB。 */
-  Output: string;
+  Output?: string;
   /** 命令执行开始时间。 */
-  ExecStartTime: string | null;
+  ExecStartTime?: string | null;
   /** 命令执行结束时间。 */
-  ExecEndTime: string | null;
+  ExecEndTime?: string | null;
   /** 命令最终输出被截断的字节数。 */
-  Dropped: number;
+  Dropped?: number;
   /** 日志在cos中的地址 */
-  OutputUrl: string;
+  OutputUrl?: string;
   /** 日志上传cos的错误信息。 */
-  OutputUploadCOSErrorInfo: string;
+  OutputUploadCOSErrorInfo?: string;
 }
 
 declare interface CancelInvocationRequest {
@@ -501,9 +501,9 @@ declare interface DescribeCommandsRequest {
 
 declare interface DescribeCommandsResponse {
   /** 符合条件的命令总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 命令详情列表。 */
-  CommandSet: Command[];
+  CommandSet?: Command[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -517,7 +517,7 @@ declare interface DescribeInvocationTasksRequest {
   Limit?: number;
   /** 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
-  /** 是否隐藏输出，取值范围：true：隐藏输出 false：不隐藏 默认为 true。 */
+  /** 是否隐藏输出，取值范围： true：隐藏输出 false：不隐藏 默认为 true。 */
   HideOutput?: boolean;
 }
 
@@ -533,7 +533,7 @@ declare interface DescribeInvocationTasksResponse {
 declare interface DescribeInvocationsRequest {
   /** 执行活动ID列表，每次请求的上限为100。参数不支持同时指定 `InvocationIds` 和 `Filters`。 */
   InvocationIds?: string[];
-  /** 过滤条件。 invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。 command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 command-created-by - String - 是否必填：否 -（过滤条件）按照执行的命令类型过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。 instance-kind - String - 是否必填：否 -（过滤条件）按照运行实例类型过滤，取值为 CVM 或 LIGHTHOUSE，CVM 代表实例为云服务器， LIGHTHOUSE 代表实例为轻量应用服务器。每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationIds` 和 `Filters` 。 */
+  /** 过滤条件。 invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。 command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 command-created-by - String - 是否必填：否 -（过滤条件）按照执行的命令类型过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。 instance-kind - String - 是否必填：否 -（过滤条件）按照运行实例类型过滤，取值为 CVM 或 LIGHTHOUSE，CVM 代表实例为云服务器， LIGHTHOUSE 代表实例为轻量应用服务器。 每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationIds` 和 `Filters` 。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
@@ -543,9 +543,9 @@ declare interface DescribeInvocationsRequest {
 
 declare interface DescribeInvocationsResponse {
   /** 符合条件的执行活动总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 执行活动列表。 */
-  InvocationSet: Invocation[];
+  InvocationSet?: Invocation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -633,7 +633,7 @@ declare interface DescribeRegisterCodesResponse {
 declare interface DescribeRegisterInstancesRequest {
   /** 实例id。 */
   InstanceIds?: string[];
-  /** 过滤器列表。- instance-name按照【实例名称】进行过滤。类型：String必选：否- instance-id按照【实例ID】进行过滤。类型：String必选：否- register-code-id按照【注册码ID】进行过滤。类型：String必选：否 */
+  /** 过滤器列表。- instance-name按照【实例名称】进行过滤。类型：String必选：否- instance-id按照【实例ID】进行过滤。类型：String必选：否- register-code-id按照【注册码ID】进行过滤。类型：String必选：否- sys-name按照【操作系统类型】进行过滤，取值：Linux | Windows。类型：String必选：否 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -785,7 +785,7 @@ declare interface PreviewReplacedCommandContentRequest {
 
 declare interface PreviewReplacedCommandContentResponse {
   /** 自定义参数替换后的，经Base64编码的命令内容。 */
-  ReplacedContent: string;
+  ReplacedContent?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -807,7 +807,7 @@ declare interface RunCommandRequest {
   Timeout?: number;
   /** 是否保存命令，取值范围： true：保存 false：不保存默认为 false。 */
   SaveCommand?: boolean;
-  /** 是否启用自定义参数功能。一旦创建，此值不提供修改。取值范围： true：启用 false：不启用默认值：false。 */
+  /** 是否启用自定义参数功能。一旦创建，此值不提供修改。取值范围： true：启用 false：不启用 默认值：false。 */
   EnableParameter?: boolean;
   /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果 Parameters 未提供，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;

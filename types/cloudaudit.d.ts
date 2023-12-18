@@ -510,7 +510,7 @@ declare interface UpdateAuditResponse {
   RequestId?: string;
 }
 
-/** {@link Cloudaudit 云审计} */
+/** {@link Cloudaudit 操作审计} */
 declare interface Cloudaudit {
   (): Versions;
   /** 创建跟踪集 {@link CreateAuditRequest} {@link CreateAuditResponse} */

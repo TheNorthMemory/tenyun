@@ -1949,6 +1949,8 @@ declare interface CancelNotebookSessionStatementResponse {
 declare interface CancelSparkSessionBatchSQLRequest {
   /** 批任务唯一标识 */
   BatchId: string;
+  /** 用户自定义主键，若不为空，则使用该值进行查询 */
+  CustomKey?: string;
 }
 
 declare interface CancelSparkSessionBatchSQLResponse {
@@ -2453,6 +2455,8 @@ declare interface CreateSparkSessionBatchSQLRequest {
   Arguments?: KVPair[];
   /** 是否继承集群的资源类配置：0：不继承（默认），1：继承集群； */
   IsInherit?: number;
+  /** 用户自定义主键，需唯一 */
+  CustomKey?: string;
 }
 
 declare interface CreateSparkSessionBatchSQLResponse {
@@ -3265,6 +3269,8 @@ declare interface DescribeSparkAppTasksResponse {
 declare interface DescribeSparkSessionBatchSQLRequest {
   /** SparkSQL唯一标识 */
   BatchId: string;
+  /** 用户自定义主键, 若不为空，则按照该值查询 */
+  CustomKey?: string;
 }
 
 declare interface DescribeSparkSessionBatchSQLResponse {
@@ -3281,6 +3287,8 @@ declare interface DescribeSparkSessionBatchSQLResponse {
 declare interface DescribeSparkSessionBatchSqlLogRequest {
   /** SparkSQL唯一标识 */
   BatchId: string;
+  /** 用户自定义主键，若不为空，则按照该值进行查询 */
+  CustomKey?: string;
 }
 
 declare interface DescribeSparkSessionBatchSqlLogResponse {
@@ -4151,7 +4159,7 @@ declare interface UpdateRowFilterResponse {
 declare interface UpdateUserDataEngineConfigRequest {
   /** 引擎ID */
   DataEngineId: string;
-  /** 引擎配置项 */
+  /** 用户自定义引擎配置项集合。该参数需要传用户需要添加的全部配置项，例如，已有配置项k1:v1，添加k2:v2，需要传[k1:v1,k2:v2]。 */
   DataEngineConfigPairs?: DataEngineConfigPair[];
   /** 作业引擎资源配置模版 */
   SessionResourceTemplate?: SessionResourceTemplate;

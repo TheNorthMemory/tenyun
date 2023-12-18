@@ -1617,7 +1617,7 @@ declare interface PrometheusClusterAgentBasic {
   /** 是否采集指标，true代表drop所有指标，false代表采集默认指标 */
   NotScrape?: boolean;
   /** 是否开启默认预聚合规则 */
-  OpenDefaultRecord?: boolean | null;
+  OpenDefaultRecord?: boolean;
 }
 
 /** 关联集群时在集群内部署组件的pod额外配置 */
@@ -1776,6 +1776,14 @@ declare interface PrometheusInstancesOverview {
 
 /** prometheus一个job的targets */
 declare interface PrometheusJobTargets {
+  /** 该Job的targets列表 */
+  Targets?: PrometheusTarget[];
+  /** job的名称 */
+  JobName?: string;
+  /** targets总数 */
+  Total?: number;
+  /** 健康的target总数 */
+  Up?: number;
 }
 
 /** 告警通知渠道配置 */
@@ -1902,6 +1910,10 @@ declare interface PrometheusTag {
   Key: string;
   /** 标签对应的值 */
   Value: string | null;
+}
+
+/** prometheus一个抓取目标的信息 */
+declare interface PrometheusTarget {
 }
 
 /** 模板实例 */
@@ -2553,7 +2565,7 @@ declare interface CreatePrometheusConfigResponse {
 }
 
 declare interface CreatePrometheusGlobalNotificationRequest {
-  /** 实例ID */
+  /** 实例ID(可通过 DescribePrometheusInstances 接口获取) */
   InstanceId: string;
   /** 告警通知渠道 */
   Notification: PrometheusNotificationItem;
@@ -2791,11 +2803,11 @@ declare interface DeletePolicyGroupResponse {
 }
 
 declare interface DeletePrometheusAlertPolicyRequest {
-  /** 实例id */
+  /** 实例ID(可通过 DescribePrometheusInstances 接口获取) */
   InstanceId: string;
-  /** 告警策略id列表 */
+  /** 告警策略ID列表(可通过 DescribePrometheusAlertPolicy 接口获取) */
   AlertIds: string[];
-  /** 告警策略名称 */
+  /** 告警策略名称(可通过 DescribePrometheusAlertPolicy 接口获取)，名称完全相同的告警策略才会删除 */
   Names?: string[];
 }
 
@@ -3780,8 +3792,10 @@ declare interface DescribePrometheusClusterAgentsResponse {
   Agents?: PrometheusAgentOverview[];
   /** 被关联集群总量 */
   Total?: number;
-  /** 是否为首次绑定，需要安装预聚合规则 */
+  /** 是否为首次绑定，如果是首次绑定则需要安装预聚合规则 */
   IsFirstBind?: boolean;
+  /** 实例组件是否需要更新镜像版本 */
+  ImageNeedUpdate?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3806,6 +3820,8 @@ declare interface DescribePrometheusConfigResponse {
   RawJobs?: PrometheusConfigItem[];
   /** Probes */
   Probes?: PrometheusConfigItem[];
+  /** 实例组件是否需要升级 */
+  ImageNeedUpdate?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4035,10 +4051,10 @@ declare interface DescribePrometheusScrapeJobsResponse {
 declare interface DescribePrometheusTargetsTMPRequest {
   /** 实例id */
   InstanceId: string;
-  /** 集群类型 */
-  ClusterType: string;
-  /** 集群id */
+  /** 集成容器服务填绑定的集群id；集成中心填 non-cluster */
   ClusterId: string;
+  /** 集群类型(可不填) */
+  ClusterType?: string;
   /** 过滤条件，当前支持Name=stateValue=up, down, unknown */
   Filters?: Filter[];
 }
@@ -4497,6 +4513,8 @@ declare interface ModifyPrometheusConfigRequest {
   PodMonitors?: PrometheusConfigItem[];
   /** prometheus原生Job配置 */
   RawJobs?: PrometheusConfigItem[];
+  /** 0: 更新实例组件镜像版本；1: 不更新实例组件镜像版本 */
+  UpdateImage?: number;
 }
 
 declare interface ModifyPrometheusConfigResponse {
@@ -4989,7 +5007,7 @@ declare interface Monitor {
   CreatePolicyGroup(data: CreatePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyGroupResponse>;
   /** 创建 Prometheus CVM Agent {@link CreatePrometheusAgentRequest} {@link CreatePrometheusAgentResponse} */
   CreatePrometheusAgent(data: CreatePrometheusAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAgentResponse>;
-  /** 创建告警策略 {@link CreatePrometheusAlertPolicyRequest} {@link CreatePrometheusAlertPolicyResponse} */
+  /** 创建Prometheus告警策略 {@link CreatePrometheusAlertPolicyRequest} {@link CreatePrometheusAlertPolicyResponse} */
   CreatePrometheusAlertPolicy(data: CreatePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAlertPolicyResponse>;
   /** 2.0实例关联集群 {@link CreatePrometheusClusterAgentRequest} {@link CreatePrometheusClusterAgentResponse} */
   CreatePrometheusClusterAgent(data: CreatePrometheusClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusClusterAgentResponse>;

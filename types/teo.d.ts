@@ -2549,7 +2549,7 @@ declare interface DescribeDDoSAttackDataRequest {
   EndTime: string;
   /** 统计指标列表，取值有：ddos_attackMaxBandwidth：攻击带宽峰值；ddos_attackMaxPackageRate：攻击包速率峰值 ；ddos_attackBandwidth：攻击带宽曲线；ddos_attackPackageRate：攻击包速率曲线。 */
   MetricNames: string[];
-  /** 站点集合，不填默认选择全部站点。 */
+  /** 站点集合，此参数必填。 */
   ZoneIds?: string[];
   /** DDoS策略组ID列表，不填默认选择全部策略ID。 */
   PolicyIds?: number[];
@@ -2561,27 +2561,27 @@ declare interface DescribeDDoSAttackDataRequest {
 
 declare interface DescribeDDoSAttackDataResponse {
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** DDoS攻击数据内容列表。 */
-  Data: SecEntry[] | null;
+  Data?: SecEntry[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDDoSAttackEventRequest {
-  /** 开始时间。 */
+  /** 开始时间，时间范围为 30 天。 */
   StartTime: string;
-  /** 结束时间。 */
+  /** 结束时间，时间范围为 30 天。 */
   EndTime: string;
   /** ddos策略组集合，不填默认选择全部策略。 */
   PolicyIds?: number[];
-  /** 站点集合，此参数必填，不填默认查询为空。 */
+  /** 站点集合，此参数必填。 */
   ZoneIds?: string[];
   /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
   Limit?: number;
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
-  /** 是否展示详细信息。 */
+  /** 展示攻击详情的参数，若填false，默认只返回攻击次数，不返回攻击详情；若填true，返回攻击详情。 */
   ShowDetail?: boolean;
   /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据；不填默认取值为global。 */
   Area?: string;
@@ -2607,7 +2607,7 @@ declare interface DescribeDDoSAttackTopDataRequest {
   EndTime: string;
   /** 查询的统计指标，取值有：ddos_attackFlux_protocol：按各协议的攻击流量排行；ddos_attackPackageNum_protocol：按各协议的攻击包量排行；ddos_attackNum_attackType：按各攻击类型的攻击数量排行；ddos_attackNum_sregion：按攻击源地区的攻击数量排行；ddos_attackFlux_sip：按攻击源IP的攻击数量排行；ddos_attackFlux_sregion：按攻击源地区的攻击数量排行。 */
   MetricName: string;
-  /** 站点ID集合，不填默认选择全部站点。 */
+  /** 站点ID集合，此参数必填。 */
   ZoneIds?: string[];
   /** DDoS策略组ID集合，不填默认选择全部策略ID。 */
   PolicyIds?: number[];
@@ -2625,9 +2625,9 @@ declare interface DescribeDDoSAttackTopDataRequest {
 
 declare interface DescribeDDoSAttackTopDataResponse {
   /** DDoS攻击Top数据列表。 */
-  Data: TopEntry[] | null;
+  Data?: TopEntry[] | null;
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

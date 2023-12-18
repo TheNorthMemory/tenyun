@@ -741,21 +741,25 @@ declare interface ColumnLineageInfo {
 /** 列的元数据 */
 declare interface ColumnMeta {
   /** 字段英文名称 */
-  NameEn: string | null;
+  NameEn?: string | null;
   /** 字段中文名称 */
-  NameCn: string | null;
+  NameCn?: string | null;
   /** 字段类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 字段描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 字段序号 */
-  Position: number | null;
+  Position?: number | null;
   /** 是否为分区字段 */
-  IsPartition: boolean | null;
+  IsPartition?: boolean | null;
   /** 字段名 */
-  Name: string | null;
+  Name?: string | null;
   /** HBase列簇属性集合 */
-  ColumnFamiliesFieldSet: Pair[] | null;
+  ColumnFamiliesFieldSet?: Pair[] | null;
+  /** 对应码表字典ID */
+  DictionaryId?: string | null;
+  /** 对应码表字典名称 */
+  DictionaryName?: string | null;
 }
 
 /** 内容详情 */
@@ -6952,6 +6956,8 @@ declare interface CreateTaskVersionDsRequest {
   AutoRun: boolean;
   /** 项目ID */
   ProjectId: string;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
   /** 告警方式:email-邮件;sms-短信;wecom-企业微信 */
   AlarmWays?: string;
   /** 告警对象:1-项目管理员，2-任务责任人 */
@@ -12686,6 +12692,8 @@ declare interface UpdateWorkflowOwnerResponse {
 declare interface UploadContentRequest {
   /** 脚本上传信息 */
   ScriptRequestInfo: ScriptRequestInfo;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
 }
 
 declare interface UploadContentResponse {

@@ -20,6 +20,98 @@ declare interface Condition {
 declare interface DescribeDevicesPageRsp {
   /** 数据分页信息 */
   Paging?: Paging | null;
+  /** 业务响应数据 */
+  Items?: DeviceDetail[] | null;
+}
+
+/** 业务响应数据 */
+declare interface DeviceDetail {
+  /** 设备ID(只支持32位) */
+  Id?: number | null;
+  /** 设备唯一标识符 */
+  Mid?: string | null;
+  /** 终端名（设备名） */
+  Name?: string | null;
+  /** 设备所在分组ID(只支持32位) */
+  GroupId?: number | null;
+  /** OS平台(只支持32位) */
+  OsType?: number | null;
+  /** 设备IP地址（出口IP） */
+  Ip?: string | null;
+  /** 在线状态 2 在线 0，1 离线(只支持32位) */
+  OnlineStatus?: number | null;
+  /** 客户端版本号-大整数 */
+  Version?: string | null;
+  /** 客户端版本号-点分字符串 */
+  StrVersion?: string | null;
+  /** 首次在线时间 */
+  Itime?: string | null;
+  /** 最后一次在线时间 */
+  ConnActiveTime?: string | null;
+  /** 设备是否加锁 1 锁定 0 2 非锁定(只支持32位) */
+  Locked?: number | null;
+  /** 设备本地IP列表, 包括IP */
+  LocalIpList?: string | null;
+  /** 主机ID(只支持32位) */
+  HostId?: number | null;
+  /** 设备所属分组名 */
+  GroupName?: string | null;
+  /** 设备所属分组路径 */
+  GroupNamePath?: string | null;
+  /** 未修复高危漏洞数(只支持32位) */
+  CriticalVulListCount?: number | null;
+  /** 设备名 和Name相同，保留参数 */
+  ComputerName?: string | null;
+  /** 登录域名 */
+  DomainName?: string | null;
+  /** MAC地址 */
+  MacAddr?: string | null;
+  /** 漏洞数(只支持32位) */
+  VulCount?: number | null;
+  /** 病毒风险数(只支持32位) */
+  RiskCount?: number | null;
+  /** 病毒库版本 */
+  VirusVer?: string | null;
+  /** 漏洞库版本 */
+  VulVersion?: string | null;
+  /** 系统修复引擎版本 */
+  SysRepVersion?: string | null;
+  /** 高危补丁列表 */
+  VulCriticalList?: string[] | null;
+  /** 标签 */
+  Tags?: string | null;
+  /** 终端用户名 */
+  UserName?: string | null;
+  /** 防火墙状态(只支持32位) */
+  FirewallStatus?: number | null;
+  /** SN序列号 */
+  SerialNum?: string | null;
+  /** 设备管控策略版本 */
+  DeviceStrategyVer?: string | null;
+  /** NGN策略版本 */
+  NGNStrategyVer?: string | null;
+  /** 最近登录账号 */
+  IOAUserName?: string | null;
+  /** 设备管控新策略 */
+  DeviceNewStrategyVer?: string | null;
+  /** NGN策略新版本 */
+  NGNNewStrategyVer?: string | null;
+  /** 主机名称 */
+  HostName?: string | null;
+  /** 主板序列号 */
+  BaseBoardSn?: string | null;
+  /** 绑定账户只有名字 */
+  AccountUsers?: string | null;
+  /** 身份策略版本 */
+  IdentityStrategyVer?: string | null;
+  /** 身份策略新版本 */
+  IdentityNewStrategyVer?: string | null;
+  /** 最近登录账号部门 */
+  AccountGroupName?: string | null;
+  /** 登录账号姓名 */
+  AccountName?: string | null;
+  /** 账号组id */
+  AccountGroupId?: number | null;
 }
 
 /** Filters 条件过滤 */

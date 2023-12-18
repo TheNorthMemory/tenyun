@@ -110,6 +110,22 @@ declare interface ApproverRestriction {
   IdCardNumber?: string;
 }
 
+/** 企业扩展服务授权列表详情 */
+declare interface AuthInfoDetail {
+  /** 扩展服务类型，和入参一致 */
+  Type?: string | null;
+  /** 扩展服务名称 */
+  Name?: string | null;
+  /** 授权员工列表 */
+  HasAuthUserList?: HasAuthUser[] | null;
+  /** 授权企业列表（企业自动签时，该字段有值） */
+  HasAuthOrganizationList?: HasAuthOrganization[] | null;
+  /** 授权员工列表总数 */
+  AuthUserTotal?: number | null;
+  /** 授权企业列表总数 */
+  AuthOrganizationTotal?: number | null;
+}
+
 /** 授权用户 */
 declare interface AuthorizedUser {
   /** 电子签系统中的用户id */
@@ -566,6 +582,8 @@ declare interface FlowCreateApprover {
   ApproverVerifyTypes?: number[];
   /** 您可以指定签署方签署合同的认证校验方式，可传递以下值：**1**：人脸认证，需进行人脸识别成功后才能签署合同；**2**：签署密码，需输入与用户在腾讯电子签设置的密码一致才能校验成功进行合同签署；**3**：运营商三要素，需到运营商处比对手机号实名信息（名字、手机号、证件号）校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸认证和签署密码两种形式；您可以传递多种值，表示可用多种认证校验方式。注:`此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主` */
   ApproverSignTypes?: number[];
+  /** 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。注：`不指定该值时，默认为签署方自行选择。` */
+  SignTypeSelector?: number;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -668,6 +686,24 @@ declare interface GroupOrganization {
   JoinTime?: number | null;
   /** 是否使用自建审批流引擎（即不是企微审批流引擎） **true**：是 **false**：否 */
   FlowEngineEnable?: boolean | null;
+}
+
+/** 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”） */
+declare interface HasAuthOrganization {
+  /** 授权企业id */
+  OrganizationId?: string | null;
+  /** 授权企业名称 */
+  OrganizationName?: string | null;
+  /** 被授权企业id */
+  AuthorizedOrganizationId?: string | null;
+  /** 被授权企业名称 */
+  AuthorizedOrganizationName?: string | null;
+  /** 授权模板id（仅当授权方式为模板授权时有值） */
+  TemplateId?: string | null;
+  /** 授权模板名称（仅当授权方式为模板授权时有值） */
+  TemplateName?: string | null;
+  /** 授权时间，格式为时间戳，单位s */
+  AuthorizeTime?: number | null;
 }
 
 /** 被授权的用户信息 */
@@ -1217,6 +1253,8 @@ declare interface CreateBatchQuickSignUrlRequest {
   SignatureTypes?: number[];
   /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**2**：密码认证(默认)，需输入与用户在腾讯电子签设置的密码一致才能校验成功进行合同签署**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸和密码认证您可以传递多种值，表示可用多种认证校验方式。 */
   ApproverSignTypes?: number[];
+  /** 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。注：`不指定该值时，默认为签署方自行选择。` */
+  SignTypeSelector?: number;
 }
 
 declare interface CreateBatchQuickSignUrlResponse {
@@ -2198,6 +2236,26 @@ declare interface DescribeBillUsageDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExtendedServiceAuthDetailRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 要查询的扩展服务类型。如下所示：OPEN_SERVER_SIGN：企业静默签署BATCH_SIGN：批量签署 */
+  ExtendServiceType?: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 指定每页返回的数据条数，和Offset参数配合使用。 注：`1.默认值为20，单页做大值为200。` */
+  Limit?: number;
+  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：`1.offset从0开始，即第一页为0。` `2.默认从第一页返回。` */
+  Offset?: number;
+}
+
+declare interface DescribeExtendedServiceAuthDetailResponse {
+  /** 服务授权的信息列表，根据查询类型返回特定扩展服务的授权状况。 */
+  AuthInfoDetail?: AuthInfoDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExtendedServiceAuthInfosRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -2705,7 +2763,7 @@ declare interface UpdateIntegrationEmployeesResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 文件对应业务类型,可以选择的类型如下 **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用于合同图片控件的填充，文件类型支持.jpg/.png **SEAL** : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png */
+  /** 文件对应业务类型,可以选择的类型如下 **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **SEAL** : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png */
   BusinessType: string;
   /** 执行本接口操作的员工信息。其中OperatorId为必填字段，即用户的UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Caller?: Caller;
@@ -2843,6 +2901,8 @@ declare interface Ess {
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 查询企业计费使用情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
+  /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
+  DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
   DescribeExtendedServiceAuthInfos(data: DescribeExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfosResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */

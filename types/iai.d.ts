@@ -528,7 +528,7 @@ declare interface CreateFaceResponse {
   SucFaceNum?: number;
   /** 加入成功的人脸ID列表 */
   SucFaceIds?: string[];
-  /** 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败， -1601代表不符合图片质量控制要求, -1604 代表人脸相似度没有超过FaceMatchThreshold。 其他非 0 值代表算法服务异常。 RetCode的顺序和入参中 Images 或 Urls 的顺序一致。 */
+  /** 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败，-1109 代表图片尺寸过大或者过小， -1601代表不符合图片质量控制要求, -1604 代表人脸相似度没有超过FaceMatchThreshold。 其他非 0 值代表算法服务异常。 RetCode的顺序和入参中 Images 或 Urls 的顺序一致。 */
   RetCode?: number[];
   /** 加入成功的人脸索引。索引顺序和入参中 Images 或 Urls 的顺序一致。 例如， Urls 中 有 3 个 url，第二个 url 失败，则 SucIndexes 值为 [0,2] 。 */
   SucIndexes?: number[];
@@ -1651,7 +1651,7 @@ declare namespace V20180301 {
     SucFaceNum?: number;
     /** 加入成功的人脸ID列表 */
     SucFaceIds?: string[];
-    /** 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败， -1601代表不符合图片质量控制要求, -1604 代表人脸相似度没有超过FaceMatchThreshold。 其他非 0 值代表算法服务异常。 RetCode的顺序和入参中 Images 或 Urls 的顺序一致。 */
+    /** 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败，-1109 代表图片尺寸过大或者过小， -1601代表不符合图片质量控制要求, -1604 代表人脸相似度没有超过FaceMatchThreshold。 其他非 0 值代表算法服务异常。 RetCode的顺序和入参中 Images 或 Urls 的顺序一致。 */
     RetCode?: number[];
     /** 加入成功的人脸索引。索引顺序和入参中 Images 或 Urls 的顺序一致。 例， Urls 中 有 3 个 url，第二个 url 失败，则 SucIndexes 值为 [0,2] 。 */
     SucIndexes?: number[];
