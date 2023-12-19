@@ -876,6 +876,8 @@ declare interface ModelInfo {
   ModelType?: string | null;
   /** 模型格式 */
   ModelFormat?: string | null;
+  /** 是否为私有化大模型 */
+  IsPrivateModel?: boolean | null;
 }
 
 /** 模型输入信息 */
@@ -3371,9 +3373,9 @@ declare interface SendChatMessageRequest {
   SessionId: string;
   /** 问题描述 */
   Question: string;
-  /** 会话模型版本。多行业客服大模型：填写demo_big_model_version_id。默认为demo_big_model_version_id，即多行业客服大模型。 */
+  /** 会话模型版本。金融大模型：填写sn-finllm-13b-chat-v1。默认为sn-finllm-13b-chat-v1，即金融大模型。 */
   ModelVersion?: string;
-  /** 使用模式(仅多场景客服大模型支持)。通用问答：填写General。搜索增强问答：填写WithSearchPlugin。默认为General，即通用问答。 */
+  /** 使用模式。通用问答：填写General。搜索增强问答：填写WithSearchPlugin。默认为General，即通用问答。当前可体验模型仅支持General。 */
   Mode?: string;
   /** 搜索来源。仅当Mode为WithSearchPlugin时生效。预置文稿库：填写Preset。自定义：填写Custom。 */
   SearchSource?: string;

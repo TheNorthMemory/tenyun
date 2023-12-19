@@ -1070,6 +1070,8 @@ declare interface PreExecuteFileSettings {
   CosSecretKey?: string;
   /** cos的appid，已废弃 */
   AppId?: string;
+  /** 备注 */
+  Remark?: string;
 }
 
 /** 价格详情 */
@@ -1547,7 +1549,7 @@ declare interface CreateClusterResponse {
 }
 
 declare interface CreateInstanceRequest {
-  /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：16：表示EMR-V2.3.0。20：表示EMR-V2.5.0。25：表示EMR-V3.1.0。27：表示KAFKA-V1.0.0。30：表示EMR-V2.6.0。33 : 表示EMR-V3.2.1。34 : 表示EMR-V3.3.0。36 : 表示STARROCKS-V1.0.0。37 : 表示EMR-V3.4.0。38 : 表示EMR-V2.7.0。39 : 表示STARROCKS-V1.1.0。41 : 表示DRUID-V1.1.0。 */
+  /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：51:表示STARROCKS-V1.4.054:表示STARROCKS-V2.0.027:表示KAFKA-V1.0.050:表示KAFKA-V2.0.016:表示EMR-V2.3.020:表示EMR-V2.5.030:表示EMR-V2.6.038:表示EMR-V2.7.025:表示EMR-V3.1.033:表示EMR-V3.2.134:表示EMR-V3.3.037:表示EMR-V3.4.044:表示EMR-V3.5.053:表示EMR-V3.6.0 */
   ProductId: number;
   /** 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；填写实例值：hive、flink。 */
   Software: string[];

@@ -210,6 +210,8 @@ declare interface AlarmReceiverInfo {
   Http: number;
   /** 企业微信群，0：未设置，1：成功，2：失败 */
   WecomGroup?: number | null;
+  /** 飞书群，0：未设置，1：成功，2：失败 */
+  LarkGroup?: number | null;
 }
 
 /** 告警规则 */
@@ -4344,6 +4346,8 @@ declare interface TaskAlarmInfo {
   LatestAlarmTime?: string | null;
   /** 告警规则描述 */
   Description?: string | null;
+  /** 飞书群Hook地址，多个hook地址使用,隔开 */
+  LarkWebHooks?: string | null;
 }
 
 /** 周期单位统计 */
@@ -6178,15 +6182,17 @@ declare interface BatchSuspendIntegrationTasksRequest {
   TaskType: number;
   /** 项目id */
   ProjectId: string;
+  /** 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP) */
+  Event?: string;
 }
 
 declare interface BatchSuspendIntegrationTasksResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6369,6 +6375,8 @@ declare interface CommitIntegrationTaskRequest {
   VersionDesc?: string;
   /** 提交版本号 */
   InstanceVersion?: number;
+  /** 前端操作类型描述 */
+  EventDesc?: string;
 }
 
 declare interface CommitIntegrationTaskResponse {
@@ -10182,6 +10190,18 @@ declare interface DescribeTableLineageResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTableMetaRequest {
+  /** 表唯一id */
+  TableId: string;
+}
+
+declare interface DescribeTableMetaResponse {
+  /** 表的元数据信息 */
+  TableMeta: TableMeta | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTableMetasRequest {
   /** 分页页码 */
   PageNumber?: number;
@@ -12118,6 +12138,8 @@ declare interface ResumeIntegrationTaskRequest {
   Event?: string;
   /** 额外参数 */
   ExtConfig?: RecordField[];
+  /** 前端操作类型描述 */
+  EventDesc?: string;
 }
 
 declare interface ResumeIntegrationTaskResponse {
@@ -12392,6 +12414,8 @@ declare interface StartIntegrationTaskRequest {
   Event?: string;
   /** 额外参数 */
   ExtConfig?: RecordField[];
+  /** 操作类型描述 */
+  EventDesc?: string;
 }
 
 declare interface StartIntegrationTaskResponse {
@@ -12574,11 +12598,13 @@ declare interface SuspendIntegrationTaskRequest {
   TaskId: string;
   /** 项目id */
   ProjectId: string;
+  /** 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP) */
+  Event?: string;
 }
 
 declare interface SuspendIntegrationTaskResponse {
   /** 操作成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13124,6 +13150,8 @@ declare interface Wedata {
   DescribeTableInfoList(data: DescribeTableInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableInfoListResponse>;
   /** 列出表血缘信息 {@link DescribeTableLineageRequest} {@link DescribeTableLineageResponse} */
   DescribeTableLineage(data: DescribeTableLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableLineageResponse>;
+  /** 查询表元数据详情 {@link DescribeTableMetaRequest} {@link DescribeTableMetaResponse} */
+  DescribeTableMeta(data: DescribeTableMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableMetaResponse>;
   /** 获取表元数据list {@link DescribeTableMetasRequest} {@link DescribeTableMetasResponse} */
   DescribeTableMetas(data?: DescribeTableMetasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableMetasResponse>;
   /** 查询表质量详情 {@link DescribeTableQualityDetailsRequest} {@link DescribeTableQualityDetailsResponse} */

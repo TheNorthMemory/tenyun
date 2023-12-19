@@ -36,6 +36,8 @@ declare interface AlarmHierarchicalNotice {
   NoticeId?: string | null;
   /** 通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警 */
   Classification?: string[] | null;
+  /** 模板对应的策略id */
+  PolicyId?: string | null;
 }
 
 /** 告警分级阈值配置 */
@@ -4991,7 +4993,7 @@ declare interface Monitor {
   CleanGrafanaInstance(data: CleanGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanGrafanaInstanceResponse>;
   /** 创建通知模板 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
-  /** 创建云监控告警策略 {@link CreateAlarmPolicyRequest} {@link CreateAlarmPolicyResponse} */
+  /** 创建腾讯云可观测平台告警策略 {@link CreateAlarmPolicyRequest} {@link CreateAlarmPolicyResponse} */
   CreateAlarmPolicy(data: CreateAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmPolicyResponse>;
   /** 创建告警规则 {@link CreateAlertRuleRequest} {@link CreateAlertRuleResponse} */
   CreateAlertRule(data: CreateAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertRuleResponse>;

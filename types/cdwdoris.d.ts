@@ -88,6 +88,8 @@ declare interface InstanceInfo {
   BuildVersion?: string | null;
   /** 组件信息 */
   Components?: string | null;
+  /** 判断审计日志表是否有catalog字段 */
+  IfExistCatalog?: number | null;
 }
 
 /** 实例节点描述信息 */

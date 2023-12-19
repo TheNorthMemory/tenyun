@@ -135,29 +135,31 @@ declare interface CommonFilter {
 /** 创建NAT ACL规则参数结构 */
 declare interface CreateNatRuleItem {
   /** 访问源示例： net：IP/CIDR(192.168.0.2) */
-  SourceContent: string | null;
+  SourceContent: string;
   /** 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag */
-  SourceType: string | null;
+  SourceType: string;
   /** 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com */
-  TargetContent: string | null;
+  TargetContent: string;
   /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location */
-  TargetType: string | null;
+  TargetType: string;
   /** 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS */
-  Protocol: string | null;
+  Protocol: string;
   /** 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察 */
-  RuleAction: string | null;
+  RuleAction: string;
   /** 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口 */
-  Port: string | null;
+  Port: string;
   /** 规则方向：1，入站；0，出站 */
-  Direction: number | null;
+  Direction: number;
   /** 规则序号 */
-  OrderIndex: number | null;
+  OrderIndex: number;
   /** 规则状态，true表示启用，false表示禁用 */
-  Enable: string | null;
+  Enable: string;
   /** 规则对应的唯一id，创建规则时无需填写 */
-  Uuid?: number | null;
+  Uuid?: number;
   /** 描述 */
-  Description?: string | null;
+  Description?: string;
+  /** 端口协议组ID */
+  ParamTemplateId?: string;
 }
 
 /** 创建互联网边界规则参数结构 */
@@ -192,6 +194,8 @@ declare interface CreateRuleItem {
   RuleSource?: number;
   /** 告警Id */
   LogId?: string;
+  /** 端都协议组ID */
+  ParamTemplateId?: string;
 }
 
 /** 数据库白名单规则数据 */
@@ -280,6 +284,10 @@ declare interface DescAcItem {
   Scope?: string | null;
   /** 互联网边界防火墙使用的内部规则id */
   InternetBorderUuid?: string | null;
+  /** 协议端口组名称 */
+  ParamTemplateName?: string | null;
+  /** 协议端口组ID */
+  ParamTemplateId?: string | null;
 }
 
 /** 设置nat防火墙的vpc dns 接入开关 */
@@ -1216,6 +1224,10 @@ declare interface VpcRuleItem {
   FwGroupName?: string | null;
   /** beta任务详情 */
   BetaList?: BetaInfoByACL[] | null;
+  /** 端口协议组ID */
+  ParamTemplateId?: string | null;
+  /** 端口协议组名称 */
+  ParamTemplateName?: string | null;
 }
 
 /** vpc区域数据详情 */
@@ -1991,7 +2003,7 @@ declare interface DescribeCfwEipsRequest {
 
 declare interface DescribeCfwEipsResponse {
   /** 返回值信息 */
-  NatFwEipList: NatFwEipsInfo[];
+  NatFwEipList?: NatFwEipsInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2451,11 +2463,11 @@ declare interface DescribeSourceAssetRequest {
 
 declare interface DescribeSourceAssetResponse {
   /** 地域集合 */
-  ZoneList: AssetZone[];
+  ZoneList?: AssetZone[];
   /** 数据 */
-  Data: InstanceInfo[];
+  Data?: InstanceInfo[];
   /** 返回数据总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

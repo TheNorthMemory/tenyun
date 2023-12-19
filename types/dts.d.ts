@@ -546,7 +546,7 @@ declare interface JobItem {
 
 /** 目标端为kakfa时添加的同步选项字段 */
 declare interface KafkaOption {
-  /** 投递到kafka的数据类型，如Avro,Json */
+  /** 投递到kafka的数据类型，如Avro,Json,canal-pb,canal-json */
   DataType?: string;
   /** 同步topic策略，如Single（集中投递到单topic）,Multi (自定义topic名称) */
   TopicType?: string;
@@ -656,7 +656,7 @@ declare interface Options {
   DdlOptions?: DdlOption[] | null;
   /** kafka同步选项 */
   KafkaOption?: KafkaOption | null;
-  /** 任务限速信息、该字段仅用作出参、入参该字段无效 */
+  /** 任务限速信息 */
   RateLimitOption?: RateLimitOption | null;
   /** 自动重试的时间窗口设置 */
   AutoRetryTimeRangeMinutes?: number | null;
@@ -690,27 +690,27 @@ declare interface ProcessStepTip {
 
 /** 迁移和同步任务限速的详细信息 */
 declare interface RateLimitOption {
-  /** 当前生效的全量导出线程数 */
+  /** 当前生效的全量导出线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16 */
   CurrentDumpThread: number | null;
-  /** 默认的全量导出线程数 */
+  /** 默认的全量导出线程数，该字段仅在出参有意义 */
   DefaultDumpThread: number | null;
-  /** 当前生效的全量导出Rps */
+  /** 当前生效的全量导出Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000 */
   CurrentDumpRps: number | null;
-  /** 默认的全量导出Rps */
+  /** 默认的全量导出Rps，该字段仅在出参有意义 */
   DefaultDumpRps: number | null;
-  /** 当前生效的全量导入线程数 */
+  /** 当前生效的全量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16 */
   CurrentLoadThread: number | null;
-  /** 默认的全量导入线程数 */
+  /** 默认的全量导入线程数，该字段仅在出参有意义 */
   DefaultLoadThread: number | null;
-  /** 当前生效的全量导入Rps */
+  /** 当前生效的全量导入Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000 */
   CurrentLoadRps: number | null;
-  /** 默认的全量导入Rps */
+  /** 默认的全量导入Rps，该字段仅在出参有意义 */
   DefaultLoadRps: number | null;
-  /** 当前生效的增量导入线程数 */
+  /** 当前生效的增量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为128 */
   CurrentSinkerThread: number | null;
-  /** 默认的增量导入线程数 */
+  /** 默认的增量导入线程数，该字段仅在出参有意义 */
   DefaultSinkerThread: number | null;
-  /** enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速 */
+  /** enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速，该字段仅在出参有意义 */
   HasUserSetRateLimit: string | null;
 }
 

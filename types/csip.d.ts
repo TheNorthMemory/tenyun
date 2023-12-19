@@ -1728,6 +1728,8 @@ declare interface DescribeDbAssetsResponse {
 }
 
 declare interface DescribeDomainAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** - */
   Filter?: Filter;
   /** 安全中心自定义标签 */
@@ -1752,6 +1754,8 @@ declare interface DescribeDomainAssetsResponse {
 }
 
 declare interface DescribeGatewayAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤参数 */
   Filter?: Filter;
 }
@@ -1774,6 +1778,8 @@ declare interface DescribeGatewayAssetsResponse {
 }
 
 declare interface DescribeListenerListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** - */
   Filter?: Filter;
 }
@@ -1788,6 +1794,8 @@ declare interface DescribeListenerListResponse {
 }
 
 declare interface DescribeNICAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤参数 */
   Filter?: Filter;
 }
@@ -1826,6 +1834,8 @@ declare interface DescribeOrganizationUserInfoResponse {
 }
 
 declare interface DescribePublicIpAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** filte过滤条件 */
   Filter?: Filter;
   /** 安全中心自定义标签 */
