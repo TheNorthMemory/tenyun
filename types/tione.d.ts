@@ -856,6 +856,40 @@ declare interface ModelAccelerateTask {
   FrameworkVersion?: string | null;
 }
 
+/** 优化模型版本列表 */
+declare interface ModelAccelerateVersion {
+  /** 模型id */
+  ModelId: string | null;
+  /** 优化模型版本id */
+  ModelVersionId: string | null;
+  /** 优化任务id */
+  ModelJobId: string | null;
+  /** 优化任务名称 */
+  ModelJobName: string | null;
+  /** 优化后模型版本 */
+  ModelVersion: string | null;
+  /** 加速比 */
+  SpeedUp: string | null;
+  /** 模型来源/任务名称/任务版本 */
+  ModelSource: ModelSource | null;
+  /** 模型cos路径 */
+  CosPathInfo: CosPathInfo | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 模型规范 */
+  ModelFormat: string | null;
+  /** 状态 */
+  Status: string | null;
+  /** 进度 */
+  Progress: number | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
+  /** GPU类型 */
+  GPUType: string | null;
+  /** 模型cos路径 */
+  ModelCosPath: CosPathInfo | null;
+}
+
 /** 模型描述信息 */
 declare interface ModelInfo {
   /** 模型版本id, DescribeTrainingModelVersion查询模型接口时的id自动学习类型的模型填写自动学习的任务id */
@@ -886,6 +920,32 @@ declare interface ModelInputInfo {
   ModelInputType: string | null;
   /** input数据尺寸 */
   ModelInputDimension: string[] | null;
+}
+
+/** 模型来源 */
+declare interface ModelSource {
+  /** 来源 */
+  Source: string | null;
+  /** 来源任务名称 */
+  JobName: string | null;
+  /** 来源任务版本 */
+  JobVersion: string | null;
+  /** 来源任务id */
+  JobId: string | null;
+  /** 模型名称 */
+  ModelName: string | null;
+  /** 算法框架 */
+  AlgorithmFramework: string | null;
+  /** 训练偏好 */
+  TrainingPreference: string | null;
+  /** 推理环境来源，SYSTEM/CUSTOM */
+  ReasoningEnvironmentSource: string | null;
+  /** 推理环境 */
+  ReasoningEnvironment: string | null;
+  /** 推理环境id */
+  ReasoningEnvironmentId: string | null;
+  /** 自定义推理环境 */
+  ReasoningImageInfo: ImageInfo | null;
 }
 
 /** 类型NotebookDetail */
@@ -2830,6 +2890,30 @@ declare interface DescribeModelAccelerateTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelAccelerateVersionsRequest {
+  /** 过滤条件 Filter.Name: 枚举值: ModelJobName (任务名称)|TrainingModelVersionId (模型版本id) Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为10，Filter.Values的上限为100 */
+  Filters?: Filter[];
+  /** 排序字段; 枚举值: CreateTime (创建时间) ；默认CreateTime */
+  OrderField?: string;
+  /** 排序方向; 枚举值: ASC | DESC；默认DESC */
+  Order?: string;
+  /** 分页查询起始位置，如：Limit为100，第一页Offset为0，第二页Offset为100....即每页左边为闭区间; 默认0 */
+  Offset?: number;
+  /** 分页查询每页大小，最大20000; 默认10 */
+  Limit?: number;
+  /** 模型ID */
+  TrainingModelId?: string;
+}
+
+declare interface DescribeModelAccelerateVersionsResponse {
+  /** 优化模型总数； 注意接口是分页拉取的，total是指优化模型节点总数，不是本次返回中ModelAccelerateVersions数组的大小 */
+  TotalCount?: number | null;
+  /** 优化模型列表 */
+  ModelAccelerateVersions?: ModelAccelerateVersion[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeModelServiceCallInfoRequest {
   /** 服务组id */
   ServiceGroupId: string;
@@ -4273,6 +4357,8 @@ declare interface Tione {
   DescribeModelAccelerateTask(data: DescribeModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTaskResponse>;
   /** 查询模型加速任务列表 {@link DescribeModelAccelerateTasksRequest} {@link DescribeModelAccelerateTasksResponse} */
   DescribeModelAccelerateTasks(data?: DescribeModelAccelerateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTasksResponse>;
+  /** 查询优化模型版本列表 {@link DescribeModelAccelerateVersionsRequest} {@link DescribeModelAccelerateVersionsResponse} */
+  DescribeModelAccelerateVersions(data?: DescribeModelAccelerateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateVersionsResponse>;
   /** 查询单个服务 {@link DescribeModelServiceRequest} {@link DescribeModelServiceResponse} */
   DescribeModelService(data: DescribeModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceResponse>;
   /** 展示服务的调用信息 {@link DescribeModelServiceCallInfoRequest} {@link DescribeModelServiceCallInfoResponse} */

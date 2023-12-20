@@ -90,6 +90,8 @@ declare interface InstanceInfo {
   Components?: string | null;
   /** 判断审计日志表是否有catalog字段 */
   IfExistCatalog?: number | null;
+  /** 页面特性，用于前端屏蔽一些页面入口 */
+  Characteristic?: string[] | null;
 }
 
 /** 实例节点描述信息 */

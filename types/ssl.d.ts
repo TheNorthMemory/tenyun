@@ -543,9 +543,17 @@ declare interface ManagerStatusInfo {
 /** 证书操作日志。 */
 declare interface OperationLog {
   /** 操作证书动作。 */
-  Action: string;
+  Action?: string;
   /** 操作时间。 */
-  CreatedOn: string;
+  CreatedOn?: string;
+  /** 主账号 */
+  Uin?: string | null;
+  /** 子账号 */
+  SubAccountUin?: string | null;
+  /** 证书ID */
+  CertId?: string | null;
+  /** 操作 */
+  Type?: string | null;
 }
 
 /** 权益包基本信息 */

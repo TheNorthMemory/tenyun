@@ -492,7 +492,7 @@ declare interface DescribeWafProtectionResult {
   ObjectStatus?: string | null;
 }
 
-/** 引擎的初始管理帐号 */
+/** 引擎的初始管理账号 */
 declare interface EngineAdmin {
   /** 控制台初始用户名 */
   Name?: string;
@@ -1403,7 +1403,7 @@ declare interface CreateEngineRequest {
   ApolloEnvParams?: ApolloEnvParam[];
   /** 引擎的标签列表。用户自定义的key/value形式，无参考值 */
   EngineTags?: InstanceTagInfo[];
-  /** 引擎的初始帐号信息。可设置参数：- Name：控制台初始用户名- Password：控制台初始密码- Token：引擎接口的管理员 Token */
+  /** 引擎的初始账号信息。可设置参数：- Name：控制台初始用户名- Password：控制台初始密码- Token：引擎接口的管理员 Token */
   EngineAdmin?: EngineAdmin;
   /** 预付费时长，以月为单位 */
   PrepaidPeriod?: number;

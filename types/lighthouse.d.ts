@@ -432,7 +432,7 @@ declare interface FirewallRule {
   Protocol: string;
   /** 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。 */
   Port?: string;
-  /** 网段或 IP (互斥)。默认为 0.0.0.0/0，表示所有来源。 */
+  /** IPv4网段或 IPv4地址(互斥)。示例值：0.0.0.0/0。和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。 */
   CidrBlock?: string;
   /** 取值：ACCEPT，DROP。默认为 ACCEPT。 */
   Action?: string;
@@ -443,17 +443,17 @@ declare interface FirewallRule {
 /** 描述防火墙规则详细信息。 */
 declare interface FirewallRuleInfo {
   /** 应用类型，取值：自定义，HTTP(80)，HTTPS(443)，Linux登录(22)，Windows登录(3389)，MySQL(3306)，SQL Server(1433)，全部TCP，全部UDP，Ping-ICMP，ALL。 */
-  AppType: string;
+  AppType?: string;
   /** 协议，取值：TCP，UDP，ICMP，ALL。 */
-  Protocol: string;
+  Protocol?: string;
   /** 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。 */
-  Port: string;
-  /** 网段或 IP (互斥)。默认为 0.0.0.0/0，表示所有来源。 */
-  CidrBlock: string;
+  Port?: string;
+  /** IPv4网段或 IPv4地址(互斥)。示例值：0.0.0.0/0。和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。 */
+  CidrBlock?: string;
   /** 取值：ACCEPT，DROP。默认为 ACCEPT。 */
-  Action: string;
+  Action?: string;
   /** 防火墙规则描述。 */
-  FirewallRuleDescription: string;
+  FirewallRuleDescription?: string;
 }
 
 /** 防火墙模板信息。 */
@@ -691,7 +691,7 @@ declare interface LoginConfiguration {
 /** 描述了实例登录相关配置与信息。 */
 declare interface LoginSettings {
   /** 密钥 ID 列表。关联密钥后，就可以通过对应的私钥来访问实例。注意：此字段可能返回 []，表示取不到有效值。 */
-  KeyIds: string[];
+  KeyIds?: string[];
 }
 
 /** 描述了实例可变更的套餐。 */
@@ -841,11 +841,11 @@ declare interface SoftwareDetail {
 /** 描述了操作系统所在块设备即系统盘的信息。 */
 declare interface SystemDisk {
   /** 系统盘类型。取值范围： LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地 SSD 硬盘 CLOUD_BASIC：普通云硬盘 CLOUD_SSD：SSD 云硬盘 CLOUD_PREMIUM：高性能云硬盘 */
-  DiskType: string;
+  DiskType?: string;
   /** 系统盘大小，单位：GB。 */
-  DiskSize: number;
+  DiskSize?: number;
   /** 系统盘ID。 */
-  DiskId: string | null;
+  DiskId?: string | null;
 }
 
 /** 标签 */

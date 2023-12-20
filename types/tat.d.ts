@@ -246,7 +246,7 @@ declare interface RegisterCodeInfo {
   Description?: string | null;
   /** 注册实例名称前缀。 */
   InstanceNamePrefix?: string | null;
-  /** 该注册码允许注册的实列数目。 */
+  /** 该注册码允许注册的实例数目。 */
   RegisterLimit?: number | null;
   /** 该注册码的过期时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   ExpiredTime?: string | null;

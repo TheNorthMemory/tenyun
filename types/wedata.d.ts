@@ -1884,6 +1884,8 @@ declare interface InstanceLogInfo {
   CostTime?: string | null;
   /** 实例状态 COMPLETED 完成 FAILED失败重试 EXPIRED失败 RUNNING运行中 */
   InstanceStatus?: string | null;
+  /** 实例代码文件，为空表示对应代码文件不存在，可能是因为执行机未升级/对应类型任务无代码。 */
+  CodeFileName?: string | null;
 }
 
 /** 实例日志信息详情 */

@@ -1157,7 +1157,7 @@ declare interface CreateCosTokenRequest {
 
 declare interface CreateCosTokenResponse {
   /** 成功时为CosToken对象，失败为null */
-  Result: CosToken | null;
+  Result?: CosToken | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2815,7 +2815,7 @@ declare interface Tem {
   CreateApplicationService(data: CreateApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationServiceResponse>;
   /** 创建配置 {@link CreateConfigDataRequest} {@link CreateConfigDataResponse} */
   CreateConfigData(data: CreateConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigDataResponse>;
-  /** 生成Cos临时秘钥 {@link CreateCosTokenRequest} {@link CreateCosTokenResponse} */
+  /** 生成Cos临时密钥 {@link CreateCosTokenRequest} {@link CreateCosTokenResponse} */
   CreateCosToken(data: CreateCosTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosTokenResponse>;
   /** 创建环境 {@link CreateEnvironmentRequest} {@link CreateEnvironmentResponse} */
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;

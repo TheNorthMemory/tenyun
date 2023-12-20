@@ -2535,9 +2535,9 @@ declare interface DescribeContentQuotaRequest {
 
 declare interface DescribeContentQuotaResponse {
   /** 刷新相关配额。 */
-  PurgeQuota: Quota[] | null;
+  PurgeQuota?: Quota[] | null;
   /** 预热相关配额。 */
-  PrefetchQuota: Quota[] | null;
+  PrefetchQuota?: Quota[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

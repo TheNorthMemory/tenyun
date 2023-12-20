@@ -356,6 +356,22 @@ declare interface JobConfig {
   EsServerlessSpace?: string | null;
 }
 
+/** 描述作业发生的一个事件 */
+declare interface JobEvent {
+  /** 内部定义的事件类型 */
+  Type: string;
+  /** 事件类型的说明文字 */
+  Description: string;
+  /** 事件发生的 Unix 时间戳（秒） */
+  Timestamp: number;
+  /** 事件发生时的运行 ID */
+  RunningOrderId: number | null;
+  /** 事件的一些可选说明 */
+  Message: string | null;
+  /** 异常事件的排查手册链接 */
+  SolutionLink: string | null;
+}
+
 /** 作业运行图 */
 declare interface JobGraph {
   /** 运行图的点集合 */
@@ -1322,6 +1338,32 @@ declare interface DescribeJobConfigsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeJobEventsRequest {
+  /** 作业的 ID */
+  JobId: string;
+  /** 筛选条件：起始 Unix 时间戳（秒） */
+  StartTimestamp: number;
+  /** 筛选条件：结束 Unix 时间戳（秒） */
+  EndTimestamp: number;
+  /** 事件类型。如果不传则返回所有类型的数据 */
+  Types?: string[];
+  /** 运行实例 ID 数组 */
+  RunningOrderIds?: number[];
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+}
+
+declare interface DescribeJobEventsResponse {
+  /** 该作业指定范围内的事件列表 */
+  Events: JobEvent[] | null;
+  /** 该作业指定范围内运行实例 ID 数组，仅当入参没有传入 RunningOrderIds 参数时才会返回。倒序输出 */
+  RunningOrderIds: number[] | null;
+  /** 事件的总数 */
+  TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobSavepointRequest {
   /** 作业 SerialId */
   JobId: string;
@@ -1757,6 +1799,8 @@ declare interface Oceanus {
   DescribeFolder(data: DescribeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderResponse>;
   /** 查询作业配置 {@link DescribeJobConfigsRequest} {@link DescribeJobConfigsResponse} */
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
+  /** 获取指定作业的事件 {@link DescribeJobEventsRequest} {@link DescribeJobEventsResponse} */
+  DescribeJobEvents(data: DescribeJobEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobEventsResponse>;
   /** 查找Savepoint列表 {@link DescribeJobSavepointRequest} {@link DescribeJobSavepointResponse} */
   DescribeJobSavepoint(data: DescribeJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSavepointResponse>;
   /** 查询作业实例启动日志 {@link DescribeJobSubmissionLogRequest} {@link DescribeJobSubmissionLogResponse} */
