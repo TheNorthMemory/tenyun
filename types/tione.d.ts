@@ -1225,21 +1225,21 @@ declare interface ResourceConfigInfo {
 /** 资源组 */
 declare interface ResourceGroup {
   /** 资源组id */
-  ResourceGroupId: string;
+  ResourceGroupId?: string;
   /** 资源组名称 */
-  ResourceGroupName: string;
+  ResourceGroupName?: string;
   /** 可用节点个数(运行中的节点) */
-  FreeInstance: number;
+  FreeInstance?: number;
   /** 总节点个数(所有节点) */
-  TotalInstance: number;
+  TotalInstance?: number;
   /** 资资源组已用的资源 */
-  UsedResource: GroupResource | null;
+  UsedResource?: GroupResource | null;
   /** 资源组总资源 */
-  TotalResource: GroupResource | null;
+  TotalResource?: GroupResource | null;
   /** 节点信息 */
-  InstanceSet: Instance[] | null;
+  InstanceSet?: Instance[] | null;
   /** 标签列表 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
 }
 
 /** 描述资源信息 */
@@ -2604,7 +2604,7 @@ declare interface DescribeBillingResourceGroupResponse {
 
 declare interface DescribeBillingResourceGroupsRequest {
   /** 资源组类型; 枚举值 TRAIN:训练 INFERENCE:推理 */
-  Type: string;
+  Type?: string;
   /** Filter.Name: 枚举值: ResourceGroupId (资源组id列表) ResourceGroupName (资源组名称列表)Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100 */
   Filters?: Filter[];
   /** 标签过滤 */
@@ -2621,9 +2621,9 @@ declare interface DescribeBillingResourceGroupsRequest {
 
 declare interface DescribeBillingResourceGroupsResponse {
   /** 资源组总数； 注意接口是分页拉取的，total是指资源组总数，不是本次返回中ResourceGroupSet数组的大小 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 资源组详情 */
-  ResourceGroupSet: ResourceGroup[] | null;
+  ResourceGroupSet?: ResourceGroup[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2655,10 +2655,10 @@ declare interface DescribeBillingSpecsPriceResponse {
 }
 
 declare interface DescribeBillingSpecsRequest {
-  /** 枚举值：TRAIN、NOTEBOOK、INFERENCE */
-  TaskType: string;
   /** 付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月 */
   ChargeType: string;
+  /** 枚举值：TRAIN、NOTEBOOK、INFERENCE */
+  TaskType?: string;
   /** 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘 */
   ResourceType?: string;
 }
@@ -4330,7 +4330,7 @@ declare interface Tione {
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
   /** 查询资源组详情 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
-  DescribeBillingResourceGroups(data: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
+  DescribeBillingResourceGroups(data?: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */
   DescribeBillingResourceInstanceRunningJobs(data: DescribeBillingResourceInstanceRunningJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceInstanceRunningJobsResponse>;
   /** 查询计费项列表 {@link DescribeBillingSpecsRequest} {@link DescribeBillingSpecsResponse} */

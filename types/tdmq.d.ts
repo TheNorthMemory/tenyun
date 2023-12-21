@@ -60,10 +60,6 @@ declare interface BindCluster {
   ClusterName: string;
 }
 
-/** 运营端命名空间bundle实体 */
-declare interface BundleSetOpt {
-}
-
 /** 集群信息集合 */
 declare interface Cluster {
   /** 集群Id。 */
@@ -2695,15 +2691,13 @@ declare interface DescribeNamespaceBundlesOptRequest {
   Offset?: number;
   /** 过滤的 bundle */
   Bundle?: string;
-  /** bundle 所属的 broker ip 地址，支持模糊查询 */
+  /** bundle 所属的 broker IP 地址，支持模糊查询 */
   OwnerBroker?: string;
 }
 
 declare interface DescribeNamespaceBundlesOptResponse {
   /** 记录条数 */
   TotalCount?: number;
-  /** bundle列表 */
-  BundleSet?: BundleSetOpt[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

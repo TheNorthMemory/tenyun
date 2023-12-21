@@ -342,12 +342,14 @@ declare interface RoomInfo {
   RoomType?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
-  /** 直播方式：0 常规模式（默认）1 回放直播模式（伪直播） */
+  /** 直播类型：0 常规（默认）1 伪直播 */
   LiveType?: number;
   /** 伪直播回放链接 */
   RecordLiveUrl?: string;
   /** 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效 */
   EnableAutoStart?: number;
+  /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
+  RecordBackground?: string;
 }
 
 /** 房间列表 */
@@ -388,7 +390,7 @@ declare interface RoomItem {
   RoomType?: number | null;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number | null;
-  /** 直播方式：0 常规模式（默认）1 回放直播模式（伪直播） */
+  /** 直播类型：0 常规（默认）1 伪直播 */
   LiveType?: number | null;
   /** 伪直播回放链接 */
   RecordLiveUrl?: string | null;
@@ -704,7 +706,7 @@ declare interface CreateRoomRequest {
   RoomType?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
-  /** 直播方式：0 常规模式（默认）1 回放直播模式（伪直播） */
+  /** 直播类型：0 常规（默认）1 伪直播 */
   LiveType?: number;
   /** 伪直播链接 */
   RecordLiveUrl?: string;
@@ -1129,7 +1131,7 @@ declare interface DescribeRoomResponse {
   VideoDuration?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
-  /** 直播方式：0 常规模式（默认）1 回放直播模式（伪直播） */
+  /** 直播类型：0 常规（默认）1 伪直播 */
   LiveType?: number;
   /** 伪直播链接 */
   RecordLiveUrl?: string;

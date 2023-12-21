@@ -2054,6 +2054,16 @@ declare interface EmptyTrackItem {
   Duration: number;
 }
 
+/** 音画质重生结果文件输出。 */
+declare interface EnhanceMediaQualityOutputConfig {
+  /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+  MediaName?: string;
+  /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+  ClassId?: number;
+  /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  ExpireTime?: string;
+}
+
 /** 事件通知内容，其中，TranscodeCompleteEvent、ConcatCompleteEvent、ClipCompleteEvent、CreateImageSpriteCompleteEvent、SnapshotByTimeOffsetCompleteEvent 为兼容 2017 版接口发起任务的事件通知。 */
 declare interface EventContent {
   /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
@@ -7858,6 +7868,30 @@ declare interface EnhanceMediaByTemplateResponse {
   RequestId?: string;
 }
 
+declare interface EnhanceMediaQualityRequest {
+  /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
+  FileId: string;
+  /** 音画质重生模板 ID，请联系腾讯云获取。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 音画质重生后的媒体文件配置。 */
+  OutputConfig?: EnhanceMediaQualityOutputConfig;
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+  TasksPriority?: number;
+}
+
+declare interface EnhanceMediaQualityResponse {
+  /** 音画质重生任务 ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExecuteFunctionRequest {
   /** 调用后端接口名称。 */
   FunctionName: string;
@@ -9529,6 +9563,8 @@ declare interface Vod {
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
   /** 使用模板发起音画质重生 {@link EnhanceMediaByTemplateRequest} {@link EnhanceMediaByTemplateResponse} */
   EnhanceMediaByTemplate(data: EnhanceMediaByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceMediaByTemplateResponse>;
+  /** 音画质重生 {@link EnhanceMediaQualityRequest} {@link EnhanceMediaQualityResponse} */
+  EnhanceMediaQuality(data: EnhanceMediaQualityRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceMediaQualityResponse>;
   /** 执行定制 API {@link ExecuteFunctionRequest} {@link ExecuteFunctionResponse} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
   /** 提取版权水印 {@link ExtractCopyRightWatermarkRequest} {@link ExtractCopyRightWatermarkResponse} */

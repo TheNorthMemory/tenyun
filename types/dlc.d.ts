@@ -126,9 +126,9 @@ declare interface CosPermission {
 
 /** 定时启停策略信息 */
 declare interface CrontabResumeSuspendStrategy {
-  /** 定时拉起时间：如：周一8点 */
+  /** 定时拉起时间：如：周一&周三8点 */
   ResumeTime?: string | null;
-  /** 定时挂起时间：如：周一20点 */
+  /** 定时挂起时间：如：周一&周三20点 */
   SuspendTime?: string | null;
   /** 挂起配置：0（默认）：等待任务结束后挂起、1：强制挂起 */
   SuspendStrategy?: number | null;

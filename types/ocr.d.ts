@@ -292,6 +292,64 @@ declare interface DutyPaidProofInfo {
   Rect: Rect;
 }
 
+/** 全电发票（航空运输电子客票行程单） */
+declare interface ElectronicAirTransport {
+  /** 发票代码 */
+  Code?: string | null;
+  /** 发票号码 */
+  Number?: string | null;
+  /** 开票日期 */
+  Date?: string | null;
+  /** 金额 */
+  Amount?: string | null;
+  /** 校验码 */
+  CheckCode?: string | null;
+  /** 价税合计 */
+  Total?: string | null;
+  /** 抵扣标志 */
+  DeductionMark?: string | null;
+  /** 发票状态代码，0正常 1 未更新 2作废 3已红冲 */
+  StateCode?: string | null;
+  /** 购方识别号 */
+  BuyerTaxCode?: string | null;
+  /** 购方名称 */
+  BuyerName?: string | null;
+  /** 合计税额 */
+  Tax?: string | null;
+  /** 国内国际标识 */
+  DomesticInternationalMark?: string | null;
+  /** 旅客姓名 */
+  PassengerName?: string | null;
+  /** 有效身份证件号码 */
+  PassengerNo?: string | null;
+  /** 电子客票号码 */
+  ElectronicNumber?: string | null;
+  /** 全电发票（航空运输电子客票行程单）详细信息 */
+  ElectronicAirTransportDetails?: ElectronicAirTransportDetail[] | null;
+}
+
+/** 全电发票（航空运输电子客票行程单）详细信息 */
+declare interface ElectronicAirTransportDetail {
+  /** 航段序号 */
+  FlightSegment?: string | null;
+  /** 始发站 */
+  StationGetOn?: string | null;
+  /** 目的站 */
+  StationGetOff?: string | null;
+  /** 承运人 */
+  Carrier?: string | null;
+  /** 航班号 */
+  FlightNumber?: string | null;
+  /** 座位等级 */
+  SeatLevel?: string | null;
+  /** 承运日期 */
+  FlightDate?: string | null;
+  /** 起飞时间 */
+  DepartureTime?: string | null;
+  /** 客票级别/客票类别 */
+  FareBasis?: string | null;
+}
+
 /** 电子发票（机票行程单） */
 declare interface ElectronicFlightTicketFull {
   /** 旅客姓名 */
@@ -340,6 +398,58 @@ declare interface ElectronicFlightTicketFull {
   BuyerTaxID?: string;
   /** 机票详细信息元组 */
   FlightItems?: FlightItemInfo[];
+}
+
+/** 全电发票（铁路电子客票） */
+declare interface ElectronicTrainTicket {
+  /** 购方名称 */
+  BuyerName?: string | null;
+  /** 购方识别号 */
+  BuyerTaxCode?: string | null;
+  /** 发票号码 */
+  Number?: string | null;
+  /** 开票日期 */
+  Date?: string | null;
+  /** 价税合计（中文大写） */
+  TotalCN?: string | null;
+  /** 税额 */
+  Tax?: string | null;
+  /** 业务类型，0：退票，1:售票 */
+  ServiceType?: string | null;
+  /** 出发时间 */
+  TimeGetOn?: string | null;
+  /** 车次 */
+  TrainNumber?: string | null;
+  /** 发票代码 */
+  Code?: string | null;
+  /** 席别 */
+  SeatType?: string | null;
+  /** 乘车日期 */
+  DateGetOn?: string | null;
+  /** 车厢 */
+  TrainCabin?: string | null;
+  /** 出发站 */
+  StationGetOn?: string | null;
+  /** 电子客票号 */
+  ElectronicNumber?: string | null;
+  /** 姓名 */
+  PassengerName?: string | null;
+  /** 证件号 */
+  PassengerNo?: string | null;
+  /** 金额 */
+  Amount?: string | null;
+  /** 到达站 */
+  StationGetOff?: string | null;
+  /** 税率 */
+  TaxRate?: string | null;
+  /** 席位 */
+  Seat?: string | null;
+  /** 价税合计 */
+  Total?: string | null;
+  /** 校验码 */
+  CheckCode?: string | null;
+  /** 发票状态代码，0正常 1 未更新 2作废 3已红冲 */
+  StateCode?: string | null;
 }
 
 /** 电子发票（火车票） */
@@ -1920,7 +2030,7 @@ declare interface VatElectronicItemInfo {
   AreaUnit?: string;
 }
 
-/** 增值税发票信息 */
+/** 增值税发票、购车发票、全电发票的基础要素字段信息。 */
 declare interface VatInvoice {
   /** 发票代码 */
   Code?: string;
@@ -1928,13 +2038,13 @@ declare interface VatInvoice {
   Number?: string;
   /** 开票日期 */
   Date?: string;
-  /** 购方抬头 */
+  /** 购方抬头通用机打发票类型时不返回 */
   BuyerName?: string;
-  /** 购方税号 */
+  /** 购方税号通用机打发票类型时不返回 */
   BuyerTaxCode?: string;
-  /** 购方地址电话 */
+  /** 购方地址电话通用机打发票类型做不返回 */
   BuyerAddressPhone?: string;
-  /** 购方银行账号 */
+  /** 购方银行账号通用机打发票类型时不返回 */
   BuyerBankAccount?: string;
   /** 销方名称 */
   SellerName?: string;
@@ -1948,8 +2058,10 @@ declare interface VatInvoice {
   Remark?: string;
   /** 机器编码 */
   MachineNo?: string;
-  /** 票种类型01：增值税专用发票，02：货运运输业增值税专用发票，03：机动车销售统一发票，04：增值税普通发票，08：增值税电子专用发票（含全电，全电仅新版接口支持），10：增值税电子普通发票（含全电，全电仅新版接口支持），11：增值税普通发票（卷式），14：增值税电子（通行费）发票，15：二手车销售统一发票，32：深圳区块链发票，102：通用机打电子发票 */
+  /** 票种类型01：增值税专用发票，02：货运运输业增值税专用发票，03：机动车销售统一发票，04：增值税普通发票，08：增值税电子专用发票（含全电，全电仅新版接口支持），10：增值税电子普通发票（含全电，全电仅新版接口支持），11：增值税普通发票（卷式），14：增值税电子（通行费）发票，15：二手车销售统一发票，32：深圳区块链发票，102：通用机打电子发票61：电子发票（航空运输电子客票行程单）83：电子发票（铁路电子发票） */
   Type?: string;
+  /** 具体的全电发票类型：01: 全电专用发票；02：全电普通发票；03：全电火车票；04：全电机票行程单 */
+  ElectronicType?: string;
   /** 检验码 */
   CheckCode?: string;
   /** 是否作废（红冲）是否作废（红冲）Y：已作废，N：未作废，H：红冲，HP：部分红冲，HF：全额红冲 */
@@ -4314,14 +4426,18 @@ declare interface VatInvoiceVerifyNewRequest {
 }
 
 declare interface VatInvoiceVerifyNewResponse {
-  /** 增值税发票信息，详情请点击左侧链接。 */
+  /** 增值税发票、购车发票、全电发票的基础要素字段信息。 */
   Invoice?: VatInvoice;
-  /** 机动车销售统一发票信息 */
+  /** 机动车销售统一发票详细字段信息。 */
   VehicleInvoiceInfo?: VehicleInvoiceInfo;
-  /** 二手车销售统一发票信息 */
+  /** 二手车销售统一发票详细字段信息。 */
   UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo;
-  /** 通行费发票信息 */
+  /** 通行费发票详细字段信息。 */
   PassInvoiceInfoList?: PassInvoiceInfo[];
+  /** 全电发票（铁路电子客票）详细字段信息。 */
+  ElectronicTrainTicket?: ElectronicTrainTicket;
+  /** 全电发票（航空运输电子客票行程单）详细字段信息。 */
+  ElectronicAirTransport?: ElectronicAirTransport;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
