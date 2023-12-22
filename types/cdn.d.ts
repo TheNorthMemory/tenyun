@@ -4603,11 +4603,11 @@ declare interface Cdn {
   UpdateScdnDomain(data: UpdateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScdnDomainResponse>;
   /** 验证域名解析 {@link VerifyDomainRecordRequest} {@link VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: VerifyDomainRecordRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainRecordResponse>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   TcbCheckResource(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   TcbModifyAttribute(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   TcbPurge(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
 }
 
