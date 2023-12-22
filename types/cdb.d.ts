@@ -277,45 +277,47 @@ declare interface BackupConfig {
 /** 备份详细信息 */
 declare interface BackupInfo {
   /** 备份文件名 */
-  Name: string;
+  Name?: string;
   /** 备份文件大小，单位：Byte */
-  Size: number;
+  Size?: number;
   /** 备份快照时间，时间格式：2016-03-17 02:10:37 */
-  Date: string;
+  Date?: string;
   /** 下载地址 */
-  IntranetUrl: string;
+  IntranetUrl?: string;
   /** 下载地址 */
-  InternetUrl: string;
+  InternetUrl?: string;
   /** 日志具体类型。可能的值有 "logical": 逻辑冷备， "physical": 物理冷备。 */
-  Type: string;
+  Type?: string;
   /** 备份子任务的ID，删除备份文件时使用 */
-  BackupId: number;
+  BackupId?: number;
   /** 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。 */
-  Status: string;
+  Status?: string;
   /** 备份任务的完成时间 */
-  FinishTime: string;
+  FinishTime?: string;
   /** （该值将废弃，不建议使用）备份的创建者，可能的值：SYSTEM - 系统创建，Uin - 发起者Uin值。 */
-  Creator: string;
+  Creator?: string;
   /** 备份任务的开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 备份方法。可能的值有 "full": 全量备份， "partial": 部分备份。 */
-  Method: string;
+  Method?: string;
   /** 备份方式。可能的值有 "manual": 手动备份， "automatic": 自动备份。 */
-  Way: string;
+  Way?: string;
   /** 手动备份别名 */
-  ManualBackupName: string;
+  ManualBackupName?: string;
   /** 备份保留类型，save_mode_regular - 常规保存备份，save_mode_period - 定期保存备份 */
-  SaveMode: string;
+  SaveMode?: string;
   /** 本地备份所在地域 */
-  Region: string;
+  Region?: string;
   /** 异地备份详细信息 */
-  RemoteInfo: RemoteBackupInfo[];
+  RemoteInfo?: RemoteBackupInfo[];
   /** 存储方式，0-常规存储，1-归档存储，默认为0 */
-  CosStorageType: number;
+  CosStorageType?: number;
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 备份文件是否加密， on-加密， off-未加密 */
-  EncryptionFlag: string | null;
+  EncryptionFlag?: string | null;
+  /** 备份GTID点位 */
+  ExecutedGTIDSet?: string | null;
 }
 
 /** 创建备份时，指定需要备份的库表信息 */
@@ -2277,7 +2279,7 @@ declare interface CreateDBInstanceResponse {
 declare interface CreateDatabaseRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 数据库名称。 */
+  /** 数据库名称，长度不超过64。 */
   DBName: string;
   /** 字符集，可选值：utf8，gbk，latin1，utf8mb4。 */
   CharacterSetName: string;
@@ -2427,7 +2429,7 @@ declare interface DeleteBackupResponse {
 declare interface DeleteDatabaseRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 数据库名称。 */
+  /** 数据库名称，长度不超过64。 */
   DBName: string;
 }
 
@@ -2901,6 +2903,8 @@ declare interface DescribeBinlogsRequest {
   MinStartTime?: string;
   /** binlog最晚开始时间，时间格式：2016-03-17 02:10:37 */
   MaxStartTime?: string;
+  /** 返回binlog列表是否包含MinStartTime起始节点，默认为否 */
+  ContainsMinStartTime?: boolean;
 }
 
 declare interface DescribeBinlogsResponse {

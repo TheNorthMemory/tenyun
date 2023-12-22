@@ -804,7 +804,7 @@ declare interface SyncDBEndpointInfos {
   AccessType: string | null;
   /** 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等 */
   DatabaseType: string | null;
-  /** 数据库信息 */
+  /** 数据库信息。注意：如果数据类型为tdsqlmysql，此处Endpoint数组的顺序应该与set顺序对应，第一个分片（shardkey范围起始为0的分片）必须要输入在第一个位置 */
   Info: Endpoint[] | null;
 }
 

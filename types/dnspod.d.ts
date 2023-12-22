@@ -364,6 +364,8 @@ declare interface DomainInfo {
   TagList?: TagItem[] | null;
   /** 是否启用搜索引擎推送 */
   SearchEnginePush?: string;
+  /** 是否开启辅助 DNS */
+  SlaveDNS?: string;
 }
 
 /** 域名列表元素 */

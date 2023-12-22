@@ -579,31 +579,33 @@ declare interface ParameterDetail {
 /** 产品信息 */
 declare interface ProductConf {
   /** 产品类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
-  Type: number;
+  Type?: number;
   /** 产品名称。包括：Redis 主从版、CKV 主从版、CKV 集群版、Redis 单机版、Redis 集群版。 */
-  TypeName: string;
+  TypeName?: string;
   /** 购买时的最小数量。 */
-  MinBuyNum: number;
+  MinBuyNum?: number;
   /** 购买时的最大数量。 */
-  MaxBuyNum: number;
+  MaxBuyNum?: number;
   /** 产品是否售罄。- true：售罄。- false：未售罄。 */
-  Saleout: boolean;
+  Saleout?: boolean;
   /** 产品引擎。包括：腾讯云 CKV与社区版 Redis。 */
-  Engine: string;
+  Engine?: string;
   /** 兼容版本。包括：Redis-2.8、Redis-3.2、Redis-4.0、Redis-5.0、Redis-6.2。 */
-  Version: string;
+  Version?: string;
   /** 规格总大小，单位GB。 */
-  TotalSize: string[];
+  TotalSize?: string[];
   /** 每个分片大小，单位GB。 */
-  ShardSize: string[];
+  ShardSize?: string[];
   /** 副本数量。 */
-  ReplicaNum: string[];
+  ReplicaNum?: string[];
   /** 分片数量。 */
-  ShardNum: string[];
+  ShardNum?: string[];
   /** 支持的计费模式。- 1：包年包月。- 0：按量计费。 */
-  PayMode: string;
+  PayMode?: string;
+  /** 该参数名因存在拼写不规范的问题，建议使用**EnableReplicaReadOnly**参数取代。其含义为是否支持副本只读。- true：支持副本只读。- false：不支持。 */
+  EnableRepicaReadOnly?: boolean;
   /** 是否支持副本只读。- true：支持副本只读。- false：不支持。 */
-  EnableRepicaReadOnly: boolean;
+  EnableReplicaReadOnly?: boolean | null;
 }
 
 /** Proxy节点信息。 */
@@ -1963,7 +1965,7 @@ declare interface DescribeSlowLogRequest {
   Limit?: number;
   /** 慢查询条数的偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
-  /** 节点所属角色。master：主节点。slave：从节点。 */
+  /** 节点所属角色。- master：主节点。- slave：从节点。 */
   Role?: string;
 }
 

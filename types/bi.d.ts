@@ -126,6 +126,8 @@ declare interface DatasourceInfo {
   DataOriginProjectId?: string | null;
   /** 第三方数据源id */
   DataOriginDatasourceId?: string | null;
+  /** 集群id */
+  ClusterId?: string | null;
 }
 
 /** 数据源详情列表 */

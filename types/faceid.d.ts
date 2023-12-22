@@ -184,6 +184,12 @@ declare interface Encryption {
   TagList?: string[] | null;
 }
 
+/** 额外的详细信息 */
+declare interface ExtraInfo {
+  /** 命中模板的详细信息，仅返回命中的相似度最高的模板信息 */
+  RetrievalLivenessExtraInfo?: RetrievalLivenessExtraInfo[] | null;
+}
+
 /** 获取token时的配置 */
 declare interface GetEidTokenConfig {
   /** 姓名身份证输入方式。1：传身份证正反面OCR 2：传身份证正面OCR 3：用户手动输入 4：客户后台传入 默认1注：使用OCR时仅支持用户修改结果中的姓名 */
@@ -270,6 +276,16 @@ declare interface IntentionVerifyData {
   IntentionVerifyBestFrame?: string | null;
   /** 本次流程用户语音与传入文本比对的相似度分值，取值范围 [0.00, 100.00]。只有配置了相似度阈值后才进行语音校验并返回相似度分值。 */
   AsrResultSimilarity?: string | null;
+}
+
+/** 模版检索详细信息 */
+declare interface RetrievalLivenessExtraInfo {
+  /** 命中的模版类型，其中Common-公共库；Auto-自动聚类库；Owner-自建模版库 */
+  HitGroup?: string | null;
+  /** 命中的相似度 */
+  SimilarityScore?: number | null;
+  /** 命中的模板id */
+  HitTemplate?: string | null;
 }
 
 /** RuleId相关配置 */
@@ -482,6 +498,8 @@ declare interface DetectAIFakeFacesResponse {
   AttackRiskLevel?: string;
   /** 检测到疑似的攻击痕迹列表说明：未检测到攻击痕迹时，返回空数组此出参仅作为结果判断的参考，实际应用仍建议使用AttackRiskLevel的结果。 */
   AttackRiskDetailList?: AttackRiskDetail[];
+  /** 额外信息 */
+  ExtraInfo?: ExtraInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

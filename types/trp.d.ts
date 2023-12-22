@@ -35,35 +35,35 @@ declare interface ChainData {
 /** 批次 */
 declare interface CodeBatch {
   /** 批次号 */
-  BatchId: string | null;
+  BatchId?: string | null;
   /** 企业ID */
-  CorpId: number | null;
+  CorpId?: number | null;
   /** 批次编码(未使用) */
-  BatchCode: string | null;
+  BatchCode?: string | null;
   /** 码数量 */
-  CodeCnt: number | null;
+  CodeCnt?: number | null;
   /** 所属商户ID */
-  MerchantId: string | null;
+  MerchantId?: string | null;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 批次类型 */
-  BatchType: number | null;
+  BatchType?: number | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 微信模板 */
-  MpTpl: string | null;
+  MpTpl?: string | null;
   /** 批次状态 0: 未激活 1: 已激活 -1: 已冻结 */
-  Status: number | null;
+  Status?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 修改时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 所属商户名称 */
-  MerchantName: string | null;
+  MerchantName?: string | null;
   /** 产品名称 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 未使用 */
-  Ext: Ext | null;
+  Ext?: Ext | null;
   /** 模板名称 */
   TplName?: string | null;
   /** 调度任务 */
@@ -184,6 +184,8 @@ declare interface CustomRule {
 
 /** 预留字段 */
 declare interface Ext {
+  /** 字符串 */
+  Value?: string | null;
 }
 
 /** 业务加密入参 */
@@ -276,6 +278,24 @@ declare interface PlanQRCode {
   Url: string | null;
   /** 状态，0:未激活 1:已激活 2:已冻结 */
   Status: number | null;
+}
+
+/** 安心计划二维码扫码记录 */
+declare interface PlanQRCodeRecord {
+  /** 二维码 */
+  Url: string | null;
+  /** OpenID */
+  OpenId: string | null;
+  /** 扫码时间 */
+  ScanTime: string | null;
+  /** IP 地址 */
+  Ip: string | null;
+  /** 国家 */
+  Country: string | null;
+  /** 省份 */
+  Province: string | null;
+  /** 城市 */
+  City: string | null;
 }
 
 /** 商品信息 */
@@ -1148,6 +1168,28 @@ declare interface DescribeMerchantsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePlanQRCodeScanRecordsRequest {
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 页码 */
+  PageNo: number;
+  /** 页大小 */
+  PageSize: number;
+}
+
+declare interface DescribePlanQRCodeScanRecordsResponse {
+  /** 返回码 */
+  Ret?: number;
+  /** 总数 */
+  Total?: number;
+  /** 数据 */
+  Data?: PlanQRCodeRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePlanQRCodesRequest {
   /** 计划ID */
   PlanId: number;
@@ -1663,6 +1705,8 @@ declare interface Trp {
   DescribeMerchantById(data: DescribeMerchantByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantByIdResponse>;
   /** 查询商户列表 {@link DescribeMerchantsRequest} {@link DescribeMerchantsResponse} */
   DescribeMerchants(data?: DescribeMerchantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantsResponse>;
+  /** 查询安心计划二维码扫码记录 {@link DescribePlanQRCodeScanRecordsRequest} {@link DescribePlanQRCodeScanRecordsResponse} */
+  DescribePlanQRCodeScanRecords(data: DescribePlanQRCodeScanRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlanQRCodeScanRecordsResponse>;
   /** 查询安心计划二维码列表 {@link DescribePlanQRCodesRequest} {@link DescribePlanQRCodesResponse} */
   DescribePlanQRCodes(data: DescribePlanQRCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlanQRCodesResponse>;
   /** 查询商品信息 {@link DescribeProductByIdRequest} {@link DescribeProductByIdResponse} */

@@ -92,6 +92,8 @@ declare interface InstanceInfo {
   IfExistCatalog?: number | null;
   /** 页面特性，用于前端屏蔽一些页面入口 */
   Characteristic?: string[] | null;
+  /** 超时时间 单位s */
+  RestartTimeout?: string | null;
 }
 
 /** 实例节点描述信息 */

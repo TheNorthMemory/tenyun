@@ -27,21 +27,21 @@ declare interface AutoCalloutTaskCalleeInfo {
 /** 自动外呼任务列表项 */
 declare interface AutoCalloutTaskInfo {
   /** 任务名 */
-  Name: string;
+  Name?: string;
   /** 被叫数量 */
-  CalleeCount: number;
+  CalleeCount?: number;
   /** 主叫号码列表 */
-  Callers: string[];
+  Callers?: string[];
   /** 起始时间戳 */
-  NotBefore: number;
+  NotBefore?: number;
   /** 结束时间戳 */
-  NotAfter: number | null;
+  NotAfter?: number | null;
   /** 任务使用的IvrId */
-  IvrId: number;
+  IvrId?: number;
   /** 任务状态0初始 1运行中 2已完成 3结束中 4已结束 */
-  State: number;
+  State?: number;
   /** 任务Id */
-  TaskId: number;
+  TaskId?: number;
 }
 
 /** 呼入实时指标 */
@@ -73,11 +73,11 @@ declare interface CallInMetrics {
 /** 呼入线路维度相关指标 */
 declare interface CallInNumberMetrics {
   /** 线路号码 */
-  Number: string;
+  Number?: string;
   /** 线路相关指标 */
-  Metrics: CallInMetrics;
+  Metrics?: CallInMetrics;
   /** 所属技能组相关指标 */
-  SkillGroupMetrics: CallInSkillGroupMetrics[];
+  SkillGroupMetrics?: CallInSkillGroupMetrics[];
 }
 
 /** 呼入技能组相关指标 */
@@ -538,7 +538,7 @@ declare interface TelCdrInfo {
   RecordId?: string | null;
   /** 坐席信息 */
   SeatUser?: SeatUserInfo;
-  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无坐席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
+  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无坐席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
   EndStatus?: number;
   /** 技能组名称 */
   SkillGroup?: string;
@@ -560,7 +560,7 @@ declare interface TelCdrInfo {
   ServeParticipants?: ServeParticipant[] | null;
   /** 技能组ID */
   SkillGroupId?: number | null;
-  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无坐席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
+  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无坐席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
   EndStatusString?: string | null;
   /** 会话开始时间戳，UNIX 秒级时间戳 */
   StartTimestamp?: number | null;
@@ -837,7 +837,7 @@ declare interface DeleteStaffRequest {
 
 declare interface DeleteStaffResponse {
   /** 无法删除的状态为在线的客服列表 */
-  OnlineStaffList: string[] | null;
+  OnlineStaffList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -873,21 +873,21 @@ declare interface DescribeAutoCalloutTaskRequest {
 
 declare interface DescribeAutoCalloutTaskResponse {
   /** 任务名 */
-  Name: string;
+  Name?: string;
   /** 任务描述 */
-  Description: string;
+  Description?: string;
   /** 任务起始时间戳 */
-  NotBefore: number;
+  NotBefore?: number;
   /** 任务结束时间戳 */
-  NotAfter: number | null;
+  NotAfter?: number | null;
   /** 主叫列表 */
-  Callers: string[];
+  Callers?: string[];
   /** 被叫信息列表 */
-  Callees: AutoCalloutTaskCalleeInfo[];
+  Callees?: AutoCalloutTaskCalleeInfo[];
   /** 任务使用的IvrId */
-  IvrId: number;
+  IvrId?: number;
   /** 任务状态 0初始 1运行中 2已完成 3结束中 4已终止 */
-  State: number;
+  State?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -903,9 +903,9 @@ declare interface DescribeAutoCalloutTasksRequest {
 
 declare interface DescribeAutoCalloutTasksResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务列表 */
-  Tasks: AutoCalloutTaskInfo[];
+  Tasks?: AutoCalloutTaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1035,9 +1035,9 @@ declare interface DescribeExtensionsRequest {
 
 declare interface DescribeExtensionsResponse {
   /** 查询总数 */
-  Total: number;
+  Total?: number;
   /** 话机信息列表 */
-  ExtensionList: ExtensionInfo[];
+  ExtensionList?: ExtensionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1123,9 +1123,9 @@ declare interface DescribePSTNActiveSessionListRequest {
 
 declare interface DescribePSTNActiveSessionListResponse {
   /** 列表总条数 */
-  Total: number;
+  Total?: number;
   /** 列表内容 */
-  Sessions: PSTNSessionInfo[];
+  Sessions?: PSTNSessionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1291,7 +1291,7 @@ declare interface DescribeTelSessionRequest {
 
 declare interface DescribeTelSessionResponse {
   /** 会话信息 */
-  Session: PSTNSession;
+  Session?: PSTNSession;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
