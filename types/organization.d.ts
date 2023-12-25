@@ -353,7 +353,7 @@ declare interface CreateOrganizationMemberRequest {
 
 declare interface CreateOrganizationMemberResponse {
   /** 成员Uin。 */
-  Uin: number | null;
+  Uin?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -683,37 +683,37 @@ declare interface DescribeOrganizationRequest {
 
 declare interface DescribeOrganizationResponse {
   /** 企业组织ID。 */
-  OrgId: number | null;
+  OrgId?: number | null;
   /** 创建者UIN。 */
-  HostUin: number | null;
+  HostUin?: number | null;
   /** 创建者昵称。 */
-  NickName: string | null;
+  NickName?: string | null;
   /** 企业组织类型。 */
-  OrgType: number | null;
+  OrgType?: number | null;
   /** 是否组织管理员。是：true ，否：false */
-  IsManager: boolean | null;
+  IsManager?: boolean | null;
   /** 策略类型。财务管理：Financial */
-  OrgPolicyType: string | null;
+  OrgPolicyType?: string | null;
   /** 策略名。 */
-  OrgPolicyName: string | null;
+  OrgPolicyName?: string | null;
   /** 成员财务权限列表。 */
-  OrgPermission: OrgPermission[] | null;
+  OrgPermission?: OrgPermission[] | null;
   /** 组织根节点ID。 */
-  RootNodeId: number | null;
+  RootNodeId?: number | null;
   /** 组织创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 成员加入时间。 */
-  JoinTime: string | null;
+  JoinTime?: string | null;
   /** 成员是否允许退出。允许：Allow，不允许：Denied */
-  IsAllowQuit: string | null;
+  IsAllowQuit?: string | null;
   /** 代付者Uin。 */
-  PayUin: string | null;
+  PayUin?: string | null;
   /** 代付者名称。 */
-  PayName: string | null;
+  PayName?: string | null;
   /** 是否可信服务管理员。是：true，否：false */
-  IsAssignManager: boolean | null;
+  IsAssignManager?: boolean | null;
   /** 是否实名主体管理员。是：true，否：false */
-  IsAuthManager: boolean | null;
+  IsAuthManager?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

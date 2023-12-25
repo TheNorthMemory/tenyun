@@ -94,6 +94,10 @@ declare interface InstanceInfo {
   Characteristic?: string[] | null;
   /** 超时时间 单位s */
   RestartTimeout?: string | null;
+  /** 内核优雅重启超时时间，如果为-1说明未设置 */
+  GraceShutdownWaitSeconds?: string | null;
+  /** 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储 */
+  CaseSensitive?: number | null;
 }
 
 /** 实例节点描述信息 */

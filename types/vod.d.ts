@@ -7871,9 +7871,9 @@ declare interface EnhanceMediaByTemplateResponse {
 declare interface EnhanceMediaQualityRequest {
   /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
   FileId: string;
-  /** 音画质重生模板 ID，请联系腾讯云获取。 */
+  /** 音画质重生模板 ID。针对典型的使用场景，云点播提供了多个[预置模板](https://cloud.tencent.com/document/product/266/102586)。 */
   Definition: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 音画质重生后的媒体文件配置。 */
   OutputConfig?: EnhanceMediaQualityOutputConfig;
@@ -8989,7 +8989,7 @@ declare interface RebuildMediaByTemplateResponse {
 declare interface RebuildMediaRequest {
   /** 媒体文件 ID。 */
   FileId: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 起始偏移时间，单位：秒，不填表示从视频开始截取。 */
   StartTimeOffset?: number;

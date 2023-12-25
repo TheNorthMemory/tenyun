@@ -141,11 +141,11 @@ declare interface QueryDevAndRiskResponse {
 /** {@link Rkp 风险探针} */
 declare interface Rkp {
   (): Versions;
-  /** RPopenID查询 {@link GetOpenIdRequest} {@link GetOpenIdResponse} */
+  /** @deprecated RPopenID查询 {@link GetOpenIdRequest} {@link GetOpenIdResponse} */
   GetOpenId(data: GetOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpenIdResponse>;
-  /** 获取token {@link GetTokenRequest} {@link GetTokenResponse} */
+  /** @deprecated 获取token {@link GetTokenRequest} {@link GetTokenResponse} */
   GetToken(data: GetTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenResponse>;
-  /** Devid及风险查询 {@link QueryDevAndRiskRequest} {@link QueryDevAndRiskResponse} */
+  /** @deprecated Devid及风险查询 {@link QueryDevAndRiskRequest} {@link QueryDevAndRiskResponse} */
   QueryDevAndRisk(data: QueryDevAndRiskRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDevAndRiskResponse>;
 }
 

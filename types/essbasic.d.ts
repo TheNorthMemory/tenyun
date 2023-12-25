@@ -634,7 +634,7 @@ declare interface FlowInfo {
   TemplateId?: string;
   /** 多个签署人信息，最大支持50个签署方 */
   FlowApprovers?: FlowApproverInfo[];
-  /** 表单K-V对列表 */
+  /** 发起方角色的填写控件的填充内容。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。(白名单功能需要联系对接经理开通，否则模板编辑时无法将填写控件分配给发起方)。![image](https://qcloudimg.tencent-cloud.cn/raw/b1d3978140ee2b44e2c9fdc96e467a5d.png) */
   FormFields?: FormField[];
   /** 合同状态变动结的通知回调URL，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性，最大长度1000个字符。腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。回调的相关说明可参考开发者中心的回调通知模块 */
   CallbackUrl?: string;
@@ -1333,7 +1333,7 @@ declare interface ChannelCreateConvertTaskApiResponse {
 declare interface ChannelCreateEmbedWebUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 要生成WEB嵌入界面的类型, 可以选择的值如下: CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成修改模板的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_FLOW：生成预览合同文档的嵌入页面PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成扩展服务的嵌入页面 */
+  /** 要生成WEB嵌入界面的类型, 可以选择的值如下: CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成修改模板的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_FLOW：生成预览合同文档的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面（仅支持PC端）PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成扩展服务的嵌入页面 */
   EmbedType: string;
   /** WEB嵌入的业务资源ID当EmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时需要填写模板id作为BusinessId当EmbedType取值PREVIEW_FLOW，PREVIEW_FLOW_DETAIL时需要填写合同id作为BusinessId当EmbedType取值PREVIEW_SEAL_DETAIL需要填写印章id作为BusinessId */
   BusinessId?: string;

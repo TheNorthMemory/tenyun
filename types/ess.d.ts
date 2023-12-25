@@ -218,8 +218,6 @@ declare interface CcInfo {
 declare interface Component {
   /** **如果是Component填写控件类型，则可选的字段为**： TEXT : 普通文本控件，输入文本字符串； MULTI_LINE_TEXT : 多行文本控件，输入文本字符串； CHECK_BOX : 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串； FILL_IMAGE : 图片控件，ComponentValue 填写图片的资源 ID； DYNAMIC_TABLE : 动态表格控件； ATTACHMENT : 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔； SELECTOR : 选择器控件，ComponentValue填写选择的字符串内容； DATE : 日期控件；默认是格式化为xxxx年xx月xx日字符串； DISTRICT : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；**如果是SignComponent签署控件类型，则可选的字段为** SIGN_SEAL : 签署印章控件； SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PERSONAL_SEAL : 个人签署印章控件（使用文件发起暂不支持此类型）； SIGN_PAGING_SEAL : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件。注：` 表单域的控件不能作为印章和签名控件` */
   ComponentType: string;
-  /** 【暂未使用】控件所属文件的序号（取值为：0-N）。 目前单文件的情况下，值一直为0 */
-  FileIndex: number;
   /** **在绝对定位方式和关键字定位方式下**，指定控件的高度， 控件高度是指控件在PDF文件中的高度，单位为pt（点）。 */
   ComponentHeight: number;
   /** **在绝对定位方式和关键字定位方式下**，指定控件宽度，控件宽度是指控件在PDF文件中的宽度，单位为pt（点）。 */
@@ -230,6 +228,10 @@ declare interface Component {
   ComponentPosX: number;
   /** **在绝对定位方式和关键字定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。 */
   ComponentPosY: number;
+  /** 【暂未使用】控件所属文件的序号（取值为：0-N）。 目前单文件的情况下，值一直为0 */
+  FileIndex: number;
+  /** 控件生成的方式： NORMAL : 绝对定位控件 FIELD : 表单域 KEYWORD : 关键字（设置关键字时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找） */
+  GenerateMode?: string;
   /** 控件唯一ID。**在绝对定位方式方式下**，ComponentId为控件的ID，长度不能超过30，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。**在关键字定位方式下**，ComponentId不仅为控件的ID，也是关键字整词。此方式下可以通过"^"来决定是否使用关键字整词匹配能力。例：- 如传入的关键字"^甲方签署^"</font >，则会在PDF文件中有且仅有"甲方签署"关键字的地方（前后不能有其他字符</font >）进行对应操作。- 如传入的关键字为"甲方签署</font >"，则PDF文件中每个出现关键字的位置（前后可以有其他字符</font >）都会执行相应操作。- 如传入的关键字为"^甲方签署</font >"，则PDF文件中每个出现关键字的位置（前面不能有其他字符</font >）都会执行相应操作。- 如传入的关键字为"甲方签署^</font >"，则PDF文件中每个出现关键字的位置（后面不能有其他字符</font >）都会执行相应操作。注：`控件ID可以在一个PDF中不可重复` */
   ComponentId?: string;
   /** **在绝对定位方式方式下**，ComponentName为控件名，长度不能超过20，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。**在表单域定位方式下**，ComponentName不仅为控件名，也是表单域名称。注：`控件名可以在一个PDF中可以重复` */
@@ -244,18 +246,10 @@ declare interface Component {
   IsFormType?: boolean | null;
   /** 控件填充vaule，ComponentType和传入值类型对应关系： TEXT : 文本内容 MULTI_LINE_TEXT : 文本内容 CHECK_BOX : true/false FILL_IMAGE、ATTACHMENT : 附件的FileId，需要通过UploadFiles接口上传获取 SELECTOR : 选项值 DYNAMIC_TABLE - 传入json格式的表格内容，详见说明：[数据表格](https://qian.tencent.com/developers/company/dynamic_table) DATE : 默认是格式化为xxxx年xx月xx日 SIGN_SEAL : 印章ID，于控制台查询获取 SIGN_PAGING_SEAL : 可以指定印章ID，于控制台查询获取控件值约束说明： 特殊控件 填写约束 企业全称控件 企业名称中文字符中文括号 统一社会信用代码控件 企业注册的统一社会信用代码 法人名称控件 最大50个字符，2到25个汉字或者1到50个字母 签署意见控件 签署意见最大长度为50字符 签署人手机号控件 国内手机号 13,14,15,16,17,18,19号段长度11位 签署人身份证控件 合法的身份证号码检查 控件名称 控件名称最大长度为20字符，不支持表情 单行文本控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 多行文本控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 勾选框控件 选择填字符串true，不选填字符串false 选择器控件 同单行文本控件约束，填写选择值中的字符串 数字控件 请输入有效的数字(可带小数点) 日期控件 格式：yyyy年mm月dd日 附件控件 JPG或PNG图片，上传数量限制，1到6个，最大6个附件，填写上传的资源ID 图片控件 JPG或PNG图片，填写上传的图片资源ID 邮箱控件 有效的邮箱地址, w3c标准 地址控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 省市区控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 性别控件 选择值中的字符串 学历控件 选择值中的字符串 注： `部分特殊控件需要在控制台配置模板形式创建` */
   ComponentValue?: string;
-  /** 控件生成的方式： NORMAL : 绝对定位控件 FIELD : 表单域 KEYWORD : 关键字（设置关键字时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找） */
-  GenerateMode?: string;
-  /** 【暂未使用】日期签署控件的字号，默认为 12 */
-  ComponentDateFontSize?: number;
-  /** 【暂未使用】第三方应用集成平台模板控件 ID 标识 */
-  ChannelComponentId?: string;
   /** **如果控件是关键字定位方式**，可以对关键字定位出来的区域进行横坐标方向的调整，单位为pt（点）。例如，如果关键字定位出来的区域偏左或偏右，可以通过调整横坐标方向的参数来使控件位置更加准确。注意： `向左调整设置为负数， 向右调整设置成正数` */
   OffsetX?: number | null;
   /** **如果控件是关键字定位方式**，可以对关键字定位出来的区域进行纵坐标方向的调整，单位为pt（点）。例如，如果关键字定位出来的区域偏上或偏下，可以通过调整纵坐标方向的参数来使控件位置更加准确。注意： `向上调整设置为负数， 向下调整设置成正数` */
   OffsetY?: number | null;
-  /** 【暂未使用】第三方应用集成中子客企业控件来源。 0 :平台指定； 1 :用户自定义 */
-  ChannelComponentSource?: number;
   /** **如果控件是关键字定位方式**，指定关键字排序规则时，可以选择Positive或Reverse两种排序方式。 Positive :表示正序，即根据关键字在PDF文件内的顺序进行排列 Reverse :表示倒序，即根据关键字在PDF文件内的反序进行排列在指定KeywordIndexes时，如果使用Positive排序方式，0代表在PDF内查找内容时，查找到的第一个关键字；如果使用Reverse排序方式，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
   KeywordOrder?: string;
   /** **如果控件是关键字定位方式**，在KeywordPage中指定关键字页码时，将只会在该页码中查找关键字，非该页码的关键字将不会查询出来。如果不设置查找所有页面中的关键字。 */
@@ -268,6 +262,12 @@ declare interface Component {
   LockComponentValue?: boolean | null;
   /** **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件 false（默认） :不禁止移动和删除控件 true : 可以移动和删除控件 */
   ForbidMoveAndDelete?: boolean | null;
+  /** 【暂未使用】日期签署控件的字号，默认为 12 */
+  ComponentDateFontSize?: number;
+  /** 【暂未使用】第三方应用集成平台模板控件 ID 标识 */
+  ChannelComponentId?: string;
+  /** 【暂未使用】第三方应用集成中子客企业控件来源。 0 :平台指定； 1 :用户自定义 */
+  ChannelComponentSource?: number;
 }
 
 /** 签署控件的类型和范围限制条件，用于控制文件发起后签署人拖拽签署区时可使用的控件类型和具体的印章或签名方式。 */
@@ -1329,7 +1329,7 @@ declare interface CreateDocumentRequest {
   TemplateId: string;
   /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。 */
   FileNames?: string[];
-  /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成 */
+  /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png) */
   FormFields?: FormField[];
   /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容，动态表格合成完后会触发文档合成完成的回调通知` */
   NeedPreview?: boolean;
@@ -1355,7 +1355,7 @@ declare interface CreateDocumentResponse {
 declare interface CreateEmbedWebUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** WEB嵌入资源类型，支持以下类型CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成编辑模板的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成拓展服务的嵌入页面PREVIEW_FLOW：生成预览合同的嵌入页面PREVIEW_FLOW_DETAIL：生成查看合同详情的嵌入页面 */
+  /** WEB嵌入资源类型，支持以下类型CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成编辑模板的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成拓展服务的嵌入页面PREVIEW_FLOW：生成预览合同的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL：生成查看合同详情的嵌入页面（仅支持PC端） */
   EmbedType: string;
   /** WEB嵌入的业务资源IDPREVIEW_SEAL_DETAIL，必填，取值为印章idMODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板idPREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id */
   BusinessId?: string;

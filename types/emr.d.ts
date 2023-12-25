@@ -66,6 +66,10 @@ declare interface AutoScaleRecord {
   CompensateFlag?: number | null;
   /** 补偿次数 */
   CompensateCount?: number | null;
+  /** 重试次数 */
+  RetryCount?: number | null;
+  /** 重试信息 */
+  RetryInfo?: string | null;
 }
 
 /** 引导脚本 */
@@ -145,89 +149,93 @@ declare interface ClusterIDToFlowID {
 /** 集群实例信息 */
 declare interface ClusterInstancesInfo {
   /** ID号 */
-  Id: number | null;
+  Id?: number | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 标题 */
-  Ftitle: string | null;
+  Ftitle?: string | null;
   /** 集群名 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 地域ID */
-  RegionId: number | null;
+  RegionId?: number | null;
   /** 地区ID */
-  ZoneId: number | null;
+  ZoneId?: number | null;
   /** 用户APPID */
-  AppId: number | null;
+  AppId?: number | null;
   /** 用户UIN */
-  Uin: string | null;
+  Uin?: string | null;
   /** 项目Id */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 集群VPCID */
-  VpcId: number | null;
+  VpcId?: number | null;
   /** 子网ID */
-  SubnetId: number | null;
+  SubnetId?: number | null;
   /** 实例的状态码。取值范围：2：表示集群运行中。3：表示集群创建中。4：表示集群扩容中。5：表示集群增加router节点中。6：表示集群安装组件中。7：表示集群执行命令中。8：表示重启服务中。9：表示进入维护中。10：表示服务暂停中。11：表示退出维护中。12：表示退出暂停中。13：表示配置下发中。14：表示销毁集群中。15：表示销毁core节点中。16：销毁task节点中。17：表示销毁router节点中。18：表示更改webproxy密码中。19：表示集群隔离中。20：表示集群冲正中。21：表示集群回收中。22：表示变配等待中。23：表示集群已隔离。24：表示缩容节点中。33：表示集群等待退费中。34：表示集群已退费。301：表示创建失败。302：表示扩容失败。 */
-  Status: number | null;
+  Status?: number | null;
   /** 添加时间 */
-  AddTime: string | null;
+  AddTime?: string | null;
   /** 已经运行时间 */
-  RunTime: string | null;
+  RunTime?: string | null;
   /** 集群产品配置信息 */
-  Config: EmrProductConfigOutter | null;
+  Config?: EmrProductConfigOutter | null;
   /** 主节点外网IP */
-  MasterIp: string | null;
+  MasterIp?: string | null;
   /** EMR版本 */
-  EmrVersion: string | null;
+  EmrVersion?: string | null;
   /** 收费类型 */
-  ChargeType: number | null;
+  ChargeType?: number | null;
   /** 交易版本 */
-  TradeVersion: number | null;
+  TradeVersion?: number | null;
   /** 资源订单ID */
-  ResourceOrderId: number | null;
+  ResourceOrderId?: number | null;
   /** 是否计费集群 */
-  IsTradeCluster: number | null;
+  IsTradeCluster?: number | null;
   /** 集群错误状态告警信息 */
-  AlarmInfo: string | null;
+  AlarmInfo?: string | null;
   /** 是否采用新架构 */
-  IsWoodpeckerCluster: number | null;
+  IsWoodpeckerCluster?: number | null;
   /** 元数据库信息 */
-  MetaDb: string | null;
+  MetaDb?: string | null;
   /** 标签信息 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** Hive元数据信息 */
-  HiveMetaDb: string | null;
+  HiveMetaDb?: string | null;
   /** 集群类型:EMR,CLICKHOUSE,DRUID */
-  ServiceClass: string | null;
+  ServiceClass?: string | null;
   /** 集群所有节点的别名序列化 */
-  AliasInfo: string | null;
+  AliasInfo?: string | null;
   /** 集群版本Id */
-  ProductId: number | null;
+  ProductId?: number | null;
   /** 地区ID */
-  Zone: string | null;
+  Zone?: string | null;
   /** 场景名称 */
-  SceneName: string | null;
+  SceneName?: string | null;
   /** 场景化集群类型 */
-  SceneServiceClass: string | null;
+  SceneServiceClass?: string | null;
   /** 场景化EMR版本 */
-  SceneEmrVersion: string | null;
+  SceneEmrVersion?: string | null;
   /** 场景化集群类型 */
-  DisplayName: string | null;
+  DisplayName?: string | null;
   /** vpc name */
-  VpcName: string | null;
+  VpcName?: string | null;
   /** subnet name */
-  SubnetName: string | null;
+  SubnetName?: string | null;
   /** 集群依赖关系 */
-  ClusterExternalServiceInfo: ClusterExternalServiceInfo[] | null;
+  ClusterExternalServiceInfo?: ClusterExternalServiceInfo[] | null;
   /** 集群vpcid 字符串类型 */
-  UniqVpcId: string | null;
+  UniqVpcId?: string | null;
   /** 子网id 字符串类型 */
-  UniqSubnetId: string | null;
+  UniqSubnetId?: string | null;
   /** 节点信息 */
-  TopologyInfoList: TopologyInfo[] | null;
+  TopologyInfoList?: TopologyInfo[] | null;
   /** 是否是跨AZ集群 */
-  IsMultiZoneCluster: boolean | null;
+  IsMultiZoneCluster?: boolean | null;
   /** 是否开通异常节点自动补偿 */
-  IsCvmReplace: boolean | null;
+  IsCvmReplace?: boolean | null;
+  /** 标题 */
+  ClusterTitle?: string | null;
+  /** 集群产品配置信息 */
+  ConfigDetail?: EmrProductConfigDetail | null;
 }
 
 /** 集群配置。 */
@@ -432,6 +440,48 @@ declare interface EmrPrice {
   PriceSpec: PriceResource | null;
   /** 是否支持竞价实例 */
   SupportSpotPaid: boolean | null;
+}
+
+/** EMR产品配置 */
+declare interface EmrProductConfigDetail {
+  /** 软件信息 */
+  SoftInfo?: string[] | null;
+  /** Master节点个数 */
+  MasterNodeSize?: number | null;
+  /** Core节点个数 */
+  CoreNodeSize?: number | null;
+  /** Task节点个数 */
+  TaskNodeSize?: number | null;
+  /** Common节点个数 */
+  ComNodeSize?: number | null;
+  /** Master节点资源 */
+  MasterResource?: ResourceDetail | null;
+  /** Core节点资源 */
+  CoreResource?: ResourceDetail | null;
+  /** Task节点资源 */
+  TaskResource?: ResourceDetail | null;
+  /** Common节点资源 */
+  ComResource?: ResourceDetail | null;
+  /** 是否使用COS */
+  OnCos?: boolean | null;
+  /** 收费类型 */
+  ChargeType?: number | null;
+  /** Router节点个数 */
+  RouterNodeSize?: number | null;
+  /** 是否支持HA */
+  SupportHA?: boolean | null;
+  /** 是否支持安全模式 */
+  SecurityOn?: boolean | null;
+  /** 安全组名称 */
+  SecurityGroup?: string | null;
+  /** 是否开启Cbs加密 */
+  CbsEncrypt?: number | null;
+  /** 自定义应用角色。 */
+  ApplicationRole?: string | null;
+  /** 安全组 */
+  SecurityGroups?: string[] | null;
+  /** SSH密钥Id */
+  PublicKeyId?: string | null;
 }
 
 /** EMR产品配置 */
@@ -1178,6 +1228,28 @@ declare interface Resource {
   DiskNum?: number | null;
 }
 
+/** 资源详情 */
+declare interface ResourceDetail {
+  /** 规格 */
+  Spec: string | null;
+  /** 规格名 */
+  SpecName: string | null;
+  /** 硬盘类型 */
+  StorageType: number | null;
+  /** 硬盘类型 */
+  DiskType: string | null;
+  /** 系统盘大小 */
+  RootSize: number | null;
+  /** 内存大小 */
+  MemSize: number | null;
+  /** CPU个数 */
+  Cpu: number | null;
+  /** 硬盘大小 */
+  DiskSize: number | null;
+  /** 规格 */
+  InstanceType: string | null;
+}
+
 /** 扩容节点类型以及数量 */
 declare interface ScaleOutNodeConfig {
   /** 扩容节点类型取值范围： MASTER TASK CORE ROUTER */
@@ -1204,14 +1276,16 @@ declare interface ScriptBootstrapActionConfig {
   Args?: string[];
   /** 脚本文件名 */
   CosFileName?: string;
+  /** 备注 */
+  Remark?: string;
 }
 
 /** 搜索字段 */
 declare interface SearchItem {
   /** 支持搜索的类型 */
-  SearchType: string;
+  SearchType: string | null;
   /** 支持搜索的值 */
-  SearchValue: string;
+  SearchValue: string | null;
 }
 
 /** 操作的服务范围 */
@@ -1665,6 +1739,8 @@ declare interface DescribeClusterNodesRequest {
   InstanceId: string;
   /** 节点标识，取值为：all：表示获取全部类型节点，cdb信息除外。master：表示获取master节点信息。core：表示获取core节点信息。task：表示获取task节点信息。common：表示获取common节点信息。router：表示获取router节点信息。db：表示获取正常状态的cdb信息。recyle：表示获取回收站隔离中的节点信息，包括cdb信息。renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。注意：现在只支持以上取值，输入其他值会导致错误。 */
   NodeFlag: string;
+  /** 导出全部节点信息csv时是否携带cdb信息 */
+  ExportDb?: boolean;
   /** 页编号，默认值为0，表示第一页。 */
   Offset?: number;
   /** 每页返回数量，默认值为100，最大值为100。 */
@@ -1681,13 +1757,13 @@ declare interface DescribeClusterNodesRequest {
 
 declare interface DescribeClusterNodesResponse {
   /** 查询到的节点总数 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** 节点详细信息列表 */
-  NodeList: NodeHardwareInfo[] | null;
+  NodeList?: NodeHardwareInfo[] | null;
   /** 用户所有的标签键列表 */
-  TagKeys: string[] | null;
+  TagKeys?: string[] | null;
   /** 资源类型列表 */
-  HardwareResourceTypeList: string[] | null;
+  HardwareResourceTypeList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
