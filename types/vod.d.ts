@@ -5811,7 +5811,7 @@ declare interface ConfirmEventsResponse {
 }
 
 declare interface CreateAIAnalysisTemplateRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 音视频内容分析模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -5903,7 +5903,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 declare interface CreateAnimatedGraphicsTemplateRequest {
   /** 帧率，取值范围：[1, 30]，单位：Hz。 */
   Fps: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
   Width?: number;
@@ -5947,7 +5947,7 @@ declare interface CreateClassResponse {
 declare interface CreateContentReviewTemplateRequest {
   /** 音视频审核结果是否进入音视频审核墙（对识别结果进行人工复核）的开关。ON：是；OFF：否。 */
   ReviewWallSwitch: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 内容审核模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6065,7 +6065,7 @@ declare interface CreateImageSpriteTemplateRequest {
   RowCount: number;
   /** 雪碧图中小图的列数。注意：小图的列数会影响最终大图的宽度，大图的宽度最大为15000像素，其中大图的宽度为小图列数与小图宽度的乘积。 */
   ColumnCount: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 雪碧图模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6113,7 +6113,7 @@ declare interface CreatePersonSampleRequest {
   Name: string;
   /** 素材应用场景，可选值：1. Recognition：用于内容识别，等价于 Recognition.Face。2. Review：用于内容不适宜，等价于 Review.Face。3. All：包含以上全部，等价于 1+2。 */
   Usages: string[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 素材描述，长度限制：1024 个字符。 */
   Description?: string;
@@ -6135,7 +6135,7 @@ declare interface CreatePersonSampleResponse {
 declare interface CreateProcedureTemplateRequest {
   /** 任务流名字（支持中文，不超过20个字）。 */
   Name: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
@@ -6157,7 +6157,7 @@ declare interface CreateProcedureTemplateResponse {
 }
 
 declare interface CreateQualityInspectTemplateRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 音画质检测模板名称。 */
   Name?: string;
@@ -6197,7 +6197,7 @@ declare interface CreateQualityInspectTemplateResponse {
 declare interface CreateRebuildMediaTemplateRequest {
   /** 输出文件封装格式，可选值：mp4、flv、hls。 */
   Container: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 音画质重生模板名称。 */
   Name?: string;
@@ -6227,7 +6227,7 @@ declare interface CreateRebuildMediaTemplateResponse {
 declare interface CreateReviewTemplateRequest {
   /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴力；Polity：不适宜的信息；Illegal：违法；Abuse：谩骂；Ad：广告；Moan：娇喘。 */
   Labels: string[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: string;
   /** 审核模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6247,7 +6247,7 @@ declare interface CreateRoundPlayRequest {
   StartTime: string;
   /** 轮播列表。数组长度限制：100。 */
   RoundPlaylist: RoundPlayListItemInfo[];
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 轮播播单名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6271,7 +6271,7 @@ declare interface CreateSampleSnapshotTemplateRequest {
   SampleType: string;
   /** 采样间隔。当 SampleType 为 Percent 时，指定采样间隔的百分比。当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。 */
   SampleInterval: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 采样截图模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6297,7 +6297,7 @@ declare interface CreateSampleSnapshotTemplateResponse {
 }
 
 declare interface CreateSnapshotByTimeOffsetTemplateRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 指定时间点截图模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6351,7 +6351,7 @@ declare interface CreateSubAppIdResponse {
 declare interface CreateSuperPlayerConfigRequest {
   /** 播放器配置名称，长度限制：64 个字符。只允许出现 [0-9a-zA-Z] 及 _- 字符（如 test_ABC-123），同一个用户该名称唯一。 */
   Name: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 播放的音视频类型，可选值：AdaptiveDynamicStream：自适应码流输出；Transcode：转码输出；Original：原始音视频。默认为 AdaptiveDynamicStream。 */
   AudioVideoType?: string;
@@ -6383,7 +6383,7 @@ declare interface CreateSuperPlayerConfigResponse {
 declare interface CreateTranscodeTemplateRequest {
   /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
   Container: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 转码模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6427,7 +6427,7 @@ declare interface CreateVodDomainResponse {
 declare interface CreateWatermarkTemplateRequest {
   /** 水印类型，可选值：image：图片水印；text：文字水印；svg：SVG 水印。 */
   Type: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 水印模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6461,7 +6461,7 @@ declare interface CreateWordSamplesRequest {
   Usages: string[];
   /** 关键词，数组长度限制：100。 */
   Words: AiSampleWordInfo[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6497,7 +6497,7 @@ declare interface DeleteAIRecognitionTemplateResponse {
 declare interface DeleteAdaptiveDynamicStreamingTemplateRequest {
   /** 自适应转码模板唯一标识。 */
   Definition: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6545,7 +6545,7 @@ declare interface DeleteContentReviewTemplateResponse {
 declare interface DeleteEnhanceMediaTemplateRequest {
   /** 音画质重生模板号。 */
   Definition: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6619,7 +6619,7 @@ declare interface DeleteMediaResponse {
 declare interface DeletePersonSampleRequest {
   /** 素材 ID。 */
   PersonId: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6631,7 +6631,7 @@ declare interface DeletePersonSampleResponse {
 declare interface DeleteProcedureTemplateRequest {
   /** 任务流名字。 */
   Name: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6655,7 +6655,7 @@ declare interface DeleteQualityInspectTemplateResponse {
 declare interface DeleteRebuildMediaTemplateRequest {
   /** 视频重生模板号。 */
   Definition: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6667,7 +6667,7 @@ declare interface DeleteRebuildMediaTemplateResponse {
 declare interface DeleteReviewTemplateRequest {
   /** 审核模板唯一标识。 */
   Definition: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6679,7 +6679,7 @@ declare interface DeleteReviewTemplateResponse {
 declare interface DeleteRoundPlayRequest {
   /** 轮播播单唯一标识。 */
   RoundPlayId: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6715,7 +6715,7 @@ declare interface DeleteSnapshotByTimeOffsetTemplateResponse {
 declare interface DeleteSuperPlayerConfigRequest {
   /** 播放器配置名称。 */
   Name: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6739,7 +6739,7 @@ declare interface DeleteTranscodeTemplateResponse {
 declare interface DeleteVodDomainRequest {
   /** 要删除的点播加速域名。 */
   Domain: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6763,7 +6763,7 @@ declare interface DeleteWatermarkTemplateResponse {
 declare interface DeleteWordSamplesRequest {
   /** 关键词，数组长度限制：100 个词。 */
   Keywords: string[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -6953,7 +6953,7 @@ declare interface DescribeClientUploadAccelerationUsageDataRequest {
   StartTime: string;
   /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 客户端上传加速类型，取值有： AccelerationWithHTTP：HTTP 传输方式的上传加速。 AccelerationWithQUIC：QUIC 传输方式的上传加速。默认查询所有加速类型的用量 。 */
   Type?: string;
@@ -6967,7 +6967,7 @@ declare interface DescribeClientUploadAccelerationUsageDataResponse {
 }
 
 declare interface DescribeContentReviewTemplatesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 内容审核模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
@@ -6993,7 +6993,7 @@ declare interface DescribeDailyMediaPlayStatRequest {
   StartDate: string;
   /** 结束日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。该参数仅日期部分有效。 */
   EndDate: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7011,7 +7011,7 @@ declare interface DescribeDailyMostPlayedStatRequest {
   DomainName?: string;
   /** Top 数据的统计指标，取值有：Traffic：播放流量，按播放流量统计 Top100 的数据。PlayTimes：播放次数，按播放次数统计播放 Top100 的数据。默认值为Traffic。 */
   Metric?: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7027,7 +7027,7 @@ declare interface DescribeDailyPlayStatFileListRequest {
   StartTime: string;
   /** 结束日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7053,7 +7053,7 @@ declare interface DescribeDrmDataKeyResponse {
 }
 
 declare interface DescribeDrmKeyProviderInfoRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7065,7 +7065,7 @@ declare interface DescribeDrmKeyProviderInfoResponse {
 }
 
 declare interface DescribeEnhanceMediaTemplatesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 音画质重生模板列表。长度限制：100。 */
   Definitions?: number[];
@@ -7105,7 +7105,7 @@ declare interface DescribeEventConfigResponse {
 }
 
 declare interface DescribeEventsStateRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7185,7 +7185,7 @@ declare interface DescribeImageReviewUsageDataRequest {
   StartTime: string;
   /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7247,7 +7247,7 @@ declare interface DescribeLicenseUsageDataRequest {
   EndTime: string;
   /** License 类型，默认为 DRM 。目前支持的 License 类型包括： DRM: DRM 加密播放 License */
   LicenseType?: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7315,7 +7315,7 @@ declare interface DescribeMediaProcessUsageDataResponse {
 }
 
 declare interface DescribePersonSamplesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 拉取的素材类型，可选值：UserDefine：用户自定义素材库；Default：系统默认素材库。默认值：UserDefine，拉取用户自定义素材库素材。说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且五官图片只返回一张。 */
   Type?: string;
@@ -7351,7 +7351,7 @@ declare interface DescribePrepaidProductsResponse {
 }
 
 declare interface DescribeProcedureTemplatesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 任务流模板名字过滤条件，数组长度限制：100。 */
   Names?: string[];
@@ -7373,7 +7373,7 @@ declare interface DescribeProcedureTemplatesResponse {
 }
 
 declare interface DescribeQualityInspectTemplatesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 音画质检测模板列表。长度限制：100。 */
   Definitions?: number[];
@@ -7397,7 +7397,7 @@ declare interface DescribeQualityInspectTemplatesResponse {
 declare interface DescribeRebuildMediaTemplatesRequest {
   /** 视频重生模板列表。 */
   Definitions?: number[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
@@ -7459,7 +7459,7 @@ declare interface DescribeReviewTemplatesResponse {
 }
 
 declare interface DescribeRoundPlaysRequest {
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 轮播播单标识过滤条件，数组长度限制：100。 */
   RoundPlayIds?: string[];
@@ -7523,7 +7523,7 @@ declare interface DescribeSnapshotByTimeOffsetTemplatesResponse {
 }
 
 declare interface DescribeStorageDataRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7601,7 +7601,7 @@ declare interface DescribeSubAppIdsResponse {
 }
 
 declare interface DescribeSuperPlayerConfigsRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 播放器配置名字过滤条件，数组长度限制：100。 */
   Names?: string[];
@@ -7747,7 +7747,7 @@ declare interface DescribeVodDomainsRequest {
   Limit?: number;
   /** 分页拉取的起始偏移量。默认值：0。 */
   Offset?: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -7783,7 +7783,7 @@ declare interface DescribeWatermarkTemplatesResponse {
 }
 
 declare interface DescribeWordSamplesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 关键词应用场景过滤条件，可选值：1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；2. Recognition.Asr：通过音频识别技术，进行内容识别；3. Review.Ocr：通过光学字符识别技术，进行不适宜的内容识别；4. Review.Asr：通过音频识别技术，进行不适宜的内容识别；可合并简写为：5. Recognition：通过光学字符识别技术、音频识别技术，进行内容识别，等价于 1+2；6. Review：通过光学字符识别技术、音频识别技术，进行不适宜的内容识别，等价于 3+4；可多选，元素间关系为 or，即关键词的应用场景包含该字段集合中任意元素的记录，均符合该条件。 */
   Usages?: string[];
@@ -7843,7 +7843,7 @@ declare interface EnhanceMediaByTemplateRequest {
   FileId: string;
   /** 音画质重生模板 ID。 */
   Definition: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 起始偏移时间，单位：秒，不填表示从视频开始截取。 */
   StartTimeOffset?: number;
@@ -7897,7 +7897,7 @@ declare interface ExecuteFunctionRequest {
   FunctionName: string;
   /** 接口参数，具体参数格式调用时与后端协调。 */
   FunctionArg: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
   SessionContext?: string;
@@ -7917,7 +7917,7 @@ declare interface ExecuteFunctionResponse {
 declare interface ExtractCopyRightWatermarkRequest {
   /** 需要提取水印的媒体 URL。 */
   Url: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 标识来源上下文，用于透传用户请求信息，在 ExtractCopyRightWatermarkComplete 回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
   SessionContext?: string;

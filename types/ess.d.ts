@@ -56,7 +56,7 @@ declare interface ApproverInfo {
   VerifyChannel?: string[];
   /** 签署方在签署合同之前，需要强制阅读合同的时长，可指定为3秒至300秒之间的任意值。若未指定阅读时间，则会按照合同页数大小计算阅读时间，计算规则如下：合同页数少于等于2页，阅读时间为3秒；合同页数为3到5页，阅读时间为5秒；合同页数大于等于6页，阅读时间为10秒。 */
   PreReadTime?: number;
-  /** 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得注: `若传此字段 则以userid的信息为主，会覆盖传递过来的签署人基本信息， 包括姓名，手机号，证件类型等信息` */
+  /** 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得注： 如果传进来的UserId已经实名， 则忽略ApproverName，ApproverIdCardType，ApproverIdCardNumber，ApproverMobile这四个入参（会用此UserId实名的身份证和登录的手机号覆盖） */
   UserId?: string;
   /** 在企微场景下使用，需设置参数为**WEWORKAPP**，以表明合同来源于企微。 */
   ApproverSource?: string;
@@ -1249,7 +1249,7 @@ declare interface CreateBatchQuickSignUrlRequest {
   FlowGroupId?: string;
   /** 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议) */
   JumpUrl?: string;
-  /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体**2**：姓名印章**3**：图片印章**4**：系统签名注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。 */
+  /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体**2**：姓名印章**3**：图片印章**4**：系统签名注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。该参数会覆盖您合同中的签名类型，若您在发起合同时限定了签名类型(赋值签名类型给ComponentTypeLimit)，请将这些签名类型赋予此参数 */
   SignatureTypes?: number[];
   /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**2**：密码认证(默认)，需输入与用户在腾讯电子签设置的密码一致才能校验成功进行合同签署**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸和密码认证您可以传递多种值，表示可用多种认证校验方式。 */
   ApproverSignTypes?: number[];
@@ -1329,7 +1329,7 @@ declare interface CreateDocumentRequest {
   TemplateId: string;
   /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。 */
   FileNames?: string[];
-  /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png) */
+  /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成附件控件支持传入图片、文件资源id，并将内容合成到合同文件中。支持的文件类型有doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt、pdf。需要注意如果传入的资源类型都是图片类型，图片资源会放置在合同文件的末尾，如果传入的资源有非图片类型资源，会将资源放置在附件控件所在页面的下一页。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png) */
   FormFields?: FormField[];
   /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容，动态表格合成完后会触发文档合成完成的回调通知` */
   NeedPreview?: boolean;

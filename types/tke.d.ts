@@ -16,6 +16,14 @@ declare interface Addon {
   Reason?: string | null;
 }
 
+/** 注释 */
+declare interface AnnotationValue {
+  /** 注释键 */
+  Name: string;
+  /** 注释值 */
+  Value: string;
+}
+
 /** app所支持的chart */
 declare interface AppChart {
   /** chart名称 */
@@ -1372,6 +1380,8 @@ declare interface NodePool {
   Labels?: Label[];
   /** Taints 污点标记 */
   Taints?: Taint[];
+  /** 节点 Annotation 列表 */
+  Annotations?: AnnotationValue[];
   /** NodeCountSummary 节点列表 */
   NodeCountSummary?: NodeCountSummary;
   /** 状态信息 */
@@ -2737,7 +2747,7 @@ declare interface CreateClusterNodePoolRequest {
   AutoScalingGroupPara: string;
   /** LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447 */
   LaunchConfigurePara: string;
-  /** InstanceAdvancedSettings 示例参数 */
+  /** InstanceAdvancedSettings */
   InstanceAdvancedSettings: InstanceAdvancedSettings;
   /** 是否启用自动伸缩 */
   EnableAutoscale: boolean;
@@ -2747,6 +2757,8 @@ declare interface CreateClusterNodePoolRequest {
   Labels?: Label[];
   /** Taints互斥 */
   Taints?: Taint[];
+  /** 节点Annotation 列表 */
+  Annotations?: AnnotationValue[];
   /** 节点池纬度运行时类型及版本 */
   ContainerRuntime?: string;
   /** 运行时版本 */
@@ -5685,6 +5697,8 @@ declare interface ModifyClusterNodePoolRequest {
   Labels?: Label[];
   /** 污点 */
   Taints?: Taint[];
+  /** 节点 Annotation 列表 */
+  Annotations?: AnnotationValue[];
   /** 是否开启伸缩 */
   EnableAutoscale?: boolean;
   /** 操作系统名称 */

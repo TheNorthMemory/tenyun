@@ -1078,6 +1078,8 @@ declare interface InstanceInfo {
   MiniQpsStandard?: number | null;
   /** 小程序qps峰值 */
   MiniMaxQPS?: number | null;
+  /** 最近一次超量时间 */
+  LastQpsExceedTime?: string | null;
 }
 
 /** 数据封装 */

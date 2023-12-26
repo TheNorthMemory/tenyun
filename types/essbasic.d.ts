@@ -500,7 +500,7 @@ declare interface FlowApproverInfo {
   OrganizationName?: string;
   /** 指定签署人非第三方平台子客企业下员工还是SaaS平台企业，在ApproverType为ORGANIZATION时指定。false: 默认值，第三方平台子客企业下员工true: SaaS平台企业下的员工 */
   NotChannelOrganization?: boolean;
-  /** 第三方平台子客企业员工的唯一标识，长度不能超过64，只能由字母和数字组成当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程 */
+  /** 第三方平台子客企业员工的唯一标识，长度不能超过64，只能由字母和数字组成当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程注： 如果传进来的OpenId已经实名并且加入企业， 则忽略Name，IdCardType，IdCardNumber，Mobile这四个入参（会用此OpenId实名的身份证和登录的手机号覆盖） */
   OpenId?: string;
   /** 同应用下第三方平台子客企业的唯一标识，定义Agent中的ProxyOrganizationOpenId一样，签署方为非发起方企业场景下必传，最大长度64个字符 */
   OrganizationOpenId?: string;
@@ -1062,9 +1062,9 @@ declare interface TemplateInfo {
   Description?: string;
   /** 模板的填充控件列表 */
   Components?: Component[];
-  /** 模板中的签署参与方列表 */
+  /** 此模块需要签署的各个参与方的角色列表。RecipientId标识每个参与方角色对应的唯一标识符，用于确定此角色的信息。 */
   Recipients?: Recipient[];
-  /** 模板中的签署控件列表 */
+  /** 此模版中的签署控件列表 */
   SignComponents?: Component[];
   /** 模板类型：1-静默签；3-普通模板 */
   TemplateType?: number;
@@ -1074,7 +1074,7 @@ declare interface TemplateInfo {
   Creator?: string;
   /** 模板创建的时间戳，格式为Unix标准时间戳（秒） */
   CreatedOn?: number;
-  /** 模板的H5预览链接,有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。（此功能开放需要联系客户经理） */
+  /** 模板的H5预览链接,有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   PreviewUrl?: string | null;
   /** 第三方应用集成-模板PDF文件链接，有效期5分钟。请求参数WithPdfUrl=true时返回（此功能开放需要联系客户经理）。 */
   PdfUrl?: string | null;
@@ -1084,9 +1084,9 @@ declare interface TemplateInfo {
   ChannelTemplateName?: string | null;
   /** 0-需要子客企业手动领取平台企业的模板(默认); 1-平台自动设置子客模板 */
   ChannelAutoSave?: number | null;
-  /** 模板版本，全数字字符。默认为空，初始版本为yyyyMMdd001。 */
+  /** 模板版本，由全数字字符组成。默认为空，模板版本号由日期和序号组成，初始版本为yyyyMMdd001，yyyyMMdd002表示第二个版本，以此类推。 */
   TemplateVersion?: string | null;
-  /** 模板可用状态：1启用（默认）2停用 */
+  /** 模板可用状态的取值通常为以下两种：1：启用（默认），表示模板处于启用状态，可以被用户正常使用。2：停用，表示模板处于停用状态，禁止用户使用该模板。 */
   Available?: number | null;
 }
 
@@ -1245,7 +1245,7 @@ declare interface ChannelCreateBatchQuickSignUrlRequest {
   FlowGroupId?: string;
   /** 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议) */
   JumpUrl?: string;
-  /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体**2**：姓名印章**3**：图片印章**4**：系统签名注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。 */
+  /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名(默认)**1**：OCR楷体**2**：姓名印章**3**：图片印章**4**：系统签名注：默认情况下，签名类型为手写签名您可以传递多种值，表示可用多种签名类型。该参数会覆盖您合同中的签名类型，若您在发起合同时限定了签名类型(赋值签名类型给ComponentTypeLimit)，请将这些签名类型赋予此参数 */
   SignatureTypes?: number[];
   /** 指定批量签署合同的认证校验方式，可传递以下值：**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同**2**：密码认证(默认)，需输入与用户在腾讯电子签设置的密码一致才能校验成功进行合同签署**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。注：默认情况下，认证校验方式为人脸和密码认证您可以传递多种值，表示可用多种认证校验方式。 */
   ApproverSignTypes?: number[];
@@ -2307,7 +2307,7 @@ declare interface CreateSignUrlsRequest {
   IdCardNumber?: string;
   /** 第三方平台子客企业的企业的标识, 即OrganizationOpenId注: `GenerateType为"CHANNEL"时必填` */
   OrganizationOpenId?: string;
-  /** 第三方平台子客企业员工的标识OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息 */
+  /** 第三方平台子客企业员工的标识OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息注： 如果传进来的OpenId已经实名并且加入企业， 则忽略Name，IdCardType，IdCardNumber，Mobile这四个入参（会用此OpenId实名的身份证和登录的手机号覆盖） */
   OpenId?: string;
   /** Endpoint为"APP" 类型的签署链接，可以设置此值；支持调用方小程序打开签署链接，在电子签小程序完成签署后自动回跳至调用方小程序 */
   AutoJumpBack?: boolean;
@@ -2521,7 +2521,7 @@ declare interface DescribeTemplatesRequest {
   ChannelTemplateId?: string;
   /** 返回控件的范围, 是只返回发起方自己的还是所有参与方的**false**：（默认）只返回发起方控件**true**：返回所有参与方(包括发起方和签署方)控件 */
   QueryAllComponents?: boolean;
-  /** 是否获取模板预览链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接, 有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 是否获取模板预览链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接, 有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   WithPreviewUrl?: boolean;
   /** 是否获取模板的PDF文件链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。` */
   WithPdfUrl?: boolean;

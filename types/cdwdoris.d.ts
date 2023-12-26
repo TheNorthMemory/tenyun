@@ -14,6 +14,92 @@ declare interface AttachCBSSpec {
   DiskDesc?: string;
 }
 
+/** 集群计费相关信息 */
+declare interface ChargeProperties {
+  /** 计费类型，“PREPAID” 预付费，“POSTPAID_BY_HOUR” 后付费 */
+  ChargeType?: string | null;
+  /** 是否自动续费，1表示自动续费开启 */
+  RenewFlag?: number | null;
+  /** 计费时间长度 */
+  TimeSpan?: number | null;
+  /** 计费时间单位，“m”表示月等 */
+  TimeUnit?: string | null;
+}
+
+/** 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息 */
+declare interface ClusterConfigsInfoFromEMR {
+  /** 配置文件名称 */
+  FileName?: string;
+  /** 配置文件对应的相关属性信息 */
+  FileConf?: string;
+  /** 配置文件对应的其他属性信息 */
+  KeyConf?: string;
+  /** 配置文件的内容，base64编码 */
+  OriParam?: string;
+  /** 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启 */
+  NeedRestart?: number;
+  /** 配置文件路径 */
+  FilePath?: string | null;
+  /** 配置文件kv值 */
+  FileKeyValues?: string | null;
+  /** 配置文件kv值 */
+  FileKeyValuesNew?: ConfigKeyValue[] | null;
+}
+
+/** 返回配置的文件内容（key-value） */
+declare interface ConfigKeyValue {
+  /** key */
+  KeyName?: string | null;
+  /** 值 */
+  Value?: string | null;
+  /** 备注 */
+  Message?: string | null;
+  /** 1-只读，2-可修改但不可删除，3-可删除 */
+  Display?: number | null;
+  /** 0不支持 1支持热更新 */
+  SupportHotUpdate?: number | null;
+}
+
+/** 集群规格 */
+declare interface CreateInstanceSpec {
+  /** 规格名字 */
+  SpecName: string;
+  /** 数量 */
+  Count: number;
+  /** 云盘大小 */
+  DiskSize: number;
+}
+
+/** 数据库审计 */
+declare interface DataBaseAuditRecord {
+  /** 查询用户 */
+  OsUser?: string | null;
+  /** 查询ID */
+  InitialQueryId?: string | null;
+  /** SQL语句 */
+  Sql?: string | null;
+  /** 开始时间 */
+  QueryStartTime?: string | null;
+  /** 执行耗时 */
+  DurationMs?: number | null;
+  /** 读取行数 */
+  ReadRows?: number | null;
+  /** 读取字节数 */
+  ResultRows?: number | null;
+  /** 结果字节数 */
+  ResultBytes?: number | null;
+  /** 内存 */
+  MemoryUsage?: number | null;
+  /** 初始查询IP */
+  InitialAddress?: string | null;
+  /** 数据库 */
+  DbName?: string | null;
+  /** sql类型 */
+  SqlType?: string | null;
+  /** catalog名称 */
+  Catalog?: string | null;
+}
+
 /** 实例描述信息 */
 declare interface InstanceInfo {
   /** 集群实例ID, "cdw-xxxx" 字符串类型 */
@@ -126,6 +212,14 @@ declare interface InstanceNode {
   UUID?: string | null;
 }
 
+/** NodeInfo */
+declare interface NodeInfo {
+  /** 用户IP */
+  Ip?: string | null;
+  /** 节点状态 */
+  Status?: number | null;
+}
+
 /** 节点角色描述信息 */
 declare interface NodesSummary {
   /** 机型，如 S1 */
@@ -168,12 +262,200 @@ declare interface SearchTags {
   AllValue?: number;
 }
 
+/** 慢查询记录 */
+declare interface SlowQueryRecord {
+  /** 查询用户 */
+  OsUser?: string;
+  /** 查询ID */
+  InitialQueryId?: string;
+  /** SQL语句 */
+  Sql?: string;
+  /** 开始时间 */
+  QueryStartTime?: string;
+  /** 执行耗时 */
+  DurationMs?: number;
+  /** 读取行数 */
+  ReadRows?: number;
+  /** 读取字节数 */
+  ResultRows?: number;
+  /** 结果字节数 */
+  ResultBytes?: number;
+  /** 内存 */
+  MemoryUsage?: number;
+  /** 初始查询IP */
+  InitialAddress?: string;
+  /** 数据库名 */
+  DbName?: string | null;
+  /** 是否是查询，0：否，1：查询语句 */
+  IsQuery?: number | null;
+}
+
 /** 标签描述 */
 declare interface Tag {
   /** 标签的键 */
   TagKey: string;
   /** 标签的值 */
   TagValue: string;
+}
+
+declare interface CreateInstanceNewRequest {
+  /** 可用区 */
+  Zone: string;
+  /** FE规格 */
+  FeSpec: CreateInstanceSpec;
+  /** BE规格 */
+  BeSpec: CreateInstanceSpec;
+  /** 是否高可用 */
+  HaFlag: boolean;
+  /** 用户VPCID */
+  UserVPCId: string;
+  /** 用户子网ID */
+  UserSubnetId: string;
+  /** 产品版本号 */
+  ProductVersion: string;
+  /** 付费类型 */
+  ChargeProperties: ChargeProperties;
+  /** 实例名字 */
+  InstanceName: string;
+  /** 数据库密码 */
+  DorisUserPwd: string;
+  /** 标签列表 */
+  Tags?: Tag[];
+  /** 高可用类型：0：非高可用，1：读高可用，2：读写高可用。 */
+  HaType?: number;
+  /** 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储 */
+  CaseSensitive?: number;
+}
+
+declare interface CreateInstanceNewResponse {
+  /** 流程ID */
+  FlowId?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterConfigsRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+  /** 0 公有云查询；1青鹅查询，青鹅查询显示所有需要展示的 */
+  ConfigType?: number;
+  /** 模糊搜索关键字文件 */
+  FileName?: string;
+  /** 0集群维度 1节点维度 */
+  ClusterConfigType?: number;
+  /** eth0的ip地址 */
+  IPAddress?: string;
+}
+
+declare interface DescribeClusterConfigsResponse {
+  /** 返回实例的配置文件相关的信息 */
+  ClusterConfList?: ClusterConfigsInfoFromEMR[];
+  /** 返回当前内核版本 如果不存在则返回空字符串 */
+  BuildVersion?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatabaseAuditDownloadRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 分页 */
+  PageSize: number;
+  /** 分页 */
+  PageNum: number;
+  /** 排序参数 */
+  OrderType?: string;
+  /** 用户 */
+  User?: string;
+  /** 数据库 */
+  DbName?: string;
+  /** sql类型 */
+  SqlType?: string;
+  /** sql语句 */
+  Sql?: string;
+  /** 用户 多选 */
+  Users?: string[];
+  /** 数据库 多选 */
+  DbNames?: string[];
+  /** sql类型 多选 */
+  SqlTypes?: string[];
+  /** catalog名称 （多选） */
+  Catalogs?: string[];
+}
+
+declare interface DescribeDatabaseAuditDownloadResponse {
+  /** 日志的cos地址 */
+  CosUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatabaseAuditRecordsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 分页 */
+  PageSize: number;
+  /** 分页 */
+  PageNum: number;
+  /** 排序参数 */
+  OrderType?: string;
+  /** 用户 */
+  User?: string;
+  /** 数据库 */
+  DbName?: string;
+  /** sql类型 */
+  SqlType?: string;
+  /** sql语句 */
+  Sql?: string;
+  /** 用户 （多选） */
+  Users?: string[];
+  /** 数据库 （多选） */
+  DbNames?: string[];
+  /** sql类型 （多选） */
+  SqlTypes?: string[];
+  /** catalog名称（多选） */
+  Catalogs?: string[];
+}
+
+declare interface DescribeDatabaseAuditRecordsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 记录列表 */
+  SlowQueryRecords?: DataBaseAuditRecord;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceNodesInfoRequest {
+  /** 集群id */
+  InstanceID: string;
+}
+
+declare interface DescribeInstanceNodesInfoResponse {
+  /** Be节点 */
+  BeNodes?: string[] | null;
+  /** Fe节点 */
+  FeNodes?: string[] | null;
+  /** Fe master节点 */
+  FeMaster?: string;
+  /** Be节点信息 */
+  BeNodeInfos?: NodeInfo[] | null;
+  /** Fe节点信息 */
+  FeNodeInfos?: NodeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeInstanceNodesRequest {
@@ -210,6 +492,28 @@ declare interface DescribeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceStateRequest {
+  /** 集群实例名称 */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceStateResponse {
+  /** 集群状态，例如：Serving */
+  InstanceState?: string;
+  /** 集群操作创建时间 */
+  FlowCreateTime?: string | null;
+  /** 集群操作名称 */
+  FlowName?: string | null;
+  /** 集群操作进度 */
+  FlowProgress?: number | null;
+  /** 集群状态描述，例如：运行中 */
+  InstanceStateDesc?: string | null;
+  /** 集群流程错误信息，例如：“创建失败，资源不足” */
+  FlowMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstancesRequest {
   /** 搜索的集群id名称 */
   SearchInstanceId?: string;
@@ -232,15 +536,211 @@ declare interface DescribeInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSlowQueryRecordsDownloadRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 慢查询时间 */
+  QueryDurationMs: number;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 排序参数 */
+  DurationMs?: string;
+}
+
+declare interface DescribeSlowQueryRecordsDownloadResponse {
+  /** cos地址 */
+  CosUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSlowQueryRecordsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 慢查询时间 */
+  QueryDurationMs: number;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 分页 */
+  PageSize: number;
+  /** 分页 */
+  PageNum: number;
+  /** 排序参数 */
+  DurationMs?: string;
+  /** 数据库名称 */
+  DbName?: string[];
+  /** 是否是查询，0：否， 1：是 */
+  IsQuery?: number;
+  /** catalog名称 */
+  CatalogName?: string[];
+}
+
+declare interface DescribeSlowQueryRecordsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 记录列表 */
+  SlowQueryRecords?: SlowQueryRecord[];
+  /** 所有数据库名 */
+  DBNameList?: string[] | null;
+  /** 所有catalog名 */
+  CatalogNameList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DestroyInstanceRequest {
+  /** 集群ID */
+  InstanceId: string;
+}
+
+declare interface DestroyInstanceResponse {
+  /** 流程ID */
+  FlowId?: string;
+  /** 集群ID */
+  InstanceId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 新修改的实例名称 */
+  InstanceName: string;
+}
+
+declare interface ModifyInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResizeDiskRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 角色（MATER/CORE），MASTER 对应 FE，CORE对应BE */
+  Type: string;
+  /** 云盘大小 */
+  DiskSize: number;
+}
+
+declare interface ResizeDiskResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 流程ID */
+  FlowId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestartClusterForNodeRequest {
+  /** 集群ID，例如cdwch-xxxx */
+  InstanceId: string;
+  /** 配置文件名称 */
+  ConfigName: string;
+  /** 每次重启的批次 */
+  BatchSize?: number;
+  /** 重启节点 */
+  NodeList?: string[];
+  /** false表示非滚动重启，true表示滚动重启 */
+  RollingRestart?: boolean;
+}
+
+declare interface RestartClusterForNodeResponse {
+  /** 流程相关信息 */
+  FlowId?: number;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScaleOutInstanceRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 角色（MATER/CORE），MASTER 对应 FE，CORE对应BE */
+  Type: string;
+  /** 节点数量 */
+  NodeCount: number;
+  /** 扩容后集群高可用类型：0：非高可用，1：读高可用，2：读写高可用。 */
+  HaType?: number;
+}
+
+declare interface ScaleOutInstanceResponse {
+  /** 流程ID */
+  FlowId?: string;
+  /** 集群ID */
+  InstanceId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScaleUpInstanceRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 节点规格 */
+  SpecName: string;
+  /** 角色（MATER/CORE），MASTER 对应 FE，CORE对应BE */
+  Type: string;
+}
+
+declare interface ScaleUpInstanceResponse {
+  /** 流程ID */
+  FlowId?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
 declare interface Cdwdoris {
   (): Versions;
+  /** 集群创建 {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
+  CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
+  /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */
+  DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
+  /** 下载数据库审计日志 {@link DescribeDatabaseAuditDownloadRequest} {@link DescribeDatabaseAuditDownloadResponse} */
+  DescribeDatabaseAuditDownload(data: DescribeDatabaseAuditDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditDownloadResponse>;
+  /** 获取数据库审计记录 {@link DescribeDatabaseAuditRecordsRequest} {@link DescribeDatabaseAuditRecordsResponse} */
+  DescribeDatabaseAuditRecords(data: DescribeDatabaseAuditRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditRecordsResponse>;
   /** 获取集群描述信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取集群节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
   DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
+  /** 获取BE、FE节点角色 {@link DescribeInstanceNodesInfoRequest} {@link DescribeInstanceNodesInfoResponse} */
+  DescribeInstanceNodesInfo(data: DescribeInstanceNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesInfoResponse>;
+  /** 获取集群状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
+  DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
   /** 获取集群列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 获取慢查询列表 {@link DescribeSlowQueryRecordsRequest} {@link DescribeSlowQueryRecordsResponse} */
+  DescribeSlowQueryRecords(data: DescribeSlowQueryRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryRecordsResponse>;
+  /** 下载慢查询文件 {@link DescribeSlowQueryRecordsDownloadRequest} {@link DescribeSlowQueryRecordsDownloadResponse} */
+  DescribeSlowQueryRecordsDownload(data: DescribeSlowQueryRecordsDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryRecordsDownloadResponse>;
+  /** 集群销毁 {@link DestroyInstanceRequest} {@link DestroyInstanceResponse} */
+  DestroyInstance(data: DestroyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstanceResponse>;
+  /** 修改集群名称 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
+  ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** 云盘扩容 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
+  ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
+  /** 集群滚动重启 {@link RestartClusterForNodeRequest} {@link RestartClusterForNodeResponse} */
+  RestartClusterForNode(data: RestartClusterForNodeRequest, config?: AxiosRequestConfig): AxiosPromise<RestartClusterForNodeResponse>;
+  /** 水平扩容 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
+  ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
+  /** 计算资源垂直变配 {@link ScaleUpInstanceRequest} {@link ScaleUpInstanceResponse} */
+  ScaleUpInstance(data: ScaleUpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpInstanceResponse>;
 }
 
 export declare type Versions = ["2021-12-28"];

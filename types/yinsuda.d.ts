@@ -430,6 +430,32 @@ declare interface DescribeKTVMusicAccompanySegmentUrlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKTVMusicAccompanySegmentUrlVipRequest {
+  /** 应用名称 */
+  AppName: string;
+  /** 用户标识 */
+  UserId: string;
+  /** 歌曲 Id */
+  MusicId: string;
+}
+
+declare interface DescribeKTVMusicAccompanySegmentUrlVipResponse {
+  /** 0:成功获取 1:歌曲下架 2:无权限 3: 非包月会员 4:没有对应的链接 */
+  Status?: number;
+  /** 伴奏链接 */
+  Url?: string;
+  /** 伴奏类型，如mkv，mp3等 */
+  ExtName?: string;
+  /** 高潮开始时间 */
+  SegmentBegin?: number;
+  /** 高潮结束时间 */
+  SegmentEnd?: number;
+  /** 链接文件大小 (单位:字节) */
+  FileSize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeKTVMusicsByTagRequest {
   /** 应用名称。 */
   AppName: string;
@@ -602,6 +628,28 @@ declare interface DescribeUserInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVipUserInfoRequest {
+  /** 应用名称。 */
+  AppName: string;
+  /** 用户标识。 */
+  UserId: string;
+}
+
+declare interface DescribeVipUserInfoResponse {
+  /** 是否是会员。（0:不是会员 1:是会员） */
+  IsVip?: number;
+  /** 主播id */
+  AnchorId?: string;
+  /** 房间id */
+  RoomId?: string;
+  /** 会员过期时间 */
+  EndTime?: string;
+  /** 会员状态。（-1:未开通过；1:已开通，未过期；2:已开通，已过期） */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyKTVRobotRequest {
   /** 应用名称。 */
   AppName: string;
@@ -636,6 +684,30 @@ declare interface RechargeLiveVipRequest {
 declare interface RechargeLiveVipResponse {
   /** 直播会员信息。 */
   LiveVipUserInfo?: LiveVipUserInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RechargeVipRequest {
+  /** 应用名称。 */
+  AppName: string;
+  /** 用户标识。 */
+  UserId: string;
+  /** 房间Id。 */
+  RoomId: string;
+  /** 充值会员天数。(取值有：31、93、186、372) */
+  VipDays: number;
+  /** 主播id。 */
+  AnchorId: string;
+}
+
+declare interface RechargeVipResponse {
+  /** 厂商订单号。 */
+  PartnerNo?: string;
+  /** TME订单号。 */
+  OrderNo?: string;
+  /** 订单创建时间。 */
+  CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -697,6 +769,8 @@ declare interface Yinsuda {
   DescribeKTVMatchMusics(data: DescribeKTVMatchMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMatchMusicsResponse>;
   /** 获取歌曲伴奏片段链接 {@link DescribeKTVMusicAccompanySegmentUrlRequest} {@link DescribeKTVMusicAccompanySegmentUrlResponse} */
   DescribeKTVMusicAccompanySegmentUrl(data: DescribeKTVMusicAccompanySegmentUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicAccompanySegmentUrlResponse>;
+  /** 获取歌曲伴奏片段链接（会员） {@link DescribeKTVMusicAccompanySegmentUrlVipRequest} {@link DescribeKTVMusicAccompanySegmentUrlVipResponse} */
+  DescribeKTVMusicAccompanySegmentUrlVip(data: DescribeKTVMusicAccompanySegmentUrlVipRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicAccompanySegmentUrlVipResponse>;
   /** 获取标签歌曲 {@link DescribeKTVMusicsByTagRequest} {@link DescribeKTVMusicsByTagResponse} */
   DescribeKTVMusicsByTag(data: DescribeKTVMusicsByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicsByTagResponse>;
   /** 获取歌单详情 {@link DescribeKTVPlaylistDetailRequest} {@link DescribeKTVPlaylistDetailResponse} */
@@ -713,10 +787,14 @@ declare interface Yinsuda {
   DescribeLiveVipTradeInfos(data: DescribeLiveVipTradeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveVipTradeInfosResponse>;
   /** 获取用户信息 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
+  /** 获取会员信息 {@link DescribeVipUserInfoRequest} {@link DescribeVipUserInfoResponse} */
+  DescribeVipUserInfo(data: DescribeVipUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVipUserInfoResponse>;
   /** 销毁机器人 {@link DestroyKTVRobotRequest} {@link DestroyKTVRobotResponse} */
   DestroyKTVRobot(data: DestroyKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyKTVRobotResponse>;
   /** 充值直播会员 {@link RechargeLiveVipRequest} {@link RechargeLiveVipResponse} */
   RechargeLiveVip(data: RechargeLiveVipRequest, config?: AxiosRequestConfig): AxiosPromise<RechargeLiveVipResponse>;
+  /** 充值会员 {@link RechargeVipRequest} {@link RechargeVipResponse} */
+  RechargeVip(data: RechargeVipRequest, config?: AxiosRequestConfig): AxiosPromise<RechargeVipResponse>;
   /** 搜索歌曲 {@link SearchKTVMusicsRequest} {@link SearchKTVMusicsResponse} */
   SearchKTVMusics(data: SearchKTVMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKTVMusicsResponse>;
   /** 同步机器人指令 {@link SyncKTVRobotCommandRequest} {@link SyncKTVRobotCommandResponse} */

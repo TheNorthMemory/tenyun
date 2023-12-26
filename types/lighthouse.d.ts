@@ -2387,7 +2387,7 @@ declare interface RunDockerContainersRequest {
 
 declare interface RunDockerContainersResponse {
   /** Docker活动ID列表。 */
-  DockerActivitySet: string[];
+  DockerActivitySet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

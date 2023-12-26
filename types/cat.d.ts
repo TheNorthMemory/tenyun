@@ -231,7 +231,7 @@ declare interface DescribeDetailedSingleProbeDataRequest {
   SortField: string;
   /** true表示升序 */
   Ascending: boolean;
-  /** 选中字段 */
+  /** 选中字段，如ProbeTime、TransferTime、TransferSize等。 */
   SelectedFields: string[];
   /** 起始取数位置 */
   Offset: number;
@@ -249,6 +249,8 @@ declare interface DescribeDetailedSingleProbeDataRequest {
   City?: string[];
   /** es scroll查询id */
   ScrollID?: string;
+  /** 详情数据下载 */
+  QueryFlag?: string;
 }
 
 declare interface DescribeDetailedSingleProbeDataResponse {
