@@ -276,7 +276,7 @@ declare interface CommonFlowApprover {
   IsFullText?: boolean;
   /** 通知签署方经办人的方式, 有以下途径: **SMS** :(默认)短信 **NONE** : 不通知注: `签署方为第三方子客企业时会被置为NONE, 不会发短信通知` */
   NotifyType?: string;
-  /** 签署人配置 */
+  /** 签署人配置，用于控制签署人相关属性 */
   ApproverOption?: CommonApproverOption;
   /** 使用PDF文件直接发起合同时，签署人指定的签署控件；使用模板发起合同时，指定本企业印章签署控件的印章ID: 通过ComponentId或ComponenetName指定签署控件，ComponentValue为印章ID。 */
   SignComponents?: Component[];
@@ -522,7 +522,7 @@ declare interface FlowApproverInfo {
   JumpUrl?: string;
   /** 可以控制签署方在签署合同时能否进行某些操作，例如拒签、转交他人、是否为动态补充签署人等。详细操作可以参考开发者中心的ApproverOption结构体。 */
   ApproverOption?: ApproverOption;
-  /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要 */
+  /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：**false**：（默认）不需要审批，直接签署。**true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过ChannelCreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
   ApproverNeedSignReview?: boolean;
   /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式 */
   ApproverVerifyTypes?: number[];
@@ -694,6 +694,22 @@ declare interface HasAuthOrganization {
 declare interface HasAuthUser {
   /** 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。 */
   OpenId?: string | null;
+}
+
+/** 需要进行签署审核的签署人信息 */
+declare interface NeedReviewApproverInfo {
+  /** 签署方经办人的类型，支持以下类型 ORGANIZATION 企业（含企业自动签）PERSON 个人（含个人自动签） */
+  ApproverType: string;
+  /** 签署方经办人的姓名。 经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
+  ApproverName: string;
+  /** 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 请确认手机号所有方为此合同签署方。 */
+  ApproverMobile?: string;
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD 居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  ApproverIdCardType?: string;
+  /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  ApproverIdCardNumber?: string;
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。 */
+  OrganizationName?: string;
 }
 
 /** 持有的电子印章信息 */
@@ -1070,7 +1086,7 @@ declare interface TemplateInfo {
   TemplateType?: number;
   /** 是否是发起人 ,已弃用 */
   IsPromoter?: boolean;
-  /** 模板的创建者信息，电子签系统用户ID */
+  /** 模板的创建者名字 */
   Creator?: string;
   /** 模板创建的时间戳，格式为Unix标准时间戳（秒） */
   CreatedOn?: number;
@@ -1483,15 +1499,15 @@ declare interface ChannelCreateFlowRemindsResponse {
 declare interface ChannelCreateFlowSignReviewRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 签署流程编号 */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 企业内部审核结果PASS: 通过REJECT: 拒绝SIGN_REJECT:拒签(流程结束) */
+  /** 企业内部审核结果PASS: 审核通过REJECT: 审核拒绝SIGN_REJECT:拒签(流程结束) */
   ReviewType: string;
-  /** 审核原因 当ReviewType 是REJECT 时此字段必填,字符串长度不超过200 */
+  /** 审核结果原因字符串长度不超过200当ReviewType 是拒绝（REJECT） 时此字段必填。当ReviewType 是拒绝（SIGN_REJECT） 时此字段必填。 */
   ReviewMessage?: string;
-  /** 签署节点审核时需要指定，给个人审核时必填。 */
+  /** 审核节点的签署人标志，用于指定当前审核的签署方**如果签署审核节点是个人， 此参数必填**。 */
   RecipientId?: string;
-  /** 操作类型，默认：SignReview；SignReview:签署审核，CreateReview：发起审核注：接口通过该字段区分操作类型该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程若想使用发起审核，请指定该字段为：CreateReview若发起个人审核，则指定该字段为：SignReview */
+  /** 流程审核操作类型，取值如下：**SignReview**：（默认）签署审核**CreateReview**：发起审核注意：`该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程` */
   OperateType?: string;
 }
 
@@ -2198,6 +2214,24 @@ declare interface CreateConsoleLoginUrlResponse {
   IsActivated?: boolean;
   /** 当前经办人是否已认证并加入功能 **true** : 已经认证加入公司 **false** : 还未认证加入公司注意：**员工是否实名是根据Agent.ProxyOperator.OpenId判断，非经办人姓名** */
   ProxyOperatorIsVerified?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFlowGroupSignReviewRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 合同(流程)组的合同组Id，为32位字符串，通过接口[通过多文件创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByFiles) 或[通过多模板创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByTemplates)创建合同组签署流程时返回。 */
+  FlowGroupId: string;
+  /** 提交的审核结果，审核结果有下面三种情况PASS: 审核通过，合同流程可以继续执行签署等操作REJECT: 审核拒绝，合同流程不会变动SIGN_REJECT:拒签，合同流程直接结束，合同状态变为**合同拒签** */
+  ReviewType: string;
+  /** 需要进行签署审核的签署人的个人信息或企业信息，签署方的匹配方式按照以下规则:个人：二选一（选择其中任意信息组合即可）姓名+证件类型+证件号姓名+手机号企业：二选一 （选择其中任意信息组合即可）企业名+姓名+证件类型+证件号企业名+姓名+手机号 */
+  ApproverInfo: NeedReviewApproverInfo;
+  /** 审核不通过的原因，该字段的字符串长度不超过200个字符。注：`当审核类型（ReviewType）为审核拒绝（REJECT）或拒签（SIGN_REJECT）时，审核结果原因字段必须填写` */
+  ReviewMessage?: string;
+}
+
+declare interface CreateFlowGroupSignReviewResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4349,6 +4383,8 @@ declare interface Essbasic {
   CreateChannelOrganizationInfoChangeUrl(data: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
+  /** 提交合同组签署流程审批结果 {@link CreateFlowGroupSignReviewRequest} {@link CreateFlowGroupSignReviewResponse} */
+  CreateFlowGroupSignReview(data: CreateFlowGroupSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupSignReviewResponse>;
   /** 用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
   /** 创建他方企业自动签授权链接 {@link CreatePartnerAutoSignAuthUrlRequest} {@link CreatePartnerAutoSignAuthUrlResponse} */

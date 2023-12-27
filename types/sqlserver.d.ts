@@ -1685,9 +1685,9 @@ declare interface CreateDBInstancesRequest {
 
 declare interface CreateDBInstancesResponse {
   /** 订单名称 */
-  DealName: string;
+  DealName?: string;
   /** 订单名称数组 */
-  DealNames: string[];
+  DealNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4285,19 +4285,19 @@ declare interface Sqlserver {
   CreateBackup(data?: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
   /** 创建备份导入任务 {@link CreateBackupMigrationRequest} {@link CreateBackupMigrationResponse} */
   CreateBackupMigration(data: CreateBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupMigrationResponse>;
-  /** 创建基础版实例 {@link CreateBasicDBInstancesRequest} {@link CreateBasicDBInstancesResponse} */
+  /** 创建基础版实例 (云盘) {@link CreateBasicDBInstancesRequest} {@link CreateBasicDBInstancesResponse} */
   CreateBasicDBInstances(data: CreateBasicDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicDBInstancesResponse>;
-  /** 创建商业智能服务实例 {@link CreateBusinessDBInstancesRequest} {@link CreateBusinessDBInstancesResponse} */
+  /** 创建商业智能服务实例 (云盘) {@link CreateBusinessDBInstancesRequest} {@link CreateBusinessDBInstancesResponse} */
   CreateBusinessDBInstances(data: CreateBusinessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessDBInstancesResponse>;
   /** 创建商业智能服务文件 {@link CreateBusinessIntelligenceFileRequest} {@link CreateBusinessIntelligenceFileResponse} */
   CreateBusinessIntelligenceFile(data: CreateBusinessIntelligenceFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessIntelligenceFileResponse>;
-  /** 创建高可用实例(虚拟机版本) {@link CreateCloudDBInstancesRequest} {@link CreateCloudDBInstancesResponse} */
+  /** 创建高可用实例 (云盘) {@link CreateCloudDBInstancesRequest} {@link CreateCloudDBInstancesResponse} */
   CreateCloudDBInstances(data: CreateCloudDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudDBInstancesResponse>;
-  /** 创建只读实例(虚拟机版本) {@link CreateCloudReadOnlyDBInstancesRequest} {@link CreateCloudReadOnlyDBInstancesResponse} */
+  /** 创建只读实例 (云盘) {@link CreateCloudReadOnlyDBInstancesRequest} {@link CreateCloudReadOnlyDBInstancesResponse} */
   CreateCloudReadOnlyDBInstances(data: CreateCloudReadOnlyDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudReadOnlyDBInstancesResponse>;
   /** 创建数据库 {@link CreateDBRequest} {@link CreateDBResponse} */
   CreateDB(data: CreateDBRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBResponse>;
-  /** 创建实例 {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
+  /** 创建高可用实例 (本地盘) {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
   /** 创建增量备份导入任务 {@link CreateIncrementalMigrationRequest} {@link CreateIncrementalMigrationResponse} */
   CreateIncrementalMigration(data: CreateIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIncrementalMigrationResponse>;
@@ -4305,7 +4305,7 @@ declare interface Sqlserver {
   CreateMigration(data: CreateMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationResponse>;
   /** 创建发布订阅 {@link CreatePublishSubscribeRequest} {@link CreatePublishSubscribeResponse} */
   CreatePublishSubscribe(data: CreatePublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublishSubscribeResponse>;
-  /** 创建只读实例 {@link CreateReadOnlyDBInstancesRequest} {@link CreateReadOnlyDBInstancesResponse} */
+  /** 创建只读实例 (本地盘) {@link CreateReadOnlyDBInstancesRequest} {@link CreateReadOnlyDBInstancesResponse} */
   CreateReadOnlyDBInstances(data: CreateReadOnlyDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyDBInstancesResponse>;
   /** 删除实例账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;

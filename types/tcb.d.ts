@@ -1491,7 +1491,7 @@ declare interface CreateWxCloudBaseRunServerDBClusterRequest {
   WxAppId?: string;
   /** mysql内核版本，支持5.7,8.0 */
   DbVersion?: string;
-  /** 0: 非大小写敏感1: 大小写敏感默认 0 */
+  /** 0: 大小写敏感1: 非大小写敏感默认为0 */
   LowerCaseTableName?: string;
 }
 

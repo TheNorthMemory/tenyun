@@ -7163,7 +7163,7 @@ declare interface DescribeAssetMachineDetailRequest {
 
 declare interface DescribeAssetMachineDetailResponse {
   /** 主机详情 */
-  MachineDetail: AssetMachineDetail;
+  MachineDetail?: AssetMachineDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7348,8 +7348,8 @@ declare interface DescribeAssetTotalCountRequest {
 }
 
 declare interface DescribeAssetTotalCountResponse {
-  /** 各项资源数量system : 资源监控account: 账号port: 端口process: 进程app: 应用软件database:数据库webapp: Web应用webframe: Web框架webservice: Web服务weblocation: Web站点jar: Jar包initservice: 启动服务planTask:计划任务env:环境变量coremoudle:内核模块 */
-  Types: AssetKeyVal[];
+  /** 各项资源数量system : 资源监控account: 账号port: 端口process: 进程app: 应用软件database:数据库webapp: Web应用webframe: Web框架webservice: Web服务weblocation: Web站点jar: Jar包initservice: 启动服务planTask:计划任务env:环境变量coremodule:内核模块 */
+  Types?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9017,7 +9017,7 @@ declare interface DescribeFileTamperRuleInfoResponse {
 }
 
 declare interface DescribeFileTamperRulesRequest {
-  /** 过滤条件。RuleCategory- string- 规则类别 0=系统规则，1=用户规则Name- String - 规则名称/li> */
+  /** 过滤条件。RuleCategory- string- 规则类别 0=系统规则，1=用户规则Name- String - 规则名称 */
   Filters?: Filters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -9031,9 +9031,9 @@ declare interface DescribeFileTamperRulesRequest {
 
 declare interface DescribeFileTamperRulesResponse {
   /** 规则列表 */
-  List: FileTamperRuleInfo[] | null;
+  List?: FileTamperRuleInfo[] | null;
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9993,9 +9993,9 @@ declare interface DescribeMalWareListRequest {
 
 declare interface DescribeMalWareListResponse {
   /** 木马列表 */
-  MalWareList: MalWareList[] | null;
+  MalWareList?: MalWareList[] | null;
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12333,7 +12333,7 @@ declare interface ExportAssetCoreModuleListRequest {
   Uuid?: string;
   /** 服务器Quuid */
   Quuid?: string;
-  /** 过滤条件。Name- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户 */
+  /** 过滤条件。Name- string - 是否必填：否 - 包名User- string - 是否必填：否 - 用户名 */
   Filters?: AssetFilters[];
   /** 排序方式，asc升序 或 desc降序 */
   Order?: string;
@@ -12343,7 +12343,7 @@ declare interface ExportAssetCoreModuleListRequest {
 
 declare interface ExportAssetCoreModuleListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12531,7 +12531,7 @@ declare interface ExportAssetSystemPackageListRequest {
   Uuid?: string;
   /** 主机Quuid */
   Quuid?: string;
-  /** 过滤条件。Name - String - 是否必填：否 - 包 名StartTime - String - 是否必填：否 - 安装开始时间EndTime - String - 是否必填：否 - 安装开始时间Type - int - 是否必填：否 - 安装包类型：1:rmp2:dpkg3:java4:system */
+  /** 过滤条件。Name - String - 是否必填：否 - 包 名StartTime - String - 是否必填：否 - 安装开始时间EndTime - String - 是否必填：否 - 安装开始时间Type - int - 是否必填：否 - 安装包类型：1:rpm2:dpkg3:java4:system */
   Filters?: Filter[];
   /** 排序方式，asc升序 或 desc降序 */
   Order?: string;
@@ -12595,7 +12595,7 @@ declare interface ExportAssetWebFrameListRequest {
 
 declare interface ExportAssetWebFrameListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

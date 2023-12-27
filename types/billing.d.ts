@@ -96,6 +96,8 @@ declare interface BillDetail {
   BillDay?: string | null;
   /** 账单归属月 */
   BillMonth?: string | null;
+  /** 账单记录ID */
+  Id?: string | null;
 }
 
 /** 明细账单关联单据信息 */
@@ -1769,23 +1771,25 @@ declare interface DescribeDosageDetailByDateRequest {
   StartDate: string;
   /** 查询账单结束日期，如 2019-01-01， 时间跨度不超过7天 */
   EndDate: string;
-  /** 互动直播：10194 互动直播-核心机房 :10195 互动直播-边缘机房cdn业务：102383：CDN静态加速流量(国内)102384：CDN静态加速带宽(国内)102385：CDN静态加速流量(海外)102386：CDN静态加速带宽(海外)100967：弹性公网IP-按流量计费101065：公网负载均衡-按流量计费视频直播10226 视频直播流量(国内)10227 视频直播带宽(国内)100763 视频直播流量(海外)100762 视频直播宽带(海外) */
+  /** 互动直播：10194 互动直播-核心机房 :10195 互动直播-边缘机房cdn业务：102383：CDN静态加速流量(国内)102384：CDN静态加速带宽(国内)102385：CDN静态加速流量(海外)102386：CDN静态加速带宽(海外)100967：弹性公网IP-按流量计费101065：公网负载均衡-按流量计费视频直播10226 视频直播流量(国内)10227 视频直播带宽(国内)100763 视频直播流量(海外)100762 视频直播宽带(海外)仅支持以上产品 */
   ProductCode: string;
   /** 查询域名 例如 www.qq.com非CDN业务查询时传入空字符串，返回的值为空 */
   Domain: string;
   /** 1、如果为空，则返回EIP或CLB所有实例的明细；2、如果传入实例名，则返回该实例明细 */
   InstanceID?: string;
+  /** 支付者的账号 ID（账号 ID 是用户在腾讯云的唯一账号标识），默认查询本账号账单，如集团管理账号需查询成员账号自付的账单，该字段需入参成员账号UIN */
+  PayerUin?: string;
 }
 
 declare interface DescribeDosageDetailByDateResponse {
   /** 计量单位 */
-  Unit: string | null;
+  Unit?: string | null;
   /** 用量数组 */
-  DetailSets: DetailSet[] | null;
+  DetailSets?: DetailSet[] | null;
   /** 错误码 */
-  RetCode: number | null;
+  RetCode?: number | null;
   /** 错误信息 */
-  RetMsg: string | null;
+  RetMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

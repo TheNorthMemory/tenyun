@@ -1177,19 +1177,19 @@ declare interface InstanceGroups {
 /** export 集成配置 */
 declare interface IntegrationConfiguration {
   /** 名字 */
-  Name: string;
+  Name?: string;
   /** 类型 */
-  Kind: string;
+  Kind?: string;
   /** 内容 */
-  Content: string;
+  Content?: string;
   /** 状态 */
-  Status: number;
+  Status?: number;
   /** 实例类型 */
-  Category: string;
+  Category?: string;
   /** 实例描述 */
-  InstanceDesc: string;
+  InstanceDesc?: string;
   /** dashboard 的 URL */
-  GrafanaDashboardURL: string;
+  GrafanaDashboardURL?: string;
 }
 
 /** k8s中标签，一般以数组的方式存在 */

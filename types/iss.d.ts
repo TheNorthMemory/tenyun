@@ -336,7 +336,7 @@ declare interface DescribeDeviceChannelData {
 declare interface DescribeDeviceData {
   /** 设备ID */
   DeviceId?: string | null;
-  /** 设备编码（即我们为设备生成的20位国标编码） */
+  /** 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码） */
   Code?: string | null;
   /** 设备名称 */
   Name?: string | null;
@@ -724,7 +724,7 @@ declare interface ListAITaskData {
 declare interface ListDeviceInfo {
   /** 设备 ID */
   DeviceId?: string;
-  /** 设备国标编码 */
+  /** 设备编码 */
   Code?: string;
   /** 设备状态。0:未注册，1:在线，2:离线，3:禁用 */
   Status?: number;
@@ -1270,11 +1270,11 @@ declare interface UpdateRecordBackupPlanData {
 
 /** 修改录像上云计划数据结构 */
 declare interface UpdateRecordBackupPlanModify {
-  /** 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段） */
+  /** 录像上云计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段） */
   PlanName?: string;
   /** 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段） */
   TemplateId?: string;
-  /** 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段） */
+  /** 录像上云计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段） */
   Describe?: string;
   /** 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段） */
   LifeCycle?: LifeCycleData;
@@ -1353,7 +1353,7 @@ declare interface AddAITaskRequest {
   Templates: AITemplates[];
   /** AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符 */
   Desc?: string;
-  /** AI 结果回调地址。类似 "http://ip:port/xxx或者https://domain/xxx */
+  /** AI 结果回调地址。类似 "http://ip:port/***或者https://domain/*** */
   CallbackUrl?: string;
   /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
   IsStartTheTask?: boolean;
@@ -2111,7 +2111,9 @@ declare interface ListDevicesRequest {
   OrganizationId: string;
   /** 是否获取当前层级及子层级的设备列表，默认false */
   IsContainSubLevel?: boolean;
-  /** 设备接入协议。1:RTMP，2:GB，3:GW */
+  /** 是否包含当前用户已关联的设备，默认false */
+  IsContainUser?: boolean;
+  /** 设备接入协议。1:RTMP，2:GB，3:GW，4:IVCP(私有协议) */
   AccessProtocol?: number;
   /** 设备类型。1:IPC，2:NVR */
   Type?: number;
@@ -2119,7 +2121,7 @@ declare interface ListDevicesRequest {
   Status?: number;
   /** 服务节点ID */
   ClusterId?: string;
-  /** 模糊搜索设备关键字 */
+  /** 模糊搜索设备的关键字 */
   Keyword?: string;
   /** 当前用户Uin */
   CurrentUin?: number;
@@ -2385,7 +2387,7 @@ declare interface UpdateAITaskRequest {
   Desc?: string;
   /** 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。 */
   ChannelList?: string[];
-  /** AI 结果回调地址。类似 "http://ip:port/xxx或者https://domain/xxx */
+  /** AI 结果回调地址。类似 "http://ip:port/***或者https://domain/*** */
   CallbackUrl?: string;
   /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
   IsStartTheTask?: boolean;
