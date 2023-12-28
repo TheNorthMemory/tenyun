@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 出现信息索引对AppearIndex可选值定义如下：| AppearIndex名称 | AppearIndex取值 | AppearIndex描述 ||---|---|---|| APPEAR_INDEX_INVALID | 0 | 非法的任务状态 || APPEAR_INDEX_AUDIO | 1 | 音频出现信息|| APPEAR_INDEX_TEXT | 2 | 可视文本出现信息|| APPEAR_INDEX_VIDEO | 3 | 视频出现信息|例如，当AppearIndex=1，Index=15，则意味着目标关键词出现在第16个(Index计数从0开始)音频文字识别结果之中 */
 declare interface AppearIndexPair {
   /** 出现信息，取值范围为[1，3] */
-  AppearIndex: number;
-  /** AppearInfo中AppearIndex对应元素的第Index元素，从0开始技术 */
-  Index: number;
+  AppearIndex?: number;
+  /** AppearInfo中AppearIndex对应元素的第Index元素，从0开始计数 */
+  Index?: number;
 }
 
 /** 出现信息结构包含关键词在音频转文字(ASR)，图片转文字(OCR)以及视频结果中的出现信息 */

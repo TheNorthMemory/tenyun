@@ -241,7 +241,7 @@ declare interface DescribeDetailedSingleProbeDataRequest {
   TaskID?: string[];
   /** 拨测点运营商	这里实际按拨测结果中的运营商来填写即可电信：中国电信移动：中国移动联通：中国联通 */
   Operators?: string[];
-  /** 拨测点地区	这里实际按拨测结果中的地区来填写即可国内一般是省级单位，如广东、广西、中国香港、新疆；直辖市则填北京、上海境外一般是国家名，如澳大利亚、新加坡 */
+  /** 拨测点地区	这里实际按拨测结果中的地区来填写即可国内一般是省级单位，如广东、广西、中国香港；直辖市则填北京、上海境外一般是国家名，如澳大利亚、新加坡 */
   Districts?: string[];
   /** 错误类型 */
   ErrorTypes?: string[];

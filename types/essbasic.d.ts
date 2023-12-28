@@ -550,7 +550,7 @@ declare interface FlowApproverItem {
 
 /** 签署人签署链接信息。 */
 declare interface FlowApproverUrlInfo {
-  /** 签署短链接。注意:- 该链接有效期为**30分钟**，同时需要注意保密，不要外泄给无关用户。- 该链接不支持小程序嵌入，仅支持**移动端浏览器**打开。 */
+  /** 签署短链接。注意:1. 该链接有效期为**30分钟**，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持**移动端浏览器**打开。3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   SignUrl?: string;
   /** 签署人类型。- **PERSON**: 个人 */
   ApproverType?: string;
@@ -558,7 +558,7 @@ declare interface FlowApproverUrlInfo {
   Name?: string;
   /** 签署人手机号。 */
   Mobile?: string;
-  /** 签署长链接。注意:- 该链接有效期为**30分钟**，同时需要注意保密，不要外泄给无关用户。- 该链接不支持小程序嵌入，仅支持**移动端浏览器**打开。 */
+  /** 签署长链接。注意:1. 该链接有效期为**30分钟**，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持**移动端浏览器**打开。3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   LongUrl?: string | null;
 }
 
@@ -988,7 +988,7 @@ declare interface SignUrl {
 
 /** 签署链接内容 */
 declare interface SignUrlInfo {
-  /** 签署链接，过期时间为90天 */
+  /** 签署链接，过期时间为90天注：生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   SignUrl?: string | null;
   /** 合同过期时间戳，单位秒 */
   Deadline?: number | null;
@@ -1240,7 +1240,7 @@ declare interface ChannelCreateBatchCancelFlowUrlRequest {
 }
 
 declare interface ChannelCreateBatchCancelFlowUrlResponse {
-  /** 批量撤销合同的URL链接, 需要在手机端打开, 有效期24小时 */
+  /** 批量撤销合同的URL链接, 需要在手机端打开, 有效期24小时注：生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   BatchCancelFlowUrl?: string;
   /** 与入参的FlowIds数组一致, 成功生成到撤销链接中,则为"", 不能撤销合同则为失败原因 */
   FailMessages?: string[];
@@ -1300,11 +1300,11 @@ declare interface ChannelCreateBatchSignUrlRequest {
 }
 
 declare interface ChannelCreateBatchSignUrlResponse {
-  /** 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。注: `非小程序和APP集成使用` */
+  /** 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。注: 1. 非小程序和APP集成使用2. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   SignUrl?: string;
   /** 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
   ExpiredTime?: number;
-  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径注: `小程序和APP集成使用` */
+  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径注: 1. 小程序和APP集成使用2. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   MiniAppPath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2208,7 +2208,7 @@ declare interface CreateConsoleLoginUrlRequest {
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP 一年 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP 一年 注： `1.链接仅单次有效，每次登录需要需要重新创建新的链接``2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP 一年 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP 一年 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   ConsoleUrl?: string;
   /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：`企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码` */
   IsActivated?: boolean;

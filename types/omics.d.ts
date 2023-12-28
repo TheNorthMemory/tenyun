@@ -609,13 +609,21 @@ declare interface ImportTableFileResponse {
 }
 
 declare interface RetryRunsRequest {
-  /** 关联项目ID。 */
-  ProjectId: string;
-  /** 任务UUID。 */
-  RunUuids: string[];
+  /** 项目ID。（不填使用指定地域下的默认项目） */
+  ProjectId?: string;
+  /** 需要重试的任务批次ID。 */
+  RunGroupId?: string;
+  /** 需要重试的任务UUID。 */
+  RunUuids?: string[];
+  /** WDL运行选项，不填使用被重试的任务批次运行选项。 */
+  WDLOption?: RunOption;
+  /** Nextflow运行选项，不填使用被重试的任务批次运行选项。 */
+  NFOption?: NFOption;
 }
 
 declare interface RetryRunsResponse {
+  /** 新的任务批次ID。 */
+  RunGroupId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -720,7 +728,7 @@ declare interface Omics {
   /** 导入表格文件 {@link ImportTableFileRequest} {@link ImportTableFileResponse} */
   ImportTableFile(data: ImportTableFileRequest, config?: AxiosRequestConfig): AxiosPromise<ImportTableFileResponse>;
   /** 重试任务 {@link RetryRunsRequest} {@link RetryRunsResponse} */
-  RetryRuns(data: RetryRunsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRunsResponse>;
+  RetryRuns(data?: RetryRunsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRunsResponse>;
   /** 运行应用 {@link RunApplicationRequest} {@link RunApplicationResponse} */
   RunApplication(data: RunApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RunApplicationResponse>;
   /** 运行工作流 {@link RunWorkflowRequest} {@link RunWorkflowResponse} */

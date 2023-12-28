@@ -3347,7 +3347,7 @@ declare interface ContinueRunFailedTaskBatchRequest {
 }
 
 declare interface ContinueRunFailedTaskBatchResponse {
-  /** 成功或失败 */
+  /** true：操作成功、false：操作失败 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

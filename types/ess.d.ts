@@ -496,16 +496,16 @@ declare interface FlowApproverDetail {
 
 /** 签署链接信息。 */
 declare interface FlowApproverUrlInfo {
-  /** 签署短链接。注意:- 该链接有效期为**30分钟**，同时需要注意保密，不要外泄给无关用户。- 该链接不支持小程序嵌入，仅支持**移动端浏览器**打开。 */
-  SignUrl?: string | null;
+  /** 签署短链接。注意:1. 该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持移动端浏览器打开。3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  SignUrl?: string;
   /** 签署人类型。- **1**: 个人 */
-  ApproverType?: number | null;
+  ApproverType?: number;
   /** 签署人姓名。 */
-  ApproverName?: string | null;
+  ApproverName?: string;
   /** 签署人手机号。 */
-  ApproverMobile?: string | null;
-  /** 签署长链接。注意:- 该链接有效期为**30分钟**，同时需要注意保密，不要外泄给无关用户。- 该链接不支持小程序嵌入，仅支持**移动端浏览器**打开。 */
-  LongUrl?: string | null;
+  ApproverMobile?: string;
+  /** 签署长链接。注意:1. 该链接有效期为**30分钟**，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持**移动端浏览器**打开。3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  LongUrl?: string;
 }
 
 /** 合同流程的基础信息 */
@@ -1304,11 +1304,11 @@ declare interface CreateBatchSignUrlRequest {
 }
 
 declare interface CreateBatchSignUrlResponse {
-  /** 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。注: `非小程序和APP集成使用` */
+  /** 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。注: 1. 非小程序和APP集成使用2. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   SignUrl?: string;
   /** 链接过期时间以 Unix 时间戳格式表示，默认生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
   ExpiredTime?: number;
-  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径注: `小程序和APP集成使用` */
+  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径注: 1. 小程序和APP集成使用2. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   MiniAppPath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2010,7 +2010,7 @@ declare interface CreateSchemeUrlRequest {
 }
 
 declare interface CreateSchemeUrlResponse {
-  /** 腾讯电子签小程序的签署链接。如果EndPoint是**APP**，得到的链接类似于`pages/guide?from=default&where=mini&id=yDwJSUUirqauh***7jNSxwdirTSGuH&to=CONTRACT_DETAIL&name=&phone=&shortKey=yDw***k1xFc5`, 用法可以参加接口描述中的"跳转到小程序的实现"如果EndPoint是**HTTP**，得到的链接类似于 `https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?where=mini&from=SFY&id=yDwfEUUw**4rV6Avz&to=MVP_CONTRACT_COVER&name=%E9%83%**5%86%9B`，点击后会跳转到腾讯电子签小程序进行签署如果EndPoint是**HTTP_SHORT_URL**，得到的链接类似于 `https://essurl.cn/2n**42Nd`，点击后会跳转到腾讯电子签小程序进行签署 */
+  /** 腾讯电子签小程序的签署链接。如果EndPoint是**APP**，得到的链接类似于`pages/guide?from=default&where=mini&id=yDwJSUUirqauh***7jNSxwdirTSGuH&to=CONTRACT_DETAIL&name=&phone=&shortKey=yDw***k1xFc5`, 用法可以参加接口描述中的"跳转到小程序的实现"如果EndPoint是**HTTP**，得到的链接类似于 `https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?where=mini&from=SFY&id=yDwfEUUw**4rV6Avz&to=MVP_CONTRACT_COVER&name=%E9%83%**5%86%9B`，点击后会跳转到腾讯电子签小程序进行签署如果EndPoint是**HTTP_SHORT_URL**，得到的链接类似于 `https://essurl.cn/2n**42Nd`，点击后会跳转到腾讯电子签小程序进行签署注： 生成的链路后面不能再增加参数 */
   SchemeUrl?: string;
   /** 二维码，在生成动态签署人跳转封面页链接时返回 */
   SchemeQrcodeUrl?: string;

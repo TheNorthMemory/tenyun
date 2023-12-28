@@ -690,6 +690,48 @@ declare interface ColumnAggregationLineage {
   ColumnInfoSet: SimpleColumnInfo[] | null;
 }
 
+/** 表的元数据信息 */
+declare interface ColumnBasicInfo {
+  /** 表的全局唯一ID */
+  TableId?: string | null;
+  /** 数据源全局唯一ID */
+  DatasourceId?: string | null;
+  /** 数据源名 */
+  DatasourceName?: string | null;
+  /** 数据库ID */
+  DatabaseId?: string | null;
+  /** 数据库名 */
+  DatabaseName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 字段名称 */
+  ColumnName?: string | null;
+  /** 数据类型,string/int等 */
+  DataType?: string | null;
+  /** 字段类型, varchar(32)/int(10)等 */
+  ColumnType?: string | null;
+  /** 字段默认值 */
+  ColumnDefault?: string | null;
+  /** 索引类型, PRI/MUL/PARTITION等,普通字段该值为空串 */
+  ColumnKey?: string | null;
+  /** 字段顺序标识 */
+  ColumnPosition?: number | null;
+  /** 字段注释 */
+  ColumnComment?: string | null;
+  /** 数据类型 */
+  StoreType?: string | null;
+  /** 所属项目ID */
+  ProjectId?: string | null;
+  /** 所属项目英文名 */
+  ProjectName?: string | null;
+  /** 所属项目中文名 */
+  ProjectDisplayName?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+}
+
 /** 血缘字段信息 */
 declare interface ColumnLineageInfo {
   /** 血缘id */
@@ -4046,6 +4088,66 @@ declare interface TableBaseInfo {
   DbGovernPolicyIsDisable?: string | null;
 }
 
+/** 表的元数据信息 */
+declare interface TableBasicInfo {
+  /** 表的全局唯一ID */
+  TableId?: string | null;
+  /** 数据源全局唯一ID */
+  DatasourceId?: string | null;
+  /** 数据源名 */
+  DatasourceName?: string | null;
+  /** 数据库ID */
+  DatabaseId?: string | null;
+  /** 数据库名 */
+  DatabaseName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 引擎/存储类型 */
+  EngineType?: string | null;
+  /** 表类型，视图，外部表等 */
+  TableType?: string | null;
+  /** 项目Id */
+  ProjectId?: string | null;
+  /** 所属项目英文名 */
+  ProjectName?: string | null;
+  /** 所属项目英中文名 */
+  ProjectDisplayName?: string | null;
+  /** 责任人ID */
+  TableOwnerId?: string | null;
+  /** 责任人名称 */
+  TableOwnerName?: string | null;
+  /** 存储位置 */
+  StorageLocation?: number | null;
+  /** 表描述 */
+  Description?: string | null;
+  /** 是否分区表，0-全量表 1-分区表 */
+  IsPartitionTable?: number | null;
+  /** 分区字段list */
+  PartitionColumns?: string[] | null;
+  /** 存储格式 */
+  StorageFormat?: string | null;
+  /** 存储量，字节数 */
+  StorageSize?: number | null;
+  /** 存储量，单位 */
+  StorageSizeWithUnit?: string | null;
+  /** 累计存储【MB】 */
+  TotalSizeMb?: number | null;
+  /** 副本数量 */
+  ReplicaCount?: number | null;
+  /** 文件数 */
+  FileCount?: number | null;
+  /** 分区总数（包含hive，iceberg） */
+  PartitionCount?: number | null;
+  /** 分区字段数量（包含hive，iceberg） */
+  PartitionFieldCount?: number | null;
+  /** 生命周期-分区保留天数【分区保留策略时有效】 */
+  PartitionExpireDays?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+}
+
 /** 规则表变量替换 */
 declare interface TableConfig {
   /** 数据库Id */
@@ -4084,6 +4186,48 @@ declare interface TableInfo {
   OriginDatabaseName: string | null;
   /** 表schemaName */
   OriginSchemaName: string | null;
+}
+
+/** 表血缘详细信息 */
+declare interface TableLineageBaseInfo {
+  /** 元数据类型 */
+  MetastoreType: string | null;
+  /** 由中心节点到该节点的路径 */
+  PrefixPath: string | null;
+  /** 空间id */
+  ProjectId?: string | null;
+  /** 数据源id */
+  DatasourceId?: string | null;
+  /** 表id */
+  TableId?: string | null;
+  /** 表血缘参数 */
+  Params?: LineageParamRecord[] | null;
+  /** 父节点列表 */
+  ParentSet?: string | null;
+  /** 子节点列表 */
+  ChildSet?: string | null;
+  /** 额外参数 */
+  ExtParams?: RecordField[] | null;
+  /** 血缘id */
+  Id?: string | null;
+  /** 元数据类型名称 */
+  MetastoreTypeName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 表全称 */
+  QualifiedName?: string | null;
+  /** 血缘下游节点数 */
+  DownStreamCount?: number | null;
+  /** 血缘上游节点数 */
+  UpStreamCount?: number | null;
+  /** 血缘描述 */
+  Description?: string | null;
+  /** 血缘创建时间 */
+  CreateTime?: string | null;
+  /** 血缘更新时间 */
+  ModifyTime?: string | null;
+  /** 修改血缘的任务id列表 */
+  Tasks?: string[] | null;
 }
 
 /** 表血缘详细信息 */
@@ -8356,6 +8500,26 @@ declare interface DescribeFathersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFieldBasicInfoRequest {
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤字段 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderField[];
+}
+
+declare interface DescribeFieldBasicInfoResponse {
+  /** 字段元数据 */
+  ColumnBasicInfoList?: ColumnBasicInfo[] | null;
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFolderListRequest {
   /** 项目Id */
   ProjectId: string;
@@ -10152,6 +10316,26 @@ declare interface DescribeSuccessorOpsTaskInfosResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTableBasicInfoRequest {
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤字段 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderField[];
+}
+
+declare interface DescribeTableBasicInfoResponse {
+  /** 表元数据 */
+  TableBasicInfoList?: TableBasicInfo[] | null;
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTableInfoListRequest {
   /** 表名 */
   Filters: Filter[];
@@ -10164,6 +10348,30 @@ declare interface DescribeTableInfoListRequest {
 declare interface DescribeTableInfoListResponse {
   /** 表信息 */
   TableInfo: TableInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTableLineageInfoRequest {
+  /** 查询方向，INPUT,OUTPUT,BOTH枚举值 */
+  Direction: string;
+  /** 表信息 */
+  Data: TableLineageInfo;
+  /** 单次查询入度,默认 1 */
+  InputDepth?: number;
+  /** 单次查询出度,默认 1 */
+  OutputDepth?: number;
+  /** 额外参数（传递调用方信息） */
+  ExtParams?: LineageParamRecord[];
+  /** 是否过滤临时表,默认true */
+  IgnoreTemp?: boolean;
+  /** 是否递归查询二级节点数目，默认为true */
+  RecursiveSecond?: boolean;
+}
+
+declare interface DescribeTableLineageInfoResponse {
+  /** 表血缘信息 */
+  TableLineageBasicInfo?: TableLineageBaseInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12978,6 +13186,8 @@ declare interface Wedata {
   DescribeExecStrategy(data?: DescribeExecStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecStrategyResponse>;
   /** 获取关联父实例 {@link DescribeFathersRequest} {@link DescribeFathersResponse} */
   DescribeFathers(data?: DescribeFathersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFathersResponse>;
+  /** 字段基础信息查询 {@link DescribeFieldBasicInfoRequest} {@link DescribeFieldBasicInfoResponse} */
+  DescribeFieldBasicInfo(data?: DescribeFieldBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFieldBasicInfoResponse>;
   /** 拉取文件夹目录【Beta版本】 {@link DescribeFolderListRequest} {@link DescribeFolderListResponse} */
   DescribeFolderList(data: DescribeFolderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderListResponse>;
   /** 拉取文件夹下的工作流【Beta版本】 {@link DescribeFolderWorkflowListRequest} {@link DescribeFolderWorkflowListResponse} */
@@ -13148,10 +13358,14 @@ declare interface Wedata {
   DescribeStreamTaskLogList(data: DescribeStreamTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamTaskLogListResponse>;
   /** 智能运维-获取下游任务信息 {@link DescribeSuccessorOpsTaskInfosRequest} {@link DescribeSuccessorOpsTaskInfosResponse} */
   DescribeSuccessorOpsTaskInfos(data: DescribeSuccessorOpsTaskInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuccessorOpsTaskInfosResponse>;
+  /** 表基础信息查询 {@link DescribeTableBasicInfoRequest} {@link DescribeTableBasicInfoResponse} */
+  DescribeTableBasicInfo(data?: DescribeTableBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableBasicInfoResponse>;
   /** 获取数据表信息 {@link DescribeTableInfoListRequest} {@link DescribeTableInfoListResponse} */
   DescribeTableInfoList(data: DescribeTableInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableInfoListResponse>;
   /** 列出表血缘信息 {@link DescribeTableLineageRequest} {@link DescribeTableLineageResponse} */
   DescribeTableLineage(data: DescribeTableLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableLineageResponse>;
+  /** 表血缘信息查询接口 {@link DescribeTableLineageInfoRequest} {@link DescribeTableLineageInfoResponse} */
+  DescribeTableLineageInfo(data: DescribeTableLineageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableLineageInfoResponse>;
   /** 查询表元数据详情 {@link DescribeTableMetaRequest} {@link DescribeTableMetaResponse} */
   DescribeTableMeta(data: DescribeTableMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableMetaResponse>;
   /** 获取表元数据list {@link DescribeTableMetasRequest} {@link DescribeTableMetasResponse} */
