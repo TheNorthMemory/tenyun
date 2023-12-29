@@ -692,13 +692,13 @@ declare interface RuleInfoData {
   Protocol: string;
   /** 策略, 0：观察，1：阻断，2：放行 */
   Strategy: string;
-  /** 访问源类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版 */
+  /** 访问源类型，1是IP，3是域名，4是IP地址模板，5是域名地址模板 */
   SourceType: number;
   /** 方向，0：出站，1：入站 */
   Direction: number;
   /** 描述 */
   Detail: string;
-  /** 访问目的类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版 */
+  /** 访问目的类型，1是IP，3是域名，4是IP地址模板，5是域名地址模板 */
   TargetType: number;
   /** 端口 */
   Port?: string;
@@ -982,21 +982,21 @@ declare interface TLogInfo {
   BruteForceNum: number;
 }
 
-/** 地址模版列表数据 */
+/** 地址模板列表数据 */
 declare interface TemplateListInfo {
-  /** 模版ID */
+  /** 模板ID */
   Uuid?: string | null;
-  /** 模版名称 */
+  /** 模板名称 */
   Name?: string | null;
   /** 描述 */
   Detail?: string | null;
-  /** IP模版 */
+  /** IP模板 */
   IpString?: string | null;
   /** 插入时间 */
   InsertTime?: string | null;
   /** 修改时间 */
   UpdateTime?: string | null;
-  /** 模版类型 */
+  /** 模板类型 */
   Type?: number | null;
   /** 关联规则条数 */
   RulesNum?: number | null;

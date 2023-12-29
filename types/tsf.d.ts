@@ -839,43 +839,45 @@ declare interface ContainerGroupDetail {
 /** 部署组列表-其它字段 */
 declare interface ContainerGroupOther {
   /** 实例总数 */
-  InstanceNum: number;
+  InstanceNum?: number;
   /** 已启动实例总数 */
-  CurrentNum: number;
+  CurrentNum?: number;
+  /** 负载均衡DNS地址 */
+  LbDns?: string;
   /** 负载均衡ip */
-  LbIp: string;
+  LbIp?: string;
   /** Service ip */
-  ClusterIp: string;
-  /** 服务状态，请参考后面的的状态定义 */
-  Status: string;
-  /** 服务状态，请参考后面的的状态定义 */
-  Message: string;
+  ClusterIp?: string;
+  /** 服务状态，请参考后面的状态定义 */
+  Status?: string;
+  /** 服务状态，请参考后面的状态定义 */
+  Message?: string;
   /** 环境变量 */
-  Envs: Env[];
+  Envs?: Env[];
   /** Service NodePort */
-  NodePort: number | null;
+  NodePort?: number | null;
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 健康检查相关字段 */
-  HealthCheckSettings: HealthCheckSettings | null;
+  HealthCheckSettings?: HealthCheckSettings | null;
   /** 服务配置信息是否匹配 */
-  IsNotEqualServiceConfig: boolean | null;
+  IsNotEqualServiceConfig?: boolean | null;
 }
 
-/** cos临时帐号信息 */
+/** cos临时账号信息 */
 declare interface CosCredentials {
   /** 会话Token */
-  SessionToken: string | null;
+  SessionToken?: string | null;
   /** 临时应用ID */
-  TmpAppId: string | null;
+  TmpAppId?: string | null;
   /** 临时调用者身份ID */
-  TmpSecretId: string | null;
+  TmpSecretId?: string | null;
   /** 临时密钥 */
-  TmpSecretKey: string | null;
+  TmpSecretKey?: string | null;
   /** 过期时间 */
-  ExpiredTime: number | null;
+  ExpiredTime?: number | null;
   /** 所在域 */
-  Domain: string | null;
+  Domain?: string | null;
 }
 
 /** Cos下载所需信息 */

@@ -2171,7 +2171,7 @@ declare interface CreatePlanForZoneResponse {
 declare interface CreatePrefetchTaskRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 要预热的资源列表，每个元素格式类似如下:http://www.example.com/example.txt。注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
+  /** 要预热的资源列表，每个元素格式类似如下:http://www.example.com/example.txt。参数值当前必填。注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
   Targets?: string[];
   /** 是否对url进行encode，若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;
@@ -2803,9 +2803,9 @@ declare interface DescribeOverviewL7DataResponse {
 declare interface DescribePrefetchTasksRequest {
   /** 站点ID。必填参数。 */
   ZoneId?: string;
-  /** 查询起始时间。 */
+  /** 查询起始时间，时间与 job-id 必填一个。 */
   StartTime?: string;
-  /** 查询结束时间。 */
+  /** 查询结束时间，时间与 job-id 必填一个。 */
   EndTime?: string;
   /** 分页查询偏移量，默认为 0。 */
   Offset?: number;
@@ -2827,9 +2827,9 @@ declare interface DescribePrefetchTasksResponse {
 declare interface DescribePurgeTasksRequest {
   /** 站点ID。必填参数。 */
   ZoneId?: string;
-  /** 查询起始时间。 */
+  /** 查询起始时间，时间与job-id必填一个。 */
   StartTime?: string;
-  /** 查询结束时间。 */
+  /** 查询结束时间，时间与job-id必填一个。 */
   EndTime?: string;
   /** 分页查询偏移量，默认为0。 */
   Offset?: number;

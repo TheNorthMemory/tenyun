@@ -1007,7 +1007,7 @@ declare interface CreateFolderRequest {
 
 declare interface CreateFolderResponse {
   /** 新建文件夹的唯一ID */
-  FolderId: string;
+  FolderId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1642,6 +1642,34 @@ declare interface FetchSqlGatewayStatementResultResponse {
   RequestId?: string;
 }
 
+declare interface GetMetaTableRequest {
+  /** Catalog名 */
+  Catalog: string;
+  /** Database名 */
+  Database: string;
+  /** Table名 */
+  Table: string;
+  /** 空间唯一标识 */
+  WorkSpaceId: string;
+}
+
+declare interface GetMetaTableResponse {
+  /** 元数据表唯一标识 */
+  SerialId?: string;
+  /** Catalog名 */
+  Catalog?: string;
+  /** Database名 */
+  Database?: string;
+  /** Table名 */
+  Table?: string;
+  /** 建表语句,使用 Base64 编码。例如Q1JFQVRFIFRBQkxFIGRhdGFnZW5fc291cmNlX3RhYmxlICggCiAgICBpZCBJTlQsIAogICAgbmFtZSBTVFJJTkcgCikgV0lUSCAoCidjb25uZWN0b3InPSdkYXRhZ2VuJywKJ3Jvd3MtcGVyLXNlY29uZCcgPSAnMScKKTs= */
+  DDL?: string;
+  /** 场景时间 */
+  CreateTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFolderRequest {
   /** 文件夹ID（必填） */
   SourceFolderId?: string;
@@ -1823,6 +1851,8 @@ declare interface Oceanus {
   DescribeWorkSpaces(data?: DescribeWorkSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpacesResponse>;
   /** 查询Statement执行结果 {@link FetchSqlGatewayStatementResultRequest} {@link FetchSqlGatewayStatementResultResponse} */
   FetchSqlGatewayStatementResult(data: FetchSqlGatewayStatementResultRequest, config?: AxiosRequestConfig): AxiosPromise<FetchSqlGatewayStatementResultResponse>;
+  /** 查询元数据表 {@link GetMetaTableRequest} {@link GetMetaTableResponse} */
+  GetMetaTable(data: GetMetaTableRequest, config?: AxiosRequestConfig): AxiosPromise<GetMetaTableResponse>;
   /** 拖拽文件夹 {@link ModifyFolderRequest} {@link ModifyFolderResponse} */
   ModifyFolder(data?: ModifyFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFolderResponse>;
   /** 更新作业 {@link ModifyJobRequest} {@link ModifyJobResponse} */

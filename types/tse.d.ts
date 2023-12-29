@@ -1252,6 +1252,20 @@ declare interface CreateCloudNativeAPIGatewayCertificateResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudNativeAPIGatewayPublicNetworkRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 分组id。 */
+  GroupId?: string;
+  /** 公网负载均衡配置。 */
+  InternetConfig?: InternetConfig;
+}
+
+declare interface CreateCloudNativeAPIGatewayPublicNetworkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudNativeAPIGatewayRequest {
   /** 云原生API网关名字, 最多支持60个字符。 */
   Name: string;
@@ -1478,6 +1492,22 @@ declare interface DeleteCloudNativeAPIGatewayCertificateRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewayCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 分组id，kong类型时必填 */
+  GroupId?: string;
+  /** 公网类型- IPV4 （默认值）- IPV6 */
+  InternetAddressVersion?: string;
+  /** 公网ip，存在多个公网时必填 */
+  Vip?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayPublicNetworkResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2136,6 +2166,22 @@ declare interface ModifyCloudNativeAPIGatewayServiceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyConsoleNetworkRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 网络类型：- Open 公网- Internal 内网（暂不支持） */
+  NetworkType: string;
+  /** 开启Konga网络，不填时默认为Open- Open，开启- Close，关闭 */
+  Operate?: string;
+  /** 访问控制策略 */
+  AccessControl?: NetworkAccessControl;
+}
+
+declare interface ModifyConsoleNetworkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNativeGatewayServerGroupRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -2148,6 +2194,44 @@ declare interface ModifyNativeGatewayServerGroupRequest {
 }
 
 declare interface ModifyNativeGatewayServerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNetworkAccessStrategyRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 分组id */
+  GroupId: string;
+  /** 网络类型： - Open 公网- Internal 内网	（暂不支持） */
+  NetworkType: string;
+  /** ip地址 */
+  Vip: string;
+  /** 访问控制策略 */
+  AccessControl: NetworkAccessControl;
+}
+
+declare interface ModifyNetworkAccessStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNetworkBasicInfoRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 分组id */
+  GroupId: string;
+  /** 网络类型：- Open 公网ipv4- Open-IPv6 公网ipv6- Internal 内网 */
+  NetworkType: string;
+  /** ip地址 */
+  Vip: string;
+  /** 公网出流量带宽[1,2048]Mbps */
+  InternetMaxBandwidthOut?: number;
+  /** 负载均衡描述 */
+  Description?: string;
+}
+
+declare interface ModifyNetworkBasicInfoResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2284,6 +2368,8 @@ declare interface Tse {
   CreateCloudNativeAPIGatewayCanaryRule(data: CreateCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayCanaryRuleResponse>;
   /** 创建云原生网关证书 {@link CreateCloudNativeAPIGatewayCertificateRequest} {@link CreateCloudNativeAPIGatewayCertificateResponse} */
   CreateCloudNativeAPIGatewayCertificate(data: CreateCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayCertificateResponse>;
+  /** 创建公网网络配置 {@link CreateCloudNativeAPIGatewayPublicNetworkRequest} {@link CreateCloudNativeAPIGatewayPublicNetworkResponse} */
+  CreateCloudNativeAPIGatewayPublicNetwork(data: CreateCloudNativeAPIGatewayPublicNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayPublicNetworkResponse>;
   /** 创建云原生网关路由 {@link CreateCloudNativeAPIGatewayRouteRequest} {@link CreateCloudNativeAPIGatewayRouteResponse} */
   CreateCloudNativeAPIGatewayRoute(data: CreateCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayRouteResponse>;
   /** 创建云原生网关限流插件(路由) {@link CreateCloudNativeAPIGatewayRouteRateLimitRequest} {@link CreateCloudNativeAPIGatewayRouteRateLimitResponse} */
@@ -2304,6 +2390,8 @@ declare interface Tse {
   DeleteCloudNativeAPIGatewayCanaryRule(data: DeleteCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
   /** 删除云原生网关证书 {@link DeleteCloudNativeAPIGatewayCertificateRequest} {@link DeleteCloudNativeAPIGatewayCertificateResponse} */
   DeleteCloudNativeAPIGatewayCertificate(data: DeleteCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCertificateResponse>;
+  /** 删除公网网络配置 {@link DeleteCloudNativeAPIGatewayPublicNetworkRequest} {@link DeleteCloudNativeAPIGatewayPublicNetworkResponse} */
+  DeleteCloudNativeAPIGatewayPublicNetwork(data: DeleteCloudNativeAPIGatewayPublicNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayPublicNetworkResponse>;
   /** 删除云原生网关路由 {@link DeleteCloudNativeAPIGatewayRouteRequest} {@link DeleteCloudNativeAPIGatewayRouteResponse} */
   DeleteCloudNativeAPIGatewayRoute(data: DeleteCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayRouteResponse>;
   /** 删除云原生网关的限流插件(路由) {@link DeleteCloudNativeAPIGatewayRouteRateLimitRequest} {@link DeleteCloudNativeAPIGatewayRouteRateLimitResponse} */
@@ -2380,8 +2468,14 @@ declare interface Tse {
   ModifyCloudNativeAPIGatewayService(data: ModifyCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceResponse>;
   /** 修改云原生网关限流插件(服务) {@link ModifyCloudNativeAPIGatewayServiceRateLimitRequest} {@link ModifyCloudNativeAPIGatewayServiceRateLimitResponse} */
   ModifyCloudNativeAPIGatewayServiceRateLimit(data: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
+  /** 修改云原生API网关实例Konga网络配置 {@link ModifyConsoleNetworkRequest} {@link ModifyConsoleNetworkResponse} */
+  ModifyConsoleNetwork(data: ModifyConsoleNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsoleNetworkResponse>;
   /** 修改云原生API网关实例分组基础信息 {@link ModifyNativeGatewayServerGroupRequest} {@link ModifyNativeGatewayServerGroupResponse} */
   ModifyNativeGatewayServerGroup(data: ModifyNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServerGroupResponse>;
+  /** 修改云原生API网关实例Kong访问策略 {@link ModifyNetworkAccessStrategyRequest} {@link ModifyNetworkAccessStrategyResponse} */
+  ModifyNetworkAccessStrategy(data: ModifyNetworkAccessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkAccessStrategyResponse>;
+  /** 修改云原生API网关实例网络基本信息 {@link ModifyNetworkBasicInfoRequest} {@link ModifyNetworkBasicInfoResponse} */
+  ModifyNetworkBasicInfo(data: ModifyNetworkBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkBasicInfoResponse>;
   /** 修改云原生网关上游实例节点健康状态 {@link ModifyUpstreamNodeStatusRequest} {@link ModifyUpstreamNodeStatusResponse} */
   ModifyUpstreamNodeStatus(data: ModifyUpstreamNodeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUpstreamNodeStatusResponse>;
   /** 开启 WAF 防护 {@link OpenWafProtectionRequest} {@link OpenWafProtectionResponse} */

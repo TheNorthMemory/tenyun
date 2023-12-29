@@ -5875,7 +5875,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   Format: string;
   /** 自适应转码输出子流参数信息，最多输出10路子流。注意：各个子流的帧率必须保持一致；如果不一致，采用第一个子流的帧率作为输出帧率。 */
   StreamInfos: AdaptiveStreamTemplate[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -7301,7 +7301,7 @@ declare interface DescribeMediaProcessUsageDataRequest {
   StartTime: string;
   /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
   Type?: string;
@@ -7437,7 +7437,7 @@ declare interface DescribeReviewDetailsResponse {
 }
 
 declare interface DescribeReviewTemplatesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 审核模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
@@ -7625,7 +7625,7 @@ declare interface DescribeSuperPlayerConfigsResponse {
 declare interface DescribeTaskDetailRequest {
   /** 视频处理任务的任务 ID。 */
   TaskId: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -8865,7 +8865,7 @@ declare interface ProcessMediaByUrlResponse {
 declare interface ProcessMediaRequest {
   /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
   FileId: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 视频处理类型任务参数。 */
   MediaProcessTask?: MediaProcessTaskInput;
@@ -9075,7 +9075,7 @@ declare interface RemoveWatermarkResponse {
 declare interface ResetProcedureTemplateRequest {
   /** 任务流名字 */
   Name: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;

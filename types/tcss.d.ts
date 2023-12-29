@@ -604,7 +604,7 @@ declare interface ClusterInfoItem {
   CheckStatus?: string;
   /** 任务创建时间,检查时间 */
   TaskCreateTime?: string;
-  /** 接入状态 */
+  /** 接入状态:未接入: AccessedNone已防护: AccessedDefended未防护: AccessedInstalled部分防护: AccessedPartialDefence接入异常: AccessedException卸载异常: AccessedUninstallException接入中: AccessedInstalling卸载中: AccessedUninstalling */
   AccessedStatus?: string | null;
   /** 接入失败原因 */
   AccessedSubStatus?: string | null;
@@ -614,6 +614,8 @@ declare interface ClusterInfoItem {
   OffLineNodeCount?: number | null;
   /** 未安装agent节点数 */
   UnInstallAgentNodeCount?: number | null;
+  /** 计费核数 */
+  ChargeCoresCnt?: number | null;
 }
 
 /** 风险项是检查完之后，有问题的检测项，并且加了一些检查结果信息。 */
@@ -1358,6 +1360,10 @@ declare interface HostInfo {
   ClusterName?: string;
   /** 集群接入状态 */
   ClusterAccessedStatus?: string;
+  /** 计费核数 */
+  ChargeCoresCnt?: number;
+  /** 防护状态:已防护: Defended未防护: UnDefended */
+  DefendStatus?: string;
 }
 
 /** 镜像自动授权任务信息 */
@@ -5755,7 +5761,7 @@ declare interface DescribeAssetImageRegistryListExportRequest {
 
 declare interface DescribeAssetImageRegistryListExportResponse {
   /** excel文件下载地址 */
-  DownloadUrl: string | null;
+  DownloadUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6933,7 +6939,7 @@ declare interface DescribeExportJobDownloadURLResponse {
 }
 
 declare interface DescribeExportJobManageListRequest {
-  /** 过滤条件。ExportStatus- string -是否必填: 否 - 导出状态 RUNNING: 导出中 SUCCESS:导出完成 FAILURE:失败ExportSource- string -是否必填: 否 - 导出来源 LocalImage: 本地镜像 */
+  /** 过滤条件。ExportStatus- string -是否必填: 否 - 导出状态 RUNNING: 导出中 SUCCESS:导出完成 FAILURE:失败ExportSource- string -是否必填: 否 - 导出来源 LocalImage: 本地镜像 RegistryImage: 仓库镜像 */
   Filters?: RunTimeFilters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6947,9 +6953,9 @@ declare interface DescribeExportJobManageListRequest {
 
 declare interface DescribeExportJobManageListResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务列表 */
-  List: ExportJobInfo[];
+  List?: ExportJobInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

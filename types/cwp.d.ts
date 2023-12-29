@@ -8243,7 +8243,7 @@ declare interface DescribeBaselineItemIgnoreListResponse {
 }
 
 declare interface DescribeBaselineItemInfoRequest {
-  /** ItemId - int64 - 是否必填：否 - 项IdPolicyId - int64 - 是否必填：否 - 项IdLevel - int - 是否必填：否 - 风险等级ItemName - string - 是否必填：否 - 检测项名字RuleId - int - 是否必填：否 - 规则Id */
+  /** ItemId - int64 - 是否必填：否 - 项IdLevel - int - 是否必填：否 - 风险等级ItemName - string - 是否必填：否 - 检测项名字RuleId - int - 是否必填：否 - 规则Id */
   Filters?: Filter[];
   /** 限制条数,默认10,最大100 */
   Limit?: number;
@@ -8257,9 +8257,9 @@ declare interface DescribeBaselineItemInfoRequest {
 
 declare interface DescribeBaselineItemInfoResponse {
   /** 结果列表 */
-  List: BaselineItemInfo[];
+  List?: BaselineItemInfo[];
   /** 总条目数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14593,25 +14593,27 @@ declare interface SyncAssetScanResponse {
 }
 
 declare interface SyncBaselineDetectSummaryRequest {
+  /** 用于计算检测中和进度的任务ID集合，一般不用传入 */
+  TaskIds?: number[];
 }
 
 declare interface SyncBaselineDetectSummaryResponse {
   /** 处理进度 */
-  ProgressRate: number;
+  ProgressRate?: number;
   /** 未通过策略总数 */
-  NotPassPolicyCount: number;
+  NotPassPolicyCount?: number;
   /** 主机总数 */
-  HostCount: number;
+  HostCount?: number;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 1:即将进行首次扫描 0:已经扫描过了 */
-  WillFirstScan: number;
+  WillFirstScan?: number;
   /** 正在检测的任务ID */
-  DetectingTaskIds: number[];
+  DetectingTaskIds?: number[];
   /** 扫描中剩余时间(分钟) */
-  LeftMins: number;
+  LeftMins?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

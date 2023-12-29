@@ -324,6 +324,8 @@ declare interface Product {
   Ext?: Ext | null;
   /** 商户名称 */
   MerchantName?: string;
+  /** 认证状态 */
+  CertState?: number | null;
 }
 
 /** 企业配额信息 */
@@ -354,6 +356,8 @@ declare interface Quota {
   TrackType?: number | null;
   /** 开通版本 lite:轻量版, basic:基础版, standard:标准版 */
   Version?: string | null;
+  /** 是否开启企业认证 */
+  ProductCertify?: number | null;
 }
 
 /** 原始扫码日志 */
@@ -583,7 +587,7 @@ declare interface CreateCodeBatchRequest {
   BatchId?: string;
   /** 备注 */
   Remark?: string;
-  /** 模版ID，或者活动ID */
+  /** 模板ID，或者活动ID */
   MpTpl?: string;
   /** 克隆批次ID，同时会复制溯源信息 */
   CloneId?: string;
@@ -1239,13 +1243,15 @@ declare interface DescribeProductsRequest {
   MerchantId?: string;
   /** 企业ID */
   CorpId?: number;
+  /** 认证状态 */
+  CertState?: number;
 }
 
 declare interface DescribeProductsResponse {
   /** 商品列表 */
-  Products: Product[] | null;
+  Products?: Product[] | null;
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

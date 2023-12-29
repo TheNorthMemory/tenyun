@@ -179,7 +179,7 @@ declare interface CreateProbeTasksRequest {
   Nodes: string[];
   /** 拨测间隔 */
   Interval: number;
-  /** 拨测参数，如{}，详细可参考云拨测官方文档。 */
+  /** 拨测参数，详细可参考云拨测官方文档,链接:https://cloud.tencent.com/document/product/248/87308 */
   Parameters: string;
   /** 任务分类1 = PC 2 = Mobile */
   TaskCategory: number;

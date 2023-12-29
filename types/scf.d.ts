@@ -1101,8 +1101,8 @@ declare interface GetFunctionLogsResponse {
 }
 
 declare interface GetFunctionRequest {
-  /** 需要获取详情的函数名称 */
-  FunctionName: string;
+  /** 需要获取详情的函数名称，ResourceId和FunctionName只能传一个 */
+  FunctionName?: string;
   /** 函数的版本号默认值: $LATEST */
   Qualifier?: string;
   /** 函数所属命名空间默认值: default */
@@ -1751,6 +1751,8 @@ declare interface UpdateFunctionConfigurationRequest {
   DnsCache?: string;
   /** 内网访问配置 */
   IntranetConfig?: IntranetConfigIn;
+  /** 忽略系统日志上报 */
+  IgnoreSysLog?: boolean;
 }
 
 declare interface UpdateFunctionConfigurationResponse {
@@ -1866,7 +1868,7 @@ declare interface Scf {
   /** 获取函数异步事件状态 {@link GetAsyncEventStatusRequest} {@link GetAsyncEventStatusResponse} */
   GetAsyncEventStatus(data: GetAsyncEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsyncEventStatusResponse>;
   /** 获取函数详细信息 {@link GetFunctionRequest} {@link GetFunctionResponse} */
-  GetFunction(data: GetFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionResponse>;
+  GetFunction(data?: GetFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionResponse>;
   /** 获取函数代码下载地址 {@link GetFunctionAddressRequest} {@link GetFunctionAddressResponse} */
   GetFunctionAddress(data: GetFunctionAddressRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionAddressResponse>;
   /** 获取函数异步重试配置 {@link GetFunctionEventInvokeConfigRequest} {@link GetFunctionEventInvokeConfigResponse} */

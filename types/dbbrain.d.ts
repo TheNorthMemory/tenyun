@@ -3053,7 +3053,7 @@ declare namespace V20191016 {
   interface DescribeMailProfileResponse {
     /** 邮件配置详情。 */
     ProfileList?: UserProfile[] | null;
-    /** 邮件模版总数。 */
+    /** 邮件模板总数。 */
     TotalCount?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
