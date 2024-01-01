@@ -8607,9 +8607,9 @@ declare interface ModifySnapshotByTimeOffsetTemplateResponse {
 declare interface ModifySubAppIdInfoRequest {
   /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId: number;
-  /** 子应用名称，长度限制：40个字符。 */
+  /** 应用名称，长度限制：40个字符。 */
   Name?: string;
-  /** 子应用简介，长度限制： 300个字符。 */
+  /** 应用简介，长度限制： 300个字符。 */
   Description?: string;
 }
 
@@ -8621,7 +8621,7 @@ declare interface ModifySubAppIdInfoResponse {
 declare interface ModifySubAppIdStatusRequest {
   /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId: number;
-  /** 子应用状态，取值范围：On：启用。Off：停用。Destroyed：销毁。当前状态如果是 Destoying ，不能进行启用操作，需要等待销毁完成后才能重新启用。 */
+  /** 应用状态，取值范围：On：启用。Off：停用。Destroyed：销毁。当前状态如果是 Destoying ，不能进行启用操作，需要等待销毁完成后才能重新启用。 */
   Status: string;
 }
 
@@ -8897,7 +8897,7 @@ declare interface ProcessMediaResponse {
 declare interface PullEventsRequest {
   /** 保留字段，特殊用途时使用。 */
   ExtInfo?: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -9621,9 +9621,9 @@ declare interface Vod {
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
   /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
-  /** 修改子应用信息 {@link ModifySubAppIdInfoRequest} {@link ModifySubAppIdInfoResponse} */
+  /** 修改应用信息 {@link ModifySubAppIdInfoRequest} {@link ModifySubAppIdInfoResponse} */
   ModifySubAppIdInfo(data: ModifySubAppIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubAppIdInfoResponse>;
-  /** 修改子应用状态 {@link ModifySubAppIdStatusRequest} {@link ModifySubAppIdStatusResponse} */
+  /** 修改应用状态 {@link ModifySubAppIdStatusRequest} {@link ModifySubAppIdStatusResponse} */
   ModifySubAppIdStatus(data: ModifySubAppIdStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubAppIdStatusResponse>;
   /** 修改播放器配置 {@link ModifySuperPlayerConfigRequest} {@link ModifySuperPlayerConfigResponse} */
   ModifySuperPlayerConfig(data: ModifySuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySuperPlayerConfigResponse>;

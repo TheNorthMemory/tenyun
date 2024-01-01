@@ -372,6 +372,12 @@ declare interface JobEvent {
   SolutionLink: string | null;
 }
 
+/** 事件信息 */
+declare interface JobEventInfo {
+  /** 异常事件总数 */
+  ErrorEventTotal?: number | null;
+}
+
 /** 作业运行图 */
 declare interface JobGraph {
   /** 运行图的点集合 */
@@ -476,6 +482,8 @@ declare interface JobV1 {
   WorkSpaceName?: string | null;
   /** 作业标签 */
   Tags?: Tag[] | null;
+  /** 作业异常事件信息 */
+  EventInfo?: JobEventInfo | null;
 }
 
 /** 日志查询的每行日志信息 */
@@ -1437,6 +1445,8 @@ declare interface DescribeJobsRequest {
   Limit?: number;
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 查询额外的作业信息,例如 JobEventInfo */
+  ExtraResult?: string[];
 }
 
 declare interface DescribeJobsResponse {
