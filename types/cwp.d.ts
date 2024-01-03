@@ -6105,7 +6105,7 @@ declare interface CreateMaliciousRequestWhiteListResponse {
 }
 
 declare interface CreateMalwareWhiteListRequest {
-  /** 白名单模式； 0MD5白名单，1自定义 */
+  /** 白名单模式； 0 MD5白名单，1自定义 */
   Mode: number;
   /** quuid 列表 */
   QuuidList?: string[];
@@ -7169,7 +7169,7 @@ declare interface DescribeAssetMachineDetailResponse {
 }
 
 declare interface DescribeAssetMachineListRequest {
-  /** 过滤条件。MachineName 主机名称InstanceID 实例ID IP 内网IP或公网IPOsType - String - 是否必填：否 - windows或linuxCpuLoad - Int - 是否必填：否 - 0: 未知 1: 低负载2: 中负载 3: 高负载DiskLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%MemLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%2: 20%～50% 3: 50%～80%4: 80%～100%Quuid：主机QuuidOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
+  /** 过滤条件。MachineName 主机名称InstanceID 实例ID IP 内网IP或公网IPOsType - String - 是否必填：否 - windows或linuxCpuLoad - Int - 是否必填：否 - 0: 未知 1: 低负载	2: 中负载 3: 高负载DiskLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%	2: 20%～50% 3: 50%～80%	4: 80%～100%MemLoad - Int - 是否必填：否 - 0: 0%或未知 1: 0%～20%	2: 20%～50% 3: 50%～80%	4: 80%～100%Quuid：主机QuuidOs -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 ) */
   Filters?: Filter[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -7451,7 +7451,7 @@ declare interface DescribeAssetUserListRequest {
   Offset?: number;
   /** 排序方式，asc升序 或 desc降序 */
   Order?: string;
-  /** 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime]PasswordLockDays */
+  /** 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime|PasswordLockDays] */
   By?: string;
 }
 
@@ -9703,9 +9703,9 @@ declare interface DescribeMachineFileTamperRulesRequest {
 
 declare interface DescribeMachineFileTamperRulesResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 查询主机相关核心文件监控规则详情 */
-  List: MachineFileTamperRule[];
+  List?: MachineFileTamperRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12909,14 +12909,14 @@ declare interface ExportJavaMemShellPluginsResponse {
 }
 
 declare interface ExportJavaMemShellsRequest {
-  /** 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段 */
+  /** 过滤条件：InstanceID、IP、MachineName主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段 */
   Filters?: Filter[];
   /** 导出字段 */
   Where?: string[];
 }
 
 declare interface ExportJavaMemShellsResponse {
-  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  /** 任务ID,需要到接口“异步导出任务”https://cloud.tencent.com/document/product/296/52508 获取DownloadUrl下载地址 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

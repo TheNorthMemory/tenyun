@@ -14,6 +14,14 @@ declare interface ApplicationInfo {
   ConfigEnvironment?: string | null;
   /** 系统盘大小下限 */
   MinSystemDiskSize?: number | null;
+  /** 应用类型，目前该项取值可以为PRIVATE_APPLICATION或者PUBLIC_APPLICATION */
+  ApplicationType?: string | null;
+  /** 应用状态：CREATING-创建中；ONLINE -正常在线；DELETING -删除中；ARREARS - 欠费隔离示例值：ONLINE */
+  ApplicationState?: string | null;
+  /** 应用创建时间 */
+  CreateTime?: string | null;
+  /** 应用大小 */
+  ApplicationSize?: number | null;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -153,12 +161,16 @@ declare interface SystemDisk {
 declare interface DescribeApplicationsRequest {
   /** 应用id列表 */
   ApplicationIds?: string[];
-  /** 过滤器，跟ApplicationIds不能共用，支持的filter主要有：application-id，精确匹配scene-id，精确匹配application-name，模糊匹配 */
+  /** 过滤器，跟ApplicationIds不能共用，支持的filter主要有：application-id: 精确匹配;scene-id: 精确匹配;application-name: 模糊匹配;application-type: 精确匹配; */
   Filters?: Filter[];
   /** 偏移量，默认为0 */
   Offset?: number;
   /** 返回量，默认为20MC：1000用户：100 */
   Limit?: number;
+  /** 应用列表排序的依据字段。取值范围："CREATED_TIME"：依据应用的创建时间排序。 "APPLICATION_SIZE"：依据应用的大小排序。默认按应用的创建时间排序。 */
+  OrderField?: string;
+  /** 输出应用列表的排列顺序。取值范围："ASC"：升序排列。 "DESC"：降序排列。默认按降序排列。 */
+  Order?: string;
 }
 
 declare interface DescribeApplicationsResponse {

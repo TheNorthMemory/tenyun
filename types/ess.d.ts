@@ -2505,12 +2505,12 @@ declare interface DescribeIntegrationRolesRequest {
   Agent?: Agent;
   /** 查询的关键字段，支持Key-Value单值查询。可选键值对如下： Key:"RoleType"，查询角色类型，Values可选： **"1"**：查询系统角色**"2"**：查询自定义角色 Key:"RoleStatus"，查询角色状态，Values可选： **"1"**：查询启用角色**"2"**：查询禁用角色 Key:"IsGroupRole"，是否查询集团角色，Values可选： **"0"**：查询非集团角色**"1"**：查询集团角色 Key:"IsReturnPermissionGroup"，是否返回角色对应权限树，Values可选： **"0"**：接口不返回角色对应的权限树字段**"1"**：接口返回角色对应的权限树字段 */
   Filters?: Filter[];
-  /** 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大2000。 */
+  /** OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0,最大2000。分页参数, 需要limit, offset 配合使用例如:您希望得到第三页的数据, 且每页限制最多10条你可以使用 LIMIT 10 OFFSET 20 */
   Offset?: number;
 }
 
 declare interface DescribeIntegrationRolesResponse {
-  /** 指定分页返回的页码。页码从0开始，最大为2000。 */
+  /** OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0, 最大为2000分页参数, 需要limit, offset 配合使用例如:您希望得到第三页的数据, 且每页限制最多10条你可以使用 LIMIT 10 OFFSET 20 */
   Offset?: number;
   /** 指定分页每页返回的数据条数，单页最大支持 200。 */
   Limit?: number;

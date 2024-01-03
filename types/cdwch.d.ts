@@ -717,15 +717,17 @@ declare interface DescribeSpecRequest {
   PayMode?: string;
   /** 是否弹性ck */
   IsElastic?: boolean;
+  /** 是否是购买页面需要的spec */
+  CaseType?: number;
 }
 
 declare interface DescribeSpecResponse {
   /** zookeeper节点规格描述 */
-  CommonSpec: ResourceSpec[];
+  CommonSpec?: ResourceSpec[];
   /** 数据节点规格描述 */
-  DataSpec: ResourceSpec[];
+  DataSpec?: ResourceSpec[];
   /** 云盘列表 */
-  AttachCBSSpec: DiskSpec[] | null;
+  AttachCBSSpec?: DiskSpec[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

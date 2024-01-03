@@ -618,6 +618,98 @@ declare interface ClusterInfoItem {
   ChargeCoresCnt?: number | null;
 }
 
+/** 集群的节点信息 */
+declare interface ClusterNodeInfo {
+  /** 实例id */
+  InstanceId?: string;
+  /** 内网ip地址 */
+  PrivateIpAddresses?: string;
+  /** 节点的角色，Master、Work等 */
+  InstanceRole?: string;
+  /** 实例的状态（running 运行中，initializing 初始化中，failed 异常） */
+  InstanceState?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** agent安装状态 */
+  AgentStatus?: string | null;
+  /** 公网ip */
+  PublicIP?: string | null;
+  /** 节点ID */
+  HostID?: string | null;
+  /** 主机类型(普通节点情况) */
+  MachineType?: string | null;
+  /** 节点类型(NORMAL: 普通节点SUPER:超级节点) */
+  NodeType?: string | null;
+  /** uuid */
+  UUID?: string | null;
+  /** 计费核数 */
+  ChargeCoresCnt?: number | null;
+  /** 防护状态:已防护: Defended未防护: UnDefended */
+  DefendStatus?: string | null;
+}
+
+/** 集群的pod详细信息 */
+declare interface ClusterPodInfo {
+  /** Pod名称. */
+  PodName?: string;
+  /** Pod状态 */
+  Status?: string;
+  /** Pod IP */
+  PodIP?: string;
+  /** 节点内网Ip */
+  NodeLanIP?: string;
+  /** 所属的工作负载名字 */
+  WorkloadName?: string;
+  /** 所属工作负载类型 */
+  WorkloadKind?: string;
+  /** 所属集群名字 */
+  ClusterName?: string;
+  /** 所属集群ID */
+  ClusterId?: string;
+  /** 所属命名空间 */
+  Namespace?: string;
+  /** 所属地域 */
+  Region?: string;
+  /** 运行时间 */
+  Age?: string;
+  /** 创建时间 */
+  StartTime?: string;
+  /** 重启次数 */
+  Restarts?: number;
+  /** 关联的service名字 */
+  ServiceName?: string;
+  /** 关联的service数量 */
+  ServiceCount?: number;
+  /** 关联的容器名字 */
+  ContainerName?: string;
+  /** 关联的容器数量 */
+  ContainerCount?: number;
+  /** CPU占用率 */
+  CPU?: number;
+  /** 内存占用量 */
+  Memory?: number;
+  /** Pod标签 */
+  Labels?: string;
+  /** 集群状态 */
+  ClusterStatus?: string;
+  /** 工作负载标签 */
+  WorkloadLabels?: string;
+  /** 容器Id */
+  ContainerId?: string;
+  /** 主机名称 */
+  HostName?: string;
+  /** 主机Id */
+  HostId?: string;
+  /** 集群类型 */
+  ClusterType?: string;
+  /** abc */
+  NodeName?: string;
+  /** NORMAL：普通节点 SUPER：超级节点 */
+  NodeType?: string;
+  /** 计费核数 */
+  ChargeCoresCnt?: number;
+}
+
 /** 风险项是检查完之后，有问题的检测项，并且加了一些检查结果信息。 */
 declare interface ClusterRiskItem {
   /** 检测项相关信息 */
@@ -2892,6 +2984,86 @@ declare interface SoftQuotaDayInfo {
   PayTime: string;
   /** 计费核数(已废弃) */
   CoresCnt: number;
+}
+
+/** 超级节点信息 */
+declare interface SuperNodeListItem {
+  /** 超级节点ID */
+  NodeID?: string;
+  /** 超级节点名称 */
+  NodeName?: string;
+  /** 所属集群名 */
+  ClusterName?: string;
+  /** 所属集群ID */
+  ClusterID?: string;
+  /** 节点状态:Running,Ready,Notready,Initializing,Failed,Error */
+  Status?: string;
+  /** 子网ID */
+  SubNetID?: string;
+  /** 子网名称 */
+  SubNetName?: string;
+  /** 子网网段 */
+  SubNetCidr?: string;
+  /** 可用区ID */
+  ZoneID?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 关联pod数 */
+  RelatePodCount?: number;
+  /** 关联容器数 */
+  RelateContainerCount?: number;
+  /** agent安装状态UNINSTALL:未安装;INSTALLED:已安装;INSTALLING:安装中; */
+  AgentStatus?: string;
+  /** 节点唯一id */
+  NodeUniqueID?: string;
+  /** 集群接入状态 */
+  ClusterAccessedStatus?: string;
+  /** 计费核数 */
+  ChargeCoresCnt?: number;
+  /** 防护状态:已防护: Defended未防护: UnDefended */
+  DefendStatus?: string;
+}
+
+/** 超级节点Pod列表Item信息 */
+declare interface SuperNodePodListItem {
+  /** pod名称 */
+  PodName?: string;
+  /** podIP */
+  PodIP?: string;
+  /** 节点唯一id */
+  NodeUniqueID?: string;
+  /** 运行状态 */
+  Status?: string;
+  /** cpu需求核数 */
+  CpuRequest?: number;
+  /** cpu限制核数 */
+  CpuLimit?: number;
+  /** 内存需求大小 */
+  MemRequest?: number;
+  /** 内存限制大小 */
+  MemLimit?: number;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 工作负载名称 */
+  DeploymentName?: string;
+  /** 工作负载id */
+  DeploymentID?: string;
+  /** 启动时间 */
+  StartTime?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 关联容器个数 */
+  RelateContainerCount?: number;
+  /** 运行时间 */
+  RunningTime?: string;
+  /** PodUid */
+  PodUid?: string;
+  /** 计费核数 */
+  ChargeCoresCnt?: number;
+  /** 防护状态 */
+  DefendStatus?: string;
 }
 
 /** 支持防御的漏洞 */
@@ -6322,6 +6494,28 @@ declare interface DescribeAssetSummaryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAssetSuperNodeListRequest {
+  /** 过滤条件。NodeID- String - 是否必填：否 - ID NodeName- String - 是否必填：否 - 超级节点名称 SubnetName- String - 是否必填：否 - VPC子网 AgentStatus- String - 是否必填：否 - 安装状态UNINSTALL:未安装;INSTALLED:已安装;INSTALLING:安装中; */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序字段 */
+  By?: string;
+  /** 排序方式 asc,desc */
+  Order?: string;
+}
+
+declare interface DescribeAssetSuperNodeListResponse {
+  /** 超级节点列表 */
+  List?: SuperNodeListItem[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAssetSyncLastTimeRequest {
 }
 
@@ -6450,6 +6644,30 @@ declare interface DescribeClusterDetailResponse {
   IngressCount?: number;
   /** 主节点的ip列表 */
   MasterIps?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterNodesRequest {
+  /** 集群Id,不输入表示查询所有 */
+  ClusterId?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 每次查询的最大记录数量 */
+  Limit?: number;
+  /** Name 可取值：DefendStatus（防护状态）:	Defended 已防护	UnDefended 未防护AgentStatus (容器agent状态): OFFLINE 离线 ONLINE 在线 UNINSTALL 未安装InstanceState (节点状态): Running 运行中 Ready 准备 Notready 未准备好 Initializing 初始化 Failed 失败 Error 错误InstanceRole (节点角色) WORKER 工作节点 MASTER_ETCD 主节点 SUPER 超级节点 */
+  Filters?: ComplianceFilters[];
+  /** 排序字段 */
+  By?: string;
+  /** 排序方式 asc,desc */
+  Order?: string;
+}
+
+declare interface DescribeClusterNodesResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 节点列表 */
+  ClusterNodeList?: ClusterNodeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8314,6 +8532,28 @@ declare interface DescribeSecLogVasInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSuperNodePodListRequest {
+  /** 过滤条件。NodeUniqueID- String - 是否必填：否 - 节点唯一id PodName- String - 是否必填：否 - Pod示例名称 PodIP- String - 是否必填：否 - POD IP Namespace- String - 是否必填：否 - 命名空间 Deployment- String - 是否必填：否 - 所属工作负载 Status- String - 是否必填：否 - 状态 */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序字段 */
+  By?: string;
+  /** 排序方式 asc,desc */
+  Order?: string;
+}
+
+declare interface DescribeSuperNodePodListResponse {
+  /** 列表 */
+  List?: SuperNodePodListItem[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSupportDefenceVulRequest {
   /** 过滤条件。Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低CVEID- string - 是否必填：否 - CVE编号Name- string -是否必填: 否 - 漏洞名称 */
   Filters?: RunTimeFilters[];
@@ -8468,6 +8708,34 @@ declare interface DescribeUserClusterResponse {
   TotalCount?: number;
   /** 集群的详细信息 */
   ClusterInfoList?: ClusterInfoItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserPodListRequest {
+  /** 集群Id,不填表示获取用户所有pod */
+  ClusterId?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 每次查询的最大记录数量 */
+  Limit?: number;
+  /** Name 可取值：ClusterId集群id,Namespace命名空间等 */
+  Filters?: ComplianceFilters[];
+  /** 排序字段 */
+  By?: string;
+  /** 排序方式 asc,desc */
+  Order?: string;
+  /** Service名称 */
+  ServiceName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+}
+
+declare interface DescribeUserPodListResponse {
+  /** Pod列表详细信息 */
+  PodList?: ClusterPodInfo[];
+  /** Pod列表总数量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10513,6 +10781,8 @@ declare interface Tcss {
   DescribeAssetProcessList(data?: DescribeAssetProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessListResponse>;
   /** 查询账户容器、镜像等统计信息 {@link DescribeAssetSummaryRequest} {@link DescribeAssetSummaryResponse} */
   DescribeAssetSummary(data?: DescribeAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSummaryResponse>;
+  /** 查询超级节点列表 {@link DescribeAssetSuperNodeListRequest} {@link DescribeAssetSuperNodeListResponse} */
+  DescribeAssetSuperNodeList(data?: DescribeAssetSuperNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSuperNodeListResponse>;
   /** 查询资产同步最近时间 {@link DescribeAssetSyncLastTimeRequest} {@link DescribeAssetSyncLastTimeResponse} */
   DescribeAssetSyncLastTime(data?: DescribeAssetSyncLastTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncLastTimeResponse>;
   /** 查询web服务列表 {@link DescribeAssetWebServiceListRequest} {@link DescribeAssetWebServiceListResponse} */
@@ -10523,6 +10793,8 @@ declare interface Tcss {
   DescribeCheckItemList(data?: DescribeCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckItemListResponse>;
   /** 查询单个集群的详细信息 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
+  /** 查询集群节点信息 {@link DescribeClusterNodesRequest} {@link DescribeClusterNodesResponse} */
+  DescribeClusterNodes(data?: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
   /** 查询用户集群资产总览 {@link DescribeClusterSummaryRequest} {@link DescribeClusterSummaryResponse} */
   DescribeClusterSummary(data?: DescribeClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterSummaryResponse>;
   /** 安全合规查询某个资产的详情 {@link DescribeComplianceAssetDetailInfoRequest} {@link DescribeComplianceAssetDetailInfoResponse} */
@@ -10711,6 +10983,8 @@ declare interface Tcss {
   DescribeSecLogKafkaUIN(data?: DescribeSecLogKafkaUINRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogKafkaUINResponse>;
   /** 查询安全日志商品信息 {@link DescribeSecLogVasInfoRequest} {@link DescribeSecLogVasInfoResponse} */
   DescribeSecLogVasInfo(data?: DescribeSecLogVasInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogVasInfoResponse>;
+  /** 查询超级节点pod列表 {@link DescribeSuperNodePodListRequest} {@link DescribeSuperNodePodListResponse} */
+  DescribeSuperNodePodList(data?: DescribeSuperNodePodListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuperNodePodListResponse>;
   /** 查询支持防御的漏洞列表 {@link DescribeSupportDefenceVulRequest} {@link DescribeSupportDefenceVulResponse} */
   DescribeSupportDefenceVul(data?: DescribeSupportDefenceVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportDefenceVulResponse>;
   /** 查询系统漏洞列表 {@link DescribeSystemVulListRequest} {@link DescribeSystemVulListResponse} */
@@ -10725,6 +10999,8 @@ declare interface Tcss {
   DescribeUnfinishRefreshTask(data?: DescribeUnfinishRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnfinishRefreshTaskResponse>;
   /** 用户集群资产查询 {@link DescribeUserClusterRequest} {@link DescribeUserClusterResponse} */
   DescribeUserCluster(data?: DescribeUserClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClusterResponse>;
+  /** 获取用户的pod列表 {@link DescribeUserPodListRequest} {@link DescribeUserPodListResponse} */
+  DescribeUserPodList(data?: DescribeUserPodListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserPodListResponse>;
   /** 查询增值服务需购买信息 {@link DescribeValueAddedSrvInfoRequest} {@link DescribeValueAddedSrvInfoResponse} */
   DescribeValueAddedSrvInfo(data?: DescribeValueAddedSrvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeValueAddedSrvInfoResponse>;
   /** 查询木马自动隔离样本详情 {@link DescribeVirusAutoIsolateSampleDetailRequest} {@link DescribeVirusAutoIsolateSampleDetailResponse} */

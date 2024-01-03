@@ -1231,7 +1231,7 @@ declare interface ChannelCancelUserAutoSignEnableUrlResponse {
 }
 
 declare interface ChannelCreateBatchCancelFlowUrlRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
   /** 要撤销的合同流程ID列表，最多100个，超过100不处理 */
   FlowIds: string[];
@@ -1277,7 +1277,7 @@ declare interface ChannelCreateBatchQuickSignUrlResponse {
 }
 
 declare interface ChannelCreateBatchSignUrlRequest {
-  /** 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：`请确保和合同中填入的一致` */
   Name: string;
@@ -1389,7 +1389,7 @@ declare interface ChannelCreateFlowApproversResponse {
 }
 
 declare interface ChannelCreateFlowByFilesRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId */
   Agent?: Agent;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName?: string;
@@ -2167,7 +2167,7 @@ declare interface CreateChannelFlowEvidenceReportResponse {
 }
 
 declare interface CreateChannelOrganizationInfoChangeUrlRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.ProxyOrganizationOpenId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
   /** 企业信息变更类型，可选类型如下：**1**：企业超管变更, 可以将超管换成同企业的其他员工**2**：企业基础信息变更, 可以改企业名称 , 所在地址 , 法人名字等信息 */
   ChangeType: number;
@@ -2319,7 +2319,7 @@ declare interface CreateSealByImageResponse {
 }
 
 declare interface CreateSignUrlsRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
   /** 合同流程ID数组，最多支持100个。注: `该参数和合同组编号必须二选一` */
   FlowIds?: string[];
@@ -2481,7 +2481,7 @@ declare interface DescribeExtendedServiceAuthDetailResponse {
 }
 
 declare interface DescribeExtendedServiceAuthInfoRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
 }
 
@@ -2619,7 +2619,7 @@ declare interface GetDownloadFlowUrlResponse {
 }
 
 declare interface ModifyExtendedServiceRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.ProxyOrganizationOpenId第三方平台子客企业标识: Agent. ProxyOperator.OpenId第三方平台子客企业中的员工标识: Agent.AppId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
   /** 扩展服务类型AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名 */
   ServiceType: string;
@@ -2637,7 +2637,7 @@ declare interface ModifyExtendedServiceResponse {
 }
 
 declare interface OperateChannelTemplateRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。第三方平台子客企业中的员工标识: Agent.AppId */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId */
   Agent: Agent;
   /** 操作类型，可取值如下:SELECT: 查询DELETE: 删除UPDATE: 更新 */
   OperateType: string;

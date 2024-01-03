@@ -169,25 +169,25 @@ declare interface DedicatedClusterOrderItem {
 /** 专用集群配置 */
 declare interface DedicatedClusterType {
   /** 配置id */
-  DedicatedClusterTypeId: string;
+  DedicatedClusterTypeId?: string;
   /** 配置描述，对应描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 配置名称，对应计算资源类型 */
-  Name: string;
+  Name?: string;
   /** 创建配置的时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 支持的存储类型列表 */
-  SupportedStorageType: string[];
+  SupportedStorageType?: string[];
   /** 支持的上连交换机的链路传输速率 */
-  SupportedUplinkGiB: number[];
+  SupportedUplinkGiB?: number[];
   /** 支持的实例族列表 */
-  SupportedInstanceFamily: string[];
+  SupportedInstanceFamily?: string[];
   /** 地板承重要求(KG) */
-  Weight: number;
+  Weight?: number;
   /** 功率要求(KW) */
-  PowerDrawKva: number;
-  /** 显示计算资源规格详情，存储等资源不显示；对应规格 */
-  ComputeFormatDesc: string;
+  PowerDrawKva?: number;
+  /** 显示计算资源规格详情，存储等资源不显示 */
+  ComputeFormatDesc?: string;
 }
 
 /** DedicatedClusterType => (Id, Count) */
@@ -204,6 +204,20 @@ declare interface DetailData {
   Timestamps?: number[] | null;
   /** 对应的具体值 */
   Values?: number[] | null;
+}
+
+/** 宿主机资源的概览详细信息。 */
+declare interface HostDetailInfo {
+  /** 类型族 */
+  HostTypeFamily?: string | null;
+  /** 总CPU */
+  CpuTotal?: number | null;
+  /** 可用CPU */
+  CpuAvailable?: number | null;
+  /** 总内存 */
+  MemTotal?: number | null;
+  /** 可用内存 */
+  MemAvailable?: number | null;
 }
 
 /** CDC宿主机的详细信息 */
@@ -539,9 +553,9 @@ declare interface DescribeDedicatedClusterHostsRequest {
 
 declare interface DescribeDedicatedClusterHostsResponse {
   /** 宿主机信息 */
-  HostInfoSet: HostInfo[] | null;
+  HostInfoSet?: HostInfo[] | null;
   /** 宿主机总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -589,17 +603,23 @@ declare interface DescribeDedicatedClusterOverviewRequest {
 
 declare interface DescribeDedicatedClusterOverviewResponse {
   /** 云服务器数量 */
-  CvmCount: number;
+  CvmCount?: number;
   /** 宿主机数量 */
-  HostCount: number;
+  HostCount?: number;
   /** vpn通道状态 */
-  VpnConnectionState: string | null;
+  VpnConnectionState?: string | null;
   /** vpn网关监控数据 */
-  VpngwBandwidthData: VpngwBandwidthData | null;
+  VpngwBandwidthData?: VpngwBandwidthData | null;
   /** 本地网关信息 */
-  LocalNetInfo: LocalNetInfo | null;
+  LocalNetInfo?: LocalNetInfo | null;
   /** vpn网关通道监控数据 */
-  VpnConnectionBandwidthData: VpngwBandwidthData[] | null;
+  VpnConnectionBandwidthData?: VpngwBandwidthData[] | null;
+  /** 宿主机资源概览信息 */
+  HostDetailInfo?: HostDetailInfo[] | null;
+  /** 热备宿主机数量 */
+  HostStandbyCount?: number | null;
+  /** 普通宿主机数量 */
+  HostNormalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -817,13 +837,13 @@ declare interface Cdc {
   DescribeDedicatedClusterCosCapacity(data: DescribeDedicatedClusterCosCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterCosCapacityResponse>;
   /** 查询专用集群内宿主机的统计信息 {@link DescribeDedicatedClusterHostStatisticsRequest} {@link DescribeDedicatedClusterHostStatisticsResponse} */
   DescribeDedicatedClusterHostStatistics(data: DescribeDedicatedClusterHostStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterHostStatisticsResponse>;
-  /** 专用集群宿主机信息 {@link DescribeDedicatedClusterHostsRequest} {@link DescribeDedicatedClusterHostsResponse} */
+  /** 查询专用集群宿主机信息 {@link DescribeDedicatedClusterHostsRequest} {@link DescribeDedicatedClusterHostsResponse} */
   DescribeDedicatedClusterHosts(data: DescribeDedicatedClusterHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterHostsResponse>;
   /** 查询专用集群支持的实例规格列表 {@link DescribeDedicatedClusterInstanceTypesRequest} {@link DescribeDedicatedClusterInstanceTypesResponse} */
   DescribeDedicatedClusterInstanceTypes(data: DescribeDedicatedClusterInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterInstanceTypesResponse>;
   /** 查询专用集群订单列表 {@link DescribeDedicatedClusterOrdersRequest} {@link DescribeDedicatedClusterOrdersResponse} */
   DescribeDedicatedClusterOrders(data?: DescribeDedicatedClusterOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOrdersResponse>;
-  /** 专用集群概览信息 {@link DescribeDedicatedClusterOverviewRequest} {@link DescribeDedicatedClusterOverviewResponse} */
+  /** 查询专用集群概览信息 {@link DescribeDedicatedClusterOverviewRequest} {@link DescribeDedicatedClusterOverviewResponse} */
   DescribeDedicatedClusterOverview(data: DescribeDedicatedClusterOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOverviewResponse>;
   /** 查询专有集群配置列表 {@link DescribeDedicatedClusterTypesRequest} {@link DescribeDedicatedClusterTypesResponse} */
   DescribeDedicatedClusterTypes(data?: DescribeDedicatedClusterTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterTypesResponse>;
