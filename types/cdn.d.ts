@@ -2340,7 +2340,7 @@ declare interface StatisticItem {
   UnBlockTime?: number | null;
   /** 带宽、流量阈值 */
   BpsThreshold?: number | null;
-  /** 关闭方式 返回404:RETURN_404, dns回源：RESOLVE_DNS_TO_ORIGIN */
+  /** 关闭方式 返回404:RETURN_404 */
   CounterMeasure?: string | null;
   /** 触发提醒阈值百分比 */
   AlertPercentage?: number | null;

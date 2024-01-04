@@ -3362,6 +3362,32 @@ declare interface ValueUnitItem {
   Unit?: PhysicalBaseItem | null;
 }
 
+declare interface ImageMaskAsyncGetResultRequest {
+  /** 异步任务ID */
+  TaskID: string;
+}
+
+declare interface ImageMaskAsyncGetResultResponse {
+  /** 脱敏后图片的base64编码 */
+  MaskedImage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImageMaskAsyncRequest {
+  /** 图片信息,目前只支持传图片base64 */
+  Image: ImageInfo;
+  /** 图片脱敏选项, 不传默认都脱敏 */
+  MaskFlag?: ImageMaskFlags;
+}
+
+declare interface ImageMaskAsyncResponse {
+  /** 加密任务ID */
+  TaskID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImageMaskRequest {
   /** 图片信息,目前只支持传图片base64 */
   Image: ImageInfo;
@@ -3505,6 +3531,10 @@ declare interface Mrs {
   (): Versions;
   /** 医疗报告图片脱敏接口 {@link ImageMaskRequest} {@link ImageMaskResponse} */
   ImageMask(data: ImageMaskRequest, config?: AxiosRequestConfig): AxiosPromise<ImageMaskResponse>;
+  /** 图片脱敏-异步接口 {@link ImageMaskAsyncRequest} {@link ImageMaskAsyncResponse} */
+  ImageMaskAsync(data: ImageMaskAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<ImageMaskAsyncResponse>;
+  /** 图片脱敏-异步获取结果接口 {@link ImageMaskAsyncGetResultRequest} {@link ImageMaskAsyncGetResultResponse} */
+  ImageMaskAsyncGetResult(data: ImageMaskAsyncGetResultRequest, config?: AxiosRequestConfig): AxiosPromise<ImageMaskAsyncGetResultResponse>;
   /** 图片分类接口 {@link ImageToClassRequest} {@link ImageToClassResponse} */
   ImageToClass(data: ImageToClassRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToClassResponse>;
   /** 图片结构化接口 {@link ImageToObjectRequest} {@link ImageToObjectResponse} */

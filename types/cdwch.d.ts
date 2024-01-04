@@ -132,6 +132,16 @@ declare interface DiskSpec {
   DiskCount: number;
 }
 
+/** 集群分组信息描述 */
+declare interface GroupInfo {
+  /** 分组名称 */
+  GroupName: string;
+  /** 分片变量名称 */
+  ShardName: string;
+  /** 副本变量名称 */
+  ReplicaName: string;
+}
+
 /** 集群配置信息 */
 declare interface InstanceConfigInfo {
   /** 配置项名称 */
@@ -260,6 +270,30 @@ declare interface InstanceInfo {
   EsIndexPassword?: string | null;
   /** true */
   HasEsIndex?: boolean | null;
+}
+
+/** 实例节点描述信息 */
+declare interface InstanceNode {
+  /** IP地址 */
+  Ip: string;
+  /** 机型，如 S1 */
+  Spec: string;
+  /** cpu核数 */
+  Core: number;
+  /** 内存大小 */
+  Memory: number;
+  /** 磁盘类型 */
+  DiskType: string;
+  /** 磁盘大小 */
+  DiskSize: number;
+  /** 所属clickhouse cluster名称 */
+  Cluster: string;
+  /** 节点所属的分组信息 */
+  NodeGroups: GroupInfo[];
+  /** VPC IP */
+  Rip: string | null;
+  /** ture的时候表示该节点上部署了chproxy进程 */
+  IsCHProxy: boolean | null;
 }
 
 /** 集群状态抽象后的结构体 */
@@ -638,6 +672,30 @@ declare interface DescribeInstanceKeyValConfigsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceNodesRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+  /** 集群角色类型，默认为 "data"数据节点 */
+  NodeRole?: string;
+  /** 分页参数，第一页为0，第二页为10 */
+  Offset?: number;
+  /** 分页参数，分页步长，默认为10 */
+  Limit?: number;
+  /** 展现策略，All时显示所有 */
+  DisplayPolicy?: string;
+  /** 当true的时候返回所有节点，即Limit无限大 */
+  ForceAll?: boolean;
+}
+
+declare interface DescribeInstanceNodesResponse {
+  /** 总数 */
+  TotalCount: number;
+  /** 实例节点总数 */
+  InstanceNodesList: InstanceNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -935,6 +993,8 @@ declare interface Cdwch {
   DescribeInstanceClusters(data: DescribeInstanceClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceClustersResponse>;
   /** 获取参数列表 {@link DescribeInstanceKeyValConfigsRequest} {@link DescribeInstanceKeyValConfigsResponse} */
   DescribeInstanceKeyValConfigs(data: DescribeInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceKeyValConfigsResponse>;
+  /** 获取实例节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
+  DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
   /** 获取实例shard信息列表 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
   /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */

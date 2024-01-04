@@ -12916,7 +12916,7 @@ declare interface ExportJavaMemShellsRequest {
 }
 
 declare interface ExportJavaMemShellsResponse {
-  /** 任务ID,需要到接口“异步导出任务”https://cloud.tencent.com/document/product/296/52508 获取DownloadUrl下载地址 */
+  /** 任务ID,需要到接口 异步导出任务获取DownloadUrl下载地址 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

@@ -1666,15 +1666,15 @@ declare interface GetMetaTableRequest {
 declare interface GetMetaTableResponse {
   /** 元数据表唯一标识 */
   SerialId?: string;
-  /** Catalog名 */
+  /** 目录名 */
   Catalog?: string;
-  /** Database名 */
+  /** 库名 */
   Database?: string;
-  /** Table名 */
+  /** 表名 */
   Table?: string;
   /** 建表语句,使用 Base64 编码。例如Q1JFQVRFIFRBQkxFIGRhdGFnZW5fc291cmNlX3RhYmxlICggCiAgICBpZCBJTlQsIAogICAgbmFtZSBTVFJJTkcgCikgV0lUSCAoCidjb25uZWN0b3InPSdkYXRhZ2VuJywKJ3Jvd3MtcGVyLXNlY29uZCcgPSAnMScKKTs= */
   DDL?: string;
-  /** 场景时间 */
+  /** 创建时间 */
   CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
