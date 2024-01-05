@@ -880,7 +880,7 @@ declare interface IPGroup {
   GroupId: number;
   /** 组名称。 */
   Name: string;
-  /** IP 组内容，可以填入 IP 及 IP 掩码。 */
+  /** IP 组内容，仅支持 IP 及 IP 掩码。 */
   Content: string[];
 }
 

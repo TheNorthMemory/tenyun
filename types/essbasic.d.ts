@@ -1203,7 +1203,7 @@ declare interface ChannelCancelFlowResponse {
 declare interface ChannelCancelMultiFlowSignQRCodeRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 需要取消签署的二维码ID，为32位字符串。由[创建一码多扫流程签署二维码](https://qian.tencent.com/developers/partnerApis/templates/ChannelCreateMultiFlowSignQRCode)返回 */
+  /** 需要取消的签署码ID，为32位字符串。由[创建一码多签签署码](https://qian.tencent.com/developers/partnerApis/templates/ChannelCreateMultiFlowSignQRCode)返回 */
   QrCodeId: string;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1564,9 +1564,9 @@ declare interface ChannelCreateMultiFlowSignQRCodeRequest {
 }
 
 declare interface ChannelCreateMultiFlowSignQRCodeResponse {
-  /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
+  /** 一码多签签署码的基本信息，用户可扫描该二维码进行签署操作。 */
   QrCode?: SignQrCode;
-  /** 流程签署二维码的签署信息，适用于客户系统整合二维码功能。通过链接，用户可直接访问电子签名小程序并签署合同。 */
+  /** 一码多签签署码链接信息，适用于客户系统整合二维码功能。通过链接，用户可直接访问电子签名小程序并签署合同。 */
   SignUrls?: SignUrl;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4293,7 +4293,7 @@ declare interface Essbasic {
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
   /** 撤销合同流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */
   ChannelCancelFlow(data: ChannelCancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelFlowResponse>;
-  /** 取消一码多扫二维码 {@link ChannelCancelMultiFlowSignQRCodeRequest} {@link ChannelCancelMultiFlowSignQRCodeResponse} */
+  /** 取消一码多签签署码 {@link ChannelCancelMultiFlowSignQRCodeRequest} {@link ChannelCancelMultiFlowSignQRCodeResponse} */
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
   /** 撤销自动签开通链接 {@link ChannelCancelUserAutoSignEnableUrlRequest} {@link ChannelCancelUserAutoSignEnableUrlResponse} */
   ChannelCancelUserAutoSignEnableUrl(data: ChannelCancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelUserAutoSignEnableUrlResponse>;
@@ -4323,7 +4323,7 @@ declare interface Essbasic {
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
   /** 获取个人用户H5签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
   ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
-  /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
+  /** 创建一码多签签署码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
   /** 获取企业签署合同web页面 {@link ChannelCreateOrganizationBatchSignUrlRequest} {@link ChannelCreateOrganizationBatchSignUrlResponse} */
   ChannelCreateOrganizationBatchSignUrl(data: ChannelCreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateOrganizationBatchSignUrlResponse>;

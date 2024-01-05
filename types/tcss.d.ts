@@ -7885,27 +7885,29 @@ declare interface DescribePurchaseStateInfoRequest {
 
 declare interface DescribePurchaseStateInfoResponse {
   /** 0：可申请试用可购买；1：只可购买(含试用审核不通过和试用过期)；2：试用生效中；3：专业版生效中；4：专业版过期 */
-  State: number;
+  State?: number;
   /** 总核数 */
-  CoresCnt: number | null;
+  CoresCnt?: number | null;
   /** 已购买核数 */
-  AuthorizedCoresCnt: number | null;
+  AuthorizedCoresCnt?: number | null;
   /** 镜像数 */
-  ImageCnt: number | null;
+  ImageCnt?: number | null;
   /** 已授权镜像数 */
-  AuthorizedImageCnt: number | null;
+  AuthorizedImageCnt?: number | null;
   /** 已购买镜像授权数 */
-  PurchasedAuthorizedCnt: number | null;
+  PurchasedAuthorizedCnt?: number | null;
   /** 过期时间 */
-  ExpirationTime: string | null;
+  ExpirationTime?: string | null;
   /** 0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置) */
-  AutomaticRenewal: number | null;
+  AutomaticRenewal?: number | null;
   /** 试用期间赠送镜像授权数，可能会过期 */
-  GivenAuthorizedCnt: number | null;
+  GivenAuthorizedCnt?: number | null;
   /** 起始时间 */
-  BeginTime: string | null;
+  BeginTime?: string | null;
   /** 子状态(具体意义依据State字段而定)State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁) */
-  SubState: string | null;
+  SubState?: string | null;
+  /** 计费key */
+  InquireKey?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

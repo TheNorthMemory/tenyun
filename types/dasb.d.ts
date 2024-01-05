@@ -154,6 +154,8 @@ declare interface Command {
   DeviceDepartmentId?: string | null;
   /** 设备部门name */
   DeviceDepartmentName?: string | null;
+  /** 会话大小 */
+  Size?: number | null;
 }
 
 /** 部门信息 */
@@ -400,6 +402,8 @@ declare interface SearchCommandResult {
   DeviceDepartmentId?: string | null;
   /** 设备部门名称 */
   DeviceDepartmentName?: string | null;
+  /** 会话大小 */
+  Size?: number | null;
 }
 
 /** 文件操作搜索结果 */

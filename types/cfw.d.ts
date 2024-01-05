@@ -3010,22 +3010,6 @@ declare interface ModifyNatSequenceRulesResponse {
   RequestId?: string;
 }
 
-declare interface ModifyPublicIPSwitchStatusRequest {
-  /** 公网IP */
-  FireWallPublicIP: string;
-  /** 状态值，0: 关闭 ,1:开启 */
-  Status: number;
-}
-
-declare interface ModifyPublicIPSwitchStatusResponse {
-  /** 接口返回信息 */
-  ReturnMsg: string | null;
-  /** 接口返回错误码，0请求成功 非0失败 */
-  ReturnCode: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyResourceGroupRequest {
   /** 组id */
   GroupId: string;
@@ -3507,8 +3491,6 @@ declare interface Cfw {
   ModifyNatInstance(data: ModifyNatInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatInstanceResponse>;
   /** NAT防火墙规则快速排序 {@link ModifyNatSequenceRulesRequest} {@link ModifyNatSequenceRulesResponse} */
   ModifyNatSequenceRules(data: ModifyNatSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatSequenceRulesResponse>;
-  /** @deprecated 单个修改互联网边界防火墙开关 {@link ModifyPublicIPSwitchStatusRequest} {@link ModifyPublicIPSwitchStatusResponse} */
-  ModifyPublicIPSwitchStatus(data: ModifyPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicIPSwitchStatusResponse>;
   /** 资产中心资产组信息修改 {@link ModifyResourceGroupRequest} {@link ModifyResourceGroupResponse} */
   ModifyResourceGroup(data: ModifyResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceGroupResponse>;
   /** 同步资产-互联网&VPC（新） {@link ModifyRunSyncAssetRequest} {@link ModifyRunSyncAssetResponse} */

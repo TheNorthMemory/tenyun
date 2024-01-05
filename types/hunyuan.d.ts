@@ -18,6 +18,24 @@ declare interface Delta {
   Content?: string;
 }
 
+/** embedding 信息，当前不支持批量，所以数组元素数目为1。 */
+declare interface EmbeddingData {
+  /** embedding 信息。 */
+  Embedding?: number[] | null;
+  /** 下标。 */
+  Index?: number | null;
+  /** embedding */
+  Object?: string | null;
+}
+
+/** token 使用计数。 */
+declare interface EmbeddingUsage {
+  /** 输入Token数。 */
+  PromptTokens?: number;
+  /** 总Token数。 */
+  TotalTokens?: number;
+}
+
 /** 运行时异常信息。 */
 declare interface ErrorMsg {
   /** 错误提示信息。 */
@@ -96,6 +114,20 @@ declare interface ChatStdResponse {
   RequestId?: string;
 }
 
+declare interface GetEmbeddingRequest {
+  /** 输入文本。总长度不超过1024 个token, 超过则会截断最后面的内容。 */
+  Input: string;
+}
+
+declare interface GetEmbeddingResponse {
+  /** 返回的 embedding 信息。 */
+  Data?: EmbeddingData[];
+  /** token 使用计数，按照总token数量收费。 */
+  Usage?: EmbeddingUsage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTokenCountRequest {
   /** 输入文本 */
   Prompt: string;
@@ -119,6 +151,8 @@ declare interface Hunyuan {
   ChatPro(data: ChatProRequest, config?: AxiosRequestConfig): AxiosPromise<ChatProResponse>;
   /** 腾讯混元大模型标准版 {@link ChatStdRequest} {@link ChatStdResponse} */
   ChatStd(data: ChatStdRequest, config?: AxiosRequestConfig): AxiosPromise<ChatStdResponse>;
+  /** 腾讯混元-Embedding {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
+  GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** Token计数 {@link GetTokenCountRequest} {@link GetTokenCountResponse} */
   GetTokenCount(data: GetTokenCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenCountResponse>;
 }

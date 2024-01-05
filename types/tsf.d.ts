@@ -265,27 +265,27 @@ declare interface ApplicationForPage {
 /** 业务日志配置关联部署组信息 */
 declare interface BusinesLogConfigAssociatedGroup {
   /** 部署组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 部署组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 部署组所属应用ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 部署组所属应用名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 部署组所属应用类型 */
-  ApplicationType: string | null;
+  ApplicationType?: string | null;
   /** 部署组所属命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 部署组所属命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 部署组所属集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 部署组所属集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 部署组所属集群类型 */
-  ClusterType: string | null;
+  ClusterType?: string | null;
   /** 部署组关联日志配置时间 */
-  AssociatedTime: string | null;
+  AssociatedTime?: string | null;
 }
 
 /** 业务日志配置 */
@@ -310,6 +310,34 @@ declare interface BusinessLogConfig {
   ConfigSchema?: BusinessLogConfigSchema | null;
   /** 配置项关联部署组 */
   ConfigAssociatedGroups?: BusinesLogConfigAssociatedGroup[] | null;
+  /** 配置项关联部署组 */
+  ConfigAssociatedGroupList?: BusinessLogConfigAssociatedGroup[] | null;
+}
+
+/** 业务日志配置关联部署组信息 */
+declare interface BusinessLogConfigAssociatedGroup {
+  /** 部署组ID */
+  GroupId: string | null;
+  /** 部署组名称 */
+  GroupName: string | null;
+  /** 部署组所属应用ID */
+  ApplicationId: string | null;
+  /** 部署组所属应用名称 */
+  ApplicationName: string | null;
+  /** 部署组所属应用类型 */
+  ApplicationType: string | null;
+  /** 部署组所属命名空间ID */
+  NamespaceId: string | null;
+  /** 部署组所属命名空间名称 */
+  NamespaceName: string | null;
+  /** 部署组所属集群ID */
+  ClusterId: string | null;
+  /** 部署组所属集群名称 */
+  ClusterName: string | null;
+  /** 部署组所属集群类型 */
+  ClusterType: string | null;
+  /** 部署组关联日志配置时间 */
+  AssociatedTime: string | null;
 }
 
 /** 业务日志配置解析规则 */

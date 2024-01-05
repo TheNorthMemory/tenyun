@@ -2405,7 +2405,7 @@ declare interface DeleteAuditRuleResponse {
 }
 
 declare interface DeleteAuditRuleTemplatesRequest {
-  /** 审计规则模版ID。 */
+  /** 审计规则模板ID。 */
   RuleTemplateIds: string[];
 }
 
@@ -4063,7 +4063,7 @@ declare interface ModifyAuditServiceRequest {
   AuditAll?: boolean;
   /** 审计规则。 */
   AuditRuleFilters?: AuditRuleFilters[];
-  /** 规则模版ID。 */
+  /** 规则模板ID。 */
   RuleTemplateIds?: string[];
 }
 
@@ -4881,7 +4881,7 @@ declare interface Cdb {
   DeleteAuditPolicy(data: DeleteAuditPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditPolicyResponse>;
   /** 删除审计规则 {@link DeleteAuditRuleRequest} {@link DeleteAuditRuleResponse} */
   DeleteAuditRule(data: DeleteAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleResponse>;
-  /** 删除审计规则模版 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
+  /** 删除审计规则模板 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
   DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
   /** 删除云数据库备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;

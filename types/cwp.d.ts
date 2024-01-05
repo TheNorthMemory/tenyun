@@ -2056,6 +2056,8 @@ declare interface BruteAttackInfo {
   Location?: string | null;
   /** 威胁等级：0低危，1中危，2高危 */
   RiskLevel?: number | null;
+  /** 事件来源：0--阻断规则，1--威胁情报 */
+  DataFrom?: number | null;
 }
 
 /** 标准阻断模式规则 */
@@ -7938,10 +7940,10 @@ declare interface DescribeBanStatusRequest {
 }
 
 declare interface DescribeBanStatusResponse {
-  /** 阻断开关状态 0:关闭 1:开启 */
-  Status: number;
+  /** 阻断开关状态: 0 -- 关闭 1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip) */
+  Status?: number;
   /** 是否弹窗提示信息 false: 关闭，true: 开启 */
-  ShowTips: boolean;
+  ShowTips?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9983,7 +9985,7 @@ declare interface DescribeMalWareListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选FilePath - String - 是否必填：否 - 路径筛选VirusName - String - 是否必填：否 - 描述筛选CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间Status - String - 是否必填：否 - 状态筛选 4待处理,5信任,6已隔离,10隔离中,11恢复隔离中 */
+  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选FilePath - String - 是否必填：否 - 路径筛选VirusName - String - 是否必填：否 - 描述筛选CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间Status - String - 是否必填：否 - 状态筛选 4待处理,5信任,6已隔离,10隔离中,11恢复隔离中,14 已处理 */
   Filters?: Filter[];
   /** 检测排序 CreateTime */
   By?: string;

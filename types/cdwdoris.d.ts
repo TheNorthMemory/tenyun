@@ -172,7 +172,7 @@ declare interface InstanceInfo {
   CanAttachCbs?: boolean | null;
   /** 小版本 */
   BuildVersion?: string | null;
-  /** 组件信息 */
+  /** 组件信息注：这里返回类型实际为map[string]struct类型，并非显示的string类型，可以参考“示例值”进行数据的解析。 */
   Components?: string | null;
   /** 判断审计日志表是否有catalog字段 */
   IfExistCatalog?: number | null;

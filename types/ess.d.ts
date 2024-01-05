@@ -1205,7 +1205,7 @@ declare interface CancelFlowResponse {
 declare interface CancelMultiFlowSignQRCodeRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 二维码ID，为32位字符串。 */
+  /** 需要取消的签署码ID，为32位字符串。由[创建一码多签签署码](https://qian.tencent.com/developers/companyApis/startFlows/CreateMultiFlowSignQRCode/)返回 */
   QrCodeId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -1784,9 +1784,9 @@ declare interface CreateMultiFlowSignQRCodeRequest {
 }
 
 declare interface CreateMultiFlowSignQRCodeResponse {
-  /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
+  /** 一码多签签署码的基本信息，用户可扫描该二维码进行签署操作。 */
   QrCode?: SignQrCode;
-  /** 流程签署二维码的签署信息，适用于客户系统整合二维码功能。通过链接，用户可直接访问电子签名小程序并签署合同。 */
+  /** 一码多签签署码的链接信息，适用于客户系统整合二维码功能。通过链接，用户可直接访问电子签名小程序并签署合同。 */
   SignUrls?: SignUrl;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2877,7 +2877,7 @@ declare interface Ess {
   BindEmployeeUserIdWithClientOpenId(data: BindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<BindEmployeeUserIdWithClientOpenIdResponse>;
   /** 撤销单个合同流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
-  /** 取消一码多扫流程签署二维码 {@link CancelMultiFlowSignQRCodeRequest} {@link CancelMultiFlowSignQRCodeResponse} */
+  /** 取消一码多签签署码 {@link CancelMultiFlowSignQRCodeRequest} {@link CancelMultiFlowSignQRCodeResponse} */
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
   /** 撤销个人用户自动签的开通链接 {@link CancelUserAutoSignEnableUrlRequest} {@link CancelUserAutoSignEnableUrlResponse} */
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
@@ -2923,7 +2923,7 @@ declare interface Ess {
   CreateIntegrationRole(data: CreateIntegrationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationRoleResponse>;
   /** 绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
-  /** 创建一码多扫流程签署二维码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
+  /** 创建一码多签签署码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;

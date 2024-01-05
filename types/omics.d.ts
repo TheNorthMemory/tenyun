@@ -631,8 +631,6 @@ declare interface RetryRunsResponse {
 declare interface RunApplicationRequest {
   /** 应用ID。 */
   ApplicationId: string;
-  /** 项目ID。 */
-  ProjectId: string;
   /** 任务批次名称。 */
   Name: string;
   /** 投递环境ID。 */
@@ -641,8 +639,8 @@ declare interface RunApplicationRequest {
   InputBase64: string;
   /** 任务缓存清理时间（小时）。不填表示不清理。 */
   CacheClearDelay: number;
-  /** 运行选项。 */
-  Option: RunOption;
+  /** 项目ID。（不填使用指定地域下的默认项目） */
+  ProjectId?: string;
   /** 任务批次描述。 */
   Description?: string;
   /** 批量投递表格ID，不填表示单例投递。 */
@@ -651,6 +649,10 @@ declare interface RunApplicationRequest {
   TableRowUuids?: string[];
   /** 应用版本ID。不填表示使用当前最新版本。 */
   ApplicationVersionId?: string;
+  /** WDL运行选项。 */
+  Option?: RunOption;
+  /** Nextflow运行选项。 */
+  NFOption?: NFOption;
 }
 
 declare interface RunApplicationResponse {

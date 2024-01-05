@@ -4219,8 +4219,10 @@ declare interface SmartStructuralOCRV2Request {
   ItemNames?: string[];
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 海外发票模版 */
+  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 海外发票模版Coin --钱币识别模板OnboardingDocuments -- 入职材料识别 */
   ConfigId?: string;
+  /** 是否打开印章识别 */
+  EnableSealRecognize?: boolean;
 }
 
 declare interface SmartStructuralOCRV2Response {

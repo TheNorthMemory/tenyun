@@ -1653,11 +1653,11 @@ declare interface FetchSqlGatewayStatementResultResponse {
 }
 
 declare interface GetMetaTableRequest {
-  /** Catalog名 */
+  /** 目录名 */
   Catalog: string;
-  /** Database名 */
+  /** 库名 */
   Database: string;
-  /** Table名 */
+  /** 表名 */
   Table: string;
   /** 空间唯一标识 */
   WorkSpaceId: string;
