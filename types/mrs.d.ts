@@ -2329,49 +2329,49 @@ declare interface PathologyV2 {
 /** 患者信息 */
 declare interface PatientInfo {
   /** 患者姓名 */
-  Name: string | null;
+  Name?: string | null;
   /** 患者性别 */
-  Sex: string | null;
+  Sex?: string | null;
   /** 患者年龄 */
-  Age: string | null;
+  Age?: string | null;
   /** 患者手机号码 */
-  Phone: string | null;
+  Phone?: string | null;
   /** 患者地址 */
-  Address: string | null;
+  Address?: string | null;
   /** 患者身份证 */
-  IdCard: string | null;
+  IdCard?: string | null;
   /** 健康卡号 */
-  HealthCardNo: string | null;
+  HealthCardNo?: string | null;
   /** 社保卡号 */
-  SocialSecurityCardNo: string | null;
+  SocialSecurityCardNo?: string | null;
   /** 出生日期 */
-  Birthday: string | null;
+  Birthday?: string | null;
   /** 民族 */
-  Ethnicity: string | null;
+  Ethnicity?: string | null;
   /** 婚姻状况 */
-  Married: string | null;
+  Married?: string | null;
   /** 职业 */
-  Profession: string | null;
+  Profession?: string | null;
   /** 教育程度 */
-  EducationBackground: string | null;
+  EducationBackground?: string | null;
   /** 国籍 */
-  Nationality: string | null;
+  Nationality?: string | null;
   /** 籍贯 */
-  BirthPlace: string | null;
+  BirthPlace?: string | null;
   /** 医保类型 */
-  MedicalInsuranceType: string | null;
+  MedicalInsuranceType?: string | null;
   /** 标准化年龄 */
-  AgeNorm: string | null;
-  /** 民族 */
-  Nation: string | null;
+  AgeNorm?: string | null;
+  /** 民族。该字段已不再使用，请从Ethnicity取值 */
+  Nation?: string | null;
   /** 婚姻代码 */
-  MarriedCode: string | null;
+  MarriedCode?: string | null;
   /** 职业代码 */
-  ProfessionCode: string | null;
+  ProfessionCode?: string | null;
   /** 居民医保代码 */
-  MedicalInsuranceTypeCode: string | null;
+  MedicalInsuranceTypeCode?: string | null;
   /** 床号 */
-  BedNo: string | null;
+  BedNo?: string | null;
 }
 
 /** 体检报告PDF信息 */

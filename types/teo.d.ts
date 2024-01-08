@@ -1299,15 +1299,15 @@ declare interface RateLimitTemplateDetail {
   /** 模板等级名称，取值有：sup_loose：超级宽松；loose：宽松；emergency：紧急；normal：适中；strict：严格；close：关闭，仅精准速率限制生效。 */
   Mode: string | null;
   /** 唯一id。 */
-  ID?: number;
+  ID: number;
   /** 模板处置方式，取值有：alg：JavaScript挑战；monitor：观察。 */
-  Action?: string | null;
+  Action: string | null;
   /** 惩罚时间，取值范围0-2天，单位秒。 */
-  PunishTime?: number | null;
+  PunishTime: number | null;
   /** 统计阈值，单位是次，取值范围0-4294967294。 */
-  Threshold?: number;
+  Threshold: number;
   /** 统计周期，取值范围0-120秒。 */
-  Period?: number;
+  Period: number;
 }
 
 /** RateLimit规则 */
@@ -1546,25 +1546,25 @@ declare interface SecEntryValue {
 
 /** 安全配置 */
 declare interface SecurityConfig {
-  /** 托管规则。如果为null，默认使用历史配置。 */
+  /** 托管规则。如果入参为空或不填，默认使用历史配置。 */
   WafConfig?: WafConfig | null;
-  /** 速率限制。如果为null，默认使用历史配置。 */
+  /** 速率限制。如果入参为空或不填，默认使用历史配置。 */
   RateLimitConfig?: RateLimitConfig | null;
-  /** 自定义规则。如果为null，默认使用历史配置。 */
+  /** 自定义规则。如果入参为空或不填，默认使用历史配置。 */
   AclConfig?: AclConfig | null;
-  /** Bot配置。如果为null，默认使用历史配置。 */
+  /** Bot配置。如果入参为空或不填，默认使用历史配置。 */
   BotConfig?: BotConfig | null;
-  /** 七层防护总开关。如果为null，默认使用历史配置。 */
+  /** 七层防护总开关。如果入参为空或不填，默认使用历史配置。 */
   SwitchConfig?: SwitchConfig | null;
-  /** 基础访问管控。如果为null，默认使用历史配置。 */
+  /** 基础访问管控。如果入参为空或不填，默认使用历史配置。 */
   IpTableConfig?: IpTableConfig | null;
-  /** 例外规则配置。如果为null，默认使用历史配置。 */
+  /** 例外规则配置。如果入参为空或不填，默认使用历史配置。 */
   ExceptConfig?: ExceptConfig | null;
-  /** 自定义拦截页面配置。如果为null，默认使用历史配置。 */
+  /** 自定义拦截页面配置。如果入参为空或不填，默认使用历史配置。 */
   DropPageConfig?: DropPageConfig | null;
   /** 模板配置。此处仅出参数使用。 */
   TemplateConfig?: TemplateConfig | null;
-  /** 慢速攻击配置。如果为null，默认使用历史配置。 */
+  /** 慢速攻击配置。如果入参为空或不填，默认使用历史配置。 */
   SlowPostConfig?: SlowPostConfig | null;
 }
 
@@ -2161,9 +2161,9 @@ declare interface CreatePlanForZoneRequest {
 
 declare interface CreatePlanForZoneResponse {
   /** 购买的资源名字列表。 */
-  ResourceNames: string[];
+  ResourceNames?: string[];
   /** 购买的订单号列表。 */
-  DealNames: string[];
+  DealNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2193,9 +2193,9 @@ declare interface CreatePurgeTaskRequest {
   ZoneId: string;
   /** 节点缓存清除类型，取值有：purge_url：URL刷新；purge_prefix：目录刷新；purge_host：Hostname 刷新；purge_all：站点下全部缓存刷新；purge_cache_tag：cache-tag 刷新。缓存清除类型详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。 */
   Type: string;
-  /** 节点缓存清除方法，针对目录刷新、Hostname刷新以及刷新全部缓存 类型有效，取值有： invalidate：仅刷新目录下产生了更新的资源； delete：无论目录下资源是否更新都刷新节点资源。注意：使用目录刷新时，默认值： invalidate。 */
+  /** 节点缓存清除方法，针对目录刷新、Hostname刷新以及刷新全部缓存类型有效，取值有： invalidate：仅刷新目录下产生了更新的资源； delete：无论目录下资源是否更新都刷新节点资源。默认值： invalidate。 */
   Method?: string;
-  /** 要清除缓存的资源列表。每个元素格式依据清除缓存类型而定，可参考接口示例。EO 默认针对内容含有非 ASCII 字符集的字符进行转义，编码规则遵循 RFC3986；单次提交的任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
+  /** 要清除缓存的资源列表。每个元素格式依据清除缓存类型而定，可参考接口示例。单次提交的任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
   Targets?: string[];
   /** 若有编码转换，仅清除编码转换后匹配的资源。若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;

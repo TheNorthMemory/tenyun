@@ -1577,7 +1577,7 @@ declare interface StartPublishCdnStreamResponse {
 }
 
 declare interface StartStreamIngestRequest {
-  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和录制的房间所对应的SdkAppId相同。 */
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和TRTC的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
   /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，录制的TRTC房间所对应的RoomId。 */
   RoomId: string;
@@ -1587,14 +1587,16 @@ declare interface StartStreamIngestRequest {
   UserId: string;
   /** 拉流转推机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910)的方案。 */
   UserSig: string;
-  /** 源流URL。示例值：https://a.b/test.mp4 */
-  SourceUrl: string[];
+  /** 【本字段已废弃，请使用 StreamUrl 字段】源流URL，支持一个地址。 */
+  SourceUrl?: string[];
   /** TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 */
   PrivateMapKey?: string;
   /** 视频编码参数。可选，如果不填，保持原始流的参数。 */
   VideoEncodeParams?: VideoEncodeParams;
   /** 音频编码参数。可选，如果不填，保持原始流的参数。 */
   AudioEncodeParams?: AudioEncodeParams;
+  /** 源流URL。历史原因本字段【必填】。 */
+  StreamUrl?: string;
 }
 
 declare interface StartStreamIngestResponse {
