@@ -2945,7 +2945,7 @@ declare interface Clb {
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
   /** 修改负载均衡实例的属性 {@link ModifyLoadBalancerAttributesRequest} {@link ModifyLoadBalancerAttributesResponse} */
   ModifyLoadBalancerAttributes(data: ModifyLoadBalancerAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerAttributesResponse>;
-  /** 修改IPv6FullChain负载均衡7层监听器支持混绑目标特性。 {@link ModifyLoadBalancerMixIpTargetRequest} {@link ModifyLoadBalancerMixIpTargetResponse} */
+  /** 修改IPv6FullChain负载均衡7层监听器支持混绑目标特性 {@link ModifyLoadBalancerMixIpTargetRequest} {@link ModifyLoadBalancerMixIpTargetResponse} */
   ModifyLoadBalancerMixIpTarget(data: ModifyLoadBalancerMixIpTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerMixIpTargetResponse>;
   /** 升级为性能容量型实例 {@link ModifyLoadBalancerSlaRequest} {@link ModifyLoadBalancerSlaResponse} */
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;

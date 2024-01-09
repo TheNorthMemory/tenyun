@@ -1396,6 +1396,18 @@ declare interface AnimatedGraphicsTemplate {
   UpdateTime: string;
 }
 
+/** 日志推送目标。 */
+declare interface AreaCLSTargetInfo {
+  /** 日志集所属地区：ap-guangzhou：广州； ap-singapore：新加坡。 */
+  CLSRegion: string;
+  /** 投递的目标主题 ID。 */
+  TopicId: string;
+  /** 投递的目标集 ID。 */
+  LogsetId: string;
+  /** 日志投递状态。 ON：启用； OFF：停用。 */
+  Switch?: string;
+}
+
 /** 去伪影（毛刺）控制信息 */
 declare interface ArtifactRepairInfo {
   /** 去伪影（毛刺）控制开关，可选值：ON：开启去伪影（毛刺）；OFF：关闭去伪影（毛刺）。 */
@@ -1528,6 +1540,24 @@ declare interface BlurConfigureInfo {
 declare interface BlurConfigureInfoForUpdate {
   /** 视频画面模糊检测开关，可选值：ON：开启；OFF：关闭。 */
   Switch?: string;
+}
+
+/** CLS 日志集信息 */
+declare interface CLSLogsetInfo {
+  /** 日志集 ID。 */
+  LogsetId?: string;
+  /** 日志集名。 */
+  LogsetName?: string;
+}
+
+/** CLS日志主题信息。 */
+declare interface CLSTopicInfo {
+  /** 日志主题 ID。 */
+  TopicId?: string | null;
+  /** 日志主题名。 */
+  TopicName?: string | null;
+  /** 日志集 ID。 */
+  LogsetId?: string | null;
 }
 
 /** 画布信息。制作视频时，如果源素材（视频或者图片）不能填满输出的视频窗口，将用设置的画布进行背景绘制。 */
@@ -1870,6 +1900,16 @@ declare interface DescribeFileAttributesTaskOutput {
   Md5: string;
   /** 媒体文件的 Sha1 值。 */
   Sha1?: string;
+}
+
+/** 域名推送 CLS 目标。 */
+declare interface DomainCLSTargetInfo {
+  /** 域名。 */
+  Domain?: string;
+  /** 中国大陆地区的日志推送目标。 */
+  ChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
+  /** 中国大陆以外地区的日志推送目标。 */
+  OutsideChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
 }
 
 /** 域名信息 */
@@ -5928,6 +5968,34 @@ declare interface CreateAnimatedGraphicsTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateCLSLogsetRequest {
+  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  CLSRegion: string;
+}
+
+declare interface CreateCLSLogsetResponse {
+  /** 日志集 ID。 */
+  LogsetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCLSTopicRequest {
+  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  CLSRegion: string;
+  /** 日志主题名。 */
+  TopicName: string;
+  /** 日志集 ID。 */
+  LogsetId: string;
+}
+
+declare interface CreateCLSTopicResponse {
+  /** 日志主题 ID。 */
+  TopicId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateClassRequest {
   /** 父类 ID，一级分类填写 -1。 */
   ParentId: number;
@@ -6518,6 +6586,18 @@ declare interface DeleteAnimatedGraphicsTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCLSTopicRequest {
+  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  CLSRegion?: string;
+  /** 日志主题 ID。 */
+  TopicId?: string;
+}
+
+declare interface DeleteCLSTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteClassRequest {
   /** 分类 ID */
   ClassId: number;
@@ -6918,6 +6998,56 @@ declare interface DescribeCDNUsageDataResponse {
   DataInterval?: number;
   /** CDN 统计数据。 */
   Data?: StatDataItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCLSLogsetsRequest {
+  /** CLS 日志集所属的地域，取值有：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  CLSRegion: string;
+}
+
+declare interface DescribeCLSLogsetsResponse {
+  /** 查询到的日志集列表。 */
+  Logsets?: CLSLogsetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCLSPushTargetsRequest {
+  /** 点播域名。 */
+  Domains: string[];
+  /** 点播应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+}
+
+declare interface DescribeCLSPushTargetsResponse {
+  /** 域名推送总数量。 */
+  TotalCount?: number;
+  /** 域名推送 CLS 目标列表。 */
+  DomainCLSTargets?: DomainCLSTargetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCLSTopicsRequest {
+  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  CLSRegion: string;
+  /** 日志主题所属日志集 ID。 */
+  LogsetId: string;
+  /** 日志主题 ID 列表。如果不填，表示查询所有的日志主题。 */
+  TopicIds?: string[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：20，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeCLSTopicsResponse {
+  /** 日志主题总数量。 */
+  TotalCount?: number;
+  /** 日志主题列表。 */
+  Topics?: CLSTopicInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9228,6 +9358,22 @@ declare interface SearchMediaResponse {
   RequestId?: string;
 }
 
+declare interface SetCLSPushTargetRequest {
+  /** 域名。 */
+  Domain: string;
+  /** 点播应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 要设置的中国大陆地区的日志推送目标。 */
+  ChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
+  /** 要设置的中国大陆以外地区的日志推送目标。 */
+  OutsideChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
+}
+
+declare interface SetCLSPushTargetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetDrmKeyProviderInfoRequest {
   /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
   SDMCInfo?: SDMCDrmKeyProviderInfo;
@@ -9365,6 +9511,10 @@ declare interface Vod {
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
   /** 创建转动图模板 {@link CreateAnimatedGraphicsTemplateRequest} {@link CreateAnimatedGraphicsTemplateResponse} */
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
+  /** 创建日志集 {@link CreateCLSLogsetRequest} {@link CreateCLSLogsetResponse} */
+  CreateCLSLogset(data: CreateCLSLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSLogsetResponse>;
+  /** 创建日志主题 {@link CreateCLSTopicRequest} {@link CreateCLSTopicResponse} */
+  CreateCLSTopic(data: CreateCLSTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSTopicResponse>;
   /** 创建分类 {@link CreateClassRequest} {@link CreateClassResponse} */
   CreateClass(data: CreateClassRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassResponse>;
   /** 创建音视频内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
@@ -9419,6 +9569,8 @@ declare interface Vod {
   DeleteAdaptiveDynamicStreamingTemplate(data: DeleteAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAdaptiveDynamicStreamingTemplateResponse>;
   /** 删除转动图模板 {@link DeleteAnimatedGraphicsTemplateRequest} {@link DeleteAnimatedGraphicsTemplateResponse} */
   DeleteAnimatedGraphicsTemplate(data: DeleteAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnimatedGraphicsTemplateResponse>;
+  /** 删除日志主题 {@link DeleteCLSTopicRequest} {@link DeleteCLSTopicResponse} */
+  DeleteCLSTopic(data?: DeleteCLSTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSTopicResponse>;
   /** 删除分类 {@link DeleteClassRequest} {@link DeleteClassResponse} */
   DeleteClass(data: DeleteClassRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClassResponse>;
   /** 删除音视频内容审核模板 {@link DeleteContentReviewTemplateRequest} {@link DeleteContentReviewTemplateResponse} */
@@ -9475,6 +9627,12 @@ declare interface Vod {
   DescribeCDNStatDetails(data: DescribeCDNStatDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDNStatDetailsResponse>;
   /** 查询点播 CDN 用量数据 {@link DescribeCDNUsageDataRequest} {@link DescribeCDNUsageDataResponse} */
   DescribeCDNUsageData(data: DescribeCDNUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDNUsageDataResponse>;
+  /** 查询日志集列表 {@link DescribeCLSLogsetsRequest} {@link DescribeCLSLogsetsResponse} */
+  DescribeCLSLogsets(data: DescribeCLSLogsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogsetsResponse>;
+  /** 查询日志投递目标 {@link DescribeCLSPushTargetsRequest} {@link DescribeCLSPushTargetsResponse} */
+  DescribeCLSPushTargets(data: DescribeCLSPushTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSPushTargetsResponse>;
+  /** 查询日志主题列表 {@link DescribeCLSTopicsRequest} {@link DescribeCLSTopicsResponse} */
+  DescribeCLSTopics(data: DescribeCLSTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSTopicsResponse>;
   /** 查询 CDN 日志下载链接列表 {@link DescribeCdnLogsRequest} {@link DescribeCdnLogsResponse} */
   DescribeCdnLogs(data: DescribeCdnLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnLogsResponse>;
   /** 查询客户端上传加速统计数据 {@link DescribeClientUploadAccelerationUsageDataRequest} {@link DescribeClientUploadAccelerationUsageDataResponse} */
@@ -9671,6 +9829,8 @@ declare interface Vod {
   ReviewImage(data: ReviewImageRequest, config?: AxiosRequestConfig): AxiosPromise<ReviewImageResponse>;
   /** 搜索媒体信息 {@link SearchMediaRequest} {@link SearchMediaResponse} */
   SearchMedia(data?: SearchMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SearchMediaResponse>;
+  /** 设置日志投递目标 {@link SetCLSPushTargetRequest} {@link SetCLSPushTargetResponse} */
+  SetCLSPushTarget(data: SetCLSPushTargetRequest, config?: AxiosRequestConfig): AxiosPromise<SetCLSPushTargetResponse>;
   /** 设置 DRM 密钥提供商信息 {@link SetDrmKeyProviderInfoRequest} {@link SetDrmKeyProviderInfoResponse} */
   SetDrmKeyProviderInfo(data?: SetDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SetDrmKeyProviderInfoResponse>;
   /** 设置点播域名 HTTPS 证书 {@link SetVodDomainCertificateRequest} {@link SetVodDomainCertificateResponse} */

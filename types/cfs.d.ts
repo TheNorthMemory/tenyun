@@ -775,6 +775,8 @@ declare interface DescribeCfsFileSystemsRequest {
   Offset?: number;
   /** Limit 页面大小 */
   Limit?: number;
+  /** 用户自定义名称 */
+  CreationToken?: string;
 }
 
 declare interface DescribeCfsFileSystemsResponse {

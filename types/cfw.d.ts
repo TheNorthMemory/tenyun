@@ -458,6 +458,22 @@ declare interface IPDefendStatus {
   Status: number;
 }
 
+/** 入侵防御规则白名单详情 */
+declare interface IdsWhiteInfo {
+  /** 白名单唯一ID */
+  Id?: number | null;
+  /** 源IP */
+  SrcIp?: string | null;
+  /** 目的IP */
+  DstIp?: string | null;
+  /** 规则类型 */
+  WhiteRuleType?: string | null;
+  /** 白名单生效防火墙范围： 1 边界防火墙 2 nat防火墙 4 vpc防火墙 7 = 1+2+4 所有防火墙 */
+  FwType?: number | null;
+  /** 入侵防御规则ID */
+  RuleId?: string | null;
+}
+
 /** // InstanceInfo 实例详情结果type InstanceInfo struct {	AppID string `json:"AppId" gorm:"column:appid"`	Region string `json:"Region" gorm:"column:region"`	VPCID string `json:"VpcId" gorm:"column:vpc_id"`	SubNetID string `json:"SubnetId" gorm:"column:subnet_id"`	InstanceID string `json:"InstanceId" gorm:"column:instance_id"`	InstanceName string `json:"InstanceName" gorm:"column:instance_name"`	//InsType common.CVM 3是cvm实例,4是clb实例,5是eni实例,6是mysql,7是redis,8是NAT,9是VPN,10是ES,11是MARIADB,12是KAFKA	InsType int `json:"InsType" gorm:"column:instance_type"`	PublicIP string `json:"PublicIp" gorm:"column:public_ip"`	PrivateIP string `json:"PrivateIp" gorm:"column:ip"`	//规则下发无需管，前端展示用	PortNum string `json:"PortNum" gorm:"column:port_num"`	LeakNum string `json:"LeakNum" gorm:"column:leak_num"`	ResourceGroupNum int `json:"ResourceGroupNum"`	VPCName string `json:"VPCName" gorm:"column:VPCName"`} */
 declare interface InstanceInfo {
   /** appid信息 */
@@ -2188,6 +2204,8 @@ declare interface DescribeIdsWhiteRuleRequest {
 declare interface DescribeIdsWhiteRuleResponse {
   /** 总条数 */
   Total?: number;
+  /** 规则详情 */
+  Data?: IdsWhiteInfo[];
   /** 返回状态码 0 成功 非0不成功 */
   ReturnCode?: number;
   /** 返回信息 success 成功 其他 不成功 */

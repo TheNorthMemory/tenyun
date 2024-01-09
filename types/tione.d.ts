@@ -308,7 +308,7 @@ declare interface CustomTrainingPoint {
 declare interface DataConfig {
   /** 映射路径 */
   MappingPath?: string;
-  /** DATASET、COS、CFS、HDFS、WEDATA_HDFS */
+  /** DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS */
   DataSourceType?: string | null;
   /** 来自数据集的数据 */
   DataSetSource?: DataSetConfig | null;
@@ -574,6 +574,10 @@ declare interface FrameworkVersion {
 declare interface GooseFS {
   /** goosefs实例id */
   Id?: string | null;
+  /** GooseFS类型，包括GooseFS和GooseFSx */
+  Type?: string | null;
+  /** GooseFSx实例需要挂载的路径 */
+  Path?: string | null;
 }
 
 /** gpu 详情 */
@@ -610,7 +614,7 @@ declare interface HorizontalPodAutoscaler {
   MinReplicas: number | null;
   /** 最大实例数 */
   MaxReplicas: number | null;
-  /** 扩缩容指标 */
+  /** 支持："gpu-util": GPU利用率。范围{10, 100} "cpu-util": CPU利用率。范围{10, 100} "memory-util": 内存利用率。范围{10, 100} "service-qps": 单个实例QPS值。范围{1, 5000}"concurrency-util":单个实例请求数量值。范围{1,100000} */
   HpaMetrics: Option[] | null;
 }
 
@@ -951,79 +955,83 @@ declare interface ModelSource {
 /** 类型NotebookDetail */
 declare interface NotebookDetail {
   /** notebook ID */
-  Id: string;
+  Id?: string;
   /** notebook 名称 */
-  Name: string;
+  Name?: string;
   /** 生命周期脚本 */
-  LifecycleScriptId: string | null;
+  LifecycleScriptId?: string | null;
   /** Pod-Name */
-  PodName: string | null;
+  PodName?: string | null;
   /** Update-Time */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 是否访问公网 */
-  DirectInternetAccess: boolean;
+  DirectInternetAccess?: boolean;
   /** 预付费专用资源组 */
-  ResourceGroupId: string | null;
+  ResourceGroupId?: string | null;
   /** 标签配置 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 是否自动停止 */
-  AutoStopping: boolean;
+  AutoStopping?: boolean;
   /** 其他GIT存储库，最多3个，单个长度不超过512字符 */
-  AdditionalCodeRepoIds: string[] | null;
+  AdditionalCodeRepoIds?: string[] | null;
   /** 自动停止时间，单位小时 */
-  AutomaticStopTime: number | null;
+  AutomaticStopTime?: number | null;
   /** 资源配置 */
-  ResourceConf: ResourceConf;
+  ResourceConf?: ResourceConf;
   /** 默认GIT存储库，长度不超过512字符 */
-  DefaultCodeRepoId: string;
+  DefaultCodeRepoId?: string;
   /** 训练输出 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 是否上报日志 */
-  LogEnable: boolean;
+  LogEnable?: boolean;
   /** 日志配置 */
-  LogConfig: LogConfig | null;
+  LogConfig?: LogConfig | null;
   /** VPC ID */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 任务状态 */
-  Status: string;
+  Status?: string;
   /** 运行时长 */
-  RuntimeInSeconds: number | null;
+  RuntimeInSeconds?: number | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 训练开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
-  ChargeStatus: string | null;
+  ChargeStatus?: string | null;
   /** 是否ROOT权限 */
-  RootAccess: boolean;
+  RootAccess?: boolean;
   /** 计贺金额信息，eg:2.00元/小时 */
-  BillingInfos: string[] | null;
+  BillingInfos?: string[] | null;
   /** 存储卷大小 （单位时GB，最小10GB，必须是10G的倍数） */
-  VolumeSizeInGB: number | null;
+  VolumeSizeInGB?: number | null;
   /** 失败原因 */
-  FailureReason: string | null;
+  FailureReason?: string | null;
   /** 计算资源付费模式 (- PREPAID：预付费，即包年包月 - POSTPAID_BY_HOUR：按小时后付费) */
-  ChargeType: string;
+  ChargeType?: string;
   /** 后付费资源规格说明 */
-  InstanceTypeAlias: string | null;
+  InstanceTypeAlias?: string | null;
   /** 预付费资源组名称 */
-  ResourceGroupName: string | null;
+  ResourceGroupName?: string | null;
   /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
-  VolumeSourceType: string | null;
+  VolumeSourceType?: string | null;
   /** CFS存储的配置 */
-  VolumeSourceCFS: CFSConfig | null;
+  VolumeSourceCFS?: CFSConfig | null;
   /** 数据配置 */
-  DataConfigs: DataConfig[] | null;
+  DataConfigs?: DataConfig[] | null;
   /** notebook 信息 */
-  Message: string | null;
+  Message?: string | null;
   /** 数据源来源，eg：WeData_HDFS */
-  DataSource: string | null;
+  DataSource?: string | null;
   /** 镜像信息 */
   ImageInfo?: ImageInfo;
   /** 镜像类型 */
   ImageType?: string | null;
+  /** SSH配置 */
+  SSHConfig?: SSHConfig | null;
+  /** GooseFS存储配置 */
+  VolumeSourceGooseFS?: GooseFS | null;
 }
 
 /** 镜像保存记录 */
@@ -1032,7 +1040,7 @@ declare interface NotebookImageRecord {
   RecordId?: string | null;
   /** 镜像地址 */
   ImageUrl?: string | null;
-  /** 状态 */
+  /** 状态。eg：creating导出中/success已完成/stopped已停止/fail异常 */
   Status?: string | null;
   /** 创建时间 */
   CreateTime?: string | null;
@@ -1098,6 +1106,8 @@ declare interface NotebookSetItem {
   UserTypes?: string[] | null;
   /** SSH配置 */
   SSHConfig?: SSHConfig | null;
+  /** GooseFS存储配置 */
+  VolumeSourceGooseFS?: GooseFS | null;
 }
 
 /** OCR场景标签列表 */
@@ -1154,7 +1164,7 @@ declare interface PodInfo {
   Name?: string | null;
   /** pod的IP */
   IP?: string | null;
-  /** pod状态 */
+  /** pod状态。eg：SUBMITTING提交中、PENDING排队中、RUNNING运行中、SUCCEEDED已完成、FAILED异常、TERMINATING停止中、TERMINATED已停止 */
   Status?: string | null;
   /** pod启动时间 */
   StartTime?: string | null;
@@ -1192,9 +1202,9 @@ declare interface ResourceConf {
   Cpu?: number | null;
   /** memory 内存资源, 单位为1M (for预付费) */
   Memory?: number | null;
-  /** gpu Gpu卡资源，单位为1单位的GpuType，例如GpuType=T4时，1 Gpu = 1/100 T4卡，GpuType=vcuda时，1 Gpu = 1/100 vcuda-core (for预付费) */
+  /** gpu Gpu卡资源，单位为1/100卡，例如GpuType=T4时，1 Gpu = 1/100 T4卡 (for预付费) */
   Gpu?: number | null;
-  /** GpuType 卡类型 vcuda, T4,P4,V100等 (for预付费) */
+  /** GpuType 卡类型，参考资源组上对应的卡类型。eg: H800,A800,A100,T4,P4,V100等 (for预付费) */
   GpuType?: string | null;
   /** 计算规格 (for后付费)，可选值如下：TI.S.LARGE.POST: 4C8G TI.S.2XLARGE16.POST: 8C16G TI.S.2XLARGE32.POST: 8C32G TI.S.4XLARGE32.POST: 16C32GTI.S.4XLARGE64.POST: 16C64GTI.S.6XLARGE48.POST: 24C48GTI.S.6XLARGE96.POST: 24C96GTI.S.8XLARGE64.POST: 32C64GTI.S.8XLARGE128.POST : 32C128GTI.GN10.2XLARGE40.POST: 8C40G V100*1 TI.GN10.5XLARGE80.POST: 18C80G V100*2 TI.GN10.10XLARGE160.POST : 32C160G V100*4TI.GN10.20XLARGE320.POST : 72C320G V100*8TI.GN7.8XLARGE128.POST: 32C128G T4*1 TI.GN7.10XLARGE160.POST: 40C160G T4*2 TI.GN7.20XLARGE320.POST: 80C320G T4*4 */
   InstanceType?: string | null;
@@ -1204,13 +1214,13 @@ declare interface ResourceConf {
 declare interface ResourceConfigInfo {
   /** 角色，eg：PS、WORKER、DRIVER、EXECUTOR */
   Role: string;
-  /** cpu核数，1000=1核 */
+  /** cpu核数，使用资源组时需配置。单位：1/1000，即1000=1核 */
   Cpu?: number;
-  /** 内存，单位为MB */
+  /** 内存，使用资源组时需配置。单位为MB */
   Memory?: number;
-  /** gpu卡类型 */
+  /** gpu卡类型，使用资源组时需配置 */
   GpuType?: string;
-  /** gpu数 */
+  /** gpu卡数，使用资源组时需配置。单位：1/100，即100=1卡 */
   Gpu?: number;
   /** 算力规格ID计算规格 (for后付费)，可选值如下：TI.S.LARGE.POST: 4C8G TI.S.2XLARGE16.POST: 8C16G TI.S.2XLARGE32.POST: 8C32G TI.S.4XLARGE32.POST: 16C32GTI.S.4XLARGE64.POST: 16C64GTI.S.6XLARGE48.POST: 24C48GTI.S.6XLARGE96.POST: 24C96GTI.S.8XLARGE64.POST: 32C64GTI.S.8XLARGE128.POST : 32C128GTI.GN10.2XLARGE40.POST: 8C40G V100*1 TI.GN10.5XLARGE80.POST: 18C80G V100*2 TI.GN10.10XLARGE160.POST : 32C160G V100*4TI.GN10.20XLARGE320.POST : 72C320G V100*8TI.GN7.8XLARGE128.POST: 32C128G T4*1 TI.GN7.10XLARGE160.POST: 40C160G T4*2 TI.GN7.20XLARGE320.POST: 80C32 */
   InstanceType?: string;
@@ -1544,6 +1554,10 @@ declare interface ServiceLimit {
   EnableInstanceRpsLimit?: boolean;
   /** 每个服务实例的 request per second 限速, 0 为不限流 */
   InstanceRpsLimit?: number;
+  /** 是否开启单实例最大并发数限制，true or false。true 则 InstanceReqLimit 必填， false 则 InstanceReqLimit 不生效 */
+  EnableInstanceReqLimit?: boolean;
+  /** 每个服务实例的最大并发 */
+  InstanceReqLimit?: number;
 }
 
 /** 计费项内容 */
@@ -1708,6 +1722,10 @@ declare interface TextLabelDistributionInfo {
 
 /** 训练数据 */
 declare interface TrainingDataPoint {
+  /** 时间戳 */
+  Timestamp?: number | null;
+  /** 训练上报的值。可以为训练指标（双精度浮点数，也可以为Epoch/Step（两者皆保证是整数） */
+  Value?: number | null;
 }
 
 /** 训练指标 */
@@ -1908,7 +1926,7 @@ declare interface TrainingTaskSetItem {
   ResourceConfigInfos?: ResourceConfigInfo[];
   /** 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD */
   TrainingMode?: string | null;
-  /** 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
+  /** 任务状态，eg：SUBMITTING提交中、PENDING排队中、STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
   Status?: string;
   /** 运行时长 */
   RuntimeInSeconds?: number | null;
@@ -2223,9 +2241,9 @@ declare interface CreateNotebookRequest {
   VpcId?: string;
   /** 子网Id */
   SubnetId?: string;
-  /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
+  /** 存储的类型。取值包含： FREE：预付费的免费存储CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CFS：CFS存储CFS_TURBO：CFS Turbo存储GooseFSx：GooseFSx存储 */
   VolumeSourceType?: string;
-  /** 存储卷大小，单位GB */
+  /** 云硬盘存储卷大小，单位GB */
   VolumeSizeInGB?: number;
   /** CFS存储的配置 */
   VolumeSourceCFS?: CFSConfig;
@@ -2241,14 +2259,16 @@ declare interface CreateNotebookRequest {
   AutomaticStopTime?: number;
   /** 标签配置 */
   Tags?: Tag[];
-  /** 数据配置 */
+  /** 数据配置，只支持WEDATA_HDFS存储类型 */
   DataConfigs?: DataConfig[];
   /** 镜像信息 */
   ImageInfo?: ImageInfo;
-  /** 镜像类型 */
+  /** 镜像类型，包括SYSTEM、TCR、CCR */
   ImageType?: string;
   /** SSH配置信息 */
   SSHConfig?: SSHConfig;
+  /** GooseFS存储配置 */
+  VolumeSourceGooseFS?: GooseFS;
 }
 
 declare interface CreateNotebookResponse {
@@ -2363,7 +2383,7 @@ declare interface CreateTrainingTaskRequest {
   StartCmdInfo?: StartCmdInfo;
   /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
   TrainingMode?: string;
-  /** 数据配置，依赖DataSource字段 */
+  /** 数据配置，依赖DataSource字段，数量不超过10个 */
   DataConfigs?: DataConfig[];
   /** VPC Id */
   VpcId?: string;
@@ -2373,13 +2393,13 @@ declare interface CreateTrainingTaskRequest {
   Output?: CosPathInfo;
   /** CLS日志配置 */
   LogConfig?: LogConfig;
-  /** 调优参数 */
+  /** 调优参数，不超过2048个字符 */
   TuningParameters?: string;
   /** 是否上报日志 */
   LogEnable?: boolean;
-  /** 备注，最多500个字 */
+  /** 备注，不超过1024个字符 */
   Remark?: string;
-  /** 数据来源，eg：DATASET、COS、CFS、HDFS */
+  /** 数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx */
   DataSource?: string;
   /** 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292) */
   CallbackUrl?: string;
@@ -3097,7 +3117,7 @@ declare interface DescribeNotebooksRequest {
   Order?: string;
   /** 根据哪个字段排序，如：CreateTime、UpdateTime，默认为UpdateTime */
   OrderField?: string;
-  /** 过滤器，eg：[{ "Name": "Id", "Values": ["nb-123456789"] }]取值范围Name（名称）：notebook1Id（notebook ID）：nb-123456789Status（状态）：Starting / Running / Stopped / Stopping / Failed / SubmitFailedChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）ChargeStatus（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ BILLING_STORAGE（存储计费中）/ARREARS_STOP（欠费停止）DefaultCodeRepoId（默认代码仓库ID）：cr-123456789AdditionalCodeRepoId（关联代码仓库ID）：cr-123456789LifecycleScriptId（生命周期ID）：ls-12312312311312 */
+  /** 过滤器，eg：[{ "Name": "Id", "Values": ["nb-123456789"] }]取值范围Name（名称）：notebook1Id（notebook ID）：nb-123456789Status（状态）：Starting / Running / Stopped / Stopping / Failed / SubmitFailedCreator（创建者 uin）：100014761913ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）ChargeStatus（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ BILLING_STORAGE（存储计费中）/ARREARS_STOP（欠费停止）DefaultCodeRepoId（默认代码仓库ID）：cr-123456789AdditionalCodeRepoId（关联代码仓库ID）：cr-123456789LifecycleScriptId（生命周期ID）：ls-12312312311312 */
   Filters?: Filter[];
   /** 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }] */
   TagFilters?: TagFilter[];
@@ -3217,7 +3237,7 @@ declare interface DescribeTrainingTaskResponse {
 }
 
 declare interface DescribeTrainingTasksRequest {
-  /** 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]取值范围：Name（名称）：task1Id（task ID）：train-23091792777383936Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILEDChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止） */
+  /** 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]取值范围：Name（名称）：task1Id（task ID）：train-23091792777383936Status（状态）：SUBMITTING/PENDING/STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILEDResourceGroupId（资源组 Id）：trsg-kvvfrwl7Creator（创建者 uin）：100014761913ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止） */
   Filters?: Filter[];
   /** 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }] */
   TagFilters?: TagFilter[];
@@ -3227,7 +3247,7 @@ declare interface DescribeTrainingTasksRequest {
   Limit?: number;
   /** 输出列表的排列顺序。取值范围：ASC（升序排列）/ DESC（降序排列），默认为DESC */
   Order?: string;
-  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
+  /** 排序的依据字段， 取值范围 "CreateTime" 、"UpdateTime"、"StartTime"，默认为UpdateTime */
   OrderField?: string;
 }
 
@@ -3315,9 +3335,9 @@ declare interface ModifyModelServiceResponse {
 declare interface ModifyNotebookRequest {
   /** notebook id */
   Id: string;
-  /** 名称 */
+  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
-  /** 计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
+  /** （不允许修改）计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
   ChargeType: string;
   /** 计算资源配置 */
   ResourceConf: ResourceConf;
@@ -3331,15 +3351,15 @@ declare interface ModifyNotebookRequest {
   RootAccess: boolean;
   /** 资源组ID(for预付费) */
   ResourceGroupId?: string;
-  /** Vpc-Id */
+  /** （不允许修改）Vpc-Id */
   VpcId?: string;
-  /** 子网Id */
+  /** （不允许修改）子网Id */
   SubnetId?: string;
   /** 存储卷大小，单位GB */
   VolumeSizeInGB?: number;
-  /** 存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
+  /** （不允许修改）存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
   VolumeSourceType?: string;
-  /** CFS存储的配置 */
+  /** （不允许修改）CFS存储的配置 */
   VolumeSourceCFS?: CFSConfig;
   /** 日志配置 */
   LogConfig?: LogConfig;
@@ -3353,11 +3373,11 @@ declare interface ModifyNotebookRequest {
   AutomaticStopTime?: number;
   /** 标签配置 */
   Tags?: Tag[];
-  /** 数据配置 */
+  /** 数据配置，只支持WEDATA_HDFS */
   DataConfigs?: DataConfig[];
   /** 镜像信息 */
   ImageInfo?: ImageInfo;
-  /** 镜像类型 */
+  /** 镜像类型，包括SYSTEM、TCR、CCR */
   ImageType?: string;
   /** SSH配置 */
   SSHConfig?: SSHConfig;

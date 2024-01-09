@@ -786,6 +786,50 @@ declare interface Deal {
   ResourceId: string[] | null;
 }
 
+/** 计量标准接入类产品支持API接口获取用量明细返回数据结构 */
+declare interface DescribeDosageDetail {
+  /** 日期 */
+  Date?: string | null;
+  /** 账号 ID 是用户在腾讯云的唯一账号标识 */
+  Uin?: string | null;
+  /** 用量统计类型 */
+  DosageType?: string | null;
+  /** 产品编码 */
+  ProductCode?: string | null;
+  /** 子产品编码 */
+  SubProductCode?: string | null;
+  /** 组件类型编码 */
+  BillingItemCode?: string | null;
+  /** 组件编码 */
+  SubBillingItemCode?: string | null;
+  /** 产品名称 */
+  ProductCodeName?: string | null;
+  /** 子产品名称 */
+  SubProductCodeName?: string | null;
+  /** 组件类型 */
+  BillingItemCodeName?: string | null;
+  /** 组件 */
+  SubBillingItemCodeName?: string | null;
+  /** 用量单位 */
+  DosageUnit?: string | null;
+  /** 用量起始时间 */
+  DosageBeginTime?: string | null;
+  /** 用量截止时间 */
+  DosageEndTime?: string | null;
+  /** 标准用量 */
+  DosageValue?: number | null;
+  /** 抵扣用量 */
+  DeductValue?: number | null;
+  /** 抵扣余量 */
+  RemainValue?: number | null;
+  /** sdkAppId */
+  SdkAppId?: string | null;
+  /** 其他信息 */
+  AttrStr?: JsonObject[] | null;
+  /** 用量模板名称 */
+  SheetName?: string[] | null;
+}
+
 /** 由时间和值组成的数据结构 */
 declare interface DetailPoint {
   /** 时间 */
@@ -872,6 +916,14 @@ declare interface ExcludedProducts {
   GoodsName: string;
   /** postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。 */
   PayMode: string;
+}
+
+/** Json对象 */
+declare interface JsonObject {
+  /** key值 */
+  Key?: string;
+  /** value值 */
+  Value?: string;
 }
 
 /** 按计费模式汇总消费详情 */
@@ -1794,6 +1846,28 @@ declare interface DescribeDosageDetailByDateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDosageDetailListRequest {
+  /** 用量起始时间，如：2023-02-01 */
+  StartTime: string;
+  /** 用量截止时间，如：2023-02-28 */
+  EndTime: string;
+  /** 产品编码，已支持查询的产品如下：p_ccc（云联络中心）p_rav（实时音视频）p_pstn（号码保护）p_smh（智能媒资托管）p_coding_devops（CODING DevOps）p_dsa（全球IP应用加速） */
+  ProductCode: string;
+  /** 数据偏移量（从0开始） */
+  Offset: number;
+  /** 单次数据量（最大3000） */
+  Limit: number;
+  /** 用量统计类型：用量明细的数据统计汇总周期类型，包括minute-按5分钟汇总、hour-按小时汇总、day-按天汇总、month-按月汇总、comm-其他，默认查询所有类型明细，目前各产品已支持的统计类型如下：p_ccc（云联络中心）：comm、dayp_rav（实时音视频）：minute、dayp_pstn（号码保护）：commp_smh（智能媒资托管）：dayp_coding_devops（CODING DevOps）：comm、dayp_dsa（全球IP应用加速）：minute */
+  DosageType?: string;
+}
+
+declare interface DescribeDosageDetailListResponse {
+  /** 用量明细集合 */
+  Record?: DescribeDosageDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSavingPlanCoverageRequest {
   /** 费用起始日期，格式yyyy-MM-dd */
   StartDate: string;
@@ -2027,6 +2101,8 @@ declare interface Billing {
   DescribeDosageCosDetailByDate(data: DescribeDosageCosDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageCosDetailByDateResponse>;
   /** 按日期获取产品用量明细 {@link DescribeDosageDetailByDateRequest} {@link DescribeDosageDetailByDateResponse} */
   DescribeDosageDetailByDate(data: DescribeDosageDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailByDateResponse>;
+  /** 获取计量标准接入类产品用量明细 {@link DescribeDosageDetailListRequest} {@link DescribeDosageDetailListResponse} */
+  DescribeDosageDetailList(data: DescribeDosageDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailListResponse>;
   /** 查询节省计划覆盖率数据 {@link DescribeSavingPlanCoverageRequest} {@link DescribeSavingPlanCoverageResponse} */
   DescribeSavingPlanCoverage(data: DescribeSavingPlanCoverageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanCoverageResponse>;
   /** 查询节省计划总览明细 {@link DescribeSavingPlanOverviewRequest} {@link DescribeSavingPlanOverviewResponse} */

@@ -510,6 +510,8 @@ declare interface AiRecognitionTaskAsrFullTextResult {
   Input?: AiRecognitionTaskAsrFullTextResultInput;
   /** 语音全文识别任务输出信息。 */
   Output?: AiRecognitionTaskAsrFullTextResultOutput | null;
+  /** 任务进度。 */
+  Progress?: number | null;
 }
 
 /** 语音全文识别的输入。 */
@@ -818,6 +820,8 @@ declare interface AiRecognitionTaskTransTextResult {
   Input?: AiRecognitionTaskTransTextResultInput;
   /** 翻译任务输出信息。 */
   Output?: AiRecognitionTaskTransTextResultOutput | null;
+  /** 任务进度。 */
+  Progress?: number | null;
 }
 
 /** 翻译的输入。 */
@@ -1376,7 +1380,7 @@ declare interface AudioSeparateConfig {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfo {
-  /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv。当外层参数 Container 为 hls 时，可选值为：libfdk_aac；libmp3lame。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac；libmp3lame。 */
   Codec: string;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate: number;
@@ -1388,7 +1392,7 @@ declare interface AudioTemplateInfo {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfoForUpdate {
-  /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac；libmp3lame。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac；libmp3lame。 */
   Codec?: string | null;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate?: number | null;
@@ -1476,6 +1480,8 @@ declare interface ComposeAudioStream {
   SampleRate?: number;
   /** 声道数，可选值：1：单声道 。2：双声道（默认）。 */
   AudioChannel?: number;
+  /** 参考码率，单位 kbps，范围：26~10000。如果设置，编码时会尽量按该码率进行编码。如果不设置，服务将根据音频参数自动采用合适的码率。 */
+  Bitrate?: number;
 }
 
 /** 视频编辑/合成任务画布信息。 */
@@ -1680,6 +1686,8 @@ declare interface ComposeVideoStream {
   Codec?: string;
   /** 视频帧率，取值范围：[0, 60]，单位：Hz。 默认值：0，表示和第一个视频帧率一致。 */
   Fps?: number;
+  /** 参考码率，单位 kbps，范围：50~35000。如果设置，编码时会尽量按该码率进行编码。如果不设置，服务将通过画面复杂度自动采用合适的码率。 */
+  Bitrate?: number;
 }
 
 /** 内容审核模板详情 */
