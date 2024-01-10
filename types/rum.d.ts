@@ -256,20 +256,6 @@ declare interface CreateLogExportResponse {
   RequestId?: string;
 }
 
-declare interface CreateOfflineLogConfigRequest {
-  /** 项目唯一上报 key */
-  ProjectKey: string;
-  /** 需要监听的用户唯一标示(aid 或 uin) */
-  UniqueID: string;
-}
-
-declare interface CreateOfflineLogConfigResponse {
-  /** 接口返回信息 */
-  Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateProjectRequest {
   /** 创建的项目名(不为空且最长为 200) */
   Name: string;
@@ -1558,36 +1544,6 @@ declare interface DescribeOfflineLogConfigsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeOfflineLogRecordsRequest {
-  /** 项目唯一上报 key */
-  ProjectKey: string;
-}
-
-declare interface DescribeOfflineLogRecordsResponse {
-  /** 接口调用信息 */
-  Msg: string;
-  /** 记录 ID 数组 */
-  RecordSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeOfflineLogsRequest {
-  /** 项目唯一上报 key */
-  ProjectKey: string;
-  /** 离线日志文件 id 列表 */
-  FileIDs: string[];
-}
-
-declare interface DescribeOfflineLogsResponse {
-  /** 接口调用返回信息 */
-  Msg: string;
-  /** 日志列表 */
-  LogSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeProjectLimitsRequest {
   /** 项目ID */
   ProjectID: number;
@@ -1991,8 +1947,6 @@ declare interface Rum {
   (): Versions;
   /** 创建日志下载任务 {@link CreateLogExportRequest} {@link CreateLogExportResponse} */
   CreateLogExport(data: CreateLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogExportResponse>;
-  /** 创建离线日志监听 {@link CreateOfflineLogConfigRequest} {@link CreateOfflineLogConfigResponse} */
-  CreateOfflineLogConfig(data: CreateOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineLogConfigResponse>;
   /** 创建 RUM 应用 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建发布文件记录 {@link CreateReleaseFileRequest} {@link CreateReleaseFileResponse} */
@@ -2071,10 +2025,6 @@ declare interface Rum {
   DescribeLogList(data: DescribeLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogListResponse>;
   /** 获取设置的离线日志监听配置 {@link DescribeOfflineLogConfigsRequest} {@link DescribeOfflineLogConfigsResponse} */
   DescribeOfflineLogConfigs(data: DescribeOfflineLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogConfigsResponse>;
-  /** 获取所有离线日志记录(最多100条) {@link DescribeOfflineLogRecordsRequest} {@link DescribeOfflineLogRecordsResponse} */
-  DescribeOfflineLogRecords(data: DescribeOfflineLogRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogRecordsResponse>;
-  /** 获取对应离线日志 {@link DescribeOfflineLogsRequest} {@link DescribeOfflineLogsResponse} */
-  DescribeOfflineLogs(data: DescribeOfflineLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogsResponse>;
   /** 获取应用上报抽样信息 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
   DescribeProjectLimits(data: DescribeProjectLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectLimitsResponse>;
   /** 获取 RUM 应用列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */

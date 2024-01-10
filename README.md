@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 244+ 款产品，10894+ 服务数</summary>
+<details><summary>共计 244+ 款产品，10913+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -186,7 +186,7 @@ drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 20
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
 dsgc | [数据安全治理中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(148) |
 dtf | [分布式事务](https://cloud.tencent.com/document/product/1224) | 2020-05-06(1) |
-dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 2021-12-06(49) | 2018-03-30(23) |
+dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 2021-12-06(71) | 2018-03-30(23) |
 eb | [事件总线](https://cloud.tencent.com/document/product/1359) | 2021-04-16(32) |
 ecc | [英文作文批改](https://cloud.tencent.com/document/product/1076) | 2018-12-13(4) |
 ecdn | [全站加速网络](https://cloud.tencent.com/document/product/570) | 2019-10-12(16) |
@@ -267,7 +267,7 @@ redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 20
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(65) |
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(62) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(46+7) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(27) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10) |

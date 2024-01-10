@@ -410,6 +410,18 @@ declare interface DifferenceItem {
   FinishedAt?: string | null;
 }
 
+/** 订阅任务的kafka分区规则。符合库名和表名正则表达式的数据将按照RuleType计算该条数据将被投递的kafka分区。如果配置了多个规则，将按照配置的顺序，第一条命中的规则生效。 */
+declare interface DistributeRule {
+  /** 规则类型。非mongo产品的枚举值为: table-按表名分区，pk-按表名+主键分区，cols-按列名分区。mongo的枚举值为：collection-按集合名分区、collectionAndObjectId-按集合+主键分区。 */
+  RuleType: string | null;
+  /** 库名匹配规则，请填写正则表达式 */
+  DbPattern: string | null;
+  /** 表名匹配规则，如果 DatabaseType 为 mongodb，则匹配集合名 */
+  TablePattern: string | null;
+  /** 列名。如果 RuleType 为 cols，此项必填。订阅任务会用该列的值计算分区。mongo没有按列分区，因此也不用传这个字段。 */
+  Columns?: string[] | null;
+}
+
 /** 数据同步中的选项 */
 declare interface DynamicOptions {
   /** 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)，PartialDDL(自定义,和DdlOptions一起起作用 )；必填、dts会用该值覆盖原有的值 */
@@ -480,6 +492,42 @@ declare interface Endpoint {
   CcnOwnerUin?: string | null;
 }
 
+/** 数据订阅的实例节点信息 */
+declare interface EndpointItem {
+  /** 源库所在地域。如果 AccessType 为 ccn，请填vpc所在地域，因为此时不知道源库在哪个地域。其他接入方式，请填订阅任务所在地域，因为确保订阅任务与源库在同一地域是最优的网络方案。 */
+  DatabaseRegion: string | null;
+  /** 用户名 */
+  User: string | null;
+  /** 密码。作为入参时必填，作为出参时为空。 */
+  Password: string | null;
+  /** 目标实例ID。如果 AccessType 为 cdb，此项必填。配置InstanceId时会查询并校验实例信息。mysql的查询接口经过了鉴权，请确保子用户有 cdb:DescribeDBInstances 的接口权限。 */
+  InstanceId?: string | null;
+  /** 云主机ID。如果 AccessType 为 cvm，此项必填。 */
+  CvmInstanceId?: string | null;
+  /** 专线网关ID。如果 AccessType 为 dcg，此项必填。 */
+  UniqDcgId?: string | null;
+  /** 云联网ID。如果 AccessType 为 ccn，此项必填。 */
+  CcnId?: string | null;
+  /** vpn网关ID。如果 AccessType 为 vpncloud，此项必填。 */
+  UniqVpnGwId?: string | null;
+  /** VpcID。如果 AccessType 为 dcg\ccn\vpncloud\vpc，此项必填。 */
+  VpcId?: string | null;
+  /** 子网ID。如果 AccessType 为 dcg\ccn\vpncloud\vpc，此项必填。 */
+  SubnetId?: string | null;
+  /** 数据库地址，支持域名与IP。如果 AccessType 为 dcg\ccn\vpncloud\vpc\extranet\intranet，此项必填。 */
+  HostName?: string | null;
+  /** 数据库端口。如果 AccessType 为 dcg\ccn\vpncloud\vpc\extranet\intranet\cvm，此项必填。 */
+  Port?: number | null;
+  /** 是否走加密传输，枚举值：UnEncrypted-不加密，Encrypted-加密。只有mysql支持，不填默认不加密，其他产品不填。 */
+  EncryptConn?: string | null;
+  /** 数据库网络环境。如果 AccessType 为 ccn 此项必填。枚举值：UserIDC-自建idc，TencentVPC-腾讯云，Aws-aws，AliYun-阿里云，Others-其他。 */
+  DatabaseNetEnv?: string | null;
+  /** 云联网网关所属的主账号uin、跨账号云联网需要。 */
+  CcnOwnerUin?: string | null;
+  /** 为业务添加的额外信息。参数名作key，参数值作value。 tdpg必填参数：PgDatabase-订阅的库名。 */
+  ExtraAttr?: KeyValuePairOption[] | null;
+}
+
 /** 错误信息及其解决方案 */
 declare interface ErrInfo {
   /** 错误原因 */
@@ -500,6 +548,32 @@ declare interface ErrorInfoItem {
   ErrorLog?: string | null;
   /** 文档提示 */
   HelpDoc?: string | null;
+}
+
+/** kafka消费者组详情 */
+declare interface GroupInfo {
+  /** 消费者组账号 */
+  Account: string;
+  /** 消费者组名称 */
+  ConsumerGroupName: string;
+  /** 消费者组备注 */
+  Description: string | null;
+  /** 消费组偏移量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区的偏移量。各分区的偏移量详见StateOfPartition字段 */
+  ConsumerGroupOffset: number;
+  /** 消费组未消费的数据量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区未消费的数据量。各分区未消费数据量详见StateOfPartition字段 */
+  ConsumerGroupLag: number;
+  /** 消费延迟(单位为秒) */
+  Latency: number;
+  /** 各分区的消费状态 */
+  StateOfPartition: MonitorInfo[];
+  /** 消费者组创建时间，格式为YYYY-MM-DD hh:mm:ss */
+  CreatedAt: string;
+  /** 消费者组修改时间，格式为YYYY-MM-DD hh:mm:ss */
+  UpdatedAt: string;
+  /** 消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作 */
+  ConsumerGroupState: string;
+  /** 每个消费者正在消费的分区 */
+  PartitionAssignment: PartitionAssignment[] | null;
 }
 
 /** 迁移任务列表 */
@@ -620,6 +694,28 @@ declare interface MigrateOption {
   ExtraAttr?: KeyValuePairOption[] | null;
 }
 
+/** 数据数据订阅的对象，用于修改订阅对象接口。与SubscribeObject结构类似，只是类型和参数名不同。 */
+declare interface ModifiedSubscribeObject {
+  /** 订阅对象的类型，枚举值为：0-库，1-表(该值对于mongo任务来说，是集合) 。注意：mongo只支持全实例、单库或者单集合订阅，因此该字段不要与SubscribeObjectType冲突。如：SubscribeObjectType=4，表示mongo单库订阅，那么该字段应该传0。 */
+  ObjectsType: number | null;
+  /** 订阅数据库的名称 */
+  DatabaseName: string | null;
+  /** 订阅数据库中表(或集合)的名称。如果 ObjectsType 为 1，那么此字段为必填，且不为空； */
+  TableNames?: string[] | null;
+}
+
+/** kafka消费者组的分区详情 */
+declare interface MonitorInfo {
+  /** 当前分区的编号，从0开始 */
+  PartitionNo: number;
+  /** 当前分区的偏移量 */
+  ConsumerGroupOffset: number;
+  /** 当前分区未消费的数据量 */
+  ConsumerGroupLag: number;
+  /** 当前分区的消费延迟(单位为秒) */
+  Latency: number;
+}
+
 /** 同步的数据库对对象描述 */
 declare interface Objects {
   /** 同步对象类型 Partial(部分对象) */
@@ -630,6 +726,14 @@ declare interface Objects {
   AdvancedObjects?: string[] | null;
   /** OnlineDDL类型，冗余字段不做配置用途 */
   OnlineDDL?: OnlineDDL | null;
+}
+
+/** 数据订阅kafka分区中checkpoint信息 */
+declare interface OffsetTimeMap {
+  /** kafka分区编号 */
+  PartitionNo?: number | null;
+  /** kafka offset */
+  Offset?: number | null;
 }
 
 /** OnlineDDL类型 */
@@ -660,6 +764,22 @@ declare interface Options {
   RateLimitOption?: RateLimitOption | null;
   /** 自动重试的时间窗口设置 */
   AutoRetryTimeRangeMinutes?: number | null;
+}
+
+/** 数据订阅中kafka消费者组的分区分配情况。该数据是实时查询的，如果需要最新数据，需重新掉接口查询。 */
+declare interface PartitionAssignment {
+  /** 消费者的clientId */
+  ClientId: string;
+  /** 该消费者正在消费的分区 */
+  PartitionNo: number[] | null;
+}
+
+/** mongo输出聚合设置。输出默认 Change Event */
+declare interface PipelineInfo {
+  /** 聚合运算符：$addFields、$match、$project、$replaceRoot、$redact、$replaceWith、$set、$unset。其中 $replaceWith、$set、$unset 只有当订阅实例是4.2及以上版本可选。 */
+  AggOp?: string | null;
+  /** 聚合表达式。必须是json格式 */
+  AggCmd?: string | null;
 }
 
 /** 任务步骤信息 */
@@ -794,6 +914,104 @@ declare interface StepTip {
   HelpDoc?: string | null;
   /** 当前步骤跳过信息 */
   SkipInfo?: string | null;
+}
+
+/** 订阅报错信息 */
+declare interface SubsErr {
+  /** 报错信息 */
+  Message?: string;
+}
+
+/** 订阅校验任务的各步骤信息。 */
+declare interface SubscribeCheckStepInfo {
+  /** 步骤名称 */
+  StepName?: string | null;
+  /** 步骤Id */
+  StepId?: string | null;
+  /** 步骤编号，从 1 开始 */
+  StepNo?: number | null;
+  /** 当前步骤状态，可能值为 notStarted,running,finished,failed */
+  Status?: string | null;
+  /** 当前步骤进度 */
+  Percent?: number | null;
+  /** 错误提示 */
+  Errors?: SubscribeCheckStepTip[] | null;
+  /** 告警提示 */
+  Warnings?: SubscribeCheckStepTip[] | null;
+}
+
+/** 订阅校验任务的提示信息 */
+declare interface SubscribeCheckStepTip {
+  /** 错误或告警的详细信息 */
+  Message?: string | null;
+  /** 帮助文档 */
+  HelpDoc?: string | null;
+}
+
+/** 订阅实例信息 */
+declare interface SubscribeInfo {
+  /** 数据订阅的实例ID */
+  SubscribeId?: string;
+  /** 数据订阅实例的名称 */
+  SubscribeName?: string;
+  /** 订阅实例发送数据的kafka topic */
+  Topic?: string | null;
+  /** 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql) */
+  Product?: string;
+  /** 订阅的数据库实例ID（如果订阅的是云数据库）如果实例不是腾讯云上的，此值为空。 */
+  InstanceId?: string | null;
+  /** 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空 */
+  InstanceStatus?: string | null;
+  /** 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng */
+  Status?: string;
+  /** 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error */
+  SubsStatus?: string;
+  /** 上次修改时间，时间格式如：Y-m-d h:m:s */
+  ModifyTime?: string | null;
+  /** 创建时间，时间格式如：Y-m-d h:m:s */
+  CreateTime?: string | null;
+  /** 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  IsolateTime?: string | null;
+  /** 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  ExpireTime?: string | null;
+  /** 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  OfflineTime?: string | null;
+  /** 计费方式，0 - 包年包月，1 - 按量计费 */
+  PayType?: number;
+  /** 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费 */
+  AutoRenewFlag?: number;
+  /** 数据订阅实例所属地域 */
+  Region?: string;
+  /** 接入方式。枚举值：extranet(公网) vpncloud(vpn接入) dcg(专线接入) ccn(云联网) cdb(云数据库) cvm(云主机自建) intranet(自研上云) vpc(私有网络vpc) */
+  AccessType?: string | null;
+  /** 数据库节点信息 */
+  Endpoints?: EndpointItem[] | null;
+  /** 数据订阅版本, 当前只支持 kafka 版本。 */
+  SubscribeVersion?: string | null;
+  /** 标签 */
+  Tags?: TagItem[] | null;
+  /** 任务报错信息，如果有的话。 */
+  Errors?: SubsErr[] | null;
+}
+
+/** 订阅的kafka分区数和分区规则。mariadb，percona，tdsqlmysql，tdpg不支持自定义分区，所以DistributeRules和DefaultRuleType可以不填，但是NumberOfPartitions是必填。 */
+declare interface SubscribeKafkaConfig {
+  /** kafka分区数量，枚举值为1，4，8 */
+  NumberOfPartitions: number | null;
+  /** 分区规则。当NumberOfPartitions > 1时，该项必填。 */
+  DistributeRules?: DistributeRule[] | null;
+  /** 默认分区策略。当NumberOfPartitions > 1时，该项必填。不满足DistributeRules中正则表达式的数据，将按照默认分区策略计算分区。非mongo产品的枚举值为: table-按表名分区，pk-按表名+主键分区。mongo的枚举值为：collection-按集合名分区。该字段与DistributeRules搭配使用，如果配置了该字段，视为配置了一条DistributeRules。 */
+  DefaultRuleType?: string | null;
+}
+
+/** 订阅的的数据库表信息，用于配置和查询订阅任务接口。 */
+declare interface SubscribeObject {
+  /** 订阅数据的类型，枚举值：database-数据库，table-数据库的表(如果 DatabaseType 为 mongodb，则表示集合) */
+  ObjectType: string | null;
+  /** 订阅的数据库名称 */
+  Database: string | null;
+  /** 订阅数据库中表的名称。如果 DatabaseType 为 mongodb，填集合名。mongodb只支持订阅单库或者单集合。 */
+  Tables?: string[] | null;
 }
 
 /** 数据同步配置多节点数据库的节点信息。多节点数据库，如tdsqlmysql使用该结构；单节点数据库，如mysql使用Endpoint。 */
@@ -1022,6 +1240,32 @@ declare interface CompleteMigrateJobResponse {
   RequestId?: string;
 }
 
+declare interface ConfigureSubscribeJobRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+  /** 数据订阅的类型，当 DatabaseType 不为 mongodb 时，枚举值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 DatabaseType 为 mongodb 时，枚举值为 all-全实例更新；database-订阅单库；collection-订阅单集合 */
+  SubscribeMode: string;
+  /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
+  AccessType: string;
+  /** 数据库节点信息 */
+  Endpoints: EndpointItem[];
+  /** Kafka配置 */
+  KafkaConfig: SubscribeKafkaConfig;
+  /** 订阅的数据库表信息，当 SubscribeMode 不为 all和ddl 时，SubscribeObjects 为必选参数 */
+  SubscribeObjects?: SubscribeObject[];
+  /** 订阅数据格式，如：protobuf、json、avro。注意具体可选值依赖当前链路支持能力，数据格式详情参考官网的消费demo文档 */
+  Protocol?: string;
+  /** mongo选填参数：输出聚合设置。 */
+  PipelineInfo?: PipelineInfo[];
+  /** 为业务添加的额外信息。参数名作key，参数值作value。mysql选填参数：ProcessXA-是否处理XA事务，填true处理，不填或填其他值不处理。mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream，不填也是默认changeStream。其他业务暂没有可选参数。 */
+  ExtraAttr?: KeyValuePairOption[];
+}
+
+declare interface ConfigureSubscribeJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ConfigureSyncJobRequest {
   /** 同步实例id（即标识一个同步作业），形如sync-werwfs23 */
   JobId: string;
@@ -1112,6 +1356,24 @@ declare interface CreateCompareTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateConsumerGroupRequest {
+  /** 订阅实例id */
+  SubscribeId: string;
+  /** 消费组名称，以数字、字母(大小写)或者_ - .开头，以数字、字母(大小写)结尾。实际生成的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName} */
+  ConsumerGroupName: string;
+  /** 账号名称。以数字、字母(大小写)或者_ - .开头，以数字、字母(大小写)结尾。实际生成的账户全称形如：account-#{SubscribeId}-#{AccountName} */
+  AccountName: string;
+  /** 消费组密码，长度必须大于3 */
+  Password: string;
+  /** 消费组备注 */
+  Description?: string;
+}
+
+declare interface CreateConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMigrateCheckJobRequest {
   /** 数据迁移任务ID */
   JobId: string;
@@ -1158,6 +1420,40 @@ declare interface CreateModifyCheckSyncJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateSubscribeCheckJobRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+}
+
+declare interface CreateSubscribeCheckJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSubscribeRequest {
+  /** 订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版) */
+  Product: string;
+  /** 付费方式，枚举值：0-包年包月，1-按量计费 */
+  PayType: number;
+  /** 购买时长。当 payType 为包年包月时，该项需要填，单位为月，最小值为 1，最大值为 120。不填默认1 */
+  Duration?: number;
+  /** 是否自动续费。当 payType 为包年包月时，该项需要填。枚举值：0-不自动续费，1-自动续费。默认不自动续费。按量计费设置该标识无效。 */
+  AutoRenew?: number;
+  /** 购买数量,默认为1，最大为10 */
+  Count?: number;
+  /** 实例资源标签 */
+  Tags?: TagItem[];
+  /** 任务名，自定义 */
+  Name?: string;
+}
+
+declare interface CreateSubscribeResponse {
+  /** 数据订阅实例的ID数组 */
+  SubscribeIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSyncJobRequest {
   /** 付款类型, 如：PrePay(表示包年包月)、PostPay(表示按时按量) */
   PayMode: string;
@@ -1200,6 +1496,20 @@ declare interface DeleteCompareTaskRequest {
 }
 
 declare interface DeleteCompareTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteConsumerGroupRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。请务必保证消费组名称正确。 */
+  ConsumerGroupName: string;
+  /** 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。请务必保证账户名称正确。 */
+  AccountName: string;
+}
+
+declare interface DeleteConsumerGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1274,6 +1584,24 @@ declare interface DescribeCompareTasksResponse {
   TotalCount?: number | null;
   /** 一致性校验列表 */
   Items?: CompareTaskItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumerGroupsRequest {
+  /** 订阅实例id */
+  SubscribeId: string;
+  /** 返回记录的起始偏移量。默认0 */
+  Offset?: number;
+  /** 单次返回的记录数量。默认10 */
+  Limit?: number;
+}
+
+declare interface DescribeConsumerGroupsResponse {
+  /** 指定实例下的消费者组总数 */
+  TotalCount?: number;
+  /** 消费者组列表 */
+  Items?: GroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1446,6 +1774,156 @@ declare interface DescribeModifyCheckSyncJobResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOffsetByTimeRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+  /** 时间点，格式为：Y-m-d h:m:s。如果输入时间比当前时间晚的多，相当于查询最新offset；如果输入时间比当前时间早的多，相当于查询最老offset；如果输入空，默认0时间，等价于查询最老offset。 */
+  Time: string;
+}
+
+declare interface DescribeOffsetByTimeResponse {
+  /** 时间与Offset的对应 */
+  Items?: OffsetTimeMap[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSubscribeCheckJobRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+}
+
+declare interface DescribeSubscribeCheckJobResponse {
+  /** 订阅实例ID */
+  SubscribeId?: string;
+  /** 失败或者报错提示，成功则提示success。 */
+  Message?: string | null;
+  /** 任务运行状态，可能值为 running,failed,success */
+  Status?: string;
+  /** 当前总体进度，范围 0~100 */
+  Progress?: number;
+  /** 校验总步骤数 */
+  StepAll?: number;
+  /** 当前执行步骤 */
+  StepNow?: number;
+  /** 各个步骤运行状态 */
+  Steps?: SubscribeCheckStepInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSubscribeDetailRequest {
+  /** 订阅实例ID */
+  SubscribeId: string;
+}
+
+declare interface DescribeSubscribeDetailResponse {
+  /** 数据订阅的ID，形如subs-b6x64o31tm */
+  SubscribeId?: string;
+  /** 数据订阅实例的名称 */
+  SubscribeName?: string;
+  /** 订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版) */
+  Product?: string;
+  /** 订阅的云数据库实例ID，只有订阅云数据库该值才有意义 */
+  InstanceId?: string | null;
+  /** 订阅的云数据库实例状态，只有订阅云数据库该值才有意义。可能值为：running, isolated, offline */
+  InstanceStatus?: string | null;
+  /** 订阅任务计费状态，可能值为：正常normal, 隔离中isolating, 已隔离isolated, 下线中offlining, 按量转包年包月中 post2PrePayIng */
+  Status?: string;
+  /** 订阅任务状态，可能值为：未启动notStarted, 校验中checking, 校验不通过checkNotPass, 校验通过checkPass, 启动中starting, 运行中running, 异常出错error */
+  SubsStatus?: string;
+  /** 修改时间，时间格式如：Y-m-d h:m:s */
+  ModifyTime?: string | null;
+  /** 创建时间，时间格式如：Y-m-d h:m:s */
+  CreateTime?: string | null;
+  /** 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  IsolateTime?: string | null;
+  /** 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  ExpireTime?: string | null;
+  /** 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  OfflineTime?: string | null;
+  /** 付费方式，可能值为：0-包年包月，1-按量计费 */
+  PayType?: number;
+  /** 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费 */
+  AutoRenewFlag?: number;
+  /** 任务所在地域 */
+  Region?: string;
+  /** Kafka topic */
+  Topic?: string | null;
+  /** Kafka服务Broker地址 */
+  Broker?: string | null;
+  /** 数据订阅的类型，当 Product 不为 mongodb 时，可能值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 Product 为 mongodb 时，可能值为 all-全实例更新；database-订阅单库；collection-订阅单集合 */
+  SubscribeMode?: string | null;
+  /** 订阅数据格式。如果为空则用的默认格式: mysql\cynosdbmysql\mariadb\percona\tdsqlpercona\tdpg是protobuf，mongo是json。当 DatabaseType 为 mysql和cynosdbmysql 时有三种可选协议：protobuf\avro\json。数据格式详情参考官网的消费demo文档 */
+  Protocol?: string | null;
+  /** 订阅的数据库表信息 */
+  SubscribeObjects?: SubscribeObject[] | null;
+  /** kafka配置信息 */
+  KafkaConfig?: SubscribeKafkaConfig | null;
+  /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
+  AccessType?: string | null;
+  /** 接入类型信息 */
+  Endpoints?: EndpointItem[] | null;
+  /** mongo输出聚合设置 */
+  PipelineInfo?: PipelineInfo[] | null;
+  /** 标签 */
+  Tags?: TagItem[] | null;
+  /** 订阅任务报错信息 */
+  Errors?: SubsErr[] | null;
+  /** 为业务添加的额外信息。参数名作key，参数值作value。mysql选填参数：ProcessXA-是否处理XA事务，为true处理，其他不处理。mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream。 */
+  ExtraAttr?: KeyValuePairOption[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSubscribeJobsRequest {
+  /** 订阅 ID 筛选，精确匹配 */
+  SubscribeId?: string;
+  /** 订阅名称，前缀模糊匹配 */
+  SubscribeName?: string;
+  /** 订阅的云上数据库实例的 ID，精确匹配 */
+  InstanceId?: string;
+  /** 计费模式筛选，可能的值：0-包年包月，1-按量计费 */
+  PayType?: number;
+  /** 订阅的数据库产品，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql) */
+  Product?: string;
+  /** 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining，按量转包年包月中 post2PrePayIng */
+  Status?: string[];
+  /** 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error */
+  SubsStatus?: string[];
+  /** 返回记录的起始偏移量。默认0 */
+  Offset?: number;
+  /** 单次返回的记录数量。默认20，最大100 */
+  Limit?: number;
+  /** 排序方向，可选的值为"DESC"和"ASC"，默认为"DESC"，按创建时间逆序排序 */
+  OrderDirection?: string;
+  /** tag 过滤条件，多个 TagFilter 之间关系为且 */
+  TagFilters?: TagFilter[];
+}
+
+declare interface DescribeSubscribeJobsResponse {
+  /** 符合查询条件的实例总数 */
+  TotalCount?: number;
+  /** 数据订阅实例的信息列表 */
+  Items?: SubscribeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSubscribeReturnableRequest {
+  /** 数据订阅实例的ID */
+  SubscribeId: string;
+}
+
+declare interface DescribeSubscribeReturnableResponse {
+  /** 实例是否支持退还/退货 */
+  IsReturnable?: boolean;
+  /** 不支持退还的原因 */
+  ReturnFailMessage?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSyncJobsRequest {
   /** 同步任务id，如sync-werwfs23 */
   JobId?: string;
@@ -1480,6 +1958,16 @@ declare interface DescribeSyncJobsResponse {
   RequestId?: string;
 }
 
+declare interface DestroyIsolatedSubscribeRequest {
+  /** 数据订阅实例的ID */
+  SubscribeId: string;
+}
+
+declare interface DestroyIsolatedSubscribeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyMigrateJobRequest {
   /** 任务id */
   JobId?: string;
@@ -1506,6 +1994,16 @@ declare interface IsolateMigrateJobRequest {
 }
 
 declare interface IsolateMigrateJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface IsolateSubscribeRequest {
+  /** 订阅实例ID */
+  SubscribeId: string;
+}
+
+declare interface IsolateSubscribeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1550,6 +2048,40 @@ declare interface ModifyCompareTaskRequest {
 }
 
 declare interface ModifyCompareTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyConsumerGroupDescriptionRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。请务必保证消费组名称正确。 */
+  ConsumerGroupName: string;
+  /** 账户名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。请务必保证账户名称正确。 */
+  AccountName: string;
+  /** 修改之后的消费组描述 */
+  Description: string;
+}
+
+declare interface ModifyConsumerGroupDescriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyConsumerGroupPasswordRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+  /** 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName} */
+  AccountName: string;
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName} */
+  ConsumerGroupName: string;
+  /** 旧密码 */
+  OldPassword: string;
+  /** 新密码。字符长度不小于3，不大于32 */
+  NewPassword: string;
+}
+
+declare interface ModifyConsumerGroupPasswordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1636,6 +2168,50 @@ declare interface ModifyMigrationJobResponse {
   RequestId?: string;
 }
 
+declare interface ModifySubscribeAutoRenewFlagRequest {
+  /** 订阅实例ID */
+  SubscribeId: string;
+  /** 自动续费标识。1-自动续费，0-不自动续费 */
+  AutoRenewFlag: number;
+}
+
+declare interface ModifySubscribeAutoRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySubscribeNameRequest {
+  /** 数据订阅实例的ID */
+  SubscribeId: string;
+  /** 修改后的数据订阅实例的名称，长度限制为[1,60] */
+  SubscribeName: string;
+}
+
+declare interface ModifySubscribeNameResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySubscribeObjectsRequest {
+  /** 数据订阅实例的ID */
+  SubscribeId: string;
+  /** 数据订阅的类型，非mongo任务的枚举值：0-全实例更新；1-数据更新；2-结构更新；3-数据更新+结构更新。mongo任务的枚举值：0-全实例更新；4-订阅单库；5-订阅单集合 */
+  SubscribeObjectType: number;
+  /** 修改后的订阅数据库表信息。会覆盖原来的订阅对象，所以除非 SubscribeObjectType = 0或2，否则改字段必填。 */
+  Objects?: ModifiedSubscribeObject[];
+  /** kafka分区策略。如果不填，默认不修改。如果填了，会覆盖原来的策略。 */
+  DistributeRules?: DistributeRule[];
+  /** 默认分区策略。不满足DistributeRules中正则表达式的数据，将按照默认分区策略计算分区。非mongo产品支持的默认策略: table-按表名分区，pk-按表名+主键分区。mongo的默认策略仅支持：collection-按集合名分区。该字段与DistributeRules搭配使用。如果配置了DistributeRules，该字段也必填。如果配置了该字段，视为配置了一条DistributeRules，原来的分区策略也会被覆盖。 */
+  DefaultRuleType?: string;
+  /** mongo输出聚合设置，mongo任务可选。如果不填，默认不修改。 */
+  PipelineInfo?: PipelineInfo[];
+}
+
+declare interface ModifySubscribeObjectsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySyncJobConfigRequest {
   /** 同步任务id */
   JobId: string;
@@ -1710,6 +2286,36 @@ declare interface RecoverSyncJobResponse {
   RequestId?: string;
 }
 
+declare interface ResetConsumerGroupOffsetRequest {
+  /** 订阅实例id */
+  SubscribeId: string;
+  /** 订阅的kafka topic */
+  TopicName: string;
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName} */
+  ConsumerGroupName: string;
+  /** 需要修改offset的分区编号 */
+  PartitionNos: number[];
+  /** 重置方式。枚举值为 earliest-从最开始位置开始消费；latest-从最新位置开始消费；datetime-从指定时间前最近的checkpoint开始消费 */
+  ResetMode: string;
+  /** 当 ResetMode 为 datetime 时，该项需要填，格式为：Y-m-d h:m:s。如果不填，默认用0时间，效果与earliest相同。 */
+  ResetDatetime?: string;
+}
+
+declare interface ResetConsumerGroupOffsetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetSubscribeRequest {
+  /** 数据订阅实例的ID */
+  SubscribeId: string;
+}
+
+declare interface ResetSubscribeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResizeSyncJobRequest {
   /** 同步任务id */
   JobId: string;
@@ -1730,6 +2336,16 @@ declare interface ResumeMigrateJobRequest {
 }
 
 declare interface ResumeMigrateJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumeSubscribeRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+}
+
+declare interface ResumeSubscribeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1800,6 +2416,16 @@ declare interface StartModifySyncJobRequest {
 }
 
 declare interface StartModifySyncJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartSubscribeRequest {
+  /** 数据订阅实例的 ID */
+  SubscribeId: string;
+}
+
+declare interface StartSubscribeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2551,6 +3177,8 @@ declare interface Dts {
   (): Versions;
   /** 完成数据迁移任务 {@link CompleteMigrateJobRequest} {@link CompleteMigrateJobResponse} */
   CompleteMigrateJob(data: CompleteMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteMigrateJobResponse>;
+  /** 配置订阅任务 {@link ConfigureSubscribeJobRequest} {@link ConfigureSubscribeJobResponse} */
+  ConfigureSubscribeJob(data: ConfigureSubscribeJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureSubscribeJobResponse>;
   /** 配置同步任务 {@link ConfigureSyncJobRequest} {@link ConfigureSyncJobResponse} */
   ConfigureSyncJob(data: ConfigureSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureSyncJobResponse>;
   /** 恢复暂停中的迁移任务 {@link ContinueMigrateJobRequest} {@link ContinueMigrateJobResponse} */
@@ -2561,22 +3189,32 @@ declare interface Dts {
   CreateCheckSyncJob(data: CreateCheckSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCheckSyncJobResponse>;
   /** 创建一致性校验任务 {@link CreateCompareTaskRequest} {@link CreateCompareTaskResponse} */
   CreateCompareTask(data: CreateCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCompareTaskResponse>;
+  /** 创建消费组 {@link CreateConsumerGroupRequest} {@link CreateConsumerGroupResponse} */
+  CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 校验迁移任务 {@link CreateMigrateCheckJobRequest} {@link CreateMigrateCheckJobResponse} */
   CreateMigrateCheckJob(data: CreateMigrateCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrateCheckJobResponse>;
   /** 购买迁移任务 {@link CreateMigrationServiceRequest} {@link CreateMigrationServiceResponse} */
   CreateMigrationService(data: CreateMigrationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationServiceResponse>;
   /** 创建修改同步配置的校验任务 {@link CreateModifyCheckSyncJobRequest} {@link CreateModifyCheckSyncJobResponse} */
   CreateModifyCheckSyncJob(data: CreateModifyCheckSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModifyCheckSyncJobResponse>;
+  /** 创建订阅任务 {@link CreateSubscribeRequest} {@link CreateSubscribeResponse} */
+  CreateSubscribe(data: CreateSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscribeResponse>;
+  /** 校验订阅任务 {@link CreateSubscribeCheckJobRequest} {@link CreateSubscribeCheckJobResponse} */
+  CreateSubscribeCheckJob(data: CreateSubscribeCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscribeCheckJobResponse>;
   /** 创建同步任务 {@link CreateSyncJobRequest} {@link CreateSyncJobResponse} */
   CreateSyncJob(data: CreateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSyncJobResponse>;
   /** 删除一致性校验任务 {@link DeleteCompareTaskRequest} {@link DeleteCompareTaskResponse} */
   DeleteCompareTask(data: DeleteCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompareTaskResponse>;
+  /** 删除消费组 {@link DeleteConsumerGroupRequest} {@link DeleteConsumerGroupResponse} */
+  DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 查询同步校验任务结果 {@link DescribeCheckSyncJobResultRequest} {@link DescribeCheckSyncJobResultResponse} */
   DescribeCheckSyncJobResult(data?: DescribeCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSyncJobResultResponse>;
   /** 查询一致性校验任务详情 {@link DescribeCompareReportRequest} {@link DescribeCompareReportResponse} */
   DescribeCompareReport(data: DescribeCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompareReportResponse>;
   /** 查询一致性校验任务列表 {@link DescribeCompareTasksRequest} {@link DescribeCompareTasksResponse} */
   DescribeCompareTasks(data: DescribeCompareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompareTasksResponse>;
+  /** 获取数据订阅的消费组详情 {@link DescribeConsumerGroupsRequest} {@link DescribeConsumerGroupsResponse} */
+  DescribeConsumerGroups(data: DescribeConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupsResponse>;
   /** 查询可迁移的实例列表 {@link DescribeMigrateDBInstancesRequest} {@link DescribeMigrateDBInstancesResponse} */
   DescribeMigrateDBInstances(data: DescribeMigrateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateDBInstancesResponse>;
   /** 查询迁移校验任务结果 {@link DescribeMigrationCheckJobRequest} {@link DescribeMigrationCheckJobResponse} */
@@ -2587,20 +3225,38 @@ declare interface Dts {
   DescribeMigrationJobs(data?: DescribeMigrationJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationJobsResponse>;
   /** 查询修改对象的校验任务的结果 {@link DescribeModifyCheckSyncJobResultRequest} {@link DescribeModifyCheckSyncJobResultResponse} */
   DescribeModifyCheckSyncJobResult(data: DescribeModifyCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyCheckSyncJobResultResponse>;
+  /** 查询kafka offset {@link DescribeOffsetByTimeRequest} {@link DescribeOffsetByTimeResponse} */
+  DescribeOffsetByTime(data: DescribeOffsetByTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOffsetByTimeResponse>;
+  /** 查看校验结果 {@link DescribeSubscribeCheckJobRequest} {@link DescribeSubscribeCheckJobResponse} */
+  DescribeSubscribeCheckJob(data: DescribeSubscribeCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeCheckJobResponse>;
+  /** 查询订阅任务详情 {@link DescribeSubscribeDetailRequest} {@link DescribeSubscribeDetailResponse} */
+  DescribeSubscribeDetail(data: DescribeSubscribeDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeDetailResponse>;
+  /** 获取数据订阅实例列表 {@link DescribeSubscribeJobsRequest} {@link DescribeSubscribeJobsResponse} */
+  DescribeSubscribeJobs(data?: DescribeSubscribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeJobsResponse>;
+  /** 查询订阅实例是否可以退换 {@link DescribeSubscribeReturnableRequest} {@link DescribeSubscribeReturnableResponse} */
+  DescribeSubscribeReturnable(data: DescribeSubscribeReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeReturnableResponse>;
   /** 查询同步任务信息 {@link DescribeSyncJobsRequest} {@link DescribeSyncJobsResponse} */
   DescribeSyncJobs(data?: DescribeSyncJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncJobsResponse>;
+  /** 下线已隔离的数据订阅任务 {@link DestroyIsolatedSubscribeRequest} {@link DestroyIsolatedSubscribeResponse} */
+  DestroyIsolatedSubscribe(data: DestroyIsolatedSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyIsolatedSubscribeResponse>;
   /** 下线数据迁移任务 {@link DestroyMigrateJobRequest} {@link DestroyMigrateJobResponse} */
   DestroyMigrateJob(data?: DestroyMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMigrateJobResponse>;
   /** 下线同步任务 {@link DestroySyncJobRequest} {@link DestroySyncJobResponse} */
   DestroySyncJob(data: DestroySyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySyncJobResponse>;
   /** 隔离数据迁移任务 {@link IsolateMigrateJobRequest} {@link IsolateMigrateJobResponse} */
   IsolateMigrateJob(data: IsolateMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateMigrateJobResponse>;
+  /** 销毁订阅任务 {@link IsolateSubscribeRequest} {@link IsolateSubscribeResponse} */
+  IsolateSubscribe(data: IsolateSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateSubscribeResponse>;
   /** 隔离同步任务 {@link IsolateSyncJobRequest} {@link IsolateSyncJobResponse} */
   IsolateSyncJob(data: IsolateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateSyncJobResponse>;
   /** 修改一致性校验任务 {@link ModifyCompareTaskRequest} {@link ModifyCompareTaskResponse} */
   ModifyCompareTask(data: ModifyCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompareTaskResponse>;
   /** 修改一致性校验任务名称 {@link ModifyCompareTaskNameRequest} {@link ModifyCompareTaskNameResponse} */
   ModifyCompareTaskName(data: ModifyCompareTaskNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompareTaskNameResponse>;
+  /** 修改消费组备注 {@link ModifyConsumerGroupDescriptionRequest} {@link ModifyConsumerGroupDescriptionResponse} */
+  ModifyConsumerGroupDescription(data: ModifyConsumerGroupDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupDescriptionResponse>;
+  /** 修改消费组密码 {@link ModifyConsumerGroupPasswordRequest} {@link ModifyConsumerGroupPasswordResponse} */
+  ModifyConsumerGroupPassword(data: ModifyConsumerGroupPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupPasswordResponse>;
   /** 调整实例规格 {@link ModifyMigrateJobSpecRequest} {@link ModifyMigrateJobSpecResponse} */
   ModifyMigrateJobSpec(data: ModifyMigrateJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateJobSpecResponse>;
   /** 修改迁移名称 {@link ModifyMigrateNameRequest} {@link ModifyMigrateNameResponse} */
@@ -2611,6 +3267,12 @@ declare interface Dts {
   ModifyMigrateRuntimeAttribute(data: ModifyMigrateRuntimeAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateRuntimeAttributeResponse>;
   /** 配置迁移服务 {@link ModifyMigrationJobRequest} {@link ModifyMigrationJobResponse} */
   ModifyMigrationJob(data: ModifyMigrationJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationJobResponse>;
+  /** 修改订阅实例自动续费标识 {@link ModifySubscribeAutoRenewFlagRequest} {@link ModifySubscribeAutoRenewFlagResponse} */
+  ModifySubscribeAutoRenewFlag(data: ModifySubscribeAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscribeAutoRenewFlagResponse>;
+  /** 修改数据订阅实例的名称 {@link ModifySubscribeNameRequest} {@link ModifySubscribeNameResponse} */
+  ModifySubscribeName(data: ModifySubscribeNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscribeNameResponse>;
+  /** 修改订阅对象 {@link ModifySubscribeObjectsRequest} {@link ModifySubscribeObjectsResponse} */
+  ModifySubscribeObjects(data: ModifySubscribeObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscribeObjectsResponse>;
   /** 修改同步任务配置 {@link ModifySyncJobConfigRequest} {@link ModifySyncJobConfigResponse} */
   ModifySyncJobConfig(data: ModifySyncJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySyncJobConfigResponse>;
   /** 修改同步任务的传输速率 {@link ModifySyncRateLimitRequest} {@link ModifySyncRateLimitResponse} */
@@ -2623,10 +3285,16 @@ declare interface Dts {
   RecoverMigrateJob(data: RecoverMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMigrateJobResponse>;
   /** 解除隔离同步任务 {@link RecoverSyncJobRequest} {@link RecoverSyncJobResponse} */
   RecoverSyncJob(data: RecoverSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverSyncJobResponse>;
+  /** 重置kafka offset {@link ResetConsumerGroupOffsetRequest} {@link ResetConsumerGroupOffsetResponse} */
+  ResetConsumerGroupOffset(data: ResetConsumerGroupOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConsumerGroupOffsetResponse>;
+  /** 重置订阅任务 {@link ResetSubscribeRequest} {@link ResetSubscribeResponse} */
+  ResetSubscribe(data: ResetSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSubscribeResponse>;
   /** 调整同步任务规格 {@link ResizeSyncJobRequest} {@link ResizeSyncJobResponse} */
   ResizeSyncJob(data: ResizeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeSyncJobResponse>;
   /** 重试迁移任务 {@link ResumeMigrateJobRequest} {@link ResumeMigrateJobResponse} */
   ResumeMigrateJob(data: ResumeMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeMigrateJobResponse>;
+  /** 恢复订阅任务 {@link ResumeSubscribeRequest} {@link ResumeSubscribeResponse} */
+  ResumeSubscribe(data: ResumeSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSubscribeResponse>;
   /** 重试同步任务 {@link ResumeSyncJobRequest} {@link ResumeSyncJobResponse} */
   ResumeSyncJob(data: ResumeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSyncJobResponse>;
   /** 跳过迁移校验检查项 {@link SkipCheckItemRequest} {@link SkipCheckItemResponse} */
@@ -2639,6 +3307,8 @@ declare interface Dts {
   StartMigrateJob(data: StartMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartMigrateJobResponse>;
   /** 开始修改配置流程 {@link StartModifySyncJobRequest} {@link StartModifySyncJobResponse} */
   StartModifySyncJob(data: StartModifySyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartModifySyncJobResponse>;
+  /** 启动订阅任务 {@link StartSubscribeRequest} {@link StartSubscribeResponse} */
+  StartSubscribe(data: StartSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<StartSubscribeResponse>;
   /** 启动同步任务 {@link StartSyncJobRequest} {@link StartSyncJobResponse} */
   StartSyncJob(data?: StartSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartSyncJobResponse>;
   /** 终止一致性校验任务 {@link StopCompareRequest} {@link StopCompareResponse} */

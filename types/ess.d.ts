@@ -1867,10 +1867,12 @@ declare interface CreatePersonAuthCertificateImageResponse {
 declare interface CreatePrepareFlowRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id */
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
   ResourceId: string;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName: string;
+  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） */
+  ResourceType?: number;
   /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制 */
   Unordered?: boolean;
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。 */
@@ -1883,8 +1885,6 @@ declare interface CreatePrepareFlowRequest {
   Approvers?: FlowCreateApprover[];
   /** 开启或者关闭智能添加填写区： **OPEN**：开启（默认值） **CLOSE**：关闭 */
   IntelligentStatus?: string;
-  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） */
-  ResourceType?: number;
   /** 该字段已废弃，请使用InitiatorComponents */
   Components?: Component;
   /** 发起合同个性化参数用于满足创建及页面操作过程中的个性化要求具体定制化内容详见数据接口说明 */
@@ -2505,12 +2505,12 @@ declare interface DescribeIntegrationRolesRequest {
   Agent?: Agent;
   /** 查询的关键字段，支持Key-Value单值查询。可选键值对如下： Key:"RoleType"，查询角色类型，Values可选： **"1"**：查询系统角色**"2"**：查询自定义角色 Key:"RoleStatus"，查询角色状态，Values可选： **"1"**：查询启用角色**"2"**：查询禁用角色 Key:"IsGroupRole"，是否查询集团角色，Values可选： **"0"**：查询非集团角色**"1"**：查询集团角色 Key:"IsReturnPermissionGroup"，是否返回角色对应权限树，Values可选： **"0"**：接口不返回角色对应的权限树字段**"1"**：接口返回角色对应的权限树字段 */
   Filters?: Filter[];
-  /** OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0,最大2000。分页参数, 需要limit, offset 配合使用例如:您希望得到第三页的数据, 且每页限制最多10条你可以使用 LIMIT 10 OFFSET 20 */
+  /** OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0,最大2000。分页参数, 需要limit, offset 配合使用例如:您希望得到第三页的数据, 且每页限制最多10条您可以使用 LIMIT 10 OFFSET 20 */
   Offset?: number;
 }
 
 declare interface DescribeIntegrationRolesResponse {
-  /** OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0, 最大为2000分页参数, 需要limit, offset 配合使用例如:您希望得到第三页的数据, 且每页限制最多10条你可以使用 LIMIT 10 OFFSET 20 */
+  /** OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0, 最大为2000分页参数, 需要limit, offset 配合使用例如:您希望得到第三页的数据, 且每页限制最多10条您可以使用 LIMIT 10 OFFSET 20 */
   Offset?: number;
   /** 指定分页每页返回的数据条数，单页最大支持 200。 */
   Limit?: number;

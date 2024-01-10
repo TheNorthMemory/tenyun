@@ -1615,7 +1615,7 @@ declare interface ChannelCreatePrepareFlowRequest {
   FlowInfo: BaseFlowInfo;
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent?: Agent;
-  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id */
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
   ResourceId?: string;
   /** 合同流程配置信息，用于配置发起合同时定制化如是否允许修改，某些按钮的隐藏等逻辑 */
   FlowOption?: CreateFlowOption;
@@ -2171,7 +2171,7 @@ declare interface CreateChannelOrganizationInfoChangeUrlRequest {
   Agent: Agent;
   /** 企业信息变更类型，可选类型如下：**1**：企业超管变更, 可以将超管换成同企业的其他员工**2**：企业基础信息变更, 可以改企业名称 , 所在地址 , 法人名字等信息 */
   ChangeType: number;
-  /** 变更链接类型：**WEIXINAPP** : 创建变更短链。需要在移动端打开，会跳转到微信腾讯电子签小程序进行更换。（默认）**APP** : 创建变更小程序链接，可从第三方APP跳转到微信腾讯电子签小程序进行更换。 */
+  /** 变更链接类型：**WEIXINAPP** : 创建变更短链。需要在移动端打开，会跳转到微信腾讯电子签小程序进行更换。（默认）**APP** : 创建变更小程序链接，可从第三方App跳转到微信腾讯电子签小程序进行更换。 */
   Endpoint?: string;
 }
 

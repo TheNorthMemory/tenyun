@@ -2879,7 +2879,7 @@ declare interface Clb {
   DescribeClusterResources(data?: DescribeClusterResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterResourcesResponse>;
   /** 查询跨域2.0版本云联网后端子机和网卡信息 {@link DescribeCrossTargetsRequest} {@link DescribeCrossTargetsResponse} */
   DescribeCrossTargets(data?: DescribeCrossTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossTargetsResponse>;
-  /** 拉取配置绑定的server或location。 {@link DescribeCustomizedConfigAssociateListRequest} {@link DescribeCustomizedConfigAssociateListResponse} */
+  /** 拉取配置绑定的server或location {@link DescribeCustomizedConfigAssociateListRequest} {@link DescribeCustomizedConfigAssociateListResponse} */
   DescribeCustomizedConfigAssociateList(data?: DescribeCustomizedConfigAssociateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigAssociateListResponse>;
   /** 拉取配置列表 {@link DescribeCustomizedConfigListRequest} {@link DescribeCustomizedConfigListResponse} */
   DescribeCustomizedConfigList(data: DescribeCustomizedConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigListResponse>;

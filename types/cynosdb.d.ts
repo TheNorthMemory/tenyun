@@ -592,6 +592,8 @@ declare interface CynosdbInstance {
   ResourcePackages?: ResourcePackage[] | null;
   /** 实例索引形态,可选值【mixedRowColumn（行列混存），onlyRowIndex（仅行存）】 */
   InstanceIndexMode?: string | null;
+  /** 当前实例支持的能力 */
+  InstanceAbility?: InstanceAbility | null;
 }
 
 /** 实例详情 */
@@ -780,6 +782,14 @@ declare interface InputAccount {
   AccountName: string;
   /** 主机，默认‘%’ */
   Host?: string;
+}
+
+/** 实例允许的操作列表 */
+declare interface InstanceAbility {
+  /** 实例是否支持强制重启，可选值：yes：支持，no：不支持 */
+  IsSupportForceRestart?: string | null;
+  /** 不支持强制重启的原因 */
+  NonsupportForceRestartReason?: string | null;
 }
 
 /** 审计日志搜索条件 */
@@ -1474,6 +1484,16 @@ declare interface SecurityGroup {
   SecurityGroupRemark: string;
 }
 
+/** 备可用区库存信息 */
+declare interface SlaveZoneStockInfo {
+  /** 备可用区 */
+  SlaveZone?: string | null;
+  /** 备可用区的库存数量 */
+  StockCount?: number | null;
+  /** 备可用区是否有库存 */
+  HasStock?: boolean | null;
+}
+
 /** 实例慢查询信息 */
 declare interface SlowQueriesItem {
   /** 执行时间戳 */
@@ -1574,6 +1594,8 @@ declare interface ZoneStockInfo {
   HasStock?: boolean;
   /** 库存数量 */
   StockCount?: number;
+  /** 备可用区库存信息 */
+  SlaveZoneStockInfos?: SlaveZoneStockInfo[] | null;
 }
 
 declare interface ActivateInstanceRequest {
@@ -3205,6 +3227,10 @@ declare interface IsolateClusterRequest {
   ClusterId: string;
   /** 该参数已废用 */
   DbType?: string;
+  /** 实例退还原因类型 */
+  IsolateReasonTypes?: number[];
+  /** 实例退还原因补充 */
+  IsolateReason?: string;
 }
 
 declare interface IsolateClusterResponse {
@@ -3223,6 +3249,10 @@ declare interface IsolateInstanceRequest {
   InstanceIdList: string[];
   /** 该参数已废弃 */
   DbType?: string;
+  /** 实例退还原因类型 */
+  IsolateReasonTypes?: number[];
+  /** 实例退还原因补充 */
+  IsolateReason?: string;
 }
 
 declare interface IsolateInstanceResponse {

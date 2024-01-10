@@ -2425,6 +2425,8 @@ declare interface CreateGrafanaInstanceRequest {
   GrafanaInitPassword?: string;
   /** 标签 */
   TagSpecification?: PrometheusTag[];
+  /** 是否自动选择代金券，默认为 false */
+  AutoVoucher?: boolean;
 }
 
 declare interface CreateGrafanaInstanceResponse {
