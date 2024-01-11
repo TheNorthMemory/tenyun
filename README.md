@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 244+ 款产品，10913+ 服务数</summary>
+<details><summary>共计 244+ 款产品，10909+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -300,7 +300,7 @@ tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-
 tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(109) |
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(337) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
-tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(13) |
+tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(9) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(127) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
