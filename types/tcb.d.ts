@@ -281,15 +281,15 @@ declare interface CloudBaseRunKVPriority {
 /** nfs挂载资源 */
 declare interface CloudBaseRunNfsVolumeSource {
   /** NFS挂载Server */
-  Server?: string;
+  Server?: string | null;
   /** Server路径 */
-  Path?: string;
+  Path?: string | null;
   /** 是否只读 */
-  ReadOnly?: boolean;
+  ReadOnly?: boolean | null;
   /** secret名称 */
-  SecretName?: string;
+  SecretName?: string | null;
   /** 临时目录 */
-  EnableEmptyDirVolume?: boolean;
+  EnableEmptyDirVolume?: boolean | null;
 }
 
 /** 版本的列表 */
@@ -389,13 +389,13 @@ declare interface CloudBaseRunVersionFlowItem {
 /** cfs挂载点 */
 declare interface CloudBaseRunVolumeMount {
   /** 资源名 */
-  Name?: string;
+  Name?: string | null;
   /** 挂载路径 */
-  MountPath?: string;
+  MountPath?: string | null;
   /** 是否只读 */
-  ReadOnly?: boolean;
+  ReadOnly?: boolean | null;
   /** Nfs挂载信息 */
-  NfsVolumes?: CloudBaseRunNfsVolumeSource[];
+  NfsVolumes?: CloudBaseRunNfsVolumeSource[] | null;
 }
 
 /** vpc信息 */

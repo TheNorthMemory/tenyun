@@ -3612,6 +3612,48 @@ declare interface DescribeTopicsResponse {
   RequestId?: string;
 }
 
+declare interface ExportRocketMQMessageDetailRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 应用命名空间 */
+  EnvironmentId: string;
+  /** Topic名称如果是死信消息 isDlqMsg=true */
+  TopicName: string;
+  /** 消息id */
+  MsgId: string;
+  /** 是否包含消息体 */
+  IncludeMsgBody: boolean;
+  /** 是否死信消息 */
+  DeadLetterMsg?: boolean;
+}
+
+declare interface ExportRocketMQMessageDetailResponse {
+  /** 消息id */
+  MsgId?: string;
+  /** 消息生成时间戳 */
+  BornTimestamp?: number | null;
+  /** 消息存储时间戳 */
+  StoreTimestamp?: number | null;
+  /** 消息生产客户端地址 */
+  BornHost?: string | null;
+  /** 消息Tag */
+  MsgTag?: string | null;
+  /** 消息Key */
+  MsgKey?: string | null;
+  /** 消息属性 */
+  Properties?: string | null;
+  /** 消息重试次数 */
+  ReConsumeTimes?: number | null;
+  /** Base64编码格式字符串 */
+  MsgBody?: string | null;
+  /** 消息内容的CRC32 Code */
+  MsgBodyCRC?: number | null;
+  /** 消息体大小（单位K）当大于2048时不返回消息 */
+  MsgBodySize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImportRocketMQConsumerGroupsRequest {
   /** 导入topic */
   Groups: RocketMQGroupConfig[];
@@ -4461,6 +4503,8 @@ declare interface Tdmq {
   DescribeTopicMsgs(data: DescribeTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicMsgsResponse>;
   /** 查询主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
+  /** 导出RocketMQ消息详情 {@link ExportRocketMQMessageDetailRequest} {@link ExportRocketMQMessageDetailResponse} */
+  ExportRocketMQMessageDetail(data: ExportRocketMQMessageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportRocketMQMessageDetailResponse>;
   /** 平滑迁移：导入消费者组列表 {@link ImportRocketMQConsumerGroupsRequest} {@link ImportRocketMQConsumerGroupsResponse} */
   ImportRocketMQConsumerGroups(data: ImportRocketMQConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQConsumerGroupsResponse>;
   /** 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */

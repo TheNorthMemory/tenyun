@@ -170,6 +170,8 @@ declare interface BGPInstance {
   ModifyTime?: string | null;
   /** 是否是基础防护加强版 0: 不是 1: 是 */
   BasicPlusFlag?: number | null;
+  /** 是否是商业模式优化-普惠版 */
+  PlanCntFlag?: number | null;
 }
 
 /** 高防包资产实例的规格信息 */
@@ -518,16 +520,16 @@ declare interface EipAddressPackRelation {
 
 /** 高防弹性公网IP关联信息 */
 declare interface EipAddressRelation {
-  /** 高防弹性公网IP绑定的实例地区，例如hk代表香港 */
-  EipAddressRegion: string | null;
+  /** 高防弹性公网IP绑定的实例地区，例如hk代表中国香港 */
+  EipAddressRegion?: string | null;
   /** 绑定的资源实例ID。可能是一个CVM。 */
-  EipBoundRscIns: string | null;
+  EipBoundRscIns?: string | null;
   /** 绑定的弹性网卡ID */
-  EipBoundRscEni: string | null;
+  EipBoundRscEni?: string | null;
   /** 绑定的资源内网ip */
-  EipBoundRscVip: string | null;
+  EipBoundRscVip?: string | null;
   /** 修改时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
 }
 
 /** EIP所属的云产品信息 */
@@ -2237,6 +2239,8 @@ declare interface DescribeListBGPInstancesRequest {
   FilterAssetIpList?: string[];
   /** 是否包含基础防护增强版 0: 不包含 1: 包含 */
   FilterBasicPlusFlag?: number;
+  /** 是否商业模式优化-普惠版 0: 包含商业模式优化-普惠版 1: 只查询商业模式优化-普惠版 */
+  FilterPlanCntFlag?: number;
 }
 
 declare interface DescribeListBGPInstancesResponse {

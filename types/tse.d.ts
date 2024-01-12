@@ -492,7 +492,7 @@ declare interface DescribeWafProtectionResult {
   ObjectStatus?: string | null;
 }
 
-/** 引擎的初始管理账号 */
+/** 引擎的初始管理账号，当前仅支持Apollo引擎 */
 declare interface EngineAdmin {
   /** 控制台初始用户名 */
   Name?: string;

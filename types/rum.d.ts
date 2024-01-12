@@ -392,34 +392,6 @@ declare interface DeleteLogExportResponse {
   RequestId?: string;
 }
 
-declare interface DeleteOfflineLogConfigRequest {
-  /** 项目唯一上报 key */
-  ProjectKey: string;
-  /** 用户唯一标示(uin or aid) */
-  UniqueID: string;
-}
-
-declare interface DeleteOfflineLogConfigResponse {
-  /** 接口调用信息 */
-  Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteOfflineLogRecordRequest {
-  /** 项目唯一上报 key */
-  ProjectKey: string;
-  /** 离线日志文件 id */
-  FileID: string;
-}
-
-declare interface DeleteOfflineLogRecordResponse {
-  /** 接口调用信息 */
-  Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteProjectRequest {
   /** 需要删除的项目 ID */
   ID: number;
@@ -1530,20 +1502,6 @@ declare interface DescribeLogListResponse {
   RequestId?: string;
 }
 
-declare interface DescribeOfflineLogConfigsRequest {
-  /** 项目唯一上报 key */
-  ProjectKey: string;
-}
-
-declare interface DescribeOfflineLogConfigsResponse {
-  /** 接口调用信息 */
-  Msg: string;
-  /** 用户唯一标示数组 */
-  UniqueIDSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeProjectLimitsRequest {
   /** 项目ID */
   ProjectID: number;
@@ -1961,10 +1919,6 @@ declare interface Rum {
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
   /** 删除日志下载任务 {@link DeleteLogExportRequest} {@link DeleteLogExportResponse} */
   DeleteLogExport(data: DeleteLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogExportResponse>;
-  /** 删除 rum 离线日志监听 {@link DeleteOfflineLogConfigRequest} {@link DeleteOfflineLogConfigResponse} */
-  DeleteOfflineLogConfig(data: DeleteOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogConfigResponse>;
-  /** 删除离线日志记录 {@link DeleteOfflineLogRecordRequest} {@link DeleteOfflineLogRecordResponse} */
-  DeleteOfflineLogRecord(data: DeleteOfflineLogRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogRecordResponse>;
   /** 删除 RUM 应用 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除发布文件 {@link DeleteReleaseFileRequest} {@link DeleteReleaseFileResponse} */
@@ -2023,8 +1977,6 @@ declare interface Rum {
   DescribeLogExports(data: DescribeLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogExportsResponse>;
   /** 获取日志列表(已下线，请用DescribeRumLogList) {@link DescribeLogListRequest} {@link DescribeLogListResponse} */
   DescribeLogList(data: DescribeLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogListResponse>;
-  /** 获取设置的离线日志监听配置 {@link DescribeOfflineLogConfigsRequest} {@link DescribeOfflineLogConfigsResponse} */
-  DescribeOfflineLogConfigs(data: DescribeOfflineLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogConfigsResponse>;
   /** 获取应用上报抽样信息 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
   DescribeProjectLimits(data: DescribeProjectLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectLimitsResponse>;
   /** 获取 RUM 应用列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */

@@ -2418,7 +2418,7 @@ declare interface ServiceSetting {
 
 /** 服务统计结果 */
 declare interface ServiceStatisticsResult {
-  /** 请求模版路径:type为接口时返回，服务时不返回 */
+  /** 请求模板路径:type为接口时返回，服务时不返回 */
   Path?: string | null;
   /** 请求方法:type为接口时返回，服务时不返回 */
   Method?: string | null;

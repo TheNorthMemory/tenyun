@@ -1552,6 +1552,66 @@ declare interface PrometheusAgentOverview {
   Name?: string | null;
 }
 
+/** Prometheus自定义告警通知时间段 */
+declare interface PrometheusAlertAllowTimeRange {
+  /** 从0点开始的秒数 */
+  Start?: string | null;
+  /** 从0点开始的秒数 */
+  End?: string | null;
+}
+
+/** Prometheus告警自定义通知模板 */
+declare interface PrometheusAlertCustomReceiver {
+  /** 自定义通知类型alertmanager -- vpc内自建alertmanagerwebhook -- vpc内webhook地址 */
+  Type?: string | null;
+  /** alertmanager/webhook地址。（prometheus实例同vpc内ip） */
+  Url?: string | null;
+  /** 允许发送告警的时间范围 */
+  AllowedTimeRanges?: PrometheusAlertAllowTimeRange[] | null;
+  /** alertmanager所在的内网集群ID */
+  ClusterId?: string | null;
+  /** alertmanager所在的内网集群类型(tke/eks/tdcc) */
+  ClusterType?: string | null;
+}
+
+/** 告警分组内告警规则信息 */
+declare interface PrometheusAlertGroupRuleSet {
+  /** 告警规则名称，同一告警分组下不允许重名 */
+  RuleName?: string | null;
+  /** 标签列表 */
+  Labels?: PrometheusRuleKV[] | null;
+  /** 注释列表告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description。 */
+  Annotations?: PrometheusRuleKV[] | null;
+  /** 规则报警持续时间 */
+  Duration?: string | null;
+  /** 规则表达式，可参考告警规则说明 */
+  Expr?: string | null;
+  /** 告警规则状态:2-启用3-禁用为空默认启用 */
+  State?: number | null;
+}
+
+/** Prometheus告警规则分组信息 */
+declare interface PrometheusAlertGroupSet {
+  /** 告警分组ID，满足正则表达式`alert-[a-z0-9]{8}` */
+  GroupId?: string | null;
+  /** 告警分组名称 */
+  GroupName?: string | null;
+  /** 云监控告警模板ID ，返回告警模板转换后的notice ID。 */
+  AMPReceivers?: string[] | null;
+  /** 自定义告警模板 */
+  CustomReceiver?: PrometheusAlertCustomReceiver | null;
+  /** 告警通知间隔 */
+  RepeatInterval?: string | null;
+  /** 若告警分组通过模板创建，则返回模板ID */
+  TemplateId?: string | null;
+  /** 分组内告警规则详情 */
+  Rules?: PrometheusAlertGroupRuleSet[] | null;
+  /** 分组创建时间 */
+  CreatedAt?: string | null;
+  /** 分组更新时间 */
+  UpdatedAt?: string | null;
+}
+
 /** 告警渠道使用自建alertmanager的配置 */
 declare interface PrometheusAlertManagerConfig {
   /** alertmanager url */
@@ -2522,6 +2582,30 @@ declare interface CreatePrometheusAgentResponse {
   RequestId?: string;
 }
 
+declare interface CreatePrometheusAlertGroupRequest {
+  /** prometheus实例ID */
+  InstanceId?: string;
+  /** 告警分组名称，不能与其他告警分组重名 */
+  GroupName?: string;
+  /** 告警分组状态：2 -- 启用3 -- 禁用不为空时会覆盖 `Rules`字段下所有告警规则状态 */
+  GroupState?: number;
+  /** 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx */
+  AMPReceivers?: string[];
+  /** 自定义告警通知模板 */
+  CustomReceiver?: PrometheusAlertCustomReceiver;
+  /** 告警通知周期（收敛时间），为空默认1h */
+  RepeatInterval?: string;
+  /** 要创建的告警规则列表 */
+  Rules?: PrometheusAlertGroupRuleSet[];
+}
+
+declare interface CreatePrometheusAlertGroupResponse {
+  /** 创建的告警分组ID，满足正则表达式`alert-[a-z0-9]{8}` */
+  GroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePrometheusAlertPolicyRequest {
   /** 实例id */
   InstanceId: string;
@@ -2802,6 +2886,18 @@ declare interface DeletePolicyGroupRequest {
 }
 
 declare interface DeletePolicyGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrometheusAlertGroupsRequest {
+  /** prometheus实例id */
+  InstanceId?: string;
+  /** 需要删除的告警分组ID，形如alert-xxxxx */
+  GroupIds?: string[];
+}
+
+declare interface DeletePrometheusAlertGroupsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3758,6 +3854,28 @@ declare interface DescribePrometheusAgentsResponse {
   AgentSet?: PrometheusAgent[] | null;
   /** Agent 总量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusAlertGroupsRequest {
+  /** Prometheus 实例 ID */
+  InstanceId?: string;
+  /** 返回数量，默认为 20，最大值为 100 */
+  Limit?: number;
+  /** 偏移量，默认为 0 */
+  Offset?: number;
+  /** 告警分组ID，形如alert-xxxx。查询给定ID的告警分组 */
+  GroupId?: string;
+  /** 告警分组名称。查询名称中包含给定字符串的告警分组 */
+  GroupName?: string;
+}
+
+declare interface DescribePrometheusAlertGroupsResponse {
+  /** 告警分组信息 */
+  AlertGroupSet?: PrometheusAlertGroupSet[] | null;
+  /** 告警分组总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4884,6 +5002,46 @@ declare interface UpdatePrometheusAgentStatusResponse {
   RequestId?: string;
 }
 
+declare interface UpdatePrometheusAlertGroupRequest {
+  /** prometheus实例ID */
+  InstanceId?: string;
+  /** 告警分组ID，形如alert-xxxx */
+  GroupId?: string;
+  /** 告警分组名称，不能与其他告警分组重名 */
+  GroupName?: string;
+  /** 告警分组状态：2 -- 启用3 -- 禁用不为空时会覆盖 `Rules`字段下所有告警规则状态 */
+  GroupState?: number;
+  /** 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx */
+  AMPReceivers?: string[];
+  /** 自定义告警通知模板 */
+  CustomReceiver?: PrometheusAlertCustomReceiver;
+  /** 告警通知周期（收敛时间），为空默认1h */
+  RepeatInterval?: string;
+  /** 要创建的告警规则列表 */
+  Rules?: PrometheusAlertGroupRuleSet[];
+}
+
+declare interface UpdatePrometheusAlertGroupResponse {
+  /** 更新的告警分组ID，满足正则表达式`alert-[a-z0-9]{8}` */
+  GroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdatePrometheusAlertGroupStateRequest {
+  /** Prometheus 实例 ID */
+  InstanceId?: string;
+  /** 告警分组ID列表，形如alert-xxxx */
+  GroupIds?: string[];
+  /** 告警分组状态2 -- 启用3 -- 禁用 */
+  GroupState?: number;
+}
+
+declare interface UpdatePrometheusAlertGroupStateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdatePrometheusScrapeJobRequest {
   /** Prometheus 实例 ID(可通过 DescribePrometheusInstances 接口获取) */
   InstanceId: string;
@@ -5011,6 +5169,8 @@ declare interface Monitor {
   CreatePolicyGroup(data: CreatePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyGroupResponse>;
   /** 创建 Prometheus CVM Agent {@link CreatePrometheusAgentRequest} {@link CreatePrometheusAgentResponse} */
   CreatePrometheusAgent(data: CreatePrometheusAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAgentResponse>;
+  /** 创建Prometheus告警规则分组 {@link CreatePrometheusAlertGroupRequest} {@link CreatePrometheusAlertGroupResponse} */
+  CreatePrometheusAlertGroup(data?: CreatePrometheusAlertGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAlertGroupResponse>;
   /** 创建Prometheus告警策略 {@link CreatePrometheusAlertPolicyRequest} {@link CreatePrometheusAlertPolicyResponse} */
   CreatePrometheusAlertPolicy(data: CreatePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAlertPolicyResponse>;
   /** 2.0实例关联集群 {@link CreatePrometheusClusterAgentRequest} {@link CreatePrometheusClusterAgentResponse} */
@@ -5049,6 +5209,8 @@ declare interface Monitor {
   DeleteGrafanaNotificationChannel(data: DeleteGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaNotificationChannelResponse>;
   /** 删除告警策略组 {@link DeletePolicyGroupRequest} {@link DeletePolicyGroupResponse} */
   DeletePolicyGroup(data: DeletePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyGroupResponse>;
+  /** 删除Prometheus告警规则分组 {@link DeletePrometheusAlertGroupsRequest} {@link DeletePrometheusAlertGroupsResponse} */
+  DeletePrometheusAlertGroups(data?: DeletePrometheusAlertGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusAlertGroupsResponse>;
   /** 删除2.0实例告警策略 {@link DeletePrometheusAlertPolicyRequest} {@link DeletePrometheusAlertPolicyResponse} */
   DeletePrometheusAlertPolicy(data: DeletePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusAlertPolicyResponse>;
   /** 解除TMP实例的集群关联 {@link DeletePrometheusClusterAgentRequest} {@link DeletePrometheusClusterAgentResponse} */
@@ -5139,6 +5301,8 @@ declare interface Monitor {
   DescribePrometheusAgentInstances(data: DescribePrometheusAgentInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentInstancesResponse>;
   /** 列出 Prometheus CVM Agent {@link DescribePrometheusAgentsRequest} {@link DescribePrometheusAgentsResponse} */
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
+  /** 列出Prometheus告警分组 {@link DescribePrometheusAlertGroupsRequest} {@link DescribePrometheusAlertGroupsResponse} */
+  DescribePrometheusAlertGroups(data?: DescribePrometheusAlertGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertGroupsResponse>;
   /** 获取2.0实例告警策略列表 {@link DescribePrometheusAlertPolicyRequest} {@link DescribePrometheusAlertPolicyResponse} */
   DescribePrometheusAlertPolicy(data: DescribePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertPolicyResponse>;
   /** 获取TMP实例关联集群列表 {@link DescribePrometheusClusterAgentsRequest} {@link DescribePrometheusClusterAgentsResponse} */
@@ -5271,6 +5435,10 @@ declare interface Monitor {
   UpdateGrafanaWhiteList(data: UpdateGrafanaWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaWhiteListResponse>;
   /** 更新 Prometheus CVM Agent 状态 {@link UpdatePrometheusAgentStatusRequest} {@link UpdatePrometheusAgentStatusResponse} */
   UpdatePrometheusAgentStatus(data: UpdatePrometheusAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusAgentStatusResponse>;
+  /** 更新Prometheus告警规则分组 {@link UpdatePrometheusAlertGroupRequest} {@link UpdatePrometheusAlertGroupResponse} */
+  UpdatePrometheusAlertGroup(data?: UpdatePrometheusAlertGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusAlertGroupResponse>;
+  /** 更新Prometheus告警分组状态 {@link UpdatePrometheusAlertGroupStateRequest} {@link UpdatePrometheusAlertGroupStateResponse} */
+  UpdatePrometheusAlertGroupState(data?: UpdatePrometheusAlertGroupStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusAlertGroupStateResponse>;
   /** 更新 Prometheus Agent 抓取任务 {@link UpdatePrometheusScrapeJobRequest} {@link UpdatePrometheusScrapeJobResponse} */
   UpdatePrometheusScrapeJob(data: UpdatePrometheusScrapeJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusScrapeJobResponse>;
   /** 更新预聚合规则 {@link UpdateRecordingRuleRequest} {@link UpdateRecordingRuleResponse} */
