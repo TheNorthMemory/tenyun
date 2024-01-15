@@ -258,9 +258,9 @@ declare interface ApplicationProxyRule {
   Proto: string;
   /** 端口，支持格式：单个端口，如：80。端口段，如：81-82。表示81，82两个端口。注意：一条规则最多可填写20个端口。 */
   Port: string[];
-  /** 源站类型，取值有：custom：手动添加；origins：源站组。 */
+  /** 源站类型，取值有：custom：手动添加；loadbalancer：负载均衡；origins：源站组。 */
   OriginType: string;
-  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
+  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 loadbalancer 时，表示一个负载均衡，如`["lb-xdffsfasdfs"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
   OriginValue: string[];
   /** 规则ID。 */
   RuleId?: string;
@@ -2063,7 +2063,7 @@ declare interface CreateApplicationProxyRequest {
   SecurityType: number;
   /** 是否开启加速，取值有：0：关闭加速；1：开启加速。 */
   AccelerateType: number;
-  /** 四层代理模式，取值有：hostname：表示子域名模式；instance：表示实例模式。不填写使用默认值instance。 */
+  /** 四层代理模式，取值有： instance：表示实例模式。不填写使用默认值instance。 */
   ProxyType?: string;
   /** 会话保持时间，取值范围：30-3600，单位：秒。不填写使用默认值600。 */
   SessionPersistTime?: number;
@@ -2091,9 +2091,9 @@ declare interface CreateApplicationProxyRuleRequest {
   Proto: string;
   /** 端口，支持格式：80：80端口；81-90：81至90端口。 */
   Port: string[];
-  /** 源站类型，取值有：custom：手动添加；origins：源站组。 */
+  /** 源站类型，取值有：custom：手动添加；loadbalancer：负载均衡；origins：源站组。 */
   OriginType: string;
-  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
+  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 loadbalancer 时，表示一个负载均衡，如`["lb-xdffsfasdfs"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
   OriginValue: string[];
   /** 传递客户端IP，取值有：TOA：TOA（仅Proto=TCP时可选）；PPV1：Proxy Protocol传递，协议版本V1（仅Proto=TCP时可选）；PPV2：Proxy Protocol传递，协议版本V2；OFF：不传递。默认值：OFF。 */
   ForwardClientIp?: string;

@@ -1775,21 +1775,23 @@ declare interface LaneGroup {
 /** 泳道 */
 declare interface LaneInfo {
   /** 泳道ID */
-  LaneId: string | null;
+  LaneId?: string | null;
   /** 泳道名称 */
-  LaneName: string | null;
+  LaneName?: string | null;
   /** 泳道备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 更新时间 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
   /** 泳道部署组 */
-  LaneGroupList: LaneGroup[] | null;
+  LaneGroupList?: LaneGroup[] | null;
   /** 是否入口应用 */
-  Entrance: boolean | null;
+  Entrance?: boolean | null;
   /** 泳道已经关联部署组的命名空间列表 */
-  NamespaceIdList: string[] | null;
+  NamespaceIdList?: string[] | null;
+  /** 泳道部署组ID */
+  LaneGroupId?: string | null;
 }
 
 /** 泳道分页查询 */
