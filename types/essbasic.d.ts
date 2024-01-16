@@ -290,7 +290,7 @@ declare interface CommonFlowApprover {
 declare interface Component {
   /** 控件唯一ID。**在绝对定位方式方式下**，ComponentId为控件的ID，长度不能超过30，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。**在关键字定位方式下**，ComponentId不仅为控件的ID，也是关键字整词。此方式下可以通过"^"来决定是否使用关键字整词匹配能力。例：- 如传入的关键字"^甲方签署^"</font >，则会在PDF文件中有且仅有"甲方签署"关键字的地方（前后不能有其他字符</font >）进行对应操作。- 如传入的关键字为"甲方签署</font >"，则PDF文件中每个出现关键字的位置（前后可以有其他字符</font >）都会执行相应操作。- 如传入的关键字为"^甲方签署</font >"，则PDF文件中每个出现关键字的位置（前面不能有其他字符</font >）都会执行相应操作。- 如传入的关键字为"甲方签署^</font >"，则PDF文件中每个出现关键字的位置（后面不能有其他字符</font >）都会执行相应操作。注：`控件ID可以在一个PDF中不可重复` */
   ComponentId?: string;
-  /** **如果是Component填写控件类型，则可选的字段为**： TEXT : 普通文本控件，输入文本字符串； MULTI_LINE_TEXT : 多行文本控件，输入文本字符串； CHECK_BOX : 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串； FILL_IMAGE : 图片控件，ComponentValue 填写图片的资源 ID； DYNAMIC_TABLE : 动态表格控件； ATTACHMENT : 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔； SELECTOR : 选择器控件，ComponentValue填写选择的字符串内容； DATE : 日期控件；默认是格式化为xxxx年xx月xx日字符串； DISTRICT : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；**如果是SignComponent签署控件类型，则可选的字段为** SIGN_SEAL : 签署印章控件； SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PERSONAL_SEAL : 个人签署印章控件（使用文件发起暂不支持此类型）； SIGN_PAGING_SEAL : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件。注：` 表单域的控件不能作为印章和签名控件` */
+  /** **如果是Component填写控件类型，则可选的字段为**： TEXT : 普通文本控件，输入文本字符串； MULTI_LINE_TEXT : 多行文本控件，输入文本字符串； CHECK_BOX : 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串； FILL_IMAGE : 图片控件，ComponentValue 填写图片的资源 ID； DYNAMIC_TABLE : 动态表格控件； ATTACHMENT : 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔； SELECTOR : 选择器控件，ComponentValue填写选择的字符串内容； DATE : 日期控件；默认是格式化为xxxx年xx月xx日字符串； DISTRICT : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；**如果是SignComponent签署控件类型，需要根据签署人的类型可选的字段为*** 企业方 SIGN_SEAL : 签署印章控件； SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PERSONAL_SEAL : 个人签署印章控件（使用文件发起暂不支持此类型）； SIGN_PAGING_SEAL : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件。* 个人方 SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PERSONAL_SEAL : 个人签署印章控件（使用文件发起暂不支持此类型）； 注：` 表单域的控件不能作为印章和签名控件` */
   ComponentType?: string;
   /** **在绝对定位方式方式下**，ComponentName为控件名，长度不能超过20，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。**在表单域定位方式下**，ComponentName不仅为控件名，也是表单域名称。注：`控件名可以在一个PDF中可以重复` */
   ComponentName?: string;
@@ -904,6 +904,10 @@ declare interface RegistrationOrganizationInfo {
   AdminMobile?: string;
   /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书+对公打款2：法人授权/认证 会根据当前操作人的身份判定,如果当前操作人是法人,则是法人认证, 如果当前操作人不是法人,则走法人授权注:`1. 当前仅支持一种认证方式``2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款` */
   AuthorizationTypes?: number[];
+  /** 经办人的证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  AdminIdCardType?: string;
+  /** 经办人的证件号 */
+  AdminIdCardNumber?: string;
 }
 
 /** 解除协议的签署人，如不指定，默认使用待解除流程(原流程)中的签署人。`注意`: - 不支持更换C端(个人身份类型)签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。 - 目前不支持替换C端(个人身份类型)签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。 - 当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只传参数ApproverSignRole。如果需要指定B端(企业身份类型)签署人，其中ReleasedApprover需要传递的参数如下：`ApproverNumber`, `OrganizationName`, `ApproverType`必传。对于其他身份标识：- **子客企业指定经办人**：OpenId必传，OrganizationOpenId必传；- **非子客企业经办人**：Name、Mobile必传。 */
@@ -1521,14 +1525,16 @@ declare interface ChannelCreateFlowSignUrlRequest {
   Agent: Agent;
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 流程签署人列表，其中结构体的Name，Mobile和ApproverType必传，其他可不传。注:`1. ApproverType目前只支持个人(PERSON)类型的签署人。``2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。` */
-  FlowApproverInfos: FlowApproverInfo[];
+  /** 流程签署人列表，其中结构体的Name，Mobile和ApproverType必传，企业签署人则还需传OrganizationName、OpenId、OrganizationOpenId，其他可不传。注:`1. 签署人只能有手写签名、时间类型和印章类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
+  FlowApproverInfos?: FlowApproverInfo[];
   /** 用户信息，暂未开放 */
   Operator?: UserInfo;
   /** 机构信息，暂未开放 */
   Organization?: OrganizationInfo;
   /** 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议) */
   JumpUrl?: string;
+  /** 链接类型，支持指定以下类型0 : 签署链接 (默认值)1 : 预览链接注:`1. 当指定链接类型为1时，链接为预览链接，打开链接无法签署仅支持预览以及查看当前合同状态。``2. 如需生成发起方预览链接，则签署方信息传空，即FlowApproverInfos传空或者不传。` */
+  UrlType?: number;
 }
 
 declare interface ChannelCreateFlowSignUrlResponse {
@@ -2133,7 +2139,7 @@ declare interface CreateBatchOrganizationRegistrationTasksRequest {
   Agent: Agent;
   /** 当前应用下子客的组织机构注册信息。一次最多支持10条认证流 */
   RegistrationOrganizations: RegistrationOrganizationInfo[];
-  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序示例值：PC */
+  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序**H5**：第三方H5跳转到电子签H5长链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面**SHORT_H5**：第三方H5跳转到电子签H5短链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面示例值：PC */
   Endpoint?: string;
 }
 
@@ -2199,7 +2205,7 @@ declare interface CreateConsoleLoginUrlRequest {
   ModuleId?: string;
   /** 是否展示左侧菜单栏 **ENABLE** : (默认)进入web控制台展示左侧菜单栏 **DISABLE** : 进入web控制台不展示左侧菜单栏注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   MenuStatus?: string;
-  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序 */
+  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序**H5**：H5长链接跳转H5链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面**SHORT_H5**：H5短链跳转H5的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签H5页面 */
   Endpoint?: string;
   /** 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括： **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序 */
   AutoJumpBackEvent?: string;
@@ -2207,10 +2213,14 @@ declare interface CreateConsoleLoginUrlRequest {
   AuthorizationTypes?: number[];
   /** 暂未开放 */
   Operator?: UserInfo;
+  /** 子客经办人身份证注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持居民身份证类型`。 */
+  ProxyOperatorIdCardNumber?: string;
+  /** 认证完成跳转链接注意：`只在H5生效，域名需要联系我们开白`。 */
+  AutoJumpUrl?: string;
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP 一年 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 PC/CHANNEL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP 一年 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 PC/CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP/H5/SHORT_H5 30天 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   ConsoleUrl?: string;
   /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：`企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码` */
   IsActivated?: boolean;
@@ -4323,7 +4333,7 @@ declare interface Essbasic {
   ChannelCreateFlowReminds(data: ChannelCreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link ChannelCreateFlowSignReviewRequest} {@link ChannelCreateFlowSignReviewResponse} */
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
-  /** 获取个人用户H5签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
+  /** 获取用户H5签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
   ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
   /** 创建一码多签签署码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;

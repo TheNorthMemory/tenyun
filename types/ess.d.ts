@@ -216,7 +216,7 @@ declare interface CcInfo {
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
 declare interface Component {
-  /** **如果是Component填写控件类型，则可选的字段为**： TEXT : 普通文本控件，输入文本字符串； MULTI_LINE_TEXT : 多行文本控件，输入文本字符串； CHECK_BOX : 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串； FILL_IMAGE : 图片控件，ComponentValue 填写图片的资源 ID； DYNAMIC_TABLE : 动态表格控件； ATTACHMENT : 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔； SELECTOR : 选择器控件，ComponentValue填写选择的字符串内容； DATE : 日期控件；默认是格式化为xxxx年xx月xx日字符串； DISTRICT : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；**如果是SignComponent签署控件类型，则可选的字段为** SIGN_SEAL : 签署印章控件； SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PERSONAL_SEAL : 个人签署印章控件（使用文件发起暂不支持此类型）； SIGN_PAGING_SEAL : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件。注：` 表单域的控件不能作为印章和签名控件` */
+  /** **如果是Component填写控件类型，则可选的字段为**： TEXT : 普通文本控件，输入文本字符串； MULTI_LINE_TEXT : 多行文本控件，输入文本字符串； CHECK_BOX : 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串； FILL_IMAGE : 图片控件，ComponentValue 填写图片的资源 ID； DYNAMIC_TABLE : 动态表格控件； ATTACHMENT : 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔； SELECTOR : 选择器控件，ComponentValue填写选择的字符串内容； DATE : 日期控件；默认是格式化为xxxx年xx月xx日字符串； DISTRICT : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；**如果是SignComponent签署控件类型，需要根据签署人的类型可选的字段为*** 企业方 SIGN_SEAL : 签署印章控件； SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PERSONAL_SEAL : 个人签署印章控件（使用文件发起暂不支持此类型）； SIGN_PAGING_SEAL : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件。* 个人方 SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PERSONAL_SEAL : 个人签署印章控件（使用文件发起暂不支持此类型）； 注：` 表单域的控件不能作为印章和签名控件` */
   ComponentType: string;
   /** **在绝对定位方式和关键字定位方式下**，指定控件的高度， 控件高度是指控件在PDF文件中的高度，单位为pt（点）。 */
   ComponentHeight: number;
@@ -1044,7 +1044,7 @@ declare interface StaffRole {
   RoleName?: string | null;
 }
 
-/** 创建员工的成功数据 */
+/** 创建员工成功返回的信息支持saas/企微/H5端进行加入。 */
 declare interface SuccessCreateStaffData {
   /** 员工名 */
   DisplayName?: string;
@@ -1056,6 +1056,8 @@ declare interface SuccessCreateStaffData {
   Note?: string | null;
   /** 传入的企微账号id */
   WeworkOpenId?: string;
+  /** H5端员工加入\实名链接只有入参 InvitationNotifyType = H5的时候才会进行返回。 */
+  Url?: string;
 }
 
 /** 删除员工的成功数据 */
@@ -1068,7 +1070,7 @@ declare interface SuccessDeleteStaffData {
   UserId: string;
 }
 
-/** 更新员工信息成功返回的数据信息 */
+/** 更新员工信息成功返回的数据信息， 仅支持未实名的用户进行更新会通过短信、企微消息或者H5Url 链接如果是通过H5邀请加入的方式，会返回H5 链接 */
 declare interface SuccessUpdateStaffData {
   /** 传入的用户名称 */
   DisplayName?: string;
@@ -1076,6 +1078,8 @@ declare interface SuccessUpdateStaffData {
   Mobile?: string;
   /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserId?: string;
+  /** H5端员工实名链接只有入参 InvitationNotifyType = H5的时候才会进行返回。 */
+  Url?: string;
 }
 
 /** 此结构体 (TemplateInfo) 用于描述模板的信息。> **模板组成** >> 一个模板通常会包含以下结构信息>- 模板基本信息>- 发起方参与信息Promoter、签署参与方 Recipients，后者会在模板发起合同时用于指定参与方>- 填写控件 Components>- 签署控件 SignComponents>- 生成模板的文件基础信息 FileInfos */
@@ -1655,16 +1659,18 @@ declare interface CreateFlowSignReviewResponse {
 declare interface CreateFlowSignUrlRequest {
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 流程签署人列表，其中结构体的ApproverName，ApproverMobile和ApproverType必传，其他可不传，注:`1. ApproverType目前只支持个人类型的签署人。``2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。` */
-  FlowApproverInfos: FlowCreateApprover[];
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 流程签署人列表，其中结构体的ApproverName，ApproverMobile和ApproverType必传，企业签署人则需传OrganizationName，其他可不传。注:`1. 签署人只能有手写签名、时间类型和印章类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
+  FlowApproverInfos?: FlowCreateApprover[];
   /** 机构信息，暂未开放 */
   Organization?: OrganizationInfo;
   /** 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议) */
   JumpUrl?: string;
+  /** 链接类型，支持指定以下类型0 : 签署链接 (默认值)1 : 预览链接注:`1. 当指定链接类型为1时，链接为预览链接，打开链接无法签署仅支持预览以及查看当前合同状态。``2. 如需生成发起方预览链接，则签署方信息传空，即FlowApproverInfos传空或者不传。` */
+  UrlType?: number;
 }
 
 declare interface CreateFlowSignUrlResponse {
@@ -1705,6 +1711,10 @@ declare interface CreateIntegrationEmployeesRequest {
   Employees: Staff[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 员工邀请方式如果是来自H5的，参数需要传递H5短信或者企微 请传递SMS，或者不传递 */
+  InvitationNotifyType?: string;
+  /** 回跳地址，在认证成功之后，进行回跳，请保证回跳地址的可用性。使用前请联系对接的客户经理沟通，提供回跳地址的域名，进行域名配置 */
+  JumpUrl?: string;
 }
 
 declare interface CreateIntegrationEmployeesResponse {
@@ -2809,6 +2819,10 @@ declare interface UpdateIntegrationEmployeesRequest {
   Employees: Staff[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 员工邀请方式如果是来自H5的，参数需要传递H5短信或者企微 请传递SMS，或者不传递 */
+  InvitationNotifyType?: string;
+  /** 回跳地址，在认证成功之后，进行回跳，请保证回跳地址的可用性。使用前请联系对接的客户经理沟通，提供回跳地址的域名，进行域名配置。 */
+  JumpUrl?: string;
 }
 
 declare interface UpdateIntegrationEmployeesResponse {
@@ -2913,7 +2927,7 @@ declare interface Ess {
   CreateFlowReminds(data: CreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowRemindsResponse>;
   /** 提交签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
-  /** 获取个人用户H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
+  /** 获取用户H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;
   /** 创建企业部门 {@link CreateIntegrationDepartmentRequest} {@link CreateIntegrationDepartmentResponse} */
   CreateIntegrationDepartment(data: CreateIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationDepartmentResponse>;

@@ -320,6 +320,8 @@ declare interface InstanceConfs {
   OverviewDisplay?: string;
   /** redis大key分析的自定义分割符，仅redis使用 */
   KeyDelimiters?: string[] | null;
+  /** 分片节点数量。 */
+  ShardNum?: string | null;
 }
 
 /** 实例id */
@@ -1709,13 +1711,17 @@ declare interface DescribeRedisTopBigKeysRequest {
   KeyType?: string;
   /** 查询数目，默认为20，最大值为100。 */
   Limit?: number;
+  /** 异步任务ID。当为空时，选择最近任务的ID。 */
+  AsyncRequestId?: number;
+  /** 分片节点序号列表。当列表为空时，选择所有分片节点。 */
+  ShardIds?: number[];
 }
 
 declare interface DescribeRedisTopBigKeysResponse {
   /** top key列表。 */
-  TopKeys: RedisKeySpaceData[];
+  TopKeys?: RedisKeySpaceData[];
   /** 采集时间戳（秒）。 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

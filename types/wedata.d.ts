@@ -9136,18 +9136,6 @@ declare interface DescribeIntegrationVersionNodesInfoResponse {
   RequestId?: string;
 }
 
-declare interface DescribeKafkaTopicInfoRequest {
-  /** 数据源id */
-  DatasourceId: string;
-  /** 数据源类型 */
-  Type: string;
-}
-
-declare interface DescribeKafkaTopicInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeMonitorsByPageRequest {
   /** 项目Id */
   ProjectId?: string;
@@ -13246,8 +13234,6 @@ declare interface Wedata {
   DescribeIntegrationTasks(data: DescribeIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationTasksResponse>;
   /** 查询集成任务版本节点信息 {@link DescribeIntegrationVersionNodesInfoRequest} {@link DescribeIntegrationVersionNodesInfoResponse} */
   DescribeIntegrationVersionNodesInfo(data: DescribeIntegrationVersionNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationVersionNodesInfoResponse>;
-  /** @deprecated 获取kafka的topic信息 {@link DescribeKafkaTopicInfoRequest} {@link DescribeKafkaTopicInfoResponse} */
-  DescribeKafkaTopicInfo(data: DescribeKafkaTopicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaTopicInfoResponse>;
   /** 分页查询质量监控组 {@link DescribeMonitorsByPageRequest} {@link DescribeMonitorsByPageResponse} */
   DescribeMonitorsByPage(data?: DescribeMonitorsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsByPageResponse>;
   /** 获取离线任务长连接Token {@link DescribeOfflineTaskTokenRequest} {@link DescribeOfflineTaskTokenResponse} */
