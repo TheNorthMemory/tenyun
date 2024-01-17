@@ -24,6 +24,28 @@ declare interface IdentityPolicy {
   PolicyDocument?: string | null;
 }
 
+/** 我的共享单元列表详情 */
+declare interface ManagerShareUnit {
+  /** 共享单元ID。 */
+  UnitId?: string;
+  /** 共享单元名称。 */
+  Name?: string;
+  /** 共享单元管理员Uin。 */
+  Uin?: number;
+  /** 共享单元管理员OwnerUin。 */
+  OwnerUin?: number;
+  /** 共享单元地域。 */
+  Area?: string;
+  /** 描述。 */
+  Description?: string | null;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+  /** 共享单元资源数。 */
+  ShareResourceNum?: number | null;
+  /** 共享单元成员数。 */
+  ShareMemberNum?: number | null;
+}
+
 /** 成员管理身份 */
 declare interface MemberIdentity {
   /** 身份ID。 */
@@ -220,6 +242,64 @@ declare interface OrgProductFinancial {
   Ratio?: string | null;
 }
 
+/** 产品资源 */
+declare interface ProductResource {
+  /** 产品资源ID。 */
+  ProductResourceId: string;
+  /** 资源六段式最后一节 */
+  ResourceGrantLast?: string;
+}
+
+/** 共享地域 */
+declare interface ShareArea {
+  /** 地域名称。 */
+  Name?: string;
+  /** 地域标识。 */
+  Area?: string;
+  /** 地域ID。 */
+  AreaId?: number;
+}
+
+/** 共享成员信息 */
+declare interface ShareMember {
+  /** 共享成员Uin。 */
+  ShareMemberUin: number;
+}
+
+/** 共享资源 */
+declare interface ShareResource {
+  /** 共享资源ID。 */
+  ResourceId?: string;
+  /** 产品资源ID。 */
+  ProductResourceId?: string | null;
+}
+
+/** 共享单元成员 */
+declare interface ShareUnitMember {
+  /** 共享成员Uin。 */
+  ShareMemberUin?: number;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+}
+
+/** 共享单元资源 */
+declare interface ShareUnitResource {
+  /** 共享资源ID。 */
+  ResourceId?: string;
+  /** 共享资源类型。 */
+  Type?: string;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+  /** 产品资源ID。 */
+  ProductResourceId?: string;
+  /** 共享单元成员数。 */
+  SharedMemberNum?: number | null;
+  /** 使用中共享单元成员数。 */
+  SharedMemberUseNum?: number | null;
+  /** 共享管理员OwnerUin。 */
+  ShareManagerUin?: number | null;
+}
+
 declare interface AddOrganizationMemberEmailRequest {
   /** 成员Uin */
   MemberUin: number;
@@ -250,6 +330,52 @@ declare interface AddOrganizationNodeRequest {
 declare interface AddOrganizationNodeResponse {
   /** 节点ID。 */
   NodeId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddShareUnitMembersRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享单元地域。 */
+  Area: string;
+  /** 共享成员列表。最大10个。 */
+  Members: ShareMember[];
+}
+
+declare interface AddShareUnitMembersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddShareUnitRequest {
+  /** 共享单元名称。仅支持大小写字母、数字、-、以及_的组合，3-128个字符。 */
+  Name: string;
+  /** 共享单元地域。可通过接口DescribeShareAreas获取支持共享的地域。 */
+  Area: string;
+  /** 共享单元描述。最大128个字符。 */
+  Description?: string;
+}
+
+declare interface AddShareUnitResourcesRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享单元地域。 */
+  Area: string;
+  /** 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489) */
+  Type: string;
+  /** 共享资源列表。最大10个。 */
+  Resources: ProductResource[];
+}
+
+declare interface AddShareUnitResourcesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddShareUnitResponse {
+  /** 共享单元ID。 */
+  UnitId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -454,6 +580,46 @@ declare interface DeleteOrganizationRequest {
 }
 
 declare interface DeleteOrganizationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteShareUnitMembersRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享单元地域。 */
+  Area: string;
+  /** 成员列表。 */
+  Members: ShareMember[];
+}
+
+declare interface DeleteShareUnitMembersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteShareUnitRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+}
+
+declare interface DeleteShareUnitResourcesRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享单元地域。 */
+  Area: string;
+  /** 资源类型。支持共享的资源类型。 */
+  Type: string;
+  /** 共享资源列表。最大10个。 */
+  Resources: ShareResource[];
+}
+
+declare interface DeleteShareUnitResourcesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteShareUnitResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -718,6 +884,84 @@ declare interface DescribeOrganizationResponse {
   RequestId?: string;
 }
 
+declare interface DescribeShareAreasRequest {
+  /** 国际站：en，国内站：zh */
+  Lang?: string;
+}
+
+declare interface DescribeShareAreasResponse {
+  /** 详情 */
+  Items?: ShareArea[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeShareUnitMembersRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享单元地域。 */
+  Area: string;
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
+  Offset: number;
+  /** 限制数目。取值范围：1~50。 */
+  Limit: number;
+  /** 搜索关键字。支持成员uin搜索。 */
+  SearchKey?: string;
+}
+
+declare interface DescribeShareUnitMembersResponse {
+  /** 总数目。 */
+  Total?: number | null;
+  /** 共享单元成员列表。 */
+  Items?: ShareUnitMember[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeShareUnitResourcesRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享单元地域。 */
+  Area: string;
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
+  Offset: number;
+  /** 限制数目。取值范围：1~50。 */
+  Limit: number;
+  /** 搜索关键字。支持产品资源ID搜索。 */
+  SearchKey?: string;
+  /** 共享资源类型。 */
+  Type?: string;
+}
+
+declare interface DescribeShareUnitResourcesResponse {
+  /** 总数目。 */
+  Total?: number | null;
+  /** 共享单元资源列表。 */
+  Items?: ShareUnitResource[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeShareUnitsRequest {
+  /** 共享单元地域。可通过接口DescribeShareAreas获取支持共享的地域。 */
+  Area: string;
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
+  Offset: number;
+  /** 限制数目。取值范围：1~50。 */
+  Limit: number;
+  /** 搜索关键字。支持UnitId和Name搜索。 */
+  SearchKey?: string;
+}
+
+declare interface DescribeShareUnitsResponse {
+  /** 总数目。 */
+  Total?: number | null;
+  /** 共享单元列表。 */
+  Items?: ManagerShareUnit[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListOrganizationIdentityRequest {
   /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
@@ -826,6 +1070,20 @@ declare interface UpdateOrganizationNodeRequest {
 }
 
 declare interface UpdateOrganizationNodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateShareUnitRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享单元名称。仅支持大小写字母、数字、-、以及_的组合，3-128个字符。 */
+  Name?: string;
+  /** 共享单元描述。最大128个字符。 */
+  Description?: string;
+}
+
+declare interface UpdateShareUnitResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1163,6 +1421,12 @@ declare interface Organization {
   AddOrganizationMemberEmail(data: AddOrganizationMemberEmailRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationMemberEmailResponse>;
   /** 添加企业组织节点 {@link AddOrganizationNodeRequest} {@link AddOrganizationNodeResponse} */
   AddOrganizationNode(data: AddOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationNodeResponse>;
+  /** 创建共享单元 {@link AddShareUnitRequest} {@link AddShareUnitResponse} */
+  AddShareUnit(data: AddShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitResponse>;
+  /** 添加共享单元成员 {@link AddShareUnitMembersRequest} {@link AddShareUnitMembersResponse} */
+  AddShareUnitMembers(data: AddShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitMembersResponse>;
+  /** 添加共享单元资源 {@link AddShareUnitResourcesRequest} {@link AddShareUnitResourcesResponse} */
+  AddShareUnitResources(data: AddShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitResourcesResponse>;
   /** 绑定组织成员和组织管理员子账号的授权关系 {@link BindOrganizationMemberAuthAccountRequest} {@link BindOrganizationMemberAuthAccountResponse} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
   /** 取消组织成员和组织管理员子账号的授权关系 {@link CancelOrganizationMemberAuthAccountRequest} {@link CancelOrganizationMemberAuthAccountResponse} */
@@ -1193,6 +1457,12 @@ declare interface Organization {
   DeleteOrganizationMembersPolicy(data: DeleteOrganizationMembersPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersPolicyResponse>;
   /** 批量删除企业组织节点 {@link DeleteOrganizationNodesRequest} {@link DeleteOrganizationNodesResponse} */
   DeleteOrganizationNodes(data: DeleteOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationNodesResponse>;
+  /** 删除共享单元 {@link DeleteShareUnitRequest} {@link DeleteShareUnitResponse} */
+  DeleteShareUnit(data: DeleteShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitResponse>;
+  /** 删除共享单元成员 {@link DeleteShareUnitMembersRequest} {@link DeleteShareUnitMembersResponse} */
+  DeleteShareUnitMembers(data: DeleteShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitMembersResponse>;
+  /** 删除共享单元资源 {@link DeleteShareUnitResourcesRequest} {@link DeleteShareUnitResourcesResponse} */
+  DeleteShareUnitResources(data: DeleteShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitResourcesResponse>;
   /** 获取企业组织信息 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
   /** 获取已设置管理员的互信主体关系列表 {@link DescribeOrganizationAuthNodeRequest} {@link DescribeOrganizationAuthNodeResponse} */
@@ -1215,6 +1485,14 @@ declare interface Organization {
   DescribeOrganizationMembers(data: DescribeOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMembersResponse>;
   /** 获取组织节点列表 {@link DescribeOrganizationNodesRequest} {@link DescribeOrganizationNodesResponse} */
   DescribeOrganizationNodes(data: DescribeOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationNodesResponse>;
+  /** 获取可共享地域列表 {@link DescribeShareAreasRequest} {@link DescribeShareAreasResponse} */
+  DescribeShareAreas(data?: DescribeShareAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareAreasResponse>;
+  /** 获取共享单元成员列表 {@link DescribeShareUnitMembersRequest} {@link DescribeShareUnitMembersResponse} */
+  DescribeShareUnitMembers(data: DescribeShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitMembersResponse>;
+  /** 获取共享单元资源列表 {@link DescribeShareUnitResourcesRequest} {@link DescribeShareUnitResourcesResponse} */
+  DescribeShareUnitResources(data: DescribeShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitResourcesResponse>;
+  /** 获取共享单元列表 {@link DescribeShareUnitsRequest} {@link DescribeShareUnitsResponse} */
+  DescribeShareUnits(data: DescribeShareUnitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitsResponse>;
   /** 获取组织成员访问身份列表 {@link ListOrganizationIdentityRequest} {@link ListOrganizationIdentityResponse} */
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
   /** 移动成员到指定企业组织节点 {@link MoveOrganizationNodeMembersRequest} {@link MoveOrganizationNodeMembersResponse} */
@@ -1229,6 +1507,8 @@ declare interface Organization {
   UpdateOrganizationMemberEmailBind(data: UpdateOrganizationMemberEmailBindRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationMemberEmailBindResponse>;
   /** 更新企业组织节点 {@link UpdateOrganizationNodeRequest} {@link UpdateOrganizationNodeResponse} */
   UpdateOrganizationNode(data: UpdateOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationNodeResponse>;
+  /** 更新共享单元 {@link UpdateShareUnitRequest} {@link UpdateShareUnitResponse} */
+  UpdateShareUnit(data: UpdateShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateShareUnitResponse>;
   /** 接受加入企业组织邀请 {@link V20181225.AcceptOrganizationInvitationRequest} {@link V20181225.AcceptOrganizationInvitationResponse} */
   AcceptOrganizationInvitation(data: V20181225.AcceptOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.AcceptOrganizationInvitationResponse>;
   /** 添加企业组织单元 {@link V20181225.AddOrganizationNodeRequest} {@link V20181225.AddOrganizationNodeResponse} */

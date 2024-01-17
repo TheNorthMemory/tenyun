@@ -445,11 +445,17 @@ declare interface CreatePolicyGroupEventCondition {
 /** 监控数据点 */
 declare interface DataPoint {
   /** 实例对象维度组合 */
-  Dimensions: Dimension[];
+  Dimensions?: Dimension[];
   /** 时间戳数组，表示那些时间点有数据，缺失的时间戳，没有数据点，可以理解为掉点了 */
-  Timestamps: number[];
+  Timestamps?: number[];
   /** 监控值数组，该数组和Timestamps一一对应 */
-  Values: number[];
+  Values?: number[];
+  /** 监控值数组，该数组和Timestamps一一对应 */
+  MaxValues?: number[] | null;
+  /** 监控值数组，该数组和Timestamps一一对应 */
+  MinValues?: number[] | null;
+  /** 监控值数组，该数组和Timestamps一一对应 */
+  AvgValues?: number[] | null;
 }
 
 /** DescribeAccidentEventList接口的出参类型 */
@@ -4377,6 +4383,8 @@ declare interface GetMonitorDataRequest {
   StartTime?: string;
   /** 结束时间，如2018-09-22T20:51:23+08:00，默认为当前时间。 EndTime不能小于StartTime */
   EndTime?: string;
+  /** 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合 */
+  SpecifyStatistics?: number;
 }
 
 declare interface GetMonitorDataResponse {

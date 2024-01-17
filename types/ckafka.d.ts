@@ -4353,7 +4353,7 @@ declare interface Ckafka {
   DescribeInstanceAttributes(data: DescribeInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAttributesResponse>;
   /** 获取实例列表信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 获取实例列表详情 {@link DescribeInstancesDetailRequest} {@link DescribeInstancesDetailResponse} */
+  /** 获取实例集群列表详情 {@link DescribeInstancesDetailRequest} {@link DescribeInstancesDetailResponse} */
   DescribeInstancesDetail(data?: DescribeInstancesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDetailResponse>;
   /** 枚举地域 {@link DescribeRegionRequest} {@link DescribeRegionResponse} */
   DescribeRegion(data?: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;

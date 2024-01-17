@@ -504,6 +504,8 @@ declare interface BaselineTaskInstanceDto {
   OwnerUin?: string | null;
   /** 租户id */
   AppId?: string | null;
+  /** 关键路径依赖 */
+  CriticalDependency?: string | null;
 }
 
 /** BatchCreateTaskVersion使用，描述任务信息 */
@@ -736,8 +738,6 @@ declare interface ColumnBasicInfo {
 declare interface ColumnLineageInfo {
   /** 血缘id */
   Id: string | null;
-  /** 由中心节点出发的路径信息 */
-  PrefixPath: string | null;
   /** 数据源ID */
   DatasourceId: string | null;
   /** 表ID */
@@ -768,6 +768,8 @@ declare interface ColumnLineageInfo {
   UpStreamCount?: number | null;
   /** 描述信息 */
   Description?: string | null;
+  /** 由中心节点出发的路径信息 */
+  PrefixPath?: string | null;
   /** 创建时间 */
   CreateTime?: string | null;
   /** 更新时间 */
@@ -3728,6 +3730,8 @@ declare interface RuntimeInstanceCntTop {
   RunTime?: number | null;
   /** 实例运行时间 */
   CurRunTime?: string | null;
+  /** 等待调度耗时 */
+  WaitScheduleTime?: number | null;
 }
 
 /** 集成离线任务实例信息 */
@@ -4234,8 +4238,6 @@ declare interface TableLineageBaseInfo {
 declare interface TableLineageInfo {
   /** 元数据类型 */
   MetastoreType: string | null;
-  /** 由中心节点到该节点的路径 */
-  PrefixPath: string | null;
   /** 空间id */
   ProjectId?: string | null;
   /** 数据源id */
@@ -4264,12 +4266,16 @@ declare interface TableLineageInfo {
   UpStreamCount?: number | null;
   /** 血缘描述 */
   Description?: string | null;
+  /** 由中心节点到该节点的路径 */
+  PrefixPath?: string | null;
   /** 血缘创建时间 */
   CreateTime?: string | null;
   /** 血缘更新时间 */
   ModifyTime?: string | null;
   /** 修改血缘的任务id列表 */
   Tasks?: string[] | null;
+  /** 模块/应用类型 */
+  ChannelType?: string | null;
 }
 
 /** 表的元数据信息 */
@@ -6710,11 +6716,13 @@ declare interface CreateDataSourceRequest {
   COSBucket?: string;
   /** cos region */
   COSRegion?: string;
+  /** 连接测试结果 */
+  ConnectResult?: string;
 }
 
 declare interface CreateDataSourceResponse {
   /** 主键ID */
-  Data: number | null;
+  Data?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7696,6 +7704,8 @@ declare interface DescribeBaselineAllTaskDagRequest {
   BaselineId: string;
   /** 1 */
   ProjectId: string;
+  /** 1 */
+  BaselineTaskId?: string;
 }
 
 declare interface DescribeBaselineAllTaskDagResponse {
@@ -7728,6 +7738,8 @@ declare interface DescribeBaselineInstanceDagRequest {
   UpstreamInstanceIds?: string;
   /** 向上展开层级 */
   Level?: number;
+  /** 保障任务id */
+  PromiseTaskId?: string;
 }
 
 declare interface DescribeBaselineInstanceDagResponse {
@@ -7742,6 +7754,8 @@ declare interface DescribeBaselineInstanceGanttRequest {
   BaselineInstanceId: number;
   /** 项目id */
   ProjectId: string;
+  /** 保障任务id */
+  PromiseTaskId?: string;
 }
 
 declare interface DescribeBaselineInstanceGanttResponse {
@@ -10097,6 +10111,8 @@ declare interface DescribeSchedulerInstanceStatusRequest {
   EndTime?: string;
   /** 责任人 */
   InCharge?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
 }
 
 declare interface DescribeSchedulerInstanceStatusResponse {
@@ -10121,6 +10137,12 @@ declare interface DescribeSchedulerRunTimeInstanceCntByStatusRequest {
   TaskType?: number;
   /** 1 */
   InCharge?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
+  /** 排序字段 */
+  SortItem?: string;
+  /** 升序降序 */
+  SortType?: string;
 }
 
 declare interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
@@ -10139,6 +10161,8 @@ declare interface DescribeSchedulerTaskCntByStatusRequest {
   ProjectId?: string;
   /** 1 */
   InCharge?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
 }
 
 declare interface DescribeSchedulerTaskCntByStatusResponse {
@@ -10249,6 +10273,8 @@ declare interface DescribeStatisticInstanceStatusTrendOpsRequest {
   AggregationUnit?: string;
   /** 1 */
   AverageWindowSize?: number;
+  /** 工作流ID */
+  WorkflowId?: string;
 }
 
 declare interface DescribeStatisticInstanceStatusTrendOpsResponse {
@@ -10537,6 +10563,8 @@ declare interface DescribeTaskByCycleRequest {
   ProjectId: string;
   /** 1 */
   InCharge?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
 }
 
 declare interface DescribeTaskByCycleResponse {
@@ -10567,6 +10595,8 @@ declare interface DescribeTaskByStatusReportRequest {
   Status?: string;
   /** 无 */
   InCharge?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
 }
 
 declare interface DescribeTaskByStatusReportResponse {

@@ -1635,6 +1635,8 @@ declare interface ControlDeviceRequest {
   ControlData: string;
   /** 应用token */
   ApplicationToken: string;
+  /** 是否同步返回设备下控ack结果 */
+  IsSynchronized?: boolean;
 }
 
 declare interface ControlDeviceResponse {

@@ -37,7 +37,7 @@ declare interface AssumeRoleRequest {
   RoleSessionName: string;
   /** 指定临时访问凭证的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒 */
   DurationSeconds?: number;
-  /** 策略描述注意：1、policy 需要做 urlencode（如果通过 GET 方法请求云 API，发送请求前，所有参数都需要按照[云 API 规范](https://cloud.tencent.com/document/api/598/33159)再 urlencode 一次）。2、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。3、策略中不能包含 principal 元素。 */
+  /** 策略描述注意：1、该参数需要做urlencode，服务端会对该字段做urldecode， 并按处理后Policy授予临时访问凭证权限，请按规范传入参数。（如果通过 GET 方法请求云 API，发送请求前，所有参数都需要按照[云 API 规范](https://cloud.tencent.com/document/api/598/33159)再 urlencode 一次）。2、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。3、策略中不能包含 principal 元素。 */
   Policy?: string;
   /** 角色外部ID，可在[访问管理](https://console.cloud.tencent.com/cam/role)，点击角色名获取。长度在2到128之间，可包含大小写字符，数字以及特殊字符：=,.@:/-。 正则为：[\w+=,.@:\/-]* */
   ExternalId?: string;
@@ -127,7 +127,7 @@ declare interface GetCallerIdentityResponse {
 declare interface GetFederationTokenRequest {
   /** 您可以自定义调用方英文名称，由字母组成。 */
   Name: string;
-  /** 授予该临时访问凭证权限的CAM策略注意：1、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。2、策略中不能包含 principal 元素。3、该参数需要做urlencode。 */
+  /** 注意：1、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。2、策略中不能包含 principal 元素。3、该参数需要做urlencode，服务端会对该字段做urldecode， 并按处理后Policy授予临时访问凭证权限，请按规范传入参数。 */
   Policy: string;
   /** 指定临时证书的有效期，单位：秒，默认1800秒，主账号最长可设定有效期为7200秒，子账号最长可设定有效期为129600秒。 */
   DurationSeconds?: number;

@@ -566,7 +566,7 @@ declare interface DescribeLogTagValueRequest {
 }
 
 declare interface DescribeLogTagValueResponse {
-  /** 索引检索维度值 */
+  /** 事件查询维度值结果 */
   Results?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -834,13 +834,13 @@ declare interface SearchLogRequest {
 }
 
 declare interface SearchLogResponse {
-  /** 日志总数 */
+  /** 事件总数 */
   Total?: number | null;
-  /** 每页日志条数 */
+  /** 每页事件条数 */
   Limit?: number | null;
   /** 页码 */
   Page?: number | null;
-  /** 日志检索结果 */
+  /** 事件查询结果 */
   Results?: SearchLogResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -967,7 +967,7 @@ declare interface Eb {
   DeleteTarget(data: DeleteTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetResponse>;
   /** 删除转换器 {@link DeleteTransformationRequest} {@link DeleteTransformationResponse} */
   DeleteTransformation(data: DeleteTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTransformationResponse>;
-  /** 查询日志索引维度值 {@link DescribeLogTagValueRequest} {@link DescribeLogTagValueResponse} */
+  /** 事件查询维度值 {@link DescribeLogTagValueRequest} {@link DescribeLogTagValueResponse} */
   DescribeLogTagValue(data: DescribeLogTagValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTagValueResponse>;
   /** 获取事件集详情 {@link GetEventBusRequest} {@link GetEventBusResponse} */
   GetEventBus(data: GetEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<GetEventBusResponse>;
@@ -995,7 +995,7 @@ declare interface Eb {
   PublishEvent(data: PublishEventRequest, config?: AxiosRequestConfig): AxiosPromise<PublishEventResponse>;
   /** 事件投递 {@link PutEventsRequest} {@link PutEventsResponse} */
   PutEvents(data: PutEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PutEventsResponse>;
-  /** 日志检索 {@link SearchLogRequest} {@link SearchLogResponse} */
+  /** 事件查询 {@link SearchLogRequest} {@link SearchLogResponse} */
   SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
   /** 更新事件连接器 {@link UpdateConnectionRequest} {@link UpdateConnectionResponse} */
   UpdateConnection(data: UpdateConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConnectionResponse>;

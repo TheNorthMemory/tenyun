@@ -5401,6 +5401,8 @@ declare interface DescribeUsedIpAddressRequest {
   SubnetId?: string;
   /** 查询是否占用的ip列表，ip需要在vpc或子网内。最多允许一次查询100个IP。 */
   IpAddresses?: string[];
+  /** 过滤条件，不支持同时指定IpAddresses和Filters参数。 支持的过滤条件如下： ip-addresses：IP地址。 resource-id：资源ID。 */
+  Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
