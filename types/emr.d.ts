@@ -630,6 +630,34 @@ declare interface ImpalaQuery {
   NumRowsFetchedFromCache?: number | null;
 }
 
+/** 洞察结果项 */
+declare interface InsightResult {
+  /** 当Type为HIVE时，是Hive查询ID，当Type为MAPREDUCE，SPARK，TEZ时则是YarnAppID */
+  ID?: string | null;
+  /** 洞察应用的类型，HIVE,SPARK,MAPREDUCE,TEZ */
+  Type?: string | null;
+  /** 洞察规则IDHIVE-ScanManyMeta:元数据扫描过多HIVE-ScanManyPartition:大表扫描HIVE-SlowCompile:编译耗时过长HIVE-UnSuitableConfig:不合理参数MAPREDUCE-MapperDataSkew:Map数据倾斜MAPREDUCE-MapperMemWaste:MapMemory资源浪费MAPREDUCE-MapperSlowTask:Map慢TaskMAPREDUCE-MapperTaskGC:MapperTaskGCMAPREDUCE-MemExceeded:峰值内存超限MAPREDUCE-ReducerDataSkew:Reduce数据倾斜MAPREDUCE-ReducerMemWaste:ReduceMemory资源浪费MAPREDUCE-ReducerSlowTask:Reduce慢TaskMAPREDUCE-ReducerTaskGC:ReducerTaskGCMAPREDUCE-SchedulingDelay:调度延迟SPARK-CpuWaste:CPU资源浪费SPARK-DataSkew:数据倾斜SPARK-ExecutorGC:ExecutorGCSPARK-MemExceeded:峰值内存超限SPARK-MemWaste:Memory资源浪费SPARK-ScheduleOverhead:ScheduleOverheadSPARK-ScheduleSkew:调度倾斜SPARK-SlowTask:慢TaskTEZ-DataSkew:数据倾斜TEZ-MapperDataSkew:Map数据倾斜TEZ-ReducerDataSkew:Reduce数据倾斜TEZ-TezMemWaste:Memory资源浪费TEZ-TezSlowTask:慢TaskTEZ-TezTaskGC:TasksGC */
+  RuleID?: string | null;
+  /** 洞察规则名字，可参考RuleID的说明 */
+  RuleName?: string | null;
+  /** 洞察规则解释 */
+  RuleExplain?: string | null;
+  /** 详情 */
+  Detail?: string | null;
+  /** 建议信息 */
+  Suggestion?: string | null;
+  /** 洞察异常衡量值，同类型的洞察项越大越严重，不同类型的洞察项无对比意义 */
+  Value?: number | null;
+  /** 调度任务执行ID */
+  ScheduleTaskExecID?: string | null;
+  /** 调度流，DAG */
+  ScheduleFlowName?: string | null;
+  /** 调度flow中的某个task节点 */
+  ScheduleTaskName?: string | null;
+  /** Yarn任务的部分核心配置 */
+  JobConf?: string | null;
+}
+
 /** 实例预付费参数，只有在付费类型为PREPAID时生效。 */
 declare interface InstanceChargePrepaid {
   /** 包年包月时间，默认为1，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 24, 36, 48, 60。 */
@@ -1870,6 +1898,28 @@ declare interface DescribeImpalaQueriesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInsightListRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 获取的洞察结果开始时间，此时间针对对App或者Hive查询的开始时间的过滤 */
+  StartTime: number;
+  /** 获取的洞察结果结束时间，此时间针对对App或者Hive查询的开始时间的过滤 */
+  EndTime: number;
+  /** 分页查询时的分页大小，最小1，最大100 */
+  PageSize: number;
+  /** 分页查询时的页号，从1开始 */
+  Page: number;
+}
+
+declare interface DescribeInsightListResponse {
+  /** 总数，分页查询时使用 */
+  TotalCount?: number;
+  /** 洞察结果数组 */
+  ResultList?: InsightResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceRenewNodesRequest {
   /** 集群实例ID,实例ID形如: emr-xxxxxxxx */
   InstanceId: string;
@@ -2531,6 +2581,8 @@ declare interface Emr {
   DescribeHiveQueries(data: DescribeHiveQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHiveQueriesResponse>;
   /** 获取Impala查询列表 {@link DescribeImpalaQueriesRequest} {@link DescribeImpalaQueriesResponse} */
   DescribeImpalaQueries(data: DescribeImpalaQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImpalaQueriesResponse>;
+  /** 获取洞察结果 {@link DescribeInsightListRequest} {@link DescribeInsightListResponse} */
+  DescribeInsightList(data: DescribeInsightListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsightListResponse>;
   /** 查询待续费节点信息 {@link DescribeInstanceRenewNodesRequest} {@link DescribeInstanceRenewNodesResponse} */
   DescribeInstanceRenewNodes(data: DescribeInstanceRenewNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRenewNodesResponse>;
   /** 查询集群实例信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */

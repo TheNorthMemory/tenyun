@@ -2105,19 +2105,21 @@ declare interface InstanceOpsInfoPage {
 /** 离线任务实例读取节点的运行指标 */
 declare interface InstanceReportReadNode {
   /** 节点名称 */
-  NodeName: string;
+  NodeName?: string;
   /** 数据来源 */
-  DataSource: string;
+  DataSource?: string;
   /** 总条数 */
-  TotalReadRecords: number;
+  TotalReadRecords?: number;
   /** 总字节数 */
-  TotalReadBytes: number;
+  TotalReadBytes?: number;
   /** 速度（条/秒） */
-  RecordSpeed: number;
+  RecordSpeed?: number;
   /** 吞吐（Byte/秒） */
-  ByteSpeed: number;
+  ByteSpeed?: number;
   /** 脏数据条数 */
-  TotalErrorRecords: number;
+  TotalErrorRecords?: number;
+  /** 等待数据发送到下游的时间 */
+  WaitWriterTime?: number | null;
 }
 
 /** 离线任务实例运行指标概览 */
@@ -2149,19 +2151,21 @@ declare interface InstanceReportSummary {
 /** 离线任务实例写入节点的运行指标 */
 declare interface InstanceReportWriteNode {
   /** 节点名称 */
-  NodeName: string;
+  NodeName?: string;
   /** 数据来源 */
-  DataSource: string;
+  DataSource?: string;
   /** 总条数 */
-  TotalWriteRecords: number;
+  TotalWriteRecords?: number;
   /** 总字节数 */
-  TotalWriteBytes: number;
+  TotalWriteBytes?: number;
   /** 速度（条/秒） */
-  RecordSpeed: number;
+  RecordSpeed?: number;
   /** 吞吐（Byte/秒） */
-  ByteSpeed: number;
+  ByteSpeed?: number;
   /** 脏数据条数 */
-  TotalErrorRecords: number;
+  TotalErrorRecords?: number;
+  /** 等待上游数据发送过来的时间 */
+  WaitReaderTime?: number | null;
 }
 
 /** 实例检索条件 */
@@ -2418,6 +2422,10 @@ declare interface IntegrationTaskInfo {
   ReadPhase?: number | null;
   /** 版本号 */
   InstanceVersion?: number | null;
+  /** 离线任务导入到编排空间的任务id */
+  ArrangeSpaceTaskId?: string | null;
+  /** 离线任务状态区分1.未提交2.已提交3.已导出 */
+  OfflineTaskStatus?: number | null;
 }
 
 /** 标签类型 */
@@ -3186,6 +3194,22 @@ declare interface Rule {
   TargetObjectValue?: string | null;
   /** 源端对应的引擎类型 */
   SourceEngineTypes?: number[] | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 表负责人名称 */
+  TableOwnerName?: string | null;
+  /** 执行策略信息 */
+  ExecStrategy?: RuleGroupExecStrategy | null;
+  /** 订阅信息 */
+  Subscription?: RuleGroupSubscribe | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 数据源 id */
+  DatasourceId?: number | null;
+  /** 数据库 id */
+  DatabaseId?: string | null;
+  /** 监控是否开启.0false,1true */
+  MonitorStatus?: number | null;
 }
 
 /** 规则配置 */
@@ -3461,33 +3485,37 @@ declare interface RuleGroupExecResultPage {
 /** 质量规则执行策略 */
 declare interface RuleGroupExecStrategy {
   /** 规则组Id */
-  RuleGroupId: number | null;
+  RuleGroupId?: number | null;
   /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
-  MonitorType: number | null;
+  MonitorType?: number | null;
   /** 计算队列 */
-  ExecQueue: string | null;
+  ExecQueue?: string | null;
   /** 执行资源组ID */
-  ExecutorGroupId: string | null;
+  ExecutorGroupId?: string | null;
   /** 执行资源组名称 */
-  ExecutorGroupName: string | null;
+  ExecutorGroupName?: string | null;
   /** 关联的生产调度任务列表 */
-  Tasks: ProdSchedulerTask[] | null;
+  Tasks?: ProdSchedulerTask[] | null;
   /** 周期开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 周期结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 调度周期类型 */
-  CycleType: string | null;
+  CycleType?: string | null;
   /** 延迟调度时间 */
-  DelayTime: number | null;
+  DelayTime?: number | null;
   /** 间隔 */
-  CycleStep: number | null;
+  CycleStep?: number | null;
   /** 时间指定 */
-  TaskAction: string | null;
+  TaskAction?: string | null;
   /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
   ExecEngineType?: string | null;
   /** 执行计划 */
   ExecPlan?: string | null;
+  /** 规则id */
+  RuleId?: number | null;
+  /** 规则名称 */
+  RuleName?: string | null;
 }
 
 /** 规则组监控业务视图 */
@@ -3564,6 +3592,10 @@ declare interface RuleGroupSubscribe {
   SubscribeType?: number[] | null;
   /** 群机器人配置的webhook信息 */
   WebHooks?: SubscribeWebHook[] | null;
+  /** 规则Id */
+  RuleId?: number | null;
+  /** 规则名称 */
+  RuleName?: string | null;
 }
 
 /** 表绑定规则组信息 */
@@ -3633,41 +3665,45 @@ declare interface RulePage {
 /** 规则模版 */
 declare interface RuleTemplate {
   /** 规则模版ID */
-  RuleTemplateId: number;
+  RuleTemplateId?: number;
   /** 规则模版名称 */
-  Name: string;
+  Name?: string;
   /** 规则模版描述 */
-  Description: string;
+  Description?: string;
   /** 模版类型（1：系统模版，2：自定义） */
-  Type: number;
+  Type?: number;
   /** 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
-  SourceObjectType: number;
+  SourceObjectType?: number;
   /** 规则适用的源数据对象类型（1：数值，2：字符串） */
-  SourceObjectDataType: number;
+  SourceObjectDataType?: number;
   /** 规则模版源侧内容，区分引擎，JSON 结构 */
-  SourceContent: string | null;
+  SourceContent?: string | null;
   /** 源数据适用类型 */
-  SourceEngineTypes: number[] | null;
+  SourceEngineTypes?: number[] | null;
   /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
-  QualityDim: number | null;
+  QualityDim?: number | null;
   /** 规则支持的比较方式类型（1：固定值比较，大于、小于，大于等于等 2：波动值比较，绝对值、上升、下降） */
-  CompareType: number | null;
+  CompareType?: number | null;
   /** 引用次数 */
-  CitationCount: number | null;
+  CitationCount?: number | null;
   /** 创建人id */
-  UserId: number | null;
+  UserId?: number | null;
   /** 创建人昵称 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 更新时间yyyy-MM-dd HH:mm:ss */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 是否添加where参数 */
-  WhereFlag: boolean | null;
+  WhereFlag?: boolean | null;
   /** 是否关联多个库表 */
-  MultiSourceFlag: boolean | null;
+  MultiSourceFlag?: boolean | null;
   /** 自定义模板SQL表达式 */
-  SqlExpression: string | null;
+  SqlExpression?: string | null;
   /** 模版子维度，0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性 */
-  SubQualityDim: number | null;
+  SubQualityDim?: number | null;
+  /** sql表达式解析对象 */
+  ResolvedSqlExpression?: SqlExpression | null;
+  /** 支持的数据源类型 */
+  DatasourceTypes?: number[] | null;
 }
 
 /** 规则模版变更历史记录视图 */
@@ -4024,6 +4060,22 @@ declare interface SpeedValue {
   Time: number | null;
   /** 无 */
   Speed: number | null;
+}
+
+/** 数据质量自定义规则时的sql表达式解析对象 */
+declare interface SqlExpression {
+  /** sql表达式表名 */
+  TableExpressions?: SqlExpressionTable[] | null;
+  /** sql表达式字段名 */
+  ParamExpressions?: string[] | null;
+}
+
+/** 数据质量自定义规则时的sql表达式解析表对象 */
+declare interface SqlExpressionTable {
+  /** sql表达式表名 */
+  TableExpression?: string | null;
+  /** sql表达式字段名 */
+  ColumnExpression?: string[] | null;
 }
 
 /** map */
@@ -6380,6 +6432,8 @@ declare interface BooleanResponse {
   Message?: string | null;
   /** 基线Id */
   BaselineId?: number | null;
+  /** 错误码 */
+  Code?: string | null;
 }
 
 declare interface CheckAlarmRegularNameExistRequest {
@@ -7211,18 +7265,28 @@ declare interface DeleteBaselineResponse {
 
 declare interface DeleteCustomFunctionRequest {
   /** 集群实例 ID */
-  ClusterIdentifier: string;
+  ClusterIdentifier?: string;
   /** 函数 ID */
-  FunctionId: string;
+  FunctionId?: string;
   /** 项目ID，必须填 */
   ProjectId?: string;
+  /** 函数名称 */
+  FunctionName?: string;
+  /** 函数类型，HIVE，SPARK，DLC，CDW_POSTGRESQL */
+  FunctionType?: string;
+  /** 数据库名 */
+  DatabaseName?: string;
+  /** 模式名 */
+  SchemaName?: string;
+  /** 函数命令格式 */
+  CommandFormat?: string;
 }
 
 declare interface DeleteCustomFunctionResponse {
   /** 函数 ID */
-  FunctionId: string | null;
+  FunctionId?: string | null;
   /** 无 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13069,7 +13133,7 @@ declare interface Wedata {
   /** DeleteBaseline {@link DeleteBaselineRequest} {@link DeleteBaselineResponse} */
   DeleteBaseline(data: DeleteBaselineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselineResponse>;
   /** 删除用户自定义函数 {@link DeleteCustomFunctionRequest} {@link DeleteCustomFunctionResponse} */
-  DeleteCustomFunction(data: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
+  DeleteCustomFunction(data?: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
   /** 数据源管理-删除数据源【Beta版本】 {@link DeleteDataSourcesRequest} {@link DeleteDataSourcesResponse} */
   DeleteDataSources(data: DeleteDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourcesResponse>;
   /** 删除文件夹 {@link DeleteDsFolderRequest} {@link DeleteDsFolderResponse} */

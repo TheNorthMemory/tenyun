@@ -1912,6 +1912,24 @@ declare interface DescribeSavingPlanOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSavingPlanResourceInfoRequest {
+  /** 数量，最大值为100 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 购买开始时间，格式yyyy-MM-dd */
+  CreateStartDate?: string;
+  /** 购买结束时间，格式yyyy-MM-dd */
+  CreateEndDate?: string;
+}
+
+declare interface DescribeSavingPlanResourceInfoResponse {
+  /** 记录数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSavingPlanUsageRequest {
   /** 开始时间，格式yyyy-MM-dd 注：查询范围请勿超过6个月 */
   StartDate: string;
@@ -2107,6 +2125,8 @@ declare interface Billing {
   DescribeSavingPlanCoverage(data: DescribeSavingPlanCoverageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanCoverageResponse>;
   /** 查询节省计划总览明细 {@link DescribeSavingPlanOverviewRequest} {@link DescribeSavingPlanOverviewResponse} */
   DescribeSavingPlanOverview(data: DescribeSavingPlanOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanOverviewResponse>;
+  /** 查询节省计划可共享列表详情 {@link DescribeSavingPlanResourceInfoRequest} {@link DescribeSavingPlanResourceInfoResponse} */
+  DescribeSavingPlanResourceInfo(data: DescribeSavingPlanResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanResourceInfoResponse>;
   /** 查询节省计划使用率明细 {@link DescribeSavingPlanUsageRequest} {@link DescribeSavingPlanUsageResponse} */
   DescribeSavingPlanUsage(data: DescribeSavingPlanUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanUsageResponse>;
   /** 获取分账标签 {@link DescribeTagListRequest} {@link DescribeTagListResponse} */

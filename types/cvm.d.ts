@@ -2786,7 +2786,7 @@ declare interface RunInstancesRequest {
   DedicatedClusterId?: string;
   /** 指定CHC物理服务器来创建CHC云主机。 */
   ChcIds?: string[];
-  /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
+  /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：true：表示开启实例保护，不允许通过api接口删除实例false：表示关闭实例保护，允许通过api接口删除实例默认取值：false。 */
   DisableApiTermination?: boolean;
 }
 

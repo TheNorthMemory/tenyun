@@ -875,6 +875,8 @@ declare interface DeleteCloudStorageEventRequest {
   EndTime: number;
   /** 用户ID */
   UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
 }
 
 declare interface DeleteCloudStorageEventResponse {
@@ -1200,6 +1202,8 @@ declare interface DescribeCloudStorageOrderResponse {
   PackageId?: string | null;
   /** 套餐状态0：等待生效1: 已过期2:生效 */
   Status?: number;
+  /** 通道id */
+  ChannelId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2265,6 +2269,8 @@ declare interface ResetCloudStorageEventRequest {
   DeviceName: string;
   /** 用户ID */
   UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
 }
 
 declare interface ResetCloudStorageEventResponse {
