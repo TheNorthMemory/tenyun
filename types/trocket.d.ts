@@ -96,6 +96,60 @@ declare interface IpRule {
   Remark: string | null;
 }
 
+/** MQTT 实例信息 */
+declare interface MQTTInstanceItem {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例版本 */
+  Version?: string;
+  /** 实例类型，EXPERIMENT，体验版BASIC，基础版PRO，专业版PLATINUM，铂金版 */
+  InstanceType?: string;
+  /** 实例状态，RUNNING, 运行中MAINTAINING，维护中ABNORMAL，异常OVERDUE，欠费DESTROYED，已删除CREATING，创建中MODIFYING，变配中CREATE_FAILURE，创建失败MODIFY_FAILURE，变配失败DELETING，删除中 */
+  InstanceStatus?: string;
+  /** 实例主题数上限 */
+  TopicNumLimit?: number;
+  /** 备注信息 */
+  Remark?: string | null;
+  /** 主题数量 */
+  TopicNum?: number;
+  /** 商品规格 */
+  SkuCode?: string;
+  /** 弹性TPS限流值 */
+  TpsLimit?: number | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 订阅关系上限 */
+  SubscriptionNumLimit?: number | null;
+  /** 客户端连接数上线 */
+  ClientNumLimit?: number | null;
+}
+
+/** MQTT ProductSkuItem */
+declare interface MQTTProductSkuItem {
+  /** 类型 */
+  InstanceType?: string | null;
+  /** cide */
+  SkuCode?: string | null;
+  /** sale */
+  OnSale?: boolean | null;
+  /** topic num限制 */
+  TopicNumLimit?: number | null;
+  /** tps */
+  TpsLimit?: number | null;
+  /** 客户端连接数 */
+  ClientNumLimit?: number | null;
+  /** 订阅数限制 */
+  SubscriptionNumLimit?: number | null;
+  /** 代理核 */
+  ProxySpecCore?: number | null;
+  /** 代理内存 */
+  ProxySpecMemory?: number | null;
+  /** 代理总数 */
+  ProxySpecCount?: number | null;
+}
+
 /** 角色信息 */
 declare interface RoleItem {
   /** 角色名称 */
@@ -266,6 +320,38 @@ declare interface CreateInstanceRequest {
 }
 
 declare interface CreateInstanceResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMQTTInstanceRequest {
+  /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
+  InstanceType: string;
+  /** 实例名称 */
+  Name: string;
+  /** 商品规格，可用规格如下：experiment_500,basic_1k,basic_2k,basic_4k,basic_6k,pro_4k,pro_6k,pro_1w,pro_2w,pro_3w,pro_4w,pro_5w,platinum_6k,platinum_1w,platinum_2w,platinum_4w,platinum_10w,platinum_15w,platinum_20w,platinum_40w,platinum_60w,platinum_100w */
+  SkuCode: string;
+  /** 备注信息 */
+  Remark?: string;
+  /** 标签列表 */
+  TagList?: Tag[];
+  /** 实例绑定的VPC信息 */
+  VpcList?: VpcInfo[];
+  /** 是否开启公网 */
+  EnablePublic?: boolean;
+  /** 公网带宽（单位：兆） */
+  Bandwidth?: number;
+  /** 公网访问白名单 */
+  IpRules?: IpRule[];
+  /** 是否自动续费（0: 不自动续费；1: 自动续费） */
+  RenewFlag?: number;
+  /** 购买时长（单位：月） */
+  TimeSpan?: number;
+}
+
+declare interface CreateMQTTInstanceResponse {
   /** 实例ID */
   InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -488,6 +574,36 @@ declare interface DescribeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMQTTInstanceListRequest {
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeMQTTInstanceListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 实例列表 */
+  Data?: MQTTInstanceItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMQTTProductSKUListRequest {
+}
+
+declare interface DescribeMQTTProductSKUListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** mqtt商品配置信息 */
+  MQTTProductSkuList?: MQTTProductSkuItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoleListRequest {
   /** 实例ID */
   InstanceId: string;
@@ -679,6 +795,8 @@ declare interface Trocket {
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 购买实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
+  /** 购买MQTT实例 {@link CreateMQTTInstanceRequest} {@link CreateMQTTInstanceResponse} */
+  CreateMQTTInstance(data: CreateMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTInstanceResponse>;
   /** 添加角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
@@ -699,6 +817,10 @@ declare interface Trocket {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
+  /** 获取MQTT实例列表 {@link DescribeMQTTInstanceListRequest} {@link DescribeMQTTInstanceListResponse} */
+  DescribeMQTTInstanceList(data?: DescribeMQTTInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInstanceListResponse>;
+  /** 获取MQTT产品售卖规格 {@link DescribeMQTTProductSKUListRequest} {@link DescribeMQTTProductSKUListResponse} */
+  DescribeMQTTProductSKUList(data?: DescribeMQTTProductSKUListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTProductSKUListResponse>;
   /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */
   DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
   /** 查询主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */

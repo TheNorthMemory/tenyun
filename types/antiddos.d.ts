@@ -124,6 +124,64 @@ declare interface BGPIPInstanceUsages {
   Last7DayAttackCount: number;
 }
 
+/** L7规则 */
+declare interface BGPIPL7RuleEntry {
+  /** 转发协议，取值[http, https] */
+  Protocol: string;
+  /** 转发域名 */
+  Domain: string;
+  /** 负载均衡方式，取值[1(加权轮询)] */
+  LbType: number;
+  /** 会话保持开关，取值[0(会话保持关闭)，1(会话保持开启)] */
+  KeepEnable: number;
+  /** 会话保持时间，单位秒 */
+  KeepTime: number;
+  /** 回源方式，取值[1(域名回源)，2(IP回源)] */
+  SourceType: number;
+  /** 回源列表 */
+  SourceList: L4RuleSource[];
+  /** 区域码 */
+  Region?: number;
+  /** 资源Id */
+  Id?: string;
+  /** 资源Ip */
+  Ip?: string;
+  /** 规则ID，当添加新规则时可以不用填写此字段；当修改或者删除规则时需要填写此字段； */
+  RuleId?: string;
+  /** 规则描述 */
+  RuleName?: string;
+  /** 证书来源，当转发协议为https时必须填，取值[2(腾讯云托管证书)]，当转发协议为http时也可以填0 */
+  CertType?: number;
+  /** 当证书来源为腾讯云托管证书时，此字段必须填写托管证书ID */
+  SSLId?: string;
+  /** 当证书来源为自有证书时，此字段必须填写证书内容；(因已不再支持自有证书，此字段已弃用，请不用填写此字段) */
+  Cert?: string;
+  /** 当证书来源为自有证书时，此字段必须填写证书密钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段) */
+  PrivateKey?: string;
+  /** 规则状态，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)] */
+  Status?: number;
+  /** cc防护状态，取值[0(关闭), 1(开启)] */
+  CCStatus?: number;
+  /** HTTPS协议的CC防护状态，取值[0(关闭), 1(开启)] */
+  CCEnable?: number;
+  /** HTTPS协议的CC防护阈值（已废弃） */
+  CCThreshold?: number;
+  /** HTTPS协议的CC防护等级 */
+  CCLevel?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭 */
+  HttpsToHttpEnable?: number;
+  /** 接入端口值 */
+  VirtualPort?: number | null;
+  /** http强制跳转https，1表示打开，0表示关闭 */
+  RewriteHttps?: number;
+  /** 规则配置失败时的详细错误原因(仅当Status=2时有效)，1001证书不存在，1002证书获取失败，1003证书上传失败，1004证书已过期 */
+  ErrCode?: number;
+  /** 版本 */
+  Version?: number | null;
+}
+
 /** 高防包资产实例信息 */
 declare interface BGPInstance {
   /** 资产实例的详细信息 */
@@ -1686,6 +1744,38 @@ declare interface DeleteWaterPrintKeyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBGPIPL7RulesRequest {
+  /** DDoS防护子产品代号（bgpip表示高防IP） */
+  Business: string;
+  /** 状态搜索，选填，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)] */
+  StatusList?: number[];
+  /** 域名搜索，选填，当需要搜索域名请填写 */
+  Domain?: string;
+  /** IP搜索，选填，当需要搜索IP请填写 */
+  Ip?: string;
+  /** 一页条数，默认值100，最大值100，超过100最大返回100条 */
+  Limit?: number;
+  /** 规则偏移量，取值为(页码-1)*一页条数 */
+  Offset?: number;
+  /** 转发协议搜索，选填，取值[http, https, http/https] */
+  ProtocolList?: string[];
+  /** 高防IP实例的Cname */
+  Cname?: string;
+  /** 默认为false，当为true时，将不对各个规则做策略检查，直接导出所有规则 */
+  Export?: boolean;
+}
+
+declare interface DescribeBGPIPL7RulesResponse {
+  /** 转发规则列表 */
+  Rules?: BGPIPL7RuleEntry[];
+  /** 健康检查配置列表 */
+  Healths?: L7RuleHealth[];
+  /** 总规则数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBasicDeviceStatusRequest {
   /** IP 资源列表 */
   IpList?: string[];
@@ -3033,6 +3123,8 @@ declare interface Antiddos {
   DeleteWaterPrintConfig(data: DeleteWaterPrintConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWaterPrintConfigResponse>;
   /** 删除DDoS防护的水印防护密钥 {@link DeleteWaterPrintKeyRequest} {@link DeleteWaterPrintKeyResponse} */
   DeleteWaterPrintKey(data: DeleteWaterPrintKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWaterPrintKeyResponse>;
+  /** 高防IP获取7层转发规则 {@link DescribeBGPIPL7RulesRequest} {@link DescribeBGPIPL7RulesResponse} */
+  DescribeBGPIPL7Rules(data: DescribeBGPIPL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBGPIPL7RulesResponse>;
   /** 获取基础防护攻击状态 {@link DescribeBasicDeviceStatusRequest} {@link DescribeBasicDeviceStatusResponse} */
   DescribeBasicDeviceStatus(data?: DescribeBasicDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceStatusResponse>;
   /** 获取高防包流量折线图 {@link DescribeBgpBizTrendRequest} {@link DescribeBgpBizTrendResponse} */

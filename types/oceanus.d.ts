@@ -354,6 +354,10 @@ declare interface JobConfig {
   EsServerlessIndex?: string | null;
   /** es空间 */
   EsServerlessSpace?: string | null;
+  /** es索引中文 */
+  IndexName?: string | null;
+  /** es空间中文 */
+  WorkspaceName?: string | null;
 }
 
 /** 描述作业发生的一个事件 */
@@ -989,15 +993,17 @@ declare interface CopyJobsRequest {
   JobItems: CopyJobItem[];
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 目标工作空间 SerialId */
+  TargetWorkspaceId?: string;
 }
 
 declare interface CopyJobsResponse {
   /** 成功条数 */
-  SuccessCount: number | null;
+  SuccessCount?: number | null;
   /** 失败条数 */
-  FailCount: number | null;
+  FailCount?: number | null;
   /** 结果列表 */
-  CopyJobsResults: CopyJobResult[] | null;
+  CopyJobsResults?: CopyJobResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

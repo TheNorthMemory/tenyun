@@ -109,41 +109,43 @@ declare interface PrivateDNSAccount {
 /** 私有域信息 */
 declare interface PrivateZone {
   /** 私有域id: zone-xxxxxxxx */
-  ZoneId: string;
+  ZoneId?: string;
   /** 域名所有者uin */
-  OwnerUin: number;
+  OwnerUin?: number;
   /** 私有域名 */
-  Domain: string;
+  Domain?: string;
   /** 创建时间 */
-  CreatedOn: string;
+  CreatedOn?: string;
   /** 修改时间 */
-  UpdatedOn: string;
+  UpdatedOn?: string;
   /** 记录数 */
-  RecordCount: number;
+  RecordCount?: number;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 绑定的Vpc列表 */
-  VpcSet: VpcInfo[];
-  /** 私有域状态：正常解析：ENABLED, 暂停解析：SUSPEND, 锁定：FROZEN */
-  Status: string;
+  VpcSet?: VpcInfo[];
+  /** 私有域绑定VPC状态，未关联vpc：SUSPEND，已关联VPC：ENABLED，关联VPC失败：FAILED */
+  Status?: string;
   /** 域名递归解析状态：开通：ENABLED, 关闭，DISABLED */
-  DnsForwardStatus: string;
+  DnsForwardStatus?: string;
   /** 标签键值对集合 */
-  Tags: TagInfo[];
+  Tags?: TagInfo[];
   /** 绑定的关联账号的vpc列表 */
-  AccountVpcSet: AccountVpcInfoOutput[] | null;
+  AccountVpcSet?: AccountVpcInfoOutput[] | null;
   /** 是否自定义TLD */
-  IsCustomTld: boolean | null;
+  IsCustomTld?: boolean | null;
   /** CNAME加速状态：开通：ENABLED, 关闭，DISABLED */
-  CnameSpeedupStatus: string;
+  CnameSpeedupStatus?: string;
   /** 转发规则名称 */
-  ForwardRuleName: string | null;
+  ForwardRuleName?: string | null;
   /** 转发规则类型：云上到云下，DOWN；云下到云上，UP，目前只支持DOWN */
-  ForwardRuleType: string | null;
+  ForwardRuleType?: string | null;
   /** 转发的地址 */
-  ForwardAddress: string | null;
+  ForwardAddress?: string | null;
   /** 终端节点名称 */
-  EndPointName: string | null;
+  EndPointName?: string | null;
+  /** 已删除的vpc */
+  DeletedVpcSet?: VpcInfo[] | null;
 }
 
 /** 私有域信息 */

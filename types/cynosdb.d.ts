@@ -12,6 +12,8 @@ declare interface Ability {
   IsSupportRo: string;
   /** 不支持RO实例的原因 */
   NonsupportRoReason: string | null;
+  /** 是否支持手动发起快照备份 */
+  IsSupportManualSnapshot: string | null;
 }
 
 /** 数据库账号信息 */
@@ -669,6 +671,52 @@ declare interface CynosdbInstanceDetail {
 }
 
 /** 实例组信息 */
+declare interface CynosdbInstanceGroup {
+  /** 用户appId */
+  AppId?: number;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 删除时间 */
+  DeletedTime?: string;
+  /** 实例组ID */
+  InstanceGroupId?: string;
+  /** 状态 */
+  Status?: string;
+  /** 实例组类型。ha-ha组；ro-只读组 */
+  Type?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+  /** 内网IP */
+  Vip?: string;
+  /** 内网端口 */
+  Vport?: number;
+  /** 外网域名 */
+  WanDomain?: string;
+  /** 外网ip */
+  WanIP?: string;
+  /** 外网端口 */
+  WanPort?: number;
+  /** 外网状态 */
+  WanStatus?: string;
+  /** 实例组包含实例信息 */
+  InstanceSet?: CynosdbInstance[];
+  /** VPC的ID */
+  UniqVpcId?: string | null;
+  /** 子网ID */
+  UniqSubnetId?: string | null;
+  /** 正在回收IP信息 */
+  OldAddrInfo?: OldAddrInfo | null;
+  /** 正在进行的任务 */
+  ProcessingTasks?: string[];
+  /** 任务列表 */
+  Tasks?: ObjectTask[];
+  /** biz_net_service表id */
+  NetServiceId?: number;
+}
+
+/** 实例组信息 */
 declare interface CynosdbInstanceGrp {
   /** 用户appId */
   AppId?: number;
@@ -865,9 +913,9 @@ declare interface InstanceNetInfo {
 /** 实例参数信息 */
 declare interface InstanceParamItem {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例参数列表 */
-  ParamsItems: ParamItemDetail[];
+  ParamsItems?: ParamItemDetail[];
 }
 
 /** 实例可售卖规格详细信息，创建实例时Cpu/Memory确定实例规格，存储可选大小为[MinStorageSize,MaxStorageSize] */
@@ -924,6 +972,8 @@ declare interface LogicBackupConfigInfo {
 
 /** 参数是否可修改的详细信息 */
 declare interface ModifiableInfo {
+  /** 参数是否可被修改, 1:可以 0:不可以 */
+  IsModifiable?: number;
 }
 
 /** 修改的实例参数信息 */
@@ -1097,35 +1147,35 @@ declare interface ParamDetail {
 /** 参数信息 */
 declare interface ParamInfo {
   /** 当前值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 默认值 */
-  Default: string;
+  Default?: string;
   /** 参数为enum/string/bool时，可选值列表 */
-  EnumValue: string[] | null;
+  EnumValue?: string[] | null;
   /** 参数类型为float/integer时的最大值 */
-  Max: string;
+  Max?: string;
   /** 参数类型为float/integer时的最小值 */
-  Min: string;
+  Min?: string;
   /** 参数名称 */
-  ParamName: string;
+  ParamName?: string;
   /** 是否需要重启生效 */
-  NeedReboot: number;
+  NeedReboot?: number;
   /** 参数类型：integer/float/string/enum/bool */
-  ParamType: string;
+  ParamType?: string;
   /** 匹配类型，multiVal, regex在参数类型是string时使用 */
-  MatchType: string;
+  MatchType?: string;
   /** 匹配目标值，当multiVal时，各个key用;分割 */
-  MatchValue: string;
+  MatchValue?: string;
   /** 参数描述 */
-  Description: string;
+  Description?: string;
   /** 是否为全局参数 */
-  IsGlobal: number | null;
+  IsGlobal?: number | null;
   /** 参数是否可修改 */
-  ModifiableInfo: ModifiableInfo | null;
+  ModifiableInfo?: ModifiableInfo | null;
   /** 是否为函数 */
-  IsFunc: boolean | null;
+  IsFunc?: boolean | null;
   /** 函数 */
-  Func: string | null;
+  Func?: string | null;
 }
 
 /** 修改参数时，传入参数描述 */
@@ -1141,29 +1191,29 @@ declare interface ParamItem {
 /** 实例参数信息 */
 declare interface ParamItemDetail {
   /** 当前值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 默认值 */
-  Default: string;
+  Default?: string;
   /** 参数的可选枚举值。如果为非枚举值，则为空 */
-  EnumValue: string[];
+  EnumValue?: string[];
   /** 1：全局参数，0：非全局参数 */
-  IsGlobal: number;
+  IsGlobal?: number;
   /** 最大值 */
-  Max: string;
+  Max?: string;
   /** 最小值 */
-  Min: string;
+  Min?: string;
   /** 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。 */
-  NeedReboot: number;
+  NeedReboot?: number;
   /** 参数名称 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型：integer，enum，float，string，func */
-  ParamType: string;
+  ParamType?: string;
   /** 参数描述 */
-  Description: string;
+  Description?: string;
   /** 类型是否为公式 */
-  IsFunc: boolean | null;
+  IsFunc?: boolean | null;
   /** 参数配置公式 */
-  Func: string | null;
+  Func?: string | null;
 }
 
 /** 参数模板信息 */
@@ -1186,7 +1236,7 @@ declare interface ParamTemplateListInfo {
 declare interface PolicyRule {
   /** 策略，ACCEPT或者DROP */
   Action?: string;
-  /** 来源IP或IP段，例如192.168.0.0/16 */
+  /** 来源Ip或Ip段，例如192.168.0.0/16 */
   CidrIp?: string;
   /** 端口 */
   PortRange?: string;
@@ -1469,19 +1519,19 @@ declare interface SaleZone {
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 创建时间，时间格式：yyyy-mm-dd hh:mm:ss */
-  CreateTime: string;
+  CreateTime?: string;
   /** 入站规则 */
-  Inbound: PolicyRule[];
+  Inbound?: PolicyRule[];
   /** 出站规则 */
-  Outbound: PolicyRule[];
+  Outbound?: PolicyRule[];
   /** 安全组ID */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 安全组名称 */
-  SecurityGroupName: string;
+  SecurityGroupName?: string;
   /** 安全组备注 */
-  SecurityGroupRemark: string;
+  SecurityGroupRemark?: string;
 }
 
 /** 备可用区库存信息 */
@@ -1635,7 +1685,7 @@ declare interface AddInstancesRequest {
   Memory: number;
   /** 新增只读实例数，取值范围为(0,15] */
   ReadOnlyCount: number;
-  /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。当前版本已废弃。 */
+  /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。 */
   InstanceGrpId?: string;
   /** 所属VPC网络ID。 */
   VpcId?: string;
@@ -1742,12 +1792,16 @@ declare interface CloseProxyResponse {
 
 declare interface CloseWanRequest {
   /** 实例组id */
-  InstanceGrpId: string;
+  InstanceGrpId?: string;
+  /** 实例组id */
+  InstanceGroupId?: string;
+  /** 实例id */
+  InstanceId?: string;
 }
 
 declare interface CloseWanResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2513,9 +2567,11 @@ declare interface DescribeClusterInstanceGrpsRequest {
 
 declare interface DescribeClusterInstanceGrpsResponse {
   /** 实例组个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例组列表 */
-  InstanceGrpInfoList: CynosdbInstanceGrp[];
+  InstanceGrpInfoList?: CynosdbInstanceGrp[];
+  /** 实例组列表 */
+  InstanceGroupInfoList?: CynosdbInstanceGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2549,6 +2605,8 @@ declare interface DescribeClusterParamsRequest {
   ClusterId: string;
   /** 参数名字 */
   ParamName?: string;
+  /** 是否为全局参数 */
+  IsGlobal?: string;
 }
 
 declare interface DescribeClusterParamsResponse {
@@ -2607,8 +2665,10 @@ declare interface DescribeClustersResponse {
 }
 
 declare interface DescribeDBSecurityGroupsRequest {
-  /** 实例组ID。可以通过接口DescribeClusterInstanceGrps获取。 */
-  InstanceId: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例组ID */
+  InstanceGroupId?: string;
 }
 
 declare interface DescribeDBSecurityGroupsResponse {
@@ -2679,6 +2739,8 @@ declare interface DescribeInstanceParamsRequest {
   InstanceIds: string[];
   /** 参数名搜索条件，支持模糊匹配 */
   ParamKeyword?: string;
+  /** 是否为全局参数 */
+  IsGlobal?: string;
 }
 
 declare interface DescribeInstanceParamsResponse {
@@ -2735,7 +2797,7 @@ declare interface DescribeInstanceSpecsResponse {
 }
 
 declare interface DescribeInstancesRequest {
-  /** 返回数量，默认为 20，最大值为 100 */
+  /** 返回数量，默认为 20，取值范围为(0,100] */
   Limit?: number;
   /** 记录偏移量，默认值为0 */
   Offset?: number;
@@ -2745,7 +2807,7 @@ declare interface DescribeInstancesRequest {
   OrderByType?: string;
   /** 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
   Filters?: QueryFilter[];
-  /** 引擎类型：目前支持“MYSQL”， “POSTGRESQL” */
+  /** 引擎类型：目前支持“MYSQL” */
   DbType?: string;
   /** 实例状态, 可选值:creating 创建中running 运行中isolating 隔离中isolated 已隔离activating 恢复中offlining 下线中offlined 已下线 */
   Status?: string;
@@ -3688,7 +3750,9 @@ declare interface ModifyVipVportRequest {
   /** 集群id */
   ClusterId: string;
   /** 实例组id */
-  InstanceGrpId: string;
+  InstanceGrpId?: string;
+  /** 实例组id */
+  InstanceGroupId?: string;
   /** 需要修改的目的ip */
   Vip?: string;
   /** 需要修改的目的端口 */
@@ -3808,12 +3872,16 @@ declare interface OpenReadOnlyInstanceExclusiveAccessResponse {
 
 declare interface OpenWanRequest {
   /** 实例组id */
-  InstanceGrpId: string;
+  InstanceGrpId?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例组id */
+  InstanceGroupId?: string;
 }
 
 declare interface OpenWanResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4177,7 +4245,7 @@ declare interface Cynosdb {
   ActivateInstance(data: ActivateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateInstanceResponse>;
   /** 开启多可用区部署 {@link AddClusterSlaveZoneRequest} {@link AddClusterSlaveZoneResponse} */
   AddClusterSlaveZone(data: AddClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterSlaveZoneResponse>;
-  /** 购买实例 {@link AddInstancesRequest} {@link AddInstancesResponse} */
+  /** 集群添加实例 {@link AddInstancesRequest} {@link AddInstancesResponse} */
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
@@ -4190,7 +4258,7 @@ declare interface Cynosdb {
   /** 关闭数据库代理 {@link CloseProxyRequest} {@link CloseProxyResponse} */
   CloseProxy(data: CloseProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyResponse>;
   /** 关闭外网 {@link CloseWanRequest} {@link CloseWanResponse} */
-  CloseWan(data: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
+  CloseWan(data?: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
   /** 复制集群密码复杂度 {@link CopyClusterPasswordComplexityRequest} {@link CopyClusterPasswordComplexityResponse} */
   CopyClusterPasswordComplexity(data: CopyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<CopyClusterPasswordComplexityResponse>;
   /** 创建用户账号 {@link CreateAccountsRequest} {@link CreateAccountsResponse} */
@@ -4257,7 +4325,7 @@ declare interface Cynosdb {
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 查询数据库列表 {@link DescribeClusterDetailDatabasesRequest} {@link DescribeClusterDetailDatabasesResponse} */
   DescribeClusterDetailDatabases(data: DescribeClusterDetailDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailDatabasesResponse>;
-  /** 查询实例组 {@link DescribeClusterInstanceGrpsRequest} {@link DescribeClusterInstanceGrpsResponse} */
+  /** 查询实例组（废弃） {@link DescribeClusterInstanceGrpsRequest} {@link DescribeClusterInstanceGrpsResponse} */
   DescribeClusterInstanceGrps(data: DescribeClusterInstanceGrpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGrpsResponse>;
   /** 查询参数修改记录 {@link DescribeClusterParamLogsRequest} {@link DescribeClusterParamLogsResponse} */
   DescribeClusterParamLogs(data: DescribeClusterParamLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamLogsResponse>;
@@ -4268,14 +4336,14 @@ declare interface Cynosdb {
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
-  DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
+  DescribeDBSecurityGroups(data?: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询任务流信息 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
   /** 查询实例详情 {@link DescribeInstanceDetailRequest} {@link DescribeInstanceDetailResponse} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 查询错误日志列表 {@link DescribeInstanceErrorLogsRequest} {@link DescribeInstanceErrorLogsResponse} */
   DescribeInstanceErrorLogs(data: DescribeInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceErrorLogsResponse>;
-  /** 查询实例参数 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
+  /** 查询实例参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
   /** 查询实例慢日志详情 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
@@ -4392,7 +4460,7 @@ declare interface Cynosdb {
   /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
   OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
   /** 开通外网 {@link OpenWanRequest} {@link OpenWanResponse} */
-  OpenWan(data: OpenWanRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanResponse>;
+  OpenWan(data?: OpenWanRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanResponse>;
   /** 暂停serverless集群 {@link PauseServerlessRequest} {@link PauseServerlessResponse} */
   PauseServerless(data: PauseServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<PauseServerlessResponse>;
   /** 退款资源包 {@link RefundResourcePackageRequest} {@link RefundResourcePackageResponse} */

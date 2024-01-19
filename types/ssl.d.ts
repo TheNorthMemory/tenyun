@@ -62,18 +62,6 @@ declare interface CdnInstanceList {
   InstanceList?: CdnInstanceDetail[] | null;
 }
 
-/** 云资源配置详情 */
-declare interface CertHostingInfo {
-  /** 证书ID */
-  CertId: string;
-  /** 已替换的新证书ID */
-  RenewCertId: string | null;
-  /** 云资源托管 ，CDN或CLB：部分开启，CDN,CLB：已开启，null：未开启托管 */
-  ResourceType: string | null;
-  /** 创建时间 */
-  CreateTime: string | null;
-}
-
 /** 证书异步任务ID */
 declare interface CertTaskId {
   /** 证书ID */
@@ -2124,20 +2112,6 @@ declare interface DownloadCertificateResponse {
   RequestId?: string;
 }
 
-declare interface HostCertificateRequest {
-  /** 证书ID */
-  CertificateId: string;
-  /** 资源类型：目前仅限于CLB,CDN */
-  ResourceType?: string[];
-}
-
-declare interface HostCertificateResponse {
-  /** 云资源配置详情 */
-  CertHostingInfo?: CertHostingInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyCertificateAliasRequest {
   /** 证书 ID。 */
   CertificateId: string;
@@ -2527,8 +2501,6 @@ declare interface Ssl {
   DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
   /** 下载证书 {@link DownloadCertificateRequest} {@link DownloadCertificateResponse} */
   DownloadCertificate(data: DownloadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCertificateResponse>;
-  /** @deprecated 云资源托管 {@link HostCertificateRequest} {@link HostCertificateResponse} */
-  HostCertificate(data: HostCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<HostCertificateResponse>;
   /** 修改证书备注 {@link ModifyCertificateAliasRequest} {@link ModifyCertificateAliasResponse} */
   ModifyCertificateAlias(data: ModifyCertificateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAliasResponse>;
   /** 修改证书所属项目 {@link ModifyCertificateProjectRequest} {@link ModifyCertificateProjectResponse} */

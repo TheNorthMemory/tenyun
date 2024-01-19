@@ -2633,8 +2633,10 @@ declare interface DescribeDDoSAttackTopDataResponse {
 }
 
 declare interface DescribeDefaultCertificatesRequest {
+  /** 站点 ID。 */
+  ZoneId?: string;
   /** 过滤条件，Filters.Values的上限为5。详细的过滤条件如下：zone-id 按照【站点ID】进行过滤。站点ID形如：zone-xxx。 类型：String 必选：是 */
-  Filters: Filter[];
+  Filters?: Filter[];
   /** 分页查询偏移量。默认值：0。 */
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：100。 */
@@ -2643,9 +2645,9 @@ declare interface DescribeDefaultCertificatesRequest {
 
 declare interface DescribeDefaultCertificatesResponse {
   /** 证书总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 默认证书列表。 */
-  DefaultServerCertInfo: DefaultServerCertInfo[];
+  DefaultServerCertInfo?: DefaultServerCertInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3778,7 +3780,7 @@ declare interface Teo {
   /** 查询DDoS攻击Top数据 {@link DescribeDDoSAttackTopDataRequest} {@link DescribeDDoSAttackTopDataResponse} */
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
   /** 查询默认证书列表 {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */
-  DescribeDefaultCertificates(data: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
+  DescribeDefaultCertificates(data?: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
   /** 查询版本发布历史 {@link DescribeDeployHistoryRequest} {@link DescribeDeployHistoryResponse} */
   DescribeDeployHistory(data: DescribeDeployHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployHistoryResponse>;
   /** 查询环境信息 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */

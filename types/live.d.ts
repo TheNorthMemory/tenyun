@@ -1629,7 +1629,7 @@ declare interface CreateLivePullStreamTaskRequest {
   VodLoopTimes?: string;
   /** 点播更新SourceUrls后的播放方式：ImmediateNewSource：立即播放新的拉流源内容；ContinueBreakPoint：播放完当前正在播放的点播 url 后再使用新的拉流源播放。（旧拉流源未播放的点播 url 不会再播放）注意：该配置生效仅对变更前拉流源为点播时生效。 */
   VodRefreshType?: string;
-  /** 自定义回调地址。拉流转推任务相关事件会回调到该地址。 */
+  /** 自定义回调地址。拉流转推任务相关事件会回调到该地址。回调事件使用方法请查看：https://cloud.tencent.com/document/product/267/32744https://cloud.tencent.com/document/product/267/56208 */
   CallbackUrl?: string;
   /** 其他参数。示例: ignore_region 用于忽略传入地域, 内部按负载分配。 */
   ExtraCmd?: string;

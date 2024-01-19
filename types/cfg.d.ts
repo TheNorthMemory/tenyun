@@ -248,8 +248,6 @@ declare interface TaskGroupInstance {
   TaskGroupInstanceObjectId: string | null;
   /** 实例动作执行状态 */
   TaskGroupInstanceStatus: number;
-  /** 实例动作执行日志 */
-  TaskGroupInstanceExecuteLog: string | null;
   /** 实例创建时间 */
   TaskGroupInstanceCreateTime: string;
   /** 实例更新时间 */
@@ -260,6 +258,8 @@ declare interface TaskGroupInstance {
   TaskGroupInstanceStartTime: string | null;
   /** 执行结束时间 */
   TaskGroupInstanceEndTime: string | null;
+  /** 实例动作执行日志 */
+  TaskGroupInstanceExecuteLog?: string | null;
   /** 实例是否可重试 */
   TaskGroupInstanceIsRedo?: boolean | null;
   /** 动作实例执行时间 */
