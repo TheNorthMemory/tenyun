@@ -4029,13 +4029,13 @@ declare interface DescribeClusterPendingReleasesRequest {
 
 declare interface DescribeClusterPendingReleasesResponse {
   /** 正在安装中应用列表 */
-  ReleaseSet: PendingRelease[] | null;
+  ReleaseSet?: PendingRelease[] | null;
   /** 每页返回数量限制 */
-  Limit: number | null;
+  Limit?: number | null;
   /** 页偏移量 */
-  Offset: number | null;
+  Offset?: number | null;
   /** 总数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5425,7 +5425,7 @@ declare interface ForwardApplicationRequestV3Request {
 
 declare interface ForwardApplicationRequestV3Response {
   /** 请求集群addon后返回的数据 */
-  ResponseBody: string;
+  ResponseBody?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

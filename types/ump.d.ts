@@ -565,7 +565,7 @@ declare interface Ump {
   CreateCameraAlerts(data?: CreateCameraAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraAlertsResponse>;
   /** 相机状态上报接口 {@link CreateCameraStateRequest} {@link CreateCameraStateResponse} */
   CreateCameraState(data: CreateCameraStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraStateResponse>;
-  /** 抓拍上报接口 {@link CreateCaptureRequest} {@link CreateCaptureResponse} */
+  /** @deprecated 抓拍上报接口 {@link CreateCaptureRequest} {@link CreateCaptureResponse} */
   CreateCapture(data: CreateCaptureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCaptureResponse>;
   /** 多经点位告警 {@link CreateMultiBizAlertRequest} {@link CreateMultiBizAlertResponse} */
   CreateMultiBizAlert(data: CreateMultiBizAlertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiBizAlertResponse>;

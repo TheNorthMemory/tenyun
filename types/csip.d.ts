@@ -2233,6 +2233,40 @@ declare interface ModifyRiskCenterRiskStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRiskCenterScanTaskRequest {
+  /** 任务名称 */
+  TaskName: string;
+  /** 0-全扫，1-指定资产扫，2-排除资产扫，3-手动填写扫；1和2则Assets字段必填，3则SelfDefiningAssets必填 */
+  ScanAssetType: number;
+  /** 扫描项目；port/poc/weakpass/webcontent/configrisk */
+  ScanItem: string[];
+  /** 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填 */
+  ScanPlanType: number;
+  /** 要修改的任务id */
+  TaskId: string;
+  /** 扫描资产信息列表 */
+  Assets?: TaskAssetObject[];
+  /** 扫描计划详情 */
+  ScanPlanContent?: string;
+  /** ip/域名/url数组 */
+  SelfDefiningAssets?: string[];
+  /** 高级配置 */
+  TaskAdvanceCFG?: TaskAdvanceCFG;
+  /** 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式 */
+  TaskMode?: number;
+}
+
+declare interface ModifyRiskCenterScanTaskResponse {
+  /** 任务id */
+  TaskId?: string;
+  /** 0，修改成功，其他失败；-1为存在资产未认证 */
+  Status?: number;
+  /** 未认证资产列表 */
+  UnAuthAsset?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopRiskCenterTaskRequest {
   /** 任务id 列表 */
   TaskIdList: TaskIdListKey[];
@@ -2316,6 +2350,8 @@ declare interface Csip {
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
   /** 修改风险中心风险状态 {@link ModifyRiskCenterRiskStatusRequest} {@link ModifyRiskCenterRiskStatusResponse} */
   ModifyRiskCenterRiskStatus(data: ModifyRiskCenterRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterRiskStatusResponse>;
+  /** 修改风险中心扫描任务 {@link ModifyRiskCenterScanTaskRequest} {@link ModifyRiskCenterScanTaskResponse} */
+  ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
   /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
   StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
 }

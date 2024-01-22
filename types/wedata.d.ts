@@ -7441,6 +7441,14 @@ declare interface DeleteProjectParamDsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteProjectUsersRequest {
+}
+
+declare interface DeleteProjectUsersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteResourceFileRequest {
   /** 项目id */
   ProjectId: string;
@@ -13154,6 +13162,8 @@ declare interface Wedata {
   DeleteOfflineTask(data: DeleteOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineTaskResponse>;
   /** 删除项目参数 {@link DeleteProjectParamDsRequest} {@link DeleteProjectParamDsResponse} */
   DeleteProjectParamDs(data?: DeleteProjectParamDsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectParamDsResponse>;
+  /** 删除项目用户 {@link DeleteProjectUsersRequest} {@link DeleteProjectUsersResponse} */
+  DeleteProjectUsers(data?: DeleteProjectUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectUsersResponse>;
   /** 删除资源 {@link DeleteResourceRequest} {@link DeleteResourceResponse} */
   DeleteResource(data?: DeleteResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceResponse>;
   /** 【资源管理】删除资源 {@link DeleteResourceFileRequest} {@link DeleteResourceFileResponse} */

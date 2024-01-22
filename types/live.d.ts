@@ -3111,11 +3111,13 @@ declare interface DescribeLiveTranscodeTemplateResponse {
 }
 
 declare interface DescribeLiveTranscodeTemplatesRequest {
+  /** 转码模板类型，默认0。0：普通转码模板。1：自适应码率转码模板。 */
+  TemplateType?: number;
 }
 
 declare interface DescribeLiveTranscodeTemplatesResponse {
   /** 转码模板列表。 */
-  Templates: TemplateInfo[];
+  Templates?: TemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
