@@ -561,39 +561,39 @@ declare interface SearchImageResponse {
 /** {@link Ump 客流数字化平台} */
 declare interface Ump {
   (): Versions;
-  /** 上报相机告警信息 {@link CreateCameraAlertsRequest} {@link CreateCameraAlertsResponse} */
+  /** @deprecated 上报相机告警信息 {@link CreateCameraAlertsRequest} {@link CreateCameraAlertsResponse} */
   CreateCameraAlerts(data?: CreateCameraAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraAlertsResponse>;
-  /** 相机状态上报接口 {@link CreateCameraStateRequest} {@link CreateCameraStateResponse} */
+  /** @deprecated 相机状态上报接口 {@link CreateCameraStateRequest} {@link CreateCameraStateResponse} */
   CreateCameraState(data: CreateCameraStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraStateResponse>;
   /** @deprecated 抓拍上报接口 {@link CreateCaptureRequest} {@link CreateCaptureResponse} */
   CreateCapture(data: CreateCaptureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCaptureResponse>;
-  /** 多经点位告警 {@link CreateMultiBizAlertRequest} {@link CreateMultiBizAlertResponse} */
+  /** @deprecated 多经点位告警 {@link CreateMultiBizAlertRequest} {@link CreateMultiBizAlertResponse} */
   CreateMultiBizAlert(data: CreateMultiBizAlertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiBizAlertResponse>;
-  /** 进程监控信息上报 {@link CreateProgramStateRequest} {@link CreateProgramStateResponse} */
+  /** @deprecated 进程监控信息上报 {@link CreateProgramStateRequest} {@link CreateProgramStateResponse} */
   CreateProgramState(data: CreateProgramStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProgramStateResponse>;
-  /** 服务器监控信息上报 {@link CreateServerStateRequest} {@link CreateServerStateResponse} */
+  /** @deprecated 服务器监控信息上报 {@link CreateServerStateRequest} {@link CreateServerStateResponse} */
   CreateServerState(data: CreateServerStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerStateResponse>;
-  /** 多经点位消警 {@link DeleteMultiBizAlertRequest} {@link DeleteMultiBizAlertResponse} */
+  /** @deprecated 多经点位消警 {@link DeleteMultiBizAlertRequest} {@link DeleteMultiBizAlertResponse} */
   DeleteMultiBizAlert(data: DeleteMultiBizAlertRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMultiBizAlertResponse>;
-  /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
+  /** @deprecated 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** 获取摄像头状态列表 {@link DescribeCamerasRequest} {@link DescribeCamerasResponse} */
+  /** @deprecated 获取摄像头状态列表 {@link DescribeCamerasRequest} {@link DescribeCamerasResponse} */
   DescribeCameras(data: DescribeCamerasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCamerasResponse>;
-  /** 获取摄像头配置信息 {@link DescribeConfigRequest} {@link DescribeConfigResponse} */
+  /** @deprecated 获取摄像头配置信息 {@link DescribeConfigRequest} {@link DescribeConfigResponse} */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
-  /** 获取底图 {@link DescribeImageRequest} {@link DescribeImageResponse} */
+  /** @deprecated 获取底图 {@link DescribeImageRequest} {@link DescribeImageResponse} */
   DescribeImage(data: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
-  /** 获取多经点位底图 {@link DescribeMultiBizBaseImageRequest} {@link DescribeMultiBizBaseImageResponse} */
+  /** @deprecated 获取多经点位底图 {@link DescribeMultiBizBaseImageRequest} {@link DescribeMultiBizBaseImageResponse} */
   DescribeMultiBizBaseImage(data: DescribeMultiBizBaseImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiBizBaseImageResponse>;
-  /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
+  /** @deprecated 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 获取点位列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
+  /** @deprecated 获取点位列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** 多经点位配置更新 {@link ModifyMultiBizConfigRequest} {@link ModifyMultiBizConfigResponse} */
+  /** @deprecated 多经点位配置更新 {@link ModifyMultiBizConfigRequest} {@link ModifyMultiBizConfigResponse} */
   ModifyMultiBizConfig(data: ModifyMultiBizConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiBizConfigResponse>;
-  /** 上报服务注册 {@link ReportServiceRegisterRequest} {@link ReportServiceRegisterResponse} */
+  /** @deprecated 上报服务注册 {@link ReportServiceRegisterRequest} {@link ReportServiceRegisterResponse} */
   ReportServiceRegister(data: ReportServiceRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<ReportServiceRegisterResponse>;
-  /** 以图搜图 {@link SearchImageRequest} {@link SearchImageResponse} */
+  /** @deprecated 以图搜图 {@link SearchImageRequest} {@link SearchImageResponse} */
   SearchImage(data: SearchImageRequest, config?: AxiosRequestConfig): AxiosPromise<SearchImageResponse>;
 }
 

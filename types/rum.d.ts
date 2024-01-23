@@ -10,34 +10,6 @@ declare interface Filter {
   Name?: string;
 }
 
-/** 日志导出记录 */
-declare interface LogExport {
-  /** 日志导出路径 */
-  CosPath: string;
-  /** 日志导出数量 */
-  Count: number;
-  /** 日志导出任务创建时间 */
-  CreateTime: string;
-  /** 日志导出任务ID */
-  ExportID: string;
-  /** 日志导出文件名 */
-  FileName: string;
-  /** 日志文件大小 */
-  FileSize: number;
-  /** 日志导出格式 */
-  Format: string;
-  /** 日志导出时间排序 */
-  Order: string;
-  /** 日志导出查询语句 */
-  Query: string;
-  /** 日志导出起始时间 */
-  StartTime: string;
-  /** 日志导出结束时间 */
-  EndTime: string;
-  /** 日志下载状态。Queuing:导出正在排队中，Processing:导出正在进行中，Complete:导出完成，Failed:导出失败，Expired:日志导出已过期（三天有效期）。 */
-  Status: string;
-}
-
 /** 项目接口限制类型 */
 declare interface ProjectLimit {
   /** 接口 */
@@ -232,30 +204,6 @@ declare interface Whitelist {
   CreateTime: string;
 }
 
-declare interface CreateLogExportRequest {
-  /** 项目ID */
-  ID: number;
-  /** 日志导出起始时间 */
-  StartTime: string;
-  /** 日志导出结束时间 */
-  EndTime: string;
-  /** 日志导出检索语句 */
-  Query: string;
-  /** 日志导出数量, 最大值1000万 */
-  Count: number;
-  /** 日志导出时间排序。desc，asc，默认为desc */
-  Order?: string;
-  /** 日志导出数据格式。json，csv，默认为json */
-  Format?: string;
-}
-
-declare interface CreateLogExportResponse {
-  /** 日志导出ID */
-  ExportID: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateProjectRequest {
   /** 创建的项目名(不为空且最长为 200) */
   Name: string;
@@ -374,20 +322,6 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteLogExportRequest {
-  /** 项目ID */
-  ID: number;
-  /** 日志导出ID */
-  ExportID: string;
-}
-
-declare interface DeleteLogExportResponse {
-  /** 是否成功，成功则为success；失败则直接返回Error，不返回该参数 */
-  Msg: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1464,44 +1398,6 @@ declare interface DescribeErrorResponse {
   RequestId?: string;
 }
 
-declare interface DescribeLogExportsRequest {
-  /** 项目ID */
-  ID: number;
-}
-
-declare interface DescribeLogExportsResponse {
-  /** 日志导出记录列表 */
-  LogExportSet: LogExport[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeLogListRequest {
-  /** 排序方式 desc asc（必填） */
-  Sort: string;
-  /** searchlog histogram（必填） */
-  ActionType: string;
-  /** 项目ID（必填） */
-  ID: number;
-  /** 开始时间（必填） */
-  StartTime?: string;
-  /** 单次查询返回的原始日志条数，最大值为100（必填） */
-  Limit?: number;
-  /** 上下文，加载更多日志时使用，透传上次返回的 Context 值，获取后续的日志内容，总计最多可获取1万条原始日志。过期时间1小时 */
-  Context?: string;
-  /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填）例："id:120001 AND type:\"log\"" */
-  Query?: string;
-  /** 结束时间（必填） */
-  EndTime?: string;
-}
-
-declare interface DescribeLogListResponse {
-  /** 返回字符串 */
-  Result: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeProjectLimitsRequest {
   /** 项目ID */
   ProjectID: number;
@@ -1903,8 +1799,6 @@ declare interface StopProjectResponse {
 /** {@link Rum 前端性能监控} */
 declare interface Rum {
   (): Versions;
-  /** 创建日志下载任务 {@link CreateLogExportRequest} {@link CreateLogExportResponse} */
-  CreateLogExport(data: CreateLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogExportResponse>;
   /** 创建 RUM 应用 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建发布文件记录 {@link CreateReleaseFileRequest} {@link CreateReleaseFileResponse} */
@@ -1917,8 +1811,6 @@ declare interface Rum {
   CreateWhitelist(data: CreateWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhitelistResponse>;
   /** 删除 RUM 业务系统 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** 删除日志下载任务 {@link DeleteLogExportRequest} {@link DeleteLogExportResponse} */
-  DeleteLogExport(data: DeleteLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogExportResponse>;
   /** 删除 RUM 应用 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除发布文件 {@link DeleteReleaseFileRequest} {@link DeleteReleaseFileResponse} */
@@ -1973,10 +1865,6 @@ declare interface Rum {
   DescribeDataWebVitalsPage(data: DescribeDataWebVitalsPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataWebVitalsPageResponse>;
   /** 获取首页错误信息 {@link DescribeErrorRequest} {@link DescribeErrorResponse} */
   DescribeError(data: DescribeErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorResponse>;
-  /** 获取日志下载任务列表 {@link DescribeLogExportsRequest} {@link DescribeLogExportsResponse} */
-  DescribeLogExports(data: DescribeLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogExportsResponse>;
-  /** 获取日志列表(已下线，请用DescribeRumLogList) {@link DescribeLogListRequest} {@link DescribeLogListResponse} */
-  DescribeLogList(data: DescribeLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogListResponse>;
   /** 获取应用上报抽样信息 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
   DescribeProjectLimits(data: DescribeProjectLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectLimitsResponse>;
   /** 获取 RUM 应用列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */

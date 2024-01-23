@@ -255,7 +255,7 @@ declare interface CreateRecTaskRequest {
   Url?: string;
   /** 回调 URL用户自行搭建的用于接收识别结果的服务URL回调格式和内容详见：[录音识别回调说明](https://cloud.tencent.com/document/product/1093/52632)注意：如果用户使用轮询方式获取识别结果，则无需提交该参数 */
   CallbackUrl?: string;
-  /** 是否开启说话人分离0：不开启；1：开启（仅支持以下引擎：8k_zh/16k_zh/16k_ms/16k_en/16k_id，且ChannelNum=1时可用）；默认值为 0注意：8k双声道电话音频请按 **ChannelNum 识别声道数** 的参数描述使用默认值 */
+  /** 是否开启说话人分离0：不开启；1：开启（仅支持以下引擎：8k_zh/16k_zh/16k_ms/16k_en/16k_id/16k_zh_large/16k_dialect_large，且ChannelNum=1时可用）；默认值为 0注意：8k双声道电话音频请按 **ChannelNum 识别声道数** 的参数描述使用默认值 */
   SpeakerDiarization?: number;
   /** 说话人分离人数**需配合开启说话人分离使用，不开启无效**，取值范围：0-100：自动分离（最多分离出20个人）；1-10：指定人数分离；默认值为 0 */
   SpeakerNumber?: number;

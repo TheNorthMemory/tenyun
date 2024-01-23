@@ -157,49 +157,63 @@ declare interface CloudBaseEsInfo {
 /** 云开发项目版本 */
 declare interface CloudBaseProjectVersion {
   /** 项目名 */
-  Name: string;
+  Name?: string;
   /** SAM json */
-  Sam: string | null;
+  Sam?: string | null;
   /** 来源类型 */
-  Source: CodeSource | null;
+  Source?: CodeSource | null;
   /** 创建时间, unix时间戳 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 更新时间 ,unix时间戳 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
   /** 项目状态, 枚举值: "creatingEnv"-创建环境中	"createEnvFail"-创建环境失败	"building"-构建中	"buildFail"-构建失败	"deploying"-部署中 "deployFail"-部署失败 "success"-部署成功 */
-  Status: string | null;
+  Status?: string | null;
   /** 环境变量 */
-  Parameters: KVPair[] | null;
+  Parameters?: KVPair[] | null;
   /** 项目类型, 枚举值:"framework-oneclick" 控制台一键部署"framework-local-oneclick" cli本地一键部署"qci-extension-cicd" 内网coding ci cd */
-  Type: string | null;
+  Type?: string | null;
   /** ci的id */
-  CIId: string | null;
+  CIId?: string | null;
   /** cd的id */
-  CDId: string | null;
+  CDId?: string | null;
   /** 环境id */
-  EnvId: string | null;
+  EnvId?: string | null;
   /** 版本号 */
-  VersionNum: number | null;
+  VersionNum?: number | null;
   /** 错误原因 */
-  FailReason: string | null;
+  FailReason?: string | null;
   /** rc.json内容 */
-  RcJson: string | null;
+  RcJson?: string | null;
   /** 插件配置内容 */
-  AddonConfig: string | null;
+  AddonConfig?: string | null;
   /** 标签 */
-  Tags: string[] | null;
+  Tags?: string[] | null;
   /** 网络配置 */
-  NetworkConfig: string | null;
+  NetworkConfig?: string | null;
   /** 扩展id */
-  ExtensionId: string | null;
+  ExtensionId?: string | null;
   /** 错误类型 */
-  FailType: string | null;
+  FailType?: string | null;
   /** 私有仓库地址 */
-  RepoUrl: string | null;
+  RepoUrl?: string | null;
   /** 是否私有仓库代码变更触发自动部署 */
-  AutoDeployOnCodeChange: boolean | null;
+  AutoDeployOnCodeChange?: boolean | null;
   /** ci部署进度（%） */
-  BuildPercent: number | null;
+  BuildPercent?: number | null;
+  /** Uin */
+  Uin?: string | null;
+  /** BuildFinishTime */
+  BuildFinishTime?: string | null;
+  /** DeployFinishTime */
+  DeployFinishTime?: string | null;
+  /** BuildId */
+  BuildId?: string | null;
+  /** SourceUrl */
+  SourceUrl?: string | null;
+  /** FailReasonShort */
+  FailReasonShort?: string | null;
+  /** FirstInitRepo */
+  FirstInitRepo?: string | null;
 }
 
 /** emptydir 数据卷详细信息 */
@@ -1759,19 +1773,19 @@ declare interface DescribeCloudBaseBuildServiceRequest {
 
 declare interface DescribeCloudBaseBuildServiceResponse {
   /** 上传url */
-  UploadUrl: string;
-  /** 上传heder */
-  UploadHeaders: KVPair[];
+  UploadUrl?: string;
+  /** 上传header */
+  UploadHeaders?: KVPair[];
   /** 包名 */
-  PackageName: string;
+  PackageName?: string;
   /** 包版本 */
-  PackageVersion: string;
+  PackageVersion?: string;
   /** 下载链接 */
-  DownloadUrl: string | null;
+  DownloadUrl?: string | null;
   /** 下载Httpheader */
-  DownloadHeaders: KVPair[] | null;
+  DownloadHeaders?: KVPair[] | null;
   /** 下载链接是否过期 */
-  OutDate: boolean | null;
+  OutDate?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1795,9 +1809,9 @@ declare interface DescribeCloudBaseProjectLatestVersionListRequest {
 
 declare interface DescribeCloudBaseProjectLatestVersionListResponse {
   /** 项目列表 */
-  ProjectList: CloudBaseProjectVersion[] | null;
+  ProjectList?: CloudBaseProjectVersion[] | null;
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1811,17 +1825,17 @@ declare interface DescribeCloudBaseProjectVersionListRequest {
   PageSize?: number;
   /** 第几页,从0开始 */
   PageNum?: number;
-  /** 起始时间 2021-03-27 12:00:00 */
+  /** 起始时间 */
   StartTime?: string;
-  /** 终止时间 2021-03-27 12:00:00 */
+  /** 终止时间 */
   EndTime?: string;
 }
 
 declare interface DescribeCloudBaseProjectVersionListResponse {
   /** 版本列表 */
-  ProjectVersions: CloudBaseProjectVersion[] | null;
+  ProjectVersions?: CloudBaseProjectVersion[] | null;
   /** 总个数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2225,7 +2239,7 @@ declare interface DescribeCloudBaseRunVersionSnapshotResponse {
 declare interface DescribeCurveDataRequest {
   /** 环境ID */
   EnvId: string;
-  /** 指标名: StorageRead: 存储读请求次数 StorageWrite: 存储写请求次数 StorageCdnOriginFlux: CDN回源流量, 单位字节 CDNFlux: CDN回源流量, 单位字节 FunctionInvocation: 云函数调用次数 FunctionGBs: 云函数资源使用量, 单位Mb*Ms FunctionFlux: 云函数流量, 单位千字节(KB) FunctionError: 云函数调用错误次数 FunctionDuration: 云函数运行时间, 单位毫秒 DbRead: 数据库读请求数 DbWrite: 数据库写请求数 DbCostTime10ms: 数据库耗时在10ms~50ms请求数 DbCostTime50ms: 数据库耗时在50ms~100ms请求数 DbCostTime100ms: 数据库耗时在100ms以上请求数 TkeCpuRatio: 容器CPU占用率 TkeMemRatio: 容器内存占用率 TkeCpuUsed: 容器CPU使用量 TkeMemUsed: 容器内存使用量 TkeInvokeNum: 调用量 FunctionConcurrentExecutions: 云函数并发执行个数 FunctionIdleProvisioned: 云函数预置并发闲置量 FunctionConcurrencyMemoryMB: 云函数并发执行内存量 FunctionThrottle: 云函数受限次数 FunctionProvisionedConcurrency: 云函数预置并发 */
+  /** 指标名: StorageRead: 存储读请求次数 StorageWrite: 存储写请求次数 StorageCdnOriginFlux: CDN回源流量, 单位字节 CDNFlux: CDN回源流量, 单位字节 FunctionInvocation: 云函数调用次数 FunctionGBs: 云函数资源使用量, 单位Mb*Ms FunctionFlux: 云函数流量, 单位千字节(KB) FunctionError: 云函数调用错误次数 FunctionDuration: 云函数运行时间, 单位毫秒 DbRead: 数据库读请求数 DbWrite: 数据库写请求数 DbCostTime10ms: 数据库耗时在10ms-50ms请求数 DbCostTime50ms: 数据库耗时在50ms-100ms请求数 DbCostTime100ms: 数据库耗时在100ms以上请求数 TkeCpuRatio: 容器CPU占用率 TkeMemRatio: 容器内存占用率 TkeCpuUsed: 容器CPU使用量 TkeMemUsed: 容器内存使用量 TkeInvokeNum: 调用量 FunctionConcurrentExecutions: 云函数并发执行个数 FunctionIdleProvisioned: 云函数预置并发闲置量 FunctionConcurrencyMemoryMB: 云函数并发执行内存量 FunctionThrottle: 云函数受限次数 FunctionProvisionedConcurrency: 云函数预置并发 */
   MetricName: string;
   /** 开始时间，如2018-08-24 10:50:00, 开始时间需要早于结束时间至少五分钟(原因是因为目前统计粒度最小是5分钟). */
   StartTime: string;
@@ -2244,7 +2258,7 @@ declare interface DescribeCurveDataResponse {
   MetricName?: string;
   /** 统计周期(单位秒), 当时间区间为1天内, 统计周期为5分钟; 当时间区间选择为1天以上, 15天以下, 统计周期为1小时; 当时间区间选择为15天以上, 180天以下, 统计周期为1天. */
   Period?: number;
-  /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到. */
+  /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到。 */
   Values?: number[];
   /** 时间数据, 标识监控数据Values中的点是哪个时间段上报的. */
   Time?: number[];
@@ -2525,7 +2539,7 @@ declare interface DescribeGatewayVersionsResponse {
 declare interface DescribeGraphDataRequest {
   /** 环境ID */
   EnvId: string;
-  /** 指标名: StorageRead: 存储读请求次数 StorageWrite: 存储写请求次数 StorageCdnOriginFlux: CDN回源流量, 单位字节 CDNFlux: CDN回源流量, 单位字节 FunctionInvocation: 云函数调用次数 FunctionGBs: 云函数资源使用量, 单位Mb*Ms FunctionFlux: 云函数流量, 单位千字节(KB) FunctionError: 云函数调用错误次数 FunctionDuration: 云函数运行时间, 单位毫秒 DbRead: 数据库读请求数 DbWrite: 数据库写请求数 DbCostTime10ms: 数据库耗时在10ms~50ms请求数 DbCostTime50ms: 数据库耗时在50ms~100ms请求数 DbCostTime100ms: 数据库耗时在100ms以上请求数 TkeCpuRatio: 容器CPU占用率 TkeMemRatio: 容器内存占用率 TkeCpuUsed: 容器CPU使用量 TkeMemUsed: 容器内存使用量 TkeInvokeNum: 调用量 FunctionConcurrentExecutions: 云函数并发执行个数FunctionIdleProvisioned: 云函数预置并发闲置量 FunctionConcurrencyMemoryMB: 云函数并发执行内存量 FunctionThrottle: 云函数受限次数 FunctionProvisionedConcurrency: 云函数预置并发 */
+  /** 指标名: StorageRead: 存储读请求次数 StorageWrite: 存储写请求次数 StorageCdnOriginFlux: CDN回源流量, 单位字节 CDNFlux: CDN回源流量, 单位字节 FunctionInvocation: 云函数调用次数 FunctionGBs: 云函数资源使用量, 单位MB*ms FunctionFlux: 云函数流量, 单位千字节(KB) FunctionError: 云函数调用错误次数 FunctionDuration: 云函数运行时间, 单位毫秒 DbRead: 数据库读请求数 DbWrite: 数据库写请求数 DbCostTime10ms: 数据库耗时在10ms-50ms请求数 DbCostTime50ms: 数据库耗时在50ms-100ms请求数 DbCostTime100ms: 数据库耗时在100ms以上请求数 TkeCpuRatio: 容器CPU占用率 TkeMemRatio: 容器内存占用率 TkeCpuUsed: 容器CPU使用量 TkeMemUsed: 容器内存使用量 TkeInvokeNum: 调用量 FunctionConcurrentExecutions: 云函数并发执行个数FunctionIdleProvisioned: 云函数预置并发闲置量 FunctionConcurrencyMemoryMB: 云函数并发执行内存量 FunctionThrottle: 云函数受限次数 FunctionProvisionedConcurrency: 云函数预置并发 */
   MetricName: string;
   /** 开始时间，如2018-08-24 10:50:00, 开始时间需要早于结束时间至少五分钟(原因是因为目前统计粒度最小是5分钟). */
   StartTime: string;
@@ -2544,7 +2558,7 @@ declare interface DescribeGraphDataResponse {
   MetricName?: string;
   /** 统计周期(单位秒), 当时间区间为1天内, 统计周期为5分钟; 当时间区间选择为1天以上, 15天以下, 统计周期为1小时; 当时间区间选择为15天以上, 180天以下, 统计周期为1天. */
   Period?: number;
-  /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到. */
+  /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到。 */
   Values?: number[];
   /** 时间数据, 标识监控数据Values中的点是哪个时间段上报的. */
   Time?: number[];
@@ -3053,7 +3067,7 @@ declare interface RollUpdateCloudBaseRunServerVersionRequest {
   MinNum?: string;
   /** 最大副本数 */
   MaxNum?: string;
-  /** 策略类型 */
+  /** 策略类型cpu/mem */
   PolicyType?: string;
   /** 策略阈值 */
   PolicyThreshold?: string;

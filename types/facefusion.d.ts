@@ -283,30 +283,6 @@ declare namespace V20181201 {
     RequestId?: string;
   }
 
-  interface FaceFusionLiteRequest {
-    /** 活动 ID，请在人脸融合控制台查看。 */
-    ProjectId: string;
-    /** 素材 ID，请在人脸融合控制台查看。 */
-    ModelId: string;
-    /** 用户人脸图片、素材模板图的人脸位置信息。 */
-    MergeInfos: MergeInfo[];
-    /** 返回图像方式（url 或 base64) ，二选一。默认url, url有效期为30天。 */
-    RspImgType?: string;
-    /** 请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。 */
-    CelebrityIdentify?: number;
-    /** 算法引擎参数: 1）选脸版 - youturecreat; 2）优享版 - youtu1vN； 3）畅享版 - ptu； 4）随机 - ALL; 默认为活动选择的算法 */
-    Engine?: string;
-  }
-
-  interface FaceFusionLiteResponse {
-    /** RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。 */
-    Image: string;
-    /** 鉴政结果 */
-    ReviewResultSet: FuseFaceReviewResult[] | null;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
   interface FaceFusionRequest {
     /** 活动 ID，请在人脸融合控制台查看。 */
     ProjectId: string;
@@ -375,8 +351,6 @@ declare interface Facefusion {
   DescribeMaterialList(data: V20181201.DescribeMaterialListRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.DescribeMaterialListResponse>;
   /** 人脸融合 {@link V20181201.FaceFusionRequest} {@link V20181201.FaceFusionResponse} */
   FaceFusion(data: V20181201.FaceFusionRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.FaceFusionResponse>;
-  /** @deprecated 人脸融合活动专用版 {@link V20181201.FaceFusionLiteRequest} {@link V20181201.FaceFusionLiteResponse} */
-  FaceFusionLite(data: V20181201.FaceFusionLiteRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.FaceFusionLiteResponse>;
   /** 选脸融合 {@link V20181201.FuseFaceRequest} {@link V20181201.FuseFaceResponse} */
   FuseFace(data: V20181201.FuseFaceRequest, config: AxiosRequestConfig & V20181201.VersionHeader): AxiosPromise<V20181201.FuseFaceResponse>;
 }

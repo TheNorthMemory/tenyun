@@ -185,55 +185,55 @@ declare interface Filter {
 /** CFS数据迁移任务信息 */
 declare interface MigrationTaskInfo {
   /** 迁移任务名称 */
-  TaskName: string;
+  TaskName?: string;
   /** 迁移任务id */
-  TaskId: string;
+  TaskId?: string;
   /** 迁移方式标志位，默认为0。0: 桶迁移；1: 清单迁移 */
-  MigrationType: number;
+  MigrationType?: number;
   /** 迁移模式，默认为0。0: 全量迁移 */
-  MigrationMode: number;
+  MigrationMode?: number;
   /** 数据源桶名称 */
-  BucketName: string | null;
+  BucketName?: string | null;
   /** 数据源桶地域 */
-  BucketRegion: string | null;
+  BucketRegion?: string | null;
   /** 数据源桶地址 */
-  BucketAddress: string | null;
+  BucketAddress?: string | null;
   /** 清单地址 */
-  ListAddress: string | null;
+  ListAddress?: string | null;
   /** 文件系统实例名称 */
-  FsName: string | null;
+  FsName?: string | null;
   /** 文件系统实例Id */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 文件系统路径 */
-  FsPath: string;
+  FsPath?: string;
   /** 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖 */
-  CoverType: number;
+  CoverType?: number;
   /** 创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 完成/终止时间 */
-  EndTime: number | null;
+  EndTime?: number | null;
   /** 迁移状态。0: 已完成；1: 进行中；2: 已终止 */
-  Status: number;
+  Status?: number;
   /** 文件数量 */
-  FileTotalCount: number | null;
+  FileTotalCount?: number | null;
   /** 已迁移文件数量 */
-  FileMigratedCount: number | null;
+  FileMigratedCount?: number | null;
   /** 迁移失败文件数量 */
-  FileFailedCount: number | null;
+  FileFailedCount?: number | null;
   /** 文件容量，单位Byte */
-  FileTotalSize: number | null;
+  FileTotalSize?: number | null;
   /** 已迁移文件容量，单位Byte */
-  FileMigratedSize: number | null;
+  FileMigratedSize?: number | null;
   /** 迁移失败文件容量，单位Byte */
-  FileFailedSize: number | null;
+  FileFailedSize?: number | null;
   /** 全部清单 */
-  FileTotalList: string | null;
+  FileTotalList?: string | null;
   /** 已完成文件清单 */
-  FileCompletedList: string | null;
+  FileCompletedList?: string | null;
   /** 失败文件清单 */
-  FileFailedList: string | null;
+  FileFailedList?: string | null;
   /** 源桶路径 */
-  BucketPath: string | null;
+  BucketPath?: string | null;
 }
 
 /** 挂载点信息 */
@@ -547,7 +547,7 @@ declare interface CreateCfsSnapshotRequest {
 
 declare interface CreateCfsSnapshotResponse {
   /** 文件系统快照id */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -711,9 +711,9 @@ declare interface DescribeAutoSnapshotPoliciesRequest {
 
 declare interface DescribeAutoSnapshotPoliciesResponse {
   /** 快照策略总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 快照策略信息 */
-  AutoSnapshotPolicies: AutoSnapshotPolicyInfo[];
+  AutoSnapshotPolicies?: AutoSnapshotPolicyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -835,11 +835,11 @@ declare interface DescribeCfsSnapshotsRequest {
   FileSystemId?: string;
   /** 快照ID */
   SnapshotId?: string;
-  /** 分页起始位置 */
+  /** 分页起始位置，默认为0 */
   Offset?: number;
-  /** 页面长度 */
+  /** 页面长度，默认为20 */
   Limit?: number;
-  /** 过滤条件 */
+  /** 过滤条件。SnapshotId - Array of String - 是否必填：否 -（过滤条件）按快照ID过滤。SnapshotName - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。FileSystemId - Array of String - 是否必填：否 -（过滤条件）按文件系统ID过滤。FsName - Array of String - 是否必填：否 -（过滤条件）按文件系统名过滤。Status - Array of String - 是否必填：否 -（过滤条件）按按照快照状态过滤。(creating：表示创建中 | available：表示可用。| rollbacking：表示回滚。| rollbacking_new：表示由快照创建新文件系统中。tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 排序取值 */
   OrderField?: string;
@@ -849,11 +849,11 @@ declare interface DescribeCfsSnapshotsRequest {
 
 declare interface DescribeCfsSnapshotsResponse {
   /** 总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 快照信息描述 */
-  Snapshots: SnapshotInfo[];
+  Snapshots?: SnapshotInfo[];
   /** 快照列表快照汇总 */
-  TotalSize: number;
+  TotalSize?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -883,9 +883,9 @@ declare interface DescribeMountTargetsRequest {
 
 declare interface DescribeMountTargetsResponse {
   /** 挂载点详情 */
-  MountTargets: MountInfo[];
+  MountTargets?: MountInfo[];
   /** 挂载点数量 */
-  NumberOfMountTargets: number;
+  NumberOfMountTargets?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1159,7 +1159,7 @@ declare interface UpdateCfsSnapshotAttributeRequest {
 
 declare interface UpdateCfsSnapshotAttributeResponse {
   /** 文件系统快照ID */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

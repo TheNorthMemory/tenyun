@@ -156,6 +156,8 @@ declare interface AgentDealNewElem {
   ResourceIds?: string[] | null;
   /** 退款单的原订单信息。当前仅 DescribeClientDealsByCache 接口会返回该字段 */
   RefundMap?: RefundMap[] | null;
+  /** 子产品名称 */
+  SubGoodsName?: string | null;
 }
 
 /** 代理商业务员信息 */
@@ -453,9 +455,9 @@ declare interface DescribeAgentDealsByCacheRequest {
 
 declare interface DescribeAgentDealsByCacheResponse {
   /** 订单数组 */
-  AgentDealSet: AgentDealNewElem[];
+  AgentDealSet?: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -483,9 +485,9 @@ declare interface DescribeAgentPayDealsV2Request {
 
 declare interface DescribeAgentPayDealsV2Response {
   /** 订单数组 */
-  AgentPayDealSet: AgentDealNewElem[];
+  AgentPayDealSet?: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -513,9 +515,9 @@ declare interface DescribeAgentSelfPayDealsV2Request {
 
 declare interface DescribeAgentSelfPayDealsV2Response {
   /** 订单数组 */
-  AgentPayDealSet: AgentDealNewElem[];
+  AgentPayDealSet?: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

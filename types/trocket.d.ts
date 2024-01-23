@@ -424,7 +424,7 @@ declare interface CreateMQTTInsPublicEndpointRequest {
   /** 带宽 */
   Bandwidth: number;
   /** 公网访问规则 */
-  Rules: PublicAccessRule[];
+  Rules?: PublicAccessRule[];
 }
 
 declare interface CreateMQTTInsPublicEndpointResponse {

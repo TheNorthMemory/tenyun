@@ -1188,6 +1188,22 @@ declare interface DescribeCloudStorageEventsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudStorageMultiThumbnailRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 多个缩略图文件名根据 | 分割 */
+  MultiThumbnail: string;
+}
+
+declare interface DescribeCloudStorageMultiThumbnailResponse {
+  /** 缩略图访问地址 */
+  ThumbnailURLInfoList?: ThumbnailURLInfoList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudStorageOrderRequest {
   /** 订单id */
   OrderId: string;
@@ -5807,6 +5823,8 @@ declare interface Iotvideo {
   DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
   /** 拉取云存事件列表 {@link DescribeCloudStorageEventsRequest} {@link DescribeCloudStorageEventsResponse} */
   DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
+  /** 拉取多个云存事件缩略图 {@link DescribeCloudStorageMultiThumbnailRequest} {@link DescribeCloudStorageMultiThumbnailResponse} */
+  DescribeCloudStorageMultiThumbnail(data: DescribeCloudStorageMultiThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageMultiThumbnailResponse>;
   /** 查询云存服务详情 {@link DescribeCloudStorageOrderRequest} {@link DescribeCloudStorageOrderResponse} */
   DescribeCloudStorageOrder(data: DescribeCloudStorageOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageOrderResponse>;
   /** 获取云存套餐包消耗详细记录 {@link DescribeCloudStoragePackageConsumeDetailsRequest} {@link DescribeCloudStoragePackageConsumeDetailsResponse} */
