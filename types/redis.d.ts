@@ -185,23 +185,25 @@ declare interface InstanceClusterNode {
 /** 实例分片列表信息 */
 declare interface InstanceClusterShard {
   /** 分片节点名称。 */
-  ShardName: string;
+  ShardName?: string;
   /** 分片节点序号。 */
-  ShardId: string;
+  ShardId?: string;
   /** 分片节点的角色。- 0：主节点。- 1：副本节点。 */
-  Role: number;
+  Role?: number;
   /** Key数量。 */
-  Keys: number;
+  Keys?: number;
   /** Slot信息。 */
-  Slots: string;
+  Slots?: string;
   /** 已使用容量。 */
-  Storage: number;
+  Storage?: number;
   /** 容量倾斜率。 */
-  StorageSlope: number;
+  StorageSlope?: number;
+  /** 该字段因拼写不规范问题，建议使用RunId取代。含义：实例运行时节点 ID。 */
+  Runid?: string;
   /** 实例运行时节点 ID。 */
-  Runid: string;
+  RunId?: string;
   /** 服务状态。- 0：down。- 1：on。 */
-  Connected: number;
+  Connected?: number;
 }
 
 /** 实例枚举类型参数描述 */
@@ -402,8 +404,10 @@ declare interface InstanceSet {
   NetLimit?: number | null;
   /** 免密实例标识（内部参数，用户可忽略）。 */
   PasswordFree?: number | null;
-  /** 内部参数，用户可忽略。 */
+  /** 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。 */
   Vip6?: string | null;
+  /** 内部参数，用户可忽略。 */
+  IPv6?: string | null;
   /** 实例只读标识（内部参数，用户可忽略）。 */
   ReadOnly?: number | null;
   /** 内部参数，用户可忽略。 */
@@ -504,8 +508,10 @@ declare interface Instances {
   Role?: string;
   /** 实例 VIP 地址。 */
   Vip?: string;
-  /** 内部参数，用户可忽略。 */
+  /** 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。 */
   Vip6?: string | null;
+  /** 内部参数，用户可忽略。 */
+  IPv6?: string | null;
   /** VPC 网络ID，如：75101。 */
   VpcID?: number;
   /** 实例端口。 */

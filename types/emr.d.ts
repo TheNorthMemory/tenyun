@@ -367,65 +367,67 @@ declare interface DynamicPodSpec {
 /** 集群列表返回示例 */
 declare interface EmrListInstance {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 状态描述 */
-  StatusDesc: string | null;
+  StatusDesc?: string | null;
   /** 集群名字 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群地域 */
-  ZoneId: number;
+  ZoneId?: number;
   /** 用户APPID */
-  AppId: number;
+  AppId?: number;
   /** 创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 运行时间 */
-  RunTime: string;
+  RunTime?: string;
   /** 集群IP */
-  MasterIp: string;
+  MasterIp?: string;
   /** 集群版本 */
-  EmrVersion: string;
+  EmrVersion?: string;
   /** 集群计费类型 */
-  ChargeType: number;
+  ChargeType?: number;
   /** emr ID */
-  Id: number;
+  Id?: number;
   /** 产品ID */
-  ProductId: number | null;
+  ProductId?: number | null;
   /** 项目ID */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 区域 */
-  RegionId: number | null;
+  RegionId?: number | null;
   /** 子网ID */
-  SubnetId: number | null;
+  SubnetId?: number | null;
   /** 网络ID */
-  VpcId: number | null;
+  VpcId?: number | null;
   /** 地区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 状态码 */
-  Status: number | null;
+  Status?: number | null;
   /** 实例标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 告警信息 */
-  AlarmInfo: string | null;
+  AlarmInfo?: string | null;
   /** 是否是woodpecker集群 */
-  IsWoodpeckerCluster: number | null;
+  IsWoodpeckerCluster?: number | null;
   /** Vpc中文 */
-  VpcName: string | null;
+  VpcName?: string | null;
   /** 子网中文 */
-  SubnetName: string | null;
+  SubnetName?: string | null;
   /** 字符串VpcId */
-  UniqVpcId: string | null;
+  UniqVpcId?: string | null;
   /** 字符串子网 */
-  UniqSubnetId: string | null;
+  UniqSubnetId?: string | null;
   /** 集群类型 */
-  ClusterClass: string | null;
+  ClusterClass?: string | null;
   /** 是否为跨AZ集群 */
-  IsMultiZoneCluster: boolean | null;
+  IsMultiZoneCluster?: boolean | null;
   /** 是否手戳集群 */
-  IsHandsCluster: boolean | null;
+  IsHandsCluster?: boolean | null;
   /** 体外客户端组件信息 */
-  OutSideSoftInfo: SoftDependInfo[] | null;
+  OutSideSoftInfo?: SoftDependInfo[] | null;
   /** 当前集群的应用场景是否支持体外客户端 */
   IsSupportOutsideCluster?: boolean | null;
+  /** 是否专有集群场景集群 */
+  IsDedicatedCluster?: boolean | null;
 }
 
 /** Emr询价描述 */
@@ -628,6 +630,10 @@ declare interface ImpalaQuery {
   EstimatedPerHostMemBytes?: number | null;
   /** 从缓存中获取的数据行数 */
   NumRowsFetchedFromCache?: number | null;
+  /** 会话ID */
+  SessionId?: string | null;
+  /** 单节点内存峰值和(Bytes) */
+  PerNodePeakMemoryBytesSum?: number | null;
 }
 
 /** 洞察结果项 */

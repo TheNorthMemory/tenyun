@@ -223,13 +223,17 @@ declare interface DescribeProjectsRequest {
   Limit: number;
   /** 分页偏移量。 */
   Offset: number;
+  /** 按项目ID筛选，大于0 */
+  ProjectId?: number;
+  /** 按项目名称筛选 */
+  ProjectName?: string;
 }
 
 declare interface DescribeProjectsResponse {
   /** 数据总条数 */
-  Total: number;
+  Total?: number;
   /** 项目列表 */
-  Projects: Project[];
+  Projects?: Project[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

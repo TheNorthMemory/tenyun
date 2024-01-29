@@ -208,6 +208,8 @@ declare interface InstanceDetail {
   InstanceStatusDesc?: string;
   /** 实例对应的物理实例id，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取 */
   RealInstanceId?: string;
+  /** 实例当前可用区信息。 */
+  ZoneList?: string[] | null;
   /** mongos节点个数。 */
   MongosNodeNum?: number | null;
   /** mongos节点内存。 */

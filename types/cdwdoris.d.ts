@@ -288,6 +288,12 @@ declare interface SlowQueryRecord {
   DbName?: string | null;
   /** 是否是查询，0：否，1：查询语句 */
   IsQuery?: number | null;
+  /** ResultBytes的MB格式 */
+  ResultBytesMB?: number | null;
+  /** MemoryUsage的MB表示 */
+  MemoryUsageMB?: number | null;
+  /** DurationMs的秒表示 */
+  DurationSec?: number | null;
 }
 
 /** 标签描述 */

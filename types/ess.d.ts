@@ -74,6 +74,8 @@ declare interface ApproverInfo {
   AddSignComponentsLimits?: ComponentLimit[];
   /** 签署须知：支持传入富文本，最长字数：500个中文字符 */
   SignInstructionContent?: string;
+  /** 签署人的签署截止时间，格式为Unix标准时间戳（秒）注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同` */
+  Deadline?: number;
 }
 
 /** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
@@ -584,6 +586,8 @@ declare interface FlowCreateApprover {
   ApproverSignTypes?: number[];
   /** 生成H5签署链接时，您可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。注：`不指定该值时，默认为签署方自行选择。` */
   SignTypeSelector?: number;
+  /** Deadline签署人的签署截止时间，格式为Unix标准时间戳（秒）注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同` */
+  Deadline?: number;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -1343,10 +1347,10 @@ declare interface CreateConvertTaskApiResponse {
 declare interface CreateDocumentRequest {
   /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
-  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。 */
-  FlowId: string;
-  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
+  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/253071cc2f7becb063c7cf71b37b7861.png) */
   TemplateId: string;
+  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。 */
+  FlowId?: string;
   /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。 */
   FileNames?: string[];
   /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成附件控件支持传入图片、文件资源id，并将内容合成到合同文件中。支持的文件类型有doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt、pdf。需要注意如果传入的资源类型都是图片类型，图片资源会放置在合同文件的末尾，如果传入的资源有非图片类型资源，会将资源放置在附件控件所在页面的下一页。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png) */
@@ -1480,7 +1484,7 @@ declare interface CreateFlowByFilesRequest {
 }
 
 declare interface CreateFlowByFilesResponse {
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。注: 如果是预览模式(即NeedPreview设置为true)时, 此处不会有值返回。 */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。注: 如果是预览模式(即NeedPreview设置为true)时, 此处不会有值返回。[点击产看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png) */
   FlowId?: string;
   /** 合同预览链接URL。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL */
   PreviewUrl?: string | null;
@@ -1628,7 +1632,7 @@ declare interface CreateFlowRequest {
 }
 
 declare interface CreateFlowResponse {
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。注:此返回的合同流程ID，需再次调用创建电子文档和发起签署流程接口将合同开始后，合同才能进入签署环节 */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。注:此返回的合同流程ID，需再次调用创建电子文档和发起签署流程接口将合同开始后，合同才能进入签署环节，[点击产看FlowId在控制台中的位置（只在进如签署环节后有效）](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png) */
   FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2357,7 +2361,7 @@ declare interface DescribeFileUrlsResponse {
 declare interface DescribeFlowBriefsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 查询的合同流程ID列表最多支持100个流程ID。 如果某个合同流程ID不存在，系统会跳过此ID的查询，继续查询剩余存在的合同流程。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  /** 查询的合同流程ID列表最多支持100个流程ID。 如果某个合同流程ID不存在，系统会跳过此ID的查询，继续查询剩余存在的合同流程。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。[点击产看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png) */
   FlowIds: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -2407,7 +2411,7 @@ declare interface DescribeFlowEvidenceReportResponse {
 declare interface DescribeFlowInfoRequest {
   /** 执行本接口操作的员工信息。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 需要查询的流程ID列表，最多可传入100个ID。如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。 */
+  /** 需要查询的流程ID列表，最多可传入100个ID。如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。[点击产看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png) */
   FlowIds?: string[];
   /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -2728,6 +2732,24 @@ declare interface ModifyExtendedServiceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyFlowDeadlineRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId: string;
+  /** 签署流程或签署人新的签署截止时间，格式为Unix标准时间戳（秒） */
+  Deadline: number;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
+  /** 签署方角色编号，为32位字符串若指定了此参数，则只调整签署流程中此签署人的签署截止时间，否则调整合同整体的签署截止时间（合同截止时间+发起时未设置签署人截止时间的参与人的签署截止时间）通过[用PDF文件创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowByFiles)发起合同，或通过[模板发起合同-创建电子文档](https://qian.tencent.com/developers/companyApis/startFlows/CreateDocument)时，返回参数[Approvers](https://qian.tencent.com/developers/companyApis/dataTypes/#approveritem)会返回此信息，建议开发者妥善保存也可通过[查询合同流程的详情信息](https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo)接口查询签署人的RecipientId编号 */
+  RecipientId?: string;
+}
+
+declare interface ModifyFlowDeadlineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyIntegrationDepartmentRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -2927,7 +2949,7 @@ declare interface Ess {
   CreateFlowReminds(data: CreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowRemindsResponse>;
   /** 提交签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
-  /** 获取用户H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
+  /** 获取H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;
   /** 创建企业部门 {@link CreateIntegrationDepartmentRequest} {@link CreateIntegrationDepartmentResponse} */
   CreateIntegrationDepartment(data: CreateIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationDepartmentResponse>;
@@ -3015,6 +3037,8 @@ declare interface Ess {
   ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
   /** 管理企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
+  /** 管理签署流程截止时间 {@link ModifyFlowDeadlineRequest} {@link ModifyFlowDeadlineResponse} */
+  ModifyFlowDeadline(data: ModifyFlowDeadlineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowDeadlineResponse>;
   /** 更新企业部门信息 {@link ModifyIntegrationDepartmentRequest} {@link ModifyIntegrationDepartmentResponse} */
   ModifyIntegrationDepartment(data: ModifyIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationDepartmentResponse>;
   /** 更新企业角色 {@link ModifyIntegrationRoleRequest} {@link ModifyIntegrationRoleResponse} */

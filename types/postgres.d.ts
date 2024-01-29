@@ -2099,11 +2099,11 @@ declare interface InquiryPriceUpgradeDBInstanceRequest {
 
 declare interface InquiryPriceUpgradeDBInstanceResponse {
   /** 刊例价费用 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 折后实际付款金额 */
-  Price: number;
+  Price?: number;
   /** 币种。例如，CNY：人民币。 */
-  Currency: string;
+  Currency?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

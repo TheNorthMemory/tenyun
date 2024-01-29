@@ -72,6 +72,8 @@ declare interface Acl {
   AllowAccessCredential?: boolean | null;
   /** 关联的数据库高危命令列表 */
   ACTemplateSet?: ACTemplate[] | null;
+  /** 关联的白命令命令 */
+  WhiteCmds?: string[] | null;
 }
 
 /** 资产同步状态 */
@@ -255,13 +257,13 @@ declare interface Filter {
 /** 组信息，用于用户组、主机组 */
 declare interface Group {
   /** 组ID */
-  Id: number;
+  Id?: number;
   /** 组名称 */
-  Name: string;
+  Name?: string;
   /** 所属部门信息 */
-  Department: Department | null;
+  Department?: Department | null;
   /** 个数 */
-  Count: number | null;
+  Count?: number | null;
 }
 
 /** 登录日志 */
@@ -566,6 +568,8 @@ declare interface User {
   LockStatus?: number | null;
   /** 状态 与Filter中一致 */
   Status?: string | null;
+  /** 权限版本 */
+  AclVersion?: number | null;
 }
 
 declare interface AddDeviceGroupMembersRequest {

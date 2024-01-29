@@ -2158,6 +2158,8 @@ declare interface EventContent {
   QualityInspectCompleteEvent?: QualityInspectTask | null;
   /** 音画质重生完成事件，当事件类型为 QualityEnhanceComplete 时有效。 */
   QualityEnhanceCompleteEvent?: QualityEnhanceTask | null;
+  /** 媒体转推状态变化事件，当事件类型为 MediaCastStatusChanged 时有效。 */
+  MediaCastStatusChangedEvent?: MediaCastEvent | null;
 }
 
 /** 提取版权水印任务。 */
@@ -2780,6 +2782,14 @@ declare interface MediaBasicInfo {
   Status?: string;
   /** 媒体文件的存储类别： STANDARD：标准存储。 STANDARD_IA：低频存储。 ARCHIVE：归档存储。 DEEP_ARCHIVE：深度归档存储。 */
   StorageClass?: string;
+}
+
+/** 媒体转推事件通知消息。 */
+declare interface MediaCastEvent {
+  /** 媒体转推 ID。 */
+  CastId?: string;
+  /** 转推状态，取值有：Working ：运行中；Scheduled ：等待定时时间到达后启动；Stopped ：已经停止转推；Idle ：空闲。 */
+  Status?: string | null;
 }
 
 /** 分类信息描述 */
@@ -7433,7 +7443,7 @@ declare interface DescribeMediaProcessUsageDataRequest {
   EndTime: string;
   /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
-  /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
+  /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
   Type?: string;
 }
 

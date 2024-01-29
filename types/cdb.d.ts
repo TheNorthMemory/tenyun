@@ -946,6 +946,8 @@ declare interface LogToCLSConfig {
   LogSetId?: string | null;
   /** 日志主题ID */
   LogTopicId?: string | null;
+  /** CLS服务所在地域 */
+  ClsRegion?: string | null;
 }
 
 /** 主实例信息 */
@@ -3097,6 +3099,8 @@ declare interface DescribeDBInstanceInfoResponse {
 declare interface DescribeDBInstanceLogToCLSRequest {
   /** 实例ID */
   InstanceId: string;
+  /** CLS服务所在地域 */
+  ClsRegion?: string;
 }
 
 declare interface DescribeDBInstanceLogToCLSResponse {
@@ -4215,7 +4219,7 @@ declare interface ModifyCdbProxyParamResponse {
 declare interface ModifyDBInstanceLogToCLSRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 日志类型：error/slowLog */
+  /** 日志类型：error/slowlog */
   LogType: string;
   /** 投递状态：ON/OFF */
   Status: string;
@@ -4231,6 +4235,8 @@ declare interface ModifyDBInstanceLogToCLSRequest {
   Period?: number;
   /** 创建日志主题时，是否创建索引 */
   CreateIndex?: boolean;
+  /** CLS所在地域 */
+  ClsRegion?: string;
 }
 
 declare interface ModifyDBInstanceLogToCLSResponse {

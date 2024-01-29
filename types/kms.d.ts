@@ -135,15 +135,15 @@ declare interface AsymmetricRsaDecryptResponse {
 declare interface AsymmetricSm2DecryptRequest {
   /** CMK的唯一标识 */
   KeyId: string;
-  /** 使用PublicKey加密的密文，Base64编码。密文长度不能超过256字节。 */
+  /** 使用PublicKey加密的密文，Base64编码，原始密文格式需要为C1C3C2_ASN1。原始密文长度不能超过256字节。 */
   Ciphertext: string;
 }
 
 declare interface AsymmetricSm2DecryptResponse {
   /** CMK的唯一标识 */
-  KeyId: string;
+  KeyId?: string;
   /** 解密后的明文，base64编码 */
-  Plaintext: string;
+  Plaintext?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

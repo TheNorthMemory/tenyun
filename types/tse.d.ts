@@ -2357,7 +2357,7 @@ declare interface UpdateUpstreamTargetsResponse {
   RequestId?: string;
 }
 
-/** {@link Tse 微服务引擎 TSE} */
+/** {@link Tse 微服务引擎} */
 declare interface Tse {
   (): Versions;
   /** 关闭 WAF 防护 {@link CloseWafProtectionRequest} {@link CloseWafProtectionResponse} */

@@ -186,7 +186,7 @@ declare interface ChannelBillUsageDetail {
   FlowName?: string;
   /** 合同流程当前的签署状态, 会存在下列的状态值**INIT**: 合同创建**PART**: 合同签署中(至少有一个签署方已经签署)**REJECT**: 合同拒签**ALL**: 合同签署完成**DEADLINE**: 合同流签(合同过期)**CANCEL**: 合同撤回**RELIEVED**: 解除协议（已解除）**WILLEXPIRE**: 合同即将过期**EXCEPTION**: 合同异常 */
   FlowStatus?: string;
-  /** 查询的套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  /** 查询的套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询**NoAuthSign**: 形式签 */
   QuotaType?: string;
   /** 合同使用量注: `如果消耗类型是撤销返还，此值为负值代表返还的合同数量` */
   UseCount?: number;
@@ -508,7 +508,7 @@ declare interface FlowApproverInfo {
   ApproverType?: string;
   /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
   RecipientId?: string;
-  /** 本签署人在此合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。 */
+  /** 签署人的签署截止时间，格式为Unix标准时间戳（秒）注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同` */
   Deadline?: number;
   /** 签署完回调url，最大长度1000个字符 */
   CallbackUrl?: string;
@@ -630,7 +630,7 @@ declare interface FlowInfo {
   FlowName: string;
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。示例值：1604912664 */
   Deadline: number;
-  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。如果使用模板发起接口，此参数为必填。可以通过生成子客登录链接登录企业控制台, 在**企业模板**中得到合同模板ID。 */
+  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。如果使用模板发起接口，此参数为必填。可以通过生成子客登录链接登录企业控制台, 在**企业模板**中得到合同模板ID。[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
   TemplateId?: string;
   /** 多个签署人信息，最大支持50个签署方 */
   FlowApprovers?: FlowApproverInfo[];
@@ -1164,6 +1164,12 @@ declare interface WebThemeConfig {
   DisplaySignBrandLogo?: boolean;
   /** 主题颜色：支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65) */
   WebEmbedThemeColor?: string;
+  /** 企业认证页背景图（base64图片） */
+  AuthenticateBackground?: string;
+  /** 隐藏企业认证页面导航栏，取值如下： **true**：隐藏企业认证页面导航栏 **false**：显示企业认证页面导航栏（默认） */
+  HideAuthenticateNavigationBar?: boolean;
+  /** 隐藏企业认证顶部logo，取值如下： **true**：隐藏企业认证顶部logo **false**：显示企业认证顶部logo（默认） */
+  HideAuthenticateTopLogo?: boolean;
 }
 
 declare interface ChannelBatchCancelFlowsRequest {
@@ -1434,7 +1440,7 @@ declare interface ChannelCreateFlowByFilesRequest {
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。[点击产看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
   FlowId?: string | null;
   /** 签署方信息，如角色ID、角色名称等 */
   Approvers?: ApproverItem[] | null;
@@ -1501,11 +1507,11 @@ declare interface ChannelCreateFlowRemindsResponse {
 }
 
 declare interface ChannelCreateFlowSignReviewRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  /** 合同流程ID，为32位字符串。 */
   FlowId: string;
-  /** 企业内部审核结果PASS: 审核通过REJECT: 审核拒绝SIGN_REJECT:拒签(流程结束) */
+  /** 企业内部审核结果PASS: 审核通过（流程可以继续签署或者发起）REJECT: 审核拒绝（流程状态不变，可以继续调用审核接口通过审核）SIGN_REJECT:拒签(流程终止，流程状态变为拒签状态) */
   ReviewType: string;
   /** 审核结果原因字符串长度不超过200当ReviewType 是拒绝（REJECT） 时此字段必填。当ReviewType 是拒绝（SIGN_REJECT） 时此字段必填。 */
   ReviewMessage?: string;
@@ -1683,7 +1689,7 @@ declare interface ChannelCreatePreparedPersonalEsignResponse {
 declare interface ChannelCreateReleaseFlowRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 待解除的签署流程编号(即原签署流程的编号)。 */
+  /** 待解除的签署流程编号(即原签署流程的编号)。[点击产看流程编号在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
   NeedRelievedFlowId: string;
   /** 解除协议内容, 包括解除理由等信息。 */
   ReliveInfo: RelieveInfo;
@@ -1811,7 +1817,7 @@ declare interface ChannelCreateUserAutoSignSealUrlResponse {
 }
 
 declare interface ChannelCreateUserRolesRequest {
-  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
   /** 绑定角色的角色id列表，最多 100 个 */
   RoleIds: string[];
@@ -1901,7 +1907,7 @@ declare interface ChannelDescribeBillUsageDetailRequest {
   StartTime: string;
   /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
   EndTime: string;
-  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询**NoAuthSign**: 形式签 */
   QuotaType?: string;
   /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
   Offset?: number;
@@ -2262,7 +2268,7 @@ declare interface CreateFlowsByTemplatesRequest {
 }
 
 declare interface CreateFlowsByTemplatesResponse {
-  /** 生成的合同流程ID数组，合同流程ID为32位字符串。建议开发者妥善保存此流程ID数组，以便于顺利进行后续操作。 */
+  /** 生成的合同流程ID数组，合同流程ID为32位字符串。建议开发者妥善保存此流程ID数组，以便于顺利进行后续操作。[点击产看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
   FlowIds?: string[];
   /** 第三方应用平台的业务信息, 与创建合同的FlowInfos数组中的CustomerData一一对应 */
   CustomerData?: string[];
@@ -2551,11 +2557,11 @@ declare interface DescribeResourceUrlsByFlowsResponse {
 declare interface DescribeTemplatesRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 合同模板ID，为32位字符串。可以通过生成子客登录链接登录企业控制台, 在企业模板中得到合同模板ID。 */
+  /** 合同模板ID，为32位字符串。可以通过生成子客登录链接登录企业控制台, 在企业模板中得到合同模板ID。[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
   TemplateId?: string;
   /** 查询模板的内容**0**：（默认）模板列表及详情**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息 */
   ContentType?: number;
-  /** 合同模板ID数组，每一个合同模板ID为32位字符串, 最多支持200个模板的批量查询。注意: 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`4. `若传递此参数，分页参数(Limit,Offset)无效` */
+  /** 合同模板ID数组，每一个合同模板ID为32位字符串, 最多支持200个模板的批量查询。注意: 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`4. `若传递此参数，分页参数(Limit,Offset)无效`[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
   TemplateIds?: string[];
   /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为200。` */
   Limit?: number;
@@ -2644,6 +2650,22 @@ declare interface ModifyExtendedServiceRequest {
 declare interface ModifyExtendedServiceResponse {
   /** 操作跳转链接，有效期24小时若操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通/关闭服务。当操作类型是 OPEN 且 扩展服务类型是 AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回操作链接，返回的链接需要平台方自行触达超管或法人，超管或法人点击链接完成服务开通操作 */
   OperateUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyFlowDeadlineRequest {
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
+  Agent: Agent;
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId: string;
+  /** 签署流程或签署人新的签署截止时间，格式为Unix标准时间戳（秒） */
+  Deadline: number;
+  /** 签署方角色编号，为32位字符串若指定了此参数，则只调整签署流程中此签署人的签署截止时间，否则调整合同整体的签署截止时间（合同截止时间+发起时未设置签署人截止时间的参与人的签署截止时间）通过[用PDF文件创建签署流程](https://test.qian.tencent.cn/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)发起合同，或通过[用模板创建签署流程](https://test.qian.tencent.cn/developers/partnerApis/startFlows/CreateFlowsByTemplates)时，返回参数[FlowApprovers](https://test.qian.tencent.cn/developers/partnerApis/dataTypes/#approveritem)会返回此信息，建议开发者妥善保存也可通过[获取合同信息](https://test.qian.tencent.cn/developers/partnerApis/flows/DescribeFlowDetailInfo)接口查询签署人的RecipientId编号 */
+  RecipientId?: string;
+}
+
+declare interface ModifyFlowDeadlineResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4431,6 +4453,8 @@ declare interface Essbasic {
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
   /** 管理企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
+  /** 管理签署流程截止时间 {@link ModifyFlowDeadlineRequest} {@link ModifyFlowDeadlineResponse} */
+  ModifyFlowDeadline(data: ModifyFlowDeadlineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowDeadlineResponse>;
   /** 第三方应用模板库管理 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
   /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */

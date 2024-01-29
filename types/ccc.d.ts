@@ -695,7 +695,7 @@ declare interface CreateCCCSkillGroupRequest {
 
 declare interface CreateCCCSkillGroupResponse {
   /** 技能组ID */
-  SkillGroupId: number;
+  SkillGroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -917,11 +917,11 @@ declare interface DescribeCCCBuyInfoListRequest {
 
 declare interface DescribeCCCBuyInfoListResponse {
   /** 应用总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 应用购买信息列表 */
-  SdkAppIdBuyList: SdkAppIdBuyInfo[];
+  SdkAppIdBuyList?: SdkAppIdBuyInfo[];
   /** 套餐包购买信息列表 */
-  PackageBuyList: PackageBuyInfo[];
+  PackageBuyList?: PackageBuyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1005,15 +1005,15 @@ declare interface DescribeExtensionRequest {
 
 declare interface DescribeExtensionResponse {
   /** 分机号 */
-  ExtensionId: string;
+  ExtensionId?: string;
   /** 域名 */
-  ExtensionDomain: string;
+  ExtensionDomain?: string;
   /** 注册密码 */
-  Password: string;
+  Password?: string;
   /** 代理服务器地址 */
-  OutboundProxy: string;
+  OutboundProxy?: string;
   /** 传输协议 */
-  Transport: string;
+  Transport?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1373,7 +1373,7 @@ declare interface ResetExtensionPasswordRequest {
 
 declare interface ResetExtensionPasswordResponse {
   /** 重置后密码 */
-  Password: string;
+  Password?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1429,7 +1429,7 @@ declare interface Ccc {
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;
   /** 创建自动外呼任务 {@link CreateAutoCalloutTaskRequest} {@link CreateAutoCalloutTaskResponse} */
   CreateAutoCalloutTask(data: CreateAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoCalloutTaskResponse>;
-  /** 创建技能组 {@link CreateCCCSkillGroupRequest} {@link CreateCCCSkillGroupResponse} */
+  /** 新建技能组 {@link CreateCCCSkillGroupRequest} {@link CreateCCCSkillGroupResponse} */
   CreateCCCSkillGroup(data: CreateCCCSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCCSkillGroupResponse>;
   /** 创建外呼会话（当前仅支持双呼） {@link CreateCallOutSessionRequest} {@link CreateCallOutSessionResponse} */
   CreateCallOutSession(data: CreateCallOutSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCallOutSessionResponse>;

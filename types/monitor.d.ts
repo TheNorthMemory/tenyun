@@ -1539,23 +1539,25 @@ declare interface PrometheusAgentInfo {
 /** 托管prometheus agent概览 */
 declare interface PrometheusAgentOverview {
   /** 集群类型 */
-  ClusterType: string;
+  ClusterType?: string;
   /** 集群id */
-  ClusterId: string;
+  ClusterId?: string;
   /** agent状态normal = 正常abnormal = 异常 */
-  Status: string;
+  Status?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 额外labels本集群的所有指标都会带上这几个label */
-  ExternalLabels: Label[] | null;
+  ExternalLabels?: Label[] | null;
   /** 集群所在地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 集群所在VPC ID */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 记录关联等操作的失败信息 */
-  FailedReason: string | null;
+  FailedReason?: string | null;
   /** agent名称 */
   Name?: string | null;
+  /** 是否已开启公网访问，true 开启，false 未开启 */
+  EnableExternal?: boolean | null;
 }
 
 /** Prometheus自定义告警通知时间段 */
@@ -4036,6 +4038,8 @@ declare interface DescribePrometheusInstanceInitStatusResponse {
   Steps?: TaskStepInfo[] | null;
   /** 实例eks集群ID */
   EksClusterId?: string | null;
+  /** eks集群内pod的安全组 */
+  SecurityGroupId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4297,9 +4301,9 @@ declare interface DescribeStatisticDataRequest {
   Module: string;
   /** 命名空间，目前支持QCE/TKE2(Conditions必填),QCE/KEEWIDB,QCE/CAMP */
   Namespace: string;
-  /** 指标名列表 */
+  /** 指标名列表，相关指标信息可参考对应 [云产品指标文档](https://cloud.tencent.com/document/product/248/62458) */
   MetricNames: string[];
-  /** 维度条件，操作符支持=、in配置文档参考：https://cloud.tencent.com/document/product/248/53821 */
+  /** 维度条件，操作符支持=、in，详情请参考对应 [指标维度信息](https://cloud.tencent.com/document/product/248/53821) */
   Conditions?: MidQueryCondition[];
   /** 统计粒度。默认取值为300，单位为s；可选的值为60、300、3600、86400受存储时长限制，统计粒度与统计的时间范围有关：60s：EndTime-StartTime<12小时，且StartTime距当前时间不能超过15天；300s：EndTime-StartTime<3天，且StartTime距当前时间不能超过31天；3600s：EndTime-StartTime<30天，且StartTime距当前时间不能超过93天；86400s：EndTime-StartTime<186天，且StartTime距当前时间不能超过186天。 */
   Period?: number;

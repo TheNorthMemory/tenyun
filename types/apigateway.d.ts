@@ -3055,7 +3055,7 @@ declare interface ModifyApiRequest {
   AuthRequired?: boolean;
   /** API 的后端服务超时时间，单位是秒。 */
   ServiceTimeout?: number;
-  /** API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。 */
+  /** API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。修改api时推荐必填 */
   Protocol?: string;
   /** 是否需要开启跨域，Ture 表示需要，False 表示不需要。 */
   EnableCORS?: boolean;

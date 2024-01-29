@@ -496,6 +496,20 @@ declare interface ElectronicTrainTicketFull {
   OriginalNumber?: string;
 }
 
+/** 敏感数据加密 */
+declare interface Encryption {
+  /** 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅数据加密 文档。 */
+  CiphertextBlob: string | null;
+  /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。 */
+  Iv: string | null;
+  /** 加密使用的算法（支持'AES-256-CBC'、'SM4-GCM'），不传默认为'AES-256-CBC' */
+  Algorithm?: string | null;
+  /** SM4-GCM算法生成的消息摘要（校验消息完整性时使用） */
+  TagList?: string[] | null;
+  /** 在使用加密服务时，指定要被加密的字段。本接口默认为EncryptedBody */
+  EncryptList?: string[] | null;
+}
+
 /** 企业证照单个字段的内容 */
 declare interface EnterpriseLicenseInfo {
   /** 识别出的字段名称（关键字），不同证件类型可能不同，证件类型包含企业登记证书、许可证书、企业执照、三证合一类证书；支持以下字段：统一社会信用代码、法定代表人、公司名称、公司地址、注册资金、企业类型、经营范围、成立日期、有效期、开办资金、经费来源、举办单位等； */
@@ -1098,6 +1112,12 @@ declare interface PassportRecognizeInfos {
   DateOfIssuance?: string;
   /** 截止日期（护照信息页识别结果） */
   DateOfExpiration?: string;
+  /** 持证人签名（护照信息页识别结果）仅中国大陆护照支持返回此字段，港澳台及境外护照不支持 */
+  Signature?: string;
+  /** 签发地点（护照信息页识别结果）仅中国大陆护照支持返回此字段，港澳台及境外护照不支持 */
+  IssuePlace?: string;
+  /** 签发机关（护照信息页识别结果）仅中国大陆护照支持返回此字段，港澳台及境外护照不支持 */
+  IssuingAuthority?: string;
 }
 
 /** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */
@@ -2547,7 +2567,7 @@ declare interface BizLicenseOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 是否返回黑白复印件告警码，默认为false */
+  /** 是否返回告警码，默认为false */
   EnableCopyWarn?: boolean;
 }
 
@@ -2574,7 +2594,7 @@ declare interface BizLicenseOCRResponse {
   SetDate?: string;
   /** Code 告警码列表和释义：-9102 黑白复印件告警-9104 翻拍件告警 */
   RecognizeWarnCode?: number[];
-  /** 告警码说明：WARN_COPY_CARD 黑白复印件告警WARN_RESHOOT_SCREENED_CARD 翻拍件告警 */
+  /** 告警码说明：WARN_COPY_CARD 黑白复印件告警WARN_RESHOOT_CARD翻拍件告警 */
   RecognizeWarnMsg?: string[];
   /** 是否为副本。1为是，-1为不是。 */
   IsDuplication?: number;
@@ -3294,9 +3314,11 @@ declare interface MLIDCardOCRResponse {
 
 declare interface MLIDPassportOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。 */
-  ImageBase64: string;
+  ImageBase64?: string;
   /** 是否返回图片，默认false */
   RetImage?: boolean;
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
+  ImageUrl?: string;
 }
 
 declare interface MLIDPassportOCRResponse {
@@ -3614,6 +3636,54 @@ declare interface RecognizeContainerOCRResponse {
   TareKG?: string;
   /** 集装箱自身重量，单位：磅（LB） */
   TareLB?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RecognizeEncryptedIDCardOCRRequest {
+  /** 请求体被加密后的密文，本接口只支持加密传输 */
+  EncryptedBody: string;
+  /** 敏感数据加密信息。对传入信息有加密需求的用户可使用此参数，详情请点击左侧链接。 */
+  Encryption: Encryption;
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
+  ImageUrl?: string;
+  /** FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。 */
+  CardSide?: string;
+  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框和框内遮挡告警ReshootWarn，翻拍告警DetectPsWarn，疑似存在PS痕迹告警TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true} */
+  Config?: string;
+  /** 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。 */
+  EnableRecognitionRectify?: boolean;
+  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
+  EnableReflectDetail?: boolean;
+}
+
+declare interface RecognizeEncryptedIDCardOCRResponse {
+  /** 姓名（人像面） */
+  Name?: string;
+  /** 性别（人像面） */
+  Sex?: string;
+  /** 民族（人像面） */
+  Nation?: string;
+  /** 出生日期（人像面） */
+  Birth?: string;
+  /** 地址（人像面） */
+  Address?: string;
+  /** 身份证号（人像面） */
+  IdNum?: string;
+  /** 发证机关（国徽面） */
+  Authority?: string;
+  /** 证件有效期（国徽面） */
+  ValidDate?: string;
+  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9100	身份证有效日期不合法告警，-9101	身份证边框不完整告警，-9102	身份证复印件告警，-9103	身份证翻拍告警，-9105	身份证框内遮挡告警，-9104	临时身份证告警，-9106	身份证疑似存在PS痕迹告警，-9107 身份证反光告警。 */
+  AdvancedInfo?: string;
+  /** 反光点覆盖区域详情结果，具体内容请点击左侧链接 */
+  ReflectDetailInfos?: ReflectDetailInfo[];
+  /** 加密后的数据 */
+  EncryptedBody?: string;
+  /** 敏感数据加密信息 */
+  Encryption?: Encryption;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4714,7 +4784,7 @@ declare interface Ocr {
   /** 马来西亚身份证识别 {@link MLIDCardOCRRequest} {@link MLIDCardOCRResponse} */
   MLIDCardOCR(data?: MLIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDCardOCRResponse>;
   /** 护照识别（港澳台地区及境外护照） {@link MLIDPassportOCRRequest} {@link MLIDPassportOCRResponse} */
-  MLIDPassportOCR(data: MLIDPassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDPassportOCRResponse>;
+  MLIDPassportOCR(data?: MLIDPassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDPassportOCRResponse>;
   /** 港澳台来往内地通行证识别 {@link MainlandPermitOCRRequest} {@link MainlandPermitOCRResponse} */
   MainlandPermitOCR(data?: MainlandPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MainlandPermitOCRResponse>;
   /** 混贴票据分类 {@link MixedInvoiceDetectRequest} {@link MixedInvoiceDetectResponse} */
@@ -4735,6 +4805,8 @@ declare interface Ocr {
   QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
   /** 集装箱识别 {@link RecognizeContainerOCRRequest} {@link RecognizeContainerOCRResponse} */
   RecognizeContainerOCR(data?: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
+  /** 身份证识别（安全加密版） {@link RecognizeEncryptedIDCardOCRRequest} {@link RecognizeEncryptedIDCardOCRResponse} */
+  RecognizeEncryptedIDCardOCR(data: RecognizeEncryptedIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeEncryptedIDCardOCRResponse>;
   /** 外国人永久居留身份证识别 {@link RecognizeForeignPermanentResidentIdCardRequest} {@link RecognizeForeignPermanentResidentIdCardResponse} */
   RecognizeForeignPermanentResidentIdCard(data?: RecognizeForeignPermanentResidentIdCardRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeForeignPermanentResidentIdCardResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */

@@ -1723,6 +1723,8 @@ declare interface UpdateInstanceRequest {
   KibanaPrivateDomain?: string;
   /** cerebro内网自定义域名 */
   CerebroPrivateDomain?: string;
+  /** 变更为https集群，默认是http */
+  Protocol?: string;
 }
 
 declare interface UpdateInstanceResponse {

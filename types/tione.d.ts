@@ -54,70 +54,70 @@ declare interface BatchModelAccTask {
   FrameworkVersion?: string | null;
 }
 
-/** 跑批任务详情 */
+/** 批量预测任务详情 */
 declare interface BatchTaskDetail {
-  /** 跑批任务ID */
-  BatchTaskId: string;
-  /** 跑批任务名称 */
-  BatchTaskName: string;
+  /** 批量预测任务ID */
+  BatchTaskId?: string;
+  /** 批量预测任务名称 */
+  BatchTaskName?: string;
   /** 主账号uin */
-  Uin: string;
+  Uin?: string;
   /** 子账号uin */
-  SubUin: string;
+  SubUin?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 计费模式 */
-  ChargeType: string;
+  ChargeType?: string;
   /** 包年包月资源组ID */
-  ResourceGroupId: string | null;
+  ResourceGroupId?: string | null;
   /** 包年包月资源组名称 */
-  ResourceGroupName: string | null;
+  ResourceGroupName?: string | null;
   /** 资源配置 */
-  ResourceConfigInfo: ResourceConfigInfo;
+  ResourceConfigInfo?: ResourceConfigInfo;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 服务对应的模型信息 */
-  ModelInfo: ModelInfo | null;
+  ModelInfo?: ModelInfo | null;
   /** 自定义镜像信息 */
-  ImageInfo: ImageInfo | null;
+  ImageInfo?: ImageInfo | null;
   /** 代码包 */
-  CodePackagePath: CosPathInfo | null;
+  CodePackagePath?: CosPathInfo | null;
   /** 启动命令 */
-  StartCmd: string | null;
+  StartCmd?: string | null;
   /** 输入数据配置 */
-  DataConfigs: DataConfig[] | null;
+  DataConfigs?: DataConfig[] | null;
   /** 输出数据配置 */
-  Outputs: DataConfig[];
+  Outputs?: DataConfig[];
   /** 是否上报日志 */
-  LogEnable: boolean;
+  LogEnable?: boolean;
   /** 日志配置 */
-  LogConfig: LogConfig | null;
+  LogConfig?: LogConfig | null;
   /** vpc id */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网id */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 任务状态 */
-  Status: string;
+  Status?: string;
   /** 运行时长 */
-  RuntimeInSeconds: number | null;
+  RuntimeInSeconds?: number | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 任务开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 任务结束时间 */
-  EndTime: string | null;
-  /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
-  ChargeStatus: string;
+  EndTime?: string | null;
+  /** 计费状态，取值范围:BILLING: 计费中NOT_BILLING: 未计费WHITELIST_USING: 白名单使用中WHITELIST_STOP: 白名单到期ARREARS_STOP: 欠费停止 */
+  ChargeStatus?: string;
   /** 最近一次实例ID */
-  LatestInstanceId: string | null;
+  LatestInstanceId?: string | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 失败原因 */
-  FailureReason: string | null;
+  FailureReason?: string | null;
   /** 计费金额信息，eg：2.00元/小时 (for 按量计费) */
-  BillingInfo: string | null;
+  BillingInfo?: string | null;
   /** 运行中的Pod的名字 */
   PodList?: string[] | null;
   /** 模型推理代码信息 */
@@ -140,44 +140,44 @@ declare interface BatchTaskInstance {
 
 /** 出参类型 */
 declare interface BatchTaskSetItem {
-  /** 跑批任务ID */
-  BatchTaskId: string;
-  /** 跑批任务名称 */
-  BatchTaskName: string;
+  /** 批量预测任务ID */
+  BatchTaskId?: string;
+  /** 批量预测任务名称 */
+  BatchTaskName?: string;
   /** 模型信息 */
-  ModelInfo: ModelInfo | null;
+  ModelInfo?: ModelInfo | null;
   /** 镜像信息 */
-  ImageInfo: ImageInfo;
+  ImageInfo?: ImageInfo;
   /** 计费模式 */
-  ChargeType: string;
-  /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
-  ChargeStatus: string;
+  ChargeType?: string;
+  /** 计费状态，取值范围:BILLING: 计费中NOT_BILLING: 未计费WHITELIST_USING: 白名单使用中WHITELIST_STOP: 白名单到期ARREARS_STOP: 欠费停止 */
+  ChargeStatus?: string;
   /** 包年包月资源组ID */
-  ResourceGroupId: string | null;
+  ResourceGroupId?: string | null;
   /** 资源配置 */
-  ResourceConfigInfo: ResourceConfigInfo;
+  ResourceConfigInfo?: ResourceConfigInfo;
   /** 标签配置 */
-  Tags: Tag[] | null;
-  /** 任务状态 */
-  Status: string;
+  Tags?: Tag[] | null;
+  /** 任务状态, 取值范围:INIT, STARTING, RUNNING, FAILED, STOPPING, STOPPED, SUCCEED */
+  Status?: string;
   /** 运行时长 */
-  RuntimeInSeconds: number | null;
-  /** 创建时间 */
-  CreateTime: string;
-  /** 开始时间 */
-  StartTime: string | null;
-  /** 结束时间 */
-  EndTime: string | null;
-  /** 更新时间 */
-  UpdateTime: string | null;
+  RuntimeInSeconds?: number | null;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务开始运行时间 */
+  StartTime?: string | null;
+  /** 任务结束时间 */
+  EndTime?: string | null;
+  /** 任务更新时间 */
+  UpdateTime?: string | null;
   /** 输出 */
-  Outputs: DataConfig[];
+  Outputs?: DataConfig[];
   /** 包年包月资源组名称 */
-  ResourceGroupName: string | null;
+  ResourceGroupName?: string | null;
   /** 失败原因 */
-  FailureReason: string;
-  /** 计费金额信息，eg：2.00元/小时 (for 按量计费) */
-  BillingInfo: string;
+  FailureReason?: string;
+  /** 按量计费信息 */
+  BillingInfo?: string;
 }
 
 /** CFS存储的配置 */
@@ -2055,13 +2055,13 @@ declare interface CreateBatchModelAccTasksResponse {
 }
 
 declare interface CreateBatchTaskRequest {
-  /** 跑批任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  /** 批量预测任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   BatchTaskName: string;
   /** 计费模式，eg：PREPAID 包年包月；POSTPAID_BY_HOUR 按量计费 */
   ChargeType: string;
   /** 资源配置 */
   ResourceConfigInfo: ResourceConfigInfo;
-  /** 结果输出 */
+  /** 结果输出存储信息 */
   Outputs: DataConfig[];
   /** 是否上报日志 */
   LogEnable: boolean;
@@ -2096,7 +2096,7 @@ declare interface CreateBatchTaskRequest {
 }
 
 declare interface CreateBatchTaskResponse {
-  /** 跑批任务ID */
+  /** 批量预测任务ID */
   BatchTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2415,7 +2415,7 @@ declare interface CreateTrainingTaskResponse {
 }
 
 declare interface DeleteBatchTaskRequest {
-  /** 跑批任务ID */
+  /** 批量预测任务ID */
   BatchTaskId: string;
 }
 
@@ -2549,48 +2549,48 @@ declare interface DescribeAPIConfigsResponse {
 }
 
 declare interface DescribeBatchTaskInstancesRequest {
-  /** 跑批任务id */
+  /** 批量预测任务id */
   BatchTaskId: string;
 }
 
 declare interface DescribeBatchTaskInstancesResponse {
-  /** 实例集 */
-  BatchInstances: BatchTaskInstance[] | null;
+  /** 批量预测实例结果 */
+  BatchInstances?: BatchTaskInstance[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBatchTaskRequest {
-  /** 跑批任务ID */
+  /** 批量预测任务ID */
   BatchTaskId: string;
 }
 
 declare interface DescribeBatchTaskResponse {
-  /** 跑批任务详情 */
+  /** 批量预测任务详情 */
   BatchTaskDetail?: BatchTaskDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBatchTasksRequest {
-  /** 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]取值范围：Name（名称）：task1Id（task ID）：train-23091792777383936Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILEDChargeType（计费类型）：PREPAID 包年包月 / POSTPAID_BY_HOUR 按量计费CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止） */
+  /** 过滤器Name支持的取值范围：BatchTaskId, BatchTaskName, Status, ModelVersionId其中Status 的有效取值范围:INIT, STARTING, RUNNING, FAILED, STOPPING, STOPPED, SUCCEED */
   Filters?: Filter[];
-  /** 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }] */
+  /** 标签过滤器 */
   TagFilters?: TagFilter[];
   /** 偏移量，默认为0 */
   Offset?: number;
-  /** 返回数量，默认为10，最大为50 */
+  /** 限制数目，默认为20 */
   Limit?: number;
   /** 输出列表的排列顺序。取值范围：ASC（升序排列）/ DESC（降序排列），默认为DESC */
   Order?: string;
-  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
+  /** 排序字段。当前仅支持 "CreateTime"。不传此字段则按照DB默认排序结果返回 */
   OrderField?: string;
 }
 
 declare interface DescribeBatchTasksResponse {
-  /** 数量 */
+  /** 批量预测任务总数 */
   TotalCount?: number;
-  /** 任务集 */
+  /** 批量预测任务列表 */
   BatchTaskSet?: BatchTaskSetItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3515,7 +3515,7 @@ declare interface StartTrainingTaskResponse {
 }
 
 declare interface StopBatchTaskRequest {
-  /** 跑批任务ID */
+  /** 批量预测任务ID */
   BatchTaskId: string;
 }
 
@@ -4303,7 +4303,7 @@ declare interface Tione {
   ChatCompletion(data: ChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionResponse>;
   /** 批量创建模型加速任务 {@link CreateBatchModelAccTasksRequest} {@link CreateBatchModelAccTasksResponse} */
   CreateBatchModelAccTasks(data: CreateBatchModelAccTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchModelAccTasksResponse>;
-  /** 创建跑批任务 {@link CreateBatchTaskRequest} {@link CreateBatchTaskResponse} */
+  /** 创建批量预测任务 {@link CreateBatchTaskRequest} {@link CreateBatchTaskResponse} */
   CreateBatchTask(data: CreateBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchTaskResponse>;
   /** 创建数据集 {@link CreateDatasetRequest} {@link CreateDatasetResponse} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
@@ -4319,7 +4319,7 @@ declare interface Tione {
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
   /** 创建模型训练任务 {@link CreateTrainingTaskRequest} {@link CreateTrainingTaskResponse} */
   CreateTrainingTask(data: CreateTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingTaskResponse>;
-  /** 删除跑批任务 {@link DeleteBatchTaskRequest} {@link DeleteBatchTaskResponse} */
+  /** 删除批量预测任务 {@link DeleteBatchTaskRequest} {@link DeleteBatchTaskResponse} */
   DeleteBatchTask(data: DeleteBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchTaskResponse>;
   /** 删除数据集 {@link DeleteDatasetRequest} {@link DeleteDatasetResponse} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
@@ -4341,11 +4341,11 @@ declare interface Tione {
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
   /** 列举API {@link DescribeAPIConfigsRequest} {@link DescribeAPIConfigsResponse} */
   DescribeAPIConfigs(data?: DescribeAPIConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIConfigsResponse>;
-  /** 查询跑批任务 {@link DescribeBatchTaskRequest} {@link DescribeBatchTaskResponse} */
+  /** 查询批量预测任务 {@link DescribeBatchTaskRequest} {@link DescribeBatchTaskResponse} */
   DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
-  /** 跑批实例列表 {@link DescribeBatchTaskInstancesRequest} {@link DescribeBatchTaskInstancesResponse} */
+  /** 查询批量预测任务实例列表 {@link DescribeBatchTaskInstancesRequest} {@link DescribeBatchTaskInstancesResponse} */
   DescribeBatchTaskInstances(data: DescribeBatchTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskInstancesResponse>;
-  /** 跑批任务列表 {@link DescribeBatchTasksRequest} {@link DescribeBatchTasksResponse} */
+  /** 查询批量预测任务列表 {@link DescribeBatchTasksRequest} {@link DescribeBatchTasksResponse} */
   DescribeBatchTasks(data?: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
@@ -4437,7 +4437,7 @@ declare interface Tione {
   StartNotebook(data: StartNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StartNotebookResponse>;
   /** 启动模型训练任务 {@link StartTrainingTaskRequest} {@link StartTrainingTaskResponse} */
   StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
-  /** 停止跑批任务 {@link StopBatchTaskRequest} {@link StopBatchTaskResponse} */
+  /** 停止批量预测任务 {@link StopBatchTaskRequest} {@link StopBatchTaskResponse} */
   StopBatchTask(data: StopBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopBatchTaskResponse>;
   /** 停止保存镜像 {@link StopCreatingImageRequest} {@link StopCreatingImageResponse} */
   StopCreatingImage(data: StopCreatingImageRequest, config?: AxiosRequestConfig): AxiosPromise<StopCreatingImageResponse>;

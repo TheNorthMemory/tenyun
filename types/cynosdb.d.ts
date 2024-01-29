@@ -48,6 +48,24 @@ declare interface Addr {
   Port?: number;
 }
 
+/** 查询审计实例的过滤条件 */
+declare interface AuditInstanceFilters {
+  /** 过滤条件值。支持InstanceId-实例ID，InstanceName-实例名称，ProjectId-项目ID，TagKey-标签键，Tag-标签（以竖线分割，例：Tagkey|Tagvalue）。 */
+  Name: string;
+  /** true表示精确查找，false表示模糊匹配。 */
+  ExactMatch: boolean;
+  /** 筛选值 */
+  Values: string[];
+}
+
+/** 审计实例详情 */
+declare interface AuditInstanceInfo {
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 标签信息 */
+  TagList?: Tag[] | null;
+}
+
 /** 审计日志详细信息 */
 declare interface AuditLog {
   /** 影响行数。 */
@@ -862,6 +880,36 @@ declare interface InstanceAuditRule {
   OldRule?: boolean | null;
   /** 实例应用的规则模板详情 */
   RuleTemplates?: RuleTemplateInfo[] | null;
+}
+
+/** 实例审计详情信息 */
+declare interface InstanceAuditStatus {
+  /** 实例ID。 */
+  InstanceId?: string;
+  /** 审计状态。ON-表示审计已开启，OFF-表示审计关闭。 */
+  AuditStatus?: string;
+  /** 日志保留时长。 */
+  LogExpireDay?: number | null;
+  /** 高频存储时长。 */
+  HighLogExpireDay?: number | null;
+  /** 低频存储时长。 */
+  LowLogExpireDay?: number | null;
+  /** 日志存储量。 */
+  BillingAmount?: number | null;
+  /** 高频存储量。 */
+  HighRealStorage?: number | null;
+  /** 低频存储量。 */
+  LowRealStorage?: number | null;
+  /** 是否为全审计。true-表示全审计。 */
+  AuditAll?: boolean | null;
+  /** 审计开通时间。 */
+  CreateAt?: string | null;
+  /** 实例相关信息。 */
+  InstanceInfo?: AuditInstanceInfo | null;
+  /** 总存储量。 */
+  RealStorage?: number | null;
+  /** 实例所应用的规则模板。 */
+  RuleTemplateIds?: string[] | null;
 }
 
 /** 实例初始化配置信息 */
@@ -2288,6 +2336,28 @@ declare interface DescribeAccountsResponse {
   AccountSet?: Account[] | null;
   /** 账号总数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditInstanceListRequest {
+  /** 实例审计开启的状态。1-已开启审计；0-未开启审计。 */
+  AuditSwitch?: number;
+  /** 查询实例列表的过滤条件。 */
+  Filters?: AuditInstanceFilters[];
+  /** 实例的审计规则模式。1-规则审计；0-全审计。 */
+  AuditMode?: number;
+  /** 单次请求返回的数量。默认值为30，最大值为 20000。 */
+  Limit?: number;
+  /** 偏移量，默认值为 0。 */
+  Offset?: number;
+}
+
+declare interface DescribeAuditInstanceListResponse {
+  /** 符合查询条件的实例总数。 */
+  TotalCount?: number;
+  /** 审计实例详细信息列表。 */
+  Items?: InstanceAuditStatus[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4299,6 +4369,8 @@ declare interface Cynosdb {
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
   /** 查询数据库账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
+  /** 获取审计实例列表 {@link DescribeAuditInstanceListRequest} {@link DescribeAuditInstanceListResponse} */
+  DescribeAuditInstanceList(data?: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 查询数据库审计日志 {@link DescribeAuditLogsRequest} {@link DescribeAuditLogsResponse} */
