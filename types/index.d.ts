@@ -186,6 +186,7 @@ import Ssl, { Versions as SslVersions } from "./ssl";
 import Sslpod, { Versions as SslpodVersions } from "./sslpod";
 import Ssm, { Versions as SsmVersions } from "./ssm";
 import Sts, { Versions as StsVersions } from "./sts";
+import Svp, { Versions as SvpVersions } from "./svp";
 import Taf, { Versions as TafVersions } from "./taf";
 import Tag, { Versions as TagVersions } from "./tag";
 import Tan, { Versions as TanVersions } from "./tan";
@@ -434,6 +435,7 @@ export declare type SERVICE_VERSIONS = {
   sslpod: SslpodVersions,
   ssm: SsmVersions,
   sts: StsVersions,
+  svp: SvpVersions,
   taf: TafVersions,
   tag: TagVersions,
   tan: TanVersions,
@@ -879,6 +881,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ssm: Ssm,
   /** {@link Sts 安全凭证服务} */
   sts: Sts,
+  /** {@link Svp 节省计划} */
+  svp: Svp,
   /** {@link Taf 流量反欺诈} */
   taf: Taf,
   /** {@link Tag 标签} */
@@ -962,7 +966,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   trro: Trro,
   /** {@link Trtc 实时音视频} */
   trtc: Trtc,
-  /** {@link Tse 微服务引擎 TSE} */
+  /** {@link Tse 微服务引擎} */
   tse: Tse,
   /** {@link Tsf 微服务平台 TSF} */
   tsf: Tsf,
