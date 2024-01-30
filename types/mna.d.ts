@@ -220,10 +220,10 @@ declare interface MonitorData {
 
 /** 网络详细信息 */
 declare interface NetDetails {
-  /** 流量值（bit） */
-  Current: number;
+  /** 流量值（byte） */
+  Current?: number;
   /** 时间点，单位：s */
-  Time: string;
+  Time?: string;
 }
 
 /** 测速数据 */

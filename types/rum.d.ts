@@ -1057,7 +1057,7 @@ declare interface DescribeDataPvUrlStatisticsRequest {
   Env?: string;
   /** group by 参数值枚举1:1m 2:5m 3:30m 4:1h 5:1d */
   GroupByType?: number;
-  /** 无需关注，是否查询zhiyan */
+  /** 1: 查询智研0: 走旧逻辑，已下线，勿使用 */
   IsNewData?: number;
 }
 

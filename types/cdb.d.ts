@@ -3420,6 +3420,14 @@ declare interface DescribeErrorLogDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceAlarmEventsRequest {
+}
+
+declare interface DescribeInstanceAlarmEventsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceParamRecordsRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
@@ -4983,6 +4991,8 @@ declare interface Cdb {
   DescribeDeviceMonitorInfo(data: DescribeDeviceMonitorInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceMonitorInfoResponse>;
   /** 查询实例错误日志详情 {@link DescribeErrorLogDataRequest} {@link DescribeErrorLogDataResponse} */
   DescribeErrorLogData(data: DescribeErrorLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorLogDataResponse>;
+  /** 查询实例发生的事件信息 {@link DescribeInstanceAlarmEventsRequest} {@link DescribeInstanceAlarmEventsResponse} */
+  DescribeInstanceAlarmEvents(data?: DescribeInstanceAlarmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAlarmEventsResponse>;
   /** 查询实例参数修改历史 {@link DescribeInstanceParamRecordsRequest} {@link DescribeInstanceParamRecordsResponse} */
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的可设置参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */

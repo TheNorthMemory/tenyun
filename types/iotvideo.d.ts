@@ -340,6 +340,8 @@ declare interface PackageInfo {
   PackageId?: string | null;
   /** 订单id */
   OrderId?: string | null;
+  /** 通道id */
+  ChannelId?: number;
 }
 
 /** 产品模型定义 */
@@ -1547,6 +1549,8 @@ declare interface DescribeDevicePackagesRequest {
   Limit: number;
   /** 分页拉取偏移 */
   Offset: number;
+  /** 通道id */
+  ChannelId?: number;
 }
 
 declare interface DescribeDevicePackagesResponse {

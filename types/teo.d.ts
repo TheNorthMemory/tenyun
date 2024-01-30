@@ -2611,12 +2611,14 @@ declare interface DescribeAliasDomainsResponse {
 }
 
 declare interface DescribeApplicationProxiesRequest {
+  /** 站点ID。该参数必填。 */
+  ZoneId?: string;
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：proxy-id 按照【代理ID】进行过滤。代理ID形如：proxy-ev2sawbwfd。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-vawer2vadg。 类型：String 必选：否rule-tag 按照【规则标签】对应用代理下的规则进行过滤。规则标签形如：rule-service-1。 类型：String 必选：否 */
+  Filters?: Filter[];
   /** 分页查询偏移量。默认为0。 */
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：proxy-id 按照【代理ID】进行过滤。代理ID形如：proxy-ev2sawbwfd。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-vawer2vadg。 类型：String 必选：否rule-tag 按照【规则标签】对应用代理下的规则进行过滤。规则标签形如：rule-service-1。 类型：String 必选：否 */
-  Filters?: Filter[];
 }
 
 declare interface DescribeApplicationProxiesResponse {
@@ -3989,9 +3991,9 @@ declare interface Teo {
   CreateAccelerationDomain(data: CreateAccelerationDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccelerationDomainResponse>;
   /** 创建别称域名 {@link CreateAliasDomainRequest} {@link CreateAliasDomainResponse} */
   CreateAliasDomain(data: CreateAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasDomainResponse>;
-  /** 创建应用代理 {@link CreateApplicationProxyRequest} {@link CreateApplicationProxyResponse} */
+  /** 创建应用代理（旧） {@link CreateApplicationProxyRequest} {@link CreateApplicationProxyResponse} */
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
-  /** 创建应用代理规则 {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
+  /** 创建应用代理规则（旧） {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
   /** 创建配置组版本 {@link CreateConfigGroupVersionRequest} {@link CreateConfigGroupVersionResponse} */
   CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
@@ -4019,9 +4021,9 @@ declare interface Teo {
   DeleteAccelerationDomains(data: DeleteAccelerationDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccelerationDomainsResponse>;
   /** 删除别称域名 {@link DeleteAliasDomainRequest} {@link DeleteAliasDomainResponse} */
   DeleteAliasDomain(data: DeleteAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasDomainResponse>;
-  /** 删除应用代理 {@link DeleteApplicationProxyRequest} {@link DeleteApplicationProxyResponse} */
+  /** 删除应用代理（旧） {@link DeleteApplicationProxyRequest} {@link DeleteApplicationProxyResponse} */
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
-  /** 删除应用代理规则 {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
+  /** 删除应用代理规则（旧） {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
   /** 删除四层代理实例 {@link DeleteL4ProxyRequest} {@link DeleteL4ProxyResponse} */
   DeleteL4Proxy(data: DeleteL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyResponse>;
@@ -4043,7 +4045,7 @@ declare interface Teo {
   DescribeAccelerationDomains(data: DescribeAccelerationDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccelerationDomainsResponse>;
   /** 查询别称域名信息列表 {@link DescribeAliasDomainsRequest} {@link DescribeAliasDomainsResponse} */
   DescribeAliasDomains(data: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
-  /** 查询应用代理列表 {@link DescribeApplicationProxiesRequest} {@link DescribeApplicationProxiesResponse} */
+  /** 查询应用代理列表（旧） {@link DescribeApplicationProxiesRequest} {@link DescribeApplicationProxiesResponse} */
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
   /** 查询当前账户可购买套餐信息列表 {@link DescribeAvailablePlansRequest} {@link DescribeAvailablePlansResponse} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
@@ -4075,7 +4077,7 @@ declare interface Teo {
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
   /** 查询四层代理实例列表 {@link DescribeL4ProxyRequest} {@link DescribeL4ProxyResponse} */
   DescribeL4Proxy(data: DescribeL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ProxyResponse>;
-  /** 查询四层代理实例规则列表 {@link DescribeL4ProxyRulesRequest} {@link DescribeL4ProxyRulesResponse} */
+  /** 查询四层代理转发规则列表 {@link DescribeL4ProxyRulesRequest} {@link DescribeL4ProxyRulesResponse} */
   DescribeL4ProxyRules(data: DescribeL4ProxyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ProxyRulesResponse>;
   /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
   DescribeOriginGroup(data?: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
@@ -4121,13 +4123,13 @@ declare interface Teo {
   ModifyAliasDomain(data: ModifyAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainResponse>;
   /** 修改别称域名状态 {@link ModifyAliasDomainStatusRequest} {@link ModifyAliasDomainStatusResponse} */
   ModifyAliasDomainStatus(data: ModifyAliasDomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainStatusResponse>;
-  /** 修改应用代理 {@link ModifyApplicationProxyRequest} {@link ModifyApplicationProxyResponse} */
+  /** 修改应用代理（旧） {@link ModifyApplicationProxyRequest} {@link ModifyApplicationProxyResponse} */
   ModifyApplicationProxy(data: ModifyApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyResponse>;
-  /** 修改应用代理规则 {@link ModifyApplicationProxyRuleRequest} {@link ModifyApplicationProxyRuleResponse} */
+  /** 修改应用代理规则（旧） {@link ModifyApplicationProxyRuleRequest} {@link ModifyApplicationProxyRuleResponse} */
   ModifyApplicationProxyRule(data: ModifyApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleResponse>;
-  /** 修改应用代理规则的状态 {@link ModifyApplicationProxyRuleStatusRequest} {@link ModifyApplicationProxyRuleStatusResponse} */
+  /** 修改应用代理规则的状态（旧） {@link ModifyApplicationProxyRuleStatusRequest} {@link ModifyApplicationProxyRuleStatusResponse} */
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
-  /** 修改应用代理的状态 {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
+  /** 修改应用代理的状态（旧） {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
   /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;

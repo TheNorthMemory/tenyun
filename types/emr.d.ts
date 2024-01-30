@@ -1687,7 +1687,7 @@ declare interface CreateInstanceRequest {
   PreExecutedFileSettings?: PreExecuteFileSettings[];
   /** 包年包月实例是否自动续费。取值范围：0：表示不自动续费。1：表示自动续费。 */
   AutoRenew?: number;
-  /** 客户端Token。 */
+  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280 */
   ClientToken?: string;
   /** 是否开启集群Master节点公网。取值范围：NEED_MASTER_WAN：表示开启集群Master节点公网。NOT_NEED_MASTER_WAN：表示不开启。默认开启集群Master节点公网。 */
   NeedMasterWan?: string;
@@ -2433,7 +2433,7 @@ declare interface ScaleOutInstanceRequest {
   InstanceId: string;
   /** 实例计费模式。取值范围：0：表示按量计费。1：表示包年包月。 */
   PayMode: number;
-  /** 客户端Token。 */
+  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280 */
   ClientToken?: string;
   /** 引导操作脚本设置。 */
   PreExecutedFileSettings?: PreExecuteFileSettings[];
@@ -2481,15 +2481,15 @@ declare interface ScaleOutInstanceRequest {
 
 declare interface ScaleOutInstanceResponse {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 订单号。 */
-  DealNames: string[] | null;
+  DealNames?: string[] | null;
   /** 客户端Token。 */
-  ClientToken: string | null;
+  ClientToken?: string | null;
   /** 扩容流程ID。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 大订单号。 */
-  BillId: string | null;
+  BillId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

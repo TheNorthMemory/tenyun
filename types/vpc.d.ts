@@ -7651,7 +7651,7 @@ declare interface Vpc {
   DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
   /** 查询云联网各地域出带宽上限 {@link DescribeCcnRegionBandwidthLimitsRequest} {@link DescribeCcnRegionBandwidthLimitsResponse} */
   DescribeCcnRegionBandwidthLimits(data: DescribeCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRegionBandwidthLimitsResponse>;
-  /** 查询云联网路由策略 {@link DescribeCcnRoutesRequest} {@link DescribeCcnRoutesResponse} */
+  /** 查询云联网路由条目 {@link DescribeCcnRoutesRequest} {@link DescribeCcnRoutesResponse} */
   DescribeCcnRoutes(data: DescribeCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRoutesResponse>;
   /** 查询CCN列表 {@link DescribeCcnsRequest} {@link DescribeCcnsResponse} */
   DescribeCcns(data?: DescribeCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnsResponse>;
