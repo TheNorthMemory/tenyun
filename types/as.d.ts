@@ -355,65 +355,67 @@ declare interface InvocationResult {
 /** 符合条件的启动配置信息的集合。 */
 declare interface LaunchConfiguration {
   /** 实例所属项目ID。 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 启动配置ID。 */
-  LaunchConfigurationId: string;
+  LaunchConfigurationId?: string;
   /** 启动配置名称。 */
-  LaunchConfigurationName: string;
+  LaunchConfigurationName?: string;
   /** 实例机型。 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例系统盘配置信息。 */
-  SystemDisk: SystemDisk;
+  SystemDisk?: SystemDisk;
   /** 实例数据盘配置信息。 */
-  DataDisks: DataDisk[];
+  DataDisks?: DataDisk[];
   /** 实例登录设置。 */
-  LoginSettings: LimitedLoginSettings;
+  LoginSettings?: LimitedLoginSettings;
   /** 公网带宽相关信息设置。 */
-  InternetAccessible: InternetAccessible;
+  InternetAccessible?: InternetAccessible;
   /** 实例所属安全组。 */
-  SecurityGroupIds: string[];
+  SecurityGroupIds?: string[];
   /** 启动配置关联的伸缩组。 */
-  AutoScalingGroupAbstractSet: AutoScalingGroupAbstract[];
+  AutoScalingGroupAbstractSet?: AutoScalingGroupAbstract[];
   /** 自定义数据。 */
-  UserData: string | null;
+  UserData?: string | null;
   /** 启动配置创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 实例的增强服务启用情况与其设置。 */
-  EnhancedService: EnhancedService;
+  EnhancedService?: EnhancedService;
   /** 镜像ID。 */
-  ImageId: string;
+  ImageId?: string;
   /** 启动配置当前状态。取值范围：NORMAL：正常IMAGE_ABNORMAL：启动配置镜像异常CBS_SNAP_ABNORMAL：启动配置数据盘快照异常SECURITY_GROUP_ABNORMAL：启动配置安全组异常 */
-  LaunchConfigurationStatus: string;
+  LaunchConfigurationStatus?: string;
   /** 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费 */
-  InstanceChargeType: string;
+  InstanceChargeType?: string;
   /** 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。 */
-  InstanceMarketOptions: InstanceMarketOptionsRequest | null;
+  InstanceMarketOptions?: InstanceMarketOptionsRequest | null;
   /** 实例机型列表。 */
-  InstanceTypes: string[];
+  InstanceTypes?: string[];
   /** 实例标签列表。扩容出来的实例会自动带上标签，最多支持10个标签。 */
-  InstanceTags: InstanceTag[];
+  InstanceTags?: InstanceTag[];
   /** 标签列表。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 版本号。 */
-  VersionNumber: number;
+  VersionNumber?: number;
   /** 更新时间。 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。 */
-  CamRoleName: string;
+  CamRoleName?: string;
   /** 上次操作时，InstanceTypesCheckPolicy 取值。 */
-  LastOperationInstanceTypesCheckPolicy: string;
+  LastOperationInstanceTypesCheckPolicy?: string;
   /** 云服务器主机名（HostName）的相关设置。 */
-  HostNameSettings: HostNameSettings;
+  HostNameSettings?: HostNameSettings;
   /** 云服务器实例名（InstanceName）的相关设置。 */
-  InstanceNameSettings: InstanceNameSettings;
+  InstanceNameSettings?: InstanceNameSettings;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
-  InstanceChargePrepaid: InstanceChargePrepaid;
+  InstanceChargePrepaid?: InstanceChargePrepaid;
   /** 云盘类型选择策略。取值范围：ORIGINAL：使用设置的云盘类型AUTOMATIC：自动选择当前可用区下可用的云盘类型 */
-  DiskTypePolicy: string;
+  DiskTypePolicy?: string;
   /** 高性能计算集群ID。注意：此字段默认为空。 */
-  HpcClusterId: string;
+  HpcClusterId?: string;
   /** IPv6公网带宽相关信息设置。 */
-  IPv6InternetAccessible: IPv6InternetAccessible;
+  IPv6InternetAccessible?: IPv6InternetAccessible;
+  /** 置放群组id，仅支持指定一个。 */
+  DisasterRecoverGroupIds?: string[];
 }
 
 /** 生命周期挂钩动作的执行结果信息。 */

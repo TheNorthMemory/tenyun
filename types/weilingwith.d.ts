@@ -538,7 +538,7 @@ declare interface DeviceDataInfo {
   ProductId?: number | null;
   /** 产品名称 */
   ProductName?: string | null;
-  /** 产品能力:信令数据、音视频。第0位表示信令数据、第1表示音视频 ，默认为1（信令数据） */
+  /** 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。 */
   ProductAbility?: number | null;
   /** 设备位置信息 */
   SpaceInfoSet?: DeviceSpaceInfo[] | null;
@@ -566,6 +566,10 @@ declare interface DeviceDataInfo {
   FieldList?: CustomFieldInfo[] | null;
   /** 分组信息 */
   GroupInfo?: string | null;
+  /** 通信在/离线状态（online=normal+fault，offline） */
+  DeviceStatus?: string | null;
+  /** 设备业务状态（normal、fault、offline） */
+  Status?: string | null;
 }
 
 /** 设备点位坐标值 */
@@ -1058,7 +1062,7 @@ declare interface ProductInfo {
   Attribute?: number | null;
   /** 产品型号 */
   ProductType?: string | null;
-  /** 产品能力:信令数据、音视频，用二进制表示，第0位表示信令数据、第1表示音视频 ，默认为1（信令数据） */
+  /** 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。 */
   ProductAbility?: number | null;
   /** 生产厂商 */
   Manufacturer?: string | null;
@@ -1917,6 +1921,10 @@ declare interface DescribeDeviceListRequest {
   Field?: CustomField;
   /** 分组id列表，非必填 */
   GroupIdSet?: number[];
+  /** 是否激活，默认全部，"1"激活，"0"未激活 */
+  IsActive?: string;
+  /** 是否为摄像头，默认全部，"true"摄像头，"false"非摄像头 */
+  IsCamera?: string;
 }
 
 declare interface DescribeDeviceListResponse {

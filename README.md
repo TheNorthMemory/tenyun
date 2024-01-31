@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 245+ 款产品，10978+ 服务数</summary>
+<details><summary>共计 245+ 款产品，10982+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -159,7 +159,7 @@ clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-1
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(89) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(93) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -221,7 +221,7 @@ iir | [智能识图](https://cloud.tencent.com/document/product/1217) | 2020-04-
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(1) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
-iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(72) | 2018-06-14(69) |
+iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(92) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(101) | 2020-12-15(79)<br/>2019-11-26(66) |
@@ -267,7 +267,7 @@ redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 20
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(55) |
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(46+7) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(27) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10) |

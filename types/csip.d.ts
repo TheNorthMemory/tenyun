@@ -902,6 +902,18 @@ declare interface OrganizationUserInfo {
   TcMemberType?: number | null;
 }
 
+/** 端口风险高级配置项 */
+declare interface PortRiskAdvanceCFGParamItem {
+  /** 端口集合,以逗号分隔 */
+  PortSets: string | null;
+  /** 检测项类型，0-系统定义，1-用户自定义 */
+  CheckType: number | null;
+  /** 检测项描述 */
+  Detail?: string | null;
+  /** 是否启用，1-启用，0-禁用 */
+  Enable?: number | null;
+}
+
 /** 端口视角的端口风险对象 */
 declare interface PortViewPortRisk {
   /** 影响资产 */
@@ -1204,12 +1216,14 @@ declare interface Tags {
 
 /** 任务高级配置 */
 declare interface TaskAdvanceCFG {
+  /** 端口风险高级配置 */
+  PortRisk?: PortRiskAdvanceCFGParamItem[];
   /** 漏洞风险高级配置 */
-  VulRisk?: TaskCenterVulRiskInputParam[] | null;
+  VulRisk?: TaskCenterVulRiskInputParam[];
   /** 弱口令风险高级配置 */
-  WeakPwdRisk?: TaskCenterWeakPwdRiskInputParam[] | null;
+  WeakPwdRisk?: TaskCenterWeakPwdRiskInputParam[];
   /** 配置风险高级配置 */
-  CFGRisk?: TaskCenterCFGRiskInputParam[] | null;
+  CFGRisk?: TaskCenterCFGRiskInputParam[];
 }
 
 /** 任务资产项 */

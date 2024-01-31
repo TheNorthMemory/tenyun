@@ -14957,7 +14957,7 @@ declare interface Cwp {
   DescribeAttackEventInfo(data: DescribeAttackEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventInfoResponse>;
   /** 网络攻击检测事件列表 {@link DescribeAttackEventsRequest} {@link DescribeAttackEventsResponse} */
   DescribeAttackEvents(data?: DescribeAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventsResponse>;
-  /** 网络攻击日志详情 {@link DescribeAttackLogInfoRequest} {@link DescribeAttackLogInfoResponse} */
+  /** @deprecated 网络攻击日志详情 {@link DescribeAttackLogInfoRequest} {@link DescribeAttackLogInfoResponse} */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
   /** 网络攻击日志列表(待下线,请使用DescribeAttackEvents代替) {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;

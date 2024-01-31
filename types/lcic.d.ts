@@ -1082,6 +1082,8 @@ declare interface DescribeRoomForbiddenUserResponse {
 declare interface DescribeRoomRequest {
   /** 房间Id。 */
   RoomId: number;
+  /** 请求RTMP推流链接，0：否，1：是，默认为0。 */
+  RTMPStreamingURL?: number;
 }
 
 declare interface DescribeRoomResponse {
@@ -1139,6 +1141,8 @@ declare interface DescribeRoomResponse {
   EnableAutoStart?: number;
   /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
   RecordBackground?: string;
+  /** RTMP推流链接 */
+  RTMPStreamingURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

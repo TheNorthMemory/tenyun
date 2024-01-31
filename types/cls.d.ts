@@ -80,6 +80,34 @@ declare interface AlarmNotice {
   NoticeRules?: NoticeRule[] | null;
 }
 
+/** 告警屏蔽任务配置 */
+declare interface AlarmShieldInfo {
+  /** 通知渠道组Id */
+  AlarmNoticeId?: string;
+  /** 屏蔽规则id */
+  TaskId?: string;
+  /** 屏蔽开始时间（秒级时间戳）。 */
+  StartTime?: number;
+  /** 屏蔽结束时间（秒级时间戳）。 */
+  EndTime?: number;
+  /** 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。 */
+  Type?: number;
+  /** 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178)。 */
+  Rule?: string | null;
+  /** 屏蔽原因。 */
+  Reason?: string;
+  /** 规则创建来源。1. 控制台，2.api，3.告警通知 */
+  Source?: number;
+  /** 操作者。 */
+  Operator?: string;
+  /** 规则状态。0：暂未生效，1：生效中，2：已失效 */
+  Status?: number;
+  /** 规则创建时间。 */
+  CreateTime?: number;
+  /** 规则更新时间。 */
+  UpdateTime?: number;
+}
+
 /** 告警对象 */
 declare interface AlarmTarget {
   /** 日志主题ID。 */
@@ -1420,6 +1448,28 @@ declare interface CreateAlarmResponse {
   RequestId?: string;
 }
 
+declare interface CreateAlarmShieldRequest {
+  /** 通知渠道组id。 */
+  AlarmNoticeId: string;
+  /** 屏蔽开始时间（秒级时间戳）。 */
+  StartTime: number;
+  /** 屏蔽结束时间（秒级时间戳）。 */
+  EndTime: number;
+  /** 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。 */
+  Type: number;
+  /** 屏蔽原因。 */
+  Reason: string;
+  /** 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178)。 */
+  Rule?: string;
+}
+
+declare interface CreateAlarmShieldResponse {
+  /** 屏蔽规则ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConfigExtraRequest {
   /** 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾 */
   Name: string;
@@ -1828,6 +1878,18 @@ declare interface DeleteAlarmResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAlarmShieldRequest {
+  /** 屏蔽规则id。 */
+  TaskId: string;
+  /** 通知渠道组id。 */
+  AlarmNoticeId: string;
+}
+
+declare interface DeleteAlarmShieldResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConfigExtraRequest {
   /** 采集规则扩展配置ID */
   ConfigExtraId: string;
@@ -1990,6 +2052,26 @@ declare interface DescribeAlarmNoticesResponse {
   AlarmNotices?: AlarmNotice[] | null;
   /** 符合条件的告警通知模板总数。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAlarmShieldsRequest {
+  /** 通知渠道组id。 */
+  AlarmNoticeId: string;
+  /** - taskId:按照【规则id】进行过滤。类型：String 必选：否- status:按照【规则状态】进行过滤。类型：String。 支持 0:暂未生效，1:生效中，2:已失效。 必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeAlarmShieldsResponse {
+  /** 符合条件的规则总数目 */
+  TotalCount?: number;
+  /** 告警屏蔽规则详情 */
+  AlarmShields?: AlarmShieldInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2580,6 +2662,30 @@ declare interface ModifyAlarmResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAlarmShieldRequest {
+  /** 屏蔽规则ID。 */
+  TaskId: string;
+  /** 通知渠道组id。 */
+  AlarmNoticeId: string;
+  /** 屏蔽开始时间（秒级时间戳）。 */
+  StartTime?: number;
+  /** 屏蔽结束时间（秒级时间戳）。 */
+  EndTime?: number;
+  /** 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。 */
+  Type?: number;
+  /** 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178)。 */
+  Rule?: string;
+  /** 屏蔽原因。 */
+  Reason?: string;
+  /** 规则状态。只有规则状态为生效中（status:1）时，才能将其修改为已失效（status:2）。 */
+  Status?: number;
+}
+
+declare interface ModifyAlarmShieldResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConfigExtraRequest {
   /** 采集配置扩展信息id */
   ConfigExtraId: string;
@@ -3133,6 +3239,8 @@ declare interface Cls {
   CreateAlarm(data: CreateAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmResponse>;
   /** 创建通知渠道组 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
+  /** 创建告警屏蔽规则 {@link CreateAlarmShieldRequest} {@link CreateAlarmShieldResponse} */
+  CreateAlarmShield(data: CreateAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmShieldResponse>;
   /** 创建采集规则配置 {@link CreateConfigRequest} {@link CreateConfigResponse} */
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
   /** 创建特殊采集配置任务 {@link CreateConfigExtraRequest} {@link CreateConfigExtraResponse} */
@@ -3165,6 +3273,8 @@ declare interface Cls {
   DeleteAlarm(data: DeleteAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmResponse>;
   /** 删除通知渠道组 {@link DeleteAlarmNoticeRequest} {@link DeleteAlarmNoticeResponse} */
   DeleteAlarmNotice(data: DeleteAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmNoticeResponse>;
+  /** 删除告警屏蔽规则 {@link DeleteAlarmShieldRequest} {@link DeleteAlarmShieldResponse} */
+  DeleteAlarmShield(data: DeleteAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmShieldResponse>;
   /** 删除采集规则配置 {@link DeleteConfigRequest} {@link DeleteConfigResponse} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
   /** 删除特殊采集规则配置 {@link DeleteConfigExtraRequest} {@link DeleteConfigExtraResponse} */
@@ -3195,6 +3305,8 @@ declare interface Cls {
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 获取通知渠道组列表 {@link DescribeAlarmNoticesRequest} {@link DescribeAlarmNoticesResponse} */
   DescribeAlarmNotices(data?: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
+  /** 获取告警屏蔽配置规则 {@link DescribeAlarmShieldsRequest} {@link DescribeAlarmShieldsResponse} */
+  DescribeAlarmShields(data: DescribeAlarmShieldsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmShieldsResponse>;
   /** 获取告警策略列表 {@link DescribeAlarmsRequest} {@link DescribeAlarmsResponse} */
   DescribeAlarms(data?: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
   /** 获取告警历史 {@link DescribeAlertRecordHistoryRequest} {@link DescribeAlertRecordHistoryResponse} */
@@ -3253,6 +3365,8 @@ declare interface Cls {
   ModifyAlarm(data: ModifyAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmResponse>;
   /** 修改通知渠道组 {@link ModifyAlarmNoticeRequest} {@link ModifyAlarmNoticeResponse} */
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
+  /** 修改告警屏蔽 {@link ModifyAlarmShieldRequest} {@link ModifyAlarmShieldResponse} */
+  ModifyAlarmShield(data: ModifyAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmShieldResponse>;
   /** 修改采集规则配置 {@link ModifyConfigRequest} {@link ModifyConfigResponse} */
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
   /** 修改特殊采集配置任务 {@link ModifyConfigExtraRequest} {@link ModifyConfigExtraResponse} */

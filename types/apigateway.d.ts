@@ -695,13 +695,15 @@ declare interface DomainSets {
 /** 服务发布的环境信息。 */
 declare interface Environment {
   /** 环境名称。 */
-  EnvironmentName: string;
+  EnvironmentName?: string;
   /** 访问路径。 */
-  Url: string;
+  Url?: string;
   /** 发布状态，1 表示已发布，0 表示未发布。 */
-  Status: number;
+  Status?: number;
   /** 运行版本。 */
-  VersionName: string;
+  VersionName?: string;
+  /** 创建时间 */
+  CreateTime?: string | null;
 }
 
 /** 环境限流 */

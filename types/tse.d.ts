@@ -30,7 +30,7 @@ declare interface AutoScalerBehavior {
 
 /** 扩容策略 */
 declare interface AutoScalerPolicy {
-  /** 类型，Pods或Percent */
+  /** 类型，Pods */
   Type?: string | null;
   /** 数量 */
   Value?: number | null;
@@ -40,11 +40,11 @@ declare interface AutoScalerPolicy {
 
 /** 指标伸缩的规则 */
 declare interface AutoScalerRules {
-  /** 稳定窗口时间 */
+  /** 稳定窗口时间，扩容时默认0，缩容时默认300 */
   StabilizationWindowSeconds?: number | null;
   /** 选择策略依据 */
   SelectPolicy?: string | null;
-  /** 扩容策略 */
+  /** 扩缩容策略 */
   Policies?: AutoScalerPolicy[] | null;
 }
 
@@ -276,11 +276,11 @@ declare interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
 
 /** 弹性伸缩配置指标 */
 declare interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
-  /** 指标类型 */
-  Type?: string | null;
-  /** 指标资源名称 */
+  /** 指标类型- Resource */
+  Type?: string;
+  /** 指标资源名称- cpu- memory */
   ResourceName?: string | null;
-  /** 指标目标类型 */
+  /** 指标目标类型，目前只支持百分比Utilization */
   TargetType?: string | null;
   /** 指标目标值 */
   TargetValue?: number | null;
@@ -306,9 +306,9 @@ declare interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
   Period?: string | null;
   /** 定时伸缩开始时间 */
   StartAt?: string | null;
-  /** 定时伸缩目标节点数 */
+  /** 定时伸缩目标节点数，不超过指标伸缩中定义的最大节点数 */
   TargetReplicas?: number | null;
-  /** 定时伸缩cron表达式 */
+  /** 定时伸缩cron表达式，无需输入 */
   Crontab?: string | null;
 }
 
@@ -346,6 +346,16 @@ declare interface CreateCloudNativeAPIGatewayServerGroupResult {
 declare interface CreateGatewayServiceResult {
   /** 网关服务ID */
   ServiceId?: string | null;
+}
+
+/** 创建kong客户端公网结果 */
+declare interface CreatePublicNetworkResult {
+  /** 网关实例ID */
+  GatewayId?: string | null;
+  /** 分组ID */
+  GroupId?: string | null;
+  /** 客户端公网网络ID */
+  NetworkId?: string | null;
 }
 
 /** 删除云原生API网关响应结果。 */
@@ -1262,6 +1272,8 @@ declare interface CreateCloudNativeAPIGatewayPublicNetworkRequest {
 }
 
 declare interface CreateCloudNativeAPIGatewayPublicNetworkResponse {
+  /** 返回结果 */
+  Result?: CreatePublicNetworkResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

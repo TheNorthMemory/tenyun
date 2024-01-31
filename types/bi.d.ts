@@ -172,6 +172,22 @@ declare interface EmbedTokenInfo {
   TicketNum?: number | null;
 }
 
+/** 自定义错误信息对象 */
+declare interface ErrorInfo {
+  /** 错误说明字段 */
+  ErrorTip?: string | null;
+  /** 原始异常信息 */
+  ErrorMessage?: string | null;
+  /** 错误等级字段ERRORWARNINFO */
+  ErrorLevel?: string | null;
+  /** 指引文档链接 */
+  DocLink?: string | null;
+  /** 快速指引说明 */
+  FAQ?: string | null;
+  /** 预留字段1 */
+  ReservedField?: string | null;
+}
+
 /** 仅包含id的对象 */
 declare interface IdDTO {
   /** 请求id */
@@ -314,6 +330,16 @@ declare interface UserIdAndUserName {
   GlobalUserName?: string | null;
   /** 手机号 */
   Mobile?: string | null;
+  /** 1 */
+  AppId?: string | null;
+  /** 1 */
+  AppUserId?: string | null;
+  /** 1 */
+  AppUserAliasName?: string | null;
+  /** 1 */
+  AppUserName?: string | null;
+  /** 1 */
+  InValidateAppRange?: boolean | null;
 }
 
 /** 用户ID和用户名 */
@@ -359,39 +385,47 @@ declare interface UserRoleListDataRoleInfo {
 /** 用户角色信息 */
 declare interface UserRoleListDataUserRoleInfo {
   /** 业务ID */
-  Id: number;
+  Id?: number;
   /** 角色列表 */
-  RoleList: UserRoleListDataRoleInfo[] | null;
+  RoleList?: UserRoleListDataRoleInfo[] | null;
   /** 角色ID列表 */
-  RoleIdList: number[] | null;
+  RoleIdList?: number[] | null;
   /** 用户ID */
-  UserId: string;
+  UserId?: string;
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 企业ID */
-  CorpId: string;
+  CorpId?: string;
   /** 邮箱 */
-  Email: string | null;
+  Email?: string | null;
   /** 创建人 */
-  CreatedUser: string | null;
+  CreatedUser?: string | null;
   /** 创建时间 */
-  CreatedAt: string | null;
+  CreatedAt?: string | null;
   /** 更新人 */
-  UpdatedUser: string | null;
+  UpdatedUser?: string | null;
   /** 更新时间 */
-  UpdatedAt: string | null;
+  UpdatedAt?: string | null;
   /** 最后一次登录时间 */
-  LastLogin: string | null;
+  LastLogin?: string | null;
   /** 账号状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 手机号码 */
-  PhoneNumber: string | null;
+  PhoneNumber?: string | null;
   /** 手机号区号 */
-  AreaCode: string | null;
+  AreaCode?: string | null;
   /** 是否为主账号 */
-  RootAccount: boolean | null;
+  RootAccount?: boolean | null;
   /** 是否为企业管理员 */
   CorpAdmin?: boolean | null;
+  /** 企微用户id */
+  AppUserId?: string | null;
+  /** 昵称 */
+  AppUserAliasName?: string | null;
+  /** 应用用户名 */
+  AppUserName?: string | null;
+  /** 是否在可见范围内 */
+  InValidateAppRange?: boolean | null;
 }
 
 declare interface ApplyEmbedIntervalRequest {
@@ -408,6 +442,8 @@ declare interface ApplyEmbedIntervalRequest {
 }
 
 declare interface ApplyEmbedIntervalResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 额外参数 */
   Extra?: string | null;
   /** 结果数据 */
@@ -462,6 +498,8 @@ declare interface CreateDatasourceCloudRequest {
 }
 
 declare interface CreateDatasourceCloudResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 成功无 */
   Data?: IdDTO | null;
   /** 额外信息 */
@@ -514,6 +552,8 @@ declare interface CreateDatasourceRequest {
 }
 
 declare interface CreateDatasourceResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 数据源id */
   Data?: IdDTO | null;
   /** 额外信息 */
@@ -544,6 +584,8 @@ declare interface CreateEmbedTokenRequest {
 }
 
 declare interface CreateEmbedTokenResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 额外信息 */
   Extra?: string | null;
   /** 数据 */
@@ -570,6 +612,8 @@ declare interface CreateProjectRequest {
 }
 
 declare interface CreateProjectResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 额外数据 */
   Extra?: string;
   /** 数据 */
@@ -592,6 +636,8 @@ declare interface CreateUserRoleProjectRequest {
 }
 
 declare interface CreateUserRoleProjectResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 数据 */
@@ -612,6 +658,8 @@ declare interface CreateUserRoleRequest {
 }
 
 declare interface CreateUserRoleResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 数据 */
@@ -630,6 +678,8 @@ declare interface DeleteDatasourceRequest {
 }
 
 declare interface DeleteDatasourceResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 数据 */
   Data?: string | null;
   /** 扩展 */
@@ -650,6 +700,8 @@ declare interface DeleteProjectRequest {
 }
 
 declare interface DeleteProjectResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** ”“ */
   Extra?: string;
   /** "" */
@@ -668,6 +720,8 @@ declare interface DeleteUserRoleProjectRequest {
 }
 
 declare interface DeleteUserRoleProjectResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 数据 */
@@ -684,6 +738,8 @@ declare interface DeleteUserRoleRequest {
 }
 
 declare interface DeleteUserRoleResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 数据 */
@@ -712,6 +768,8 @@ declare interface DescribeDatasourceListRequest {
 }
 
 declare interface DescribeDatasourceListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 列表详情 */
   Data?: DatasourceInfoData | null;
   /** 信息 */
@@ -730,6 +788,8 @@ declare interface DescribeProjectInfoRequest {
 }
 
 declare interface DescribeProjectInfoResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** "" */
   Extra?: string | null;
   /** "" */
@@ -754,6 +814,8 @@ declare interface DescribeProjectListRequest {
 }
 
 declare interface DescribeProjectListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 额外信息 */
   Extra?: string | null;
   /** 接口信息 */
@@ -776,6 +838,8 @@ declare interface DescribeUserProjectListRequest {
 }
 
 declare interface DescribeUserProjectListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 数据 */
   Data?: CorpUserListData | null;
   /** 扩展 */
@@ -799,9 +863,13 @@ declare interface DescribeUserRoleListRequest {
   Keyword?: string;
   /** 项目id */
   ProjectId?: string;
+  /** 是否只获取绑定企微应用的 */
+  IsOnlyBindAppUser?: boolean;
 }
 
 declare interface DescribeUserRoleListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 数据 */
@@ -819,9 +887,13 @@ declare interface DescribeUserRoleProjectListRequest {
   PageSize: number;
   /** 项目ID */
   ProjectId: number;
+  /** 是否只获取绑定企微应用的 */
+  IsOnlyBindAppUser?: boolean;
 }
 
 declare interface DescribeUserRoleProjectListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 数据 */
@@ -878,6 +950,8 @@ declare interface ModifyDatasourceCloudRequest {
 }
 
 declare interface ModifyDatasourceCloudResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 成功无 */
   Data?: string | null;
   /** 额外信息 */
@@ -932,6 +1006,8 @@ declare interface ModifyDatasourceRequest {
 }
 
 declare interface ModifyDatasourceResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 无 */
   Data?: string | null;
   /** 额外信息 */
@@ -964,6 +1040,8 @@ declare interface ModifyProjectRequest {
 }
 
 declare interface ModifyProjectResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 额外信息 */
   Extra?: string | null;
   /** 返回数据 */
@@ -985,9 +1063,13 @@ declare interface ModifyUserRoleProjectRequest {
   Email?: string;
   /** 用户名 */
   UserName?: string;
+  /** 企业微信应用用户id */
+  AppUserId?: string;
 }
 
 declare interface ModifyUserRoleProjectResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 消息 */
@@ -1011,9 +1093,13 @@ declare interface ModifyUserRoleRequest {
   PhoneNumber?: string;
   /** 手机区号 */
   AreaCode?: string;
+  /** 企业微信应用用户id */
+  AppUserId?: string;
 }
 
 declare interface ModifyUserRoleResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 扩展 */
   Extra?: string | null;
   /** 消息 */

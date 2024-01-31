@@ -18,6 +18,8 @@ declare interface Device {
   Duration?: string | null;
   /** 已经绑定licenseId列表 */
   LicenseIds?: string[] | null;
+  /** 每月license的限定时长 */
+  MonthlyRemainTime?: number | null;
 }
 
 /** 设备信息 */
@@ -542,6 +544,8 @@ declare interface GetLicenseStatResponse {
   UnBound?: number;
   /** 过期授权 */
   Expire?: number;
+  /** 当月用量超时授权个数 */
+  MonthlyExpire?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -555,6 +559,8 @@ declare interface GetLicensesRequest {
   ProjectId?: string;
   /** DeviceId */
   DeviceId?: string;
+  /** license状态：0:未绑定；1:已绑定；2:已停服；3:已退费 */
+  Status?: number;
 }
 
 declare interface GetLicensesResponse {

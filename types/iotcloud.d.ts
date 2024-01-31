@@ -451,11 +451,13 @@ declare interface BatchUpdateFirmwareRequest {
   DeviceNames?: string[];
   /** 固件升级任务，默认超时时间。 最小取值60秒，最大为3600秒 */
   TimeoutInterval?: number;
+  /** 固件升级任务类型，默认静态升级值为空或1，动态升级值为7。 */
+  Type?: number;
 }
 
 declare interface BatchUpdateFirmwareResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1261,6 +1263,8 @@ declare interface EditFirmwareRequest {
   FirmwareName: string;
   /** 固件描述 */
   FirmwareDescription?: string;
+  /** 固件用户自定义配置信息 */
+  FirmwareUserDefined?: string;
 }
 
 declare interface EditFirmwareResponse {
@@ -1331,9 +1335,9 @@ declare interface ListFirmwaresRequest {
 
 declare interface ListFirmwaresResponse {
   /** 固件总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 固件列表 */
-  Firmwares: FirmwareInfo[];
+  Firmwares?: FirmwareInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1632,6 +1636,20 @@ declare interface UpdateDevicesEnableStateResponse {
   RequestId?: string;
 }
 
+declare interface UpdateOtaTaskStatusRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 固件升级任务ID */
+  TaskId: number;
+  /** 固件任务取消状态 */
+  Status: number;
+}
+
+declare interface UpdateOtaTaskStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdatePrivateCARequest {
   /** CA证书名称 */
   CertName: string;
@@ -1709,6 +1727,8 @@ declare interface UploadFirmwareRequest {
   FirmwareName?: string;
   /** 固件描述 */
   FirmwareDescription?: string;
+  /** 固件用户自定义配置信息 */
+  FirmwareUserDefined?: string;
 }
 
 declare interface UploadFirmwareResponse {
@@ -3573,6 +3593,8 @@ declare interface Iotcloud {
   UpdateDeviceShadow(data: UpdateDeviceShadowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceShadowResponse>;
   /** 批量切换设备可用状态 {@link UpdateDevicesEnableStateRequest} {@link UpdateDevicesEnableStateResponse} */
   UpdateDevicesEnableState(data: UpdateDevicesEnableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicesEnableStateResponse>;
+  /** 更新固件升级任务状态 {@link UpdateOtaTaskStatusRequest} {@link UpdateOtaTaskStatusResponse} */
+  UpdateOtaTaskStatus(data: UpdateOtaTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOtaTaskStatusResponse>;
   /** 更新私有CA证书 {@link UpdatePrivateCARequest} {@link UpdatePrivateCAResponse} */
   UpdatePrivateCA(data: UpdatePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrivateCAResponse>;
   /** 更新产品动态注册 {@link UpdateProductDynamicRegisterRequest} {@link UpdateProductDynamicRegisterResponse} */
