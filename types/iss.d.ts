@@ -78,7 +78,7 @@ declare interface AITemplates {
 declare interface AddDeviceData {
   /** 设备iD */
   DeviceId?: string | null;
-  /** 设备编码（即我们为设备生成的20位国标编码） */
+  /** 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码） */
   Code?: string | null;
   /** 设备名称 */
   Name?: string | null;
@@ -1509,9 +1509,9 @@ declare interface AddStreamAuthResponse {
 declare interface AddUserDeviceRequest {
   /** 设备名称，仅支持中文、英文、数字、_、-，长度不超过32个字符；（设备名称无需全局唯一，可以重复） */
   Name: string;
-  /** 设备接入协议（1:RTMP,2:GB,3:GW） */
+  /** 设备接入协议（1:RTMP,2:GB,3:GW,4:IVCP） */
   AccessProtocol: number;
-  /** 设备类型，1:IPC,2:NVR；（若设备接入协议选择RTMP，则设备类型只能选择IPC） */
+  /** 设备类型，1:IPC,2:NVR；（若设备接入协议选择RTMP,IVCP，则设备类型只能选择IPC） */
   Type: number;
   /** 设备所属组织ID，从查询组织接口DescribeOrganization中获取 */
   OrganizationId: string;
@@ -1533,6 +1533,8 @@ declare interface AddUserDeviceRequest {
   Port?: number;
   /** 设备用户名（仅网关接入需要） */
   Username?: string;
+  /** 设备 SN，仅IVCP 协议设备需要 */
+  SNCode?: string;
 }
 
 declare interface AddUserDeviceResponse {

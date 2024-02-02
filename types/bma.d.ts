@@ -118,6 +118,8 @@ declare interface FakeURLData {
   AccountStatus?: number | null;
   /** 审核状态：0-未审核 1-审核中 2-审核成功 3-审核失败 */
   AuditStatus?: number | null;
+  /** 下线时间 */
+  OfflineTime?: string | null;
 }
 
 /** 过滤参数 */

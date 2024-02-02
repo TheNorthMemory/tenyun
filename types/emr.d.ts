@@ -1777,7 +1777,7 @@ declare interface DescribeClusterNodesRequest {
   ExportDb?: boolean;
   /** 页编号，默认值为0，表示第一页。 */
   Offset?: number;
-  /** 每页返回数量，默认值为100，最大值为100。 */
+  /** 每页返回数量，默认值为100，最大值为100。如果offset和limit都不填，或者都填0，则返回全部数据 */
   Limit?: number;
   /** 资源类型:支持all/host/pod，默认为all */
   HardwareResourceType?: string;
@@ -1841,21 +1841,21 @@ declare interface DescribeEmrApplicationStaticsRequest {
   IsAsc?: number;
   /** 页号 */
   Offset?: number;
-  /** 页容量 */
+  /** 页容量，范围为[10,100] */
   Limit?: number;
 }
 
 declare interface DescribeEmrApplicationStaticsResponse {
   /** 作业统计信息 */
-  Statics: ApplicationStatics[];
+  Statics?: ApplicationStatics[];
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 可选择的队列名 */
-  Queues: string[];
+  Queues?: string[];
   /** 可选择的用户名 */
-  Users: string[];
+  Users?: string[];
   /** 可选择的作业类型 */
-  ApplicationTypes: string[];
+  ApplicationTypes?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1947,7 +1947,7 @@ declare interface DescribeInstancesListRequest {
   DisplayStrategy: string;
   /** 页编号，默认值为0，表示第一页。 */
   Offset?: number;
-  /** 每页返回数量，默认值为10，最大值为100。 */
+  /** 每页返回数量，默认值为100，最大值为100。如果limit和offset都为0，则查询全部记录； */
   Limit?: number;
   /** 排序字段。取值范围：clusterId：表示按照实例ID排序。addTime：表示按照实例创建时间排序。status：表示按照实例的状态码排序。 */
   OrderField?: string;
@@ -1973,7 +1973,7 @@ declare interface DescribeInstancesRequest {
   InstanceIds?: string[];
   /** 页编号，默认值为0，表示第一页。 */
   Offset?: number;
-  /** 每页返回数量，默认值为10，最大值为100。 */
+  /** 每页返回数量，默认值为100，最大值为100。 */
   Limit?: number;
   /** 建议必填-1，表示拉取所有项目下的集群。不填默认值为0，表示拉取默认项目下的集群。实例所属项目ID。该参数可以通过调用 [DescribeProjects](https://cloud.tencent.com/document/product/651/78725) 的返回值中的 projectId 字段来获取。 */
   ProjectId?: number;
@@ -2031,7 +2031,7 @@ declare interface DescribeUsersForUserManagerRequest {
   InstanceId: string;
   /** 页码 */
   PageNo: number;
-  /** 分页的大小 */
+  /** 分页的大小。默认查询全部；PageNo和PageSize不合理的设置，都是查询全部 */
   PageSize: number;
   /** 查询用户列表过滤器 */
   UserManagerFilter?: UserManagerFilter;
@@ -2041,9 +2041,9 @@ declare interface DescribeUsersForUserManagerRequest {
 
 declare interface DescribeUsersForUserManagerResponse {
   /** 总数 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** 用户信息列表 */
-  UserManagerUserList: UserManagerUserBriefInfo[] | null;
+  UserManagerUserList?: UserManagerUserBriefInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1501,6 +1501,8 @@ declare interface CreateFlowEvidenceReportRequest {
   FlowId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 指定申请的报告类型，可选类型如下： **0** :合同签署报告（默认） **1** :公证处核验报告 */
+  ReportType?: number;
 }
 
 declare interface CreateFlowEvidenceReportResponse {
@@ -2397,6 +2399,8 @@ declare interface DescribeFlowEvidenceReportRequest {
   ReportId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 指定申请的报告类型，可选类型如下： **0** :合同签署报告（默认） **1** :公证处核验报告 */
+  ReportType?: number;
 }
 
 declare interface DescribeFlowEvidenceReportResponse {

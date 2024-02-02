@@ -286,6 +286,20 @@ declare interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
   TargetValue?: number | null;
 }
 
+/** 策略绑定的网关分组信息 */
+declare interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
+  /** 网关分组ID */
+  GroupId: string | null;
+  /** 节点配置 */
+  NodeConfig: CloudNativeAPIGatewayNodeConfig | null;
+  /** 绑定时间 */
+  BindTime: string | null;
+  /** 网关分组名称 */
+  GroupName: string | null;
+  /** 绑定状态 */
+  Status: string | null;
+}
+
 /** 定时伸缩策略配置 */
 declare interface CloudNativeAPIGatewayStrategyCronScalerConfig {
   /** 是否开启定时伸缩 */
@@ -482,6 +496,16 @@ declare interface DescribeInstanceRegionInfo {
   MainRegion?: boolean | null;
   /** 该地域所在的EKS集群 */
   EKSClusterID?: string | null;
+}
+
+/** 查询客户端公网信息 */
+declare interface DescribePublicNetworkResult {
+  /** 网关实例ID */
+  GatewayId?: string | null;
+  /** 网关分组ID */
+  GroupId?: string | null;
+  /** 客户端公网信息 */
+  PublicNetwork?: CloudNativeAPIGatewayConfig | null;
 }
 
 /** 获取WAF保护域名列表 */
@@ -904,6 +928,22 @@ declare interface ListCloudNativeAPIGatewayResult {
   GatewayList: DescribeCloudNativeAPIGatewayResult[];
 }
 
+/** 获取云原生API网关实例策略绑定网关分组列表响应结果。 */
+declare interface ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult {
+  /** 数量 */
+  TotalCount: number;
+  /** 云原生API网关实例策略绑定网关分组列表 */
+  GroupInfos: CloudNativeAPIGatewayStrategyBindingGroupInfo[];
+}
+
+/** 获取云原生API网关实例策略响应结果。 */
+declare interface ListCloudNativeAPIGatewayStrategyResult {
+  /** 总数。 */
+  TotalCount: number;
+  /** 云原生API网关实例策略列表。 */
+  StrategyList: CloudNativeAPIGatewayStrategy[];
+}
+
 /** 列表过滤条件，模糊匹配 */
 declare interface ListFilter {
   /** 过滤字段 */
@@ -1212,6 +1252,22 @@ declare interface ZookeeperServerInterface {
   Interface: string | null;
 }
 
+declare interface BindAutoScalerResourceStrategyToGroupsRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 策略ID */
+  StrategyId: string;
+  /** 网关分组ID列表 */
+  GroupIds: string[];
+}
+
+declare interface BindAutoScalerResourceStrategyToGroupsResponse {
+  /** 是否成功 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseWafProtectionRequest {
   /** 网关ID */
   GatewayId: string;
@@ -1222,6 +1278,32 @@ declare interface CloseWafProtectionRequest {
 }
 
 declare interface CloseWafProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAutoScalerResourceStrategyRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 策略名称 */
+  StrategyName: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 指标伸缩配置 */
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig;
+  /** 定时伸缩配置列表 */
+  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
+  /** 最大节点数 */
+  MaxReplicas?: number;
+  /** 定时伸缩配置 */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
+}
+
+declare interface CreateAutoScalerResourceStrategyResponse {
+  /** 是否成功 */
+  Result?: boolean;
+  /** 策略Id */
+  StrategyId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1482,6 +1564,20 @@ declare interface CreateWafDomainsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAutoScalerResourceStrategyRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 策略ID */
+  StrategyId: string;
+}
+
+declare interface DeleteAutoScalerResourceStrategyResponse {
+  /** 是否成功 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
   /** 网关 ID */
   GatewayId: string;
@@ -1618,6 +1714,38 @@ declare interface DeleteWafDomainsRequest {
 }
 
 declare interface DeleteWafDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAutoScalerResourceStrategiesRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 策略ID */
+  StrategyId?: string;
+}
+
+declare interface DescribeAutoScalerResourceStrategiesResponse {
+  /** 获取云原生API网关实例弹性伸缩策略列表响应结果。 */
+  Result?: ListCloudNativeAPIGatewayStrategyResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 策略ID */
+  StrategyId: string;
+  /** 查询偏移量 */
+  Offset?: number;
+  /** 查询数量限制 */
+  Limit?: number;
+}
+
+declare interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
+  /** 云原生API网关实例策略绑定网关分组列表响应结果 */
+  Result?: ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1894,6 +2022,22 @@ declare interface DescribeOneCloudNativeAPIGatewayServiceResponse {
   RequestId?: string;
 }
 
+declare interface DescribePublicNetworkRequest {
+  /** 云原生API网关实例ID。 */
+  GatewayId: string;
+  /** 网关分组ID */
+  GroupId: string;
+  /** 网络ID */
+  NetworkId: string;
+}
+
+declare interface DescribePublicNetworkResponse {
+  /** 获取云原生API网关公网详情响应结果。 */
+  Result?: DescribePublicNetworkResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSREInstanceAccessAddressRequest {
   /** 注册引擎实例Id */
   InstanceId?: string;
@@ -2026,6 +2170,32 @@ declare interface DescribeZookeeperServerInterfacesResponse {
   TotalCount: number;
   /** 接口列表 */
   Content: ZookeeperServerInterface[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAutoScalerResourceStrategyRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 策略ID */
+  StrategyId: string;
+  /** 策略名称 */
+  StrategyName?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 指标伸缩配置 */
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig;
+  /** 定时伸缩配置 */
+  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
+  /** 最大节点数 */
+  MaxReplicas?: number;
+  /** 指标伸缩配置 */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
+}
+
+declare interface ModifyAutoScalerResourceStrategyResponse {
+  /** 是否成功 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2291,6 +2461,22 @@ declare interface RateLimitResponse {
   HttpStatus?: number | null;
 }
 
+declare interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** 策略ID */
+  StrategyId: string;
+  /** 网关分组ID列表 */
+  GroupIds: string[];
+}
+
+declare interface UnbindAutoScalerResourceStrategyFromGroupsResponse {
+  /** 是否成功 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateCloudNativeAPIGatewayCertificateInfoRequest {
   /** 网关ID */
   GatewayId: string;
@@ -2372,8 +2558,12 @@ declare interface UpdateUpstreamTargetsResponse {
 /** {@link Tse 微服务引擎} */
 declare interface Tse {
   (): Versions;
+  /** 弹性伸缩策略批量绑定网关分组 {@link BindAutoScalerResourceStrategyToGroupsRequest} {@link BindAutoScalerResourceStrategyToGroupsResponse} */
+  BindAutoScalerResourceStrategyToGroups(data: BindAutoScalerResourceStrategyToGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoScalerResourceStrategyToGroupsResponse>;
   /** 关闭 WAF 防护 {@link CloseWafProtectionRequest} {@link CloseWafProtectionResponse} */
   CloseWafProtection(data: CloseWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWafProtectionResponse>;
+  /** 创建弹性伸缩策略 {@link CreateAutoScalerResourceStrategyRequest} {@link CreateAutoScalerResourceStrategyResponse} */
+  CreateAutoScalerResourceStrategy(data: CreateAutoScalerResourceStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoScalerResourceStrategyResponse>;
   /** 创建云原生API网关实例 {@link CreateCloudNativeAPIGatewayRequest} {@link CreateCloudNativeAPIGatewayResponse} */
   CreateCloudNativeAPIGateway(data: CreateCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayResponse>;
   /** 创建云原生网关的灰度规则 {@link CreateCloudNativeAPIGatewayCanaryRuleRequest} {@link CreateCloudNativeAPIGatewayCanaryRuleResponse} */
@@ -2396,6 +2586,8 @@ declare interface Tse {
   CreateNativeGatewayServerGroup(data: CreateNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServerGroupResponse>;
   /** 新建 WAF 防护域名 {@link CreateWafDomainsRequest} {@link CreateWafDomainsResponse} */
   CreateWafDomains(data: CreateWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWafDomainsResponse>;
+  /** 删除弹性伸缩策略 {@link DeleteAutoScalerResourceStrategyRequest} {@link DeleteAutoScalerResourceStrategyResponse} */
+  DeleteAutoScalerResourceStrategy(data: DeleteAutoScalerResourceStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScalerResourceStrategyResponse>;
   /** 删除云原生API网关实例 {@link DeleteCloudNativeAPIGatewayRequest} {@link DeleteCloudNativeAPIGatewayResponse} */
   DeleteCloudNativeAPIGateway(data: DeleteCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayResponse>;
   /** 删除云原生网关的灰度规则 {@link DeleteCloudNativeAPIGatewayCanaryRuleRequest} {@link DeleteCloudNativeAPIGatewayCanaryRuleResponse} */
@@ -2418,6 +2610,10 @@ declare interface Tse {
   DeleteNativeGatewayServerGroup(data: DeleteNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeGatewayServerGroupResponse>;
   /** 删除 WAF 防护域名 {@link DeleteWafDomainsRequest} {@link DeleteWafDomainsResponse} */
   DeleteWafDomains(data: DeleteWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWafDomainsResponse>;
+  /** 查看弹性伸缩策略列表 {@link DescribeAutoScalerResourceStrategiesRequest} {@link DescribeAutoScalerResourceStrategiesResponse} */
+  DescribeAutoScalerResourceStrategies(data: DescribeAutoScalerResourceStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalerResourceStrategiesResponse>;
+  /** 查看弹性伸缩策略绑定的网关分组 {@link DescribeAutoScalerResourceStrategyBindingGroupsRequest} {@link DescribeAutoScalerResourceStrategyBindingGroupsResponse} */
+  DescribeAutoScalerResourceStrategyBindingGroups(data: DescribeAutoScalerResourceStrategyBindingGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalerResourceStrategyBindingGroupsResponse>;
   /** 获取云原生API网关实例信息 {@link DescribeCloudNativeAPIGatewayRequest} {@link DescribeCloudNativeAPIGatewayResponse} */
   DescribeCloudNativeAPIGateway(data: DescribeCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayResponse>;
   /** 查询云原生网关灰度规则列表 {@link DescribeCloudNativeAPIGatewayCanaryRulesRequest} {@link DescribeCloudNativeAPIGatewayCanaryRulesResponse} */
@@ -2452,6 +2648,8 @@ declare interface Tse {
   DescribeNativeGatewayServerGroups(data: DescribeNativeGatewayServerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeGatewayServerGroupsResponse>;
   /** 获取云原生网关服务详情 {@link DescribeOneCloudNativeAPIGatewayServiceRequest} {@link DescribeOneCloudNativeAPIGatewayServiceResponse} */
   DescribeOneCloudNativeAPIGatewayService(data: DescribeOneCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOneCloudNativeAPIGatewayServiceResponse>;
+  /** 查询云原生API网关实例公网详情 {@link DescribePublicNetworkRequest} {@link DescribePublicNetworkResponse} */
+  DescribePublicNetwork(data: DescribePublicNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicNetworkResponse>;
   /** 查询引擎实例访问地址 {@link DescribeSREInstanceAccessAddressRequest} {@link DescribeSREInstanceAccessAddressResponse} */
   DescribeSREInstanceAccessAddress(data?: DescribeSREInstanceAccessAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstanceAccessAddressResponse>;
   /** 查询引擎实例列表 {@link DescribeSREInstancesRequest} {@link DescribeSREInstancesResponse} */
@@ -2466,6 +2664,8 @@ declare interface Tse {
   DescribeZookeeperReplicas(data: DescribeZookeeperReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperReplicasResponse>;
   /** 查询zookeeper服务接口列表 {@link DescribeZookeeperServerInterfacesRequest} {@link DescribeZookeeperServerInterfacesResponse} */
   DescribeZookeeperServerInterfaces(data?: DescribeZookeeperServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperServerInterfacesResponse>;
+  /** 更新弹性伸缩策略 {@link ModifyAutoScalerResourceStrategyRequest} {@link ModifyAutoScalerResourceStrategyResponse} */
+  ModifyAutoScalerResourceStrategy(data: ModifyAutoScalerResourceStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScalerResourceStrategyResponse>;
   /** 修改云原生API网关实例基础信息 {@link ModifyCloudNativeAPIGatewayRequest} {@link ModifyCloudNativeAPIGatewayResponse} */
   ModifyCloudNativeAPIGateway(data: ModifyCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayResponse>;
   /** 修改云原生网关的灰度规则 {@link ModifyCloudNativeAPIGatewayCanaryRuleRequest} {@link ModifyCloudNativeAPIGatewayCanaryRuleResponse} */
@@ -2492,6 +2692,8 @@ declare interface Tse {
   ModifyUpstreamNodeStatus(data: ModifyUpstreamNodeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUpstreamNodeStatusResponse>;
   /** 开启 WAF 防护 {@link OpenWafProtectionRequest} {@link OpenWafProtectionResponse} */
   OpenWafProtection(data: OpenWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWafProtectionResponse>;
+  /** 弹性伸缩策略批量解绑网关分组 {@link UnbindAutoScalerResourceStrategyFromGroupsRequest} {@link UnbindAutoScalerResourceStrategyFromGroupsResponse} */
+  UnbindAutoScalerResourceStrategyFromGroups(data: UnbindAutoScalerResourceStrategyFromGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoScalerResourceStrategyFromGroupsResponse>;
   /** 修改云原生网关证书信息 {@link UpdateCloudNativeAPIGatewayCertificateInfoRequest} {@link UpdateCloudNativeAPIGatewayCertificateInfoResponse} */
   UpdateCloudNativeAPIGatewayCertificateInfo(data: UpdateCloudNativeAPIGatewayCertificateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewayCertificateInfoResponse>;
   /** 修改云原生API网关实例的节点规格 {@link UpdateCloudNativeAPIGatewaySpecRequest} {@link UpdateCloudNativeAPIGatewaySpecResponse} */

@@ -2587,13 +2587,13 @@ declare interface DescribeClusterDatabasesRequest {
 
 declare interface DescribeClusterDatabasesResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 分页偏移 */
-  Offset: number;
+  Offset?: number;
   /** 数据库列表 */
-  Databases: string[];
+  Databases?: string[];
   /** 分页限制数 */
-  Limit: number;
+  Limit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4391,7 +4391,7 @@ declare interface Cynosdb {
   DescribeBinlogSaveDays(data: DescribeBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogSaveDaysResponse>;
   /** 查询Binlog列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
-  /** 获取database列表 {@link DescribeClusterDatabasesRequest} {@link DescribeClusterDatabasesResponse} */
+  /** 获取集群数据库列表 {@link DescribeClusterDatabasesRequest} {@link DescribeClusterDatabasesResponse} */
   DescribeClusterDatabases(data: DescribeClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDatabasesResponse>;
   /** 集群信息描述 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
@@ -4551,7 +4551,7 @@ declare interface Cynosdb {
   RevokeAccountPrivileges(data: RevokeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeAccountPrivilegesResponse>;
   /** 集群回档 {@link RollBackClusterRequest} {@link RollBackClusterResponse} */
   RollBackCluster(data: RollBackClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RollBackClusterResponse>;
-  /** 搜索集群database列表 {@link SearchClusterDatabasesRequest} {@link SearchClusterDatabasesResponse} */
+  /** 搜索集群数据库列表 {@link SearchClusterDatabasesRequest} {@link SearchClusterDatabasesResponse} */
   SearchClusterDatabases(data: SearchClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterDatabasesResponse>;
   /** 搜索集群数据表列表 {@link SearchClusterTablesRequest} {@link SearchClusterTablesResponse} */
   SearchClusterTables(data: SearchClusterTablesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterTablesResponse>;

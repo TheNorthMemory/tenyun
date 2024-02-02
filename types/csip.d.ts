@@ -70,6 +70,16 @@ declare interface AssetInfoDetail {
   ScanTime?: string | null;
 }
 
+/** 资产类型和实例类型的映射 */
+declare interface AssetInstanceTypeMap {
+  /** 资产类型 */
+  Text?: string | null;
+  /** 资产类型 */
+  Value?: string | null;
+  /** 资产类型和实例类型映射关系 */
+  InstanceTypeList?: FilterDataObject[] | null;
+}
+
 /** 安全中心资产标签 */
 declare interface AssetTag {
   /** 标签的key值,可以是字母、数字、下划线 */
@@ -428,6 +438,30 @@ declare interface CVMAssetVO {
   BASAgentStatus?: number | null;
   /** 1新资产；0 非新资产 */
   IsNewAsset?: number | null;
+  /** 0 未安装 1安装 2:安装中 */
+  CVMAgentStatus?: number | null;
+  /** 1:开启 0:未开启 */
+  CVMStatus?: number | null;
+  /** 1:客户端已安装 0：未安装 2: Agentless */
+  DefenseModel?: number | null;
+  /** 1:已安装 0:未安装 */
+  TatStatus?: number | null;
+  /** cpu趋势图 */
+  CpuTrend?: Element[] | null;
+  /** 内存趋势图 */
+  MemoryTrend?: Element[] | null;
+  /** 1:agent在线 0:agent离线 2:主机离线 */
+  AgentStatus?: number | null;
+  /** 本月防护关闭次数 */
+  CloseDefenseCount?: number | null;
+  /** 运行状态 */
+  InstanceState?: string | null;
+  /** 安全组数据 */
+  SecurityGroupIds?: string[] | null;
+  /** 物理内存占用KB */
+  AgentMemRss?: number | null;
+  /** CPU使用率百分比 */
+  AgentCpuPer?: number | null;
 }
 
 /** clb实例和监听器信息 */
@@ -636,6 +670,14 @@ declare interface DomainAssetVO {
   VerifyStatus?: number | null;
   /** bot访问数量 */
   BotAccessCount?: number | null;
+}
+
+/** 统计条目 */
+declare interface Element {
+  /** 统计类型 */
+  Key?: string | null;
+  /** 统计对象 */
+  Value?: string | null;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */
@@ -973,13 +1015,13 @@ declare interface ReportTaskIdList {
 /** 风险中心状态处理Key */
 declare interface RiskCenterStatusKey {
   /** 风险ID */
-  Id: string | null;
-  /** APP ID */
-  AppId: string | null;
+  Id: string;
   /** 公网IP/域名 */
-  PublicIPDomain?: string | null;
+  PublicIPDomain?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
+  /** APP ID */
+  AppId?: string;
 }
 
 /** 扫描任务详情 */
@@ -1154,6 +1196,18 @@ declare interface ServerRiskSuggestion {
   Title?: string | null;
   /** 详情 */
   Body?: string | null;
+}
+
+/** 产品支持情况 */
+declare interface ServiceSupport {
+  /** 产品名称:"cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix" */
+  ServiceName?: string | null;
+  /** 已处理的资产总数 */
+  SupportHandledCount?: number | null;
+  /** 支持的资产总数 */
+  SupportTotalCount?: number | null;
+  /** 是否支持该产品1支持；0不支持 */
+  IsSupport?: boolean | null;
 }
 
 /** 子网资产 */
@@ -1348,6 +1402,18 @@ declare interface VULRiskAdvanceCFGList {
   VULDescribe?: string | null;
   /** 影响组件 */
   ImpactComponent?: string | null;
+  /** 漏洞Payload */
+  Payload?: string | null;
+  /** 技术参考 */
+  References?: string | null;
+  /** cvss评分 */
+  CVSS?: string | null;
+  /** 攻击热度 */
+  AttackHeat?: string | null;
+  /** 安全产品支持情况 */
+  ServiceSupport?: ServiceSupport[] | null;
+  /** 最新检测时间 */
+  RecentScanTime?: string | null;
 }
 
 /** 漏洞视角的漏洞风险对象 */
@@ -1652,6 +1718,8 @@ declare interface DescribeCVMAssetInfoResponse {
 }
 
 declare interface DescribeCVMAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** - */
   Filter?: Filter;
 }
@@ -1679,6 +1747,8 @@ declare interface DescribeCVMAssetsResponse {
   ZoneList?: FilterDataObject[] | null;
   /** os列表 */
   OsList?: FilterDataObject[] | null;
+  /** 资产类型和实例类型的对应关系 */
+  AssetMapInstanceTypeList?: AssetInstanceTypeMap[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2180,6 +2250,8 @@ declare interface DescribeTaskLogURLResponse {
 }
 
 declare interface DescribeVULRiskAdvanceCFGListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 任务ID */
   TaskId?: string;
   /** 过滤条件 */
@@ -2197,6 +2269,8 @@ declare interface DescribeVULRiskAdvanceCFGListResponse {
   VULTypeLists?: FilterDataObject[] | null;
   /** 识别来源过滤列表 */
   CheckFromLists?: FilterDataObject[] | null;
+  /** 漏洞标签列表 */
+  VulTagList?: FilterDataObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

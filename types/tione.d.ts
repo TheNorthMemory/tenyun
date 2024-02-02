@@ -446,6 +446,14 @@ declare interface DatasetInfo {
   AnnotationKeyStatus: string | null;
 }
 
+/** 默认内网调用信息 */
+declare interface DefaultInnerCallInfo {
+  /** 可以进行调用的VPC-ID */
+  VpcIds?: string[] | null;
+  /** 默认内网调用地址 */
+  InnerHttpAddr?: string | null;
+}
+
 /** 默认Nginx网关结构 */
 declare interface DefaultNginxGatewayCallInfo {
   /** host */
@@ -659,7 +667,7 @@ declare interface ImageInfo {
 /** 推理代码的信息 */
 declare interface InferCodeInfo {
   /** 推理代码所在的cos详情 */
-  CosPathInfo?: CosPathInfo | null;
+  CosPathInfo: CosPathInfo | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -706,6 +714,8 @@ declare interface IngressPrivateLinkInfo {
   InnerHttpAddr?: string[] | null;
   /** 内网https调用地址 */
   InnerHttpsAddr?: string[] | null;
+  /** 私有连接状态 */
+  State?: string | null;
 }
 
 /** 资源组节点信息 */
@@ -742,6 +752,10 @@ declare interface IntranetCallInfo {
   IngressPrivateLinkInfo?: IngressPrivateLinkInfo | null;
   /** 共享弹性网卡信息 */
   ServiceEIPInfo?: ServiceEIPInfo[] | null;
+  /** 私有连接信息 */
+  PrivateLinkInfos?: PrivateLinkInfo[] | null;
+  /** 默认内网调用信息 */
+  DefaultInnerCallInfos?: DefaultInnerCallInfo[] | null;
 }
 
 /** 日志配置 */
@@ -1190,6 +1204,20 @@ declare interface PreTrainModel {
   ModelName?: string | null;
 }
 
+/** 私有连接信息 */
+declare interface PrivateLinkInfo {
+  /** 私有连接所在的VPCID */
+  VpcId?: string | null;
+  /** 私有连接所在的子网ID */
+  SubnetId?: string | null;
+  /** HTTP内网调用地址 */
+  InnerHttpAddr?: string[] | null;
+  /** HTTPS内网调用地址 */
+  InnerHttpsAddr?: string[] | null;
+  /** 私有连接状态 */
+  State?: string | null;
+}
+
 /** RDMA配置 */
 declare interface RDMAConfig {
   /** 是否开启RDMA */
@@ -1376,9 +1404,9 @@ declare interface Service {
   AppId?: number | null;
   /** 服务的业务状态 */
   BusinessStatus?: string | null;
-  /** 已废弃 */
+  /** 已废弃,以ServiceInfo中的对应为准 */
   ServiceLimit?: ServiceLimit | null;
-  /** 已废弃 */
+  /** 已废弃,以ServiceInfo中的对应为准 */
   ScheduledAction?: ScheduledAction | null;
   /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
   CreateFailedReason?: string | null;
@@ -1394,24 +1422,28 @@ declare interface Service {
   Version?: string | null;
   /** 服务组下服务的最高版本号 */
   LatestVersion?: string | null;
+  /** 资源组类别 托管 NORMAL，纳管 SW */
+  ResourceGroupSWType?: string | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
 declare interface ServiceCallInfo {
   /** 服务组id */
-  ServiceGroupId: string | null;
+  ServiceGroupId?: string | null;
   /** 内网http调用地址 */
-  InnerHttpAddr: string | null;
+  InnerHttpAddr?: string | null;
   /** 内网https调用地址 */
-  InnerHttpsAddr: string | null;
+  InnerHttpsAddr?: string | null;
   /** 内网http调用地址 */
-  OuterHttpAddr: string | null;
+  OuterHttpAddr?: string | null;
   /** 内网https调用地址 */
-  OuterHttpsAddr: string | null;
+  OuterHttpsAddr?: string | null;
   /** 调用key */
-  AppKey: string | null;
+  AppKey?: string | null;
   /** 调用secret */
-  AppSecret: string | null;
+  AppSecret?: string | null;
+  /** 鉴权是否开启 */
+  AuthorizationEnable?: boolean | null;
 }
 
 /** 服务共享弹性网卡设置 */
@@ -1437,37 +1469,41 @@ declare interface ServiceEIPInfo {
 /** 在线服务一个服务组的信息 */
 declare interface ServiceGroup {
   /** 服务组id */
-  ServiceGroupId: string;
+  ServiceGroupId?: string;
   /** 服务组名 */
-  ServiceGroupName: string;
+  ServiceGroupName?: string;
   /** 创建者 */
-  CreatedBy: string;
+  CreatedBy?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 主账号 */
-  Uin: string;
+  Uin?: string;
   /** 服务组下服务总数 */
-  ServiceCount: number | null;
+  ServiceCount?: number | null;
   /** 服务组下在运行的服务数量 */
-  RunningServiceCount: number | null;
+  RunningServiceCount?: number | null;
   /** 服务描述 */
-  Services: Service[] | null;
+  Services?: Service[] | null;
   /** 服务组状态，与服务一致 CREATING 创建中 CREATE_FAILED 创建失败 Normal	正常运行中 Stopped 已停止 Stopping 停止中 Abnormal 异常 Pending 启动中 Waiting 就绪中 */
-  Status: string | null;
+  Status?: string | null;
   /** 服务组标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 服务组下最高版本 */
-  LatestVersion: string | null;
+  LatestVersion?: string | null;
   /** 服务的业务状态CREATING 创建中 CREATE_FAILED 创建失败 ARREARS_STOP 因欠费被强制停止 BILLING 计费中 WHITELIST_USING 白名单试用中 WHITELIST_STOP 白名单额度不足 */
-  BusinessStatus: string | null;
+  BusinessStatus?: string | null;
   /** 服务的计费信息 */
-  BillingInfo: string | null;
+  BillingInfo?: string | null;
   /** 服务的创建来源 */
-  CreateSource: string | null;
+  CreateSource?: string | null;
   /** 服务组的权重更新状态 UPDATING 更新中 UPDATED 更新成功 UPDATE_FAILED 更新失败 */
-  WeightUpdateStatus: string | null;
+  WeightUpdateStatus?: string | null;
+  /** 服务组下运行的pod数量 */
+  ReplicasCount?: number | null;
+  /** 服务组下期望的pod数 */
+  AvailableReplicasCount?: number | null;
 }
 
 /** 服务历史版本 */
@@ -1510,8 +1546,6 @@ declare interface ServiceInfo {
   Status: WorkloadStatus | null;
   /** 权重 */
   Weight: number | null;
-  /** 实例列表 */
-  PodList: string[] | null;
   /** 资源总量 */
   ResourceTotal: ResourceInfo | null;
   /** 历史实例数 */
@@ -1530,6 +1564,8 @@ declare interface ServiceInfo {
   ScaleStrategy?: string | null;
   /** 定时停止的配置 */
   ScheduledAction?: string | null;
+  /** 实例列表 */
+  PodList?: string[] | null;
   /** Pod列表信息 */
   Pods?: Pod | null;
   /** Pod列表信息 */
@@ -2603,7 +2639,7 @@ declare interface DescribeBillingResourceGroupRequest {
   Filters?: Filter[];
   /** 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10....即每页左边为闭区间; 默认0 */
   Offset?: number;
-  /** 分页查询每页大小，最大30; 默认20 */
+  /** 分页查询每页大小，默认20 */
   Limit?: number;
   /** 排序方向; 枚举值: ASC | DESC；默认DESC */
   Order?: string;
@@ -2623,7 +2659,7 @@ declare interface DescribeBillingResourceGroupResponse {
 }
 
 declare interface DescribeBillingResourceGroupsRequest {
-  /** 资源组类型; 枚举值 TRAIN:训练 INFERENCE:推理 */
+  /** 资源组类型;枚举值:空: 通用, TRAIN: 训练, INFERENCE: 推理 */
   Type?: string;
   /** Filter.Name: 枚举值: ResourceGroupId (资源组id列表) ResourceGroupName (资源组名称列表)Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100 */
   Filters?: Filter[];
@@ -2631,7 +2667,7 @@ declare interface DescribeBillingResourceGroupsRequest {
   TagFilters?: TagFilter[];
   /** 偏移量，默认为0；分页查询起始位置，如：Limit为100，第一页Offset为0，第二页OffSet为100....即每页左边为闭区间 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为30;注意：小于0则默认为20；大于30则默认为30 */
+  /** 分页查询每页大小，默认20 */
   Limit?: number;
   /** 支持模糊查找资源组id和资源组名 */
   SearchWord?: string;

@@ -902,12 +902,14 @@ declare interface RegistrationOrganizationInfo {
   AdminName?: string;
   /** 组织机构超管姓名。在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。 */
   AdminMobile?: string;
-  /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书+对公打款2：法人授权/认证 会根据当前操作人的身份判定,如果当前操作人是法人,则是法人认证, 如果当前操作人不是法人,则走法人授权注:`1. 当前仅支持一种认证方式``2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款` */
+  /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书2：法人授权超管5：授权书+对公打款注:`1. 当前仅支持一种认证方式``2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款``3. 如果当前操作人是法人,则是法人认证` */
   AuthorizationTypes?: number[];
   /** 经办人的证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   AdminIdCardType?: string;
   /** 经办人的证件号 */
   AdminIdCardNumber?: string;
+  /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
+  BusinessLicense?: string;
 }
 
 /** 解除协议的签署人，如不指定，默认使用待解除流程(原流程)中的签署人。`注意`: - 不支持更换C端(个人身份类型)签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。 - 目前不支持替换C端(个人身份类型)签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。 - 当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只传参数ApproverSignRole。如果需要指定B端(企业身份类型)签署人，其中ReleasedApprover需要传递的参数如下：`ApproverNumber`, `OrganizationName`, `ApproverType`必传。对于其他身份标识：- **子客企业指定经办人**：OpenId必传，OrganizationOpenId必传；- **非子客企业经办人**：Name、Mobile必传。 */
@@ -2165,6 +2167,8 @@ declare interface CreateChannelFlowEvidenceReportRequest {
   FlowId: string;
   /** 暂未开放 */
   Operator?: UserInfo;
+  /** 指定申请的报告类型，可选类型如下： **0** :合同签署报告（默认） **1** :公证处核验报告 */
+  ReportType?: number;
 }
 
 declare interface CreateChannelFlowEvidenceReportResponse {
@@ -2343,7 +2347,7 @@ declare interface CreateSignUrlsRequest {
   FlowIds?: string[];
   /** 合同组编号注：`该参数和合同流程ID数组必须二选一` */
   FlowGroupId?: string;
-  /** 签署链接类型,可以设置的参数如下 **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链 **CHANNEL** :带有H5引导页的跳转电子签小程序的链接 **APP** :第三方App或小程序跳转电子签小程序的path, App或者小程序跳转适合此类型 **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下** */
+  /** 签署链接类型,可以设置的参数如下 **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链 **CHANNEL** :带有H5引导页的跳转电子签小程序的链接 **APP** :第三方App或小程序跳转电子签小程序的path, App或者小程序跳转适合此类型 **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链**注：**动态签署人场景，如果签署链接类型设置为`APP`，则仅支持跳转到封面页。详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下** */
   Endpoint?: string;
   /** 签署链接生成类型，可以选择的类型如下**ALL**：(默认)全部签署方签署链接，此时不会给自动签署(静默签署)的签署方创建签署链接**CHANNEL**：第三方子企业员工签署方**NOT_CHANNEL**：SaaS平台企业员工签署方**PERSON**：个人/自然人签署方**FOLLOWER**：关注方，目前是合同抄送方**RECIPIENT**：获取RecipientId对应的签署链接，可用于生成动态签署人补充链接 */
   GenerateType?: string;
@@ -2427,6 +2431,8 @@ declare interface DescribeChannelFlowEvidenceReportRequest {
   ReportId: string;
   /** 暂未开放 */
   Operator?: UserInfo;
+  /** 指定申请的报告类型，可选类型如下： **0** :合同签署报告（默认） **1** :公证处核验报告 */
+  ReportType?: number;
 }
 
 declare interface DescribeChannelFlowEvidenceReportResponse {

@@ -144,6 +144,14 @@ declare interface VoicePrintBaseData {
   SpeakerNick?: string | null;
 }
 
+/** 音频声纹比对结果，包含比对分数 */
+declare interface VoicePrintCompareData {
+  /** 匹配度 取值范围(0.0 - 100.0) */
+  Score?: string | null;
+  /** 验证结果 0: 未通过 1: 通过 */
+  Decision?: number | null;
+}
+
 /** 统计返回[说话人注册数量](https://cloud.tencent.com/document/product/1093/96061) */
 declare interface VoicePrintCountData {
   /** 总数 */
@@ -548,6 +556,24 @@ declare interface UpdateAsrVocabResponse {
   RequestId?: string;
 }
 
+declare interface VoicePrintCompareRequest {
+  /** 音频格式 0: pcm, 1: wav；pcm和wav音频无损压缩，识别准确度更高 */
+  VoiceFormat: number;
+  /** 音频采样率，目前仅支持16k，请填写16000 */
+  SampleRate: number;
+  /** 对比源音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M */
+  SrcAudioData: string;
+  /** 对比目标音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M */
+  DestAudioData: string;
+}
+
+declare interface VoicePrintCompareResponse {
+  /** 音频声纹比对结果，包含相似度打分 */
+  Data?: VoicePrintCompareData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VoicePrintCountRequest {
 }
 
@@ -669,6 +695,8 @@ declare interface Asr {
   SetVocabState(data: SetVocabStateRequest, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateResponse>;
   /** 更新热词表 {@link UpdateAsrVocabRequest} {@link UpdateAsrVocabResponse} */
   UpdateAsrVocab(data: UpdateAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAsrVocabResponse>;
+  /** 说话人比对 {@link VoicePrintCompareRequest} {@link VoicePrintCompareResponse} */
+  VoicePrintCompare(data: VoicePrintCompareRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintCompareResponse>;
   /** 说话人注册数量统计 {@link VoicePrintCountRequest} {@link VoicePrintCountResponse} */
   VoicePrintCount(data?: VoicePrintCountRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintCountResponse>;
   /** 说话人删除 {@link VoicePrintDeleteRequest} {@link VoicePrintDeleteResponse} */

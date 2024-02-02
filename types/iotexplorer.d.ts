@@ -287,31 +287,35 @@ declare interface FirmwareInfo {
 /** 实例信息公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效 */
 declare interface InstanceDetail {
   /** 实例ID */
-  InstanceId: string;
-  /** 实例类型（0 公共实例 1 标准企业实例 2专享企业实例） */
-  InstanceType: number;
+  InstanceId?: string;
+  /** 实例类型（0 公共实例 1 标准企业实例 2新企业实例3新公共实例） */
+  InstanceType?: number;
   /** 地域字母缩写 */
-  Region: string;
+  Region?: string;
   /** 区域全拼 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 支持设备总数 */
-  TotalDeviceNum: number;
-  /** 以注册设备数 */
-  UsedDeviceNum: number;
+  TotalDeviceNum?: number;
+  /** 已注册设备数 */
+  UsedDeviceNum?: number;
   /** 项目数 */
-  ProjectNum: number;
+  ProjectNum?: number;
   /** 产品数 */
-  ProductNum: number;
+  ProductNum?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 过期时间，公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 总设备数 */
-  TotalDevice: number | null;
+  TotalDevice?: number | null;
   /** 激活设备数 */
-  ActivateDevice: number | null;
+  ActivateDevice?: number | null;
+  /** 备注 */
+  Description?: string | null;
+  /** 实例状态 */
+  Status?: number | null;
 }
 
 /** LoRa自定义频点信息 */
@@ -451,41 +455,43 @@ declare interface ProductDevicesPositionItem {
 /** 产品详情 */
 declare interface ProductEntry {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
   /** 产品分组模板ID */
-  CategoryId: number;
+  CategoryId?: number;
   /** 加密类型。1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式 */
-  EncryptionType: string;
+  EncryptionType?: string;
   /** 连接类型。如：wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh */
-  NetType: string;
+  NetType?: string;
   /** 数据协议 (1 使用物模型 2 为自定义类型) */
-  DataProtocol: number;
+  DataProtocol?: number;
   /** 产品描述 */
-  ProductDesc: string;
+  ProductDesc?: string;
   /** 状态 如：all 全部, dev 开发中, audit 审核中 released 已发布 */
-  DevStatus: string;
+  DevStatus?: string;
   /** 创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 更新时间 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 区域 */
-  Region: string;
+  Region?: string;
   /** 产品类型。如： 0 普通产品 ， 5 网关产品 */
-  ProductType: number;
+  ProductType?: number;
   /** 项目ID */
-  ProjectId: string;
+  ProjectId?: string;
   /** 产品ModuleId */
-  ModuleId: number;
+  ModuleId?: number;
   /** 是否使用脚本进行二进制转json功能 可以取值 true / false */
-  EnableProductScript: string | null;
+  EnableProductScript?: string | null;
   /** 创建人 UinId */
-  CreateUserId: number | null;
+  CreateUserId?: number | null;
   /** 创建者昵称 */
-  CreatorNickName: string | null;
+  CreatorNickName?: string | null;
   /** 绑定策略（1：强踢；2：非强踢；0：表示无意义） */
-  BindStrategy: number | null;
+  BindStrategy?: number | null;
+  /** 设备数量 */
+  DeviceCount?: number | null;
 }
 
 /** 产品模型定义 */
@@ -1385,7 +1391,7 @@ declare interface DescribeInstanceRequest {
 
 declare interface DescribeInstanceResponse {
   /** 实例信息 */
-  Data: InstanceDetail | null;
+  Data?: InstanceDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2259,6 +2265,8 @@ declare interface UploadFirmwareRequest {
   FirmwareDescription?: string;
   /** 固件升级模块；可选值 mcu|moudule */
   FwType?: string;
+  /** 固件用户自定义配置信息 */
+  FirmwareUserDefined?: string;
 }
 
 declare interface UploadFirmwareResponse {

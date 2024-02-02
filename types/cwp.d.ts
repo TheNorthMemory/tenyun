@@ -10184,6 +10184,14 @@ declare interface DescribeNetAttackSettingResponse {
   NetAttackEnable?: number;
   /** 0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略 */
   NetAttackAlarmStatus?: number;
+  /** 1 全部旗舰版主机，0 InstanceIds列表主机 */
+  Scope?: number;
+  /** 自选主机 */
+  InstanceIds?: string[] | null;
+  /** 自选排除主机 */
+  ExcludeInstanceIds?: string[] | null;
+  /** 新增资产自动包含 0 不包含 1包含 */
+  AutoInclude?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11693,13 +11701,19 @@ declare interface DescribeVulDefenceSettingRequest {
 
 declare interface DescribeVulDefenceSettingResponse {
   /** 防御开关，0 关闭 1 开启 */
-  Enable: number;
+  Enable?: number;
   /** 影响范围：1 全网旗舰版主机，0 quuid列表主机 */
-  Scope: number;
+  Scope?: number;
   /** 影响主机quuid列表 */
-  Quuids: string[] | null;
+  Quuids?: string[] | null;
   /** 当前旗舰版主机数量 */
-  FlagshipCount: number;
+  FlagshipCount?: number;
+  /** 影响主机id列表 */
+  InstanceIds?: string[] | null;
+  /** 新增旗舰版主机自动加入;1是，0否 */
+  AutoInclude?: number;
+  /** 排除的主机id列表 */
+  ExcludeInstanceIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13943,6 +13957,14 @@ declare interface ModifyNetAttackSettingRequest {
   NetAttackEnable: number;
   /** 0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略 */
   NetAttackAlarmStatus: number;
+  /** 1 全部旗舰版主机，0 Quuids列表主机 */
+  Scope?: number;
+  /** 自选主机 */
+  InstanceIds?: string[];
+  /** 自选排除的主机 */
+  ExcludeInstanceIds?: string[];
+  /** 新增资产自动包含 0 不包含 1包含 */
+  AutoInclude?: number;
 }
 
 declare interface ModifyNetAttackSettingResponse {
@@ -14091,8 +14113,14 @@ declare interface ModifyVulDefenceSettingRequest {
   Enable: number;
   /** 1 全部旗舰版主机，0 Quuids列表主机 */
   Scope: number;
-  /** 作用弄范围内旗舰版主机列表 */
+  /** 作用范围内旗舰版主机列表 */
   Quuids?: string[];
+  /** 排除作用范围内旗舰版主机列表 */
+  ExcludeInstanceIds?: string[];
+  /** 新增资产自动包含 0 不包含 1包含 */
+  AutoInclude?: number;
+  /** 作用范围内旗舰版主机列表 */
+  InstanceIds?: string[];
 }
 
 declare interface ModifyVulDefenceSettingResponse {

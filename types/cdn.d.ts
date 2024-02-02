@@ -2951,7 +2951,7 @@ declare interface DescribeCdnDataRequest {
   Project?: number;
   /** 时间粒度，支持以下几种模式：min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据（指定查询服务地域为中国境外时不支持 1 分钟粒度）5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据 */
   Interval?: string;
-  /** 多域名查询时，默认（false)返回多个域名的汇总数据可按需指定为 true，返回每一个 Domain 的明细数据（statusCode 指标暂不支持） */
+  /** 多域名查询时，默认（false)返回多个域名的汇总数据可按需指定为 true，返回每一个 Domain 的明细数据（statusCode、2xx、3xx、4xx、5xx 指标暂不支持） */
   Detail?: boolean;
   /** 查询中国境内CDN数据时，指定运营商查询，不填充表示查询所有运营商运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316)指定运营商查询时，不可同时指定省份、IP协议查询 */
   Isp?: number;
@@ -2975,9 +2975,9 @@ declare interface DescribeCdnDataRequest {
 
 declare interface DescribeCdnDataResponse {
   /** 返回数据的时间粒度，查询时指定：min：1 分钟粒度5min：5 分钟粒度hour：1 小时粒度day：天粒度 */
-  Interval: string;
+  Interval?: string;
   /** 指定条件查询得到的数据明细 */
-  Data: ResourceData[];
+  Data?: ResourceData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3327,7 +3327,7 @@ declare interface DescribeOriginDataRequest {
   Project?: number;
   /** 时间粒度，支持以下几种模式：min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据（指定查询服务地域为中国境外时不支持 1 分钟粒度）5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据 */
   Interval?: string;
-  /** Domains 传入多个时，默认（false)返回多个域名的汇总数据可按需指定为 true，返回每一个 Domain 的明细数据（statusCode 指标暂不支持） */
+  /** Domains 传入多个时，默认（false)返回多个域名的汇总数据可按需指定为 true，返回每一个 Domain 的明细数据（statusCode、2xx、3xx、4xx、5xx 指标暂不支持） */
   Detail?: boolean;
   /** 指定服务地域查询，不填充表示查询中国境内 CDN 数据mainland：指定查询中国境内 CDN 数据overseas：指定查询中国境外 CDN 数据 */
   Area?: string;
@@ -3337,9 +3337,9 @@ declare interface DescribeOriginDataRequest {
 
 declare interface DescribeOriginDataResponse {
   /** 数据统计的时间粒度，支持min, 5min, hour, day，分别表示1分钟，5分钟，1小时和1天的时间粒度。 */
-  Interval: string;
+  Interval?: string;
   /** 各个资源的回源数据详情。 */
-  Data: ResourceOriginData[];
+  Data?: ResourceOriginData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
