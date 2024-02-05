@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 245+ 款产品，10991+ 服务数</summary>
+<details><summary>共计 245+ 款产品，10992+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -283,7 +283,7 @@ sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) 
 ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24) |
 sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 2018-08-13(6) |
 svp | [节省计划](https://cloud.tencent.com/document/product/1761) | 2024-01-25(1) |
-taf | [流量反欺诈](https://cloud.tencent.com/document/product/1031) | 2020-02-10(3) |
+taf | [流量反欺诈](https://cloud.tencent.com/document/product/1031) | 2020-02-10(4) |
 tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(31) |
 tan | [碳引擎](https://cloud.tencent.com/document/product/1498) | 2022-04-20(1) |
 tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(28) |

@@ -98,6 +98,34 @@ declare interface InputRecognizeTargetAudience {
   DeviceList?: Device[];
 }
 
+/** 业务入参 */
+declare interface ManagePortraitRiskInput {
+  /** 请求时间戳秒 */
+  PostTime: number;
+  /** 用户公网ip（仅支持IPv4） */
+  UserIp: string;
+  /** 渠道号 */
+  Channel: number;
+}
+
+/** 业务出参 */
+declare interface ManagePortraitRiskOutput {
+  /** 返回码（0，成功，其他失败） */
+  Code?: number;
+  /** 返回码对应的信息 */
+  Message?: string | null;
+  /** 结果 */
+  Value?: ManagePortraitRiskValueOutput | null;
+}
+
+/** 业务出参 */
+declare interface ManagePortraitRiskValueOutput {
+  /** 对应的IP */
+  UserIp?: string;
+  /** 返回风险等级, 0 - 4，0代表无风险，数值越大，风险越高 */
+  Level?: number;
+}
+
 /** 流量反欺诈-验准返回值 */
 declare interface OutputRecognizeTargetAudience {
   /** 返回码（0，成功，其他失败） */
@@ -120,6 +148,18 @@ declare interface OutputRecognizeTargetAudienceValue {
   ModelType: number | null;
   /** 入参Uid */
   Uid: string | null;
+}
+
+declare interface ManagePortraitRiskRequest {
+  /** 业务入参 */
+  BusinessSecurityData: ManagePortraitRiskInput;
+}
+
+declare interface ManagePortraitRiskResponse {
+  /** 业务出参 */
+  Data?: ManagePortraitRiskOutput | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface RecognizeCustomizedAudienceRequest {
@@ -163,6 +203,8 @@ declare interface RecognizeTargetAudienceResponse {
 /** {@link Taf 流量反欺诈} */
 declare interface Taf {
   (): Versions;
+  /** 虚假流量识别 {@link ManagePortraitRiskRequest} {@link ManagePortraitRiskResponse} */
+  ManagePortraitRisk(data: ManagePortraitRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManagePortraitRiskResponse>;
   /** 流量反欺诈-流量验准定制版 {@link RecognizeCustomizedAudienceRequest} {@link RecognizeCustomizedAudienceResponse} */
   RecognizeCustomizedAudience(data: RecognizeCustomizedAudienceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCustomizedAudienceResponse>;
   /** 流量反欺诈-流量验准高级版 {@link RecognizePreciseTargetAudienceRequest} {@link RecognizePreciseTargetAudienceResponse} */

@@ -3000,7 +3000,7 @@ declare interface DescribeCdnDomainLogsRequest {
 }
 
 declare interface DescribeCdnDomainLogsResponse {
-  /** 日志包下载链接。下载内容是gz后缀的压缩包，解压后是无扩展名的文本文件。 */
+  /** 日志包下载链接。下载内容是gz后缀的压缩包，解压后是无扩展名的文本文件。链接有效期1天。 */
   DomainLogs?: DomainLog[];
   /** 查询到的总条数 */
   TotalCount?: number;

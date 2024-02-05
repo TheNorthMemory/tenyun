@@ -656,6 +656,14 @@ declare interface GroupTriggerConditionInfo {
   Value: string;
 }
 
+/** 日志内容高亮描述信息 */
+declare interface HighLightItem {
+  /** 高亮的日志Key */
+  Key: string;
+  /** 高亮的语法 */
+  Values: string[];
+}
+
 /** 直方图详细信息 */
 declare interface HistogramInfo {
   /** 统计周期内的日志条数 */
@@ -780,6 +788,8 @@ declare interface LogContextInfo {
   RawLog?: string | null;
   /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
   IndexStatus?: string | null;
+  /** 日志内容的高亮描述信息 */
+  HighLights?: HighLightItem[] | null;
 }
 
 /** 日志结果信息 */
@@ -1240,39 +1250,39 @@ declare interface TopicIdAndRegion {
   RegionId: number;
 }
 
-/** 日志主题信息 */
+/** 主题基本信息 */
 declare interface TopicInfo {
   /** 日志集ID */
   LogsetId?: string;
-  /** 日志主题ID */
+  /** 主题ID */
   TopicId?: string;
-  /** 日志主题名称 */
+  /** 主题名称 */
   TopicName?: string;
   /** 主题分区个数 */
   PartitionCount?: number;
-  /** 是否开启索引 */
+  /** 主题是否开启索引（主题类型需为日志主题） */
   Index?: boolean;
-  /** 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
+  /** 云产品标识，主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
   AssumerName?: string | null;
   /** 创建时间 */
   CreateTime?: string;
-  /** 日主主题是否开启采集 */
+  /** 主题是否开启采集 */
   Status?: boolean;
-  /** 日志主题绑定的标签信息 */
+  /** 主题绑定的标签信息 */
   Tags?: Tag[] | null;
   /** 该主题是否开启自动分裂 */
   AutoSplit?: boolean | null;
   /** 若开启自动分裂的话，该主题能够允许的最大分区数 */
   MaxSplitPartitions?: number | null;
-  /** 日主题的存储类型 */
+  /** 主题的存储类型 */
   StorageType?: string | null;
   /** 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存 */
   Period?: number | null;
   /** 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。 */
   SubAssumerName?: string | null;
-  /** 日志主题描述 */
+  /** 主题描述 */
   Describes?: string | null;
-  /** 开启日志沉降，热存储的生命周期， hotPeriod < Period。热存储为 hotPeriod, 冷存储则为 Period-hotPeriod。 */
+  /** 开启日志沉降，标准存储的生命周期， hotPeriod < Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题） */
   HotPeriod?: number | null;
   /** 主题类型。- 0: 日志主题 - 1: 指标主题 */
   BizType?: number | null;
@@ -3365,7 +3375,7 @@ declare interface Cls {
   ModifyAlarm(data: ModifyAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmResponse>;
   /** 修改通知渠道组 {@link ModifyAlarmNoticeRequest} {@link ModifyAlarmNoticeResponse} */
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
-  /** 修改告警屏蔽 {@link ModifyAlarmShieldRequest} {@link ModifyAlarmShieldResponse} */
+  /** 修改告警屏蔽规则 {@link ModifyAlarmShieldRequest} {@link ModifyAlarmShieldResponse} */
   ModifyAlarmShield(data: ModifyAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmShieldResponse>;
   /** 修改采集规则配置 {@link ModifyConfigRequest} {@link ModifyConfigResponse} */
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
