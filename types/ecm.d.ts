@@ -617,21 +617,21 @@ declare interface Ipv6SubnetCidrBlock {
 /** 描述密钥对信息 */
 declare interface KeyPair {
   /** 密钥对的ID，是密钥对的唯一标识。 */
-  KeyId: string | null;
+  KeyId?: string | null;
   /** 密钥对名称。 */
-  KeyName: string | null;
+  KeyName?: string | null;
   /** 密钥对所属的项目ID。 */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 密钥对描述信息。 */
-  Description: string | null;
+  Description?: string | null;
   /** 密钥对的纯文本公钥。 */
-  PublicKey: string | null;
+  PublicKey?: string | null;
   /** 钥对的纯文本私钥。腾讯云不会保管私钥，请用户自行妥善保存。 */
-  PrivateKey: string | null;
+  PrivateKey?: string | null;
   /** 钥关联的实例ID列表。 */
-  AssociatedInstanceIds: string[] | null;
+  AssociatedInstanceIds?: string[] | null;
   /** 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
 }
 
 /** 负载均衡监听器 */
@@ -915,21 +915,21 @@ declare interface NetworkStorageRange {
 /** 节点信息 */
 declare interface Node {
   /** zone信息。 */
-  ZoneInfo: ZoneInfo;
+  ZoneInfo?: ZoneInfo;
   /** 国家信息。 */
-  Country: Country;
+  Country?: Country;
   /** 区域信息。 */
-  Area: Area;
+  Area?: Area;
   /** 省份信息。 */
-  Province: Province;
+  Province?: Province;
   /** 城市信息。 */
-  City: City;
+  City?: City;
   /** Region信息。 */
-  RegionInfo: RegionInfo;
+  RegionInfo?: RegionInfo;
   /** 运营商列表。 */
-  ISPSet: ISP[];
+  ISPSet?: ISP[];
   /** 运营商数量。 */
-  ISPNum: number;
+  ISPNum?: number;
   /** 节点是否支持LB */
   LBSupported?: boolean;
 }
@@ -1025,11 +1025,11 @@ declare interface PeakNetworkRegionInfo {
 /** 物理位置信息 */
 declare interface PhysicalPosition {
   /** 机位 */
-  PosId: string | null;
+  PosId?: string | null;
   /** 机架 */
-  RackId: string | null;
+  RackId?: string | null;
   /** 交换机 */
-  SwitchId: string | null;
+  SwitchId?: string | null;
 }
 
 /** 描述了实例的抽象位置，包括其所在的可用区，所属的项目，以及所属的独享集群的ID和名字。 */

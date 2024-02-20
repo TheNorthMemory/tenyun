@@ -2532,6 +2532,24 @@ declare interface ModifySecurityPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyServiceAccountPasswordRequest {
+  /** 实例Id */
+  RegistryId: string;
+  /** 服务级账号名 */
+  Name: string;
+  /** 是否随机生成密码 */
+  Random: boolean;
+  /** 服务级账号密码，长度在8到20之间且需包含至少一个大写字符，一个小写字符和一个数字 */
+  Password?: string;
+}
+
+declare interface ModifyServiceAccountPasswordResponse {
+  /** 自定义用户密码，仅展示一次，请注意留存 */
+  Password?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyServiceAccountRequest {
   /** 实例Id */
   RegistryId: string;
@@ -2847,6 +2865,8 @@ declare interface Tcr {
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
   /** 更新服务级账号 {@link ModifyServiceAccountRequest} {@link ModifyServiceAccountResponse} */
   ModifyServiceAccount(data: ModifyServiceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceAccountResponse>;
+  /** 更新服务级账号密码 {@link ModifyServiceAccountPasswordRequest} {@link ModifyServiceAccountPasswordResponse} */
+  ModifyServiceAccountPassword(data: ModifyServiceAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceAccountPasswordResponse>;
   /** 更新版本保留规则 {@link ModifyTagRetentionRuleRequest} {@link ModifyTagRetentionRuleResponse} */
   ModifyTagRetentionRule(data: ModifyTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTagRetentionRuleResponse>;
   /** 修改个人用户登录密码 {@link ModifyUserPasswordPersonalRequest} {@link ModifyUserPasswordPersonalResponse} */

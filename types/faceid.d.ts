@@ -92,7 +92,7 @@ declare interface DetectInfoIdCardData {
 
 /** 核身文本信息 */
 declare interface DetectInfoText {
-  /** 本次流程最终验证结果。0为成功 */
+  /** 本次流程最终验证结果。0为成功（仅包含活体人脸核身结果，不包含意愿核身结果） */
   ErrCode?: number | null;
   /** 本次流程最终验证结果描述。（仅描述用，文案更新时不会通知。） */
   ErrMsg?: string | null;

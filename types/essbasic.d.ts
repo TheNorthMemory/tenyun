@@ -136,32 +136,6 @@ declare interface BaseFlowInfo {
   Components?: Component[];
 }
 
-/** 用户计费使用情况详情 */
-declare interface BillUsageDetail {
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 */
-  FlowId?: string | null;
-  /** 合同经办人名称如果有多个经办人用分号隔开。 */
-  OperatorName?: string | null;
-  /** 发起方组织机构名称 */
-  CreateOrganizationName?: string | null;
-  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
-  FlowName?: string | null;
-  /** 当前合同状态,如下是状态码对应的状态。0-还没有发起1-等待签署2-部分签署 3-拒签4-已签署 5-已过期 6-已撤销 7-还没有预发起8-等待填写9-部分填写 10-拒填11-已解除 */
-  Status?: number | null;
-  /** 套餐类型对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
-  QuotaType?: string | null;
-  /** 合同使用量 */
-  UseCount?: number | null;
-  /** 消耗的时间戳，格式为Unix标准时间戳（秒）。 */
-  CostTime?: number | null;
-  /** 消耗的套餐名称 */
-  QuotaName?: string | null;
-  /** 消耗类型1.扣费 2.撤销返还 */
-  CostType?: number | null;
-  /** 备注 */
-  Remark?: string | null;
-}
-
 /** 抄送信息 */
 declare interface CcInfo {
   /** 被抄送人手机号，大陆11位手机号 */
@@ -1841,7 +1815,7 @@ declare interface ChannelCreateUserRolesResponse {
 declare interface ChannelCreateWebThemeConfigRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。 */
   Agent: Agent;
-  /** 主题类型EMBED_WEB_THEME：嵌入式主题目前只支持EMBED_WEB_THEME，web页面嵌入的主题风格配置 */
+  /** 主题类型EMBED_WEB_THEME：嵌入式主题EMBED_WEB_THEME，web页面嵌入的主题风格配置COMPANY_AUTHENTICATE，子客认证主题配置， 对当前第三方应用号生效，目前支持的有，背景图替换，隐藏企业认证页面导航栏和隐藏企业认证顶部logo */
   ThemeType: string;
   /** 主题配置 */
   WebThemeConfig: WebThemeConfig;
@@ -2347,7 +2321,7 @@ declare interface CreateSignUrlsRequest {
   FlowIds?: string[];
   /** 合同组编号注：`该参数和合同流程ID数组必须二选一` */
   FlowGroupId?: string;
-  /** 签署链接类型,可以设置的参数如下 **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链 **CHANNEL** :带有H5引导页的跳转电子签小程序的链接 **APP** :第三方App或小程序跳转电子签小程序的path, App或者小程序跳转适合此类型 **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链**注：**动态签署人场景，如果签署链接类型设置为`APP`，则仅支持跳转到封面页。详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下** */
+  /** 签署链接类型,可以设置的参数如下 **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链 **CHANNEL** :带有H5引导页的跳转电子签小程序的链接 **APP** :第三方App或小程序跳转电子签小程序的path, App或者小程序跳转适合此类型 **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链**注：**动态签署人场景，如果签署链接类型设置为`APP`，则仅支持跳转到封面页。详细使用场景可以参考接口描述说明中的 **主要使用场景EndPoint分类** */
   Endpoint?: string;
   /** 签署链接生成类型，可以选择的类型如下**ALL**：(默认)全部签署方签署链接，此时不会给自动签署(静默签署)的签署方创建签署链接**CHANNEL**：第三方子企业员工签署方**NOT_CHANNEL**：SaaS平台企业员工签署方**PERSON**：个人/自然人签署方**FOLLOWER**：关注方，目前是合同抄送方**RECIPIENT**：获取RecipientId对应的签署链接，可用于生成动态签署人补充链接 */
   GenerateType?: string;
@@ -2396,30 +2370,6 @@ declare interface DescribeBatchOrganizationRegistrationUrlsRequest {
 declare interface DescribeBatchOrganizationRegistrationUrlsResponse {
   /** 企业批量注册链接信息 */
   OrganizationAuthUrls?: OrganizationAuthUrl[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBillUsageDetailRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
-  Agent: Agent;
-  /** 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
-  StartTime: string;
-  /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
-  EndTime: string;
-  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；对应关系如下CloudEnterprise-企业版合同SingleSignature-单方签章CloudProve-签署报告CloudOnlineSign-腾讯会议在线签约ChannelWeCard-微工卡SignFlow-合同套餐SignFace-签署意愿（人脸识别）SignPassword-签署意愿（密码）SignSMS-签署意愿（短信）PersonalEssAuth-签署人实名（腾讯电子签认证）PersonalThirdAuth-签署人实名（信任第三方认证）OrgEssAuth-签署企业实名FlowNotify-短信通知AuthService-企业工商信息查询 */
-  QuotaType?: string;
-  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
-  Offset?: number;
-  /** 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。 */
-  Limit?: number;
-}
-
-declare interface DescribeBillUsageDetailResponse {
-  /** 返回查询记录总数 */
-  Total?: number;
-  /** 消耗记录详情 */
-  Details?: BillUsageDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4435,8 +4385,6 @@ declare interface Essbasic {
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
   /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */
   DescribeBatchOrganizationRegistrationUrls(data: DescribeBatchOrganizationRegistrationUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationUrlsResponse>;
-  /** @deprecated [废弃]查询计费消耗情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
-  DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
   /** 查询企业信息 {@link DescribeChannelOrganizationsRequest} {@link DescribeChannelOrganizationsResponse} */

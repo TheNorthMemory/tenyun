@@ -52,7 +52,7 @@ declare interface InputFrontRisk {
 declare interface InputManageMarketingRisk {
   /** 用户账号类型（默认开通 QQ 开放账号，手机 MD5 账号类型查询。如需使用微信开放账号，则需要 提交工单 由腾讯云进行资格审核，审核通过后方可正常使用微信开放账号）： 1：QQ 开放账号；2：微信开放账号；8：设备号（imei/imeiMD5/idfa/idfaMd5）；10004：手机号 MD5。 */
   Account: AccountInfo;
-  /** 场景码，用于识别和区分不同的业务场景，可在控制台上新建和管理控制台链接：https://console.cloud.tencent.com/rce/risk/strategy/scene-root活动防刷默认场景码：e_activity_antirush 登陆保护默认场景码：e_login_protection注册保护默认场景码：e_register_protection */
+  /** 场景码，用于识别和区分不同的业务场景，可在控制台上新建和管理控制台链接：https://console.cloud.tencent.com/rce/risk/strategy/scene-root活动防刷默认场景码：e_activity_antirush 登录保护默认场景码：e_login_protection注册保护默认场景码：e_register_protection */
   SceneCode: string;
   /** 用户外网ip（传入用户非外网ip会影响判断结果）。 */
   UserIp: string;
