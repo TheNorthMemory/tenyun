@@ -421,61 +421,61 @@ declare interface ImageUrl {
 /** 用于描述实例相关的信息。 */
 declare interface Instance {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称，如ens-34241f3s。 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 实例状态。取值范围：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中STOPPED：表示关机STARTING：表示开机中STOPPING：表示关机中REBOOTING：表示重启中SHUTDOWN：表示停止待销毁TERMINATING：表示销毁中。 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 实例当前使用的镜像的信息。 */
-  Image: Image | null;
+  Image?: Image | null;
   /** 实例当前所属的模块简要信息。 */
-  SimpleModule: SimpleModule | null;
+  SimpleModule?: SimpleModule | null;
   /** 实例所在的位置相关信息。 */
-  Position: Position | null;
+  Position?: Position | null;
   /** 实例的网络相关信息。 */
-  Internet: Internet | null;
+  Internet?: Internet | null;
   /** 实例的配置相关信息。 */
-  InstanceTypeConfig: InstanceTypeConfig | null;
+  InstanceTypeConfig?: InstanceTypeConfig | null;
   /** 实例的创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 实例的标签信息。 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 实例最后一次操作。 */
-  LatestOperation: string | null;
+  LatestOperation?: string | null;
   /** 实例最后一次操作结果。 */
-  LatestOperationState: string | null;
+  LatestOperationState?: string | null;
   /** 实例业务状态。取值范围：NORMAL：表示正常状态的实例EXPIRED：表示过期的实例PROTECTIVELY_ISOLATED：表示被安全隔离的实例。 */
-  RestrictState: string | null;
+  RestrictState?: string | null;
   /** 系统盘大小，单位GB。 */
-  SystemDiskSize: number | null;
+  SystemDiskSize?: number | null;
   /** 数据盘大小，单位GB。 */
-  DataDiskSize: number | null;
+  DataDiskSize?: number | null;
   /** 实例UUID */
-  UUID: string | null;
+  UUID?: string | null;
   /** 付费方式。 0为后付费。 1为预付费。 */
-  PayMode: number | null;
+  PayMode?: number | null;
   /** 过期时间。格式为yyyy-mm-dd HH:mm:ss。 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 隔离时间。格式为yyyy-mm-dd HH:mm:ss。 */
-  IsolatedTime: string | null;
+  IsolatedTime?: string | null;
   /** 是否自动续费。 0为不自动续费。 1为自动续费。 */
-  RenewFlag: number | null;
+  RenewFlag?: number | null;
   /** 过期状态。 NORMAL 表示机器运行正常。 WILL_EXPIRE 表示即将过期。 EXPIRED 表示已过期。 */
-  ExpireState: string | null;
+  ExpireState?: string | null;
   /** 系统盘信息 */
-  SystemDisk: DiskInfo | null;
+  SystemDisk?: DiskInfo | null;
   /** 数据盘信息 */
-  DataDisks: DiskInfo[] | null;
+  DataDisks?: DiskInfo[] | null;
   /** 新实例标志 */
-  NewFlag: number | null;
+  NewFlag?: number | null;
   /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。 */
-  SecurityGroupIds: string[] | null;
+  SecurityGroupIds?: string[] | null;
   /** VPC属性 */
-  VirtualPrivateCloud: VirtualPrivateCloud | null;
+  VirtualPrivateCloud?: VirtualPrivateCloud | null;
   /** 实例运营商字段。 */
-  ISP: string | null;
+  ISP?: string | null;
   /** 物理位置信息。注意该字段目前为保留字段，均为空值。 */
-  PhysicalPosition: PhysicalPosition | null;
+  PhysicalPosition?: PhysicalPosition | null;
 }
 
 /** 机型族配置 */
@@ -547,25 +547,25 @@ declare interface InstanceStatistic {
 /** 机型配置 */
 declare interface InstanceTypeConfig {
   /** 机型族配置信息 */
-  InstanceFamilyConfig: InstanceFamilyConfig;
+  InstanceFamilyConfig?: InstanceFamilyConfig;
   /** 机型 */
-  InstanceType: string;
+  InstanceType?: string;
   /** CPU核数 */
-  Vcpu: number;
+  Vcpu?: number;
   /** 内存大小 */
-  Memory: number;
+  Memory?: number;
   /** 主频 */
-  Frequency: string;
+  Frequency?: string;
   /** 处理器型号 */
-  CpuModelName: string;
+  CpuModelName?: string;
   /** 机型族类别配置信息 */
-  InstanceFamilyTypeConfig: InstanceFamilyTypeConfig;
+  InstanceFamilyTypeConfig?: InstanceFamilyTypeConfig;
   /** 机型额外信息 是一个json字符串，如果存在则表示特殊机型，格式如下：{"dataDiskSize":3200,"systemDiskSize":60, "systemDiskSizeShow":"系统盘默认60G","dataDiskSizeShow":"本地NVMe SSD 硬盘3200 GB"} */
-  ExtInfo: string | null;
+  ExtInfo?: string | null;
   /** GPU卡数 */
-  Vgpu: number | null;
+  Vgpu?: number | null;
   /** GPU型号 */
-  GpuModelName: string | null;
+  GpuModelName?: string | null;
 }
 
 /** 实例价格信息 */
@@ -739,37 +739,37 @@ declare interface LoadBalancerInternetAccessible {
 /** 模块信息 */
 declare interface Module {
   /** 模块Id。 */
-  ModuleId: string;
+  ModuleId?: string;
   /** 模块名称。 */
-  ModuleName: string;
+  ModuleName?: string;
   /** 模块状态：NORMAL：正常。DELETING：删除中 DELETEFAILED：删除失败。 */
-  ModuleState: string;
+  ModuleState?: string;
   /** 默认系统盘大小。 */
-  DefaultSystemDiskSize: number;
+  DefaultSystemDiskSize?: number;
   /** 默认数据盘大小。 */
-  DefaultDataDiskSize: number;
+  DefaultDataDiskSize?: number;
   /** 默认机型。 */
-  InstanceTypeConfig: InstanceTypeConfig;
+  InstanceTypeConfig?: InstanceTypeConfig;
   /** 默认镜像。 */
-  DefaultImage: Image;
+  DefaultImage?: Image;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 默认出带宽。 */
-  DefaultBandwidth: number;
+  DefaultBandwidth?: number;
   /** 标签集合。 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 是否关闭IP直通。 */
-  CloseIpDirect: number;
+  CloseIpDirect?: number;
   /** 默认安全组id列表。 */
-  SecurityGroupIds: string[];
+  SecurityGroupIds?: string[];
   /** 默认入带宽。 */
-  DefaultBandwidthIn: number;
+  DefaultBandwidthIn?: number;
   /** 自定义脚本数据 */
-  UserData: string;
+  UserData?: string;
   /** 系统盘信息。 */
-  SystemDisk: SystemDisk;
+  SystemDisk?: SystemDisk;
   /** 数据盘信息。 */
-  DataDisks: DataDisk[];
+  DataDisks?: DataDisk[];
   /** 是否禁止外网ip */
   DisableWanIp?: number;
 }
@@ -881,35 +881,39 @@ declare interface NetworkInterfaceAttachment {
 /** 网络硬盘上下限数据 */
 declare interface NetworkStorageRange {
   /** 网络带宽上限 */
-  MaxBandwidth: number;
+  MaxBandwidth?: number;
   /** 数据盘上限 */
-  MaxSystemDiskSize: number;
+  MaxSystemDiskSize?: number;
   /** 网络带宽下限 */
-  MinBandwidth: number;
+  MinBandwidth?: number;
   /** 数据盘下限 */
-  MinSystemDiskSize: number;
+  MinSystemDiskSize?: number;
   /** 最大数据盘大小 */
-  MaxDataDiskSize: number;
+  MaxDataDiskSize?: number;
   /** 最小数据盘大小 */
-  MinDataDiskSize: number;
+  MinDataDiskSize?: number;
   /** 建议带宽 */
-  SuggestBandwidth: number;
+  SuggestBandwidth?: number;
   /** 建议硬盘大小 */
-  SuggestDataDiskSize: number;
+  SuggestDataDiskSize?: number;
   /** 建议系统盘大小 */
-  SuggestSystemDiskSize: number;
+  SuggestSystemDiskSize?: number;
   /** Cpu核数峰值 */
-  MaxVcpu: number;
+  MaxVcpu?: number;
   /** Cpu核最小值 */
-  MinVcpu: number;
+  MinVcpu?: number;
   /** 单次请求最大cpu核数 */
-  MaxVcpuPerReq: number;
+  MaxVcpuPerReq?: number;
   /** 带宽步长 */
-  PerBandwidth: number;
+  PerBandwidth?: number;
   /** 数据盘步长 */
-  PerDataDisk: number;
+  PerDataDisk?: number;
   /** 总模块数量 */
-  MaxModuleNum: number;
+  MaxModuleNum?: number;
+  /** 是否支持cbs */
+  CBSSupported?: boolean;
+  /** 磁盘数量限制 */
+  DiskNumLimit?: number;
 }
 
 /** 节点信息 */
@@ -1060,6 +1064,8 @@ declare interface Position {
   City: City;
   /** 实例所在的Region的信息。 */
   RegionInfo: RegionInfo;
+  /** 实例是否支持ipv6 */
+  Ipv6Supported?: boolean | null;
 }
 
 /** 描述cpu,内存等维度的价格 */
@@ -1534,6 +1540,8 @@ declare interface VirtualPrivateCloud {
   PrivateIpAddresses?: string[];
   /** 为弹性网卡指定随机生成的 IPv6 地址数量。 */
   Ipv6AddressCount?: number;
+  /** runInstances接口创建三网ipv6地址使用 */
+  Ipv6SubnetIds?: string[] | null;
 }
 
 /** 私有网络(VPC) 对象。 */
@@ -2677,9 +2685,9 @@ declare interface DescribeModuleRequest {
 
 declare interface DescribeModuleResponse {
   /** 符合条件的模块数量。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 模块详情信息的列表。 */
-  ModuleItemSet: ModuleItem[] | null;
+  ModuleItemSet?: ModuleItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

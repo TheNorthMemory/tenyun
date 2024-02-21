@@ -1416,7 +1416,7 @@ declare interface ChannelCreateFlowByFilesRequest {
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。[点击产看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。[点击查看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
   FlowId?: string | null;
   /** 签署方信息，如角色ID、角色名称等 */
   Approvers?: ApproverItem[] | null;
@@ -1665,7 +1665,7 @@ declare interface ChannelCreatePreparedPersonalEsignResponse {
 declare interface ChannelCreateReleaseFlowRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 待解除的签署流程编号(即原签署流程的编号)。[点击产看流程编号在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
+  /** 待解除的签署流程编号(即原签署流程的编号)。[点击查看流程编号在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
   NeedRelievedFlowId: string;
   /** 解除协议内容, 包括解除理由等信息。 */
   ReliveInfo: RelieveInfo;
@@ -2513,11 +2513,11 @@ declare interface DescribeResourceUrlsByFlowsResponse {
 declare interface DescribeTemplatesRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 合同模板ID，为32位字符串。可以通过生成子客登录链接登录企业控制台, 在企业模板中得到合同模板ID。[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
+  /** 合同模板ID，为32位字符串。可以通过生成子客登录链接登录企业控制台, 在企业模板中得到合同模板ID。[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
   TemplateId?: string;
   /** 查询模板的内容**0**：（默认）模板列表及详情**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息 */
   ContentType?: number;
-  /** 合同模板ID数组，每一个合同模板ID为32位字符串, 最多支持200个模板的批量查询。注意: 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`4. `若传递此参数，分页参数(Limit,Offset)无效`[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
+  /** 合同模板ID数组，每一个合同模板ID为32位字符串, 最多支持200个模板的批量查询。注意: 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`4. `若传递此参数，分页参数(Limit,Offset)无效`[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
   TemplateIds?: string[];
   /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为200。` */
   Limit?: number;

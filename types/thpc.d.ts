@@ -744,7 +744,7 @@ declare interface DescribeQueuesRequest {
 declare interface DescribeQueuesResponse {
   /** 队列概览信息列表。 */
   QueueSet?: QueueOverview[];
-  /** 符合条件的节点数量。 */
+  /** 符合条件的队列数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

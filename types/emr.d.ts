@@ -1292,6 +1292,14 @@ declare interface ScaleOutNodeConfig {
   NodeCount: number;
 }
 
+/** 扩容指定配置组 */
+declare interface ScaleOutServiceConfGroupsInfo {
+  /** 组件版本名称 如 HDFS-2.8.5 */
+  ServiceComponentName?: string;
+  /** 配置组名 如hdfs-core-defaultGroup ConfGroupName参数传入 代表配置组维度 ConfGroupName参数不传 默认 代表集群维度 */
+  ConfGroupName?: string;
+}
+
 /** 集群应用场景以及支持部署组件信息 */
 declare interface SceneSoftwareConfig {
   /** 部署的组件列表。不同的EMR产品版本ProductVersion 对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；填写实例值：hive、flink。 */
@@ -2411,6 +2419,8 @@ declare interface ScaleOutClusterRequest {
   Zone?: string;
   /** 子网，默认是集群创建时的子网 */
   SubnetId?: string;
+  /** 扩容指定配置组 */
+  ScaleOutServiceConfGroupsInfo?: ScaleOutServiceConfGroupsInfo[];
 }
 
 declare interface ScaleOutClusterResponse {

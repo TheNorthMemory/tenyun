@@ -252,6 +252,96 @@ declare interface BinlogItem {
   BinlogId: number;
 }
 
+/** 任务信息 */
+declare interface BizTaskInfo {
+  /** 任务id */
+  ID?: number;
+  /** 用户appid */
+  AppId?: number;
+  /** 集群id */
+  ClusterId?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 延迟执行时间 */
+  DelayTime?: string | null;
+  /** 任务失败信息 */
+  ErrMsg?: string | null;
+  /** 异步任务流id */
+  FlowId?: number;
+  /** 任务输入信息 */
+  Input?: string;
+  /** 实例组id */
+  InstanceGrpId?: string;
+  /** 实例组id */
+  InstanceGroupId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 任务操作对象id */
+  ObjectId?: string;
+  /** 任务操作对象类型 */
+  ObjectType?: string;
+  /** 操作者uin */
+  Operator?: string;
+  /** 任务输出信息 */
+  Output?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 任务类型 */
+  TaskType?: string;
+  /** 触发本任务的父任务ID */
+  TriggerTaskId?: number;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 任务开始时间 */
+  StartTime?: string;
+  /** 任务结束时间 */
+  EndTime?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 任务进度 */
+  Process?: number;
+  /** 修改参数任务信息 */
+  ModifyParamsData?: ModifyParamsData[] | null;
+  /** 创建集群任务信息 */
+  CreateClustersData?: CreateClustersData | null;
+  /** 集群回档任务信息 */
+  RollbackData?: RollbackData | null;
+  /** 实例变配任务信息 */
+  ModifyInstanceData?: ModifyInstanceData | null;
+  /** 手动备份任务信息 */
+  ManualBackupData?: ManualBackupData | null;
+  /** 修改内核版本任务信息 */
+  ModifyDbVersionData?: ModifyDbVersionData | null;
+  /** 集群可用区信息 */
+  ClusterSlaveData?: ClusterSlaveData | null;
+  /** 转换集群日志 */
+  SwitchClusterLogBin?: SwitchClusterLogBin | null;
+  /** 修改实例参数数据 */
+  ModifyInstanceParamsData?: BizTaskModifyParamsData | null;
+  /** 维护时间 */
+  TaskMaintainInfo?: TaskMaintainInfo | null;
+}
+
+/** 实例参数修改任务详情 */
+declare interface BizTaskModifyInstanceParam {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例参数修改任务详情 */
+  ModifyInstanceParamList?: ModifyParamItem[] | null;
+}
+
+/** 修改参数任务数据 */
+declare interface BizTaskModifyParamsData {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群参数修改数据 */
+  ClusterParamList?: ModifyParamItem[] | null;
+  /** 实例参数修改数据 */
+  ModifyInstanceParams?: BizTaskModifyInstanceParam[] | null;
+}
+
 /** 集群实例信息 */
 declare interface ClusterInstanceDetail {
   /** 实例ID */
@@ -300,6 +390,28 @@ declare interface ClusterParamModifyLog {
   ClusterId: string;
   /** 实例ID */
   InstanceId: string;
+}
+
+/** 集群从可用区信息 */
+declare interface ClusterSlaveData {
+  /** 旧主可用区 */
+  OldMasterZone?: string | null;
+  /** 旧从可用区 */
+  OldSlaveZone?: string[] | null;
+  /** 新主可用区 */
+  NewMasterZone?: string | null;
+  /** 新从可用区 */
+  NewSlaveZone?: string[] | null;
+}
+
+/** 创建集群任务信息 */
+declare interface CreateClustersData {
+  /** 实例CPU */
+  Cpu?: number;
+  /** 实例内存 */
+  Memory?: number;
+  /** 集群存储上限 */
+  StorageLimit?: number;
 }
 
 /** 集群信息 */
@@ -1018,10 +1130,48 @@ declare interface LogicBackupConfigInfo {
   LogicCrossRegions?: string[] | null;
 }
 
+/** 手动备份任务信息 */
+declare interface ManualBackupData {
+  /** 备份类型。snapshot-快照备份 */
+  BackupType?: string;
+  /** 备份方式。auto-自动备份，manual-手动 */
+  BackupMethod?: string;
+  /** 备份时间 */
+  SnapshotTime?: string;
+}
+
 /** 参数是否可修改的详细信息 */
 declare interface ModifiableInfo {
   /** 参数是否可被修改, 1:可以 0:不可以 */
   IsModifiable?: number;
+}
+
+/** 修改数据库内核版本任务信息 */
+declare interface ModifyDbVersionData {
+  /** 修改前版本 */
+  OldVersion?: string;
+  /** 修改后版本 */
+  NewVersion?: string;
+  /** 升级方式 */
+  UpgradeType?: string;
+}
+
+/** 实例变配任务信息 */
+declare interface ModifyInstanceData {
+  /** 变配后CPU */
+  Cpu?: number;
+  /** 变配后内存 */
+  Memory?: number;
+  /** 变配后存储上限 */
+  StorageLimit?: number;
+  /** 变配前CPU */
+  OldCpu?: number;
+  /** 变配前内存 */
+  OldMemory?: number;
+  /** 变配前存储上限 */
+  OldStorageLimit?: number;
+  /** 升级方式。升级完成后切换或维护时间内切换 */
+  UpgradeType?: string;
 }
 
 /** 修改的实例参数信息 */
@@ -1032,6 +1182,16 @@ declare interface ModifyParamItem {
   CurrentValue: string;
   /** 参数旧值（只在出参时有用） */
   OldValue?: string | null;
+}
+
+/** 修改参数信息 */
+declare interface ModifyParamsData {
+  /** 参数名 */
+  Name?: string;
+  /** 修改前参数值 */
+  OldValue?: string;
+  /** 修改后参数值 */
+  CurValue?: string;
 }
 
 /** 系统支持的模块 */
@@ -1454,6 +1614,36 @@ declare interface ResourcePackage {
   PackageType?: string | null;
 }
 
+/** 回档任务信息 */
+declare interface RollbackData {
+  /** 实例CPU */
+  Cpu?: number;
+  /** 实例内存 */
+  Memory?: number;
+  /** 集群存储上限 */
+  StorageLimit?: number;
+  /** 原集群id */
+  OriginalClusterId?: string;
+  /** 原集群名 */
+  OriginalClusterName?: string;
+  /** 回档方式 */
+  RollbackStrategy?: string;
+  /** 快照时间 */
+  SnapshotTime?: string;
+  /** 回档到serverlessls集群时最小CPU */
+  MinCpu?: number | null;
+  /** 回档到serverlessls集群时最大CPU */
+  MaxCpu?: number | null;
+  /** 快照ID */
+  SnapShotId?: number | null;
+  /** 回档数据库 */
+  RollbackDatabases?: RollbackDatabase[] | null;
+  /** 回档数据表 */
+  RollbackTables?: RollbackTable[] | null;
+  /** 备份文件名称 */
+  BackupFileName?: string | null;
+}
+
 /** 回滚数据库信息 */
 declare interface RollbackDatabase {
   /** 旧数据库名称 */
@@ -1618,6 +1808,12 @@ declare interface SlowQueriesItem {
   SqlMd5?: string;
 }
 
+/** 转换集群log bin开关 */
+declare interface SwitchClusterLogBin {
+  /** 状态 */
+  Status?: string | null;
+}
+
 /** mysql表权限 */
 declare interface TablePrivileges {
   /** 数据库名 */
@@ -1634,6 +1830,16 @@ declare interface Tag {
   TagKey: string;
   /** 标签值 */
   TagValue: string;
+}
+
+/** TaskMaintainInfo */
+declare interface TaskMaintainInfo {
+  /** 执行开始时间(距离0点的秒数) */
+  MaintainStartTime?: number | null;
+  /** 持续的时间(单位：秒) */
+  MaintainDuration?: number | null;
+  /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
+  MaintainWeekDays?: string[] | null;
 }
 
 /** 参数模板详情 */
@@ -3192,6 +3398,28 @@ declare interface DescribeSupportProxyVersionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTasksRequest {
+  /** 任务开始时间起始值 */
+  StartTimeBegin?: string;
+  /** 任务开始时间结束值 */
+  StartTimeEnd?: string;
+  /** 过滤条件 */
+  Filters?: QueryFilter[];
+  /** 查询列表长度 */
+  Limit?: number;
+  /** 查询列表偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeTasksResponse {
+  /** 任务列表总条数 */
+  TotalCount?: number;
+  /** 任务列表 */
+  TaskList?: BizTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeZonesRequest {
   /** 是否包含虚拟区 */
   IncludeVirtualZones?: boolean;
@@ -4451,6 +4679,8 @@ declare interface Cynosdb {
   DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
   /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */
   DescribeSupportProxyVersion(data: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;
+  /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 查询可售卖地域可用区信息。 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
