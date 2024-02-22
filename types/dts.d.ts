@@ -79,9 +79,9 @@ declare interface CompareColumnItem {
 /** 一致性校验详细信息 */
 declare interface CompareDetailInfo {
   /** 数据不一致的表详情 */
-  Difference: DifferenceDetail | null;
+  Difference?: DifferenceDetail | null;
   /** 跳过校验的表详情 */
-  Skipped: SkippedDetail | null;
+  Skipped?: SkippedDetail | null;
 }
 
 /** 一致性对比对象配置 */
@@ -1561,9 +1561,9 @@ declare interface DescribeCompareReportRequest {
 
 declare interface DescribeCompareReportResponse {
   /** 一致性校验摘要信息 */
-  Abstract: CompareAbstractInfo | null;
+  Abstract?: CompareAbstractInfo | null;
   /** 一致性校验详细信息 */
-  Detail: CompareDetailInfo | null;
+  Detail?: CompareDetailInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

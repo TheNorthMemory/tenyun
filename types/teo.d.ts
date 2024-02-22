@@ -2651,7 +2651,7 @@ declare interface DescribeBillingDataRequest {
   MetricName: string;
   /** 查询时间粒度，取值有：5min：5 分钟粒度；hour：1 小时粒度；day：1 天粒度。 */
   Interval: string;
-  /** 过滤条件，详细的过滤条件取值如下：host 按照【域名】进行过滤。示例值：test.example.com。 类型：String 必选：否proxy-id 按照【四层代理实例 ID】进行过滤。示例值：sid-2rugn89bkla9。 类型：String 必选：否region-id 按照【计费大区】进行过滤。 类型：String 必选：否 可选项如下： CH：中国大陆境内 AF：非洲 AS1：亚太一区 AS2：亚太二区 AS3：亚太三区 EU：欧洲 MidEast：中东 NA：北美 SA：南美 */
+  /** 过滤条件，详细的过滤条件取值如下：host：按照域名进行过滤。示例值：test.example.com。proxy-id：按照四层代理实例 ID 进行过滤。示例值：sid-2rugn89bkla9。region-id：按照计费大区进行过滤。可选项如下： CH：中国大陆境内 AF：非洲 AS1：亚太一区 AS2：亚太二区 AS3：亚太三区 EU：欧洲 MidEast：中东 NA：北美 SA：南美 */
   Filters?: BillingDataFilter[];
 }
 

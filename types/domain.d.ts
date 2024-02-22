@@ -208,6 +208,14 @@ declare interface DomainSimpleInfo {
   RegistrantName: string;
 }
 
+/** 失败预约预释放域名信息 */
+declare interface FailReservedDomainInfo {
+  /** 域名 */
+  Domain?: string | null;
+  /** 预约失败原因 */
+  FailReason?: string | null;
+}
+
 /** 手机号邮箱列表 */
 declare interface PhoneEmailData {
   /** 手机号或者邮箱 */
@@ -232,6 +240,40 @@ declare interface PriceInfo {
   RealPrice: number;
   /** 商品的购买类型，新购，续费，赎回，转入，续费并转入 */
   Operation: string;
+}
+
+/** 查询预释放预约列表域名详情 */
+declare interface ReservedDomainInfo {
+  /** 域名 */
+  Domain?: string;
+  /** 注册时间 */
+  RegTime?: string;
+  /** 到期时间 */
+  ExpireTime?: string;
+  /** 续费时间结束 */
+  RenewEndTime?: string;
+  /** 赎回结束时间 */
+  RestoreEndTime?: string;
+  /** 域名预约结束时间 */
+  ReservedEndTime?: string;
+}
+
+/** 预约预释放域名详情信息 */
+declare interface ReservedPreDomainInfo {
+  /** 域名 */
+  Domain?: string;
+  /** 1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成 */
+  ReservedStatus?: number;
+  /** 域名预定失败原因 */
+  FailReason?: string | null;
+  /** 预计变更所有权时间（仅用于参考，实际时间会存在误差） */
+  ChangeOwnerTime?: string | null;
+  /** 注册时间 */
+  RegTime?: string | null;
+  /** 到期时间 */
+  ExpireTime?: string | null;
+  /** 资源ID，用于删除资源信息 */
+  ResourceId?: string | null;
 }
 
 /** Template数据 */
@@ -440,6 +482,16 @@ declare interface DeletePhoneEmailResponse {
   RequestId?: string;
 }
 
+declare interface DeleteReservedPreDomainInfoRequest {
+  /** 资源ID列表 */
+  ResourceIdList: string[];
+}
+
+declare interface DeleteReservedPreDomainInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTemplateRequest {
   /** 模板ID */
   TemplateId: string;
@@ -582,6 +634,44 @@ declare interface DescribePhoneEmailListResponse {
   RequestId?: string;
 }
 
+declare interface DescribePreDomainListRequest {
+  /** 页码 */
+  Page?: number;
+  /** 条数 */
+  Size?: number;
+}
+
+declare interface DescribePreDomainListResponse {
+  /** 预释放预约列表数据 */
+  ReservedDomainList?: ReservedDomainInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReservedPreDomainInfoRequest {
+  /** 域名,每次最多支持500条域名查询 */
+  DomainList?: string[];
+  /** 状态，用于筛选，可不填写(1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成) */
+  ReservedStatus?: number;
+  /** 根据预约时间排序，仅支持："desc","asc"。 */
+  ReservedTimeSort?: string;
+  /** 条数 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeReservedPreDomainInfoResponse {
+  /** 预释放预约列表 */
+  ReservedPreDomainInfoList?: ReservedPreDomainInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTemplateListRequest {
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -702,6 +792,22 @@ declare interface RenewDomainBatchRequest {
 declare interface RenewDomainBatchResponse {
   /** 操作日志ID。 */
   LogId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReservedPreDomainsRequest {
+  /** 预约预释放域名列表 */
+  DomainList: string[];
+  /** 模版ID */
+  TemplateId: string;
+}
+
+declare interface ReservedPreDomainsResponse {
+  /** 预定成功域名列表 */
+  SucDomainList?: string[];
+  /** 预定失败域名列表 */
+  FailDomainList?: FailReservedDomainInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -837,6 +943,8 @@ declare interface Domain {
   DeleteCustomDnsHost(data: DeleteCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomDnsHostResponse>;
   /** 删除手机邮箱 {@link DeletePhoneEmailRequest} {@link DeletePhoneEmailResponse} */
   DeletePhoneEmail(data: DeletePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePhoneEmailResponse>;
+  /** 合作商删除预定域名信息 {@link DeleteReservedPreDomainInfoRequest} {@link DeleteReservedPreDomainInfoResponse} */
+  DeleteReservedPreDomainInfo(data: DeleteReservedPreDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReservedPreDomainInfoResponse>;
   /** 删除信息模板 {@link DeleteTemplateRequest} {@link DeleteTemplateResponse} */
   DeleteTemplate(data: DeleteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTemplateResponse>;
   /** 批量操作日志详情 {@link DescribeBatchOperationLogDetailsRequest} {@link DescribeBatchOperationLogDetailsResponse} */
@@ -855,6 +963,10 @@ declare interface Domain {
   DescribeDomainSimpleInfo(data: DescribeDomainSimpleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainSimpleInfoResponse>;
   /** 已验证手机邮箱列表 {@link DescribePhoneEmailListRequest} {@link DescribePhoneEmailListResponse} */
   DescribePhoneEmailList(data?: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
+  /** 提前获取域释放域名数据 {@link DescribePreDomainListRequest} {@link DescribePreDomainListResponse} */
+  DescribePreDomainList(data?: DescribePreDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreDomainListResponse>;
+  /** 查询预约预释放域名状态 {@link DescribeReservedPreDomainInfoRequest} {@link DescribeReservedPreDomainInfoResponse} */
+  DescribeReservedPreDomainInfo(data?: DescribeReservedPreDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedPreDomainInfoResponse>;
   /** 获取模板信息 {@link DescribeTemplateRequest} {@link DescribeTemplateResponse} */
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
   /** 信息模板列表 {@link DescribeTemplateListRequest} {@link DescribeTemplateListResponse} */
@@ -869,6 +981,8 @@ declare interface Domain {
   ModifyIntlCustomDnsHost(data: ModifyIntlCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntlCustomDnsHostResponse>;
   /** 批量域名续费 {@link RenewDomainBatchRequest} {@link RenewDomainBatchResponse} */
   RenewDomainBatch(data: RenewDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDomainBatchResponse>;
+  /** 预留预释放域名 {@link ReservedPreDomainsRequest} {@link ReservedPreDomainsResponse} */
+  ReservedPreDomains(data: ReservedPreDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ReservedPreDomainsResponse>;
   /** 发送手机邮箱验证码 {@link SendPhoneEmailCodeRequest} {@link SendPhoneEmailCodeResponse} */
   SendPhoneEmailCode(data: SendPhoneEmailCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendPhoneEmailCodeResponse>;
   /** 域名自动续费 {@link SetDomainAutoRenewRequest} {@link SetDomainAutoRenewResponse} */

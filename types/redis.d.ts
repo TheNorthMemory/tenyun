@@ -1978,8 +1978,10 @@ declare interface DescribeSlowLogRequest {
 declare interface DescribeSlowLogResponse {
   /** 慢查询总数。 */
   TotalCount?: number;
-  /** 慢查询详情。 */
+  /** 该参数存在命名不规范问题，建议用参数InstanceSlowLogDetail取代。慢查询详情。 */
   InstanceSlowlogDetail?: InstanceSlowlogDetail[];
+  /** 慢查询详情。 */
+  InstanceSlowLogDetail?: InstanceSlowlogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
