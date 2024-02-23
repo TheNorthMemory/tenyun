@@ -1116,6 +1116,14 @@ declare interface SubTaskData {
   UpdatedAt?: string;
   /** 任务运行时间，单位ms */
   Runtime?: number;
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 设备名称 */
+  DeviceName?: string | null;
+  /** 通道ID */
+  ChannelId?: string | null;
+  /** 通道名称 */
+  ChannelName?: string | null;
 }
 
 /** 查询复杂任务详情返回结果 */
@@ -1152,6 +1160,14 @@ declare interface TaskData {
   UpdatedAt?: string;
   /** 任务运行时间，单位ms */
   Runtime?: number;
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 设备名称 */
+  DeviceName?: string | null;
+  /** 通道ID */
+  ChannelId?: string | null;
+  /** 通道名称 */
+  ChannelName?: string | null;
 }
 
 /** 时间片段结构体 */
@@ -1307,13 +1323,13 @@ declare interface UpdateRecordBackupTemplateData {
 /** 修改录像上云模板数据结构 */
 declare interface UpdateRecordBackupTemplateModify {
   /** 模板名称（不修改名称时，不需要带该字段） */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  TimeSections?: RecordTemplateTimeSections[] | null;
+  TimeSections?: RecordTemplateTimeSections[];
   /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  DevTimeSections?: RecordTemplateTimeSections[];
   /** 上云倍速（支持1，2，4倍速） */
-  Scale?: number | null;
+  Scale?: number;
 }
 
 /** 修改实时上云录像计划的数据 */
@@ -1547,7 +1563,7 @@ declare interface AddUserDeviceResponse {
 declare interface BatchOperateDeviceRequest {
   /** 设备 ID 数组（从获取设备列表接口ListDevices中获取） */
   DeviceIds: string[];
-  /** 操作命令（enable：启用；disable：禁用；delete：删除） */
+  /** 操作命令（enable：启用；disable：禁用；delete：删除；upgrade：固件升级；reset：恢复出厂设置；reboot：重启） */
   Cmd: string;
 }
 
@@ -2335,12 +2351,16 @@ declare interface ListSubTasksResponse {
 declare interface ListTasksRequest {
   /** 页码，默认为1 */
   PageNumber?: number;
-  /** 每页数量，默认为10 */
+  /** 每页数量，默认为20 */
   PageSize?: number;
-  /** 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，对应任务的Action字段，批量任务操作类型以Batch开头。目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，DeleteUserDevice，DisableDevice，EnableDevice */
+  /** 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，BatchUpgradeDevice，BatchResetDevice,BatchRebootDevice */
   Operation?: string;
-  /** 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-NEW，2-RUNNING，3-COMPLETED，4-FAILED */
+  /** 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-未执行，2-执行中，3-完成，4-取消 */
   Status?: number;
+  /** 开始时间 */
+  BeginTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
 }
 
 declare interface ListTasksResponse {

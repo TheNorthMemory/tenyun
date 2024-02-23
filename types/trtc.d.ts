@@ -1643,7 +1643,7 @@ declare interface StopPublishCdnStreamRequest {
 
 declare interface StopPublishCdnStreamResponse {
   /** 转推任务唯一的String Id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

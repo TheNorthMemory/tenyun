@@ -655,11 +655,11 @@ declare interface InstanceTrafficPackage {
 /** 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。 */
 declare interface InternetAccessible {
   /** 网络计费类型，取值范围：按流量包付费：TRAFFIC_POSTPAID_BY_HOUR按带宽付费： BANDWIDTH_POSTPAID_BY_HOUR */
-  InternetChargeType: string;
+  InternetChargeType?: string;
   /** 公网出带宽上限，单位：Mbps。 */
-  InternetMaxBandwidthOut: number;
+  InternetMaxBandwidthOut?: number;
   /** 是否分配公网 IP。 */
-  PublicIpAssigned: boolean;
+  PublicIpAssigned?: boolean;
 }
 
 /** 描述密钥对信息。 */

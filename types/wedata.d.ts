@@ -278,6 +278,16 @@ declare interface ApproveType {
   Classification: string;
 }
 
+/** aiops基础信息 */
+declare interface AttributeItemDTO {
+  /** key */
+  Key?: string | null;
+  /** value */
+  Value?: string | null;
+  /** 描述 */
+  Description?: string | null;
+}
+
 /** AttributeItemVO参数 */
 declare interface AttributeItemDsVO {
   /** Key值 */
@@ -1852,6 +1862,38 @@ declare interface InstanceInfo {
   CurRunDate: string;
 }
 
+/** 实例生命周期详情 */
+declare interface InstanceLifeCycleOpsDto {
+  /** 任务id */
+  TaskId: string | null;
+  /** 数据时间 */
+  CurRunDate: string | null;
+  /** 实例生命次数 */
+  LifeRound: number | null;
+  /** 运行类型 重跑/补录/周期/非周期 */
+  RunType: string | null;
+  /** 重跑次数 */
+  Tries: number | null;
+  /** 实例生命周期 */
+  InstanceLifeDetailDtoList: InstanceLifeDetailDto[] | null;
+  /** Runner运行状态 */
+  RunnerState: string | null;
+  /** 错误码 */
+  ErrorDesc: string | null;
+  /** 错误告警级别 */
+  ErrorCodeLevel: string | null;
+  /** 实例日志简略信息 */
+  InstanceLogListOpsDto: InstanceLogInfo | null;
+}
+
+/** 实例生命周期detail */
+declare interface InstanceLifeDetailDto {
+  /** 实例状态 */
+  State: string | null;
+  /** 该状态开始时间 */
+  StartTime: string | null;
+}
+
 /** 离线运维实例列表 */
 declare interface InstanceList {
   /** 耗费时间 */
@@ -1930,6 +1972,8 @@ declare interface InstanceLogInfo {
   InstanceStatus?: string | null;
   /** 实例代码文件，为空表示对应代码文件不存在，可能是因为执行机未升级/对应类型任务无代码。 */
   CodeFileName?: string | null;
+  /** 扩展属性 */
+  ExtensionInfo?: AttributeItemDTO[] | null;
 }
 
 /** 实例日志信息详情 */
@@ -2092,6 +2136,18 @@ declare interface InstanceOpsDto {
   ExecutorGroupId?: string | null;
   /** 资源组名称 */
   ExecutorGroupName?: string | null;
+  /** 关联实例信息。 */
+  RelatedInstanceList?: InstanceOpsDto[] | null;
+  /** 关联实例信息数量，不和RelatedInstanceList强关联。 */
+  RelatedInstanceSize?: number | null;
+  /** ownerId */
+  OwnerId?: string | null;
+  /** 用户id */
+  UserId?: string | null;
+  /** 实例生命周期 */
+  InstanceLifeCycleOpsDto?: InstanceLifeCycleOpsDto | null;
+  /** 自动重试次数 */
+  RetryAttempts?: number | null;
 }
 
 /** 任务运行历史分页记录 */

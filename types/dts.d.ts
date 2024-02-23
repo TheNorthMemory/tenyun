@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 数据库不一致的详情，mongodb业务用到 */
+declare interface AdvancedObjectsItem {
+  /** 对象类型,可能得值有：account,index,shardkey,schema */
+  ObjectType?: string | null;
+  /** 源端分块 */
+  SrcChunk?: string | null;
+  /** 目标端分块 */
+  DstChunk?: string | null;
+  /** 源端值 */
+  SrcItem?: string | null;
+  /** 目标端值 */
+  DstItem?: string | null;
+}
+
 /** 检查步骤 */
 declare interface CheckStep {
   /** 步骤编号 */
@@ -82,6 +96,12 @@ declare interface CompareDetailInfo {
   Difference?: DifferenceDetail | null;
   /** 跳过校验的表详情 */
   Skipped?: SkippedDetail | null;
+  /** 数据库不一致的详情，mongodb业务用到 */
+  DifferenceAdvancedObjects?: DifferenceAdvancedObjectsDetail | null;
+  /** 数据不一致的详情，mongodb业务用到 */
+  DifferenceData?: DifferenceDataDetail | null;
+  /** 数据行不一致的详情，mongodb业务用到 */
+  DifferenceRow?: DifferenceRowDetail | null;
 }
 
 /** 一致性对比对象配置 */
@@ -378,6 +398,40 @@ declare interface DetailCheckItem {
   SkipInfo?: string | null;
 }
 
+/** 数据库不一致的详情，mongodb业务用到 */
+declare interface DifferenceAdvancedObjectsDetail {
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 不一致详情 */
+  Items?: AdvancedObjectsItem[] | null;
+}
+
+/** 数据不一致详情 */
+declare interface DifferenceData {
+  /** 数据库名 */
+  Db?: string | null;
+  /** 集合 */
+  Table?: string | null;
+  /** 源端ID */
+  SrcChunk?: string | null;
+  /** 目标端ID */
+  DstChunk?: string | null;
+  /** 源端值 */
+  SrcItem?: string | null;
+  /** 目标端值 */
+  DstItem?: string | null;
+  /** 更新时间 */
+  UpdatedAt?: string | null;
+}
+
+/** mongodb数据不一致性详情 */
+declare interface DifferenceDataDetail {
+  /** 总数 */
+  TotalCount?: number | null;
+  /** mongo数据不一致详细列表 */
+  Items?: DifferenceData[] | null;
+}
+
 /** 数据不一致的表详情 */
 declare interface DifferenceDetail {
   /** 数据不一致的表数量 */
@@ -408,6 +462,14 @@ declare interface DifferenceItem {
   CostTime?: number | null;
   /** 完成时间 */
   FinishedAt?: string | null;
+}
+
+/** mongodb行数校验不一致性详情结果 */
+declare interface DifferenceRowDetail {
+  /** 不一致总数 */
+  TotalCount?: number | null;
+  /** 不一致列表 */
+  Items?: RowsCountDifference[] | null;
 }
 
 /** 订阅任务的kafka分区规则。符合库名和表名正则表达式的数据将按照RuleType计算该条数据将被投递的kafka分区。如果配置了多个规则，将按照配置的顺序，第一条命中的规则生效。 */
@@ -842,6 +904,18 @@ declare interface RoleItem {
   RoleName?: string | null;
   /** 迁移后的角色名称 */
   NewRoleName?: string | null;
+}
+
+/** mongodb行校验不一致详细信息 */
+declare interface RowsCountDifference {
+  /** 数据库名 */
+  Db?: string | null;
+  /** 集合 */
+  Table?: string | null;
+  /** 源端行数 */
+  SrcCount?: number | null;
+  /** 目标端行数 */
+  DstCount?: number | null;
 }
 
 /** 跳过校验的表详情 */

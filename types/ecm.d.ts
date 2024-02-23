@@ -2801,7 +2801,7 @@ declare interface DescribePriceRunInstanceRequest {
 
 declare interface DescribePriceRunInstanceResponse {
   /** 实例价格信息 */
-  InstancePrice: InstancesPrice;
+  InstancePrice?: InstancesPrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
