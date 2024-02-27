@@ -242,6 +242,8 @@ declare interface AlarmPolicy {
   Tags?: Tag[] | null;
   /** 是否支持告警标签 */
   IsSupportAlarmTag?: number | null;
+  /** 多标签交/并集关系 */
+  TagOperation?: string | null;
 }
 
 /** 告警策略指标触发条件 */
@@ -2331,6 +2333,8 @@ declare interface BindingPolicyTagRequest {
   EbEventFlag?: number;
   /** 事件配置的告警 */
   EbSubject?: string;
+  /** 标识标签取交/并集关系 */
+  TagOperation?: string;
 }
 
 declare interface BindingPolicyTagResponse {

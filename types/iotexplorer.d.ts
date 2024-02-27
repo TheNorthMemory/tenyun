@@ -1172,6 +1172,20 @@ declare interface DescribeDeviceDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceFirmWareRequest {
+  /** 产品ID。 */
+  ProductId: string;
+  /** 设备名称。 */
+  DeviceName: string;
+}
+
+declare interface DescribeDeviceFirmWareResponse {
+  /** 固件信息 */
+  Data: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceLocationSolveRequest {
   /** 产品ID */
   ProductId: string;
@@ -2343,6 +2357,8 @@ declare interface Iotexplorer {
   DescribeDeviceData(data: DescribeDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataResponse>;
   /** 获取设备历史数据 {@link DescribeDeviceDataHistoryRequest} {@link DescribeDeviceDataHistoryResponse} */
   DescribeDeviceDataHistory(data: DescribeDeviceDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataHistoryResponse>;
+  /** 获取设备固件信息 {@link DescribeDeviceFirmWareRequest} {@link DescribeDeviceFirmWareResponse} */
+  DescribeDeviceFirmWare(data: DescribeDeviceFirmWareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmWareResponse>;
   /** 获取实时位置解析 {@link DescribeDeviceLocationSolveRequest} {@link DescribeDeviceLocationSolveResponse} */
   DescribeDeviceLocationSolve(data: DescribeDeviceLocationSolveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceLocationSolveResponse>;
   /** 获取设备位置列表 {@link DescribeDevicePositionListRequest} {@link DescribeDevicePositionListResponse} */

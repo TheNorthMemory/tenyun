@@ -263,21 +263,25 @@ declare interface HostResource {
 /** 高性能计算集群 */
 declare interface HpcClusterInfo {
   /** 高性能计算集群ID */
-  HpcClusterId: string;
+  HpcClusterId?: string;
   /** 高性能计算集群名 */
-  Name: string | null;
+  Name?: string | null;
   /** 高性能计算集群备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 集群下设备容量 */
-  CvmQuotaTotal: number;
+  CvmQuotaTotal?: number;
   /** 集群所在可用区 */
-  Zone: string;
+  Zone?: string;
   /** 集群当前已有设备量 */
-  CurrentNum: number;
+  CurrentNum?: number;
   /** 集群创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 集群内实例ID列表 */
-  InstanceIds: string[] | null;
+  InstanceIds?: string[] | null;
+  /** 高性能计算集群类型。 */
+  HpcClusterType?: string | null;
+  /** 高性能计算集群对应的业务场景标识，当前只支持CDC。 */
+  HpcClusterBusinessId?: string | null;
 }
 
 /** 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。 */
@@ -1259,6 +1263,10 @@ declare interface CreateHpcClusterRequest {
   Name: string;
   /** 高性能计算集群备注。 */
   Remark?: string;
+  /** 高性能计算集群类型。 */
+  HpcClusterType?: string;
+  /** 高性能计算集群对应的业务场景标识，当前只支持CDC。 */
+  HpcClusterBusinessId?: string;
 }
 
 declare interface CreateHpcClusterResponse {
@@ -1476,6 +1484,16 @@ declare interface DeleteImagesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteInstancesActionTimerRequest {
+  /** 定时任务ID列表，可以通过DescribeInstancesActionTimer接口查询。只能删除未执行的定时任务。 */
+  ActionTimerIds: string[];
+}
+
+declare interface DeleteInstancesActionTimerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteKeyPairsRequest {
   /** 一个或多个待操作的密钥对ID。每次请求批量密钥对的上限为100。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。 */
   KeyIds: string[];
@@ -1621,6 +1639,10 @@ declare interface DescribeHpcClustersRequest {
   Offset?: number;
   /** 本次请求量, 默认值20。 */
   Limit?: number;
+  /** 高性能计算集群类型。 */
+  HpcClusterType?: string;
+  /** 高性能计算集群对应的业务场景标识，当前只支持CDC。 */
+  HpcClusterBusinessId?: string;
 }
 
 declare interface DescribeHpcClustersResponse {
@@ -1730,6 +1752,28 @@ declare interface DescribeInstanceVncUrlRequest {
 declare interface DescribeInstanceVncUrlResponse {
   /** 实例的管理终端地址。 */
   InstanceVncUrl: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstancesActionTimerRequest {
+  /** 定时任务ID列表。 */
+  ActionTimerIds?: string[];
+  /** 按照一个或者多个实例ID查询。 */
+  InstanceIds?: string[];
+  /** 定时任务执行时间，格式如：2018-05-01 19:00:00，必须大于当前时间5分钟。 */
+  TimerAction?: string;
+  /** 执行时间的结束范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
+  EndActionTime?: string;
+  /** 执行时间的开始范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
+  StartActionTime?: string;
+  /** 定时任务状态列表。UNDO：未执行DOING：正在执行DONE：执行完成。 */
+  StatusList?: string[];
+}
+
+declare interface DescribeInstancesActionTimerResponse {
+  /** 定时任务信息列表。 */
+  ActionTimers: ActionTimer[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2084,6 +2128,20 @@ declare interface ImportImageRequest {
 }
 
 declare interface ImportImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportInstancesActionTimerRequest {
+  /** 实例id列表，可以通过DescribeInstances接口查询到。 */
+  InstanceIds: string[];
+  /** 定时器任务信息，目前仅支持定时销毁。 */
+  ActionTimer: ActionTimer;
+}
+
+declare interface ImportInstancesActionTimerResponse {
+  /** 定时器id列表 */
+  ActionTimerIds: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2886,6 +2944,8 @@ declare interface Cvm {
   DeleteHpcClusters(data: DeleteHpcClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHpcClustersResponse>;
   /** 删除镜像 {@link DeleteImagesRequest} {@link DeleteImagesResponse} */
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
+  /** 删除定时任务 {@link DeleteInstancesActionTimerRequest} {@link DeleteInstancesActionTimerResponse} */
+  DeleteInstancesActionTimer(data: DeleteInstancesActionTimerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancesActionTimerResponse>;
   /** 删除密钥对 {@link DeleteKeyPairsRequest} {@link DeleteKeyPairsResponse} */
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
   /** 删除实例启动模板 {@link DeleteLaunchTemplateRequest} {@link DeleteLaunchTemplateResponse} */
@@ -2924,6 +2984,8 @@ declare interface Cvm {
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
   /** 查看实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 查询定时任务信息 {@link DescribeInstancesActionTimerRequest} {@link DescribeInstancesActionTimerResponse} */
+  DescribeInstancesActionTimer(data?: DescribeInstancesActionTimerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesActionTimerResponse>;
   /** 查询实例可调整配置 {@link DescribeInstancesModificationRequest} {@link DescribeInstancesModificationResponse} */
   DescribeInstancesModification(data: DescribeInstancesModificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesModificationResponse>;
   /** 查询实例操作限制 {@link DescribeInstancesOperationLimitRequest} {@link DescribeInstancesOperationLimitResponse} */
@@ -2960,6 +3022,8 @@ declare interface Cvm {
   ExportImages(data: ExportImagesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportImagesResponse>;
   /** 外部镜像导入 {@link ImportImageRequest} {@link ImportImageResponse} */
   ImportImage(data: ImportImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImportImageResponse>;
+  /** 导入定时任务 {@link ImportInstancesActionTimerRequest} {@link ImportInstancesActionTimerResponse} */
+  ImportInstancesActionTimer(data: ImportInstancesActionTimerRequest, config?: AxiosRequestConfig): AxiosPromise<ImportInstancesActionTimerResponse>;
   /** 导入密钥对 {@link ImportKeyPairRequest} {@link ImportKeyPairResponse} */
   ImportKeyPair(data: ImportKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyPairResponse>;
   /** 创建预留实例询价 {@link InquirePricePurchaseReservedInstancesOfferingRequest} {@link InquirePricePurchaseReservedInstancesOfferingResponse} */

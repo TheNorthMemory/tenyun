@@ -197,27 +197,27 @@ declare interface ImageMsgContent {
 /** 成员记录信息。 */
 declare interface MemberRecord {
   /** 用户ID。 */
-  UserId: string;
+  UserId?: string;
   /** 用户名称。 */
-  UserName: string;
+  UserName?: string;
   /** 在线时长，单位秒。 */
-  PresentTime: number;
+  PresentTime?: number;
   /** 是否开启摄像头。 */
-  Camera: number;
+  Camera?: number;
   /** 是否开启麦克风。 */
-  Mic: number;
+  Mic?: number;
   /** 是否禁言。 */
-  Silence: number;
+  Silence?: number;
   /** 回答问题数量。 */
-  AnswerQuestions: number;
+  AnswerQuestions?: number;
   /** 举手数量。 */
-  HandUps: number;
+  HandUps?: number;
   /** 首次进入房间的unix时间戳。 */
-  FirstJoinTimestamp: number;
+  FirstJoinTimestamp?: number;
   /** 最后一次退出房间的unix时间戳。 */
-  LastQuitTimestamp: number;
+  LastQuitTimestamp?: number;
   /** 奖励次数。 */
-  Rewords: number;
+  Rewords?: number;
   /** 用户IP。 */
   IPAddress?: string;
   /** 用户位置信息。 */
@@ -572,13 +572,13 @@ declare interface BatchRegisterResponse {
 
 declare interface BatchUserRequest {
   /** 低代码互动课堂的SdkAppId。 */
-  SdkAppId: number | null;
+  SdkAppId: number;
   /** 用户名称。 */
-  Name?: string | null;
-  /** 用户在客户系统的Id，需要在同一应用下唯一。 */
-  OriginId?: string | null;
+  Name?: string;
+  /** 用户在客户系统的Id，需要在同一应用下唯一。入参为空时默认赋值为UserId。 */
+  OriginId?: string;
   /** 用户头像。 */
-  Avatar?: string | null;
+  Avatar?: string;
 }
 
 declare interface BindDocumentToRoomRequest {
@@ -1390,9 +1390,9 @@ declare interface LoginOriginIdRequest {
 
 declare interface LoginOriginIdResponse {
   /** 用户Id。 */
-  UserId: string;
+  UserId?: string;
   /** 登录/注册成功后返回登录态token。有效期7天。 */
-  Token: string;
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

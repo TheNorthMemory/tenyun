@@ -160,7 +160,7 @@ declare interface ChannelBillUsageDetail {
   FlowName?: string;
   /** 合同流程当前的签署状态, 会存在下列的状态值**INIT**: 合同创建**PART**: 合同签署中(至少有一个签署方已经签署)**REJECT**: 合同拒签**ALL**: 合同签署完成**DEADLINE**: 合同流签(合同过期)**CANCEL**: 合同撤回**RELIEVED**: 解除协议（已解除）**WILLEXPIRE**: 合同即将过期**EXCEPTION**: 合同异常 */
   FlowStatus?: string;
-  /** 查询的套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询**NoAuthSign**: 形式签 */
+  /** 查询的套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
   QuotaType?: string;
   /** 合同使用量注: `如果消耗类型是撤销返还，此值为负值代表返还的合同数量` */
   UseCount?: number;
@@ -1277,7 +1277,7 @@ declare interface ChannelCreateBatchSignUrlRequest {
   IdCardNumber?: string;
   /** 通知用户方式：**NONE** : 不通知（默认）**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号） */
   NotifyType?: string;
-  /** 本次需要批量签署的合同流程ID列表。可以不传, 如不传则是发给对方的所有待签署合同流程。 */
+  /** 批量签署的合同流程ID数组。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
   FlowIds?: string[];
   /** 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。暂时仅支持给`自建应用集成企业` 生成员工批签链接，不支持子客企业。 */
   OrganizationName?: string;
@@ -2237,7 +2237,7 @@ declare interface CreateFlowsByTemplatesRequest {
   Agent: Agent;
   /** 要创建的合同信息列表，最多支持一次创建20个合同 */
   FlowInfos: FlowInfo[];
-  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注:`如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到` */
+  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作注:`如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到` */
   NeedPreview?: boolean;
   /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
   PreviewType?: number;

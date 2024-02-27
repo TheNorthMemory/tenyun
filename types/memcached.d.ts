@@ -57,9 +57,9 @@ declare interface InstanceListInfo {
 /** 标签信息 */
 declare interface TagInfo {
   /** 标签键 */
-  TagKey: string;
+  TagKey: string | null;
   /** 标签值 */
-  TagValue?: string;
+  TagValue?: string | null;
 }
 
 declare interface DescribeInstancesRequest {

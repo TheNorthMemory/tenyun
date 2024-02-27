@@ -2836,6 +2836,20 @@ declare interface DescribeClusterDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterInstanceGroupsRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterInstanceGroupsResponse {
+  /** 实例组个数 */
+  TotalCount?: number;
+  /** 实例组列表 */
+  InstanceGroupInfoList?: CynosdbInstanceGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterInstanceGrpsRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4625,6 +4639,8 @@ declare interface Cynosdb {
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 查询数据库列表 {@link DescribeClusterDetailDatabasesRequest} {@link DescribeClusterDetailDatabasesResponse} */
   DescribeClusterDetailDatabases(data: DescribeClusterDetailDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailDatabasesResponse>;
+  /** 查询集群实例组 {@link DescribeClusterInstanceGroupsRequest} {@link DescribeClusterInstanceGroupsResponse} */
+  DescribeClusterInstanceGroups(data: DescribeClusterInstanceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGroupsResponse>;
   /** 查询实例组（废弃） {@link DescribeClusterInstanceGrpsRequest} {@link DescribeClusterInstanceGrpsResponse} */
   DescribeClusterInstanceGrps(data: DescribeClusterInstanceGrpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGrpsResponse>;
   /** 查询参数修改记录 {@link DescribeClusterParamLogsRequest} {@link DescribeClusterParamLogsResponse} */

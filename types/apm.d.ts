@@ -247,11 +247,11 @@ declare interface CreateApmInstanceRequest {
   Name: string;
   /** 实例描述信息 */
   Description?: string;
-  /** Trace数据保存时长 */
+  /** Trace数据保存时长，单位为天默认存储为3天 */
   TraceDuration?: number;
   /** 标签列表 */
   Tags?: ApmTag[];
-  /** 实例上报额度值 */
+  /** 实例上报额度值，默认赋值为0表示不限制上报额度 */
   SpanDailyCounters?: number;
   /** 实例的计费模式 */
   PayMode?: number;
