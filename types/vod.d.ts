@@ -1472,7 +1472,7 @@ declare interface AudioTemplateInfo {
   Bitrate: number;
   /** 音频流的采样率，可选值：16000，仅当 Codec 为 pcm16 时可选。320004410048000单位：Hz。 */
   SampleRate: number;
-  /** 音频通道方式，可选值：1：单通道2：双通道6：立体声当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。默认值：2。 */
+  /** 音频通道，可选值：1：单通道2：双通道6：立体声0：音频声道数和原始音频保持一致当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。默认值：2。 */
   AudioChannel?: number;
 }
 
@@ -1484,7 +1484,7 @@ declare interface AudioTemplateInfoForUpdate {
   Bitrate?: number;
   /** 音频流的采样率，可选值：16000，仅当 Codec 为 pcm16 时可选。320004410048000单位：Hz。 */
   SampleRate?: number;
-  /** 音频通道方式，可选值：1：单通道2：双通道6：立体声当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。 */
+  /** 音频通道，可选值：1：单通道2：双通道6：立体声0：音频声道数和原始音频保持一致当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。 */
   AudioChannel?: number;
 }
 

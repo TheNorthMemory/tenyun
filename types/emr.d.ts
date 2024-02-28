@@ -72,6 +72,24 @@ declare interface AutoScaleRecord {
   RetryInfo?: string | null;
 }
 
+/** 弹性扩缩容规格配置 */
+declare interface AutoScaleResourceConf {
+  /** 配置ID。 */
+  Id?: number | null;
+  /** 集群实例ID。 */
+  ClusterId?: number;
+  /** 自动扩缩容保留最小实例数。 */
+  ScaleLowerBound?: number;
+  /** 自动扩缩容最大实例数。 */
+  ScaleUpperBound?: number;
+  /** 扩容规则类型，1为按负载指标扩容规则，2为按时间扩容规则 */
+  StrategyType?: number;
+  /** 下次能可扩容时间。 */
+  NextTimeCanScale?: number | null;
+  /** 优雅缩容开关 */
+  GraceDownFlag?: boolean | null;
+}
+
 /** 引导脚本 */
 declare interface BootstrapAction {
   /** 脚本位置，支持cos上的文件，且只支持https协议。 */
@@ -318,6 +336,14 @@ declare interface CustomServiceDefine {
   Value?: string;
 }
 
+/** 弹性扩缩容按天重复任务描述 */
+declare interface DayRepeatStrategy {
+  /** 重复任务执行的具体时刻，例如"01:02:00" */
+  ExecuteAtTimeOfDay: string | null;
+  /** 每隔Step天执行一次 */
+  Step: number | null;
+}
+
 /** 共用组件信息 */
 declare interface DependService {
   /** 共用组件名 */
@@ -556,6 +582,18 @@ declare interface Filters {
   Values: string[];
 }
 
+/** 集群所有伸缩组全局参数信息 */
+declare interface GroupGlobalConfs {
+  /** 伸缩组信息 */
+  GroupGlobalConf?: AutoScaleResourceConf | null;
+  /** 当前伸缩组扩容出来的节点数量。 */
+  CurrentNodes?: number | null;
+  /** 当前伸缩组扩容出来的后付费节点数量。 */
+  CurrentPostPaidNodes?: number | null;
+  /** 当前伸缩组扩容出来的竞价实例节点数量。 */
+  CurrentSpotPaidNodes?: number | null;
+}
+
 /** Hive查询详情 */
 declare interface HiveQuery {
   /** 查询语句 */
@@ -762,6 +800,14 @@ declare interface ModifyResourceTags {
   ModifyTags?: Tag[];
 }
 
+/** 定时伸缩每月重复任务策略 */
+declare interface MonthRepeatStrategy {
+  /** 重复任务执行的具体时刻，例如"01:02:00" */
+  ExecuteAtTimeOfDay: string | null;
+  /** 每月中的天数时间段描述，长度只能为2，例如[2,10]表示每月2-10号。 */
+  DaysOfMonthRange: number[] | null;
+}
+
 /** 多云盘参数 */
 declare interface MultiDisk {
   /** 云盘类型CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_HSSD：表示增强型SSD云硬盘。 */
@@ -940,6 +986,12 @@ declare interface NodeResourceSpec {
   DataDisk?: DiskSpecInfo[] | null;
   /** 本地数据盘 */
   LocalDataDisk?: DiskSpecInfo[] | null;
+}
+
+/** 弹性扩缩容执行一次规则上下文 */
+declare interface NotRepeatStrategy {
+  /** 该次任务执行的具体完整时间，格式为"2020-07-13 00:00:00" */
+  ExecuteAt: string | null;
 }
 
 /** 操作范围 */
@@ -1234,6 +1286,22 @@ declare interface RenewInstancesInfo {
   StorageType: number;
 }
 
+/** 定时伸缩任务策略 */
+declare interface RepeatStrategy {
+  /** 取值范围"DAY","DOW","DOM","NONE"，分别表示按天重复、按周重复、按月重复和一次执行。 */
+  RepeatType: string;
+  /** 按天重复规则，当RepeatType为"DAY"时有效 */
+  DayRepeat?: DayRepeatStrategy | null;
+  /** 按周重复规则，当RepeatType为"DOW"时有效 */
+  WeekRepeat?: WeekRepeatStrategy | null;
+  /** 按月重复规则，当RepeatType为"DOM"时有效 */
+  MonthRepeat?: MonthRepeatStrategy | null;
+  /** 一次执行规则，当RepeatType为"NONE"时有效 */
+  NotRepeat?: NotRepeatStrategy | null;
+  /** 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。 */
+  Expire?: string | null;
+}
+
 /** 资源详情 */
 declare interface Resource {
   /** 节点规格描述，如CVM.SA2。 */
@@ -1394,6 +1462,50 @@ declare interface Tag {
   TagValue?: string;
 }
 
+/** 时间扩缩容规则 */
+declare interface TimeAutoScaleStrategy {
+  /** 策略名字，集群内唯一。 */
+  StrategyName: string | null;
+  /** 策略触发后的冷却时间，该段时间内，将不能触发弹性扩缩容。 */
+  IntervalTime: number | null;
+  /** 扩缩容动作，1表示扩容，2表示缩容。 */
+  ScaleAction: number | null;
+  /** 扩缩容数量。 */
+  ScaleNum: number | null;
+  /** 规则状态，1表示有效，2表示无效，3表示暂停。 */
+  StrategyStatus: number | null;
+  /** 规则优先级，越小越高。 */
+  Priority: number | null;
+  /** 当多条规则同时触发，其中某些未真正执行时，在该时间范围内，将会重试。 */
+  RetryValidTime: number | null;
+  /** 时间扩缩容重复策略 */
+  RepeatStrategy: RepeatStrategy | null;
+  /** 策略唯一ID。 */
+  StrategyId?: number | null;
+  /** 优雅缩容开关 */
+  GraceDownFlag?: boolean | null;
+  /** 优雅缩容等待时间 */
+  GraceDownTime?: number | null;
+  /** 绑定标签列表 */
+  Tags?: Tag[] | null;
+  /** 预设配置组 */
+  ConfigGroupAssigned?: string | null;
+  /** 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。"DEFAULT"表示默认方式，与"INSTANCE"意义相同。"INSTANCE"表示按照节点计算，默认方式。"CPU"表示按照机器的核数计算。"MEMORYGB"表示按照机器内存数计算。 */
+  MeasureMethod?: string | null;
+  /** 销毁策略, "DEFAULT",默认销毁策略，由缩容规则触发缩容，"TIMING"表示定时销毁 */
+  TerminatePolicy?: string | null;
+  /** 最长使用时间， 秒数，最短1小时，最长24小时 */
+  MaxUse?: number | null;
+  /** 节点部署服务列表。 */
+  SoftDeployInfo?: number[] | null;
+  /** 启动进程列表。 */
+  ServiceNodeInfo?: number[] | null;
+  /** 补偿扩容，0表示不开启，1表示开启 */
+  CompensateFlag?: number | null;
+  /** 伸缩组id */
+  GroupId?: number | null;
+}
+
 /** 集群节点拓扑信息 */
 declare interface TopologyInfo {
   /** 可用区ID */
@@ -1474,6 +1586,14 @@ declare interface VirtualPrivateCloud {
   VpcId: string;
   /** Subnet ID */
   SubnetId: string;
+}
+
+/** 定时扩容每周重复任务策略 */
+declare interface WeekRepeatStrategy {
+  /** 重复任务执行的具体时刻，例如"01:02:00" */
+  ExecuteAtTimeOfDay: string | null;
+  /** 每周几的数字描述，例如，[1,3,4]表示每周周一、周三、周四。 */
+  DaysOfWeek: number[] | null;
 }
 
 /** Yarn 运行的Application信息 */
@@ -1596,6 +1716,20 @@ declare interface ZoneResourceConfiguration {
   AllNodeResourceSpec?: AllNodeResourceSpec | null;
   /** 如果是单可用区，ZoneTag可以不用填， 如果是双AZ部署，第一个可用区ZoneTag选择master，第二个可用区ZoneTag选择standby，如果是三AZ部署，第一个可用区ZoneTag选择master，第二个可用区ZoneTag选择standby，第三个可用区ZoneTag选择third-party，取值范围： master standby third-party */
   ZoneTag?: string | null;
+}
+
+declare interface AddMetricScaleStrategyRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 1表示按负载规则扩容，2表示按时间规则扩容。 */
+  StrategyType: number;
+  /** 按时间扩缩容的规则。 */
+  TimeAutoScaleStrategy?: TimeAutoScaleStrategy;
+}
+
+declare interface AddMetricScaleStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface AddUsersForUserManagerRequest {
@@ -1738,6 +1872,22 @@ declare interface CreateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAutoScaleStrategyRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 自动扩缩容规则类型，1表示按照负载指标扩缩容，2表示按照时间规则扩缩容。 */
+  StrategyType: number;
+  /** 规则ID。 */
+  StrategyId: number;
+  /** 伸缩组Id */
+  GroupId?: number;
+}
+
+declare interface DeleteAutoScaleStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteUserManagerUserListRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -1752,6 +1902,20 @@ declare interface DeleteUserManagerUserListRequest {
 }
 
 declare interface DeleteUserManagerUserListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAutoScaleGroupGlobalConfRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeAutoScaleGroupGlobalConfResponse {
+  /** 集群所有伸缩组全局信息 */
+  GroupGlobalConfs?: GroupGlobalConfs[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1772,6 +1936,20 @@ declare interface DescribeAutoScaleRecordsResponse {
   TotalCount?: number;
   /** 记录列表。 */
   RecordList?: AutoScaleRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAutoScaleStrategiesRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 伸缩组id */
+  GroupId?: number;
+}
+
+declare interface DescribeAutoScaleStrategiesResponse {
+  /** 按时间伸缩规则 */
+  TimeBasedAutoScaleStrategies?: TimeAutoScaleStrategy[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2258,6 +2436,22 @@ declare interface InquiryPriceUpdateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAutoScaleStrategyRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 自动扩缩容规则类型，1表示按负载指标扩缩容，2表示按时间扩缩容。 */
+  StrategyType: number;
+  /** 按时间扩缩容的规则。 */
+  TimeAutoScaleStrategies?: TimeAutoScaleStrategy[];
+  /** 伸缩组Id */
+  GroupId?: number;
+}
+
+declare interface ModifyAutoScaleStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyResourcePoolsRequest {
   /** emr集群id */
   InstanceId: string;
@@ -2577,16 +2771,24 @@ declare interface TerminateTasksResponse {
 /** {@link Emr 弹性 MapReduce} */
 declare interface Emr {
   (): Versions;
+  /** 添加扩缩容负载规则 {@link AddMetricScaleStrategyRequest} {@link AddMetricScaleStrategyResponse} */
+  AddMetricScaleStrategy(data: AddMetricScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<AddMetricScaleStrategyResponse>;
   /** 新增用户列表 {@link AddUsersForUserManagerRequest} {@link AddUsersForUserManagerResponse} */
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
   /** 创建EMR集群实例 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建EMR实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
+  /** 删除自动扩缩容规则 {@link DeleteAutoScaleStrategyRequest} {@link DeleteAutoScaleStrategyResponse} */
+  DeleteAutoScaleStrategy(data: DeleteAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScaleStrategyResponse>;
   /** 删除用户列表 {@link DeleteUserManagerUserListRequest} {@link DeleteUserManagerUserListResponse} */
   DeleteUserManagerUserList(data: DeleteUserManagerUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserManagerUserListResponse>;
+  /** 获取伸缩组全局配置 {@link DescribeAutoScaleGroupGlobalConfRequest} {@link DescribeAutoScaleGroupGlobalConfResponse} */
+  DescribeAutoScaleGroupGlobalConf(data: DescribeAutoScaleGroupGlobalConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleGroupGlobalConfResponse>;
   /** 获取自动扩缩容记录 {@link DescribeAutoScaleRecordsRequest} {@link DescribeAutoScaleRecordsResponse} */
   DescribeAutoScaleRecords(data: DescribeAutoScaleRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleRecordsResponse>;
+  /** 获取自动扩缩容规则 {@link DescribeAutoScaleStrategiesRequest} {@link DescribeAutoScaleStrategiesResponse} */
+  DescribeAutoScaleStrategies(data: DescribeAutoScaleStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleStrategiesResponse>;
   /** 查询集群节点信息 {@link DescribeClusterNodesRequest} {@link DescribeClusterNodesResponse} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
   /** 查询账户的CVM配额 {@link DescribeCvmQuotaRequest} {@link DescribeCvmQuotaResponse} */
@@ -2623,6 +2825,8 @@ declare interface Emr {
   InquiryPriceScaleOutInstance(data: InquiryPriceScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceScaleOutInstanceResponse>;
   /** 变配询价 {@link InquiryPriceUpdateInstanceRequest} {@link InquiryPriceUpdateInstanceResponse} */
   InquiryPriceUpdateInstance(data: InquiryPriceUpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpdateInstanceResponse>;
+  /** 修改自动扩缩容规则 {@link ModifyAutoScaleStrategyRequest} {@link ModifyAutoScaleStrategyResponse} */
+  ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
   /** 刷新YARN的动态资源池 {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
   /** 修改YARN资源调度的资源配置 {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */

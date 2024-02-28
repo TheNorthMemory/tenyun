@@ -197,7 +197,7 @@ declare interface StyleImageProRequest {
   Url?: string;
   /** 滤镜效果，取值[0,100]，0表示无效果，100表示满滤镜效果。默认值为80。 */
   FilterDegree?: number;
-  /** 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。 */
+  /** 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。默认为base64。 */
   RspImgType?: string;
 }
 
@@ -219,7 +219,7 @@ declare interface StyleImageRequest {
   Url?: string;
   /** 滤镜效果，取值[0,100]，0表示无效果，100表示满滤镜效果。默认值为80。 */
   FilterDegree?: number;
-  /** 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。 */
+  /** 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。默认值为base64。 */
   RspImgType?: string;
 }
 

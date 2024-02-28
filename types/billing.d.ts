@@ -26,6 +26,152 @@ declare interface ActionSummaryOverviewItem {
   TotalCost: string;
 }
 
+/** 成本分析交易类型复杂类型 */
+declare interface AnalyseActionTypeDetail {
+  /** 交易类型code */
+  ActionType?: string | null;
+  /** 交易类型Name */
+  ActionTypeName?: string | null;
+}
+
+/** 成本分析金额返回数据模型 */
+declare interface AnalyseAmountDetail {
+  /** 费用类型 */
+  Key?: string | null;
+  /** 是否展示 */
+  Display?: number | null;
+}
+
+/** 成本分析产品返回复杂类型 */
+declare interface AnalyseBusinessDetail {
+  /** 产品码code */
+  BusinessCode?: string | null;
+  /** 产品名称 */
+  BusinessCodeName?: string | null;
+}
+
+/** 成本分析过滤框复杂类型 */
+declare interface AnalyseConditionDetail {
+  /** 产品 */
+  Business?: AnalyseBusinessDetail[] | null;
+  /** 项目 */
+  Project?: AnalyseProjectDetail[] | null;
+  /** 地域 */
+  Region?: AnalyseRegionDetail[] | null;
+  /** 计费模式 */
+  PayMode?: AnalysePayModeDetail[] | null;
+  /** 交易类型 */
+  ActionType?: AnalyseActionTypeDetail[] | null;
+  /** 可用区 */
+  Zone?: AnalyseZoneDetail[] | null;
+  /** 资源所有者Uin */
+  OwnerUin?: AnalyseOwnerUinDetail[] | null;
+  /** 费用类型 */
+  Amount?: AnalyseAmountDetail[] | null;
+}
+
+/** 成本分析查询条件 */
+declare interface AnalyseConditions {
+  /** 产品名称代码 */
+  BusinessCodes?: string | null;
+  /** 子产品名称代码 */
+  ProductCodes?: string | null;
+  /** 组件类型代码 */
+  ComponentCode?: string | null;
+  /** 可用区ID：资源所属可用区ID */
+  ZoneIds?: string | null;
+  /** 地域ID:资源所属地域ID */
+  RegionIds?: string | null;
+  /** 项目ID:资源所属项目ID */
+  ProjectIds?: string | null;
+  /** 计费模式 prePay(表示包年包月)/postPay(表示按量计费) */
+  PayModes?: string | null;
+  /** 交易类型，查询交易类型（请使用交易类型code入参） */
+  ActionTypes?: string | null;
+  /** 分账标签键 */
+  Tags?: string | null;
+  /** 费用类型，查询费用类型（请使用费用类型code入参)入参枚举如下：cashPayAmount:现金 incentivePayAmount:赠送金 voucherPayAmount:优惠券 tax:税金 costBeforeTax:税前价 */
+  FeeType?: string | null;
+  /** 查询成本分析数据的用户UIN */
+  PayerUins?: string | null;
+  /** 使用资源的用户UIN */
+  OwnerUins?: string | null;
+  /** 消耗类型，查询消耗类型（请使用消耗类型code入参） */
+  ConsumptionTypes?: string | null;
+}
+
+/** 成本分析数据复杂类型 */
+declare interface AnalyseDetail {
+  /** 时间 */
+  Name?: string;
+  /** 金额 */
+  Total?: string;
+  /** 日期明细金额 */
+  TimeDetail?: AnalyseTimeDetail[] | null;
+}
+
+/** 成本分析表头数据复杂类型 */
+declare interface AnalyseHeaderDetail {
+  /** 表头日期 */
+  HeadDetail?: AnalyseHeaderTimeDetail[] | null;
+  /** 时间 */
+  Name?: string | null;
+  /** 总计 */
+  Total?: string | null;
+}
+
+/** 成本分析header表头数据 */
+declare interface AnalyseHeaderTimeDetail {
+  /** 日期 */
+  Name?: string | null;
+}
+
+/** 成本分析使用者uin复杂类型 */
+declare interface AnalyseOwnerUinDetail {
+  /** 使用者uin */
+  OwnerUin?: string | null;
+}
+
+/** 成本分析支付方式复杂类型 */
+declare interface AnalysePayModeDetail {
+  /** 计费模式code */
+  PayMode?: string | null;
+  /** 计费模式Name */
+  PayModeName?: string | null;
+}
+
+/** 成本分析项目返回复杂类型 */
+declare interface AnalyseProjectDetail {
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 默认项目 */
+  ProjectName?: string | null;
+}
+
+/** 成本分析地域返回复杂类型 */
+declare interface AnalyseRegionDetail {
+  /** 地域id */
+  RegionId?: string | null;
+  /** 地域名称 */
+  RegionName?: string | null;
+}
+
+/** 成本分返回值复杂类型 */
+declare interface AnalyseTimeDetail {
+  /** 日期 */
+  Time?: string | null;
+  /** 金额 */
+  Money?: string | null;
+}
+
+/** 成本分析可用区复杂类型 */
+declare interface AnalyseZoneDetail {
+  /** 可用区id */
+  ZoneId?: string | null;
+  /** 可用区Name */
+  ZoneName?: string | null;
+}
+
 /** 适用商品信息 */
 declare interface ApplicableProducts {
   /** 适用商品名称，值为“全产品通用”或商品名称组成的string，以","分割。 */
@@ -1656,6 +1802,46 @@ declare interface DescribeCostDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCostExplorerSummaryRequest {
+  /** 周期开始时间，格式为yyyy-mm-dd hh:ii:ss */
+  BeginTime: string;
+  /** 周期结束时间，格式为yyyy-mm-dd hh:ii:ss */
+  EndTime: string;
+  /** 账单类型：1-费用账单、2-消耗账单 */
+  BillType: string;
+  /** 统计周期：日-day，月-month； */
+  PeriodType: string;
+  /** 分类维度（数据汇总维度），查询分类维度（请使用分类维度code入参）入参枚举值：default=仅总计feeType=费用类型billType=账单类型business=产品product=子产品region=地域zone=可用区actionType=交易类型payMode =计费模式tags=标签project =项目payerUin=支付者账号ownerUin=使用者账号 */
+  Dimensions: string;
+  /** 费用类型：cost-总费用，totalCost-原价费用 */
+  FeeType: string;
+  /** 数量，每页最大值为100 */
+  PageSize: number;
+  /** 起始页，当PageNo=1表示第一页， PageNo=2表示第二页，依次类推。 */
+  PageNo: number;
+  /** 分账标签值 */
+  TagKeyStr?: string;
+  /** 是否需要筛选框， 1-表示需要， 0-表示不需要，若不传默认不需要。 */
+  NeedConditionValue?: string;
+  /** 筛选参数 */
+  Conditions?: AnalyseConditions;
+}
+
+declare interface DescribeCostExplorerSummaryResponse {
+  /** 数据条数 */
+  Total?: number | null;
+  /** 表头信息 */
+  Header?: AnalyseHeaderDetail | null;
+  /** 数据明细 */
+  Detail?: AnalyseDetail[] | null;
+  /** 数据总计 */
+  TotalDetail?: AnalyseDetail | null;
+  /** 筛选框 */
+  ConditionValue?: AnalyseConditionDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCostSummaryByProductRequest {
   /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
   BeginTime: string;
@@ -1785,7 +1971,7 @@ declare interface DescribeDealsByCondRequest {
   Offset?: number;
   /** 订单状态,默认为4（成功的订单）订单的状态1：未支付2：已支付3：发货中4：已发货5：发货失败6：已退款7：已关单8：订单过期9：订单已失效10：产品已失效11：代付拒绝12：支付中 */
   Status?: number;
-  /** 订单号 */
+  /** 子订单号 */
   OrderId?: string;
   /** 大订单号 */
   BigDealId?: string;
@@ -2105,6 +2291,8 @@ declare interface Billing {
   DescribeBillSummaryForOrganization(data: DescribeBillSummaryForOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryForOrganizationResponse>;
   /** 查询消耗明细 {@link DescribeCostDetailRequest} {@link DescribeCostDetailResponse} */
   DescribeCostDetail(data: DescribeCostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostDetailResponse>;
+  /** 查看成本分析明细 {@link DescribeCostExplorerSummaryRequest} {@link DescribeCostExplorerSummaryResponse} */
+  DescribeCostExplorerSummary(data: DescribeCostExplorerSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostExplorerSummaryResponse>;
   /** 获取按产品汇总消耗详情 {@link DescribeCostSummaryByProductRequest} {@link DescribeCostSummaryByProductResponse} */
   DescribeCostSummaryByProduct(data: DescribeCostSummaryByProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByProductResponse>;
   /** 获取按项目汇总消耗详情 {@link DescribeCostSummaryByProjectRequest} {@link DescribeCostSummaryByProjectResponse} */

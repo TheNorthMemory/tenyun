@@ -799,7 +799,7 @@ declare interface RenewDomainBatchResponse {
 declare interface ReservedPreDomainsRequest {
   /** 预约预释放域名列表 */
   DomainList: string[];
-  /** 模版ID */
+  /** 模板ID */
   TemplateId: string;
 }
 
