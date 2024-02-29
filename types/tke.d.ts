@@ -2986,9 +2986,9 @@ declare namespace V20180525 {
 
   interface CheckEdgeClusterCIDRResponse {
     /** 返回码，具体如下-1 内部错误0 没冲突1 vpc 和 serviceCIDR 冲突2 vpc 和 podCIDR 冲突3 serviceCIDR 和 podCIDR 冲突 */
-    ConflictCode: number;
+    ConflictCode?: number;
     /** CIDR冲突描述信息。 */
-    ConflictMsg: string;
+    ConflictMsg?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3290,9 +3290,9 @@ declare namespace V20180525 {
   }
 
   interface CreateECMInstancesRequest {
-    /** 集群id */
+    /** 集群id，边缘集群需要先开启公网访问才能添加ecm节点 */
     ClusterID: string;
-    /** 模块id */
+    /** 边缘模块id */
     ModuleId: string;
     /** 需要创建实例的可用区及创建数目及运营商的列表 */
     ZoneInstanceCountISPSet: ECMZoneInstanceCountISP[];
@@ -3406,7 +3406,7 @@ declare namespace V20180525 {
   }
 
   interface CreateEdgeCVMInstancesRequest {
-    /** 集群id */
+    /** 集群id，边缘集群需要先开启公网访问才能添加cvm节点 */
     ClusterID: string;
     /** CVM创建透传参数，json化字符串格式，如需要保证扩展集群节点请求幂等性需要在此参数添加ClientToken字段，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。 */
     RunInstancePara: string;
@@ -4777,16 +4777,16 @@ declare namespace V20180525 {
   }
 
   interface DescribeEdgeClusterUpgradeInfoResponse {
-    /** 可升级的集群组件和 */
-    ComponentVersion: string | null;
+    /** 可升级的集群组件及其版本 */
+    ComponentVersion?: string | null;
     /** 边缘集群当前版本 */
-    EdgeVersionCurrent: string | null;
+    EdgeVersionCurrent?: string | null;
     /** 边缘组件镜像仓库地址前缀，包含域名和命名空间 */
-    RegistryPrefix: string | null;
+    RegistryPrefix?: string | null;
     /** 集群升级状态，可能值：running、updating、failed */
-    ClusterUpgradeStatus: string | null;
+    ClusterUpgradeStatus?: string | null;
     /** 集群升级中状态或者失败原因 */
-    ClusterUpgradeStatusReason: string | null;
+    ClusterUpgradeStatusReason?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5582,7 +5582,7 @@ declare namespace V20180525 {
   interface DescribeTKEEdgeScriptRequest {
     /** 集群id */
     ClusterId: string;
-    /** 网卡名 */
+    /** 网卡名,指定边缘节点上kubelet向apiserver注册使用的网卡 */
     Interface: string;
     /** 节点名字 */
     NodeName?: string;

@@ -742,6 +742,8 @@ declare interface ColumnBasicInfo {
   CreateTime?: string | null;
   /** 更新时间 */
   UpdateTime?: string | null;
+  /** 精度 */
+  Scale?: number | null;
 }
 
 /** 血缘字段信息 */
@@ -750,8 +752,6 @@ declare interface ColumnLineageInfo {
   Id: string | null;
   /** 数据源ID */
   DatasourceId: string | null;
-  /** 表ID */
-  TableId: string | null;
   /** 字段名称 */
   ColumnName?: string | null;
   /** 字段中文名称 */
@@ -792,6 +792,8 @@ declare interface ColumnLineageInfo {
   ChildSet?: string | null;
   /** 额外参数 */
   ExtParams?: LineageParamRecord[] | null;
+  /** 表ID */
+  TableId?: string | null;
 }
 
 /** 列的元数据 */
@@ -816,6 +818,10 @@ declare interface ColumnMeta {
   DictionaryId?: string | null;
   /** 对应码表字典名称 */
   DictionaryName?: string | null;
+  /** 安全等级：名称 */
+  LevelName?: string | null;
+  /** 安全等级：值范围1-10 */
+  LevelRank?: number | null;
 }
 
 /** 内容详情 */
@@ -870,13 +876,15 @@ declare interface CompareRule {
   Items?: CompareRuleItem[] | null;
   /** 周期性模板默认周期，单位秒 */
   CycleStep?: number | null;
+  /** o 表示 或，a 表示 且，数字表示items下标 */
+  ComputeExpression?: string | null;
 }
 
 /** 比较条件 */
 declare interface CompareRuleItem {
   /** 比较类型 1.固定值 2.波动值 3.数值范围比较 4.枚举范围比较 5.不用比较 */
   CompareType?: number | null;
-  /** 比较操作类型 < <= == => > */
+  /** 比较操作类型< <= == => > !=IRLCRO:在区间内(左闭右开)IRLORC:在区间内(左开右闭)IRLCRC:在区间内(左闭右闭)IRLORO:在区间内(左开右开)NRLCRO:不在区间内(左闭右开)NRLORC:不在区间内(左开右闭)NRLCRC:不在在区间内(左闭右闭)NRLORO:不在在区间内(左开右开) */
   Operator?: string | null;
   /** 质量统计值类型 1.绝对值 2.上升 3. 下降 4._C包含 5. N_C不包含 */
   ValueComputeType?: number | null;
@@ -1979,15 +1987,17 @@ declare interface InstanceLogInfo {
 /** 实例日志信息详情 */
 declare interface InstanceLogInfoOpsDto {
   /** 实例运行日志 */
-  LogInfo: string | null;
+  LogInfo?: string | null;
   /** 实例运行提交的yarn日志地址 */
-  YarnLogInfo: string[] | null;
+  YarnLogInfo?: string[] | null;
   /** 实例运行产生的datax日志 */
-  DataLogInfo: string | null;
+  DataLogInfo?: string | null;
   /** 第三方任务运行日志 */
-  ThirdTaskRunLogInfo: string | null;
+  ThirdTaskRunLogInfo?: string | null;
   /** 第三方任务日志链接描述 */
-  ThirdTaskLogUrlDesc: string | null;
+  ThirdTaskLogUrlDesc?: string | null;
+  /** 日志行数 */
+  LineCount?: number | null;
 }
 
 /** 实例日志信息 */
@@ -3502,6 +3512,10 @@ declare interface RuleGroup {
   InstanceId?: string | null;
   /** 创建时间 */
   CreateTime?: string | null;
+  /** 是否已配置执行策略 */
+  StrategyConfig?: boolean | null;
+  /** 是否已配置执行策略 */
+  SubscribeConfig?: boolean | null;
 }
 
 /** 规则组执行结果 */
@@ -4266,6 +4280,8 @@ declare interface TableBasicInfo {
   CreateTime?: string | null;
   /** 更新时间 */
   UpdateTime?: string | null;
+  /** 存储位置 */
+  Location?: string | null;
 }
 
 /** 规则表变量替换 */
@@ -4392,104 +4408,116 @@ declare interface TableLineageInfo {
   Tasks?: string[] | null;
   /** 模块/应用类型 */
   ChannelType?: string | null;
+  /** 展示类型 */
+  DisplayType?: string | null;
+  /** 表类型 */
+  EngineType?: string | null;
+  /** 表类型 */
+  TableType?: string | null;
 }
 
 /** 表的元数据信息 */
 declare interface TableMeta {
   /** 表的全局唯一ID */
-  TableId: string | null;
+  TableId?: string | null;
   /** 表名称 */
-  TableName: string | null;
+  TableName?: string | null;
   /** 责任人 */
-  TableOwnerName: string | null;
+  TableOwnerName?: string | null;
   /** 数据源全局唯一ID */
-  DatasourceId: number | null;
+  DatasourceId?: number | null;
   /** 所属集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 数据源名 */
-  DatasourceName: string | null;
+  DatasourceName?: string | null;
   /** 数据库名 */
-  DatabaseName: string | null;
+  DatabaseName?: string | null;
   /** 表路径 */
-  TablePath: string | null;
+  TablePath?: string | null;
   /** 表中文名 */
-  TableNameCn: string | null;
+  TableNameCn?: string | null;
   /** 元数据租户ID */
-  MetastoreId: number | null;
+  MetastoreId?: number | null;
   /** 技术类型，可用值:HIVE,MYSQL,KAFKA, HBASE */
-  MetastoreType: string | null;
+  MetastoreType?: string | null;
   /** 表描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 列分隔符 */
-  ColumnSeparator: string | null;
+  ColumnSeparator?: string | null;
   /** 存储格式 */
-  StorageFormat: string | null;
+  StorageFormat?: string | null;
   /** 存储量，字节数 */
-  StorageSize: number | null;
+  StorageSize?: number | null;
   /** 表类型，如hive MANAGED_TABLE;EXTERNAL_TABLE */
-  TableType: string | null;
+  TableType?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 最近数据变更时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 最近DDL变更时间 */
-  DdlModifyTime: string | null;
+  DdlModifyTime?: string | null;
   /** 数据最后访问时间 */
-  LastAccessTime: string | null;
+  LastAccessTime?: string | null;
   /** 所属项目英文名 */
-  ProjectName: string | null;
+  ProjectName?: string | null;
   /** 所属数据目录id（可能多个） */
-  BizCatalogIds: string[] | null;
+  BizCatalogIds?: string[] | null;
   /** 所属数据目录（可能多个） */
-  BizCatalogNames: string[] | null;
+  BizCatalogNames?: string[] | null;
   /** true已收藏/false表示未收藏状态 */
-  HasFavorite: boolean | null;
+  HasFavorite?: boolean | null;
   /** 生命周期 */
-  LifeCycleTime: number | null;
+  LifeCycleTime?: number | null;
   /** 存储量，已转为适合的单位展示 */
-  StorageSizeWithUnit: string | null;
+  StorageSizeWithUnit?: string | null;
   /** 数据源引擎的实例ID：如EMR集群实例ID/数据源实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 数据来源技术类型：HIVE/MYSQL/HBASE/KAFKA等 */
-  TechnologyType: string | null;
+  TechnologyType?: string | null;
   /** 表英文名 */
-  TableNameEn: string | null;
+  TableNameEn?: string | null;
   /** 项目Id */
-  ProjectId: string | null;
+  ProjectId?: string | null;
   /** Kafka Topic 分区数 */
-  Partitions: string | null;
+  Partitions?: string | null;
   /** Kafka Topic 副本数 */
-  ReplicationFactor: string | null;
+  ReplicationFactor?: string | null;
   /** 所属项目英中文名 */
-  ProjectDisplayName: string | null;
+  ProjectDisplayName?: string | null;
   /** 数据最后修改时间 */
-  DataModifyTime: string | null;
+  DataModifyTime?: string | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 当前用户是否有管理员权限 */
-  HasAdminAuthority: boolean | null;
+  HasAdminAuthority?: boolean | null;
   /** 数据源展示名称 */
-  DatasourceDisplayName: string | null;
+  DatasourceDisplayName?: string | null;
   /** 数据库ID */
-  DatabaseId: string | null;
+  DatabaseId?: string | null;
   /** 租户下对表的收藏总次数 */
-  FavoriteCount: number | null;
+  FavoriteCount?: number | null;
   /** 租户下对表的点赞总次数 */
-  LikeCount: number | null;
+  LikeCount?: number | null;
   /** true已点赞/false表示未点赞状态 */
-  HasLike: boolean | null;
+  HasLike?: boolean | null;
   /** 表的资产评分 */
-  TablePropertyScore: TablePropertyScore | null;
+  TablePropertyScore?: TablePropertyScore | null;
   /** 表的热度值 */
-  TableHeat: TableHeat | null;
+  TableHeat?: TableHeat | null;
   /** 数据源ownerProjectId */
-  OwnerProjectId: string | null;
+  OwnerProjectId?: string | null;
   /** 表负责人ID */
-  TableOwnerId: string | null;
+  TableOwnerId?: string | null;
   /** 系统源-CLUSTER, DB-自定义源 */
   DataSourceCategory?: string | null;
   /** 表字段信息 */
   Columns?: SearchColumnDocVO[] | null;
+  /** 表采集类型TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUAL_VIEW(虚拟视图), MATERIALIZED_VIEW(物化视图), LATERAL_VIEW, INDEX_TABLE(索引表), END_SELECT(查询结构), INSTANCE(中间临时表类型(数据血缘)), CDW(CDW表类型) */
+  MetaCrawlType?: string | null;
+  /** 是否视图 */
+  IsView?: boolean | null;
+  /** 存储位置 */
+  Location?: string | null;
 }
 
 /** 按天更新的表的资产评分 */
@@ -8062,13 +8090,15 @@ declare interface DescribeColumnsMetaRequest {
   OrderFieldSet?: OrderField[];
   /** 是否查询分区字段，默认false */
   IsPartitionQuery?: boolean;
+  /** 合规组ID */
+  ComplianceId?: number;
 }
 
 declare interface DescribeColumnsMetaResponse {
   /** 分页返回的 */
-  ColumnMetaSet: ColumnMeta[] | null;
+  ColumnMetaSet?: ColumnMeta[] | null;
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8927,6 +8957,10 @@ declare interface DescribeInstanceLogDetailRequest {
   BrokerIp: string;
   /** 文件Name */
   OriginFileName: string;
+  /** 起始行 */
+  StartCount?: number;
+  /** 每次查询行数 */
+  LineCount?: number;
 }
 
 declare interface DescribeInstanceLogDetailResponse {
@@ -13378,7 +13412,7 @@ declare interface Wedata {
   DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
   /** 获取实例运行日志 {@link DescribeInstanceLogRequest} {@link DescribeInstanceLogResponse} */
   DescribeInstanceLog(data: DescribeInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogResponse>;
-  /** 获取具体实例相关日志信息 {@link DescribeInstanceLogDetailRequest} {@link DescribeInstanceLogDetailResponse} */
+  /** 获取具体实例相关日志信息内容 {@link DescribeInstanceLogDetailRequest} {@link DescribeInstanceLogDetailResponse} */
   DescribeInstanceLogDetail(data: DescribeInstanceLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogDetailResponse>;
   /** 下载日志文件 {@link DescribeInstanceLogFileRequest} {@link DescribeInstanceLogFileResponse} */
   DescribeInstanceLogFile(data: DescribeInstanceLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogFileResponse>;

@@ -2794,6 +2794,20 @@ declare interface SetLoadBalancerSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface SetLoadBalancerStartStatusRequest {
+  /** 操作类型。Start：启动实例，Stop：停止实例。 */
+  OperationType: string;
+  /** 负载均衡实例ID。 */
+  LoadBalancerId: string;
+  /** 监听器ID。如果该字段为空，则表示操作负载均衡实例，如果不为空，则表示操作监听器。 */
+  ListenerIds?: string[];
+}
+
+declare interface SetLoadBalancerStartStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetSecurityGroupForLoadbalancersRequest {
   /** 安全组ID，如 sg-12345678 */
   SecurityGroup: string;
@@ -2979,6 +2993,8 @@ declare interface Clb {
   SetLoadBalancerClsLog(data: SetLoadBalancerClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerClsLogResponse>;
   /** 设置负载均衡实例的安全组 {@link SetLoadBalancerSecurityGroupsRequest} {@link SetLoadBalancerSecurityGroupsResponse} */
   SetLoadBalancerSecurityGroups(data: SetLoadBalancerSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerSecurityGroupsResponse>;
+  /** 启停负载均衡实例或者监听器 {@link SetLoadBalancerStartStatusRequest} {@link SetLoadBalancerStartStatusResponse} */
+  SetLoadBalancerStartStatus(data: SetLoadBalancerStartStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerStartStatusResponse>;
   /** 绑定或解绑一个安全组到多个负载均衡实例 {@link SetSecurityGroupForLoadbalancersRequest} {@link SetSecurityGroupForLoadbalancersResponse} */
   SetSecurityGroupForLoadbalancers(data: SetSecurityGroupForLoadbalancersRequest, config?: AxiosRequestConfig): AxiosPromise<SetSecurityGroupForLoadbalancersResponse>;
 }

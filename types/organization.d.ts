@@ -62,6 +62,28 @@ declare interface MemberMainInfo {
   MemberName: string | null;
 }
 
+/** 不允许删除的原因。 */
+declare interface NotAllowReason {
+  /** 是否创建的成员。true-是、false-否；成员不是创建的成员不允许删除 */
+  IsCreateMember?: boolean | null;
+  /** 成员删除许可。true-开启、false-关闭；成员删除许可关闭时不允许删除 */
+  DeletionPermission?: boolean | null;
+  /** 是否可信服务委派管理员。true-是、false-否；成员是可信服务委派管理员不允许删除 */
+  IsAssignManager?: boolean | null;
+  /** 是否主体管理员。true-是、false-否；成员是主体管理员不允许删除 */
+  IsAuthManager?: boolean | null;
+  /** 是否共享资源管理员。true-是、false-否；成员是共享资源管理员不允许删除 */
+  IsShareManager?: boolean | null;
+  /** 成员是否设置了操作审批。true-是、false-否；成员设置了操作审批时不允许删除 */
+  OperateProcess?: boolean | null;
+  /** 是否允许解除成员财务权限。true-是、false-否；成员不能解除财务权限时不允许删除 */
+  BillingPermission?: boolean | null;
+  /** 存在的资源列表。账号存在资源时不允许删除 */
+  ExistResources?: string[] | null;
+  /** 检测失败的资源列表。账号有资源检测失败时不允许删除。 */
+  DetectFailedResources?: string[] | null;
+}
+
 /** 按月获取组织财务信息 */
 declare interface OrgFinancialByMonth {
   /** 记录ID。 */
@@ -404,6 +426,20 @@ declare interface CancelOrganizationMemberAuthAccountRequest {
 }
 
 declare interface CancelOrganizationMemberAuthAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckAccountDeleteRequest {
+  /** 成员uin。 */
+  MemberUin: number;
+}
+
+declare interface CheckAccountDeleteResponse {
+  /** 成员是否允许删除。 true-是、false-否 */
+  AllowDelete?: boolean;
+  /** 不允许删除原因。 */
+  NotAllowReason?: NotAllowReason;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1431,6 +1467,8 @@ declare interface Organization {
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
   /** 取消组织成员和组织管理员子账号的授权关系 {@link CancelOrganizationMemberAuthAccountRequest} {@link CancelOrganizationMemberAuthAccountResponse} */
   CancelOrganizationMemberAuthAccount(data: CancelOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationMemberAuthAccountResponse>;
+  /** 成员账号删除检查 {@link CheckAccountDeleteRequest} {@link CheckAccountDeleteResponse} */
+  CheckAccountDelete(data: CheckAccountDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAccountDeleteResponse>;
   /** 创建企业组织 {@link CreateOrganizationRequest} {@link CreateOrganizationResponse} */
   CreateOrganization(data?: CreateOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationResponse>;
   /** 添加组织身份 {@link CreateOrganizationIdentityRequest} {@link CreateOrganizationIdentityResponse} */

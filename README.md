@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 245+ 款产品，11008+ 服务数</summary>
+<details><summary>共计 245+ 款产品，11012+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -155,7 +155,7 @@ cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 20
 cim |  | 2019-03-18(1) |
 cis |  | 2018-04-08(7) |
 ckafka | [消息队列 CKafka 版](https://cloud.tencent.com/document/product/597) | 2019-08-19(81) |
-clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(85) |
+clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(86) |
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) |
@@ -232,7 +232,7 @@ ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(60) |
-lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(107) |
+lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(109) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(153) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |
@@ -256,7 +256,7 @@ oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(15) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
-organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(46) | 2018-12-25(20) |
+organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(47) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(19) |
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(90) |

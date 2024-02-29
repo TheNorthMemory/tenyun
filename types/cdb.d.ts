@@ -459,49 +459,49 @@ declare interface CdbZoneDataResult {
 /** 可用区售卖配置 */
 declare interface CdbZoneSellConf {
   /** 可用区状态。可能的返回值为：1-上线；3-停售；4-不展示 */
-  Status: number;
+  Status?: number;
   /** 可用区中文名称 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 实例类型是否为自定义类型 */
-  IsCustom: boolean;
+  IsCustom?: boolean;
   /** 是否支持灾备 */
-  IsSupportDr: boolean;
+  IsSupportDr?: boolean;
   /** 是否支持私有网络 */
-  IsSupportVpc: boolean;
+  IsSupportVpc?: boolean;
   /** 小时计费实例最大售卖数量 */
-  HourInstanceSaleMaxNum: number;
+  HourInstanceSaleMaxNum?: number;
   /** 是否为默认可用区 */
-  IsDefaultZone: boolean;
+  IsDefaultZone?: boolean;
   /** 是否为黑石区 */
-  IsBm: boolean;
+  IsBm?: boolean;
   /** 支持的付费类型。可能的返回值为：0-包年包月；1-小时计费；2-后付费 */
-  PayType: string[];
+  PayType?: string[];
   /** 数据复制类型。0-异步复制；1-半同步复制；2-强同步复制 */
-  ProtectMode: string[];
+  ProtectMode?: string[];
   /** 可用区名称 */
-  Zone: string;
+  Zone?: string;
   /** 多可用区信息 */
-  ZoneConf: ZoneConf;
+  ZoneConf?: ZoneConf;
   /** 可支持的灾备可用区信息 */
-  DrZone: string[];
+  DrZone?: string[];
   /** 是否支持跨可用区只读 */
-  IsSupportRemoteRo: boolean;
+  IsSupportRemoteRo?: boolean;
   /** 可支持的跨可用区只读区信息 */
-  RemoteRoZone: string[];
+  RemoteRoZone?: string[];
   /** 独享型可用区状态。可能的返回值为：1-上线；3-停售；4-不展示 */
-  ExClusterStatus: number;
+  ExClusterStatus?: number;
   /** 独享型可支持的跨可用区只读区信息 */
-  ExClusterRemoteRoZone: string[];
+  ExClusterRemoteRoZone?: string[];
   /** 独享型多可用区信息 */
-  ExClusterZoneConf: ZoneConf;
+  ExClusterZoneConf?: ZoneConf;
   /** 售卖实例类型数组，其中configIds的值与configs结构体中的id一一对应。 */
-  SellType: CdbSellType[];
+  SellType?: CdbSellType[];
   /** 可用区id */
-  ZoneId: number;
+  ZoneId?: number;
   /** 是否支持ipv6 */
-  IsSupportIpv6: boolean;
+  IsSupportIpv6?: boolean;
   /** 可支持的售卖数据库引擎类型 */
-  EngineType: string[];
+  EngineType?: string[];
 }
 
 /** 克隆任务记录。 */
@@ -4123,19 +4123,19 @@ declare interface ModifyBackupConfigRequest {
   BackupPeriodSaveCount?: number;
   /** 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss */
   StartBackupPeriodSaveDate?: string;
-  /** 是否开启数据备份归档策略，off-关闭，on-打开，默认为off */
+  /** 是否开启数据备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。 */
   EnableBackupArchive?: string;
   /** 数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数 */
   BackupArchiveDays?: number;
   /** 日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数 */
   BinlogArchiveDays?: number;
-  /** 是否开启日志备份归档策略，off-关闭，on-打开，默认为off */
+  /** 是否开启日志备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。 */
   EnableBinlogArchive?: string;
-  /** 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off */
+  /** 是否开启数据备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。 */
   EnableBackupStandby?: string;
   /** 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数 */
   BackupStandbyDays?: number;
-  /** 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off */
+  /** 是否开启日志备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。 */
   EnableBinlogStandby?: string;
   /** 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数 */
   BinlogStandbyDays?: number;

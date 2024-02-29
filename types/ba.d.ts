@@ -19,11 +19,13 @@ declare interface DescribeGetAuthInfoRequest {
 
 declare interface DescribeGetAuthInfoResponse {
   /** 实名认证状态：0未实名，1已实名 */
-  IsTenPayMasked: string;
+  IsTenPayMasked?: string;
   /** 实名认证类型：0个人，1企业 */
-  IsAuthenticated: string;
+  IsAuthenticated?: string;
   /** 认证类型，个人0，企业1 */
-  Type: string;
+  Type?: string;
+  /** 大客户标识：1004、1003、1002、1001其余为普通的用户 */
+  Level?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -39,49 +39,49 @@ declare interface HsmInfo {
 /** 资源信息 */
 declare interface ResourceInfo {
   /** 资源Id */
-  ResourceId: string | null;
+  ResourceId?: string | null;
   /** 资源名称 */
-  ResourceName: string | null;
+  ResourceName?: string | null;
   /** 资源状态，1-正常，2-隔离，3-销毁 */
-  Status: number | null;
+  Status?: number | null;
   /** 资源IP */
-  Vip: string | null;
+  Vip?: string | null;
   /** 资源所属Vpc */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 资源所属子网 */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 资源所属HSM规格 */
-  Model: string | null;
+  Model?: string | null;
   /** 云加密机类型id */
-  VsmType: number | null;
+  VsmType?: number | null;
   /** 地域Id */
-  RegionId: number | null;
+  RegionId?: number | null;
   /** 区域Id */
-  ZoneId: number | null;
+  ZoneId?: number | null;
   /** 过期时间（Epoch Unix Timestamp） */
-  ExpireTime: number | null;
+  ExpireTime?: number | null;
   /** 地域名 */
-  RegionName: string | null;
+  RegionName?: string | null;
   /** 区域名 */
-  ZoneName: string | null;
+  ZoneName?: string | null;
   /** 实例的安全组列表 */
-  SgList: SgUnit[] | null;
+  SgList?: SgUnit[] | null;
   /** 子网名称 */
-  SubnetName: string | null;
+  SubnetName?: string | null;
   /** 当前实例是否已经过期 */
-  Expired: boolean | null;
+  Expired?: boolean | null;
   /** 为正数表示实例距离过期时间还剩余多少秒，为负数表示已经过期多少秒 */
-  RemainSeconds: number | null;
+  RemainSeconds?: number | null;
   /** Vpc名称 */
-  VpcName: string | null;
+  VpcName?: string | null;
   /** 创建者Uin账号 */
-  CreateUin: string | null;
+  CreateUin?: string | null;
   /** 自动续费状态标识， 0-手动续费，1-自动续费，2-到期不续 */
-  RenewFlag: number | null;
+  RenewFlag?: number | null;
   /** 标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 厂商 */
-  Manufacturer: string | null;
+  Manufacturer?: string | null;
   /** 告警状态，0：停用，1：启用 */
   AlarmStatus?: number | null;
 }
@@ -139,39 +139,39 @@ declare interface TagFilter {
 /** 安全组策略 */
 declare interface UsgPolicy {
   /** cidr格式地址 */
-  Ip: string | null;
+  Ip?: string | null;
   /** 安全组id代表的地址集合 */
-  Id: string | null;
+  Id?: string | null;
   /** 地址组id代表的地址集合 */
-  AddressModule: string | null;
+  AddressModule?: string | null;
   /** 协议 */
-  Proto: string | null;
+  Proto?: string | null;
   /** 端口 */
-  Port: string | null;
+  Port?: string | null;
   /** 服务组id代表的协议和端口集合 */
-  ServiceModule: string | null;
+  ServiceModule?: string | null;
   /** 备注 */
-  Desc: string | null;
+  Desc?: string | null;
   /** 匹配后行为:ACCEPT/DROP */
-  Action: string | null;
+  Action?: string | null;
 }
 
 /** 安全组规则详情 */
 declare interface UsgRuleDetail {
   /** 入站规则 */
-  InBound: UsgPolicy[] | null;
+  InBound?: UsgPolicy[] | null;
   /** 出站规则 */
-  OutBound: UsgPolicy[] | null;
+  OutBound?: UsgPolicy[] | null;
   /** 安全组Id */
-  SgId: string | null;
+  SgId?: string | null;
   /** 安全组名称 */
-  SgName: string | null;
+  SgName?: string | null;
   /** 备注 */
-  SgRemark: string | null;
+  SgRemark?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 版本 */
-  Version: number | null;
+  Version?: number | null;
 }
 
 /** VPC对象 */
@@ -311,51 +311,51 @@ declare interface DescribeVsmAttributesRequest {
 
 declare interface DescribeVsmAttributesResponse {
   /** 资源Id */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源名称 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 资源状态，1表示资源为正常，2表示资源处于隔离状态 */
-  Status: number;
+  Status?: number;
   /** 资源IP */
-  Vip: string;
+  Vip?: string;
   /** 资源所属Vpc */
-  VpcId: string;
+  VpcId?: string;
   /** 资源所属子网 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 资源所属HSM的规格 */
-  Model: string;
+  Model?: string;
   /** 资源类型，17表示EVSM，33表示GVSM，49表示SVSM */
-  VsmType: number;
+  VsmType?: number;
   /** 地域Id，返回腾讯云地域代码，如广州为1，北京为8 */
-  RegionId: number;
+  RegionId?: number;
   /** 区域Id，返回腾讯云每个地域的可用区代码 */
-  ZoneId: number;
+  ZoneId?: number;
   /** 资源过期时间，以时间戳形式展示。 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 安全组详情信息 */
-  SgList: UsgRuleDetail[] | null;
+  SgList?: UsgRuleDetail[] | null;
   /** 子网名 */
-  SubnetName: string | null;
+  SubnetName?: string | null;
   /** 地域名 */
-  RegionName: string | null;
+  RegionName?: string | null;
   /** 区域名 */
-  ZoneName: string | null;
+  ZoneName?: string | null;
   /** 实例是否已经过期 */
-  Expired: boolean | null;
+  Expired?: boolean | null;
   /** 为正数表示实例距离过期时间剩余秒数，为负数表示实例已经过期多少秒 */
-  RemainSeconds: number | null;
+  RemainSeconds?: number | null;
   /** 私有虚拟网络名称 */
-  VpcName: string | null;
+  VpcName?: string | null;
   /** VPC的IPv4 CIDR */
-  VpcCidrBlock: string | null;
+  VpcCidrBlock?: string | null;
   /** 子网的CIDR */
-  SubnetCidrBlock: string | null;
+  SubnetCidrBlock?: string | null;
   /** 资源所关联的Tag */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置) */
-  RenewFlag: number | null;
+  RenewFlag?: number | null;
   /** 厂商 */
-  Manufacturer: string | null;
+  Manufacturer?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -365,7 +365,7 @@ declare interface DescribeVsmsRequest {
   Offset: number;
   /** 最大数量 */
   Limit: number;
-  /** 查询关键字 */
+  /** 资源ID或者资源名字模糊查询的关键字 */
   SearchWord?: string;
   /** 标签过滤条件 */
   TagFilters?: TagFilter[];
@@ -377,9 +377,9 @@ declare interface DescribeVsmsRequest {
 
 declare interface DescribeVsmsResponse {
   /** 获取实例的总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 资源信息 */
-  VsmList: ResourceInfo[] | null;
+  VsmList?: ResourceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

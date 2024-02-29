@@ -48,6 +48,8 @@ declare interface ClusterOption {
   Zone: string;
   /** 计算集群类型，取值范围：- KUBERNETES */
   Type: string;
+  /** 计算集群Service CIDR，不能与VPC网段重合。 */
+  ServiceCidr?: string;
   /** 资源配额。 */
   ResourceQuota?: ResourceQuota;
   /** 限制范围。 */
@@ -76,6 +78,10 @@ declare interface Environment {
   Status?: string;
   /** 环境是否可用。环境需要可用才能投递计算任务。 */
   Available?: boolean;
+  /** 环境是否为默认环境。 */
+  IsDefault?: boolean;
+  /** 环境是否为托管环境。 */
+  IsManaged?: boolean;
   /** 环境信息。 */
   Message?: string;
   /** 云资源ID。 */
@@ -152,6 +158,8 @@ declare interface NFOption {
   Report?: boolean | null;
   /** Resume。 */
   Resume?: boolean | null;
+  /** Nextflow引擎版本，取值范围：- 22.10.4- 22.10.8 - 23.10.1 */
+  NFVersion?: string | null;
 }
 
 /** 云资源ID。 */
@@ -637,8 +645,6 @@ declare interface RunApplicationRequest {
   EnvironmentId: string;
   /** 任务输入JSON。需要进行base64编码。 */
   InputBase64: string;
-  /** 任务缓存清理时间（小时）。不填表示不清理。 */
-  CacheClearDelay: number;
   /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
   /** 任务批次描述。 */
@@ -647,12 +653,16 @@ declare interface RunApplicationRequest {
   TableId?: string;
   /** 批量投递表格行UUID。不填表示表格全部行。 */
   TableRowUuids?: string[];
+  /** 任务缓存清理时间（小时）。不填或0表示不清理。 */
+  CacheClearDelay?: number;
   /** 应用版本ID。不填表示使用当前最新版本。 */
   ApplicationVersionId?: string;
   /** WDL运行选项。 */
   Option?: RunOption;
   /** Nextflow运行选项。 */
   NFOption?: NFOption;
+  /** 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow) */
+  WorkDir?: string;
 }
 
 declare interface RunApplicationResponse {
@@ -681,8 +691,10 @@ declare interface RunWorkflowRequest {
   InputBase64?: string;
   /** 任务输入COS地址。（InputBase64和InputCosUri必选其一） */
   InputCosUri?: string;
-  /** 任务缓存清理时间（小时）。不填表示不清理。 */
+  /** 任务缓存清理时间（小时）。不填或0表示不清理。 */
   CacheClearDelay?: number;
+  /** 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow) */
+  WorkDir?: string;
 }
 
 declare interface RunWorkflowResponse {

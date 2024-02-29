@@ -2072,6 +2072,18 @@ declare interface ModifyDisksAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDisksBackupQuotaRequest {
+  /** 云硬盘ID列表，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。列表最大长度为15。 */
+  DiskIds: string[];
+  /** 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须不小于已存在的备份点数量。 */
+  DiskBackupQuota: number;
+}
+
+declare interface ModifyDisksBackupQuotaResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDisksRenewFlagRequest {
   /** 云硬盘ID列表。 */
   DiskIds: string[];
@@ -2364,6 +2376,18 @@ declare interface ResetInstancesPasswordResponse {
   RequestId?: string;
 }
 
+declare interface ResizeDisksRequest {
+  /** 云硬盘ID列表，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。列表最大长度为15。 */
+  DiskIds: string[];
+  /** 扩容后的云硬盘大小。单位: GB。高性能云硬盘大小取值范围：[10, 4000] ,SSD云硬盘大小取值范围：[20, 4000]。扩容后的云硬盘大小必须大于当前云硬盘大小。 */
+  DiskSize: number;
+}
+
+declare interface ResizeDisksResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RestartDockerContainersRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2629,6 +2653,8 @@ declare interface Lighthouse {
   ModifyDiskBackupsAttribute(data: ModifyDiskBackupsAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskBackupsAttributeResponse>;
   /** 修改云硬盘属性 {@link ModifyDisksAttributeRequest} {@link ModifyDisksAttributeResponse} */
   ModifyDisksAttribute(data: ModifyDisksAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksAttributeResponse>;
+  /** 调整云硬盘备份点配额 {@link ModifyDisksBackupQuotaRequest} {@link ModifyDisksBackupQuotaResponse} */
+  ModifyDisksBackupQuota(data: ModifyDisksBackupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksBackupQuotaResponse>;
   /** 修改云硬盘续费标识 {@link ModifyDisksRenewFlagRequest} {@link ModifyDisksRenewFlagResponse} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;
   /** 修改实例内的Docker容器 {@link ModifyDockerContainerRequest} {@link ModifyDockerContainerResponse} */
@@ -2671,6 +2697,8 @@ declare interface Lighthouse {
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
   /** 重置实例密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
+  /** 扩容云硬盘 {@link ResizeDisksRequest} {@link ResizeDisksResponse} */
+  ResizeDisks(data: ResizeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDisksResponse>;
   /** 重启Docker容器 {@link RestartDockerContainersRequest} {@link RestartDockerContainersResponse} */
   RestartDockerContainers(data: RestartDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDockerContainersResponse>;
   /** 创建并运行Docker容器 {@link RunDockerContainersRequest} {@link RunDockerContainersResponse} */

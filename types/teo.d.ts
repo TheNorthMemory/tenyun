@@ -1072,6 +1072,8 @@ declare interface L4ProxyRule {
   RuleTag?: string;
   /** 规则状态，取值有：online：已启用；offline：已停用；progress：部署中；stopping：停用中；fail：部署失败/停用失败。注意：L4ProxyRule 在 CreateL4ProxyRules、ModifyL4ProxyRules 作为入参使用时，该参数请勿填写。 */
   Status?: string;
+  /** BuID。 */
+  BuId?: string;
 }
 
 /** 七层离线日志详细信息。 */

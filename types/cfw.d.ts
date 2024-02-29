@@ -274,7 +274,7 @@ declare interface DescAcItem {
   OrderIndex?: number;
   /** 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag */
   SourceType?: string | null;
-  /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location */
+  /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location,dnsparse */
   TargetType?: string | null;
   /** 规则对应的唯一id */
   Uuid?: number | null;
@@ -1054,6 +1054,8 @@ declare interface TemplateListInfo {
   TemplateId?: string | null;
   /** 协议端口模板，协议类型，4:4层协议，7:7层协议 */
   ProtocolType?: string | null;
+  /** 模板包含地址数量 */
+  IPNum?: number | null;
 }
 
 /** 未处置事件详情 */
@@ -1242,7 +1244,7 @@ declare interface VpcRuleItem {
   SourceType: string;
   /** 访问目的示例：net：IP/CIDR(192.168.0.2)domain：域名规则，例如*.qq.com */
   DestContent: string;
-  /** 访问目的类型，类型可以为：net，domain */
+  /** 访问目的类型，类型可以为：net，domain，dnsparse */
   DestType: string;
   /** 协议，可选的值：TCPUDPICMPANYHTTPHTTPSHTTP/HTTPSSMTPSMTPSSMTP/SMTPSFTPDNSTLS/SSL */
   Protocol: string | null;
