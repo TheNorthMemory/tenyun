@@ -14,6 +14,8 @@ declare interface ActivateHardware {
   Description?: string | null;
   /** 设备密钥 */
   DataKey?: string;
+  /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
+  AccessScope?: number;
 }
 
 /** 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间 */
@@ -43,15 +45,17 @@ declare interface DestAddressInfo {
 /** 设备的基本信息 */
 declare interface DeviceBaseInfo {
   /** 设备唯一ID */
-  DeviceId: string;
+  DeviceId?: string;
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 设备创建的时间，单位：ms */
-  CreateTime: string;
+  CreateTime?: string;
   /** 设备最后在线时间，单位：ms */
-  LastTime: string;
+  LastTime?: string;
   /** 设备的备注 */
-  Remark: string;
+  Remark?: string;
+  /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
+  AccessScope?: number;
 }
 
 /** 设备详细信息 */
@@ -160,6 +164,8 @@ declare interface FlowPackageInfo {
   PackageType?: string;
   /** 流量包状态，0：未生效，1：有效期内，2：已过期 */
   Status?: number;
+  /** 购买时间，Unix时间戳格式，单位：秒 */
+  CreateTime?: number | null;
   /** 生效时间，Unix时间戳格式，单位：秒 */
   ActiveTime?: number;
   /** 过期时间，Unix时间戳格式，单位：秒 */
@@ -172,6 +178,8 @@ declare interface FlowPackageInfo {
   CapacityRemain?: number;
   /** 自动续费标识。true代表自动续费，false代表不自动续费 */
   RenewFlag?: boolean;
+  /** 资源包变更状态，0：未发生变配；1：变配中；2：已变配或已续费 */
+  ModifyStatus?: number;
 }
 
 /** 新建Hardware入参 */
@@ -315,15 +323,17 @@ declare interface AddDeviceRequest {
   DataKey?: string;
   /** 是否设置预置密钥 */
   Encrypted?: boolean;
+  /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。具体含义：公有云网关：即该设备只能接入公有云网关（就近接入）自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入）公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
+  AccessScope?: number;
 }
 
 declare interface AddDeviceResponse {
   /** 经过加密算法加密后的base64格式密钥 */
-  DataKey: string;
+  DataKey?: string;
   /** 设备ID */
-  DeviceId: string;
+  DeviceId?: string;
   /** 签名字符串 */
-  Signature: string | null;
+  Signature?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -505,6 +515,10 @@ declare interface GetFlowStatisticRequest {
   Type: number;
   /** 时间粒度（1：按小时统计，2：按天统计） */
   TimeGranularity: number;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆 */
+  AccessRegion?: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
 }
 
 declare interface GetFlowStatisticResponse {
@@ -551,6 +565,10 @@ declare interface GetMultiFlowStatisticRequest {
   Type: number;
   /** 统计时间粒度（1：按小时统计，2：按天统计） */
   TimeGranularity: number;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆 */
+  AccessRegion?: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
 }
 
 declare interface GetMultiFlowStatisticResponse {
@@ -569,11 +587,15 @@ declare interface GetNetMonitorRequest {
   EndTime: number;
   /** 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms） */
   Metrics: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
 }
 
 declare interface GetNetMonitorResponse {
   /** 监控数据 */
   MonitorData?: MonitorData[] | null;
+  /** 接入区域。取值范围：['MC','AP','EU','AM']MC=中国大陆AP=亚太EU=欧洲AM=美洲 */
+  AccessRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -589,7 +611,7 @@ declare interface GetPublicKeyResponse {
 }
 
 declare interface GetStatisticDataRequest {
-  /** 设备ID */
+  /** 设备ID。若不指定设备，可传"-1" */
   DeviceId: string;
   /** 统计开始时间，单位：s */
   BeginTime: number;
@@ -597,6 +619,10 @@ declare interface GetStatisticDataRequest {
   EndTime: number;
   /** 聚合粒度：1:按小时统计2:按天统计 */
   TimeGranularity: number;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆 */
+  AccessRegion?: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
 }
 
 declare interface GetStatisticDataResponse {

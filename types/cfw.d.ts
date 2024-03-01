@@ -58,6 +58,30 @@ declare interface AssociatedInstanceInfo {
   CdbId?: string | null;
 }
 
+/** 封禁列表和放通列表结构体 */
+declare interface BanAndAllowRule {
+  /** 封禁和放通对象 */
+  Ioc?: string | null;
+  /** 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 */
+  DirectionList?: string | null;
+  /** 规则截止时间 */
+  EndTime?: string | null;
+  /** 规则评论 */
+  Comment?: string | null;
+  /** 自定义白名单规则 */
+  CustomRule?: CustomWhiteRule | null;
+}
+
+/** 封禁列表和放通列表结构体 */
+declare interface BanAndAllowRuleDel {
+  /** 封禁和放通对象 */
+  Ioc?: string | null;
+  /** 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 */
+  DirectionList?: string | null;
+  /** 规则类型 */
+  RuleType?: number | null;
+}
+
 /** 规则关联的beta任务 */
 declare interface BetaInfoByACL {
   /** 任务id */
@@ -1457,7 +1481,7 @@ declare interface CreateAlertCenterIsolateRequest {
   AlertDirection: number;
   /** 隔离类型 1 互联网入站2 互联网出站4 内网访问 */
   IsolateType: number[];
-  /** 运维模式 1 IP白名单 2 身份认证 */
+  /** 运维模式 1 IP白名单 2 身份认证 0 非运维模式 */
   OmMode?: number;
 }
 
@@ -1534,6 +1558,20 @@ declare interface CreateBlockIgnoreRuleListRequest {
 declare interface CreateBlockIgnoreRuleListResponse {
   /** 成功返回 */
   List?: IocListData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBlockIgnoreRuleNewRequest {
+  /** 非自定义类型规则列表 */
+  Rules: BanAndAllowRule[];
+  /** RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则 7入侵防御规则 */
+  RuleType: number;
+  /** 是否覆盖重复数据，1覆盖，非1不覆盖，跳过重复数据 */
+  CoverDuplicate?: number;
+}
+
+declare interface CreateBlockIgnoreRuleNewResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1748,6 +1786,22 @@ declare interface DeleteBlockIgnoreRuleListRequest {
 }
 
 declare interface DeleteBlockIgnoreRuleListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBlockIgnoreRuleNewRequest {
+  /** 是否删除全部 */
+  DeleteAll: number;
+  /** 规则列表 */
+  Rules?: BanAndAllowRuleDel[];
+  /** 封禁：1，放通：100，主要用于全部删除时区分列表类型 */
+  RuleType?: number;
+  /** blocklist 封禁列表 whitelist 白名单列表 */
+  ShowType?: string;
+}
+
+declare interface DeleteBlockIgnoreRuleNewResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2880,6 +2934,18 @@ declare interface ModifyBlockIgnoreListResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBlockIgnoreRuleNewRequest {
+  /** 规则 */
+  Rule: BanAndAllowRule;
+  /** RuleType: 1放通列表 2外部IP 3域名 4情报 5资产 6自定义规则 7入侵防御规则 */
+  RuleType: number;
+}
+
+declare interface ModifyBlockIgnoreRuleNewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBlockIgnoreRuleRequest {
   /** 规则 */
   Rule: IntrusionDefenseRule;
@@ -3401,6 +3467,8 @@ declare interface Cfw {
   CreateAlertCenterRule(data: CreateAlertCenterRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertCenterRuleResponse>;
   /** 批量添加入侵防御封禁列表、放通列表规则 {@link CreateBlockIgnoreRuleListRequest} {@link CreateBlockIgnoreRuleListResponse} */
   CreateBlockIgnoreRuleList(data: CreateBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockIgnoreRuleListResponse>;
+  /** 批量添加入侵防御封禁列表、放通列表规则（新） {@link CreateBlockIgnoreRuleNewRequest} {@link CreateBlockIgnoreRuleNewResponse} */
+  CreateBlockIgnoreRuleNew(data: CreateBlockIgnoreRuleNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockIgnoreRuleNewResponse>;
   /** 创建、选择vpc {@link CreateChooseVpcsRequest} {@link CreateChooseVpcsResponse} */
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
   /** 创建暴露数据库白名单规则 {@link CreateDatabaseWhiteListRulesRequest} {@link CreateDatabaseWhiteListRulesResponse} */
@@ -3423,6 +3491,8 @@ declare interface Cfw {
   DeleteAllAccessControlRule(data?: DeleteAllAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllAccessControlRuleResponse>;
   /** 批量删除入侵防御封禁列表、放通列表规则 {@link DeleteBlockIgnoreRuleListRequest} {@link DeleteBlockIgnoreRuleListResponse} */
   DeleteBlockIgnoreRuleList(data: DeleteBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleListResponse>;
+  /** 批量删除入侵防御封禁列表、放通列表规则（新） {@link DeleteBlockIgnoreRuleNewRequest} {@link DeleteBlockIgnoreRuleNewResponse} */
+  DeleteBlockIgnoreRuleNew(data: DeleteBlockIgnoreRuleNewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleNewResponse>;
   /** 删除入侵防御规则白名单接口 {@link DeleteIdsWhiteRuleRequest} {@link DeleteIdsWhiteRuleResponse} */
   DeleteIdsWhiteRule(data: DeleteIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIdsWhiteRuleResponse>;
   /** 销毁防火墙实例 {@link DeleteNatFwInstanceRequest} {@link DeleteNatFwInstanceResponse} */
@@ -3533,6 +3603,8 @@ declare interface Cfw {
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
   /** 编辑单条入侵防御封禁列表、放通列表规则 {@link ModifyBlockIgnoreRuleRequest} {@link ModifyBlockIgnoreRuleResponse} */
   ModifyBlockIgnoreRule(data: ModifyBlockIgnoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreRuleResponse>;
+  /** 编辑单条入侵防御封禁列表、放通列表规则（新） {@link ModifyBlockIgnoreRuleNewRequest} {@link ModifyBlockIgnoreRuleNewResponse} */
+  ModifyBlockIgnoreRuleNew(data: ModifyBlockIgnoreRuleNewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreRuleNewResponse>;
   /** 取消阻断记录置顶接口 {@link ModifyBlockTopRequest} {@link ModifyBlockTopResponse} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;
   /** 启用停用VPC间规则或Nat边界规则 {@link ModifyEWRuleStatusRequest} {@link ModifyEWRuleStatusResponse} */

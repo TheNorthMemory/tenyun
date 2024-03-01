@@ -470,6 +470,46 @@ declare interface ClbWafRegionItem {
   Code?: string | null;
 }
 
+/** 计费下单接口出入参Goods */
+declare interface CreateDealsGoods {
+  /** 商品数量 */
+  GoodsNum: number;
+  /** 商品明细 */
+  GoodsDetail: CreateDealsGoodsDetail;
+  /** 订单类型ID，用来唯一标识一个业务的一种场景（总共三种场景：新购、配置变更、续费）高级版: 102375(新购),102376(续费),102377(变配)企业版 : 102378(新购),102379(续费),102380(变配)旗舰版 : 102369(新购),102370(续费),102371(变配)域名包 : 102372(新购),102373(续费),102374(变配)业务扩展包 : 101040(新购),101041(续费),101042(变配)高级版-CLB: 新购 101198 续费 101199 变配 101200企业版-CLB 101204(新购),101205(续费),101206(变配)旗舰版-CLB : 101201(新购),101202(续费),101203(变配)域名包-CLB: 101207(新购),101208(续费),101209(变配)业务扩展包-CLB: 101210(新购),101211(续费),101212(变配) */
+  GoodsCategoryId?: number | null;
+  /** 购买waf实例区域ID1 表示购买大陆资源;9表示购买非中国大陆资源 */
+  RegionId?: number | null;
+}
+
+/** 产品明细 */
+declare interface CreateDealsGoodsDetail {
+  /** 时间间隔 */
+  TimeSpan?: number | null;
+  /** 单位，支持购买d、m、y 即（日、月、年） */
+  TimeUnit?: string | null;
+  /** 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面Saas 高级版 ：sp_wsm_waf_premiumSaas企业版 ：sp_wsm_waf_enterpriseSaas旗舰版 ：sp_wsm_waf_ultimateSaas 业务扩展包：sp_wsm_waf_qpsepSaas 域名扩展包：sp_wsm_waf_domain高级版-CLB:sp_wsm_waf_premium_clb企业版-CLB : sp_wsm_waf_enterprise_clb旗舰版-CLB:sp_wsm_waf_ultimate_clb 业务扩展包-CLB：sp_wsm_waf_qpsep_clb域名扩展包-CLB：sp_wsm_waf_domain_clb */
+  SubProductCode?: string | null;
+  /** 业务产品申请的pid（对应一个定价公式），通过pid计费查询到定价模型高级版 ：1000827企业版 ：1000830旗舰版 ：1000832域名包 : 1000834业务扩展包 : 1000481高级版-CLB:1001150企业版-CLB : 1001152旗舰版-CLB:1001154域名包-CLB: 1001156业务扩展包-CLB : 1001160 */
+  Pid?: number | null;
+  /** waf实例名 */
+  InstanceName?: string | null;
+  /** 1:自动续费，0:不自动续费 */
+  AutoRenewFlag?: number | null;
+  /** waf购买的实际地域信息 */
+  RealRegion?: number | null;
+  /** 计费细项标签数组Saas 高级版 sv_wsm_waf_package_premium Saas 企业版 sv_wsm_waf_package_enterpriseSaas 旗舰版 sv_wsm_waf_package_ultimate Saas 非中国大陆高级版 sv_wsm_waf_package_premium_intlSaas 非中国大陆企业版 sv_wsm_waf_package_enterprise_intlSaas 非中国大陆旗舰版 sv_wsm_waf_package_ultimate _intlSaas 业务扩展包 sv_wsm_waf_qps_epSaas 域名扩展包 sv_wsm_waf_domain高级版CLB sv_wsm_waf_package_premium_clb企业版CLB sv_wsm_waf_package_enterprise_clb旗舰版CLB sv_wsm_waf_package_ultimate_clb非中国大陆高级版 CLB sv_wsm_waf_package_premium_clb_intl非中国大陆企业版CLB sv_wsm_waf_package_premium_clb_intl非中国大陆旗舰版CLB sv_wsm_waf_package_ultimate_clb _intl业务扩展包CLB sv_wsm_waf_qps_ep_clb域名扩展包CLB sv_wsm_waf_domain_clb */
+  LabelTypes?: string[] | null;
+  /** 计费细项标签数量，一般和SvLabelType一一对应 */
+  LabelCounts?: number[] | null;
+  /** 变配使用，实例到期时间 */
+  CurDeadline?: string | null;
+  /** 对存在的实例购买bot 或api 安全 */
+  InstanceId?: string | null;
+  /** 资源id */
+  ResourceId?: string | null;
+}
+
 /** 计费下单响应实体 */
 declare interface DealData {
   /** 订单号列表，元素个数与请求包的goods数组的元素个数一致，商品详情与订单按顺序对应 */
@@ -792,7 +832,7 @@ declare interface ExportAccessInfo {
 
 /** 过滤数组 */
 declare interface FiltersItemNew {
-  /** 字段名 */
+  /** 字段名； 过滤子订单号过滤通过name 为：DealName； value为子订单号 */
   Name: string;
   /** 过滤值 */
   Values: string[];
@@ -1928,6 +1968,22 @@ declare interface CreateAccessExportRequest {
 declare interface CreateAccessExportResponse {
   /** 日志导出ID。 */
   ExportId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDealsRequest {
+  /** 计费下单入参 */
+  Goods: CreateDealsGoods[];
+}
+
+declare interface CreateDealsResponse {
+  /** 计费下单响应结构体 */
+  Data?: DealData | null;
+  /** 1:成功，0:失败 */
+  Status?: number;
+  /** 返回message */
+  ReturnMessage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4349,6 +4405,8 @@ declare interface Waf {
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
+  /** 计费实例创建订单 {@link CreateDealsRequest} {@link CreateDealsResponse} */
+  CreateDeals(data: CreateDealsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealsResponse>;
   /** 添加负载均衡型WAF防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */

@@ -2695,9 +2695,9 @@ declare interface DescribeBackupDownloadUrlResponse {
 declare interface DescribeBackupListRequest {
   /** 集群ID */
   ClusterId: string;
-  /** 备份文件列表大小，取值范围(0,100] */
+  /** 返回数量，取值范围(0,100] */
   Limit?: number;
-  /** 备份文件列表偏移，取值范围[0,INF) */
+  /** 记录偏移量，取值范围[0,INF) */
   Offset?: number;
   /** 数据库类型，取值范围: MYSQL */
   DbType?: string;
@@ -2705,7 +2705,7 @@ declare interface DescribeBackupListRequest {
   BackupIds?: number[];
   /** 备份类型，可选值：snapshot，快照备份； logic，逻辑备份 */
   BackupType?: string;
-  /** 备份方式，可选值：auto，自动备份；manual，手动备 */
+  /** 备份方式，可选值：auto，自动备份；manual，手动备份 */
   BackupMethod?: string;
   /** 快照类型，可选值：full，全量；increment，增量 */
   SnapShotType?: string;

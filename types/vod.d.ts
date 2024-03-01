@@ -6053,6 +6053,8 @@ declare interface CreateContentReviewTemplateResponse {
 }
 
 declare interface CreateDomainVerifyRecordRequest {
+  /** 需要接入点播的加速域名。 */
+  Domain: string;
 }
 
 declare interface CreateDomainVerifyRecordResponse {
@@ -7174,6 +7176,24 @@ declare interface DescribeDailyPlayStatFileListRequest {
 declare interface DescribeDailyPlayStatFileListResponse {
   /** 播放统计文件列表。 */
   PlayStatFileSet?: PlayStatFileInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDefaultDistributionConfigRequest {
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+  SubAppId?: number;
+}
+
+declare interface DescribeDefaultDistributionConfigResponse {
+  /** 分发配置的域名(已废弃）。 */
+  DomainName?: string;
+  /** 分发配置的域名。 */
+  Domain?: string;
+  /** 分发配置的协议，为 HTTP 或 HTTPS。 */
+  Scheme?: string;
+  /** 播放密钥，由大小写字母（a - Z）或者数字（0 - 9）组成，长度在8 - 20个字符之间。 */
+  PlayKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8358,6 +8378,22 @@ declare interface ModifyContentReviewTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDefaultDistributionConfigRequest {
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+  SubAppId?: number;
+  /** 分发域名，取值为点播域名列表里的域名。不填或者填空，表示不修改域名。 */
+  Domain?: string;
+  /** 分发协议，取值为 HTTP 或者 HTTPS。 */
+  Scheme?: string;
+  /** 播放密钥，由大小写字母（a - Z）或者数字（0 - 9）组成，长度在8 - 20个字符之间。 */
+  PlayKey?: string;
+}
+
+declare interface ModifyDefaultDistributionConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDefaultStorageRegionRequest {
   /** 默认的存储地域，必须是已经开通的地域（通过 DescribeStorageRegions 接口查询）。 */
   StorageRegion: string;
@@ -9530,7 +9566,7 @@ declare interface Vod {
   /** 创建音视频内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
   /** 生成域名解析记录 {@link CreateDomainVerifyRecordRequest} {@link CreateDomainVerifyRecordResponse} */
-  CreateDomainVerifyRecord(data?: CreateDomainVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainVerifyRecordResponse>;
+  CreateDomainVerifyRecord(data: CreateDomainVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainVerifyRecordResponse>;
   /** 创建音画质重生模板 {@link CreateEnhanceMediaTemplateRequest} {@link CreateEnhanceMediaTemplateResponse} */
   CreateEnhanceMediaTemplate(data: CreateEnhanceMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnhanceMediaTemplateResponse>;
   /** 创建片头片尾模板 {@link CreateHeadTailTemplateRequest} {@link CreateHeadTailTemplateResponse} */
@@ -9655,6 +9691,8 @@ declare interface Vod {
   DescribeDailyMostPlayedStat(data: DescribeDailyMostPlayedStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyMostPlayedStatResponse>;
   /** 查询播放统计文件下载列表 {@link DescribeDailyPlayStatFileListRequest} {@link DescribeDailyPlayStatFileListResponse} */
   DescribeDailyPlayStatFileList(data: DescribeDailyPlayStatFileListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyPlayStatFileListResponse>;
+  /** 查询默认分发配置 {@link DescribeDefaultDistributionConfigRequest} {@link DescribeDefaultDistributionConfigResponse} */
+  DescribeDefaultDistributionConfig(data?: DescribeDefaultDistributionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultDistributionConfigResponse>;
   /** 获取视频解密密钥 {@link DescribeDrmDataKeyRequest} {@link DescribeDrmDataKeyResponse} */
   DescribeDrmDataKey(data: DescribeDrmDataKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmDataKeyResponse>;
   /** 查询 DRM 密钥提供商信息 {@link DescribeDrmKeyProviderInfoRequest} {@link DescribeDrmKeyProviderInfoResponse} */
@@ -9759,6 +9797,8 @@ declare interface Vod {
   ModifyClass(data: ModifyClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClassResponse>;
   /** 修改音视频内容审核模板 {@link ModifyContentReviewTemplateRequest} {@link ModifyContentReviewTemplateResponse} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
+  /** 修改默认分发配置 {@link ModifyDefaultDistributionConfigRequest} {@link ModifyDefaultDistributionConfigResponse} */
+  ModifyDefaultDistributionConfig(data?: ModifyDefaultDistributionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultDistributionConfigResponse>;
   /** 设置默认的存储地域 {@link ModifyDefaultStorageRegionRequest} {@link ModifyDefaultStorageRegionResponse} */
   ModifyDefaultStorageRegion(data: ModifyDefaultStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultStorageRegionResponse>;
   /** 修改音画质重生模板 {@link ModifyEnhanceMediaTemplateRequest} {@link ModifyEnhanceMediaTemplateResponse} */

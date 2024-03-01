@@ -120,6 +120,26 @@ declare interface CarrierPrivilegeNumberApplicant {
   UpdateTime?: number;
 }
 
+/** 查询预测式外呼任务列表元素 */
+declare interface DescribePredictiveDialingCampaignsElement {
+  /** 任务 ID */
+  CampaignId?: number | null;
+  /** 任务名称 */
+  Name?: string | null;
+  /** 任务状态 0 待开始 1 进行中 2 已暂停 3 已终止 4 已完成 */
+  Status?: number | null;
+  /** 任务状态原因 0 正常 1 手动结束 2 超时结束 */
+  StatusReason?: number | null;
+  /** 被叫号码个数 */
+  CalleeCount?: number | null;
+  /** 已完成的被叫个数 */
+  FinishedCalleeCount?: number | null;
+  /** 相同应用内多个任务运行优先级，从高到底 1 - 5 */
+  Priority?: number | null;
+  /** 使用的座席技能组 ID */
+  SkillGroupId?: number | null;
+}
+
 /** 批量添加客服时，返回出错客服的信息 */
 declare interface ErrStaffItem {
   /** 坐席邮箱地址 */
@@ -604,6 +624,18 @@ declare interface Variable {
   Value: string;
 }
 
+declare interface AbortPredictiveDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务 ID */
+  CampaignId: number;
+}
+
+declare interface AbortPredictiveDialingCampaignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindNumberCallOutSkillGroupRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -762,6 +794,42 @@ declare interface CreateExtensionResponse {
   RequestId?: string;
 }
 
+declare interface CreatePredictiveDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务名称 */
+  Name: string;
+  /** 被叫列表，支持 E.164 或不带国家码形式的号码 */
+  Callees: string[];
+  /** 主叫列表，使用管理端展示的号码格式 */
+  Callers: string[];
+  /** 被叫呼叫顺序 0 随机 1 顺序 */
+  CallOrder: number;
+  /** 使用的座席技能组 ID */
+  SkillGroupId: number;
+  /** 相同应用内多个任务运行优先级，从高到底 1 - 5 */
+  Priority: number;
+  /** 预期呼损率，百分比，5 - 50 */
+  ExpectedAbandonRate: number;
+  /** 呼叫重试间隔时间，单位秒，60 - 86400 */
+  RetryInterval: number;
+  /** 任务启动时间，Unix 时间戳，到此时间后会自动启动任务 */
+  StartTime: number;
+  /** 任务结束时间，Unix 时间戳，到此时间后会自动终止任务 */
+  EndTime: number;
+  /** 指定的 IVR Id */
+  IVRId?: number;
+  /** 呼叫重试次数，0 - 2 */
+  RetryTimes?: number;
+}
+
+declare interface CreatePredictiveDialingCampaignResponse {
+  /** 生成的任务 ID */
+  CampaignId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSDKLoginTokenRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -824,6 +892,18 @@ declare interface DeleteExtensionRequest {
 }
 
 declare interface DeleteExtensionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePredictiveDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务 ID */
+  CampaignId: number;
+}
+
+declare interface DeletePredictiveDialingCampaignResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1130,6 +1210,82 @@ declare interface DescribePSTNActiveSessionListResponse {
   RequestId?: string;
 }
 
+declare interface DescribePredictiveDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务 ID */
+  CampaignId: number;
+}
+
+declare interface DescribePredictiveDialingCampaignResponse {
+  /** 任务 ID */
+  CampaignId?: number;
+  /** 任务名称 */
+  Name?: string;
+  /** 被叫呼叫顺序 0 随机 1 顺序 */
+  CallOrder?: number;
+  /** 使用的座席技能组 ID */
+  SkillGroupId?: number;
+  /** 指定的 IVR ID */
+  IVRId?: number;
+  /** 相同应用内多个任务运行优先级，从高到底 1 - 5 */
+  Priority?: number;
+  /** 预期呼损率，百分比，5 - 50 */
+  ExpectedAbandonRate?: number;
+  /** 呼叫重试次数，0 - 2 */
+  RetryTimes?: number;
+  /** 呼叫重试间隔时间，单位秒，60 - 86400 */
+  RetryInterval?: number;
+  /** 任务启动时间，Unix 时间戳，到此时间后会自动启动任务 */
+  StartTime?: number;
+  /** 任务结束时间，Unix 时间戳，到此时间后会自动终止任务 */
+  EndTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePredictiveDialingCampaignsRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 分页尺寸，最大为 100 */
+  PageSize: number;
+  /** 分页页码，从 0 开始 */
+  PageNumber: number;
+  /** 查询任务列表名称关键字 */
+  Name?: string;
+  /** 查询任务列表技能组 ID */
+  SkillGroupId?: number;
+}
+
+declare interface DescribePredictiveDialingCampaignsResponse {
+  /** 数据总量 */
+  TotalCount?: number | null;
+  /** 数据 */
+  CampaignList?: DescribePredictiveDialingCampaignsElement[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePredictiveDialingSessionsRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 生成的任务 ID */
+  CampaignId: number;
+  /** 分页尺寸，最大为 1000 */
+  PageSize: number;
+  /** 分页页码，从 0 开始 */
+  PageNumber: number;
+}
+
+declare interface DescribePredictiveDialingSessionsResponse {
+  /** 数据总量 */
+  TotalCount?: number;
+  /** 呼叫的 session id 列表，通过 https://cloud.tencent.com/document/product/679/47714 可以批量获取呼叫详细话单 */
+  SessionList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProtectedTelCdrRequest {
   /** 起始时间戳，Unix 秒级时间戳 */
   StartTimeStamp: number;
@@ -1364,6 +1520,18 @@ declare interface ModifyStaffResponse {
   RequestId?: string;
 }
 
+declare interface PausePredictiveDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务 ID */
+  CampaignId: number;
+}
+
+declare interface PausePredictiveDialingCampaignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetExtensionPasswordRequest {
   /** TCCC 实例应用 ID */
   SdkAppId: number;
@@ -1374,6 +1542,18 @@ declare interface ResetExtensionPasswordRequest {
 declare interface ResetExtensionPasswordResponse {
   /** 重置后密码 */
   Password?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumePredictiveDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务 ID */
+  CampaignId: number;
+}
+
+declare interface ResumePredictiveDialingCampaignResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1418,9 +1598,47 @@ declare interface UnbindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
+declare interface UpdatePredictiveDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 生成的任务 ID */
+  CampaignId: number;
+  /** 任务名称 */
+  Name: string;
+  /** 被叫列表，支持 E.164 或不带国家码形式的号码 */
+  Callees: string[];
+  /** 主叫列表，使用管理端展示的号码格式 */
+  Callers: string[];
+  /** 被叫呼叫顺序 0 随机 1 顺序 */
+  CallOrder: number;
+  /** 使用的座席技能组 ID */
+  SkillGroupId: number;
+  /** 相同应用内多个任务运行优先级，从高到底 1 - 5 */
+  Priority: number;
+  /** 预期呼损率，百分比，5 - 50 */
+  ExpectedAbandonRate: number;
+  /** 呼叫重试间隔时间，单位秒，60 - 86400 */
+  RetryInterval: number;
+  /** 任务启动时间，Unix 时间戳，到此时间后会自动启动任务 */
+  StartTime: number;
+  /** 任务结束时间，Unix 时间戳，到此时间后会自动终止任务 */
+  EndTime: number;
+  /** 指定的 IVR ID */
+  IVRId?: number;
+  /** 呼叫重试次数，0 - 2 */
+  RetryTimes?: number;
+}
+
+declare interface UpdatePredictiveDialingCampaignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ccc 云联络中心} */
 declare interface Ccc {
   (): Versions;
+  /** 停止预测式外呼任务 {@link AbortPredictiveDialingCampaignRequest} {@link AbortPredictiveDialingCampaignResponse} */
+  AbortPredictiveDialingCampaign(data: AbortPredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<AbortPredictiveDialingCampaignResponse>;
   /** 绑定号码外呼技能组 {@link BindNumberCallOutSkillGroupRequest} {@link BindNumberCallOutSkillGroupResponse} */
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定座席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
@@ -1437,6 +1655,8 @@ declare interface Ccc {
   CreateCarrierPrivilegeNumberApplicant(data: CreateCarrierPrivilegeNumberApplicantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCarrierPrivilegeNumberApplicantResponse>;
   /** 创建话机账号 {@link CreateExtensionRequest} {@link CreateExtensionResponse} */
   CreateExtension(data: CreateExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtensionResponse>;
+  /** 创建预测式外呼任务 {@link CreatePredictiveDialingCampaignRequest} {@link CreatePredictiveDialingCampaignResponse} */
+  CreatePredictiveDialingCampaign(data: CreatePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePredictiveDialingCampaignResponse>;
   /** 创建 SDK 登录 Token {@link CreateSDKLoginTokenRequest} {@link CreateSDKLoginTokenResponse} */
   CreateSDKLoginToken(data: CreateSDKLoginTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSDKLoginTokenResponse>;
   /** 创建客服账号 {@link CreateStaffRequest} {@link CreateStaffResponse} */
@@ -1445,6 +1665,8 @@ declare interface Ccc {
   CreateUserSig(data: CreateUserSigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserSigResponse>;
   /** 删除话机账号 {@link DeleteExtensionRequest} {@link DeleteExtensionResponse} */
   DeleteExtension(data: DeleteExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExtensionResponse>;
+  /** 删除预测式外呼任务 {@link DeletePredictiveDialingCampaignRequest} {@link DeletePredictiveDialingCampaignResponse} */
+  DeletePredictiveDialingCampaign(data: DeletePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePredictiveDialingCampaignResponse>;
   /** 删除坐席信息 {@link DeleteStaffRequest} {@link DeleteStaffResponse} */
   DeleteStaff(data: DeleteStaffRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStaffResponse>;
   /** 查询生效运营商白名单规则 {@link DescribeActiveCarrierPrivilegeNumberRequest} {@link DescribeActiveCarrierPrivilegeNumberResponse} */
@@ -1473,6 +1695,12 @@ declare interface Ccc {
   DescribeNumbers(data: DescribeNumbersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNumbersResponse>;
   /** 获取 PSTN 活动会话列表 {@link DescribePSTNActiveSessionListRequest} {@link DescribePSTNActiveSessionListResponse} */
   DescribePSTNActiveSessionList(data: DescribePSTNActiveSessionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePSTNActiveSessionListResponse>;
+  /** 查询预测式外呼任务 {@link DescribePredictiveDialingCampaignRequest} {@link DescribePredictiveDialingCampaignResponse} */
+  DescribePredictiveDialingCampaign(data: DescribePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePredictiveDialingCampaignResponse>;
+  /** 查询预测式外呼任务列表 {@link DescribePredictiveDialingCampaignsRequest} {@link DescribePredictiveDialingCampaignsResponse} */
+  DescribePredictiveDialingCampaigns(data: DescribePredictiveDialingCampaignsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePredictiveDialingCampaignsResponse>;
+  /** 查询预测式外呼呼叫列表 {@link DescribePredictiveDialingSessionsRequest} {@link DescribePredictiveDialingSessionsResponse} */
+  DescribePredictiveDialingSessions(data: DescribePredictiveDialingSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePredictiveDialingSessionsResponse>;
   /** 获取主被叫受保护的电话服务记录与录音 {@link DescribeProtectedTelCdrRequest} {@link DescribeProtectedTelCdrResponse} */
   DescribeProtectedTelCdr(data: DescribeProtectedTelCdrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectedTelCdrResponse>;
   /** 获取技能组信息列表 {@link DescribeSkillGroupInfoListRequest} {@link DescribeSkillGroupInfoListResponse} */
@@ -1495,14 +1723,20 @@ declare interface Ccc {
   ModifyExtension(data: ModifyExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtensionResponse>;
   /** 修改客服账号 {@link ModifyStaffRequest} {@link ModifyStaffResponse} */
   ModifyStaff(data: ModifyStaffRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStaffResponse>;
+  /** 暂停预测式外呼任务 {@link PausePredictiveDialingCampaignRequest} {@link PausePredictiveDialingCampaignResponse} */
+  PausePredictiveDialingCampaign(data: PausePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<PausePredictiveDialingCampaignResponse>;
   /** 重置话机注册密码 {@link ResetExtensionPasswordRequest} {@link ResetExtensionPasswordResponse} */
   ResetExtensionPassword(data: ResetExtensionPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetExtensionPasswordResponse>;
+  /** 恢复预测式外呼任务 {@link ResumePredictiveDialingCampaignRequest} {@link ResumePredictiveDialingCampaignResponse} */
+  ResumePredictiveDialingCampaign(data: ResumePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<ResumePredictiveDialingCampaignResponse>;
   /** 停止自动外呼任务 {@link StopAutoCalloutTaskRequest} {@link StopAutoCalloutTaskResponse} */
   StopAutoCalloutTask(data: StopAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoCalloutTaskResponse>;
   /** 解绑号码外呼技能组 {@link UnbindNumberCallOutSkillGroupRequest} {@link UnbindNumberCallOutSkillGroupResponse} */
   UnbindNumberCallOutSkillGroup(data: UnbindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindNumberCallOutSkillGroupResponse>;
   /** 解绑坐席所属技能组 {@link UnbindStaffSkillGroupListRequest} {@link UnbindStaffSkillGroupListResponse} */
   UnbindStaffSkillGroupList(data: UnbindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindStaffSkillGroupListResponse>;
+  /** 更新预测式外呼任务 {@link UpdatePredictiveDialingCampaignRequest} {@link UpdatePredictiveDialingCampaignResponse} */
+  UpdatePredictiveDialingCampaign(data: UpdatePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePredictiveDialingCampaignResponse>;
 }
 
 export declare type Versions = ["2020-02-10"];

@@ -4156,6 +4156,18 @@ declare interface SqlExpressionTable {
   ColumnExpression?: string[] | null;
 }
 
+/** 批量运行集成任务配置 */
+declare interface StartTaskInfo {
+  /** 批量运行任务类型，比如START，TIMESTAMP，RESTORE，RESUME等 */
+  Event?: string | null;
+  /** 任务Id列表 */
+  TaskIds?: string[] | null;
+  /** 批量运行任务配置，目前仅用与实时集成基于时间位点启动。基于时间位点启动，需要设置一个name=timestamp, value=具体时间戳的RecordField的配置 */
+  Config?: RecordField[] | null;
+  /** 操作类型 */
+  Description?: string | null;
+}
+
 /** map */
 declare interface StrToStrMap {
   /** k */
@@ -6176,6 +6188,10 @@ declare interface BatchDeleteIntegrationTasksRequest {
   ProjectId: string;
   /** 是否删除开发态任务。默认不删除开发态，为 0 不删除 , 为 1 删除 */
   DeleteKFFlag?: number;
+  /** 操作名称 */
+  Name?: string;
+  /** 本次批量操作涉及任务，用于审计 */
+  TaskNames?: string[];
 }
 
 declare interface BatchDeleteIntegrationTasksResponse {
@@ -6371,6 +6387,8 @@ declare interface BatchResumeIntegrationTasksResponse {
   FailedCount?: number;
   /** 任务总数 */
   TotalCount?: number;
+  /** 本次批量操作涉及任务，用于审计 */
+  TaskNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6392,21 +6410,25 @@ declare interface BatchRunOpsTaskResponse {
 }
 
 declare interface BatchStartIntegrationTasksRequest {
-  /** 任务id */
-  TaskIds: string[];
   /** 任务类型 */
   TaskType: number;
   /** 项目id */
   ProjectId: string;
+  /** 任务id */
+  TaskIds?: string[];
+  /** 批量运行集成任务，目前仅实时集成用到了这个参数 */
+  StartTaskInfoSet?: StartTaskInfo[];
 }
 
 declare interface BatchStartIntegrationTasksResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
+  /** 本次批量操作成功任务id，用于审计 */
+  TaskNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6422,11 +6444,13 @@ declare interface BatchStopIntegrationTasksRequest {
 
 declare interface BatchStopIntegrationTasksResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
+  /** 本次批量操作涉及成功任务，用于审计 */
+  TaskNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6482,6 +6506,8 @@ declare interface BatchSuspendIntegrationTasksRequest {
   ProjectId: string;
   /** 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP) */
   Event?: string;
+  /** 本次批量操作涉及任务，用于审计 */
+  TaskNames?: string[];
 }
 
 declare interface BatchSuspendIntegrationTasksResponse {
@@ -6506,6 +6532,8 @@ declare interface BatchUpdateIntegrationTasksRequest {
   ProjectId: string;
   /** 责任人Id（多个责任人用小写分号隔开） */
   InchargeIds?: string;
+  /** 本次批量操作涉及任务，用于审计 */
+  TaskNames?: string[];
 }
 
 declare interface BatchUpdateIntegrationTasksResponse {
