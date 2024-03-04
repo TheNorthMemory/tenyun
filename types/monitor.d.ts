@@ -1560,6 +1560,10 @@ declare interface PrometheusAgentOverview {
   Name?: string | null;
   /** 是否已开启公网访问，true 开启，false 未开启 */
   EnableExternal?: boolean | null;
+  /** 采集agent期望pod数 */
+  DesiredAgentNum?: number | null;
+  /** 采集agent已正常启动pod数 */
+  ReadyAgentNum?: number | null;
 }
 
 /** Prometheus自定义告警通知时间段 */

@@ -260,7 +260,7 @@ declare interface CommonFlowApprover {
   ApproverSignTypes?: number[];
 }
 
-/** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
+/** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
 declare interface Component {
   /** 控件唯一ID。**在绝对定位方式方式下**，ComponentId为控件的ID，长度不能超过30，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。**在关键字定位方式下**，ComponentId不仅为控件的ID，也是关键字整词。此方式下可以通过"^"来决定是否使用关键字整词匹配能力。例：- 如传入的关键字"^甲方签署^"</font >，则会在PDF文件中有且仅有"甲方签署"关键字的地方（前后不能有其他字符</font >）进行对应操作。- 如传入的关键字为"甲方签署</font >"，则PDF文件中每个出现关键字的位置（前后可以有其他字符</font >）都会执行相应操作。- 如传入的关键字为"^甲方签署</font >"，则PDF文件中每个出现关键字的位置（前面不能有其他字符</font >）都会执行相应操作。- 如传入的关键字为"甲方签署^</font >"，则PDF文件中每个出现关键字的位置（后面不能有其他字符</font >）都会执行相应操作。注：`控件ID可以在一个PDF中不可重复`点击查看ComponentId在模板页面的位置 */
   ComponentId?: string;
@@ -608,7 +608,7 @@ declare interface FlowInfo {
   Deadline: number;
   /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。如果使用模板发起接口，此参数为必填。可以通过生成子客登录链接登录企业控制台, 在**企业模板**中得到合同模板ID。[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
   TemplateId?: string;
-  /** 多个签署人信息，最大支持50个签署方 */
+  /** 合同流程的参与方列表，最多可支持50个参与方注: 在发起流程时，需要保证 FlowApprovers中的顺序与模板定义顺序一致，否则会发起失败。例如，如果模板中定义的第一个参与人是个人用户，第二个参与人是企业员工，则在 approver 中传参时，第一个也必须是个人用户，第二个参与人必须是企业员工。[点击查看模板参与人顺序定义位置](https://qcloudimg.tencent-cloud.cn/raw/c50e0a204fc5c66aaa2ca70e451ef2d6.png) */
   FlowApprovers?: FlowApproverInfo[];
   /** 发起方角色的填写控件的填充内容。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。(白名单功能需要联系对接经理开通，否则模板编辑时无法将填写控件分配给发起方)。![image](https://qcloudimg.tencent-cloud.cn/raw/b1d3978140ee2b44e2c9fdc96e467a5d.png) */
   FormFields?: FormField[];

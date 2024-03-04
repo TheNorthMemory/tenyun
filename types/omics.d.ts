@@ -414,6 +414,34 @@ declare interface VPCOption {
   SubnetCIDRBlock?: string;
 }
 
+/** 缓存卷。 */
+declare interface Volume {
+  /** 缓存卷ID。 */
+  VolumeId?: string | null;
+  /** 名称。 */
+  Name?: string | null;
+  /** 描述。 */
+  Description?: string | null;
+  /** 环境ID。 */
+  EnvironmentId?: string | null;
+  /** 缓存卷类型，取值范围：* SHARED：多点挂载共享存储 */
+  Type?: string | null;
+  /** 缓存卷规格，取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
+  Spec?: string | null;
+  /** 缓存卷大小（GB）。 */
+  Capacity?: number | null;
+  /** 缓存卷使用量（Byte）。 */
+  Usage?: number | null;
+  /** 缓存卷吞吐上限（MiB/s）。 */
+  BandwidthLimit?: number | null;
+  /** 默认挂载路径。 */
+  DefaultMountPath?: string | null;
+  /** 是否为默认缓存卷。 */
+  IsDefault?: boolean | null;
+  /** 状态。 */
+  Status?: string | null;
+}
+
 declare interface CreateEnvironmentRequest {
   /** 环境名称。 */
   Name: string;
@@ -434,6 +462,28 @@ declare interface CreateEnvironmentResponse {
   RequestId?: string;
 }
 
+declare interface CreateVolumeRequest {
+  /** 环境ID。 */
+  EnvironmentId: string;
+  /** 名称。 */
+  Name: string;
+  /** 缓存卷类型，取值范围：* SHARED：多点挂载共享存储 */
+  Type: string;
+  /** 缓存卷规格，取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
+  Spec: string;
+  /** 描述。 */
+  Description?: string;
+  /** 缓存卷大小（GB），Turbo系列需要指定。 */
+  Capacity?: number;
+}
+
+declare interface CreateVolumeResponse {
+  /** 缓存卷ID。 */
+  VolumeId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteEnvironmentRequest {
   /** 环境ID。 */
   EnvironmentId: string;
@@ -442,6 +492,28 @@ declare interface DeleteEnvironmentRequest {
 declare interface DeleteEnvironmentResponse {
   /** 工作流UUID。 */
   WorkflowUuid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVolumeDataRequest {
+  /** 缓存卷ID。 */
+  VolumeId: string;
+  /** 需要删除的路径 */
+  Path: string;
+}
+
+declare interface DeleteVolumeDataResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVolumeRequest {
+  /** 缓存卷ID。 */
+  VolumeId: string;
+}
+
+declare interface DeleteVolumeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -546,6 +618,26 @@ declare interface DescribeTablesRowsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVolumesRequest {
+  /** 环境ID。 */
+  EnvironmentId: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：- Name：名称- IsDefault：是否为默认 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeVolumesResponse {
+  /** 缓存卷。 */
+  Volumes?: Volume[] | null;
+  /** 符合条件的数量。 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetRunCallsRequest {
   /** 任务Uuid。 */
   RunUuid: string;
@@ -612,6 +704,20 @@ declare interface ImportTableFileRequest {
 declare interface ImportTableFileResponse {
   /** 表格ID。 */
   TableId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVolumeRequest {
+  /** 缓存卷ID。 */
+  VolumeId: string;
+  /** 名称。 */
+  Name?: string;
+  /** 描述。 */
+  Description?: string;
+}
+
+declare interface ModifyVolumeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -721,8 +827,14 @@ declare interface Omics {
   (): Versions;
   /** 创建环境 {@link CreateEnvironmentRequest} {@link CreateEnvironmentResponse} */
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
+  /** 创建缓存卷 {@link CreateVolumeRequest} {@link CreateVolumeResponse} */
+  CreateVolume(data: CreateVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVolumeResponse>;
   /** 删除环境 {@link DeleteEnvironmentRequest} {@link DeleteEnvironmentResponse} */
   DeleteEnvironment(data: DeleteEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentResponse>;
+  /** 删除缓存卷 {@link DeleteVolumeRequest} {@link DeleteVolumeResponse} */
+  DeleteVolume(data: DeleteVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVolumeResponse>;
+  /** 删除缓存卷数据 {@link DeleteVolumeDataRequest} {@link DeleteVolumeDataResponse} */
+  DeleteVolumeData(data: DeleteVolumeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVolumeDataResponse>;
   /** 查询环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询任务批次列表 {@link DescribeRunGroupsRequest} {@link DescribeRunGroupsResponse} */
@@ -733,6 +845,8 @@ declare interface Omics {
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询表格行数据 {@link DescribeTablesRowsRequest} {@link DescribeTablesRowsResponse} */
   DescribeTablesRows(data: DescribeTablesRowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesRowsResponse>;
+  /** 查询缓存卷列表 {@link DescribeVolumesRequest} {@link DescribeVolumesResponse} */
+  DescribeVolumes(data: DescribeVolumesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVolumesResponse>;
   /** 查询作业详情 {@link GetRunCallsRequest} {@link GetRunCallsResponse} */
   GetRunCalls(data: GetRunCallsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunCallsResponse>;
   /** 获取任务详情文件 {@link GetRunMetadataFileRequest} {@link GetRunMetadataFileResponse} */
@@ -741,6 +855,8 @@ declare interface Omics {
   GetRunStatus(data: GetRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunStatusResponse>;
   /** 导入表格文件 {@link ImportTableFileRequest} {@link ImportTableFileResponse} */
   ImportTableFile(data: ImportTableFileRequest, config?: AxiosRequestConfig): AxiosPromise<ImportTableFileResponse>;
+  /** 修改缓存卷 {@link ModifyVolumeRequest} {@link ModifyVolumeResponse} */
+  ModifyVolume(data: ModifyVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVolumeResponse>;
   /** 重试任务 {@link RetryRunsRequest} {@link RetryRunsResponse} */
   RetryRuns(data?: RetryRunsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRunsResponse>;
   /** 运行应用 {@link RunApplicationRequest} {@link RunApplicationResponse} */

@@ -630,6 +630,96 @@ declare interface GatewayInstanceSchemeAndPorts {
   PortList?: number[] | null;
 }
 
+/** 治理中心实例信息。 */
+declare interface GovernanceInstance {
+  /** 实例id。 */
+  Id: string;
+  /** 实例所在服务名。 */
+  Service: string;
+  /** 实例所在命名空间名。 */
+  Namespace: string;
+  /** 实例ip地址。 */
+  Host: string | null;
+  /** 实例端口信息。 */
+  Port: number | null;
+  /** 通信协议。 */
+  Protocol: string | null;
+  /** 版本信息。 */
+  Version: string | null;
+  /** 负载均衡权重。 */
+  Weight: number | null;
+  /** 是否开启健康检查。 */
+  EnableHealthCheck: boolean | null;
+  /** 实例是否健康。 */
+  Healthy: boolean | null;
+  /** 实例是否隔离。 */
+  Isolate: boolean | null;
+  /** 实例创建时间。 */
+  CreateTime: string | null;
+  /** 实例修改时间。 */
+  ModifyTime: string | null;
+  /** 元数据数组。 */
+  Metadatas: Metadata[] | null;
+  /** 上报心跳间隔。 */
+  Ttl: number | null;
+}
+
+/** 实例信息 */
+declare interface GovernanceInstanceInput {
+  /** 实例所在服务名。 */
+  Service: string;
+  /** 实例服务所在命名空间。 */
+  Namespace: string;
+  /** 实例负载均衡权重信息。不填默认为100。 */
+  Weight?: number;
+  /** 实例默认健康信息。不填默认为健康。 */
+  Healthy?: boolean;
+  /** 实例隔离信息。不填默认为非隔离。 */
+  Isolate?: boolean;
+  /** 实例ip。 */
+  Host?: string;
+  /** 实例监听端口。 */
+  Port?: number;
+  /** 实例使用协议。不填默认为空。 */
+  Protocol?: string;
+  /** 实例版本。不填默认为空。 */
+  InstanceVersion?: string;
+  /** 是否启用健康检查。不填默认不启用。 */
+  EnableHealthCheck?: boolean;
+  /** 上报心跳时间间隔。若 EnableHealthCheck 为不启用，则此参数不生效；若 EnableHealthCheck 启用，此参数不填，则默认 ttl 为 5s。 */
+  Ttl?: number;
+}
+
+/** 实例信息 */
+declare interface GovernanceInstanceUpdate {
+  /** 实例所在服务名。 */
+  Service: string;
+  /** 实例服务所在命名空间。 */
+  Namespace: string;
+  /** 治理中心服务实例id。 */
+  Id: string;
+  /** 实例负载均衡权重信息。不填默认为100。 */
+  Weight?: number;
+  /** 实例默认健康信息。不填默认为健康。 */
+  Healthy?: boolean;
+  /** 实例隔离信息。不填默认为非隔离。 */
+  Isolate?: boolean;
+  /** 实例ip。 */
+  Host?: string;
+  /** 实例监听端口。 */
+  Port?: number;
+  /** 实例使用协议。不填默认为空。 */
+  Protocol?: string;
+  /** 实例版本。不填默认为空。 */
+  InstanceVersion?: string;
+  /** 是否启用健康检查。不填默认不启用。 */
+  EnableHealthCheck?: boolean;
+  /** 上报心跳时间间隔。若 EnableHealthCheck 为不启用，则此参数不生效；若 EnableHealthCheck 启用，此参数不填，则默认 ttl 为 5s。 */
+  Ttl?: number;
+  /** 元数据信息。 */
+  Metadatas?: Metadata[];
+}
+
 /** 实例监听端口信息 */
 declare interface InstancePort {
   /** 监听的 http 端口范围。 */
@@ -949,6 +1039,14 @@ declare interface ListFilter {
   /** 过滤字段 */
   Key?: string | null;
   /** 过滤值 */
+  Value?: string | null;
+}
+
+/** 元数据信息 */
+declare interface Metadata {
+  /** 元数据键名。 */
+  Key: string | null;
+  /** 元数据键值。不填则默认为空字符串。 */
   Value?: string | null;
 }
 
@@ -1528,6 +1626,20 @@ declare interface CreateEngineResponse {
   RequestId?: string;
 }
 
+declare interface CreateGovernanceInstancesRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 服务实例信息。 */
+  GovernanceInstances: GovernanceInstanceInput[];
+}
+
+declare interface CreateGovernanceInstancesResponse {
+  /** 创建是否成功。 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNativeGatewayServerGroupRequest {
   /** 网关实例id。只支持后付费实例 */
   GatewayId: string;
@@ -1688,6 +1800,20 @@ declare interface DeleteEngineRequest {
 }
 
 declare interface DeleteEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGovernanceInstancesRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 要删除的服务实例信息。 */
+  GovernanceInstances: GovernanceInstanceUpdate[];
+}
+
+declare interface DeleteGovernanceInstancesResponse {
+  /** 操作是否成功。 */
+  Result: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1950,6 +2076,40 @@ declare interface DescribeCloudNativeAPIGatewaysRequest {
 declare interface DescribeCloudNativeAPIGatewaysResponse {
   /** 获取云原生API网关实例列表响应结果。 */
   Result: ListCloudNativeAPIGatewayResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGovernanceInstancesRequest {
+  /** 实例所在的服务名。 */
+  Service: string;
+  /** 实例所在命名空间名。 */
+  Namespace: string;
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 根据实例ip过滤，多个ip使用英文逗号分隔。 */
+  Host?: string;
+  /** 根据实例版本过滤。 */
+  InstanceVersion?: string;
+  /** 根据实例协议过滤。 */
+  Protocol?: string;
+  /** 根据实例健康状态过滤。false：表示不健康，true：表示健康。 */
+  HealthStatus?: boolean;
+  /** 根据实例隔离状态过滤。false：表示非隔离，true：表示隔离中。 */
+  Isolate?: boolean;
+  /** 根据元数据信息过滤。目前只支持一组元数据键值，若传了多个键值对，只会以第一个过滤。 */
+  Metadatas?: Metadata[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeGovernanceInstancesResponse {
+  /** 服务实例总数量。 */
+  TotalCount: number;
+  /** 服务里实例列表。 */
+  Content: GovernanceInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2364,6 +2524,20 @@ declare interface ModifyConsoleNetworkResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGovernanceInstancesRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 服务实例信息。 */
+  GovernanceInstances: GovernanceInstanceUpdate[];
+}
+
+declare interface ModifyGovernanceInstancesResponse {
+  /** 修改是否成功。 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNativeGatewayServerGroupRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -2582,6 +2756,8 @@ declare interface Tse {
   CreateCloudNativeAPIGatewayServiceRateLimit(data: CreateCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 创建引擎实例 {@link CreateEngineRequest} {@link CreateEngineResponse} */
   CreateEngine(data: CreateEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEngineResponse>;
+  /** 创建治理中心服务实例 {@link CreateGovernanceInstancesRequest} {@link CreateGovernanceInstancesResponse} */
+  CreateGovernanceInstances(data: CreateGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceInstancesResponse>;
   /** 创建云原生网关引擎分组 {@link CreateNativeGatewayServerGroupRequest} {@link CreateNativeGatewayServerGroupResponse} */
   CreateNativeGatewayServerGroup(data: CreateNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServerGroupResponse>;
   /** 新建 WAF 防护域名 {@link CreateWafDomainsRequest} {@link CreateWafDomainsResponse} */
@@ -2606,6 +2782,8 @@ declare interface Tse {
   DeleteCloudNativeAPIGatewayServiceRateLimit(data: DeleteCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 删除引擎实例 {@link DeleteEngineRequest} {@link DeleteEngineResponse} */
   DeleteEngine(data: DeleteEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEngineResponse>;
+  /** 删除治理中心服务实例 {@link DeleteGovernanceInstancesRequest} {@link DeleteGovernanceInstancesResponse} */
+  DeleteGovernanceInstances(data: DeleteGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceInstancesResponse>;
   /** 删除网关实例分组 {@link DeleteNativeGatewayServerGroupRequest} {@link DeleteNativeGatewayServerGroupResponse} */
   DeleteNativeGatewayServerGroup(data: DeleteNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeGatewayServerGroupResponse>;
   /** 删除 WAF 防护域名 {@link DeleteWafDomainsRequest} {@link DeleteWafDomainsResponse} */
@@ -2640,6 +2818,8 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayUpstream(data: DescribeCloudNativeAPIGatewayUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayUpstreamResponse>;
   /** 获取云原生网关实例列表 {@link DescribeCloudNativeAPIGatewaysRequest} {@link DescribeCloudNativeAPIGatewaysResponse} */
   DescribeCloudNativeAPIGateways(data?: DescribeCloudNativeAPIGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaysResponse>;
+  /** 查询治理中心服务实例 {@link DescribeGovernanceInstancesRequest} {@link DescribeGovernanceInstancesResponse} */
+  DescribeGovernanceInstances(data: DescribeGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceInstancesResponse>;
   /** 查询Nacos类型引擎实例副本信息 {@link DescribeNacosReplicasRequest} {@link DescribeNacosReplicasResponse} */
   DescribeNacosReplicas(data: DescribeNacosReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosReplicasResponse>;
   /** 查询nacos服务接口列表 {@link DescribeNacosServerInterfacesRequest} {@link DescribeNacosServerInterfacesResponse} */
@@ -2682,6 +2862,8 @@ declare interface Tse {
   ModifyCloudNativeAPIGatewayServiceRateLimit(data: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 修改云原生API网关实例Konga网络配置 {@link ModifyConsoleNetworkRequest} {@link ModifyConsoleNetworkResponse} */
   ModifyConsoleNetwork(data: ModifyConsoleNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsoleNetworkResponse>;
+  /** 修改治理中心服务实例 {@link ModifyGovernanceInstancesRequest} {@link ModifyGovernanceInstancesResponse} */
+  ModifyGovernanceInstances(data: ModifyGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceInstancesResponse>;
   /** 修改云原生API网关实例分组基础信息 {@link ModifyNativeGatewayServerGroupRequest} {@link ModifyNativeGatewayServerGroupResponse} */
   ModifyNativeGatewayServerGroup(data: ModifyNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServerGroupResponse>;
   /** 修改云原生API网关实例Kong访问策略 {@link ModifyNetworkAccessStrategyRequest} {@link ModifyNetworkAccessStrategyResponse} */

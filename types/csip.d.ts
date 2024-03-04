@@ -1260,6 +1260,14 @@ declare interface Tag {
   Value: string;
 }
 
+/** 产品日志条数 */
+declare interface TagCount {
+  /** 产品名 */
+  Name?: string | null;
+  /** 日志条数 */
+  Count?: number | null;
+}
+
 /** 主机标签信息 */
 declare interface Tags {
   /** 无 */
@@ -2249,6 +2257,18 @@ declare interface DescribeTaskLogURLResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopAttackInfoRequest {
+  /** 被调用的集团账号的成员id */
+  OperatedMemberId?: string[];
+}
+
+declare interface DescribeTopAttackInfoResponse {
+  /** Top攻击类型/攻击者次数 */
+  TopAttackInfo?: TagCount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVULRiskAdvanceCFGListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -2430,6 +2450,8 @@ declare interface Csip {
   DescribeTaskLogList(data?: DescribeTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogListResponse>;
   /** 获取报告下载的临时链接 {@link DescribeTaskLogURLRequest} {@link DescribeTaskLogURLResponse} */
   DescribeTaskLogURL(data: DescribeTaskLogURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogURLResponse>;
+  /** 查询TOP攻击信息 {@link DescribeTopAttackInfoRequest} {@link DescribeTopAttackInfoResponse} */
+  DescribeTopAttackInfo(data?: DescribeTopAttackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackInfoResponse>;
   /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */
   DescribeVULRiskAdvanceCFGList(data?: DescribeVULRiskAdvanceCFGListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskAdvanceCFGListResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */

@@ -1155,27 +1155,27 @@ declare interface InquireCkafkaPriceResp {
 /** 询价返回参数 */
 declare interface InquiryBasePrice {
   /** 单位原价 */
-  UnitPrice: number | null;
+  UnitPrice?: number | null;
   /** 折扣单位价格 */
-  UnitPriceDiscount: number | null;
+  UnitPriceDiscount?: number | null;
   /** 合计原价 */
-  OriginalPrice: number | null;
+  OriginalPrice?: number | null;
   /** 折扣合计价格 */
-  DiscountPrice: number | null;
+  DiscountPrice?: number | null;
   /** 折扣(单位是%) */
-  Discount: number | null;
+  Discount?: number | null;
   /** 商品数量 */
-  GoodsNum: number | null;
+  GoodsNum?: number | null;
   /** 付费货币 */
-  Currency: string | null;
+  Currency?: string | null;
   /** 硬盘专用返回参数 */
-  DiskType: string | null;
+  DiskType?: string | null;
   /** 购买时长 */
-  TimeSpan: number | null;
+  TimeSpan?: number | null;
   /** 购买时长单位("m"按月, "h"按小时) */
-  TimeUnit: string | null;
+  TimeUnit?: string | null;
   /** 购买数量 */
-  Value: number | null;
+  Value?: number | null;
 }
 
 /** 详细类别的价格 */
@@ -2747,7 +2747,7 @@ declare interface CreateInstancePreRequest {
   RenewFlag?: number;
   /** CKafka版本号[0.10.2、1.1.1、2.4.1、2.4.2、2.8.1、3.2.3], 默认是1.1.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
-  /** 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession" */
+  /** 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession",[高级版实例]填写"premium" */
   SpecificationsType?: string;
   /** 磁盘大小，如果跟控制台规格配比不相符，则无法创建成功 */
   DiskSize?: number;
@@ -2757,7 +2757,7 @@ declare interface CreateInstancePreRequest {
   Partition?: number;
   /** 标签 */
   Tags?: Tag[];
-  /** 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC" */
+  /** 专业版/高级版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC" */
   DiskType?: string;
   /** 是否创建跨可用区实例，当前参数为 true 时，zoneIds必填 */
   MultiZoneFlag?: boolean;
@@ -3756,21 +3756,21 @@ declare interface GroupResponse {
 }
 
 declare interface InquireCkafkaPriceRequest {
-  /** 国内站标准版填写standards2, 国际站标准版填写standard，专业版填写profession */
+  /** 国内站标准版填写standards2, 国际站标准版填写standard,专业版填写profession,高级版填写premium */
   InstanceType: string;
   /** 购买/续费付费类型(购买时不填的话, 默认获取购买包年包月一个月的费用) */
   InstanceChargeParam?: InstanceChargeParam;
   /** 购买/续费时购买的实例数量(不填时, 默认为1个) */
   InstanceNum?: number;
-  /** 实例内网带宽大小, 单位MB/s (购买时必填，专业版询价时带宽信息必填) */
+  /** 实例内网带宽大小, 单位MB/s (购买时必填，专业版/高级版询价时带宽信息必填) */
   Bandwidth?: number;
-  /** 实例的硬盘购买类型以及大小 (购买时必填，专业版询价时磁盘信息必填) */
+  /** 实例的硬盘购买类型以及大小 (购买时必填，专业版/高级版询价时磁盘信息必填) */
   InquiryDiskParam?: InquiryDiskParam;
   /** 实例消息保留时间大小, 单位小时 (购买时必填) */
   MessageRetention?: number;
   /** 购买实例topic数, 单位个 (购买时必填) */
   Topic?: number;
-  /** 购买实例分区数, 单位个 (购买时必填，专业版询价时带宽信息必填) */
+  /** 购买实例分区数, 单位个 (购买时必填，专业版/高级版询价时带宽信息必填) */
   Partition?: number;
   /** 购买地域, 可通过查看DescribeCkafkaZone这个接口获取ZoneId */
   ZoneIds?: number[];

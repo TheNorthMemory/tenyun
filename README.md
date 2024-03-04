@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 245+ 款产品，11027+ 服务数</summary>
+<details><summary>共计 245+ 款产品，11037+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -166,7 +166,7 @@ cms | 内容安全 | 2019-03-21(6) |
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(3) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
 cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2018-03-21(28) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(36) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(37) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(97) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(518) |
@@ -254,7 +254,7 @@ nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(38) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
-omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(15) |
+omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(20) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(47) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(19) |
@@ -325,7 +325,7 @@ trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(53) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(43) |
-tse | [微服务引擎](https://cloud.tencent.com/document/product/1364) | 2020-12-07(73) |
+tse | [微服务引擎](https://cloud.tencent.com/document/product/1364) | 2020-12-07(77) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(219) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |

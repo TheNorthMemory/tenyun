@@ -955,6 +955,8 @@ declare interface DescribeCodeBatchesRequest {
   BatchType?: string;
   /** 企业ID */
   CorpId?: number;
+  /** 批次状态 */
+  Status?: number;
 }
 
 declare interface DescribeCodeBatchesResponse {
@@ -981,6 +983,8 @@ declare interface DescribeCodeBatchsRequest {
   BatchType?: string;
   /** 企业ID */
   CorpId?: number;
+  /** 批次状态 */
+  Status?: number;
 }
 
 declare interface DescribeCodeBatchsResponse {
