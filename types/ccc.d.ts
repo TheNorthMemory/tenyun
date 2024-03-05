@@ -1598,6 +1598,24 @@ declare interface UnbindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
+declare interface UpdateCCCSkillGroupRequest {
+  /** 应用 ID（必填） */
+  SdkAppId: number;
+  /** 技能组ID */
+  SkillGroupID: number;
+  /** 修改后的技能组名字 */
+  SkillGroupName?: string;
+  /** 修改后的最大并发数,同振最大为2 */
+  MaxConcurrency?: number;
+  /** true同振，false顺振 */
+  RingAll?: boolean;
+}
+
+declare interface UpdateCCCSkillGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdatePredictiveDialingCampaignRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1735,6 +1753,8 @@ declare interface Ccc {
   UnbindNumberCallOutSkillGroup(data: UnbindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindNumberCallOutSkillGroupResponse>;
   /** 解绑坐席所属技能组 {@link UnbindStaffSkillGroupListRequest} {@link UnbindStaffSkillGroupListResponse} */
   UnbindStaffSkillGroupList(data: UnbindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindStaffSkillGroupListResponse>;
+  /** 更新技能组 {@link UpdateCCCSkillGroupRequest} {@link UpdateCCCSkillGroupResponse} */
+  UpdateCCCSkillGroup(data: UpdateCCCSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCCCSkillGroupResponse>;
   /** 更新预测式外呼任务 {@link UpdatePredictiveDialingCampaignRequest} {@link UpdatePredictiveDialingCampaignResponse} */
   UpdatePredictiveDialingCampaign(data: UpdatePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePredictiveDialingCampaignResponse>;
 }

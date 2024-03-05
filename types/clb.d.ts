@@ -476,11 +476,11 @@ declare interface IdleLoadBalancer {
 
 /** 网络计费模式，最大出带宽 */
 declare interface InternetAccessible {
-  /** TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;BANDWIDTH_PACKAGE 按带宽包计费; */
+  /** TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费; BANDWIDTH_PACKAGE 按带宽包计费;BANDWIDTH_PREPAID按带宽预付费。 */
   InternetChargeType?: string | null;
-  /** 最大出带宽，单位Mbps，仅对公网属性的共享型、性能容量型和独占型 CLB 实例、以及内网属性的性能容量型 CLB 实例生效。- 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。- 对于公网属性和内网属性的性能容量型 CLB实例，最大出带宽的范围为1Mbps-61440Mbps。 */
+  /** 最大出带宽，单位Mbps，仅对公网属性的共享型、性能容量型和独占型 CLB 实例、以及内网属性的性能容量型 CLB 实例生效。- 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。- 对于公网属性和内网属性的性能容量型 CLB实例，最大出带宽的范围为1Mbps-61440Mbps。（调用CreateLoadBalancer创建LB时不指定此参数则设置为默认值10Mbps。此上限可调整） */
   InternetMaxBandwidthOut?: number | null;
-  /** 带宽包的类型，如SINGLEISP */
+  /** 带宽包的类型，如SINGLEISP（单线）、BGP（多线）。 */
   BandwidthpkgSubType?: string | null;
 }
 
@@ -1104,9 +1104,9 @@ declare interface SnatIp {
 
 /** 规格可用性 */
 declare interface SpecAvailability {
-  /** 规格类型 */
+  /** 规格类型。clb.c2.medium（标准型）clb.c3.small（高阶型1）clb.c3.medium（高阶型2）clb.c4.small（超强型1）clb.c4.medium（超强型2）clb.c4.large（超强型3）clb.c4.xlarge（超强型4）shared（共享型） */
   SpecType?: string | null;
-  /** 规格可用性 */
+  /** 规格可用性。资源可用性，"Available"：可用，"Unavailable"：不可用 */
   Availability?: string | null;
 }
 
@@ -1581,7 +1581,7 @@ declare interface CreateTopicRequest {
   PartitionCount?: number;
   /** 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。 */
   TopicType?: string;
-  /** 日志集的保存周期，单位：天，默认30天。 */
+  /** 日志集的保存周期，单位：天，默认30天，范围[1, 3600]。 */
   Period?: number;
   /** 日志主题的存储类型，可选值 HOT（标准存储），COLD（低频存储）；默认为HOT。 */
   StorageType?: string;
@@ -1925,9 +1925,9 @@ declare interface DescribeCustomizedConfigListRequest {
 
 declare interface DescribeCustomizedConfigListResponse {
   /** 配置列表 */
-  ConfigList: ConfigListItem[];
+  ConfigList?: ConfigListItem[];
   /** 配置数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2127,7 +2127,7 @@ declare interface DescribeResourcesRequest {
   Limit?: number;
   /** 返回可用区资源列表起始偏移量，默认0。 */
   Offset?: number;
-  /** 查询可用区资源列表条件，详细的过滤条件如下： zone - String - 是否必填：否 - （过滤条件）按照 可用区 过滤，如："ap-guangzhou-1"（广州一区）。 isp -- String - 是否必填：否 - （过滤条件）按照 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC"。 */
+  /** 查询可用区资源列表条件，详细的过滤条件如下：master-zone -- String - 是否必填：否 - （过滤条件）按照 地区 类型过滤，如："ap-guangzhou-2"。ip-version -- String - 是否必填：否 - （过滤条件）按照 IP 类型过滤，可选值："IPv4"、"IPv6"、"IPv6_Nat"。 isp -- String - 是否必填：否 - （过滤条件）按照 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC"。 */
   Filters?: Filter[];
 }
 
@@ -2279,7 +2279,7 @@ declare interface InquiryPriceCreateLoadBalancerRequest {
   LoadBalancerType: string;
   /** 询价的收费类型，POSTPAID为按量计费，"PREPAID"为预付费包年包月 */
   LoadBalancerChargeType: string;
-  /** 询价的收费周期 */
+  /** 询价的收费周期。（仅包年包月支持该参数） */
   LoadBalancerChargePrepaid?: LBChargePrepaid;
   /** 询价的网络计费方式 */
   InternetAccessible?: InternetAccessible;
@@ -2287,11 +2287,11 @@ declare interface InquiryPriceCreateLoadBalancerRequest {
   GoodsNum?: number;
   /** 指定可用区询价。如：ap-guangzhou-1 */
   ZoneId?: string;
-  /** 包年包月询价时传性能容量型规格，如：clb.c3.small。按量付费询价时传SLA */
+  /** 包年包月询价时传性能容量型规格，如：clb.c2.medium（标准型）clb.c3.small（高阶型1）clb.c3.medium（高阶型2）clb.c4.small（超强型1）clb.c4.medium（超强型2）clb.c4.large（超强型3）clb.c4.xlarge（超强型4）按量付费询价时传SLA */
   SlaType?: string;
   /** IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。 */
   AddressIPVersion?: string;
-  /** 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。示例值：CMCC */
+  /** 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。 */
   VipIsp?: string;
 }
 
@@ -2551,7 +2551,7 @@ declare interface ModifyLoadBalancerSlaResponse {
 declare interface ModifyLoadBalancersProjectRequest {
   /** 一个或多个待操作的负载均衡实例ID。 */
   LoadBalancerIds: string[];
-  /** 项目ID。 */
+  /** 项目ID。可以通过 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取。 */
   ProjectId: number;
 }
 
@@ -2769,9 +2769,9 @@ declare interface SetCustomizedConfigForLoadBalancerResponse {
 declare interface SetLoadBalancerClsLogRequest {
   /** 负载均衡实例 ID。 */
   LoadBalancerId: string;
-  /** 日志服务(CLS)的日志集 ID。增加和更新日志主题时可调用 [DescribeLogsets](https://cloud.tencent.com/document/product/614/56454) 接口获取日志集 ID。删除日志主题时，此参数填写为null即可。 */
+  /** 日志服务(CLS)的日志集 ID。增加和更新日志主题时可调用 [DescribeLogsets](https://cloud.tencent.com/document/product/614/58624) 接口获取日志集 ID。删除日志主题时，此参数填写为null即可。 */
   LogSetId: string;
-  /** 日志服务(CLS)的日志主题 ID。增加和更新日志主题时可调用 [DescribeTopics](https://cloud.tencent.com/document/product/614/58624) 接口获取日志主题 ID。删除日志主题时，此参数填写为null即可。 */
+  /** 日志服务(CLS)的日志主题 ID。增加和更新日志主题时可调用 [DescribeTopics](https://cloud.tencent.com/document/product/614/56454) 接口获取日志主题 ID。删除日志主题时，此参数填写为null即可。 */
   LogTopicId: string;
   /** 日志类型：ACCESS：访问日志HEALTH：健康检查日志默认为ACCESS。 */
   LogType?: string;

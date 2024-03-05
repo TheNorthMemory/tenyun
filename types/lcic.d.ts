@@ -26,6 +26,20 @@ declare interface AnswerStat {
 
 /** 应用配置信息 */
 declare interface AppConfig {
+  /** 应用ID */
+  ApplicationId?: string;
+  /** 应用名称 */
+  AppName?: string | null;
+  /** 应用状态 1正常 2停用 */
+  State?: number | null;
+  /** 1试用 2轻量版 3标准版 4旗舰版 */
+  AppVersion?: number | null;
+  /** 创建时间 */
+  CreatedAt?: string | null;
+  /** 回调 */
+  Callback?: string | null;
+  /** 回调Key */
+  CallbackKey?: string | null;
 }
 
 /** 应用自定义内容 */
@@ -402,6 +416,16 @@ declare interface RoomItem {
 
 /** 场景配置 */
 declare interface SceneItem {
+  /** 场景名称 */
+  Scene?: string;
+  /** logo地址 */
+  LogoUrl?: string | null;
+  /** 主页地址 */
+  HomeUrl?: string | null;
+  /** 自定义的js */
+  JSUrl?: string | null;
+  /** 自定义的css */
+  CSSUrl?: string | null;
 }
 
 /** 文字水印配置 */
@@ -416,6 +440,12 @@ declare interface TextMarkConfig {
 declare interface TextMsgContent {
   /** 文本消息。 */
   Text: string;
+}
+
+/** 转存配置 */
+declare interface TransferItem {
+  /** 转存状态， 1正常 2停用 */
+  State?: number | null;
 }
 
 /** 用户信息结构体 */
@@ -690,7 +720,7 @@ declare interface CreateRoomRequest {
   RTCAudienceNumber?: number;
   /** 观看类型。互动观看 （默认） */
   AudienceType?: number;
-  /** 录制模板。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
+  /** 录制模板。房间子类型为视频+白板（SubType=videodoc）时默认为3，房间子类型为纯视频（SubType=video）时默认为0。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;
   /** 房间绑定的群组ID,非空时限制组成员进入 */
   GroupId?: string;
@@ -859,6 +889,8 @@ declare interface DescribeAppDetailResponse {
   AppConfig?: AppConfig;
   /** 场景配置 */
   SceneConfig?: SceneItem[];
+  /** 转存配置 */
+  TransferConfig?: TransferItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1418,6 +1450,10 @@ declare interface ModifyAppRequest {
   Callback?: string;
   /** 回调key。 */
   CallbackKey?: string;
+  /** 转存id */
+  TransferId?: string;
+  /** 转存地址 */
+  TransferUrl?: string;
 }
 
 declare interface ModifyAppResponse {
