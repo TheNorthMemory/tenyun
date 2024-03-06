@@ -28,7 +28,7 @@ declare interface CustomMapEntry {
 
 /** 接入点信息 */
 declare interface Endpoint {
-  /** 接入点类型，VPC，PUBLIC 公网 */
+  /** 接入点类型，枚举值如下VPC: VPC;PUBLIC: 公网;INTERNAL: 支撑网; */
   Type?: string;
   /** 状态，OPEN 开启，CLOSE 关闭，PROCESSING 操作中， */
   Status?: string;
@@ -713,7 +713,7 @@ declare interface DescribeInstanceRequest {
 
 declare interface DescribeInstanceResponse {
   /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 实例ID */
   InstanceId?: string;
   /** 实例名称 */
@@ -758,6 +758,20 @@ declare interface DescribeInstanceResponse {
   SkuCode?: string;
   /** 计费模式 */
   PayMode?: string;
+  /** 是否开启弹性TPS */
+  ScaledTpsEnabled?: boolean;
+  /** 是否自动续费 */
+  RenewFlag?: number;
+  /** 到期时间 */
+  ExpiryTime?: number;
+  /** 角色数量限制 */
+  RoleNumLimit?: number;
+  /** 是否开启 ACL */
+  AclEnabled?: boolean | null;
+  /** topic个数免费额度 */
+  TopicNumLowerLimit?: number | null;
+  /** 最大可设置的topic个数 */
+  TopicNumUpperLimit?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

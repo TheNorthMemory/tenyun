@@ -1848,6 +1848,22 @@ declare interface DescribeModelDefinitionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeP2PInfoRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+}
+
+declare interface DescribeP2PInfoResponse {
+  /** xp2pinfo信息 */
+  P2PInfo?: string;
+  /** 上报时间 */
+  ReportTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePackageConsumeTaskRequest {
   /** 任务id */
   TaskId: number;
@@ -5891,6 +5907,8 @@ declare interface Iotvideo {
   DescribeMessageDataStats(data: DescribeMessageDataStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageDataStatsResponse>;
   /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
+  /** 拉取设备p2p信息 {@link DescribeP2PInfoRequest} {@link DescribeP2PInfoResponse} */
+  DescribeP2PInfo(data: DescribeP2PInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeP2PInfoResponse>;
   /** 查询套餐消耗记录详情 {@link DescribePackageConsumeTaskRequest} {@link DescribePackageConsumeTaskResponse} */
   DescribePackageConsumeTask(data: DescribePackageConsumeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTaskResponse>;
   /** 查询套餐消耗记录列表 {@link DescribePackageConsumeTasksRequest} {@link DescribePackageConsumeTasksResponse} */

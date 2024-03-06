@@ -412,6 +412,16 @@ declare interface CC {
   PolicyId?: number;
 }
 
+/** 实时日志投递到腾讯云 CLS 的配置信息。 */
+declare interface CLSTopic {
+  /** 腾讯云 CLS 日志集 ID。 */
+  LogSetId: string;
+  /** 腾讯云 CLS 日志主题 ID。 */
+  TopicId: string;
+  /** 腾讯云 CLS 日志集所在的地域。 */
+  LogSetRegion: string;
+}
+
 /** 缓存时间设置 */
 declare interface Cache {
   /** 缓存配置开关，取值有：on：开启；off：关闭。 */
@@ -528,6 +538,32 @@ declare interface ConfigGroupVersionInfo {
   CreateTime?: string;
 }
 
+/** 实时日志投递到自定义 HTTP(S) 接口的配置信息。 */
+declare interface CustomEndpoint {
+  /** 实时日志投递的自定义 HTTP 接口地址，暂仅支持 HTTP/HTTPS 协议。 */
+  Url: string;
+  /** 填写自定义的 SecretId 用于生成加密签名，如果源站需要鉴权此参数必填。 */
+  AccessId?: string;
+  /** 填写自定义的 SecretKey 用于生成加密签名，如果源站需要鉴权此参数必填。 */
+  AccessKey?: string;
+  /** 数据压缩类型，取值有: gzip：使用 gzip 方式压缩。不填表示不启用压缩。 */
+  CompressType?: string;
+  /** POST 请求投递日志时，使用的应用层协议类型，取值有： http：HTTP 协议；https：HTTPS 协议。如果不填默认根据填写的 URL 地址解析出协议类型。 */
+  Protocol?: string;
+  /** 投递日志时携带的自定义请求头，注意 Content-Type、Accept-Encoding 不支持添加修改。 */
+  Headers?: Header[];
+}
+
+/** 实时日志投递任务中的自定义日志字段。 */
+declare interface CustomField {
+  /** 从 HTTP 请求和响应中的指定位置提取数据，取值有：ReqHeader：从 HTTP 请求头中提取指定字段值；RspHeader：从 HTTP 响应头中提取指定字段值；Cookie: 从 Cookie 中提取指定字段值。 */
+  Name: string | null;
+  /** 需要提取值的参数名称，例如：Accept-Language。 */
+  Value: string | null;
+  /** 是否投递该字段，不填表示不投递此字段。 */
+  Enabled?: boolean | null;
+}
+
 /** DDoS配置 */
 declare interface DDoS {
   /** 开关，取值有：on：开启；off：关闭。 */
@@ -602,6 +638,12 @@ declare interface DefaultServerCertInfo {
   Message?: string | null;
   /** 证书算法。 */
   SignAlgo?: string | null;
+}
+
+/** 实时日志投递条件，用于定义投递日志范围。DeliveryCondition 数组内多个项的关系为“或”，内层 Conditions 数组内多个项的关系为“且”。 */
+declare interface DeliveryCondition {
+  /** 日志过滤条件，详细的过滤条件如下：EdgeResponseStatusCode：按照 EdgeOne 节点响应返回给客户端的状态码进行过滤。 支持运算符：equal、great、less、great_equal、less_equal 取值范围：任意大于等于 0 的整数OriginResponseStatusCode：按照源站响应状态码进行过滤。 支持运算符：equal、great、less、great_equal、less_equal 取值范围：任意大于等于 -1 的整数SecurityAction：按照请求命中安全规则后的最终处置动作进行过滤。 支持运算符：equal 可选项如下： -：未知/未命中 Monitor：观察 JSChallenge：JavaScript 挑战 Deny：拦截 Allow：放行 BlockIP：IP 封禁 Redirect：重定向 ReturnCustomPage：返回自定义页面 ManagedChallenge：托管挑战 Silence：静默 LongDelay：长时间等待后响应 ShortDelay：短时间等待后响应 */
+  Conditions?: QueryCondition[];
 }
 
 /** 配置组版本发布记录详情。 */
@@ -1432,6 +1474,42 @@ declare interface RateLimitUserRule {
   RedirectUrl?: string;
 }
 
+/** 实时日志投递任务。 */
+declare interface RealtimeLogDeliveryTask {
+  /** 实时日志投递任务 ID。 */
+  TaskId?: string;
+  /** 实时日志投递任务的名称。 */
+  TaskName?: string;
+  /** 实时日志投递任务的状态，取值有： enabled: 已启用； disabled: 已停用；deleted: 异常删除状态，请检查目的地腾讯云 CLS 日志集/日志主题是否已被删除。 */
+  DeliveryStatus?: string;
+  /** 实时日志投递任务类型，取值有： cls: 推送到腾讯云 CLS； custom_endpoint：推送到自定义 HTTP(S) 地址； s3：推送到 AWS S3 兼容存储桶地址。 */
+  TaskType?: string;
+  /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： 七层域名：domain.example.com； 四层代理实例：sid-2s69eb5wcms7。 */
+  EntityList?: string[];
+  /** 数据投递类型，取值有： domain：站点加速日志； application：四层代理日志； web-rateLiming：速率限制和 CC 攻击防护日志； web-attack：托管规则日志； web-rule：自定义规则日志； web-bot：Bot管理日志。 */
+  LogType?: string;
+  /** 数据投递区域，取值有： mainland：中国大陆境内； overseas：全球（不含中国大陆）。 */
+  Area?: string;
+  /** 投递的预设字段列表。 */
+  Fields?: string[];
+  /** 投递的自定义字段列表。 */
+  CustomFields?: CustomField[];
+  /** 日志投递的过滤条件。 */
+  DeliveryConditions?: DeliveryCondition[];
+  /** 采样比例，采用千分制，取值范围为1-1000，例如：605 表示采样比例为 60.5%。 */
+  Sample?: number;
+  /** CLS 的配置信息。 */
+  CLS?: CLSTopic | null;
+  /** 自定义 HTTP 服务的配置信息。 */
+  CustomEndpoint?: CustomEndpoint | null;
+  /** AWS S3 兼容存储桶的配置信息。 */
+  S3?: S3 | null;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 更新时间。 */
+  UpdateTime?: string;
+}
+
 /** 计费资源 */
 declare interface Resource {
   /** 资源 ID。 */
@@ -1604,6 +1682,22 @@ declare interface RulesSettingAction {
   Action: string;
   /** 参数信息。 */
   Properties: RulesProperties[];
+}
+
+/** 实时日志投递到 AWS S3 兼容存储桶的配置信息。 */
+declare interface S3 {
+  /** 不包含存储桶名称或路径的 URL，例如：`https://storage.googleapis.com`、`https://s3.ap-northeast-2.amazonaws.com`、`https://cos.ap-nanjing.myqcloud.com`。 */
+  Endpoint: string;
+  /** 存储桶所在的地域，例如：`ap-northeast-2`。 */
+  Region: string;
+  /** 存储桶名称和日志存储目录，例如：`your_bucket_name/EO-logs/`。如果存储桶中无此目录则会自动创建。 */
+  Bucket: string;
+  /** 访问存储桶使用的 Access Key ID。 */
+  AccessId: string;
+  /** 访问存储桶使用的 secret key。 */
+  AccessKey: string;
+  /** 数据压缩类型，取值有: gzip：gzip压缩。不填表示不启用压缩。 */
+  CompressType?: string;
 }
 
 /** 安全数据Entry返回值 */
@@ -2198,6 +2292,18 @@ declare interface CreateApplicationProxyRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateCLSIndexRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 实时日志投递任务 ID。 */
+  TaskId: string;
+}
+
+declare interface CreateCLSIndexResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConfigGroupVersionRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2330,6 +2436,42 @@ declare interface CreatePurgeTaskResponse {
   JobId?: string;
   /** 失败的任务列表及原因。 */
   FailedList?: FailReason[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRealtimeLogDeliveryTaskRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 实时日志投递任务的名称，格式为数字、英文、-和_组合，最多 200 个字符。 */
+  TaskName: string;
+  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 AWS S3 兼容存储桶地址。 */
+  TaskType: string;
+  /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下：七层域名：domain.example.com；四层代理实例：sid-2s69eb5wcms7。 */
+  EntityList: string[];
+  /** 数据投递类型，取值有：domain：站点加速日志；application：四层代理日志；web-rateLiming：速率限制和 CC 攻击防护日志；web-attack：托管规则日志；web-rule：自定义规则日志；web-bot：Bot管理日志。 */
+  LogType: string;
+  /** 数据投递区域，取值有：mainland：中国大陆境内；overseas：全球（不含中国大陆）。 */
+  Area: string;
+  /** 投递的预设字段列表。 */
+  Fields: string[];
+  /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie 中提取指定字段值。自定义字段名称不能重复，且最多不能超过 200 个字段。 */
+  CustomFields?: CustomField[];
+  /** 日志投递的过滤条件，不填表示投递全量日志。 */
+  DeliveryConditions?: DeliveryCondition[];
+  /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填表示采样比例为 100%。 */
+  Sample?: number;
+  /** CLS 的配置信息。当 TaskType 取值为 cls 时，该参数必填。 */
+  CLS?: CLSTopic;
+  /** 自定义 HTTP 服务的配置信息。当 TaskType 取值为 custom_endpoint 时，该参数必填。 */
+  CustomEndpoint?: CustomEndpoint;
+  /** AWS S3 兼容存储桶的配置信息。当 TaskType 取值为 s3 时，该参数必填。 */
+  S3?: S3;
+}
+
+declare interface CreateRealtimeLogDeliveryTaskResponse {
+  /** 创建成功的任务ID。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2498,6 +2640,18 @@ declare interface DeleteOriginGroupRequest {
 }
 
 declare interface DeleteOriginGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRealtimeLogDeliveryTaskRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 实时日志投递任务 ID。 */
+  TaskId: string;
+}
+
+declare interface DeleteRealtimeLogDeliveryTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3066,6 +3220,26 @@ declare interface DescribePurgeTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRealtimeLogDeliveryTasksRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：1000。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有实时日志投递任务信息。详细的过滤条件如下：task-id：按照实时日志投递任务 ID进行过滤。不支持模糊查询。task-name：按照实时日志投递任务名称进行过滤。支持模糊查询，使用模糊查询时，仅支持填写一个实时日志投递任务名称。entity-list：按照实时日志投递任务对应的实体进行过滤。不支持模糊查询。示例值：domain.example.com 或者 sid-2s69eb5wcms7。task-type：按照实时日志投递任务类型进行过滤。不支持模糊查询。可选项如下： cls: 推送到腾讯云 CLS； custom_endpoint：推送到自定义 HTTP(S) 地址； s3：推送到 AWS S3 兼容存储桶地址。 */
+  Filters?: AdvancedFilter[];
+}
+
+declare interface DescribeRealtimeLogDeliveryTasksResponse {
+  /** 符合查询条件的实时日志投递任务个数。 */
+  TotalCount?: number;
+  /** 符合查询条件的所有实时日志投递任务列表。 */
+  RealtimeLogDeliveryTasks?: RealtimeLogDeliveryTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRulesRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -3592,6 +3766,36 @@ declare interface ModifyOriginGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRealtimeLogDeliveryTaskRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 实时日志投递任务 ID。 */
+  TaskId: string;
+  /** 实时日志投递任务的名称，格式为数字、英文、-和_组合，最多 200 个字符。不填保持原有配置。 */
+  TaskName?: string;
+  /** 实时日志投递任务的状态，取值有：enabled: 启用；disabled: 停用。不填保持原有配置。 */
+  DeliveryStatus?: string;
+  /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下：七层域名：domain.example.com；四层代理实例：sid-2s69eb5wcms7。不填保持原有配置。 */
+  EntityList?: string[];
+  /** 投递的预设字段列表。不填保持原有配置。 */
+  Fields?: string[];
+  /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie 中提取指定字段值。自定义字段名称不能重复，且最多不能超过 200 个字段。不填保持原有配置。 */
+  CustomFields?: CustomField[];
+  /** 日志投递的过滤条件。不填表示投递全量日志。 */
+  DeliveryConditions?: DeliveryCondition[];
+  /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填保持原有配置。 */
+  Sample?: number;
+  /** 自定义 HTTP 服务的配置信息，不填保持原有配置。 */
+  CustomEndpoint?: CustomEndpoint;
+  /** AWS S3 兼容存储桶的配置信息，不填保持原有配置。 */
+  S3?: S3;
+}
+
+declare interface ModifyRealtimeLogDeliveryTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRuleRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -3997,6 +4201,8 @@ declare interface Teo {
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
   /** 创建应用代理规则（旧） {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
+  /** 创建 CLS 索引 {@link CreateCLSIndexRequest} {@link CreateCLSIndexResponse} */
+  CreateCLSIndex(data: CreateCLSIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSIndexResponse>;
   /** 创建配置组版本 {@link CreateConfigGroupVersionRequest} {@link CreateConfigGroupVersionResponse} */
   CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
   /** 创建四层代理实例 {@link CreateL4ProxyRequest} {@link CreateL4ProxyResponse} */
@@ -4011,6 +4217,8 @@ declare interface Teo {
   CreatePrefetchTask(data: CreatePrefetchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrefetchTaskResponse>;
   /** 创建清除缓存任务 {@link CreatePurgeTaskRequest} {@link CreatePurgeTaskResponse} */
   CreatePurgeTask(data: CreatePurgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePurgeTaskResponse>;
+  /** 创建实时日志投递任务 {@link CreateRealtimeLogDeliveryTaskRequest} {@link CreateRealtimeLogDeliveryTaskResponse} */
+  CreateRealtimeLogDeliveryTask(data: CreateRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRealtimeLogDeliveryTaskResponse>;
   /** 创建规则引擎规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建安全 IP 组 {@link CreateSecurityIPGroupRequest} {@link CreateSecurityIPGroupResponse} */
@@ -4033,6 +4241,8 @@ declare interface Teo {
   DeleteL4ProxyRules(data: DeleteL4ProxyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyRulesResponse>;
   /** 删除源站组 {@link DeleteOriginGroupRequest} {@link DeleteOriginGroupResponse} */
   DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
+  /** 删除实时日志投递任务 {@link DeleteRealtimeLogDeliveryTaskRequest} {@link DeleteRealtimeLogDeliveryTaskResponse} */
+  DeleteRealtimeLogDeliveryTask(data: DeleteRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRealtimeLogDeliveryTaskResponse>;
   /** 批量删除规则引擎规则 {@link DeleteRulesRequest} {@link DeleteRulesResponse} */
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
   /** 删除安全 IP 组 {@link DeleteSecurityIPGroupRequest} {@link DeleteSecurityIPGroupResponse} */
@@ -4091,6 +4301,8 @@ declare interface Teo {
   DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
   /** 查询清除缓存历史记录 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
+  /** 查询实时日志投递任务列表 {@link DescribeRealtimeLogDeliveryTasksRequest} {@link DescribeRealtimeLogDeliveryTasksResponse} */
+  DescribeRealtimeLogDeliveryTasks(data: DescribeRealtimeLogDeliveryTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealtimeLogDeliveryTasksResponse>;
   /** 查询规则引擎规则 {@link DescribeRulesRequest} {@link DescribeRulesResponse} */
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
   /** 查询规则引擎的设置参数 {@link DescribeRulesSettingRequest} {@link DescribeRulesSettingResponse} */
@@ -4145,6 +4357,8 @@ declare interface Teo {
   ModifyL4ProxyStatus(data: ModifyL4ProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ProxyStatusResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
+  /** 修改实时日志投递任务 {@link ModifyRealtimeLogDeliveryTaskRequest} {@link ModifyRealtimeLogDeliveryTaskResponse} */
+  ModifyRealtimeLogDeliveryTask(data: ModifyRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRealtimeLogDeliveryTaskResponse>;
   /** 修改规则引擎规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 修改安全 IP 组 {@link ModifySecurityIPGroupRequest} {@link ModifySecurityIPGroupResponse} */

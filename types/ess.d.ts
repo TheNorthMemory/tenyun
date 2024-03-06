@@ -983,11 +983,11 @@ declare interface ReviewerInfo {
 /** 模板中指定的印章信息 */
 declare interface SealInfo {
   /** 印章ID */
-  SealId?: string | null;
+  SealId: string | null;
   /** 印章类型。LEGAL_PERSON_SEAL: 法定代表人章；ORGANIZATIONSEAL：企业印章；OFFICIAL：企业公章；CONTRACT：合同专用章 */
-  SealType?: string | null;
+  SealType: string | null;
   /** 印章名称 */
-  SealName?: string | null;
+  SealName: string | null;
 }
 
 /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
@@ -1092,47 +1092,49 @@ declare interface SuccessUpdateStaffData {
 declare interface TemplateInfo {
   /** 模板ID，模板的唯一标识 */
   TemplateId?: string;
-  /** 模板名 */
+  /** 模板的名字 */
   TemplateName?: string;
+  /** 此模块需要签署的各个参与方的角色列表。RecipientId标识每个参与方角色对应的唯一标识符，用于确定此角色的信息。[点击查看在模板中配置的签署参与方角色列表的样子](https://qcloudimg.tencent-cloud.cn/raw/e082bbcc0d923f8cb723d98382410aa2.png) */
+  Recipients?: Recipient[];
+  /** 模板的填充控件列表[点击查看在模板中配置的填充控件的样子](https://qcloudimg.tencent-cloud.cn/raw/cb2f58529fca8d909258f9d45a56f7f4.png) */
+  Components?: Component[];
+  /** 此模板中的签署控件列表[点击查看在模板中配置的签署控件的样子](https://qcloudimg.tencent-cloud.cn/raw/29bc6ed753a5a0fce4a3ab02e2c0d955.png) */
+  SignComponents?: Component[];
   /** 模板描述信息 */
   Description?: string;
-  /** 模板关联的资源ID列表 */
+  /** 此模板的资源ID */
   DocumentResourceIds?: string[];
   /** 生成模板的文件基础信息 */
   FileInfos?: FileInfo[];
-  /** 附件关联的资源ID */
+  /** 此模板里边附件的资源ID */
   AttachmentResourceIds?: string[];
-  /** 签署顺序无序 -1有序为序列数字 0,1,2 */
+  /** 签署人参与签署的顺序，可以分为以下两种方式：无序：不限定签署人的签署顺序，签署人可以在任何时间签署。此种方式值为 ：｛-1｝有序：通过序列数字标识签署顺序，从0开始编码，数字越大签署顺序越靠后，签署人按照指定的顺序依次签署。此种方式值为： ｛0，1，2，3………｝ */
   SignOrder?: number[];
-  /** 模板中的签署参与方列表 */
-  Recipients?: Recipient[];
-  /** 模板的填充控件列表 */
-  Components?: Component[];
-  /** 模板中的签署控件列表 */
-  SignComponents?: Component[];
-  /** 模板状态-1:不可用0:草稿态1:正式态，可以正常使用 */
+  /** 此模板的状态可以分为以下几种：-1：不可用状态。0：草稿态，即模板正在编辑或未发布状态。1：正式态，只有正式态的模板才可以发起合同。 */
   Status?: number;
-  /** 模板的创建者信息，电子签系统用户ID */
+  /** 模板的创建者信息，用户的名字注： `是创建者的名字，而非创建者的用户ID` */
   Creator?: string;
   /** 模板创建的时间戳，格式为Unix标准时间戳（秒） */
   CreatedOn?: number;
-  /** 发起方参与信息Promoter */
+  /** 此模板创建方角色信息。[点击查看在模板中配置的创建方角色的样子](https://qcloudimg.tencent-cloud.cn/raw/e082bbcc0d923f8cb723d98382410aa2.png) */
   Promoter?: Recipient;
-  /** 模板类型：1 静默签,3 普通模板 */
+  /** 模板类型可以分为以下两种：1：带有本企业自动签署的模板，即签署过程无需签署人手动操作，系统自动完成签署。3：普通模板，即签署人需要手动进行签署操作。 */
   TemplateType?: number;
-  /** 模板可用状态：1 启用（默认）2 停用 */
+  /** 模板可用状态可以分为以下两种：1：（默认）启用状态，即模板可以正常使用。2：停用状态，即模板暂时无法使用。可到控制台启停模板 */
   Available?: number;
   /** 创建模板的企业ID，电子签的机构ID */
   OrganizationId?: string;
-  /** 模板预览链接，有效时间5分钟 */
+  /** 模板创建人用户ID */
+  CreatorId?: string;
+  /** 模板的H5预览链接,有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   PreviewUrl?: string | null;
-  /** 模板版本。默认为空时，全数字字符，初始版本为yyyyMMdd001。 */
+  /** 模板版本的编号，旨在标识其独特的版本信息，通常呈现为一串字符串，由日期和递增的数字组成 */
   TemplateVersion?: string | null;
-  /** 模板是否已发布：true-已发布false-未发布 */
+  /** 模板是否已发布可以分为以下两种状态：true：已发布状态，表示该模板已经发布并可以正常使用。false：未发布状态，表示该模板还未发布，无法使用。 */
   Published?: boolean | null;
-  /** 分享来源的模板ID。用在集团账号子企业模板里 */
+  /** 集体账号场景下： 集团账号分享给子企业的模板的来源模板ID。 */
   ShareTemplateId?: string | null;
-  /** 模板内部指定的印章列表 */
+  /** 此模板配置的预填印章列表（包括自动签署指定的印章） */
   TemplateSeals?: SealInfo[] | null;
   /** 模板内部指定的印章列表 */
   Seals?: SealInfo[] | null;

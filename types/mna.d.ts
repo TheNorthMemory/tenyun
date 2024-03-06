@@ -515,7 +515,7 @@ declare interface GetFlowStatisticRequest {
   Type: number;
   /** 时间粒度（1：按小时统计，2：按天统计） */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆 */
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
@@ -565,7 +565,7 @@ declare interface GetMultiFlowStatisticRequest {
   Type: number;
   /** 统计时间粒度（1：按小时统计，2：按天统计） */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆 */
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
@@ -619,7 +619,7 @@ declare interface GetStatisticDataRequest {
   EndTime: number;
   /** 聚合粒度：1:按小时统计2:按天统计 */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆 */
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;

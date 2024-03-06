@@ -646,6 +646,8 @@ declare interface PulsarProClusterInfo {
   MaxStorage?: number;
   /** 是否可以修改路由 */
   CanEditRoute?: boolean | null;
+  /** 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储 */
+  BillingLabelVersion?: string | null;
 }
 
 /** Pulsar专业版集群规格信息 */
@@ -702,6 +704,8 @@ declare interface PulsarProInstance {
   Tags?: Tag[] | null;
   /** 集群创建时间 */
   CreateTime?: string | null;
+  /** 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储 */
+  BillingLabelVersion?: string | null;
 }
 
 /** queue使用配额信息 */
@@ -862,6 +866,10 @@ declare interface RabbitMQQueueListInfo {
   MessageRateIn?: number | null;
   /** 消息消费速率，每秒 */
   MessageRateOut?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
 }
 
 /** RabbitMQ用户实体详情 */
@@ -887,37 +895,41 @@ declare interface RabbitMQUser {
 /** RabbitMQ专享实例信息 */
 declare interface RabbitMQVipInstance {
   /** 实例id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例版本 */
-  InstanceVersion: string | null;
+  InstanceVersion?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
-  Status: number;
+  Status?: number;
   /** 节点数量 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 实例配置规格名称 */
-  ConfigDisplay: string;
+  ConfigDisplay?: string;
   /** 峰值TPS */
-  MaxTps: number;
+  MaxTps?: number;
   /** 峰值带宽，Mbps为单位 */
-  MaxBandWidth: number;
+  MaxBandWidth?: number;
   /** 存储容量，GB为单位 */
-  MaxStorage: number;
+  MaxStorage?: number;
   /** 实例到期时间，毫秒为单位 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 0-后付费，1-预付费 */
-  PayMode: number;
+  PayMode?: number;
   /** 备注信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 实例配置ID */
-  SpecName: string;
+  SpecName?: string;
   /** 集群异常。 */
   ExceptionInformation?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败为了和计费区分开，额外开启一个状态位，用于显示。 */
   ClusterStatus?: number;
+  /** 公网接入点 */
+  PublicAccessEndpoint?: string | null;
+  /** VPC 接入点列表 */
+  Vpcs?: VpcEndpointInfo[] | null;
 }
 
 /** RabbitMQ的vhost详情 */
@@ -2178,20 +2190,6 @@ declare interface DeleteProClusterResponse {
   RequestId?: string;
 }
 
-declare interface DeleteProClustersRequest {
-  /** 集群Id列表 */
-  ClusterIds: string[];
-}
-
-declare interface DeleteProClustersResponse {
-  /** 退还实例订单号 */
-  DealNames?: string[];
-  /** 集群ID */
-  ClusterIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -2648,6 +2646,62 @@ declare interface DescribeEnvironmentsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMqMsgTraceRequest {
+  /** pulsar、rocketmq、rabbitmq、cmq */
+  Protocol: string;
+  /** 消息id */
+  MsgId: string;
+  /** 集群id，cmq为空 */
+  ClusterId?: string;
+  /** 命名空间，cmq为空 */
+  EnvironmentId?: string;
+  /** 主题，cmq为空，rocketmq查询死信时值为groupId */
+  TopicName?: string;
+  /** cmq必填，其他协议填空 */
+  QueueName?: string;
+  /** 消费组、订阅 */
+  GroupName?: string;
+  /** 查询死信时该值为true，只对Rocketmq有效 */
+  QueryDlqMsg?: boolean;
+}
+
+declare interface DescribeMqMsgTraceResponse {
+  /** [ { "Stage": "produce", "Data": { "ProducerName": "生产者名", "ProduceTime": "消息生产时间", "ProducerAddr": "客户端地址", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "persist", "Data": { "PersistTime": "存储时间", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "consume", "Data": { "TotalCount": 2, "RocketMqConsumeLogs": [ { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" }, { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" } ] } }] */
+  Result?: TraceResult[];
+  /** 消息轨迹页展示的topic名称 */
+  ShowTopicName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMsgRequest {
+  /** 环境（命名空间）名称。 */
+  EnvironmentId: string;
+  /** 消息ID。 */
+  MsgId: string;
+  /** 主题名。 */
+  TopicName: string;
+  /** Pulsar 集群的ID */
+  ClusterId?: string;
+}
+
+declare interface DescribeMsgResponse {
+  /** 消息属性。 */
+  Properties: string;
+  /** 消息体。 */
+  Body: string;
+  /** 批次ID。 */
+  BatchId: string;
+  /** 生产时间。 */
+  ProduceTime: string;
+  /** 消息ID。 */
+  MsgId: string;
+  /** 生产者名称。 */
+  ProducerName: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMsgTraceRequest {
   /** 环境（命名空间）。 */
   EnvironmentId: string;
@@ -2890,7 +2944,7 @@ declare interface DescribeRabbitMQQueuesRequest {
   /** 实例Id */
   InstanceId: string;
   /** Vhost参数 */
-  VirtualHost: string;
+  VirtualHost?: string;
   /** 分页Offset */
   Offset?: number;
   /** 分页Limit */
@@ -2899,7 +2953,7 @@ declare interface DescribeRabbitMQQueuesRequest {
   SearchWord?: string;
   /** 队列类型筛选，不填或 "all"：classic 和 quorum 队列；"classic"：筛选 classic 队列；"quorum"：筛选 quorum 队列 */
   QueueType?: string;
-  /** 排序依据的字段：MessageHeapCount - 消息堆积数；MessageRateInOut - 生产消费速率之和；MessageRateIn - 生产速率；MessageRateOut - 消费速率； */
+  /** 排序依据的字段：ConsumerNumber - 在线消费者数量；MessageHeapCount - 消息堆积数；MessageRateInOut - 生产消费速率之和；MessageRateIn - 生产速率；MessageRateOut - 消费速率； */
   SortElement?: string;
   /** 排序顺序，ascend 或 descend */
   SortOrder?: string;
@@ -4371,8 +4425,6 @@ declare interface Tdmq {
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
   /** 删除专业集群实例 {@link DeleteProClusterRequest} {@link DeleteProClusterResponse} */
   DeleteProCluster(data: DeleteProClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClusterResponse>;
-  /** @deprecated 删除专业集群 {@link DeleteProClustersRequest} {@link DeleteProClustersResponse} */
-  DeleteProClusters(data: DeleteProClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClustersResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
   DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;
   /** 删除RabbitMQ专享版实例 {@link DeleteRabbitMQVipInstanceRequest} {@link DeleteRabbitMQVipInstanceResponse} */
@@ -4425,6 +4477,10 @@ declare interface Tdmq {
   DescribeEnvironmentRoles(data?: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
   /** 获取命名空间列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  /** 查询消息轨迹 {@link DescribeMqMsgTraceRequest} {@link DescribeMqMsgTraceResponse} */
+  DescribeMqMsgTrace(data: DescribeMqMsgTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMqMsgTraceResponse>;
+  /** 查询Pulsar消息详情 {@link DescribeMsgRequest} {@link DescribeMsgResponse} */
+  DescribeMsg(data: DescribeMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsgResponse>;
   /** 消息轨迹 {@link DescribeMsgTraceRequest} {@link DescribeMsgTraceResponse} */
   DescribeMsgTrace(data: DescribeMsgTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsgTraceResponse>;
   /** 运营端获取命名空间bundle列表 {@link DescribeNamespaceBundlesOptRequest} {@link DescribeNamespaceBundlesOptResponse} */

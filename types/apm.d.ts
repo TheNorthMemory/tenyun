@@ -279,7 +279,7 @@ declare interface DescribeApmAgentRequest {
 
 declare interface DescribeApmAgentResponse {
   /** Agent信息 */
-  ApmAgent: ApmAgentInfo | null;
+  ApmAgent?: ApmAgentInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -485,9 +485,9 @@ declare interface TerminateApmInstanceResponse {
 /** {@link Apm 应用性能监控} */
 declare interface Apm {
   (): Versions;
-  /** 创建Apm实例 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
+  /** 创建APM实例 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
-  /** 获取Apm Agent信息 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
+  /** 获取APM Agent信息 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
   /** 拉取APM实例列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
