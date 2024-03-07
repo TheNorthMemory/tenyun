@@ -354,6 +354,12 @@ declare interface Department {
   DepartmentName: string | null;
 }
 
+/** 视频认证结果 */
+declare interface DetectInfoVideoData {
+  /** 活体视频的base64编码，mp4格式注:`需进行base64解码获取活体视频文件` */
+  LiveNessVideo?: string | null;
+}
+
 /** 签署流程下载信息 */
 declare interface DownloadFlowInfo {
   /** 文件夹名称 */
@@ -514,6 +520,8 @@ declare interface FlowApproverInfo {
   SignTypeSelector?: number;
   /** 签署人在合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体单行文本控件多行文本控件勾选框控件数字控件图片控件数据表格等填写控件具体使用说明可参考[为签署方指定填写控件](https://qian.tencent.cn/developers/partner/createFlowByFiles#为签署方指定填写控件)注：`此参数仅在通过文件发起合同或者合同组时生效` */
   Components?: Component[];
+  /** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `1.视频认证为白名单功能，使用前请联系对接的客户经理沟通。``2.使用视频认证必须指定签署认证方式为人脸（即ApproverSignTypes）。` */
+  Intention?: Intention;
 }
 
 /** 签署方信息，如角色ID、角色名称等 */
@@ -670,6 +678,52 @@ declare interface HasAuthOrganization {
 declare interface HasAuthUser {
   /** 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。 */
   OpenId?: string | null;
+}
+
+/** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。` */
+declare interface Intention {
+  /** 视频认证类型，支持以下类型1 : 问答模式2 : 点头模式注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。` */
+  IntentionType?: number;
+  /** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。 */
+  IntentionQuestions?: IntentionQuestion[];
+  /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。 */
+  IntentionActions?: IntentionAction[];
+}
+
+/** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。 */
+declare interface IntentionAction {
+  /** 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。 */
+  Text?: string;
+}
+
+/** 意愿核身点头确认模式结果 */
+declare interface IntentionActionResult {
+  /** 意愿核身结果详细数据，与每段点头确认过程一一对应 */
+  Details?: IntentionActionResultDetail[] | null;
+}
+
+/** 意愿核身点头确认模式结果详细数据 */
+declare interface IntentionActionResultDetail {
+  /** 视频base64编码（其中包含全程提示文本和点头音频，mp4格式） */
+  Video?: string | null;
+}
+
+/** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。 */
+declare interface IntentionQuestion {
+  /** 当选择语音问答模式时，系统自动播报的问题文本，最大长度为150个字符。 */
+  Question?: string;
+  /** 当选择语音问答模式时，用于判断用户回答是否通过的标准答案列表，传入后可自动判断用户回答文本是否在标准文本列表中。 */
+  Answers?: string[];
+}
+
+/** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
+declare interface IntentionQuestionResult {
+  /** 视频base64（其中包含全程问题和回答音频，mp4格式）注：`需进行base64解码获取视频文件` */
+  Video?: string | null;
+  /** 和答案匹配结果列表 */
+  ResultCode?: string[] | null;
+  /** 回答问题语音识别结果列表 */
+  AsrResult?: string[] | null;
 }
 
 /** 需要进行签署审核的签署人信息 */
@@ -1988,6 +2042,26 @@ declare interface ChannelDescribeRolesResponse {
   TotalCount?: number;
   /** 查询的角色信息列表 */
   ChannelRoles?: ChannelRole[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDescribeSignFaceVideoRequest {
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId: string;
+  /** 签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。 */
+  SignId: string;
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+}
+
+declare interface ChannelDescribeSignFaceVideoResponse {
+  /** 核身视频结果。 */
+  VideoData?: DetectInfoVideoData | null;
+  /** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
+  IntentionQuestionResult?: IntentionQuestionResult | null;
+  /** 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。 */
+  IntentionActionResult?: IntentionActionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4355,6 +4429,8 @@ declare interface Essbasic {
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
   /** 获取角色列表 {@link ChannelDescribeRolesRequest} {@link ChannelDescribeRolesResponse} */
   ChannelDescribeRoles(data: ChannelDescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeRolesResponse>;
+  /** 查询签署认证人脸视频 {@link ChannelDescribeSignFaceVideoRequest} {@link ChannelDescribeSignFaceVideoResponse} */
+  ChannelDescribeSignFaceVideo(data: ChannelDescribeSignFaceVideoRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeSignFaceVideoResponse>;
   /** 查询个人用户开通自动签状态 {@link ChannelDescribeUserAutoSignStatusRequest} {@link ChannelDescribeUserAutoSignStatusResponse} */
   ChannelDescribeUserAutoSignStatus(data: ChannelDescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeUserAutoSignStatusResponse>;
   /** 关闭个人自动签功能 {@link ChannelDisableUserAutoSignRequest} {@link ChannelDisableUserAutoSignResponse} */

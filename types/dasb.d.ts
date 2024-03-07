@@ -1412,6 +1412,30 @@ declare interface ModifyDeviceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOAuthSettingRequest {
+  /** 是否开启OAuth认证，false-不开启，true-开启。 */
+  Enable: boolean;
+  /** OAuth认证方式。 */
+  AuthMethod?: string;
+  /** OAuth认证客户端Id */
+  ClientId?: string;
+  /** OAuth认证客户端密钥 */
+  ClientSecret?: string;
+  /** 获取OAuth认证授权码URL */
+  CodeUrl?: string;
+  /** 获取OAuth令牌URL */
+  TokenUrl?: string;
+  /** 获取OAuth用户信息URL */
+  UserInfoUrl?: string;
+  /** 使用Okta认证时指定范围。为空时默认使用 openid、profile、email。 */
+  Scopes?: string[];
+}
+
+declare interface ModifyOAuthSettingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyResourceRequest {
   /** 需要开通服务的资源ID */
   ResourceId: string;
@@ -1807,6 +1831,8 @@ declare interface Dasb {
   ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
   /** 修改资产组 {@link ModifyDeviceGroupRequest} {@link ModifyDeviceGroupResponse} */
   ModifyDeviceGroup(data: ModifyDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceGroupResponse>;
+  /** 设置OAuth认证参数 {@link ModifyOAuthSettingRequest} {@link ModifyOAuthSettingResponse} */
+  ModifyOAuthSetting(data: ModifyOAuthSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOAuthSettingResponse>;
   /** 资源变配 {@link ModifyResourceRequest} {@link ModifyResourceResponse} */
   ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */

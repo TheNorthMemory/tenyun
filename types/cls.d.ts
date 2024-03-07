@@ -4,9 +4,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 告警多维分析一些配置信息 */
 declare interface AlarmAnalysisConfig {
-  /** 键 */
+  /** 键。支持以下key：SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。QueryIndex：执行语句序号。value支持 -1：自定义； 1：执行语句1； 2：执行语句2。CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。Limit：最大日志条数。 value示例： 5。 */
   Key: string | null;
-  /** 值 */
+  /** 值。键对应值如下：SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。QueryIndex：执行语句序号。value支持 -1：自定义； 1：执行语句1； 2：执行语句2。CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。Limit：最大日志条数。 value示例： 5。 */
   Value: string | null;
 }
 
@@ -226,6 +226,20 @@ declare interface Ckafka {
   TopicName: string;
 }
 
+/** 采集配置信息 */
+declare interface CollectConfig {
+  /** 指定采集类型的采集配置名称信息。当CollectInfo中Type为0：表示元数据配置，name为元数据名称。目前支持"container_id"，"container_name"，"image_name"，"namespace"，"pod_uid"，"pod_name"，"pod_ip"。当CollectInfo中Type为1：指定pod label，name为指定pod label名称。 */
+  Name: string;
+}
+
+/** 采集配置信息 */
+declare interface CollectInfo {
+  /** 采集类型，必填字段。0：元数据配置。1：指定Pod Label。 */
+  Type: number | null;
+  /** 指定采集类型的采集配置信息。当Type为0时，CollectConfigs不允许为空。当Type为1时，CollectConfigs为空时，表示选择所有Pod Label；否则CollectConfigs为指定Pod Label。 */
+  CollectConfigs?: CollectConfig[] | null;
+}
+
 /** 日志分析的列属性 */
 declare interface Column {
   /** 列的名字 */
@@ -280,6 +294,8 @@ declare interface ConfigExtraInfo {
   LogsetName?: string | null;
   /** 日志主题name */
   TopicName?: string | null;
+  /** 采集相关配置信息。详情见 CollectInfo复杂类型配置。 */
+  CollectInfos?: CollectInfo[] | null;
   /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
   AdvancedConfig?: string | null;
 }
@@ -314,14 +330,16 @@ declare interface ConfigInfo {
 
 /** 投递任务出入参 Content */
 declare interface ConsumerContent {
-  /** 是否投递 TAG 信息 */
+  /** 是否投递 TAG 信息。当EnableTag为true时，表示投递TAG元信息。 */
   EnableTag: boolean | null;
   /** 需要投递的元数据列表，目前仅支持：\_\_SOURCE\_\_，\_\_FILENAME\_\_，\_\_TIMESTAMP\_\_，\_\_HOSTNAME\_\_和\_\_PKGID\_\_ */
   MetaFields: string[] | null;
-  /** 当EnableTag为true时，必须填写TagJsonNotTiled字段，TagJsonNotTiled用于标识tag信息是否json平铺，TagJsonNotTiled为true时不平铺，false时平铺 */
+  /** 当EnableTag为true时，必须填写TagJsonNotTiled字段。TagJsonNotTiled用于标识tag信息是否json平铺。TagJsonNotTiled为true时不平铺，示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`TagJsonNotTiled为false时平铺，示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}` */
   TagJsonNotTiled?: boolean | null;
-  /** 投递时间戳精度，可选项 [1:秒；2:毫秒] ，默认是秒 */
+  /** 投递时间戳精度，可选项 [1：秒；2：毫秒] ，默认是1。 */
   TimestampAccuracy?: number | null;
+  /** 投递Json格式。JsonType为0：和原始日志一致，不转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType为1：转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}` */
+  JsonType?: number | null;
 }
 
 /** 自建k8s-容器文件路径信息 */
@@ -562,7 +580,7 @@ declare interface ExportInfo {
   From?: number;
   /** 日志导出结束时间 */
   To?: number;
-  /** 日志导出路径 */
+  /** 日志导出路径,有效期一个小时，请尽快使用该路径下载。 */
   CosPath?: string;
   /** 日志导出创建时间 */
   CreateTime?: string;
@@ -572,17 +590,17 @@ declare interface ExportInfo {
 
 /** 日志提取规则 */
 declare interface ExtractRuleInfo {
-  /** 时间字段的key名字，time_key和time_format必须成对出现 */
+  /** 时间字段的key名字，TikeKey和TimeFormat必须成对出现 */
   TimeKey?: string | null;
   /** 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数 */
   TimeFormat?: string | null;
-  /** 分隔符类型日志的分隔符，只有log_type为delimiter_log时有效 */
+  /** 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效 */
   Delimiter?: string | null;
-  /** 整条日志匹配规则，只有log_type为fullregex_log时有效 */
+  /** 整条日志匹配规则，只有LogType为fullregex_log时有效 */
   LogRegex?: string | null;
-  /** 行首匹配规则，只有log_type为multiline_log或fullregex_log时有效 */
+  /** 行首匹配规则，只有LogType为multiline_log或fullregex_log时有效 */
   BeginRegex?: string | null;
-  /** 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。 */
+  /** 取的每个字段的key名字，为空的key代表丢弃这个字段，只有LogType为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。 */
   Keys?: string[] | null;
   /** 需要过滤日志的key，及其对应的regex */
   FilterKeyRegex?: KeyRegexInfo[] | null;
@@ -590,7 +608,7 @@ declare interface ExtractRuleInfo {
   UnMatchUpLoadSwitch?: boolean | null;
   /** 失败日志的key */
   UnMatchLogKey?: string | null;
-  /** 增量采集模式下的回溯数据量，默认-1（全量采集） */
+  /** 增量采集模式下的回溯数据量，默认-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。 */
   Backtracking?: number | null;
   /** 是否为Gbk编码. 0: 否, 1: 是 */
   IsGBK?: number | null;
@@ -694,15 +712,15 @@ declare interface JsonInfo {
 
 /** kafka协议消费内容 */
 declare interface KafkaConsumerContent {
-  /** 消费格式 0:全文；1:json */
+  /** 消费数据格式。 0：原始内容；1：JSON。 */
   Format: number;
   /** 是否投递 TAG 信息Format为0时，此字段不需要赋值 */
   EnableTag: boolean;
   /** 元数据信息列表, 可选值为：\_\_SOURCE\_\_、\_\_FILENAME\_\_、\_\_TIMESTAMP\_\_、\_\_HOSTNAME\_\_、\_\_PKGID\_\_Format为0时，此字段不需要赋值 */
   MetaFields: string[];
-  /** tag数据处理方式：1:不平铺（默认值）2:平铺 */
+  /** tag数据处理方式：1:不平铺（默认值）；2:平铺。不平铺示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}` */
   TagTransaction?: number | null;
-  /** 消费数据Json格式：1：不转义（默认格式）2：转义 */
+  /** 消费数据Json格式：1：不转义（默认格式）2：转义投递Json格式。JsonType为1：和原始日志一致，不转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType为2：转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}` */
   JsonType?: number;
 }
 
@@ -740,7 +758,7 @@ declare interface KafkaRechargeInfo {
   UserKafkaTopics?: string | null;
   /** 用户Kafka消费组名称 */
   ConsumerGroupName?: string | null;
-  /** 状态 status 1: 运行中, 2: 暂停 ... */
+  /** 状态 ，1：运行中；2：暂停。 */
   Status?: number | null;
   /** 导入数据位置，-2:最早（默认），-1：最晚 */
   Offset?: number | null;
@@ -795,23 +813,23 @@ declare interface LogContextInfo {
 /** 日志结果信息 */
 declare interface LogInfo {
   /** 日志时间，单位ms */
-  Time: number;
+  Time?: number;
   /** 日志主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 日志主题名称 */
-  TopicName: string;
+  TopicName?: string;
   /** 日志来源IP */
-  Source: string;
+  Source?: string;
   /** 日志文件名称 */
-  FileName: string;
+  FileName?: string;
   /** 日志上报请求包的ID */
-  PkgId: string;
+  PkgId?: string;
   /** 请求包内日志的ID */
-  PkgLogId: string;
+  PkgLogId?: string;
   /** 日志内容的Json序列化字符串 */
-  LogJson: string | null;
+  LogJson?: string | null;
   /** 日志来源主机名称 */
-  HostName: string | null;
+  HostName?: string | null;
   /** 原始日志(仅在日志创建索引异常时有值) */
   RawLog?: string | null;
   /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
@@ -932,11 +950,11 @@ declare interface MachineInfo {
   AutoUpdate?: number;
   /** 机器当前版本号。 */
   Version?: string;
-  /** 机器升级功能状态。 */
+  /** 机器升级功能状态。 0：升级成功；1：升级中；-1：升级失败。 */
   UpdateStatus?: number;
-  /** 机器升级结果标识。 */
+  /** 机器升级结果标识。0：成功；1200：升级成功；其他值表示异常。 */
   ErrCode?: number;
-  /** 机器升级结果信息。 */
+  /** 机器升级结果信息。“ok”：成功；“update success”：升级成功；其他值为失败原因。 */
   ErrMsg?: string;
 }
 
@@ -1248,7 +1266,7 @@ declare interface Tag {
 declare interface TopicIdAndRegion {
   /** 日志主题id */
   TopicId: string;
-  /** 日志主题id 所在的地域id地域ID - 访问链接查看详情：https://iwiki.woa.com/pages/viewpage.action?pageId=780556968 */
+  /** 日志主题id所在的地域id。id,地域,简称信息如下：- 1, 广州,ap-guangzhou- 4, 上海,ap-shanghai- 5, 中国香港,ap-hongkong- 6, 多伦多,na-toronto- 7, 上海金融,ap-shanghai-fsi- 8, 北京,ap-beijing- 9, 新加坡,ap-singapore- 11, 深圳金融,ap-shenzhen-fsi- 15, 硅谷,na-siliconvalley- 16, 成都,ap-chengdu- 17, 法兰克福,eu-frankfurt- 18, 首尔,ap-seoul- 19, 重庆,ap-chongqing- 21, 孟买,ap-mumbai- 22, 弗吉尼亚,na-ashburn- 23, 曼谷,ap-bangkok- 25, 东京,ap-tokyo- 33, 南京,ap-nanjing- 46, 北京金融,ap-beijing-fsi- 72, 雅加达,ap-jakarta- 74, 圣保罗,sa-saopaulo */
   RegionId: number;
 }
 
@@ -1268,7 +1286,7 @@ declare interface TopicInfo {
   AssumerName?: string | null;
   /** 创建时间 */
   CreateTime?: string;
-  /** 主题是否开启采集 */
+  /** 主题是否开启采集，true：开启采集；false：关闭采集。创建日志主题时默认开启，可通过SDK调用ModifyTopic修改此字段。控制台目前不支持修改此参数。 */
   Status?: boolean;
   /** 主题绑定的标签信息 */
   Tags?: Tag[] | null;
@@ -1288,7 +1306,7 @@ declare interface TopicInfo {
   HotPeriod?: number | null;
   /** 主题类型。- 0: 日志主题 - 1: 指标主题 */
   BizType?: number | null;
-  /** 免鉴权开关。- false: 关闭- true: 开启 */
+  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean | null;
 }
 
@@ -1557,13 +1575,13 @@ declare interface CreateConfigResponse {
 declare interface CreateConsumerRequest {
   /** 投递任务绑定的日志主题 ID */
   TopicId: string;
-  /** 是否投递日志的元数据信息，默认为 true */
+  /** 是否投递日志的元数据信息，默认为 true。当NeedContent为true时：字段Content有效。当NeedContent为false时：字段Content无效。 */
   NeedContent?: boolean;
   /** 如果需要投递元数据信息，元数据信息的描述 */
   Content?: ConsumerContent;
   /** CKafka的描述 */
   Ckafka?: Ckafka;
-  /** 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4] */
+  /** 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4] */
   Compression?: number;
 }
 
@@ -1579,9 +1597,9 @@ declare interface CreateCosRechargeRequest {
   LogsetId: string;
   /** 投递任务名称 */
   Name: string;
-  /** COS存储桶。存储桶命名规范：https://cloud.tencent.com/document/product/436/13312 */
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
   Bucket: string;
-  /** COS存储桶所在地域。地域和访问域名：https://cloud.tencent.com/document/product/436/6224 */
+  /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion: string;
   /** COS文件所在文件夹的前缀 */
   Prefix: string;
@@ -1601,7 +1619,7 @@ declare interface CreateCosRechargeResponse {
 }
 
 declare interface CreateDataTransformRequest {
-  /** 任务类型. 1: 指定主题；2:动态创建 */
+  /** 任务类型. 1: 指定主题；2:动态创建。详情请参考[创建加工任务文档](https://cloud.tencent.com/document/product/614/63940)。 */
   FuncType: number;
   /** 源日志主题 */
   SrcTopicId: string;
@@ -1609,12 +1627,12 @@ declare interface CreateDataTransformRequest {
   Name: string;
   /** 加工语句 */
   EtlContent: string;
-  /** 加工类型 1 使用源日志主题中的随机数据，进行加工预览 :2 使用用户自定义测试数据，进行加工预览 3 创建真实加工任务 */
+  /** 加工类型。1：使用源日志主题中的随机数据，进行加工预览；2：使用用户自定义测试数据，进行加工预览；3：创建真实加工任务。 */
   TaskType: number;
+  /** 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写。 */
+  DstResources?: DataTransformResouceInfo[];
   /** 任务启动状态. 默认为1:开启, 2:关闭 */
   EnableFlag?: number;
-  /** 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写 */
-  DstResources?: DataTransformResouceInfo[];
   /** 用于预览加工结果的测试数据 */
   PreviewLogStatistics?: PreviewLogStatistic[];
 }
@@ -1855,13 +1873,13 @@ declare interface CreateTopicRequest {
   MaxSplitPartitions?: number;
   /** 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。 */
   StorageType?: string;
-  /** 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600天。取值为3640时代表永久保存 */
+  /** 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600天。取值为3640时代表永久保存。不传此值，默认获取该日志主题对应日志集的Period值（当获取失败时默认为30天）。 */
   Period?: number;
   /** 日志主题描述 */
   Describes?: string;
-  /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效 */
+  /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效。 */
   HotPeriod?: number;
-  /** 免鉴权开关； false: 关闭 true： 开启 */
+  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
 }
 
@@ -2219,7 +2237,7 @@ declare interface DescribeDashboardsRequest {
   Offset?: number;
   /** 分页单页限制数目，默认值为20，最大值100。 */
   Limit?: number;
-  /** dashboardId按照【仪表盘id】进行过滤。类型：String必选：否 dashboardName按照【仪表盘名字】进行模糊搜索过滤。类型：String必选：否 dashboardRegion按照【仪表盘地域】进行过滤，为了兼容老的仪表盘，通过云API创建的仪表盘没有地域属性类型：String必选：否 tagKey按照【标签键】进行过滤。类型：String必选：否 tag:tagKey按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** dashboardId按照【仪表盘id】进行过滤。类型：String必选：否 dashboardName按照【仪表盘名字】进行模糊搜索过滤。类型：String必选：否 dashboardRegion按照【仪表盘地域】进行过滤，为了兼容老的仪表盘，通过云API创建的仪表盘没有地域属性类型：String必选：否 tagKey按照【标签键】进行过滤。类型：String必选：否 tag:tagKey按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。使用请参考示例二。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 按照topicId和regionId过滤。 */
   TopicIdRegionFilter?: TopicIdAndRegion[];
@@ -2333,13 +2351,13 @@ declare interface DescribeKafkaRechargesResponse {
 }
 
 declare interface DescribeKafkaUserRequest {
-  /** kafka消费用户名 */
+  /** kafka用户名。 */
   UserName: string;
 }
 
 declare interface DescribeKafkaUserResponse {
-  /** kafka消费用户名 */
-  UserName: string;
+  /** 如果返回不为空，代表用户名UserName已经创建成功。 */
+  UserName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2349,22 +2367,22 @@ declare interface DescribeLogContextRequest {
   TopicId: string;
   /** 日志时间, 格式: YYYY-mm-dd HH:MM:SS.FFF */
   BTime: string;
-  /** 日志包序号 */
+  /** 日志包序号。SearchLog接口返回信息中Results结构体中的PkgId。 */
   PkgId: string;
-  /** 日志包内一条日志的序号 */
+  /** 日志包内一条日志的序号。SearchLog接口返回信息中Results结构中的PkgLogId。 */
   PkgLogId: number;
-  /** 上文日志条数, 默认值10 */
+  /** 前${PrevLogs}条日志，默认值10。 */
   PrevLogs?: number;
-  /** 下文日志条数, 默认值10 */
+  /** 后${NextLogs}条日志，默认值10。 */
   NextLogs?: number;
 }
 
 declare interface DescribeLogContextResponse {
   /** 日志上下文信息集合 */
   LogContextInfos?: LogContextInfo[];
-  /** 上文日志是否已经返回 */
+  /** 上文日志是否已经返回完成（当PrevOver为false，表示有上文日志还未全部返回）。 */
   PrevOver?: boolean;
-  /** 下文日志是否已经返回 */
+  /** 下文日志是否已经返回完成（当NextOver为false，表示有下文日志还未全部返回）。 */
   NextOver?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2452,7 +2470,7 @@ declare interface DescribeMachinesRequest {
 declare interface DescribeMachinesResponse {
   /** 机器状态信息组 */
   Machines?: MachineInfo[];
-  /** 机器组是否开启自动升级功能 */
+  /** 机器组是否开启自动升级功能。 0：未开启自动升级；1：开启了自动升级。 */
   AutoUpdate?: number;
   /** 机器组自动升级功能预设开始时间 */
   UpdateStartTime?: string;
@@ -2487,7 +2505,7 @@ declare interface DescribeScheduledSqlInfoRequest {
   Name?: string;
   /** 任务id。 */
   TaskId?: string;
-  /** srcTopicName按照【源日志主题名称】进行过滤，模糊匹配。类型：String。必选：否dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配。类型：String。必选：否srcTopicId按照【源日志主题ID】进行过滤。类型：String。必选：否dstTopicId按照【目标日志主题ID】进行过滤。类型：String。必选：否bizType按照【主题类型】进行过滤,0日志主题 1指标主题。类型：String。必选：否status按照【任务状态】进行过滤，1:运行 2:停止。类型：String。必选：否taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否 */
+  /** srcTopicName按照【源日志主题名称】进行过滤，模糊匹配。类型：String。必选：否dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配。类型：String。必选：否srcTopicId按照【源日志主题ID】进行过滤。类型：String。必选：否dstTopicId按照【目标日志主题ID】进行过滤。类型：String。必选：否bizType按照【主题类型】进行过滤，0日志主题 1指标主题。类型：String。必选：否status按照【任务状态】进行过滤，1：运行；2：停止。类型：String。必选：否taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否 */
   Filters?: Filter[];
 }
 
@@ -2569,7 +2587,7 @@ declare interface GetAlarmLogRequest {
   Context?: string;
   /** 执行详情是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc */
   Sort?: string;
-  /** 如果Query包含SQL语句，UseNewAnalysis为true时响应参数AnalysisRecords和Columns有效， UseNewAnalysis为false时响应参数AnalysisResults和ColNames有效 */
+  /** 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效；为false代表使用老的检索结果返回方式，输出AnalysisResults和ColNames有效；两种返回方式在编码格式上有少量区别，建议使用true。示例值：false */
   UseNewAnalysis?: boolean;
 }
 
@@ -2584,9 +2602,9 @@ declare interface GetAlarmLogResponse {
   ColNames?: string[] | null;
   /** 执行详情查询结果。当Query字段无SQL语句时，返回查询结果。当Query字段有SQL语句时，可能返回null。 */
   Results?: LogInfo[] | null;
-  /** 执行详情统计分析结果。当Query字段有SQL语句时，返回sql统计结果，否则可能返回null。 */
+  /** 执行详情统计分析结果。当Query字段有SQL语句时，返回SQL统计结果，否则可能返回null。 */
   AnalysisResults?: LogItems[] | null;
-  /** 执行详情统计分析结果; UseNewAnalysis为true有效 */
+  /** 执行详情统计分析结果；UseNewAnalysis为true有效。 */
   AnalysisRecords?: string[] | null;
   /** 分析结果的列名， UseNewAnalysis为true有效 */
   Columns?: Column[] | null;
@@ -2775,13 +2793,13 @@ declare interface ModifyConsumerRequest {
   TopicId: string;
   /** 投递任务是否生效，默认不生效 */
   Effective?: boolean;
-  /** 是否投递日志的元数据信息，默认为 false */
+  /** 是否投递日志的元数据信息，默认为 true。当NeedContent为true时：字段Content有效。当NeedContent为false时：字段Content无效。 */
   NeedContent?: boolean;
   /** 如果需要投递元数据信息，元数据信息的描述 */
   Content?: ConsumerContent;
   /** CKafka的描述 */
   Ckafka?: Ckafka;
-  /** 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4] */
+  /** 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4] */
   Compression?: number;
 }
 
@@ -3003,7 +3021,7 @@ declare interface ModifyTopicRequest {
   TopicName?: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
-  /** 该日志主题是否开始采集 */
+  /** 主题是否开启采集，true：开启采集；false：关闭采集。控制台目前不支持修改此参数。 */
   Status?: boolean;
   /** 是否开启自动分裂 */
   AutoSplit?: boolean;
@@ -3015,7 +3033,7 @@ declare interface ModifyTopicRequest {
   Describes?: string;
   /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效 */
   HotPeriod?: number;
-  /** 免鉴权开关； false: 关闭 true: 开启 */
+  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
 }
 
@@ -3053,7 +3071,7 @@ declare interface PreviewKafkaRechargeRequest {
   KafkaInstance?: string;
   /** 服务地址。KafkaType为1时ServerAddr必填 */
   ServerAddr?: string;
-  /** ServerAddr是否为加密连接。。KafkaType为1时有效。 */
+  /** ServerAddr是否为加密连接。KafkaType为1时有效。 */
   IsEncryptionAddr?: boolean;
   /** 加密访问协议。KafkaType为1并且IsEncryptionAddr为true时Protocol必填 */
   Protocol?: KafkaProtocolInfo;
@@ -3131,9 +3149,9 @@ declare interface SearchCosRechargeInfoRequest {
   LogsetId: string;
   /** 投递任务名称 */
   Name: string;
-  /** 存储桶。存储桶命名规范：https://cloud.tencent.com/document/product/436/13312 */
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
   Bucket: string;
-  /** 存储桶所在地域。地域和访问域名：https://cloud.tencent.com/document/product/436/6224 */
+  /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion: string;
   /** cos文件所在文件夹的前缀 */
   Prefix: string;
@@ -3261,7 +3279,7 @@ declare interface Cls {
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
   /** 创建特殊采集配置任务 {@link CreateConfigExtraRequest} {@link CreateConfigExtraResponse} */
   CreateConfigExtra(data: CreateConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigExtraResponse>;
-  /** 创建投递任务 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
+  /** 创建投递Ckafka任务 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
   /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
   CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
@@ -3387,7 +3405,7 @@ declare interface Cls {
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
   /** 修改特殊采集配置任务 {@link ModifyConfigExtraRequest} {@link ModifyConfigExtraResponse} */
   ModifyConfigExtra(data: ModifyConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigExtraResponse>;
-  /** 修改投递任务 {@link ModifyConsumerRequest} {@link ModifyConsumerResponse} */
+  /** 修改投递Ckafka任务 {@link ModifyConsumerRequest} {@link ModifyConsumerResponse} */
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
   /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */
   ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;

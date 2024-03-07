@@ -3045,7 +3045,7 @@ declare interface DescribeIPRegionResponse {
 }
 
 declare interface DescribeIdentificationsRequest {
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-name 按照【站点名称】进行过滤。 类型：String 必选：是 */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-name：按照站点名称进行过滤。 */
   Filters: Filter[];
   /** 分页查询偏移量。默认值：0。 */
   Offset?: number;
@@ -3055,9 +3055,9 @@ declare interface DescribeIdentificationsRequest {
 
 declare interface DescribeIdentificationsResponse {
   /** 符合条件的站点个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 站点验证信息列表。 */
-  Identifications: Identification[];
+  Identifications?: Identification[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

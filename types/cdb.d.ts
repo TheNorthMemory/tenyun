@@ -3415,9 +3415,9 @@ declare interface DescribeErrorLogDataRequest {
 
 declare interface DescribeErrorLogDataResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的记录。 */
-  Items: ErrlogItem[] | null;
+  Items?: ErrlogItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

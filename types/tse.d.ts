@@ -992,6 +992,8 @@ declare interface KongUpstreamInfo {
   RealSourceType?: string | null;
   /** upstream健康状态HEALTHY（健康）, UNHEALTHY（异常）, HEALTHCHECKS_OFF（未开启）和NONE（不支持健康检查） */
   HealthStatus?: string | null;
+  /** 云函数是否开启CAM鉴权，不填时默认为开启(true) */
+  ScfCamAuthEnable?: boolean | null;
 }
 
 /** kong后端upstream列表 */
@@ -1312,6 +1314,8 @@ declare interface UpstreamHealthCheckConfig {
   HealthyHttpStatuses?: number[] | null;
   /** 异常HTTP状态码 */
   UnhealthyHttpStatuses?: number[] | null;
+  /** 健康检查屏蔽权重为0的节点 */
+  IgnoreZeroWeightNodes?: boolean | null;
 }
 
 /** 私有网络信息 */

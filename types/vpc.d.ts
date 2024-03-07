@@ -2587,11 +2587,11 @@ declare interface AssociateDhcpIpWithAddressIpResponse {
 }
 
 declare interface AssociateDirectConnectGatewayNatGatewayRequest {
-  /** VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
+  /** VPC实例ID。形如：vpc-xxx。 */
   VpcId: string;
-  /** NAT网关ID。 */
+  /** NAT网关ID。形如：nat-xxx */
   NatGatewayId: string;
-  /** 专线网关ID。 */
+  /** 专线网关ID。形如：dcg-xxx */
   DirectConnectGatewayId: string;
 }
 
@@ -5885,11 +5885,11 @@ declare interface DisassociateDhcpIpWithAddressIpResponse {
 }
 
 declare interface DisassociateDirectConnectGatewayNatGatewayRequest {
-  /** 专线网关ID。 */
+  /** VPC实例ID。形如：vpc-xxx。 */
   VpcId: string;
-  /** NAT网关ID。 */
+  /** NAT网关ID。形如：nat-xxx */
   NatGatewayId: string;
-  /** VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
+  /** 专线网关ID。形如：dcg-xxx */
   DirectConnectGatewayId: string;
 }
 
@@ -6803,7 +6803,7 @@ declare interface ModifyTemplateMemberResponse {
 }
 
 declare interface ModifyVpcAttributeRequest {
-  /** VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。 */
+  /** VPC实例ID。形如：vpc-f49l6u0z。 */
   VpcId: string;
   /** 私有网络名称，可任意命名，但不得超过60个字符。 */
   VpcName?: string;

@@ -541,41 +541,45 @@ declare interface DspaCOSDataAssetCount {
 /** COS对象存储数据资产详情 */
 declare interface DspaCOSDataAssetDetail {
   /** 对象桶 */
-  BucketName: string;
+  BucketName?: string;
   /** 对象名称 */
-  FileName: string;
+  FileName?: string;
   /** 规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** 出现次数 */
-  SensitiveDataCount: number;
+  SensitiveDataCount?: number;
   /** 敏感数据分类 */
-  CategoryName: string;
+  CategoryName?: string;
   /** 敏感等级 */
-  LevelRiskName: string;
+  LevelRiskName?: string;
   /** KMS加密 */
-  KMSEncrypted: boolean;
+  KMSEncrypted?: boolean;
   /** 文件类型 */
-  FileType: string;
+  FileType?: string;
   /** 文件大小 */
-  FileSize: string;
+  FileSize?: string;
   /** 敏感数据分级分数 */
-  LevelRiskScore: number;
+  LevelRiskScore?: number;
   /** 数据源ID */
-  DataSourceId: string;
+  DataSourceId?: string;
   /** 规则id */
-  RuleId: number;
+  RuleId?: number;
   /** 资源所在地域 */
-  ResourceRegion: string | null;
+  ResourceRegion?: string | null;
   /** 分类ID */
-  CategoryId: number | null;
+  CategoryId?: number | null;
   /** 分级ID */
-  LevelId: number | null;
+  LevelId?: number | null;
   /** 文件扫描结果ID */
-  FileResultId: number | null;
+  FileResultId?: number | null;
   /** 数据源名称 */
-  DataSourceName: string | null;
+  DataSourceName?: string | null;
   /** 分类路径 */
-  CategoryFullPath: string | null;
+  CategoryFullPath?: string | null;
+  /** 0-系统识别1-人工识别 */
+  IdentifyType?: number | null;
+  /** 0-系统识别1-人工识别 */
+  CheckStatus?: number | null;
 }
 
 /** COS敏感数据扫描任务相关信息 */
@@ -921,15 +925,17 @@ declare interface DspaDiscoveryTaskCOSCondition {
 /** 扫描任务数据源信息 */
 declare interface DspaDiscoveryTaskDataSource {
   /** 数据源ID */
-  DataSourceId: string;
+  DataSourceId?: string;
   /** 用于传入的数据源的条件，可以选择多个数据库，数据库之间通过逗号分隔，如果为空，默认是全部数据库 */
-  Condition: string;
+  Condition?: string;
   /** 代理地址 */
-  ProxyAddress: string[] | null;
+  ProxyAddress?: string[] | null;
   /** 数据源名称 */
-  DataSourceName: string | null;
+  DataSourceName?: string | null;
   /** 资源所在地域 */
-  ResourceRegion: string | null;
+  ResourceRegion?: string | null;
+  /** 无 */
+  DataSourceType?: string | null;
 }
 
 /** 扫描任务结果，按照数据库级别展示 */
@@ -1200,6 +1206,10 @@ declare interface DspaUserResourceMeta {
   ResourceAuthType?: string;
   /** 授权账号名 */
   ResourceAuthAccount?: string;
+  /** x */
+  InstanceType?: string | null;
+  /** x */
+  InstanceValue?: string | null;
 }
 
 /** es的资产统计结果 */
@@ -2241,13 +2251,17 @@ declare interface CreateDSPASelfBuildMetaResourceRequest {
   Password: string;
   /** 资源名称，1-60个字符。 */
   ResourceName?: string;
+  /** 实例类型databsesidserviceName */
+  InstanceType?: string;
+  /** 实例值 */
+  InstanceValue?: string;
 }
 
 declare interface CreateDSPASelfBuildMetaResourceResponse {
   /** 连通性测试情况，success表示可正常访问，failed表示无法访问。 */
-  ConnectivityStatus: string;
+  ConnectivityStatus?: string;
   /** 连通性描述字段，如果连通性测试失败，这里会返回无法访问的相关信息说明。 */
-  ConnectivityDescription: string;
+  ConnectivityDescription?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3331,11 +3345,13 @@ declare interface DescribeDSPADataSourceDbInfoRequest {
   DspaId: string;
   /** 数据源ID */
   DataSourceId: string;
+  /** 数据源类型 */
+  DataSourceType?: string;
 }
 
 declare interface DescribeDSPADataSourceDbInfoResponse {
   /** 数据库信息列表 */
-  Items: DSPADataSourceDbInfo[] | null;
+  Items?: DSPADataSourceDbInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3477,6 +3493,10 @@ declare interface DescribeDSPAESDataAssetByComplianceIdRequest {
   DspaId: string;
   /** 合规组id */
   ComplianceId: number;
+  /** 云上还是自建 */
+  BuildType?: string;
+  /** 数据源类型 */
+  DataSourceType?: string;
 }
 
 declare interface DescribeDSPAESDataAssetByComplianceIdResponse {
@@ -3591,11 +3611,13 @@ declare interface DescribeDSPARDBDataAssetByComplianceIdRequest {
   ComplianceId: number;
   /** 数据源类型，不填默认过滤非自建的所有关系型数据源类型，填selfbuilt-db只过滤自建类型 */
   DataSourceType?: string;
+  /** 自建还是云上 */
+  BuildType?: string;
 }
 
 declare interface DescribeDSPARDBDataAssetByComplianceIdResponse {
   /** 符合条件的RDB关系数据库敏感数据资产统计记录 */
-  Stats: DspaRDBDataAssetCount;
+  Stats?: DspaRDBDataAssetCount;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4147,6 +4169,12 @@ declare interface ModifyDSPACOSTaskResultRequest {
   FileResultId: number;
   /** 是否设置为非敏感文件 */
   IsSetNonSensitiveFile?: boolean;
+  /** 文件名 */
+  FileName?: string;
+  /** 桶名 */
+  BucketName?: string;
+  /** 数据源id */
+  DataSourceId?: string;
 }
 
 declare interface ModifyDSPACOSTaskResultResponse {

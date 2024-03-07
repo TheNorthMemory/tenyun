@@ -324,6 +324,8 @@ declare interface SubscriptionData {
   MaxRetryTimes?: number | null;
   /** 是否顺序消费 */
   ConsumeMessageOrderly?: boolean | null;
+  /** 消费模式: BROADCASTING 广播模式;CLUSTERING 集群模式; */
+  MessageModel?: string | null;
 }
 
 /** 标签数据 */
@@ -354,6 +356,16 @@ declare interface TopicItem {
   QueueNum?: number;
   /** 描述 */
   Remark?: string | null;
+  /** 4.x的集群id */
+  ClusterIdV4?: string | null;
+  /** 4.x的命名空间 */
+  NamespaceV4?: string | null;
+  /** 4.x的主题名称 */
+  TopicV4?: string | null;
+  /** 4.x的完整命名空间 */
+  FullNamespaceV4?: string | null;
+  /** 消息保留时长 */
+  MsgTTL?: number | null;
 }
 
 /** VPC信息 */
@@ -393,7 +405,7 @@ declare interface CreateInstanceRequest {
   InstanceType: string;
   /** 实例名称 */
   Name: string;
-  /** 商品规格，可用规格如下：experiment_500,basic_1k,basic_2k,basic_4k,basic_6k */
+  /** 商品规格，可用规格如下：experiment_500,basic_1k,basic_2k,basic_4k,basic_6k,pro_4k,pro_6k,pro_1w,pro_2w,pro_3w,pro_4w,pro_5w,platinum_6k,platinum_1w,platinum_2w,platinum_4w,platinum_10w,platinum_15w,platinum_20w,platinum_40w,platinum_60w,platinum_100w */
   SkuCode: string;
   /** 备注信息 */
   Remark?: string;
@@ -403,12 +415,20 @@ declare interface CreateInstanceRequest {
   VpcList?: VpcInfo[];
   /** 是否开启公网 */
   EnablePublic?: boolean;
-  /** 公网带宽 */
+  /** 公网带宽（单位：兆） */
   Bandwidth?: number;
   /** 公网访问白名单 */
   IpRules?: IpRule[];
-  /** 消息保留时长，小时为单位 */
+  /** 消息保留时长（单位：小时） */
   MessageRetention?: number;
+  /** 付费模式（0: 后付费；1: 预付费） */
+  PayMode?: number;
+  /** 是否自动续费（0: 不自动续费；1: 自动续费） */
+  RenewFlag?: number;
+  /** 购买时长（单位：月） */
+  TimeSpan?: number;
+  /** 最大可创建主题数 */
+  MaxTopicNum?: number;
 }
 
 declare interface CreateInstanceResponse {
@@ -533,6 +553,8 @@ declare interface CreateTopicRequest {
   QueueNum: number;
   /** 备注 */
   Remark?: string;
+  /** 消息保留时长 */
+  MsgTTL?: number;
 }
 
 declare interface CreateTopicResponse {
@@ -1053,12 +1075,12 @@ declare interface DescribeRoleListResponse {
 declare interface DescribeTopicListRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 查询起始位置 */
-  Offset: number;
-  /** 查询结果限制数量 */
-  Limit: number;
   /** 查询条件列表 */
   Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
 }
 
 declare interface DescribeTopicListResponse {
@@ -1075,12 +1097,12 @@ declare interface DescribeTopicRequest {
   InstanceId: string;
   /** 主题 */
   Topic: string;
-  /** 查询起始位置 */
-  Offset: number;
-  /** 查询结果限制数量 */
-  Limit: number;
   /** 查询条件列表 */
   Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
 }
 
 declare interface DescribeTopicResponse {
@@ -1100,6 +1122,8 @@ declare interface DescribeTopicResponse {
   SubscriptionCount?: number;
   /** 订阅关系列表 */
   SubscriptionData?: SubscriptionData[];
+  /** 消息保留时长 */
+  MsgTTL?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1173,6 +1197,8 @@ declare interface ModifyInstanceRequest {
   MessageRetention?: number;
   /** 是否开启弹性TPS */
   ScaledTpsEnabled?: boolean;
+  /** 最大可创建主题数 */
+  MaxTopicNum?: number;
 }
 
 declare interface ModifyInstanceResponse {

@@ -3338,7 +3338,7 @@ declare interface MLIDPassportOCRResponse {
   Nationality?: string;
   /** 告警码：-9103	证照翻拍告警-9102	证照复印件告警（包括黑白复印件、彩色复印件）-9106 证件遮挡告警 */
   Warn?: number[];
-  /** 证件图片 */
+  /** 证件中的人像图片base64 */
   Image?: string;
   /** 扩展字段:{ ID:{ Confidence:0.9999 }, Name:{ Confidence:0.9996 }} */
   AdvancedInfo?: string;

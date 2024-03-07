@@ -473,19 +473,21 @@ declare interface StaffBuyInfo {
 /** 带有技能组优先级的坐席信息 */
 declare interface StaffInfo {
   /** 坐席名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 坐席邮箱 */
-  Mail: string;
+  Mail?: string;
   /** 坐席电话号码 */
-  Phone: string | null;
+  Phone?: string | null;
   /** 坐席昵称 */
-  Nick: string | null;
+  Nick?: string | null;
   /** 坐席工号 */
-  StaffNumber: string | null;
+  StaffNumber?: string | null;
+  /** 用户角色id */
+  RoleId?: number;
   /** 所属技能组列表 */
-  SkillGroupList: SkillGroupItem[] | null;
+  SkillGroupList?: SkillGroupItem[] | null;
   /** 最后修改时间 */
-  LastModifyTimestamp: number | null;
+  LastModifyTimestamp?: number | null;
 }
 
 /** 座席绑定技能组列表 */

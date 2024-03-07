@@ -499,7 +499,7 @@ declare interface Apm {
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
   /** 获取服务概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
-  /** 修改Apm实例 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
+  /** 修改APM实例 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
   ModifyApmInstance(data: ModifyApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmInstanceResponse>;
   /** 销毁实例 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
   TerminateApmInstance(data: TerminateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateApmInstanceResponse>;

@@ -328,6 +328,12 @@ declare interface Department {
   DepartmentName?: string;
 }
 
+/** 视频认证结果 */
+declare interface DetectInfoVideoData {
+  /** 活体视频的base64编码，mp4格式注:`需进行base64解码获取活体视频文件` */
+  LiveNessVideo?: string | null;
+}
+
 /** 个性化参数 */
 declare interface EmbedUrlOption {
   /** 合同详情预览，允许展示控件信息true：允许在合同详情页展示控件false：不允许在合同详情页展示控件默认false，合同详情页不展示控件 */
@@ -590,6 +596,8 @@ declare interface FlowCreateApprover {
   SignTypeSelector?: number;
   /** Deadline签署人的签署截止时间，格式为Unix标准时间戳（秒）注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同` */
   Deadline?: number;
+  /** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `1.视频认证为白名单功能，使用前请联系对接的客户经理沟通。``2.使用视频认证必须指定签署认证方式为人脸（即ApproverSignTypes）。` */
+  Intention?: Intention;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -750,6 +758,52 @@ declare interface IntegrationDepartment {
   DeptOpenId?: string | null;
   /** 序列号。 */
   OrderNo?: number | null;
+}
+
+/** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。` */
+declare interface Intention {
+  /** 视频认证类型，支持以下类型1 : 问答模式2 : 点头模式注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。` */
+  IntentionType?: number;
+  /** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。 */
+  IntentionQuestions?: IntentionQuestion[];
+  /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。 */
+  IntentionActions?: IntentionAction[];
+}
+
+/** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。 */
+declare interface IntentionAction {
+  /** 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。 */
+  Text?: string;
+}
+
+/** 意愿核身点头确认模式结果 */
+declare interface IntentionActionResult {
+  /** 意愿核身结果详细数据，与每段点头确认过程一一对应 */
+  Details?: IntentionActionResultDetail[] | null;
+}
+
+/** 意愿核身点头确认模式结果详细数据 */
+declare interface IntentionActionResultDetail {
+  /** 视频base64编码（其中包含全程提示文本和点头音频，mp4格式） */
+  Video?: string | null;
+}
+
+/** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。 */
+declare interface IntentionQuestion {
+  /** 当选择语音问答模式时，系统自动播报的问题文本，最大长度为150个字符。 */
+  Question?: string;
+  /** 当选择语音问答模式时，用于判断用户回答是否通过的标准答案列表，传入后可自动判断用户回答文本是否在标准文本列表中。 */
+  Answers?: string[];
+}
+
+/** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
+declare interface IntentionQuestionResult {
+  /** 视频base64（其中包含全程问题和回答音频，mp4格式）注：`需进行base64解码获取视频文件` */
+  Video?: string | null;
+  /** 和答案匹配结果列表 */
+  ResultCode?: string[] | null;
+  /** 回答问题语音识别结果列表 */
+  AsrResult?: string[] | null;
 }
 
 /** 需要进行签署审核的签署人信息 */
@@ -2624,6 +2678,28 @@ declare interface DescribePersonCertificateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSignFaceVideoRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同流程ID，为32位字符串。 */
+  FlowId: string;
+  /** 签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。 */
+  SignId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeSignFaceVideoResponse {
+  /** 核身视频结果。 */
+  VideoData?: DetectInfoVideoData | null;
+  /** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
+  IntentionQuestionResult?: IntentionQuestionResult | null;
+  /** 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。 */
+  IntentionActionResult?: IntentionActionResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeThirdPartyAuthCodeRequest {
   /** 腾讯电子签小程序跳转客户企业小程序时携带的授权查看码，AuthCode由腾讯电子签小程序生成。 */
   AuthCode: string;
@@ -3033,6 +3109,8 @@ declare interface Ess {
   DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
   /** 查询个人证书接口 {@link DescribePersonCertificateRequest} {@link DescribePersonCertificateResponse} */
   DescribePersonCertificate(data: DescribePersonCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonCertificateResponse>;
+  /** 查询签署认证人脸视频 {@link DescribeSignFaceVideoRequest} {@link DescribeSignFaceVideoResponse} */
+  DescribeSignFaceVideo(data: DescribeSignFaceVideoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSignFaceVideoResponse>;
   /** 通过AuthCode查询个人用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** 获取个人用户自动签的开通状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */
