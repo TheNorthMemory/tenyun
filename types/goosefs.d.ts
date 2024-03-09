@@ -245,6 +245,8 @@ declare interface CreateFileSystemRequest {
   Tag?: Tag[];
   /** GooseFSx构建时要传递的参数 */
   GooseFSxBuildElements?: GooseFSxBuildElement;
+  /** 客户端集群所属的安全组 */
+  SecurityGroupId?: string;
 }
 
 declare interface CreateFileSystemResponse {

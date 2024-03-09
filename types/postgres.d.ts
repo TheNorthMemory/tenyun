@@ -65,38 +65,38 @@ declare interface BackupDownloadRestriction {
 /** 备份计划 */
 declare interface BackupPlan {
   /** 备份周期 */
-  BackupPeriod: string;
-  /** 基础备份保留时长 */
-  BaseBackupRetentionPeriod: number;
+  BackupPeriod?: string;
+  /** 数据备份保留时长 */
+  BaseBackupRetentionPeriod?: number;
   /** 开始备份的最早时间 */
-  MinBackupStartTime: string;
+  MinBackupStartTime?: string;
   /** 开始备份的最晚时间 */
-  MaxBackupStartTime: string;
+  MaxBackupStartTime?: string;
 }
 
 /** 实例备份统计项 */
 declare interface BackupSummary {
   /** 实例ID。 */
-  DBInstanceId: string;
+  DBInstanceId?: string;
   /** 实例日志备份数量。 */
-  LogBackupCount: number;
+  LogBackupCount?: number;
   /** 实例日志备份大小。 */
-  LogBackupSize: number;
-  /** 手动创建的实例基础备份数量。 */
-  ManualBaseBackupCount: number;
-  /** 手动创建的实例基础备份大小。 */
-  ManualBaseBackupSize: number;
-  /** 自动创建的实例基础备份数量。 */
-  AutoBaseBackupCount: number;
-  /** 自动创建的实例基础备份大小。 */
-  AutoBaseBackupSize: number;
+  LogBackupSize?: number;
+  /** 手动创建的实例数据备份数量。 */
+  ManualBaseBackupCount?: number;
+  /** 手动创建的实例数据备份大小。 */
+  ManualBaseBackupSize?: number;
+  /** 自动创建的实例数据备份数量。 */
+  AutoBaseBackupCount?: number;
+  /** 自动创建的实例数据备份大小。 */
+  AutoBaseBackupSize?: number;
   /** 总备份数量 */
-  TotalBackupCount: number;
+  TotalBackupCount?: number;
   /** 总备份大小 */
-  TotalBackupSize: number;
+  TotalBackupSize?: number;
 }
 
-/** 数据库基础备份信息 */
+/** 数据库数据备份信息 */
 declare interface BaseBackup {
   /** 实例ID。 */
   DBInstanceId?: string;
@@ -447,81 +447,81 @@ declare interface ParamEntry {
 /** 参数详情 */
 declare interface ParamInfo {
   /** 参数ID */
-  ID: number | null;
+  ID?: number | null;
   /** 参数名 */
-  Name: string | null;
+  Name?: string | null;
   /** 参数值类型：integer（整型）、real（浮点型）、bool（布尔型）、enum（枚举类型）、mutil_enum（枚举类型、支持多选）。当参数类型为integer（整型）、real（浮点型）时，参数的取值范围根据返回值的Max、Min确定； 当参数类型为bool（布尔型）时，参数设置值取值范围是true | false； 当参数类型为enum（枚举类型）、mutil_enum（多枚举类型）时，参数的取值范围由返回值中的EnumValue确定。 */
-  ParamValueType: string | null;
+  ParamValueType?: string | null;
   /** 参数值 单位。参数没有单位时，该字段返回空 */
-  Unit: string | null;
+  Unit?: string | null;
   /** 参数默认值。以字符串形式返回 */
-  DefaultValue: string | null;
+  DefaultValue?: string | null;
   /** 参数当前运行值。以字符串形式返回 */
-  CurrentValue: string | null;
+  CurrentValue?: string | null;
   /** 数值类型（integer、real）参数，取值下界 */
-  Max: number | null;
+  Max?: number | null;
   /** 枚举类型参数，取值范围 */
-  EnumValue: string[] | null;
+  EnumValue?: string[] | null;
   /** 数值类型（integer、real）参数，取值上界 */
-  Min: number | null;
+  Min?: number | null;
   /** 参数中文描述 */
-  ParamDescriptionCH: string | null;
+  ParamDescriptionCH?: string | null;
   /** 参数英文描述 */
-  ParamDescriptionEN: string | null;
+  ParamDescriptionEN?: string | null;
   /** 参数修改，是否重启生效。（true为需要，false为不需要） */
-  NeedReboot: boolean | null;
+  NeedReboot?: boolean | null;
   /** 参数中文分类 */
-  ClassificationCN: string | null;
+  ClassificationCN?: string | null;
   /** 参数英文分类 */
-  ClassificationEN: string | null;
+  ClassificationEN?: string | null;
   /** 是否和规格相关。（true为相关，false为不想关） */
-  SpecRelated: boolean | null;
+  SpecRelated?: boolean | null;
   /** 是否为重点参数。（true为重点参数，修改是需要重点关注，可能会影响实例性能） */
-  Advanced: boolean | null;
+  Advanced?: boolean | null;
   /** 参数最后一次修改时间 */
-  LastModifyTime: string | null;
-  /** 参数存在主备制约，0：无主备制约关系，1:备机参数值需比主机大，2:主机参数值需比备机大 */
-  StandbyRelated: number | null;
-  /** 参数版本关联信息，存储具体内核版本下的具体参数信息 */
-  VersionRelationSet: ParamVersionRelation[] | null;
-  /** 参数规格关联信息，存储具体规格下具体的参数信息 */
-  SpecRelationSet: ParamSpecRelation[] | null;
+  LastModifyTime?: string | null;
+  /** 参数主备制约，0：无主备制约关系，1:备机参数值需比主机大，2:主机参数值需比备机大 */
+  StandbyRelated?: number | null;
+  /** 参数版本关联信息，内容为相应内核版本下的参数详细信息 */
+  VersionRelationSet?: ParamVersionRelation[] | null;
+  /** 参数规格关联信息，内容为相应规格下的参数详细信息 */
+  SpecRelationSet?: ParamSpecRelation[] | null;
 }
 
-/** 描述各规格下的参数信息 */
+/** 各规格下的参数信息 */
 declare interface ParamSpecRelation {
   /** 参数名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 参数信息所属规格 */
-  Memory: string | null;
+  Memory?: string | null;
   /** 参数在该规格下的默认值 */
-  Value: string | null;
+  Value?: string | null;
   /** 参数值单位。参数没有单位时，该字段返回空 */
-  Unit: string | null;
+  Unit?: string | null;
   /** 数值类型（integer、real）参数，取值上界 */
-  Max: number | null;
+  Max?: number | null;
   /** 数值类型（integer、real）参数，取值下界 */
-  Min: number | null;
+  Min?: number | null;
   /** 枚举类型参数，取值范围 */
-  EnumValue: string[] | null;
+  EnumValue?: string[] | null;
 }
 
-/** 描述各版本下的参数信息 */
+/** 各版本下的参数信息 */
 declare interface ParamVersionRelation {
   /** 参数名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 参数信息所属内核版本 */
-  DBKernelVersion: string | null;
+  DBKernelVersion?: string | null;
   /** 参数在该版本该规格下的默认值 */
-  Value: string | null;
+  Value?: string | null;
   /** 参数值单位。参数没有单位时，该字段返回空 */
-  Unit: string | null;
+  Unit?: string | null;
   /** 数值类型（integer、real）参数，取值上界 */
-  Max: number | null;
+  Max?: number | null;
   /** 数值类型（integer、real）参数，取值下界 */
-  Min: number | null;
+  Min?: number | null;
   /** 枚举类型参数，取值范围 */
-  EnumValue: string[] | null;
+  EnumValue?: string[] | null;
 }
 
 /** 参数模板的基本信息 */
@@ -926,7 +926,7 @@ declare interface CreateBaseBackupRequest {
 }
 
 declare interface CreateBaseBackupResponse {
-  /** 基础备份集ID */
+  /** 数据备份集ID */
   BaseBackupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1235,7 +1235,7 @@ declare interface CreateServerlessDBInstanceResponse {
 declare interface DeleteBaseBackupRequest {
   /** 实例ID。 */
   DBInstanceId: string;
-  /** 基础备份ID。 */
+  /** 数据备份ID。 */
   BaseBackupId: string;
 }
 
@@ -1342,7 +1342,7 @@ declare interface DescribeAccountsRequest {
 declare interface DescribeAccountsResponse {
   /** 本次调用接口共返回了多少条数据。 */
   TotalCount?: number;
-  /** 帐号列表详细信息。 */
+  /** 账号列表详细信息。 */
   Details?: AccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1478,9 +1478,9 @@ declare interface DescribeBaseBackupsRequest {
 }
 
 declare interface DescribeBaseBackupsResponse {
-  /** 查询到的基础备份数量。 */
+  /** 查询到的数据备份数量。 */
   TotalCount?: number;
-  /** 基础备份详细信息列表。 */
+  /** 数据备份详细信息列表。 */
   BaseBackupSet?: BaseBackup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2175,7 +2175,7 @@ declare interface ModifyBackupPlanResponse {
 declare interface ModifyBaseBackupExpireTimeRequest {
   /** 实例ID。 */
   DBInstanceId: string;
-  /** 基础备份ID。 */
+  /** 数据备份ID。 */
   BaseBackupId: string;
   /** 新过期时间。 */
   NewExpireTime: string;
@@ -2611,7 +2611,7 @@ declare interface Postgres {
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
   /** 关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
-  /** 创建实例基础备份 {@link CreateBaseBackupRequest} {@link CreateBaseBackupResponse} */
+  /** 创建实例数据备份 {@link CreateBaseBackupRequest} {@link CreateBaseBackupResponse} */
   CreateBaseBackup(data: CreateBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseBackupResponse>;
   /** 创建实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
@@ -2629,7 +2629,7 @@ declare interface Postgres {
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
   /** 创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
-  /** 删除实例基础备份 {@link DeleteBaseBackupRequest} {@link DeleteBaseBackupResponse} */
+  /** 删除实例数据备份 {@link DeleteBaseBackupRequest} {@link DeleteBaseBackupResponse} */
   DeleteBaseBackup(data: DeleteBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaseBackupResponse>;
   /** 删除实例网络 {@link DeleteDBInstanceNetworkAccessRequest} {@link DeleteDBInstanceNetworkAccessResponse} */
   DeleteDBInstanceNetworkAccess(data: DeleteDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceNetworkAccessResponse>;
@@ -2657,7 +2657,7 @@ declare interface Postgres {
   DescribeBackupPlans(data: DescribeBackupPlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupPlansResponse>;
   /** 查询备份统计信息 {@link DescribeBackupSummariesRequest} {@link DescribeBackupSummariesResponse} */
   DescribeBackupSummaries(data?: DescribeBackupSummariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupSummariesResponse>;
-  /** 查询基础备份列表 {@link DescribeBaseBackupsRequest} {@link DescribeBaseBackupsResponse} */
+  /** 查询数据备份列表 {@link DescribeBaseBackupsRequest} {@link DescribeBaseBackupsResponse} */
   DescribeBaseBackups(data?: DescribeBaseBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseBackupsResponse>;
   /** 查询售卖规格 {@link DescribeClassesRequest} {@link DescribeClassesResponse} */
   DescribeClasses(data: DescribeClassesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassesResponse>;
@@ -2727,13 +2727,13 @@ declare interface Postgres {
   InquiryPriceUpgradeDBInstance(data: InquiryPriceUpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeDBInstanceResponse>;
   /** 隔离实例 {@link IsolateDBInstancesRequest} {@link IsolateDBInstancesResponse} */
   IsolateDBInstances(data: IsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstancesResponse>;
-  /** 修改帐号备注 {@link ModifyAccountRemarkRequest} {@link ModifyAccountRemarkResponse} */
+  /** 修改账号备注 {@link ModifyAccountRemarkRequest} {@link ModifyAccountRemarkResponse} */
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
   /** 修改备份文件下载限制 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
   /** 修改备份计划 {@link ModifyBackupPlanRequest} {@link ModifyBackupPlanResponse} */
   ModifyBackupPlan(data: ModifyBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupPlanResponse>;
-  /** 修改基础备份过期时间 {@link ModifyBaseBackupExpireTimeRequest} {@link ModifyBaseBackupExpireTimeResponse} */
+  /** 修改数据备份过期时间 {@link ModifyBaseBackupExpireTimeRequest} {@link ModifyBaseBackupExpireTimeResponse} */
   ModifyBaseBackupExpireTime(data: ModifyBaseBackupExpireTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaseBackupExpireTimeResponse>;
   /** 修改实例计费类型 {@link ModifyDBInstanceChargeTypeRequest} {@link ModifyDBInstanceChargeTypeResponse} */
   ModifyDBInstanceChargeType(data: ModifyDBInstanceChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceChargeTypeResponse>;

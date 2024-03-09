@@ -617,43 +617,43 @@ declare interface ShardZoneChooseInfo {
 /** 慢查询条目信息 */
 declare interface SlowLogData {
   /** 语句校验和，用于查询详情 */
-  CheckSum: string;
+  CheckSum?: string;
   /** 数据库名称 */
-  Db: string;
+  Db?: string;
   /** 抽象的SQL语句 */
-  FingerPrint: string;
+  FingerPrint?: string;
   /** 平均的锁时间 */
-  LockTimeAvg: string;
+  LockTimeAvg?: string;
   /** 最大锁时间 */
-  LockTimeMax: string;
+  LockTimeMax?: string;
   /** 最小锁时间 */
-  LockTimeMin: string;
+  LockTimeMin?: string;
   /** 锁时间总和 */
-  LockTimeSum: string;
+  LockTimeSum?: string;
   /** 查询次数 */
-  QueryCount: string;
+  QueryCount?: string;
   /** 平均查询时间 */
-  QueryTimeAvg: string;
+  QueryTimeAvg?: string;
   /** 最大查询时间 */
-  QueryTimeMax: string;
+  QueryTimeMax?: string;
   /** 最小查询时间 */
-  QueryTimeMin: string;
+  QueryTimeMin?: string;
   /** 查询时间总和 */
-  QueryTimeSum: string;
+  QueryTimeSum?: string;
   /** 扫描行数 */
-  RowsExaminedSum: string;
+  RowsExaminedSum?: string;
   /** 发送行数 */
-  RowsSentSum: string;
+  RowsSentSum?: string;
   /** 最后执行时间 */
-  TsMax: string;
+  TsMax?: string;
   /** 首次执行时间 */
-  TsMin: string;
-  /** 帐号 */
-  User: string;
+  TsMin?: string;
+  /** 账号 */
+  User?: string;
   /** 样例Sql */
-  ExampleSql: string | null;
+  ExampleSql?: string | null;
   /** 账户的域名 */
-  Host: string | null;
+  Host?: string | null;
 }
 
 /** 按机型分类的规格配置 */
@@ -917,13 +917,13 @@ declare interface CreateAccountRequest {
 
 declare interface CreateAccountResponse {
   /** 实例ID，透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 用户名，透传入参。 */
-  UserName: string;
+  UserName?: string;
   /** 允许访问的 host，透传入参。 */
-  Host: string;
+  Host?: string;
   /** 透传入参。 */
-  ReadOnly: number;
+  ReadOnly?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

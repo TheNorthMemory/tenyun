@@ -33,21 +33,21 @@ declare interface ConstraintRange {
 /** 云数据库账号信息 */
 declare interface DBAccount {
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 用户可以从哪台主机登录（对应 MySQL 用户的 host 字段，UserName + Host 唯一标识一个用户，IP形式，IP段以%结尾；支持填入%；为空默认等于%） */
-  Host: string;
+  Host?: string;
   /** 用户备注信息 */
-  Description: string;
+  Description?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 只读标记，0：否， 1：该账号的sql请求优先选择备机执行，备机不可用时选择主机执行，2：优先选择备机执行，备机不可用时操作失败。 */
-  ReadOnly: number;
-  /** 该字段对只读帐号有意义，表示选择主备延迟小于该值的备机 */
-  DelayThresh: number | null;
+  ReadOnly?: number;
+  /** 该字段对只读账号有意义，表示选择主备延迟小于该值的备机 */
+  DelayThresh?: number | null;
   /** 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。 */
-  SlaveConst: number;
+  SlaveConst?: number;
   /** 用户最大连接数，0代表无限制 */
   MaxUserConnections?: number;
 }
@@ -497,43 +497,43 @@ declare interface SecurityGroupBound {
 /** 慢查询条目信息 */
 declare interface SlowLogData {
   /** 语句校验和，用于查询详情 */
-  CheckSum: string;
+  CheckSum?: string;
   /** 数据库名称 */
-  Db: string;
+  Db?: string;
   /** 抽象的SQL语句 */
-  FingerPrint: string;
+  FingerPrint?: string;
   /** 平均的锁时间 */
-  LockTimeAvg: string;
+  LockTimeAvg?: string;
   /** 最大锁时间 */
-  LockTimeMax: string;
+  LockTimeMax?: string;
   /** 最小锁时间 */
-  LockTimeMin: string;
+  LockTimeMin?: string;
   /** 锁时间总和 */
-  LockTimeSum: string;
+  LockTimeSum?: string;
   /** 查询次数 */
-  QueryCount: string;
+  QueryCount?: string;
   /** 平均查询时间 */
-  QueryTimeAvg: string;
+  QueryTimeAvg?: string;
   /** 最大查询时间 */
-  QueryTimeMax: string;
+  QueryTimeMax?: string;
   /** 最小查询时间 */
-  QueryTimeMin: string;
+  QueryTimeMin?: string;
   /** 查询时间总和 */
-  QueryTimeSum: string;
+  QueryTimeSum?: string;
   /** 扫描行数 */
-  RowsExaminedSum: string;
+  RowsExaminedSum?: string;
   /** 发送行数 */
-  RowsSentSum: string;
+  RowsSentSum?: string;
   /** 最后执行时间 */
-  TsMax: string;
+  TsMax?: string;
   /** 首次执行时间 */
-  TsMin: string;
-  /** 帐号 */
-  User: string;
+  TsMin?: string;
+  /** 账号 */
+  User?: string;
   /** 样例Sql */
-  ExampleSql: string | null;
+  ExampleSql?: string | null;
   /** 账户的域名 */
-  Host: string;
+  Host?: string;
 }
 
 /** 实例可售卖规格详细信息，创建实例和扩容实例时 Pid+MemSize 唯一确定一种售卖规格，磁盘大小可用区间为[MinDataDisk,MaxDataDisk] */
@@ -747,7 +747,7 @@ declare interface CreateAccountRequest {
   Host: string;
   /** 账号密码，密码需要 8-32 个字符，不能以 '/' 开头，并且必须包含小写字母、大写字母、数字和符号()~!@#$%^&*-+=_|{}[]:<>,.?/。 */
   Password: string;
-  /** 是否创建为只读账号，0：否， 1：该账号的sql请求优先选择备机执行，备机不可用时选择主机执行，2：优先选择备机执行，备机不可用时操作失败。 */
+  /** 是否创建为只读账号，0：否:； 1：只读账号，该账号的sql请求优先选择备机执行，备机延迟时选择主机执行；2：只读账号，优先选择备机执行，备机延迟时操作报错；3：只读账号，优先选择备机执行，忽略备机延迟只读备机； */
   ReadOnly?: number;
   /** 账号备注，可以包含中文、英文字符、常见符号和数字，长度为0~256字符 */
   Description?: string;
@@ -761,13 +761,13 @@ declare interface CreateAccountRequest {
 
 declare interface CreateAccountResponse {
   /** 实例ID，透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 用户名，透传入参。 */
-  UserName: string;
+  UserName?: string;
   /** 允许访问的 host，透传入参。 */
-  Host: string;
+  Host?: string;
   /** 透传入参。 */
-  ReadOnly: number;
+  ReadOnly?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -184,6 +184,10 @@ declare interface InstanceInfo {
   GraceShutdownWaitSeconds?: string | null;
   /** 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储 */
   CaseSensitive?: number | null;
+  /** 用户是否可以绑定安全组 */
+  IsWhiteSGs?: boolean | null;
+  /** 已绑定的安全组信息 */
+  BindSGs?: string[] | null;
 }
 
 /** 实例节点描述信息 */

@@ -26,6 +26,580 @@ declare interface ActionSummaryOverviewItem {
   TotalCost: string;
 }
 
+/** 分账账单趋势图平均值 */
+declare interface AllocationAverageData {
+  /** 起始月份 */
+  BeginMonth?: string | null;
+  /** 结束月份 */
+  EndMonth?: string | null;
+  /** 合计费用(折后总额)平均值 */
+  RealTotalCost?: string | null;
+}
+
+/** 分账趋势图详情数据 */
+declare interface AllocationBillTrendDetail {
+  /** 账单月份 */
+  Month?: string | null;
+  /** 账单月份展示名称 */
+  Name?: string | null;
+  /** 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额) */
+  RealTotalCost?: string | null;
+}
+
+/** 分账账单明细 */
+declare interface AllocationDetail {
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string | null;
+  /** 日期：结算日期 */
+  BillDate?: string | null;
+  /** 支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识 */
+  PayerUin?: string | null;
+  /** 使用者 UIN：实际使用资源的账号 ID */
+  OwnerUin?: string | null;
+  /** 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID） */
+  OperateUin?: string | null;
+  /** 产品编码 */
+  BusinessCode?: string | null;
+  /** 产品名称：用户所采购的各类云产品 */
+  BusinessCodeName?: string | null;
+  /** 计费模式编码 */
+  PayMode?: string | null;
+  /** 计费模式：资源的计费模式，区分为包年包月和按量计费 */
+  PayModeName?: string | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目 */
+  ProjectName?: string | null;
+  /** 地域ID */
+  RegionId?: number | null;
+  /** 地域名称：资源所属地域 */
+  RegionName?: string | null;
+  /** 可用区ID */
+  ZoneId?: number | null;
+  /** 可用区：资源所属可用区 */
+  ZoneName?: string | null;
+  /** 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID */
+  ResourceId?: string | null;
+  /** 实例名称：用户在控制台为资源设置的名称，如未设置默认为空 */
+  ResourceName?: string | null;
+  /** 实例类型编码 */
+  InstanceType?: string | null;
+  /** 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-” */
+  InstanceTypeName?: string | null;
+  /** 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名 */
+  SplitItemId?: string | null;
+  /** 分拆项名称：涉及分拆产品的分拆后的分拆项 */
+  SplitItemName?: string | null;
+  /** 子产品编码 */
+  ProductCode?: string | null;
+  /** 子产品名称：用户采购的具体产品细分类型 */
+  ProductCodeName?: string | null;
+  /** 交易类型编码 */
+  ActionType?: string | null;
+  /** 交易类型：明细交易类型 */
+  ActionTypeName?: string | null;
+  /** 订单 ID：包年包月计费模式下订购的订单号 */
+  OrderId?: string | null;
+  /** 交易 ID：结算扣费单号 */
+  BillId?: string | null;
+  /** 扣费时间：结算扣费时间 */
+  PayTime?: string | null;
+  /** 开始使用时间：产品服务开始使用时间 */
+  FeeBeginTime?: string | null;
+  /** 结束使用时间：产品服务结束使用时间 */
+  FeeEndTime?: string | null;
+  /** 组件类型编码 */
+  ComponentCode?: string | null;
+  /** 组件类型：用户购买的产品或服务对应的组件大类 */
+  ComponentCodeName?: string | null;
+  /** 组件刊例价：组件的官网原始单价（如客户享受一口价/合同价则默认不展示） */
+  SinglePrice?: string | null;
+  /** 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣 */
+  ContractPrice?: string | null;
+  /** 组件价格单位：组件价格的单位，单位构成：元/用量单位/时长单位 */
+  SinglePriceUnit?: string | null;
+  /** 组件用量：该组件实际结算用量，组件用量=组件原始用量-抵扣用量（含资源包） */
+  UsedAmount?: string | null;
+  /** 组件用量单位：组件用量对应的单位 */
+  UsedAmountUnit?: string | null;
+  /** 使用时长：资源使用的时长，组件用量=组件原始使用时长-抵扣时长（含资源包） */
+  TimeSpan?: string | null;
+  /** 时长单位：资源使用时长的单位 */
+  TimeUnit?: string | null;
+  /** 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息 */
+  ReserveDetail?: string | null;
+  /** 分拆项用量/时长占比：分拆项用量（时长）占比，分拆项用量（时长）/ 拆分前合计用量（时长） */
+  SplitRatio?: string | null;
+  /** 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如客户享受一口价/合同价则默认不展示，退费类场景也默认不展示），指定价模式 */
+  TotalCost?: string | null;
+  /** 预留实例抵扣时长：本产品或服务使用预留实例抵扣的使用时长 */
+  RITimeSpan?: string | null;
+  /** 预留实例抵扣原价：本产品或服务使用预留实例抵扣的组件原价金额 */
+  RICost?: string | null;
+  /** 节省计划抵扣原价：节省计划抵扣原价 = 节省计划包抵扣面值 / 节省计划抵扣率 */
+  SPCost?: string | null;
+  /** 折扣率：本资源享受的折扣率（如客户享受一口价/合同价则默认不展示，退费场景也默认不展示） */
+  Discount?: string | null;
+  /** 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率=优惠后总价/原价 */
+  BlendedDiscount?: string | null;
+  /** 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率 */
+  RealTotalCost?: string | null;
+  /** 现金账户支出(元)：通过现金账户支付的金额 */
+  CashPayAmount?: string | null;
+  /** 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额 */
+  VoucherPayAmount?: string | null;
+  /** 赠送账户支出(元)：使用赠送金支付的金额 */
+  IncentivePayAmount?: string | null;
+  /** 分成账户支出(元)：通过分成金账户支付的金额 */
+  TransferPayAmount?: string | null;
+  /** 分账标签：资源绑定的标签 */
+  Tag?: BillTag[] | null;
+  /** 国内国际编码 */
+  RegionType?: string | null;
+  /** 国内国际：资源所属区域类型（国内、国际） */
+  RegionTypeName?: string | null;
+  /** 组件名称编码 */
+  ItemCode?: string | null;
+  /** 组件名称：用户购买的产品或服务，所包含的具体组件 */
+  ItemCodeName?: string | null;
+  /** 关联单据ID：和本笔交易关联单据ID，如退费订单对应的原新购订单等 */
+  AssociatedOrder?: string;
+  /** 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息 */
+  PriceInfo?: string[] | null;
+  /** 计算规则说明：特殊交易类型计费结算的详细计算说明，如退费及变配 */
+  Formula?: string | null;
+  /** 计费规则：各产品详细的计费规则官网说明链接 */
+  FormulaUrl?: string | null;
+  /** 原始用量/时长：组件被资源包抵扣前的原始用量（目前仅实时音视频、弹性微服务、云呼叫中心及专属可用区产品支持该信息外显，其他产品尚在接入中） */
+  RealTotalMeasure?: string | null;
+  /** 抵扣用量/时长（含资源包）：组件被资源包抵扣的用量（目前仅实时音视频、弹性微服务、云呼叫中心及专属可用区产品支持该信息外显，其他产品尚在接入中） */
+  DeductedMeasure?: string | null;
+  /** 配置描述：资源配置规格信息 */
+  ComponentConfig?: string | null;
+  /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊1 - 归集-1 - 未分配 */
+  AllocationType?: number | null;
+}
+
+/** 分账账单月概览金额明细 */
+declare interface AllocationMonthOverviewDetail {
+  /** 归集费用(现金)：基于归集规则直接归集到分账单元的现金 */
+  GatherCashPayAmount?: string;
+  /** 归集费用(优惠券)：基于归集规则直接归集到分账单元的资源优惠券 */
+  GatherVoucherPayAmount?: string;
+  /** 归集费用(赠送金)：基于归集规则直接归集到分账单元的资源赠送金 */
+  GatherIncentivePayAmount?: string;
+  /** 归集费用(分成金)：基于归集规则直接归集到分账单元的资源分成金 */
+  GatherTransferPayAmount?: string;
+  /** 分摊费用(现金)：基于分摊规则分摊到分账单元的资源现金 */
+  AllocateCashPayAmount?: string;
+  /** 分摊费用(优惠券)：基于分摊规则分摊到分账单元的资源优惠券 */
+  AllocateVoucherPayAmount?: string;
+  /** 分摊费用(赠送金)：基于分摊规则分摊到分账单元的资源赠送金 */
+  AllocateIncentivePayAmount?: string;
+  /** 分摊费用(分成金)：基于分摊规则分摊到分账单元的资源分成金 */
+  AllocateTransferPayAmount?: string;
+  /** 合计费用(现金)：分账单元总费用，归集费用(现金) + 分摊费用(现金) */
+  TotalCashPayAmount?: string;
+  /** 合计费用(优惠券)：分账单元总费用，归集费用(优惠券) + 分摊费用(优惠券) */
+  TotalVoucherPayAmount?: string;
+  /** 合计费用(赠送金)：分账单元总费用，归集费用(赠送金) + 分摊费用(赠送金) */
+  TotalIncentivePayAmount?: string;
+  /** 合计费用(分成金)：分账单元总费用，归集费用(分成金)+分摊费用(分成金) */
+  TotalTransferPayAmount?: string;
+  /** 归集费用(折后总额)：基于归集规则直接归集到分账单元的资源优惠后总价 */
+  GatherRealCost?: string;
+  /** 分摊费用(折后总额)：基于分摊规则分摊到分账单元的资源优惠后总价 */
+  AllocateRealCost?: string;
+  /** 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额) */
+  RealTotalCost?: string;
+  /** 占比(折后总额)：本分账单元合计费用(折后总额)/合计费用(折后总额)*100% */
+  Ratio?: string;
+  /** 环比(折后总额)：[本月分账单元合计费用(折后总额) - 上月分账单元合计费用(折后总额)] / 上月分账单元合计费用(折后总额) * 100% */
+  Trend?: string | null;
+  /** 环比箭头upward -上升downward - 下降none - 平稳 */
+  TrendType?: string | null;
+}
+
+/** 分账概览明细 */
+declare interface AllocationOverviewDetail {
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string | null;
+  /** 日期：结算日期 */
+  BillDate?: string | null;
+  /** 归集费用(现金)：基于归集规则直接归集到分账单元的现金 */
+  GatherCashPayAmount?: string;
+  /** 归集费用(优惠券)：基于归集规则直接归集到分账单元的资源优惠券 */
+  GatherVoucherPayAmount?: string;
+  /** 归集费用(赠送金)：基于归集规则直接归集到分账单元的资源赠送金 */
+  GatherIncentivePayAmount?: string;
+  /** 归集费用(分成金)：基于归集规则直接归集到分账单元的资源分成金 */
+  GatherTransferPayAmount?: string;
+  /** 分摊费用(现金)：基于分摊规则分摊到分账单元的资源现金 */
+  AllocateCashPayAmount?: string;
+  /** 分摊费用(优惠券)：基于分摊规则分摊到分账单元的资源优惠券 */
+  AllocateVoucherPayAmount?: string;
+  /** 分摊费用(赠送金)：基于分摊规则分摊到分账单元的资源赠送金 */
+  AllocateIncentivePayAmount?: string;
+  /** 分摊费用(分成金)：基于分摊规则分摊到分账单元的资源分成金 */
+  AllocateTransferPayAmount?: string;
+  /** 合计费用(现金)：分账单元总费用，归集费用(现金) + 分摊费用(现金) */
+  TotalCashPayAmount?: string;
+  /** 合计费用(优惠券)：分账单元总费用，归集费用(优惠券) + 分摊费用(优惠券) */
+  TotalVoucherPayAmount?: string;
+  /** 合计费用(赠送金)：分账单元总费用，归集费用(赠送金) + 分摊费用(赠送金) */
+  TotalIncentivePayAmount?: string;
+  /** 合计费用(分成金)：分账单元总费用，归集费用(分成金)+分摊费用(分成金) */
+  TotalTransferPayAmount?: string;
+  /** 归集费用(折后总额)：基于归集规则直接归集到分账单元的资源优惠后总价 */
+  GatherRealCost?: string;
+  /** 分摊费用(折后总额)：基于分摊规则分摊到分账单元的资源优惠后总价 */
+  AllocateRealCost?: string;
+  /** 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额) */
+  RealTotalCost?: string;
+  /** 占比(折后总额)：本分账单元合计费用(折后总额)/合计费用(折后总额)*100% */
+  Ratio?: string;
+  /** 环比(折后总额)：[本月分账单元合计费用(折后总额) - 上月分账单元合计费用(折后总额)] / 上月分账单元合计费用(折后总额) * 100% */
+  Trend?: string | null;
+  /** 环比箭头upward -上升downward - 下降none - 平稳 */
+  TrendType?: string | null;
+}
+
+/** 分账账单月概览详情 */
+declare interface AllocationOverviewNode {
+  /** 分账单元ID */
+  Id?: number | null;
+  /** 分账单元名称 */
+  Name?: string | null;
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元包含规则标志0 - 不存在规则1 - 同时存在归集规则和公摊规则2 - 仅存在归集规则3 - 仅存在公摊规则 */
+  Symbol?: number | null;
+  /** 子单元月概览详情 */
+  Children?: AllocationOverviewNode[] | null;
+  /** 分账账单月概览金额明细 */
+  Detail?: AllocationMonthOverviewDetail | null;
+}
+
+/** 分账账单概览金额汇总 */
+declare interface AllocationOverviewTotal {
+  /** 总费用：现金费用合计+分成金费用合计+赠送金费用合计+优惠券费用合计 */
+  RealTotalCost?: string | null;
+  /** 现金： 现金费用合计 */
+  CashPayAmount?: string | null;
+  /** 赠送金：赠送金费用合计 */
+  IncentivePayAmount?: string | null;
+  /** 优惠券：优惠券费用合计 */
+  VoucherPayAmount?: string | null;
+  /** 分成金：分成金费用合计 */
+  TransferPayAmount?: string | null;
+}
+
+/** 当前资源命中公摊规则信息 */
+declare interface AllocationRule {
+  /** 公摊规则ID */
+  RuleId?: number | null;
+  /** 公摊规则名称 */
+  RuleName?: string | null;
+}
+
+/** 分账账单趋势图 */
+declare interface AllocationStat {
+  /** 费用平均信息 */
+  Average?: AllocationAverageData | null;
+}
+
+/** 分账账单按产品汇总明细 */
+declare interface AllocationSummaryByBusiness {
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string | null;
+  /** 日期：结算日期 */
+  BillDate?: string | null;
+  /** 归集费用(现金)：基于归集规则直接归集到分账单元的现金 */
+  GatherCashPayAmount?: string;
+  /** 归集费用(优惠券)：基于归集规则直接归集到分账单元的资源优惠券 */
+  GatherVoucherPayAmount?: string;
+  /** 归集费用(赠送金)：基于归集规则直接归集到分账单元的资源赠送金 */
+  GatherIncentivePayAmount?: string;
+  /** 归集费用(分成金)：基于归集规则直接归集到分账单元的资源分成金 */
+  GatherTransferPayAmount?: string;
+  /** 分摊费用(现金)：基于分摊规则分摊到分账单元的资源现金 */
+  AllocateCashPayAmount?: string;
+  /** 分摊费用(优惠券)：基于分摊规则分摊到分账单元的资源优惠券 */
+  AllocateVoucherPayAmount?: string;
+  /** 分摊费用(赠送金)：基于分摊规则分摊到分账单元的资源赠送金 */
+  AllocateIncentivePayAmount?: string;
+  /** 分摊费用(分成金)：基于分摊规则分摊到分账单元的资源分成金 */
+  AllocateTransferPayAmount?: string;
+  /** 合计费用(现金)：分账单元总费用，归集费用(现金) + 分摊费用(现金) */
+  TotalCashPayAmount?: string;
+  /** 合计费用(优惠券)：分账单元总费用，归集费用(优惠券) + 分摊费用(优惠券) */
+  TotalVoucherPayAmount?: string;
+  /** 合计费用(赠送金)：分账单元总费用，归集费用(赠送金) + 分摊费用(赠送金) */
+  TotalIncentivePayAmount?: string;
+  /** 合计费用(分成金)：分账单元总费用，归集费用(分成金)+分摊费用(分成金) */
+  TotalTransferPayAmount?: string;
+  /** 归集费用(折后总额)：基于归集规则直接归集到分账单元的资源优惠后总价 */
+  GatherRealCost?: string;
+  /** 分摊费用(折后总额)：基于分摊规则分摊到分账单元的资源优惠后总价 */
+  AllocateRealCost?: string;
+  /** 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额) */
+  RealTotalCost?: string;
+  /** 占比(折后总额)：本分账单元合计费用(折后总额)/合计费用(折后总额)*100% */
+  Ratio?: string;
+  /** 环比(折后总额)：[本月分账单元合计费用(折后总额) - 上月分账单元合计费用(折后总额)] / 上月分账单元合计费用(折后总额) * 100% */
+  Trend?: string | null;
+  /** 环比箭头upward -上升downward - 下降none - 平稳 */
+  TrendType?: string | null;
+  /** 产品编码 */
+  BusinessCode?: string | null;
+  /** 产品名称：用户所采购的各类云产品 */
+  BusinessCodeName?: string | null;
+  /** 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如客户享受一口价/合同价则默认不展示，退费类场景也默认不展示），指定价模式 */
+  TotalCost?: string;
+  /** 预留实例抵扣原价：本产品或服务使用预留实例抵扣的组件原价金额 */
+  RICost?: string;
+  /** 节省计划抵扣原价：节省计划抵扣原价 = 节省计划包抵扣面值 / 节省计划抵扣率 */
+  SPCost?: string;
+  /** 现金账户支出(元)：通过现金账户支付的金额 */
+  CashPayAmount?: string;
+  /** 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额 */
+  VoucherPayAmount?: string;
+  /** 赠送账户支出(元)：使用赠送金支付的金额 */
+  IncentivePayAmount?: string;
+  /** 分成账户支出(元)：通过分成金账户支付的金额 */
+  TransferPayAmount?: string;
+  /** 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率 */
+  AllocationRealTotalCost?: string;
+}
+
+/** 分账账单按组件汇总明细 */
+declare interface AllocationSummaryByItem {
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string | null;
+  /** 日期：结算日期 */
+  BillDate?: string | null;
+  /** 支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识 */
+  PayerUin?: string | null;
+  /** 使用者 UIN：实际使用资源的账号 ID */
+  OwnerUin?: string | null;
+  /** 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID） */
+  OperateUin?: string | null;
+  /** 计费模式编码 */
+  PayMode?: string | null;
+  /** 计费模式：资源的计费模式，区分为包年包月和按量计费 */
+  PayModeName?: string | null;
+  /** 交易类型编码 */
+  ActionType?: string | null;
+  /** 交易类型：明细交易类型 */
+  ActionTypeName?: string | null;
+  /** 产品编码 */
+  BusinessCode?: string | null;
+  /** 产品名称：用户所采购的各类云产品 */
+  BusinessCodeName?: string | null;
+  /** 子产品编码 */
+  ProductCode?: string | null;
+  /** 子产品名称：用户采购的具体产品细分类型 */
+  ProductCodeName?: string | null;
+  /** 地域ID */
+  RegionId?: number | null;
+  /** 地域名称：资源所属地域 */
+  RegionName?: string | null;
+  /** 可用区ID */
+  ZoneId?: number | null;
+  /** 可用区：资源所属可用区 */
+  ZoneName?: string | null;
+  /** 实例类型编码 */
+  InstanceType?: string | null;
+  /** 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-” */
+  InstanceTypeName?: string | null;
+  /** 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID */
+  ResourceId?: string | null;
+  /** 实例名称：用户在控制台为资源设置的名称，如未设置默认为空 */
+  ResourceName?: string | null;
+  /** 分账标签：资源绑定的标签 */
+  Tag?: BillTag[] | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目 */
+  ProjectName?: string | null;
+  /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊1 - 归集-1 - 未分配 */
+  AllocationType?: number | null;
+  /** 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如客户享受一口价/合同价则默认不展示，退费类场景也默认不展示），指定价模式 */
+  TotalCost?: string | null;
+  /** 预留实例抵扣时长：本产品或服务使用预留实例抵扣的使用时长 */
+  RiTimeSpan?: string | null;
+  /** 预留实例抵扣原价：本产品或服务使用预留实例抵扣的组件原价金额 */
+  RiCost?: string | null;
+  /** 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率 */
+  RealTotalCost?: string | null;
+  /** 现金账户支出(元)：通过现金账户支付的金额 */
+  CashPayAmount?: string | null;
+  /** 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额 */
+  VoucherPayAmount?: string | null;
+  /** 赠送账户支出(元)：使用赠送金支付的金额 */
+  IncentivePayAmount?: string | null;
+  /** 分成账户支出(元)：通过分成金账户支付的金额 */
+  TransferPayAmount?: string | null;
+  /** 组件名称编码 */
+  ItemCode?: string | null;
+  /** 组件名称：用户购买的产品或服务，所包含的具体组件 */
+  ItemCodeName?: string | null;
+  /** 组件类型编码 */
+  ComponentCode?: string | null;
+  /** 组件类型：用户购买的产品或服务对应的组件大类 */
+  ComponentCodeName?: string | null;
+  /** 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名 */
+  SplitItemId?: string | null;
+  /** 分拆项名称：涉及分拆产品的分拆后的分拆项 */
+  SplitItemName?: string | null;
+  /** 开始使用时间：产品服务开始使用时间 */
+  FeeBeginTime?: string | null;
+  /** 结束使用时间：产品服务结束使用时间 */
+  FeeEndTime?: string | null;
+  /** 节省计划抵扣原价：节省计划抵扣原价 = 节省计划包抵扣面值 / 节省计划抵扣率 */
+  SPCost?: string | null;
+  /** 国内国际编码 */
+  RegionType?: string | null;
+  /** 国内国际：资源所属区域类型（国内、国际） */
+  RegionTypeName?: string | null;
+  /** 组件刊例价：组件的官网原始单价（如客户享受一口价/合同价则默认不展示） */
+  SinglePrice?: string | null;
+  /** 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣 */
+  ContractPrice?: string | null;
+  /** 组件价格单位：组件价格的单位，单位构成：元/用量单位/时长单位 */
+  SinglePriceUnit?: string | null;
+  /** 组件用量：该组件实际结算用量，组件用量=组件原始用量-抵扣用量（含资源包） */
+  UsedAmount?: string | null;
+  /** 组件用量单位：组件用量对应的单位 */
+  UsedAmountUnit?: string | null;
+  /** 使用时长：资源使用的时长，组件用量=组件原始使用时长-抵扣时长（含资源包） */
+  TimeSpan?: string | null;
+  /** 时长单位：资源使用时长的单位 */
+  TimeUnit?: string | null;
+  /** 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息 */
+  ReserveDetail?: string | null;
+  /** 原始用量/时长：组件被资源包抵扣前的原始用量（目前仅实时音视频、弹性微服务、云呼叫中心及专属可用区产品支持该信息外显，其他产品尚在接入中） */
+  RealTotalMeasure?: string | null;
+  /** 抵扣用量/时长（含资源包）：组件被资源包抵扣的用量（目前仅实时音视频、弹性微服务、云呼叫中心及专属可用区产品支持该信息外显，其他产品尚在接入中） */
+  DeductedMeasure?: string | null;
+  /** 折扣率：本资源享受的折扣率（如客户享受一口价/合同价则默认不展示，退费场景也默认不展示） */
+  Discount?: string | null;
+  /** 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率=优惠后总价/原价 */
+  BlendedDiscount?: string | null;
+  /** 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息 */
+  PriceInfo?: string[] | null;
+  /** 计算规则说明：特殊交易类型计费结算的详细计算说明，如退费及变配 */
+  Formula?: string | null;
+  /** 计费规则：各产品详细的计费规则官网说明链接 */
+  FormulaUrl?: string | null;
+  /** 配置描述：资源配置规格信息 */
+  ComponentConfig?: string | null;
+}
+
+/** 分账账单按资源汇总明细 */
+declare interface AllocationSummaryByResource {
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string | null;
+  /** 日期：结算日期 */
+  BillDate?: string | null;
+  /** 支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识 */
+  PayerUin?: string | null;
+  /** 使用者 UIN：实际使用资源的账号 ID */
+  OwnerUin?: string | null;
+  /** 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID） */
+  OperateUin?: string | null;
+  /** 计费模式编码 */
+  PayMode?: string | null;
+  /** 计费模式：资源的计费模式，区分为包年包月和按量计费 */
+  PayModeName?: string | null;
+  /** 交易类型编码 */
+  ActionType?: string | null;
+  /** 交易类型：明细交易类型 */
+  ActionTypeName?: string | null;
+  /** 产品编码 */
+  BusinessCode?: string | null;
+  /** 产品名称：用户所采购的各类云产品 */
+  BusinessCodeName?: string | null;
+  /** 子产品编码 */
+  ProductCode?: string | null;
+  /** 子产品名称：用户采购的具体产品细分类型 */
+  ProductCodeName?: string | null;
+  /** 地域ID */
+  RegionId?: number | null;
+  /** 地域名称：资源所属地域 */
+  RegionName?: string | null;
+  /** 可用区ID */
+  ZoneId?: number | null;
+  /** 可用区：资源所属可用区 */
+  ZoneName?: string | null;
+  /** 实例类型编码 */
+  InstanceType?: string | null;
+  /** 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-” */
+  InstanceTypeName?: string | null;
+  /** 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID */
+  ResourceId?: string | null;
+  /** 实例名称：用户在控制台为资源设置的名称，如未设置默认为空 */
+  ResourceName?: string | null;
+  /** 分账标签：资源绑定的标签 */
+  Tag?: BillTag[] | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目 */
+  ProjectName?: string | null;
+  /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊 1 - 归集 -1 - 未分配 */
+  AllocationType?: number | null;
+  /** 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如客户享受一口价/合同价则默认不展示，退费类场景也默认不展示），指定价模式 */
+  TotalCost?: string | null;
+  /** 预留实例抵扣时长：本产品或服务使用预留实例抵扣的使用时长 */
+  RiTimeSpan?: string | null;
+  /** 预留实例抵扣原价：本产品或服务使用预留实例抵扣的组件原价金额 */
+  RiCost?: string | null;
+  /** 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率 */
+  RealTotalCost?: string | null;
+  /** 现金账户支出(元)：通过现金账户支付的金额 */
+  CashPayAmount?: string | null;
+  /** 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额 */
+  VoucherPayAmount?: string | null;
+  /** 赠送账户支出(元)：使用赠送金支付的金额 */
+  IncentivePayAmount?: string | null;
+  /** 分成账户支出(元)：通过分成金账户支付的金额 */
+  TransferPayAmount?: string | null;
+  /** 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名 */
+  SplitItemId?: string | null;
+  /** 分拆项名称：涉及分拆产品的分拆后的分拆项 */
+  SplitItemName?: string | null;
+  /** 开始使用时间：产品服务开始使用时间 */
+  FeeBeginTime?: string | null;
+  /** 结束使用时间：产品服务结束使用时间 */
+  FeeEndTime?: string | null;
+  /** 节省计划抵扣原价：节省计划抵扣原价 = 节省计划包抵扣面值 / 节省计划抵扣率 */
+  SPCost?: string | null;
+  /** 国内国际编码 */
+  RegionType?: string | null;
+  /** 国内国际：资源所属区域类型（国内、国际） */
+  RegionTypeName?: string | null;
+  /** 配置描述：对应资源下各组件名称及用量（如组件为用量累加型计费则为合计用量） */
+  ComponentConfig?: string | null;
+}
+
+/** 当前归属单元信息 */
+declare interface AllocationTreeNode {
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string | null;
+}
+
 /** 成本分析交易类型复杂类型 */
 declare interface AnalyseActionTypeDetail {
   /** 交易类型code */
@@ -178,6 +752,42 @@ declare interface ApplicableProducts {
   GoodsName: string;
   /** postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。如GoodsName为多个商品名以","分割组成的string，而PayMode为"*"，表示每一件商品的模式都为"*"。 */
   PayMode: string;
+}
+
+/** 交易类型筛选列表 */
+declare interface BillActionType {
+  /** 交易类型编码 */
+  ActionType: string | null;
+  /** 交易类型：明细交易类型 */
+  ActionTypeName: string | null;
+}
+
+/** 产品筛选列表 */
+declare interface BillBusiness {
+  /** 产品编码 */
+  BusinessCode: string;
+  /** 产品名称：用户所采购的各类云产品 */
+  BusinessCodeName: string;
+}
+
+/** 产品级联筛选值 */
+declare interface BillBusinessLink {
+  /** 子产品 */
+  Children: BillProductLink[];
+}
+
+/** 组件类型筛选列表 */
+declare interface BillComponent {
+  /** 组件类型编码 */
+  ComponentCode: string | null;
+  /** 组件类型：用户购买的产品或服务对应的组件大类 */
+  ComponentCodeName: string | null;
+}
+
+/** 日期筛选列表 */
+declare interface BillDays {
+  /** 日期：结算日期 */
+  BillDay: string | null;
 }
 
 /** 账单明细数据对象 */
@@ -414,6 +1024,70 @@ declare interface BillDistributionResourceSummary {
   BillMonth?: string | null;
 }
 
+/** 实例类型筛选列表 */
+declare interface BillInstanceType {
+  /** 实例类型编码 */
+  InstanceType: string;
+  /** 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-” */
+  InstanceTypeName: string;
+}
+
+/** 组件名称筛选列表 */
+declare interface BillItem {
+  /** 组件名称编码 */
+  ItemCode: string;
+  /** 组件名称：用户购买的产品或服务，所包含的具体组件 */
+  ItemCodeName: string;
+}
+
+/** 操作者 UIN筛选列表 */
+declare interface BillOperateUin {
+  /** 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID） */
+  OperateUin: string;
+}
+
+/** 使用者 UIN筛选列表 */
+declare interface BillOwnerUin {
+  /** 使用者 UIN：实际使用资源的账号 ID */
+  OwnerUin: string;
+}
+
+/** 计费模式筛选列表 */
+declare interface BillPayMode {
+  /** 计费模式编码 */
+  PayMode: string;
+  /** 计费模式：资源的计费模式，区分为包年包月和按量计费 */
+  PayModeName: string;
+}
+
+/** 子产品筛选列表 */
+declare interface BillProduct {
+  /** 子产品编码 */
+  ProductCode: string | null;
+  /** 子产品名称：用户采购的具体产品细分类型 */
+  ProductCodeName: string | null;
+}
+
+/** 分账条件子产品筛选 */
+declare interface BillProductLink {
+}
+
+/** 项目筛选列表 */
+declare interface BillProject {
+  /** 项目ID */
+  ProjectId: number;
+  /** 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目 */
+  ProjectName: string;
+}
+
+/** 地域筛选列表 */
+declare interface BillRegion {
+  /** 地域ID */
+  RegionId: number;
+  /** 地域名称：资源所属地域 */
+  RegionName: string;
+}
+
 /** 账单资源汇总数据对象 */
 declare interface BillResourceSummary {
   /** 产品名称：用户所采购的各类云产品，例如：云服务器 CVM */
@@ -496,6 +1170,14 @@ declare interface BillResourceSummary {
   BillMonth?: string | null;
 }
 
+/** 标签筛选列表 */
+declare interface BillTag {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue: string;
+}
+
 /** 账单 Tag 信息 */
 declare interface BillTagInfo {
   /** 分账标签键 */
@@ -528,6 +1210,14 @@ declare interface BillTransactionInfo {
   PayChannel: string;
   /** 扣费模式：trade 包年包月(预付费)，hourh 按量-小时结，hourd 按量-日结，hourm 按量-月结，month 按量-月结 */
   DeductMode: string;
+}
+
+/** 可用区筛选列表 */
+declare interface BillZoneId {
+  /** 可用区ID */
+  ZoneId: number | null;
+  /** 可用区：资源所属可用区 */
+  ZoneName: string | null;
 }
 
 /** 产品汇总信息 */
@@ -1064,6 +1754,86 @@ declare interface ExcludedProducts {
   PayMode: string;
 }
 
+/** 资源归集汇总 */
+declare interface GatherResourceSummary {
+  /** 支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识 */
+  PayerUin?: string | null;
+  /** 使用者 UIN：实际使用资源的账号 ID */
+  OwnerUin?: string | null;
+  /** 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID） */
+  OperateUin?: string | null;
+  /** 实例类型编码 */
+  InstanceType?: string | null;
+  /** 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-” */
+  InstanceTypeName?: string | null;
+  /** 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID */
+  ResourceId?: string | null;
+  /** 实例名称：用户在控制台为资源设置的名称，如未设置默认为空 */
+  ResourceName?: string | null;
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string | null;
+  /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string | null;
+  /** 资源命中公摊规则ID */
+  RuleId?: number | null;
+  /** 资源命中公摊规则名称 */
+  RuleName?: string | null;
+  /** 产品编码 */
+  BusinessCode?: string | null;
+  /** 产品名称：用户所采购的各类云产品 */
+  BusinessCodeName?: string | null;
+  /** 组件名称编码 */
+  ItemCode?: string | null;
+  /** 组件名称：用户购买的产品或服务，所包含的具体组件 */
+  ItemCodeName?: string | null;
+  /** 地域ID */
+  RegionId?: number | null;
+  /** 地域名称：资源所属地域 */
+  RegionName?: string | null;
+  /** 分账标签：资源绑定的标签 */
+  Tag?: BillTag[] | null;
+  /** 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率 */
+  RealTotalCost?: string | null;
+  /** 现金账户支出(元)：通过现金账户支付的金额 */
+  CashPayAmount?: string | null;
+  /** 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额 */
+  VoucherPayAmount?: string | null;
+  /** 赠送账户支出(元)：使用赠送金支付的金额 */
+  IncentivePayAmount?: string | null;
+  /** 分成账户支出(元)：通过分成金账户支付的金额 */
+  TransferPayAmount?: string | null;
+  /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊1 - 归集-1 - 未分配 */
+  AllocationType?: number | null;
+  /** 当前归属单元信息 */
+  BelongTreeNodeUniqKey?: AllocationTreeNode | null;
+  /** 当前资源命中公摊规则信息 */
+  BelongRule?: AllocationRule | null;
+  /** 其它归属单元信息 */
+  OtherTreeNodeUniqKeys?: AllocationTreeNode[] | null;
+  /** 其他命中规则信息 */
+  OtherRules?: AllocationRule[] | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目 */
+  ProjectName?: string | null;
+  /** 子产品编码 */
+  ProductCode?: string | null;
+  /** 子产品名称：用户采购的具体产品细分类型 */
+  ProductCodeName?: string | null;
+  /** 计费模式编码 */
+  PayMode?: string | null;
+  /** 计费模式：资源的计费模式，区分为包年包月和按量计费 */
+  PayModeName?: string | null;
+  /** 交易类型编码 */
+  ActionType?: string | null;
+  /** 交易类型：明细交易类型 */
+  ActionTypeName?: string | null;
+  /** 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名 */
+  SplitItemId?: string | null;
+  /** 分拆项名称：涉及分拆产品的分拆后的分拆项 */
+  SplitItemName?: string | null;
+}
+
 /** Json对象 */
 declare interface JsonObject {
   /** key值 */
@@ -1414,6 +2184,380 @@ declare interface DescribeAccountBalanceResponse {
   CreditBalance: number;
   /** 真实可用信用额度 */
   RealCreditBalance: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocateConditionsRequest {
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DescribeAllocateConditionsResponse {
+  /** 产品筛选列表 */
+  Business?: BillBusinessLink[] | null;
+  /** 子产品筛选列表 */
+  Product?: BillProduct[] | null;
+  /** 组件名称筛选列表 */
+  Item?: BillItem[] | null;
+  /** 地域筛选列表 */
+  Region?: BillRegion[] | null;
+  /** 实例类型筛选列表 */
+  InstanceType?: BillInstanceType[] | null;
+  /** 计费模式筛选列表 */
+  PayMode?: BillPayMode[] | null;
+  /** 项目筛选列表 */
+  Project?: BillProject[] | null;
+  /** 标签筛选列表 */
+  Tag?: BillTag[] | null;
+  /** 使用者 UIN 筛选列表 */
+  OwnerUin?: BillOwnerUin[] | null;
+  /** 操作者 UIN 筛选列表 */
+  OperateUin?: BillOperateUin[] | null;
+  /** 交易类型筛选列表 */
+  ActionType?: BillActionType[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationBillConditionsRequest {
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+  /** 分账单元唯一标识，用作筛选 */
+  TreeNodeUniqKeys?: string[];
+  /** 日期 */
+  BillDates?: string[];
+  /** 产品编码 */
+  BusinessCodes?: string[];
+  /** 使用者UIN */
+  OwnerUins?: string[];
+  /** 操作者UIN */
+  OperateUins?: string[];
+  /** 计费模式编码 */
+  PayModes?: string[];
+  /** 交易类型编码 */
+  ActionTypes?: string[];
+  /** 子产品编码 */
+  ProductCodes?: string[];
+  /** 地域ID */
+  RegionIds?: string[];
+  /** 可用区ID */
+  ZoneIds?: string[];
+  /** 实例类型编码 */
+  InstanceTypes?: string[];
+  /** 标签 */
+  Tag?: string[];
+  /** 组件类型编码 */
+  ComponentCodes?: string[];
+  /** 组件名称编码 */
+  ItemCodes?: string[];
+  /** 模糊搜索条件 */
+  SearchKey?: string;
+  /** 项目id */
+  ProjectIds?: number[];
+  /** 费用归集类型 */
+  AllocationType?: number[];
+}
+
+declare interface DescribeAllocationBillConditionsResponse {
+  /** 产品筛选列表 */
+  Business?: BillBusiness[] | null;
+  /** 子产品筛选列表 */
+  Product?: BillProduct[] | null;
+  /** 组件名称筛选列表 */
+  Item?: BillItem[] | null;
+  /** 地域筛选列表 */
+  Region?: BillRegion[] | null;
+  /** 实例类型筛选列表 */
+  InstanceType?: BillInstanceType[] | null;
+  /** 计费模式筛选列表 */
+  PayMode?: BillPayMode[] | null;
+  /** 项目筛选列表 */
+  Project?: BillProject[] | null;
+  /** 标签筛选列表 */
+  Tag?: BillTag[] | null;
+  /** 使用者 UIN 筛选列表 */
+  OwnerUin?: BillOwnerUin[] | null;
+  /** 操作者 UIN 筛选列表 */
+  OperateUin?: BillOperateUin[] | null;
+  /** 日期筛选列表 */
+  BillDay?: BillDays[] | null;
+  /** 交易类型筛选列表 */
+  ActionType?: BillActionType[] | null;
+  /** 组件类型筛选列表 */
+  Component?: BillComponent[] | null;
+  /** 可用区筛选列表 */
+  Zone?: BillZoneId[] | null;
+  /** 分账单元筛选列表 */
+  AllocationTreeNode?: AllocationTreeNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationBillDetailRequest {
+  /** 数量，最大值为1000 */
+  Limit: number;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  Offset: number;
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+  /** 分账单元唯一标识，用作筛选 */
+  TreeNodeUniqKeys?: string[];
+  /** 排序字段，枚举值如下：RiTimeSpan - 预留实例抵扣时长ExtendPayAmount1 - 预留实例抵扣组件原价RealCost - 折后总价CashPayAmount - 现金金额VoucherPayAmount - 代金券金额IncentivePayAmount - 赠送金金额TransferPayAmount -分成金金额Cost - 组件原价 */
+  Sort?: string;
+  /** 排序类型，枚举值如下：asc - 升序desc - 降序 */
+  SortType?: string;
+  /** 产品编码，用作筛选 */
+  BusinessCodes?: string[];
+  /** 使用者UIN，用作筛选 */
+  OwnerUins?: string[];
+  /** 操作者UIN，用作筛选 */
+  OperateUins?: string[];
+  /** 计费模式编码，用作筛选 */
+  PayModes?: string[];
+  /** 交易类型编码，用作筛选 */
+  ActionTypes?: string[];
+  /** 子产品编码，用作筛选 */
+  ProductCodes?: string[];
+  /** 地域ID，用作筛选 */
+  RegionIds?: string[];
+  /** 可用区ID，用作筛选 */
+  ZoneIds?: string[];
+  /** 实例类型编码，用作筛选 */
+  InstanceTypes?: string[];
+  /** 标签，用作筛选 */
+  Tag?: string[];
+  /** 组件类型编码，用作筛选 */
+  ComponentCodes?: string[];
+  /** 组件名称编码，用作筛选 */
+  ItemCodes?: string[];
+  /** 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称 */
+  SearchKey?: string;
+  /** 项目ID，用作筛选 */
+  ProjectIds?: number[];
+}
+
+declare interface DescribeAllocationBillDetailResponse {
+  /** 总条数 */
+  RecordNum?: number | null;
+  /** 分账账单概览金额汇总 */
+  Total?: AllocationOverviewTotal | null;
+  /** 分账账单明细 */
+  Detail?: AllocationDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationMonthOverviewRequest {
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DescribeAllocationMonthOverviewResponse {
+  /** 分账账单月概览详情 */
+  Detail?: AllocationOverviewNode[] | null;
+  /** 分账账单概览金额汇总 */
+  Total?: AllocationOverviewTotal | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationOverviewRequest {
+  /** 数量，最大值为1000 */
+  Limit: number;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  Offset: number;
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+  /** 统计周期，枚举值如下month - 月day - 日 */
+  PeriodType?: string;
+  /** 分账单元唯一标识，用作筛选 */
+  TreeNodeUniqKeys?: string[];
+  /** 排序字段，枚举值如下： GatherCashPayAmount - 归集费用(现金)GatherVoucherPayAmount- 归集费用(优惠券)GatherIncentivePayAmount - 归集费用(赠送金)GatherTransferPayAmount - 归集费用(分成金)AllocateCashPayAmount - 分摊费用(现金)AllocateVoucherPayAmount - 分摊费用(优惠券)AllocateIncentivePayAmount - 分摊费用(赠送金)AllocateTransferPayAmount - 分摊费用(分成金)TotalCashPayAmount - 合计费用(现金)TotalVoucherPayAmount - 合计费用(优惠券)TotalIncentivePayAmount - 合计费用(赠送金)TotalTransferPayAmount - 合计费用(分成金)GatherRealCost - 归集费用(折后总额)AllocateRealCost - 分摊费用(折后总额)RealTotalCost - 合计费用(折后总额)Ratio - 占比(折后总额) */
+  Sort?: string;
+  /** 排序类型，枚举值如下：asc - 升序desc - 降序 */
+  SortType?: string;
+  /** 日期，用作筛选 */
+  BillDates?: string[];
+}
+
+declare interface DescribeAllocationOverviewResponse {
+  /** 总条数 */
+  RecordNum?: number | null;
+  /** 分账账单概览金额汇总 */
+  Total?: AllocationOverviewTotal | null;
+  /** 分账概览明细 */
+  Detail?: AllocationOverviewDetail[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationSummaryByBusinessRequest {
+  /** 数量，最大值为1000 */
+  Limit: number;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  Offset: number;
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+  /** 统计周期，枚举值如下month - 月day - 日 */
+  PeriodType?: string;
+  /** 分账单元唯一标识，用作筛选 */
+  TreeNodeUniqKeys?: string[];
+  /** 排序类型，枚举值如下：asc - 升序desc - 降序 */
+  SortType?: string;
+  /** 排序字段，枚举值如下：GatherCashPayAmount - 归集费用(现金)GatherVoucherPayAmount- 归集费用(优惠券)GatherIncentivePayAmount - 归集费用(赠送金)GatherTransferPayAmount - 归集费用(分成金)AllocateCashPayAmount - 分摊费用(现金)AllocateVoucherPayAmount - 分摊费用(优惠券)AllocateIncentivePayAmount - 分摊费用(赠送金)AllocateTransferPayAmount - 分摊费用(分成金)TotalCashPayAmount - 合计费用(现金)TotalVoucherPayAmount - 合计费用(优惠券)TotalIncentivePayAmount - 合计费用(赠送金)TotalTransferPayAmount - 合计费用(分成金)GatherRealCost - 归集费用(折后总额)AllocateRealCost - 分摊费用(折后总额)RealTotalCost - 合计费用(折后总额)BusinessCode - 产品代码Ratio - 占比(折后总额)Trend - 环比(折后总额) */
+  Sort?: string;
+  /** 日期，用作筛选，PeriodType=day时可传 */
+  BillDates?: string[];
+  /** 产品编码，用作筛选 */
+  BusinessCodes?: string[];
+  /** 模糊搜索条件 */
+  SearchKey?: string;
+}
+
+declare interface DescribeAllocationSummaryByBusinessResponse {
+  /** 总条数 */
+  RecordNum?: number | null;
+  /** 分账账单概览金额汇总 */
+  Total?: AllocationOverviewTotal | null;
+  /** 分账账单按产品汇总明细 */
+  Detail?: AllocationSummaryByBusiness[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationSummaryByItemRequest {
+  /** 数量，最大值为1000 */
+  Limit: number;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  Offset: number;
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+  /** 统计周期，枚举值如下month - 月day - 日 */
+  PeriodType?: string;
+  /** 分账单元唯一标识，用作筛选 */
+  TreeNodeUniqKeys?: string[];
+  /** 排序字段，枚举值如下：RiTimeSpan - 预留实例抵扣时长ExtendPayAmount1 - 预留实例抵扣组件原价RealCost - 折后总价CashPayAmount - 现金金额VoucherPayAmount - 代金券金额IncentivePayAmount - 赠送金金额TransferPayAmount -分成金金额Cost - 组件原价 */
+  Sort?: string;
+  /** 排序类型，枚举值如下：asc - 升序desc - 降序 */
+  SortType?: string;
+  /** 日期，用作筛选 */
+  BillDates?: string[];
+  /** 产品编码，用作筛选 */
+  BusinessCodes?: string[];
+  /** 使用者UIN，用作筛选 */
+  OwnerUins?: string[];
+  /** 操作者UIN，用作筛选 */
+  OperateUins?: string[];
+  /** 计费模式编码，用作筛选 */
+  PayModes?: string[];
+  /** 交易类型编码，用作筛选 */
+  ActionTypes?: string[];
+  /** 子产品编码，用作筛选 */
+  ProductCodes?: string[];
+  /** 地域ID，用作筛选 */
+  RegionIds?: string[];
+  /** 可用区ID，用作筛选 */
+  ZoneIds?: string[];
+  /** 实例类型编码，用作筛选 */
+  InstanceTypes?: string[];
+  /** 标签，用作筛选 */
+  Tag?: string[];
+  /** 组件类型编码，用作筛选 */
+  ComponentCodes?: string[];
+  /** 组件名称编码，用作筛选 */
+  ItemCodes?: string[];
+  /** 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称 */
+  SearchKey?: string;
+  /** 项目ID，用作筛选 */
+  ProjectIds?: number[];
+  /** 费用归集类型，枚举值如下：0 - 分摊1 - 归集-1 - 未分配 */
+  AllocationType?: number[];
+}
+
+declare interface DescribeAllocationSummaryByItemResponse {
+  /** 总条数 */
+  RecordNum?: number | null;
+  /** 分账账单概览金额汇总 */
+  Total?: AllocationOverviewTotal | null;
+  /** 分账账单按组件汇总明细 */
+  Detail?: AllocationSummaryByItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationSummaryByResourceRequest {
+  /** 数量，最大值为1000 */
+  Limit: number;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  Offset: number;
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+  /** 统计周期，枚举值如下month - 月day - 日 */
+  PeriodType?: string;
+  /** 分账单元唯一标识，用作筛选 */
+  TreeNodeUniqKeys?: string[];
+  /** 排序字段，枚举值如下：RiTimeSpan - 预留实例抵扣时长ExtendPayAmount1 - 预留实例抵扣组件原价RealCost - 折后总价CashPayAmount - 现金金额VoucherPayAmount - 代金券金额IncentivePayAmount - 赠送金金额TransferPayAmount -分成金金额Cost - 组件原价 */
+  Sort?: string;
+  /** 排序类型，枚举值如下：asc - 升序desc - 降序 */
+  SortType?: string;
+  /** 日期，用作筛选 */
+  BillDates?: string[];
+  /** 产品编码，用作筛选 */
+  BusinessCodes?: string[];
+  /** 使用者UIN，用作筛选 */
+  OwnerUins?: string[];
+  /** 操作者UIN，用作筛选 */
+  OperateUins?: string[];
+  /** 计费模式编码，用作筛选 */
+  PayModes?: string[];
+  /** 交易类型编码，用作筛选 */
+  ActionTypes?: string[];
+  /** 子产品编码，用作筛选 */
+  ProductCodes?: string[];
+  /** 地域ID，用作筛选 */
+  RegionIds?: string[];
+  /** 可用区ID，用作筛选 */
+  ZoneIds?: string[];
+  /** 实例类型编码，用作筛选 */
+  InstanceTypes?: string[];
+  /** 标签，用作筛选 */
+  Tag?: string[];
+  /** 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称 */
+  SearchKey?: string;
+  /** 项目ID，用作筛选 */
+  ProjectIds?: number[];
+  /** 费用归集类型，枚举值如下：0 - 分摊 1 - 归集 -1 - 未分配 */
+  AllocationType?: number[];
+}
+
+declare interface DescribeAllocationSummaryByResourceResponse {
+  /** 总条数 */
+  RecordNum?: number | null;
+  /** 分账账单概览金额汇总 */
+  Total?: AllocationOverviewTotal | null;
+  /** 分账账单按资源汇总明细 */
+  Detail?: AllocationSummaryByResource[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationTrendByMonthRequest {
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month: string;
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey: string;
+  /** 产品编码，用作筛选 */
+  BusinessCode?: string;
+}
+
+declare interface DescribeAllocationTrendByMonthResponse {
+  /** 当月费用信息 */
+  Current?: AllocationBillTrendDetail | null;
+  /** 之前月份费用信息 */
+  Previous?: AllocationBillTrendDetail[] | null;
+  /** 费用统计信息 */
+  Stat?: AllocationStat | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2054,6 +3198,58 @@ declare interface DescribeDosageDetailListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGatherResourceRequest {
+  /** 数量，最大值为1000 */
+  Limit: number;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  Offset: number;
+  /** 账单月份，格式为2024-02，不传默认当前月 */
+  Month?: string;
+  /** 分账单元唯一标识，用作筛选 */
+  TreeNodeUniqKey?: string;
+  /** 资源目录类别，枚举值如下：all - 全部 none - 未归集 */
+  GatherType?: string;
+  /** 排序字段，枚举值如下：realCost - 折后总价cashPayAmount - 现金金额voucherPayAmount - 代金券金额incentivePayAmount - 赠送金金额transferPayAmount -分成金金额 */
+  Sort?: string;
+  /** 排序类型，枚举值如下：asc - 升序desc - 降序 */
+  SortType?: string;
+  /** 产品编码，用作筛选 */
+  BusinessCodes?: string[];
+  /** 子产品编码，用作筛选 */
+  ProductCodes?: string[];
+  /** 组件名称编码，用作筛选 */
+  ItemCodes?: string[];
+  /** 地域ID，用作筛选 */
+  RegionIds?: number[];
+  /** 实例类型编码，用作筛选 */
+  InstanceTypes?: string[];
+  /** 计费模式编码，用作筛选 */
+  PayModes?: string[];
+  /** 操作者UIN，用作筛选 */
+  OperateUins?: string[];
+  /** 使用者UIN，用作筛选 */
+  OwnerUins?: string[];
+  /** 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称 */
+  SearchKey?: string;
+  /** 标签，用作筛选 */
+  Tag?: string[];
+  /** 项目ID，用作筛选 */
+  ProjectIds?: string[];
+  /** 交易类型编码，用作筛选 */
+  ActionTypes?: string[];
+}
+
+declare interface DescribeGatherResourceResponse {
+  /** 总条数 */
+  RecordNum?: number | null;
+  /** 资源归集汇总 */
+  GatherResourceSummary?: GatherResourceSummary[] | null;
+  /** 数据更新时间 */
+  LastUpdateTime?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSavingPlanCoverageRequest {
   /** 费用起始日期，格式yyyy-MM-dd */
   StartDate: string;
@@ -2263,6 +3459,24 @@ declare interface Billing {
   DeleteAllocationTag(data: DeleteAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationTagResponse>;
   /** 获取账户余额 {@link DescribeAccountBalanceRequest} {@link DescribeAccountBalanceResponse} */
   DescribeAccountBalance(data?: DescribeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountBalanceResponse>;
+  /** 查询资源目录筛选条件 {@link DescribeAllocateConditionsRequest} {@link DescribeAllocateConditionsResponse} */
+  DescribeAllocateConditions(data?: DescribeAllocateConditionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocateConditionsResponse>;
+  /** 查询分账账单筛选条件 {@link DescribeAllocationBillConditionsRequest} {@link DescribeAllocationBillConditionsResponse} */
+  DescribeAllocationBillConditions(data?: DescribeAllocationBillConditionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationBillConditionsResponse>;
+  /** 查询分账账单明细 {@link DescribeAllocationBillDetailRequest} {@link DescribeAllocationBillDetailResponse} */
+  DescribeAllocationBillDetail(data: DescribeAllocationBillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationBillDetailResponse>;
+  /** 查询分账账单月概览 {@link DescribeAllocationMonthOverviewRequest} {@link DescribeAllocationMonthOverviewResponse} */
+  DescribeAllocationMonthOverview(data?: DescribeAllocationMonthOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationMonthOverviewResponse>;
+  /** 查询分账账单日概览 {@link DescribeAllocationOverviewRequest} {@link DescribeAllocationOverviewResponse} */
+  DescribeAllocationOverview(data: DescribeAllocationOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationOverviewResponse>;
+  /** 查询分账账单按产品汇总 {@link DescribeAllocationSummaryByBusinessRequest} {@link DescribeAllocationSummaryByBusinessResponse} */
+  DescribeAllocationSummaryByBusiness(data: DescribeAllocationSummaryByBusinessRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationSummaryByBusinessResponse>;
+  /** 查询分账账单按组件汇总 {@link DescribeAllocationSummaryByItemRequest} {@link DescribeAllocationSummaryByItemResponse} */
+  DescribeAllocationSummaryByItem(data: DescribeAllocationSummaryByItemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationSummaryByItemResponse>;
+  /** 查询分账账单按资源汇总 {@link DescribeAllocationSummaryByResourceRequest} {@link DescribeAllocationSummaryByResourceResponse} */
+  DescribeAllocationSummaryByResource(data: DescribeAllocationSummaryByResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationSummaryByResourceResponse>;
+  /** 查询分账账单费用趋势 {@link DescribeAllocationTrendByMonthRequest} {@link DescribeAllocationTrendByMonthResponse} */
+  DescribeAllocationTrendByMonth(data: DescribeAllocationTrendByMonthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationTrendByMonthResponse>;
   /** 获取账单明细数据 {@link DescribeBillDetailRequest} {@link DescribeBillDetailResponse} */
   DescribeBillDetail(data: DescribeBillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillDetailResponse>;
   /** 成员账号获取管理账号代付账单（费用明细） {@link DescribeBillDetailForOrganizationRequest} {@link DescribeBillDetailForOrganizationResponse} */
@@ -2309,6 +3523,8 @@ declare interface Billing {
   DescribeDosageDetailByDate(data: DescribeDosageDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailByDateResponse>;
   /** 获取计量标准接入类产品用量明细 {@link DescribeDosageDetailListRequest} {@link DescribeDosageDetailListResponse} */
   DescribeDosageDetailList(data: DescribeDosageDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailListResponse>;
+  /** 查询分账账单资源归集汇总 {@link DescribeGatherResourceRequest} {@link DescribeGatherResourceResponse} */
+  DescribeGatherResource(data: DescribeGatherResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherResourceResponse>;
   /** 查询节省计划覆盖率数据 {@link DescribeSavingPlanCoverageRequest} {@link DescribeSavingPlanCoverageResponse} */
   DescribeSavingPlanCoverage(data: DescribeSavingPlanCoverageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanCoverageResponse>;
   /** 查询节省计划总览明细 {@link DescribeSavingPlanOverviewRequest} {@link DescribeSavingPlanOverviewResponse} */

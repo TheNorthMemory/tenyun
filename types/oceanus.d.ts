@@ -488,6 +488,8 @@ declare interface JobV1 {
   Tags?: Tag[] | null;
   /** 作业异常事件信息 */
   EventInfo?: JobEventInfo | null;
+  /** 描述信息 */
+  Description?: string | null;
 }
 
 /** 日志查询的每行日志信息 */
@@ -1113,6 +1115,8 @@ declare interface CreateJobRequest {
   WorkSpaceId?: string;
   /** 作业标签 */
   Tags?: Tag[];
+  /** 作业描述 */
+  Description?: string;
 }
 
 declare interface CreateJobResponse {
@@ -1717,6 +1721,8 @@ declare interface ModifyJobRequest {
   TargetFolderId?: string;
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 作业描述 */
+  Description?: string;
 }
 
 declare interface ModifyJobResponse {

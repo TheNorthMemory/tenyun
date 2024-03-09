@@ -1307,7 +1307,7 @@ declare interface CreateImageResponse {
 declare interface CreateKeyPairRequest {
   /** 密钥对名称，可由数字，字母和下划线组成，长度不超过25个字符。 */
   KeyName: string;
-  /** 密钥对创建后所属的项目ID。可以通过以下方式获取项目ID：通过项目列表查询项目ID。通过调用接口DescribeProject，取返回信息中的`projectId `获取项目ID。 */
+  /** 密钥对创建后所属的项目ID。可以通过以下方式获取项目ID：通过项目列表查询项目ID。通过调用接口 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725)，取返回信息中的`projectId `获取项目ID。 */
   ProjectId: number;
   /** 标签描述列表。通过指定该参数可以同时绑定标签到密钥对。 */
   TagSpecification?: TagSpecification[];
@@ -1721,13 +1721,13 @@ declare interface DescribeInstanceFamilyConfigsResponse {
 }
 
 declare interface DescribeInstanceInternetBandwidthConfigsRequest {
-  /** 待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。 */
+  /** 待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
 }
 
 declare interface DescribeInstanceInternetBandwidthConfigsResponse {
   /** 带宽配置信息列表。 */
-  InternetBandwidthConfigSet: InternetBandwidthConfig[];
+  InternetBandwidthConfigSet?: InternetBandwidthConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1861,7 +1861,7 @@ declare interface DescribeKeyPairsRequest {
   KeyIds?: string[];
   /** 过滤条件。 project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可以通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID，或者调用接口 [DescribeProject](https://cloud.tencent.com/document/api/378/4400)，取返回信息中的projectId获取项目ID。 key-name - String - 是否必填：否 -（过滤条件）按照密钥对名称过滤。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对过滤。tag-key使用具体的标签键进行替换。参数不支持同时指定 `KeyIds` 和 `Filters`。 */
   Filters?: Filter[];
-  /** 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  /** 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
@@ -1869,9 +1869,9 @@ declare interface DescribeKeyPairsRequest {
 
 declare interface DescribeKeyPairsResponse {
   /** 符合条件的密钥对数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 密钥对详细信息列表。 */
-  KeyPairSet: KeyPair[];
+  KeyPairSet?: KeyPair[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2185,19 +2185,19 @@ declare interface InquirePricePurchaseReservedInstancesOfferingResponse {
 }
 
 declare interface InquiryPriceModifyInstancesChargeTypeRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
-  /** 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月。POSTPAID_BY_HOUR：后付费，即按量付费。 */
+  /** 修改后的实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月。POSTPAID_BY_HOUR：后付费，即按量付费。 */
   InstanceChargeType: string;
-  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</dx-alert> */
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定修改后实例的付费模式为预付费则该参数必传。</dx-alert> */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 是否同时切换弹性数据云盘计费模式。取值范围：TRUE：表示切换弹性数据云盘计费模式FALSE：表示不切换弹性数据云盘计费模式默认取值：FALSE。 */
+  /** 是否同时切换弹性数据云盘计费模式。取值范围：true：表示切换弹性数据云盘计费模式false：表示不切换弹性数据云盘计费模式默认取值：false。 */
   ModifyPortableDataDisk?: boolean;
 }
 
 declare interface InquiryPriceModifyInstancesChargeTypeResponse {
   /** 该参数表示对应配置实例转换计费模式的价格。 */
-  Price: Price;
+  Price?: Price;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2219,13 +2219,13 @@ declare interface InquiryPriceRenewHostsResponse {
 }
 
 declare interface InquiryPriceRenewInstancesRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。 */
   InstanceChargePrepaid: InstanceChargePrepaid;
-  /** 试运行，测试使用，不执行具体逻辑。取值范围：TRUE：跳过执行逻辑FALSE：执行逻辑默认取值：FALSE。 */
+  /** 试运行，测试使用，不执行具体逻辑。取值范围：true：跳过执行逻辑false：执行逻辑默认取值：false。 */
   DryRun?: boolean;
-  /** 是否续费弹性数据盘。取值范围：TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘默认取值：TRUE。 */
+  /** 是否续费弹性数据盘。取值范围：true：表示续费包年包月实例同时续费其挂载的弹性数据盘false：表示续费包年包月实例同时不再续费其挂载的弹性数据盘默认取值：true。 */
   RenewPortableDataDisk?: boolean;
 }
 
@@ -2257,13 +2257,13 @@ declare interface InquiryPriceResetInstanceResponse {
 }
 
 declare interface InquiryPriceResetInstancesInternetMaxBandwidthRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。 */
   InstanceIds: string[];
   /** 公网出带宽配置。不同机型带宽上限范围不一致，具体限制详见带宽限制对账表。暂时只支持`InternetMaxBandwidthOut`参数。 */
   InternetAccessible: InternetAccessible;
   /** 带宽生效的起始时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。起始时间不能早于当前时间。如果起始时间是今天则新设置的带宽立即生效。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。 */
   StartTime?: string;
-  /** 带宽生效的终止时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。新设置的带宽的有效期包含终止时间此日期。终止时间不能晚于包年包月实例的到期时间。实例的到期时间可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`ExpiredTime`获取。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。 */
+  /** 带宽生效的终止时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。新设置的带宽的有效期包含终止时间此日期。终止时间不能晚于包年包月实例的到期时间。实例的到期时间可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`ExpiredTime`获取。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。 */
   EndTime?: string;
 }
 
@@ -2275,7 +2275,7 @@ declare interface InquiryPriceResetInstancesInternetMaxBandwidthResponse {
 }
 
 declare interface InquiryPriceResetInstancesTypeRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。 */
+  /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。 */
   InstanceIds: string[];
   /** 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表[实例资源规格](https://cloud.tencent.com/document/product/213/11518)对照表，也可以调用查询[实例资源规格列表](https://cloud.tencent.com/document/product/213/15749)接口获得最新的规格表。 */
   InstanceType: string;
@@ -2438,9 +2438,9 @@ declare interface ModifyHpcClusterAttributeResponse {
 declare interface ModifyImageAttributeRequest {
   /** 镜像ID，形如`img-gvbnzy6f`。镜像ID可以通过如下方式获取：通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 */
   ImageId: string;
-  /** 设置新的镜像名称；必须满足下列限制： 不得超过60个字符。 镜像名称不能与已有镜像重复。 */
+  /** 设置新的镜像名称；必须满足下列限制 不得超过60个字符。 镜像名称不能与已有镜像重复。 */
   ImageName?: string;
-  /** 设置新的镜像描述；必须满足下列限制： 不得超过60个字符。 */
+  /** 设置新的镜像描述；必须满足下列限制： 不得超过 256 个字符。 */
   ImageDescription?: string;
 }
 

@@ -532,6 +532,22 @@ declare interface DealInstance {
   DealName?: string;
 }
 
+/** 备机只读信息 */
+declare interface DrReadableInfo {
+  /** 备机状态，enable-运行中，disable-不可用 */
+  SlaveStatus?: string | null;
+  /** 备机可读状态，enable-已开启，disable-已关闭 */
+  ReadableStatus?: string | null;
+  /** 备机只读vip */
+  Vip?: string | null;
+  /** 备机只读端口 */
+  VPort?: number | null;
+  /** 备机所在私有网络ID */
+  UniqVpcId?: string | null;
+  /** 备机所在私有网络子网ID */
+  UniqSubnetId?: string | null;
+}
+
 /** 设置实例扩展事件阈值 */
 declare interface EventConfig {
   /** 事件类型，slow-设置慢SQL阈值，blocked-设置阻塞、死锁阈值 */
@@ -893,33 +909,37 @@ declare interface PublishSubscribe {
 /** 只读组对象 */
 declare interface ReadOnlyGroup {
   /** 只读组ID */
-  ReadOnlyGroupId: string;
+  ReadOnlyGroupId?: string;
   /** 只读组名称 */
-  ReadOnlyGroupName: string;
+  ReadOnlyGroupName?: string;
   /** 只读组的地域ID，与主实例相同 */
-  RegionId: string;
+  RegionId?: string;
   /** 只读组的可用区ID，与主实例相同 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 是否启动超时剔除功能，0-不开启剔除功能，1-开启剔除功能 */
-  IsOfflineDelay: number;
+  IsOfflineDelay?: number;
   /** 启动超时剔除功能后，使用的超时阈值 */
-  ReadOnlyMaxDelayTime: number;
+  ReadOnlyMaxDelayTime?: number;
   /** 启动超时剔除功能后，只读组至少保留的只读副本数 */
-  MinReadOnlyInGroup: number;
+  MinReadOnlyInGroup?: number;
   /** 只读组vip */
-  Vip: string;
+  Vip?: string;
   /** 只读组vport */
-  Vport: number;
+  Vport?: number;
   /** 只读组私有网络ID */
-  VpcId: string;
+  VpcId?: string;
   /** 只读组私有网络子网ID */
-  SubnetId: string;
+  SubnetId?: string;
   /** 只读组状态: 1-申请成功运行中，5-申请中 */
-  Status: number;
+  Status?: number;
   /** 主实例ID，形如mssql-sgeshe3th */
-  MasterInstanceId: string;
+  MasterInstanceId?: string;
   /** 只读实例副本集合 */
-  ReadOnlyInstanceSet: ReadOnlyInstance[];
+  ReadOnlyInstanceSet?: ReadOnlyInstance[];
+  /** RO组外网地址域名 */
+  DnsPodDomain?: string;
+  /** RO组外网地址端口 */
+  TgwWanVPort?: number;
 }
 
 /** 只读副本实例 */
@@ -2406,6 +2426,8 @@ declare interface DescribeDBInstancesAttributeResponse {
   TDEConfig?: TDEConfigAttribute;
   /** SSL加密 */
   SSLConfig?: SSLConfig;
+  /** 备机只读信息 */
+  DrReadableInfo?: DrReadableInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3573,11 +3595,13 @@ declare interface ModifyBackupStrategyResponse {
 declare interface ModifyCloseWanIpRequest {
   /** 实例资源ID */
   InstanceId: string;
+  /** RO只读组Id */
+  RoGroupId?: string;
 }
 
 declare interface ModifyCloseWanIpResponse {
   /** 关闭外网流程Id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3639,11 +3663,13 @@ declare interface ModifyDBInstanceNetworkRequest {
   OldIpRetainTime?: number;
   /** 指定VIP地址 */
   Vip?: string;
+  /** 目标节点，0-修改主节点网络，1-修改备节点网络，默认取值0 */
+  DRNetwork?: number;
 }
 
 declare interface ModifyDBInstanceNetworkResponse {
   /** 实例转网流程id，可通过[DescribeFlowStatus](https://cloud.tencent.com/document/product/238/19967)接口查询流程状态 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3897,11 +3923,13 @@ declare interface ModifyMigrationResponse {
 declare interface ModifyOpenWanIpRequest {
   /** 实例资源ID */
   InstanceId: string;
+  /** RO只读组Id */
+  RoGroupId?: string;
 }
 
 declare interface ModifyOpenWanIpResponse {
   /** 开通外网流程Id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4068,8 +4096,8 @@ declare interface ResetAccountPasswordRequest {
 }
 
 declare interface ResetAccountPasswordResponse {
-  /** 修改帐号密码的异步任务流程ID */
-  FlowId: number;
+  /** 修改账号密码的异步任务流程ID */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

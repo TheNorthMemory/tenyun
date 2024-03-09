@@ -3613,7 +3613,7 @@ declare interface ModifyApplicationProxyRuleRequest {
   ProxyId: string;
   /** 规则ID。 */
   RuleId: string;
-  /** 源站类型，取值有：custom：手动添加；origins：源站组。不填保持原有值。 */
+  /** 源站类型，取值有：custom：手动添加；origins：源站组。 */
   OriginType: string;
   /** 端口，支持格式：80：80端口；81-90：81至90端口。 */
   Port: string[];

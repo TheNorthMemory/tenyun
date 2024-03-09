@@ -828,6 +828,10 @@ declare interface Options {
   RateLimitOption?: RateLimitOption | null;
   /** 自动重试的时间窗口设置 */
   AutoRetryTimeRangeMinutes?: number | null;
+  /** 同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持 */
+  FilterBeginCommit?: boolean | null;
+  /** 同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持 */
+  FilterCheckpoint?: boolean | null;
 }
 
 /** 数据订阅中kafka消费者组的分区分配情况。该数据是实时查询的，如果需要最新数据，需重新掉接口查询。 */
@@ -1080,7 +1084,7 @@ declare interface SubscribeKafkaConfig {
   DefaultRuleType?: string | null;
 }
 
-/** 订阅的的数据库表信息，用于配置和查询订阅任务接口。 */
+/** 订阅的数据库表信息，用于配置和查询订阅任务接口。 */
 declare interface SubscribeObject {
   /** 订阅数据的类型，枚举值：database-数据库，table-数据库的表(如果 DatabaseType 为 mongodb，则表示集合) */
   ObjectType: string | null;
@@ -1246,20 +1250,22 @@ declare interface TagItem {
   TagValue?: string | null;
 }
 
-/** 单topic和自定义topic的描述 */
+/** 单topic和自定义topic的描述。投递到单topic时，该数组的最后一项会被视为默认分区策略，所有未匹配到的数据都会按该策略投递，默认策略只支持 投递至partition0、按表名、表名+主键三种。 */
 declare interface TopicRule {
-  /** topic名 */
+  /** topic名。单topic时，所有的TopicName必须相同 */
   TopicName?: string;
-  /** topic分区策略，如 自定义topic：Random（随机投递），集中投递到单Topic：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区) */
+  /** topic分区策略，自定义topic时支持：Random（随机投递），集中投递到单Topic时支持：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区)、PartitionByCols(按列分区) */
   PartitionType?: string;
-  /** 库名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中必须有一项为‘Default’ */
+  /** 库名匹配规则，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中最后一项必须为‘Default’ */
   DbMatchMode?: string;
-  /** 库名，仅“自定义topic”时，DbMatchMode=Regular生效 */
+  /** 库名，DbMatchMode=Regular时生效 */
   DbName?: string;
-  /** 表名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中必须有一项为‘Default’ */
+  /** 表名匹配规则，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中最后一项必须为‘Default’ */
   TableMatchMode?: string;
-  /** 表名，仅“自定义topic”时，TableMatchMode=Regular生效 */
+  /** 表名，仅TableMatchMode=Regular时生效 */
   TableName?: string;
+  /** 按列分区时需要选择配置列名，可以选择多列 */
+  Columns?: string[] | null;
 }
 
 /** 计费状态信息 */
@@ -1321,7 +1327,7 @@ declare interface ConfigureSubscribeJobRequest {
   SubscribeId: string;
   /** 数据订阅的类型，当 DatabaseType 不为 mongodb 时，枚举值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 DatabaseType 为 mongodb 时，枚举值为 all-全实例更新；database-订阅单库；collection-订阅单集合 */
   SubscribeMode: string;
-  /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
+  /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
   AccessType: string;
   /** 数据库节点信息 */
   Endpoints: EndpointItem[];
@@ -1936,7 +1942,7 @@ declare interface DescribeSubscribeDetailResponse {
   SubscribeObjects?: SubscribeObject[] | null;
   /** kafka配置信息 */
   KafkaConfig?: SubscribeKafkaConfig | null;
-  /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
+  /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
   AccessType?: string | null;
   /** 接入类型信息 */
   Endpoints?: EndpointItem[] | null;

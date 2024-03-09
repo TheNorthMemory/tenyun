@@ -1108,6 +1108,14 @@ declare interface RocketMQConsumerTopic {
   SubRule: string | null;
 }
 
+/** 监控数据点 */
+declare interface RocketMQDataPoint {
+  /** 监控值数组，该数组和Timestamps一一对应 */
+  Timestamps?: number[] | null;
+  /** 监控数据点位置，比如一天按分钟划分有1440个点，每个点的序号是0 - 1439之间的一个数，当某个序号不在该数组中，说明掉点了 */
+  Values?: number[] | null;
+}
+
 /** RocketMQ消费组信息 */
 declare interface RocketMQGroup {
   /** 消费组名称 */
@@ -1202,7 +1210,7 @@ declare interface RocketMQInstanceConfig {
 declare interface RocketMQMessageTrack {
   /** 消费者组 */
   Group: string;
-  /** 消费状态 */
+  /** 消费状态,CONSUMED: 已消费CONSUMED_BUT_FILTERED: 已过滤NOT_CONSUME: 未消费ENTER_RETRY: 进入重试队列ENTER_DLQ: 进入死信队列UNKNOWN: 查询不到消费状态 */
   ConsumeStatus: string;
   /** 消息track类型 */
   TrackType: string;
@@ -3255,6 +3263,14 @@ declare interface DescribeRocketMQMsgRequest {
   PulsarMsgId: string;
   /** 查询死信时该值为true，只对Rocketmq有效 */
   QueryDlqMsg?: boolean;
+  /** 查询死信时该值为true，只对Rocketmq有效 */
+  QueryDeadLetterMessage?: boolean;
+  /** 分页Offset */
+  Offset?: number;
+  /** 分页Limit */
+  Limit?: number;
+  /** 根据消费组名称过滤消费详情 */
+  FilterTrackGroup?: string;
 }
 
 declare interface DescribeRocketMQMsgResponse {
@@ -3268,10 +3284,12 @@ declare interface DescribeRocketMQMsgResponse {
   MsgId?: string;
   /** 生产者地址 */
   ProducerAddr?: string;
-  /** 消费组消费情况 */
+  /** 消费组消费情况列表 */
   MessageTracks?: RocketMQMessageTrack[] | null;
   /** 详情页展示的topic名称 */
   ShowTopicName?: string | null;
+  /** 消费组消费情况列表总数 */
+  MessageTracksCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3316,6 +3334,36 @@ declare interface DescribeRocketMQNamespacesResponse {
   Namespaces: RocketMQNamespace[];
   /** 总条数 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRocketMQPublicAccessMonitorDataRequest {
+  /** 专享集群ID */
+  InstanceId: string;
+  /** 指标名称，仅支持单指标拉取。目前仅支持：ClientIntraffic; ClientOuttraffic */
+  MetricName: string;
+  /** 起始时间 */
+  StartTime?: string;
+  /** 结束时间，默认为当前时间 */
+  EndTime?: string;
+  /** 监控统计周期，如60。默认为取值为300，单位为s。 */
+  Period?: number;
+}
+
+declare interface DescribeRocketMQPublicAccessMonitorDataResponse {
+  /** 指标名 */
+  MetricName?: string | null;
+  /** 监控统计周期，如60。默认为取值为300，单位为s。 */
+  Period?: number | null;
+  /** 起始时间，如2018-09-22T19:51:23+08:00 */
+  StartTime?: string | null;
+  /** 结束时间，如2018-09-22T20:51:23+08:00，默认为当前时间 */
+  EndTime?: string | null;
+  /** 数据点数组 */
+  DataPoints?: RocketMQDataPoint[] | null;
+  /** 返回信息 */
+  Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4531,6 +4579,8 @@ declare interface Tdmq {
   DescribeRocketMQMsgTrace(data: DescribeRocketMQMsgTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgTraceResponse>;
   /** 获取RocketMQ命名空间列表 {@link DescribeRocketMQNamespacesRequest} {@link DescribeRocketMQNamespacesResponse} */
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
+  /** 拉取公网指标监控数据 {@link DescribeRocketMQPublicAccessMonitorDataRequest} {@link DescribeRocketMQPublicAccessMonitorDataResponse} */
+  DescribeRocketMQPublicAccessMonitorData(data: DescribeRocketMQPublicAccessMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessMonitorDataResponse>;
   /** 查询RocketMQ实例公网接入点信息 {@link DescribeRocketMQPublicAccessPointRequest} {@link DescribeRocketMQPublicAccessPointResponse} */
   DescribeRocketMQPublicAccessPoint(data: DescribeRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessPointResponse>;
   /** 获取RocketMQ平滑迁移任务详情 {@link DescribeRocketMQSmoothMigrationTaskRequest} {@link DescribeRocketMQSmoothMigrationTaskResponse} */

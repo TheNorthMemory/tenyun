@@ -434,7 +434,7 @@ declare interface CcBlackWhiteIpPolicy {
 
 /** DDoS防护的区域封禁配置 */
 declare interface CcGeoIPBlockConfig {
-  /** 区域类型，取值[oversea(海外)china(国内)customized(自定义地区)] */
+  /** 区域类型，取值[oversea(境外)china(国内)customized(自定义地区)] */
   RegionType: string;
   /** 封禁动作，取值[drop(拦截)alg(人机校验)] */
   Action: string;
@@ -664,7 +664,7 @@ declare interface IPLineInfo {
 
 /** 实例7层规则 */
 declare interface InsL7Rules {
-  /** 规则在中间状态态不可修改，只可在（0， 2， 8）状态可编辑。规则状态，0: 正常运行中, 1: 配置规则中(配置生效中), 2: 配置规则失败（配置生效失败）, 3: 删除规则中(删除生效中), 5: 删除规则失败(删除失败), 6: 等待添加规则, 7: 等待删除规则, 8: 等待上传证书, 9: 规则对应的资源不存在，被隔离, 10:等待修改规则, 11:配置修改中 */
+  /** 规则在中间状态不可修改，只可在（0， 2， 8）状态可编辑。规则状态，0: 正常运行中, 1: 配置规则中(配置生效中), 2: 配置规则失败（配置生效失败）, 3: 删除规则中(删除生效中), 5: 删除规则失败(删除失败), 6: 等待添加规则, 7: 等待删除规则, 8: 等待上传证书, 9: 规则对应的资源不存在，被隔离, 10:等待修改规则, 11:配置修改中 */
   Status: number;
   /** 域名 */
   Domain: string;
@@ -2058,7 +2058,7 @@ declare interface DescribeCCTrendRequest {
 declare interface DescribeCCTrendResponse {
   /** 值个数 */
   Count?: number;
-  /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
   Business?: string;
   /** 资源的IP */
   Ip?: string;
@@ -2169,7 +2169,7 @@ declare interface DescribeDDoSConnectLimitListResponse {
 }
 
 declare interface DescribeDDoSTrendRequest {
-  /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
   Business: string;
   /** 资源实例的IP */
   Ip: string;
@@ -2187,23 +2187,23 @@ declare interface DescribeDDoSTrendRequest {
 
 declare interface DescribeDDoSTrendResponse {
   /** 值个数 */
-  Count: number;
-  /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
-  Business: string;
+  Count?: number;
+  /** DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护） */
+  Business?: string;
   /** 资源的IP */
-  Ip: string;
+  Ip?: string;
   /** 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)] */
-  Period: number;
+  Period?: number;
   /** 统计开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 统计结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 值数组，攻击流量带宽单位为Mbps，包速率单位为pps */
-  Data: number[];
+  Data?: number[];
   /** 资源ID */
-  Id: string | null;
+  Id?: string | null;
   /** 指标，取值[bps(攻击流量带宽，pps(攻击包速率))] */
-  MetricName: string;
+  MetricName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
