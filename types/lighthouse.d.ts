@@ -138,6 +138,18 @@ declare interface CcnAttachedInstance {
   Description: string;
 }
 
+/** 用户执行TAT命令的数据结构。 */
+declare interface Command {
+  /** Base64编码后的命令内容，长度不可超过64KB。 */
+  Content: string;
+  /** 命令超时时间，默认60秒。取值范围[1, 86400]。 */
+  Timeout?: number;
+  /** 命令执行路径，对于 SHELL 命令默认为 /root，对于 POWERSHELL 命令默认为 C:\Program Files\qcloud\tat_agent\workdir。 */
+  WorkingDirectory?: string;
+  /** 在 Lighthouse 实例中执行命令的用户名称。默认情况下，在 Linux 实例中以 root 用户执行命令；在Windows 实例中以 System 用户执行命令。 */
+  Username?: string;
+}
+
 /** 容器环境变量 */
 declare interface ContainerEnv {
   /** 环境变量Key */
@@ -582,6 +594,8 @@ declare interface Instance {
   Tags?: Tag[];
   /** 实例封禁状态。取值范围：NORMAL实例正常。NETWORK_RESTRICT：网络封禁。 */
   InstanceRestrictState?: string;
+  /** 创建实例后自动执行TAT命令的调用ID。 */
+  InitInvocationId?: string;
 }
 
 /** 描述了实例的计费模式 */
@@ -1125,6 +1139,8 @@ declare interface CreateInstancesRequest {
   FirewallTemplateId?: string;
   /** 标签键和标签值。如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。如果标签不存在会为您自动创建标签。数组最多支持10个元素。 */
   Tags?: Tag[];
+  /** 创建实例后自动执行的命令。 */
+  InitCommand?: Command;
 }
 
 declare interface CreateInstancesResponse {

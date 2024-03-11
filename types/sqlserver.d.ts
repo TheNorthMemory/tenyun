@@ -3768,6 +3768,26 @@ declare interface ModifyDBRemarkResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDReadableRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 操作类型。enable-开启备机只读，disable-关闭备机只读 */
+  Type: string;
+  /** 备机网络ID，不填默认和主实例保持一致 */
+  VpcId?: string;
+  /** 备机网络子网ID，不填默认和主实例保持一致 */
+  SubnetId?: string;
+  /** 指定的备机只读vip，不填自动分配 */
+  Vip?: string;
+}
+
+declare interface ModifyDReadableResponse {
+  /** 任务ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDatabaseCDCRequest {
   /** 数据库名数组 */
   DBNames: string[];
@@ -4517,6 +4537,8 @@ declare interface Sqlserver {
   ModifyDBName(data: ModifyDBNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBNameResponse>;
   /** 修改数据库备注 {@link ModifyDBRemarkRequest} {@link ModifyDBRemarkResponse} */
   ModifyDBRemark(data: ModifyDBRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBRemarkResponse>;
+  /** 开通\关闭备机只读 {@link ModifyDReadableRequest} {@link ModifyDReadableResponse} */
+  ModifyDReadable(data: ModifyDReadableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDReadableResponse>;
   /** 开启&关闭数据库CDC {@link ModifyDatabaseCDCRequest} {@link ModifyDatabaseCDCResponse} */
   ModifyDatabaseCDC(data: ModifyDatabaseCDCRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseCDCResponse>;
   /** 启用&禁用数据库CT {@link ModifyDatabaseCTRequest} {@link ModifyDatabaseCTResponse} */

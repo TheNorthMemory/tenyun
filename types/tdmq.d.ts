@@ -3307,6 +3307,8 @@ declare interface DescribeRocketMQMsgTraceRequest {
   GroupName?: string;
   /** 查询死信时该值为true */
   QueryDLQMsg?: boolean;
+  /** 查询死信时该值为true */
+  QueryDeadLetterMessage?: string;
 }
 
 declare interface DescribeRocketMQMsgTraceResponse {
