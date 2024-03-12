@@ -696,8 +696,6 @@ declare interface GovernanceInstanceUpdate {
   Service: string;
   /** 实例服务所在命名空间。 */
   Namespace: string;
-  /** 治理中心服务实例id。 */
-  Id: string;
   /** 实例负载均衡权重信息。不填默认为100。 */
   Weight?: number;
   /** 实例默认健康信息。不填默认为健康。 */
@@ -716,6 +714,8 @@ declare interface GovernanceInstanceUpdate {
   EnableHealthCheck?: boolean;
   /** 上报心跳时间间隔。若 EnableHealthCheck 为不启用，则此参数不生效；若 EnableHealthCheck 启用，此参数不填，则默认 ttl 为 5s。 */
   Ttl?: number;
+  /** 治理中心服务实例id。 */
+  Id?: string;
   /** 元数据信息。 */
   Metadatas?: Metadata[];
 }

@@ -1492,14 +1492,14 @@ declare namespace V20180408 {
   }
 
   interface AssignProjectRequest {
-    /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+    /** 实例 ID 列表。格式如：cmgo-p8vn****，与云数据库控制台页面中显示的实例 ID 相同。 */
     InstanceIds: string[];
-    /** 项目ID */
+    /** 项目ID。项目 ID 具有唯一性，请[登录 MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在右上角的账户信息的下拉菜单中，选择**项目管理**，即可获取项目ID。 */
     ProjectId: number;
   }
 
   interface AssignProjectResponse {
-    /** 返回的异步任务ID列表 */
+    /** 返回的异步任务ID列表。 */
     FlowIds?: number[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
@@ -1592,41 +1592,43 @@ declare namespace V20180408 {
 
   interface DescribeClientConnectionsResponse {
     /** 客户端连接信息，包括客户端IP和对应IP的连接数量 */
-    Clients?: ClientConnection[] | null;
+    Clients: ClientConnection[] | null;
+    /** 连接数总结 */
+    TotalCount: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
   interface DescribeDBInstancesRequest {
-    /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+    /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
     InstanceIds?: string[];
-    /** 实例类型，取值范围：0-所有实例,1-正式实例，2-临时实例, 3-只读实例，-1-正式实例+只读+灾备实例 */
+    /** 实例类型，取值范围：0： 所有实例1： 正式实例2： 临时实例3： 只读实例-1： 正式实例+只读+灾备实例 */
     InstanceType?: number;
-    /** 集群类型，取值范围：0-副本集实例，1-分片实例，-1-所有实例 */
+    /** 集群类型，取值范围： 0： 副本集实例1： 正式实例 -1： 所有实例 */
     ClusterType?: number;
-    /** 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-实例已过期 */
+    /** 实例状态，取值范围： 0： 待初始化1： 流程执行中 2： 有效实例-2： 已过期实例 */
     Status?: number[];
-    /** 私有网络的ID，基础网络则不传该参数 */
+    /** 私有网络的ID，基础网络则不传该参数。 */
     VpcId?: string;
-    /** 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId */
+    /** 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId。 */
     SubnetId?: string;
-    /** 付费类型，取值范围：0-按量计费，1-包年包月，-1-按量计费+包年包月 */
+    /** 付费类型，取值范围：0： 按量计费1：包年包月-1： 按量计费+包年包月 */
     PayMode?: number;
-    /** 单次请求返回的数量，最小值为1，最大值为100，默认值为20 */
+    /** 单次请求返回的数量，最小值为1，最大值为100，默认值为20。 */
     Limit?: number;
-    /** 偏移量，默认值为0 */
+    /** 偏移量，默认值为0。 */
     Offset?: number;
-    /** 返回结果集排序的字段，目前支持："ProjectId", "InstanceName", "CreateTime"，默认为升序排序 */
+    /** 返回结果集排序的字段，目前支持： ProjectId： 按照项目ID排序InstanceName：按照实例名称排序CreateTime： 根据创建时间排序 */
     OrderBy?: string;
-    /** 返回结果集排序方式，目前支持："ASC"或者"DESC" */
+    /** 返回结果集排序方式，目前支持："ASC"或者"DESC"。ASC： 顺序取值DESC：倒序取值 */
     OrderByType?: string;
   }
 
   interface DescribeDBInstancesResponse {
     /** 符合查询条件的实例总数 */
-    TotalCount?: number;
+    TotalCount: number;
     /** 实例详细信息 */
-    InstanceDetails?: MongoDBInstanceDetail[];
+    InstanceDetails: MongoDBInstanceDetail[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -1670,7 +1672,7 @@ declare namespace V20180408 {
   interface RenameInstanceRequest {
     /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
     InstanceId: string;
-    /** 实例名称 */
+    /** 实例自定义名称 */
     NewName: string;
   }
 
@@ -1682,7 +1684,7 @@ declare namespace V20180408 {
   interface SetAutoRenewRequest {
     /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
     InstanceIds: string[];
-    /** 续费选项，取值范围：0-手动续费，1-自动续费，2-确认不续费 */
+    /** 配置自动续费标识。- 0：手动续费。- 1：自动续费。- 2：确认不续费。 */
     AutoRenewFlag: number;
   }
 
@@ -1694,7 +1696,7 @@ declare namespace V20180408 {
   interface SetPasswordRequest {
     /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
     InstanceId: string;
-    /** 实例账户名称 */
+    /** 实例账户名。初始化实例密码，本参数传mongouser。 */
     UserName: string;
     /** 实例新密码，至少包含字母、数字和字符（!@#%^*()）中的两种，长度为8-16个字符 */
     Password: string;
@@ -1702,7 +1704,7 @@ declare namespace V20180408 {
 
   interface SetPasswordResponse {
     /** 返回的异步任务ID */
-    FlowId?: number;
+    FlowId: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -1713,8 +1715,8 @@ declare namespace V20180408 {
   }
 
   interface TerminateDBInstanceResponse {
-    /** 订单ID，表示注销实例成功 */
-    AsyncRequestId?: string;
+    /** 订单ID，表示注销实例成功。 */
+    AsyncRequestId: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -1851,7 +1853,7 @@ declare interface Mongodb {
   SetAutoRenew(data: V20180408.SetAutoRenewRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.SetAutoRenewResponse>;
   /** 修改云数据库实例的账户密码 {@link V20180408.SetPasswordRequest} {@link V20180408.SetPasswordResponse} */
   SetPassword(data: V20180408.SetPasswordRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.SetPasswordResponse>;
-  /** 销毁云数据库实例（按量计费） {@link V20180408.TerminateDBInstanceRequest} {@link V20180408.TerminateDBInstanceResponse} */
+  /** 销毁云数据库实例（按量计费--废弃） {@link V20180408.TerminateDBInstanceRequest} {@link V20180408.TerminateDBInstanceResponse} */
   TerminateDBInstance(data: V20180408.TerminateDBInstanceRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.TerminateDBInstanceResponse>;
   /** 升级云数据库实例（包年包月） {@link V20180408.UpgradeDBInstanceRequest} {@link V20180408.UpgradeDBInstanceResponse} */
   UpgradeDBInstance(data: V20180408.UpgradeDBInstanceRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.UpgradeDBInstanceResponse>;

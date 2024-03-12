@@ -3647,7 +3647,9 @@ declare interface DescribeDSPASupportedMetasRequest {
 
 declare interface DescribeDSPASupportedMetasResponse {
   /** 支持的元数据类型 */
-  Metas: DSPAMetaType[] | null;
+  Metas?: DSPAMetaType[] | null;
+  /** 最大支持每批次同步数量 */
+  MaxDBInstanceLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -5,17 +5,19 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 子账号信息 */
 declare interface Account {
   /** 实例 ID。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 账号名称。 */
-  AccountName: string | null;
+  AccountName?: string | null;
   /** 账号描述信息。 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 读写权限策略。- r：只读。- w：只写。- rw：读写。 */
-  Privilege: string | null;
+  Privilege?: string | null;
   /** 只读路由策略。- master：主节点。- replication：从节点。 */
-  ReadonlyPolicy: string[] | null;
+  ReadonlyPolicy?: string[] | null;
   /** 子账号状态.- 1：账号变更中。- 2：账号有效。- 4：账号已删除。 */
-  Status: number | null;
+  Status?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
 }
 
 /** 备份文件下载信息 */

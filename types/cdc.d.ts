@@ -310,6 +310,34 @@ declare interface RegionZoneInfo {
   Zones: ZoneInfo[];
 }
 
+/** 云硬盘的仓库级别信息 */
+declare interface SetInfo {
+  /** 云硬盘仓库id */
+  SetId?: string | null;
+  /** 云硬盘仓库名称 */
+  SetName?: string | null;
+  /** 云硬盘仓库类型 */
+  SetType?: string | null;
+  /** 云硬盘仓库容量 */
+  SetSize?: number | null;
+  /** 云硬盘仓库状态 */
+  SetStatus?: string | null;
+  /** 云硬盘仓库创建时间 */
+  CreateTime?: string | null;
+  /** 读流量 */
+  ReadTraffic?: DetailData | null;
+  /** 写流量 */
+  WriteTraffic?: DetailData | null;
+  /** 读IO */
+  ReadIO?: DetailData | null;
+  /** 写IO */
+  WriteIO?: DetailData | null;
+  /** 平均等待时间 */
+  Await?: DetailData | null;
+  /** 利用率 */
+  Util?: DetailData | null;
+}
+
 /** 客户站点信息 */
 declare interface Site {
   /** 站点名称 */
@@ -506,6 +534,32 @@ declare interface DeleteSitesRequest {
 }
 
 declare interface DeleteSitesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDedicatedClusterCbsStatisticsRequest {
+  /** 查询的专用集群id */
+  DedicatedClusterId: string;
+  /** 云硬盘仓库id */
+  SetId?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 时间范围精度，1分钟/5分钟 */
+  Period?: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20 */
+  Limit?: number;
+}
+
+declare interface DescribeDedicatedClusterCbsStatisticsResponse {
+  /** 云硬盘仓库信息 */
+  SetList?: SetInfo[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -833,6 +887,8 @@ declare interface Cdc {
   DeleteDedicatedClusters(data: DeleteDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDedicatedClustersResponse>;
   /** 删除站点 {@link DeleteSitesRequest} {@link DeleteSitesResponse} */
   DeleteSites(data: DeleteSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSitesResponse>;
+  /** 查询本地专用集群云硬盘仓库信息 {@link DescribeDedicatedClusterCbsStatisticsRequest} {@link DescribeDedicatedClusterCbsStatisticsResponse} */
+  DescribeDedicatedClusterCbsStatistics(data: DescribeDedicatedClusterCbsStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterCbsStatisticsResponse>;
   /** 查询专用集群内cos的容量信息 {@link DescribeDedicatedClusterCosCapacityRequest} {@link DescribeDedicatedClusterCosCapacityResponse} */
   DescribeDedicatedClusterCosCapacity(data: DescribeDedicatedClusterCosCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterCosCapacityResponse>;
   /** 查询专用集群内宿主机的统计信息 {@link DescribeDedicatedClusterHostStatisticsRequest} {@link DescribeDedicatedClusterHostStatisticsResponse} */
