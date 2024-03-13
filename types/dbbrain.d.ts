@@ -1647,7 +1647,7 @@ declare interface DescribeProxyProcessStatisticsRequest {
   Product: string;
   /** 偏移量，默认0。 */
   Offset?: number;
-  /** 按照某字断排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。 */
+  /** 按照某字段排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。 */
   SortBy?: string;
   /** 排序方向。支持值包括："DESC"，"ASC"。 */
   OrderDirection?: string;
@@ -2461,7 +2461,7 @@ declare namespace V20191016 {
   interface MailConfiguration {
     /** 是否开启邮件发送: 0, 否; 1, 是。 */
     SendMail: number;
-    /** 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模版，配置需要发送巡检邮件的地域；订阅的邮件发送模版，配置当前订阅实例的所属地域。 */
+    /** 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模板，配置需要发送巡检邮件的地域；订阅的邮件发送模板，配置当前订阅实例的所属地域。 */
     Region: string[];
     /** 发送指定的健康等级的报告, 如["HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"]。 */
     HealthStatus: string[];
@@ -2612,54 +2612,54 @@ declare namespace V20191016 {
   /** 慢日志TopSql */
   interface SlowLogTopSqlItem {
     /** sql总锁等待时间 */
-    LockTime: number;
+    LockTime?: number;
     /** 最大锁等待时间 */
-    LockTimeMax: number;
+    LockTimeMax?: number;
     /** 最小锁等待时间 */
-    LockTimeMin: number;
+    LockTimeMin?: number;
     /** 总扫描行数 */
-    RowsExamined: number;
+    RowsExamined?: number;
     /** 最大扫描行数 */
-    RowsExaminedMax: number;
+    RowsExaminedMax?: number;
     /** 最小扫描行数 */
-    RowsExaminedMin: number;
+    RowsExaminedMin?: number;
     /** 总耗时 */
-    QueryTime: number;
+    QueryTime?: number;
     /** 最大执行时间 */
-    QueryTimeMax: number;
+    QueryTimeMax?: number;
     /** 最小执行时间 */
-    QueryTimeMin: number;
+    QueryTimeMin?: number;
     /** 总返回行数 */
-    RowsSent: number;
+    RowsSent?: number;
     /** 最大返回行数 */
-    RowsSentMax: number;
+    RowsSentMax?: number;
     /** 最小返回行数 */
-    RowsSentMin: number;
+    RowsSentMin?: number;
     /** 执行次数 */
-    ExecTimes: number;
+    ExecTimes?: number;
     /** sql模板 */
-    SqlTemplate: string;
+    SqlTemplate?: string;
     /** 带参数SQL（随机） */
-    SqlText: string;
+    SqlText?: string;
     /** 数据库名 */
-    Schema: string;
+    Schema?: string;
     /** 总耗时占比 */
-    QueryTimeRatio: number;
+    QueryTimeRatio?: number;
     /** sql总锁等待时间占比 */
-    LockTimeRatio: number;
+    LockTimeRatio?: number;
     /** 总扫描行数占比 */
-    RowsExaminedRatio: number;
+    RowsExaminedRatio?: number;
     /** 总返回行数占比 */
-    RowsSentRatio: number;
+    RowsSentRatio?: number;
     /** 平均执行时间 */
-    QueryTimeAvg: number;
+    QueryTimeAvg?: number;
     /** 平均返回行数 */
-    RowsSentAvg: number;
+    RowsSentAvg?: number;
     /** 平均锁等待时间 */
-    LockTimeAvg: number;
+    LockTimeAvg?: number;
     /** 平均扫描行数 */
-    RowsExaminedAvg: number;
-    /** SOL模板的MD5值 */
+    RowsExaminedAvg?: number;
+    /** SQL模板的MD5值 */
     Md5?: string;
   }
 

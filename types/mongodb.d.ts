@@ -1298,6 +1298,20 @@ declare interface SetAccountUserPrivilegeResponse {
   RequestId?: string;
 }
 
+declare interface SetInstanceMaintenanceRequest {
+  /** 指定实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 维护时间窗开始时间。取值范围为"00:00-23:00"的任意整点或半点，如00:00或00:30。 */
+  MaintenanceStart: string;
+  /** 维护时间窗结束时间。- 取值范围为"00:00-23:00"的任意整点或半点，维护时间持续时长最小为30分钟，最大为3小时。- 结束时间务必是基于开始时间向后的时间。 */
+  MaintenanceEnd: string;
+}
+
+declare interface SetInstanceMaintenanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateDBInstancesRequest {
   /** 指定预隔离实例ID。格式如：cmgo-p8vnipr5。 */
   InstanceId: string;
@@ -1831,6 +1845,8 @@ declare interface Mongodb {
   ResetDBInstancePassword(data: ResetDBInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDBInstancePasswordResponse>;
   /** 设置账户权限 {@link SetAccountUserPrivilegeRequest} {@link SetAccountUserPrivilegeResponse} */
   SetAccountUserPrivilege(data: SetAccountUserPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<SetAccountUserPrivilegeResponse>;
+  /** 实例维护时间设置 {@link SetInstanceMaintenanceRequest} {@link SetInstanceMaintenanceResponse} */
+  SetInstanceMaintenance(data: SetInstanceMaintenanceRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstanceMaintenanceResponse>;
   /** 包年包月隔离接口 {@link TerminateDBInstancesRequest} {@link TerminateDBInstancesResponse} */
   TerminateDBInstances(data: TerminateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDBInstancesResponse>;
   /** 指定云数据库实例的所属项目 {@link V20180408.AssignProjectRequest} {@link V20180408.AssignProjectResponse} */

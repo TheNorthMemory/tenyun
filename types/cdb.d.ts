@@ -3685,7 +3685,7 @@ declare interface DescribeSlowLogDataRequest {
   SortBy?: string;
   /** 升序还是降序排列。当前支持：ASC,DESC 。 */
   OrderBy?: string;
-  /** 偏移量，默认为0。 */
+  /** 偏移量，默认为0，最大为9999。 */
   Offset?: number;
   /** 一次性返回的记录数量，默认为100，最大为400。 */
   Limit?: number;

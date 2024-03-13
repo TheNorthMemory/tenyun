@@ -3266,6 +3266,24 @@ declare interface DescribeRulesSettingResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSecurityIPGroupInfoRequest {
+  /** 站点的 ID ，用于指定查询的站点范围。 */
+  ZoneId: string;
+  /** 单次返回的最大条目数。默认值为 20 ，最大查询条目为 1000 。 */
+  Limit?: number;
+  /** 分页查询的起始条目偏移量。默认值为 0 。 */
+  Offset?: number;
+}
+
+declare interface DescribeSecurityIPGroupInfoResponse {
+  /** 返回的满足条件的 IP 组数量。 */
+  TotalCount?: number;
+  /** IP 组的详细配置信息。包含每个 IP 组的 ID 、名称和 IP /网段列表信息。 */
+  IPGroups?: IPGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSecurityTemplateBindingsRequest {
   /** 要查询的站点 ID。 */
   ZoneId: string;
@@ -4307,6 +4325,8 @@ declare interface Teo {
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
   /** 查询规则引擎的设置参数 {@link DescribeRulesSettingRequest} {@link DescribeRulesSettingResponse} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
+  /** 查询 IP 组配置信息 {@link DescribeSecurityIPGroupInfoRequest} {@link DescribeSecurityIPGroupInfoResponse} */
+  DescribeSecurityIPGroupInfo(data: DescribeSecurityIPGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupInfoResponse>;
   /** 查询指定策略模板的绑定关系列表 {@link DescribeSecurityTemplateBindingsRequest} {@link DescribeSecurityTemplateBindingsResponse} */
   DescribeSecurityTemplateBindings(data: DescribeSecurityTemplateBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTemplateBindingsResponse>;
   /** 查询四层流量时序数据 {@link DescribeTimingL4DataRequest} {@link DescribeTimingL4DataResponse} */

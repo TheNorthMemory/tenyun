@@ -884,7 +884,7 @@ declare interface CompareRule {
 declare interface CompareRuleItem {
   /** 比较类型 1.固定值 2.波动值 3.数值范围比较 4.枚举范围比较 5.不用比较 */
   CompareType?: number | null;
-  /** 比较操作类型< <= == => > !=IRLCRO:在区间内(左闭右开)IRLORC:在区间内(左开右闭)IRLCRC:在区间内(左闭右闭)IRLORO:在区间内(左开右开)NRLCRO:不在区间内(左闭右开)NRLORC:不在区间内(左开右闭)NRLCRC:不在在区间内(左闭右闭)NRLORO:不在在区间内(左开右开) */
+  /** 比较操作类型< <= == => > !=IRLCRO:在区间内(左闭右开)IRLORC:在区间内(左开右闭)IRLCRC:在区间内(左闭右闭)IRLORO:在区间内(左开右开)NRLCRO:不在区间内(左闭右开)NRLORC:不在区间内(左开右闭)NRLCRC:不在区间内(左闭右闭)NRLORO:不在区间内(左开右开) */
   Operator?: string | null;
   /** 质量统计值类型 1.绝对值 2.上升 3. 下降 4._C包含 5. N_C不包含 */
   ValueComputeType?: number | null;
@@ -1873,33 +1873,39 @@ declare interface InstanceInfo {
 /** 实例生命周期详情 */
 declare interface InstanceLifeCycleOpsDto {
   /** 任务id */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 数据时间 */
-  CurRunDate: string | null;
+  CurRunDate?: string | null;
   /** 实例生命次数 */
-  LifeRound: number | null;
+  LifeRound?: number | null;
   /** 运行类型 重跑/补录/周期/非周期 */
-  RunType: string | null;
+  RunType?: string | null;
   /** 重跑次数 */
-  Tries: number | null;
+  Tries?: number | null;
   /** 实例生命周期 */
-  InstanceLifeDetailDtoList: InstanceLifeDetailDto[] | null;
+  InstanceLifeDetailDtoList?: InstanceLifeDetailDto[] | null;
   /** Runner运行状态 */
-  RunnerState: string | null;
+  RunnerState?: string | null;
   /** 错误码 */
-  ErrorDesc: string | null;
+  ErrorDesc?: string | null;
   /** 错误告警级别 */
-  ErrorCodeLevel: string | null;
+  ErrorCodeLevel?: string | null;
   /** 实例日志简略信息 */
-  InstanceLogListOpsDto: InstanceLogInfo | null;
+  InstanceLogListOpsDto?: InstanceLogInfo | null;
+  /** 实例状态 */
+  InstanceState?: string | null;
 }
 
 /** 实例生命周期detail */
 declare interface InstanceLifeDetailDto {
   /** 实例状态 */
-  State: string | null;
+  State?: string | null;
   /** 该状态开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
+  /** 实例生命周期阶段状态 */
+  DetailState?: string | null;
+  /** 该状态结束时间 */
+  EndTime?: string | null;
 }
 
 /** 离线运维实例列表 */
@@ -7222,9 +7228,9 @@ declare interface CreateRuleResponse {
 }
 
 declare interface CreateRuleTemplateRequest {
-  /** 模版类型 1.系统模版 2.自定义模版 */
+  /** 模板类型 1.系统模板 2.自定义模板 */
   Type?: number;
-  /** 模版名称 */
+  /** 模板名称 */
   Name?: string;
   /** 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性 */
   QualityDim?: number;
@@ -7246,7 +7252,7 @@ declare interface CreateRuleTemplateRequest {
 
 declare interface CreateRuleTemplateResponse {
   /** 模板Id */
-  Data: number | null;
+  Data?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7634,13 +7640,13 @@ declare interface DeleteRuleResponse {
 declare interface DeleteRuleTemplateRequest {
   /** 项目Id */
   ProjectId?: string;
-  /** 模版Id列表 */
+  /** 模板Id列表 */
   Ids?: number[];
 }
 
 declare interface DeleteRuleTemplateResponse {
   /** 删除成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10177,13 +10183,13 @@ declare interface DescribeRuleTemplatesByPageRequest {
 
 declare interface DescribeRuleTemplatesByPageResponse {
   /** 结果 */
-  Data: RuleTemplatePage;
+  Data?: RuleTemplatePage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeRuleTemplatesRequest {
-  /** 模版类型 1.系统模版 2.自定义模版 */
+  /** 模板类型 1.系统模板 2.自定义模板 */
   Type?: number;
   /** 1.常量 2.离线表级 2.离线字段级 */
   SourceObjectType?: number;
@@ -10194,8 +10200,8 @@ declare interface DescribeRuleTemplatesRequest {
 }
 
 declare interface DescribeRuleTemplatesResponse {
-  /** 规则模版列表 */
-  Data: RuleTemplate[] | null;
+  /** 规则模板列表 */
+  Data?: RuleTemplate[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13260,7 +13266,7 @@ declare interface Wedata {
   CreateResourcePath(data: CreateResourcePathRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourcePathResponse>;
   /** 创建质量规则接口 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data?: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** 创建规则模版 {@link CreateRuleTemplateRequest} {@link CreateRuleTemplateResponse} */
+  /** 创建规则模板 {@link CreateRuleTemplateRequest} {@link CreateRuleTemplateResponse} */
   CreateRuleTemplate(data?: CreateRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleTemplateResponse>;
   /** 创建任务【Beta版本】 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
@@ -13306,7 +13312,7 @@ declare interface Wedata {
   DeleteResourceFiles(data: DeleteResourceFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceFilesResponse>;
   /** 删除质量规则接口 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data?: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** 删除规则模版 {@link DeleteRuleTemplateRequest} {@link DeleteRuleTemplateResponse} */
+  /** 删除规则模板 {@link DeleteRuleTemplateRequest} {@link DeleteRuleTemplateResponse} */
   DeleteRuleTemplate(data?: DeleteRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleTemplateResponse>;
   /** 删除任务告警规则 {@link DeleteTaskAlarmRegularRequest} {@link DeleteTaskAlarmRegularResponse} */
   DeleteTaskAlarmRegular(data: DeleteTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskAlarmRegularResponse>;
@@ -13552,9 +13558,9 @@ declare interface Wedata {
   DescribeRuleTablesByPage(data?: DescribeRuleTablesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTablesByPageResponse>;
   /** 查询模板详情 {@link DescribeRuleTemplateRequest} {@link DescribeRuleTemplateResponse} */
   DescribeRuleTemplate(data?: DescribeRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplateResponse>;
-  /** 查询规则模版列表 {@link DescribeRuleTemplatesRequest} {@link DescribeRuleTemplatesResponse} */
+  /** 查询规则模板列表 {@link DescribeRuleTemplatesRequest} {@link DescribeRuleTemplatesResponse} */
   DescribeRuleTemplates(data?: DescribeRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplatesResponse>;
-  /** 规则模版查询接口 {@link DescribeRuleTemplatesByPageRequest} {@link DescribeRuleTemplatesByPageResponse} */
+  /** 规则模板查询接口 {@link DescribeRuleTemplatesByPageRequest} {@link DescribeRuleTemplatesByPageResponse} */
   DescribeRuleTemplatesByPage(data: DescribeRuleTemplatesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplatesByPageResponse>;
   /** 查询质量规则列表 {@link DescribeRulesRequest} {@link DescribeRulesResponse} */
   DescribeRules(data?: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;

@@ -2349,6 +2349,8 @@ declare interface CreatePartnerAutoSignAuthUrlRequest {
   AuthorizedOrganizationId?: string;
   /** 被授权企业名，和AuthorizedOrganizationId二选一，不能同时为空注：`被授权企业必须和当前企业在同一应用号下` */
   AuthorizedOrganizationName?: string;
+  /** 是否给平台应用授权:- true: 是（无需设置AuthorizedOrganizationId和AuthorizedOrganizationName）- false: 否（默认） 注：该参数需要开通“基于子客授权第三方应用可文件发起子客自动签署”，请联系运营经理开通 */
+  PlatformAppAuthorization?: boolean;
 }
 
 declare interface CreatePartnerAutoSignAuthUrlResponse {

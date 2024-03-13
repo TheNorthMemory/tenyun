@@ -2419,7 +2419,7 @@ declare interface ModifyDomainAttributesRequest {
   NewDefaultServerDomain?: string;
   /** 要修改的新域名列表。NewDomain和NewDomains只能传一个。 */
   NewDomains?: string[];
-  /** 域名相关的证书信息，注意，仅对启用SNI的监听器适用；支持同时传入多本算法类型不同的服务器证书，不可和MultiCertInfo 同时传入。 */
+  /** 域名相关的证书信息，注意，仅对启用SNI的监听器适用；支持同时传入多本算法类型不同的服务器证书，不可和Certificate 同时传入。 */
   MultiCertInfo?: MultiCertInfo;
 }
 

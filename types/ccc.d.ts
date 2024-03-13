@@ -142,38 +142,38 @@ declare interface DescribePredictiveDialingCampaignsElement {
 
 /** 批量添加客服时，返回出错客服的信息 */
 declare interface ErrStaffItem {
-  /** 坐席邮箱地址 */
-  StaffEmail: string;
+  /** 座席邮箱地址 */
+  StaffEmail?: string;
   /** 错误码 */
-  Code: string;
+  Code?: string;
   /** 错误描述 */
-  Message: string;
+  Message?: string;
 }
 
 /** 话机信息 */
 declare interface ExtensionInfo {
   /** 实例ID */
-  SdkAppId: number;
+  SdkAppId?: number;
   /** 分机全名 */
-  FullExtensionId: string;
+  FullExtensionId?: string;
   /** 分机号 */
-  ExtensionId: string;
+  ExtensionId?: string;
   /** 所属技能组列表 */
-  SkillGroupId: string;
+  SkillGroupId?: string;
   /** 分机名称 */
-  ExtensionName: string;
+  ExtensionName?: string;
   /** 创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 最后修改时间 */
-  ModifyTime: number;
+  ModifyTime?: number;
   /** 话机状态(0 离线、100 空闲、200忙碌） */
-  Status: number;
+  Status?: number;
   /** 是否注册 */
-  Register: boolean;
-  /** 绑定坐席邮箱 */
-  Relation: string;
-  /** 绑定坐席名称 */
-  RelationName: string;
+  Register?: boolean;
+  /** 绑定座席邮箱 */
+  Relation?: string;
+  /** 绑定座席名称 */
+  RelationName?: string;
 }
 
 /** 筛选条件 */
@@ -187,27 +187,27 @@ declare interface Filter {
 /** 文本会话服务记录信息 */
 declare interface IMCdrInfo {
   /** 服务记录ID */
-  Id: string;
+  Id?: string;
   /** 服务时长秒数 */
-  Duration: number;
-  /** 结束状态0 异常结束1 正常结束3 无坐席在线17 坐席放弃接听100 黑名单101 坐席手动转接102 IVR阶段放弃108 用户超时自动结束 */
-  EndStatus: number;
+  Duration?: number;
+  /** 结束状态0 异常结束1 正常结束3 无座席在线17 座席放弃接听100 黑名单101 座席手动转接102 IVR阶段放弃108 用户超时自动结束 */
+  EndStatus?: number;
   /** 用户昵称 */
-  Nickname: string;
+  Nickname?: string;
   /** 服务类型 1为全媒体，2为文本客服 */
-  Type: number;
+  Type?: number;
   /** 客服ID */
-  StaffId: string;
+  StaffId?: string;
   /** 服务时间戳 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 会话ID */
-  SessionId: string | null;
+  SessionId?: string | null;
   /** 技能组ID */
-  SkillGroupId: string | null;
+  SkillGroupId?: string | null;
   /** 技能组名称 */
-  SkillGroupName: string | null;
+  SkillGroupName?: string | null;
   /** 满意度 */
-  Satisfaction: IMSatisfaction | null;
+  Satisfaction?: IMSatisfaction | null;
 }
 
 /** IM满意度 */
@@ -257,65 +257,65 @@ declare interface NumberInfo {
 /** PSTN 会话类型。 */
 declare interface PSTNSession {
   /** 会话 ID */
-  SessionID: string;
+  SessionID?: string;
   /** 会话临时房间 ID */
-  RoomID: string;
+  RoomID?: string;
   /** 主叫 */
-  Caller: string;
+  Caller?: string;
   /** 被叫 */
-  Callee: string;
+  Callee?: string;
   /** 开始时间，Unix 时间戳 */
-  StartTimestamp: number;
+  StartTimestamp?: number;
   /** 振铃时间，Unix 时间戳 */
-  RingTimestamp: number;
+  RingTimestamp?: number;
   /** 接听时间，Unix 时间戳 */
-  AcceptTimestamp: number;
-  /** 坐席邮箱 */
-  StaffEmail: string;
-  /** 坐席工号 */
-  StaffNumber: string;
-  /** 会话状态ringing 振铃中seatJoining 等待坐席接听inProgress 进行中finished 已完成 */
-  SessionStatus: string;
+  AcceptTimestamp?: number;
+  /** 座席邮箱 */
+  StaffEmail?: string;
+  /** 座席工号 */
+  StaffNumber?: string;
+  /** 会话状态ringing 振铃中seatJoining 等待座席接听inProgress 进行中finished 已完成 */
+  SessionStatus?: string;
   /** 会话呼叫方向， 0 呼入 | 1 - 呼出 */
-  Direction: number;
+  Direction?: number;
   /** 转外线使用的号码（转外线主叫） */
-  OutBoundCaller: string;
+  OutBoundCaller?: string;
   /** 转外线被叫 */
-  OutBoundCallee: string;
+  OutBoundCallee?: string;
   /** 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空 */
-  ProtectedCaller: string;
+  ProtectedCaller?: string;
   /** 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空 */
-  ProtectedCallee: string;
+  ProtectedCallee?: string;
 }
 
 /** PSTN 会话信息 */
 declare interface PSTNSessionInfo {
   /** 会话 ID */
-  SessionID: string;
+  SessionID?: string;
   /** 会话临时房间 ID */
-  RoomID: string;
+  RoomID?: string;
   /** 主叫 */
-  Caller: string;
+  Caller?: string;
   /** 被叫 */
-  Callee: string;
+  Callee?: string;
   /** 开始时间，Unix 时间戳 */
-  StartTimestamp: string;
+  StartTimestamp?: string;
   /** 接听时间，Unix 时间戳 */
-  AcceptTimestamp: string;
-  /** 坐席邮箱 */
-  StaffEmail: string;
-  /** 坐席工号 */
-  StaffNumber: string;
-  /** 坐席状态 inProgress 进行中 */
-  SessionStatus: string;
+  AcceptTimestamp?: string;
+  /** 座席邮箱 */
+  StaffEmail?: string;
+  /** 座席工号 */
+  StaffNumber?: string;
+  /** 座席状态 inProgress 进行中 */
+  SessionStatus?: string;
   /** 会话呼叫方向， 0 呼入 | 1 - 呼出 */
-  Direction: number;
+  Direction?: number;
   /** 振铃时间，Unix 时间戳 */
-  RingTimestamp: number;
+  RingTimestamp?: number;
   /** 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空 */
-  ProtectedCaller: string;
+  ProtectedCaller?: string;
   /** 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空 */
-  ProtectedCallee: string;
+  ProtectedCallee?: string;
 }
 
 /** 套餐包购买信息 */
@@ -353,34 +353,34 @@ declare interface PhoneNumBuyInfo {
 /** 应用购买信息 */
 declare interface SdkAppIdBuyInfo {
   /** 应用ID */
-  SdkAppId: number;
+  SdkAppId?: number;
   /** 应用名称 */
-  Name: string;
-  /** 坐席购买数（还在有效期内） */
-  StaffBuyNum: number;
-  /** 坐席购买列表 （还在有效期内） */
-  StaffBuyList: StaffBuyInfo[];
+  Name?: string;
+  /** 座席购买数（还在有效期内） */
+  StaffBuyNum?: number;
+  /** 座席购买列表 （还在有效期内） */
+  StaffBuyList?: StaffBuyInfo[];
   /** 号码购买列表 */
-  PhoneNumBuyList: PhoneNumBuyInfo[];
+  PhoneNumBuyList?: PhoneNumBuyInfo[];
   /** 办公电话购买数（还在有效期内） */
   SipBuyNum?: number | null;
 }
 
-/** 坐席用户信息 */
+/** 座席用户信息 */
 declare interface SeatUserInfo {
-  /** 坐席名称 */
+  /** 座席名称 */
   Name: string;
-  /** 坐席邮箱 */
+  /** 座席邮箱 */
   Mail: string;
   /** 工号 */
   StaffNumber: string | null;
-  /** 坐席电话号码（带0086前缀） */
+  /** 座席电话号码（带0086前缀） */
   Phone?: string;
-  /** 坐席昵称 */
+  /** 座席昵称 */
   Nick?: string;
   /** 用户ID */
   UserId?: string;
-  /** 坐席关联的技能组列表 */
+  /** 座席关联的技能组列表 */
   SkillGroupNameList?: string[] | null;
   /** 1:管理员2:质检员3:普通座席else:自定义角色ID */
   Role?: number | null;
@@ -388,42 +388,42 @@ declare interface SeatUserInfo {
 
 /** 参与者信息 */
 declare interface ServeParticipant {
-  /** 坐席邮箱 */
-  Mail: string | null;
-  /** 坐席电话 */
-  Phone: string | null;
+  /** 座席邮箱 */
+  Mail?: string | null;
+  /** 座席电话 */
+  Phone?: string | null;
   /** 振铃时间戳，Unix 秒级时间戳 */
-  RingTimestamp: number | null;
+  RingTimestamp?: number | null;
   /** 接听时间戳，Unix 秒级时间戳 */
-  AcceptTimestamp: number | null;
+  AcceptTimestamp?: number | null;
   /** 结束时间戳，Unix 秒级时间戳 */
-  EndedTimestamp: number | null;
-  /** 录音 ID，能够索引到坐席侧的录音 */
-  RecordId: string | null;
+  EndedTimestamp?: number | null;
+  /** 录音 ID，能够索引到座席侧的录音 */
+  RecordId?: string | null;
   /** 参与者类型，"staffSeat", "outboundSeat", "staffPhoneSeat" */
-  Type: string | null;
-  /** 转接来源坐席信息 */
-  TransferFrom: string | null;
+  Type?: string | null;
+  /** 转接来源座席信息 */
+  TransferFrom?: string | null;
   /** 转接来源参与者类型，取值与 Type 一致 */
   TransferFromType?: string | null;
-  /** 转接去向坐席信息 */
-  TransferTo: string | null;
+  /** 转接去向座席信息 */
+  TransferTo?: string | null;
   /** 转接去向参与者类型，取值与 Type 一致 */
-  TransferToType: string | null;
+  TransferToType?: string | null;
   /** 技能组 ID */
-  SkillGroupId: number | null;
+  SkillGroupId?: number | null;
   /** 结束状态 */
-  EndStatusString: string | null;
+  EndStatusString?: string | null;
   /** 录音 URL */
-  RecordURL: string | null;
+  RecordURL?: string | null;
   /** 参与者序号，从 0 开始 */
-  Sequence: number | null;
+  Sequence?: number | null;
   /** 开始时间戳，Unix 秒级时间戳 */
-  StartTimestamp: number | null;
+  StartTimestamp?: number | null;
   /** 技能组名称 */
-  SkillGroupName: string | null;
+  SkillGroupName?: string | null;
   /** 录音转存第三方COS地址 */
-  CustomRecordURL: string | null;
+  CustomRecordURL?: string | null;
 }
 
 /** 技能组信息 */
@@ -436,7 +436,7 @@ declare interface SkillGroupInfoItem {
   Type?: string;
   /** 会话分配策略 */
   RoutePolicy?: string | null;
-  /** 会话分配是否优先上次服务坐席 */
+  /** 会话分配是否优先上次服务座席 */
   UsingLastSeat?: number | null;
   /** 单客服最大并发数（电话类型默认1） */
   MaxConcurrency?: number | null;
@@ -458,29 +458,29 @@ declare interface SkillGroupItem {
   Type: string;
 }
 
-/** 坐席购买信息 */
+/** 座席购买信息 */
 declare interface StaffBuyInfo {
-  /** 购买坐席数量 */
-  Num: number;
+  /** 购买座席数量 */
+  Num?: number;
   /** 购买时间戳 */
-  BuyTime: number;
+  BuyTime?: number;
   /** 截止时间戳 */
-  EndTime: number;
+  EndTime?: number;
   /** 购买办公电话数量 */
   SipNum?: number | null;
 }
 
-/** 带有技能组优先级的坐席信息 */
+/** 带有技能组优先级的座席信息 */
 declare interface StaffInfo {
-  /** 坐席名称 */
+  /** 座席名称 */
   Name?: string | null;
-  /** 坐席邮箱 */
+  /** 座席邮箱 */
   Mail?: string;
-  /** 坐席电话号码 */
+  /** 座席电话号码 */
   Phone?: string | null;
-  /** 坐席昵称 */
+  /** 座席昵称 */
   Nick?: string | null;
-  /** 坐席工号 */
+  /** 座席工号 */
   StaffNumber?: string | null;
   /** 用户角色id */
   RoleId?: number;
@@ -498,44 +498,44 @@ declare interface StaffSkillGroupList {
   Priority?: number;
 }
 
-/** 坐席状态补充信息 */
+/** 座席状态补充信息 */
 declare interface StaffStatusExtra {
   /** im - 文本 | tel - 电话 | all - 全媒体 */
-  Type: string;
+  Type?: string;
   /** in - 呼入 | out - 呼出 */
-  Direct: string;
+  Direct?: string;
 }
 
-/** 坐席状态相关信息 */
+/** 座席状态相关信息 */
 declare interface StaffStatusMetrics {
-  /** 坐席邮箱 */
-  Email: string;
-  /** 坐席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线 */
-  Status: string;
-  /** 坐席状态补充信息 */
-  StatusExtra: StaffStatusExtra;
+  /** 座席邮箱 */
+  Email?: string;
+  /** 座席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线 */
+  Status?: string;
+  /** 座席状态补充信息 */
+  StatusExtra?: StaffStatusExtra;
   /** 当天在线总时长 */
-  OnlineDuration: number;
+  OnlineDuration?: number;
   /** 当天示闲总时长 */
-  FreeDuration: number;
+  FreeDuration?: number;
   /** 当天忙碌总时长 */
-  BusyDuration: number;
+  BusyDuration?: number;
   /** 当天示忙总时长 */
-  NotReadyDuration: number;
+  NotReadyDuration?: number;
   /** 当天小休总时长 */
-  RestDuration: number;
+  RestDuration?: number;
   /** 当天话后调整总时长 */
-  AfterCallWorkDuration: number;
+  AfterCallWorkDuration?: number;
   /** 小休原因 */
-  Reason: string;
+  Reason?: string;
   /** 是否预约小休 */
-  ReserveRest: boolean;
+  ReserveRest?: boolean;
   /** 是否预约示忙 */
-  ReserveNotReady: boolean;
+  ReserveNotReady?: boolean;
   /** 手机接听模式： 0 - 关闭 | 1 - 仅离线 | 2- 始终 */
-  UseMobileAccept: number;
+  UseMobileAccept?: number;
   /** 手机外呼开关 */
-  UseMobileCallOut: boolean;
+  UseMobileCallOut?: boolean;
   /** 最近一次上线时间戳 */
   LastOnlineTimestamp?: number | null;
   /** 最近一次状态时间戳 */
@@ -558,9 +558,9 @@ declare interface TelCdrInfo {
   RecordURL?: string;
   /** 录音 ID */
   RecordId?: string | null;
-  /** 坐席信息 */
+  /** 座席信息 */
   SeatUser?: SeatUserInfo;
-  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无坐席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
+  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
   EndStatus?: number;
   /** 技能组名称 */
   SkillGroup?: string;
@@ -576,13 +576,13 @@ declare interface TelCdrInfo {
   EndedTimestamp?: number | null;
   /** IVR 按键信息 ，e.g. ["1","2","3"] */
   IVRKeyPressed?: string[] | null;
-  /** 挂机方 seat 坐席 user 用户 system 系统 */
+  /** 挂机方 seat 座席 user 用户 system 系统 */
   HungUpSide?: string | null;
   /** 服务参与者列表 */
   ServeParticipants?: ServeParticipant[] | null;
   /** 技能组ID */
   SkillGroupId?: number | null;
-  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无坐席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
+  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
   EndStatusString?: string | null;
   /** 会话开始时间戳，UNIX 秒级时间戳 */
   StartTimestamp?: number | null;

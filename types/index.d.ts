@@ -530,7 +530,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   af: Af,
   /** {@link Afc 定制建模} */
   afc: Afc,
-  /** {@link Aiart AI 绘画} */
+  /** {@link Aiart 大模型图像创作引擎} */
   aiart: Aiart,
   /** {@link Ame 正版曲库直通车} */
   ame: Ame,

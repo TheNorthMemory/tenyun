@@ -214,6 +214,8 @@ declare interface LoginActionFlag {
   Custom?: number;
   /** 邮箱 */
   Mail?: number;
+  /** u2f硬件token */
+  U2FToken?: number | null;
 }
 
 /** 登录和敏感操作flag */
@@ -230,6 +232,8 @@ declare interface LoginActionFlagIntl {
   Custom?: number;
   /** 邮件 */
   Mail?: number;
+  /** u2f硬件token */
+  U2FToken?: number | null;
 }
 
 /** 登录和敏感操作flag */

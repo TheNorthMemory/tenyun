@@ -1787,13 +1787,13 @@ declare interface CreateIntegrationDepartmentResponse {
 declare interface CreateIntegrationEmployeesRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 待创建员工的信息，最多不超过20个。其中入参Mobile和DisplayName必填，OpenId、Email和Department.DepartmentId选填，其他字段暂不支持设置。在创建企微企业员工场景下，只需传入WeworkOpenId，无需再传其他信息。 */
+  /** 待创建员工的信息最多不超过20个。**1. 在创建企业微信员工的场景下** : 只需传入下面的参数，其他信息不支持设置。 参数 是否必填 含义 WeworkOpenId 是 企业微信用户账号ID **2. 在其他场景下** : 只需传入下面的参数，其他信息不支持设置。 参数 是否必填 含义 DisplayName 是 用户的真实名字 Mobile 是 用户手机号码 OpenId 否 用户的自定义ID Email 否 用户的邮箱 Department.DepartmentId 否 用户加入后的部门ID 注: `每个手机号每天最多使用3次` */
   Employees: Staff[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 员工邀请方式如果是来自H5的，参数需要传递H5短信或者企微 请传递SMS，或者不传递 */
+  /** 员工邀请方式可通过以下方式进行设置：**H5**：会生成H5的链接，点击链接进入H5的认证加入企业的逻辑。**SMS（默认）**：会通过短信或企业微信消息进行邀请。如果非企业微信场景，则是企业微信消息。其他场景则是短信通知，短信中包含链接，点击后进入微信小程序进行认证加入企业的逻辑。 */
   InvitationNotifyType?: string;
-  /** 回跳地址，在认证成功之后，进行回跳，请保证回跳地址的可用性。使用前请联系对接的客户经理沟通，提供回跳地址的域名，进行域名配置 */
+  /** 回跳地址，为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。注：`只有在员工邀请方式（InvitationNotifyType参数）为H5场景下才生效， 其他方式下设置无效。` */
   JumpUrl?: string;
 }
 
@@ -2291,7 +2291,7 @@ declare interface DeleteIntegrationDepartmentResponse {
 declare interface DeleteIntegrationEmployeesRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 待移除员工的信息。应符合以下规则：UserId和OpenId不可同时为空。若需要进行离职交接，交接人信息ReceiveUserId和ReceiveOpenId不可同时为空。否则视为不进行离职交接。 */
+  /** 待离职员工的信息最多不超过100个。应符合以下规则：1. UserId和OpenId不可同时为空，必须填写其中一个，优先使用UserId。2. **若需要进行离职交接**，交接人信息ReceiveUserId和ReceiveOpenId不可同时为空，必须填写其中一个，优先使用ReceiveUserId。 */
   Employees: Staff[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -2937,13 +2937,13 @@ declare interface UnbindEmployeeUserIdWithClientOpenIdResponse {
 declare interface UpdateIntegrationEmployeesRequest {
   /** 执行本接口操作的员工信息,UserId必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 员工信息，不超过100个。根据UserId或OpenId更新员工，必填一个，优先UserId。可更新Mobile、DisplayName、Email和Department.DepartmentId字段，其他字段暂不支持 */
+  /** 需要更新的员工信息，最多不超过100个。根据UserId或OpenId更新员工信息，必须填写其中一个，优先使用UserId。可更新以下字段，其他字段暂不支持 参数 含义 DisplayName 用户的真实名字 Mobile 用户手机号码 Email 用户的邮箱 Department.DepartmentId 用户进入后的部门ID */
   Employees: Staff[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 员工邀请方式如果是来自H5的，参数需要传递H5短信或者企微 请传递SMS，或者不传递 */
+  /** 员工邀请方式可通过以下方式进行设置：**H5**：会生成H5的链接，点击链接进入H5的认证加入企业的逻辑。**SMS（默认）**：会通过短信或企业微信消息进行邀请。如果非企业微信场景，则是企业微信消息。其他场景则是短信通知，短信中包含链接，点击后进入微信小程序进行认证加入企业的逻辑。 */
   InvitationNotifyType?: string;
-  /** 回跳地址，在认证成功之后，进行回跳，请保证回跳地址的可用性。使用前请联系对接的客户经理沟通，提供回跳地址的域名，进行域名配置。 */
+  /** 回跳地址，为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。注：`只有在员工邀请方式（InvitationNotifyType参数）为H5场景下才生效， 其他方式下设置无效。` */
   JumpUrl?: string;
 }
 
@@ -3089,7 +3089,7 @@ declare interface Ess {
   DeleteExtendedServiceAuthInfos(data: DeleteExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExtendedServiceAuthInfosResponse>;
   /** 删除企业部门 {@link DeleteIntegrationDepartmentRequest} {@link DeleteIntegrationDepartmentResponse} */
   DeleteIntegrationDepartment(data: DeleteIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationDepartmentResponse>;
-  /** 移除企业员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
+  /** 离职企业员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
   /** 解绑员工角色 {@link DeleteIntegrationRoleUsersRequest} {@link DeleteIntegrationRoleUsersResponse} */
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;

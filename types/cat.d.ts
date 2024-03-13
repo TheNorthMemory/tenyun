@@ -375,9 +375,9 @@ declare interface DescribeProbeTasksRequest {
 
 declare interface DescribeProbeTasksResponse {
   /** 任务列表 */
-  TaskSet: ProbeTask[] | null;
+  TaskSet?: ProbeTask[] | null;
   /** 任务总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

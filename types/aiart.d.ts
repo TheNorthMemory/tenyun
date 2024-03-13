@@ -84,7 +84,7 @@ declare interface TextToImageResponse {
   RequestId?: string;
 }
 
-/** {@link Aiart AI 绘画} */
+/** {@link Aiart 大模型图像创作引擎} */
 declare interface Aiart {
   (): Versions;
   /** 智能图生图 {@link ImageToImageRequest} {@link ImageToImageResponse} */

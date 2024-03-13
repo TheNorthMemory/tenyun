@@ -2330,6 +2330,18 @@ declare interface CreateOptimizedModelResponse {
   RequestId?: string;
 }
 
+declare interface CreatePresignedNotebookUrlRequest {
+  /** Notebook ID */
+  Id: string;
+}
+
+declare interface CreatePresignedNotebookUrlResponse {
+  /** 携带认证TOKEN的URL */
+  AuthorizedUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTrainingModelRequest {
   /** 导入方式MODEL：导入新模型VERSION：导入新版本EXIST：导入现有版本 */
   ImportMethod: string;
@@ -4351,6 +4363,8 @@ declare interface Tione {
   CreateNotebookImage(data: CreateNotebookImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookImageResponse>;
   /** 保存优化模型 {@link CreateOptimizedModelRequest} {@link CreateOptimizedModelResponse} */
   CreateOptimizedModel(data: CreateOptimizedModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOptimizedModelResponse>;
+  /** 生成Notebook访问链接 {@link CreatePresignedNotebookUrlRequest} {@link CreatePresignedNotebookUrlResponse} */
+  CreatePresignedNotebookUrl(data: CreatePresignedNotebookUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePresignedNotebookUrlResponse>;
   /** 导入模型 {@link CreateTrainingModelRequest} {@link CreateTrainingModelResponse} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
   /** 创建模型训练任务 {@link CreateTrainingTaskRequest} {@link CreateTrainingTaskResponse} */

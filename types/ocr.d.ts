@@ -4533,6 +4533,8 @@ declare interface VatInvoiceVerifyNewRequest {
   SellerTaxCode?: string;
   /** 是否开启通用机打电子发票，默认为关闭。 */
   EnableCommonElectronic?: boolean;
+  /** 是否允许查验当日发票，默认值为false。请注意，发票从开具到录入税局需要一定的时间来更新和验证发票信息，打开后仅支持查验已成功录入到税局中的发票。 */
+  EnableTodayInvoice?: boolean;
 }
 
 declare interface VatInvoiceVerifyNewResponse {

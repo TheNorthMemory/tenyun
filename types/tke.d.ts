@@ -5830,9 +5830,11 @@ declare namespace V20180525 {
 
   interface GetClusterLevelPriceResponse {
     /** 询价结果，单位：分，打折后 */
-    Cost: number;
+    Cost?: number;
     /** 询价结果，单位：分，折扣前 */
-    TotalCost: number;
+    TotalCost?: number;
+    /** 总的折扣，100表示100%不打折 */
+    Policy?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

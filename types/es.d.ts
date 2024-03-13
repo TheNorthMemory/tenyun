@@ -90,6 +90,128 @@ declare interface DescribeInstancePluginInfo {
   PluginUpdateTime: string;
 }
 
+/** 数据接入信息 */
+declare interface DiData {
+  /** 数据接入id */
+  DiId?: string | null;
+  /** 数据接入创建时间 */
+  CreateTime?: string | null;
+  /** 数据接入状态，0处理中，1正常，-2删除中，-3已删除 */
+  Status?: number | null;
+  /** cvm数据源信息 */
+  DiDataSourceCvm?: DiDataSourceCvm | null;
+  /** tke数据源信息 */
+  DiDataSourceTke?: DiDataSourceTke | null;
+  /** serverless目的端信息 */
+  DiDataSinkServerless?: DiDataSinkServerless | null;
+  /** 数据接入类型 */
+  DiDataSourceType?: string | null;
+}
+
+/** 数据接入serverless目的端信息 */
+declare interface DiDataSinkServerless {
+  /** serverless实例id */
+  ServerlessId?: string | null;
+}
+
+/** 数据接入cvm数据源信息 */
+declare interface DiDataSourceCvm {
+  /** vpc id */
+  VpcId?: string | null;
+  /** 采集路径列表 */
+  LogPaths?: string[] | null;
+  /** cvm实例信息列表 */
+  CvmInstances?: DiDataSourceCvmInstance[] | null;
+  /** 采集器id */
+  CollectorId?: string | null;
+}
+
+/** 数据接入cvm实例信息 */
+declare interface DiDataSourceCvmInstance {
+  /** cvm实例id */
+  InstanceId?: string | null;
+  /** vpc id */
+  VpcId?: string | null;
+  /** 子网id */
+  SubnetId?: string | null;
+  /** 错误信息 */
+  ErrMsg?: string | null;
+}
+
+/** 数据接入tke数据源信息 */
+declare interface DiDataSourceTke {
+  /** vpc id */
+  VpcId?: string | null;
+  /** tke实例id */
+  TkeId?: string | null;
+  /** 采集器id */
+  CollectorId?: string | null;
+  /** 采集源名称 */
+  CollectorName?: string | null;
+  /** 采集器类型 */
+  CollectorType?: string | null;
+  /** 采集器版本 */
+  CollectorVersion?: string | null;
+  /** tke包含的命名空间 */
+  IncludeNamespaces?: string[] | null;
+  /** tke不包含的命名空间 */
+  ExcludeNamespaces?: string[] | null;
+  /** tke pod标签名 */
+  PodLabelKeys?: string[] | null;
+  /** tke pod标签值 */
+  PodLabelValues?: string[] | null;
+  /** tke容器名称 */
+  ContainerName?: string | null;
+  /** tke采集器beat配置 */
+  ConfigContent?: string | null;
+  /** / */
+  InputType?: string | null;
+  /** TKE 日志采集路径 */
+  InputPath?: string | null;
+}
+
+/** 数据接入cvm数据源 */
+declare interface DiSourceCvm {
+  /** 数据源所属vpc id，创建后不允许修改 */
+  VpcId?: string;
+  /** cvm列表 */
+  CvmIds?: string[];
+  /** 采集路径列表，支持通配符 */
+  LogPaths?: string[];
+}
+
+/** 数据接入tke数据源 */
+declare interface DiSourceTke {
+  /** 数据源所属vpc id，创建后不允许修改 */
+  VpcId?: string;
+  /** tke实例id，创建后不允许修改 */
+  TkeId?: string;
+  /** tke包含的命名空间 */
+  IncludeNamespaces?: string[];
+  /** tke不包含的命名空间 */
+  ExcludeNamespaces?: string[];
+  /** tke容器名称 */
+  ContainerName?: string;
+  /** tke日志内容过滤 */
+  LogFilters?: string;
+  /** tke beats配置项 */
+  ConfigContent?: string;
+  /** tke pod标签 */
+  PodLabel?: DiSourceTkePodLabel[];
+  /** / */
+  InputType?: string;
+  /** tke 日志采集路径 */
+  InputPath?: string;
+}
+
+/** tke pod标签 */
+declare interface DiSourceTkePodLabel {
+  /** 标签key */
+  Key?: string | null;
+  /** 标签value */
+  Value?: string | null;
+}
+
 /** 智能运维支持的诊断项和元信息 */
 declare interface DiagnoseJobMeta {
   /** 智能运维诊断项英文名 */
@@ -500,6 +622,12 @@ declare interface KibanaNodeInfo {
   KibanaNodeDiskSize: number;
 }
 
+/** kibana公网域名白名单参数 */
+declare interface KibanaPublicAcl {
+  /** kibana访问白名单 */
+  WhiteIpList?: string[];
+}
+
 /** Kibana视图数据 */
 declare interface KibanaView {
   /** Kibana节点IP */
@@ -866,6 +994,70 @@ declare interface ProcessDetail {
   TaskType?: number | null;
 }
 
+/** 创建serverless索引时创建数据接入 */
+declare interface ServerlessDi {
+  /** 数据链路采集源类型，如cvm_collector、tke_collector */
+  DiSourceType?: string;
+  /** cvm数据源 */
+  DiSourceCvm?: DiSourceCvm;
+  /** tke数据源 */
+  DiSourceTke?: DiSourceTke;
+}
+
+/** Serverless索引空间信息 */
+declare interface ServerlessSpace {
+  /** Serverless索引空间ID */
+  SpaceId?: string;
+  /** Serverless索引空间名 */
+  SpaceName?: string;
+  /** Serverless索引空间状态，0正常，-1已删除 */
+  Status?: number;
+  /** 创建日期 */
+  CreateTime?: string;
+  /** 空间内索引数量 */
+  IndexCount?: number;
+  /** kibana公网uri */
+  KibanaUrl?: string | null;
+  /** kibana内网url */
+  KibanaPrivateUrl?: string | null;
+  /** 空间内网访问地址 */
+  IndexAccessUrl?: string | null;
+  /** 空间白名单 */
+  KibanaPublicAcl?: EsAcl | null;
+  /** 空间检索分析域名 */
+  KibanaEmbedUrl?: string | null;
+  /** 数据联路 */
+  DiDataList?: DiData | null;
+  /** 空间vpc信息 */
+  VpcInfo?: VpcInfo[] | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 可用区 */
+  Zone?: string | null;
+  /** kibana公网开关，0关闭，1开启 */
+  EnableKibanaPublicAccess?: number | null;
+  /** kibana内网开关，0关闭，1开启 */
+  EnableKibanaPrivateAccess?: number | null;
+  /** 空间所属appid */
+  AppId?: number | null;
+}
+
+/** ServerlessSpaceUser */
+declare interface ServerlessSpaceUser {
+  /** 用户名 */
+  Username?: string | null;
+  /** 用户密码 */
+  Password?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 用户状态 */
+  Status?: number | null;
+  /** 有权限的索引数组 */
+  IndicesScope?: string[] | null;
+  /** 权限类型 */
+  PrivilegeType?: number | null;
+}
+
 /** 智能运维集群配置详情 */
 declare interface SettingDetail {
   /** 配置key */
@@ -918,6 +1110,20 @@ declare interface TaskDetail {
   ElapsedTime: number | null;
   /** 任务进度详情 */
   ProcessInfo?: ProcessDetail | null;
+}
+
+/** vpc信息 */
+declare interface VpcInfo {
+  /** vpcId信息 */
+  VpcId?: string | null;
+  /** SubnetId信息 */
+  SubnetId?: string | null;
+  /** VpcUid信息 */
+  VpcUid?: number | null;
+  /** SubnetUid 信息 */
+  SubnetUid?: number | null;
+  /** 可用ip数量 */
+  AvailableIpAddressCount?: number | null;
 }
 
 /** 可视化节点配置 */
@@ -1084,6 +1290,62 @@ declare interface CreateLogstashInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateServerlessInstanceRequest {
+  /** 可用区 */
+  Zone: string;
+  /** 私有网络ID */
+  VpcId: string;
+  /** 子网ID */
+  SubnetId: string;
+  /** 索引名，需以-AppId结尾 */
+  IndexName: string;
+  /** 创建的索引元数据JSON，如mappings、settings */
+  IndexMetaJson?: string;
+  /** 创建索引的空间ID */
+  SpaceId?: string;
+  /** 创建索引的用户名 */
+  Username?: string;
+  /** 创建索引的密码 */
+  Password?: string;
+  /** 创建数据接入 */
+  ServerlessDi?: ServerlessDi;
+  /** 是否自行添加白名单ip */
+  AutoGetIp?: number;
+  /** 标签信息 */
+  TagList?: TagInfo[];
+  /** kibana公网白名单 */
+  KibanaWhiteIpList?: string[];
+}
+
+declare interface CreateServerlessInstanceResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 订单号 */
+  DealName?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateServerlessSpaceV2Request {
+  /** vpc信息 */
+  VpcInfo: VpcInfo[];
+  /** 索引空间名 */
+  SpaceName?: string;
+  /** 空间名称 */
+  Zone?: string;
+  /** 白名单列表 */
+  KibanaWhiteIpList?: string[];
+  /** 空间id */
+  ZoneId?: number;
+}
+
+declare interface CreateServerlessSpaceV2Response {
+  /** 空间ID */
+  SpaceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteIndexRequest {
   /** ES集群ID */
   InstanceId: string;
@@ -1132,6 +1394,28 @@ declare interface DeleteLogstashPipelinesRequest {
 }
 
 declare interface DeleteLogstashPipelinesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteServerlessInstanceRequest {
+  /** serverless实例ID */
+  InstanceId: string;
+}
+
+declare interface DeleteServerlessInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteServerlessSpaceUserRequest {
+  /** 空间的ID */
+  SpaceId: string;
+  /** 创建索引的用户名 */
+  Username: string;
+}
+
+declare interface DeleteServerlessSpaceUserResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1406,6 +1690,56 @@ declare interface DescribeLogstashPipelinesResponse {
   TotalCount: number;
   /** 管道列表 */
   LogstashPipelineList: LogstashPipelineInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServerlessSpaceUserRequest {
+  /** 空间的ID */
+  SpaceId: string;
+  /** 游标 */
+  Offset?: number;
+  /** 页条数 */
+  Limit?: number;
+  /** 用户名列表过滤 */
+  UserNames?: string[];
+  /** 用户类型 */
+  UserTypes?: number[];
+  /** 权限类型 */
+  PrivilegeTypes?: number[];
+}
+
+declare interface DescribeServerlessSpaceUserResponse {
+  /** 用户数组 */
+  ServerlessSpaceUsers?: ServerlessSpaceUser[];
+  /** 用户总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServerlessSpacesRequest {
+  /** 过滤的空间ID */
+  SpaceIds?: string[];
+  /** 过滤的空间名 */
+  SpaceNames?: string[];
+  /** 排序顺序，支持升序asc、降序desc */
+  Order?: string;
+  /** 排序字段，支持空间创建时间SpaceCreateTime */
+  OrderBy?: string;
+  /** vpcId信息数组 */
+  VpcIds?: string[];
+  /** 分页起始 */
+  Offset?: number;
+  /** 分页条数 */
+  Limit?: number;
+}
+
+declare interface DescribeServerlessSpacesResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** Serverless空间信息列表 */
+  ServerlessSpaces?: ServerlessSpace[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1822,6 +2156,44 @@ declare interface UpdateRequestTargetNodeTypesResponse {
   RequestId?: string;
 }
 
+declare interface UpdateServerlessInstanceRequest {
+  /** Serveless实例ID */
+  InstanceId: string;
+  /** 更新的索引元数据JSON，如mappings、settings */
+  UpdateMetaJson?: string;
+  /** 实例访问密码 */
+  Password?: string;
+  /** 开启kibana内网访问，如OPEN、CLOSE */
+  KibanaPrivateAccess?: string;
+  /** 开启kibana外网访问，如OPEN、CLOSE */
+  KibanaPublicAccess?: string;
+  /** 访问控制列表 */
+  KibanaPublicAcl?: KibanaPublicAcl;
+}
+
+declare interface UpdateServerlessInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateServerlessSpaceRequest {
+  /** Serveless索引空间ID */
+  SpaceId: string;
+  /** Serveless索引空间名 */
+  SpaceName?: string;
+  /** kibana内网开关 */
+  KibanaPrivateAccess?: string;
+  /** kibana公网开关 */
+  KibanaPublicAccess?: string;
+  /** kibana公网白名单 */
+  KibanaPublicAcl?: EsAcl;
+}
+
+declare interface UpdateServerlessSpaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1877,6 +2249,10 @@ declare interface Es {
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** 创建Logstash实例 {@link CreateLogstashInstanceRequest} {@link CreateLogstashInstanceResponse} */
   CreateLogstashInstance(data: CreateLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogstashInstanceResponse>;
+  /** 创建Serverless索引 {@link CreateServerlessInstanceRequest} {@link CreateServerlessInstanceResponse} */
+  CreateServerlessInstance(data: CreateServerlessInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessInstanceResponse>;
+  /** 创建Serverless索引项目空间(new) {@link CreateServerlessSpaceV2Request} {@link CreateServerlessSpaceV2Response} */
+  CreateServerlessSpaceV2(data: CreateServerlessSpaceV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessSpaceV2Response>;
   /** 删除索引 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
   /** 销毁ES集群实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
@@ -1885,6 +2261,10 @@ declare interface Es {
   DeleteLogstashInstance(data: DeleteLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashInstanceResponse>;
   /** 删除Logstash管道 {@link DeleteLogstashPipelinesRequest} {@link DeleteLogstashPipelinesResponse} */
   DeleteLogstashPipelines(data: DeleteLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashPipelinesResponse>;
+  /** 删除Serverless索引 {@link DeleteServerlessInstanceRequest} {@link DeleteServerlessInstanceResponse} */
+  DeleteServerlessInstance(data: DeleteServerlessInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessInstanceResponse>;
+  /** 删除Serverless空间子用户 {@link DeleteServerlessSpaceUserRequest} {@link DeleteServerlessSpaceUserResponse} */
+  DeleteServerlessSpaceUser(data: DeleteServerlessSpaceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessSpaceUserResponse>;
   /** 查询智能运维诊断结果报告 {@link DescribeDiagnoseRequest} {@link DescribeDiagnoseResponse} */
   DescribeDiagnose(data: DescribeDiagnoseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseResponse>;
   /** 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
@@ -1907,6 +2287,10 @@ declare interface Es {
   DescribeLogstashInstances(data?: DescribeLogstashInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstancesResponse>;
   /** 获取Logstash实例管道列表 {@link DescribeLogstashPipelinesRequest} {@link DescribeLogstashPipelinesResponse} */
   DescribeLogstashPipelines(data: DescribeLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashPipelinesResponse>;
+  /** 查看Serverless空间子用户 {@link DescribeServerlessSpaceUserRequest} {@link DescribeServerlessSpaceUserResponse} */
+  DescribeServerlessSpaceUser(data: DescribeServerlessSpaceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpaceUserResponse>;
+  /** 获取Serverless索引空间列表 {@link DescribeServerlessSpacesRequest} {@link DescribeServerlessSpacesResponse} */
+  DescribeServerlessSpaces(data?: DescribeServerlessSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpacesResponse>;
   /** 查询集群视图 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
   /** 智能运维诊断集群 {@link DiagnoseInstanceRequest} {@link DiagnoseInstanceResponse} */
@@ -1951,6 +2335,10 @@ declare interface Es {
   UpdatePlugins(data: UpdatePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePluginsResponse>;
   /** 更新接收客户端请求的节点类型 {@link UpdateRequestTargetNodeTypesRequest} {@link UpdateRequestTargetNodeTypesResponse} */
   UpdateRequestTargetNodeTypes(data: UpdateRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRequestTargetNodeTypesResponse>;
+  /** 更新Serverless索引 {@link UpdateServerlessInstanceRequest} {@link UpdateServerlessInstanceResponse} */
+  UpdateServerlessInstance(data: UpdateServerlessInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServerlessInstanceResponse>;
+  /** 更新Serverless索引空间 {@link UpdateServerlessSpaceRequest} {@link UpdateServerlessSpaceResponse} */
+  UpdateServerlessSpace(data: UpdateServerlessSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServerlessSpaceResponse>;
   /** 升级ES集群版本 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
   /** 升级ES商业特性 {@link UpgradeLicenseRequest} {@link UpgradeLicenseResponse} */
