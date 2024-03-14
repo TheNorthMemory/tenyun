@@ -236,7 +236,7 @@ declare interface DBEndpointInfo {
 
 /** 数据库信息 */
 declare interface DBInfo {
-  /** 表示节点角色，针对分布式数据库，如mongodb中的mongos节点 */
+  /** 表示节点角色，针对分布式数据库，如mongodb中的mongos节点。如数据库是tdsql，枚举值为：proxy、set */
   Role?: string | null;
   /** 内核版本，针对mariadb的不同内核版本等 */
   DbKernel?: string | null;
@@ -276,6 +276,8 @@ declare interface DBInfo {
   TmpSecretKey?: string | null;
   /** 临时Token，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195 */
   TmpToken?: string | null;
+  /** tdsql分片id。tdsql set节点必填 */
+  SetId?: string | null;
 }
 
 /** 迁移对象信息，在配置库表视图等对象信息时大小写敏感 */
@@ -500,7 +502,7 @@ declare interface DynamicOptions {
 declare interface Endpoint {
   /** 地域英文名，如：ap-guangzhou */
   Region?: string | null;
-  /** tdsql mysql版的节点类型，枚举值为proxy、set */
+  /** tdsql mysql版的节点类型，枚举值为proxy、set。tdsqlmysql必填 */
   Role?: string | null;
   /** 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql */
   DbKernel?: string | null;

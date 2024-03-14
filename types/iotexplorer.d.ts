@@ -316,6 +316,22 @@ declare interface InstanceDetail {
   Description?: string | null;
   /** 实例状态 */
   Status?: number | null;
+  /** 消息上下行配置TPS */
+  UpDownTPS?: number | null;
+  /** 当前消息上下行TPS */
+  UpDownCurrentTPS?: number | null;
+  /** 消息转发配置TPS */
+  ForwardTPS?: number | null;
+  /** 消息转发当前TPS */
+  ForwardCurrentTPS?: number | null;
+  /** 实例单元数 */
+  CellNum?: number | null;
+  /** 实例Tag */
+  BillingTag?: string | null;
+  /** 每日消息数 */
+  EverydayFreeMessageCount?: number | null;
+  /** 最大在线设备数 */
+  MaxDeviceOnlineCount?: number | null;
 }
 
 /** LoRa自定义频点信息 */

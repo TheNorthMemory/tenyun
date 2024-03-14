@@ -1398,7 +1398,7 @@ declare interface AudioTemplateInfoForUpdate {
   Bitrate?: number | null;
   /** 音频流的采样率，可选值：320004410048000单位：Hz。 */
   SampleRate?: number | null;
-  /** 音频通道方式，可选值：1：单通道2：双通道6：立体声当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。 */
+  /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。 */
   AudioChannel?: number | null;
   /** 指定输出要保留的音频轨道。默认是全部保留源的。 */
   StreamSelects?: number[] | null;

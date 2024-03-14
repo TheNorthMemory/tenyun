@@ -64,12 +64,46 @@ declare interface ClusterView {
   SearchableSnapshotCosAppId: string | null;
 }
 
+/** 普通索引信息列表 */
+declare interface CommonIndexInfo {
+  /** 普通索引名 */
+  IndexName?: string | null;
+  /** 分片状态 */
+  IsShardComplete?: number | null;
+}
+
 /** ES cos自动备份信息 */
 declare interface CosBackup {
   /** 是否开启cos自动备份 */
   IsAutoBackup: boolean;
   /** 自动备份执行时间（精确到小时）, e.g. "22:00" */
   BackupTime: string;
+}
+
+/** 无 */
+declare interface CosSnapShotInfo {
+  /** cos 桶名 */
+  CosBucket?: string | null;
+  /** base path */
+  BasePath?: string | null;
+  /** 快照名 */
+  SnapshotName?: string | null;
+  /** 状态 */
+  State?: string | null;
+  /** 快照版本 */
+  Version?: string | null;
+  /** 普通索引信息列表 */
+  CommonIndexArr?: CommonIndexInfo[] | null;
+  /** 自治索引信息列表 */
+  DataStreamArr?: DataStreamInfo[] | null;
+}
+
+/** 自治索引信息 */
+declare interface DataStreamInfo {
+  /** 自治索引名 */
+  DataStreamName?: string | null;
+  /** 分片状态 */
+  IsShardComplete?: number | null;
 }
 
 /** 插件信息 */
@@ -1142,6 +1176,58 @@ declare interface ZoneDetail {
   SubnetId: string;
 }
 
+declare interface CheckMigrateIndexMetaDataRequest {
+  /** 索引 id */
+  ServerlessId: string;
+  /** 快照名 */
+  Snapshot: string;
+  /** Cos桶名 */
+  CosBucket?: string;
+  /** BasePath路径 */
+  BasePath?: string;
+  /** 云上集群名 */
+  ClusterInstanceId?: string;
+  /** 普通索引名列表 */
+  CommonIndexArr?: string[];
+  /** 自治索引名列表 */
+  DataStreamArr?: string[];
+}
+
+declare interface CheckMigrateIndexMetaDataResponse {
+  /** 不存在于目标索引时间字段相同的字段 */
+  MappingTimeFieldCheckFailedIndexArr?: string[];
+  /** @timestamp不为date类型，与目标索引时间字段冲突 */
+  MappingTimeTypeCheckFailedIndexArr?: string[];
+  /** 索引的创建时间不在 serverless的存储周期内 */
+  SettingCheckFailedIndexArr?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCosMigrateToServerlessInstanceRequest {
+  /** 快照名 */
+  Snapshot: string;
+  /** 索引 id */
+  ServerlessId: string;
+  /** cos 桶名 */
+  CosBucket?: string;
+  /** BasePath 路径 */
+  BasePath?: string;
+  /** 云上集群 id */
+  ClusterInstanceId?: string;
+  /** 待迁移普通索引名列表 */
+  CommonIndexArr?: string[];
+  /** 待迁移自治索引名列表 */
+  DataStreamArr?: string[];
+}
+
+declare interface CreateCosMigrateToServerlessInstanceResponse {
+  /** 迁移 taskid */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateIndexRequest {
   /** ES集群ID */
   InstanceId: string;
@@ -1744,6 +1830,24 @@ declare interface DescribeServerlessSpacesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserCosSnapshotListRequest {
+  /** cos桶名 */
+  CosBucket?: string;
+  /** bucket 桶下的备份路径 */
+  BasePath?: string;
+  /** 云上集群迁移集群名 */
+  ClusterInstanceId?: string;
+}
+
+declare interface DescribeUserCosSnapshotListResponse {
+  /** cos 快照信息列表 */
+  CosSnapshotInfoList?: CosSnapShotInfo[];
+  /** cos 快照数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeViewsRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -2243,6 +2347,10 @@ declare interface UpgradeLicenseResponse {
 /** {@link Es Elasticsearch Service} */
 declare interface Es {
   (): Versions;
+  /** 检查cos迁移索引元数据 {@link CheckMigrateIndexMetaDataRequest} {@link CheckMigrateIndexMetaDataResponse} */
+  CheckMigrateIndexMetaData(data: CheckMigrateIndexMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckMigrateIndexMetaDataResponse>;
+  /** cos迁移流程 {@link CreateCosMigrateToServerlessInstanceRequest} {@link CreateCosMigrateToServerlessInstanceResponse} */
+  CreateCosMigrateToServerlessInstance(data: CreateCosMigrateToServerlessInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosMigrateToServerlessInstanceResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
   CreateIndex(data: CreateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIndexResponse>;
   /** 创建ES集群实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
@@ -2291,6 +2399,8 @@ declare interface Es {
   DescribeServerlessSpaceUser(data: DescribeServerlessSpaceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpaceUserResponse>;
   /** 获取Serverless索引空间列表 {@link DescribeServerlessSpacesRequest} {@link DescribeServerlessSpacesResponse} */
   DescribeServerlessSpaces(data?: DescribeServerlessSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpacesResponse>;
+  /** 查询快照信息接口 {@link DescribeUserCosSnapshotListRequest} {@link DescribeUserCosSnapshotListResponse} */
+  DescribeUserCosSnapshotList(data?: DescribeUserCosSnapshotListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCosSnapshotListResponse>;
   /** 查询集群视图 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
   /** 智能运维诊断集群 {@link DiagnoseInstanceRequest} {@link DiagnoseInstanceResponse} */

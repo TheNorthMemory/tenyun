@@ -2738,6 +2738,16 @@ declare interface DescribeBillingSpecsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBuildInImagesRequest {
+}
+
+declare interface DescribeBuildInImagesResponse {
+  /** 内置镜像详情列表 */
+  BuildInImageInfos?: ImageInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDatasetDetailStructuredRequest {
   /** 数据集ID */
   DatasetId: string;
@@ -4407,6 +4417,8 @@ declare interface Tione {
   DescribeBillingSpecs(data: DescribeBillingSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsResponse>;
   /** 查询计费项价格 {@link DescribeBillingSpecsPriceRequest} {@link DescribeBillingSpecsPriceResponse} */
   DescribeBillingSpecsPrice(data: DescribeBillingSpecsPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsPriceResponse>;
+  /** 获取内置镜像列表 {@link DescribeBuildInImagesRequest} {@link DescribeBuildInImagesResponse} */
+  DescribeBuildInImages(data?: DescribeBuildInImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildInImagesResponse>;
   /** 查询结构化数据集详情 {@link DescribeDatasetDetailStructuredRequest} {@link DescribeDatasetDetailStructuredResponse} */
   DescribeDatasetDetailStructured(data: DescribeDatasetDetailStructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailStructuredResponse>;
   /** 查询非结构化数据集详情 {@link DescribeDatasetDetailUnstructuredRequest} {@link DescribeDatasetDetailUnstructuredResponse} */

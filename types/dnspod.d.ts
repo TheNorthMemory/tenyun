@@ -468,6 +468,22 @@ declare interface LineInfo {
   LineId: string;
 }
 
+/** 域名解析记录线路信息 */
+declare interface LineItem {
+  /** 解析线路名称。 */
+  LineName?: string;
+  /** 解析线路 ID。 */
+  LineId?: string | null;
+  /** 当前线路在当前域名下是否可用。 */
+  Useful?: boolean;
+  /** 当前线路最低套餐等级要求。 */
+  Grade?: string | null;
+  /** 当前线路分类下的子线路列表。 */
+  SubGroup?: LineItem[] | null;
+  /** 自定义线路分组内包含的线路。 */
+  Lines?: string[] | null;
+}
+
 /** 域名锁定信息 */
 declare interface LockInfo {
   /** 域名 ID */
@@ -1061,6 +1077,8 @@ declare interface CreateRecordRequest {
   Status?: string;
   /** 备注 */
   Remark?: string;
+  /** 开启DNSSEC时，强制添加CNAME/URL记录 */
+  DnssecConflictMode?: string;
 }
 
 declare interface CreateRecordResponse {
@@ -1552,6 +1570,20 @@ declare interface DescribeRecordGroupListRequest {
 declare interface DescribeRecordGroupListResponse {
   /** 分组列表 */
   GroupList?: RecordGroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordLineCategoryListRequest {
+  /** 要查询线路列表的域名。 */
+  Domain: string;
+  /** 要查询线路列表的域名 ID。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口 DescribeDomainList 查到所有的 Domain 以及 DomainId。 */
+  DomainId?: number;
+}
+
+declare interface DescribeRecordLineCategoryListResponse {
+  /** 按分类返回的线路列表。 */
+  LineList?: LineItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2055,6 +2087,8 @@ declare interface ModifyRecordRequest {
   Status?: string;
   /** 记录的备注信息。传空删除备注。 */
   Remark?: string;
+  /** 开启DNSSEC时，强制将其它记录修改为CNAME/URL记录 */
+  DnssecConflictMode?: string;
 }
 
 declare interface ModifyRecordResponse {
@@ -2279,6 +2313,8 @@ declare interface Dnspod {
   DescribeRecordFilterList(data: DescribeRecordFilterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordFilterListResponse>;
   /** 查询解析记录分组列表 {@link DescribeRecordGroupListRequest} {@link DescribeRecordGroupListResponse} */
   DescribeRecordGroupList(data: DescribeRecordGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordGroupListResponse>;
+  /** 按分类返回线路列表 {@link DescribeRecordLineCategoryListRequest} {@link DescribeRecordLineCategoryListResponse} */
+  DescribeRecordLineCategoryList(data: DescribeRecordLineCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordLineCategoryListResponse>;
   /** 获取等级允许的线路 {@link DescribeRecordLineListRequest} {@link DescribeRecordLineListResponse} */
   DescribeRecordLineList(data: DescribeRecordLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordLineListResponse>;
   /** 获取域名的解析记录列表 {@link DescribeRecordListRequest} {@link DescribeRecordListResponse} */

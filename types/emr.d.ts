@@ -2057,6 +2057,12 @@ declare interface DescribeHiveQueriesRequest {
   Offset: number;
   /** 分页大小，合法范围[1,100] */
   Limit: number;
+  /** 执行状态,ERROR等 */
+  State?: string[];
+  /** 结束时间大于的时间点 */
+  EndTimeGte?: number;
+  /** 结束时间小于时间点 */
+  EndTimeLte?: number;
 }
 
 declare interface DescribeHiveQueriesResponse {
@@ -2079,6 +2085,12 @@ declare interface DescribeImpalaQueriesRequest {
   Offset: number;
   /** 分页大小，合法范围[1,100] */
   Limit: number;
+  /** 执行状态，CREATED、INITIALIZED、COMPILED、RUNNING、FINISHED、EXCEPTION */
+  State?: string[];
+  /** 结束时间大于的时间点 */
+  EndTimeGte?: number;
+  /** 结束时间小于的时间点 */
+  EndTimeLte?: number;
 }
 
 declare interface DescribeImpalaQueriesResponse {

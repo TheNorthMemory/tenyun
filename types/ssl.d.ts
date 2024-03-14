@@ -2155,7 +2155,7 @@ declare interface ModifyCertificateResubmitRequest {
 
 declare interface ModifyCertificateResubmitResponse {
   /** 证书ID。 */
-  CertificateId: string;
+  CertificateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

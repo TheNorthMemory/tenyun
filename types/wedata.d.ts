@@ -4432,6 +4432,12 @@ declare interface TableLineageInfo {
   EngineType?: string | null;
   /** 表类型 */
   TableType?: string | null;
+  /** datasourceName */
+  DatasourceName?: string | null;
+  /** DatabaseName */
+  DatabaseName?: string | null;
+  /** DatabaseId */
+  DatabaseId?: string | null;
 }
 
 /** 表的元数据信息 */
@@ -4536,6 +4542,12 @@ declare interface TableMeta {
   IsView?: boolean | null;
   /** 存储位置 */
   Location?: string | null;
+  /** 判断是否是分区表1 是 0否 */
+  IsPartitionTable?: number | null;
+  /** 分区字段 key */
+  PartitionColumns?: string[] | null;
+  /** 生命周期-分区保留天数【分区保留策略时有效】 */
+  PartitionExpireDays?: number | null;
 }
 
 /** 按天更新的表的资产评分 */
