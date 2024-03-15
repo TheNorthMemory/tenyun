@@ -1577,9 +1577,9 @@ declare interface ProxySpec {
 /** proxy节点可用区内个数 */
 declare interface ProxyZone {
   /** proxy节点可用区 */
-  ProxyNodeZone?: string | null;
+  ProxyNodeZone?: string;
   /** proxy节点数量 */
-  ProxyNodeCount?: number | null;
+  ProxyNodeCount?: number;
 }
 
 /** 查询过滤器 */
@@ -1880,6 +1880,18 @@ declare interface TradePrice {
   ChargeUnit: string;
 }
 
+/** 添加实例或者变配实例时同步升级proxy. */
+declare interface UpgradeProxy {
+  /** cpu */
+  Cpu: number;
+  /** memory */
+  Mem: number;
+  /** 代理节点信息 */
+  ProxyZones: ProxyZone[];
+  /** 重新负载均衡 */
+  ReloadBalance?: string;
+}
+
 /** 用户主机权限 */
 declare interface UserHostPrivilege {
   /** 授权用户 */
@@ -1963,6 +1975,8 @@ declare interface AddInstancesRequest {
   InstanceParams?: ModifyParamItem[];
   /** 安全组ID，新建只读实例时可以指定安全组。 */
   SecurityGroupIds?: string[];
+  /** proxy同步升级 */
+  UpgradeProxy?: UpgradeProxy;
 }
 
 declare interface AddInstancesResponse {
@@ -4487,6 +4501,8 @@ declare interface UpgradeInstanceRequest {
   DealMode?: number;
   /** NormalUpgrade：普通变配，FastUpgrade：极速变配，若变配过程判断会造成闪断，变配流程会终止。 */
   UpgradeMode?: string;
+  /** proxy同步升级 */
+  UpgradeProxy?: UpgradeProxy;
 }
 
 declare interface UpgradeInstanceResponse {

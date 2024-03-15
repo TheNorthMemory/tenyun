@@ -159,9 +159,9 @@ declare interface QueryAntiFraudVipRequest {
   BankCardNumber?: string;
   /** 用户请求来源 IP(五选二) */
   UserIp?: string;
-  /** 国际移动设备识别码(五选二) */
+  /** 国际移动设备识别码，和Idfa同时传入时，只看作一个关键入参(五选二) */
   Imei?: string;
-  /** ios 系统广告标示符(五选二) */
+  /** ios 系统广告标示符，和Imei同时传入时，只看作一个关键入参(五选二) */
   Idfa?: string;
   /** 业务场景 ID，需要找技术对接 */
   Scene?: string;
@@ -193,7 +193,7 @@ declare interface QueryAntiFraudVipRequest {
   Mac?: string;
   /** 国际移动用户识别码 */
   Imsi?: string;
-  /** 姓名加密类型0：不加密（默认值）1：md52：sha2563：SM3 */
+  /** 姓名加密类型0：不加密（默认值）1：md5 */
   NameCryptoType?: string;
 }
 
@@ -202,7 +202,7 @@ declare interface QueryAntiFraudVipResponse {
   Found?: number;
   /** 表示该条Id能否查到：1为能查到，-1为查不到 */
   IdFound?: number;
-  /** 0~100;值越高 欺诈可能性越大 */
+  /** 0~100;值越高 欺诈可能性越大（注：该字段真实类型为有符号整型） */
   RiskScore?: number;
   /** 扩展字段，对风险类型的说明 */
   RiskInfo?: RiskDetail[] | null;

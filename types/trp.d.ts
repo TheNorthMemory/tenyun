@@ -352,6 +352,10 @@ declare interface Quota {
   ChainQuota?: number | null;
   /** 风控配额 */
   RiskQuota?: number | null;
+  /** AI文字数量 */
+  AigcTextQuota?: number | null;
+  /** AI图片数量 */
+  AigcImageQuota?: number | null;
   /** 溯源类型 */
   TrackType?: number | null;
   /** 开通版本 lite:轻量版, basic:基础版, standard:标准版 */

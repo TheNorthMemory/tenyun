@@ -42,6 +42,14 @@ declare interface ApplicationStatics {
   CountApps: number;
 }
 
+/** 通用的参数 */
+declare interface Arg {
+  /** key */
+  Key?: string | null;
+  /** 值列表 */
+  Values?: string[] | null;
+}
+
 /** 弹性扩缩容记录 */
 declare interface AutoScaleRecord {
   /** 扩缩容规则名。 */
@@ -1434,6 +1442,14 @@ declare interface Step {
   User?: string;
 }
 
+/** 停止服务时的参数 */
+declare interface StopParams {
+  /** 安全模式：safe默认模式：default */
+  StopPolicy?: string;
+  /** 线程数 */
+  ThreadCount?: number;
+}
+
 /** 重启/停止/启动服务/监控的配置 */
 declare interface StrategyConfig {
   /** 0:关闭滚动重启1:开启滚动启动 */
@@ -1444,6 +1460,8 @@ declare interface StrategyConfig {
   TimeWait?: number | null;
   /** 操作失败处理策略，0:失败阻塞, 1:失败自动跳过 */
   DealOnFail?: number | null;
+  /** 指令需要指定的参数 */
+  Args?: Arg[] | null;
 }
 
 /** 子网信息 */
@@ -2719,6 +2737,8 @@ declare interface StartStopServiceOrMonitorRequest {
   OpScope: OpScope;
   /** 操作策略 */
   StrategyConfig?: StrategyConfig;
+  /** 暂停服务时用的参数 */
+  StopParams?: StopParams;
 }
 
 declare interface StartStopServiceOrMonitorResponse {

@@ -3009,7 +3009,7 @@ declare interface DescribeCdnDomainLogsResponse {
 }
 
 declare interface DescribeCdnIpRequest {
-  /** 需要查询的 IP 列表 */
+  /** 需要查询的 IP 列表，单次可支持1-20个IP查询。 */
   Ips: string[];
 }
 
