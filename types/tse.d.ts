@@ -334,6 +334,230 @@ declare interface CloudNativeAPIGatewayVpcConfig {
   SubnetId?: string | null;
 }
 
+/** 配置文件 */
+declare interface ConfigFile {
+  /** 配置文件id */
+  Id?: number | null;
+  /** 配置文件名称 */
+  Name?: string | null;
+  /** 配置文件命名空间 */
+  Namespace?: string | null;
+  /** 配置文件组 */
+  Group?: string | null;
+  /** 配置文件内容 */
+  Content?: string | null;
+  /** 配置文件格式 */
+  Format?: string | null;
+  /** 配置文件注释 */
+  Comment?: string | null;
+  /** 配置文件状态 */
+  Status?: string | null;
+  /** 配置文件标签数组 */
+  Tags?: ConfigFileTag[] | null;
+  /** 配置文件创建时间 */
+  CreateTime?: string | null;
+  /** 配置文件创建者 */
+  CreateBy?: string | null;
+  /** 配置文件修改时间 */
+  ModifyTime?: string | null;
+  /** 配置文件修改者 */
+  ModifyBy?: string | null;
+  /** 配置文件发布时间 */
+  ReleaseTime?: string | null;
+  /** 配置文件发布者 */
+  ReleaseBy?: string | null;
+}
+
+/** 配置文件组 */
+declare interface ConfigFileGroup {
+  /** 配置文件组id */
+  Id?: number | null;
+  /** 配置文件组名称 */
+  Name?: string | null;
+  /** 命名空间 */
+  Namespace?: string | null;
+  /** 备注 */
+  Comment?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 创建者 */
+  CreateBy?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 修改者 */
+  ModifyBy?: string | null;
+  /** 文件数 */
+  FileCount?: number | null;
+  /** 关联用户，link_users */
+  UserIds?: string[] | null;
+  /** 组id，link_groups */
+  GroupIds?: string[] | null;
+  /** remove_link_users */
+  RemoveUserIds?: string[] | null;
+  /** remove_link_groups */
+  RemoveGroupIds?: string[] | null;
+  /** 是否可编辑 */
+  Editable?: boolean | null;
+  /** 归属者 */
+  Owner?: string | null;
+  /** 部门 */
+  Department?: string | null;
+  /** 业务 */
+  Business?: string | null;
+  /** 配置文件组标签 */
+  ConfigFileGroupTags?: ConfigFileGroupTag[] | null;
+}
+
+/** 配置文件标签 */
+declare interface ConfigFileGroupTag {
+  /** key-value 键 */
+  Key?: string | null;
+  /** key-value 值 */
+  Value?: string | null;
+}
+
+/** 发布详情 */
+declare interface ConfigFilePublishInfo {
+  /** 发布名称 */
+  ReleaseName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 发布组 */
+  Group?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 内容 */
+  Content?: string;
+  /** 描述 */
+  Comment?: string;
+  /** 格式 */
+  Format?: string;
+  /** 创建者 */
+  CreateBy?: string;
+  /** 修改者 */
+  ModifyBy?: string;
+  /** 标签 */
+  Tags?: ConfigFileTag[];
+}
+
+/** 配置文件发布 */
+declare interface ConfigFileRelease {
+  /** 配置文件发布id */
+  Id?: number | null;
+  /** 配置文件发布名称 */
+  Name?: string | null;
+  /** 配置文件发布命名空间 */
+  Namespace?: string | null;
+  /** 配置文件发布组 */
+  Group?: string | null;
+  /** 配置文件发布文件名称 */
+  FileName?: string | null;
+  /** 配置文件发布内容 */
+  Content?: string | null;
+  /** 配置文件发布注释 */
+  Comment?: string | null;
+  /** 配置文件发布Md5 */
+  Md5?: string | null;
+  /** 配置文件发布版本 */
+  Version?: number | null;
+  /** 配置文件发布创建时间 */
+  CreateTime?: string | null;
+  /** 配置文件发布创建者 */
+  CreateBy?: string | null;
+  /** 配置文件发布修改时间 */
+  ModifyTime?: string | null;
+  /** 配置文件发布修改者 */
+  ModifyBy?: string | null;
+  /** 发布描述 */
+  ReleaseDescription?: string | null;
+  /** 是否生效 */
+  Active?: boolean | null;
+  /** 格式 */
+  Format?: string | null;
+}
+
+/** 配置发布删除 */
+declare interface ConfigFileReleaseDeletion {
+  /** 命名空间 */
+  Namespace?: string | null;
+  /** 配置分组 */
+  Group?: string | null;
+  /** 文件名称 */
+  FileName?: string | null;
+  /** 发布版本 */
+  ReleaseVersion?: string | null;
+}
+
+/** 配置文件发布历史 */
+declare interface ConfigFileReleaseHistory {
+  /** 配置文件发布历史记录id */
+  Id?: number | null;
+  /** 配置文件发布历史名称 */
+  Name?: string | null;
+  /** 配置文件发布历史命名空间 */
+  Namespace?: string | null;
+  /** 配置文件发布历史组 */
+  Group?: string | null;
+  /** 配置文件发布历史名称 */
+  FileName?: string | null;
+  /** 配置文件发布历史内容 */
+  Content?: string | null;
+  /** 配置文件发布历史格式 */
+  Format?: string | null;
+  /** 配置文件发布历史注释 */
+  Comment?: string | null;
+  /** 配置文件发布历史Md5 */
+  Md5?: string | null;
+  /** 配置文件发布历史类型 */
+  Type?: string | null;
+  /** 配置文件发布历史状态 */
+  Status?: string | null;
+  /** 配置文件发布历史标签组 */
+  Tags?: ConfigFileTag[] | null;
+  /** 配置文件发布创建时间 */
+  CreateTime?: string | null;
+  /** 配置文件发布创建者 */
+  CreateBy?: string | null;
+  /** 配置文件发布修改时间 */
+  ModifyTime?: string | null;
+  /** 配置文件发布修改者 */
+  ModifyBy?: string | null;
+  /** 发布描述 */
+  ReleaseDescription?: string | null;
+  /** 原因，用于失败时原因展示 */
+  ReleaseReason?: string | null;
+}
+
+/** 配置文件标签 */
+declare interface ConfigFileTag {
+  /** key-value 键 */
+  Key?: string | null;
+  /** key-value 值 */
+  Value?: string | null;
+}
+
+/** 配置文件模板 */
+declare interface ConfigFileTemplate {
+  /** 配置文件模板id */
+  Id?: number | null;
+  /** 配置文件模板名称 */
+  Name?: string | null;
+  /** 配置文件模板内容 */
+  Content?: string | null;
+  /** 配置文件模板格式 */
+  Format?: string | null;
+  /** 配置文件模板注释 */
+  Comment?: string | null;
+  /** 配置文件模板创建时间 */
+  CreateTime?: string | null;
+  /** 配置文件模板创建者 */
+  CreateBy?: string | null;
+  /** 配置文件模板修改时间 */
+  ModifyTime?: string | null;
+  /** 配置文件模板修改者 */
+  ModifyBy?: string | null;
+}
+
 /** 创建云原生API网关响应结果。 */
 declare interface CreateCloudNativeAPIGatewayResult {
   /** 云原生API网关ID。 */
@@ -630,38 +854,66 @@ declare interface GatewayInstanceSchemeAndPorts {
   PortList?: number[] | null;
 }
 
+/** 服务别名结构信息 */
+declare interface GovernanceAlias {
+  /** 服务别名 */
+  Alias?: string;
+  /** 服务别名命名空间 */
+  AliasNamespace?: string;
+  /** 服务别名指向的服务名 */
+  Service?: string;
+  /** 服务别名指向的服务命名空间 */
+  Namespace?: string;
+  /** 服务别名的描述信息 */
+  Comment?: string | null;
+  /** 服务别名创建时间 */
+  CreateTime?: string | null;
+  /** 服务别名修改时间 */
+  ModifyTime?: string | null;
+  /** 服务别名ID */
+  Id?: string | null;
+  /** 该服务别名是否可以编辑 */
+  Editable?: boolean | null;
+}
+
 /** 治理中心实例信息。 */
 declare interface GovernanceInstance {
   /** 实例id。 */
-  Id: string;
+  Id?: string;
   /** 实例所在服务名。 */
-  Service: string;
+  Service?: string;
   /** 实例所在命名空间名。 */
-  Namespace: string;
+  Namespace?: string;
   /** 实例ip地址。 */
-  Host: string | null;
+  Host?: string | null;
   /** 实例端口信息。 */
-  Port: number | null;
+  Port?: number | null;
   /** 通信协议。 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 版本信息。 */
-  Version: string | null;
+  Version?: string | null;
   /** 负载均衡权重。 */
-  Weight: number | null;
+  Weight?: number | null;
   /** 是否开启健康检查。 */
-  EnableHealthCheck: boolean | null;
+  EnableHealthCheck?: boolean | null;
   /** 实例是否健康。 */
-  Healthy: boolean | null;
+  Healthy?: boolean | null;
   /** 实例是否隔离。 */
-  Isolate: boolean | null;
+  Isolate?: boolean | null;
   /** 实例创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 实例修改时间。 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 元数据数组。 */
-  Metadatas: Metadata[] | null;
+  Metadatas?: Metadata[] | null;
   /** 上报心跳间隔。 */
-  Ttl: number | null;
+  Ttl?: number | null;
+  /** 版本信息。 */
+  InstanceVersion?: string | null;
+  /** 状态信息 */
+  HealthStatus?: string | null;
+  /** 描述 */
+  Comment?: string | null;
 }
 
 /** 实例信息 */
@@ -718,6 +970,176 @@ declare interface GovernanceInstanceUpdate {
   Id?: string;
   /** 元数据信息。 */
   Metadatas?: Metadata[];
+}
+
+/** 服务契约接口定义 */
+declare interface GovernanceInterfaceDescription {
+  /** 契约接口ID */
+  ID?: string | null;
+  /** 方法名称 */
+  Method?: string | null;
+  /** 路径/接口名称 */
+  Path?: string | null;
+  /** 内容 */
+  Content?: string | null;
+  /** 创建来源 */
+  Source?: string | null;
+  /** 信息摘要 */
+  Revision?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 接口名称 */
+  Name?: string | null;
+}
+
+/** 治理中心命名空间 */
+declare interface GovernanceNamespace {
+  /** 命名空间名称。 */
+  Name?: string | null;
+  /** 命名空间描述信息。 */
+  Comment?: string | null;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+  /** 修改时间。 */
+  ModifyTime?: string | null;
+  /** 命名空间下总服务数据量 */
+  TotalServiceCount?: number | null;
+  /** 命名空间下总健康实例数量 */
+  TotalHealthInstanceCount?: number | null;
+  /** 命名空间下总实例数量 */
+  TotalInstanceCount?: number | null;
+  /** 命名空间ID */
+  Id?: string | null;
+  /** 是否可以编辑 */
+  Editable?: boolean | null;
+  /** 可以操作此命名空间的用户ID列表 */
+  UserIds?: string[] | null;
+  /** 可以操作此命名空间的用户组ID列表 */
+  GroupIds?: string[] | null;
+  /** 移除可以操作此命名空间的用户ID列表 */
+  RemoveUserIds?: string[] | null;
+  /** 移除可以操作此命名空间的用户组ID列表 */
+  RemoveGroupIds?: string[] | null;
+}
+
+/** 治理中心命名空间输入参数 */
+declare interface GovernanceNamespaceInput {
+  /** 命名空间名。 */
+  Name: string;
+  /** 描述信息。 */
+  Comment?: string;
+  /** 新增的可以操作此命名空间的用户ID列表 */
+  UserIds?: string[];
+  /** 新增的可以操作此命名空间的用户组ID列表 */
+  GroupIds?: string[];
+  /** 移除可以操作此命名空间的用户ID列表 */
+  RemoveUserIds?: string[];
+  /** 移除可以操作此命名空间的用户组ID列表 */
+  RemoveGroupIds?: string[];
+}
+
+/** 治理中心服务信息。 */
+declare interface GovernanceService {
+  /** 服务名称。 */
+  Name?: string;
+  /** 命名空间名称。 */
+  Namespace?: string;
+  /** 元数据信息数组。 */
+  Metadatas?: Metadata[] | null;
+  /** 描述信息。 */
+  Comment?: string | null;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+  /** 修改时间。 */
+  ModifyTime?: string | null;
+  /** 服务所属部门。 */
+  Department?: string | null;
+  /** 服务所属业务。 */
+  Business?: string | null;
+  /** 健康服务实例数 */
+  HealthyInstanceCount?: number | null;
+  /** 服务实例总数 */
+  TotalInstanceCount?: number | null;
+  /** 服务ID */
+  Id?: string | null;
+  /** 是否可以编辑 */
+  Editable?: boolean | null;
+  /** 可以编辑该资源的用户ID */
+  UserIds?: string[] | null;
+  /** 可以编辑该资源的用户组ID */
+  GroupIds?: string[] | null;
+  /** 移除可以编辑该资源的用户ID */
+  RemoveUserIds?: string[] | null;
+  /** 移除可以编辑该资源的用户组ID */
+  RemoveGroupIds?: string[] | null;
+  /** 该服务对哪些命名空间可见 */
+  ExportTo?: string[] | null;
+  /** 该服务信息摘要签名 */
+  Revision?: string | null;
+}
+
+/** 服务契约定义 */
+declare interface GovernanceServiceContract {
+  /** 契约名称 */
+  Name: string | null;
+  /** 所属服务命名空间 */
+  Namespace: string | null;
+  /** 协议 */
+  Protocol: string | null;
+  /** 契约ID */
+  ID?: string | null;
+  /** 所属服务名称 */
+  Service?: string | null;
+  /** 版本 */
+  Version?: string | null;
+  /** 信息摘要 */
+  Revision?: string | null;
+  /** 额外内容描述 */
+  Content?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 契约接口列表 */
+  Interfaces?: GovernanceInterfaceDescription[] | null;
+}
+
+/** 服务契约版本信息 */
+declare interface GovernanceServiceContractVersion {
+  /** 契约版本 */
+  Version?: string | null;
+  /** 契约名称 */
+  Name?: string | null;
+  /** 唯一名称 */
+  Key?: string | null;
+}
+
+/** 治理中心服务入参 */
+declare interface GovernanceServiceInput {
+  /** 服务名。 */
+  Name: string;
+  /** 服务所属命名空间。 */
+  Namespace: string;
+  /** 服务描述信息。 */
+  Comment?: string;
+  /** 服务元数据。 */
+  Metadatas?: Metadata[];
+  /** 服务所属部门。 */
+  Department?: string;
+  /** 服务所属业务。 */
+  Business?: string;
+  /** 被添加进来可以操作此命名空间的用户ID列表 */
+  UserIds?: string[];
+  /** 被添加进来可以操作此命名空间的用户组ID列表 */
+  GroupIds?: string[];
+  /** 从操作此命名空间的用户组ID列表被移除的ID列表 */
+  RemoveUserIds?: string[];
+  /** 从可以操作此命名空间的用户组ID列表中被移除的ID列表 */
+  RemoveGroupIds?: string[];
+  /** 该服务对哪些命名空间可见 */
+  ExportTo?: string[];
 }
 
 /** 实例监听端口信息 */
@@ -1146,6 +1568,14 @@ declare interface QpsThreshold {
   Unit: string;
   /** 阈值 */
   Max: number;
+}
+
+/** 配置发布版本信息 */
+declare interface ReleaseVersion {
+  /** 名称 */
+  Name?: string | null;
+  /** 是否生效 */
+  Active?: boolean | null;
 }
 
 /** 路由 WAF 状态 */
@@ -1588,6 +2018,34 @@ declare interface CreateCloudNativeAPIGatewayServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateConfigFileGroupRequest {
+  /** tse 实例 id */
+  InstanceId: string;
+  /** 配置文件组实体 */
+  ConfigFileGroup: ConfigFileGroup;
+}
+
+declare interface CreateConfigFileGroupResponse {
+  /** 是否创建成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateConfigFileRequest {
+  /** TSE 实例id */
+  InstanceId: string;
+  /** 配置文件列表详情 */
+  ConfigFile: ConfigFile;
+}
+
+declare interface CreateConfigFileResponse {
+  /** 是否创建成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateEngineRequest {
   /** 引擎类型。参考值：- zookeeper- nacos- consul- apollo- eureka- polaris */
   EngineType: string;
@@ -1630,6 +2088,28 @@ declare interface CreateEngineResponse {
   RequestId?: string;
 }
 
+declare interface CreateGovernanceAliasRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 服务别名 */
+  Alias: string;
+  /** 服务别名命名空间 */
+  AliasNamespace: string;
+  /** 服务别名所指向的服务名 */
+  Service: string;
+  /** 服务别名所指向的命名空间 */
+  Namespace: string;
+  /** 服务别名描述 */
+  Comment?: string;
+}
+
+declare interface CreateGovernanceAliasResponse {
+  /** 创建是否成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateGovernanceInstancesRequest {
   /** tse实例id。 */
   InstanceId: string;
@@ -1639,7 +2119,35 @@ declare interface CreateGovernanceInstancesRequest {
 
 declare interface CreateGovernanceInstancesResponse {
   /** 创建是否成功。 */
-  Result: boolean;
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGovernanceNamespacesRequest {
+  /** tse 实例id。 */
+  InstanceId: string;
+  /** 命名空间信息。 */
+  GovernanceNamespaces: GovernanceNamespaceInput[];
+}
+
+declare interface CreateGovernanceNamespacesResponse {
+  /** 操作是否成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGovernanceServicesRequest {
+  /** tse 实例 id。 */
+  InstanceId: string;
+  /** 服务信息。 */
+  GovernanceServices: GovernanceServiceInput[];
+}
+
+declare interface CreateGovernanceServicesResponse {
+  /** 创建是否成功。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1664,6 +2172,20 @@ declare interface CreateNativeGatewayServerGroupRequest {
 declare interface CreateNativeGatewayServerGroupResponse {
   /** 网关分组创建信息 */
   Result?: CreateCloudNativeAPIGatewayServerGroupResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateOrUpdateConfigFileAndReleaseRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 配置文件列表详情 */
+  ConfigFilePublishInfo: ConfigFilePublishInfo;
+}
+
+declare interface CreateOrUpdateConfigFileAndReleaseResponse {
+  /** 操作是否成功 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1798,12 +2320,88 @@ declare interface DeleteCloudNativeAPIGatewayServiceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteConfigFileGroupRequest {
+  /** tse 实例 id。 */
+  InstanceId: string;
+  /** 命名空间 */
+  Namespace: string;
+  /** 组 */
+  Group: string;
+}
+
+declare interface DeleteConfigFileGroupResponse {
+  /** 是否删除成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteConfigFileReleasesRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 待删除配置发布详情 */
+  ConfigFileReleases: ConfigFileReleaseDeletion[];
+}
+
+declare interface DeleteConfigFileReleasesResponse {
+  /** 删除配置发布结果 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteConfigFilesRequest {
+  /** TSE实例id */
+  InstanceId: string;
+  /** 命名空间 */
+  Namespace: string;
+  /** 配置分组名称 */
+  Group: string;
+  /** 配置文件名称 */
+  Name: string;
+}
+
+declare interface DeleteConfigFilesResponse {
+  /** 修改是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteEngineRequest {
   /** 引擎实例 ID */
   InstanceId: string;
 }
 
 declare interface DeleteEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGovernanceAliasesRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 服务别名列表 */
+  GovernanceAliases: GovernanceAlias[];
+}
+
+declare interface DeleteGovernanceAliasesResponse {
+  /** 创建是否成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGovernanceInstancesByHostRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 要删除的服务实例信息。 */
+  GovernanceInstances: GovernanceInstanceUpdate[];
+}
+
+declare interface DeleteGovernanceInstancesByHostResponse {
+  /** 操作是否成功。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1817,7 +2415,35 @@ declare interface DeleteGovernanceInstancesRequest {
 
 declare interface DeleteGovernanceInstancesResponse {
   /** 操作是否成功。 */
-  Result: boolean;
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGovernanceNamespacesRequest {
+  /** tse 实例 id。 */
+  InstanceId: string;
+  /** 命名空间信息。 */
+  GovernanceNamespaces: GovernanceNamespaceInput[];
+}
+
+declare interface DeleteGovernanceNamespacesResponse {
+  /** 删除是否成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGovernanceServicesRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 服务信息。 */
+  GovernanceServices: GovernanceServiceInput[];
+}
+
+declare interface DeleteGovernanceServicesResponse {
+  /** 删除服务结果。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1844,6 +2470,20 @@ declare interface DeleteWafDomainsRequest {
 }
 
 declare interface DeleteWafDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllConfigFileTemplatesRequest {
+  /** TSE实例id */
+  InstanceId: string;
+}
+
+declare interface DescribeAllConfigFileTemplatesResponse {
+  /** 数据总数量 */
+  TotalCount?: number;
+  /** 配置文件模板列表 */
+  ConfigFileTemplates?: ConfigFileTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2084,6 +2724,220 @@ declare interface DescribeCloudNativeAPIGatewaysResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConfigFileGroupsRequest {
+  /** tse实例id */
+  InstanceId: string;
+  /** 根据命名空间过滤 */
+  Namespace?: string;
+  /** 根据配置文件组名过滤 */
+  Group?: string;
+  /** 根据配置文件组名过滤 */
+  FileName?: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeConfigFileGroupsResponse {
+  /** 列表总数量 */
+  TotalCount?: number;
+  /** 配置文件组列表 */
+  ConfigFileGroups?: ConfigFileGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigFileReleaseHistoriesRequest {
+  /** TSE实例id */
+  InstanceId: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 组 */
+  Group?: string;
+  /** 名称 */
+  Name?: string;
+  /** 发布历史记录id，用于分页优化，一般指定 EndId，就不用指定 Offset，否则分页可能不连续 */
+  EndId?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeConfigFileReleaseHistoriesResponse {
+  /** 数据总数量 */
+  TotalCount?: number;
+  /** 配置文件发布历史列表 */
+  ConfigFileReleaseHistories?: ConfigFileReleaseHistory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigFileReleaseRequest {
+  /** TSE实例id */
+  InstanceId: string;
+  /** 命名空间名称 */
+  Namespace: string;
+  /** 配置分组名称 */
+  Group: string;
+  /** 配置文件名称 */
+  Name: string;
+  /** 配置文件发布名称 */
+  ReleaseName?: string;
+}
+
+declare interface DescribeConfigFileReleaseResponse {
+  /** 配置文件发布详情 */
+  ConfigFileRelease?: ConfigFileRelease;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigFileReleaseVersionsRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 配置分组 */
+  Group?: string;
+  /** 文件名称 */
+  FileName?: string;
+}
+
+declare interface DescribeConfigFileReleaseVersionsResponse {
+  /** 版本信息 */
+  ReleaseVersions?: ReleaseVersion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigFileReleasesRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 条数 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 配置分组 */
+  Group?: string;
+  /** 文件名称 */
+  FileName?: string;
+  /** 只保护处于使用状态 */
+  OnlyUse?: boolean;
+  /** 发布名称 */
+  ReleaseName?: string;
+  /** 排序字段，mtime/version/name，默认version */
+  OrderField?: string;
+  /** 排序，asc/desc，默认 desc */
+  OrderDesc?: string;
+}
+
+declare interface DescribeConfigFileReleasesResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 发布列表 */
+  Releases?: ConfigFileRelease[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigFileRequest {
+  /** TSE实例id */
+  InstanceId: string;
+  /** 命名空间 */
+  Namespace: string;
+  /** 组 */
+  Group: string;
+  /** 名称 */
+  Name: string;
+}
+
+declare interface DescribeConfigFileResponse {
+  /** 配置文件 */
+  ConfigFile?: ConfigFile | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigFilesByGroupRequest {
+  /** TSE实例id */
+  InstanceId: string;
+  /** 命名空间名 */
+  Namespace: string;
+  /** 组名 */
+  Group: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeConfigFilesByGroupResponse {
+  /** 记录总数量 */
+  TotalCount?: number;
+  /** 配置文件列表 */
+  ConfigFiles?: ConfigFile[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigFilesRequest {
+  /** 命名空间名称 */
+  Namespace: string;
+  /** TSE实例id */
+  InstanceId?: string;
+  /** 组名 */
+  Group?: string;
+  /** 名称 */
+  Name?: string;
+  /** 标签列表 */
+  Tags?: ConfigFileTag[];
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeConfigFilesResponse {
+  /** 分页总数量 */
+  TotalCount?: number;
+  /** 配置文件列表 */
+  ConfigFiles?: ConfigFile[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGovernanceAliasesRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 服务别名所指向的服务名。 */
+  Service?: string;
+  /** 服务别名所指向的命名空间名。 */
+  Namespace?: string;
+  /** 服务别名。 */
+  Alias?: string;
+  /** 服务别名命名空间。 */
+  AliasNamespace?: string;
+  /** 服务别名描述。 */
+  Comment?: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeGovernanceAliasesResponse {
+  /** 服务别名总数量。 */
+  TotalCount?: number;
+  /** 服务别名列表。 */
+  Content?: GovernanceAlias[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGovernanceInstancesRequest {
   /** 实例所在的服务名。 */
   Service: string;
@@ -2111,9 +2965,109 @@ declare interface DescribeGovernanceInstancesRequest {
 
 declare interface DescribeGovernanceInstancesResponse {
   /** 服务实例总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 服务里实例列表。 */
-  Content: GovernanceInstance[];
+  Content?: GovernanceInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGovernanceNamespacesRequest {
+  /** tse实例id */
+  InstanceId: string;
+  /** 根据命名空间名称过滤。 */
+  Name?: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeGovernanceNamespacesResponse {
+  /** 列表总数量。 */
+  TotalCount?: number;
+  /** 治理中心命名空间实例列表。 */
+  Content?: GovernanceNamespace[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGovernanceServiceContractVersionsRequest {
+  /** 引擎实例ID */
+  InstanceId: string;
+  /** 命名空间 */
+  Namespace: string;
+  /** 服务名 */
+  Service?: string;
+}
+
+declare interface DescribeGovernanceServiceContractVersionsResponse {
+  /** 服务契约版本列表 */
+  GovernanceServiceContractVersions?: GovernanceServiceContractVersion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGovernanceServiceContractsRequest {
+  /** 北极星引擎实例ID */
+  InstanceId: string;
+  /** 分页偏移量 */
+  Offset: number;
+  /** 分页条数 */
+  Limit: number;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 服务名 */
+  Service?: string;
+  /** 契约名称 */
+  Name?: string;
+  /** 契约版本 */
+  ContractVersion?: string;
+  /** 契约协议 */
+  Protocol?: string;
+  /** 是否只展示基本信息 */
+  Brief?: boolean;
+}
+
+declare interface DescribeGovernanceServiceContractsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 返回条数 */
+  Size?: number;
+  /** 契约定义列表 */
+  ServiceContracts?: GovernanceServiceContract[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGovernanceServicesRequest {
+  /** 按照服务名过滤，精确匹配。 */
+  Name?: string;
+  /** 按照命名空间过滤，精确匹配。 */
+  Namespace?: string;
+  /** 使用元数据过滤，目前只支持一组元组数，若传了多条，只会使用第一条元数据过滤。 */
+  Metadatas?: Metadata[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** tse 实例 id。 */
+  InstanceId?: string;
+  /** 服务所属部门。 */
+  Department?: string;
+  /** 服务所属业务。 */
+  Business?: string;
+  /** 服务中实例的ip，用来过滤服务。 */
+  Host?: string;
+  /** 是否只查询存在健康实例的服务 */
+  OnlyExistHealthyInstance?: boolean;
+}
+
+declare interface DescribeGovernanceServicesResponse {
+  /** 服务数总量。 */
+  TotalCount?: number;
+  /** 服务信息详情。 */
+  Content?: GovernanceService[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2512,6 +3466,34 @@ declare interface ModifyCloudNativeAPIGatewayServiceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyConfigFileGroupRequest {
+  /** tse实例id */
+  InstanceId: string;
+  /** 配置文件组 */
+  ConfigFileGroup: ConfigFileGroup;
+}
+
+declare interface ModifyConfigFileGroupResponse {
+  /** 修改是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyConfigFilesRequest {
+  /** ins-df344df5 */
+  InstanceId: string;
+  /** 配置文件列表 */
+  ConfigFile: ConfigFile;
+}
+
+declare interface ModifyConfigFilesResponse {
+  /** 修改是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConsoleNetworkRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -2528,6 +3510,28 @@ declare interface ModifyConsoleNetworkResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGovernanceAliasRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 服务别名 */
+  Alias: string;
+  /** 服务别名命名空间 */
+  AliasNamespace: string;
+  /** 服务别名所指向的服务名 */
+  Service: string;
+  /** 服务别名所指向的命名空间 */
+  Namespace: string;
+  /** 服务别名描述 */
+  Comment?: string;
+}
+
+declare interface ModifyGovernanceAliasResponse {
+  /** 创建是否成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGovernanceInstancesRequest {
   /** tse实例id。 */
   InstanceId: string;
@@ -2537,7 +3541,35 @@ declare interface ModifyGovernanceInstancesRequest {
 
 declare interface ModifyGovernanceInstancesResponse {
   /** 修改是否成功。 */
-  Result: boolean;
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGovernanceNamespacesRequest {
+  /** tse实例id。 */
+  InstanceId: string;
+  /** 命名空间信息。 */
+  GovernanceNamespaces: GovernanceNamespaceInput[];
+}
+
+declare interface ModifyGovernanceNamespacesResponse {
+  /** 操作是否成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGovernanceServicesRequest {
+  /** tse 实例 id。 */
+  InstanceId: string;
+  /** 服务信息。 */
+  GovernanceServices: GovernanceServiceInput[];
+}
+
+declare interface ModifyGovernanceServicesResponse {
+  /** 是否成功 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2630,6 +3662,20 @@ declare interface OpenWafProtectionResponse {
   RequestId?: string;
 }
 
+declare interface PublishConfigFilesRequest {
+  /** TSE实例id */
+  InstanceId: string;
+  /** 配置文件发布 */
+  ConfigFileReleases: ConfigFileRelease;
+}
+
+declare interface PublishConfigFilesResponse {
+  /** 配置文件发布是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RateLimitResponse {
   /** 自定义响应体 */
   Body?: string | null;
@@ -2637,6 +3683,20 @@ declare interface RateLimitResponse {
   Headers?: KVMapping[] | null;
   /** http状态码 */
   HttpStatus?: number | null;
+}
+
+declare interface RollbackConfigFileReleasesRequest {
+  /** TSE实例id */
+  InstanceId: string;
+  /** 回滚发布 */
+  RollbackConfigFileReleases: ConfigFileRelease[];
+}
+
+declare interface RollbackConfigFileReleasesResponse {
+  /** 回滚结果 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
@@ -2758,12 +3818,24 @@ declare interface Tse {
   CreateCloudNativeAPIGatewayService(data: CreateCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayServiceResponse>;
   /** 创建云原生网关限流插件(服务) {@link CreateCloudNativeAPIGatewayServiceRateLimitRequest} {@link CreateCloudNativeAPIGatewayServiceRateLimitResponse} */
   CreateCloudNativeAPIGatewayServiceRateLimit(data: CreateCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayServiceRateLimitResponse>;
+  /** 创建配置文件 {@link CreateConfigFileRequest} {@link CreateConfigFileResponse} */
+  CreateConfigFile(data: CreateConfigFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigFileResponse>;
+  /** 创建配置文件组 {@link CreateConfigFileGroupRequest} {@link CreateConfigFileGroupResponse} */
+  CreateConfigFileGroup(data: CreateConfigFileGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigFileGroupResponse>;
   /** 创建引擎实例 {@link CreateEngineRequest} {@link CreateEngineResponse} */
   CreateEngine(data: CreateEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEngineResponse>;
-  /** 创建治理中心服务实例 {@link CreateGovernanceInstancesRequest} {@link CreateGovernanceInstancesResponse} */
+  /** 创建服务别名 {@link CreateGovernanceAliasRequest} {@link CreateGovernanceAliasResponse} */
+  CreateGovernanceAlias(data: CreateGovernanceAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceAliasResponse>;
+  /** 创建服务实例 {@link CreateGovernanceInstancesRequest} {@link CreateGovernanceInstancesResponse} */
   CreateGovernanceInstances(data: CreateGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceInstancesResponse>;
+  /** 创建命名空间 {@link CreateGovernanceNamespacesRequest} {@link CreateGovernanceNamespacesResponse} */
+  CreateGovernanceNamespaces(data: CreateGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceNamespacesResponse>;
+  /** 创建服务 {@link CreateGovernanceServicesRequest} {@link CreateGovernanceServicesResponse} */
+  CreateGovernanceServices(data: CreateGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceServicesResponse>;
   /** 创建云原生网关引擎分组 {@link CreateNativeGatewayServerGroupRequest} {@link CreateNativeGatewayServerGroupResponse} */
   CreateNativeGatewayServerGroup(data: CreateNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServerGroupResponse>;
+  /** 创建或更新配置文件并发布配置 {@link CreateOrUpdateConfigFileAndReleaseRequest} {@link CreateOrUpdateConfigFileAndReleaseResponse} */
+  CreateOrUpdateConfigFileAndRelease(data: CreateOrUpdateConfigFileAndReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateConfigFileAndReleaseResponse>;
   /** 新建 WAF 防护域名 {@link CreateWafDomainsRequest} {@link CreateWafDomainsResponse} */
   CreateWafDomains(data: CreateWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWafDomainsResponse>;
   /** 删除弹性伸缩策略 {@link DeleteAutoScalerResourceStrategyRequest} {@link DeleteAutoScalerResourceStrategyResponse} */
@@ -2784,14 +3856,30 @@ declare interface Tse {
   DeleteCloudNativeAPIGatewayService(data: DeleteCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayServiceResponse>;
   /** 删除云原生网关的限流插件(服务) {@link DeleteCloudNativeAPIGatewayServiceRateLimitRequest} {@link DeleteCloudNativeAPIGatewayServiceRateLimitResponse} */
   DeleteCloudNativeAPIGatewayServiceRateLimit(data: DeleteCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayServiceRateLimitResponse>;
+  /** 批量删除配置文件组列表 {@link DeleteConfigFileGroupRequest} {@link DeleteConfigFileGroupResponse} */
+  DeleteConfigFileGroup(data: DeleteConfigFileGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFileGroupResponse>;
+  /** 删除配置发布 {@link DeleteConfigFileReleasesRequest} {@link DeleteConfigFileReleasesResponse} */
+  DeleteConfigFileReleases(data: DeleteConfigFileReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFileReleasesResponse>;
+  /** 删除配置文件 {@link DeleteConfigFilesRequest} {@link DeleteConfigFilesResponse} */
+  DeleteConfigFiles(data: DeleteConfigFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFilesResponse>;
   /** 删除引擎实例 {@link DeleteEngineRequest} {@link DeleteEngineResponse} */
   DeleteEngine(data: DeleteEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEngineResponse>;
-  /** 删除治理中心服务实例 {@link DeleteGovernanceInstancesRequest} {@link DeleteGovernanceInstancesResponse} */
+  /** 删除服务别名 {@link DeleteGovernanceAliasesRequest} {@link DeleteGovernanceAliasesResponse} */
+  DeleteGovernanceAliases(data: DeleteGovernanceAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceAliasesResponse>;
+  /** 删除服务实例 {@link DeleteGovernanceInstancesRequest} {@link DeleteGovernanceInstancesResponse} */
   DeleteGovernanceInstances(data: DeleteGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceInstancesResponse>;
+  /** 根据HOST删除服务实例 {@link DeleteGovernanceInstancesByHostRequest} {@link DeleteGovernanceInstancesByHostResponse} */
+  DeleteGovernanceInstancesByHost(data: DeleteGovernanceInstancesByHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceInstancesByHostResponse>;
+  /** 删除命名空间 {@link DeleteGovernanceNamespacesRequest} {@link DeleteGovernanceNamespacesResponse} */
+  DeleteGovernanceNamespaces(data: DeleteGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceNamespacesResponse>;
+  /** 删除服务 {@link DeleteGovernanceServicesRequest} {@link DeleteGovernanceServicesResponse} */
+  DeleteGovernanceServices(data: DeleteGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceServicesResponse>;
   /** 删除网关实例分组 {@link DeleteNativeGatewayServerGroupRequest} {@link DeleteNativeGatewayServerGroupResponse} */
   DeleteNativeGatewayServerGroup(data: DeleteNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeGatewayServerGroupResponse>;
   /** 删除 WAF 防护域名 {@link DeleteWafDomainsRequest} {@link DeleteWafDomainsResponse} */
   DeleteWafDomains(data: DeleteWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWafDomainsResponse>;
+  /** 获取全量配置文件模板列表 {@link DescribeAllConfigFileTemplatesRequest} {@link DescribeAllConfigFileTemplatesResponse} */
+  DescribeAllConfigFileTemplates(data: DescribeAllConfigFileTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllConfigFileTemplatesResponse>;
   /** 查看弹性伸缩策略列表 {@link DescribeAutoScalerResourceStrategiesRequest} {@link DescribeAutoScalerResourceStrategiesResponse} */
   DescribeAutoScalerResourceStrategies(data: DescribeAutoScalerResourceStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalerResourceStrategiesResponse>;
   /** 查看弹性伸缩策略绑定的网关分组 {@link DescribeAutoScalerResourceStrategyBindingGroupsRequest} {@link DescribeAutoScalerResourceStrategyBindingGroupsResponse} */
@@ -2822,8 +3910,34 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayUpstream(data: DescribeCloudNativeAPIGatewayUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayUpstreamResponse>;
   /** 获取云原生网关实例列表 {@link DescribeCloudNativeAPIGatewaysRequest} {@link DescribeCloudNativeAPIGatewaysResponse} */
   DescribeCloudNativeAPIGateways(data?: DescribeCloudNativeAPIGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaysResponse>;
-  /** 查询治理中心服务实例 {@link DescribeGovernanceInstancesRequest} {@link DescribeGovernanceInstancesResponse} */
+  /** 查询配置文件 {@link DescribeConfigFileRequest} {@link DescribeConfigFileResponse} */
+  DescribeConfigFile(data: DescribeConfigFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFileResponse>;
+  /** 查询配置文件组 {@link DescribeConfigFileGroupsRequest} {@link DescribeConfigFileGroupsResponse} */
+  DescribeConfigFileGroups(data: DescribeConfigFileGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFileGroupsResponse>;
+  /** 获取配置文件发布 {@link DescribeConfigFileReleaseRequest} {@link DescribeConfigFileReleaseResponse} */
+  DescribeConfigFileRelease(data: DescribeConfigFileReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFileReleaseResponse>;
+  /** 获取配置文件发布历史列表 {@link DescribeConfigFileReleaseHistoriesRequest} {@link DescribeConfigFileReleaseHistoriesResponse} */
+  DescribeConfigFileReleaseHistories(data: DescribeConfigFileReleaseHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFileReleaseHistoriesResponse>;
+  /** 查询某个配置所有版本信息 {@link DescribeConfigFileReleaseVersionsRequest} {@link DescribeConfigFileReleaseVersionsResponse} */
+  DescribeConfigFileReleaseVersions(data: DescribeConfigFileReleaseVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFileReleaseVersionsResponse>;
+  /** 查询配置版本列表 {@link DescribeConfigFileReleasesRequest} {@link DescribeConfigFileReleasesResponse} */
+  DescribeConfigFileReleases(data: DescribeConfigFileReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFileReleasesResponse>;
+  /** 查询配置文件列表 {@link DescribeConfigFilesRequest} {@link DescribeConfigFilesResponse} */
+  DescribeConfigFiles(data: DescribeConfigFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFilesResponse>;
+  /** 根据group查询配置文件列表 {@link DescribeConfigFilesByGroupRequest} {@link DescribeConfigFilesByGroupResponse} */
+  DescribeConfigFilesByGroup(data: DescribeConfigFilesByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigFilesByGroupResponse>;
+  /** 查询服务别名列表 {@link DescribeGovernanceAliasesRequest} {@link DescribeGovernanceAliasesResponse} */
+  DescribeGovernanceAliases(data: DescribeGovernanceAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceAliasesResponse>;
+  /** 查询服务实例 {@link DescribeGovernanceInstancesRequest} {@link DescribeGovernanceInstancesResponse} */
   DescribeGovernanceInstances(data: DescribeGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceInstancesResponse>;
+  /** 查询命名空间列表 {@link DescribeGovernanceNamespacesRequest} {@link DescribeGovernanceNamespacesResponse} */
+  DescribeGovernanceNamespaces(data: DescribeGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceNamespacesResponse>;
+  /** 查询服务下契约版本列表 {@link DescribeGovernanceServiceContractVersionsRequest} {@link DescribeGovernanceServiceContractVersionsResponse} */
+  DescribeGovernanceServiceContractVersions(data: DescribeGovernanceServiceContractVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceServiceContractVersionsResponse>;
+  /** 查询服务契约定义列表 {@link DescribeGovernanceServiceContractsRequest} {@link DescribeGovernanceServiceContractsResponse} */
+  DescribeGovernanceServiceContracts(data: DescribeGovernanceServiceContractsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceServiceContractsResponse>;
+  /** 查询服务列表 {@link DescribeGovernanceServicesRequest} {@link DescribeGovernanceServicesResponse} */
+  DescribeGovernanceServices(data?: DescribeGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceServicesResponse>;
   /** 查询Nacos类型引擎实例副本信息 {@link DescribeNacosReplicasRequest} {@link DescribeNacosReplicasResponse} */
   DescribeNacosReplicas(data: DescribeNacosReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosReplicasResponse>;
   /** 查询nacos服务接口列表 {@link DescribeNacosServerInterfacesRequest} {@link DescribeNacosServerInterfacesResponse} */
@@ -2864,10 +3978,20 @@ declare interface Tse {
   ModifyCloudNativeAPIGatewayService(data: ModifyCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceResponse>;
   /** 修改云原生网关限流插件(服务) {@link ModifyCloudNativeAPIGatewayServiceRateLimitRequest} {@link ModifyCloudNativeAPIGatewayServiceRateLimitResponse} */
   ModifyCloudNativeAPIGatewayServiceRateLimit(data: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
+  /** 批量修改配置文件组 {@link ModifyConfigFileGroupRequest} {@link ModifyConfigFileGroupResponse} */
+  ModifyConfigFileGroup(data: ModifyConfigFileGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigFileGroupResponse>;
+  /** 修改配置文件 {@link ModifyConfigFilesRequest} {@link ModifyConfigFilesResponse} */
+  ModifyConfigFiles(data: ModifyConfigFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigFilesResponse>;
   /** 修改云原生API网关实例Konga网络配置 {@link ModifyConsoleNetworkRequest} {@link ModifyConsoleNetworkResponse} */
   ModifyConsoleNetwork(data: ModifyConsoleNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsoleNetworkResponse>;
-  /** 修改治理中心服务实例 {@link ModifyGovernanceInstancesRequest} {@link ModifyGovernanceInstancesResponse} */
+  /** 修改服务别名 {@link ModifyGovernanceAliasRequest} {@link ModifyGovernanceAliasResponse} */
+  ModifyGovernanceAlias(data: ModifyGovernanceAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceAliasResponse>;
+  /** 修改服务实例 {@link ModifyGovernanceInstancesRequest} {@link ModifyGovernanceInstancesResponse} */
   ModifyGovernanceInstances(data: ModifyGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceInstancesResponse>;
+  /** 修改命名空间 {@link ModifyGovernanceNamespacesRequest} {@link ModifyGovernanceNamespacesResponse} */
+  ModifyGovernanceNamespaces(data: ModifyGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceNamespacesResponse>;
+  /** 修改服务 {@link ModifyGovernanceServicesRequest} {@link ModifyGovernanceServicesResponse} */
+  ModifyGovernanceServices(data: ModifyGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceServicesResponse>;
   /** 修改云原生API网关实例分组基础信息 {@link ModifyNativeGatewayServerGroupRequest} {@link ModifyNativeGatewayServerGroupResponse} */
   ModifyNativeGatewayServerGroup(data: ModifyNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServerGroupResponse>;
   /** 修改云原生API网关实例Kong访问策略 {@link ModifyNetworkAccessStrategyRequest} {@link ModifyNetworkAccessStrategyResponse} */
@@ -2878,6 +4002,10 @@ declare interface Tse {
   ModifyUpstreamNodeStatus(data: ModifyUpstreamNodeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUpstreamNodeStatusResponse>;
   /** 开启 WAF 防护 {@link OpenWafProtectionRequest} {@link OpenWafProtectionResponse} */
   OpenWafProtection(data: OpenWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWafProtectionResponse>;
+  /** 发布配置文件 {@link PublishConfigFilesRequest} {@link PublishConfigFilesResponse} */
+  PublishConfigFiles(data: PublishConfigFilesRequest, config?: AxiosRequestConfig): AxiosPromise<PublishConfigFilesResponse>;
+  /** 回滚配置发布 {@link RollbackConfigFileReleasesRequest} {@link RollbackConfigFileReleasesResponse} */
+  RollbackConfigFileReleases(data: RollbackConfigFileReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackConfigFileReleasesResponse>;
   /** 弹性伸缩策略批量解绑网关分组 {@link UnbindAutoScalerResourceStrategyFromGroupsRequest} {@link UnbindAutoScalerResourceStrategyFromGroupsResponse} */
   UnbindAutoScalerResourceStrategyFromGroups(data: UnbindAutoScalerResourceStrategyFromGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoScalerResourceStrategyFromGroupsResponse>;
   /** 修改云原生网关证书信息 {@link UpdateCloudNativeAPIGatewayCertificateInfoRequest} {@link UpdateCloudNativeAPIGatewayCertificateInfoResponse} */

@@ -396,30 +396,6 @@ declare interface ClbDomainsInfo {
   Note?: string | null;
 }
 
-/** CLB查询对应绑定的WAF状态的结果参数 */
-declare interface ClbHostResult {
-  /** WAF绑定的监听器实例 */
-  LoadBalancer: LoadBalancer;
-  /** WAF绑定的域名 */
-  Domain: string;
-  /** WAF绑定的实例ID */
-  DomainId: string;
-  /** 是否有绑定WAF，1：绑定了WAF，0：没有绑定WAF */
-  Status: number;
-  /** 绑定了WAF的情况下，WAF流量模式，1：清洗模式，0：镜像模式（默认） */
-  FlowMode: number;
-}
-
-/** CLB回调WAF接口（获取、删除）的参数 */
-declare interface ClbHostsParams {
-  /** 负载均衡实例ID，如果不传次参数则默认认为操作的是整个AppId的监听器，如果此参数不为空则认为操作的是对应负载均衡实例。 */
-  LoadBalancerId: string;
-  /** 负载均衡监听器ID，，如果不传次参数则默认认为操作的是整个负载均衡实例，如果此参数不为空则认为操作的是对应负载均衡监听器。 */
-  ListenerId?: string;
-  /** WAF实例ID，，如果不传次参数则默认认为操作的是整个负载均衡监听器实例，如果此参数不为空则认为操作的是对应负载均衡监听器的某一个具体的域名。 */
-  DomainId?: string;
-}
-
 /** Clb类型防护对象 */
 declare interface ClbObject {
   /** 对象ID */
@@ -3330,20 +3306,6 @@ declare interface DescribeWafAutoDenyStatusResponse {
   RequestId?: string;
 }
 
-declare interface DescribeWafInfoRequest {
-  /** CLB回调WAF接口（获取、删除）的参数 */
-  Params: ClbHostsParams[];
-}
-
-declare interface DescribeWafInfoResponse {
-  /** 返回的WAF信息数组的长度，为0则表示没有查询到对应的信息 */
-  Total?: number;
-  /** 对应的WAF信息的数组。 */
-  HostList?: ClbHostResult[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeWafThreatenIntelligenceRequest {
 }
 
@@ -4547,8 +4509,6 @@ declare interface Waf {
   DescribeWafAutoDenyRules(data: DescribeWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyRulesResponse>;
   /** 描述WAF自动封禁模块详情 {@link DescribeWafAutoDenyStatusRequest} {@link DescribeWafAutoDenyStatusResponse} */
   DescribeWafAutoDenyStatus(data?: DescribeWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyStatusResponse>;
-  /** 获取负载均衡绑定的WAF信息 {@link DescribeWafInfoRequest} {@link DescribeWafInfoResponse} */
-  DescribeWafInfo(data: DescribeWafInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafInfoResponse>;
   /** 描述WAF威胁情报封禁模块配置详情 {@link DescribeWafThreatenIntelligenceRequest} {@link DescribeWafThreatenIntelligenceResponse} */
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
   /** 获取域名webshell状态 {@link DescribeWebshellStatusRequest} {@link DescribeWebshellStatusResponse} */
