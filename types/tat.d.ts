@@ -86,7 +86,7 @@ declare interface DefaultParameterConf {
   ParameterDescription?: string | null;
 }
 
-/** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。>> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：```Filters.0.Name=zone&Filters.0.Values.0=ap-guangzhou-1&Filters.1.Name=instance-charge-type&Filters.1.Values.0=PREPAID&Filters.1.Values.1=POSTPAID_BY_HOUR``` */
+/** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。>> 以[DescribeCommands](https://cloud.tencent.com/document/api/1340/52681)接口的`Filters`为例。若我们需要查询命令名称（`command-name`）为 “打印工作目录” ***并且*** 命令类型（`command-type`）为 “POWERSHELL” ***或者*** “BAT” 时，可如下实现：```Filters.0.Name=command-name&Filters.0.Values.0=打印工作目录&Filters.1.Name=command-type&Filters.1.Values.0=POWERSHELL&Filters.1.Values.1=BAT``` */
 declare interface Filter {
   /** 需要过滤的字段。 */
   Name: string;
@@ -110,7 +110,7 @@ declare interface Invocation {
   InvocationId?: string;
   /** 命令ID。 */
   CommandId?: string;
-  /** 执行任务状态。取值范围： PENDING：等待下发 RUNNING：命令运行中 SUCCESS：命令成功 FAILED：命令失败 TIMEOUT：命令超时 PARTIAL_FAILED：命令部分失败 */
+  /** 执行任务状态。取值范围： PENDING：等待下发 RUNNING：命令运行中 SUCCESS：命令成功 FAILED：命令失败 TIMEOUT：命令超时 PARTIAL_FAILED：命令部分失败 PARTIAL_CANCELLED：任务部分取消 CANCELLED：任务全部取消 CANCELLING：任务取消中 */
   InvocationStatus?: string;
   /** 执行任务信息列表。 */
   InvocationTaskBasicInfoSet?: InvocationTaskBasicInfo[];

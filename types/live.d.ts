@@ -1873,6 +1873,8 @@ declare interface CreateLiveTranscodeRuleRequest {
   DomainName: string;
   /** 推流路径，与推流和播放地址中的AppName保持一致。如果只绑定域名，则此处填""。 */
   AppName: string;
+  /** 流名称。已废弃该字段，请传入空字符串。 */
+  StreamName: string;
   /** 指定已有的模板Id。 */
   TemplateId: number;
 }
