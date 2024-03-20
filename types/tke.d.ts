@@ -1846,11 +1846,13 @@ declare namespace V20180525 {
   /** 某机型可支持的最大 VPC-CNI 模式的 Pod 数量 */
   interface PodLimitsByType {
     /** TKE共享网卡非固定IP模式可支持的Pod数量 */
-    TKERouteENINonStaticIP: number | null;
+    TKERouteENINonStaticIP?: number | null;
     /** TKE共享网卡固定IP模式可支持的Pod数量 */
-    TKERouteENIStaticIP: number | null;
+    TKERouteENIStaticIP?: number | null;
     /** TKE独立网卡模式可支持的Pod数量 */
-    TKEDirectENI: number | null;
+    TKEDirectENI?: number | null;
+    /** TKE中继网卡模式可支持的Pod数量 */
+    TKESubENI?: number | null;
   }
 
   /** 机型信息和其可支持的最大VPC-CNI模式Pod数量信息 */

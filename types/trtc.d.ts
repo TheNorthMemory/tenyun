@@ -716,7 +716,7 @@ declare interface TencentVod {
   SourceContext?: string;
   /** 上传到vod平台的录制文件格式类型，0：mp4(默认), 1: hls, 2:aac(StreamType=1纯音频录制时有效),3: hls+mp4, 4: hls+aac(StreamType=1纯音频录制时有效)。 */
   MediaType?: number;
-  /** 仅支持API录制上传vod，该参数表示用户可以自定义录制文件名前缀，【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符】。前缀与自动生成的录制文件名之间用__UserId_u_分开。 */
+  /** 仅支持API录制上传vod，该参数表示用户可以自定义录制文件名前缀，【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符】。前缀与自动生成的录制文件名之间用__UserDefine_u_分开。 */
   UserDefineRecordId?: string;
 }
 

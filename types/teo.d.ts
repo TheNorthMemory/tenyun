@@ -2753,7 +2753,7 @@ declare interface DescribeAliasDomainsRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：target-name 按照【目标域名名称】进行过滤。 类型：String 必选：否alias-name 按照【别称域名名称】进行过滤。 类型：String 必选：否模糊查询时仅支持过滤字段名为alias-name。 */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：target-name：目标域名名称进行过滤；alias-name：按照别称域名名称进行过滤。模糊查询时仅支持过滤字段名为 alias-name。 */
   Filters?: AdvancedFilter[];
 }
 
@@ -3019,7 +3019,7 @@ declare interface DescribeHostsSettingRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值： 100，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：host 按照【域名】进行过滤。 类型：string 必选：否 */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：host：按照域名进行过滤。 */
   Filters?: Filter[];
 }
 

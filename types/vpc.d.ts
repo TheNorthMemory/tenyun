@@ -2071,25 +2071,25 @@ declare interface TrafficFlow {
 /** 流量包信息描述类型 */
 declare interface TrafficPackage {
   /** 流量包唯一ID */
-  TrafficPackageId: string;
+  TrafficPackageId?: string;
   /** 流量包名称 */
-  TrafficPackageName: string | null;
+  TrafficPackageName?: string | null;
   /** 流量包总量，单位GB */
-  TotalAmount: number;
+  TotalAmount?: number;
   /** 流量包剩余量，单位GB */
-  RemainingAmount: number;
+  RemainingAmount?: number;
   /** 流量包状态，可能的值有: AVAILABLE-可用状态， EXPIRED-已过期， EXHAUSTED-已用完， REFUNDED-已退还， DELETED-已删除 */
-  Status: string;
+  Status?: string;
   /** 流量包创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 流量包截止时间 */
-  Deadline: string;
+  Deadline?: string;
   /** 已使用的流量，单位GB */
-  UsedAmount: number;
+  UsedAmount?: number;
   /** 流量包标签 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 区分闲时流量包与全时流量包 */
-  DeductType: string;
+  DeductType?: string;
 }
 
 /** 共享流量包用量明细 */
@@ -3429,7 +3429,7 @@ declare interface CreateTrafficPackagesRequest {
 
 declare interface CreateTrafficPackagesResponse {
   /** 创建的流量包ID列表。 */
-  TrafficPackageSet: string[];
+  TrafficPackageSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

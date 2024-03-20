@@ -41,9 +41,9 @@ declare interface AutoSnapshotPolicyInfo {
 /** 版本控制-协议详情 */
 declare interface AvailableProtoStatus {
   /** 售卖状态。可选值有 sale_out 售罄、saling可售、no_saling不可销售 */
-  SaleStatus: string;
-  /** 协议类型。可选值有 NFS、CIFS */
-  Protocol: string;
+  SaleStatus?: string;
+  /** 协议类型。可选值有 NFS、CIFS、TURBO */
+  Protocol?: string;
 }
 
 /** 版本控制-区域数组 */

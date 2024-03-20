@@ -136,6 +136,14 @@ declare interface BaseFlowInfo {
   Components?: Component[];
 }
 
+/** 撤销失败的流程信息 */
+declare interface CancelFailureFlow {
+  /** 签署流程编号，为32位字符串 */
+  FlowId?: string;
+  /** 撤销失败原因 */
+  Reason?: string;
+}
+
 /** 抄送信息 */
 declare interface CcInfo {
   /** 被抄送人手机号，大陆11位手机号 */
@@ -2478,6 +2486,26 @@ declare interface DescribeBatchOrganizationRegistrationUrlsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCancelFlowsTaskRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 批量撤销任务编号，为32位字符串，通过接口[批量撤销合同流程](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelBatchCancelFlows)或者[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateBatchCancelFlowUrl)获得。 */
+  TaskId: string;
+}
+
+declare interface DescribeCancelFlowsTaskResponse {
+  /** 批量撤销任务编号，为32位字符串。 */
+  TaskId?: string;
+  /** 任务状态，需要关注的状态**PROCESSING** - 任务执行中**END** - 任务处理完成**TIMEOUT** 任务超时未处理完成，用户未在批量撤销链接有效期内操作 */
+  TaskStatus?: string;
+  /** 批量撤销成功的签署流程编号 */
+  SuccessFlowIds?: string[];
+  /** 批量撤销失败的签署流程信息 */
+  FailureFlows?: CancelFailureFlow[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeChannelFlowEvidenceReportRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -4493,6 +4521,8 @@ declare interface Essbasic {
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
   /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */
   DescribeBatchOrganizationRegistrationUrls(data: DescribeBatchOrganizationRegistrationUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationUrlsResponse>;
+  /** 查询批量撤销签署流程任务结果 {@link DescribeCancelFlowsTaskRequest} {@link DescribeCancelFlowsTaskResponse} */
+  DescribeCancelFlowsTask(data: DescribeCancelFlowsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCancelFlowsTaskResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
   /** 查询企业信息 {@link DescribeChannelOrganizationsRequest} {@link DescribeChannelOrganizationsResponse} */

@@ -738,7 +738,7 @@ declare interface KafkaProtocolInfo {
 
 /** Kafka导入配置信息 */
 declare interface KafkaRechargeInfo {
-  /** 主键ID */
+  /** Kafka数据订阅配置的ID。 */
   Id?: string | null;
   /** 日志主题ID */
   TopicId?: string | null;

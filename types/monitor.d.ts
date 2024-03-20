@@ -480,6 +480,20 @@ declare interface DescribeAccidentEventListAlarms {
   UpdateTime: string | null;
 }
 
+/** DescribeAlarmSmsQuota接口的配额信息 */
+declare interface DescribeAlarmSmsQuotaQuota {
+  /** 配额类型 */
+  Type: string;
+  /** 配额名称 */
+  Name: string;
+  /** 免费配额剩余量 */
+  FreeLeft: number;
+  /** 付费配额剩余量 */
+  PurchaseLeft: number;
+  /** 已使用量 */
+  Used: number;
+}
+
 /** DescribeBasicAlarmList返回的Alarms */
 declare interface DescribeBasicAlarmListAlarms {
   /** 该条告警的ID */
@@ -1917,19 +1931,19 @@ declare interface PrometheusRecordRuleYamlItem {
 /** DescribePrometheusRegions 响应结构体 */
 declare interface PrometheusRegionItem {
   /** 区域 */
-  Region: string;
+  Region?: string;
   /** 区域 ID */
-  RegionId: number;
+  RegionId?: number;
   /** 区域状态( 0: 不可用；1: 可用) */
-  RegionState: number;
+  RegionState?: number;
   /** 区域名(中文) */
-  RegionName: string;
+  RegionName?: string;
   /** 区域名(英文缩写) */
-  RegionShortName: string;
+  RegionShortName?: string;
   /** 区域所在大区名 */
-  Area: string;
+  Area?: string;
   /** 1-仅支持预付费，2-仅支持后付费，3-支持两种计费模式实例 */
-  RegionPayMode: number;
+  RegionPayMode?: number;
 }
 
 /** prometheus 报警规则 KV 参数 */
@@ -3312,6 +3326,22 @@ declare interface DescribeAlarmPolicyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAlarmSmsQuotaRequest {
+  /** 固定值，为"monitor" */
+  Module: string;
+}
+
+declare interface DescribeAlarmSmsQuotaResponse {
+  /** 配额总数 */
+  Total?: number;
+  /** 总使用量 */
+  Used?: number;
+  /** 短信配额信息列表 */
+  QuotaList?: DescribeAlarmSmsQuotaQuota[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAlertRulesRequest {
   /** Prometheus 实例 ID */
   InstanceId: string;
@@ -3650,6 +3680,22 @@ declare interface DescribeInstalledPluginsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMonitorResourceInfoRequest {
+}
+
+declare interface DescribeMonitorResourceInfoResponse {
+  /** 电话告警数量 */
+  PhoneAlarmNumber: number;
+  /** 高级指标数量 */
+  AdvancedMetricNumber: number;
+  /** API调用量 */
+  APIUsageNumber: number;
+  /** 告警短信数量 */
+  AlarmSMSNumber: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMonitorTypesRequest {
   /** 模块名，固定值 monitor */
   Module: string;
@@ -3660,6 +3706,20 @@ declare interface DescribeMonitorTypesResponse {
   MonitorTypes?: string[];
   /** 监控类型详情 */
   MonitorTypeInfos?: MonitorTypeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePhoneAlarmFlowTotalCountRequest {
+  /** 默认monitor */
+  Module: string;
+  /** unix时间戳，单位：s */
+  QueryTime: number;
+}
+
+declare interface DescribePhoneAlarmFlowTotalCountResponse {
+  /** 电话流水总数 */
+  Count: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5269,6 +5329,8 @@ declare interface Monitor {
   DescribeAlarmPolicies(data: DescribeAlarmPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmPoliciesResponse>;
   /** 获取单个告警策略详情 {@link DescribeAlarmPolicyRequest} {@link DescribeAlarmPolicyResponse} */
   DescribeAlarmPolicy(data: DescribeAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmPolicyResponse>;
+  /** 获取告警短信配额 {@link DescribeAlarmSmsQuotaRequest} {@link DescribeAlarmSmsQuotaResponse} */
+  DescribeAlarmSmsQuota(data: DescribeAlarmSmsQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmSmsQuotaResponse>;
   /** 报警规则查询 {@link DescribeAlertRulesRequest} {@link DescribeAlertRulesResponse} */
   DescribeAlertRules(data: DescribeAlertRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRulesResponse>;
   /** 查询所有名字空间 {@link DescribeAllNamespacesRequest} {@link DescribeAllNamespacesResponse} */
@@ -5303,8 +5365,12 @@ declare interface Monitor {
   DescribeGrafanaWhiteList(data: DescribeGrafanaWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaWhiteListResponse>;
   /** 列出实例已安装的插件 {@link DescribeInstalledPluginsRequest} {@link DescribeInstalledPluginsResponse} */
   DescribeInstalledPlugins(data: DescribeInstalledPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstalledPluginsResponse>;
+  /** 资源消耗页概览接口 {@link DescribeMonitorResourceInfoRequest} {@link DescribeMonitorResourceInfoResponse} */
+  DescribeMonitorResourceInfo(data?: DescribeMonitorResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorResourceInfoResponse>;
   /** 查询监控类型 {@link DescribeMonitorTypesRequest} {@link DescribeMonitorTypesResponse} */
   DescribeMonitorTypes(data: DescribeMonitorTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorTypesResponse>;
+  /** 查询周期内电话流水总数 {@link DescribePhoneAlarmFlowTotalCountRequest} {@link DescribePhoneAlarmFlowTotalCountResponse} */
+  DescribePhoneAlarmFlowTotalCount(data: DescribePhoneAlarmFlowTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneAlarmFlowTotalCountResponse>;
   /** 列出所有 Grafana 插件 {@link DescribePluginOverviewsRequest} {@link DescribePluginOverviewsResponse} */
   DescribePluginOverviews(data?: DescribePluginOverviewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginOverviewsResponse>;
   /** 获取基础告警策略条件 {@link DescribePolicyConditionListRequest} {@link DescribePolicyConditionListResponse} */

@@ -162,7 +162,7 @@ declare interface BatchIpAccessControlData {
   Res: BatchIpAccessControlItem[];
 }
 
-/** 多域名黑白名单列表Ip */
+/** 批量多域名黑白名单列表Ip */
 declare interface BatchIpAccessControlItem {
   /** mongo表自增Id */
   Id?: string | null;
@@ -180,6 +180,10 @@ declare interface BatchIpAccessControlItem {
   ValidTs?: number;
   /** 域名列表 */
   Hosts?: string[];
+  /** 55101145 */
+  RuleId?: number | null;
+  /** IP列表 */
+  IpList?: string[] | null;
 }
 
 /** Bot资源信息 */
@@ -582,7 +586,7 @@ declare interface DomainInfo {
   Cname: string;
   /** 域名所属实例类型。sparta-waf：SaaS型WAF实例clb-waf：负载均衡型WAF实例cdc-clb-waf：CDC环境下负载均衡型WAF实例 */
   Edition: string;
-  /** 地域。"多伦多": "ca""广州": "gz""成都": "cd""福州": "fzec""深圳": "szx""印度": "in""济南": "jnec""重庆": "cq""天津": "tsn""欧洲东北": "ru""南京": "nj""美国硅谷": "usw""泰国": "th""广州Open": "gzopen""深圳金融": "szjr""法兰克福": "de""日本": "jp""弗吉尼亚": "use""北京": "bj""香港": "hk""杭州": "hzec""北京金融": "bjjr""上海金融": "shjr""台北": "tpe""首尔": "kr""上海": "sh""新加坡": "sg""清远": "qy" */
+  /** 地域。"多伦多": "ca""广州": "gz""成都": "cd""福州": "fzec""深圳": "szx""印度": "in""济南": "jnec""重庆": "cq""天津": "tsn""欧洲东北": "ru""南京": "nj""美国硅谷": "usw""泰国": "th""广州Open": "gzopen""深圳金融": "szjr""法兰克福": "de""日本": "jp""弗吉尼亚": "use""北京": "bj""中国香港": "hk""杭州": "hzec""北京金融": "bjjr""上海金融": "shjr""台北": "tpe""首尔": "kr""上海": "sh""新加坡": "sg""清远": "qy" */
   Region: string;
   /** 实例名 */
   InstanceName: string;
@@ -640,6 +644,8 @@ declare interface DomainInfo {
   UpstreamDomainList?: string[] | null;
   /** 安全组ID */
   SgID?: string | null;
+  /** clbwaf接入状态 */
+  AccessStatus?: number | null;
 }
 
 /** clb-waf 域名扩展套餐 */
@@ -750,6 +756,8 @@ declare interface DomainsPartInfo {
   UpstreamHost?: string | null;
   /** 防护规则 */
   Level?: string | null;
+  /** 是否开启缓存 0-关闭 1-开启 */
+  ProxyBuffer?: number | null;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -1142,6 +1150,10 @@ declare interface IpAccessControlItem {
   ValidTs?: number;
   /** 生效状态 */
   ValidStatus?: number | null;
+  /** 55000001 */
+  RuleId?: number | null;
+  /** IP列表 */
+  IpList?: string[] | null;
 }
 
 /** ip封堵状态数据 */
@@ -1857,6 +1869,12 @@ declare interface AddSpartaProtectionRequest {
   IsWebsocket: number;
   /** 回源负载均衡策略。0：轮询1：IP hash2：加权轮询 */
   LoadBalance: string;
+  /** 服务端口列表配置。NginxServerId：新增域名时填'0'Port：监听端口号Protocol：端口协议UpstreamPort：与Port相同UpstreamProtocol：与Protocol相同 */
+  Ports: PortItem[];
+  /** 必填项，是否开启长连接。0： 短连接1： 长连接 */
+  IsKeepAlive: string;
+  /** 必填项，域名所属实例id */
+  InstanceID: string;
   /** CertType为1时，需要填充此参数，表示自有证书的证书链 */
   Cert?: string;
   /** CertType为1时，需要填充此参数，表示自有证书的私钥 */
@@ -1883,14 +1901,8 @@ declare interface AddSpartaProtectionRequest {
   SrcList?: string[];
   /** 必填项，是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
   IsHttp2?: number;
-  /** 服务端口列表配置。NginxServerId：新增域名时填'0'Port：监听端口号Protocol：端口协议UpstreamPort：与Port相同UpstreamProtocol：与Protocol相同 */
-  Ports?: PortItem[];
   /** 待废弃，可不填。WAF实例类型。sparta-waf：SAAS型WAFclb-waf：负载均衡型WAFcdn-waf：CDN上的Web防护能力 */
   Edition?: string;
-  /** 必填项，是否开启长连接。0： 短连接1： 长连接 */
-  IsKeepAlive?: string;
-  /** 必填项，域名所属实例id */
-  InstanceID?: string;
   /** 待废弃，目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
   Anycast?: number;
   /** 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 [] */
@@ -1917,6 +1929,8 @@ declare interface AddSpartaProtectionRequest {
   Note?: string;
   /** 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。 */
   UpstreamHost?: string;
+  /** 是否开启缓存 0-关闭 1-开启 */
+  ProxyBuffer?: number;
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -2368,6 +2382,8 @@ declare interface DescribeAttackOverviewResponse {
   TamperCount?: number | null;
   /** 信息泄露总数 */
   LeakCount?: number | null;
+  /** API风险事件周环比 */
+  ApiRiskEventCircleCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2465,7 +2481,7 @@ declare interface DescribeBatchIpAccessControlRequest {
 
 declare interface DescribeBatchIpAccessControlResponse {
   /** 输出 */
-  Data: BatchIpAccessControlData | null;
+  Data?: BatchIpAccessControlData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2476,7 +2492,7 @@ declare interface DescribeCCAutoStatusRequest {
 }
 
 declare interface DescribeCCAutoStatusResponse {
-  /** 配置状态 */
+  /** 配置状态，0表示关闭，1表示开启 */
   AutoCCSwitch?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2891,7 +2907,7 @@ declare interface DescribeIpAccessControlRequest {
   Source?: string;
   /** 排序参数 */
   Sort?: string;
-  /** ip */
+  /** IP */
   Ip?: string;
   /** 生效状态 */
   ValidStatus?: number;
@@ -2899,11 +2915,15 @@ declare interface DescribeIpAccessControlRequest {
   ValidTimeStampMin?: string;
   /** 最大有效时间的时间戳 */
   ValidTimeStampMax?: string;
+  /** 规则ID */
+  RuleId?: number;
 }
 
 declare interface DescribeIpAccessControlResponse {
   /** 输出 */
   Data?: IpAccessControlData | null;
+  /** 已经使用的IP黑白名单的IP总数 */
+  UsedTotal?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3430,7 +3450,7 @@ declare interface ModifyAccessPeriodRequest {
   /** 访问日志保存期限，范围为[1, 180] */
   Period: number;
   /** 日志主题，新版本不需要再传 */
-  TopicId: string;
+  TopicId?: string;
 }
 
 declare interface ModifyAccessPeriodResponse {
@@ -3950,7 +3970,9 @@ declare interface ModifySpartaProtectionRequest {
   /** 域名 */
   Domain: string;
   /** 必填项。域名唯一ID */
-  DomainId?: string;
+  DomainId: string;
+  /** 必填项。域名所属实例id */
+  InstanceID: string;
   /** 必填项。证书类型。0：仅配置HTTP监听端口，没有证书1：证书来源为自有证书2：证书来源为托管证书 */
   CertType?: number;
   /** CertType为1时，需要填充此参数，表示自有证书的证书链 */
@@ -3987,8 +4009,6 @@ declare interface ModifySpartaProtectionRequest {
   Ports?: SpartaProtectionPort[];
   /** 必填项。是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive?: string;
-  /** 必填项。域名所属实例id */
-  InstanceID?: string;
   /** 必填项，待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
   Anycast?: number;
   /** 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 [] */
@@ -4017,6 +4037,8 @@ declare interface ModifySpartaProtectionRequest {
   Note?: string;
   /** 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。 */
   UpstreamHost?: string;
+  /** 是否开启缓存 0-关闭 1-开启 */
+  ProxyBuffer?: number;
 }
 
 declare interface ModifySpartaProtectionResponse {
@@ -4423,9 +4445,9 @@ declare interface Waf {
   DescribeAttackWhiteRule(data: DescribeAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackWhiteRuleResponse>;
   /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
-  /** Waf 多域名ip黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
+  /** Waf 批量防护IP黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
-  /** Waf 斯巴达版本查询cc自动封堵状态 {@link DescribeCCAutoStatusRequest} {@link DescribeCCAutoStatusResponse} */
+  /** 获取SAAS型接入的紧急CC防护状态 {@link DescribeCCAutoStatusRequest} {@link DescribeCCAutoStatusResponse} */
   DescribeCCAutoStatus(data: DescribeCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCAutoStatusResponse>;
   /** Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
   DescribeCCRule(data: DescribeCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleResponse>;
@@ -4581,7 +4603,7 @@ declare interface Waf {
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */
   ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
-  /** waf斯巴达-waf开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
+  /** 获取基础安全防护（WAF开关）状态 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
   ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 编辑SaaS型WAF域名 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */
   ModifySpartaProtection(data: ModifySpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionResponse>;
@@ -4609,7 +4631,7 @@ declare interface Waf {
   SwitchDomainRules(data?: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
   /** 切换弹性QPS的开关 {@link SwitchElasticModeRequest} {@link SwitchElasticModeResponse} */
   SwitchElasticMode(data: SwitchElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchElasticModeResponse>;
-  /** Waf 斯巴达版本更新cc自动封堵状态 {@link UpsertCCAutoStatusRequest} {@link UpsertCCAutoStatusResponse} */
+  /** 编辑SAAS型接入的紧急CC防护状态 {@link UpsertCCAutoStatusRequest} {@link UpsertCCAutoStatusResponse} */
   UpsertCCAutoStatus(data: UpsertCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCAutoStatusResponse>;
   /** Waf CC V2 Upsert接口 {@link UpsertCCRuleRequest} {@link UpsertCCRuleResponse} */
   UpsertCCRule(data: UpsertCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCRuleResponse>;

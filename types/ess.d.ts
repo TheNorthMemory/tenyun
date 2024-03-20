@@ -204,6 +204,14 @@ declare interface Caller {
   SubOrganizationId?: string;
 }
 
+/** 撤销失败的流程信息 */
+declare interface CancelFailureFlow {
+  /** 合同流程ID，为32位字符串。 */
+  FlowId?: string;
+  /** 撤销失败原因 */
+  Reason?: string;
+}
+
 /** 抄送信息 */
 declare interface CcInfo {
   /** 被抄送方手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此业务通知方。 */
@@ -1793,10 +1801,12 @@ declare interface CreateIntegrationEmployeesRequest {
   Employees: Staff[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 员工邀请方式可通过以下方式进行设置：**H5**：会生成H5的链接，点击链接进入H5的认证加入企业的逻辑。**SMS（默认）**：会通过短信或企业微信消息进行邀请。如果非企业微信场景，则是企业微信消息。其他场景则是短信通知，短信中包含链接，点击后进入微信小程序进行认证加入企业的逻辑。 */
+  /** 员工邀请方式可通过以下途径进行设置：**SMS（默认）**：邀请将通过短信或企业微信消息发送。若场景非企业微信，则采用企业微信消息；其他情境下则使用短信通知。短信内含链接，点击后将进入微信小程序进行认证并加入企业的流程。**H5**：将生成H5链接，用户点击链接后可进入H5页面进行认证并加入企业的流程。**NONE**：系统会根据Endpoint生成签署链接，业务方需获取链接并通知客户。 */
   InvitationNotifyType?: string;
   /** 回跳地址，为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。注：`只有在员工邀请方式（InvitationNotifyType参数）为H5场景下才生效， 其他方式下设置无效。` */
   JumpUrl?: string;
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链**APP**： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型**H5**： 第三方移动端浏览器进行嵌入，不支持小程序嵌入，过期时间一个月注意：InvitationNotifyType 和 Endpoint 的关系图通知类型（InvitationNotifyType）EndpointSMS（默认）不需要传递，会将 Endpoint 默认设置为HTTP_SHORT_URLH5不需要传递，会将 Endpoint 默认设置为 H5NONE所有 Endpoint 都支持（HTTP_URL/HTTP_SHORT_URL/H5/APP）默认为HTTP_SHORT_URL */
+  Endpoint?: string;
 }
 
 declare interface CreateIntegrationEmployeesResponse {
@@ -2362,6 +2372,28 @@ declare interface DescribeBillUsageDetailResponse {
   Total?: number;
   /** 消耗详情 */
   Details?: BillUsageDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCancelFlowsTaskRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 批量撤销任务编号，为32位字符串，通过接口[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl)获得。 */
+  TaskId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeCancelFlowsTaskResponse {
+  /** 批量撤销任务编号，为32位字符串，通过接口[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl)获得。 */
+  TaskId?: string;
+  /** 任务状态，需要关注的状态**PROCESSING** - 任务执行中**END** - 任务处理完成**TIMEOUT** 任务超时未处理完成，用户未在批量撤销链接有效期内操作 */
+  TaskStatus?: string;
+  /** 批量撤销成功的签署流程编号 */
+  SuccessFlowIds?: string[];
+  /** 批量撤销失败的签署流程信息 */
+  FailureFlows?: CancelFailureFlow[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2961,10 +2993,12 @@ declare interface UpdateIntegrationEmployeesRequest {
   Employees: Staff[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 员工邀请方式可通过以下方式进行设置：**H5**：会生成H5的链接，点击链接进入H5的认证加入企业的逻辑。**SMS（默认）**：会通过短信或企业微信消息进行邀请。如果非企业微信场景，则是企业微信消息。其他场景则是短信通知，短信中包含链接，点击后进入微信小程序进行认证加入企业的逻辑。 */
+  /** 员工邀请方式可通过以下途径进行设置：**SMS（默认）**：邀请将通过短信或企业微信消息发送。若场景非企业微信，则采用企业微信消息；其他情境下则使用短信通知。短信内含链接，点击后将进入微信小程序进行认证并加入企业的流程。**H5**：将生成H5链接，用户点击链接后可进入H5页面进行认证并加入企业的流程。**NONE**：系统会根据Endpoint生成签署链接，业务方需获取链接并通知客户。 */
   InvitationNotifyType?: string;
   /** 回跳地址，为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。注：`只有在员工邀请方式（InvitationNotifyType参数）为H5场景下才生效， 其他方式下设置无效。` */
   JumpUrl?: string;
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链**APP**： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型**H5**： 第三方移动端浏览器进行嵌入，不支持小程序嵌入，过期时间一个月注意：InvitationNotifyType 和 Endpoint 的关系图通知类型（InvitationNotifyType）EndpointSMS（默认）不需要传递，会将 Endpoint 默认设置为HTTP_SHORT_URLH5不需要传递，会将 Endpoint 默认设置为 H5NONE所有 Endpoint 都支持（HTTP_URL/HTTP_SHORT_URL/H5/APP）默认为HTTP_SHORT_URL */
+  Endpoint?: string;
 }
 
 declare interface UpdateIntegrationEmployeesResponse {
@@ -3117,6 +3151,8 @@ declare interface Ess {
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 查询企业计费使用情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
+  /** 查询批量撤销签署流程任务结果 {@link DescribeCancelFlowsTaskRequest} {@link DescribeCancelFlowsTaskResponse} */
+  DescribeCancelFlowsTask(data: DescribeCancelFlowsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCancelFlowsTaskResponse>;
   /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
