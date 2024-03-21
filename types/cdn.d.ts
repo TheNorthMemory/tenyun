@@ -1300,7 +1300,7 @@ declare interface IpFilter {
   Switch: string;
   /** IP 黑白名单类型whitelist：白名单blacklist：黑名单 */
   FilterType?: string | null;
-  /** IP 黑白名单列表支持 X.X.X.X 形式 IP，或 /8、 /16、/24 形式网段最多可填充 50 个白名单或 50 个黑名单 */
+  /** IP 黑白名单列表支持 X.X.X.X 格式IPV4地址 或X:X:X:X:X:X:X:X 格式IPV6地址， 或网段格式/X（IPV4:1≤X≤32；IPV6:1≤X≤128）最多可填充 200 个白名单或 200 个黑名单； */
   Filters?: string[] | null;
   /** IP 黑白名单分路径配置，白名单功能 */
   FilterRules?: IpFilterPathRule[] | null;
@@ -1312,7 +1312,7 @@ declare interface IpFilter {
 declare interface IpFilterPathRule {
   /** IP 黑白名单类型whitelist：白名单blacklist：黑名单 */
   FilterType: string | null;
-  /** IP 黑白名单列表支持 X.X.X.X 形式 IP，或 /8、 /16、/24 形式网段最多可填充 50 个白名单或 50 个黑名单 */
+  /** IP 黑白名单列表支持 X.X.X.X 格式IPV4地址 或X:X:X:X:X:X:X:X 格式IPV6地址， 或网段格式/X（IPV4:1≤X≤32；IPV6:1≤X≤128）最多可填充 200 个白名单或 500 个黑名单； */
   Filters: string[] | null;
   /** 规则类型：all：所有文件生效file：指定文件后缀生效directory：指定路径生效path：指定绝对路径生效 */
   RuleType: string | null;

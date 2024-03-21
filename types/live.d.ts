@@ -3171,6 +3171,12 @@ declare interface DescribeLiveWatermarkRulesResponse {
 }
 
 declare interface DescribeLiveWatermarksRequest {
+  /** 水印名称 */
+  Name?: string;
+  /** 分页的索引参数，从1开始 */
+  PageNo?: number;
+  /** 分页的大小参数，默认值500 */
+  PageSize?: number;
 }
 
 declare interface DescribeLiveWatermarksResponse {

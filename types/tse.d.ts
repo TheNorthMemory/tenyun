@@ -3012,9 +3012,9 @@ declare interface DescribeGovernanceServiceContractsRequest {
   /** 北极星引擎实例ID */
   InstanceId: string;
   /** 分页偏移量 */
-  Offset: number;
+  Offset?: number;
   /** 分页条数 */
-  Limit: number;
+  Limit?: number;
   /** 命名空间 */
   Namespace?: string;
   /** 服务名 */

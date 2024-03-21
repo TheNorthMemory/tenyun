@@ -428,6 +428,8 @@ declare interface DataEngineInfo {
   EngineGeneration?: string | null;
   /** 引擎详细类型，支持：SparkSQL/SparkBatch/PrestoSQL/Kyuubi */
   EngineTypeDetail?: string | null;
+  /** 引擎网络ID */
+  EngineNetworkId?: string | null;
 }
 
 /** 数据表数据格式。 */

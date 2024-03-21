@@ -364,7 +364,7 @@ declare interface RoomInfo {
   EnableAutoStart?: number;
   /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
   RecordBackground?: string;
-  /** 录制自定义场景，仅recordlayout=9的时候此参数有效 */
+  /** 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。 */
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
@@ -416,10 +416,10 @@ declare interface RoomItem {
   EnableAutoStart?: number | null;
   /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
   RecordBackground?: string | null;
-  /** 录制自定义场景，仅recordlayout=9的时候此参数有效 */
+  /** 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。 */
   RecordScene?: string | null;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
-  RecordLang?: string | null;
+  RecordLang?: string;
 }
 
 /** 场景配置 */
@@ -752,7 +752,7 @@ declare interface CreateRoomRequest {
   EnableAutoStart?: number;
   /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
   RecordBackground?: string;
-  /** 录制自定义场景，仅recordlayout=9的时候此参数有效 */
+  /** 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。 */
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
@@ -1542,7 +1542,7 @@ declare interface ModifyRoomRequest {
   RecordLiveUrl?: string;
   /** 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效 */
   EnableAutoStart?: number;
-  /** 录制自定义场景，仅recordlayout=9的时候此参数有效 */
+  /** 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。 */
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;

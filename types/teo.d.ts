@@ -110,7 +110,7 @@ declare interface AclUserRule {
 
 /** 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。 */
 declare interface Action {
-  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； SslTlsSecureConf； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)； 修改源站(Origin)。 */
+  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； SslTlsSecureConf； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)； 修改源站(Origin)。 七层回源超时(HTTPUpstreamTimeout)。 Http应答（HttpResponse）。 */
   NormalAction?: NormalAction | null;
   /** 带有请求头/响应头的功能操作，选择该类型的功能项有： 修改 HTTP 请求头（RequestHeader）； 修改HTTP响应头（ResponseHeader）。 */
   RewriteAction?: RewriteAction | null;
@@ -1598,9 +1598,9 @@ declare interface RuleCodeActionParams {
 declare interface RuleCondition {
   /** 运算符，取值有： equal: 等于； notequal: 不等于； exist: 存在； notexist: 不存在。 */
   Operator: string;
-  /** 匹配类型，取值有： filename：文件名； extension：文件后缀； host：HOST； full_url：URL Full，当前站点下完整 URL 路径，必须包含 HTTP 协议，Host 和 路径； url：URL Path，当前站点下 URL 路径的请求； client_country：客户端国家/地区； query_string：查询字符串，当前站点下请求URL的查询字符串； request_header：HTTP请求头部。 */
+  /** 匹配类型，取值有： filename：文件名； extension：文件后缀； host：HOST； full_url：URL Full，当前站点下完整 URL 路径，必须包含 HTTP 协议，Host 和 路径； url：URL Path，当前站点下 URL 路径的请求； client_country：客户端国家/地区； query_string：查询字符串，当前站点下请求URL的查询字符串； request_header：HTTP请求头部。 client_ip：客户端 IP。 */
   Target: string;
-  /** 对应匹配类型的参数值，仅在匹配类型为查询字符串或HTTP请求头并且运算符取值为存在或不存在时允许传空数组，对应匹配类型有： 文件后缀：jpg、txt等文件后缀； 文件名称：例如 foo.jpg 中的 foo； 全部（站点任意请求）： all； HOST：当前站点下的 host ，例如www.maxx55.com； URL Path：当前站点下 URL 路径的请求，例如：/example； URL Full：当前站点下完整 URL 请求，必须包含 HTTP 协议，Host 和 路径，例如：https://www.maxx55.cn/example； 客户端国家/地区：符合ISO3166标准的国家/地区标识； 查询字符串: 当前站点下URL请求中查询字符串的参数值，例如lang=cn&version=1中的cn和1； HTTP 请求头: HTTP请求头部字段值，例如Accept-Language:zh-CN,zh;q=0.9中的zh-CN,zh;q=0.9。 */
+  /** 对应匹配类型的参数值，仅在匹配类型为查询字符串或HTTP请求头并且运算符取值为存在或不存在时允许传空数组，对应匹配类型有： 文件后缀：jpg、txt等文件后缀； 文件名称：例如 foo.jpg 中的 foo； 全部（站点任意请求）： all； HOST：当前站点下的 host ，例如www.maxx55.com； URL Path：当前站点下 URL 路径的请求，例如：/example； URL Full：当前站点下完整 URL 请求，必须包含 HTTP 协议，Host 和 路径，例如：https://www.maxx55.cn/example； 客户端国家/地区：符合ISO3166标准的国家/地区标识； 查询字符串: 当前站点下URL请求中查询字符串的参数值，例如lang=cn&version=1中的cn和1； HTTP 请求头: HTTP请求头部字段值，例如Accept-Language:zh-CN,zh;q=0.9中的zh-CN,zh;q=0.9。 客户端 IP: 当前请求携带的客户端请求IP，支持IPv4 IPv6, 支持IP段。 */
   Values?: string[];
   /** 是否忽略参数值的大小写，默认值为 false。 */
   IgnoreCase?: boolean;
