@@ -76,6 +76,8 @@ declare interface Instance {
   ConfigurationEnvironment?: string | null;
   /** 实例包含的登录服务详情 */
   LoginServices?: LoginService[] | null;
+  /** 应用服务的操作系统类型 */
+  OSType?: string | null;
 }
 
 /** 套餐价格 */

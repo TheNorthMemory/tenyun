@@ -2030,7 +2030,7 @@ declare interface BruteAttackInfo {
   Province?: number | null;
   /** 创建时间 */
   CreateTime?: string | null;
-  /** 阻断状态：1-阻断成功；非1-阻断失败 */
+  /** 0 -不阻断(客户端版本不支持)1 -已阻断2 -阻断失败(程序异常)3 -不阻断(内网不阻断)4 -可用区不支持阻断10-阻断中81-不阻断(未开启阻断)82-不阻断(非专业版)83-不阻断(已加白名单)86-不阻断(系统白名单)87-不阻断(客户端离线) */
   BanStatus?: number | null;
   /** 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件 */
   EventType?: number | null;
@@ -2058,6 +2058,10 @@ declare interface BruteAttackInfo {
   RiskLevel?: number | null;
   /** 事件来源：0--阻断规则，1--威胁情报 */
   DataFrom?: number | null;
+  /** 破解状态说明 */
+  AttackStatusDesc?: string | null;
+  /** 阻断过期时间（仅阻断中事件有效） */
+  BanExpiredTime?: string | null;
 }
 
 /** 标准阻断模式规则 */
@@ -7944,6 +7948,8 @@ declare interface DescribeBanStatusResponse {
   Status?: number;
   /** 是否弹窗提示信息 false: 关闭，true: 开启 */
   ShowTips?: boolean;
+  /** 是否开启智能过白模式 */
+  OpenSmartMode?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13439,8 +13445,10 @@ declare interface ModifyBanModeResponse {
 }
 
 declare interface ModifyBanStatusRequest {
-  /** 阻断状态 0:关闭 1:开启 */
+  /** 阻断开关状态: 0 -- 关闭 1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip) */
   Status: number;
+  /** 是否开启智能过白模式 */
+  OpenSmartMode?: boolean;
 }
 
 declare interface ModifyBanStatusResponse {

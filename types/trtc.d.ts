@@ -716,7 +716,7 @@ declare interface TencentVod {
   SourceContext?: string;
   /** 上传到vod平台的录制文件格式类型，0：mp4(默认), 1: hls, 2:aac(StreamType=1纯音频录制时有效),3: hls+mp4, 4: hls+aac(StreamType=1纯音频录制时有效)。 */
   MediaType?: number;
-  /** 仅支持API录制上传vod，该参数表示用户可以自定义录制文件名前缀，【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符】。前缀与自动生成的录制文件名之间用__UserDefine_u_分开。 */
+  /** 仅支持API录制上传vod，该参数表示用户可以自定义录制文件名前缀，【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符】。前缀与自动生成的录制文件名之间用`__UserDefine_u_` 分开。 */
   UserDefineRecordId?: string;
 }
 
@@ -878,6 +878,16 @@ declare interface WaterMarkTimestamp {
   TimeZone?: number;
   /** 文字水印的字体，支持设置以下值：1. Tencent （默认）2. SourceHanSans */
   Font?: string;
+}
+
+/** 页面录制视频参数 */
+declare interface WebRecordVideoParams {
+  /** 录制画面宽度，默认为1280，取值范围[0, 1920] */
+  Width?: number;
+  /** 录制画面高度，默认为720，取值范围[0, 1080] */
+  Height?: number;
+  /** 指定输出格式，可选hls,mp4 */
+  Format?: string;
 }
 
 declare interface CreateCloudRecordingRequest {
@@ -1420,6 +1430,18 @@ declare interface DescribeUserInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWebRecordRequest {
+  /** 开始页面录制时返回的任务id */
+  TaskId: string;
+}
+
+declare interface DescribeWebRecordResponse {
+  /** 1: 正在录制中2: 任务不存在 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DismissRoomByStrRoomIdRequest {
   /** TRTC的SDKAppId。 */
   SdkAppId: number;
@@ -1612,6 +1634,28 @@ declare interface StartStreamIngestResponse {
   RequestId?: string;
 }
 
+declare interface StartWebRecordRequest {
+  /** 需要录制的网页URL */
+  RecordUrl: string;
+  /** 录制最大时长限制， 单位 s, 合法取值范围[0, 36000], 默认 36000s(10 小时) */
+  MaxDurationLimit?: number;
+  /** 云存储相关的参数，目前支持腾讯云对象存储，不支持第三方云存储以及VOD */
+  StorageParams?: StorageParams;
+  /** 页面录制视频参数 */
+  WebRecordVideoParams?: WebRecordVideoParams;
+  /** TRTC的SdkAppId */
+  SdkAppId?: number;
+  /** 当对重复任务敏感时，请关注此值： 为了避免任务在短时间内重复发起，导致任务重复传入录制RecordId来标识此次任务， 小于32字节，若携带RecordId发起两次以上的开始录制请求，任务只会启动一个，第二个报错FailedOperation.TaskExist。注意StartWebRecord调用失败时而非FailedOperation.TaskExist错误，请更换RecordId重新发起。 */
+  RecordId?: string;
+}
+
+declare interface StartWebRecordResponse {
+  /** 录制任务的唯一Id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopMCUMixTranscodeByStrRoomIdRequest {
   /** TRTC的SDKAppId。 */
   SdkAppId: number;
@@ -1658,6 +1702,16 @@ declare interface StopStreamIngestRequest {
 }
 
 declare interface StopStreamIngestResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopWebRecordRequest {
+  /** 需要停止的任务Id */
+  TaskId: string;
+}
+
+declare interface StopWebRecordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1751,6 +1805,8 @@ declare interface Trtc {
   DescribeUserEvent(data: DescribeUserEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserEventResponse>;
   /** 查询历史用户列表 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
+  /** 查询页面录制 {@link DescribeWebRecordRequest} {@link DescribeWebRecordResponse} */
+  DescribeWebRecord(data: DescribeWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebRecordResponse>;
   /** 解散房间 {@link DismissRoomRequest} {@link DismissRoomResponse} */
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
   /** 解散房间（字符串房间号） {@link DismissRoomByStrRoomIdRequest} {@link DismissRoomByStrRoomIdResponse} */
@@ -1771,6 +1827,8 @@ declare interface Trtc {
   StartPublishCdnStream(data: StartPublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishCdnStreamResponse>;
   /** 开启输入在线媒体流 {@link StartStreamIngestRequest} {@link StartStreamIngestResponse} */
   StartStreamIngest(data: StartStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamIngestResponse>;
+  /** 开始页面录制 {@link StartWebRecordRequest} {@link StartWebRecordResponse} */
+  StartWebRecord(data: StartWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartWebRecordResponse>;
   /** 结束云端混流（旧） {@link StopMCUMixTranscodeRequest} {@link StopMCUMixTranscodeResponse} */
   StopMCUMixTranscode(data: StopMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeResponse>;
   /** 结束云端混流（字符串房间号） {@link StopMCUMixTranscodeByStrRoomIdRequest} {@link StopMCUMixTranscodeByStrRoomIdResponse} */
@@ -1779,6 +1837,8 @@ declare interface Trtc {
   StopPublishCdnStream(data: StopPublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishCdnStreamResponse>;
   /** 停止输入在线媒体流 {@link StopStreamIngestRequest} {@link StopStreamIngestResponse} */
   StopStreamIngest(data: StopStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamIngestResponse>;
+  /** 停止页面录制 {@link StopWebRecordRequest} {@link StopWebRecordResponse} */
+  StopWebRecord(data: StopWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopWebRecordResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
 }

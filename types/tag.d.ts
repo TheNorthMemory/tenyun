@@ -120,7 +120,7 @@ declare interface AddProjectRequest {
 declare interface AddProjectResponse {
   /** 项目Id */
   ProjectId?: number;
-  /** 是否为新项目 */
+  /** 是否为新项目，1是新项目，0不是新项目 */
   IsNew?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -606,7 +606,7 @@ declare interface GetTagKeysRequest {
 }
 
 declare interface GetTagKeysResponse {
-  /** 获取的下一页的Token值 */
+  /** 获取的下一页的Token值，如果当前是最后一页，返回为空 */
   PaginationToken?: string;
   /** 标签键信息。 */
   TagKeys?: string[];
@@ -626,7 +626,7 @@ declare interface GetTagValuesRequest {
 }
 
 declare interface GetTagValuesResponse {
-  /** 获取的下一页的Token值 */
+  /** 获取的下一页的Token值，如果当前是最后一页，返回为空 */
   PaginationToken?: string;
   /** 标签列表。 */
   Tags?: TagInfo[];
@@ -646,7 +646,7 @@ declare interface GetTagsRequest {
 }
 
 declare interface GetTagsResponse {
-  /** 获取的下一页的Token值 */
+  /** 获取的下一页的Token值，如果当前是最后一页，返回为空 */
   PaginationToken?: string;
   /** 标签列表。 */
   Tags?: TagInfo[];

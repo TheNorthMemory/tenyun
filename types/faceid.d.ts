@@ -509,9 +509,9 @@ declare interface DetectAuthRequest {
   RuleId: string;
   /** 本接口不需要传递此参数。 */
   TerminalType?: string;
-  /** 身份标识（未使用OCR服务时，必须传入）。规则：a-z，A-Z，0-9组合。最长长度32位。 */
+  /** 身份标识（是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示）。规则：a-z，A-Z，0-9组合。最长长度32位。 */
   IdCard?: string;
-  /** 姓名。（未使用OCR服务时，必须传入）最长长度32位。中文请使用UTF-8编码。 */
+  /** 姓名。（是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示）。最长长度32位。中文请使用UTF-8编码。 */
   Name?: string;
   /** 认证结束后重定向的回调链接地址。最长长度1024位。 */
   RedirectUrl?: string;
