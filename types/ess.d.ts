@@ -96,6 +96,8 @@ declare interface ApproverOption {
   NoRefuse?: boolean;
   /** 签署方是否可以转他人处理 **false** : ( 默认)可以转他人处理 **true** :不可以转他人处理 */
   NoTransfer?: boolean;
+  /** 允许编辑签署人信息（嵌入式使用） 默认true-可以编辑 false-不可以编辑 */
+  CanEditApprover?: boolean;
   /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充` */
   FillType?: number;
   /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
@@ -310,6 +312,26 @@ declare interface CreateFlowOption {
   ForbidEditFillComponent?: boolean;
   /** 定制化发起合同弹窗的描述信息，描述信息最长500字符 */
   CustomCreateFlowDescription?: string;
+  /** 禁止添加签署方，若为true则在发起流程的可嵌入页面隐藏“添加签署人按钮” */
+  ForbidAddApprover?: string;
+  /** 禁止设置设置签署流程属性 (顺序、合同签署认证方式等)，若为true则在发起流程的可嵌入页面隐藏签署流程设置面板 */
+  ForbidEditFlowProperties?: string;
+  /** 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用，具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  HideComponentTypes?: string[];
+  /** 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用，具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  ShowComponentTypes?: string[];
+  /** 发起流程的可嵌入页面结果页配置 */
+  ResultPageConfig?: CreateResultPageConfig[];
+}
+
+/** 发起流程的可嵌入页面操作结果页配置 */
+declare interface CreateResultPageConfig {
+  /** 0 : 发起审批成功页面（通过接口创建发起流程web页面发起时设置了NeedCreateReview参数为true） */
+  Type: number;
+  /** 结果页标题，不超过50字 */
+  Title: string;
+  /** 结果页描述，不超过200字 */
+  Description?: string;
 }
 
 /** 创建员工的结果 */

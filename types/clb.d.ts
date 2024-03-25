@@ -726,7 +726,7 @@ declare interface LoadBalancer {
   SnatPro?: boolean | null;
   /** 开启SnatPro负载均衡后，SnatIp列表。 */
   SnatIps?: SnatIp[] | null;
-  /** 性能容量型规格 */
+  /** 性能容量型规格。 clb.c2.medium：标准型规格 clb.c3.small：高阶型1规格 clb.c3.medium：高阶型2规格 clb.c4.small：超强型1规格 clb.c4.medium：超强型2规格 clb.c4.large：超强型3规格 clb.c4.xlarge：超强型4规格 null：共享型实例 */
   SlaType?: string | null;
   /** vip是否被封堵 */
   IsBlock?: boolean | null;

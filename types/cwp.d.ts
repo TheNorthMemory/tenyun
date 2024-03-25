@@ -490,6 +490,8 @@ declare interface AssetMachineBaseInfo {
   FirstTime?: string;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** cpu负载读数（仅linux系统有效） */
+  CpuLoadNum?: string | null;
 }
 
 /** 资产指纹中服务器列表的基本信息 */
