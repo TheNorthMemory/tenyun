@@ -418,6 +418,8 @@ declare interface FillApproverInfo {
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
   ApproverIdCardNumber?: string;
+  /** 合同流程ID，补充合同组子合同动态签署人时必传。 */
+  FlowId?: string;
 }
 
 /** 批量补充签署人时，补充失败的报错说明 */
@@ -612,12 +614,34 @@ declare interface FlowFileInfo {
   NeedSignReview?: boolean;
 }
 
+/** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
+declare interface FlowGroupApproverInfo {
+  /** 合同流程ID。 */
+  FlowId?: string;
+  /** 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。` */
+  RecipientId?: string;
+}
+
+/** 合同组签署方信息 */
+declare interface FlowGroupApprovers {
+  /** 合同流程ID */
+  FlowId?: string | null;
+  /** 签署方信息，包含合同ID和角色ID用于定位RecipientId。 */
+  Approvers?: ApproverItem[] | null;
+}
+
 /** 合同组的配置项信息包括：在合同组签署过程中，是否需要对每个子合同进行独立的意愿确认。 */
 declare interface FlowGroupOptions {
   /** 发起方企业经办人（即签署人为发起方企业员工）是否需要对子合同进行独立的意愿确认**false**（默认）：发起方企业经办人签署时对所有子合同进行统一的意愿确认。**true**：发起方企业经办人签署时需要对子合同进行独立的意愿确认。 */
   SelfOrganizationApproverSignEach?: boolean;
   /** 非发起方企业经办人（即：签署人为个人或者不为发起方企业的员工）是否需要对子合同进行独立的意愿确认**false**（默认）：非发起方企业经办人签署时对所有子合同进行统一的意愿确认。**true**：非发起方企业经办人签署时需要对子合同进行独立的意愿确认。 */
   OtherApproverSignEach?: boolean;
+}
+
+/** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
+declare interface FlowGroupUrlInfo {
+  /** 合同组子合同和签署方的信息，用于补充动态签署人。 */
+  FlowGroupApproverInfos?: FlowGroupApproverInfo[];
 }
 
 /** 此结构体 (FlowInfo) 用于描述签署流程信息。 */
@@ -1429,14 +1453,16 @@ declare interface ChannelCreateEmbedWebUrlResponse {
 declare interface ChannelCreateFlowApproversRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
-  FlowId: string;
   /** 补充企业签署人信息。- 如果发起方指定的补充签署人是企业签署人，则需要提供企业名称或者企业OpenId；- 如果不指定，则使用姓名和手机号进行补充。 */
   Approvers: FillApproverInfo[];
+  /** 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId?: string;
   /** 签署人信息补充方式**1**: 表示往未指定签署人的节点，添加一个明确的签署人，支持企业或个人签署方。 */
   FillApproverType?: number;
   /** 操作人信息 */
   Operator?: UserInfo;
+  /** 合同流程组的组ID, 在合同流程组场景下，生成合同流程组的签署链接时需要赋值 */
+  FlowGroupId?: string;
 }
 
 declare interface ChannelCreateFlowApproversResponse {
@@ -1516,6 +1542,8 @@ declare interface ChannelCreateFlowGroupByFilesResponse {
   FlowGroupId?: string | null;
   /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:`此数组的顺序和入参中的FlowGroupInfos顺序一致` */
   FlowIds?: string[] | null;
+  /** 合同组签署方信息。 */
+  Approvers?: FlowGroupApprovers[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1536,6 +1564,8 @@ declare interface ChannelCreateFlowGroupByTemplatesResponse {
   FlowIds?: string[];
   /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
   TaskInfos?: TaskInfo[];
+  /** 合同组签署方信息 */
+  Approvers?: FlowGroupApprovers[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2461,6 +2491,8 @@ declare interface CreateSignUrlsRequest {
   Hides?: number[];
   /** 参与方角色ID，用于生成动态签署人链接完成领取。注：`使用此参数需要与flow_ids数量一致并且一一对应, 表示在对应同序号的流程中的参与角色ID`， */
   RecipientIds?: string[];
+  /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
+  FlowGroupUrlInfo?: FlowGroupUrlInfo;
 }
 
 declare interface CreateSignUrlsResponse {

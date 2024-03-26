@@ -35,9 +35,9 @@ declare interface ApproverInfo {
   /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:**0**：企业**1**：个人**3**：企业静默签署注：`类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。`**7**: 个人自动签署，适用于个人自动签场景。注: `个人自动签场景为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverType: number;
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
-  ApproverName: string;
+  ApproverName?: string;
   /** 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此合同签署方。 */
-  ApproverMobile: string;
+  ApproverMobile?: string;
   /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。 */
   OrganizationName?: string;
   /** 合同中的签署控件列表，列表中可支持下列多种签署控件,控件的详细定义参考开发者中心的Component结构体 个人签名/印章 企业印章 骑缝章等签署控件 */
@@ -470,6 +470,8 @@ declare interface FillApproverInfo {
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
   ApproverIdCardNumber?: string;
+  /** 合同流程ID，补充合同组子合同动态签署人时必传。 */
+  FlowId?: string;
 }
 
 /** 批量补充签署人时，补充失败的报错说明 */
@@ -658,6 +660,22 @@ declare interface FlowDetailInfo {
   Creator?: string | null;
 }
 
+/** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
+declare interface FlowGroupApproverInfo {
+  /** 合同流程ID。 */
+  FlowId?: string;
+  /** 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。` */
+  RecipientId?: string;
+}
+
+/** 合同组签署方信息 */
+declare interface FlowGroupApprovers {
+  /** 合同流程ID */
+  FlowId?: string | null;
+  /** 签署方信息，包含合同ID和角色ID用于定位RecipientId。 */
+  Approvers?: ApproverItem[] | null;
+}
+
 /** 此结构体(FlowGroupInfo)描述的是合同组(流程组)的单个合同(流程)信息 */
 declare interface FlowGroupInfo {
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
@@ -696,6 +714,12 @@ declare interface FlowGroupOptions {
   SelfOrganizationApproverNotifyType?: string;
   /** 发起合同（流程）组他方经办人通知方式签署通知类型，支持以下类型sms : 短信 (默认值)none : 不通知 */
   OtherApproverNotifyType?: string;
+}
+
+/** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
+declare interface FlowGroupUrlInfo {
+  /** 合同组子合同和签署方的信息，用于补充动态签署人。 */
+  FlowGroupApproverInfos?: FlowGroupApproverInfo[];
 }
 
 /** 电子文档的控件填充信息。按照控件类型进行相应的填充。当控件的 ComponentType=‘SIGN_SEAL'时，FormField.ComponentValue填入印章id。* 可用于指定自动签模板未设置自动签印章时，可由接口传入自动签印章* 若指定的控件上已设置ComponentValue，那以已经设置的ComponentValue为准```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "sealId（印章id）"}```当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "文本内容"}```当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "多行文本内容"}```当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "true"}```当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"}```当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue支持填入附件图片或者文件的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；支持的文件类型包括doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt、pdf```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"}```当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "选择的内容"}```当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "2023年01月01日"}```当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "广东省深圳市福田区"}```【数据表格传参说明】当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例3（表格设置字体加粗颜色）：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "CENTER"} }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "LEFT"} }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789", "style": {"color": "#b500bf", "fontSize": 12,"bold": false,"align": "RIGHT"} } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 || cells.N.style | String | 单元格字体风格配置 ，风格配置的json字符串 如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"} |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF 字符串形如： "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER */
@@ -1525,16 +1549,18 @@ declare interface CreateExtendedServiceAuthInfosResponse {
 declare interface CreateFlowApproversRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
-  FlowId: string;
   /** 补充企业签署人信息。- 如果发起方指定的补充签署人是企业微信签署人（ApproverSource=WEWORKAPP），则需要提供企业微信UserId进行补充；- 如果不指定，则使用姓名和手机号进行补充。 */
   Approvers: FillApproverInfo[];
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId?: string;
   /** 签署人信息补充方式**0**: 添加或签人候选人，或签支持一个节点传多个签署人，不传值默认或签。注: `或签只支持企业签署方`**1**: 表示往未指定签署人的节点，添加一个明确的签署人，支持企业或个人签署方。 */
   FillApproverType?: number;
   /** 在可定制的企业微信通知中，发起人可以根据具体需求进行自定义设置。 */
   Initiator?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 合同流程组的组ID, 在合同流程组场景下，生成合同流程组的签署链接时需要赋值 */
+  FlowGroupId?: string;
 }
 
 declare interface CreateFlowApproversResponse {
@@ -1640,6 +1666,8 @@ declare interface CreateFlowGroupByFilesResponse {
   FlowGroupId?: string | null;
   /** 合同(流程)组中子合同列表. */
   FlowIds?: string[] | null;
+  /** 合同组签署方信息。 */
+  Approvers?: FlowGroupApprovers[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1662,6 +1690,8 @@ declare interface CreateFlowGroupByTemplatesResponse {
   FlowGroupId?: string | null;
   /** 合同(流程)组中子合同列表. */
   FlowIds?: string[] | null;
+  /** 合同组签署人信息。 */
+  Approvers?: FlowGroupApprovers[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2131,6 +2161,8 @@ declare interface CreateSchemeUrlRequest {
   Hides?: number[];
   /** 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。` */
   RecipientId?: string;
+  /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
+  FlowGroupUrlInfo?: FlowGroupUrlInfo;
 }
 
 declare interface CreateSchemeUrlResponse {

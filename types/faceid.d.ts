@@ -728,6 +728,28 @@ declare interface GetFaceIdResultResponse {
   RequestId?: string;
 }
 
+declare interface GetFaceIdRiskInfoRequest {
+  /** SDK人脸核身流程的标识，调用GetFaceidRiskInfoToken接口时生成。 */
+  FaceIdToken: string;
+}
+
+declare interface GetFaceIdRiskInfoResponse {
+  /** 描述当前请求所在设备的风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备 */
+  DeviceInfoTag?: string | null;
+  /** 描述当前请求所在设备的风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级 */
+  DeviceInfoLevel?: number | null;
+  /** 设备id标识 */
+  OpenId?: string | null;
+  /** 描述当前请求所在设备的相机指纹风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级 */
+  CameraInfoLevel?: number | null;
+  /** 描述当前请求所在设备的相机指纹风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备，空表示没有相机指纹风险 */
+  CameraInfoTag?: string | null;
+  /** 获取token时透传的信息 */
+  Extra?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetFaceIdTokenRequest {
   /** 本地上传照片(LOCAL)、商业库(BUSINESS) */
   CompareLib: string;
@@ -748,6 +770,20 @@ declare interface GetFaceIdTokenRequest {
 }
 
 declare interface GetFaceIdTokenResponse {
+  /** 有效期 10分钟。只能完成1次核身。 */
+  FaceIdToken?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetFaceidRiskInfoTokenRequest {
+  /** SDK中生成的Meta字符串 */
+  Meta?: string;
+  /** 透传参数 1000长度字符串 */
+  Extra?: string;
+}
+
+declare interface GetFaceidRiskInfoTokenResponse {
   /** 有效期 10分钟。只能完成1次核身。 */
   FaceIdToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1213,8 +1249,12 @@ declare interface Faceid {
   GetEidToken(data: GetEidTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetEidTokenResponse>;
   /** 获取SDK核验结果 {@link GetFaceIdResultRequest} {@link GetFaceIdResultResponse} */
   GetFaceIdResult(data: GetFaceIdResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdResultResponse>;
+  /** 获取SDK设备风险信息 {@link GetFaceIdRiskInfoRequest} {@link GetFaceIdRiskInfoResponse} */
+  GetFaceIdRiskInfo(data: GetFaceIdRiskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdRiskInfoResponse>;
   /** 获取SDKToken {@link GetFaceIdTokenRequest} {@link GetFaceIdTokenResponse} */
   GetFaceIdToken(data: GetFaceIdTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdTokenResponse>;
+  /** 获取风险信息Token {@link GetFaceidRiskInfoTokenRequest} {@link GetFaceidRiskInfoTokenResponse} */
+  GetFaceidRiskInfoToken(data?: GetFaceidRiskInfoTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceidRiskInfoTokenResponse>;
   /** 获取数字验证码 {@link GetLiveCodeRequest} {@link GetLiveCodeResponse} */
   GetLiveCode(data?: GetLiveCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetLiveCodeResponse>;
   /** 查询账单明细（微信渠道） {@link GetWeChatBillDetailsRequest} {@link GetWeChatBillDetailsResponse} */

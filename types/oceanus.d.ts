@@ -1013,7 +1013,7 @@ declare interface CopyJobsResponse {
 declare interface CreateFolderRequest {
   /** 新建文件夹名 */
   FolderName: string;
-  /** 新建文件夹的父目录ID */
+  /** 新建文件夹的父目录ID（根目录为"root"） */
   ParentId: string;
   /** 文件夹类型，0是任务文件夹，1是依赖文件夹 */
   FolderType?: number;

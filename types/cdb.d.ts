@@ -1622,28 +1622,38 @@ declare interface TagsInfoOfInstance {
   Tags: TagInfoUnit[];
 }
 
+/** 任务列表中的部分任务支持特定的附加信息 */
+declare interface TaskAttachInfo {
+  /** 升级任务：”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。 */
+  AttachKey?: string | null;
+  /** 升级任务：”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。 */
+  AttachValue?: string | null;
+}
+
 /** 实例任务详情 */
 declare interface TaskDetail {
   /** 错误码。 */
-  Code: number;
+  Code?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 实例任务 ID。 */
-  JobId: number;
+  JobId?: number;
   /** 实例任务进度。 */
-  Progress: number;
+  Progress?: number;
   /** 实例任务状态，可能的值包括："UNDEFINED" - 未定义；"INITIAL" - 初始化；"RUNNING" - 运行中；"SUCCEED" - 执行成功；"FAILED" - 执行失败；"KILLED" - 已终止；"REMOVED" - 已删除；"PAUSED" - 已暂停。"WAITING" - 等待中（可撤销） */
-  TaskStatus: string;
+  TaskStatus?: string;
   /** 实例任务类型，可能的值包括："ROLLBACK" - 数据库回档；"SQL OPERATION" - SQL操作；"IMPORT DATA" - 数据导入；"MODIFY PARAM" - 参数设置；"INITIAL" - 初始化云数据库实例；"REBOOT" - 重启云数据库实例；"OPEN GTID" - 开启云数据库实例GTID；"UPGRADE RO" - 只读实例升级；"BATCH ROLLBACK" - 数据库批量回档；"UPGRADE MASTER" - 主实例升级；"DROP TABLES" - 删除云数据库库表；"SWITCH DR TO MASTER" - 灾备实例提升为主。 */
-  TaskType: string;
+  TaskType?: string;
   /** 实例任务开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 实例任务结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 任务关联的实例 ID。 */
-  InstanceIds: string[] | null;
+  InstanceIds?: string[] | null;
   /** 异步任务的请求 ID。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
+  /** 任务的附加信息。 */
+  TaskAttachInfo?: TaskAttachInfo[] | null;
 }
 
 /** 文件上传描述 */
@@ -2073,11 +2083,15 @@ declare interface CreateCloneInstanceRequest {
   CageId?: string;
   /** 项目ID，默认项目ID0 */
   ProjectId?: number;
+  /** 付费类型，PRE_PAID：包年包月，USED_PAID：按量计费。默认为按量计费 */
+  PayType?: string;
+  /** 实例时长，PayType为PRE_PAID时必传，单位：月，可选值包括 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。 */
+  Period?: number;
 }
 
 declare interface CreateCloneInstanceResponse {
   /** 异步任务的请求ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

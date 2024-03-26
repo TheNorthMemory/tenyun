@@ -3726,17 +3726,17 @@ declare interface FetchMessageListByOffsetResponse {
 
 declare interface GroupInfoResponse {
   /** 错误码，正常为0 */
-  ErrorCode: string;
+  ErrorCode?: string;
   /** group 状态描述（常见的为 Empty、Stable、Dead 三种状态）：Dead：消费分组不存在Empty：消费分组，当前没有任何消费者订阅PreparingRebalance：消费分组处于 rebalance 状态CompletingRebalance：消费分组处于 rebalance 状态Stable：消费分组中各个消费者已经加入，处于稳定状态 */
-  State: string;
+  State?: string;
   /** 消费分组选择的协议类型正常的消费者一般为 consumer 但有些系统采用了自己的协议如 kafka-connect 用的就是 connect。只有标准的 consumer 协议，本接口才知道具体的分配方式的格式，才能解析到具体的 partition 的分配情况 */
-  ProtocolType: string;
+  ProtocolType?: string;
   /** 消费者 partition 分配算法常见的有如下几种(Kafka 消费者 SDK 默认的选择项为 range)：range、 roundrobin、 sticky */
-  Protocol: string;
+  Protocol?: string;
   /** 仅当 state 为 Stable 且 protocol_type 为 consumer 时， 该数组才包含信息 */
-  Members: GroupInfoMember[];
+  Members?: GroupInfoMember[];
   /** Kafka 消费分组 */
-  Group: string;
+  Group?: string;
 }
 
 declare interface GroupOffsetResponse {
@@ -3919,13 +3919,13 @@ declare interface ModifyAclRuleRequest {
   InstanceId: string;
   /** ACL策略名 */
   RuleName: string;
-  /** 是否应用到新增的Topic */
-  IsApplied: number;
+  /** 修改预设规则时传入,是否应用到新增的Topic */
+  IsApplied?: number;
 }
 
 declare interface ModifyAclRuleResponse {
   /** 规则的唯一表示Key */
-  Result: number;
+  Result?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4389,7 +4389,7 @@ declare interface Ckafka {
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
   /** 按量实例缩容 {@link InstanceScalingDownRequest} {@link InstanceScalingDownResponse} */
   InstanceScalingDown(data: InstanceScalingDownRequest, config?: AxiosRequestConfig): AxiosPromise<InstanceScalingDownResponse>;
-  /** 修改Acl策略 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */
+  /** 修改Acl预设规则 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */
   ModifyAclRule(data: ModifyAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclRuleResponse>;
   /** 编辑Datahub连接源 {@link ModifyConnectResourceRequest} {@link ModifyConnectResourceResponse} */
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;

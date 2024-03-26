@@ -12265,11 +12265,17 @@ declare interface ModifyTaskInfoRequest {
   DependencyWorkflow?: string;
   /** 依赖配置 */
   DependencyConfigDTOs?: DependencyConfig[];
+  /** 执行耗时 */
+  ExecutionTTL?: number;
+  /** 脚本是否改变 */
+  ScriptChange?: boolean;
+  /** 责任人id */
+  InChargeIds?: string[];
 }
 
 declare interface ModifyTaskInfoResponse {
   /** 执行结果 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
