@@ -243,6 +243,8 @@ declare interface CreateInstanceByApiRequest {
   Resources: ResourceSpecNew[];
   /** 标签列表 */
   Tags?: Tag;
+  /** 版本 */
+  ProductVersion?: string;
 }
 
 declare interface CreateInstanceByApiResponse {

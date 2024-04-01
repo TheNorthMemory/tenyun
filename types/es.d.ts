@@ -452,7 +452,7 @@ declare interface InstanceInfo {
   VpcUid?: string;
   /** 实例所属子网的UID */
   SubnetUid?: string;
-  /** 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁, 2:创建集群时初始化中 */
+  /** 实例状态，0:处理中,1:正常,-1:停止,-2:销毁中,-3:已销毁, -4:隔离中,2:创建集群时初始化中 */
   Status?: number;
   /** 自动续费标识。取值范围：RENEW_FLAG_AUTO：自动续费 RENEW_FLAG_MANUAL：不自动续费默认取值：RENEW_FLAG_DEFAULT：不自动续费若该参数指定为 RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。 */
   RenewFlag?: string;
@@ -606,6 +606,10 @@ declare interface InstanceInfo {
   KibanaPrivateVip?: string | null;
   /** 自定义kibana内网url */
   CustomKibanaPrivateUrl?: string | null;
+  /** 节点出站访问详细信息 */
+  OutboundPublicAcls?: OutboundPublicAcl[] | null;
+  /** 网络连接方案 */
+  NetConnectScheme?: string | null;
 }
 
 /** ES集群日志详细信息 */
@@ -903,41 +907,43 @@ declare interface NodeInfo {
 /** 节点维度视图数据 */
 declare interface NodeView {
   /** 节点ID */
-  NodeId: string;
+  NodeId?: string;
   /** 节点IP */
-  NodeIp: string;
+  NodeIp?: string;
   /** 节点是否可见 */
-  Visible: number;
+  Visible?: number;
   /** 是否熔断 */
-  Break: number;
+  Break?: number;
   /** 节点总磁盘大小 */
-  DiskSize: number;
+  DiskSize?: number;
   /** 磁盘使用率 */
-  DiskUsage: number;
+  DiskUsage?: number;
   /** 节点内存大小，单位GB */
-  MemSize: number;
+  MemSize?: number;
   /** 内存使用率 */
-  MemUsage: number;
+  MemUsage?: number;
   /** 节点cpu个数 */
-  CpuNum: number;
+  CpuNum?: number;
   /** cpu使用率 */
-  CpuUsage: number;
+  CpuUsage?: number;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 节点角色 */
-  NodeRole: string;
+  NodeRole?: string;
   /** 节点HTTP IP */
-  NodeHttpIp: string;
+  NodeHttpIp?: string;
   /** JVM内存使用率 */
-  JvmMemUsage: number;
+  JvmMemUsage?: number;
   /** 节点分片数 */
-  ShardNum: number;
+  ShardNum?: number;
   /** 节点上磁盘ID列表 */
-  DiskIds: string[];
+  DiskIds?: string[];
   /** 是否为隐藏可用区 */
-  Hidden: boolean;
+  Hidden?: boolean;
   /** 是否充当协调节点的角色 */
   IsCoordinationNode?: boolean;
+  /** CVM运行状态 */
+  CVMStatus?: string;
 }
 
 /** ES集群操作详细信息 */
@@ -1014,6 +1020,14 @@ declare interface OptionalWebServiceInfo {
   PrivateVip?: string | null;
   /** 自定义cerebro内网url */
   CustomPrivateUrl?: string | null;
+}
+
+/** 节点出站访问信息 */
+declare interface OutboundPublicAcl {
+  /** 允许节点出站访问的节点类型 */
+  NodeType: string | null;
+  /** 允许节点出站访问的白名单 */
+  WhiteHostList?: string[] | null;
 }
 
 /** 任务进度详情 */
@@ -1236,7 +1250,7 @@ declare interface CreateIndexRequest {
   /** 创建的索引名 */
   IndexName: string;
   /** 【必填】创建的索引元数据JSON，如mappings、settings */
-  IndexMetaJson?: string;
+  IndexMetaJson: string;
   /** 集群访问用户名 */
   Username?: string;
   /** 集群访问密码 */
@@ -1989,6 +2003,8 @@ declare interface RestartNodesRequest {
   RestartMode?: string;
   /** 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险 */
   IsOffline?: boolean;
+  /** cvm延迟上架时间 */
+  CvmDelayOnlineTime?: number;
 }
 
 declare interface RestartNodesResponse {
@@ -2163,6 +2179,12 @@ declare interface UpdateInstanceRequest {
   CerebroPrivateDomain?: string;
   /** 变更为https集群，默认是http */
   Protocol?: string;
+  /** 节点出站访问详细信息 */
+  OutboundPublicAcls?: OutboundPublicAcl[];
+  /** 节点出站访问操作OPEN 开启CLOSE 关闭 */
+  OutboundPublicAccess?: string;
+  /** cvm延迟上架参数 */
+  CvmDelayOnlineTime?: number;
 }
 
 declare interface UpdateInstanceResponse {
@@ -2315,6 +2337,8 @@ declare interface UpgradeInstanceRequest {
   CosBackup?: boolean;
   /** 滚动模式时，是否跳过检查，进行强制重启。默认值为false */
   SkipCheckForceRestart?: boolean;
+  /** cvm延迟上架参数 */
+  CvmDelayOnlineTime?: number;
 }
 
 declare interface UpgradeInstanceResponse {

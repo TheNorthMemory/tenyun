@@ -60,6 +60,48 @@ declare interface ImageToImageResponse {
   RequestId?: string;
 }
 
+declare interface QueryTextToImageProJobRequest {
+  /** 任务 ID。 */
+  JobId: string;
+}
+
+declare interface QueryTextToImageProJobResponse {
+  /** 当前任务状态码：1：排队中、3：处理中、5：处理失败、7：处理完成。 */
+  JobStatusCode?: string;
+  /** 当前任务状态：排队中、处理中、处理失败或者处理完成。 */
+  JobStatusMsg?: string;
+  /** 任务处理失败错误码。 */
+  JobErrorCode?: string;
+  /** 任务处理失败错误信息。 */
+  JobErrorMsg?: string;
+  /** 生成图 URL 列表，有效期1小时，请及时保存。 */
+  ResultImage?: string[];
+  /** 结果 detail 数组，Success 代表成功。 */
+  ResultDetails?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitTextToImageProJobRequest {
+  /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传100个 utf-8 字符。 */
+  Prompt: string;
+  /** 绘画风格。请在 [文生图（高级版）风格列表](https://cloud.tencent.com/document/product/1668/104567) 中选择期望的风格，传入风格编号。不传默认不指定风格。 */
+  Style?: string;
+  /** 生成图分辨率。支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3），不传默认使用1024:1024。 */
+  Resolution?: string;
+  /** 为生成结果图添加显式水印标识的开关，默认为1。 1：添加。 0：不添加。 其他数值：默认按1处理。 建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 文生图引擎，默认使用engine1。 取值： engine1 engine2 */
+  Engine?: string;
+}
+
+declare interface SubmitTextToImageProJobResponse {
+  /** 任务 ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TextToImageRequest {
   /** 文本描述。算法将根据输入的文本智能生成与之相关的图像。建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。不能为空，推荐使用中文。最多可传256个 utf-8 字符。 */
   Prompt: string;
@@ -89,6 +131,10 @@ declare interface Aiart {
   (): Versions;
   /** 智能图生图 {@link ImageToImageRequest} {@link ImageToImageResponse} */
   ImageToImage(data?: ImageToImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToImageResponse>;
+  /** 查询文生图（高级版）任务 {@link QueryTextToImageProJobRequest} {@link QueryTextToImageProJobResponse} */
+  QueryTextToImageProJob(data: QueryTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageProJobResponse>;
+  /** 提交文生图（高级版）任务 {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */
+  SubmitTextToImageProJob(data: SubmitTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageProJobResponse>;
   /** 智能文生图 {@link TextToImageRequest} {@link TextToImageResponse} */
   TextToImage(data: TextToImageRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageResponse>;
 }

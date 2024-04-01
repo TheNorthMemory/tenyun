@@ -1436,7 +1436,7 @@ declare interface DescribeWebRecordRequest {
 }
 
 declare interface DescribeWebRecordResponse {
-  /** 1: 正在录制中2: 任务不存在 */
+  /** 1: 正在录制中 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

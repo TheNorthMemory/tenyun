@@ -3982,6 +3982,30 @@ declare interface QueryResultResponse {
   RequestId?: string;
 }
 
+declare interface QueryTaskCostDetailRequest {
+  /** 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。task-operator- string （子uin过滤） */
+  Filters?: Filter[];
+  /** 起始时间点，格式为yyyy-mm-dd HH:MM:SS。默认为45天前的当前时刻 */
+  StartTime?: string;
+  /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻 */
+  EndTime?: string;
+  /** 数据引擎名称，用于筛选 */
+  DataEngineName?: string;
+  /** 下一页的标识 */
+  SearchAfter?: string;
+  /** 每页的大小 */
+  PageSize?: number;
+}
+
+declare interface QueryTaskCostDetailResponse {
+  /** 下一页的标识 */
+  SearchAfter?: string | null;
+  /** 返回的数据 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewDataEngineRequest {
   /** CU队列名称 */
   DataEngineName: string;
@@ -4407,6 +4431,8 @@ declare interface Dlc {
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
   /** 获取任务结果查询 {@link QueryResultRequest} {@link QueryResultResponse} */
   QueryResult(data: QueryResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResultResponse>;
+  /** 查询任务消耗明细 {@link QueryTaskCostDetailRequest} {@link QueryTaskCostDetailResponse} */
+  QueryTaskCostDetail(data?: QueryTaskCostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTaskCostDetailResponse>;
   /** 续费包年包月数据引擎 {@link RenewDataEngineRequest} {@link RenewDataEngineResponse} */
   RenewDataEngine(data: RenewDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDataEngineResponse>;
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */

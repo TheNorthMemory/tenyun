@@ -549,6 +549,8 @@ declare interface CreateDatasourceRequest {
   Vport?: string;
   /** 腾讯云私有网络标识 */
   VpcId?: string;
+  /** 操作权限限制 */
+  OperationAuthLimit?: string[];
 }
 
 declare interface CreateDatasourceResponse {
@@ -609,6 +611,8 @@ declare interface CreateProjectRequest {
   IsApply?: boolean;
   /** 默认看板 */
   DefaultPanelType?: number;
+  /** 管理平台 */
+  ManagePlatform?: string;
 }
 
 declare interface CreateProjectResponse {
@@ -1037,6 +1041,8 @@ declare interface ModifyProjectRequest {
   DefaultPanelType?: number;
   /** 2 */
   PanelScope?: string;
+  /** 项目管理平台 */
+  ManagePlatform?: string;
 }
 
 declare interface ModifyProjectResponse {

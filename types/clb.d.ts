@@ -1351,7 +1351,7 @@ declare interface BatchRegisterTargetsRequest {
 
 declare interface BatchRegisterTargetsResponse {
   /** 绑定失败的监听器ID，如为空表示全部绑定成功。 */
-  FailListenerIdSet?: string[] | null;
+  FailListenerIdSet?: string[];
   /** 绑定失败错误原因信息。 */
   Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */

@@ -4551,7 +4551,7 @@ declare interface ReleaseIsolatedDBInstancesRequest {
 
 declare interface ReleaseIsolatedDBInstancesResponse {
   /** 解隔离操作的结果集。 */
-  Items: ReleaseResult[];
+  Items?: ReleaseResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5129,7 +5129,7 @@ declare interface Cdb {
   OpenDBInstanceGTID(data: OpenDBInstanceGTIDRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBInstanceGTIDResponse>;
   /** 开通实例外网访问 {@link OpenWanServiceRequest} {@link OpenWanServiceResponse} */
   OpenWanService(data: OpenWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanServiceResponse>;
-  /** 解隔离云数据库实例 {@link ReleaseIsolatedDBInstancesRequest} {@link ReleaseIsolatedDBInstancesResponse} */
+  /** 解隔离按量计费云数据库实例 {@link ReleaseIsolatedDBInstancesRequest} {@link ReleaseIsolatedDBInstancesResponse} */
   ReleaseIsolatedDBInstances(data: ReleaseIsolatedDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIsolatedDBInstancesResponse>;
   /** 负载均衡数据库代理 {@link ReloadBalanceProxyNodeRequest} {@link ReloadBalanceProxyNodeResponse} */
   ReloadBalanceProxyNode(data: ReloadBalanceProxyNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadBalanceProxyNodeResponse>;

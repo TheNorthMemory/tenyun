@@ -86,6 +86,16 @@ declare interface ClassScoreItem {
   ScoreMsg?: string | null;
 }
 
+/** 自定义消息 */
+declare interface CustomMsgContent {
+  /** 自定义消息数据。 */
+  Data?: string | null;
+  /** 自定义消息描述信息。 */
+  Desc?: string | null;
+  /** 扩展字段。 */
+  Ext?: string | null;
+}
+
 /** 文档信息 */
 declare interface DocumentInfo {
   /** 文档Id */
@@ -262,6 +272,8 @@ declare interface MessageItem {
   TextMessage?: string | null;
   /** 图片消息URL。 message type为1时有效。 */
   ImageMessage?: string | null;
+  /** 自定义消息内容。message type为2时有效。 */
+  CustomMessage?: CustomMsgContent | null;
 }
 
 /** 历史消息列表 */
@@ -278,7 +290,7 @@ declare interface MessageList {
 
 /** 自定义消息结构 */
 declare interface MsgBody {
-  /** TIM 消息对象类型，目前支持的消息对象包括：TIMTextElem（文本消息）TIMFaceElem（表情消息）TIMImageElem（图像消息） */
+  /** TIM 消息对象类型，目前支持的消息对象包括：TIMTextElem（文本消息）TIMFaceElem（表情消息）TIMImageElem（图像消息）TIMCustomElem（自定义消息） */
   MsgType: string;
   /** 文本消息，当MsgType 为TIMTextElem（文本消息）必选。 */
   TextMsgContent?: TextMsgContent;
@@ -286,6 +298,8 @@ declare interface MsgBody {
   FaceMsgContent?: FaceMsgContent;
   /** 图像消息，当MsgType为TIMImageElem（图像消息）必选。 */
   ImageMsgContent?: ImageMsgContent;
+  /** 自定义消息，TIMCustomElem（自定义消息）必选。 */
+  CustomMsgContent?: CustomMsgContent;
 }
 
 /** 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间） */

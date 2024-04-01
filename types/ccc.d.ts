@@ -120,6 +120,60 @@ declare interface CarrierPrivilegeNumberApplicant {
   UpdateTime?: number;
 }
 
+/** 企业资质申请信息 */
+declare interface CompanyApplyInfo {
+  /** 申请人身份，0-公司法定代表人，1-经办人（受法定代表人委托） */
+  ApplicantType: number | null;
+  /** 企业名称 */
+  CompanyName: string | null;
+  /** 统一社会信用代码 */
+  BusinessId: string | null;
+  /** 营业执照扫描件(加盖公章)。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  BusinessIdPicUrl: string | null;
+  /** 法定代表人名称 */
+  CorporationName: string | null;
+  /** 法定代表人身份证号码 */
+  CorporationId: string | null;
+  /** 法定代表人身份证正反面扫描件。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  CorporationIdPicUrl: string | null;
+  /** 业务经营范围 */
+  BusinessScope: string | null;
+  /** 电话受理单。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  AcceptPicUrl: string | null;
+  /** 电信入网承诺书。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  NetworkCommitmentPicUrl: string | null;
+  /** 法定代表人手持身份证照，申请人类型为法定代表人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  CorporationHoldingOnIdPicUrl?: string | null;
+  /** 经办人名称，申请人类型为经办人时必填。 */
+  OperatorName?: string | null;
+  /** 经办人证件号码，申请人类型为经办人时必填。 */
+  OperatorId?: string | null;
+  /** 经办人身份证正反面扫描件，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  OperatorIdPicUrl?: string | null;
+  /** 经办人手持身份证照，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  OperatorHoldingOnIdPicUrl?: string | null;
+  /** 委托授权书，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  CommissionPicUrl?: string | null;
+}
+
+/** 公司资质审核状态信息 */
+declare interface CompanyStateInfo {
+  /** 申请单ID */
+  Id?: number;
+  /** 公司名称 */
+  CompanyName?: string | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 审核时间 */
+  CheckTime?: number | null;
+  /** 审核备注 */
+  CheckMsg?: string | null;
+  /** 审核状态，1-待审核，2-审核通过，3-驳回 */
+  State?: number | null;
+  /** 公司统一社会信用代码 */
+  BusinessId?: string | null;
+}
+
 /** 查询预测式外呼任务列表元素 */
 declare interface DescribePredictiveDialingCampaignsElement {
   /** 任务 ID */
@@ -778,6 +832,18 @@ declare interface CreateCarrierPrivilegeNumberApplicantResponse {
   RequestId?: string;
 }
 
+declare interface CreateCompanyApplyRequest {
+  /** 企业资质信息 */
+  CompanyInfo: CompanyApplyInfo;
+}
+
+declare interface CreateCompanyApplyResponse {
+  /** 申请单ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExtensionRequest {
   /** TCCC 实例应用 ID */
   SdkAppId: number;
@@ -1074,6 +1140,28 @@ declare interface DescribeChatMessagesResponse {
   TotalCount?: number;
   /** 消息列表 */
   Messages?: MessageBody[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCompanyListRequest {
+  /** 分页尺寸，上限 100 */
+  PageSize: number;
+  /** 分页页码，从 0 开始 */
+  PageNumber: number;
+  /** 公司名称 */
+  CompanyName?: string[];
+  /** 审核状态，1-待审核，2-审核通过，3-驳回 */
+  State?: number[];
+  /** 申请ID */
+  ApplyID?: number[];
+}
+
+declare interface DescribeCompanyListResponse {
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 企业资质审核信息 */
+  CompanyInfo?: CompanyStateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1480,6 +1568,18 @@ declare interface HangUpCallResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCompanyApplyRequest {
+  /** 申请单ID(只能修改状态为“驳回”或者“待审核”的申请单) */
+  ApplyId: number;
+  /** 企业资质信息 */
+  CompanyInfo: CompanyApplyInfo;
+}
+
+declare interface ModifyCompanyApplyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyExtensionRequest {
   /** TCCC 实例应用 ID */
   SdkAppId: number;
@@ -1673,6 +1773,8 @@ declare interface Ccc {
   CreateCallOutSession(data: CreateCallOutSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCallOutSessionResponse>;
   /** 申请运营商白名单号码 {@link CreateCarrierPrivilegeNumberApplicantRequest} {@link CreateCarrierPrivilegeNumberApplicantResponse} */
   CreateCarrierPrivilegeNumberApplicant(data: CreateCarrierPrivilegeNumberApplicantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCarrierPrivilegeNumberApplicantResponse>;
+  /** 创建公司资质申请 {@link CreateCompanyApplyRequest} {@link CreateCompanyApplyResponse} */
+  CreateCompanyApply(data: CreateCompanyApplyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCompanyApplyResponse>;
   /** 创建话机账号 {@link CreateExtensionRequest} {@link CreateExtensionResponse} */
   CreateExtension(data: CreateExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtensionResponse>;
   /** 创建预测式外呼任务 {@link CreatePredictiveDialingCampaignRequest} {@link CreatePredictiveDialingCampaignResponse} */
@@ -1703,6 +1805,8 @@ declare interface Ccc {
   DescribeCarrierPrivilegeNumberApplicants(data: DescribeCarrierPrivilegeNumberApplicantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCarrierPrivilegeNumberApplicantsResponse>;
   /** 查询服务的聊天记录 {@link DescribeChatMessagesRequest} {@link DescribeChatMessagesResponse} */
   DescribeChatMessages(data?: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
+  /** 查询公司资质申请列表 {@link DescribeCompanyListRequest} {@link DescribeCompanyListResponse} */
+  DescribeCompanyList(data: DescribeCompanyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompanyListResponse>;
   /** 获取话机信息 {@link DescribeExtensionRequest} {@link DescribeExtensionResponse} */
   DescribeExtension(data: DescribeExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionResponse>;
   /** 查询话机列表信息 {@link DescribeExtensionsRequest} {@link DescribeExtensionsResponse} */
@@ -1739,6 +1843,8 @@ declare interface Ccc {
   DisableCCCPhoneNumber(data: DisableCCCPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCCCPhoneNumberResponse>;
   /** 挂断电话 {@link HangUpCallRequest} {@link HangUpCallResponse} */
   HangUpCall(data: HangUpCallRequest, config?: AxiosRequestConfig): AxiosPromise<HangUpCallResponse>;
+  /** 修改公司资质申请 {@link ModifyCompanyApplyRequest} {@link ModifyCompanyApplyResponse} */
+  ModifyCompanyApply(data: ModifyCompanyApplyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompanyApplyResponse>;
   /** 修改话机账号(绑定技能组、绑定坐席账号) {@link ModifyExtensionRequest} {@link ModifyExtensionResponse} */
   ModifyExtension(data: ModifyExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtensionResponse>;
   /** 修改客服账号 {@link ModifyStaffRequest} {@link ModifyStaffResponse} */

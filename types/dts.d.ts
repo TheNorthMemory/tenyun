@@ -502,7 +502,7 @@ declare interface DynamicOptions {
 declare interface Endpoint {
   /** 地域英文名，如：ap-guangzhou */
   Region?: string | null;
-  /** tdsql mysql版的节点类型，枚举值为proxy、set。tdsqlmysql必填 */
+  /** 节点类型，proxy表示节点类型为主机，set表示节点类型为节点。proxy类型必须填在数组第一项。tdsqlmysql类型的源/目标配置必填 */
   Role?: string | null;
   /** 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql */
   DbKernel?: string | null;
@@ -554,6 +554,10 @@ declare interface Endpoint {
   DatabaseNetEnv?: string | null;
   /** 数据库为跨账号云联网下的实例时、表示云联网所属主账号 */
   CcnOwnerUin?: string | null;
+  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的ID */
+  ChildInstanceId?: string | null;
+  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、比如：只读实例传ro、读写实例传rw */
+  ChildInstanceType?: string | null;
 }
 
 /** 数据订阅的实例节点信息 */
@@ -590,6 +594,10 @@ declare interface EndpointItem {
   CcnOwnerUin?: string | null;
   /** 为业务添加的额外信息。参数名作key，参数值作value。 tdpg必填参数：PgDatabase-订阅的库名。 */
   ExtraAttr?: KeyValuePairOption[] | null;
+  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的ID */
+  ChildInstanceId?: string | null;
+  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、比如：只读实例传ro、读写实例传rw */
+  ChildInstanceType?: string | null;
 }
 
 /** 错误信息及其解决方案 */
@@ -1104,7 +1112,7 @@ declare interface SyncDBEndpointInfos {
   AccessType: string | null;
   /** 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等 */
   DatabaseType: string | null;
-  /** 数据库信息。注意：如果数据类型为tdsqlmysql，此处Endpoint数组的顺序应该与set顺序对应，第一个分片（shardkey范围起始为0的分片）必须要输入在第一个位置 */
+  /** 数据库信息。注意：如果数据库类型为tdsqlmysql，此处Endpoint数组的顺序应满足规则：proxy节点放在set节点之前。如果SrcConnectType选择proxy接入则只需要填写proxy节点即可。如果选择set接入，数组中第一个set节点必须是shardkey范围起始为0的分片 */
   Info: Endpoint[] | null;
 }
 
@@ -1944,6 +1952,8 @@ declare interface DescribeSubscribeDetailResponse {
   SubscribeObjects?: SubscribeObject[] | null;
   /** kafka配置信息 */
   KafkaConfig?: SubscribeKafkaConfig | null;
+  /** 订阅内置kafka的版本信息 */
+  KafkaVersion?: string | null;
   /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
   AccessType?: string | null;
   /** 接入类型信息 */

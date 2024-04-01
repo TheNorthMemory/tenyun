@@ -1263,11 +1263,13 @@ declare interface BaselineBasicInfo {
 /** 基线规则或项的分类 */
 declare interface BaselineCategory {
   /** 分类Id */
-  CategoryId: number;
+  CategoryId?: number;
   /** 分类名称 */
-  CategoryName: string;
+  CategoryName?: string;
   /** 父分类ID,如果为0则没有父分类 */
-  ParentCategoryId: number;
+  ParentCategoryId?: number;
+  /** 子分类下检测项总数 */
+  ItemCount?: number | null;
 }
 
 /** 基线自定规则ID和名字 */
@@ -1540,6 +1542,18 @@ declare interface BaselineItemInfo {
   SysRuleId: number | null;
   /** 被引自定义规则信息 */
   RelatedCustomRuleInfo: BaselineCustomRuleIdName[] | null;
+}
+
+/** 基线检测项分类树状结构 */
+declare interface BaselineItemsCategory {
+  /** 基线检测项父分类id */
+  ParentCategoryId?: number;
+  /** 基线检测项父分类名称 */
+  ParentCategoryName?: string;
+  /** 基线检测项子分类数目 */
+  CategoryCount?: number;
+  /** 基线检测项子分类列表 */
+  CategoryLists?: BaselineCategory[];
 }
 
 /** 基线策略信息 */
@@ -2816,6 +2830,8 @@ declare interface Item {
   ItemId: number;
   /** 名称 */
   ItemName?: string;
+  /** 自定义阈值 */
+  CustomItemValues?: number[] | null;
 }
 
 /** java内存马事件详细信息 */
@@ -6243,7 +6259,9 @@ declare interface CreateSearchTemplateRequest {
 
 declare interface CreateSearchTemplateResponse {
   /** 0：成功，非0：失败 */
-  Status: number;
+  Status?: number;
+  /** 失败原因 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8270,6 +8288,8 @@ declare interface DescribeBaselineItemInfoResponse {
   List?: BaselineItemInfo[];
   /** 总条目数 */
   Total?: number;
+  /** 基线分类列表 */
+  CategoryList?: BaselineItemsCategory[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13525,6 +13545,12 @@ declare interface ModifyBaselineRuleRequest {
   SelectAll?: number;
   /** ItemName - string - 是否必填：否 - 项名称 */
   Filters?: Filter[];
+  /** 0:检测项，1:检测项分类 */
+  IdType?: number;
+  /** 需要排除的检测项id */
+  ExcludeIds?: number[];
+  /** 勾选的检测项分类 */
+  CategoryIds?: number[];
 }
 
 declare interface ModifyBaselineRuleResponse {
@@ -14809,7 +14835,7 @@ declare interface Cwp {
   CreateWhiteListOrder(data: CreateWhiteListOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteListOrderResponse>;
   /** 删除全部java内存马事件 {@link DeleteAllJavaMemShellsRequest} {@link DeleteAllJavaMemShellsResponse} */
   DeleteAllJavaMemShells(data?: DeleteAllJavaMemShellsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllJavaMemShellsResponse>;
-  /** 删除网络攻击日志 {@link DeleteAttackLogsRequest} {@link DeleteAttackLogsResponse} */
+  /** @deprecated 删除网络攻击日志 {@link DeleteAttackLogsRequest} {@link DeleteAttackLogsResponse} */
   DeleteAttackLogs(data?: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
   /** 删除阻断白名单列表 {@link DeleteBanWhiteListRequest} {@link DeleteBanWhiteListResponse} */
   DeleteBanWhiteList(data: DeleteBanWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBanWhiteListResponse>;
@@ -15521,7 +15547,7 @@ declare interface Cwp {
   ExportAssetWebServiceInfoList(data?: ExportAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetWebServiceInfoListResponse>;
   /** 导出网络攻击事件 {@link ExportAttackEventsRequest} {@link ExportAttackEventsResponse} */
   ExportAttackEvents(data?: ExportAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackEventsResponse>;
-  /** 导出网络攻击日志 {@link ExportAttackLogsRequest} {@link ExportAttackLogsResponse} */
+  /** @deprecated 导出网络攻击日志 {@link ExportAttackLogsRequest} {@link ExportAttackLogsResponse} */
   ExportAttackLogs(data?: ExportAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackLogsResponse>;
   /** 基线影响主机列表导出 {@link ExportBaselineEffectHostListRequest} {@link ExportBaselineEffectHostListResponse} */
   ExportBaselineEffectHostList(data: ExportBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineEffectHostListResponse>;

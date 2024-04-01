@@ -3964,6 +3964,10 @@ declare interface GetUserQuotaInfoResponse {
   CosRemainQuota?: number;
   /** COS存储量单位，例如TB。 */
   CosQuotaUnit?: string;
+  /** db月解绑次数 */
+  DBUnbindNum?: number;
+  /** cos月解绑次数 */
+  COSUnbindNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

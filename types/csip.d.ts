@@ -104,7 +104,7 @@ declare interface AssetViewCFGRisk {
   InstanceType?: string;
   /** 影响资产 */
   AffectAsset?: string;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
   /** 首次识别时间 */
   FirstTime?: string;
@@ -138,7 +138,7 @@ declare interface AssetViewPortRisk {
   Port?: number;
   /** 影响资产 */
   AffectAsset?: string;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
   /** 资产类型 */
   InstanceType?: string;
@@ -178,7 +178,7 @@ declare interface AssetViewPortRisk {
 declare interface AssetViewVULRisk {
   /** 影响资产 */
   AffectAsset?: string;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
   /** 资产类型 */
   InstanceType?: string;
@@ -248,7 +248,7 @@ declare interface AssetViewVULRisk {
 declare interface AssetViewWeakPassRisk {
   /** 影响资产 */
   AffectAsset?: string;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
   /** 资产类型 */
   InstanceType?: string;
@@ -960,7 +960,7 @@ declare interface PortRiskAdvanceCFGParamItem {
 declare interface PortViewPortRisk {
   /** 影响资产 */
   NoHandleCount?: number;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
   /** 协议 */
   Protocol?: string;
@@ -1150,7 +1150,7 @@ declare interface ServerRisk {
   InstanceName?: string;
   /** 资产类型 */
   InstanceType?: string;
-  /** 风险等级 */
+  /** 风险等级 low:低危 high:高危 middle:中危 info:提示 extreme:严重 */
   Level?: string;
   /** 协议 */
   Protocol?: string;
@@ -1386,7 +1386,7 @@ declare interface VULRiskAdvanceCFGList {
   RiskId?: string;
   /** 漏洞名称 */
   VULName?: string;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   RiskLevel?: string;
   /** 识别来源 */
   CheckFrom?: string;
@@ -1430,7 +1430,7 @@ declare interface VULViewVULRisk {
   Port?: string;
   /** 影响资产 */
   NoHandleCount?: number;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
   /** 组件 */
   Component?: string;
@@ -1514,7 +1514,7 @@ declare interface Vpc {
 declare interface WebsiteRisk {
   /** 影响资产 */
   AffectAsset?: string;
-  /** 风险等级 */
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
   /** 最近识别时间 */
   RecentTime?: string;

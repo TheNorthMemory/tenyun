@@ -106,6 +106,10 @@ declare interface AlarmEventInfo {
   TaskName?: string | null;
   /** 0：部分成功，1：全部成功，2：全部失败 */
   IsSendSuccess?: number | null;
+  /** 是否在免打扰时间内，0:否, 1:是 */
+  InQuitePeriods?: number | null;
+  /** 告警记录id */
+  RecordId?: number | null;
   /** 消息ID */
   MessageId?: string | null;
   /** 阈值计算算子，1 : 大于 2 ：小于 */
@@ -1000,6 +1004,12 @@ declare interface DataSourceInfo {
   ModifiedTime?: number | null;
   /** 数据源页面展示类型，与Type对应 */
   ShowType?: string | null;
+  /** 当前数据源生产源Id */
+  ProductId?: number | null;
+  /** 当前数据源开发源Id */
+  DevelopmentId?: number | null;
+  /** 同params 内容为开发数据源的数据 */
+  DevelopmentParams?: string | null;
 }
 
 /** 查询数据源分页列表 */
@@ -1628,6 +1638,16 @@ declare interface ExportTaskInfo {
   SchedulerCurRunDate?: string | null;
   /** 文件相对路径 */
   FilePath?: string | null;
+  /** 是否过期(1.已过期 2.未过期) */
+  Expire?: number | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 库名+表名 */
+  DbTableName?: string | null;
+  /** 规则名称 */
+  RuleName?: string | null;
+  /** 规则执行id */
+  RuleExecId?: number | null;
 }
 
 /** 错误处理结果信息 */
@@ -2652,12 +2672,14 @@ declare interface MakePlanOpsDtoCollection {
 declare interface MakePlanTaskOpsDto {
   /** 任务基本信息 */
   TaskBaseInfo?: TaskOpsDto | null;
-  /** 补录计划该任务实例数 */
+  /** 补录该任务当前已生成的实例数 */
   InstanceCount?: number | null;
   /** 补录任务实例完成百分数 */
   CompletePercent?: number | null;
   /** 补录任务实例成功百分数 */
   SuccessPercent?: number | null;
+  /** 预计生成的总实例个数，由于是异步生成，-1代表实例还未完完全生成 */
+  InstanceTotalCount?: number | null;
 }
 
 /** 补录计划任务集合 */
@@ -3122,6 +3144,16 @@ declare interface QualityScoreTrend {
   DailyScoreList: DailyScoreInfo[] | null;
 }
 
+/** 数据集成 - 告警免打扰时间 */
+declare interface QuietPeriod {
+  /** 代表一周里的哪些天，1代表周一，7代表周日，以此类推 */
+  DaysOfWeek?: number[] | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+}
+
 /** 实时任务实例当前的节点信息 */
 declare interface RealTimeTaskInstanceNodeInfo {
   /** 任务名 */
@@ -3290,6 +3322,8 @@ declare interface Rule {
   DatabaseId?: string | null;
   /** 监控是否开启.0false,1true */
   MonitorStatus?: number | null;
+  /** 触发条件 */
+  TriggerCondition?: string | null;
 }
 
 /** 规则配置 */
@@ -3383,19 +3417,19 @@ declare interface RuleExecResult {
   /** 对比结果 */
   CompareResult?: CompareResult | null;
   /** 模版名称 */
-  TemplateName: string | null;
+  TemplateName?: string | null;
   /** 质量维度 */
-  QualityDim: number | null;
+  QualityDim?: number | null;
   /** 目标表-库表名称 */
-  TargetDBTableName: string | null;
+  TargetDBTableName?: string | null;
   /** 目标表-字段名称 */
-  TargetObjectValue: string | null;
+  TargetObjectValue?: string | null;
   /** 目标表-字段类型 */
-  TargetObjectDataType: string | null;
+  TargetObjectDataType?: string | null;
   /** 自定义模版sql表达式参数 */
-  FieldConfig: RuleFieldConfig | null;
+  FieldConfig?: RuleFieldConfig | null;
   /** 源字段与目标字段关联条件on表达式 */
-  RelConditionExpr: string | null;
+  RelConditionExpr?: string | null;
   /** 执行时间 */
   StartTime?: string | null;
   /** 1/2/3:低/中/高 */
@@ -3556,6 +3590,8 @@ declare interface RuleGroupExecResult {
   ExecDetail?: string | null;
   /** 实际执行引擎 */
   EngineType?: string | null;
+  /** 规则执行结果 */
+  RuleExecResultVOList?: RuleExecResult[] | null;
 }
 
 /** 规则组执行结果分页 */
@@ -4654,6 +4690,8 @@ declare interface TaskAlarmInfo {
   AlarmIndicatorInfos?: AlarmIndicatorInfo[] | null;
   /** 告警接收人类型，0指定人员；1任务责任人 */
   AlarmRecipientType?: number | null;
+  /** 免打扰时间 */
+  QuietPeriods?: QuietPeriod[] | null;
   /** 企业微信群Hook地址，多个hook地址使用,隔开 */
   WeComHook?: string | null;
   /** 最近操作时间 */
@@ -4705,49 +4743,49 @@ declare interface TaskByStatus {
 /** 任务信息 */
 declare interface TaskCanvasInfo {
   /** 任务Id */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 任务名称 */
-  TaskName: string | null;
+  TaskName?: string | null;
   /** 工作流id */
-  WorkflowId: string | null;
+  WorkflowId?: string | null;
   /** 工作流名称 */
-  WorkflowName: string | null;
+  WorkflowName?: string | null;
   /** 项目名称 */
-  ProjectName: string | null;
+  ProjectName?: string | null;
   /** 项目标识 */
-  ProjectIdent: string | null;
+  ProjectIdent?: string | null;
   /** 任务状态，'Y','F','O','T','INVALID' 分别表示调度中、已停止、已暂停、停止中、已失效 */
-  Status: string | null;
+  Status?: string | null;
   /** 任务类型id */
-  TaskTypeId: number | null;
+  TaskTypeId?: number | null;
   /** 任务类型描述，其中任务类型id和任务类型描述的对应的关系为20	通用数据同步任务21	JDBC SQL22	Tbase25	数据ETL30	Python31	PySpark34	Hive SQL35	Shell36	Spark SQL37	HDFS到HBase38	SHELL39	Spark45	DATA_QUALITY55	THIVE到MYSQL56	THIVE到PG66	HDFS到PG67	HDFS到Oracle68	HDFS到MYSQL69	FTP到HDFS70	HIVE SQL72	HIVE到HDFS75	HDFS到HIVE81	PYTHONSQL脚本82	SPARKSCALA计算83	虫洞任务84	校验对账文件85	HDFS到THIVE86	TDW到HDFS87	HDFS到TDW88	校验对账文件91	FLINK任务92	MapReduce98	custom topology99	kafkatoHDFS100	kafkatoHbase101	MYSQL导入至HIVE(DX)104	MYSQL到HIVE105	HIVE到MYSQL106	SQL SERVER到HIVE107	HIVE到SQL SERVER108	ORACLE到HIVE109	HIVE到ORACLE111	HIVE到MYSQL(NEW)112	HIVE到PG113	HIVE到PHOENIX118	MYSQL到HDFS119	PG到HDFS120	ORACLE到HDFS121	数据质量10000	自定义业务 */
-  TaskTypeDesc: string | null;
+  TaskTypeDesc?: string | null;
   /** 项目id */
-  ProjectId: string | null;
+  ProjectId?: string | null;
   /** 文件夹名称 */
-  FolderName: string | null;
+  FolderName?: string | null;
   /** 文件夹id */
-  FolderId: string | null;
+  FolderId?: string | null;
   /** 最近提交时间 */
-  FirstSubmitTime: string | null;
+  FirstSubmitTime?: string | null;
   /** 首次运行时间 */
-  FirstRunTime: string | null;
+  FirstRunTime?: string | null;
   /** 调度计划展示描述信息 */
-  ScheduleDesc: string | null;
+  ScheduleDesc?: string | null;
   /** 负责人 */
-  InCharge: string | null;
+  InCharge?: string | null;
   /** 调度周期类型 */
-  CycleUnit: string | null;
+  CycleUnit?: string | null;
   /** 画布x轴坐标点 */
-  LeftCoordinate: number | null;
+  LeftCoordinate?: number | null;
   /** 画布y轴坐标点 */
-  TopCoordinate: number | null;
+  TopCoordinate?: number | null;
   /** 跨工作流虚拟任务标识；true标识跨工作流任务；false标识本工作流任务 */
-  VirtualFlag: boolean | null;
+  VirtualFlag?: boolean | null;
   /** 弹性周期配置 */
-  TaskAction: string | null;
+  TaskAction?: string | null;
   /** 延迟时间 */
-  DelayTime: number | null;
+  DelayTime?: number | null;
   /** 执行开始时间 */
   ExecutionStartTime?: string | null;
   /** 执行结束时间 */
@@ -4772,6 +4810,34 @@ declare interface TaskCanvasInfo {
   OwnerId?: string | null;
   /** TenantId */
   TenantId?: string | null;
+  /** 自依赖类型 */
+  SelfDepend?: number | null;
+  /** 资源组id */
+  ExecutorGroupId?: string | null;
+  /** 资源组名称 */
+  ExecutorGroupName?: string | null;
+  /** 优先级 */
+  RunPriority?: string | null;
+  /** 可充实次数 */
+  TryLimit?: string | null;
+  /** 可充实 */
+  RetryAble?: string | null;
+  /** 重试等待事件 */
+  RetryWait?: string | null;
+  /** 最近提交时间 */
+  LastSchedulerCommitTime?: string | null;
+  /** 备注 */
+  Notes?: string | null;
+  /** 创建人 */
+  Creator?: string | null;
+  /** 创建人id */
+  UpdateUser?: string | null;
+  /** 更新人id */
+  UpdateUserId?: string | null;
+  /** yarn队列 */
+  YarnQueue?: string | null;
+  /** 可执行的timeToLive */
+  ExecutionTTL?: number | null;
 }
 
 /** TaskDsDTO 减少嵌套层数 */
@@ -6166,11 +6232,11 @@ declare interface BatchCreateIntegrationTaskAlarmsRequest {
 
 declare interface BatchCreateIntegrationTaskAlarmsResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number | null;
+  SuccessCount?: number | null;
   /** 操作失败的任务数 */
-  FailedCount: number | null;
+  FailedCount?: number | null;
   /** 任务总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6288,11 +6354,11 @@ declare interface BatchForceSuccessIntegrationTaskInstancesRequest {
 
 declare interface BatchForceSuccessIntegrationTaskInstancesResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6306,11 +6372,13 @@ declare interface BatchKillIntegrationTaskInstancesRequest {
 
 declare interface BatchKillIntegrationTaskInstancesResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
+  /** 实际传的为taskId */
+  TaskNames?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6330,11 +6398,11 @@ declare interface BatchMakeUpIntegrationTasksRequest {
 
 declare interface BatchMakeUpIntegrationTasksResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6380,11 +6448,13 @@ declare interface BatchRerunIntegrationTaskInstancesRequest {
 
 declare interface BatchRerunIntegrationTaskInstancesResponse {
   /** 操作成功的任务数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 操作失败的任务数 */
-  FailedCount: number;
+  FailedCount?: number;
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
+  /** 实际传的为taskId */
+  TaskNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6611,7 +6681,7 @@ declare interface CheckDuplicateRuleNameRequest {
 
 declare interface CheckDuplicateRuleNameResponse {
   /** 规则名称是否重复 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6627,7 +6697,7 @@ declare interface CheckDuplicateTemplateNameRequest {
 
 declare interface CheckDuplicateTemplateNameResponse {
   /** 是否重名 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6645,7 +6715,7 @@ declare interface CheckIntegrationNodeNameExistsRequest {
 
 declare interface CheckIntegrationNodeNameExistsResponse {
   /** 返回true代表存在，返回false代表不存在 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6663,9 +6733,9 @@ declare interface CheckIntegrationTaskNameExistsRequest {
 
 declare interface CheckIntegrationTaskNameExistsResponse {
   /** true表示存在，false表示不存在 */
-  Data: boolean;
+  Data?: boolean;
   /** 任务名重复类型（0:未重复, 1:开发态重复, 2:生产态重复） */
-  ExistsType: number;
+  ExistsType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6681,7 +6751,7 @@ declare interface CheckTaskNameExistRequest {
 
 declare interface CheckTaskNameExistResponse {
   /** 结果 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6701,7 +6771,7 @@ declare interface CommitExportTaskRequest {
 
 declare interface CommitExportTaskResponse {
   /** 提交结果 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6912,6 +6982,8 @@ declare interface CreateDataSourceRequest {
   COSRegion?: string;
   /** 连接测试结果 */
   ConnectResult?: string;
+  /** 开发环境数据源配置 */
+  DevelopmentParams?: string;
 }
 
 declare interface CreateDataSourceResponse {
@@ -7016,7 +7088,7 @@ declare interface CreateInLongAgentRequest {
 
 declare interface CreateInLongAgentResponse {
   /** 采集器ID */
-  AgentId: string;
+  AgentId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7156,6 +7228,8 @@ declare interface CreateOrUpdateResourceRequest {
   NewFile?: boolean;
   /** 必填项，文件大小，与 Files 字段对应 */
   FilesSize?: string[];
+  /** 必填项，资源的Md5值（COS中的ETag） */
+  FileMd5?: string;
 }
 
 declare interface CreateOrUpdateResourceResponse {
@@ -7278,7 +7352,7 @@ declare interface CreateTaskAlarmRegularRequest {
 
 declare interface CreateTaskAlarmRegularResponse {
   /** 告警ID */
-  AlarmId: number;
+  AlarmId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7526,7 +7600,7 @@ declare interface DeleteIntegrationNodeRequest {
 
 declare interface DeleteIntegrationNodeResponse {
   /** 删除返回是否成功标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7562,7 +7636,7 @@ declare interface DeleteOfflineTaskRequest {
 
 declare interface DeleteOfflineTaskResponse {
   /** 结果 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7644,7 +7718,7 @@ declare interface DeleteRuleRequest {
 
 declare interface DeleteRuleResponse {
   /** 是否删除成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7780,8 +7854,6 @@ declare interface DescribeAlarmReceiverRequest {
   PageSize: number;
   /** 项目ID */
   ProjectId: string;
-  /** 消息ID */
-  MessageId: string;
   /** 类型 */
   TaskType?: number;
   /** 告警接收人ID(逗号分隔) */
@@ -7790,6 +7862,10 @@ declare interface DescribeAlarmReceiverRequest {
   AlarmRecipientName?: string;
   /** 告警时间 */
   AlarmTime?: string;
+  /** 消息ID */
+  MessageId?: string;
+  /** 告警记录id */
+  RecordId?: number;
   /** 监控对象类型(1:所有任务,2:指定任务,3:指定责任人,4:指定资源组) */
   MonitorType?: number;
 }
@@ -8096,7 +8172,7 @@ declare interface DescribeClusterNamespaceListRequest {
 
 declare interface DescribeClusterNamespaceListResponse {
   /** 命名空间 */
-  Namespaces: Namespace[];
+  Namespaces?: Namespace[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8160,13 +8236,13 @@ declare interface DescribeDataBasesRequest {
 
 declare interface DescribeDataBasesResponse {
   /** 数据来源数据数据库列表 */
-  Data: DatabaseInfo[] | null;
+  Data?: DatabaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDataCheckStatRequest {
-  /** Project id */
+  /** 项目id */
   ProjectId: string;
   /** 开始时间，时间戳到秒 */
   BeginDate: string;
@@ -8176,7 +8252,7 @@ declare interface DescribeDataCheckStatRequest {
 
 declare interface DescribeDataCheckStatResponse {
   /** 结果 */
-  Data: DataCheckStat;
+  Data?: DataCheckStat;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8194,7 +8270,7 @@ declare interface DescribeDataObjectsRequest {
 
 declare interface DescribeDataObjectsResponse {
   /** 数据对象列表 */
-  Data: SourceObject[] | null;
+  Data?: SourceObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8258,7 +8334,7 @@ declare interface DescribeDataSourceWithoutInfoResponse {
 }
 
 declare interface DescribeDataTypesRequest {
-  /** 数据源类型，MYSQL|HIVE|KAFKA|POSTGRE|CDW|ORACLE|SQLSERVER|FTP|HDFS|ICEBERG|HBASE|TDSQL|TDSQLC|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DORIS|CKAFKA|MONGODB|FTP_FILE|HDFS_FILE|DTS_KAFKA|REST_API|FILE|TIDB|SYBASE|TCHOUSE_X 等 */
+  /** 数据源类型，MYSQL|HIVE|KAFKA|POSTGRE|TCHouse-P|ORACLE|SQLSERVER|FTP|HDFS|ICEBERG|HBASE|TDSQL|TDSQLC|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DORIS|CKAFKA|MONGODB|FTP_FILE|HDFS_FILE|DTS_KAFKA|REST_API|FILE|TIDB|SYBASE|TCHOUSE_X 等 */
   DatasourceType: string;
   /** 项目ID。 */
   ProjectId: string;
@@ -8677,7 +8753,7 @@ declare interface DescribeExecStrategyRequest {
 
 declare interface DescribeExecStrategyResponse {
   /** 规则组执行策略 */
-  Data: RuleGroupExecStrategy | null;
+  Data?: RuleGroupExecStrategy | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8859,7 +8935,7 @@ declare interface DescribeInLongAgentTaskListRequest {
 
 declare interface DescribeInLongAgentTaskListResponse {
   /** 采集器关联的集成任务列表 */
-  Items: InLongAgentTask[];
+  Items?: InLongAgentTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8871,7 +8947,7 @@ declare interface DescribeInLongAgentVpcListRequest {
 
 declare interface DescribeInLongAgentVpcListResponse {
   /** VPC列表 */
-  VpcList: string[];
+  VpcList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9137,9 +9213,9 @@ declare interface DescribeInstancesInfoWithTaskInfoResponse {
 declare interface DescribeInstancesRequest {
   /** 项目id */
   ProjectId?: string;
-  /** 页数 */
+  /** 页数:默认1 */
   PageNumber?: number;
-  /** 分页大小 */
+  /** 分页大小,默认最小10 */
   PageSize?: number;
   /** 过滤条件 */
   Filters?: Filter[];
@@ -9147,7 +9223,7 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** Json 结果 */
-  Data: string | null;
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9163,9 +9239,9 @@ declare interface DescribeIntegrationNodeRequest {
 
 declare interface DescribeIntegrationNodeResponse {
   /** 节点信息 */
-  NodeInfo: IntegrationNodeInfo | null;
+  NodeInfo?: IntegrationNodeInfo | null;
   /** 上游节点是否已经修改。true 已修改，需要提示；false 没有修改 */
-  SourceCheckFlag: boolean | null;
+  SourceCheckFlag?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9183,7 +9259,7 @@ declare interface DescribeIntegrationStatisticsAgentStatusRequest {
 
 declare interface DescribeIntegrationStatisticsAgentStatusResponse {
   /** 统计结果 */
-  StatusData: string | null;
+  StatusData?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9201,7 +9277,7 @@ declare interface DescribeIntegrationStatisticsInstanceTrendRequest {
 
 declare interface DescribeIntegrationStatisticsInstanceTrendResponse {
   /** 统计结果 */
-  TrendsData: IntegrationStatisticsTrendResult[] | null;
+  TrendsData?: IntegrationStatisticsTrendResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9217,7 +9293,7 @@ declare interface DescribeIntegrationStatisticsRecordsTrendRequest {
 
 declare interface DescribeIntegrationStatisticsRecordsTrendResponse {
   /** 统计结果 */
-  TrendsData: IntegrationStatisticsTrendResult[] | null;
+  TrendsData?: IntegrationStatisticsTrendResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9233,29 +9309,29 @@ declare interface DescribeIntegrationStatisticsRequest {
 
 declare interface DescribeIntegrationStatisticsResponse {
   /** 总任务数 */
-  TotalTask: number | null;
+  TotalTask?: number | null;
   /** 生产态任务数 */
-  ProdTask: number | null;
+  ProdTask?: number | null;
   /** 开发态任务数 */
-  DevTask: number | null;
+  DevTask?: number | null;
   /** 总读取条数 */
-  TotalReadRecords: number | null;
+  TotalReadRecords?: number | null;
   /** 总写入条数 */
-  TotalWriteRecords: number | null;
+  TotalWriteRecords?: number | null;
   /** 总脏数据条数 */
-  TotalErrorRecords: number | null;
+  TotalErrorRecords?: number | null;
   /** 总告警事件数 */
-  TotalAlarmEvent: number | null;
+  TotalAlarmEvent?: number | null;
   /** 当天读取增长条数 */
-  IncreaseReadRecords: number | null;
+  IncreaseReadRecords?: number | null;
   /** 当天写入增长条数 */
-  IncreaseWriteRecords: number | null;
+  IncreaseWriteRecords?: number | null;
   /** 当天脏数据增长条数 */
-  IncreaseErrorRecords: number | null;
+  IncreaseErrorRecords?: number | null;
   /** 当天告警事件增长数 */
-  IncreaseAlarmEvent: number | null;
+  IncreaseAlarmEvent?: number | null;
   /** 告警事件统计 */
-  AlarmEvent: string | null;
+  AlarmEvent?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9273,7 +9349,7 @@ declare interface DescribeIntegrationStatisticsTaskStatusRequest {
 
 declare interface DescribeIntegrationStatisticsTaskStatusResponse {
   /** 统计结果 */
-  StatusData: string | null;
+  StatusData?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9291,7 +9367,7 @@ declare interface DescribeIntegrationStatisticsTaskStatusTrendRequest {
 
 declare interface DescribeIntegrationStatisticsTaskStatusTrendResponse {
   /** 统计结果 */
-  TrendsData: IntegrationStatisticsTrendResult[] | null;
+  TrendsData?: IntegrationStatisticsTrendResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9383,7 +9459,7 @@ declare interface DescribeMonitorsByPageRequest {
 
 declare interface DescribeMonitorsByPageResponse {
   /** 分页查询结果 */
-  Data: RuleGroupMonitorPage | null;
+  Data?: RuleGroupMonitorPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9393,9 +9469,9 @@ declare interface DescribeOfflineTaskTokenRequest {
 
 declare interface DescribeOfflineTaskTokenResponse {
   /** 长连接临时token */
-  Token: string;
+  Token?: string;
   /** 长连接临时token。与Token相同含义，优先取Data，Data为空时，取Token。 */
-  Data: string | null;
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9689,7 +9765,7 @@ declare interface DescribeProdTasksRequest {
 
 declare interface DescribeProdTasksResponse {
   /** 生产调度任务列表 */
-  Data: ProdSchedulerTask[] | null;
+  Data?: ProdSchedulerTask[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9767,7 +9843,7 @@ declare interface DescribeRealTimeTaskInstanceNodeInfoRequest {
 
 declare interface DescribeRealTimeTaskInstanceNodeInfoResponse {
   /** 实时任务实例节点相关信息 */
-  RealTimeTaskInstanceNodeInfo: RealTimeTaskInstanceNodeInfo | null;
+  RealTimeTaskInstanceNodeInfo?: RealTimeTaskInstanceNodeInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9821,11 +9897,11 @@ declare interface DescribeRealTimeTaskSpeedRequest {
 
 declare interface DescribeRealTimeTaskSpeedResponse {
   /** 同步速度条/s列表 */
-  RecordsSpeedList: RecordsSpeed[];
+  RecordsSpeedList?: RecordsSpeed[];
   /** 同步速度字节/s列表 */
-  BytesSpeedList: BytesSpeed[];
+  BytesSpeedList?: BytesSpeed[];
   /** 同步速度，包括了RecordsSpeedList和BytesSpeedList */
-  Data: RealTimeTaskSpeed;
+  Data?: RealTimeTaskSpeed;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9883,13 +9959,13 @@ declare interface DescribeRuleDataSourcesRequest {
 
 declare interface DescribeRuleDataSourcesResponse {
   /** 数据源列表 */
-  Data: DatabaseInfo[] | null;
+  Data?: DatabaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeRuleDimStatRequest {
-  /** Project Id */
+  /** 项目id */
   ProjectId: string;
   /** 开始时间，时间戳到秒 */
   BeginDate: string;
@@ -9899,7 +9975,7 @@ declare interface DescribeRuleDimStatRequest {
 
 declare interface DescribeRuleDimStatResponse {
   /** 结果 */
-  Data: RuleDimStat;
+  Data?: RuleDimStat;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9913,7 +9989,7 @@ declare interface DescribeRuleExecDetailRequest {
 
 declare interface DescribeRuleExecDetailResponse {
   /** 规则执行结果详情 */
-  Data: RuleExecResultDetail | null;
+  Data?: RuleExecResultDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9927,7 +10003,7 @@ declare interface DescribeRuleExecExportResultRequest {
 
 declare interface DescribeRuleExecExportResultResponse {
   /** 导出结果 */
-  Data: RuleExecExportResult | null;
+  Data?: RuleExecExportResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9957,7 +10033,7 @@ declare interface DescribeRuleExecLogRequest {
 
 declare interface DescribeRuleExecLogResponse {
   /** 规则执行日志 */
-  Data: RuleExecLog | null;
+  Data?: RuleExecLog | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9973,7 +10049,7 @@ declare interface DescribeRuleExecResultsByPageRequest {
 
 declare interface DescribeRuleExecResultsByPageResponse {
   /** results */
-  Data: RuleExecResultPage | null;
+  Data?: RuleExecResultPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9987,13 +10063,13 @@ declare interface DescribeRuleExecResultsRequest {
 
 declare interface DescribeRuleExecResultsResponse {
   /** 规则执行结果列表 */
-  Data: RuleExecResultPage | null;
+  Data?: RuleExecResultPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeRuleExecStatRequest {
-  /** ProjectId 值 */
+  /** 项目id */
   ProjectId: string;
   /** 开始时间，时间戳到秒 */
   BeginDate: string;
@@ -10003,7 +10079,7 @@ declare interface DescribeRuleExecStatRequest {
 
 declare interface DescribeRuleExecStatResponse {
   /** 结果 */
-  Data: RuleExecStat;
+  Data?: RuleExecStat;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10023,7 +10099,7 @@ declare interface DescribeRuleGroupExecResultsByPageRequest {
 
 declare interface DescribeRuleGroupExecResultsByPageResponse {
   /** 规则组执行结果列表 */
-  Data: RuleGroupExecResultPage | null;
+  Data?: RuleGroupExecResultPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10043,7 +10119,7 @@ declare interface DescribeRuleGroupExecResultsByPageWithoutAuthRequest {
 
 declare interface DescribeRuleGroupExecResultsByPageWithoutAuthResponse {
   /** 规则组执行结果列表 */
-  Data: RuleGroupExecResultPage | null;
+  Data?: RuleGroupExecResultPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10063,7 +10139,7 @@ declare interface DescribeRuleGroupRequest {
 
 declare interface DescribeRuleGroupResponse {
   /** 数据质量规则组详情 */
-  Data: RuleGroup | null;
+  Data?: RuleGroup | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10089,7 +10165,7 @@ declare interface DescribeRuleGroupTableRequest {
 
 declare interface DescribeRuleGroupTableResponse {
   /** 数据 */
-  Data: RuleGroupTable | null;
+  Data?: RuleGroupTable | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10109,7 +10185,7 @@ declare interface DescribeRuleGroupsByPageRequest {
 
 declare interface DescribeRuleGroupsByPageResponse {
   /** 规则组列表 */
-  Data: RuleGroupPage | null;
+  Data?: RuleGroupPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10127,7 +10203,7 @@ declare interface DescribeRuleHistoryByPageRequest {
 
 declare interface DescribeRuleHistoryByPageResponse {
   /** 规则组操作历史列表 */
-  Data: RuleHistoryPage | null;
+  Data?: RuleHistoryPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10141,7 +10217,7 @@ declare interface DescribeRuleRequest {
 
 declare interface DescribeRuleResponse {
   /** 规则详情 */
-  Data: Rule | null;
+  Data?: Rule | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10161,7 +10237,7 @@ declare interface DescribeRuleTablesByPageRequest {
 
 declare interface DescribeRuleTablesByPageResponse {
   /** 表列表 */
-  Data: RuleGroupPage | null;
+  Data?: RuleGroupPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10175,7 +10251,7 @@ declare interface DescribeRuleTemplateRequest {
 
 declare interface DescribeRuleTemplateResponse {
   /** 模板详情 */
-  Data: RuleTemplate | null;
+  Data?: RuleTemplate | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10233,7 +10309,7 @@ declare interface DescribeRulesByPageRequest {
 
 declare interface DescribeRulesByPageResponse {
   /** 规则质量列表 */
-  Data: RulePage | null;
+  Data?: RulePage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10459,7 +10535,7 @@ declare interface DescribeStandardRuleDetailInfoListRequest {
 
 declare interface DescribeStandardRuleDetailInfoListResponse {
   /** 返回值 */
-  StandardRuleDetailList: string | null;
+  StandardRuleDetailList?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10579,7 +10655,7 @@ declare interface DescribeTableInfoListRequest {
 
 declare interface DescribeTableInfoListResponse {
   /** 表信息 */
-  TableInfo: TableInfo[] | null;
+  TableInfo?: TableInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10853,11 +10929,11 @@ declare interface DescribeTaskInstanceReportDetailRequest {
 
 declare interface DescribeTaskInstanceReportDetailResponse {
   /** 任务实例运行指标概览 */
-  Summary: InstanceReportSummary;
+  Summary?: InstanceReportSummary;
   /** 任务实例读取节点运行指标 */
-  ReadNode: InstanceReportReadNode;
+  ReadNode?: InstanceReportReadNode;
   /** 任务实例写入节点运行指标 */
-  WriteNode: InstanceReportWriteNode;
+  WriteNode?: InstanceReportWriteNode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10933,7 +11009,7 @@ declare interface DescribeTaskLockStatusRequest {
 
 declare interface DescribeTaskLockStatusResponse {
   /** 任务锁状态信息 */
-  TaskLockStatus: TaskLockStatus;
+  TaskLockStatus?: TaskLockStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10961,15 +11037,15 @@ declare interface DescribeTaskReportDetailListRequest {
 
 declare interface DescribeTaskReportDetailListResponse {
   /** 页码，从1开始 */
-  PageIndex: number;
+  PageIndex?: number;
   /** 每页的记录数 */
-  PageSize: number;
+  PageSize?: number;
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 总页数 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 任务运行指标 */
-  Items: TaskReportDetail[];
+  Items?: TaskReportDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10987,15 +11063,15 @@ declare interface DescribeTaskReportRequest {
 
 declare interface DescribeTaskReportResponse {
   /** 总读取条数 */
-  TotalReadRecords: number;
+  TotalReadRecords?: number;
   /** 总读取字节数，单位为Byte */
-  TotalReadBytes: number;
+  TotalReadBytes?: number;
   /** 总写入条数 */
-  TotalWriteRecords: number;
+  TotalWriteRecords?: number;
   /** 总写入字节数，单位为Byte */
-  TotalWriteBytes: number;
+  TotalWriteBytes?: number;
   /** 总脏数据条数 */
-  TotalErrorRecords: number;
+  TotalErrorRecords?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11097,7 +11173,7 @@ declare interface DescribeThirdTaskRunLogResponse {
 }
 
 declare interface DescribeTopTableStatRequest {
-  /** Project Id */
+  /** 项目id */
   ProjectId: string;
   /** 开始时间，时间戳到秒 */
   BeginDate: string;
@@ -11107,13 +11183,13 @@ declare interface DescribeTopTableStatRequest {
 
 declare interface DescribeTopTableStatResponse {
   /** 结果 */
-  Data: TopTableStat;
+  Data?: TopTableStat;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeTrendStatRequest {
-  /** Project id */
+  /** 项目id */
   ProjectId: string;
   /** 开始时间，时间戳到秒 */
   BeginDate: string;
@@ -11123,7 +11199,7 @@ declare interface DescribeTrendStatRequest {
 
 declare interface DescribeTrendStatResponse {
   /** 结果 */
-  Data: RuleExecDateStat[];
+  Data?: RuleExecDateStat[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11273,15 +11349,15 @@ declare interface DryRunDIOfflineTaskRequest {
 
 declare interface DryRunDIOfflineTaskResponse {
   /** 数据时间 */
-  CurrentRunDate: string;
+  CurrentRunDate?: string;
   /** 项目Id */
-  ProjectId: string;
+  ProjectId?: string;
   /** 任务状态 */
-  Status: string;
+  Status?: string;
   /** 任务Id */
-  TaskId: string;
+  TaskId?: string;
   /** 任务实例唯一key */
-  TaskInstanceKey: string;
+  TaskInstanceKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11531,7 +11607,7 @@ declare interface GetIntegrationNodeColumnSchemaRequest {
 
 declare interface GetIntegrationNodeColumnSchemaResponse {
   /** 字段列表 */
-  Schemas: IntegrationNodeSchema[] | null;
+  Schemas?: IntegrationNodeSchema[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11549,9 +11625,9 @@ declare interface GetOfflineDIInstanceListRequest {
 
 declare interface GetOfflineDIInstanceListResponse {
   /** 总条数 */
-  Total: number;
+  Total?: number;
   /** 实例详情 */
-  List: OfflineInstance[];
+  List?: OfflineInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11724,7 +11800,7 @@ declare interface LockIntegrationTaskRequest {
 
 declare interface LockIntegrationTaskResponse {
   /** 操作成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11919,6 +11995,8 @@ declare interface ModifyDataSourceRequest {
   COSRegion?: string;
   /** 操作项目id */
   ProjectId?: string;
+  /** 数据源开发环境配置 */
+  DevelopmentParams?: string;
 }
 
 declare interface ModifyDataSourceResponse {
@@ -12037,9 +12115,9 @@ declare interface ModifyIntegrationNodeRequest {
 
 declare interface ModifyIntegrationNodeResponse {
   /** 节点id */
-  Id: string;
+  Id?: string;
   /** 任务id */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12055,7 +12133,7 @@ declare interface ModifyIntegrationTaskRequest {
 
 declare interface ModifyIntegrationTaskResponse {
   /** 任务id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12071,7 +12149,7 @@ declare interface ModifyMonitorStatusRequest {
 
 declare interface ModifyMonitorStatusResponse {
   /** 监控状态修改成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12201,7 +12279,7 @@ declare interface ModifyTaskAlarmRegularRequest {
 
 declare interface ModifyTaskAlarmRegularResponse {
   /** 判断是否修改成功 */
-  Data: boolean | null;
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12315,7 +12393,7 @@ declare interface ModifyTaskNameRequest {
 
 declare interface ModifyTaskNameResponse {
   /** 结果 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12618,7 +12696,7 @@ declare interface RobAndLockIntegrationTaskRequest {
 
 declare interface RobAndLockIntegrationTaskResponse {
   /** 抢锁状态 */
-  RobLockState: RobLockState;
+  RobLockState?: RobLockState;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12906,7 +12984,7 @@ declare interface StopIntegrationTaskRequest {
 
 declare interface StopIntegrationTaskResponse {
   /** 操作成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13086,7 +13164,7 @@ declare interface TaskLogRequest {
 
 declare interface TaskLogResponse {
   /** 详细日志 */
-  LogContentList: LogContent[];
+  LogContentList?: LogContent[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13134,7 +13212,7 @@ declare interface UnlockIntegrationTaskRequest {
 
 declare interface UnlockIntegrationTaskResponse {
   /** 操作成功与否标识 */
-  Data: boolean;
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -956,6 +956,14 @@ declare interface CreateCronJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateEnvironmentRequest {
+}
+
+declare interface CreateEnvironmentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFileRequest {
   /** 文件 ID。其值应为前序步骤上传该文件到 cos 桶后，文件在 cos 桶中的相应目录 */
   FileId: string;
@@ -1070,6 +1078,14 @@ declare interface DeleteCronJobsRequest {
 }
 
 declare interface DeleteCronJobsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEnvironmentsRequest {
+}
+
+declare interface DeleteEnvironmentsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1230,6 +1246,14 @@ declare interface DescribeCronJobsResponse {
   Total: number;
   /** 定时任务信息 */
   CronJobSet: CronJob[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEnvironmentsRequest {
+}
+
+declare interface DescribeEnvironmentsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1708,6 +1732,14 @@ declare interface UpdateCronJobResponse {
   RequestId?: string;
 }
 
+declare interface UpdateEnvironmentRequest {
+}
+
+declare interface UpdateEnvironmentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateFileScenarioRelationRequest {
   /** 文件 ID。其值应为前序步骤上传该文件到 cos 桶后，文件在 cos 桶中的相应目录 */
   FileId: string;
@@ -1823,6 +1855,8 @@ declare interface Pts {
   CreateAlertChannel(data: CreateAlertChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertChannelResponse>;
   /** 创建定时任务 {@link CreateCronJobRequest} {@link CreateCronJobResponse} */
   CreateCronJob(data: CreateCronJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCronJobResponse>;
+  /** 创建环境 {@link CreateEnvironmentRequest} {@link CreateEnvironmentResponse} */
+  CreateEnvironment(data?: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
   /** 创建文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
@@ -1833,6 +1867,8 @@ declare interface Pts {
   DeleteAlertChannel(data: DeleteAlertChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlertChannelResponse>;
   /** 删除定时任务 {@link DeleteCronJobsRequest} {@link DeleteCronJobsResponse} */
   DeleteCronJobs(data: DeleteCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCronJobsResponse>;
+  /** 删除环境 {@link DeleteEnvironmentsRequest} {@link DeleteEnvironmentsResponse} */
+  DeleteEnvironments(data?: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
   /** 删除文件 {@link DeleteFilesRequest} {@link DeleteFilesResponse} */
   DeleteFiles(data: DeleteFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilesResponse>;
   /** 删除任务 {@link DeleteJobsRequest} {@link DeleteJobsResponse} */
@@ -1851,6 +1887,8 @@ declare interface Pts {
   DescribeCheckSummary(data: DescribeCheckSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSummaryResponse>;
   /** 列出定时任务 {@link DescribeCronJobsRequest} {@link DescribeCronJobsResponse} */
   DescribeCronJobs(data: DescribeCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCronJobsResponse>;
+  /** 查看环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
+  DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询错误详情汇总信息 {@link DescribeErrorSummaryRequest} {@link DescribeErrorSummaryResponse} */
   DescribeErrorSummary(data: DescribeErrorSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorSummaryResponse>;
   /** 查询文件列表 {@link DescribeFilesRequest} {@link DescribeFilesResponse} */
@@ -1891,6 +1929,8 @@ declare interface Pts {
   StartJob(data: StartJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartJobResponse>;
   /** 更新定时任务 {@link UpdateCronJobRequest} {@link UpdateCronJobResponse} */
   UpdateCronJob(data: UpdateCronJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCronJobResponse>;
+  /** 更新环境 {@link UpdateEnvironmentRequest} {@link UpdateEnvironmentResponse} */
+  UpdateEnvironment(data?: UpdateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEnvironmentResponse>;
   /** 更新关联文件场景 {@link UpdateFileScenarioRelationRequest} {@link UpdateFileScenarioRelationResponse} */
   UpdateFileScenarioRelation(data: UpdateFileScenarioRelationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFileScenarioRelationResponse>;
   /** 更新任务 {@link UpdateJobRequest} {@link UpdateJobResponse} */

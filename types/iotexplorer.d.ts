@@ -70,6 +70,40 @@ declare interface BindProductInfo {
   ProductOwnerName: string | null;
 }
 
+/** 云存事件 */
+declare interface CloudStorageEvent {
+  /** 事件起始时间（Unix 时间戳，秒级 */
+  StartTime: number;
+  /** 事件结束时间（Unix 时间戳，秒级 */
+  EndTime: number;
+  /** 事件缩略图 */
+  Thumbnail: string;
+  /** 事件ID */
+  EventId: string;
+}
+
+/** 云存时间轴接口返回数据 */
+declare interface CloudStorageTimeData {
+  /** 云存时间轴信息列表 */
+  TimeList?: CloudStorageTimeInfo[];
+  /** 播放地址 */
+  VideoURL?: string | null;
+}
+
+/** 云存时间轴信息 */
+declare interface CloudStorageTimeInfo {
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+}
+
+/** 云存用户信息 */
+declare interface CloudStorageUserInfo {
+  /** 用户ID */
+  UserId?: string;
+}
+
 /** DeviceData */
 declare interface DeviceData {
   /** 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。 */
@@ -396,6 +430,54 @@ declare interface LoRaGatewayLocation {
   Altitude?: number;
 }
 
+/** 云存套餐包消耗统计 */
+declare interface PackageConsumeStat {
+  /** 云存套餐包id */
+  PackageId?: string;
+  /** 云存套餐包名称 */
+  PackageName?: string;
+  /** 消耗个数 */
+  Cnt?: number;
+  /** 套餐包单价，单位分 */
+  Price?: number;
+  /** 消耗来源，1预付费 */
+  Source?: number;
+}
+
+/** 套餐包消耗任务列表 */
+declare interface PackageConsumeTask {
+  /** 任务id */
+  TaskId?: number;
+  /** 任务创始时间 */
+  CreateTime?: string;
+  /** 任务状态，1待处理，2处理中，3已完成 */
+  State?: number;
+}
+
+/** 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间 */
+declare interface PackageInfo {
+  /** 云存开启状态，0为未开启，2为正在生效，1为已过期注：这里只返回状态为0的数据 */
+  Status?: number;
+  /** 云存类型，1为全时云存，2为事件云存 */
+  CSType?: number;
+  /** 云存回看时长 */
+  CSShiftDuration?: number;
+  /** 云存套餐过期时间 */
+  CSExpiredTime?: number;
+  /** 云存套餐创建时间 */
+  CreatedAt?: number | null;
+  /** 云存套餐更新时间 */
+  UpdatedAt?: number | null;
+  /** 套餐id */
+  PackageId?: string | null;
+  /** 订单id */
+  OrderId?: string | null;
+  /** 通道id */
+  ChannelId?: number;
+  /** 用户id */
+  CSUserId?: string | null;
+}
+
 /** 围栏详细信息(包含创建时间及更新时间) */
 declare interface PositionFenceInfo {
   /** 围栏信息 */
@@ -576,6 +658,14 @@ declare interface SearchKeyword {
   Value?: string;
 }
 
+/** 缩略图信息 */
+declare interface ThumbnailURLInfoList {
+  /** 缩略图访问地址 */
+  ThumbnailURL?: string | null;
+  /** 缩略图访问地址的过期时间 */
+  ExpireTime?: number | null;
+}
+
 /** Topic信息, 包括Topic名字和权限 */
 declare interface TopicItem {
   /** Topic名称 */
@@ -628,6 +718,20 @@ declare interface WifiInfo {
   MAC: string;
   /** 信号强度 */
   RSSI: number;
+}
+
+declare interface BindCloudStorageUserRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 用户ID */
+  UserId: string;
+}
+
+declare interface BindCloudStorageUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BindDevicesRequest {
@@ -790,6 +894,30 @@ declare interface CreateFenceBindResponse {
   RequestId?: string;
 }
 
+declare interface CreateIotVideoCloudStorageRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存套餐ID：yc1m3d ： 全时3天存储月套餐。yc1m7d ： 全时7天存储月套餐。yc1m30d ：全时30天存储月套餐。yc1y3d ：全时3天存储年套餐。yc1y7d ：全时7天存储年套餐。yc1y30d ：全时30天存储年套餐。ye1m3d ：事件3天存储月套餐。ye1m7d ：事件7天存储月套餐。ye1m30d ：事件30天存储月套餐 。ye1y3d ：事件3天存储年套餐。ye1y7d ：事件7天存储年套餐。ye1y30d ：事件30天存储年套餐。yc1w7d : 全时7天存储周套餐。ye1w7d : 事件7天存储周套餐。lye1m3d：低功耗事件3天月套餐。lye1m7d：低功耗事件7天月套餐。lye1m30d：低功耗事件30天月套餐。lye1y3d：低功耗事件3天年套餐。lye1y7d：低功耗事件7天年套餐。lye1y30d：低功耗事件30天年套餐。 */
+  PackageId: string;
+  /** 如果当前设备已开启云存套餐，Override=1会使用新套餐覆盖原有套餐。不传此参数则默认为0。 */
+  Override?: number;
+  /** 套餐列表顺序：PackageQueue=front会立即使用新购买的套餐，新购套餐结束后，列表中下一个未过期的套餐继续生效；PackageQueue=end会等设备当前所有已购买套餐过期后才会生效新购套餐。与Override参数不能同时使用。 */
+  PackageQueue?: string;
+  /** 订单id */
+  OrderId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+  /** 云存视频存储区域，国内默认为ap-guangzhou。海外默认为东南亚ap-singapore，可选美东na-ashburn、欧洲eu-frankfurt。 */
+  StorageRegion?: string;
+}
+
+declare interface CreateIotVideoCloudStorageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLoRaFrequencyRequest {
   /** 频点配置名称 */
   FreqName?: string;
@@ -944,6 +1072,28 @@ declare interface CreateTopicRuleRequest {
 }
 
 declare interface CreateTopicRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudStorageEventRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 事件id */
+  EventId: string;
+  /** 开始时间，unix时间 */
+  StartTime: number;
+  /** 结束时间，unix时间 */
+  EndTime: number;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+}
+
+declare interface DeleteCloudStorageEventResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1120,6 +1270,244 @@ declare interface DescribeBindedProductsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudStorageDateRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+}
+
+declare interface DescribeCloudStorageDateResponse {
+  /** 云存日期数组，["2021-01-05","2021-01-06"] */
+  Data?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageEventsRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h */
+  StartTime?: number;
+  /** 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间 */
+  EndTime?: number;
+  /** 请求上下文, 用作查询游标 */
+  Context?: string;
+  /** 查询数据项目的最大数量, 默认为10。假设传Size=10，返回的实际事件数量为N，则 5 <= N <= 10。 */
+  Size?: number;
+  /** 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。 */
+  EventId?: string;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID 非NVR设备则不填 NVR设备则必填 默认为无 */
+  ChannelId?: number;
+}
+
+declare interface DescribeCloudStorageEventsResponse {
+  /** 云存事件列表 */
+  Events?: CloudStorageEvent[];
+  /** 请求上下文, 用作查询游标 */
+  Context?: string;
+  /** 拉取结果是否已经结束 */
+  Listover?: boolean;
+  /** 内部结果数量，并不等同于事件总数。 */
+  Total?: number;
+  /** 视频播放URL */
+  VideoURL?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageMultiThumbnailRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 多个缩略图文件名根据 | 分割 */
+  MultiThumbnail: string;
+}
+
+declare interface DescribeCloudStorageMultiThumbnailResponse {
+  /** 缩略图访问地址 */
+  ThumbnailURLInfoList?: ThumbnailURLInfoList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageOrderRequest {
+  /** 订单id */
+  OrderId: string;
+}
+
+declare interface DescribeCloudStorageOrderResponse {
+  /** 云存套餐开始时间 */
+  StartTime?: number | null;
+  /** 云存套餐过期时间 */
+  ExpireTime?: number | null;
+  /** 套餐id */
+  PackageId?: string | null;
+  /** 套餐状态0：等待生效1: 已过期2:生效 */
+  Status?: number;
+  /** 通道id */
+  ChannelId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStoragePackageConsumeDetailsRequest {
+  /** 开始日期 */
+  StartDate: string;
+  /** 结束日期 */
+  EndDate: string;
+}
+
+declare interface DescribeCloudStoragePackageConsumeDetailsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStoragePackageConsumeStatsRequest {
+  /** 开始日期 */
+  StartDate: string;
+  /** 结束日期，开始与结束日期间隔不可超过一年 */
+  EndDate: string;
+}
+
+declare interface DescribeCloudStoragePackageConsumeStatsResponse {
+  /** 统计列表详情 */
+  Stats?: PackageConsumeStat[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存用户ID */
+  UserId?: string;
+  /** 通道ID 非NVR设备不填 NVR设备必填 默认为无 */
+  ChannelId?: number;
+}
+
+declare interface DescribeCloudStorageResponse {
+  /** 云存开启状态，1为开启，0为未开启或已过期 */
+  Status?: number;
+  /** 云存类型，1为全时云存，2为事件云存 */
+  Type?: number;
+  /** 云存套餐过期时间 */
+  ExpireTime?: number;
+  /** 云存回看时长 */
+  ShiftDuration?: number;
+  /** 云存用户ID */
+  UserId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageStreamDataRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 图片流事件开始时间 */
+  StartTime: number;
+}
+
+declare interface DescribeCloudStorageStreamDataResponse {
+  /** 图片流视频地址 */
+  VideoStream?: string;
+  /** 图片流音频地址 */
+  AudioStream?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageThumbnailListRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 缩略图文件名列表 */
+  ThumbnailList: string[];
+}
+
+declare interface DescribeCloudStorageThumbnailListResponse {
+  /** 缩略图访问地址 */
+  ThumbnailURLInfoList?: ThumbnailURLInfoList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageThumbnailRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 缩略图文件名 */
+  Thumbnail: string;
+}
+
+declare interface DescribeCloudStorageThumbnailResponse {
+  /** 缩略图访问地址 */
+  ThumbnailURL?: string;
+  /** 缩略图访问地址的过期时间 */
+  ExpireTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageTimeRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存日期，例如"2020-01-05" */
+  Date: string;
+  /** 开始时间，unix时间 */
+  StartTime?: number;
+  /** 结束时间，unix时间 */
+  EndTime?: number;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+}
+
+declare interface DescribeCloudStorageTimeResponse {
+  /** 接口返回数据 */
+  Data?: CloudStorageTimeData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageUsersRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 分页拉取数量 */
+  Limit: number;
+  /** 分页拉取偏移 */
+  Offset: number;
+}
+
+declare interface DescribeCloudStorageUsersResponse {
+  /** 用户总数 */
+  TotalCount?: number;
+  /** 用户信息 */
+  Users?: CloudStorageUserInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceBindGatewayRequest {
   /** 产品Id */
   ProductId: string;
@@ -1224,6 +1612,30 @@ declare interface DescribeDeviceLocationSolveResponse {
   LocationType: string;
   /** 误差精度预估，单位为米 */
   Accuracy: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDevicePackagesRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 分页拉取数量 */
+  Limit: number;
+  /** 分页拉取偏移 */
+  Offset: number;
+  /** 用户id */
+  CSUserId?: string;
+  /** 通道id */
+  ChannelId?: number;
+}
+
+declare interface DescribeDevicePackagesResponse {
+  /** 有效云存套餐数量 */
+  TotalCount?: number;
+  /** 有效云存套餐列表 */
+  Packages?: PackageInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1450,6 +1862,34 @@ declare interface DescribeModelDefinitionResponse {
   RequestId?: string;
 }
 
+declare interface DescribePackageConsumeTaskRequest {
+  /** 任务id */
+  TaskId: number;
+}
+
+declare interface DescribePackageConsumeTaskResponse {
+  /** 文件下载的url，文件详情是套餐包消耗详情 */
+  URL?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePackageConsumeTasksRequest {
+  /** 分页单页量 */
+  Limit: number;
+  /** 分页的偏移量，第一页为0 */
+  Offset: number;
+}
+
+declare interface DescribePackageConsumeTasksResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 任务列表 */
+  List?: PackageConsumeTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePositionFenceListRequest {
   /** 位置空间Id */
   SpaceId: string;
@@ -1598,6 +2038,22 @@ declare interface GenSingleDeviceSignatureOfPublicRequest {
 declare interface GenSingleDeviceSignatureOfPublicResponse {
   /** 设备签名 */
   DeviceSignature: DeviceSignatureInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GenerateSignedVideoURLRequest {
+  /** 视频播放原始URL地址 */
+  VideoURL: string;
+  /** 播放链接过期时间 */
+  ExpireTime: number;
+  /** 通道ID 非NVR设备不填 NVR设备必填 默认为无 */
+  ChannelId?: number;
+}
+
+declare interface GenerateSignedVideoURLResponse {
+  /** 视频防盗链播放URL */
+  SignedVideoURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1836,6 +2292,22 @@ declare interface GetTopicRuleListResponse {
   TotalCnt: number;
   /** 规则列表 */
   Rules: TopicRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InheritCloudStorageUserRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 原始用户ID */
+  UserId: string;
+  /** 目标用户ID */
+  ToUserId: string;
+}
+
+declare interface InheritCloudStorageUserResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2158,6 +2630,38 @@ declare interface ReleaseStudioProductResponse {
   RequestId?: string;
 }
 
+declare interface ResetCloudStorageEventRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+}
+
+declare interface ResetCloudStorageEventResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetCloudStorageRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 通道ID 非NVR设备则不填 NVR设备则必填 默认为无 */
+  ChannelId?: number;
+  /** 云存用户Id，为空则为默认云存空间。 */
+  UserId?: string;
+}
+
+declare interface ResetCloudStorageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchPositionSpaceRequest {
   /** 项目Id */
   ProjectId: string;
@@ -2212,6 +2716,22 @@ declare interface SearchTopicRuleResponse {
   TotalCnt: number;
   /** 规则信息列表 */
   Rules: TopicRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TransferCloudStorageRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 已开通云存的设备名称 */
+  DeviceName: string;
+  /** 未开通云存的设备名称 */
+  ToDeviceName: string;
+  /** 未开通云存的设备产品ID */
+  ToProductId?: string;
+}
+
+declare interface TransferCloudStorageResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2307,6 +2827,8 @@ declare interface UploadFirmwareResponse {
 /** {@link Iotexplorer 物联网开发平台} */
 declare interface Iotexplorer {
   (): Versions;
+  /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
+  BindCloudStorageUser(data: BindCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudStorageUserResponse>;
   /** 批量绑定子设备 {@link BindDevicesRequest} {@link BindDevicesResponse} */
   BindDevices(data: BindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BindDevicesResponse>;
   /** 批量绑定子产品 {@link BindProductsRequest} {@link BindProductsResponse} */
@@ -2323,6 +2845,8 @@ declare interface Iotexplorer {
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
   /** 创建围栏绑定信息 {@link CreateFenceBindRequest} {@link CreateFenceBindResponse} */
   CreateFenceBind(data: CreateFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFenceBindResponse>;
+  /** 开通video云存服务 {@link CreateIotVideoCloudStorageRequest} {@link CreateIotVideoCloudStorageResponse} */
+  CreateIotVideoCloudStorage(data: CreateIotVideoCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIotVideoCloudStorageResponse>;
   /** 创建 LoRa 自定义频点 {@link CreateLoRaFrequencyRequest} {@link CreateLoRaFrequencyResponse} */
   CreateLoRaFrequency(data?: CreateLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaFrequencyResponse>;
   /** 新建 LoRa 网关设备 {@link CreateLoRaGatewayRequest} {@link CreateLoRaGatewayResponse} */
@@ -2339,6 +2863,8 @@ declare interface Iotexplorer {
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
   /** 创建规则 {@link CreateTopicRuleRequest} {@link CreateTopicRuleResponse} */
   CreateTopicRule(data: CreateTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicRuleResponse>;
+  /** 删除云存事件 {@link DeleteCloudStorageEventRequest} {@link DeleteCloudStorageEventResponse} */
+  DeleteCloudStorageEvent(data: DeleteCloudStorageEventRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudStorageEventResponse>;
   /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
   /** 批量删除设备 {@link DeleteDevicesRequest} {@link DeleteDevicesResponse} */
@@ -2365,6 +2891,30 @@ declare interface Iotexplorer {
   DescribeBatchProduction(data: DescribeBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchProductionResponse>;
   /** 获取网关产品已经绑定的子产品 {@link DescribeBindedProductsRequest} {@link DescribeBindedProductsResponse} */
   DescribeBindedProducts(data: DescribeBindedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindedProductsResponse>;
+  /** 获取设备云存服务详情 {@link DescribeCloudStorageRequest} {@link DescribeCloudStorageResponse} */
+  DescribeCloudStorage(data: DescribeCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageResponse>;
+  /** 获取具有云存的日期 {@link DescribeCloudStorageDateRequest} {@link DescribeCloudStorageDateResponse} */
+  DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
+  /** 拉取云存事件列表 {@link DescribeCloudStorageEventsRequest} {@link DescribeCloudStorageEventsResponse} */
+  DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
+  /** 拉取多个云存事件缩略图 {@link DescribeCloudStorageMultiThumbnailRequest} {@link DescribeCloudStorageMultiThumbnailResponse} */
+  DescribeCloudStorageMultiThumbnail(data: DescribeCloudStorageMultiThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageMultiThumbnailResponse>;
+  /** 查询云存服务详情 {@link DescribeCloudStorageOrderRequest} {@link DescribeCloudStorageOrderResponse} */
+  DescribeCloudStorageOrder(data: DescribeCloudStorageOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageOrderResponse>;
+  /** 获取云存套餐包消耗详细记录 {@link DescribeCloudStoragePackageConsumeDetailsRequest} {@link DescribeCloudStoragePackageConsumeDetailsResponse} */
+  DescribeCloudStoragePackageConsumeDetails(data: DescribeCloudStoragePackageConsumeDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeDetailsResponse>;
+  /** 获取云存套餐包消耗统计 {@link DescribeCloudStoragePackageConsumeStatsRequest} {@link DescribeCloudStoragePackageConsumeStatsResponse} */
+  DescribeCloudStoragePackageConsumeStats(data: DescribeCloudStoragePackageConsumeStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeStatsResponse>;
+  /** 获取设备图片流数据 {@link DescribeCloudStorageStreamDataRequest} {@link DescribeCloudStorageStreamDataResponse} */
+  DescribeCloudStorageStreamData(data: DescribeCloudStorageStreamDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageStreamDataResponse>;
+  /** 拉取云存事件缩略图 {@link DescribeCloudStorageThumbnailRequest} {@link DescribeCloudStorageThumbnailResponse} */
+  DescribeCloudStorageThumbnail(data: DescribeCloudStorageThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageThumbnailResponse>;
+  /** 批量拉取云存事件缩略图 {@link DescribeCloudStorageThumbnailListRequest} {@link DescribeCloudStorageThumbnailListResponse} */
+  DescribeCloudStorageThumbnailList(data: DescribeCloudStorageThumbnailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageThumbnailListResponse>;
+  /** 获取某一天云存时间轴 {@link DescribeCloudStorageTimeRequest} {@link DescribeCloudStorageTimeResponse} */
+  DescribeCloudStorageTime(data: DescribeCloudStorageTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageTimeResponse>;
+  /** 拉取云存用户列表 {@link DescribeCloudStorageUsersRequest} {@link DescribeCloudStorageUsersResponse} */
+  DescribeCloudStorageUsers(data: DescribeCloudStorageUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageUsersResponse>;
   /** 查看设备详情 {@link DescribeDeviceRequest} {@link DescribeDeviceResponse} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
   /** 查询设备绑定的网关设备 {@link DescribeDeviceBindGatewayRequest} {@link DescribeDeviceBindGatewayResponse} */
@@ -2377,6 +2927,8 @@ declare interface Iotexplorer {
   DescribeDeviceFirmWare(data: DescribeDeviceFirmWareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmWareResponse>;
   /** 获取实时位置解析 {@link DescribeDeviceLocationSolveRequest} {@link DescribeDeviceLocationSolveResponse} */
   DescribeDeviceLocationSolve(data: DescribeDeviceLocationSolveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceLocationSolveResponse>;
+  /** 拉取有效云存套餐列表 {@link DescribeDevicePackagesRequest} {@link DescribeDevicePackagesResponse} */
+  DescribeDevicePackages(data: DescribeDevicePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePackagesResponse>;
   /** 获取设备位置列表 {@link DescribeDevicePositionListRequest} {@link DescribeDevicePositionListResponse} */
   DescribeDevicePositionList(data: DescribeDevicePositionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionListResponse>;
   /** 获取围栏绑定信息列表 {@link DescribeFenceBindListRequest} {@link DescribeFenceBindListResponse} */
@@ -2397,6 +2949,10 @@ declare interface Iotexplorer {
   DescribeLoRaFrequency(data?: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
   /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
+  /** 查询套餐消耗记录详情 {@link DescribePackageConsumeTaskRequest} {@link DescribePackageConsumeTaskResponse} */
+  DescribePackageConsumeTask(data: DescribePackageConsumeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTaskResponse>;
+  /** 查询套餐消耗记录列表 {@link DescribePackageConsumeTasksRequest} {@link DescribePackageConsumeTasksResponse} */
+  DescribePackageConsumeTasks(data: DescribePackageConsumeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTasksResponse>;
   /** 获取围栏列表 {@link DescribePositionFenceListRequest} {@link DescribePositionFenceListResponse} */
   DescribePositionFenceList(data: DescribePositionFenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePositionFenceListResponse>;
   /** 查询项目详情 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
@@ -2417,6 +2973,8 @@ declare interface Iotexplorer {
   EnableTopicRule(data: EnableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTopicRuleResponse>;
   /** 生成单个设备绑定的签名 {@link GenSingleDeviceSignatureOfPublicRequest} {@link GenSingleDeviceSignatureOfPublicResponse} */
   GenSingleDeviceSignatureOfPublic(data: GenSingleDeviceSignatureOfPublicRequest, config?: AxiosRequestConfig): AxiosPromise<GenSingleDeviceSignatureOfPublicResponse>;
+  /** 获取视频防盗链播放URL {@link GenerateSignedVideoURLRequest} {@link GenerateSignedVideoURLResponse} */
+  GenerateSignedVideoURL(data: GenerateSignedVideoURLRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateSignedVideoURLResponse>;
   /** 列出量产数据列表 {@link GetBatchProductionsListRequest} {@link GetBatchProductionsListResponse} */
   GetBatchProductionsList(data: GetBatchProductionsListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBatchProductionsListResponse>;
   /** 获取固件存储请求地址 {@link GetCOSURLRequest} {@link GetCOSURLResponse} */
@@ -2441,6 +2999,8 @@ declare interface Iotexplorer {
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
+  /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */
+  InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
   /** 获取设备的历史事件 {@link ListEventHistoryRequest} {@link ListEventHistoryResponse} */
   ListEventHistory(data: ListEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventHistoryResponse>;
   /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */
@@ -2477,12 +3037,18 @@ declare interface Iotexplorer {
   PublishRRPCMessage(data: PublishRRPCMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishRRPCMessageResponse>;
   /** 发布产品 {@link ReleaseStudioProductRequest} {@link ReleaseStudioProductResponse} */
   ReleaseStudioProduct(data: ReleaseStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseStudioProductResponse>;
+  /** 重置云存服务 {@link ResetCloudStorageRequest} {@link ResetCloudStorageResponse} */
+  ResetCloudStorage(data: ResetCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageResponse>;
+  /** 重置云存事件 {@link ResetCloudStorageEventRequest} {@link ResetCloudStorageEventResponse} */
+  ResetCloudStorageEvent(data: ResetCloudStorageEventRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageEventResponse>;
   /** 搜索位置空间 {@link SearchPositionSpaceRequest} {@link SearchPositionSpaceResponse} */
   SearchPositionSpace(data: SearchPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPositionSpaceResponse>;
   /** 搜索产品 {@link SearchStudioProductRequest} {@link SearchStudioProductResponse} */
   SearchStudioProduct(data?: SearchStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStudioProductResponse>;
   /** 搜索规则 {@link SearchTopicRuleRequest} {@link SearchTopicRuleResponse} */
   SearchTopicRule(data: SearchTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTopicRuleResponse>;
+  /** 转移云存服务 {@link TransferCloudStorageRequest} {@link TransferCloudStorageResponse} */
+  TransferCloudStorage(data: TransferCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<TransferCloudStorageResponse>;
   /** 批量解绑子设备 {@link UnbindDevicesRequest} {@link UnbindDevicesResponse} */
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
   /** 批量解绑子产品 {@link UnbindProductsRequest} {@link UnbindProductsResponse} */

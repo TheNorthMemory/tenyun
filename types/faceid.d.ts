@@ -705,25 +705,25 @@ declare interface GetFaceIdResultRequest {
 
 declare interface GetFaceIdResultResponse {
   /** 身份证 */
-  IdCard: string;
+  IdCard?: string;
   /** 姓名 */
-  Name: string;
+  Name?: string;
   /** 业务核验结果，参考https://cloud.tencent.com/document/product/1007/47912 */
-  Result: string;
+  Result?: string;
   /** 业务核验描述 */
-  Description: string;
+  Description?: string;
   /** 相似度，0-100，数值越大相似度越高 */
-  Similarity: number;
+  Similarity?: number;
   /** 用户核验的视频base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey */
-  VideoBase64: string | null;
+  VideoBase64?: string | null;
   /** 用户核验视频的截帧base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey */
-  BestFrameBase64: string | null;
+  BestFrameBase64?: string | null;
   /** 获取token时透传的信息 */
-  Extra: string | null;
+  Extra?: string | null;
   /** 设备风险标签，仅错误码返回1007（设备疑似被劫持）时返回风险标签。标签说明：202、5001：设备疑似被Root203、5004：设备疑似被注入205：设备疑似被Hook206：设备疑似虚拟运行环境5007、1005：设备疑似摄像头被劫持8000：设备疑似存在异常篡改行为 */
-  DeviceInfoTag: string | null;
+  DeviceInfoTag?: string | null;
   /** 行为风险标签，仅错误码返回1007（设备疑似被劫持）时返回风险标签。标签说明：02：攻击风险 */
-  RiskInfoTag: string | null;
+  RiskInfoTag?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -736,11 +736,11 @@ declare interface GetFaceIdRiskInfoRequest {
 declare interface GetFaceIdRiskInfoResponse {
   /** 描述当前请求所在设备的风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备 */
   DeviceInfoTag?: string | null;
-  /** 描述当前请求所在设备的风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级 */
+  /** 描述当前请求所在设备的风险等级，共4级，详情如下： 1 - 低风险 2 - 中风险 3 - 高风险 4 - 攻击 ，-1表示未获取到风险等级 */
   DeviceInfoLevel?: number | null;
   /** 设备id标识 */
   OpenId?: string | null;
-  /** 描述当前请求所在设备的相机指纹风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级 */
+  /** 描述当前请求所在设备的相机指纹风险等级，共4级，详情如下： 1 - 低风险 2 - 中风险 3 - 高风险 4 - 攻击 ，-1表示未获取到风险等级 */
   CameraInfoLevel?: number | null;
   /** 描述当前请求所在设备的相机指纹风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备，空表示没有相机指纹风险 */
   CameraInfoTag?: string | null;
@@ -767,6 +767,8 @@ declare interface GetFaceIdTokenRequest {
   UseCos?: boolean;
   /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
+  /** 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请添加腾讯云人脸核身小助手进行咨询。示例值：1 */
+  RuleId?: string;
 }
 
 declare interface GetFaceIdTokenResponse {

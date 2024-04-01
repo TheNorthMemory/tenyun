@@ -42,7 +42,7 @@ declare interface ApproverOption {
   NoTransfer?: boolean;
   /** 是否隐藏一键签署 默认false-不隐藏true-隐藏 */
   HideOneKeySign?: boolean;
-  /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充` */
+  /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`注：`使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关` */
   FillType?: number;
   /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
   FlowReadLimit?: string;
@@ -508,7 +508,7 @@ declare interface FlowApproverInfo {
   CallbackUrl?: string;
   /** 使用PDF文件直接发起合同时，签署人指定的签署控件；使用模板发起合同时，指定本企业印章签署控件的印章ID: 通过ComponentId或ComponenetName指定签署控件，ComponentValue为印章ID。 */
   SignComponents?: Component[];
-  /** 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式	HANDWRITE – 手写签名	OCR_ESIGN -- AI智能识别手写签名	ESIGN -- 个人印章类型	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） */
+  /** 当签署方控件类型为 SIGN_SIGNATURE 时，可以指定签署方签名方式。如果不指定，签署人可以使用所有的签名类型，可指定的签名类型包括： HANDWRITE :手写签名。 OCR_ESIGN :AI智能识别手写签名。 ESIGN :个人印章类型。 IMG_ESIGN : 图片印章。该类型支持用户在签署将上传的PNG格式的图片作为签名。 SYSTEM_ESIGN :系统签名。该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署。各种签名的样式可以参考下图：![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg) */
   ComponentLimitType?: string[];
   /** 签署方在签署合同之前，需要强制阅读合同的时长，可指定为3秒至300秒之间的任意值。若未指定阅读时间，则会按照合同页数大小计算阅读时间，计算规则如下：合同页数少于等于2页，阅读时间为3秒；合同页数为3到5页，阅读时间为5秒；合同页数大于等于6页，阅读时间为10秒。 */
   PreReadTime?: number;
@@ -520,7 +520,7 @@ declare interface FlowApproverInfo {
   ApproverNeedSignReview?: boolean;
   /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式 */
   ApproverVerifyTypes?: number[];
-  /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素默认为1(人脸认证 ),2(签署密码)注: 1. 用模板创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在创建合同重新指定无效2. 运营商三要素认证方式对手机号运营商及前缀有限制,可以参考[运营商支持列表类](https://qian.tencent.com/developers/partner/mobile_support)得到具体的支持说明 */
+  /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素默认为1(人脸认证 ),2(签署密码),3(运营商三要素)注: 1. 用模板创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在创建合同重新指定无效2. 运营商三要素认证方式对手机号运营商及前缀有限制,可以参考[运营商支持列表类](https://qian.tencent.com/developers/partner/mobile_support)得到具体的支持说明 */
   ApproverSignTypes?: number[];
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
   SignId?: string;
@@ -2323,6 +2323,8 @@ declare interface CreateConsoleLoginUrlRequest {
   UniformSocialCreditCode?: string;
   /** 子客企业员工的姓名，最大长度50个字符, 员工的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：`该姓名需要和Agent.ProxyOperator.OpenId相匹配, 当员工完成认证后该姓名会和Agent.ProxyOperator.OpenId一一绑定, 若员工已认证加入企业，这里修改经办人名字传入将不会生效` */
   ProxyOperatorName?: string;
+  /** 子客企业员工的手机码, 支持国内手机号11位数字(无需加+86前缀或其他字符)。注：`该手机号需要和Agent.ProxyOperator.OpenId相匹配, 当员工完成认证后该手机号会和Agent.ProxyOperator.OpenId一一绑定, 若员工已认证加入企业，这里修改经办人手机号传入将不会生效` */
+  ProxyOperatorMobile?: string;
   /** Web控制台登录后进入的功能模块, 支持的模块包括： **空值** :(默认)企业中心模块 **DOCUMENT** :合同管理模块 **TEMPLATE** :企业模板管理模块 **SEAL** :印章管理模块 **OPERATOR** :组织管理模块注意：1、如果EndPoint选择"CHANNEL"或"APP"，该参数仅支持传递"SEAL"，进入印章管理模块2、该参数**仅在企业和员工激活已经完成，登录控制台场景才生效**。 */
   Module?: string;
   /** 该参数和Module参数配合使用，用于指定模块下的资源Id，指定后链接登录将展示该资源的详情。根据Module参数的不同所代表的含义不同(ModuleId需要和Module对应，ModuleId可以通过API或者控制台获取到)。当前支持： Module传值 ModuleId传值 进入的目标页面 SEAL 印章ID 查看指定印章的详情页面 TEMPLATE 合同模板ID 指定模板的详情页面 DOCUMENT 合同ID 指定合同的详情页面 注意：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */

@@ -4350,6 +4350,64 @@ declare interface RollBackClusterResponse {
   RequestId?: string;
 }
 
+declare interface RollbackToNewClusterRequest {
+  /** 可用区 */
+  Zone: string;
+  /** 回档时，传入源集群ID，用于查找源poolId */
+  OriginalClusterId: string;
+  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
+  ClusterName?: string;
+  /** 所属VPC网络ID */
+  UniqVpcId?: string;
+  /** 所属子网ID */
+  UniqSubnetId?: string;
+  /** 是否自动选择代金券 1是 0否 默认为0 */
+  AutoVoucher?: number;
+  /** Db类型当DbType为MYSQL时可选(默认NORMAL)：NORMALSERVERLESS */
+  DbMode?: string;
+  /** 当DbMode为SEVERLESS时必填cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  MinCpu?: number;
+  /** 当DbMode为SEVERLESS时必填：cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  MaxCpu?: number;
+  /** 当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围yesno默认值:yes */
+  AutoPause?: string;
+  /** 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]默认值:600 */
+  AutoPauseDelay?: number;
+  /** 安全组id数组 */
+  SecurityGroupIds?: string[];
+  /** 告警策略Id数组 */
+  AlarmPolicyIds?: string[];
+  /** 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感 */
+  ClusterParams?: ParamItem[];
+  /** 0-下单并支付 1-下单 */
+  DealMode?: number;
+  /** 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID */
+  ParamTemplateId?: number;
+  /** 集群创建需要绑定的tag数组信息 */
+  ResourceTags?: Tag[];
+  /** 实例初始化配置信息，主要用于购买集群时选不同规格实例 */
+  InstanceInitInfos?: InstanceInitInfo[];
+  /** 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效 */
+  RollbackId?: number;
+  /** 时间点回档，指定时间；快照回档，快照时间 */
+  ExpectTime?: string;
+}
+
+declare interface RollbackToNewClusterResponse {
+  /** 冻结流水ID */
+  TranId?: string | null;
+  /** 订单号 */
+  DealNames?: string[] | null;
+  /** 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID） */
+  ResourceIds?: string[] | null;
+  /** 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID） */
+  ClusterIds?: string[] | null;
+  /** 大订单号 */
+  BigDealIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchClusterDatabasesRequest {
   /** 集群id */
   ClusterId: string;
@@ -4813,6 +4871,8 @@ declare interface Cynosdb {
   RevokeAccountPrivileges(data: RevokeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeAccountPrivilegesResponse>;
   /** 集群回档 {@link RollBackClusterRequest} {@link RollBackClusterResponse} */
   RollBackCluster(data: RollBackClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RollBackClusterResponse>;
+  /** 回档到新集群 {@link RollbackToNewClusterRequest} {@link RollbackToNewClusterResponse} */
+  RollbackToNewCluster(data: RollbackToNewClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackToNewClusterResponse>;
   /** 搜索集群数据库列表 {@link SearchClusterDatabasesRequest} {@link SearchClusterDatabasesResponse} */
   SearchClusterDatabases(data: SearchClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterDatabasesResponse>;
   /** 搜索集群数据表列表 {@link SearchClusterTablesRequest} {@link SearchClusterTablesResponse} */

@@ -1398,7 +1398,7 @@ declare interface AnimatedGraphicsTemplate {
 
 /** 日志推送目标。 */
 declare interface AreaCLSTargetInfo {
-  /** 日志集所属地区：ap-guangzhou：广州； ap-singapore：新加坡。 */
+  /** 日志集所属地区：ap-guangzhou：广州；ap-beijing：北京；ap-chengdu：成都；ap-chongqing：重庆；ap-nanjing：南京；ap-shanghai：上海；ap-singapore：新加坡。 */
   CLSRegion: string;
   /** 投递的目标主题 ID。 */
   TopicId: string;
@@ -5979,7 +5979,7 @@ declare interface CreateAnimatedGraphicsTemplateResponse {
 }
 
 declare interface CreateCLSLogsetRequest {
-  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  /** 日志集所属的地域，取值有： ap-guangzhou：广州； ap-beijing：北京； ap-chengdu：成都； ap-chongqing：重庆； ap-nanjing：南京； ap-shanghai：上海； ap-singapore：新加坡。 */
   CLSRegion: string;
 }
 
@@ -5991,7 +5991,7 @@ declare interface CreateCLSLogsetResponse {
 }
 
 declare interface CreateCLSTopicRequest {
-  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  /** 日志集所属的地域，取值有： ap-guangzhou：广州； ap-beijing：北京； ap-chengdu：成都； ap-chongqing：重庆； ap-nanjing：南京； ap-shanghai：上海； ap-singapore：新加坡。 */
   CLSRegion: string;
   /** 日志主题名。 */
   TopicName: string;
@@ -6599,7 +6599,7 @@ declare interface DeleteAnimatedGraphicsTemplateResponse {
 }
 
 declare interface DeleteCLSTopicRequest {
-  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  /** 日志集所属的地域，取值有： ap-guangzhou：广州； ap-beijing：北京； ap-chengdu：成都； ap-chongqing：重庆； ap-nanjing：南京； ap-shanghai：上海； ap-singapore：新加坡。 */
   CLSRegion?: string;
   /** 日志主题 ID。 */
   TopicId?: string;
@@ -7015,7 +7015,7 @@ declare interface DescribeCDNUsageDataResponse {
 }
 
 declare interface DescribeCLSLogsetsRequest {
-  /** CLS 日志集所属的地域，取值有：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  /** 日志集所属的地域，取值有： ap-guangzhou：广州； ap-beijing：北京； ap-chengdu：成都； ap-chongqing：重庆； ap-nanjing：南京； ap-shanghai：上海； ap-singapore：新加坡。 */
   CLSRegion: string;
 }
 
@@ -7043,7 +7043,7 @@ declare interface DescribeCLSPushTargetsResponse {
 }
 
 declare interface DescribeCLSTopicsRequest {
-  /** 日志集所属地区：ap-guangzhou：广州；ap-singapore：新加坡。 */
+  /** 日志集所属的地域，取值有： ap-guangzhou：广州； ap-beijing：北京； ap-chengdu：成都； ap-chongqing：重庆； ap-nanjing：南京； ap-shanghai：上海； ap-singapore：新加坡。 */
   CLSRegion: string;
   /** 日志主题所属日志集 ID。 */
   LogsetId: string;

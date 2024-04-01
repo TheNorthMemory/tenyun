@@ -648,6 +648,16 @@ declare interface HyperParameter {
   LoraScale?: string | null;
 }
 
+/** 镜像列表过滤 */
+declare interface ImageFIlter {
+  /** 过滤字段名称 */
+  Name: string;
+  /** 过滤值 */
+  Values: string[];
+  /** 是否反选 */
+  Negative?: boolean;
+}
+
 /** 镜像描述信息 */
 declare interface ImageInfo {
   /** 镜像类型：TCR为腾讯云TCR镜像; CCR为腾讯云TCR个人版镜像，PreSet为平台预置镜像 */
@@ -662,6 +672,8 @@ declare interface ImageInfo {
   AllowSaveAllContent?: boolean | null;
   /** 镜像名称 */
   ImageName?: string | null;
+  /** 是否支持数据构建 */
+  SupportDataPipeline?: boolean | null;
 }
 
 /** 推理代码的信息 */
@@ -744,6 +756,10 @@ declare interface Instance {
   SpecFeatures?: string[] | null;
   /** 纳管cvmid */
   CvmInstanceId?: string;
+  /** 部署失败错误码 */
+  ErrCode?: string | null;
+  /** 部署失败错误信息 */
+  ErrMsg?: string | null;
 }
 
 /** 内网调用信息 */
@@ -2231,7 +2247,7 @@ declare interface CreateModelServiceRequest {
   ServiceCategory?: string;
   /** 服务的启动命令 */
   Command?: string;
-  /** 是否开启TIONE内网访问外部 */
+  /** 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。 */
   ServiceEIP?: ServiceEIP;
 }
 
@@ -2739,6 +2755,8 @@ declare interface DescribeBillingSpecsResponse {
 }
 
 declare interface DescribeBuildInImagesRequest {
+  /** 镜像过滤器 */
+  ImageFilters?: ImageFIlter[];
 }
 
 declare interface DescribeBuildInImagesResponse {
@@ -3379,7 +3397,7 @@ declare interface ModifyModelServiceRequest {
   ModelTurboEnable?: boolean;
   /** 服务的启动命令 */
   Command?: string;
-  /** 是否开启TIONE内网访问外部 */
+  /** 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。 */
   ServiceEIP?: ServiceEIP;
 }
 

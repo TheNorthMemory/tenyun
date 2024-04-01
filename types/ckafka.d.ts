@@ -1790,6 +1790,26 @@ declare interface PrivateLinkParam {
   UniqVpcId: string;
 }
 
+/** 普罗米修斯打通的vipVport */
+declare interface PrometheusDTO {
+  /** export类型（jmx_export\node_export） */
+  Type: string;
+  /** vip */
+  SourceIp: string;
+  /** vport */
+  SourcePort: number;
+}
+
+/** Prometheus 监控返回 */
+declare interface PrometheusResult {
+  /** 返回的code，0为正常，非0为错误 */
+  ReturnCode: string;
+  /** 成功消息 */
+  ReturnMessage: string;
+  /** 操作型返回的Data数据,可能有flowId等 */
+  Data: OperateResponseData;
+}
+
 /** record 与数据库表的映射关系 */
 declare interface RecordMapping {
   /** 消息的 key 名称 */
@@ -2683,12 +2703,12 @@ declare interface CreateDatahubTopicResponse {
 declare interface CreateInstancePostRequest {
   /** 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
   InstanceName: string;
+  /** 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填 */
+  VpcId: string;
+  /** 子网id。创建实例默认接入点所在的子网对应的子网 id */
+  SubnetId: string;
   /** 实例内网峰值带宽。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格。 */
   BandWidth: number;
-  /** 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填 */
-  VpcId?: string;
-  /** 子网id。创建实例默认接入点所在的子网对应的子网 id */
-  SubnetId?: string;
   /** 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。 */
   InstanceType?: number;
   /** 实例日志的默认最长保留时间，单位分钟。不传入该参数时默认为 1440 分钟（1天），最大30天。当 topic 显式设置消息保留时间时，以 topic 保留时间为准 */
@@ -2836,6 +2856,22 @@ declare interface CreatePostPaidInstanceRequest {
 declare interface CreatePostPaidInstanceResponse {
   /** 返回结果 */
   Result?: CreateInstancePostResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrometheusRequest {
+  /** ckafka实例id */
+  InstanceId: string;
+  /** vpc地址 */
+  VpcId: string;
+  /** 子网地址 */
+  SubnetId: string;
+}
+
+declare interface CreatePrometheusResponse {
+  /** 打通普罗米修斯 */
+  Result: PrometheusResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3347,7 +3383,7 @@ declare interface DescribeDatahubTopicsResponse {
 declare interface DescribeGroupInfoRequest {
   /** （过滤条件）按照实例 ID 过滤。 */
   InstanceId: string;
-  /** Kafka 消费分组，Consumer-group，这里是数组形式，格式：GroupList.0=xxx&GroupList.1=yyy。 */
+  /** Kafka 消费分组，Consumer-group，这里是数组形式，示例：["xxx","yyy"] */
   GroupList: string[];
 }
 
@@ -3460,6 +3496,18 @@ declare interface DescribeInstancesRequest {
 declare interface DescribeInstancesResponse {
   /** 返回的结果 */
   Result: InstanceResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusRequest {
+  /** ckafka实例Id */
+  InstanceId: string;
+}
+
+declare interface DescribePrometheusResponse {
+  /** Prometheus监控映射列表 */
+  Result: PrometheusDTO[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4283,6 +4331,8 @@ declare interface Ckafka {
   CreatePartition(data: CreatePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartitionResponse>;
   /** 创建按量计费实例（新） {@link CreatePostPaidInstanceRequest} {@link CreatePostPaidInstanceResponse} */
   CreatePostPaidInstance(data?: CreatePostPaidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostPaidInstanceResponse>;
+  /** 添加普罗米修斯监控 {@link CreatePrometheusRequest} {@link CreatePrometheusResponse} */
+  CreatePrometheus(data: CreatePrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusResponse>;
   /** 添加实例路由 {@link CreateRouteRequest} {@link CreateRouteResponse} */
   CreateRoute(data: CreateRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteResponse>;
   /** 创建token {@link CreateTokenRequest} {@link CreateTokenResponse} */
@@ -4355,6 +4405,8 @@ declare interface Ckafka {
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 获取实例集群列表详情 {@link DescribeInstancesDetailRequest} {@link DescribeInstancesDetailResponse} */
   DescribeInstancesDetail(data?: DescribeInstancesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDetailResponse>;
+  /** 获取实例Prometheus信息 {@link DescribePrometheusRequest} {@link DescribePrometheusResponse} */
+  DescribePrometheus(data: DescribePrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusResponse>;
   /** 枚举地域 {@link DescribeRegionRequest} {@link DescribeRegionResponse} */
   DescribeRegion(data?: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;
   /** 查看路由信息 {@link DescribeRouteRequest} {@link DescribeRouteResponse} */
