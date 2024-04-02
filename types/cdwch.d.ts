@@ -499,9 +499,9 @@ declare interface CreateInstanceNewRequest {
   ChargeProperties: Charge;
   /** 实例名称 */
   InstanceName: string;
-  /** 数据节点 */
+  /** 数据节点SpecName从DescribeSpec接口中返回的DataSpec.Name获取 */
   DataSpec: NodeSpec;
-  /** 标签列表 */
+  /** 标签列表（废弃） */
   Tags?: Tag;
   /** 日志主题ID */
   ClsLogSetId?: string;
@@ -511,8 +511,10 @@ declare interface CreateInstanceNewRequest {
   MountDiskType?: number;
   /** 是否是ZK高可用 */
   HAZk?: boolean;
-  /** ZK节点 */
+  /** ZK节点SpecName从DescribeSpec接口中返回的CommonSpec.Name（ZK节点）获取 */
   CommonSpec?: NodeSpec;
+  /** 标签列表 */
+  TagItems?: Tag[];
 }
 
 declare interface CreateInstanceNewResponse {

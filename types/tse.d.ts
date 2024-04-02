@@ -110,6 +110,22 @@ declare interface CloudNativeAPIGatewayCanaryRule {
   ServiceId?: string | null;
   /** 归属服务名称 */
   ServiceName?: string | null;
+  /** 灰度规则类别Standard｜Lane */
+  RuleType?: string | null;
+  /** 全链路灰度策略多个条件之间的匹配方式，与AND，或OR */
+  MatchType?: string | null;
+  /** 泳道组ID */
+  GroupId?: string | null;
+  /** 泳道组名称 */
+  GroupName?: string | null;
+  /** 泳道ID */
+  LaneId?: string | null;
+  /** 泳道名称 */
+  LaneName?: string | null;
+  /** 泳道匹配规则：严格STRICT｜宽松PERMISSIVE */
+  MatchMode?: string | null;
+  /** 泳道标签 */
+  LaneTag?: string | null;
 }
 
 /** 灰度规则中的条件配置 */
@@ -205,21 +221,15 @@ declare interface CloudNativeAPIGatewayNodeConfig {
 /** 云原生网关Tse 限流插件配置 */
 declare interface CloudNativeAPIGatewayRateLimitDetail {
   /** 插件启用状态 */
-  Enabled: boolean;
+  Enabled?: boolean;
   /** qps阈值 */
-  QpsThresholds: QpsThreshold[];
-  /** 限流依据ip service consumer credential path header */
-  LimitBy: string;
-  /** 响应策略url请求转发text 响应配置default 直接返回 */
-  ResponseType: string;
-  /** 是否隐藏限流客户端响应头 */
-  HideClientHeaders: boolean;
-  /** 是否开启请求排队 */
-  IsDelay: boolean;
+  QpsThresholds?: QpsThreshold[];
   /** 需要进行流量控制的请求路径 */
   Path?: string | null;
   /** 需要进行流量控制的请求头Key */
   Header?: string | null;
+  /** 限流依据ip service consumer credential path header */
+  LimitBy?: string;
   /** 外部redis配置 */
   ExternalRedis?: ExternalRedis | null;
   /** 计数器策略 local 单机redis 默认redisexternal_redis 外部redis */
@@ -228,8 +238,18 @@ declare interface CloudNativeAPIGatewayRateLimitDetail {
   RateLimitResponse?: RateLimitResponse | null;
   /** 请求转发地址 */
   RateLimitResponseUrl?: string | null;
+  /** 响应策略url请求转发text 响应配置default 直接返回 */
+  ResponseType?: string;
+  /** 是否隐藏限流客户端响应头 */
+  HideClientHeaders?: boolean;
   /** 排队时间 */
   LineUpTime?: number;
+  /** 是否开启请求排队 */
+  IsDelay?: boolean;
+  /** 基础限流 */
+  BasicLimitQpsThresholds?: QpsThreshold[] | null;
+  /** 参数限流的规则 */
+  LimitRules?: LimitRule[] | null;
 }
 
 /** 网关实例策略 */
@@ -1198,6 +1218,14 @@ declare interface KVPair {
   Value: string;
 }
 
+/** Key/Value结构 */
+declare interface KeyValue {
+  /** 条件的Key */
+  Key?: string | null;
+  /** 条件的Value */
+  Value?: string | null;
+}
+
 /** Kong网关主动健康检查配置 */
 declare interface KongActiveHealthCheck {
   /** 主动健康检查健康探测间隔，单位：秒，0表示不开启 */
@@ -1370,6 +1398,8 @@ declare interface KongTarget {
   CvmInstanceId?: string | null;
   /** CVM实例名称 */
   CvmInstanceName?: string | null;
+  /** target标签 */
+  Tags?: string[] | null;
 }
 
 /** 服务的后端配置 */
@@ -1432,6 +1462,16 @@ declare interface KongUpstreamPreview {
   Name?: string | null;
   /** 后端配置 */
   Target?: KongTarget[] | null;
+}
+
+/** 参数限流的规则 */
+declare interface LimitRule {
+  /** 请求匹配条件 */
+  Filters?: RuleFilter[] | null;
+  /** 参数限流依据组合 */
+  LimitBy?: KeyValue[] | null;
+  /** 限流阈值 */
+  QpsThresholds?: QpsThreshold[] | null;
 }
 
 /** 获取云原生API网关实例列表响应结果。 */
@@ -1596,6 +1636,14 @@ declare interface RouteWafStatus {
   ServiceName?: string | null;
   /** 路由对应服务的ID */
   ServiceId?: string | null;
+}
+
+/** 限流规则的Filter */
+declare interface RuleFilter {
+  /** 限流条件的Key */
+  Key?: string | null;
+  /** 限流条件的Values */
+  Values?: string[] | null;
 }
 
 /** 微服务注册引擎实例 */
@@ -2525,6 +2573,8 @@ declare interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
   GatewayId: string;
   /** 服务 ID */
   ServiceId: string;
+  /** 灰度规则类别 Standard｜Lane */
+  RuleType?: string;
   /** 列表数量 */
   Limit?: number;
   /** 列表offset */

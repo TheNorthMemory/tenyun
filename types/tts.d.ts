@@ -43,14 +43,14 @@ declare interface Subtitle {
 declare interface CreateTtsTaskRequest {
   /** 合成语音的源文本，按UTF-8编码统一计算，最多支持10万字符 */
   Text: string;
-  /** 模型类型，1-默认模型。 */
-  ModelType: number;
   /** 音量大小，范围：[0，10]，分别对应11个等级的音量，默认为0，代表正常音量。没有静音选项。 */
   Volume?: number;
   /** 语速，范围：[-2，2]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
   Speed?: number;
   /** 项目id，用户自定义，默认为0。 */
   ProjectId?: number;
+  /** 模型类型，1-默认模型。 */
+  ModelType?: number;
   /** 音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见[购买指南](https://cloud.tencent.com/document/product/1073/34112)。完整的音色 ID 列表请参见[音色列表](https://cloud.tencent.com/document/product/1073/92668)。 */
   VoiceType?: number;
   /** 主语言类型：1-中文（默认）2-英文3-日文 */

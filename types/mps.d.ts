@@ -214,6 +214,8 @@ declare interface AiAnalysisResult {
   HighlightTask?: AiAnalysisTaskHighlightResult | null;
   /** 视频内容分析去水印任务的查询结果，当任务类型为 DeLogo 时有效。 */
   DeLogoTask?: AiAnalysisTaskDelLogoResult | null;
+  /** 视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。 */
+  HeadTailTask?: AiAnalysisTaskHeadTailResult | null;
   /** 视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。 */
   DescriptionTask?: AiAnalysisTaskDescriptionResult | null;
 }
@@ -356,6 +358,34 @@ declare interface AiAnalysisTaskFrameTagResult {
   Input?: AiAnalysisTaskFrameTagInput;
   /** 智能按帧标签任务输出。 */
   Output?: AiAnalysisTaskFrameTagOutput | null;
+}
+
+/** 片头片尾任务输入类型 */
+declare interface AiAnalysisTaskHeadTailInput {
+  /** 片头片尾识别模板 ID。 */
+  Definition: number;
+}
+
+/** 片头片尾结果信息 */
+declare interface AiAnalysisTaskHeadTailOutput {
+  /** 片头pts。 */
+  HeadTimeOffset: number | null;
+  /** 片尾pts。 */
+  TailTimeOffset?: number | null;
+}
+
+/** 片头片尾结果类型 */
+declare interface AiAnalysisTaskHeadTailResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 片头片尾任务输入。 */
+  Input?: AiAnalysisTaskHeadTailInput;
+  /** 片头片尾任务输出。 */
+  Output?: AiAnalysisTaskHeadTailOutput | null;
 }
 
 /** 智能精彩片段任务输入类型 */

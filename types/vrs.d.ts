@@ -20,7 +20,7 @@ declare interface DescribeVRSTaskStatusRespData {
   Status?: number | null;
   /** 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。 */
   StatusStr?: string | null;
-  /** 音色id */
+  /** 音色id。 */
   VoiceType?: number | null;
   /** 失败原因说明。 */
   ErrorMsg?: string | null;
@@ -119,23 +119,23 @@ declare interface CreateVRSTaskRequest {
   SessionId: string;
   /** 音色名称 */
   VoiceName: string;
-  /** 音频采样率：16000：16k */
-  SampleRate: number;
   /** 音色性别:1-male2-female */
   VoiceGender: number;
   /** 语言类型：1-中文 */
   VoiceLanguage: number;
-  /** 音频格式，音频类型(wav,mp3,aac,m4a) */
-  Codec: string;
   /** 音频ID集合 */
   AudioIdList: string[];
+  /** 音频采样率：16000：16k */
+  SampleRate?: number;
+  /** 音频格式，音频类型(wav,mp3,aac,m4a) */
+  Codec?: string;
   /** 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""} */
   CallbackUrl?: string;
   /** 模型类型 1:在线 2:离线 默认为1 */
   ModelType?: number;
-  /** 任务类型 0:轻量版复刻默认为0 */
+  /** 复刻类型。 0 - 轻量版声音复刻（默认）。 */
   TaskType?: number;
-  /** 校验音频ID */
+  /** 校验音频ID。 */
   VPRAudioId?: string;
 }
 
@@ -163,10 +163,10 @@ declare interface DetectEnvAndSoundQualityRequest {
   TextId: string;
   /** 语音数据 要使用base64编码(采用python语言时注意读取文件时需要转成base64字符串编码，例如：str(base64.b64encode(open("input.aac", mode="rb").read()), encoding='utf-8') )。 */
   AudioData: string;
-  /** 音频格式，音频类型(wav,mp3,aac,m4a) */
-  Codec: string;
   /** 1:环境检测 2:音质检测 */
   TypeId: number;
+  /** 音频格式，音频类型(wav,mp3,aac,m4a) */
+  Codec?: string;
   /** 音频采样率：16000：16k（默认） */
   SampleRate?: number;
 }

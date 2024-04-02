@@ -690,6 +690,36 @@ declare interface RedisCommonInstanceList {
   NetType: number;
 }
 
+/** 实例事件信息 */
+declare interface RedisInstanceEvent {
+  /** 事件 ID。 */
+  ID?: number | null;
+  /** 实例 ID。 */
+  InstanceId?: string | null;
+  /** 实例名称。 */
+  InstanceName?: string | null;
+  /** 事件类型，当前仅支持配置实例迁移、资源腾挪、机房裁撤相关的运维操作。该参数仅支持配置为 **InstanceMigration**。 */
+  Type?: string | null;
+  /** 事件等级根据其影响严重程度和紧急程度进行分级，由重至轻依次为关键、重要、中等、一般。- Critical：关键- High：重要- Middle：中等- Low：一般 */
+  Grade?: string | null;
+  /** 事件计划执行日期。 */
+  ExecutionDate?: string | null;
+  /** 事件计划执行开始时间。 */
+  StartTime?: string | null;
+  /** 事件计划执行结束时间。 */
+  EndTime?: string | null;
+  /** 运维事件最迟执行的日期，即该事件必须在该日期之前完成，否则可能会对业务产生影响。 */
+  LatestExecutionDate?: string | null;
+  /** 事件当前状态。- Waiting：未到达执行日期或不在维护时间窗内的事件。- Running：在维护时间窗内，正在执行维护的事件。- Finished：已全部完成维护的事件。- Canceled：已取消执行的事件。 */
+  Status?: string | null;
+  /** 事件执行任务完成时间。 */
+  TaskEndTime?: string | null;
+  /** 事件影响信息。 */
+  EffectInfo?: string | null;
+  /** 事件最初计划执行日期。 */
+  InitialExecutionDate?: string | null;
+}
+
 /** Redis节点的运行信息 */
 declare interface RedisNode {
   /** Redis 节点上 Key 的个数。 */
@@ -1492,6 +1522,34 @@ declare interface DescribeInstanceDealDetailRequest {
 declare interface DescribeInstanceDealDetailResponse {
   /** 订单详细信息。 */
   DealDetails?: TradeDealDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceEventsRequest {
+  /** 配置查询事件执行计划的起始日期。 */
+  ExecutionStartDate: string;
+  /** 配置查询事件执行计划的结束日期。 */
+  ExecutionEndDate: string;
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  InstanceId?: string;
+  /** 输出每页显示事件的数量，默认：10。 */
+  PageSize?: number;
+  /** 配置查询事件的输出页码，即支持根据PageNo（页码）与 PageSize （每页输出数量）查询某一页的事件。默认：1。 */
+  PageNo?: number;
+  /** 事件当前状态。- Waiting：未到达执行日期或不在维护时间窗内的事件。- Running：在维护时间窗内，正在执行维护的事件。- Finished：已全部完成维护的事件。- Canceled：已取消执行的事件。 */
+  Status?: string[];
+  /** 事件类型，当前仅支持配置实例迁移、资源腾挪、机房裁撤相关的运维操作。该参数仅支持配置为 **InstanceMigration**。 */
+  EventTypes?: string[];
+  /** 配置查询事件等级。事件等级根据其影响严重程度和紧急程度进行分级，由重至轻依次为关键、重要、中等、一般。- Critical：关键- High：重要- Middle：中等- Low：一般 */
+  Grades?: string[];
+}
+
+declare interface DescribeInstanceEventsResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 实例事件信息 */
+  RedisInstanceEvents?: RedisInstanceEvent[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2358,6 +2416,28 @@ declare interface ModifyInstanceAvailabilityZonesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceEventRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 事件 ID。请通过 DescribeInstanceEvents 获取需修改的事件 ID。 */
+  EventId: number;
+  /** 修改事件执行的计划开始时间。 */
+  StartTime?: string;
+  /** 修改事件计划执行的结束时间。开始时间配置之后，结束时间只能选择在开始时间之后的 30 分钟、1 小时、1.5 小时、2 小时和 3 小时之内。 */
+  EndTime?: string;
+  /** 修改事件执行计划的开始日期。 */
+  ExecutionDate?: string;
+  /** 修改事件的运行状态。该参数当前仅支持设置为 **Canceled**， 即取消执行当前事件。可通过 DescribeInstanceEvents 接口查询当前事件的运行状态与事件级别。- 事件级别为Critical（关键）或 High（重要）类事件不支持取消。即严重的事件必须执行，不可取消。- 仅运行状态为 Waiting （待执行的事件）的事件，才能执行取消操作。 */
+  Status?: string;
+}
+
+declare interface ModifyInstanceEventResponse {
+  /** 事件 ID。 */
+  EventId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceParamsRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2765,6 +2845,8 @@ declare interface Redis {
   DescribeInstanceDTSInfo(data: DescribeInstanceDTSInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDTSInfoResponse>;
   /** 查询订单信息 {@link DescribeInstanceDealDetailRequest} {@link DescribeInstanceDealDetailResponse} */
   DescribeInstanceDealDetail(data: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
+  /** 查询实例事件信息 {@link DescribeInstanceEventsRequest} {@link DescribeInstanceEventsResponse} */
+  DescribeInstanceEvents(data: DescribeInstanceEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceEventsResponse>;
   /** 查询实例大Key（已废弃） {@link DescribeInstanceMonitorBigKeyRequest} {@link DescribeInstanceMonitorBigKeyResponse} */
   DescribeInstanceMonitorBigKey(data: DescribeInstanceMonitorBigKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeyResponse>;
   /** 查询实例大Key大小分布（已废弃） {@link DescribeInstanceMonitorBigKeySizeDistRequest} {@link DescribeInstanceMonitorBigKeySizeDistResponse} */
@@ -2859,6 +2941,8 @@ declare interface Redis {
   ModifyInstanceAccount(data: ModifyInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAccountResponse>;
   /** 修改实例可用区 {@link ModifyInstanceAvailabilityZonesRequest} {@link ModifyInstanceAvailabilityZonesResponse} */
   ModifyInstanceAvailabilityZones(data: ModifyInstanceAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAvailabilityZonesResponse>;
+  /** 修改实例事件 {@link ModifyInstanceEventRequest} {@link ModifyInstanceEventResponse} */
+  ModifyInstanceEvent(data: ModifyInstanceEventRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEventResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 设置实例输入模式 {@link ModifyInstanceReadOnlyRequest} {@link ModifyInstanceReadOnlyResponse} */

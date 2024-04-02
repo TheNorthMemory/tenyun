@@ -188,6 +188,10 @@ declare interface InstanceInfo {
   IsWhiteSGs?: boolean | null;
   /** 已绑定的安全组信息 */
   BindSGs?: string[] | null;
+  /** 是否为多可用区 */
+  EnableMultiZones?: boolean | null;
+  /** 用户可用区和子网信息 */
+  UserNetworkInfos?: string | null;
 }
 
 /** 实例节点描述信息 */
@@ -216,12 +220,32 @@ declare interface InstanceNode {
   UUID?: string | null;
 }
 
+/** 网络信息 */
+declare interface NetworkInfo {
+  /** 可用区 */
+  Zone?: string | null;
+  /** 子网id */
+  SubnetId?: string | null;
+  /** 当前子网可用ip数 */
+  SubnetIpNum?: number | null;
+}
+
 /** NodeInfo */
 declare interface NodeInfo {
   /** 用户IP */
   Ip?: string | null;
   /** 节点状态 */
   Status?: number | null;
+  /** 节点角色名 */
+  NodeName?: string | null;
+  /** 组件名 */
+  ComponentName?: string | null;
+  /** 节点角色 */
+  NodeRole?: string | null;
+  /** 节点上次重启的时间 */
+  LastRestartTime?: string | null;
+  /** 节点所在可用区 */
+  Zone?: string | null;
 }
 
 /** 节点角色描述信息 */
@@ -335,6 +359,10 @@ declare interface CreateInstanceNewRequest {
   HaType?: number;
   /** 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储 */
   CaseSensitive?: number;
+  /** 是否开启多可用区 */
+  EnableMultiZones?: boolean;
+  /** 开启多可用区后，用户的所有可用区和子网信息 */
+  UserMultiZoneInfos?: NetworkInfo;
 }
 
 declare interface CreateInstanceNewResponse {

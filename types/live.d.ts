@@ -1028,6 +1028,8 @@ declare interface RecordTemplateInfo {
   Mp3Param?: RecordParam;
   /** 是否去除水印。 */
   RemoveWatermark?: boolean | null;
+  /** 是否存储至cos */
+  CosStore?: number | null;
   /** FLV 录制定制参数。 */
   FlvSpecialParam?: FlvSpecialParam | null;
 }
