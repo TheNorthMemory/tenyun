@@ -1735,6 +1735,8 @@ declare interface CreateLiveRecordTemplateRequest {
   HlsSpecialParam?: HlsSpecialParam;
   /** Mp3录制参数，开启Mp3录制时设置。 */
   Mp3Param?: RecordParam;
+  /** 是否存储至 cos，值为 1 时表示存储至 cos。 */
+  CosStore?: number;
   /** 是否去除水印，类型为慢直播时此参数无效。如果为false，则录制水印流或转码流；如果为true，则录制原始流。 */
   RemoveWatermark?: boolean;
   /** FLV 录制特殊参数。 */

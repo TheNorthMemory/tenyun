@@ -710,6 +710,16 @@ declare interface DescribeTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTldListRequest {
+}
+
+declare interface DescribeTldListResponse {
+  /** 支持的后缀列表 */
+  List?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomDnsHostRequest {
   /** 域名实例ID */
   DomainId: string;
@@ -975,6 +985,8 @@ declare interface Domain {
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
   /** 信息模板列表 {@link DescribeTemplateListRequest} {@link DescribeTemplateListResponse} */
   DescribeTemplateList(data?: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
+  /** 查询支持注册后缀 {@link DescribeTldListRequest} {@link DescribeTldListResponse} */
+  DescribeTldList(data?: DescribeTldListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTldListResponse>;
   /** 修改自定义DNS Host {@link ModifyCustomDnsHostRequest} {@link ModifyCustomDnsHostResponse} */
   ModifyCustomDnsHost(data: ModifyCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomDnsHostResponse>;
   /** 批量域名 DNS 修改 {@link ModifyDomainDNSBatchRequest} {@link ModifyDomainDNSBatchResponse} */

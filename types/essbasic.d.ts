@@ -976,6 +976,8 @@ declare interface RegistrationOrganizationInfo {
   AdminIdCardNumber?: string;
   /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
   BusinessLicense?: string;
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M */
+  PowerOfAttorneys?: string[];
 }
 
 /** 解除协议的签署人，如不指定，默认使用待解除流程(原流程)中的签署人。`注意`: - 不支持更换C端(个人身份类型)签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。 - 目前不支持替换C端(个人身份类型)签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。 - 当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只传参数ApproverSignRole。如果需要指定B端(企业身份类型)签署人，其中ReleasedApprover需要传递的参数如下：`ApproverNumber`, `OrganizationName`, `ApproverType`必传。对于其他身份标识：- **子客企业指定经办人**：OpenId必传，OrganizationOpenId必传；- **非子客企业经办人**：Name、Mobile必传。 */
@@ -2483,7 +2485,7 @@ declare interface CreateSignUrlsRequest {
   OrganizationOpenId?: string;
   /** 第三方平台子客企业员工的标识OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息注： 如果传进来的OpenId已经实名并且加入企业， 则忽略Name，IdCardType，IdCardNumber，Mobile这四个入参（会用此OpenId实名的身份证和登录的手机号覆盖） */
   OpenId?: string;
-  /** Endpoint为"APP" 类型的签署链接，可以设置此值；支持调用方小程序打开签署链接，在电子签小程序完成签署后自动回跳至调用方小程序 */
+  /** 签署完成后是否自动回跳false：否, 签署完成不会自动跳转回来(默认)true：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
   AutoJumpBack?: boolean;
   /** 签署完之后的H5页面的跳转链接，针对Endpoint为CHANNEL时有效，最大长度1000个字符。 */
   JumpUrl?: string;

@@ -482,6 +482,12 @@ declare interface DescribeCityWorkspaceListRes {
   WorkspaceSet?: WorkspaceInfo[] | null;
 }
 
+/** 设备分组信息 */
+declare interface DescribeDeviceGroupListRes {
+  /** 设备分组list */
+  List?: DescribeGroupInfo[] | null;
+}
+
 /** 设备列表查询结果 */
 declare interface DescribeDeviceListRes {
   /** 第几页 */
@@ -508,6 +514,18 @@ declare interface DescribeEventListRes {
   TotalRow?: number | null;
   /** 事件信息列表 */
   EventDetailSet?: EventDetail[] | null;
+}
+
+/** 分组信息实体类 */
+declare interface DescribeGroupInfo {
+  /** 分组 */
+  Id?: number;
+  /** 设备分组名称 */
+  Name?: string;
+  /** 分组描述 */
+  Description?: string | null;
+  /** 分组父级ID */
+  ParentId?: number | null;
 }
 
 /** 联动规则列表查询结果 */
@@ -1030,6 +1048,32 @@ declare interface ModelSet {
   Set?: ModelInfo[] | null;
 }
 
+/** 设备自定义值修改信息入参 */
+declare interface ModifyDeviceFieldInfo {
+  /** 设备id */
+  WID: string;
+  /** 自定义字段key */
+  Key: string;
+  /** 自定义字段值 */
+  Val: string;
+}
+
+/** 设备组修改信息入参 */
+declare interface ModifyDeviceGroupInfo {
+  /** 设备id */
+  WID: string;
+  /** 设备分组id */
+  GroupId: number;
+}
+
+/** 设备标签修改信息入参 */
+declare interface ModifyDeviceTagInfo {
+  /** 设备id */
+  WID: string;
+  /** 设备标签名称集合 */
+  NameSet: string[];
+}
+
 /** 处理记录项 */
 declare interface ProcessRecordInfo {
   /** 告警的id */
@@ -1186,6 +1230,12 @@ declare interface RuleDetailRes {
   EventInfoSet?: EventObj[] | null;
   /** 动作对象集合 */
   ActionInfoSet?: ActionObj[] | null;
+}
+
+/** 保存or修改设备分组回包 */
+declare interface SaveDeviceGroupRes {
+  /** 保存or修改设备分组回包信息 */
+  Id?: number | null;
 }
 
 /** 场景信息 */
@@ -1524,6 +1574,22 @@ declare interface BatchCreateDeviceResponse {
   RequestId?: string;
 }
 
+declare interface BatchDeleteDeviceRequest {
+  /** 工作空间id */
+  WorkspaceId: number;
+  /** 设备wid数组列表 */
+  WIDSet: string[];
+  /** 应用token */
+  ApplicationToken: string;
+}
+
+declare interface BatchDeleteDeviceResponse {
+  /** 返回请求结果 */
+  Result?: EmptyRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchKillAlarmRequest {
   /** 告警开始时间，必填,时间戳秒 */
   BeginTime: number;
@@ -1666,6 +1732,22 @@ declare interface CreateApplicationTokenRequest {
 declare interface CreateApplicationTokenResponse {
   /** 应用令牌信息 */
   Result?: ApplicationTokenInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDeviceGroupRequest {
+  /** 设备分组的id */
+  Id: number;
+  /** 工作空间的id */
+  WorkspaceId: number;
+  /** 应用token */
+  ApplicationToken: string;
+}
+
+declare interface DeleteDeviceGroupResponse {
+  /** 无返回信息 */
+  Result?: EmptyRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1892,6 +1974,22 @@ declare interface DescribeCityWorkspaceListRequest {
 declare interface DescribeCityWorkspaceListResponse {
   /** 工作空间信息集合 */
   Result?: DescribeCityWorkspaceListRes | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceGroupListRequest {
+  /** 应用token */
+  ApplicationToken: string;
+  /** 工作空间ID */
+  WorkspaceId: number;
+  /** 分组id, 不传默认全部 */
+  GroupId?: number;
+}
+
+declare interface DescribeDeviceGroupListResponse {
+  /** 分组信息 */
+  Result?: DescribeDeviceGroupListRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2610,6 +2708,38 @@ declare interface DescribeWorkspaceUserListResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDeviceFieldRequest {
+  /** 工作空间id */
+  WorkspaceId: number;
+  /** 设备自定义字段修改信息集合 */
+  Set: ModifyDeviceFieldInfo[];
+  /** 应用token */
+  ApplicationToken: string;
+}
+
+declare interface ModifyDeviceFieldResponse {
+  /** 返回请求结果 */
+  Result?: EmptyRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDeviceGroupRequest {
+  /** 工作空间id */
+  WorkspaceId: number;
+  /** 设备组修改信息集合 */
+  Set: ModifyDeviceGroupInfo[];
+  /** 应用token */
+  ApplicationToken: string;
+}
+
+declare interface ModifyDeviceGroupResponse {
+  /** 返回请求结果 */
+  Result?: EmptyRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeviceNameRequest {
   /** 工作空间id */
   WorkspaceId: number;
@@ -2620,6 +2750,22 @@ declare interface ModifyDeviceNameRequest {
 }
 
 declare interface ModifyDeviceNameResponse {
+  /** 返回请求结果 */
+  Result?: EmptyRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDeviceTagRequest {
+  /** 工作空间id */
+  WorkspaceId: number;
+  /** 设备标签修改信息集合 */
+  Set: ModifyDeviceTagInfo[];
+  /** 应用token */
+  ApplicationToken: string;
+}
+
+declare interface ModifyDeviceTagResponse {
   /** 返回请求结果 */
   Result?: EmptyRes;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2650,6 +2796,28 @@ declare interface ReportAppMessageRequest {
 declare interface ReportAppMessageResponse {
   /** 上报单条信息结果 */
   Result?: EmptyRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SaveDeviceGroupRequest {
+  /** 分组名称 */
+  Name: string;
+  /** 分组描述 */
+  Description: string;
+  /** 空间id */
+  WorkspaceId: number;
+  /** 应用token */
+  ApplicationToken: string;
+  /** 分组id, 携带则为修改, 不携带则为新增 */
+  Id?: number;
+  /** 分组父级id */
+  ParentId?: number;
+}
+
+declare interface SaveDeviceGroupResponse {
+  /** 新增/修改的设备分组记录的id */
+  Result?: SaveDeviceGroupRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2697,6 +2865,8 @@ declare interface Weilingwith {
   AddAlarmProcessRecord(data: AddAlarmProcessRecordRequest, config?: AxiosRequestConfig): AxiosPromise<AddAlarmProcessRecordResponse>;
   /** 批量新增设备 {@link BatchCreateDeviceRequest} {@link BatchCreateDeviceResponse} */
   BatchCreateDevice(data: BatchCreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateDeviceResponse>;
+  /** 批量删除设备 {@link BatchDeleteDeviceRequest} {@link BatchDeleteDeviceResponse} */
+  BatchDeleteDevice(data: BatchDeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteDeviceResponse>;
   /** 批量消警 {@link BatchKillAlarmRequest} {@link BatchKillAlarmResponse} */
   BatchKillAlarm(data: BatchKillAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<BatchKillAlarmResponse>;
   /** 批量上报应用消息 {@link BatchReportAppMessageRequest} {@link BatchReportAppMessageResponse} */
@@ -2709,6 +2879,8 @@ declare interface Weilingwith {
   ControlDevice(data: ControlDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceResponse>;
   /** 创建应用授权令牌 {@link CreateApplicationTokenRequest} {@link CreateApplicationTokenResponse} */
   CreateApplicationToken(data: CreateApplicationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationTokenResponse>;
+  /** 删除设备分组 {@link DeleteDeviceGroupRequest} {@link DeleteDeviceGroupResponse} */
+  DeleteDeviceGroup(data: DeleteDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupResponse>;
   /** 动作列表查询 {@link DescribeActionListRequest} {@link DescribeActionListResponse} */
   DescribeActionList(data: DescribeActionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActionListResponse>;
   /** 根据标签获取行政区划列表 {@link DescribeAdministrationByTagRequest} {@link DescribeAdministrationByTagResponse} */
@@ -2733,6 +2905,8 @@ declare interface Weilingwith {
   DescribeCameraExtendInfo(data: DescribeCameraExtendInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCameraExtendInfoResponse>;
   /** 通过城市id查询工作空间列表 {@link DescribeCityWorkspaceListRequest} {@link DescribeCityWorkspaceListResponse} */
   DescribeCityWorkspaceList(data: DescribeCityWorkspaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCityWorkspaceListResponse>;
+  /** 设备分组列表 {@link DescribeDeviceGroupListRequest} {@link DescribeDeviceGroupListResponse} */
+  DescribeDeviceGroupList(data: DescribeDeviceGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupListResponse>;
   /** 设备列表查询 {@link DescribeDeviceListRequest} {@link DescribeDeviceListResponse} */
   DescribeDeviceList(data: DescribeDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceListResponse>;
   /** 获取设备影子数据 {@link DescribeDeviceShadowListRequest} {@link DescribeDeviceShadowListResponse} */
@@ -2799,10 +2973,18 @@ declare interface Weilingwith {
   DescribeWorkspaceList(data: DescribeWorkspaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceListResponse>;
   /** 查询项目空间人员列表 {@link DescribeWorkspaceUserListRequest} {@link DescribeWorkspaceUserListResponse} */
   DescribeWorkspaceUserList(data: DescribeWorkspaceUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceUserListResponse>;
+  /** 修改设备自定义字段值 {@link ModifyDeviceFieldRequest} {@link ModifyDeviceFieldResponse} */
+  ModifyDeviceField(data: ModifyDeviceFieldRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceFieldResponse>;
+  /** 修改设备分组 {@link ModifyDeviceGroupRequest} {@link ModifyDeviceGroupResponse} */
+  ModifyDeviceGroup(data: ModifyDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceGroupResponse>;
   /** 批量修改设备名字 {@link ModifyDeviceNameRequest} {@link ModifyDeviceNameResponse} */
   ModifyDeviceName(data: ModifyDeviceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceNameResponse>;
+  /** 修改设备绑定标签 {@link ModifyDeviceTagRequest} {@link ModifyDeviceTagResponse} */
+  ModifyDeviceTag(data: ModifyDeviceTagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceTagResponse>;
   /** 上报应用消息 {@link ReportAppMessageRequest} {@link ReportAppMessageResponse} */
   ReportAppMessage(data: ReportAppMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ReportAppMessageResponse>;
+  /** 设备分组新增or修改 {@link SaveDeviceGroupRequest} {@link SaveDeviceGroupResponse} */
+  SaveDeviceGroup(data: SaveDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDeviceGroupResponse>;
   /** 断流接口 {@link StopVideoStreamingRequest} {@link StopVideoStreamingResponse} */
   StopVideoStreaming(data: StopVideoStreamingRequest, config?: AxiosRequestConfig): AxiosPromise<StopVideoStreamingResponse>;
   /** 修改工作空间园区属性 {@link UpdateWorkspaceParkAttributesRequest} {@link UpdateWorkspaceParkAttributesResponse} */

@@ -749,12 +749,14 @@ declare interface RunApplicationRequest {
   Name: string;
   /** 投递环境ID。 */
   EnvironmentId: string;
-  /** 任务输入JSON。需要进行base64编码。 */
-  InputBase64: string;
   /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
   /** 任务批次描述。 */
   Description?: string;
+  /** 任务输入COS地址。（InputBase64和InputCosUri必选其一） */
+  InputCosUri?: string;
+  /** 任务输入JSON。需要进行base64编码。（InputBase64和InputCosUri必选其一） */
+  InputBase64?: string;
   /** 批量投递表格ID，不填表示单例投递。 */
   TableId?: string;
   /** 批量投递表格行UUID。不填表示表格全部行。 */
@@ -769,6 +771,8 @@ declare interface RunApplicationRequest {
   NFOption?: NFOption;
   /** 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow) */
   WorkDir?: string;
+  /** 访问模式，不填默认私有。取值范围- PRIVATE：私有应用- PUBLIC：公共应用 */
+  AccessMode?: string;
 }
 
 declare interface RunApplicationResponse {

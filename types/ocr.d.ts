@@ -294,6 +294,8 @@ declare interface DocumentElement {
   Polygon?: Polygon | null;
   /** 元素层级 */
   Level?: number | null;
+  /** 入参开启EnableInsetImage后返回，表示在InsetImagePackage中的内嵌图片名称 */
+  InsetImageName?: string | null;
   /** 嵌套的文档元素信息，一般包含的是文档内嵌入图片的文字识别结果 */
   Elements?: DocumentElement[] | null;
 }

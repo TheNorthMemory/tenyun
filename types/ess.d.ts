@@ -2153,7 +2153,7 @@ declare interface CreateSchemeUrlRequest {
   FlowGroupId?: string;
   /** 要跳转到的页面类型 **0** : 腾讯电子签小程序个人首页 (默认) **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面) **2** : 腾讯电子签小程序合同列表页 **3** : 腾讯电子签小程序合同封面页注：`生成动态签署人补充链接时，必须指定为封面页` */
   PathType?: number;
-  /** 签署完成后是否自动回跳**false**：否, 签署完成不会自动跳转回来(默认)**true**：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP 类型的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object) */
+  /** 签署完成后是否自动回跳**false**：否, 签署完成不会自动跳转回来(默认)**true**：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
   AutoJumpBack?: boolean;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

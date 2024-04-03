@@ -130,7 +130,7 @@ declare interface FilterGroup {
   Filters?: Filter[] | null;
 }
 
-/** 数据分页信息 */
+/** 页码 */
 declare interface Paging {
   /** 每页条数(只支持32位) */
   PageSize?: number | null;

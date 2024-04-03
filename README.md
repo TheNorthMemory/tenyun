@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 245+ 款产品，11161+ 服务数</summary>
+<details><summary>共计 245+ 款产品，11169+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -181,7 +181,7 @@ dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(124) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(73) |
-domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(37) |
+domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(38) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
 dsgc | [数据安全治理中心](https://cloud.tencent.com/document/product/1087) | 2019-07-23(148) |
@@ -338,7 +338,7 @@ vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(133) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(318) |
-weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(57) |
+weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(64) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(20) |
 youmall |  | 2018-02-28(31) |
