@@ -76,6 +76,8 @@ declare interface Address {
   AntiDDoSPackageId?: string;
   /** 当前EIP是否自动续费，只有按月带宽预付费的EIP才会显示该字段，具体值示例如下:NOTIFY_AND_MANUAL_RENEW:正常续费NOTIFY_AND_AUTO_RENEW:自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW:到期不续费 */
   RenewFlag?: string;
+  /** 当前公网IP所关联的带宽包ID，如果该公网IP未使用带宽包计费，则返回为空 */
+  BandwidthPackageId?: string | null;
 }
 
 /** 用于描述弹性公网IP的费用对象 */

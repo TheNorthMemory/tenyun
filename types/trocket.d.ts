@@ -1307,6 +1307,8 @@ declare interface ModifyTopicRequest {
   QueueNum?: number;
   /** 备注信息 */
   Remark?: string;
+  /** 消息保留时长 */
+  MsgTTL?: number;
 }
 
 declare interface ModifyTopicResponse {

@@ -982,6 +982,12 @@ declare interface RecordParam {
   StorageMode?: string | null;
   /** 点播应用分类 */
   ClassId?: number | null;
+  /** 存储至 cos 的 bucket 桶名称。 */
+  CosBucketName?: string | null;
+  /** 存储至 cos 的 bucket 区域。 */
+  CosBucketRegion?: string | null;
+  /** 存储至 cos 的 bucket 路径。 */
+  CosBucketPath?: string | null;
 }
 
 /** 录制任务 */

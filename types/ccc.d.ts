@@ -14,6 +14,18 @@ declare interface ActiveCarrierPrivilegeNumber {
   CreateTime?: number;
 }
 
+/** 音频文件审核信息 */
+declare interface AudioFileInfo {
+  /** 文件ID */
+  FileId?: number | null;
+  /** 文件别名 */
+  CustomFileName?: string | null;
+  /** 文件名 */
+  AudioFileName?: string | null;
+  /** 审核状态，0-未审核，1-审核通过，2-审核拒绝 */
+  Status?: number | null;
+}
+
 /** 外呼任务被叫信息 */
 declare interface AutoCalloutTaskCalleeInfo {
   /** 被叫号码 */
@@ -672,6 +684,22 @@ declare interface TelCdrInfo {
   VoicemailAsrURL?: string[] | null;
 }
 
+/** 上传音频文件信息 */
+declare interface UploadAudioInfo {
+  /** 文件别名（可重复） */
+  CustomFileName: string;
+  /** 音频文件链接。(支持mp3和wav格式，文件不超过5MB) */
+  AudioUrl: string;
+}
+
+/** 上传音频文件失败信息 */
+declare interface UploadIvrAudioFailedInfo {
+  /** 文件名 */
+  FileName?: string | null;
+  /** 失败原因 */
+  FailedMsg?: string | null;
+}
+
 /** 变量 */
 declare interface Variable {
   /** 变量名 */
@@ -1264,6 +1292,30 @@ declare interface DescribeIMCdrsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIvrAudioListRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 分页尺寸，上限 50 */
+  PageSize: number;
+  /** 分页页码，从 0 开始 */
+  PageNumber: number;
+  /** 文件别名 */
+  CustomFileName?: string[];
+  /** 文件名 */
+  AudioFileName?: string[];
+  /** 文件ID */
+  FileId?: number[];
+}
+
+declare interface DescribeIvrAudioListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 文件信息 */
+  FileInfo?: AudioFileInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNumbersRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1754,6 +1806,20 @@ declare interface UpdatePredictiveDialingCampaignResponse {
   RequestId?: string;
 }
 
+declare interface UploadIvrAudioRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 音频文件列表 */
+  AudioList: UploadAudioInfo[];
+}
+
+declare interface UploadIvrAudioResponse {
+  /** 上传失败的文件列表 */
+  FailedFileList?: UploadIvrAudioFailedInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ccc 云联络中心} */
 declare interface Ccc {
   (): Versions;
@@ -1815,6 +1881,8 @@ declare interface Ccc {
   DescribeIMCdrList(data: DescribeIMCdrListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrListResponse>;
   /** 查询在线客服记录(已废弃) {@link DescribeIMCdrsRequest} {@link DescribeIMCdrsResponse} */
   DescribeIMCdrs(data: DescribeIMCdrsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrsResponse>;
+  /** 查询IVR音频文件列表 {@link DescribeIvrAudioListRequest} {@link DescribeIvrAudioListResponse} */
+  DescribeIvrAudioList(data: DescribeIvrAudioListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIvrAudioListResponse>;
   /** 查询号码列表 {@link DescribeNumbersRequest} {@link DescribeNumbersResponse} */
   DescribeNumbers(data: DescribeNumbersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNumbersResponse>;
   /** 获取 PSTN 活动会话列表 {@link DescribePSTNActiveSessionListRequest} {@link DescribePSTNActiveSessionListResponse} */
@@ -1865,6 +1933,8 @@ declare interface Ccc {
   UpdateCCCSkillGroup(data: UpdateCCCSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCCCSkillGroupResponse>;
   /** 更新预测式外呼任务 {@link UpdatePredictiveDialingCampaignRequest} {@link UpdatePredictiveDialingCampaignResponse} */
   UpdatePredictiveDialingCampaign(data: UpdatePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePredictiveDialingCampaignResponse>;
+  /** 上传IVR音频文件 {@link UploadIvrAudioRequest} {@link UploadIvrAudioResponse} */
+  UploadIvrAudio(data: UploadIvrAudioRequest, config?: AxiosRequestConfig): AxiosPromise<UploadIvrAudioResponse>;
 }
 
 export declare type Versions = ["2020-02-10"];

@@ -244,6 +244,86 @@ declare interface AssetViewVULRisk {
   EMGCVulType?: number | null;
 }
 
+/** 资产视角的漏洞风险对象 */
+declare interface AssetViewVULRiskData {
+  /** 影响资产 */
+  AffectAsset?: string;
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
+  Level?: string;
+  /** 资产类型 */
+  InstanceType?: string;
+  /** 组件 */
+  Component?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 状态，0未处理、1标记已处置、2已忽略，3已处置 ，4 处置中 ，5 检测中 ，6部分已处置 */
+  Status?: number;
+  /** 风险ID */
+  RiskId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 漏洞类型 */
+  VULType?: string;
+  /** 端口 */
+  Port?: string;
+  /** 漏洞影响组件 */
+  AppName?: string;
+  /** 漏洞影响版本 */
+  AppVersion?: string;
+  /** 风险点 */
+  VULURL?: string;
+  /** 漏洞名称 */
+  VULName?: string;
+  /** cve */
+  CVE?: string;
+  /** pocid */
+  POCId?: string;
+  /** 扫描来源 */
+  From?: string;
+  /** 主机版本 */
+  CWPVersion?: number;
+  /** 实例uuid */
+  InstanceUUID?: string;
+  /** 攻击载荷 */
+  Payload?: string;
+  /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
+  EMGCVulType?: number | null;
+  /** CVSS评分 */
+  CVSS?: number | null;
+  /** 前端索引id */
+  Index?: string | null;
+  /** pcmgrId */
+  PCMGRId?: string | null;
+  /** 报告id */
+  LogId?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 漏洞标签 */
+  VulTag?: string[] | null;
+  /** 漏洞披露时间 */
+  DisclosureTime?: string | null;
+  /** 攻击热度 */
+  AttackHeat?: number | null;
+  /** 是否必修漏洞1是，0不是 */
+  IsSuggest?: number | null;
+  /** 处置任务ID */
+  HandleTaskId?: string | null;
+  /** 引擎来源 */
+  EngineSource?: string | null;
+  /** 新的漏洞风险id(同全网漏洞表的riskid) */
+  VulRiskId?: string | null;
+}
+
 /** 资产视角的弱口令风险 */
 declare interface AssetViewWeakPassRisk {
   /** 影响资产 */
@@ -1713,6 +1793,36 @@ declare interface DeleteRiskScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAssetViewVulRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
+}
+
+declare interface DescribeAssetViewVulRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 资产视角的漏洞风险列表 */
+  Data?: AssetViewVULRiskData[] | null;
+  /** 状态列表 */
+  StatusLists?: FilterDataObject[];
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 来源列表 */
+  FromLists?: FilterDataObject[];
+  /** 漏洞类型列表 */
+  VULTypeLists?: FilterDataObject[];
+  /** 资产类型列表 */
+  InstanceTypeLists?: FilterDataObject[];
+  /** tag枚举 */
+  Tags?: FilterDataObject[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCVMAssetInfoRequest {
   /** - */
   AssetId: string;
@@ -2400,6 +2510,8 @@ declare interface Csip {
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 漏洞管理-资产视角的漏洞风险列表 {@link DescribeAssetViewVulRiskListRequest} {@link DescribeAssetViewVulRiskListResponse} */
+  DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */
