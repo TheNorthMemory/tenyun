@@ -1271,13 +1271,15 @@ declare interface DeployCertificateInstanceRequest {
   ResourceType?: string;
   /** 部署云资源状态：云直播：-1：域名未关联证书。1： 域名https已开启。0： 域名https已关闭。 */
   Status?: number;
+  /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
+  IsCache?: number;
 }
 
 declare interface DeployCertificateInstanceResponse {
   /** 云资源部署任务ID */
-  DeployRecordId: number | null;
+  DeployRecordId?: number | null;
   /** 部署状态，1表示部署成功，0表示部署失败 */
-  DeployStatus: number;
+  DeployStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

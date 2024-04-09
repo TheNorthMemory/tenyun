@@ -366,7 +366,7 @@ declare interface RoomInfo {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
@@ -418,7 +418,7 @@ declare interface RoomItem {
   VideoOrientation?: number | null;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number | null;
-  /** 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展） */
+  /** 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展）注：大班课的布局(layout)只有三分屏 */
   RoomType?: number | null;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number | null;
@@ -754,7 +754,7 @@ declare interface CreateRoomRequest {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放) */
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放)注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
@@ -1185,7 +1185,7 @@ declare interface DescribeRoomResponse {
   VideoOrientation?: number;
   /** 该房间是否开启了课后评分功能。0：未开启 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展) */
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 录制时长 */
   VideoDuration?: number;
@@ -1544,7 +1544,7 @@ declare interface ModifyRoomRequest {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 （预留参数、暂未开放) */
+  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 （预留参数、暂未开放)注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 录制模板。仅可修改还未开始的房间。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;

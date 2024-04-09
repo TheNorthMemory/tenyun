@@ -122,6 +122,34 @@ declare interface DBInstancePrice {
   DiscountPrice: number;
 }
 
+/** 按key回档，用于筛选数据的键值对 */
+declare interface FBKeyValue {
+  /** 用于按key回档过滤的key */
+  Key?: string;
+  /** 用于按key回档过滤的value */
+  Value?: string;
+}
+
+/** 按key回档，源数据所在的表 */
+declare interface FlashbackCollection {
+  /** 按key回档指定的集合名 */
+  CollectionName: string;
+  /** 按key回档到的目标集合名 */
+  TargetResultCollectionName: string;
+  /** 上传到cos的文件的value所对应的key值 */
+  FilterKey: string;
+  /** 用于按key回档过滤的键值对 */
+  KeyValues?: FBKeyValue[];
+}
+
+/** 按key回档，源数据所在的库表 */
+declare interface FlashbackDatabase {
+  /** 按key回档源数据所在库 */
+  DBName: string;
+  /** 按key回档的集群数组 */
+  Collections: FlashbackCollection[];
+}
+
 /** 描述了实例的计费模式 */
 declare interface InstanceChargePrepaid {
   /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。（InquirePriceRenewDBInstances，RenewDBInstances调用时必填） */
@@ -1060,6 +1088,24 @@ declare interface DescribeSpecInfoResponse {
   RequestId?: string;
 }
 
+declare interface FlashBackDBInstanceRequest {
+  /** 开启按 Key 回档的实例 ID。 */
+  InstanceId: string;
+  /** 源数据想恢复到的时间。 */
+  TargetFlashbackTime: string;
+  /** 源数据所在的库表信息。 */
+  TargetDatabases: FlashbackDatabase[];
+  /** 数据最终写入的实例 ID。 */
+  TargetInstanceId?: string;
+}
+
+declare interface FlashBackDBInstanceResponse {
+  /** 回档数据异步任务 ID。 */
+  FlowId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface FlushInstanceRouterConfigRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1819,6 +1865,8 @@ declare interface Mongodb {
   DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
   /** 查询云数据库的售卖规格 {@link DescribeSpecInfoRequest} {@link DescribeSpecInfoResponse} */
   DescribeSpecInfo(data?: DescribeSpecInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecInfoResponse>;
+  /** 按 Key 回档 {@link FlashBackDBInstanceRequest} {@link FlashBackDBInstanceResponse} */
+  FlashBackDBInstance(data: FlashBackDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<FlashBackDBInstanceResponse>;
   /** 刷新路由配置 {@link FlushInstanceRouterConfigRequest} {@link FlushInstanceRouterConfigResponse} */
   FlushInstanceRouterConfig(data: FlushInstanceRouterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<FlushInstanceRouterConfigResponse>;
   /** 创建实例询价 {@link InquirePriceCreateDBInstancesRequest} {@link InquirePriceCreateDBInstancesResponse} */

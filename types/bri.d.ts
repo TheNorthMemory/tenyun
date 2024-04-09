@@ -59,7 +59,7 @@ declare interface DescribeBRIResponse {
 /** {@link Bri 业务风险情报} */
 declare interface Bri {
   (): Versions;
-  /** 获取业务风险情报 {@link DescribeBRIRequest} {@link DescribeBRIResponse} */
+  /** @deprecated 获取业务风险情报 {@link DescribeBRIRequest} {@link DescribeBRIResponse} */
   DescribeBRI(data: DescribeBRIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBRIResponse>;
 }
 
