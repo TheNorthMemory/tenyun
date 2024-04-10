@@ -480,10 +480,10 @@ declare interface CheckPhoneAndNameRequest {
 }
 
 declare interface CheckPhoneAndNameResponse {
-  /** 认证结果码，收费情况如下。收费结果码：0: 验证结果一致1: 验证结果不一致不收费结果码：-1:查无记录-2:引擎未知错误-3:引擎服务异常 */
-  Result: string;
+  /** 认证结果码，收费情况如下。收费结果码：0: 验证结果一致1: 验证结果不一致不收费结果码：-1:查无记录-2:引擎未知错误-3:引擎服务异常-4:姓名校验不通过-5:手机号码不合法 */
+  Result?: string;
   /** 业务结果描述 */
-  Description: string;
+  Description?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

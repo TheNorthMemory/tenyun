@@ -814,6 +814,16 @@ declare interface ModifyDataBaseTuple {
   DeleteDataBasesTuple?: boolean;
 }
 
+/** 用于返回实例存在的未回收的ip数量 */
+declare interface OldVip {
+  /** 未回收的旧ip */
+  Vip?: string;
+  /** ip回收时间 */
+  RecycleTime?: string;
+  /** 旧IP保留时间小时数 */
+  OldIpRetainTime?: number | null;
+}
+
 /** 实例参数修改记录 */
 declare interface ParamRecord {
   /** 实例ID */
@@ -2430,6 +2440,8 @@ declare interface DescribeDBInstancesAttributeResponse {
   SSLConfig?: SSLConfig;
   /** 备机只读信息 */
   DrReadableInfo?: DrReadableInfo;
+  /** 等待回收的IP列表 */
+  OldVipList?: OldVip[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -66,7 +66,7 @@ declare interface QueryTextToImageProJobRequest {
 }
 
 declare interface QueryTextToImageProJobResponse {
-  /** 当前任务状态码：1：排队中、3：处理中、5：处理失败、7：处理完成。 */
+  /** 当前任务状态码：1：等待中、2：运行中、4：处理失败、5：处理完成。 */
   JobStatusCode?: string;
   /** 当前任务状态：排队中、处理中、处理失败或者处理完成。 */
   JobStatusMsg?: string;

@@ -96,6 +96,18 @@ declare interface StartPublishStreamResponse {
   RequestId?: string;
 }
 
+declare interface StartPublishStreamToCSSRequest {
+  /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
+  UserId: string;
+  /** 推流参数，推流时携带自定义参数。 */
+  PublishStreamArgs?: string;
+}
+
+declare interface StartPublishStreamToCSSResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopGameRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
@@ -165,6 +177,8 @@ declare interface Gs {
   SaveGameArchive(data: SaveGameArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<SaveGameArchiveResponse>;
   /** 开始云端推流 {@link StartPublishStreamRequest} {@link StartPublishStreamResponse} */
   StartPublishStream(data: StartPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamResponse>;
+  /** 开始云端推流到云直播 {@link StartPublishStreamToCSSRequest} {@link StartPublishStreamToCSSResponse} */
+  StartPublishStreamToCSS(data: StartPublishStreamToCSSRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamToCSSResponse>;
   /** 强制退出游戏 {@link StopGameRequest} {@link StopGameResponse} */
   StopGame(data: StopGameRequest, config?: AxiosRequestConfig): AxiosPromise<StopGameResponse>;
   /** 停止云端推流 {@link StopPublishStreamRequest} {@link StopPublishStreamResponse} */

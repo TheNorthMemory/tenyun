@@ -323,13 +323,13 @@ declare interface ShareUnitResource {
 }
 
 declare interface AddOrganizationMemberEmailRequest {
-  /** 成员Uin */
+  /** 成员Uin。 */
   MemberUin: number;
-  /** 邮箱地址 */
+  /** 邮箱地址。 */
   Email: string;
-  /** 国际区号 */
+  /** 国际区号。 */
   CountryCode: string;
-  /** 手机号 */
+  /** 手机号。 */
   Phone: string;
 }
 
@@ -341,7 +341,7 @@ declare interface AddOrganizationMemberEmailResponse {
 }
 
 declare interface AddOrganizationNodeRequest {
-  /** 父节点ID。可以调用DescribeOrganizationNodes获取 */
+  /** 父节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取 */
   ParentNodeId: number;
   /** 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]- */
   Name: string;
@@ -351,7 +351,7 @@ declare interface AddOrganizationNodeRequest {
 
 declare interface AddOrganizationNodeResponse {
   /** 节点ID。 */
-  NodeId: number;
+  NodeId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -373,7 +373,7 @@ declare interface AddShareUnitMembersResponse {
 declare interface AddShareUnitRequest {
   /** 共享单元名称。仅支持大小写字母、数字、-、以及_的组合，3-128个字符。 */
   Name: string;
-  /** 共享单元地域。可通过接口DescribeShareAreas获取支持共享的地域。 */
+  /** 共享单元地域。可通过接口[DescribeShareAreas](https://cloud.tencent.com/document/product/850/103050)获取支持共享的地域。 */
   Area: string;
   /** 共享单元描述。最大128个字符。 */
   Description?: string;
@@ -405,7 +405,7 @@ declare interface AddShareUnitResponse {
 declare interface BindOrganizationMemberAuthAccountRequest {
   /** 成员Uin。 */
   MemberUin: number;
-  /** 策略ID。可以调用DescribeOrganizationMemberPolicies获取 */
+  /** 策略ID。可以调用[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取 */
   PolicyId: number;
   /** 组织管理员子账号Uin列表。最大5个 */
   OrgSubAccountUins: number[];
@@ -419,7 +419,7 @@ declare interface BindOrganizationMemberAuthAccountResponse {
 declare interface CancelOrganizationMemberAuthAccountRequest {
   /** 成员Uin。 */
   MemberUin: number;
-  /** 策略ID。 */
+  /** 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取 */
   PolicyId: number;
   /** 组织子账号Uin。 */
   OrgSubAccountUin: number;
@@ -431,7 +431,7 @@ declare interface CancelOrganizationMemberAuthAccountResponse {
 }
 
 declare interface CheckAccountDeleteRequest {
-  /** 成员uin。 */
+  /** 成员Uin。 */
   MemberUin: number;
 }
 
@@ -461,9 +461,9 @@ declare interface CreateOrganizationIdentityResponse {
 }
 
 declare interface CreateOrganizationMemberAuthIdentityRequest {
-  /** 成员uin列表。最多10个 */
+  /** 成员Uin列表。最多10个 */
   MemberUins: number[];
-  /** 身份Id列表。最多5个 */
+  /** 身份Id列表。最多5个，可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityIds: number[];
 }
 
@@ -477,7 +477,7 @@ declare interface CreateOrganizationMemberPolicyRequest {
   MemberUin: number;
   /** 策略名。最大长度为128个字符，支持英文字母、数字、符号+=,.@_- */
   PolicyName: string;
-  /** 成员访问身份ID。可以调用DescribeOrganizationMemberAuthIdentities获取 */
+  /** 成员访问身份ID。可以调用[DescribeOrganizationMemberAuthIdentities](https://cloud.tencent.com/document/product/850/82936)获取 */
   IdentityId: number;
   /** 描述。 */
   Description?: string;
@@ -485,7 +485,7 @@ declare interface CreateOrganizationMemberPolicyRequest {
 
 declare interface CreateOrganizationMemberPolicyResponse {
   /** 策略ID。 */
-  PolicyId: number | null;
+  PolicyId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -497,7 +497,7 @@ declare interface CreateOrganizationMemberRequest {
   PolicyType: string;
   /** 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须 */
   PermissionIds: number[];
-  /** 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取 */
+  /** 成员所属部门的节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取 */
   NodeId: number;
   /** 账号名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:, */
   AccountName: string;
@@ -525,7 +525,7 @@ declare interface CreateOrganizationMembersPolicyRequest {
   MemberUins: number[];
   /** 策略名。长度1～128个字符，支持英文字母、数字、符号+=,.@_- */
   PolicyName: string;
-  /** 成员访问身份ID。 */
+  /** 成员访问身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityId: number;
   /** 策略描述。最大长度为128个字符 */
   Description?: string;
@@ -551,7 +551,7 @@ declare interface CreateOrganizationResponse {
 }
 
 declare interface DeleteAccountRequest {
-  /** 成员uin。 */
+  /** 成员Uin。 */
   MemberUin: number;
 }
 
@@ -561,7 +561,7 @@ declare interface DeleteAccountResponse {
 }
 
 declare interface DeleteOrganizationIdentityRequest {
-  /** 身份ID */
+  /** 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityId: number;
 }
 
@@ -571,9 +571,9 @@ declare interface DeleteOrganizationIdentityResponse {
 }
 
 declare interface DeleteOrganizationMemberAuthIdentityRequest {
-  /** 成员uin。 */
+  /** 成员Uin。 */
   MemberUin: number;
-  /** 身份Id。 */
+  /** 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityId: number;
 }
 
@@ -583,7 +583,7 @@ declare interface DeleteOrganizationMemberAuthIdentityResponse {
 }
 
 declare interface DeleteOrganizationMembersPolicyRequest {
-  /** 访问策略ID。 */
+  /** 访问策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取 */
   PolicyId: number;
 }
 
@@ -593,7 +593,7 @@ declare interface DeleteOrganizationMembersPolicyResponse {
 }
 
 declare interface DeleteOrganizationMembersRequest {
-  /** 被删除成员的UIN列表。 */
+  /** 被删除成员的Uin列表。 */
   MemberUin: number[];
 }
 
@@ -603,7 +603,7 @@ declare interface DeleteOrganizationMembersResponse {
 }
 
 declare interface DeleteOrganizationNodesRequest {
-  /** 节点ID列表。 */
+  /** 节点ID列表。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取 */
   NodeId: number[];
 }
 
@@ -644,7 +644,7 @@ declare interface DeleteShareUnitResourcesRequest {
   UnitId: string;
   /** 共享单元地域。 */
   Area: string;
-  /** 资源类型。支持共享的资源类型。 */
+  /** 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489) */
   Type: string;
   /** 共享资源列表。最大10个。 */
   Resources: ShareResource[];
@@ -661,9 +661,9 @@ declare interface DeleteShareUnitResponse {
 }
 
 declare interface DescribeOrganizationAuthNodeRequest {
-  /** 偏移量。 */
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
-  /** 限制数目。最大50 */
+  /** 限制数目。取值范围：1~50。默认值：10。 */
   Limit: number;
   /** 互信主体名称。 */
   AuthName?: string;
@@ -749,21 +749,21 @@ declare interface DescribeOrganizationFinancialByProductResponse {
 }
 
 declare interface DescribeOrganizationMemberAuthAccountsRequest {
-  /** 偏移量。 */
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
-  /** 限制数目。 */
+  /** 限制数目。取值范围：1~50。默认值：10。 */
   Limit: number;
   /** 成员Uin。 */
   MemberUin: number;
-  /** 策略ID。 */
+  /** 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935) */
   PolicyId: number;
 }
 
 declare interface DescribeOrganizationMemberAuthAccountsResponse {
   /** 列表 */
-  Items: OrgMemberAuthAccount[] | null;
+  Items?: OrgMemberAuthAccount[] | null;
   /** 总数目 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -775,7 +775,7 @@ declare interface DescribeOrganizationMemberAuthIdentitiesRequest {
   Limit: number;
   /** 组织成员Uin。入参MemberUin与IdentityId至少填写一个 */
   MemberUin?: number;
-  /** 身份ID。入参MemberUin与IdentityId至少填写一个 */
+  /** 身份ID。入参MemberUin与IdentityId至少填写一个, 可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityId?: number;
 }
 
@@ -789,37 +789,37 @@ declare interface DescribeOrganizationMemberAuthIdentitiesResponse {
 }
 
 declare interface DescribeOrganizationMemberEmailBindRequest {
-  /** 成员Uin */
+  /** 成员Uin。 */
   MemberUin: number;
 }
 
 declare interface DescribeOrganizationMemberEmailBindResponse {
-  /** 绑定ID */
-  BindId: number | null;
-  /** 申请时间 */
-  ApplyTime: string | null;
-  /** 邮箱地址 */
-  Email: string | null;
-  /** 手机号 */
-  Phone: string | null;
-  /** 绑定状态 未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed */
-  BindStatus: string | null;
-  /** 绑定时间 */
-  BindTime: string | null;
-  /** 失败说明 */
-  Description: string | null;
-  /** 安全手机绑定状态 未绑定：0，已绑定：1 */
-  PhoneBind: number | null;
-  /** 国际区号 */
-  CountryCode: string | null;
+  /** 绑定ID。 */
+  BindId?: number | null;
+  /** 申请时间。 */
+  ApplyTime?: string | null;
+  /** 邮箱地址。 */
+  Email?: string | null;
+  /** 安全手机号。 */
+  Phone?: string | null;
+  /** 绑定状态。 未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed */
+  BindStatus?: string | null;
+  /** 绑定时间。 */
+  BindTime?: string | null;
+  /** 失败说明。 */
+  Description?: string | null;
+  /** 安全手机绑定状态 。 未绑定：0，已绑定：1 */
+  PhoneBind?: number | null;
+  /** 国际区号。 */
+  CountryCode?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeOrganizationMemberPoliciesRequest {
-  /** 偏移量。 */
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
-  /** 限制数目。最大50 */
+  /** 限制数目。取值范围：1~50。默认值：10。 */
   Limit: number;
   /** 成员Uin。 */
   MemberUin: number;
@@ -829,9 +829,9 @@ declare interface DescribeOrganizationMemberPoliciesRequest {
 
 declare interface DescribeOrganizationMemberPoliciesResponse {
   /** 列表。 */
-  Items: OrgMemberPolicy[] | null;
+  Items?: OrgMemberPolicy[] | null;
   /** 总数目。 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -863,15 +863,15 @@ declare interface DescribeOrganizationMembersResponse {
 declare interface DescribeOrganizationNodesRequest {
   /** 限制数目。最大50 */
   Limit: number;
-  /** 偏移量。 */
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
 }
 
 declare interface DescribeOrganizationNodesResponse {
   /** 总数。 */
-  Total: number | null;
+  Total?: number | null;
   /** 列表详情。 */
-  Items: OrgNode[] | null;
+  Items?: OrgNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -965,7 +965,7 @@ declare interface DescribeShareUnitResourcesRequest {
   Limit: number;
   /** 搜索关键字。支持产品资源ID搜索。 */
   SearchKey?: string;
-  /** 共享资源类型。 */
+  /** 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489) */
   Type?: string;
 }
 
@@ -979,7 +979,7 @@ declare interface DescribeShareUnitResourcesResponse {
 }
 
 declare interface DescribeShareUnitsRequest {
-  /** 共享单元地域。可通过接口DescribeShareAreas获取支持共享的地域。 */
+  /** 共享单元地域。可通过接口[DescribeShareAreas](https://cloud.tencent.com/document/product/850/103050)获取支持共享的地域。 */
   Area: string;
   /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
@@ -1005,7 +1005,7 @@ declare interface ListOrganizationIdentityRequest {
   Limit: number;
   /** 名称搜索关键字。 */
   SearchKey?: string;
-  /** 身份ID搜索。 */
+  /** 身份ID。可以通过身份ID搜索 */
   IdentityId?: number;
   /** 身份类型。取值范围 1-预设, 2-自定义 */
   IdentityType?: number;
@@ -1021,9 +1021,9 @@ declare interface ListOrganizationIdentityResponse {
 }
 
 declare interface MoveOrganizationNodeMembersRequest {
-  /** 组织节点ID。 */
+  /** 组织节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取 */
   NodeId: number;
-  /** 成员UIN列表。 */
+  /** 成员Uin列表。 */
   MemberUin: number[];
 }
 
@@ -1043,11 +1043,11 @@ declare interface QuitOrganizationResponse {
 }
 
 declare interface UpdateOrganizationIdentityRequest {
-  /** 身份ID */
+  /** 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityId: number;
-  /** 身份描述 */
+  /** 身份描述。 */
   Description: string;
-  /** 身份策略 */
+  /** 身份策略。 */
   IdentityPolicy: IdentityPolicy[];
 }
 
@@ -1057,15 +1057,15 @@ declare interface UpdateOrganizationIdentityResponse {
 }
 
 declare interface UpdateOrganizationMemberEmailBindRequest {
-  /** 成员Uin */
+  /** 成员Uin。 */
   MemberUin: number;
-  /** 绑定ID */
+  /** 绑定ID。可以通过[DescribeOrganizationMemberEmailBind](https://cloud.tencent.com/document/product/850/93332)获取 */
   BindId: number;
-  /** 邮箱 */
+  /** 邮箱地址。 */
   Email: string;
-  /** 国际区号 */
+  /** 国际区号。 */
   CountryCode: string;
-  /** 手机号 */
+  /** 手机号。 */
   Phone: string;
 }
 
@@ -1097,7 +1097,7 @@ declare interface UpdateOrganizationMemberResponse {
 }
 
 declare interface UpdateOrganizationNodeRequest {
-  /** 节点ID。 */
+  /** 节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取 */
   NodeId: number;
   /** 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]- */
   Name?: string;

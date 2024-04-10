@@ -1816,6 +1816,8 @@ declare interface UploadIvrAudioRequest {
 declare interface UploadIvrAudioResponse {
   /** 上传失败的文件列表 */
   FailedFileList?: UploadIvrAudioFailedInfo[] | null;
+  /** 上传成功文件列表 */
+  SuccessFileList?: AudioFileInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
