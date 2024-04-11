@@ -1635,11 +1635,11 @@ declare interface WebsiteRisk {
 /** 过滤条件 */
 declare interface WhereFilter {
   /** 过滤的项 */
-  Name: string;
+  Name: string | null;
   /** 过滤的值 */
-  Values: string[];
+  Values: string[] | null;
   /** 中台定义：1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与精确匹配填 7 模糊匹配填9 */
-  OperatorType?: number;
+  OperatorType?: number | null;
 }
 
 declare interface AddNewBindRoleUserRequest {

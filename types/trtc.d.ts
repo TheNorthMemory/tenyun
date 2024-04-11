@@ -1129,9 +1129,9 @@ declare interface DescribeRoomInfoRequest {
 
 declare interface DescribeRoomInfoResponse {
   /** 返回当页数据总数 */
-  Total: number;
+  Total?: number;
   /** 房间信息列表 */
-  RoomList: RoomState[];
+  RoomList?: RoomState[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1423,16 +1423,20 @@ declare interface DescribeUserInfoRequest {
 
 declare interface DescribeUserInfoResponse {
   /** 返回的用户总条数 */
-  Total: number;
+  Total?: number;
   /** 用户信息列表 */
-  UserList: UserInformation[] | null;
+  UserList?: UserInformation[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeWebRecordRequest {
   /** 开始页面录制时返回的任务id */
-  TaskId: string;
+  TaskId?: string;
+  /** 发起页面录制时传递的SdkAppId */
+  SdkAppId?: number;
+  /** 发起录制时传递的RecordId, 传入此值时需要传递SdkAppId */
+  RecordId?: string;
 }
 
 declare interface DescribeWebRecordResponse {
@@ -1637,7 +1641,7 @@ declare interface StartStreamIngestResponse {
 declare interface StartWebRecordRequest {
   /** 需要录制的网页URL */
   RecordUrl: string;
-  /** 录制最大时长限制， 单位 s, 合法取值范围[0, 36000], 默认 36000s(10 小时) */
+  /** 录制最大时长限制， 单位 s, 合法取值范围[1800, 36000], 默认 36000s(10 小时) */
   MaxDurationLimit?: number;
   /** 云存储相关的参数，目前支持腾讯云对象存储，不支持第三方云存储以及VOD */
   StorageParams?: StorageParams;
@@ -1808,7 +1812,7 @@ declare interface Trtc {
   /** 查询历史用户列表 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
   /** 查询页面录制 {@link DescribeWebRecordRequest} {@link DescribeWebRecordResponse} */
-  DescribeWebRecord(data: DescribeWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebRecordResponse>;
+  DescribeWebRecord(data?: DescribeWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebRecordResponse>;
   /** 解散房间 {@link DismissRoomRequest} {@link DismissRoomResponse} */
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
   /** 解散房间（字符串房间号） {@link DismissRoomByStrRoomIdRequest} {@link DismissRoomByStrRoomIdResponse} */

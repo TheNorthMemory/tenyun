@@ -4798,20 +4798,6 @@ declare interface RunPrometheusInstanceResponse {
   RequestId?: string;
 }
 
-declare interface SendCustomAlarmMsgRequest {
-  /** 接口模块名，当前取值monitor */
-  Module: string;
-  /** 消息策略ID，在自定义消息页面配置 */
-  PolicyId: string;
-  /** 用户想要发送的自定义消息内容 */
-  Msg: string;
-}
-
-declare interface SendCustomAlarmMsgResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SetDefaultAlarmPolicyRequest {
   /** 模块名，固定值 monitor */
   Module: string;
@@ -5483,8 +5469,6 @@ declare interface Monitor {
   ResumeGrafanaInstance(data: ResumeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeGrafanaInstanceResponse>;
   /** 初始化TMP实例 {@link RunPrometheusInstanceRequest} {@link RunPrometheusInstanceResponse} */
   RunPrometheusInstance(data: RunPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RunPrometheusInstanceResponse>;
-  /** 发送自定义消息告警 {@link SendCustomAlarmMsgRequest} {@link SendCustomAlarmMsgResponse} */
-  SendCustomAlarmMsg(data: SendCustomAlarmMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendCustomAlarmMsgResponse>;
   /** 设为默认告警策略 {@link SetDefaultAlarmPolicyRequest} {@link SetDefaultAlarmPolicyResponse} */
   SetDefaultAlarmPolicy(data: SetDefaultAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<SetDefaultAlarmPolicyResponse>;
   /** 同步模板 {@link SyncPrometheusTempRequest} {@link SyncPrometheusTempResponse} */

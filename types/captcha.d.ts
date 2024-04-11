@@ -313,11 +313,11 @@ declare interface DescribeCaptchaMiniDataRequest {
 
 declare interface DescribeCaptchaMiniDataResponse {
   /** 返回码 0 成功 其它失败 */
-  CaptchaCode: number;
+  CaptchaCode?: number;
   /** 数据数组 */
-  Data: CaptchaQueryData[] | null;
+  Data?: CaptchaQueryData[] | null;
   /** 返回信息描述 */
-  CaptchaMsg: string | null;
+  CaptchaMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -367,11 +367,11 @@ declare interface DescribeCaptchaMiniOperDataRequest {
 
 declare interface DescribeCaptchaMiniOperDataResponse {
   /** 成功返回 0 其它失败 */
-  CaptchaCode: number;
+  CaptchaCode?: number;
   /** 返回信息 */
-  CaptchaMsg: string | null;
+  CaptchaMsg?: string | null;
   /** 用户操作数据 */
-  Data: CaptchaOperDataRes | null;
+  Data?: CaptchaOperDataRes | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -561,11 +561,11 @@ declare interface DescribeCaptchaTicketDataRequest {
 
 declare interface DescribeCaptchaTicketDataResponse {
   /** 成功返回 0 其它失败 */
-  CaptchaCode: number;
+  CaptchaCode?: number;
   /** 返回信息 */
-  CaptchaMsg: string | null;
+  CaptchaMsg?: string | null;
   /** 验证码票据信息 */
-  Data: CaptchaTicketDataRes | null;
+  Data?: CaptchaTicketDataRes | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -659,11 +659,11 @@ declare interface GetTotalTicketStatisticsRequest {
 
 declare interface GetTotalTicketStatisticsResponse {
   /** 返回数据 */
-  Data: CaptchaStatisticObj | null;
+  Data?: CaptchaStatisticObj | null;
   /** 返回码 */
-  CaptchaCode: number;
+  CaptchaCode?: number;
   /** 返回信息 */
-  CaptchaMsg: string;
+  CaptchaMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
