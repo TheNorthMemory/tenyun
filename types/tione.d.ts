@@ -470,6 +470,12 @@ declare interface DetectionLabelInfo {
   FrameType: string | null;
 }
 
+/** 编码后的启动命令信息 */
+declare interface EncodedStartCmdInfo {
+  /** 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""} */
+  StartCmdInfo?: string;
+}
+
 /** 引擎版本 */
 declare interface EngineVersion {
   /** 引擎版本 */
@@ -2447,7 +2453,7 @@ declare interface CreateTrainingTaskRequest {
   ImageInfo?: ImageInfo;
   /** COS代码包路径 */
   CodePackagePath?: CosPathInfo;
-  /** 启动命令信息，默认为sh start.sh */
+  /** 任务的启动命令，按任务训练模式输入，如遇特殊字符导致配置失败，可使用EncodedStartCmdInfo参数 */
   StartCmdInfo?: StartCmdInfo;
   /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
   TrainingMode?: string;
@@ -2473,6 +2479,8 @@ declare interface CreateTrainingTaskRequest {
   CallbackUrl?: string;
   /** 太极预训练模型ID */
   PreTrainModel?: PreTrainModel;
+  /** 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效 */
+  EncodedStartCmdInfo?: EncodedStartCmdInfo;
 }
 
 declare interface CreateTrainingTaskResponse {

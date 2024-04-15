@@ -16,6 +16,12 @@ declare interface ActivateHardware {
   DataKey?: string;
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
+  /** 当付费方为租户时，可选择租户license付费方式：0，月度授权1，永久授权若不传则默认为月度授权。当付费方为厂商时，此参数无效 */
+  LicensePayMode?: number | null;
+  /** 设备分组ID */
+  GroupId?: string | null;
+  /** 设备分组名称，预留参数，需要分组时传入GroupId */
+  GroupName?: string | null;
 }
 
 /** 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间 */
@@ -56,14 +62,22 @@ declare interface DeviceBaseInfo {
   Remark?: string;
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
+  /** license授权有效期 0：月度授权 1：永久授权 */
+  LicensePayMode?: number | null;
+  /** 付费方 0：厂商付费 1：客户付费 */
+  Payer?: number | null;
+  /** 设备分组ID */
+  GroupId?: string | null;
+  /** 设备分组名称 */
+  GroupName?: string | null;
 }
 
 /** 设备详细信息 */
 declare interface DeviceDetails {
   /** 设备基本信息 */
-  DeviceBaseInfo: DeviceBaseInfo;
+  DeviceBaseInfo?: DeviceBaseInfo;
   /** 设备网络信息 */
-  DeviceNetInfo: DeviceNetInfo[] | null;
+  DeviceNetInfo?: DeviceNetInfo[] | null;
   /** 聚合服务器地址 */
   GatewaySite?: string | null;
   /** 业务下行速率 */
@@ -180,13 +194,17 @@ declare interface FlowPackageInfo {
   RenewFlag?: boolean;
   /** 资源包变更状态，0：未发生变配；1：变配中；2：已变配或已续费 */
   ModifyStatus?: number;
+  /** 流量截断标识。true代表开启流量截断，false代表不开启流量截断 */
+  TruncFlag?: boolean;
+  /** 流量包精确余量，单位：MB */
+  CapacityRemainPrecise?: number;
 }
 
 /** 新建Hardware入参 */
 declare interface Hardware {
   /** 硬件序列号 */
   SN: string | null;
-  /** license计费模式：1，租户月付费2，厂商月付费3，license永久授权 */
+  /** license计费模式：1，租户付费2，厂商月付费3，厂商永久授权 */
   LicenseChargingMode: number | null;
   /** 设备描述 */
   Description?: string | null;
@@ -208,12 +226,20 @@ declare interface HardwareInfo {
   Description?: string | null;
   /** 厂商备注 */
   VendorDescription?: string | null;
-  /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权 */
+  /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权注：后续将废弃此参数，新接入请使用LicensePayMode和Payer */
   LicenseChargingMode?: number | null;
   /** 创建时间 */
   CreateTime?: string | null;
   /** 硬件序列号 */
   SN?: string | null;
+  /** license授权有效期 0：月度授权 1：永久授权 */
+  LicensePayMode?: number | null;
+  /** 付费方 0：客户付费 1：厂商付费 */
+  Payer?: number | null;
+  /** 设备分组ID */
+  GroupId?: string | null;
+  /** 设备分组名称 */
+  GroupName?: string | null;
 }
 
 /** 流量监控指标 */
@@ -296,10 +322,14 @@ declare interface VendorHardware {
   Description?: string | null;
   /** 设备id */
   DeviceId?: string | null;
-  /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权 */
+  /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权注：设备为租户付费且未激活（未选择月付还是永久付费）时，此参数返回1，仅代表租户付费。后续将废弃此参数，新接入请使用LicensePayMode和Payer */
   LicenseChargingMode?: number | null;
   /** 最后在线时间 */
   LastOnlineTime?: string | null;
+  /** license授权有效期0：月度授权1：永久授权-1：未知 */
+  LicensePayMode?: number | null;
+  /** 付费方0：客户付费1：厂商付费 */
+  Payer?: number | null;
 }
 
 declare interface ActivateHardwareRequest {
@@ -325,6 +355,12 @@ declare interface AddDeviceRequest {
   Encrypted?: boolean;
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。具体含义：公有云网关：即该设备只能接入公有云网关（就近接入）自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入）公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
+  /** license付费方式： 0，月度授权 1，永久授权 若不传则默认为月度授权 */
+  LicensePayMode?: number;
+  /** 设备分组名称，非必选，预留参数，需要分组时传入GroupId */
+  GroupName?: string;
+  /** 设备分组ID，非必选，如果不填写则默认设备无分组 */
+  GroupId?: string;
 }
 
 declare interface AddDeviceResponse {
@@ -511,7 +547,7 @@ declare interface GetFlowStatisticRequest {
   BeginTime: number;
   /** 截止时间 */
   EndTime: number;
-  /** 流量种类（1：上行流量，2：下行流量） */
+  /** 流量种类（1：上行流量，2：下行流量，3：上下行总和） */
   Type: number;
   /** 时间粒度（1：按小时统计，2：按天统计） */
   TimeGranularity: number;
@@ -519,6 +555,8 @@ declare interface GetFlowStatisticRequest {
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
+  /** 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传"-1" */
+  DeviceList?: string[];
 }
 
 declare interface GetFlowStatisticResponse {
@@ -561,7 +599,7 @@ declare interface GetMultiFlowStatisticRequest {
   BeginTime: number;
   /** 1659515000 */
   EndTime: number;
-  /** 统计流量类型（1：上行流量，2：下行流量） */
+  /** 统计流量类型（1：上行流量，2：下行流量， 3: 上下行总和） */
   Type: number;
   /** 统计时间粒度（1：按小时统计，2：按天统计） */
   TimeGranularity: number;
@@ -623,6 +661,10 @@ declare interface GetStatisticDataRequest {
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
+  /** 设备ID列表，最多10个设备，下载多个设备流量和时使用，此时DeviceId可传"-1" */
+  DeviceList?: string[];
+  /** 设备分组ID，若不指定分组则不传，按分组下载数据时使用 */
+  GroupId?: string;
 }
 
 declare interface GetStatisticDataResponse {
@@ -671,10 +713,12 @@ declare interface OrderFlowPackageRequest {
   PackageType: string;
   /** 流量包绑定的设备ID列表。捆绑设备个数上限取决于包的规格档位：20G：最多绑定1个设备50G：最多绑定2个设备100G：最多绑定3个设备500G：最多绑定5个设备 */
   DeviceList: string[];
-  /** 是否自动续费 */
+  /** 是否自动续费，该选项和流量截断冲突，只能开启一个 */
   AutoRenewFlag: boolean;
   /** 区域标识，0：国内，1：国外 */
   PackageRegion: number;
+  /** 是否开启流量截断功能，该选项和自动续费冲突 */
+  FlowTruncFlag?: boolean;
   /** 是否自动选择代金券，默认false。有多张券时的选择策略：按照可支付订单全部金额的券，先到期的券，可抵扣金额最大的券，余额最小的券，现金券 这个优先级进行扣券，且最多只抵扣一张券。 */
   AutoVoucher?: boolean;
   /** 指定代金券ID。自动选择代金券时此参数无效。目前只允许传入一张代金券。注：若指定的代金券不符合订单抵扣条件，则正常支付，不扣券 */

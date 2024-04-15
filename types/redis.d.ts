@@ -432,7 +432,7 @@ declare interface InstanceSet {
   PolarisServer?: string | null;
   /** 实例当前Proxy版本。 */
   CurrentProxyVersion?: string | null;
-  /** 实例当前Cache小版本。 */
+  /** 实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。 */
   CurrentRedisVersion?: string | null;
   /** 实例可升级Proxy版本。 */
   UpgradeProxyVersion?: string | null;

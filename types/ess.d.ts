@@ -46,7 +46,7 @@ declare interface ApproverInfo {
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
-  /** 通知签署方经办人的方式, 有以下途径: **sms** : (默认)短信 **none** : 不通知```注意：如果使用的是通过文件发起合同（CreateFlowByFiles），NotifyType必须 是 sms 才会发送短信``` */
+  /** 通知签署方经办人的方式, 有以下途径: **sms** : (默认)短信 **none** : 不通知注意：`如果使用的是通过文件发起合同（CreateFlowByFiles），NotifyType必须 是 sms 才会发送短信` */
   NotifyType?: string;
   /** 收据场景设置签署人角色类型, 可以设置如下****类型****: **1** :收款人 **2** :开具人 **3** :见证人注: `收据场景为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverRole?: number;
@@ -154,7 +154,7 @@ declare interface AutoSignConfig {
   VerifyChannels?: string[];
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起 */
   LicenseType?: number;
-  /** 开通成功后前端页面跳转的url，此字段的用法场景请联系客户经理确认。注：`仅支持H5开通场景`, `跳转链接仅支持 https:// , qianapp:// 开头`跳转场景：**贵方H5 -> 腾讯电子签H5 -> 贵方H5** : JumpUrl格式: https://YOUR_CUSTOM_URL/xxxx，只需满足 https:// 开头的正确且合规的网址即可。**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。`APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。`APP拦截地址跳转可参考：Android，IOS 成功结果返回：若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，比如 qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess */
+  /** 开通成功后前端页面跳转的url，此字段的用法场景请联系客户经理确认。注：`仅支持H5开通场景`, `跳转链接仅支持 https:// , qianapp:// 开头`跳转场景：**贵方H5 -> 腾讯电子签H5 -> 贵方H5** : JumpUrl格式: https://YOUR_CUSTOM_URL/xxxx，只需满足 https:// 开头的正确且合规的网址即可。**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。`APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。`APP拦截地址跳转可参考：Android，IOS 成功结果返回：若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，例如： qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess */
   JumpUrl?: string;
 }
 
@@ -592,7 +592,7 @@ declare interface FlowCreateApprover {
   ApproverIdCardType?: string;
   /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
-  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项，可以通过[查询模版信息接口](https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFlowTemplates)获得。文件发起合同时，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
+  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项，可以通过[查询模板信息接口](https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFlowTemplates)获得。文件发起合同时，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
   RecipientId?: string;
   /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 将要废弃</font >, `用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置` */
   VerifyChannel?: string[];
@@ -1046,6 +1046,30 @@ declare interface RegisterInfo {
   UnifiedSocialCreditCode?: string;
 }
 
+/** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
+declare interface RegistrationOrganizationInfo {
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。 */
+  OrganizationName: string;
+  /** 组织机构企业统一社会信用代码。请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。 */
+  UniformSocialCreditCode: string;
+  /** 组织机构法人的姓名。请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
+  LegalName: string;
+  /** 组织机构企业注册地址。请确认该企业注册地址与企业营业执照中注册的地址一致。 */
+  Address: string;
+  /** 组织机构超管姓名。在注册流程中，必须是超管本人进行操作。如果法人做为超管管理组织机构,超管姓名就是法人姓名 */
+  AdminName?: string;
+  /** 组织机构超管姓名。在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。 */
+  AdminMobile?: string;
+  /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书2：法人授权超管5：授权书+对公打款注:`1. 当前仅支持一种认证方式``2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款``3. 如果当前操作人是法人,则是法人认证` */
+  AuthorizationTypes?: number[];
+  /** 认证人身份证号 */
+  AdminIdCardNumber?: string;
+  /** 认证人证件类型 支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  AdminIdCardType?: string;
+  /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
+  BusinessLicense?: string;
+}
+
 /** 解除协议的签署人，如不指定，默认使用原流程中的签署人。`注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。``注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。``注意：当指定C端签署人的签署方自定义控件别名不空时，除RelievedApproverReceiptId参数外，可以只参数ApproverSignRole。` */
 declare interface ReleasedApprover {
   /** 签署人姓名，最大长度50个字。 */
@@ -1388,6 +1412,26 @@ declare interface CreateBatchCancelFlowUrlResponse {
   UrlExpireOn?: string;
   /** 批量撤销任务编号，为32位字符串，可用于[查询批量撤销签署流程任务结果](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl) 或关联[批量撤销任务结果回调](https://qian.tencent.com/developers/company/callback_types_contracts_sign#%E4%B9%9D-%E6%89%B9%E9%87%8F%E6%92%A4%E9%94%80%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83) */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchOrganizationRegistrationTasksRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 组织机构注册信息。一次最多支持10条认证流 */
+  RegistrationOrganizations: RegistrationOrganizationInfo[];
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 要生成链接的类型, 可以选择的值如下: (默认)PC: 生成PC端的链接SHORT_URL: H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序APP：生成小程序跳转链接H5：生成H5跳转长链接SHORT_H5：生成H5跳转短链 */
+  Endpoint?: string;
+}
+
+declare interface CreateBatchOrganizationRegistrationTasksResponse {
+  /** 生成注册链接的任务Id，根据这个id， 调用DescribeBatchOrganizationRegistrationUrls 获取生成的链接，进入认证流程 */
+  TaskId?: string;
+  /** 批量生成企业认证链接的详细错误信息，顺序与输入参数保持一致。若企业认证均成功生成，则不返回错误信息；若存在任何错误，则返回具体的错误描述。 */
+  ErrorMessages?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1948,6 +1992,14 @@ declare interface CreateMultiFlowSignQRCodeResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrganizationAuthUrlRequest {
+}
+
+declare interface CreateOrganizationAuthUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOrganizationBatchSignUrlRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -1961,6 +2013,8 @@ declare interface CreateOrganizationBatchSignUrlRequest {
   Name?: string;
   /** 员工手机号，必须与姓名一起使用。 如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。 */
   Mobile?: string;
+  /** 为签署方经办人在签署合同中的参与方ID，必须与参数FlowIds数组一一对应。您可以通过查询合同接口（DescribeFlowInfo）查询此参数。若传了此参数，则可以不传 UserId, Name, Mobile等参数 */
+  RecipientIds?: string[];
 }
 
 declare interface CreateOrganizationBatchSignUrlResponse {
@@ -3131,6 +3185,8 @@ declare interface Ess {
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 获取批量撤销签署流程腾讯电子签小程序链接 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
+  /** 创建企业批量认证链接 {@link CreateBatchOrganizationRegistrationTasksRequest} {@link CreateBatchOrganizationRegistrationTasksResponse} */
+  CreateBatchOrganizationRegistrationTasks(data: CreateBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationRegistrationTasksResponse>;
   /** 获取H5批量签署链接 {@link CreateBatchQuickSignUrlRequest} {@link CreateBatchQuickSignUrlResponse} */
   CreateBatchQuickSignUrl(data: CreateBatchQuickSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchQuickSignUrlResponse>;
   /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
@@ -3173,6 +3229,8 @@ declare interface Ess {
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 创建一码多签签署码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
+  /** 创建企业认证链接 {@link CreateOrganizationAuthUrlRequest} {@link CreateOrganizationAuthUrlResponse} */
+  CreateOrganizationAuthUrl(data?: CreateOrganizationAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationAuthUrlResponse>;
   /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
   /** 创建企业信息变更链接 {@link CreateOrganizationInfoChangeUrlRequest} {@link CreateOrganizationInfoChangeUrlResponse} */

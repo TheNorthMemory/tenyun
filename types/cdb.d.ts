@@ -28,6 +28,24 @@ declare interface AccountInfo {
   MaxUserConnections: number;
 }
 
+/** 实例地址信息 */
+declare interface AddressInfo {
+  /** 地址的资源id标识。 */
+  ResourceId?: string;
+  /** 地址所在的vpc。 */
+  UniqVpcId?: string;
+  /** 地址所在的子网。 */
+  UniqSubnetId?: string;
+  /** 地址的vip。 */
+  Vip?: string;
+  /** 地址的端口。 */
+  VPort?: number;
+  /** 外网地址域名。 */
+  WanDomain?: string;
+  /** 外网地址端口。 */
+  WanPort?: number;
+}
+
 /** 审计日志聚合条件 */
 declare interface AggregationCondition {
   /** 聚合字段。目前仅支持host-源IP、user-用户名、dbName-数据库名、sqlType-sql类型。 */
@@ -526,6 +544,20 @@ declare interface CloneItem {
   NewRegionId: number;
   /** 源实例所在地域Id */
   SrcRegionId: number;
+}
+
+/** 集群版实例节点信息 */
+declare interface ClusterNodeInfo {
+  /** 节点id。 */
+  NodeId?: string;
+  /** 节点的角色。 */
+  Role?: string;
+  /** 节点所在可用区。 */
+  Zone?: string;
+  /** 节点的权重 */
+  Weight?: number;
+  /** 节点状态。 */
+  Status?: string | null;
 }
 
 /** 列权限信息 */
@@ -1804,6 +1836,14 @@ declare interface BalanceRoGroupLoadResponse {
   RequestId?: string;
 }
 
+declare interface CheckMigrateClusterRequest {
+}
+
+declare interface CheckMigrateClusterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseAuditServiceRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2972,6 +3012,28 @@ declare interface DescribeCloneListResponse {
   TotalCount?: number;
   /** 克隆任务列表。 */
   Items?: CloneItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterInfoRequest {
+  /** 实例id。 */
+  InstanceId: string;
+}
+
+declare interface DescribeClusterInfoResponse {
+  /** 实例名称。 */
+  ClusterName?: string;
+  /** 集群读写地址信息。 */
+  ReadWriteAddress?: AddressInfo;
+  /** 集群只读地址信息。 */
+  ReadOnlyAddress?: AddressInfo[];
+  /** 集群节点列表信息。 */
+  NodeList?: ClusterNodeInfo[];
+  /** 只读空间保护阈值,单位GB */
+  ReadonlyLimit?: number;
+  /** 实例节点数。 */
+  NodeCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4863,6 +4925,8 @@ declare interface Cdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 均衡RO组内实例的负载 {@link BalanceRoGroupLoadRequest} {@link BalanceRoGroupLoadResponse} */
   BalanceRoGroupLoad(data: BalanceRoGroupLoadRequest, config?: AxiosRequestConfig): AxiosPromise<BalanceRoGroupLoadResponse>;
+  /** 迁移集群版校验 {@link CheckMigrateClusterRequest} {@link CheckMigrateClusterResponse} */
+  CheckMigrateCluster(data?: CheckMigrateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CheckMigrateClusterResponse>;
   /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭数据库代理 {@link CloseCDBProxyRequest} {@link CloseCDBProxyResponse} */
@@ -4969,6 +5033,8 @@ declare interface Cdb {
   DescribeCdbZoneConfig(data?: DescribeCdbZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbZoneConfigResponse>;
   /** 查询克隆任务列表 {@link DescribeCloneListRequest} {@link DescribeCloneListResponse} */
   DescribeCloneList(data: DescribeCloneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneListResponse>;
+  /** 查询集群版实例信息 {@link DescribeClusterInfoRequest} {@link DescribeClusterInfoResponse} */
+  DescribeClusterInfo(data: DescribeClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInfoResponse>;
   /** 查询实例的 CPU 弹性扩容策略 {@link DescribeCpuExpandStrategyRequest} {@link DescribeCpuExpandStrategyResponse} */
   DescribeCpuExpandStrategy(data: DescribeCpuExpandStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpuExpandStrategyResponse>;
   /** 查询实例版本属性 {@link DescribeDBFeaturesRequest} {@link DescribeDBFeaturesResponse} */

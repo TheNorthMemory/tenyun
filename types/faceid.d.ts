@@ -296,6 +296,8 @@ declare interface RuleIdConfig {
   IntentionRecognition?: boolean;
   /** 意愿核身类型，默认为0：0：问答模式，DetectAuth接口需要传入IntentionQuestions字段；1：点头模式，DetectAuth接口需要传入IntentionActions字段； */
   IntentionType?: number;
+  /** 用户语音回答过程中是否开启张嘴识别检测，默认不开启，仅在意愿核身问答模式中使用。 */
+  MouthOpenRecognition?: boolean;
 }
 
 /** 账单详情 */

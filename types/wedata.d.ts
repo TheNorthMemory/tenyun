@@ -908,14 +908,6 @@ declare interface CreateMakeDatetimeInfo {
   EndTime?: string | null;
 }
 
-/** 采集器状态统计 */
-declare interface CvmAgentStatus {
-  /** agent状态 */
-  Status: string | null;
-  /** 对应状态的agent总数 */
-  Count: number | null;
-}
-
 /** 日评分信息 */
 declare interface DailyScoreInfo {
   /** 统计日期 时间戳 */
@@ -1800,72 +1792,6 @@ declare interface GeneralTaskParam {
   Value: string;
 }
 
-/** 采集器详细信息 */
-declare interface InLongAgentDetail {
-  /** Agent ID */
-  AgentId?: string;
-  /** Agent Name */
-  AgentName?: string;
-  /** Agent状态(running运行中，initializing 操作中，failed心跳异常) */
-  Status?: string;
-  /** Agent状态描述 */
-  StatusDesc?: string | null;
-  /** 集群类型，1：TKE Agent，2：BOSS SDK，默认：1 */
-  AgentType?: number;
-  /** 采集来源 */
-  Source?: string;
-  /** VPC */
-  VpcId?: string;
-  /** 集成资源组Id */
-  ExecutorGroupId?: string;
-  /** 集成资源组名称 */
-  ExecutorGroupName?: string;
-  /** 关联任务数 */
-  TaskCount?: number;
-  /** 采集器组ID */
-  AgentGroupId?: string | null;
-  /** agent状态统计 */
-  CvmAgentStatusList?: CvmAgentStatus[] | null;
-  /** agent数量 */
-  AgentTotal?: number | null;
-  /** 生命周期 */
-  LifeDays?: number | null;
-  /** 集群ID */
-  ClusterId?: string | null;
-  /** agent地域 */
-  AgentRegion?: string | null;
-}
-
-/** 采集器关联的集成任务 */
-declare interface InLongAgentTask {
-  /** 集成任务ID */
-  TaskId: string;
-  /** 集成任务名称 */
-  TaskName: string;
-  /** 集成任务状态 */
-  TaskStatus: string;
-}
-
-/** TKE集群信息详情 */
-declare interface InLongTkeDetail {
-  /** 集群Id */
-  ClusterId: string;
-  /** 集群名称 */
-  ClusterName: string;
-  /** TKE集群状态 (Running 运行中 Creating 创建中 Idling 闲置中 Abnormal 异常) */
-  Status: string;
-  /** 是否安装Agent，true: 是，false: 否 */
-  HasAgent: boolean;
-  /** 采集器ID */
-  AgentId: string | null;
-  /** VPC ID */
-  VpcId: string;
-  /** TKE集群区域ID */
-  TkeRegion: string;
-  /** 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER */
-  ClusterType: string;
-}
-
 /** 实例检索条件 */
 declare interface InstanceCondition {
   /** 执行类型 */
@@ -1946,7 +1872,7 @@ declare interface InstanceList {
   SchedulerDesc?: string | null;
   /** 开始启动时间 */
   StartTime?: string | null;
-  /** 实例状态 */
+  /** 实例状态 EVENT_LISTENING|DEPENDENCE|BEFORE_ASPECT|ALLOCATED|LAUNCHED|KILL|SNAP_STATE_SAVING|ISSUED|RUNNING|AFTER_ASPECT|PENDING|KILLING|FINAL_STATE_SAVING|FAILED|KILL_FAILED| COMPLETED|EXPIRED|KILL_EXPIRED|DELETED */
   State?: string | null;
   /** 任务ID */
   TaskId?: string | null;
@@ -2034,7 +1960,7 @@ declare interface InstanceLogList {
   CurRunDate?: string | null;
   /** 重试次数 */
   Tries?: string | null;
-  /** 最后更新事件 */
+  /** 最后更新时间 */
   LastUpdate?: string | null;
   /** 节点ip */
   BrokerIp?: string | null;
@@ -2055,11 +1981,11 @@ declare interface InstanceLogList {
 /** 查询实时任务实例当前的节点信息 */
 declare interface InstanceNodeInfo {
   /** 读取节点SOURCE 写入节点SINK */
-  NodeType: string | null;
+  NodeType?: string | null;
   /** 节点id */
-  NodeId: string | null;
+  NodeId?: string | null;
   /** 节点名称 */
-  NodeName: string | null;
+  NodeName?: string | null;
 }
 
 /** 实例运维详情 */
@@ -2328,7 +2254,7 @@ declare interface IntegrationNodeDetail {
   OwnerUin?: string;
 }
 
-/** 集成节点 */
+/** 集成任务节点 */
 declare interface IntegrationNodeInfo {
   /** 集成节点id */
   Id?: string | null;
@@ -2336,9 +2262,9 @@ declare interface IntegrationNodeInfo {
   TaskId?: string;
   /** 集成节点名称 */
   Name?: string;
-  /** 集成节点类型 */
+  /** 集成节点类型,INPUT: 输入节点，OUTPUT:输出节点 */
   NodeType?: string;
-  /** 节点数据源类型 */
+  /** 节点数据源类型：MYSQL|POSTGRE|ORACLE|SQLSERVER|FTP|HIVE|HDFS|ICEBERG|KAFKA|HBASE|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DLCV1|DORIS|CKAFKA|DTS_KAFKA|S3|CDW|LOCAL|TDSQLC|TDSQL|TDSQL_MYSQL|MONGODB|INFORMIX|SYBASE|REST_API|SuperSQL|PRESTO|DR_SUM|TiDB|StarRocks|Trino|Kyuubi|GDB|TCHOUSE_X|TCHOUSE_P|TDSQL_POSTGRE */
   DataSourceType?: string;
   /** 节点描述 */
   Description?: string | null;
@@ -2352,15 +2278,15 @@ declare interface IntegrationNodeInfo {
   Schema?: IntegrationNodeSchema[] | null;
   /** 节点映射 */
   NodeMapping?: IntegrationNodeMapping | null;
-  /** 应用id */
+  /** 归属用户AppId,展示字段 非传入 */
   AppId?: string;
   /** 项目id */
   ProjectId?: string;
-  /** 创建人uin */
+  /** 创建人uin,展示字段 非传入 */
   CreatorUin?: string | null;
-  /** 操作人uin */
+  /** 操作人uin，展示字段 非传入 */
   OperatorUin?: string | null;
-  /** owner uin */
+  /** owner uin 展示字段 非传入 */
   OwnerUin?: string;
   /** 创建时间 */
   CreateTime?: string | null;
@@ -2384,7 +2310,7 @@ declare interface IntegrationNodeMapping {
 
 /** 集成节点schema */
 declare interface IntegrationNodeSchema {
-  /** schema id */
+  /** schema id 随机唯一 */
   Id: string;
   /** schema名称 */
   Name: string;
@@ -2402,20 +2328,20 @@ declare interface IntegrationNodeSchema {
 
 /** 集成节点schema映射 */
 declare interface IntegrationNodeSchemaMapping {
-  /** 源schema id */
+  /** 任务节点的源schema id */
   SourceSchemaId: string;
-  /** 目标schema id */
+  /** 任务节点目标schema id */
   SinkSchemaId: string;
 }
 
 /** 数据集成大屏趋势图统计结果 */
 declare interface IntegrationStatisticsTrendResult {
   /** 统计属性名称 */
-  StatisticName: string[] | null;
+  StatisticName?: string[] | null;
   /** 统计值 */
-  StatisticValue: number[] | null;
+  StatisticValue?: number[] | null;
   /** 统计项目 */
-  StatisticType: string | null;
+  StatisticType?: string | null;
 }
 
 /** 集成任务 */
@@ -2432,9 +2358,9 @@ declare interface IntegrationTaskInfo {
   WorkflowId?: string | null;
   /** 任务id */
   TaskId?: string | null;
-  /** 任务调度id(oceanus or us等作业id) */
+  /** 任务调度id(oceanus or us等作业id)，非填项 */
   ScheduleTaskId?: string | null;
-  /** 任务组id */
+  /** inlong任务id */
   TaskGroupId?: string | null;
   /** 项目id */
   ProjectId?: string | null;
@@ -2446,7 +2372,7 @@ declare interface IntegrationTaskInfo {
   OwnerUin?: string | null;
   /** 应用id */
   AppId?: string | null;
-  /** 任务状态1.初始化,2.操作中,3.运行中,4.暂停,5.任务停止中,6.停止,7.执行失败,8.已删除,9.已锁定,10.配置过期,11.提交中,12.提交成功,13.提交失败 */
+  /** 1:未开始|2:操作中|3:运行中|4:暂停|5:任务停止中|6:停止|7:执行失败|20:异常|21:未知| */
   Status?: number | null;
   /** 节点列表 */
   Nodes?: IntegrationNodeInfo[] | null;
@@ -2460,7 +2386,7 @@ declare interface IntegrationTaskInfo {
   ExecuteContext?: RecordField[] | null;
   /** 节点映射 */
   Mappings?: IntegrationNodeMapping[] | null;
-  /** 任务模式：1.画布模式，2.flink jar */
+  /** 任务配置模式，0:画布 1:表单 3:脚本 */
   TaskMode?: string | null;
   /** 责任人 */
   Incharge?: string | null;
@@ -2468,19 +2394,19 @@ declare interface IntegrationTaskInfo {
   OfflineTaskAddEntity?: OfflineTaskAddParam | null;
   /** group name */
   ExecutorGroupName?: string | null;
-  /** url */
+  /** inlong manager url */
   InLongManagerUrl?: string | null;
   /** stream id */
   InLongStreamId?: string | null;
   /** version */
   InLongManagerVersion?: string | null;
-  /** dataproxy url */
+  /** inlong dataproxy url */
   DataProxyUrl?: string[] | null;
   /** 任务版本是否已提交运维 */
   Submit?: boolean | null;
-  /** MYSQL */
+  /** 数据源类型：MYSQL|POSTGRE|ORACLE|SQLSERVER|FTP|HIVE|HDFS|ICEBERG|KAFKA|HBASE|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DLCV1|DORIS|CKAFKA|DTS_KAFKA|S3|CDW|LOCAL|TDSQLC|TDSQL|TDSQL_MYSQL|MONGODB|INFORMIX|SYBASE|REST_API|SuperSQL|PRESTO|DR_SUM|TiDB|StarRocks|Trino|Kyuubi|GDB|TCHOUSE_X|TCHOUSE_P|TDSQL_POSTGRE */
   InputDatasourceType?: string | null;
-  /** DLC */
+  /** 数据源类型：MYSQL|POSTGRE|ORACLE|SQLSERVER|FTP|HIVE|HDFS|ICEBERG|KAFKA|HBASE|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DLCV1|DORIS|CKAFKA|DTS_KAFKA|S3|CDW|LOCAL|TDSQLC|TDSQL|TDSQL_MYSQL|MONGODB|INFORMIX|SYBASE|REST_API|SuperSQL|PRESTO|DR_SUM|TiDB|StarRocks|Trino|Kyuubi|GDB|TCHOUSE_X|TCHOUSE_P|TDSQL_POSTGRE */
   OutputDatasourceType?: string | null;
   /** 读取条数 */
   NumRecordsIn?: number | null;
@@ -2508,11 +2434,11 @@ declare interface IntegrationTaskInfo {
   RunningCu?: number | null;
   /** 该任务关联的告警规则 */
   TaskAlarmRegularList?: string[] | null;
-  /** 资源分层情况： 0：进行中,1：成功 ,2：失败 */
+  /** 实时任务资源分层情况： 0：进行中,1：成功 ,2：失败 */
   SwitchResource?: number | null;
-  /** 读取阶段：0：全部全量,1：部分全量,2：全部增量 */
+  /** 实时任务读取阶段：0：全部全量,1：部分全量,2：全部增量 */
   ReadPhase?: number | null;
-  /** 版本号 */
+  /** 实时任务版本号 */
   InstanceVersion?: number | null;
   /** 离线任务导入到编排空间的任务id */
   ArrangeSpaceTaskId?: string | null;
@@ -2571,15 +2497,15 @@ declare interface LogContent {
 /** 日志内容实体 */
 declare interface LogContentInfo {
   /** 日志内容 */
-  Log: string | null;
+  Log?: string | null;
   /** 日志组Id */
-  PkgId: string | null;
+  PkgId?: string | null;
   /** 日志Id */
-  PkgLogId: string | null;
+  PkgLogId?: string | null;
   /** 时间 */
-  Time: number | null;
+  Time?: number | null;
   /** 日志所属的容器名 */
-  ContainerName: string | null;
+  ContainerName?: string | null;
 }
 
 /** 补录计划实例集合 */
@@ -2698,71 +2624,61 @@ declare interface MakePlanTaskOpsDtoCollection {
   Items?: MakePlanTaskOpsDto[] | null;
 }
 
-/** 命名空间 */
-declare interface Namespace {
-  /** 名称 */
-  Name: string;
-  /** 当前状态 */
-  Status: string;
-  /** 创建时间 */
-  CreatedAt: string;
-}
-
 /** 离线实例 */
 declare interface OfflineInstance {
-  /** 创建账号 */
-  CreateUin: string | null;
-  /** 操作账号 */
-  OperatorUin: string | null;
+  /** 创建账号sub uin */
+  CreateUin?: string | null;
+  /** 操作账号sub uin */
+  OperatorUin?: string | null;
   /** 主账号 */
-  OwnerUin: string | null;
+  OwnerUin?: string | null;
   /** 账号 */
-  AppId: string | null;
+  AppId?: string | null;
   /** 项目Id */
-  WorkspaceId: string | null;
+  WorkspaceId?: string | null;
   /** 任务Id */
-  TaskId: string;
+  TaskId?: string;
   /** 数据时间 */
-  CurRunDate: string;
+  CurRunDate?: string;
   /** 下发时间 */
-  IssueId: string;
-  /** 资源组id */
-  InlongTaskId: string | null;
+  IssueId?: string;
+  /** 下发资源组id，非传入项 */
+  InlongTaskId?: string | null;
   /** 资源组 */
-  ResourceGroup: string | null;
-  /** 实例类型 */
-  TaskRunType: number;
-  /** 实例状态 */
-  State: string;
+  ResourceGroup?: string | null;
+  /** 任务类型(1 调试运行,2 调度执行) */
+  TaskRunType?: number;
+  /** 实例状态 EVENT_LISTENING|DEPENDENCE|BEFORE_ASPECT|ALLOCATED|LAUNCHED|KILL|SNAP_STATE_SAVING|ISSUED|RUNNING|AFTER_ASPECT|PENDING|KILLING|FINAL_STATE_SAVING|FAILED|KILL_FAILED| COMPLETED|EXPIRED|KILL_EXPIRED|DELETED */
+  State?: string;
   /** 开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 最后更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 唯一key */
-  InstanceKey: string | null;
+  InstanceKey?: string | null;
 }
 
 /** 离线任务新增参数 */
 declare interface OfflineTaskAddParam {
   /** 名称 */
   WorkflowName: string;
-  /** 依赖 */
+  /** 依赖：yes、no */
   DependencyWorkflow: string;
-  /** 开始时间 */
+  /** 任务开始数据时间。非空。默认当前时间 */
   StartTime: string;
-  /** 结束时间 */
+  /** 任务结束数据时间。非空。默认当前时间 */
   EndTime: string;
-  /** 周期 */
+  /** 周期类型。一次性任务:6、分钟任务：1、小时任务：2、天任务：3、周任务：4、月任务：5、crontab任务：0 */
   CycleType: number;
-  /** 周期间隔 */
+  /** 间隔，可选，默认1。非空。默认 1 */
   CycleStep: number;
-  /** 延迟时间 */
+  /** 延时执行时间，单位分钟 */
   DelayTime: number;
-  /** crontab */
+  /** 任务cron表达式，仅cron任务使用，其他时候默认为空 */
   CrontabExpression: string | null;
   /** 重试等待 */
   RetryWait: number;
@@ -2776,7 +2692,7 @@ declare interface OfflineTaskAddParam {
   ProductName: string;
   /** 1 有序串行 一次一个，排队 orderly 2 无序串行 一次一个，不排队 serial 3 并行 一次多个 parallel */
   SelfDepend: number;
-  /** 周任务：1是周天，2是周1，7是周6 。月任务：如具体1，3号则写 "1,3"，指定月末不可和具体号数一起输入，仅能为 "L" */
+  /** 时间指定，如月任务指定1，3号，则填入 1，3。非空。默认 ""月任务：如具体1，3号则写 "1,3"，指定月末不可和具体号数一起输入，仅能为 "L" */
   TaskAction?: string | null;
   /** 调度执行结束时间 */
   ExecutionEndTime?: string | null;
@@ -2784,7 +2700,7 @@ declare interface OfflineTaskAddParam {
   ExecutionStartTime?: string | null;
   /** 是否自动提交 */
   TaskAutoSubmit?: boolean | null;
-  /** 实例初始化策略 */
+  /** 实例生成方式，T_PLUS_0 当天任务当天调度 / T_PLUS_1 当天任务后一天调度 */
   InstanceInitStrategy?: string | null;
 }
 
@@ -3157,11 +3073,11 @@ declare interface QuietPeriod {
 /** 实时任务实例当前的节点信息 */
 declare interface RealTimeTaskInstanceNodeInfo {
   /** 任务名 */
-  TaskName: string | null;
+  TaskName?: string | null;
   /** 任务id */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 实时任务实例节点信息列表 */
-  InstanceNodeInfoList: InstanceNodeInfo[] | null;
+  InstanceNodeInfoList?: InstanceNodeInfo[] | null;
 }
 
 /** 实时任务同步速度趋势 */
@@ -3172,11 +3088,11 @@ declare interface RealTimeTaskSpeed {
   BytesSpeedList: BytesSpeed[];
 }
 
-/** 通用记录字段 */
+/** 通用记录字段，与服务端约定传入合法的键值对 */
 declare interface RecordField {
-  /** 字段名称 */
+  /** 字段名称，拓展字段名称 */
   Name?: string;
-  /** 字段值 */
+  /** 字段值，拓展字段值 */
   Value?: string;
 }
 
@@ -3229,9 +3145,9 @@ declare interface ResourcePathTree {
 /** 抢锁状态：是否可以抢锁和当前持锁人 */
 declare interface RobLockState {
   /** 是否可以抢锁 */
-  IsRob: boolean;
+  IsRob?: boolean;
   /** 当前持锁人 */
-  Locker: string;
+  Locker?: string;
 }
 
 /** 数据质量规则 */
@@ -4369,13 +4285,13 @@ declare interface TableHeat {
 /** 元数据表详细信息 */
 declare interface TableInfo {
   /** 表Id */
-  TableId: string | null;
+  TableId?: string | null;
   /** 表名称 */
-  TableName: string | null;
+  TableName?: string | null;
   /** 表databaseName */
-  OriginDatabaseName: string | null;
+  OriginDatabaseName?: string | null;
   /** 表schemaName */
-  OriginSchemaName: string | null;
+  OriginSchemaName?: string | null;
 }
 
 /** 表血缘详细信息 */
@@ -4660,7 +4576,7 @@ declare interface TaskAlarmInfo {
   AlarmWay: string;
   /** 任务类型(201表示实时，202表示离线) */
   TaskType: number;
-  /** 主键ID */
+  /** ID */
   Id?: string | null;
   /** 规则ID */
   RegularId?: string;
@@ -7071,28 +6987,6 @@ declare interface CreateHiveTableResponse {
   RequestId?: string;
 }
 
-declare interface CreateInLongAgentRequest {
-  /** 采集器类型，1：TKE Agent，2：BOSS SDK，默认：1 */
-  AgentType: number;
-  /** 采集器名称 */
-  AgentName: string;
-  /** 集成资源组id */
-  ExecutorGroupId: string;
-  /** WeData项目ID */
-  ProjectId: string;
-  /** TKE集群的地域 */
-  TkeRegion: string;
-  /** 当AgentType为1时，必填。当AgentType为2时，不用填 */
-  ClusterId?: string;
-}
-
-declare interface CreateInLongAgentResponse {
-  /** 采集器ID */
-  AgentId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateIntegrationNodeRequest {
   /** 集成节点信息 */
   NodeInfo: IntegrationNodeInfo;
@@ -7575,18 +7469,6 @@ declare interface DeleteFolderRequest {
 declare interface DeleteFolderResponse {
   /** true代表删除成功，false代表删除失败 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteInLongAgentRequest {
-  /** 采集器ID */
-  AgentId: string;
-  /** WeData项目ID */
-  ProjectId: string;
-}
-
-declare interface DeleteInLongAgentResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8159,20 +8041,6 @@ declare interface DescribeBelongToRequest {
 declare interface DescribeBelongToResponse {
   /** 所属任务/基线 */
   Data?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeClusterNamespaceListRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** WeData项目ID */
-  ProjectId: string;
-}
-
-declare interface DescribeClusterNamespaceListResponse {
-  /** 命名空间 */
-  Namespaces?: Namespace[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8888,104 +8756,6 @@ declare interface DescribeFunctionTypesResponse {
   RequestId?: string;
 }
 
-declare interface DescribeInLongAgentListRequest {
-  /** WeData项目ID */
-  ProjectId: string;
-  /** 采集器ID */
-  AgentId?: string;
-  /** Agent Name */
-  AgentName?: string;
-  /** 集群类型，1：TKE Agent，2：BOSS SDK，默认：1，3：CVM，4：自建服务器 【传多个用逗号分割】 */
-  AgentType?: number;
-  /** Agent状态(running运行中，initializing 操作中，failed心跳异常) */
-  Status?: string;
-  /** Vpc Id */
-  VpcId?: string;
-  /** 分页页码，从1开始，默认：1 */
-  PageIndex?: number;
-  /** 分页每页记录数，默认10 */
-  PageSize?: number;
-  /** 名称搜索是否开启模糊匹配，1：开启，0：不开启（精确匹配） */
-  Like?: number;
-  /** agent类型【多个用逗号分隔】 */
-  AgentTypes?: string;
-}
-
-declare interface DescribeInLongAgentListResponse {
-  /** 采集器信息列表 */
-  Items?: InLongAgentDetail[];
-  /** 页码 */
-  PageIndex?: number;
-  /** 每页记录数 */
-  PageSize?: number;
-  /** 总记录数 */
-  TotalCount?: number;
-  /** 总页数 */
-  TotalPage?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeInLongAgentTaskListRequest {
-  /** 采集器ID */
-  AgentId: string;
-  /** WeData项目ID */
-  ProjectId: string;
-}
-
-declare interface DescribeInLongAgentTaskListResponse {
-  /** 采集器关联的集成任务列表 */
-  Items?: InLongAgentTask[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeInLongAgentVpcListRequest {
-  /** WeData项目ID */
-  ProjectId: string;
-}
-
-declare interface DescribeInLongAgentVpcListResponse {
-  /** VPC列表 */
-  VpcList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeInLongTkeClusterListRequest {
-  /** WeData项目ID */
-  ProjectId: string;
-  /** TKE集群地域 */
-  TkeRegion: string;
-  /** 集群名称。多个名称用逗号连接。 */
-  ClusterName?: string;
-  /** TKE集群状态 (Running 运行中 Creating 创建中 Idling 闲置中 Abnormal 异常 Failed 失败 Deleting 删除中 Scaling 规模调整中 Upgrading 升级中 Isolated 欠费隔离中 NodeUpgrading 节点升级中 Recovering 唤醒中 Activating 激活中 MasterScaling Master扩缩容中 Waiting 等待注册 ClusterLevelUpgrading 调整规格中 ResourceIsolate 隔离中 ResourceIsolated 已隔离 ResourceReverse 冲正中 Trading 集群开通中 ResourceReversal 集群冲正 ClusterLevelTrading 集群变配交易中)多个状态用逗号连接。 */
-  Status?: string;
-  /** 是否安装Agent，true: 是，false: 否 */
-  HasAgent?: boolean;
-  /** 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。多个集群用逗号连接。 */
-  ClusterType?: string;
-  /** 分页页码，从1开始，默认：1 */
-  PageIndex?: number;
-  /** 分页每页记录数，默认10 */
-  PageSize?: number;
-}
-
-declare interface DescribeInLongTkeClusterListResponse {
-  /** TKE集群信息 */
-  Items?: InLongTkeDetail[];
-  /** 页码 */
-  PageIndex?: number;
-  /** 每页记录数 */
-  PageSize?: number;
-  /** 总记录数 */
-  TotalCount?: number;
-  /** 总页数 */
-  TotalPage?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeInstanceByCycleReportRequest {
   /** 周期类型 */
   Type: string;
@@ -9242,24 +9012,6 @@ declare interface DescribeIntegrationNodeResponse {
   NodeInfo?: IntegrationNodeInfo | null;
   /** 上游节点是否已经修改。true 已修改，需要提示；false 没有修改 */
   SourceCheckFlag?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeIntegrationStatisticsAgentStatusRequest {
-  /** 任务类型（实时：201，离线：202） */
-  TaskType: number;
-  /** 项目id */
-  ProjectId: string;
-  /** 查询日期 */
-  QueryDate?: string;
-  /** 资源组id */
-  ExecutorGroupId?: string;
-}
-
-declare interface DescribeIntegrationStatisticsAgentStatusResponse {
-  /** 统计结果 */
-  StatusData?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10522,20 +10274,6 @@ declare interface DescribeSonInstancesRequest {
 declare interface DescribeSonInstancesResponse {
   /** 结果集 */
   Data?: CollectionInstanceOpsDto;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeStandardRuleDetailInfoListRequest {
-  /** 空间、项目id */
-  ProjectId: string;
-  /** 标准分类11编码映射 12数据过滤 13字符串转换 14数据元定义 15正则表达 16术语词典 */
-  Type: number;
-}
-
-declare interface DescribeStandardRuleDetailInfoListResponse {
-  /** 返回值 */
-  StandardRuleDetailList?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12653,18 +12391,6 @@ declare interface RerunScheduleInstancesResponse {
   RequestId?: string;
 }
 
-declare interface RestartInLongAgentRequest {
-  /** 采集器ID */
-  AgentId: string;
-  /** WeData项目ID */
-  ProjectId: string;
-}
-
-declare interface RestartInLongAgentResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ResumeIntegrationTaskRequest {
   /** 任务id */
   TaskId: string;
@@ -13217,22 +12943,6 @@ declare interface UnlockIntegrationTaskResponse {
   RequestId?: string;
 }
 
-declare interface UpdateInLongAgentRequest {
-  /** 采集器ID */
-  AgentId: string;
-  /** WeData项目ID */
-  ProjectId: string;
-  /** 采集器名称 */
-  AgentName?: string;
-  /** 集成资源组ID */
-  ExecutorGroupId?: string;
-}
-
-declare interface UpdateInLongAgentResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface UpdateWorkflowOwnerRequest {
   /** 项目Id */
   ProjectId: string;
@@ -13346,8 +13056,6 @@ declare interface Wedata {
   CreateHiveTable(data: CreateHiveTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHiveTableResponse>;
   /** 创建hive表 {@link CreateHiveTableByDDLRequest} {@link CreateHiveTableByDDLResponse} */
   CreateHiveTableByDDL(data: CreateHiveTableByDDLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHiveTableByDDLResponse>;
-  /** 注册采集器 {@link CreateInLongAgentRequest} {@link CreateInLongAgentResponse} */
-  CreateInLongAgent(data: CreateInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInLongAgentResponse>;
   /** 创建集成节点 {@link CreateIntegrationNodeRequest} {@link CreateIntegrationNodeResponse} */
   CreateIntegrationNode(data: CreateIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationNodeResponse>;
   /** 创建集成任务 {@link CreateIntegrationTaskRequest} {@link CreateIntegrationTaskResponse} */
@@ -13388,8 +13096,6 @@ declare interface Wedata {
   DeleteFilePath(data: DeleteFilePathRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilePathResponse>;
   /** 删除文件夹【Beta版本】 {@link DeleteFolderRequest} {@link DeleteFolderResponse} */
   DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
-  /** 删除采集器 {@link DeleteInLongAgentRequest} {@link DeleteInLongAgentResponse} */
-  DeleteInLongAgent(data: DeleteInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInLongAgentResponse>;
   /** 删除集成节点 {@link DeleteIntegrationNodeRequest} {@link DeleteIntegrationNodeResponse} */
   DeleteIntegrationNode(data: DeleteIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationNodeResponse>;
   /** 删除集成任务 {@link DeleteIntegrationTaskRequest} {@link DeleteIntegrationTaskResponse} */
@@ -13448,8 +13154,6 @@ declare interface Wedata {
   DescribeBatchOperateTask(data: DescribeBatchOperateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperateTaskResponse>;
   /** 所属任务-基线列表 {@link DescribeBelongToRequest} {@link DescribeBelongToResponse} */
   DescribeBelongTo(data: DescribeBelongToRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBelongToResponse>;
-  /** 获取集群命名空间列表 {@link DescribeClusterNamespaceListRequest} {@link DescribeClusterNamespaceListResponse} */
-  DescribeClusterNamespaceList(data: DescribeClusterNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNamespaceListResponse>;
   /** 列出字段血缘信息 {@link DescribeColumnLineageRequest} {@link DescribeColumnLineageResponse} */
   DescribeColumnLineage(data: DescribeColumnLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeColumnLineageResponse>;
   /** 查询表的所有列元数据 {@link DescribeColumnsMetaRequest} {@link DescribeColumnsMetaResponse} */
@@ -13524,14 +13228,6 @@ declare interface Wedata {
   DescribeFunctionKinds(data?: DescribeFunctionKindsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionKindsResponse>;
   /** 查询函数类型 {@link DescribeFunctionTypesRequest} {@link DescribeFunctionTypesResponse} */
   DescribeFunctionTypes(data?: DescribeFunctionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionTypesResponse>;
-  /** 获取采集器列表 {@link DescribeInLongAgentListRequest} {@link DescribeInLongAgentListResponse} */
-  DescribeInLongAgentList(data: DescribeInLongAgentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongAgentListResponse>;
-  /** 查询采集器关联的任务列表 {@link DescribeInLongAgentTaskListRequest} {@link DescribeInLongAgentTaskListResponse} */
-  DescribeInLongAgentTaskList(data: DescribeInLongAgentTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongAgentTaskListResponse>;
-  /** 获取采集器所在集群的VPC列表 {@link DescribeInLongAgentVpcListRequest} {@link DescribeInLongAgentVpcListResponse} */
-  DescribeInLongAgentVpcList(data: DescribeInLongAgentVpcListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongAgentVpcListResponse>;
-  /** 获取TKE集群列表 {@link DescribeInLongTkeClusterListRequest} {@link DescribeInLongTkeClusterListResponse} */
-  DescribeInLongTkeClusterList(data: DescribeInLongTkeClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongTkeClusterListResponse>;
   /** 周期实例统计 {@link DescribeInstanceByCycleRequest} {@link DescribeInstanceByCycleResponse} */
   DescribeInstanceByCycle(data?: DescribeInstanceByCycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByCycleResponse>;
   /** 实例状态周期增长趋势 {@link DescribeInstanceByCycleReportRequest} {@link DescribeInstanceByCycleReportResponse} */
@@ -13558,8 +13254,6 @@ declare interface Wedata {
   DescribeIntegrationNode(data: DescribeIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationNodeResponse>;
   /** 数据集成大屏概览 {@link DescribeIntegrationStatisticsRequest} {@link DescribeIntegrationStatisticsResponse} */
   DescribeIntegrationStatistics(data: DescribeIntegrationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsResponse>;
-  /** 数据集成大屏采集器状态分布统计 {@link DescribeIntegrationStatisticsAgentStatusRequest} {@link DescribeIntegrationStatisticsAgentStatusResponse} */
-  DescribeIntegrationStatisticsAgentStatus(data: DescribeIntegrationStatisticsAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsAgentStatusResponse>;
   /** 数据集成大屏实例状态统计趋势 {@link DescribeIntegrationStatisticsInstanceTrendRequest} {@link DescribeIntegrationStatisticsInstanceTrendResponse} */
   DescribeIntegrationStatisticsInstanceTrend(data: DescribeIntegrationStatisticsInstanceTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsInstanceTrendResponse>;
   /** 数据集成大屏同步条数统计趋势 {@link DescribeIntegrationStatisticsRecordsTrendRequest} {@link DescribeIntegrationStatisticsRecordsTrendResponse} */
@@ -13676,8 +13370,6 @@ declare interface Wedata {
   DescribeSchedulerTaskTypeCnt(data: DescribeSchedulerTaskTypeCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSchedulerTaskTypeCntResponse>;
   /** 获取关联子实例 {@link DescribeSonInstancesRequest} {@link DescribeSonInstancesResponse} */
   DescribeSonInstances(data?: DescribeSonInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSonInstancesResponse>;
-  /** 获取数据标准规则详情 {@link DescribeStandardRuleDetailInfoListRequest} {@link DescribeStandardRuleDetailInfoListResponse} */
-  DescribeStandardRuleDetailInfoList(data: DescribeStandardRuleDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandardRuleDetailInfoListResponse>;
   /** 实例状态趋势 {@link DescribeStatisticInstanceStatusTrendOpsRequest} {@link DescribeStatisticInstanceStatusTrendOpsResponse} */
   DescribeStatisticInstanceStatusTrendOps(data: DescribeStatisticInstanceStatusTrendOpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticInstanceStatusTrendOpsResponse>;
   /** 查询实时任务日志列表 {@link DescribeStreamTaskLogListRequest} {@link DescribeStreamTaskLogListResponse} */
@@ -13852,8 +13544,6 @@ declare interface Wedata {
   RerunOpsMakePlanInstances(data: RerunOpsMakePlanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RerunOpsMakePlanInstancesResponse>;
   /** 实例批量重跑 {@link RerunScheduleInstancesRequest} {@link RerunScheduleInstancesResponse} */
   RerunScheduleInstances(data?: RerunScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RerunScheduleInstancesResponse>;
-  /** 重启采集器 {@link RestartInLongAgentRequest} {@link RestartInLongAgentResponse} */
-  RestartInLongAgent(data: RestartInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInLongAgentResponse>;
   /** 继续集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */
   ResumeIntegrationTask(data: ResumeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeIntegrationTaskResponse>;
   /** 抢占锁定集成任务 {@link RobAndLockIntegrationTaskRequest} {@link RobAndLockIntegrationTaskResponse} */
@@ -13898,8 +13588,6 @@ declare interface Wedata {
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
   /** 解锁集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
-  /** 更新采集器 {@link UpdateInLongAgentRequest} {@link UpdateInLongAgentResponse} */
-  UpdateInLongAgent(data: UpdateInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInLongAgentResponse>;
   /** 修改工作流责任人 {@link UpdateWorkflowOwnerRequest} {@link UpdateWorkflowOwnerResponse} */
   UpdateWorkflowOwner(data: UpdateWorkflowOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowOwnerResponse>;
   /** 开发空间-保存任务信息 {@link UploadContentRequest} {@link UploadContentResponse} */

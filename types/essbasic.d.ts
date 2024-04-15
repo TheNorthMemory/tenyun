@@ -106,7 +106,7 @@ declare interface AutoSignConfig {
   VerifyChannels?: string[];
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起 */
   LicenseType?: number;
-  /** 开通成功后前端页面跳转的url，此字段的用法场景请联系客户经理确认。注：`仅支持H5开通场景`, `跳转链接仅支持 https:// , qianapp:// 开头`跳转场景：**贵方H5 -> 腾讯电子签H5 -> 贵方H5** : JumpUrl格式: https://YOUR_CUSTOM_URL/xxxx，只需满足 https:// 开头的正确且合规的网址即可。**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。`APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。`APP拦截地址跳转可参考：Android，IOS 成功结果返回：若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，比如 qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess */
+  /** 开通成功后前端页面跳转的url，此字段的用法场景请联系客户经理确认。注：`仅支持H5开通场景`, `跳转链接仅支持 https:// , qianapp:// 开头`跳转场景：**贵方H5 -> 腾讯电子签H5 -> 贵方H5** : JumpUrl格式: https://YOUR_CUSTOM_URL/xxxx，只需满足 https:// 开头的正确且合规的网址即可。**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。`APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。`APP拦截地址跳转可参考：Android，IOS 成功结果返回：若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，例如：qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess */
   JumpUrl?: string;
 }
 
@@ -1991,7 +1991,7 @@ declare interface ChannelDescribeBillUsageDetailRequest {
   StartTime: string;
   /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
   EndTime: string;
-  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询**NoAuthSign**: 形式签 */
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
   QuotaType?: string;
   /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
   Offset?: number;

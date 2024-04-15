@@ -230,6 +230,8 @@ declare interface BGPInstance {
   BasicPlusFlag?: number | null;
   /** 是否是商业模式优化-普惠版 */
   PlanCntFlag?: number | null;
+  /** 是否为超级高防包 */
+  SuperPackFlag?: number | null;
 }
 
 /** 高防包资产实例的规格信息 */

@@ -400,6 +400,8 @@ declare interface Condition {
   IsOpen: number;
   /** 产品ID */
   ProductId: string | null;
+  /** 告警分级阈值配置 */
+  HierarchicalValue: AlarmHierarchicalValue | null;
 }
 
 /** 告警条件模板 */
@@ -1023,15 +1025,17 @@ declare interface DimensionsDesc {
 /** 事件告警条件 */
 declare interface EventCondition {
   /** 告警通知频率 */
-  AlarmNotifyPeriod: string | null;
+  AlarmNotifyPeriod?: string | null;
   /** 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警） */
-  AlarmNotifyType: string | null;
+  AlarmNotifyType?: string | null;
   /** 事件ID */
-  EventID: string;
+  EventID?: string;
   /** 事件展示名称（对外） */
-  EventDisplayName: string;
+  EventDisplayName?: string;
   /** 规则ID */
-  RuleID: string;
+  RuleID?: string;
+  /** 指标名 */
+  MetricName?: string | null;
 }
 
 /** 查询过滤参数 */

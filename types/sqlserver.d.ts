@@ -3232,6 +3232,22 @@ declare interface DescribeRestoreTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRestoreTimeRangeRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 回档的目标实例ID，不填默认回档到原实例 */
+  TargetInstanceId?: string;
+}
+
+declare interface DescribeRestoreTimeRangeResponse {
+  /** 按照时间点可回档的最小时间 */
+  MinTime?: string;
+  /** 按照时间点可回档的最大时间 */
+  MaxTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRollbackTimeRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4493,6 +4509,8 @@ declare interface Sqlserver {
   DescribeRegularBackupPlan(data: DescribeRegularBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegularBackupPlanResponse>;
   /** 查询回档任务列表 {@link DescribeRestoreTaskRequest} {@link DescribeRestoreTaskResponse} */
   DescribeRestoreTask(data: DescribeRestoreTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRestoreTaskResponse>;
+  /** 查询按照时间点可回档的时间范围 {@link DescribeRestoreTimeRangeRequest} {@link DescribeRestoreTimeRangeResponse} */
+  DescribeRestoreTimeRange(data: DescribeRestoreTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRestoreTimeRangeResponse>;
   /** 查询实例可回档时间范围 {@link DescribeRollbackTimeRequest} {@link DescribeRollbackTimeResponse} */
   DescribeRollbackTime(data: DescribeRollbackTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeResponse>;
   /** 获取慢查询日志文件信息 {@link DescribeSlowlogsRequest} {@link DescribeSlowlogsResponse} */

@@ -242,6 +242,18 @@ declare interface PriceInfo {
   Operation: string;
 }
 
+/** 合作商竞价详情 */
+declare interface ReserveBidInfo {
+  /** 用户 */
+  User?: string | null;
+  /** 出价 */
+  Price?: number | null;
+  /** 出价时间 */
+  BidTime?: string | null;
+  /** 当前状态 */
+  BidStatus?: string | null;
+}
+
 /** 查询预释放预约列表域名详情 */
 declare interface ReservedDomainInfo {
   /** 域名 */
@@ -274,6 +286,8 @@ declare interface ReservedPreDomainInfo {
   ExpireTime?: string | null;
   /** 资源ID，用于删除资源信息 */
   ResourceId?: string | null;
+  /** 业务ID */
+  BusinessId?: string | null;
 }
 
 /** Template数据 */
@@ -316,6 +330,18 @@ declare interface BatchModifyDomainInfoRequest {
 declare interface BatchModifyDomainInfoResponse {
   /** 日志ID */
   LogId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BidPreDomainsRequest {
+  /** 业务ID */
+  BusinessId?: string;
+  /** 价格 */
+  Price?: number;
+}
+
+declare interface BidPreDomainsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -654,10 +680,28 @@ declare interface DescribePreDomainListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeReservedBidInfoRequest {
+  /** 业务ID */
+  BusinessId: string;
+}
+
+declare interface DescribeReservedBidInfoResponse {
+  /** 竞价领先价格 */
+  UpPrice?: number;
+  /** 请求用户当前价格 */
+  Price?: number;
+  /** 领先用户 */
+  UpUser?: string;
+  /** 竞价详细数据 */
+  BidList?: ReserveBidInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReservedPreDomainInfoRequest {
   /** 域名,每次最多支持500条域名查询 */
   DomainList?: string[];
-  /** 状态，用于筛选，可不填写(1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成) */
+  /** 状态，用于筛选，可不填写(1. 成功 2. 失败（失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成 5. 预约 6. 竞价) */
   ReservedStatus?: number;
   /** 根据预约时间排序，仅支持："desc","asc"。 */
   ReservedTimeSort?: string;
@@ -939,6 +983,8 @@ declare interface Domain {
   (): Versions;
   /** 批量域名信息修改 {@link BatchModifyDomainInfoRequest} {@link BatchModifyDomainInfoResponse} */
   BatchModifyDomainInfo(data: BatchModifyDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyDomainInfoResponse>;
+  /** 合作商预释放域名出价 {@link BidPreDomainsRequest} {@link BidPreDomainsResponse} */
+  BidPreDomains(data?: BidPreDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<BidPreDomainsResponse>;
   /** 批量操作日志状态 {@link CheckBatchStatusRequest} {@link CheckBatchStatusResponse} */
   CheckBatchStatus(data: CheckBatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBatchStatusResponse>;
   /** 域名注册查询 {@link CheckDomainRequest} {@link CheckDomainResponse} */
@@ -979,6 +1025,8 @@ declare interface Domain {
   DescribePhoneEmailList(data?: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
   /** 提前获取域释放域名数据 {@link DescribePreDomainListRequest} {@link DescribePreDomainListResponse} */
   DescribePreDomainList(data?: DescribePreDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreDomainListResponse>;
+  /** 合作商查询竞价信息 {@link DescribeReservedBidInfoRequest} {@link DescribeReservedBidInfoResponse} */
+  DescribeReservedBidInfo(data: DescribeReservedBidInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedBidInfoResponse>;
   /** 查询预约预释放域名状态 {@link DescribeReservedPreDomainInfoRequest} {@link DescribeReservedPreDomainInfoResponse} */
   DescribeReservedPreDomainInfo(data?: DescribeReservedPreDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedPreDomainInfoResponse>;
   /** 获取模板信息 {@link DescribeTemplateRequest} {@link DescribeTemplateResponse} */
