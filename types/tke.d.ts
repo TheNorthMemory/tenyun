@@ -1799,6 +1799,18 @@ declare namespace V20180525 {
     InheritConfigurationFromNodePool?: boolean;
   }
 
+  /** NodePool的运行时配置 */
+  interface NodePoolRuntime {
+    /** 节点池ID */
+    NodePoolId?: string | null;
+    /** 运行时类型 */
+    RuntimeType?: string | null;
+    /** 运行时版本 */
+    RuntimeVersion?: string | null;
+    /** 节点池名称 */
+    NodePoolName?: string | null;
+  }
+
   /** OIDC认证相关配置 */
   interface OIDCConfigAuthenticationOptions {
     /** 创建身份提供商 */
@@ -1807,6 +1819,16 @@ declare namespace V20180525 {
     AutoCreateClientId?: string[] | null;
     /** 创建PodIdentityWebhook组件 */
     AutoInstallPodIdentityWebhookAddon?: boolean | null;
+  }
+
+  /** 可选运行时 */
+  interface OptionalRuntimes {
+    /** 运行时类型 */
+    RuntimeType?: string | null;
+    /** 运行时版本列表 */
+    RuntimeVersions?: string[] | null;
+    /** 该类型的默认运行时版本 */
+    DefaultVersion?: string | null;
   }
 
   /** 应用市场安装的Pending应用 */
@@ -2615,6 +2637,14 @@ declare namespace V20180525 {
     Enabled?: boolean;
   }
 
+  /** 运行时配置 */
+  interface RuntimeConfig {
+    /** 运行时类型 */
+    RuntimeType?: string | null;
+    /** 运行时版本 */
+    RuntimeVersion?: string | null;
+  }
+
   /** master节点缩容参数 */
   interface ScaleInMaster {
     /** 实例ID */
@@ -3216,9 +3246,9 @@ declare namespace V20180525 {
   interface CreateClusterRouteRequest {
     /** 路由表名称。 */
     RouteTableName: string;
-    /** 目的端CIDR。 */
+    /** 目的节点的 PodCIDR */
     DestinationCidrBlock: string;
-    /** 下一跳地址。 */
+    /** 下一跳地址，即目的节点的内网 IP 地址 */
     GatewayIp: string;
   }
 
@@ -3228,13 +3258,13 @@ declare namespace V20180525 {
   }
 
   interface CreateClusterRouteTableRequest {
-    /** 路由表名称 */
+    /** 路由表名称，一般为集群ID */
     RouteTableName: string;
     /** 路由表CIDR */
     RouteTableCidrBlock: string;
     /** 路由表绑定的VPC */
     VpcId: string;
-    /** 是否忽略CIDR冲突 */
+    /** 是否忽略CIDR与 vpc 路由表的冲突， 0 表示不忽略，1表示忽略。默认不忽略 */
     IgnoreClusterCidrConflict?: number;
   }
 
@@ -5507,6 +5537,18 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeSupportedRuntimeRequest {
+    /** K8S版本 */
+    K8sVersion: string;
+  }
+
+  interface DescribeSupportedRuntimeResponse {
+    /** 可选运行时列表 */
+    OptionalRuntimes?: OptionalRuntimes[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeTKEEdgeClusterCredentialRequest {
     /** 集群Id */
     ClusterId: string;
@@ -5820,7 +5862,7 @@ declare namespace V20180525 {
 
   interface ForwardTKEEdgeApplicationRequestV3Response {
     /** 请求集群addon后返回的数据 */
-    ResponseBody: string;
+    ResponseBody?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6099,6 +6141,22 @@ declare namespace V20180525 {
   }
 
   interface ModifyClusterNodePoolResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyClusterRuntimeConfigRequest {
+    /** 集群ID，必填 */
+    ClusterId: string;
+    /** 当需要修改运行时版本是根据另外的K8S版本获取时，需填写。例如升级校验有冲突后修改场景 */
+    DstK8SVersion?: string;
+    /** 需要修改集群运行时时填写 */
+    ClusterRuntimeConfig?: RuntimeConfig;
+    /** 需要修改节点池运行时时，填需要修改的部分 */
+    NodePoolRuntimeConfig?: NodePoolRuntime[];
+  }
+
+  interface ModifyClusterRuntimeConfigResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6993,6 +7051,8 @@ declare interface Tke {
   DescribeResourceUsage(data: V20180525.DescribeResourceUsageRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeResourceUsageResponse>;
   /** 查询路由表冲突列表 {@link V20180525.DescribeRouteTableConflictsRequest} {@link V20180525.DescribeRouteTableConflictsResponse} */
   DescribeRouteTableConflicts(data: V20180525.DescribeRouteTableConflictsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeRouteTableConflictsResponse>;
+  /** 基于K8S版本获取可选运行时版本 {@link V20180525.DescribeSupportedRuntimeRequest} {@link V20180525.DescribeSupportedRuntimeResponse} */
+  DescribeSupportedRuntime(data: V20180525.DescribeSupportedRuntimeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeSupportedRuntimeResponse>;
   /** 获取边缘计算集群的认证信息 {@link V20180525.DescribeTKEEdgeClusterCredentialRequest} {@link V20180525.DescribeTKEEdgeClusterCredentialResponse} */
   DescribeTKEEdgeClusterCredential(data: V20180525.DescribeTKEEdgeClusterCredentialRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeClusterCredentialResponse>;
   /** 查询边缘计算集群状态 {@link V20180525.DescribeTKEEdgeClusterStatusRequest} {@link V20180525.DescribeTKEEdgeClusterStatusResponse} */
@@ -7063,6 +7123,8 @@ declare interface Tke {
   ModifyClusterEndpointSP(data: V20180525.ModifyClusterEndpointSPRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterEndpointSPResponse>;
   /** 编辑节点池 {@link V20180525.ModifyClusterNodePoolRequest} {@link V20180525.ModifyClusterNodePoolResponse} */
   ModifyClusterNodePool(data: V20180525.ModifyClusterNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterNodePoolResponse>;
+  /** 修改集群运行时配置 {@link V20180525.ModifyClusterRuntimeConfigRequest} {@link V20180525.ModifyClusterRuntimeConfigResponse} */
+  ModifyClusterRuntimeConfig(data: V20180525.ModifyClusterRuntimeConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterRuntimeConfigResponse>;
   /** 修改超级节点池 {@link V20180525.ModifyClusterVirtualNodePoolRequest} {@link V20180525.ModifyClusterVirtualNodePoolResponse} */
   ModifyClusterVirtualNodePool(data: V20180525.ModifyClusterVirtualNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterVirtualNodePoolResponse>;
   /** 修改节点池关联伸缩组的期望实例数 {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgRequest} {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgResponse} */

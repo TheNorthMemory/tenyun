@@ -78,6 +78,8 @@ declare interface QueryTextToImageProJobResponse {
   ResultImage?: string[];
   /** 结果 detail 数组，Success 代表成功。 */
   ResultDetails?: string[];
+  /** 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。 */
+  RevisedPrompt?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -93,6 +95,8 @@ declare interface SubmitTextToImageProJobRequest {
   LogoAdd?: number;
   /** 文生图引擎，默认使用engine1。 取值： engine1 engine2 */
   Engine?: string;
+  /** prompt 扩写开关。1为开启，0为关闭，不传默认开启。开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。如果关闭扩写，将直接使用原始输入的 prompt 生成图片。建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。 */
+  Revise?: number;
 }
 
 declare interface SubmitTextToImageProJobResponse {

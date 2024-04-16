@@ -558,7 +558,7 @@ declare interface Endpoint {
   CcnOwnerUin?: string | null;
   /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的ID */
   ChildInstanceId?: string | null;
-  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、比如：只读实例传ro、读写实例传rw */
+  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、例如：只读实例传ro、读写实例传rw */
   ChildInstanceType?: string | null;
 }
 
@@ -598,7 +598,7 @@ declare interface EndpointItem {
   ExtraAttr?: KeyValuePairOption[] | null;
   /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的ID */
   ChildInstanceId?: string | null;
-  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、比如：只读实例传ro、读写实例传rw */
+  /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、例如：只读实例传ro、读写实例传rw */
   ChildInstanceType?: string | null;
 }
 

@@ -5749,7 +5749,7 @@ declare interface WechatPublishTask {
 declare interface ApplyUploadRequest {
   /** 媒体类型，可选值请参考 [上传能力综述](/document/product/266/9760)。 */
   MediaType: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 媒体名称。 */
   MediaName?: string;
@@ -6415,15 +6415,15 @@ declare interface CreateStorageRegionResponse {
 }
 
 declare interface CreateSubAppIdRequest {
-  /** 子应用名称，长度限制：40个字符。 */
+  /** 应用名称，长度限制：40个字符。 */
   Name: string;
-  /** 子应用简介，长度限制： 300个字符。 */
+  /** 应用简介，长度限制： 300个字符。 */
   Description?: string;
 }
 
 declare interface CreateSubAppIdResponse {
-  /** 新创建的子应用 ID。 */
-  SubAppId: number;
+  /** 新创建的应用 ID。 */
+  SubAppId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6697,7 +6697,7 @@ declare interface DeleteJustInTimeTranscodeTemplateResponse {
 declare interface DeleteMediaRequest {
   /** 媒体文件的唯一标识。 */
   FileId: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 指定本次需要删除的部分。默认值为 "[]", 表示删除媒体及其对应的全部视频处理文件。 */
   DeleteParts?: MediaDeleteItem[];
@@ -6905,7 +6905,7 @@ declare interface DescribeAIRecognitionTemplatesResponse {
 }
 
 declare interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 转自适应码流模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
@@ -6919,9 +6919,9 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
 
 declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 转自适应码流模板详情列表。 */
-  AdaptiveDynamicStreamingTemplateSet: AdaptiveDynamicStreamingTemplate[];
+  AdaptiveDynamicStreamingTemplateSet?: AdaptiveDynamicStreamingTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7711,7 +7711,7 @@ declare interface DescribeStorageDetailsRequest {
   StartTime: string;
   /** 结束时间，需大于开始日期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
-  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 统计时间粒度，有效值：Minute：以5分钟为粒度。Day：以天为粒度。默认按时间跨度决定，小于等于1天以5分钟为粒度，大于1天则以天为粒度。 */
   Interval?: string;
@@ -7741,9 +7741,9 @@ declare interface DescribeStorageRegionsResponse {
 }
 
 declare interface DescribeSubAppIdsRequest {
-  /** 子应用名称。 */
+  /** 应用名称。 */
   Name?: string;
-  /** 标签信息，查询指定标签的子应用列表。 */
+  /** 标签信息，查询指定标签的应用列表。 */
   Tags?: ResourceTag[];
   /** 分页拉取的起始偏移量。默认值：0。 */
   Offset?: number;
@@ -7752,9 +7752,9 @@ declare interface DescribeSubAppIdsRequest {
 }
 
 declare interface DescribeSubAppIdsResponse {
-  /** 子应用信息集合。 */
+  /** 应用信息集合。 */
   SubAppIdInfoSet?: SubAppIdInfo[];
-  /** 子应用总数量。 */
+  /** 应用总数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -9123,7 +9123,7 @@ declare interface PullUploadResponse {
 declare interface PushUrlCacheRequest {
   /** 预热的 URL 列表，单次最多指定20个 URL。 */
   Urls: string[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
 }
 
@@ -9275,7 +9275,7 @@ declare interface ResetProcedureTemplateResponse {
 declare interface RestoreMediaRequest {
   /** 媒体文件唯一标识列表，最大长度：100。 */
   FileIds: string[];
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 解冻出的临时媒体文件的可访问持续时长，必须大于0，单位为“天”。 */
   RestoreDay?: number;
@@ -9291,7 +9291,7 @@ declare interface RestoreMediaResponse {
 declare interface ReviewAudioVideoRequest {
   /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
   FileId: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 审核的内容，可选值有：Media：原始音视频；Cover：封面。不填或填空数组时，默认为审核 Media。 */
   ReviewContents?: string[];
@@ -9407,7 +9407,7 @@ declare interface SearchMediaResponse {
 declare interface SetCLSPushTargetRequest {
   /** 域名。 */
   Domain: string;
-  /** 点播应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 要设置的中国大陆地区的日志推送目标。 */
   ChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
@@ -9523,7 +9523,7 @@ declare interface VerifyDomainRecordResponse {
 declare interface WeChatMiniProgramPublishRequest {
   /** 媒体文件 ID。 */
   FileId: string;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
   /** 发布视频所对应的转码模板 ID，为0代表原始视频。 */
   SourceDefinition?: number;
@@ -9595,7 +9595,7 @@ declare interface Vod {
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
   /** 开通某地域的存储 {@link CreateStorageRegionRequest} {@link CreateStorageRegionResponse} */
   CreateStorageRegion(data: CreateStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStorageRegionResponse>;
-  /** 创建子应用 {@link CreateSubAppIdRequest} {@link CreateSubAppIdResponse} */
+  /** 创建应用 {@link CreateSubAppIdRequest} {@link CreateSubAppIdResponse} */
   CreateSubAppId(data: CreateSubAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubAppIdResponse>;
   /** 创建播放器配置 {@link CreateSuperPlayerConfigRequest} {@link CreateSuperPlayerConfigResponse} */
   CreateSuperPlayerConfig(data: CreateSuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSuperPlayerConfigResponse>;
@@ -9749,7 +9749,7 @@ declare interface Vod {
   DescribeStorageDetails(data: DescribeStorageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDetailsResponse>;
   /** 查询存储地域列表 {@link DescribeStorageRegionsRequest} {@link DescribeStorageRegionsResponse} */
   DescribeStorageRegions(data?: DescribeStorageRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageRegionsResponse>;
-  /** 查询子应用列表 {@link DescribeSubAppIdsRequest} {@link DescribeSubAppIdsResponse} */
+  /** 查询应用列表 {@link DescribeSubAppIdsRequest} {@link DescribeSubAppIdsResponse} */
   DescribeSubAppIds(data?: DescribeSubAppIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAppIdsResponse>;
   /** 获取播放器配置列表 {@link DescribeSuperPlayerConfigsRequest} {@link DescribeSuperPlayerConfigsResponse} */
   DescribeSuperPlayerConfigs(data?: DescribeSuperPlayerConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuperPlayerConfigsResponse>;

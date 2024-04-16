@@ -114,9 +114,9 @@ declare interface OnlineScamInfo {
 declare interface OtherAccountInfo {
   /** 其他账号信息；AccountType是8时，填入设备号（IMEI、IMEIMD5、IDFA、IDFAMD5）AccountType是10004时，填入中国大陆标准11位手机号的MD5值注释：MD5手机号加密方式，中国大陆11位手机号进行MD5加密，加密后取32位小写值设备号加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。 */
   AccountId: string;
-  /** MD5手机号,AccountType是10004时，此处无需重复填写。 */
+  /** 账号绑定的MD5手机号。注释：只支持标准中国大陆11位手机号MD5加密后位的32位小写字符串。 */
   MobilePhone?: string;
-  /** 用户设备号，AccountType是8时，此处无需重复填写。 */
+  /** 用户设备号，支持IMEI、IMEIMD5、IDFA、IDFAMD5。注释：IMEIMD5、IDFAMD5加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。 */
   DeviceId?: string;
 }
 
@@ -160,7 +160,7 @@ declare interface OutputManageMarketingRisk {
 
 /** 全栈式风控引擎出参值 */
 declare interface OutputManageMarketingRiskValue {
-  /** 账号ID：对应输入参数。当AccountType为1时，对应QQ的OpenId。当AccountType为2时，对应微信的OpenId/UnionId。当AccountType为8时，对应IMEI、IDFA、IMEIMD5或者IDFAMD5。当AccountType为10004时，对应手机号的MD5值。请注意：此字段可能返回null，表示无法获取有效值。 */
+  /** 账号ID：对应输入参数。当AccountType为1时，对应QQ的OpenId。当AccountType为2时，对应微信的OpenId/UnionId。当AccountType为8时，对应IMEI、IDFA、IMEIMD5或者IDFAMD5。当AccountType为10004时，对应手机号的MD5值。 */
   UserId?: string | null;
   /** 操作时间戳，单位秒（对应输入参数）。 */
   PostTime?: number | null;
@@ -253,7 +253,7 @@ declare interface ManageMarketingRiskRequest {
 
 declare interface ManageMarketingRiskResponse {
   /** 业务出参 */
-  Data: OutputManageMarketingRisk;
+  Data?: OutputManageMarketingRisk;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -4136,16 +4136,16 @@ declare interface RecognizeThaiIDCardOCRResponse {
   ThaiName?: string;
   /** 英文姓名 */
   EnFirstName?: string;
-  /** 地址 */
-  Address?: string;
-  /** 出生日期 */
-  Birthday?: string;
-  /** 签发日期 */
-  IssueDate?: string;
-  /** 到期日期 */
-  ExpirationDate?: string;
   /** 英文姓名 */
   EnLastName?: string;
+  /** 泰文签发日期 */
+  IssueDate?: string;
+  /** 泰文到期日期 */
+  ExpirationDate?: string;
+  /** 泰文出生日期 */
+  Birthday?: string;
+  /** 地址 */
+  Address?: string;
   /** 证件人像照片抠取 */
   PortraitImage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */

@@ -251,11 +251,13 @@ declare interface DescribeKBComponentVersionListResponse {
 declare interface DescribeKBComponentVulnerabilityRequest {
   /** 组件的PURL，其中Name和Version为必填字段 */
   PURL: PURL;
+  /** 语言，ZH或EN */
+  Language?: string;
 }
 
 declare interface DescribeKBComponentVulnerabilityResponse {
   /** 漏洞信息列表 */
-  VulnerabilityList: ComponentVulnerabilityUnion[] | null;
+  VulnerabilityList?: ComponentVulnerabilityUnion[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -283,6 +285,8 @@ declare interface DescribeKBVulnerabilityRequest {
   CNVDID?: string[];
   /** 根据CNNVD ID查询（不能与其他参数同时存在） */
   CNNVDID?: string[];
+  /** 语言，ZH或EN */
+  Language?: string;
 }
 
 declare interface DescribeKBVulnerabilityResponse {

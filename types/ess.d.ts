@@ -1993,9 +1993,51 @@ declare interface CreateMultiFlowSignQRCodeResponse {
 }
 
 declare interface CreateOrganizationAuthUrlRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 指定授权方式 支持多选:1-上传授权书方式2- 法人授权方式3- 法人身份认证方式 */
+  AuthorizationTypes?: number[];
+  /** 企业名称EndPointType=“H5”或者"SHORT_H5"时，该参数必填 */
+  OrganizationName?: string;
+  /** 企业统一社会信用代码 */
+  UniformSocialCreditCode?: string;
+  /** 法人姓名 */
+  LegalName?: string;
+  /** 认证完成跳转链接 */
+  AutoJumpUrl?: string;
+  /** 营业执照企业地址示例：xx省xx市xx县/区xx街道 */
+  OrganizationAddress?: string;
+  /** 认证人姓名 */
+  AdminName?: string;
+  /** 认证人手机号 */
+  AdminMobile?: string;
+  /** 认证人身份证号 */
+  AdminIdCardNumber?: string;
+  /** 认证人证件类型支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  AdminIdCardType?: string;
+  /** 营业执照的社会信用代码保持一致false 关闭-默认true 开启 */
+  UniformSocialCreditCodeSame?: boolean;
+  /** 法人姓名保持一致false 关闭-默认true 开启 */
+  LegalNameSame?: boolean;
+  /** 认证人姓名一致false 关闭-默认true 开启注意：开启后在认证过程前会校验拦截 */
+  AdminNameSame?: boolean;
+  /** 认证人居民身份证件号一致false 关闭-默认true 开启注意：开启后在认证过程前会校验拦截 */
+  AdminIdCardNumberSame?: boolean;
+  /** 认证人手机号一致false 关闭-默认true 开启注意：开启后在认证过程前会校验拦截 */
+  AdminMobileSame?: boolean;
+  /** 企业名称保持一致false 关闭-默认true 开启 */
+  OrganizationNameSame?: boolean;
+  /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
+  BusinessLicense?: string;
+  /** 跳转链接类型："PC"-PC端认证链接 "APP"-全屏或半屏跳转小程序链接“H5”-H5页面认证链接 "SHORT_H5"- H5认证短链"SHORT_URL"- 跳转小程序短链 */
+  Endpoint?: string;
 }
 
 declare interface CreateOrganizationAuthUrlResponse {
+  /** “H5”-H5长连接"SHORT_H5"- H5短链"APP"-小程序"PC"-PC浏览器链接有效期统一30天 */
+  AuthUrl?: string;
+  /** 链接过期时间戳 */
+  ExpiredTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3230,7 +3272,7 @@ declare interface Ess {
   /** 创建一码多签签署码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 创建企业认证链接 {@link CreateOrganizationAuthUrlRequest} {@link CreateOrganizationAuthUrlResponse} */
-  CreateOrganizationAuthUrl(data?: CreateOrganizationAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationAuthUrlResponse>;
+  CreateOrganizationAuthUrl(data: CreateOrganizationAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationAuthUrlResponse>;
   /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
   /** 创建企业信息变更链接 {@link CreateOrganizationInfoChangeUrlRequest} {@link CreateOrganizationInfoChangeUrlResponse} */

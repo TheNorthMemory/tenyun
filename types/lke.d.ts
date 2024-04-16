@@ -1194,12 +1194,14 @@ declare interface DescribeStorageCredentialResponse {
   Bucket?: string;
   /** 对象存储可用区 */
   Region?: string;
-  /** 目录 */
+  /** 文件存储目录 */
   FilePath?: string;
   /** 存储类型 */
   Type?: string;
   /** 主号 */
   CorpUin?: string;
+  /** 图片存储目录 */
+  ImagePath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

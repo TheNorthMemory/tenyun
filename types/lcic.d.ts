@@ -136,6 +136,10 @@ declare interface DocumentInfo {
   Cover?: string | null;
   /** 课件预览地址 */
   Preview?: string | null;
+  /** 文档的分辨率 */
+  Resolution?: string | null;
+  /** 转码后文档的最小分辨率，和创建文档时传入的参数一致。 */
+  MinScaleResolution?: string | null;
 }
 
 /** 房间事件对应的信息。 */
@@ -666,6 +670,8 @@ declare interface CreateDocumentRequest {
   DocumentSize?: number;
   /** 是否对不支持元素开启自动处理的功能。默认关闭。自动处理的元素如下：1. 墨迹：移除不支持的墨迹（例如WPS墨迹）2. 自动翻页：移除PPT上所有自动翻页设置，并设置为单击鼠标翻页3. 已损坏音视频：移除PPT上对损坏音视频的引用 */
   AutoHandleUnsupportedElement?: boolean;
+  /** 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率。示例：1280x720，注意分辨率宽高中间为英文字母"xyz"的"x" */
+  MinScaleResolution?: string;
 }
 
 declare interface CreateDocumentResponse {
@@ -987,6 +993,10 @@ declare interface DescribeDocumentResponse {
   Pages?: number;
   /** 课件预览地址 */
   Preview?: string;
+  /** 文档的分辨率 */
+  Resolution?: string;
+  /** 转码后文档的最小分辨率，和创建文档时传入的参数一致。 */
+  MinScaleResolution?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
