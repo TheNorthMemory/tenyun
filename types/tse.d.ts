@@ -2125,8 +2125,10 @@ declare interface CreateEngineRequest {
   PrepaidPeriod?: number;
   /** 自动续费标记，仅预付费使用。参考值：- 0：不自动续费- 1：自动续费 */
   PrepaidRenewFlag?: number;
-  /** 跨地域部署的引擎地域配置详情 */
+  /** 跨地域部署的引擎地域配置详情zk标准版没有跨地域部署，请不要填写 */
   EngineRegionInfos?: EngineRegionInfo[];
+  /** zk专业版至多有两个盘，且磁盘的容量在50-3200之间如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致 */
+  StorageOption?: StorageOption[];
 }
 
 declare interface CreateEngineResponse {

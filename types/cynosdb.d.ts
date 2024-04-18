@@ -1806,6 +1806,20 @@ declare interface SlowQueriesItem {
   SqlTemplate?: string;
   /** sql语句md5 */
   SqlMd5?: string;
+  /** 远程读取次数数据库内核版本大于3.1.12 */
+  SyncReadCountRemote?: number | null;
+  /** 远程读取的字节数数据库内核版本大于3.1.12 */
+  SyncReadBytesRemote?: number | null;
+  /** 远程读取所花费的时间（微秒）数据库内核版本大于3.1.12 */
+  SyncReadTimeRemote?: number | null;
+  /** 远程写入次数数据库内核版本大于3.1.12 */
+  SyncWriteCountRemote?: number | null;
+  /** 远程写入的字节数。数据库内核版本大于3.1.12 */
+  SyncWriteBytesRemote?: number | null;
+  /** 远程写入所花费的时间（微秒）。数据库内核版本大于3.1.12 */
+  SyncWriteTimeRemote?: number | null;
+  /** 事务提交延迟（微秒）数据库内核版本大于3.1.12 */
+  TrxCommitDelay?: number | null;
 }
 
 /** 转换集群log bin开关 */

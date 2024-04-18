@@ -253,47 +253,49 @@ declare interface DomainErrorPageInfo {
 /** 按照域名分类的7层监听器转发规则信息 */
 declare interface DomainRuleSet {
   /** 转发规则域名。 */
-  Domain: string;
+  Domain?: string;
   /** 该域名对应的转发规则列表。 */
-  RuleSet: RuleInfo[];
+  RuleSet?: RuleInfo[];
   /** 该域名对应的服务器证书ID，值为default时，表示使用默认证书（监听器配置的证书）。 */
-  CertificateId: string | null;
+  CertificateId?: string | null;
   /** 该域名对应服务器证书名称。 */
-  CertificateAlias: string | null;
+  CertificateAlias?: string | null;
   /** 该域名对应的客户端证书ID，值为default时，表示使用默认证书（监听器配置的证书）。 */
-  ClientCertificateId: string | null;
+  ClientCertificateId?: string | null;
   /** 该域名对应客户端证书名称。 */
-  ClientCertificateAlias: string | null;
+  ClientCertificateAlias?: string | null;
   /** 该域名对应基础认证配置ID。 */
-  BasicAuthConfId: string | null;
+  BasicAuthConfId?: string | null;
   /** 基础认证开关，其中：0，表示未开启；1，表示已开启。 */
-  BasicAuth: number | null;
+  BasicAuth?: number | null;
   /** 该域名对应基础认证配置名称。 */
-  BasicAuthConfAlias: string | null;
+  BasicAuthConfAlias?: string | null;
   /** 该域名对应源站认证证书ID。 */
-  RealServerCertificateId: string | null;
+  RealServerCertificateId?: string | null;
   /** 源站认证开关，其中：0，表示未开启；1，表示已开启。 */
-  RealServerAuth: number | null;
+  RealServerAuth?: number | null;
   /** 该域名对应源站认证证书名称。 */
-  RealServerCertificateAlias: string | null;
+  RealServerCertificateAlias?: string | null;
   /** 该域名对应通道认证证书ID。 */
-  GaapCertificateId: string | null;
+  GaapCertificateId?: string | null;
   /** 通道认证开关，其中：0，表示未开启；1，表示已开启。 */
-  GaapAuth: number | null;
+  GaapAuth?: number | null;
   /** 该域名对应通道认证证书名称。 */
-  GaapCertificateAlias: string | null;
+  GaapCertificateAlias?: string | null;
   /** 源站认证域名。 */
-  RealServerCertificateDomain: string | null;
+  RealServerCertificateDomain?: string | null;
   /** 多客户端证书时，返回多个证书的id和别名 */
-  PolyClientCertificateAliasInfo: CertificateAliasInfo[] | null;
+  PolyClientCertificateAliasInfo?: CertificateAliasInfo[] | null;
   /** 多源站证书时，返回多个证书的id和别名 */
-  PolyRealServerCertificateAliasInfo: CertificateAliasInfo[] | null;
+  PolyRealServerCertificateAliasInfo?: CertificateAliasInfo[] | null;
   /** 域名的状态。0表示运行中，1表示变更中，2表示删除中。 */
-  DomainStatus: number | null;
+  DomainStatus?: number | null;
   /** 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。 */
-  BanStatus: string | null;
+  BanStatus?: string | null;
   /** Http3特性标识，其中：0表示关闭；1表示启用。 */
-  Http3Supported: number | null;
+  Http3Supported?: number | null;
+  /** 是否为默认域名 */
+  IsDefaultServer?: boolean | null;
 }
 
 /** 过滤条件 */
@@ -715,35 +717,35 @@ declare interface RuleCheckParams {
 /** 7层监听器转发规则信息 */
 declare interface RuleInfo {
   /** 规则信息 */
-  RuleId: string;
+  RuleId?: string;
   /** 监听器信息 */
-  ListenerId: string;
+  ListenerId?: string;
   /** 规则域名 */
-  Domain: string;
+  Domain?: string;
   /** 规则路径 */
-  Path: string;
+  Path?: string;
   /** 源站类型 */
-  RealServerType: string;
+  RealServerType?: string;
   /** 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。 */
-  Scheduler: string;
+  Scheduler?: string;
   /** 是否开启健康检查标志，1表示开启，0表示关闭 */
-  HealthCheck: number;
+  HealthCheck?: number;
   /** 规则状态，0表示运行中，1表示创建中，2表示销毁中，3表示绑定解绑源站中，4表示配置更新中 */
-  RuleStatus: number;
+  RuleStatus?: number;
   /** 健康检查相关参数 */
-  CheckParams: RuleCheckParams;
+  CheckParams?: RuleCheckParams;
   /** 已绑定的源站相关信息 */
-  RealServerSet: BindRealServer[];
+  RealServerSet?: BindRealServer[];
   /** 源站的服务状态，0表示异常，1表示正常。未开启健康检查时，该状态始终未正常。只要有一个源站健康状态为异常时，该状态为异常，具体源站的状态请查看RealServerSet。 */
-  BindStatus: number;
+  BindStatus?: number;
   /** 通道转发到源站的请求所携带的host，其中default表示直接转发接收到的host。 */
-  ForwardHost: string | null;
+  ForwardHost?: string | null;
   /** 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。 */
-  ServerNameIndicationSwitch: string | null;
+  ServerNameIndicationSwitch?: string | null;
   /** 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。 */
-  ServerNameIndication: string | null;
+  ServerNameIndication?: string | null;
   /** 强转HTTPS指示，当传递值为https:时表示强转为https */
-  ForcedRedirect: string | null;
+  ForcedRedirect?: string | null;
 }
 
 /** 安全策略规则（入参） */
@@ -1107,6 +1109,8 @@ declare interface CreateDomainRequest {
   PolyClientCertificateIds?: string[];
   /** 是否开启Http3特性的标识，其中：0，表示不开启Http3；1，表示开启Http3。默认不开启Http3。可以通过SetDomainHttp3开启。 */
   Http3Supported?: number;
+  /** 是否作为默认域名，默认为“否” */
+  IsDefaultServer?: boolean;
 }
 
 declare interface CreateDomainResponse {
@@ -1973,7 +1977,7 @@ declare interface DescribeProxyDetailRequest {
 
 declare interface DescribeProxyDetailResponse {
   /** 通道详情信息。 */
-  ProxyDetail: ProxyInfo;
+  ProxyDetail?: ProxyInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1985,7 +1989,7 @@ declare interface DescribeProxyGroupDetailsRequest {
 
 declare interface DescribeProxyGroupDetailsResponse {
   /** 通道组详细信息。 */
-  ProxyGroupDetail: ProxyGroupDetail;
+  ProxyGroupDetail?: ProxyGroupDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2199,9 +2203,9 @@ declare interface DescribeRulesRequest {
 
 declare interface DescribeRulesResponse {
   /** 按照域名分类的规则信息列表 */
-  DomainRuleSet: DomainRuleSet[];
+  DomainRuleSet?: DomainRuleSet[];
   /** 该监听器下的域名总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2425,6 +2429,8 @@ declare interface ModifyDomainRequest {
   ClientCertificateId?: string;
   /** 客户端CA证书ID，仅适用于version3.0的通道。其中：不带该字段和ClientCertificateId时，表示使用原证书；携带该字段时并且ClientCertificateId=default，表示使用监听器证书；其他情况，使用该ClientCertificateId或PolyClientCertificateIds指定的证书。 */
   PolyClientCertificateIds?: string[];
+  /** 是否作为默认域名，默认为“否” */
+  IsDefaultServer?: boolean;
 }
 
 declare interface ModifyDomainResponse {

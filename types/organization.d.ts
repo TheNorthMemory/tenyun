@@ -24,6 +24,58 @@ declare interface IdentityPolicy {
   PolicyDocument?: string | null;
 }
 
+/** 查询目标关联的SCP策略列表 */
+declare interface ListPoliciesForTarget {
+  /** 策略Id */
+  StrategyId: number;
+  /** 策略名称 */
+  StrategyName: string;
+  /** 备注信息 */
+  Remark: string | null;
+  /** 关联的账号或节点 */
+  Uin: number;
+  /** 关联类型 1-节点 2-用户 */
+  Type: number;
+  /** 策略创建时间 */
+  AddTime: string | null;
+  /** 策略更新时间 */
+  UpdateTime: string | null;
+  /** 部门名称 */
+  Name: string | null;
+  /** 策略绑定时间 */
+  AttachTime: string | null;
+}
+
+/** 企业组织策略列表 */
+declare interface ListPolicyNode {
+  /** 策略创建时间 */
+  AddTime: string | null;
+  /** 策略绑定次数 */
+  AttachedTimes: number | null;
+  /** 策略描述信息 */
+  Description: string | null;
+  /** 策略名称 */
+  PolicyName: string;
+  /** 策略Id */
+  PolicyId: number;
+  /** 策略更新时间 */
+  UpdateTime: string | null;
+  /** 策略类型 1-自定义 2-预设 */
+  Type: number;
+}
+
+/** 查询某个指定SCP策略关联的目标列表 */
+declare interface ListTargetsForPolicyNode {
+  /** scp账号uin或节点Id */
+  Uin: number;
+  /** 关联类型 1-节点关联 2-用户关联 */
+  RelatedType: number;
+  /** 账号或者节点名称 */
+  Name: string | null;
+  /** 绑定时间 */
+  AddTime: string;
+}
+
 /** 我的共享单元列表详情 */
 declare interface ManagerShareUnit {
   /** 共享单元ID。 */
@@ -402,6 +454,22 @@ declare interface AddShareUnitResponse {
   RequestId?: string;
 }
 
+declare interface AttachPolicyRequest {
+  /** 绑定策略目标ID。成员Uin或部门ID */
+  TargetId: number;
+  /** 目标类型。取值范围：NODE-部门、MEMBER-成员 */
+  TargetType: string;
+  /** 策略ID。 */
+  PolicyId: number;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  Type?: string;
+}
+
+declare interface AttachPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindOrganizationMemberAuthAccountRequest {
   /** 成员Uin。 */
   MemberUin: number;
@@ -550,6 +618,24 @@ declare interface CreateOrganizationResponse {
   RequestId?: string;
 }
 
+declare interface CreatePolicyRequest {
+  /** 策略名。长度为1~128个字符，可以包含汉字、英文字母、数字和下划线（_） */
+  Name: string;
+  /** 策略内容。参考CAM策略语法 */
+  Content: string;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  Type: string;
+  /** 策略描述。 */
+  Description?: string;
+}
+
+declare interface CreatePolicyResponse {
+  /** 策略ID */
+  PolicyId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccountRequest {
   /** 成员Uin。 */
   MemberUin: number;
@@ -616,6 +702,18 @@ declare interface DeleteOrganizationRequest {
 }
 
 declare interface DeleteOrganizationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePolicyRequest {
+  /** 需要删除的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取 */
+  PolicyId: number;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  Type?: string;
+}
+
+declare interface DeletePolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -755,7 +853,7 @@ declare interface DescribeOrganizationMemberAuthAccountsRequest {
   Limit: number;
   /** 成员Uin。 */
   MemberUin: number;
-  /** 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935) */
+  /** 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取 */
   PolicyId: number;
 }
 
@@ -920,6 +1018,48 @@ declare interface DescribeOrganizationResponse {
   RequestId?: string;
 }
 
+declare interface DescribePolicyConfigRequest {
+  /** 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取 */
+  OrganizationId: number;
+  /** 策略类型。默认值0，取值范围：0-服务控制策略、1-标签策略 */
+  Type?: number;
+}
+
+declare interface DescribePolicyConfigResponse {
+  /** 开启状态。0-未开启、1-开启 */
+  Status?: number;
+  /** 策略类型。SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  Type?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePolicyRequest {
+  /** 策略Id。 */
+  PolicyId: number;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  PolicyType?: string;
+}
+
+declare interface DescribePolicyResponse {
+  /** 策略Id。 */
+  PolicyId?: number;
+  /** 策略名称。 */
+  PolicyName?: string | null;
+  /** 策略类型。1-自定义 2-预设策略 */
+  Type?: number;
+  /** 策略描述。 */
+  Description?: string | null;
+  /** 策略文档。 */
+  PolicyDocument?: string | null;
+  /** 策略更新时间。 */
+  UpdateTime?: string | null;
+  /** 策略创建时间。 */
+  AddTime?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeShareAreasRequest {
   /** 国际站：en，国内站：zh */
   Lang?: string;
@@ -941,7 +1081,7 @@ declare interface DescribeShareUnitMembersRequest {
   Offset: number;
   /** 限制数目。取值范围：1~50。 */
   Limit: number;
-  /** 搜索关键字。支持成员uin搜索。 */
+  /** 搜索关键字。支持成员Uin搜索。 */
   SearchKey?: string;
 }
 
@@ -998,6 +1138,46 @@ declare interface DescribeShareUnitsResponse {
   RequestId?: string;
 }
 
+declare interface DetachPolicyRequest {
+  /** 解绑策略目标ID。成员Uin或部门ID */
+  TargetId: number;
+  /** 目标类型。取值范围：NODE-部门、MEMBER-成员 */
+  TargetType: string;
+  /** 策略ID。 */
+  PolicyId: number;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  Type?: string;
+}
+
+declare interface DetachPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisablePolicyTypeRequest {
+  /** 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取 */
+  OrganizationId: number;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  PolicyType: string;
+}
+
+declare interface DisablePolicyTypeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnablePolicyTypeRequest {
+  /** 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取 */
+  OrganizationId: number;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  PolicyType: string;
+}
+
+declare interface EnablePolicyTypeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListOrganizationIdentityRequest {
   /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
@@ -1016,6 +1196,74 @@ declare interface ListOrganizationIdentityResponse {
   Total?: number | null;
   /** 条目详情。 */
   Items?: OrgIdentity[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListPoliciesForTargetRequest {
+  /** 账号uin或者节点id。 */
+  TargetId: number;
+  /** 每页数量。默认值是 20，必须大于 0 且小于或等于 200 */
+  Rp?: number;
+  /** 页码。默认值是 1，从 1开始，不能大于 200 */
+  Page?: number;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  PolicyType?: string;
+  /** 搜索关键字。按照策略名称搜索 */
+  Keyword?: string;
+}
+
+declare interface ListPoliciesForTargetResponse {
+  /** 总数。 */
+  TotalNum?: number;
+  /** 目标关联的策略列表。 */
+  List?: ListPoliciesForTarget[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListPoliciesRequest {
+  /** 每页数量。默认值是 20，必须大于 0 且小于或等于 200 */
+  Rp?: number;
+  /** 页码。默认值是 1，从 1开始，不能大于 200 */
+  Page?: number;
+  /** 查询范围。取值范围： All-获取所有策略、QCS-只获取预设策略、Local-只获取自定义策略，默认值：All */
+  Scope?: string;
+  /** 搜索关键字。按照策略名搜索 */
+  Keyword?: string;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  PolicyType?: string;
+}
+
+declare interface ListPoliciesResponse {
+  /** 策略总数 */
+  TotalNum?: number;
+  /** 策略列表数据 */
+  List?: ListPolicyNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTargetsForPolicyRequest {
+  /** 策略Id。 */
+  PolicyId: number;
+  /** 每页数量。默认值是 20，必须大于 0 且小于或等于 200 */
+  Rp?: number;
+  /** 页码。默认值是 1，从 1开始，不能大于 200 */
+  Page?: number;
+  /** 策略类型。取值范围：All-全部、User-用户、Node-节点 */
+  TargetType?: string;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  PolicyType?: string;
+  /** 按照多个策略id搜索，空格隔开。 */
+  Keyword?: string;
+}
+
+declare interface ListTargetsForPolicyResponse {
+  /** 总数。 */
+  TotalNum?: number;
+  /** 指定SCP策略关联目标列表。 */
+  List?: ListTargetsForPolicyNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1106,6 +1354,24 @@ declare interface UpdateOrganizationNodeRequest {
 }
 
 declare interface UpdateOrganizationNodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdatePolicyRequest {
+  /** 需要编辑的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取 */
+  PolicyId: number;
+  /** 策略描述。 */
+  Description?: string;
+  /** 策略内容。参考CAM策略语法 */
+  Content?: string;
+  /** 策略名。长度为1~128个字符，可以包含汉字、英文字母、数字和下划线（_） */
+  Name?: string;
+  /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
+  Type?: string;
+}
+
+declare interface UpdatePolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1463,6 +1729,8 @@ declare interface Organization {
   AddShareUnitMembers(data: AddShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitMembersResponse>;
   /** 添加共享单元资源 {@link AddShareUnitResourcesRequest} {@link AddShareUnitResourcesResponse} */
   AddShareUnitResources(data: AddShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitResourcesResponse>;
+  /** 绑定策略 {@link AttachPolicyRequest} {@link AttachPolicyResponse} */
+  AttachPolicy(data: AttachPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachPolicyResponse>;
   /** 绑定组织成员和组织管理员子账号的授权关系 {@link BindOrganizationMemberAuthAccountRequest} {@link BindOrganizationMemberAuthAccountResponse} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
   /** 取消组织成员和组织管理员子账号的授权关系 {@link CancelOrganizationMemberAuthAccountRequest} {@link CancelOrganizationMemberAuthAccountResponse} */
@@ -1481,6 +1749,8 @@ declare interface Organization {
   CreateOrganizationMemberPolicy(data: CreateOrganizationMemberPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberPolicyResponse>;
   /** 创建组织成员访问策略 {@link CreateOrganizationMembersPolicyRequest} {@link CreateOrganizationMembersPolicyResponse} */
   CreateOrganizationMembersPolicy(data: CreateOrganizationMembersPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMembersPolicyResponse>;
+  /** 创建策略 {@link CreatePolicyRequest} {@link CreatePolicyResponse} */
+  CreatePolicy(data: CreatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyResponse>;
   /** 删除成员账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
   /** 删除企业组织 {@link DeleteOrganizationRequest} {@link DeleteOrganizationResponse} */
@@ -1495,6 +1765,8 @@ declare interface Organization {
   DeleteOrganizationMembersPolicy(data: DeleteOrganizationMembersPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersPolicyResponse>;
   /** 批量删除企业组织节点 {@link DeleteOrganizationNodesRequest} {@link DeleteOrganizationNodesResponse} */
   DeleteOrganizationNodes(data: DeleteOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationNodesResponse>;
+  /** 删除策略 {@link DeletePolicyRequest} {@link DeletePolicyResponse} */
+  DeletePolicy(data: DeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyResponse>;
   /** 删除共享单元 {@link DeleteShareUnitRequest} {@link DeleteShareUnitResponse} */
   DeleteShareUnit(data: DeleteShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitResponse>;
   /** 删除共享单元成员 {@link DeleteShareUnitMembersRequest} {@link DeleteShareUnitMembersResponse} */
@@ -1523,6 +1795,10 @@ declare interface Organization {
   DescribeOrganizationMembers(data: DescribeOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMembersResponse>;
   /** 获取组织节点列表 {@link DescribeOrganizationNodesRequest} {@link DescribeOrganizationNodesResponse} */
   DescribeOrganizationNodes(data: DescribeOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationNodesResponse>;
+  /** 查看策略详情 {@link DescribePolicyRequest} {@link DescribePolicyResponse} */
+  DescribePolicy(data: DescribePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyResponse>;
+  /** 查看企业组织策略配置 {@link DescribePolicyConfigRequest} {@link DescribePolicyConfigResponse} */
+  DescribePolicyConfig(data: DescribePolicyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyConfigResponse>;
   /** 获取可共享地域列表 {@link DescribeShareAreasRequest} {@link DescribeShareAreasResponse} */
   DescribeShareAreas(data?: DescribeShareAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareAreasResponse>;
   /** 获取共享单元成员列表 {@link DescribeShareUnitMembersRequest} {@link DescribeShareUnitMembersResponse} */
@@ -1531,8 +1807,20 @@ declare interface Organization {
   DescribeShareUnitResources(data: DescribeShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitResourcesResponse>;
   /** 获取共享单元列表 {@link DescribeShareUnitsRequest} {@link DescribeShareUnitsResponse} */
   DescribeShareUnits(data: DescribeShareUnitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitsResponse>;
+  /** 解绑策略 {@link DetachPolicyRequest} {@link DetachPolicyResponse} */
+  DetachPolicy(data: DetachPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachPolicyResponse>;
+  /** 禁用策略类型 {@link DisablePolicyTypeRequest} {@link DisablePolicyTypeResponse} */
+  DisablePolicyType(data: DisablePolicyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DisablePolicyTypeResponse>;
+  /** 启用策略类型 {@link EnablePolicyTypeRequest} {@link EnablePolicyTypeResponse} */
+  EnablePolicyType(data: EnablePolicyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<EnablePolicyTypeResponse>;
   /** 获取组织成员访问身份列表 {@link ListOrganizationIdentityRequest} {@link ListOrganizationIdentityResponse} */
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
+  /** 查看策略列表数据 {@link ListPoliciesRequest} {@link ListPoliciesResponse} */
+  ListPolicies(data?: ListPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesResponse>;
+  /** 查询目标关联的策略列表 {@link ListPoliciesForTargetRequest} {@link ListPoliciesForTargetResponse} */
+  ListPoliciesForTarget(data: ListPoliciesForTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesForTargetResponse>;
+  /** 查询某个指定策略关联的目标列表 {@link ListTargetsForPolicyRequest} {@link ListTargetsForPolicyResponse} */
+  ListTargetsForPolicy(data: ListTargetsForPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTargetsForPolicyResponse>;
   /** 移动成员到指定企业组织节点 {@link MoveOrganizationNodeMembersRequest} {@link MoveOrganizationNodeMembersResponse} */
   MoveOrganizationNodeMembers(data: MoveOrganizationNodeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<MoveOrganizationNodeMembersResponse>;
   /** 退出企业组织 {@link QuitOrganizationRequest} {@link QuitOrganizationResponse} */
@@ -1545,6 +1833,8 @@ declare interface Organization {
   UpdateOrganizationMemberEmailBind(data: UpdateOrganizationMemberEmailBindRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationMemberEmailBindResponse>;
   /** 更新企业组织节点 {@link UpdateOrganizationNodeRequest} {@link UpdateOrganizationNodeResponse} */
   UpdateOrganizationNode(data: UpdateOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationNodeResponse>;
+  /** 编辑策略 {@link UpdatePolicyRequest} {@link UpdatePolicyResponse} */
+  UpdatePolicy(data: UpdatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePolicyResponse>;
   /** 更新共享单元 {@link UpdateShareUnitRequest} {@link UpdateShareUnitResponse} */
   UpdateShareUnit(data: UpdateShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateShareUnitResponse>;
   /** 接受加入企业组织邀请 {@link V20181225.AcceptOrganizationInvitationRequest} {@link V20181225.AcceptOrganizationInvitationResponse} */

@@ -1128,16 +1128,6 @@ declare interface DescribeTopicResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTopicStatsOpRequest {
-  /** 主题 */
-  Topic: string;
-}
-
-declare interface DescribeTopicStatsOpResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ImportSourceClusterConsumerGroupsRequest {
   /** 任务ID */
   TaskId: string;
@@ -1389,8 +1379,6 @@ declare interface Trocket {
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
-  /** 运营端查询topicStata {@link DescribeTopicStatsOpRequest} {@link DescribeTopicStatsOpResponse} */
-  DescribeTopicStatsOp(data: DescribeTopicStatsOpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicStatsOpResponse>;
   /** 平滑迁移：导入消费者组列表 {@link ImportSourceClusterConsumerGroupsRequest} {@link ImportSourceClusterConsumerGroupsResponse} */
   ImportSourceClusterConsumerGroups(data: ImportSourceClusterConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterConsumerGroupsResponse>;
   /** 平滑迁移：导入topic列表 {@link ImportSourceClusterTopicsRequest} {@link ImportSourceClusterTopicsResponse} */

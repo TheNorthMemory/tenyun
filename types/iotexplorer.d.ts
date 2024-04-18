@@ -70,6 +70,32 @@ declare interface BindProductInfo {
   ProductOwnerName: string | null;
 }
 
+/** 云存 AI 服务任务信息 */
+declare interface CloudStorageAIServiceTask {
+  /** 云存 AI 服务任务 ID */
+  TaskId?: string;
+  /** 产品 ID */
+  ProductId?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 对应云存视频的起始时间 */
+  StartTime?: number;
+  /** 对应云存视频的结束时间 */
+  EndTime?: number;
+  /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空） */
+  Status?: number;
+  /** 任务结果 */
+  Result?: string;
+  /** 云存 AI 服务类型 */
+  ServiceType?: string | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 最后更新时间 */
+  UpdateTime?: number | null;
+}
+
 /** 云存事件 */
 declare interface CloudStorageEvent {
   /** 事件起始时间（Unix 时间戳，秒级 */
@@ -1270,6 +1296,66 @@ declare interface DescribeBindedProductsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudStorageAIServiceCallbackRequest {
+  /** 产品ID */
+  ProductId: string;
+}
+
+declare interface DescribeCloudStorageAIServiceCallbackResponse {
+  /** 推送类型。http：HTTP 回调 */
+  Type?: string;
+  /** HTTP 回调 URL */
+  CallbackUrl?: string | null;
+  /** HTTP 回调鉴权 Token */
+  CallbackToken?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageAIServiceRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存 AI 服务类型。可选值：PackageDetect */
+  ServiceType: string;
+}
+
+declare interface DescribeCloudStorageAIServiceResponse {
+  /** 启用状态 */
+  Enabled?: boolean;
+  /** 视频分析区域 */
+  ROI?: string;
+  /** 云存 AI 服务的配置参数 */
+  Config?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageAIServiceTasksRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存 AI 服务类型。可选值：PackageDetect */
+  ServiceType: string;
+  /** 分页拉取数量 */
+  Limit: number;
+  /** 分页拉取偏移 */
+  Offset?: number;
+  /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；不传则查询全部状态的任务） */
+  Status?: number;
+}
+
+declare interface DescribeCloudStorageAIServiceTasksResponse {
+  /** 任务列表 */
+  Tasks?: CloudStorageAIServiceTask[];
+  /** 任务数量 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudStorageDateRequest {
   /** 产品ID */
   ProductId: string;
@@ -1908,6 +1994,20 @@ declare interface DescribePositionFenceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProductCloudStorageAIServiceRequest {
+  /** 产品ID */
+  ProductId: string;
+}
+
+declare interface DescribeProductCloudStorageAIServiceResponse {
+  /** 开通状态 */
+  Enabled?: boolean;
+  /** 当前账号是否可开通 */
+  Available?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProjectRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2376,6 +2476,40 @@ declare interface ListTopicPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloudStorageAIServiceCallbackRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 推送类型。http：HTTP 回调 */
+  Type: string;
+  /** HTTP 回调 URL */
+  CallbackUrl?: string;
+  /** HTTP 回调鉴权 Token */
+  CallbackToken?: string;
+}
+
+declare interface ModifyCloudStorageAIServiceCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudStorageAIServiceRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存 AI 服务类型。可选值：PackageDetect */
+  ServiceType: string;
+  /** 启用状态 */
+  Enabled?: boolean;
+  /** 视频分析区域 */
+  ROI?: string;
+}
+
+declare interface ModifyCloudStorageAIServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFenceBindRequest {
   /** 围栏Id */
   FenceId: number;
@@ -2478,6 +2612,18 @@ declare interface ModifyPositionSpaceRequest {
 }
 
 declare interface ModifyPositionSpaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProductCloudStorageAIServiceRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 开通状态 */
+  Enabled?: boolean;
+}
+
+declare interface ModifyProductCloudStorageAIServiceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2893,6 +3039,12 @@ declare interface Iotexplorer {
   DescribeBindedProducts(data: DescribeBindedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindedProductsResponse>;
   /** 获取设备云存服务详情 {@link DescribeCloudStorageRequest} {@link DescribeCloudStorageResponse} */
   DescribeCloudStorage(data: DescribeCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageResponse>;
+  /** 查询设备云存AI分析服务 {@link DescribeCloudStorageAIServiceRequest} {@link DescribeCloudStorageAIServiceResponse} */
+  DescribeCloudStorageAIService(data: DescribeCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageAIServiceResponse>;
+  /** 查询云存AI分析回调配置 {@link DescribeCloudStorageAIServiceCallbackRequest} {@link DescribeCloudStorageAIServiceCallbackResponse} */
+  DescribeCloudStorageAIServiceCallback(data: DescribeCloudStorageAIServiceCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageAIServiceCallbackResponse>;
+  /** 查询设备云存AI分析任务列表 {@link DescribeCloudStorageAIServiceTasksRequest} {@link DescribeCloudStorageAIServiceTasksResponse} */
+  DescribeCloudStorageAIServiceTasks(data: DescribeCloudStorageAIServiceTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageAIServiceTasksResponse>;
   /** 获取具有云存的日期 {@link DescribeCloudStorageDateRequest} {@link DescribeCloudStorageDateResponse} */
   DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
   /** 拉取云存事件列表 {@link DescribeCloudStorageEventsRequest} {@link DescribeCloudStorageEventsResponse} */
@@ -2955,6 +3107,8 @@ declare interface Iotexplorer {
   DescribePackageConsumeTasks(data: DescribePackageConsumeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTasksResponse>;
   /** 获取围栏列表 {@link DescribePositionFenceListRequest} {@link DescribePositionFenceListResponse} */
   DescribePositionFenceList(data: DescribePositionFenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePositionFenceListResponse>;
+  /** 查询产品云存AI分析服务 {@link DescribeProductCloudStorageAIServiceRequest} {@link DescribeProductCloudStorageAIServiceResponse} */
+  DescribeProductCloudStorageAIService(data: DescribeProductCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductCloudStorageAIServiceResponse>;
   /** 查询项目详情 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
   DescribeProject(data: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
   /** 获取位置空间中围栏告警事件列表 {@link DescribeSpaceFenceEventListRequest} {@link DescribeSpaceFenceEventListResponse} */
@@ -3007,6 +3161,10 @@ declare interface Iotexplorer {
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
   /** 获取Topic列表 {@link ListTopicPolicyRequest} {@link ListTopicPolicyResponse} */
   ListTopicPolicy(data: ListTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopicPolicyResponse>;
+  /** 修改设备云存AI分析服务 {@link ModifyCloudStorageAIServiceRequest} {@link ModifyCloudStorageAIServiceResponse} */
+  ModifyCloudStorageAIService(data: ModifyCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudStorageAIServiceResponse>;
+  /** 修改云存AI分析回调配置 {@link ModifyCloudStorageAIServiceCallbackRequest} {@link ModifyCloudStorageAIServiceCallbackResponse} */
+  ModifyCloudStorageAIServiceCallback(data: ModifyCloudStorageAIServiceCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudStorageAIServiceCallbackResponse>;
   /** 更新围栏绑定信息 {@link ModifyFenceBindRequest} {@link ModifyFenceBindResponse} */
   ModifyFenceBind(data: ModifyFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFenceBindResponse>;
   /** 修改LoRa自定义频点 {@link ModifyLoRaFrequencyRequest} {@link ModifyLoRaFrequencyResponse} */
@@ -3019,6 +3177,8 @@ declare interface Iotexplorer {
   ModifyPositionFence(data?: ModifyPositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPositionFenceResponse>;
   /** 更新位置空间 {@link ModifyPositionSpaceRequest} {@link ModifyPositionSpaceResponse} */
   ModifyPositionSpace(data: ModifyPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPositionSpaceResponse>;
+  /** 修改产品云存AI分析服务 {@link ModifyProductCloudStorageAIServiceRequest} {@link ModifyProductCloudStorageAIServiceResponse} */
+  ModifyProductCloudStorageAIService(data: ModifyProductCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductCloudStorageAIServiceResponse>;
   /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
   /** 更新位置空间产品属性 {@link ModifySpacePropertyRequest} {@link ModifySpacePropertyResponse} */

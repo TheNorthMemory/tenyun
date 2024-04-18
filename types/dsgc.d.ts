@@ -274,6 +274,14 @@ declare interface CategoryRuleStatistic {
   CategoryName: string;
 }
 
+/** 云数据库资源项 */
+declare interface CloudResourceItem {
+  /** 资源所处地域。 */
+  Region: string;
+  /** 云上资源列表。 */
+  Items: DspaCloudResourceMeta[];
+}
+
 /** 模板详情 */
 declare interface ComplianceGroupDetail {
   /** 模板id */
@@ -316,6 +324,14 @@ declare interface CosAsset {
   FileNums?: number | null;
   /** 敏感文件的个数 */
   SensitiveFileNums?: number | null;
+}
+
+/** cos桶资源项 */
+declare interface CosBucketItem {
+  /** 资源所处地域。 */
+  Region: string;
+  /** COS桶列表。 */
+  Buckets: string[];
 }
 
 /** COS资源的桶信息 */
@@ -2081,12 +2097,14 @@ declare interface CreateDSPAComplianceRulesResponse {
 }
 
 declare interface CreateDSPACosMetaResourcesRequest {
-  /** 资源所处地域。 */
-  ResourceRegion: string;
   /** DSPA实例ID。 */
   DspaId: string;
+  /** 资源所处地域。 */
+  ResourceRegion?: string;
   /** COS桶列表 */
-  Buckets: string[];
+  Buckets?: string[];
+  /** 必填，COS资源列表 */
+  CosBucketItems?: CosBucketItem[];
 }
 
 declare interface CreateDSPACosMetaResourcesResponse {
@@ -2100,13 +2118,15 @@ declare interface CreateDSPADbMetaResourcesRequest {
   /** 资源类型，支持：cdb（云数据库 MySQL）、dcdb（TDSQL MySQL版）、mariadb（云数据库 MariaDB）、postgres（云数据库 PostgreSQL）、cynosdbpg（TDSQL-C PostgreSQL版）、cynosdbmysql（TDSQL-C MySQL版） */
   MetaType: string;
   /** 资源所处地域。 */
-  ResourceRegion: string;
+  ResourceRegion?: string;
   /** 用来标记本次更新是否已经是最后一次，可选值：continue（后续还需要更新）、finished（本次是最后一次更新）。 */
-  UpdateStatus: string;
+  UpdateStatus?: string;
   /** 本次更新的ID号，用来标记一次完整的更新过程。 */
-  UpdateId: string;
+  UpdateId?: string;
   /** 云上资源列表。 */
-  Items: DspaCloudResourceMeta[];
+  Items?: DspaCloudResourceMeta[];
+  /** 必填，云数据库资源列表。 */
+  CloudResourceItems?: CloudResourceItem[];
 }
 
 declare interface CreateDSPADbMetaResourcesResponse {

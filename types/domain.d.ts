@@ -694,6 +694,14 @@ declare interface DescribeReservedBidInfoResponse {
   UpUser?: string;
   /** 竞价详细数据 */
   BidList?: ReserveBidInfo[] | null;
+  /** 竞价结束时间 */
+  BidEndTime?: string;
+  /** 是否领先 */
+  IsUp?: boolean;
+  /** 下次出价金额 */
+  NextPrice?: number;
+  /** 状态：1. 等待竞价 2.竞价中 3.竞价结束 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

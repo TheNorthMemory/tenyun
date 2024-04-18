@@ -1761,6 +1761,8 @@ declare namespace V20180525 {
     MinNodesNum?: number | null;
     /** 期望的节点数量 */
     DesiredNodesNum?: number | null;
+    /** 运行时描述 */
+    RuntimeConfig?: RuntimeConfig | null;
     /** 节点池osName */
     NodePoolOs?: string | null;
     /** 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值) */

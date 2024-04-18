@@ -132,6 +132,14 @@ declare interface Event {
   Subject: string;
   /** 事件发生的毫秒时间戳，time.Now().UnixNano()/1e6 */
   Time?: number;
+  /** 事件的地域信息，没有则默认是EB所在的地域信息 */
+  Region?: string;
+  /** 用于描述事件状态，非必须，默认是"" */
+  Status?: string;
+  /** 事件的唯一id，用户侧主动上传则需要保证风格一致 */
+  Id?: string;
+  /** 标签列表 */
+  TagList?: Tag[];
 }
 
 /** 事件集信息 */
@@ -300,6 +308,14 @@ declare interface TDMQParams {
   ClusterType?: string | null;
   /** 集群支撑网接入点 */
   ClusterEndPoint?: string | null;
+}
+
+/** 事件总线资源标签 */
+declare interface Tag {
+  /** 标签名称 */
+  Key: string;
+  /** 标签值 */
+  Value: string;
 }
 
 /** Target信息 */

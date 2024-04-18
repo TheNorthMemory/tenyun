@@ -908,6 +908,18 @@ declare interface OccupiedSeal {
   AuthorizedUsers: AuthorizedUser[] | null;
 }
 
+/** 企业套餐余额情况 */
+declare interface OrgBillSummary {
+  /** 套餐总数 */
+  Total?: number;
+  /** 套餐使用数 */
+  Used?: number;
+  /** 套餐剩余数 */
+  Available?: number;
+  /** 套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  QuotaType?: string;
+}
+
 /** 机构信息 */
 declare interface OrganizationInfo {
   /** 机构在平台的编号，内部字段，暂未开放 */
@@ -1186,6 +1198,22 @@ declare interface StaffRole {
   RoleId?: string | null;
   /** 角色名称。 */
   RoleName?: string | null;
+}
+
+/** 子企业套餐使用情况 */
+declare interface SubOrgBillSummary {
+  /** 子企业名称 */
+  OrganizationName?: string;
+  /**  */
+  Usage?: SubOrgBillUsage[];
+}
+
+/** 集团子企业使用集团主企业的套餐使用情况 */
+declare interface SubOrgBillUsage {
+  /** 套餐使用数 */
+  Used?: number;
+  /** 套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  QuotaType?: string;
 }
 
 /** 创建/修改员工成功返回的信息现在支持saas/企微/H5端进行加入。 */
@@ -2530,6 +2558,26 @@ declare interface DescribeBillUsageDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBillUsageRequest {
+  /** 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于90天 */
+  StartTime: string;
+  /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于90天 */
+  EndTime: string;
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  QuotaType?: string;
+  /** 是否展示集团子企业的明细，默认否 */
+  DisplaySubEnterprise?: boolean;
+}
+
+declare interface DescribeBillUsageResponse {
+  /** 企业套餐余额及使用情况 */
+  Summary?: OrgBillSummary[];
+  /** 集团子企业套餐使用情况 */
+  SubOrgSummary?: SubOrgBillSummary[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCancelFlowsTaskRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
@@ -3307,6 +3355,8 @@ declare interface Ess {
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
   /** 撤销企业员工的印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
+  /** 查询企业套餐使用情况 {@link DescribeBillUsageRequest} {@link DescribeBillUsageResponse} */
+  DescribeBillUsage(data: DescribeBillUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageResponse>;
   /** 查询企业计费使用情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 查询批量撤销签署流程任务结果 {@link DescribeCancelFlowsTaskRequest} {@link DescribeCancelFlowsTaskResponse} */

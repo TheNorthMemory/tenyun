@@ -2093,35 +2093,35 @@ declare interface Topic {
 /** 主题详情 */
 declare interface TopicDetail {
   /** 主题名称 */
-  TopicName: string;
+  TopicName?: string;
   /** 主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 分区数 */
-  PartitionNum: number;
+  PartitionNum?: number;
   /** 副本数 */
-  ReplicaNum: number;
+  ReplicaNum?: number;
   /** 备注 */
-  Note: string | null;
+  Note?: string | null;
   /** 创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 是否开启ip鉴权白名单，true表示开启，false表示不开启 */
-  EnableWhiteList: boolean;
+  EnableWhiteList?: boolean;
   /** ip白名单中ip个数 */
-  IpWhiteListCount: number;
+  IpWhiteListCount?: number;
   /** 数据备份cos bucket: 转存到cos 的bucket地址 */
-  ForwardCosBucket: string | null;
+  ForwardCosBucket?: string | null;
   /** 数据备份cos 状态： 1 不开启数据备份，0 开启数据备份 */
-  ForwardStatus: number;
+  ForwardStatus?: number;
   /** 数据备份到cos的周期频率 */
-  ForwardInterval: number;
+  ForwardInterval?: number;
   /** 高级配置 */
-  Config: Config | null;
+  Config?: Config | null;
   /** 消息保留时间配置(用于动态配置变更记录) */
-  RetentionTimeConfig: TopicRetentionTimeConfigRsp | null;
+  RetentionTimeConfig?: TopicRetentionTimeConfigRsp | null;
   /** 0:正常，1：已删除，2：删除中 */
-  Status: number | null;
+  Status?: number | null;
   /** 标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** topic 流量排行 */
