@@ -3325,7 +3325,7 @@ declare interface Dts {
   DescribeModifyCheckSyncJobResult(data: DescribeModifyCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyCheckSyncJobResultResponse>;
   /** 查询kafka offset {@link DescribeOffsetByTimeRequest} {@link DescribeOffsetByTimeResponse} */
   DescribeOffsetByTime(data: DescribeOffsetByTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOffsetByTimeResponse>;
-  /** 查看校验结果 {@link DescribeSubscribeCheckJobRequest} {@link DescribeSubscribeCheckJobResponse} */
+  /** 查询订阅校验结果 {@link DescribeSubscribeCheckJobRequest} {@link DescribeSubscribeCheckJobResponse} */
   DescribeSubscribeCheckJob(data: DescribeSubscribeCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeCheckJobResponse>;
   /** 查询订阅任务详情 {@link DescribeSubscribeDetailRequest} {@link DescribeSubscribeDetailResponse} */
   DescribeSubscribeDetail(data: DescribeSubscribeDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeDetailResponse>;
@@ -3391,7 +3391,7 @@ declare interface Dts {
   ResizeSyncJob(data: ResizeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeSyncJobResponse>;
   /** 重试迁移任务 {@link ResumeMigrateJobRequest} {@link ResumeMigrateJobResponse} */
   ResumeMigrateJob(data: ResumeMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeMigrateJobResponse>;
-  /** 恢复订阅任务 {@link ResumeSubscribeRequest} {@link ResumeSubscribeResponse} */
+  /** 重试订阅任务 {@link ResumeSubscribeRequest} {@link ResumeSubscribeResponse} */
   ResumeSubscribe(data: ResumeSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSubscribeResponse>;
   /** 重试同步任务 {@link ResumeSyncJobRequest} {@link ResumeSyncJobResponse} */
   ResumeSyncJob(data: ResumeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSyncJobResponse>;

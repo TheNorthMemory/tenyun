@@ -3900,134 +3900,6 @@ declare interface TaskExtInfo {
   Value?: string;
 }
 
-/** 任务信息数据 */
-declare interface TaskInfoData {
-  /** 任务Id */
-  TaskId: string | null;
-  /** 任务名称 */
-  TaskName: string | null;
-  /** 工作流id */
-  WorkflowId: string | null;
-  /** 工作流名称 */
-  WorkflowName: string | null;
-  /** 项目名称 */
-  ProjectName: string | null;
-  /** 项目标识 */
-  ProjectIdent: string | null;
-  /** 任务状态，'Y','F','O','T','INVALID' 分别表示调度中、已停止、已暂停、停止中、已失效 */
-  Status: string | null;
-  /** 项目id */
-  ProjectId: string | null;
-  /** 文件夹名称 */
-  FolderName: string | null;
-  /** 文件夹id */
-  FolderId: string | null;
-  /** 负责人 */
-  InCharge: string | null;
-  /** 跨工作流虚拟任务标识；true标识跨工作流任务；false标识本工作流任务 */
-  VirtualFlag: boolean | null;
-  /** 延时实例生成时间(延时调度)，转换为分钟 */
-  DelayTime: number | null;
-  /** crontab表达式 */
-  CrontabExpression: string | null;
-  /** 创建时间 */
-  CreateTime: string | null;
-  /** 更新时间 */
-  LastUpdate: string | null;
-  /** 生效日期 */
-  StartTime: string | null;
-  /** 结束日期 */
-  EndTime: string | null;
-  /** 执行时间左闭区间 */
-  ExecutionStartTime: string | null;
-  /** 执行时间右闭区间 */
-  ExecutionEndTime: string | null;
-  /** 周期类型 */
-  CycleType: number | null;
-  /** 步长 */
-  CycleStep: number | null;
-  /** 延时执行时间（延时执行) 对应为 开始时间 状态为分钟 */
-  StartupTime: number | null;
-  /** 重试等待时间,单位分钟 */
-  RetryWait: number | null;
-  /** 是否可重试 */
-  Retriable: number | null;
-  /** 调度扩展信息 */
-  TaskAction: string | null;
-  /** 运行次数限制 */
-  TryLimit: number | null;
-  /** 运行优先级 */
-  RunPriority: number | null;
-  /** 任务类型 */
-  TaskType: number | null;
-  /** 指定的运行节点 */
-  BrokerIp: string | null;
-  /** 集群 */
-  ClusterId: string | null;
-  /** 最小数据时间 */
-  MinDateTime: string | null;
-  /** 最大数据时间 */
-  MaxDateTime: string | null;
-  /** 是否自身依赖 是1 否2 并行3 */
-  SelfDepend: number | null;
-  /** 扩展属性 */
-  TaskExt: TaskExtInfo[] | null;
-  /** 任务备注 */
-  Notes: string | null;
-  /** 队列 */
-  YarnQueue: string | null;
-  /** 任务版本是否已提交 */
-  Submit: boolean | null;
-  /** 最新调度计划变更时间 仅生产态 */
-  LastSchedulerCommitTime: string | null;
-  /** 仅生产态存储于生产态序列化任务信息, 减少base CPU重复密集计算 */
-  NormalizedJobStartTime: string | null;
-  /** 源数据源 */
-  SourceServer: string | null;
-  /** 创建者 */
-  Creater: string | null;
-  /** 分支，依赖关系，and/or, 默认and */
-  DependencyRel: string | null;
-  /** 是否支持工作流依赖 yes / no 默认 no */
-  DependencyWorkflow: string | null;
-  /** 任务参数 */
-  Params: ParamInfo[] | null;
-  /** 最后修改的人 */
-  UpdateUser: string | null;
-  /** 最后修改的时间 */
-  UpdateTime: string | null;
-  /** 最后修改的人Id */
-  UpdateUserId: string | null;
-  /** 调度计划 */
-  SchedulerDesc: string | null;
-  /** 资源组信息 */
-  ResourceGroup: string | null;
-  /** 版本提交说明 */
-  VersionDesc: string | null;
-  /** 真实工作流Id */
-  RealWorkflowId: string | null;
-  /** 目标数据源 */
-  TargetServer: string | null;
-  /** 依赖配置 */
-  DependencyConfigs: DependencyConfig[] | null;
-  /** 虚拟任务状态1 */
-  VirtualTaskStatus: string | null;
-  /** 虚拟任务id */
-  VirtualTaskId: string | null;
-}
-
-/** 任务分页数据查询 */
-declare interface TaskInfoDataPage {
-  /** 页号 */
-  PageNumber: number;
-  /** 页大小 */
-  PageSize: number;
-  /** 任务集合信息 */
-  Items: TaskInfoData[];
-  /** 总页数1 */
-  TotalCount: number;
-}
-
 /** 任务属性 */
 declare interface TaskInnerInfo {
   /** 任务ID */
@@ -6426,24 +6298,6 @@ declare interface DescribeFunctionTypesResponse {
   RequestId?: string;
 }
 
-declare interface DescribeInstanceByCycleReportRequest {
-  /** 周期类型 */
-  Type: string;
-  /** 项目ID */
-  ProjectId: string;
-  /** 开始日期 */
-  StartTime?: string;
-  /** 结束日期 */
-  EndTime?: string;
-}
-
-declare interface DescribeInstanceByCycleReportResponse {
-  /** 实例周期统计 */
-  Data?: TaskByStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeInstanceByCycleRequest {
   /** 1 */
   ProjectId?: string;
@@ -7910,22 +7764,6 @@ declare interface DescribeTaskByStatusReportResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTaskDetailRequest {
-  /** 项目Id */
-  ProjectId: string;
-  /** 任务ID */
-  TaskId: string;
-  /** 任务告警状态 */
-  TaskAlarmStatus?: number;
-}
-
-declare interface DescribeTaskDetailResponse {
-  /** 任务详情1 */
-  Data: TaskInfoData | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTaskLockStatusRequest {
   /** 任务id */
   TaskId: string;
@@ -7970,24 +7808,6 @@ declare interface DescribeTaskScriptRequest {
 declare interface DescribeTaskScriptResponse {
   /** 任务脚本内容 */
   Data?: TaskScriptContent | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeTasksByPageRequest {
-  /** 项目Id */
-  ProjectId: string;
-  /** 工作流ID */
-  WorkflowId: string;
-  /** 页码，默认1 */
-  PageNumber?: number;
-  /** 页大小，默认10 */
-  PageSize?: number;
-}
-
-declare interface DescribeTasksByPageResponse {
-  /** 无1 */
-  Data: TaskInfoDataPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8916,7 +8736,7 @@ declare interface ModifyTaskLinksRequest {
   WorkflowId: string;
   /** 父任务工作流 */
   RealFromWorkflowId: string;
-  /** 父子任务之间的依赖关系 /** 正常的依赖父任务全部实例 启用* normal_all(1), normal_first_one(2),// 正常的依赖父任务 第一个 normal_last_one(3),// 正常的依赖父任务 最后一个 normal_any_one(4),// 正常的依赖父任务 任意一个 normal_specific_one(5),// 正常的依赖父任务 指定的一个 self(6),// 自身依赖，可能用不到 /** // 非正常的依赖父任务全部实例 启用（向前依赖 明天）* non_normal_all_forward(11), non_normal_first_one_forward(12),// 非正常的依赖父任务 第一个 non_normal_last_one_forward(13),// 非正常的依赖父任务 最后一个 non_normal_any_one_forward(14),// 非正常的依赖父任务 任意一个 non_normal_specific_one_forward(15),// 非正常的依赖父任务 指定一个 /** // 非正常的依赖父任务全部实例 启用（向后依赖 昨天） * non_normal_all_backward(21), non_normal_first_one_backward(22),// 非正常的依赖父任务 第一个 non_normal_last_one_backward(23),// 非正常的依赖父任务 最后一个 non_normal_any_one_backward(24),// 非正常的依赖父任务 任意一个 non_normal_specific_one_backward(25);// 非正常的依赖父任务 指定一个 */
+  /** 父子任务之间的依赖关系 */
   LinkDependencyType?: string;
 }
 
@@ -9837,8 +9657,6 @@ declare interface Wedata {
   DescribeFunctionTypes(data?: DescribeFunctionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionTypesResponse>;
   /** 周期实例统计 {@link DescribeInstanceByCycleRequest} {@link DescribeInstanceByCycleResponse} */
   DescribeInstanceByCycle(data?: DescribeInstanceByCycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByCycleResponse>;
-  /** 实例状态周期增长趋势 {@link DescribeInstanceByCycleReportRequest} {@link DescribeInstanceByCycleReportResponse} */
-  DescribeInstanceByCycleReport(data: DescribeInstanceByCycleReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByCycleReportResponse>;
   /** 获取日志详情页面 {@link DescribeInstanceLastLogRequest} {@link DescribeInstanceLastLogResponse} */
   DescribeInstanceLastLog(data: DescribeInstanceLastLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLastLogResponse>;
   /** 获取离线运维实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
@@ -9973,16 +9791,12 @@ declare interface Wedata {
   DescribeTaskByCycleReport(data: DescribeTaskByCycleReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByCycleReportResponse>;
   /** 任务状态趋势 {@link DescribeTaskByStatusReportRequest} {@link DescribeTaskByStatusReportResponse} */
   DescribeTaskByStatusReport(data: DescribeTaskByStatusReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByStatusReportResponse>;
-  /** 查询任务具体详情【Beta版本】 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
-  DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 查看任务锁状态信息 {@link DescribeTaskLockStatusRequest} {@link DescribeTaskLockStatusResponse} */
   DescribeTaskLockStatus(data: DescribeTaskLockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLockStatusResponse>;
   /** 分页查询任务运行历史 {@link DescribeTaskRunHistoryRequest} {@link DescribeTaskRunHistoryResponse} */
   DescribeTaskRunHistory(data: DescribeTaskRunHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRunHistoryResponse>;
   /** 查询任务脚本 {@link DescribeTaskScriptRequest} {@link DescribeTaskScriptResponse} */
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
-  /** 根据工作流分页查询任务【Beta版本】 {@link DescribeTasksByPageRequest} {@link DescribeTasksByPageResponse} */
-  DescribeTasksByPage(data: DescribeTasksByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksByPageResponse>;
   /** 查询规则模板维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
   DescribeTemplateDimCount(data?: DescribeTemplateDimCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateDimCountResponse>;
   /** 实例运维-获取第三方运行日志 {@link DescribeThirdTaskRunLogRequest} {@link DescribeThirdTaskRunLogResponse} */

@@ -550,6 +550,8 @@ declare interface LiveStreamMonitorInfo {
   AllowMonitorReport?: number | null;
   /** 是否开启格式诊断 */
   AiFormatDiagnose?: number | null;
+  /** 是否开启内容质检。 */
+  AiQualityControl?: number | null;
 }
 
 /** 直播监播功能输入流信息 */
@@ -1829,6 +1831,8 @@ declare interface CreateLiveStreamMonitorRequest {
   AllowMonitorReport?: number;
   /** 是否开启格式诊断。 */
   AiFormatDiagnose?: number;
+  /** 是否开启内容质检。 */
+  AiQualityControl?: number;
 }
 
 declare interface CreateLiveStreamMonitorResponse {
@@ -4097,6 +4101,8 @@ declare interface ModifyLiveStreamMonitorRequest {
   AllowMonitorReport?: number;
   /** 是否开启格式诊断。 */
   AiFormatDiagnose?: number;
+  /** 是否开启内容质检。 */
+  AiQualityControl?: number;
 }
 
 declare interface ModifyLiveStreamMonitorResponse {

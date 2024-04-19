@@ -230,6 +230,8 @@ declare interface BGPInstance {
   BasicPlusFlag?: number | null;
   /** 是否是商业模式优化-普惠版 */
   PlanCntFlag?: number | null;
+  /** 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 */
+  TransRegionFlag?: number | null;
   /** 是否为超级高防包 */
   SuperPackFlag?: number | null;
 }
@@ -2333,6 +2335,8 @@ declare interface DescribeListBGPInstancesRequest {
   FilterBasicPlusFlag?: number;
   /** 是否商业模式优化-普惠版 0: 包含商业模式优化-普惠版 1: 只查询商业模式优化-普惠版 */
   FilterPlanCntFlag?: number;
+  /** 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 3: 包含全部 */
+  FilterTransRegionFlag?: number;
 }
 
 declare interface DescribeListBGPInstancesResponse {

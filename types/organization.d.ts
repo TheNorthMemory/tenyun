@@ -707,7 +707,7 @@ declare interface DeleteOrganizationResponse {
 }
 
 declare interface DeletePolicyRequest {
-  /** 需要删除的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取 */
+  /** 需要删除的策略ID。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取 */
   PolicyId: number;
   /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
   Type?: string;
@@ -1359,7 +1359,7 @@ declare interface UpdateOrganizationNodeResponse {
 }
 
 declare interface UpdatePolicyRequest {
-  /** 需要编辑的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取 */
+  /** 需要编辑的策略ID。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取 */
   PolicyId: number;
   /** 策略描述。 */
   Description?: string;

@@ -4259,8 +4259,12 @@ declare interface DescribePrometheusTargetsTMPRequest {
   ClusterId: string;
   /** 集群类型(可不填) */
   ClusterType?: string;
-  /** 过滤条件，当前支持Name=stateValue=up, down, unknown */
+  /** 过滤条件，支持Name=ServiceMonitor/PodMonitor/Probe/RawJob/Job, Value为采集配置名称；Name=Health, Value=up, down, unknown；Name=EndPoint, Value为EndPoint地址 */
   Filters?: Filter[];
+  /** targets偏移量，默认为0 */
+  Offset?: number;
+  /** targets返回数量，默认为20，最大值200 */
+  Limit?: number;
 }
 
 declare interface DescribePrometheusTargetsTMPResponse {

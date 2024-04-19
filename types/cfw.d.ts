@@ -680,6 +680,18 @@ declare interface NatInstanceInfo {
   Zone?: string | null;
   /** 实例备所在可用区 */
   ZoneBak?: string | null;
+  /** 引擎预约升级时间 */
+  ReserveTime?: string | null;
+  /** 引擎预约升级版本 */
+  ReserveVersion?: string | null;
+  /** 引擎预约升级版本状态 */
+  ReserveVersionState?: string | null;
+  /** 弹性开关1 打开0 关闭 */
+  ElasticSwitch?: number | null;
+  /** 弹性带宽，单位Mbps */
+  ElasticBandwidth?: number | null;
+  /** 是否首次开通按量付费1 是0 不是 */
+  IsFirstAfterPay?: number | null;
 }
 
 /** NAT防火墙开关列表数据 */
@@ -1056,6 +1068,14 @@ declare interface TLogInfo {
   BruteForceNum: number;
 }
 
+/** 标签信息 */
+declare interface TagInfo {
+  /** 目标key */
+  TagKey?: string;
+  /** 目标值 */
+  TagValue?: string;
+}
+
 /** 地址模板列表数据 */
 declare interface TemplateListInfo {
   /** 模板ID */
@@ -1240,6 +1260,18 @@ declare interface VpcFwInstanceInfo {
   UpdateEnable?: number | null;
   /** 引擎运行模式，Normal:正常, OnlyRoute:透明模式 */
   TrafficMode?: string | null;
+  /** 引擎预约升级时间 */
+  ReserveTime?: string | null;
+  /** 预约引擎升级版本 */
+  ReserveVersion?: string | null;
+  /** 引擎预约升级版本状态 */
+  ReserveVersionState?: string | null;
+  /** 弹性开关 1打开 0关闭 */
+  ElasticSwitch?: number | null;
+  /** 弹性带宽，单位Mbps */
+  ElasticBandwidth?: number | null;
+  /** 是否首次开通按量付费1 是0 不是 */
+  IsFirstAfterPay?: number | null;
 }
 
 /** VPC防火墙实例信息 */
@@ -2763,6 +2795,12 @@ declare interface ExpandCfwVerticalRequest {
   Width: number;
   /** 防火墙实例id */
   CfwInstance?: string;
+  /** 弹性开关 1打开 0 关闭 */
+  ElasticSwitch?: number;
+  /** 弹性带宽上限，单位Mbps */
+  ElasticBandwidth?: number;
+  /** 按量计费标签 */
+  Tags?: TagInfo[];
 }
 
 declare interface ExpandCfwVerticalResponse {

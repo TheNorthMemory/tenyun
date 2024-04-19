@@ -446,7 +446,7 @@ declare interface Load {
   LoadSpec?: LoadSpec | null;
   /** 压力来源 */
   VpcLoadDistribution?: VpcLoadDistribution | null;
-  /** 压力分布 */
+  /** 多地域压力分布 */
   GeoRegionsLoadDistribution?: GeoRegionsLoadItem[] | null;
 }
 
@@ -1431,11 +1431,13 @@ declare interface DescribeProjectsResponse {
 }
 
 declare interface DescribeRegionsRequest {
+  /** 通过该参数指定不同压测网络环境，在不同网络环境下，PTS可用的地域不一样 */
+  LoadType?: number;
 }
 
 declare interface DescribeRegionsResponse {
   /** 地域数组 */
-  RegionSet: RegionDetail[] | null;
+  RegionSet?: RegionDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

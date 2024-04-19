@@ -1052,6 +1052,76 @@ declare interface ServerlessDi {
   DiSourceTke?: DiSourceTke;
 }
 
+/** 索引元数据字段 */
+declare interface ServerlessIndexMetaField {
+  /** 索引所属集群APP ID */
+  AppId?: number | null;
+  /** 索引名 */
+  IndexName?: string | null;
+  /** 索引文档数 */
+  IndexDocs?: number | null;
+  /** 索引存储大小，单位Byte */
+  IndexStorage?: number | null;
+  /** 索引创建时间 */
+  IndexCreateTime?: string | null;
+  /** 索引实例ID */
+  InstanceId?: string | null;
+  /** 索引自治字段 */
+  IndexOptionsField?: ServerlessIndexOptionsField | null;
+  /** 索引配置字段 */
+  IndexSettingsField?: ServerlessIndexSettingsField | null;
+  /** 索引所属连接相关信息 */
+  IndexNetworkField?: ServerlessIndexNetworkField | null;
+  /** Kibana公网域名 */
+  KibanaUrl?: string | null;
+  /** Kibana内网域名 */
+  KibanaPrivateUrl?: string | null;
+  /** 索引内网访问地址 */
+  IndexAccessUrl?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 索引空间ID */
+  SpaceId?: string | null;
+  /** 索引空间名 */
+  SpaceName?: string | null;
+  /** 存储类型 */
+  StorageType?: number | null;
+  /** 标签信息 */
+  TagList?: TagInfo[];
+}
+
+/** Serverless实例，网络、索引、kibana等连接信息 */
+declare interface ServerlessIndexNetworkField {
+  /** 地域 */
+  Region: string | null;
+  /** 区域 */
+  Zone: string | null;
+  /** vpc唯一ID */
+  VpcUid: string | null;
+  /** 子网唯一ID */
+  SubnetUid: string | null;
+  /** 用户名 */
+  Username: string | null;
+  /** 密码 */
+  Password: string | null;
+}
+
+/** 索引自治字段 */
+declare interface ServerlessIndexOptionsField {
+  /** 过期时间 */
+  ExpireMaxAge?: string | null;
+  /** 时间分区字段 */
+  TimestampField?: string | null;
+}
+
+/** 索引配置字段 */
+declare interface ServerlessIndexSettingsField {
+  /** 索引主分片数 */
+  NumberOfShards?: string | null;
+  /** 索引刷新频率 */
+  RefreshInterval?: string | null;
+}
+
 /** Serverless索引空间信息 */
 declare interface ServerlessSpace {
   /** Serverless索引空间ID */
@@ -1794,6 +1864,38 @@ declare interface DescribeLogstashPipelinesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeServerlessInstancesRequest {
+  /** 索引集群ID */
+  InstanceIds?: string[];
+  /** 索引名 */
+  IndexNames?: string[];
+  /** 分页起始位置 */
+  Offset?: number;
+  /** 一页展示数量 */
+  Limit?: number;
+  /** 排序字段，支持索引名：IndexName、索引存储量：IndexStorage、索引创建时间：IndexCreateTime */
+  OrderBy?: string;
+  /** 过滤索引状态 */
+  IndexStatusList?: string[];
+  /** 排序顺序，支持asc、desc，默认为desc */
+  Order?: string;
+  /** 索引空间ID列表 */
+  SpaceIds?: string[];
+  /** 数据链路数据源类型 */
+  DiSourceTypes?: string[];
+  /** 标签信息 */
+  TagList?: TagInfo[];
+}
+
+declare interface DescribeServerlessInstancesResponse {
+  /** 索引元数据字段 */
+  IndexMetaFields?: ServerlessIndexMetaField[] | null;
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeServerlessSpaceUserRequest {
   /** 空间的ID */
   SpaceId: string;
@@ -2419,6 +2521,8 @@ declare interface Es {
   DescribeLogstashInstances(data?: DescribeLogstashInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstancesResponse>;
   /** 获取Logstash实例管道列表 {@link DescribeLogstashPipelinesRequest} {@link DescribeLogstashPipelinesResponse} */
   DescribeLogstashPipelines(data: DescribeLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashPipelinesResponse>;
+  /** Serverless获取索引列表 {@link DescribeServerlessInstancesRequest} {@link DescribeServerlessInstancesResponse} */
+  DescribeServerlessInstances(data?: DescribeServerlessInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessInstancesResponse>;
   /** 查看Serverless空间子用户 {@link DescribeServerlessSpaceUserRequest} {@link DescribeServerlessSpaceUserResponse} */
   DescribeServerlessSpaceUser(data: DescribeServerlessSpaceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpaceUserResponse>;
   /** 获取Serverless索引空间列表 {@link DescribeServerlessSpacesRequest} {@link DescribeServerlessSpacesResponse} */
