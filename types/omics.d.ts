@@ -769,10 +769,12 @@ declare interface RunApplicationRequest {
   Option?: RunOption;
   /** Nextflow运行选项。 */
   NFOption?: NFOption;
-  /** 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow) */
+  /** 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。 */
   WorkDir?: string;
   /** 访问模式，不填默认私有。取值范围- PRIVATE：私有应用- PUBLIC：公共应用 */
   AccessMode?: string;
+  /** 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。 */
+  VolumeIds?: string[];
 }
 
 declare interface RunApplicationResponse {
@@ -803,8 +805,10 @@ declare interface RunWorkflowRequest {
   InputCosUri?: string;
   /** 任务缓存清理时间（小时）。不填或0表示不清理。 */
   CacheClearDelay?: number;
-  /** 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow) */
+  /** 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。 */
   WorkDir?: string;
+  /** 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。 */
+  VolumeIds?: string[];
 }
 
 declare interface RunWorkflowResponse {

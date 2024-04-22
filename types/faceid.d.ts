@@ -1197,6 +1197,8 @@ declare interface PhoneVerificationRequest {
   Name: string;
   /** 手机号 */
   Phone: string;
+  /** 验证模式（详版/简版）。简版与详版价格不一致，详见[价格说明](https://cloud.tencent.com/document/product/1007/84321)。枚举值：0（简版），1（详版）。默认值为0。 */
+  VerifyMode?: string;
   /** 有加密需求的用户，传入kms的CiphertextBlob，关于数据加密可查阅 数据加密 文档。 */
   CiphertextBlob?: string;
   /** 在使用加密服务时，填入要被加密的字段。本接口中可填入加密后的IdCard，Name，Phone中的一个或多个。 */
@@ -1207,11 +1209,13 @@ declare interface PhoneVerificationRequest {
 
 declare interface PhoneVerificationResponse {
   /** 认证结果码:收费结果码0: 三要素信息一致-4: 三要素信息不一致不收费结果码-6: 手机号码不合法-7: 身份证号码有误-8: 姓名校验不通过-9: 没有记录-11: 验证中心服务繁忙 */
-  Result: string;
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 运营商名称。取值范围为["","移动","电信","联通"] */
-  Isp: string;
+  Isp?: string;
+  /** 业务结果详细信息。（当VerifyMode配置"详版"，且Result为"-4: 三要素信息不一致"时返回）枚举值：手机号码与姓名一致，与身份证号不一致；手机号码身份证号一致，与姓名不一致；手机号码与姓名和身份证号均不一致；姓名和身份证号不一致；其他不一致。 */
+  ResultDetail?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

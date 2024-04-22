@@ -2349,6 +2349,8 @@ declare interface CreateConsoleLoginUrlRequest {
   ProxyOperatorIdCardNumber?: string;
   /** 认证完成跳转链接。注意：`目前仅支持 H5 和 PC`。 */
   AutoJumpUrl?: string;
+  /** 是否展示头顶导航栏 **ENABLE** : (默认)进入web控制台展示头顶导航栏 **DISABLE** : 进入web控制台不展示头顶导航栏 注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
+  TopNavigationStatus?: string;
 }
 
 declare interface CreateConsoleLoginUrlResponse {

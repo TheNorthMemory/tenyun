@@ -126,6 +126,8 @@ declare interface MQTTEndpointItem {
   Host?: string | null;
   /** 端口 */
   Port?: number | null;
+  /** 接入点ip */
+  Ip?: string | null;
 }
 
 /** MQTT 实例信息 */
@@ -232,6 +234,16 @@ declare interface MQTTUserItem {
   ModifiedTime?: number;
 }
 
+/** MQTT客户端监控 */
+declare interface PacketStatistics {
+  /** 类型 */
+  MessageType?: string | null;
+  /** 服务质量 */
+  Qos?: number | null;
+  /** 指标值 */
+  Count?: number | null;
+}
+
 /** 公网访问安全规则 */
 declare interface PublicAccessRule {
   /** ip网段信息 */
@@ -292,6 +304,14 @@ declare interface SourceClusterTopicConfig {
   Namespace?: string | null;
   /** 导入状态，Unknown 未知，AlreadyExists 已存在，Success 成功，Failure 失败 */
   ImportStatus?: string | null;
+}
+
+/** MQTT客户端数据流量统计 */
+declare interface StatisticsReport {
+  /** 字节数 */
+  Bytes?: number | null;
+  /** 监控指标 */
+  Items?: PacketStatistics[] | null;
 }
 
 /** 主题与消费组的订阅关系数据 */
@@ -824,6 +844,12 @@ declare interface DescribeMQTTClientResponse {
   DisconnectTime?: number;
   /** 客户端的订阅列表 */
   MQTTClientSubscriptions?: MQTTClientSubscription[];
+  /** 服务端到客户端的流量统计 */
+  Inbound?: StatisticsReport;
+  /** 客户端到服务端的流量统计 */
+  OutBound?: StatisticsReport;
+  /** cleansession标志 */
+  CleanSession?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -842,6 +868,8 @@ declare interface DescribeMQTTInsPublicEndpointsResponse {
   Bandwidth?: number;
   /** 公网访问规则 */
   Rules?: PublicAccessRule[];
+  /** 公网状态： NORMAL-正常 CLOSING-关闭中 MODIFYING-修改中 CREATING-开启中 CLOSE-关闭 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

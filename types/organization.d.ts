@@ -12,6 +12,16 @@ declare interface AuthNode {
   Manager: MemberMainInfo | null;
 }
 
+/** 有效策略。 */
+declare interface EffectivePolicy {
+  /** 目标ID。 */
+  TargetId: number;
+  /** 有效策略内容。 */
+  PolicyContent: string;
+  /** 有效策略更新时间。 */
+  LastUpdatedTimestamp: number;
+}
+
 /** 组织身份策略 */
 declare interface IdentityPolicy {
   /** CAM预设策略ID。PolicyType 为预设策略时有效且必选 */
@@ -324,6 +334,16 @@ declare interface ProductResource {
   ResourceGrantLast?: string;
 }
 
+/** 资源及关联的标签 */
+declare interface ResourceTagMapping {
+  /** 资源六段式。腾讯云使用资源六段式描述一个资源。例如：qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。 */
+  Resource: string | null;
+  /** 合规详情。 */
+  ComplianceDetails: TagComplianceDetails | null;
+  /** 资源标签。 */
+  Tags: Tags[] | null;
+}
+
 /** 共享地域 */
 declare interface ShareArea {
   /** 地域名称。 */
@@ -372,6 +392,24 @@ declare interface ShareUnitResource {
   SharedMemberUseNum?: number | null;
   /** 共享管理员OwnerUin。 */
   ShareManagerUin?: number | null;
+}
+
+/** 标签合规信息 */
+declare interface TagComplianceDetails {
+  /** 合规状态。true-合规，false-不合规 */
+  ComplianceStatus: boolean | null;
+  /** 值不合规的标签键列表。 */
+  KeysWithNonCompliantValues: string[] | null;
+  /** 键不合规的标签键列表。 */
+  NonCompliantKeys: string[] | null;
+}
+
+/** 标签键值对 */
+declare interface Tags {
+  /** 标签键。 */
+  TagKey: string | null;
+  /** 标签值。 */
+  TagValue: string | null;
 }
 
 declare interface AddOrganizationMemberEmailRequest {
@@ -754,6 +792,18 @@ declare interface DeleteShareUnitResourcesResponse {
 }
 
 declare interface DeleteShareUnitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEffectivePolicyRequest {
+  /** 账号uin或者节点id。 */
+  TargetId: number;
+}
+
+declare interface DescribeEffectivePolicyResponse {
+  /** 有效策略。 */
+  EffectivePolicy?: EffectivePolicy | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1174,6 +1224,26 @@ declare interface EnablePolicyTypeRequest {
 }
 
 declare interface EnablePolicyTypeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListNonCompliantResourceRequest {
+  /** 限制数目。取值范围：1~50。 */
+  MaxResults: number;
+  /** 成员Uin。 */
+  MemberUin: number;
+  /** 从上一页的响应中获取的下一页的Token值。如果是第一次请求，设置为空。 */
+  PaginationToken?: string;
+  /** 标签键。 */
+  TagKey?: string;
+}
+
+declare interface ListNonCompliantResourceResponse {
+  /** 资源及标签合规信息。 */
+  Items?: ResourceTagMapping[] | null;
+  /** 获取的下一页的Token值。 */
+  PaginationToken?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1773,6 +1843,8 @@ declare interface Organization {
   DeleteShareUnitMembers(data: DeleteShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitMembersResponse>;
   /** 删除共享单元资源 {@link DeleteShareUnitResourcesRequest} {@link DeleteShareUnitResourcesResponse} */
   DeleteShareUnitResources(data: DeleteShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitResourcesResponse>;
+  /** 查询目标关联的有效策略 {@link DescribeEffectivePolicyRequest} {@link DescribeEffectivePolicyResponse} */
+  DescribeEffectivePolicy(data: DescribeEffectivePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEffectivePolicyResponse>;
   /** 获取企业组织信息 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
   /** 获取已设置管理员的互信主体关系列表 {@link DescribeOrganizationAuthNodeRequest} {@link DescribeOrganizationAuthNodeResponse} */
@@ -1813,6 +1885,8 @@ declare interface Organization {
   DisablePolicyType(data: DisablePolicyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DisablePolicyTypeResponse>;
   /** 启用策略类型 {@link EnablePolicyTypeRequest} {@link EnablePolicyTypeResponse} */
   EnablePolicyType(data: EnablePolicyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<EnablePolicyTypeResponse>;
+  /** 获取成员标签检测不合规资源列表 {@link ListNonCompliantResourceRequest} {@link ListNonCompliantResourceResponse} */
+  ListNonCompliantResource(data: ListNonCompliantResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ListNonCompliantResourceResponse>;
   /** 获取组织成员访问身份列表 {@link ListOrganizationIdentityRequest} {@link ListOrganizationIdentityResponse} */
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
   /** 查看策略列表数据 {@link ListPoliciesRequest} {@link ListPoliciesResponse} */

@@ -152,38 +152,42 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   AddOnSubtitles?: AddOnSubtitle[] | null;
   /** Drm信息。 */
   DrmInfo?: DrmInfo | null;
+  /** 自适应转码模板类型：Common：音视频类型PureAudio：纯音频类型 */
+  DefinitionType?: string | null;
 }
 
 /** 转自适应码流模板详情 */
 declare interface AdaptiveDynamicStreamingTemplate {
   /** 转自适应码流模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 模板类型，取值范围：Preset：系统预置模板；Custom：用户自定义模板。 */
-  Type: string;
+  Type?: string;
   /** 转自适应码流模板名称。 */
-  Name: string;
+  Name?: string;
   /** 转自适应码流模板描述信息。 */
-  Comment: string;
+  Comment?: string;
   /** 转自适应码流格式，取值范围：HLS，MPEG-DASH。 */
-  Format: string;
+  Format?: string;
   /** 转自适应码流输入流参数信息，最多输入10路流。 */
-  StreamInfos: AdaptiveStreamTemplate[];
+  StreamInfos?: AdaptiveStreamTemplate[];
   /** 是否禁止视频低码率转高码率，取值范围：0：否，1：是。 */
-  DisableHigherVideoBitrate: number;
+  DisableHigherVideoBitrate?: number;
   /** 是否禁止视频分辨率转高分辨率，取值范围：0：否，1：是。 */
-  DisableHigherVideoResolution: number;
+  DisableHigherVideoResolution?: number;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
+  /** 是否为纯音频，0表示视频，1表示纯音频 */
+  PureAudio?: number | null;
 }
 
 /** 自适应转码流参数模板 */
 declare interface AdaptiveStreamTemplate {
-  /** 视频参数信息。 */
-  Video: VideoTemplateInfo;
   /** 音频参数信息。 */
   Audio: AudioTemplateInfo;
+  /** 视频参数信息。 */
+  Video?: VideoTemplateInfo;
   /** 是否移除音频流，取值范围：0：否，1：是。 */
   RemoveAudio?: number;
   /** 是否移除视频流，取值范围：0：否，1：是。 */
@@ -3509,29 +3513,29 @@ declare interface MediaSnapshotByTimePicInfoItem {
 /** 转码信息 */
 declare interface MediaTranscodeItem {
   /** 转码后文件的目标存储。 */
-  OutputStorage: TaskOutputStorage;
+  OutputStorage?: TaskOutputStorage;
   /** 转码后的视频文件路径。 */
-  Path: string;
+  Path?: string;
   /** 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/862/37042)。 */
-  Definition: number;
+  Definition?: number;
   /** 视频流码率平均值与音频流码率平均值之和， 单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 视频流高度的最大值，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 视频流宽度的最大值，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 媒体文件总大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。 */
-  Size: number;
+  Size?: number;
   /** 视频时长，单位：秒。 */
-  Duration: number;
+  Duration?: number;
   /** 容器类型，例如 m4a，mp4 等。 */
-  Container: string;
+  Container?: string;
   /** 视频的 md5 值。 */
-  Md5: string;
+  Md5?: string;
   /** 音频流信息。 */
-  AudioStreamSet: MediaAudioStreamItem[];
+  AudioStreamSet?: MediaAudioStreamItem[];
   /** 视频流信息。 */
-  VideoStreamSet: MediaVideoStreamItem[];
+  VideoStreamSet?: MediaVideoStreamItem[];
 }
 
 /** 点播文件视频流信息 */
@@ -4536,24 +4540,28 @@ declare interface TerrorismOcrReviewTemplateInfoForUpdate {
 declare interface TextWatermarkTemplateInput {
   /** 字体类型，目前可以支持两种：simkai.ttf：可以支持中文和英文；arial.ttf：仅支持英文。 */
   FontType: string;
-  /** 字体大小，格式：Npx，N 为数值。 */
+  /** 字体大小，格式：Npx，N 为数值。N的取值范围：[0,1] 和 [8, 4096] */
   FontSize: string;
   /** 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。 */
   FontColor: string;
   /** 文字透明度，取值范围：(0, 1]0：完全透明1：完全不透明默认值：1。 */
   FontAlpha: number;
+  /** 文字内容，长度不超过100个字符。 */
+  TextContent?: string | null;
 }
 
 /** 文字水印模板 */
 declare interface TextWatermarkTemplateInputForUpdate {
   /** 字体类型，目前可以支持两种：simkai.ttf：可以支持中文和英文；arial.ttf：仅支持英文。 */
   FontType?: string;
-  /** 字体大小，格式：Npx，N 为数值。 */
+  /** 字体大小，格式：Npx，N 为数值。N的取值范围：[0,1] 和 [8, 4096] */
   FontSize?: string;
   /** 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。 */
   FontColor?: string;
   /** 文字透明度，取值范围：(0, 1]0：完全透明1：完全不透明 */
   FontAlpha?: number;
+  /** 文字内容，长度不超过100个字符。 */
+  TextContent?: string;
 }
 
 /** 转码任务输入参数类型 */
@@ -4770,7 +4778,7 @@ declare interface VideoEnhanceConfig {
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfo {
-  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
+  /** 视频流的编码格式，可选值：copy：纯音频模版h264：H.264 编码h265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
   Codec: string;
   /** 视频帧率，取值范围：[0, 120]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
   Fps: number;
@@ -4832,9 +4840,9 @@ declare interface WatermarkInput {
   TextContent?: string;
   /** SVG 内容。长度不超过 2000000 个字符。仅当水印类型为 SVG 水印时填写。SVG 水印不支持截图打水印。 */
   SvgContent?: string;
-  /** 水印的起始时间偏移，单位：秒。不填或填0，表示水印从画面出现时开始显现。不填或填0，表示水印从画面开始就出现；当数值大于0时（假设为 n），表示水印从画面开始的第 n 秒出现；当数值小于0时（假设为 -n），表示水印从离画面结束 n 秒前开始出现。 */
+  /** 水印的起始时间偏移，单位：秒。不填或填0，表示水印从画面出现时开始显现。不填或填0，表示水印从画面开始就出现；当数值大于0时（假设为 n），表示水印从画面开始的第 n 秒出现；当数值小于0时（假设为 -n），表示水印从离画面结束 n 秒前开始出现。注：只用于视频场景，截图不支持。 */
   StartTimeOffset?: number;
-  /** 水印的结束时间偏移，单位：秒。不填或填0，表示水印持续到画面结束；当数值大于0时（假设为 n），表示水印持续到第 n 秒时消失；当数值小于0时（假设为 -n），表示水印持续到离画面结束 n 秒前消失。 */
+  /** 水印的结束时间偏移，单位：秒。不填或填0，表示水印持续到画面结束；当数值大于0时（假设为 n），表示水印持续到第 n 秒时消失；当数值小于0时（假设为 -n），表示水印持续到离画面结束 n 秒前消失。注：只用于视频场景，截图不支持。 */
   EndTimeOffset?: number;
 }
 
@@ -4901,27 +4909,27 @@ declare interface WorkflowInfo {
 /** 媒体处理任务信息 */
 declare interface WorkflowTask {
   /** 媒体处理任务 ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。 */
-  Message: string;
+  Message?: string;
   /** 媒体处理的目标文件信息。 */
-  InputInfo: MediaInputInfo | null;
+  InputInfo?: MediaInputInfo | null;
   /** 原始视频的元信息。 */
-  MetaData: MediaMetaData | null;
+  MetaData?: MediaMetaData | null;
   /** 媒体处理任务的执行状态与结果。 */
-  MediaProcessResultSet: MediaProcessTaskResult[];
+  MediaProcessResultSet?: MediaProcessTaskResult[];
   /** 视频内容审核任务的执行状态与结果。 */
-  AiContentReviewResultSet: AiContentReviewResult[];
+  AiContentReviewResultSet?: AiContentReviewResult[];
   /** 视频内容分析任务的执行状态与结果。 */
-  AiAnalysisResultSet: AiAnalysisResult[];
+  AiAnalysisResultSet?: AiAnalysisResult[];
   /** 视频内容识别任务的执行状态与结果。 */
-  AiRecognitionResultSet: AiRecognitionResult[];
+  AiRecognitionResultSet?: AiRecognitionResult[];
   /** 视频质检任务的执行状态与结果。 */
-  AiQualityControlTaskResult: ScheduleQualityControlTaskResult | null;
+  AiQualityControlTaskResult?: ScheduleQualityControlTaskResult | null;
 }
 
 /** 输入规则，当上传视频命中该规则时，即触发工作流。 */
@@ -5031,11 +5039,13 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   DisableHigherVideoResolution?: number;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 是否为纯音频，0表示视频模版，1表示纯音频模版当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null */
+  PureAudio?: number;
 }
 
 declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   /** 自适应转码模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5601,13 +5611,15 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
+  /** 是否为纯音频，0表示视频，1表示纯音频 */
+  PureAudio?: number;
 }
 
 declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 转自适应码流模板详情列表。 */
-  AdaptiveDynamicStreamingTemplateSet: AdaptiveDynamicStreamingTemplate[];
+  AdaptiveDynamicStreamingTemplateSet?: AdaptiveDynamicStreamingTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6305,6 +6317,8 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   StreamInfos?: AdaptiveStreamTemplate[];
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 是否为纯音频，0表示视频模版，1表示纯音频模版当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null */
+  PureAudio?: number;
 }
 
 declare interface ModifyAdaptiveDynamicStreamingTemplateResponse {

@@ -402,6 +402,10 @@ declare interface ClusterSlaveData {
   NewMasterZone?: string | null;
   /** 新从可用区 */
   NewSlaveZone?: string[] | null;
+  /** 新从可用区属性 */
+  NewSlaveZoneAttr?: SlaveZoneAttrItem[] | null;
+  /** 旧可用区属性 */
+  OldSlaveZoneAttr?: SlaveZoneAttrItem[] | null;
 }
 
 /** 创建集群任务信息 */
@@ -604,6 +608,8 @@ declare interface CynosdbClusterDetail {
   RenewFlag?: number | null;
   /** 节点网络类型 */
   NetworkType?: string | null;
+  /** 备可用区属性 */
+  SlaveZoneAttr?: SlaveZoneAttrItem[] | null;
 }
 
 /** 实例错误日志返回类型 */
@@ -1772,6 +1778,14 @@ declare interface SecurityGroup {
   SecurityGroupRemark?: string;
 }
 
+/** 可用区属性项 */
+declare interface SlaveZoneAttrItem {
+  /** 可用区 */
+  Zone?: string | null;
+  /** binlog同步方式 */
+  BinlogSyncWay?: string | null;
+}
+
 /** 备可用区库存信息 */
 declare interface SlaveZoneStockInfo {
   /** 备可用区 */
@@ -1947,6 +1961,8 @@ declare interface AddClusterSlaveZoneRequest {
   ClusterId: string;
   /** 从可用区 */
   SlaveZone: string;
+  /** binlog同步方式。默认值：async。可选值：sync、semisync、async */
+  BinlogSyncWay?: string;
 }
 
 declare interface AddClusterSlaveZoneResponse {
@@ -3895,6 +3911,8 @@ declare interface ModifyClusterSlaveZoneRequest {
   OldSlaveZone: string;
   /** 新从可用区 */
   NewSlaveZone: string;
+  /** binlog同步方式。默认值：async。可选值：sync、semisync、async */
+  BinlogSyncWay?: string;
 }
 
 declare interface ModifyClusterSlaveZoneResponse {

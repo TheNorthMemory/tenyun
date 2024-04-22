@@ -320,6 +320,22 @@ declare interface DdosInstanceList {
   InstanceList?: DdosInstanceDetail[] | null;
 }
 
+/** 批量删除证书异步任务结果 */
+declare interface DeleteTaskResult {
+  /** 任务ID */
+  TaskId?: string;
+  /** 证书ID */
+  CertId?: string;
+  /** 异步查询结果： 0表示任务进行中、 1表示任务成功、 2表示任务失败、3表示未授权服务角色导致任务失败、4表示有未解绑的云资源导致任务失败、5表示查询关联云资源超时导致任务失败 */
+  Status?: number;
+  /** 错误信息 */
+  Error?: string | null;
+  /** 当前结果缓存时间 */
+  CacheTime?: string | null;
+  /** 包含的域名 */
+  Domains?: string[] | null;
+}
+
 /** 部署记录详情 */
 declare interface DeployRecordDetail {
   /** 部署记录详情ID */
@@ -1622,6 +1638,18 @@ declare interface DescribeCompaniesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeleteCertificatesTaskResultRequest {
+  /** DeleteCertificates接口返回的任务ID， 最大支持100个 */
+  TaskIds: string[];
+}
+
+declare interface DescribeDeleteCertificatesTaskResultResponse {
+  /** 批量删除证书异步任务结果 */
+  DeleteTaskResult?: DeleteTaskResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeployedResourcesRequest {
   /** 证书ID */
   CertificateIds: string[];
@@ -2469,6 +2497,8 @@ declare interface Ssl {
   DescribeCertificates(data?: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
   /** 查询公司列表 {@link DescribeCompaniesRequest} {@link DescribeCompaniesResponse} */
   DescribeCompanies(data?: DescribeCompaniesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompaniesResponse>;
+  /** 查询批量删除任务结果 {@link DescribeDeleteCertificatesTaskResultRequest} {@link DescribeDeleteCertificatesTaskResultResponse} */
+  DescribeDeleteCertificatesTaskResult(data: DescribeDeleteCertificatesTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeleteCertificatesTaskResultResponse>;
   /** 证书查询关联资源 {@link DescribeDeployedResourcesRequest} {@link DescribeDeployedResourcesResponse} */
   DescribeDeployedResources(data: DescribeDeployedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployedResourcesResponse>;
   /** 查询证书apiGateway云资源部署实例列表 {@link DescribeHostApiGatewayInstanceListRequest} {@link DescribeHostApiGatewayInstanceListResponse} */

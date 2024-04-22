@@ -341,7 +341,7 @@ declare interface EnableSecretRequest {
 
 declare interface EnableSecretResponse {
   /** 启用的凭据名称。 */
-  SecretName: string;
+  SecretName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
