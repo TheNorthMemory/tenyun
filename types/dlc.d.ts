@@ -3108,6 +3108,12 @@ declare interface DescribeNotebookSessionStatementSqlResultResponse {
   NextToken?: string | null;
   /** 存储结果地址 */
   OutputPath?: string | null;
+  /** 引擎计算耗时 */
+  UseTime?: number | null;
+  /** 结果条数 */
+  AffectRows?: number | null;
+  /** 数据扫描量 */
+  DataAmount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

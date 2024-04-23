@@ -30,11 +30,11 @@ declare interface EmbeddingData {
   Object?: string | null;
 }
 
-/** token 使用计数。 */
+/** Token 使用计数。 */
 declare interface EmbeddingUsage {
-  /** 输入Token数。 */
+  /** 输入 Token 数。 */
   PromptTokens?: number;
-  /** 总Token数。 */
+  /** 总 Token 数。 */
   TotalTokens?: number;
 }
 
@@ -54,13 +54,13 @@ declare interface Message {
   Content: string;
 }
 
-/** token 数量 */
+/** Token 数量 */
 declare interface Usage {
-  /** 输入 token 数量。 */
+  /** 输入 Token 数量。 */
   PromptTokens?: number;
-  /** 输出 token 数量。 */
+  /** 输出 Token 数量。 */
   CompletionTokens?: number;
-  /** 总 token 数量。 */
+  /** 总 Token 数量。 */
   TotalTokens?: number;
 }
 

@@ -1134,7 +1134,7 @@ declare interface NatGateway {
   NatGatewayName?: string;
   /** NAT网关创建的时间。 */
   CreatedTime?: string;
-  /** NAT网关的状态。 'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中，'UPDATING'：升级中，‘FAILED’：失败。 */
+  /** NAT网关的状态。 'PENDING'：生产中，'DELETING'：删除中/子实例关闭中，'AVAILABLE'：运行中，'UPDATING'：升级中，‘PENDFAILURE’：创建失败，‘DELETEFAILURE：删除失败，‘DENIED’：子实例关闭中 */
   State?: string;
   /** 网关最大外网出带宽(单位:Mbps)。 */
   InternetMaxBandwidthOut?: number;
@@ -4653,6 +4653,8 @@ declare interface DescribeGatewayFlowMonitorDetailRequest {
   OrderField?: string;
   /** 排序方法。顺序：`ASC`，倒序：`DESC`。默认值`DESC`。 */
   OrderDirection?: string;
+  /** VPC内部IPv4地址，精确匹配 */
+  PrivateIpAddress?: string;
 }
 
 declare interface DescribeGatewayFlowMonitorDetailResponse {
@@ -5953,7 +5955,7 @@ declare interface DownloadCustomerGatewayConfigurationRequest {
   VpnGatewayId: string;
   /** VPN通道实例ID。形如：vpnx-f49l6u0z。 */
   VpnConnectionId: string;
-  /** 对端网关厂商信息对象，可通过[DescribeCustomerGatewayVendors](https://cloud.tencent.com/document/api/215/17513)获取。 */
+  /** 对端网关厂商信息对象，可通过[DescribeCustomerGatewayVendors](https://cloud.tencent.com/document/api/215/17517)获取。 */
   CustomerGatewayVendor: CustomerGatewayVendor;
   /** 通道接入设备物理接口名称。 */
   InterfaceName: string;

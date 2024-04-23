@@ -658,6 +658,18 @@ declare interface UnsatisfiedReply {
   Reasons?: string[] | null;
 }
 
+/** 消耗量 */
+declare interface Usage {
+  /** 文档页数 */
+  TotalPages?: number;
+  /** 输入token数 */
+  InputTokens?: number;
+  /** 输出token数 */
+  OutputTokens?: number;
+  /** 总token数 */
+  TotalTokens?: number;
+}
+
 declare interface CheckAttributeLabelExistRequest {
   /** 机器人ID */
   BotBizId: string;
@@ -1358,6 +1370,8 @@ declare interface GetEmbeddingRequest {
 declare interface GetEmbeddingResponse {
   /** 特征 */
   Data?: EmbeddingObject[];
+  /** 消耗量，返回TotalToken */
+  Usage?: Usage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1987,7 +2001,7 @@ declare interface ParseDocRequest {
   TaskId: string;
   /** 切分策略 */
   Policy?: string;
-  /** 默认值: split */
+  /** 默认值: parse */
   Operate?: string;
 }
 
@@ -2012,6 +2026,8 @@ declare interface QueryParseDocResultResponse {
   Url?: string;
   /** 解析失败原因 */
   Reason?: string;
+  /** 消耗量，输出页数 */
+  Usage?: Usage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2028,6 +2044,8 @@ declare interface QueryRewriteRequest {
 declare interface QueryRewriteResponse {
   /** 改写结果 */
   Content?: string;
+  /** 消耗量，返回输入token数，输出token数以及总token数 */
+  Usage?: Usage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

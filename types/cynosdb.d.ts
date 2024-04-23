@@ -3990,6 +3990,20 @@ declare interface ModifyInstanceParamResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceUpgradeLimitDaysRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 升级限制时间 */
+  UpgradeLimitDays: number;
+}
+
+declare interface ModifyInstanceUpgradeLimitDaysResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMaintainPeriodConfigRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4857,6 +4871,8 @@ declare interface Cynosdb {
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamRequest} {@link ModifyInstanceParamResponse} */
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
+  /** 修改实例小版本升级限制时间 {@link ModifyInstanceUpgradeLimitDaysRequest} {@link ModifyInstanceUpgradeLimitDaysResponse} */
+  ModifyInstanceUpgradeLimitDays(data: ModifyInstanceUpgradeLimitDaysRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceUpgradeLimitDaysResponse>;
   /** 修改维护时间配置 {@link ModifyMaintainPeriodConfigRequest} {@link ModifyMaintainPeriodConfigResponse} */
   ModifyMaintainPeriodConfig(data: ModifyMaintainPeriodConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainPeriodConfigResponse>;
   /** 修改参数模板 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */

@@ -2,6 +2,206 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 告警下拉字段 */
+declare interface AlertExtraInfo {
+  /** 相关攻击事件 */
+  RelateEvent?: RelatedEvent | null;
+  /** 泄漏内容 */
+  LeakContent?: string | null;
+  /** 泄漏API */
+  LeakAPI?: string | null;
+  /** secretID */
+  SecretID?: string | null;
+  /** 命中规则 */
+  Rule?: string | null;
+  /** 规则描述 */
+  RuleDesc?: string | null;
+  /** 协议端口 */
+  ProtocolPort?: string | null;
+  /** 攻击内容 */
+  AttackContent?: string | null;
+  /** 攻击IP画像 */
+  AttackIPProfile?: string | null;
+  /** 攻击IP标签 */
+  AttackIPTags?: string | null;
+  /** 请求方式 */
+  RequestMethod?: string | null;
+  /** HTTP日志 */
+  HttpLog?: string | null;
+  /** 被攻击域名 */
+  AttackDomain?: string | null;
+  /** 文件路径 */
+  FilePath?: string | null;
+  /** user_agent */
+  UserAgent?: string | null;
+  /** 请求头 */
+  RequestHeaders?: string | null;
+  /** 登录用户名 */
+  LoginUserName?: string | null;
+  /** 漏洞名称 */
+  VulnerabilityName?: string | null;
+  /** 公共漏洞和暴露 */
+  CVE?: string | null;
+  /** 服务进程 */
+  ServiceProcess?: string | null;
+  /** 文件名 */
+  FileName?: string | null;
+  /** 文件大小 */
+  FileSize?: string | null;
+  /** 文件MD5 */
+  FileMD5?: string | null;
+  /** 文件最近访问时间 */
+  FileLastAccessTime?: string | null;
+  /** 文件修改时间 */
+  FileModifyTime?: string | null;
+  /** 最近访问时间 */
+  RecentAccessTime?: string | null;
+  /** 最近修改时间 */
+  RecentModifyTime?: string | null;
+  /** 病毒名 */
+  VirusName?: string | null;
+  /** 病毒文件标签 */
+  VirusFileTags?: string | null;
+  /** 行为特征 */
+  BehavioralCharacteristics?: string | null;
+  /** 进程名（PID） */
+  ProcessNamePID?: string | null;
+  /** 进程路径 */
+  ProcessPath?: string | null;
+  /** 进程命令行 */
+  ProcessCommandLine?: string | null;
+  /** 进程权限 */
+  ProcessPermissions?: string | null;
+  /** 执行命令 */
+  ExecutedCommand?: string | null;
+  /** 受影响文件名 */
+  AffectedFileName?: string | null;
+  /** 诱饵路径 */
+  DecoyPath?: string | null;
+  /** 恶意进程文件大小 */
+  MaliciousProcessFileSize?: string | null;
+  /** 恶意进程文件MD5 */
+  MaliciousProcessFileMD5?: string | null;
+  /** 恶意进程名（PID） */
+  MaliciousProcessNamePID?: string | null;
+  /** 恶意进程路径 */
+  MaliciousProcessPath?: string | null;
+  /** 恶意进程启动时间 */
+  MaliciousProcessStartTime?: string | null;
+  /** 命令内容 */
+  CommandContent?: string | null;
+  /** 启动用户 */
+  StartupUser?: string | null;
+  /** 用户所属组 */
+  UserGroup?: string | null;
+  /** 新增权限 */
+  NewPermissions?: string | null;
+  /** 父进程 */
+  ParentProcess?: string | null;
+  /** 类名 */
+  ClassName?: string | null;
+  /** 所属类加载器 */
+  ClassLoader?: string | null;
+  /** 类文件大小 */
+  ClassFileSize?: string | null;
+  /** 类文件MD5 */
+  ClassFileMD5?: string | null;
+  /** 父类名 */
+  ParentClassName?: string | null;
+  /** 继承接口 */
+  InheritedInterface?: string | null;
+  /** 注释 */
+  Comment?: string | null;
+  /** 载荷内容 */
+  PayloadContent?: string | null;
+  /** 回连地址画像 */
+  CallbackAddressPortrait?: string | null;
+  /** 回连地址标签 */
+  CallbackAddressTag?: string | null;
+  /** 进程MD5 */
+  ProcessMD5?: string | null;
+  /** 文件权限 */
+  FilePermission?: string | null;
+  /** 来源于日志分析的信息字段 */
+  FromLogAnalysisData?: KeyValue[] | null;
+  /** 命中探针 */
+  HitProbe?: string | null;
+  /** 命中蜜罐 */
+  HitHoneyPot?: string | null;
+  /** 命令列表 */
+  CommandList?: string | null;
+  /** 攻击事件描述 */
+  AttackEventDesc?: string | null;
+  /** 进程信息 */
+  ProcessInfo?: string | null;
+  /** 使用用户名&密码 */
+  UserNameAndPwd?: string | null;
+  /** 主机防护策略ID */
+  StrategyID?: string | null;
+  /** 主机防护策略名称 */
+  StrategyName?: string | null;
+  /** 主机防护命中策略，是策略ID和策略名称的组合 */
+  HitStrategy?: string | null;
+}
+
+/** 告警中心全量告警列表数据 */
+declare interface AlertInfo {
+  /** 告警ID */
+  ID?: string | null;
+  /** 告警名称 */
+  Name?: string | null;
+  /** 告警来源CFW:云防火墙WAF:Web应用防火墙CWP:主机安全CSIP:云安全中心 */
+  Source?: string | null;
+  /** 告警等级1:提示2:低危3:中危4:高危5:严重 */
+  Level?: number | null;
+  /** 攻击者 */
+  Attacker?: RoleInfo | null;
+  /** 受害者 */
+  Victim?: RoleInfo | null;
+  /** 证据数据(比如攻击内容等) */
+  EvidenceData?: string | null;
+  /** 证据位置(比如协议端口) */
+  EvidenceLocation?: string | null;
+  /** 证据路径 */
+  EvidencePath?: string | null;
+  /** 首次告警时间 */
+  CreateTime?: string | null;
+  /** 最近告警时间 */
+  UpdateTime?: string | null;
+  /** 告警次数 */
+  Count?: number | null;
+  /** 紧急缓解建议 */
+  UrgentSuggestion?: string | null;
+  /** 根治建议 */
+  RemediationSuggestion?: string | null;
+  /** 处理状态0：未处置，1：已忽略，2：已处置 */
+  Status?: number | null;
+  /** 告警处理类型 */
+  ProcessType?: string | null;
+  /** 告警大类 */
+  Type?: string | null;
+  /** 告警小类 */
+  SubType?: string | null;
+  /** 下拉字段 */
+  ExtraInfo?: AlertExtraInfo | null;
+  /** 聚合字段 */
+  Key?: string | null;
+  /** 告警日期 */
+  Date?: string | null;
+  /** appid */
+  AppID?: string | null;
+  /** 账户名称 */
+  NickName?: string | null;
+  /** 账户ID */
+  Uin?: string | null;
+  /** 行为 */
+  Action?: number | null;
+  /** 风险排查 */
+  RiskInvestigation?: string | null;
+  /** 风险处置 */
+  RiskTreatment?: string | null;
+}
+
 /** 集群pod列表 */
 declare interface AssetClusterPod {
   /** 租户id */
@@ -922,6 +1122,14 @@ declare interface IpAssetListVO {
   VerifyStatus?: number | null;
 }
 
+/** KeyValue对 */
+declare interface KeyValue {
+  /** 字段 */
+  Key?: string | null;
+  /** 值 */
+  Value?: string | null;
+}
+
 /** 网卡资产 */
 declare interface NICAsset {
   /** appid */
@@ -1078,6 +1286,16 @@ declare interface PublicIpDomainListKey {
   Asset: string;
 }
 
+/** 相关攻击事件结构 */
+declare interface RelatedEvent {
+  /** 事件ID */
+  EventID?: string | null;
+  /** 事件描述 */
+  Description?: string | null;
+  /** 与事件关联的告警数量 */
+  RelatedCount?: number | null;
+}
+
 /** 报告项key */
 declare interface ReportItemKey {
   /** 日志Id列表 */
@@ -1102,6 +1320,52 @@ declare interface RiskCenterStatusKey {
   InstanceId?: string;
   /** APP ID */
   AppId?: string;
+}
+
+/** 告警数据攻击者或受害者信息 */
+declare interface RoleInfo {
+  /** IP */
+  IP?: string | null;
+  /** HostIP */
+  HostIP?: string | null;
+  /** 原始IP */
+  OriginIP?: string | null;
+  /** 端口 */
+  Port?: number | null;
+  /** 资产ID */
+  InstanceID?: string | null;
+  /** 城市 */
+  City?: string | null;
+  /** 省份 */
+  Province?: string | null;
+  /** 国家 */
+  Country?: string | null;
+  /** 地址 */
+  Address?: string | null;
+  /** 纬度 */
+  Latitude?: string | null;
+  /** 经度 */
+  Longitude?: string | null;
+  /** 信息 */
+  Info?: string | null;
+  /** 域名 */
+  Domain?: string | null;
+  /** 企业名称 */
+  Name?: string | null;
+  /** 账号 */
+  Account?: string | null;
+  /** 家族团伙 */
+  Family?: string | null;
+  /** 病毒名 */
+  VirusName?: string | null;
+  /** MD5值 */
+  MD5?: string | null;
+  /** 恶意进程文件名 */
+  FileName?: string | null;
+  /** 1:主机资产 2:域名资产 3:网络资产 */
+  AssetType?: number | null;
+  /** 来源日志分析的信息字段 */
+  FromLogAnalysisData?: KeyValue[] | null;
 }
 
 /** 扫描任务详情 */
@@ -1789,6 +2053,28 @@ declare interface DeleteRiskScanTaskRequest {
 }
 
 declare interface DeleteRiskScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAlertListRequest {
+  /** 标签搜索筛选 */
+  Filter: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 被调用的集团账号的成员id */
+  OperatedMemberId?: string[];
+  /** 0:默认全部 1:资产ID 2:域名 */
+  AssetType?: number;
+}
+
+declare interface DescribeAlertListResponse {
+  /** 全量告警列表 */
+  AlertList?: AlertInfo[];
+  /** 告警大类数量 */
+  AlertTypeCount?: TagCount[];
+  /** 告警总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2510,6 +2796,8 @@ declare interface Csip {
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 查询全量告警列表 {@link DescribeAlertListRequest} {@link DescribeAlertListResponse} */
+  DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
   /** 漏洞管理-资产视角的漏洞风险列表 {@link DescribeAssetViewVulRiskListRequest} {@link DescribeAssetViewVulRiskListResponse} */
   DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */

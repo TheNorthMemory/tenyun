@@ -1650,6 +1650,20 @@ declare interface ModifyExtensionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyStaffPasswordRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 座席邮箱 */
+  Email: string;
+  /** 设置的密码 */
+  Password: string;
+}
+
+declare interface ModifyStaffPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyStaffRequest {
   /** 应用ID */
   SdkAppId: number;
@@ -1863,7 +1877,7 @@ declare interface Ccc {
   DescribeActiveCarrierPrivilegeNumber(data: DescribeActiveCarrierPrivilegeNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActiveCarrierPrivilegeNumberResponse>;
   /** 查询自动外呼任务详情 {@link DescribeAutoCalloutTaskRequest} {@link DescribeAutoCalloutTaskResponse} */
   DescribeAutoCalloutTask(data: DescribeAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoCalloutTaskResponse>;
-  /** 批量查询自动任务外呼 {@link DescribeAutoCalloutTasksRequest} {@link DescribeAutoCalloutTasksResponse} */
+  /** 批量查询自动外呼任务 {@link DescribeAutoCalloutTasksRequest} {@link DescribeAutoCalloutTasksResponse} */
   DescribeAutoCalloutTasks(data: DescribeAutoCalloutTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoCalloutTasksResponse>;
   /** 获取用户购买信息列表 {@link DescribeCCCBuyInfoListRequest} {@link DescribeCCCBuyInfoListResponse} */
   DescribeCCCBuyInfoList(data?: DescribeCCCBuyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCCBuyInfoListResponse>;
@@ -1919,6 +1933,8 @@ declare interface Ccc {
   ModifyExtension(data: ModifyExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtensionResponse>;
   /** 修改客服账号 {@link ModifyStaffRequest} {@link ModifyStaffResponse} */
   ModifyStaff(data: ModifyStaffRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStaffResponse>;
+  /** 修改座席密码 {@link ModifyStaffPasswordRequest} {@link ModifyStaffPasswordResponse} */
+  ModifyStaffPassword(data: ModifyStaffPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStaffPasswordResponse>;
   /** 暂停预测式外呼任务 {@link PausePredictiveDialingCampaignRequest} {@link PausePredictiveDialingCampaignResponse} */
   PausePredictiveDialingCampaign(data: PausePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<PausePredictiveDialingCampaignResponse>;
   /** 重置话机注册密码 {@link ResetExtensionPasswordRequest} {@link ResetExtensionPasswordResponse} */
