@@ -576,6 +576,14 @@ declare interface TablePrivilege {
   Privileges: string[];
 }
 
+/** 标签 */
+declare interface Tag {
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
+}
+
 /** 临时实例 */
 declare interface TmpInstance {
   /** 应用ID */
@@ -1196,6 +1204,8 @@ declare interface DescribeDBInstanceDetailResponse {
   IsDcnStrongSyncSupported?: number;
   /** 是否支持DCN切换 */
   IsDcnSwitchSupported?: number;
+  /** proxy版本号 */
+  ProxyVersion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1243,6 +1253,8 @@ declare interface DescribeDBInstancesRequest {
   ExclusterIds?: string[];
   /** 按标签key查询 */
   TagKeys?: string[];
+  /** 标签 */
+  Tags?: Tag[];
   /** 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔 */
   FilterInstanceType?: string;
   /** 按照实例状态进行筛选 */
@@ -1253,9 +1265,9 @@ declare interface DescribeDBInstancesRequest {
 
 declare interface DescribeDBInstancesResponse {
   /** 符合条件的实例数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息列表 */
-  Instances: DBInstance[];
+  Instances?: DBInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

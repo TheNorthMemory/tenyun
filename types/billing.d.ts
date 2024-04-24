@@ -854,6 +854,12 @@ declare interface BillDetail {
   BillMonth?: string | null;
   /** 账单记录ID */
   Id?: string | null;
+  /** 国内国际编码 */
+  RegionType?: string | null;
+  /** 国内国际：资源所属区域类型（国内、国际） */
+  RegionTypeName?: string | null;
+  /** 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息 */
+  ReserveDetail?: string | null;
 }
 
 /** 明细账单关联单据信息 */

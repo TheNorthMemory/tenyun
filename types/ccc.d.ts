@@ -1159,7 +1159,7 @@ declare interface DescribeChatMessagesRequest {
   Offset?: number;
   /** 1为从早到晚，2为从晚到早，默认为2 */
   Order?: number;
-  /** 服务记录 SessionID（必填） */
+  /** 服务记录 SessionID */
   SessionId?: string;
 }
 
@@ -1885,7 +1885,7 @@ declare interface Ccc {
   DescribeCallInMetrics(data: DescribeCallInMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallInMetricsResponse>;
   /** 查询运营商白名单号码申请 {@link DescribeCarrierPrivilegeNumberApplicantsRequest} {@link DescribeCarrierPrivilegeNumberApplicantsResponse} */
   DescribeCarrierPrivilegeNumberApplicants(data: DescribeCarrierPrivilegeNumberApplicantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCarrierPrivilegeNumberApplicantsResponse>;
-  /** 查询服务的聊天记录 {@link DescribeChatMessagesRequest} {@link DescribeChatMessagesResponse} */
+  /** 查询指定会话（SessionId）的聊天记录 {@link DescribeChatMessagesRequest} {@link DescribeChatMessagesResponse} */
   DescribeChatMessages(data?: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
   /** 查询公司资质申请列表 {@link DescribeCompanyListRequest} {@link DescribeCompanyListResponse} */
   DescribeCompanyList(data: DescribeCompanyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompanyListResponse>;

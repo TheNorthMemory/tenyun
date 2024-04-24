@@ -125,9 +125,9 @@ declare interface FakeURLData {
 /** 过滤参数 */
 declare interface Filter {
   /** 过滤参数键 */
-  Name: string | null;
+  Name: string;
   /** 过滤参数值 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 服务响应数据 */

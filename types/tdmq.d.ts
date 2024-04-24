@@ -1923,11 +1923,13 @@ declare interface CreateRabbitMQVirtualHostRequest {
   Description?: string;
   /** 消息轨迹开关,true打开,false关闭,默认关闭 */
   TraceFlag?: boolean;
+  /** 是否创建镜像队列策略，默认值 true */
+  MirrorQueuePolicyFlag?: boolean;
 }
 
 declare interface CreateRabbitMQVirtualHostResponse {
   /** vhost名 */
-  VirtualHost: string;
+  VirtualHost?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2907,53 +2909,59 @@ declare interface DescribeRabbitMQQueueDetailRequest {
 
 declare interface DescribeRabbitMQQueueDetailResponse {
   /** 队列名称 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** Vhost参数 */
-  VirtualHost: string | null;
+  VirtualHost?: string | null;
   /** 队列名称 */
-  QueueName: string | null;
+  QueueName?: string | null;
   /** 队列类型,取值classic或quorum */
-  QueueType: string | null;
+  QueueType?: string | null;
   /** 在线消费者数量 */
-  Consumers: number | null;
+  Consumers?: number | null;
   /** 持久标记 */
-  Durable: boolean | null;
+  Durable?: boolean | null;
   /** 自动清除 */
-  AutoDelete: boolean | null;
+  AutoDelete?: boolean | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** MessageTTL参数,classic类型专用 */
-  MessageTTL: number | null;
+  MessageTTL?: number | null;
   /** AutoExpire参数 */
-  AutoExpire: number | null;
+  AutoExpire?: number | null;
   /** MaxLength参数 */
-  MaxLength: number | null;
+  MaxLength?: number | null;
   /** MaxLengthBytes参数 */
-  MaxLengthBytes: number | null;
+  MaxLengthBytes?: number | null;
   /** DeliveryLimit参数,quorum类型专用 */
-  DeliveryLimit: number | null;
+  DeliveryLimit?: number | null;
   /** OverflowBehaviour参数,取值为drop-head, reject-publish或reject-publish-dlx */
-  OverflowBehaviour: string | null;
+  OverflowBehaviour?: string | null;
   /** DeadLetterExchange参数 */
-  DeadLetterExchange: string | null;
+  DeadLetterExchange?: string | null;
   /** DeadLetterRoutingKey参数 */
-  DeadLetterRoutingKey: string | null;
+  DeadLetterRoutingKey?: string | null;
   /** SingleActiveConsumer参数 */
-  SingleActiveConsumer: boolean | null;
+  SingleActiveConsumer?: boolean | null;
   /** MaximumPriority参数,classic类型专用 */
-  MaximumPriority: number | null;
+  MaximumPriority?: number | null;
   /** LazyMode参数,classic类型专用 */
-  LazyMode: boolean | null;
+  LazyMode?: boolean | null;
   /** MasterLocator参数,classic类型专用 */
-  MasterLocator: string | null;
+  MasterLocator?: string | null;
   /** MaxInMemoryLength参数,quorum类型专用 */
-  MaxInMemoryLength: number | null;
+  MaxInMemoryLength?: number | null;
   /** MaxInMemoryBytes参数,quorum类型专用 */
-  MaxInMemoryBytes: number | null;
+  MaxInMemoryBytes?: number | null;
   /** 创建时间戳,单位秒 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 节点 */
-  Node: string | null;
+  Node?: string | null;
+  /** 仲裁队列死信一致性策略 */
+  DeadLetterStrategy?: string | null;
+  /** 仲裁队列的领导者选举策略 */
+  QueueLeaderLocator?: string | null;
+  /** 仲裁队列的初始副本组大小 */
+  QuorumInitialGroupSize?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

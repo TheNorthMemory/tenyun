@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 训练图像质量过滤开关配置。支持开启或关闭对训练图像分辨率下限、脸部区域大小、脸部遮挡、脸部角度的过滤，默认开启以上过滤。如果训练图像内包含多人脸或无人脸、和 Base 人像不为同一人也将被过滤，不可关闭该过滤条件。建议：关闭以上过滤可能导致写真生成效果受损，建议使用单人、正脸、脸部清晰、无遮挡、无夸张表情、脸部区域占比较大的图像进行训练。 */
+declare interface Filter {
+  /** 过滤不满足分辨率下限的训练图像，默认开启过滤开启后将过滤横边<512或竖边<720的图片，横、竖边上限均为2000，不支持调整1：开启过滤0：关闭过滤 */
+  Resolution?: number;
+  /** 过滤脸部区域过小的训练图像，默认开启过滤1：开启过滤0：关闭过滤 */
+  Size?: number;
+  /** 过滤脸部存在明显遮挡、偏转角度过大等质量较差的训练图像，默认开启过滤1：开启过滤0：关闭过滤 */
+  Occlusion?: number;
+}
+
 /** logo参数 */
 declare interface LogoParam {
   /** 水印url */
@@ -60,6 +70,28 @@ declare interface ImageToImageResponse {
   RequestId?: string;
 }
 
+declare interface QueryDrawPortraitJobRequest {
+  /** 查询生成写真图片任务 ID。 */
+  JobId: string;
+}
+
+declare interface QueryDrawPortraitJobResponse {
+  /** 任务状态码。INIT: 初始化、WAIT：等待中、RUN：运行中、FAIL：处理失败、DONE：处理完成。 */
+  JobStatusCode?: string;
+  /** 任务状态信息。 */
+  JobStatusMsg?: string;
+  /** 任务错误码。 */
+  JobErrorCode?: string;
+  /** 任务错误信息。 */
+  JobErrorMsg?: string;
+  /** 结果 URL 数组。URL 有效期1小时，请及时保存。 */
+  ResultUrls?: string[];
+  /** 结果描述数组。 */
+  ResultDetails?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryTextToImageProJobRequest {
   /** 任务 ID。 */
   JobId: string;
@@ -84,6 +116,46 @@ declare interface QueryTextToImageProJobResponse {
   RequestId?: string;
 }
 
+declare interface QueryTrainPortraitModelJobRequest {
+  /** 写真模型 ID。 */
+  ModelId: string;
+}
+
+declare interface QueryTrainPortraitModelJobResponse {
+  /** 任务状态码。INIT: 初始化、WAIT：等待中、RUN：运行中、FAIL：处理失败、DONE：处理完成。 */
+  JobStatusCode?: string;
+  /** 任务状态信息。 */
+  JobStatusMsg?: string;
+  /** 任务错误码。 */
+  JobErrorCode?: string;
+  /** 任务错误信息。 */
+  JobErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitDrawPortraitJobRequest {
+  /** 写真模型 ID。 */
+  ModelId: string;
+  /** 风格模板，支持以下风格：zhengjian_female：证件照（适用女性）zhengjian_male：证件照（适用男性）hanfu_female：汉服（适用女性）hanfu2_female：汉服2（适用女性）qipao_female：旗袍（适用女性）green_female：绿色系穿搭（适用女性）white_sweater_female：白色系毛衣（适用女性）sports_female：蓝色系运动（适用女性）wedding_female：婚纱裙（适用女性）forest_female：户外森林（适用女性）flower_female：户外花丛（适用女性）lolita_female：洛丽塔（适用女性black_dress1_female：小黑裙1（适用女性）black_dress2_female：小黑裙2（适用女性）black_dress3_female：小黑裙3（适用女性）wedding2_female：婚纱裙2（适用女性）fire_female：火焰背景（适用女性）wreath_female：头戴花环（适用女性）bow_female：蝴蝶结发饰（适用女性）feather_female：羽毛（适用女性）blue_shirt_female：缤纷衬衣系列-蓝色（适用女性）green_shirt_female：缤纷衬衣系列-绿色（适用女性）purple_shirt_female：缤纷衬衣系列-紫色（适用女性）grey_suit_male: 灰色西装（适用男性）beige_suit_male: 米色西装（适用男性）white_sweater_male: 白色系毛衣（适用男性）christmas1_female: 圣诞1（适用女性）christmas2_female: 圣诞2（适用女性）christmas3_female: 圣诞3（适用女性）newyear1_female：新春1（适用女性）newyear2_female：新春2（适用女性）newyear3_female：新春3（适用女性）newyear5_female：新春5（适用女性）simple：简洁风格（通用），一般用于写真模型封面示意图，每个ModelId的生成结果固定，多次生成将返回相同图片 */
+  StyleId: string;
+  /** 本次生成的图片数量，取值范围[1,4] */
+  ImageNum: number;
+  /** 为生成结果图添加标识的开关，默认为1。 1：添加标识。 0：不添加标识。 其他数值：默认按1处理。 建议您使用显著标识来提示结果图是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 标识内容设置。 默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+  /** 清晰度，支持以下选项：sd：基础版，分辨率512:640hd：高清畅享版，分辨率1024:1280hdpro：高清优享版，分辨率1024:1280（推荐）uhd：超清版，分辨率2048:2560不填默认为sd。 */
+  Definition?: string;
+}
+
+declare interface SubmitDrawPortraitJobResponse {
+  /** 提交生成写真图片任务 ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitTextToImageProJobRequest {
   /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传100个 utf-8 字符。 */
   Prompt: string;
@@ -102,6 +174,16 @@ declare interface SubmitTextToImageProJobRequest {
 declare interface SubmitTextToImageProJobResponse {
   /** 任务 ID。 */
   JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitTrainPortraitModelJobRequest {
+  /** 在上传写真训练图片时指定的写真模型 ID。 每个 AI 写真模型自训练完成起1年内有效，有效期内可使用模型生成图片，期满后需要重新训练模型。 */
+  ModelId: string;
+}
+
+declare interface SubmitTrainPortraitModelJobResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -130,17 +212,47 @@ declare interface TextToImageResponse {
   RequestId?: string;
 }
 
+declare interface UploadTrainPortraitImagesRequest {
+  /** 写真模型 ID。由英文大小写字母、数字及下划线组成。用于唯一标识一个写真模型，一个写真模型只能用于一个人物的写真图片生成。 */
+  ModelId: string;
+  /** 写真模型训练用的基础图像 URL，用于固定写真模型可生成的人物。图片数量：1张。图片内容：单人，脸部清晰。图片限制：单边分辨率小于2000，转成 Base64 字符串后小于 5MB。 */
+  BaseUrl?: string;
+  /** 写真模型训练用的图像 URL 列表。图片数量：19 - 24 张。图片内容：单人，脸部清晰，和基础图像中的人物为同一人。图片限制：单边分辨率小于2000，转成 Base64 字符串后小于 5MB。 */
+  Urls?: string[];
+  /** 训练图像质量过滤开关配置。支持开启或关闭对训练图像分辨率下限、脸部区域大小、脸部遮挡的过滤，默认开启以上过滤。如果训练图像内包含多人脸或无人脸、和 Base 人像不为同一人也将被过滤，不可关闭该过滤条件。建议：关闭以上过滤可能导致写真生成效果受损，建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的图像进行训练。 */
+  Filter?: Filter;
+  /** 是否开启快速训练模式。默认不开启。开启后只需要在 BaseUrl 中传入1张图片，Urls.N 中无需传入图片。 0：不开启 1：开启 */
+  TrainMode?: number;
+}
+
+declare interface UploadTrainPortraitImagesResponse {
+  /** 用于提示对应上传的Urls训练图片是否符合要求，如果未通过需要重新上传。如果基础图像不符合要求会直接通过ErrorCode提示。如果您选择了快速模式，该参数返回为空数组。 */
+  ResultDetails?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Aiart 大模型图像创作引擎} */
 declare interface Aiart {
   (): Versions;
   /** 智能图生图 {@link ImageToImageRequest} {@link ImageToImageResponse} */
   ImageToImage(data?: ImageToImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToImageResponse>;
+  /** 查询生成写真图片任务 {@link QueryDrawPortraitJobRequest} {@link QueryDrawPortraitJobResponse} */
+  QueryDrawPortraitJob(data: QueryDrawPortraitJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDrawPortraitJobResponse>;
   /** 查询文生图（高级版）任务 {@link QueryTextToImageProJobRequest} {@link QueryTextToImageProJobResponse} */
   QueryTextToImageProJob(data: QueryTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageProJobResponse>;
+  /** 查询训练写真模型任务 {@link QueryTrainPortraitModelJobRequest} {@link QueryTrainPortraitModelJobResponse} */
+  QueryTrainPortraitModelJob(data: QueryTrainPortraitModelJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTrainPortraitModelJobResponse>;
+  /** 提交生成写真图片任务 {@link SubmitDrawPortraitJobRequest} {@link SubmitDrawPortraitJobResponse} */
+  SubmitDrawPortraitJob(data: SubmitDrawPortraitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitDrawPortraitJobResponse>;
   /** 提交文生图（高级版）任务 {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */
   SubmitTextToImageProJob(data: SubmitTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageProJobResponse>;
+  /** 提交训练写真模型任务 {@link SubmitTrainPortraitModelJobRequest} {@link SubmitTrainPortraitModelJobResponse} */
+  SubmitTrainPortraitModelJob(data: SubmitTrainPortraitModelJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTrainPortraitModelJobResponse>;
   /** 智能文生图 {@link TextToImageRequest} {@link TextToImageResponse} */
   TextToImage(data: TextToImageRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageResponse>;
+  /** 上传写真训练图片 {@link UploadTrainPortraitImagesRequest} {@link UploadTrainPortraitImagesResponse} */
+  UploadTrainPortraitImages(data: UploadTrainPortraitImagesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTrainPortraitImagesResponse>;
 }
 
 export declare type Versions = ["2022-12-29"];

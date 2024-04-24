@@ -714,6 +714,14 @@ declare interface TablePrivilege {
   Privileges: string[];
 }
 
+/** 标签 */
+declare interface Tag {
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
+}
+
 /** 临时实例 */
 declare interface TmpInstance {
   /** 应用ID */
@@ -1527,6 +1535,8 @@ declare interface DescribeDCDBInstancesRequest {
   ExclusterIds?: string[];
   /** 按标签key查询 */
   TagKeys?: string[];
+  /** 标签 */
+  Tags?: Tag[];
   /** 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔 */
   FilterInstanceType?: string;
   /** 按实例状态筛选 */
@@ -1537,9 +1547,9 @@ declare interface DescribeDCDBInstancesRequest {
 
 declare interface DescribeDCDBInstancesResponse {
   /** 符合条件的实例数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息列表 */
-  Instances: DCDBInstanceInfo[];
+  Instances?: DCDBInstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2249,11 +2259,13 @@ declare interface SwitchDBInstanceHARequest {
   InstanceId: string;
   /** 切换的目标区域，会自动选择该可用区中延迟最低的节点。 */
   Zone: string;
+  /** 指定分片实例id进行切换 */
+  ShardInstanceIds?: string[];
 }
 
 declare interface SwitchDBInstanceHAResponse {
   /** 异步流程Id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
