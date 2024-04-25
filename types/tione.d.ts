@@ -322,6 +322,8 @@ declare interface DataConfig {
   GooseFSSource?: GooseFS | null;
   /** 配置TurboFS的数据 */
   CFSTurboSource?: CFSTurbo | null;
+  /** 来自本地磁盘的信息 */
+  LocalDiskSource?: LocalDisk | null;
 }
 
 /** 数据点 */
@@ -778,6 +780,12 @@ declare interface IntranetCallInfo {
   PrivateLinkInfos?: PrivateLinkInfo[] | null;
   /** 默认内网调用信息 */
   DefaultInnerCallInfos?: DefaultInnerCallInfo[] | null;
+}
+
+/** 本地磁盘信息 */
+declare interface LocalDisk {
+  /** 节点ID */
+  InstanceId: string | null;
 }
 
 /** 日志配置 */

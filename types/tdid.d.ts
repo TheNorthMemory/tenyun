@@ -417,7 +417,7 @@ declare interface Tdid {
   IssueCredential(data?: IssueCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<IssueCredentialResponse>;
   /** 查询权威机构信息 {@link QueryAuthorityInfoRequest} {@link QueryAuthorityInfoResponse} */
   QueryAuthorityInfo(data?: QueryAuthorityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAuthorityInfoResponse>;
-  /** 查询凭证模版内容 {@link QueryCPTRequest} {@link QueryCPTResponse} */
+  /** 查询凭证模板内容 {@link QueryCPTRequest} {@link QueryCPTResponse} */
   QueryCPT(data?: QueryCPTRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCPTResponse>;
   /** 设置DID文档的属性值 {@link SetTDidAttributeRequest} {@link SetTDidAttributeResponse} */
   SetTDidAttribute(data?: SetTDidAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<SetTDidAttributeResponse>;

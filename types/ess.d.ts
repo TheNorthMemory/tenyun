@@ -556,6 +556,20 @@ declare interface FlowApproverUrlInfo {
   LongUrl?: string;
 }
 
+/** 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。 */
+declare interface FlowBatchApproverInfo {
+  /** 合同流程ID。 */
+  FlowId?: string;
+  /** 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。` */
+  RecipientId?: string;
+}
+
+/** 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。 */
+declare interface FlowBatchUrlInfo {
+  /** 批量签署合同和签署方的信息，用于补充动态签署人。 */
+  FlowBatchApproverInfos?: FlowBatchApproverInfo[];
+}
+
 /** 合同流程的基础信息 */
 declare interface FlowBrief {
   /** 合同流程ID，为32位字符串。 */
@@ -1496,9 +1510,9 @@ declare interface CreateBatchSignUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：`请确保和合同中填入的一致` */
-  Name: string;
+  Name?: string;
   /** 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此业务通知方。注：`请确保和合同中填入的一致, 若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息` */
-  Mobile: string;
+  Mobile?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)注：`请确保和合同中填入的一致` */
@@ -1513,6 +1527,8 @@ declare interface CreateBatchSignUrlRequest {
   OrganizationName?: string;
   /** 是否直接跳转至合同内容页面进行签署**false**: 会跳转至批量合同流程的列表, 点击需要批量签署合同后进入合同内容页面进行签署(默认)**true**: 跳过合同流程列表, 直接进入合同内容页面进行签署 */
   JumpToDetail?: boolean;
+  /** 批量签署合同相关信息，指定合同和签署方的信息，用于补充动态签署人。 */
+  FlowBatchUrlInfo?: FlowBatchUrlInfo;
 }
 
 declare interface CreateBatchSignUrlResponse {

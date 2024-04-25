@@ -1992,46 +1992,6 @@ declare interface ModifyRejectedQuestionResponse {
   RequestId?: string;
 }
 
-declare interface ParseDocRequest {
-  /** 文件名称(需要包括文件后缀, 最大长度1024字节) */
-  Name: string;
-  /** 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf) */
-  Url: string;
-  /** 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节) */
-  TaskId: string;
-  /** 切分策略 */
-  Policy?: string;
-  /** 默认值: parse */
-  Operate?: string;
-}
-
-declare interface ParseDocResponse {
-  /** 任务ID */
-  TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface QueryParseDocResultRequest {
-  /** 任务ID */
-  TaskId: string;
-}
-
-declare interface QueryParseDocResultResponse {
-  /** 等待 / 执行中 / 成功 / 失败 */
-  Status?: string;
-  /** 解析后的文件内容 */
-  Name?: string;
-  /** 文件下载地址 */
-  Url?: string;
-  /** 解析失败原因 */
-  Reason?: string;
-  /** 消耗量，输出页数 */
-  Usage?: Usage;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface QueryRewriteRequest {
   /** 需要改写的问题 */
   Question: string;
@@ -2345,10 +2305,6 @@ declare interface Lke {
   ModifyQACate(data: ModifyQACateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQACateResponse>;
   /** 修改拒答问题 {@link ModifyRejectedQuestionRequest} {@link ModifyRejectedQuestionResponse} */
   ModifyRejectedQuestion(data: ModifyRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRejectedQuestionResponse>;
-  /** 文档解析 {@link ParseDocRequest} {@link ParseDocResponse} */
-  ParseDoc(data: ParseDocRequest, config?: AxiosRequestConfig): AxiosPromise<ParseDocResponse>;
-  /** 查询文档解析结果 {@link QueryParseDocResultRequest} {@link QueryParseDocResultResponse} */
-  QueryParseDocResult(data: QueryParseDocResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryParseDocResultResponse>;
   /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 评价消息 {@link RateMsgRecordRequest} {@link RateMsgRecordResponse} */

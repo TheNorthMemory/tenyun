@@ -26,6 +26,8 @@ declare interface AccelerationDomain {
   OriginDetail?: OriginDetail | null;
   /** 回源协议，取值有：FOLLOW: 协议跟随；HTTP: HTTP协议回源；HTTPS: HTTPS协议回源。 */
   OriginProtocol?: string | null;
+  /** 域名证书信息 */
+  Certificate?: AccelerationDomainCertificate | null;
   /** HTTP回源端口。 */
   HttpOriginPort?: number | null;
   /** HTTPS回源端口。 */
@@ -42,8 +44,6 @@ declare interface AccelerationDomain {
   ModifiedOn?: string;
   /** 当域名需要进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。 */
   OwnershipVerification?: OwnershipVerification | null;
-  /** 域名证书信息 */
-  Certificate?: AccelerationDomainCertificate | null;
 }
 
 /** 加速域名所对应的证书信息。 */
@@ -1186,7 +1186,7 @@ declare interface Origin {
 
 /** 加速域名源站信息。 */
 declare interface OriginDetail {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站； VODEO：云点播（混合云版）；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VODEO：云点播（混合云版）；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
   OriginType?: string;
   /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；当 OriginType = VODEO 时，如果 VodeoDistributionRange = ALL，则该参数为 "all-buckets-in-vodeo-application"；如果 VodeoDistributionRange = Bucket，则该参数为对应存储桶域名。 */
   Origin?: string;
@@ -1196,7 +1196,7 @@ declare interface OriginDetail {
   OriginGroupName?: string;
   /** 备用源站组名称，该参数仅当 OriginType = ORIGIN_GROUP 且配置了备用源站组时会生效。 */
   BackOriginGroupName?: string;
-  /** 指定是否允许访问私有对象存储源站，该参数仅当源站类型 OriginType = COS 或 AWS_S3 时会生效，取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为off。 */
+  /** 指定是否允许访问私有对象存储源站，该参数仅当源站类型OriginType = COS 或 AWS_S3 时会生效，取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为 off。 */
   PrivateAccess?: string;
   /** 私有鉴权使用参数，该参数仅当源站类型 PrivateAccess = on 时会生效。 */
   PrivateParameters?: PrivateParameter[] | null;

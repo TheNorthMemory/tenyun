@@ -34,6 +34,48 @@ declare interface ApmAgentInfo {
   PrivateLinkCollectorURL: string | null;
 }
 
+/** 应用相关的配置列表项 */
+declare interface ApmApplicationConfigView {
+  /** 实例ID */
+  InstanceKey?: string;
+  /** 服务名 */
+  ServiceName?: string;
+  /** 接口过滤 */
+  OperationNameFilter?: string;
+  /** 异常过滤 */
+  ExceptionFilter?: string;
+  /** 错误码过滤 */
+  ErrorCodeFilter?: string;
+  /** 应用诊断开关 */
+  EventEnable?: boolean | null;
+  /** URL收敛开关 0 关 1 开 */
+  UrlConvergenceSwitch?: number;
+  /** URL收敛阈值 */
+  UrlConvergenceThreshold?: number;
+  /** URL收敛规则正则 */
+  UrlConvergence?: string;
+  /** URL排除规则正则 */
+  UrlExclude?: string;
+  /** 是否开启日志 0 关 1 开 */
+  IsRelatedLog?: number;
+  /** 日志来源 */
+  LogSource?: string | null;
+  /** CLS日志集 */
+  LogSet?: string;
+  /** 日志主题ID */
+  LogTopicID?: string;
+  /** 线程剖析开关 */
+  SnapshotEnable?: boolean;
+  /** 线程剖析超时阈值 */
+  SnapshotTimeout?: number;
+  /** 探针开启开关 */
+  AgentEnable?: boolean;
+  /** 组件列表开关 */
+  InstrumentList?: Instrument[] | null;
+  /** 链路压缩开关 */
+  TraceSquash?: boolean;
+}
+
 /** 指标维度信息 */
 declare interface ApmField {
   /** 昨日同比指标值，已弃用，不建议使用 */
@@ -144,6 +186,14 @@ declare interface GeneralFilter {
   Key: string;
   /** 过滤值 */
   Value: string;
+}
+
+/** 组件 */
+declare interface Instrument {
+  /** 组件名称 */
+  Name?: string | null;
+  /** 组件开关 */
+  Enable?: boolean | null;
 }
 
 /** 指标曲线数据 */
@@ -304,6 +354,20 @@ declare interface DescribeApmInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGeneralApmApplicationConfigRequest {
+  /** 应用名 */
+  ServiceName: string;
+  /** 实例Id */
+  InstanceId: string;
+}
+
+declare interface DescribeGeneralApmApplicationConfigResponse {
+  /** 应用配置项 */
+  ApmApplicationConfigView?: ApmApplicationConfigView;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGeneralMetricDataRequest {
   /** 要过滤的维度信息：service_metric视图支持：service.name（服务名）、span.kind（客户端/服务端视角）为维度进行过滤，service.name（服务名）必填。span.kind:	server:服务端视角	client:客户端视角默认为服务端视角进行查询。runtime_metric视图支持：service.name（服务名）维度进行过滤，service.name（服务名）必填。sql_metric视图支持：service.name（服务名）、db.instance（数据库名称）、db.ip（数据库实例ip）维度进行过滤，查询service_slow_sql_count（慢sql）指标时service.name必填，查询sql_duration_avg（耗时）指标时db.instance（数据库名称）必填。 */
   Filters: GeneralFilter[];
@@ -428,6 +492,30 @@ declare interface DescribeServiceOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTagValuesRequest {
+  /** 维度名 */
+  TagKey: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 开始时间 */
+  StartTime?: number;
+  /** Or过滤条件 */
+  OrFilters?: Filter[];
+  /** 使用类型 */
+  Type?: string;
+}
+
+declare interface DescribeTagValuesResponse {
+  /** 维度值列表 */
+  Values?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyApmInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -472,6 +560,22 @@ declare interface ModifyApmInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGeneralApmApplicationConfigRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 需要修改的字段key value分别指定字段名、字段值 */
+  Tags: ApmTag[];
+  /** 需要修改配置的服务列表名称 */
+  ServiceNames?: string[];
+}
+
+declare interface ModifyGeneralApmApplicationConfigResponse {
+  /** 返回值描述 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateApmInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -491,6 +595,8 @@ declare interface Apm {
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
   /** 拉取APM实例列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
+  /** 查询应用配置信息 {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
+  DescribeGeneralApmApplicationConfig(data: DescribeGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralApmApplicationConfigResponse>;
   /** 获取指标数据通用接口 {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
   DescribeGeneralMetricData(data: DescribeGeneralMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralMetricDataResponse>;
   /** 通用查询调用链列表 {@link DescribeGeneralSpanListRequest} {@link DescribeGeneralSpanListResponse} */
@@ -499,8 +605,12 @@ declare interface Apm {
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
   /** 获取服务概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
+  /** 查询 Tag 数据 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */
+  DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
   /** 修改APM实例 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
   ModifyApmInstance(data: ModifyApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmInstanceResponse>;
+  /** 修改应用配置信息 {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
+  ModifyGeneralApmApplicationConfig(data: ModifyGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGeneralApmApplicationConfigResponse>;
   /** 销毁实例 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
   TerminateApmInstance(data: TerminateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateApmInstanceResponse>;
 }

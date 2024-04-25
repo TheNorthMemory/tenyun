@@ -150,6 +150,16 @@ declare interface DeviceDataHistoryItem {
   Value: string;
 }
 
+/** 设备固件信息 */
+declare interface DeviceFirmwareInfo {
+  /** 固件类型 */
+  FwType: string;
+  /** 固件版本 */
+  Version: string;
+  /** 最后更新时间 */
+  UpdateTime: number;
+}
+
 /** 设备详细信息 */
 declare interface DeviceInfo {
   /** 设备名 */
@@ -1676,6 +1686,20 @@ declare interface DescribeDeviceFirmWareResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceFirmwaresRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+}
+
+declare interface DescribeDeviceFirmwaresResponse {
+  /** 固件信息列表 */
+  Firmwares: DeviceFirmwareInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceLocationSolveRequest {
   /** 产品ID */
   ProductId: string;
@@ -3077,6 +3101,8 @@ declare interface Iotexplorer {
   DescribeDeviceDataHistory(data: DescribeDeviceDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataHistoryResponse>;
   /** 获取设备固件信息 {@link DescribeDeviceFirmWareRequest} {@link DescribeDeviceFirmWareResponse} */
   DescribeDeviceFirmWare(data: DescribeDeviceFirmWareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmWareResponse>;
+  /** 获取设备当前固件信息 {@link DescribeDeviceFirmwaresRequest} {@link DescribeDeviceFirmwaresResponse} */
+  DescribeDeviceFirmwares(data: DescribeDeviceFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmwaresResponse>;
   /** 获取实时位置解析 {@link DescribeDeviceLocationSolveRequest} {@link DescribeDeviceLocationSolveResponse} */
   DescribeDeviceLocationSolve(data: DescribeDeviceLocationSolveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceLocationSolveResponse>;
   /** 拉取有效云存套餐列表 {@link DescribeDevicePackagesRequest} {@link DescribeDevicePackagesResponse} */
