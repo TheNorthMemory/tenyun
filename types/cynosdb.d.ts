@@ -1430,6 +1430,18 @@ declare interface ParamItemDetail {
   Func?: string | null;
 }
 
+/** 参数变化信息 */
+declare interface ParamItemInfo {
+  /** 参数名字 */
+  ParamName?: string | null;
+  /** 参数新值 */
+  NewValue?: string | null;
+  /** 参数旧值 */
+  OldValue?: string | null;
+  /** 参数公式 */
+  ValueFunction?: string | null;
+}
+
 /** 参数模板信息 */
 declare interface ParamTemplateListInfo {
   /** 参数模板ID */
@@ -2397,7 +2409,7 @@ declare interface CreateProxyRequest {
   UniqueVpcId?: string;
   /** 私有网络子网ID，默认与集群子网ID保持一致 */
   UniqueSubnetId?: string;
-  /** 数据库代理组节点个数 */
+  /** 数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones) */
   ProxyCount?: number;
   /** 连接池类型：SessionConnectionPool(会话级别连接池 ) */
   ConnectionPoolType?: string;
@@ -2409,7 +2421,7 @@ declare interface CreateProxyRequest {
   SecurityGroupIds?: string[];
   /** 描述说明 */
   Description?: string;
-  /** 数据库节点信息 */
+  /** 数据库节点信息（该参数与ProxyCount需要任选一个输入） */
   ProxyZones?: ProxyZone[];
 }
 
@@ -2822,6 +2834,24 @@ declare interface DescribeBinlogsResponse {
   TotalCount: number;
   /** Binlog列表 */
   Binlogs: BinlogItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeChangedParamsAfterUpgradeRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 变配后的CPU */
+  DstCpu: number;
+  /** 变配后的MEM，单位G */
+  DstMem: number;
+}
+
+declare interface DescribeChangedParamsAfterUpgradeResponse {
+  /** 参数个数 */
+  TotalCount?: number;
+  /** 实例参数列表 */
+  Items?: ParamItemInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4753,6 +4783,8 @@ declare interface Cynosdb {
   DescribeBinlogSaveDays(data: DescribeBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogSaveDaysResponse>;
   /** 查询Binlog列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
+  /** 升降配运行参数对比 {@link DescribeChangedParamsAfterUpgradeRequest} {@link DescribeChangedParamsAfterUpgradeResponse} */
+  DescribeChangedParamsAfterUpgrade(data: DescribeChangedParamsAfterUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChangedParamsAfterUpgradeResponse>;
   /** 获取集群数据库列表 {@link DescribeClusterDatabasesRequest} {@link DescribeClusterDatabasesResponse} */
   DescribeClusterDatabases(data: DescribeClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDatabasesResponse>;
   /** 集群信息描述 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 246+ 款产品，11192+ 服务数</summary>
+<details><summary>共计 246+ 款产品，11194+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -171,7 +171,7 @@ csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(97) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(518) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(135) |
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(136) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(56) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
@@ -211,7 +211,7 @@ habo |  | 2018-12-03(2) |
 hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(11) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
-hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(4) |
+hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(5) |
 iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(35) | 2018-03-01(33) |
 ic | [图片瘦身](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
 icr | [对话机器人](https://cloud.tencent.com/document/product/1268) | 2021-10-14(1) |

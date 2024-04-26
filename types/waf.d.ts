@@ -3895,7 +3895,7 @@ declare interface ModifyInstanceRenewFlagResponse {
 declare interface ModifyModuleStatusRequest {
   /** 需要设置的domain */
   Domain: string;
-  /** WEB 安全模块开关，0或1 */
+  /** Web 安全模块开关，0或1 */
   WebSecurity: number;
   /** 访问控制模块开关，0或者1 */
   AccessControl: number;
@@ -4489,7 +4489,7 @@ declare interface Waf {
   DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
   /** 查询用户所有实例的详细信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** Waf ip黑白名单查询 {@link DescribeIpAccessControlRequest} {@link DescribeIpAccessControlResponse} */
+  /** Waf IP黑白名单查询 {@link DescribeIpAccessControlRequest} {@link DescribeIpAccessControlResponse} */
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;

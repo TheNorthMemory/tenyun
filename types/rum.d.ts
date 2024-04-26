@@ -585,7 +585,7 @@ declare interface DescribeDataEventUrlRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -599,7 +599,7 @@ declare interface DescribeDataEventUrlRequest {
 
 declare interface DescribeDataEventUrlResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -3026,6 +3026,14 @@ declare interface LiveStreamProcessTask {
   Url: string;
 }
 
+/** 直播流录制结果 */
+declare interface LiveStreamRecordResultInfo {
+  /** 录制是否结束。0：录制未结束，返回单个文件结果1：录制结束，返回所有录制文件结果 */
+  RecordOver?: number | null;
+  /** 文件列表 */
+  FileResults?: LiveRecordFile[] | null;
+}
+
 /** 直播 AI 打点识别结果 */
 declare interface LiveStreamTagRecognitionResult {
   /** 打点事件。 */
@@ -6638,7 +6646,7 @@ declare interface ParseLiveStreamProcessNotificationRequest {
 }
 
 declare interface ParseLiveStreamProcessNotificationResponse {
-  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；ProcessEof：直播流处理结束。 */
+  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；LiveRecordResult：直播录制结果；ProcessEof：直播流处理结束。 */
   NotificationType?: string;
   /** 视频处理任务 ID。 */
   TaskId?: string;
@@ -6652,6 +6660,8 @@ declare interface ParseLiveStreamProcessNotificationResponse {
   AiAnalysisResultInfo?: LiveStreamAiAnalysisResultInfo | null;
   /** 媒体质检结果，当 NotificationType 为 AiQualityControlResult 时有效。 */
   AiQualityControlResultInfo?: LiveStreamAiQualityControlResultInfo | null;
+  /** 直播录制结果，当 NotificationType 为 LiveRecordResult 时有效。 */
+  LiveRecordResultInfo?: LiveStreamRecordResultInfo | null;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。 */
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */

@@ -22,7 +22,7 @@ declare interface AutoSnapshotPolicyInfo {
   NextActiveTime?: string;
   /** 快照策略状态，1代表快照策略状态正常。这里只有一种状态 */
   Status?: string;
-  /** 帐号ID */
+  /** 账号ID */
   AppId?: number;
   /** 保留时间 */
   AliveDays?: number;
@@ -289,15 +289,15 @@ declare interface PGroupInfo {
 /** 权限组规则列表 */
 declare interface PGroupRuleInfo {
   /** 规则ID */
-  RuleId: string;
+  RuleId?: string;
   /** 允许访问的客户端IP */
-  AuthClientIp: string;
+  AuthClientIp?: string;
   /** 读写权限, ro为只读，rw为读写 */
-  RWPermission: string;
-  /** 用户权限。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。 */
-  UserPermission: string;
+  RWPermission?: string;
+  /** all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息 */
+  UserPermission?: string;
   /** 规则优先级，1-100。 其中 1 为最高，100为最低 */
-  Priority: number;
+  Priority?: number;
 }
 
 /** 快照信息 */
@@ -320,7 +320,7 @@ declare interface SnapshotInfo {
   AliveDay?: number;
   /** 快照进度百分比，1表示1% */
   Percent?: number;
-  /** 帐号ID */
+  /** 账号ID */
   AppId?: number;
   /** 快照删除时间 */
   DeleteTime?: string;
@@ -515,23 +515,23 @@ declare interface CreateCfsRuleRequest {
   Priority: number;
   /** 读写权限, 值为 RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读 */
   RWPermission?: string;
-  /** 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。不填默认为root_squash。 */
+  /** 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息 */
   UserPermission?: string;
 }
 
 declare interface CreateCfsRuleResponse {
   /** 规则 ID */
-  RuleId: string;
+  RuleId?: string;
   /** 权限组 ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 客户端 IP */
-  AuthClientIp: string;
+  AuthClientIp?: string;
   /** 读写权限 */
-  RWPermission: string;
+  RWPermission?: string;
   /** 用户权限 */
-  UserPermission: string;
+  UserPermission?: string;
   /** 优先级 */
-  Priority: number;
+  Priority?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1125,7 +1125,7 @@ declare interface UpdateCfsRuleRequest {
   AuthClientIp?: string;
   /** 读写权限, 值为RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读 */
   RWPermission?: string;
-  /** 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。不填默认为root_squash。 */
+  /** 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash。all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息 */
   UserPermission?: string;
   /** 规则优先级，参数范围1-100。 其中 1 为最高，100为最低 */
   Priority?: number;
@@ -1133,17 +1133,17 @@ declare interface UpdateCfsRuleRequest {
 
 declare interface UpdateCfsRuleResponse {
   /** 权限组 ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 规则 ID */
-  RuleId: string;
+  RuleId?: string;
   /** 允许访问的客户端 IP 或者 IP 段 */
-  AuthClientIp: string;
+  AuthClientIp?: string;
   /** 读写权限 */
-  RWPermission: string;
+  RWPermission?: string;
   /** 用户权限 */
-  UserPermission: string;
+  UserPermission?: string;
   /** 优先级 */
-  Priority: number;
+  Priority?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

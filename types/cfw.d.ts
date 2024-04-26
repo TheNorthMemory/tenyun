@@ -2313,11 +2313,11 @@ declare interface DescribeIPStatusListRequest {
 
 declare interface DescribeIPStatusListResponse {
   /** ip状态信息 */
-  StatusList: IPDefendStatus[];
+  StatusList?: IPDefendStatus[];
   /** 状态码 */
-  ReturnCode: number;
+  ReturnCode?: number;
   /** 状态信息 */
-  ReturnMsg: string;
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3575,7 +3575,7 @@ declare interface Cfw {
   DescribeFwSyncStatus(data?: DescribeFwSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwSyncStatusResponse>;
   /** 新手引导扫描接口信息 {@link DescribeGuideScanInfoRequest} {@link DescribeGuideScanInfoResponse} */
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
-  /** ip防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
+  /** IP防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
   /** 查询入侵防御规则白名单接口 {@link DescribeIdsWhiteRuleRequest} {@link DescribeIdsWhiteRuleResponse} */
   DescribeIdsWhiteRule(data: DescribeIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdsWhiteRuleResponse>;

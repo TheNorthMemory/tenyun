@@ -96,13 +96,15 @@ declare interface CreateWorkspaceRequest {
   /** 工作空间生命周期钩子. 分为三个阶段 init, start, destroy. 分别表示工作空间数据初始化阶段, 工作空间启动阶段, 工作空间关闭阶段. 用户可以自定义 shell 命令. */
   Lifecycle?: LifeCycle;
   /** 应用名称 */
-  AppId?: number;
+  TenantAppId?: number;
   /** 用户UIN */
-  Uin?: string;
+  TenantUin?: string;
   /** VPCID */
-  UniqVpcId?: string;
+  TenantUniqVpcId?: string;
   /** 子网ID */
-  SubnetId?: string;
+  TenantSubnetId?: string;
+  /** 地域 */
+  Region?: string;
 }
 
 declare interface CreateWorkspaceResponse {

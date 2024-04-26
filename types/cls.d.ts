@@ -413,35 +413,39 @@ declare interface ContentInfo {
 /** cos导入配置信息 */
 declare interface CosRechargeInfo {
   /** COS导入配置ID */
-  Id: string | null;
+  Id?: string | null;
   /** 日志主题ID */
-  TopicId: string | null;
+  TopicId?: string | null;
   /** 日志集ID */
-  LogsetId: string | null;
+  LogsetId?: string | null;
   /** COS导入任务名称 */
-  Name: string | null;
+  Name?: string | null;
   /** COS存储桶 */
-  Bucket: string | null;
+  Bucket?: string | null;
   /** COS存储桶所在地域 */
-  BucketRegion: string | null;
+  BucketRegion?: string | null;
   /** COS文件所在文件夹的前缀 */
-  Prefix: string | null;
+  Prefix?: string | null;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
-  LogType: string | null;
+  LogType?: string | null;
   /** 状态 status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。 */
-  Status: number | null;
+  Status?: number | null;
   /** 是否启用: 0： 未启用 ， 1：启用 */
-  Enable: number | null;
+  Enable?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 进度条百分值 */
-  Progress: number | null;
+  Progress?: number | null;
   /** supported: "", "gzip", "lzop", "snappy”; 默认空 */
-  Compress: string | null;
+  Compress?: string | null;
   /** 见： ExtractRuleInfo 结构描述 */
-  ExtractRuleInfo: ExtractRuleInfo | null;
+  ExtractRuleInfo?: ExtractRuleInfo | null;
+  /** COS导入任务类型。1：一次性导入任务；2：持续性导入任务。 */
+  TaskType?: number | null;
+  /** 元数据。支持 bucket，object。 */
+  Metadata?: string[] | null;
 }
 
 /** csv内容描述 */
@@ -526,7 +530,7 @@ declare interface DataTransformTaskInfo {
   LogsetId?: string;
   /** 加工任务目的topic_id以及别名 */
   DstResources?: DataTransformResouceInfo[];
-  /** 加工逻辑函数 */
+  /** 加工逻辑函数。 */
   EtlContent?: string;
 }
 
@@ -608,25 +612,25 @@ declare interface ExtractRuleInfo {
   UnMatchUpLoadSwitch?: boolean | null;
   /** 失败日志的key */
   UnMatchLogKey?: string | null;
-  /** 增量采集模式下的回溯数据量，默认-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。 */
+  /** 增量采集模式下的回溯数据量，默认：-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。注意：- COS导入不支持此字段。 */
   Backtracking?: number | null;
-  /** 是否为Gbk编码. 0: 否, 1: 是 */
+  /** 是否为Gbk编码。 0：否；1：是。注意：- COS导入不支持此字段。 */
   IsGBK?: number | null;
-  /** 是否为标准json. 0: 否, 1: 是 */
+  /** 是否为标准json。 0：否； 1：是。 */
   JsonStandard?: number | null;
-  /** syslog传输协议，取值为tcp或者udp。该字段适用于：创建采集规则配置、修改采集规则配置 */
+  /** syslog传输协议，取值为tcp或者udp。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置。- COS导入不支持此字段。 */
   Protocol?: string | null;
-  /** syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]。举例：127.0.0.1:9000该字段适用于：创建采集规则配置、修改采集规则配置 */
+  /** syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]。举例：127.0.0.1:9000注意：- 该字段适用于：创建采集规则配置、修改采集规则配置。- COS导入不支持此字段。 */
   Address?: string | null;
-  /** rfc3164：指定系统日志采集使用RFC3164协议解析日志。rfc5424：指定系统日志采集使用RFC5424协议解析日志。auto：自动匹配rfc3164或者rfc5424其中一种协议该字段适用于：创建采集规则配置、修改采集规则配置 */
+  /** rfc3164：指定系统日志采集使用RFC3164协议解析日志。rfc5424：指定系统日志采集使用RFC5424协议解析日志。auto：自动匹配rfc3164或者rfc5424其中一种协议。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置- COS导入不支持此字段。 */
   ParseProtocol?: string | null;
-  /** 元数据类型，0: 不使用元数据信息，1:使用机器组元数据，2:使用用户自定义元数据，3:使用采集配置路径， */
+  /** 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。注意：- COS导入不支持此字段。 */
   MetadataType?: number;
-  /** 采集配置路径正则表达式，MetadataType为3时必填 */
+  /** 采集配置路径正则表达式。注意：- MetadataType为3时必填。- COS导入不支持此字段。 */
   PathRegex?: string | null;
-  /** 用户自定义元数据信息，MetadataType为2时必填 */
+  /** 用户自定义元数据信息。注意：- MetadataType为2时必填。- COS导入不支持此字段。 */
   MetaTags?: MetaTagInfo[];
-  /** Windows事件日志采集 */
+  /** Windows事件日志采集。注意：- COS导入不支持此字段。 */
   EventLogRules?: EventLog[];
 }
 
@@ -976,7 +980,7 @@ declare interface MetricLabel {
 
 /** 告警策略中监控任务的执行时间点 */
 declare interface MonitorTime {
-  /** 可选值： Period - 周期执行 Fixed - 定期执行 */
+  /** 执行周期， 可选值：Period；Fixed。- Period：固定频率- Fixed：固定时间 */
   Type: string;
   /** 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。 */
   Time: number;
@@ -2255,7 +2259,7 @@ declare interface DescribeDashboardsResponse {
 }
 
 declare interface DescribeDataTransformInfoRequest {
-  /** taskName按照【加工任务名称】进行过滤。类型：String必选：否 taskId按照【加工任务id】进行过滤。类型：String必选：否 srctopicId按照【源topicId】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** taskName按照【加工任务名称】进行过滤。类型：String必选：否 taskId按照【加工任务id】进行过滤。类型：String必选：否 topicId按照【源topicId】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -2605,13 +2609,13 @@ declare interface GetAlarmLogResponse {
 declare interface MergePartitionRequest {
   /** 日志主题ID */
   TopicId: string;
-  /** 合并的PartitionId */
+  /** 合并的PartitionId（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等，且找到的分区必须是读写分区（Staus:readwrite），入参PartitionId与找到的PartitionId设置为只读分区（Status:readonly）,再新建一个新的读写分区） 。[获取分区列表](https://cloud.tencent.com/document/product/614/56469)1. 入参PartitionId只能是读写分区（Status的值有readonly，readwrite），且能找到入参PartitionId的下一个可读写分区（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等）；2. 入参PartitionId不能是最后一个分区（PartitionId的ExclusiveEndKey不能是ffffffffffffffffffffffffffffffff）；3. topic的分区数量是有限制的（默认50个），合并之后不能超过最大分区，否则不能合并。 */
   PartitionId: number;
 }
 
 declare interface MergePartitionResponse {
   /** 合并结果集 */
-  Partitions: PartitionInfo[];
+  Partitions?: PartitionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3035,7 +3039,7 @@ declare interface ModifyTopicResponse {
 declare interface OpenKafkaConsumerRequest {
   /** 日志主题ID */
   FromTopicId: string;
-  /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
+  /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4]，默认：0 */
   Compression?: number;
   /** kafka协议消费数据格式 */
   ConsumerContent?: KafkaConsumerContent;
@@ -3145,7 +3149,7 @@ declare interface SearchCosRechargeInfoRequest {
   BucketRegion: string;
   /** cos文件所在文件夹的前缀 */
   Prefix: string;
-  /** 压缩模式: "", "gzip", "lzop", "snappy”; 默认"" */
+  /** 压缩模式: "", "gzip", "lzop", "snappy"; 默认"" */
   Compress?: string;
 }
 
@@ -3173,9 +3177,9 @@ declare interface SearchLogRequest {
   Query: string;
   /** 检索语法规则，默认值为0，推荐使用1 (CQL语法)。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
   SyntaxRule?: number;
-  /** - 要检索分析的日志主题ID，仅能指定一个日志主题。- 如需同时检索多个日志主题，请使用Topics参数。 */
+  /** - 要检索分析的日志主题ID，仅能指定一个日志主题。- 如需同时检索多个日志主题，请使用Topics参数。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
   TopicId?: string;
-  /** - 要检索分析的日志主题列表，最大支持20个日志主题。- 检索单个日志主题时请使用TopicId。- 不能同时使用TopicId和Topics。 */
+  /** - 要检索分析的日志主题列表，最大支持20个日志主题。- 检索单个日志主题时请使用TopicId。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
   Topics?: MultiTopicSearchInformation[];
   /** 表示单次查询返回的原始日志条数，默认为100，最大值为1000，获取后续日志需使用Context参数注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法 */
   Limit?: number;

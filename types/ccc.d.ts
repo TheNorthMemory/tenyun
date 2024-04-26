@@ -1149,7 +1149,7 @@ declare interface DescribeCarrierPrivilegeNumberApplicantsResponse {
 declare interface DescribeChatMessagesRequest {
   /** 实例 ID（废弃） */
   InstanceId?: number;
-  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  /** 应用 ID，可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId?: number;
   /** 服务记录ID（废弃） */
   CdrId?: string;

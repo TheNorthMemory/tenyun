@@ -608,11 +608,11 @@ declare interface DDoSBlockData {
 
 /** 适用于四层代理或 Web 站点服务的独立 DDoS 防护规格配置。 */
 declare interface DDosProtectionConfig {
-  /** 中国大陆地区独立 DDoS 防护的规格。详情请参考 [独立 DDoS 防护相关费用](https://cloud.tencent.com/document/product/1552/94162)PLATFORM：平台默认防护，即不开启独立 DDoS 防护；BASE30_MAX300：开启独立 DDoS 防护，提供 30 Gbps 保底防护带宽，可配置最高 300 Gpbs 弹性防护带宽；BASE60_MAX600：开启独立 DDoS 防护，提供 60 Gbps 保底防护带宽，可配置最高 600 Gpbs 弹性防护带宽。不填写参数时，取默认值 PLATFORM。 */
+  /** 中国大陆地区独立 DDoS 防护的规格。详情请参考 [独立 DDoS 防护相关费用](https://cloud.tencent.com/document/product/1552/94162)PLATFORM：平台默认防护，即不开启独立 DDoS 防护；BASE30_MAX300：开启独立 DDoS 防护，提供 30 Gbps 保底防护带宽以及 300 Gbps 弹性防护带宽；BASE60_MAX600：开启独立 DDoS 防护，提供 60 Gbps 保底防护带宽以及 600 Gbps 弹性防护带宽。不填写参数时，取默认值 PLATFORM。 */
   LevelMainland?: string;
   /** 中国大陆地区独立 DDoS 防护的弹性防护带宽配置。仅当开启中国大陆区域独立 DDos 防护时有效（详见 LevelMainland 参数配置），且取值范围有如下限制：开启中国大陆地区独立 DDoS 防护，使用 30 Gbps 保底防护带宽规格时（ LevelMainland 参数值为 BASE30_MAX300 ）：有效取值范围为 30 至 300，单位为 Gbps；开启中国大陆地区独立 DDoS 防护，使用 60 Gbps 保底防护带宽规格时（ LevelMainland 参数值为 BASE60_MAX600 ）：有效取值范围为 60 至 600，单位为 Gbps；使用平台默认防护（ LevelMainland 参数值为 PLATFORM ）：不支持配置，本参数值无效。 */
   MaxBandwidthMainland?: number;
-  /** 全球（除中国大陆以外）地区独立 DDoS 防护的规格。PLATFORM：平台默认防护，即不开启独立 DDoS 防护；ANYCAST300：开启独立 DDoS 防护，提供合计最大 300 Gbps 防护带宽；ANYCAST_ALLIN：开启独立 DDoS 防护，使用全部可用防护资源进行防护。不填写参数时，取默认值 PLATFORM。 */
+  /** 全球（除中国大陆以外）地区独立 DDoS 防护的规格。PLATFORM：平台默认防护，即不开启独立 DDoS 防护；ANYCAST300：开启独立 DDoS 防护，提供 300 Gbps 防护带宽；ANYCAST_ALLIN：开启独立 DDoS 防护，使用全部可用防护资源进行防护。不填写参数时，取默认值 PLATFORM。 */
   LevelOverseas?: string;
 }
 
@@ -1138,6 +1138,24 @@ declare interface L7OfflineLog {
   Size?: number;
 }
 
+/** 实时日志投递的输出格式。您可以直接通过 FormatType 参数使用指定预设日志输出格式（JSON Lines / csv），也可以在预设日志输出格式基础上，通过其他参数来自定义变体输出格式。 */
+declare interface LogFormat {
+  /** 日志投递的预设输出格式类型，取值有：json：使用预设日志输出格式 JSON Lines，单条日志中的字段以键值对方式呈现；csv：使用预设日志输出格式 csv，单条日志中仅呈现字段值，不呈现字段名称。 */
+  FormatType: string;
+  /** 在每个日志投递批次之前添加的字符串。每个日志投递批次可能包含多条日志记录。 */
+  BatchPrefix?: string;
+  /** 在每个日志投递批次后附加的字符串。 */
+  BatchSuffix?: string;
+  /** 在每条日志记录之前添加的字符串。 */
+  RecordPrefix?: string;
+  /** 在每条日志记录后附加的字符串。 */
+  RecordSuffix?: string;
+  /** 插入日志记录之间作为分隔符的字符串，取值有：\n：换行符；\t：制表符；，：半角逗号。 */
+  RecordDelimiter?: string;
+  /** 单条日志记录内，插入字段之间作为分隔符的字符串，取值有：\t：制表符；，：半角逗号；;：半角分号。 */
+  FieldDelimiter?: string;
+}
+
 /** 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态 */
 declare interface MaxAge {
   /** 是否遵循源站，取值有：on：遵循源站，忽略MaxAge 时间设置；off：不遵循源站，使用MaxAge 时间设置。 */
@@ -1498,6 +1516,8 @@ declare interface RealtimeLogDeliveryTask {
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：605 表示采样比例为 60.5%。 */
   Sample?: number;
+  /** 日志投递的输出格式。出参为 null 时表示为默认格式，默认格式逻辑如下：当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；当 TaskType 取值为 s3 时，默认格式为 JSON Lines。 */
+  LogFormat?: LogFormat | null;
   /** CLS 的配置信息。 */
   CLS?: CLSTopic | null;
   /** 自定义 HTTP 服务的配置信息。 */
@@ -1881,17 +1901,17 @@ declare interface Tag {
 /** 内容管理任务结果 */
 declare interface Task {
   /** 任务 ID。 */
-  JobId: string;
-  /** 状态。 */
-  Status: string;
+  JobId?: string;
   /** 资源。 */
-  Target: string;
+  Target?: string;
   /** 任务类型。 */
-  Type: string;
+  Type?: string;
+  /** 状态。取值有：processing：处理中；success：成功； failed：失败；timeout：超时。 */
+  Status?: string;
   /** 任务创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务完成时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 安全模板配置 */
@@ -2461,6 +2481,8 @@ declare interface CreateRealtimeLogDeliveryTaskRequest {
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填表示采样比例为 100%。 */
   Sample?: number;
+  /** 日志投递的输出格式。不填表示为默认格式，默认格式逻辑如下：当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；当 TaskType 取值为 s3 时，默认格式为 JSON Lines；特别地，当 TaskType 取值为 cls 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。 */
+  LogFormat?: LogFormat;
   /** CLS 的配置信息。当 TaskType 取值为 cls 时，该参数必填。 */
   CLS?: CLSTopic;
   /** 自定义 HTTP 服务的配置信息。当 TaskType 取值为 custom_endpoint 时，该参数必填。 */
@@ -3803,6 +3825,8 @@ declare interface ModifyRealtimeLogDeliveryTaskRequest {
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填保持原有配置。 */
   Sample?: number;
+  /** 日志投递的输出格式。不填保持原有配置。 */
+  LogFormat?: LogFormat;
   /** 自定义 HTTP 服务的配置信息，不填保持原有配置。 */
   CustomEndpoint?: CustomEndpoint;
   /** AWS S3 兼容存储桶的配置信息，不填保持原有配置。 */
