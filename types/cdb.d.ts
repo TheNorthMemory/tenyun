@@ -1880,6 +1880,20 @@ declare interface CloseCdbProxyAddressResponse {
   RequestId?: string;
 }
 
+declare interface CloseSSLRequest {
+  /** 实例 ID 。只读组 ID为空时必填。 */
+  InstanceId?: string;
+  /** 只读组 ID。实例 ID为空时必填。 */
+  RoGroupId?: string;
+}
+
+declare interface CloseSSLResponse {
+  /** 异步请求 ID。 */
+  AsyncRequestId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseWanServiceRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
@@ -3746,6 +3760,22 @@ declare interface DescribeRollbackTaskDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSSLStatusRequest {
+  /** 实例 ID 。只读组 ID为空时必填。 */
+  InstanceId?: string;
+  /** 只读组 ID。实例 ID为空时必填。 */
+  RoGroupId?: string;
+}
+
+declare interface DescribeSSLStatusResponse {
+  /** 是否开通 SSL 。ON 代表开通 ，OFF 代表未开通。 */
+  Status: string;
+  /** 证书下载链接。 */
+  Url: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSlowLogDataRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -4596,6 +4626,20 @@ declare interface OpenDBInstanceGTIDResponse {
   RequestId?: string;
 }
 
+declare interface OpenSSLRequest {
+  /** 实例 ID 。 */
+  InstanceId?: string;
+  /** 只读组 ID。 */
+  RoGroupId?: string;
+}
+
+declare interface OpenSSLResponse {
+  /** 异步请求 ID。 */
+  AsyncRequestId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenWanServiceRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
@@ -4935,6 +4979,8 @@ declare interface Cdb {
   CloseCDBProxy(data: CloseCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseCDBProxyResponse>;
   /** 关闭数据库代理地址 {@link CloseCdbProxyAddressRequest} {@link CloseCdbProxyAddressResponse} */
   CloseCdbProxyAddress(data: CloseCdbProxyAddressRequest, config?: AxiosRequestConfig): AxiosPromise<CloseCdbProxyAddressResponse>;
+  /** 关闭SSL {@link CloseSSLRequest} {@link CloseSSLResponse} */
+  CloseSSL(data?: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
   /** 关闭实例外网访问 {@link CloseWanServiceRequest} {@link CloseWanServiceResponse} */
   CloseWanService(data: CloseWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanServiceResponse>;
   /** 创建云数据库的账户 {@link CreateAccountsRequest} {@link CreateAccountsResponse} */
@@ -5103,6 +5149,8 @@ declare interface Cdb {
   DescribeRollbackRangeTime(data: DescribeRollbackRangeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackRangeTimeResponse>;
   /** 查询回档任务详情 {@link DescribeRollbackTaskDetailRequest} {@link DescribeRollbackTaskDetailResponse} */
   DescribeRollbackTaskDetail(data: DescribeRollbackTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTaskDetailResponse>;
+  /** 查询 SSL 开通情况 {@link DescribeSSLStatusRequest} {@link DescribeSSLStatusResponse} */
+  DescribeSSLStatus(data?: DescribeSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSLStatusResponse>;
   /** 查询实例慢日志 {@link DescribeSlowLogDataRequest} {@link DescribeSlowLogDataResponse} */
   DescribeSlowLogData(data: DescribeSlowLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogDataResponse>;
   /** 查询慢查询日志 {@link DescribeSlowLogsRequest} {@link DescribeSlowLogsResponse} */
@@ -5195,6 +5243,8 @@ declare interface Cdb {
   OpenDBInstanceEncryption(data: OpenDBInstanceEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBInstanceEncryptionResponse>;
   /** 开启实例的GTID {@link OpenDBInstanceGTIDRequest} {@link OpenDBInstanceGTIDResponse} */
   OpenDBInstanceGTID(data: OpenDBInstanceGTIDRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBInstanceGTIDResponse>;
+  /** 开启SSL {@link OpenSSLRequest} {@link OpenSSLResponse} */
+  OpenSSL(data?: OpenSSLRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSSLResponse>;
   /** 开通实例外网访问 {@link OpenWanServiceRequest} {@link OpenWanServiceResponse} */
   OpenWanService(data: OpenWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanServiceResponse>;
   /** 解隔离按量计费云数据库实例 {@link ReleaseIsolatedDBInstancesRequest} {@link ReleaseIsolatedDBInstancesResponse} */

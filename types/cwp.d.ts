@@ -7750,48 +7750,6 @@ declare interface DescribeAttackEventsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAttackLogInfoRequest {
-  /** 日志ID */
-  Id: number;
-}
-
-declare interface DescribeAttackLogInfoResponse {
-  /** 日志ID */
-  Id: number;
-  /** 主机ID */
-  Quuid: string;
-  /** 攻击来源端口 */
-  SrcPort: number;
-  /** 攻击来源IP */
-  SrcIp: string;
-  /** 攻击目标端口 */
-  DstPort: number;
-  /** 攻击目标IP */
-  DstIp: string;
-  /** 攻击方法 */
-  HttpMethod: string;
-  /** 攻击目标主机 */
-  HttpHost: string;
-  /** 攻击头信息 */
-  HttpHead: string;
-  /** 攻击者浏览器标识 */
-  HttpUserAgent: string;
-  /** 请求源 */
-  HttpReferer: string;
-  /** 威胁类型 */
-  VulType: string;
-  /** 攻击路径 */
-  HttpCgi: string;
-  /** 攻击参数 */
-  HttpParam: string;
-  /** 攻击时间 */
-  CreatedAt: string;
-  /** 攻击内容 */
-  HttpContent: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeAttackLogsRequest {
   /** 返回数量，最大值为100。 */
   Limit?: number;
@@ -15021,8 +14979,6 @@ declare interface Cwp {
   DescribeAttackEventInfo(data: DescribeAttackEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventInfoResponse>;
   /** 网络攻击检测事件列表 {@link DescribeAttackEventsRequest} {@link DescribeAttackEventsResponse} */
   DescribeAttackEvents(data?: DescribeAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventsResponse>;
-  /** @deprecated 网络攻击日志详情 {@link DescribeAttackLogInfoRequest} {@link DescribeAttackLogInfoResponse} */
-  DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
   /** 网络攻击日志列表(待下线,请使用DescribeAttackEvents代替) {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
   /** 查询攻击溯源 {@link DescribeAttackSourceRequest} {@link DescribeAttackSourceResponse} */

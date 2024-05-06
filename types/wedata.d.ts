@@ -238,6 +238,74 @@ declare interface AttributeItemDTO {
   Description?: string | null;
 }
 
+/** 集群基础信息 */
+declare interface BaseClusterInfo {
+  /** 集群id */
+  ClusterId?: string | null;
+  /** 集群类型，EMR/CDW等 */
+  ClusterType?: string | null;
+  /** 集群名称 */
+  ClusterName?: string | null;
+  /** 地域中文 */
+  RegionCn?: string | null;
+  /** 地域英文 */
+  RegionEn?: string | null;
+  /** 地区 */
+  RegionArea?: string | null;
+  /** 集群是否使用 */
+  Used?: boolean | null;
+  /** 集群状态 */
+  Status?: number | null;
+  /** 集群状态信息 */
+  StatusInfo?: string | null;
+  /** 集群存储类型 */
+  StorageType?: string | null;
+  /** 集群计算类型 */
+  ComputeType?: string | null;
+  /** 集群资源量 */
+  ClusterResource?: string | null;
+  /** 集群付费方式 */
+  ChargeType?: string | null;
+  /** 集群创建时间 */
+  CreateTime?: string | null;
+  /** 额外配置 */
+  ExtraConf?: string | null;
+  /** ranger账号名称 */
+  RangerUserName?: string | null;
+  /** cdw账号（用于展示） */
+  CdwUserName?: string | null;
+}
+
+/** 租户基础信息 */
+declare interface BaseTenant {
+  /** 租户id */
+  TenantId: string | null;
+  /** 租户标识 */
+  TenantName: string | null;
+  /** 租户显示名称，一般是中文名 */
+  DisplayName: string | null;
+  /** 备注 */
+  Description: string | null;
+  /** 租户主账号 */
+  OwnerUserId: string | null;
+  /** 租户的额外配置参数, json格式字符串 */
+  Params: string | null;
+}
+
+/** 基础用户信息 */
+declare interface BaseUser {
+  /** 有云的UIN，全局唯一 */
+  UserId?: string | null;
+  /** 用户全局唯一标识 */
+  UserName?: string | null;
+  /** 用户显示名称 */
+  DisplayName?: string | null;
+  /** 电话号码 */
+  PhoneNum?: string | null;
+  /** 邮箱 */
+  Email?: string | null;
+}
+
 /** BatchCreateTaskVersion使用，描述任务信息 */
 declare interface BatchCreateTaskVersionDTO {
   /** 任务ID */
@@ -2430,6 +2498,38 @@ declare interface ProdSchedulerTask {
   TaskName?: string | null;
   /** 生产调度任务任务类型 */
   CycleType?: number | null;
+}
+
+/** 项目信息 */
+declare interface Project {
+  /** 项目的所在租户ID */
+  TenantId?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目标识，英文名 */
+  ProjectName?: string | null;
+  /** 项目显示名称，可以为中文名 */
+  DisplayName?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 备注 */
+  Description?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 创建者 */
+  Creator?: BaseUser | null;
+  /** 租户信息 */
+  Tenant?: BaseTenant | null;
+  /** 项目的管理员 */
+  AdminUsers?: BaseUser[] | null;
+  /** 项目关联的集群信息 */
+  Clusters?: BaseClusterInfo[] | null;
+  /** 项目的额外配置参数 */
+  Params?: string | null;
+  /** 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中 */
+  Status?: number;
+  /** 项目类型，SIMPLE：简单模式 STANDARD：标准模式 */
+  Model?: string | null;
 }
 
 /** dlc建表属性 */
@@ -6866,6 +6966,8 @@ declare interface DescribeProjectRequest {
 }
 
 declare interface DescribeProjectResponse {
+  /** 项目信息 */
+  Data?: Project;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

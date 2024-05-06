@@ -3315,7 +3315,7 @@ declare interface DescribeRulesSettingRequest {
 
 declare interface DescribeRulesSettingResponse {
   /** 规则引擎可应用匹配请求的设置列表及其详细建议配置信息。 */
-  Actions: RulesSettingAction[];
+  Actions?: RulesSettingAction[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

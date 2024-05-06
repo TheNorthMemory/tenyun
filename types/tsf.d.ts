@@ -435,77 +435,79 @@ declare interface Cluster {
 /** 集群详情 */
 declare interface ClusterV2 {
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 集群描述 */
-  ClusterDesc: string | null;
+  ClusterDesc?: string | null;
   /** 集群类型 */
-  ClusterType: string | null;
+  ClusterType?: string | null;
   /** 集群所属私有网络ID */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 集群状态 */
-  ClusterStatus: string | null;
+  ClusterStatus?: string | null;
   /** 集群CIDR */
-  ClusterCIDR: string | null;
+  ClusterCIDR?: string | null;
   /** 集群总CPU，单位: 核 */
-  ClusterTotalCpu: number | null;
+  ClusterTotalCpu?: number | null;
   /** 集群总内存，单位: G */
-  ClusterTotalMem: number | null;
+  ClusterTotalMem?: number | null;
   /** 集群已使用CPU，单位: 核 */
-  ClusterUsedCpu: number | null;
+  ClusterUsedCpu?: number | null;
   /** 集群已使用内存，单位: G */
-  ClusterUsedMem: number | null;
+  ClusterUsedMem?: number | null;
   /** 集群机器实例数量 */
-  InstanceCount: number | null;
+  InstanceCount?: number | null;
   /** 集群运行中的机器实例数量 */
-  RunInstanceCount: number | null;
+  RunInstanceCount?: number | null;
   /** 集群正常状态的机器实例数量 */
-  NormalInstanceCount: number | null;
+  NormalInstanceCount?: number | null;
   /** 删除标记：true：可以删除；false：不可删除 */
-  DeleteFlag: boolean | null;
+  DeleteFlag?: boolean | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 集群所属TSF地域ID */
-  TsfRegionId: string | null;
+  TsfRegionId?: string | null;
   /** 集群所属TSF地域名称 */
-  TsfRegionName: string | null;
+  TsfRegionName?: string | null;
   /** 集群所属TSF可用区ID */
-  TsfZoneId: string | null;
+  TsfZoneId?: string | null;
   /** 集群所属TSF可用区名称 */
-  TsfZoneName: string | null;
+  TsfZoneName?: string | null;
   /** 集群不可删除的原因 */
-  DeleteFlagReason: string | null;
+  DeleteFlagReason?: string | null;
   /** 集群所属私有网络子网ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 集群剩余 cpu limit */
-  ClusterLimitCpu: string | null;
+  ClusterLimitCpu?: string | null;
   /** 集群剩余 memory limit */
-  ClusterLimitMem: string | null;
+  ClusterLimitMem?: string | null;
   /** 运行服务实例数 */
-  RunServiceInstanceCount: number | null;
+  RunServiceInstanceCount?: number | null;
   /** 给前端的按钮控制信息 */
-  OperationInfo: OperationInfo | null;
+  OperationInfo?: OperationInfo | null;
   /** 容器集群版本 */
-  ClusterVersion: string | null;
+  ClusterVersion?: string | null;
   /** 部署组总数 */
-  GroupCount: number | null;
+  GroupCount?: number | null;
   /** 运行中部署组数 */
-  RunGroupCount: number | null;
+  RunGroupCount?: number | null;
   /** 停止中部署组数 */
-  StopGroupCount: number | null;
+  StopGroupCount?: number | null;
   /** 异常部署组数 */
-  AbnormalGroupCount: number | null;
+  AbnormalGroupCount?: number | null;
   /** 集群备注名 */
-  ClusterRemarkName: string | null;
+  ClusterRemarkName?: string | null;
   /** api地址 */
-  KuberneteApiServer: string | null;
+  KuberneteApiServer?: string | null;
   /** K : kubeconfig, S : service account */
-  KuberneteNativeType: string | null;
+  KuberneteNativeType?: string | null;
   /** native secret */
-  KuberneteNativeSecret: string | null;
+  KuberneteNativeSecret?: string | null;
+  /** 是否开启cls日志功能 */
+  EnableLogCollection?: boolean | null;
 }
 
 /** 配置项 */
@@ -3526,11 +3528,13 @@ declare interface CreateClusterRequest {
   KuberneteNativeSecret?: string;
   /** 无 */
   ProgramIdList?: string[];
+  /** 是否开启cls日志功能 */
+  EnableLogCollection?: boolean;
 }
 
 declare interface CreateClusterResponse {
   /** 集群ID */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6508,6 +6512,10 @@ declare interface ModifyClusterRequest {
   ClusterDesc?: string;
   /** 备注名 */
   ClusterRemarkName?: string;
+  /** 是否开启cls日志功能 */
+  EnableLogCollection?: boolean;
+  /** 是否修复cls日志功能 */
+  RepairLog?: boolean;
 }
 
 declare interface ModifyClusterResponse {

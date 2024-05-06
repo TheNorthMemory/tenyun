@@ -2609,7 +2609,7 @@ declare interface DescribeAuditInstanceListRequest {
   Filters?: AuditInstanceFilters[];
   /** 实例的审计规则模式。1-规则审计；0-全审计。 */
   AuditMode?: number;
-  /** 单次请求返回的数量。默认值为30，最大值为 20000。 */
+  /** 单次请求返回的数量。默认值为30，最大值为 100。 */
   Limit?: number;
   /** 偏移量，默认值为 0。 */
   Offset?: number;

@@ -1988,6 +1988,8 @@ declare interface SslVpnSever {
   AccessPolicyEnabled?: number;
   /** 策略信息 */
   AccessPolicy?: AccessPolicy[];
+  /** CAM服务提供商Name */
+  SpName?: string | null;
 }
 
 /** 子网对象 */
@@ -3671,9 +3673,9 @@ declare interface CreateVpnGatewaySslServerRequest {
   IntegrityAlgorithm?: string;
   /** 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 'NONE'，默认NONE。 */
   EncryptAlgorithm?: string;
-  /** 是否支持压缩。当前仅支持不支持压缩，默认False。 */
+  /** 是否支持压缩。当前不支持压缩，默认False。 */
   Compress?: boolean;
-  /** 是否开启SSO认证。默认为False */
+  /** 是否开启SSO认证。默认为False。该功能当前需要申请开白使用。 */
   SsoEnabled?: boolean;
   /** 是否开启策略访问控制。默认为False */
   AccessPolicyEnabled?: boolean;
@@ -5707,7 +5709,7 @@ declare interface DescribeVpnGatewaySslServersRequest {
   Offset?: number;
   /** 请求对象个数。 */
   Limit?: number;
-  /** SSL-VPN-SERVER实例ID。形如：vpngwSslServer-12345678。每次请求的实例的上限为100。参数不支持同时指定SslVpnServerIds和Filters。 */
+  /** SSL-VPN-SERVER实例ID。形如：vpns-0p4rj60。每次请求的实例的上限为100。参数不支持同时指定SslVpnServerIds和Filters。 */
   SslVpnServerIds?: string[];
   /** 过滤条件，参数不支持同时指定SslVpnServerIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。vpn-gateway-id - String - （过滤条件）VPN实例ID，形如：vpngw-5aluhh9t。vpn-gateway-name - String - （过滤条件）VPN实例名称。ssl-vpn-server-name - String - （过滤条件）SSL-VPN-SERVER实例名称。ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID，形如：vpns-xxx。 */
   Filters?: FilterObject[];
@@ -6147,21 +6149,21 @@ declare interface InquirePriceCreateDirectConnectGatewayResponse {
 }
 
 declare interface InquiryPriceCreateVpnGatewayRequest {
-  /** 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps。 */
+  /** 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000, 3000；单位：Mbps。 */
   InternetMaxBandwidthOut: number;
   /** VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。 */
   InstanceChargeType?: string;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100；单位：个。 */
+  /** SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个。 */
   MaxConnection?: number;
-  /** 查询的VPN类型，支持IPSEC和SSL两种类型，为SSL类型时，MaxConnection参数必传。 */
+  /** 查询的VPN类型，支持IPSEC、SSL两种类型，为SSL类型时，MaxConnection参数必传。 */
   Type?: string;
 }
 
 declare interface InquiryPriceCreateVpnGatewayResponse {
   /** 商品价格。 */
-  Price: Price;
+  Price?: Price;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6183,12 +6185,12 @@ declare interface InquiryPriceRenewVpnGatewayResponse {
 declare interface InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest {
   /** VPN网关实例ID。 */
   VpnGatewayId: string;
-  /** 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps。 */
+  /** 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：Mbps。 */
   InternetMaxBandwidthOut: number;
 }
 
 declare interface InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse {
-  /** 商品价格。 */
+  /** 商品价格。仅支持未过期的预付费网关。 */
   Price?: Price;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -6943,7 +6945,7 @@ declare interface ModifyVpnGatewayAttributeResponse {
 declare interface ModifyVpnGatewayCcnRoutesRequest {
   /** VPN网关实例ID。 */
   VpnGatewayId: string;
-  /** 云联网路由（IDC网段）列表。 */
+  /** 云联网路由（IDC网段）列表。其中RouteId可通过[DescribeVpnGatewayCcnRoutes](https://cloud.tencent.com/document/product/215/43514)接口获取。 */
   Routes: VpngwCcnRoutes[];
 }
 
@@ -6983,9 +6985,9 @@ declare interface ModifyVpnGatewaySslServerRequest {
   EncryptAlgorithm?: string;
   /** 认证算法。可选 'SHA1', 'MD5', 'NONE'。默认NONE */
   IntegrityAlgorithm?: string;
-  /** 是否支持压缩。当前仅支持不支持压缩。默认False */
+  /** 是否支持压缩。当前不支持压缩。默认False。 */
   Compress?: boolean;
-  /** 是否开启SSO认证，默认False */
+  /** 是否开启SSO认证。默认为False。该功能当前需要申请开白使用。 */
   SsoEnabled?: boolean;
   /** SAML-DATA */
   SamlData?: string;
@@ -7295,7 +7297,7 @@ declare interface SetCcnRegionBandwidthLimitsResponse {
 }
 
 declare interface SetVpnGatewaysRenewFlagRequest {
-  /** VPNGW字符型ID列表。可通过[DescribeVpnGateways](https://cloud.tencent.com/document/api/215/17514)接口返回值VpnGatewaySet中的VpnGatewayId获取。 */
+  /** VPNGW字符型ID列表。可通过[DescribeVpnGateways](https://cloud.tencent.com/document/api/215/17514)接口返回值VpnGatewaySet中的VpnGatewayId获取，只能选择包年包月的VPN实例。 */
   VpnGatewayIds: string[];
   /** 自动续费标记 [0, 1, 2]0表示默认状态(初始状态)， 1表示自动续费，2表示明确不自动续费。 */
   AutoRenewFlag: number;

@@ -605,11 +605,11 @@ declare interface DescribeDataEventUrlResponse {
 }
 
 declare interface DescribeDataFetchProjectRequest {
-  /** 开始时间 */
+  /** 开始时间，示例值：1625454840 */
   StartTime: number;
   /** allcount：性能视图，day：14天数据，condition：条件列表，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
   Type: string;
-  /** 结束时间 */
+  /** 结束时间，示例值：1625454840 */
   EndTime: number;
   /** 项目ID */
   ID: number;
@@ -621,7 +621,7 @@ declare interface DescribeDataFetchProjectRequest {
   Isp?: string;
   /** 来源页面 */
   From?: string;
-  /** 日志等级 */
+  /** 日志等级（1表示白名单日志，2表示一般日志，4表示错误日志，8表示Promise 错误，16表示Ajax 请求异常，32表示JS 加载异常，64表示图片加载异常，128表示css 加载异常，256表示console.error，512表示音视频资源异常，1024表示retcode 异常，2048表示aegis report，4096表示PV日志，8192表示自定义事件，16384表示小程序 页面不存在，32768表示websocket错误，65536表示js bridge错误） */
   Level?: string;
   /** 品牌 */
   Brand?: string;
@@ -635,7 +635,7 @@ declare interface DescribeDataFetchProjectRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。 */
   NetType?: string;
   /** 机型 */
   Device?: string;
@@ -1021,7 +1021,7 @@ declare interface DescribeDataReportCountRequest {
   EndTime: number;
   /** 项目ID */
   ID?: number;
-  /** 上报类型 */
+  /** 上报类型（custom，event，log，miniProgramData，performance，pv，speed，webvitals） */
   ReportType?: string;
   /** 实例ID */
   InstanceID?: string;
@@ -1029,7 +1029,7 @@ declare interface DescribeDataReportCountRequest {
 
 declare interface DescribeDataReportCountResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1121,7 +1121,7 @@ declare interface DescribeDataStaticProjectRequest {
   Isp?: string;
   /** 来源页面 */
   From?: string;
-  /** 日志等级 */
+  /** 日志等级（1表示白名单日志，2表示一般日志，4表示错误日志，8表示Promise 错误，16表示Ajax 请求异常，32表示JS 加载异常，64表示图片加载异常，128表示css 加载异常，256表示console.error，512表示音视频资源异常，1024表示retcode 异常，2048表示aegis report，4096表示PV日志，8192表示自定义事件，16384表示小程序 页面不存在，32768表示websocket错误，65536表示js bridge错误） */
   Level?: string;
   /** 品牌 */
   Brand?: string;
@@ -1135,7 +1135,7 @@ declare interface DescribeDataStaticProjectRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。 */
   NetType?: string;
   /** 机型 */
   Device?: string;

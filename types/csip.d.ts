@@ -2000,6 +2000,8 @@ declare interface CreateRiskCenterScanTaskRequest {
   ScanItem: string[];
   /** 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填 */
   ScanPlanType: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 扫描资产信息列表 */
   Assets?: TaskAssetObject[];
   /** 扫描计划详情 */
@@ -2050,6 +2052,8 @@ declare interface DeleteDomainAndIpResponse {
 declare interface DeleteRiskScanTaskRequest {
   /** 任务id 列表 */
   TaskIdList: TaskIdListKey[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
 }
 
 declare interface DeleteRiskScanTaskResponse {
@@ -2352,6 +2356,8 @@ declare interface DescribePublicIpAssetsResponse {
 }
 
 declare interface DescribeRiskCenterAssetViewCFGRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2380,6 +2386,8 @@ declare interface DescribeRiskCenterAssetViewCFGRiskListResponse {
 }
 
 declare interface DescribeRiskCenterAssetViewPortRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2406,6 +2414,8 @@ declare interface DescribeRiskCenterAssetViewPortRiskListResponse {
 }
 
 declare interface DescribeRiskCenterAssetViewVULRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2432,6 +2442,8 @@ declare interface DescribeRiskCenterAssetViewVULRiskListResponse {
 }
 
 declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2458,6 +2470,8 @@ declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
 }
 
 declare interface DescribeRiskCenterPortViewPortRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2480,6 +2494,8 @@ declare interface DescribeRiskCenterPortViewPortRiskListResponse {
 }
 
 declare interface DescribeRiskCenterServerRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2498,6 +2514,8 @@ declare interface DescribeRiskCenterServerRiskListResponse {
 }
 
 declare interface DescribeRiskCenterVULViewVULRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2520,6 +2538,8 @@ declare interface DescribeRiskCenterVULViewVULRiskListResponse {
 }
 
 declare interface DescribeRiskCenterWebsiteRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 资产标签 */
@@ -2544,6 +2564,8 @@ declare interface DescribeRiskCenterWebsiteRiskListResponse {
 }
 
 declare interface DescribeScanReportListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 列表过滤条件 */
   Filter?: Filter;
 }
@@ -2560,6 +2582,8 @@ declare interface DescribeScanReportListResponse {
 }
 
 declare interface DescribeScanTaskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 标签 */
@@ -2620,6 +2644,8 @@ declare interface DescribeSubnetAssetsResponse {
 }
 
 declare interface DescribeTaskLogListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
 }
@@ -2640,6 +2666,8 @@ declare interface DescribeTaskLogListResponse {
 declare interface DescribeTaskLogURLRequest {
   /** 0: 预览， 1: 下载 */
   Type: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 任务报告Id 列表 */
   ReportItemKeyList?: ReportItemKey[];
   /** 报告中任务id列表 */
@@ -2730,6 +2758,8 @@ declare interface ModifyRiskCenterRiskStatusRequest {
   Status: number;
   /** 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露 */
   Type: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
 }
 
 declare interface ModifyRiskCenterRiskStatusResponse {
@@ -2748,6 +2778,8 @@ declare interface ModifyRiskCenterScanTaskRequest {
   ScanPlanType: number;
   /** 要修改的任务id */
   TaskId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 扫描资产信息列表 */
   Assets?: TaskAssetObject[];
   /** 扫描计划详情 */
@@ -2774,6 +2806,8 @@ declare interface ModifyRiskCenterScanTaskResponse {
 declare interface StopRiskCenterTaskRequest {
   /** 任务id 列表 */
   TaskIdList: TaskIdListKey[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
 }
 
 declare interface StopRiskCenterTaskResponse {

@@ -454,7 +454,7 @@ declare interface InstanceRefund {
 declare interface InstanceStatus {
   /** 实例`ID`。 */
   InstanceId?: string;
-  /** 实例状态。取值范围：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中STOPPED：表示关机STARTING：表示开机中STOPPING：表示关机中REBOOTING：表示重启中SHUTDOWN：表示停止待销毁TERMINATING：表示销毁中。 */
+  /** 实例状态。取值范围：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中STOPPED：表示关机STARTING：表示开机中STOPPING：表示关机中REBOOTING：表示重启中SHUTDOWN：表示停止待销毁TERMINATING：表示销毁中ENTER_RESCUE_MODE：表示进入救援模式RESCUE_MODE：表示在救援模式中EXIT_RESCUE_MODE：表示退出救援模式ENTER_SERVICE_LIVE_MIGRATE：表示进入在线服务迁移SERVICE_LIVE_MIGRATE：表示在线服务迁移中EXIT_SERVICE_LIVE_MIGRATE：表示退出在线服务迁移。 */
   InstanceState?: string;
 }
 
