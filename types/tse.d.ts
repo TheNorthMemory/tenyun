@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 云原生网关限流插件参数限流的精确Qps阈值 */
+declare interface AccurateQpsThreshold {
+  /** qps阈值控制维度,包含:second、minute、hour、day、month、year */
+  Unit: string;
+  /** 全局配置ID */
+  GlobalConfigId: string;
+}
+
 /** Apollo 环境配置参数 */
 declare interface ApolloEnvParam {
   /** 环境名称 */
@@ -788,7 +796,7 @@ declare interface EngineRegionInfo {
   Replica: number;
   /** 集群网络信息 */
   VpcInfos: VpcInfo[];
-  /** 是否为主地域 */
+  /** Polaris: 是否为主地域Zookeeper: 是否为Leader固定地域 */
   MainRegion?: boolean;
   /** 引擎规格ID */
   SpecId?: string;
@@ -1472,6 +1480,8 @@ declare interface LimitRule {
   LimitBy?: KeyValue[] | null;
   /** 限流阈值 */
   QpsThresholds?: QpsThreshold[] | null;
+  /** 精确限流阈值 */
+  AccurateQpsThresholds?: AccurateQpsThreshold[] | null;
 }
 
 /** 获取云原生API网关实例列表响应结果。 */
@@ -2129,6 +2139,8 @@ declare interface CreateEngineRequest {
   EngineRegionInfos?: EngineRegionInfo[];
   /** zk专业版至多有两个盘，且磁盘的容量在50-3200之间如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致 */
   StorageOption?: StorageOption[];
+  /** ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束 */
+  AffinityConstraint?: string;
 }
 
 declare interface CreateEngineResponse {

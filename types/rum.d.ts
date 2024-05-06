@@ -273,7 +273,7 @@ declare interface CreateTawInstanceRequest {
   Tags?: Tag[];
   /** 实例描述，(最大长度不超过1024字节) */
   InstanceDesc?: string;
-  /** 每天数据上报量 */
+  /** 每天数据上报量，（不作量级限制） */
   CountNum?: string;
   /** 数据存储时长计费 */
   PeriodRetain?: string;
@@ -299,7 +299,7 @@ declare interface CreateTawInstanceResponse {
 declare interface CreateWhitelistRequest {
   /** 实例ID：taw-123 */
   InstanceID: string;
-  /** 备注 */
+  /** 备注（暂未作字节数限制） */
   Remark: string;
   /** uin：业务方标识 */
   WhitelistUin: string;
@@ -309,9 +309,9 @@ declare interface CreateWhitelistRequest {
 
 declare interface CreateWhitelistResponse {
   /** 消息 */
-  Msg: string;
+  Msg?: string;
   /** 白名单ID */
-  ID: number;
+  ID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -525,11 +525,11 @@ declare interface DescribeDataCustomUrlRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。 */
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -545,7 +545,7 @@ declare interface DescribeDataCustomUrlRequest {
 
 declare interface DescribeDataCustomUrlResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -639,7 +639,7 @@ declare interface DescribeDataFetchProjectRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -659,7 +659,7 @@ declare interface DescribeDataFetchProjectRequest {
 
 declare interface DescribeDataFetchProjectResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -699,7 +699,7 @@ declare interface DescribeDataFetchUrlInfoRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -715,7 +715,7 @@ declare interface DescribeDataFetchUrlInfoRequest {
 
 declare interface DescribeDataFetchUrlInfoResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -755,7 +755,7 @@ declare interface DescribeDataFetchUrlRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -777,7 +777,7 @@ declare interface DescribeDataFetchUrlRequest {
 
 declare interface DescribeDataFetchUrlResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -833,7 +833,7 @@ declare interface DescribeDataLogUrlStatisticsRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -845,7 +845,7 @@ declare interface DescribeDataLogUrlStatisticsRequest {
 
 declare interface DescribeDataLogUrlStatisticsResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -879,7 +879,7 @@ declare interface DescribeDataPerformancePageRequest {
   ExtSecond?: string;
   /** 自定义3 */
   ExtThird?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 浏览器 */
   Browser?: string;
@@ -901,7 +901,7 @@ declare interface DescribeDataPerformancePageRequest {
 
 declare interface DescribeDataPerformancePageResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -941,7 +941,7 @@ declare interface DescribeDataPvUrlInfoRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -953,7 +953,7 @@ declare interface DescribeDataPvUrlInfoRequest {
 
 declare interface DescribeDataPvUrlInfoResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -993,7 +993,7 @@ declare interface DescribeDataPvUrlStatisticsRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 显示是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -1083,7 +1083,7 @@ declare interface DescribeDataSetUrlStatisticsRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -1099,7 +1099,7 @@ declare interface DescribeDataSetUrlStatisticsRequest {
 
 declare interface DescribeDataSetUrlStatisticsResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1139,7 +1139,7 @@ declare interface DescribeDataStaticProjectRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -1155,7 +1155,7 @@ declare interface DescribeDataStaticProjectRequest {
 
 declare interface DescribeDataStaticProjectResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1195,7 +1195,7 @@ declare interface DescribeDataStaticResourceRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -1211,7 +1211,7 @@ declare interface DescribeDataStaticResourceRequest {
 
 declare interface DescribeDataStaticResourceResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1251,7 +1251,7 @@ declare interface DescribeDataStaticUrlRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -1267,7 +1267,7 @@ declare interface DescribeDataStaticUrlRequest {
 
 declare interface DescribeDataStaticUrlResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1307,7 +1307,7 @@ declare interface DescribeDataWebVitalsPageRequest {
   NetType?: string;
   /** 机型 */
   Device?: string;
-  /** 是否海外 */
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
   IsAbroad?: string;
   /** 操作系统 */
   Os?: string;
@@ -1321,7 +1321,7 @@ declare interface DescribeDataWebVitalsPageRequest {
 
 declare interface DescribeDataWebVitalsPageResponse {
   /** 返回值 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1451,7 +1451,7 @@ declare interface DescribeRumGroupLogRequest {
 
 declare interface DescribeRumGroupLogResponse {
   /** 返回字符串 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1473,7 +1473,7 @@ declare interface DescribeRumLogExportRequest {
 
 declare interface DescribeRumLogExportResponse {
   /** 返回字符串 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1533,7 +1533,7 @@ declare interface DescribeRumStatsLogListRequest {
 
 declare interface DescribeRumStatsLogListResponse {
   /** 返回字符串 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -122,6 +122,8 @@ declare interface ClassifyConfig {
   Model?: AppModel | null;
   /** 标签列表 */
   Labels?: ClassifyLabel[] | null;
+  /** 欢迎语，200字符以内 */
+  Greeting?: string | null;
 }
 
 /** 标签信息 */
@@ -212,6 +214,12 @@ declare interface KnowledgeQaOutput {
   UseGeneralKnowledge?: boolean | null;
   /** 未知回复语，300字符以内 */
   BareAnswer?: string | null;
+  /** 是否展示问题澄清开关 */
+  ShowQuestionClarify?: boolean | null;
+  /** 是否打开问题澄清 */
+  UseQuestionClarify?: boolean | null;
+  /** 问题澄清关键词列表 */
+  QuestionClarifyKeywords?: string[] | null;
 }
 
 /** 检索配置 */
@@ -414,6 +422,10 @@ declare interface MsgRecord {
   Reasons?: string[];
   /** 是否大模型 */
   IsLlmGenerated?: boolean;
+  /** 图片链接，可公有读 */
+  ImageUrls?: string[];
+  /** 当次 token 统计信息 */
+  TokenStat?: TokenStat | null;
 }
 
 /** 聊天详情Refer */
@@ -440,6 +452,18 @@ declare interface Option {
   CharSize?: string | null;
   /** 文件类型 */
   FileType?: string | null;
+}
+
+/** 执行过程信息记录 */
+declare interface Procedure {
+  /** 执行过程英语名 */
+  Name?: string | null;
+  /** 中文名, 用于展示 */
+  Title?: string | null;
+  /** 状态常量: 使用中: processing, 成功: success, 失败: failed */
+  Status?: string | null;
+  /** 消耗 token 数 */
+  Count?: number | null;
 }
 
 /** 获取QA分类分组 */
@@ -626,6 +650,8 @@ declare interface SummaryConfig {
   Model?: AppModel | null;
   /** 知识摘要输出配置 */
   Output?: SummaryOutput | null;
+  /** 欢迎语，200字符以内 */
+  Greeting?: string | null;
 }
 
 /** 知识摘要输出配置 */
@@ -642,6 +668,32 @@ declare interface SummaryOutput {
 declare interface TaskParams {
   /** 下载地址,需要通过cos桶临时密钥去下载 */
   CosPath?: string | null;
+}
+
+/** 当前执行的 token 统计信息 */
+declare interface TokenStat {
+  /** 会话 ID */
+  SessionId?: string | null;
+  /** 请求 ID */
+  RequestId?: string | null;
+  /** 对应哪条会话, 会话 ID, 用于回答的消息存储使用, 可提前生成, 保存消息时使用 */
+  RecordId?: string | null;
+  /** token 已使用数 */
+  UsedCount?: number | null;
+  /** 免费 token 数 */
+  FreeCount?: number | null;
+  /** 订单总 token 数 */
+  OrderCount?: number | null;
+  /** 当前执行状态汇总, 常量: 使用中: processing, 成功: success, 失败: failed */
+  StatusSummary?: string | null;
+  /** 当前执行状态汇总后中文展示 */
+  StatusSummaryTitle?: string | null;
+  /** 当前请求执行时间, 单位 ms */
+  Elapsed?: number | null;
+  /** 当前请求消耗 token 数 */
+  TokenCount?: number | null;
+  /** 执行过程信息 */
+  Procedures?: Procedure[] | null;
 }
 
 /** 不满意回复 */
@@ -954,6 +1006,10 @@ declare interface DescribeAppResponse {
   BareAnswerInAppeal?: boolean;
   /** 应用appKey */
   AppKey?: string;
+  /** 应用状态，1：未上线，2：运行中，3：停用 */
+  AppStatus?: number;
+  /** 状态说明 */
+  AppStatusDesc?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1193,6 +1249,10 @@ declare interface DescribeRobotBizIDByAppKeyResponse {
 declare interface DescribeStorageCredentialRequest {
   /** 机器人ID */
   BotBizId: string;
+  /** 文件类型 */
+  FileType?: string;
+  /** 权限场景，是否公有权限 */
+  IsPublic?: boolean;
 }
 
 declare interface DescribeStorageCredentialResponse {
@@ -1214,6 +1274,8 @@ declare interface DescribeStorageCredentialResponse {
   CorpUin?: string;
   /** 图片存储目录 */
   ImagePath?: string;
+  /** 上传存储目录 */
+  UploadPath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1387,11 +1449,15 @@ declare interface GetMsgRecordRequest {
   LastRecordId?: string;
   /** 机器人AppKey */
   BotAppKey?: string;
+  /** 场景, 体验: 1; 正式: 2 */
+  Scene?: number;
 }
 
 declare interface GetMsgRecordResponse {
   /** 会话记录 */
   Records?: MsgRecord[];
+  /** session 清除关联上下文时间, 单位 ms */
+  SessionDisassociatedTimestamp?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1992,6 +2058,46 @@ declare interface ModifyRejectedQuestionResponse {
   RequestId?: string;
 }
 
+declare interface ParseDocRequest {
+  /** 文件名称(需要包括文件后缀, 最大长度1024字节) */
+  Name: string;
+  /** 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf) */
+  Url: string;
+  /** 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节) */
+  TaskId: string;
+  /** 切分策略 */
+  Policy?: string;
+  /** 默认值: parse */
+  Operate?: string;
+}
+
+declare interface ParseDocResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QueryParseDocResultRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface QueryParseDocResultResponse {
+  /** 等待 / 执行中 / 成功 / 失败 */
+  Status?: string;
+  /** 解析后的文件内容 */
+  Name?: string;
+  /** 文件下载地址 */
+  Url?: string;
+  /** 解析失败原因 */
+  Reason?: string;
+  /** 消耗量，输出页数 */
+  Usage?: Usage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryRewriteRequest {
   /** 需要改写的问题 */
   Question: string;
@@ -2029,6 +2135,8 @@ declare interface RateMsgRecordResponse {
 declare interface ResetSessionRequest {
   /** 会话ID */
   SessionId: string;
+  /** 是否仅清空会话关联 */
+  IsOnlyEmptyTheDialog?: boolean;
 }
 
 declare interface ResetSessionResponse {
@@ -2305,6 +2413,10 @@ declare interface Lke {
   ModifyQACate(data: ModifyQACateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQACateResponse>;
   /** 修改拒答问题 {@link ModifyRejectedQuestionRequest} {@link ModifyRejectedQuestionResponse} */
   ModifyRejectedQuestion(data: ModifyRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRejectedQuestionResponse>;
+  /** 文档解析 {@link ParseDocRequest} {@link ParseDocResponse} */
+  ParseDoc(data: ParseDocRequest, config?: AxiosRequestConfig): AxiosPromise<ParseDocResponse>;
+  /** 查询文档解析结果 {@link QueryParseDocResultRequest} {@link QueryParseDocResultResponse} */
+  QueryParseDocResult(data: QueryParseDocResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryParseDocResultResponse>;
   /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 评价消息 {@link RateMsgRecordRequest} {@link RateMsgRecordResponse} */

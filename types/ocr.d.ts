@@ -650,6 +650,16 @@ declare interface GeneralMachineItem {
   Tax?: string;
 }
 
+/** 通用告警详情 */
+declare interface GeneralWarnInfo {
+  /** 是否存在该告警 */
+  IsWarn?: boolean;
+  /** 告警位置四点坐标 */
+  Polygon?: Polygon[];
+  /** 特殊判定，支持包括Finger：由手指导致的不完整，仅在不完整告警中返回 */
+  SpecificMatter?: string;
+}
+
 /** 组在图中的序号 */
 declare interface GroupInfo {
   /** 每一行的元素 */
@@ -3796,6 +3806,34 @@ declare interface RecognizeGeneralInvoiceResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeGeneralTextImageWarnRequest {
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 示例值：false */
+  EnablePdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。 示例值：1 */
+  PdfPageNumber?: number;
+  /** 支持的模板类型- General 通用告警- LicensePlate 车牌告警 */
+  Type?: string;
+}
+
+declare interface RecognizeGeneralTextImageWarnResponse {
+  /** 复印告警信息 */
+  Copy?: GeneralWarnInfo;
+  /** 翻拍告警信息 */
+  Reprint?: GeneralWarnInfo;
+  /** 模糊告警信息 */
+  Blur?: GeneralWarnInfo;
+  /** 反光告警信息 */
+  Reflection?: GeneralWarnInfo;
+  /** 边框不完整告警信息 */
+  BorderIncomplete?: GeneralWarnInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeHealthCodeOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4887,6 +4925,8 @@ declare interface Ocr {
   RecognizeForeignPermanentResidentIdCard(data?: RecognizeForeignPermanentResidentIdCardRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeForeignPermanentResidentIdCardResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */
   RecognizeGeneralInvoice(data?: RecognizeGeneralInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralInvoiceResponse>;
+  /** 通用文本图像告警 {@link RecognizeGeneralTextImageWarnRequest} {@link RecognizeGeneralTextImageWarnResponse} */
+  RecognizeGeneralTextImageWarn(data?: RecognizeGeneralTextImageWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralTextImageWarnResponse>;
   /** 健康码识别 {@link RecognizeHealthCodeOCRRequest} {@link RecognizeHealthCodeOCRResponse} */
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
   /** 印尼身份证识别 {@link RecognizeIndonesiaIDCardOCRRequest} {@link RecognizeIndonesiaIDCardOCRResponse} */

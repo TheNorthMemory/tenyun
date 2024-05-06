@@ -184,6 +184,18 @@ declare interface User {
   SendTime?: number;
 }
 
+declare interface AnswerQuestionRequest {
+  /** 用户问题 */
+  Question: string;
+}
+
+declare interface AnswerQuestionResponse {
+  /** 匹配到的答案 */
+  Answer?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModerateTextRequest {
   /** 该字段表示待检测对象的文本内容，文本需要按utf-8格式编码，长度不能超过10000个字符（按unicode编码计算），并进行 Base64加密 */
   Content: string;
@@ -494,6 +506,8 @@ declare namespace V20200713 {
 /** {@link Tms 文本内容安全} */
 declare interface Tms {
   (): Versions;
+  /** AIGC代答 {@link AnswerQuestionRequest} {@link AnswerQuestionResponse} */
+  AnswerQuestion(data: AnswerQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<AnswerQuestionResponse>;
   /** 客户定制标签文本审核 {@link ModerateTextRequest} {@link ModerateTextResponse} */
   ModerateText(data: ModerateTextRequest, config?: AxiosRequestConfig): AxiosPromise<ModerateTextResponse>;
   /** 文本内容安全 {@link TextModerationRequest} {@link TextModerationResponse} */

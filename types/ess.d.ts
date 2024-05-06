@@ -934,6 +934,14 @@ declare interface OrgBillSummary {
   QuotaType?: string;
 }
 
+/** 企业批量注册链接信息 */
+declare interface OrganizationAuthUrl {
+  /** 企业批量注册链接，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 Endpoint 示例 链接有效期限 PC https://qian.tencent.com/console/batch-register?token=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9 7天 PC_SHORT_URL https://test.essurl.cn/8gDKUBAWK8 7天 APP /pages/guide/index?to=REGISTER_ENTERPRISE_FOR_BATCH&urlAuthToken=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9 7天 注： `1.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
+  AuthUrl?: string;
+  /** 企业批量注册的错误信息，例如：企业三要素不通过 */
+  ErrorMessage?: string;
+}
+
 /** 机构信息 */
 declare interface OrganizationInfo {
   /** 机构在平台的编号，内部字段，暂未开放 */
@@ -2550,6 +2558,22 @@ declare interface DeleteSealPoliciesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBatchOrganizationRegistrationUrlsRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 通过接口CreateBatchOrganizationRegistrationTasks创建企业批量认证链接任得到的任务Id */
+  TaskId: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
+}
+
+declare interface DescribeBatchOrganizationRegistrationUrlsResponse {
+  /** 企业批量注册链接信息 */
+  OrganizationAuthUrls?: OrganizationAuthUrl[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBillUsageDetailRequest {
   /** 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天 */
   StartTime: string;
@@ -3371,6 +3395,8 @@ declare interface Ess {
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
   /** 撤销企业员工的印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
+  /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */
+  DescribeBatchOrganizationRegistrationUrls(data: DescribeBatchOrganizationRegistrationUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationUrlsResponse>;
   /** 查询企业套餐使用情况 {@link DescribeBillUsageRequest} {@link DescribeBillUsageResponse} */
   DescribeBillUsage(data: DescribeBillUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageResponse>;
   /** 查询企业计费使用情况 {@link DescribeBillUsageDetailRequest} {@link DescribeBillUsageDetailResponse} */

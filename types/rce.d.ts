@@ -148,14 +148,14 @@ declare interface OutputFrontRiskValue {
 
 /** 全栈式风控引擎出参 */
 declare interface OutputManageMarketingRisk {
-  /** 返回码。0表示成功，非0标识失败错误码。 */
-  Code: number | null;
+  /** 错误码，0 表示成功，非0表示失败错误码。0：成功1：错误1002：参数错误4300：未开通服务4301：后端未创建对应产品 */
+  Code?: number | null;
   /** UTF-8编码，出错消息。 */
-  Message: string | null;
+  Message?: string | null;
   /** 业务详情。 */
-  Value: OutputManageMarketingRiskValue | null;
+  Value?: OutputManageMarketingRiskValue | null;
   /** 控制台显示的req_id。 */
-  UUid: string | null;
+  UUid?: string | null;
 }
 
 /** 全栈式风控引擎出参值 */

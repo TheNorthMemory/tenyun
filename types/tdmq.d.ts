@@ -2707,17 +2707,17 @@ declare interface DescribeMsgRequest {
 
 declare interface DescribeMsgResponse {
   /** 消息属性。 */
-  Properties: string;
+  Properties?: string;
   /** 消息体。 */
-  Body: string;
+  Body?: string;
   /** 批次ID。 */
-  BatchId: string;
+  BatchId?: string;
   /** 生产时间。 */
-  ProduceTime: string;
+  ProduceTime?: string;
   /** 消息ID。 */
-  MsgId: string;
+  MsgId?: string;
   /** 生产者名称。 */
-  ProducerName: string;
+  ProducerName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

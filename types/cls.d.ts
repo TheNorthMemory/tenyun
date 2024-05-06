@@ -488,6 +488,44 @@ declare interface DashboardInfo {
   DashboardTopicInfos: DashboardTopicInfo[] | null;
 }
 
+/** 仪表盘订阅通知方式 */
+declare interface DashboardNoticeMode {
+  /** 仪表盘通知方式。Uin：腾讯云用户Group：腾讯云用户组Email：自定义EmailWeCom: 企业微信回调 */
+  ReceiverType: string;
+  /** 知方式对应的值。 当ReceiverType不是 Wecom 时，Values必填。 */
+  Values?: string[];
+  /** 仪表盘通知渠道。 支持：["Email","Sms","WeChat","Phone"]。 当ReceiverType是 Email 或 Wecom 时，ReceiverChannels不能赋值。 */
+  ReceiverChannels?: string[] | null;
+  /** 回调Url。 当ReceiverType是 Wecom 时，Url必填。 当ReceiverType不是 Wecom 时，Url不能填写。 */
+  Url?: string | null;
+}
+
+/** 仪表盘订阅相关数据 */
+declare interface DashboardSubscribeData {
+  /** 仪表盘订阅通知方式。 */
+  NoticeModes: DashboardNoticeMode[];
+  /** 仪表盘订阅时间，为空标识取仪表盘默认的时间。 */
+  DashboardTime?: string[] | null;
+  /** 仪表盘订阅模板变量。 */
+  TemplateVariables?: DashboardTemplateVariable[] | null;
+  /** 时区。参考：https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#SHANGHAI */
+  Timezone?: string | null;
+  /** 语言。 zh 中文、en`英文。 */
+  SubscribeLanguage?: string | null;
+  /** 调用链接域名。http:// 或者 https:// 开头，不能/结尾 */
+  JumpDomain?: string | null;
+  /** 自定义跳转链接。 */
+  JumpUrl?: string | null;
+}
+
+/** 仪表盘订阅模板变量 */
+declare interface DashboardTemplateVariable {
+  /** key的值 */
+  Key: string;
+  /** key对应的values取值values */
+  Values: string[];
+}
+
 /** 仪表盘关联的topic信息 */
 declare interface DashboardTopicInfo {
   /** 主题id */
@@ -934,9 +972,9 @@ declare interface MachineGroupInfo {
 
 /** 机器组类型描述 */
 declare interface MachineGroupTypeInfo {
-  /** 机器组类型，ip表示该机器组Values中存的是采集机器的IP地址，label表示该机器组Values中存储的是机器的标签 */
+  /** 机器组类型。支持 ip 和 label。- ip：表示该机器组Values中存的是采集机器的ip地址- label：表示该机器组Values中存储的是机器的标签 */
   Type: string;
-  /** 机器描述列表 */
+  /** 机器描述列表。 */
   Values?: string[];
 }
 
@@ -1615,11 +1653,23 @@ declare interface CreateCosRechargeRequest {
   Compress?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRuleInfo?: ExtractRuleInfo;
+  /** COS导入任务类型。1：一次性导入任务；2：持续性导入任务。默认为1：一次性导入任务 */
+  TaskType?: number;
+  /** 元数据。 */
+  Metadata?: string[];
 }
 
 declare interface CreateCosRechargeResponse {
-  /** cos_recharge记录id */
+  /** COS导入任务id */
   Id?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDashboardSubscribeRequest {
+}
+
+declare interface CreateDashboardSubscribeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1631,7 +1681,7 @@ declare interface CreateDataTransformRequest {
   SrcTopicId: string;
   /** 加工任务名称 */
   Name: string;
-  /** 加工语句 */
+  /** 加工语句。[创建加工任务](https://cloud.tencent.com/document/product/614/63940) [函数总览](https://cloud.tencent.com/document/product/614/70395) */
   EtlContent: string;
   /** 加工类型。1：使用源日志主题中的随机数据，进行加工预览；2：使用用户自定义测试数据，进行加工预览；3：创建真实加工任务。 */
   TaskType: number;
@@ -1763,19 +1813,19 @@ declare interface CreateLogsetResponse {
 declare interface CreateMachineGroupRequest {
   /** 机器组名字，不能重复 */
   GroupName: string;
-  /** 创建机器组类型，Type为ip，Values中为Ip字符串列表创建机器组，Type为label， Values中为标签字符串列表创建机器组 */
+  /** 创建机器组类型。Type：ip，Values中为ip字符串列表创建机器组；Type：label，Values中为标签字符串列表创建机器组。 */
   MachineGroupType: MachineGroupTypeInfo;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的机器组。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
   Tags?: Tag[];
-  /** 是否开启机器组自动更新 */
+  /** 是否开启机器组自动更新。默认false */
   AutoUpdate?: boolean;
   /** 升级开始时间，建议业务低峰期升级LogListener */
   UpdateStartTime?: string;
   /** 升级结束时间，建议业务低峰期升级LogListener */
   UpdateEndTime?: string;
-  /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
+  /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费。默认false */
   ServiceLogging?: boolean;
-  /** 机器组中机器离线清理时间 */
+  /** 机器组中机器离线清理时间。单位：天 */
   DelayCleanupTime?: number;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
@@ -1966,6 +2016,14 @@ declare interface DeleteConsumerRequest {
 }
 
 declare interface DeleteConsumerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDashboardSubscribeRequest {
+}
+
+declare interface DeleteDashboardSubscribeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2234,6 +2292,14 @@ declare interface DescribeCosRechargesRequest {
 declare interface DescribeCosRechargesResponse {
   /** 见: CosRechargeInfo 结构描述 */
   Data?: CosRechargeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDashboardSubscribesRequest {
+}
+
+declare interface DescribeDashboardSubscribesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2515,15 +2581,15 @@ declare interface DescribeScheduledSqlInfoResponse {
 declare interface DescribeShipperTasksRequest {
   /** 投递规则ID */
   ShipperId: string;
-  /** 查询的开始时间戳，支持最近3天的查询， 毫秒 */
+  /** 查询的开始时间戳，支持最近3天的查询， 毫秒。StartTime必须小于EndTime */
   StartTime: number;
-  /** 查询的结束时间戳， 毫秒 */
+  /** 查询的结束时间戳， 毫秒。StartTime必须小于EndTime */
   EndTime: number;
 }
 
 declare interface DescribeShipperTasksResponse {
   /** 投递任务列表 */
-  Tasks: ShipperTaskInfo[] | null;
+  Tasks?: ShipperTaskInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2803,17 +2869,41 @@ declare interface ModifyConsumerResponse {
 }
 
 declare interface ModifyCosRechargeRequest {
-  /** COS导入配置ID */
+  /** COS导入配置Id */
   Id: string;
   /** 日志主题Id */
   TopicId: string;
   /** COS导入任务名称 */
   Name?: string;
-  /** 是否启用: 0： 未启用 ， 1：启用 */
+  /** 任务状态 0： 停用 ， 1：启用 */
   Enable?: number;
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
+  Bucket?: string;
+  /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
+  BucketRegion?: string;
+  /** COS文件所在文件夹的前缀 */
+  Prefix?: string;
+  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文； 默认为minimalist_log */
+  LogType?: string;
+  /** 解析格式。supported: "", "gzip", "lzop", "snappy"; 默认空 */
+  Compress?: string;
+  /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
+  ExtractRuleInfo?: ExtractRuleInfo;
+  /** COS导入任务类型。1：一次性导入任务；2：持续性导入任务。 */
+  TaskType?: number;
+  /** 元数据。支持 bucket，object。 */
+  Metadata?: string[];
 }
 
 declare interface ModifyCosRechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDashboardSubscribeRequest {
+}
+
+declare interface ModifyDashboardSubscribeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2921,7 +3011,7 @@ declare interface ModifyMachineGroupRequest {
   GroupId: string;
   /** 机器组名称 */
   GroupName?: string;
-  /** 机器组类型 */
+  /** 机器组类型。Type：ip，Values中为ip字符串列表机器组；Type：label，Values中为标签字符串列表机器组。 */
   MachineGroupType?: MachineGroupTypeInfo;
   /** 标签列表 */
   Tags?: Tag[];
@@ -2933,7 +3023,7 @@ declare interface ModifyMachineGroupRequest {
   UpdateEndTime?: string;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
   ServiceLogging?: boolean;
-  /** 机器组中机器定期离线清理时间 */
+  /** 机器组中机器定期离线清理时间。单位：天 */
   DelayCleanupTime?: number;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
@@ -3168,6 +3258,22 @@ declare interface SearchCosRechargeInfoResponse {
   RequestId?: string;
 }
 
+declare interface SearchDashboardSubscribeRequest {
+  /** 仪表盘id。 */
+  DashboardId: string;
+  /** 仪表盘订阅数据。 */
+  SubscribeData: DashboardSubscribeData;
+  /** 仪表盘订阅Id。 */
+  Id?: number;
+  /** 仪表盘订阅名称。 */
+  Name?: string;
+}
+
+declare interface SearchDashboardSubscribeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchLogRequest {
   /** 要检索分析的日志的起始时间，Unix时间戳（毫秒） */
   From: number;
@@ -3277,6 +3383,8 @@ declare interface Cls {
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
   /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
   CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
+  /** 创建仪表盘订阅 {@link CreateDashboardSubscribeRequest} {@link CreateDashboardSubscribeResponse} */
+  CreateDashboardSubscribe(data?: CreateDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDashboardSubscribeResponse>;
   /** 创建数据加工任务 {@link CreateDataTransformRequest} {@link CreateDataTransformResponse} */
   CreateDataTransform(data: CreateDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataTransformResponse>;
   /** 创建投递SCF任务 {@link CreateDeliverCloudFunctionRequest} {@link CreateDeliverCloudFunctionResponse} */
@@ -3311,6 +3419,8 @@ declare interface Cls {
   DeleteConfigFromMachineGroup(data: DeleteConfigFromMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFromMachineGroupResponse>;
   /** 删除投递配置 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
+  /** 删除仪表盘订阅 {@link DeleteDashboardSubscribeRequest} {@link DeleteDashboardSubscribeResponse} */
+  DeleteDashboardSubscribe(data?: DeleteDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDashboardSubscribeResponse>;
   /** 删除数据加工任务 {@link DeleteDataTransformRequest} {@link DeleteDataTransformResponse} */
   DeleteDataTransform(data: DeleteDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataTransformResponse>;
   /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
@@ -3349,6 +3459,8 @@ declare interface Cls {
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
   /** 获取cos导入配置 {@link DescribeCosRechargesRequest} {@link DescribeCosRechargesResponse} */
   DescribeCosRecharges(data: DescribeCosRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRechargesResponse>;
+  /** 获取仪表盘订阅列表 {@link DescribeDashboardSubscribesRequest} {@link DescribeDashboardSubscribesResponse} */
+  DescribeDashboardSubscribes(data?: DescribeDashboardSubscribesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardSubscribesResponse>;
   /** 获取仪表盘 {@link DescribeDashboardsRequest} {@link DescribeDashboardsResponse} */
   DescribeDashboards(data?: DescribeDashboardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardsResponse>;
   /** 获取数据加工任务列表基本信息 {@link DescribeDataTransformInfoRequest} {@link DescribeDataTransformInfoResponse} */
@@ -3401,6 +3513,8 @@ declare interface Cls {
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
   /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */
   ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;
+  /** 修改仪表盘订阅 {@link ModifyDashboardSubscribeRequest} {@link ModifyDashboardSubscribeResponse} */
+  ModifyDashboardSubscribe(data?: ModifyDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDashboardSubscribeResponse>;
   /** 修改数据加工任务 {@link ModifyDataTransformRequest} {@link ModifyDataTransformResponse} */
   ModifyDataTransform(data: ModifyDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataTransformResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
@@ -3431,6 +3545,8 @@ declare interface Cls {
   RetryShipperTask(data: RetryShipperTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryShipperTaskResponse>;
   /** 预览cos导入信息 {@link SearchCosRechargeInfoRequest} {@link SearchCosRechargeInfoResponse} */
   SearchCosRechargeInfo(data: SearchCosRechargeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SearchCosRechargeInfoResponse>;
+  /** 预览仪表盘订阅 {@link SearchDashboardSubscribeRequest} {@link SearchDashboardSubscribeResponse} */
+  SearchDashboardSubscribe(data: SearchDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<SearchDashboardSubscribeResponse>;
   /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */
   SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
   /** 分裂主题分区 {@link SplitPartitionRequest} {@link SplitPartitionResponse} */

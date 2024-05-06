@@ -642,7 +642,7 @@ declare interface DefaultServerCertInfo {
 
 /** 实时日志投递条件，用于定义投递日志范围。DeliveryCondition 数组内多个项的关系为“或”，内层 Conditions 数组内多个项的关系为“且”。 */
 declare interface DeliveryCondition {
-  /** 日志过滤条件，详细的过滤条件如下：EdgeResponseStatusCode：按照 EdgeOne 节点响应返回给客户端的状态码进行过滤。 支持运算符：equal、great、less、great_equal、less_equal 取值范围：任意大于等于 0 的整数OriginResponseStatusCode：按照源站响应状态码进行过滤。 支持运算符：equal、great、less、great_equal、less_equal 取值范围：任意大于等于 -1 的整数SecurityAction：按照请求命中安全规则后的最终处置动作进行过滤。 支持运算符：equal 可选项如下： -：未知/未命中 Monitor：观察 JSChallenge：JavaScript 挑战 Deny：拦截 Allow：放行 BlockIP：IP 封禁 Redirect：重定向 ReturnCustomPage：返回自定义页面 ManagedChallenge：托管挑战 Silence：静默 LongDelay：长时间等待后响应 ShortDelay：短时间等待后响应 */
+  /** 日志过滤条件，详细的过滤条件如下：EdgeResponseStatusCode：按照 EdgeOne 节点响应返回给客户端的状态码进行过滤。 支持运算符：equal、great、less、great_equal、less_equal 取值范围：任意大于等于 0 的整数OriginResponseStatusCode：按照源站响应状态码进行过滤。 支持运算符：equal、great、less、great_equal、less_equal 取值范围：任意大于等于 -1 的整数SecurityAction：按照请求命中安全规则后的最终处置动作进行过滤。 支持运算符：equal 可选项如下： -：未知/未命中 Monitor：观察 JSChallenge：JavaScript 挑战 Deny：拦截 Allow：放行 BlockIP：IP 封禁 Redirect：重定向 ReturnCustomPage：返回自定义页面 ManagedChallenge：托管挑战 Silence：静默 LongDelay：长时间等待后响应 ShortDelay：短时间等待后响应SecurityModule：按照最终处置请求的安全模块名称进行过滤。 支持运算符：equal 可选项如下： -：未知/未命中 CustomRule：Web防护 - 自定义规则 RateLimitingCustomRule：Web防护 - 速率限制规则 ManagedRule：Web防护 - 托管规则 L7DDoS：Web防护 - CC攻击防护 BotManagement：Bot管理 - Bot基础管理 BotClientReputation：Bot管理 - 客户端画像分析 BotBehaviorAnalysis：Bot管理 - Bot智能分析 BotCustomRule：Bot管理 - 自定义Bot规则 BotActiveDetection：Bot管理 - 主动特征识别 */
   Conditions?: QueryCondition[];
 }
 
@@ -1358,6 +1358,14 @@ declare interface PostMaxSize {
   MaxSize?: number | null;
 }
 
+/** 预付费套餐计费参数 */
+declare interface PrepaidPlanParam {
+  /** 订阅预付费套餐的周期，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。不填写使用默认值 1。 */
+  Period?: number;
+  /** 预付费套餐的自动续费标志，取值有： on：开启自动续费； off：不开启自动续费。不填写使用默认值 off，自动续费时，默认续费1个月。 */
+  RenewFlag?: string;
+}
+
 /** 对象存储源站私有鉴权参数 */
 declare interface PrivateParameter {
   /** 私有鉴权参数名称，取值有：AccessKeyId：鉴权参数 Access Key ID；SecretAccessKey：鉴权参数 Secret Access Key；SignatureVersion：鉴权版本，v2 或者 v4；Region：存储桶地域。 */
@@ -1528,6 +1536,12 @@ declare interface RealtimeLogDeliveryTask {
   CreateTime?: string;
   /** 更新时间。 */
   UpdateTime?: string;
+}
+
+/** 预付费套餐自动续费配置项。 */
+declare interface RenewFlag {
+  /** 预付费套餐的自动续费标志，取值有： on：开启自动续费； off：不开启自动续费。 */
+  Switch: string;
 }
 
 /** 计费资源 */
@@ -2414,6 +2428,24 @@ declare interface CreatePlanForZoneResponse {
   ResourceNames?: string[];
   /** 购买的订单号列表。 */
   DealNames?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePlanRequest {
+  /** 订阅的套餐类型，取值有： personal：个人版套餐，预付费套餐； basic：基础版套餐，预付费套餐； standard：标准版套餐，预付费套餐； enterprise：企业版套餐，后付费套餐。订阅预付费套餐时，请确保账号内有足够余额，余额不足会产生一个待支付的订单。计费概述参考 [Edgeone计费概述](https://cloud.tencent.com/document/product/1552/94156)不同套餐区别参考 [Edgeone计费套餐选型对比](https://cloud.tencent.com/document/product/1552/94165) */
+  PlanType: string;
+  /** 是否自动使用代金券，取值有： true：是； false：否。该参数仅在 PlanType 为 personal, basic, standard 时有效。不填写使用默认值 false。 */
+  AutoUseVoucher?: string;
+  /** 订阅预付费套餐参数，PlanType 为 personal, basic, standard 时，可以选填该参数，用于传入套餐的订阅时长和是否开启自动续费。不填该参数时，默认开通套餐时长为 1 个月，不开启自动续费。 */
+  PrepaidPlanParam?: PrepaidPlanParam;
+}
+
+declare interface CreatePlanResponse {
+  /** 套餐 ID，形如 edgeone-2unuvzjmmn2q。 */
+  PlanId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3490,6 +3522,16 @@ declare interface DescribeZonesResponse {
   RequestId?: string;
 }
 
+declare interface DestroyPlanRequest {
+  /** 套餐 ID，形如 edgeone-2wdo315m2y4c。 */
+  PlanId: string;
+}
+
+declare interface DestroyPlanResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DownloadL4LogsRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -3550,6 +3592,22 @@ declare interface IdentifyZoneResponse {
   Ascription?: AscriptionInfo;
   /** 站点归属权校验：文件校验信息。 */
   FileAscription?: FileAscriptionInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface IncreasePlanQuotaRequest {
+  /** 套餐 ID, 形如 edgeone-2unuvzjmmn2q。 */
+  PlanId: string;
+  /** 新增的套餐配额类型，取值有： site：站点数； precise_access_control_rule：Web 防护 - 自定义规则 - 精准匹配策略的规则配额； rate_limiting_rule：Web 防护 - 速率限制 - 精准速率限制模块的规则配额。 */
+  QuotaType: string;
+  /** 新增的配额个数。单次新增的配额个数上限为 100。 */
+  QuotaNumber: number;
+}
+
+declare interface IncreasePlanQuotaResponse {
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3806,6 +3864,18 @@ declare interface ModifyOriginGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPlanRequest {
+  /** 套餐 ID，形如 edgeone-2unuvzjmmn2q。 */
+  PlanId: string;
+  /** 预付费套餐自动续费配置。若开启了自动续费，则会在套餐到期前一天自动续费，仅支持个人版，基础版，标准版套餐。不填写表示保持原有配置。 */
+  RenewFlag?: RenewFlag;
+}
+
+declare interface ModifyPlanResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRealtimeLogDeliveryTaskRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -3968,6 +4038,38 @@ declare interface ModifyZoneStatusRequest {
 }
 
 declare interface ModifyZoneStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RenewPlanRequest {
+  /** 套餐 ID，形如 edgeone-2unuvzjmmn2q。 */
+  PlanId: string;
+  /** 续费套餐的时长，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。 */
+  Period: number;
+  /** 是否自动使用代金券，取值有： true：是； false：否。不填写使用默认值 false。 */
+  AutoUseVoucher?: string;
+}
+
+declare interface RenewPlanResponse {
+  /** 订单号。 */
+  DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpgradePlanRequest {
+  /** 套餐 ID，形如 edgeone-2unuvzjmmn2q。 */
+  PlanId: string;
+  /** 需要升级到的目标套餐版本，取值有： basic：基础版套餐； standard：标准版套餐。 */
+  PlanType: string;
+  /** 是否自动使用代金券，取值有： true：是； false：否。不填写使用默认值 false。 */
+  AutoUseVoucher?: string;
+}
+
+declare interface UpgradePlanResponse {
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4253,6 +4355,8 @@ declare interface Teo {
   CreateL4ProxyRules(data: CreateL4ProxyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ProxyRulesResponse>;
   /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
   CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
+  /** 创建套餐 {@link CreatePlanRequest} {@link CreatePlanResponse} */
+  CreatePlan(data: CreatePlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlanResponse>;
   /** 为未购买套餐的站点购买套餐 {@link CreatePlanForZoneRequest} {@link CreatePlanForZoneResponse} */
   CreatePlanForZone(data: CreatePlanForZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlanForZoneResponse>;
   /** 创建预热任务 {@link CreatePrefetchTaskRequest} {@link CreatePrefetchTaskResponse} */
@@ -4367,12 +4471,16 @@ declare interface Teo {
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
   /** 查询站点列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
+  /** 销毁套餐 {@link DestroyPlanRequest} {@link DestroyPlanResponse} */
+  DestroyPlan(data: DestroyPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPlanResponse>;
   /** 下载四层离线日志 {@link DownloadL4LogsRequest} {@link DownloadL4LogsResponse} */
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
   /** 认证站点 {@link IdentifyZoneRequest} {@link IdentifyZoneResponse} */
   IdentifyZone(data: IdentifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<IdentifyZoneResponse>;
+  /** 增购套餐配额 {@link IncreasePlanQuotaRequest} {@link IncreasePlanQuotaResponse} */
+  IncreasePlanQuota(data: IncreasePlanQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<IncreasePlanQuotaResponse>;
   /** 修改加速域名信息 {@link ModifyAccelerationDomainRequest} {@link ModifyAccelerationDomainResponse} */
   ModifyAccelerationDomain(data: ModifyAccelerationDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccelerationDomainResponse>;
   /** 批量修改加速域名状态 {@link ModifyAccelerationDomainStatusesRequest} {@link ModifyAccelerationDomainStatusesResponse} */
@@ -4401,6 +4509,8 @@ declare interface Teo {
   ModifyL4ProxyStatus(data: ModifyL4ProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ProxyStatusResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
+  /** 修改套餐配置 {@link ModifyPlanRequest} {@link ModifyPlanResponse} */
+  ModifyPlan(data: ModifyPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPlanResponse>;
   /** 修改实时日志投递任务 {@link ModifyRealtimeLogDeliveryTaskRequest} {@link ModifyRealtimeLogDeliveryTaskResponse} */
   ModifyRealtimeLogDeliveryTask(data: ModifyRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRealtimeLogDeliveryTaskResponse>;
   /** 修改规则引擎规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
@@ -4415,6 +4525,10 @@ declare interface Teo {
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
   /** 切换站点状态 {@link ModifyZoneStatusRequest} {@link ModifyZoneStatusResponse} */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
+  /** 续费套餐 {@link RenewPlanRequest} {@link RenewPlanResponse} */
+  RenewPlan(data: RenewPlanRequest, config?: AxiosRequestConfig): AxiosPromise<RenewPlanResponse>;
+  /** 升级套餐 {@link UpgradePlanRequest} {@link UpgradePlanResponse} */
+  UpgradePlan(data: UpgradePlanRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradePlanResponse>;
   /** 验证归属权 {@link VerifyOwnershipRequest} {@link VerifyOwnershipResponse} */
   VerifyOwnership(data: VerifyOwnershipRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOwnershipResponse>;
   /** 创建预热任务 {@link V20220106.CreatePrefetchTaskRequest} {@link V20220106.CreatePrefetchTaskResponse} */

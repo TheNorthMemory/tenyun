@@ -836,6 +836,22 @@ declare interface ModifyIntlCustomDnsHostResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTemplateRequest {
+  /** 证件信息 */
+  CertificateInfo: CertificateInfo;
+  /** 联系人信息 */
+  ContactInfo: ContactInfo;
+  /** 模板ID */
+  TemplateId: string;
+}
+
+declare interface ModifyTemplateResponse {
+  /** 模板信息 */
+  Template: TemplateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewDomainBatchRequest {
   /** 域名续费的年限。 */
   Period: number;
@@ -1051,6 +1067,8 @@ declare interface Domain {
   ModifyDomainOwnerBatch(data: ModifyDomainOwnerBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerBatchResponse>;
   /** 修改DNS Host {@link ModifyIntlCustomDnsHostRequest} {@link ModifyIntlCustomDnsHostResponse} */
   ModifyIntlCustomDnsHost(data: ModifyIntlCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntlCustomDnsHostResponse>;
+  /** 修改模板 {@link ModifyTemplateRequest} {@link ModifyTemplateResponse} */
+  ModifyTemplate(data: ModifyTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTemplateResponse>;
   /** 批量域名续费 {@link RenewDomainBatchRequest} {@link RenewDomainBatchResponse} */
   RenewDomainBatch(data: RenewDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDomainBatchResponse>;
   /** 预留预释放域名 {@link ReservedPreDomainsRequest} {@link ReservedPreDomainsResponse} */

@@ -3771,7 +3771,7 @@ declare namespace V20191022 {
 
   /** Git凭证 */
   interface GitSecret {
-    /** 无秘钥，默认选项 */
+    /** 无密钥，默认选项 */
     NoSecret?: boolean;
     /** Git用户名密码base64编码后的字符串编码前的内容应为Json字符串，如{"UserName": "用户名", "Password":"密码"} */
     Secret?: string;
