@@ -780,7 +780,7 @@ declare interface RabbitMQClusterInfo {
   ConsumerNumber?: number;
   /** Exchang数量 */
   ExchangeNumber?: number;
-  /** 集群异常。 */
+  /** 集群异常信息 */
   ExceptionInformation?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
   ClusterStatus?: number;
@@ -788,6 +788,10 @@ declare interface RabbitMQClusterInfo {
   AutoRenewFlag?: number | null;
   /** 是否开启镜像队列策略。1表示开启，0表示没开启。 */
   MirrorQueuePolicyFlag?: number | null;
+  /** 每秒消费消息数 单位：条/秒 */
+  MessageConsumeRate?: number | null;
+  /** 集群版本信息 */
+  ClusterVersion?: string | null;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -870,6 +874,22 @@ declare interface RabbitMQQueueListInfo {
   CreateTime?: string | null;
   /** 修改时间 */
   ModifyTime?: string | null;
+  /** 队列是否持久化，true 为持久化，false 为非持久化 */
+  Durable?: boolean | null;
+  /** 队列是否为自动删除队列，true 为自动删除，false 为非自动删除 */
+  AutoDelete?: boolean | null;
+  /** 队列所属实例 ID */
+  InstanceId?: string | null;
+  /** 队列所属虚拟主机名称 */
+  VirtualHost?: string | null;
+  /** 队列所在主节点名称 */
+  Node?: string | null;
+  /** 生效的策略名称 */
+  Policy?: string | null;
+  /** 扩展参数 key-value 对象 */
+  Arguments?: string | null;
+  /** 是否独占队列 */
+  Exclusive?: boolean | null;
 }
 
 /** RabbitMQ用户实体详情 */
@@ -956,6 +976,8 @@ declare interface RabbitMQVirtualHostInfo {
   MessageRateIn?: number | null;
   /** 输出消息速率 */
   MessageRateOut?: number | null;
+  /** 是否存在镜像队列策略，true 为存在，false 为不存 */
+  MirrorQueuePolicyFlag?: boolean | null;
 }
 
 /** vhost概览统计信息 */

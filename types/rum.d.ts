@@ -205,7 +205,7 @@ declare interface Whitelist {
 }
 
 declare interface CreateProjectRequest {
-  /** 创建的项目名(不为空且最长为 200) */
+  /** 应用名称(不为空且最长为 200) */
   Name: string;
   /** 业务系统 ID */
   InstanceID: string;
@@ -219,7 +219,7 @@ declare interface CreateProjectRequest {
   Repo?: string;
   /** 项目对应网页地址(可选，最长为 256) */
   URL?: string;
-  /** 创建的项目描述(可选，最长为 1000) */
+  /** 应用描述(可选，最长为 1000) */
   Desc?: string;
 }
 
@@ -723,7 +723,7 @@ declare interface DescribeDataFetchUrlInfoResponse {
 declare interface DescribeDataFetchUrlRequest {
   /** 开始时间 */
   StartTime: number;
-  /** allcount：性能视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  /** allcount：性能视图，pagepv：pv视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
   Type: string;
   /** 结束时间 */
   EndTime: number;
@@ -857,7 +857,7 @@ declare interface DescribeDataPerformancePageRequest {
   StartTime: number;
   /** 结束时间 */
   EndTime: number;
-  /** pagepv：性能视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等 */
+  /** pagepv：pv视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等 */
   Type: string;
   /** 日志等级 */
   Level?: string;
@@ -1335,11 +1335,11 @@ declare interface DescribeErrorRequest {
 
 declare interface DescribeErrorResponse {
   /** 内容 */
-  Content: string;
+  Content?: string;
   /** 项目ID */
-  ID: number;
+  ID?: number;
   /** 时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1397,7 +1397,7 @@ declare interface DescribePvListResponse {
 declare interface DescribeReleaseFileSignRequest {
   /** 超时时间，不填默认是 5 分钟 */
   Timeout?: number;
-  /** bucket类型，不填默认web，2:app */
+  /** bucket类型，不填默认1:web，2:app */
   FileType?: number;
 }
 
@@ -1551,7 +1551,7 @@ declare interface DescribeScoresRequest {
 
 declare interface DescribeScoresResponse {
   /** 数组 */
-  ScoreSet: ScoreInfo[];
+  ScoreSet?: ScoreInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1675,7 +1675,7 @@ declare interface ModifyProjectLimitResponse {
 declare interface ModifyProjectRequest {
   /** 项目 id */
   ID: number;
-  /** 项目名(可选，不为空且最长为 200) */
+  /** 应用名称(可选，不为空且最长为 200字符) */
   Name?: string;
   /** 项目网页地址(可选，最长为 256) */
   URL?: string;
@@ -1689,7 +1689,7 @@ declare interface ModifyProjectRequest {
   EnableURLGroup?: number;
   /** 项目类型(可接受值为 "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn") */
   Type?: string;
-  /** 项目描述(可选，最长为 1000) */
+  /** 应用描述(可选，最长为 1000字符) */
   Desc?: string;
 }
 

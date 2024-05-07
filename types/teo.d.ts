@@ -3338,6 +3338,20 @@ declare interface DescribeSecurityIPGroupInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSecurityIPGroupRequest {
+  /** 站点 ID ，用于指定查询的站点范围。 */
+  ZoneId: string;
+  /** 指定安全 IP 组 ID。提供该参数时，仅查询指定 ID 的安全 IP 组配置；不传递参数时，返回站点下所有安全 IP 组信息。 */
+  GroupIds?: number[];
+}
+
+declare interface DescribeSecurityIPGroupResponse {
+  /** 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称和 IP / 网段列表信息。 */
+  IPGroups?: IPGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSecurityTemplateBindingsRequest {
   /** 要查询的站点 ID。 */
   ZoneId: string;
@@ -4453,7 +4467,9 @@ declare interface Teo {
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
   /** 查询规则引擎的设置参数 {@link DescribeRulesSettingRequest} {@link DescribeRulesSettingResponse} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
-  /** 查询 IP 组配置信息 {@link DescribeSecurityIPGroupInfoRequest} {@link DescribeSecurityIPGroupInfoResponse} */
+  /** 查询安全 IP 组 {@link DescribeSecurityIPGroupRequest} {@link DescribeSecurityIPGroupResponse} */
+  DescribeSecurityIPGroup(data: DescribeSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupResponse>;
+  /** 查询安全 IP 组（已废弃） {@link DescribeSecurityIPGroupInfoRequest} {@link DescribeSecurityIPGroupInfoResponse} */
   DescribeSecurityIPGroupInfo(data: DescribeSecurityIPGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupInfoResponse>;
   /** 查询指定策略模板的绑定关系列表 {@link DescribeSecurityTemplateBindingsRequest} {@link DescribeSecurityTemplateBindingsResponse} */
   DescribeSecurityTemplateBindings(data: DescribeSecurityTemplateBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTemplateBindingsResponse>;

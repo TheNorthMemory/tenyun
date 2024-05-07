@@ -46,12 +46,12 @@ declare interface ErrorMsg {
   Code?: number;
 }
 
-/** 单条消息 */
+/** 会话内容 */
 declare interface Message {
   /** 角色 */
   Role: string;
   /** 文本内容 */
-  Content: string;
+  Content?: string;
 }
 
 /** Token 数量 */

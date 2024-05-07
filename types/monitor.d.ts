@@ -1696,7 +1696,7 @@ declare interface PrometheusAlertRule {
 declare interface PrometheusClusterAgentBasic {
   /** 集群ID */
   Region: string;
-  /** 集群类型 */
+  /** 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群 */
   ClusterType: string;
   /** 集群ID */
   ClusterId: string;
@@ -1769,65 +1769,65 @@ declare interface PrometheusInstanceTenantUsage {
 /** Prometheus 服务响应体 */
 declare interface PrometheusInstancesItem {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例计费模式。取值范围：2：包年包月3：按量 */
-  InstanceChargeType: number;
+  InstanceChargeType?: number;
   /** 地域 ID */
-  RegionId: number;
+  RegionId?: number;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** VPC ID */
-  VpcId: string;
+  VpcId?: string;
   /** 子网 ID */
-  SubnetId: string;
+  SubnetId?: string;
   /** 存储周期 */
-  DataRetentionTime: number | null;
+  DataRetentionTime?: number | null;
   /** 实例业务状态。取值范围：1：正在创建2：运行中3：异常4：重建中5：销毁中6：已停服8：欠费停服中9：欠费已停服 */
-  InstanceStatus: number;
+  InstanceStatus?: number;
   /** Grafana 面板 URL */
-  GrafanaURL: string | null;
+  GrafanaURL?: string | null;
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 是否开启 Grafana0：不开启1：开启 */
-  EnableGrafana: number;
+  EnableGrafana?: number;
   /** 实例IPV4地址 */
-  IPv4Address: string | null;
+  IPv4Address?: string | null;
   /** 实例关联的标签列表。 */
-  TagSpecification: PrometheusTag[] | null;
+  TagSpecification?: PrometheusTag[] | null;
   /** 购买的实例过期时间 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 计费状态1：正常2：过期3：销毁4：分配中5：分配失败 */
-  ChargeStatus: number | null;
+  ChargeStatus?: number | null;
   /** 规格名称 */
-  SpecName: string | null;
+  SpecName?: string | null;
   /** 自动续费标记0：不自动续费1：开启自动续费2：禁止自动续费-1：无效 */
-  AutoRenewFlag: number | null;
+  AutoRenewFlag?: number | null;
   /** 是否快过期0：否1：快过期 */
-  IsNearExpire: number | null;
+  IsNearExpire?: number | null;
   /** 数据写入需要的 Token */
-  AuthToken: string | null;
+  AuthToken?: string | null;
   /** Prometheus Remote Write 的地址 */
-  RemoteWrite: string | null;
+  RemoteWrite?: string | null;
   /** Prometheus HTTP Api 根地址 */
-  ApiRootPath: string | null;
+  ApiRootPath?: string | null;
   /** Proxy 的地址 */
-  ProxyAddress: string | null;
+  ProxyAddress?: string | null;
   /** Grafana 运行状态1：正在创建2：运行中3：异常4：重启中5：销毁中6：已停机7：已删除 */
-  GrafanaStatus: number | null;
+  GrafanaStatus?: number | null;
   /** Grafana IP 白名单列表，使用英文分号分隔 */
-  GrafanaIpWhiteList: string | null;
+  GrafanaIpWhiteList?: string | null;
   /** 实例的授权信息 */
-  Grant: PrometheusInstanceGrantInfo | null;
+  Grant?: PrometheusInstanceGrantInfo | null;
   /** 绑定的 Grafana 实例 ID */
-  GrafanaInstanceId: string | null;
+  GrafanaInstanceId?: string | null;
   /** 告警规则限制 */
-  AlertRuleLimit: number | null;
+  AlertRuleLimit?: number | null;
   /** 预聚合规则限制 */
-  RecordingRuleLimit: number | null;
+  RecordingRuleLimit?: number | null;
   /** 迁移状态，0-不在迁移中，1-迁移中、原实例，2-迁移中、目标实例 */
-  MigrationType: number | null;
+  MigrationType?: number | null;
 }
 
 /** 托管prometheusV2实例概览 */
@@ -4745,10 +4745,10 @@ declare interface ModifyPrometheusGlobalNotificationResponse {
 }
 
 declare interface ModifyPrometheusInstanceAttributesRequest {
-  /** 实例名称 */
-  InstanceName: string;
   /** 实例 ID */
   InstanceId: string;
+  /** 实例名称 */
+  InstanceName?: string;
   /** 存储时长（取值为 15、30、45。此参数不适用于包年包月实例） */
   DataRetentionTime?: number;
 }
