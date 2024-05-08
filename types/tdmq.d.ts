@@ -2984,6 +2984,12 @@ declare interface DescribeRabbitMQQueueDetailResponse {
   QueueLeaderLocator?: string | null;
   /** 仲裁队列的初始副本组大小 */
   QuorumInitialGroupSize?: number | null;
+  /** 是否为独占队列 */
+  Exclusive?: boolean | null;
+  /** 生效的策略名 */
+  Policy?: string | null;
+  /** 扩展参数 key-value */
+  Arguments?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

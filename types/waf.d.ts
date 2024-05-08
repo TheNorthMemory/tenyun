@@ -1156,6 +1156,18 @@ declare interface IpAccessControlItem {
   IpList?: string[] | null;
 }
 
+/** IP黑白名单参数结构体，主要用于IP黑白名单的导入。 */
+declare interface IpAccessControlParam {
+  /** IP列表 */
+  IpList: string[];
+  /** valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
+  ValidTs: number;
+  /** 42为黑名单，40为白名单 */
+  ActionType: number;
+  /** 备注 */
+  Note?: string;
+}
+
 /** ip封堵状态数据 */
 declare interface IpHitItem {
   /** 动作 */
@@ -1992,6 +2004,32 @@ declare interface CreateHostResponse {
   RequestId?: string;
 }
 
+declare interface CreateIpAccessControlRequest {
+  /** 具体域名如：test.qcloudwaf.com全局域名为：global */
+  Domain: string;
+  /** ip参数列表 */
+  IpList: string[];
+  /** 42为黑名单，40为白名单 */
+  ActionType: number;
+  /** valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
+  ValidTS: number;
+  /** 实例Id */
+  InstanceId?: string;
+  /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
+  Edition?: string;
+  /** 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空 */
+  SourceType?: string;
+  /** 备注 */
+  Note?: string;
+}
+
+declare interface CreateIpAccessControlResponse {
+  /** 新增的规则对应的ID */
+  RuleId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccessExportRequest {
   /** 日志导出ID */
   ExportId: string;
@@ -2156,6 +2194,26 @@ declare interface DeleteIpAccessControlResponse {
   FailedItems?: string | null;
   /** 删除失败的条目数 */
   FailedCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteIpAccessControlV2Request {
+  /** 域名 */
+  Domain: string;
+  /** 规则ID列表，支持批量删除 */
+  RuleIds: number[];
+  /** 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单 */
+  DeleteAll?: boolean;
+  /** batch表示为批量防护的IP黑白名单 */
+  SourceType?: string;
+  /** IP黑白名单类型，40为IP白名单，42为IP黑名单 */
+  ActionType?: number;
+}
+
+declare interface DeleteIpAccessControlV2Response {
+  /** 在批量删除的时候表示删除失败的条数 */
+  FailedCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3446,6 +3504,22 @@ declare interface GetInstanceQpsLimitResponse {
   RequestId?: string;
 }
 
+declare interface ImportIpAccessControlRequest {
+  /** 导入的IP黑白名单列表 */
+  Data: IpAccessControlParam[];
+  /** 具体域名如：test.qcloudwaf.com全局域名为：global */
+  Domain: string;
+  /** 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空 */
+  SourceType: string;
+  /** 实例Id */
+  InstanceId?: string;
+}
+
+declare interface ImportIpAccessControlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAccessPeriodRequest {
   /** 访问日志保存期限，范围为[1, 180] */
   Period: number;
@@ -3888,6 +3962,32 @@ declare interface ModifyInstanceRenewFlagRequest {
 }
 
 declare interface ModifyInstanceRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyIpAccessControlRequest {
+  /** 具体域名如：test.qcloudwaf.com全局域名为：global */
+  Domain: string;
+  /** ip参数列表 */
+  IpList: string[];
+  /** 42为黑名单，40为白名单 */
+  ActionType: number;
+  /** valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
+  ValidTS: number;
+  /** 规则ID */
+  RuleId: number;
+  /** 实例Id */
+  InstanceId?: string;
+  /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
+  Edition?: string;
+  /** 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空 */
+  SourceType?: string;
+  /** 备注 */
+  Note?: string;
+}
+
+declare interface ModifyIpAccessControlResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4393,6 +4493,8 @@ declare interface Waf {
   CreateDeals(data: CreateDealsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealsResponse>;
   /** 添加负载均衡型WAF防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
+  /** Waf IP黑白名单新增接口 {@link CreateIpAccessControlRequest} {@link CreateIpAccessControlResponse} */
+  CreateIpAccessControl(data: CreateIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpAccessControlResponse>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
   /** 删除防篡改url {@link DeleteAntiFakeUrlRequest} {@link DeleteAntiFakeUrlResponse} */
@@ -4417,6 +4519,8 @@ declare interface Waf {
   DeleteHost(data: DeleteHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostResponse>;
   /** Waf IP黑白名单Delete接口 {@link DeleteIpAccessControlRequest} {@link DeleteIpAccessControlResponse} */
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
+  /** Waf IP黑白名单删除接口 {@link DeleteIpAccessControlV2Request} {@link DeleteIpAccessControlV2Response} */
+  DeleteIpAccessControlV2(data: DeleteIpAccessControlV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlV2Response>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
   /** 删除SaaS型WAF防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
@@ -4547,6 +4651,8 @@ declare interface Waf {
   GetAttackTotalCount(data: GetAttackTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackTotalCountResponse>;
   /** 获取套餐实例的弹性qps上限 {@link GetInstanceQpsLimitRequest} {@link GetInstanceQpsLimitResponse} */
   GetInstanceQpsLimit(data: GetInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceQpsLimitResponse>;
+  /** 导入IP黑白名单 {@link ImportIpAccessControlRequest} {@link ImportIpAccessControlResponse} */
+  ImportIpAccessControl(data: ImportIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ImportIpAccessControlResponse>;
   /** 修改访问日志保存期限等字段信息 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
   /** 编辑防篡改url {@link ModifyAntiFakeUrlRequest} {@link ModifyAntiFakeUrlResponse} */
@@ -4599,6 +4705,8 @@ declare interface Waf {
   ModifyInstanceQpsLimit(data: ModifyInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceQpsLimitResponse>;
   /** 修改实例的自动续费开关 {@link ModifyInstanceRenewFlagRequest} {@link ModifyInstanceRenewFlagResponse} */
   ModifyInstanceRenewFlag(data: ModifyInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceRenewFlagResponse>;
+  /** Waf IP黑白名单编辑接口 {@link ModifyIpAccessControlRequest} {@link ModifyIpAccessControlResponse} */
+  ModifyIpAccessControl(data: ModifyIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpAccessControlResponse>;
   /** 设置某个domain下基础安全模块的开关 {@link ModifyModuleStatusRequest} {@link ModifyModuleStatusResponse} */
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */

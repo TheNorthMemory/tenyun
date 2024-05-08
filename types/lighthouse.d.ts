@@ -1113,9 +1113,9 @@ declare interface CreateInstanceSnapshotResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 套餐ID。可以通过调用 [查询套餐](https://cloud.tencent.com/document/api/1207/47575) 接口获取。 */
+  /** 套餐ID。可以通过调用 [DescribeBundles](https://cloud.tencent.com/document/api/1207/47575) 接口获取。 */
   BundleId: string;
-  /** 镜像ID。可以通过调用 [查询镜像信息](https://cloud.tencent.com/document/api/1207/47689) 接口获取。 */
+  /** 镜像ID。可以通过调用 [DescribeBlueprints](https://cloud.tencent.com/document/api/1207/47689) 接口获取。 */
   BlueprintId: string;
   /** 当前实例仅支持预付费模式，即包年包月相关参数设置，单位（月）。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。该参数必传。 */
   InstanceChargePrepaid: InstanceChargePrepaid;
@@ -1229,7 +1229,7 @@ declare interface DeleteKeyPairsResponse {
 }
 
 declare interface DeleteSnapshotsRequest {
-  /** 要删除的快照 ID 列表，可通过 DescribeSnapshots 查询。 */
+  /** 要删除的快照 ID 列表，可通过 DescribeSnapshots查询。 */
   SnapshotIds: string[];
 }
 
@@ -1337,13 +1337,13 @@ declare interface DescribeCcnAttachedInstancesResponse {
 }
 
 declare interface DescribeDiskBackupsDeniedActionsRequest {
-  /** 云硬盘备份点 ID 列表, 可通过 DescribeDiskBackups 接口查询。 */
+  /** 云硬盘备份点 ID 列表, 可通过DescribeDiskBackups接口查询。 */
   DiskBackupIds: string[];
 }
 
 declare interface DescribeDiskBackupsDeniedActionsResponse {
   /** 云硬盘备份点操作限制列表详细信息。 */
-  DiskBackupDeniedActionSet: DiskBackupDeniedActions[];
+  DiskBackupDeniedActionSet?: DiskBackupDeniedActions[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1381,7 +1381,7 @@ declare interface DescribeDiskConfigsResponse {
 }
 
 declare interface DescribeDiskDiscountRequest {
-  /** 云硬盘类型, 取值: "CLOUD_PREMIUM"。 */
+  /** 云硬盘类型, 取值范围: CLOUD_PREMIUM: 高性能云硬盘，CLOUD_SSD: SSD云硬盘 */
   DiskType: string;
   /** 云硬盘大小。 */
   DiskSize: number;
@@ -1681,7 +1681,7 @@ declare interface DescribeInstancesDeniedActionsRequest {
 
 declare interface DescribeInstancesDeniedActionsResponse {
   /** 实例操作限制列表详细信息。 */
-  InstanceDeniedActionSet: InstanceDeniedActions[];
+  InstanceDeniedActionSet?: InstanceDeniedActions[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1853,7 +1853,7 @@ declare interface DescribeSnapshotsDeniedActionsRequest {
 
 declare interface DescribeSnapshotsDeniedActionsResponse {
   /** 快照操作限制列表详细信息。 */
-  SnapshotDeniedActionSet: SnapshotDeniedActions[];
+  SnapshotDeniedActionSet?: SnapshotDeniedActions[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2381,7 +2381,7 @@ declare interface ResetInstanceResponse {
 declare interface ResetInstancesPasswordRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。 */
   InstanceIds: string[];
-  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：`LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：小写字母：[a-z]大写字母：[A-Z]数字：0-9特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/`WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符小写字母：[a-z]大写字母：[A-Z]数字： 0-9特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。 */
+  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下： `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类： 小写字母：[a-z] 大写字母：[A-Z] 数字：0-9 特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/ `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符 小写字母：[a-z] 大写字母：[A-Z] 数字： 0-9 特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/ 如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。 */
   Password: string;
   /** 待重置密码的实例操作系统用户名。不得超过 64 个字符。 */
   UserName?: string;

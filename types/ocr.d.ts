@@ -4435,7 +4435,7 @@ declare interface SmartStructuralOCRV2Request {
   ItemNames?: string[];
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 海外发票模版Coin --钱币识别模板OnboardingDocuments -- 入职材料识别PropertyOwnershipCertificate -- 房产证识别RealEstateCertificate --不动产权证识别HouseEncumbranceCertificate -- 他权证识别CarInsurance -- 车险保单 */
+  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 海外发票模版Coin --钱币识别模板OnboardingDocuments -- 入职材料识别PropertyOwnershipCertificate -- 房产证识别RealEstateCertificate --不动产权证识别HouseEncumbranceCertificate -- 他权证识别CarInsurance -- 车险保单MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板 */
   ConfigId?: string;
   /** 是否打开印章识别 */
   EnableSealRecognize?: boolean;

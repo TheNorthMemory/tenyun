@@ -2109,7 +2109,7 @@ declare interface CreateEngineRequest {
   EngineType: string;
   /** 引擎的开源版本。每种引擎支持的开源版本不同，请参考产品文档或者控制台购买页 */
   EngineVersion: string;
-  /** 引擎的产品版本。参考值：- STANDARD： 标准版引擎各版本及可选择的规格、节点数说明：apollo - STANDARD版本规格列表：1C2G、2C4G、4C8G、8C16G、16C32G节点数：1，2，3，4，5eureka - STANDARD版本规格列表：1C2G、2C4G、4C8G、8C16G、16C32G节点数：3，4，5polarismesh - STANDARD版本规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000兼容原spec-xxxxxx形式的规格ID */
+  /** 引擎的产品版本。参考值：- STANDARD： 标准版- PROFESSIONAL: 专业版（Zookeeper）/企业版（PolarisMesh）引擎各版本及可选择的规格、节点数说明：apollo - STANDARD版本规格列表：1C2G、2C4G、4C8G、8C16G、16C32G节点数：1，2，3，4，5eureka - STANDARD版本规格列表：1C2G、2C4G、4C8G、8C16G、16C32G节点数：3，4，5polarismesh - STANDARD版本规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000兼容原spec-xxxxxx形式的规格ID */
   EngineProductVersion: string;
   /** 引擎所在地域。参考值说明：中国区 参考值：- ap-guangzhou：广州- ap-beijing：北京- ap-chengdu：成都- ap-chongqing：重庆- ap-nanjing：南京- ap-shanghai：上海- ap-hongkong：香港- ap-taipei：台北亚太区 参考值：- ap-jakarta：雅加达- ap-singapore：新加坡北美区 参考值- na-toronto：多伦多金融专区 参考值- ap-beijing-fsi：北京金融- ap-shanghai-fsi：上海金融- ap-shenzhen-fsi：深圳金融 */
   EngineRegion: string;
@@ -2135,7 +2135,7 @@ declare interface CreateEngineRequest {
   PrepaidPeriod?: number;
   /** 自动续费标记，仅预付费使用。参考值：- 0：不自动续费- 1：自动续费 */
   PrepaidRenewFlag?: number;
-  /** 跨地域部署的引擎地域配置详情zk标准版没有跨地域部署，请不要填写 */
+  /** 跨地域部署的引擎地域配置详情zk标准版没有跨地域部署，请不要填写zk专业版跨地域部署开启了固定Leader所在地域，需要满足以下条件- 固定Leader所在地域当前仅支持跨两个地域- leader地域的副本数必须是3/2 + 1，5/2+1，7/2+1，也就是 2，3，4 */
   EngineRegionInfos?: EngineRegionInfo[];
   /** zk专业版至多有两个盘，且磁盘的容量在50-3200之间如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致 */
   StorageOption?: StorageOption[];

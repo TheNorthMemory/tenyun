@@ -430,6 +430,10 @@ declare interface DataEngineInfo {
   EngineTypeDetail?: string | null;
   /** 引擎网络ID */
   EngineNetworkId?: string | null;
+  /** 标准引擎关联的资源组个数 */
+  EngineResourceGroupCount?: number | null;
+  /** 引擎当前使用量（Cu） */
+  EngineResourceUsedCU?: number | null;
 }
 
 /** 数据表数据格式。 */
@@ -1502,6 +1506,10 @@ declare interface TaskResponseInfo {
   PrestoMonitorMetrics?: PrestoMonitorMetrics | null;
   /** 结果文件格式：默认为csv */
   ResultFormat?: string | null;
+  /** 引擎类型，SparkSQL：SparkSQL 引擎；SparkBatch：Spark作业引擎；PrestoSQL：Presto引擎 */
+  EngineTypeDetail?: string | null;
+  /** spark引擎资源组名称 */
+  ResourceGroupName?: string | null;
 }
 
 /** 任务结果信息。 */
@@ -2505,6 +2513,8 @@ declare interface CreateTaskRequest {
   DatasourceConnectionName?: string;
   /** 数据引擎名称，不填提交到默认集群 */
   DataEngineName?: string;
+  /** 标准spark执行任务resourceGroupName */
+  ResourceGroupName?: string;
 }
 
 declare interface CreateTaskResponse {
@@ -2541,6 +2551,8 @@ declare interface CreateTasksRequest {
   DatasourceConnectionName?: string;
   /** 计算引擎名称，不填任务提交到默认集群 */
   DataEngineName?: string;
+  /** spark集群资源组名称 */
+  ResourceGroupName?: string;
 }
 
 declare interface CreateTasksResponse {
@@ -2857,7 +2869,7 @@ declare interface DescribeDataEngineEventsResponse {
 }
 
 declare interface DescribeDataEngineImageVersionsRequest {
-  /** 引擎类型：SQL、SparkBatch */
+  /** 引擎类型：SQL、SparkBatch、StandardSpark、StandardPresto */
   EngineType: string;
 }
 
@@ -3441,6 +3453,8 @@ declare interface DescribeTasksRequest {
   EndTime?: string;
   /** 数据引擎名称，用于筛选 */
   DataEngineName?: string;
+  /** spark引擎资源组名称 */
+  ResourceGroupName?: string;
 }
 
 declare interface DescribeTasksResponse {

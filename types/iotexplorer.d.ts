@@ -80,20 +80,22 @@ declare interface CloudStorageAIServiceTask {
   DeviceName?: string;
   /** 通道 ID */
   ChannelId?: number;
+  /** 云存 AI 服务类型。可能取值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
+  ServiceType?: string;
   /** 对应云存视频的起始时间 */
   StartTime?: number;
   /** 对应云存视频的结束时间 */
   EndTime?: number;
-  /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空） */
+  /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；4：执行中） */
   Status?: number;
   /** 任务结果 */
   Result?: string;
-  /** 云存 AI 服务类型 */
-  ServiceType?: string | null;
+  /** 任务输出文件列表 */
+  Files?: string[];
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 最后更新时间 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
 }
 
 /** 云存事件 */
@@ -694,6 +696,20 @@ declare interface SearchKeyword {
   Value?: string;
 }
 
+/** TRTC 的参数 可以用来加入房间 */
+declare interface TRTCParams {
+  /** TRTC入参: TRTC的实例ID */
+  SdkAppId: number;
+  /** TRTC入参: 用户加入房间的ID */
+  UserId: string;
+  /** TRTC入参: 用户的签名用来鉴权 */
+  UserSig: string;
+  /** TRTC入参: 加入的TRTC房间名称 */
+  StrRoomId: string;
+  /** TRTC入参: 校验TRTC的KEY */
+  PrivateKey: string;
+}
+
 /** 缩略图信息 */
 declare interface ThumbnailURLInfoList {
   /** 缩略图访问地址 */
@@ -1086,6 +1102,20 @@ declare interface CreateStudioProductResponse {
   RequestId?: string;
 }
 
+declare interface CreateTRTCSignaturesWithRoomIdRequest {
+  /** TRTC进房间的用户名称数组，数组元素不可重复，最长不超过 10 个。 */
+  TRTCUserIds: string[];
+  /** 房间id */
+  RoomId: string;
+}
+
+declare interface CreateTRTCSignaturesWithRoomIdResponse {
+  /** 返回参数数组 */
+  TRTCParamList?: TRTCParams[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -1327,7 +1357,7 @@ declare interface DescribeCloudStorageAIServiceRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：PackageDetect */
+  /** 云存 AI 服务类型。可选值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
   ServiceType: string;
 }
 
@@ -1342,19 +1372,35 @@ declare interface DescribeCloudStorageAIServiceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudStorageAIServiceTaskRequest {
+  /** 任务 ID */
+  TaskId: string;
+}
+
+declare interface DescribeCloudStorageAIServiceTaskResponse {
+  /** 任务信息 */
+  TaskInfo?: CloudStorageAIServiceTask;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudStorageAIServiceTasksRequest {
   /** 产品 ID */
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：PackageDetect */
+  /** 云存 AI 服务类型。可选值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
   ServiceType: string;
   /** 分页拉取数量 */
   Limit: number;
   /** 分页拉取偏移 */
   Offset?: number;
-  /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；不传则查询全部状态的任务） */
+  /** 任务状态。可选值：- （不传）：查询全部状态的任务- `1`：失败- `2`：成功但结果为空- `3`：成功且结果非空- `4`：执行中 */
   Status?: number;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID 非NVR设备则不填 NVR设备则必填 默认为无 */
+  ChannelId?: number;
 }
 
 declare interface DescribeCloudStorageAIServiceTasksResponse {
@@ -2140,6 +2186,16 @@ declare interface DisableTopicRuleResponse {
   RequestId?: string;
 }
 
+declare interface DismissRoomByStrRoomIdFromTRTCRequest {
+  /** 房间id */
+  RoomId: string;
+}
+
+declare interface DismissRoomByStrRoomIdFromTRTCResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EnableTopicRuleRequest {
   /** 规则名称 */
   RuleName: string;
@@ -2162,6 +2218,24 @@ declare interface GenSingleDeviceSignatureOfPublicRequest {
 declare interface GenSingleDeviceSignatureOfPublicResponse {
   /** 设备签名 */
   DeviceSignature: DeviceSignatureInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GenerateCloudStorageAIServiceTaskFileURLRequest {
+  /** 产品 ID */
+  TaskId: string;
+  /** 文件名 */
+  FileName: string;
+  /** 过期时间 UNIX 时间戳（默认值为当前时间 1 小时后） */
+  ExpireTime?: number;
+}
+
+declare interface GenerateCloudStorageAIServiceTaskFileURLResponse {
+  /** 文件下载 URL */
+  FileURL?: string;
+  /** 过期时间 UNIX 时间戳 */
+  ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2503,7 +2577,7 @@ declare interface ListTopicPolicyResponse {
 declare interface ModifyCloudStorageAIServiceCallbackRequest {
   /** 产品ID */
   ProductId: string;
-  /** 推送类型。http：HTTP 回调 */
+  /** 推送类型。可选值：- `http`：HTTP 回调 */
   Type: string;
   /** HTTP 回调 URL */
   CallbackUrl?: string;
@@ -2521,12 +2595,14 @@ declare interface ModifyCloudStorageAIServiceRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：PackageDetect */
+  /** 云存 AI 服务类型。可选值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
   ServiceType: string;
   /** 启用状态 */
   Enabled?: boolean;
   /** 视频分析区域 */
   ROI?: string;
+  /** 云存 AI 服务的配置参数 */
+  Config?: string;
 }
 
 declare interface ModifyCloudStorageAIServiceResponse {
@@ -2800,6 +2876,18 @@ declare interface ReleaseStudioProductResponse {
   RequestId?: string;
 }
 
+declare interface RemoveUserByRoomIdFromTRTCRequest {
+  /** 房间id */
+  RoomId: string;
+  /** 用户名称数组，数组元素不可重复，最长不超过 10 个。 */
+  TRTCUserIds: string[];
+}
+
+declare interface RemoveUserByRoomIdFromTRTCResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetCloudStorageEventRequest {
   /** 产品ID */
   ProductId: string;
@@ -3029,6 +3117,8 @@ declare interface Iotexplorer {
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 新建产品 {@link CreateStudioProductRequest} {@link CreateStudioProductResponse} */
   CreateStudioProduct(data: CreateStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStudioProductResponse>;
+  /** 自定义房间id创建TRTC通话参数 {@link CreateTRTCSignaturesWithRoomIdRequest} {@link CreateTRTCSignaturesWithRoomIdResponse} */
+  CreateTRTCSignaturesWithRoomId(data: CreateTRTCSignaturesWithRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTRTCSignaturesWithRoomIdResponse>;
   /** 创建Topic {@link CreateTopicPolicyRequest} {@link CreateTopicPolicyResponse} */
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
   /** 创建规则 {@link CreateTopicRuleRequest} {@link CreateTopicRuleResponse} */
@@ -3067,6 +3157,8 @@ declare interface Iotexplorer {
   DescribeCloudStorageAIService(data: DescribeCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageAIServiceResponse>;
   /** 查询云存AI分析回调配置 {@link DescribeCloudStorageAIServiceCallbackRequest} {@link DescribeCloudStorageAIServiceCallbackResponse} */
   DescribeCloudStorageAIServiceCallback(data: DescribeCloudStorageAIServiceCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageAIServiceCallbackResponse>;
+  /** 查询设备云存AI分析任务 {@link DescribeCloudStorageAIServiceTaskRequest} {@link DescribeCloudStorageAIServiceTaskResponse} */
+  DescribeCloudStorageAIServiceTask(data: DescribeCloudStorageAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageAIServiceTaskResponse>;
   /** 查询设备云存AI分析任务列表 {@link DescribeCloudStorageAIServiceTasksRequest} {@link DescribeCloudStorageAIServiceTasksResponse} */
   DescribeCloudStorageAIServiceTasks(data: DescribeCloudStorageAIServiceTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageAIServiceTasksResponse>;
   /** 获取具有云存的日期 {@link DescribeCloudStorageDateRequest} {@link DescribeCloudStorageDateResponse} */
@@ -3149,10 +3241,14 @@ declare interface Iotexplorer {
   DirectBindDeviceInFamily(data: DirectBindDeviceInFamilyRequest, config?: AxiosRequestConfig): AxiosPromise<DirectBindDeviceInFamilyResponse>;
   /** 禁用规则 {@link DisableTopicRuleRequest} {@link DisableTopicRuleResponse} */
   DisableTopicRule(data: DisableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTopicRuleResponse>;
+  /** 解散TRTC房间 {@link DismissRoomByStrRoomIdFromTRTCRequest} {@link DismissRoomByStrRoomIdFromTRTCResponse} */
+  DismissRoomByStrRoomIdFromTRTC(data: DismissRoomByStrRoomIdFromTRTCRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomByStrRoomIdFromTRTCResponse>;
   /** 启用规则 {@link EnableTopicRuleRequest} {@link EnableTopicRuleResponse} */
   EnableTopicRule(data: EnableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTopicRuleResponse>;
   /** 生成单个设备绑定的签名 {@link GenSingleDeviceSignatureOfPublicRequest} {@link GenSingleDeviceSignatureOfPublicResponse} */
   GenSingleDeviceSignatureOfPublic(data: GenSingleDeviceSignatureOfPublicRequest, config?: AxiosRequestConfig): AxiosPromise<GenSingleDeviceSignatureOfPublicResponse>;
+  /** 获取云存AI分析任务输出文件URL {@link GenerateCloudStorageAIServiceTaskFileURLRequest} {@link GenerateCloudStorageAIServiceTaskFileURLResponse} */
+  GenerateCloudStorageAIServiceTaskFileURL(data: GenerateCloudStorageAIServiceTaskFileURLRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCloudStorageAIServiceTaskFileURLResponse>;
   /** 获取视频防盗链播放URL {@link GenerateSignedVideoURLRequest} {@link GenerateSignedVideoURLResponse} */
   GenerateSignedVideoURL(data: GenerateSignedVideoURLRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateSignedVideoURLResponse>;
   /** 列出量产数据列表 {@link GetBatchProductionsListRequest} {@link GetBatchProductionsListResponse} */
@@ -3223,6 +3319,8 @@ declare interface Iotexplorer {
   PublishRRPCMessage(data: PublishRRPCMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishRRPCMessageResponse>;
   /** 发布产品 {@link ReleaseStudioProductRequest} {@link ReleaseStudioProductResponse} */
   ReleaseStudioProduct(data: ReleaseStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseStudioProductResponse>;
+  /** 将用户从TRTC房间移出 {@link RemoveUserByRoomIdFromTRTCRequest} {@link RemoveUserByRoomIdFromTRTCResponse} */
+  RemoveUserByRoomIdFromTRTC(data: RemoveUserByRoomIdFromTRTCRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByRoomIdFromTRTCResponse>;
   /** 重置云存服务 {@link ResetCloudStorageRequest} {@link ResetCloudStorageResponse} */
   ResetCloudStorage(data: ResetCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageResponse>;
   /** 重置云存事件 {@link ResetCloudStorageEventRequest} {@link ResetCloudStorageEventResponse} */

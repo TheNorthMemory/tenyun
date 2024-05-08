@@ -2061,7 +2061,7 @@ declare interface ModifyRejectedQuestionResponse {
 declare interface ParseDocRequest {
   /** 文件名称(需要包括文件后缀, 最大长度1024字节) */
   Name: string;
-  /** 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf) */
+  /** 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf), 该地址需要外网可以直接无状态访问 */
   Url: string;
   /** 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节) */
   TaskId: string;

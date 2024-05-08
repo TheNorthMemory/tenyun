@@ -98,6 +98,138 @@ declare interface BaseItem3 {
   Order?: number | null;
 }
 
+/** 预防用生物制品说明书 */
+declare interface BiologicalProductInfo {
+  /** 药品名称，包括通用名和商品名 */
+  Name?: BiologicalProductInfoName | null;
+  /** 成份和性状 */
+  IngredientAndAppearance?: BiologicalProductInfoIngredientAndAppearance | null;
+  /** 接种对象 */
+  VaccinationTarget?: BiologicalProductInfoVaccinationTarget | null;
+  /** 作用与用途 */
+  Indications?: BiologicalProductInfoIndications | null;
+  /** 规格 */
+  Brochure?: BiologicalProductInfoBrochure | null;
+  /** 免疫程序和剂量 */
+  Dosage?: BiologicalProductInfoDosage | null;
+  /** 不良反应 */
+  AdverseReaction?: BiologicalProductInfoAdverseReaction | null;
+  /** 禁忌情况 */
+  Contraindications?: BiologicalProductInfoContraindications | null;
+  /** 注意事项 */
+  Precautions?: BiologicalProductInfoPrecautions | null;
+  /** 储存条件 */
+  Storage?: BiologicalProductInfoStorage | null;
+  /** 包装信息 */
+  Packaging?: BiologicalProductInfoPackaging | null;
+  /** 有效期 */
+  ValidityPeriod?: BiologicalProductInfoValidityPeriod | null;
+  /** 执行标准 */
+  ExecutiveStandards?: BiologicalProductInfoExecutiveStandards | null;
+  /** 批准文号 */
+  Approval?: BiologicalProductInfoApproval | null;
+  /** 生产企业名称和地址 */
+  Manufacturer?: BiologicalProductInfoManufacturer | null;
+}
+
+/** 不良反应 */
+declare interface BiologicalProductInfoAdverseReaction {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 批准文号 */
+declare interface BiologicalProductInfoApproval {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 规格 */
+declare interface BiologicalProductInfoBrochure {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 禁忌情况 */
+declare interface BiologicalProductInfoContraindications {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 免疫程序和剂量 */
+declare interface BiologicalProductInfoDosage {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 执行标准 */
+declare interface BiologicalProductInfoExecutiveStandards {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 作用与用途 */
+declare interface BiologicalProductInfoIndications {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 成份和性状 */
+declare interface BiologicalProductInfoIngredientAndAppearance {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 生产企业名称和地址 */
+declare interface BiologicalProductInfoManufacturer {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 药品名称，包括通用名和商品名 */
+declare interface BiologicalProductInfoName {
+  /** 文本内容 */
+  Text?: string | null;
+  /** 通用名 */
+  GenericName?: string | null;
+  /** 品牌名 */
+  BarndName?: string | null;
+  /** 英文名 */
+  EnName?: string | null;
+  /** 拼音 */
+  Pinyin?: string | null;
+}
+
+/** 包装信息 */
+declare interface BiologicalProductInfoPackaging {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 注意事项 */
+declare interface BiologicalProductInfoPrecautions {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 储存条件 */
+declare interface BiologicalProductInfoStorage {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 接种对象 */
+declare interface BiologicalProductInfoVaccinationTarget {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
+/** 有效期 */
+declare interface BiologicalProductInfoValidityPeriod {
+  /** 文本内容 */
+  Text?: string | null;
+}
+
 /** 活检部位 */
 declare interface BiopsyPart {
   /** 值 */
@@ -294,6 +426,222 @@ declare interface Check {
   Summary?: Summary | null;
   /** 检查报告块标题 */
   BlockTitle?: BlockTitle[] | null;
+}
+
+/** 药品说明书消息定义 */
+declare interface ChemicalProductInfo {
+  /** 药品名称，包括通用名和商品名 */
+  Name?: ChemicalProductInfoName | null;
+  /** 活性成份消息定义，如果是复方制剂，可以不列出每个活性成份的详细信息 */
+  ActiveIngredient?: ChemicalProductInfoActiveIngredient | null;
+  /** 性状 */
+  Appearance?: ChemicalProductInfoAppearance | null;
+  /** 适应症描述 */
+  Indications?: ChemicalProductInfoIndications | null;
+  /** 规格 */
+  Brochure?: ChemicalProductInfoBrochure | null;
+  /** 用法用量 */
+  Dosage?: ChemicalProductInfoDosage | null;
+  /** 不良反应 */
+  AdverseReaction?: ChemicalProductInfoAdverseReaction | null;
+  /** 禁忌情况 */
+  Contraindications?: ChemicalProductInfoContraindications | null;
+  /** 注意事项 */
+  Precautions?: ChemicalProductInfoPrecautions | null;
+  /** 孕妇及哺乳期妇女用药 */
+  PregnancyLactationUse?: ChemicalProductInfoPregnancyLactationUse | null;
+  /** 儿童用药 */
+  PediatricUse?: ChemicalProductInfoPediatricUse | null;
+  /** 老年用药 */
+  GeriatricUse?: ChemicalProductInfoGeriatricUse | null;
+  /** 药品的药物相互作用 */
+  Interactions?: ChemicalProductInfoInteractions | null;
+  /** 药物过量 */
+  Overdose?: ChemicalProductInfoOverdose | null;
+  /** 临床试验 */
+  ClinicalTrial?: ChemicalProductInfoClinicalTrial | null;
+  /** 药理毒理 */
+  PharmacologyToxicology?: ChemicalProductInfoPharmacologyToxicology | null;
+  /** 药代动力学 */
+  Pharmacokinetics?: ChemicalProductInfoPharmacokinetics | null;
+  /** 储存条件 */
+  Storage?: ChemicalProductInfoStorage | null;
+  /** 包装信息 */
+  Packaging?: ChemicalProductInfoPackaging | null;
+  /** 有效期 */
+  ValidityPeriod?: ChemicalProductInfoValidityPeriod | null;
+  /** 执行标准 */
+  ExecutiveStandards?: ChemicalProductInfoExecutiveStandards | null;
+  /** 批准文号 */
+  Approval?: ChemicalProductInfoApproval | null;
+  /** 生产企业名称和地址 */
+  Manufacturer?: ChemicalProductInfoManufacturer | null;
+}
+
+/** 活性成份消息定义，如果是复方制剂，可以不列出每个活性成份的详细信息 */
+declare interface ChemicalProductInfoActiveIngredient {
+  /** 文本内容 */
+  Text?: string | null;
+  /** 活性成份的化学名称 */
+  ChemicalName?: string | null;
+  /** 活性成份的化学结构式 */
+  ChemicalFormula?: string | null;
+  /** 活性成份的分子式 */
+  MolecularFormula?: string | null;
+  /** 活性成份的分子量 */
+  MolecularWeight?: string | null;
+}
+
+/** 不良反应 */
+declare interface ChemicalProductInfoAdverseReaction {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 性状 */
+declare interface ChemicalProductInfoAppearance {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 批准文号 */
+declare interface ChemicalProductInfoApproval {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 规格 */
+declare interface ChemicalProductInfoBrochure {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 临床试验 */
+declare interface ChemicalProductInfoClinicalTrial {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 禁忌情况 */
+declare interface ChemicalProductInfoContraindications {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 用法用量 */
+declare interface ChemicalProductInfoDosage {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 执行标准 */
+declare interface ChemicalProductInfoExecutiveStandards {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 老年用药 */
+declare interface ChemicalProductInfoGeriatricUse {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 适应症描述 */
+declare interface ChemicalProductInfoIndications {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 药品的药物相互作用 */
+declare interface ChemicalProductInfoInteractions {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 生产企业名称和地址 */
+declare interface ChemicalProductInfoManufacturer {
+  /** 文本 */
+  Text?: string | null;
+  /** 企业名称 */
+  Name?: string | null;
+  /** 生产地址 */
+  Address?: string | null;
+  /** 邮政编码 */
+  PostalCode?: string | null;
+  /** 电话，包含区号 */
+  Phone?: string | null;
+  /** 传真，包含区号 */
+  Fax?: string | null;
+  /** 网址，如无则不填写 */
+  Website?: string | null;
+}
+
+/** 药品名称，包括通用名和商品名 */
+declare interface ChemicalProductInfoName {
+  /** 文本内容 */
+  Text?: string | null;
+  /** 通用名 */
+  GenericName?: string | null;
+  /** 品牌名 */
+  BarndName?: string | null;
+  /** 英文名 */
+  EnName?: string | null;
+  /** 拼音 */
+  Pinyin?: string | null;
+}
+
+/** 药物过量 */
+declare interface ChemicalProductInfoOverdose {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 包装信息 */
+declare interface ChemicalProductInfoPackaging {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 儿童用药 */
+declare interface ChemicalProductInfoPediatricUse {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 药代动力学 */
+declare interface ChemicalProductInfoPharmacokinetics {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 药理毒理 */
+declare interface ChemicalProductInfoPharmacologyToxicology {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 注意事项 */
+declare interface ChemicalProductInfoPrecautions {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 孕妇及哺乳期妇女用药 */
+declare interface ChemicalProductInfoPregnancyLactationUse {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 储存条件 */
+declare interface ChemicalProductInfoStorage {
+  /** 文本 */
+  Text?: string | null;
+}
+
+/** 有效期 */
+declare interface ChemicalProductInfoValidityPeriod {
+  /** 文本 */
+  Text?: string | null;
 }
 
 /** 体检报告-胸围信息 */
@@ -3362,6 +3710,20 @@ declare interface ValueUnitItem {
   Unit?: PhysicalBaseItem | null;
 }
 
+declare interface DrugInstructionObjectRequest {
+  /** 药品说明书PDF文件信息(目前只支持传PDF文件的Base64编码字符(PDF文件不能超过10MB，如果超过建议先压缩PDF，再转成base64) */
+  PdfInfo: PdfInfo;
+}
+
+declare interface DrugInstructionObjectResponse {
+  /** 药品说明书消息定义 */
+  ChemicalProductInfo?: ChemicalProductInfo | null;
+  /** 预防用生物制品说明书 */
+  BiologicalProductInfo?: BiologicalProductInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImageMaskAsyncGetResultRequest {
   /** 异步任务ID */
   TaskID: string;
@@ -3533,6 +3895,8 @@ declare interface TurnPDFToObjectResponse {
 /** {@link Mrs 医疗报告结构化} */
 declare interface Mrs {
   (): Versions;
+  /** 药品说明书结构化接口 {@link DrugInstructionObjectRequest} {@link DrugInstructionObjectResponse} */
+  DrugInstructionObject(data: DrugInstructionObjectRequest, config?: AxiosRequestConfig): AxiosPromise<DrugInstructionObjectResponse>;
   /** 医疗报告图片脱敏接口 {@link ImageMaskRequest} {@link ImageMaskResponse} */
   ImageMask(data: ImageMaskRequest, config?: AxiosRequestConfig): AxiosPromise<ImageMaskResponse>;
   /** 图片脱敏-异步接口 {@link ImageMaskAsyncRequest} {@link ImageMaskAsyncResponse} */

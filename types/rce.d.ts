@@ -32,22 +32,6 @@ declare interface InputDetails {
   FieldValue: string;
 }
 
-/** 风险趋势统计--入参 */
-declare interface InputFrontRisk {
-  /** 事件ID */
-  EventId: number;
-  /** 开始时间 */
-  StartTime?: string;
-  /** 结束时间 */
-  EndTime?: string;
-  /** 趋势类型 */
-  Type?: number;
-  /** 当前开始时间 */
-  CurrentStartTime?: string;
-  /** 当前结束时间 */
-  CurrentEndTime?: string;
-}
-
 /** 全栈式风控引擎入参 */
 declare interface InputManageMarketingRisk {
   /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号8：设备号，仅支持IMEI、IMEIMD5、IDFA、IDFAMD510004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值。 */
@@ -118,32 +102,6 @@ declare interface OtherAccountInfo {
   MobilePhone?: string;
   /** 用户设备号，支持IMEI、IMEIMD5、IDFA、IDFAMD5。注释：IMEIMD5、IDFAMD5加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。 */
   DeviceId?: string;
-}
-
-/** 风险趋势统计出参，需要为数组 */
-declare interface OutputFrontRisk {
-  /** 名称 */
-  Name: string | null;
-  /** 参数值 */
-  Value: OutputFrontRiskValue[] | null;
-}
-
-/** 风险趋势统计--出参 */
-declare interface OutputFrontRiskData {
-  /** 返回码[0：成功；非0：标识失败错误码]。 */
-  Code: number | null;
-  /** 出错消息[UTF-8编码]。 */
-  Message: string | null;
-  /** 返回结果。 */
-  Value: OutputFrontRisk[] | null;
-}
-
-/** 风险趋势统计--值 */
-declare interface OutputFrontRiskValue {
-  /** 请求次数 */
-  Requests: number | null;
-  /** 日期标签 */
-  Index: string | null;
 }
 
 /** 全栈式风控引擎出参 */
@@ -232,18 +190,6 @@ declare interface DescribeRiskAssessmentResponse {
   RequestId?: string;
 }
 
-declare interface DescribeRiskTrendsRequest {
-  /** 业务入参 */
-  BusinessSecurityData: InputFrontRisk;
-}
-
-declare interface DescribeRiskTrendsResponse {
-  /** 业务出参 */
-  Data?: OutputFrontRiskData;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ManageMarketingRiskRequest {
   /** 业务入参 */
   BusinessSecurityData?: InputManageMarketingRisk;
@@ -263,8 +209,6 @@ declare interface Rce {
   (): Versions;
   /** 查询风险评估结果 {@link DescribeRiskAssessmentRequest} {@link DescribeRiskAssessmentResponse} */
   DescribeRiskAssessment(data?: DescribeRiskAssessmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskAssessmentResponse>;
-  /** 风险趋势统计 {@link DescribeRiskTrendsRequest} {@link DescribeRiskTrendsResponse} */
-  DescribeRiskTrends(data: DescribeRiskTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskTrendsResponse>;
   /** 全栈式风控引擎 {@link ManageMarketingRiskRequest} {@link ManageMarketingRiskResponse} */
   ManageMarketingRisk(data?: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
 }

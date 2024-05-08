@@ -426,6 +426,8 @@ declare interface DescribeDomainData {
   ClusterName?: string | null;
   /** 用户ID */
   AppId?: number | null;
+  /** 证书ID */
+  CertId?: string | null;
 }
 
 /** 查询域名可绑定集群数据 */
