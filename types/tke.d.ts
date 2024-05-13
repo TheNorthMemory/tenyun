@@ -10,6 +10,16 @@ declare interface Annotation {
   Value: string;
 }
 
+/** 托管节点池运维窗口设置 */
+declare interface AutoUpgradeOptions {
+  /** 自动升级开始时间 */
+  AutoUpgradeStartTime?: string | null;
+  /** 自动升级持续时间 */
+  Duration?: string | null;
+  /** 运维日期 */
+  WeeklyPeriod?: string[] | null;
+}
+
 /** 自动扩所容的节点 */
 declare interface AutoscalingAdded {
   /** 正在加入中的节点数量 */
@@ -20,6 +30,88 @@ declare interface AutoscalingAdded {
   Normal: number;
   /** 节点总数 */
   Total: number;
+}
+
+/** 原生节点池创建参数 */
+declare interface CreateNativeNodePoolParam {
+  /** 节点池伸缩配置 */
+  Scaling: MachineSetScaling;
+  /** 子网列表 */
+  SubnetIds: string[];
+  /** 节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）； */
+  InstanceChargeType: string;
+  /** 系统盘配置 */
+  SystemDisk: Disk;
+  /** 机型列表 */
+  InstanceTypes: string[];
+  /** 安全组列表 */
+  SecurityGroupIds?: string[];
+  /** 自动升级配置 */
+  UpgradeSettings?: MachineUpgradeSettings;
+  /** 是否开启自愈能力 */
+  AutoRepair?: boolean;
+  /** 包年包月机型计费配置 */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
+  /** 节点池 Management 参数设置 */
+  Management?: ManagementConfig;
+  /** 故障自愈规则名称 */
+  HealthCheckPolicyName?: string;
+  /** 原生节点池hostName模式串 */
+  HostNamePattern?: string;
+  /** kubelet 自定义参数 */
+  KubeletArgs?: string[];
+  /** 预定义脚本 */
+  Lifecycle?: LifecycleConfig;
+  /** 运行时根目录 */
+  RuntimeRootDir?: string;
+  /** 是否开启弹性伸缩 */
+  EnableAutoscaling?: boolean;
+  /** 期望节点数 */
+  Replicas?: number;
+  /** 公网带宽设置 */
+  InternetAccessible?: InternetAccessible;
+  /** 原生节点池数据盘列表 */
+  DataDisks?: DataDisk[];
+  /** 节点池ssh公钥id数组 */
+  KeyIds?: string[];
+}
+
+/** 描述了k8s节点数据盘相关配置与信息。 */
+declare interface DataDisk {
+  /** 云盘类型 */
+  DiskType: string | null;
+  /** 文件系统(ext3/ext4/xfs) */
+  FileSystem: string | null;
+  /** 云盘大小(G） */
+  DiskSize: number | null;
+  /** 是否自动化格式盘并挂载 */
+  AutoFormatAndMount: boolean | null;
+  /** 挂载设备名或分区名 */
+  DiskPartition: string | null;
+  /** 挂载目录 */
+  MountTarget?: string | null;
+  /** 传入该参数用于创建加密云盘，取值固定为ENCRYPT */
+  Encrypt?: string | null;
+  /** 购买加密盘时自定义密钥，当传入该参数时, Encrypt入参不为空 */
+  KmsKeyId?: string | null;
+  /** 快照ID，如果传入则根据此快照创建云硬盘，快照类型必须为数据盘快照 */
+  SnapshotId?: string | null;
+  /** 云硬盘性能，单位：MB/s。使用此参数可给云硬盘购买额外的性能 */
+  ThroughputPerformance?: number | null;
+}
+
+/** 节点系统盘和数据盘配置 */
+declare interface Disk {
+  /** 云盘类型 */
+  DiskType: string;
+  /** 云盘大小(G） */
+  DiskSize: number;
+  /** 是否自动化格式盘并挂载 */
+  AutoFormatAndMount?: boolean;
+  /** 文件系统 */
+  FileSystem?: string;
+  /** 挂载目录 */
+  MountTarget?: string;
 }
 
 /** 第三方节点 */
@@ -94,10 +186,28 @@ declare interface InstanceAdvancedSettings {
   ExtraArgs?: InstanceExtraArgs | null;
 }
 
+/** 包年包月配置 */
+declare interface InstanceChargePrepaid {
+  /** 后付费计费周期，单位（月）：1，2，3，4，5，，6，7， 8，9，10，11，12，24，36，48，60 */
+  Period: number;
+  /** 预付费续费方式：- NOTIFY_AND_AUTO_RENEW：通知用户过期，且自动续费 (默认）- NOTIFY_AND_MANUAL_RENEW：通知用户过期，但不不自动续费- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知用户过期，也不自动续费 */
+  RenewFlag?: string;
+}
+
 /** 节点自定义参数 */
 declare interface InstanceExtraArgs {
   /** kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"] */
   Kubelet?: string[] | null;
+}
+
+/** 数值结构 */
+declare interface IntOrString {
+  /** 数值类型，0是int, 1是字符串 */
+  Type: number | null;
+  /** 整数 */
+  IntVal?: number | null;
+  /** 字符串 */
+  StrVal?: string | null;
 }
 
 /** 公网带宽 */
@@ -116,6 +226,46 @@ declare interface Label {
   Name: string;
   /** map表中的Value */
   Value: string;
+}
+
+/** 节点池自定义脚本 */
+declare interface LifecycleConfig {
+  /** 节点初始化前自定义脚本 */
+  PreInit?: string | null;
+  /** 节点初始化后自定义脚本 */
+  PostInit?: string | null;
+}
+
+/** 节点池弹性伸缩配置 */
+declare interface MachineSetScaling {
+  /** 节点池最小副本数 */
+  MinReplicas?: number | null;
+  /** 节点池最大副本数 */
+  MaxReplicas?: number | null;
+  /** 节点池扩容策略。ZoneEquality：多可用区打散；ZonePriority：首选可用区优先； */
+  CreatePolicy?: string | null;
+}
+
+/** 托管节点池自动升级配置 */
+declare interface MachineUpgradeSettings {
+  /** 是否开启自动升级 */
+  AutoUpgrade?: boolean | null;
+  /** 运维窗口 */
+  UpgradeOptions?: AutoUpgradeOptions | null;
+  /** 升级项 */
+  Components?: string[] | null;
+  /** 升级时，最大不可升级的节点数 */
+  MaxUnavailable?: IntOrString | null;
+}
+
+/** 托管节点池Management配置 */
+declare interface ManagementConfig {
+  /** dns 配置 */
+  Nameservers?: string[] | null;
+  /** hosts 配置 */
+  Hosts?: string[] | null;
+  /** 内核参数配置 */
+  KernelArgs?: string[] | null;
 }
 
 /** 手动加入的节点 */
@@ -180,10 +330,46 @@ declare interface NativeNodeInfo {
 
 /** 原生节点池信息 */
 declare interface NativeNodePoolInfo {
+  /** 伸缩配置 */
+  Scaling?: MachineSetScaling | null;
   /** 子网列表 */
   SubnetIds?: string[];
   /** 安全组列表 */
   SecurityGroupIds?: string[] | null;
+  /** 自动升级配置 */
+  UpgradeSettings?: MachineUpgradeSettings | null;
+  /** 是否开启自愈能力 */
+  AutoRepair?: boolean | null;
+  /** 节点计费类型 */
+  InstanceChargeType?: string;
+  /** 包年包月机型计费配置 */
+  InstanceChargePrepaid?: InstanceChargePrepaid | null;
+  /** 系统盘配置 */
+  SystemDisk?: Disk;
+  /** 密钥 ID 列表 */
+  KeyIds?: string[] | null;
+  /** Machine 系统配置 */
+  Management?: ManagementConfig | null;
+  /** 故障自愈规则名称 */
+  HealthCheckPolicyName?: string | null;
+  /** 原生节点池hostName模式串 */
+  HostNamePattern?: string | null;
+  /** kubelet 自定义参数 */
+  KubeletArgs?: string[] | null;
+  /** 预定义脚本 */
+  Lifecycle?: LifecycleConfig | null;
+  /** 运行时根目录 */
+  RuntimeRootDir?: string | null;
+  /** 是否开启弹性伸缩 */
+  EnableAutoscaling?: boolean | null;
+  /** 机型列表 */
+  InstanceTypes?: string[];
+  /** 期望节点数 */
+  Replicas?: number | null;
+  /** 公网带宽设置 */
+  InternetAccessible?: InternetAccessible | null;
+  /** 原生节点池数据盘 */
+  DataDisks?: DataDisk[] | null;
 }
 
 /** 节点统计列表 */
@@ -200,10 +386,14 @@ declare interface NodePool {
   ClusterId?: string;
   /** 节点池 ID */
   NodePoolId?: string;
+  /** 节点标签 */
+  Tags?: TagSpecification[] | null;
   /** 节点污点 */
   Taints?: Taint[] | null;
   /** 是否开启删除保护 */
   DeletionProtection?: boolean | null;
+  /** 节点是否不可调度 */
+  Unschedulable?: boolean | null;
   /** 节点池类型 */
   Type?: string;
   /** 节点 Labels */
@@ -314,6 +504,22 @@ declare interface SuperNodePoolInfo {
   SecurityGroupIds?: string[] | null;
 }
 
+/** 标签绑定的资源类型，当前支持类型："cluster" */
+declare interface Tag {
+  /** 标签键 */
+  Key?: string;
+  /** 标签值 */
+  Value?: string;
+}
+
+/** 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。 */
+declare interface TagSpecification {
+  /** 标签绑定的资源类型，当前支持类型："cluster" */
+  ResourceType?: string | null;
+  /** 标签对列表 */
+  Tags?: Tag[] | null;
+}
+
 /** kubernetes Taint */
 declare interface Taint {
   /** Taint的Key */
@@ -322,6 +528,90 @@ declare interface Taint {
   Value?: string;
   /** Taint的Effect */
   Effect?: string;
+}
+
+/** 修改原生节点池参数 */
+declare interface UpdateNativeNodePoolParam {
+  /** 伸缩配置 */
+  Scaling?: MachineSetScaling;
+  /** 子网列表 */
+  SubnetIds?: string[];
+  /** 安全组列表 */
+  SecurityGroupIds?: string[];
+  /** 自动升级配置 */
+  UpgradeSettings?: MachineUpgradeSettings;
+  /** 是否开启自愈能力 */
+  AutoRepair?: boolean;
+  /** 节点计费类型变更当前仅支持按量计费转包年包月：- PREPAID */
+  InstanceChargeType?: string;
+  /** 包年包月机型计费配置 */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
+  /** 系统盘配置 */
+  SystemDisk?: Disk;
+  /** Machine 系统配置 */
+  Management?: ManagementConfig;
+  /** 故障自愈规则名称 */
+  HealthCheckPolicyName?: string;
+  /** 原生节点池hostName模式串 */
+  HostNamePattern?: string;
+  /** kubelet 自定义参数 */
+  KubeletArgs?: string[];
+  /** 预定义脚本 */
+  Lifecycle?: LifecycleConfig;
+  /** 运行时根目录 */
+  RuntimeRootDir?: string;
+  /** 是否开启弹性伸缩 */
+  EnableAutoscaling?: boolean;
+  /** 机型列表 */
+  InstanceTypes?: string[];
+  /** 期望节点数 */
+  Replicas?: number;
+  /** 数据盘列表 */
+  DataDisks?: DataDisk[];
+  /** ssh公钥id数组 */
+  KeyIds?: string[];
+}
+
+declare interface CreateNodePoolRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点池名称 */
+  Name: string;
+  /** 节点池类型 */
+  Type: string;
+  /** 节点 Labels */
+  Labels?: Label[];
+  /** 节点污点 */
+  Taints?: Taint[];
+  /** 节点标签 */
+  Tags?: TagSpecification[];
+  /** 是否开启删除保护 */
+  DeletionProtection?: boolean;
+  /** 节点是否默认不可调度 */
+  Unschedulable?: boolean;
+  /** 原生节点池创建参数 */
+  Native?: CreateNativeNodePoolParam;
+  /** 节点 Annotation 列表 */
+  Annotations?: Annotation[];
+}
+
+declare interface CreateNodePoolResponse {
+  /** 节点池 ID */
+  NodePoolId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNodePoolRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点池 ID */
+  NodePoolId: string;
+}
+
+declare interface DeleteNodePoolResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeClusterInstancesRequest {
@@ -364,6 +654,34 @@ declare interface DescribeNodePoolsResponse {
   NodePools?: NodePool[] | null;
   /** 资源总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNodePoolRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点池 ID */
+  NodePoolId: string;
+  /** 节点池名称 */
+  Name?: string;
+  /** 节点 Labels */
+  Labels?: Label[];
+  /** 节点污点 */
+  Taints?: Taint[];
+  /** 节点标签 */
+  Tags?: TagSpecification[];
+  /** 是否开启删除保护 */
+  DeletionProtection?: boolean;
+  /** 节点是否不可调度 */
+  Unschedulable?: boolean;
+  /** 原生节点池更新参数 */
+  Native?: UpdateNativeNodePoolParam;
+  /** 节点 Annotation 列表 */
+  Annotations?: Annotation[];
+}
+
+declare interface ModifyNodePoolResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6753,10 +7071,16 @@ declare namespace V20180525 {
 /** {@link Tke 容器服务} */
 declare interface Tke {
   (): Versions;
+  /** 创建 TKE 节点池 {@link CreateNodePoolRequest} {@link CreateNodePoolResponse} */
+  CreateNodePool(data: CreateNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNodePoolResponse>;
+  /** 删除 TKE 节点池 {@link DeleteNodePoolRequest} {@link DeleteNodePoolResponse} */
+  DeleteNodePool(data: DeleteNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodePoolResponse>;
   /** 查询集群节点信息 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
   /** 查询 TKE 节点池列表 {@link DescribeNodePoolsRequest} {@link DescribeNodePoolsResponse} */
   DescribeNodePools(data: DescribeNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodePoolsResponse>;
+  /** 更新 TKE 节点池 {@link ModifyNodePoolRequest} {@link ModifyNodePoolResponse} */
+  ModifyNodePool(data: ModifyNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolResponse>;
   /** 获取集群RBAC管理员角色 {@link V20180525.AcquireClusterAdminRoleRequest} {@link V20180525.AcquireClusterAdminRoleResponse} */
   AcquireClusterAdminRole(data: V20180525.AcquireClusterAdminRoleRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.AcquireClusterAdminRoleResponse>;
   /** 给集群增加ClusterCIDR {@link V20180525.AddClusterCIDRRequest} {@link V20180525.AddClusterCIDRResponse} */

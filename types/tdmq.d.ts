@@ -363,23 +363,23 @@ declare interface ConsumersSchedule {
 /** 命名空间信息 */
 declare interface Environment {
   /** 命名空间名称 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 说明 */
-  Remark: string;
+  Remark?: string;
   /** 未消费消息过期时间，单位：秒，最大1296000（15天） */
-  MsgTTL: number;
+  MsgTTL?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 命名空间ID */
-  NamespaceId: string;
+  NamespaceId?: string;
   /** 命名空间名称 */
-  NamespaceName: string;
+  NamespaceName?: string;
   /** Topic数量 */
-  TopicNum: number | null;
+  TopicNum?: number | null;
   /** 消息保留策略 */
-  RetentionPolicy: RetentionPolicy | null;
+  RetentionPolicy?: RetentionPolicy | null;
   /** 是否自动创建订阅 */
   AutoSubscriptionCreation?: boolean | null;
 }

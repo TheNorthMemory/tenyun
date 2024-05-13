@@ -1630,6 +1630,8 @@ declare interface ResourcePackage {
   PackageId?: string | null;
   /** 资源包类型：CCU：计算资源包DISK：存储资源包 */
   PackageType?: string | null;
+  /** 当前资源包绑定在当前实例下的抵扣优先级 */
+  DeductionPriority?: number | null;
 }
 
 /** 回档任务信息 */
@@ -2206,6 +2208,14 @@ declare interface CreateBackupResponse {
   RequestId?: string;
 }
 
+declare interface CreateCLSDeliveryRequest {
+}
+
+declare interface CreateCLSDeliveryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateClusterDatabaseRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2508,6 +2518,14 @@ declare interface DeleteBackupRequest {
 }
 
 declare interface DeleteBackupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCLSDeliveryRequest {
+}
+
+declare interface DeleteCLSDeliveryResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3050,6 +3068,14 @@ declare interface DescribeFlowRequest {
 declare interface DescribeFlowResponse {
   /** 任务流状态。0-成功，1-失败，2-处理中 */
   Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceCLSLogDeliveryRequest {
+}
+
+declare interface DescribeInstanceCLSLogDeliveryResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4532,6 +4558,22 @@ declare interface SetRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface StartCLSDeliveryRequest {
+}
+
+declare interface StartCLSDeliveryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopCLSDeliveryRequest {
+}
+
+declare interface StopCLSDeliveryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SwitchClusterVpcRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4731,6 +4773,8 @@ declare interface Cynosdb {
   CreateAuditRuleTemplate(data: CreateAuditRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleTemplateResponse>;
   /** 创建手动备份 {@link CreateBackupRequest} {@link CreateBackupResponse} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
+  /** 创建日志投递 {@link CreateCLSDeliveryRequest} {@link CreateCLSDeliveryResponse} */
+  CreateCLSDelivery(data?: CreateCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSDeliveryResponse>;
   /** 创建数据库 {@link CreateClusterDatabaseRequest} {@link CreateClusterDatabaseResponse} */
   CreateClusterDatabase(data: CreateClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterDatabaseResponse>;
   /** 购买新集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
@@ -4751,6 +4795,8 @@ declare interface Cynosdb {
   DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
   /** 删除手动备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
+  /** 删除日志投递 {@link DeleteCLSDeliveryRequest} {@link DeleteCLSDeliveryResponse} */
+  DeleteCLSDelivery(data?: DeleteCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSDeliveryResponse>;
   /** 删除数据库 {@link DeleteClusterDatabaseRequest} {@link DeleteClusterDatabaseResponse} */
   DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
@@ -4807,6 +4853,8 @@ declare interface Cynosdb {
   DescribeDBSecurityGroups(data?: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询任务流信息 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
+  /** 查询实例日志投递信息 {@link DescribeInstanceCLSLogDeliveryRequest} {@link DescribeInstanceCLSLogDeliveryResponse} */
+  DescribeInstanceCLSLogDelivery(data?: DescribeInstanceCLSLogDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCLSLogDeliveryResponse>;
   /** 查询实例详情 {@link DescribeInstanceDetailRequest} {@link DescribeInstanceDetailResponse} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 查询错误日志列表 {@link DescribeInstanceErrorLogsRequest} {@link DescribeInstanceErrorLogsResponse} */
@@ -4959,6 +5007,10 @@ declare interface Cynosdb {
   SearchClusterTables(data: SearchClusterTablesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterTablesResponse>;
   /** 设置自动续费 {@link SetRenewFlagRequest} {@link SetRenewFlagResponse} */
   SetRenewFlag(data: SetRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewFlagResponse>;
+  /** 开启日志投递 {@link StartCLSDeliveryRequest} {@link StartCLSDeliveryResponse} */
+  StartCLSDelivery(data?: StartCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<StartCLSDeliveryResponse>;
+  /** 停止日志投递 {@link StopCLSDeliveryRequest} {@link StopCLSDeliveryResponse} */
+  StopCLSDelivery(data?: StopCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<StopCLSDeliveryResponse>;
   /** 更换集群vpc {@link SwitchClusterVpcRequest} {@link SwitchClusterVpcResponse} */
   SwitchClusterVpc(data: SwitchClusterVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterVpcResponse>;
   /** 主备可用区切换 {@link SwitchClusterZoneRequest} {@link SwitchClusterZoneResponse} */

@@ -1664,6 +1664,22 @@ declare interface DescribeDeployedResourcesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDownloadCertificateUrlRequest {
+  /** 证书ID */
+  CertificateId: string;
+  /** 下载的服务类型: nginx tomcat apache iis jks other root */
+  ServiceType?: string;
+}
+
+declare interface DescribeDownloadCertificateUrlResponse {
+  /** 下载链接 */
+  DownloadCertificateUrl: string;
+  /** 下载文件的名称 */
+  DownloadFilename: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHostApiGatewayInstanceListRequest {
   /** 待部署的证书ID */
   CertificateId: string;
@@ -2509,6 +2525,8 @@ declare interface Ssl {
   DescribeDeleteCertificatesTaskResult(data: DescribeDeleteCertificatesTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeleteCertificatesTaskResultResponse>;
   /** 证书查询关联资源 {@link DescribeDeployedResourcesRequest} {@link DescribeDeployedResourcesResponse} */
   DescribeDeployedResources(data: DescribeDeployedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployedResourcesResponse>;
+  /** 获取下载证书链接 {@link DescribeDownloadCertificateUrlRequest} {@link DescribeDownloadCertificateUrlResponse} */
+  DescribeDownloadCertificateUrl(data: DescribeDownloadCertificateUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadCertificateUrlResponse>;
   /** 查询证书apiGateway云资源部署实例列表 {@link DescribeHostApiGatewayInstanceListRequest} {@link DescribeHostApiGatewayInstanceListResponse} */
   DescribeHostApiGatewayInstanceList(data: DescribeHostApiGatewayInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostApiGatewayInstanceListResponse>;
   /** 查询证书cdn云资源部署实例列表 {@link DescribeHostCdnInstanceListRequest} {@link DescribeHostCdnInstanceListResponse} */

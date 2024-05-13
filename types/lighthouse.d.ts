@@ -576,6 +576,8 @@ declare interface Instance {
   LatestOperationState?: string;
   /** 实例最新操作的唯一请求 ID。 注意：此字段可能返回 空值，表示取不到有效值。 */
   LatestOperationRequestId?: string;
+  /** 实例最新操作的开始时间。 */
+  LatestOperationStartedTime?: string | null;
   /** 隔离时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   IsolatedTime?: string | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
@@ -1383,7 +1385,7 @@ declare interface DescribeDiskConfigsResponse {
 declare interface DescribeDiskDiscountRequest {
   /** 云硬盘类型, 取值范围: CLOUD_PREMIUM: 高性能云硬盘，CLOUD_SSD: SSD云硬盘 */
   DiskType: string;
-  /** 云硬盘大小。 */
+  /** 云硬盘大小, 单位: GB。 */
   DiskSize: number;
   /** 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置1个云硬盘备份点配额。 */
   DiskBackupQuota?: number;

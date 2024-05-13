@@ -460,6 +460,12 @@ declare interface CachePrefresh {
   Percent?: number | null;
 }
 
+/** 节点缓存清除类型取值为 purge_cache_tag 时附带的信息。 */
+declare interface CacheTag {
+  /** 待清除缓存的域名列表。 */
+  Domains: string[];
+}
+
 /** https 服务端证书配置 */
 declare interface CertificateInfo {
   /** 服务器证书 ID。 */
@@ -1920,6 +1926,8 @@ declare interface Task {
   Target?: string;
   /** 任务类型。 */
   Type?: string;
+  /** 节点缓存清除方法，取值有：invalidate：标记过期，用户请求时触发回源校验，即发送带有 If-None-Match 和 If-Modified-Since 头部的 HTTP 条件请求。若源站响应 200，则节点会回源拉取新的资源并更新缓存；若源站响应 304，则节点不会更新缓存；delete：直接删除节点缓存，用户请求时触发回源拉取资源。 */
+  Method?: string | null;
   /** 状态。取值有：processing：处理中；success：成功； failed：失败；timeout：超时。 */
   Status?: string;
   /** 任务创建时间。 */
@@ -2481,6 +2489,8 @@ declare interface CreatePurgeTaskRequest {
   Targets?: string[];
   /** 若有编码转换，仅清除编码转换后匹配的资源。若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;
+  /** 节点缓存清除类型取值为 purge_cache_tag 时附带的信息。 */
+  CacheTag?: CacheTag;
 }
 
 declare interface CreatePurgeTaskResponse {

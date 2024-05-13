@@ -256,7 +256,7 @@ declare interface Component {
   ComponentRequired?: boolean;
   /** **在通过接口拉取控件信息场景下**，为出参参数，此控件归属的参与方的角色ID角色（即RecipientId），**发起合同时候不要填写此字段留空即可** */
   ComponentRecipientId?: string;
-  /** **在所有的定位方式下**，控件的扩展参数，为JSON格式，不同类型的控件会有部分非通用参数。ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数： Font：目前只支持黑体、宋体 FontSize： 范围12 :72 FontAlign： Left/Right/Center，左对齐/居中/右对齐 FontColor：字符串类型，格式为RGB颜色数字参数样例：`{"FontColor":"255,0,0","FontSize":12}`ComponentType为DATE时，支持以下参数： Font：目前只支持黑体、宋体 FontSize： 范围12 :72参数样例：`{"FontColor":"255,0,0","FontSize":12}`ComponentType为FILL_IMAGE时，支持以下参数： NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true : 不居中 FillMethod : int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型时，可以**ComponentTypeLimit**参数控制签署方式 HANDWRITE : 手写签名 OCR_ESIGN : AI智能识别手写签名 ESIGN : 个人印章类型 SYSTEM_ESIGN : 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） IMG_ESIGN : 图片印章(该类型支持用户在签署将上传的PNG格式的图片作为签名)参考样例：`{"ComponentTypeLimit": ["SYSTEM_ESIGN"]}`印章的对应关系参考下图![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)ComponentType为SIGN_DATE时，支持以下参数： Font :字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体" FontSize : 数字类型，范围6-72，默认值为12 FontAlign : 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐 Format : 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。 Gaps : 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： ` "{"Format":"yyyy m d","FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"`ComponentType为SIGN_SEAL类型时，支持以下参数： PageRanges :PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例：` "{"PageRanges":[{"BeginPage":1,"EndPage":-1}]}"`关键字模式下支持关键字找不到的情况下不进行报错的设置 IgnoreKeywordError :1-关键字查找不到时不进行报错场景说明：如果使用关键字进行定位，但是指定的PDF文件中又没有设置的关键字时，发起合同会进行关键字是否存在的校验，如果关键字不存在，会进行报错返回。如果不希望进行报错，可以设置"IgnoreKeywordError"来忽略错误。请注意，如果关键字签署控件对应的签署方在整个PDF文件中一个签署控件都没有，还是会触发报错逻辑。参数样例：` "{"IgnoreKeywordError":1}"` */
+  /** **在所有的定位方式下**，控件的扩展参数，为JSON格式，不同类型的控件会有部分非通用参数。ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数： Font：目前只支持黑体、宋体 FontSize： 范围12 :72 FontAlign： Left/Right/Center，左对齐/居中/右对齐 FontColor：字符串类型，格式为RGB颜色数字参数样例：`{"FontColor":"255,0,0","FontSize":12}`ComponentType为DATE时，支持以下参数： Font：目前只支持黑体、宋体 FontSize： 范围12 :72参数样例：`{"FontColor":"255,0,0","FontSize":12}`ComponentType为FILL_IMAGE时，支持以下参数： NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true : 不居中 FillMethod : int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型时，可以**ComponentTypeLimit**参数控制签署方式 HANDWRITE : 需要实时手写的手写签名 HANDWRITTEN_ESIGN : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE) OCR_ESIGN : AI智能识别手写签名 ESIGN : 个人印章类型 SYSTEM_ESIGN : 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） IMG_ESIGN : 图片印章(该类型支持用户在签署将上传的PNG格式的图片作为签名)参考样例：`{"ComponentTypeLimit": ["SYSTEM_ESIGN"]}`印章的对应关系参考下图![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)ComponentType为SIGN_DATE时，支持以下参数： Font :字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体" FontSize : 数字类型，范围6-72，默认值为12 FontAlign : 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐 Format : 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。 Gaps : 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： ` "{"Format":"yyyy m d","FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"`ComponentType为SIGN_SEAL类型时，支持以下参数： PageRanges :PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例：` "{"PageRanges":[{"BeginPage":1,"EndPage":-1}]}"`关键字模式下支持关键字找不到的情况下不进行报错的设置 IgnoreKeywordError :1-关键字查找不到时不进行报错场景说明：如果使用关键字进行定位，但是指定的PDF文件中又没有设置的关键字时，发起合同会进行关键字是否存在的校验，如果关键字不存在，会进行报错返回。如果不希望进行报错，可以设置"IgnoreKeywordError"来忽略错误。请注意，如果关键字签署控件对应的签署方在整个PDF文件中一个签署控件都没有，还是会触发报错逻辑。参数样例：` "{"IgnoreKeywordError":1}"` */
   ComponentExtra?: string;
   /** **在通过接口拉取控件信息场景下**，为出参参数，此控件是否通过表单域定位方式生成，默认false-不是，**发起合同时候不要填写此字段留空即可** */
   IsFormType?: boolean;
@@ -290,7 +290,7 @@ declare interface Component {
 declare interface ComponentLimit {
   /** 控件类型，支持以下类型SIGN_SEAL : 印章控件SIGN_PAGING_SEAL : 骑缝章控件SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件SIGN_SIGNATURE : 用户签名控件 */
   ComponentType: string;
-  /** 签署控件类型的值(可选)，用与限制签署时印章或者签名的选择范围1.当ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时可传入企业印章Id（支持多个）2.当ComponentType 是 SIGN_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 手写签名OCR_ESIGN : OCR印章（智慧手写签名）ESIGN : 个人印章SYSTEM_ESIGN : 系统印章3.当ComponentType 是 SIGN_LEGAL_PERSON_SEAL 时无需传递此参数。 */
+  /** 签署控件类型的值(可选)，用与限制签署时印章或者签名的选择范围1.当ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时可传入企业印章Id（支持多个）2.当ComponentType 是 SIGN_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 需要实时手写的手写签名HANDWRITTEN_ESIGN : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE)OCR_ESIGN : OCR印章（智慧手写签名）ESIGN : 个人印章SYSTEM_ESIGN : 系统印章3.当ComponentType 是 SIGN_LEGAL_PERSON_SEAL 时无需传递此参数。 */
   ComponentValue?: string[];
 }
 
@@ -638,7 +638,7 @@ declare interface FlowCreateApprover {
   SignComponents?: Component[];
   /** 签署人填写控件 此参数仅针对文件发起（CreateFlowByFiles）生效合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体单行文本控件多行文本控件勾选框控件数字控件图片控件动态表格等填写控件`此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主` */
   Components?: Component[];
-  /** 当签署方控件类型为 SIGN_SIGNATURE 时，可以指定签署方签名方式。如果不指定，签署人可以使用所有的签名类型，可指定的签名类型包括： HANDWRITE :手写签名。 OCR_ESIGN :AI智能识别手写签名。 ESIGN :个人印章类型。 IMG_ESIGN : 图片印章。该类型支持用户在签署将上传的PNG格式的图片作为签名。 SYSTEM_ESIGN :系统签名。该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署。各种签名的样式可以参考下图：![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg) */
+  /** 当签署方控件类型为 SIGN_SIGNATURE 时，可以指定签署方签名方式。如果不指定，签署人可以使用所有的签名类型，可指定的签名类型包括： HANDWRITE :需要实时手写的手写签名。 HANDWRITTEN_ESIGN :长效手写签名， 是使用保存到个人中心的印章列表的手写签名。(并且包含HANDWRITE) OCR_ESIGN :AI智能识别手写签名。 ESIGN :个人印章类型。 IMG_ESIGN : 图片印章。该类型支持用户在签署将上传的PNG格式的图片作为签名。 SYSTEM_ESIGN :系统签名。该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署。各种签名的样式可以参考下图：![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg) */
   ComponentLimitType?: string[];
   /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式`此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主`. */
   ApproverVerifyTypes?: number[];
@@ -2460,6 +2460,34 @@ declare interface CreateUserAutoSignSealUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserVerifyUrlRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 要实名的姓名 */
+  Name?: string;
+  /** 要实名的身份证号码，身份证号码如果有x的话，统一传大写X */
+  IdCardNumber?: string;
+  /** 证件类型，目前只支持身份证类型：ID_CARD */
+  IdCardType?: string;
+  /** 要实名的手机号，兼容带+86的格式 */
+  Mobile?: string;
+  /** 要跳转的链接类型- HTTP：跳转电子签小程序的http_url,短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)- HTTP_SHORT_URL：跳转电子签小程序的http_url,短信通知或者H5跳转适合此类型，此时返回短链- APP：第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型如果不传递，默认值是 APP */
+  Endpoint?: string;
+  /** 签署完成后是否自动回跳false：否, 实名完成不会自动跳转回来(默认)true：是, 实名完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的实名链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
+  AutoJumpBack?: boolean;
+}
+
+declare interface CreateUserVerifyUrlResponse {
+  /** 腾讯电子签小程序的实名认证链接。如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。- 如果EndPoint是APP，得到的链接类似于pages/guide/index?to=MP_PERSONAL_VERIFY&shortKey=yDCZHUyOcExAlcOvNod0, 用法可以参考描述中的"跳转到小程序的实现"- 如果EndPoint是HTTP，得到的链接类似于https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=TAG_VERIFY&shortKey=yDCZHUyOcChrfpaswT0d，点击后会跳转到腾讯电子签小程序进行签署- 如果EndPoint是HTTP_SHORT_URL，得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签小程序进行签署注： 生成的链路后面不能再增加参数示例值：https://essurl.cn/2n**42Nd */
+  UserVerifyUrl?: string;
+  /** 链接过期时间 */
+  ExpireTime?: number;
+  /** 小程序appid，用于半屏拉起电子签小程序， 仅在 Endpoint 设置为 APP 的时候返回 */
+  MiniAppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWebThemeConfigRequest {
   /** 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -3034,6 +3062,22 @@ declare interface DescribeUserAutoSignStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserVerifyStatusRequest {
+  /** 用户信息 */
+  Operator: UserInfo;
+  /** 姓名 */
+  Name: string;
+  /** 证件号，身份证如果有x的话，统一按照大写X传递 */
+  IdCardNumber: string;
+}
+
+declare interface DescribeUserVerifyStatusResponse {
+  /** true:表示已实名false：表示未实名 */
+  VerifyStatus?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableUserAutoSignRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -3385,6 +3429,8 @@ declare interface Ess {
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
   /** 获取设置自动签印章小程序链接 {@link CreateUserAutoSignSealUrlRequest} {@link CreateUserAutoSignSealUrlResponse} */
   CreateUserAutoSignSealUrl(data: CreateUserAutoSignSealUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignSealUrlResponse>;
+  /** 获取c端用户实名链接 {@link CreateUserVerifyUrlRequest} {@link CreateUserVerifyUrlResponse} */
+  CreateUserVerifyUrl(data: CreateUserVerifyUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserVerifyUrlResponse>;
   /** 设置本企业嵌入式页面主题配置 {@link CreateWebThemeConfigRequest} {@link CreateWebThemeConfigResponse} */
   CreateWebThemeConfig(data: CreateWebThemeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebThemeConfigResponse>;
   /** 删除企业扩展服务授权 {@link DeleteExtendedServiceAuthInfosRequest} {@link DeleteExtendedServiceAuthInfosResponse} */
@@ -3439,6 +3485,8 @@ declare interface Ess {
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** 获取个人用户自动签的开通状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */
   DescribeUserAutoSignStatus(data: DescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAutoSignStatusResponse>;
+  /** 查询用户实名状态 {@link DescribeUserVerifyStatusRequest} {@link DescribeUserVerifyStatusResponse} */
+  DescribeUserVerifyStatus(data: DescribeUserVerifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserVerifyStatusResponse>;
   /** 关闭个人用户自动签功能 {@link DisableUserAutoSignRequest} {@link DisableUserAutoSignResponse} */
   DisableUserAutoSign(data: DisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserAutoSignResponse>;
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */

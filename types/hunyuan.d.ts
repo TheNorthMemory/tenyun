@@ -65,7 +65,7 @@ declare interface Usage {
 }
 
 declare interface ChatCompletionsRequest {
-  /** 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-pro。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
+  /** 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
   Model: string;
   /** 聊天上下文信息。说明：1. 长度最多为 40，按对话时间从旧到新在数组中排列。2. Message.Role 可选值：system、user、assistant。其中，system 角色可选，如存在则必须位于列表的最开始。user 和 assistant 需交替出现（一问一答），以 user 提问开始和结束，且 Content 不能为空。Role 的顺序示例：[system（可选） user assistant user assistant user ...]。3. Messages 中 Content 总长度不能超过模型输入长度上限（可参考 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 文档），超过则会截断最前面的内容，只保留尾部内容。 */
   Messages: Message[];
@@ -186,6 +186,50 @@ declare interface GetTokenCountResponse {
   RequestId?: string;
 }
 
+declare interface QueryHunyuanImageJobRequest {
+  /** 任务 ID。 */
+  JobId: string;
+}
+
+declare interface QueryHunyuanImageJobResponse {
+  /** 当前任务状态码：1：等待中、2：运行中、4：处理失败、5：处理完成。 */
+  JobStatusCode?: string;
+  /** 当前任务状态：排队中、处理中、处理失败或者处理完成。 */
+  JobStatusMsg?: string;
+  /** 任务处理失败错误码。 */
+  JobErrorCode?: string;
+  /** 任务处理失败错误信息。 */
+  JobErrorMsg?: string;
+  /** 生成图 URL 列表，有效期1小时，请及时保存。 */
+  ResultImage?: string[];
+  /** 结果 detail 数组，Success 代表成功。 */
+  ResultDetails?: string[];
+  /** 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。 */
+  RevisedPrompt?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitHunyuanImageJobRequest {
+  /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传100个 utf-8 字符。 */
+  Prompt: string;
+  /** 绘画风格。请在 [混元生图风格列表](https://cloud.tencent.com/document/product/1729/105846) 中选择期望的风格，传入风格编号。不传默认不指定风格。 */
+  Style?: string;
+  /** 生成图分辨率。支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3），不传默认使用1024:1024。 */
+  Resolution?: string;
+  /** 为生成结果图添加显式水印标识的开关，默认为1。 1：添加。 0：不添加。 其他数值：默认按1处理。 建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** prompt 扩写开关。1为开启，0为关闭，不传默认开启。开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。如果关闭扩写，将直接使用原始输入的 prompt 生成图片。建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。 */
+  Revise?: number;
+}
+
+declare interface SubmitHunyuanImageJobResponse {
+  /** 任务 ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Hunyuan 腾讯混元大模型} */
 declare interface Hunyuan {
   (): Versions;
@@ -199,6 +243,10 @@ declare interface Hunyuan {
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** Token 计数 {@link GetTokenCountRequest} {@link GetTokenCountResponse} */
   GetTokenCount(data: GetTokenCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenCountResponse>;
+  /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */
+  QueryHunyuanImageJob(data: QueryHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageJobResponse>;
+  /** 提交混元生图任务 {@link SubmitHunyuanImageJobRequest} {@link SubmitHunyuanImageJobResponse} */
+  SubmitHunyuanImageJob(data: SubmitHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageJobResponse>;
 }
 
 export declare type Versions = ["2023-09-01"];

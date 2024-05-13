@@ -2832,6 +2832,8 @@ declare interface Item {
   ItemName?: string;
   /** 自定义阈值 */
   CustomItemValues?: number[] | null;
+  /** 检测项所属分类 */
+  CategoryId?: number | null;
 }
 
 /** java内存马事件详细信息 */
@@ -10423,15 +10425,15 @@ declare interface DescribeProtectNetListResponse {
 }
 
 declare interface DescribePublicProxyInstallCommandRequest {
-  /** nginx主机ip列表，逗号分隔 */
+  /** nginx主机IP列表，逗号分隔 */
   Ip?: string;
 }
 
 declare interface DescribePublicProxyInstallCommandResponse {
   /** Nginx安装命令 */
-  NginxCommand: string;
+  NginxCommand?: string;
   /** Keepalived安装命令 */
-  KeepAliveCommand: string | null;
+  KeepAliveCommand?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12731,7 +12733,7 @@ declare interface ExportBaselineItemDetectListResponse {
 }
 
 declare interface ExportBaselineItemListRequest {
-  /** PolicyId - int64 - 是否必填：否 - 策略IdRuleId - int64 - 是否必填：否 - 规则IdHostId - string - 是否必填：否 - 主机IdHostName - string - 是否必填：否 - 主机名HostIp - string - 是否必填：否 - 主机IPItemId - String - 是否必填：否 - 检测项IdItemName - String - 是否必填：否 - 项名称DetectStatus - int - 是否必填：否 - 检测状态[0:未通过|3:通过|5:检测中]Level - int - 是否必填：否 - 风险等级StartTime - string - 是否必填：否 - 开时时间EndTime - string - 是否必填：否 - 结束时间 */
+  /** PolicyId - int64 - 是否必填：否 - 策略IdRuleId - int64 - 是否必填：否 - 规则IdHostId - string - 是否必填：否 - 主机IdHostName - string - 是否必填：否 - 主机名HostIp - string - 是否必填：否 - 主机IPItemId - String - 是否必填：否 - 检测项IdItemName - String - 是否必填：否 - 项名称DetectStatus - int - 是否必填：否 - 检测状态[0:未通过|3:通过|5:检测中]Level - int - 是否必填：否 - 风险等级StartTime - string - 是否必填：否 - 开始时间EndTime - string - 是否必填：否 - 结束时间 */
   Filters?: Filter[];
   /** 0:过滤的结果导出；1:全部导出 */
   ExportAll?: number;
@@ -12855,7 +12857,7 @@ declare interface ExportFileTamperEventsResponse {
 }
 
 declare interface ExportFileTamperRulesRequest {
-  /** 过滤条件。RuleCategory- string- 规则类别 0=系统规则，1=用户规则Name- String - 规则名称/li> */
+  /** 过滤条件。RuleCategory- string- 规则类别 0=系统规则，1=用户规则Name- String - 规则名称 */
   Filters?: Filters[];
 }
 

@@ -396,6 +396,8 @@ declare interface ModelInfo {
 declare interface MsgRecord {
   /** 内容 */
   Content?: string;
+  /** 当前记录所对应的 Session ID */
+  SessionId?: string | null;
   /** 记录ID */
   RecordId?: string;
   /** 关联记录ID */
@@ -414,6 +416,8 @@ declare interface MsgRecord {
   Score?: number;
   /** 是否评分 */
   CanRating?: boolean;
+  /** 是否展示反馈按钮 */
+  CanFeedback?: boolean | null;
   /** 记录类型 */
   Type?: number;
   /** 引用来源 */
@@ -426,6 +430,12 @@ declare interface MsgRecord {
   ImageUrls?: string[];
   /** 当次 token 统计信息 */
   TokenStat?: TokenStat | null;
+  /** 回复方式 */
+  ReplyMethod?: number | null;
+  /** 选项卡, 用于多轮对话 */
+  OptionCards?: string[] | null;
+  /** 任务信息 */
+  TaskFlow?: TaskFlowInfo | null;
 }
 
 /** 聊天详情Refer */
@@ -662,6 +672,20 @@ declare interface SummaryOutput {
   Requirement?: number | null;
   /** 自定义要求指令 */
   RequireCommand?: string | null;
+}
+
+/** 任务流程信息 */
+declare interface TaskFlowInfo {
+  /** 任务流程ID */
+  TaskFlowId?: string | null;
+  /** 任务流程名称 */
+  TaskFlowName?: string | null;
+  /** Query 重写结果 */
+  QueryRewrite?: string | null;
+  /** 命中意图 */
+  HitIntent?: string | null;
+  /** 任务流程回复类型0: 任务流回复1: 任务流静默2: 任务流拉回话术3: 任务流自定义回复 */
+  Type?: number | null;
 }
 
 /** 任务参数 */

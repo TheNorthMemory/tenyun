@@ -1218,7 +1218,7 @@ declare interface PhoneVerificationResponse {
   Description?: string;
   /** 运营商名称。取值范围为["","移动","电信","联通"] */
   Isp?: string;
-  /** 业务结果详细信息。（当VerifyMode配置"详版"，且Result为"-4: 三要素信息不一致"时返回）枚举值：手机号码与姓名一致，与身份证号不一致；手机号码身份证号一致，与姓名不一致；手机号码与姓名和身份证号均不一致；姓名和身份证号不一致；其他不一致。 */
+  /** 业务结果详细信息。（当VerifyMode配置"详版"，且Result为"-4: 三要素信息不一致"时返回）枚举值：PhoneIdCardMismatch：手机号码与姓名一致，与身份证号不一致；PhoneNameMismatch：手机号码身份证号一致，与姓名不一致；PhoneNameIdCardMismatch：手机号码与姓名和身份证号均不一致；NameIdCardMismatch：姓名和身份证号不一致；OtherMismatch：其他不一致； */
   ResultDetail?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

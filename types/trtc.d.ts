@@ -442,7 +442,7 @@ declare interface MixUserInfo {
   UserId: string;
   /** 动态布局时房间信息必须和主房间信息保持一致，自定义布局时房间信息必须和MixLayoutList中对应用户的房间信息保持一致，不填时默认与主房间信息一致。 */
   RoomId?: string;
-  /** 房间号类型，0为整形房间号，1为字符串房间号。 */
+  /** 房间号类型，0为整型房间号，1为字符串房间号。 */
   RoomIdType?: number;
 }
 
@@ -1601,7 +1601,7 @@ declare interface StartPublishCdnStreamRequest {
   SdkAppId: number;
   /** 主房间信息RoomId，转推的TRTC房间所对应的RoomId。 */
   RoomId: string;
-  /** 主房间信息RoomType，必须和转推的房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。 */
+  /** 主房间信息RoomType，必须和转推的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。 */
   RoomIdType: number;
   /** 转推服务加入TRTC房间的机器人参数。 */
   AgentParams: AgentParams;

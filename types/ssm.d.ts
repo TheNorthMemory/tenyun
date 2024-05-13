@@ -495,7 +495,7 @@ declare interface RotateProductSecretRequest {
 
 declare interface RotateProductSecretResponse {
   /** 当凭据类型为云产品凭据时（即SecretType为1，如MySQL、Tdsql等托管凭据）此字段有效，返回轮转异步任务ID号。 */
-  FlowID: number;
+  FlowID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

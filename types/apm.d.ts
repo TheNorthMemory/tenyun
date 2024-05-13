@@ -357,7 +357,7 @@ declare interface DescribeApmInstancesResponse {
 declare interface DescribeGeneralApmApplicationConfigRequest {
   /** 应用名 */
   ServiceName: string;
-  /** 实例Id */
+  /** 业务系统ID */
   InstanceId: string;
 }
 

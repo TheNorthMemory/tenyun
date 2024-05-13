@@ -450,7 +450,7 @@ declare interface HealthCheck {
   CheckType?: string | null;
   /** HTTP版本。健康检查协议CheckType的值取HTTP时，必传此字段，代表后端服务的HTTP版本：HTTP/1.0、HTTP/1.1；（仅适用于TCP监听器） */
   HttpVersion?: string | null;
-  /** 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP），默认值：0 */
+  /** 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP）。 */
   SourceIpType?: number | null;
   /** GRPC健康检查状态码（仅适用于后端转发协议为GRPC的规则）。默认值为 12，可输入值为数值、多个数值、或者范围，例如 20 或 20,25 或 0-99 */
   ExtendedCode?: string | null;

@@ -68,7 +68,7 @@ declare interface Instance {
   LatestOperationState?: string | null;
   /** 实例创建时间 */
   CreateTime?: string | null;
-  /** 公网出带宽上限，默认5Mbps */
+  /** 公网出带宽上限，默认10Mbps */
   MaxOutBandwidth?: string | null;
   /** 每月免费流量，默认500G */
   MaxFreeTraffic?: string | null;

@@ -2710,6 +2710,20 @@ declare interface DescribeLivePackageInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLivePadProcessorListRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 您的推流域名。 */
+  PushDomainName: string;
+}
+
+declare interface DescribeLivePadProcessorListResponse {
+  /** 当前正在拉取垫片的流名称列表。 */
+  StreamNameList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLivePadRulesRequest {
 }
 
@@ -4272,6 +4286,24 @@ declare interface StartLiveStreamMonitorResponse {
   RequestId?: string;
 }
 
+declare interface StopLivePadProcessorRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 您的推流域名。 */
+  PushDomainName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 操作人备注信息。 */
+  Operator?: string;
+}
+
+declare interface StopLivePadProcessorResponse {
+  /** 处理结果信息。 */
+  ResultMessage?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopLiveRecordRequest {
   /** 流名称。 */
   StreamName: string;
@@ -4511,6 +4543,8 @@ declare interface Live {
   DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
   /** 查询直播套餐包信息 {@link DescribeLivePackageInfoRequest} {@link DescribeLivePackageInfoResponse} */
   DescribeLivePackageInfo(data: DescribeLivePackageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePackageInfoResponse>;
+  /** 查询垫片流列表 {@link DescribeLivePadProcessorListRequest} {@link DescribeLivePadProcessorListResponse} */
+  DescribeLivePadProcessorList(data: DescribeLivePadProcessorListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadProcessorListResponse>;
   /** 获取直播垫片规则列表 {@link DescribeLivePadRulesRequest} {@link DescribeLivePadRulesResponse} */
   DescribeLivePadRules(data?: DescribeLivePadRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadRulesResponse>;
   /** 获取单个直播垫片模板 {@link DescribeLivePadTemplateRequest} {@link DescribeLivePadTemplateResponse} */
@@ -4665,6 +4699,8 @@ declare interface Live {
   ResumeLiveStream(data: ResumeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeLiveStreamResponse>;
   /** 启动直播流监播任务 {@link StartLiveStreamMonitorRequest} {@link StartLiveStreamMonitorResponse} */
   StartLiveStreamMonitor(data: StartLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveStreamMonitorResponse>;
+  /** 停止垫片流 {@link StopLivePadProcessorRequest} {@link StopLivePadProcessorResponse} */
+  StopLivePadProcessor(data: StopLivePadProcessorRequest, config?: AxiosRequestConfig): AxiosPromise<StopLivePadProcessorResponse>;
   /** 终止录制任务(已废弃,请使用新接口) {@link StopLiveRecordRequest} {@link StopLiveRecordResponse} */
   StopLiveRecord(data: StopLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveRecordResponse>;
   /** 停止直播流监播任务 {@link StopLiveStreamMonitorRequest} {@link StopLiveStreamMonitorResponse} */

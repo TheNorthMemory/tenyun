@@ -472,7 +472,7 @@ declare interface InstanceTypeQuotaItem {
   GpuCount?: number;
   /** 实例的CPU主频信息 */
   Frequency?: string;
-  /** 描述库存情况。取值范围： UnderStock：表示对应库存即将售罄 NormalStock：表示对应库存供应有保障 EnoughStock：表示对应库存非常充足 WithoutStock：表示对应库存已经售罄 */
+  /** 描述库存情况。取值范围： EnoughStock：表示对应库存非常充足 NormalStock：表示对应库存供应有保障 UnderStock：表示对应库存即将售罄 WithoutStock：表示对应库存已经售罄 */
   StatusCategory?: string | null;
 }
 

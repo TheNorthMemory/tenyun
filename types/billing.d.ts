@@ -178,7 +178,7 @@ declare interface AllocationDetail {
   DeductedMeasure?: string | null;
   /** 配置描述：资源配置规格信息 */
   ComponentConfig?: string | null;
-  /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊1 - 归集-1 - 未分配 */
+  /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊1 - 归集2 - 未分配 */
   AllocationType?: number | null;
 }
 
@@ -2708,7 +2708,7 @@ declare interface DescribeBillDownloadUrlRequest {
 declare interface DescribeBillDownloadUrlResponse {
   /** 账单文件是否准备就绪，0文件生成中，1文件已生成 */
   Ready?: number;
-  /** 账单文件下载链接，有效时长为一小时 */
+  /** 账单文件下载链接，有效时长为一天 */
   DownloadUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

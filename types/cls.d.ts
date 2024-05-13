@@ -1044,7 +1044,7 @@ declare interface MultiTopicSearchInformation {
 declare interface NoticeReceiver {
   /** 接受者类型。可选值：- Uin - 用户ID- Group - 用户组ID暂不支持其余接收者类型。 */
   ReceiverType: string;
-  /** 接收者。当ReceiverType为Uin时，ReceiverIds的值为用户id。[子用户信息查询](https://cloud.tencent.com/document/product/598/36258)当ReceiverType为Group时，ReceiverIds的值为用户组id。[CAM用户组](https://cloud.tencent.com/document/product/598/14985) */
+  /** 接收者。当ReceiverType为Uin时，ReceiverIds的值为用户uid。[子用户信息查询](https://cloud.tencent.com/document/api/598/53486)当ReceiverType为Group时，ReceiverIds的值为用户组id。[CAM用户组](https://cloud.tencent.com/document/product/598/14985) */
   ReceiverIds: number[];
   /** 通知接收渠道。- Email - 邮件- Sms - 短信- WeChat - 微信- Phone - 电话 */
   ReceiverChannels: string[];

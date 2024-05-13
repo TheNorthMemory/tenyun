@@ -158,9 +158,9 @@ declare interface AlertInfo {
   Attacker?: RoleInfo | null;
   /** 受害者 */
   Victim?: RoleInfo | null;
-  /** 证据数据(比如攻击内容等) */
+  /** 证据数据(例如攻击内容等) */
   EvidenceData?: string | null;
-  /** 证据位置(比如协议端口) */
+  /** 证据位置(例如协议端口) */
   EvidenceLocation?: string | null;
   /** 证据路径 */
   EvidencePath?: string | null;
@@ -1230,6 +1230,10 @@ declare interface OrganizationUserInfo {
   AuthType?: number | null;
   /** 0 腾讯云集团账户1 腾讯云接入账户2 非腾讯云 */
   TcMemberType?: number | null;
+  /** 子账号数量 */
+  SubUserCount?: number | null;
+  /** 加入方式详细信息 */
+  JoinTypeInfo?: string | null;
 }
 
 /** 端口风险高级配置项 */
@@ -2157,6 +2161,8 @@ declare interface DescribeCVMAssetsResponse {
   OsList?: FilterDataObject[] | null;
   /** 资产类型和实例类型的对应关系 */
   AssetMapInstanceTypeList?: AssetInstanceTypeMap[] | null;
+  /** 公网内网枚举 */
+  PublicPrivateAttr?: FilterDataObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2196,6 +2202,8 @@ declare interface DescribeDbAssetInfoResponse {
 }
 
 declare interface DescribeDbAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** - */
   Filter?: Filter;
   /** 资产类型:MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS */
@@ -2215,6 +2223,8 @@ declare interface DescribeDbAssetsResponse {
   VpcList?: FilterDataObject[] | null;
   /** Appid枚举 */
   AppIdList?: FilterDataObject[] | null;
+  /** 公网内网枚举 */
+  PublicPrivateAttr?: FilterDataObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2310,6 +2320,8 @@ declare interface DescribeNICAssetsResponse {
 }
 
 declare interface DescribeOrganizationUserInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
   /** 不支持多云 */
@@ -2321,6 +2333,10 @@ declare interface DescribeOrganizationUserInfoResponse {
   TotalCount?: number | null;
   /** 集团用户列表 */
   Data?: OrganizationUserInfo[] | null;
+  /** 加入方式枚举 */
+  JoinTypeLst?: FilterDataObject[] | null;
+  /** 云厂商枚举 */
+  CloudTypeLst?: FilterDataObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
