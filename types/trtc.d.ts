@@ -374,6 +374,8 @@ declare interface McuWaterMarkText {
   DynamicPosType?: number;
   /** 水印在输出时的层级，不填默认为0。 */
   ZOrder?: number;
+  /** 水印字体，不填默认为Tencent。支持设置以下值： Tencent （默认） SourceHanSans */
+  Font?: string;
 }
 
 /** 用户自定义混流布局参数列表。 */

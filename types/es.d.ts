@@ -1158,6 +1158,8 @@ declare interface ServerlessSpace {
   EnableKibanaPrivateAccess?: number | null;
   /** 空间所属appid */
   AppId?: number | null;
+  /** //默认en， 可选zh-CN */
+  KibanaLanguage?: string | null;
 }
 
 /** ServerlessSpaceUser */

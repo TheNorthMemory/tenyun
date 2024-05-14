@@ -5853,7 +5853,7 @@ declare interface Iotvideo {
   DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
   /** 拉取多个云存事件缩略图 {@link DescribeCloudStorageMultiThumbnailRequest} {@link DescribeCloudStorageMultiThumbnailResponse} */
   DescribeCloudStorageMultiThumbnail(data: DescribeCloudStorageMultiThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageMultiThumbnailResponse>;
-  /** 查询云存服务详情 {@link DescribeCloudStorageOrderRequest} {@link DescribeCloudStorageOrderResponse} */
+  /** 查询云存订单详情 {@link DescribeCloudStorageOrderRequest} {@link DescribeCloudStorageOrderResponse} */
   DescribeCloudStorageOrder(data: DescribeCloudStorageOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageOrderResponse>;
   /** 获取云存套餐包消耗详细记录 {@link DescribeCloudStoragePackageConsumeDetailsRequest} {@link DescribeCloudStoragePackageConsumeDetailsResponse} */
   DescribeCloudStoragePackageConsumeDetails(data: DescribeCloudStoragePackageConsumeDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeDetailsResponse>;

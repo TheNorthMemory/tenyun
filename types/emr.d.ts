@@ -680,6 +680,12 @@ declare interface ImpalaQuery {
   SessionId?: string | null;
   /** 单节点内存峰值和(Bytes) */
   PerNodePeakMemoryBytesSum?: number | null;
+  /** 后端个数 */
+  BackendsCount?: number | null;
+  /** fragment数 */
+  FragmentInstancesCount?: number | null;
+  /** 剩余未完成Fragment数 */
+  RemainingFragmentCount?: number | null;
 }
 
 /** 洞察结果项 */

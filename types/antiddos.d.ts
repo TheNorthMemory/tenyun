@@ -1805,9 +1805,9 @@ declare interface DescribeBasicDeviceStatusResponse {
 declare interface DescribeBgpBizTrendRequest {
   /** DDoS防护子产品代号（bgp-multip表示高防包） */
   Business: string;
-  /** 统计开始时间。 例：“2020-09-22 00:00:00” */
+  /** 统计开始时间。 例：“2020-09-22 00:00:00”，注意该时间必须为5分钟的倍数 */
   StartTime: string;
-  /** 统计结束时间。 例：“2020-09-22 00:00:00” */
+  /** 统计结束时间。 例：“2020-09-22 00:00:00”，注意该时间必须为5分钟的倍数 */
   EndTime: string;
   /** 统计纬度，可取值intraffic, outtraffic, inpkg, outpkg */
   MetricName: string;

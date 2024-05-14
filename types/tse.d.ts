@@ -203,9 +203,9 @@ declare interface CloudNativeAPIGatewayConfig {
 /** 云原生API网关节点信息。 */
 declare interface CloudNativeAPIGatewayNode {
   /** 云原生网关节点 id */
-  NodeId: string;
+  NodeId?: string;
   /** 节点 ip */
-  NodeIp: string;
+  NodeIp?: string;
   /** Zone id */
   ZoneId?: string | null;
   /** Zone */
@@ -216,6 +216,10 @@ declare interface CloudNativeAPIGatewayNode {
   GroupName?: string | null;
   /** 状态 */
   Status?: string | null;
+  /** 节点权重 */
+  Weight?: number | null;
+  /** 是否默认权重 */
+  IsDefaultWeight?: boolean | null;
 }
 
 /** 云原生API网关节点配置。 */
@@ -1574,6 +1578,8 @@ declare interface NativeGatewayServerGroup {
   ModifyTime?: string | null;
   /** 子网id */
   SubnetIds?: string | null;
+  /** 分组默认权重 */
+  DefaultWeight?: number | null;
 }
 
 /** 网关分组列表 */

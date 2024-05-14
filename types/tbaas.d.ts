@@ -19,37 +19,37 @@ declare interface Block {
 /** 长安链合约执行结果 */
 declare interface ChainMakerContractResult {
   /** 交易结果码 */
-  Code: number;
+  Code?: number;
   /** 交易结果码含义 */
-  CodeMessage: string | null;
+  CodeMessage?: string | null;
   /** 交易ID */
-  TxId: string | null;
+  TxId?: string | null;
   /** Gas使用量 */
-  GasUsed: number | null;
+  GasUsed?: number | null;
   /** 合约返回消息 */
-  Message: string | null;
+  Message?: string | null;
   /** 合约函数返回，base64编码 */
-  Result: string | null;
+  Result?: string | null;
 }
 
 /** 长安链交易查询结果 */
 declare interface ChainMakerTransactionResult {
   /** 交易结果码 */
-  Code: number;
+  Code?: number;
   /** 交易结果码含义 */
-  CodeMessage: string | null;
+  CodeMessage?: string | null;
   /** 交易ID */
-  TxId: string | null;
+  TxId?: string | null;
   /** Gas使用量 */
-  GasUsed: number | null;
+  GasUsed?: number | null;
   /** 区块高度 */
-  BlockHeight: number | null;
+  BlockHeight?: number | null;
   /** 合约执行结果 */
-  ContractEvent: string | null;
+  ContractEvent?: string | null;
   /** 合约返回信息 */
-  Message: string | null;
+  Message?: string | null;
   /** 交易时间，单位是秒 */
-  Timestamp: number | null;
+  Timestamp?: number | null;
 }
 
 /** 背书组织及其节点列表 */

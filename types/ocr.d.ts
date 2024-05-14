@@ -536,7 +536,7 @@ declare interface ElectronicTrainTicketFull {
 
 /** 敏感数据加密 */
 declare interface Encryption {
-  /** 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅数据加密 文档。 */
+  /** 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。 */
   CiphertextBlob: string | null;
   /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。 */
   Iv: string | null;
@@ -3121,10 +3121,10 @@ declare interface GetTaskStateResponse {
 }
 
 declare interface HKIDCardOCRRequest {
-  /** 是否鉴伪。 */
-  DetectFake: boolean;
   /** 是否返回人像照片。 */
   ReturnHeadImage: boolean;
+  /** 是否鉴伪。 */
+  DetectFake?: boolean;
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 */
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
@@ -3158,6 +3158,8 @@ declare interface HKIDCardOCRResponse {
   HeadImage?: string | null;
   /** 多重告警码，当身份证是翻拍、复印件时返回对应告警码。-9102：证照复印件告警-9103：证照翻拍告警 */
   WarningCode?: number[];
+  /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
+  WarnCardInfos?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3345,23 +3347,25 @@ declare interface MLIDCardOCRRequest {
 
 declare interface MLIDCardOCRResponse {
   /** 身份证号 */
-  ID: string;
+  ID?: string;
   /** 姓名 */
-  Name: string;
+  Name?: string;
   /** 地址 */
-  Address: string;
+  Address?: string;
   /** 性别 */
-  Sex: string;
+  Sex?: string;
   /** 告警码-9103	证照翻拍告警-9102	证照复印件告警-9106 证件遮挡告警-9107 模糊图片告警 */
-  Warn: number[];
+  Warn?: number[];
   /** 证件图片 */
-  Image: string;
+  Image?: string;
   /** 此字段为扩展字段。返回字段识别结果的置信度，格式如下{ 字段名:{ Confidence:0.9999 }} */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
   /** 证件类型MyKad 身份证MyPR 永居证MyTentera 军官证MyKAS 临时身份证POLIS 警察证IKAD 劳工证MyKid 儿童卡 */
-  Type: string;
+  Type?: string;
   /** 出生日期（目前该字段仅支持IKAD劳工证、MyKad 身份证） */
-  Birthday: string;
+  Birthday?: string;
+  /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
+  WarnCardInfos?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3916,6 +3920,8 @@ declare interface RecognizeIndonesiaIDCardOCRResponse {
   Provinsi?: string;
   /** 城市，Scene为V2时支持识别 */
   Kota?: string;
+  /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
+  WarnCardInfos?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4186,6 +4192,8 @@ declare interface RecognizeThaiIDCardOCRResponse {
   Address?: string;
   /** 证件人像照片抠取 */
   PortraitImage?: string;
+  /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
+  WarnCardInfos?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

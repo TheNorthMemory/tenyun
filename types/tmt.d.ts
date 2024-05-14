@@ -5,15 +5,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 查询文件翻译任务 */
 declare interface GetFileTranslateData {
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 文件数据 */
-  FileData: string | null;
+  FileData?: string | null;
   /** 错误提示 */
-  Message: string | null;
+  Message?: string | null;
   /** 翻译进度 */
-  Progress: number | null;
+  Progress?: number | null;
 }
 
 /** 图片翻译结果 */

@@ -180,6 +180,12 @@ declare interface BatchTaskSetItem {
   BillingInfo?: string;
 }
 
+/** CBS存储配置 */
+declare interface CBSConfig {
+  /** 存储大小 */
+  VolumeSizeInGB: number | null;
+}
+
 /** CFS存储的配置 */
 declare interface CFSConfig {
   /** cfs的实例的ID */
@@ -324,6 +330,8 @@ declare interface DataConfig {
   CFSTurboSource?: CFSTurbo | null;
   /** 来自本地磁盘的信息 */
   LocalDiskSource?: LocalDisk | null;
+  /** CBS配置信息 */
+  CBSSource?: CBSConfig | null;
 }
 
 /** 数据点 */
@@ -4378,20 +4386,6 @@ declare namespace V20191022 {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
-
-  interface UpdateNotebookLifecycleScriptRequest {
-    /** notebook生命周期脚本名称 */
-    NotebookLifecycleScriptsName: string;
-    /** 创建脚本，base64编码base64后的脚本长度不能超过16384个字符 */
-    CreateScript?: string;
-    /** 启动脚本，base64编码base64后的脚本长度不能超过16384个字符 */
-    StartScript?: string;
-  }
-
-  interface UpdateNotebookLifecycleScriptResponse {
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
 }
 
 /** {@link Tione TI-ONE 训练平台} */
@@ -4593,8 +4587,6 @@ declare interface Tione {
   UpdateCodeRepository(data: V20191022.UpdateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateCodeRepositoryResponse>;
   /** 更新Notebook实例 {@link V20191022.UpdateNotebookInstanceRequest} {@link V20191022.UpdateNotebookInstanceResponse} */
   UpdateNotebookInstance(data: V20191022.UpdateNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateNotebookInstanceResponse>;
-  /** 更新notebook生命周期脚本 {@link V20191022.UpdateNotebookLifecycleScriptRequest} {@link V20191022.UpdateNotebookLifecycleScriptResponse} */
-  UpdateNotebookLifecycleScript(data: V20191022.UpdateNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateNotebookLifecycleScriptResponse>;
 }
 
 export declare type Versions = ["2021-11-11", "2019-10-22"];

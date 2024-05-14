@@ -1773,7 +1773,7 @@ declare interface AdjustCdbProxyRequest {
   InstanceId: string;
   /** 代理组ID */
   ProxyGroupId: string;
-  /** 节点规格配置 */
+  /** 节点规格配置备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。示例中参数说明：NodeCount：节点个数Region：节点地域Zone：节点可用区Cpu：单个代理节点核数（单位：核）Mem：单个代理节点内存数（单位：MB） */
   ProxyNodeCustom: ProxyNodeCustom[];
   /** 重新负载均衡：auto(自动),manual(手动) */
   ReloadBalance: string;
@@ -1783,7 +1783,7 @@ declare interface AdjustCdbProxyRequest {
 
 declare interface AdjustCdbProxyResponse {
   /** 异步任务ID */
-  AsyncRequestId: string | null;
+  AsyncRequestId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2077,13 +2077,13 @@ declare interface CreateCdbProxyRequest {
   UniqVpcId: string;
   /** 私有子网ID */
   UniqSubnetId: string;
-  /** 节点规格配置 */
+  /** 节点规格配置备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。示例中参数说明：NodeCount：节点个数。Region：节点地域。Zone：节点可用区。Cpu：单个代理节点核数（单位：核）。Mem：单个代理节点内存数（单位：MB）。 */
   ProxyNodeCustom: ProxyNodeCustom[];
   /** 安全组 */
   SecurityGroup?: string[];
   /** 描述 */
   Desc?: string;
-  /** 连接池阈值 */
+  /** 连接池阈值注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPoolLimit?: number;
   /** 指定要购买的 proxy 内核版本。不填则默认发货最新版本的 proxy。 */
   ProxyVersion?: string;
@@ -2227,7 +2227,7 @@ declare interface CreateDBInstanceHourRequest {
   ClientToken?: string;
   /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - ONTKE单节点实例。 不指定则默认为通用型实例。 */
   DeviceType?: string;
-  /** 参数模板id。 */
+  /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
   /** 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。 */
   AlarmPolicyList?: number[];
@@ -2239,7 +2239,7 @@ declare interface CreateDBInstanceHourRequest {
   AutoSyncFlag?: number;
   /** 金融围拢 ID 。 */
   CageId?: string;
-  /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板，默认值是："HIGH_STABILITY"。 */
+  /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板，默认值是："HIGH_STABILITY"。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
   ParamTemplateType?: string;
   /** 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。 */
   AlarmPolicyIdList?: string[];
@@ -2315,7 +2315,7 @@ declare interface CreateDBInstanceRequest {
   ClientToken?: string;
   /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - ONTKE单节点实例。 不指定则默认为通用型实例。 */
   DeviceType?: string;
-  /** 参数模板id。 */
+  /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
   /** 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。 */
   AlarmPolicyList?: number[];
@@ -2327,7 +2327,7 @@ declare interface CreateDBInstanceRequest {
   AutoSyncFlag?: number;
   /** 金融围拢 ID。 */
   CageId?: string;
-  /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。 */
+  /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
   ParamTemplateType?: string;
   /** 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。 */
   AlarmPolicyIdList?: string[];
@@ -4325,7 +4325,7 @@ declare interface ModifyCdbProxyParamRequest {
   InstanceId: string;
   /** 代理组ID */
   ProxyGroupId: string;
-  /** 连接池阈值 */
+  /** 连接池阈值注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPoolLimit: number;
 }
 
@@ -4913,7 +4913,7 @@ declare interface UpgradeDBInstanceRequest {
   EngineVersion?: string;
   /** 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。 */
   WaitSwitch?: number;
-  /** 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。 */
+  /** 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。备注：如您要将三节点降级至双节点，将该参数设置为空值即可实现。 */
   BackupZone?: string;
   /** 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。 */
   InstanceRole?: string;

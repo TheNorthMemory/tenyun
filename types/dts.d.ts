@@ -1439,7 +1439,7 @@ declare interface CreateCompareTaskRequest {
   TaskName?: string;
   /** 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)，custom(自定义模式) */
   ObjectMode?: string;
-  /** 一致性对比对象配置 */
+  /** 数据对比对象，当ObjectMode为custom时，此项需要填写。 */
   Objects?: CompareObject;
   /** 一致性校验选项 */
   Options?: CompareOptions;

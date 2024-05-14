@@ -342,6 +342,24 @@ declare interface BizTaskModifyParamsData {
   ModifyInstanceParams?: BizTaskModifyInstanceParam[] | null;
 }
 
+/** CLS日志投递配置 */
+declare interface CLSInfo {
+  /** 日志主题操作：可选create,reuse。create:新增日志主题，使用TopicName创建日志主题。reuse:使用已有日志主题，使用TopicId指定日志主题。不允许使用已有日志主题且新建日志集的组合。 */
+  TopicOperation: string;
+  /** 日志集操作：可选create,reuse。create:新增日志集，使用GroupName创建日志集。reuse:使用已有日志集，使用GroupId指定日志集。不允许使用已有日志主题且新建日志集的组合。 */
+  GroupOperation: string;
+  /** 日志投递地域 */
+  Region: string;
+  /** 日志主题id */
+  TopicId?: string;
+  /** 日志主题name */
+  TopicName?: string;
+  /** 日志集id */
+  GroupId?: string;
+  /** 日志集name */
+  GroupName?: string;
+}
+
 /** 集群实例信息 */
 declare interface ClusterInstanceDetail {
   /** 实例ID */
@@ -1028,6 +1046,26 @@ declare interface InstanceAuditStatus {
   RealStorage?: number | null;
   /** 实例所应用的规则模板。 */
   RuleTemplateIds?: string[] | null;
+}
+
+/** 实例日志投递信息 */
+declare interface InstanceCLSDeliveryInfo {
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 实例name */
+  InstanceName?: string | null;
+  /** 日志主题id */
+  TopicId?: string | null;
+  /** 日志主题name */
+  TopicName?: string | null;
+  /** 日志集id */
+  GroupId?: string | null;
+  /** 日志集name */
+  GroupName?: string | null;
+  /** 日志投递地域 */
+  Region?: string | null;
+  /** 投递状态creating,running,offlining,offlined */
+  Status?: string | null;
 }
 
 /** 实例初始化配置信息 */
@@ -2209,9 +2247,15 @@ declare interface CreateBackupResponse {
 }
 
 declare interface CreateCLSDeliveryRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 日志投递配置 */
+  CLSInfoList: CLSInfo[];
 }
 
 declare interface CreateCLSDeliveryResponse {
+  /** 异步任务id */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2523,9 +2567,15 @@ declare interface DeleteBackupResponse {
 }
 
 declare interface DeleteCLSDeliveryRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 日志主题id */
+  CLSTopicIds: string[];
 }
 
 declare interface DeleteCLSDeliveryResponse {
+  /** 异步任务id */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3073,9 +3123,15 @@ declare interface DescribeFlowResponse {
 }
 
 declare interface DescribeInstanceCLSLogDeliveryRequest {
+  /** 实例id */
+  InstanceId: string;
 }
 
 declare interface DescribeInstanceCLSLogDeliveryResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 实例投递信息 */
+  InstanceCLSDeliveryInfos?: InstanceCLSDeliveryInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4559,17 +4615,29 @@ declare interface SetRenewFlagResponse {
 }
 
 declare interface StartCLSDeliveryRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 开通的日志主题id */
+  CLSTopicIds: string[];
 }
 
 declare interface StartCLSDeliveryResponse {
+  /** 异步任务id */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface StopCLSDeliveryRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 日志主题id */
+  CLSTopicIds: string[];
 }
 
 declare interface StopCLSDeliveryResponse {
+  /** 异步任务id */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4774,7 +4842,7 @@ declare interface Cynosdb {
   /** 创建手动备份 {@link CreateBackupRequest} {@link CreateBackupResponse} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
   /** 创建日志投递 {@link CreateCLSDeliveryRequest} {@link CreateCLSDeliveryResponse} */
-  CreateCLSDelivery(data?: CreateCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSDeliveryResponse>;
+  CreateCLSDelivery(data: CreateCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSDeliveryResponse>;
   /** 创建数据库 {@link CreateClusterDatabaseRequest} {@link CreateClusterDatabaseResponse} */
   CreateClusterDatabase(data: CreateClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterDatabaseResponse>;
   /** 购买新集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
@@ -4796,7 +4864,7 @@ declare interface Cynosdb {
   /** 删除手动备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
   /** 删除日志投递 {@link DeleteCLSDeliveryRequest} {@link DeleteCLSDeliveryResponse} */
-  DeleteCLSDelivery(data?: DeleteCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSDeliveryResponse>;
+  DeleteCLSDelivery(data: DeleteCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSDeliveryResponse>;
   /** 删除数据库 {@link DeleteClusterDatabaseRequest} {@link DeleteClusterDatabaseResponse} */
   DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
@@ -4854,7 +4922,7 @@ declare interface Cynosdb {
   /** 查询任务流信息 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
   /** 查询实例日志投递信息 {@link DescribeInstanceCLSLogDeliveryRequest} {@link DescribeInstanceCLSLogDeliveryResponse} */
-  DescribeInstanceCLSLogDelivery(data?: DescribeInstanceCLSLogDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCLSLogDeliveryResponse>;
+  DescribeInstanceCLSLogDelivery(data: DescribeInstanceCLSLogDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCLSLogDeliveryResponse>;
   /** 查询实例详情 {@link DescribeInstanceDetailRequest} {@link DescribeInstanceDetailResponse} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 查询错误日志列表 {@link DescribeInstanceErrorLogsRequest} {@link DescribeInstanceErrorLogsResponse} */
@@ -5008,9 +5076,9 @@ declare interface Cynosdb {
   /** 设置自动续费 {@link SetRenewFlagRequest} {@link SetRenewFlagResponse} */
   SetRenewFlag(data: SetRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewFlagResponse>;
   /** 开启日志投递 {@link StartCLSDeliveryRequest} {@link StartCLSDeliveryResponse} */
-  StartCLSDelivery(data?: StartCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<StartCLSDeliveryResponse>;
+  StartCLSDelivery(data: StartCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<StartCLSDeliveryResponse>;
   /** 停止日志投递 {@link StopCLSDeliveryRequest} {@link StopCLSDeliveryResponse} */
-  StopCLSDelivery(data?: StopCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<StopCLSDeliveryResponse>;
+  StopCLSDelivery(data: StopCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<StopCLSDeliveryResponse>;
   /** 更换集群vpc {@link SwitchClusterVpcRequest} {@link SwitchClusterVpcResponse} */
   SwitchClusterVpc(data: SwitchClusterVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterVpcResponse>;
   /** 主备可用区切换 {@link SwitchClusterZoneRequest} {@link SwitchClusterZoneResponse} */
