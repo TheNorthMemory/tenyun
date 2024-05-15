@@ -190,7 +190,7 @@ declare interface InstanceAdvancedSettings {
 declare interface InstanceChargePrepaid {
   /** 后付费计费周期，单位（月）：1，2，3，4，5，，6，7， 8，9，10，11，12，24，36，48，60 */
   Period: number;
-  /** 预付费续费方式：- NOTIFY_AND_AUTO_RENEW：通知用户过期，且自动续费 (默认）- NOTIFY_AND_MANUAL_RENEW：通知用户过期，但不不自动续费- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知用户过期，也不自动续费 */
+  /** 预付费续费方式：- NOTIFY_AND_AUTO_RENEW：通知用户过期，且自动续费 (默认）- NOTIFY_AND_MANUAL_RENEW：通知用户过期，但不自动续费- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知用户过期，也不自动续费 */
   RenewFlag?: string;
 }
 

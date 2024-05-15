@@ -2143,6 +2143,10 @@ declare interface CreateEngineRequest {
   PrepaidRenewFlag?: number;
   /** 跨地域部署的引擎地域配置详情zk标准版没有跨地域部署，请不要填写zk专业版跨地域部署开启了固定Leader所在地域，需要满足以下条件- 固定Leader所在地域当前仅支持跨两个地域- leader地域的副本数必须是3/2 + 1，5/2+1，7/2+1，也就是 2，3，4 */
   EngineRegionInfos?: EngineRegionInfo[];
+  /** zk标准版请填CLOUD_PREMIUM，zk标准版无法选择磁盘类型和磁盘容量，默认为CLOUD_PREMIUMzk专业版可以为：CLOUD_SSD,CLOUD_SSD_PLUS,CLOUD_PREMIUM */
+  StorageType?: string;
+  /** zk标准版请填50，zk标准版无法选择磁盘类型和磁盘容量，磁盘容量默认为50 */
+  StorageCapacity?: number;
   /** zk专业版至多有两个盘，且磁盘的容量在50-3200之间如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致 */
   StorageOption?: StorageOption[];
   /** ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束 */

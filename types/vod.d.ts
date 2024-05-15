@@ -5090,7 +5090,7 @@ declare interface TaskOutputMediaInfo {
 declare interface TaskSimpleInfo {
   /** 任务 ID。 */
   TaskId?: string;
-  /** 任务状态。取值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。 */
+  /** 任务状态。取值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）、ABORTED（已终止）。 */
   Status?: string;
   /** 视频 ID。 */
   FileId?: string;
@@ -7792,7 +7792,7 @@ declare interface DescribeTaskDetailRequest {
 declare interface DescribeTaskDetailResponse {
   /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务。 */
   TaskType?: string;
-  /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
+  /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
   Status?: string;
   /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   CreateTime?: string;
