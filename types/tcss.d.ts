@@ -1370,6 +1370,34 @@ declare interface EscapeWhiteListInfo {
   ImageSize: number;
 }
 
+/** 风险容器信息 */
+declare interface EventEscapeImageInfo {
+  /** 镜像id，用于跳转 */
+  ImageId?: string;
+  /** 唯一值 */
+  UniqueKey?: string;
+  /** 事件类型 ESCAPE_CGROUPS：利用cgroup机制逃逸 ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸 ESCAPE_DOCKER_API：访问Docker API接口逃逸 ESCAPE_VUL_OCCURRED：逃逸漏洞利用 MOUNT_SENSITIVE_PTAH：敏感路径挂载 PRIVILEGE_CONTAINER_START：特权容器 PRIVILEGE：程序提权逃逸 */
+  EventType?: string;
+  /** 原始事件类型 */
+  OriginEventType?: string;
+  /** 镜像名 */
+  ImageName?: string;
+  /** 容器数量 */
+  ContainerCount?: number;
+  /** 生成时间 */
+  FoundTime?: string;
+  /** 最近生成时间 */
+  LatestFoundTime?: string;
+  /** 事件数量 */
+  EventCount?: number;
+  /** 状态，EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略 */
+  Status?: string;
+  /** 风险描述 */
+  Description?: string;
+  /** 解决方案 */
+  Solution?: string;
+}
+
 /** 导出任务详情 */
 declare interface ExportJobInfo {
   /** 任务ID */
@@ -7144,6 +7172,28 @@ declare interface DescribeEscapeWhiteListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEventEscapeImageListRequest {
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤参数:EventType: 事件类型(MOUNT_SENSITIVE_PTAH:敏感路径挂载 PRIVILEGE_CONTAINER_START:特权容器)Status: 事件状态(EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略)ImageID: 镜像idImageName:镜像名称 */
+  Filters?: RunTimeFilters[];
+  /** 升序降序,asc desc */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeEventEscapeImageListResponse {
+  /** 风险容器镜像列表 */
+  List?: EventEscapeImageInfo[];
+  /** 事件总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExportJobDownloadURLRequest {
   /** 任务ID */
   JobID: string;
@@ -10855,6 +10905,8 @@ declare interface Tcss {
   DescribeEscapeSafeState(data?: DescribeEscapeSafeStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeSafeStateResponse>;
   /** 查询逃逸白名单 {@link DescribeEscapeWhiteListRequest} {@link DescribeEscapeWhiteListResponse} */
   DescribeEscapeWhiteList(data?: DescribeEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeWhiteListResponse>;
+  /** 查询风险容器镜像列表 {@link DescribeEventEscapeImageListRequest} {@link DescribeEventEscapeImageListResponse} */
+  DescribeEventEscapeImageList(data?: DescribeEventEscapeImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventEscapeImageListResponse>;
   /** 查询导出任务下载URL {@link DescribeExportJobDownloadURLRequest} {@link DescribeExportJobDownloadURLResponse} */
   DescribeExportJobDownloadURL(data: DescribeExportJobDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobDownloadURLResponse>;
   /** 查询导出任务管理列表 {@link DescribeExportJobManageListRequest} {@link DescribeExportJobManageListResponse} */

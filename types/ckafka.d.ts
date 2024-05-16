@@ -243,13 +243,13 @@ declare interface ClickHouseParam {
 /** ClickHouse的Schema */
 declare interface ClickHouseSchema {
   /** 表的列名 */
-  ColumnName: string;
+  ColumnName: string | null;
   /** 该列对应的jsonKey名 */
-  JsonKey: string;
+  JsonKey: string | null;
   /** 表列项的类型 */
-  Type: string;
+  Type: string | null;
   /** 列项是否允许为空 */
-  AllowNull: boolean;
+  AllowNull: boolean | null;
 }
 
 /** Cls类型入参 */
@@ -257,13 +257,13 @@ declare interface ClsParam {
   /** 生产的信息是否为json格式 */
   DecodeJson: boolean | null;
   /** cls日志主题id */
-  Resource: string;
+  Resource: string | null;
   /** cls日志集id */
   LogSet?: string | null;
   /** 当DecodeJson为false时必填 */
   ContentKey?: string | null;
   /** 指定消息中的某字段内容作为cls日志的时间。字段内容格式需要是秒级时间戳 */
-  TimeField?: string;
+  TimeField?: string | null;
 }
 
 /** 集群信息实体 */
@@ -367,21 +367,21 @@ declare interface ConsumerRecord {
 /** Cos Datahub 任务接入参数 */
 declare interface CosParam {
   /** cos 存储桶名称 */
-  BucketName: string;
+  BucketName: string | null;
   /** 地域代码 */
-  Region: string;
+  Region: string | null;
   /** 对象名称 */
-  ObjectKey?: string;
+  ObjectKey?: string | null;
   /** 汇聚消息量的大小（单位：MB) */
-  AggregateBatchSize?: number;
+  AggregateBatchSize?: number | null;
   /** 汇聚的时间间隔（单位：小时） */
-  AggregateInterval?: number;
+  AggregateInterval?: number | null;
   /** 消息汇聚后的文件格式（支持csv, json） */
-  FormatOutputType?: string;
+  FormatOutputType?: string | null;
   /** 转储的对象目录前缀 */
-  ObjectKeyPrefix?: string;
+  ObjectKeyPrefix?: string | null;
   /** 根据strptime 时间格式化的分区格式 */
-  DirectoryTimeFormat?: string;
+  DirectoryTimeFormat?: string | null;
 }
 
 /** 创建数据转储返回值 */
@@ -479,9 +479,9 @@ declare interface CtsdbModifyConnectParam {
 /** Ctsdb类型入参 */
 declare interface CtsdbParam {
   /** 连接管理实例资源 */
-  Resource?: string;
+  Resource?: string | null;
   /** Ctsdb的metric */
-  CtsdbMetric?: string;
+  CtsdbMetric?: string | null;
 }
 
 /** Datahub资源配置 */
@@ -520,6 +520,8 @@ declare interface DatahubResource {
   CtsdbParam?: CtsdbParam | null;
   /** Scf配置，Type为SCF时必填 */
   ScfParam?: ScfParam | null;
+  /** MQTT配置，Type为 MQTT 时必填 */
+  MqttParam?: MqttParam | null;
 }
 
 /** Datahub请求的taskid */
@@ -613,93 +615,97 @@ declare interface DescribeConnectInfoResultDTO {
 /** 查询连接源具体数据的返参 */
 declare interface DescribeConnectResource {
   /** 连接源的Id */
-  ResourceId: string | null;
+  ResourceId?: string | null;
   /** 连接源名称 */
-  ResourceName: string | null;
+  ResourceName?: string | null;
   /** 连接源描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 连接源类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 连接源的状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 连接源的创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 连接源的异常信息 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
   /** 该连接源关联的Datahub任务数 */
-  DatahubTaskCount: number | null;
+  DatahubTaskCount?: number | null;
   /** 连接源的当前所处步骤 */
-  CurrentStep: string | null;
+  CurrentStep?: string | null;
   /** 创建进度百分比 */
   TaskProgress?: number | null;
   /** 步骤列表 */
   StepList?: string[] | null;
   /** Dts配置，Type为DTS时返回 */
-  DtsConnectParam: DtsConnectParam | null;
+  DtsConnectParam?: DtsConnectParam | null;
   /** MongoDB配置，Type为MONGODB时返回 */
-  MongoDBConnectParam: MongoDBConnectParam | null;
+  MongoDBConnectParam?: MongoDBConnectParam | null;
   /** Es配置，Type为ES时返回 */
-  EsConnectParam: EsConnectParam | null;
+  EsConnectParam?: EsConnectParam | null;
   /** ClickHouse配置，Type为CLICKHOUSE时返回 */
-  ClickHouseConnectParam: ClickHouseConnectParam | null;
+  ClickHouseConnectParam?: ClickHouseConnectParam | null;
   /** MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回 */
-  MySQLConnectParam: MySQLConnectParam | null;
+  MySQLConnectParam?: MySQLConnectParam | null;
   /** PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回 */
-  PostgreSQLConnectParam: PostgreSQLConnectParam | null;
+  PostgreSQLConnectParam?: PostgreSQLConnectParam | null;
   /** MariaDB配置，Type为MARIADB时返回 */
-  MariaDBConnectParam: MariaDBConnectParam | null;
+  MariaDBConnectParam?: MariaDBConnectParam | null;
   /** SQLServer配置，Type为SQLSERVER时返回 */
-  SQLServerConnectParam: SQLServerConnectParam | null;
+  SQLServerConnectParam?: SQLServerConnectParam | null;
   /** Ctsdb配置，Type为CTSDB时返回 */
-  CtsdbConnectParam: CtsdbConnectParam | null;
+  CtsdbConnectParam?: CtsdbConnectParam | null;
   /** Doris 配置，Type 为 DORIS 时返回 */
-  DorisConnectParam: DorisConnectParam | null;
+  DorisConnectParam?: DorisConnectParam | null;
   /** Kafka配置，Type 为 KAFKA 时返回 */
   KafkaConnectParam?: KafkaConnectParam | null;
+  /** MQTT配置，Type 为 MQTT 时返回 */
+  MqttConnectParam?: MqttConnectParam | null;
 }
 
 /** 查询连接源具体数据的返参 */
 declare interface DescribeConnectResourceResp {
   /** 连接源的Id */
-  ResourceId: string | null;
+  ResourceId?: string | null;
   /** 连接源名称 */
-  ResourceName: string | null;
+  ResourceName?: string | null;
   /** 连接源描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 连接源类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 连接源的状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 连接源的创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 连接源的异常信息 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
   /** 连接源的当前所处步骤 */
-  CurrentStep: string | null;
+  CurrentStep?: string | null;
   /** 步骤列表 */
-  StepList: string[] | null;
+  StepList?: string[] | null;
   /** MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回 */
-  MySQLConnectParam: MySQLConnectParam | null;
+  MySQLConnectParam?: MySQLConnectParam | null;
   /** PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回 */
-  PostgreSQLConnectParam: PostgreSQLConnectParam | null;
+  PostgreSQLConnectParam?: PostgreSQLConnectParam | null;
   /** Dts配置，Type为DTS时返回 */
-  DtsConnectParam: DtsConnectParam | null;
+  DtsConnectParam?: DtsConnectParam | null;
   /** MongoDB配置，Type为MONGODB时返回 */
-  MongoDBConnectParam: MongoDBConnectParam | null;
+  MongoDBConnectParam?: MongoDBConnectParam | null;
   /** Es配置，Type为ES时返回 */
-  EsConnectParam: EsConnectParam | null;
+  EsConnectParam?: EsConnectParam | null;
   /** ClickHouse配置，Type为CLICKHOUSE时返回 */
-  ClickHouseConnectParam: ClickHouseConnectParam | null;
+  ClickHouseConnectParam?: ClickHouseConnectParam | null;
   /** MariaDB配置，Type为MARIADB时返回 */
-  MariaDBConnectParam: MariaDBConnectParam | null;
+  MariaDBConnectParam?: MariaDBConnectParam | null;
   /** SQLServer配置，Type为SQLSERVER时返回 */
-  SQLServerConnectParam: SQLServerConnectParam | null;
+  SQLServerConnectParam?: SQLServerConnectParam | null;
   /** Ctsdb配置，Type为CTSDB时返回 */
-  CtsdbConnectParam: CtsdbConnectParam | null;
+  CtsdbConnectParam?: CtsdbConnectParam | null;
   /** Doris 配置，Type 为 DORIS 时返回 */
-  DorisConnectParam: DorisConnectParam | null;
+  DorisConnectParam?: DorisConnectParam | null;
   /** Kafka配置，Type 为 KAFKA 时返回 */
   KafkaConnectParam?: KafkaConnectParam | null;
+  /** MQTT配置，Type 为 MQTT 时返回 */
+  MqttConnectParam?: MqttConnectParam | null;
 }
 
 /** 查询连接源列表的返参 */
@@ -889,21 +895,21 @@ declare interface DtsModifyConnectParam {
 /** Dts类型入参 */
 declare interface DtsParam {
   /** Dts实例Id */
-  Resource: string;
+  Resource: string | null;
   /** Dts的连接ip */
-  Ip?: string;
+  Ip?: string | null;
   /** Dts的连接port */
-  Port?: number;
+  Port?: number | null;
   /** Dts订阅的topic */
-  Topic?: string;
+  Topic?: string | null;
   /** Dts消费分组的Id */
-  GroupId?: string;
+  GroupId?: string | null;
   /** Dts消费分组的账号 */
-  GroupUser?: string;
+  GroupUser?: string | null;
   /** Dts消费分组的密码 */
-  GroupPassword?: string;
+  GroupPassword?: string | null;
   /** false同步原始数据，true同步解析后的json格式数据,默认true */
-  TranSql?: boolean;
+  TranSql?: boolean | null;
 }
 
 /** 动态硬盘扩容配置 */
@@ -973,53 +979,53 @@ declare interface EsModifyConnectParam {
 /** Es类型入参 */
 declare interface EsParam {
   /** 实例资源 */
-  Resource: string;
+  Resource: string | null;
   /** Es的连接port */
-  Port?: number;
+  Port?: number | null;
   /** Es用户名 */
-  UserName?: string;
+  UserName?: string | null;
   /** Es密码 */
-  Password?: string;
+  Password?: string | null;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean;
+  SelfBuilt?: boolean | null;
   /** 实例vip */
-  ServiceVip?: string;
+  ServiceVip?: string | null;
   /** 实例的vpcId */
-  UniqVpcId?: string;
+  UniqVpcId?: string | null;
   /** Es是否抛弃解析失败的消息 */
-  DropInvalidMessage?: boolean;
+  DropInvalidMessage?: boolean | null;
   /** Es自定义index名称 */
-  Index?: string;
+  Index?: string | null;
   /** Es自定义日期后缀 */
-  DateFormat?: string;
+  DateFormat?: string | null;
   /** 非json格式数据的自定义key */
-  ContentKey?: string;
+  ContentKey?: string | null;
   /** Es是否抛弃非json格式的消息 */
-  DropInvalidJsonMessage?: boolean;
+  DropInvalidJsonMessage?: boolean | null;
   /** 转储到Es中的文档ID取值字段名 */
-  DocumentIdField?: string;
+  DocumentIdField?: string | null;
   /** Es自定义index名称的类型，STRING，JSONPATH，默认为STRING */
-  IndexType?: string;
+  IndexType?: string | null;
   /** 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效 */
-  DropCls?: DropCls;
+  DropCls?: DropCls | null;
   /** 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键 */
-  DatabasePrimaryKey?: string;
+  DatabasePrimaryKey?: string | null;
   /** 死信队列 */
-  DropDlq?: FailureParam;
+  DropDlq?: FailureParam | null;
   /** 使用数据订阅格式导入 es 时，消息与 es 索引字段映射关系。不填默认为默认字段匹配 */
-  RecordMappingList?: EsRecordMapping[];
+  RecordMappingList?: EsRecordMapping[] | null;
   /** 消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射 */
-  DateField?: string;
+  DateField?: string | null;
   /** 用来区分当前索引映射，属于新建索引还是存量索引。"EXIST_MAPPING"：从存量索引中选择；"NEW_MAPPING"：新建索引 */
-  RecordMappingMode?: string;
+  RecordMappingMode?: string | null;
 }
 
 /** 消息字段与 es 索引的映射关系 */
 declare interface EsRecordMapping {
   /** es 索引成员名称 */
-  ColumnName?: string;
+  ColumnName?: string | null;
   /** 消息字段名称 */
-  JsonKey?: string;
+  JsonKey?: string | null;
 }
 
 /** EventBus配置 */
@@ -1362,13 +1368,13 @@ declare interface KVParam {
 
 /** Kafka连接源参数 */
 declare interface KafkaConnectParam {
-  /** Kafka连接源的实例资源, 非自建时必填 */
+  /** Kafka连接源的实例资源, 非自建时必填，NetworkType=VPC时传clb实例id */
   Resource?: string | null;
   /** 是否为自建集群 */
   SelfBuilt?: boolean | null;
   /** 是否更新到关联的Dip任务 */
   IsUpdate?: boolean | null;
-  /** Kafka连接的broker地址, 自建时必填 */
+  /** Kafka连接的broker地址, NetworkType=PUBLIC公网时必填 */
   BrokerAddress?: string | null;
   /** CKafka连接源的实例资源地域, 跨地域时必填 */
   Region?: string | null;
@@ -1467,25 +1473,25 @@ declare interface MariaDBModifyConnectParam {
 /** MariaDB类型入参 */
 declare interface MariaDBParam {
   /** MariaDB的数据库名称，"*"为全数据库 */
-  Database: string;
+  Database: string | null;
   /** MariaDB的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写 */
-  Table: string;
+  Table: string | null;
   /** 该MariaDB在连接管理内的Id */
-  Resource: string;
+  Resource: string | null;
   /** 复制存量信息(schema_only不复制, initial全量)，默认位initial */
-  SnapshotMode?: string;
+  SnapshotMode?: string | null;
   /** 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键 */
-  KeyColumns?: string;
+  KeyColumns?: string | null;
   /** 当Table输入的是前缀时，该项值为true，否则为false */
-  IsTablePrefix?: boolean;
+  IsTablePrefix?: boolean | null;
   /** 输出格式，DEFAULT、CANAL_1、CANAL_2 */
-  OutputFormat?: string;
+  OutputFormat?: string | null;
   /** 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic */
-  IncludeContentChanges?: string;
+  IncludeContentChanges?: string | null;
   /** 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句 */
-  IncludeQuery?: boolean;
+  IncludeQuery?: boolean | null;
   /** 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带 */
-  RecordWithSchema?: boolean;
+  RecordWithSchema?: boolean | null;
 }
 
 /** 修改实例属性的配置对象 */
@@ -1541,29 +1547,75 @@ declare interface MongoDBModifyConnectParam {
 /** MongoDB类型入参 */
 declare interface MongoDBParam {
   /** MongoDB的数据库名称 */
-  Database: string;
+  Database: string | null;
   /** MongoDB的集群 */
-  Collection: string;
+  Collection: string | null;
   /** 是否复制存量数据，默认传参true */
-  CopyExisting: boolean;
+  CopyExisting: boolean | null;
   /** 实例资源 */
-  Resource: string;
+  Resource: string | null;
   /** MongoDB的连接ip */
-  Ip?: string;
+  Ip?: string | null;
   /** MongoDB的连接port */
-  Port?: number;
+  Port?: number | null;
   /** MongoDB数据库用户名 */
-  UserName?: string;
+  UserName?: string | null;
   /** MongoDB数据库密码 */
-  Password?: string;
+  Password?: string | null;
   /** 监听事件类型，为空时表示全选。取值包括insert,update,replace,delete,invalidate,drop,dropdatabase,rename，多个类型间使用,逗号分隔 */
-  ListeningEvent?: string;
+  ListeningEvent?: string | null;
   /** 主从优先级，默认主节点 */
-  ReadPreference?: string;
+  ReadPreference?: string | null;
   /** 聚合管道 */
-  Pipeline?: string;
+  Pipeline?: string | null;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean;
+  SelfBuilt?: boolean | null;
+}
+
+/** MQTT连接源参数 */
+declare interface MqttConnectParam {
+  /** MQTT连接源的用户名 */
+  UserName: string | null;
+  /** MQTT连接源的密码 */
+  Password: string | null;
+  /** MQTT连接源的实例资源 */
+  Resource: string | null;
+  /** MQTT Instance vpc-id */
+  UniqVpcId: string | null;
+  /** 是否为自建集群 */
+  SelfBuilt?: boolean | null;
+  /** 是否更新到关联的Dip任务 */
+  IsUpdate?: boolean | null;
+  /** MQTT连接源的实例资源地域, 跨地域时必填 */
+  Region?: string | null;
+}
+
+/** 创建MQTT 为Source的Data Hub Task参数 */
+declare interface MqttParam {
+  /** 需要同步的MQTT Topic列表, CSV格式 */
+  Topics: string | null;
+  /** MQTT clean-session */
+  CleanSession: boolean | null;
+  /** MQTT instance-id */
+  Resource?: string | null;
+  /** MQTT实例VIP */
+  Ip?: string | null;
+  /** MQTT VIP 端口 */
+  Port?: number | null;
+  /** MQTT实例用户名 */
+  UserName?: string | null;
+  /** MQTT实例内账户密码 */
+  Password?: string | null;
+  /** QoS */
+  Qos?: number | null;
+  /** tasks.max 订阅Topic的并发Task个数, 默认为1; 当设置大于1时, 使用Shared Subscription */
+  MaxTasks?: number | null;
+  /** MQTT 实例的Service VIP */
+  ServiceVip?: string | null;
+  /** MQTT实例的VPC ID */
+  UniqVpcId?: string | null;
+  /** 是否为自建集群, MQTT只支持非自建集群 */
+  SelfBuilt?: boolean | null;
 }
 
 /** MySQL连接源参数 */
@@ -1747,31 +1799,31 @@ declare interface PostgreSQLModifyConnectParam {
 /** PostgreSQL类型入参 */
 declare interface PostgreSQLParam {
   /** PostgreSQL的数据库名称 */
-  Database: string;
+  Database: string | null;
   /** PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名" */
-  Table: string;
+  Table: string | null;
   /** 该PostgreSQL在连接管理内的Id */
-  Resource: string;
+  Resource: string | null;
   /** 插件名(decoderbufs/pgoutput)，默认为decoderbufs */
-  PluginName: string;
+  PluginName: string | null;
   /** 复制存量信息(never增量, initial全量)，默认为initial */
-  SnapshotMode?: string;
+  SnapshotMode?: string | null;
   /** 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填 */
-  DataFormat?: string;
+  DataFormat?: string | null;
   /** "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入 */
-  DataTargetInsertMode?: string;
+  DataTargetInsertMode?: string | null;
   /** 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键 */
-  DataTargetPrimaryKeyField?: string;
+  DataTargetPrimaryKeyField?: string | null;
   /** 表与消息间的映射关系 */
-  DataTargetRecordMapping?: RecordMapping[];
+  DataTargetRecordMapping?: RecordMapping[] | null;
   /** 是否抛弃解析失败的消息，默认为true */
-  DropInvalidMessage?: boolean;
+  DropInvalidMessage?: boolean | null;
   /** 输入的table是否为正则表达式 */
-  IsTableRegular?: boolean;
+  IsTableRegular?: boolean | null;
   /** 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键 */
-  KeyColumns?: string;
+  KeyColumns?: string | null;
   /** 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带 */
-  RecordWithSchema?: boolean;
+  RecordWithSchema?: boolean | null;
 }
 
 /** 消息价格实体 */
@@ -1973,13 +2025,13 @@ declare interface SQLServerModifyConnectParam {
 /** SQLServer类型入参 */
 declare interface SQLServerParam {
   /** SQLServer的数据库名称 */
-  Database: string;
+  Database: string | null;
   /** SQLServer的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写 */
-  Table: string;
+  Table: string | null;
   /** 该SQLServer在连接管理内的Id */
-  Resource: string;
+  Resource: string | null;
   /** 复制存量信息(schema_only增量, initial全量)，默认为initial */
-  SnapshotMode?: string;
+  SnapshotMode?: string | null;
 }
 
 /** 标准版销售信息 */
@@ -2009,9 +2061,9 @@ declare interface ScfParam {
   /** SCF云函数版本及别名, 默认为$DEFAULT */
   Qualifier?: string | null;
   /** 每批最大发送消息数, 默认为1000 */
-  BatchSize?: number;
+  BatchSize?: number | null;
   /** SCF调用失败后重试次数, 默认为5 */
-  MaxRetries?: number;
+  MaxRetries?: number | null;
 }
 
 /** 数据处理——二次解析参数 */
@@ -2069,15 +2121,15 @@ declare interface Tag {
 /** Tdw类型入参 */
 declare interface TdwParam {
   /** Tdw的bid */
-  Bid: string;
+  Bid: string | null;
   /** Tdw的tid */
-  Tid: string;
+  Tid: string | null;
   /** 默认true */
-  IsDomestic?: boolean;
+  IsDomestic?: boolean | null;
   /** TDW地址，默认tl-tdbank-tdmanager.tencent-distribute.com */
-  TdwHost?: string;
+  TdwHost?: string | null;
   /** TDW端口，默认8099 */
-  TdwPort?: number;
+  TdwPort?: number | null;
 }
 
 /** 返回的topic对象 */

@@ -1184,6 +1184,26 @@ declare interface NICAsset {
   IsNewAsset?: number | null;
 }
 
+/** 该结构体用来传入告警的key，以更新告警的status */
+declare interface NewAlertKey {
+  /** 需要更改的用户appid */
+  AppId: string;
+  /** 告警类别 */
+  Type: string;
+  /** 告警子类别 */
+  SubType: string;
+  /** 告警来源 */
+  Source: string;
+  /** 告警名称 */
+  Name: string;
+  /** 告警key */
+  Key: string;
+  /** 时间 */
+  Date: string;
+  /** 状态 */
+  Status?: number;
+}
+
 /** 集团账号成员详情 */
 declare interface OrganizationUserInfo {
   /** 成员账号Uin */
@@ -2833,6 +2853,24 @@ declare interface StopRiskCenterTaskResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAlertStatusListRequest {
+  /** 告警ID列表 */
+  ID: NewAlertKey[];
+  /** 操作类型 1:撤销处置 2:标记为已处置 3:标记忽略 4:取消标记处置5:取消标记忽略 */
+  OperateType: number;
+  /** 被调用的集团账号的成员id */
+  OperatedMemberId?: string[];
+}
+
+declare interface UpdateAlertStatusListResponse {
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 结果代码 */
+  Code?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Csip 云安全一体化平台} */
 declare interface Csip {
   (): Versions;
@@ -2914,6 +2952,8 @@ declare interface Csip {
   ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
   /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
   StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
+  /** 批量告警状态处理 {@link UpdateAlertStatusListRequest} {@link UpdateAlertStatusListResponse} */
+  UpdateAlertStatusList(data: UpdateAlertStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertStatusListResponse>;
 }
 
 export declare type Versions = ["2022-11-21"];

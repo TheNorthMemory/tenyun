@@ -2427,7 +2427,7 @@ declare interface DescribeKafkaRechargesResponse {
 declare interface DescribeLogContextRequest {
   /** 要查询的日志主题ID */
   TopicId: string;
-  /** 日志时间, 格式: YYYY-mm-dd HH:MM:SS.FFF */
+  /** 日志时间, 需按照 UTC+8 时区将日志中的Unix时间戳转换为 YYYY-mm-dd HH:MM:SS.FFF 格式的字符串。 */
   BTime: string;
   /** 日志包序号。SearchLog接口返回信息中Results结构体中的PkgId。 */
   PkgId: string;
