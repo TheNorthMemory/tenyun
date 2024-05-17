@@ -182,14 +182,6 @@ declare interface WeChatAccountInfo {
   DeviceId?: string;
 }
 
-declare interface DescribeRiskAssessmentRequest {
-}
-
-declare interface DescribeRiskAssessmentResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ManageMarketingRiskRequest {
   /** 业务入参 */
   BusinessSecurityData?: InputManageMarketingRisk;
@@ -207,8 +199,6 @@ declare interface ManageMarketingRiskResponse {
 /** {@link Rce 全栈式风控引擎} */
 declare interface Rce {
   (): Versions;
-  /** 查询风险评估结果 {@link DescribeRiskAssessmentRequest} {@link DescribeRiskAssessmentResponse} */
-  DescribeRiskAssessment(data?: DescribeRiskAssessmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskAssessmentResponse>;
   /** 全栈式风控引擎 {@link ManageMarketingRiskRequest} {@link ManageMarketingRiskResponse} */
   ManageMarketingRisk(data?: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
 }

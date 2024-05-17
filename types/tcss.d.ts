@@ -6179,13 +6179,13 @@ declare interface DescribeAssetImageRegistryVulListExportRequest {
   Filters?: AssetFilters[];
   /** 镜像信息 */
   ImageInfo?: ImageInfo;
-  /** 镜像标识Id */
+  /** 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取 */
   Id?: number;
 }
 
 declare interface DescribeAssetImageRegistryVulListExportResponse {
   /** excel文件下载地址 */
-  DownloadUrl: string | null;
+  DownloadUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6199,15 +6199,15 @@ declare interface DescribeAssetImageRegistryVulListRequest {
   Filters?: AssetFilters[];
   /** 镜像信息 */
   ImageInfo?: ImageInfo;
-  /** 镜像标识Id */
+  /** 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取 */
   Id?: number;
 }
 
 declare interface DescribeAssetImageRegistryVulListResponse {
   /** 镜像漏洞列表 */
-  List: ImageVul[] | null;
+  List?: ImageVul[] | null;
   /** 总数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

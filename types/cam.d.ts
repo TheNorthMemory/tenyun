@@ -41,27 +41,27 @@ declare interface AttachEntityOfPolicy {
 /** 关联策略信息 */
 declare interface AttachPolicyInfo {
   /** 策略id */
-  PolicyId: number;
+  PolicyId?: number;
   /** 策略名称 */
-  PolicyName: string | null;
+  PolicyName?: string | null;
   /** 创建时间 */
-  AddTime: string | null;
+  AddTime?: string | null;
   /** 创建来源，1 通过控制台创建, 2 通过策略语法创建。 */
-  CreateMode: number | null;
+  CreateMode?: number | null;
   /** 取值为user和QCS */
-  PolicyType: string | null;
+  PolicyType?: string | null;
   /** 策略备注 */
-  Remark: string | null;
-  /** 策略关联操作者主帐号 */
-  OperateOwnerUin: string | null;
-  /** 策略关联操作者ID，如果UinType为0表示子帐号Uin，如果UinType为1表示角色ID */
-  OperateUin: string | null;
-  /** UinType为0表示OperateUin字段是子帐号Uin，如果UinType为1表示OperateUin字段是角色ID */
-  OperateUinType: number | null;
+  Remark?: string | null;
+  /** 策略关联操作者主账号 */
+  OperateOwnerUin?: string | null;
+  /** 策略关联操作者ID，如果UinType为0表示子账号Uin，如果UinType为1表示角色ID */
+  OperateUin?: string | null;
+  /** UinType为0表示OperateUin字段是子账号Uin，如果UinType为1表示OperateUin字段是角色ID */
+  OperateUinType?: number | null;
   /** 是否已下线 */
-  Deactived: number | null;
+  Deactived?: number | null;
   /** 已下线的产品列表 */
-  DeactivedDetail: string[] | null;
+  DeactivedDetail?: string[] | null;
 }
 
 /** 角色关联的策略信息 */
@@ -238,11 +238,11 @@ declare interface LoginActionFlagIntl {
 
 /** 登录和敏感操作flag */
 declare interface LoginActionMfaFlag {
-  /** 是否设置手机号为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置 */
+  /** 是否设置手机号为登录和敏感操作安全校验方式， 1: 设置，0: 不设置 */
   Phone?: number;
-  /** 是否设置软token为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置 */
+  /** 是否设置软token为登录和敏感操作安全校验方式， 1: 设置，0: 不设置 */
   Stoken?: number;
-  /** 是否设置微信为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置 */
+  /** 是否设置微信为登录和敏感操作安全校验方式， 1: 设置，0: 不设置 */
   Wechat?: number;
 }
 
@@ -585,12 +585,12 @@ declare interface CreateMessageReceiverResponse {
 declare interface CreateOIDCConfigRequest {
   /** 身份提供商URL */
   IdentityUrl: string;
-  /** 签名公钥，需要base64 */
-  IdentityKey: string;
   /** 客户端ID */
   ClientId: string[];
   /** 名称 */
   Name: string;
+  /** 签名公钥，需要base64 */
+  IdentityKey: string;
   /** 描述 */
   Description?: string;
 }
@@ -691,8 +691,6 @@ declare interface CreateServiceLinkedRoleResponse {
 declare interface CreateUserOIDCConfigRequest {
   /** 身份提供商URL。OpenID Connect身份提供商标识。对应企业IdP提供的Openid-configuration中"issuer"字段的值。 */
   IdentityUrl: string;
-  /** 签名公钥，需要base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的帐号安全，建议您定期轮换签名公钥。 */
-  IdentityKey: string;
   /** 客户端ID，在OpenID Connect身份提供商注册的客户端ID。 */
   ClientId: string;
   /** 授权请求Endpoint，OpenID Connect身份提供商授权地址。对应企业IdP提供的Openid-configuration中"authorization_endpoint"字段的值。 */
@@ -703,6 +701,8 @@ declare interface CreateUserOIDCConfigRequest {
   ResponseMode: string;
   /** 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段 */
   MappingFiled: string;
+  /** 签名公钥，需要base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的账号安全，建议您定期轮换签名公钥。 */
+  IdentityKey: string;
   /** 授权请求Scope。openid; email;profile。授权请求信息范围。默认必选openid。 */
   Scope?: string[];
   /** 描述 */
@@ -1070,7 +1070,7 @@ declare interface GetCustomMFATokenInfoRequest {
 }
 
 declare interface GetCustomMFATokenInfoResponse {
-  /** 自定义多因子验证Token对应的帐号Id */
+  /** 自定义多因子验证Token对应的账号Id */
   Uin?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1701,12 +1701,12 @@ declare interface UpdateGroupResponse {
 declare interface UpdateOIDCConfigRequest {
   /** 身份提供商URL */
   IdentityUrl: string;
-  /** 签名公钥，需要base64 */
-  IdentityKey: string;
   /** 客户端ID */
   ClientId: string[];
   /** 名称 */
   Name: string;
+  /** 签名公钥，需要base64 */
+  IdentityKey: string;
   /** 描述 */
   Description?: string;
 }
@@ -1781,8 +1781,6 @@ declare interface UpdateSAMLProviderResponse {
 declare interface UpdateUserOIDCConfigRequest {
   /** 身份提供商URL。OpenID Connect身份提供商标识。对应企业IdP提供的Openid-configuration中"issuer"字段的值，该URL必须以https开头，符合标准URL格式，不允许带有query参数（以?标识）、fragment片段（以#标识）和登录信息（以@标识）。 */
   IdentityUrl: string;
-  /** RSA签名公钥，JWKS格式，需要进行base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的账号安全，建议您定期轮换签名公钥。 */
-  IdentityKey: string;
   /** 客户端ID，在OpenID Connect身份提供商注册的客户端ID，允许英文字母、数字、特殊字符.-_:/，不能以特殊字符.-_:/开头，单个客户端ID最大64个字符。 */
   ClientId: string;
   /** 授权请求Endpoint，OpenID Connect身份提供商授权地址。对应企业IdP提供的Openid-configuration中"authorization_endpoint"字段的值，该URL必须以https开头，符合标准URL格式，不允许带有query参数（以?标识）、fragment片段（以#标识）和登录信息（以@标识）。 */
@@ -1791,8 +1789,10 @@ declare interface UpdateUserOIDCConfigRequest {
   ResponseType: string;
   /** 授权请求Response mode。授权请求返回模式，有form_post和fragment两种可选模式，推荐选择form_post模式。 */
   ResponseMode: string;
-  /** 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段,仅支持英文字母、数宇、汉字、符号@、＆_[]-的组合，1-255个中文或英文字符 */
+  /** 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段,仅支持英文字母、数字、汉字、符号@、＆_[]-的组合，1-255个中文或英文字符 */
   MappingFiled: string;
+  /** RSA签名公钥，JWKS格式，需要进行base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的账号安全，建议您定期轮换签名公钥。 */
+  IdentityKey: string;
   /** 授权请求Scope。有openid; email;profile三种。代表授权请求信息范围openid表示请求访问用户的身份信息，email表示请求访问用户的电子邮件地址，profile表示请求访问用户的基本信息。默认必选openid。 */
   Scope?: string[];
   /** 描述，长度为1~255个英文或中文字符，默认值为空。 */

@@ -104,6 +104,14 @@ declare interface ChcHostDeniedActions {
   DenyActions: string[];
 }
 
+/** 描述了实例CPU拓扑结构的相关信息。 */
+declare interface CpuTopology {
+  /** 决定启用的CPU物理核心数。 */
+  CoreCount?: number;
+  /** 每核心线程数。该参数决定是否开启或关闭超线程。1 表示关闭超线程 2 表示开启超线程 不设置时，实例使用默认的超线程策略。开关超线程请参考文档：[开启与关闭超线程](https://cloud.tencent.com/document/product/213/103798)。 */
+  ThreadPerCore?: number;
+}
+
 /** 描述了数据盘的信息 */
 declare interface DataDisk {
   /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
@@ -2834,6 +2842,8 @@ declare interface RunInstancesRequest {
   UserData?: string;
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例 */
   DryRun?: boolean;
+  /** 描述了实例CPU拓扑结构的相关信息。若不指定该参数，则按系统资源情况决定。 */
+  CpuTopology?: CpuTopology;
   /** CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。 */
   CamRoleName?: string;
   /** 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。 */

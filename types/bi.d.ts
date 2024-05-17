@@ -170,6 +170,8 @@ declare interface EmbedTokenInfo {
   UserId?: string | null;
   /** 访问次数限制，限制范围1-99999，为空则不设置访问次数限制 */
   TicketNum?: number | null;
+  /** 全局参数 */
+  GlobalParam?: string | null;
 }
 
 /** 自定义错误信息对象 */
@@ -583,6 +585,8 @@ declare interface CreateEmbedTokenRequest {
   UserId?: string;
   /** 访问次数限制，限制范围1-99999，为空则不设置访问次数限制 */
   TicketNum?: number;
+  /** 全局筛选参数 报表过滤条件的全局参数。 格式为JSON格式的字符串**目前仅支持字符类型页面参数绑定到全局参数**[ { "ParamKey": "name", //页面参数名称 "JoinType": "AND", // 连接方式,目前仅支持AND "WhereList": [ { "Operator": "-neq", // 操作符，参考以下说明 "Value": [ //操作值，单值数组只传一个值 "zZWJMD", "ZzVGHX", "湖南省", "河北省" ] } ] }, { "ParamKey": "genderParam", "JoinType": "AND", "WhereList": [ { "Operator": "-neq", "Value": [ "男" ] } ] }]Operator 目前支持-neq 不等于!=操作符-eq 等于=操作符-is in操作符 */
+  GlobalParam?: string;
 }
 
 declare interface CreateEmbedTokenResponse {

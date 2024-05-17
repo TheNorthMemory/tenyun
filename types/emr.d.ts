@@ -794,6 +794,14 @@ declare interface MetaDbInfo {
   MetaDBInfo: CustomMetaInfo;
 }
 
+/** 指标tag */
+declare interface MetricTags {
+  /** 指标单位 */
+  Unit?: string | null;
+  /** 指标Type */
+  Type?: string | null;
+}
+
 /** 强制修改标签 */
 declare interface ModifyResourceTags {
   /** 集群id 或者 cvm id */
@@ -1034,6 +1042,38 @@ declare interface OutterResource {
   DiskSize: number | null;
   /** 规格 */
   InstanceType: string | null;
+}
+
+/** 概览数据 */
+declare interface OverviewMetricData {
+  /** 指标名 */
+  Metric?: string | null;
+  /** 第一个数据时间戳 */
+  First?: number | null;
+  /** 最后一个数据时间戳 */
+  Last?: number | null;
+  /** 采样点时间间隔 */
+  Interval?: number | null;
+  /** 采样点数据 */
+  DataPoints?: string[] | null;
+  /** 指标tags */
+  Tags?: MetricTags | null;
+}
+
+/** Hbase的TableMetric Overview返回 */
+declare interface OverviewRow {
+  /** 表名字 */
+  Table?: string;
+  /** 读请求次数 */
+  ReadRequestCount?: number;
+  /** 写请求次数 */
+  WriteRequestCount?: number;
+  /** 当前memstore的size */
+  MemstoreSize?: number;
+  /** 当前region中StroreFile的size */
+  StoreFileSize?: number;
+  /** regions，点击可跳转 */
+  Operation?: string;
 }
 
 /** 用于创建集群价格清单-节点组成部分价格 */
@@ -1476,6 +1516,22 @@ declare interface SubnetInfo {
   SubnetName?: string | null;
   /** 子网信息（ID） */
   SubnetId?: string | null;
+}
+
+/** 表格schema信息 */
+declare interface TableSchemaItem {
+  /** 列标识 */
+  Name: string;
+  /** 是否可按该列排序 */
+  Sortable: boolean;
+  /** 是否可筛选 */
+  WithFilter: boolean;
+  /** 筛选的候选集 */
+  Candidates: string[] | null;
+  /** 是否可点击 */
+  Clickable: boolean | null;
+  /** 展示的名字 */
+  Title: string | null;
 }
 
 /** 标签 */
@@ -2070,6 +2126,56 @@ declare interface DescribeEmrApplicationStaticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEmrOverviewMetricsRequest {
+  /** 结束时间 */
+  End: number;
+  /** 指标名 */
+  Metric: string;
+  /** 集群id */
+  InstanceId: string;
+  /** 粒度 30s-max 1m-max 1h-max等 */
+  Downsample: string;
+  /** 起始时间，画饼状图时不传 */
+  Start?: number;
+  /** 聚合方法，扩展用，这里目前不用传 */
+  Aggregator?: string;
+  /** 指标要查询的具体type 如："{"type":"CapacityTotal|CapacityRemaining"}" */
+  Tags?: string;
+}
+
+declare interface DescribeEmrOverviewMetricsResponse {
+  /** 指标数据明细 */
+  Result?: OverviewMetricData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHBaseTableOverviewRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 分页查询编号偏移量，从0开始 */
+  Offset: number;
+  /** 分页查询时的分页大小，最小1，最大100 */
+  Limit: number;
+  /** 表名称，模糊匹配 */
+  Table?: string;
+  /** 排序的字段，有默认值 */
+  OrderField?: string;
+  /** 默认为降序，asc代表升序，desc代表降序 */
+  OrderType?: string;
+}
+
+declare interface DescribeHBaseTableOverviewResponse {
+  /** 概览数据数组 */
+  TableMonitorList?: OverviewRow[];
+  /** 概览数据数组长度 */
+  TotalCount?: number;
+  /** 表schema信息 */
+  SchemaList?: TableSchemaItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHiveQueriesRequest {
   /** 集群ID */
   InstanceId: string;
@@ -2423,6 +2529,10 @@ declare interface InquiryPriceScaleOutInstanceRequest {
   RouterCount?: number;
   /** 扩容的Master节点数量。 */
   MasterCount?: number;
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR */
+  ResourceBaseType?: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
 }
 
 declare interface InquiryPriceScaleOutInstanceResponse {
@@ -2717,6 +2827,10 @@ declare interface ScaleOutInstanceRequest {
   ScaleOutServiceConfAssign?: string;
   /** 0表示关闭自动续费，1表示开启自动续费 */
   AutoRenew?: number;
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识 */
+  ResourceBaseType?: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
 }
 
 declare interface ScaleOutInstanceResponse {
@@ -2787,6 +2901,10 @@ declare interface TerminateInstanceRequest {
   InstanceId: string;
   /** 销毁节点ID。该参数为预留参数，用户无需配置。 */
   ResourceIds?: string[];
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识 */
+  ResourceBaseType?: string;
+  /** 计算资源ID */
+  ComputeResourceId?: string;
 }
 
 declare interface TerminateInstanceResponse {
@@ -2833,6 +2951,10 @@ declare interface Emr {
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
   /** 查询YARN的任务统计信息 {@link DescribeEmrApplicationStaticsRequest} {@link DescribeEmrApplicationStaticsResponse} */
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
+  /** 查询监控概览页指标数据 {@link DescribeEmrOverviewMetricsRequest} {@link DescribeEmrOverviewMetricsResponse} */
+  DescribeEmrOverviewMetrics(data: DescribeEmrOverviewMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrOverviewMetricsResponse>;
+  /** 【监控218】获取Hbase表级监控数据概览接口 {@link DescribeHBaseTableOverviewRequest} {@link DescribeHBaseTableOverviewResponse} */
+  DescribeHBaseTableOverview(data: DescribeHBaseTableOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableOverviewResponse>;
   /** 获取hive查询信息 {@link DescribeHiveQueriesRequest} {@link DescribeHiveQueriesResponse} */
   DescribeHiveQueries(data: DescribeHiveQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHiveQueriesResponse>;
   /** 获取Impala查询列表 {@link DescribeImpalaQueriesRequest} {@link DescribeImpalaQueriesResponse} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 246+ 款产品，11239+ 服务数</summary>
+<details><summary>共计 248+ 款产品，11245+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -193,7 +193,7 @@ ecdn | [全站加速网络](https://cloud.tencent.com/document/product/570) | 20
 ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 2019-07-19(139) |
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
-emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(41) |
+emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(43) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(54) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(81) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(73) | 2020-12-22(53) |
@@ -263,7 +263,7 @@ pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(90) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(25) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
-rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(2) |
+rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(1) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(97) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
@@ -331,11 +331,13 @@ tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 20
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) | 2020-09-18(17) |
+vcg | [视频生成](https://cloud.tencent.com/document/product/1770) | 2024-04-04(2) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(177) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(316) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(7) |
+vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(137) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(220) |

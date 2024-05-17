@@ -1647,10 +1647,10 @@ declare interface CreateCosRechargeRequest {
   Bucket: string;
   /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion: string;
-  /** COS文件所在文件夹的前缀 */
-  Prefix: string;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
   LogType: string;
+  /** COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
+  Prefix?: string;
   /** supported: "", "gzip", "lzop", "snappy"; 默认空 */
   Compress?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
@@ -2883,7 +2883,7 @@ declare interface ModifyCosRechargeRequest {
   Bucket?: string;
   /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion?: string;
-  /** COS文件所在文件夹的前缀 */
+  /** COS文件所在文件夹的前缀。为空串时投递存储桶下所有的文件。 */
   Prefix?: string;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文； 默认为minimalist_log */
   LogType?: string;
@@ -3239,8 +3239,8 @@ declare interface SearchCosRechargeInfoRequest {
   Bucket: string;
   /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion: string;
-  /** cos文件所在文件夹的前缀 */
-  Prefix: string;
+  /** COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
+  Prefix?: string;
   /** 压缩模式: "", "gzip", "lzop", "snappy"; 默认"" */
   Compress?: string;
 }

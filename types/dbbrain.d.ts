@@ -1449,19 +1449,19 @@ declare interface DescribeDBSpaceStatusRequest {
   InstanceId: string;
   /** 时间段天数，截止日期为当日，默认为7天。 */
   RangeDays?: number;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"mongodb" - 云数据库 MongoDB，默认为"mysql"。 */
   Product?: string;
 }
 
 declare interface DescribeDBSpaceStatusResponse {
   /** 磁盘增长量(MB)。 */
-  Growth: number;
+  Growth?: number;
   /** 磁盘剩余(MB)。 */
-  Remain: number;
+  Remain?: number;
   /** 磁盘总量(MB)。 */
-  Total: number;
+  Total?: number;
   /** 预计可用天数。 */
-  AvailableDays: number;
+  AvailableDays?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

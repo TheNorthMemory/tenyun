@@ -1719,7 +1719,7 @@ declare interface CreateCmqQueueRequest {
   PollingWaitSeconds?: number;
   /** 消息可见性超时。取值范围 1-43200 秒（即12小时内），默认值 30。 */
   VisibilityTimeout?: number;
-  /** 消息最大长度。取值范围 1024-65536 Byte（即1-64K），默认值 65536。 */
+  /** 消息最大长度。取值范围 1024-1048576 Byte（即1-1024K），默认值 1048576。 */
   MaxMsgSize?: number;
   /** 消息最长未确认时间。取值范围 30-43200 秒（30秒~12小时），默认值 3600 (1 小时)。 */
   MsgRetentionSeconds?: number;
@@ -3903,7 +3903,7 @@ declare interface ModifyCmqQueueAttributeResponse {
 declare interface ModifyCmqSubscriptionAttributeRequest {
   /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
   TopicName: string;
-  /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   SubscriptionName: string;
   /** 向 Endpoint 推送消息出现错误时，CMQ 推送服务器的重试策略。取值如下：（1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息。（2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始1s，后面是2s，4s，8s···由于 Topic 消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是 EXPONENTIAL_DECAY_RETRY。 */
   NotifyStrategy?: string;
@@ -4337,15 +4337,15 @@ declare interface SendCmqMsgRequest {
   QueueName: string;
   /** 消息内容 */
   MsgContent: string;
-  /** 延迟时间 */
+  /** 延迟时间。单位为秒，默认值为0秒，最大不能超过队列配置的消息最长未确认时间。 */
   DelaySeconds: number;
 }
 
 declare interface SendCmqMsgResponse {
   /** true表示发送成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 消息id */
-  MsgId: string;
+  MsgId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4555,7 +4555,7 @@ declare interface Tdmq {
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 获取集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 枚举cmq死信队列源队列 {@link DescribeCmqDeadLetterSourceQueuesRequest} {@link DescribeCmqDeadLetterSourceQueuesResponse} */
+  /** @deprecated 枚举cmq死信队列源队列 {@link DescribeCmqDeadLetterSourceQueuesRequest} {@link DescribeCmqDeadLetterSourceQueuesResponse} */
   DescribeCmqDeadLetterSourceQueues(data: DescribeCmqDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqDeadLetterSourceQueuesResponse>;
   /** 查询cmq队列详情 {@link DescribeCmqQueueDetailRequest} {@link DescribeCmqQueueDetailResponse} */
   DescribeCmqQueueDetail(data: DescribeCmqQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueueDetailResponse>;

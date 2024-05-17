@@ -235,11 +235,13 @@ import Tsf, { Versions as TsfVersions } from "./tsf";
 import Tsw, { Versions as TswVersions } from "./tsw";
 import Tts, { Versions as TtsVersions } from "./tts";
 import Ump, { Versions as UmpVersions } from "./ump";
+import Vcg, { Versions as VcgVersions } from "./vcg";
 import Vm, { Versions as VmVersions } from "./vm";
 import Vms, { Versions as VmsVersions } from "./vms";
 import Vod, { Versions as VodVersions } from "./vod";
 import Vpc, { Versions as VpcVersions } from "./vpc";
 import Vrs, { Versions as VrsVersions } from "./vrs";
+import Vtc, { Versions as VtcVersions } from "./vtc";
 import Waf, { Versions as WafVersions } from "./waf";
 import Wav, { Versions as WavVersions } from "./wav";
 import Wedata, { Versions as WedataVersions } from "./wedata";
@@ -485,11 +487,13 @@ export declare type SERVICE_VERSIONS = {
   tsw: TswVersions,
   tts: TtsVersions,
   ump: UmpVersions,
+  vcg: VcgVersions,
   vm: VmVersions,
   vms: VmsVersions,
   vod: VodVersions,
   vpc: VpcVersions,
   vrs: VrsVersions,
+  vtc: VtcVersions,
   waf: WafVersions,
   wav: WavVersions,
   wedata: WedataVersions,
@@ -980,6 +984,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tts: Tts,
   /** {@link Ump 客流数字化平台} */
   ump: Ump,
+  /** {@link Vcg 视频生成} */
+  vcg: Vcg,
   /** {@link Vm 视频内容安全} */
   vm: Vm,
   /** {@link Vms 语音消息} */
@@ -990,6 +996,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   vpc: Vpc,
   /** {@link Vrs 声音复刻} */
   vrs: Vrs,
+  /** {@link Vtc 视频转译} */
+  vtc: Vtc,
   /** {@link Waf Web 应用防火墙} */
   waf: Waf,
   /** {@link Wav 企业微信汽车行业版} */

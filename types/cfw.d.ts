@@ -2312,7 +2312,7 @@ declare interface DescribeIPStatusListRequest {
 }
 
 declare interface DescribeIPStatusListResponse {
-  /** ip状态信息 */
+  /** IP状态信息 */
   StatusList?: IPDefendStatus[];
   /** 状态码 */
   ReturnCode?: number;
