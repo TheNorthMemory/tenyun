@@ -533,29 +533,29 @@ declare interface DatahubTaskIdRes {
 /** Datahub任务信息 */
 declare interface DatahubTaskInfo {
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 任务名称 */
-  TaskName: string;
+  TaskName?: string;
   /** 任务类型，SOURCE数据接入，SINK数据流出 */
-  TaskType: string;
+  TaskType?: string;
   /** 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败 */
-  Status: number;
+  Status?: number;
   /** 数据源 */
-  SourceResource: DatahubResource | null;
+  SourceResource?: DatahubResource | null;
   /** 数据目标 */
-  TargetResource: DatahubResource | null;
+  TargetResource?: DatahubResource | null;
   /** 任务创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 异常信息 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
   /** 创建进度百分比 */
-  TaskProgress: number | null;
+  TaskProgress?: number | null;
   /** 任务当前处于的步骤 */
-  TaskCurrentStep: string | null;
+  TaskCurrentStep?: string | null;
   /** Datahub转储Id */
-  DatahubId: string | null;
+  DatahubId?: string | null;
   /** 步骤列表 */
-  StepList: string[] | null;
+  StepList?: string[] | null;
 }
 
 /** Datahub主题 */

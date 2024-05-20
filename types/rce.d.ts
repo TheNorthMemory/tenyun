@@ -4,13 +4,13 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 账号信息。 */
 declare interface AccountInfo {
-  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号8：设备号，仅支持IMEI、IMEIMD5、IDFA、IDFAMD510004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值。 */
+  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值。 */
   AccountType: number;
   /** QQ账号信息，AccountType是"1"时，该字段必填。 */
   QQAccount?: QQAccountInfo;
   /** 微信账号信息，AccountType是"2"时，该字段必填。 */
   WeChatAccount?: WeChatAccountInfo;
-  /** 其它账号信息，AccountType是8或10004时，该字段必填。 */
+  /** 其它账号信息，AccountType是10004时，该字段必填。 */
   OtherAccount?: OtherAccountInfo;
 }
 
@@ -34,7 +34,7 @@ declare interface InputDetails {
 
 /** 全栈式风控引擎入参 */
 declare interface InputManageMarketingRisk {
-  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号8：设备号，仅支持IMEI、IMEIMD5、IDFA、IDFAMD510004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值。 */
+  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值。 */
   Account: AccountInfo;
   /** 场景码，用于识别和区分不同的业务场景，可在控制台上新建和管理控制台链接：https://console.cloud.tencent.com/rce/risk/strategy/scene-root活动防刷默认场景码：e_activity_antirush 登录保护默认场景码：e_login_protection注册保护默认场景码：e_register_protection */
   SceneCode: string;
@@ -68,7 +68,7 @@ declare interface InputManageMarketingRisk {
   MacAddress?: string;
   /** 手机制造商ID，如果手机注册，请带上此信息。 */
   VendorId?: string;
-  /** 设备类型，账号类型（AccountType）为8时填写。1:IMEI；国际移动设备识别号（15-17位数字）；2:IMEIMD5；国际移动设备识别号，通过MD5加密后取32位小写值；3:IDFA；4:IDFAMD5；国际移动设备识别号，通过MD5加密后取32位小写值。 */
+  /** 设备类型(已不推荐使用)。 */
   DeviceType?: number;
   /** 扩展字段。 */
   Details?: InputDetails[];
@@ -96,11 +96,11 @@ declare interface OnlineScamInfo {
 
 /** 其它账号信息。 */
 declare interface OtherAccountInfo {
-  /** 其他账号信息；AccountType是8时，填入设备号（IMEI、IMEIMD5、IDFA、IDFAMD5）AccountType是10004时，填入中国大陆标准11位手机号的MD5值注释：MD5手机号加密方式，中国大陆11位手机号进行MD5加密，加密后取32位小写值设备号加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。 */
+  /** 其他账号信息；AccountType是10004时，填入中国大陆标准11位手机号的MD5值注释：MD5手机号加密方式，使用中国大陆11位手机号进行MD5加密，加密后取32位小写值。 */
   AccountId: string;
   /** 账号绑定的MD5手机号。注释：只支持标准中国大陆11位手机号MD5加密后位的32位小写字符串。 */
   MobilePhone?: string;
-  /** 用户设备号，支持IMEI、IMEIMD5、IDFA、IDFAMD5。注释：IMEIMD5、IDFAMD5加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。 */
+  /** 用户设备号（已不推荐使用）。 */
   DeviceId?: string;
 }
 
@@ -118,7 +118,7 @@ declare interface OutputManageMarketingRisk {
 
 /** 全栈式风控引擎出参值 */
 declare interface OutputManageMarketingRiskValue {
-  /** 账号ID：对应输入参数。当AccountType为1时，对应QQ的OpenId。当AccountType为2时，对应微信的OpenId/UnionId。当AccountType为8时，对应IMEI、IDFA、IMEIMD5或者IDFAMD5。当AccountType为10004时，对应手机号的MD5值。 */
+  /** 账号ID：对应输入参数。当AccountType为1时，对应QQ的OpenId。当AccountType为2时，对应微信的OpenId/UnionId。当AccountType为10004时，对应手机号的MD5值。 */
   UserId?: string | null;
   /** 操作时间戳，单位秒（对应输入参数）。 */
   PostTime?: number | null;
@@ -128,7 +128,7 @@ declare interface OutputManageMarketingRiskValue {
   UserIp?: string | null;
   /** 风险等级pass：无恶意review：低风险，需要人工审核reject：高风险，建议拦截 */
   RiskLevel?: string | null;
-  /** 风险类型，可能同时命中多个风险类型1: 账号信用低，账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素。11: 疑似低活跃账号，账号活跃度与正常用户有差异。2: 垃圾账号，疑似批量注册小号，近期存在严重违规或大量举报。21: 疑似小号，账号有疑似线上养号，小号等行为。22: 疑似违规账号，账号曾有违规行为、曾被举报过、曾因违规被处罚过等。3: 无效账号，送检账号参数无法成功解析，请检查微信 OpenId 是否有误/AppId 与 QQ OpenId 无法关联/微信 OpenId 权限是否开通/手机号是否为中国大陆手机号；4: 黑名单，该账号在业务侧有过拉黑记录。5: 白名单，业务自行有添加过白名单记录。101: 批量操作，存在 IP/设备/环境等因素的聚集性异常。1011: 疑似 IP 属性聚集，出现 IP 聚集。1012: 疑似设备属性聚集，出现设备聚集。102: 自动机，疑似自动机批量请求。103: 恶意行为-网赚，疑似网赚。104: 微信登录态无效，检查 WeChatAccessToken 参数，是否已经失效。201: 环境风险，环境异常操作 IP/设备/环境存在异常。当前 IP 为非常用 IP 或恶意 IP 段。2011: 疑似非常用IP，请求当前请求 IP 非该账号常用 IP。2012: 疑似 IP 异常，使用 IDC 机房 IP 或使用代理 IP 或使用恶意 IP 等。205: 非公网有效 IP，传进来的 IP 地址为内网 IP 地址或者 IP 保留地址。206: 设备异常，该设备存在异常的使用行为。2061: 疑似非常用设备，当前请求的设备非该账号常用设备。2062: 疑似虚拟设备，请求设备为模拟器、脚本、云设备等虚拟设备。2063: 疑似群控设备，请求设备为猫池、手机墙等群控设备。 */
+  /** 风险类型，可能同时命中多个风险类型1: 账号信用低，账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素。11: 疑似低活跃账号，账号活跃度与正常用户有差异。2: 垃圾账号，疑似批量注册小号，近期存在严重违规或大量举报。21: 疑似小号，账号有疑似线上养号，小号等行为。22: 疑似违规账号，账号曾有违规行为、曾被举报过、曾因违规被处罚过等。3: 无效账号，送检账号参数无法成功解析，请检查微信 OpenId 是否有误/AppId 与 QQ OpenId 无法关联/微信 OpenId 权限是否开通/手机号是否为中国大陆手机号；4: 黑名单，该账号在业务侧有过拉黑记录。5: 白名单，业务自行有添加过白名单记录。101: 批量操作，存在 IP/设备/环境等因素的聚集性异常。1011: 疑似 IP 属性聚集，出现 IP 聚集。1012: 疑似设备属性聚集，出现设备聚集。102: 自动机，疑似自动机批量请求。103: 恶意行为-网赚，疑似网赚。104: 微信登录态无效，检查 WeChatAccessToken 参数，是否已经失效。201: 环境风险，环境异常操作 IP/设备/环境存在异常。当前 IP 为非常用 IP 或恶意 IP 段。2011: 疑似非常用IP，请求当前请求 IP 非该账号常用 IP。2012: 疑似 IP 异常，使用 IDC 机房 IP 或使用代理 IP 或使用恶意 IP 等。205: 非公网有效 IP，传进来的 IP 地址为内网 IP 地址或者 IP 保留地址。 */
   RiskType?: number[] | null;
   /** 设备指纹ID，如果集成了设备指纹，并传入了正确的DeviceToken和Platform，该字段正常输出；如果DeviceToken异常（校验不通过），则会在RiskType中返回"-1"标签，ConstId字段为空；如果没有集成设备指纹ConstId字段默认为空。 */
   ConstId?: string | null;
@@ -146,7 +146,7 @@ declare interface QQAccountInfo {
   AssociateAccount?: string;
   /** 账号绑定的MD5手机号，注释：只支中国大陆11位手机号MD5加密后位的32位小写字符串。 */
   MobilePhone?: string;
-  /** 用户设备号，支持IMEI、IMEIMD5、IDFA、IDFAMD5注释：IMEIMD5、IDFAMD5加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。 */
+  /** 用户设备号（已不推荐使用）。 */
   DeviceId?: string;
 }
 
@@ -178,7 +178,7 @@ declare interface WeChatAccountInfo {
   AssociateAccount?: string;
   /** 账号绑定的MD5手机号，注释：只支持标准中国大陆11位手机号MD5加密后位的32位小写字符串。 */
   MobilePhone?: string;
-  /** 用户设备号，支持IMEI、IMEIMD5、IDFA、IDFAMD5注释：IMEIMD5、IDFAMD5加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。 */
+  /** 用户设备号（已不推荐使用）。 */
   DeviceId?: string;
 }
 

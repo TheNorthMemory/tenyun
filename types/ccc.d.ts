@@ -148,12 +148,20 @@ declare interface CompanyApplyInfo {
   CorporationId: string | null;
   /** 法定代表人身份证正反面扫描件。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
   CorporationIdPicUrl: string | null;
-  /** 业务经营范围 */
-  BusinessScope: string | null;
+  /** 安全合规使用承诺书。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  NetworkCommitmentPicUrl: string | null;
+  /** 是否与腾讯云账号的资质一致,0-不一致,1-一致 */
+  IsEqualTencentCloud: number | null;
+  /** 法定代表人手机号 */
+  CorporationMobile: string | null;
+  /** 法定代表人手机号码实名认证。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  CorporationMobilePicUrl: string | null;
+  /** 通话话术。(支持doc、docx格式的文档不超过50MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  UseDescribeFileUrl: string | null;
+  /** 公司授权函。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  CompanyAuthLetterPicUrl: string | null;
   /** 电话受理单。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
   AcceptPicUrl: string | null;
-  /** 电信入网承诺书。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  NetworkCommitmentPicUrl: string | null;
   /** 法定代表人手持身份证照，申请人类型为法定代表人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
   CorporationHoldingOnIdPicUrl?: string | null;
   /** 经办人名称，申请人类型为经办人时必填。 */
@@ -166,6 +174,12 @@ declare interface CompanyApplyInfo {
   OperatorHoldingOnIdPicUrl?: string | null;
   /** 委托授权书，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
   CommissionPicUrl?: string | null;
+  /** 经办人手机号，申请人类型为经办人时必填。 */
+  OperatorMobile?: string | null;
+  /** 经办人邮箱，申请人类型为经办人时必填。 */
+  OperatorEmail?: string | null;
+  /** 经办人手机号码实名认证，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
+  OperatorMobilePicUrl?: string | null;
 }
 
 /** 公司资质审核状态信息 */
@@ -184,6 +198,8 @@ declare interface CompanyStateInfo {
   State?: number | null;
   /** 公司统一社会信用代码 */
   BusinessId?: string | null;
+  /** 修改时间 */
+  ModifyTime?: number | null;
 }
 
 /** 查询预测式外呼任务列表元素 */
