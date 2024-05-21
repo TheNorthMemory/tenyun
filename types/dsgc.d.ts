@@ -152,7 +152,7 @@ declare interface AssessmentTask {
   ProgressPercent: number | null;
 }
 
-/** DSPA评估模版 */
+/** DSPA评估模板 */
 declare interface AssessmentTemplate {
   /** id */
   Id?: number | null;
@@ -1947,13 +1947,13 @@ declare interface CreateDSPAAssessmentRiskLevelResponse {
 declare interface CreateDSPAAssessmentRiskTemplateRequest {
   /** dspa实例id */
   DspaId: string;
-  /** 模版名称 */
+  /** 模板名称 */
   TemplateName: string;
   /** 风险等级id */
   RiskLevelId: number;
   /** 风险id列表 */
   RiskIdList: number[];
-  /** 模版描述 */
+  /** 模板描述 */
   TemplateDescription?: string;
 }
 
@@ -3059,7 +3059,7 @@ declare interface DescribeDSPAAssessmentTemplatesRequest {
   Offset?: number;
   /** 结果集个数限制。默认为20，最大值为100 */
   Limit?: number;
-  /** 过滤项。支持模糊搜索：（TemplateId，TemplateName）支持过滤：Source：模版来源，system / userUseType：模版类型，auto，semi-auto，law等Status：模版启用状态，draft / launched */
+  /** 过滤项。支持模糊搜索：（TemplateId，TemplateName）支持过滤：Source：模板来源，system / userUseType：模板类型，auto，semi-auto，law等Status：模板启用状态，draft / launched */
   Filters?: DspaAssessmentFilter[];
 }
 
@@ -4623,7 +4623,7 @@ declare interface Dsgc {
   CreateDSPAMetaResources(data: CreateDSPAMetaResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDSPAMetaResourcesResponse>;
   /** 新建用户自建云资源 {@link CreateDSPASelfBuildMetaResourceRequest} {@link CreateDSPASelfBuildMetaResourceResponse} */
   CreateDSPASelfBuildMetaResource(data: CreateDSPASelfBuildMetaResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDSPASelfBuildMetaResourceResponse>;
-  /** 创建规则别别名 {@link CreateIdentifyRuleAnotherNameRequest} {@link CreateIdentifyRuleAnotherNameResponse} */
+  /** 创建规则别名 {@link CreateIdentifyRuleAnotherNameRequest} {@link CreateIdentifyRuleAnotherNameResponse} */
   CreateIdentifyRuleAnotherName(data: CreateIdentifyRuleAnotherNameRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIdentifyRuleAnotherNameResponse>;
   /** 创建新分类 {@link CreateNewClassificationRequest} {@link CreateNewClassificationResponse} */
   CreateNewClassification(data?: CreateNewClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewClassificationResponse>;

@@ -204,7 +204,7 @@ declare interface AddOnSubtitle {
 
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
-  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能去水印Description：大模型摘要 */
+  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要 */
   Type?: string;
   /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
   ClassificationTask?: AiAnalysisTaskClassificationResult | null;
@@ -216,7 +216,7 @@ declare interface AiAnalysisResult {
   FrameTagTask?: AiAnalysisTaskFrameTagResult | null;
   /** 视频内容分析集锦任务的查询结果，当任务类型为 Highlight时有效。 */
   HighlightTask?: AiAnalysisTaskHighlightResult | null;
-  /** 视频内容分析去水印任务的查询结果，当任务类型为 DeLogo 时有效。 */
+  /** 视频内容分析智能擦除任务的查询结果，当任务类型为 DeLogo 时有效。 */
   DeLogoTask?: AiAnalysisTaskDelLogoResult | null;
   /** 视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。 */
   HeadTailTask?: AiAnalysisTaskHeadTailResult | null;
@@ -282,21 +282,21 @@ declare interface AiAnalysisTaskCoverResult {
   Output?: AiAnalysisTaskCoverOutput | null;
 }
 
-/** 智能去水印任务输入类型 */
+/** 智能擦除任务输入类型 */
 declare interface AiAnalysisTaskDelLogoInput {
-  /** 视频智能去水印模板 ID。 */
-  Definition: number;
+  /** 视频智能擦除模板 ID。 */
+  Definition?: number;
 }
 
-/** 智能去水印结果信息 */
+/** 智能擦除结果信息 */
 declare interface AiAnalysisTaskDelLogoOutput {
-  /** 去水印后文件的路径。 */
-  Path: string;
-  /** 去水印后文件的存储位置。 */
-  OutputStorage: TaskOutputStorage;
+  /** 擦除后文件的路径。 */
+  Path?: string;
+  /** 擦除后文件的存储位置。 */
+  OutputStorage?: TaskOutputStorage;
 }
 
-/** 智能去水印结果类型 */
+/** 智能擦除结果类型 */
 declare interface AiAnalysisTaskDelLogoResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
@@ -304,9 +304,9 @@ declare interface AiAnalysisTaskDelLogoResult {
   ErrCode?: number;
   /** 错误信息。 */
   Message?: string;
-  /** 智能去水印任务输入。 */
+  /** 智能擦除任务输入。 */
   Input?: AiAnalysisTaskDelLogoInput;
-  /** 智能去水印任务输出。 */
+  /** 智能擦除任务输出。 */
   Output?: AiAnalysisTaskDelLogoOutput | null;
 }
 

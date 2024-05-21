@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 248+ 款产品，11245+ 服务数</summary>
+<details><summary>共计 248+ 款产品，11249+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -325,7 +325,7 @@ trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/160
 trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(46) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(53) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
-trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(46) |
+trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(50) |
 tse | [微服务引擎](https://cloud.tencent.com/document/product/1364) | 2020-12-07(111) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(219) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |

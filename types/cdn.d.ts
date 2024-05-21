@@ -326,6 +326,8 @@ declare interface AuthenticationTypeD {
 declare interface AvifAdapter {
   /** 图片优化AvifAdapter配置项开关，取值有：on：开启off：关闭 */
   Switch?: string | null;
+  /** 当原图是 avif 且客户端 Accept 头包含 image/avif 时，直接返回原图。当原图是 avif 且客户端 Accept 头不包含 image/avif 时但包含 image/webp，将 avif 转 webp 格式返回。如果 Accept 头不包含 image/webp, 则转 jpeg 返回。可用的枚举值： - []- ["webp"]- ["jpeg"]- ["webp", "jpeg"]"webp"：是否开启 avif 转 webp，"jpeg": 是否开启 avif 转 jpeg。如果 webp 和 jpeg 都开启的情况下，webp 必须在 jpeg 前面。 */
+  FallbackFormats?: string[] | null;
 }
 
 /** s3源站回源鉴权。 */

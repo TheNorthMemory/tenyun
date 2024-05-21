@@ -530,6 +530,14 @@ declare interface QualityData {
   DataType: string;
 }
 
+/** 语音识别使用的配置 */
+declare interface RecognizeConfig {
+  /** 支持的语言，目前支持语言如下： Chinese = "zh" Chinese_TW = "zh-TW" English = "en" Vietnamese = "vi" Japanese = "ja" Korean = "ko" Indonesia = "id" Thai = "th" Portuguese = "pt" Turkish = "tr" Arabic = "ar" Spanish = "es" Hindi = "hi" French = "fr" */
+  Language?: string;
+  /** 选填，如果填写，则会启用翻译，不填则忽略。支持语言同Language字段。 */
+  TranslationLanguage?: string;
+}
+
 /** 云端录制控制参数。 */
 declare interface RecordParams {
   /** 录制模式：1：单流录制，分别录制房间的订阅UserId的音频和视频，将录制文件上传至云存储；2：合流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件上传至云存储； */
@@ -742,6 +750,24 @@ declare interface TimeValue {
   Time: number;
   /** 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ） */
   Value: number;
+}
+
+/** AI转录参数 */
+declare interface TranscriptionParams {
+  /** 转录机器人的UserId，用于进房发起转录任务。【注意】这个UserId不能与当前房间内的主播观众[UserId](https://cloud.tencent.com/document/product/647/46351)重复。如果一个房间发起多个转录任务时，机器人的userid也不能相互重复，否则会中断前一个任务。需要保证转录机器人UserId在房间内唯一。 */
+  UserId: string;
+  /** 转录机器人UserId对应的校验签名，即UserId和UserSig相当于转录机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910)的方案。 */
+  UserSig: string;
+  /** IM[管理员账户](https://cloud.tencent.com/document/product/269/31999)，如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。 */
+  IMAdminUserId?: string;
+  /** IM管理员账户生成的签名，用于向特定群组发送消息。如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。必须和IM管理员的UserId一起填写。 */
+  IMAdminUserSig?: string;
+  /** 房间内推流用户全部退出后超过MaxIdleTime秒，后台自动关闭转录任务，默认值是60s。 */
+  MaxIdleTime?: number;
+  /** 1表示机器人只订阅单个人的流，0表示机器人订阅整个房间的流，如果不填默认订阅整个房间的流。 */
+  TranscriptionMode?: number;
+  /** TranscriptionMode为1时必填，机器人只会拉该userid的流，忽略房间里其他用户。 */
+  TargetUserId?: string;
 }
 
 /** 实时音视频用量在某一时间段的统计信息。 */
@@ -986,6 +1012,20 @@ declare interface DeletePictureRequest {
 }
 
 declare interface DeletePictureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAITranscriptionRequest {
+  /** 唯一标识AI转录任务。 */
+  TaskId: string;
+}
+
+declare interface DescribeAITranscriptionResponse {
+  /** 起始时间。 */
+  StartTime?: string;
+  /** 转录任务状态。 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1558,6 +1598,26 @@ declare interface RemoveUserResponse {
   RequestId?: string;
 }
 
+declare interface StartAITranscriptionRequest {
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，使用该sdkappid开启任务。 */
+  SdkAppId: number;
+  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，使用该roomid开启任务。 */
+  RoomId: string;
+  /** 启动转录机器人和鉴权的参数。 */
+  TranscriptionParams: TranscriptionParams;
+  /** TRTC房间号的类型，0代表数字房间号，1代表字符串房间号。不填默认是数字房间号。 */
+  RoomIdType?: number;
+  /** 语音识别配置 */
+  RecognizeConfig?: RecognizeConfig;
+}
+
+declare interface StartAITranscriptionResponse {
+  /** 用于唯一标识转录任务。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartMCUMixTranscodeByStrRoomIdRequest {
   /** TRTC的SDKAppId。 */
   SdkAppId: number;
@@ -1686,6 +1746,16 @@ declare interface StartWebRecordResponse {
   RequestId?: string;
 }
 
+declare interface StopAITranscriptionRequest {
+  /** 唯一标识转录任务。 */
+  TaskId: string;
+}
+
+declare interface StopAITranscriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopMCUMixTranscodeByStrRoomIdRequest {
   /** TRTC的SDKAppId。 */
   SdkAppId: number;
@@ -1746,6 +1816,14 @@ declare interface StopWebRecordResponse {
   RequestId?: string;
 }
 
+declare interface SummarizeTranscriptionRequest {
+}
+
+declare interface SummarizeTranscriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdatePublishCdnStreamRequest {
   /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和转推的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
@@ -1787,6 +1865,8 @@ declare interface Trtc {
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
+  /** 查询AI转录状态 {@link DescribeAITranscriptionRequest} {@link DescribeAITranscriptionResponse} */
+  DescribeAITranscription(data: DescribeAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITranscriptionResponse>;
   /** 查询历史用户列表与通话指标 {@link DescribeCallDetailInfoRequest} {@link DescribeCallDetailInfoResponse} */
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
   /** 查询云端录制状态 {@link DescribeCloudRecordingRequest} {@link DescribeCloudRecordingResponse} */
@@ -1849,6 +1929,8 @@ declare interface Trtc {
   RemoveUser(data: RemoveUserRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserResponse>;
   /** 移出用户（字符串房间号） {@link RemoveUserByStrRoomIdRequest} {@link RemoveUserByStrRoomIdResponse} */
   RemoveUserByStrRoomId(data: RemoveUserByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByStrRoomIdResponse>;
+  /** 开始AI转录 {@link StartAITranscriptionRequest} {@link StartAITranscriptionResponse} */
+  StartAITranscription(data: StartAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<StartAITranscriptionResponse>;
   /** 启动云端混流（旧） {@link StartMCUMixTranscodeRequest} {@link StartMCUMixTranscodeResponse} */
   StartMCUMixTranscode(data: StartMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeResponse>;
   /** 启动云端混流（字符串房间号）（旧） {@link StartMCUMixTranscodeByStrRoomIdRequest} {@link StartMCUMixTranscodeByStrRoomIdResponse} */
@@ -1859,6 +1941,8 @@ declare interface Trtc {
   StartStreamIngest(data: StartStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamIngestResponse>;
   /** 开始页面录制 {@link StartWebRecordRequest} {@link StartWebRecordResponse} */
   StartWebRecord(data: StartWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartWebRecordResponse>;
+  /** 停止AI转录 {@link StopAITranscriptionRequest} {@link StopAITranscriptionResponse} */
+  StopAITranscription(data: StopAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<StopAITranscriptionResponse>;
   /** 结束云端混流（旧） {@link StopMCUMixTranscodeRequest} {@link StopMCUMixTranscodeResponse} */
   StopMCUMixTranscode(data: StopMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeResponse>;
   /** 结束云端混流（字符串房间号） {@link StopMCUMixTranscodeByStrRoomIdRequest} {@link StopMCUMixTranscodeByStrRoomIdResponse} */
@@ -1869,6 +1953,8 @@ declare interface Trtc {
   StopStreamIngest(data: StopStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamIngestResponse>;
   /** 停止页面录制 {@link StopWebRecordRequest} {@link StopWebRecordResponse} */
   StopWebRecord(data: StopWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopWebRecordResponse>;
+  /** 总结转录文本 {@link SummarizeTranscriptionRequest} {@link SummarizeTranscriptionResponse} */
+  SummarizeTranscription(data?: SummarizeTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<SummarizeTranscriptionResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
 }
