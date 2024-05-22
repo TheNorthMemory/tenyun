@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 248+ 款产品，11249+ 服务数</summary>
+<details><summary>共计 248+ 款产品，11252+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -179,7 +179,7 @@ dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/pro
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(73) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(124) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(125) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(73) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(41) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -327,7 +327,7 @@ trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) 
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(50) |
 tse | [微服务引擎](https://cloud.tencent.com/document/product/1364) | 2020-12-07(111) |
-tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(219) |
+tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(221) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) | 2020-09-18(17) |

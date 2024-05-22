@@ -3262,7 +3262,7 @@ declare namespace V20180525 {
     NodePool?: NodePoolOption;
     /** 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验） */
     SkipValidateOptions?: string[];
-    /** 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instace将使用默认配置。 */
+    /** 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instance将使用默认配置。 */
     InstanceAdvancedSettingsOverrides?: InstanceAdvancedSettings[];
     /** 节点镜像 */
     ImageId?: string;
@@ -3524,7 +3524,7 @@ declare namespace V20180525 {
     Password?: string;
     /** 制品命名空间 */
     ChartNamespace?: string;
-    /** 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群） */
+    /** 集群类型，支持传 tke, eks, tkeedge, external(注册集群） */
     ClusterType?: string;
   }
 
@@ -7046,7 +7046,7 @@ declare namespace V20180525 {
     Values?: ReleaseValues;
     /** 制品来源，范围：tke-market 或 other */
     ChartFrom?: string;
-    /** 制品版本( 从第三安装时，不传这个参数） */
+    /** 制品版本( 从第三方安装时，不传这个参数） */
     ChartVersion?: string;
     /** 制品仓库URL地址 */
     ChartRepoURL?: string;
@@ -7056,7 +7056,7 @@ declare namespace V20180525 {
     Password?: string;
     /** 制品命名空间 */
     ChartNamespace?: string;
-    /** 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群） */
+    /** 集群类型，支持传 tke, eks, tkeedge, external(注册集群） */
     ClusterType?: string;
   }
 

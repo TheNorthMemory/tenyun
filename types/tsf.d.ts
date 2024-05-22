@@ -6309,6 +6309,18 @@ declare interface DescribeUsableUnitNamespacesResponse {
   RequestId?: string;
 }
 
+declare interface DisableLaneRuleRequest {
+  /** 泳道规则ID */
+  RuleId: string;
+}
+
+declare interface DisableLaneRuleResponse {
+  /** 操作状态。成功：true，失败：false */
+  Result?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableTaskFlowRequest {
   /** 工作流 ID */
   FlowId: string;
@@ -6393,6 +6405,18 @@ declare interface DraftApiGroupRequest {
 declare interface DraftApiGroupResponse {
   /** true: 成功, false: 失败 */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableLaneRuleRequest {
+  /** 泳道规则ID */
+  RuleId: string;
+}
+
+declare interface EnableLaneRuleResponse {
+  /** 操作状态。成功：true，失败：false */
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6615,7 +6639,7 @@ declare interface ModifyLaneRuleRequest {
 }
 
 declare interface ModifyLaneRuleResponse {
-  /** 操作状态 */
+  /** 操作状态。成功：true，失败：false */
   Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -7651,6 +7675,8 @@ declare interface Tsf {
   DescribeUploadInfo(data: DescribeUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadInfoResponse>;
   /** 查询可用于被导入的命名空间列表 {@link DescribeUsableUnitNamespacesRequest} {@link DescribeUsableUnitNamespacesResponse} */
   DescribeUsableUnitNamespaces(data?: DescribeUsableUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsableUnitNamespacesResponse>;
+  /** 禁用泳道规则 {@link DisableLaneRuleRequest} {@link DisableLaneRuleResponse} */
+  DisableLaneRule(data: DisableLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableLaneRuleResponse>;
   /** 停用任务 {@link DisableTaskRequest} {@link DisableTaskResponse} */
   DisableTask(data: DisableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskResponse>;
   /** 停用工作流 {@link DisableTaskFlowRequest} {@link DisableTaskFlowResponse} */
@@ -7665,6 +7691,8 @@ declare interface Tsf {
   DisassociateKafkaConfig(data: DisassociateKafkaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateKafkaConfigResponse>;
   /** 下线Api分组 {@link DraftApiGroupRequest} {@link DraftApiGroupResponse} */
   DraftApiGroup(data: DraftApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DraftApiGroupResponse>;
+  /** 启用泳道规则 {@link EnableLaneRuleRequest} {@link EnableLaneRuleResponse} */
+  EnableLaneRule(data: EnableLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableLaneRuleResponse>;
   /** 启用任务 {@link EnableTaskRequest} {@link EnableTaskResponse} */
   EnableTask(data: EnableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskResponse>;
   /** 启用工作流 {@link EnableTaskFlowRequest} {@link EnableTaskFlowResponse} */

@@ -676,7 +676,7 @@ declare interface ImageFIlter {
 
 /** 镜像描述信息 */
 declare interface ImageInfo {
-  /** 镜像类型：TCR为腾讯云TCR镜像; CCR为腾讯云TCR个人版镜像，PreSet为平台预置镜像 */
+  /** 镜像类型：TCR为腾讯云TCR镜像; CCR为腾讯云TCR个人版镜像，PreSet为平台预置镜像，CUSTOM为第三方自定义镜像 */
   ImageType: string;
   /** 镜像地址 */
   ImageUrl: string;
@@ -690,6 +690,18 @@ declare interface ImageInfo {
   ImageName?: string | null;
   /** 是否支持数据构建 */
   SupportDataPipeline?: boolean | null;
+  /** 镜像仓库用户名密码信息(仅当ImageType为CUSTOM第三方镜像的时候需要) */
+  ImageSecret?: ImageSecret | null;
+}
+
+/** 自定义镜像仓库凭据 */
+declare interface ImageSecret {
+  /** 用于加密密码的KMS公钥ID */
+  KeyId?: string | null;
+  /** 用户名 */
+  Username?: string | null;
+  /** 密码,base64编码； 当keyId不为空时，密码是加密后的 */
+  Password?: string | null;
 }
 
 /** 推理代码的信息 */
@@ -1620,6 +1632,8 @@ declare interface ServiceInfo {
   Command?: string | null;
   /** 开启TIONE内网访问外部设置 */
   ServiceEIP?: ServiceEIP | null;
+  /** 服务端口，默认为8501 */
+  ServicePort?: number | null;
 }
 
 /** 服务的限流限速等配置 */
@@ -2273,8 +2287,10 @@ declare interface CreateModelServiceRequest {
   Command?: string;
   /** 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。 */
   ServiceEIP?: ServiceEIP;
-  /** 服务的启动命令，以base64格式进行输入 */
+  /** 服务的启动命令，以base64格式进行输入，与Command同时配置时，仅当前参数生效 */
   CommandBase64?: string;
+  /** 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092 */
+  ServicePort?: number;
 }
 
 declare interface CreateModelServiceResponse {
@@ -3427,8 +3443,10 @@ declare interface ModifyModelServiceRequest {
   Command?: string;
   /** 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。 */
   ServiceEIP?: ServiceEIP;
-  /** 服务的启动命令，以base64格式进行输入 */
+  /** 服务的启动命令，以base64格式进行输入，与Command同时配置时，仅当前参数生效 */
   CommandBase64?: string;
+  /** 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092 */
+  ServicePort?: number;
 }
 
 declare interface ModifyModelServiceResponse {

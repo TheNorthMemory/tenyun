@@ -3418,6 +3418,38 @@ declare interface DescribeTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskLogRequest {
+  /** 列表返回的Id */
+  TaskId: string;
+  /** 开始运行时间，unix时间戳（毫秒） */
+  StartTime: number;
+  /** 结束运行时间，unix时间戳（毫秒） */
+  EndTime: number;
+  /** 分页大小，最大1000，配合Context一起使用 */
+  Limit: number;
+  /** 下一次分页参数，第一次传空。透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。 */
+  Context: string;
+  /** 是否升序排列，true:升序排序，false:倒序，默认false，倒序排列 */
+  Asc?: boolean;
+  /** 预览日志的通用过滤条件 */
+  Filters?: Filter[];
+  /** SparkSQL任务唯一ID */
+  BatchId?: string;
+}
+
+declare interface DescribeTaskLogResponse {
+  /** 下一次分页参数 */
+  Context?: string | null;
+  /** 是否获取完结 */
+  ListOver?: boolean | null;
+  /** 日志详情 */
+  Results?: JobLogResult[] | null;
+  /** 日志url */
+  LogUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskResultRequest {
   /** 任务唯一ID */
   TaskId: string;
@@ -4395,6 +4427,8 @@ declare interface Dlc {
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询数据表名称列表 {@link DescribeTablesNameRequest} {@link DescribeTablesNameResponse} */
   DescribeTablesName(data: DescribeTablesNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesNameResponse>;
+  /** 查询任务日志 {@link DescribeTaskLogRequest} {@link DescribeTaskLogResponse} */
+  DescribeTaskLog(data: DescribeTaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogResponse>;
   /** 查询任务结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */

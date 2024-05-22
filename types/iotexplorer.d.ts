@@ -628,6 +628,10 @@ declare interface ProductEntry {
   BindStrategy?: number | null;
   /** 设备数量 */
   DeviceCount?: number | null;
+  /** 平均传输速率 */
+  Rate?: string | null;
+  /** 有效期 */
+  Period?: string | null;
 }
 
 /** 产品模型定义 */
@@ -1093,11 +1097,15 @@ declare interface CreateStudioProductRequest {
   ProductDesc: string;
   /** 产品的项目ID */
   ProjectId: string;
+  /** 平均传输速率 */
+  Rate?: string;
+  /** 期限 */
+  Period?: string;
 }
 
 declare interface CreateStudioProductResponse {
   /** 产品描述 */
-  Product: ProductEntry;
+  Product?: ProductEntry;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
