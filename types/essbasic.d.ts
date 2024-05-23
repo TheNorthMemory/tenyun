@@ -992,7 +992,7 @@ declare interface RegistrationOrganizationInfo {
   AdminIdCardNumber?: string;
   /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
   BusinessLicense?: string;
-  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M */
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。p.s. 如果上传授权书 ，需遵循以下条件1. 超管的信息（超管姓名，超管身份证，超管手机号）必须为必填参数。2. 超管的个人身份必须在电子签已经实名。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
   PowerOfAttorneys?: string[];
 }
 
@@ -2374,7 +2374,7 @@ declare interface CreateConsoleLoginUrlRequest {
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 PC/CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP/H5/SHORT_H5 30天 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP/H5/SHORT_H5 30天 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   ConsoleUrl?: string;
   /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：`企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码` */
   IsActivated?: boolean;

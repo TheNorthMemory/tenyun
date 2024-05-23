@@ -3032,6 +3032,22 @@ declare interface UnbindProductsResponse {
   RequestId?: string;
 }
 
+declare interface UpdateDeviceTWeCallAuthorizeStatusRequest {
+  /** TweCall授权状态：0未授权，1已授权 */
+  Status?: number;
+  /** 产品ID */
+  ProductId?: string;
+  /** 设备名 */
+  DeviceName?: string;
+  /** 微信用户的openId */
+  WechatOpenId?: string;
+}
+
+declare interface UpdateDeviceTWeCallAuthorizeStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDevicesEnableStateRequest {
   /** 多个设备标识 */
   DevicesItems: DevicesItem[];
@@ -3345,6 +3361,8 @@ declare interface Iotexplorer {
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
   /** 批量解绑子产品 {@link UnbindProductsRequest} {@link UnbindProductsResponse} */
   UnbindProducts(data: UnbindProductsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindProductsResponse>;
+  /** 更新用户对设备的TweCall授权状态 {@link UpdateDeviceTWeCallAuthorizeStatusRequest} {@link UpdateDeviceTWeCallAuthorizeStatusResponse} */
+  UpdateDeviceTWeCallAuthorizeStatus(data?: UpdateDeviceTWeCallAuthorizeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceTWeCallAuthorizeStatusResponse>;
   /** 批量禁用启用设备 {@link UpdateDevicesEnableStateRequest} {@link UpdateDevicesEnableStateResponse} */
   UpdateDevicesEnableState(data: UpdateDevicesEnableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicesEnableStateResponse>;
   /** 更新设备固件 {@link UpdateFirmwareRequest} {@link UpdateFirmwareResponse} */

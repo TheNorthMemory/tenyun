@@ -1845,11 +1845,13 @@ declare interface PrivateLinkParam {
 /** 普罗米修斯打通的vipVport */
 declare interface PrometheusDTO {
   /** export类型（jmx_export\node_export） */
-  Type: string;
+  Type?: string;
   /** vip */
-  SourceIp: string;
+  SourceIp?: string;
   /** vport */
-  SourcePort: number;
+  SourcePort?: number;
+  /** broker地址 */
+  BrokerIp?: string | null;
 }
 
 /** Prometheus 监控返回 */

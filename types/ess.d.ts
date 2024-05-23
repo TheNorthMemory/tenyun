@@ -1090,18 +1090,20 @@ declare interface RegistrationOrganizationInfo {
   LegalName: string;
   /** 组织机构企业注册地址。请确认该企业注册地址与企业营业执照中注册的地址一致。 */
   Address: string;
-  /** 组织机构超管姓名。在注册流程中，必须是超管本人进行操作。如果法人做为超管管理组织机构,超管姓名就是法人姓名 */
+  /** 组织机构超管姓名。在注册流程中，必须是超管本人进行操作。如果法人做为超管管理组织机构,超管姓名就是法人姓名如果入参中传递超管授权书PowerOfAttorneys，则此参数为必填参数。 */
   AdminName?: string;
-  /** 组织机构超管姓名。在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。 */
+  /** 组织机构超管手机号。在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。如果入参中传递超管授权书PowerOfAttorneys，则此参数为必填参数 */
   AdminMobile?: string;
   /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书2：法人授权超管5：授权书+对公打款注:`1. 当前仅支持一种认证方式``2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款``3. 如果当前操作人是法人,则是法人认证` */
   AuthorizationTypes?: number[];
-  /** 认证人身份证号 */
+  /** 认证人身份证号，如果入参中传递超管授权书PowerOfAttorneys，则此参数为必填参数 */
   AdminIdCardNumber?: string;
   /** 认证人证件类型 支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   AdminIdCardType?: string;
   /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
   BusinessLicense?: string;
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。p.s. 如果上传授权书 ，需遵循以下条件1. 超管的信息（超管姓名，超管身份证，超管手机号）必须为必填参数。2. 超管的个人身份必须在电子签已经实名。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
+  PowerOfAttorneys?: string[];
 }
 
 /** 解除协议的签署人，如不指定，默认使用原流程中的签署人。`注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。``注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。``注意：当指定C端签署人的签署方自定义控件别名不空时，除RelievedApproverReceiptId参数外，可以只参数ApproverSignRole。` */

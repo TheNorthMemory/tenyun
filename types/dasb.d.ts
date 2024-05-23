@@ -1744,7 +1744,7 @@ declare interface SearchSessionResponse {
   RequestId?: string;
 }
 
-/** {@link Dasb T-Sec-堡垒机（BH）} */
+/** {@link Dasb 运维安全中心（堡垒机）} */
 declare interface Dasb {
   (): Versions;
   /** 添加资产组成员 {@link AddDeviceGroupMembersRequest} {@link AddDeviceGroupMembersResponse} */

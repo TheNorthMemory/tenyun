@@ -668,7 +668,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   cws: Cws,
   /** {@link Cynosdb TDSQL-C MySQL 版} */
   cynosdb: Cynosdb,
-  /** {@link Dasb T-Sec-堡垒机（BH）} */
+  /** {@link Dasb 运维安全中心（堡垒机）} */
   dasb: Dasb,
   /** {@link Dataintegration 数据接入平台} */
   dataintegration: Dataintegration,

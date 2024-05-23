@@ -2,184 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 接口描述信息 */
-declare interface APIConfigDetail {
-  /** 接口id */
-  Id: string | null;
-  /** 接口所属服务组id */
-  ServiceGroupId: string | null;
-  /** 接口描述 */
-  Description: string | null;
-  /** 相对路径 */
-  RelativeUrl: string | null;
-  /** 服务类型 HTTP HTTPS */
-  ServiceType: string | null;
-  /** GET POST */
-  HttpMethod: string | null;
-  /** 请求示例 */
-  HttpInputExample: string | null;
-  /** 回包示例 */
-  HttpOutputExample: string | null;
-  /** 更新成员 */
-  UpdatedBy: string | null;
-  /** 更新时间 */
-  UpdatedAt: string | null;
-  /** 主账号uin */
-  Uin: string | null;
-  /** 子账号subuin */
-  SubUin: string | null;
-}
-
-/** 批量模型加速任务 */
-declare interface BatchModelAccTask {
-  /** 模型ID */
-  ModelId: string;
-  /** 模型版本 */
-  ModelVersion: string;
-  /** 模型来源(JOB/COS) */
-  ModelSource: string;
-  /** 模型格式(TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/MMDETECTION/ONNX/HUGGING_FACE) */
-  ModelFormat: string;
-  /** 模型Tensor信息 */
-  TensorInfos: string[];
-  /** 加速引擎版本 */
-  AccEngineVersion: string;
-  /** 模型输入cos路径 */
-  ModelInputPath: CosPathInfo;
-  /** 模型名称 */
-  ModelName?: string;
-  /** SavedModel保存时配置的签名 */
-  ModelSignature?: string;
-  /** 加速引擎对应的框架版本 */
-  FrameworkVersion?: string | null;
-}
-
-/** 批量预测任务详情 */
-declare interface BatchTaskDetail {
-  /** 批量预测任务ID */
-  BatchTaskId?: string;
-  /** 批量预测任务名称 */
-  BatchTaskName?: string;
-  /** 主账号uin */
-  Uin?: string;
-  /** 子账号uin */
-  SubUin?: string;
-  /** 地域 */
-  Region?: string;
-  /** 计费模式 */
-  ChargeType?: string;
-  /** 包年包月资源组ID */
-  ResourceGroupId?: string | null;
-  /** 包年包月资源组名称 */
-  ResourceGroupName?: string | null;
-  /** 资源配置 */
-  ResourceConfigInfo?: ResourceConfigInfo;
-  /** 标签 */
-  Tags?: Tag[] | null;
-  /** 服务对应的模型信息 */
-  ModelInfo?: ModelInfo | null;
-  /** 自定义镜像信息 */
-  ImageInfo?: ImageInfo | null;
-  /** 代码包 */
-  CodePackagePath?: CosPathInfo | null;
-  /** 启动命令 */
-  StartCmd?: string | null;
-  /** 输入数据配置 */
-  DataConfigs?: DataConfig[] | null;
-  /** 输出数据配置 */
-  Outputs?: DataConfig[];
-  /** 是否上报日志 */
-  LogEnable?: boolean;
-  /** 日志配置 */
-  LogConfig?: LogConfig | null;
-  /** vpc id */
-  VpcId?: string | null;
-  /** 子网id */
-  SubnetId?: string | null;
-  /** 任务状态 */
-  Status?: string;
-  /** 运行时长 */
-  RuntimeInSeconds?: number | null;
-  /** 创建时间 */
-  CreateTime?: string;
-  /** 更新时间 */
-  UpdateTime?: string;
-  /** 任务开始时间 */
-  StartTime?: string | null;
-  /** 任务结束时间 */
-  EndTime?: string | null;
-  /** 计费状态，取值范围:BILLING: 计费中NOT_BILLING: 未计费WHITELIST_USING: 白名单使用中WHITELIST_STOP: 白名单到期ARREARS_STOP: 欠费停止 */
-  ChargeStatus?: string;
-  /** 最近一次实例ID */
-  LatestInstanceId?: string | null;
-  /** 备注 */
-  Remark?: string | null;
-  /** 失败原因 */
-  FailureReason?: string | null;
-  /** 计费金额信息，eg：2.00元/小时 (for 按量计费) */
-  BillingInfo?: string | null;
-  /** 运行中的Pod的名字 */
-  PodList?: string[] | null;
-  /** 模型推理代码信息 */
-  ModelInferenceCodeInfo?: CosPathInfo | null;
-}
-
-/** 批处理任务实例 */
-declare interface BatchTaskInstance {
-  /** 任务实例id */
-  BatchTaskInstanceId: string;
-  /** 开始时间 */
-  StartTime: string | null;
-  /** 结束时间 */
-  EndTime: string | null;
-  /** 任务状态 */
-  Status: string;
-  /** 运行时长 */
-  RuntimeInSeconds: number | null;
-}
-
-/** 出参类型 */
-declare interface BatchTaskSetItem {
-  /** 批量预测任务ID */
-  BatchTaskId?: string;
-  /** 批量预测任务名称 */
-  BatchTaskName?: string;
-  /** 模型信息 */
-  ModelInfo?: ModelInfo | null;
-  /** 镜像信息 */
-  ImageInfo?: ImageInfo;
-  /** 计费模式 */
-  ChargeType?: string;
-  /** 计费状态，取值范围:BILLING: 计费中NOT_BILLING: 未计费WHITELIST_USING: 白名单使用中WHITELIST_STOP: 白名单到期ARREARS_STOP: 欠费停止 */
-  ChargeStatus?: string;
-  /** 包年包月资源组ID */
-  ResourceGroupId?: string | null;
-  /** 资源配置 */
-  ResourceConfigInfo?: ResourceConfigInfo;
-  /** 标签配置 */
-  Tags?: Tag[] | null;
-  /** 任务状态, 取值范围:INIT, STARTING, RUNNING, FAILED, STOPPING, STOPPED, SUCCEED */
-  Status?: string;
-  /** 运行时长 */
-  RuntimeInSeconds?: number | null;
-  /** 任务创建时间 */
-  CreateTime?: string;
-  /** 任务开始运行时间 */
-  StartTime?: string | null;
-  /** 任务结束时间 */
-  EndTime?: string | null;
-  /** 任务更新时间 */
-  UpdateTime?: string | null;
-  /** 输出 */
-  Outputs?: DataConfig[];
-  /** 包年包月资源组名称 */
-  ResourceGroupName?: string | null;
-  /** 失败原因 */
-  FailureReason?: string;
-  /** 按量计费信息 */
-  BillingInfo?: string;
-}
-
 /** CBS存储配置 */
 declare interface CBSConfig {
   /** 存储大小 */
@@ -252,16 +74,6 @@ declare interface CosPathInfo {
   Paths: string[] | null;
 }
 
-/** 跑批任务周期描述 */
-declare interface CronInfo {
-  /** cron配置 */
-  CronConfig: string;
-  /** 周期开始时间 */
-  StartTime?: string | null;
-  /** 周期结束时间 */
-  EndTime?: string | null;
-}
-
 /** 定时扩缩任务 */
 declare interface CronScaleJob {
   /** Cron表达式，标识任务的执行时间，精确到分钟级 */
@@ -284,30 +96,6 @@ declare interface CrossTenantENIInfo {
   PrimaryIP?: string | null;
   /** Pod Port */
   Port?: string | null;
-}
-
-/** 自定义指标 */
-declare interface CustomTrainingData {
-  /** 指标名 */
-  MetricName?: string | null;
-  /** 指标 */
-  Metrics?: CustomTrainingMetric[] | null;
-}
-
-/** 自定义指标 */
-declare interface CustomTrainingMetric {
-  /** X轴数据类型: TIMESTAMP; EPOCH; STEP */
-  XType?: string;
-  /** 数据点 */
-  Points?: CustomTrainingPoint[] | null;
-}
-
-/** 自定义训练指标数据点 */
-declare interface CustomTrainingPoint {
-  /** X值 */
-  XValue?: number;
-  /** Y值 */
-  YValue?: number;
 }
 
 /** 数据配置 */
@@ -470,60 +258,12 @@ declare interface DefaultNginxGatewayCallInfo {
   Host?: string | null;
 }
 
-/** 图像检测参数信息 */
-declare interface DetectionLabelInfo {
-  /** 点坐标列表 */
-  Points: PointInfo[] | null;
-  /** 标签 */
-  Labels: string[] | null;
-  /** 类别 */
-  FrameType: string | null;
-}
-
-/** 编码后的启动命令信息 */
-declare interface EncodedStartCmdInfo {
-  /** 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""} */
-  StartCmdInfo?: string;
-}
-
-/** 引擎版本 */
-declare interface EngineVersion {
-  /** 引擎版本 */
-  Version: string | null;
-  /** 运行镜像 */
-  Image: string | null;
-  /** 是否支持int8量化 */
-  IsSupportIntEightQuantization: boolean | null;
-  /** 框架版本 */
-  FrameworkVersion: string | null;
-}
-
 /** 环境变量 */
 declare interface EnvVar {
   /** 环境变量key */
   Name?: string | null;
   /** 环境变量value */
   Value?: string | null;
-}
-
-/** K8s的Event */
-declare interface Event {
-  /** 事件的id */
-  Id: string | null;
-  /** 事件的具体信息 */
-  Message: string | null;
-  /** 事件第一次发生的时间 */
-  FirstTimestamp: string | null;
-  /** 事件最后一次发生的时间 */
-  LastTimestamp: string | null;
-  /** 事件发生的次数 */
-  Count: number | null;
-  /** 事件的类型 */
-  Type: string | null;
-  /** 事件关联的资源的类型 */
-  ResourceKind: string | null;
-  /** 事件关联的资源的名字 */
-  ResourceName: string | null;
 }
 
 /** 过滤器 */
@@ -536,62 +276,6 @@ declare interface Filter {
   Negative?: boolean;
   /** 是否开启模糊匹配 */
   Fuzzy?: boolean;
-}
-
-/** 图片列表查询结果详情 */
-declare interface FilterLabelInfo {
-  /** 数据集id */
-  DatasetId: string;
-  /** 文件ID */
-  FileId: string;
-  /** 文件路径 */
-  FileName: string;
-  /** 分类标签结果 */
-  ClassificationLabels: string[] | null;
-  /** 检测标签结果 */
-  DetectionLabels: DetectionLabelInfo[] | null;
-  /** 分割标签结果 */
-  SegmentationLabels: SegmentationInfo[] | null;
-  /** RGB 图片路径 */
-  RGBPath: string | null;
-  /** 标签模板类型 */
-  LabelTemplateType: string | null;
-  /** 下载url链接 */
-  DownloadUrl: string | null;
-  /** 缩略图下载链接 */
-  DownloadThumbnailUrl: string | null;
-  /** 分割结果图片下载链接 */
-  DownloadRGBUrl: string | null;
-  /** OCR场景IDENTITY：识别STRUCTURE：智能结构化 */
-  OcrScene: string | null;
-  /** OCR场景标签列表 */
-  OcrLabels: OcrLabelInfo[] | null;
-  /** OCR场景标签信息 */
-  OcrLabelInfo: string | null;
-  /** 文本分类场景标签结果，内容是json结构 */
-  TextClassificationLabelList: string | null;
-  /** 文本内容，返回50字符 */
-  RowText: string | null;
-  /** 文本内容是否完全返回 */
-  ContentOmit: boolean | null;
-}
-
-/** 框架信息列表 */
-declare interface FrameworkInfo {
-  /** 框架名称 */
-  Name: string;
-  /** 框架版本以及对应的训练模式 */
-  VersionInfos: FrameworkVersion[];
-}
-
-/** 框架版本以及对应的训练模式 */
-declare interface FrameworkVersion {
-  /** 框架版本 */
-  Version: string;
-  /** 训练模式 */
-  TrainingModes: string[];
-  /** 框架运行环境 */
-  Environment?: string;
 }
 
 /** 配置GooseFS参数 */
@@ -806,6 +490,8 @@ declare interface IntranetCallInfo {
 declare interface LocalDisk {
   /** 节点ID */
   InstanceId: string | null;
+  /** 本地路径 */
+  LocalPath?: string | null;
 }
 
 /** 日志配置 */
@@ -814,18 +500,6 @@ declare interface LogConfig {
   LogsetId: string | null;
   /** 日志需要投递到cls的主题 */
   TopicId: string | null;
-}
-
-/** 单条日志数据结构 */
-declare interface LogIdentity {
-  /** 单条日志的ID */
-  Id: string | null;
-  /** 单条日志的内容 */
-  Message: string | null;
-  /** 这条日志对应的Pod名称 */
-  PodName: string | null;
-  /** 日志的时间戳（RFC3339格式的时间字符串） */
-  Timestamp: string | null;
 }
 
 /** 对话输入内容 */
@@ -852,14 +526,6 @@ declare interface MetricData {
   TotalSteps?: number | null;
   /** 数据点。数组元素为不同指标的数据。数组长度不超过10。 */
   Points?: DataPoint[] | null;
-}
-
-/** 模型加速引擎版本 */
-declare interface ModelAccEngineVersion {
-  /** 模型格式 */
-  ModelFormat: string | null;
-  /** 引擎版本信息 */
-  EngineVersions: EngineVersion[] | null;
 }
 
 /** 模型加速任务 */
@@ -1098,24 +764,6 @@ declare interface NotebookDetail {
   VolumeSourceGooseFS?: GooseFS | null;
 }
 
-/** 镜像保存记录 */
-declare interface NotebookImageRecord {
-  /** 保存记录ID */
-  RecordId?: string | null;
-  /** 镜像地址 */
-  ImageUrl?: string | null;
-  /** 状态。eg：creating导出中/success已完成/stopped已停止/fail异常 */
-  Status?: string | null;
-  /** 创建时间 */
-  CreateTime?: string | null;
-  /** 状态信息 */
-  Message?: string | null;
-  /** 实例ID */
-  InstanceId?: string | null;
-  /** kernel数组 */
-  Kernels?: string[] | null;
-}
-
 /** Notebook列表元素 */
 declare interface NotebookSetItem {
   /** notebook ID */
@@ -1174,24 +822,6 @@ declare interface NotebookSetItem {
   VolumeSourceGooseFS?: GooseFS | null;
 }
 
-/** OCR场景标签列表 */
-declare interface OcrLabelInfo {
-  /** 坐标点围起来的框 */
-  Points: PointInfo[] | null;
-  /** 框的形状：FRAME_TYPE_RECTANGLEFRAME_TYPE_POLYGON */
-  FrameType: string | null;
-  /** 智能结构化：key区域对应的内容 */
-  Key: string | null;
-  /** 智能结构化：上述key的ID */
-  KeyId: string | null;
-  /** 识别：框区域的内容智能结构化：value区域对应的内容 */
-  Value: string | null;
-  /** 智能结构化：value区域所关联的key 区域的keyID的集合 */
-  KeyIdsForValue: string[] | null;
-  /** key或者value区域内容的方向：DIRECTION_VERTICALDIRECTION_HORIZONTAL */
-  Direction: string | null;
-}
-
 /** 键值对 */
 declare interface Option {
   /** 指标名 */
@@ -1236,22 +866,6 @@ declare interface PodInfo {
   EndTime?: string | null;
   /** pod资源配置 */
   ResourceConfigInfo?: ResourceConfigInfo | null;
-}
-
-/** 点信息描述 */
-declare interface PointInfo {
-  /** X坐标值 */
-  X: number | null;
-  /** Y坐标值 */
-  Y: number | null;
-}
-
-/** 太极任务预训练模型信息 */
-declare interface PreTrainModel {
-  /** 模型ID */
-  ModelId?: string | null;
-  /** 模型名称 */
-  ModelName?: string | null;
 }
 
 /** 私有连接信息 */
@@ -1358,20 +972,6 @@ declare interface ResourceInstanceRunningJobInfo {
   TaskName?: string | null;
 }
 
-/** 文本行信息 */
-declare interface RowItem {
-  /** rowValue 数组 */
-  Values: RowValue[] | null;
-}
-
-/** 文件行信息 */
-declare interface RowValue {
-  /** 列名 */
-  Name: string;
-  /** 列值 */
-  Value: string | null;
-}
-
 /** notebook ssh端口配置 */
 declare interface SSHConfig {
   /** 是否开启ssh */
@@ -1398,18 +998,6 @@ declare interface SchemaInfo {
   Name: string;
   /** 数据类型 */
   Type: string;
-}
-
-/** 图片分割参数信息 */
-declare interface SegmentationInfo {
-  /** 点坐标数组 */
-  Points: PointInfo[] | null;
-  /** 分割标签 */
-  Label: string | null;
-  /** 灰度值 */
-  Gray: number | null;
-  /** 颜色 */
-  Color: string | null;
 }
 
 /** 描述在线服务 */
@@ -1556,20 +1144,6 @@ declare interface ServiceGroup {
   AvailableReplicasCount?: number | null;
 }
 
-/** 服务历史版本 */
-declare interface ServiceHistory {
-  /** 版本 */
-  Revision: string | null;
-  /** 更新时间 */
-  UpdateTime: string | null;
-  /** 镜像 */
-  Image: string | null;
-  /** 模型文件 */
-  ModelFile: string | null;
-  /** 原始数据 */
-  RawData: string | null;
-}
-
 /** 推理服务在集群中的信息 */
 declare interface ServiceInfo {
   /** 期望运行的Pod数量，停止状态是0不同计费模式和调节模式下对应关系如下PREPAID 和 POSTPAID_BY_HOUR:手动调节模式下对应 实例数量自动调节模式下对应 基于时间的默认策略的实例数量HYBRID_PAID:后付费实例手动调节模式下对应 实例数量后付费实例自动调节模式下对应 时间策略的默认策略的实例数量 */
@@ -1648,48 +1222,6 @@ declare interface ServiceLimit {
   InstanceReqLimit?: number;
 }
 
-/** 计费项内容 */
-declare interface Spec {
-  /** 计费项标签 */
-  SpecId?: string;
-  /** 计费项名称 */
-  SpecName?: string;
-  /** 计费项显示名称 */
-  SpecAlias?: string;
-  /** 是否售罄 */
-  Available?: boolean;
-  /** 当前资源售罄时，可用的区域有哪些 */
-  AvailableRegion?: string[];
-  /** 当前计费项支持的特性 */
-  SpecFeatures?: string[] | null;
-  /** 计费项类型 */
-  SpecType?: string | null;
-  /** GPU类型 */
-  GpuType?: string | null;
-  /** 计费项CategoryId */
-  CategoryId?: string | null;
-}
-
-/** 计费项询价结果 */
-declare interface SpecPrice {
-  /** 计费项名称 */
-  SpecName: string;
-  /** 原价，单位：分。最大值42亿，超过则返回0 */
-  TotalCost: number;
-  /** 优惠后的价格，单位：分 */
-  RealTotalCost: number;
-  /** 计费项数量 */
-  SpecCount?: number;
-}
-
-/** 计费项询价单元 */
-declare interface SpecUnit {
-  /** 计费项名称 */
-  SpecName: string;
-  /** 计费项数量,建议不超过100万 */
-  SpecCount: number;
-}
-
 /** 启动命令信息 */
 declare interface StartCmdInfo {
   /** 启动命令 */
@@ -1740,108 +1272,6 @@ declare interface TagFilter {
   TagKey?: string;
   /** 多个标签值 */
   TagValues?: string[];
-}
-
-/** 五级标签 */
-declare interface TextLabelDistributionDetailInfoFifthClass {
-  /** 标签名称 */
-  LabelValue?: string | null;
-  /** 标签个数 */
-  LabelCount?: number | null;
-  /** 标签占比 */
-  LabelPercentage?: number | null;
-}
-
-/** 一级标签 */
-declare interface TextLabelDistributionDetailInfoFirstClass {
-  /** 标签名称 */
-  LabelValue?: string | null;
-  /** 标签个数 */
-  LabelCount?: number | null;
-  /** 标签占比 */
-  LabelPercentage?: number | null;
-  /** 子标签分布 */
-  ChildLabelList?: TextLabelDistributionDetailInfoSecondClass[] | null;
-}
-
-/** 四级标签 */
-declare interface TextLabelDistributionDetailInfoFourthClass {
-  /** 标签名称 */
-  LabelValue?: string | null;
-  /** 标签个数 */
-  LabelCount?: number | null;
-  /** 标签占比 */
-  LabelPercentage?: number | null;
-  /** 子标签分布 */
-  ChildLabelList?: TextLabelDistributionDetailInfoFifthClass[] | null;
-}
-
-/** 二级标签 */
-declare interface TextLabelDistributionDetailInfoSecondClass {
-  /** 标签名称 */
-  LabelValue?: string | null;
-  /** 标签个数 */
-  LabelCount?: number | null;
-  /** 标签占比 */
-  LabelPercentage?: number | null;
-  /** 子标签分布 */
-  ChildLabelList?: TextLabelDistributionDetailInfoThirdClass[] | null;
-}
-
-/** 三级标签 */
-declare interface TextLabelDistributionDetailInfoThirdClass {
-  /** 标签名称 */
-  LabelValue?: string | null;
-  /** 标签个数 */
-  LabelCount?: number | null;
-  /** 标签占比 */
-  LabelPercentage?: number | null;
-  /** 子标签分布 */
-  ChildLabelList?: TextLabelDistributionDetailInfoFourthClass[] | null;
-}
-
-/** 文本标签 */
-declare interface TextLabelDistributionInfo {
-  /** 文本分类题目名称 */
-  Theme?: string | null;
-  /** 一级标签分布 */
-  ClassLabelList?: TextLabelDistributionDetailInfoFirstClass[] | null;
-}
-
-/** 训练数据 */
-declare interface TrainingDataPoint {
-  /** 时间戳 */
-  Timestamp?: number | null;
-  /** 训练上报的值。可以为训练指标（双精度浮点数，也可以为Epoch/Step（两者皆保证是整数） */
-  Value?: number | null;
-}
-
-/** 训练指标 */
-declare interface TrainingMetric {
-  /** 指标名 */
-  MetricName: string;
-  /** 数据值 */
-  Values: TrainingDataPoint[] | null;
-  /** 上报的Epoch. 可能为空 */
-  Epochs: TrainingDataPoint[] | null;
-  /** 上报的Step. 可能为空 */
-  Steps: TrainingDataPoint[] | null;
-  /** 上报的TotalSteps. 可能为空 */
-  TotalSteps: TrainingDataPoint[] | null;
-}
-
-/** 模型列表 */
-declare interface TrainingModelDTO {
-  /** 模型id */
-  TrainingModelId?: string;
-  /** 模型名称 */
-  TrainingModelName?: string;
-  /** 标签 */
-  Tags?: Tag[] | null;
-  /** 模型创建时间 */
-  CreateTime?: string | null;
-  /** 模型版本列表。默认不返回，仅在指定请求参数开启时返回。 */
-  TrainingModelVersions?: TrainingModelVersionDTO[] | null;
 }
 
 /** 模型版本列表 */
@@ -2062,14 +1492,6 @@ declare interface VolumeMount {
   VolumeSourceType?: string;
 }
 
-/** 服务的权重 */
-declare interface WeightEntry {
-  /** 服务id */
-  ServiceId: string;
-  /** 流量权重值，同 ServiceGroup 下 总和应为 100 */
-  Weight: number;
-}
-
 /** 工作负载的状态 */
 declare interface WorkloadStatus {
   /** 当前实例数 */
@@ -2114,80 +1536,6 @@ declare interface ChatCompletionResponse {
   Id?: string | null;
   /** token统计 */
   Usage?: Usage | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateBatchModelAccTasksRequest {
-  /** 模型加速任务名称 */
-  ModelAccTaskName: string;
-  /** 批量模型加速任务 */
-  BatchModelAccTasks: BatchModelAccTask[];
-  /** 模型加速保存路径 */
-  ModelOutputPath: CosPathInfo;
-  /** 标签 */
-  Tags?: Tag[];
-  /** 优化级别(NO_LOSS/FP16/INT8)，默认FP16 */
-  OptimizationLevel?: string;
-  /** GPU卡类型(T4/V100/A10)，默认T4 */
-  GPUType?: string;
-  /** 专业参数设置 */
-  HyperParameter?: HyperParameter;
-}
-
-declare interface CreateBatchModelAccTasksResponse {
-  /** 模型优化任务ID列表 */
-  ModelAccTaskIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateBatchTaskRequest {
-  /** 批量预测任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
-  BatchTaskName: string;
-  /** 计费模式，eg：PREPAID 包年包月；POSTPAID_BY_HOUR 按量计费 */
-  ChargeType: string;
-  /** 资源配置 */
-  ResourceConfigInfo: ResourceConfigInfo;
-  /** 结果输出存储信息 */
-  Outputs: DataConfig[];
-  /** 是否上报日志 */
-  LogEnable: boolean;
-  /** 工作类型 1:单次 2:周期 */
-  JobType?: number;
-  /** 任务周期描述 */
-  CronInfo?: CronInfo;
-  /** 包年包月资源组ID */
-  ResourceGroupId?: string;
-  /** 标签配置 */
-  Tags?: Tag[];
-  /** 服务对应的模型信息，有模型文件时需要填写 */
-  ModelInfo?: ModelInfo;
-  /** 自定义镜像信息 */
-  ImageInfo?: ImageInfo;
-  /** 代码包 */
-  CodePackage?: CosPathInfo;
-  /** 启动命令 */
-  StartCmd?: string;
-  /** 数据配置 */
-  DataConfigs?: DataConfig[];
-  /** 日志配置 */
-  LogConfig?: LogConfig;
-  /** VPC Id */
-  VpcId?: string;
-  /** 子网Id */
-  SubnetId?: string;
-  /** 备注 */
-  Remark?: string;
-  /** 任务执行结果回调URL，仅支持http和https。回调格式&内容详见: [TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292) */
-  CallbackUrl?: string;
-  /** 以Base64方式编码的启动命令。假设启动命令是/app/run.sh，则此处输入参数应该为L2FwcC9ydW4uc2g=。 */
-  StartCmdBase64?: string;
-}
-
-declare interface CreateBatchTaskResponse {
-  /** 批量预测任务ID */
-  BatchTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2300,20 +1648,6 @@ declare interface CreateModelServiceResponse {
   RequestId?: string;
 }
 
-declare interface CreateNotebookImageRequest {
-  /** 镜像信息 */
-  ImageInfo: ImageInfo;
-  /** notebook id */
-  NotebookId: string;
-  /** 要保存的kernel数组 */
-  Kernels?: string[];
-}
-
-declare interface CreateNotebookImageResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateNotebookRequest {
   /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
@@ -2368,22 +1702,6 @@ declare interface CreateNotebookRequest {
 declare interface CreateNotebookResponse {
   /** notebook标志 */
   Id?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateOptimizedModelRequest {
-  /** 模型加速任务ID */
-  ModelAccTaskId: string;
-  /** 标签 */
-  Tags?: Tag[];
-}
-
-declare interface CreateOptimizedModelResponse {
-  /** 模型ID */
-  ModelId: string | null;
-  /** 模型版本ID */
-  ModelVersionId: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2464,74 +1782,6 @@ declare interface CreateTrainingModelResponse {
   RequestId?: string;
 }
 
-declare interface CreateTrainingTaskRequest {
-  /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
-  Name: string;
-  /** 计费模式，eg：PREPAID 包年包月（资源组）;POSTPAID_BY_HOUR 按量计费 */
-  ChargeType: string;
-  /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}] */
-  ResourceConfigInfos: ResourceConfigInfo[];
-  /** 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH */
-  FrameworkName?: string;
-  /** 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9 */
-  FrameworkVersion?: string;
-  /** 训练框架环境，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu */
-  FrameworkEnvironment?: string;
-  /** 预付费专用资源组ID，通过DescribeBillingResourceGroups接口查询 */
-  ResourceGroupId?: string;
-  /** 标签配置 */
-  Tags?: Tag[];
-  /** 自定义镜像信息 */
-  ImageInfo?: ImageInfo;
-  /** COS代码包路径 */
-  CodePackagePath?: CosPathInfo;
-  /** 任务的启动命令，按任务训练模式输入，如遇特殊字符导致配置失败，可使用EncodedStartCmdInfo参数 */
-  StartCmdInfo?: StartCmdInfo;
-  /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
-  TrainingMode?: string;
-  /** 数据配置，依赖DataSource字段，数量不超过10个 */
-  DataConfigs?: DataConfig[];
-  /** VPC Id */
-  VpcId?: string;
-  /** 子网Id */
-  SubnetId?: string;
-  /** COS训练输出路径 */
-  Output?: CosPathInfo;
-  /** CLS日志配置 */
-  LogConfig?: LogConfig;
-  /** 调优参数，不超过2048个字符 */
-  TuningParameters?: string;
-  /** 是否上报日志 */
-  LogEnable?: boolean;
-  /** 备注，不超过1024个字符 */
-  Remark?: string;
-  /** 数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx */
-  DataSource?: string;
-  /** 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292) */
-  CallbackUrl?: string;
-  /** 太极预训练模型ID */
-  PreTrainModel?: PreTrainModel;
-  /** 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效 */
-  EncodedStartCmdInfo?: EncodedStartCmdInfo;
-}
-
-declare interface CreateTrainingTaskResponse {
-  /** 训练任务ID */
-  Id?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteBatchTaskRequest {
-  /** 批量预测任务ID */
-  BatchTaskId: string;
-}
-
-declare interface DeleteBatchTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteDatasetRequest {
   /** 数据集id */
   DatasetId: string;
@@ -2542,16 +1792,6 @@ declare interface DeleteDatasetRequest {
 declare interface DeleteDatasetResponse {
   /** 删除的datasetId */
   DatasetId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteModelAccelerateTaskRequest {
-  /** 模型加速任务ID */
-  ModelAccTaskId: string;
-}
-
-declare interface DeleteModelAccelerateTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2574,16 +1814,6 @@ declare interface DeleteModelServiceRequest {
 }
 
 declare interface DeleteModelServiceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteNotebookImageRecordRequest {
-  /** 记录id */
-  RecordId: string;
-}
-
-declare interface DeleteNotebookImageRecordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2620,86 +1850,6 @@ declare interface DeleteTrainingModelVersionRequest {
 }
 
 declare interface DeleteTrainingModelVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteTrainingTaskRequest {
-  /** 训练任务ID */
-  Id: string;
-}
-
-declare interface DeleteTrainingTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAPIConfigsRequest {
-  /** 偏移量，默认为0 */
-  Offset?: number;
-  /** 返回数量，默认为20，最大值为100 */
-  Limit?: number;
-  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
-  Order?: string;
-  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
-  OrderField?: string;
-  /** 分页参数，支持的分页过滤Name包括：["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId"] */
-  Filters?: Filter[];
-}
-
-declare interface DescribeAPIConfigsResponse {
-  /** 接口数量 */
-  TotalCount: number | null;
-  /** 接口详情 */
-  Details: APIConfigDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBatchTaskInstancesRequest {
-  /** 批量预测任务id */
-  BatchTaskId: string;
-}
-
-declare interface DescribeBatchTaskInstancesResponse {
-  /** 批量预测实例结果 */
-  BatchInstances?: BatchTaskInstance[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBatchTaskRequest {
-  /** 批量预测任务ID */
-  BatchTaskId: string;
-}
-
-declare interface DescribeBatchTaskResponse {
-  /** 批量预测任务详情 */
-  BatchTaskDetail?: BatchTaskDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBatchTasksRequest {
-  /** 过滤器Name支持的取值范围：BatchTaskId, BatchTaskName, Status, ModelVersionId其中Status 的有效取值范围:INIT, STARTING, RUNNING, FAILED, STOPPING, STOPPED, SUCCEED */
-  Filters?: Filter[];
-  /** 标签过滤器 */
-  TagFilters?: TagFilter[];
-  /** 偏移量，默认为0 */
-  Offset?: number;
-  /** 限制数目，默认为20 */
-  Limit?: number;
-  /** 输出列表的排列顺序。取值范围：ASC（升序排列）/ DESC（降序排列），默认为DESC */
-  Order?: string;
-  /** 排序字段。当前仅支持 "CreateTime"。不传此字段则按照DB默认排序结果返回 */
-  OrderField?: string;
-}
-
-declare interface DescribeBatchTasksResponse {
-  /** 批量预测任务总数 */
-  TotalCount?: number;
-  /** 批量预测任务列表 */
-  BatchTaskSet?: BatchTaskSetItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2770,34 +1920,6 @@ declare interface DescribeBillingResourceInstanceRunningJobsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeBillingSpecsPriceRequest {
-  /** 询价参数，支持批量询价 */
-  SpecsParam: SpecUnit[];
-}
-
-declare interface DescribeBillingSpecsPriceResponse {
-  /** 计费项价格，支持批量返回 */
-  SpecsPrice?: SpecPrice[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBillingSpecsRequest {
-  /** 付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月 */
-  ChargeType: string;
-  /** 枚举值：TRAIN、NOTEBOOK、INFERENCE */
-  TaskType?: string;
-  /** 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘 */
-  ResourceType?: string;
-}
-
-declare interface DescribeBillingSpecsResponse {
-  /** 计费项列表 */
-  Specs?: Spec[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeBuildInImagesRequest {
   /** 镜像过滤器 */
   ImageFilters?: ImageFIlter[];
@@ -2806,60 +1928,6 @@ declare interface DescribeBuildInImagesRequest {
 declare interface DescribeBuildInImagesResponse {
   /** 内置镜像详情列表 */
   BuildInImageInfos?: ImageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDatasetDetailStructuredRequest {
-  /** 数据集ID */
-  DatasetId: string;
-  /** 偏移值 */
-  Offset?: number;
-  /** 返回数据条数，默认20，目前最大支持2000条数据 */
-  Limit?: number;
-}
-
-declare interface DescribeDatasetDetailStructuredResponse {
-  /** 数据总数 */
-  TotalCount: number | null;
-  /** 表格头信息 */
-  ColumnNames: string[] | null;
-  /** 表格内容 */
-  RowItems: RowItem[] | null;
-  /** 文本内容 */
-  RowTexts: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDatasetDetailUnstructuredRequest {
-  /** 数据集ID */
-  DatasetId?: string;
-  /** 偏移量 */
-  Offset?: number;
-  /** 返回个数，默认20，目前最大支持2000条数据 */
-  Limit?: number;
-  /** 标签过滤参数，对应标签值 */
-  LabelList?: string[];
-  /** 标注状态过滤参数:STATUS_ANNOTATED，已标注STATUS_NON_ANNOTATED，未标注STATUS_ALL，全部默认为STATUS_ALL */
-  AnnotationStatus?: string;
-  /** 数据集ID列表 */
-  DatasetIds?: string[];
-  /** 要筛选的文本分类场景标签信息 */
-  TextClassificationLabels?: TextLabelDistributionInfo[];
-}
-
-declare interface DescribeDatasetDetailUnstructuredResponse {
-  /** 已标注数据量 */
-  AnnotatedTotalCount: number | null;
-  /** 没有标注数据量 */
-  NonAnnotatedTotalCount: number | null;
-  /** 过滤数据总量 */
-  FilterTotalCount: number | null;
-  /** 过滤数据详情 */
-  FilterLabelList: FilterLabelInfo[] | null;
-  /** 数据文本行，默认返回前1000行 */
-  RowTexts: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2892,98 +1960,12 @@ declare interface DescribeDatasetsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeEventsRequest {
-  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
-  Service: string;
-  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
-  ServiceId?: string;
-  /** 查询事件最早发生的时间（RFC3339格式的时间字符串），默认值为当前时间的前一天 */
-  StartTime?: string;
-  /** 查询事件最晚发生的时间（RFC3339格式的时间字符串），默认值为当前时间 */
-  EndTime?: string;
-  /** 分页Limit，默认值为100，最大值为100 */
-  Limit?: number;
-  /** 分页Offset，默认值为0 */
-  Offset?: number;
-  /** 排列顺序（可选值为ASC, DESC ），默认为DESC */
-  Order?: string;
-  /** 排序的依据字段（可选值为FirstTimestamp, LastTimestamp），默认值为LastTimestamp */
-  OrderField?: string;
-  /** 过滤条件注意: 1. Filter.Name：目前支持ResourceKind（按事件关联的资源类型过滤）；Type（按事件类型过滤）2. Filter.Values：对于Name为ResourceKind，Values的可选取值为Deployment, Replicaset, Pod等K8S资源类型；对于Name为Type，Values的可选取值仅为Normal或者Warning；Values为多个的时候表示同时满足3. Filter. Negative和Filter. Fuzzy没有使用 */
-  Filters?: Filter[];
-}
-
-declare interface DescribeEventsResponse {
-  /** 事件的列表 */
-  Events?: Event[] | null;
-  /** 此次查询的事件的个数 */
-  TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeInferTemplatesRequest {
 }
 
 declare interface DescribeInferTemplatesResponse {
   /** 模板列表 */
   FrameworkTemplates: InferTemplateGroup[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeLatestTrainingMetricsRequest {
-  /** 任务ID */
-  TaskId: string;
-}
-
-declare interface DescribeLatestTrainingMetricsResponse {
-  /** 任务ID */
-  TaskId: string | null;
-  /** 最近一次上报的训练指标.每个Metric中只有一个点的数据, 即len(Values) = len(Timestamps) = 1 */
-  Metrics: TrainingMetric[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeLogsRequest {
-  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
-  Service: string;
-  /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
-  StartTime?: string;
-  /** 日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间 */
-  EndTime?: string;
-  /** 日志查询条数，默认值100，最大值100 */
-  Limit?: number;
-  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
-  ServiceId?: string;
-  /** Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList注：支持结尾通配符* */
-  PodName?: string;
-  /** 排序方向（可选值为ASC, DESC ），默认为DESC */
-  Order?: string;
-  /** 按哪个字段排序（可选值为Timestamp），默认值为Timestamp */
-  OrderField?: string;
-  /** 日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回 */
-  Context?: string;
-  /** 过滤条件注意: 1. Filter.Name：目前只支持Key（也就是按关键字过滤日志）2. Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足3. Filter. Negative和Filter. Fuzzy没有使用 */
-  Filters?: Filter[];
-}
-
-declare interface DescribeLogsResponse {
-  /** 分页的游标 */
-  Context?: string | null;
-  /** 日志数组 */
-  Content?: LogIdentity[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeModelAccEngineVersionsRequest {
-}
-
-declare interface DescribeModelAccEngineVersionsResponse {
-  /** 模型加速版本列表 */
-  ModelAccEngineVersions: ModelAccEngineVersion[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3002,30 +1984,6 @@ declare interface DescribeModelAccelerateTaskResponse {
   ModelAccStartTime: string | null;
   /** 模型加速任务结束时间 */
   ModelAccEndTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeModelAccelerateTasksRequest {
-  /** 过滤器ModelAccTaskName 任务名称ModelSource 模型来源 */
-  Filters?: Filter[];
-  /** 排序字段，默认CreateTime */
-  OrderField?: string;
-  /** 排序方式：ASC/DESC，默认DESC */
-  Order?: string;
-  /** 偏移量 */
-  Offset?: number;
-  /** 返回记录条数，默认10 */
-  Limit?: number;
-  /** 标签过滤 */
-  TagFilters?: TagFilter[];
-}
-
-declare interface DescribeModelAccelerateTasksResponse {
-  /** 模型加速任务列表 */
-  ModelAccelerateTasks: ModelAccelerateTask[] | null;
-  /** 任务总数 */
-  TotalCount: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3116,20 +2074,6 @@ declare interface DescribeModelServiceGroupsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeModelServiceHistoryRequest {
-  /** 服务Id */
-  ServiceId: string;
-}
-
-declare interface DescribeModelServiceHistoryResponse {
-  /** 历史版本总数 */
-  TotalCount: number | null;
-  /** 服务版本 */
-  ServiceHistory: ServiceHistory[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeModelServiceHotUpdatedRequest {
   /** 镜像信息，配置服务运行所需的镜像地址等信息 */
   ImageInfo: ImageInfo;
@@ -3156,62 +2100,6 @@ declare interface DescribeModelServiceRequest {
 declare interface DescribeModelServiceResponse {
   /** 服务信息 */
   Service?: Service;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeModelServicesRequest {
-  /** 偏移量，默认为0 */
-  Offset?: number;
-  /** 返回数量，默认为20，最大值为20 */
-  Limit?: number;
-  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
-  Order?: string;
-  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
-  OrderField?: string;
-  /** 分页参数，支持的分页过滤Name包括：["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelId"] */
-  Filters?: Filter[];
-  /** 标签过滤参数 */
-  TagFilters?: TagFilter[];
-}
-
-declare interface DescribeModelServicesResponse {
-  /** 服务数量 */
-  TotalCount: number | null;
-  /** 无 */
-  Services: Service[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeNotebookImageKernelsRequest {
-  /** notebook id */
-  NotebookId: string;
-}
-
-declare interface DescribeNotebookImageKernelsResponse {
-  /** 镜像kernel数组 */
-  Kernels?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeNotebookImageRecordsRequest {
-  /** notebook id */
-  NotebookId: string;
-  /** 位移值 */
-  Offset: number;
-  /** 日志限制 */
-  Limit: number;
-  /** 状态筛选 */
-  Filters?: Filter[];
-}
-
-declare interface DescribeNotebookImageRecordsResponse {
-  /** 总条数 */
-  TotalCount?: number;
-  /** 镜像保存记录 */
-  NotebookImageRecords?: NotebookImageRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3252,30 +2140,6 @@ declare interface DescribeNotebooksResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTrainingFrameworksRequest {
-}
-
-declare interface DescribeTrainingFrameworksResponse {
-  /** 框架信息列表 */
-  FrameworkInfos?: FrameworkInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeTrainingMetricsRequest {
-  /** 任务ID */
-  TaskId: string;
-}
-
-declare interface DescribeTrainingMetricsResponse {
-  /** 任务ID */
-  TaskId: string | null;
-  /** 训练指标数据 */
-  Data: CustomTrainingData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTrainingModelVersionRequest {
   /** 模型版本ID */
   TrainingModelVersionId: string;
@@ -3298,32 +2162,6 @@ declare interface DescribeTrainingModelVersionsRequest {
 declare interface DescribeTrainingModelVersionsResponse {
   /** 模型版本列表 */
   TrainingModelVersions?: TrainingModelVersionDTO[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeTrainingModelsRequest {
-  /** 过滤器Filter.Name: 枚举值:keyword (模型名称)TrainingModelId (模型ID)ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速)TrainingModelSource (模型来源) 其值Filter.Values支持： JOB/COSModelFormat（模型格式）其值Filter.Values支持：PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACEFilter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为10，Filter.Values的上限为100Filter.Fuzzy取值：true/false，是否支持模糊匹配 */
-  Filters?: Filter[];
-  /** 排序字段，默认CreateTime */
-  OrderField?: string;
-  /** 排序方式，ASC/DESC，默认DESC */
-  Order?: string;
-  /** 偏移量 */
-  Offset?: number;
-  /** 返回结果数量 */
-  Limit?: number;
-  /** 标签过滤 */
-  TagFilters?: TagFilter[];
-  /** 是否同时返回模型版本列表 */
-  WithModelVersions?: boolean;
-}
-
-declare interface DescribeTrainingModelsResponse {
-  /** 模型列表 */
-  TrainingModels?: TrainingModelDTO[];
-  /** 模型总数 */
-  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3376,22 +2214,6 @@ declare interface DescribeTrainingTasksResponse {
   TrainingTaskSet?: TrainingTaskSetItem[];
   /** 数量 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyModelServicePartialConfigRequest {
-  /** 在线推理服务Id，需已存在 */
-  ServiceId: string;
-  /** 更新后服务不重启，定时停止的配置 */
-  ScheduledAction?: ScheduledAction;
-  /** 更新后服务不重启，服务对应限流限频配置 */
-  ServiceLimit?: ServiceLimit;
-}
-
-declare interface ModifyModelServicePartialConfigResponse {
-  /** 被修改后的服务配置 */
-  Service: Service;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3456,142 +2278,12 @@ declare interface ModifyModelServiceResponse {
   RequestId?: string;
 }
 
-declare interface ModifyNotebookRequest {
-  /** notebook id */
-  Id: string;
-  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
-  Name: string;
-  /** （不允许修改）计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
-  ChargeType: string;
-  /** 计算资源配置 */
-  ResourceConf: ResourceConf;
-  /** 是否上报日志 */
-  LogEnable: boolean;
-  /** 是否自动停止 */
-  AutoStopping: boolean;
-  /** 是否访问公网 */
-  DirectInternetAccess: boolean;
-  /** 是否ROOT权限 */
-  RootAccess: boolean;
-  /** 资源组ID(for预付费) */
-  ResourceGroupId?: string;
-  /** （不允许修改）Vpc-Id */
-  VpcId?: string;
-  /** （不允许修改）子网Id */
-  SubnetId?: string;
-  /** 存储卷大小，单位GB */
-  VolumeSizeInGB?: number;
-  /** （不允许修改）存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
-  VolumeSourceType?: string;
-  /** （不允许修改）CFS存储的配置 */
-  VolumeSourceCFS?: CFSConfig;
-  /** 日志配置 */
-  LogConfig?: LogConfig;
-  /** 生命周期脚本的ID */
-  LifecycleScriptId?: string;
-  /** 默认GIT存储库的ID */
-  DefaultCodeRepoId?: string;
-  /** 其他GIT存储库的ID，最多3个 */
-  AdditionalCodeRepoIds?: string[];
-  /** 自动停止时间，单位小时 */
-  AutomaticStopTime?: number;
-  /** 标签配置 */
-  Tags?: Tag[];
-  /** 数据配置，只支持WEDATA_HDFS */
-  DataConfigs?: DataConfig[];
-  /** 镜像信息 */
-  ImageInfo?: ImageInfo;
-  /** 镜像类型，包括SYSTEM、TCR、CCR */
-  ImageType?: string;
-  /** SSH配置 */
-  SSHConfig?: SSHConfig;
-}
-
-declare interface ModifyNotebookResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyNotebookTagsRequest {
-  /** Notebook Id */
-  Id: string;
-  /** Notebook修改标签集合 */
-  Tags?: Tag[];
-}
-
-declare interface ModifyNotebookTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyServiceGroupWeightsRequest {
-  /** 服务组id */
-  ServiceGroupId: string;
-  /** 权重设置 */
-  Weights: WeightEntry[];
-}
-
-declare interface ModifyServiceGroupWeightsResponse {
-  /** 更新权重后的服务组信息 */
-  ServiceGroup: ServiceGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface PushTrainingMetricsRequest {
   /** 指标数据 */
   Data?: MetricData[];
 }
 
 declare interface PushTrainingMetricsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RestartModelAccelerateTaskRequest {
-  /** 模型加速任务ID */
-  ModelAccTaskId: string;
-  /** 模型加速任务名称 */
-  ModelAccTaskName?: string;
-  /** 模型来源（JOB/COS） */
-  ModelSource?: string;
-  /** 算法框架（废弃） */
-  AlgorithmFramework?: string;
-  /** 模型ID */
-  ModelId?: string;
-  /** 模型名称 */
-  ModelName?: string;
-  /** 模型版本 */
-  ModelVersion?: string;
-  /** 模型输入cos路径 */
-  ModelInputPath?: CosPathInfo;
-  /** 优化级别（NO_LOSS/FP16/INT8），默认FP16 */
-  OptimizationLevel?: string;
-  /** input节点个数（废弃） */
-  ModelInputNum?: number;
-  /** input节点信息（废弃） */
-  ModelInputInfos?: ModelInputInfo[];
-  /** 模型输出cos路径 */
-  ModelOutputPath?: CosPathInfo;
-  /** 模型格式（TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/MMDETECTION/ONNX/HUGGING_FACE） */
-  ModelFormat?: string;
-  /** 模型Tensor信息 */
-  TensorInfos?: string[];
-  /** GPU类型（T4/V100/A10），默认T4 */
-  GPUType?: string;
-  /** 模型专业参数 */
-  HyperParameter?: HyperParameter;
-  /** 加速引擎版本 */
-  AccEngineVersion?: string;
-  /** 标签 */
-  Tags?: Tag[];
-  /** SavedModel保存时配置的签名 */
-  ModelSignature?: string;
-  /** 加速引擎对应的框架版本 */
-  FrameworkVersion?: string;
-}
-
-declare interface RestartModelAccelerateTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3628,36 +2320,6 @@ declare interface StartNotebookResponse {
   RequestId?: string;
 }
 
-declare interface StartTrainingTaskRequest {
-  /** 训练任务ID */
-  Id: string;
-}
-
-declare interface StartTrainingTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface StopBatchTaskRequest {
-  /** 批量预测任务ID */
-  BatchTaskId: string;
-}
-
-declare interface StopBatchTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface StopCreatingImageRequest {
-  /** 镜像保存记录ID */
-  RecordId: string;
-}
-
-declare interface StopCreatingImageResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface StopModelAccelerateTaskRequest {
   /** 模型加速任务ID */
   ModelAccTaskId: string;
@@ -3678,16 +2340,6 @@ declare interface StopNotebookRequest {
 }
 
 declare interface StopNotebookResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface StopTrainingTaskRequest {
-  /** 训练任务ID */
-  Id: string;
-}
-
-declare interface StopTrainingTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4411,86 +3063,42 @@ declare interface Tione {
   (): Versions;
   /** 与大模型聊天 {@link ChatCompletionRequest} {@link ChatCompletionResponse} */
   ChatCompletion(data: ChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionResponse>;
-  /** 批量创建模型加速任务 {@link CreateBatchModelAccTasksRequest} {@link CreateBatchModelAccTasksResponse} */
-  CreateBatchModelAccTasks(data: CreateBatchModelAccTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchModelAccTasksResponse>;
-  /** 创建批量预测任务 {@link CreateBatchTaskRequest} {@link CreateBatchTaskResponse} */
-  CreateBatchTask(data: CreateBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchTaskResponse>;
   /** 创建数据集 {@link CreateDatasetRequest} {@link CreateDatasetResponse} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
   /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
   CreateModelService(data?: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
   /** 创建Notebook {@link CreateNotebookRequest} {@link CreateNotebookResponse} */
   CreateNotebook(data: CreateNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookResponse>;
-  /** 保存镜像 {@link CreateNotebookImageRequest} {@link CreateNotebookImageResponse} */
-  CreateNotebookImage(data: CreateNotebookImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookImageResponse>;
-  /** 保存优化模型 {@link CreateOptimizedModelRequest} {@link CreateOptimizedModelResponse} */
-  CreateOptimizedModel(data: CreateOptimizedModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOptimizedModelResponse>;
   /** 生成Notebook访问链接 {@link CreatePresignedNotebookUrlRequest} {@link CreatePresignedNotebookUrlResponse} */
   CreatePresignedNotebookUrl(data: CreatePresignedNotebookUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePresignedNotebookUrlResponse>;
   /** 导入模型 {@link CreateTrainingModelRequest} {@link CreateTrainingModelResponse} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
-  /** 创建模型训练任务 {@link CreateTrainingTaskRequest} {@link CreateTrainingTaskResponse} */
-  CreateTrainingTask(data: CreateTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingTaskResponse>;
-  /** 删除批量预测任务 {@link DeleteBatchTaskRequest} {@link DeleteBatchTaskResponse} */
-  DeleteBatchTask(data: DeleteBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchTaskResponse>;
   /** 删除数据集 {@link DeleteDatasetRequest} {@link DeleteDatasetResponse} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
-  /** 删除模型加速任务 {@link DeleteModelAccelerateTaskRequest} {@link DeleteModelAccelerateTaskResponse} */
-  DeleteModelAccelerateTask(data: DeleteModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelAccelerateTaskResponse>;
   /** 删除模型服务 {@link DeleteModelServiceRequest} {@link DeleteModelServiceResponse} */
   DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
   /** 删除模型服务组 {@link DeleteModelServiceGroupRequest} {@link DeleteModelServiceGroupResponse} */
   DeleteModelServiceGroup(data: DeleteModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceGroupResponse>;
   /** 删除Notebook {@link DeleteNotebookRequest} {@link DeleteNotebookResponse} */
   DeleteNotebook(data: DeleteNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookResponse>;
-  /** 删除notebook镜像保存记录 {@link DeleteNotebookImageRecordRequest} {@link DeleteNotebookImageRecordResponse} */
-  DeleteNotebookImageRecord(data: DeleteNotebookImageRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookImageRecordResponse>;
   /** 删除模型 {@link DeleteTrainingModelRequest} {@link DeleteTrainingModelResponse} */
   DeleteTrainingModel(data: DeleteTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelResponse>;
   /** 删除模型版本 {@link DeleteTrainingModelVersionRequest} {@link DeleteTrainingModelVersionResponse} */
   DeleteTrainingModelVersion(data: DeleteTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelVersionResponse>;
-  /** 删除训练任务 {@link DeleteTrainingTaskRequest} {@link DeleteTrainingTaskResponse} */
-  DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
-  /** 列举API {@link DescribeAPIConfigsRequest} {@link DescribeAPIConfigsResponse} */
-  DescribeAPIConfigs(data?: DescribeAPIConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIConfigsResponse>;
-  /** 查询批量预测任务 {@link DescribeBatchTaskRequest} {@link DescribeBatchTaskResponse} */
-  DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
-  /** 查询批量预测任务实例列表 {@link DescribeBatchTaskInstancesRequest} {@link DescribeBatchTaskInstancesResponse} */
-  DescribeBatchTaskInstances(data: DescribeBatchTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskInstancesResponse>;
-  /** 查询批量预测任务列表 {@link DescribeBatchTasksRequest} {@link DescribeBatchTasksResponse} */
-  DescribeBatchTasks(data?: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
   /** 查询资源组详情 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
   DescribeBillingResourceGroups(data?: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */
   DescribeBillingResourceInstanceRunningJobs(data: DescribeBillingResourceInstanceRunningJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceInstanceRunningJobsResponse>;
-  /** 查询计费项列表 {@link DescribeBillingSpecsRequest} {@link DescribeBillingSpecsResponse} */
-  DescribeBillingSpecs(data: DescribeBillingSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsResponse>;
-  /** 查询计费项价格 {@link DescribeBillingSpecsPriceRequest} {@link DescribeBillingSpecsPriceResponse} */
-  DescribeBillingSpecsPrice(data: DescribeBillingSpecsPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsPriceResponse>;
   /** 获取内置镜像列表 {@link DescribeBuildInImagesRequest} {@link DescribeBuildInImagesResponse} */
   DescribeBuildInImages(data?: DescribeBuildInImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildInImagesResponse>;
-  /** 查询结构化数据集详情 {@link DescribeDatasetDetailStructuredRequest} {@link DescribeDatasetDetailStructuredResponse} */
-  DescribeDatasetDetailStructured(data: DescribeDatasetDetailStructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailStructuredResponse>;
-  /** 查询非结构化数据集详情 {@link DescribeDatasetDetailUnstructuredRequest} {@link DescribeDatasetDetailUnstructuredResponse} */
-  DescribeDatasetDetailUnstructured(data?: DescribeDatasetDetailUnstructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailUnstructuredResponse>;
   /** 查询数据集列表 {@link DescribeDatasetsRequest} {@link DescribeDatasetsResponse} */
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
-  /** 获取事件 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
-  DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
-  /** 查询最近上报的训练自定义指标 {@link DescribeLatestTrainingMetricsRequest} {@link DescribeLatestTrainingMetricsResponse} */
-  DescribeLatestTrainingMetrics(data: DescribeLatestTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLatestTrainingMetricsResponse>;
-  /** 获取日志 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
-  DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
-  /** 查询模型加速引擎版本列表 {@link DescribeModelAccEngineVersionsRequest} {@link DescribeModelAccEngineVersionsResponse} */
-  DescribeModelAccEngineVersions(data?: DescribeModelAccEngineVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccEngineVersionsResponse>;
   /** 查询模型优化任务详情 {@link DescribeModelAccelerateTaskRequest} {@link DescribeModelAccelerateTaskResponse} */
   DescribeModelAccelerateTask(data: DescribeModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTaskResponse>;
-  /** 查询模型加速任务列表 {@link DescribeModelAccelerateTasksRequest} {@link DescribeModelAccelerateTasksResponse} */
-  DescribeModelAccelerateTasks(data?: DescribeModelAccelerateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTasksResponse>;
   /** 查询优化模型版本列表 {@link DescribeModelAccelerateVersionsRequest} {@link DescribeModelAccelerateVersionsResponse} */
   DescribeModelAccelerateVersions(data?: DescribeModelAccelerateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateVersionsResponse>;
   /** 查询单个服务 {@link DescribeModelServiceRequest} {@link DescribeModelServiceResponse} */
@@ -4501,30 +3109,16 @@ declare interface Tione {
   DescribeModelServiceGroup(data: DescribeModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceGroupResponse>;
   /** 列举在线推理服务组 {@link DescribeModelServiceGroupsRequest} {@link DescribeModelServiceGroupsResponse} */
   DescribeModelServiceGroups(data?: DescribeModelServiceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceGroupsResponse>;
-  /** 展示服务的历史版本 {@link DescribeModelServiceHistoryRequest} {@link DescribeModelServiceHistoryResponse} */
-  DescribeModelServiceHistory(data: DescribeModelServiceHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHistoryResponse>;
   /** 查询模型服务能否开启热更新 {@link DescribeModelServiceHotUpdatedRequest} {@link DescribeModelServiceHotUpdatedResponse} */
   DescribeModelServiceHotUpdated(data: DescribeModelServiceHotUpdatedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHotUpdatedResponse>;
-  /** 查询多个服务 {@link DescribeModelServicesRequest} {@link DescribeModelServicesResponse} */
-  DescribeModelServices(data?: DescribeModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServicesResponse>;
   /** Notebook详情 {@link DescribeNotebookRequest} {@link DescribeNotebookResponse} */
   DescribeNotebook(data: DescribeNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookResponse>;
-  /** 查询镜像kernel {@link DescribeNotebookImageKernelsRequest} {@link DescribeNotebookImageKernelsResponse} */
-  DescribeNotebookImageKernels(data: DescribeNotebookImageKernelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookImageKernelsResponse>;
-  /** 查看notebook镜像保存记录 {@link DescribeNotebookImageRecordsRequest} {@link DescribeNotebookImageRecordsResponse} */
-  DescribeNotebookImageRecords(data: DescribeNotebookImageRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookImageRecordsResponse>;
   /** Notebook列表 {@link DescribeNotebooksRequest} {@link DescribeNotebooksResponse} */
   DescribeNotebooks(data?: DescribeNotebooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebooksResponse>;
-  /** 训练框架列表 {@link DescribeTrainingFrameworksRequest} {@link DescribeTrainingFrameworksResponse} */
-  DescribeTrainingFrameworks(data?: DescribeTrainingFrameworksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingFrameworksResponse>;
-  /** 查询训练自定义指标 {@link DescribeTrainingMetricsRequest} {@link DescribeTrainingMetricsResponse} */
-  DescribeTrainingMetrics(data: DescribeTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingMetricsResponse>;
   /** 查询模型版本 {@link DescribeTrainingModelVersionRequest} {@link DescribeTrainingModelVersionResponse} */
   DescribeTrainingModelVersion(data: DescribeTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionResponse>;
   /** 模型版本列表 {@link DescribeTrainingModelVersionsRequest} {@link DescribeTrainingModelVersionsResponse} */
   DescribeTrainingModelVersions(data: DescribeTrainingModelVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionsResponse>;
-  /** 模型列表 {@link DescribeTrainingModelsRequest} {@link DescribeTrainingModelsResponse} */
-  DescribeTrainingModels(data?: DescribeTrainingModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelsResponse>;
   /** 训练任务详情 {@link DescribeTrainingTaskRequest} {@link DescribeTrainingTaskResponse} */
   DescribeTrainingTask(data: DescribeTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskResponse>;
   /** 训练任务pod列表 {@link DescribeTrainingTaskPodsRequest} {@link DescribeTrainingTaskPodsResponse} */
@@ -4533,34 +3127,16 @@ declare interface Tione {
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
   /** 更新模型服务 {@link ModifyModelServiceRequest} {@link ModifyModelServiceResponse} */
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
-  /** 增量修改模型服务 {@link ModifyModelServicePartialConfigRequest} {@link ModifyModelServicePartialConfigResponse} */
-  ModifyModelServicePartialConfig(data: ModifyModelServicePartialConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServicePartialConfigResponse>;
-  /** 修改Notebook {@link ModifyNotebookRequest} {@link ModifyNotebookResponse} */
-  ModifyNotebook(data: ModifyNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookResponse>;
-  /** 修改Notebook标签 {@link ModifyNotebookTagsRequest} {@link ModifyNotebookTagsResponse} */
-  ModifyNotebookTags(data: ModifyNotebookTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookTagsResponse>;
-  /** 更新推理服务组流量分配 {@link ModifyServiceGroupWeightsRequest} {@link ModifyServiceGroupWeightsResponse} */
-  ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
-  /** 重启模型加速任务 {@link RestartModelAccelerateTaskRequest} {@link RestartModelAccelerateTaskResponse} */
-  RestartModelAccelerateTask(data: RestartModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartModelAccelerateTaskResponse>;
   /** 大模型聊天体验 {@link SendChatMessageRequest} {@link SendChatMessageResponse} */
   SendChatMessage(data: SendChatMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendChatMessageResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */
   StartNotebook(data: StartNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StartNotebookResponse>;
-  /** 启动模型训练任务 {@link StartTrainingTaskRequest} {@link StartTrainingTaskResponse} */
-  StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
-  /** 停止批量预测任务 {@link StopBatchTaskRequest} {@link StopBatchTaskResponse} */
-  StopBatchTask(data: StopBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopBatchTaskResponse>;
-  /** 停止保存镜像 {@link StopCreatingImageRequest} {@link StopCreatingImageResponse} */
-  StopCreatingImage(data: StopCreatingImageRequest, config?: AxiosRequestConfig): AxiosPromise<StopCreatingImageResponse>;
   /** 停止模型加速任务 {@link StopModelAccelerateTaskRequest} {@link StopModelAccelerateTaskResponse} */
   StopModelAccelerateTask(data: StopModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopModelAccelerateTaskResponse>;
   /** 停止Notebook {@link StopNotebookRequest} {@link StopNotebookResponse} */
   StopNotebook(data: StopNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StopNotebookResponse>;
-  /** 停止模型训练任务 {@link StopTrainingTaskRequest} {@link StopTrainingTaskResponse} */
-  StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
   /** 创建存储库 {@link V20191022.CreateCodeRepositoryRequest} {@link V20191022.CreateCodeRepositoryResponse} */
   CreateCodeRepository(data: V20191022.CreateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateCodeRepositoryResponse>;
   /** 创建Notebook实例 {@link V20191022.CreateNotebookInstanceRequest} {@link V20191022.CreateNotebookInstanceResponse} */
