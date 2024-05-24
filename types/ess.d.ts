@@ -1994,6 +1994,20 @@ declare interface CreateIntegrationRoleResponse {
   RequestId?: string;
 }
 
+declare interface CreateIntegrationSubOrganizationActiveRecordRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 待激活成员企业ID集合 */
+  SubOrganizationIds: string[];
+}
+
+declare interface CreateIntegrationSubOrganizationActiveRecordResponse {
+  /** 激活失败的成员企业ID集合 */
+  FailedSubOrganizationIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateIntegrationUserRolesRequest {
   /** 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
@@ -2120,6 +2134,26 @@ declare interface CreateOrganizationBatchSignUrlResponse {
   SignUrl?: string;
   /** 链接过期截止时间，格式为Unix标准时间戳（秒），默认为7天后截止。 */
   ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateOrganizationGroupInvitationLinkRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 到期时间（以秒为单位的时间戳），其上限为30天的有效期限。 */
+  ExpireTime: number;
+}
+
+declare interface CreateOrganizationGroupInvitationLinkResponse {
+  /** 加入集团二维码链接，子企业的管理员可以直接扫码进入。注意:1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持移动端浏览器打开。3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  Link?: string;
+  /** 到期时间（以秒为单位的时间戳） */
+  ExpireTime?: number;
+  /** 加入集团短链接。注意:1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持移动端浏览器打开。3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  JumpUrl?: string;
+  /** 腾讯电子签小程序加入集团链接。小程序和APP集成使用得到的链接类似于`pages/guide?shortKey=yDw***k1xFc5`, 用法可以参考：跳转电子签小程序注： 生成的链路后面不能再增加参数 */
+  MiniAppPath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3405,6 +3439,8 @@ declare interface Ess {
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
   /** 创建企业角色 {@link CreateIntegrationRoleRequest} {@link CreateIntegrationRoleResponse} */
   CreateIntegrationRole(data: CreateIntegrationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationRoleResponse>;
+  /** 创建子企业激活记录 {@link CreateIntegrationSubOrganizationActiveRecordRequest} {@link CreateIntegrationSubOrganizationActiveRecordResponse} */
+  CreateIntegrationSubOrganizationActiveRecord(data: CreateIntegrationSubOrganizationActiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationSubOrganizationActiveRecordResponse>;
   /** 绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 创建一码多签签署码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
@@ -3413,6 +3449,8 @@ declare interface Ess {
   CreateOrganizationAuthUrl(data: CreateOrganizationAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationAuthUrlResponse>;
   /** 获取企业签署合同web页面 {@link CreateOrganizationBatchSignUrlRequest} {@link CreateOrganizationBatchSignUrlResponse} */
   CreateOrganizationBatchSignUrl(data: CreateOrganizationBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationBatchSignUrlResponse>;
+  /** 生成集团加入邀请二维码 {@link CreateOrganizationGroupInvitationLinkRequest} {@link CreateOrganizationGroupInvitationLinkResponse} */
+  CreateOrganizationGroupInvitationLink(data: CreateOrganizationGroupInvitationLinkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationGroupInvitationLinkResponse>;
   /** 创建企业信息变更链接 {@link CreateOrganizationInfoChangeUrlRequest} {@link CreateOrganizationInfoChangeUrlResponse} */
   CreateOrganizationInfoChangeUrl(data: CreateOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationInfoChangeUrlResponse>;
   /** 获取个人用户认证证书图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */

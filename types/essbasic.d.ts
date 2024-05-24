@@ -1750,6 +1750,8 @@ declare interface ChannelCreatePrepareFlowResponse {
   PrepareFlowUrl?: string;
   /** 合同发起后预览链接， 注意此时合同并未发起，仅只是展示效果， 有效期为5分钟 */
   PreviewFlowUrl?: string;
+  /** 发起的合同临时Id， 只有当点击进入链接，成功发起合同后， 此Id才有效 */
+  FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

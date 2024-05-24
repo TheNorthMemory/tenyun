@@ -322,6 +322,8 @@ declare interface InstanceConfs {
   KeyDelimiters?: string[] | null;
   /** 分片节点数量。 */
   ShardNum?: string | null;
+  /** 是否开启大key周期性分析，仅redis产品有效。 */
+  AnalysisTopKey?: string | null;
 }
 
 /** 实例id */
@@ -562,6 +564,24 @@ declare interface ReceiveUin {
   UinName?: string | null;
   /** 用户id */
   Uin?: string | null;
+}
+
+/** Redis大Key分析任务详情。 */
+declare interface RedisBigKeyTask {
+  /** 异步任务请求 ID。 */
+  AsyncRequestId?: number;
+  /** 任务创建时间。 */
+  CreateTime?: string;
+  /** 任务开始时间。 */
+  StartTime?: string;
+  /** 任务结束时间。 */
+  EndTime?: string;
+  /** 任务状态。 */
+  TaskStatus?: string;
+  /** 任务执行进度。 */
+  Progress?: number;
+  /** 任务包含的分片节点序号列表。 */
+  ShardIds?: number[];
 }
 
 /** redis key空间信息。 */
@@ -1469,7 +1489,7 @@ declare interface DescribeDBSpaceStatusResponse {
 declare interface DescribeDiagDBInstancesRequest {
   /** 是否是DBbrain支持的实例，固定传 true。 */
   IsSupported: boolean;
-  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product: string;
   /** 分页参数，偏移量。 */
   Offset: number;
@@ -1674,6 +1694,26 @@ declare interface DescribeProxySessionKillTasksResponse {
   Tasks: TaskInfo[];
   /** 任务总数。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisBigKeyAnalysisTasksRequest {
+  /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 查询数目，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeRedisBigKeyAnalysisTasksResponse {
+  /** 任务总数。 */
+  TotalCount?: number | null;
+  /** 任务列表。 */
+  Tasks?: RedisBigKeyTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2143,7 +2183,7 @@ declare interface ModifyDiagDBInstanceConfRequest {
   InstanceConfs: InstanceConfs;
   /** 生效实例地域，取值为"All"，代表全地域。 */
   Regions: string;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"redis" - 云数据库 Redis。 */
   Product: string;
   /** 指定更改巡检状态的实例ID。 */
   InstanceIds?: string[];
@@ -3383,6 +3423,8 @@ declare interface Dbbrain {
   DescribeProxyProcessStatistics(data: DescribeProxyProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyProcessStatisticsResponse>;
   /** 查询代理节点 kill 会话任务执行状态 {@link DescribeProxySessionKillTasksRequest} {@link DescribeProxySessionKillTasksResponse} */
   DescribeProxySessionKillTasks(data: DescribeProxySessionKillTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySessionKillTasksResponse>;
+  /** 查询redis大key分析任务列表 {@link DescribeRedisBigKeyAnalysisTasksRequest} {@link DescribeRedisBigKeyAnalysisTasksResponse} */
+  DescribeRedisBigKeyAnalysisTasks(data: DescribeRedisBigKeyAnalysisTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisBigKeyAnalysisTasksResponse>;
   /** 获取Redis实例proxy实时会话详情 {@link DescribeRedisProcessListRequest} {@link DescribeRedisProcessListResponse} */
   DescribeRedisProcessList(data: DescribeRedisProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisProcessListResponse>;
   /** 查询redis实例大key列表 {@link DescribeRedisTopBigKeysRequest} {@link DescribeRedisTopBigKeysResponse} */

@@ -3987,6 +3987,12 @@ declare interface DescribePrometheusClusterAgentsRequest {
   Offset?: number;
   /** 用于分页 */
   Limit?: number;
+  /** 用于通过集群id过滤被绑定集群 */
+  ClusterIds?: string[];
+  /** 用于通过集群类型过滤被绑定集群 */
+  ClusterTypes?: string[];
+  /** 用于通过名称搜索被绑定集群 */
+  ClusterName?: string;
 }
 
 declare interface DescribePrometheusClusterAgentsResponse {

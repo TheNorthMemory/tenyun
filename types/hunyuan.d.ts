@@ -48,7 +48,7 @@ declare interface ErrorMsg {
 
 /** 会话内容 */
 declare interface Message {
-  /** 角色 */
+  /** 角色，可选值包括 system、user、assistant。 */
   Role: string;
   /** 文本内容 */
   Content?: string;

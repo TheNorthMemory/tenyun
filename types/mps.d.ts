@@ -2818,7 +2818,7 @@ declare interface LiveStreamAiRecognitionResultInfo {
 
 /** 直播流 AI 识别结果 */
 declare interface LiveStreamAiRecognitionResultItem {
-  /** 结果的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。TransTextRecognition：语音翻译。TagRecognition：精彩打点。 */
+  /** 结果的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。TransTextRecognition：语音翻译。ObjectRecognition：目标检测。TagRecognition：精彩打点。 */
   Type?: string;
   /** 人脸识别结果，当 Type 为FaceRecognition 时有效。 */
   FaceRecognitionResultSet?: LiveStreamFaceRecognitionResult[];
@@ -2832,6 +2832,8 @@ declare interface LiveStreamAiRecognitionResultItem {
   OcrFullTextRecognitionResultSet?: LiveStreamOcrFullTextRecognitionResult[];
   /** 翻译结果，当Type 为 TransTextRecognition 时有效。 */
   TransTextRecognitionResultSet?: LiveStreamTransTextRecognitionResult[];
+  /** 目标检测结果，当Type为 ObjectRecognition 时有效。 */
+  ObjectRecognitionResultSet?: LiveStreamObjectRecognitionResult[];
   /** 打点结果，当Type 为 TagRecognition 时有效。 */
   TagRecognitionResultSet?: LiveStreamTagRecognitionResult[] | null;
 }
@@ -2970,6 +2972,20 @@ declare interface LiveStreamFaceRecognitionResult {
   StartPtsTime: number;
   /** 识别片段终止的 PTS 时间，单位：秒。 */
   EndPtsTime: number;
+  /** 识别片段置信度。取值：0~100。 */
+  Confidence: number;
+  /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
+  AreaCoordSet: number[];
+}
+
+/** 直播 AI 物体识别结果 */
+declare interface LiveStreamObjectRecognitionResult {
+  /** 识别的物体名称。 */
+  Name: string;
+  /** 识别片段起始的 PTS 时间，单位：秒。 */
+  StartPtsOffset: number;
+  /** 识别片段终止的 PTS 时间，单位：秒。 */
+  EndPtsOffset: number;
   /** 识别片段置信度。取值：0~100。 */
   Confidence: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */

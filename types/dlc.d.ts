@@ -1798,6 +1798,14 @@ declare interface AddDMSPartitionsResponse {
   RequestId?: string;
 }
 
+declare interface AddOptimizerEnginesRequest {
+}
+
+declare interface AddOptimizerEnginesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddUsersToWorkGroupRequest {
   /** 要操作的工作组和用户信息 */
   AddInfo: UserIdSetOfWorkGroupId;
@@ -3468,6 +3476,30 @@ declare interface DescribeTaskResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTasksCostInfoRequest {
+  /** 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。task-operator- string （子uin过滤） */
+  Filters?: Filter[];
+  /** 起始时间点，格式为yyyy-mm-dd HH:MM:SS。默认为45天前的当前时刻 */
+  StartTime?: string;
+  /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻 */
+  EndTime?: string;
+  /** 数据引擎名称，用于筛选 */
+  DataEngineName?: string;
+  /** 下一页的标识 */
+  SearchAfter?: string;
+  /** 每页的大小 */
+  PageSize?: number;
+}
+
+declare interface DescribeTasksCostInfoResponse {
+  /** 下一页的标识 */
+  SearchAfter?: string | null;
+  /** 返回的数据，字符串类型的二维数组，首行为列中文名称 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTasksRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -4269,6 +4301,8 @@ declare interface Dlc {
   (): Versions;
   /** DMS元数据新增分区 {@link AddDMSPartitionsRequest} {@link AddDMSPartitionsResponse} */
   AddDMSPartitions(data?: AddDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<AddDMSPartitionsResponse>;
+  /** 添加数据优化资源 {@link AddOptimizerEnginesRequest} {@link AddOptimizerEnginesResponse} */
+  AddOptimizerEngines(data?: AddOptimizerEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<AddOptimizerEnginesResponse>;
   /** 添加用户到工作组 {@link AddUsersToWorkGroupRequest} {@link AddUsersToWorkGroupResponse} */
   AddUsersToWorkGroup(data: AddUsersToWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersToWorkGroupResponse>;
   /** DMS元数据更新库 {@link AlterDMSDatabaseRequest} {@link AlterDMSDatabaseResponse} */
@@ -4433,6 +4467,8 @@ declare interface Dlc {
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  /** 查询任务消耗 {@link DescribeTasksCostInfoRequest} {@link DescribeTasksCostInfoResponse} */
+  DescribeTasksCostInfo(data?: DescribeTasksCostInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksCostInfoResponse>;
   /** 查询可更新配置的引擎列表 {@link DescribeUpdatableDataEnginesRequest} {@link DescribeUpdatableDataEnginesResponse} */
   DescribeUpdatableDataEngines(data: DescribeUpdatableDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpdatableDataEnginesResponse>;
   /** 查询用户自定义引擎参数 {@link DescribeUserDataEngineConfigRequest} {@link DescribeUserDataEngineConfigResponse} */
