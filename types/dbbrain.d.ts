@@ -1228,6 +1228,22 @@ declare interface DeleteDBDiagReportTasksResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRedisBigKeyAnalysisTasksRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 待删除的异步任务ID列表。 */
+  AsyncRequestIds: number[];
+  /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface DeleteRedisBigKeyAnalysisTasksResponse {
+  /** 状态值，为0时代表正常处理。 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSecurityAuditLogExportTasksRequest {
   /** 安全审计组Id。 */
   SecAuditGroupId: string;
@@ -3381,6 +3397,8 @@ declare interface Dbbrain {
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除健康报告生成任务 {@link DeleteDBDiagReportTasksRequest} {@link DeleteDBDiagReportTasksResponse} */
   DeleteDBDiagReportTasks(data: DeleteDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBDiagReportTasksResponse>;
+  /** 删除redis实例大key分析任务 {@link DeleteRedisBigKeyAnalysisTasksRequest} {@link DeleteRedisBigKeyAnalysisTasksResponse} */
+  DeleteRedisBigKeyAnalysisTasks(data: DeleteRedisBigKeyAnalysisTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRedisBigKeyAnalysisTasksResponse>;
   /** 删除安全审计日志导出任务 {@link DeleteSecurityAuditLogExportTasksRequest} {@link DeleteSecurityAuditLogExportTasksResponse} */
   DeleteSecurityAuditLogExportTasks(data: DeleteSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityAuditLogExportTasksResponse>;
   /** 删除实例SQL限流任务 {@link DeleteSqlFiltersRequest} {@link DeleteSqlFiltersResponse} */

@@ -1080,6 +1080,8 @@ declare interface DspaInstance {
   CosQuotaUnit?: string;
   /** 0: 默认状态(用户未设置)1: 开启自动续费2: 明确不自动续费 */
   RenewFlag?: number;
+  /** 实例渠道 */
+  Channel?: string | null;
 }
 
 /** RDB关系型数据库敏感数据资产统计 */

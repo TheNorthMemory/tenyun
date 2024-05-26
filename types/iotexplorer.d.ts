@@ -26,6 +26,22 @@ declare interface AppDeviceInfo {
   UpdateTime: number;
 }
 
+/** 授权小程序信息 */
+declare interface AuthMiniProgramAppInfo {
+  /** 小程序APPID */
+  MiniProgramAppId?: string | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 小程序名称 */
+  MiniProgramName?: string | null;
+  /** 激活码数 */
+  LicenseNum?: number | null;
+  /** 应用ID */
+  IotAppId?: string | null;
+  /** 应用名称 */
+  IotAppName?: string | null;
+}
+
 /** 获取返回列表的详情。 */
 declare interface BatchProductionInfo {
   /** 量产ID */
@@ -714,6 +730,44 @@ declare interface TRTCParams {
   PrivateKey: string;
 }
 
+/** TWeCall设备激活信息 */
+declare interface TWeCallActiveInfo {
+  /** 小程序ID */
+  ModelId?: string | null;
+  /** Sn信息 */
+  Sn?: string | null;
+  /** 过期时间 */
+  ExpireTime?: number | null;
+}
+
+/** TWeCall信息 */
+declare interface TWeCallInfo {
+  /** 小程序ID */
+  ModelId: string | null;
+  /** Sn信息 */
+  Sn: string | null;
+  /** 激活数 */
+  ActiveNum?: number | null;
+}
+
+/** TWeCall设备信息 */
+declare interface TWeCallPkgInfo {
+  /** 包ID */
+  PkgId?: string | null;
+  /** 包类型 */
+  PkgType?: number | null;
+  /** 生效时间 */
+  CreateTime?: number | null;
+  /** 过期时间 */
+  ExpireTime?: number | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 已使用 */
+  LicenseUsedNum?: number | null;
+  /** 总量 */
+  LicenseTotalNum?: number | null;
+}
+
 /** 缩略图信息 */
 declare interface ThumbnailURLInfoList {
   /** 缩略图访问地址 */
@@ -774,6 +828,34 @@ declare interface WifiInfo {
   MAC: string;
   /** 信号强度 */
   RSSI: number;
+}
+
+declare interface ActivateTWeCallLicenseRequest {
+  /** voip类型 */
+  PkgType: number;
+  /** appId */
+  MiniProgramAppId: string;
+  /** 设备列表 */
+  DeviceList?: TWeCallInfo[];
+}
+
+declare interface ActivateTWeCallLicenseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssignTWeCallLicenseRequest {
+  /** voip类型 */
+  PkgType: number;
+  /** appId */
+  MiniProgramAppId: string;
+  /** License数 */
+  DeductNum: number;
+}
+
+declare interface AssignTWeCallLicenseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BindCloudStorageUserRequest {
@@ -856,6 +938,16 @@ declare interface CallDeviceActionSyncResponse {
   OutputParams: string | null;
   /** 返回状态，取值设备端上报$thing/up/action	method为action_reply 的 status字段，如果不包含status字段，则取默认值，空字符串，物模型协议参考https://cloud.tencent.com/document/product/1081/34916 */
   Status: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelAssignTWeCallLicenseRequest {
+  /** 订单号 */
+  PkgId: string;
+}
+
+declare interface CancelAssignTWeCallLicenseResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2264,6 +2356,24 @@ declare interface GenerateSignedVideoURLResponse {
   RequestId?: string;
 }
 
+declare interface GetAuthMiniProgramAppListRequest {
+  /** appId */
+  MiniProgramAppId?: string;
+  /** 页码 */
+  Offset?: number;
+  /** 每页大小 */
+  Limit?: number;
+}
+
+declare interface GetAuthMiniProgramAppListResponse {
+  /** 小程序列表 */
+  MiniProgramList?: AuthMiniProgramAppInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetBatchProductionsListRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2482,6 +2592,42 @@ declare interface GetStudioProductListResponse {
   Products: ProductEntry[];
   /** 产品数量 */
   Total: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTWeCallActiveStatusRequest {
+  /** appId */
+  MiniProgramAppId: string;
+  /** 设备列表 */
+  DeviceList?: TWeCallInfo[];
+}
+
+declare interface GetTWeCallActiveStatusResponse {
+  /** 激活状态 */
+  TWeCallActiveInfos?: TWeCallActiveInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTWeCallPkgListRequest {
+  /** appId */
+  MiniProgramAppId: string;
+  /** 类型 */
+  PkgType?: number[];
+  /** 状态 */
+  Status?: number[];
+  /** 偏移量 */
+  Offset?: number;
+  /** 每页数据大小 */
+  Limit?: number;
+}
+
+declare interface GetTWeCallPkgListResponse {
+  /** 激活状态 */
+  TWeCallPkgList?: TWeCallPkgInfo[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3109,6 +3255,10 @@ declare interface UploadFirmwareResponse {
 /** {@link Iotexplorer 物联网开发平台} */
 declare interface Iotexplorer {
   (): Versions;
+  /** 激活TWeCall {@link ActivateTWeCallLicenseRequest} {@link ActivateTWeCallLicenseResponse} */
+  ActivateTWeCallLicense(data: ActivateTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeCallLicenseResponse>;
+  /** 分配TWeCall {@link AssignTWeCallLicenseRequest} {@link AssignTWeCallLicenseResponse} */
+  AssignTWeCallLicense(data: AssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<AssignTWeCallLicenseResponse>;
   /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
   BindCloudStorageUser(data: BindCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudStorageUserResponse>;
   /** 批量绑定子设备 {@link BindDevicesRequest} {@link BindDevicesResponse} */
@@ -3119,6 +3269,8 @@ declare interface Iotexplorer {
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
   /** 同步调用设备行为 {@link CallDeviceActionSyncRequest} {@link CallDeviceActionSyncResponse} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
+  /** 取消分配TWeCall {@link CancelAssignTWeCallLicenseRequest} {@link CancelAssignTWeCallLicenseResponse} */
+  CancelAssignTWeCallLicense(data: CancelAssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAssignTWeCallLicenseResponse>;
   /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
   /** 创建量产任务 {@link CreateBatchProductionRequest} {@link CreateBatchProductionResponse} */
@@ -3275,6 +3427,8 @@ declare interface Iotexplorer {
   GenerateCloudStorageAIServiceTaskFileURL(data: GenerateCloudStorageAIServiceTaskFileURLRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCloudStorageAIServiceTaskFileURLResponse>;
   /** 获取视频防盗链播放URL {@link GenerateSignedVideoURLRequest} {@link GenerateSignedVideoURLResponse} */
   GenerateSignedVideoURL(data: GenerateSignedVideoURLRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateSignedVideoURLResponse>;
+  /** 查询微信小程序授权列表 {@link GetAuthMiniProgramAppListRequest} {@link GetAuthMiniProgramAppListResponse} */
+  GetAuthMiniProgramAppList(data?: GetAuthMiniProgramAppListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthMiniProgramAppListResponse>;
   /** 列出量产数据列表 {@link GetBatchProductionsListRequest} {@link GetBatchProductionsListResponse} */
   GetBatchProductionsList(data: GetBatchProductionsListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBatchProductionsListResponse>;
   /** 获取固件存储请求地址 {@link GetCOSURLRequest} {@link GetCOSURLResponse} */
@@ -3297,6 +3451,10 @@ declare interface Iotexplorer {
   GetProjectList(data?: GetProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<GetProjectListResponse>;
   /** 获取产品列表 {@link GetStudioProductListRequest} {@link GetStudioProductListResponse} */
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
+  /** 查询TWeCall激活状态 {@link GetTWeCallActiveStatusRequest} {@link GetTWeCallActiveStatusResponse} */
+  GetTWeCallActiveStatus(data: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
+  /** 查询TWeCall包列表 {@link GetTWeCallPkgListRequest} {@link GetTWeCallPkgListResponse} */
+  GetTWeCallPkgList(data: GetTWeCallPkgListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallPkgListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
   /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */

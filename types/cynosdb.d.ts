@@ -388,6 +388,10 @@ declare interface ClusterInstanceDetail {
   MaintainWeekDays?: string[] | null;
   /** serverless实例子状态 */
   ServerlessStatus?: string | null;
+  /** 实例任务信息 */
+  InstanceTasks?: ObjectTask[] | null;
+  /** 实例机器类型 */
+  InstanceDeviceType?: string | null;
 }
 
 /** 参数修改记录 */
@@ -750,6 +754,8 @@ declare interface CynosdbInstance {
   InstanceIndexMode?: string | null;
   /** 当前实例支持的能力 */
   InstanceAbility?: InstanceAbility | null;
+  /** 实例机器类型 */
+  DeviceType?: string | null;
 }
 
 /** 实例详情 */
@@ -1086,6 +1092,8 @@ declare interface InstanceInitInfo {
   MinRoCpu?: number;
   /** Serverless实例最大规格 */
   MaxRoCpu?: number;
+  /** 实例机器类型 */
+  DeviceType?: string;
 }
 
 /** 实例网络信息 */
@@ -1214,6 +1222,10 @@ declare interface ModifyInstanceData {
   OldMemory?: number;
   /** 变配前存储上限 */
   OldStorageLimit?: number;
+  /** 变配前实例机器类型 */
+  OldDeviceType?: string | null;
+  /** 变配后实例机器类型 */
+  DeviceType?: string | null;
   /** 升级方式。升级完成后切换或维护时间内切换 */
   UpgradeType?: string;
 }
@@ -2033,6 +2045,8 @@ declare interface AddInstancesRequest {
   Memory: number;
   /** 新增只读实例数，取值范围为(0,15] */
   ReadOnlyCount: number;
+  /** 实例机器类型 */
+  DeviceType?: string;
   /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。 */
   InstanceGrpId?: string;
   /** 所属VPC网络ID。 */
@@ -3233,6 +3247,8 @@ declare interface DescribeInstanceSpecsRequest {
   DbType: string;
   /** 是否需要返回可用区信息 */
   IncludeZoneStocks?: boolean;
+  /** 实例机器类型 */
+  DeviceType?: string;
 }
 
 declare interface DescribeInstanceSpecsResponse {
@@ -3705,6 +3721,8 @@ declare interface InquirePriceCreateRequest {
   InstancePayMode: string;
   /** 存储购买类型，可选值为：PREPAID, POSTPAID */
   StoragePayMode: string;
+  /** 实例设备类型 */
+  DeviceType?: string;
   /** CPU核数，PREPAID与POSTPAID实例类型必传 */
   Cpu?: number;
   /** 内存大小，单位G，PREPAID与POSTPAID实例类型必传 */
@@ -3721,9 +3739,9 @@ declare interface InquirePriceCreateRequest {
 
 declare interface InquirePriceCreateResponse {
   /** 实例价格 */
-  InstancePrice: TradePrice;
+  InstancePrice?: TradePrice;
   /** 存储价格 */
-  StoragePrice: TradePrice;
+  StoragePrice?: TradePrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4513,14 +4531,20 @@ declare interface RollbackToNewClusterRequest {
   Zone: string;
   /** 回档时，传入源集群ID，用于查找源poolId */
   OriginalClusterId: string;
-  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
-  ClusterName?: string;
   /** 所属VPC网络ID */
   UniqVpcId?: string;
   /** 所属子网ID */
   UniqSubnetId?: string;
+  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
+  ClusterName?: string;
+  /** 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效 */
+  RollbackId?: number;
+  /** 时间点回档，指定时间；快照回档，快照时间 */
+  ExpectTime?: string;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher?: number;
+  /** 集群创建需要绑定的tag数组信息 */
+  ResourceTags?: Tag[];
   /** Db类型当DbType为MYSQL时可选(默认NORMAL)：NORMALSERVERLESS */
   DbMode?: string;
   /** 当DbMode为SEVERLESS时必填cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
@@ -4537,18 +4561,14 @@ declare interface RollbackToNewClusterRequest {
   AlarmPolicyIds?: string[];
   /** 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感 */
   ClusterParams?: ParamItem[];
-  /** 0-下单并支付 1-下单 */
-  DealMode?: number;
   /** 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID */
   ParamTemplateId?: number;
-  /** 集群创建需要绑定的tag数组信息 */
-  ResourceTags?: Tag[];
   /** 实例初始化配置信息，主要用于购买集群时选不同规格实例 */
   InstanceInitInfos?: InstanceInitInfo[];
-  /** 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效 */
-  RollbackId?: number;
-  /** 时间点回档，指定时间；快照回档，快照时间 */
-  ExpectTime?: string;
+  /** 0-下单并支付 1-下单 */
+  DealMode?: number;
+  /** 计算节点付费模式：0-按量计费，1-预付费 */
+  PayMode?: number;
 }
 
 declare interface RollbackToNewClusterResponse {
@@ -4735,6 +4755,8 @@ declare interface UpgradeInstanceRequest {
   Memory: number;
   /** 升级类型：upgradeImmediate，upgradeInMaintain */
   UpgradeType: string;
+  /** 实例机器类型 */
+  DeviceType?: string;
   /** 该参数已废弃 */
   StorageLimit?: number;
   /** 是否自动选择代金券 1是 0否 默认为0 */

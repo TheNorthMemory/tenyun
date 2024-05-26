@@ -112,6 +112,62 @@ declare interface AuditLogResult {
   SubAccountUin: string;
 }
 
+/** 查询改密计划详情 */
+declare interface ChangePwdTaskDetail {
+  /** 资产信息 */
+  Device?: Device | null;
+  /** 资产账号 */
+  Account?: string | null;
+  /** 上次改密结果。0-未改密 1-改密成功 2-改密失败 */
+  LastChangeStatus?: number | null;
+}
+
+/** 修改密码任务信息 */
+declare interface ChangePwdTaskInfo {
+  /** id */
+  Id?: number | null;
+  /** 任务id */
+  OperationId?: string;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 所属部门信息 */
+  Department?: Department | null;
+  /** 改密方式。1：使用执行账号。2：修改自身密码 */
+  ChangeMethod?: number | null;
+  /** 执行账号 */
+  RunAccount?: string | null;
+  /** 密码生成策略 */
+  AuthGenerationStrategy?: number | null;
+  /** 密码长度 */
+  PasswordLength?: number | null;
+  /** 包含小写字母 */
+  SmallLetter?: number | null;
+  /** 包含大写字母 */
+  BigLetter?: number | null;
+  /** 包含数字 */
+  Digit?: number | null;
+  /** 包含的特殊字符，base64 */
+  Symbol?: string | null;
+  /** 改密完成通知。0-通知，1-不通知 */
+  CompleteNotify?: number | null;
+  /** 通知人邮箱 */
+  NotifyEmails?: string[] | null;
+  /** 加密附件密码 */
+  FilePassword?: string | null;
+  /** 需要改密的账户 */
+  AccountSet?: string[] | null;
+  /** 需要改密的主机 */
+  DeviceSet?: Device[] | null;
+  /** 任务类型：4手动，5自动 */
+  Type?: number | null;
+  /** 周期 */
+  Period?: number | null;
+  /** 首次执行时间 */
+  FirstTime?: string | null;
+  /** 下次执行时间 */
+  NextTime?: string | null;
+}
+
 /** 高危命令模板 */
 declare interface CmdTemplate {
   /** 高危命令模板ID */
@@ -360,6 +416,14 @@ declare interface Resource {
   PackageNode?: number;
   /** 日志投递规格信息 */
   LogDeliveryArgs?: string | null;
+}
+
+/** 立即执行改密任务的入参 */
+declare interface RunChangePwdTaskDetail {
+  /** 资产id */
+  DeviceId: number;
+  /** 资产账号 */
+  Account: string;
 }
 
 /** 命令执行检索结果 */
@@ -708,6 +772,54 @@ declare interface CreateAssetSyncJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateChangePwdTaskRequest {
+  /** 任务名 */
+  TaskName: string;
+  /** 资产id数组 */
+  DeviceIdSet: number[];
+  /** 修改的账户数组 */
+  AccountSet: string[];
+  /** 改密方式。1：使用执行账号修改密码；2：修改自身密码 */
+  ChangeMethod: number;
+  /** 认证生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码 */
+  AuthGenerationStrategy: number;
+  /** 执行账号 */
+  RunAccount?: string;
+  /** 手动指定密码时必传 */
+  Password?: string;
+  /** 密码限制长度，长度大于 12 位 */
+  PasswordLength?: number;
+  /** 密码包含小写字母。0：否，1：是 */
+  SmallLetter?: number;
+  /** 密码包含大写字母。0：否，1：是 */
+  BigLetter?: number;
+  /** 密码包含数字。0：否，1：是 */
+  Digit?: number;
+  /** 密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$ */
+  Symbol?: string;
+  /** 改密完成通知。0：不通知 1：通知 */
+  CompleteNotify?: number;
+  /** 通知邮箱 */
+  NotifyEmails?: string[];
+  /** 加密压缩文件密码 */
+  FilePassword?: string;
+  /** 所属部门id。“1.2.3” */
+  DepartmentId?: string;
+  /** 任务类型 4-手工执行 5-周期自动执行 */
+  Type?: number;
+  /** 执行周期，单位天（大于等于 1，小于等于 365） */
+  Period?: number;
+  /** 周期任务首次执行时间 */
+  FirstTime?: string;
+}
+
+declare interface CreateChangePwdTaskResponse {
+  /** 任务id */
+  OperationId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCmdTemplateRequest {
   /** 模板名，最大长度32字符，不能包含空白字符 */
   Name: string;
@@ -832,6 +944,16 @@ declare interface DeleteAclsRequest {
 }
 
 declare interface DeleteAclsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteChangePwdTaskRequest {
+  /** 改密任务id列表 */
+  IdSet: number[];
+}
+
+declare interface DeleteChangePwdTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -986,6 +1108,48 @@ declare interface DescribeAssetSyncStatusRequest {
 declare interface DescribeAssetSyncStatusResponse {
   /** 资产同步结果 */
   Status: AssetSyncStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeChangePwdTaskDetailRequest {
+  /** 改密任务Id */
+  OperationId: string;
+  /** 所属部门ID，如：“1.2.3” */
+  DepartmentId?: string;
+  /** 过滤数组，支持：InstanceId 资产ID，DeviceName 资产名称，Ip 内外IP，Account 资产账号，LastChangeStatus 上次改密状态。 */
+  Filters?: Filter[];
+  /** 分页偏移位置，默认0 */
+  Offset?: number;
+  /** 每页条目。默认20 */
+  Limit?: number;
+}
+
+declare interface DescribeChangePwdTaskDetailResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 任务详情 */
+  Details?: ChangePwdTaskDetail[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeChangePwdTaskRequest {
+  /** 过滤数组。过滤数组。Name支持以下值: OperationId 任务ID TaskName 任务名 */
+  Filters?: Filter[];
+  /** 所属部门ID */
+  DepartmentId?: string;
+  /** 分页偏移量，默认0 */
+  Offset?: number;
+  /** 每页条目数量，默认20 */
+  Limit?: number;
+}
+
+declare interface DescribeChangePwdTaskResponse {
+  /** 任务详情 */
+  Tasks?: ChangePwdTaskInfo[] | null;
+  /** 任务总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1366,6 +1530,56 @@ declare interface ModifyAclResponse {
   RequestId?: string;
 }
 
+declare interface ModifyChangePwdTaskRequest {
+  /** 改密任务id */
+  OperationId: string;
+  /** 改密资产id列表 */
+  DeviceIdSet: number[];
+  /** 改密资产的账号列表 */
+  AccountSet: string[];
+  /** 修改类型：1：修改任务信息 2：关联任务资产账号 */
+  ModifyType: number;
+  /** 改密方式。1：使用执行账号修改密码；2：修改自身密码 */
+  ChangeMethod: number;
+  /** 密码生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码 */
+  AuthGenerationStrategy: number;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 所属部门ID，"1,2,3" */
+  DepartmentId?: string;
+  /** 任务的执行账号 */
+  RunAccount?: string;
+  /** 密码，手动指定密码时必传。 */
+  Password?: string;
+  /** 密码限制长度，自动生成密码必传。 */
+  PasswordLength?: number;
+  /** 密码包含小写字母，0：否，1：是。 */
+  SmallLetter?: number;
+  /** 密码包含大写字母，0：否，1：是。 */
+  BigLetter?: number;
+  /** 密码包含数字，0：否，1：是。 */
+  Digit?: number;
+  /** 密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$ */
+  Symbol?: string;
+  /** 改密完成通知。0：不通知 1：通知 */
+  CompleteNotify?: number;
+  /** 通知邮箱 */
+  NotifyEmails?: string[];
+  /** 加密压缩文件密码 */
+  FilePassword?: string;
+  /** 任务类型， 4：手工执行 5：周期自动执行 */
+  Type?: number;
+  /** 周期任务周期，单位天（大于等于 1，小于等于 365） */
+  Period?: number;
+  /** 周期任务首次执行时间 */
+  FirstTime?: string;
+}
+
+declare interface ModifyChangePwdTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCmdTemplateRequest {
   /** 模板名，最长32字符，不能包含空白字符 */
   Name: string;
@@ -1530,6 +1744,20 @@ declare interface ResetUserRequest {
 }
 
 declare interface ResetUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunChangePwdTaskRequest {
+  /** 任务Id */
+  OperationId: string;
+  /** 部门id */
+  DepartmentId?: string;
+  /** 改密任务详情 */
+  Details?: RunChangePwdTaskDetail[];
+}
+
+declare interface RunChangePwdTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1761,6 +1989,8 @@ declare interface Dasb {
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
   /** 创建手工资产同步任务 {@link CreateAssetSyncJobRequest} {@link CreateAssetSyncJobResponse} */
   CreateAssetSyncJob(data: CreateAssetSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetSyncJobResponse>;
+  /** 创建修改密码任务 {@link CreateChangePwdTaskRequest} {@link CreateChangePwdTaskResponse} */
+  CreateChangePwdTask(data: CreateChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChangePwdTaskResponse>;
   /** 新建高危命令模板 {@link CreateCmdTemplateRequest} {@link CreateCmdTemplateResponse} */
   CreateCmdTemplate(data: CreateCmdTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmdTemplateResponse>;
   /** 新建主机账号 {@link CreateDeviceAccountRequest} {@link CreateDeviceAccountResponse} */
@@ -1775,6 +2005,8 @@ declare interface Dasb {
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
   /** 删除访问权限 {@link DeleteAclsRequest} {@link DeleteAclsResponse} */
   DeleteAcls(data: DeleteAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclsResponse>;
+  /** 删除修改密码任务 {@link DeleteChangePwdTaskRequest} {@link DeleteChangePwdTaskResponse} */
+  DeleteChangePwdTask(data: DeleteChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChangePwdTaskResponse>;
   /** 删除高危命令模板 {@link DeleteCmdTemplatesRequest} {@link DeleteCmdTemplatesResponse} */
   DeleteCmdTemplates(data: DeleteCmdTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmdTemplatesResponse>;
   /** 删除主机账号 {@link DeleteDeviceAccountsRequest} {@link DeleteDeviceAccountsResponse} */
@@ -1797,6 +2029,10 @@ declare interface Dasb {
   DescribeAcls(data?: DescribeAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclsResponse>;
   /** 查询资产同步状态 {@link DescribeAssetSyncStatusRequest} {@link DescribeAssetSyncStatusResponse} */
   DescribeAssetSyncStatus(data: DescribeAssetSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncStatusResponse>;
+  /** 查询改密任务列表 {@link DescribeChangePwdTaskRequest} {@link DescribeChangePwdTaskResponse} */
+  DescribeChangePwdTask(data?: DescribeChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChangePwdTaskResponse>;
+  /** 查询改密任务详情 {@link DescribeChangePwdTaskDetailRequest} {@link DescribeChangePwdTaskDetailResponse} */
+  DescribeChangePwdTaskDetail(data: DescribeChangePwdTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChangePwdTaskDetailResponse>;
   /** 查询命令模板列表 {@link DescribeCmdTemplatesRequest} {@link DescribeCmdTemplatesResponse} */
   DescribeCmdTemplates(data?: DescribeCmdTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmdTemplatesResponse>;
   /** 数盾-DASB-获取镜像列表 {@link DescribeDasbImageIdsRequest} {@link DescribeDasbImageIdsResponse} */
@@ -1825,6 +2061,8 @@ declare interface Dasb {
   ImportExternalDevice(data: ImportExternalDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ImportExternalDeviceResponse>;
   /** 修改访问权限 {@link ModifyAclRequest} {@link ModifyAclResponse} */
   ModifyAcl(data: ModifyAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclResponse>;
+  /** 更新修改密码任务 {@link ModifyChangePwdTaskRequest} {@link ModifyChangePwdTaskResponse} */
+  ModifyChangePwdTask(data: ModifyChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChangePwdTaskResponse>;
   /** 修改高危命令模板 {@link ModifyCmdTemplateRequest} {@link ModifyCmdTemplateResponse} */
   ModifyCmdTemplate(data: ModifyCmdTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmdTemplateResponse>;
   /** 修改资产信息 {@link ModifyDeviceRequest} {@link ModifyDeviceResponse} */
@@ -1845,6 +2083,8 @@ declare interface Dasb {
   ResetDeviceAccountPrivateKey(data: ResetDeviceAccountPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceAccountPrivateKeyResponse>;
   /** 重置用户 {@link ResetUserRequest} {@link ResetUserResponse} */
   ResetUser(data: ResetUserRequest, config?: AxiosRequestConfig): AxiosPromise<ResetUserResponse>;
+  /** 执行改密任务 {@link RunChangePwdTaskRequest} {@link RunChangePwdTaskResponse} */
+  RunChangePwdTask(data: RunChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunChangePwdTaskResponse>;
   /** 搜索审计日志 {@link SearchAuditLogRequest} {@link SearchAuditLogResponse} */
   SearchAuditLog(data: SearchAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAuditLogResponse>;
   /** 命令执行检索 {@link SearchCommandRequest} {@link SearchCommandResponse} */

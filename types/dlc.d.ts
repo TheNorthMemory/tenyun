@@ -3868,6 +3868,20 @@ declare interface ListTaskJobLogDetailResponse {
   RequestId?: string;
 }
 
+declare interface ListTaskJobLogNameRequest {
+  /** 查询的taskId */
+  TaskId: string;
+  /** SparkSQL批任务唯一ID */
+  BatchId?: string;
+}
+
+declare interface ListTaskJobLogNameResponse {
+  /** 日志名称列表 */
+  Names?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface LockMetaDataRequest {
   /** 加锁内容 */
   LockComponentList: LockComponentInfo[];
@@ -4503,6 +4517,8 @@ declare interface Dlc {
   GetOptimizerPolicy(data: GetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOptimizerPolicyResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
+  /** 日志名称列表 {@link ListTaskJobLogNameRequest} {@link ListTaskJobLogNameResponse} */
+  ListTaskJobLogName(data: ListTaskJobLogNameRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogNameResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
   /** 修改高级设置 {@link ModifyAdvancedStoreLocationRequest} {@link ModifyAdvancedStoreLocationResponse} */

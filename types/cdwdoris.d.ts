@@ -593,6 +593,8 @@ declare interface DescribeSlowQueryRecordsDownloadRequest {
   ResultBytes?: string;
   /** 排序参数 */
   MemoryUsage?: string;
+  /** IsQuery条件 */
+  IsQuery?: number;
 }
 
 declare interface DescribeSlowQueryRecordsDownloadResponse {

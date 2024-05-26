@@ -286,6 +286,8 @@ declare interface GooseFS {
   Type?: string | null;
   /** GooseFSx实例需要挂载的路径 */
   Path?: string | null;
+  /** GooseFS命名空间 */
+  NameSpace?: string | null;
 }
 
 /** gpu 详情 */
