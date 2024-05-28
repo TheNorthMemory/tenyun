@@ -1383,13 +1383,13 @@ declare interface DescribePvListRequest {
   EndTime: string;
   /** 开始时间 */
   StartTime: string;
-  /** 获取day：d， 获取min则不填 */
+  /** 对PV指标的查询维度。获取day：d， 获取min则不填。 */
   Dimension?: string;
 }
 
 declare interface DescribePvListResponse {
   /** pv列表 */
-  ProjectPvSet: RumPvInfo[] | null;
+  ProjectPvSet?: RumPvInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1561,19 +1561,19 @@ declare interface DescribeTawAreasRequest {
   AreaIds?: number[];
   /** 片区Key */
   AreaKeys?: string[];
-  /** 分页Limit */
+  /** 分页Limit，默认根据AreaKeys和AreaStatuses参数查询所有。 */
   Limit?: number;
   /** 片区状态(1=有效，2=无效) */
   AreaStatuses?: number[];
-  /** 分页Offset */
+  /** 分页Offset，默认根据AreaKeys和AreaStatuses参数查询所有。 */
   Offset?: number;
 }
 
 declare interface DescribeTawAreasResponse {
   /** 片区总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 片区列表 */
-  AreaSet: RumAreaInfo[];
+  AreaSet?: RumAreaInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

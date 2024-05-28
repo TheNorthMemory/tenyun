@@ -973,9 +973,9 @@ declare interface AttachCcnResponse {
 }
 
 declare interface AttachDisksRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。 */
   DiskIds: string[];
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
   /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知。默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。 */
   RenewFlag?: string;
@@ -1401,19 +1401,19 @@ declare interface DescribeDiskDiscountResponse {
 }
 
 declare interface DescribeDisksDeniedActionsRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。 */
   DiskIds: string[];
 }
 
 declare interface DescribeDisksDeniedActionsResponse {
   /** 云硬盘操作限制列表详细信息。 */
-  DiskDeniedActionSet: DiskDeniedActions[];
+  DiskDeniedActionSet?: DiskDeniedActions[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDisksRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 100。 */
   DiskIds?: string[];
   /** 过滤器列表。disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否instance-id按照【实例ID】进行过滤。类型：String必选：否disk-name按照【云硬盘名称】进行过滤。类型：String必选：否zone按照【可用区】进行过滤。类型：String必选：否disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK或DATA_DISKdisk-state按照【云硬盘状态】进行过滤。类型：String必选：否取值：参考数据结构[Disk](https://cloud.tencent.com/document/api/1207/47576)中DiskState取值。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 DiskIds 和 Filters。 */
   Filters?: Filter[];
@@ -1437,7 +1437,7 @@ declare interface DescribeDisksResponse {
 }
 
 declare interface DescribeDisksReturnableRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 10。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。 */
   DiskIds?: string[];
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -1447,9 +1447,9 @@ declare interface DescribeDisksReturnableRequest {
 
 declare interface DescribeDisksReturnableResponse {
   /** 可退还云硬盘详细信息列表。 */
-  DiskReturnableSet: DiskReturnable[];
+  DiskReturnableSet?: DiskReturnable[];
   /** 符合条件的云硬盘数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1897,7 +1897,7 @@ declare interface DescribeZonesResponse {
 }
 
 declare interface DetachCcnRequest {
-  /** 云联网实例ID。 */
+  /** 云联网实例ID。可通过[DescribeCcnAttachedInstances](https://cloud.tencent.com/document/product/1207/58797)接口返回值中的CcnId获取。 */
   CcnId: string;
 }
 
@@ -1907,7 +1907,7 @@ declare interface DetachCcnResponse {
 }
 
 declare interface DetachDisksRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。 */
   DiskIds: string[];
 }
 
@@ -1993,7 +1993,7 @@ declare interface InquirePriceCreateInstancesResponse {
 }
 
 declare interface InquirePriceRenewDisksRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 1。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。 */
   DiskIds: string[];
   /** 续费云硬盘包年包月相关参数设置。 */
   RenewDiskChargePrepaid: RenewDiskChargePrepaid;
@@ -2001,7 +2001,7 @@ declare interface InquirePriceRenewDisksRequest {
 
 declare interface InquirePriceRenewDisksResponse {
   /** 云硬盘价格。 */
-  DiskPrice: DiskPrice;
+  DiskPrice?: DiskPrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2079,7 +2079,7 @@ declare interface ModifyDiskBackupsAttributeResponse {
 }
 
 declare interface ModifyDisksAttributeRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。 */
   DiskIds: string[];
   /** 云硬盘名称。 */
   DiskName: string;
@@ -2103,9 +2103,9 @@ declare interface ModifyDisksBackupQuotaResponse {
 }
 
 declare interface ModifyDisksRenewFlagRequest {
-  /** 云硬盘ID列表。 */
+  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。 */
   DiskIds: string[];
-  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
+  /** 自动续费标识。取值范围：- NOTIFY_AND_AUTO_RENEW：通知过期且自动续费- NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
   RenewFlag: string;
 }
 
@@ -2341,7 +2341,7 @@ declare interface RerunDockerContainerResponse {
 }
 
 declare interface ResetAttachCcnRequest {
-  /** 云联网实例ID。 */
+  /** 云联网实例ID。可通过[DescribeCcnAttachedInstances](https://cloud.tencent.com/document/product/1207/58797)接口返回值中的CcnId获取。 */
   CcnId: string;
 }
 

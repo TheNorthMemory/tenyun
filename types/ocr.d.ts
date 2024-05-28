@@ -2656,6 +2656,18 @@ declare interface BizLicenseOCRResponse {
   RegistrationDate?: string;
   /** 图片旋转角度(角度制)，文本的水平方向为0度；顺时针为正，角度范围是0-360度 */
   Angle?: number;
+  /** 是否有国徽。0为没有，1为有。 */
+  NationalEmblem?: boolean;
+  /** 是否有二维码。0为没有，1为有。 */
+  QRCode?: boolean;
+  /** 是否有印章。0为没有，1为有。 */
+  Seal?: boolean;
+  /** 标题 */
+  Title?: string;
+  /** 编号 */
+  SerialNumber?: string;
+  /** 登记机关 */
+  RegistrationAuthority?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

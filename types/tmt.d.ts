@@ -13,7 +13,7 @@ declare interface GetFileTranslateData {
   /** 错误提示 */
   Message?: string | null;
   /** 翻译进度 */
-  Progress?: number | null;
+  Progress?: number;
 }
 
 /** 图片翻译结果 */

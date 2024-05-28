@@ -417,7 +417,7 @@ declare interface SuspendProbeTaskResponse {
 declare interface UpdateProbeTaskAttributesRequest {
   /** 任务 ID */
   TaskId: string;
-  /** 任务名 */
+  /** 任务名，该参数为空时不作任何修改。 */
   Name?: string;
 }
 

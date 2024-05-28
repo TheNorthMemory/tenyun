@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 用于域名预释放详情页面 */
+declare interface AuctionInfo {
+  /** 竞拍人 */
+  Bidder?: string | null;
+  /** 竞拍时间 */
+  AuctionTime?: string | null;
+  /** 竞拍价格 */
+  AuctionPrice?: number | null;
+  /** 状态 up: 领先 down: 落后 */
+  Status?: string | null;
+}
+
 /** 批量任务状态 */
 declare interface BatchStatus {
   /** 批量任务id */
@@ -228,6 +240,46 @@ declare interface PhoneEmailData {
   CheckStatus: number;
 }
 
+/** 预释放竞价列表 */
+declare interface PreAuctionInfo {
+  /** 域名 */
+  Domain?: string | null;
+  /** 竞价倒计时 */
+  BiddingTime?: string | null;
+  /** 出价次数 */
+  BidCount?: number | null;
+  /** 当前价格 */
+  Price?: number | null;
+  /** 用户操作 bid：出价 "noAction"：无法操作 */
+  Op?: string | null;
+  /** 业务ID */
+  BusinessId?: string | null;
+}
+
+/** 预释放列表信息 */
+declare interface PreReleaseInfo {
+  /** 域名 */
+  Domain?: string | null;
+  /** 预订倒计时 */
+  ReservationTime?: string | null;
+  /** 域名注册时间 */
+  RegTime?: string | null;
+  /** 域名删除时间 */
+  DelTime?: string | null;
+  /** 当前人数 */
+  CurrentPeople?: number | null;
+  /** 当前价格 */
+  Price?: number | null;
+  /** 是否收藏 */
+  IsFollow?: boolean | null;
+  /** 是否已经预约 */
+  IsAppoint?: boolean | null;
+  /** 业务ID */
+  BusinessId?: string | null;
+  /** 是否为原持有者 */
+  IsDomainUser?: boolean | null;
+}
+
 /** 域名价格信息 */
 declare interface PriceInfo {
   /** 域名后缀，例如.com */
@@ -240,6 +292,18 @@ declare interface PriceInfo {
   RealPrice: number;
   /** 商品的购买类型，新购，续费，赎回，转入，续费并转入 */
   Operation: string;
+}
+
+/** 预释放价格区间配置 */
+declare interface PriceScopeConf {
+  /** 最高价格 */
+  MaxPrice?: number | null;
+  /** 最低价格 */
+  MinPrice?: number | null;
+  /** 价格幅度 */
+  Price?: number | null;
+  /** 保证金 */
+  DepositPrice?: number | null;
 }
 
 /** 合作商竞价详情 */
@@ -334,6 +398,28 @@ declare interface BatchModifyDomainInfoResponse {
   RequestId?: string;
 }
 
+declare interface BidDetailPageRequest {
+  /** 业务ID */
+  BusinessId: string;
+}
+
+declare interface BidDetailPageResponse {
+  /** 域名 */
+  Domain?: string | null;
+  /** 当前域名价格 */
+  CurrentPrice?: number | null;
+  /** 用户上次出价 */
+  BidPrice?: number | null;
+  /** 当前加价幅度 */
+  CurrentPriceScope?: number | null;
+  /** 加价幅度区间配置 */
+  PriceScope?: PriceScopeConf[] | null;
+  /** 用户当前已经支付了的保证金 */
+  DepositPrice?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BidPreDomainsRequest {
   /** 业务ID */
   BusinessId?: string;
@@ -342,6 +428,22 @@ declare interface BidPreDomainsRequest {
 }
 
 declare interface BidPreDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BiddingPreReleaseRequest {
+  /** 业务ID */
+  BusinessId: string;
+  /** 价格 */
+  Price: number;
+}
+
+declare interface BiddingPreReleaseResponse {
+  /** 是否需要额外支付 */
+  IsNeedPay?: boolean;
+  /** 计费请求参数，以Json字符串的形式进行返回。 */
+  BillingParam?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -482,6 +584,14 @@ declare interface CreateTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBiddingRequest {
+}
+
+declare interface DeleteBiddingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCustomDnsHostRequest {
   /** 域名实例ID */
   DomainId: string;
@@ -528,6 +638,24 @@ declare interface DeleteTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAuctionListRequest {
+  /** 业务ID */
+  BusinessId: string;
+  /** 条数，默认10条 */
+  Limit?: number;
+  /** 偏移量 */
+  OffSet?: number;
+}
+
+declare interface DescribeAuctionListResponse {
+  /** 竞拍详情列表 */
+  AuctionList?: AuctionInfo[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBatchOperationLogDetailsRequest {
   /** 日志ID。 */
   LogId: number;
@@ -558,6 +686,86 @@ declare interface DescribeBatchOperationLogsResponse {
   TotalCount?: number;
   /** 日志列表 */
   DomainBatchLogSet?: DomainBatchLogSet[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBiddingAppointDetailRequest {
+}
+
+declare interface DescribeBiddingAppointDetailResponse {
+  /** 1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回 */
+  Status?: number;
+  /** 预约保证金是否已经退回yes：退回 no: 未退回 */
+  BiddingBondRefund?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBiddingAppointListRequest {
+  /** 每页数量 */
+  PageSize: number;
+  /** 状态： 1 已预约 9 预约持有者索回 */
+  Status?: number[];
+  /** 排序字段：AppointEndTime 预约结束时间 */
+  SortField?: string;
+  /** 排序规则：asc升序，desc降序 */
+  SortOrder?: string;
+}
+
+declare interface DescribeBiddingAppointListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBiddingDetailRequest {
+}
+
+declare interface DescribeBiddingDetailResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBiddingListRequest {
+  /** 每页数量 */
+  PageSize: number;
+  /** 2 竞价中 3 等待出价 4 交易失败 10 竞价阶段持有者赎回 */
+  Status?: number[];
+  /** 排序字段：BiddingEndTime 竞价结束时间	BiddingPrice 我的价格 */
+  SortField?: string;
+  /** 排序规则：asc升序，desc降序 */
+  SortOrder?: string;
+}
+
+declare interface DescribeBiddingListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBiddingSuccessfulDetailRequest {
+}
+
+declare interface DescribeBiddingSuccessfulDetailResponse {
+  /** 保证金，是否退款，yes表示退款，no表示不退款 */
+  BiddingBondRefund?: string;
+  /** 状态：1 竞价中，2 待出价，3 竞价失败， 4 等待支付 5 等待转移， 6 转移中，7 交易成功，8 持有者索回，9 已违约 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBiddingSuccessfulListRequest {
+  /** 每页数量 */
+  PageSize: number;
+  /** 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约 */
+  Status?: number[];
+  /** 排序字段：SuccessfulTime 预约结束时间 */
+  SortField?: string;
+  /** 排序规则：asc升序，desc降序 */
+  SortOrder?: string;
+}
+
+declare interface DescribeBiddingSuccessfulListResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -640,6 +848,28 @@ declare interface DescribeDomainSimpleInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribePayWaitDetailRequest {
+  /** 业务ID */
+  BusinessId: string;
+}
+
+declare interface DescribePayWaitDetailResponse {
+  /** 域名 */
+  Domain?: string;
+  /** 域名类型 */
+  Status?: string;
+  /** 支付结束时间 */
+  EndTime?: string;
+  /** 域名注册时间 */
+  RegTime?: string;
+  /** 域名成交价格 */
+  Price?: number;
+  /** 待退还保证金 */
+  RetDeposit?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePhoneEmailListRequest {
   /** 0：所有类型 1：手机 2：邮箱，默认0 */
   Type?: number;
@@ -660,6 +890,22 @@ declare interface DescribePhoneEmailListResponse {
   RequestId?: string;
 }
 
+declare interface DescribePreAuctionListRequest {
+  /** 页码 */
+  PageNumber?: number;
+  /** 条数 */
+  PageSize?: number;
+}
+
+declare interface DescribePreAuctionListResponse {
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 预释放竞价列表 */
+  PreAuctionList?: PreAuctionInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePreDomainListRequest {
   /** 页码 */
   Page?: number;
@@ -676,6 +922,62 @@ declare interface DescribePreDomainListResponse {
   ReservedDomainList?: ReservedDomainInfo[];
   /** 总数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePreReleaseListRequest {
+  /** 关键词 */
+  Keywords?: string;
+  /** 搜索关键字，开头 */
+  DomainStart?: boolean;
+  /** 搜索关键字结尾 */
+  DomainEnd?: boolean;
+  /** 排序 */
+  Sort?: number;
+  /** 起始价格 */
+  PriceStart?: number;
+  /** 结束价格 */
+  PriceEnd?: number;
+  /** 起始域名长度 */
+  LengthStart?: number;
+  /** 结束域名长度 */
+  LengthEnd?: number;
+  /** 页码 */
+  PageNumber?: number;
+  /** 没页显示数 */
+  PageSize?: number;
+  /** 后缀 */
+  Suffix?: number[];
+  /** 一级分类 */
+  ClassOne?: number;
+  /** 二级分类 */
+  ClassTwo?: number[];
+  /** 三级分类 */
+  ClassThree?: number[];
+  /** 四级分类 */
+  ClassFour?: number[];
+  /** 排除关键字，开头 */
+  FilterStart?: boolean;
+  /** 排除关键字，结尾 */
+  FilterEnd?: boolean;
+  /** 排除关键字 */
+  FilterWords?: string;
+  /** 交易类型 */
+  TransType?: number;
+  /** 搜索白金域名 */
+  IsTop?: boolean;
+  /** 结束时间排序啊 desc:倒序 asc:正序 */
+  EndTimeSort?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+declare interface DescribePreReleaseListResponse {
+  /** 数量 */
+  TotalCount?: number | null;
+  /** 预释放列表 */
+  PreReleaseList?: PreReleaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -768,6 +1070,38 @@ declare interface DescribeTldListRequest {
 declare interface DescribeTldListResponse {
   /** 支持的后缀列表 */
   List?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUnPreDomainDetailRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeUnPreDomainDetailResponse {
+  /** 域名 */
+  Domain?: string;
+  /** 预约人数 */
+  PreCount?: number;
+  /** 域名注册时间 */
+  RegTime?: string;
+  /** 域名删除时间 */
+  DeleteTime?: string;
+  /** 到期时间 */
+  ExpireTime?: string;
+  /** 域名状态 */
+  Status?: string;
+  /** 域名价格 */
+  CurrentPrice?: number;
+  /** 域名保证金 */
+  AppointBondPrice?: number;
+  /** 是否已经预约 */
+  IsAppoint?: boolean;
+  /** 业务ID */
+  BusinessId?: string;
+  /** 是否为原持有者域名 */
+  IsDomainUser?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1007,8 +1341,12 @@ declare interface Domain {
   (): Versions;
   /** 批量域名信息修改 {@link BatchModifyDomainInfoRequest} {@link BatchModifyDomainInfoResponse} */
   BatchModifyDomainInfo(data: BatchModifyDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyDomainInfoResponse>;
+  /** 预释放详情页出价 {@link BidDetailPageRequest} {@link BidDetailPageResponse} */
+  BidDetailPage(data: BidDetailPageRequest, config?: AxiosRequestConfig): AxiosPromise<BidDetailPageResponse>;
   /** 合作商预释放域名出价 {@link BidPreDomainsRequest} {@link BidPreDomainsResponse} */
   BidPreDomains(data?: BidPreDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<BidPreDomainsResponse>;
+  /** 预释放出价 {@link BiddingPreReleaseRequest} {@link BiddingPreReleaseResponse} */
+  BiddingPreRelease(data: BiddingPreReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<BiddingPreReleaseResponse>;
   /** 批量操作日志状态 {@link CheckBatchStatusRequest} {@link CheckBatchStatusResponse} */
   CheckBatchStatus(data: CheckBatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBatchStatusResponse>;
   /** 域名注册查询 {@link CheckDomainRequest} {@link CheckDomainResponse} */
@@ -1023,6 +1361,8 @@ declare interface Domain {
   CreatePhoneEmail(data: CreatePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePhoneEmailResponse>;
   /** 添加域名信息模板 {@link CreateTemplateRequest} {@link CreateTemplateResponse} */
   CreateTemplate(data: CreateTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTemplateResponse>;
+  /** 删除记录 {@link DeleteBiddingRequest} {@link DeleteBiddingResponse} */
+  DeleteBidding(data?: DeleteBiddingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBiddingResponse>;
   /** 删除自定义DNS Host {@link DeleteCustomDnsHostRequest} {@link DeleteCustomDnsHostResponse} */
   DeleteCustomDnsHost(data: DeleteCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomDnsHostResponse>;
   /** 删除手机邮箱 {@link DeletePhoneEmailRequest} {@link DeletePhoneEmailResponse} */
@@ -1031,10 +1371,24 @@ declare interface Domain {
   DeleteReservedPreDomainInfo(data: DeleteReservedPreDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReservedPreDomainInfoResponse>;
   /** 删除信息模板 {@link DeleteTemplateRequest} {@link DeleteTemplateResponse} */
   DeleteTemplate(data: DeleteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTemplateResponse>;
+  /** 获取竞价列表 {@link DescribeAuctionListRequest} {@link DescribeAuctionListResponse} */
+  DescribeAuctionList(data: DescribeAuctionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuctionListResponse>;
   /** 批量操作日志详情 {@link DescribeBatchOperationLogDetailsRequest} {@link DescribeBatchOperationLogDetailsResponse} */
   DescribeBatchOperationLogDetails(data: DescribeBatchOperationLogDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogDetailsResponse>;
   /** 批量操作日志列表 {@link DescribeBatchOperationLogsRequest} {@link DescribeBatchOperationLogsResponse} */
   DescribeBatchOperationLogs(data?: DescribeBatchOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogsResponse>;
+  /** 我预约的域名-预约详情 {@link DescribeBiddingAppointDetailRequest} {@link DescribeBiddingAppointDetailResponse} */
+  DescribeBiddingAppointDetail(data?: DescribeBiddingAppointDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBiddingAppointDetailResponse>;
+  /** 我预定的域名 {@link DescribeBiddingAppointListRequest} {@link DescribeBiddingAppointListResponse} */
+  DescribeBiddingAppointList(data: DescribeBiddingAppointListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBiddingAppointListResponse>;
+  /** 我竞价的域名-竞价详情 {@link DescribeBiddingDetailRequest} {@link DescribeBiddingDetailResponse} */
+  DescribeBiddingDetail(data?: DescribeBiddingDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBiddingDetailResponse>;
+  /** 我竞价的域名 {@link DescribeBiddingListRequest} {@link DescribeBiddingListResponse} */
+  DescribeBiddingList(data: DescribeBiddingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBiddingListResponse>;
+  /** 我得标的域名-得标详情 {@link DescribeBiddingSuccessfulDetailRequest} {@link DescribeBiddingSuccessfulDetailResponse} */
+  DescribeBiddingSuccessfulDetail(data?: DescribeBiddingSuccessfulDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBiddingSuccessfulDetailResponse>;
+  /** 我得标的域名 {@link DescribeBiddingSuccessfulListRequest} {@link DescribeBiddingSuccessfulListResponse} */
+  DescribeBiddingSuccessfulList(data: DescribeBiddingSuccessfulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBiddingSuccessfulListResponse>;
   /** 查询自定义DNS Host {@link DescribeCustomDnsHostSetRequest} {@link DescribeCustomDnsHostSetResponse} */
   DescribeCustomDnsHostSet(data: DescribeCustomDnsHostSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomDnsHostSetResponse>;
   /** 域名基本信息 {@link DescribeDomainBaseInfoRequest} {@link DescribeDomainBaseInfoResponse} */
@@ -1045,10 +1399,16 @@ declare interface Domain {
   DescribeDomainPriceList(data?: DescribeDomainPriceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPriceListResponse>;
   /** 获取域名实名信息 {@link DescribeDomainSimpleInfoRequest} {@link DescribeDomainSimpleInfoResponse} */
   DescribeDomainSimpleInfo(data: DescribeDomainSimpleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainSimpleInfoResponse>;
+  /** 等待支付详情接口 {@link DescribePayWaitDetailRequest} {@link DescribePayWaitDetailResponse} */
+  DescribePayWaitDetail(data: DescribePayWaitDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePayWaitDetailResponse>;
   /** 已验证手机邮箱列表 {@link DescribePhoneEmailListRequest} {@link DescribePhoneEmailListResponse} */
   DescribePhoneEmailList(data?: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
+  /** 查询预释放竞价列表 {@link DescribePreAuctionListRequest} {@link DescribePreAuctionListResponse} */
+  DescribePreAuctionList(data?: DescribePreAuctionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreAuctionListResponse>;
   /** 提前获取域释放域名数据 {@link DescribePreDomainListRequest} {@link DescribePreDomainListResponse} */
   DescribePreDomainList(data?: DescribePreDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreDomainListResponse>;
+  /** 购买页预释放域名查询 {@link DescribePreReleaseListRequest} {@link DescribePreReleaseListResponse} */
+  DescribePreReleaseList(data?: DescribePreReleaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreReleaseListResponse>;
   /** 合作商查询竞价信息 {@link DescribeReservedBidInfoRequest} {@link DescribeReservedBidInfoResponse} */
   DescribeReservedBidInfo(data: DescribeReservedBidInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedBidInfoResponse>;
   /** 查询预约预释放域名状态 {@link DescribeReservedPreDomainInfoRequest} {@link DescribeReservedPreDomainInfoResponse} */
@@ -1059,6 +1419,8 @@ declare interface Domain {
   DescribeTemplateList(data?: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
   /** 查询支持注册后缀 {@link DescribeTldListRequest} {@link DescribeTldListResponse} */
   DescribeTldList(data?: DescribeTldListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTldListResponse>;
+  /** 查询预释放未预约域名详情接口 {@link DescribeUnPreDomainDetailRequest} {@link DescribeUnPreDomainDetailResponse} */
+  DescribeUnPreDomainDetail(data: DescribeUnPreDomainDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnPreDomainDetailResponse>;
   /** 修改自定义DNS Host {@link ModifyCustomDnsHostRequest} {@link ModifyCustomDnsHostResponse} */
   ModifyCustomDnsHost(data: ModifyCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomDnsHostResponse>;
   /** 批量域名 DNS 修改 {@link ModifyDomainDNSBatchRequest} {@link ModifyDomainDNSBatchResponse} */

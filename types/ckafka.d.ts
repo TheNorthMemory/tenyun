@@ -1852,6 +1852,10 @@ declare interface PrometheusDTO {
   SourcePort?: number;
   /** broker地址 */
   BrokerIp?: string | null;
+  /** VPC ID信息 */
+  VpcId?: string | null;
+  /** 子网ID信息 */
+  SubnetId?: string | null;
 }
 
 /** Prometheus 监控返回 */

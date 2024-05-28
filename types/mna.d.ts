@@ -518,6 +518,20 @@ declare interface GetDevicesResponse {
   RequestId?: string;
 }
 
+declare interface GetFlowAlarmInfoRequest {
+}
+
+declare interface GetFlowAlarmInfoResponse {
+  /** 流量包的告警阈值 */
+  AlarmValue?: number | null;
+  /** 告警通知回调url */
+  NotifyUrl?: string | null;
+  /** 告警通知回调key */
+  CallbackKey?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetFlowPackagesRequest {
   /** 页码，从1开始 */
   PageNumber: number;
@@ -536,6 +550,36 @@ declare interface GetFlowPackagesResponse {
   PackageList?: FlowPackageInfo[];
   /** 总数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetFlowStatisticByGroupRequest {
+  /** 分组ID */
+  GroupId: string;
+  /** 开始查找时间 */
+  BeginTime: number;
+  /** 截止时间 */
+  EndTime: number;
+  /** 流量种类（1：上行流量，2：下行流量， 3: 上下行总和） */
+  Type: number;
+  /** 时间粒度（1：按小时统计，2：按天统计） */
+  TimeGranularity: number;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  AccessRegion?: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
+}
+
+declare interface GetFlowStatisticByGroupResponse {
+  /** 流量详细信息 */
+  NetDetails?: NetDetails[];
+  /** 查找时间段流量使用最大值（单位：byte） */
+  MaxValue?: number;
+  /** 查找时间段流量使用平均值（单位：byte） */
+  AvgValue?: number;
+  /** 查找时间段流量使用总量（单位：byte） */
+  TotalValue?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -787,10 +831,14 @@ declare interface Mna {
   GetDevicePayMode(data: GetDevicePayModeRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicePayModeResponse>;
   /** 设备信息列表 {@link GetDevicesRequest} {@link GetDevicesResponse} */
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
+  /** 查询流量告警信息 {@link GetFlowAlarmInfoRequest} {@link GetFlowAlarmInfoResponse} */
+  GetFlowAlarmInfo(data?: GetFlowAlarmInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowAlarmInfoResponse>;
   /** 获取流量包列表 {@link GetFlowPackagesRequest} {@link GetFlowPackagesResponse} */
   GetFlowPackages(data: GetFlowPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowPackagesResponse>;
   /** 获取数据流量统计数据 {@link GetFlowStatisticRequest} {@link GetFlowStatisticResponse} */
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
+  /** 根据设备组获取数据流量统计数据 {@link GetFlowStatisticByGroupRequest} {@link GetFlowStatisticByGroupResponse} */
+  GetFlowStatisticByGroup(data: GetFlowStatisticByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByGroupResponse>;
   /** 获取厂商硬件列表 {@link GetHardwareListRequest} {@link GetHardwareListResponse} */
   GetHardwareList(data: GetHardwareListRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareListResponse>;
   /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
