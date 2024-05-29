@@ -168,6 +168,12 @@ declare interface ChangePwdTaskInfo {
   NextTime?: string | null;
 }
 
+/** 负载均衡 */
+declare interface Clb {
+  /** 负载均衡IP */
+  ClbIp?: string | null;
+}
+
 /** 高危命令模板 */
 declare interface CmdTemplate {
   /** 高危命令模板ID */
@@ -416,6 +422,8 @@ declare interface Resource {
   PackageNode?: number;
   /** 日志投递规格信息 */
   LogDeliveryArgs?: string | null;
+  /** 堡垒机资源LB */
+  ClbSet?: Clb[] | null;
 }
 
 /** 立即执行改密任务的入参 */
@@ -1365,11 +1373,17 @@ declare interface DescribeResourcesRequest {
   VpcId?: string;
   /** 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId */
   ResourceIds?: string[];
+  /** 每页条目数量 */
+  Limit?: number;
+  /** 分页偏移位置 */
+  Offset?: number;
 }
 
 declare interface DescribeResourcesResponse {
   /** 堡垒机资源列表 */
-  ResourceSet: Resource[];
+  ResourceSet?: Resource[];
+  /** 堡垒机资源数量 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

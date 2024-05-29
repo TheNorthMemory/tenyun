@@ -884,6 +884,8 @@ declare interface DatasourceBaseInfo {
   Version?: string | null;
   /** 数据源附带参数信息Params json字符串 */
   ParamsString?: string | null;
+  /** 区分数据源类型自定义源还是系统源 */
+  Category?: string | null;
 }
 
 /** 依赖配置 */
@@ -1730,6 +1732,10 @@ declare interface InstanceOpsDto {
   InstanceLifeCycleOpsDto?: InstanceLifeCycleOpsDto | null;
   /** 自动重试次数 */
   RetryAttempts?: number | null;
+  /** 紧急去除的依赖父实例列表 */
+  DeletedFatherList?: string[] | null;
+  /** 循环依赖关联的实例 */
+  CirculateInstanceList?: InstanceOpsDto[] | null;
 }
 
 /** 任务运行历史分页记录 */
@@ -2331,9 +2337,11 @@ declare interface OpsTaskCanvasDto {
 /** 画布所需的信息 */
 declare interface OpsTaskCanvasInfoList {
   /** 画布任务信息 */
-  TasksList: OpsTaskCanvasDto[];
+  TasksList?: OpsTaskCanvasDto[];
   /** 画布任务链接信息 */
-  LinksList: OpsTaskLinkInfoDto[];
+  LinksList?: OpsTaskLinkInfoDto[];
+  /** 画布循环依赖任务信息 */
+  CirculateTaskList?: OpsTaskCanvasDto | null;
 }
 
 /** 任务分页查询 */
@@ -2355,13 +2363,15 @@ declare interface OpsTaskInfoPage {
 /** 任务依赖的边信息 */
 declare interface OpsTaskLinkInfoDto {
   /** 下游任务id */
-  TaskTo: string;
+  TaskTo?: string;
   /** 上游任务id */
-  TaskFrom: string;
+  TaskFrom?: string;
   /** 依赖边类型 1、“real_real”表示任务->任务；2、"virtual_real" 跨工作流任务->任务 */
-  LinkType: string;
+  LinkType?: string;
   /** 依赖边id */
-  LinkId: string;
+  LinkId?: string;
+  /** 为了区分新增的循环依赖新增的类型。默认是normal，循环依赖则是circulate */
+  LinkStyle?: string | null;
 }
 
 /** 通用排序字段 */
@@ -4781,6 +4791,8 @@ declare interface BatchStopOpsTasksRequest {
   TaskIdList: string[];
   /** 项目Id */
   ProjectId: string;
+  /** 是否终止已生成的实例 */
+  KillInstance?: boolean;
 }
 
 declare interface BatchStopOpsTasksResponse {
@@ -4795,6 +4807,8 @@ declare interface BatchStopWorkflowsByIdsRequest {
   WorkflowIds: string[];
   /** 项目id */
   ProjectId: string;
+  /** 是否终止已生成的实例 */
+  KillInstance?: boolean;
 }
 
 declare interface BatchStopWorkflowsByIdsResponse {
@@ -5095,6 +5109,8 @@ declare interface CreateHiveTableByDDLRequest {
   Type: string;
   /** 责任人 */
   Incharge?: string;
+  /** schema名称 */
+  SchemaName?: string;
 }
 
 declare interface CreateHiveTableByDDLResponse {
@@ -6799,6 +6815,10 @@ declare interface DescribeOperateOpsTasksRequest {
   TaskTags?: TaskTag[];
   /** 查询关键字 */
   KeyWord?: string;
+  /** 实例生成方式 */
+  InitStrategy?: string;
+  /** 额外请求的资源类型 */
+  RequestResourceTypes?: string[];
 }
 
 declare interface DescribeOperateOpsTasksResponse {
@@ -8135,6 +8155,8 @@ declare interface FreezeOpsTasksRequest {
   Tasks: SimpleTaskInfo[];
   /** 任务操作是否消息通知下游任务责任人 */
   OperateIsInform: boolean;
+  /** 是否终止已生成的实例 */
+  KillInstance?: boolean;
 }
 
 declare interface FreezeOpsTasksResponse {
@@ -8149,6 +8171,8 @@ declare interface FreezeTasksByWorkflowIdsRequest {
   WorkflowIds: string[];
   /** 项目id */
   ProjectId: string;
+  /** 是否终止已生成的实例 */
+  KillInstance?: boolean;
 }
 
 declare interface FreezeTasksByWorkflowIdsResponse {
@@ -9611,7 +9635,7 @@ declare interface Wedata {
   BatchStartIntegrationTasks(data: BatchStartIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStartIntegrationTasksResponse>;
   /** 批量停止集成任务 {@link BatchStopIntegrationTasksRequest} {@link BatchStopIntegrationTasksResponse} */
   BatchStopIntegrationTasks(data: BatchStopIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopIntegrationTasksResponse>;
-  /** 智能运维-批量停止任务 {@link BatchStopOpsTasksRequest} {@link BatchStopOpsTasksResponse} */
+  /** 任务运维-批量停止任务 {@link BatchStopOpsTasksRequest} {@link BatchStopOpsTasksResponse} */
   BatchStopOpsTasks(data: BatchStopOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopOpsTasksResponse>;
   /** 批量停止工作流 {@link BatchStopWorkflowsByIdsRequest} {@link BatchStopWorkflowsByIdsResponse} */
   BatchStopWorkflowsByIds(data: BatchStopWorkflowsByIdsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopWorkflowsByIdsResponse>;
@@ -9923,7 +9947,7 @@ declare interface Wedata {
   DryRunDIOfflineTask(data: DryRunDIOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DryRunDIOfflineTaskResponse>;
   /** 编排空间批量操作页面查找全部的文件夹 {@link FindAllFolderRequest} {@link FindAllFolderResponse} */
   FindAllFolder(data: FindAllFolderRequest, config?: AxiosRequestConfig): AxiosPromise<FindAllFolderResponse>;
-  /** 批量冻结任务 {@link FreezeOpsTasksRequest} {@link FreezeOpsTasksResponse} */
+  /** 任务运维-批量暂停任务 {@link FreezeOpsTasksRequest} {@link FreezeOpsTasksResponse} */
   FreezeOpsTasks(data: FreezeOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeOpsTasksResponse>;
   /** 暂停工作流下的所有任务 {@link FreezeTasksByWorkflowIdsRequest} {@link FreezeTasksByWorkflowIdsResponse} */
   FreezeTasksByWorkflowIds(data: FreezeTasksByWorkflowIdsRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksByWorkflowIdsResponse>;

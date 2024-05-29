@@ -624,6 +624,8 @@ declare interface PulsarNetworkAccessPointInfo {
   RouteType?: number;
   /** 0：本地域访问，由于并没有配置跨地域容灾，所该类型的接入点，无法进行异地切换、异地访问切回；1：本地域访问，由于配置了跨地域容灾，随时可以进行异地切换，该状态用于主集群的接入点2：跨地域访问，已经完成了异地切换，该状态用于源集群的接入点，该状态下的接入点不可删除3：跨地域访问，随时可以进行异地访问切回，该状态用于目标集群的接入点，该状态下的接入点不可删除4:跨地域访问，目标集群已经完成异地切回，等待删除状态 */
   OperationType?: number | null;
+  /** 接入点类型 */
+  AccessPointsType?: string | null;
 }
 
 /** Pulsar专业版集群信息 */
@@ -2867,11 +2869,11 @@ declare interface DescribePulsarProInstanceDetailRequest {
 
 declare interface DescribePulsarProInstanceDetailResponse {
   /** 集群信息 */
-  ClusterInfo: PulsarProClusterInfo;
+  ClusterInfo?: PulsarProClusterInfo;
   /** 集群网络接入点信息 */
-  NetworkAccessPointInfos: PulsarNetworkAccessPointInfo[] | null;
+  NetworkAccessPointInfos?: PulsarNetworkAccessPointInfo[] | null;
   /** 集群规格信息 */
-  ClusterSpecInfo: PulsarProClusterSpecInfo | null;
+  ClusterSpecInfo?: PulsarProClusterSpecInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2887,9 +2889,9 @@ declare interface DescribePulsarProInstancesRequest {
 
 declare interface DescribePulsarProInstancesResponse {
   /** 未分页的总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例信息列表 */
-  Instances: PulsarProInstance[];
+  Instances?: PulsarProInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
