@@ -306,6 +306,8 @@ declare interface AlarmPolicyRule {
   ValueMin?: number | null;
   /** 告警分级阈值配置 */
   HierarchicalValue?: AlarmHierarchicalValue | null;
+  /** 是否延迟指标 */
+  IsLatenessMetric?: number | null;
 }
 
 /** 告警策略触发任务 */
@@ -1265,31 +1267,33 @@ declare interface ManagementCommand {
 /** 指标，可用于设置告警、查询数据 */
 declare interface Metric {
   /** 告警策略类型 */
-  Namespace: string;
+  Namespace?: string;
   /** 指标名 */
-  MetricName: string;
+  MetricName?: string;
   /** 指标展示名 */
-  Description: string;
+  Description?: string;
   /** 最小值 */
-  Min: number;
+  Min?: number;
   /** 最大值 */
-  Max: number;
+  Max?: number;
   /** 维度列表 */
-  Dimensions: string[];
+  Dimensions?: string[];
   /** 单位 */
-  Unit: string;
+  Unit?: string;
   /** 指标配置 */
-  MetricConfig: MetricConfig | null;
+  MetricConfig?: MetricConfig | null;
   /** 是否为高级指标。1是 0否 */
-  IsAdvanced: number | null;
+  IsAdvanced?: number | null;
   /** 高级指标是否开通。1是 0否 */
-  IsOpen: number | null;
+  IsOpen?: number | null;
   /** 集成中心产品ID */
-  ProductId: number | null;
+  ProductId?: number | null;
   /** 匹配运算符 */
   Operators?: Operator[] | null;
   /** 指标触发 */
   Periods?: number[] | null;
+  /** 是否延迟指标 */
+  IsLatenessMetric?: number | null;
 }
 
 /** 指标配置 */

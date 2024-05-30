@@ -551,17 +551,17 @@ declare interface EncryptedPhoneVerificationRequest {
   Name: string;
   /** 手机号，加密方式以EncryptionMode为准 */
   Phone: string;
-  /** 敏感信息的加密方式，目前支持明文、MD5和SHA256加密传输，参数取值：0：明文，不加密1: 使用MD5加密2: 使用SHA256 */
+  /** 敏感信息的加密方式，目前支持明文、MD5和SHA256加密传输，参数取值：0：明文，不加密1：使用MD5加密2：使用SHA2563：使用SM3加密 */
   EncryptionMode: string;
 }
 
 declare interface EncryptedPhoneVerificationResponse {
   /** 认证结果码:【收费结果码】0: 三要素信息一致-4: 三要素信息不一致【不收费结果码】-7: 身份证号码有误-8: 参数错误-9: 没有记录-11: 验证中心服务繁忙 */
-  Result: string;
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 运营商名称。取值范围为["移动","联通","电信",""] */
-  ISP: string;
+  ISP?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -779,45 +779,57 @@ declare interface FunctionInfo {
 /** 网关信息 */
 declare interface GatewayItem {
   /** 用户uin */
-  Uin: string;
+  Uin?: string;
   /** 用户appid */
-  AppId: number | null;
+  AppId?: number | null;
+  /** WxAppId */
+  WxAppId?: string | null;
   /** 环境id */
-  EnvId: string | null;
+  EnvId?: string | null;
   /** Gateway唯一id */
-  GatewayId: string | null;
+  GatewayId?: string | null;
   /** Gateway名称 */
-  GatewayName: string | null;
+  GatewayName?: string | null;
   /** Gateway类型 */
-  GatewayType: string | null;
+  GatewayType?: string | null;
   /** Gateway描述 */
-  GatewayDesc: string | null;
+  GatewayDesc?: string | null;
   /** 套餐版本 */
-  PackageVersion: string | null;
+  PackageVersion?: string | null;
   /** 套餐唯一id */
-  PackageId: number | null;
+  PackageId?: number | null;
   /** vpc唯一id */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网id */
-  SubnetIds: string[] | null;
+  SubnetIds?: string[] | null;
   /** 网关状态 */
-  Status: string | null;
+  Status?: string | null;
   /** l5地址 */
-  L5Addr: string | null;
+  L5Addr?: string | null;
   /** 地域 */
-  Region: string | null;
+  Region?: string | null;
+  /** 是否可以续费 */
+  CanRenew?: boolean | null;
+  /** 自动续费标志 */
+  AutoRenewFlag?: number | null;
   /** 隔离时间 */
-  IsolateTime: string | null;
+  IsolateTime?: string | null;
   /** 到期时间 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 变更时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
+  /** 是否可以降配 */
+  CanDowngrade?: boolean | null;
   /** 允许未登录访问 */
-  AllowUncertified: number | null;
+  AllowUncertified?: number | null;
   /** 网关版本限额 */
   VersionNumLimit?: number | null;
+  /** Donut接入ID */
+  LongAccessId?: string | null;
+  /** Donut接入域名 */
+  AccessDomain?: string | null;
 }
 
 /** 网关版本详情 */
@@ -2763,6 +2775,8 @@ declare interface DescribeWxGatewayRoutesResponse {
 declare interface DescribeWxGatewaysRequest {
   /** 环境ID */
   EnvId: string;
+  /** 网关ID */
+  GatewayId?: string;
   /** 服务名称，精确匹配 */
   GatewayName?: string;
   /** 分页参数 */
@@ -2773,9 +2787,9 @@ declare interface DescribeWxGatewaysRequest {
 
 declare interface DescribeWxGatewaysResponse {
   /** 返回的服务列表 */
-  Gateways: GatewayItem[] | null;
+  Gateways?: GatewayItem[] | null;
   /** 网关总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

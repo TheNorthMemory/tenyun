@@ -1590,11 +1590,11 @@ declare interface RewriteAction {
 
 /** 规则引擎规则项，Conditions 数组内多个项的关系为 或，内层 Conditions 列表内多个项的关系为 且。 */
 declare interface Rule {
-  /** 执行的功能。 */
-  Actions: Action[];
   /** 执行功能判断条件。注意：满足该数组内任意一项条件，功能即可执行。 */
   Conditions: RuleAndConditions[];
-  /** 嵌套规则。 */
+  /** 执行的功能。注意：Actions 和 SubRules 不可都为空 */
+  Actions?: Action[];
+  /** 嵌套规则。注意：SubRules 和 Actions 不可都为空 */
   SubRules?: SubRuleItem[];
 }
 

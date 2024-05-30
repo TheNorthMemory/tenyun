@@ -132,6 +132,16 @@ declare interface CodePack {
   ProductId?: string | null;
   /** 码关系是否预关联0:否, 1:是 */
   RelateType?: number;
+  /** 场景码 */
+  SceneCode?: number | null;
+  /** 码规则 */
+  CodeRule?: string | null;
+  /** 已使用码数 */
+  UsedAmount?: number | null;
+  /** 开始流水号 */
+  SerialStart?: number | null;
+  /** 结束流水号 */
+  SerialEnd?: number | null;
 }
 
 /** 码段配置 */
@@ -205,9 +215,11 @@ declare interface InputEncryptData {
 /** 通用调度任务 */
 declare interface Job {
   /** 调度ID */
-  JobId: number;
+  JobId?: number;
   /** 执行状态 init:初始化, pending: 执行中, done: 执行成功, error: 执行失败 */
-  Status: string;
+  Status?: string;
+  /** 任务错误信息 */
+  ErrorMessage?: string | null;
 }
 
 /** 商户信息 */
@@ -254,6 +266,10 @@ declare interface PackSpec {
   CustomId?: string | null;
   /** 码段配置 */
   CodeParts?: CodePart[] | null;
+  /** 包装单位 */
+  Unit?: string | null;
+  /** 场景值 */
+  SceneCode?: number | null;
 }
 
 /** 环节数据 */
@@ -393,31 +409,31 @@ declare interface RawScanLog {
 /** 扫码明细 */
 declare interface ScanLog {
   /** 行ID */
-  LogId: number;
+  LogId?: number;
   /** 微信openid */
-  Openid: string | null;
+  Openid?: string | null;
   /** 微信昵称 */
-  Nickname: string | null;
+  Nickname?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 码 */
-  Code: string | null;
+  Code?: string | null;
   /** 企业ID */
-  CorpId: number | null;
+  CorpId?: number | null;
   /** 商户ID */
-  MerchantId: string | null;
+  MerchantId?: string | null;
   /** 商品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** ip地址 */
-  Ip: string | null;
+  Ip?: string | null;
   /** 国家 */
-  Country: string | null;
+  Country?: string | null;
   /** 省份 */
-  Province: string | null;
+  Province?: string | null;
   /** 城市 */
-  City: string | null;
+  City?: string | null;
   /** 县/区 */
-  District: string | null;
+  District?: string | null;
   /** 微信 unionid */
   Unionid?: string | null;
   /** 首次扫码 0:否, 1:是 */
@@ -430,6 +446,12 @@ declare interface ScanLog {
   MerchantName?: string | null;
   /** 产品名称 */
   ProductName?: string | null;
+  /** 产品Logo */
+  ProductLogo?: string | null;
+  /** 风险状态0: 未知, 1:通过, 2:失败/风险, 3:存疑 */
+  Status?: number;
+  /** 是否开启验证0:否, 1:是 */
+  Verify?: number;
 }
 
 /** 扫码统计 */
@@ -461,31 +483,37 @@ declare interface ScanStat {
 /** 溯源码 */
 declare interface TraceCode {
   /** 二维码 */
-  Code: string;
+  Code?: string;
   /** 企业ID */
-  CorpId: number;
+  CorpId?: number;
   /** 码包ID */
-  PackId: string;
+  PackId?: string;
   /** 批次ID */
-  BatchId: string;
+  BatchId?: string;
   /** 所属商户ID */
-  MerchantId: string;
+  MerchantId?: string;
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 码状态 0: 冻结 1: 激活 */
-  Status: number;
+  Status?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 商户名称 */
-  MerchantName: string;
+  MerchantName?: string;
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
   /** 渠道商ID */
   AgentId?: number;
   /** 码层级 0: 最小级, 1: 一级, 2: 二级 */
   Level?: number;
+  /** 码层级详情 */
+  PackSpec?: PackSpec[] | null;
+  /** 场景码 */
+  SceneCode?: number | null;
+  /** 流水码 */
+  SerialCode?: number | null;
 }
 
 /** 溯源数据 */
@@ -635,6 +663,8 @@ declare interface CreateCodePackRequest {
   ProductId?: string;
   /** 层级码时是否提前生成关联关系，默认为 1 */
   RelateType?: number;
+  /** 场景值 */
+  SceneCode?: number;
 }
 
 declare interface CreateCodePackResponse {
@@ -697,6 +727,8 @@ declare interface CreateCustomPackRequest {
   ProductId?: string;
   /** 是否预生成码关系0: 否, 1:是默认为1，仅对层级码有效 */
   RelateType?: number;
+  /** 场景值 */
+  SceneCode?: number;
 }
 
 declare interface CreateCustomPackResponse {
@@ -1047,6 +1079,10 @@ declare interface DescribeCodePacksRequest {
   ResType?: string;
   /** 资源ID ResType是 batch 时对应是批次ID, 是 order_in, order_out时，则是订单ID */
   ResId?: string;
+  /** 应用场景 */
+  SceneCode?: number;
+  /** 码包状态 */
+  Status?: string;
 }
 
 declare interface DescribeCodePacksResponse {
@@ -1377,9 +1413,9 @@ declare interface DescribeTraceCodesRequest {
 
 declare interface DescribeTraceCodesResponse {
   /** 标识列表 */
-  TraceCodes: TraceCode[] | null;
+  TraceCodes?: TraceCode[] | null;
   /** 条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2327,14 +2327,14 @@ declare interface GenerateCloudStorageAIServiceTaskFileURLRequest {
   TaskId: string;
   /** 文件名 */
   FileName: string;
-  /** 过期时间 UNIX 时间戳（默认值为当前时间 1 小时后） */
+  /** 过期时间 UNIX 时间戳（默认值为当前时间 1 小时后，最大不超过文件所属任务的过期时间） */
   ExpireTime?: number;
 }
 
 declare interface GenerateCloudStorageAIServiceTaskFileURLResponse {
   /** 文件下载 URL */
   FileURL?: string;
-  /** 过期时间 UNIX 时间戳 */
+  /** 过期时间 UNIX 时间戳（最大不超过文件所属任务的过期时间） */
   ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

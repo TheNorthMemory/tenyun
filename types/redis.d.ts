@@ -77,11 +77,11 @@ declare interface CommandTake {
 /** 延时分布详情 */
 declare interface DelayDistribution {
   /** 指延时分布阶梯，其与延时区间的对应关系如下所示。- 1：[0ms,1ms]。- 5： [1ms,5ms]。- 10： [5ms,10ms]。- 50： [10ms,50ms]。- 200：[50ms,200ms]。- -1： [200ms,∞]。 */
-  Ladder: number;
+  Ladder?: number;
   /** 延时处于当前分布阶梯的命令数量，单位：个。 */
-  Size: number;
+  Size?: number;
   /** 修改时间。 */
-  Updatetime: number;
+  Updatetime?: number;
 }
 
 /** 详细DTS实例信息 */
@@ -211,21 +211,21 @@ declare interface InstanceClusterShard {
 /** 实例枚举类型参数描述 */
 declare interface InstanceEnumParam {
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型，例如：Enum。 */
-  ValueType: string;
+  ValueType?: string;
   /** 参数值修改后是否需要重启。- true：需要。- false：不需要。 */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数默认值。 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 参数当前运行值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数说明。 */
-  Tips: string;
+  Tips?: string;
   /** 参数可取的值。 */
-  EnumValue: string[];
+  EnumValue?: string[];
   /** 参数修改状态。- 1: 修改中。- 2：修改完成。 */
-  Status: number;
+  Status?: number;
 }
 
 /** 实例整型参数描述 */
@@ -255,29 +255,29 @@ declare interface InstanceIntegerParam {
 /** 实例多选项类型参数描述 */
 declare interface InstanceMultiParam {
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型。例如：multi。 */
-  ValueType: string;
+  ValueType?: string;
   /** 参数修改后是否需要重启。- true：需要。- false：不需要。 */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数默认值。 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 当前运行参数值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数说明。 */
-  Tips: string;
-  /** 参数说明。 */
-  EnumValue: string[];
+  Tips?: string;
+  /** 参数枚举值。 */
+  EnumValue?: string[];
   /** 参数修改的状态。- 1：修改中。- 2：修改完成。 */
-  Status: number;
+  Status?: number;
 }
 
 /** 实例节点 */
 declare interface InstanceNode {
   /** 实例 ID。 */
-  Id: number;
+  Id?: number;
   /** 节点详细信息。 */
-  InstanceClusterNode: InstanceClusterNode[];
+  InstanceClusterNode?: InstanceClusterNode[];
 }
 
 /** 实例参数 */
@@ -291,37 +291,37 @@ declare interface InstanceParam {
 /** 实例参数修改历史 */
 declare interface InstanceParamHistory {
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数修改之前的值。 */
-  PreValue: string;
+  PreValue?: string;
   /** 参数修改之后的值。 */
-  NewValue: string;
+  NewValue?: string;
   /** 参数配置状态。- 1：参数配置修改中。- 2：参数配置修改成功。- 3：参数配置修改失败。 */
-  Status: number;
+  Status?: number;
   /** 修改时间。 */
-  ModifyTime: string;
+  ModifyTime?: string;
 }
 
 /** 代理慢查询详情 */
 declare interface InstanceProxySlowlogDetail {
   /** 慢查询耗时时长。单位：毫秒。 */
-  Duration: number;
+  Duration?: number;
   /** 客户端地址。 */
-  Client: string;
+  Client?: string;
   /** 慢查询的命令。 */
-  Command: string;
+  Command?: string;
   /** 慢查询详细命令行信息。 */
-  CommandLine: string;
+  CommandLine?: string;
   /** 执行时间。 */
-  ExecuteTime: string;
+  ExecuteTime?: string;
 }
 
 /** 实例安全组信息 */
 declare interface InstanceSecurityGroupDetail {
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 安全组信息，包括：安全组 ID、安全组名称、安全组出入站规则。 */
-  SecurityGroupDetails: SecurityGroupDetail[];
+  SecurityGroupDetails?: SecurityGroupDetail[];
 }
 
 /** 实例详细信息列表。 */
@@ -438,6 +438,8 @@ declare interface InstanceSet {
   UpgradeProxyVersion?: string | null;
   /** 实例可升级Cache小版本。 */
   UpgradeRedisVersion?: string | null;
+  /** 备份模式：- SecondLevelBackup 秒级备份- NormalLevelBackup 普通备份 */
+  BackupMode?: string | null;
 }
 
 /** 慢查询详情 */
@@ -467,21 +469,21 @@ declare interface InstanceTagInfo {
 /** 实例字符型参数描述 */
 declare interface InstanceTextParam {
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型。例如：text。 */
-  ValueType: string;
+  ValueType?: string;
   /** 参数修改后是否需要重启。- true：需要。- false：不需要。 */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数默认值。 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 参数当前运行值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数说明。 */
-  Tips: string;
+  Tips?: string;
   /** 参数可取值。 */
-  TextValue: string[];
+  TextValue?: string[];
   /** 参数修改状态。- 1: 修改中。- 2：修改完成。 */
-  Status: number;
+  Status?: number;
 }
 
 /** 复制组实例 */
@@ -596,7 +598,7 @@ declare interface ProductConf {
   MaxBuyNum?: number;
   /** 产品是否售罄。- true：售罄。- false：未售罄。 */
   Saleout?: boolean;
-  /** 产品引擎。包括：腾讯云 CKV与社区版 Redis。 */
+  /** 产品引擎。Redis 或者 CKV。 */
   Engine?: string;
   /** 兼容版本。包括：Redis-2.8、Redis-3.2、Redis-4.0、Redis-5.0、Redis-6.2。 */
   Version?: string;
@@ -619,9 +621,9 @@ declare interface ProductConf {
 /** Proxy节点信息。 */
 declare interface ProxyNodes {
   /** 节点 ID。 */
-  NodeId: string | null;
+  NodeId?: string | null;
   /** 可用区 ID。 */
-  ZoneId: number | null;
+  ZoneId?: number | null;
 }
 
 /** 实例的备份数组 */
@@ -775,15 +777,15 @@ declare interface RegionConf {
 /** 实例节点组信息 */
 declare interface ReplicaGroup {
   /** 节点组 ID。 */
-  GroupId: number;
+  GroupId?: number;
   /** 节点组的名称，主节点为空。 */
-  GroupName: string;
+  GroupName?: string;
   /** 节点的可用区ID，比如ap-guangzhou-1 */
-  ZoneId: string;
-  /** 节点组类型，master为主节点，replica为副本节点 */
-  Role: string;
+  ZoneId?: string;
+  /** 节点组类型，master为主节点，replica为副本节点。 */
+  Role?: string;
   /** 节点组节点列表 */
-  RedisNodes: RedisNode[];
+  RedisNodes?: RedisNode[];
 }
 
 /** API购买实例绑定标签 */
@@ -815,31 +817,31 @@ declare interface SecurityGroup {
 /** 安全组详情 */
 declare interface SecurityGroupDetail {
   /** 项目ID。 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 创建安全组的时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 安全组 ID。 */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 安全组名称。 */
-  SecurityGroupName: string;
+  SecurityGroupName?: string;
   /** 安全组标记。 */
-  SecurityGroupRemark: string;
+  SecurityGroupRemark?: string;
   /** 安全组入站规则，即控制访问数据库的来源。 */
-  InboundRule: SecurityGroupsInboundAndOutbound[];
+  InboundRule?: SecurityGroupsInboundAndOutbound[];
   /** 安全组出站规则。 */
-  OutboundRule: SecurityGroupsInboundAndOutbound[];
+  OutboundRule?: SecurityGroupsInboundAndOutbound[];
 }
 
 /** 安全组出入规则 */
 declare interface SecurityGroupsInboundAndOutbound {
-  /** 标识出入数据库的IP与端口是否被允许。 */
-  Action: string;
+  /** 标识出入数据库的IP与端口是否被允许。- ACCEPT：允许。- DROP：不允许。 */
+  Action?: string;
   /** 出入数据库的IP地址 */
-  Ip: string;
+  Ip?: string;
   /** 端口号。 */
-  Port: string;
+  Port?: string;
   /** 协议类型。 */
-  Proto: string;
+  Proto?: string;
 }
 
 /** 访问命令 */
@@ -853,33 +855,33 @@ declare interface SourceCommand {
 /** 访问来源信息 */
 declare interface SourceInfo {
   /** 来源 IP 地址。 */
-  Ip: string;
+  Ip?: string;
   /** 客户端连接数量。 */
-  Conn: number;
+  Conn?: number;
   /** 命令 */
-  Cmd: number;
+  Cmd?: number;
 }
 
 /** 任务信息详情 */
 declare interface TaskInfoDetail {
   /** 任务 ID。 */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 任务开始时间。 */
-  StartTime: string | null;
-  /** 任务类型。- FLOW_CREATE：创建实例。- FLOW_MODIFYCONNECTIONCONFIG：调整带宽连接数。- FLOW_MODIFYINSTANCEPASSWORDFREE：免密变更流程。- FLOW_CLEARNETWORK：VPC退还中。- FLOW_SETPWD：设置访问密码。- FLOW_EXPORSHR：扩缩容流程。- FLOW_UpgradeArch：实例架构升级流程。- FLOW_MODIFYINSTANCEPARAMS：修改实例参数。- FLOW_MODIFYINSTACEREADONLY：只读变更流程。- FLOW_CLOSE：关闭实例。- FLOW_DELETE：删除实例。- FLOW_OPEN_WAN：开启外网。- FLOW_CLEAN：清空实例。 - FLOW_MODIFYINSTANCEACCOUNT：修改实例账号。- FLOW_ENABLEINSTANCE_REPLICATE：开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE: 关闭副本只读。- FLOW_SWITCHINSTANCEVIP：交换实例 VIP。- FLOW_CHANGE_REPLICA_TO_MSTER：副本节点升主节点。- FLOW_BACKUPINSTANCE：备份实例。 */
-  TaskType: string | null;
+  StartTime?: string | null;
+  /** 任务类型。- FLOW_CREATE: "001"，新建实例- FLOW_RESIZE ： "002"，配置变更- FLOW_CLOSE："003"，关闭实例- FLOW_CLEAN： "004"，清空实例- FLOW_STARTUP："005"，实例启用。- FLOW_DELETE："006"，删除实例。- FLOW_SETPWD："007"，重置密码。- FLOW_EXPORTBACKUP："009"，导出备份文件。- FLOW_RESTOREBACKUP："010"，恢复备份。- FLOW_BACKUPINSTANCE："012"，备份实例。- FLOW_MIGRATEINSTANCE："013"，迁移实例。- FLOW_DELBACKUP："014"，删除备份。- FLOW_EXCHANGEINSTANCE： "016"，切换实例流程。- FLOW_AUTOBACKUP："017"，自动备份实例。- FLOW_MIGRATECHECK： "022"，迁移参数校验。- FLOW_MIGRATETASK："023"，数据迁移中。- FLOW_CLEANDB："025"，清空某个数据库。- FLOW_CLONEBACKUP："026"，克隆备份。- FLOW_CHANGEVIP： "027"，改变vip地址。- FLOW_EXPORSHR ："028"，扩缩容。- FLOW_ADDNODES："029"，加（减）节点。- FLOW_CHANGENET："031"，改变网络类型。- FLOW_MODIFYINSTACEREADONLY："033"，只读策略变更。- FLOW_MODIFYINSTANCEPARAMS："034"，修改实例参数。- FLOW_MODIFYINSTANCEPASSWORDFREE："035"，设置免密。- FLOW_SWITCHINSTANCEVIP："036"，实例VIP切换。- FLOW_MODIFYINSTANCEACCOUNT："037"，实例帐号变更。- FLOW_MODIFYINSTANCEBANDWIDTH："038"，实例带宽变更。- FLOW_ENABLEINSTANCE_REPLICATE："039"，开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE："040"，关闭副本只读。- FLOW_UpgradeArch："041"，实例架构升级，主从升集群。- FLOW_DowngradeArch： "042"，实例架构降级，集群降主从。- FLOW_UpgradeVersion： "043"，版本升级。- FLOW_MODIFYCONNECTIONCONFIG："044"，带宽连接数调整。- FLOW_CLEARNETWORK："045"，更换网络，- FLOW_REMOVE_BACKUP_FILE："046"，删除备份。- FLOW_UPGRADE_SUPPORT_MULTI_AZ："047"，升级实例支持多可用区。- FLOW_SHUTDOWN_MASTER："048"，模拟故障。- FLOW_CHANGE_REPLICA_TO_MASTER："049"，手动提主。- FLOW_CODE_ADD_REPLICATION_INSTANCE："050"，新增复制组。- FLOW_OPEN_WAN："052"，开通外网。- FLOW_CLOSE_WAN："053"，关闭外网FLOW_UPDATE_WAN："054"，更新外网。- FLOW_CODE_DELETE_REPLICATION_INSTANCE："055"，解绑复制组。- FLOW_CODE_CHANGE_MASTER_INSTANCE："056"，复制组实例切主。- FLOW_CODE_CHANGE_INSTANCE_ROLE： "057"，更改复制组实例角色。- FLOW_MIGRATE_NODE："058"，迁移节点。- FLOW_SWITCH_NODE："059"，切换节点。- FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redi s版本。- FLOW_UPGRADE_PROXY_VERSION："061"，升级 Proxy 版本。- FLOW_MODIFY_INSTANCE_NETWORK： "062"，实例修改网络。- FLOW_MIGRATE_PROXY_NODE："063"，迁移proxy节点。- FLOW_MIGRATION_INSTANCE_ZONE："066"，实例可用区迁移中。- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。- FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。- FLOW_MODIFYBACKUPMOD："070"，变更实例备份模式。 */
+  TaskType?: string | null;
   /** 实例名称。 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 实例 ID。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 项目 ID。 */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 任务进度。 */
-  Progress: number | null;
+  Progress?: number | null;
   /** 任务执行结束时间。 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 任务执行状态。0：任务初始化。1：执行中。2：完成。4：失败。 */
-  Result: number | null;
+  Result?: number | null;
 }
 
 /** tendis节点信息 */
@@ -989,7 +991,7 @@ declare interface ApplyParamsTemplateRequest {
 
 declare interface ApplyParamsTemplateResponse {
   /** 任务ID */
-  TaskIds: number[];
+  TaskIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1119,6 +1121,8 @@ declare interface CloneInstancesRequest {
   TemplateId?: string;
   /** 指定克隆实例的告警策略 ID。请登录[腾讯云可观测平台控制台](https://console.cloud.tencent.com/monitor/alarm2/policy)，在 告警管理 > 策略管理页面获取策略 ID 信息。 */
   AlarmPolicyList?: string[];
+  /** 克隆指定恢复数据的时间。仅支持已开通秒级备份的实例 */
+  CloneTime?: string;
 }
 
 declare interface CloneInstancesResponse {
@@ -1893,7 +1897,7 @@ declare interface DescribeParamTemplateInfoResponse {
 }
 
 declare interface DescribeParamTemplatesRequest {
-  /** 产品类型数组。产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构） */
+  /** 产品类型数组。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。 */
   ProductTypes?: number[];
   /** 模板名称数组。 */
   TemplateNames?: string[];
@@ -1903,9 +1907,9 @@ declare interface DescribeParamTemplatesRequest {
 
 declare interface DescribeParamTemplatesResponse {
   /** 该用户的参数模板数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数模板详情。 */
-  Items: ParamTemplateInfo[];
+  Items?: ParamTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1949,9 +1953,9 @@ declare interface DescribeProjectSecurityGroupsRequest {
 
 declare interface DescribeProjectSecurityGroupsResponse {
   /** 安全组规则。 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 符合条件的安全组总数量。 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2079,7 +2083,7 @@ declare interface DescribeTaskListRequest {
   Offset?: number;
   /** 项目 ID。登录 [Redis 控制台](https://console.cloud.tencent.com/redis)，在右上角的账号信息下拉菜单中，选择**项目管理**，即可获取对应的项目 ID。 */
   ProjectIds?: number[];
-  /** 任务类型。- FLOW_CREATE：创建实例。- FLOW_MODIFYCONNECTIONCONFIG：调整带宽连接数。- FLOW_MODIFYINSTANCEPASSWORDFREE：免密变更流程。- FLOW_CLEARNETWORK：VPC退还中。- FLOW_SETPWD：设置访问密码。- FLOW_EXPORSHR：扩缩容流程。- FLOW_UpgradeArch：实例架构升级流程。- FLOW_MODIFYINSTANCEPARAMS：修改实例参数。- FLOW_MODIFYINSTACEREADONLY：只读变更流程。- FLOW_CLOSE：关闭实例。- FLOW_DELETE：删除实例。- FLOW_OPEN_WAN：开启外网。- FLOW_CLEAN：清空实例。 - FLOW_MODIFYINSTANCEACCOUNT：修改实例账号。- FLOW_ENABLEINSTANCE_REPLICATE：开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE: 关闭副本只读。- FLOW_SWITCHINSTANCEVIP：交换实例 VIP。- FLOW_CHANGE_REPLICA_TO_MSTER：副本节点升主节点。- FLOW_BACKUPINSTANCE：备份实例。 */
+  /** 任务类型。- FLOW_CREATE: "001"，新建实例。- FLOW_RESIZE ： "002"，配置变更。- FLOW_CLOSE："003"，关闭实例。- FLOW_CLEAN： "004"，清空实例。- FLOW_STARTUP："005"，实例启用。- FLOW_DELETE："006"，删除实例。- FLOW_SETPWD："007"，重置密码。- FLOW_EXPORTBACKUP："009"，导出备份文件。- FLOW_RESTOREBACKUP："010"，恢复备份。- FLOW_BACKUPINSTANCE："012"，备份实例。- FLOW_MIGRATEINSTANCE："013"，迁移实例。- FLOW_DELBACKUP："014"，删除备份。- FLOW_EXCHANGEINSTANCE： "016"，切换实例流程。- FLOW_AUTOBACKUP："017"，自动备份实例。- FLOW_MIGRATECHECK： "022"，迁移参数校验。- FLOW_MIGRATETASK："023"，数据迁移中。- FLOW_CLEANDB："025"，清空某个数据库。- FLOW_CLONEBACKUP："026"，克隆备份。- FLOW_CHANGEVIP： "027"，改变vip地址。- FLOW_EXPORSHR ："028"，扩缩容。- FLOW_ADDNODES："029"，加（减）节点。- FLOW_CHANGENET："031"，改变网络类型。- FLOW_MODIFYINSTACEREADONLY："033"，只读策略变更。- FLOW_MODIFYINSTANCEPARAMS："034"，修改实例参数。- FLOW_MODIFYINSTANCEPASSWORDFREE："035"，设置免密。- FLOW_SWITCHINSTANCEVIP："036"，实例VIP切换。- FLOW_MODIFYINSTANCEACCOUNT："037"，实例帐号变更。- FLOW_MODIFYINSTANCEBANDWIDTH："038"，实例带宽变更。- FLOW_ENABLEINSTANCE_REPLICATE："039"，开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE："040"，关闭副本只读。- FLOW_UpgradeArch："041"，实例架构升级，主从升集群。- FLOW_DowngradeArch： "042"，实例架构降级，集群降主从。- FLOW_UpgradeVersion： "043"，版本升级。- FLOW_MODIFYCONNECTIONCONFIG："044"，带宽连接数调整，- FLOW_CLEARNETWORK："045"，更换网络，- FLOW_REMOVE_BACKUP_FILE："046"，删除备份。- FLOW_UPGRADE_SUPPORT_MULTI_AZ："047"，升级实例支持多可用区。- FLOW_SHUTDOWN_MASTER："048"，模拟故障。- FLOW_CHANGE_REPLICA_TO_MASTER："049"，手动提主。- FLOW_CODE_ADD_REPLICATION_INSTANCE："050"，新增复制组。- FLOW_OPEN_WAN："052"，开通外网。- FLOW_CLOSE_WAN："053"，关闭外网FLOW_UPDATE_WAN："054"，更新外网。- FLOW_CODE_DELETE_REPLICATION_INSTANCE："055"，解绑复制组。- FLOW_CODE_CHANGE_MASTER_INSTANCE："056"，复制组实例切主。- FLOW_CODE_CHANGE_INSTANCE_ROLE： "057"，更改复制组实例角色。- FLOW_MIGRATE_NODE："058"，迁移节点。- FLOW_SWITCH_NODE："059"，切换节点。- FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redi s版本。- FLOW_UPGRADE_PROXY_VERSION："061"，升级 Proxy 版本。- FLOW_MODIFY_INSTANCE_NETWORK： "062"，实例修改网络。- FLOW_MIGRATE_PROXY_NODE："063"，迁移proxy节点。- FLOW_MIGRATION_INSTANCE_ZONE："066"，实例可用区迁移中。- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。- FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。- FLOW_MODIFYBACKUPMOD："070"，变更实例备份模式。 */
   TaskTypes?: string[];
   /** 任务执行的起始时间。格式如：2021-12-30 00:00:00。 */
   BeginTime?: string;
@@ -2391,13 +2395,13 @@ declare interface ModifyInstanceAccountRequest {
   ReadonlyPolicy?: string[];
   /** 子账号读写策略：填写r、w、rw，表示只读，只写，读写策略 */
   Privilege?: string;
-  /** true表示将主账号切换为免密账号，这里只适用于主账号，子账号不可免密 */
+  /** true表示将主账号切换为免密账号，这里只适用于主账号，子账号不可免密。 */
   NoAuth?: boolean;
 }
 
 declare interface ModifyInstanceAccountResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

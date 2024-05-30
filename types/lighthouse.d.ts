@@ -939,9 +939,9 @@ declare interface ApplyFirewallTemplateResponse {
 }
 
 declare interface ApplyInstanceSnapshotRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/product/1207/47573) 接口返回值中的 InstanceId	获取。 */
   InstanceId: string;
-  /** 快照 ID。 */
+  /** 快照 ID。可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/1207/54388) 接口返回值中的 SnapshotId 获取。 */
   SnapshotId: string;
 }
 
@@ -1101,7 +1101,7 @@ declare interface CreateFirewallTemplateRulesResponse {
 }
 
 declare interface CreateInstanceSnapshotRequest {
-  /** 需要创建快照的实例 ID。 */
+  /** 需要创建快照的实例 ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/product/1207/47573) 接口返回值中的 InstanceId	获取。 */
   InstanceId: string;
   /** 快照名称，最长为 60 个字符。 */
   SnapshotName?: string;
@@ -1689,15 +1689,15 @@ declare interface DescribeInstancesDeniedActionsResponse {
 }
 
 declare interface DescribeInstancesDiskNumRequest {
-  /** 实例ID列表。 */
+  /** 实例ID列表。每次请求批量实例的上限为 100。可通过 DescribeInstances 接口返回值中的 InstanceId 获取。 */
   InstanceIds: string[];
 }
 
 declare interface DescribeInstancesDiskNumResponse {
   /** 挂载信息列表 */
-  AttachDetailSet: AttachDetail[];
+  AttachDetailSet?: AttachDetail[];
   /** 挂载信息数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1779,9 +1779,9 @@ declare interface DescribeKeyPairsResponse {
 }
 
 declare interface DescribeModifyInstanceBundlesRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 DescribeInstances 接口返回值中的 InstanceId 获取。 */
   InstanceId: string;
-  /** 过滤器列表。bundle-id按照【套餐 ID】进行过滤。类型：String必选：否support-platform-type按照【系统类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）类型：String必选：否bundle-type按照 【套餐类型进行过滤】。取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);类型：String必选：否bundle-state按照【套餐状态】进行过滤。取值: ‘ONLINE’(在线); ‘OFFLINE’(下线);类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。 */
+  /** 过滤器列表。bundle-id按照【套餐 ID】进行过滤。类型：String必选：否可通过 DescribeBundles 接口返回值中的 BundleId 获取。support-platform-type按照【系统类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）类型：String必选：否bundle-type按照 【套餐类型进行过滤】。取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);类型：String必选：否bundle-state按照【套餐状态】进行过滤。取值: ‘ONLINE’(在线); ‘OFFLINE’(下线);类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Offset?: number;
@@ -1791,9 +1791,9 @@ declare interface DescribeModifyInstanceBundlesRequest {
 
 declare interface DescribeModifyInstanceBundlesResponse {
   /** 符合条件的套餐数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 变更套餐详细信息。 */
-  ModifyBundleSet: ModifyBundle[];
+  ModifyBundleSet?: ModifyBundle[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1861,9 +1861,9 @@ declare interface DescribeSnapshotsDeniedActionsResponse {
 }
 
 declare interface DescribeSnapshotsRequest {
-  /** 要查询快照的 ID 列表。参数不支持同时指定 SnapshotIds 和 Filters。 */
+  /** 要查询快照的 ID 列表。每次请求批量快照的上限为 100。 可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/1207/54388) 接口返回值中的 SnapshotId 获取。参数不支持同时指定 SnapshotIds 和 Filters。 */
   SnapshotIds?: string[];
-  /** 过滤器列表。snapshot-id按照【快照 ID】进行过滤。类型：String必选：否disk-id按照【磁盘 ID】进行过滤。类型：String必选：否snapshot-name按照【快照名称】进行过滤。类型：String必选：否instance-id按照【实例 ID 】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。 */
+  /** 过滤器列表。snapshot-id按照【快照 ID】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotId 获取。disk-id按照【磁盘 ID】进行过滤。类型：String必选：否可通过 DescribeDisks 接口返回值中的 DiskId 获取。snapshot-name按照【快照名称】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotName 获取。instance-id按照【实例 ID 】进行过滤。类型：String必选：否可通过 DescribeInstances 接口返回值中的 InstanceId 获取。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -1873,9 +1873,9 @@ declare interface DescribeSnapshotsRequest {
 
 declare interface DescribeSnapshotsResponse {
   /** 快照的数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 快照的详情列表。 */
-  SnapshotSet: Snapshot[];
+  SnapshotSet?: Snapshot[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2311,9 +2311,9 @@ declare interface RenewInstancesResponse {
 }
 
 declare interface ReplaceFirewallTemplateRuleRequest {
-  /** 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 的返回值 TemplateSet 获取。 */
+  /** 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 接口返回值中的 TemplateId 获取。 */
   TemplateId: string;
-  /** 防火墙模板规则ID。可通过 [DescribeFirewallTemplateRules](https://cloud.tencent.com/document/product/1207/96875) 的返回值 TemplateRuleSet 获取。 */
+  /** 防火墙模板规则ID。可通过 [DescribeFirewallTemplateRules](https://cloud.tencent.com/document/product/1207/96875) 接口返回值中的 TemplateRuleId 获取。 */
   TemplateRuleId: string;
   /** 替换后的防火墙模板规则。 */
   TemplateRule: FirewallRule;
@@ -2351,9 +2351,9 @@ declare interface ResetAttachCcnResponse {
 }
 
 declare interface ResetFirewallTemplateRulesRequest {
-  /** 模板ID。 */
+  /** 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 接口返回值中的 TemplateId	获取。 */
   TemplateId: string;
-  /** 重置后的防火墙模板规则列表。 */
+  /** 重置后的防火墙模板规则列表。每次请求批量防火墙规则的上限为 100。 */
   TemplateRules: FirewallRule[];
 }
 
@@ -2381,7 +2381,7 @@ declare interface ResetInstanceResponse {
 }
 
 declare interface ResetInstancesPasswordRequest {
-  /** 实例 ID 列表。每次请求批量实例的上限为 100。 */
+  /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过 DescribeInstances 接口返回值中的 InstanceId 获取。 */
   InstanceIds: string[];
   /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下： `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类： 小写字母：[a-z] 大写字母：[A-Z] 数字：0-9 特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/ `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符 小写字母：[a-z] 大写字母：[A-Z] 数字： 0-9 特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/ 如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。 */
   Password: string;

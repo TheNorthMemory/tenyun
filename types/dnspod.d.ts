@@ -1934,6 +1934,20 @@ declare interface ModifyDomainStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDomainToGroupRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名分组ID */
+  GroupId: number;
+  /** 域名ID,域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain */
+  DomainId?: number;
+}
+
+declare interface ModifyDomainToGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDomainUnlockRequest {
   /** 域名 */
   Domain: string;
@@ -2349,6 +2363,8 @@ declare interface Dnspod {
   ModifyDomainRemark(data: ModifyDomainRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainRemarkResponse>;
   /** 修改域名状态 {@link ModifyDomainStatusRequest} {@link ModifyDomainStatusResponse} */
   ModifyDomainStatus(data: ModifyDomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainStatusResponse>;
+  /** 修改域名所属分组 {@link ModifyDomainToGroupRequest} {@link ModifyDomainToGroupResponse} */
+  ModifyDomainToGroup(data: ModifyDomainToGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainToGroupResponse>;
   /** 域名锁定解锁 {@link ModifyDomainUnlockRequest} {@link ModifyDomainUnlockResponse} */
   ModifyDomainUnlock(data: ModifyDomainUnlockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainUnlockResponse>;
   /** 更新动态 DNS 记录 {@link ModifyDynamicDNSRequest} {@link ModifyDynamicDNSResponse} */
