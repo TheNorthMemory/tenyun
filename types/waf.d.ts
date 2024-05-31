@@ -184,6 +184,8 @@ declare interface BatchIpAccessControlItem {
   RuleId?: number | null;
   /** IP列表 */
   IpList?: string[] | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
 }
 
 /** Bot资源信息 */
@@ -310,6 +312,8 @@ declare interface CCRuleItems {
   EventId?: string | null;
   /** 关联的Session规则 */
   SessionApplied?: number[] | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
 }
 
 /** CC规则总览 */
@@ -339,17 +343,21 @@ declare interface CacheUrlItem {
 /** 防篡改url元素 */
 declare interface CacheUrlItems {
   /** 标识 */
-  Id: number;
+  Id?: number;
   /** 名字 */
-  Name: string;
+  Name?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 网址 */
-  Uri: string;
+  Uri?: string;
   /** 协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 状态 */
-  Status: number;
+  Status?: number;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
 }
 
 /** CDC场景下负载均衡WAF的集群信息 */
@@ -490,6 +498,18 @@ declare interface CreateDealsGoodsDetail {
   ResourceId?: string | null;
 }
 
+/** 规则周期执行的数据结构 */
+declare interface CronJob {
+  /** 每个月的几号执行 */
+  Days?: number[] | null;
+  /** 每个星期的星期几执行 */
+  WDays?: number[] | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+}
+
 /** 计费下单响应实体 */
 declare interface DealData {
   /** 订单号列表，元素个数与请求包的goods数组的元素个数一致，商品详情与订单按顺序对应 */
@@ -527,19 +547,21 @@ declare interface DescribeAntiInfoLeakRulesStrategyItem {
 /** 出参 */
 declare interface DescribeAntiLeakageItem {
   /** 规则ID */
-  RuleId: number;
+  RuleId?: number;
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 状态值 */
-  Status: number;
+  Status?: number;
   /** 动作 */
-  Action: string;
+  Action?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 匹配条件 */
-  Strategies: DescribeAntiInfoLeakRulesStrategyItem[] | null;
+  Strategies?: DescribeAntiInfoLeakRulesStrategyItem[] | null;
   /** 匹配的URL */
-  Uri: string | null;
+  Uri?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
 }
 
 /** DescribeCustomRules接口回包中的复杂类型 */
@@ -572,6 +594,18 @@ declare interface DescribeCustomRulesRspRuleListItem {
   ValidStatus?: number | null;
   /** 来源 */
   Source?: string | null;
+  /** 定时任务类型 */
+  JobType?: string | null;
+  /** 定时任务配置信息 */
+  JobDateTime?: JobDateTime | null;
+  /** 周期任务粒度 */
+  CronType?: string | null;
+  /** 自定义标签，风控规则用，用来表示是内置规则还是用户自定义的 */
+  Label?: string | null;
+  /** 拦截页面id */
+  PageId?: string | null;
+  /** 域名 */
+  Domain?: string | null;
 }
 
 /** domain列表 */
@@ -660,6 +694,14 @@ declare interface DomainPackageNew {
   Count: number | null;
   /** 套餐购买地域，clb-waf暂时没有用到 */
   Region: string | null;
+}
+
+/** 域名-规则id结构体 */
+declare interface DomainRuleId {
+  /** 域名 */
+  Domain?: string | null;
+  /** 规则id */
+  RuleId?: string | null;
 }
 
 /** 唯一定位Domain */
@@ -1122,6 +1164,10 @@ declare interface InstanceInfo {
   MiniMaxQPS?: number | null;
   /** 最近一次超量时间 */
   LastQpsExceedTime?: string | null;
+  /** 小程序安全接入ID数量扩张包 */
+  MiniExtendPkg?: MiniExtendPkg | null;
+  /** 计费项 */
+  BillingItem?: string | null;
 }
 
 /** 数据封装 */
@@ -1154,6 +1200,8 @@ declare interface IpAccessControlItem {
   RuleId?: number | null;
   /** IP列表 */
   IpList?: string[] | null;
+  /** 规则创建时间 */
+  CreateTime?: number | null;
 }
 
 /** IP黑白名单参数结构体，主要用于IP黑白名单的导入。 */
@@ -1190,6 +1238,16 @@ declare interface IpHitItemsData {
   Res: IpHitItem[];
   /** 总数目 */
   TotalCount: number;
+}
+
+/** 规则执行的时间结构体 */
+declare interface JobDateTime {
+  /** 定时执行的时间参数 */
+  Timed?: TimedJob[] | null;
+  /** 周期执行的时间参数 */
+  Cron?: CronJob[] | null;
+  /** 时区 */
+  TimeTZone?: string | null;
 }
 
 /** Key-Value的形式，Value为Int */
@@ -1286,6 +1344,26 @@ declare interface MajorEventsPkg {
   BillingItem?: string | null;
   /** 护网包状态 */
   HWState?: number | null;
+}
+
+/** 小程序安全接入ID扩展资源信息 */
+declare interface MiniExtendPkg {
+  /** 资源id */
+  ResourceIds?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 地域 */
+  Region?: number | null;
+  /** 开始时间 */
+  BeginTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 购买数量 */
+  Count?: number | null;
+  /** 续费标志 */
+  RenewFlag?: number | null;
+  /** 计费项 */
+  BillingItem?: string | null;
 }
 
 /** API安全资源信息 */
@@ -1479,17 +1557,19 @@ declare interface Rule {
 /** 规则白名单 */
 declare interface RuleList {
   /** 规则Id */
-  Id: number;
+  Id?: number;
   /** 规则列表的id */
-  Rules: number[];
+  Rules?: number[];
   /** 请求url */
-  Url: string;
+  Url?: string;
   /** 请求的方法 */
-  Function: string;
+  Function?: string;
   /** 时间戳 */
-  Time: string;
+  Time?: string;
   /** 开关状态 */
-  Status: number;
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string | null;
 }
 
 /** 接入列表查询复杂条件 */
@@ -1596,6 +1676,14 @@ declare interface TargetEntity {
   Domain?: string;
 }
 
+/** 规则定时任务数据结构 */
+declare interface TimedJob {
+  /** 开始时间戳，单位为秒 */
+  StartDateTime?: number | null;
+  /** 结束时间戳，单位为秒 */
+  EndDateTime?: number | null;
+}
+
 /** saas和clb信息 */
 declare interface UserDomainInfo {
   /** 用户id */
@@ -1618,6 +1706,12 @@ declare interface UserDomainInfo {
   Cls?: number | null;
   /** 标记是否是混合云接入。hybrid表示混合云接入域名 */
   CloudType?: string | null;
+  /** 标记clbwaf类型 */
+  AlbType?: string | null;
+  /** BOT开关状态 */
+  BotStatus?: number | null;
+  /** API开关状态 */
+  ApiStatus?: number | null;
 }
 
 /** 用户特征规则描述 */
@@ -1797,8 +1891,6 @@ declare interface AddCustomRuleRequest {
   Name: string;
   /** 优先级 */
   SortId: string;
-  /** 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59. 0表示永不过期 */
-  ExpireTime: string;
   /** 策略详情 */
   Strategies: Strategy[];
   /** 需要添加策略的域名 */
@@ -1807,12 +1899,26 @@ declare interface AddCustomRuleRequest {
   ActionType: string;
   /** 如果动作是重定向，则表示重定向的地址；其他情况可以为空 */
   Redirect?: string;
+  /** 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59. 0表示永不过期 */
+  ExpireTime?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
   /** 放行的详情 */
   Bypass?: string;
   /** 添加规则的来源，默认为空 */
   EventId?: string;
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType?: string;
+  /** 规则执行的时间 */
+  JobDateTime?: JobDateTime;
+  /** 规则来源，判断是不是小程序的 */
+  Source?: string;
+  /** 规则标签，小程序规则用，标识是内置规则还是自定义规则 */
+  Label?: string;
+  /** 开关状态，小程序风控规则的时候传该值 */
+  Status?: number;
+  /** 拦截页面id */
+  PageId?: string;
 }
 
 declare interface AddCustomRuleResponse {
@@ -1837,13 +1943,17 @@ declare interface AddCustomWhiteRuleRequest {
   Domain: string;
   /** 放行的详情 */
   Bypass: string;
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
 }
 
 declare interface AddCustomWhiteRuleResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
-  Success: ResponseCode;
+  Success?: ResponseCode;
   /** 添加成功的规则ID */
-  RuleId: number | null;
+  RuleId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1943,6 +2053,8 @@ declare interface AddSpartaProtectionRequest {
   UpstreamHost?: string;
   /** 是否开启缓存 0-关闭 1-开启 */
   ProxyBuffer?: number;
+  /** 0: 禁用拨测, 1: 启用拨测。默认启用拨测 */
+  ProbeStatus?: number;
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -2017,7 +2129,7 @@ declare interface CreateIpAccessControlRequest {
   InstanceId?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
-  /** 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空 */
+  /** 可选值为：batch（批量添加）、bot、cc、custom（非批量添加时的默认值） */
   SourceType?: string;
   /** 备注 */
   Note?: string;
@@ -2117,9 +2229,13 @@ declare interface DeleteCustomRuleRequest {
   RuleId: string;
   /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
   Edition?: string;
+  /** 批量删除的规则列表 */
+  DomainRuleIdList?: DomainRuleId[];
 }
 
 declare interface DeleteCustomRuleResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2649,13 +2765,15 @@ declare interface DescribeCustomRuleListRequest {
   Order?: string;
   /** exp_ts或者mod_ts */
   By?: string;
+  /** 查询的域名列表,访问控制页面不用传 */
+  DomainList?: string[];
 }
 
 declare interface DescribeCustomRuleListResponse {
   /** 规则详情 */
-  RuleList: DescribeCustomRulesRspRuleListItem[];
+  RuleList?: DescribeCustomRulesRspRuleListItem[];
   /** 规则条数 */
-  TotalCount: string;
+  TotalCount?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3703,9 +3821,21 @@ declare interface ModifyCustomRuleRequest {
   SortId?: number;
   /** 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。默认是0 */
   ExpireTime?: number;
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 规则来源，判断是不是小程序的 */
+  Source?: string;
+  /** 开关状态，小程序风控规则的时候传该值 */
+  Status?: number;
+  /** 拦截页面id */
+  PageId?: string;
 }
 
 declare interface ModifyCustomRuleResponse {
+  /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3719,6 +3849,8 @@ declare interface ModifyCustomRuleStatusRequest {
   Status: number;
   /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
   Edition?: string;
+  /** 规则id */
+  DomainRuleIdList?: DomainRuleId[];
 }
 
 declare interface ModifyCustomRuleStatusResponse {
@@ -3743,6 +3875,10 @@ declare interface ModifyCustomWhiteRuleRequest {
   ExpireTime: number;
   /** 匹配条件数组 */
   Strategies: Strategy[];
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
 }
 
 declare interface ModifyCustomWhiteRuleResponse {
@@ -4139,6 +4275,8 @@ declare interface ModifySpartaProtectionRequest {
   UpstreamHost?: string;
   /** 是否开启缓存 0-关闭 1-开启 */
   ProxyBuffer?: number;
+  /** 0: 禁用拨测, 1: 启用拨测。默认启用拨测 */
+  ProbeStatus?: number;
 }
 
 declare interface ModifySpartaProtectionResponse {
@@ -4403,6 +4541,8 @@ declare interface UpsertCCRuleRequest {
   SessionApplied?: number[];
   /** 规则ID，新增时填0 */
   RuleId?: number;
+  /** 规则创建时间 */
+  CreateTime?: number;
 }
 
 declare interface UpsertCCRuleResponse {
@@ -4417,13 +4557,13 @@ declare interface UpsertCCRuleResponse {
 declare interface UpsertIpAccessControlRequest {
   /** 具体域名如：test.qcloudwaf.com全局域名为：global */
   Domain: string;
-  /** ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
+  /** IP 参数列表，json数组由IP，source，note，action，valid_ts组成。IP对应配置的IP地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
   Items: string[];
   /** 实例Id */
   InstanceId?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
-  /** 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空 */
+  /** 可选值为：batch（批量添加）、bot、cc、custom（非批量添加时的默认值） */
   SourceType?: string;
 }
 

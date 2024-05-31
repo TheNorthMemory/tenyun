@@ -110,9 +110,9 @@ declare interface AttributeLabel {
 declare interface BaseConfig {
   /** 应用名称 */
   Name: string;
-  /** 机器人头像 */
+  /** 应用头像 */
   Avatar: string;
-  /** 机器人描述 */
+  /** 应用描述 */
   Desc?: string;
 }
 
@@ -2205,13 +2205,13 @@ declare interface RetryReleaseResponse {
 }
 
 declare interface SaveDocRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文件名 */
   FileName: string;
   /** 文件类型(md|txt|docx|pdf|xlsx) */
   FileType: string;
-  /** cos路径 */
+  /** 平台cos路径，与DescribeStorageCredential接口查询UploadPath参数保持一致 */
   CosUrl: string;
   /** ETag 全称为 Entity Tag，是对象被创建时标识对象内容的信息标签，可用于检查对象的内容是否发生变化 */
   ETag: string;

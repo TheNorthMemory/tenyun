@@ -1921,7 +1921,7 @@ declare interface CreateAccountsRequest {
 
 declare interface CreateAccountsResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2169,7 +2169,7 @@ declare interface CreateDBImportJobRequest {
 
 declare interface CreateDBImportJobResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4091,7 +4091,7 @@ declare interface ModifyAccountPasswordRequest {
 
 declare interface ModifyAccountPasswordResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

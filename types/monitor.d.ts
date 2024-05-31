@@ -3615,11 +3615,11 @@ declare interface DescribeGrafanaInstancesRequest {
 
 declare interface DescribeGrafanaInstancesResponse {
   /** 已废弃，请使用 Instances */
-  InstanceSet: GrafanaInstanceInfo[];
+  InstanceSet?: GrafanaInstanceInfo[];
   /** 符合查询条件的实例总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例列表 */
-  Instances: GrafanaInstanceInfo[];
+  Instances?: GrafanaInstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

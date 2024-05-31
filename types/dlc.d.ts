@@ -732,6 +732,18 @@ declare interface LakeFileSystemToken {
   IssueTime?: number;
 }
 
+/** 描述DLC托管存储基本信息 */
+declare interface LakeFsInfo {
+  /** 托管存储名称 */
+  Name?: string;
+  /** 托管存储类型 */
+  Type?: string;
+  /** 容量 */
+  SpaceUsedSize?: number;
+  /** 创建时候的时间戳 */
+  CreateTimeStamp?: number;
+}
+
 /** 元数据加锁内容 */
 declare interface LockComponentInfo {
   /** 数据库名称 */
@@ -3046,6 +3058,8 @@ declare interface DescribeLakeFsInfoRequest {
 }
 
 declare interface DescribeLakeFsInfoResponse {
+  /** 托管存储信息 */
+  LakeFsInfos?: LakeFsInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

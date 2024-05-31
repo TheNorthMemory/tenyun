@@ -2345,7 +2345,7 @@ declare interface CreateChannelOrganizationInfoChangeUrlResponse {
 declare interface CreateConsoleLoginUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId注:`1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 ``2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。 ``3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 ` */
   Agent: Agent;
-  /** 第三方平台子客企业名称，请确认该名称与企业营业执照中注册的名称一致。注: `1. 如果名称中包含英文括号()，请使用中文括号（）代替。` `2、该名称需要与Agent.ProxyOrganizationOpenId相匹配, 企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 ` */
+  /** 第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。在测试环境联调的过程中，企业名称请统一加上“测试”二字，如：典子谦示例企业测试，否则将无法审核通过。注: `1. 如果名称中包含英文括号()，请使用中文括号（）代替。` `2、该名称需要与Agent.ProxyOrganizationOpenId相匹配, 企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 ` */
   ProxyOrganizationName: string;
   /** 子客企业统一社会信用代码，最大长度200个字符注意：`如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效`。 */
   UniformSocialCreditCode?: string;

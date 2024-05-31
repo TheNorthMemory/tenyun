@@ -356,6 +356,10 @@ declare interface UserInfo {
   PhoneNumber?: string | null;
   /** 手机号区号 */
   AreaCode?: string | null;
+  /** 企微账号id */
+  AppUserId?: string | null;
+  /** 企微账号名称 */
+  AppUserName?: string | null;
 }
 
 /** 用户角色信息 */
@@ -428,6 +432,8 @@ declare interface UserRoleListDataUserRoleInfo {
   AppUserName?: string | null;
   /** 是否在可见范围内 */
   InValidateAppRange?: boolean | null;
+  /** 用户openid */
+  AppOpenUserId?: string | null;
 }
 
 declare interface ApplyEmbedIntervalRequest {

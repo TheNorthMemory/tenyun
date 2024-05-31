@@ -276,6 +276,10 @@ declare interface Device {
   Department?: Department | null;
   /** 数据库资产的多节点 */
   IpPortSet?: string[] | null;
+  /** 网络域Id */
+  DomainId?: string | null;
+  /** 网络域名称 */
+  DomainName?: string | null;
 }
 
 /** 主机账号 */
@@ -424,6 +428,10 @@ declare interface Resource {
   LogDeliveryArgs?: string | null;
   /** 堡垒机资源LB */
   ClbSet?: Clb[] | null;
+  /** 网络域个数 */
+  DomainCount?: number | null;
+  /** 已使用网络域个数 */
+  UsedDomainCount?: number | null;
 }
 
 /** 立即执行改密任务的入参 */
@@ -699,6 +707,8 @@ declare interface BindDeviceResourceRequest {
   DeviceIdSet: number[];
   /** 堡垒机服务ID */
   ResourceId: string;
+  /** 网络域ID */
+  DomainId?: string;
 }
 
 declare interface BindDeviceResourceResponse {
@@ -1633,6 +1643,8 @@ declare interface ModifyDeviceRequest {
   GroupIdSet?: number[];
   /** 资产所属部门ID */
   DepartmentId?: string;
+  /** 网络域Id */
+  DomainId?: string;
 }
 
 declare interface ModifyDeviceResponse {

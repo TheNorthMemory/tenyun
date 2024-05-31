@@ -4177,6 +4177,8 @@ declare interface CreateAssetImageScanSettingRequest {
   ScanScope?: number;
   /** 扫描结束时间02:00 时分 */
   ScanEndTime?: string;
+  /** 排除扫描的镜像 */
+  ExcludeImages?: string[];
 }
 
 declare interface CreateAssetImageScanSettingResponse {
@@ -6278,6 +6280,8 @@ declare interface DescribeAssetImageScanSettingResponse {
   ScanScope?: number;
   /** 扫描结束时间 02:00 时分 */
   ScanEndTime?: string;
+  /** 排除的扫描镜像 */
+  ExcludeImages?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7416,6 +7420,8 @@ declare interface DescribeImageRegistryTimingScanTaskResponse {
   ScanScope?: number;
   /** 命名空间 */
   Namespace?: string[];
+  /** 排除的镜像资产id */
+  ExcludeImageAssetIds?: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10517,6 +10523,8 @@ declare interface UpdateImageRegistryTimingScanTaskRequest {
   RegistryType?: string[];
   /** 命名空间 */
   Namespace?: string[];
+  /** 排除的镜像资产id */
+  ExcludeImageAssetIds?: number[];
 }
 
 declare interface UpdateImageRegistryTimingScanTaskResponse {
