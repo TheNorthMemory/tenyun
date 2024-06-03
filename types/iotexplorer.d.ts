@@ -744,7 +744,7 @@ declare interface TWeCallActiveInfo {
 declare interface TWeCallInfo {
   /** 小程序ID */
   ModelId: string | null;
-  /** Sn信息 */
+  /** Sn信息，SN格式：产品ID_设备名 */
   Sn: string | null;
   /** 激活数 */
   ActiveNum?: number | null;
@@ -831,7 +831,7 @@ declare interface WifiInfo {
 }
 
 declare interface ActivateTWeCallLicenseRequest {
-  /** voip类型 */
+  /** TWecall类型： 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
   PkgType: number;
   /** appId */
   MiniProgramAppId: string;

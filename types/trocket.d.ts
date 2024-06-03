@@ -55,6 +55,52 @@ declare interface Filter {
 }
 
 /** 实例列表页中的实例信息 */
+declare interface FusionInstanceItem {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例版本 */
+  Version?: string;
+  /** 实例类型，EXPERIMENT，体验版BASIC，基础版PRO，专业版PLATINUM，铂金版 */
+  InstanceType?: string;
+  /** 实例状态，RUNNING, 运行中MAINTAINING，维护中ABNORMAL，异常OVERDUE，欠费DESTROYED，已删除CREATING，创建中MODIFYING，变配中CREATE_FAILURE，创建失败MODIFY_FAILURE，变配失败DELETING，删除中 */
+  InstanceStatus?: string;
+  /** 实例主题数上限 */
+  TopicNumLimit?: number;
+  /** 实例消费组数量上限 */
+  GroupNumLimit?: number;
+  /** 计费模式，POSTPAID，按量计费PREPAID，包年包月 */
+  PayMode?: string;
+  /** 到期时间，秒为单位 */
+  ExpiryTime?: number | null;
+  /** 备注信息 */
+  Remark?: string | null;
+  /** 主题数量 */
+  TopicNum?: number;
+  /** 消费组数量 */
+  GroupNum?: number;
+  /** 标签列表 */
+  TagList?: Tag[] | null;
+  /** 商品规格 */
+  SkuCode?: string;
+  /** TPS限流值 */
+  TpsLimit?: number | null;
+  /** 弹性TPS限流值 */
+  ScaledTpsLimit?: number | null;
+  /** 消息保留时间，小时为单位 */
+  MessageRetention?: number | null;
+  /** 延迟消息最大时长，小时为单位 */
+  MaxMessageDelay?: number | null;
+  /** 是否自动续费 */
+  RenewFlag?: number | null;
+  /** 4.x独有数据 */
+  InstanceItemExtraInfo?: InstanceItemExtraInfo | null;
+  /** 预销毁时间 */
+  DestroyTime?: number | null;
+}
+
+/** 实例列表页中的实例信息 */
 declare interface InstanceItem {
   /** 实例ID */
   InstanceId?: string;
@@ -92,6 +138,28 @@ declare interface InstanceItem {
   MessageRetention?: number | null;
   /** 延迟消息最大时长，小时为单位 */
   MaxMessageDelay?: number | null;
+}
+
+/** 4.x集群和5.0集群列表统一显示 4.x特殊数据承载接口 */
+declare interface InstanceItemExtraInfo {
+  /** 是否vip */
+  IsVip?: boolean | null;
+  /** 4.x专享集群状态 */
+  VipInstanceStatus?: number | null;
+  /** 专享集群峰值带宽 */
+  MaxBandWidth?: number | null;
+  /** 专享集群规格 */
+  SpecName?: string | null;
+  /** 专享集群节点数量 */
+  NodeCount?: number | null;
+  /** 专享集群最大存储 */
+  MaxStorage?: number | null;
+  /** 专享集群最大保留时间 */
+  MaxRetention?: number | null;
+  /** 专项集群最大保留时间 */
+  MinRetention?: number | null;
+  /** 4.0共享集群 */
+  InstanceStatus?: number | null;
 }
 
 /** IP规则 */
@@ -724,6 +792,26 @@ declare interface DescribeConsumerGroupResponse {
   MaxRetryTimes?: number;
   /** 备注 */
   Remark?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFusionInstanceListRequest {
+  /** 查询起始位置 */
+  Offset: number;
+  /** 查询结果限制数量 */
+  Limit: number;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 标签过滤器 */
+  TagFilters?: TagFilter[];
+}
+
+declare interface DescribeFusionInstanceListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 实例列表 */
+  Data?: FusionInstanceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1373,6 +1461,8 @@ declare interface Trocket {
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
   /** 查询消费组列表 {@link DescribeConsumerGroupListRequest} {@link DescribeConsumerGroupListResponse} */
   DescribeConsumerGroupList(data: DescribeConsumerGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupListResponse>;
+  /** 获取4.x和5.0版本的实例列表 {@link DescribeFusionInstanceListRequest} {@link DescribeFusionInstanceListResponse} */
+  DescribeFusionInstanceList(data: DescribeFusionInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFusionInstanceListResponse>;
   /** 查询实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
