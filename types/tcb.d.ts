@@ -1049,13 +1049,13 @@ declare interface SmsFreeQuota {
 /** 1分钱计费详情 */
 declare interface SpecialCostItem {
   /** 上报日期 */
-  ReportDate: string | null;
+  ReportDate?: string | null;
   /** 腾讯云uin */
-  Uin: string | null;
+  Uin?: string | null;
   /** 资源id:环境id */
-  EnvId: string | null;
+  EnvId?: string | null;
   /** 上报任务状态 */
-  Status: string | null;
+  Status?: string | null;
 }
 
 /** 独立网关信息 */

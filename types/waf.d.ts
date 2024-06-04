@@ -126,6 +126,16 @@ declare interface ApiPkg {
   IsAPISecurityTrial?: number | null;
 }
 
+/** api列表 */
+declare interface ApiSecKey {
+  /** api名称 */
+  ApiName: string;
+  /** 域名 */
+  Domain: string;
+  /** 请求方法 */
+  Method: string;
+}
+
 /** 攻击日志详情 */
 declare interface AttackLogInfo {
   /** 攻击日志的详情内容 */
@@ -3736,6 +3746,28 @@ declare interface ModifyApiAnalyzeStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApiSecEventChangeRequest {
+  /** 变更状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略 */
+  Mode?: string;
+  /** 处理人 */
+  UserName?: string;
+  /** 备注，有长度显示1k */
+  Remark?: string;
+  /** 批量操作的事件列表 */
+  EventIdList?: string[];
+  /** 批量操作的api列表 */
+  ApiNameList?: ApiSecKey[];
+  /** 判断是否删除，包括删除事件和删除资产 */
+  IsDelete?: boolean;
+  /** 判断是否是更新api的备注，更新api备注的时候，为true */
+  UpdateApiRemark?: boolean;
+}
+
+declare interface ModifyApiSecEventChangeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAreaBanStatusRequest {
   /** 需要修改的域名 */
   Domain: string;
@@ -4805,6 +4837,8 @@ declare interface Waf {
   ModifyAntiInfoLeakRules(data: ModifyAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAntiInfoLeakRulesResponse>;
   /** api分析页面开关 {@link ModifyApiAnalyzeStatusRequest} {@link ModifyApiAnalyzeStatusResponse} */
   ModifyApiAnalyzeStatus(data: ModifyApiAnalyzeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAnalyzeStatusResponse>;
+  /** api安全状态变更接口 {@link ModifyApiSecEventChangeRequest} {@link ModifyApiSecEventChangeResponse} */
+  ModifyApiSecEventChange(data?: ModifyApiSecEventChangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiSecEventChangeResponse>;
   /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 修改规则引擎白名单 {@link ModifyAttackWhiteRuleRequest} {@link ModifyAttackWhiteRuleResponse} */

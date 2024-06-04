@@ -2496,6 +2496,36 @@ declare interface CreateUserAutoSignSealUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserMobileChangeUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 如果您要修改企业员工用户ID，传递此用户ID即可，其他参数（Name，UserAccountType，IdCardType，IdCardNumber）将被忽略。如果不传此用户ID，则会使用其他参数来进行链接生成。[点击查看用户ID的获取方式](https://res.ess.tencent.cn/cdn/tsign-developer-center/assets/images/%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84-47eb7105dd300e6dc0c502fba22688ae.png) */
+  UserId?: string;
+  /** 要修改手机号用户的类型。0：员工 （默认）1：个人如果是员工类型，只能修改本方员工，而不能修改其他企业的员工。如果是个人类型，可不指定用户身份，生成的是固定的链接，当前登录电子签小程序的用户可进行换绑。 */
+  UserAccountType?: number;
+  /** 要修改手机号用户的姓名，请确保填写的姓名为对方的真实姓名，而非昵称等代名。如果没有传递 userId且 userAccountType 是 0 或者没有传递， 此参数为必填项。 */
+  Name?: string;
+  /** 要修改手机号用户的证件类型，目前支持的账号类型如下：ID_CARD : （默认）中国大陆居民身份证 HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  IdCardType?: string;
+  /** 要修改手机号用户的身份证号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。如果没有传递 userId且 userAccountType 是 0 或者没有传递， 此参数为必填项。 */
+  IdCardNumber?: string;
+  /** 要跳转的链接类型HTTP：（默认）跳转电子签小程序的http_url,短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)HTTP_SHORT_URL：跳转电子签小程序的http_url,短信通知或者H5跳转适合此类型，此时返回短链APP：第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型 */
+  Endpoint?: string;
+  /** 在用户完成实名认证后，其自定义数据将通过[手机号换绑回调](https://qian.tencent.com/developers/company/callback_types_staffs/#%E5%8D%81%E4%B8%89-%E4%B8%AA%E4%BA%BA%E5%91%98%E5%B7%A5%E6%89%8B%E6%9C%BA%E5%8F%B7%E4%BF%AE%E6%94%B9%E5%90%8E%E5%9B%9E%E8%B0%83)返回，以便用户确认其个人数据信息。请注意，自定义数据的字符长度上限为1000，且必须采用base64编码格式。请注意：此参数仅支持通过[获取c端用户实名链接](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)接口实名的用户生效。 */
+  UserData?: string;
+}
+
+declare interface CreateUserMobileChangeUrlResponse {
+  /** 腾讯电子签小程序的实名认证链接。如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。- 如果EndPoint是APP，得到的链接类似于pages/guide/index?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcExAlcOvNod0, 用法可以参考描述中的"跳转到小程序的实现"- 如果EndPoint是HTTP，得到的链接类似于https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcChrfpaswT0d，点击后会跳转到腾讯电子签小程序进行签署- 如果EndPoint是HTTP_SHORT_URL，得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签小程序进行签署注： 生成的链路后面不能再增加参数示例值：https://essurl.cn/2n**42Nd */
+  Url?: string;
+  /** 链接失效期限如下：如果指定更换绑定手机号的用户(指定用户ID或姓名等信息)，则设定的链接失效期限为7天后。如果没有指定更换绑定手机号的用户，则生成通用跳转到个人换手机号的界面，链接不会过期。 */
+  ExpireTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserVerifyUrlRequest {
   /** 操作人信息 */
   Operator: UserInfo;
@@ -3473,6 +3503,8 @@ declare interface Ess {
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
   /** 获取设置自动签印章小程序链接 {@link CreateUserAutoSignSealUrlRequest} {@link CreateUserAutoSignSealUrlResponse} */
   CreateUserAutoSignSealUrl(data: CreateUserAutoSignSealUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignSealUrlResponse>;
+  /** 生成修改用户手机号链接 {@link CreateUserMobileChangeUrlRequest} {@link CreateUserMobileChangeUrlResponse} */
+  CreateUserMobileChangeUrl(data: CreateUserMobileChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserMobileChangeUrlResponse>;
   /** 获取c端用户实名链接 {@link CreateUserVerifyUrlRequest} {@link CreateUserVerifyUrlResponse} */
   CreateUserVerifyUrl(data: CreateUserVerifyUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserVerifyUrlResponse>;
   /** 设置本企业嵌入式页面主题配置 {@link CreateWebThemeConfigRequest} {@link CreateWebThemeConfigResponse} */

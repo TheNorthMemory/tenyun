@@ -1121,37 +1121,41 @@ declare interface ParameterDetail {
 /** 数据库代理地址信息 */
 declare interface ProxyAddress {
   /** 代理组地址ID */
-  ProxyAddressId: string;
+  ProxyAddressId?: string;
   /** 私有网络ID */
-  UniqVpcId: string;
+  UniqVpcId?: string;
   /** 私有子网ID */
-  UniqSubnetId: string;
+  UniqSubnetId?: string;
   /** IP地址 */
-  Vip: string;
+  Vip?: string;
   /** 端口 */
-  VPort: number;
+  VPort?: number;
   /** 权重分配模式；系统自动分配："system"， 自定义："custom" */
-  WeightMode: string | null;
+  WeightMode?: string | null;
   /** 是否开启延迟剔除，取值："true" | "false" */
-  IsKickOut: boolean | null;
+  IsKickOut?: boolean | null;
   /** 最小保留数量，最小取值：0 */
-  MinCount: number | null;
+  MinCount?: number | null;
   /** 延迟剔除阈值，最小取值：0 */
-  MaxDelay: number | null;
+  MaxDelay?: number | null;
   /** 是否自动添加RO，取值："true" | "false" */
-  AutoAddRo: boolean | null;
+  AutoAddRo?: boolean | null;
   /** 是否是只读，取值："true" | "false" */
-  ReadOnly: boolean | null;
+  ReadOnly?: boolean | null;
   /** 是否开启事务分离 */
-  TransSplit: boolean | null;
+  TransSplit?: boolean | null;
   /** 是否开启故障转移 */
-  FailOver: boolean | null;
+  FailOver?: boolean | null;
   /** 是否开启连接池 */
-  ConnectionPool: boolean | null;
+  ConnectionPool?: boolean | null;
   /** 描述 */
-  Desc: string | null;
+  Desc?: string | null;
   /** 实例读权重分配 */
-  ProxyAllocation: ProxyAllocation[] | null;
+  ProxyAllocation?: ProxyAllocation[] | null;
+  /** 接入模式 */
+  AccessMode?: string | null;
+  /** 是否开启自动负载均衡 */
+  AutoLoadBalance?: boolean | null;
 }
 
 /** 代理节点权重分布 */
@@ -1204,6 +1208,10 @@ declare interface ProxyInst {
   Region?: string | null;
   /** 实例所属可用区 */
   Zone?: string | null;
+  /** 实例节点ID */
+  InstNodeId?: string | null;
+  /** 节点角色 */
+  InstNodeRole?: string | null;
 }
 
 /** 代理节点 */
@@ -1755,10 +1763,14 @@ declare interface AdjustCdbProxyAddressRequest {
   ProxyAddressId: string;
   /** 是否开启事务分离，取值："true" | "false" */
   TransSplit?: boolean;
-  /** 是否开启连接池 */
+  /** 是否开启连接池注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPool?: boolean;
   /** 读写权重分配。如果 WeightMode 传的是 system ，则传入的权重不生效，由系统分配默认权重。 */
   ProxyAllocation?: ProxyAllocation[];
+  /** 是否开启自适应负载均衡 */
+  AutoLoadBalance?: boolean;
+  /** 访问模式：就近访问，均衡分配 */
+  AccessMode?: string;
 }
 
 declare interface AdjustCdbProxyAddressResponse {
@@ -2049,7 +2061,7 @@ declare interface CreateCdbProxyAddressRequest {
   UniqVpcId: string;
   /** 私有子网ID */
   UniqSubnetId: string;
-  /** 是否开启连接池 */
+  /** 是否开启连接池注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPool?: boolean;
   /** 描述 */
   Desc?: string;
@@ -2061,6 +2073,10 @@ declare interface CreateCdbProxyAddressRequest {
   SecurityGroup?: string[];
   /** 连接池类型。可选值 transaction（事务级别连接池），connection（会话级别连接池），ConnectionPool为true时生效。 */
   ConnectionPoolType?: string;
+  /** 是否自适应负载均衡 */
+  AutoLoadBalance?: boolean;
+  /** 接入模式 */
+  AccessMode?: string;
 }
 
 declare interface CreateCdbProxyAddressResponse {
@@ -3655,21 +3671,25 @@ declare interface DescribeProxySupportParamRequest {
 
 declare interface DescribeProxySupportParamResponse {
   /** 支持最大代理版本 */
-  ProxyVersion: string | null;
+  ProxyVersion?: string | null;
   /** 是否支持连接池 */
-  SupportPool: boolean | null;
+  SupportPool?: boolean | null;
   /** 连接池最小值 */
-  PoolMin: number | null;
+  PoolMin?: number | null;
   /** 连接池最大值 */
-  PoolMax: number | null;
+  PoolMax?: number | null;
   /** 是否支持事务拆分 */
-  SupportTransSplit: boolean | null;
+  SupportTransSplit?: boolean | null;
   /** 支持连接池的最小代理版本 */
-  SupportPoolMinVersion: string | null;
+  SupportPoolMinVersion?: string | null;
   /** 支持事务拆分的最小代理版本 */
-  SupportTransSplitMinVersion: string | null;
+  SupportTransSplitMinVersion?: string | null;
   /** 是否支持设置只读 */
-  SupportReadOnly: boolean | null;
+  SupportReadOnly?: boolean | null;
+  /** 是否自动均衡负载 */
+  SupportAutoLoadBalance?: boolean | null;
+  /** 是否支持接入模式 */
+  SupportAccessMode?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

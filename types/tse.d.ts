@@ -1458,6 +1458,10 @@ declare interface KongUpstreamInfo {
   HealthStatus?: string | null;
   /** 云函数是否开启CAM鉴权，不填时默认为开启(true) */
   ScfCamAuthEnable?: boolean | null;
+  /** 云函数是否开启Base64编码，默认为false */
+  ScfIsBase64Encoded?: boolean | null;
+  /** 云函数是否开启响应集成，默认为false */
+  ScfIsIntegratedResponse?: boolean | null;
 }
 
 /** kong后端upstream列表 */

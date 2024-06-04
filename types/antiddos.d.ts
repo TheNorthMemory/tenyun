@@ -234,6 +234,8 @@ declare interface BGPInstance {
   TransRegionFlag?: number | null;
   /** 是否为超级高防包 */
   SuperPackFlag?: number | null;
+  /** 所属ZoneId */
+  ZoneId?: number | null;
 }
 
 /** 高防包资产实例的规格信息 */
@@ -2337,6 +2339,8 @@ declare interface DescribeListBGPInstancesRequest {
   FilterPlanCntFlag?: number;
   /** 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 3: 包含全部 */
   FilterTransRegionFlag?: number;
+  /** zoenid列表 */
+  FilterZoneIdList?: number[];
 }
 
 declare interface DescribeListBGPInstancesResponse {

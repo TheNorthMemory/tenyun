@@ -568,6 +568,8 @@ declare interface ConfigRelease {
   ApplicationId?: string | null;
   /** 配置中心发布情况 */
   ConfigCenters?: TsfConfigCenter[] | null;
+  /** DUAL_STATUS_WRITE_REGISTRATION_ON 双写&&双注册开启DUAL_STATUS_WRITE_REGISTRATION_OFF 双写&&双注册关闭 */
+  DaulStatus?: string | null;
 }
 
 /** 配置项发布日志 */
@@ -2728,6 +2730,10 @@ declare interface TsfConfigCenter {
   RegionId?: string | null;
   /** 命名空间id */
   NamespaceId?: string | null;
+  /** 当前版本 */
+  CurrentVersion?: string | null;
+  /** 需要升级的版本 */
+  TargetVersion?: string | null;
 }
 
 /** ApiDetailInfo 翻页对象 */
@@ -4126,6 +4132,8 @@ declare interface DeleteApiRateLimitRuleResponse {
 declare interface DeleteApplicationRequest {
   /** 应用ID */
   ApplicationId: string;
+  /** 是否删除镜像仓库 */
+  SyncDeleteImageRepository?: boolean;
 }
 
 declare interface DeleteApplicationResponse {
@@ -5660,11 +5668,13 @@ declare interface DescribeMicroservicesRequest {
   MicroserviceIdList?: string[];
   /** 搜索的服务名列表 */
   MicroserviceNameList?: string[];
+  /** 注册中心实例id */
+  ConfigCenterInstanceId?: string;
 }
 
 declare interface DescribeMicroservicesResponse {
   /** 微服务分页列表信息 */
-  Result: TsfPageMicroservice | null;
+  Result?: TsfPageMicroservice | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6088,15 +6098,15 @@ declare interface DescribeStatisticsRequest {
   Offset: number;
   /** 单页请求配置数量，取值范围[1, 50]，默认值为10 */
   Limit: number;
-  /** 命名空间Id */
+  /** 命名空间Id,此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一。 */
   NamespaceId?: string;
   /** 排序字段:AvgTimeConsuming[默认]、RequestCount、ErrorRate。实例监控还支持 CpuPercent */
   OrderBy?: string;
   /** 排序方式：ASC:0、DESC:1 */
   OrderType?: number;
-  /** 开始时间：年月日 时分秒2020-05-12 14:43:12 */
+  /** 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空 */
   EndTime?: string;
-  /** 开始时间：年月日 时分秒2020-05-12 14:43:12 */
+  /** 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空 */
   StartTime?: string;
   /** 服务名称 */
   ServiceName?: string;
@@ -6110,11 +6120,13 @@ declare interface DescribeStatisticsRequest {
   DbName?: string;
   /** 命名空间id数组 */
   NamespaceIdList?: string[];
+  /** 独占配置中心的ID */
+  ConfigCenterInstanceId?: string;
 }
 
 declare interface DescribeStatisticsResponse {
   /** 查询服务统计结果 */
-  Result: ServiceStatisticsResults | null;
+  Result?: ServiceStatisticsResults | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
