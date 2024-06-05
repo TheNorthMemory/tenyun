@@ -110,6 +110,8 @@ declare interface Cluster {
   SubEks?: SubEks | null;
   /** 上级集群 */
   AgentSerialId?: string | null;
+  /** 资源类型 */
+  ResourceType?: number | null;
 }
 
 /** 工作空间集群组信息 */

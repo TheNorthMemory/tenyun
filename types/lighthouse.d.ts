@@ -1455,9 +1455,9 @@ declare interface DescribeDisksReturnableResponse {
 }
 
 declare interface DescribeDockerActivitiesRequest {
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
-  /** Docker活动ID列表。 */
+  /** Docker活动ID列表。可通过[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口返回值中的ActivityId获取。 */
   ActivityIds?: string[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -1493,9 +1493,9 @@ declare interface DescribeDockerContainerConfigurationResponse {
 }
 
 declare interface DescribeDockerContainerDetailRequest {
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
-  /** 容器ID。 */
+  /** 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。 */
   ContainerId: string;
 }
 
@@ -1507,9 +1507,9 @@ declare interface DescribeDockerContainerDetailResponse {
 }
 
 declare interface DescribeDockerContainersRequest {
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
-  /** 容器ID列表。 */
+  /** 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。 */
   ContainerIds?: string[];
   /** 返回数量，默认为 20，最大值为 100。 */
   Limit?: number;

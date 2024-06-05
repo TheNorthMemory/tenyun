@@ -5,19 +5,19 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** AME 曲库歌曲基础信息。 */
 declare interface AMEMusicBaseInfo {
   /** 歌曲 Id。 */
-  MusicId: string;
+  MusicId?: string;
   /** 歌曲名称。 */
-  Name: string;
+  Name?: string;
   /** 歌手列表。 */
-  SingerSet: string[];
+  SingerSet?: string[];
 }
 
 /** 副歌片段信息。 */
 declare interface ChorusClip {
   /** 开始时间，单位：毫秒。 */
-  StartTime: number;
+  StartTime?: number;
   /** 结束时间，单位：毫秒。 */
-  EndTime: number;
+  EndTime?: number;
 }
 
 /** 直播进房输入参数 */
@@ -29,19 +29,19 @@ declare interface JoinRoomInput {
 /** 节拍信息。 */
 declare interface KTVBPMInfo {
   /** 节拍类型，取值有：Slow：慢；Middle：中等；Fast：快；Unknown：未知。 */
-  Type: string;
+  Type?: string;
   /** BPM 值。 */
-  Value: number;
+  Value?: number;
 }
 
 /** 匹配歌曲信息。 */
 declare interface KTVMatchMusic {
   /** 匹配到的歌曲基础信息。 */
-  KTVMusicBaseInfo: KTVMusicBaseInfo;
+  KTVMusicBaseInfo?: KTVMusicBaseInfo;
   /** 命中规则。 */
-  MatchRule: KTVMatchRule;
+  MatchRule?: KTVMatchRule;
   /** AME 歌曲基础信息，仅在使用音速达歌曲 Id 匹配 AME 曲库时有效。 */
-  AMEMusicBaseInfo: AMEMusicBaseInfo | null;
+  AMEMusicBaseInfo?: AMEMusicBaseInfo | null;
 }
 
 /** 歌曲匹配规则。 */
@@ -65,41 +65,41 @@ declare interface KTVMatchRuleMusicInfo {
 /** 歌曲基础信息。 */
 declare interface KTVMusicBaseInfo {
   /** 歌曲Id。 */
-  MusicId: string;
+  MusicId?: string;
   /** 歌曲名称。 */
-  Name: string;
+  Name?: string;
   /** 歌手名称。 */
-  SingerSet: string[];
+  SingerSet?: string[];
   /** 播放时长。 */
-  Duration: number;
+  Duration?: number;
   /** 歌手图片链接。 */
-  SingerImageUrl: string;
+  SingerImageUrl?: string;
   /** 专辑信息。 */
-  AlbumInfo: MusicAlbumInfo | null;
+  AlbumInfo?: MusicAlbumInfo | null;
   /** 权益列表，取值有：Play：可播；Sing：可唱。 */
-  RightSet: string[];
+  RightSet?: string[];
   /** 推荐类型，取值有：Featured：精选；Other：其他。 */
-  RecommendType: string;
+  RecommendType?: string;
 }
 
 /** 歌曲详细信息。 */
 declare interface KTVMusicDetailInfo {
   /** 歌曲基础信息。 */
-  KTVMusicBaseInfo: KTVMusicBaseInfo;
+  KTVMusicBaseInfo?: KTVMusicBaseInfo;
   /** 播放凭证。 */
-  PlayToken: string;
+  PlayToken?: string;
   /** 歌词下载链接。 */
-  LyricsUrl: string;
+  LyricsUrl?: string;
   /** 音高数据下载链接。 */
-  MidiUrl: string;
+  MidiUrl?: string;
   /** 副歌片段信息。 */
-  ChorusClipSet: ChorusClip[];
+  ChorusClipSet?: ChorusClip[];
   /** 前奏间隔。 */
-  PreludeInterval: number;
+  PreludeInterval?: number;
   /** 歌曲流派列表。 */
-  GenreSet: string[];
+  GenreSet?: string[];
   /** 节拍信息。 */
-  BPMInfo: KTVBPMInfo | null;
+  BPMInfo?: KTVBPMInfo | null;
 }
 
 /** 其它片段时间（可用于抢唱） */
@@ -113,55 +113,55 @@ declare interface KTVOtherSegments {
 /** 歌单基础信息。 */
 declare interface KTVPlaylistBaseInfo {
   /** 歌单Id。 */
-  PlaylistId: string;
+  PlaylistId?: string;
   /** 歌单标题。 */
-  Title: string;
+  Title?: string;
 }
 
 /** 机器人信息 */
 declare interface KTVRobotInfo {
   /** 机器人Id。 */
-  RobotId: string;
+  RobotId?: string;
   /** 状态，取值有：Play：播放Pause：暂停Destroy：销毁 */
-  Status: string;
+  Status?: string;
   /** 播放列表。 */
-  Playlists: string[];
+  Playlists?: string[];
   /** 当前歌单索引位置。 */
-  CurIndex: number;
+  CurIndex?: number;
   /** 播放进度，单位：毫秒。 */
-  Position: number;
+  Position?: number;
   /** 音频参数。 */
-  SetAudioParamInput: SetAudioParamCommandInput;
+  SetAudioParamInput?: SetAudioParamCommandInput;
   /** 进房信息。 */
-  JoinRoomInput: JoinRoomInput;
+  JoinRoomInput?: JoinRoomInput;
   /** RTC厂商类型，取值有：TRTC */
-  RTCSystem: string;
+  RTCSystem?: string;
   /** 播放模式，PlayMode取值有：RepeatPlaylist：列表循环Order：顺序播放RepeatSingle：单曲循环Shuffle：随机播放 */
-  SetPlayModeInput: SetPlayModeCommandInput;
+  SetPlayModeInput?: SetPlayModeCommandInput;
 }
 
 /** 联想词信息。 */
 declare interface KTVSuggestionInfo {
   /** 联想词。 */
-  Suggestion: string;
+  Suggestion?: string;
 }
 
 /** 标签分组信息。 */
 declare interface KTVTagGroupInfo {
   /** 分组 Id。 */
-  GroupId: string;
+  GroupId?: string;
   /** 分组名。 */
-  Name: string;
+  Name?: string;
   /** 标签列表。 */
-  TagInfoSet: KTVTagInfo[];
+  TagInfoSet?: KTVTagInfo[];
 }
 
 /** 标签信息。 */
 declare interface KTVTagInfo {
   /** 标签 Id。 */
-  TagId: string;
+  TagId?: string;
   /** 标签名称。 */
-  Name: string;
+  Name?: string;
 }
 
 /** 充值直播会员流水信息 */
@@ -195,17 +195,17 @@ declare interface LiveVipUserInfo {
 /** 歌曲专辑封面信息。 */
 declare interface MusicAlbumCoverInfo {
   /** 尺寸规格，取值有：Mini：150 x 150 尺寸；Small：240 x 240 尺寸；Medium：480 x 480 尺寸。 */
-  Dimension: string;
+  Dimension?: string;
   /** 下载链接。 */
-  Url: string;
+  Url?: string;
 }
 
 /** 歌曲专辑信息。 */
 declare interface MusicAlbumInfo {
   /** 专辑名称。 */
-  Name: string;
+  Name?: string;
   /** 封面列表。 */
-  CoverInfoSet: MusicAlbumCoverInfo[];
+  CoverInfoSet?: MusicAlbumCoverInfo[];
 }
 
 /** 播放指令输入参数 */
@@ -231,7 +231,7 @@ declare interface SendMessageCommandInput {
 /** 音频参数信息 */
 declare interface SetAudioParamCommandInput {
   /** 音频类型，取值有：Original：原唱Accompaniment：伴奏 */
-  Type?: string;
+  Type?: string | null;
 }
 
 /** 设置销毁模式 */
@@ -245,7 +245,7 @@ declare interface SetDestroyModeCommandInput {
 /** 设置播放模式 */
 declare interface SetPlayModeCommandInput {
   /** 播放模式，取值有：RepeatPlaylist：列表循环Order：顺序播放RepeatSingle：单曲循环Shuffle：随机播放 */
-  PlayMode: string;
+  PlayMode: string | null;
 }
 
 /** 设置播放列表指令参数 */
@@ -331,7 +331,7 @@ declare interface ApplyChorusRequest {
 
 declare interface ApplyChorusResponse {
   /** 合唱 Token。 */
-  ChorusToken: string;
+  ChorusToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -391,9 +391,9 @@ declare interface DescribeKTVMatchMusicsRequest {
 
 declare interface DescribeKTVMatchMusicsResponse {
   /** 匹配到的歌曲列表。 */
-  MatchMusicSet: KTVMatchMusic[];
+  MatchMusicSet?: KTVMatchMusic[];
   /** 未匹配的规则列表。 */
-  NotMatchRuleSet: KTVMatchRule[];
+  NotMatchRuleSet?: KTVMatchRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -437,6 +437,8 @@ declare interface DescribeKTVMusicAccompanySegmentUrlVipRequest {
   UserId: string;
   /** 歌曲 Id */
   MusicId: string;
+  /** 房间Id */
+  RoomId?: string;
 }
 
 declare interface DescribeKTVMusicAccompanySegmentUrlVipResponse {
@@ -525,9 +527,9 @@ declare interface DescribeKTVPlaylistsRequest {
 
 declare interface DescribeKTVPlaylistsResponse {
   /** 歌单基础信息。 */
-  PlaylistBaseInfoSet: KTVPlaylistBaseInfo[];
+  PlaylistBaseInfoSet?: KTVPlaylistBaseInfo[];
   /** 歌单总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -551,9 +553,9 @@ declare interface DescribeKTVRobotsRequest {
 
 declare interface DescribeKTVRobotsResponse {
   /** 机器人总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 机器人信息集合。 */
-  KTVRobotInfoSet: KTVRobotInfo[];
+  KTVRobotInfoSet?: KTVRobotInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -583,7 +585,7 @@ declare interface DescribeKTVTagsRequest {
 
 declare interface DescribeKTVTagsResponse {
   /** 标签分组列表。 */
-  TagGroupInfoSet: KTVTagGroupInfo[];
+  TagGroupInfoSet?: KTVTagGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

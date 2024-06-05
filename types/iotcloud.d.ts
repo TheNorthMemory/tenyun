@@ -201,23 +201,25 @@ declare interface DeviceUpdateStatus {
 /** 设备固件详细信息 */
 declare interface FirmwareInfo {
   /** 固件版本 */
-  Version: string;
+  Version?: string;
   /** 固件MD5值 */
-  Md5sum: string;
+  Md5sum?: string;
   /** 固件创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 产品名称 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 固件名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 固件描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 固件类型 */
-  FwType: string | null;
+  FwType?: string | null;
   /** 创建者 Uin */
-  CreateUserId: number | null;
+  CreateUserId?: number | null;
+  /** 固件用户自定义配置信息 */
+  UserDefined?: string | null;
 }
 
 /** 固件升级任务信息 */
@@ -887,21 +889,23 @@ declare interface DescribeFirmwareRequest {
 
 declare interface DescribeFirmwareResponse {
   /** 固件版本号 */
-  Version: string;
+  Version?: string;
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 固件名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 固件描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 固件Md5值 */
-  Md5sum: string | null;
+  Md5sum?: string | null;
   /** 固件上传的秒级时间戳 */
-  Createtime: number | null;
+  Createtime?: number | null;
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
   /** 固件类型。选项：mcu、module */
-  FwType: string;
+  FwType?: string;
+  /** 固件用户自定义配置信息 */
+  UserDefined?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

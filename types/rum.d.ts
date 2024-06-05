@@ -403,7 +403,7 @@ declare interface DescribeAppDimensionMetricsRequest {
 
 declare interface DescribeAppDimensionMetricsResponse {
   /** 查询数据返回 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -433,7 +433,7 @@ declare interface DescribeAppMetricsDataRequest {
 
 declare interface DescribeAppMetricsDataResponse {
   /** 查询数据返回 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -461,7 +461,7 @@ declare interface DescribeAppSingleCaseDetailListRequest {
 
 declare interface DescribeAppSingleCaseDetailListResponse {
   /** 查询数据返回 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -489,7 +489,7 @@ declare interface DescribeAppSingleCaseListRequest {
 
 declare interface DescribeAppSingleCaseListResponse {
   /** 查询数据返回 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1489,7 +1489,7 @@ declare interface DescribeRumLogExportsRequest {
 
 declare interface DescribeRumLogExportsResponse {
   /** 返回字符串 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1667,7 +1667,7 @@ declare interface ModifyProjectLimitRequest {
 
 declare interface ModifyProjectLimitResponse {
   /** 返回信息 */
-  Msg: string | null;
+  Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

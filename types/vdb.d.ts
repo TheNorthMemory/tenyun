@@ -56,7 +56,7 @@ declare interface InstanceInfo {
   WanAddress?: string | null;
 }
 
-/** 网路信息 */
+/** 网络信息 */
 declare interface Network {
   /** VpcId(VPC网络下有效) */
   VpcId?: string | null;

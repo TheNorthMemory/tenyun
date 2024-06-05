@@ -354,7 +354,7 @@ declare interface InstanceSet {
   Size?: number;
   /** 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。 */
   SizeUsed?: number;
-  /** 实例类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
+  /** 实例类型。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 5：Redis 2.8 内存版（单机）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
   Type?: number;
   /** 实例是否设置自动续费标识。1：设置自动续费。0：未设置自动续费。 */
   AutoRenewFlag?: number;
@@ -1169,7 +1169,7 @@ declare interface CreateInstanceAccountResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。 */
+  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。17：Redis 7.0 内存版（标准架构）。18：Redis 7.0 内存版（集群架构）。 */
   TypeId: number;
   /** 内存容量，单位为MB， 数值需为1024的整数倍。具体规格，请通过 [DescribeProductInfo](https://cloud.tencent.com/document/api/239/30600) 接口查询全地域的售卖规格。- **TypeId**为标准架构时，**MemSize**是实例总内存容量；- **TypeId**为集群架构时，**MemSize**是单分片内存容量。 */
   MemSize: number;
@@ -1237,7 +1237,7 @@ declare interface CreateParamTemplateRequest {
   Name: string;
   /** 参数模板描述。 */
   Description?: string;
-  /** 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）。创建模板时必填，从源模板复制则不需要传入该参数。 */
+  /** 产品类型。- 2：Redis 2.8 内存版（标准架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
   ProductType?: number;
   /** 源参数模板 ID。 */
   TemplateId?: string;
@@ -1247,7 +1247,7 @@ declare interface CreateParamTemplateRequest {
 
 declare interface CreateParamTemplateResponse {
   /** 参数模板 ID。 */
-  TemplateId: string;
+  TemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

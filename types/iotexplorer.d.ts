@@ -351,25 +351,27 @@ declare interface FenceEventItem {
 /** 设备固件详细信息 */
 declare interface FirmwareInfo {
   /** 固件版本 */
-  Version: string;
+  Version?: string;
   /** 固件MD5值 */
-  Md5sum: string;
+  Md5sum?: string;
   /** 固件创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 产品名称 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 固件名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 固件描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 固件升级模块 */
-  FwType: string | null;
+  FwType?: string | null;
   /** 创建者子 uin */
-  CreateUserId: number | null;
+  CreateUserId?: number | null;
   /** 创建者昵称 */
-  CreatorNickName: string | null;
+  CreatorNickName?: string | null;
+  /** 固件用户自定义配置信息 */
+  UserDefined?: string | null;
 }
 
 /** 实例信息公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效 */

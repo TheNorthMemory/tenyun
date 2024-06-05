@@ -945,7 +945,7 @@ declare interface DescribePreReleaseListRequest {
   LengthEnd?: number;
   /** 页码 */
   PageNumber?: number;
-  /** 没页显示数 */
+  /** 每页显示数 */
   PageSize?: number;
   /** 后缀 */
   Suffix?: number[];
