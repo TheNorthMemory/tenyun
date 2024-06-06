@@ -824,6 +824,24 @@ declare interface TopicRulePayload {
   RuleDisabled?: boolean;
 }
 
+/** 微信硬件设备信息 */
+declare interface WXDeviceInfo {
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 设备信息 */
+  WXIoTDeviceInfo?: WXIoTDeviceInfo | null;
+}
+
+/** 微信物联网硬件信息 */
+declare interface WXIoTDeviceInfo {
+  /** sn信息 */
+  SN?: string | null;
+  /** 票据 */
+  SNTicket?: string | null;
+  /** 模版ID */
+  ModelId?: string | null;
+}
+
 /** wifi定位信息 */
 declare interface WifiInfo {
   /** mac地址 */
@@ -2650,6 +2668,24 @@ declare interface GetTopicRuleListResponse {
   RequestId?: string;
 }
 
+declare interface GetWechatDeviceTicketRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 产品名称 */
+  DeviceName: string;
+  /** 是否第三方小程序 */
+  IsThirdApp?: number;
+  /** 模板ID */
+  ModelId?: string;
+}
+
+declare interface GetWechatDeviceTicketResponse {
+  /** 微信设备信息 */
+  WXDeviceInfo?: WXDeviceInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InheritCloudStorageUserRequest {
   /** 产品ID */
   ProductId: string;
@@ -3459,6 +3495,8 @@ declare interface Iotexplorer {
   GetTWeCallPkgList(data: GetTWeCallPkgListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallPkgListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
+  /** 查询微信授权票据 {@link GetWechatDeviceTicketRequest} {@link GetWechatDeviceTicketResponse} */
+  GetWechatDeviceTicket(data: GetWechatDeviceTicketRequest, config?: AxiosRequestConfig): AxiosPromise<GetWechatDeviceTicketResponse>;
   /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */
   InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
   /** 获取设备的历史事件 {@link ListEventHistoryRequest} {@link ListEventHistoryResponse} */

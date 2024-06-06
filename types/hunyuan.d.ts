@@ -22,11 +22,11 @@ declare interface Delta {
 
 /** Embedding 信息。 */
 declare interface EmbeddingData {
-  /** embedding 信息。 */
+  /** Embedding 信息，目前为 1024 维浮点数。 */
   Embedding?: number[] | null;
-  /** 下标。 */
+  /** 下标，目前不支持批量，因此固定为 0。 */
   Index?: number | null;
-  /** embedding */
+  /** 目前固定为 "embedding"。 */
   Object?: string | null;
 }
 

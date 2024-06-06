@@ -906,6 +906,28 @@ declare interface CreateExtensionResponse {
   RequestId?: string;
 }
 
+declare interface CreateIVRSessionRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 被叫 */
+  Callee: string;
+  /** 指定的 IVR Id，目前支持呼入和自动外呼两种类型 */
+  IVRId: number;
+  /** 主叫号码列表 */
+  Callers?: string[];
+  /** 自定义变量 */
+  Variables?: Variable[];
+  /** 用户数据 */
+  UUI?: string;
+}
+
+declare interface CreateIVRSessionResponse {
+  /** 新创建的会话 ID */
+  SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePredictiveDialingCampaignRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1875,6 +1897,8 @@ declare interface Ccc {
   CreateCompanyApply(data: CreateCompanyApplyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCompanyApplyResponse>;
   /** 创建话机账号 {@link CreateExtensionRequest} {@link CreateExtensionResponse} */
   CreateExtension(data: CreateExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtensionResponse>;
+  /** CreateIVRSession {@link CreateIVRSessionRequest} {@link CreateIVRSessionResponse} */
+  CreateIVRSession(data: CreateIVRSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIVRSessionResponse>;
   /** 创建预测式外呼任务 {@link CreatePredictiveDialingCampaignRequest} {@link CreatePredictiveDialingCampaignResponse} */
   CreatePredictiveDialingCampaign(data: CreatePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePredictiveDialingCampaignResponse>;
   /** 创建 SDK 登录 Token {@link CreateSDKLoginTokenRequest} {@link CreateSDKLoginTokenResponse} */

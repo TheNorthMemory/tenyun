@@ -23,6 +23,14 @@ declare interface AttrItem {
 }
 
 /** 上链数据 */
+declare interface Chain {
+  /** 码url */
+  Code: string | null;
+  /** 上链数据 */
+  Data: ChainValue[] | null;
+}
+
+/** 上链数据 */
 declare interface ChainData {
   /** 区块hash */
   BlockHash?: string | null;
@@ -30,6 +38,16 @@ declare interface ChainData {
   BlockHeight?: string | null;
   /** 区块时间 */
   BlockTime?: string | null;
+}
+
+/** 上链数据 key-value */
+declare interface ChainValue {
+  /** 标题名字 */
+  Label: string | null;
+  /** 类型，文字："text"，图片："image" */
+  Type: string | null;
+  /** 值，文字类型："abc"，图片类型：""/images/img.png" */
+  Value: string | null;
 }
 
 /** 批次 */
@@ -602,6 +620,18 @@ declare interface AuthorizedTransferRequest {
 declare interface AuthorizedTransferResponse {
   /** 业务出参。 */
   Data?: OutputAuthorizedTransfer;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateChainBatchRequest {
+  /** 企业ID */
+  CorpId: number;
+  /** 溯源ID */
+  ChainList: Chain[];
+}
+
+declare interface CreateChainBatchResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1697,6 +1727,8 @@ declare interface Trp {
   (): Versions;
   /** 授权数据上报接口 {@link AuthorizedTransferRequest} {@link AuthorizedTransferResponse} */
   AuthorizedTransfer(data: AuthorizedTransferRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizedTransferResponse>;
+  /** 通用批量上链接口 {@link CreateChainBatchRequest} {@link CreateChainBatchResponse} */
+  CreateChainBatch(data: CreateChainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChainBatchResponse>;
   /** 新增批次 {@link CreateCodeBatchRequest} {@link CreateCodeBatchResponse} */
   CreateCodeBatch(data?: CreateCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeBatchResponse>;
   /** 生成普通码包 {@link CreateCodePackRequest} {@link CreateCodePackResponse} */

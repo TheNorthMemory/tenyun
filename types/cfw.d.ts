@@ -2301,7 +2301,7 @@ declare interface DescribeGuideScanInfoRequest {
 
 declare interface DescribeGuideScanInfoResponse {
   /** 扫描信息 */
-  Data: ScanInfo;
+  Data?: ScanInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3541,7 +3541,7 @@ declare interface Cfw {
   DeleteSecurityGroupRule(data: DeleteSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupRuleResponse>;
   /** 删除防火墙(组)，或者删除其中实例 {@link DeleteVpcFwGroupRequest} {@link DeleteVpcFwGroupResponse} */
   DeleteVpcFwGroup(data?: DeleteVpcFwGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcFwGroupResponse>;
-  /** 删除防火墙实例 {@link DeleteVpcInstanceRequest} {@link DeleteVpcInstanceResponse} */
+  /** @deprecated 删除防火墙实例 {@link DeleteVpcInstanceRequest} {@link DeleteVpcInstanceResponse} */
   DeleteVpcInstance(data?: DeleteVpcInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcInstanceResponse>;
   /** 访问控制列表 {@link DescribeAcListsRequest} {@link DescribeAcListsResponse} */
   DescribeAcLists(data?: DescribeAcListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAcListsResponse>;
@@ -3603,7 +3603,7 @@ declare interface Cfw {
   DescribeRuleOverview(data?: DescribeRuleOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleOverviewResponse>;
   /** 查询安全组规则列表 {@link DescribeSecurityGroupListRequest} {@link DescribeSecurityGroupListResponse} */
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
-  /** 查询资产组全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
+  /** 查询全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
   /** 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;

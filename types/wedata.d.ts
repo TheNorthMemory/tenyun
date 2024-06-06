@@ -1005,19 +1005,21 @@ declare interface DimensionScore {
 /** 维度评分信息 */
 declare interface DimensionScoreInfo {
   /** 维度名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 权重 */
-  Weight: number | null;
+  Weight?: number | null;
   /** 设置人id */
-  UserId: number | null;
+  UserId?: number | null;
   /** 设置人名 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 更新时间 时间戳 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
   /** 参与评估表数量 */
-  JoinTableNumber: number;
+  JoinTableNumber?: number;
   /** 评分 */
-  Score: number;
+  Score?: number;
+  /** 设置人idStr */
+  UserIdStr?: string | null;
 }
 
 /** 数据治理配置项 */
@@ -3194,6 +3196,8 @@ declare interface RuleTemplate {
   ResolvedSqlExpression?: SqlExpression | null;
   /** 支持的数据源类型 */
   DatasourceTypes?: number[] | null;
+  /** 创建人IdStr */
+  UserIdStr?: string | null;
 }
 
 /** RuleTemplatePage 结果 */
@@ -3494,6 +3498,8 @@ declare interface SubscribeReceiver {
   ReceiverUserId?: number | null;
   /** 接收人名称 */
   ReceiverName?: string | null;
+  /** 接收人Uin */
+  ReceiverUserIdStr?: string | null;
 }
 
 /** 群机器人订阅配置 */

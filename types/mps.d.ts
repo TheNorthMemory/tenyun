@@ -3369,17 +3369,17 @@ declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
 /** 转动图任务结果类型 */
 declare interface MediaProcessTaskAnimatedGraphicResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 转动图任务的输入。 */
-  Input: AnimatedGraphicTaskInput;
+  Input?: AnimatedGraphicTaskInput;
   /** 转动图任务的输出。 */
-  Output: MediaAnimatedGraphicsItem | null;
+  Output?: MediaAnimatedGraphicsItem | null;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   BeginProcessTime?: string | null;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
@@ -3389,17 +3389,17 @@ declare interface MediaProcessTaskAnimatedGraphicResult {
 /** 对视频截雪碧图任务结果类型 */
 declare interface MediaProcessTaskImageSpriteResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 对视频截雪碧图任务的输入。 */
-  Input: ImageSpriteTaskInput;
+  Input?: ImageSpriteTaskInput;
   /** 对视频截雪碧图任务的输出。 */
-  Output: MediaImageSpriteItem | null;
+  Output?: MediaImageSpriteItem | null;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   BeginProcessTime?: string | null;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
@@ -3963,13 +3963,13 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
 /** 质检结果输出。 */
 declare interface QualityControlData {
   /** 为true时表示视频无音频轨。 */
-  NoAudio: boolean | null;
+  NoAudio?: boolean | null;
   /** 为true时表示视频无视频轨。 */
-  NoVideo: boolean | null;
+  NoVideo?: boolean | null;
   /** 视频无参考质量打分，百分制。 */
-  QualityEvaluationScore: number | null;
+  QualityEvaluationScore?: number | null;
   /** 质检检出异常项。 */
-  QualityControlResultSet: QualityControlResult[] | null;
+  QualityControlResultSet?: QualityControlResult[] | null;
 }
 
 /** 质检结果项 */
@@ -4804,7 +4804,7 @@ declare interface VideoEnhanceConfig {
 declare interface VideoTemplateInfo {
   /** 视频流的编码格式，可选值：copy：纯音频模版h264：H.264 编码h265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
   Codec: string;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 注意：自适应码率时取值范围是 [0, 60] */
   Fps: number;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate: number;
@@ -6042,7 +6042,7 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，目前取值有：WorkflowTask：视频工作流处理任务。EditMediaTask：视频编辑任务。LiveStreamProcessTask：直播流处理任务。ScheduleTask：编排处理任务。 */
+  /** 任务类型，目前取值有：WorkflowTask：视频工作流处理任务。EditMediaTask：视频编辑任务。LiveStreamProcessTask：直播流处理任务。ScheduleTask：编排处理任务。EvaluationTask：评测任务。 */
   TaskType?: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status?: string;

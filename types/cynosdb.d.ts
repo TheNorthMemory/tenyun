@@ -1375,37 +1375,39 @@ declare interface PackageDetail {
 /** 实例参数详细描述 */
 declare interface ParamDetail {
   /** 参数名称 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型：integer，enum，float，string，func */
-  ParamType: string;
+  ParamType?: string;
   /** true-支持"func"，false-不支持公式 */
-  SupportFunc: boolean;
+  SupportFunc?: boolean;
   /** 默认值 */
-  Default: string;
+  Default?: string;
   /** 参数描述 */
-  Description: string;
+  Description?: string;
   /** 参数当前值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。 */
-  NeedReboot: number;
+  NeedReboot?: number;
   /** 参数容许的最大值 */
-  Max: string;
+  Max?: string;
   /** 参数容许的最小值 */
-  Min: string;
+  Min?: string;
   /** 参数的可选枚举值。如果为非枚举值，则为空 */
-  EnumValue: string[] | null;
+  EnumValue?: string[] | null;
   /** 1：全局参数，0：非全局参数 */
-  IsGlobal: number;
+  IsGlobal?: number;
   /** 匹配类型，multiVal */
-  MatchType: string;
+  MatchType?: string;
   /** 匹配目标值，当multiVal时，各个key用，分割 */
-  MatchValue: string;
+  MatchValue?: string;
   /** true-为公式，false-非公式 */
-  IsFunc: boolean | null;
+  IsFunc?: boolean | null;
   /** 参数设置为公式时，Func返回设置的公式内容 */
-  Func: string | null;
+  Func?: string | null;
   /** 参数是否可修改 */
-  ModifiableInfo: ModifiableInfo | null;
+  ModifiableInfo?: ModifiableInfo | null;
+  /** 支持公式的参数的默认公式样式 */
+  FuncPattern?: string | null;
 }
 
 /** 参数信息 */
@@ -1478,6 +1480,8 @@ declare interface ParamItemDetail {
   IsFunc?: boolean | null;
   /** 参数配置公式 */
   Func?: string | null;
+  /** 支持公式的参数的默认公式样式 */
+  FuncPattern?: string | null;
 }
 
 /** 参数变化信息 */

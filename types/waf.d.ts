@@ -2468,8 +2468,10 @@ declare interface DescribeAntiFakeRulesRequest {
 }
 
 declare interface DescribeAntiFakeRulesResponse {
+  /** 总数 */
+  Total?: number;
   /** 返回值 */
-  Data: CacheUrlItems[] | null;
+  Data?: CacheUrlItems[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

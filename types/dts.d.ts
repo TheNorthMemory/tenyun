@@ -1981,6 +1981,8 @@ declare interface DescribeSubscribeJobsRequest {
   SubscribeName?: string;
   /** 订阅的云上数据库实例的 ID，精确匹配 */
   InstanceId?: string;
+  /** 订阅的topicName */
+  Topic?: string;
   /** 计费模式筛选，可能的值：0-包年包月，1-按量计费 */
   PayType?: number;
   /** 订阅的数据库产品，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql) */

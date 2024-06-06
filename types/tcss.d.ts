@@ -4077,7 +4077,7 @@ declare interface CreateAbnormalProcessRulesExportJobRequest {
 
 declare interface CreateAbnormalProcessRulesExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
-  JobId: string;
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5019,7 +5019,7 @@ declare interface DescribeABTestConfigRequest {
 
 declare interface DescribeABTestConfigResponse {
   /** 灰度项目配置 */
-  Config: ABTestConfig[];
+  Config?: ABTestConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

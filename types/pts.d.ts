@@ -1201,7 +1201,7 @@ declare interface DescribeAvailableMetricsRequest {
 
 declare interface DescribeAvailableMetricsResponse {
   /** 系统支持的所有指标 */
-  MetricSet: MetricInfo[];
+  MetricSet?: MetricInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

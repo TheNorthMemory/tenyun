@@ -4731,7 +4731,7 @@ declare interface RestartDBInstancesRequest {
 
 declare interface RestartDBInstancesResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
