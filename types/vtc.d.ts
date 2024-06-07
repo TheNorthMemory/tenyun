@@ -42,6 +42,10 @@ declare interface ConfirmVideoTranslateJobResponse {
   TaskId?: string;
   /** 音频翻译结果确认 session */
   SessionId?: string;
+  /** 视频转译任务状态 */
+  Status?: number;
+  /** 视频转译任务信息 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

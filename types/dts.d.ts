@@ -2742,7 +2742,7 @@ declare namespace V20180330 {
   /** 查询订阅配置的错误信息 */
   interface SubsErr {
     /** 错误信息 */
-    Message: string | null;
+    Message?: string | null;
   }
 
   /** 订阅实例信息 */
@@ -2773,6 +2773,8 @@ declare namespace V20180330 {
     OfflineTime?: string;
     /** 最近一次修改的消费时间起点，如果从未修改则为零值 */
     ConsumeStartTime?: string;
+    /** 自动续费标识。0-不自动续费，1-自动续费 */
+    AutoRenewFlag?: number | null;
     /** 数据订阅实例所属地域 */
     Region?: string;
     /** 计费方式，0 - 包年包月，1 - 按量计费 */
@@ -2791,8 +2793,6 @@ declare namespace V20180330 {
     SdkConsumedTime?: string;
     /** 标签 */
     Tags?: TagItem[] | null;
-    /** 自动续费标识。0-不自动续费，1-自动续费 */
-    AutoRenewFlag?: number | null;
     /** 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅 */
     SubscribeVersion?: string | null;
   }
@@ -3118,9 +3118,9 @@ declare namespace V20180330 {
 
   interface DescribeSubscribesResponse {
     /** 符合查询条件的实例总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 数据订阅实例的信息列表 */
-    Items: SubscribeInfo[];
+    Items?: SubscribeInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

@@ -259,21 +259,21 @@ declare interface InstanceDetail {
 /** 实例可修改参数枚举类型集合。 */
 declare interface InstanceEnumParam {
   /** 参数当前值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数默认值。 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 枚举值，所有支持的值。 */
-  EnumValue: string[];
+  EnumValue?: string[];
   /** 参数修改之后是否需要重启生效。- 1：需要重启后生效。- 0：无需重启，设置成功即可生效。 */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数说明。 */
-  Tips: string[];
+  Tips?: string[];
   /** 参数值类型说明。 */
-  ValueType: string;
+  ValueType?: string;
   /** 是否为运行中参数值。- 1：运行中参数值。- 0：非运行中参数值。 */
-  Status: number;
+  Status?: number;
 }
 
 /** 实例可修改参数 Integer 类型集合。 */
@@ -993,20 +993,20 @@ declare interface DescribeDBInstancesResponse {
 }
 
 declare interface DescribeInstanceParamsRequest {
-  /** 指定待查询参数列表的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  /** 指定待查询参数列表的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeInstanceParamsResponse {
-  /** 参数值为枚举类型参数集合。 */
+  /** 参数值为枚举类型的参数集合。 */
   InstanceEnumParam?: InstanceEnumParam[];
-  /** 参数值为 Integer 类型参数集合。 */
+  /** 参数值为 Integer 类型的参数集合。 */
   InstanceIntegerParam?: InstanceIntegerParam[];
   /** 参数值为 Text 类型的参数集合。 */
   InstanceTextParam?: InstanceTextParam[];
   /** 参数值为混合类型的参数集合。 */
   InstanceMultiParam?: InstanceMultiParam[];
-  /** 当前实例支持修改的参数个数统计 如0 */
+  /** 当前实例支持修改的参数数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

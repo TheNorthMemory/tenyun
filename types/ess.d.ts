@@ -270,7 +270,7 @@ declare interface Component {
   KeywordOrder?: string;
   /** **如果控件是关键字定位方式**，在KeywordPage中指定关键字页码时，将只会在该页码中查找关键字，非该页码的关键字将不会查询出来。如果不设置查找所有页面中的关键字。 */
   KeywordPage?: number;
-  /** **如果控件是关键字定位方式**，关键字生成的区域的对齐方式， 可以设置下面的值 Middle :居中 Below :正下方 Right :正右方 LowerRight :右上角 UpperRight :右下角。示例：如果设置Middle的关键字盖章，则印章的中心会和关键字的中心重合，如果设置Below，则印章在关键字的正下方 */
+  /** **如果控件是关键字定位方式**，关键字生成的区域的对齐方式， 可以设置下面的值 Middle :居中 Below :正下方 Right :正右方 LowerRight :右下角 UpperRight :右上角。示例：如果设置Middle的关键字盖章，则印章的中心会和关键字的中心重合，如果设置Below，则印章在关键字的正下方 */
   RelativeLocation?: string;
   /** **如果控件是关键字定位方式**，关键字索引是指在PDF文件中存在多个相同的关键字时，通过索引指定使用哪一个关键字作为最后的结果。可以通过指定多个索引来同时使用多个关键字。例如，[0,2]表示使用PDF文件内第1个和第3个关键字位置作为最后的结果。注意：关键字索引是从0开始计数的 */
   KeywordIndexes?: number[];

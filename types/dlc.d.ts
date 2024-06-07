@@ -44,6 +44,20 @@ declare interface BatchSqlTask {
   Message?: string | null;
 }
 
+/** chdfs产品vpc信息 */
+declare interface CHDFSProductVpcInfo {
+  /** vpc id */
+  VpcId?: string | null;
+  /** vpc名称 */
+  VpcName?: string | null;
+  /** vpc子网信息列表 */
+  VpcCidrBlock?: VpcCidrBlock[] | null;
+  /** 规则Id */
+  RuleId?: number | null;
+  /** 权限组Id */
+  AccessGroupId?: string | null;
+}
+
 /** CSV类型数据格式 */
 declare interface CSV {
   /** 压缩格式，["Snappy", "Gzip", "None"选一]。 */
@@ -132,6 +146,18 @@ declare interface CrontabResumeSuspendStrategy {
   SuspendTime?: string | null;
   /** 挂起配置：0（默认）：等待任务结束后挂起、1：强制挂起 */
   SuspendStrategy?: number | null;
+}
+
+/** DLC 数据目录访问权限 */
+declare interface DLCCatalogAccess {
+  /** VPCID */
+  VpcId: string | null;
+  /** 产品类型 */
+  Product: string | null;
+  /** 描述信息 */
+  Description?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
 }
 
 /** 迁移列对象 */
@@ -764,6 +790,20 @@ declare interface LockComponentInfo {
   IsDynamicPartitionWrite?: boolean;
 }
 
+/** 绑定融合桶信息 */
+declare interface MountPointAssociates {
+  /** 桶Id */
+  BucketId?: string | null;
+  /** vpcId */
+  VpcId?: string | null;
+  /** 子网地址 */
+  VpcCidrBlock?: string | null;
+  /** 权限组Id */
+  AccessGroupId?: string | null;
+  /** 权限规则Id */
+  AccessRuleId?: number | null;
+}
+
 /** Mysql类型数据源信息 */
 declare interface MysqlInfo {
   /** 连接mysql的jdbc url */
@@ -926,10 +966,34 @@ declare interface NotebookSessions {
   SparkUiUrl?: string | null;
 }
 
+/** 开通了第三方访问的用户信息 */
+declare interface OpendThirdAccessUserInfo {
+  /** id信息 */
+  Id?: number | null;
+  /** 用户主UIN */
+  Uin?: string | null;
+  /** 用户AppId */
+  AppId?: string | null;
+  /** 开通时间 */
+  CreateTime?: string | null;
+}
+
 /** 数据格式其它类型。 */
 declare interface Other {
   /** 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。 */
   Format?: string;
+}
+
+/** 非DLC产品CHDFS绑定 */
+declare interface OtherCHDFSBinding {
+  /** 产品名称 */
+  ProductName?: string | null;
+  /** 用户名称（该字段已废弃） */
+  SuperUser?: string[] | null;
+  /** vpc配置信息 */
+  VpcInfo?: CHDFSProductVpcInfo[] | null;
+  /** 是否与该桶绑定（该字段已废弃） */
+  IsBind?: boolean | null;
 }
 
 /** 其他数据源 */
@@ -1726,6 +1790,26 @@ declare interface ViewResponseInfo {
   ModifiedTime: string;
 }
 
+/** VPC子网信息 */
+declare interface VpcCidrBlock {
+  /** 子网Id */
+  CidrId?: string | null;
+  /** 子网网段 */
+  CidrAddr?: string | null;
+}
+
+/** vpc信息 */
+declare interface VpcInfo {
+  /** vpc Id */
+  VpcId?: string | null;
+  /** vpc子网 */
+  VpcCidrBlock?: string | null;
+  /** 规则Id */
+  RuleId?: number | null;
+  /** 权限组Id */
+  AccessGroupId?: string | null;
+}
+
 /** 工作组详细信息 */
 declare interface WorkGroupDetailInfo {
   /** 工作组Id */
@@ -2066,6 +2150,26 @@ declare interface CheckLockMetaDataResponse {
   LockId: number;
   /** 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED */
   LockState: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCHDFSBindingProductRequest {
+  /** 需要绑定的元数据加速桶名 */
+  MountPoint: string;
+  /** 桶的类型，分为cos和lakefs */
+  BucketType: string;
+  /** 产品名称 */
+  ProductName: string;
+  /** 引擎名称，ProductName选择DLC产品时，必传此参数。其他产品可不传 */
+  EngineName?: string;
+  /** vpc信息，产品名称为other时必传此参数 */
+  VpcInfo?: VpcInfo[];
+}
+
+declare interface CreateCHDFSBindingProductResponse {
+  /** 绑定信息 */
+  MountPointAssociates?: MountPointAssociates[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2622,6 +2726,24 @@ declare interface CreateWorkGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCHDFSBindingProductRequest {
+  /** 需要解绑的元数据加速桶名 */
+  MountPoint: string;
+  /** 桶的类型，分为cos和lakefs */
+  BucketType: string;
+  /** 产品名称 */
+  ProductName: string;
+  /** 引擎名称，ProductName选择DLC产品时，必传此参数。其他产品可不传 */
+  EngineName?: string;
+  /** vpc信息，ProductName选择other时，必传此参数 */
+  VpcInfo?: VpcInfo[];
+}
+
+declare interface DeleteCHDFSBindingProductResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDataEngineRequest {
   /** 删除虚拟集群的名称数组 */
   DataEngineNames: string[];
@@ -2660,6 +2782,14 @@ declare interface DeleteSparkAppRequest {
 }
 
 declare interface DeleteSparkAppResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteThirdPartyAccessUserRequest {
+}
+
+declare interface DeleteThirdPartyAccessUserResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2706,6 +2836,24 @@ declare interface DescribeAdvancedStoreLocationResponse {
   HasLakeFs: boolean;
   /** 托管存储状态，HasLakeFs等于true时，该值才有意义 */
   LakeFsStatus: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDLCCatalogAccessRequest {
+  /** 显示条数 */
+  Limit?: number;
+  /** 记录数量 */
+  Offset?: number;
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDLCCatalogAccessResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** DLCCatalog授权列表 */
+  Rows?: DLCCatalogAccess[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3198,6 +3346,20 @@ declare interface DescribeNotebookSessionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOtherCHDFSBindingListRequest {
+  /** 桶名 */
+  BucketId: string;
+}
+
+declare interface DescribeOtherCHDFSBindingListResponse {
+  /** 非DLC 产品绑定列表 */
+  OtherCHDFSBindingList?: OtherCHDFSBinding[];
+  /** 总记录数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResultDownloadRequest {
   /** 查询任务Id */
   DownloadId: string;
@@ -3352,6 +3514,16 @@ declare interface DescribeStoreLocationRequest {
 declare interface DescribeStoreLocationResponse {
   /** 返回用户设置的结果存储位置路径，如果未设置则返回空字符串："" */
   StoreLocation: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSubUserAccessPolicyRequest {
+}
+
+declare interface DescribeSubUserAccessPolicyResponse {
+  /** 子用户访问策略 */
+  PolicyDocument?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3542,6 +3714,16 @@ declare interface DescribeTasksResponse {
   TotalCount?: number;
   /** 任务概览信息 */
   TasksOverview?: TasksOverview | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeThirdPartyAccessUserRequest {
+}
+
+declare interface DescribeThirdPartyAccessUserResponse {
+  /** 用户信息 */
+  UserInfo?: OpendThirdAccessUserInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3850,6 +4032,24 @@ declare interface GetOptimizerPolicyResponse {
   RequestId?: string;
 }
 
+declare interface GrantDLCCatalogAccessRequest {
+  /** 授权VpcId */
+  VpcId: string;
+  /** 产品(EMR|DLC|Doris|Inlong|Wedata) */
+  Product: string;
+  /** 描述 */
+  Description?: string;
+  /** VPC所属账号UIN */
+  VpcUin?: string;
+  /** VPC所属账号AppId */
+  VpcAppId?: number;
+}
+
+declare interface GrantDLCCatalogAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTaskJobLogDetailRequest {
   /** 列表返回的Id */
   TaskId: string;
@@ -4120,6 +4320,14 @@ declare interface QueryTaskCostDetailResponse {
   RequestId?: string;
 }
 
+declare interface RegisterThirdPartyAccessUserRequest {
+}
+
+declare interface RegisterThirdPartyAccessUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewDataEngineRequest {
   /** CU队列名称 */
   DataEngineName: string;
@@ -4160,6 +4368,16 @@ declare interface RestartDataEngineRequest {
 }
 
 declare interface RestartDataEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RevokeDLCCatalogAccessRequest {
+  /** VpcID */
+  VpcId: string;
+}
+
+declare interface RevokeDLCCatalogAccessResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4363,6 +4581,8 @@ declare interface Dlc {
   CheckDataEngineImageCanBeUpgrade(data: CheckDataEngineImageCanBeUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineImageCanBeUpgradeResponse>;
   /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
+  /** 创建元数据加速桶和产品绑定关系 {@link CreateCHDFSBindingProductRequest} {@link CreateCHDFSBindingProductResponse} */
+  CreateCHDFSBindingProduct(data: CreateCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCHDFSBindingProductResponse>;
   /** DMS元数据创建库 {@link CreateDMSDatabaseRequest} {@link CreateDMSDatabaseResponse} */
   CreateDMSDatabase(data?: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
   /** DMS元数据创建表 {@link CreateDMSTableRequest} {@link CreateDMSTableResponse} */
@@ -4407,6 +4627,8 @@ declare interface Dlc {
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 创建工作组 {@link CreateWorkGroupRequest} {@link CreateWorkGroupResponse} */
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
+  /** 删除元数据加速桶和产品绑定关系 {@link DeleteCHDFSBindingProductRequest} {@link DeleteCHDFSBindingProductResponse} */
+  DeleteCHDFSBindingProduct(data: DeleteCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCHDFSBindingProductResponse>;
   /** 删除数据引擎 {@link DeleteDataEngineRequest} {@link DeleteDataEngineResponse} */
   DeleteDataEngine(data: DeleteDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataEngineResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
@@ -4415,6 +4637,8 @@ declare interface Dlc {
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;
   /** 删除spark作业 {@link DeleteSparkAppRequest} {@link DeleteSparkAppResponse} */
   DeleteSparkApp(data: DeleteSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSparkAppResponse>;
+  /** 移除第三方平台访问用户 {@link DeleteThirdPartyAccessUserRequest} {@link DeleteThirdPartyAccessUserResponse} */
+  DeleteThirdPartyAccessUser(data?: DeleteThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteThirdPartyAccessUserResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 从工作组中删除用户 {@link DeleteUsersFromWorkGroupRequest} {@link DeleteUsersFromWorkGroupResponse} */
@@ -4423,6 +4647,8 @@ declare interface Dlc {
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
   /** 查询高级设置 {@link DescribeAdvancedStoreLocationRequest} {@link DescribeAdvancedStoreLocationResponse} */
   DescribeAdvancedStoreLocation(data?: DescribeAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdvancedStoreLocationResponse>;
+  /** 查询DLCCatalog访问权限 {@link DescribeDLCCatalogAccessRequest} {@link DescribeDLCCatalogAccessResponse} */
+  DescribeDLCCatalogAccess(data?: DescribeDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLCCatalogAccessResponse>;
   /** DMS元数据获取库 {@link DescribeDMSDatabaseRequest} {@link DescribeDMSDatabaseResponse} */
   DescribeDMSDatabase(data?: DescribeDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSDatabaseResponse>;
   /** DMS元数据获取分区 {@link DescribeDMSPartitionsRequest} {@link DescribeDMSPartitionsResponse} */
@@ -4467,6 +4693,8 @@ declare interface Dlc {
   DescribeNotebookSessionStatements(data: DescribeNotebookSessionStatementsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionStatementsResponse>;
   /** 查询交互式 session列表 {@link DescribeNotebookSessionsRequest} {@link DescribeNotebookSessionsResponse} */
   DescribeNotebookSessions(data: DescribeNotebookSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionsResponse>;
+  /** 查询其他产品元数据加速桶绑定列表 {@link DescribeOtherCHDFSBindingListRequest} {@link DescribeOtherCHDFSBindingListResponse} */
+  DescribeOtherCHDFSBindingList(data: DescribeOtherCHDFSBindingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOtherCHDFSBindingListResponse>;
   /** 查询结果下载任务 {@link DescribeResultDownloadRequest} {@link DescribeResultDownloadResponse} */
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
   /** 查询SQL脚本列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */
@@ -4483,6 +4711,8 @@ declare interface Dlc {
   DescribeSparkSessionBatchSqlLog(data: DescribeSparkSessionBatchSqlLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSqlLogResponse>;
   /** 查询结果存储位置 {@link DescribeStoreLocationRequest} {@link DescribeStoreLocationResponse} */
   DescribeStoreLocation(data?: DescribeStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStoreLocationResponse>;
+  /** 查询子用户访问策略 {@link DescribeSubUserAccessPolicyRequest} {@link DescribeSubUserAccessPolicyResponse} */
+  DescribeSubUserAccessPolicy(data?: DescribeSubUserAccessPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubUserAccessPolicyResponse>;
   /** 查询表详情 {@link DescribeTableRequest} {@link DescribeTableResponse} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
   /** 查询数据表列表 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
@@ -4497,6 +4727,8 @@ declare interface Dlc {
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 查询任务消耗 {@link DescribeTasksCostInfoRequest} {@link DescribeTasksCostInfoResponse} */
   DescribeTasksCostInfo(data?: DescribeTasksCostInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksCostInfoResponse>;
+  /** 查询开通的第三方平台访问用户信息 {@link DescribeThirdPartyAccessUserRequest} {@link DescribeThirdPartyAccessUserResponse} */
+  DescribeThirdPartyAccessUser(data?: DescribeThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAccessUserResponse>;
   /** 查询可更新配置的引擎列表 {@link DescribeUpdatableDataEnginesRequest} {@link DescribeUpdatableDataEnginesResponse} */
   DescribeUpdatableDataEngines(data: DescribeUpdatableDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpdatableDataEnginesResponse>;
   /** 查询用户自定义引擎参数 {@link DescribeUserDataEngineConfigRequest} {@link DescribeUserDataEngineConfigResponse} */
@@ -4529,6 +4761,8 @@ declare interface Dlc {
   GenerateCreateMangedTableSql(data: GenerateCreateMangedTableSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCreateMangedTableSqlResponse>;
   /** 获取策略 {@link GetOptimizerPolicyRequest} {@link GetOptimizerPolicyResponse} */
   GetOptimizerPolicy(data: GetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOptimizerPolicyResponse>;
+  /** 授权DLCCatalog访问权限 {@link GrantDLCCatalogAccessRequest} {@link GrantDLCCatalogAccessResponse} */
+  GrantDLCCatalogAccess(data: GrantDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<GrantDLCCatalogAccessResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 日志名称列表 {@link ListTaskJobLogNameRequest} {@link ListTaskJobLogNameResponse} */
@@ -4555,12 +4789,16 @@ declare interface Dlc {
   QueryResult(data: QueryResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResultResponse>;
   /** 查询任务消耗明细 {@link QueryTaskCostDetailRequest} {@link QueryTaskCostDetailResponse} */
   QueryTaskCostDetail(data?: QueryTaskCostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTaskCostDetailResponse>;
+  /** 注册第三方平台访问用户 {@link RegisterThirdPartyAccessUserRequest} {@link RegisterThirdPartyAccessUserResponse} */
+  RegisterThirdPartyAccessUser(data?: RegisterThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterThirdPartyAccessUserResponse>;
   /** 续费包年包月数据引擎 {@link RenewDataEngineRequest} {@link RenewDataEngineResponse} */
   RenewDataEngine(data: RenewDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDataEngineResponse>;
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
   /** 重启引擎 {@link RestartDataEngineRequest} {@link RestartDataEngineResponse} */
   RestartDataEngine(data: RestartDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDataEngineResponse>;
+  /** 撤销DLCCatalog访问权限 {@link RevokeDLCCatalogAccessRequest} {@link RevokeDLCCatalogAccessResponse} */
+  RevokeDLCCatalogAccess(data: RevokeDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeDLCCatalogAccessResponse>;
   /** 回滚引擎镜像版本 {@link RollbackDataEngineImageRequest} {@link RollbackDataEngineImageResponse} */
   RollbackDataEngineImage(data: RollbackDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackDataEngineImageResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */

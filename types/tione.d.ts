@@ -482,10 +482,12 @@ declare interface IntranetCallInfo {
   IngressPrivateLinkInfo?: IngressPrivateLinkInfo | null;
   /** 共享弹性网卡信息 */
   ServiceEIPInfo?: ServiceEIPInfo[] | null;
-  /** 私有连接信息 */
-  PrivateLinkInfos?: PrivateLinkInfo[] | null;
   /** 默认内网调用信息 */
   DefaultInnerCallInfos?: DefaultInnerCallInfo[] | null;
+  /** 私有连接信息 */
+  PrivateLinkInfos?: PrivateLinkInfo[] | null;
+  /** 基于新网关的私有连接信息 */
+  PrivateLinkInfosV2?: PrivateLinkInfo[] | null;
 }
 
 /** 本地磁盘信息 */
@@ -1084,6 +1086,18 @@ declare interface ServiceCallInfo {
   AppSecret?: string | null;
   /** 鉴权是否开启 */
   AuthorizationEnable?: boolean | null;
+}
+
+/** V2版本的服务调用信息 */
+declare interface ServiceCallInfoV2 {
+  /** 服务组id */
+  ServiceGroupId?: string | null;
+  /** 服务的公网调用地址 */
+  InternetEndpoint?: string | null;
+  /** 鉴权是否开启 */
+  AuthorizationEnable?: boolean | null;
+  /** 鉴权token，仅当AuthorizationEnable为true时有效 */
+  AuthToken?: string | null;
 }
 
 /** 服务共享弹性网卡设置 */
@@ -2032,6 +2046,8 @@ declare interface DescribeModelServiceCallInfoResponse {
   TJCallInfo?: TJCallInfo | null;
   /** 内网调用信息 */
   IntranetCallInfo?: IntranetCallInfo | null;
+  /** 基于新网关的服务调用信息 */
+  ServiceCallInfoV2?: ServiceCallInfoV2 | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

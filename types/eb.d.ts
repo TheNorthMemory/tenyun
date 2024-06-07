@@ -101,17 +101,17 @@ declare interface DeadLetterConfig {
 /** 描述Es规则目标 */
 declare interface ESTargetParams {
   /** 网络连接类型 */
-  NetMode: string;
+  NetMode: string | null;
   /** 索引前缀 */
-  IndexPrefix: string;
+  IndexPrefix: string | null;
   /** es日志轮换粒度 */
-  RotationInterval: string;
+  RotationInterval: string | null;
   /** DTS事件配置 */
-  OutputMode: string;
+  OutputMode: string | null;
   /** DTS索引配置 */
-  IndexSuffixMode: string;
+  IndexSuffixMode: string | null;
   /** es模版类型 */
-  IndexTemplateType?: string;
+  IndexTemplateType?: string | null;
 }
 
 /** 描述如何过滤数据 */
@@ -251,35 +251,35 @@ declare interface RetryPolicy {
 /** 规则信息 */
 declare interface Rule {
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 修改时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 使能开关 */
-  Enable: boolean;
+  Enable?: boolean;
   /** 描述 */
-  Description: string;
+  Description?: string;
   /** 规则ID */
-  RuleId: string;
+  RuleId?: string;
   /** 创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 事件集ID */
-  EventBusId: string;
+  EventBusId?: string;
   /** 规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** Target 简要信息 */
-  Targets: TargetBrief[] | null;
+  Targets?: TargetBrief[] | null;
   /** rule设置的dlq规则. 可能为null */
-  DeadLetterConfig: DeadLetterConfig | null;
+  DeadLetterConfig?: DeadLetterConfig | null;
 }
 
 /** 云函数参数 */
 declare interface SCFParams {
   /** 批量投递最长等待时间 */
-  BatchTimeout?: number;
+  BatchTimeout?: number | null;
   /** 批量投递最大事件条数 */
-  BatchEventCount?: number;
+  BatchEventCount?: number | null;
   /** 开启批量投递使能 */
-  EnableBatchDelivery?: boolean;
+  EnableBatchDelivery?: boolean | null;
 }
 
 /** 日志检索详情 */
@@ -321,21 +321,21 @@ declare interface Tag {
 /** Target信息 */
 declare interface Target {
   /** 目标类型 */
-  Type: string;
+  Type?: string;
   /** 事件集ID */
-  EventBusId: string;
+  EventBusId?: string;
   /** 目标ID */
-  TargetId: string;
+  TargetId?: string;
   /** 目标描述 */
-  TargetDescription: TargetDescription;
+  TargetDescription?: TargetDescription;
   /** 事件规则ID */
-  RuleId: string;
+  RuleId?: string;
   /** 开启批量投递使能 */
-  EnableBatchDelivery: boolean | null;
+  EnableBatchDelivery?: boolean | null;
   /** 批量投递最长等待时间 */
-  BatchTimeout: number | null;
+  BatchTimeout?: number | null;
   /** 批量投递最大事件条数 */
-  BatchEventCount: number | null;
+  BatchEventCount?: number | null;
 }
 
 /** 目标简要信息 */
@@ -697,9 +697,9 @@ declare interface ListConnectionsRequest {
 
 declare interface ListConnectionsResponse {
   /** 连接器信息 */
-  Connections: Connection[];
+  Connections?: Connection[];
   /** 连接器总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -763,7 +763,7 @@ declare interface ListPlatformProductsResponse {
 declare interface ListRulesRequest {
   /** 事件集ID */
   EventBusId: string;
-  /** 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间） */
+  /** 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）,name（规则名称） */
   OrderBy?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -775,9 +775,9 @@ declare interface ListRulesRequest {
 
 declare interface ListRulesResponse {
   /** 事件规则信息 */
-  Rules: Rule[];
+  Rules?: Rule[];
   /** 事件规则总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -799,9 +799,9 @@ declare interface ListTargetsRequest {
 
 declare interface ListTargetsResponse {
   /** 目标总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 目标信息 */
-  Targets: Target[];
+  Targets?: Target[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1210,9 +1210,9 @@ declare interface Origin {
 
 /** 加速域名源站信息。 */
 declare interface OriginDetail {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VODEO：云点播-混合云版；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VODEO：云点播-混合云版；VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
   OriginType?: string;
-  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；当 OriginType = VODEO 时，如果 VodeoDistributionRange = ALL，则该参数为 "all-buckets-in-vodeo-application"；如果 VodeoDistributionRange = Bucket，则该参数为对应存储桶域名。 */
+  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；当 OriginType = VOD 时，该参数请填写云点播应用 ID ；当 OriginType = VODEO 时，如果 VodeoDistributionRange = ALL，则该参数为 "all-buckets-in-vodeo-application"；如果 VodeoDistributionRange = Bucket，则该参数为对应存储桶域名。 */
   Origin?: string;
   /** 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 且配置了备源站组时会生效。 */
   BackupOrigin?: string;
@@ -1264,9 +1264,9 @@ declare interface OriginGroupReference {
 
 /** 加速域名源站信息。 */
 declare interface OriginInfo {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站； VODEO：云点播-混合云版；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站； VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
   OriginType: string;
-  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数请填写 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；当 OriginType = AWS_S3，该参数请填写 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数请填写源站组 ID；当 OriginType = VODEO 时，如果 VodeoDistributionRange = ALL，则该参数填写 "all-buckets-in-vodeo-application"；如果 VodeoDistributionRange = Bucket，则该参数请填写对应存储桶域名；当 OriginType = LB 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；当 OriginType = SPACE 时，该参数请填写源站卸载空间 ID，该功能当前仅白名单开放。 */
+  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数请填写 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；当 OriginType = AWS_S3，该参数请填写 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数请填写源站组 ID；当 OriginType = VOD 时，该参数请填写云点播应用 ID ；当 OriginType = LB 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；当 OriginType = SPACE 时，该参数请填写源站卸载空间 ID，该功能当前仅白名单开放。 */
   Origin: string;
   /** 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 时生效，该字段为旧版能力，调用后控制台无法进行配置修改，如需使用请提交工单咨询。 */
   BackupOrigin?: string;

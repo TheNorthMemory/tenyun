@@ -239,9 +239,9 @@ declare interface DescribeTrafficPackagesRequest {
 
 declare interface DescribeTrafficPackagesResponse {
   /** 流量包列表 */
-  List: TrafficPackage[];
+  List?: TrafficPackage[];
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

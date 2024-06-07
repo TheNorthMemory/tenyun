@@ -4137,7 +4137,7 @@ declare interface DescribePrometheusInstanceUsageRequest {
 
 declare interface DescribePrometheusInstanceUsageResponse {
   /** 用量列表 */
-  UsageSet: PrometheusInstanceTenantUsage[] | null;
+  UsageSet?: PrometheusInstanceTenantUsage[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

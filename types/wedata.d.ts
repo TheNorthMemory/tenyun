@@ -2446,6 +2446,10 @@ declare interface OrganizationalFunction {
   SubmitTimestamp?: string | null;
   /** 函数tag */
   Tag?: string | null;
+  /** 操作人 ID 列表 */
+  OperatorUserIdsStr?: string[] | null;
+  /** 公有云 Owner ID 列表 */
+  OwnerUserIdsStr?: string[] | null;
 }
 
 /** 键值对 */

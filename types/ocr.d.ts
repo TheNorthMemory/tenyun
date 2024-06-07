@@ -4829,7 +4829,7 @@ declare interface VinOCRRequest {
 
 declare interface VinOCRResponse {
   /** 检测到的车辆 VIN 码。 */
-  Vin: string;
+  Vin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4897,7 +4897,7 @@ declare interface Ocr {
   FlightInvoiceOCR(data?: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
   /** 数学公式识别 {@link FormulaOCRRequest} {@link FormulaOCRResponse} */
   FormulaOCR(data?: FormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FormulaOCRResponse>;
-  /** 通用印刷体识别（高精度版） {@link GeneralAccurateOCRRequest} {@link GeneralAccurateOCRResponse} */
+  /** 通用文字识别（高精度版） {@link GeneralAccurateOCRRequest} {@link GeneralAccurateOCRResponse} */
   GeneralAccurateOCR(data?: GeneralAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralAccurateOCRResponse>;
   /** 通用印刷体识别 {@link GeneralBasicOCRRequest} {@link GeneralBasicOCRResponse} */
   GeneralBasicOCR(data?: GeneralBasicOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralBasicOCRResponse>;

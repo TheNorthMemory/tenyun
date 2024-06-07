@@ -123,45 +123,45 @@ declare interface BaseBackup {
 /** 数据库实例规格 */
 declare interface ClassInfo {
   /** 规格ID */
-  SpecCode: string;
+  SpecCode?: string;
   /** CPU核数 */
-  CPU: number;
+  CPU?: number;
   /** 内存大小，单位：MB */
-  Memory: number;
+  Memory?: number;
   /** 该规格所支持最大存储容量，单位：GB */
-  MaxStorage: number;
+  MaxStorage?: number;
   /** 该规格所支持最小存储容量，单位：GB */
-  MinStorage: number;
+  MinStorage?: number;
   /** 该规格的预估QPS */
-  QPS: number;
+  QPS?: number;
 }
 
 /** 数据库备份信息 */
 declare interface DBBackup {
   /** 备份文件唯一标识 */
-  Id: number;
+  Id?: number;
   /** 文件生成的开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 文件生成的结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 文件大小(K) */
-  Size: number;
+  Size?: number;
   /** 策略（0-实例备份；1-多库备份） */
-  Strategy: number;
+  Strategy?: number;
   /** 类型（0-定时） */
-  Way: number;
+  Way?: number;
   /** 备份方式（1-完整） */
-  Type: number;
+  Type?: number;
   /** 状态（1-创建中；2-成功；3-失败） */
-  Status: number;
+  Status?: number;
   /** DB列表 */
-  DbList: string[];
+  DbList?: string[];
   /** 内网下载地址 */
-  InternalAddr: string;
+  InternalAddr?: string;
   /** 外网下载地址 */
-  ExternalAddr: string;
+  ExternalAddr?: string;
   /** 备份集ID */
-  SetId: string | null;
+  SetId?: string | null;
 }
 
 /** 描述实例的详细信息 */
@@ -178,7 +178,7 @@ declare interface DBInstance {
   DBInstanceId?: string;
   /** 实例名称。 */
   DBInstanceName?: string;
-  /** 实例状态，分别为：applying（申请中）、init(待初始化)、initing(初始化中)、running(运行中)、limited run（受限运行）、isolating（隔离中）、isolated（已隔离）、recycling（回收中）、recycled（已回收）、job running（任务执行中）、offline（下线）、migrating（迁移中）、expanding（扩容中）、waitSwitch（等待切换）、switching（切换中）、readonly（只读）、restarting（重启中）、network changing（网络变更中）、upgrading（内核版本升级中）、audit-switching（审计状态变更中）、primary-switching（主备切换中） */
+  /** 实例状态，分别为：applying（申请中）、init(待初始化)、initing(初始化中)、running(运行中)、limited run（受限运行）、isolating（隔离中）、isolated（已隔离）、disisolating（解隔离中）、recycling（回收中）、recycled（已回收）、job running（任务执行中）、offline（下线）、migrating（迁移中）、expanding（扩容中）、waitSwitch（等待切换）、switching（切换中）、readonly（只读）、restarting（重启中）、network changing（网络变更中）、upgrading（内核版本升级中）、audit-switching（审计状态变更中）、primary-switching（主备切换中） */
   DBInstanceStatus?: string;
   /** 实例分配的内存大小，单位：GB */
   DBInstanceMemory?: number;
@@ -277,11 +277,11 @@ declare interface DBNode {
 /** 慢SQL 统计分析接口返回详情 */
 declare interface Detail {
   /** 输入时间范围内所有慢sql执行的总时间，单位毫秒（ms） */
-  TotalTime: number;
+  TotalTime?: number;
   /** 输入时间范围内所有慢sql总条数 */
-  TotalCallNum: number;
+  TotalCallNum?: number;
   /** 慢SQL统计分析列表 */
-  AnalysisItems: AnalysisItems[] | null;
+  AnalysisItems?: AnalysisItems[] | null;
 }
 
 /** 慢SQL耗时分段分析 */
@@ -641,19 +641,19 @@ declare interface RegionInfo {
 /** 安全组信息 */
 declare interface SecurityGroup {
   /** 项目Id */
-  ProjectId: number;
+  ProjectId?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 入站规则 */
-  Inbound: PolicyRule[];
+  Inbound?: PolicyRule[];
   /** 出站规则 */
-  Outbound: PolicyRule[];
+  Outbound?: PolicyRule[];
   /** 安全组ID */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 安全组名称 */
-  SecurityGroupName: string;
+  SecurityGroupName?: string;
   /** 安全组备注 */
-  SecurityGroupDescription: string;
+  SecurityGroupDescription?: string;
 }
 
 /** serverless账号描述 */
@@ -781,19 +781,19 @@ declare interface Tag {
 /** 数据库版本号信息 */
 declare interface Version {
   /** 数据库引擎，支持：1、postgresql（云数据库PostgreSQL）；2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）； */
-  DBEngine: string;
+  DBEngine?: string;
   /** 数据库版本，例如：12.4 */
-  DBVersion: string;
+  DBVersion?: string;
   /** 数据库主要版本，例如：12 */
-  DBMajorVersion: string;
+  DBMajorVersion?: string;
   /** 数据库内核版本，例如：v12.4_r1.3 */
-  DBKernelVersion: string;
+  DBKernelVersion?: string;
   /** 数据库内核支持的特性列表。例如，TDE：支持数据加密。 */
-  SupportedFeatureNames: string[];
+  SupportedFeatureNames?: string[];
   /** 数据库版本状态，包括：AVAILABLE：可用；DEPRECATED：已弃用。 */
-  Status: string;
-  /** 该数据库版本（DBKernelVersion）可以升级到的版本号列表。 */
-  AvailableUpgradeTarget: string[];
+  Status?: string;
+  /** 该数据库版本（DBKernelVersion）可以升级到的版本号列表。其中包含可升级的小版本号和可升级的大版本号（完整内核版本格式示例：v15.1_v1.6）。 */
+  AvailableUpgradeTarget?: string[];
 }
 
 /** 数据库Xlog信息 */
@@ -849,9 +849,9 @@ declare interface CloneDBInstanceRequest {
   SpecCode: string;
   /** 实例容量大小，单位：GB。 */
   Storage: number;
-  /** 购买时长，单位：月。预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36后付费：只支持1 */
+  /** 购买时长，单位：月。- 预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36- 后付费：只支持1 */
   Period: number;
-  /** 续费标记：0：手动续费1：自动续费默认值：0 */
+  /** 续费标记：- 0：手动续费- 1：自动续费默认值：0 */
   AutoRenewFlag: number;
   /** 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。 */
   VpcId: string;
@@ -859,7 +859,7 @@ declare interface CloneDBInstanceRequest {
   SubnetId: string;
   /** 新购的实例名称，仅支持长度小于60的中文/英文/数字/"_"/"-"，不指定实例名称则默认显示"未命名"。 */
   Name?: string;
-  /** 实例计费类型，目前支持：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：后付费，即按量计费默认值：PREPAID */
+  /** 实例计费类型，目前支持：- PREPAID：预付费，即包年包月- POSTPAID_BY_HOUR：后付费，即按量计费默认值：PREPAID */
   InstanceChargeType?: string;
   /** 实例所属安全组，该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
   SecurityGroupIds?: string[];
@@ -869,7 +869,7 @@ declare interface CloneDBInstanceRequest {
   TagList?: Tag[];
   /** 实例节点部署信息，支持多可用区部署时需要指定每个节点的部署可用区信息。可用区信息可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/409/16769) 接口的返回值中的Zone字段来获取。 */
   DBNodeSet?: DBNode[];
-  /** 是否自动使用代金券：0：否1：是默认值：0 */
+  /** 是否自动使用代金券：- 0：否- 1：是默认值：0 */
   AutoVoucher?: number;
   /** 代金券ID列表。 */
   VoucherIds?: string;
@@ -1227,7 +1227,7 @@ declare interface CreateServerlessDBInstanceRequest {
 
 declare interface CreateServerlessDBInstanceResponse {
   /** 实例ID，该ID全局唯一，如：postgres-xxxxx */
-  DBInstanceId: string;
+  DBInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1257,7 +1257,7 @@ declare interface DeleteDBInstanceNetworkAccessRequest {
 
 declare interface DeleteDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1297,7 +1297,7 @@ declare interface DeleteReadOnlyGroupNetworkAccessRequest {
 
 declare interface DeleteReadOnlyGroupNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1433,7 +1433,7 @@ declare interface DescribeBackupPlansRequest {
 
 declare interface DescribeBackupPlansResponse {
   /** 实例的备份计划集 */
-  Plans: BackupPlan[];
+  Plans?: BackupPlan[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1577,7 +1577,7 @@ declare interface DescribeDBInstanceAttributeRequest {
 
 declare interface DescribeDBInstanceAttributeResponse {
   /** 实例详细信息。 */
-  DBInstance: DBInstance;
+  DBInstance?: DBInstance;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1633,7 +1633,7 @@ declare interface DescribeDBInstanceSecurityGroupsResponse {
 }
 
 declare interface DescribeDBInstancesRequest {
-  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为stringdb-instance-name：按照实例名过滤，类型为stringdb-project-id：按照项目ID过滤，类型为integerdb-pay-mode：按照付费模式过滤，类型为stringdb-tag-key：按照标签键过滤，类型为string */
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为stringdb-instance-name：按照实例名过滤，类型为stringdb-project-id：按照项目ID过滤，类型为integerdb-pay-mode：按照实例付费模式过滤，类型为stringdb-tag-key：按照标签键过滤，类型为stringdb-private-ip： 按照实例私有网络IP过滤，类型为stringdb-public-address： 按照实例外网地址过滤，类型为string */
   Filters?: Filter[];
   /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
   Limit?: number;
@@ -1647,9 +1647,9 @@ declare interface DescribeDBInstancesRequest {
 
 declare interface DescribeDBInstancesResponse {
   /** 查询到的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息集合。 */
-  DBInstanceSet: DBInstance[];
+  DBInstanceSet?: DBInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1717,11 +1717,19 @@ declare interface DescribeDBXlogsResponse {
 declare interface DescribeDatabasesRequest {
   /** 实例ID */
   DBInstanceId: string;
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：database-name：按照数据库名称过滤，类型为string。此处使用模糊匹配搜索符合条件的数据库。 */
+  Filters?: Filter[];
+  /** 数据偏移量，从0开始。 */
+  Offset?: number;
+  /** 单次显示数量 */
+  Limit?: number;
 }
 
 declare interface DescribeDatabasesResponse {
   /** 数据库信息 */
   Items?: string[];
+  /** 数据库总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1735,9 +1743,9 @@ declare interface DescribeDefaultParametersRequest {
 
 declare interface DescribeDefaultParametersResponse {
   /** 参数个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数信息 */
-  ParamInfoSet: ParamInfo[] | null;
+  ParamInfoSet?: ParamInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1801,19 +1809,19 @@ declare interface DescribeParameterTemplateAttributesRequest {
 
 declare interface DescribeParameterTemplateAttributesResponse {
   /** 参数模板ID */
-  TemplateId: string | null;
+  TemplateId?: string | null;
   /** 参数模板包含的参数个数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 参数模板包含的参数信息 */
-  ParamInfoSet: ParamInfo[] | null;
+  ParamInfoSet?: ParamInfo[] | null;
   /** 参数模板名称 */
-  TemplateName: string | null;
+  TemplateName?: string | null;
   /** 参数模板适用的数据库版本 */
-  DBMajorVersion: string | null;
+  DBMajorVersion?: string | null;
   /** 参数模板适用的数据库引擎 */
-  DBEngine: string | null;
+  DBEngine?: string | null;
   /** 参数模板描述 */
-  TemplateDescription: string | null;
+  TemplateDescription?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1833,9 +1841,9 @@ declare interface DescribeParameterTemplatesRequest {
 
 declare interface DescribeParameterTemplatesResponse {
   /** 符合查询条件的参数模板总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数模板列表 */
-  ParameterTemplateSet: ParameterTemplate[];
+  ParameterTemplateSet?: ParameterTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1893,15 +1901,15 @@ declare interface DescribeRegionsRequest {
 
 declare interface DescribeRegionsResponse {
   /** 返回的结果数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 地域信息集合。 */
-  RegionSet: RegionInfo[];
+  RegionSet?: RegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeServerlessDBInstancesRequest {
-  /** 查询条件 */
+  /** 查询条件。按照一个或者多个过滤条件进行查询，目前支持的过滤条件类型（name字段指定）有： - db-instance-id：按照实例ID过滤，类型为string- db-instance-name：按照实例名过滤，类型为string- db-tag-key：按照实例的tag过滤，类型为stringvalue字段指定该类型过滤条件下具体要过滤的实例ID/实例名/实例tag-key。 */
   Filter?: Filter[];
   /** 查询个数 */
   Limit?: number;
@@ -1915,9 +1923,9 @@ declare interface DescribeServerlessDBInstancesRequest {
 
 declare interface DescribeServerlessDBInstancesResponse {
   /** 查询结果数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 查询结果 */
-  DBInstanceSet: ServerlessDBInstance[] | null;
+  DBInstanceSet?: ServerlessDBInstance[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1925,27 +1933,27 @@ declare interface DescribeServerlessDBInstancesResponse {
 declare interface DescribeSlowQueryAnalysisRequest {
   /** 实例ID。 */
   DBInstanceId: string;
-  /** 查询起始时间戳，格式 “YYYY-MM-DD HH:mm:ss” ，日志保留时间默认为7天，起始时间不能超出保留时间范围。 */
+  /** 查询起始时间，形如2018-01-01 00:00:00。日志保留时间默认为7天，起始时间不能超出保留时间范围。 */
   StartTime: string;
-  /** 查询结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。 */
+  /** 查询结束时间，形如2018-01-01 00:00:00。 */
   EndTime: string;
-  /** 根据数据库名进行筛选，可以为空。 */
+  /** 数据库名字。 */
   DatabaseName?: string;
-  /** 排序维度。 可选参数，取值范围[CallNum,CostTime,AvgCostTime]。默认CallNum。 */
+  /** 排序字段，取值范围[CallNum,CostTime,AvgCostTime]。默认值为CallNum。 */
   OrderBy?: string;
-  /** 排序类型。升序asc、降序desc。默认desc。 */
+  /** 排序方式，包括升序：asc 降序：desc。默认值为desc。 */
   OrderByType?: string;
-  /** 分页大小。取值范围[1,100]。默认50。 */
+  /** 每页显示数量，取值范围为1-100。默认值为50。 */
   Limit?: number;
-  /** 分页偏移。取值范围[0,INF)。默认0。 */
+  /** 数据偏移量，从0开始。默认值为0。 */
   Offset?: number;
 }
 
 declare interface DescribeSlowQueryAnalysisResponse {
-  /** 查询总条数。 */
-  TotalCount: number;
-  /** 慢SQL统计分析接口返回详情。 */
-  Detail: Detail;
+  /** 查询到的总条数，最大值为10000条。 */
+  TotalCount?: number;
+  /** 查询到的慢SQL统计分析详细信息集合。 */
+  Detail?: Detail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1953,29 +1961,29 @@ declare interface DescribeSlowQueryAnalysisResponse {
 declare interface DescribeSlowQueryListRequest {
   /** 实例ID。 */
   DBInstanceId: string;
-  /** 查询起始时间戳，格式 “YYYY-MM-DD HH:mm:ss” ，日志保留时间默认为7天，起始时间不能超出保留时间范围。 */
+  /** 查询起始时间，形如2018-01-01 00:00:00。日志保留时间默认为7天，起始时间不能超出保留时间范围。 */
   StartTime: string;
-  /** 查询结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。 */
+  /** 查询结束时间，形如2018-01-01 00:00:00。 */
   EndTime: string;
-  /** 根据数据库名进行筛选，可以为空。 */
+  /** 数据库名字。 */
   DatabaseName?: string;
-  /** 排序类型。升序asc、降序desc。默认为desc。 */
+  /** 排序方式，包括升序：asc 降序：desc。默认值为desc。 */
   OrderByType?: string;
-  /** 排序维度。 可选参数，取值范围[SessionStartTime,Duration]，默认为SessionStartTime。 */
+  /** 排序字段，取值范围[SessionStartTime,Duration]。默认值为SessionStartTime。 */
   OrderBy?: string;
-  /** 分页大小。取值范围[1,100],默认为20。 */
+  /** 每页显示数量，取值范围为1-100。默认值为50。 */
   Limit?: number;
-  /** 分页偏移。取值范围[0,INF)，默认为0。 */
+  /** 数据偏移量，从0开始。默认值为0。 */
   Offset?: number;
 }
 
 declare interface DescribeSlowQueryListResponse {
-  /** 选定时间范围内慢SQL总条数。 */
-  TotalCount: number;
-  /** 指定时间范围内，慢SQL耗时分段分析。 */
-  DurationAnalysis: DurationAnalysis[] | null;
-  /** 指定时间范围内 慢SQL流水。 */
-  RawSlowQueryList: RawSlowQuery[] | null;
+  /** 查询到的慢日志数量，最大值为10000条。 */
+  TotalCount?: number;
+  /** 查询到的慢日志耗时分段分析结果。 */
+  DurationAnalysis?: DurationAnalysis[] | null;
+  /** 查询到的慢日志详细信息集合。 */
+  RawSlowQueryList?: RawSlowQuery[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1985,9 +1993,9 @@ declare interface DescribeZonesRequest {
 
 declare interface DescribeZonesResponse {
   /** 返回的结果数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 可用区信息集合。 */
-  ZoneSet: ZoneInfo[];
+  ZoneSet?: ZoneInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2257,9 +2265,9 @@ declare interface ModifyDBInstanceNameResponse {
 }
 
 declare interface ModifyDBInstanceParametersRequest {
-  /** 实例ID */
+  /** 实例ID。 */
   DBInstanceId: string;
-  /** 待修改参数及期望值 */
+  /** 待修改参数及期望值。 */
   ParamList: ParamEntry[];
 }
 
@@ -2488,6 +2496,22 @@ declare interface RestartDBInstanceRequest {
 declare interface RestartDBInstanceResponse {
   /** 异步流程ID */
   FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestoreDBInstanceObjectsRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 需要恢复的对象列表。假设需要恢复的对象名为test，则恢复后的名称为test_bak_${LinuxTime}。${LinuxTime}无法指定，由系统根据任务发起的linux时间设定。 */
+  RestoreObjects: string[];
+  /** 恢复所用备份集。BackupSetId与RestoreTargetTime有且只能传一个。 */
+  BackupSetId?: string;
+  /** 恢复目标时间，北京时间。BackupSetId与RestoreTargetTime有且只能传一个。 */
+  RestoreTargetTime?: string;
+}
+
+declare interface RestoreDBInstanceObjectsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2773,6 +2797,8 @@ declare interface Postgres {
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
   /** 重启实例 {@link RestartDBInstanceRequest} {@link RestartDBInstanceResponse} */
   RestartDBInstance(data: RestartDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstanceResponse>;
+  /** 恢复数据库对象 {@link RestoreDBInstanceObjectsRequest} {@link RestoreDBInstanceObjectsResponse} */
+  RestoreDBInstanceObjects(data: RestoreDBInstanceObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreDBInstanceObjectsResponse>;
   /** 设置自动续费 {@link SetAutoRenewFlagRequest} {@link SetAutoRenewFlagResponse} */
   SetAutoRenewFlag(data: SetAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoRenewFlagResponse>;
   /** 切换实例主备关系 {@link SwitchDBInstancePrimaryRequest} {@link SwitchDBInstancePrimaryResponse} */
