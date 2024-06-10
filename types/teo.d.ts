@@ -560,6 +560,24 @@ declare interface CustomEndpoint {
   Headers?: Header[];
 }
 
+/** 自定义错误码页面结构体。 */
+declare interface CustomErrorPage {
+  /** 自定义错误页面 ID。 */
+  PageId?: string;
+  /** 站点 ID。 */
+  ZoneId?: string;
+  /** 自定义错误页面名称。 */
+  Name?: string;
+  /** 自定义错误页面类型。 */
+  ContentType?: string;
+  /** 自定义错误页面描述。 */
+  Description?: string;
+  /** 自定义错误页面内容。 */
+  Content?: string;
+  /** 自定义错误页面引用。 */
+  References?: ErrorPageReference[];
+}
+
 /** 实时日志投递任务中的自定义日志字段。 */
 declare interface CustomField {
   /** 从 HTTP 请求和响应中的指定位置提取数据，取值有：ReqHeader：从 HTTP 请求头中提取指定字段值；RspHeader：从 HTTP 响应头中提取指定字段值；Cookie: 从 Cookie 中提取指定字段值。 */
@@ -790,6 +808,12 @@ declare interface EnvInfo {
   CreateTime?: string;
   /** 更新时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
   UpdateTime?: string;
+}
+
+/** 自定义错误页面被引用的来源 */
+declare interface ErrorPageReference {
+  /** 引用的业务 ID，如自定义拦截规则 ID。 */
+  BusinessId?: string;
 }
 
 /** 例外规则，用于配置需要跳过特定场景的规则 */
@@ -2364,6 +2388,26 @@ declare interface CreateConfigGroupVersionResponse {
   RequestId?: string;
 }
 
+declare interface CreateCustomizeErrorPageRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义错误页名称，名称为 2-30 个字符。 */
+  Name: string;
+  /** 自定义错误页面类型，取值有：text/html； application/json；text/plain；text/xml。 */
+  ContentType: string;
+  /** 自定义错误页面描述，描述不超过 60 个字符。 */
+  Description?: string;
+  /** 自定义错误页面内容，内容不超过 2KB。 */
+  Content?: string;
+}
+
+declare interface CreateCustomizeErrorPageResponse {
+  /** 页面 ID。 */
+  PageId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateL4ProxyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2670,6 +2714,18 @@ declare interface DeleteApplicationProxyRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCustomErrorPageRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义页面 ID。 */
+  PageId: string;
+}
+
+declare interface DeleteCustomErrorPageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteL4ProxyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2930,6 +2986,26 @@ declare interface DescribeContentQuotaResponse {
   PurgeQuota?: Quota[] | null;
   /** 预热相关配额。 */
   PrefetchQuota?: Quota[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCustomErrorPagesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 过滤条件，Filters.Values 的上限为20，详细的过滤条件Name值如下：page-id： 按照页面 ID 进行过滤；name： 按照页面名称进行过滤；description：按照页面描述过滤；content-type：按照页面类型过滤。 */
+  Filters?: AdvancedFilter[];
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：1000。 */
+  Limit?: number;
+}
+
+declare interface DescribeCustomErrorPagesResponse {
+  /** 自定义错误页面总数。 */
+  TotalCount?: number;
+  /** 自定义错误页面数据列表。 */
+  ErrorPages?: CustomErrorPage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3790,6 +3866,26 @@ declare interface ModifyApplicationProxyStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCustomErrorPageRequest {
+  /** 自定义错误页面 ID。 */
+  PageId: string;
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义错误页名称，名称为2 - 60个字符。 */
+  Name?: string;
+  /** 自定义错误页描述，描述内容不超过60个字符。 */
+  Description?: string;
+  /** 自定义错误页面类型，取值有：text/html。 application/json。plain/text。text/xml。 */
+  ContentType?: string;
+  /** 自定义错误页面内容。内容不超过 2KB。 */
+  Content?: string;
+}
+
+declare interface ModifyCustomErrorPageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyHostsCertificateRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -4373,6 +4469,8 @@ declare interface Teo {
   CreateCLSIndex(data: CreateCLSIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSIndexResponse>;
   /** 创建配置组版本 {@link CreateConfigGroupVersionRequest} {@link CreateConfigGroupVersionResponse} */
   CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
+  /** 创建自定义错误页面 {@link CreateCustomizeErrorPageRequest} {@link CreateCustomizeErrorPageResponse} */
+  CreateCustomizeErrorPage(data: CreateCustomizeErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeErrorPageResponse>;
   /** 创建四层代理实例 {@link CreateL4ProxyRequest} {@link CreateL4ProxyResponse} */
   CreateL4Proxy(data: CreateL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ProxyResponse>;
   /** 创建四层代理转发规则 {@link CreateL4ProxyRulesRequest} {@link CreateL4ProxyRulesResponse} */
@@ -4405,6 +4503,8 @@ declare interface Teo {
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
   /** 删除应用代理规则（旧） {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
+  /** 删除自定义错误页面 {@link DeleteCustomErrorPageRequest} {@link DeleteCustomErrorPageResponse} */
+  DeleteCustomErrorPage(data: DeleteCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomErrorPageResponse>;
   /** 删除四层代理实例 {@link DeleteL4ProxyRequest} {@link DeleteL4ProxyResponse} */
   DeleteL4Proxy(data: DeleteL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyResponse>;
   /** 删除四层代理转发规则 {@link DeleteL4ProxyRulesRequest} {@link DeleteL4ProxyRulesResponse} */
@@ -4439,6 +4539,8 @@ declare interface Teo {
   DescribeConfigGroupVersions(data: DescribeConfigGroupVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigGroupVersionsResponse>;
   /** 查询内容管理接口配额 {@link DescribeContentQuotaRequest} {@link DescribeContentQuotaResponse} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
+  /** 查询自定义错误页列表 {@link DescribeCustomErrorPagesRequest} {@link DescribeCustomErrorPagesResponse} */
+  DescribeCustomErrorPages(data: DescribeCustomErrorPagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomErrorPagesResponse>;
   /** 查询DDoS攻击时序数据 {@link DescribeDDoSAttackDataRequest} {@link DescribeDDoSAttackDataResponse} */
   DescribeDDoSAttackData(data: DescribeDDoSAttackDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackDataResponse>;
   /** 查询DDoS攻击事件列表 {@link DescribeDDoSAttackEventRequest} {@link DescribeDDoSAttackEventResponse} */
@@ -4523,6 +4625,8 @@ declare interface Teo {
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
   /** 修改应用代理的状态（旧） {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
+  /** 修改自定义错误页面 {@link ModifyCustomErrorPageRequest} {@link ModifyCustomErrorPageResponse} */
+  ModifyCustomErrorPage(data: ModifyCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomErrorPageResponse>;
   /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
   /** 修改四层代理实例 {@link ModifyL4ProxyRequest} {@link ModifyL4ProxyResponse} */

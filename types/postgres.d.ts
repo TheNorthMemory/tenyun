@@ -170,9 +170,9 @@ declare interface DBInstance {
   Region?: string;
   /** 实例所属可用区， 如：ap-guangzhou-3，对应ZoneSet的Zone字段。 */
   Zone?: string;
-  /** 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。 */
+  /** 私有网络ID，形如vpc-e6w23k31。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcs](https://cloud.tencent.com/document/api/215/15778) ，从接口返回中的unVpcId字段获取。 */
   VpcId?: string;
-  /** 私有网络子网ID，形如subnet-xxxxxxxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。 */
+  /** 私有网络子网ID，形如subnet-51lcif9y。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。 */
   SubnetId?: string;
   /** 实例ID。 */
   DBInstanceId?: string;
@@ -1453,9 +1453,9 @@ declare interface DescribeBackupSummariesRequest {
 
 declare interface DescribeBackupSummariesResponse {
   /** 备份统计信息列表。 */
-  BackupSummarySet: BackupSummary[];
+  BackupSummarySet?: BackupSummary[];
   /** 查询到的所有备份信息数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

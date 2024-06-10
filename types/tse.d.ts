@@ -3218,6 +3218,18 @@ declare interface DescribeOneCloudNativeAPIGatewayServiceResponse {
   RequestId?: string;
 }
 
+declare interface DescribePublicAddressConfigRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 查询该分组的公网信息，不传则查询实例所有的公网负载均衡信息 */
+  GroupId?: string;
+}
+
+declare interface DescribePublicAddressConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePublicNetworkRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -4024,6 +4036,8 @@ declare interface Tse {
   DescribeNativeGatewayServerGroups(data: DescribeNativeGatewayServerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeGatewayServerGroupsResponse>;
   /** 获取云原生网关服务详情 {@link DescribeOneCloudNativeAPIGatewayServiceRequest} {@link DescribeOneCloudNativeAPIGatewayServiceResponse} */
   DescribeOneCloudNativeAPIGatewayService(data: DescribeOneCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOneCloudNativeAPIGatewayServiceResponse>;
+  /** 查询公网地址信息 {@link DescribePublicAddressConfigRequest} {@link DescribePublicAddressConfigResponse} */
+  DescribePublicAddressConfig(data: DescribePublicAddressConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicAddressConfigResponse>;
   /** 查询云原生API网关实例公网详情 {@link DescribePublicNetworkRequest} {@link DescribePublicNetworkResponse} */
   DescribePublicNetwork(data: DescribePublicNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicNetworkResponse>;
   /** 查询引擎实例访问地址 {@link DescribeSREInstanceAccessAddressRequest} {@link DescribeSREInstanceAccessAddressResponse} */

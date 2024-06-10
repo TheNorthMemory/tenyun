@@ -2770,6 +2770,8 @@ declare interface ScaleOutClusterResponse {
   ClientToken?: string | null;
   /** 扩容流程ID。 */
   FlowId?: number | null;
+  /** 查询流程状态，流程额外信息 */
+  TraceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2844,6 +2846,8 @@ declare interface ScaleOutInstanceResponse {
   FlowId?: number | null;
   /** 大订单号。 */
   BillId?: string | null;
+  /** 扩容TraceId */
+  TraceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

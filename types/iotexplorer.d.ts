@@ -803,13 +803,13 @@ declare interface TopicRule {
 /** 规则信息 */
 declare interface TopicRuleInfo {
   /** 规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** 规则描述 */
-  Description: string;
+  Description?: string;
   /** 创建时间 */
-  CreatedAt: number;
+  CreatedAt?: number;
   /** 规则是否禁用 */
-  RuleDisabled: boolean;
+  RuleDisabled?: boolean;
 }
 
 /** TopicRulePayload结构 */
@@ -2089,9 +2089,9 @@ declare interface DescribeGatewaySubProductsRequest {
 
 declare interface DescribeGatewaySubProductsResponse {
   /** 当前分页的可绑定或解绑的产品信息。 */
-  Products: BindProductInfo[];
+  Products?: BindProductInfo[];
   /** 可绑定或解绑的产品总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

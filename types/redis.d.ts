@@ -1328,6 +1328,42 @@ declare interface DescribeAutoBackupConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupDetailRequest {
+  /** 实例 ID。 */
+  InstanceId: string;
+  /** 备份 ID，可通过接口 [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) 返回的参数 **RedisBackupSet** 获取。 */
+  BackupId: string;
+}
+
+declare interface DescribeBackupDetailResponse {
+  /** 备份 ID。 */
+  BackupId?: string;
+  /** 备份开始时间。 */
+  StartTime?: string;
+  /** 备份结束时间。 */
+  EndTime?: string;
+  /** 备份方式。 - 1：手动备份。- 0：自动备份。 */
+  BackupType?: string;
+  /** 备份状态。 - 1：备份被其它流程锁定。- 2：备份正常，没有被任何流程锁定。- -1：备份已过期。- 3：备份正在被导出。- 4：备份导出成功。 */
+  Status?: number;
+  /** 备份的备注信息。 */
+  Remark?: string;
+  /** 备份是否被锁定。- 0：未被锁定。- 1：已被锁定。 */
+  Locked?: number;
+  /** 备份文件大小。单位：Byte。 */
+  BackupSize?: number;
+  /** 实例类型。 */
+  InstanceType?: number;
+  /** 单分片内存规格大小，单位：MB。 */
+  MemSize?: number;
+  /** 分片数量。 */
+  ShardNum?: number;
+  /** 副本数量。 */
+  ReplicasNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupDownloadRestrictionRequest {
 }
 
@@ -2833,6 +2869,8 @@ declare interface Redis {
   DeleteReplicationInstance(data: DeleteReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReplicationInstanceResponse>;
   /** 获取自动备份配置 {@link DescribeAutoBackupConfigRequest} {@link DescribeAutoBackupConfigResponse} */
   DescribeAutoBackupConfig(data: DescribeAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoBackupConfigResponse>;
+  /** 查询备份信息详情 {@link DescribeBackupDetailRequest} {@link DescribeBackupDetailResponse} */
+  DescribeBackupDetail(data: DescribeBackupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDetailResponse>;
   /** 查询备份文件的下载来源限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
   DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
   /** 查询备份Rdb下载地址 {@link DescribeBackupUrlRequest} {@link DescribeBackupUrlResponse} */

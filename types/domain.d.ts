@@ -24,6 +24,54 @@ declare interface BatchStatus {
   BatchAction: string;
 }
 
+/** 我预定的域名结构体。 */
+declare interface BiddingAppointResult {
+  /** business_id */
+  BusinessID?: string | null;
+  /** 域名 */
+  Domain?: string | null;
+  /** 预定价格 */
+  AppointPrice?: number | null;
+  /** 预约保证金 */
+  AppointBondPrice?: number | null;
+  /** 预约结束时间 */
+  AppointEndTime?: string | null;
+  /** 预约人数 */
+  AppointNum?: number | null;
+  /** 1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回 */
+  Status?: number | null;
+}
+
+/** 我竞价的域名结构体。 */
+declare interface BiddingResult {
+  /** business_id */
+  BusinessID?: string | null;
+  /** 域名 */
+  Domain?: string | null;
+  /** 当前价格 */
+  CurrentPrice?: number | null;
+  /** 当前用户昵称 */
+  CurrentNickname?: string | null;
+  /** 我的出价 */
+  BiddingPrice?: number | null;
+  /** 竞价保证金 */
+  BiddingBondPrice?: number | null;
+  /** 竞价结束时间 */
+  BiddingEndTime?: string | null;
+  /** 竞价标识，1 领先，2 落后 */
+  BiddingFlag?: number | null;
+  /** 出价次数 */
+  BiddingNum?: number | null;
+  /** 1 已预约，2 竞价中，3 支付尾款 4 交割 5 交易失败 6 交易成功，7 已过期 */
+  Status?: number | null;
+}
+
+/** 我得标的域名结构体。 */
+declare interface BiddingSuccessfulResult {
+  /** 支付结束时间 */
+  PayEndTime?: string | null;
+}
+
 /** 认证资料信息 */
 declare interface CertificateInfo {
   /** 证件号码。 */
@@ -585,6 +633,8 @@ declare interface CreateTemplateResponse {
 }
 
 declare interface DeleteBiddingRequest {
+  /** business_id */
+  BusinessID?: string;
 }
 
 declare interface DeleteBiddingResponse {
@@ -691,9 +741,29 @@ declare interface DescribeBatchOperationLogsResponse {
 }
 
 declare interface DescribeBiddingAppointDetailRequest {
+  /** business_id */
+  BusinessID?: string;
 }
 
 declare interface DescribeBiddingAppointDetailResponse {
+  /** 域名 */
+  Domain?: string;
+  /** 预约人数 */
+  AppointNum?: number;
+  /** 预约开始时间 */
+  AppointStartTime?: string;
+  /** 预约结束时间 */
+  AppointEndTime?: string;
+  /** 注册时间 */
+  RegTime?: string;
+  /** 过期时间 */
+  ExpireTime?: string;
+  /** 删除时间 */
+  DeleteTime?: string;
+  /** 当前价格 */
+  AppointPrice?: number;
+  /** 预约保证金 */
+  AppointBondPrice?: number;
   /** 1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回 */
   Status?: number;
   /** 预约保证金是否已经退回yes：退回 no: 未退回 */
@@ -703,8 +773,12 @@ declare interface DescribeBiddingAppointDetailResponse {
 }
 
 declare interface DescribeBiddingAppointListRequest {
+  /** 页码 */
+  PageNumber: number;
   /** 每页数量 */
   PageSize: number;
+  /** 域名 */
+  Domain?: string;
   /** 状态： 1 已预约 9 预约持有者索回 */
   Status?: number[];
   /** 排序字段：AppointEndTime 预约结束时间 */
@@ -714,21 +788,59 @@ declare interface DescribeBiddingAppointListRequest {
 }
 
 declare interface DescribeBiddingAppointListResponse {
+  /** 搜索结果条数 */
+  Total?: number;
+  /** 预约列表 */
+  AppointList?: BiddingAppointResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBiddingDetailRequest {
+  /** business_id */
+  BusinessID?: string;
 }
 
 declare interface DescribeBiddingDetailResponse {
+  /** 域名 */
+  Domain?: string;
+  /** 出价次数 */
+  BiddingNum?: number;
+  /** 竞价开始时间 */
+  BiddingStartTime?: string;
+  /** 竞价结束时间 */
+  BiddingEndTime?: string;
+  /** 注册时间 */
+  RegTime?: string;
+  /** 过期时间 */
+  ExpireTime?: string;
+  /** 删除时间 */
+  DeleteTime?: string;
+  /** 当前价格 */
+  CurrentPrice?: number;
+  /** 当前用户昵称 */
+  CurrentNickname?: string;
+  /** 竞价保证金 */
+  BiddingBondPrice?: number;
+  /** 1 已预约，2 竞价中，3 支付尾款 4 交割 5 交易失败 6 交易成功，7 已过期 */
+  Status?: number;
+  /** 竞价标识，1 领先，2 落后 */
+  BiddingFlag?: number;
+  /** 是否退款，yes表示退款，no表示不退款 */
+  BiddingBondRefund?: string;
+  /** 我的出价 */
+  BiddingPrice?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBiddingListRequest {
+  /** 页码 */
+  PageNumber: number;
   /** 每页数量 */
   PageSize: number;
+  /** 域名 */
+  Domain?: string;
   /** 2 竞价中 3 等待出价 4 交易失败 10 竞价阶段持有者赎回 */
   Status?: number[];
   /** 排序字段：BiddingEndTime 竞价结束时间	BiddingPrice 我的价格 */
@@ -738,16 +850,38 @@ declare interface DescribeBiddingListRequest {
 }
 
 declare interface DescribeBiddingListResponse {
+  /** 搜索结果条数 */
+  Total?: number;
+  /** 竞价列表 */
+  BiddingList?: BiddingResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBiddingSuccessfulDetailRequest {
+  /** business_id */
+  BusinessID?: string;
 }
 
 declare interface DescribeBiddingSuccessfulDetailResponse {
+  /** 域名 */
+  Domain?: string;
+  /** 得标时间 */
+  SuccessfulTime?: string;
+  /** 得标价格 */
+  SuccessfulPrice?: number;
+  /** 注册时间 */
+  RegTime?: string;
+  /** 过期时间 */
+  ExpireTime?: string;
+  /** 删除时间 */
+  DeleteTime?: string;
+  /** 付款结束时间 */
+  PayEndTime?: string;
   /** 保证金，是否退款，yes表示退款，no表示不退款 */
   BiddingBondRefund?: string;
+  /** 保证金 */
+  BiddingBondPrice?: number;
   /** 状态：1 竞价中，2 待出价，3 竞价失败， 4 等待支付 5 等待转移， 6 转移中，7 交易成功，8 持有者索回，9 已违约 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -755,8 +889,12 @@ declare interface DescribeBiddingSuccessfulDetailResponse {
 }
 
 declare interface DescribeBiddingSuccessfulListRequest {
+  /** 页码 */
+  PageNumber: number;
   /** 每页数量 */
   PageSize: number;
+  /** 域名 */
+  Domain?: string;
   /** 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约 */
   Status?: number[];
   /** 排序字段：SuccessfulTime 预约结束时间 */
@@ -766,6 +904,10 @@ declare interface DescribeBiddingSuccessfulListRequest {
 }
 
 declare interface DescribeBiddingSuccessfulListResponse {
+  /** 搜索结果条数 */
+  Total?: number;
+  /** 得标列表 */
+  SuccessfulList?: BiddingSuccessfulResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
