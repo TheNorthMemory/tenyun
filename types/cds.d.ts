@@ -155,7 +155,7 @@ declare interface ModifyDbauditInstancesRenewFlagResponse {
 /** {@link Cds T-Sec-数据安全审计（DSA）} */
 declare interface Cds {
   (): Versions;
-  /** 数盾-DASB-获取镜像列表 {@link DescribeDasbImageIdsRequest} {@link DescribeDasbImageIdsResponse} */
+  /** @deprecated 数盾-DASB-获取镜像列表 {@link DescribeDasbImageIdsRequest} {@link DescribeDasbImageIdsResponse} */
   DescribeDasbImageIds(data?: DescribeDasbImageIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDasbImageIdsResponse>;
   /** 获取产品规格信息列表 {@link DescribeDbauditInstanceTypeRequest} {@link DescribeDbauditInstanceTypeResponse} */
   DescribeDbauditInstanceType(data?: DescribeDbauditInstanceTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditInstanceTypeResponse>;

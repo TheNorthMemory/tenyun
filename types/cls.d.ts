@@ -628,6 +628,8 @@ declare interface ExportInfo {
   CreateTime?: string;
   /** 语法规则。 默认值为0。0：Lucene语法，1：CQL语法。 */
   SyntaxRule?: number;
+  /** 导出字段 */
+  DerivedFields?: string[] | null;
 }
 
 /** 日志提取规则 */
@@ -1739,6 +1741,8 @@ declare interface CreateExportRequest {
   Format?: string;
   /** 语法规则, 默认值为0。0：Lucene语法，1：CQL语法。 */
   SyntaxRule?: number;
+  /** 导出字段 */
+  DerivedFields?: string[];
 }
 
 declare interface CreateExportResponse {

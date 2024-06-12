@@ -2563,9 +2563,9 @@ declare interface GetPositionSpaceListRequest {
 
 declare interface GetPositionSpaceListResponse {
   /** 位置空间列表 */
-  List: PositionSpaceInfo[] | null;
+  List?: PositionSpaceInfo[] | null;
   /** 位置空间数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

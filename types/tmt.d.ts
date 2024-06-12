@@ -99,13 +99,13 @@ declare interface ImageTranslateRequest {
 
 declare interface ImageTranslateResponse {
   /** 请求的SessionUuid返回 */
-  SessionUuid: string;
+  SessionUuid?: string;
   /** 源语言 */
-  Source: string;
+  Source?: string;
   /** 目标语言 */
-  Target: string;
+  Target?: string;
   /** 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本 */
-  ImageRecord: ImageRecord;
+  ImageRecord?: ImageRecord;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

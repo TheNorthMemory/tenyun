@@ -2415,7 +2415,7 @@ declare interface DescribeAllocationMonthOverviewResponse {
 declare interface DescribeAllocationOverviewRequest {
   /** 数量，最大值为1000 */
   Limit: number;
-  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推 */
   Offset: number;
   /** 账单月份，格式为2024-02，不传默认当前月 */
   Month?: string;
@@ -2445,7 +2445,7 @@ declare interface DescribeAllocationOverviewResponse {
 declare interface DescribeAllocationSummaryByBusinessRequest {
   /** 数量，最大值为1000 */
   Limit: number;
-  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推 */
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推 */
   Offset: number;
   /** 账单月份，格式为2024-02，不传默认当前月 */
   Month?: string;

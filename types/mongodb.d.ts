@@ -340,6 +340,22 @@ declare interface InstanceTextParam {
   Status: string;
 }
 
+/** KMS密钥信息 */
+declare interface KMSInfoDetail {
+  /** 主密钥 ID。 */
+  KeyId?: string | null;
+  /** 主密钥名称。 */
+  KeyName?: string | null;
+  /** 实例与密钥绑定时间。 */
+  CreateTime?: string | null;
+  /** 密钥状态。 */
+  Status?: string | null;
+  /** 密钥用途。 */
+  KeyUsage?: string | null;
+  /** 密钥来源。 */
+  KeyOrigin?: string | null;
+}
+
 /** 修改数据库地址 */
 declare interface ModifyNetworkAddress {
   /** 新IP地址。 */
@@ -836,6 +852,22 @@ declare interface DescribeBackupDownloadTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupRulesRequest {
+  /** 指定实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeBackupRulesResponse {
+  /** 备份数据保留期限。单位为：天。 */
+  BackupSaveTime?: number;
+  /** 自动备份开始时间。 */
+  BackupTime?: number;
+  /** 备份方式。- 0：逻辑备份。- 1：物理备份。 */
+  BackupMethod?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClientConnectionsRequest {
   /** 指定待查询的实例ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -1084,6 +1116,36 @@ declare interface DescribeSpecInfoRequest {
 declare interface DescribeSpecInfoResponse {
   /** 实例售卖规格信息列表 */
   SpecInfoList: SpecificationInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTransparentDataEncryptionStatusRequest {
+  /** 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeTransparentDataEncryptionStatusResponse {
+  /** 表示是否开启了透明加密。 - close：未开启。- open：已开启。 */
+  TransparentDataEncryptionStatus?: string;
+  /** 已绑定的密钥列表，如未绑定，返回null。 */
+  KeyInfoList?: KMSInfoDetail[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableTransparentDataEncryptionRequest {
+  /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。目前支持通用版本包含：4.4、5.0，云盘版暂不支持。 */
+  InstanceId: string;
+  /** [密钥管理系统（Key Management Service，KMS）](https://cloud.tencent.com/document/product/573/18809)服务所在地域，例如 ap-shanghai。 */
+  KmsRegion: string;
+  /** 密钥 ID。若不设置该参数，不指定具体的密钥 ID，由腾讯云自动生成密钥。 */
+  KeyId?: string;
+}
+
+declare interface EnableTransparentDataEncryptionResponse {
+  /** 开启透明加密的异步流程id，用于查询流程状态。 */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1342,6 +1404,24 @@ declare interface SetAccountUserPrivilegeRequest {
 declare interface SetAccountUserPrivilegeResponse {
   /** 任务ID。 */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetBackupRulesRequest {
+  /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 设置自动备份方式。- 0：逻辑备份。- 1：物理备份。-3：快照备份(仅云盘版支持)。 */
+  BackupMethod: number;
+  /** 设置自动备份开始时间。取值范围为：[0,23]，例如：该参数设置为2，表示02:00开始备份。 */
+  BackupTime: number;
+  /** 设置自动备份发生错误时，是否发送失败告警。- true：发送。- false：不发送。 */
+  Notify?: boolean;
+  /** 指定备份数据保存天数。默认为 7 天，支持设置为7、30、90、180、365。 */
+  BackupRetentionPeriod?: number;
+}
+
+declare interface SetBackupRulesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1843,6 +1923,8 @@ declare interface Mongodb {
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
   /** 查询备份下载任务信息 {@link DescribeBackupDownloadTaskRequest} {@link DescribeBackupDownloadTaskResponse} */
   DescribeBackupDownloadTask(data: DescribeBackupDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadTaskResponse>;
+  /** 获取云数据库实例自动备份配置 {@link DescribeBackupRulesRequest} {@link DescribeBackupRulesResponse} */
+  DescribeBackupRules(data: DescribeBackupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupRulesResponse>;
   /** 查询实例客户端连接信息 {@link DescribeClientConnectionsRequest} {@link DescribeClientConnectionsResponse} */
   DescribeClientConnections(data: DescribeClientConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientConnectionsResponse>;
   /** 查询数据库实例当前正在执行的操作 {@link DescribeCurrentOpRequest} {@link DescribeCurrentOpResponse} */
@@ -1865,6 +1947,10 @@ declare interface Mongodb {
   DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
   /** 查询云数据库的售卖规格 {@link DescribeSpecInfoRequest} {@link DescribeSpecInfoResponse} */
   DescribeSpecInfo(data?: DescribeSpecInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecInfoResponse>;
+  /** 获取实例透明加密的开启状态 {@link DescribeTransparentDataEncryptionStatusRequest} {@link DescribeTransparentDataEncryptionStatusResponse} */
+  DescribeTransparentDataEncryptionStatus(data: DescribeTransparentDataEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTransparentDataEncryptionStatusResponse>;
+  /** 开启实例数据透明加密 {@link EnableTransparentDataEncryptionRequest} {@link EnableTransparentDataEncryptionResponse} */
+  EnableTransparentDataEncryption(data: EnableTransparentDataEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTransparentDataEncryptionResponse>;
   /** 按 Key 回档 {@link FlashBackDBInstanceRequest} {@link FlashBackDBInstanceResponse} */
   FlashBackDBInstance(data: FlashBackDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<FlashBackDBInstanceResponse>;
   /** 刷新路由配置 {@link FlushInstanceRouterConfigRequest} {@link FlushInstanceRouterConfigResponse} */
@@ -1895,6 +1981,8 @@ declare interface Mongodb {
   ResetDBInstancePassword(data: ResetDBInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDBInstancePasswordResponse>;
   /** 设置账户权限 {@link SetAccountUserPrivilegeRequest} {@link SetAccountUserPrivilegeResponse} */
   SetAccountUserPrivilege(data: SetAccountUserPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<SetAccountUserPrivilegeResponse>;
+  /** 设置云数据库实例的自动备份规则 {@link SetBackupRulesRequest} {@link SetBackupRulesResponse} */
+  SetBackupRules(data: SetBackupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SetBackupRulesResponse>;
   /** 实例维护时间设置 {@link SetInstanceMaintenanceRequest} {@link SetInstanceMaintenanceResponse} */
   SetInstanceMaintenance(data: SetInstanceMaintenanceRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstanceMaintenanceResponse>;
   /** 包年包月隔离接口 {@link TerminateDBInstancesRequest} {@link TerminateDBInstancesResponse} */

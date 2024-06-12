@@ -122,6 +122,8 @@ declare interface ProbeTask {
   CronState?: number | null;
   /** 任务当前绑定的标签 */
   TagInfoList?: KeyValuePair[] | null;
+  /** 是否为同步账号 */
+  SubSyncFlag?: number | null;
 }
 
 /** 拨测任务基础配置 */

@@ -114,6 +114,22 @@ declare interface AttachedUserPolicyGroupInfo {
   GroupName: string;
 }
 
+/** 认证凭据Token */
+declare interface AuthToken {
+  /** 认证Token */
+  Token?: string;
+  /** 服务器时间戳 */
+  CurrentTime?: number | null;
+  /** 毫秒时间戳，根据轮转周期准确计算得到 */
+  NextRotationTime?: number | null;
+  /** 毫秒，如果轮转失败则为 -1 */
+  LastRotationTimeCost?: number | null;
+  /** 成功：success失败：failed */
+  RotationStatus?: string | null;
+  /** 成功：success失败：失败信息 */
+  RotationMessage?: string | null;
+}
+
 /** 子用户和用户组关联信息 */
 declare interface GroupIdOfUidInfo {
   /** 用户组 ID */
@@ -524,6 +540,22 @@ declare interface AttachUserPolicyRequest {
 }
 
 declare interface AttachUserPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BuildDataFlowAuthTokenRequest {
+  /** 资源ID */
+  ResourceId: string;
+  /** 资源地域 */
+  ResourceRegion: string;
+  /** 资源用户名 */
+  ResourceAccount: string;
+}
+
+declare interface BuildDataFlowAuthTokenResponse {
+  /** 认证凭据AuthToken信息 */
+  Credentials?: AuthToken | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1855,6 +1887,8 @@ declare interface Cam {
   AttachRolePolicy(data?: AttachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachRolePolicyResponse>;
   /** 绑定策略到用户 {@link AttachUserPolicyRequest} {@link AttachUserPolicyResponse} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
+  /** 获取数据流认证Token {@link BuildDataFlowAuthTokenRequest} {@link BuildDataFlowAuthTokenResponse} */
+  BuildDataFlowAuthToken(data: BuildDataFlowAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<BuildDataFlowAuthTokenResponse>;
   /** 验证自定义多因子Token {@link ConsumeCustomMFATokenRequest} {@link ConsumeCustomMFATokenResponse} */
   ConsumeCustomMFAToken(data: ConsumeCustomMFATokenRequest, config?: AxiosRequestConfig): AxiosPromise<ConsumeCustomMFATokenResponse>;
   /** 创建访问密钥 {@link CreateAccessKeyRequest} {@link CreateAccessKeyResponse} */
