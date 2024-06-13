@@ -3131,6 +3131,8 @@ declare interface ModifyTopicRequest {
   HotPeriod?: number;
   /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
+  /** 日志主题分区数量 */
+  PartitionCount?: number;
 }
 
 declare interface ModifyTopicResponse {

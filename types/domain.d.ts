@@ -433,7 +433,7 @@ declare interface TemplateInfo {
 declare interface BatchModifyDomainInfoRequest {
   /** 批量修改的域名。 */
   Domains: string[];
-  /** 模板ID。 */
+  /** 模板ID(可从模板列表接口获取) */
   TemplateId: string;
   /** true： 开启60天内禁止转移注册商锁定false：关闭60天内禁止转移注册商锁定默认 true */
   LockTransfer?: boolean;
@@ -441,7 +441,7 @@ declare interface BatchModifyDomainInfoRequest {
 
 declare interface BatchModifyDomainInfoResponse {
   /** 日志ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -609,7 +609,7 @@ declare interface CreatePhoneEmailRequest {
   Code: string;
   /** 1：手机 2：邮箱 */
   Type: number;
-  /** 验证码 */
+  /** 验证码(通过SendPhoneEmailCode发送到手机或邮箱的验证码) */
   VerifyCode: string;
 }
 
@@ -679,7 +679,7 @@ declare interface DeleteReservedPreDomainInfoResponse {
 }
 
 declare interface DeleteTemplateRequest {
-  /** 模板ID */
+  /** 模板ID(可通过模板信息列表获取) */
   TemplateId: string;
 }
 
@@ -913,7 +913,7 @@ declare interface DescribeBiddingSuccessfulListResponse {
 }
 
 declare interface DescribeCustomDnsHostSetRequest {
-  /** 域名实例ID */
+  /** 域名实例ID(域名基本信息或我的域名列表接口可获取) */
   DomainId: string;
   /** 返回数量，默认为20，取值范围[1,100] */
   Limit: number;
@@ -1049,9 +1049,9 @@ declare interface DescribePreAuctionListResponse {
 }
 
 declare interface DescribePreDomainListRequest {
-  /** 页码 */
+  /** 页码，默认为1 */
   Page?: number;
-  /** 条数 */
+  /** 条数，默认为20 */
   Size?: number;
   /** 用于结束时间筛选 */
   EndTime?: string;
@@ -1349,7 +1349,7 @@ declare interface RenewDomainBatchRequest {
 
 declare interface RenewDomainBatchResponse {
   /** 操作日志ID。 */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1551,7 +1551,7 @@ declare interface Domain {
   DescribePhoneEmailList(data?: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
   /** 查询预释放竞价列表 {@link DescribePreAuctionListRequest} {@link DescribePreAuctionListResponse} */
   DescribePreAuctionList(data?: DescribePreAuctionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreAuctionListResponse>;
-  /** 提前获取域释放域名数据 {@link DescribePreDomainListRequest} {@link DescribePreDomainListResponse} */
+  /** 提前获取预释放域名数据 {@link DescribePreDomainListRequest} {@link DescribePreDomainListResponse} */
   DescribePreDomainList(data?: DescribePreDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreDomainListResponse>;
   /** 购买页预释放域名查询 {@link DescribePreReleaseListRequest} {@link DescribePreReleaseListResponse} */
   DescribePreReleaseList(data?: DescribePreReleaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreReleaseListResponse>;

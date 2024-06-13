@@ -3737,7 +3737,7 @@ declare interface DescribePluginOverviewsRequest {
 
 declare interface DescribePluginOverviewsResponse {
   /** 插件列表 */
-  PluginSet: GrafanaPlugin[];
+  PluginSet?: GrafanaPlugin[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5413,7 +5413,7 @@ declare interface Monitor {
   DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
   /** 获取2.0实例列表 {@link DescribePrometheusInstancesOverviewRequest} {@link DescribePrometheusInstancesOverviewResponse} */
   DescribePrometheusInstancesOverview(data?: DescribePrometheusInstancesOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesOverviewResponse>;
-  /** 拉取Prometheus聚合规则yaml列表 {@link DescribePrometheusRecordRuleYamlRequest} {@link DescribePrometheusRecordRuleYamlResponse} */
+  /** @deprecated 拉取Prometheus聚合规则yaml列表 {@link DescribePrometheusRecordRuleYamlRequest} {@link DescribePrometheusRecordRuleYamlResponse} */
   DescribePrometheusRecordRuleYaml(data: DescribePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRuleYamlResponse>;
   /** 获取聚合规则列表，包含关联集群内的资源 {@link DescribePrometheusRecordRulesRequest} {@link DescribePrometheusRecordRulesResponse} */
   DescribePrometheusRecordRules(data: DescribePrometheusRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRulesResponse>;

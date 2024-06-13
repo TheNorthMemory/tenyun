@@ -797,7 +797,7 @@ declare interface CreateAutoCalloutTaskRequest {
   Description?: string;
   /** 任务停止时间戳，Unix 秒级时间戳 */
   NotAfter?: number;
-  /** 最大尝试次数 */
+  /** 最大尝试次数，1-3 次 */
   Tries?: number;
   /** 自定义变量（仅高级版支持） */
   Variables?: Variable[];

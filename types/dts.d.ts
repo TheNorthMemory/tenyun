@@ -3435,7 +3435,7 @@ declare interface Dts {
   DescribeMigrateCheckJob(data: V20180330.DescribeMigrateCheckJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeMigrateCheckJobResponse>;
   /** 查询数据迁移任务 {@link V20180330.DescribeMigrateJobsRequest} {@link V20180330.DescribeMigrateJobsResponse} */
   DescribeMigrateJobs(data: V20180330.DescribeMigrateJobsRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeMigrateJobsResponse>;
-  /** 查询可售卖订阅地域 {@link V20180330.DescribeRegionConfRequest} {@link V20180330.DescribeRegionConfResponse} */
+  /** @deprecated 查询可售卖订阅地域 {@link V20180330.DescribeRegionConfRequest} {@link V20180330.DescribeRegionConfResponse} */
   DescribeRegionConf(data: V20180330.DescribeRegionConfRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeRegionConfResponse>;
   /** 查询订阅实例配置 {@link V20180330.DescribeSubscribeConfRequest} {@link V20180330.DescribeSubscribeConfResponse} */
   DescribeSubscribeConf(data: V20180330.DescribeSubscribeConfRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeSubscribeConfResponse>;

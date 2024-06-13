@@ -94,7 +94,7 @@ declare interface SentenceWords {
 
 /** [录音文件识别](https://cloud.tencent.com/document/product/1093/37823)、[实时语音异步识别](https://cloud.tencent.com/document/product/1093/52061)请求的返回数据 */
 declare interface Task {
-  /** 任务ID，可通过此ID在轮询接口获取识别状态与结果。注意：TaskId数据类型为uint64 */
+  /** 任务ID，可通过此ID在轮询接口获取识别状态与结果。TaskId数据类型为**uint64**。**注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。** */
   TaskId?: number;
 }
 
@@ -261,7 +261,7 @@ declare interface CreateRecTaskRequest {
   DataLen?: number;
   /** 音频URL的地址（需要公网环境浏览器可下载）**当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写**注意：1. 请确保录音文件时长在5个小时（含）之内，否则可能识别失败；2. 请保证文件的下载速度，否则可能下载失败 */
   Url?: string;
-  /** 回调 URL用户自行搭建的用于接收识别结果的服务URL回调格式和内容详见：[录音识别回调说明](https://cloud.tencent.com/document/product/1093/52632)注意：如果用户使用轮询方式获取识别结果，则无需提交该参数 */
+  /** 回调 URL用户自行搭建的用于接收识别结果的服务URL回调格式和内容详见：[录音识别回调说明](https://cloud.tencent.com/document/product/1093/52632)注意：- 如果用户使用轮询方式获取识别结果，则无需提交该参数- 建议在回调URL中带上您的业务ID等信息，以便处理业务逻辑 */
   CallbackUrl?: string;
   /** 是否开启说话人分离0：不开启；1：开启（仅支持以下引擎：8k_zh/16k_zh/16k_ms/16k_en/16k_id/16k_zh_large/16k_zh_dialect，且ChannelNum=1时可用）；默认值为 0注意：8k双声道电话音频请按 **ChannelNum 识别声道数** 的参数描述使用默认值 */
   SpeakerDiarization?: number;
@@ -292,7 +292,7 @@ declare interface CreateRecTaskRequest {
 }
 
 declare interface CreateRecTaskResponse {
-  /** 录音文件识别的请求返回结果，包含结果查询需要的TaskId */
+  /** 录音文件识别的请求返回结果，包含结果查询需要的TaskId。**注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。** */
   Data?: Task;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -329,13 +329,13 @@ declare interface DescribeAsyncRecognitionTasksResponse {
 }
 
 declare interface DescribeTaskStatusRequest {
-  /** 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。 */
+  /** 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。**注意：TaskId有效期为24小时，超过24小时的TaskId请不要再查询。** */
   TaskId: number;
 }
 
 declare interface DescribeTaskStatusResponse {
   /** 录音文件识别的请求返回结果。 */
-  Data: TaskStatus;
+  Data?: TaskStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

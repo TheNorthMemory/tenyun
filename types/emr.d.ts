@@ -590,6 +590,30 @@ declare interface Filters {
   Values: string[];
 }
 
+/** 流程额外信息 */
+declare interface FlowExtraDetail {
+  /** 额外信息Title */
+  Title?: string | null;
+  /** 额外信息 */
+  Detail?: FlowParamsDesc[] | null;
+}
+
+/** FlowParam流程参数 */
+declare interface FlowParam {
+  /** 流程参数keyTraceId：通过TraceId查询FlowId： 通过FlowId查询 */
+  FKey: string;
+  /** 参数value */
+  FValue: string;
+}
+
+/** 任务参数描述 */
+declare interface FlowParamsDesc {
+  /** 参数key */
+  PKey: string;
+  /** 参数value */
+  PValue: string | null;
+}
+
 /** 集群所有伸缩组全局参数信息 */
 declare interface GroupGlobalConfs {
   /** 伸缩组信息 */
@@ -994,6 +1018,8 @@ declare interface NodeHardwareInfo {
   TradeVersion?: number | null;
   /** 各组件状态，Zookeeper:STARTED,ResourceManager:STARTED，STARTED已启动，STOPED已停止 */
   ServicesStatus?: string | null;
+  /** 备注 */
+  Remark?: string | null;
 }
 
 /** 资源详情 */
@@ -1474,6 +1500,40 @@ declare interface SoftDependInfo {
   SoftName: string;
   /** 是否必选 */
   Required: boolean;
+}
+
+/** 任务步骤详情 */
+declare interface StageInfoDetail {
+  /** 步骤id */
+  Stage?: string;
+  /** 步骤名 */
+  Name?: string | null;
+  /** 是否展示 */
+  IsShow?: boolean;
+  /** 是否子流程 */
+  IsSubFlow?: boolean;
+  /** 子流程标签 */
+  SubFlowFlag?: string | null;
+  /** 步骤运行状态：0:未开始 1:进行中 2:已完成 3:部分完成 -1:失败 */
+  Status?: number;
+  /** 步骤运行状态描述 */
+  Desc?: string | null;
+  /** 运行进度 */
+  Progress?: number | null;
+  /** 开始时间 */
+  Starttime?: string | null;
+  /** 结束时间 */
+  Endtime?: string | null;
+  /** 是否有详情信息 */
+  HadWoodDetail?: boolean | null;
+  /** Wood子流程Id */
+  WoodJobId?: number | null;
+  /** 多语言版本Key */
+  LanguageKey?: string | null;
+  /** 如果stage失败，失败原因 */
+  FailedReason?: string | null;
+  /** 步骤耗时 */
+  TimeConsuming?: string | null;
 }
 
 /** 执行步骤 */
@@ -2030,6 +2090,32 @@ declare interface DescribeAutoScaleStrategiesRequest {
 declare interface DescribeAutoScaleStrategiesResponse {
   /** 按时间伸缩规则 */
   TimeBasedAutoScaleStrategies?: TimeAutoScaleStrategy[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterFlowStatusDetailRequest {
+  /** EMR实例ID */
+  InstanceId: string;
+  /** 流程相关参数 */
+  FlowParam: FlowParam;
+  /** 是否返回任务额外信息默认: false */
+  NeedExtraDetail?: boolean;
+}
+
+declare interface DescribeClusterFlowStatusDetailResponse {
+  /** 任务步骤详情 */
+  StageDetails?: StageInfoDetail[] | null;
+  /** 任务参数 */
+  FlowDesc?: FlowParamsDesc[] | null;
+  /** 任务名称 */
+  FlowName?: string | null;
+  /** 总任务流程进度：例如：0.8 */
+  FlowTotalProgress?: number | null;
+  /** 定义流程总状态：0:初始化，1:运行中，2:完成，3:完成（存在跳过步骤），-1:失败，-3:阻塞， */
+  FlowTotalStatus?: number | null;
+  /** 流程额外信息NeedExtraDetail为true时返回 */
+  FlowExtraDetail?: FlowExtraDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2949,6 +3035,8 @@ declare interface Emr {
   DescribeAutoScaleRecords(data: DescribeAutoScaleRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleRecordsResponse>;
   /** 获取自动扩缩容规则 {@link DescribeAutoScaleStrategiesRequest} {@link DescribeAutoScaleStrategiesResponse} */
   DescribeAutoScaleStrategies(data: DescribeAutoScaleStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleStrategiesResponse>;
+  /** 查询EMR集群任务运行详情状态 {@link DescribeClusterFlowStatusDetailRequest} {@link DescribeClusterFlowStatusDetailResponse} */
+  DescribeClusterFlowStatusDetail(data: DescribeClusterFlowStatusDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterFlowStatusDetailResponse>;
   /** 查询集群节点信息 {@link DescribeClusterNodesRequest} {@link DescribeClusterNodesResponse} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
   /** 查询账户的CVM配额 {@link DescribeCvmQuotaRequest} {@link DescribeCvmQuotaResponse} */

@@ -2532,6 +2532,16 @@ declare interface DescribeAntiInfoLeakageRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAreaBanSupportAreasRequest {
+}
+
+declare interface DescribeAreaBanSupportAreasResponse {
+  /** 地域封禁的地域列表，要解析成json后使用 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAttackOverviewRequest {
   /** 查询开始时间 */
   FromTime: string;
@@ -3770,6 +3780,22 @@ declare interface ModifyApiSecEventChangeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAreaBanAreasRequest {
+  /** 需要修改的域名 */
+  Domain: string;
+  /** 需要调整的地域信息，一个字符串数组 */
+  Areas: string[];
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+}
+
+declare interface ModifyAreaBanAreasResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAreaBanStatusRequest {
   /** 需要修改的域名 */
   Domain: string;
@@ -4715,6 +4741,8 @@ declare interface Waf {
   DescribeAntiInfoLeakRules(data: DescribeAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakRulesResponse>;
   /** 获取信息防泄漏规则列表 {@link DescribeAntiInfoLeakageRulesRequest} {@link DescribeAntiInfoLeakageRulesResponse} */
   DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
+  /** 获取WAF地域封禁支持的地域列表 {@link DescribeAreaBanSupportAreasRequest} {@link DescribeAreaBanSupportAreasResponse} */
+  DescribeAreaBanSupportAreas(data?: DescribeAreaBanSupportAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanSupportAreasResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */
   DescribeAttackOverview(data: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
   /** 查询TOP N攻击类型 {@link DescribeAttackTypeRequest} {@link DescribeAttackTypeResponse} */
@@ -4841,6 +4869,8 @@ declare interface Waf {
   ModifyApiAnalyzeStatus(data: ModifyApiAnalyzeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAnalyzeStatusResponse>;
   /** api安全状态变更接口 {@link ModifyApiSecEventChangeRequest} {@link ModifyApiSecEventChangeResponse} */
   ModifyApiSecEventChange(data?: ModifyApiSecEventChangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiSecEventChangeResponse>;
+  /** 修改地域封禁中地域信息 {@link ModifyAreaBanAreasRequest} {@link ModifyAreaBanAreasResponse} */
+  ModifyAreaBanAreas(data: ModifyAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanAreasResponse>;
   /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 修改规则引擎白名单 {@link ModifyAttackWhiteRuleRequest} {@link ModifyAttackWhiteRuleResponse} */

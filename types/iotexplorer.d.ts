@@ -2677,6 +2677,8 @@ declare interface GetWechatDeviceTicketRequest {
   IsThirdApp?: number;
   /** 模板ID */
   ModelId?: string;
+  /** 小程序APPID */
+  MiniProgramAppId?: string;
 }
 
 declare interface GetWechatDeviceTicketResponse {

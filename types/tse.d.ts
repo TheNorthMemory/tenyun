@@ -3375,9 +3375,9 @@ declare interface DescribeZookeeperServerInterfacesRequest {
 
 declare interface DescribeZookeeperServerInterfacesResponse {
   /** 接口总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 接口列表 */
-  Content: ZookeeperServerInterface[];
+  Content?: ZookeeperServerInterface[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
