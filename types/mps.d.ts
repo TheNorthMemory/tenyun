@@ -218,6 +218,8 @@ declare interface AiAnalysisResult {
   HighlightTask?: AiAnalysisTaskHighlightResult | null;
   /** 视频内容分析智能擦除任务的查询结果，当任务类型为 DeLogo 时有效。 */
   DeLogoTask?: AiAnalysisTaskDelLogoResult | null;
+  /** 视频内容分析拆条任务的查询结果，当任务类型为 SegmentRecognition 时有效。 */
+  SegmentTask?: AiAnalysisTaskSegmentResult | null;
   /** 视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。 */
   HeadTailTask?: AiAnalysisTaskHeadTailResult | null;
   /** 视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。 */
@@ -426,6 +428,32 @@ declare interface AiAnalysisTaskInput {
   Definition: number;
   /** 扩展参数，其值为序列化的 json字符串。注意：此参数为定制需求参数，需要线下对接。 */
   ExtendedParameter?: string | null;
+}
+
+/** 拆条任务输入类型 */
+declare interface AiAnalysisTaskSegmentInput {
+  /** 拆条任务模板 ID。 */
+  Definition: number;
+}
+
+/** 智能拆条结果信息 */
+declare interface AiAnalysisTaskSegmentOutput {
+  /** 智能拆条子片段列表。 */
+  SegmentSet: SegmentRecognitionItem[];
+}
+
+/** 拆条结果类型 */
+declare interface AiAnalysisTaskSegmentResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 拆条任务输入。 */
+  Input?: AiAnalysisTaskSegmentInput;
+  /** 拆条任务输出。 */
+  Output?: AiAnalysisTaskSegmentOutput | null;
 }
 
 /** 智能标签任务输入类型 */
@@ -4305,13 +4333,17 @@ declare interface ScratchRepairConfig {
 /** 智能拆条片段。 */
 declare interface SegmentRecognitionItem {
   /** 置信度。 */
-  Confidence: number;
+  Confidence?: number;
   /** 片段起始时间偏移。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 片段结束时间偏移。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 拆条片段URL。 */
   SegmentUrl?: string | null;
+  /** 分段标题。 */
+  Title?: string | null;
+  /** 分段概要。 */
+  Summary?: string | null;
 }
 
 /** 细节增强配置 */

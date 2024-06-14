@@ -2807,9 +2807,9 @@ declare interface DescribeNodeHealthOptRequest {
 
 declare interface DescribeNodeHealthOptResponse {
   /** 0-异常；1-正常 */
-  NodeState: number;
+  NodeState?: number;
   /** 最近一次健康检查的时间 */
-  LatestHealthCheckTime: string;
+  LatestHealthCheckTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2825,13 +2825,13 @@ declare interface DescribePublisherSummaryRequest {
 
 declare interface DescribePublisherSummaryResponse {
   /** 生产速率（条/秒） */
-  MsgRateIn: number | null;
+  MsgRateIn?: number | null;
   /** 生产速率（字节/秒） */
-  MsgThroughputIn: number | null;
+  MsgThroughputIn?: number | null;
   /** 生产者数量 */
-  PublisherCount: number | null;
+  PublisherCount?: number | null;
   /** 消息存储大小，以字节为单位 */
-  StorageSize: number | null;
+  StorageSize?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2855,9 +2855,9 @@ declare interface DescribePublishersRequest {
 
 declare interface DescribePublishersResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 生产者信息列表 */
-  Publishers: Publisher[] | null;
+  Publishers?: Publisher[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

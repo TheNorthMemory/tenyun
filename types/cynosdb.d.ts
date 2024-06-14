@@ -3377,9 +3377,9 @@ declare interface DescribeProjectSecurityGroupsRequest {
 
 declare interface DescribeProjectSecurityGroupsResponse {
   /** 安全组详情 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4483,7 +4483,7 @@ declare interface ResumeServerlessRequest {
 
 declare interface ResumeServerlessResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -3854,6 +3854,30 @@ declare interface TableMeta {
   PartitionColumns?: string[] | null;
   /** 生命周期-分区保留天数【分区保留策略时有效】 */
   PartitionExpireDays?: number | null;
+  /** 表附属信息 */
+  TableProperties?: TableMetaProperty[] | null;
+}
+
+/** 表附加信息 */
+declare interface TableMetaProperty {
+  /** 属性的key */
+  Key?: string | null;
+  /** 属性的值 */
+  Value?: string | null;
+}
+
+/** 按表名查询的查询条件 */
+declare interface TableNameFilter {
+  /** 数据源类型 */
+  MsType?: string;
+  /** 数据源id */
+  DatasourceId?: number;
+  /** 数据库名称 */
+  DatabaseName?: string;
+  /** schema */
+  SchemaName?: string;
+  /** 表名 */
+  Name?: string;
 }
 
 /** 按天更新的表的资产评分 */
@@ -7707,11 +7731,15 @@ declare interface DescribeTableLineageResponse {
 declare interface DescribeTableMetaRequest {
   /** 表唯一id */
   TableId: string;
+  /** 按名称查询的条件 */
+  TableNameFilter?: TableNameFilter;
+  /** 查询条件类型0按id，1按名称，默认为0 */
+  TableFilterType?: number;
 }
 
 declare interface DescribeTableMetaResponse {
   /** 表的元数据信息 */
-  TableMeta: TableMeta | null;
+  TableMeta?: TableMeta | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

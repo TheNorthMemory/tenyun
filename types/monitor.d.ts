@@ -137,31 +137,31 @@ declare interface AlarmHistoryMetric {
 /** 告警通知模板详情 */
 declare interface AlarmNotice {
   /** 告警通知模板 ID */
-  Id: string | null;
+  Id?: string | null;
   /** 告警通知模板名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 上次修改时间 */
-  UpdatedAt: string | null;
+  UpdatedAt?: string | null;
   /** 上次修改人 */
-  UpdatedBy: string | null;
+  UpdatedBy?: string | null;
   /** 告警通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=全部通知 */
-  NoticeType: string | null;
+  NoticeType?: string | null;
   /** 用户通知列表 */
-  UserNotices: UserNotice[] | null;
+  UserNotices?: UserNotice[] | null;
   /** 回调通知列表 */
-  URLNotices: URLNotice[] | null;
+  URLNotices?: URLNotice[] | null;
   /** 是否是系统预设通知模板 0=否 1=是 */
-  IsPreset: number | null;
+  IsPreset?: number | null;
   /** 通知语言 zh-CN=中文 en-US=英文 */
-  NoticeLanguage: string | null;
+  NoticeLanguage?: string | null;
   /** 告警通知模板绑定的告警策略ID列表 */
-  PolicyIds: string[] | null;
+  PolicyIds?: string[] | null;
   /** 后台 amp consumer id */
-  AMPConsumerId: string | null;
+  AMPConsumerId?: string | null;
   /** 推送cls渠道 */
-  CLSNotices: CLSNotice[] | null;
+  CLSNotices?: CLSNotice[] | null;
   /** 通知模板绑定的标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** 告警策略详情 */
@@ -5231,7 +5231,7 @@ declare interface Monitor {
   BindingPolicyObject(data: BindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyObjectResponse>;
   /** 策略绑定标签 {@link BindingPolicyTagRequest} {@link BindingPolicyTagResponse} */
   BindingPolicyTag(data: BindingPolicyTagRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyTagResponse>;
-  /** 判断用户是否为云原生监控新用户 {@link CheckIsPrometheusNewUserRequest} {@link CheckIsPrometheusNewUserResponse} */
+  /** @deprecated 判断用户是否为云原生监控新用户 {@link CheckIsPrometheusNewUserRequest} {@link CheckIsPrometheusNewUserResponse} */
   CheckIsPrometheusNewUser(data?: CheckIsPrometheusNewUserRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIsPrometheusNewUserResponse>;
   /** 强制销毁 Grafana 实例 {@link CleanGrafanaInstanceRequest} {@link CleanGrafanaInstanceResponse} */
   CleanGrafanaInstance(data: CleanGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanGrafanaInstanceResponse>;

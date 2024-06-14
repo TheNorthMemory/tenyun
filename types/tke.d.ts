@@ -1030,9 +1030,9 @@ declare namespace V20180525 {
   /** 弹性容器集群内网访问LB信息 */
   interface ClusterInternalLB {
     /** 是否开启内网访问LB */
-    Enabled: boolean;
+    Enabled: boolean | null;
     /** 内网访问LB关联的子网Id */
-    SubnetId?: string;
+    SubnetId?: string | null;
   }
 
   /** 托管集群等级属性 */
@@ -1122,15 +1122,15 @@ declare namespace V20180525 {
   /** 弹性容器集群公网访问负载均衡信息 */
   interface ClusterPublicLB {
     /** 是否开启公网访问LB */
-    Enabled: boolean;
+    Enabled: boolean | null;
     /** 允许访问的来源CIDR列表 */
-    AllowFromCidrs?: string[];
+    AllowFromCidrs?: string[] | null;
     /** 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有) */
-    SecurityPolicies?: string[];
+    SecurityPolicies?: string[] | null;
     /** 外网访问相关的扩展参数，格式为json */
-    ExtraParam?: string;
+    ExtraParam?: string | null;
     /** 新内外网功能，需要传递安全组 */
-    SecurityGroup?: string;
+    SecurityGroup?: string | null;
   }
 
   /** 集群状态信息 */
@@ -3015,9 +3015,9 @@ declare namespace V20180525 {
     Name: string;
     /** 安全组id */
     SecurityGroups?: string[];
-    /** 系统 */
+    /** 系统，默认linux */
     Os?: string;
-    /** 硬件架构 */
+    /** 硬件架构，默认amd64 */
     Arch?: string;
   }
 
@@ -3702,7 +3702,7 @@ declare namespace V20180525 {
 
   interface CreateEKSClusterResponse {
     /** 弹性集群Id */
-    ClusterId: string;
+    ClusterId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4976,17 +4976,17 @@ declare namespace V20180525 {
 
   interface DescribeEKSClusterCredentialResponse {
     /** 集群的接入地址信息 */
-    Addresses: IPAddress[];
+    Addresses?: IPAddress[];
     /** 集群的认证信息（token只有请求是主账号才返回，子账户请使用返回的kubeconfig） */
-    Credential: ClusterCredential;
+    Credential?: ClusterCredential;
     /** 集群的公网访问信息 */
-    PublicLB: ClusterPublicLB;
+    PublicLB?: ClusterPublicLB;
     /** 集群的内网访问信息 */
-    InternalLB: ClusterInternalLB;
+    InternalLB?: ClusterInternalLB;
     /** 标记是否新的内外网功能 */
-    ProxyLB: boolean;
+    ProxyLB?: boolean;
     /** 连接用户集群k8s 的Config */
-    Kubeconfig: string;
+    Kubeconfig?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

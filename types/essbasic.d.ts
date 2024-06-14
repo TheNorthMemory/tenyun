@@ -378,6 +378,14 @@ declare interface DownloadFlowInfo {
   FlowIdList: string[];
 }
 
+/** 创建嵌入式页面url个性化参数 */
+declare interface EmbedUrlOption {
+  /** 合同详情页面是否展示合同控件信息true:允许在合同详情页展示控件false:不允许在合同详情页展示控件默认false,在合同详情页不展示控件 */
+  ShowFlowDetailComponent?: boolean;
+  /** 模版预览页面是否展示空间信息true:允许在模版预览页展示控件false:不允许在模版预览页展示控件默认false,在模版预览页不展示控件 */
+  ShowTemplateComponent?: boolean;
+}
+
 /** 扩展服务开通和授权的详细信息 */
 declare interface ExtentServiceAuthInfo {
   /** 扩展服务类型AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名 */
@@ -482,7 +490,7 @@ declare interface FlowApproverDetail {
   ApproverRoleName?: string | null;
 }
 
-/** 创建签署流程签署人入参。**各种场景传参说明**: 场景编号 发起方类型 签署方类型 签署方传参说明 场景一 第三方子企业A员工 第三方子企业A员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景二 第三方子企业A员工 第三方子企业B(不指定经办人走领取方式) （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION （固定）ApproverOption.FillType：需设置为1 场景三 第三方子企业A员工 第三方子企业B员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景四 第三方子企业A员工 个人/自然人 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （固定）ApproverType：需设置为PERSON 场景五 第三方子企业A员工 SaaS平台企业员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）OrganizationName：SaaS企业的名字 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION （固定）NotChannelOrganization：需设置为True **注1**: `使用模板发起合同时，RecipientId（模板发起合同时）必传`RecipientId参数获取：从DescribeFlowTemplates接口接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。**注2**: `如果发起的是动态签署方（即ApproverOption.FillType指定为1），可以不指定具体签署人信息`, 动态签署方可以参考此文档 */
+/** 创建签署流程签署人入参。**各种场景传参说明**: 场景编号 发起方类型 签署方类型 签署方传参说明 场景一 第三方子企业A员工 第三方子企业A员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景二 第三方子企业A员工 第三方子企业B(不指定经办人走领取方式) （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION （固定）ApproverOption.FillType：需设置为1 场景三 第三方子企业A员工 第三方子企业B员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景四 第三方子企业A员工 个人/自然人 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （固定）ApproverType：需设置为PERSON 场景五 第三方子企业A员工 SaaS平台企业员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）OrganizationName：SaaS企业的名字 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （不传）OrganizationOpenId：子企业的标识 （不传）OpenId：企业员工标识 （固定）ApproverType：需设置为ORGANIZATION （固定）NotChannelOrganization：需设置为True **注1**: `使用模板发起合同时，RecipientId（模板发起合同时）必传`RecipientId参数获取：从DescribeFlowTemplates接口接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。**注2**: `如果发起的是动态签署方（即ApproverOption.FillType指定为1），可以不指定具体签署人信息`, 动态签署方可以参考此文档 */
 declare interface FlowApproverInfo {
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   Name?: string;
@@ -1465,6 +1473,8 @@ declare interface ChannelCreateEmbedWebUrlRequest {
   Operator?: UserInfo;
   /** 用户自定义参数目前仅支持EmbedType=CREATE_TEMPLATE时传入指定后，创建，编辑，删除模板时，回调都会携带该userData支持的格式：json字符串的BASE64编码字符串示例： json字符串：{"ComeFrom":"xxx"}，BASE64编码：eyJDb21lRnJvbSI6Inh4eCJ9 eyJDb21lRnJvbSI6Inh4eCJ9，为符合要求的userData数据格式 */
   UserData?: string;
+  /** 个性化参数，用于控制页面展示内容 */
+  Option?: EmbedUrlOption;
 }
 
 declare interface ChannelCreateEmbedWebUrlResponse {
@@ -2083,6 +2093,8 @@ declare interface ChannelDescribeOrganizationSealsRequest {
   SealId?: string;
   /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章注: `为空时查询所有类型的印章。` */
   SealTypes?: string[];
+  /** 查询的印章状态列表。 空，只查询启用状态的印章； ALL，查询所有状态的印章； CHECKING，查询待审核的印章； SUCCESS，查询启用状态的印章； FAIL，查询印章审核拒绝的印章； DISABLE，查询已停用的印章； STOPPED，查询已终止的印章； VOID，查询已作废的印章； INVALID，查询已失效的印章； */
+  SealStatuses?: string[];
 }
 
 declare interface ChannelDescribeOrganizationSealsResponse {

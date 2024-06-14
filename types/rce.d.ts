@@ -4,13 +4,13 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 账号信息。 */
 declare interface AccountInfo {
-  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值。 */
+  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值10005：手机号SHA256，中国大陆11位手机号进行SHA256加密，取64位小写值 */
   AccountType: number;
   /** QQ账号信息，AccountType是"1"时，该字段必填。 */
   QQAccount?: QQAccountInfo;
   /** 微信账号信息，AccountType是"2"时，该字段必填。 */
   WeChatAccount?: WeChatAccountInfo;
-  /** 其它账号信息，AccountType是10004时，该字段必填。 */
+  /** 其它账号信息，AccountType是10004或10005时，该字段必填。 */
   OtherAccount?: OtherAccountInfo;
 }
 
@@ -34,7 +34,7 @@ declare interface InputDetails {
 
 /** 全栈式风控引擎入参 */
 declare interface InputManageMarketingRisk {
-  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值。 */
+  /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值10005：手机号SHA256，中国大陆11位手机号进行SHA256加密，取64位小写值 */
   Account: AccountInfo;
   /** 场景码，用于识别和区分不同的业务场景，可在控制台上新建和管理控制台链接：https://console.cloud.tencent.com/rce/risk/strategy/scene-root活动防刷默认场景码：e_activity_antirush 登录保护默认场景码：e_login_protection注册保护默认场景码：e_register_protection */
   SceneCode: string;
@@ -96,11 +96,11 @@ declare interface OnlineScamInfo {
 
 /** 其它账号信息。 */
 declare interface OtherAccountInfo {
-  /** 其他账号信息；AccountType是10004时，填入中国大陆标准11位手机号的MD5值注释：MD5手机号加密方式，使用中国大陆11位手机号进行MD5加密，加密后取32位小写值。 */
+  /** 其他账号信息；AccountType是10004时，填入中国大陆标准11位手机号的MD5值AccountType是10005时，填入中国大陆标准11位手机号的SHA256值注释：MD5手机号加密方式，使用中国大陆11位手机号进行MD5加密，加密后取32位小写值。SHA256手机号加密方式，使用中国大陆11位手机号进行SHA256加密，加密后取64位小写值。 */
   AccountId: string;
-  /** 账号绑定的MD5手机号。注释：只支持标准中国大陆11位手机号MD5加密后位的32位小写字符串。 */
+  /** 账号绑定的MD5或SHA256加密的手机号（该字段已不推荐使用）。注释：支持标准中国大陆11位手机号MD5加密后位的32位小写字符串； 支持标准中国大陆11位手机号SHA256加密后位的64位小写字符串。 */
   MobilePhone?: string;
-  /** 用户设备号（已不推荐使用）。 */
+  /** 用户设备号（该字段已不推荐使用）。 */
   DeviceId?: string;
 }
 
@@ -118,7 +118,7 @@ declare interface OutputManageMarketingRisk {
 
 /** 全栈式风控引擎出参值 */
 declare interface OutputManageMarketingRiskValue {
-  /** 账号ID：对应输入参数。当AccountType为1时，对应QQ的OpenId。当AccountType为2时，对应微信的OpenId/UnionId。当AccountType为10004时，对应手机号的MD5值。 */
+  /** 账号ID：对应输入参数。当AccountType为1时，对应QQ的OpenId；当AccountType为2时，对应微信的OpenId/UnionId；当AccountType为10004时，对应手机号的MD5值；当AccountType为10005时，对应手机号的SHA256值。 */
   UserId?: string | null;
   /** 操作时间戳，单位秒（对应输入参数）。 */
   PostTime?: number | null;
@@ -144,7 +144,7 @@ declare interface QQAccountInfo {
   AppIdUser: string;
   /** 用于标识QQ用户登录后所关联业务自身的账号ID。 */
   AssociateAccount?: string;
-  /** 账号绑定的MD5手机号，注释：只支中国大陆11位手机号MD5加密后位的32位小写字符串。 */
+  /** 账号绑定的MD5或SHA256加密的手机号。注释：支持标准中国大陆11位手机号MD5加密后位的32位小写字符串； 支持标准中国大陆11位手机号SHA256加密后位的64位小写字符串。 */
   MobilePhone?: string;
   /** 用户设备号（已不推荐使用）。 */
   DeviceId?: string;
@@ -176,7 +176,7 @@ declare interface WeChatAccountInfo {
   WeChatAccessToken?: string;
   /** 用于标识微信用户登录后所关联业务自身的账号ID。 */
   AssociateAccount?: string;
-  /** 账号绑定的MD5手机号，注释：只支持标准中国大陆11位手机号MD5加密后位的32位小写字符串。 */
+  /** 账号绑定的MD5或SHA256加密的手机号。注释：支持标准中国大陆11位手机号MD5加密后位的32位小写字符串； 支持标准中国大陆11位手机号SHA256加密后位的64位小写字符串。 */
   MobilePhone?: string;
   /** 用户设备号（已不推荐使用）。 */
   DeviceId?: string;

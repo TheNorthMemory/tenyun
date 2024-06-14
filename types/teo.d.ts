@@ -4469,7 +4469,7 @@ declare interface Teo {
   CreateCLSIndex(data: CreateCLSIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSIndexResponse>;
   /** 创建配置组版本 {@link CreateConfigGroupVersionRequest} {@link CreateConfigGroupVersionResponse} */
   CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
-  /** 创建自定义错误页面 {@link CreateCustomizeErrorPageRequest} {@link CreateCustomizeErrorPageResponse} */
+  /** 创建自定义响应页面 {@link CreateCustomizeErrorPageRequest} {@link CreateCustomizeErrorPageResponse} */
   CreateCustomizeErrorPage(data: CreateCustomizeErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeErrorPageResponse>;
   /** 创建四层代理实例 {@link CreateL4ProxyRequest} {@link CreateL4ProxyResponse} */
   CreateL4Proxy(data: CreateL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ProxyResponse>;
@@ -4503,7 +4503,7 @@ declare interface Teo {
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
   /** 删除应用代理规则（旧） {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
-  /** 删除自定义错误页面 {@link DeleteCustomErrorPageRequest} {@link DeleteCustomErrorPageResponse} */
+  /** 删除自定义响应页面 {@link DeleteCustomErrorPageRequest} {@link DeleteCustomErrorPageResponse} */
   DeleteCustomErrorPage(data: DeleteCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomErrorPageResponse>;
   /** 删除四层代理实例 {@link DeleteL4ProxyRequest} {@link DeleteL4ProxyResponse} */
   DeleteL4Proxy(data: DeleteL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyResponse>;
@@ -4539,7 +4539,7 @@ declare interface Teo {
   DescribeConfigGroupVersions(data: DescribeConfigGroupVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigGroupVersionsResponse>;
   /** 查询内容管理接口配额 {@link DescribeContentQuotaRequest} {@link DescribeContentQuotaResponse} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
-  /** 查询自定义错误页列表 {@link DescribeCustomErrorPagesRequest} {@link DescribeCustomErrorPagesResponse} */
+  /** 查询自定义响应页面列表 {@link DescribeCustomErrorPagesRequest} {@link DescribeCustomErrorPagesResponse} */
   DescribeCustomErrorPages(data: DescribeCustomErrorPagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomErrorPagesResponse>;
   /** 查询DDoS攻击时序数据 {@link DescribeDDoSAttackDataRequest} {@link DescribeDDoSAttackDataResponse} */
   DescribeDDoSAttackData(data: DescribeDDoSAttackDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackDataResponse>;
@@ -4625,7 +4625,7 @@ declare interface Teo {
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
   /** 修改应用代理的状态（旧） {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
-  /** 修改自定义错误页面 {@link ModifyCustomErrorPageRequest} {@link ModifyCustomErrorPageResponse} */
+  /** 修改自定义响应页面 {@link ModifyCustomErrorPageRequest} {@link ModifyCustomErrorPageResponse} */
   ModifyCustomErrorPage(data: ModifyCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomErrorPageResponse>;
   /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;

@@ -1160,6 +1160,8 @@ declare interface ServerlessSpace {
   AppId?: number | null;
   /** //默认en， 可选zh-CN */
   KibanaLanguage?: string | null;
+  /** 0 */
+  ClusterType?: number | null;
 }
 
 /** ServerlessSpaceUser */

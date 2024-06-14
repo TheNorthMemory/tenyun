@@ -68,9 +68,9 @@ declare interface BigKeyTypeInfo {
 
 /** 命令耗时 */
 declare interface CommandTake {
-  /** 命令 */
+  /** 命令名。 */
   Cmd: string;
-  /** 耗时 */
+  /** 耗时时长。 */
   Took: number;
 }
 
@@ -846,9 +846,9 @@ declare interface SecurityGroupsInboundAndOutbound {
 
 /** 访问命令 */
 declare interface SourceCommand {
-  /** 命令 */
+  /** 命令名称。 */
   Cmd: string;
-  /** 执行次数 */
+  /** 执行次数。 */
   Count: number;
 }
 
@@ -1641,14 +1641,14 @@ declare interface DescribeInstanceMonitorBigKeyTypeDistResponse {
 }
 
 declare interface DescribeInstanceMonitorHotKeyRequest {
-  /** 实例Id */
+  /** 指定实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时 */
+  /** 查询时间范围。- 1：实时。- 2：近30分钟。- 3：近6小时。- 4：近24小时。 */
   SpanType: number;
 }
 
 declare interface DescribeInstanceMonitorHotKeyResponse {
-  /** 热Key详细信息 */
+  /** 热 Key 详细信息。 */
   Data?: HotKeyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1667,16 +1667,16 @@ declare interface DescribeInstanceMonitorSIPResponse {
 }
 
 declare interface DescribeInstanceMonitorTookDistRequest {
-  /** 实例Id */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 时间；例如："20190219" */
+  /** 查询时间日期。 */
   Date: string;
-  /** 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时 */
+  /** 时间范围。- 1：实时。- 2：近30分钟。- 3：近6小时。- 4：近24小时。 */
   SpanType: number;
 }
 
 declare interface DescribeInstanceMonitorTookDistResponse {
-  /** 时延分布信息 */
+  /** 时延分布信息。 */
   Data?: DelayDistribution[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1697,15 +1697,15 @@ declare interface DescribeInstanceMonitorTopNCmdResponse {
 }
 
 declare interface DescribeInstanceMonitorTopNCmdTookRequest {
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时 */
+  /** 查询时间范围。- 1：实时。- 2：近30分钟。- 3：近6小时。- 4：近24小时。 */
   SpanType: number;
 }
 
 declare interface DescribeInstanceMonitorTopNCmdTookResponse {
   /** 耗时详细信息 */
-  Data: CommandTake[];
+  Data?: CommandTake[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1978,7 +1978,7 @@ declare interface DescribeProjectSecurityGroupsRequest {
   /** 数据库引擎名称，本接口取值：redis。 */
   Product: string;
   /** 项目 ID。 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 偏移量，取值为Limit的整数倍。 */
   Offset?: number;
   /** 拉取数量限制，默认 20。 */
@@ -2897,7 +2897,7 @@ declare interface Redis {
   DescribeInstanceMonitorBigKeySizeDist(data: DescribeInstanceMonitorBigKeySizeDistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeySizeDistResponse>;
   /** 查询实例大Key类型分布（已废弃） {@link DescribeInstanceMonitorBigKeyTypeDistRequest} {@link DescribeInstanceMonitorBigKeyTypeDistResponse} */
   DescribeInstanceMonitorBigKeyTypeDist(data: DescribeInstanceMonitorBigKeyTypeDistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeyTypeDistResponse>;
-  /** 查询实例热Key {@link DescribeInstanceMonitorHotKeyRequest} {@link DescribeInstanceMonitorHotKeyResponse} */
+  /** 查询实例热 Key {@link DescribeInstanceMonitorHotKeyRequest} {@link DescribeInstanceMonitorHotKeyResponse} */
   DescribeInstanceMonitorHotKey(data: DescribeInstanceMonitorHotKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorHotKeyResponse>;
   /** 查询实例访问来源信息 {@link DescribeInstanceMonitorSIPRequest} {@link DescribeInstanceMonitorSIPResponse} */
   DescribeInstanceMonitorSIP(data: DescribeInstanceMonitorSIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorSIPResponse>;

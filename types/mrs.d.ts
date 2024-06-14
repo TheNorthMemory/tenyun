@@ -250,6 +250,8 @@ declare interface BirthCert {
   FatherInfo?: ParentInfo | null;
   /** 签发信息 */
   IssueInfo?: IssueInfo | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 出生地 */
@@ -390,6 +392,8 @@ declare interface BloodPressureItem {
   Times?: PhysicalBaseItem | null;
   /** 左右手臂 */
   Location?: PhysicalBaseItem | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 查体 */
@@ -426,6 +430,8 @@ declare interface Check {
   Summary?: Summary | null;
   /** 检查报告块标题 */
   BlockTitle?: BlockTitle[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 药品说明书消息定义 */
@@ -730,6 +736,8 @@ declare interface CovidItemsInfo {
   CovidItems?: CovidItem[] | null;
   /** 版本号 */
   Version?: string | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 死亡时间 */
@@ -805,9 +813,11 @@ declare interface DetailInformation {
 /** 诊断证明 */
 declare interface DiagCert {
   /** 建议 */
-  Advice: Advice | null;
+  Advice?: Advice | null;
   /** 诊断 */
-  Diagnosis: DiagCertItem[] | null;
+  Diagnosis?: DiagCertItem[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 诊断证明项 */
@@ -870,6 +880,8 @@ declare interface DischargeInfoBlock {
   TreatmentRecord?: TreatmentRecordBlock | null;
   /** 文本段落 */
   ParagraphBlock?: ParagraphBlock | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 疾病史 */
@@ -1029,19 +1041,23 @@ declare interface Elastic {
 /** 心电图 */
 declare interface Electrocardiogram {
   /** 心电图详情 */
-  EcgDescription: EcgDescription | null;
+  EcgDescription?: EcgDescription | null;
   /** 心电图诊断 */
-  EcgDiagnosis: EcgDiagnosis | null;
+  EcgDiagnosis?: EcgDiagnosis | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 内窥镜报告 */
 declare interface Endoscopy {
   /** 活检部位 */
-  BiopsyPart: BiopsyPart | null;
+  BiopsyPart?: BiopsyPart | null;
   /** 可见描述 */
-  Desc: EndoscopyDesc | null;
+  Desc?: EndoscopyDesc | null;
   /** 结论 */
-  Summary: Summary | null;
+  Summary?: Summary | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 内窥镜描述 */
@@ -1106,6 +1122,8 @@ declare interface EyeItemsInfo {
   EyeItems?: EyeItem | null;
   /** 版本号 */
   Version?: string | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 家族史 */
@@ -1228,6 +1246,8 @@ declare interface FirstPage {
   DamagePoi?: BlockInfoV2 | null;
   /** 病案首页第二页 */
   Fp2NdItems?: Fp2NdItem[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 病案首页第二页 */
@@ -1512,6 +1532,8 @@ declare interface Hospitalization {
   DischargeInstruction?: string | null;
   /** 入院诊断 */
   AdmissionDiagnosis?: string | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** IHC块 */
@@ -1592,6 +1614,8 @@ declare interface Indicator {
   Indicators?: IndicatorItem[] | null;
   /** 检验报告块标题 */
   BlockTitle?: BlockTitle[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 检验指标项 */
@@ -1658,6 +1682,8 @@ declare interface IndicatorV3 {
   Version?: string | null;
   /** 检验报告V3结论 */
   TableIndicators?: TableIndicators[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 体检报告-内科-腹部 */
@@ -1860,6 +1886,8 @@ declare interface KeyValueItem {
   Item?: PhysicalBaseItem | null;
   /** 结果 */
   Result?: PhysicalBaseItem | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 末次月经 */
@@ -1954,6 +1982,8 @@ declare interface Maternity {
   Summary?: MaternitySummary | null;
   /** 报告原文 */
   OcrText?: string | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 孕产描述部分 */
@@ -2000,26 +2030,30 @@ declare interface MedDoc {
   MenstrualMedicalHistory?: MenstrualMedicalHistory;
   /** 诊疗记录 */
   TreatmentRecord?: TreatmentRecord;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 门诊病历信息 */
 declare interface MedicalRecordInfo {
   /** 就诊日期 */
-  DiagnosisTime: string | null;
+  DiagnosisTime?: string | null;
   /** 就诊科室 */
-  DiagnosisDepartmentName: string | null;
+  DiagnosisDepartmentName?: string | null;
   /** 就诊医生 */
-  DiagnosisDoctorName: string | null;
+  DiagnosisDoctorName?: string | null;
   /** 临床诊断 */
-  ClinicalDiagnosis: string | null;
+  ClinicalDiagnosis?: string | null;
   /** 主述 */
-  MainNarration: string | null;
+  MainNarration?: string | null;
   /** 体格检查 */
-  PhysicalExamination: string | null;
+  PhysicalExamination?: string | null;
   /** 检查结论 */
-  InspectionFindings: string | null;
+  InspectionFindings?: string | null;
   /** 治疗意见 */
-  TreatmentOpinion: string | null;
+  TreatmentOpinion?: string | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 药品 */
@@ -2672,6 +2706,8 @@ declare interface PathologyV2 {
   LymphSize?: Size[] | null;
   /** 分子病理 */
   Molecular?: Molecular[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 患者信息 */
@@ -2823,7 +2859,9 @@ declare interface PoslistBlock {
 /** 处方单 */
 declare interface Prescription {
   /** 药品列表 */
-  MedicineList: Medicine[] | null;
+  MedicineList?: Medicine[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 位置坐标 */
@@ -2978,6 +3016,8 @@ declare interface ResultInfo {
   Text?: BaseInfo | null;
   /** 结论详情 */
   Items?: BaseInfo[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 大小 */
@@ -3076,6 +3116,8 @@ declare interface Surgery {
   SurgeryHistory?: SurgeryHistory | null;
   /** 其他信息 */
   OtherInfo?: OtherInfo | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 体检报告-外科-肛门直肠 */
@@ -3338,6 +3380,8 @@ declare interface TextType {
 declare interface TextTypeListBlock {
   /** 文本类型列表 */
   TextTypeList?: TextType[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 时间 */
@@ -3372,6 +3416,8 @@ declare interface TimelineEvent {
 declare interface TimelineInformation {
   /** 时间轴 */
   Timeline?: TimelineEvent[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 输血史 */
@@ -3675,7 +3721,9 @@ declare interface Vaccination {
 /** 免疫接种证明 */
 declare interface VaccineCertificate {
   /** 免疫接种列表 */
-  VaccineList: Vaccination[] | null;
+  VaccineList?: Vaccination[] | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 /** 值 */
@@ -3708,6 +3756,8 @@ declare interface ValueUnitItem {
   Result?: PhysicalBaseItem | null;
   /** 单位 */
   Unit?: PhysicalBaseItem | null;
+  /** 数据在原PDF文件中的第几页 */
+  Page?: number | null;
 }
 
 declare interface DrugInstructionObjectRequest {

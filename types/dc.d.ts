@@ -47,9 +47,9 @@ declare interface BGPStatus {
 /** bgp参数，包括Asn，AuthKey */
 declare interface BgpPeer {
   /** 用户侧BGP ASN */
-  Asn?: number;
+  Asn?: number | null;
   /** 用户侧BGP密钥 */
-  AuthKey?: string;
+  AuthKey?: string | null;
 }
 
 /** 坐标，经维度描述 */
@@ -131,149 +131,151 @@ declare interface DirectConnect {
 /** 专用通道信息列表 */
 declare interface DirectConnectTunnel {
   /** 专用通道ID */
-  DirectConnectTunnelId: string;
+  DirectConnectTunnelId?: string;
   /** 物理专线ID */
-  DirectConnectId: string;
+  DirectConnectId?: string;
   /** 专用通道状态AVAILABLE:就绪或者已连接PENDING:申请中ALLOCATING:配置中ALLOCATED:配置完成ALTERING:修改中DELETING:删除中DELETED:删除完成COMFIRMING:待接受REJECTED:拒绝 */
-  State: string;
+  State?: string;
   /** 物理专线的拥有者，开发商账号 ID */
-  DirectConnectOwnerAccount: string;
+  DirectConnectOwnerAccount?: string;
   /** 专用通道的拥有者，开发商账号 ID */
-  OwnerAccount: string;
+  OwnerAccount?: string;
   /** 网络类型，分别为VPC、BMVPC、CCN VPC：私有网络 ，BMVPC：黑石网络，CCN：云联网 */
-  NetworkType: string;
+  NetworkType?: string;
   /** VPC地域对应的网络名，如ap-guangzhou */
-  NetworkRegion: string;
+  NetworkRegion?: string;
   /** 私有网络统一 ID 或者黑石网络统一 ID */
-  VpcId: string;
+  VpcId?: string;
   /** 专线网关 ID */
-  DirectConnectGatewayId: string;
+  DirectConnectGatewayId?: string;
   /** BGP ：BGP路由 STATIC：静态 默认为 BGP 路由 */
-  RouteType: string;
+  RouteType?: string;
   /** 用户侧BGP，Asn，AuthKey */
-  BgpPeer: BgpPeer;
+  BgpPeer?: BgpPeer;
   /** 用户侧网段地址 */
-  RouteFilterPrefixes: RouteFilterPrefix[];
+  RouteFilterPrefixes?: RouteFilterPrefix[];
   /** 专用通道的Vlan */
-  Vlan: number;
+  Vlan?: number;
   /** TencentAddress，腾讯侧互联 IP */
-  TencentAddress: string;
+  TencentAddress?: string;
   /** CustomerAddress，用户侧互联 IP */
-  CustomerAddress: string;
+  CustomerAddress?: string;
   /** 专用通道名称 */
-  DirectConnectTunnelName: string;
+  DirectConnectTunnelName?: string;
   /** 专用通道创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 专用通道带宽值 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 专用通道标签值 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** 关联的网络自定义探测ID */
-  NetDetectId: string | null;
+  NetDetectId?: string | null;
   /** BGP community开关 */
-  EnableBGPCommunity: boolean | null;
+  EnableBGPCommunity?: boolean | null;
   /** 是否为Nat通道 */
-  NatType: number | null;
+  NatType?: number | null;
   /** VPC地域简码，如gz、cd */
-  VpcRegion: string | null;
+  VpcRegion?: string | null;
   /** 是否开启BFD */
-  BfdEnable: number | null;
+  BfdEnable?: number | null;
   /** 专用通道接入点类型 */
-  AccessPointType: string | null;
+  AccessPointType?: string | null;
   /** 专线网关名称 */
-  DirectConnectGatewayName: string | null;
+  DirectConnectGatewayName?: string | null;
   /** VPC名称 */
-  VpcName: string | null;
+  VpcName?: string | null;
   /** TencentBackupAddress，腾讯侧备用互联 IP */
-  TencentBackupAddress: string | null;
+  TencentBackupAddress?: string | null;
   /** 专用通道关联的物理专线是否签署了用户协议 */
-  SignLaw: boolean | null;
+  SignLaw?: boolean | null;
   /** 高速上云服务ID */
-  CloudAttachId: string | null;
+  CloudAttachId?: string | null;
+  /** 是否共享通道 */
+  ShareOrNot?: number | null;
 }
 
 /** 专用通道扩展信息 */
 declare interface DirectConnectTunnelExtra {
   /** 专用通道ID */
-  DirectConnectTunnelId: string;
+  DirectConnectTunnelId?: string;
   /** 物理专线ID */
-  DirectConnectId: string;
+  DirectConnectId?: string;
   /** 专用通道状态AVAILABLE:就绪或者已连接PENDING:申请中ALLOCATING:配置中ALLOCATED:配置完成ALTERING:修改中DELETING:删除中DELETED:删除完成COMFIRMING:待接受REJECTED:拒绝 */
-  State: string;
+  State?: string;
   /** 物理专线的拥有者，开发商账号 ID */
-  DirectConnectOwnerAccount: string;
+  DirectConnectOwnerAccount?: string;
   /** 专用通道的拥有者，开发商账号 ID */
-  OwnerAccount: string;
+  OwnerAccount?: string;
   /** 网络类型，分别为VPC、BMVPC、CCN VPC：私有网络 ，BMVPC：黑石网络，CCN：云联网 */
-  NetworkType: string;
+  NetworkType?: string;
   /** VPC地域对应的网络名，如ap-guangzhou */
-  NetworkRegion: string;
+  NetworkRegion?: string;
   /** 私有网络统一 ID 或者黑石网络统一 ID */
-  VpcId: string;
+  VpcId?: string;
   /** 专线网关 ID */
-  DirectConnectGatewayId: string;
+  DirectConnectGatewayId?: string;
   /** BGP ：BGP路由 STATIC：静态 默认为 BGP 路由 */
-  RouteType: string;
+  RouteType?: string;
   /** 用户侧BGP，Asn，AuthKey */
-  BgpPeer: BgpPeer;
+  BgpPeer?: BgpPeer;
   /** 用户侧网段地址 */
-  RouteFilterPrefixes: RouteFilterPrefix[];
+  RouteFilterPrefixes?: RouteFilterPrefix[];
   /** 互联网通道公网网段地址 */
-  PublicAddresses: RouteFilterPrefix[];
+  PublicAddresses?: RouteFilterPrefix[];
   /** 专用通道的Vlan */
-  Vlan: number;
+  Vlan?: number;
   /** 腾讯侧互联 IP */
-  TencentAddress: string;
+  TencentAddress?: string;
   /** 腾讯侧备用互联IP */
-  TencentBackupAddress: string;
+  TencentBackupAddress?: string;
   /** 用户侧互联 IP */
-  CustomerAddress: string;
+  CustomerAddress?: string;
   /** 专用通道名称 */
-  DirectConnectTunnelName: string;
+  DirectConnectTunnelName?: string;
   /** 专用通道创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 专用通道带宽值 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 关联的网络自定义探测ID */
-  NetDetectId: string;
+  NetDetectId?: string;
   /** BGP community开关 */
-  EnableBGPCommunity: boolean;
+  EnableBGPCommunity?: boolean;
   /** 是否为Nat通道 */
-  NatType: number;
+  NatType?: number;
   /** VPC地域简码，如gz、cd */
-  VpcRegion: string;
+  VpcRegion?: string;
   /** 是否开启BFD */
-  BfdEnable: number;
+  BfdEnable?: number;
   /** 是否开启NQA */
-  NqaEnable: number;
+  NqaEnable?: number;
   /** 专用通道接入点类型 */
-  AccessPointType: string;
+  AccessPointType?: string;
   /** 专线网关名称 */
-  DirectConnectGatewayName: string;
+  DirectConnectGatewayName?: string;
   /** VPC名称 */
-  VpcName: string;
+  VpcName?: string;
   /** 专用通道关联的物理专线是否签署了用户协议 */
-  SignLaw: boolean;
+  SignLaw?: boolean;
   /** BFD配置信息 */
-  BfdInfo: BFDInfo;
+  BfdInfo?: BFDInfo;
   /** NQA配置信息 */
-  NqaInfo: NQAInfo;
+  NqaInfo?: NQAInfo;
   /** BGP状态 */
-  BgpStatus: BGPStatus;
+  BgpStatus?: BGPStatus;
   /** 是否开启IPv6 */
-  IPv6Enable: number | null;
+  IPv6Enable?: number | null;
   /** 腾讯侧互联IPv6地址 */
-  TencentIPv6Address: string | null;
+  TencentIPv6Address?: string | null;
   /** 腾讯侧备用互联IPv6地址 */
-  TencentBackupIPv6Address: string | null;
+  TencentBackupIPv6Address?: string | null;
   /** BGPv6状态 */
-  BgpIPv6Status: BGPStatus | null;
+  BgpIPv6Status?: BGPStatus | null;
   /** 用户侧互联IPv6地址 */
-  CustomerIPv6Address: string | null;
+  CustomerIPv6Address?: string | null;
   /** 专用通道是否支持巨帧。1 支持，0 不支持 */
-  JumboEnable: number | null;
+  JumboEnable?: number | null;
   /** 专用通道是否支持高精度BFD。1支持，0不支持 */
-  HighPrecisionBFDEnable: number | null;
+  HighPrecisionBFDEnable?: number | null;
 }
 
 /** 专用通道路由 */
@@ -349,7 +351,7 @@ declare interface NQAInfo {
 /** 用户侧网段地址 */
 declare interface RouteFilterPrefix {
   /** 用户侧网段地址 */
-  Cidr?: string;
+  Cidr?: string | null;
 }
 
 /** 标签键值对 */
@@ -531,20 +533,20 @@ declare interface DescribeDirectConnectTunnelExtraResponse {
 }
 
 declare interface DescribeDirectConnectTunnelsRequest {
-  /** 过滤条件:参数不支持同时指定DirectConnectTunnelIds和Filters。 direct-connect-tunnel-name, 专用通道名称。 direct-connect-tunnel-id, 专用通道实例ID，如dcx-abcdefgh。direct-connect-id, 物理专线实例ID，如，dc-abcdefgh。 */
+  /** 过滤条件:参数不支持同时指定DirectConnectTunnelIds和Filters。direct-connect-tunnel-name, 专用通道名称。direct-connect-tunnel-id, 专用通道实例ID，如：dcx-abcdefgh。direct-connect-id, 物理专线实例ID，如：dc-abcdefgh。 */
   Filters?: Filter[];
-  /** 专用通道 ID数组 */
+  /** 专用通道ID数组。 */
   DirectConnectTunnelIds?: string[];
-  /** 偏移量，默认为0 */
+  /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100 */
+  /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
 }
 
 declare interface DescribeDirectConnectTunnelsResponse {
-  /** 专用通道列表 */
+  /** 专用通道列表。 */
   DirectConnectTunnelSet?: DirectConnectTunnel[];
-  /** 符合专用通道数量。 */
+  /** 专用通道总数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

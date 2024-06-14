@@ -106,6 +106,8 @@ declare interface ManagerShareUnit {
   ShareResourceNum?: number | null;
   /** 共享单元成员数。 */
   ShareMemberNum?: number | null;
+  /** 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号 */
+  ShareScope?: number | null;
 }
 
 /** 成员管理身份 */
@@ -467,6 +469,8 @@ declare interface AddShareUnitRequest {
   Area: string;
   /** 共享单元描述。最大128个字符。 */
   Description?: string;
+  /** 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号，默认值：1 */
+  ShareScope?: number;
 }
 
 declare interface AddShareUnitResourcesRequest {
@@ -1453,6 +1457,8 @@ declare interface UpdateShareUnitRequest {
   Name?: string;
   /** 共享单元描述。最大128个字符。 */
   Description?: string;
+  /** 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号，默认值：1 */
+  ShareScope?: number;
 }
 
 declare interface UpdateShareUnitResponse {

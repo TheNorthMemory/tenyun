@@ -192,6 +192,10 @@ declare interface InstanceInfo {
   EnableMultiZones?: boolean | null;
   /** 用户可用区和子网信息 */
   UserNetworkInfos?: string | null;
+  /** 是否启用冷热分层。0：未开启 1：已开启 */
+  EnableCoolDown?: number | null;
+  /** 冷热分层使用COS桶 */
+  CoolDownBucket?: string | null;
 }
 
 /** 实例节点描述信息 */
