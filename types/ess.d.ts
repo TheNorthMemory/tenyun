@@ -1561,7 +1561,7 @@ declare interface CreateConvertTaskApiRequest {
   ResourceName: string;
   /** 需要进行转换操作的文件资源Id，通过UploadFiles接口获取文件资源Id。注: `目前，此接口仅支持单个文件进行转换。` */
   ResourceId: string;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -2339,7 +2339,7 @@ declare interface CreateSchemeUrlRequest {
   FlowId?: string;
   /** 合同流程组的组ID, 在合同流程组场景下，生成合同流程组的签署链接时需要赋值 */
   FlowGroupId?: string;
-  /** 要跳转到的页面类型 **0** : 腾讯电子签小程序个人首页 (默认) **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面) **2** : 腾讯电子签小程序合同列表页 **3** : 腾讯电子签小程序合同封面页注：`生成动态签署人补充链接时，必须指定为封面页` */
+  /** 要跳转到的页面类型 **0** : 腾讯电子签小程序个人首页 (默认) 点击查看示例页面 **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面)点击查看示例页面 **2** : 腾讯电子签小程序合同列表页 点击查看示例页面 **3** : 腾讯电子签小程序合同封面页 （注：`生成动态签署人补充链接时，必须指定为封面页`）点击查看示例页面 */
   PathType?: number;
   /** 签署完成后是否自动回跳**false**：否, 签署完成不会自动跳转回来(默认)**true**：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
   AutoJumpBack?: boolean;
@@ -2419,7 +2419,7 @@ declare interface CreateSealRequest {
   SealStyle?: string;
   /** 印章尺寸取值描述, 可以选择的尺寸如下: **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效 **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效 */
   SealSize?: string;
-  /** 企业税号注: `1.印章类型SealType是INVOICE类型时，此参数才会生效``2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号` */
+  /** 企业税号注:1.印章类型SealType是INVOICE类型时，此参数才会生效2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（如果是通过授权书授权方式认证的企业，此参数必传不能为空） */
   TaxIdentifyCode?: string;
 }
 
@@ -3167,7 +3167,7 @@ declare interface DisableUserAutoSignResponse {
 declare interface GetTaskResultApiRequest {
   /** 转换任务Id，通过接口创建文件转换任务接口或创建多文件转换任务接口得到的转换任务id */
   TaskId: string;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

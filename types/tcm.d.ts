@@ -10,6 +10,8 @@ declare interface APM {
   Region?: string | null;
   /** APM 实例，如果创建时传入的参数为空，则表示自动创建 APM 实例。 */
   InstanceId?: string | null;
+  /** 是否要删除APM实例 */
+  NeedDelete?: boolean | null;
 }
 
 /** AccessLog 配置 */
@@ -123,17 +125,17 @@ declare interface CrossRegionConfig {
 /** 第三方 Prometheus 配置参数 */
 declare interface CustomPromConfig {
   /** Prometheus 访问地址 */
-  Url: string;
+  Url: string | null;
   /** 认证方式 */
-  AuthType: string;
+  AuthType: string | null;
   /** 是否公网地址，缺省为 false */
-  IsPublicAddr?: boolean;
+  IsPublicAddr?: boolean | null;
   /** 虚拟网络id */
-  VpcId?: string;
+  VpcId?: string | null;
   /** Prometheus 用户名（用于 basic 认证方式） */
-  Username?: string;
+  Username?: string | null;
   /** Prometheus 密码（用于 basic 认证方式） */
-  Password?: string;
+  Password?: string | null;
 }
 
 /** 部署配置 */
@@ -302,6 +304,10 @@ declare interface LoadBalancer {
   ExtensiveClusters?: ExtensiveClusters | null;
   /** 负载均衡跨地域配置 */
   CrossRegionConfig?: CrossRegionConfig | null;
+  /** 设置跨可用区容灾时的主可用区ID */
+  MasterZoneID?: string | null;
+  /** 设置跨可用区容灾时的备可用区ID */
+  SlaveZoneID?: string | null;
 }
 
 /** 负载均衡状态信息 */
@@ -313,7 +319,7 @@ declare interface LoadBalancerStatus {
   /** 负载均衡实例 VIP */
   LoadBalancerVip: string;
   /** 负载均衡实例 Hostname */
-  LoadBalancerHostname?: string | null;
+  LoadBalancerHostname: string | null;
 }
 
 /** Mesh信息 */
@@ -615,9 +621,9 @@ declare interface DescribeMeshListRequest {
 
 declare interface DescribeMeshListResponse {
   /** 查询到的网格信息 */
-  MeshList: Mesh[] | null;
+  MeshList?: Mesh[] | null;
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

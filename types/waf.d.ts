@@ -574,6 +574,22 @@ declare interface DescribeAntiLeakageItem {
   ModifyTime?: string | null;
 }
 
+/** DescribeAreaBanAreas接口的回包 */
+declare interface DescribeAreaBanAreasRsp {
+  /** 状态 "0"：未开启地域封禁 "1"：开启地域封禁 */
+  Status?: string;
+  /** 数据来源 custom-自定义(默认)、batch-批量防护 */
+  Source?: string | null;
+  /** 字符串数据，配置的地域列表 */
+  Areas?: string[];
+  /** 定时任务类型 */
+  JobType?: string | null;
+  /** 定时任务详细配置 */
+  JobDateTime?: JobDateTime | null;
+  /** 周期任务配置 */
+  CronType?: string | null;
+}
+
 /** DescribeCustomRules接口回包中的复杂类型 */
 declare interface DescribeCustomRulesRspRuleListItem {
   /** 动作类型 */
@@ -2528,6 +2544,18 @@ declare interface DescribeAntiInfoLeakageRulesResponse {
   Total?: number;
   /** 规则列表 */
   RuleList?: DescribeAntiLeakageItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAreaBanAreasRequest {
+  /** 需要查询的域名 */
+  Domain: string;
+}
+
+declare interface DescribeAreaBanAreasResponse {
+  /** 回包内容 */
+  Data?: DescribeAreaBanAreasRsp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4741,6 +4769,8 @@ declare interface Waf {
   DescribeAntiInfoLeakRules(data: DescribeAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakRulesResponse>;
   /** 获取信息防泄漏规则列表 {@link DescribeAntiInfoLeakageRulesRequest} {@link DescribeAntiInfoLeakageRulesResponse} */
   DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
+  /** 获取地域封禁配置 {@link DescribeAreaBanAreasRequest} {@link DescribeAreaBanAreasResponse} */
+  DescribeAreaBanAreas(data: DescribeAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanAreasResponse>;
   /** 获取WAF地域封禁支持的地域列表 {@link DescribeAreaBanSupportAreasRequest} {@link DescribeAreaBanSupportAreasResponse} */
   DescribeAreaBanSupportAreas(data?: DescribeAreaBanSupportAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanSupportAreasResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */

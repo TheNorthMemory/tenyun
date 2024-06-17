@@ -2455,6 +2455,8 @@ declare interface CreatePartnerAutoSignAuthUrlRequest {
   AuthorizedOrganizationName?: string;
   /** 是否给平台应用授权:- true: 是（无需设置AuthorizedOrganizationId和AuthorizedOrganizationName）- false: 否（默认） 注：该参数需要开通“基于子客授权第三方应用可文件发起子客自动签署”，请联系运营经理开通 */
   PlatformAppAuthorization?: boolean;
+  /** 指定印章类型，指定后只能选择该类型的印章进行授权支持以下印章类型：- OFFICIAL : 企业公章- CONTRACT : 合同专用章- FINANCE : 财务专用章- PERSONNEL : 人事专用章 */
+  SealTypes?: string[];
 }
 
 declare interface CreatePartnerAutoSignAuthUrlResponse {
@@ -2487,7 +2489,7 @@ declare interface CreateSealByImageRequest {
   SealStyle?: string;
   /** 印章尺寸取值描述, 可以选择的尺寸如下: **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效 **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效 */
   SealSize?: string;
-  /** 企业税号注: `1.印章类型SealType是INVOICE类型时，此参数才会生效``2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号` */
+  /** 企业税号注:1.印章类型SealType是INVOICE类型时，此参数才会生效2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（如果是通过授权书授权方式认证的企业，此参数必传不能为空） */
   TaxIdentifyCode?: string;
 }
 

@@ -2563,7 +2563,7 @@ declare interface DescribePartitionsRequest {
 
 declare interface DescribePartitionsResponse {
   /** 分区列表 */
-  Partitions: PartitionInfo[];
+  Partitions?: PartitionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3351,7 +3351,7 @@ declare interface SplitPartitionRequest {
 
 declare interface SplitPartitionResponse {
   /** 分裂结果集 */
-  Partitions: PartitionInfo[];
+  Partitions?: PartitionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

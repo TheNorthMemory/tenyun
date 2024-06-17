@@ -1736,6 +1736,10 @@ declare interface SREInstance {
   EnableClientIntranet?: boolean | null;
   /** 存储额外配置选项 */
   StorageOption?: StorageOption[] | null;
+  /** Zookeeper的额外环境数据信息 */
+  ZookeeperRegionInfo?: ZookeeperRegionInfo | null;
+  /** 部署架构 */
+  DeployMode?: string | null;
 }
 
 /** 服务治理相关的信息 */
@@ -1824,6 +1828,28 @@ declare interface VpcInfo {
   SubnetId: string;
   /** 内网访问地址 */
   IntranetAddress?: string | null;
+  /** 负载均衡均衡接入点子网ID */
+  LbSubnetId?: string | null;
+}
+
+/** Zookeeper的地域额外信息记录 */
+declare interface ZookeeperRegionInfo {
+  /** 部署架构信息- SingleRegion: 普通单地域- MultiRegion: 普通多地域场景- MasterSlave: 两地域，主备地域场景 */
+  DeployMode?: string | null;
+  /** 主地域的额外信息 */
+  MainRegion?: ZookeeperRegionMyIdInfo | null;
+  /** 其他地域的额外信息 */
+  OtherRegions?: ZookeeperRegionMyIdInfo[] | null;
+}
+
+/** Zookeeper的地域信息的 myid 信息记录 */
+declare interface ZookeeperRegionMyIdInfo {
+  /** 地域信息 */
+  Region?: string | null;
+  /** myid 的起始号段 */
+  MyIdStart?: number | null;
+  /** myid 的结束号段 */
+  MyIdEnd?: number | null;
 }
 
 /** Zookeeper副本信息 */

@@ -4252,7 +4252,7 @@ declare namespace V20180525 {
   }
 
   interface DeleteImageCachesRequest {
-    /** 镜像缓存Id数组 */
+    /** 镜像缓存ID数组 */
     ImageCacheIds: string[];
   }
 
@@ -4528,7 +4528,7 @@ declare namespace V20180525 {
 
   interface DescribeClusterCommonNamesResponse {
     /** 子账户Uin与其客户端证书的CN字段映射 */
-    CommonNames: CommonName[];
+    CommonNames?: CommonName[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4678,9 +4678,9 @@ declare namespace V20180525 {
 
   interface DescribeClusterLevelAttributeResponse {
     /** 总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 集群规模 */
-    Items: ClusterLevelAttribute[];
+    Items?: ClusterLevelAttribute[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4892,9 +4892,9 @@ declare namespace V20180525 {
 
   interface DescribeClusterStatusResponse {
     /** 集群状态列表 */
-    ClusterStatusSet: ClusterStatus[];
+    ClusterStatusSet?: ClusterStatus[];
     /** 集群个数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5020,9 +5020,9 @@ declare namespace V20180525 {
 
   interface DescribeEKSContainerInstanceEventResponse {
     /** 事件集合 */
-    Events: Event[];
+    Events?: Event[];
     /** 容器实例id */
-    EksCiId: string;
+    EksCiId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5230,9 +5230,9 @@ declare namespace V20180525 {
 
   interface DescribeExistedInstancesResponse {
     /** 已经存在的实例信息数组。 */
-    ExistedInstanceSet: ExistedInstance[] | null;
+    ExistedInstanceSet?: ExistedInstance[] | null;
     /** 符合条件的实例数量。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5850,9 +5850,9 @@ declare namespace V20180525 {
 
   interface DescribeRouteTableConflictsResponse {
     /** 路由表是否冲突。 */
-    HasConflict: boolean;
+    HasConflict?: boolean;
     /** 路由表冲突列表。 */
-    RouteTableConflictSet: RouteTableConflict[] | null;
+    RouteTableConflictSet?: RouteTableConflict[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6764,9 +6764,9 @@ declare namespace V20180525 {
 
   interface SetNodePoolNodeProtectionResponse {
     /** 成功设置的节点id */
-    SucceedInstanceIds: string[] | null;
+    SucceedInstanceIds?: string[] | null;
     /** 没有成功设置的节点id */
-    FailedInstanceIds: string[] | null;
+    FailedInstanceIds?: string[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7311,7 +7311,7 @@ declare interface Tke {
   DescribeEncryptionStatus(data: V20180525.DescribeEncryptionStatusRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeEncryptionStatusResponse>;
   /** 查询已经存在的节点 {@link V20180525.DescribeExistedInstancesRequest} {@link V20180525.DescribeExistedInstancesResponse} */
   DescribeExistedInstances(data: V20180525.DescribeExistedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExistedInstancesResponse>;
-  /** 获取导入第三方集群YAML定义 {@link V20180525.DescribeExternalClusterSpecRequest} {@link V20180525.DescribeExternalClusterSpecResponse} */
+  /** @deprecated 获取导入第三方集群YAML定义 {@link V20180525.DescribeExternalClusterSpecRequest} {@link V20180525.DescribeExternalClusterSpecResponse} */
   DescribeExternalClusterSpec(data: V20180525.DescribeExternalClusterSpecRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalClusterSpecResponse>;
   /** 查看开启第三方节点池配置信息 {@link V20180525.DescribeExternalNodeSupportConfigRequest} {@link V20180525.DescribeExternalNodeSupportConfigResponse} */
   DescribeExternalNodeSupportConfig(data: V20180525.DescribeExternalNodeSupportConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalNodeSupportConfigResponse>;
@@ -7517,7 +7517,7 @@ declare interface Tke {
   UpdateImageCache(data: V20180525.UpdateImageCacheRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.UpdateImageCacheResponse>;
   /** 修改边缘计算的集群 {@link V20180525.UpdateTKEEdgeClusterRequest} {@link V20180525.UpdateTKEEdgeClusterResponse} */
   UpdateTKEEdgeCluster(data: V20180525.UpdateTKEEdgeClusterRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.UpdateTKEEdgeClusterResponse>;
-  /** 集群节点升级 {@link V20180525.UpgradeClusterInstancesRequest} {@link V20180525.UpgradeClusterInstancesResponse} */
+  /** 集群节点的升级 {@link V20180525.UpgradeClusterInstancesRequest} {@link V20180525.UpgradeClusterInstancesResponse} */
   UpgradeClusterInstances(data: V20180525.UpgradeClusterInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.UpgradeClusterInstancesResponse>;
   /** 集群升级应用 {@link V20180525.UpgradeClusterReleaseRequest} {@link V20180525.UpgradeClusterReleaseResponse} */
   UpgradeClusterRelease(data: V20180525.UpgradeClusterReleaseRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.UpgradeClusterReleaseResponse>;

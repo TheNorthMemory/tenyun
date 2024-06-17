@@ -20,6 +20,14 @@ declare interface Account {
   CreateTime?: string | null;
 }
 
+/** 可使用的地域信息 */
+declare interface AvailableRegion {
+  /** 地域 */
+  Region?: string | null;
+  /** 可用区信息 */
+  AvailableZones?: string[] | null;
+}
+
 /** 备份文件下载信息 */
 declare interface BackupDownloadInfo {
   /** 备份文件名称。 */
@@ -1486,6 +1494,16 @@ declare interface DescribeDBSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGlobalReplicationAreaRequest {
+}
+
+declare interface DescribeGlobalReplicationAreaResponse {
+  /** 可用地域信息 */
+  AvailableRegions?: AvailableRegion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceAccountRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -1802,6 +1820,14 @@ declare interface DescribeInstanceShardsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceSpecBandwidthRequest {
+}
+
+declare interface DescribeInstanceSpecBandwidthResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceSupportFeatureRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。示例值：crs-asdasdas */
   InstanceId: string;
@@ -2016,6 +2042,26 @@ declare interface DescribeProxySlowLogResponse {
   TotalCount?: number;
   /** 慢查询详情。 */
   InstanceProxySlowLogDetail?: InstanceProxySlowlogDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReplicationGroupInstanceRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeReplicationGroupInstanceResponse {
+  /** AppID。 */
+  AppId?: number;
+  /** 地域数字编号。 */
+  RegionId?: number;
+  /** 复制组字符串ID。 */
+  GroupId?: string;
+  /** 复制组名称。 */
+  GroupName?: string;
+  /** 实例复制组角色。- r: 备实例- rw: 主实例 */
+  InstanceRole?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2598,6 +2644,20 @@ declare interface ModifyParamTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyReplicationGroupRequest {
+  /** 复制组字符串ID */
+  GroupId: string;
+  /** 复制组名称 */
+  GroupName?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyReplicationGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenSSLRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2881,6 +2941,8 @@ declare interface Redis {
   DescribeCommonDBInstances(data?: DescribeCommonDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommonDBInstancesResponse>;
   /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
+  /** 查询全球复制支持地域信息 {@link DescribeGlobalReplicationAreaRequest} {@link DescribeGlobalReplicationAreaResponse} */
+  DescribeGlobalReplicationArea(data?: DescribeGlobalReplicationAreaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalReplicationAreaResponse>;
   /** 查看实例子账号信息 {@link DescribeInstanceAccountRequest} {@link DescribeInstanceAccountResponse} */
   DescribeInstanceAccount(data: DescribeInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAccountResponse>;
   /** 查询Redis实例备份列表 {@link DescribeInstanceBackupsRequest} {@link DescribeInstanceBackupsResponse} */
@@ -2917,6 +2979,8 @@ declare interface Redis {
   DescribeInstanceSecurityGroup(data: DescribeInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSecurityGroupResponse>;
   /** 获取集群版实例分片信息 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
+  /** 查询或计算带宽规格 {@link DescribeInstanceSpecBandwidthRequest} {@link DescribeInstanceSpecBandwidthResponse} */
+  DescribeInstanceSpecBandwidth(data?: DescribeInstanceSpecBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecBandwidthResponse>;
   /** 查询实例支持的功能特性 {@link DescribeInstanceSupportFeatureRequest} {@link DescribeInstanceSupportFeatureResponse} */
   DescribeInstanceSupportFeature(data: DescribeInstanceSupportFeatureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSupportFeatureResponse>;
   /** 查询Redis节点详细信息 {@link DescribeInstanceZoneInfoRequest} {@link DescribeInstanceZoneInfoResponse} */
@@ -2939,6 +3003,8 @@ declare interface Redis {
   DescribeProxySlowLog(data: DescribeProxySlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySlowLogResponse>;
   /** 查询复制组 {@link DescribeReplicationGroupRequest} {@link DescribeReplicationGroupResponse} */
   DescribeReplicationGroup(data: DescribeReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationGroupResponse>;
+  /** 查询复制组信息 {@link DescribeReplicationGroupInstanceRequest} {@link DescribeReplicationGroupInstanceResponse} */
+  DescribeReplicationGroupInstance(data: DescribeReplicationGroupInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationGroupInstanceResponse>;
   /** 查询SSL状态 {@link DescribeSSLStatusRequest} {@link DescribeSSLStatusResponse} */
   DescribeSSLStatus(data: DescribeSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSLStatusResponse>;
   /** 查询实例慢查询记录 {@link DescribeSlowLogRequest} {@link DescribeSlowLogResponse} */
@@ -2997,6 +3063,8 @@ declare interface Redis {
   ModifyNetworkConfig(data: ModifyNetworkConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkConfigResponse>;
   /** 修改参数模板 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
+  /** 修改复制组信息 {@link ModifyReplicationGroupRequest} {@link ModifyReplicationGroupResponse} */
+  ModifyReplicationGroup(data: ModifyReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReplicationGroupResponse>;
   /** 开启SSL {@link OpenSSLRequest} {@link OpenSSLResponse} */
   OpenSSL(data: OpenSSLRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSSLResponse>;
   /** 关闭外网接口 {@link ReleaseWanAddressRequest} {@link ReleaseWanAddressResponse} */

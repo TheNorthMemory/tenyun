@@ -5398,6 +5398,24 @@ declare interface CreateTaskAlarmRegularResponse {
   RequestId?: string;
 }
 
+declare interface CreateTaskFolderRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 文件夹名称 */
+  FolderName: string;
+  /** 工作量ID */
+  WorkflowId: string;
+  /** 父文件夹ID */
+  ParentFolderId?: string;
+}
+
+declare interface CreateTaskFolderResponse {
+  /** 任务文件夹Id，null则创建失败 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTaskRequest {
   /** 项目Id */
   ProjectId: string;
@@ -9723,6 +9741,8 @@ declare interface Wedata {
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
   /** 创建任务告警规则 {@link CreateTaskAlarmRegularRequest} {@link CreateTaskAlarmRegularResponse} */
   CreateTaskAlarmRegular(data: CreateTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskAlarmRegularResponse>;
+  /** 创建任务文件夹 {@link CreateTaskFolderRequest} {@link CreateTaskFolderResponse} */
+  CreateTaskFolder(data: CreateTaskFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFolderResponse>;
   /** 提交任务版本 {@link CreateTaskVersionDsRequest} {@link CreateTaskVersionDsResponse} */
   CreateTaskVersionDs(data: CreateTaskVersionDsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskVersionDsResponse>;
   /** 创建工作流 {@link CreateWorkflowDsRequest} {@link CreateWorkflowDsResponse} */

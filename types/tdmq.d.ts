@@ -794,6 +794,8 @@ declare interface RabbitMQClusterInfo {
   MessageConsumeRate?: number | null;
   /** 集群版本信息 */
   ClusterVersion?: string | null;
+  /** 计费模式，0-后付费，1-预付费 */
+  PayMode?: number | null;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -3041,9 +3043,9 @@ declare interface DescribeRabbitMQUserRequest {
 
 declare interface DescribeRabbitMQUserResponse {
   /** 返回的User数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 当前已创建的RabbitMQ用户列表 */
-  RabbitMQUserList: RabbitMQUser[];
+  RabbitMQUserList?: RabbitMQUser[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

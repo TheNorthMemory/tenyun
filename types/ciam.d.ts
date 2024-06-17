@@ -46,7 +46,7 @@ declare interface Filter {
   Logic?: boolean;
 }
 
-/** 导入用户信息1、UserName，PhoneNumber ，Email ，WechatOpenId ，WechatUnionId ，AlipayUserId ，QqOpenId ，QqUnionId 八个属性中，导入时必须包含其中一个属性并遵守初始化自定义属性的正则表达式规则。UserName，PhoneNumber，Email的正则表达式在控制台的自定义属性中可以查询到。2、对于密码的导入，导入的密码支持明文导入，MD5密文导入，SHA1密文导入，BCRYPT密文导入 ，这个需要在PasswordEncryptTypeEnum 字段中指定。3、IdentityVerified，IdentityVerificationMethod 支持导入，IdentityVerified 为true，IdentityVerificationMethod必传；IdentityVerificationMethod 为nameAndIdCard，Name,ResidentIdentityCard必传IdentityVerificationMethod 为nameIdCardAndPhone，Name,PhoneNumber,ResidentIdentityCard必传; */
+/** 导入用户信息1、UserName，PhoneNumber ，Email ，WechatOpenId ，WechatUnionId ，AlipayUserId ，QqOpenId ，QqUnionId ，WeComUserId 九个属性中，导入时必须包含其中一个属性并遵守初始化自定义属性的正则表达式规则。UserName，PhoneNumber，Email的正则表达式在控制台的自定义属性中可以查询到。2、对于密码的导入，导入的密码支持明文导入，MD5密文导入，SHA1密文导入，BCRYPT密文导入 ，这个需要在PasswordEncryptTypeEnum 字段中指定。3、IdentityVerified，IdentityVerificationMethod 支持导入，IdentityVerified 为true，IdentityVerificationMethod必传；IdentityVerificationMethod 为nameAndIdCard，Name,ResidentIdentityCard必传IdentityVerificationMethod 为nameIdCardAndPhone，Name,PhoneNumber,ResidentIdentityCard必传; */
 declare interface ImportUser {
   /** 用户名 */
   UserName?: string;
@@ -72,6 +72,8 @@ declare interface ImportUser {
   WechatUnionId?: string;
   /** 支付宝alipayUserId */
   AlipayUserId?: string;
+  /** 企业微信weComUserId */
+  WeComUserId?: string;
   /** 描述 */
   Description?: string;
   /** 生日 */
@@ -233,87 +235,89 @@ declare interface Sort {
 /** 用户信息 */
 declare interface User {
   /** 用户ID */
-  UserId: string;
+  UserId?: string;
   /** 用户名 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 手机号 */
-  PhoneNumber: string | null;
+  PhoneNumber?: string | null;
   /** 邮箱 */
-  Email: string | null;
+  Email?: string | null;
   /** 上次登录时间 */
-  LastSignOn: number | null;
+  LastSignOn?: number | null;
   /** 创建时间 */
-  CreatedDate: number;
+  CreatedDate?: number;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 用户来源 */
-  UserDataSourceEnum: string;
+  UserDataSourceEnum?: string;
   /** 昵称 */
-  Nickname: string | null;
+  Nickname?: string | null;
   /** 地址 */
-  Address: string | null;
+  Address?: string | null;
   /** 生日 */
-  Birthdate: number | null;
+  Birthdate?: number | null;
   /** 用户组ID */
-  UserGroups: string[] | null;
+  UserGroups?: string[] | null;
   /** 上次修改时间 */
-  LastModifiedDate: number | null;
+  LastModifiedDate?: number | null;
   /** 自定义属性 */
-  CustomAttributes: MemberMap[] | null;
+  CustomAttributes?: MemberMap[] | null;
   /** 身份证号 */
-  ResidentIdentityCard: string | null;
+  ResidentIdentityCard?: string | null;
   /** QQ的OpenId */
-  QqOpenId: string | null;
+  QqOpenId?: string | null;
   /** QQ的UnionId */
-  QqUnionId: string | null;
+  QqUnionId?: string | null;
   /** 微信的WechatOpenId */
-  WechatOpenId: string | null;
+  WechatOpenId?: string | null;
   /** 微信的WechatUnionId */
-  WechatUnionId: string | null;
+  WechatUnionId?: string | null;
   /** 支付宝的AlipayUserId */
-  AlipayUserId: string | null;
+  AlipayUserId?: string | null;
+  /** 企业微信的WeComUserId */
+  WeComUserId?: string | null;
   /** 描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 姓名 */
-  Name: string | null;
+  Name?: string | null;
   /** 坐标 */
-  Locale: string | null;
+  Locale?: string | null;
   /** 性别 */
-  Gender: string | null;
+  Gender?: string | null;
   /** 实名核验方式 */
-  IdentityVerificationMethod: string | null;
+  IdentityVerificationMethod?: string | null;
   /** 是否已经实名核验 */
-  IdentityVerified: boolean | null;
+  IdentityVerified?: boolean | null;
   /** 工作 */
-  Job: string | null;
+  Job?: string | null;
   /** 国家 */
-  Nationality: string | null;
+  Nationality?: string | null;
   /** 是否主账号（进行过账号融合后，主账号为true，从账号为false） */
-  Primary: boolean | null;
+  Primary?: boolean | null;
   /** 时区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 是否已经首次登录 */
-  AlreadyFirstLogin: boolean | null;
+  AlreadyFirstLogin?: boolean | null;
   /** 租户id */
-  TenantId: string | null;
+  TenantId?: string | null;
   /** 用户目录id */
-  UserStoreId: string | null;
+  UserStoreId?: string | null;
   /** 版本 */
-  Version: number | null;
+  Version?: number | null;
   /** 锁定类型（分为管理员锁定，和登录策略锁定） */
-  LockType: string | null;
+  LockType?: string | null;
   /** 锁定时间点 */
-  LockTime: number | null;
+  LockTime?: number | null;
   /** 索引字段1 */
-  IndexedAttribute1: string | null;
+  IndexedAttribute1?: string | null;
   /** 索引字段2 */
-  IndexedAttribute2: string | null;
+  IndexedAttribute2?: string | null;
   /** 索引字段3 */
-  IndexedAttribute3: string | null;
+  IndexedAttribute3?: string | null;
   /** 索引字段4 */
-  IndexedAttribute4: string | null;
+  IndexedAttribute4?: string | null;
   /** 索引字段5 */
-  IndexedAttribute5: string | null;
+  IndexedAttribute5?: string | null;
 }
 
 /** 用户组 */
