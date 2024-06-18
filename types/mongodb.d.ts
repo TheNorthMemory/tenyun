@@ -53,23 +53,29 @@ declare interface BackupDownloadTaskStatus {
 /** 备份信息 */
 declare interface BackupInfo {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 备份方式，0-自动备份，1-手动备份 */
-  BackupType: number;
+  BackupType?: number;
   /** 备份名称 */
-  BackupName: string;
+  BackupName?: string;
   /** 备份备注 */
-  BackupDesc: string | null;
+  BackupDesc?: string | null;
   /** 备份文件大小，单位KB */
-  BackupSize: number | null;
+  BackupSize?: number | null;
   /** 备份开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 备份结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 备份状态，1-备份中，2-备份成功 */
-  Status: number;
+  Status?: number;
   /** 备份方法，0-逻辑备份，1-物理备份 */
-  BackupMethod: number;
+  BackupMethod?: number;
+  /** 备份记录id */
+  BackId?: number;
+  /** 备份删除时间 */
+  DeleteTime?: string;
+  /** 异地备份地域 */
+  BackupRegion?: string | null;
 }
 
 /** 客户端连接信息，包括客户端IP和连接数 */
@@ -931,9 +937,9 @@ declare interface DescribeDBBackupsRequest {
 
 declare interface DescribeDBBackupsResponse {
   /** 备份列表 */
-  BackupList: BackupInfo[];
+  BackupList?: BackupInfo[];
   /** 备份总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

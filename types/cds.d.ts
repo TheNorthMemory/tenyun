@@ -68,18 +68,6 @@ declare interface RegionInfo {
   RegionState: number;
 }
 
-declare interface DescribeDasbImageIdsRequest {
-}
-
-declare interface DescribeDasbImageIdsResponse {
-  /** 基础镜像ID */
-  BaseImageId?: string;
-  /** AI镜像ID */
-  AiImageId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeDbauditInstanceTypeRequest {
 }
 
@@ -155,8 +143,6 @@ declare interface ModifyDbauditInstancesRenewFlagResponse {
 /** {@link Cds T-Sec-数据安全审计（DSA）} */
 declare interface Cds {
   (): Versions;
-  /** @deprecated 数盾-DASB-获取镜像列表 {@link DescribeDasbImageIdsRequest} {@link DescribeDasbImageIdsResponse} */
-  DescribeDasbImageIds(data?: DescribeDasbImageIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDasbImageIdsResponse>;
   /** 获取产品规格信息列表 {@link DescribeDbauditInstanceTypeRequest} {@link DescribeDbauditInstanceTypeResponse} */
   DescribeDbauditInstanceType(data?: DescribeDbauditInstanceTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditInstanceTypeResponse>;
   /** 获取数据安全审计实例列表 {@link DescribeDbauditInstancesRequest} {@link DescribeDbauditInstancesResponse} */

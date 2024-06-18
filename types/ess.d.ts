@@ -368,9 +368,9 @@ declare interface DetectInfoVideoData {
 
 /** 个性化参数 */
 declare interface EmbedUrlOption {
-  /** 合同详情预览，允许展示控件信息true：允许在合同详情页展示控件false：不允许在合同详情页展示控件默认false，合同详情页不展示控件 */
+  /** 合同详情预览，允许展示控件信息true：允许在合同详情页展示控件false：（默认）不允许在合同详情页展示控件 */
   ShowFlowDetailComponent?: boolean;
-  /** 模板预览，允许展示模板控件信息true：允许在模板预览页展示控件false：不允许在模板预览页展示控件默认false，模板预览页不展示控件 */
+  /** 模板预览，允许展示模板控件信息 true :允许在模板预览页展示控件 false :（默认）不允许在模板预览页展示控件 */
   ShowTemplateComponent?: boolean;
 }
 

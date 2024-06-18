@@ -171,21 +171,21 @@ declare interface ClusterInfo {
 /** 比较表格的Meta信息 */
 declare interface CompareTablesInfo {
   /** 源表格的集群id */
-  SrcTableClusterId: string;
+  SrcTableClusterId: string | null;
   /** 源表格的表格组id */
-  SrcTableGroupId: string;
+  SrcTableGroupId: string | null;
   /** 源表格的表名 */
-  SrcTableName: string;
+  SrcTableName: string | null;
   /** 目标表格的集群id */
-  DstTableClusterId: string;
+  DstTableClusterId: string | null;
   /** 目标表格的表格组id */
-  DstTableGroupId: string;
+  DstTableGroupId: string | null;
   /** 目标表格的表名 */
-  DstTableName: string;
+  DstTableName: string | null;
   /** 源表格的实例id */
-  SrcTableInstanceId: string;
+  SrcTableInstanceId: string | null;
   /** 目标表格的实例id */
-  DstTableInstanceId: string;
+  DstTableInstanceId: string | null;
 }
 
 /** 描述每个实例（应用，大区或表）处理过程中可能出现的错误详情。 */
@@ -253,17 +253,17 @@ declare interface IdlFileInfoWithoutContent {
 /** ckafka地址信息 */
 declare interface KafkaInfo {
   /** Kafka address */
-  Address: string;
+  Address: string | null;
   /** Kafka topic */
-  Topic: string;
+  Topic: string | null;
   /** kafka username */
-  User: string;
+  User: string | null;
   /** kafka password */
-  Password: string;
+  Password: string | null;
   /** ckafka实例 */
-  Instance: string;
+  Instance: string | null;
   /** 是否走VPC */
-  IsVpc: number;
+  IsVpc: number | null;
 }
 
 /** 部分key导入快照数据时所需要的key文件 */
@@ -524,6 +524,8 @@ declare interface SnapshotResult {
   SnapshotSize: number | null;
   /** 快照状态，0 生成中 1 正常 2 删除中 3 已失效 4 回档使用中 */
   SnapshotStatus: number | null;
+  /** 申请单ID */
+  ApplicationId?: string | null;
 }
 
 /** 缓写表字段名称的映射 */
@@ -758,6 +760,12 @@ declare interface TaskInfoNew {
   Operator: string;
   /** 任务详情 */
   Content: string;
+  /** 表格组ID */
+  TableGroupId?: string | null;
+  /** 表格组名称 */
+  TableGroupName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
 }
 
 declare interface ClearTablesRequest {
@@ -1101,9 +1109,9 @@ declare interface DescribeClustersRequest {
 
 declare interface DescribeClustersResponse {
   /** 集群实例数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群实例列表 */
-  Clusters: ClusterInfo[];
+  Clusters?: ClusterInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

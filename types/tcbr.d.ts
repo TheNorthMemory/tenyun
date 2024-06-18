@@ -405,7 +405,7 @@ declare interface DescribeCloudRunEnvsRequest {
 
 declare interface DescribeCloudRunEnvsResponse {
   /** 环境信息列表 */
-  EnvList: EnvInfo[];
+  EnvList?: EnvInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -545,7 +545,7 @@ declare interface Tcbr {
   CreateCloudRunEnv(data: CreateCloudRunEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunEnvResponse>;
   /** 创建云托管服务 {@link CreateCloudRunServerRequest} {@link CreateCloudRunServerResponse} */
   CreateCloudRunServer(data: CreateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunServerResponse>;
-  /** 查询环境列表 {@link DescribeCloudRunEnvsRequest} {@link DescribeCloudRunEnvsResponse} */
+  /** 查询云托管环境列表 {@link DescribeCloudRunEnvsRequest} {@link DescribeCloudRunEnvsResponse} */
   DescribeCloudRunEnvs(data?: DescribeCloudRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunEnvsResponse>;
   /** 查询云托管服务详情 {@link DescribeCloudRunServerDetailRequest} {@link DescribeCloudRunServerDetailResponse} */
   DescribeCloudRunServerDetail(data: DescribeCloudRunServerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServerDetailResponse>;

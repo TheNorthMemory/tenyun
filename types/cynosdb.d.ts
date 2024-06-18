@@ -4573,6 +4573,16 @@ declare interface RollbackToNewClusterRequest {
   DealMode?: number;
   /** 计算节点付费模式：0-按量计费，1-预付费 */
   PayMode?: number;
+  /** 时间 */
+  TimeSpan?: number;
+  /** 单位 */
+  TimeUnit?: string;
+  /** 回档库信息 */
+  RollbackDatabases?: RollbackDatabase[];
+  /** 回档表信息 */
+  RollbackTables?: RollbackTable[];
+  /** 原ro实例信息 */
+  OriginalROInstanceList?: string[];
 }
 
 declare interface RollbackToNewClusterResponse {
@@ -4985,7 +4995,7 @@ declare interface Cynosdb {
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
   /** 查询回档时间范围 {@link DescribeRollbackTimeRangeRequest} {@link DescribeRollbackTimeRangeResponse} */
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
-  /** 查询指定时间是否可回滚 {@link DescribeRollbackTimeValidityRequest} {@link DescribeRollbackTimeValidityResponse} */
+  /** @deprecated 查询指定时间是否可回滚 {@link DescribeRollbackTimeValidityRequest} {@link DescribeRollbackTimeValidityResponse} */
   DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
   /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */
   DescribeSupportProxyVersion(data: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;

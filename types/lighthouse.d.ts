@@ -93,35 +93,35 @@ declare interface BlueprintPrice {
 /** 套餐信息。 */
 declare interface Bundle {
   /** 套餐 ID。 */
-  BundleId: string;
+  BundleId?: string;
   /** 内存大小，单位 GB。 */
-  Memory: number;
+  Memory?: number;
   /** 系统盘类型。取值范围： CLOUD_SSD：SSD 云硬盘 CLOUD_PREMIUM：高性能云硬盘 */
-  SystemDiskType: string;
+  SystemDiskType?: string;
   /** 系统盘大小。单位GB。 */
-  SystemDiskSize: number;
+  SystemDiskSize?: number;
   /** 每月网络流量，单位 GB。 */
-  MonthlyTraffic: number;
+  MonthlyTraffic?: number;
   /** 是否支持 Linux/Unix 平台。 */
-  SupportLinuxUnixPlatform: boolean;
+  SupportLinuxUnixPlatform?: boolean;
   /** 是否支持 Windows 平台。 */
-  SupportWindowsPlatform: boolean;
+  SupportWindowsPlatform?: boolean;
   /** 套餐当前单位价格信息。 */
-  Price: Price;
+  Price?: Price;
   /** CPU 核数。 */
-  CPU: number;
+  CPU?: number;
   /** 峰值带宽，单位 Mbps。 */
-  InternetMaxBandwidthOut: number;
+  InternetMaxBandwidthOut?: number;
   /** 网络计费类型。 */
-  InternetChargeType: string;
+  InternetChargeType?: string;
   /** 套餐售卖状态,取值:‘AVAILABLE’(可用) , ‘SOLD_OUT’(售罄) */
-  BundleSalesState: string;
+  BundleSalesState?: string;
   /** 套餐类型。取值范围：STARTER_BUNDLE：入门型GENERAL_BUNDLE：通用型ENTERPRISE_BUNDLE：企业型STORAGE_BUNDLE：存储型EXCLUSIVE_BUNDLE：专属型HK_EXCLUSIVE_BUNDLE：香港专属型 CAREFREE_BUNDLE：无忧型BEFAST_BUNDLE：蜂驰型 */
-  BundleType: string;
+  BundleType?: string;
   /** 套餐类型描述信息。 */
   BundleTypeDescription?: string | null;
   /** 套餐展示标签.取值范围:"ACTIVITY": 活动套餐,"NORMAL": 普通套餐"CAREFREE": 无忧套餐 */
-  BundleDisplayLabel: string;
+  BundleDisplayLabel?: string;
 }
 
 /** 云联网关联的实例列表。 */

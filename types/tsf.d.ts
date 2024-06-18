@@ -1090,6 +1090,8 @@ declare interface FileConfigRelease {
   ClusterId?: string | null;
   /** 集群名称 */
   ClusterName?: string | null;
+  /** 配置中心发布详情 */
+  ConfigCenters?: TsfConfigCenter[] | null;
 }
 
 /** 用于请求参数中的条件过滤字段 */
@@ -1525,83 +1527,83 @@ declare interface IndicatorCoord {
 /** 机器实例 */
 declare interface Instance {
   /** 机器实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 机器名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 机器内网地址IP */
-  LanIp: string | null;
+  LanIp?: string | null;
   /** 机器外网地址IP */
-  WanIp: string | null;
+  WanIp?: string | null;
   /** 机器描述信息 */
-  InstanceDesc: string | null;
+  InstanceDesc?: string | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** VM的状态 虚机：虚机的状态 容器：Pod所在虚机的状态 */
-  InstanceStatus: string | null;
+  InstanceStatus?: string | null;
   /** VM的可使用状态 虚机：虚机是否能够作为资源使用 容器：虚机是否能够作为资源部署POD */
-  InstanceAvailableStatus: string | null;
+  InstanceAvailableStatus?: string | null;
   /** 服务下的服务实例的状态 虚机：应用是否可用 + Agent状态 容器：Pod状态 */
-  ServiceInstanceStatus: string | null;
+  ServiceInstanceStatus?: string | null;
   /** 标识此instance是否已添加在tsf中 */
-  CountInTsf: number | null;
+  CountInTsf?: number | null;
   /** 机器所属部署组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 机器所属应用ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 机器所属应用名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 机器实例在CVM的创建时间 */
-  InstanceCreatedTime: string | null;
+  InstanceCreatedTime?: string | null;
   /** 机器实例在CVM的过期时间 */
-  InstanceExpiredTime: string | null;
+  InstanceExpiredTime?: string | null;
   /** 机器实例在CVM的计费模式 */
-  InstanceChargeType: string | null;
+  InstanceChargeType?: string | null;
   /** 机器实例总CPU信息 */
-  InstanceTotalCpu: number | null;
+  InstanceTotalCpu?: number | null;
   /** 机器实例总内存信息 */
-  InstanceTotalMem: number | null;
+  InstanceTotalMem?: number | null;
   /** 机器实例使用的CPU信息 */
-  InstanceUsedCpu: number | null;
+  InstanceUsedCpu?: number | null;
   /** 机器实例使用的内存信息 */
-  InstanceUsedMem: number | null;
+  InstanceUsedMem?: number | null;
   /** 机器实例Limit CPU信息 */
-  InstanceLimitCpu: number | null;
+  InstanceLimitCpu?: number | null;
   /** 机器实例Limit 内存信息 */
-  InstanceLimitMem: number | null;
+  InstanceLimitMem?: number | null;
   /** 包版本 */
-  InstancePkgVersion: string | null;
+  InstancePkgVersion?: string | null;
   /** 集群类型 */
-  ClusterType: string | null;
+  ClusterType?: string | null;
   /** 机器实例业务状态 */
-  RestrictState: string | null;
+  RestrictState?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 实例执行状态 */
-  OperationState: number | null;
+  OperationState?: number | null;
   /** NamespaceId Ns ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** InstanceZoneId 可用区ID */
-  InstanceZoneId: string | null;
+  InstanceZoneId?: string | null;
   /** InstanceImportMode 导入模式 */
-  InstanceImportMode: string | null;
+  InstanceImportMode?: string | null;
   /** ApplicationType应用类型 */
-  ApplicationType: string | null;
+  ApplicationType?: string | null;
   /** ApplicationResourceType 资源类型 */
-  ApplicationResourceType: string | null;
+  ApplicationResourceType?: string | null;
   /** sidecar状态 */
-  ServiceSidecarStatus: string | null;
+  ServiceSidecarStatus?: string | null;
   /** 部署组名 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** NS名 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 健康检查原因 */
-  Reason: string | null;
+  Reason?: string | null;
   /** agent版本 */
-  AgentVersion: string | null;
+  AgentVersion?: string | null;
   /** 容器母机实例ID */
-  NodeInstanceId: string | null;
+  NodeInstanceId?: string | null;
 }
 
 /** 容器导入实例高级设置 */
@@ -5284,7 +5286,7 @@ declare interface DescribeGroupReleaseRequest {
 
 declare interface DescribeGroupReleaseResponse {
   /** 部署组发布的相关信息 */
-  Result: GroupRelease | null;
+  Result?: GroupRelease | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

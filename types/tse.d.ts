@@ -754,6 +754,16 @@ declare interface DescribeInstanceRegionInfo {
   EKSClusterID?: string | null;
 }
 
+/** 获取云原生api网关公网地址信息响应结果 */
+declare interface DescribePublicAddressConfigResult {
+  /** 网关实例id */
+  GatewayId?: string | null;
+  /** 公网地址信息 */
+  ConfigList?: PublicAddressConfig[] | null;
+  /** 总个数 */
+  TotalCount?: number | null;
+}
+
 /** 查询客户端公网信息 */
 declare interface DescribePublicNetworkResult {
   /** 网关实例ID */
@@ -1620,6 +1630,20 @@ declare interface PolarisCLSTopicInfo {
 declare interface PolarisLimiterAddress {
   /** VPC接入IP列表 */
   IntranetAddress: string | null;
+}
+
+/** 公网地址信息 */
+declare interface PublicAddressConfig {
+  /** 公网 ip */
+  Vip?: string | null;
+  /** 公网最大带宽 */
+  InternetMaxBandwidthOut?: number | null;
+  /** 公网所属分组 id */
+  GroupId?: string | null;
+  /** 公网所属分组名 */
+  GroupName?: string | null;
+  /** 公网负载均衡 id */
+  NetworkId?: string | null;
 }
 
 /** 云原生网关限流插件Qps阈值 */
@@ -3252,6 +3276,8 @@ declare interface DescribePublicAddressConfigRequest {
 }
 
 declare interface DescribePublicAddressConfigResponse {
+  /** 公网地址信息 */
+  Result?: DescribePublicAddressConfigResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

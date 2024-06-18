@@ -38,7 +38,7 @@ declare interface BiddingAppointResult {
   AppointEndTime?: string | null;
   /** 预约人数 */
   AppointNum?: number | null;
-  /** 1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回 */
+  /** 1 已预约，2 竞价中，3 等待出价 4 竞价失败 5 等待支付 6 等待转移，7 转移中 8 交易成功 9 预约持有者赎回 10 竞价持有者赎回 11 其他阶段持有者赎回 12 违约 */
   Status?: number | null;
 }
 
@@ -62,7 +62,7 @@ declare interface BiddingResult {
   BiddingFlag?: number | null;
   /** 出价次数 */
   BiddingNum?: number | null;
-  /** 1 已预约，2 竞价中，3 支付尾款 4 交割 5 交易失败 6 交易成功，7 已过期 */
+  /** 2 竞价中 3 等待出价 4 竞价失败 10 竞价持有者赎回 */
   Status?: number | null;
 }
 
@@ -764,7 +764,7 @@ declare interface DescribeBiddingAppointDetailResponse {
   AppointPrice?: number;
   /** 预约保证金 */
   AppointBondPrice?: number;
-  /** 1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回 */
+  /** 1 已预约，2 竞价中，3 等待出价 4 竞价失败 5 等待支付 6 等待转移，7 转移中 8 交易成功 9 预约持有者赎回 10 竞价持有者赎回 11 其他阶段持有者赎回 12 违约 */
   Status?: number;
   /** 预约保证金是否已经退回yes：退回 no: 未退回 */
   BiddingBondRefund?: string;
@@ -822,7 +822,7 @@ declare interface DescribeBiddingDetailResponse {
   CurrentNickname?: string;
   /** 竞价保证金 */
   BiddingBondPrice?: number;
-  /** 1 已预约，2 竞价中，3 支付尾款 4 交割 5 交易失败 6 交易成功，7 已过期 */
+  /** 2 竞价中 3 等待出价 4 竞价失败 10 竞价持有者赎回 */
   Status?: number;
   /** 竞价标识，1 领先，2 落后 */
   BiddingFlag?: number;
@@ -841,7 +841,7 @@ declare interface DescribeBiddingListRequest {
   PageSize: number;
   /** 域名 */
   Domain?: string;
-  /** 2 竞价中 3 等待出价 4 交易失败 10 竞价阶段持有者赎回 */
+  /** 2 竞价中 3 等待出价 4 竞价失败 10 竞价持有者赎回 */
   Status?: number[];
   /** 排序字段：BiddingEndTime 竞价结束时间	BiddingPrice 我的价格 */
   SortField?: string;
@@ -882,7 +882,7 @@ declare interface DescribeBiddingSuccessfulDetailResponse {
   BiddingBondRefund?: string;
   /** 保证金 */
   BiddingBondPrice?: number;
-  /** 状态：1 竞价中，2 待出价，3 竞价失败， 4 等待支付 5 等待转移， 6 转移中，7 交易成功，8 持有者索回，9 已违约 */
+  /** 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

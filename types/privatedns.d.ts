@@ -397,7 +397,7 @@ declare interface DescribeAuditLogRequest {
 
 declare interface DescribeAuditLogResponse {
   /** 操作日志列表 */
-  Data: AuditLog[];
+  Data?: AuditLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -429,9 +429,9 @@ declare interface DescribePrivateDNSAccountListRequest {
 
 declare interface DescribePrivateDNSAccountListResponse {
   /** 私有域解析账号数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 私有域解析账号列表 */
-  AccountSet: PrivateDNSAccount[];
+  AccountSet?: PrivateDNSAccount[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -517,9 +517,9 @@ declare interface DescribeRequestDataRequest {
 
 declare interface DescribeRequestDataResponse {
   /** 请求量统计表 */
-  Data: MetricData[];
+  Data?: MetricData[];
   /** 请求量单位时间: Day：天，Hour：小时 */
-  Interval: string;
+  Interval?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

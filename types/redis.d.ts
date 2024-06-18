@@ -895,9 +895,11 @@ declare interface TaskInfoDetail {
 /** tendis节点信息 */
 declare interface TendisNodes {
   /** 节点ID */
-  NodeId: string;
+  NodeId?: string;
   /** 节点角色 */
-  NodeRole: string;
+  NodeRole?: string;
+  /** 可用区 ID。 */
+  ZoneId?: number;
 }
 
 /** Tendis慢查询详情 */
@@ -945,19 +947,19 @@ declare interface TradeDealDetail {
 /** 可用区内产品信息 */
 declare interface ZoneCapacityConf {
   /** 可用区ID：如ap-guangzhou-3 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 可用区名称 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 可用区是否售罄 */
-  IsSaleout: boolean;
+  IsSaleout?: boolean;
   /** 是否为默认可用区 */
-  IsDefault: boolean;
+  IsDefault?: boolean;
   /** 网络类型：basenet -- 基础网络；vpcnet -- VPC网络 */
-  NetWorkType: string[];
+  NetWorkType?: string[];
   /** 可用区内产品规格等信息 */
-  ProductSet: ProductConf[];
+  ProductSet?: ProductConf[];
   /** 可用区ID：如100003 */
-  OldZoneId: number;
+  OldZoneId?: number;
 }
 
 declare interface AddReplicationInstanceRequest {
@@ -1793,7 +1795,7 @@ declare interface DescribeInstanceParamsResponse {
 }
 
 declare interface DescribeInstanceSecurityGroupRequest {
-  /** 实例 ID 列表。例如;["crs-f2ho5rsz\n"] */
+  /** 实例 ID 列表，数组长度限制[0,100]。例如：["crs-f2ho5rsz\n"] */
   InstanceIds: string[];
 }
 
@@ -2126,7 +2128,7 @@ declare interface DescribeSlowLogRequest {
 declare interface DescribeSlowLogResponse {
   /** 慢查询总数。 */
   TotalCount?: number;
-  /** 该参数存在命名不规范问题，建议用参数InstanceSlowLogDetail取代。慢查询详情。 */
+  /** 已废弃，该参数存在命名不规范问题，后续用参数InstanceSlowLogDetail取代。慢查询详情。 */
   InstanceSlowlogDetail?: InstanceSlowlogDetail[];
   /** 慢查询详情。 */
   InstanceSlowLogDetail?: InstanceSlowlogDetail[];

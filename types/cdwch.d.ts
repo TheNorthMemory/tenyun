@@ -270,6 +270,12 @@ declare interface InstanceInfo {
   EsIndexPassword?: string | null;
   /** true */
   HasEsIndex?: boolean | null;
+  /** true */
+  IsSecondaryZone?: boolean | null;
+  /** desc */
+  SecondaryZoneInfo?: string | null;
+  /** 是否clickhouse-keeper */
+  ClickHouseKeeper?: boolean | null;
 }
 
 /** 实例节点描述信息 */

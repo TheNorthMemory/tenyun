@@ -587,25 +587,25 @@ declare interface DescribeAccessLogConfigRequest {
 
 declare interface DescribeAccessLogConfigResponse {
   /** 访问日志输出路径。默认 /dev/stdout */
-  File: string;
+  File?: string;
   /** 访问日志的格式。 */
-  Format: string;
+  Format?: string;
   /** 访问日志输出编码，可取值为 "TEXT" 或 "JSON"，默认 TEXT" */
-  Encoding: string;
+  Encoding?: string;
   /** 选中的范围 */
-  SelectedRange: SelectedRange | null;
+  SelectedRange?: SelectedRange | null;
   /** 采用的模板，可取值为"istio" 或 "trace"，默认为"istio" */
-  Template: string;
+  Template?: string;
   /** 腾讯云日志服务相关参数 */
-  CLS: CLS;
+  CLS?: CLS;
   /** GRPC第三方服务器地址 */
-  Address: string;
+  Address?: string;
   /** 是否启用GRPC第三方服务器 */
-  EnableServer: boolean;
+  EnableServer?: boolean;
   /** 是否启用标准输出 */
-  EnableStdout: boolean;
+  EnableStdout?: boolean;
   /** 是否启用访问日志采集 */
-  Enable: boolean | null;
+  Enable?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
