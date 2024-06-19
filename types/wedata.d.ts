@@ -2343,7 +2343,7 @@ declare interface OpsTaskCanvasInfoList {
   /** 画布任务链接信息 */
   LinksList?: OpsTaskLinkInfoDto[];
   /** 画布循环依赖任务信息 */
-  CirculateTaskList?: OpsTaskCanvasDto | null;
+  CirculateTaskList?: OpsTaskCanvasDto[] | null;
 }
 
 /** 任务分页查询 */
@@ -9035,6 +9035,26 @@ declare interface ModifyWorkflowScheduleResponse {
   RequestId?: string;
 }
 
+declare interface MoveTasksToFolderRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 任务文件夹ID */
+  TaskFolderId: string;
+  /** 任务ID */
+  TaskIds: string[];
+  /** 虚拟任务ID */
+  VirtualTaskIds: string[];
+}
+
+declare interface MoveTasksToFolderResponse {
+  /** true代表成功 */
+  Data?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ProjectBaseInfoOpsRequest {
   /** 项目Id */
   ProjectId?: string;
@@ -10063,6 +10083,8 @@ declare interface Wedata {
   ModifyWorkflowInfo(data: ModifyWorkflowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowInfoResponse>;
   /** 更新工作流调度 {@link ModifyWorkflowScheduleRequest} {@link ModifyWorkflowScheduleResponse} */
   ModifyWorkflowSchedule(data: ModifyWorkflowScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowScheduleResponse>;
+  /** 移动任务到工作流文件夹 {@link MoveTasksToFolderRequest} {@link MoveTasksToFolderResponse} */
+  MoveTasksToFolder(data: MoveTasksToFolderRequest, config?: AxiosRequestConfig): AxiosPromise<MoveTasksToFolderResponse>;
   /** 注册事件（新建事件） {@link RegisterEventRequest} {@link RegisterEventResponse} */
   RegisterEvent(data: RegisterEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventResponse>;
   /** 注册事件监听器 {@link RegisterEventListenerRequest} {@link RegisterEventListenerResponse} */

@@ -1792,6 +1792,18 @@ declare interface VULRiskAdvanceCFGList {
   RecentScanTime?: string | null;
 }
 
+/** 漏洞风险信息 */
+declare interface VULRiskInfo {
+  /** 修复建议 */
+  Fix?: string | null;
+  /** 技术参考/参考链接 */
+  References?: string | null;
+  /** 漏洞描述 */
+  Describe?: string | null;
+  /** 受影响组件 */
+  ImpactComponent?: VulImpactComponentInfo[] | null;
+}
+
 /** 漏洞视角的漏洞风险对象 */
 declare interface VULViewVULRisk {
   /** 端口 */
@@ -1844,6 +1856,70 @@ declare interface VULViewVULRisk {
   EMGCVulType?: number | null;
 }
 
+/** 漏洞视角的漏洞风险对象 */
+declare interface VULViewVULRiskData {
+  /** 端口 */
+  Port?: string;
+  /** 影响资产 */
+  NoHandleCount?: number;
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
+  Level?: string;
+  /** 组件 */
+  Component?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 影响资产数量 */
+  AffectAssetCount?: number;
+  /** 风险ID */
+  RiskId?: string;
+  /** 扫描来源，具体看接口返回枚举类型 */
+  From?: string;
+  /** 前端索引 */
+  Index?: string;
+  /** 漏洞类型 */
+  VULType?: string;
+  /** 漏洞名 */
+  VULName?: string;
+  /** cve */
+  CVE?: string;
+  /** 漏洞payload */
+  Payload?: string;
+  /** 漏洞影响组件 */
+  AppName?: string;
+  /** 漏洞影响版本 */
+  AppVersion?: string;
+  /** 风险点 */
+  VULURL?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
+  EMGCVulType?: number | null;
+  /** CVSS评分 */
+  CVSS?: number | null;
+  /** PCMGRId */
+  PCMGRId?: string | null;
+  /** 漏洞标签。搜索时应急 必修传参VulTag=SuggestRepair/EMGCVul */
+  VulTag?: string[] | null;
+  /** 漏洞披露时间 */
+  DisclosureTime?: string | null;
+  /** 攻击热度 */
+  AttackHeat?: number | null;
+  /** 是否必修漏洞1是，0不是 */
+  IsSuggest?: number | null;
+  /** 处置任务id */
+  HandleTaskId?: string | null;
+  /** 引擎来源 */
+  EngineSource?: string | null;
+  /** 新的漏洞风险id */
+  VulRiskId?: string | null;
+}
+
 /** vpc列表数据 */
 declare interface Vpc {
   /** 子网(只支持32位) */
@@ -1876,6 +1952,26 @@ declare interface Vpc {
   IsNewAsset?: number | null;
   /** 是否核心资产1是 2不是 */
   IsCore?: number | null;
+}
+
+/** 漏洞影响组件信息 */
+declare interface VulImpactComponentInfo {
+  /** 组件名称 */
+  Component?: string | null;
+  /** 版本名称 */
+  Version?: string | null;
+}
+
+/** 漏洞趋势-攻击趋势、影响用户、影响资产 */
+declare interface VulTrend {
+  /** 影响的资产数 */
+  AffectAssetCount?: number | null;
+  /** 影响的用户数 */
+  AffectUserCount?: number | null;
+  /** 攻击数 */
+  AttackCount?: number | null;
+  /** 时间 */
+  Date?: string | null;
 }
 
 /** 网站风险对象 */
@@ -2755,6 +2851,30 @@ declare interface DescribeVULRiskAdvanceCFGListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVULRiskDetailRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 风险id */
+  RiskId?: string;
+  /** pcMgrId */
+  PCMGRId?: string;
+}
+
+declare interface DescribeVULRiskDetailResponse {
+  /** 安全产品支持情况 */
+  ServiceSupport?: ServiceSupport[];
+  /** 漏洞趋势 */
+  VulTrend?: VulTrend[];
+  /** 漏洞补充信息 */
+  VulData?: VULRiskInfo;
+  /** 小助手问答id */
+  QuestionId?: string;
+  /** 会话id */
+  SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVpcAssetsRequest {
   /** 过滤参数 */
   Filter?: Filter;
@@ -2771,6 +2891,32 @@ declare interface DescribeVpcAssetsResponse {
   RegionList?: FilterDataObject[];
   /** appid列表 */
   AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulViewVulRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filter?: Filter;
+  /** 资产标签 */
+  Tags?: AssetTag[];
+}
+
+declare interface DescribeVulViewVulRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 漏洞产视角的漏洞风险列表 */
+  Data?: VULViewVULRiskData[] | null;
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 来源列表 */
+  FromLists?: FilterDataObject[];
+  /** 漏洞类型列表 */
+  VULTypeLists?: FilterDataObject[];
+  /** tag枚举 */
+  Tags?: FilterDataObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2942,8 +3088,12 @@ declare interface Csip {
   DescribeTopAttackInfo(data?: DescribeTopAttackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackInfoResponse>;
   /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */
   DescribeVULRiskAdvanceCFGList(data?: DescribeVULRiskAdvanceCFGListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskAdvanceCFGListResponse>;
+  /** 漏洞管理-漏洞详情 {@link DescribeVULRiskDetailRequest} {@link DescribeVULRiskDetailResponse} */
+  DescribeVULRiskDetail(data?: DescribeVULRiskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskDetailResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
+  /** 漏洞管理-漏洞视角的漏洞风险列表 {@link DescribeVulViewVulRiskListRequest} {@link DescribeVulViewVulRiskListResponse} */
+  DescribeVulViewVulRiskList(data?: DescribeVulViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulViewVulRiskListResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
   /** 修改风险中心风险状态 {@link ModifyRiskCenterRiskStatusRequest} {@link ModifyRiskCenterRiskStatusResponse} */

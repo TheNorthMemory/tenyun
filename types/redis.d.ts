@@ -973,7 +973,7 @@ declare interface AddReplicationInstanceRequest {
 
 declare interface AddReplicationInstanceResponse {
   /** 异步流程ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1313,7 +1313,7 @@ declare interface DeleteReplicationInstanceRequest {
 
 declare interface DeleteReplicationInstanceResponse {
   /** 异步任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1925,14 +1925,14 @@ declare interface DescribeInstancesResponse {
 }
 
 declare interface DescribeMaintenanceWindowRequest {
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeMaintenanceWindowResponse {
-  /** 维护时间窗起始时间，如：17:00 */
+  /** 维护时间窗开始时间。取值范围为"00:00-23:00"的任意时间点，如03:24。 */
   StartTime?: string;
-  /** 维护时间窗结束时间，如：19:00 */
+  /** 维护时间窗结束时间。- 取值范围为"00:00-23:00"的任意时间点，如：04:24。- 维护时间持续时长最小为30分钟，最大为3小时。- 结束时间务必是基于开始时间向后的时间。 */
   EndTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1983,7 +1983,7 @@ declare interface DescribeProductInfoRequest {
 
 declare interface DescribeProductInfoResponse {
   /** 地域售卖信息。 */
-  RegionSet: RegionConf[];
+  RegionSet?: RegionConf[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2283,7 +2283,7 @@ declare interface EnableReplicaReadonlyResponse {
 }
 
 declare interface InquiryPriceCreateInstanceRequest {
-  /** 实例类型：2 – Redis2.8内存版(标准架构)，3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版(标准架构)，7 – Redis4.0内存版(集群架构)，8 – Redis5.0内存版(标准架构)，9 – Redis5.0内存版(集群架构)。 */
+  /** 实例类型。- 2：Redis 2.8 内存版（标准架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
   TypeId: number;
   /** 内存容量，单位为MB， 数值需为1024的整数倍，具体规格以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。 */
   MemSize: number;
@@ -2291,38 +2291,38 @@ declare interface InquiryPriceCreateInstanceRequest {
   GoodsNum: number;
   /** 购买时长，在创建包年包月实例的时候需要填写，按量计费实例填1即可，单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。 */
   Period: number;
-  /** 付费方式:0-按量计费，1-包年包月。 */
+  /** 付费方式。- 0：按量计费。- 1：包年包月。 */
   BillingMode: number;
   /** 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
   ZoneId?: number;
-  /** 实例分片数量，Redis2.8标准架构、CKV标准架构和Redis2.8单机版、Redis4.0标准架构不需要填写。 */
+  /** 实例分片数量。Redis2.8标准架构、CKV标准架构、Redis4.0标准架构无需填写。 */
   RedisShardNum?: number;
-  /** 实例副本数量，Redis2.8标准架构、CKV标准架构和Redis2.8单机版不需要填写。 */
+  /** 实例副本数量。Redis2.8标准架构、CKV标准架构无需填写。 */
   RedisReplicasNum?: number;
-  /** 是否支持副本只读，Redis2.8标准架构、CKV标准架构和Redis2.8单机版不需要填写。 */
+  /** 是否支持副本只读。Redis2.8标准架构、CKV标准架构无需填写。- true：无需支持副本只读。- false：需支持。 */
   ReplicasReadonly?: boolean;
   /** 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
   ZoneName?: string;
-  /** "local"本地盘版，"cloud"云盘版，"cdc"独享集群版，如果不传默认询价为本地盘版本 */
+  /** 部署方式。- local：本地盘版，默认为 local。- cloud：云盘版。- cdc：独享集群版。 */
   ProductVersion?: string;
 }
 
 declare interface InquiryPriceCreateInstanceResponse {
   /** 价格，单位：分 */
-  Price: number | null;
+  Price?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface InquiryPriceRenewInstanceRequest {
-  /** 购买时长，单位：月 */
+  /** 包年包月实例的购买时长，单位：月。 */
   Period: number;
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface InquiryPriceRenewInstanceResponse {
-  /** 价格，单位：分 */
+  /** 价格，单位：分。 */
   Price?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

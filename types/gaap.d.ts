@@ -296,6 +296,10 @@ declare interface DomainRuleSet {
   Http3Supported?: number | null;
   /** 是否为默认域名 */
   IsDefaultServer?: boolean | null;
+  /** TLS套件包 */
+  TLSCiphers?: string | null;
+  /** TLS版本 */
+  TLSSupportVersion?: string[] | null;
 }
 
 /** 过滤条件 */
