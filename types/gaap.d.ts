@@ -1759,7 +1759,7 @@ declare interface DescribeGlobalDomainDnsRequest {
 
 declare interface DescribeGlobalDomainDnsResponse {
   /** DNS解析记录详细信息列表 */
-  GlobalDnsList: GlobalDns[];
+  GlobalDnsList?: GlobalDns[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

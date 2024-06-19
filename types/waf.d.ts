@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** DescribeAccessFastAnalysis接口的出参 */
+declare interface AccessFieldValueRatioInfo {
+  /** 日志条数 */
+  Count?: number;
+  /** 对应的Value值的百分比 */
+  Ratio?: number;
+  /** 字段对应的值 */
+  Value?: string;
+}
+
 /** DescribeAccessIndex */
 declare interface AccessFullTextInfo {
   /** 是否大小写敏感 */
@@ -2409,8 +2419,6 @@ declare interface DescribeAccessExportsResponse {
 }
 
 declare interface DescribeAccessFastAnalysisRequest {
-  /** 客户要查询的日志主题ID，每个客户都有对应的一个主题 */
-  TopicId: string;
   /** 要查询的日志的起始时间，Unix时间戳，单位ms */
   From: number;
   /** 要查询的日志的结束时间，Unix时间戳，单位ms */
@@ -2419,6 +2427,8 @@ declare interface DescribeAccessFastAnalysisRequest {
   Query: string;
   /** 需要分析统计的字段名 */
   FieldName: string;
+  /** 客户要查询的日志主题ID，每个客户都有对应的一个主题 */
+  TopicId?: string;
   /** 排序字段,升序asc,降序desc，默认降序desc */
   Sort?: string;
   /** 返回的top数，默认返回top5 */
@@ -2426,6 +2436,10 @@ declare interface DescribeAccessFastAnalysisRequest {
 }
 
 declare interface DescribeAccessFastAnalysisResponse {
+  /** 注意：此字段可能返回 null，表示取不到有效值 */
+  FieldValueRatioInfos?: AccessFieldValueRatioInfo[] | null;
+  /** 日志条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

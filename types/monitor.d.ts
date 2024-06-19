@@ -2845,6 +2845,8 @@ declare interface DeleteAlarmPolicyRequest {
   Module: string;
   /** 告警策略 ID 列表 */
   PolicyIds: string[];
+  /** prom的实例id */
+  PromInsIds?: string[];
 }
 
 declare interface DeleteAlarmPolicyResponse {

@@ -1007,7 +1007,7 @@ declare interface CreateProjectRequest {
 
 declare interface CreateProjectResponse {
   /** 项目ID */
-  ProjectId: string;
+  ProjectId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

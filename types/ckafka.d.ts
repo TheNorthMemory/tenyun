@@ -21,31 +21,31 @@ declare interface Acl {
 /** AclRule列表接口出参 */
 declare interface AclRule {
   /** Acl规则名称 */
-  RuleName: string | null;
+  RuleName?: string | null;
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED */
-  PatternType: string | null;
+  PatternType?: string | null;
   /** 表示前缀匹配的前缀的值 */
-  Pattern: string | null;
+  Pattern?: string | null;
   /** Acl资源类型,目前只支持Topic,枚举值列表：Topic */
-  ResourceType: string | null;
+  ResourceType?: string | null;
   /** 该规则所包含的ACL信息 */
-  AclList: string | null;
+  AclList?: string | null;
   /** 规则所创建的时间 */
-  CreateTimeStamp: string | null;
+  CreateTimeStamp?: string | null;
   /** 预设ACL规则是否应用到新增的topic中 */
-  IsApplied: number | null;
+  IsApplied?: number | null;
   /** 规则更新时间 */
-  UpdateTimeStamp: string | null;
+  UpdateTimeStamp?: string | null;
   /** 规则的备注 */
-  Comment: string | null;
+  Comment?: string | null;
   /** 其中一个显示的对应的TopicName */
-  TopicName: string | null;
+  TopicName?: string | null;
   /** 应用该ACL规则的Topic数 */
-  TopicCount: number | null;
+  TopicCount?: number | null;
   /** patternType的中文显示 */
-  PatternTypeTitle: string | null;
+  PatternTypeTitle?: string | null;
 }
 
 /** 表示ACL 规则的四元组信息 */
@@ -2705,7 +2705,7 @@ declare interface CreateConsumerRequest {
 
 declare interface CreateConsumerResponse {
   /** 创建group描述 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3033,7 +3033,7 @@ declare interface CreateTopicRequest {
 
 declare interface CreateTopicResponse {
   /** 返回创建结果 */
-  Result: CreateTopicResp;
+  Result?: CreateTopicResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3073,7 +3073,7 @@ declare interface DeleteAclRequest {
 
 declare interface DeleteAclResponse {
   /** 返回结果 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3137,7 +3137,7 @@ declare interface DeleteGroupRequest {
 
 declare interface DeleteGroupResponse {
   /** 返回结果 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3179,7 +3179,7 @@ declare interface DeleteRouteRequest {
 
 declare interface DeleteRouteResponse {
   /** 返回结果 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3255,7 +3255,7 @@ declare interface DescribeACLRequest {
 
 declare interface DescribeACLResponse {
   /** 返回的ACL结果集对象 */
-  Result: AclResponse;
+  Result?: AclResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3273,7 +3273,7 @@ declare interface DescribeAclRuleRequest {
 
 declare interface DescribeAclRuleResponse {
   /** 返回的AclRule结果集对象 */
-  Result: AclRuleResp;
+  Result?: AclRuleResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3299,7 +3299,7 @@ declare interface DescribeCkafkaZoneRequest {
 
 declare interface DescribeCkafkaZoneResponse {
   /** 查询结果复杂对象实体 */
-  Result: ZoneResponse;
+  Result?: ZoneResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3435,7 +3435,7 @@ declare interface DescribeDatahubTopicsRequest {
 
 declare interface DescribeDatahubTopicsResponse {
   /** 主题列表 */
-  Result: DescribeDatahubTopicsResp | null;
+  Result?: DescribeDatahubTopicsResp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3585,7 +3585,7 @@ declare interface DescribeRegionRequest {
 
 declare interface DescribeRegionResponse {
   /** 返回地域枚举结果列表 */
-  Result: Region[] | null;
+  Result?: Region[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3625,7 +3625,7 @@ declare interface DescribeTopicAttributesRequest {
 
 declare interface DescribeTopicAttributesResponse {
   /** 返回的结果对象 */
-  Result: TopicAttributesResponse;
+  Result?: TopicAttributesResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3645,7 +3645,7 @@ declare interface DescribeTopicDetailRequest {
 
 declare interface DescribeTopicDetailResponse {
   /** 返回的主题详情实体 */
-  Result: TopicDetailResponse;
+  Result?: TopicDetailResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3679,7 +3679,7 @@ declare interface DescribeTopicProduceConnectionRequest {
 
 declare interface DescribeTopicProduceConnectionResponse {
   /** 链接信息返回结果集 */
-  Result: DescribeConnectInfoResultDTO[];
+  Result?: DescribeConnectInfoResultDTO[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3699,7 +3699,7 @@ declare interface DescribeTopicRequest {
 
 declare interface DescribeTopicResponse {
   /** 返回的结果 */
-  Result: TopicResult | null;
+  Result?: TopicResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3717,7 +3717,7 @@ declare interface DescribeTopicSubscribeGroupRequest {
 
 declare interface DescribeTopicSubscribeGroupResponse {
   /** 返回结果 */
-  Result: TopicSubscribeGroup;
+  Result?: TopicSubscribeGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3807,7 +3807,7 @@ declare interface FetchMessageByOffsetRequest {
 
 declare interface FetchMessageByOffsetResponse {
   /** 返回结果 */
-  Result: ConsumerRecord;
+  Result?: ConsumerRecord;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4217,10 +4217,10 @@ declare interface ModifyTopicAttributesRequest {
   UncleanLeaderElectionEnable?: number;
   /** 消息保留时间，单位：ms，当前最小值为60000ms。 */
   RetentionMs?: number;
-  /** Segment 分片滚动的时长，单位：ms，当前最小为86400000ms。 */
-  SegmentMs?: number;
   /** 主题消息最大值，单位为 Byte，最大值为12582912Byte（即12MB）。 */
   MaxMessageBytes?: number;
+  /** Segment 分片滚动的时长，单位：ms，当前最小为300000ms。 */
+  SegmentMs?: number;
   /** 消息删除策略，可以选择delete 或者compact */
   CleanUpPolicy?: string;
   /** Ip白名单列表，配额限制，enableWhileList=1时必选 */
@@ -4243,7 +4243,7 @@ declare interface ModifyTopicAttributesRequest {
 
 declare interface ModifyTopicAttributesResponse {
   /** 返回结果集 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4331,29 +4331,39 @@ declare interface UserResponse {
 
 declare interface ZoneResponse {
   /** zone列表 */
-  ZoneList: ZoneInfo[];
+  ZoneList?: ZoneInfo[];
   /** 最大购买实例个数 */
-  MaxBuyInstanceNum: number;
+  MaxBuyInstanceNum?: number;
   /** 最大购买带宽 单位Mb/s */
-  MaxBandwidth: number;
+  MaxBandwidth?: number;
   /** 后付费单位价格 */
-  UnitPrice: Price;
+  UnitPrice?: Price;
   /** 后付费消息单价 */
-  MessagePrice: Price;
+  MessagePrice?: Price;
   /** 用户独占集群信息 */
-  ClusterInfo: ClusterInfo[] | null;
+  ClusterInfo?: ClusterInfo[] | null;
   /** 购买标准版配置 */
-  Standard: string | null;
+  Standard?: string | null;
   /** 购买标准版S2配置 */
-  StandardS2: string | null;
+  StandardS2?: string | null;
   /** 购买专业版配置 */
-  Profession: string | null;
+  Profession?: string | null;
   /** 购买物理独占版配置 */
-  Physical: string | null;
+  Physical?: string | null;
   /** 公网带宽 */
-  PublicNetwork: string | null;
+  PublicNetwork?: string | null;
   /** 公网带宽配置 */
-  PublicNetworkLimit: string | null;
+  PublicNetworkLimit?: string | null;
+  /** 请求ID */
+  RequestId?: string | null;
+  /** 版本 */
+  Version?: string | null;
+  /** 分页offset */
+  Offset?: number | null;
+  /** 分页limit */
+  Limit?: number | null;
+  /** 是否必须录入tag */
+  ForceCheckTag?: boolean | null;
 }
 
 /** {@link Ckafka 消息队列 CKafka 版} */

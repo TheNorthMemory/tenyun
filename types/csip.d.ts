@@ -522,6 +522,10 @@ declare interface AssetViewVULRiskData {
   EngineSource?: string | null;
   /** 新的漏洞风险id(同全网漏洞表的riskid) */
   VulRiskId?: string | null;
+  /** 新版漏洞id */
+  TvdID?: string | null;
+  /** 是否可以一键体检，1-可以，0-不可以 */
+  IsOneClick?: number | null;
 }
 
 /** 资产视角的弱口令风险 */
@@ -742,6 +746,10 @@ declare interface CVMAssetVO {
   AgentMemRss?: number | null;
   /** CPU使用率百分比 */
   AgentCpuPer?: number | null;
+  /** cvm真正所属的appid */
+  RealAppid?: number | null;
+  /** 云资产类型：0：腾讯云，1：aws，2：azure */
+  CloudType?: number | null;
 }
 
 /** clb实例和监听器信息 */
@@ -1323,7 +1331,7 @@ declare interface RelatedEvent {
 /** 报告项key */
 declare interface ReportItemKey {
   /** 日志Id列表 */
-  TaskLogList: string[] | null;
+  TaskLogList: string[];
 }
 
 /** 报告中的task_id list */
@@ -1693,9 +1701,9 @@ declare interface TaskCenterVulRiskInputParam {
 /** 弱口令风险高级配置 */
 declare interface TaskCenterWeakPwdRiskInputParam {
   /** 检测项ID */
-  CheckItemId: number | null;
+  CheckItemId: number;
   /** 是否开启，0-不开启，1-开启 */
-  Enable: number | null;
+  Enable: number;
 }
 
 /** 任务ID列表Key */
@@ -1910,7 +1918,7 @@ declare interface VULViewVULRiskData {
   DisclosureTime?: string | null;
   /** 攻击热度 */
   AttackHeat?: number | null;
-  /** 是否必修漏洞1是，0不是 */
+  /** 是否必修漏洞，1-是，0-不是 */
   IsSuggest?: number | null;
   /** 处置任务id */
   HandleTaskId?: string | null;
@@ -1918,6 +1926,10 @@ declare interface VULViewVULRiskData {
   EngineSource?: string | null;
   /** 新的漏洞风险id */
   VulRiskId?: string | null;
+  /** 新版漏洞id */
+  TvdID?: string | null;
+  /** 是否可以一键体检，1-可以，0-不可以 */
+  IsOneClick?: number | null;
 }
 
 /** vpc列表数据 */
@@ -2100,6 +2112,8 @@ declare interface AssetBaseInfoResponse {
 declare interface CreateDomainAndIpRequest {
   /** 公网IP/域名 */
   Content: string[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 资产标签 */
   Tags?: AssetTag[];
 }
@@ -2136,6 +2150,8 @@ declare interface CreateRiskCenterScanTaskRequest {
   TaskMode?: number;
   /** 资产标签 */
   Tags?: AssetTag;
+  /** 任务完成回调webhook地址 */
+  FinishWebHook?: string;
 }
 
 declare interface CreateRiskCenterScanTaskResponse {
@@ -2150,6 +2166,8 @@ declare interface CreateRiskCenterScanTaskResponse {
 }
 
 declare interface DeleteDomainAndIpRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** - */
   Content?: PublicIpDomainListKey[];
   /** 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留 */
@@ -2972,6 +2990,8 @@ declare interface ModifyRiskCenterScanTaskRequest {
   TaskAdvanceCFG?: TaskAdvanceCFG;
   /** 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式 */
   TaskMode?: number;
+  /** 任务完成回调webhook地址 */
+  FinishWebHook?: string;
 }
 
 declare interface ModifyRiskCenterScanTaskResponse {

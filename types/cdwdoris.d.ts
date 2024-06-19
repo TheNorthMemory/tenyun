@@ -599,6 +599,10 @@ declare interface DescribeSlowQueryRecordsDownloadRequest {
   MemoryUsage?: string;
   /** IsQuery条件 */
   IsQuery?: number;
+  /** 数据库名称 */
+  DbName?: string[];
+  /** catalog名称 */
+  CatalogName?: string[];
 }
 
 declare interface DescribeSlowQueryRecordsDownloadResponse {

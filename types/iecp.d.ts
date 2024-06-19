@@ -2931,11 +2931,11 @@ declare interface SetRouteOnOffResponse {
 /** {@link Iecp 物联网边缘计算平台} */
 declare interface Iecp {
   (): Versions;
-  /** 使用组件市场中的组件 {@link ApplyMarketComponentRequest} {@link ApplyMarketComponentResponse} */
+  /** @deprecated 使用组件市场中的组件 {@link ApplyMarketComponentRequest} {@link ApplyMarketComponentResponse} */
   ApplyMarketComponent(data: ApplyMarketComponentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyMarketComponentResponse>;
   /** 建立消息路由 {@link BuildMessageRouteRequest} {@link BuildMessageRouteResponse} */
   BuildMessageRoute(data: BuildMessageRouteRequest, config?: AxiosRequestConfig): AxiosPromise<BuildMessageRouteResponse>;
-  /** 创建可视化创建应用模板 {@link CreateApplicationVisualizationRequest} {@link CreateApplicationVisualizationResponse} */
+  /** @deprecated 创建可视化创建应用模板 {@link CreateApplicationVisualizationRequest} {@link CreateApplicationVisualizationResponse} */
   CreateApplicationVisualization(data: CreateApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationVisualizationResponse>;
   /** 创建ConfigMap {@link CreateConfigMapRequest} {@link CreateConfigMapResponse} */
   CreateConfigMap(data: CreateConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigMapResponse>;
@@ -2947,9 +2947,9 @@ declare interface Iecp {
   CreateEdgeNodeGroup(data: CreateEdgeNodeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeGroupResponse>;
   /** 创建边缘单元NodeUnit模板 {@link CreateEdgeNodeUnitTemplateRequest} {@link CreateEdgeNodeUnitTemplateResponse} */
   CreateEdgeNodeUnitTemplate(data: CreateEdgeNodeUnitTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeUnitTemplateResponse>;
-  /** 可视化创建应用 {@link CreateEdgeUnitApplicationVisualizationRequest} {@link CreateEdgeUnitApplicationVisualizationResponse} */
+  /** @deprecated 可视化创建应用 {@link CreateEdgeUnitApplicationVisualizationRequest} {@link CreateEdgeUnitApplicationVisualizationResponse} */
   CreateEdgeUnitApplicationVisualization(data: CreateEdgeUnitApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitApplicationVisualizationResponse>;
-  /** yaml方式创建应用 {@link CreateEdgeUnitApplicationYamlRequest} {@link CreateEdgeUnitApplicationYamlResponse} */
+  /** @deprecated yaml方式创建应用 {@link CreateEdgeUnitApplicationYamlRequest} {@link CreateEdgeUnitApplicationYamlResponse} */
   CreateEdgeUnitApplicationYaml(data: CreateEdgeUnitApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitApplicationYamlResponse>;
   /** 创建边缘单元 {@link CreateEdgeUnitCloudRequest} {@link CreateEdgeUnitCloudResponse} */
   CreateEdgeUnitCloud(data: CreateEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitCloudResponse>;
@@ -2967,7 +2967,7 @@ declare interface Iecp {
   CreateUpdateNodeUnit(data: CreateUpdateNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUpdateNodeUnitResponse>;
   /** 创建token {@link CreateUserTokenRequest} {@link CreateUserTokenResponse} */
   CreateUserToken(data?: CreateUserTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserTokenResponse>;
-  /** 删除应用模板 {@link DeleteApplicationsRequest} {@link DeleteApplicationsResponse} */
+  /** @deprecated 删除应用模板 {@link DeleteApplicationsRequest} {@link DeleteApplicationsResponse} */
   DeleteApplications(data: DeleteApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationsResponse>;
   /** 删除ConfigMap {@link DeleteConfigMapRequest} {@link DeleteConfigMapResponse} */
   DeleteConfigMap(data: DeleteConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigMapResponse>;
@@ -2977,7 +2977,7 @@ declare interface Iecp {
   DeleteEdgeNodeUnitTemplates(data: DeleteEdgeNodeUnitTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeNodeUnitTemplatesResponse>;
   /** 批量删除边缘节点 {@link DeleteEdgeNodesRequest} {@link DeleteEdgeNodesResponse} */
   DeleteEdgeNodes(data: DeleteEdgeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeNodesResponse>;
-  /** 删除应用列表 {@link DeleteEdgeUnitApplicationsRequest} {@link DeleteEdgeUnitApplicationsResponse} */
+  /** @deprecated 删除应用列表 {@link DeleteEdgeUnitApplicationsRequest} {@link DeleteEdgeUnitApplicationsResponse} */
   DeleteEdgeUnitApplications(data: DeleteEdgeUnitApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitApplicationsResponse>;
   /** 删除边缘单元 {@link DeleteEdgeUnitCloudRequest} {@link DeleteEdgeUnitCloudResponse} */
   DeleteEdgeUnitCloud(data: DeleteEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitCloudResponse>;
@@ -2999,13 +2999,13 @@ declare interface Iecp {
   DeleteNodeUnit(data: DeleteNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodeUnitResponse>;
   /** 删除Secret {@link DeleteSecretRequest} {@link DeleteSecretResponse} */
   DeleteSecret(data: DeleteSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretResponse>;
-  /** 获取应用模板可视化配置信息 {@link DescribeApplicationVisualizationRequest} {@link DescribeApplicationVisualizationResponse} */
+  /** @deprecated 获取应用模板可视化配置信息 {@link DescribeApplicationVisualizationRequest} {@link DescribeApplicationVisualizationResponse} */
   DescribeApplicationVisualization(data: DescribeApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationVisualizationResponse>;
-  /** 查询应用模板Yaml {@link DescribeApplicationYamlRequest} {@link DescribeApplicationYamlResponse} */
+  /** @deprecated 查询应用模板Yaml {@link DescribeApplicationYamlRequest} {@link DescribeApplicationYamlResponse} */
   DescribeApplicationYaml(data: DescribeApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationYamlResponse>;
-  /** 检查应用模板的Yaml配置 {@link DescribeApplicationYamlErrorRequest} {@link DescribeApplicationYamlErrorResponse} */
+  /** @deprecated 检查应用模板的Yaml配置 {@link DescribeApplicationYamlErrorRequest} {@link DescribeApplicationYamlErrorResponse} */
   DescribeApplicationYamlError(data: DescribeApplicationYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationYamlErrorResponse>;
-  /** 获取应用模板列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
+  /** @deprecated 获取应用模板列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 获取ConfigMap详情 {@link DescribeConfigMapRequest} {@link DescribeConfigMapResponse} */
   DescribeConfigMap(data: DescribeConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMapResponse>;
@@ -3035,23 +3035,23 @@ declare interface Iecp {
   DescribeEdgePod(data: DescribeEdgePodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgePodResponse>;
   /** 查询预注册节点列表 {@link DescribeEdgeSnNodesRequest} {@link DescribeEdgeSnNodesResponse} */
   DescribeEdgeSnNodes(data: DescribeEdgeSnNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeSnNodesResponse>;
-  /** 获取应用事件列表 {@link DescribeEdgeUnitApplicationEventsRequest} {@link DescribeEdgeUnitApplicationEventsResponse} */
+  /** @deprecated 获取应用事件列表 {@link DescribeEdgeUnitApplicationEventsRequest} {@link DescribeEdgeUnitApplicationEventsResponse} */
   DescribeEdgeUnitApplicationEvents(data: DescribeEdgeUnitApplicationEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationEventsResponse>;
-  /** 获取应用日志 {@link DescribeEdgeUnitApplicationLogsRequest} {@link DescribeEdgeUnitApplicationLogsResponse} */
+  /** @deprecated 获取应用日志 {@link DescribeEdgeUnitApplicationLogsRequest} {@link DescribeEdgeUnitApplicationLogsResponse} */
   DescribeEdgeUnitApplicationLogs(data: DescribeEdgeUnitApplicationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationLogsResponse>;
-  /** 获取应用容器状态 {@link DescribeEdgeUnitApplicationPodContainersRequest} {@link DescribeEdgeUnitApplicationPodContainersResponse} */
+  /** @deprecated 获取应用容器状态 {@link DescribeEdgeUnitApplicationPodContainersRequest} {@link DescribeEdgeUnitApplicationPodContainersResponse} */
   DescribeEdgeUnitApplicationPodContainers(data: DescribeEdgeUnitApplicationPodContainersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationPodContainersResponse>;
-  /** 获取应用下Pod状态 {@link DescribeEdgeUnitApplicationPodsRequest} {@link DescribeEdgeUnitApplicationPodsResponse} */
+  /** @deprecated 获取应用下Pod状态 {@link DescribeEdgeUnitApplicationPodsRequest} {@link DescribeEdgeUnitApplicationPodsResponse} */
   DescribeEdgeUnitApplicationPods(data: DescribeEdgeUnitApplicationPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationPodsResponse>;
-  /** 获取单元可视化配置信息 {@link DescribeEdgeUnitApplicationVisualizationRequest} {@link DescribeEdgeUnitApplicationVisualizationResponse} */
+  /** @deprecated 获取单元可视化配置信息 {@link DescribeEdgeUnitApplicationVisualizationRequest} {@link DescribeEdgeUnitApplicationVisualizationResponse} */
   DescribeEdgeUnitApplicationVisualization(data: DescribeEdgeUnitApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationVisualizationResponse>;
-  /** 获取应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlRequest} {@link DescribeEdgeUnitApplicationYamlResponse} */
+  /** @deprecated 获取应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlRequest} {@link DescribeEdgeUnitApplicationYamlResponse} */
   DescribeEdgeUnitApplicationYaml(data: DescribeEdgeUnitApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationYamlResponse>;
-  /** 检查单元应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlErrorRequest} {@link DescribeEdgeUnitApplicationYamlErrorResponse} */
+  /** @deprecated 检查单元应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlErrorRequest} {@link DescribeEdgeUnitApplicationYamlErrorResponse} */
   DescribeEdgeUnitApplicationYamlError(data: DescribeEdgeUnitApplicationYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationYamlErrorResponse>;
   /** 获取单元下应用列表 {@link DescribeEdgeUnitApplicationsRequest} {@link DescribeEdgeUnitApplicationsResponse} */
   DescribeEdgeUnitApplications(data: DescribeEdgeUnitApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationsResponse>;
-  /** 查询边缘集群详情 {@link DescribeEdgeUnitCloudRequest} {@link DescribeEdgeUnitCloudResponse} */
+  /** @deprecated 查询边缘集群详情 {@link DescribeEdgeUnitCloudRequest} {@link DescribeEdgeUnitCloudResponse} */
   DescribeEdgeUnitCloud(data: DescribeEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitCloudResponse>;
   /** 查询边缘单元Grid列表 {@link DescribeEdgeUnitDeployGridRequest} {@link DescribeEdgeUnitDeployGridResponse} */
   DescribeEdgeUnitDeployGrid(data: DescribeEdgeUnitDeployGridRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitDeployGridResponse>;
@@ -3103,9 +3103,9 @@ declare interface Iecp {
   GetMarketComponent(data: GetMarketComponentRequest, config?: AxiosRequestConfig): AxiosPromise<GetMarketComponentResponse>;
   /** 获取组件市场组件列表 {@link GetMarketComponentListRequest} {@link GetMarketComponentListResponse} */
   GetMarketComponentList(data: GetMarketComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<GetMarketComponentListResponse>;
-  /** 修改应用模板基本信息 {@link ModifyApplicationBasicInfoRequest} {@link ModifyApplicationBasicInfoResponse} */
+  /** @deprecated 修改应用模板基本信息 {@link ModifyApplicationBasicInfoRequest} {@link ModifyApplicationBasicInfoResponse} */
   ModifyApplicationBasicInfo(data: ModifyApplicationBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationBasicInfoResponse>;
-  /** 修改应用模板配置 {@link ModifyApplicationVisualizationRequest} {@link ModifyApplicationVisualizationResponse} */
+  /** @deprecated 修改应用模板配置 {@link ModifyApplicationVisualizationRequest} {@link ModifyApplicationVisualizationResponse} */
   ModifyApplicationVisualization(data: ModifyApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationVisualizationResponse>;
   /** 修改ConfigMap {@link ModifyConfigMapRequest} {@link ModifyConfigMapResponse} */
   ModifyConfigMap(data: ModifyConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigMapResponse>;

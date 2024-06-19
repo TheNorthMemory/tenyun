@@ -3686,6 +3686,16 @@ declare interface DescribeTasksCostInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTasksOverviewRequest {
+}
+
+declare interface DescribeTasksOverviewResponse {
+  /** 各类任务个数大于0 */
+  TasksOverview: TasksOverview;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTasksRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -4727,6 +4737,8 @@ declare interface Dlc {
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 查询任务消耗 {@link DescribeTasksCostInfoRequest} {@link DescribeTasksCostInfoResponse} */
   DescribeTasksCostInfo(data?: DescribeTasksCostInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksCostInfoResponse>;
+  /** 查看任务概览页 {@link DescribeTasksOverviewRequest} {@link DescribeTasksOverviewResponse} */
+  DescribeTasksOverview(data?: DescribeTasksOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksOverviewResponse>;
   /** 查询开通的第三方平台访问用户信息 {@link DescribeThirdPartyAccessUserRequest} {@link DescribeThirdPartyAccessUserResponse} */
   DescribeThirdPartyAccessUser(data?: DescribeThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAccessUserResponse>;
   /** 查询可更新配置的引擎列表 {@link DescribeUpdatableDataEnginesRequest} {@link DescribeUpdatableDataEnginesResponse} */

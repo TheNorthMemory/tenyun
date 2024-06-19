@@ -1681,7 +1681,7 @@ declare interface DescribeImageFilterPersonalRequest {
 
 declare interface DescribeImageFilterPersonalResponse {
   /** 返回tag镜像内容相同的tag列表 */
-  Data: SameImagesResp;
+  Data?: SameImagesResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

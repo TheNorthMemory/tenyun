@@ -1840,8 +1840,10 @@ declare interface UpstreamHealthCheckConfig {
   HealthyHttpStatuses?: number[] | null;
   /** 异常HTTP状态码 */
   UnhealthyHttpStatuses?: number[] | null;
-  /** 健康检查屏蔽权重为0的节点 */
+  /** 健康检查监控上报的数据屏蔽权重为0的节点 */
   IgnoreZeroWeightNodes?: boolean | null;
+  /** 健康检查支持权重为0节点 */
+  ZeroWeightHeathCheck?: boolean | null;
 }
 
 /** 私有网络信息 */

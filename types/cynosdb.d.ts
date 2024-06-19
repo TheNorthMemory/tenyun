@@ -260,6 +260,8 @@ declare interface BizTaskInfo {
   AppId?: number;
   /** 集群id */
   ClusterId?: string;
+  /** 地域 */
+  Region?: string | null;
   /** 任务创建时间 */
   CreateTime?: string;
   /** 延迟执行时间 */
@@ -322,6 +324,8 @@ declare interface BizTaskInfo {
   ModifyInstanceParamsData?: BizTaskModifyParamsData | null;
   /** 维护时间 */
   TaskMaintainInfo?: TaskMaintainInfo | null;
+  /** 实例日志投递信息 */
+  InstanceCLSDeliveryInfos?: InstanceCLSDeliveryInfo[] | null;
 }
 
 /** 实例参数修改任务详情 */
@@ -982,6 +986,22 @@ declare interface ErrorLogItemExport {
   Level?: string | null;
   /** 日志内容 */
   Content?: string | null;
+}
+
+/** 交换实例信息 */
+declare interface ExchangeInstanceInfo {
+  /** 源实例信息 */
+  SrcInstanceInfo?: RollbackInstanceInfo | null;
+  /** 目标实例信息 */
+  DstInstanceInfo?: RollbackInstanceInfo | null;
+}
+
+/** 交换RO组信息 */
+declare interface ExchangeRoGroupInfo {
+  /** 源RO组信息 */
+  SrcRoGroupInfo?: RollbackRoGroupInfo | null;
+  /** 目标RO组信息 */
+  DstRoGroupInfo?: RollbackRoGroupInfo | null;
 }
 
 /** 账号，包含accountName和host */
@@ -1716,6 +1736,8 @@ declare interface RollbackData {
   RollbackTables?: RollbackTable[] | null;
   /** 备份文件名称 */
   BackupFileName?: string | null;
+  /** 回档进程 */
+  RollbackProcess?: RollbackProcessInfo | null;
 }
 
 /** 回滚数据库信息 */
@@ -1724,6 +1746,66 @@ declare interface RollbackDatabase {
   OldDatabase: string;
   /** 新数据库名称 */
   NewDatabase: string;
+}
+
+/** 回档实例信息 */
+declare interface RollbackInstanceInfo {
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** 集群名称 */
+  ClusterName?: string | null;
+  /** vpc信息 */
+  UniqVpcId?: string | null;
+  /** 子网信息 */
+  UniqSubnetId?: string | null;
+  /** vip信息 */
+  Vip?: string | null;
+  /** vport信息 */
+  Vport?: number | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** 状态 */
+  Status?: string | null;
+  /** cpu大小 */
+  Cpu?: number | null;
+  /** 内存大小 */
+  Mem?: number | null;
+  /** 存储大小 */
+  StorageLimit?: number | null;
+}
+
+/** 回档进度详情 */
+declare interface RollbackProcessInfo {
+  /** 是否可以交换vip */
+  IsVipSwitchable?: boolean | null;
+  /** vip可交换时间 */
+  VipSwitchableTime?: string | null;
+  /** 交换实例列表 */
+  ExchangeInstanceInfoList?: ExchangeInstanceInfo[] | null;
+  /** 交换RO组列表 */
+  ExchangeRoGroupInfoList?: ExchangeRoGroupInfo[] | null;
+  /** 当前步骤 */
+  CurrentStep?: string | null;
+  /** 当前步骤进度 */
+  CurrentStepProgress?: number | null;
+  /** 当前步骤剩余时间 */
+  CurrentStepRemainingTime?: string | null;
+}
+
+/** 回档RO组信息 */
+declare interface RollbackRoGroupInfo {
+  /** 实例组ID */
+  InstanceGroupId?: string | null;
+  /** vpc信息 */
+  UniqVpcId?: string | null;
+  /** 子网信息 */
+  UniqSubnetId?: string | null;
+  /** vip信息 */
+  Vip?: string | null;
+  /** vport信息 */
+  Vport?: number | null;
 }
 
 /** 回档数据库及表 */

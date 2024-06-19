@@ -5772,7 +5772,7 @@ declare interface DescribePkgsRequest {
 
 declare interface DescribePkgsResponse {
   /** 符合查询程序包信息列表 */
-  Result: PkgList;
+  Result?: PkgList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7519,7 +7519,7 @@ declare interface Tsf {
   DescribeApplication(data: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
   /** 获取应用列表其它字段 {@link DescribeApplicationAttributeRequest} {@link DescribeApplicationAttributeResponse} */
   DescribeApplicationAttribute(data: DescribeApplicationAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationAttributeResponse>;
-  /** 查询应用关联日志配置项信息 {@link DescribeApplicationBusinessLogConfigRequest} {@link DescribeApplicationBusinessLogConfigResponse} */
+  /** @deprecated 查询应用关联日志配置项信息 {@link DescribeApplicationBusinessLogConfigRequest} {@link DescribeApplicationBusinessLogConfigResponse} */
   DescribeApplicationBusinessLogConfig(data: DescribeApplicationBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationBusinessLogConfigResponse>;
   /** 获取应用列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;

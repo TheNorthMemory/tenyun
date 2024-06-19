@@ -3303,7 +3303,7 @@ declare interface DescribeDSPACategoryTreeWithRulesRequest {
 
 declare interface DescribeDSPACategoryTreeWithRulesResponse {
   /** 分类树json */
-  ResultJson: string | null;
+  ResultJson?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3603,9 +3603,9 @@ declare interface DescribeDSPALevelDetailRequest {
 
 declare interface DescribeDSPALevelDetailResponse {
   /** 符合条件的敏感数据分级标识记录 */
-  Items: LevelItem[];
+  Items?: LevelItem[];
   /** 符合条件的敏感数据分级标识记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3619,9 +3619,9 @@ declare interface DescribeDSPALevelGroupsRequest {
 
 declare interface DescribeDSPALevelGroupsResponse {
   /** 符合条件的敏感数据分级标识记录 */
-  Items: DspaDiscoveryLevelDetail[] | null;
+  Items?: DspaDiscoveryLevelDetail[] | null;
   /** 符合条件的敏感数据分级标识记录数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

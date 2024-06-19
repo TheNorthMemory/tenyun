@@ -1212,19 +1212,19 @@ declare namespace V20180525 {
   /** 容器状态 */
   interface ContainerState {
     /** 容器运行开始时间 */
-    StartTime: string | null;
+    StartTime?: string | null;
     /** 容器状态：created, running, exited, unknown */
-    State: string;
+    State?: string;
     /** 容器运行结束时间 */
-    FinishTime: string | null;
+    FinishTime?: string | null;
     /** 容器运行退出码 */
-    ExitCode: number | null;
+    ExitCode?: number | null;
     /** 容器状态 Reason */
-    Reason: string | null;
+    Reason?: string | null;
     /** 容器状态信息 */
-    Message: string | null;
+    Message?: string | null;
     /** 容器重启次数 */
-    RestartCount: number | null;
+    RestartCount?: number | null;
   }
 
   /** 集群中控制器的状态描述 */
@@ -1688,25 +1688,25 @@ declare namespace V20180525 {
   /** 镜像缓存的信息 */
   interface ImageCache {
     /** 镜像缓存Id */
-    ImageCacheId: string;
+    ImageCacheId?: string;
     /** 镜像缓存名称 */
-    ImageCacheName: string;
+    ImageCacheName?: string;
     /** 镜像缓存大小。单位：GiB */
-    ImageCacheSize: number;
+    ImageCacheSize?: number;
     /** 镜像缓存包含的镜像列表 */
-    Images: string[];
+    Images?: string[];
     /** 创建时间 */
-    CreationTime: string;
+    CreationTime?: string;
     /** 到期时间 */
-    ExpireDateTime: string;
+    ExpireDateTime?: string;
     /** 镜像缓存事件信息 */
-    Events: ImageCacheEvent[];
+    Events?: ImageCacheEvent[];
     /** 最新一次匹配到镜像缓存的时间 */
-    LastMatchedTime: string;
+    LastMatchedTime?: string;
     /** 镜像缓存对应的快照Id */
-    SnapshotId: string;
+    SnapshotId?: string;
     /** 镜像缓存状态，可能取值：Pending：创建中Ready：创建完成Failed：创建失败Updating：更新中UpdateFailed：更新失败只有状态为Ready时，才能正常使用镜像缓存 */
-    Status: string;
+    Status?: string;
   }
 
   /** 镜像缓存的事件 */
@@ -2167,6 +2167,28 @@ declare namespace V20180525 {
     Status: string | null;
     /** 更新时间 */
     UpdatedTime: string | null;
+  }
+
+  /** Pod计费信息 */
+  interface PodChargeInfo {
+    /** Pod计费开始时间 */
+    StartTime?: string;
+    /** Pod的Uid */
+    Uid?: string;
+    /** Pod的CPU */
+    Cpu?: number;
+    /** Pod的内存 */
+    Memory?: number;
+    /** Pod类型：intel、amd、v100、t4、a10\*gnv4、a10\*gnv4v等。 */
+    Type?: string;
+    /** Pod是GPU时，表示GPU卡数 */
+    Gpu?: string | null;
+    /** 计费类型PREPAID：Pod调度到包月超级节点POSTPAID_BY_HOUR：按量计费RESERVED_INSTANCE：上个周期被预留券抵扣SPOT：竞价实例TPOD：特惠实例 */
+    ChargeType?: string;
+    /** 命名空间 */
+    Namespace?: string;
+    /** Pod名称 */
+    Name?: string;
   }
 
   /** 可被预留券抵扣的 Pod 某种规格的抵扣率 */
@@ -3814,13 +3836,13 @@ declare namespace V20180525 {
   interface CreateImageCacheRequest {
     /** 用于制作镜像缓存的容器镜像列表 */
     Images: string[];
-    /** 实例所属子网Id */
+    /** 实例所属子网 ID */
     SubnetId: string;
-    /** 实例所属VPC Id */
+    /** 实例所属 VPC ID */
     VpcId: string;
     /** 镜像缓存名称 */
     ImageCacheName?: string;
-    /** 安全组Id */
+    /** 安全组 ID */
     SecurityGroupIds?: string[];
     /** 镜像仓库凭证数组 */
     ImageRegistryCredentials?: ImageRegistryCredential[];
@@ -3844,7 +3866,7 @@ declare namespace V20180525 {
 
   interface CreateImageCacheResponse {
     /** 镜像缓存Id */
-    ImageCacheId: string;
+    ImageCacheId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5188,9 +5210,9 @@ declare namespace V20180525 {
 
   interface DescribeEnableVpcCniProgressResponse {
     /** 任务进度的描述：Running/Succeed/Failed */
-    Status: string;
+    Status?: string;
     /** 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败 */
-    ErrorMessage: string | null;
+    ErrorMessage?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5311,6 +5333,8 @@ declare namespace V20180525 {
     SubnetIds?: string[] | null;
     /** 固定ip回收时间，已安装eniipamd组件才会有值 */
     ClaimExpiredDuration?: string | null;
+    /** 是否开启了中继网卡模式 */
+    EnableTrunkingENI?: boolean | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5330,9 +5354,9 @@ declare namespace V20180525 {
 
   interface DescribeImageCachesResponse {
     /** 镜像缓存总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 镜像缓存信息列表 */
-    ImageCaches: ImageCache[];
+    ImageCaches?: ImageCache[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5359,6 +5383,24 @@ declare namespace V20180525 {
   interface DescribeLogSwitchesResponse {
     /** 集群日志开关集合 */
     SwitchSet?: Switch[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribePodChargeInfoRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 命名空间 */
+    Namespace?: string;
+    /** Pod名称 */
+    Name?: string;
+    /** Pod的Uid */
+    Uids?: string[];
+  }
+
+  interface DescribePodChargeInfoResponse {
+    /** Pod计费信息 */
+    ChargeInfoSet?: PodChargeInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6210,9 +6252,9 @@ declare namespace V20180525 {
 
   interface GetMostSuitableImageCacheResponse {
     /** 是否有匹配的镜像缓存 */
-    Found: boolean;
+    Found?: boolean;
     /** 匹配的镜像缓存 */
-    ImageCache: ImageCache | null;
+    ImageCache?: ImageCache | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6954,7 +6996,7 @@ declare namespace V20180525 {
   }
 
   interface UpdateImageCacheRequest {
-    /** 镜像缓存Id */
+    /** 镜像缓存ID */
     ImageCacheId: string;
     /** 镜像缓存名称 */
     ImageCacheName?: string;
@@ -7323,6 +7365,8 @@ declare interface Tke {
   DescribeImages(data: V20180525.DescribeImagesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeImagesResponse>;
   /** 查询集群日志开关列表 {@link V20180525.DescribeLogSwitchesRequest} {@link V20180525.DescribeLogSwitchesResponse} */
   DescribeLogSwitches(data: V20180525.DescribeLogSwitchesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogSwitchesResponse>;
+  /** 查询超级节点上正在运行中Pod的计费信息 {@link V20180525.DescribePodChargeInfoRequest} {@link V20180525.DescribePodChargeInfoResponse} */
+  DescribePodChargeInfo(data: V20180525.DescribePodChargeInfoRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribePodChargeInfoResponse>;
   /** 查询Pod 抵扣率 {@link V20180525.DescribePodDeductionRateRequest} {@link V20180525.DescribePodDeductionRateResponse} */
   DescribePodDeductionRate(data: V20180525.DescribePodDeductionRateRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribePodDeductionRateResponse>;
   /** 根据规格查询 Pod 信息 {@link V20180525.DescribePodsBySpecRequest} {@link V20180525.DescribePodsBySpecResponse} */

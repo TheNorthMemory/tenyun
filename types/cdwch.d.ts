@@ -655,7 +655,7 @@ declare interface DescribeInstanceClustersRequest {
 
 declare interface DescribeInstanceClustersResponse {
   /** cluster列表 */
-  Clusters: ClusterInfo[];
+  Clusters?: ClusterInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -669,13 +669,13 @@ declare interface DescribeInstanceKeyValConfigsRequest {
 
 declare interface DescribeInstanceKeyValConfigsResponse {
   /** 参数列表 */
-  ConfigItems: InstanceConfigInfo[];
+  ConfigItems?: InstanceConfigInfo[];
   /** 未配置的参数列表 */
-  UnConfigItems: InstanceConfigInfo[] | null;
+  UnConfigItems?: InstanceConfigInfo[] | null;
   /** 配置的多层级参数列表 */
-  MapConfigItems: MapConfigItem[] | null;
+  MapConfigItems?: MapConfigItem[] | null;
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -725,7 +725,7 @@ declare interface DescribeInstanceShardsRequest {
 
 declare interface DescribeInstanceShardsResponse {
   /** 实例shard信息 */
-  InstanceShardsList: string | null;
+  InstanceShardsList?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -825,9 +825,9 @@ declare interface ModifyClusterConfigsRequest {
 
 declare interface ModifyClusterConfigsResponse {
   /** 流程相关信息 */
-  FlowId: number;
+  FlowId?: number;
   /** 错误信息 */
-  ErrorMsg: string;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -999,7 +999,7 @@ declare interface Cdwch {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** vcluster列表 {@link DescribeInstanceClustersRequest} {@link DescribeInstanceClustersResponse} */
   DescribeInstanceClusters(data: DescribeInstanceClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceClustersResponse>;
-  /** 获取参数列表 {@link DescribeInstanceKeyValConfigsRequest} {@link DescribeInstanceKeyValConfigsResponse} */
+  /** 在集群详情页面获取所有参数列表 {@link DescribeInstanceKeyValConfigsRequest} {@link DescribeInstanceKeyValConfigsResponse} */
   DescribeInstanceKeyValConfigs(data: DescribeInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceKeyValConfigsResponse>;
   /** 获取实例节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
   DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;

@@ -150,6 +150,20 @@ declare interface Context {
   Content?: string | null;
 }
 
+/** 坐标 */
+declare interface Coord {
+  /** 横坐标 */
+  X?: number;
+  /** 纵坐标 */
+  Y?: number;
+}
+
+/** 创建智能文档解析任务的配置信息 */
+declare interface CreateReconstructDocumentFlowConfig {
+  /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为1 */
+  TableResultType?: string;
+}
+
 /** 临时密钥结构 */
 declare interface Credentials {
   /** token */
@@ -158,6 +172,44 @@ declare interface Credentials {
   TmpSecretId?: string | null;
   /** 临时证书密钥Key */
   TmpSecretKey?: string | null;
+}
+
+/** 文档元素字段 */
+declare interface DocumentElement {
+  /** 文档元素索引 */
+  Index?: number | null;
+  /** 元素类型，包括paragraph、table、formula、figure、title、header、footer、figure_text */
+  Type?: string | null;
+  /** 元素内容，当type为figure或formula(公式识别关闭)时该字段内容为图片的位置 */
+  Text?: string | null;
+  /** 元素坐标，左上角(x1, y1)，右上角(x2, y2)，右下角(x3, y3)，左下角(x4, y4) */
+  Polygon?: Polygon | null;
+  /** 元素层级 */
+  Level?: number | null;
+  /** 入参开启EnableInsetImage后返回，表示在InsetImagePackage中的内嵌图片名称 */
+  InsetImageName?: string | null;
+  /** 嵌套的文档元素信息，一般包含的是文档内嵌入图片的文字识别结果 */
+  Elements?: DocumentElement[] | null;
+}
+
+/** 单页文档识别的内容 */
+declare interface DocumentRecognizeInfo {
+  /** 输入PDF文件的页码，从1开始。输入图片的话值始终为1 */
+  PageNumber?: number | null;
+  /** 旋转角度 */
+  Angle?: number | null;
+  /** AI算法识别处理后的图片高度 */
+  Height?: number | null;
+  /** AI算法识别处理后的图片宽度 */
+  Width?: number | null;
+  /** 图片的原始高度，输入PDF文件则表示单页PDF转图片之后的图片高度 */
+  OriginHeight?: number | null;
+  /** 图片的原始宽度，输入PDF文件则表示单页PDF转图片之后的图片宽度 */
+  OriginWidth?: number | null;
+  /** 文档元素信息 */
+  Elements?: DocumentElement[] | null;
+  /** 旋转角度 */
+  RotatedAngle?: number | null;
 }
 
 /** 向量 */
@@ -464,6 +516,18 @@ declare interface Option {
   FileType?: string | null;
 }
 
+/** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */
+declare interface Polygon {
+  /** 左上顶点坐标 */
+  LeftTop?: Coord;
+  /** 右上顶点坐标 */
+  RightTop?: Coord;
+  /** 右下顶点坐标 */
+  RightBottom?: Coord;
+  /** 左下顶点坐标 */
+  LeftBottom?: Coord;
+}
+
 /** 执行过程信息记录 */
 declare interface Procedure {
   /** 执行过程英语名 */
@@ -532,6 +596,18 @@ declare interface QAQuery {
   Source?: number;
   /** 查询答案 */
   QueryAnswer?: string;
+}
+
+/** ReconstructDocument配置选项 */
+declare interface ReconstructDocumentConfig {
+  /** 生成的Markdown中是否嵌入图片 */
+  EnableInsetImage?: boolean;
+}
+
+/** 文档解析失败记录 */
+declare interface ReconstructDocumentFailedPage {
+  /** 失败页码 */
+  PageNumber?: number | null;
 }
 
 /** 引用来源详情 */
@@ -888,6 +964,26 @@ declare interface CreateQARequest {
 declare interface CreateQAResponse {
   /** 问答ID */
   QaBizId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateReconstructDocumentFlowRequest {
+  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  FileBase64?: string;
+  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  FileUrl?: string;
+  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
+  FileStartPageNumber?: number;
+  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。 */
+  FileEndPageNumber?: number;
+  /** 创建智能文档识别任务配置信息 */
+  Config?: CreateReconstructDocumentFlowConfig;
+}
+
+declare interface CreateReconstructDocumentFlowResponse {
+  /** 任务唯一id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1482,6 +1578,22 @@ declare interface GetMsgRecordResponse {
   Records?: MsgRecord[];
   /** session 清除关联上下文时间, 单位 ms */
   SessionDisassociatedTimestamp?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetReconstructDocumentResultRequest {
+  /** 任务唯一id */
+  TaskId: string;
+}
+
+declare interface GetReconstructDocumentResultResponse {
+  /** 任务状态: Success->执行完成；Processing->执行中；Failed->执行失败；WaitExecute->等待执行； */
+  Status?: string;
+  /** 输入文件中嵌入的图片中文字内容的识别结果，存储在腾讯云cos的下载地址 */
+  DocumentRecognizeResultUrl?: string;
+  /** 还原失败的页 */
+  FailedPages?: ReconstructDocumentFailedPage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2156,6 +2268,30 @@ declare interface RateMsgRecordResponse {
   RequestId?: string;
 }
 
+declare interface ReconstructDocumentRequest {
+  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  FileBase64?: string;
+  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  FileUrl?: string;
+  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
+  FileStartPageNumber?: number;
+  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。单次调用，最多支持10页pdf的智能识别。 */
+  FileEndPageNumber?: number;
+  /** 配置选项，支持配置是否在生成的Markdown中是否嵌入图片 */
+  Config?: ReconstructDocumentConfig;
+}
+
+declare interface ReconstructDocumentResponse {
+  /** 识别生成的Markdown文件base64编码的字符串 */
+  MarkdownBase64?: string | null;
+  /** 输入文件中嵌入的图片放在一个文件夹中打包为.zip压缩文件，识别生成的Markdown文件通过路径关联插入本文件夹中的图片。 */
+  InsetImagePackage?: string | null;
+  /** 输入文件中嵌入的图片中文字内容的识别结果 */
+  DocumentRecognizeInfo?: DocumentRecognizeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetSessionRequest {
   /** 会话ID */
   SessionId: string;
@@ -2325,6 +2461,8 @@ declare interface Lke {
   CreateQA(data: CreateQARequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAResponse>;
   /** 创建QA分类 {@link CreateQACateRequest} {@link CreateQACateResponse} */
   CreateQACate(data: CreateQACateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQACateResponse>;
+  /** 创建智能文档识别任务 {@link CreateReconstructDocumentFlowRequest} {@link CreateReconstructDocumentFlowResponse} */
+  CreateReconstructDocumentFlow(data?: CreateReconstructDocumentFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReconstructDocumentFlowResponse>;
   /** 创建拒答问题 {@link CreateRejectedQuestionRequest} {@link CreateRejectedQuestionResponse} */
   CreateRejectedQuestion(data: CreateRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRejectedQuestionResponse>;
   /** 创建发布 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */
@@ -2381,6 +2519,8 @@ declare interface Lke {
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** 获取聊天历史请求 {@link GetMsgRecordRequest} {@link GetMsgRecordResponse} */
   GetMsgRecord(data: GetMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<GetMsgRecordResponse>;
+  /** 查询智能文档识别任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */
+  GetReconstructDocumentResult(data: GetReconstructDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetReconstructDocumentResultResponse>;
   /** 查询任务状态 {@link GetTaskStatusRequest} {@link GetTaskStatusResponse} */
   GetTaskStatus(data: GetTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStatusResponse>;
   /** 获取ws token {@link GetWsTokenRequest} {@link GetWsTokenResponse} */
@@ -2445,6 +2585,8 @@ declare interface Lke {
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 评价消息 {@link RateMsgRecordRequest} {@link RateMsgRecordResponse} */
   RateMsgRecord(data: RateMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<RateMsgRecordResponse>;
+  /** 智能文档识别 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
+  ReconstructDocument(data?: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
   /** 重置会话 {@link ResetSessionRequest} {@link ResetSessionResponse} */
   ResetSession(data: ResetSessionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSessionResponse>;
   /** 文档审核重试 {@link RetryDocAuditRequest} {@link RetryDocAuditResponse} */

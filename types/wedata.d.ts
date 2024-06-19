@@ -4008,6 +4008,8 @@ declare interface TaskAlarmInfo {
   Description?: string | null;
   /** 飞书群Hook地址，多个hook地址使用,隔开 */
   LarkWebHooks?: string | null;
+  /** 钉钉群Hook地址，多个hook地址使用,隔开 */
+  DingDingWebHooks?: string | null;
 }
 
 /** 周期单位统计 */
@@ -8123,6 +8125,10 @@ declare interface DescribeWorkflowTaskCountResponse {
 }
 
 declare interface DiagnoseProRequest {
+  /** 查询条件（当前接口TaskId和CurRunDate需要填充在该字段方可诊断） */
+  SearchCondition: InstanceApiOpsRequest;
+  /** 项目id */
+  ProjectId: string;
   /** 实例列表 */
   Instances?: InstanceOpsDto[];
   /** 检查父任务类型, true: 检查父任务; false: 不检查父任务 */
@@ -8135,16 +8141,12 @@ declare interface DiagnoseProRequest {
   SkipEventListening?: boolean;
   /** 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目 */
   SonInstanceType?: string;
-  /** 查询条件（当前接口TaskId和CurRunDate需要填充在该字段方可诊断） */
-  SearchCondition?: InstanceApiOpsRequest;
   /** 访问类型 */
   OptType?: string;
   /** 操作者名称 */
   OperatorName?: string;
   /** 操作者id */
   OperatorId?: string;
-  /** 项目id */
-  ProjectId?: string;
   /** 项目标志 */
   ProjectIdent?: string;
   /** 项目名称 */
@@ -10022,7 +10024,7 @@ declare interface Wedata {
   /** 查询工作流任务数 {@link DescribeWorkflowTaskCountRequest} {@link DescribeWorkflowTaskCountResponse} */
   DescribeWorkflowTaskCount(data: DescribeWorkflowTaskCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowTaskCountResponse>;
   /** 实例诊断信息-新 {@link DiagnoseProRequest} {@link DiagnoseProResponse} */
-  DiagnosePro(data?: DiagnoseProRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseProResponse>;
+  DiagnosePro(data: DiagnoseProRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseProResponse>;
   /** 调试运行集成任务 {@link DryRunDIOfflineTaskRequest} {@link DryRunDIOfflineTaskResponse} */
   DryRunDIOfflineTask(data: DryRunDIOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DryRunDIOfflineTaskResponse>;
   /** 编排空间批量操作页面查找全部的文件夹 {@link FindAllFolderRequest} {@link FindAllFolderResponse} */

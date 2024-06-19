@@ -2411,13 +2411,13 @@ declare interface DescribeNatFwInfoCountRequest {
 
 declare interface DescribeNatFwInfoCountResponse {
   /** 返回参数 */
-  ReturnMsg: string | null;
+  ReturnMsg?: string | null;
   /** 当前租户的nat实例个数 */
-  NatFwInsCount: number | null;
+  NatFwInsCount?: number | null;
   /** 当前租户接入子网个数 */
-  SubnetCount: number | null;
+  SubnetCount?: number | null;
   /** 打开开关个数 */
-  OpenSwitchCount: number | null;
+  OpenSwitchCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
