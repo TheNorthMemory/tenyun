@@ -34,6 +34,22 @@ declare interface Asset {
   DatasourceId?: number;
 }
 
+/** spark session batch SQL的消耗信息 */
+declare interface BatchSQLCostInfo {
+  /** 任务id */
+  BatchId?: string | null;
+  /** 引擎名称 */
+  DataEngineName?: string | null;
+  /** 引擎id */
+  DataEngineId?: string | null;
+  /** 本次消耗，单位cu */
+  Cost?: number | null;
+  /** 时间开销，秒 */
+  TimeCost?: number | null;
+  /** 操作者 */
+  Operator?: string | null;
+}
+
 /** SparkSQL批任务信息 */
 declare interface BatchSqlTask {
   /** SQL子任务唯一标识 */
@@ -3474,6 +3490,18 @@ declare interface DescribeSparkAppTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSparkSessionBatchSQLCostRequest {
+  /** SparkSQL唯一标识 */
+  BatchIds?: string[];
+}
+
+declare interface DescribeSparkSessionBatchSQLCostResponse {
+  /** 任务消耗 */
+  CostInfo?: BatchSQLCostInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSparkSessionBatchSQLRequest {
   /** SparkSQL唯一标识 */
   BatchId: string;
@@ -3687,11 +3715,19 @@ declare interface DescribeTasksCostInfoResponse {
 }
 
 declare interface DescribeTasksOverviewRequest {
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 筛选条件 */
+  Filters?: Filter[];
+  /** 引擎名 */
+  DataEngineName?: string;
 }
 
 declare interface DescribeTasksOverviewResponse {
   /** 各类任务个数大于0 */
-  TasksOverview: TasksOverview;
+  TasksOverview?: TasksOverview;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4717,6 +4753,8 @@ declare interface Dlc {
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
   /** 获取Spark SQL批任务运行状态 {@link DescribeSparkSessionBatchSQLRequest} {@link DescribeSparkSessionBatchSQLResponse} */
   DescribeSparkSessionBatchSQL(data: DescribeSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSQLResponse>;
+  /** 获取Spark SQL批任务消耗 {@link DescribeSparkSessionBatchSQLCostRequest} {@link DescribeSparkSessionBatchSQLCostResponse} */
+  DescribeSparkSessionBatchSQLCost(data?: DescribeSparkSessionBatchSQLCostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSQLCostResponse>;
   /** 查询Spark SQL批任务日志 {@link DescribeSparkSessionBatchSqlLogRequest} {@link DescribeSparkSessionBatchSqlLogResponse} */
   DescribeSparkSessionBatchSqlLog(data: DescribeSparkSessionBatchSqlLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSqlLogResponse>;
   /** 查询结果存储位置 {@link DescribeStoreLocationRequest} {@link DescribeStoreLocationResponse} */

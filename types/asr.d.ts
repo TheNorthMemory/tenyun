@@ -586,7 +586,7 @@ declare interface VoicePrintCountResponse {
 
 declare interface VoicePrintDeleteRequest {
   /** 说话人id，说话人唯一标识 */
-  VoicePrintId: string;
+  VoicePrintId?: string;
 }
 
 declare interface VoicePrintDeleteResponse {
@@ -700,7 +700,7 @@ declare interface Asr {
   /** 说话人注册数量统计 {@link VoicePrintCountRequest} {@link VoicePrintCountResponse} */
   VoicePrintCount(data?: VoicePrintCountRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintCountResponse>;
   /** 说话人删除 {@link VoicePrintDeleteRequest} {@link VoicePrintDeleteResponse} */
-  VoicePrintDelete(data: VoicePrintDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintDeleteResponse>;
+  VoicePrintDelete(data?: VoicePrintDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintDeleteResponse>;
   /** 说话人注册 {@link VoicePrintEnrollRequest} {@link VoicePrintEnrollResponse} */
   VoicePrintEnroll(data: VoicePrintEnrollRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintEnrollResponse>;
   /** 说话人更新 {@link VoicePrintUpdateRequest} {@link VoicePrintUpdateResponse} */

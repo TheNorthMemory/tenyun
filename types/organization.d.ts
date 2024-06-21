@@ -414,6 +414,16 @@ declare interface Tags {
   TagValue: string | null;
 }
 
+declare interface AcceptJoinShareUnitInvitationRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+}
+
+declare interface AcceptJoinShareUnitInvitationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddOrganizationMemberEmailRequest {
   /** 成员Uin。 */
   MemberUin: number;
@@ -1364,6 +1374,16 @@ declare interface QuitOrganizationResponse {
   RequestId?: string;
 }
 
+declare interface RejectJoinShareUnitInvitationRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+}
+
+declare interface RejectJoinShareUnitInvitationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateOrganizationIdentityRequest {
   /** 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityId: number;
@@ -1795,6 +1815,8 @@ declare namespace V20181225 {
 /** {@link Organization 集团账号管理} */
 declare interface Organization {
   (): Versions;
+  /** 接受加入共享单元邀请 {@link AcceptJoinShareUnitInvitationRequest} {@link AcceptJoinShareUnitInvitationResponse} */
+  AcceptJoinShareUnitInvitation(data: AcceptJoinShareUnitInvitationRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptJoinShareUnitInvitationResponse>;
   /** 添加组织成员邮箱 {@link AddOrganizationMemberEmailRequest} {@link AddOrganizationMemberEmailResponse} */
   AddOrganizationMemberEmail(data: AddOrganizationMemberEmailRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationMemberEmailResponse>;
   /** 添加企业组织节点 {@link AddOrganizationNodeRequest} {@link AddOrganizationNodeResponse} */
@@ -1905,6 +1927,8 @@ declare interface Organization {
   MoveOrganizationNodeMembers(data: MoveOrganizationNodeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<MoveOrganizationNodeMembersResponse>;
   /** 退出企业组织 {@link QuitOrganizationRequest} {@link QuitOrganizationResponse} */
   QuitOrganization(data: QuitOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<QuitOrganizationResponse>;
+  /** 拒绝加入共享单元邀请 {@link RejectJoinShareUnitInvitationRequest} {@link RejectJoinShareUnitInvitationResponse} */
+  RejectJoinShareUnitInvitation(data: RejectJoinShareUnitInvitationRequest, config?: AxiosRequestConfig): AxiosPromise<RejectJoinShareUnitInvitationResponse>;
   /** 更新组织身份 {@link UpdateOrganizationIdentityRequest} {@link UpdateOrganizationIdentityResponse} */
   UpdateOrganizationIdentity(data: UpdateOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationIdentityResponse>;
   /** 更新组织成员信息 {@link UpdateOrganizationMemberRequest} {@link UpdateOrganizationMemberResponse} */

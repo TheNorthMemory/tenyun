@@ -4530,6 +4530,32 @@ declare interface RemoveClusterSlaveZoneResponse {
   RequestId?: string;
 }
 
+declare interface RenewClustersRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 续费时长 */
+  TimeSpan: number;
+  /** 时间单位 y,m,d,h,i,s */
+  TimeUnit: string;
+  /** 交易模式 0-下单并支付 1-下单 */
+  DealMode?: number;
+}
+
+declare interface RenewClustersResponse {
+  /** 预付费总订单号 */
+  BigDealIds: string[] | null;
+  /** 退款订单号 */
+  DealNames: string[] | null;
+  /** 冻结流水，一次开通一个冻结流水 */
+  TranId: string | null;
+  /** 每个订单号对应的发货资源id列表 */
+  ResourceIds: string[] | null;
+  /** 集群id列表 */
+  ClusterIds: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetAccountPasswordRequest {
   /** 数据库账号名 */
   AccountName: string;
@@ -5175,6 +5201,8 @@ declare interface Cynosdb {
   ReloadBalanceProxyNode(data: ReloadBalanceProxyNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadBalanceProxyNodeResponse>;
   /** 关闭多可用区部署 {@link RemoveClusterSlaveZoneRequest} {@link RemoveClusterSlaveZoneResponse} */
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
+  /** 续费集群 {@link RenewClustersRequest} {@link RenewClustersResponse} */
+  RenewClusters(data: RenewClustersRequest, config?: AxiosRequestConfig): AxiosPromise<RenewClustersResponse>;
   /** 修改数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
   /** 重启实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */

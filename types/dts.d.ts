@@ -2807,20 +2807,6 @@ declare namespace V20180330 {
     TableNames?: string[] | null;
   }
 
-  /** 数据订阅地域售卖信息 */
-  interface SubscribeRegionConf {
-    /** 地域名称，如广州 */
-    RegionName: string | null;
-    /** 地区标识，如ap-guangzhou */
-    Region: string | null;
-    /** 地域名称，如华南地区 */
-    Area: string | null;
-    /** 是否为默认地域，0 - 不是，1 - 是的 */
-    IsDefaultRegion: number | null;
-    /** 当前地域的售卖情况，1 - 正常， 2-灰度，3 - 停售 */
-    Status: number | null;
-  }
-
   /** 标签过滤 */
   interface TagFilter {
     /** 标签键值 */
@@ -3005,18 +2991,6 @@ declare namespace V20180330 {
     TotalCount: number;
     /** 任务详情数组 */
     JobList: MigrateJobInfo[];
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
-  interface DescribeRegionConfRequest {
-  }
-
-  interface DescribeRegionConfResponse {
-    /** 可售卖地域的数量 */
-    TotalCount?: number;
-    /** 可售卖地域详情 */
-    Items?: SubscribeRegionConf[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3435,8 +3409,6 @@ declare interface Dts {
   DescribeMigrateCheckJob(data: V20180330.DescribeMigrateCheckJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeMigrateCheckJobResponse>;
   /** 查询数据迁移任务 {@link V20180330.DescribeMigrateJobsRequest} {@link V20180330.DescribeMigrateJobsResponse} */
   DescribeMigrateJobs(data: V20180330.DescribeMigrateJobsRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeMigrateJobsResponse>;
-  /** @deprecated 查询可售卖订阅地域 {@link V20180330.DescribeRegionConfRequest} {@link V20180330.DescribeRegionConfResponse} */
-  DescribeRegionConf(data: V20180330.DescribeRegionConfRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeRegionConfResponse>;
   /** 查询订阅实例配置 {@link V20180330.DescribeSubscribeConfRequest} {@link V20180330.DescribeSubscribeConfResponse} */
   DescribeSubscribeConf(data: V20180330.DescribeSubscribeConfRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeSubscribeConfResponse>;
   /** 获取数据订阅实例列表 {@link V20180330.DescribeSubscribesRequest} {@link V20180330.DescribeSubscribesResponse} */

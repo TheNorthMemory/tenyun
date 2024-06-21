@@ -362,6 +362,14 @@ declare interface KMSInfoDetail {
   KeyOrigin?: string | null;
 }
 
+/** 修改mongoDB实例，请求参数 */
+declare interface ModifyMongoDBParamType {
+  /** 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。 */
+  Key: string;
+  /** 需要修改的参数名称对应的值，请严格参考通过 DescribeInstanceParams 获取的参数对应的值的范围。 */
+  Value: string;
+}
+
 /** 修改数据库地址 */
 declare interface ModifyNetworkAddress {
   /** 新IP地址。 */
@@ -1346,6 +1354,24 @@ declare interface ModifyDBInstanceSpecResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceParamsRequest {
+  /** 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 指定需修改的参数名及值。当前所支持的参数名及对应取值范围，请通过 [DescribeInstanceParams ](https://cloud.tencent.com/document/product/240/65903)获取。 */
+  InstanceParams: ModifyMongoDBParamType[];
+  /** 操作类型，包括：- IMMEDIATELY：立即调整。- DELAY：延迟调整。可选字段，不配置该参数则默认为立即调整。 */
+  ModifyType?: string;
+}
+
+declare interface ModifyInstanceParamsResponse {
+  /** 修改参数配置是否生效。- true：参数修改后的值已生效。- false：执行失败。 */
+  Changed?: boolean;
+  /** 该参数暂时无意义(兼容前端保留)。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OfflineIsolatedDBInstanceRequest {
   /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
   InstanceId: string;
@@ -1977,6 +2003,8 @@ declare interface Mongodb {
   ModifyDBInstanceSecurityGroup(data: ModifyDBInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupResponse>;
   /** 调整云数据库实例配置 {@link ModifyDBInstanceSpecRequest} {@link ModifyDBInstanceSpecResponse} */
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
+  /** 修改mongoDB实例参数 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
+  ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 下线隔离状态的云数据库实例 {@link OfflineIsolatedDBInstanceRequest} {@link OfflineIsolatedDBInstanceResponse} */
   OfflineIsolatedDBInstance(data: OfflineIsolatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineIsolatedDBInstanceResponse>;
   /** 修改实例名称 {@link RenameInstanceRequest} {@link RenameInstanceResponse} */

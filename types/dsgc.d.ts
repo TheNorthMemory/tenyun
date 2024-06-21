@@ -2359,9 +2359,9 @@ declare interface DeleteCosMetaResourceRequest {
 
 declare interface DeleteCosMetaResourceResponse {
   /** 结果集合。 */
-  Results: DspaTaskResult[] | null;
+  Results?: DspaTaskResult[] | null;
   /** DSPA实例ID。 */
-  DspaId: string;
+  DspaId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2437,9 +2437,9 @@ declare interface DeleteDSPAMetaResourceRequest {
 
 declare interface DeleteDSPAMetaResourceResponse {
   /** DSPA实例ID。 */
-  DspaId: string;
+  DspaId?: string;
   /** 删除结果。 */
-  Results: DspaTaskResult[];
+  Results?: DspaTaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3949,9 +3949,9 @@ declare interface GetResourceConnectionStatusRequest {
 
 declare interface GetResourceConnectionStatusResponse {
   /** 连接状态，success -- 连接成功，failed -- 连接失败 */
-  ConnectionStatus: string;
+  ConnectionStatus?: string;
   /** 连接状态的描述信息。 */
-  ConnectionDesc: string | null;
+  ConnectionDesc?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -380,9 +380,9 @@ declare interface DownloadFlowInfo {
 
 /** 创建嵌入式页面url个性化参数 */
 declare interface EmbedUrlOption {
-  /** 合同详情页面是否展示合同控件信息true:允许在合同详情页展示控件false:不允许在合同详情页展示控件默认false,在合同详情页不展示控件 */
+  /** 合同详情预览，允许展示控件信息true：允许在合同详情页展示控件false：（默认）不允许在合同详情页展示控件 */
   ShowFlowDetailComponent?: boolean;
-  /** 模版预览页面是否展示空间信息true:允许在模版预览页展示控件false:不允许在模版预览页展示控件默认false,在模版预览页不展示控件 */
+  /** 模板预览，允许展示模板控件信息 true :允许在模板预览页展示控件 false :（默认）不允许在模板预览页展示控件 */
   ShowTemplateComponent?: boolean;
 }
 
@@ -2398,6 +2398,24 @@ declare interface CreateConsoleLoginUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateFlowBlockchainEvidenceUrlRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 渠道应用标识: Agent.AppId 第三方平台子客企业标识: Agent.ProxyOrganizationOpenId 第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId */
+  Agent: Agent;
+  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  FlowId: string;
+}
+
+declare interface CreateFlowBlockchainEvidenceUrlResponse {
+  /** 二维码图片下载链接，下载链接有效时间5分钟，请尽快下载保存。 */
+  QrCode?: string;
+  /** 查看短链，可直接点击短链查看报告。 */
+  Url?: string;
+  /** 二维码和短链的过期时间戳，过期时间默认为生成链接后7天。 */
+  ExpiredOn?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFlowGroupSignReviewRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -2442,6 +2460,22 @@ declare interface CreateFlowsByTemplatesResponse {
   TaskInfos?: TaskInfo[];
   /** 签署方信息，如角色ID、角色名称等 */
   FlowApprovers?: FlowApproverItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLegalSealQrCodeRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId注:`1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 ``2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。 ``3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 ` */
+  Agent?: Agent;
+  /** 操作人信息 */
+  Operator?: UserInfo;
+  /** 企业信息 */
+  Organization?: OrganizationInfo;
+}
+
+declare interface CreateLegalSealQrCodeResponse {
+  /** 二维码图片base64值 */
+  QrcodeBase64?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4587,10 +4621,14 @@ declare interface Essbasic {
   CreateChannelOrganizationInfoChangeUrl(data: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
+  /** 获取签署存证证书查看二维码 {@link CreateFlowBlockchainEvidenceUrlRequest} {@link CreateFlowBlockchainEvidenceUrlResponse} */
+  CreateFlowBlockchainEvidenceUrl(data: CreateFlowBlockchainEvidenceUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowBlockchainEvidenceUrlResponse>;
   /** 提交合同组签署流程审批结果 {@link CreateFlowGroupSignReviewRequest} {@link CreateFlowGroupSignReviewResponse} */
   CreateFlowGroupSignReview(data: CreateFlowGroupSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupSignReviewResponse>;
   /** 用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
+  /** 获取创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
+  CreateLegalSealQrCode(data?: CreateLegalSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLegalSealQrCodeResponse>;
   /** 创建他方企业自动签授权链接 {@link CreatePartnerAutoSignAuthUrlRequest} {@link CreatePartnerAutoSignAuthUrlResponse} */
   CreatePartnerAutoSignAuthUrl(data: CreatePartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartnerAutoSignAuthUrlResponse>;
   /** 创建企业电子印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */

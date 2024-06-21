@@ -402,7 +402,7 @@ declare interface DynamicPodSpec {
 declare interface EmrListInstance {
   /** 集群ID */
   ClusterId?: string;
-  /** 状态描述 */
+  /** 常见状态描述：集群生产中,集群运行中,集群创建中,集群已关闭,集群已删除 */
   StatusDesc?: string | null;
   /** 集群名字 */
   ClusterName?: string;
@@ -434,7 +434,7 @@ declare interface EmrListInstance {
   VpcId?: number | null;
   /** 地区 */
   Zone?: string | null;
-  /** 状态码 */
+  /** 状态码, 取值为-2(集群已删除), -1(集群已关闭), 0(集群生产中), 2(集群运行中), 3(集群创建中) */
   Status?: number | null;
   /** 实例标签 */
   Tags?: Tag[] | null;

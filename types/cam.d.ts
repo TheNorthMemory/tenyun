@@ -5,23 +5,27 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 访问密钥列表 */
 declare interface AccessKey {
   /** 访问密钥标识 */
-  AccessKeyId: string;
+  AccessKeyId?: string;
   /** 密钥状态，激活（Active）或未激活（Inactive） */
-  Status: string;
+  Status?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
+  /** 密钥描述 */
+  Description?: string | null;
 }
 
 /** 访问密钥 */
 declare interface AccessKeyDetail {
   /** 访问密钥标识 */
-  AccessKeyId: string;
+  AccessKeyId?: string;
   /** 访问密钥（密钥仅创建时可见，请妥善保存） */
-  SecretAccessKey: string;
+  SecretAccessKey?: string;
   /** 密钥状态，激活（Active）或未激活（Inactive） */
-  Status: string;
+  Status?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
+  /** 描述 */
+  Description?: string | null;
 }
 
 /** 策略关联的实体信息 */
@@ -573,11 +577,13 @@ declare interface ConsumeCustomMFATokenResponse {
 declare interface CreateAccessKeyRequest {
   /** 指定用户Uin，不填默认为当前用户创建访问密钥 */
   TargetUin?: number;
+  /** 密钥描述，长度在1到1024之间，可包含大小写字符，数字以及特殊字符：=,.@:/-。 正则为：[\w+=,.@:/-]*。 */
+  Description?: string;
 }
 
 declare interface CreateAccessKeyResponse {
   /** 访问密钥 */
-  AccessKey: AccessKeyDetail | null;
+  AccessKey?: AccessKeyDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

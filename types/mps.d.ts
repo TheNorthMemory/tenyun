@@ -180,6 +180,8 @@ declare interface AdaptiveDynamicStreamingTemplate {
   UpdateTime?: string;
   /** 是否为纯音频，0表示视频，1表示纯音频 */
   PureAudio?: number | null;
+  /** hls 分片类型，可选值：ts-segment：HLS+TS 切片ts-byterange：HLS+TS byte rangemp4-segment：HLS+MP4 切片mp4-byterange：HLS+MP4 byte rangets-packed-audio：TS+Packed Audiomp4-packed-audio：MP4+Packed Audio默认值：ts-segment注：自适应码流的hls分片格式已此字段为准 */
+  SegmentType?: string | null;
 }
 
 /** 自适应转码流参数模板 */
@@ -1442,7 +1444,7 @@ declare interface AudioSeparateConfig {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfo {
-  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；mp3；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；mp3；ac3。eac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
   Codec: string;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate: number;
@@ -1454,7 +1456,7 @@ declare interface AudioTemplateInfo {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfoForUpdate {
-  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；mp3；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；mp3；ac3。eac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
   Codec?: string | null;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate?: number | null;
@@ -4834,9 +4836,9 @@ declare interface VideoEnhanceConfig {
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfo {
-  /** 视频流的编码格式，可选值：copy：纯音频模版h264：H.264 编码h265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
+  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv，mov。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec: string;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 注意：自适应码率时取值范围是 [0, 60] */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
   Fps: number;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate: number;
@@ -4852,13 +4854,15 @@ declare interface VideoTemplateInfo {
   FillType?: string;
   /** 视频恒定码率控制因子，取值范围为[1, 51]。如果指定该参数，将使用 CRF 的码率控制方式做转码（视频码率将不再生效）。如果没有特殊需求，不建议指定该参数。 */
   Vcrf?: number;
+  /** hls 分片类型，可选值 ：6：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：6 */
+  SegmentType?: number | null;
 }
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfoForUpdate {
-  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码av1：AOMedia Video 1 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 。 */
+  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv，mov。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec?: string | null;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 */
   Fps?: number | null;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate?: number | null;
@@ -4876,6 +4880,8 @@ declare interface VideoTemplateInfoForUpdate {
   Vcrf?: number | null;
   /** 内容自适应编码。可选值：0：不开启1：开启默认值: 0. 当开启该参数时，将会自适应生成多个不同分辨率，不同码率的码流， 其中VideoTemplate的宽和高为多个码流中的最大分辨率，VideoTemplate中的码率为多个码流中的最高码率， VideoTemplate中的vcrf为多个码流中的最高质量。 当不设置分辨率、码率和vcrf时， ContentAdaptStream 参数生成的最高分辨率为视频源的分辨率，视频质量为接近vmaf95分。 若要开启该参数或了解计费细节, 请联系您的腾讯云商务。 */
   ContentAdaptStream?: number | null;
+  /** hls 分片类型，可选值：6：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：6 */
+  SegmentType?: number | null;
 }
 
 /** 音量均衡配置 */
@@ -5097,6 +5103,8 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   Comment?: string;
   /** 是否为纯音频，0表示视频模版，1表示纯音频模版当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null */
   PureAudio?: number;
+  /** hls 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准 */
+  SegmentType?: string;
 }
 
 declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
@@ -5347,7 +5355,7 @@ declare interface CreateStreamLinkOutputInfoResponse {
 }
 
 declare interface CreateTranscodeTemplateRequest {
-  /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
+  /** 封装格式，可选值：mp4、flv、hls、ts、webm、mkv、mxf、mov、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
   Container: string;
   /** 转码模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6375,6 +6383,8 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   Comment?: string;
   /** 是否为纯音频，0表示视频模版，1表示纯音频模版当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null */
   PureAudio?: number;
+  /** hls 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准 */
+  SegmentType?: string;
 }
 
 declare interface ModifyAdaptiveDynamicStreamingTemplateResponse {

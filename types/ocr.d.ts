@@ -572,6 +572,86 @@ declare interface FinanBillSliceInfo {
   Value: string;
 }
 
+/** 财务票据查验返回结果 */
+declare interface FinancialBill {
+  /** 票据代码 */
+  Code?: string | null;
+  /** 票据号码 */
+  Number?: string | null;
+  /** 缴款人纳税识别号 */
+  BuyerTaxID?: string | null;
+  /** 校验码 */
+  CheckCode?: string | null;
+  /** 缴款人 */
+  Buyer?: string | null;
+  /** 开票日期 */
+  Date?: string | null;
+  /** 收款单位 */
+  SellerCompany?: string | null;
+  /** 复核人 */
+  Reviewer?: string | null;
+  /** 收款人 */
+  Seller?: string | null;
+  /** 票据名称 */
+  Title?: string | null;
+  /** 金额合计 */
+  Total?: string | null;
+  /** 金额合计中文大写 */
+  TotalCn?: string | null;
+  /** 冲红 */
+  RushRedStateCode?: string | null;
+  /** 冲红日期 */
+  RushRedDate?: string | null;
+  /** 冲红时间 */
+  RushRedTime?: string | null;
+  /** 冲红原因 */
+  RushRedReason?: string | null;
+  /** 项目明细 */
+  FinancialBillItems?: FinancialBillItem[] | null;
+  /** 项目清单 */
+  FinancialBillItemDetails?: FinancialBillItemDetails[] | null;
+}
+
+/** 财务票据查验返回结果-项目明细 */
+declare interface FinancialBillItem {
+  /** 项目编号 */
+  ItemID?: string | null;
+  /** 项目名称 */
+  Name?: string | null;
+  /** 单位 */
+  Unit?: string | null;
+  /** 数量 */
+  Quantity?: string | null;
+  /** 规格标准 */
+  Standard?: string | null;
+  /** 金额 */
+  Total?: string | null;
+  /** 项目序号 */
+  SerialNumber?: string | null;
+  /** 备注 */
+  Remark?: string | null;
+}
+
+/** 财务票据查验返回结果-项目清单 */
+declare interface FinancialBillItemDetails {
+  /** 项目编号 */
+  ItemID?: string | null;
+  /** 项目名称 */
+  Name?: string | null;
+  /** 单位 */
+  Unit?: string | null;
+  /** 数量 */
+  Quantity?: string | null;
+  /** 规格标准 */
+  Standard?: string | null;
+  /** 金额 */
+  Total?: string | null;
+  /** 项目序号 */
+  SerialNumber?: string | null;
+  /** 备注 */
+  Remark?: string | null;
+}
+
 /** 机票行程单识别结果 */
 declare interface FlightInvoiceInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：票价、合计金额、填开日期、有效身份证件号码、电子客票号码、验证码、旅客姓名、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李。 */
@@ -4659,11 +4739,11 @@ declare interface VatInvoiceVerifyNewRequest {
   InvoiceDate: string;
   /** 发票代码（10或12 位），全电发票为空。查验未成功超过5次后当日无法再查。 */
   InvoiceCode?: string;
-  /** 票种类型 01:增值税专用发票， 02:货运运输业增值税专用发 票， 03:机动车销售统一发票， 04:增值税普通发票， 08:增值税电子专用发票(含全电)， 10:增值税电子普通发票(含全电)， 11:增值税普通发票(卷式)， 14:增值税电子(通行费)发 票， 15:二手车销售统一发票， 32:深圳区块链发票(云南区块链因业务调整现已下线)。 */
+  /** 票种类型 01:增值税专用发票， 02:货运运输业增值税专用发 票， 03:机动车销售统一发票， 04:增值税普通发票， 08:增值税电子专用发票(含全电)， 10:增值税电子普通发票(含全电)， 11:增值税普通发票(卷式)， 14:增值税电子(通行费)发 票， 15:二手车销售统一发票，16:财务发票， 32:深圳区块链发票(云南区块链因业务调整现已下线)。 */
   InvoiceKind?: string;
-  /** 校验码后 6 位，增值税普通发票、增值税电子普通发票、增值税普通发票(卷式)、增值税电子普通发票(通行费)、全电纸质发票（增值税普通发票）时必填;区块链为 5 位 */
+  /** 校验码后 6 位，增值税普通发票、增值税电子普通发票、增值税普通发票(卷式)、增值税电子普通发票(通行费)、全电纸质发票（增值税普通发票）、财政票据时必填;区块链为 5 位 */
   CheckCode?: string;
-  /** 不含税金额，增值税专用发票、增值税电子专用发票、机动车销售统一发票、二手车销售统一发票、区块链发票时必填; 全电发票为价税合计(含税金额) */
+  /** 不含税金额，增值税专用发票、增值税电子专用发票、机动车销售统一发票、二手车销售统一发票、区块链发票、财政发票时必填; 全电发票为价税合计(含税金额) */
   Amount?: string;
   /** 地区编码，通用机打电子发票时必填。广东:4400，浙江:3300 */
   RegionCode?: string;
@@ -4688,6 +4768,8 @@ declare interface VatInvoiceVerifyNewResponse {
   ElectronicTrainTicket?: ElectronicTrainTicket;
   /** 全电发票（航空运输电子客票行程单）详细字段信息。 */
   ElectronicAirTransport?: ElectronicAirTransport;
+  /** 财政发票详细字段信息 */
+  FinancialBill?: FinancialBill;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

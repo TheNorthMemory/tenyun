@@ -1518,6 +1518,8 @@ declare interface ConsumptionResourceSummaryDataItem {
   ZoneName?: string | null;
   /** 配置描述 */
   ComponentConfig?: string | null;
+  /** 标签信息 */
+  Tags?: string | null;
 }
 
 /** 消耗汇总详情 */

@@ -1985,55 +1985,57 @@ declare interface MsApiArray {
 /** 微服务实例信息 */
 declare interface MsInstance {
   /** 机器实例ID信息 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 机器实例名称信息 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 服务运行的端口号 */
-  Port: string | null;
+  Port?: string | null;
   /** 机器实例内网IP */
-  LanIp: string | null;
+  LanIp?: string | null;
   /** 机器实例外网IP */
-  WanIp: string | null;
+  WanIp?: string | null;
   /** 机器可用状态 */
-  InstanceAvailableStatus: string | null;
+  InstanceAvailableStatus?: string | null;
   /** 服务运行状态 */
-  ServiceInstanceStatus: string | null;
+  ServiceInstanceStatus?: string | null;
   /** 应用ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 应用名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 部署组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 部署组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 机器TSF可用状态 */
-  InstanceStatus: string | null;
+  InstanceStatus?: string | null;
   /** 健康检查URL */
-  HealthCheckUrl: string | null;
+  HealthCheckUrl?: string | null;
   /** 集群类型 */
-  ClusterType: string | null;
+  ClusterType?: string | null;
   /** 应用程序包版本 */
-  ApplicationPackageVersion: string | null;
+  ApplicationPackageVersion?: string | null;
   /** 应用类型 */
-  ApplicationType: string | null;
+  ApplicationType?: string | null;
   /** 服务状态，passing 在线，critical 离线 */
-  ServiceStatus: string | null;
+  ServiceStatus?: string | null;
   /** 注册时间 */
-  RegistrationTime: number | null;
+  RegistrationTime?: number | null;
   /** 上次心跳时间 */
-  LastHeartbeatTime: number | null;
+  LastHeartbeatTime?: number | null;
   /** 实例注册id */
-  RegistrationId: string | null;
+  RegistrationId?: string | null;
   /** 屏蔽状态，hidden 为屏蔽，unhidden 为未屏蔽 */
-  HiddenStatus: string | null;
+  HiddenStatus?: string | null;
+  /** json格式的 meta 信息 */
+  MetaJson?: string | null;
 }
 
 /** 多值数据 */
@@ -5646,7 +5648,7 @@ declare interface DescribeMicroserviceRequest {
 
 declare interface DescribeMicroserviceResponse {
   /** 微服务详情实例列表 */
-  Result: TsfPageMsInstance | null;
+  Result?: TsfPageMsInstance | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6208,7 +6210,7 @@ declare interface DescribeUnitApiUseDetailRequest {
 
 declare interface DescribeUnitApiUseDetailResponse {
   /** 单元化使用统计对象 */
-  Result: GroupUnitApiUseStatistics;
+  Result?: GroupUnitApiUseStatistics;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

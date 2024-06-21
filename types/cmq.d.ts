@@ -323,16 +323,16 @@ declare interface DescribeDeadLetterSourceQueuesResponse {
 }
 
 declare interface DescribeQueueDetailRequest {
-  /** 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0 */
-  Offset?: number;
-  /** 分页时本页获取队列的个数，如果不传递该参数，则该参数默认为20，最大值为50。 */
-  Limit?: number;
-  /** 筛选参数，目前支持QueueName筛选，且仅支持一个关键字 */
-  Filters?: Filter[];
   /** 标签搜索 */
   TagKey?: string;
+  /** 分页时本页获取队列的个数，如果不传递该参数，则该参数默认为20，最大值为50。 */
+  Limit?: number;
   /** 精确匹配QueueName */
   QueueName?: string;
+  /** 筛选参数，目前支持QueueName筛选，且仅支持一个关键字 */
+  Filters?: Filter[];
+  /** 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0 */
+  Offset?: number;
 }
 
 declare interface DescribeQueueDetailResponse {
@@ -365,16 +365,16 @@ declare interface DescribeSubscriptionDetailResponse {
 }
 
 declare interface DescribeTopicDetailRequest {
-  /** 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。 */
-  Offset?: number;
-  /** 分页时本页获取队列的个数，如果不传递该参数，则该参数默认为20，最大值为50。 */
-  Limit?: number;
-  /** 目前只支持过滤TopicName ， 且只能填一个过滤值。 */
-  Filters?: Filter[];
   /** 标签匹配。 */
   TagKey?: string;
+  /** 分页时本页获取队列的个数，如果不传递该参数，则该参数默认为20，最大值为50。 */
+  Limit?: number;
   /** 精确匹配TopicName。 */
   TopicName?: string;
+  /** 目前只支持过滤TopicName ， 且只能填一个过滤值。 */
+  Filters?: Filter[];
+  /** 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。 */
+  Offset?: number;
 }
 
 declare interface DescribeTopicDetailResponse {
@@ -505,7 +505,7 @@ declare interface Cmq {
   DescribeQueueDetail(data?: DescribeQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueDetailResponse>;
   /** 查询订阅详情 {@link DescribeSubscriptionDetailRequest} {@link DescribeSubscriptionDetailResponse} */
   DescribeSubscriptionDetail(data: DescribeSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionDetailResponse>;
-  /** 查询主题详情 {@link DescribeTopicDetailRequest} {@link DescribeTopicDetailResponse} */
+  /** 查询主题列表 {@link DescribeTopicDetailRequest} {@link DescribeTopicDetailResponse} */
   DescribeTopicDetail(data?: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
   /** 修改队列属性 {@link ModifyQueueAttributeRequest} {@link ModifyQueueAttributeResponse} */
   ModifyQueueAttribute(data: ModifyQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQueueAttributeResponse>;

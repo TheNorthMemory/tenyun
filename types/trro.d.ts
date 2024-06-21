@@ -391,19 +391,19 @@ declare interface DescribePolicyResponse {
 }
 
 declare interface DescribeProjectInfoRequest {
-  /** 目标项目ID */
-  ProjectId?: string;
+  /** 目标项目ID，必填参数 */
+  ProjectId: string;
 }
 
 declare interface DescribeProjectInfoResponse {
   /** 项目名称 */
-  ProjectName: string;
+  ProjectName?: string;
   /** 项目描述 */
-  ProjectDescription: string;
+  ProjectDescription?: string;
   /** 项目权限模式，black为黑名单，white为白名单 */
-  PolicyMode: string;
+  PolicyMode?: string;
   /** 项目信息修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -652,7 +652,7 @@ declare interface Trro {
   /** 查看权限配置 {@link DescribePolicyRequest} {@link DescribePolicyResponse} */
   DescribePolicy(data: DescribePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyResponse>;
   /** 查询项目信息 {@link DescribeProjectInfoRequest} {@link DescribeProjectInfoResponse} */
-  DescribeProjectInfo(data?: DescribeProjectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectInfoResponse>;
+  DescribeProjectInfo(data: DescribeProjectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectInfoResponse>;
   /** 获取项目列表 {@link DescribeProjectListRequest} {@link DescribeProjectListResponse} */
   DescribeProjectList(data?: DescribeProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectListResponse>;
   /** 获取最新设备会话列表 {@link DescribeRecentSessionListRequest} {@link DescribeRecentSessionListResponse} */
