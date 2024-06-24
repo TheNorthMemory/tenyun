@@ -3021,9 +3021,9 @@ declare interface DescribeDMSTablesRequest {
 
 declare interface DescribeDMSTablesResponse {
   /** DMS元数据列表信息 */
-  TableList: DMSTableInfo[] | null;
+  TableList?: DMSTableInfo[] | null;
   /** 统计值 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4025,7 +4025,7 @@ declare interface DropDMSPartitionsRequest {
 
 declare interface DropDMSPartitionsResponse {
   /** 状态 */
-  Status: boolean;
+  Status?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

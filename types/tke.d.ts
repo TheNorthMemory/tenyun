@@ -5118,7 +5118,7 @@ declare namespace V20180525 {
 
   interface DescribeEdgeClusterExtraArgsResponse {
     /** 集群自定义参数 */
-    ClusterExtraArgs: EdgeClusterExtraArgs | null;
+    ClusterExtraArgs?: EdgeClusterExtraArgs | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5946,9 +5946,9 @@ declare namespace V20180525 {
 
   interface DescribeTKEEdgeClusterStatusResponse {
     /** 集群当前状态 */
-    Phase: string;
+    Phase?: string;
     /** 集群过程数组 */
-    Conditions: ClusterCondition[];
+    Conditions?: ClusterCondition[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7086,7 +7086,7 @@ declare namespace V20180525 {
     Chart: string;
     /** 自定义参数，覆盖chart 中values.yaml 中的参数 */
     Values?: ReleaseValues;
-    /** 制品来源，范围：tke-market 或 other */
+    /** 制品来源，范围：tke-market 或 other默认值：tke-market。 */
     ChartFrom?: string;
     /** 制品版本( 从第三方安装时，不传这个参数） */
     ChartVersion?: string;

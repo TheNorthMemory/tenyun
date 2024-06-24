@@ -560,6 +560,14 @@ declare interface ClusterNodeInfo {
   Status?: string | null;
 }
 
+/** 集群版的节点拓扑配置。 */
+declare interface ClusterTopology {
+  /** RW 节点拓扑。 */
+  ReadWriteNode?: ReadWriteNode;
+  /** RO 节点拓扑。 */
+  ReadOnlyNodes?: ReadonlyNode[];
+}
+
 /** 列权限信息 */
 declare interface ColumnPrivilege {
   /** 数据库名 */
@@ -1022,6 +1030,16 @@ declare interface MasterInfo {
   ExClusterName: string;
 }
 
+/** 独享集群CDB实例的节点分布情况 */
+declare interface NodeDistribution {
+  /** 主实例Master节点所在主机ID或者只读实例所在主机ID */
+  Node: string;
+  /** 主实例第一Slave节点所在主机ID */
+  SlaveNodeOne: string;
+  /** 主实例第二Slave节点所在主机ID */
+  SlaveNodeTwo: string;
+}
+
 /** 安全组出站规则 */
 declare interface Outbound {
   /** 策略，ACCEPT 或者 DROP */
@@ -1244,6 +1262,22 @@ declare interface ProxyNodeCustom {
   Region: string;
   /** 可用区 */
   Zone: string;
+}
+
+/** 集群版 RW 节点的配置。 */
+declare interface ReadWriteNode {
+  /** RW 节点所在可用区。 */
+  Zone: string;
+  /** 升级集群版实例时，如果要调整只读节点可用区，需要指定节点id。 */
+  NodeId?: string;
+}
+
+/** 集群版的 RO 节点配置。 */
+declare interface ReadonlyNode {
+  /** 是否分布在随机可用区。传入YES表示随机可用区。否则使用Zone指定的可用区。 */
+  IsRandomZone?: string;
+  /** 指定该节点分布在哪个可用区。 */
+  Zone?: string;
 }
 
 /** 解隔离任务结果 */
@@ -3570,6 +3604,44 @@ declare interface DescribeInstanceParamsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceUpgradeTypeRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 目标实例cpu */
+  DstCpu: number;
+  /** 目标实例内存 */
+  DstMemory: number;
+  /** 目标实例磁盘 */
+  DstDisk: number;
+  /** 目标实例版本 */
+  DstVersion?: string;
+  /** 目标实例部署模型 */
+  DstDeployMode?: number;
+  /** 目标实例复制类型 */
+  DstProtectMode?: number;
+  /** 目标实例备机1可用区 */
+  DstSlaveZone?: number;
+  /** 目标实例备机2可用区 */
+  DstBackupZone?: number;
+  /** 目标实例类型 */
+  DstCdbType?: string;
+  /** 目标实例主可用区 */
+  DstZoneId?: number;
+  /** 独享集群CDB实例的节点分布情况 */
+  NodeDistribution?: NodeDistribution;
+  /** 集群版的节点拓扑配置 */
+  ClusterTopology?: ClusterTopology;
+}
+
+declare interface DescribeInstanceUpgradeTypeResponse {
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例升级类型 */
+  UpgradeType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLocalBinlogConfigRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。 */
   InstanceId: string;
@@ -5147,6 +5219,8 @@ declare interface Cdb {
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的可设置参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查询数据库实例升级类型 {@link DescribeInstanceUpgradeTypeRequest} {@link DescribeInstanceUpgradeTypeResponse} */
+  DescribeInstanceUpgradeType(data: DescribeInstanceUpgradeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceUpgradeTypeResponse>;
   /** 查询本地binlog保留策略 {@link DescribeLocalBinlogConfigRequest} {@link DescribeLocalBinlogConfigResponse} */
   DescribeLocalBinlogConfig(data: DescribeLocalBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalBinlogConfigResponse>;
   /** 查询参数模板详情 {@link DescribeParamTemplateInfoRequest} {@link DescribeParamTemplateInfoResponse} */

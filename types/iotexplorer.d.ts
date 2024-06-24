@@ -2661,9 +2661,9 @@ declare interface GetTopicRuleListRequest {
 
 declare interface GetTopicRuleListResponse {
   /** 规则总数量 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** 规则列表 */
-  Rules: TopicRuleInfo[];
+  Rules?: TopicRuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3165,9 +3165,9 @@ declare interface SearchTopicRuleRequest {
 
 declare interface SearchTopicRuleResponse {
   /** 搜索到的规则总数 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** 规则信息列表 */
-  Rules: TopicRuleInfo[];
+  Rules?: TopicRuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

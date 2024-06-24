@@ -226,17 +226,17 @@ declare namespace V20181201 {
   /** 人脸融合不适宜内容识别返回参数item */
   interface FuseFaceReviewResult {
     /** 保留字段 */
-    Category: string;
+    Category?: string;
     /** 状态码， 0为处理成功，其他值为处理失败 */
-    Code: string;
+    Code?: string;
     /** 对应状态码信息描述 */
-    CodeDescription: string;
+    CodeDescription?: string;
     /** 保留字段 */
-    Confidence: number;
+    Confidence?: number;
     /** 保留字段 */
-    Suggestion: string;
+    Suggestion?: string;
     /** 审核详细内容 */
-    DetailSet: FuseFaceReviewDetail[];
+    DetailSet?: FuseFaceReviewDetail[];
   }
 
   /** 融合参数 */

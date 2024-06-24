@@ -50,6 +50,8 @@ declare interface AppModel {
   ContextLimit?: number | null;
   /** 模型别名 */
   AliasName?: string | null;
+  /** token余量 */
+  TokenBalance?: number | null;
 }
 
 /** 属性标签详情信息 */
@@ -148,6 +150,8 @@ declare interface Context {
   Avatar?: string | null;
   /** 消息内容 */
   Content?: string | null;
+  /** 文档信息 */
+  FileInfos?: MsgFileInfo[] | null;
 }
 
 /** 坐标 */
@@ -218,6 +222,20 @@ declare interface EmbeddingObject {
   Embedding?: number[];
 }
 
+/** 实时上传的文件信息 */
+declare interface FileInfo {
+  /** 文件名称 */
+  FileName?: string | null;
+  /** 文件大小 */
+  FileSize?: string | null;
+  /** 文件的URL地址，COS地址 */
+  FileUrl?: string | null;
+  /** 文件类型 */
+  FileType?: string | null;
+  /** 解析后返回的DocID */
+  DocId?: string | null;
+}
+
 /** 不满意回复检索过滤 */
 declare interface Filters {
   /** 检索，用户问题或答案 */
@@ -236,7 +254,7 @@ declare interface GetWsTokenReq_Label {
 
 /** 分片高亮内容 */
 declare interface Highlight {
-  /** 高亮启始位置 */
+  /** 高亮起始位置 */
   StartPos?: string | null;
   /** 高亮结束位置 */
   EndPos?: string | null;
@@ -290,6 +308,8 @@ declare interface KnowledgeQaSearch {
   QaTopN?: number | null;
   /** 文档最大召回数量, 默认3，限制5 */
   DocTopN?: number | null;
+  /** 检索置信度，针对文档和问答有效，最小0.01，最大0.99 */
+  Confidence?: number | null;
 }
 
 /** 标签ID */
@@ -444,6 +464,20 @@ declare interface ModelInfo {
   AliasName?: string | null;
 }
 
+/** 文档信息 */
+declare interface MsgFileInfo {
+  /** 文档名称 */
+  FileName?: string | null;
+  /** 文档大小 */
+  FileSize?: string | null;
+  /** 文档URL */
+  FileUrl?: string | null;
+  /** 文档类型 */
+  FileType?: string | null;
+  /** 文档ID */
+  DocId?: string | null;
+}
+
 /** 消息详情 */
 declare interface MsgRecord {
   /** 内容 */
@@ -482,12 +516,14 @@ declare interface MsgRecord {
   ImageUrls?: string[];
   /** 当次 token 统计信息 */
   TokenStat?: TokenStat | null;
-  /** 回复方式 */
+  /** 回复方式1:大模型直接回复;2:保守回复, 未知问题回复;3:拒答问题回复;4:敏感回复;5:问答对直接回复, 已采纳问答对优先回复;6:欢迎语回复;7:并发超限回复;8:全局干预知识;9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;10:任务流程答案回复;11:搜索引擎回复;12:知识润色后回复;13:图片理解回复;14:实时文档回复; */
   ReplyMethod?: number | null;
   /** 选项卡, 用于多轮对话 */
   OptionCards?: string[] | null;
   /** 任务信息 */
   TaskFlow?: TaskFlowInfo | null;
+  /** 用户传入的文件信息 */
+  FileInfos?: FileInfo[] | null;
 }
 
 /** 聊天详情Refer */
@@ -578,7 +614,7 @@ declare interface QAQuery {
   PageNumber: number;
   /** 每页数量 */
   PageSize: number;
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 查询内容 */
   Query?: string;
@@ -804,7 +840,7 @@ declare interface UnsatisfiedReply {
   RecordBizId?: string | null;
   /** 用户问题 */
   Question?: string | null;
-  /** 机器人回复 */
+  /** 应用回复 */
   Answer?: string | null;
   /** 错误类型 */
   Reasons?: string[] | null;
@@ -823,7 +859,7 @@ declare interface Usage {
 }
 
 declare interface CheckAttributeLabelExistRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 属性名称 */
   LabelName: string;
@@ -845,7 +881,7 @@ declare interface CheckAttributeLabelExistResponse {
 }
 
 declare interface CheckAttributeLabelReferRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -879,7 +915,7 @@ declare interface CreateAppResponse {
 }
 
 declare interface CreateAttributeLabelRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 属性标识 */
   AttrKey: string;
@@ -917,7 +953,7 @@ declare interface CreateCorpResponse {
 }
 
 declare interface CreateQACateRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 父级业务ID */
   ParentBizId: string;
@@ -939,7 +975,7 @@ declare interface CreateQACateResponse {
 }
 
 declare interface CreateQARequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 问题 */
   Question: string;
@@ -969,15 +1005,15 @@ declare interface CreateQAResponse {
 }
 
 declare interface CreateReconstructDocumentFlowRequest {
-  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
   FileBase64?: string;
-  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 100M。文件下载时间不超过 15 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl?: string;
-  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
   FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。 */
   FileEndPageNumber?: number;
-  /** 创建智能文档识别任务配置信息 */
+  /** 创建文档解析任务配置信息 */
   Config?: CreateReconstructDocumentFlowConfig;
 }
 
@@ -989,7 +1025,7 @@ declare interface CreateReconstructDocumentFlowResponse {
 }
 
 declare interface CreateRejectedQuestionRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 拒答问题 */
   Question: string;
@@ -1031,7 +1067,7 @@ declare interface DeleteAppResponse {
 }
 
 declare interface DeleteAttributeLabelRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 属性ID */
   AttributeBizIds: string[];
@@ -1049,7 +1085,7 @@ declare interface DeleteAttributeLabelResponse {
 declare interface DeleteDocRequest {
   /** 文档业务ID列表 */
   DocBizIds: string[];
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
 }
 
@@ -1059,7 +1095,7 @@ declare interface DeleteDocResponse {
 }
 
 declare interface DeleteQACateRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 分类业务ID */
   CateBizId: string;
@@ -1071,7 +1107,7 @@ declare interface DeleteQACateResponse {
 }
 
 declare interface DeleteQARequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 问答ID */
   QaBizIds: string[];
@@ -1083,7 +1119,7 @@ declare interface DeleteQAResponse {
 }
 
 declare interface DeleteRejectedQuestionRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 拒答问题来源的数据源唯一id */
   RejectedBizIds: string[];
@@ -1135,7 +1171,7 @@ declare interface DescribeAppResponse {
 }
 
 declare interface DescribeAttributeLabelRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 属性ID */
   AttributeBizId: string;
@@ -1181,7 +1217,7 @@ declare interface DescribeCorpResponse {
 }
 
 declare interface DescribeDocRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档ID */
   DocBizId: string;
@@ -1241,7 +1277,7 @@ declare interface DescribeDocResponse {
 declare interface DescribeQARequest {
   /** QA业务ID */
   QaBizId: string;
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
 }
 
@@ -1299,7 +1335,7 @@ declare interface DescribeQAResponse {
 }
 
 declare interface DescribeReferRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 引用ID */
   ReferBizIds: string[];
@@ -1355,24 +1391,26 @@ declare interface DescribeReleaseResponse {
 }
 
 declare interface DescribeRobotBizIDByAppKeyRequest {
-  /** 机器人appkey */
+  /** 应用appkey */
   AppKey: string;
 }
 
 declare interface DescribeRobotBizIDByAppKeyResponse {
-  /** 机器人业务ID */
+  /** 应用业务ID */
   BotBizId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeStorageCredentialRequest {
-  /** 机器人ID */
-  BotBizId: string;
-  /** 文件类型 */
+  /** 应用ID */
+  BotBizId?: string;
+  /** 文件类型,正常的文件名类型后缀，例如 xlsx、pdf、 docx、png 等 */
   FileType?: string;
-  /** 权限场景，是否公有权限 */
+  /** IsPublic为空用于上传文件时选择场景，当上传为图片文件是IsPublic为true，上传文档文件时场景IsPublic为false */
   IsPublic?: boolean;
+  /** 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline */
+  TypeKey?: string;
 }
 
 declare interface DescribeStorageCredentialResponse {
@@ -1394,14 +1432,14 @@ declare interface DescribeStorageCredentialResponse {
   CorpUin?: string;
   /** 图片存储目录 */
   ImagePath?: string;
-  /** 上传存储目录 */
+  /** 上传存储路径，到具体文件 */
   UploadPath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeUnsatisfiedReplyContextRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 回复ID */
   ReplyBizId: string;
@@ -1419,7 +1457,7 @@ declare interface DescribeUnsatisfiedReplyContextResponse {
 }
 
 declare interface ExportAttributeLabelRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -1439,7 +1477,7 @@ declare interface ExportAttributeLabelResponse {
 }
 
 declare interface ExportQAListRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** QA业务ID */
   QaBizIds: string[];
@@ -1453,7 +1491,7 @@ declare interface ExportQAListResponse {
 }
 
 declare interface ExportUnsatisfiedReplyRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 勾选导出ID列表 */
   ReplyBizIds: string[];
@@ -1471,7 +1509,7 @@ declare interface ExportUnsatisfiedReplyResponse {
 }
 
 declare interface GenerateQARequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档ID */
   DocBizIds?: string[];
@@ -1521,8 +1559,10 @@ declare interface GetAppSecretResponse {
 declare interface GetDocPreviewRequest {
   /** 文档业务ID */
   DocBizId: string;
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
+  /** 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline */
+  TypeKey?: string;
 }
 
 declare interface GetDocPreviewResponse {
@@ -1567,7 +1607,7 @@ declare interface GetMsgRecordRequest {
   SessionId: string;
   /** 最后一条记录ID */
   LastRecordId?: string;
-  /** 机器人AppKey */
+  /** 应用AppKey */
   BotAppKey?: string;
   /** 场景, 体验: 1; 正式: 2 */
   Scene?: number;
@@ -1592,7 +1632,7 @@ declare interface GetReconstructDocumentResultResponse {
   Status?: string;
   /** 输入文件中嵌入的图片中文字内容的识别结果，存储在腾讯云cos的下载地址 */
   DocumentRecognizeResultUrl?: string;
-  /** 还原失败的页 */
+  /** 文档解析失败的页码 */
   FailedPages?: ReconstructDocumentFailedPage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1603,7 +1643,7 @@ declare interface GetTaskStatusRequest {
   TaskId: string;
   /** 任务类型 */
   TaskType: string;
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
 }
 
@@ -1625,7 +1665,7 @@ declare interface GetTaskStatusResponse {
 declare interface GetWsTokenRequest {
   /** 接入类型 */
   Type: number;
-  /** 机器人AppKey */
+  /** 应用AppKey */
   BotAppKey?: string;
   /** 坐席ID */
   VisitorBizId?: string;
@@ -1636,12 +1676,16 @@ declare interface GetWsTokenRequest {
 declare interface GetWsTokenResponse {
   /** token值 */
   Token?: string;
+  /** 余额; 余额大于 0 时表示有效. */
+  Balance?: number | null;
+  /** 对话窗输入字符限制 */
+  InputLenLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface GroupQARequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** QA业务ID列表 */
   QaBizIds: string[];
@@ -1655,7 +1699,7 @@ declare interface GroupQAResponse {
 }
 
 declare interface IgnoreUnsatisfiedReplyRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 不满意回复ID */
   ReplyBizIds: string[];
@@ -1673,7 +1717,7 @@ declare interface IgnoreUnsatisfiedReplyResponse {
 declare interface IsTransferIntentRequest {
   /** 内容 */
   Content: string;
-  /** 机器人appKey */
+  /** 应用appKey */
   BotAppKey: string;
 }
 
@@ -1717,7 +1761,7 @@ declare interface ListAppResponse {
 }
 
 declare interface ListAttributeLabelRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -1779,7 +1823,7 @@ declare interface ListModelResponse {
 }
 
 declare interface ListQACateRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
 }
 
@@ -1831,7 +1875,7 @@ declare interface ListQAResponse {
 }
 
 declare interface ListRejectedQuestionPreviewRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -1859,7 +1903,7 @@ declare interface ListRejectedQuestionPreviewResponse {
 }
 
 declare interface ListRejectedQuestionRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -1909,7 +1953,7 @@ declare interface ListReleaseConfigPreviewResponse {
 }
 
 declare interface ListReleaseDocPreviewRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -1937,7 +1981,7 @@ declare interface ListReleaseDocPreviewResponse {
 }
 
 declare interface ListReleaseQAPreviewRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -1985,7 +2029,7 @@ declare interface ListReleaseResponse {
 }
 
 declare interface ListSelectDocRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档名称 */
   FileName?: string;
@@ -2001,7 +2045,7 @@ declare interface ListSelectDocResponse {
 }
 
 declare interface ListUnsatisfiedReplyRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -2049,7 +2093,7 @@ declare interface ModifyAppResponse {
 }
 
 declare interface ModifyAttributeLabelRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 属性ID */
   AttributeBizId: string;
@@ -2075,7 +2119,7 @@ declare interface ModifyAttributeLabelResponse {
 }
 
 declare interface ModifyDocAttrRangeRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档ID */
   DocBizIds: string[];
@@ -2091,7 +2135,7 @@ declare interface ModifyDocAttrRangeResponse {
 }
 
 declare interface ModifyDocRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档ID */
   DocBizId: string;
@@ -2121,7 +2165,7 @@ declare interface ModifyDocResponse {
 }
 
 declare interface ModifyQAAttrRangeRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 问答ID */
   QaBizIds: string[];
@@ -2137,7 +2181,7 @@ declare interface ModifyQAAttrRangeResponse {
 }
 
 declare interface ModifyQACateRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 分类名称 */
   Name: string;
@@ -2151,7 +2195,7 @@ declare interface ModifyQACateResponse {
 }
 
 declare interface ModifyQARequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 问答ID */
   QaBizId: string;
@@ -2181,7 +2225,7 @@ declare interface ModifyQAResponse {
 }
 
 declare interface ModifyRejectedQuestionRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 拒答问题 */
   Question: string;
@@ -2253,7 +2297,7 @@ declare interface QueryRewriteResponse {
 }
 
 declare interface RateMsgRecordRequest {
-  /** 机器人appKey */
+  /** 应用appKey */
   BotAppKey: string;
   /** 消息ID */
   RecordId: string;
@@ -2269,13 +2313,13 @@ declare interface RateMsgRecordResponse {
 }
 
 declare interface ReconstructDocumentRequest {
-  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
   FileBase64?: string;
-  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl?: string;
-  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
   FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。单次调用，最多支持10页pdf的智能识别。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。单次调用，最多支持10页pdf的文档解析。 */
   FileEndPageNumber?: number;
   /** 配置选项，支持配置是否在生成的Markdown中是否嵌入图片 */
   Config?: ReconstructDocumentConfig;
@@ -2305,7 +2349,7 @@ declare interface ResetSessionResponse {
 }
 
 declare interface RetryDocAuditRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档ID */
   DocBizId: string;
@@ -2317,7 +2361,7 @@ declare interface RetryDocAuditResponse {
 }
 
 declare interface RetryDocParseRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档ID */
   DocBizId: string;
@@ -2389,7 +2433,7 @@ declare interface SaveDocResponse {
 }
 
 declare interface StopDocParseRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文档ID */
   DocBizId: string;
@@ -2401,7 +2445,7 @@ declare interface StopDocParseResponse {
 }
 
 declare interface UploadAttributeLabelRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 文件名 */
   FileName: string;
@@ -2431,7 +2475,7 @@ declare interface UploadAttributeLabelResponse {
 declare interface VerifyQARequest {
   /** 问答列表 */
   List: QAList[];
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -2461,7 +2505,7 @@ declare interface Lke {
   CreateQA(data: CreateQARequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAResponse>;
   /** 创建QA分类 {@link CreateQACateRequest} {@link CreateQACateResponse} */
   CreateQACate(data: CreateQACateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQACateResponse>;
-  /** 创建智能文档识别任务 {@link CreateReconstructDocumentFlowRequest} {@link CreateReconstructDocumentFlowResponse} */
+  /** 创建文档解析任务 {@link CreateReconstructDocumentFlowRequest} {@link CreateReconstructDocumentFlowResponse} */
   CreateReconstructDocumentFlow(data?: CreateReconstructDocumentFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReconstructDocumentFlowResponse>;
   /** 创建拒答问题 {@link CreateRejectedQuestionRequest} {@link CreateRejectedQuestionResponse} */
   CreateRejectedQuestion(data: CreateRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRejectedQuestionResponse>;
@@ -2495,10 +2539,10 @@ declare interface Lke {
   DescribeRelease(data: DescribeReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseResponse>;
   /** 拉取发布按钮状态、最后发布时间 {@link DescribeReleaseInfoRequest} {@link DescribeReleaseInfoResponse} */
   DescribeReleaseInfo(data: DescribeReleaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseInfoResponse>;
-  /** 通过appKey获取机器人业务ID {@link DescribeRobotBizIDByAppKeyRequest} {@link DescribeRobotBizIDByAppKeyResponse} */
+  /** 通过appKey获取应用业务ID {@link DescribeRobotBizIDByAppKeyRequest} {@link DescribeRobotBizIDByAppKeyResponse} */
   DescribeRobotBizIDByAppKey(data: DescribeRobotBizIDByAppKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRobotBizIDByAppKeyResponse>;
   /** 获取文件上传临时密钥 {@link DescribeStorageCredentialRequest} {@link DescribeStorageCredentialResponse} */
-  DescribeStorageCredential(data: DescribeStorageCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageCredentialResponse>;
+  DescribeStorageCredential(data?: DescribeStorageCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageCredentialResponse>;
   /** 获取不满意回复上下文 {@link DescribeUnsatisfiedReplyContextRequest} {@link DescribeUnsatisfiedReplyContextResponse} */
   DescribeUnsatisfiedReplyContext(data: DescribeUnsatisfiedReplyContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnsatisfiedReplyContextResponse>;
   /** 导出属性标签 {@link ExportAttributeLabelRequest} {@link ExportAttributeLabelResponse} */
@@ -2519,7 +2563,7 @@ declare interface Lke {
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** 获取聊天历史请求 {@link GetMsgRecordRequest} {@link GetMsgRecordResponse} */
   GetMsgRecord(data: GetMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<GetMsgRecordResponse>;
-  /** 查询智能文档识别任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */
+  /** 查询文档解析任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */
   GetReconstructDocumentResult(data: GetReconstructDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetReconstructDocumentResultResponse>;
   /** 查询任务状态 {@link GetTaskStatusRequest} {@link GetTaskStatusResponse} */
   GetTaskStatus(data: GetTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStatusResponse>;
@@ -2577,7 +2621,7 @@ declare interface Lke {
   ModifyQACate(data: ModifyQACateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQACateResponse>;
   /** 修改拒答问题 {@link ModifyRejectedQuestionRequest} {@link ModifyRejectedQuestionResponse} */
   ModifyRejectedQuestion(data: ModifyRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRejectedQuestionResponse>;
-  /** 文档解析 {@link ParseDocRequest} {@link ParseDocResponse} */
+  /** 文档解析旧版（请迁移新接口） {@link ParseDocRequest} {@link ParseDocResponse} */
   ParseDoc(data: ParseDocRequest, config?: AxiosRequestConfig): AxiosPromise<ParseDocResponse>;
   /** 查询文档解析结果 {@link QueryParseDocResultRequest} {@link QueryParseDocResultResponse} */
   QueryParseDocResult(data: QueryParseDocResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryParseDocResultResponse>;
@@ -2585,7 +2629,7 @@ declare interface Lke {
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 评价消息 {@link RateMsgRecordRequest} {@link RateMsgRecordResponse} */
   RateMsgRecord(data: RateMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<RateMsgRecordResponse>;
-  /** 智能文档识别 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
+  /** 文档解析 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
   ReconstructDocument(data?: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
   /** 重置会话 {@link ResetSessionRequest} {@link ResetSessionResponse} */
   ResetSession(data: ResetSessionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSessionResponse>;

@@ -1090,6 +1090,10 @@ declare interface RocketMQClusterInfo {
   SupportMigration?: boolean | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败 */
   InstanceStatus?: number | null;
+  /** 集群所属可用区，表明集群归属的可用区 */
+  ZoneId?: number | null;
+  /** 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。 */
+  ZoneIds?: number[] | null;
 }
 
 /** RocketMQ近期使用量 */
