@@ -858,6 +858,14 @@ declare interface Usage {
   TotalTokens?: number;
 }
 
+/** 解析为 word 文档的结果 */
+declare interface WordRecognizeInfo {
+  /** 输入文件的页码数 */
+  PageNumber?: number | null;
+  /** word的base64 */
+  WordBase64?: string | null;
+}
+
 declare interface CheckAttributeLabelExistRequest {
   /** 应用ID */
   BotBizId: string;
@@ -896,6 +904,24 @@ declare interface CheckAttributeLabelReferRequest {
 declare interface CheckAttributeLabelReferResponse {
   /** 是否引用 */
   IsRefer?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ConvertDocumentRequest {
+  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  FileUrl?: string;
+  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  FileBase64?: string;
+  /** 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
+  FileStartPageNumber?: number;
+  /** 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的结束页码，识别的页码包含当前值。建议一次请求的页面不超过3页。 */
+  FileEndPageNumber?: number;
+}
+
+declare interface ConvertDocumentResponse {
+  /** 识别生成的word文件base64编码的字符串 */
+  WordRecognizeInfo?: WordRecognizeInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1009,9 +1035,9 @@ declare interface CreateReconstructDocumentFlowRequest {
   FileBase64?: string;
   /** 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 100M。文件下载时间不超过 15 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl?: string;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。 */
   FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为100，表示识别到pdf文件的第100页。单次调用最多支持识别100页内容，即FileEndPageNumber-FileStartPageNumber需要不大于100。 */
   FileEndPageNumber?: number;
   /** 创建文档解析任务配置信息 */
   Config?: CreateReconstructDocumentFlowConfig;
@@ -1520,6 +1546,46 @@ declare interface GenerateQAResponse {
   RequestId?: string;
 }
 
+declare interface GetAnswerTypeDataCountRequest {
+  /** 开始日期 */
+  StartTime: number;
+  /** 结束日期 */
+  EndTime: number;
+  /** 应用id */
+  AppBizId?: string[];
+  /** 消息来源(1、分享用户端 2、对话API 3、对话测试 4、应用评测) */
+  Type?: number;
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+}
+
+declare interface GetAnswerTypeDataCountResponse {
+  /** 总消息数 */
+  Total?: number;
+  /** 大模型直接回复总数 */
+  ModelReplyCount?: number;
+  /** 知识型回复总数 */
+  KnowledgeCount?: number;
+  /** 任务流回复总数 */
+  TaskFlowCount?: number;
+  /** 搜索引擎回复总数 */
+  SearchEngineCount?: number;
+  /** 图片理解回复总数 */
+  ImageUnderstandingCount?: number;
+  /** 拒答回复总数 */
+  RejectCount?: number;
+  /** 敏感回复总数 */
+  SensitiveCount?: number;
+  /** 并发超限回复总数 */
+  ConcurrentLimitCount?: number;
+  /** 未知问题回复总数 */
+  UnknownIssuesCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetAppKnowledgeCountRequest {
   /** 类型：doc-文档；qa-问答对 */
   Type: string;
@@ -1594,6 +1660,40 @@ declare interface GetEmbeddingResponse {
   Data?: EmbeddingObject[];
   /** 消耗量，返回TotalToken */
   Usage?: Usage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLikeDataCountRequest {
+  /** 开始日期 */
+  StartTime: number;
+  /** 结束日期 */
+  EndTime: number;
+  /** 应用id */
+  AppBizId?: string[];
+  /** 消息来源(1、分享用户端 2、对话API) */
+  Type?: number;
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+}
+
+declare interface GetLikeDataCountResponse {
+  /** 可评价消息数 */
+  Total?: number;
+  /** 评价数 */
+  AppraisalTotal?: number;
+  /** 参评率 */
+  ParticipationRate?: number;
+  /** 点赞数 */
+  LikeTotal?: number;
+  /** 点赞率 */
+  LikeRate?: number;
+  /** 点踩数 */
+  DislikeTotal?: number;
+  /** 点踩率 */
+  DislikeRate?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2317,9 +2417,9 @@ declare interface ReconstructDocumentRequest {
   FileBase64?: string;
   /** 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl?: string;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。 */
   FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。单次调用，最多支持10页pdf的文档解析。 */
+  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为10，表示识别到pdf文件的第10页。单次调用最多支持识别10页内容，即FileEndPageNumber-FileStartPageNumber需要不大于10。 */
   FileEndPageNumber?: number;
   /** 配置选项，支持配置是否在生成的Markdown中是否嵌入图片 */
   Config?: ReconstructDocumentConfig;
@@ -2495,6 +2595,8 @@ declare interface Lke {
   CheckAttributeLabelExist(data: CheckAttributeLabelExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelExistResponse>;
   /** 检查属性标签引用 {@link CheckAttributeLabelReferRequest} {@link CheckAttributeLabelReferResponse} */
   CheckAttributeLabelRefer(data: CheckAttributeLabelReferRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelReferResponse>;
+  /** 文档转换 {@link ConvertDocumentRequest} {@link ConvertDocumentResponse} */
+  ConvertDocument(data?: ConvertDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertDocumentResponse>;
   /** 创建应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 创建属性 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
@@ -2553,6 +2655,8 @@ declare interface Lke {
   ExportUnsatisfiedReply(data: ExportUnsatisfiedReplyRequest, config?: AxiosRequestConfig): AxiosPromise<ExportUnsatisfiedReplyResponse>;
   /** 文档生成问答 {@link GenerateQARequest} {@link GenerateQAResponse} */
   GenerateQA(data: GenerateQARequest, config?: AxiosRequestConfig): AxiosPromise<GenerateQAResponse>;
+  /** 回答类型数据统计 {@link GetAnswerTypeDataCountRequest} {@link GetAnswerTypeDataCountResponse} */
+  GetAnswerTypeDataCount(data: GetAnswerTypeDataCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAnswerTypeDataCountResponse>;
   /** 获取知识问答个数 {@link GetAppKnowledgeCountRequest} {@link GetAppKnowledgeCountResponse} */
   GetAppKnowledgeCount(data: GetAppKnowledgeCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAppKnowledgeCountResponse>;
   /** 获取应用密钥 {@link GetAppSecretRequest} {@link GetAppSecretResponse} */
@@ -2561,6 +2665,8 @@ declare interface Lke {
   GetDocPreview(data: GetDocPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<GetDocPreviewResponse>;
   /** 获取特征向量 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
+  /** 点踩点赞数据统计 {@link GetLikeDataCountRequest} {@link GetLikeDataCountResponse} */
+  GetLikeDataCount(data: GetLikeDataCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetLikeDataCountResponse>;
   /** 获取聊天历史请求 {@link GetMsgRecordRequest} {@link GetMsgRecordResponse} */
   GetMsgRecord(data: GetMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<GetMsgRecordResponse>;
   /** 查询文档解析任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */

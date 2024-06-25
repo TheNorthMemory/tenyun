@@ -116,6 +116,22 @@ declare interface TaskStatus {
   AudioDuration?: number | null;
 }
 
+/** 声纹组对比结果top数据 */
+declare interface VerifyTop {
+  /** 相似度打分 */
+  Score?: string | null;
+  /** 说话人id */
+  VoicePrintId?: string | null;
+  /** 说话人昵称 */
+  SpeakerId?: string | null;
+}
+
+/** 说话人验证1:N返回结果 */
+declare interface VerifyTopResult {
+  /** 对比打分结果，按照打分降序排列返回 */
+  VerifyTops?: VerifyTop[] | null;
+}
+
 /** [词表内容](https://cloud.tencent.com/document/product/1093/41484) */
 declare interface Vocab {
   /** 热词表名称 */
@@ -156,6 +172,8 @@ declare interface VoicePrintCompareData {
 declare interface VoicePrintCountData {
   /** 总数 */
   Total?: number | null;
+  /** 说话人id列表 */
+  VoicePrintList?: VoicePrintBaseData[] | null;
 }
 
 /** [说话人验证数据](https://cloud.tencent.com/document/product/1093/94481) */
@@ -575,6 +593,10 @@ declare interface VoicePrintCompareResponse {
 }
 
 declare interface VoicePrintCountRequest {
+  /** 分组ID,仅支持大小写字母和下划线的组合，不超过128个字符 */
+  GroupId?: string;
+  /** 统计模式0: 统计所有声纹数量1: 统计指定分组下的声纹数量 */
+  CountMod?: number;
 }
 
 declare interface VoicePrintCountResponse {
@@ -587,6 +609,10 @@ declare interface VoicePrintCountResponse {
 declare interface VoicePrintDeleteRequest {
   /** 说话人id，说话人唯一标识 */
   VoicePrintId?: string;
+  /** 说话人分组ID,仅支持大小写字母和下划线的组合，不超过128个字符 */
+  GroupId?: string;
+  /** 删除模式: 0.默认值，删除该条声纹1.从分组中删除该条声纹，声纹本身不删除2.从声纹库中删除分组，仅删除分组信息，不会真正删除分组中的声纹 */
+  DelMod?: number;
 }
 
 declare interface VoicePrintDeleteResponse {
@@ -605,11 +631,33 @@ declare interface VoicePrintEnrollRequest {
   Data: string;
   /** 说话人昵称 不超过32字节 */
   SpeakerNick?: string;
+  /** 分组id, 仅支持大小写字母和下划线的组合，不超过128个字符 */
+  GroupId?: string;
 }
 
 declare interface VoicePrintEnrollResponse {
   /** 说话人基本数据 */
   Data?: VoicePrintBaseData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VoicePrintGroupVerifyRequest {
+  /** 音频格式 0: pcm, 1: wav */
+  VoiceFormat: number;
+  /** 音频采样率，目前支持16000，单位：Hz，必填 */
+  SampleRate: number;
+  /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
+  Data: string;
+  /** 分组id, 支持数字，字母，下划线，长度不超过128 */
+  GroupId: string;
+  /** 返回打分结果降序排列topN, TopN大于0， 小于可创建声纹最大数量 */
+  TopN: number;
+}
+
+declare interface VoicePrintGroupVerifyResponse {
+  /** TopN 返回结果;系统建议打分70分以上为同一个人音色，评分也取决于音频质量、长度等其他原因影响，您可以按照业务需求适当提高或降低分数要求 */
+  Data?: VerifyTopResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -703,6 +751,8 @@ declare interface Asr {
   VoicePrintDelete(data?: VoicePrintDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintDeleteResponse>;
   /** 说话人注册 {@link VoicePrintEnrollRequest} {@link VoicePrintEnrollResponse} */
   VoicePrintEnroll(data: VoicePrintEnrollRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintEnrollResponse>;
+  /** 说话人验证1:N {@link VoicePrintGroupVerifyRequest} {@link VoicePrintGroupVerifyResponse} */
+  VoicePrintGroupVerify(data: VoicePrintGroupVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintGroupVerifyResponse>;
   /** 说话人更新 {@link VoicePrintUpdateRequest} {@link VoicePrintUpdateResponse} */
   VoicePrintUpdate(data: VoicePrintUpdateRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintUpdateResponse>;
   /** 说话人认证 {@link VoicePrintVerifyRequest} {@link VoicePrintVerifyResponse} */

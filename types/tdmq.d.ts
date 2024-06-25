@@ -828,6 +828,42 @@ declare interface RabbitMQClusterWhiteListInfo {
   PublicDataStreamWhiteListStatus?: string | null;
 }
 
+/** RabbitMQ exchange列表成员信息 */
+declare interface RabbitMQExchangeListInfo {
+  /** exchange 名 */
+  ExchangeName?: string;
+  /** 备注说明 */
+  Remark?: string | null;
+  /** exchange 类型, 支持 "fanout","direct","topic","headers" */
+  ExchangeType?: string;
+  /** VHost参数 */
+  VirtualHost?: string | null;
+  /** exchange 创建者, "system":"系统创建", "user":"用户创建" */
+  ExchangeCreator?: string | null;
+  /** exchange 创建时间 */
+  CreateTimeStamp?: string | null;
+  /** exchange 修改时间 */
+  ModTimeStamp?: string | null;
+  /** 输入消息速率 */
+  MessageRateIn?: number | null;
+  /** 输出消息速率 */
+  MessageRateOut?: number | null;
+  /** 是否为持久化交换机，true 为持久化，false 为非持久化 */
+  Durable?: boolean | null;
+  /** 是否为自动删除交换机，true 为自动删除，false 为非自动删除 */
+  AutoDelete?: boolean | null;
+  /** 是否为内部交换机，true 为内部交换机 */
+  Internal?: boolean | null;
+  /** 交换机所属实例 ID */
+  InstanceId?: string | null;
+  /** 生效的策略名称 */
+  Policy?: string | null;
+  /** 扩展参数 key-value 对象 */
+  Arguments?: string | null;
+  /** 未调度的延时消息数量 */
+  MessagesDelayed?: number | null;
+}
+
 /** RabbitMQ节点信息 */
 declare interface RabbitMQPrivateNode {
   /** 节点名字 */
@@ -2966,6 +3002,38 @@ declare interface DescribePulsarProInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRabbitMQExchangesRequest {
+  /** 实例 id */
+  InstanceId: string;
+  /** vhost 参数 */
+  VirtualHost: string;
+  /** 分页 offset */
+  Offset?: number;
+  /** 分页 limit */
+  Limit?: number;
+  /** 搜索关键词, 支持模糊匹配 */
+  SearchWord?: string;
+  /** 筛选 exchange 类型, 数组中每个元素为选中的过滤类型 */
+  ExchangeTypeFilters?: string[];
+  /** 筛选 exchange 创建来源, "system":"系统创建", "user":"用户创建" */
+  ExchangeCreatorFilters?: string[];
+  /** exchange 名称，用于精确匹配 */
+  ExchangeName?: string;
+  /** 排序依据的字段：MessageRateInOut - 生产消费速率之和；MessageRateIn - 生产速率；MessageRateOut - 消费速率； */
+  SortElement?: string;
+  /** 排序顺序，ascend 或 descend */
+  SortOrder?: string;
+}
+
+declare interface DescribeRabbitMQExchangesResponse {
+  /** 策略列表信息 */
+  ExchangeInfoList?: RabbitMQExchangeListInfo[] | null;
+  /** 策略结果总数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRabbitMQNodeListRequest {
   /** rabbitmq集群ID */
   InstanceId: string;
@@ -4751,6 +4819,8 @@ declare interface Tdmq {
   DescribePulsarProInstanceDetail(data: DescribePulsarProInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstanceDetailResponse>;
   /** 查询Pulsar专业版实例列表 {@link DescribePulsarProInstancesRequest} {@link DescribePulsarProInstancesResponse} */
   DescribePulsarProInstances(data?: DescribePulsarProInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstancesResponse>;
+  /** 查询RabbitMQ exchange 列表 {@link DescribeRabbitMQExchangesRequest} {@link DescribeRabbitMQExchangesResponse} */
+  DescribeRabbitMQExchanges(data: DescribeRabbitMQExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQExchangesResponse>;
   /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
   /** 查询RabbitMQ队列详情 {@link DescribeRabbitMQQueueDetailRequest} {@link DescribeRabbitMQQueueDetailResponse} */

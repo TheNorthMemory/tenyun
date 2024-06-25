@@ -312,6 +312,44 @@ declare interface PacketStatistics {
   Count?: number | null;
 }
 
+/** 价格标签信息 */
+declare interface PriceTag {
+  /** 计价名称 */
+  Name?: string;
+  /** 步长 */
+  Step?: number | null;
+}
+
+/** 商品售卖信息 */
+declare interface ProductSKU {
+  /** 产品类型，EXPERIMENT，体验版BASIC，基础版PRO，专业版PLATINUM，铂金版 */
+  InstanceType?: string;
+  /** 规格代码 */
+  SkuCode?: string;
+  /** TPS上限 */
+  TpsLimit?: number | null;
+  /** 弹性TPS上限 */
+  ScaledTpsLimit?: number | null;
+  /** 主题数量上限默认值 */
+  TopicNumLimit?: number | null;
+  /** 消费组数量上限 */
+  GroupNumLimit?: number | null;
+  /** 默认消息保留时间，小时为单位 */
+  DefaultRetention?: number | null;
+  /** 可调整消息保留时间上限，小时为单位 */
+  RetentionUpperLimit?: number | null;
+  /** 可调整消息保留时间下限，小时为单位 */
+  RetentionLowerLimit?: number | null;
+  /** 延时消息最大时长，小时为单位 */
+  MaxMessageDelay?: number | null;
+  /** 是否可购买 */
+  OnSale?: boolean;
+  /** 计费项信息 */
+  PriceTags?: PriceTag[];
+  /** 主题数量上限默认最大值 */
+  TopicNumUpperLimit?: number | null;
+}
+
 /** 公网访问安全规则 */
 declare interface PublicAccessRule {
   /** ip网段信息 */
@@ -1168,6 +1206,16 @@ declare interface DescribeMQTTUserListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProductSKUsRequest {
+}
+
+declare interface DescribeProductSKUsResponse {
+  /** 商品配置信息 */
+  Data?: ProductSKU[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoleListRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1491,6 +1539,8 @@ declare interface Trocket {
   DescribeMQTTTopicList(data: DescribeMQTTTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTTopicListResponse>;
   /** 查询MQTT用户列表 {@link DescribeMQTTUserListRequest} {@link DescribeMQTTUserListResponse} */
   DescribeMQTTUserList(data: DescribeMQTTUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTUserListResponse>;
+  /** 查询产品售卖规格 {@link DescribeProductSKUsRequest} {@link DescribeProductSKUsResponse} */
+  DescribeProductSKUs(data?: DescribeProductSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUsResponse>;
   /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */
   DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
   /** 查询主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */

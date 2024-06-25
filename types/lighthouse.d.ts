@@ -1293,7 +1293,7 @@ declare interface DescribeBlueprintsResponse {
 }
 
 declare interface DescribeBundleDiscountRequest {
-  /** 套餐 ID。 */
+  /** 套餐 ID。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。 */
   BundleId: string;
 }
 
@@ -1307,7 +1307,7 @@ declare interface DescribeBundleDiscountResponse {
 }
 
 declare interface DescribeBundlesRequest {
-  /** 套餐 ID 列表。 */
+  /** 套餐 ID 列表。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。 */
   BundleIds?: string[];
   /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Offset?: number;
@@ -1811,21 +1811,21 @@ declare interface DescribeRegionsResponse {
 }
 
 declare interface DescribeResetInstanceBlueprintsRequest {
-  /** 实例ID */
+  /** 实例ID。可通过 DescribeInstances 接口返回值中的 InstanceId 获取。 */
   InstanceId: string;
   /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Limit?: number;
-  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否blueprint-type按照【镜像类型】进行过滤。取值： APP_OS（应用镜像 ）；PURE_OS（ 系统镜像）；PRIVATE（自定义镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。 */
+  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否可通过 DescribeBlueprints 接口返回值中的 BlueprintId 获取。blueprint-type按照【镜像类型】进行过滤。取值： APP_OS（应用镜像 ）；PURE_OS（ 系统镜像）；PRIVATE（自定义镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否可通过 DescribeBlueprints 接口返回值中的 BlueprintName 获取。blueprint-state按照【镜像状态】进行过滤。类型：String必选：否可通过 DescribeBlueprints 接口返回值中的 BlueprintState 获取。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。 */
   Filters?: Filter[];
 }
 
 declare interface DescribeResetInstanceBlueprintsResponse {
   /** 符合条件的镜像数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 镜像重置信息列表 */
-  ResetInstanceBlueprintSet: ResetInstanceBlueprint[];
+  ResetInstanceBlueprintSet?: ResetInstanceBlueprint[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2115,9 +2115,9 @@ declare interface ModifyDisksRenewFlagResponse {
 }
 
 declare interface ModifyDockerContainerRequest {
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
-  /** 容器ID。 */
+  /** 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。 */
   ContainerId: string;
   /** 环境变量列表 */
   Envs?: ContainerEnv[];
@@ -2325,17 +2325,17 @@ declare interface ReplaceFirewallTemplateRuleResponse {
 }
 
 declare interface RerunDockerContainerRequest {
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
   /** 重新创建的容器配置。 */
   ContainerConfiguration: DockerContainerConfiguration;
-  /** 容器ID。 */
+  /** 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。 */
   ContainerId: string;
 }
 
 declare interface RerunDockerContainerResponse {
   /** Docker活动ID。 */
-  DockerActivityId: string;
+  DockerActivityId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2421,7 +2421,7 @@ declare interface RestartDockerContainersResponse {
 }
 
 declare interface RunDockerContainersRequest {
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
   /** 要创建的容器列表。 */
   Containers: DockerContainerConfiguration[];

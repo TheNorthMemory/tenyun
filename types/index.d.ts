@@ -232,6 +232,7 @@ import Trro, { Versions as TrroVersions } from "./trro";
 import Trtc, { Versions as TrtcVersions } from "./trtc";
 import Tse, { Versions as TseVersions } from "./tse";
 import Tsf, { Versions as TsfVersions } from "./tsf";
+import Tsi, { Versions as TsiVersions } from "./tsi";
 import Tsw, { Versions as TswVersions } from "./tsw";
 import Tts, { Versions as TtsVersions } from "./tts";
 import Ump, { Versions as UmpVersions } from "./ump";
@@ -485,6 +486,7 @@ export declare type SERVICE_VERSIONS = {
   trtc: TrtcVersions,
   tse: TseVersions,
   tsf: TsfVersions,
+  tsi: TsiVersions,
   tsw: TswVersions,
   tts: TtsVersions,
   ump: UmpVersions,
@@ -980,6 +982,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tse: Tse,
   /** {@link Tsf 微服务平台 TSF} */
   tsf: Tsf,
+  /** {@link Tsi 腾讯同传系统} */
+  tsi: Tsi,
   /** {@link Tsw 微服务观测平台 TSW} */
   tsw: Tsw,
   /** {@link Tts 语音合成} */

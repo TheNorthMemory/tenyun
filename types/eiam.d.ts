@@ -499,7 +499,7 @@ declare interface DeleteUsersRequest {
 
 declare interface DeleteUsersResponse {
   /** 未被成功删除的用户信息。当业务参数为DeleteIdList时，本字段将返回未成功删除的用户ID列表。当业务参数为DeleteNameList时，本字段将返回未成功删除的用户名称列表。 */
-  FailedItems: string[] | null;
+  FailedItems?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -773,11 +773,11 @@ declare interface DescribeUserThirdPartyAccountInfoRequest {
 
 declare interface DescribeUserThirdPartyAccountInfoResponse {
   /** 用户 id。 */
-  UserId: string;
+  UserId?: string;
   /** 用户名。 */
-  UserName: string;
+  UserName?: string;
   /** 三方账号的绑定情况。 */
-  ThirdPartyAccounts: ThirdPartyAccountInfo[] | null;
+  ThirdPartyAccounts?: ThirdPartyAccountInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

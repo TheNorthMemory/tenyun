@@ -1021,11 +1021,11 @@ declare interface TemServiceVersionInfo {
 /** 创建应用，创建仓库参数 */
 declare interface UseDefaultRepoParameters {
   /** 企业版实例名 */
-  EnterpriseInstanceName: string | null;
+  EnterpriseInstanceName?: string | null;
   /** 企业版收费类型 0 按量收费 1 包年包月 */
-  EnterpriseInstanceChargeType: number | null;
+  EnterpriseInstanceChargeType?: number | null;
   /** 企业版规格：basic-基础班 ，standard-标准版，premium-高级版 */
-  EnterpriseInstanceType: string | null;
+  EnterpriseInstanceType?: string | null;
 }
 
 /** 工作负载详情 */
@@ -1101,7 +1101,7 @@ declare interface CreateApplicationRequest {
 
 declare interface CreateApplicationResponse {
   /** 服务code */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

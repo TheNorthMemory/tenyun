@@ -478,6 +478,26 @@ declare interface DataEngineInfo {
   EngineResourceUsedCU?: number | null;
 }
 
+/** 引擎规格详情 */
+declare interface DataEngineScaleInfo {
+  /** 引擎ID */
+  DataEngineId?: string | null;
+  /** 引擎名称 */
+  DataEngineName?: string | null;
+  /** 引擎规格详情 */
+  ScaleDetail?: DataEngineScaleInfoDetail[] | null;
+}
+
+/** 引擎规格详情 */
+declare interface DataEngineScaleInfoDetail {
+  /** 统计开始时间，格式为：yyyy-MM-dd HH:mm:ss */
+  StartTime?: string | null;
+  /** 统计结束时间，格式为：yyyy-MM-dd HH:mm:ss */
+  EndTime?: string | null;
+  /** 当前统计时间段，引擎规格 */
+  CU?: number | null;
+}
+
 /** 数据表数据格式。 */
 declare interface DataFormat {
   /** 文本格式，TextFile。 */
@@ -3128,6 +3148,22 @@ declare interface DescribeDataEnginesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataEnginesScaleDetailRequest {
+  /** 引擎名称列表 */
+  DataEngineNames?: string[];
+  /** 开始时间，时间格式：yyyy-MM-dd HH:mm:ss，最长查询一个月内的记录 */
+  StartTime?: string;
+  /** 结束时间，时间格式：yyyy-MM-dd HH:mm:ss，最长查询一个月内的记录 */
+  EndTime?: string;
+}
+
+declare interface DescribeDataEnginesScaleDetailResponse {
+  /** 引擎规格统计详细信息 */
+  Scales?: DataEngineScaleInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDatabasesRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -4713,6 +4749,8 @@ declare interface Dlc {
   DescribeDataEnginePythonSparkImages(data: DescribeDataEnginePythonSparkImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginePythonSparkImagesResponse>;
   /** 查询DataEngines列表 {@link DescribeDataEnginesRequest} {@link DescribeDataEnginesResponse} */
   DescribeDataEngines(data?: DescribeDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesResponse>;
+  /** 查看引擎的规格明细 {@link DescribeDataEnginesScaleDetailRequest} {@link DescribeDataEnginesScaleDetailResponse} */
+  DescribeDataEnginesScaleDetail(data?: DescribeDataEnginesScaleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesScaleDetailResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询数据源信息 {@link DescribeDatasourceConnectionRequest} {@link DescribeDatasourceConnectionResponse} */

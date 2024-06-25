@@ -3555,7 +3555,7 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 返回的结果 */
-  Result: InstanceResponse;
+  Result?: InstanceResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1996,6 +1996,36 @@ declare interface DescribeFenceEventListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFirmwareRequest {
+  /** 产品ID */
+  ProductID: string;
+  /** 固件版本号 */
+  FirmwareVersion: string;
+}
+
+declare interface DescribeFirmwareResponse {
+  /** 固件版本号 */
+  Version?: string;
+  /** 产品ID */
+  ProductId?: string;
+  /** 固件名称 */
+  Name?: string | null;
+  /** 固件描述 */
+  Description?: string | null;
+  /** 固件Md5值 */
+  Md5sum?: string | null;
+  /** 固件上传的秒级时间戳 */
+  Createtime?: number | null;
+  /** 产品名称 */
+  ProductName?: string;
+  /** 固件升级模块 */
+  FwType?: string | null;
+  /** 固件用户自定义配置信息 */
+  UserDefined?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFirmwareTaskRequest {
   /** 产品ID */
   ProductID: string;
@@ -3421,6 +3451,8 @@ declare interface Iotexplorer {
   DescribeFenceBindList(data: DescribeFenceBindListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFenceBindListResponse>;
   /** 获取围栏告警事件列表 {@link DescribeFenceEventListRequest} {@link DescribeFenceEventListResponse} */
   DescribeFenceEventList(data: DescribeFenceEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFenceEventListResponse>;
+  /** 查询固件信息 {@link DescribeFirmwareRequest} {@link DescribeFirmwareResponse} */
+  DescribeFirmware(data: DescribeFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareResponse>;
   /** 查询固件升级任务列表 {@link DescribeFirmwareTaskRequest} {@link DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
   /** 获取网关绑定的子设备列表 {@link DescribeGatewayBindDevicesRequest} {@link DescribeGatewayBindDevicesResponse} */

@@ -755,41 +755,41 @@ declare interface DspaDiscoveryCOSRules {
 /** COS扫描任务结果详情 */
 declare interface DspaDiscoveryCOSTaskResultDetail {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 扫描File结果详情ID */
-  FileResultId: number | null;
+  FileResultId?: number | null;
   /** 所属桶名 */
-  BucketName: string | null;
+  BucketName?: string | null;
   /** 所属文件名 */
-  FileName: string | null;
+  FileName?: string | null;
   /** 敏感数据分类ID */
-  CategoryId: number | null;
+  CategoryId?: number | null;
   /** 敏感数据分类名称 */
-  CategoryName: string | null;
+  CategoryName?: string | null;
   /** 敏感数据分级ID */
-  LevelId: number | null;
+  LevelId?: number | null;
   /** 敏感数据分级名称 */
-  LevelName: string | null;
+  LevelName?: string | null;
   /** KMS加密，true or false */
-  KMSEncrypted: boolean | null;
+  KMSEncrypted?: boolean | null;
   /** 规则名称 */
-  RuleName: string | null;
+  RuleName?: string | null;
   /** 规则ID */
-  RuleId: number | null;
+  RuleId?: number | null;
   /** 敏感数据分级分数 */
-  LevelRiskScore: number | null;
+  LevelRiskScore?: number | null;
   /** 文件大小，单位为KB */
-  FileSize: number | null;
+  FileSize?: number | null;
   /** 文件类型，如csv，txt */
-  FileType: string | null;
+  FileType?: string | null;
   /** 敏感数据出现次数 */
-  SensitiveDataCount: number | null;
+  SensitiveDataCount?: number | null;
   /** 分类树路径 */
-  CategoryFullPath: string[] | null;
+  CategoryFullPath?: string[] | null;
   /** 合规组ID */
-  ComplianceId: number | null;
+  ComplianceId?: number | null;
   /** 结果id */
-  ResultId: number | null;
+  ResultId?: number | null;
 }
 
 /** 合规组 */

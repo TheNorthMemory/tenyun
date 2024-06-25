@@ -1900,6 +1900,24 @@ declare interface AddAntiInfoLeakRulesResponse {
   RequestId?: string;
 }
 
+declare interface AddAreaBanAreasRequest {
+  /** 需要修改的域名 */
+  Domain: string;
+  /** 需要新增的封禁地域 */
+  Areas: string[];
+  /** waf版本信息，spart-waf或者clb-waf，其他无效，请一定填写 */
+  Edition?: string;
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+}
+
+declare interface AddAreaBanAreasResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddAttackWhiteRuleRequest {
   /** 域名 */
   Domain: string;
@@ -4719,6 +4737,8 @@ declare interface Waf {
   AddAntiFakeUrl(data: AddAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<AddAntiFakeUrlResponse>;
   /** 添加信息防泄漏规则 {@link AddAntiInfoLeakRulesRequest} {@link AddAntiInfoLeakRulesResponse} */
   AddAntiInfoLeakRules(data: AddAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddAntiInfoLeakRulesResponse>;
+  /** 添加封禁地域 {@link AddAreaBanAreasRequest} {@link AddAreaBanAreasResponse} */
+  AddAreaBanAreas(data: AddAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<AddAreaBanAreasResponse>;
   /** 增加规则引擎白名单 {@link AddAttackWhiteRuleRequest} {@link AddAttackWhiteRuleResponse} */
   AddAttackWhiteRule(data: AddAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAttackWhiteRuleResponse>;
   /** 增加访问控制（自定义策略） {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
