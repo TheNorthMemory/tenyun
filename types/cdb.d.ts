@@ -2625,11 +2625,11 @@ declare interface DescribeAccountsRequest {
 
 declare interface DescribeAccountsResponse {
   /** 符合查询条件的账号数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合查询条件的账号详细信息。 */
-  Items: AccountInfo[];
+  Items?: AccountInfo[];
   /** 用户可设置实例最大连接数。 */
-  MaxUserConnections: number;
+  MaxUserConnections?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

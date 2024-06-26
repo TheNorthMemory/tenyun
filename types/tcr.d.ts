@@ -866,6 +866,8 @@ declare interface CheckInstanceNameRequest {
 declare interface CheckInstanceNameResponse {
   /** 检查结果，true为合法，false为非法 */
   IsValidated?: boolean;
+  /** 1: Illegal（名子非法）, 2:Reserved（名字保留）, 3:Existed（名字已存在） */
+  DetailCode?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -877,9 +879,9 @@ declare interface CheckInstanceRequest {
 
 declare interface CheckInstanceResponse {
   /** 检查结果，true为合法，false为非法 */
-  IsValidated: boolean;
+  IsValidated?: boolean;
   /** 实例所在的RegionId */
-  RegionId: number;
+  RegionId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2639,7 +2641,7 @@ declare interface ValidateNamespaceExistPersonalRequest {
 
 declare interface ValidateNamespaceExistPersonalResponse {
   /** 验证命名空间是否存在返回信息 */
-  Data: NamespaceIsExistsResp;
+  Data?: NamespaceIsExistsResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2651,7 +2653,7 @@ declare interface ValidateRepositoryExistPersonalRequest {
 
 declare interface ValidateRepositoryExistPersonalResponse {
   /** 验证个人版仓库是否存在返回信息 */
-  Data: RepoIsExistResp;
+  Data?: RepoIsExistResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

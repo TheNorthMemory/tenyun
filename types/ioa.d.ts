@@ -16,12 +16,118 @@ declare interface Condition {
   PageNum?: number | null;
 }
 
+/** 账户分响应对象集合 */
+declare interface DescribeAccountGroupsData {
+  /** 创建时间 */
+  Itime?: string | null;
+  /** 账户组名称 */
+  Name?: string | null;
+  /** id patch数组 */
+  IdPathArr?: number[] | null;
+  /** 该分组下用户总数 */
+  UserTotal?: number | null;
+  /** 扩展信息 */
+  ExtraInfo?: string | null;
+  /** 导入类型 */
+  ImportType?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 同步数据源 */
+  Source?: number | null;
+  /** miniIAM id */
+  MiniIamId?: string | null;
+  /** 组织id */
+  OrgId?: string | null;
+  /** 是否该账户的直接权限 */
+  ReadOnly?: boolean | null;
+  /** 父id */
+  ParentId?: number | null;
+  /** 名称path */
+  NamePath?: string | null;
+  /** 父组织id */
+  ParentOrgId?: string | null;
+  /** id path */
+  IdPath?: string | null;
+  /** 自增id */
+  Id?: number | null;
+  /** 是否叶子节点 */
+  IsLeaf?: boolean | null;
+  /** 最后更新时间 */
+  Utime?: string | null;
+}
+
+/** 账户分组详情响应数据 */
+declare interface DescribeAccountGroupsPageResp {
+  /** 账户分响应对象集合 */
+  Items?: DescribeAccountGroupsData[] | null;
+  /** 分页公共对象 */
+  Page?: Paging | null;
+}
+
 /** 分页的data数据 */
 declare interface DescribeDevicesPageRsp {
   /** 数据分页信息 */
   Paging?: Paging | null;
   /** 业务响应数据 */
   Items?: DeviceDetail[] | null;
+}
+
+/** 所属组 */
+declare interface DescribeLocalAccountAccountGroupsData {
+  /** 组Id(只支持32位) */
+  AccountGroupId?: number | null;
+}
+
+/** 获取账号列表响应的单个对象 */
+declare interface DescribeLocalAccountsData {
+  /** uid，数据库中唯一 */
+  Id?: number | null;
+  /** 账号，登录账号 */
+  UserId?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 账号id，同Id字段 */
+  AccountId?: number | null;
+  /** 账号所在的分组id */
+  GroupId?: number | null;
+  /** 账号所在的分组名称 */
+  GroupName?: string | null;
+  /** 账号所在的分组名称路径，用英文.分割 */
+  NamePath?: string | null;
+  /** 账号来源,0表示本地账号(只支持32位) */
+  Source?: number | null;
+  /** 账号状态,0禁用，1启用(只支持32位) */
+  Status?: number | null;
+  /** 账号的创建时间 */
+  Itime?: string | null;
+  /** 账号的最后更新时间 */
+  Utime?: string | null;
+  /** 账号的扩展信息，包含邮箱、手机号、身份证、职位等信息 */
+  ExtraInfo?: string | null;
+  /** 用户风险等级，枚举：none, low, middle, high */
+  RiskLevel?: string | null;
+  /** 所属组 */
+  AccountGroups?: DescribeLocalAccountAccountGroupsData[] | null;
+  /** 绑定手机端设备数 */
+  MobileBindNum?: number | null;
+  /** 绑定Pc端设备数 */
+  PcBindNum?: number | null;
+  /** 账号在线状态 1：在线 2：离线 */
+  OnlineStatus?: number | null;
+  /** 账号活跃状态 1：活跃 2：非活跃 */
+  ActiveStatus?: number | null;
+  /** 账号登录时间 */
+  LoginTime?: string | null;
+  /** 账号登出时间 */
+  LogoutTime?: string | null;
+}
+
+/** 获取账号列表响应的分页对象 */
+declare interface DescribeLocalAccountsPage {
+  /** 公共分页对象 */
+  Page?: Paging | null;
+  /** 获取账号列表响应的单个对象 */
+  Items?: DescribeLocalAccountsData[] | null;
 }
 
 /** 业务响应数据 */
@@ -130,6 +236,44 @@ declare interface FilterGroup {
   Filters?: Filter[] | null;
 }
 
+/** 账户分组详情响应数据 */
+declare interface GetAccountGroupData {
+  /** 分组Namepath */
+  NamePath?: string | null;
+  /** 分组Id path arr(只支持32位) */
+  IdPathArr?: number[] | null;
+  /** 分组扩展信息 */
+  ExtraInfo?: string | null;
+  /** 最后更新时间 */
+  Utime?: string | null;
+  /** 父分组id(只支持32位) */
+  ParentId?: number | null;
+  /** 组织id */
+  OrgId?: string | null;
+  /** 分组名称 */
+  Name?: string | null;
+  /** 分组id(只支持32位) */
+  Id?: number | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 分组导入源(只支持32位) */
+  Source?: number | null;
+  /** Id Path */
+  IdPath?: string | null;
+  /** 创建时间 */
+  Itime?: string | null;
+  /** 父组织id */
+  ParentOrgId?: string | null;
+  /** 导入信息,json格式 */
+  Import?: string | null;
+  /** 是否开启导入架构 */
+  ImportEnable?: boolean | null;
+  /** 导入类型 */
+  ImportType?: string | null;
+  /** miniIAMId，MiniIAM源才有 */
+  MiniIamId?: string | null;
+}
+
 /** 页码 */
 declare interface Paging {
   /** 每页条数(只支持32位) */
@@ -148,6 +292,22 @@ declare interface Sort {
   Field?: string | null;
   /** 排序方式 */
   Order?: string | null;
+}
+
+declare interface DescribeAccountGroupsRequest {
+  /** 搜索范围,0-仅搜直接子组,1-深层搜索(只支持32位) */
+  Deepin?: number;
+  /** 滤条件、分页参数Name - String - 是否必填：否 - 操作符: like - 排序支持：否- 按账号分组过滤。排序条件Itime - string - 是否必填：否 - 排序支持：是 - 按账号分组创建时间排序。Utime - string - 是否必填：否 - 排序支持：是 - 按账号分组更新时间排序。 */
+  Condition?: Condition;
+  /** 父分组id */
+  ParentId?: number;
+}
+
+declare interface DescribeAccountGroupsResponse {
+  /** 账户分组详情响应数据 */
+  Data?: DescribeAccountGroupsPageResp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeDevicesRequest {
@@ -178,11 +338,43 @@ declare interface DescribeDevicesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLocalAccountsRequest {
+  /** 滤条件、分页参数UserName - String - 是否必填：否 - 操作符: eq,like - 排序支持：否- 按账号UserName过滤。UserId - string - 是否必填：否 - 操作符: eq,like - 排序支持：否 - 按账号UserNd过滤。Phone - string - 是否必填：否 - 操作符: eq,like - 排序支持：否 - 按手机号过滤。 */
+  Condition?: Condition;
+  /** 获取账号的分组Id，不传默认获取全部(只支持32位) */
+  AccountGroupId?: number;
+  /** 是否仅展示当前目录下用户 1： 递归显示 2：仅显示当前目录下用户(只支持32位) */
+  ShowFlag?: number;
+}
+
+declare interface DescribeLocalAccountsResponse {
+  /** 获取账号列表响应的分页对象 */
+  Data?: DescribeLocalAccountsPage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRootAccountGroupRequest {
+}
+
+declare interface DescribeRootAccountGroupResponse {
+  /** 账户分组详情响应数据 */
+  Data?: GetAccountGroupData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
+  /** 查询账户目录列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
+  DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 查询设备列表详情 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
+  /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */
+  DescribeLocalAccounts(data?: DescribeLocalAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalAccountsResponse>;
+  /** 查询账户根分组详情 {@link DescribeRootAccountGroupRequest} {@link DescribeRootAccountGroupResponse} */
+  DescribeRootAccountGroup(data?: DescribeRootAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRootAccountGroupResponse>;
 }
 
 export declare type Versions = ["2022-06-01"];

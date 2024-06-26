@@ -110,6 +110,8 @@ declare interface AuditLog {
   NsTime?: number | null;
   /** 日志命中规则模板的基本信息 */
   TemplateInfo?: LogRuleTemplateInfo[] | null;
+  /** 事务ID */
+  TrxId?: number | null;
 }
 
 /** 审计日志文件 */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 250+ 款产品，11327+ 服务数</summary>
+<details><summary>共计 250+ 款产品，11333+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -169,7 +169,7 @@ cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(42) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(97) |
-cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(517) |
+cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(516) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(142) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(62) |
@@ -219,10 +219,10 @@ ie | [智能编辑](https://cloud.tencent.com/document/product/1186) | 2020-03-0
 iecp | [物联网边缘计算平台](https://cloud.tencent.com/document/product/1118) | 2021-09-14(102) |
 iir | [智能识图](https://cloud.tencent.com/document/product/1217) | 2020-04-17(1) |
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
-ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(1) |
+ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(4) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(138) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(141) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(102) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
@@ -342,7 +342,7 @@ vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(142) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(222) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(223) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(64) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(20) |

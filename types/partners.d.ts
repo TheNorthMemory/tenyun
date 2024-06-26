@@ -5,37 +5,39 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 已审核代客信息 */
 declare interface AgentAuditedClient {
   /** 代理商账号ID */
-  Uin: string;
+  Uin?: string;
   /** 代客账号ID */
-  ClientUin: string;
+  ClientUin?: string;
   /** 代客审核通过时间戳 */
-  AgentTime: string;
+  AgentTime?: string;
   /** 代客类型，可能值为a/b/c */
-  ClientFlag: string;
+  ClientFlag?: string;
   /** 代客备注 */
-  ClientRemark: string;
+  ClientRemark?: string;
   /** 代客名称（首选实名认证名称） */
-  ClientName: string;
+  ClientName?: string;
   /** 认证类型, 0：个人，1：企业；其他：未认证或无效值 */
-  AuthType: string;
+  AuthType?: string;
   /** 代客APPID */
-  AppId: string;
+  AppId?: string;
   /** 上月消费金额 */
-  LastMonthAmt: number;
+  LastMonthAmt?: number;
   /** 本月消费金额 */
-  ThisMonthAmt: number;
+  ThisMonthAmt?: number;
   /** 是否欠费,0：不欠费；1：欠费 */
-  HasOverdueBill: number;
+  HasOverdueBill?: number;
   /** 客户类型：可以为new(自拓)/assign(指派)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空 */
-  ClientType: string;
+  ClientType?: string;
   /** 项目类型：可以为self(自拓项目)/platform(合作项目)/repeat(复算项目 )/空 */
-  ProjectType: string;
+  ProjectType?: string;
   /** 业务员ID */
-  SalesUin: string | null;
+  SalesUin?: string | null;
   /** 业务员姓名 */
-  SalesName: string | null;
+  SalesName?: string | null;
   /** 代客邮箱 */
-  Mail: string | null;
+  Mail?: string | null;
+  /** 交易类型:交易类型 1-原类型 2-代理型 3-代采型 */
+  TransactionType?: string | null;
 }
 
 /** 业务信息定义 */

@@ -1627,7 +1627,7 @@ declare interface ChannelCreateFlowSignReviewRequest {
   ReviewType: string;
   /** 审核结果原因字符串长度不超过200当ReviewType 是拒绝（REJECT） 时此字段必填。当ReviewType 是拒绝（SIGN_REJECT） 时此字段必填。 */
   ReviewMessage?: string;
-  /** 审核节点的签署人标志，用于指定当前审核的签署方**如果签署审核节点是个人， 此参数必填**。 */
+  /** 审核节点的签署人标志，用于指定当前审核的签署方。注意：以下情况必须传递RecipientId **发起签署流程时，指定签署人需要审批（即签署人需要审批ApproverNeedSignReview为true），则必须指定RecipientId****如果签署审核节点是个人， 此参数必填**。 */
   RecipientId?: string;
   /** 流程审核操作类型，取值如下：**SignReview**：（默认）签署审核**CreateReview**：发起审核注意：`该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程` */
   OperateType?: string;

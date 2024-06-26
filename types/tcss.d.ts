@@ -578,7 +578,7 @@ declare interface ClusterInfoItem {
   ClusterNodeNum?: number;
   /** 集群区域 */
   Region?: string;
-  /** 监控组件的状态，为Defender_Uninstall、Defender_Normal、Defender_Error、Defender_Installing */
+  /** 防护状态: 已防护: Defended 未防护: UnDefended */
   DefenderStatus?: string;
   /** 集群状态 */
   ClusterStatus?: string;
@@ -614,8 +614,12 @@ declare interface ClusterInfoItem {
   OffLineNodeCount?: number | null;
   /** 未安装agent节点数 */
   UnInstallAgentNodeCount?: number | null;
-  /** 计费核数 */
+  /** 计费核数(弹性计费核数+普通计费核数) */
   ChargeCoresCnt?: number | null;
+  /** master 地址列表 */
+  MasterAddresses?: string[];
+  /** 核数 */
+  CoresCnt?: number;
 }
 
 /** 集群的节点信息 */
@@ -1484,6 +1488,8 @@ declare interface HostInfo {
   ChargeCoresCnt?: number;
   /** 防护状态:已防护: Defended未防护: UnDefended */
   DefendStatus?: string;
+  /** 核数 */
+  CoresCnt?: number;
 }
 
 /** 镜像自动授权任务信息 */
@@ -5687,7 +5693,7 @@ declare interface DescribeAssetHostListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"HostName - String - 是否必填：否 - 主机名筛选Group- String - 是否必填：否 - 主机群组搜索HostIP- string - 是否必填：否 - 主机ip搜索HostID- string - 是否必填：否 - 主机id搜索DockerVersion- string - 是否必填：否 - docker版本搜索MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"ProjectID- string - 是否必填：否 - 所属项目id搜索Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}] */
+  /** 过滤条件。 Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中" HostName - String - 是否必填：否 - 主机名筛选 Group- String - 是否必填：否 - 主机群组搜索 HostIP- string - 是否必填：否 - 主机ip搜索 HostID- string - 是否必填：否 - 主机id搜索 DockerVersion- string - 是否必填：否 - docker版本搜索 MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器； DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装" ProjectID- string - 是否必填：否 - 所属项目id搜索 Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}] NonClusterNode: 是否查询非集群节点(true: 是,false: 否) */
   Filters?: AssetFilters[];
   /** 排序字段 */
   By?: string;
@@ -7952,18 +7958,26 @@ declare interface DescribePurchaseStateInfoRequest {
 declare interface DescribePurchaseStateInfoResponse {
   /** 0：可申请试用可购买；1：只可购买(含试用审核不通过和试用过期)；2：试用生效中；3：专业版生效中；4：专业版过期 */
   State?: number;
-  /** 总核数 */
+  /** 总资源核数 = 总防护核数 + 未防护核数 */
+  AllCoresCnt?: number;
+  /** 总防护核数 =已购核数+ 试用赠送核数 +弹性计费核数 */
   CoresCnt?: number | null;
+  /** 未防护核数(未开启防护资源核数) */
+  UndefendCoresCnt?: number;
   /** 已购买核数 */
   AuthorizedCoresCnt?: number | null;
+  /** 试用赠送专业版核心数 */
+  GivenAuthorizedCoresCnt?: number | null;
+  /** 当前弹性计费核数数量 */
+  CurrentFlexibleCoresCnt?: number;
   /** 镜像数 */
   ImageCnt?: number | null;
   /** 已授权镜像数 */
   AuthorizedImageCnt?: number | null;
-  /** 已购买镜像授权数 */
-  PurchasedAuthorizedCnt?: number | null;
   /** 过期时间 */
   ExpirationTime?: string | null;
+  /** 已购买镜像授权数 */
+  PurchasedAuthorizedCnt?: number | null;
   /** 0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置) */
   AutomaticRenewal?: number | null;
   /** 试用期间赠送镜像授权数，可能会过期 */
@@ -7974,6 +7988,14 @@ declare interface DescribePurchaseStateInfoResponse {
   SubState?: string | null;
   /** 计费key */
   InquireKey?: string | null;
+  /** 防护策略 */
+  DefendPolicy?: string;
+  /** 弹性计费核数上限 */
+  FlexibleCoresLimit?: number;
+  /** 已防护集群核数 */
+  DefendClusterCoresCnt?: number;
+  /** 已防护主机核数 */
+  DefendHostCoresCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -506,7 +506,7 @@ declare interface Endpoint {
   Region?: string | null;
   /** 节点类型，proxy表示节点类型为主机，set表示节点类型为节点。proxy类型必须填在数组第一项。tdsqlmysql类型的源/目标配置必填 */
   Role?: string | null;
-  /** 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql */
+  /** 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql。注意TDSQL-C MySQL、TDSQL PostgreSQL无需填写此项值。 */
   DbKernel?: string | null;
   /** 数据库实例ID，格式如：cdb-powiqx8q */
   InstanceId?: string | null;
@@ -1553,11 +1553,11 @@ declare interface CreateSubscribeResponse {
 declare interface CreateSyncJobRequest {
   /** 付款类型, 如：PrePay(表示包年包月)、PostPay(表示按时按量) */
   PayMode: string;
-  /** 源端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,tdstore等 */
+  /** 源端数据库类型,如mysql,mariadb,percona,postgresql,cynosdbmysql(表示TDSQL-C MySQL),tdpg(TDSQL PostgreSQL版),tdsqlmysql,tdstore(表示TDSQL TDStore版)等。 */
   SrcDatabaseType: string;
   /** 源端数据库所在地域,如ap-guangzhou */
   SrcRegion: string;
-  /** 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,kafka,tdstore等 */
+  /** 目标端数据库类型,如mysql,mariadb,percona,cynosdbmysql(表示TDSQL-C MySQL),tdpg(TDSQL PostgreSQL版),tdsqlmysql,kafka,tdstore(表示TDSQL TDStore版)等。 */
   DstDatabaseType: string;
   /** 目标端数据库所在地域,如ap-guangzhou */
   DstRegion: string;

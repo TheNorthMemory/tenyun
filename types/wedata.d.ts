@@ -4344,6 +4344,78 @@ declare interface TopTableStatItem {
   Cnt: number;
 }
 
+/** 资管管理-上传资源请求 */
+declare interface UploadResourceRequestInfo {
+  /** 项目id */
+  ProjectId: string;
+  /** 资源路径 */
+  FilePath: string;
+  /** 桶名称 */
+  BucketName: string;
+  /** 所属地区 */
+  Region: string;
+  /** 是否为新资源 */
+  NewFile: boolean;
+  /** 资源列表 */
+  FileList?: string[];
+  /** 资源大小列表 */
+  FileSizeList?: string[];
+  /** File Md5（适配私有化，公有云可以不传） */
+  FileMd5?: string;
+}
+
+/** 用户文件信息 */
+declare interface UserFileDTONew {
+  /** 资源ID */
+  ResourceId?: string | null;
+  /** 文件名 */
+  FileName?: string | null;
+  /** 文件类型，如 jar zip 等 */
+  FileExtensionType?: string | null;
+  /** 文件上传类型，资源管理为 resource */
+  Type?: string | null;
+  /** 文件MD5值 */
+  Md5Value?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 文件大小，单位为字节 */
+  Size?: number | null;
+  /** 本地路径 */
+  LocalPath?: string | null;
+  /** 本地临时路径 */
+  LocalTempPath?: string | null;
+  /** 远程路径 */
+  RemotePath?: string | null;
+  /** 文件拥有者名字 */
+  OwnerName?: string | null;
+  /** 文件拥有者uin */
+  Owner?: string | null;
+  /** 文件深度 */
+  PathDepth?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 附加信息 */
+  ExtraInfo?: string | null;
+  /** 本地临时压缩文件绝对路径 */
+  ZipPath?: string | null;
+  /** 文件所属存储桶 */
+  Bucket?: string | null;
+  /** 文件所属存储桶的地域 */
+  Region?: string | null;
+  /** 删除用户名称 */
+  DeleteName?: string | null;
+  /** 删除用户id */
+  DeleteOwner?: string | null;
+  /** 操作者id */
+  Operator?: string | null;
+  /** 操作者名称 */
+  OperatorName?: string | null;
+  /** 全路径 */
+  FullPath?: string | null;
+}
+
 /** 开发空间-获取数据开发脚本信息响应体 */
 declare interface UserFileInfo {
   /** 资源ID */
@@ -9688,6 +9760,20 @@ declare interface UploadContentResponse {
   RequestId?: string;
 }
 
+declare interface UploadResourceRequest {
+  /** 资源上传请求信息 */
+  UploadResourceRequestInfo?: UploadResourceRequestInfo;
+  /** 项目id */
+  ProjectId?: string;
+}
+
+declare interface UploadResourceResponse {
+  /** 资源文件信息列表 */
+  Data?: UserFileDTONew[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Wedata 数据开发治理平台 WeData} */
 declare interface Wedata {
   (): Versions;
@@ -10135,6 +10221,8 @@ declare interface Wedata {
   UpdateWorkflowOwner(data: UpdateWorkflowOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowOwnerResponse>;
   /** 开发空间-保存任务信息 {@link UploadContentRequest} {@link UploadContentResponse} */
   UploadContent(data: UploadContentRequest, config?: AxiosRequestConfig): AxiosPromise<UploadContentResponse>;
+  /** 【资源管理】上传资源 {@link UploadResourceRequest} {@link UploadResourceResponse} */
+  UploadResource(data?: UploadResourceRequest, config?: AxiosRequestConfig): AxiosPromise<UploadResourceResponse>;
 }
 
 export declare type Versions = ["2021-08-20"];

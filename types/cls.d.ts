@@ -202,6 +202,14 @@ declare interface AnalysisDimensional {
   ConfigInfo?: AlarmAnalysisConfig[] | null;
 }
 
+/** 免鉴权信息 */
+declare interface AnonymousInfo {
+  /** 操作列表，支持trackLog(JS/HTTP上传日志 )和realtimeProducer(kafka协议上传日志) */
+  Operations?: string[];
+  /** 条件列表 */
+  Conditions?: ConditionInfo[];
+}
+
 /** 回调配置 */
 declare interface CallBackInfo {
   /** 回调时的Body。可将各类告警变量放在请求内容中，详见[帮助文档](https://cloud.tencent.com/document/product/614/74718)。如下示例：```{"TopicId": "{{ .QueryLog[0][0].topicId }}","key": "{{.Alarm}}","time": "{{ .QueryLog[0][0].time }}","log": "{{ .QueryLog[0][0].content.__CONTENT__ }}","namespace": "{{ .QueryLog[0][0].content.__TAG__.namespace }}"}``` */
@@ -252,6 +260,16 @@ declare interface Column {
 declare interface CompressInfo {
   /** 压缩格式，支持gzip、lzop、snappy和none不压缩 */
   Format: string;
+}
+
+/** 免鉴权条件信息 */
+declare interface ConditionInfo {
+  /** 条件属性，目前只支持VpcID */
+  Attributes?: string;
+  /** 条件规则，1:等于，2:不等于 */
+  Rule?: number;
+  /** 对应条件属性的值 */
+  ConditionValue?: string;
 }
 
 /** 特殊采集规则配置信息 */
@@ -1308,6 +1326,12 @@ declare interface Tag {
   Value: string | null;
 }
 
+/** 日志主题扩展信息 */
+declare interface TopicExtendInfo {
+  /** 日志主题免鉴权配置信息 */
+  AnonymousAccess?: AnonymousInfo | null;
+}
+
 /** 仪表盘 topic与地域信息 */
 declare interface TopicIdAndRegion {
   /** 日志主题id */
@@ -1943,6 +1967,8 @@ declare interface CreateTopicRequest {
   HotPeriod?: number;
   /** 免鉴权开关。 false：关闭； true：开启。默认为false。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
+  /** 日志主题扩展信息 */
+  Extends?: TopicExtendInfo;
 }
 
 declare interface CreateTopicResponse {

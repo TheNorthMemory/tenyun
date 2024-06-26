@@ -2229,7 +2229,7 @@ declare interface CreateDMSDatabaseResponse {
 declare interface CreateDMSTableRequest {
   /** 基础对象 */
   Asset?: Asset;
-  /** 表类型 */
+  /** 表类型：EXTERNAL_TABLE, VIRTUAL_VIEW, MATERIALIZED_VIEW */
   Type?: string;
   /** 数据库名称 */
   DbName?: string;
@@ -2905,13 +2905,13 @@ declare interface DescribeDMSDatabaseRequest {
 
 declare interface DescribeDMSDatabaseResponse {
   /** 数据库名称 */
-  Name: string | null;
+  Name?: string | null;
   /** schema名称 */
-  SchemaName: string | null;
+  SchemaName?: string | null;
   /** 存储地址 */
-  Location: string | null;
+  Location?: string | null;
   /** 数据对象 */
-  Asset: Asset | null;
+  Asset?: Asset | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2971,41 +2971,41 @@ declare interface DescribeDMSTableRequest {
 
 declare interface DescribeDMSTableResponse {
   /** 基础对象 */
-  Asset: Asset | null;
+  Asset?: Asset | null;
   /** 视图文本 */
-  ViewOriginalText: string | null;
+  ViewOriginalText?: string | null;
   /** 视图文本 */
-  ViewExpandedText: string | null;
+  ViewExpandedText?: string | null;
   /** hive维护版本 */
-  Retention: number | null;
+  Retention?: number | null;
   /** 存储对象 */
-  Sds: DMSSds | null;
+  Sds?: DMSSds | null;
   /** 分区列 */
-  PartitionKeys: DMSColumn[] | null;
+  PartitionKeys?: DMSColumn[] | null;
   /** 分区 */
-  Partitions: DMSPartition[] | null;
+  Partitions?: DMSPartition[] | null;
   /** 表类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 数据库名称 */
-  DbName: string | null;
+  DbName?: string | null;
   /** Schame名称 */
-  SchemaName: string | null;
+  SchemaName?: string | null;
   /** 存储大小 */
-  StorageSize: number | null;
+  StorageSize?: number | null;
   /** 记录数量 */
-  RecordCount: number | null;
+  RecordCount?: number | null;
   /** 生命周期 */
-  LifeTime: number | null;
+  LifeTime?: number | null;
   /** 最后访问时间 */
-  LastAccessTime: string | null;
+  LastAccessTime?: string | null;
   /** 数据更新时间 */
-  DataUpdateTime: string | null;
+  DataUpdateTime?: string | null;
   /** 结构更新时间 */
-  StructUpdateTime: string | null;
+  StructUpdateTime?: string | null;
   /** 列 */
-  Columns: DMSColumn[] | null;
+  Columns?: DMSColumn[] | null;
   /** 表名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -972,6 +972,22 @@ declare interface CancelAssignTWeCallLicenseResponse {
   RequestId?: string;
 }
 
+declare interface CheckFirmwareUpdateRequest {
+  /** 产品ID。 */
+  ProductId: string;
+  /** 设备名称。 */
+  DeviceName: string;
+}
+
+declare interface CheckFirmwareUpdateResponse {
+  /** 设备当前固件版本。 */
+  CurrentVersion?: string | null;
+  /** 固件可升级版本。 */
+  DstVersion?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ControlDeviceDataRequest {
   /** 产品ID */
   ProductId: string;
@@ -2060,6 +2076,26 @@ declare interface DescribeFirmwareTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFirmwareUpdateStatusRequest {
+  /** 产品 ID。 */
+  ProductId: string;
+  /** 设备名。 */
+  DeviceName: string;
+}
+
+declare interface DescribeFirmwareUpdateStatusResponse {
+  /** 升级任务源版本。 */
+  OriVersion?: string | null;
+  /** 升级任务目标版本。 */
+  DstVersion?: string | null;
+  /** 升级状态：- 0：设备离线。- 1：待处理。- 2：消息下发成功。- 3：下载中。- 4：烧录中。- 5：失败。- 6：升级完成。- 7：正在处理中。- 8：等待用户确认。- 20：下载完成。 */
+  Status?: number;
+  /** 进度 */
+  Percent?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGatewayBindDevicesRequest {
   /** 网关设备的产品ID */
   GatewayProductId: string;
@@ -3050,6 +3086,20 @@ declare interface PublishBroadcastMessageResponse {
   RequestId?: string;
 }
 
+declare interface PublishFirmwareUpdateMessageRequest {
+  /** 产品 ID。 */
+  ProductID: string;
+  /** 设备名称。 */
+  DeviceName?: string;
+}
+
+declare interface PublishFirmwareUpdateMessageResponse {
+  /** 请求状态 */
+  Status?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PublishMessageRequest {
   /** 产品ID */
   ProductId: string;
@@ -3341,6 +3391,8 @@ declare interface Iotexplorer {
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
   /** 取消分配TWeCall {@link CancelAssignTWeCallLicenseRequest} {@link CancelAssignTWeCallLicenseResponse} */
   CancelAssignTWeCallLicense(data: CancelAssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAssignTWeCallLicenseResponse>;
+  /** 查询设备可升级固件版本 {@link CheckFirmwareUpdateRequest} {@link CheckFirmwareUpdateResponse} */
+  CheckFirmwareUpdate(data: CheckFirmwareUpdateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFirmwareUpdateResponse>;
   /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
   /** 创建量产任务 {@link CreateBatchProductionRequest} {@link CreateBatchProductionResponse} */
@@ -3455,6 +3507,8 @@ declare interface Iotexplorer {
   DescribeFirmware(data: DescribeFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareResponse>;
   /** 查询固件升级任务列表 {@link DescribeFirmwareTaskRequest} {@link DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
+  /** 查询设备固件升级状态 {@link DescribeFirmwareUpdateStatusRequest} {@link DescribeFirmwareUpdateStatusResponse} */
+  DescribeFirmwareUpdateStatus(data: DescribeFirmwareUpdateStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareUpdateStatusResponse>;
   /** 获取网关绑定的子设备列表 {@link DescribeGatewayBindDevicesRequest} {@link DescribeGatewayBindDevicesResponse} */
   DescribeGatewayBindDevices(data: DescribeGatewayBindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayBindDevicesResponse>;
   /** 查询绑定到家庭的网关设备的子设备列表 {@link DescribeGatewaySubDeviceListRequest} {@link DescribeGatewaySubDeviceListResponse} */
@@ -3569,6 +3623,8 @@ declare interface Iotexplorer {
   ModifyTopicRule(data: ModifyTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicRuleResponse>;
   /** 发布广播消息 {@link PublishBroadcastMessageRequest} {@link PublishBroadcastMessageResponse} */
   PublishBroadcastMessage(data: PublishBroadcastMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishBroadcastMessageResponse>;
+  /** 确认固件升级任务 {@link PublishFirmwareUpdateMessageRequest} {@link PublishFirmwareUpdateMessageResponse} */
+  PublishFirmwareUpdateMessage(data: PublishFirmwareUpdateMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishFirmwareUpdateMessageResponse>;
   /** 设备透传指令控制 {@link PublishMessageRequest} {@link PublishMessageResponse} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
   /** 发布RRPC消息 {@link PublishRRPCMessageRequest} {@link PublishRRPCMessageResponse} */

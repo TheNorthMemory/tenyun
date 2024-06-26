@@ -6318,18 +6318,6 @@ declare interface DeleteAllJavaMemShellsResponse {
   RequestId?: string;
 }
 
-declare interface DeleteAttackLogsRequest {
-  /** 日志ID数组，最大100条。 */
-  Ids?: number[];
-  /** 是否全部删除 */
-  IsAll?: boolean;
-}
-
-declare interface DeleteAttackLogsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteBanWhiteListRequest {
   /** 要删除的白名单ID列表 (最大100条) */
   Ids: number[];
@@ -14795,8 +14783,6 @@ declare interface Cwp {
   CreateWhiteListOrder(data: CreateWhiteListOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteListOrderResponse>;
   /** 删除全部java内存马事件 {@link DeleteAllJavaMemShellsRequest} {@link DeleteAllJavaMemShellsResponse} */
   DeleteAllJavaMemShells(data?: DeleteAllJavaMemShellsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllJavaMemShellsResponse>;
-  /** @deprecated 删除网络攻击日志 {@link DeleteAttackLogsRequest} {@link DeleteAttackLogsResponse} */
-  DeleteAttackLogs(data?: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
   /** 删除阻断白名单列表 {@link DeleteBanWhiteListRequest} {@link DeleteBanWhiteListResponse} */
   DeleteBanWhiteList(data: DeleteBanWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBanWhiteListResponse>;
   /** 删除基线策略配置 {@link DeleteBaselinePolicyRequest} {@link DeleteBaselinePolicyResponse} */

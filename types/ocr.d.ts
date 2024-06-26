@@ -5093,7 +5093,7 @@ declare interface Ocr {
   TrainTicketOCR(data?: TrainTicketOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TrainTicketOCRResponse>;
   /** 增值税发票识别 {@link VatInvoiceOCRRequest} {@link VatInvoiceOCRResponse} */
   VatInvoiceOCR(data?: VatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceOCRResponse>;
-  /** 增值税发票核验 {@link VatInvoiceVerifyRequest} {@link VatInvoiceVerifyResponse} */
+  /** @deprecated 增值税发票核验 {@link VatInvoiceVerifyRequest} {@link VatInvoiceVerifyResponse} */
   VatInvoiceVerify(data: VatInvoiceVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyResponse>;
   /** 增值税发票核验（新版） {@link VatInvoiceVerifyNewRequest} {@link VatInvoiceVerifyNewResponse} */
   VatInvoiceVerifyNew(data: VatInvoiceVerifyNewRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyNewResponse>;

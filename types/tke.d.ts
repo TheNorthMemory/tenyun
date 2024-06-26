@@ -2267,6 +2267,8 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 备注 */
     Describe?: string;
+    /** 集群所在地域 */
+    Region?: string;
   }
 
   /** 托管prometheus agent概览 */
