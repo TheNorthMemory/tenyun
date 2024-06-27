@@ -59,33 +59,35 @@ declare interface ClusterActivity {
 /** 集群概览信息。 */
 declare interface ClusterOverview {
   /** 集群ID。 */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群状态。取值范围：PENDING：创建中INITING：初始化中INIT_FAILED：初始化失败RUNNING：运行中TERMINATING：销毁中 */
-  ClusterStatus: string;
+  ClusterStatus?: string;
   /** 集群名称。 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群位置信息。 */
-  Placement: Placement;
+  Placement?: Placement;
   /** 集群创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 集群调度器。 */
-  SchedulerType: string;
+  SchedulerType?: string;
+  /** 集群调度器版本。 */
+  SchedulerVersion?: string | null;
   /** 计算节点数量。 */
-  ComputeNodeCount: number;
+  ComputeNodeCount?: number;
   /** 计算节点概览。 */
-  ComputeNodeSet: ComputeNodeOverview[];
+  ComputeNodeSet?: ComputeNodeOverview[];
   /** 管控节点数量。 */
-  ManagerNodeCount: number;
+  ManagerNodeCount?: number;
   /** 管控节点概览。 */
-  ManagerNodeSet: ManagerNodeOverview[];
+  ManagerNodeSet?: ManagerNodeOverview[];
   /** 登录节点概览。 */
-  LoginNodeSet: LoginNodeOverview[];
+  LoginNodeSet?: LoginNodeOverview[];
   /** 登录节点数量。 */
-  LoginNodeCount: number;
-  /** 弹性伸缩类型。THPC_AS：集群自动扩缩容由THPC产品内部实现。AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。 */
-  AutoScalingType: string;
+  LoginNodeCount?: number;
+  /** 弹性伸缩类型。取值范围：THPC_AS：集群自动扩缩容由THPC产品内部实现。AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。 */
+  AutoScalingType?: string;
   /** 集群所属私有网络ID。 */
-  VpcId: string;
+  VpcId?: string;
 }
 
 /** 计算节点信息。 */
@@ -549,6 +551,8 @@ declare interface CreateClusterRequest {
   ComputeNodeCount?: number;
   /** 调度器类型。默认取值：SLURM。SGE：SGE调度器。SLURM：SLURM调度器。 */
   SchedulerType?: string;
+  /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是"latest", 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7SGE： 8.1.9 */
+  SchedulerVersion?: string;
   /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。 */
   ImageId?: string;
   /** 私有网络相关信息配置。 */

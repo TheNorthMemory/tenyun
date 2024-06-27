@@ -616,7 +616,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   cdn: Cdn,
   /** {@link Cds T-Sec-数据安全审计（DSA）} */
   cds: Cds,
-  /** {@link Cdwch 云数据仓库 ClickHouse} */
+  /** {@link Cdwch 腾讯云数据仓库TCHouse-C} */
   cdwch: Cdwch,
   /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
   cdwdoris: Cdwdoris,

@@ -2469,7 +2469,7 @@ declare interface AuthorizeTokenRequest {
 
 declare interface AuthorizeTokenResponse {
   /** 0 成功 */
-  Result: number | null;
+  Result?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2623,7 +2623,7 @@ declare interface CreateAclRuleRequest {
 
 declare interface CreateAclRuleResponse {
   /** 规则的唯一表示Key */
-  Result: number;
+  Result?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2741,7 +2741,7 @@ declare interface CreateDatahubTaskResponse {
 }
 
 declare interface CreateDatahubTopicRequest {
-  /** 名称，是一个不超过 128 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** 名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-) */
   Name: string;
   /** Partition个数，大于0 */
   PartitionNum: number;
@@ -2755,7 +2755,7 @@ declare interface CreateDatahubTopicRequest {
 
 declare interface CreateDatahubTopicResponse {
   /** 返回创建结果 */
-  Result: DatahubTopicResp;
+  Result?: DatahubTopicResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2931,7 +2931,7 @@ declare interface CreatePrometheusRequest {
 
 declare interface CreatePrometheusResponse {
   /** 打通普罗米修斯 */
-  Result: PrometheusResult;
+  Result?: PrometheusResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2939,7 +2939,7 @@ declare interface CreatePrometheusResponse {
 declare interface CreateRouteRequest {
   /** 实例唯一id */
   InstanceId: string;
-  /** 路由网络类型(3:vpc路由;4:标准版支撑路由;7:专业版支撑路由) */
+  /** 路由网络类型(3:vpc路由;7:内部支撑路由) */
   VipType: number;
   /** vpc网络Id */
   VpcId?: string;
@@ -2973,7 +2973,7 @@ declare interface CreateTokenRequest {
 
 declare interface CreateTokenResponse {
   /** token串 */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3087,7 +3087,7 @@ declare interface DeleteAclRuleRequest {
 
 declare interface DeleteAclRuleResponse {
   /** 返回被删除的规则的ID */
-  Result: number;
+  Result?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3099,7 +3099,7 @@ declare interface DeleteConnectResourceRequest {
 
 declare interface DeleteConnectResourceResponse {
   /** 连接源的Id */
-  Result: ConnectResourceResourceIdResp;
+  Result?: ConnectResourceResourceIdResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3111,7 +3111,7 @@ declare interface DeleteDatahubTaskRequest {
 
 declare interface DeleteDatahubTaskResponse {
   /** 任务id */
-  Result: DatahubTaskIdRes | null;
+  Result?: DatahubTaskIdRes | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3311,7 +3311,7 @@ declare interface DescribeConnectResourceRequest {
 
 declare interface DescribeConnectResourceResponse {
   /** 连接源的Id */
-  Result: DescribeConnectResourceResp | null;
+  Result?: DescribeConnectResourceResp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3371,7 +3371,7 @@ declare interface DescribeDatahubGroupOffsetsRequest {
 
 declare interface DescribeDatahubGroupOffsetsResponse {
   /** 返回的结果对象 */
-  Result: GroupOffsetResponse;
+  Result?: GroupOffsetResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3383,7 +3383,7 @@ declare interface DescribeDatahubTaskRequest {
 
 declare interface DescribeDatahubTaskResponse {
   /** 返回结果 */
-  Result: DescribeDatahubTaskRes;
+  Result?: DescribeDatahubTaskRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3419,7 +3419,7 @@ declare interface DescribeDatahubTopicRequest {
 
 declare interface DescribeDatahubTopicResponse {
   /** 返回的结果对象 */
-  Result: DescribeDatahubTopicResp;
+  Result?: DescribeDatahubTopicResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3789,7 +3789,7 @@ declare interface FetchLatestDatahubMessageListRequest {
 
 declare interface FetchLatestDatahubMessageListResponse {
   /** 返回结果。 */
-  Result: ConsumerRecord[];
+  Result?: ConsumerRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4089,7 +4089,7 @@ declare interface ModifyDatahubTaskRequest {
 
 declare interface ModifyDatahubTaskResponse {
   /** 任务id */
-  Result: DatahubTaskIdRes | null;
+  Result?: DatahubTaskIdRes | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4107,7 +4107,7 @@ declare interface ModifyDatahubTopicRequest {
 
 declare interface ModifyDatahubTopicResponse {
   /** 返回结果集 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4393,7 +4393,7 @@ declare interface Ckafka {
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
   /** 创建DIP转储任务 {@link CreateDatahubTaskRequest} {@link CreateDatahubTaskResponse} */
   CreateDatahubTask(data: CreateDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTaskResponse>;
-  /** 创建Datahub主题 {@link CreateDatahubTopicRequest} {@link CreateDatahubTopicResponse} */
+  /** 创建DIP主题 {@link CreateDatahubTopicRequest} {@link CreateDatahubTopicResponse} */
   CreateDatahubTopic(data: CreateDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTopicResponse>;
   /** 创建按量计费实例 {@link CreateInstancePostRequest} {@link CreateInstancePostResponse} */
   CreateInstancePost(data: CreateInstancePostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePostResponse>;
@@ -4421,7 +4421,7 @@ declare interface Ckafka {
   DeleteAclRule(data: DeleteAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclRuleResponse>;
   /** 删除Datahub连接源 {@link DeleteConnectResourceRequest} {@link DeleteConnectResourceResponse} */
   DeleteConnectResource(data: DeleteConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConnectResourceResponse>;
-  /** 删除Datahub任务 {@link DeleteDatahubTaskRequest} {@link DeleteDatahubTaskResponse} */
+  /** 删除Dip任务 {@link DeleteDatahubTaskRequest} {@link DeleteDatahubTaskResponse} */
   DeleteDatahubTask(data: DeleteDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTaskResponse>;
   /** 删除Datahub主题 {@link DeleteDatahubTopicRequest} {@link DeleteDatahubTopicResponse} */
   DeleteDatahubTopic(data: DeleteDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTopicResponse>;
@@ -4461,7 +4461,7 @@ declare interface Ckafka {
   DescribeDatahubTask(data: DescribeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTaskResponse>;
   /** 查询Datahub任务列表 {@link DescribeDatahubTasksRequest} {@link DescribeDatahubTasksResponse} */
   DescribeDatahubTasks(data?: DescribeDatahubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTasksResponse>;
-  /** 获取Datahub主题属性 {@link DescribeDatahubTopicRequest} {@link DescribeDatahubTopicResponse} */
+  /** 获取DIP主题属性 {@link DescribeDatahubTopicRequest} {@link DescribeDatahubTopicResponse} */
   DescribeDatahubTopic(data: DescribeDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTopicResponse>;
   /** 查询DIP主题列表 {@link DescribeDatahubTopicsRequest} {@link DescribeDatahubTopicsResponse} */
   DescribeDatahubTopics(data?: DescribeDatahubTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTopicsResponse>;
@@ -4519,7 +4519,7 @@ declare interface Ckafka {
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;
   /** 修改Datahub任务 {@link ModifyDatahubTaskRequest} {@link ModifyDatahubTaskResponse} */
   ModifyDatahubTask(data: ModifyDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTaskResponse>;
-  /** 修改Datahub主题属性 {@link ModifyDatahubTopicRequest} {@link ModifyDatahubTopicResponse} */
+  /** 修改DIP主题属性 {@link ModifyDatahubTopicRequest} {@link ModifyDatahubTopicResponse} */
   ModifyDatahubTopic(data: ModifyDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTopicResponse>;
   /** 设置Groups 消费分组offset {@link ModifyGroupOffsetsRequest} {@link ModifyGroupOffsetsResponse} */
   ModifyGroupOffsets(data: ModifyGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupOffsetsResponse>;

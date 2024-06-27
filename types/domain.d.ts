@@ -402,6 +402,14 @@ declare interface ReservedPreDomainInfo {
   BusinessId?: string | null;
 }
 
+/** 预释放域名预约参数补充成功信息 */
+declare interface SucDomainInfo {
+  /** 域名 */
+  Domain?: string | null;
+  /** 业务ID */
+  BusinessId?: string | null;
+}
+
 /** Template数据 */
 declare interface TemplateInfo {
   /** 模板ID */
@@ -1370,6 +1378,8 @@ declare interface ReservedPreDomainsResponse {
   SucDomainList?: string[];
   /** 预定失败域名列表 */
   FailDomainList?: FailReservedDomainInfo[];
+  /** 域名预定成功详情 */
+  SucDomains?: SucDomainInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

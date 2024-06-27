@@ -1038,10 +1038,10 @@ declare interface MetricLabel {
 
 /** 告警策略中监控任务的执行时间点 */
 declare interface MonitorTime {
-  /** 执行周期， 可选值：Period；Fixed。- Period：固定频率- Fixed：固定时间 */
+  /** 执行周期， 可选值：`Period`、`Fixed`。- Period：固定频率- Fixed：固定时间 */
   Type: string;
-  /** 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。 */
-  Time: number;
+  /** 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。当type为`Period`,`Fixed`时，time字段生效。 */
+  Time?: number;
 }
 
 /** 多触发条件。 */
@@ -1378,6 +1378,8 @@ declare interface TopicInfo {
   BizType?: number | null;
   /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean | null;
+  /** 日志主题扩展信息 */
+  Extends?: TopicExtendInfo | null;
 }
 
 /** 需要开启键值索引的字段的索引描述信息 */
@@ -1507,7 +1509,7 @@ declare interface CreateAlarmRequest {
   AlarmTargets: AlarmTarget[];
   /** 监控任务运行时间点。 */
   MonitorTime: MonitorTime;
-  /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。 */
+  /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为2000。 */
   TriggerCount: number;
   /** 告警重复的周期，单位是分钟。取值范围是0~1440。 */
   AlarmPeriod: number;
@@ -2757,7 +2759,7 @@ declare interface ModifyAlarmRequest {
   AlarmLevel?: number;
   /** 多触发条件。 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   MultiConditions?: MultiCondition[];
-  /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。 */
+  /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为2000。 */
   TriggerCount?: number;
   /** 告警重复的周期。单位是分钟。取值范围是0~1440。 */
   AlarmPeriod?: number;
@@ -3157,6 +3159,8 @@ declare interface ModifyTopicRequest {
   HotPeriod?: number;
   /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
+  /** 日志主题扩展信息 */
+  Extends?: TopicExtendInfo;
   /** 日志主题分区数量 */
   PartitionCount?: number;
 }

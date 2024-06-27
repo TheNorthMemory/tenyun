@@ -24,6 +24,8 @@ declare interface ApiGatewayInstanceList {
   InstanceList?: ApiGatewayInstanceDetail[] | null;
   /** 该地域下apigateway实例总数 */
   TotalCount?: number;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** 绑定资源地域结果 */
@@ -40,6 +42,18 @@ declare interface BindResourceResult {
   ResourceType?: string;
   /** 绑定资源地域结果 */
   BindResourceRegionResult?: BindResourceRegionResult[];
+}
+
+/** cos实例详情 - 异步关联云资源数据结构 */
+declare interface COSInstanceList {
+  /** 地域 */
+  Region?: string | null;
+  /** 实例详情 */
+  InstanceList?: CosInstanceDetail[] | null;
+  /** 地域下总数 */
+  TotalCount?: number | null;
+  /** 错误信息 */
+  Error?: string | null;
 }
 
 /** CDN实例详情 */
@@ -60,6 +74,8 @@ declare interface CdnInstanceList {
   TotalCount?: number;
   /** cdn域名详情 */
   InstanceList?: CdnInstanceDetail[] | null;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** 证书异步任务ID */
@@ -228,6 +244,8 @@ declare interface ClbInstanceList {
   InstanceList?: ClbInstanceDetail[] | null;
   /** 该地域下Clb实例总数 */
   TotalCount?: number;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** CLB实例监听器 */
@@ -251,13 +269,13 @@ declare interface ClbListener {
 /** CLB监听器规则 */
 declare interface ClbListenerRule {
   /** 规则ID */
-  LocationId: string;
+  LocationId?: string;
   /** 规则绑定的域名 */
-  Domain: string;
+  Domain?: string;
   /** 规则是否匹配待绑定证书的域名 */
-  IsMatch: boolean;
+  IsMatch?: boolean;
   /** 规则已绑定的证书数据 */
-  Certificate: Certificate | null;
+  Certificate?: Certificate | null;
   /** 不匹配域名列表 */
   NoMatchDomains?: string[] | null;
 }
@@ -318,6 +336,8 @@ declare interface DdosInstanceList {
   TotalCount?: number;
   /** ddos实例详情 */
   InstanceList?: DdosInstanceDetail[] | null;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** 批量删除证书异步任务结果 */
@@ -504,6 +524,8 @@ declare interface LiveInstanceList {
   TotalCount?: number;
   /** live实例详情 */
   InstanceList?: LiveInstanceDetail[] | null;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** 管理人信息 */
@@ -824,6 +846,8 @@ declare interface TCBInstanceList {
   Region?: string;
   /** tcb环境实例详情 */
   Environments?: TCBEnvironments[] | null;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** tse实例详情 */
@@ -844,6 +868,8 @@ declare interface TSEInstanceList {
   TotalCount?: number;
   /** 地域 */
   Region?: string;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** 标签 */
@@ -872,6 +898,8 @@ declare interface TeoInstanceList {
   InstanceList?: TeoInstanceDetail[] | null;
   /** edgeone实例总数 */
   TotalCount?: number;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** tke ingress实例详情 */
@@ -906,6 +934,8 @@ declare interface TkeInstanceList {
   InstanceList?: TkeInstanceDetail[] | null;
   /** 该地域下tke实例总数 */
   TotalCount?: number;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** tke namespace详情 */
@@ -1034,6 +1064,8 @@ declare interface VODInstanceList {
   InstanceList?: VodInstanceDetail[] | null;
   /** 该地域下vod实例总数 */
   TotalCount?: number;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** Vod实例 */
@@ -1062,6 +1094,8 @@ declare interface WafInstanceList {
   InstanceList?: WafInstanceDetail[] | null;
   /** 该地域下waf实例总数 */
   TotalCount?: number;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 declare interface ApplyCertificateRequest {
@@ -1364,6 +1398,8 @@ declare interface DescribeCertificateBindResourceTaskDetailResponse {
   CacheTime?: string;
   /** 关联tse资源详情 */
   TSE?: TSEInstanceList[] | null;
+  /** 关联的COS资源详情 */
+  COS?: COSInstanceList[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

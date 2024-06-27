@@ -7036,7 +7036,7 @@ declare interface SearchBusinessLogRequest {
 
 declare interface SearchBusinessLogResponse {
   /** 业务日志列表 */
-  Result: TsfPageBusinessLogV2 | null;
+  Result?: TsfPageBusinessLogV2 | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

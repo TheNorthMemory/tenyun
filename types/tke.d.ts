@@ -3882,7 +3882,7 @@ declare namespace V20180525 {
 
   interface CreatePrometheusAlertPolicyResponse {
     /** 告警id */
-    Id: string;
+    Id?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3926,6 +3926,8 @@ declare namespace V20180525 {
     PodMonitors?: PrometheusConfigItem[];
     /** prometheus原生Job配置 */
     RawJobs?: PrometheusConfigItem[];
+    /** Probe 配置 */
+    Probes?: PrometheusConfigItem[];
   }
 
   interface CreatePrometheusConfigResponse {
@@ -3956,7 +3958,7 @@ declare namespace V20180525 {
 
   interface CreatePrometheusGlobalNotificationResponse {
     /** 全局告警通知渠道ID */
-    Id: string | null;
+    Id?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3980,7 +3982,7 @@ declare namespace V20180525 {
 
   interface CreatePrometheusTempResponse {
     /** 模板Id */
-    TemplateId: string;
+    TemplateId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4316,6 +4318,8 @@ declare namespace V20180525 {
     Agents: PrometheusAgentInfo[];
     /** 实例id */
     InstanceId: string;
+    /** 在7天可回收期间，强制解除绑定 */
+    Force?: boolean;
   }
 
   interface DeletePrometheusClusterAgentResponse {
@@ -4336,6 +4340,8 @@ declare namespace V20180525 {
     PodMonitors?: string[];
     /** 要删除的RawJobs名字列表 */
     RawJobs?: string[];
+    /** 要删除的Probe名字列表 */
+    Probes?: string[];
   }
 
   interface DeletePrometheusConfigResponse {
@@ -5538,9 +5544,9 @@ declare namespace V20180525 {
 
   interface DescribePrometheusAlertPolicyResponse {
     /** 告警详情 */
-    AlertRules: PrometheusAlertPolicyItem[] | null;
+    AlertRules?: PrometheusAlertPolicyItem[] | null;
     /** 总数 */
-    Total: number;
+    Total?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5576,9 +5582,9 @@ declare namespace V20180525 {
 
   interface DescribePrometheusClusterAgentsResponse {
     /** 被关联集群信息 */
-    Agents: PrometheusAgentOverview[];
+    Agents?: PrometheusAgentOverview[];
     /** 被关联集群总量 */
-    Total: number;
+    Total?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5601,6 +5607,8 @@ declare namespace V20180525 {
     PodMonitors?: PrometheusConfigItem[];
     /** 原生Job */
     RawJobs?: PrometheusConfigItem[];
+    /** Probe配置 */
+    Probes?: PrometheusConfigItem[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5614,13 +5622,13 @@ declare namespace V20180525 {
 
   interface DescribePrometheusGlobalConfigResponse {
     /** 配置内容 */
-    Config: string;
+    Config?: string;
     /** ServiceMonitors列表以及对应targets信息 */
-    ServiceMonitors: PrometheusConfigItem[] | null;
+    ServiceMonitors?: PrometheusConfigItem[] | null;
     /** PodMonitors列表以及对应targets信息 */
-    PodMonitors: PrometheusConfigItem[] | null;
+    PodMonitors?: PrometheusConfigItem[] | null;
     /** RawJobs列表以及对应targets信息 */
-    RawJobs: PrometheusConfigItem[] | null;
+    RawJobs?: PrometheusConfigItem[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5632,7 +5640,7 @@ declare namespace V20180525 {
 
   interface DescribePrometheusGlobalNotificationResponse {
     /** 全局告警通知渠道 */
-    Notification: PrometheusNotificationItem | null;
+    Notification?: PrometheusNotificationItem | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5644,11 +5652,11 @@ declare namespace V20180525 {
 
   interface DescribePrometheusInstanceInitStatusResponse {
     /** 实例初始化状态，取值：uninitialized 未初始化 initializing 初始化中running 初始化完成，运行中 */
-    Status: string | null;
+    Status?: string | null;
     /** 初始化任务步骤 */
-    Steps: TaskStepInfo[] | null;
+    Steps?: TaskStepInfo[] | null;
     /** 实例eks集群ID */
-    EksClusterId: string | null;
+    EksClusterId?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5690,9 +5698,9 @@ declare namespace V20180525 {
 
   interface DescribePrometheusInstancesOverviewResponse {
     /** 实例列表 */
-    Instances: PrometheusInstancesOverview[];
+    Instances?: PrometheusInstancesOverview[];
     /** 实例总数 */
-    Total: number | null;
+    Total?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5728,9 +5736,9 @@ declare namespace V20180525 {
 
   interface DescribePrometheusRecordRulesResponse {
     /** 聚合规则 */
-    Records: PrometheusRecordRuleYamlItem[];
+    Records?: PrometheusRecordRuleYamlItem[];
     /** 总数 */
-    Total: number;
+    Total?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5764,9 +5772,9 @@ declare namespace V20180525 {
 
   interface DescribePrometheusTempResponse {
     /** 模板列表 */
-    Templates: PrometheusTemp[];
+    Templates?: PrometheusTemp[];
     /** 总数 */
-    Total: number;
+    Total?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5778,7 +5786,7 @@ declare namespace V20180525 {
 
   interface DescribePrometheusTempSyncResponse {
     /** 同步目标详情 */
-    Targets: PrometheusTemplateSyncTarget[] | null;
+    Targets?: PrometheusTemplateSyncTarget[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6018,9 +6026,9 @@ declare namespace V20180525 {
 
   interface DescribeVersionsResponse {
     /** 版本数量 */
-    TotalCount: number | null;
+    TotalCount?: number | null;
     /** 版本列表 */
-    VersionInstanceSet: VersionInstance[] | null;
+    VersionInstanceSet?: VersionInstance[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6036,9 +6044,9 @@ declare namespace V20180525 {
 
   interface DescribeVpcCniPodLimitsResponse {
     /** 机型数据数量 */
-    TotalCount: number | null;
+    TotalCount?: number | null;
     /** 机型信息及其可支持的最大VPC-CNI模式Pod数量信息 */
-    PodLimitsInstanceSet: PodLimitsInstance[] | null;
+    PodLimitsInstanceSet?: PodLimitsInstance[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6626,6 +6634,8 @@ declare namespace V20180525 {
     PodMonitors?: PrometheusConfigItem[];
     /** prometheus原生Job配置 */
     RawJobs?: PrometheusConfigItem[];
+    /** Probes 配置 */
+    Probes?: PrometheusConfigItem[];
   }
 
   interface ModifyPrometheusConfigResponse {
@@ -7185,13 +7195,13 @@ declare interface Tke {
   CreatePrometheusAlertRule(data: V20180525.CreatePrometheusAlertRuleRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusAlertRuleResponse>;
   /** 2.0实例关联集群 {@link V20180525.CreatePrometheusClusterAgentRequest} {@link V20180525.CreatePrometheusClusterAgentResponse} */
   CreatePrometheusClusterAgent(data: V20180525.CreatePrometheusClusterAgentRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusClusterAgentResponse>;
-  /** 创建prometheus配置 {@link V20180525.CreatePrometheusConfigRequest} {@link V20180525.CreatePrometheusConfigResponse} */
+  /** 创建集群采集配置 {@link V20180525.CreatePrometheusConfigRequest} {@link V20180525.CreatePrometheusConfigResponse} */
   CreatePrometheusConfig(data: V20180525.CreatePrometheusConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusConfigResponse>;
   /** 创建grafana监控面板 {@link V20180525.CreatePrometheusDashboardRequest} {@link V20180525.CreatePrometheusDashboardResponse} */
   CreatePrometheusDashboard(data: V20180525.CreatePrometheusDashboardRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusDashboardResponse>;
   /** 创建全局告警通知渠道 {@link V20180525.CreatePrometheusGlobalNotificationRequest} {@link V20180525.CreatePrometheusGlobalNotificationResponse} */
   CreatePrometheusGlobalNotification(data: V20180525.CreatePrometheusGlobalNotificationRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusGlobalNotificationResponse>;
-  /** 以Yaml的方式创建聚合规则 {@link V20180525.CreatePrometheusRecordRuleYamlRequest} {@link V20180525.CreatePrometheusRecordRuleYamlResponse} */
+  /** 创建聚合规则yaml方式 {@link V20180525.CreatePrometheusRecordRuleYamlRequest} {@link V20180525.CreatePrometheusRecordRuleYamlResponse} */
   CreatePrometheusRecordRuleYaml(data: V20180525.CreatePrometheusRecordRuleYamlRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusRecordRuleYamlResponse>;
   /** 新建模板 {@link V20180525.CreatePrometheusTempRequest} {@link V20180525.CreatePrometheusTempResponse} */
   CreatePrometheusTemp(data: V20180525.CreatePrometheusTempRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusTempResponse>;
@@ -7243,9 +7253,9 @@ declare interface Tke {
   DeletePrometheusAlertRule(data: V20180525.DeletePrometheusAlertRuleRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeletePrometheusAlertRuleResponse>;
   /** 解除TMP实例的集群关联 {@link V20180525.DeletePrometheusClusterAgentRequest} {@link V20180525.DeletePrometheusClusterAgentResponse} */
   DeletePrometheusClusterAgent(data: V20180525.DeletePrometheusClusterAgentRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeletePrometheusClusterAgentResponse>;
-  /** 删除Prometheus配置 {@link V20180525.DeletePrometheusConfigRequest} {@link V20180525.DeletePrometheusConfigResponse} */
+  /** 删除集群采集配置 {@link V20180525.DeletePrometheusConfigRequest} {@link V20180525.DeletePrometheusConfigResponse} */
   DeletePrometheusConfig(data: V20180525.DeletePrometheusConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeletePrometheusConfigResponse>;
-  /** 删除聚合实例 {@link V20180525.DeletePrometheusRecordRuleYamlRequest} {@link V20180525.DeletePrometheusRecordRuleYamlResponse} */
+  /** 删除聚合规则 {@link V20180525.DeletePrometheusRecordRuleYamlRequest} {@link V20180525.DeletePrometheusRecordRuleYamlResponse} */
   DeletePrometheusRecordRuleYaml(data: V20180525.DeletePrometheusRecordRuleYamlRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeletePrometheusRecordRuleYamlResponse>;
   /** 删除模板实例 {@link V20180525.DeletePrometheusTempRequest} {@link V20180525.DeletePrometheusTempResponse} */
   DeletePrometheusTemp(data: V20180525.DeletePrometheusTempRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeletePrometheusTempResponse>;
@@ -7387,7 +7397,7 @@ declare interface Tke {
   DescribePrometheusAlertRule(data: V20180525.DescribePrometheusAlertRuleRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribePrometheusAlertRuleResponse>;
   /** 获取TMP实例关联集群列表 {@link V20180525.DescribePrometheusClusterAgentsRequest} {@link V20180525.DescribePrometheusClusterAgentsResponse} */
   DescribePrometheusClusterAgents(data: V20180525.DescribePrometheusClusterAgentsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribePrometheusClusterAgentsResponse>;
-  /** 拉取Prometheus配置 {@link V20180525.DescribePrometheusConfigRequest} {@link V20180525.DescribePrometheusConfigResponse} */
+  /** 获取集群采集配置 {@link V20180525.DescribePrometheusConfigRequest} {@link V20180525.DescribePrometheusConfigResponse} */
   DescribePrometheusConfig(data: V20180525.DescribePrometheusConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribePrometheusConfigResponse>;
   /** 获得实例级别抓取配置 {@link V20180525.DescribePrometheusGlobalConfigRequest} {@link V20180525.DescribePrometheusGlobalConfigResponse} */
   DescribePrometheusGlobalConfig(data: V20180525.DescribePrometheusGlobalConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribePrometheusGlobalConfigResponse>;
@@ -7509,11 +7519,11 @@ declare interface Tke {
   ModifyPrometheusAlertPolicy(data: V20180525.ModifyPrometheusAlertPolicyRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusAlertPolicyResponse>;
   /** 修改告警规则 {@link V20180525.ModifyPrometheusAlertRuleRequest} {@link V20180525.ModifyPrometheusAlertRuleResponse} */
   ModifyPrometheusAlertRule(data: V20180525.ModifyPrometheusAlertRuleRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusAlertRuleResponse>;
-  /** 修改prometheus配置 {@link V20180525.ModifyPrometheusConfigRequest} {@link V20180525.ModifyPrometheusConfigResponse} */
+  /** 修改集群采集配置 {@link V20180525.ModifyPrometheusConfigRequest} {@link V20180525.ModifyPrometheusConfigResponse} */
   ModifyPrometheusConfig(data: V20180525.ModifyPrometheusConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusConfigResponse>;
   /** 修改全局告警通知渠道 {@link V20180525.ModifyPrometheusGlobalNotificationRequest} {@link V20180525.ModifyPrometheusGlobalNotificationResponse} */
   ModifyPrometheusGlobalNotification(data: V20180525.ModifyPrometheusGlobalNotificationRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusGlobalNotificationResponse>;
-  /** 通过yaml的方式修改Prometheus聚合实例 {@link V20180525.ModifyPrometheusRecordRuleYamlRequest} {@link V20180525.ModifyPrometheusRecordRuleYamlResponse} */
+  /** 修改聚合规则yaml方式 {@link V20180525.ModifyPrometheusRecordRuleYamlRequest} {@link V20180525.ModifyPrometheusRecordRuleYamlResponse} */
   ModifyPrometheusRecordRuleYaml(data: V20180525.ModifyPrometheusRecordRuleYamlRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusRecordRuleYamlResponse>;
   /** 修改模板实例 {@link V20180525.ModifyPrometheusTempRequest} {@link V20180525.ModifyPrometheusTempResponse} */
   ModifyPrometheusTemp(data: V20180525.ModifyPrometheusTempRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusTempResponse>;

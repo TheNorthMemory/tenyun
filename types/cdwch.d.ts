@@ -972,7 +972,7 @@ declare interface ScaleUpInstanceResponse {
   RequestId?: string;
 }
 
-/** {@link Cdwch 云数据仓库 ClickHouse} */
+/** {@link Cdwch 腾讯云数据仓库TCHouse-C} */
 declare interface Cdwch {
   (): Versions;
   /** 新增、修改集群用户接口 {@link ActionAlterCkUserRequest} {@link ActionAlterCkUserResponse} */
