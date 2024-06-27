@@ -144,6 +144,10 @@ declare interface AlarmTargetInfo {
   StartTimeOffset?: number;
   /** 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。 */
   EndTimeOffset?: number;
+  /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
+  SyntaxRule?: number | null;
+  /** 主题类型。0: 日志主题，1: 指标主题 */
+  BizType?: number | null;
 }
 
 /** 告警通知渠道组详情 */

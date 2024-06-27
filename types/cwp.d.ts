@@ -12644,24 +12644,6 @@ declare interface ExportAttackEventsResponse {
   RequestId?: string;
 }
 
-declare interface ExportAttackLogsRequest {
-  /** 过滤条件。HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]VulType - String 威胁类型 - 是否必填: 否SrcIp - String 攻击源IP - 是否必填: 否DstIp - String 攻击目标IP - 是否必填: 否SrcPort - String 攻击源端口 - 是否必填: 否DstPort - String 攻击目标端口 - 是否必填: 否 */
-  Filters?: Filters[];
-  /** 主机安全客户端ID */
-  Uuid?: string;
-  /** 云主机机器ID */
-  Quuid?: string;
-}
-
-declare interface ExportAttackLogsResponse {
-  /** 已废弃 */
-  DownloadUrl?: string;
-  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
-  TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ExportBaselineEffectHostListRequest {
   /** 基线id */
   BaselineId: number;
@@ -15491,8 +15473,6 @@ declare interface Cwp {
   ExportAssetWebServiceInfoList(data?: ExportAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetWebServiceInfoListResponse>;
   /** 导出网络攻击事件 {@link ExportAttackEventsRequest} {@link ExportAttackEventsResponse} */
   ExportAttackEvents(data?: ExportAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackEventsResponse>;
-  /** @deprecated 导出网络攻击日志 {@link ExportAttackLogsRequest} {@link ExportAttackLogsResponse} */
-  ExportAttackLogs(data?: ExportAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackLogsResponse>;
   /** 基线影响主机列表导出 {@link ExportBaselineEffectHostListRequest} {@link ExportBaselineEffectHostListResponse} */
   ExportBaselineEffectHostList(data: ExportBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineEffectHostListResponse>;
   /** 导出修复列表 {@link ExportBaselineFixListRequest} {@link ExportBaselineFixListResponse} */

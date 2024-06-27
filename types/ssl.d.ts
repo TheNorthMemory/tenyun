@@ -28,6 +28,14 @@ declare interface ApiGatewayInstanceList {
   Error?: string | null;
 }
 
+/** 批量删除失败的项 */
+declare interface BatchDeleteFail {
+  /** 失败的证书ID */
+  CertId?: string | null;
+  /** 失败的原因 */
+  Msg?: string | null;
+}
+
 /** 绑定资源地域结果 */
 declare interface BindResourceRegionResult {
   /** 地域 */
@@ -1300,6 +1308,20 @@ declare interface DeleteCertificateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCertificatesRequest {
+}
+
+declare interface DeleteCertificatesResponse {
+  /** 成功的ID */
+  Success?: string[];
+  /** 失败的ID和原因 */
+  Fail?: BatchDeleteFail[];
+  /** 证书ID和异步任务的ID */
+  CertTaskIds?: CertTaskId[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteManagerRequest {
   /** 管理人ID */
   ManagerId: number;
@@ -2535,6 +2557,8 @@ declare interface Ssl {
   CreateCertificateByPackage(data: CreateCertificateByPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateByPackageResponse>;
   /** 删除证书 {@link DeleteCertificateRequest} {@link DeleteCertificateResponse} */
   DeleteCertificate(data: DeleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificateResponse>;
+  /** 批量删除证书 {@link DeleteCertificatesRequest} {@link DeleteCertificatesResponse} */
+  DeleteCertificates(data?: DeleteCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificatesResponse>;
   /** 删除管理人 {@link DeleteManagerRequest} {@link DeleteManagerResponse} */
   DeleteManager(data: DeleteManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteManagerResponse>;
   /** 证书部署到云资源实例列表 {@link DeployCertificateInstanceRequest} {@link DeployCertificateInstanceResponse} */

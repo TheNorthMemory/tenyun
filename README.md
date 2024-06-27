@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 250+ 款产品，11333+ 服务数</summary>
+<details><summary>共计 251+ 款产品，11341+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -105,7 +105,7 @@ acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 20
 advisor | [云顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(2) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
-aiart | [大模型图像创作引擎](https://cloud.tencent.com/document/product/1668) | 2022-12-29(9) |
+aiart | [大模型图像创作引擎](https://cloud.tencent.com/document/product/1668) | 2022-12-29(10) |
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
 anicloud | [动效素材服务](https://cloud.tencent.com/document/product/1641) | 2022-09-23(3) |
@@ -169,7 +169,7 @@ cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(42) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(97) |
-cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(516) |
+cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(515) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(142) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(62) |
@@ -279,7 +279,7 @@ soe | [智聆口语评测](https://cloud.tencent.com/document/product/884) | 201
 solar | 智汇零售 | 2018-10-11(17) |
 sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(146) |
 ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(23) |
-ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(58) |
+ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(59) |
 sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10) |
 ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24) |
 sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 2018-08-13(6) |
@@ -333,6 +333,7 @@ tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/131
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) | 2020-09-18(17) |
 vcg | [视频生成](https://cloud.tencent.com/document/product/1770) | 2024-04-04(2) |
+vclm | [大模型视频创作引擎](https://cloud.tencent.com/document/product/1616) | 2024-05-23(7) |
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(1) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |

@@ -29,9 +29,9 @@ declare interface AutoMountConfiguration {
   /** 要挂载到的实例ID。 */
   InstanceId: string[];
   /** 子机内的挂载点。 */
-  MountPoint: string[];
+  MountPoint?: string[];
   /** 文件系统类型，支持的有 ext4、xfs。 */
-  FileSystemType: string;
+  FileSystemType?: string;
 }
 
 /** 描述了定期快照策略的详细信息 */

@@ -950,6 +950,10 @@ declare interface RabbitMQUser {
   ModifyTime?: string;
   /** 用户类型，System：系统创建，User：用户创建 */
   Type?: string;
+  /** 单个用户最大可用连接数 */
+  MaxConnections?: number | null;
+  /** 单个用户最大可用通道数 */
+  MaxChannels?: number | null;
 }
 
 /** RabbitMQ专享实例信息 */
@@ -990,6 +994,8 @@ declare interface RabbitMQVipInstance {
   PublicAccessEndpoint?: string | null;
   /** VPC 接入点列表 */
   Vpcs?: VpcEndpointInfo[] | null;
+  /** 创建时间，毫秒为单位 */
+  CreateTime?: number | null;
 }
 
 /** RabbitMQ的vhost详情 */
@@ -1270,6 +1276,16 @@ declare interface RocketMQInstanceConfig {
   TopicDistribution?: RocketMQTopicDistribution[];
   /** 每个主题最大队列数 */
   MaxQueuesPerTopic?: number | null;
+  /** 最大可设置消息保留时间，小时为单位 */
+  MaxRetention?: number | null;
+  /** 最小可设置消息保留时间，小时为单位 */
+  MinRetention?: number | null;
+  /** 实例消息保留时间，小时为单位 */
+  Retention?: number | null;
+  /** Topic个数最小配额，即免费额度，默认为集群规格单节点最小配额*节点个数 */
+  TopicNumLowerLimit?: number | null;
+  /** Topic个数最大配额，默认为集群规格单节点最大配额*节点个数 */
+  TopicNumUpperLimit?: number | null;
 }
 
 /** Rocketmq消息消费track信息 */
@@ -1965,10 +1981,20 @@ declare interface CreateRabbitMQVipInstanceRequest {
   StorageSize?: number;
   /** 镜像队列,不传默认为false */
   EnableCreateDefaultHaMirrorQueue?: boolean;
-  /** 自动续费,不传默认为true */
+  /** 预付费使用。自动续费,不传默认为true */
   AutoRenewFlag?: boolean;
   /** 购买时长,不传默认为1(月) */
   TimeSpan?: number;
+  /** 付费方式，0 为后付费，即按量计费；1 为预付费，即包年包月。默认包年包月 */
+  PayMode?: number;
+  /** 集群版本，不传默认为 3.8.30，可选值为 3.8.30 和 3.11.8 */
+  ClusterVersion?: string;
+  /** 是否国际站请求，默认 false */
+  IsIntl?: boolean;
+  /** 资源标签列表 */
+  ResourceTags?: Tag[];
+  /** 公网带宽大小，单位 M */
+  Bandwidth?: number;
 }
 
 declare interface CreateRabbitMQVipInstanceResponse {
@@ -2327,6 +2353,8 @@ declare interface DeleteRabbitMQUserResponse {
 declare interface DeleteRabbitMQVipInstanceRequest {
   /** 实例Id */
   InstanceId: string;
+  /** 是否国际站请求，默认 false */
+  IsIntl?: boolean;
 }
 
 declare interface DeleteRabbitMQVipInstanceResponse {
@@ -3819,9 +3847,9 @@ declare interface DescribeRocketMQVipInstanceDetailRequest {
 
 declare interface DescribeRocketMQVipInstanceDetailResponse {
   /** 集群信息 */
-  ClusterInfo: RocketMQClusterInfo;
+  ClusterInfo?: RocketMQClusterInfo;
   /** 集群配置 */
-  InstanceConfig: RocketMQInstanceConfig;
+  InstanceConfig?: RocketMQInstanceConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4627,9 +4655,9 @@ declare interface SendRocketMQMessageRequest {
 
 declare interface SendRocketMQMessageResponse {
   /** 发送结果 */
-  Result: boolean;
+  Result?: boolean;
   /** 消息ID */
-  MsgId: string | null;
+  MsgId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

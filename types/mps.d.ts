@@ -62,7 +62,7 @@ declare interface ActionConfigInfo {
 
 /** 编排原子任务 */
 declare interface Activity {
-  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流 */
+  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检 */
   ActivityType: string | null;
   /** 后驱节点索引数组 */
   ReardriveIndex?: number[] | null;
@@ -116,10 +116,10 @@ declare interface ActivityResItem {
 
 /** 编排任务输出 */
 declare interface ActivityResult {
-  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。 */
-  ActivityType: string;
+  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。AiQualityControl：媒体质检。 */
+  ActivityType?: string;
   /** 原子任务输出。 */
-  ActivityResItem: ActivityResItem;
+  ActivityResItem?: ActivityResItem;
 }
 
 /** 转自适应码流信息 */
@@ -534,7 +534,7 @@ declare interface AiParagraphInfo {
 
 /** 视频质检输入参数类型 */
 declare interface AiQualityControlTaskInput {
-  /** 视频质检模板 ID 。暂时可以直接使用 预设模板ID 10，后面控制台支持用户配置自定义模板。 */
+  /** 媒体质检模板 ID 。暂时可以直接使用 预设模板ID 10，后面控制台支持用户配置自定义模板。 */
   Definition?: number | null;
   /** 渠道扩展参数json序列化字符串。 */
   ChannelExtPara?: string | null;
@@ -1444,7 +1444,7 @@ declare interface AudioSeparateConfig {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfo {
-  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；mp3；ac3。eac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
   Codec: string;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate: number;
@@ -1456,7 +1456,7 @@ declare interface AudioTemplateInfo {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfoForUpdate {
-  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；mp3；ac3。eac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
   Codec?: string | null;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate?: number | null;
@@ -1848,6 +1848,8 @@ declare interface CreateInput {
   ResilientStream?: ResilientStreamConf;
   /** 绑定的输入安全组 ID。 */
   SecurityGroupIds?: string[];
+  /** 可用区，非必填，如果开启容灾必须输入两个不同的可用区，否则最多只允许输入一个可用区。 */
+  Zones?: string[];
 }
 
 /** 创建的输入HLS拉流的配置信息。 */
@@ -1920,6 +1922,8 @@ declare interface CreateOutputInfo {
   MaxConcurrent?: number;
   /** 绑定的输入安全组 ID。 */
   SecurityGroupIds?: string[];
+  /** 可用区，output最多只支持输入一个可用区。 */
+  Zones?: string[];
 }
 
 /** 创建媒体传输流的输出的RTP配置。 */
@@ -2070,6 +2074,8 @@ declare interface DescribeInput {
   ResilientStream?: ResilientStreamConf | null;
   /** 绑定的输入安全组 ID。 */
   SecurityGroupIds?: string[] | null;
+  /** 可用区配置，开启容灾情况下最多有两个，顺序和pipeline 0、1对应，否则最多只有一个可用区。 */
+  Zones?: string[];
 }
 
 /** 查询输入的HLS配置信息。 */
@@ -2109,23 +2115,23 @@ declare interface DescribeInputRTSPPullSettings {
 /** 查询输入的SRT配置信息。 */
 declare interface DescribeInputSRTSettings {
   /** SRT模式。 */
-  Mode: string | null;
+  Mode?: string | null;
   /** 流Id。 */
-  StreamId: string;
+  StreamId?: string;
   /** 延迟。 */
-  Latency: number;
+  Latency?: number;
   /** 接收延迟。 */
-  RecvLatency: number;
+  RecvLatency?: number;
   /** 对端延迟。 */
-  PeerLatency: number;
+  PeerLatency?: number;
   /** 对端空闲超时时间。 */
-  PeerIdleTimeout: number;
+  PeerIdleTimeout?: number;
   /** 解密密钥。 */
-  Passphrase: string;
+  Passphrase?: string;
   /** 密钥长度。 */
-  PbKeyLen: number;
+  PbKeyLen?: number;
   /** SRT对端地址。 */
-  SourceAddresses: SRTSourceAddressResp[] | null;
+  SourceAddresses?: SRTSourceAddressResp[] | null;
 }
 
 /** 查询输出的配置信息。 */
@@ -2162,6 +2168,8 @@ declare interface DescribeOutput {
   MaxConcurrent?: number;
   /** 绑定的安全组 ID。 */
   SecurityGroupIds?: string[] | null;
+  /** 可用区，output目前最多只支持一个。 */
+  Zones?: string[];
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -2225,25 +2233,25 @@ declare interface DescribeOutputRTSPPullSettings {
 /** 查询输出的SRT配置信息。 */
 declare interface DescribeOutputSRTSettings {
   /** 转推的目标的地址信息列表，SRT模式为CALLER时使用。 */
-  Destinations: SRTAddressDestination[] | null;
+  Destinations?: SRTAddressDestination[] | null;
   /** 流Id。 */
-  StreamId: string | null;
+  StreamId?: string | null;
   /** 延迟。 */
-  Latency: number | null;
+  Latency?: number | null;
   /** 接收延迟。 */
-  RecvLatency: number | null;
+  RecvLatency?: number | null;
   /** 对端延迟。 */
-  PeerLatency: number | null;
+  PeerLatency?: number | null;
   /** 对端空闲超时时间。 */
-  PeerIdleTimeout: number | null;
+  PeerIdleTimeout?: number | null;
   /** 加密密钥。 */
-  Passphrase: string | null;
+  Passphrase?: string | null;
   /** 加密密钥长度。 */
-  PbKeyLen: number | null;
+  PbKeyLen?: number | null;
   /** SRT模式。 */
-  Mode: string | null;
+  Mode?: string | null;
   /** 服务器监听地址，SRT模式为LISTENER时使用。 */
-  SourceAddresses: OutputSRTSourceAddressResp[] | null;
+  SourceAddresses?: OutputSRTSourceAddressResp[] | null;
 }
 
 /** 查询输入的RTMP配置信息。 */
@@ -2740,11 +2748,13 @@ declare interface InputAddress {
 declare interface LiveActivityResItem {
   /** 直播录制任务输出 */
   LiveRecordTask?: LiveScheduleLiveRecordTaskResult | null;
+  /** 媒体质检任务输出 */
+  LiveQualityControlTask?: ScheduleQualityControlTaskResult | null;
 }
 
 /** 直播编排任务输出 */
 declare interface LiveActivityResult {
-  /** 原子任务类型。LiveRecord：直播录制。 */
+  /** 原子任务类型。LiveRecord：直播录制。AiQualityControl：媒体质检。 */
   ActivityType?: string | null;
   /** 原子任务输出。 */
   LiveActivityResItem?: LiveActivityResItem | null;
@@ -3644,6 +3654,8 @@ declare interface ModifyInput {
   ResilientStream?: ResilientStreamConf;
   /** 绑定的输入安全组 ID。 仅支持关联一组安全组。 */
   SecurityGroupIds?: string[];
+  /** 可用区，非必填，最多支持输入两个可用区，对于需改接口，只要第二个可用区会参与到资源分配。如果input开启容灾或者涉及RTSP_PULL协议切换时有效(会重新分配地址)。 */
+  Zones?: string[];
 }
 
 /** 修改Output配置。 */
@@ -3990,7 +4002,7 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
-/** 质检结果输出。 */
+/** 媒体质检结果输出。 */
 declare interface QualityControlData {
   /** 为true时表示视频无音频轨。 */
   NoAudio?: boolean | null;
@@ -3998,7 +4010,7 @@ declare interface QualityControlData {
   NoVideo?: boolean | null;
   /** 视频无参考质量打分，百分制。 */
   QualityEvaluationScore?: number | null;
-  /** 质检检出异常项。 */
+  /** 内容质检检出异常项。 */
   QualityControlResultSet?: QualityControlResult[] | null;
 }
 
@@ -4137,9 +4149,9 @@ declare interface S3OutputStorage {
 /** 转推的目标地址信息。 */
 declare interface SRTAddressDestination {
   /** 目标地址的IP。 */
-  Ip: string;
+  Ip?: string;
   /** 目标地址的端口。 */
-  Port: number;
+  Port?: number;
 }
 
 /** SRT输入源地址。 */
@@ -4222,7 +4234,7 @@ declare interface ScheduleAnalysisTaskResult {
   FinishTime?: string | null;
 }
 
-/** 质检任务结果类型 */
+/** 媒体质检任务结果类型 */
 declare interface ScheduleQualityControlTaskResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
@@ -4232,9 +4244,9 @@ declare interface ScheduleQualityControlTaskResult {
   ErrCode?: number;
   /** 错误信息。 */
   Message?: string;
-  /** 质检任务的输入。 */
+  /** 媒体质检任务的输入。 */
   Input?: AiQualityControlTaskInput;
-  /** 质检任务的输出。 */
+  /** 媒体质检任务的输出。 */
   Output?: QualityControlData | null;
 }
 
@@ -4539,7 +4551,7 @@ declare interface TerrorismConfigureInfo {
   /** 画面涉敏任务控制参数。 */
   ImgReviewInfo?: TerrorismImgReviewTemplateInfo;
   /** 文本涉敏任务控制参数。 */
-  OcrReviewInfo: TerrorismOcrReviewTemplateInfo;
+  OcrReviewInfo?: TerrorismOcrReviewTemplateInfo;
 }
 
 /** 涉敏任务控制参数。 */
@@ -4554,7 +4566,7 @@ declare interface TerrorismConfigureInfoForUpdate {
 declare interface TerrorismImgReviewTemplateInfo {
   /** 画面涉敏任务开关，可选值：ON：开启画面涉敏任务；OFF：关闭画面涉敏任务。 */
   Switch: string;
-  /** 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：guns：武器枪支；crowd：人群聚集；bloody：血腥画面；police：警察部队；banners：涉敏旗帜；militant：武装分子；explosion：爆炸火灾；terrorists：涉敏人物；scenario：涉敏画面。 */
+  /** 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：guns：武器枪支；crowd：人群聚集；bloody：血腥画面；police：警察部队；banners：涉敏旗帜；militant：武装分子；explosion：爆炸火灾；terrorists：涉敏人物； */
   LabelSet?: string[];
   /** 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。 */
   BlockConfidence?: number;
@@ -4566,7 +4578,7 @@ declare interface TerrorismImgReviewTemplateInfo {
 declare interface TerrorismImgReviewTemplateInfoForUpdate {
   /** 画面涉敏任务开关，可选值：ON：开启画面涉敏任务；OFF：关闭画面涉敏任务。 */
   Switch?: string;
-  /** 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：guns：武器枪支；crowd：人群聚集；bloody：血腥画面；police：警察部队；banners：涉敏旗帜；militant：武装分子；explosion：爆炸火灾；terrorists：涉敏人物；scenario：涉敏画面。 */
+  /** 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：guns：武器枪支；crowd：人群聚集；bloody：血腥画面；police：警察部队；banners：涉敏旗帜；militant：武装分子；explosion：爆炸火灾；terrorists：涉敏人物； */
   LabelSet?: string[];
   /** 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。 */
   BlockConfidence?: number;
@@ -4697,9 +4709,9 @@ declare interface TranslateConfigureInfoForUpdate {
   /** 语音翻译任务开关，可选值：ON：开启智能语音翻译任务；OFF：关闭智能语音翻译任务。 */
   Switch?: string;
   /** 视频源语言。 */
-  SourceLanguage?: string | null;
+  SourceLanguage?: string;
   /** 翻译目标语言。 */
-  DestinationLanguage?: string | null;
+  DestinationLanguage?: string;
 }
 
 /** 媒体处理 URL 对象信息。 */
@@ -4836,9 +4848,9 @@ declare interface VideoEnhanceConfig {
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfo {
-  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv，mov。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
+  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec: string;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 注意：自适应码率时取值范围是 [0, 60] */
   Fps: number;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate: number;
@@ -4854,15 +4866,15 @@ declare interface VideoTemplateInfo {
   FillType?: string;
   /** 视频恒定码率控制因子，取值范围为[1, 51]。如果指定该参数，将使用 CRF 的码率控制方式做转码（视频码率将不再生效）。如果没有特殊需求，不建议指定该参数。 */
   Vcrf?: number;
-  /** hls 分片类型，可选值 ：6：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：6 */
+  /** hls 分片类型，可选值 ：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0 */
   SegmentType?: number | null;
 }
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfoForUpdate {
-  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv，mov。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
+  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec?: string | null;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 */
   Fps?: number | null;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate?: number | null;
@@ -4880,7 +4892,7 @@ declare interface VideoTemplateInfoForUpdate {
   Vcrf?: number | null;
   /** 内容自适应编码。可选值：0：不开启1：开启默认值: 0. 当开启该参数时，将会自适应生成多个不同分辨率，不同码率的码流， 其中VideoTemplate的宽和高为多个码流中的最大分辨率，VideoTemplate中的码率为多个码流中的最高码率， VideoTemplate中的vcrf为多个码流中的最高质量。 当不设置分辨率、码率和vcrf时， ContentAdaptStream 参数生成的最高分辨率为视频源的分辨率，视频质量为接近vmaf95分。 若要开启该参数或了解计费细节, 请联系您的腾讯云商务。 */
   ContentAdaptStream?: number | null;
-  /** hls 分片类型，可选值：6：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：6 */
+  /** hls 分片类型，可选值：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0 */
   SegmentType?: number | null;
 }
 
@@ -4990,7 +5002,7 @@ declare interface WorkflowTask {
   AiAnalysisResultSet?: AiAnalysisResult[];
   /** 视频内容识别任务的执行状态与结果。 */
   AiRecognitionResultSet?: AiRecognitionResult[];
-  /** 视频质检任务的执行状态与结果。 */
+  /** 媒体质检任务的执行状态与结果。 */
   AiQualityControlTaskResult?: ScheduleQualityControlTaskResult | null;
 }
 
@@ -5289,7 +5301,7 @@ declare interface CreateSnapshotByTimeOffsetTemplateRequest {
 
 declare interface CreateSnapshotByTimeOffsetTemplateResponse {
   /** 时间点截图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5405,9 +5417,9 @@ declare interface CreateWatermarkTemplateRequest {
 
 declare interface CreateWatermarkTemplateResponse {
   /** 水印模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 水印图片地址，仅当 Type 为 image，该字段有效。 */
-  ImageUrl: string;
+  ImageUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5659,9 +5671,9 @@ declare interface DescribeAIRecognitionTemplatesRequest {
 
 declare interface DescribeAIRecognitionTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 视频内容识别模板详情列表。 */
-  AIRecognitionTemplateSet: AIRecognitionTemplateItem[];
+  AIRecognitionTemplateSet?: AIRecognitionTemplateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5721,9 +5733,9 @@ declare interface DescribeContentReviewTemplatesRequest {
 
 declare interface DescribeContentReviewTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 内容审核模板详情列表。 */
-  ContentReviewTemplateSet: ContentReviewTemplateItem[];
+  ContentReviewTemplateSet?: ContentReviewTemplateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5741,9 +5753,9 @@ declare interface DescribeImageSpriteTemplatesRequest {
 
 declare interface DescribeImageSpriteTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 雪碧图模板详情列表。 */
-  ImageSpriteTemplateSet: ImageSpriteTemplate[];
+  ImageSpriteTemplateSet?: ImageSpriteTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5797,9 +5809,9 @@ declare interface DescribeSampleSnapshotTemplatesRequest {
 
 declare interface DescribeSampleSnapshotTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 采样截图模板详情列表。 */
-  SampleSnapshotTemplateSet: SampleSnapshotTemplate[];
+  SampleSnapshotTemplateSet?: SampleSnapshotTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5839,9 +5851,9 @@ declare interface DescribeSnapshotByTimeOffsetTemplatesRequest {
 
 declare interface DescribeSnapshotByTimeOffsetTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 指定时间点截图模板详情列表。 */
-  SnapshotByTimeOffsetTemplateSet: SnapshotByTimeOffsetTemplate[];
+  SnapshotByTimeOffsetTemplateSet?: SnapshotByTimeOffsetTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6175,9 +6187,9 @@ declare interface DescribeWatermarkTemplatesRequest {
 
 declare interface DescribeWatermarkTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 水印模板详情列表。 */
-  WatermarkTemplateSet: WatermarkTemplate[];
+  WatermarkTemplateSet?: WatermarkTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6217,9 +6229,9 @@ declare interface DescribeWorkflowsRequest {
 
 declare interface DescribeWorkflowsResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 工作流信息数组。 */
-  WorkflowInfoSet: WorkflowInfo[];
+  WorkflowInfoSet?: WorkflowInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6769,7 +6781,7 @@ declare interface ProcessLiveStreamRequest {
   AiRecognitionTask?: AiRecognitionTaskInput;
   /** 视频内容分析类型任务参数。 */
   AiAnalysisTask?: AiAnalysisTaskInput;
-  /** 视频内容质检类型任务参数。 */
+  /** 媒体质检类型任务参数。 */
   AiQualityControlTask?: AiQualityControlTaskInput;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
   SessionId?: string;
@@ -6803,13 +6815,13 @@ declare interface ProcessMediaRequest {
   AiAnalysisTask?: AiAnalysisTaskInput;
   /** 视频内容识别类型任务参数。 */
   AiRecognitionTask?: AiRecognitionTaskInput;
-  /** 视频质检类型任务参数。 */
+  /** 媒体质检类型任务参数。 */
   AiQualityControlTask?: AiQualityControlTaskInput;
   /** 任务的事件通知信息，不填代表不获取事件通知。 */
   TaskNotifyConfig?: TaskNotifyConfig;
   /** 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */
   TasksPriority?: number;
-  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。 */
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
   SessionContext?: string;

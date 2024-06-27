@@ -54,6 +54,10 @@ declare interface InstanceInfo {
   IsNoExpired?: boolean | null;
   /** 外网地址。 */
   WanAddress?: string | null;
+  /** 隔离时间 */
+  IsolateAt?: string | null;
+  /** 是否自动续费。0: 不自动续费(可以支持特权不停服)；1:自动续费；2:到期不续费. */
+  AutoRenew?: number | null;
 }
 
 /** 网络信息 */

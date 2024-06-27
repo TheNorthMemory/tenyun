@@ -237,6 +237,7 @@ import Tsw, { Versions as TswVersions } from "./tsw";
 import Tts, { Versions as TtsVersions } from "./tts";
 import Ump, { Versions as UmpVersions } from "./ump";
 import Vcg, { Versions as VcgVersions } from "./vcg";
+import Vclm, { Versions as VclmVersions } from "./vclm";
 import Vdb, { Versions as VdbVersions } from "./vdb";
 import Vm, { Versions as VmVersions } from "./vm";
 import Vms, { Versions as VmsVersions } from "./vms";
@@ -491,6 +492,7 @@ export declare type SERVICE_VERSIONS = {
   tts: TtsVersions,
   ump: UmpVersions,
   vcg: VcgVersions,
+  vclm: VclmVersions,
   vdb: VdbVersions,
   vm: VmVersions,
   vms: VmsVersions,
@@ -992,6 +994,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ump: Ump,
   /** {@link Vcg 视频生成} */
   vcg: Vcg,
+  /** {@link Vclm 大模型视频创作引擎} */
+  vclm: Vclm,
   /** {@link Vdb 向量数据库} */
   vdb: Vdb,
   /** {@link Vm 视频内容安全} */

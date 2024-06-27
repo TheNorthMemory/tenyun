@@ -16,44 +16,48 @@ declare interface Condition {
   PageNum?: number | null;
 }
 
-/** 账户分响应对象集合 */
+/** 分组名称 */
 declare interface DescribeAccountGroupsData {
-  /** 创建时间 */
-  Itime?: string | null;
-  /** 账户组名称 */
-  Name?: string | null;
-  /** id patch数组 */
+  /** 名称path */
+  NamePath?: string | null;
+  /** id patch数组(只支持32位) */
   IdPathArr?: number[] | null;
-  /** 该分组下用户总数 */
-  UserTotal?: number | null;
   /** 扩展信息 */
   ExtraInfo?: string | null;
-  /** 导入类型 */
-  ImportType?: string | null;
+  /** 最后更新时间 */
+  Utime?: string | null;
+  /** 父id */
+  ParentId?: number | null;
+  /** 组织id */
+  OrgId?: string | null;
+  /** 账户组名称 */
+  Name?: string | null;
+  /** id */
+  Id?: number | null;
   /** 描述 */
   Description?: string | null;
   /** 同步数据源 */
   Source?: number | null;
-  /** miniIAM id */
-  MiniIamId?: string | null;
-  /** 组织id */
-  OrgId?: string | null;
-  /** 是否该账户的直接权限 */
-  ReadOnly?: boolean | null;
-  /** 父id */
-  ParentId?: number | null;
-  /** 名称path */
-  NamePath?: string | null;
-  /** 父组织id */
-  ParentOrgId?: string | null;
   /** id path */
   IdPath?: string | null;
-  /** 自增id */
-  Id?: number | null;
+  /** 创建时间 */
+  Itime?: string | null;
+  /** 父组织id */
+  ParentOrgId?: string | null;
+  /** 导入类型 */
+  ImportType?: string | null;
+  /** miniIAM id */
+  MiniIamId?: string | null;
+  /** 该分组下用户总数 */
+  UserTotal?: number | null;
   /** 是否叶子节点 */
   IsLeaf?: boolean | null;
-  /** 最后更新时间 */
-  Utime?: string | null;
+  /** 是否该账户的直接权限 */
+  ReadOnly?: boolean | null;
+  /** 最新一次同步任务的结果 */
+  LatestSyncResult?: string | null;
+  /** 最新一次同步任务的结束时间 */
+  LatestSyncTime?: string | null;
 }
 
 /** 账户分组详情响应数据 */
@@ -132,19 +136,19 @@ declare interface DescribeLocalAccountsPage {
 
 /** 业务响应数据 */
 declare interface DeviceDetail {
-  /** 设备ID(只支持32位) */
+  /** 设备ID */
   Id?: number | null;
-  /** 设备唯一标识符 */
+  /** 设备唯一标识码，在ioa中每个设备有唯一标识码 */
   Mid?: string | null;
   /** 终端名（设备名） */
   Name?: string | null;
-  /** 设备所在分组ID(只支持32位) */
+  /** 设备所在分组ID */
   GroupId?: number | null;
-  /** OS平台(只支持32位) */
+  /** OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0 */
   OsType?: number | null;
   /** 设备IP地址（出口IP） */
   Ip?: string | null;
-  /** 在线状态 2 在线 0，1 离线(只支持32位) */
+  /** 在线状态，2：在线、0或者1:离线 */
   OnlineStatus?: number | null;
   /** 客户端版本号-大整数 */
   Version?: string | null;
@@ -154,7 +158,7 @@ declare interface DeviceDetail {
   Itime?: string | null;
   /** 最后一次在线时间 */
   ConnActiveTime?: string | null;
-  /** 设备是否加锁 1 锁定 0 2 非锁定(只支持32位) */
+  /** 设备是否加锁 ，1：锁定 0或者2：未锁定。 */
   Locked?: number | null;
   /** 设备本地IP列表, 包括IP */
   LocalIpList?: string | null;
@@ -166,15 +170,15 @@ declare interface DeviceDetail {
   GroupNamePath?: string | null;
   /** 未修复高危漏洞数(只支持32位) */
   CriticalVulListCount?: number | null;
-  /** 设备名 和Name相同，保留参数 */
+  /** 设备名，和Name相同 */
   ComputerName?: string | null;
   /** 登录域名 */
   DomainName?: string | null;
   /** MAC地址 */
   MacAddr?: string | null;
-  /** 漏洞数(只支持32位) */
+  /** 漏洞数 */
   VulCount?: number | null;
-  /** 病毒风险数(只支持32位) */
+  /** 病毒风险数 */
   RiskCount?: number | null;
   /** 病毒库版本 */
   VirusVer?: string | null;
@@ -188,7 +192,7 @@ declare interface DeviceDetail {
   Tags?: string | null;
   /** 终端用户名 */
   UserName?: string | null;
-  /** 防火墙状态(只支持32位) */
+  /** 防火墙状态，不等于0表示开启 */
   FirewallStatus?: number | null;
   /** SN序列号 */
   SerialNum?: string | null;
@@ -196,7 +200,7 @@ declare interface DeviceDetail {
   DeviceStrategyVer?: string | null;
   /** NGN策略版本 */
   NGNStrategyVer?: string | null;
-  /** 最近登录账号 */
+  /** 最近登录账户的账号 */
   IOAUserName?: string | null;
   /** 设备管控新策略 */
   DeviceNewStrategyVer?: string | null;
@@ -214,7 +218,7 @@ declare interface DeviceDetail {
   IdentityNewStrategyVer?: string | null;
   /** 最近登录账号部门 */
   AccountGroupName?: string | null;
-  /** 登录账号姓名 */
+  /** 最近登录账户的姓名 */
   AccountName?: string | null;
   /** 账号组id */
   AccountGroupId?: number | null;

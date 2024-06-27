@@ -78,6 +78,10 @@ declare interface AutoScaleRecord {
   RetryCount?: number | null;
   /** 重试信息 */
   RetryInfo?: string | null;
+  /** 重试英文描述 */
+  RetryEnReason?: string | null;
+  /** 重试描述 */
+  RetryReason?: string | null;
 }
 
 /** 弹性扩缩容规格配置 */
@@ -96,6 +100,24 @@ declare interface AutoScaleResourceConf {
   NextTimeCanScale?: number | null;
   /** 优雅缩容开关 */
   GraceDownFlag?: boolean | null;
+  /** "CVM"表示规格全部使用CVM相关类型，"POD"表示规格使用容器相关类型,默认为"CVM"。 */
+  HardwareType?: string | null;
+  /** "POSTPAY"表示只使用按量计费，"SPOT_FIRST"表示竞价实例优先，只有HardwareType为"HOST"时支持竞价实例优先，"POD"只支持纯按量计费。 */
+  PayMode?: string | null;
+  /** 竞价实例优先的场景下，按量计费资源数量的最低百分比，整数 */
+  PostPayPercentMin?: number | null;
+  /** 预设资源类型为HOST时，支持勾选“资源不足时切换POD”；支持取消勾选；默认不勾选（0），勾选（1) */
+  ChangeToPod?: number | null;
+  /** 伸缩组名 */
+  GroupName?: string | null;
+  /** 标签 */
+  YarnNodeLabel?: string | null;
+  /** 伸缩组状态 */
+  GroupStatus?: number | null;
+  /** 并行伸缩 0关闭；1开启 */
+  Parallel?: number | null;
+  /** 是否支持MNode */
+  EnableMNode?: number | null;
 }
 
 /** 引导脚本 */
@@ -800,6 +822,72 @@ declare interface KeyValue {
   Value: string | null;
 }
 
+/** 自动扩缩容基于负载指标的规则 */
+declare interface LoadAutoScaleStrategy {
+  /** 规则ID。 */
+  StrategyId?: number | null;
+  /** 规则名称。 */
+  StrategyName?: string | null;
+  /** 规则生效冷却时间。 */
+  CalmDownTime?: number | null;
+  /** 扩缩容动作，1表示扩容，2表示缩容。 */
+  ScaleAction?: number | null;
+  /** 每次规则生效时的扩缩容数量。 */
+  ScaleNum?: number | null;
+  /** 扩缩容负载指标。 */
+  LoadMetrics?: string | null;
+  /** 规则元数据记录ID。 */
+  MetricId?: number | null;
+  /** 规则统计周期，提供300s,600s,900s */
+  StatisticPeriod?: number | null;
+  /** 指标处理方法，1表示MAX，2表示MIN，3表示AVG。 */
+  ProcessMethod?: number | null;
+  /** 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。 */
+  TriggerThreshold?: number;
+  /** 条件触发数组。 */
+  TriggerConditions?: TriggerConditions | null;
+  /** 规则优先级，添加时无效，默认为自增。 */
+  Priority?: number | null;
+  /** 规则状态，1表示启动，3表示禁用。 */
+  StrategyStatus?: number | null;
+  /** 规则扩容指定 yarn node label */
+  YarnNodeLabel?: string | null;
+  /** 规则生效的有效时间 */
+  PeriodValid?: string;
+  /** 优雅缩容开关 */
+  GraceDownFlag?: boolean;
+  /** 优雅缩容等待时间 */
+  GraceDownTime?: number;
+  /** 绑定标签列表 */
+  Tags?: Tag[] | null;
+  /** 预设配置组 */
+  ConfigGroupAssigned?: string | null;
+  /** 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。"DEFAULT"表示默认方式，与"INSTANCE"意义相同。"INSTANCE"表示按照节点计算，默认方式。"CPU"表示按照机器的核数计算。"MEMORYGB"表示按照机器内存数计算。 */
+  MeasureMethod?: string | null;
+  /** 多指标触发条件 */
+  LoadMetricsConditions?: LoadMetricsConditions | null;
+}
+
+/** 负载指标条件 */
+declare interface LoadMetricsCondition {
+  /** 规则统计周期，提供1min,3min,5min。 */
+  StatisticPeriod?: number | null;
+  /** 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。 */
+  TriggerThreshold?: number | null;
+  /** 扩缩容负载指标。 */
+  LoadMetrics?: string | null;
+  /** 规则元数据记录ID。 */
+  MetricId?: number | null;
+  /** 触发条件 */
+  Conditions?: TriggerCondition[] | null;
+}
+
+/** 负载指标 */
+declare interface LoadMetricsConditions {
+  /** 触发规则条件 */
+  LoadMetrics?: LoadMetricsCondition[] | null;
+}
+
 /** 登录设置 */
 declare interface LoginSettings {
   /** 实例登录密码，8-16个字符，包含大写字母、小写字母、数字和特殊字符四种，特殊符号仅支持!@%^*，密码第一位不能为特殊字符 */
@@ -1368,7 +1456,7 @@ declare interface RenewInstancesInfo {
 
 /** 定时伸缩任务策略 */
 declare interface RepeatStrategy {
-  /** 取值范围"DAY","DOW","DOM","NONE"，分别表示按天重复、按周重复、按月重复和一次执行。 */
+  /** 取值范围"DAY","DOW","DOM","NONE"，分别表示按天重复、按周重复、按月重复和一次执行。必须填写 */
   RepeatType: string;
   /** 按天重复规则，当RepeatType为"DAY"时有效 */
   DayRepeat?: DayRepeatStrategy | null;
@@ -1378,7 +1466,7 @@ declare interface RepeatStrategy {
   MonthRepeat?: MonthRepeatStrategy | null;
   /** 一次执行规则，当RepeatType为"NONE"时有效 */
   NotRepeat?: NotRepeatStrategy | null;
-  /** 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。 */
+  /** 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。必须填写 */
   Expire?: string | null;
 }
 
@@ -1612,7 +1700,7 @@ declare interface TimeAutoScaleStrategy {
   ScaleAction: number | null;
   /** 扩缩容数量。 */
   ScaleNum: number | null;
-  /** 规则状态，1表示有效，2表示无效，3表示暂停。 */
+  /** 规则状态，1表示有效，2表示无效，3表示暂停。必须填写 */
   StrategyStatus: number | null;
   /** 规则优先级，越小越高。 */
   Priority: number | null;
@@ -1636,7 +1724,7 @@ declare interface TimeAutoScaleStrategy {
   TerminatePolicy?: string | null;
   /** 最长使用时间， 秒数，最短1小时，最长24小时 */
   MaxUse?: number | null;
-  /** 节点部署服务列表。 */
+  /** 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760) */
   SoftDeployInfo?: number[] | null;
   /** 启动进程列表。 */
   ServiceNodeInfo?: number[] | null;
@@ -1656,6 +1744,20 @@ declare interface TopologyInfo {
   SubnetInfoList?: SubnetInfo[] | null;
   /** 节点信息 */
   NodeInfoList?: ShortNodeInfo[] | null;
+}
+
+/** 规则触发条件 */
+declare interface TriggerCondition {
+  /** 条件比较方法，1表示大于，2表示小于，3表示大于等于，4表示小于等于。 */
+  CompareMethod: number;
+  /** 条件阈值。 */
+  Threshold?: number | null;
+}
+
+/** 规则触发条件数组 */
+declare interface TriggerConditions {
+  /** 规则触发条件数组。 */
+  Conditions?: TriggerCondition[] | null;
 }
 
 /** 变配资源规格 */
@@ -1861,8 +1963,10 @@ declare interface ZoneResourceConfiguration {
 declare interface AddMetricScaleStrategyRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 1表示按负载规则扩容，2表示按时间规则扩容。 */
+  /** 1表示按负载规则扩容，2表示按时间规则扩容。必须填写，并且和下面的规则策略匹配 */
   StrategyType: number;
+  /** 按负载扩容的规则。 */
+  LoadAutoScaleStrategy?: LoadAutoScaleStrategy;
   /** 按时间扩缩容的规则。 */
   TimeAutoScaleStrategy?: TimeAutoScaleStrategy;
 }
@@ -2069,6 +2173,8 @@ declare interface DescribeAutoScaleRecordsRequest {
   Offset?: number;
   /** 分页参数。最大支持100 */
   Limit?: number;
+  /** 表示是自动(0)还是托管伸缩(1) */
+  RecordSource?: number;
 }
 
 declare interface DescribeAutoScaleRecordsResponse {
@@ -2088,6 +2194,8 @@ declare interface DescribeAutoScaleStrategiesRequest {
 }
 
 declare interface DescribeAutoScaleStrategiesResponse {
+  /** 按负载伸缩规则 */
+  LoadAutoScaleStrategies?: LoadAutoScaleStrategy[] | null;
   /** 按时间伸缩规则 */
   TimeBasedAutoScaleStrategies?: TimeAutoScaleStrategy[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2673,6 +2781,8 @@ declare interface ModifyAutoScaleStrategyRequest {
   InstanceId: string;
   /** 自动扩缩容规则类型，1表示按负载指标扩缩容，2表示按时间扩缩容。 */
   StrategyType: number;
+  /** 按负载扩缩容的指标。 */
+  LoadAutoScaleStrategies?: LoadAutoScaleStrategy[];
   /** 按时间扩缩容的规则。 */
   TimeAutoScaleStrategies?: TimeAutoScaleStrategy[];
   /** 伸缩组Id */
@@ -3091,19 +3201,19 @@ declare interface Emr {
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
   /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
-  /** 扩容集群节点 {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */
+  /** 扩容集群节点(新) {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */
   ScaleOutCluster(data: ScaleOutClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutClusterResponse>;
-  /** 实例扩容 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
+  /** 实例扩容(旧) {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
   /** 执行服务操作 {@link StartStopServiceOrMonitorRequest} {@link StartStopServiceOrMonitorResponse} */
   StartStopServiceOrMonitor(data: StartStopServiceOrMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartStopServiceOrMonitorResponse>;
   /** EMR同步POD状态 {@link SyncPodStateRequest} {@link SyncPodStateResponse} */
   SyncPodState(data: SyncPodStateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPodStateResponse>;
-  /** 销毁集群节点 {@link TerminateClusterNodesRequest} {@link TerminateClusterNodesResponse} */
+  /** 销毁集群节点(新) {@link TerminateClusterNodesRequest} {@link TerminateClusterNodesResponse} */
   TerminateClusterNodes(data: TerminateClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateClusterNodesResponse>;
   /** 销毁EMR实例 {@link TerminateInstanceRequest} {@link TerminateInstanceResponse} */
   TerminateInstance(data: TerminateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstanceResponse>;
-  /** 缩容Task节点 {@link TerminateTasksRequest} {@link TerminateTasksResponse} */
+  /** 缩容Task节点(旧) {@link TerminateTasksRequest} {@link TerminateTasksResponse} */
   TerminateTasks(data: TerminateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTasksResponse>;
 }
 
