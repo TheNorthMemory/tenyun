@@ -270,7 +270,7 @@ declare interface CommonFlowApprover {
   ApproverSignTypes?: number[];
 }
 
-/** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
+/** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找 */
 declare interface Component {
   /** 控件唯一ID。**在绝对定位方式方式下**，ComponentId为控件的ID，长度不能超过30，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。**在关键字定位方式下**，ComponentId不仅为控件的ID，也是关键字整词。此方式下可以通过"^"来决定是否使用关键字整词匹配能力。例：- 如传入的关键字"^甲方签署^"</font >，则会在PDF文件中有且仅有"甲方签署"关键字的地方（前后不能有其他字符</font >）进行对应操作。- 如传入的关键字为"甲方签署</font >"，则PDF文件中每个出现关键字的位置（前后可以有其他字符</font >）都会执行相应操作。注：`控件ID可以在一个PDF中不可重复`点击查看ComponentId在模板页面的位置 */
   ComponentId?: string;
@@ -2083,22 +2083,22 @@ declare interface ChannelDescribeFlowComponentsResponse {
 declare interface ChannelDescribeOrganizationSealsRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 返回最大数量，最大为100 */
+  /** 指定分页每页返回的数据条数，单页最大支持 100。 */
   Limit: number;
   /** 分页查询偏移量，默认为0，最大为20000 */
   Offset?: number;
-  /** 查询信息类型支持的值如下：0-默认，不返回授权用户信息1-返回授权用户信息 */
+  /** 查询授权用户信息类型，取值如下： 0：（默认）不返回授权用户信息 1：返回授权用户的信息 */
   InfoType?: number;
-  /** 印章id（没有输入返回所有）注: `没有输入返回所有记录，最大返回100条。` */
+  /** 印章id，是否查询特定的印章（没有输入返回所有）注: `没有输入返回所有记录，最大返回100条。` */
   SealId?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章注: `为空时查询所有类型的印章。` */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: 公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章注: `为空时查询所有类型的印章。` */
   SealTypes?: string[];
-  /** 查询的印章状态列表。 空，只查询启用状态的印章； ALL，查询所有状态的印章； CHECKING，查询待审核的印章； SUCCESS，查询启用状态的印章； FAIL，查询印章审核拒绝的印章； DISABLE，查询已停用的印章； STOPPED，查询已终止的印章； VOID，查询已作废的印章； INVALID，查询已失效的印章； */
+  /** 需查询的印章状态列表。 空，()仅查询启用状态的印章； ALL，查询所有状态的印章； CHECKING，查询待审核的印章； SUCCESS，查询启用状态的印章； FAIL，查询印章审核拒绝的印章； DISABLE，查询已停用的印章； STOPPED，查询已终止的印章； VOID，查询已作废的印章； INVALID，查询已失效的印章。 */
   SealStatuses?: string[];
 }
 
 declare interface ChannelDescribeOrganizationSealsResponse {
-  /** 在设置了SealId时返回0或1，没有设置时返回公司的总印章数量，可能比返回的印章数组数量多 */
+  /** 在设定了SealId时，返回值为0或1；若未设定SealId，则返回公司的总印章数量 */
   TotalCount?: number;
   /** 查询到的印章结果数组 */
   Seals?: OccupiedSeal[];
@@ -2474,7 +2474,7 @@ declare interface CreateLegalSealQrCodeRequest {
 }
 
 declare interface CreateLegalSealQrCodeResponse {
-  /** 二维码图片base64值 */
+  /** 二维码图片base64值，二维码有效期7天（604800秒）二维码图片的样式如下图：![image](https://qcloudimg.tencent-cloud.cn/raw/7ec2478761158a35a9c623882839a5df.png) */
   QrcodeBase64?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4593,7 +4593,7 @@ declare interface Essbasic {
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
   /** 获取合同填写控件内容 {@link ChannelDescribeFlowComponentsRequest} {@link ChannelDescribeFlowComponentsResponse} */
   ChannelDescribeFlowComponents(data: ChannelDescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeFlowComponentsResponse>;
-  /** 查询子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
+  /** 查询子企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
   /** 获取角色列表 {@link ChannelDescribeRolesRequest} {@link ChannelDescribeRolesResponse} */
   ChannelDescribeRoles(data: ChannelDescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeRolesResponse>;
@@ -4627,7 +4627,7 @@ declare interface Essbasic {
   CreateFlowGroupSignReview(data: CreateFlowGroupSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupSignReviewResponse>;
   /** 用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
-  /** 获取创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
+  /** 获取到电子签小程序创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
   CreateLegalSealQrCode(data?: CreateLegalSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLegalSealQrCodeResponse>;
   /** 创建他方企业自动签授权链接 {@link CreatePartnerAutoSignAuthUrlRequest} {@link CreatePartnerAutoSignAuthUrlResponse} */
   CreatePartnerAutoSignAuthUrl(data: CreatePartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartnerAutoSignAuthUrlResponse>;

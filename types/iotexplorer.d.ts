@@ -744,6 +744,16 @@ declare interface TWeCallActiveInfo {
   ExpireTime?: number | null;
 }
 
+/** TWeCall分类统计数据 */
+declare interface TWeCallCategoryPkgInfo {
+  /** 类型 */
+  PkgType?: number | null;
+  /** 总数 */
+  All?: number | null;
+  /** 已使用数 */
+  Used?: number | null;
+}
+
 /** TWeCall信息 */
 declare interface TWeCallInfo {
   /** 小程序ID */
@@ -2716,6 +2726,8 @@ declare interface GetTWeCallPkgListResponse {
   TWeCallPkgList?: TWeCallPkgInfo[];
   /** 总数 */
   Total?: number;
+  /** 分类统计 */
+  TWeCallCategoryPkgList?: TWeCallCategoryPkgInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

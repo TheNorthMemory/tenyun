@@ -1723,7 +1723,7 @@ declare interface AcknowledgeMessageRequest {
 
 declare interface AcknowledgeMessageResponse {
   /** 如果为“”，则说明没有错误返回 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4713,7 +4713,7 @@ declare interface VerifyRocketMQConsumeResponse {
 /** {@link Tdmq 消息队列 TDMQ} */
 declare interface Tdmq {
   (): Versions;
-  /** 确认消息 {@link AcknowledgeMessageRequest} {@link AcknowledgeMessageResponse} */
+  /** 确认pulsar消息 {@link AcknowledgeMessageRequest} {@link AcknowledgeMessageResponse} */
   AcknowledgeMessage(data: AcknowledgeMessageRequest, config?: AxiosRequestConfig): AxiosPromise<AcknowledgeMessageResponse>;
   /** 清空cmq消息队列中的消息 {@link ClearCmqQueueRequest} {@link ClearCmqQueueResponse} */
   ClearCmqQueue(data: ClearCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqQueueResponse>;

@@ -1927,7 +1927,7 @@ declare interface DescribeNamespacesRequest {
   Offset?: number;
   /** 列出所有命名空间 */
   All?: boolean;
-  /** 过滤条件 */
+  /** 过滤条件- 按照【标签】过滤 Name: Tags Value: tagKey:tagVal */
   Filters?: Filter[];
   /** 仅查询启用了 KMS 镜像签名的空间 */
   KmsSignPolicy?: boolean;

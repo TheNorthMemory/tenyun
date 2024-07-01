@@ -10,6 +10,20 @@ declare interface Attachment {
   Content: string;
 }
 
+/** 黑名单详情 */
+declare interface BlackAddressDetail {
+  /** 黑名单地址id */
+  Id?: number | null;
+  /** 邮箱地址 */
+  Email?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 过期时间 */
+  ExpireDate?: string | null;
+  /** 黑名单状态，0:已过期，1:生效中 */
+  Status?: number | null;
+}
+
 /** 邮箱黑名单结构，包含被拉黑的邮箱地址和被拉黑时间，以及被拉黑的理由 */
 declare interface BlackEmailAddress {
   /** 邮箱被拉黑时间 */
@@ -264,6 +278,18 @@ declare interface BatchSendEmailResponse {
   RequestId?: string;
 }
 
+declare interface CreateCustomBlacklistRequest {
+  /** 添加到黑名单的邮件地址 */
+  Emails: string[];
+  /** 过期日期 */
+  ExpireDate?: string;
+}
+
+declare interface CreateCustomBlacklistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateEmailAddressRequest {
   /** 您的发信地址（发信地址总数上限为10个） */
   EmailAddress: string;
@@ -350,6 +376,16 @@ declare interface DeleteBlackListRequest {
 }
 
 declare interface DeleteBlackListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCustomBlackListRequest {
+  /** 需要删除的邮箱地址 */
+  Emails: string[];
+}
+
+declare interface DeleteCustomBlackListResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -486,6 +522,26 @@ declare interface ListBlackEmailAddressResponse {
   BlackList?: BlackEmailAddress[];
   /** 黑名单总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListCustomBlacklistRequest {
+  /** 偏移量，整型，从0开始 */
+  Offset: number;
+  /** 限制数目，整型,不超过100 */
+  Limit: number;
+  /** 筛选黑名单的状态，0:已过期，1:生效中, 2:全部 */
+  Status: number;
+  /** 黑名单中的邮箱地址 */
+  Email?: string;
+}
+
+declare interface ListCustomBlacklistResponse {
+  /** 列表总数 */
+  TotalCount?: number;
+  /** 黑名单列表详情 */
+  Data?: BlackAddressDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -628,6 +684,20 @@ declare interface SendEmailResponse {
   RequestId?: string;
 }
 
+declare interface UpdateCustomBlackListRequest {
+  /** 需要更改的黑名单id */
+  Id: number;
+  /** 修改后的邮件地址 */
+  Email: string;
+  /** 过期时间，为空则表示永久有效 */
+  ExpireDate?: string;
+}
+
+declare interface UpdateCustomBlackListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateEmailIdentityRequest {
   /** 请求验证的域名 */
   EmailIdentity: string;
@@ -675,6 +745,8 @@ declare interface Ses {
   (): Versions;
   /** 批量发送邮件 {@link BatchSendEmailRequest} {@link BatchSendEmailResponse} */
   BatchSendEmail(data: BatchSendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<BatchSendEmailResponse>;
+  /** 批量增加自定义黑名单 {@link CreateCustomBlacklistRequest} {@link CreateCustomBlacklistResponse} */
+  CreateCustomBlacklist(data: CreateCustomBlacklistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomBlacklistResponse>;
   /** 新建发信地址 {@link CreateEmailAddressRequest} {@link CreateEmailAddressResponse} */
   CreateEmailAddress(data: CreateEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmailAddressResponse>;
   /** 新建发信域名 {@link CreateEmailIdentityRequest} {@link CreateEmailIdentityResponse} */
@@ -689,6 +761,8 @@ declare interface Ses {
   CreateReceiverDetailWithData(data: CreateReceiverDetailWithDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverDetailWithDataResponse>;
   /** 删除收件人黑名单 {@link DeleteBlackListRequest} {@link DeleteBlackListResponse} */
   DeleteBlackList(data: DeleteBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlackListResponse>;
+  /** 删除自定义黑名单 {@link DeleteCustomBlackListRequest} {@link DeleteCustomBlackListResponse} */
+  DeleteCustomBlackList(data: DeleteCustomBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomBlackListResponse>;
   /** 删除发信地址 {@link DeleteEmailAddressRequest} {@link DeleteEmailAddressResponse} */
   DeleteEmailAddress(data: DeleteEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailAddressResponse>;
   /** 删除发信域名 {@link DeleteEmailIdentityRequest} {@link DeleteEmailIdentityResponse} */
@@ -707,6 +781,8 @@ declare interface Ses {
   GetStatisticsReport(data: GetStatisticsReportRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticsReportResponse>;
   /** 获取黑名单邮箱地址 {@link ListBlackEmailAddressRequest} {@link ListBlackEmailAddressResponse} */
   ListBlackEmailAddress(data: ListBlackEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ListBlackEmailAddressResponse>;
+  /** 获取自定义黑名单列表 {@link ListCustomBlacklistRequest} {@link ListCustomBlacklistResponse} */
+  ListCustomBlacklist(data: ListCustomBlacklistRequest, config?: AxiosRequestConfig): AxiosPromise<ListCustomBlacklistResponse>;
   /** 获取发信地址列表 {@link ListEmailAddressRequest} {@link ListEmailAddressResponse} */
   ListEmailAddress(data?: ListEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ListEmailAddressResponse>;
   /** 获取当前发信域名列表 {@link ListEmailIdentitiesRequest} {@link ListEmailIdentitiesResponse} */
@@ -721,6 +797,8 @@ declare interface Ses {
   ListSendTasks(data: ListSendTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSendTasksResponse>;
   /** 发送邮件 {@link SendEmailRequest} {@link SendEmailResponse} */
   SendEmail(data: SendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<SendEmailResponse>;
+  /** 更新自定义黑名单 {@link UpdateCustomBlackListRequest} {@link UpdateCustomBlackListResponse} */
+  UpdateCustomBlackList(data: UpdateCustomBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomBlackListResponse>;
   /** 请求验证 {@link UpdateEmailIdentityRequest} {@link UpdateEmailIdentityResponse} */
   UpdateEmailIdentity(data: UpdateEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailIdentityResponse>;
   /** 设置邮箱的smtp密码 {@link UpdateEmailSmtpPassWordRequest} {@link UpdateEmailSmtpPassWordResponse} */

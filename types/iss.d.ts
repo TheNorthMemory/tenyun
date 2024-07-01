@@ -270,6 +270,18 @@ declare interface CarAIResultInfo {
   Location?: Location;
 }
 
+/** 通道属性信息 */
+declare interface ChannelAttrInfo {
+  /** 设备通道所属的设备ID */
+  DeviceId?: string;
+  /** 设备通道所属的设备名称 */
+  DeviceName?: string | null;
+  /** 设备通道ID */
+  ChannelId?: string;
+  /** 设备通道名称 */
+  ChannelName?: string | null;
+}
+
 /** 通道及通道所属设备信息 */
 declare interface ChannelInfo {
   /** 通道所属的设备ID */
@@ -756,6 +768,18 @@ declare interface ListDeviceInfo {
   ChannelNum?: number;
 }
 
+/** 用户禁止播流的通道列表返回数据 */
+declare interface ListForbidplayChannelsData {
+  /** 第几页 */
+  PageNumber?: number;
+  /** 当前页的设备数量 */
+  PageSize?: number;
+  /** 本次查询的设备通道总数 */
+  TotalCount?: number;
+  /** 设备通道信息列表 */
+  List?: ChannelAttrInfo[] | null;
+}
+
 /** 查询网关设备列表返回数据 */
 declare interface ListGatewayDevicesData {
   /** 网关下设备列表 */
@@ -1078,6 +1102,14 @@ declare interface RecordTimeLine {
   Begin?: number;
   /** 时间片段结束时间，UTC秒数，例如：1662114146 */
   End?: number;
+}
+
+/** 设置通道禁止播流，有通道Id和使能enable字段 */
+declare interface SetForbidplayChannelParam {
+  /** 通道Id */
+  ChannelId: string;
+  /** 是否禁止通道播流 */
+  Enable: boolean;
 }
 
 /** 抽烟识别结果详情 */
@@ -2404,12 +2436,40 @@ declare interface PlayRecordResponse {
   RequestId?: string;
 }
 
+declare interface QueryForbidPlayChannelListRequest {
+  /** 子用户uin，也可以是主用户的uin */
+  UserId: string;
+  /** 每页最大数量，最大为200，超过按照200返回 */
+  PageSize: number;
+  /** 第几页 */
+  PageNumber: number;
+}
+
+declare interface QueryForbidPlayChannelListResponse {
+  /** 返回结果 */
+  Data?: ListForbidplayChannelsData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RefreshDeviceChannelRequest {
   /** 设备 ID（从获取设备列表ListDevices接口中获取） */
   DeviceId: string;
 }
 
 declare interface RefreshDeviceChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetForbidPlayChannelsRequest {
+  /** 要禁播的通道参数，一次最多可以设置200个通道 */
+  Channels: SetForbidplayChannelParam[];
+  /** 用户uin，可以是子用户的也可以是主用户的uin */
+  UserId: string;
+}
+
+declare interface SetForbidPlayChannelsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2743,8 +2803,12 @@ declare interface Iss {
   ListTasks(data?: ListTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTasksResponse>;
   /** 获取本地录像URL地址 {@link PlayRecordRequest} {@link PlayRecordResponse} */
   PlayRecord(data: PlayRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PlayRecordResponse>;
+  /** 查询禁播通道列表 {@link QueryForbidPlayChannelListRequest} {@link QueryForbidPlayChannelListResponse} */
+  QueryForbidPlayChannelList(data: QueryForbidPlayChannelListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryForbidPlayChannelListResponse>;
   /** 刷新设备通道 {@link RefreshDeviceChannelRequest} {@link RefreshDeviceChannelResponse} */
   RefreshDeviceChannel(data: RefreshDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDeviceChannelResponse>;
+  /** 设置通道禁止播流 {@link SetForbidPlayChannelsRequest} {@link SetForbidPlayChannelsResponse} */
+  SetForbidPlayChannels(data: SetForbidPlayChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<SetForbidPlayChannelsResponse>;
   /** 更新AI任务 {@link UpdateAITaskRequest} {@link UpdateAITaskResponse} */
   UpdateAITask(data: UpdateAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAITaskResponse>;
   /** 更新 AI 任务状态 {@link UpdateAITaskStatusRequest} {@link UpdateAITaskStatusResponse} */

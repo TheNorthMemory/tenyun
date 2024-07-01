@@ -3059,6 +3059,8 @@ declare interface StartStopServiceOrMonitorRequest {
   StrategyConfig?: StrategyConfig;
   /** 暂停服务时用的参数 */
   StopParams?: StopParams;
+  /** 当OpType为StopMonitor才有用，true表示进入维护模式但是仍然监控进程但是不拉起进程 */
+  KeepMonitorButNotRecoverProcess?: boolean;
 }
 
 declare interface StartStopServiceOrMonitorResponse {

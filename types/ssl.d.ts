@@ -42,6 +42,8 @@ declare interface BindResourceRegionResult {
   Region?: string | null;
   /** 关联资源总数 */
   TotalCount?: number;
+  /** 是否查询异常 */
+  Error?: string | null;
 }
 
 /** 绑定资源结果 */
@@ -2403,7 +2405,7 @@ declare interface SubmitCertificateInformationResponse {
 declare interface UpdateCertificateInstanceRequest {
   /** 一键更新原证书ID， 查询绑定该证书的云资源然后进行证书更新 */
   OldCertificateId: string;
-  /** 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse */
+  /** 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse、cos */
   ResourceTypes: string[];
   /** 一键更新新证书ID，不传该则证书公钥和私钥必传 */
   CertificateId?: string;

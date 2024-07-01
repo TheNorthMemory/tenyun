@@ -230,7 +230,7 @@ declare interface CcInfo {
   NotifyType?: string;
 }
 
-/** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
+/** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找 */
 declare interface Component {
   /** **如果是Component填写控件类型，则可选的字段为**： TEXT : 普通文本控件，输入文本字符串； MULTI_LINE_TEXT : 多行文本控件，输入文本字符串； CHECK_BOX : 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串； FILL_IMAGE : 图片控件，ComponentValue 填写图片的资源 ID； DYNAMIC_TABLE : 动态表格控件； ATTACHMENT : 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔； SELECTOR : 选择器控件，ComponentValue填写选择的字符串内容； DATE : 日期控件；默认是格式化为xxxx年xx月xx日字符串； WATERMARK : 水印控件；只能分配给发起方，必须设置ComponentExtra； DISTRICT : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；**如果是SignComponent签署控件类型，需要根据签署人的类型可选的字段为*** 企业方 SIGN_SEAL : 签署印章控件； SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PAGING_SEAL : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件。* 个人方 SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； 注：` 表单域的控件不能作为印章和签名控件` */
   ComponentType: string;
@@ -2056,7 +2056,7 @@ declare interface CreateLegalSealQrCodeRequest {
 }
 
 declare interface CreateLegalSealQrCodeResponse {
-  /** 二维码图片base64值 */
+  /** 二维码图片base64值，二维码有效期7天（604800秒）二维码图片的样式如下图：![image](https://qcloudimg.tencent-cloud.cn/raw/7ec2478761158a35a9c623882839a5df.png) */
   QrcodeBase64?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3065,20 +3065,20 @@ declare interface DescribeOrganizationSealsRequest {
   Limit: number;
   /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 20000。 */
   Offset?: number;
-  /** 查询信息类型，取值如下：0不返回授权用户1返回授权用户信息 */
+  /** 查询授权用户信息类型，取值如下： 0：（默认）不返回授权用户信息 1：返回授权用户的信息 */
   InfoType?: number;
-  /** 印章id（没有输入返回所有） */
+  /** 印章id，是否查询特定的印章（没有输入返回所有） */
   SealId?: string;
-  /** 印章类型列表（都是组织机构印章）。为空时查询所有类型的印章。目前支持以下类型：OFFICIAL：企业公章；CONTRACT：合同专用章；ORGANIZATION_SEAL：企业印章(图片上传创建)；LEGAL_PERSON_SEAL：法定代表人章 */
+  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； ORGANIZATION_SEAL：企业印章（通过图片上传创建）； LEGAL_PERSON_SEAL：法定代表人章。 */
   SealTypes?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 查询的印章状态列表。空，只查询启用状态的印章；ALL，查询所有状态的印章；CHECKING，查询待审核的印章；SUCCESS，查询启用状态的印章；FAIL，查询印章审核拒绝的印章；DISABLE，查询已停用的印章；STOPPED，查询已终止的印章；VOID，查询已作废的印章；INVALID，查询已失效的印章； */
+  /** 需查询的印章状态列表。空：（默认）仅查询启用状态的印章；ALL：查询所有状态的印章；CHECKING：查询待审核的印章；SUCCESS：查询启用状态的印章；FAIL：查询印章审核拒绝的印章；DISABLE：查询已停用的印章；STOPPED：查询已终止的印章；VOID：查询已作废的印章；INVALID：查询已失效的印章。 */
   SealStatuses?: string[];
 }
 
 declare interface DescribeOrganizationSealsResponse {
-  /** 在设置了SealId时返回0或1，没有设置时返回公司的总印章数量，可能比返回的印章数组数量多 */
+  /** 在设定了SealId时，返回值为0或1；若未设定SealId，则返回公司的总印章数量 */
   TotalCount?: number;
   /** 查询到的印章结果数组 */
   Seals?: OccupiedSeal[];
@@ -3513,7 +3513,7 @@ declare interface Ess {
   CreateIntegrationSubOrganizationActiveRecord(data: CreateIntegrationSubOrganizationActiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationSubOrganizationActiveRecordResponse>;
   /** 绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
-  /** 获取创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
+  /** 获取到电子签小程序创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
   CreateLegalSealQrCode(data?: CreateLegalSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLegalSealQrCodeResponse>;
   /** 创建一码多签签署码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
