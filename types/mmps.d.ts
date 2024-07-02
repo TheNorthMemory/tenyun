@@ -409,11 +409,11 @@ declare interface DescribeResourceUsageInfoRequest {
 
 declare interface DescribeResourceUsageInfoResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 安全资源数据列表 */
-  Data: ResourceUsageInfoData[];
+  Data?: ResourceUsageInfoData[];
   /** 安全资源数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

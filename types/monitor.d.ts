@@ -3415,7 +3415,7 @@ declare interface DescribeBaseMetricsRequest {
 
 declare interface DescribeBaseMetricsResponse {
   /** 查询得到的指标描述列表 */
-  MetricSet: MetricSet[];
+  MetricSet?: MetricSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

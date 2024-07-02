@@ -574,6 +574,14 @@ declare interface ManagerInfo {
 
 /** 管理人的四种审核状态 */
 declare interface ManagerStatusInfo {
+  /** 审核类型，枚举值：ov,ev,cs,ev_cs */
+  Type?: string | null;
+  /** 审核状态，枚举值：pending,completed,invalid,submitted,expiring,expired */
+  Status?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 过期时间 */
+  ExpireTime?: string | null;
 }
 
 /** 证书操作日志。 */
@@ -2123,43 +2131,43 @@ declare interface DescribeManagerDetailRequest {
 
 declare interface DescribeManagerDetailResponse {
   /** 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期 */
-  Status: string;
+  Status?: string;
   /** 管理人姓名 */
-  ManagerFirstName: string;
+  ManagerFirstName?: string;
   /** 管理人邮箱 */
-  ManagerMail: string;
+  ManagerMail?: string;
   /** 联系人姓名 */
-  ContactFirstName: string;
+  ContactFirstName?: string;
   /** 管理人姓名 */
-  ManagerLastName: string;
+  ManagerLastName?: string;
   /** 联系人职位 */
-  ContactPosition: string;
+  ContactPosition?: string;
   /** 管理人职位 */
-  ManagerPosition: string;
+  ManagerPosition?: string;
   /** 核验通过时间 */
-  VerifyTime: string | null;
+  VerifyTime?: string | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 核验过期时间 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 联系人姓名 */
-  ContactLastName: string;
+  ContactLastName?: string;
   /** 管理人电话 */
-  ManagerPhone: string;
+  ManagerPhone?: string;
   /** 联系人电话 */
-  ContactPhone: string;
+  ContactPhone?: string;
   /** 联系人邮箱 */
-  ContactMail: string;
+  ContactMail?: string;
   /** 管理人所属部门 */
-  ManagerDepartment: string;
+  ManagerDepartment?: string;
   /** 管理人所属公司信息 */
-  CompanyInfo: CompanyInfo;
+  CompanyInfo?: CompanyInfo;
   /** 管理人公司ID */
-  CompanyId: number;
+  CompanyId?: number;
   /** 管理人ID */
-  ManagerId: number;
+  ManagerId?: number;
   /** 审核状态详细信息 */
-  StatusInfo: ManagerStatusInfo[];
+  StatusInfo?: ManagerStatusInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -3720,18 +3720,6 @@ declare interface ImportIpAccessControlResponse {
   RequestId?: string;
 }
 
-declare interface ModifyAccessPeriodRequest {
-  /** 访问日志保存期限，范围为[1, 180] */
-  Period: number;
-  /** 日志主题，新版本不需要再传 */
-  TopicId?: string;
-}
-
-declare interface ModifyAccessPeriodResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyAntiFakeUrlRequest {
   /** 域名 */
   Domain: string;
@@ -4919,8 +4907,6 @@ declare interface Waf {
   GetInstanceQpsLimit(data: GetInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceQpsLimitResponse>;
   /** 导入IP黑白名单 {@link ImportIpAccessControlRequest} {@link ImportIpAccessControlResponse} */
   ImportIpAccessControl(data: ImportIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ImportIpAccessControlResponse>;
-  /** 修改访问日志保存期限等字段信息 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
-  ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
   /** 编辑防篡改url {@link ModifyAntiFakeUrlRequest} {@link ModifyAntiFakeUrlResponse} */
   ModifyAntiFakeUrl(data: ModifyAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAntiFakeUrlResponse>;
   /** 切换防篡改开关 {@link ModifyAntiFakeUrlStatusRequest} {@link ModifyAntiFakeUrlStatusResponse} */

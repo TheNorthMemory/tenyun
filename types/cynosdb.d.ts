@@ -14,6 +14,10 @@ declare interface Ability {
   NonsupportRoReason: string | null;
   /** 是否支持手动发起快照备份 */
   IsSupportManualSnapshot: string | null;
+  /** 是否支持透明数据加密 */
+  IsSupportTransparentDataEncryption?: string | null;
+  /** 不支持透明数据加密原因 */
+  NoSupportTransparentDataEncryptionReason?: string | null;
 }
 
 /** 数据库账号信息 */
@@ -788,6 +792,8 @@ declare interface CynosdbInstanceDetail {
   Status?: string;
   /** 实例状态中文描述 */
   StatusDesc?: string;
+  /** serverless实例状态, 可能值：resumepause */
+  ServerlessStatus?: string;
   /** 数据库类型 */
   DbType?: string;
   /** 数据库版本 */
@@ -832,8 +838,6 @@ declare interface CynosdbInstanceDetail {
   MinCpu?: number;
   /** serverless实例cpu上限 */
   MaxCpu?: number;
-  /** serverless实例状态, 可能值：resumepause */
-  ServerlessStatus?: string;
 }
 
 /** 实例组信息 */
@@ -1283,25 +1287,25 @@ declare interface Module {
 /** 网络信息 */
 declare interface NetAddr {
   /** 内网ip */
-  Vip: string | null;
+  Vip?: string | null;
   /** 内网端口号 */
-  Vport: number | null;
+  Vport?: number | null;
   /** 外网域名 */
-  WanDomain: string | null;
+  WanDomain?: string | null;
   /** 外网端口号 */
-  WanPort: number | null;
+  WanPort?: number | null;
   /** 网络类型（ro-只读,rw/ha-读写） */
-  NetType: string | null;
+  NetType?: string | null;
   /** 子网ID */
-  UniqSubnetId: string | null;
+  UniqSubnetId?: string | null;
   /** 私有网络ID */
-  UniqVpcId: string | null;
+  UniqVpcId?: string | null;
   /** 描述信息 */
-  Description: string | null;
+  Description?: string | null;
   /** 外网IP */
-  WanIP: string | null;
+  WanIP?: string | null;
   /** 外网状态 */
-  WanStatus: string | null;
+  WanStatus?: string | null;
   /** 实例组ID */
   InstanceGroupId?: string | null;
 }
@@ -1464,6 +1468,8 @@ declare interface ParamInfo {
   IsFunc?: boolean | null;
   /** 函数 */
   Func?: string | null;
+  /** 支持公式的参数的默认公式样式 */
+  FuncPattern?: string | null;
 }
 
 /** 修改参数时，传入参数描述 */
@@ -3061,9 +3067,9 @@ declare interface DescribeClusterDetailDatabasesRequest {
 
 declare interface DescribeClusterDetailDatabasesResponse {
   /** 数据库信息 */
-  DbInfos: DbInfo[] | null;
+  DbInfos?: DbInfo[] | null;
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3159,17 +3165,17 @@ declare interface DescribeClusterPasswordComplexityRequest {
 
 declare interface DescribeClusterPasswordComplexityResponse {
   /** 数据字典参数 */
-  ValidatePasswordDictionary: ParamInfo | null;
+  ValidatePasswordDictionary?: ParamInfo | null;
   /** 密码长度 */
-  ValidatePasswordLength: ParamInfo | null;
+  ValidatePasswordLength?: ParamInfo | null;
   /** 大小写敏感字符个数 */
-  ValidatePasswordMixedCaseCount: ParamInfo | null;
+  ValidatePasswordMixedCaseCount?: ParamInfo | null;
   /** 数字个数 */
-  ValidatePasswordNumberCount: ParamInfo | null;
+  ValidatePasswordNumberCount?: ParamInfo | null;
   /** 密码等级 */
-  ValidatePasswordPolicy: ParamInfo | null;
+  ValidatePasswordPolicy?: ParamInfo | null;
   /** 特殊字符个数 */
-  ValidatePasswordSpecialCharCount: ParamInfo | null;
+  ValidatePasswordSpecialCharCount?: ParamInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3245,7 +3251,7 @@ declare interface DescribeInstanceDetailRequest {
 
 declare interface DescribeInstanceDetailResponse {
   /** 实例详情 */
-  Detail: CynosdbInstanceDetail;
+  Detail?: CynosdbInstanceDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3381,11 +3387,11 @@ declare interface DescribeMaintainPeriodRequest {
 
 declare interface DescribeMaintainPeriodResponse {
   /** 维护week days */
-  MaintainWeekDays: string[];
+  MaintainWeekDays?: string[];
   /** 维护开始时间，单位秒 */
-  MaintainStartTime: number;
+  MaintainStartTime?: number;
   /** 维护时长，单位秒 */
-  MaintainDuration: number;
+  MaintainDuration?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -618,6 +618,32 @@ declare interface DestinationIpPortTranslationNatRule {
   Description: string;
 }
 
+/** 本端目的IP端口转换复杂结构 */
+declare interface DestinationIpPortTranslationNatRuleDiff {
+  /** 协议 */
+  Protocol: string;
+  /** 源端口 */
+  OriginalPort: number;
+  /** 源IP */
+  OriginalIp: string;
+  /** 目的端口 */
+  TranslationPort: number;
+  /** 目的IP */
+  TranslationIp: string;
+  /** 旧协议。 */
+  OldProtocol: string;
+  /** 旧源端口 */
+  OldOriginalPort: number;
+  /** 旧源IP */
+  OldOriginalIp: string;
+  /** 旧目的端口 */
+  OldTranslationPort: number;
+  /** 旧目的IP */
+  OldTranslationIp: string;
+  /** 描述 */
+  Description?: string;
+}
+
 /** 描述 DhcpIp 信息 */
 declare interface DhcpIp {
   /** `DhcpIp`的`ID`，是`DhcpIp`的唯一标识。 */
@@ -1092,6 +1118,22 @@ declare interface ItemPrice {
   DiscountPrice?: number;
 }
 
+/** 本端目的IP端口转换复杂结构 */
+declare interface LocalDestinationIpPortTranslationNatRule {
+  /** 协议 */
+  Protocol: string;
+  /** 源端口 */
+  OriginalPort: number;
+  /** 源IP */
+  OriginalIp: string;
+  /** 目的端口 */
+  TranslationPort: number;
+  /** 目的IP */
+  TranslationIp: string;
+  /** 描述 */
+  Description?: string;
+}
+
 /** 本地网关信息 */
 declare interface LocalGateway {
   /** CDC实例ID */
@@ -1210,6 +1252,10 @@ declare interface NatGatewayDestinationIpPortTranslationNatRule {
   VpcId: string | null;
   /** NAT网关转发规则创建时间。 */
   CreatedTime: string | null;
+}
+
+/** NAT地域地区对象 */
+declare interface NatRegionInfoWithArea {
 }
 
 /** 网络探测对象。 */
@@ -1474,6 +1520,54 @@ declare interface PrivateIpAddressSpecification {
   State?: string;
   /** IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
   QosLevel?: string;
+}
+
+/** 本端目的IP端口转换复杂结构 */
+declare interface PrivateNatDestinationIpPortTranslationNatRule {
+  /** 协议 */
+  Protocol: string;
+  /** 原端口 */
+  OriginalPort: number;
+  /** 原IP */
+  OriginalIp: string;
+  /** 映射端口 */
+  TranslationPort: number;
+  /** 映射IP */
+  TranslationIp: string;
+  /** 描述 */
+  Description?: string;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 更新时间。 */
+  UpdateTime?: string;
+}
+
+/** 私网网关对象 */
+declare interface PrivateNatGateway {
+  /** 私网网关`ID`。 */
+  NatGatewayId?: string;
+  /** 私网网关名称。 */
+  NatGatewayName?: string;
+  /** 私网网关关联`VPC`实例`ID`。 */
+  VpcId?: string | null;
+  /** 私网网关当前状态。 */
+  Status?: string;
+  /** 私网网关跨域标志。 */
+  CrossDomain?: boolean;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
+}
+
+/** 可创建的私网网关配额数量 */
+declare interface PrivateNatGatewayLimit {
+  /** 私有网络唯一`ID`。 */
+  UniqVpcId: string;
+  /** Vpc下总计可创建私网网关数量。 */
+  TotalLimit: number;
+  /** 可创建私网网关数量。 */
+  Available: number;
 }
 
 /** 描述网络中心每个产品的配额信息 */
@@ -2098,6 +2192,74 @@ declare interface TrafficPackage {
   TagSet?: Tag[] | null;
   /** 区分闲时流量包与全时流量包 */
   DeductType?: string;
+}
+
+/** 私网网关转发规则匹配ACL */
+declare interface TranslationAclRule {
+  /** ACL协议类型，可选值:"ALL","TCP","UDP" */
+  Protocol: string;
+  /** 源端口。 */
+  SourcePort: string;
+  /** 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx" */
+  SourceCidr: string;
+  /** 目的端口。 */
+  DestinationPort: string;
+  /** 目的地址。 */
+  DestinationCidr: string;
+  /** ACL规则`ID`。 */
+  AclRuleId?: number;
+  /** 是否匹配。 */
+  Action?: number;
+}
+
+/** 私网网关Snat转发规则 */
+declare interface TranslationNatRule {
+  /** 转换规则目标，可选值"LOCAL","PEER"。 */
+  TranslationDirection: string;
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  TranslationType: string;
+  /** 转换`IP`,当转换规则类型为四层时为`IP`池。 */
+  TranslationIp: string;
+  /** 转换规则描述。 */
+  Description: string | null;
+  /** 源`IP`,当转换规则类型为三层时有效。 */
+  OriginalIp?: string | null;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 更新时间。 */
+  UpdateTime?: string;
+}
+
+/** 私网网关Snat转发规则修改 */
+declare interface TranslationNatRuleDiff {
+  /** 转发规则目标，可选值"LOCAL","PEER"。 */
+  TranslationDirection: string;
+  /** 转发规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  TranslationType: string;
+  /** 转发规则映射`IP`,当转发规则类型为四层时为`IP`池 */
+  TranslationIp: string;
+  /** 转发规则描述。 */
+  Description: string | null;
+  /** 旧转发规则映射`IP`,当转发规则类型为四层时为`IP`池 */
+  OldTranslationIp: string;
+  /** 新转发规则源`IP`,当转发规则类型为三层时有效 */
+  OriginalIp?: string | null;
+  /** 旧转发规则源`IP`,当转发规则类型为三层时有效 */
+  OldOriginalIp?: string | null;
+}
+
+/** 私网网关Snat转发规则入参 */
+declare interface TranslationNatRuleInput {
+  /** 转换规则目标，可选值"LOCAL","PEER"。 */
+  TranslationDirection: string;
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  TranslationType: string;
+  /** 转换`IP`,当转换规则类型为四层时为`IP`池。 */
+  TranslationIp: string;
+  /** 转换规则描述。 */
+  Description: string | null;
+  /** 源`IP`,当转换规则类型为三层时有效。 */
+  OriginalIp?: string | null;
 }
 
 /** 共享流量包用量明细 */
@@ -3266,6 +3428,78 @@ declare interface CreateNetworkInterfaceResponse {
   RequestId?: string;
 }
 
+declare interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 目的端口转换规则列表。 */
+  LocalDestinationIpPortTranslationNatRules: LocalDestinationIpPortTranslationNatRule[];
+}
+
+declare interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrivateNatGatewayRequest {
+  /** 私网网关名称 */
+  NatGatewayName: string;
+  /** 私有网络实例ID。当创建VPC类型私网NAT网关或者专线网关类型私网NAT网关时，此参数必填。 */
+  VpcId?: string;
+  /** 跨域参数。仅当取值为True时，才会支持跨域绑定VPC。 */
+  CrossDomain?: boolean;
+  /** 实例标签 */
+  Tags?: Tag[];
+  /** VPC类型私网NAT网关。仅当取值为True时，才会创建VPC类型私网NAT网关。 */
+  VpcType?: boolean;
+  /** 云联网类型私网NAT网关需要绑定的云联网实例ID。 */
+  CcnId?: string;
+}
+
+declare interface CreatePrivateNatGatewayResponse {
+  /** 私网网关对象。 */
+  PrivateNatGatewaySet?: PrivateNatGateway[];
+  /** 创建实例个数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrivateNatGatewayTranslationAclRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 转换规则目标，可选值"LOCAL"。 */
+  TranslationDirection: string;
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  TranslationType: string;
+  /** 转换`IP`,当转换规则类型为四层时为`IP`池。 */
+  TranslationIp: string;
+  /** 访问控制列表。 */
+  TranslationAclRules: TranslationAclRule[];
+  /** 源`IP`,当转换规则类型为三层时有效。 */
+  OriginalIp?: string;
+}
+
+declare interface CreatePrivateNatGatewayTranslationAclRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrivateNatGatewayTranslationNatRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 转换规则对象数组。 */
+  TranslationNatRules: TranslationNatRuleInput[];
+  /** 跨域参数，当VPC为跨域时填写为True。 */
+  CrossDomain?: boolean;
+}
+
+declare interface CreatePrivateNatGatewayTranslationNatRuleResponse {
+  /** 私网网关唯一`ID`。 */
+  NatGatewayId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRouteTableRequest {
   /** 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
   VpcId: string;
@@ -3920,6 +4154,64 @@ declare interface DeleteNetworkInterfaceRequest {
 }
 
 declare interface DeleteNetworkInterfaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 目的端口转换规则数组。 */
+  LocalDestinationIpPortTranslationNatRules: LocalDestinationIpPortTranslationNatRule[];
+}
+
+declare interface DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrivateNatGatewayRequest {
+  /** 私网网关唯一`ID`，形如"intranat-xxxxxxxx"。 */
+  NatGatewayId: string;
+}
+
+declare interface DeletePrivateNatGatewayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrivateNatGatewayTranslationAclRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 转换规则目标，可选值"LOCAL"。 */
+  TranslationDirection: string;
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  TranslationType: string;
+  /** 转换`IP`,当转换规则类型为四层时为`IP`池 */
+  TranslationIp: string;
+  /** 访问控制规则对应`ID` */
+  AclRuleIds: number[];
+  /** 源`IP`,当转换规则类型为三层时有效 */
+  OriginalIp?: string;
+}
+
+declare interface DeletePrivateNatGatewayTranslationAclRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrivateNatGatewayTranslationNatRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 转换规则对象数组。 */
+  TranslationNatRules: TranslationNatRule[];
+  /** 跨域参数，当VPC为跨域时填写为True。 */
+  CrossDomain?: boolean;
+}
+
+declare interface DeletePrivateNatGatewayTranslationNatRuleResponse {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5024,6 +5316,126 @@ declare interface DescribeNetworkInterfacesResponse {
   NetworkInterfaceSet?: NetworkInterface[];
   /** 符合条件的实例数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRequest {
+  /** 私网网关唯一`ID`，形如"intranat-xxxxxxxx) */
+  NatGatewayId: string;
+  /** 过滤条件，Name可选值"OriginalIp", "TranslationIp", "OriginalPort","TranslationPort", "Protocol", "Description" */
+  Filters?: Filter[];
+  /** 偏移量，默认值为0。 */
+  Offset?: number;
+  /** 返回数目，默认值为20。 */
+  Limit?: number;
+}
+
+declare interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesResponse {
+  /** 总规则数目。 */
+  TotalCount: number;
+  /** 目的端口转换规则数组。 */
+  LocalDestinationIpPortTranslationNatRuleSet: PrivateNatDestinationIpPortTranslationNatRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateNatGatewayLimitsRequest {
+  /** 查询VPC下可创建的私网网关配额数量，可选值：VpcId - String - 所在VpcId */
+  Filters?: Filter[];
+  /** 偏移量，默认值为0。 */
+  Offset?: number;
+  /** 返回数目，默认值为20。 */
+  Limit?: number;
+}
+
+declare interface DescribePrivateNatGatewayLimitsResponse {
+  /** 查询返回结果个数。 */
+  TotalCount: number;
+  /** 私网网关配额。 */
+  PrivateNatGatewayLimitSet: PrivateNatGatewayLimit[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateNatGatewayRegionsRequest {
+}
+
+declare interface DescribePrivateNatGatewayRegionsResponse {
+  /** 地域对象 */
+  RegionSet: NatRegionInfoWithArea[];
+  /** 返回可支持地域总数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateNatGatewayTranslationAclRulesRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 转换规则目标，可选值"LOCAL"。 */
+  TranslationDirection: string;
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  TranslationType: string;
+  /** 转换`IP`,当转换规则类型为四层时为`IP`池。 */
+  TranslationIp: string;
+  /** 源`IP`,当转换规则类型为三层时有效。 */
+  OriginalIp?: string;
+  /** 偏移量。默认值为0。 */
+  Offset?: number;
+  /** 返回数目，默认值为20。 */
+  Limit?: number;
+}
+
+declare interface DescribePrivateNatGatewayTranslationAclRulesResponse {
+  /** 返回个数。 */
+  TotalCount?: number;
+  /** 访问控制规则列表。 */
+  TranslationAclRuleSet?: TranslationAclRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateNatGatewayTranslationNatRulesRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId?: string;
+  /** 过滤条件。OriginalIp - String - 转换规则源`IP`。TranslationIp - String - 转换`IP`。VpcId - String - 私网网关所在`VpcId`。Description - String - 转换规则描述 */
+  Filters?: Filter[];
+  /** 偏移量。默认值为0。 */
+  Offset?: number;
+  /** 返回数量。默认值为20。 */
+  Limit?: number;
+}
+
+declare interface DescribePrivateNatGatewayTranslationNatRulesResponse {
+  /** 对象数目。 */
+  TotalCount: number;
+  /** 转换规则详情数组。 */
+  TranslationNatRuleSet: TranslationNatRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateNatGatewaysRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-0g3blj80`。 */
+  NatGatewayIds?: string[];
+  /** 过滤条件。NatGatewayId - String - 私网网关唯一`ID`，形如：`intranat-0g3blj80`。NatGatewayName - String - 专线网关名称，默认模糊查询。VpcId - String - 私网网关所在`VpcId`。TagKey - Tag数组 - 私网网关标签键值对数组 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20。 */
+  Limit?: number;
+  /** 排序字段。可选值："NatGatewayId"、"NatGatewayName"、"CreatedTime" */
+  OrderField?: string;
+  /** 排序方式。可选值："ASC"、"DESC"。 */
+  OrderDirection?: string;
+}
+
+declare interface DescribePrivateNatGatewaysResponse {
+  /** 符合条件的对象数。 */
+  TotalCount?: number;
+  /** 私网网关对象数组。 */
+  PrivateNatGatewaySet?: PrivateNatGateway[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6704,6 +7116,64 @@ declare interface ModifyPrivateIpAddressesAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPrivateNatGatewayAttributeRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 私网网关名称，可任意命名，但不得超过60个字符。 */
+  NatGatewayName: string;
+}
+
+declare interface ModifyPrivateNatGatewayAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 目的端口转换规则列表。 */
+  LocalDestinationIpPortTranslationNatRules: DestinationIpPortTranslationNatRuleDiff[];
+}
+
+declare interface ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrivateNatGatewayTranslationAclRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 转换规则目标，可选值"LOCAL"。 */
+  TranslationDirection: string;
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  TranslationType: string;
+  /** 转换`IP`,当转换规则类型为四层时为`IP`池 */
+  TranslationIp: string;
+  /** 访问控制列表，需要附带AclRuleId参数。 */
+  TranslationAclRules: TranslationAclRule[];
+  /** 源`IP`,当转换规则类型为三层时有效 */
+  OriginalIp?: string;
+}
+
+declare interface ModifyPrivateNatGatewayTranslationAclRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrivateNatGatewayTranslationNatRuleRequest {
+  /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
+  NatGatewayId: string;
+  /** 转换规则对象数组。仅支持修改单个转换规则 */
+  TranslationNatRules: TranslationNatRuleDiff[];
+  /** 跨域参数，当VPC为跨域时填写为True。 */
+  CrossDomain?: boolean;
+}
+
+declare interface ModifyPrivateNatGatewayTranslationNatRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRouteTableAttributeRequest {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId: string;
@@ -7513,6 +7983,14 @@ declare interface Vpc {
   CreateNetworkAclQuintupleEntries(data: CreateNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkAclQuintupleEntriesResponse>;
   /** 创建弹性网卡 {@link CreateNetworkInterfaceRequest} {@link CreateNetworkInterfaceResponse} */
   CreateNetworkInterface(data: CreateNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkInterfaceResponse>;
+  /** 创建私网NAT网关 {@link CreatePrivateNatGatewayRequest} {@link CreatePrivateNatGatewayResponse} */
+  CreatePrivateNatGateway(data: CreatePrivateNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateNatGatewayResponse>;
+  /** 创建私网NAT网关目的端口转换规则 {@link CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest} {@link CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse} */
+  CreatePrivateNatGatewayDestinationIpPortTranslationNatRule(data: CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse>;
+  /** 创建私网NAT网关源端转换访问控制规则 {@link CreatePrivateNatGatewayTranslationAclRuleRequest} {@link CreatePrivateNatGatewayTranslationAclRuleResponse} */
+  CreatePrivateNatGatewayTranslationAclRule(data: CreatePrivateNatGatewayTranslationAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateNatGatewayTranslationAclRuleResponse>;
+  /** 创建私网NAT网关源端转换规则 {@link CreatePrivateNatGatewayTranslationNatRuleRequest} {@link CreatePrivateNatGatewayTranslationNatRuleResponse} */
+  CreatePrivateNatGatewayTranslationNatRule(data: CreatePrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateNatGatewayTranslationNatRuleResponse>;
   /** 创建路由表 {@link CreateRouteTableRequest} {@link CreateRouteTableResponse} */
   CreateRouteTable(data: CreateRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteTableResponse>;
   /** 创建路由策略 {@link CreateRoutesRequest} {@link CreateRoutesResponse} */
@@ -7597,6 +8075,14 @@ declare interface Vpc {
   DeleteNetworkAclQuintupleEntries(data: DeleteNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkAclQuintupleEntriesResponse>;
   /** 删除弹性网卡 {@link DeleteNetworkInterfaceRequest} {@link DeleteNetworkInterfaceResponse} */
   DeleteNetworkInterface(data: DeleteNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkInterfaceResponse>;
+  /** 删除私网NAT网关 {@link DeletePrivateNatGatewayRequest} {@link DeletePrivateNatGatewayResponse} */
+  DeletePrivateNatGateway(data: DeletePrivateNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateNatGatewayResponse>;
+  /** 删除私网NAT网关目的端口转换规则 {@link DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest} {@link DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse} */
+  DeletePrivateNatGatewayDestinationIpPortTranslationNatRule(data: DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse>;
+  /** 删除私网NAT网关源端转换访问控制规则 {@link DeletePrivateNatGatewayTranslationAclRuleRequest} {@link DeletePrivateNatGatewayTranslationAclRuleResponse} */
+  DeletePrivateNatGatewayTranslationAclRule(data: DeletePrivateNatGatewayTranslationAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateNatGatewayTranslationAclRuleResponse>;
+  /** 删除私网NAT网关源端转换规则 {@link DeletePrivateNatGatewayTranslationNatRuleRequest} {@link DeletePrivateNatGatewayTranslationNatRuleResponse} */
+  DeletePrivateNatGatewayTranslationNatRule(data: DeletePrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateNatGatewayTranslationNatRuleResponse>;
   /** 删除路由表 {@link DeleteRouteTableRequest} {@link DeleteRouteTableResponse} */
   DeleteRouteTable(data: DeleteRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTableResponse>;
   /** 删除路由策略 {@link DeleteRoutesRequest} {@link DeleteRoutesResponse} */
@@ -7727,6 +8213,18 @@ declare interface Vpc {
   DescribeNetworkInterfaceLimit(data: DescribeNetworkInterfaceLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfaceLimitResponse>;
   /** 查询弹性网卡列表 {@link DescribeNetworkInterfacesRequest} {@link DescribeNetworkInterfacesResponse} */
   DescribeNetworkInterfaces(data?: DescribeNetworkInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfacesResponse>;
+  /** 查询私网NAT网关目的端口转换规则 {@link DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRequest} {@link DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesResponse} */
+  DescribePrivateNatGatewayDestinationIpPortTranslationNatRules(data: DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesResponse>;
+  /** 查询可创建的私网NAT网关配额数量 {@link DescribePrivateNatGatewayLimitsRequest} {@link DescribePrivateNatGatewayLimitsResponse} */
+  DescribePrivateNatGatewayLimits(data?: DescribePrivateNatGatewayLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateNatGatewayLimitsResponse>;
+  /** 查询私网NAT网关可支持地域 {@link DescribePrivateNatGatewayRegionsRequest} {@link DescribePrivateNatGatewayRegionsResponse} */
+  DescribePrivateNatGatewayRegions(data?: DescribePrivateNatGatewayRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateNatGatewayRegionsResponse>;
+  /** 查询私网NAT网关源端转换访问控制规则 {@link DescribePrivateNatGatewayTranslationAclRulesRequest} {@link DescribePrivateNatGatewayTranslationAclRulesResponse} */
+  DescribePrivateNatGatewayTranslationAclRules(data: DescribePrivateNatGatewayTranslationAclRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateNatGatewayTranslationAclRulesResponse>;
+  /** 查询私网NAT网关源端转换规则 {@link DescribePrivateNatGatewayTranslationNatRulesRequest} {@link DescribePrivateNatGatewayTranslationNatRulesResponse} */
+  DescribePrivateNatGatewayTranslationNatRules(data?: DescribePrivateNatGatewayTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateNatGatewayTranslationNatRulesResponse>;
+  /** 查询私网NAT网关 {@link DescribePrivateNatGatewaysRequest} {@link DescribePrivateNatGatewaysResponse} */
+  DescribePrivateNatGateways(data?: DescribePrivateNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateNatGatewaysResponse>;
   /** 查询网络产品配额信息 {@link DescribeProductQuotaRequest} {@link DescribeProductQuotaResponse} */
   DescribeProductQuota(data: DescribeProductQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductQuotaResponse>;
   /** 查询路由策略冲突列表 {@link DescribeRouteConflictsRequest} {@link DescribeRouteConflictsResponse} */
@@ -7943,6 +8441,14 @@ declare interface Vpc {
   ModifyNetworkInterfaceQos(data: ModifyNetworkInterfaceQosRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkInterfaceQosResponse>;
   /** 修改弹性网卡内网IP信息 {@link ModifyPrivateIpAddressesAttributeRequest} {@link ModifyPrivateIpAddressesAttributeResponse} */
   ModifyPrivateIpAddressesAttribute(data: ModifyPrivateIpAddressesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateIpAddressesAttributeResponse>;
+  /** 修改私网NAT网关属性 {@link ModifyPrivateNatGatewayAttributeRequest} {@link ModifyPrivateNatGatewayAttributeResponse} */
+  ModifyPrivateNatGatewayAttribute(data: ModifyPrivateNatGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayAttributeResponse>;
+  /** 修改私网NAT网关目的端口转换规则 {@link ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleRequest} {@link ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleResponse} */
+  ModifyPrivateNatGatewayDestinationIpPortTranslationNatRule(data: ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleResponse>;
+  /** 修改私网NAT网关源端转换访问控制规则 {@link ModifyPrivateNatGatewayTranslationAclRuleRequest} {@link ModifyPrivateNatGatewayTranslationAclRuleResponse} */
+  ModifyPrivateNatGatewayTranslationAclRule(data: ModifyPrivateNatGatewayTranslationAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayTranslationAclRuleResponse>;
+  /** 修改私网NAT网关源端转换规则 {@link ModifyPrivateNatGatewayTranslationNatRuleRequest} {@link ModifyPrivateNatGatewayTranslationNatRuleResponse} */
+  ModifyPrivateNatGatewayTranslationNatRule(data: ModifyPrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayTranslationNatRuleResponse>;
   /** 修改路由表属性 {@link ModifyRouteTableAttributeRequest} {@link ModifyRouteTableAttributeResponse} */
   ModifyRouteTableAttribute(data: ModifyRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableAttributeResponse>;
   /** 修改安全组属性 {@link ModifySecurityGroupAttributeRequest} {@link ModifySecurityGroupAttributeResponse} */

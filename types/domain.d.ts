@@ -169,19 +169,19 @@ declare interface DomainBaseInfo {
 /** 批量操作日志详情 */
 declare interface DomainBatchDetailSet {
   /** 详情ID */
-  Id: number;
+  Id?: number;
   /** 类型 new: 注册域名 batch_transfer_prohibition_on:开启禁止转移 batch_transfer_prohibition_off:关闭禁止转移 batch_update_prohibition_on:开启禁止更新 batch_update_prohibition_off:关闭禁止更新 */
-  Action: string;
+  Action?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 执行状态：doing 执行中。failed 操作失败。success 操作成功。 */
-  Status: string;
+  Status?: string;
   /** 失败原因 */
-  Reason: string | null;
+  Reason?: string | null;
   /** 创建时间 */
-  CreatedOn: string;
+  CreatedOn?: string;
   /** 更新时间 */
-  UpdatedOn: string;
+  UpdatedOn?: string;
   /** 订单号 */
   BigDealId?: string | null;
 }
@@ -189,13 +189,13 @@ declare interface DomainBatchDetailSet {
 /** 批量操作记录 */
 declare interface DomainBatchLogSet {
   /** 日志ID */
-  LogId: number;
+  LogId?: number;
   /** 数量 */
-  Number: number;
+  Number?: number;
   /** 执行状态：doing 执行中。done 执行完成。 */
-  Status: string;
+  Status?: string;
   /** 提交时间 */
-  CreatedOn: string;
+  CreatedOn?: string;
   /** 批量操作成功个数 */
   Success?: number;
   /** 批量操作处理中个数 */

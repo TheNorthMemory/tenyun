@@ -1140,6 +1140,66 @@ declare interface DrInstanceOpsDtoPage {
   Items?: DrInstanceOpsDto[] | null;
 }
 
+/** 值班信息 */
+declare interface Duty {
+  /** 值班Id */
+  DutyScheduleId: number | null;
+  /** 值班开始时间 */
+  StartTime: string | null;
+  /** 值班结束时间 */
+  EndTime: string | null;
+  /** 值班人员 */
+  DutyPersons: DutyPerson[] | null;
+}
+
+/** 值班人员 */
+declare interface DutyPerson {
+  /** 值班人子账号id */
+  UserId: string | null;
+  /** 值班人名称 */
+  UserName: string | null;
+  /** 值班人员主账号用户id */
+  OwnerUserId?: string | null;
+  /** 值班人tenantId */
+  TenantId?: number | null;
+  /** 2023-11-02 08:00:00 */
+  AddTime?: string | null;
+  /** 扩展字段 */
+  Params?: string | null;
+}
+
+/** 值班表列表 */
+declare interface DutySchedule {
+  /** 值班表列表 */
+  Rows: DutyScheduleData[] | null;
+  /** 总条数 */
+  TotalCount: number;
+  /** 页号 */
+  PageNumber: number;
+  /** 页大小 */
+  PageSize: number;
+  /** 总页数 */
+  TotalPageNumber: number;
+}
+
+/** 值班表列表 */
+declare interface DutyScheduleData {
+  /** 值班表Id */
+  Id: number;
+  /** 值班表名称 */
+  Name: string;
+  /** 创建人 */
+  Creator: string;
+}
+
+/** 值班信息表 */
+declare interface DutyScheduleDetailsInfo {
+  /** 值班日期 */
+  Day: string;
+  /** 值班信息 */
+  Duty: Duty[] | null;
+}
+
 /** 事件连续时间实例信息 */
 declare interface EventBatchCaseDTO {
   /** 事件实例id */
@@ -6384,6 +6444,38 @@ declare interface DescribeDsParentFolderTreeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDutyScheduleDetailsRequest {
+  /** 值班表id */
+  Id: number;
+  /** 查询时间 */
+  QueryDate: string;
+  /** 扩展字段 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDutyScheduleDetailsResponse {
+  /** 值班日历信息 */
+  Data?: DutyScheduleDetailsInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDutyScheduleListRequest {
+  /** 页码，默认1 */
+  PageNumber: number;
+  /** 页大小，默认10 */
+  PageSize: number;
+  /** 值班表名称 */
+  Name?: string;
+}
+
+declare interface DescribeDutyScheduleListResponse {
+  /** 无 */
+  Data: DutySchedule;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEventCasesRequest {
   /** 项目ID */
   ProjectId: string;
@@ -9933,6 +10025,10 @@ declare interface Wedata {
   DescribeDsFolderTree(data: DescribeDsFolderTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsFolderTreeResponse>;
   /** 编排空间-查询父目录树 {@link DescribeDsParentFolderTreeRequest} {@link DescribeDsParentFolderTreeResponse} */
   DescribeDsParentFolderTree(data: DescribeDsParentFolderTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsParentFolderTreeResponse>;
+  /** 获取值班日历 {@link DescribeDutyScheduleDetailsRequest} {@link DescribeDutyScheduleDetailsResponse} */
+  DescribeDutyScheduleDetails(data: DescribeDutyScheduleDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDutyScheduleDetailsResponse>;
+  /** 获取值班表列表 {@link DescribeDutyScheduleListRequest} {@link DescribeDutyScheduleListResponse} */
+  DescribeDutyScheduleList(data: DescribeDutyScheduleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDutyScheduleListResponse>;
   /** 实例运维-事件实例-查询事件详情 {@link DescribeEventRequest} {@link DescribeEventResponse} */
   DescribeEvent(data: DescribeEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventResponse>;
   /** 查找事件实例 {@link DescribeEventCasesRequest} {@link DescribeEventCasesResponse} */
