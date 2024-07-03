@@ -746,6 +746,14 @@ declare interface GroupInfo {
   Groups?: LineInfo[];
 }
 
+/** 图片分辨率信息 */
+declare interface ImageSize {
+  /** 图片的宽，单位像素 */
+  Width?: number | null;
+  /** 图片的高，单位像素 */
+  Height?: number | null;
+}
+
 /** 保险单据信息 */
 declare interface InsuranceBillInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：【病案首页】姓名、性别、出生日期、出院诊断、疾病编码、入院病情等。【费用清单】医疗参保人员类别、身份证号、入院方式、结账日期、项目、金额等。【结算单】名称、单价、数量、金额、医保内、医保外等。【医疗发票】姓名、性别、住院时间、收费项目、金额、合计等。 */
@@ -2604,6 +2612,8 @@ declare interface AdvertiseOCRRequest {
 declare interface AdvertiseOCRResponse {
   /** 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。 */
   TextDetections?: AdvertiseTextDetection[];
+  /** 图片分辨率信息，单位 px */
+  ImageSize?: ImageSize;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 251+ 款产品，11366+ 服务数</summary>
+<details><summary>共计 251+ 款产品，11367+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -201,7 +201,7 @@ facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 20
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(37) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
-gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(103) |
+gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(104) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(28) |
 goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(20) |
 gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 2020-08-20(18) |

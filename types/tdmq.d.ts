@@ -1014,6 +1014,8 @@ declare interface RabbitMQVirtualHostInfo {
   ModifyTime?: string | null;
   /** vhost概览统计信息 */
   VirtualHostStatistics?: RabbitMQVirtualHostStatistics | null;
+  /** 消息轨迹开关,true打开,false关闭 */
+  TraceFlag?: boolean | null;
   /** vhost状态，与原生控制台对应，有running、partial、stopped、unknown */
   Status?: string | null;
   /** 消息堆积数 */
@@ -1995,6 +1997,8 @@ declare interface CreateRabbitMQVipInstanceRequest {
   ResourceTags?: Tag[];
   /** 公网带宽大小，单位 M */
   Bandwidth?: number;
+  /** 是否打开公网接入，不传默认为false */
+  EnablePublicAccess?: boolean;
 }
 
 declare interface CreateRabbitMQVipInstanceResponse {
@@ -2176,9 +2180,9 @@ declare interface CreateRoleRequest {
   /** 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。 */
   RoleName: string;
   /** 备注说明，长度必须大等于0且小等于128。 */
-  Remark?: string;
+  Remark: string;
   /** 必填字段，集群Id */
-  ClusterId?: string;
+  ClusterId: string;
 }
 
 declare interface CreateRoleResponse {

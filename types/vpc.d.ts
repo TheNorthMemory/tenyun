@@ -912,6 +912,18 @@ declare interface HaVip {
   Business: string;
 }
 
+/** VPN通道健康检查配置 */
+declare interface HealthCheckConfig {
+  /** 探测模式，默认值NQA，不可修改。 */
+  ProbeType?: string | null;
+  /** 探测间隔，腾讯云两次健康检查间隔时间，范围【1000-5000】，单位ms。 */
+  ProbeInterval?: number | null;
+  /** 探测次数，连续N次健康检查失败后执行路由切换，范围【3-8】，单位次。 */
+  ProbeThreshold?: number | null;
+  /** 探测超时时间，范围【10-5000】，单位ms。 */
+  ProbeTimeout?: number | null;
+}
+
 /** IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议 */
 declare interface IKEOptionsSpecification {
   /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC */
@@ -2422,6 +2434,8 @@ declare interface VpnConnection {
   NegotiationType?: string | null;
   /** Bgp配置信息 */
   BgpConfig?: BgpConfigAndAsn | null;
+  /** Nqa配置信息 */
+  HealthCheckConfig?: HealthCheckConfig | null;
 }
 
 /** VPN网关对象。 */
@@ -3823,6 +3837,8 @@ declare interface CreateVpnConnectionRequest {
   Route?: CreateVpnConnRoute;
   /** BGP配置。 */
   BgpConfig?: BgpConfig;
+  /** 健康检查NQA配置。 */
+  HealthCheckConfig?: HealthCheckConfig;
 }
 
 declare interface CreateVpnConnectionResponse {
@@ -7393,6 +7409,8 @@ declare interface ModifyVpnConnectionAttributeRequest {
   DpdAction?: string;
   /** 对端网关ID，4.0及以上网关下的通道支持更新。 */
   CustomerGatewayId?: string;
+  /** 健康检查配置 */
+  HealthCheckConfig?: HealthCheckConfig;
 }
 
 declare interface ModifyVpnConnectionAttributeResponse {

@@ -3169,6 +3169,8 @@ declare interface DescribeAlarmHistoriesRequest {
   PolicyIds?: string[];
   /** 告警等级,取值范围：Remind、Serious、Warn */
   AlarmLevels?: string[];
+  /** 收敛历史的唯一id */
+  ConvergenceHistoryIDs?: string[];
 }
 
 declare interface DescribeAlarmHistoriesResponse {

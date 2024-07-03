@@ -1857,7 +1857,7 @@ declare interface Organization {
   DeleteOrganizationIdentity(data: DeleteOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationIdentityResponse>;
   /** 删除组织成员访问授权 {@link DeleteOrganizationMemberAuthIdentityRequest} {@link DeleteOrganizationMemberAuthIdentityResponse} */
   DeleteOrganizationMemberAuthIdentity(data: DeleteOrganizationMemberAuthIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMemberAuthIdentityResponse>;
-  /** 批量删除企业组织成员 {@link DeleteOrganizationMembersRequest} {@link DeleteOrganizationMembersResponse} */
+  /** 批量移除企业组织成员 {@link DeleteOrganizationMembersRequest} {@link DeleteOrganizationMembersResponse} */
   DeleteOrganizationMembers(data: DeleteOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersResponse>;
   /** 删除组织成员访问策略 {@link DeleteOrganizationMembersPolicyRequest} {@link DeleteOrganizationMembersPolicyResponse} */
   DeleteOrganizationMembersPolicy(data: DeleteOrganizationMembersPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersPolicyResponse>;

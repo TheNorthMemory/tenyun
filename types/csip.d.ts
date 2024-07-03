@@ -314,7 +314,7 @@ declare interface AssetViewCFGRisk {
   From?: string;
   /** 状态 */
   Status?: number;
-  /** - */
+  /** 相关规范 */
   CFGSTD?: string;
   /** 配置详情 */
   CFGDescribe?: string;
@@ -546,7 +546,7 @@ declare interface AssetViewWeakPassRisk {
   FirstTime?: string;
   /** 状态，0未处理、1已处置、2已忽略 */
   Status?: number;
-  /** 资产唯一id */
+  /** ID，处理风险使用 */
   Id?: string;
   /** 前端索引 */
   Index?: string;
@@ -570,7 +570,7 @@ declare interface AssetViewWeakPassRisk {
   VULURL?: string;
   /** 修复建议 */
   Fix?: string;
-  /** 负载 */
+  /** 证明 */
   Payload?: string;
 }
 
@@ -1267,18 +1267,18 @@ declare interface OrganizationUserInfo {
 /** 端口风险高级配置项 */
 declare interface PortRiskAdvanceCFGParamItem {
   /** 端口集合,以逗号分隔 */
-  PortSets: string | null;
+  PortSets: string;
   /** 检测项类型，0-系统定义，1-用户自定义 */
-  CheckType: number | null;
+  CheckType: number;
   /** 检测项描述 */
-  Detail?: string | null;
+  Detail?: string;
   /** 是否启用，1-启用，0-禁用 */
-  Enable?: number | null;
+  Enable?: number;
 }
 
 /** 端口视角的端口风险对象 */
 declare interface PortViewPortRisk {
-  /** 影响资产 */
+  /** 未处理数量 */
   NoHandleCount?: number;
   /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
   Level?: string;
@@ -1294,11 +1294,11 @@ declare interface PortViewPortRisk {
   FirstTime?: string;
   /** 处置建议,0保持现状、1限制访问、2封禁端口 */
   Suggestion?: number;
-  /** 状态，0未处理、1已处置、2已忽略 */
+  /** 影响资产数量 */
   AffectAssetCount?: string;
-  /** 资产唯一id */
+  /** ID */
   Id?: string;
-  /** 资产子类型 */
+  /** 识别来源 */
   From?: string;
   /** 前端索引 */
   Index?: string;
@@ -1683,11 +1683,11 @@ declare interface TaskAssetObject {
 /** 配置风险高级配置 */
 declare interface TaskCenterCFGRiskInputParam {
   /** 检测项ID */
-  ItemId: string | null;
+  ItemId: string;
   /** 是否开启，0-不开启，1-开启 */
-  Enable: number | null;
+  Enable: number;
   /** 资源类型 */
-  ResourceType: string | null;
+  ResourceType: string;
 }
 
 /** 漏洞风险高级配置 */
@@ -1998,7 +1998,7 @@ declare interface WebsiteRisk {
   FirstTime?: string;
   /** 状态，0未处理、1已处置、2已忽略 */
   Status?: number;
-  /** 资产唯一id */
+  /** ID,处理风险使用 */
   Id?: string;
   /** 前端索引 */
   Index?: string;
@@ -2168,7 +2168,7 @@ declare interface CreateRiskCenterScanTaskResponse {
 declare interface DeleteDomainAndIpRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** - */
+  /** 资产 */
   Content?: PublicIpDomainListKey[];
   /** 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留 */
   RetainPath?: number;

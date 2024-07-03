@@ -1565,9 +1565,9 @@ declare interface ReqUserRule {
 /** 响应体的返回码 */
 declare interface ResponseCode {
   /** 如果成功则返回Success，失败则返回云api定义的错误码 */
-  Code: string;
+  Code?: string;
   /** 如果成功则返回Success，失败则返回WAF定义的二级错误码 */
-  Message: string;
+  Message?: string;
 }
 
 /** 规则列表详情 */

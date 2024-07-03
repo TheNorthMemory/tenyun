@@ -2808,6 +2808,20 @@ declare interface SetAuthenticationResponse {
   RequestId?: string;
 }
 
+declare interface SetTlsVersionRequest {
+  /** 监听器ID */
+  ListenerId: string;
+  /** TLS版本 */
+  TLSSupportVersion: string[];
+  /** 密码套件包 */
+  TLSCiphers: string;
+}
+
+declare interface SetTlsVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Gaap 全球应用加速} */
 declare interface Gaap {
   (): Versions;
@@ -3017,6 +3031,8 @@ declare interface Gaap {
   RemoveRealServers(data: RemoveRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveRealServersResponse>;
   /** 认证高级配置 {@link SetAuthenticationRequest} {@link SetAuthenticationResponse} */
   SetAuthentication(data: SetAuthenticationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAuthenticationResponse>;
+  /** 设置监听器TLS配置 {@link SetTlsVersionRequest} {@link SetTlsVersionResponse} */
+  SetTlsVersion(data: SetTlsVersionRequest, config?: AxiosRequestConfig): AxiosPromise<SetTlsVersionResponse>;
 }
 
 export declare type Versions = ["2018-05-29"];

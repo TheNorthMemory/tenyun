@@ -1335,7 +1335,7 @@ declare interface InvokeRequest {
 
 declare interface InvokeResponse {
   /** 函数执行结果 */
-  Result: Result;
+  Result?: Result;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

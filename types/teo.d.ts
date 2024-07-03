@@ -50,8 +50,10 @@ declare interface AccelerationDomain {
 declare interface AccelerationDomainCertificate {
   /** 配置证书的模式，取值有： disable：不配置证书； eofreecert：配置 EdgeOne 免费证书； sslcert：配置 SSL 证书。 */
   Mode?: string;
-  /** 证书列表。 */
+  /** 服务端证书列表。 */
   List?: CertificateInfo[] | null;
+  /** 边缘双向认证配置。 */
+  ClientCertInfo?: MutualTLS;
 }
 
 /** 精准防护条件 */
@@ -466,10 +468,10 @@ declare interface CacheTag {
   Domains: string[];
 }
 
-/** https 服务端证书配置 */
+/** https 证书配置。 */
 declare interface CertificateInfo {
-  /** 服务器证书 ID。 */
-  CertId?: string;
+  /** 证书 ID。 */
+  CertId: string;
   /** 证书备注名。 */
   Alias?: string;
   /** 证书类型，取值有：default：默认证书；upload：用户上传；managed：腾讯云托管。 */
@@ -1192,6 +1194,14 @@ declare interface MaxAge {
   FollowOrigin?: string;
   /** MaxAge 时间设置，单位秒，最大365天。注意：时间为0，即不缓存。 */
   MaxAgeTime?: number;
+}
+
+/** HTTPS 双向认证。 */
+declare interface MutualTLS {
+  /** 双向认证配置开关，取值有：on：开启；off：关闭。 */
+  Switch: string;
+  /** 双向认证证书列表。注意：MutualTLS 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。 */
+  CertInfos?: CertificateInfo[];
 }
 
 /** 不缓存配置 */
@@ -3891,12 +3901,14 @@ declare interface ModifyHostsCertificateRequest {
   ZoneId: string;
   /** 需要修改证书配置的加速域名。 */
   Hosts: string[];
-  /** 配置证书的模式，取值有：disable：不配置证书；eofreecert：配置 EdgeOne 免费证书；sslcert：配置 SSL 证书。不填时默认取值为 disable。 */
+  /** 配置服务端证书的模式，取值有：disable：不配置服务端证书；eofreecert：配置 EdgeOne 免费服务端证书；sslcert：配置 SSL 托管服务端证书；不填写表示服务端证书保持原有配置。 */
   Mode?: string;
-  /** SSL 证书配置，本参数仅在 mode = sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。 */
+  /** SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。 */
   ServerCertInfo?: ServerCertInfo[];
   /** 托管类型，取值有：none：不托管EO；apply：托管EO不填，默认取值为none。 */
   ApplyType?: string;
+  /** 边缘双向认证配置。不填写表示边缘双向认证保持原有配置。 */
+  ClientCertInfo?: MutualTLS;
 }
 
 declare interface ModifyHostsCertificateResponse {
