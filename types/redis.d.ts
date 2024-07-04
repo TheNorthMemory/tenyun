@@ -77,9 +77,9 @@ declare interface BigKeyTypeInfo {
 /** 命令耗时 */
 declare interface CommandTake {
   /** 命令名。 */
-  Cmd: string;
-  /** 耗时时长。 */
-  Took: number;
+  Cmd?: string;
+  /** 耗时时长。单位：ms。 */
+  Took?: number;
 }
 
 /** 延时分布详情 */
@@ -164,7 +164,7 @@ declare interface Inbound {
 
 /** 实例节点类型 */
 declare interface InstanceClusterNode {
-  /** 节点名称。 */
+  /** 节点组名称。 */
   Name?: string;
   /** 实例运行时节点 ID。 */
   RunId?: string;
@@ -855,9 +855,9 @@ declare interface SecurityGroupsInboundAndOutbound {
 /** 访问命令 */
 declare interface SourceCommand {
   /** 命令名称。 */
-  Cmd: string;
+  Cmd?: string;
   /** 执行次数。 */
-  Count: number;
+  Count?: number;
 }
 
 /** 访问来源信息 */
@@ -948,13 +948,13 @@ declare interface TradeDealDetail {
 declare interface ZoneCapacityConf {
   /** 可用区ID：如ap-guangzhou-3 */
   ZoneId?: string;
-  /** 可用区名称 */
+  /** 可用区名称。 */
   ZoneName?: string;
-  /** 可用区是否售罄 */
+  /** 可用区是否售罄。 */
   IsSaleout?: boolean;
-  /** 是否为默认可用区 */
+  /** 是否为默认可用区。 */
   IsDefault?: boolean;
-  /** 网络类型：basenet -- 基础网络；vpcnet -- VPC网络 */
+  /** 网络类型。- basenet：基础网络。- vpcnet -- VPC网络。 */
   NetWorkType?: string[];
   /** 可用区内产品规格等信息 */
   ProductSet?: ProductConf[];
@@ -1703,9 +1703,9 @@ declare interface DescribeInstanceMonitorTookDistResponse {
 }
 
 declare interface DescribeInstanceMonitorTopNCmdRequest {
-  /** 实例Id */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时 */
+  /** 时间范围。- 1：实时。- 2：近30分钟。- 3：近6小时。- 4：近24小时。 */
   SpanType: number;
 }
 
@@ -2667,7 +2667,7 @@ declare interface OpenSSLRequest {
 
 declare interface OpenSSLResponse {
   /** 任务ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

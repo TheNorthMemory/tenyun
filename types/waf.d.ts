@@ -149,13 +149,13 @@ declare interface ApiSecKey {
 /** 攻击日志详情 */
 declare interface AttackLogInfo {
   /** 攻击日志的详情内容 */
-  Content: string;
+  Content?: string;
   /** CLS返回内容 */
-  FileName: string;
+  FileName?: string;
   /** CLS返回内容 */
-  Source: string;
+  Source?: string;
   /** CLS返回内容 */
-  TimeStamp: string;
+  TimeStamp?: string;
 }
 
 /** Waf 攻击自动封禁详情 */
@@ -464,6 +464,16 @@ declare interface ClbObject {
   Type?: string | null;
   /** 对象地域 */
   Region?: string | null;
+  /** 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出 */
+  Proxy?: number | null;
+  /** 指定获取客户端IP的头部字段列表。IsCdn为3时有效 */
+  IpHeaders?: string[] | null;
+  /** bot防护开关 */
+  BotStatus?: number | null;
+  /** api防护开关 */
+  ApiStatus?: number | null;
+  /** 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式 */
+  ObjectFlowMode?: number | null;
 }
 
 /** Clb-waf地域信息 */
@@ -2251,7 +2261,7 @@ declare interface DeleteAttackWhiteRuleRequest {
 
 declare interface DeleteAttackWhiteRuleResponse {
   /** 删除失败的规则序号组 */
-  FailIds: number[] | null;
+  FailIds?: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3097,7 +3107,7 @@ declare interface DescribeHostRequest {
 
 declare interface DescribeHostResponse {
   /** 域名详情 */
-  Host: HostRecord;
+  Host?: HostRecord;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3117,9 +3127,9 @@ declare interface DescribeHostsRequest {
 
 declare interface DescribeHostsResponse {
   /** 防护域名列表的长度 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 防护域名的列表 */
-  HostList: HostRecord[] | null;
+  HostList?: HostRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3509,7 +3519,7 @@ declare interface DescribeUserLevelRequest {
 
 declare interface DescribeUserLevelResponse {
   /** 300:正常 400:严格 */
-  Level: number;
+  Level?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4083,11 +4093,11 @@ declare interface ModifyGenerateDealsRequest {
 
 declare interface ModifyGenerateDealsResponse {
   /** 计费下单响应结构体 */
-  Data: DealData | null;
+  Data?: DealData | null;
   /** 1:成功，0:失败 */
-  Status: number;
+  Status?: number;
   /** 返回message */
-  ReturnMessage: string | null;
+  ReturnMessage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4127,7 +4137,7 @@ declare interface ModifyHostModeRequest {
 
 declare interface ModifyHostModeResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
-  Success: ResponseCode | null;
+  Success?: ResponseCode | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4769,7 +4779,7 @@ declare interface Waf {
   DeleteHost(data: DeleteHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostResponse>;
   /** Waf IP黑白名单Delete接口 {@link DeleteIpAccessControlRequest} {@link DeleteIpAccessControlResponse} */
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
-  /** Waf IP黑白名单删除接口 {@link DeleteIpAccessControlV2Request} {@link DeleteIpAccessControlV2Response} */
+  /** IP黑白名单删除接口 {@link DeleteIpAccessControlV2Request} {@link DeleteIpAccessControlV2Response} */
   DeleteIpAccessControlV2(data: DeleteIpAccessControlV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlV2Response>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;

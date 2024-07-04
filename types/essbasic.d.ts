@@ -1212,7 +1212,7 @@ declare interface TemplateInfo {
 declare interface UploadFile {
   /** Base64编码后的文件内容 */
   FileBody: string;
-  /** 文件名 */
+  /** 文件名，最大长度不超过200字符 */
   FileName?: string;
 }
 

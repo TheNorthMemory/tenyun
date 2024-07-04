@@ -1046,23 +1046,23 @@ declare interface IpTableConfig {
   IpTableRules?: IpTableRule[] | null;
 }
 
-/** IP黑白名单详细规则 */
+/** 自定义规则-基础访问管控配置。 */
 declare interface IpTableRule {
   /** 动作，取值有： drop：拦截； trans：放行； monitor：观察。 */
   Action: string;
-  /** 根据类型匹配，取值有：ip：对ip进行匹配；area：对ip所属地区匹配。 */
+  /** 根据类型匹配，取值有：ip：客户端 IP 进行匹配；area：客户端 IP 所属地区匹配；asn：客户端所属的自治系统进行匹配；referer：请求头 Referer 进行匹配；ua：请求头 User-Agent 进行匹配；url：请求 URL 进行匹配。 */
   MatchFrom: string;
-  /** 规则的匹配方式，默认为空代表等于。取值有： is_emty：配置为空； not_exists：配置为不存在； include：包含； not_include：不包含； equal：等于； not_equal：不等于。 */
-  Operator?: string | null;
+  /** 规则的匹配方式。取值有： match：匹配，适用于 MatchFrom 为 ip； not_match：不匹配，适用于 MatchFrom 为 ip； include_area：地域包含，适用于 MatchFrom 为 area； not_include_area：地域不包含，适用于 MatchFrom 为 area； asn_match：ASN 包含，适用于 MatchFrom 为 asn； asn_not_match：ASN 不包含，适用于 MatchFrom 为 asn； equal：等于，适用于 MatchFrom 为 ua , referer； not_equal：不等于，适用于 MatchFrom 为 ua , referer； include：通配符匹配，适用于 MatchFrom 为 ua , referer , url； not_include：通配符不匹配，适用于 MatchFrom 为 ua , referer； is_emty：配置内容为空，适用于 MatchFrom 为 ua , referer； not_exists：配置内容不存在，适用于 MatchFrom 为 ua , referer。 */
+  Operator?: string;
   /** 规则id。仅出参使用。 */
   RuleID?: number;
   /** 更新时间。仅出参使用。 */
   UpdateTime?: string;
-  /** 规则启用状态，当返回为null时，为启用。取值有： on：启用； off：未启用。 */
-  Status?: string | null;
+  /** 规则启用状态。取值有： on：启用； off：未启用。当入参缺省时，按 on 取值。 */
+  Status?: string;
   /** 规则名。 */
   RuleName?: string | null;
-  /** 匹配内容。当 Operator为is_emty 或not_exists时，此值允许为空。 */
+  /** 匹配内容。支持多值输入。当输入多个匹配值时，请使用英文逗号分隔；当 MatchFrom 为 ua 时，不支持多值输入；当 Operator 为 is_empty 或 not_exists 时，本字段入参值无效。 */
   MatchContent?: string;
 }
 
