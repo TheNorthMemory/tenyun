@@ -257,9 +257,9 @@ declare interface Fmu {
   (): Versions;
   /** 人脸美颜 {@link BeautifyPicRequest} {@link BeautifyPicResponse} */
   BeautifyPic(data?: BeautifyPicRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyPicResponse>;
-  /** 视频美颜(此接口目前已下线) {@link BeautifyVideoRequest} {@link BeautifyVideoResponse} */
+  /** @deprecated 视频美颜(此接口目前已下线) {@link BeautifyVideoRequest} {@link BeautifyVideoResponse} */
   BeautifyVideo(data: BeautifyVideoRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyVideoResponse>;
-  /** 撤销视频美颜任务(此接口目前已下线) {@link CancelBeautifyVideoJobRequest} {@link CancelBeautifyVideoJobResponse} */
+  /** @deprecated 撤销视频美颜任务(此接口目前已下线) {@link CancelBeautifyVideoJobRequest} {@link CancelBeautifyVideoJobResponse} */
   CancelBeautifyVideoJob(data: CancelBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBeautifyVideoJobResponse>;
   /** 上传唇色素材 {@link CreateModelRequest} {@link CreateModelResponse} */
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
@@ -267,7 +267,7 @@ declare interface Fmu {
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
   /** 查询唇色素材 {@link GetModelListRequest} {@link GetModelListResponse} */
   GetModelList(data?: GetModelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelListResponse>;
-  /** 查询视频美颜任务(此接口目前已下线) {@link QueryBeautifyVideoJobRequest} {@link QueryBeautifyVideoJobResponse} */
+  /** @deprecated 查询视频美颜任务(此接口目前已下线) {@link QueryBeautifyVideoJobRequest} {@link QueryBeautifyVideoJobResponse} */
   QueryBeautifyVideoJob(data: QueryBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBeautifyVideoJobResponse>;
   /** 图片滤镜 {@link StyleImageRequest} {@link StyleImageResponse} */
   StyleImage(data: StyleImageRequest, config?: AxiosRequestConfig): AxiosPromise<StyleImageResponse>;

@@ -138,6 +138,8 @@ declare interface InstanceItem {
   MessageRetention?: number | null;
   /** 延迟消息最大时长，小时为单位 */
   MaxMessageDelay?: number | null;
+  /** 是否自动续费 */
+  RenewFlag?: number | null;
 }
 
 /** 4.x集群和5.0集群列表统一显示 4.x特殊数据承载接口 */
@@ -855,14 +857,14 @@ declare interface DescribeFusionInstanceListResponse {
 }
 
 declare interface DescribeInstanceListRequest {
-  /** 查询起始位置 */
-  Offset: number;
-  /** 查询结果限制数量 */
-  Limit: number;
   /** 查询条件列表 */
   Filters?: Filter[];
   /** 标签过滤器 */
   TagFilters?: TagFilter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
 }
 
 declare interface DescribeInstanceListResponse {
@@ -1513,8 +1515,8 @@ declare interface Trocket {
   DescribeFusionInstanceList(data: DescribeFusionInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFusionInstanceListResponse>;
   /** 查询实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
-  /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
-  DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
+  /** 查询实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
+  DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
   /** 查询 MQTT 客户端详情 {@link DescribeMQTTClientRequest} {@link DescribeMQTTClientResponse} */
   DescribeMQTTClient(data: DescribeMQTTClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTClientResponse>;
   /** 查询MQTT实例公网接入点 {@link DescribeMQTTInsPublicEndpointsRequest} {@link DescribeMQTTInsPublicEndpointsResponse} */

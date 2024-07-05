@@ -32,6 +32,14 @@ declare interface ApproveUser {
   Nick?: string | null;
   /** 动态获取Scf */
   Scf?: Scf | null;
+  /** 审批状态 （取值范围 0:待审批 1:审批通过 2:拒绝 6:其他人已审批） */
+  ApproveStatus?: number | null;
+  /** 审批意见 */
+  ApproveMsg?: string | null;
+  /** 审批时间 */
+  ApproveTime?: string | null;
+  /** 审批组名称 */
+  ApproveGroup?: string | null;
 }
 
 /** 云函数SCF */

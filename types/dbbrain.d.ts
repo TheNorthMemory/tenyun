@@ -947,7 +947,7 @@ declare interface UserProfile {
 declare interface AddUserContactRequest {
   /** 联系人姓名，由中英文、数字、空格、!@#$%^&*()_+-=（）组成，不能以下划线开头，长度在20以内。 */
   Name: string;
-  /** 邮箱地址，支持大小写字母、数字、下划线及@字符， 不能以下划线开头，邮箱地址不可重复。 */
+  /** 邮箱地址，支持大小写字母、数字、下划线、连字符及@字符， 只能以数字或字母开头，邮箱地址不可重复。 */
   ContactInfo: string;
   /** 服务产品类型，固定值："mysql"。 */
   Product: string;
@@ -955,7 +955,7 @@ declare interface AddUserContactRequest {
 
 declare interface AddUserContactResponse {
   /** 添加成功的联系人id。 */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2262,13 +2262,13 @@ declare interface DefendAttackLog {
 
 /** 日志投递类型细节 */
 declare interface DeliverTypeDetails {
-  /** 安全模块类型 1: 入侵检测 2: 漏洞管理 3: 基线管理 4: 高级防御 5:客户端相关 6: 资产指纹 */
+  /** 安全模块类型 1: 入侵检测 2: 漏洞管理 3: 基线管理 4: 高级防御 5:客户端相关 6: 资产指纹 7 主机列表 8 客户端上报 */
   SecurityType: number;
-  /** 安全模块下的日志类型，http://tapd.woa.com/Teneyes/markdown_wikis/show/#1210131751002328905 */
+  /** 安全模块下的日志类型 */
   LogType: number[];
-  /** kafka topic id */
+  /** 主题ID */
   TopicId: string;
-  /** kafka topic name */
+  /** 主题名 */
   TopicName: string;
   /** 投递开关 0关闭 1开启 */
   Switch: number;
@@ -2276,8 +2276,14 @@ declare interface DeliverTypeDetails {
   Status?: number;
   /** 错误信息 */
   ErrInfo?: string;
-  /** 最近一次状态上报时间戳，s */
+  /** 最近一次状态上报时间戳 */
   StatusTime?: number;
+  /** 日志集名 */
+  LogName?: string;
+  /** 日志集ID */
+  LogSetId?: string;
+  /** 日志集所在地域 */
+  Region?: string;
 }
 
 /** 批量添加白名单：重复情况重复列表实体 */
@@ -12683,6 +12689,8 @@ declare interface ExportBaselineHostDetectListRequest {
   Filters?: Filter[];
   /** 0:过滤的结果导出；1:全部导出 */
   ExportAll?: number;
+  /** 0:导出界面展示；1:导出全部结果事件 */
+  IsExportDetail?: number;
 }
 
 declare interface ExportBaselineHostDetectListResponse {
@@ -12695,6 +12703,8 @@ declare interface ExportBaselineItemDetectListRequest {
   Filters?: Filter[];
   /** 0:过滤的结果导出；1:全部导出 */
   ExportAll?: number;
+  /** 0:导出界面展示；1:导出全部结果事件 */
+  IsExportDetail?: number;
 }
 
 declare interface ExportBaselineItemDetectListResponse {
@@ -12735,6 +12745,8 @@ declare interface ExportBaselineRuleDetectListRequest {
   Filters?: Filter[];
   /** 0:过滤的结果导出；1:全部导出 */
   ExportAll?: number;
+  /** 0:导出界面展示；1:导出全部结果事件 */
+  IsExportDetail?: number;
 }
 
 declare interface ExportBaselineRuleDetectListResponse {

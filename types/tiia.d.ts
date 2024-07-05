@@ -763,7 +763,7 @@ declare interface Tiia {
   DetectPet(data?: DetectPetRequest, config?: AxiosRequestConfig): AxiosPromise<DetectPetResponse>;
   /** 商品识别 {@link DetectProductRequest} {@link DetectProductResponse} */
   DetectProduct(data?: DetectProductRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductResponse>;
-  /** 商品识别-微信识物版 {@link DetectProductBetaRequest} {@link DetectProductBetaResponse} */
+  /** @deprecated 商品识别-微信识物版 {@link DetectProductBetaRequest} {@link DetectProductBetaResponse} */
   DetectProductBeta(data?: DetectProductBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductBetaResponse>;
   /** 安全属性识别 {@link DetectSecurityRequest} {@link DetectSecurityResponse} */
   DetectSecurity(data?: DetectSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<DetectSecurityResponse>;

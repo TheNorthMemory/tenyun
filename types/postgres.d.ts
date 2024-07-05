@@ -5,17 +5,19 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 账户信息 */
 declare interface AccountInfo {
   /** 实例ID，形如postgres-lnp6j617 */
-  DBInstanceId: string;
-  /** 帐号 */
-  UserName: string;
-  /** 帐号备注 */
-  Remark: string;
-  /** 帐号状态。 1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中 */
-  Status: number;
-  /** 帐号创建时间 */
-  CreateTime: string;
-  /** 帐号最后一次更新时间 */
-  UpdateTime: string;
+  DBInstanceId?: string;
+  /** 账号 */
+  UserName?: string;
+  /** 账号备注 */
+  Remark?: string;
+  /** 账号状态。 1-创建中，2-正常，3-修改中，4-密码重置中，5-锁定中，-1-删除中 */
+  Status?: number;
+  /** 账号创建时间 */
+  CreateTime?: string;
+  /** 账号最后一次更新时间 */
+  UpdateTime?: string;
+  /** 账号类型 */
+  UserType?: string;
 }
 
 /** 慢查询分析接口返回的分析详情，按照参数抽象之后进行分类 */
@@ -1329,11 +1331,11 @@ declare interface DeleteServerlessDBInstanceResponse {
 declare interface DescribeAccountsRequest {
   /** 实例ID，形如postgres-6fego161 */
   DBInstanceId: string;
-  /** 分页返回，每页最大返回数目，默认10，取值范围为1-100 */
+  /** 分页返回，每页最大返回数目，默认20，取值范围为1-100 */
   Limit?: number;
   /** 数据偏移量，从0开始。 */
   Offset?: number;
-  /** 返回数据按照创建时间或者用户名排序。取值只能为createTime或者name。createTime-按照创建时间排序；name-按照用户名排序 */
+  /** 返回数据按照创建时间或者用户名排序。取值支持createTime、name、updateTime。createTime-按照创建时间排序；name-按照用户名排序; updateTime-按照更新时间排序。 */
   OrderBy?: string;
   /** 返回结果是升序还是降序。取值只能为desc或者asc。desc-降序；asc-升序 */
   OrderByType?: string;
@@ -1342,7 +1344,7 @@ declare interface DescribeAccountsRequest {
 declare interface DescribeAccountsResponse {
   /** 本次调用接口共返回了多少条数据。 */
   TotalCount?: number;
-  /** 账号列表详细信息。 */
+  /** 账号列表详细信息。当CreateTime项为0000-00-00 00:00:00时，意味着对应账号是直连数据库创建的，并非通过CreateAccount接口创建。 */
   Details?: AccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

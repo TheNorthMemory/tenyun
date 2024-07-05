@@ -150,6 +150,16 @@ declare interface CloudStorageUserInfo {
   UserId?: string;
 }
 
+/** 设备激活结果数据 */
+declare interface DeviceActiveResult {
+  /** 模版ID */
+  ModelId?: string | null;
+  /** SN信息 */
+  Sn?: string | null;
+  /** 设备激活状态，0：激活成功；9800020：设备数超出限制；9800040：资源包类型和设备类型不匹配；9800039：资源包余额不足；9800037：激活码序号已使用；9800038：设备有效期超出限制； */
+  ErrCode?: number | null;
+}
+
 /** DeviceData */
 declare interface DeviceData {
   /** 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。 */
@@ -863,7 +873,7 @@ declare interface WifiInfo {
 }
 
 declare interface ActivateTWeCallLicenseRequest {
-  /** TWecall类型： 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
+  /** TWecall类型： 0-测试激活码； 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
   PkgType: number;
   /** appId */
   MiniProgramAppId: string;
@@ -872,6 +882,8 @@ declare interface ActivateTWeCallLicenseRequest {
 }
 
 declare interface ActivateTWeCallLicenseResponse {
+  /** 设备激活返回数据 */
+  DeviceList?: DeviceActiveResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

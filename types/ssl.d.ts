@@ -288,6 +288,8 @@ declare interface ClbListenerRule {
   Certificate?: Certificate | null;
   /** 不匹配域名列表 */
   NoMatchDomains?: string[] | null;
+  /** 规则绑定的路径 */
+  Url?: string | null;
 }
 
 /** 公司信息 */
@@ -410,6 +412,8 @@ declare interface DeployRecordDetail {
   TCBType?: string | null;
   /** 部署的TCB地域 */
   Region?: string | null;
+  /** 部署CLB监听器的Url */
+  Url?: string[] | null;
 }
 
 /** 部署记录信息 */
@@ -1022,6 +1026,8 @@ declare interface UpdateRecordDetail {
   EnvId?: string | null;
   /** TCB部署类型 */
   TCBType?: string | null;
+  /** 监听器Url(clb专属) */
+  Url?: string | null;
 }
 
 /** 更新记录详情列表 */

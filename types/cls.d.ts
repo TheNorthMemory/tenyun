@@ -2569,6 +2569,12 @@ declare interface DescribeMachineGroupsResponse {
 declare interface DescribeMachinesRequest {
   /** 查询的机器组ID */
   GroupId: string;
+  /** ip- 按照【ip】进行过滤。- 类型：String- 必选：否instance- 按照【instance】进行过滤。- 类型：String- 必选：否version- 按照【LogListener版本】进行过滤。- 类型：String- 必选：否status- 按照【状态】进行过滤。- 类型：String- 必选：否- 可选值：0：离线，1：正常offlineTime- 按照【机器离线时间】进行过滤。- 类型：String- 必选：否- - 可选值：0：无离线时间，12：12小时内，24：一天内，48：两天内，99：两天前每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量。 */
+  Offset?: number;
+  /** 分页单页限制数目。最大支持100 */
+  Limit?: number;
 }
 
 declare interface DescribeMachinesResponse {
@@ -2584,6 +2590,8 @@ declare interface DescribeMachinesResponse {
   LatestAgentVersion?: string;
   /** 是否开启服务日志 */
   ServiceLogging?: boolean;
+  /** 总数目 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
