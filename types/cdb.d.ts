@@ -2478,6 +2478,18 @@ declare interface CreateRoInstanceIpResponse {
   RequestId?: string;
 }
 
+declare interface CreateRotationPasswordRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 当前需开启密码轮转的账号信息，包含账户名与主机名 */
+  Accounts: Account[];
+}
+
+declare interface CreateRotationPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccountsRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -2576,6 +2588,22 @@ declare interface DeleteParamTemplateRequest {
 }
 
 declare interface DeleteParamTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRotationPasswordRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同 */
+  InstanceId: string;
+  /** 关闭密码轮转的实例账户名,例如root */
+  User: string;
+  /** 关闭密码轮转的实例账户域名，例如% */
+  Host: string;
+  /** 关闭密码轮转后实例账户的最新密码 */
+  Password: string;
+}
+
+declare interface DeleteRotationPasswordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4786,6 +4814,20 @@ declare interface RenewDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ResetPasswordRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 手动刷新轮转密码的实例账户名，例如root */
+  User: string;
+  /** 手动刷新轮转密码的实例账户域名，例如% */
+  Host: string;
+}
+
+declare interface ResetPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetRootAccountRequest {
   /** 实例id */
   InstanceId: string;
@@ -5107,6 +5149,8 @@ declare interface Cdb {
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
   /** 创建云数据库只读实例的独立VIP {@link CreateRoInstanceIpRequest} {@link CreateRoInstanceIpResponse} */
   CreateRoInstanceIp(data: CreateRoInstanceIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoInstanceIpResponse>;
+  /** 开启密码轮转 {@link CreateRotationPasswordRequest} {@link CreateRotationPasswordResponse} */
+  CreateRotationPassword(data: CreateRotationPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRotationPasswordResponse>;
   /** 删除云数据库的账号 {@link DeleteAccountsRequest} {@link DeleteAccountsResponse} */
   DeleteAccounts(data: DeleteAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountsResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
@@ -5125,6 +5169,8 @@ declare interface Cdb {
   DeleteDeployGroups(data: DeleteDeployGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeployGroupsResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
+  /** 关闭密码轮转 {@link DeleteRotationPasswordRequest} {@link DeleteRotationPasswordResponse} */
+  DeleteRotationPassword(data: DeleteRotationPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRotationPasswordResponse>;
   /** 删除维护时间窗口 {@link DeleteTimeWindowRequest} {@link DeleteTimeWindowResponse} */
   DeleteTimeWindow(data: DeleteTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimeWindowResponse>;
   /** 查询云数据库账户的权限信息 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
@@ -5347,6 +5393,8 @@ declare interface Cdb {
   ReloadBalanceProxyNode(data: ReloadBalanceProxyNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadBalanceProxyNodeResponse>;
   /** 续费云数据库实例 {@link RenewDBInstanceRequest} {@link RenewDBInstanceResponse} */
   RenewDBInstance(data: RenewDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDBInstanceResponse>;
+  /** 手动刷新轮转密码 {@link ResetPasswordRequest} {@link ResetPasswordResponse} */
+  ResetPassword(data: ResetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetPasswordResponse>;
   /** 重置ROOT账号 {@link ResetRootAccountRequest} {@link ResetRootAccountResponse} */
   ResetRootAccount(data: ResetRootAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRootAccountResponse>;
   /** 重启实例 {@link RestartDBInstancesRequest} {@link RestartDBInstancesResponse} */

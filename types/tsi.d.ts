@@ -51,7 +51,7 @@ declare interface TongChuanRecognizeRequest {
   Utc: number;
   /** 是否最后一片语音分片，0-否，1-是 */
   IsEnd: number;
-  /** 翻译时机，0 -不翻译 1 - 句子结束时翻译，2 - 句子实时翻译 */
+  /** 翻译时机，0-不翻译 2-句子实时翻译 */
   TranslateTime: number;
   /** 语音分片内容进行 Base64 编码后的字符串。音频内容需包含有效并可识别的文本信息。 */
   Data: string;
@@ -77,7 +77,7 @@ declare interface TongChuanSyncRequest {
   Utc: number;
   /** 是否最后一片语音分片，0-否，1-是 */
   IsEnd: number;
-  /** 翻译时机，0 -不翻译 1 - 句子结束时翻译，2 - 句子实时翻译 */
+  /** 翻译时机，0-不翻译 2-句子实时翻译 */
   TranslateTime: number;
   /** 语音分片内容进行 Base64 编码后的字符串。音频内容需包含有效并可识别的文本信息。 */
   Data: string;

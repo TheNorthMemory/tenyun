@@ -3737,7 +3737,7 @@ declare interface DescribeTopicSyncReplicaRequest {
 
 declare interface DescribeTopicSyncReplicaResponse {
   /** 返回topic 副本详情 */
-  Result: TopicInSyncReplicaResult;
+  Result?: TopicInSyncReplicaResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

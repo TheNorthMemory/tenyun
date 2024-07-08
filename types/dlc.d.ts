@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 引擎的访问信息 */
+declare interface AccessInfo {
+  /** 访问引擎的方法 */
+  AccessType?: string | null;
+  /** 访问引擎的url，内部的部分参数需要根据实际情况替换 */
+  AccessConnectionInfos?: string[] | null;
+}
+
 /** 元数据基本对象 */
 declare interface Asset {
   /** 主键 */
@@ -476,6 +484,10 @@ declare interface DataEngineInfo {
   EngineResourceGroupCount?: number | null;
   /** 引擎当前使用量（Cu） */
   EngineResourceUsedCU?: number | null;
+  /** 引擎的访问信息 */
+  AccessInfos?: AccessInfo[] | null;
+  /** 引擎所在网络名称 */
+  EngineNetworkName?: string | null;
 }
 
 /** 引擎规格详情 */
@@ -4771,7 +4783,7 @@ declare interface Dlc {
   DescribeNotebookSessionLog(data: DescribeNotebookSessionLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionLogResponse>;
   /** 查询session 中执行任务的详情 {@link DescribeNotebookSessionStatementRequest} {@link DescribeNotebookSessionStatementResponse} */
   DescribeNotebookSessionStatement(data: DescribeNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionStatementResponse>;
-  /** 获取statement运行结果。 {@link DescribeNotebookSessionStatementSqlResultRequest} {@link DescribeNotebookSessionStatementSqlResultResponse} */
+  /** 获取statement运行结果（作用于：Spark交互式SQL任务、Notebook任务）。 {@link DescribeNotebookSessionStatementSqlResultRequest} {@link DescribeNotebookSessionStatementSqlResultResponse} */
   DescribeNotebookSessionStatementSqlResult(data: DescribeNotebookSessionStatementSqlResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionStatementSqlResultResponse>;
   /** 查询Session中执行的任务列表 {@link DescribeNotebookSessionStatementsRequest} {@link DescribeNotebookSessionStatementsResponse} */
   DescribeNotebookSessionStatements(data: DescribeNotebookSessionStatementsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionStatementsResponse>;
@@ -4807,7 +4819,7 @@ declare interface Dlc {
   DescribeTablesName(data: DescribeTablesNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesNameResponse>;
   /** 查询任务日志 {@link DescribeTaskLogRequest} {@link DescribeTaskLogResponse} */
   DescribeTaskLog(data: DescribeTaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogResponse>;
-  /** 查询任务结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
+  /** 查询任务结果(用于: SparkSQL、PrestoSQL、Spark作业任务) {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;

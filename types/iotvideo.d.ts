@@ -112,6 +112,8 @@ declare interface CloudStorageEvent {
   EventId: string;
   /** 事件录像上传状态，Finished: 全部上传成功 Partial: 部分上传成功 Failed: 上传失败 */
   UploadStatus?: string | null;
+  /** 事件自定义数据 */
+  Data?: string | null;
 }
 
 /** 云存时间轴接口返回数据 */

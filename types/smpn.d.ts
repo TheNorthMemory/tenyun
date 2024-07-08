@@ -139,15 +139,15 @@ declare interface MRLResponse {
 /** {@link Smpn 营销号码安全} */
 declare interface Smpn {
   (): Versions;
-  /** 企业号码认证 {@link CreateSmpnEpaRequest} {@link CreateSmpnEpaResponse} */
+  /** @deprecated 企业号码认证 {@link CreateSmpnEpaRequest} {@link CreateSmpnEpaResponse} */
   CreateSmpnEpa(data: CreateSmpnEpaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSmpnEpaResponse>;
-  /** 终端骚扰保护 {@link DescribeSmpnChpRequest} {@link DescribeSmpnChpResponse} */
+  /** @deprecated 终端骚扰保护 {@link DescribeSmpnChpRequest} {@link DescribeSmpnChpResponse} */
   DescribeSmpnChp(data: DescribeSmpnChpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnChpResponse>;
-  /** 虚假号码识别 {@link DescribeSmpnFnrRequest} {@link DescribeSmpnFnrResponse} */
+  /** @deprecated 虚假号码识别 {@link DescribeSmpnFnrRequest} {@link DescribeSmpnFnrResponse} */
   DescribeSmpnFnr(data: DescribeSmpnFnrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnFnrResponse>;
-  /** 号码营销监控 {@link DescribeSmpnMhmRequest} {@link DescribeSmpnMhmResponse} */
+  /** @deprecated 号码营销监控 {@link DescribeSmpnMhmRequest} {@link DescribeSmpnMhmResponse} */
   DescribeSmpnMhm(data: DescribeSmpnMhmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMhmResponse>;
-  /** 恶意标记等级 {@link DescribeSmpnMrlRequest} {@link DescribeSmpnMrlResponse} */
+  /** @deprecated 恶意标记等级 {@link DescribeSmpnMrlRequest} {@link DescribeSmpnMrlResponse} */
   DescribeSmpnMrl(data: DescribeSmpnMrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMrlResponse>;
 }
 

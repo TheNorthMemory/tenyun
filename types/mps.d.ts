@@ -90,6 +90,8 @@ declare interface ActivityPara {
   AiAnalysisTask?: AiAnalysisTaskInput | null;
   /** 视频内容识别类型任务 */
   AiRecognitionTask?: AiRecognitionTaskInput | null;
+  /** 媒体质检任务 */
+  QualityControlTask?: AiQualityControlTaskInput | null;
 }
 
 /** 编排子任务输出 */
@@ -112,6 +114,8 @@ declare interface ActivityResItem {
   ReviewTask?: ScheduleReviewTaskResult | null;
   /** 分析任务输出 */
   AnalysisTask?: ScheduleAnalysisTaskResult | null;
+  /** 媒体质检任务输出 */
+  QualityControlTask?: ScheduleQualityControlTaskResult | null;
 }
 
 /** 编排任务输出 */
@@ -1752,6 +1756,20 @@ declare interface ComposeVideoStream {
   Fps?: number;
   /** 参考码率，单位 kbps，范围：50~35000。如果设置，编码时会尽量按该码率进行编码。如果不设置，服务将通过画面复杂度自动采用合适的码率。 */
   Bitrate?: number;
+}
+
+/** 容器格式诊断结果 */
+declare interface ContainerDiagnoseResultItem {
+  /** 诊断出的异常类别，取值范围：DecodeParamException：解码参数异常TimeStampException：时间戳异常FrameException： 帧率异常StreamStatusException：流状态异常StreamInfo：流信息异常StreamAbnormalCharacteristics：流特征异常DecodeException：解码异常HLSRequirements：HLS 格式异常 */
+  Category?: string | null;
+  /** 诊断出的具体异常类型，取值如下：VideoResolutionChanged：视频分辨率变化AudioSampleRateChanged：音频采样率变化AudioChannelsChanged：音频通道数变化ParameterSetsChanged：流参数集信息发生变化DarOrSarInvalid：视频的宽高比异常TimestampFallback：DTS时间戳回退DtsJitter：DTS抖动过大PtsJitter：PTS抖动过大AACDurationDeviation：AAC帧时间戳间隔不合理AudioDroppingFrames：音频丢帧VideoDroppingFrames：视频丢帧AVTimestampInterleave：音视频交织不合理PtsLessThanDts：媒体流的 pts 小于 dtsReceiveFpsJitter：网络接收帧率抖动过大ReceiveFpsTooSmall：网络接收视频帧率过小FpsJitter：通过PTS计算得到的流帧率抖动过大StreamOpenFailed：流打开失败StreamEnd：流结束StreamParseFailed：流解析失败VideoFirstFrameNotIdr：首帧不是IDR帧StreamNALUError：NALU起始码错误TsStreamNoAud：mpegts的H26x流缺失 AUD NALUAudioStreamLack：无音频流VideoStreamLack：无视频流LackAudioRecover：缺失音频流恢复LackVideoRecover：缺失视频流恢复VideoBitrateOutofRange：视频流码率(kbps)超出范围AudioBitrateOutofRange：音频流码率(kbps)超出范围VideoDecodeFailed：视频解码错误AudioDecodeFailed：音频解码错误AudioOutOfPhase：双通道音频相位相反VideoDuplicatedFrame：视频流中存在重复帧AudioDuplicatedFrame：音频流中存在重复帧VideoRotation：视频画面旋转TsMultiPrograms：MPEG2-TS流有多个programMp4InvalidCodecFourcc：MP4中codec fourcc不符合Apple HLS要求HLSBadM3u8Format：无效的m3u8文件HLSInvalidMasterM3u8：无效的main m3u8文件HLSInvalidMediaM3u8：无效的media m3u8文件HLSMasterM3u8Recommended：main m3u8缺少标准推荐的参数HLSMediaM3u8Recommended：media m3u8缺少标准推荐的参数HLSMediaM3u8DiscontinuityExist：media m3u8存在EXT-X-DISCONTINUITYHLSMediaSegmentsStreamNumChange：切片的流数目发生变化HLSMediaSegmentsPTSJitterDeviation：切片间PTS跳变且没有EXT-X-DISCONTINUITYHLSMediaSegmentsDTSJitterDeviation：切片间DTS跳变且没有EXT-X-DISCONTINUITYTimecodeTrackExist：MP4存在tmcd轨道 */
+  Type?: string | null;
+  /** 诊断出的异常级别，取值范围：Fatal：影响后续播放和解析，Error： 可能会影响播放，Warning： 可能会有潜在风险，但不一定会影响播放，Notice：比较重要的流信息，Info：一般性的流信息。 */
+  SeverityLevel?: string | null;
+  /** 警告出现的时间点，形式如 “2022-12-25T13:14:16Z” */
+  DateTimeSet?: string[] | null;
+  /** 时间戳 */
+  TimestampSet?: number[] | null;
 }
 
 /** 内容审核模板详情 */
@@ -4012,6 +4030,8 @@ declare interface QualityControlData {
   QualityEvaluationScore?: number | null;
   /** 内容质检检出异常项。 */
   QualityControlResultSet?: QualityControlResult[] | null;
+  /** 格式诊断检出异常项 */
+  ContainerDiagnoseResultSet?: ContainerDiagnoseResultItem[] | null;
 }
 
 /** 质检结果项 */
@@ -4026,12 +4046,46 @@ declare interface QualityControlItem {
   AreaCoordSet?: number[] | null;
 }
 
+/** 质检项配置 */
+declare interface QualityControlItemConfig {
+  /** 质检项名称。 */
+  Type: string;
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string | null;
+  /** 采样方式，取值范围：- Time：根据时间间隔采样。 */
+  Sampling?: string | null;
+  /** 采样间隔时间，取值范围：[0, 60000]，单位：ms。默认值 0。 */
+  IntervalTime?: number | null;
+  /** 异常持续时间，取值范围：[0, 60000]，单位：ms。默认值 0。 */
+  Duration?: number | null;
+  /** 检测分值的阈值，使用数学区间格式，当检测值超出区间范围会触发回调。 */
+  Threshold?: string | null;
+}
+
 /** 质检异常项。 */
 declare interface QualityControlResult {
   /** 异常类型，取值范围：Jitter：抖动，Blur：模糊，LowLighting：低光照，HighLighting：过曝，CrashScreen：花屏，BlackWhiteEdge：黑白边，SolidColorScreen：纯色屏，Noise：噪点，Mosaic：马赛克，QRCode：二维码，AppletCode：小程序码，BarCode：条形码，LowVoice：低音，HighVoice：爆音，NoVoice：静音，LowEvaluation：无参考打分低于阈值。 */
   Type: string;
   /** 质检结果项。 */
   QualityControlItems: QualityControlItem[];
+}
+
+/** 媒体质检模板详情 */
+declare interface QualityControlTemplate {
+  /** 媒体质检模板唯一标识。 */
+  Definition?: number;
+  /** 媒体质检模板名称。 */
+  Name?: string | null;
+  /** 模板描述信息。 */
+  Comment?: string | null;
+  /** 模板类型，取值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string | null;
+  /** 媒体质检配置参数。 */
+  QualityControlItemSet?: QualityControlItemConfig[] | null;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string | null;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  UpdateTime?: string | null;
 }
 
 /** RTMP转推的目标地址信息。 */
@@ -4874,7 +4928,7 @@ declare interface VideoTemplateInfo {
 declare interface VideoTemplateInfoForUpdate {
   /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec?: string | null;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 */
   Fps?: number | null;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate?: number | null;
@@ -5230,6 +5284,22 @@ declare interface CreatePersonSampleResponse {
   RequestId?: string;
 }
 
+declare interface CreateQualityControlTemplateRequest {
+  /** 媒体质检模板名称，长度限制：64 个字符。 */
+  Name: string;
+  /** 媒体质检控制参数。 */
+  QualityControlItemSet: QualityControlItemConfig[];
+  /** 媒体质检模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+}
+
+declare interface CreateQualityControlTemplateResponse {
+  /** 媒体质检模板唯一标识。 */
+  Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSampleSnapshotTemplateRequest {
   /** 采样截图类型，取值：Percent：按百分比。Time：按时间间隔。 */
   SampleType: string;
@@ -5536,6 +5606,16 @@ declare interface DeletePersonSampleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteQualityControlTemplateRequest {
+  /** 媒体质检模板唯一标识。 */
+  Definition: number;
+}
+
+declare interface DeleteQualityControlTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSampleSnapshotTemplateRequest {
   /** 采样截图模板唯一标识。 */
   Definition: number;
@@ -5792,6 +5872,26 @@ declare interface DescribePersonSamplesResponse {
   TotalCount?: number;
   /** 素材信息。 */
   PersonSet?: AiSamplePerson[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQualityControlTemplatesRequest {
+  /** 媒体质检模板唯一标识过滤条件，数组长度限制：100。 */
+  Definitions?: number[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数默认值：10；最大值：100。 */
+  Limit?: number;
+  /** "Preset"：预设，Custom":客户魔板 */
+  Type?: string;
+}
+
+declare interface DescribeQualityControlTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 媒体质检模板详情列表。 */
+  QualityControlTemplateSet?: QualityControlTemplate[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6510,6 +6610,22 @@ declare interface ModifyPersonSampleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyQualityControlTemplateRequest {
+  /** 媒体质检模板唯一标识。 */
+  Definition: number;
+  /** 媒体质检模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+  /** 媒体质检配置参数。 */
+  QualityControlItemSet?: QualityControlItemConfig[];
+}
+
+declare interface ModifyQualityControlTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySampleSnapshotTemplateRequest {
   /** 采样截图模板唯一标识。 */
   Definition: number;
@@ -6941,6 +7057,8 @@ declare interface Mps {
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
   /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
+  /** 创建媒体质检模板 {@link CreateQualityControlTemplateRequest} {@link CreateQualityControlTemplateResponse} */
+  CreateQualityControlTemplate(data: CreateQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityControlTemplateResponse>;
   /** 创建采样截图模板 {@link CreateSampleSnapshotTemplateRequest} {@link CreateSampleSnapshotTemplateResponse} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
   /** 创建编排 {@link CreateScheduleRequest} {@link CreateScheduleResponse} */
@@ -6977,6 +7095,8 @@ declare interface Mps {
   DeleteImageSpriteTemplate(data: DeleteImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSpriteTemplateResponse>;
   /** 删除素材样本 {@link DeletePersonSampleRequest} {@link DeletePersonSampleResponse} */
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
+  /** 删除媒体质检模板 {@link DeleteQualityControlTemplateRequest} {@link DeleteQualityControlTemplateResponse} */
+  DeleteQualityControlTemplate(data: DeleteQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQualityControlTemplateResponse>;
   /** 删除采样截图模板 {@link DeleteSampleSnapshotTemplateRequest} {@link DeleteSampleSnapshotTemplateResponse} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
   /** 删除编排 {@link DeleteScheduleRequest} {@link DeleteScheduleResponse} */
@@ -7013,6 +7133,8 @@ declare interface Mps {
   DescribeMediaMetaData(data: DescribeMediaMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaMetaDataResponse>;
   /** 获取素材样本列表 {@link DescribePersonSamplesRequest} {@link DescribePersonSamplesResponse} */
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
+  /** 获取媒体质检模板列表 {@link DescribeQualityControlTemplatesRequest} {@link DescribeQualityControlTemplatesResponse} */
+  DescribeQualityControlTemplates(data?: DescribeQualityControlTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityControlTemplatesResponse>;
   /** 获取采样截图模板列表 {@link DescribeSampleSnapshotTemplatesRequest} {@link DescribeSampleSnapshotTemplatesResponse} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** 查询编排 {@link DescribeSchedulesRequest} {@link DescribeSchedulesResponse} */
@@ -7083,6 +7205,8 @@ declare interface Mps {
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
   /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
+  /** 修改媒体质检模板 {@link ModifyQualityControlTemplateRequest} {@link ModifyQualityControlTemplateResponse} */
+  ModifyQualityControlTemplate(data: ModifyQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQualityControlTemplateResponse>;
   /** 修改采样截图模板 {@link ModifySampleSnapshotTemplateRequest} {@link ModifySampleSnapshotTemplateResponse} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
   /** 修改编排 {@link ModifyScheduleRequest} {@link ModifyScheduleResponse} */

@@ -610,6 +610,8 @@ declare interface InstanceInfo {
   OutboundPublicAcls?: OutboundPublicAcl[] | null;
   /** 网络连接方案 */
   NetConnectScheme?: string | null;
+  /** 置放群组相关参数 */
+  DisasterRecoverGroupAffinity?: number | null;
 }
 
 /** ES集群日志详细信息 */
@@ -1407,6 +1409,8 @@ declare interface CreateInstanceRequest {
   EnableDiagnose?: boolean;
   /** cdcId，使用cdc子网时传递 */
   CdcId?: string;
+  /** 置放群组亲和度，范围[0,10]，0表示不开启 */
+  DisasterRecoverGroupAffinity?: number;
 }
 
 declare interface CreateInstanceResponse {
@@ -1795,9 +1799,9 @@ declare interface DescribeLogstashInstanceLogsRequest {
 
 declare interface DescribeLogstashInstanceLogsResponse {
   /** 返回的日志条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志详细信息列表 */
-  InstanceLogList: InstanceLog[];
+  InstanceLogList?: InstanceLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1896,6 +1900,22 @@ declare interface DescribeServerlessInstancesResponse {
   IndexMetaFields?: ServerlessIndexMetaField[] | null;
   /** 查询总数 */
   TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServerlessMetricsRequest {
+  /** space空间id */
+  SpaceId?: string;
+  /** index索引id */
+  IndexId?: string;
+  /** 指标类型，暂时只支持Storage */
+  MetricType?: string[];
+}
+
+declare interface DescribeServerlessMetricsResponse {
+  /** storage指标值，单位byte */
+  Storage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2527,6 +2547,8 @@ declare interface Es {
   DescribeLogstashPipelines(data: DescribeLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashPipelinesResponse>;
   /** Serverless获取索引列表 {@link DescribeServerlessInstancesRequest} {@link DescribeServerlessInstancesResponse} */
   DescribeServerlessInstances(data?: DescribeServerlessInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessInstancesResponse>;
+  /** 获取实例对应的监控指标 {@link DescribeServerlessMetricsRequest} {@link DescribeServerlessMetricsResponse} */
+  DescribeServerlessMetrics(data?: DescribeServerlessMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessMetricsResponse>;
   /** 查看Serverless空间子用户 {@link DescribeServerlessSpaceUserRequest} {@link DescribeServerlessSpaceUserResponse} */
   DescribeServerlessSpaceUser(data: DescribeServerlessSpaceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpaceUserResponse>;
   /** 获取Serverless索引空间列表 {@link DescribeServerlessSpacesRequest} {@link DescribeServerlessSpacesResponse} */
