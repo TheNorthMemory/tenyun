@@ -4871,6 +4871,8 @@ declare interface VerifyOfdVatInvoiceOCRRequest {
   OfdFileUrl?: string;
   /** OFD文件的 Base64 值。OfdFileUrl 和 OfdFileBase64 必传其一，若两者都传，只解析OfdFileBase64。 */
   OfdFileBase64?: string;
+  /** 需要识别的OFD发票页面的对应页码，默认值为1。 示例值：1 */
+  OfdPageNumber?: number;
 }
 
 declare interface VerifyOfdVatInvoiceOCRResponse {

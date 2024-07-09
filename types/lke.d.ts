@@ -386,6 +386,8 @@ declare interface ListDocItem {
   ExpireStart?: string | null;
   /** 有效结束时间，unix时间戳，0代表永久有效 */
   ExpireEnd?: string | null;
+  /** 是否允许重试，0：否，1：是 */
+  IsAllowRetry?: boolean | null;
 }
 
 /** 问答详情数据 */

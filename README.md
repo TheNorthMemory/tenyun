@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 251+ 款产品，11376+ 服务数</summary>
+<details><summary>共计 251+ 款产品，11373+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -273,7 +273,7 @@ scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(4
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(31) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10) |
 smop | [腾讯安心用户运营平台](https://cloud.tencent.com/document/product/1310) | 2020-12-03(1) |
-smpn | [营销号码安全](https://cloud.tencent.com/document/product/1127) | 2019-08-22(5) |
+smpn | [营销号码安全](https://cloud.tencent.com/document/product/1127) | 2019-08-22(2) |
 sms | [短信](https://cloud.tencent.com/document/product/382) | 2021-01-11(18) | 2019-07-11(16) |
 soe | [智聆口语评测](https://cloud.tencent.com/document/product/884) | 2018-07-24(4) |
 solar | 智汇零售 | 2018-10-11(17) |

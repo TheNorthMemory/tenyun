@@ -1114,6 +1114,8 @@ declare interface ServerlessIndexOptionsField {
   ExpireMaxAge?: string | null;
   /** 时间分区字段 */
   TimestampField?: string | null;
+  /** 标准存储时长 */
+  SinkCycleAge?: string | null;
 }
 
 /** 索引配置字段 */

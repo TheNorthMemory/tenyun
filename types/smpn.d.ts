@@ -14,20 +14,6 @@ declare interface CHPResponse {
   TagCount: number;
 }
 
-declare interface CreateSmpnEpaRequest {
-  /** 企业号码认证请求内容 */
-  RequestData: EPARequest;
-  /** 用于计费的资源ID */
-  ResourceId: string;
-}
-
-declare interface CreateSmpnEpaResponse {
-  /** 业号码认证回应内容 */
-  ResponseData?: EPAResponse;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeSmpnChpRequest {
   /** 客户用于计费的资源Id */
   ResourceId: string;
@@ -56,46 +42,6 @@ declare interface DescribeSmpnFnrResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSmpnMhmRequest {
-  /** 号码营销监控请求内容 */
-  RequestData: MHMRequest;
-  /** 用于计费的资源ID */
-  ResourceId: string;
-}
-
-declare interface DescribeSmpnMhmResponse {
-  /** 号码营销监控回应内容 */
-  ResponseData?: MHMResponse;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeSmpnMrlRequest {
-  /** 恶意标记等级请求内容 */
-  RequestData: MRLRequest;
-  /** 用于计费的资源ID */
-  ResourceId: string;
-}
-
-declare interface DescribeSmpnMrlResponse {
-  /** 恶意标记等级回应内容 */
-  ResponseData?: MRLResponse;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface EPARequest {
-  /** 电话号码 */
-  PhoneNumber: string;
-  /** 黄页名称 */
-  Name: string;
-}
-
-declare interface EPAResponse {
-  /** 0成功 其他失败 */
-  RetCode: number;
-}
-
 declare interface FNRRequest {
   /** 电话号码 */
   PhoneNumber: string;
@@ -106,49 +52,13 @@ declare interface FNRResponse {
   Status: number;
 }
 
-declare interface MHMRequest {
-  /** 电话号码 */
-  PhoneNumber: string;
-}
-
-declare interface MHMResponse {
-  /** 标记类型 0: 无标记 50:骚扰电话 51:房产中介 52:保险理财 53:广告推销 54:诈骗电话 55:快递电话 56:出租车专车 */
-  TagType: number;
-  /** 标记次数 */
-  TagCount: number;
-}
-
-declare interface MRLRequest {
-  /** 电话号码 */
-  PhoneNumber: string;
-}
-
-declare interface MRLResponse {
-  /** 骚扰电话恶意标记等级 */
-  DisturbLevel: number;
-  /** 房产中介恶意标记等级 */
-  HouseAgentLevel: number;
-  /** 保险理财恶意标记等级 */
-  InsuranceLevel: number;
-  /** 广告推销恶意标记等级 */
-  SalesLevel: number;
-  /** 诈骗电话恶意标记等级 */
-  CheatLevel: number;
-}
-
 /** {@link Smpn 营销号码安全} */
 declare interface Smpn {
   (): Versions;
-  /** @deprecated 企业号码认证 {@link CreateSmpnEpaRequest} {@link CreateSmpnEpaResponse} */
-  CreateSmpnEpa(data: CreateSmpnEpaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSmpnEpaResponse>;
   /** @deprecated 终端骚扰保护 {@link DescribeSmpnChpRequest} {@link DescribeSmpnChpResponse} */
   DescribeSmpnChp(data: DescribeSmpnChpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnChpResponse>;
   /** @deprecated 虚假号码识别 {@link DescribeSmpnFnrRequest} {@link DescribeSmpnFnrResponse} */
   DescribeSmpnFnr(data: DescribeSmpnFnrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnFnrResponse>;
-  /** @deprecated 号码营销监控 {@link DescribeSmpnMhmRequest} {@link DescribeSmpnMhmResponse} */
-  DescribeSmpnMhm(data: DescribeSmpnMhmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMhmResponse>;
-  /** @deprecated 恶意标记等级 {@link DescribeSmpnMrlRequest} {@link DescribeSmpnMrlResponse} */
-  DescribeSmpnMrl(data: DescribeSmpnMrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMrlResponse>;
 }
 
 export declare type Versions = ["2019-08-22"];

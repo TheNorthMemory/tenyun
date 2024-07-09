@@ -1123,27 +1123,27 @@ declare interface SignUrlInfo {
 /** 企业员工信息 */
 declare interface Staff {
   /** 员工在电子签平台的用户ID */
-  UserId: string;
-  /** 显示的员工名 */
-  DisplayName: string;
-  /** 员工手机号 */
-  Mobile: string;
+  UserId?: string;
+  /** 显示的员工名注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息 */
+  DisplayName?: string;
+  /** 员工手机号注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息 */
+  Mobile?: string;
   /** 员工邮箱 */
-  Email: string | null;
+  Email?: string | null;
   /** 员工在第三方应用平台的用户ID */
-  OpenId: string | null;
+  OpenId?: string | null;
   /** 员工角色 */
-  Roles: StaffRole[] | null;
+  Roles?: StaffRole[] | null;
   /** 员工部门 */
-  Department: Department | null;
+  Department?: Department | null;
   /** 员工是否实名 */
-  Verified: boolean;
+  Verified?: boolean;
   /** 员工创建时间戳，单位秒 */
-  CreatedOn: number;
+  CreatedOn?: number;
   /** 员工实名时间戳，单位秒 */
-  VerifiedOn: number;
+  VerifiedOn?: number;
   /** 员工是否离职：0-未离职，1-离职 */
-  QuiteJob: number;
+  QuiteJob?: number;
 }
 
 /** 第三方应用集成员工角色信息 */
@@ -2403,6 +2403,8 @@ declare interface CreateFlowBlockchainEvidenceUrlRequest {
   Agent: Agent;
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
+  /** 链接/二维码的有效截止时间，格式为unix时间戳。最长不超过 2099年12月31日（4102415999）。默认值为有效期为当前时间后7天。 */
+  ExpiredOn?: number;
 }
 
 declare interface CreateFlowBlockchainEvidenceUrlResponse {
@@ -2761,9 +2763,9 @@ declare interface DescribeTemplatesRequest {
   TemplateId?: string;
   /** 查询模板的内容**0**：（默认）模板列表及详情**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息 */
   ContentType?: number;
-  /** 合同模板ID数组，每一个合同模板ID为32位字符串, 最多支持200个模板的批量查询。注意: 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`4. `若传递此参数，分页参数(Limit,Offset)无效`[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
+  /** 合同模板ID数组，每一个合同模板ID为32位字符串, 最多支持100个模板的批量查询。注意: 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`4. `若传递此参数，分页参数(Limit,Offset)无效`[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png) */
   TemplateIds?: string[];
-  /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为200。` */
+  /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为100。` */
   Limit?: number;
   /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。注：`1.offset从0开始，即第一页为0。``2.默认从第一页返回。` */
   Offset?: number;

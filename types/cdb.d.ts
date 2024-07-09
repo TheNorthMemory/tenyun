@@ -4073,9 +4073,9 @@ declare interface DescribeUploadedFilesRequest {
 
 declare interface DescribeUploadedFilesResponse {
   /** 符合查询条件的SQL文件总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的SQL文件列表。 */
-  Items: SqlFileInfo[];
+  Items?: SqlFileInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

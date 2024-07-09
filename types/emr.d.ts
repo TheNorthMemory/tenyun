@@ -834,17 +834,17 @@ declare interface LoadAutoScaleStrategy {
   ScaleAction?: number | null;
   /** 每次规则生效时的扩缩容数量。 */
   ScaleNum?: number | null;
-  /** 扩缩容负载指标。 */
+  /** 扩缩容负载指标。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
   LoadMetrics?: string | null;
-  /** 规则元数据记录ID。 */
+  /** 规则元数据记录ID。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
   MetricId?: number | null;
-  /** 规则统计周期，提供300s,600s,900s */
+  /** 规则统计周期，提供300s,600s,900s。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
   StatisticPeriod?: number | null;
   /** 指标处理方法，1表示MAX，2表示MIN，3表示AVG。 */
   ProcessMethod?: number | null;
-  /** 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。 */
+  /** 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
   TriggerThreshold?: number;
-  /** 条件触发数组。 */
+  /** 条件触发数组。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
   TriggerConditions?: TriggerConditions | null;
   /** 规则优先级，添加时无效，默认为自增。 */
   Priority?: number | null;

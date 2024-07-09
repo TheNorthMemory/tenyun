@@ -302,6 +302,10 @@ declare interface AiAnalysisTaskDelLogoOutput {
   Path?: string;
   /** 擦除后文件的存储位置。 */
   OutputStorage?: TaskOutputStorage;
+  /** 基于画面提取的字幕文件路径。 */
+  OriginSubtitlePath?: string | null;
+  /** 基于画面提取的字幕翻译文件路径。 */
+  TranslateSubtitlePath?: string | null;
 }
 
 /** 智能擦除结果类型 */
