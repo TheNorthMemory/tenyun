@@ -24,6 +24,18 @@ declare interface AbnormalExperience {
   EventTime: number;
 }
 
+/** 机器人参数 */
+declare interface AgentConfig {
+  /** 机器人的UserId，用于进房发起任务。【注意】这个UserId不能与当前房间内的主播观众[UserId](https://cloud.tencent.com/document/product/647/46351)重复。如果一个房间发起多个任务时，机器人的UserId也不能相互重复，否则会中断前一个任务。需要保证机器人UserId在房间内唯一。 */
+  UserId: string | null;
+  /** 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910)的方案。 */
+  UserSig: string | null;
+  /** 机器人拉流的UserId, 填写后，机器人会拉取该UserId的流进行实时处理 */
+  TargetUserId: string | null;
+  /** 房间内推流用户全部退出后超过MaxIdleTime秒，后台自动关闭任务，默认值是60s。 */
+  MaxIdleTime?: number | null;
+}
+
 /** 转推服务加入TRTC房间的机器人参数。 */
 declare interface AgentParams {
   /** 转推服务在TRTC房间使用的[UserId](https://cloud.tencent.com/document/product/647/46351)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。 */
@@ -602,6 +614,14 @@ declare interface RowValues {
   RowValue?: number[] | null;
 }
 
+/** 语音转文字参数 */
+declare interface STTConfig {
+  /** 语音识别支持的语言，默认是"zh" 中文目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：1. Chinese = "zh" # 中文2. Chinese_TW = "zh-TW" # 中国台湾3. Chinese_DIALECT = "zh-dialect" # 中国方言4. English = "en" # 英语5. Vietnamese = "vi" # 越南语6. Japanese = "ja" # 日语7. Korean = "ko" # 汉语8. Indonesia = "id" # 印度尼西亚语9. Thai = "th" # 泰语10. Portuguese = "pt" # 葡萄牙语11. Turkish = "tr" # 土耳其语12. Arabic = "ar" # 阿拉伯语13. Spanish = "es" # 西班牙语14. Hindi = "hi" # 印地语15. French = "fr" # 法语16. Malay = "ms" # 马来语17. Filipino = "fil" # 菲律宾语18. German = "de" # 德语19. Italian = "it" # 意大利语20. Russian = "ru" # 俄语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
+  Language?: string | null;
+  /** 额外识别可能替代语言,最多3个, 需高级版支持,Language指定方言时，不允许设置该字段 */
+  AlternativeLanguage?: string[] | null;
+}
+
 /** 历史规模信息 */
 declare interface ScaleInfomation {
   /** 每天开始的时间 */
@@ -1018,6 +1038,28 @@ declare interface DeletePictureRequest {
 }
 
 declare interface DeletePictureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIConversationRequest {
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和开启转录任务的房间使用的SdkAppId相同。 */
+  SdkAppId?: number;
+  /** 唯一标识一次任务。 */
+  TaskId?: string;
+  /** 开启任务时填写的SessionId，如果没写则不返回。 */
+  SessionId?: string;
+}
+
+declare interface DescribeAIConversationResponse {
+  /** 任务开始时间。 */
+  StartTime?: string;
+  /** 任务状态。有4个值：1、Idle表示任务未开始2、Preparing表示任务准备中3、InProgress表示任务正在运行4、Stopped表示任务已停止，正在清理资源中 */
+  Status?: string;
+  /** 唯一标识一次任务。 */
+  TaskId?: string;
+  /** 开启对话任务时填写的SessionId，如果没写则不返回。 */
+  SessionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1612,6 +1654,32 @@ declare interface RemoveUserResponse {
   RequestId?: string;
 }
 
+declare interface StartAIConversationRequest {
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和开启转录任务的房间使用的SdkAppId相同。 */
+  SdkAppId: number;
+  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，表示开启对话任务的房间号。 */
+  RoomId: string;
+  /** 机器人参数 */
+  AgentConfig: AgentConfig;
+  /** 调用方传入的唯一Id，服务端用来去重。 */
+  SessionId?: string;
+  /** TRTC房间号的类型，0代表数字房间号，1代表字符串房间号。不填默认是数字房间号。 */
+  RoomIdType?: number;
+  /** 语音识别配置。 */
+  STTConfig?: STTConfig;
+  /** LLM配置。需符合openai规范，为JSON字符串，示例如下： { &emsp; "LLMType": “大模型类型"， // String 必填，目前固定为"openai" &emsp; "Model": "您的模型名称", // String 必填，指定使用的模型 "APIKey": "您的OpenAI API密钥", // String 必填，相当于环境变量中的OPENAI_API_KEY &emsp; "APIBaseUrl": "https://api.openai.com", // String 必填，OpenAI API的基础URL &emsp; "Streaming": true // Boolean 非必填，指定是否使用流式传输 &emsp;} */
+  LLMConfig?: string;
+  /** TTS配置。目前支持腾讯云TTS, 为JSON字符串，示例如下： { &emsp; "AppId": "您的应用ID", // String 必填 &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent" &emsp; "SercetId": "您的密钥ID", // String 必填 &emsp; "SercetKey": "您的密钥Key", // String 必填 &emsp; "VoiceType": 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &emsp; "PrimaryLanguage": "zh-CN" // String 非必填，主要语言 &emsp;} */
+  TTSConfig?: string;
+}
+
+declare interface StartAIConversationResponse {
+  /** 用于唯一标识对话任务。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartAITranscriptionRequest {
   /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和开启转录任务的房间使用的SdkAppId相同。 */
   SdkAppId: number;
@@ -1762,6 +1830,16 @@ declare interface StartWebRecordResponse {
   RequestId?: string;
 }
 
+declare interface StopAIConversationRequest {
+  /** 唯一标识任务。 */
+  TaskId: string;
+}
+
+declare interface StopAIConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopAITranscriptionRequest {
   /** 唯一标识转录任务。 */
   TaskId: string;
@@ -1881,6 +1959,8 @@ declare interface Trtc {
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
+  /** 查询AI对话状态 {@link DescribeAIConversationRequest} {@link DescribeAIConversationResponse} */
+  DescribeAIConversation(data?: DescribeAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIConversationResponse>;
   /** 查询AI转录任务状态 {@link DescribeAITranscriptionRequest} {@link DescribeAITranscriptionResponse} */
   DescribeAITranscription(data: DescribeAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITranscriptionResponse>;
   /** 查询历史用户列表与通话指标 {@link DescribeCallDetailInfoRequest} {@link DescribeCallDetailInfoResponse} */
@@ -1945,6 +2025,8 @@ declare interface Trtc {
   RemoveUser(data: RemoveUserRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserResponse>;
   /** 移出用户（字符串房间号） {@link RemoveUserByStrRoomIdRequest} {@link RemoveUserByStrRoomIdResponse} */
   RemoveUserByStrRoomId(data: RemoveUserByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByStrRoomIdResponse>;
+  /** 开始AI对话任务 {@link StartAIConversationRequest} {@link StartAIConversationResponse} */
+  StartAIConversation(data: StartAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<StartAIConversationResponse>;
   /** 开始AI转录任务 {@link StartAITranscriptionRequest} {@link StartAITranscriptionResponse} */
   StartAITranscription(data: StartAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<StartAITranscriptionResponse>;
   /** 启动云端混流（旧） {@link StartMCUMixTranscodeRequest} {@link StartMCUMixTranscodeResponse} */
@@ -1957,6 +2039,8 @@ declare interface Trtc {
   StartStreamIngest(data: StartStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamIngestResponse>;
   /** 开始页面录制 {@link StartWebRecordRequest} {@link StartWebRecordResponse} */
   StartWebRecord(data: StartWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartWebRecordResponse>;
+  /** 停止AI对话 {@link StopAIConversationRequest} {@link StopAIConversationResponse} */
+  StopAIConversation(data: StopAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<StopAIConversationResponse>;
   /** 停止AI转录任务 {@link StopAITranscriptionRequest} {@link StopAITranscriptionResponse} */
   StopAITranscription(data: StopAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<StopAITranscriptionResponse>;
   /** 结束云端混流（旧） {@link StopMCUMixTranscodeRequest} {@link StopMCUMixTranscodeResponse} */

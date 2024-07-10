@@ -365,9 +365,9 @@ declare interface DescribeClusterInstancesRequest {
 
 declare interface DescribeClusterInstancesResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例列表信息 */
-  InstanceSet: Instance[];
+  InstanceSet?: Instance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -401,9 +401,9 @@ declare interface DescribeClustersRequest {
 
 declare interface DescribeClustersResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群列表信息 */
-  ClusterSet: Cluster[];
+  ClusterSet?: Cluster[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

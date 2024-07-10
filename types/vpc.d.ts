@@ -1506,6 +1506,18 @@ declare interface PeerConnection {
   Type?: string | null;
 }
 
+/** 安全组策略统计 */
+declare interface PolicyStatistics {
+  /** 入站IPv4总数 */
+  IngressIPv4TotalCount: number | null;
+  /** 入站IPv6总数 */
+  IngressIPv6TotalCount: number | null;
+  /** 出站IPv4总数 */
+  EgressIPv4TotalCount: number | null;
+  /** 出站IPv6总数 */
+  EgressIPv6TotalCount: number | null;
+}
+
 /** 价格 */
 declare interface Price {
   /** 实例价格。 */
@@ -1865,27 +1877,27 @@ declare interface SecurityGroupLimitSet {
 /** 安全组规则对象 */
 declare interface SecurityGroupPolicy {
   /** 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。 */
-  PolicyIndex?: number;
+  PolicyIndex?: number | null;
   /** 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。 */
-  Protocol?: string;
+  Protocol?: string | null;
   /** 端口(all, 离散port, range)。说明：如果Protocol设置为ALL，则Port也需要设置为all。 */
-  Port?: string;
+  Port?: string | null;
   /** 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。 */
-  ServiceTemplate?: ServiceTemplateSpecification;
+  ServiceTemplate?: ServiceTemplateSpecification | null;
   /** 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。 */
-  CidrBlock?: string;
+  CidrBlock?: string | null;
   /** 网段或IPv6(互斥)。 */
-  Ipv6CidrBlock?: string;
+  Ipv6CidrBlock?: string | null;
   /** 安全组实例ID，例如：sg-ohuuioma。 */
-  SecurityGroupId?: string;
+  SecurityGroupId?: string | null;
   /** IP地址ID或者IP地址组ID。 */
-  AddressTemplate?: AddressTemplateSpecification;
+  AddressTemplate?: AddressTemplateSpecification | null;
   /** ACCEPT 或 DROP。 */
-  Action?: string;
+  Action?: string | null;
   /** 安全组规则描述。 */
-  PolicyDescription?: string;
+  PolicyDescription?: string | null;
   /** 安全组最近修改时间。 */
-  ModifyTime?: string;
+  ModifyTime?: string | null;
 }
 
 /** 安全组规则集合 */
@@ -1896,6 +1908,8 @@ declare interface SecurityGroupPolicySet {
   Egress?: SecurityGroupPolicy[] | null;
   /** 入站规则。 */
   Ingress?: SecurityGroupPolicy[] | null;
+  /** 安全组策略条目统计。只用于出参。 */
+  PolicyStatistics?: PolicyStatistics | null;
 }
 
 /** SecurityPolicyDatabase策略 */
@@ -5535,7 +5549,7 @@ declare interface DescribeSecurityGroupPoliciesRequest {
 
 declare interface DescribeSecurityGroupPoliciesResponse {
   /** 安全组规则集合。 */
-  SecurityGroupPolicySet: SecurityGroupPolicySet;
+  SecurityGroupPolicySet?: SecurityGroupPolicySet;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7460,6 +7474,18 @@ declare interface ModifyVpnGatewayRoutesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyVpnGatewaySslClientCertRequest {
+  /** SSL-VPN-CLIENT 实例ID列表。 */
+  SslVpnClientIds: string[];
+}
+
+declare interface ModifyVpnGatewaySslClientCertResponse {
+  /** 异步任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVpnGatewaySslServerRequest {
   /** SSL-VPN SERVER 实例ID */
   SslVpnServerId: string;
@@ -8501,6 +8527,8 @@ declare interface Vpc {
   ModifyVpnGatewayCcnRoutes(data: ModifyVpnGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayCcnRoutesResponse>;
   /** 修改VPN路由状态 {@link ModifyVpnGatewayRoutesRequest} {@link ModifyVpnGatewayRoutesResponse} */
   ModifyVpnGatewayRoutes(data: ModifyVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayRoutesResponse>;
+  /** 更新SslVpnClient证书 {@link ModifyVpnGatewaySslClientCertRequest} {@link ModifyVpnGatewaySslClientCertResponse} */
+  ModifyVpnGatewaySslClientCert(data: ModifyVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewaySslClientCertResponse>;
   /** 修改SSL-VPN 服务端属性 {@link ModifyVpnGatewaySslServerRequest} {@link ModifyVpnGatewaySslServerResponse} */
   ModifyVpnGatewaySslServer(data: ModifyVpnGatewaySslServerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewaySslServerResponse>;
   /** 发布路由至云联网 {@link NotifyRoutesRequest} {@link NotifyRoutesResponse} */

@@ -4527,9 +4527,9 @@ declare interface Live {
   DescribeLiveCallbackTemplate(data: DescribeLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplateResponse>;
   /** 获取回调模板列表 {@link DescribeLiveCallbackTemplatesRequest} {@link DescribeLiveCallbackTemplatesResponse} */
   DescribeLiveCallbackTemplates(data?: DescribeLiveCallbackTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplatesResponse>;
-  /** 获取证书信息 {@link DescribeLiveCertRequest} {@link DescribeLiveCertResponse} */
+  /** 获取证书信息(该接口已下线,请使用新接口 ssl.DescribeCertificateDetail) {@link DescribeLiveCertRequest} {@link DescribeLiveCertResponse} */
   DescribeLiveCert(data: DescribeLiveCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertResponse>;
-  /** 获取证书信息列表 {@link DescribeLiveCertsRequest} {@link DescribeLiveCertsResponse} */
+  /** 获取证书信息列表(该接口已下线，请使用新接口 DescribeLiveDomainCertBindings) {@link DescribeLiveCertsRequest} {@link DescribeLiveCertsResponse} */
   DescribeLiveCerts(data?: DescribeLiveCertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertsResponse>;
   /** 获取直播延播列表 {@link DescribeLiveDelayInfoListRequest} {@link DescribeLiveDelayInfoListResponse} */
   DescribeLiveDelayInfoList(data?: DescribeLiveDelayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDelayInfoListResponse>;

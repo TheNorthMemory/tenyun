@@ -1512,7 +1512,7 @@ declare interface Origin {
   ServerName?: string | null;
   /** OriginType 为对象存储（COS）时，可以指定是否允许访问私有 bucket注意：需要先授权 CDN 访问该私有 Bucket 的权限后，才可开启此配置。取值范围: on/off */
   CosPrivateAccess?: string | null;
-  /** 回源协议配置http：强制 http 回源follow：协议跟随回源https：强制 https 回源，https 回源时仅支持源站 443 端口 */
+  /** 回源协议配置http：强制 http 回源follow：协议跟随回源https：强制 https 回源 */
   OriginPullProtocol?: string | null;
   /** 备源站列表修改备源站时，需要同时填充对应的 BackupOriginType */
   BackupOrigins?: string[] | null;

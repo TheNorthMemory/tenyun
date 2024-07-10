@@ -1644,6 +1644,8 @@ declare interface PublicAddressConfig {
   GroupName?: string | null;
   /** 公网负载均衡 id */
   NetworkId?: string | null;
+  /** 公网负载均衡描述 */
+  Description?: string | null;
 }
 
 /** 云原生网关限流插件Qps阈值 */
@@ -2041,6 +2043,8 @@ declare interface CreateCloudNativeAPIGatewayRequest {
   TradeType?: number;
   /** 公网相关配置 */
   InternetConfig?: InternetConfig;
+  /** 关联的prometheus ID */
+  PromId?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewayResponse {

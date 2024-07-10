@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 付费信息详情 */
+declare interface ChargeAttribute {
+  /** 到期时间 */
+  CurDeadline?: string | null;
+  /** 付费方式 */
+  PayMode?: string | null;
+  /** 自动付费标识：0:默认未设置 1:自动续费 2 不自动续费 */
+  AutoRenewFlag?: number | null;
+  /** 资源ID */
+  ResourceId?: string | null;
+}
+
 /** 客户侧集群管理节点信息 */
 declare interface ClientClusterManagerNodeInfo {
   /** 客户端节点IP */
@@ -49,29 +61,31 @@ declare interface ClusterRole {
 /** 文件系统属性 */
 declare interface FSAttribute {
   /** 文件系统类型, 可填goosefs和goosefsx */
-  Type: string;
+  Type?: string;
   /** 文件系统ID */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** GooseFSx文件系统属性 */
-  GooseFSxAttribute: GooseFSxAttribute | null;
+  GooseFSxAttribute?: GooseFSxAttribute | null;
   /** 文件系统状态 ACTIVE(运行中), CREATING(创建中), DESTROYING(销毁中), FAIL(创建失败),EXPANDING(扩容中),PROBING(容灾中) */
-  Status: string;
+  Status?: string;
   /** 文件系统名 */
-  Name: string;
+  Name?: string;
   /** 文件系统备注描述 */
-  Description: string;
+  Description?: string;
   /** vpc ID */
-  VpcId: string;
+  VpcId?: string;
   /** 子网ID */
-  SubnetId: string;
+  SubnetId?: string;
   /** 子网所在的可用区 */
-  Zone: string;
+  Zone?: string;
   /** Tag数组 */
-  Tag: Tag[] | null;
+  Tag?: Tag[] | null;
   /** 更新属性时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
+  /** 文件系统付费信息 */
+  ChargeAttribute?: ChargeAttribute | null;
 }
 
 /** GooseFSx文件系统的属性 */
@@ -126,6 +140,8 @@ declare interface MappedBucket {
   AccelerateFlag?: boolean | null;
   /** 桶所在的园区 */
   BucketRegion?: string | null;
+  /** 自定义Endpoint */
+  Endpoint?: string | null;
 }
 
 /** 角色凭证 */
@@ -393,6 +409,8 @@ declare interface ExpandCapacityRequest {
   FileSystemId: string;
   /** 新增扩容的系统容量 */
   ExpandedCapacity: number;
+  /** 容量修改类型：add/sub */
+  ModifyType?: string;
 }
 
 declare interface ExpandCapacityResponse {

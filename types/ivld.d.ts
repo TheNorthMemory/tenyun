@@ -20,6 +20,16 @@ declare interface AppearInfo {
   VideoAppearSet: VideoAppearInfo[] | null;
 }
 
+/** 一条 asr 语音结果的结构 */
+declare interface AsrResult {
+  /** ASR提取的文字信息 */
+  Content: string;
+  /** ASR起始时间戳，从0开始 */
+  StartTimeStamp: number;
+  /** ASR结束时间戳，从0开始 */
+  EndTimeStamp: number;
+}
+
 /** 音频文件分析结果数据 */
 declare interface AudioData {
   /** 音频识别文本结果 */
@@ -320,6 +330,14 @@ declare interface Rectf {
   Height: number | null;
 }
 
+/** 输入的镜头信息的描述 */
+declare interface ShotInfo {
+  /** 镜头开始时间 */
+  StartTimeStamp: number | null;
+  /** 镜头结束时间 */
+  EndTimeStamp: number | null;
+}
+
 /** 视频结构化结果 */
 declare interface ShowInfo {
   /** 节目日期(只在新闻有效) */
@@ -364,6 +382,14 @@ declare interface SortBy {
   By?: string;
   /** true表示降序，false表示升序 */
   Descend?: boolean;
+}
+
+/** TTS 的参数模式 */
+declare interface TTSMode {
+  /** 语速，范围：[-2，2]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 */
+  Speed?: number;
+  /** 音色 ID，[音色体验地址](https://cloud.tencent.com/product/tts)。|音乐ID|音色名称|推荐场景||--|--|--||1001|智瑜|情感女声||1002|智聆|通用女声||1003|智美|客服女声||1004|智云|通用男声||1005|智莉|通用女声||1007|智娜|客服女声||1008|智琪|客服女声||1009|智芸|知性女声||1010|智华|通用男声||1017|智蓉|情感女声||1018|智靖|情感男声| */
+  VoiceType?: number;
 }
 
 /** 任务筛选条件结构体 */
@@ -468,6 +494,12 @@ declare interface TextMetadata {
   Format: string | null;
 }
 
+/** 单个文本摘要分割结果和所有镜头的匹配度信息 */
+declare interface TextSegMatchShotScore {
+  /** 数组第 i 个值表示该文本摘要和第 i 个镜头的匹配度 */
+  ScoreSet?: number[] | null;
+}
+
 /** 未知人物信息 */
 declare interface UnknownPerson {
   /** 视觉出现信息 */
@@ -484,6 +516,12 @@ declare interface VideoAppearInfo {
   EndTimeStamp: number;
   /** 关键词在视觉信息中的封面图片 */
   ImageURL: string;
+}
+
+/** 视频横转竖的控制参数 */
+declare interface VideoRotationMode {
+  /** 生成的视频是否需要横屏转竖屏。 */
+  ActiveVideoRotation: boolean;
 }
 
 declare interface AddCustomPersonImageRequest {
@@ -576,6 +614,40 @@ declare interface CreateTaskRequest {
 declare interface CreateTaskResponse {
   /** 智能标签视频分析任务ID */
   TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVideoSummaryTaskRequest {
+  /** 目前只支持 1，表示新闻缩编。 */
+  SummaryType: number;
+  /** 待处理的视频的URL，目前只支持*不带签名的*COS地址，长度最长1KB */
+  VideoURL: string;
+  /** 任务处理完成的回调地址。 */
+  CallbackURL?: string;
+  /** 如果需要你输出 TTS 或者视频，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/ (注意，cos路径需要以/分隔符结尾)。 */
+  WriteBackCosPath?: string;
+  /** 是否开启结果视频生成功能，如果开启，需要指定WriteBackCosPath 参数 */
+  ActiveVideoGenerate?: boolean;
+  /** 生成结果视频的时候，控制生成的结果视频的横转竖参数。如果 ActiveVideoGenerate 为 false, 该参数无效。 */
+  VideoRotationMode?: VideoRotationMode;
+  /** 语音合成相关的控制参数 */
+  TTSMode?: TTSMode;
+  /** 是否输出合成好的语音列表。 */
+  ActiveTTSOutput?: boolean;
+  /** 用户指定的精确的 asr 结果列表 */
+  ExactAsrSet?: AsrResult[];
+  /** 用户指定的精确的文本摘要 */
+  ExactTextSummary?: string;
+  /** 用户指定的精确的文本摘要分割结果 */
+  ExactTextSegSet?: string[];
+  /** 用户指定的精确的镜头分割结果 */
+  ExactShotSegSet?: ShotInfo[];
+}
+
+declare interface CreateVideoSummaryTaskResponse {
+  /** 返回的任务 id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -780,6 +852,48 @@ declare interface DescribeTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUsageAmountRequest {
+}
+
+declare interface DescribeUsageAmountResponse {
+  /** 资源使用小时数 */
+  UsedHours?: number;
+  /** 资源包总量小时数 */
+  TotalHours?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVideoSummaryDetailRequest {
+  /** 要查询的任务Id */
+  TaskId: string;
+}
+
+declare interface DescribeVideoSummaryDetailResponse {
+  /** 任务的状态1: 等待处理中2: 处理中3: 处理成功4: 处理失败 */
+  Status?: number;
+  /** 如果处理失败，返回失败的原因 */
+  FailedReason?: string;
+  /** 提取出的视频的 Asr 结果 */
+  AsrSet?: AsrResult[];
+  /** 文本摘要结果 */
+  TextSummary?: string;
+  /** 文本摘要分割结果 */
+  TextSegSet?: string[];
+  /** 镜头分割结果 */
+  ShotSegSet?: ShotInfo[];
+  /** 数组第 i 个结构 TextSegMatchShotConfidenceSet[i] 表示第 i 个文本摘要分割结果和所有镜头的匹配度。 */
+  TextSegMatchShotScoreSet?: TextSegMatchShotScore[];
+  /** TTS 输出音频下载地址列表 */
+  TTSResultURLSet?: string[];
+  /** 合成视频输出下载地址 */
+  VideoResultURL?: string;
+  /** 合成后的视频横竖屏转换后的视频下载地址 */
+  VideoRotateResultURL?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImportMediaRequest {
   /** 待分析视频的URL，目前只支持*不带签名的*COS地址，长度最长1KB */
   URL: string;
@@ -877,6 +991,8 @@ declare interface Ivld {
   CreateDefaultCategories(data?: CreateDefaultCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultCategoriesResponse>;
   /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
+  /** 创建视频缩编任务 {@link CreateVideoSummaryTaskRequest} {@link CreateVideoSummaryTaskResponse} */
+  CreateVideoSummaryTask(data: CreateVideoSummaryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoSummaryTaskResponse>;
   /** 删除自定义分类 {@link DeleteCustomCategoryRequest} {@link DeleteCustomCategoryResponse} */
   DeleteCustomCategory(data: DeleteCustomCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomCategoryResponse>;
   /** 删除自定义人物 {@link DeleteCustomPersonRequest} {@link DeleteCustomPersonResponse} */
@@ -905,6 +1021,10 @@ declare interface Ivld {
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 批量描述任务 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  /** 视频摘要使用量统计 {@link DescribeUsageAmountRequest} {@link DescribeUsageAmountResponse} */
+  DescribeUsageAmount(data?: DescribeUsageAmountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageAmountResponse>;
+  /** 描述视频缩编任务与任务结果 {@link DescribeVideoSummaryDetailRequest} {@link DescribeVideoSummaryDetailResponse} */
+  DescribeVideoSummaryDetail(data: DescribeVideoSummaryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoSummaryDetailResponse>;
   /** 导入媒资文件 {@link ImportMediaRequest} {@link ImportMediaResponse} */
   ImportMedia(data: ImportMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMediaResponse>;
   /** 编辑回调地址 {@link ModifyCallbackRequest} {@link ModifyCallbackResponse} */

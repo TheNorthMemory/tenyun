@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 数据库账号信息 */
 declare interface Account {
   /** 新账户的名称 */
-  User: string;
+  User: string | null;
   /** 新账户的域名 */
-  Host: string;
+  Host: string | null;
 }
 
 /** 账号详细信息 */
@@ -2783,9 +2783,9 @@ declare interface DescribeAuditPoliciesRequest {
 
 declare interface DescribeAuditPoliciesResponse {
   /** 符合条件的审计策略个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 审计策略详情。 */
-  Items: AuditPolicy[] | null;
+  Items?: AuditPolicy[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2851,9 +2851,9 @@ declare interface DescribeAuditRulesRequest {
 
 declare interface DescribeAuditRulesResponse {
   /** 符合条件的审计规则个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 审计规则详情。 */
-  Items: AuditRule[] | null;
+  Items?: AuditRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3239,7 +3239,7 @@ declare interface DescribeDBInstanceGTIDRequest {
 
 declare interface DescribeDBInstanceGTIDResponse {
   /** GTID 是否开通的标记，可能的取值为：0 - 未开通，1 - 已开通。 */
-  IsGTIDOpen: number;
+  IsGTIDOpen?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

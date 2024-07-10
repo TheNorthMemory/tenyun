@@ -3059,7 +3059,7 @@ declare interface DescribeHistogramRequest {
   FromTime: string;
   /** 结束时间 */
   ToTime: string;
-  /** 聚类字段，ip为ip聚合，art为响应耗时聚合，url为url聚合，local为ip转化的城市聚合 */
+  /** 聚类字段，ip为ip聚合，art为响应耗时聚合，url为url聚合，local为ip转化的城市聚合,qps为每秒请求数峰值的聚合，up为上行带宽峰值聚合，down为下行带峰值聚合 */
   QueryField: string;
   /** 条件，access为访问日志，attack为攻击日志 */
   Source: string;
@@ -3075,7 +3075,7 @@ declare interface DescribeHistogramRequest {
 
 declare interface DescribeHistogramResponse {
   /** 统计数据 */
-  Histogram: string[];
+  Histogram?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
