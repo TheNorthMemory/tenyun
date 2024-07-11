@@ -22,6 +22,10 @@ declare interface ActivateHardware {
   GroupId?: string | null;
   /** 设备分组名称，预留参数，需要分组时传入GroupId */
   GroupName?: string | null;
+  /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
+  FlowTrunc?: number | null;
+  /** 激活后的设备ID */
+  DeviceId?: string | null;
 }
 
 /** 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间 */
@@ -70,6 +74,8 @@ declare interface DeviceBaseInfo {
   GroupId?: string | null;
   /** 设备分组名称 */
   GroupName?: string | null;
+  /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
+  FlowTrunc?: number | null;
 }
 
 /** 设备详细信息 */
@@ -200,6 +206,22 @@ declare interface FlowPackageInfo {
   CapacityRemainPrecise?: number;
 }
 
+/** 分组的基本信息 */
+declare interface GroupInfo {
+  /** 分组ID */
+  GroupId?: string;
+  /** 分组名 */
+  GroupName?: string;
+  /** 分组创建的时间，单位：ms */
+  CreateTime?: string;
+  /** 分组更新的时间，单位：ms */
+  UpdateTime?: string;
+  /** 分组描述 */
+  Description?: string | null;
+  /** 分组中的设备数量 */
+  DeviceNum?: number;
+}
+
 /** 新建Hardware入参 */
 declare interface Hardware {
   /** 硬件序列号 */
@@ -240,6 +262,8 @@ declare interface HardwareInfo {
   GroupId?: string | null;
   /** 设备分组名称 */
   GroupName?: string | null;
+  /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
+  FlowTrunc?: number | null;
 }
 
 /** 流量监控指标 */
@@ -361,6 +385,8 @@ declare interface AddDeviceRequest {
   GroupName?: string;
   /** 设备分组ID，非必选，如果不填写则默认设备无分组 */
   GroupId?: string;
+  /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
+  FlowTrunc?: number;
 }
 
 declare interface AddDeviceResponse {
@@ -370,6 +396,20 @@ declare interface AddDeviceResponse {
   DeviceId?: string;
   /** 签名字符串 */
   Signature?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddGroupRequest {
+  /** 分组的名称 */
+  GroupName: string;
+  /** 分组的描述 */
+  Description?: string;
+}
+
+declare interface AddGroupResponse {
+  /** 分组的唯一ID，仅做分组唯一区分 */
+  GroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -434,6 +474,16 @@ declare interface DeleteDeviceRequest {
 }
 
 declare interface DeleteDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGroupRequest {
+  /** 删除指定分组 */
+  GroupId: string;
+}
+
+declare interface DeleteGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -584,6 +634,34 @@ declare interface GetFlowStatisticByGroupResponse {
   RequestId?: string;
 }
 
+declare interface GetFlowStatisticByRegionRequest {
+  /** 开始查找时间 */
+  BeginTime: number;
+  /** 截止时间 */
+  EndTime: number;
+  /** 流量种类（1：上行流量，2：下行流量， 3: 上下行总和） */
+  Type: number;
+  /** 时间粒度（1：按小时统计，2：按天统计） */
+  TimeGranularity: number;
+  /** 网关类型。0：公有云网关；1：自有网关。 */
+  GatewayType: number;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  AccessRegion?: string;
+}
+
+declare interface GetFlowStatisticByRegionResponse {
+  /** 流量详细信息 */
+  NetDetails?: NetDetails[];
+  /** 查找时间段流量使用最大值（单位：byte） */
+  MaxValue?: number;
+  /** 查找时间段流量使用平均值（单位：byte） */
+  AvgValue?: number;
+  /** 查找时间段流量使用总量（单位：byte） */
+  TotalValue?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetFlowStatisticRequest {
   /** 设备ID */
   DeviceId: string;
@@ -612,6 +690,50 @@ declare interface GetFlowStatisticResponse {
   AvgValue?: number;
   /** 查找时间段流量使用总量（单位：byte） */
   TotalValue?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetGroupDetailRequest {
+  /** 分组ID */
+  GroupId: string;
+  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  PageSize: number;
+  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  PageNumber: number;
+  /** 搜索关键字 */
+  KeyWord?: string;
+}
+
+declare interface GetGroupDetailResponse {
+  /** 分组基本信息 */
+  GroupInfo?: GroupInfo;
+  /** 分组中设备列表 */
+  DeviceInfos?: DeviceBaseInfo[];
+  /** 设备总记录条数 */
+  Length?: number;
+  /** 总页数 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetGroupListRequest {
+  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  PageSize: number;
+  /** 当前查看页码，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  PageNumber: number;
+  /** 搜索分组的关键字，为空时匹配所有分组 */
+  Keyword?: string;
+}
+
+declare interface GetGroupListResponse {
+  /** 设备信息列表 */
+  GroupInfos?: GroupInfo[];
+  /** 设备总记录条数 */
+  Length?: number;
+  /** 总页数 */
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -740,6 +862,34 @@ declare interface GetVendorHardwareResponse {
   RequestId?: string;
 }
 
+declare interface GroupAddDeviceRequest {
+  /** 分组ID */
+  GroupId: string;
+  /** 待添加的设备列表 */
+  DeviceList: string[];
+}
+
+declare interface GroupAddDeviceResponse {
+  /** 分组中的设备数量 */
+  DeviceNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GroupDeleteDeviceRequest {
+  /** 分组ID */
+  GroupId: string;
+  /** 待删除的设备列表 */
+  DeviceList: string[];
+}
+
+declare interface GroupDeleteDeviceResponse {
+  /** 分组中的设备数量 */
+  DeviceNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPackageRenewFlagRequest {
   /** 流量包的唯一资源ID */
   ResourceId: string;
@@ -776,6 +926,20 @@ declare interface OrderFlowPackageResponse {
   RequestId?: string;
 }
 
+declare interface SetNotifyUrlRequest {
+  /** 告警通知回调url */
+  NotifyUrl: string;
+  /** 告警通知回调key */
+  CallbackKey: string;
+  /** 流量包的告警阈值 */
+  AlarmValue?: number;
+}
+
+declare interface SetNotifyUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDeviceRequest {
   /** 设备id */
   DeviceId: string;
@@ -785,9 +949,23 @@ declare interface UpdateDeviceRequest {
   Remark?: string;
   /** 更新设备网络信息 */
   UpdateNetInfo?: UpdateNetInfo[];
+  /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
+  FlowTrunc?: number;
 }
 
 declare interface UpdateDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateGroupRequest {
+  /** 分组ID */
+  GroupId: string;
+  /** 分组备注 */
+  Description?: string;
+}
+
+declare interface UpdateGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -813,6 +991,8 @@ declare interface Mna {
   ActivateHardware(data: ActivateHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateHardwareResponse>;
   /** 新建设备 {@link AddDeviceRequest} {@link AddDeviceResponse} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
+  /** 新建分组 {@link AddGroupRequest} {@link AddGroupResponse} */
+  AddGroup(data: AddGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddGroupResponse>;
   /** 添加硬件设备 {@link AddHardwareRequest} {@link AddHardwareResponse} */
   AddHardware(data: AddHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<AddHardwareResponse>;
   /** 设置或更新密钥 {@link CreateEncryptedKeyRequest} {@link CreateEncryptedKeyResponse} */
@@ -821,6 +1001,8 @@ declare interface Mna {
   CreateQos(data: CreateQosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQosResponse>;
   /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
+  /** 删除分组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
+  DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** 停止Qos加速过程 {@link DeleteQosRequest} {@link DeleteQosResponse} */
   DeleteQos(data: DeleteQosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQosResponse>;
   /** 获取Qos加速状态 {@link DescribeQosRequest} {@link DescribeQosResponse} */
@@ -839,6 +1021,12 @@ declare interface Mna {
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
   /** 根据设备组获取数据流量统计数据 {@link GetFlowStatisticByGroupRequest} {@link GetFlowStatisticByGroupResponse} */
   GetFlowStatisticByGroup(data: GetFlowStatisticByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByGroupResponse>;
+  /** 根据区域获取数据流量统计数据 {@link GetFlowStatisticByRegionRequest} {@link GetFlowStatisticByRegionResponse} */
+  GetFlowStatisticByRegion(data: GetFlowStatisticByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByRegionResponse>;
+  /** 获取分组详细信息 {@link GetGroupDetailRequest} {@link GetGroupDetailResponse} */
+  GetGroupDetail(data: GetGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupDetailResponse>;
+  /** 获取分组列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */
+  GetGroupList(data: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
   /** 获取厂商硬件列表 {@link GetHardwareListRequest} {@link GetHardwareListResponse} */
   GetHardwareList(data: GetHardwareListRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareListResponse>;
   /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
@@ -851,12 +1039,20 @@ declare interface Mna {
   GetStatisticData(data: GetStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataResponse>;
   /** 获取厂商硬件设备列表 {@link GetVendorHardwareRequest} {@link GetVendorHardwareResponse} */
   GetVendorHardware(data: GetVendorHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<GetVendorHardwareResponse>;
+  /** 分组添加设备 {@link GroupAddDeviceRequest} {@link GroupAddDeviceResponse} */
+  GroupAddDevice(data: GroupAddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GroupAddDeviceResponse>;
+  /** 分组删除设备 {@link GroupDeleteDeviceRequest} {@link GroupDeleteDeviceResponse} */
+  GroupDeleteDevice(data: GroupDeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GroupDeleteDeviceResponse>;
   /** 修改流量包自动续费标识 {@link ModifyPackageRenewFlagRequest} {@link ModifyPackageRenewFlagResponse} */
   ModifyPackageRenewFlag(data: ModifyPackageRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageRenewFlagResponse>;
   /** 订购流量包 {@link OrderFlowPackageRequest} {@link OrderFlowPackageResponse} */
   OrderFlowPackage(data: OrderFlowPackageRequest, config?: AxiosRequestConfig): AxiosPromise<OrderFlowPackageResponse>;
+  /** 设置用户流量告警信息 {@link SetNotifyUrlRequest} {@link SetNotifyUrlResponse} */
+  SetNotifyUrl(data: SetNotifyUrlRequest, config?: AxiosRequestConfig): AxiosPromise<SetNotifyUrlResponse>;
   /** 更新设备 {@link UpdateDeviceRequest} {@link UpdateDeviceResponse} */
   UpdateDevice(data: UpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceResponse>;
+  /** 更新分组信息 {@link UpdateGroupRequest} {@link UpdateGroupResponse} */
+  UpdateGroup(data: UpdateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGroupResponse>;
   /** 更新硬件信息 {@link UpdateHardwareRequest} {@link UpdateHardwareResponse} */
   UpdateHardware(data: UpdateHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateHardwareResponse>;
 }

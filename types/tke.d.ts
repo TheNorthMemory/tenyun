@@ -4478,11 +4478,11 @@ declare namespace V20180525 {
 
   interface DescribeAvailableTKEEdgeVersionResponse {
     /** 版本列表 */
-    Versions: string[];
+    Versions?: string[];
     /** 边缘集群最新版本 */
-    EdgeVersionLatest: string | null;
+    EdgeVersionLatest?: string | null;
     /** 边缘集群当前版本 */
-    EdgeVersionCurrent: string | null;
+    EdgeVersionCurrent?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

@@ -3043,15 +3043,17 @@ declare interface LiveStreamFaceRecognitionResult {
 /** 直播 AI 物体识别结果 */
 declare interface LiveStreamObjectRecognitionResult {
   /** 识别的物体名称。 */
-  Name: string;
+  Name?: string;
   /** 识别片段起始的 PTS 时间，单位：秒。 */
-  StartPtsOffset: number;
+  StartPtsOffset?: number;
   /** 识别片段终止的 PTS 时间，单位：秒。 */
-  EndPtsOffset: number;
+  EndPtsOffset?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
+  /** 截图链接。 */
+  Url?: string | null;
 }
 
 /** 直播识别 Ocr 全文识别 */
@@ -3138,6 +3140,8 @@ declare interface LiveStreamTaskNotifyConfig {
   TopicName?: string;
   /** HTTP回调地址，NotifyType为URL时必填。 */
   NotifyUrl?: string;
+  /** 用于生成回调签名的 Key。 */
+  NotifyKey?: string | null;
 }
 
 /** 直播实时翻译结果 */

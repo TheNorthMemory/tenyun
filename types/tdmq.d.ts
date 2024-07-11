@@ -4485,19 +4485,19 @@ declare interface ReceiveMessageRequest {
 
 declare interface ReceiveMessageResponse {
   /** 用作标识消息的唯一主键 */
-  MessageID: string;
+  MessageID?: string;
   /** 接收消息的内容 */
-  MessagePayload: string;
+  MessagePayload?: string;
   /** 提供给 Ack 接口，用来Ack哪一个topic中的消息 */
-  AckTopic: string;
+  AckTopic?: string;
   /** 返回的错误信息，如果为空，说明没有错误 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 返回订阅者的名字，用来创建 ack consumer时使用 */
-  SubName: string | null;
+  SubName?: string | null;
   /** BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID */
-  MessageIDList: string | null;
+  MessageIDList?: string | null;
   /** BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容 */
-  MessagesPayload: string | null;
+  MessagesPayload?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

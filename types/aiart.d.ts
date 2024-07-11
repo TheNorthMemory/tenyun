@@ -40,6 +40,26 @@ declare interface ResultConfig {
   Resolution?: string;
 }
 
+declare interface ChangeClothesRequest {
+  /** 模特图片 Url。图片限制：单边分辨率小于3000，且大于512，转成 Base64 字符串后小于 8MB。输入要求：1、建议上传正面模特图片，至少完整露出应穿着输入指定服装的身体部位（全身、上半身或下半身），无大角度身体偏转或异常姿势。2、建议上传3:4比例的图片，生成效果更佳。3、建议模特图片中的原始服装和更换后的服装类别一致，或原始服装在身体上的覆盖范围小于等于更换后的服装（例如需要给模特换上短裤，则原始模特图片中也建议穿短裤，不建议穿长裤），否则会影响人像生成效果。 */
+  ModelUrl: string;
+  /** 服装图片 Url。图片限制：单边分辨率小于3000，大于512，转成 Base64 字符串后小于 8MB。输入要求：建议上传服装完整的正面平铺图片，仅包含1个服装主体，服装类型支持上衣、下装、连衣裙，三选一。算法将根据输入的图片，结合服装图片给模特换装。 */
+  ClothesUrl: string;
+  /** 服装类型，需要和服装图片保持一致。取值：Upper-body：上衣Lower-body：下装Dress：连衣裙 */
+  ClothesType: string;
+  /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。 */
+  RspImgType?: string;
+}
+
+declare interface ChangeClothesResponse {
+  /** 根据入参 RspImgType 填入不同，返回不同的内容。如果传入 base64 则返回生成图 Base64 编码。如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。 */
+  ResultImage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GenerateAvatarRequest {
   /** 头像风格。请在 [百变头像风格列表](https://cloud.tencent.com/document/product/1668/107741) 中选择期望的风格，必须传入风格编号。 */
   Style: string;
@@ -285,6 +305,8 @@ declare interface UploadTrainPortraitImagesResponse {
 /** {@link Aiart 大模型图像创作引擎} */
 declare interface Aiart {
   (): Versions;
+  /** 模特换装 {@link ChangeClothesRequest} {@link ChangeClothesResponse} */
+  ChangeClothes(data: ChangeClothesRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeClothesResponse>;
   /** 百变头像 {@link GenerateAvatarRequest} {@link GenerateAvatarResponse} */
   GenerateAvatar(data: GenerateAvatarRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateAvatarResponse>;
   /** 图像风格化（图生图） {@link ImageToImageRequest} {@link ImageToImageResponse} */

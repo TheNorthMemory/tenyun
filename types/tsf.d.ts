@@ -3927,6 +3927,22 @@ declare interface CreatePathRewritesWithDetailRespResponse {
   RequestId?: string;
 }
 
+declare interface CreateProgramRequest {
+  /** 数据集名称 */
+  ProgramName: string;
+  /** 数据集描述 */
+  ProgramDesc?: string;
+  /** 数据项列表，传入null或空数组时不新增 */
+  ProgramItemList?: ProgramItem[];
+}
+
+declare interface CreateProgramResponse {
+  /** true: 创建成功；false: 创建失败 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePublicConfigRequest {
   /** 配置项名称 */
   ConfigName: string;
@@ -6713,6 +6729,26 @@ declare interface ModifyPathRewriteResponse {
   RequestId?: string;
 }
 
+declare interface ModifyProgramRequest {
+  /** 数据集ID */
+  ProgramId: string;
+  /** 数据集名称，不传入时不更新 */
+  ProgramName?: string;
+  /** 数据集描述，不传入时不更新 */
+  ProgramDesc?: string;
+  /** 数据项列表，传入null不更新，传入空数组全量删除 */
+  ProgramItemList?: ProgramItem[];
+  /** ProgramItemList是否是空数组 */
+  EmptyProgramItemList?: boolean;
+}
+
+declare interface ModifyProgramResponse {
+  /** true: 更新成功；false: 更新失败 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTaskRequest {
   /** 任务ID */
   TaskId: string;
@@ -7439,6 +7475,8 @@ declare interface Tsf {
   CreatePathRewrites(data: CreatePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePathRewritesResponse>;
   /** 创建路径重写返回详细信息 {@link CreatePathRewritesWithDetailRespRequest} {@link CreatePathRewritesWithDetailRespResponse} */
   CreatePathRewritesWithDetailResp(data: CreatePathRewritesWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePathRewritesWithDetailRespResponse>;
+  /** 创建数据集 {@link CreateProgramRequest} {@link CreateProgramResponse} */
+  CreateProgram(data: CreateProgramRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProgramResponse>;
   /** 创建公共配置项 {@link CreatePublicConfigRequest} {@link CreatePublicConfigResponse} */
   CreatePublicConfig(data: CreatePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublicConfigResponse>;
   /** 创建公共配置项返回详细信息 {@link CreatePublicConfigWithDetailRespRequest} {@link CreatePublicConfigWithDetailRespResponse} */
@@ -7743,6 +7781,8 @@ declare interface Tsf {
   ModifyNamespace(data: ModifyNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNamespaceResponse>;
   /** 修改路径重写 {@link ModifyPathRewriteRequest} {@link ModifyPathRewriteResponse} */
   ModifyPathRewrite(data: ModifyPathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPathRewriteResponse>;
+  /** 更新数据集 {@link ModifyProgramRequest} {@link ModifyProgramResponse} */
+  ModifyProgram(data: ModifyProgramRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProgramResponse>;
   /** 修改任务 {@link ModifyTaskRequest} {@link ModifyTaskResponse} */
   ModifyTask(data: ModifyTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskResponse>;
   /** 更新上传程序包信息 {@link ModifyUploadInfoRequest} {@link ModifyUploadInfoResponse} */

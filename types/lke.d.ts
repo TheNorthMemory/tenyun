@@ -178,6 +178,30 @@ declare interface Credentials {
   TmpSecretKey?: string | null;
 }
 
+/** 文档片段 */
+declare interface DocSegment {
+  /** 片段ID */
+  Id?: string | null;
+  /** 业务ID */
+  BusinessId?: string | null;
+  /** 文件类型(markdown,word,txt) */
+  FileType?: string | null;
+  /** 文档切片类型(segment-文档切片 table-表格) */
+  SegmentType?: string | null;
+  /** 标题 */
+  Title?: string | null;
+  /** 段落内容 */
+  PageContent?: string | null;
+  /** 段落原文 */
+  OrgData?: string | null;
+  /** 文章ID */
+  DocId?: string | null;
+  /** 文档业务ID */
+  DocBizId?: string | null;
+  /** 文档链接 */
+  DocUrl?: string | null;
+}
+
 /** 文档元素字段 */
 declare interface DocumentElement {
   /** 文档元素索引 */
@@ -1430,6 +1454,20 @@ declare interface DescribeRobotBizIDByAppKeyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSegmentsRequest {
+  /** 应用ID */
+  BotBizId: string;
+  /** 文档ID */
+  SegBizId?: string[];
+}
+
+declare interface DescribeSegmentsResponse {
+  /** 片段列表 */
+  List?: DocSegment[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStorageCredentialRequest {
   /** 应用ID */
   BotBizId?: string;
@@ -2517,7 +2555,7 @@ declare interface SaveDocRequest {
   ExpireEnd?: string;
   /** 是否引用链接 */
   IsRefer?: boolean;
-  /** 文档操作类型：1：批量导入；2:文档导入 */
+  /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） */
   Opt?: number;
 }
 
@@ -2645,6 +2683,8 @@ declare interface Lke {
   DescribeReleaseInfo(data: DescribeReleaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseInfoResponse>;
   /** 通过appKey获取应用业务ID {@link DescribeRobotBizIDByAppKeyRequest} {@link DescribeRobotBizIDByAppKeyResponse} */
   DescribeRobotBizIDByAppKey(data: DescribeRobotBizIDByAppKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRobotBizIDByAppKeyResponse>;
+  /** 获取片段详情 {@link DescribeSegmentsRequest} {@link DescribeSegmentsResponse} */
+  DescribeSegments(data: DescribeSegmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSegmentsResponse>;
   /** 获取文件上传临时密钥 {@link DescribeStorageCredentialRequest} {@link DescribeStorageCredentialResponse} */
   DescribeStorageCredential(data?: DescribeStorageCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageCredentialResponse>;
   /** 获取不满意回复上下文 {@link DescribeUnsatisfiedReplyContextRequest} {@link DescribeUnsatisfiedReplyContextResponse} */
