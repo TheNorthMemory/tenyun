@@ -368,6 +368,8 @@ declare interface JobConfig {
   IndexName?: string | null;
   /** es空间中文 */
   WorkspaceName?: string | null;
+  /** flink 版本 */
+  FlinkVersion?: string | null;
 }
 
 /** 描述作业发生的一个事件 */
@@ -798,6 +800,8 @@ declare interface SlotSharingGroup {
   Spec: SlotSharingGroupSpec | null;
   /** SlotSharingGroup的描述 */
   Description?: string | null;
+  /** SlotSharingGroup的配置 */
+  Configuration?: Property[] | null;
 }
 
 /** SlotSharingGroup的规格描述 */

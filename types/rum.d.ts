@@ -1423,6 +1423,8 @@ declare interface DescribeReleaseFilesRequest {
   ProjectID: number;
   /** 文件版本 */
   FileVersion?: string;
+  /** 查询过滤条件（根据sourcemap的文件名模糊匹配） */
+  FileName?: string;
 }
 
 declare interface DescribeReleaseFilesResponse {

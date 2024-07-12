@@ -799,9 +799,11 @@ declare interface TranscriptionParams {
 /** 实时音视频用量在某一时间段的统计信息。 */
 declare interface TrtcUsage {
   /** 时间点，格式为YYYY-MM-DD HH:mm:ss。多天查询时，HH:mm:ss为00:00:00。 */
-  TimeKey: string;
-  /** 用量数组。每个数值含义与UsageKey对应。单位：分钟。 */
-  UsageValue: number[];
+  TimeKey?: string;
+  /** 时间点时间戳 */
+  TimeStampKey?: number;
+  /** 用量数组。每个数值含义与UsageKey对应。单位:分钟。 */
+  UsageValue?: number[];
 }
 
 /** 用户信息，包括用户进房时间，退房时间等 */
@@ -1470,7 +1472,7 @@ declare interface DescribeTrtcUsageRequest {
 declare interface DescribeTrtcUsageResponse {
   /** 用量类型，与UsageValue中各个位置的值对应。 */
   UsageKey?: string[];
-  /** 各个时间点用量明细。 */
+  /** 各个时间点用量明细，单位:分钟 */
   UsageList?: TrtcUsage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

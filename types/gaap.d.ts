@@ -2276,6 +2276,14 @@ declare interface DescribeTCPListenersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskStatusRequest {
+}
+
+declare interface DescribeTaskStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUDPListenersRequest {
   /** 过滤条件，根据通道ID进行拉取，ProxyId/GroupId/ListenerId必须设置一个，但ProxyId和GroupId不能同时设置。 */
   ProxyId?: string;
@@ -2977,6 +2985,8 @@ declare interface Gaap {
   DescribeSecurityRules(data: DescribeSecurityRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRulesResponse>;
   /** 查询TCP监听器列表 {@link DescribeTCPListenersRequest} {@link DescribeTCPListenersResponse} */
   DescribeTCPListeners(data?: DescribeTCPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTCPListenersResponse>;
+  /** 查询异步任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
+  DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 查询UDP监听器列表 {@link DescribeUDPListenersRequest} {@link DescribeUDPListenersResponse} */
   DescribeUDPListeners(data?: DescribeUDPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUDPListenersResponse>;
   /** 销毁通道 {@link DestroyProxiesRequest} {@link DestroyProxiesResponse} */

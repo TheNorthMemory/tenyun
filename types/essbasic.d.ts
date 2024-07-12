@@ -388,7 +388,7 @@ declare interface EmbedUrlOption {
 
 /** 扩展服务开通和授权的详细信息 */
 declare interface ExtentServiceAuthInfo {
-  /** 扩展服务类型AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名 */
+  /** 扩展服务类型AUTO_SIGN 企业自动签（自动签署） OVERSEA_SIGN 企业与港澳台居民签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 DOWNLOAD_FLOW 授权渠道下载合同 AGE_LIMIT_EXPANSION 拓宽签署方年龄限制HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名 */
   Type?: string;
   /** 扩展服务名称 */
   Name?: string;
@@ -2091,7 +2091,7 @@ declare interface ChannelDescribeOrganizationSealsRequest {
   InfoType?: number;
   /** 印章id，是否查询特定的印章（没有输入返回所有）注: `没有输入返回所有记录，最大返回100条。` */
   SealId?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: 公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章注: `为空时查询所有类型的印章。` */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: 公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章<**EMPLOYEE_QUALIFICATION_SEAL**: 员工执业章注: `为空时查询所有类型的印章。` */
   SealTypes?: string[];
   /** 需查询的印章状态列表。 空，()仅查询启用状态的印章； ALL，查询所有状态的印章； CHECKING，查询待审核的印章； SUCCESS，查询启用状态的印章； FAIL，查询印章审核拒绝的印章； DISABLE，查询已停用的印章； STOPPED，查询已终止的印章； VOID，查询已作废的印章； INVALID，查询已失效的印章。 */
   SealStatuses?: string[];
@@ -2357,7 +2357,7 @@ declare interface CreateChannelOrganizationInfoChangeUrlResponse {
 declare interface CreateConsoleLoginUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId注:`1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 ``2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。 ``3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 ` */
   Agent: Agent;
-  /** 第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。在测试环境联调的过程中，企业名称请使用以下名称 **子客测试专用企业1 - 子客测试专用企业9**注: `1. 如果名称中包含英文括号()，请使用中文括号（）代替。` `2、该名称需要与Agent.ProxyOrganizationOpenId相匹配, 企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 ` */
+  /** 第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。在测试环境联调的过程中，企业名称请统一加上“测试”二字，如：典子谦示例企业测试，否则将无法审核通过。企业名称请使用以下名称, 以下名称可以不用走收录。**子客测试专用企业1 - 子客测试专用企业9**注: `1. 如果名称中包含英文括号()，请使用中文括号（）代替。` `2、该名称需要与Agent.ProxyOrganizationOpenId相匹配, 企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 ` */
   ProxyOrganizationName: string;
   /** 子客企业统一社会信用代码，最大长度200个字符注意：`如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效`。 */
   UniformSocialCreditCode?: string;
@@ -2394,6 +2394,20 @@ declare interface CreateConsoleLoginUrlResponse {
   IsActivated?: boolean;
   /** 当前经办人是否已认证并加入功能 **true** : 已经认证加入公司 **false** : 还未认证加入公司注意：**员工是否实名是根据Agent.ProxyOperator.OpenId判断，非经办人姓名** */
   ProxyOperatorIsVerified?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateEmployeeQualificationSealQrCodeRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 提示信息，扫码后此信息会展示给扫描用户，用来提示用户授权操作的目的 */
+  HintText?: string;
+}
+
+declare interface CreateEmployeeQualificationSealQrCodeResponse {
+  /** 二维码图片的Base64 注: `此二维码的有效时间为7天，过期后需要重新生成新的二维码图片` */
+  QrcodeBase64?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4623,6 +4637,8 @@ declare interface Essbasic {
   CreateChannelOrganizationInfoChangeUrl(data: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
+  /** 创建个人印章授权给企业使用的授权二维码 {@link CreateEmployeeQualificationSealQrCodeRequest} {@link CreateEmployeeQualificationSealQrCodeResponse} */
+  CreateEmployeeQualificationSealQrCode(data: CreateEmployeeQualificationSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeQualificationSealQrCodeResponse>;
   /** 获取签署存证证书查看二维码 {@link CreateFlowBlockchainEvidenceUrlRequest} {@link CreateFlowBlockchainEvidenceUrlResponse} */
   CreateFlowBlockchainEvidenceUrl(data: CreateFlowBlockchainEvidenceUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowBlockchainEvidenceUrlResponse>;
   /** 提交合同组签署流程审批结果 {@link CreateFlowGroupSignReviewRequest} {@link CreateFlowGroupSignReviewResponse} */

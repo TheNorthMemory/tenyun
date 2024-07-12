@@ -4577,9 +4577,9 @@ declare interface SendBatchMessagesRequest {
 
 declare interface SendBatchMessagesResponse {
   /** 消息的唯一标识 */
-  MessageId: string | null;
+  MessageId?: string | null;
   /** 错误消息，返回为 ""，代表没有错误 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

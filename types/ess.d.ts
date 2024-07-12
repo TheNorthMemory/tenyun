@@ -1632,6 +1632,22 @@ declare interface CreateEmbedWebUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateEmployeeQualificationSealQrCodeRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 提示信息，扫码后此信息会展示给扫描用户，用来提示用户授权操作的目的 */
+  HintText?: string;
+}
+
+declare interface CreateEmployeeQualificationSealQrCodeResponse {
+  /** 二维码图片的Base64 注: `此二维码的有效时间为7天，过期后需要重新生成新的二维码图片` */
+  QrcodeBase64?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExtendedServiceAuthInfosRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -1697,7 +1713,7 @@ declare interface CreateFlowBlockchainEvidenceUrlResponse {
 declare interface CreateFlowByFilesRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
+  /** 合同流程的名称（可自定义此名称），长度不能超过200个字符，只能由中文、字母、数字、中划线和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
   FlowName: string;
   /** 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的ApproverInfo结构体。如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序，请确保列表中参与人的顺序符合实际签署顺序。 */
   Approvers: ApproverInfo[];
@@ -1707,7 +1723,7 @@ declare interface CreateFlowByFilesRequest {
   FlowDescription?: string;
   /** 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。如果用户已经在控制台创建了自定义合同类型，可以将这里的类型名称传入。 如果没有创建，我们会自动给发起方公司创建此自定义合同类型。![image](https://qcloudimg.tencent-cloud.cn/raw/36582cea03ae6a2559894844942b5d5c.png) */
   FlowType?: string;
-  /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体 单行文本控件 多行文本控件 勾选框控件 数字控件 图片控件 动态表格等填写控件 */
+  /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体 单行文本控件 多行文本控件 勾选框控件 数字控件 图片控件 水印控件 动态表格等填写控件 */
   Components?: Component[];
   /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。 */
   CcInfos?: CcInfo[];
@@ -2801,7 +2817,7 @@ declare interface DescribeExtendedServiceAuthDetailResponse {
 declare interface DescribeExtendedServiceAuthInfosRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 要查询的扩展服务类型。默认为空，即查询当前支持的所有扩展服务信息。若需查询单个扩展服务的开通情况，请传递相应的值，如下所示：OPEN_SERVER_SIGN：企业自动签署BATCH_SIGN：批量签署OVERSEA_SIGN：企业与港澳台居民签署合同AGE_LIMIT_EXPANSION：拓宽签署方年龄限制MOBILE_CHECK_APPROVER：个人签署方仅校验手机号HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方HIDE_ONE_KEY_SIGN：个人签署方手动签字PAGING_SEAL：骑缝章ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导 */
+  /** 要查询的扩展服务类型。默认为空，即查询当前支持的所有扩展服务信息。若需查询单个扩展服务的开通情况，请传递相应的值，如下所示：OPEN_SERVER_SIGN：企业自动签署AUTO_SIGN_CAN_FILL_IN：本企业自动签合同支持签前内容补充BATCH_SIGN：批量签署OVERSEA_SIGN：企业与港澳台居民签署合同AGE_LIMIT_EXPANSION：拓宽签署方年龄限制MOBILE_CHECK_APPROVER：个人签署方仅校验手机号HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方HIDE_ONE_KEY_SIGN：个人签署方手动签字ORGANIZATION_FLOW_EMAIL_NOTIFY：邮件通知签署方FLOW_APPROVAL：合同审批强制开启ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导 */
   ExtendServiceType?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -3073,7 +3089,7 @@ declare interface DescribeOrganizationSealsRequest {
   InfoType?: number;
   /** 印章id，是否查询特定的印章（没有输入返回所有） */
   SealId?: string;
-  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； ORGANIZATION_SEAL：企业印章（通过图片上传创建）； LEGAL_PERSON_SEAL：法定代表人章。 */
+  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； ORGANIZATION_SEAL：企业印章（通过图片上传创建）； LEGAL_PERSON_SEAL：法定代表人章。 EMPLOYEE_QUALIFICATION_SEAL：员工执业章。 */
   SealTypes?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -3247,7 +3263,7 @@ declare interface ModifyApplicationCallbackInfoResponse {
 declare interface ModifyExtendedServiceRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 要管理的拓展服务类型。OPEN_SERVER_SIGN：企业自动签署OVERSEA_SIGN：企业与港澳台居民签署合同AGE_LIMIT_EXPANSION：拓宽签署方年龄限制MOBILE_CHECK_APPROVER：个人签署方仅校验手机号HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方HIDE_ONE_KEY_SIGN：个人签署方手动签字PAGING_SEAL：骑缝章ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导 */
+  /** 要管理的拓展服务类型。OPEN_SERVER_SIGN：企业自动签署AUTO_SIGN_CAN_FILL_IN：本企业自动签合同支持签前内容补充OVERSEA_SIGN：企业与港澳台居民签署合同AGE_LIMIT_EXPANSION：拓宽签署方年龄限制MOBILE_CHECK_APPROVER：个人签署方仅校验手机号HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方HIDE_ONE_KEY_SIGN：个人签署方手动签字ORGANIZATION_FLOW_EMAIL_NOTIFY：邮件通知签署方FLOW_APPROVAL：合同审批强制开启ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导 */
   ServiceType: string;
   /** 操作类型OPEN : 开通CLOSE : 关闭 */
   Operate: string;
@@ -3483,6 +3499,8 @@ declare interface Ess {
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
   /** 获取其他可嵌入web页面 {@link CreateEmbedWebUrlRequest} {@link CreateEmbedWebUrlResponse} */
   CreateEmbedWebUrl(data: CreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedWebUrlResponse>;
+  /** 创建个人印章授权给企业使用的授权二维码 {@link CreateEmployeeQualificationSealQrCodeRequest} {@link CreateEmployeeQualificationSealQrCodeResponse} */
+  CreateEmployeeQualificationSealQrCode(data: CreateEmployeeQualificationSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeQualificationSealQrCodeResponse>;
   /** 创建企业扩展服务授权 {@link CreateExtendedServiceAuthInfosRequest} {@link CreateExtendedServiceAuthInfosResponse} */
   CreateExtendedServiceAuthInfos(data: CreateExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtendedServiceAuthInfosResponse>;
   /** 模板发起合同-创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
