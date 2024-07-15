@@ -2225,7 +2225,7 @@ declare interface CloseClusterPasswordComplexityRequest {
 
 declare interface CloseClusterPasswordComplexityResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4123,7 +4123,7 @@ declare interface ModifyClusterPasswordComplexityRequest {
 
 declare interface ModifyClusterPasswordComplexityResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

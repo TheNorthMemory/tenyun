@@ -4,7 +4,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 修改实例节点详情 */
 declare interface AddNodeList {
-  /** 需要删除的节点角色。- SECONDARY：Mongod 节点。- READONLY：只读节点。- MONGOS：Mongos 节点。 */
+  /** 需要新增的节点角色。- SECONDARY：Mongod 节点。- READONLY：只读节点。- MONGOS：Mongos 节点。 */
   Role: string;
   /** 节点所对应的可用区。- 单可用区，所有节点在同一可用区。- 多可用区：当前标准规格是三可用区分布，主从节点不在同一可用区，需注意配置新增节点对应的可用区，且新增后必须满足任意2个可用区节点数大于第3个可用区原则。 */
   Zone: string;
@@ -424,7 +424,7 @@ declare interface Operation {
 
 /** 修改实例节点详情 */
 declare interface RemoveNodeList {
-  /** 需要删除的节点角色。- SECONDARY：Mongod 节点。- READONLY：只读节点。- MONGOS：Mongos 节点。 */
+  /** 需要删除的节点角色。- SECONDARY：Mongod 从节点。- READONLY：只读节点。- MONGOS：Mongos 节点。 */
   Role: string;
   /** 要删除的节点 ID。分片集群须指定一组分片要删除的节点名称即可，其余分片对改组对齐。- 获取方式：登录 [MongoDB控制台](https://console.cloud.tencent.com/)，在**节点管理**页签，可获取**节点 ID**。- 特别说明：分片集群同一节点上的分片，仅需指定0分片节点 ID 即可。例如：cmgo-6hfk****_0-node-primary。 */
   NodeName: string;
@@ -1329,21 +1329,23 @@ declare interface ModifyDBInstanceSecurityGroupResponse {
 declare interface ModifyDBInstanceSpecRequest {
   /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 实例配置变更后的内存大小。- 单位：GB。- 内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。 */
+  /** 实例配置变更后的内存大小。- 单位：GB。- 内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。注意：节点变更时，输入实例当前的内存配置。 */
   Memory: number;
-  /** 实例配置变更后的硬盘大小，单位：GB。内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。降配时，变更后的磁盘容量必须大于已用磁盘容量的1.2倍。 */
+  /** 实例配置变更后的硬盘大小，单位：GB。内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。降配时，变更后的磁盘容量必须大于已用磁盘容量的1.2倍。 注意：节点变更时，输入实例当前的硬盘配置。 */
   Volume: number;
   /** (已废弃) 请使用ResizeOplog独立接口完成。实例配置变更后 Oplog 的大小。- 单位：GB。- 默认 Oplog 占用容量为磁盘空间的10%。系统允许设置的 Oplog 容量范围为磁盘空间的[10%,90%]。 */
   OplogSize?: number;
-  /** 实例变更后的节点数(mongod节点或mongos节点或readonly节点调整后的节点数，具体类型取决于AddNodeList或RemoveNodeList参数的节点类型)。副本集：取值范围请通过云数据库的售卖规格（DescribeSpecInfo）接口返回的参数 MinNodeNum 与 MaxNodeNum 获取。分片集群：取值范围请通过云数据库的售卖规格（DescribeSpecInfo）接口返回的参数 MinReplicateSetNodeNum 与 MaxReplicateSetNodeNum 获取。 */
+  /** 实例变更后的节点数。- 变更节点类型包含：mongod节点 或 readonly 节点，mongos节点变更无需填写。变更节点类型，请查询参数**AddNodeList**或**RemoveNodeList**指定的类型。- 副本集节点数：取值范围请通过云数据库的售卖规格 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinNodeNum**与 **MaxNodeNum**获取。- 分片集群每个分片节点数：取值范围请通过云数据库的售卖规格 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinReplicateSetNodeNum**与**MaxReplicateSetNodeNum**获取。 */
   NodeNum?: number;
-  /** 实例变更后的分片数。取值范围请通过云数据库的售卖规格（DescribeSpecInfo）接口返回的参数MinReplicateSetNum与MaxReplicateSetNum获取。该参数只能增加不能减少。 */
+  /** 实例变更后的分片数。取值范围请通过云数据库的售卖规格 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinReplicateSetNum**与**MaxReplicateSetNum**获取。该参数只能增加不能减少。 */
   ReplicateSetNum?: number;
-  /** 实例配置变更的切换时间。0：调整完成时，立即执行变配任务。默认为0。1：在维护时间窗内，执行变配任务。说明：调整节点数和分片数不支持在维护时间窗内变更。 */
+  /** 实例配置变更的切换时间。- 0：调整完成时，立即执行变配任务。默认为0。- 1：在维护时间窗内，执行变配任务。**说明**：调整节点数和分片数不支持在维护时间窗内变更。 */
   InMaintenance?: number;
-  /** 新增节点属性列表。 */
+  /** 分片实例配置变更后的mongos内存大小。- 单位：GB。 */
+  MongosMemory?: string;
+  /** 新增节点列表，节点类型及可用区信息。 */
   AddNodeList?: AddNodeList[];
-  /** 删除节点属性列表。 */
+  /** 删除节点列表，注意：基于分片实例各片节点的一致性原则，删除分片实例节点时，只需指定0分片对应的节点即可，如：cmgo-9nl1czif_0-node-readonly0 将删除每个分片的第1个只读节点。 */
   RemoveNodeList?: RemoveNodeList[];
 }
 

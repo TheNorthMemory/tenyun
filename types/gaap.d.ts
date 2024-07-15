@@ -2277,6 +2277,8 @@ declare interface DescribeTCPListenersResponse {
 }
 
 declare interface DescribeTaskStatusRequest {
+  /** 任务ID，值为异步接口返回的RequestId */
+  TaskId?: string;
 }
 
 declare interface DescribeTaskStatusResponse {

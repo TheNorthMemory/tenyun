@@ -86,6 +86,14 @@ declare interface BindProductInfo {
   ProductOwnerName: string | null;
 }
 
+/** 标签数据结构 */
+declare interface CamTag {
+  /** 标签键 */
+  TagKey?: string | null;
+  /** 标签值 */
+  TagValue?: string | null;
+}
+
 /** 云存 AI 服务任务信息 */
 declare interface CloudStorageAIServiceTask {
   /** 云存 AI 服务任务 ID */
@@ -360,6 +368,14 @@ declare interface FenceEventItem {
   AlertType: string;
   /** 围栏事件的设备位置信息 */
   Data: FenceAlarmPoint;
+}
+
+/** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
+declare interface Filter {
+  /** 需要过滤的字段 */
+  Name: string;
+  /** 字段的过滤的一个或多个值 */
+  Values?: string[];
 }
 
 /** 设备固件详细信息 */
@@ -2361,7 +2377,9 @@ declare interface DescribeTopicRuleRequest {
 
 declare interface DescribeTopicRuleResponse {
   /** 规则描述。 */
-  Rule: TopicRule | null;
+  Rule?: TopicRule | null;
+  /** 规则绑定的标签 */
+  CamTag?: CamTag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2533,6 +2551,8 @@ declare interface GetDeviceListRequest {
   DeviceName?: string;
   /** 项目ID。产品 ID 为 -1 时，该参数必填 */
   ProjectId?: string;
+  /** 每次请求的Filters的上限为10，Filter.Values的上限为1。 */
+  Filters?: Filter[];
 }
 
 declare interface GetDeviceListResponse {
@@ -3255,6 +3275,8 @@ declare interface SearchStudioProductRequest {
   DevStatus?: string;
   /** 产品ID */
   ProductId?: string;
+  /** 每次请求的Filters的上限为10，Filter.Values的上限为1。 */
+  Filters?: Filter[];
 }
 
 declare interface SearchStudioProductResponse {

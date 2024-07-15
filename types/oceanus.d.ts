@@ -1113,6 +1113,8 @@ declare interface CreateJobConfigRequest {
   EsServerlessIndex?: string;
   /** es索引空间 */
   EsServerlessSpace?: string;
+  /** flink版本 */
+  FlinkVersion?: string;
 }
 
 declare interface CreateJobConfigResponse {

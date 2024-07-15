@@ -5971,7 +5971,7 @@ declare interface DescribeStreamLinkActivateStateRequest {
 
 declare interface DescribeStreamLinkActivateStateResponse {
   /** 用户已激活为0，否则为非0。 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6015,15 +6015,15 @@ declare interface DescribeStreamLinkEventsRequest {
 
 declare interface DescribeStreamLinkEventsResponse {
   /** 媒体传输事件的配置信息列表。 */
-  Infos: DescribeEvent[];
+  Infos?: DescribeEvent[];
   /** 当前页数。 */
-  PageNum: number;
+  PageNum?: number;
   /** 每页大小。 */
-  PageSize: number;
+  PageSize?: number;
   /** 总数量。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 总页数。 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
