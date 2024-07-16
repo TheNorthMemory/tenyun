@@ -1525,6 +1525,8 @@ declare interface CreateLoadBalancerRequest {
   DynamicVip?: boolean;
   /** 网络出口 */
   Egress?: string;
+  /** 负载均衡实例的预付费相关属性 */
+  LBChargePrepaid?: LBChargePrepaid;
 }
 
 declare interface CreateLoadBalancerResponse {

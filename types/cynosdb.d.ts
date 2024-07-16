@@ -4491,7 +4491,7 @@ declare interface PauseServerlessRequest {
 
 declare interface PauseServerlessResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

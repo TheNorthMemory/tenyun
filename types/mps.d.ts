@@ -4912,7 +4912,7 @@ declare interface VideoEnhanceConfig {
 declare interface VideoTemplateInfo {
   /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec: string;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 注意：自适应码率时取值范围是 [0, 60] */
+  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
   Fps: number;
   /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate: number;
@@ -5209,7 +5209,7 @@ declare interface CreateAnimatedGraphicsTemplateRequest {
 
 declare interface CreateAnimatedGraphicsTemplateResponse {
   /** 转动图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5233,7 +5233,7 @@ declare interface CreateContentReviewTemplateRequest {
 
 declare interface CreateContentReviewTemplateResponse {
   /** 内容审核模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5265,7 +5265,7 @@ declare interface CreateImageSpriteTemplateRequest {
 
 declare interface CreateImageSpriteTemplateResponse {
   /** 雪碧图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5331,7 +5331,7 @@ declare interface CreateSampleSnapshotTemplateRequest {
 
 declare interface CreateSampleSnapshotTemplateResponse {
   /** 采样截图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6421,7 +6421,7 @@ declare interface ExecuteFunctionRequest {
 
 declare interface ExecuteFunctionResponse {
   /** 处理结果打包后的字符串，具体与后台一同协调。 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6815,7 +6815,7 @@ declare interface ModifyWatermarkTemplateRequest {
 
 declare interface ModifyWatermarkTemplateResponse {
   /** 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有效。 */
-  ImageUrl: string;
+  ImageUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6985,7 +6985,7 @@ declare interface ResetWorkflowRequest {
   Trigger: WorkflowTrigger;
   /** 视频处理的文件输出配置。不填则继承 Trigger 中的存储位置。 */
   OutputStorage?: TaskOutputStorage;
-  /** 视频处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致，即`{inputDir}`。 */
+  /** 视频处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致，即`{inputDir}`。 */
   OutputDir?: string;
   /** 视频处理类型任务参数。 */
   MediaProcessTask?: MediaProcessTaskInput;
@@ -7037,7 +7037,7 @@ declare interface WithdrawsWatermarkRequest {
 
 declare interface WithdrawsWatermarkResponse {
   /** 任务 ID，可以通过该 ID 查询任务状态和结果。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -50,6 +50,7 @@ import Cds, { Versions as CdsVersions } from "./cds";
 import Cdwch, { Versions as CdwchVersions } from "./cdwch";
 import Cdwdoris, { Versions as CdwdorisVersions } from "./cdwdoris";
 import Cdwpg, { Versions as CdwpgVersions } from "./cdwpg";
+import Cdz, { Versions as CdzVersions } from "./cdz";
 import Cfg, { Versions as CfgVersions } from "./cfg";
 import Cfs, { Versions as CfsVersions } from "./cfs";
 import Cfw, { Versions as CfwVersions } from "./cfw";
@@ -305,6 +306,7 @@ export declare type SERVICE_VERSIONS = {
   cdwch: CdwchVersions,
   cdwdoris: CdwdorisVersions,
   cdwpg: CdwpgVersions,
+  cdz: CdzVersions,
   cfg: CfgVersions,
   cfs: CfsVersions,
   cfw: CfwVersions,
@@ -624,6 +626,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   cdwdoris: Cdwdoris,
   /** {@link Cdwpg 云数据仓库 PostgreSQL} */
   cdwpg: Cdwpg,
+  /** {@link Cdz 专属可用区} */
+  cdz: Cdz,
   /** {@link Cfg 混沌演练平台} */
   cfg: Cfg,
   /** {@link Cfs 文件存储} */

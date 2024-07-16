@@ -352,6 +352,16 @@ declare interface CcnBandwidthInfo {
   TagSet?: Tag[] | null;
 }
 
+/** 云联网路由表信息 */
+declare interface CcnBatchRouteTable {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 云联网路由表名称。 */
+  Name: string;
+  /** 云联网路由表描述。 */
+  Description: string;
+}
+
 /** 云联网限速实例锁对象，该对象特用于运营端使用，用于封禁实例流量。 */
 declare interface CcnFlowLock {
   /** 带宽所属的云联网ID。 */
@@ -378,6 +388,14 @@ declare interface CcnInstance {
 
 /** 云联网实例对象，该对象特用于运营端使用，不建议给租户的接口中提供该复杂类型。 */
 declare interface CcnInstanceInfo {
+}
+
+/** ccn实例信息（不带地域属性） */
+declare interface CcnInstanceWithoutRegion {
+  /** 云联网支持的实例类型：`VPC``DIRECTCONNECT``BMVPC` `EDGE``EDGE_TUNNEL``EDGE_VPNGW``VPNGW` */
+  InstanceType: string;
+  /** 实例ID。 */
+  InstanceId: string;
 }
 
 /** 云联网（CCN）地域出带宽上限 */
@@ -432,6 +450,88 @@ declare interface CcnRoute {
   RoutePriority: number;
   /** 下一跳扩展名称（关联实例的扩展名称） */
   InstanceExtraName: string;
+}
+
+/** 云联网路由传播策略之路由条件 */
+declare interface CcnRouteBroadcastPolicyRouteCondition {
+  /** 条件类型 */
+  Name: string;
+  /** 条件值列表 */
+  Values: string[];
+  /** 匹配模式，`1` 精确匹配，`0` 模糊匹配 */
+  MatchPattern: number;
+}
+
+/** 云联网路由表信息 */
+declare interface CcnRouteTable {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 云联网路由表ID。 */
+  CcnRouteTableId: string;
+  /** 云联网路由表名称。 */
+  RouteTableName: string;
+  /** 云联网路由表描述。 */
+  RouteTableDescription: string;
+  /** True：是默认路由表 False：非默认路由表。 */
+  IsDefaultTable: boolean;
+  /** 创建时间。 */
+  CreateTime: string;
+}
+
+/** 云联网路由传播策略 */
+declare interface CcnRouteTableBroadcastPolicy {
+  /** 路由条件 */
+  RouteConditions: CcnRouteBroadcastPolicyRouteCondition[];
+  /** 传播条件 */
+  BroadcastConditions: CcnRouteBroadcastPolicyRouteCondition[];
+  /** 路由行为，`accept` 允许，`drop` 拒绝 */
+  Action: string;
+  /** 策略描述 */
+  Description: string;
+}
+
+/** 云联网路由传播策略列表 */
+declare interface CcnRouteTableBroadcastPolicys {
+  /** 策略列表 */
+  Policys: CcnRouteTableBroadcastPolicy[];
+  /** 版本号 */
+  PolicyVersion: number;
+  /** 创建时间 */
+  CreateTime: string;
+}
+
+/** 云联网路由接收策略 */
+declare interface CcnRouteTableInputPolicy {
+  /** 路由条件。 */
+  RouteConditions: CcnRouteBroadcastPolicyRouteCondition[];
+  /** 路由行为，`accept` 允许，`drop` 拒绝。 */
+  Action: string;
+  /** 策略描述。 */
+  Description: string;
+}
+
+/** 云联网路由接收策略列表 */
+declare interface CcnRouteTableInputPolicys {
+  /** 策略列表。 */
+  Policys?: CcnRouteTableInputPolicy[] | null;
+  /** 版本号。 */
+  PolicyVersion?: number | null;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+}
+
+/** 路由表选择策略信息 */
+declare interface CcnRouteTableSelectPolicy {
+  /** 实例类型：私有网络: `VPC`专线网关: `DIRECTCONNECT`黑石私有网络: `BMVPC`EDGE设备: `EDGE`EDGE隧道: `EDGE_TUNNEL`EDGE网关: `EDGE_VPNGW`VPN网关：`VPNGW` */
+  InstanceType: string;
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 源端CIDR。 */
+  SourceCidrBlock: string;
+  /** 路由表ID。 */
+  RouteTableId: string | null;
+  /** 路由表备注。 */
+  Description?: string;
 }
 
 /** 用于发布云联网的cidr信息 */
@@ -968,6 +1068,28 @@ declare interface IPSECOptionsSpecification {
   IntegrityAlgorithm?: string | null;
 }
 
+/** 云联网实例绑定路由表信息 */
+declare interface InstanceBind {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 实例类型：VPC，DIRECTCONNECT，BMVPC，EDGE，EDGE_TUNNEL，EDGE_VPNGW，VPNGW。 */
+  InstanceType: string;
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 实例绑定路由表的时间。 */
+  InstanceBindTime: string;
+  /** 路由表ID。 */
+  RouteTableId: string;
+  /** 实例名称。 */
+  InstanceName: string;
+  /** 实例所在地域。 */
+  InstanceRegion: string[];
+  /** 实例所属的账户uin。 */
+  InstanceUin: string;
+  /** 关联实例状态：`PENDING`：申请中`ACTIVE`：已连接`EXPIRED`：已过期`REJECTED`：已拒绝`DELETED`：已删除`FAILED`：失败的（2小时后将异步强制解关联）`ATTACHING`：关联中`DETACHING`：解关联中`DETACHFAILED`：解关联失败（2小时后将异步强制解关联） */
+  State: string;
+}
+
 /** 预付费（包年包月）计费对象。 */
 declare interface InstanceChargePrepaid {
   /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36。 */
@@ -1167,6 +1289,16 @@ declare interface MemberInfo {
   /** 模板对象成员 */
   Member: string;
   /** 模板对象成员描述信息 */
+  Description?: string;
+}
+
+/** 云联网路由表信息 */
+declare interface ModifyRouteTableInfo {
+  /** 云联网路由表id。 */
+  RouteTableId: string;
+  /** 云联网路由表名称。 */
+  Name?: string | null;
+  /** 云联网路由表描述。 */
   Description?: string;
 }
 
@@ -1782,6 +1914,28 @@ declare interface RouteConflict {
   DestinationCidrBlock: string;
   /** 冲突的路由策略列表 */
   ConflictSet: Route[];
+}
+
+/** 路由表选择策略信息 */
+declare interface RouteSelectionPolicy {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 路由表ID。 */
+  RouteTableId: string;
+  /** 路由表名称。 */
+  RouteTableName: string;
+  /** 实例类型。如VPC */
+  InstanceType: string;
+  /** 实例名称。 */
+  InstanceName: string;
+  /** 源端cidr。 */
+  SourceCidrBlock: string;
+  /** 路由表描述。 */
+  Description: string | null;
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 关联实例所属UIN（根账号）。 */
+  InstanceUin: string;
 }
 
 /** 路由表对象 */
@@ -2798,6 +2952,20 @@ declare interface AssociateDirectConnectGatewayNatGatewayResponse {
   RequestId?: string;
 }
 
+declare interface AssociateInstancesToCcnRouteTableRequest {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 路由表ID。 */
+  RouteTableId: string;
+  /** 实例列表。 */
+  Instances: CcnInstanceWithoutRegion[];
+}
+
+declare interface AssociateInstancesToCcnRouteTableResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssociateNatGatewayAddressRequest {
   /** NAT网关的ID，形如：`nat-df45454`。 */
   NatGatewayId: string;
@@ -2964,6 +3132,16 @@ declare interface CheckNetDetectStateResponse {
   RequestId?: string;
 }
 
+declare interface ClearRouteTableSelectionPoliciesRequest {
+  /** 云联网ID。 */
+  CcnId: string;
+}
+
+declare interface ClearRouteTableSelectionPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloneSecurityGroupRequest {
   /** 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。 */
   SecurityGroupId: string;
@@ -3110,6 +3288,18 @@ declare interface CreateCcnRequest {
 declare interface CreateCcnResponse {
   /** 云联网（CCN）对象。 */
   Ccn?: CCN;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCcnRouteTablesRequest {
+  /** 需要创建的路由表列表。 */
+  RouteTable: CcnBatchRouteTable[];
+}
+
+declare interface CreateCcnRouteTablesResponse {
+  /** 路由表信息列表。 */
+  CcnRouteTableSet?: CcnRouteTable[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4012,6 +4202,16 @@ declare interface DeleteCcnResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCcnRouteTablesRequest {
+  /** 需要删除的路由表列表。 */
+  RouteTableId: string[];
+}
+
+declare interface DeleteCcnRouteTablesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCustomerGatewayRequest {
   /** 对端网关ID，例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/api/215/17516)接口查询对端网关。 */
   CustomerGatewayId: string;
@@ -4660,6 +4860,60 @@ declare interface DescribeCcnRegionBandwidthLimitsRequest {
 declare interface DescribeCcnRegionBandwidthLimitsResponse {
   /** 云联网（CCN）各地域出带宽上限 */
   CcnRegionBandwidthLimitSet?: CcnRegionBandwidthLimit[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCcnRouteTableBroadcastPolicysRequest {
+  /** 云联网ID */
+  CcnId: string;
+  /** 云联网路由表ID */
+  RouteTableId: string;
+  /** 路由传播策略版本号 */
+  PolicyVersion?: number;
+}
+
+declare interface DescribeCcnRouteTableBroadcastPolicysResponse {
+  /** 路由表传播策略。 */
+  PolicySet: CcnRouteTableBroadcastPolicys[];
+  /** 符合条件的对象数。 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCcnRouteTableInputPolicysRequest {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 云联网路由表ID。 */
+  RouteTableId: string;
+  /** 路由接收策略版本号。 */
+  PolicyVersion?: number;
+}
+
+declare interface DescribeCcnRouteTableInputPolicysResponse {
+  /** 路由表接收策略。 */
+  PolicySet?: CcnRouteTableInputPolicys[];
+  /** 符合条件的对象数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCcnRouteTablesRequest {
+  /** 过滤条件：ccn-id - String -（过滤条件）CCN实例ID。route-table-id - String -（过滤条件）路由表ID。route-table-name - String -（过滤条件）路由表名称。route-table-description- String -（过滤条件）路由表备注。 */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 一次查询最大返回的数量。 */
+  Limit?: number;
+}
+
+declare interface DescribeCcnRouteTablesResponse {
+  /** 路由表信息列表。 */
+  CcnRouteTableSet: CcnRouteTable[];
+  /** 查询到的路由表数量。 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5494,6 +5748,42 @@ declare interface DescribeRouteConflictsRequest {
 declare interface DescribeRouteConflictsResponse {
   /** 路由策略冲突列表。 */
   RouteConflictSet?: RouteConflict[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRouteTableAssociatedInstancesRequest {
+  /** 过滤条件：ccn-id - String -（过滤条件）CCN实例ID。ccn-route-table-id - String -（过滤条件）路由表ID。instance-type - String -（过滤条件）实例类型：私有网络: `VPC`专线网关: `DIRECTCONNECT`黑石私有网络: `BMVPC`EDGE设备: `EDGE`EDGE隧道: `EDGE_TUNNEL`EDGE网关: `EDGE_VPNGW`VPN网关：`VPNGW`instance-id- String -（过滤条件）实例ID。 */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 一次查询最大返回的数量。 */
+  Limit?: number;
+}
+
+declare interface DescribeRouteTableAssociatedInstancesResponse {
+  /** 查询到的绑定路由表的实例数量。 */
+  TotalCount?: number;
+  /** 绑定信息。 */
+  InstanceBindSet?: InstanceBind[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRouteTableSelectionPoliciesRequest {
+  /** 偏移量 */
+  Offset?: number;
+  /** 返回数量 */
+  Limit?: number;
+  /** 过滤条件：ccn-id - String -（过滤条件）CCN实例ID。instance-type - String -（过滤条件）关联实例类型:私有网络: `VPC`专线网关: `DIRECTCONNECT`黑石私有网络: `BMVPC`EDGE设备: `EDGE`EDGE隧道: `EDGE_TUNNEL`EDGE网关: `EDGE_VPNGW`VPN网关：`VPNGW`ccn-route-table-id - String -（过滤条件）路由表ID。instance-id - String -（过滤条件）关联的实例ID。route-table-name - String -（过滤条件）路由表名称。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRouteTableSelectionPoliciesResponse {
+  /** 符合条件的对象数。 */
+  TotalCount?: number;
+  /** 路由表选择策略信息集合。 */
+  RouteSelectionPolicySet?: RouteSelectionPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6840,6 +7130,16 @@ declare interface ModifyCcnRegionBandwidthLimitsTypeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCcnRouteTablesRequest {
+  /** 需要修改的路由表列表。 */
+  RouteTableInfo: ModifyRouteTableInfo[];
+}
+
+declare interface ModifyCcnRouteTablesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomerGatewayAttributeRequest {
   /** 对端网关ID，例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/api/215/17516)接口查询对端网关。 */
   CustomerGatewayId: string;
@@ -7212,6 +7512,18 @@ declare interface ModifyRouteTableAttributeRequest {
 }
 
 declare interface ModifyRouteTableAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRouteTableSelectionPoliciesRequest {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 选择策略信息集合，表示需要按照当前的策略来修改。 */
+  SelectionPolicies: CcnRouteTableSelectPolicy[];
+}
+
+declare interface ModifyRouteTableSelectionPoliciesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7644,6 +7956,34 @@ declare interface RenewVpnGatewayResponse {
   RequestId?: string;
 }
 
+declare interface ReplaceCcnRouteTableBroadcastPolicysRequest {
+  /** 云联网ID */
+  CcnId: string;
+  /** 云联网路由表ID */
+  RouteTableId: string;
+  /** 新的路由传播策略 */
+  Policys: CcnRouteTableBroadcastPolicy[];
+}
+
+declare interface ReplaceCcnRouteTableBroadcastPolicysResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReplaceCcnRouteTableInputPolicysRequest {
+  /** 云联网ID。 */
+  CcnId: string;
+  /** 云联网路由表ID。 */
+  RouteTableId: string;
+  /** 新的路由接收策略。 */
+  Policys?: CcnRouteTableInputPolicy[];
+}
+
+declare interface ReplaceCcnRouteTableInputPolicysResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReplaceDirectConnectGatewayCcnRoutesRequest {
   /** 专线网关ID，形如：dcg-prpqlmg1 */
   DirectConnectGatewayId: string;
@@ -7955,6 +8295,8 @@ declare interface Vpc {
   AssociateDhcpIpWithAddressIp(data: AssociateDhcpIpWithAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDhcpIpWithAddressIpResponse>;
   /** 专线网关绑定NAT网关 {@link AssociateDirectConnectGatewayNatGatewayRequest} {@link AssociateDirectConnectGatewayNatGatewayResponse} */
   AssociateDirectConnectGatewayNatGateway(data: AssociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDirectConnectGatewayNatGatewayResponse>;
+  /** 关联云联网实例到指定的云联网路由表 {@link AssociateInstancesToCcnRouteTableRequest} {@link AssociateInstancesToCcnRouteTableResponse} */
+  AssociateInstancesToCcnRouteTable(data: AssociateInstancesToCcnRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateInstancesToCcnRouteTableResponse>;
   /** NAT网关绑定弹性IP {@link AssociateNatGatewayAddressRequest} {@link AssociateNatGatewayAddressResponse} */
   AssociateNatGatewayAddress(data: AssociateNatGatewayAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateNatGatewayAddressResponse>;
   /** 网络ACL关联子网 {@link AssociateNetworkAclSubnetsRequest} {@link AssociateNetworkAclSubnetsResponse} */
@@ -7977,6 +8319,8 @@ declare interface Vpc {
   CheckDefaultSubnet(data?: CheckDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDefaultSubnetResponse>;
   /** 验证网络探测 {@link CheckNetDetectStateRequest} {@link CheckNetDetectStateResponse} */
   CheckNetDetectState(data: CheckNetDetectStateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetDetectStateResponse>;
+  /** 清空云联网路由表选择策略 {@link ClearRouteTableSelectionPoliciesRequest} {@link ClearRouteTableSelectionPoliciesResponse} */
+  ClearRouteTableSelectionPolicies(data: ClearRouteTableSelectionPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ClearRouteTableSelectionPoliciesResponse>;
   /** 克隆安全组 {@link CloneSecurityGroupRequest} {@link CloneSecurityGroupResponse} */
   CloneSecurityGroup(data: CloneSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CloneSecurityGroupResponse>;
   /** 创建IP地址模板 {@link CreateAddressTemplateRequest} {@link CreateAddressTemplateResponse} */
@@ -7991,6 +8335,8 @@ declare interface Vpc {
   CreateBandwidthPackage(data?: CreateBandwidthPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBandwidthPackageResponse>;
   /** 创建CCN {@link CreateCcnRequest} {@link CreateCcnResponse} */
   CreateCcn(data: CreateCcnRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcnResponse>;
+  /** 新建云联网路由表 {@link CreateCcnRouteTablesRequest} {@link CreateCcnRouteTablesResponse} */
+  CreateCcnRouteTables(data: CreateCcnRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcnRouteTablesResponse>;
   /** 创建对端网关 {@link CreateCustomerGatewayRequest} {@link CreateCustomerGatewayResponse} */
   CreateCustomerGateway(data: CreateCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerGatewayResponse>;
   /** 创建默认安全组 {@link CreateDefaultSecurityGroupRequest} {@link CreateDefaultSecurityGroupResponse} */
@@ -8087,6 +8433,8 @@ declare interface Vpc {
   DeleteBandwidthPackage(data: DeleteBandwidthPackageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBandwidthPackageResponse>;
   /** 删除CCN {@link DeleteCcnRequest} {@link DeleteCcnResponse} */
   DeleteCcn(data: DeleteCcnRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCcnResponse>;
+  /** 删除云联网路由表 {@link DeleteCcnRouteTablesRequest} {@link DeleteCcnRouteTablesResponse} */
+  DeleteCcnRouteTables(data: DeleteCcnRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCcnRouteTablesResponse>;
   /** 删除对端网关 {@link DeleteCustomerGatewayRequest} {@link DeleteCustomerGatewayResponse} */
   DeleteCustomerGateway(data: DeleteCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerGatewayResponse>;
   /** 删除DhcpIp {@link DeleteDhcpIpRequest} {@link DeleteDhcpIpResponse} */
@@ -8191,6 +8539,12 @@ declare interface Vpc {
   DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
   /** 查询云联网各地域出带宽上限 {@link DescribeCcnRegionBandwidthLimitsRequest} {@link DescribeCcnRegionBandwidthLimitsResponse} */
   DescribeCcnRegionBandwidthLimits(data: DescribeCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRegionBandwidthLimitsResponse>;
+  /** 查询云联网路由传播策略 {@link DescribeCcnRouteTableBroadcastPolicysRequest} {@link DescribeCcnRouteTableBroadcastPolicysResponse} */
+  DescribeCcnRouteTableBroadcastPolicys(data: DescribeCcnRouteTableBroadcastPolicysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRouteTableBroadcastPolicysResponse>;
+  /** 查询云联网路由接收策略 {@link DescribeCcnRouteTableInputPolicysRequest} {@link DescribeCcnRouteTableInputPolicysResponse} */
+  DescribeCcnRouteTableInputPolicys(data: DescribeCcnRouteTableInputPolicysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRouteTableInputPolicysResponse>;
+  /** 查询云联网路由表信息 {@link DescribeCcnRouteTablesRequest} {@link DescribeCcnRouteTablesResponse} */
+  DescribeCcnRouteTables(data?: DescribeCcnRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRouteTablesResponse>;
   /** 查询云联网路由条目 {@link DescribeCcnRoutesRequest} {@link DescribeCcnRoutesResponse} */
   DescribeCcnRoutes(data: DescribeCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRoutesResponse>;
   /** 查询CCN列表 {@link DescribeCcnsRequest} {@link DescribeCcnsResponse} */
@@ -8273,6 +8627,10 @@ declare interface Vpc {
   DescribeProductQuota(data: DescribeProductQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductQuotaResponse>;
   /** 查询路由策略冲突列表 {@link DescribeRouteConflictsRequest} {@link DescribeRouteConflictsResponse} */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
+  /** 查询实例绑定路由表信息 {@link DescribeRouteTableAssociatedInstancesRequest} {@link DescribeRouteTableAssociatedInstancesResponse} */
+  DescribeRouteTableAssociatedInstances(data?: DescribeRouteTableAssociatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTableAssociatedInstancesResponse>;
+  /** 查询云联网路由表选择策略信息 {@link DescribeRouteTableSelectionPoliciesRequest} {@link DescribeRouteTableSelectionPoliciesResponse} */
+  DescribeRouteTableSelectionPolicies(data?: DescribeRouteTableSelectionPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTableSelectionPoliciesResponse>;
   /** 查询路由表 {@link DescribeRouteTablesRequest} {@link DescribeRouteTablesResponse} */
   DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
   /** 查询安全组关联实例统计 {@link DescribeSecurityGroupAssociationStatisticsRequest} {@link DescribeSecurityGroupAssociationStatisticsResponse} */
@@ -8443,6 +8801,8 @@ declare interface Vpc {
   ModifyCcnAttribute(data: ModifyCcnAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnAttributeResponse>;
   /** 后付费产品修改带宽限速策略 {@link ModifyCcnRegionBandwidthLimitsTypeRequest} {@link ModifyCcnRegionBandwidthLimitsTypeResponse} */
   ModifyCcnRegionBandwidthLimitsType(data: ModifyCcnRegionBandwidthLimitsTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnRegionBandwidthLimitsTypeResponse>;
+  /** 修改云联网路由表 {@link ModifyCcnRouteTablesRequest} {@link ModifyCcnRouteTablesResponse} */
+  ModifyCcnRouteTables(data: ModifyCcnRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnRouteTablesResponse>;
   /** 修改对端网关 {@link ModifyCustomerGatewayAttributeRequest} {@link ModifyCustomerGatewayAttributeResponse} */
   ModifyCustomerGatewayAttribute(data: ModifyCustomerGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerGatewayAttributeResponse>;
   /** 修改DhcpIp属性 {@link ModifyDhcpIpAttributeRequest} {@link ModifyDhcpIpAttributeResponse} */
@@ -8495,6 +8855,8 @@ declare interface Vpc {
   ModifyPrivateNatGatewayTranslationNatRule(data: ModifyPrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayTranslationNatRuleResponse>;
   /** 修改路由表属性 {@link ModifyRouteTableAttributeRequest} {@link ModifyRouteTableAttributeResponse} */
   ModifyRouteTableAttribute(data: ModifyRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableAttributeResponse>;
+  /** 编辑云联网路由表选择策略 {@link ModifyRouteTableSelectionPoliciesRequest} {@link ModifyRouteTableSelectionPoliciesResponse} */
+  ModifyRouteTableSelectionPolicies(data: ModifyRouteTableSelectionPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableSelectionPoliciesResponse>;
   /** 修改安全组属性 {@link ModifySecurityGroupAttributeRequest} {@link ModifySecurityGroupAttributeResponse} */
   ModifySecurityGroupAttribute(data: ModifySecurityGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupAttributeResponse>;
   /** 修改安全组出站和入站规则 {@link ModifySecurityGroupPoliciesRequest} {@link ModifySecurityGroupPoliciesResponse} */
@@ -8551,6 +8913,10 @@ declare interface Vpc {
   RenewAddresses(data: RenewAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAddressesResponse>;
   /** 续费VPN网关 {@link RenewVpnGatewayRequest} {@link RenewVpnGatewayResponse} */
   RenewVpnGateway(data: RenewVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<RenewVpnGatewayResponse>;
+  /** 替换云联网路由传播策略 {@link ReplaceCcnRouteTableBroadcastPolicysRequest} {@link ReplaceCcnRouteTableBroadcastPolicysResponse} */
+  ReplaceCcnRouteTableBroadcastPolicys(data: ReplaceCcnRouteTableBroadcastPolicysRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCcnRouteTableBroadcastPolicysResponse>;
+  /** 替换云联网路由接收策略 {@link ReplaceCcnRouteTableInputPolicysRequest} {@link ReplaceCcnRouteTableInputPolicysResponse} */
+  ReplaceCcnRouteTableInputPolicys(data: ReplaceCcnRouteTableInputPolicysRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCcnRouteTableInputPolicysResponse>;
   /** 替换专线网关云联网路由 {@link ReplaceDirectConnectGatewayCcnRoutesRequest} {@link ReplaceDirectConnectGatewayCcnRoutesResponse} */
   ReplaceDirectConnectGatewayCcnRoutes(data: ReplaceDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceDirectConnectGatewayCcnRoutesResponse>;
   /** 替换路由表绑定关系 {@link ReplaceRouteTableAssociationRequest} {@link ReplaceRouteTableAssociationResponse} */

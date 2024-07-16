@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 251+ 款产品，11397+ 服务数</summary>
+<details><summary>共计 252+ 款产品，11414+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -137,7 +137,7 @@ cam | [访问管理](https://cloud.tencent.com/document/product/598) | 2019-01-1
 captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07-22(18) |
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(6) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(12) |
-cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(41) |
+cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(42) |
 ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(58) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(168) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(21) |
@@ -146,6 +146,7 @@ cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/pro
 cdwch | [腾讯云数据仓库TCHouse-C](https://cloud.tencent.com/document/product/1299) | 2020-09-15(27) |
 cdwdoris | [腾讯云数据仓库 TCHouse-D](https://cloud.tencent.com/document/product/1387) | 2021-12-28(17) |
 cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(8) |
+cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-11-23(2) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(12) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(43) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(113) |
@@ -211,7 +212,7 @@ habo |  | 2018-12-03(2) |
 hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(11) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
-hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(5) |
+hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(6) |
 iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(35) | 2018-03-01(33) |
 ic | [图片瘦身](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
 icr | [对话机器人](https://cloud.tencent.com/document/product/1268) | 2021-10-14(1) |
@@ -338,7 +339,7 @@ vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(177) |
-vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(335) |
+vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(348) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(7) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(141) |

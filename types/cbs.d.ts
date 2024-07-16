@@ -800,6 +800,22 @@ declare interface DescribeInstancesDiskNumResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSnapshotOverviewRequest {
+}
+
+declare interface DescribeSnapshotOverviewResponse {
+  /** 当前总有效快照数量 */
+  TotalNums?: number;
+  /** 已使用快照总容量大小，容量单位为GiB */
+  TotalSize?: number;
+  /** 快照免费额度大小，额度单位为GiB */
+  FreeQuota?: number;
+  /** 快照真实产生计费的总容量大小，单位为GiB */
+  RealTradeSize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSnapshotSharePermissionRequest {
   /** 要查询快照的ID。可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。 */
   SnapshotId: string;
@@ -1175,6 +1191,8 @@ declare interface Cbs {
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询实例关联的云硬盘数量 {@link DescribeInstancesDiskNumRequest} {@link DescribeInstancesDiskNumResponse} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
+  /** 查询快照使用概览 {@link DescribeSnapshotOverviewRequest} {@link DescribeSnapshotOverviewResponse} */
+  DescribeSnapshotOverview(data?: DescribeSnapshotOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOverviewResponse>;
   /** 查看快照分享信息 {@link DescribeSnapshotSharePermissionRequest} {@link DescribeSnapshotSharePermissionResponse} */
   DescribeSnapshotSharePermission(data: DescribeSnapshotSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotSharePermissionResponse>;
   /** 查询快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */

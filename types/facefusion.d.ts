@@ -95,17 +95,17 @@ declare interface MetaData {
 /** 素材信息 */
 declare interface PublicMaterialInfos {
   /** 素材Id */
-  MaterialId: string;
-  /** 素材状态 */
-  MaterialStatus: number;
+  MaterialId?: string;
+  /** 素材状态字段取值: 0 审核中1 人工审核通过2 人工审核失败3 申诉中11 申诉成功12 申诉失败21 机器审核通过22 机器审核失败31 视频素材预处理成功，素材可用32 视频素材预处理失败33 角色不在视频中 */
+  MaterialStatus?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 人脸信息 */
-  MaterialFaceList: MaterialFaces[];
+  MaterialFaceList?: MaterialFaces[];
   /** 素材名 */
-  MaterialName: string;
+  MaterialName?: string;
   /** 审核原因 */
   AuditResult?: string | null;
 }
