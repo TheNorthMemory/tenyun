@@ -83,45 +83,59 @@ declare interface DedicatedClusterInstanceType {
 /** 专用集群订单 */
 declare interface DedicatedClusterOrder {
   /** 专用集群id */
-  DedicatedClusterId: string;
+  DedicatedClusterId?: string;
   /** 专用集群类型id（移到下一层级，已经废弃，后续将删除） */
-  DedicatedClusterTypeId: string;
+  DedicatedClusterTypeId?: string;
   /** 支持的存储类型列表（移到下一层级，已经废弃，后续将删除） */
-  SupportedStorageType: string[];
+  SupportedStorageType?: string[];
   /** 支持的上连交换机的链路传输速率(GiB)（移到下一层级，已经废弃，后续将删除） */
-  SupportedUplinkSpeed: number[];
+  SupportedUplinkSpeed?: number[];
   /** 支持的实例族列表（移到下一层级，已经废弃，后续将删除） */
-  SupportedInstanceFamily: string[];
+  SupportedInstanceFamily?: string[];
   /** 地板承重要求(KG) */
-  Weight: number;
+  Weight?: number;
   /** 功率要求(KW) */
-  PowerDraw: number;
+  PowerDraw?: number;
   /** 订单状态 */
-  OrderStatus: string;
+  OrderStatus?: string;
   /** 订单创建的时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 大订单ID */
-  DedicatedClusterOrderId: string;
+  DedicatedClusterOrderId?: string;
   /** 订单类型，创建CREATE或扩容EXTEND */
-  Action: string;
+  Action?: string;
   /** 子订单详情列表 */
-  DedicatedClusterOrderItems: DedicatedClusterOrderItem[] | null;
+  DedicatedClusterOrderItems?: DedicatedClusterOrderItem[] | null;
   /** cpu值 */
-  Cpu: number | null;
+  Cpu?: number | null;
   /** mem值 */
-  Mem: number | null;
+  Mem?: number | null;
   /** gpu值 */
-  Gpu: number | null;
+  Gpu?: number | null;
   /** 0代表未支付，1代表已支付 */
-  PayStatus: number | null;
+  PayStatus?: number | null;
   /** 支付方式，一次性、按月、按年 */
-  PayType: string | null;
+  PayType?: string | null;
   /** 购买时长的单位 */
-  TimeUnit: string | null;
+  TimeUnit?: string | null;
   /** 购买时长 */
-  TimeSpan: number | null;
+  TimeSpan?: number | null;
   /** 订单类型 */
-  OrderType: string | null;
+  OrderType?: string | null;
+  /** 验收状态 */
+  CheckStatus?: string | null;
+  /** 交付预期时间 */
+  DeliverExpectTime?: string | null;
+  /** 交付实际完成时间 */
+  DeliverFinishTime?: string | null;
+  /** 验收预期时间 */
+  CheckExpectTime?: string | null;
+  /** 验收实际完成时间 */
+  CheckFinishTime?: string | null;
+  /** 订单SLA */
+  OrderSLA?: string | null;
+  /** 订单支付计划 */
+  OrderPayPlan?: string | null;
 }
 
 /** 专用集群子订单 */
@@ -639,6 +653,8 @@ declare interface DescribeDedicatedClusterOrdersRequest {
   Status?: string;
   /** 订单类型为过滤条件：CREATE EXTEND */
   ActionType?: string;
+  /** 订单类型列表 */
+  OrderTypes?: string[];
 }
 
 declare interface DescribeDedicatedClusterOrdersResponse {

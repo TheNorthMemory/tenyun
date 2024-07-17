@@ -160,6 +160,8 @@ declare interface ChatCompletionsResponse {
   Choices?: Choice[];
   /** 错误信息。如果流式返回中服务处理异常，返回该错误信息。 */
   ErrorMsg?: ErrorMsg | null;
+  /** 多轮会话风险审核，值为1时，表明存在信息安全风险，建议终止客户多轮会话。 */
+  ModerationLevel?: string;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }

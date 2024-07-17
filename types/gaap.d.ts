@@ -2282,6 +2282,10 @@ declare interface DescribeTaskStatusRequest {
 }
 
 declare interface DescribeTaskStatusResponse {
+  /** 任务状态：RUNNING，FAIL，SUCCESS */
+  Status?: string;
+  /** 任务ID */
+  TaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

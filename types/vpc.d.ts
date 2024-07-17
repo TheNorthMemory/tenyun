@@ -384,6 +384,8 @@ declare interface CcnInstance {
   Description?: string;
   /** 实例关联的路由表ID。 */
   RouteTableId?: string | null;
+  /** 实例付费方式 */
+  OrderType?: string | null;
 }
 
 /** 云联网实例对象，该对象特用于运营端使用，不建议给租户的接口中提供该复杂类型。 */
@@ -579,49 +581,53 @@ declare interface CreateVpnConnRoute {
 /** 合规化审批单 */
 declare interface CrossBorderCompliance {
   /** 服务商，可选值：`UNICOM`。 */
-  ServiceProvider: string;
+  ServiceProvider?: string;
   /** 合规化审批单`ID`。 */
-  ComplianceId: number;
+  ComplianceId?: number;
   /** 公司全称。 */
-  Company: string;
+  Company?: string;
   /** 统一社会信用代码。 */
-  UniformSocialCreditCode: string;
+  UniformSocialCreditCode?: string;
   /** 法定代表人。 */
-  LegalPerson: string;
+  LegalPerson?: string;
   /** 发证机关。 */
-  IssuingAuthority: string;
+  IssuingAuthority?: string;
   /** 营业执照。 */
-  BusinessLicense: string;
+  BusinessLicense?: string;
   /** 营业执照住所。 */
-  BusinessAddress: string;
+  BusinessAddress?: string;
   /** 邮编。 */
-  PostCode: number;
+  PostCode?: number;
   /** 经办人。 */
-  Manager: string;
+  Manager?: string;
   /** 经办人身份证号。 */
-  ManagerId: string;
+  ManagerId?: string;
   /** 经办人身份证。 */
-  ManagerIdCard: string;
+  ManagerIdCard?: string;
   /** 经办人身份证地址。 */
-  ManagerAddress: string;
+  ManagerAddress?: string;
   /** 经办人联系电话。 */
-  ManagerTelephone: string;
+  ManagerTelephone?: string;
   /** 电子邮箱。 */
-  Email: string;
+  Email?: string;
   /** 服务受理单。 */
-  ServiceHandlingForm: string;
+  ServiceHandlingForm?: string;
   /** 授权函。 */
-  AuthorizationLetter: string;
+  AuthorizationLetter?: string;
   /** 信息安全承诺书。 */
-  SafetyCommitment: string;
+  SafetyCommitment?: string;
   /** 服务开始时间。 */
-  ServiceStartDate: string;
+  ServiceStartDate?: string;
   /** 服务截止时间。 */
-  ServiceEndDate: string;
+  ServiceEndDate?: string;
   /** 状态。待审批：`PENDING`，已通过：`APPROVED`，已拒绝：`DENY`。 */
-  State: string;
+  State?: string;
   /** 审批单创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
+  /** 法定代表人身份证号。 */
+  LegalPersonId?: string | null;
+  /** 法定代表人身份证。 */
+  LegalPersonIdCard?: string | null;
 }
 
 /** 跨境带宽监控数据 */
@@ -989,27 +995,43 @@ declare interface GatewayQos {
 /** 描述 HAVIP 信息 */
 declare interface HaVip {
   /** `HAVIP`的`ID`，是`HAVIP`的唯一标识。 */
-  HaVipId: string;
+  HaVipId?: string;
   /** `HAVIP`名称。 */
-  HaVipName: string;
+  HaVipName?: string;
   /** 虚拟IP地址。 */
-  Vip: string;
+  Vip?: string;
   /** `HAVIP`所在私有网络`ID`。 */
-  VpcId: string;
+  VpcId?: string;
   /** `HAVIP`所在子网`ID`。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** `HAVIP`关联弹性网卡`ID`。 */
-  NetworkInterfaceId: string;
+  NetworkInterfaceId?: string;
   /** 被绑定的实例`ID`。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 绑定`EIP`。 */
-  AddressIp: string;
+  AddressIp?: string;
   /** 状态：`AVAILABLE`：运行中`UNBIND`：未绑定 */
-  State: string;
+  State?: string;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 使用havip的业务标识。 */
-  Business: string;
+  Business?: string;
+  /** `HAVIP`的飘移范围。 */
+  HaVipAssociationSet?: HaVipAssociation[] | null;
+  /** 是否开启`HAVIP`的飘移范围校验。 */
+  CheckAssociate?: boolean | null;
+  /** HAVIP 刷新时间。该参数只作为出参数。以下场景会触发 FlushTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00 */
+  FlushedTime?: string | null;
+}
+
+/** HaVip绑定的子机/网卡（用于限制HaVip飘移的范围，并不是真正的飘移动作）。 */
+declare interface HaVipAssociation {
+  /** HaVip实例唯一ID。 */
+  HaVipId: string | null;
+  /** HaVip绑定的子机或网卡唯一ID。 */
+  InstanceId: string | null;
+  /** HaVip绑定的类型。取值:CVM, ENI。 */
+  InstanceType: string | null;
 }
 
 /** VPN通道健康检查配置 */
@@ -3437,19 +3459,21 @@ declare interface CreateFlowLogResponse {
 declare interface CreateHaVipRequest {
   /** `HAVIP`所在私有网络`ID`。 */
   VpcId: string;
-  /** `HAVIP`所在子网`ID`。 */
-  SubnetId: string;
   /** `HAVIP`名称。 */
   HaVipName: string;
+  /** `HAVIP`所在子网`ID`。 */
+  SubnetId?: string;
   /** 指定虚拟IP地址，必须在`VPC`网段内且未被占用。不指定则自动分配。 */
   Vip?: string;
   /** `HAVIP`所在弹性网卡`ID`。 */
   NetworkInterfaceId?: string;
+  /** 是否开启`HAVIP`漂移时子机或网卡范围的校验。默认不开启。 */
+  CheckAssociate?: boolean;
 }
 
 declare interface CreateHaVipResponse {
   /** `HAVIP`对象。 */
-  HaVip: HaVip;
+  HaVip?: HaVip;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5271,7 +5295,7 @@ declare interface DescribeGatewayFlowQosResponse {
 declare interface DescribeHaVipsRequest {
   /** `HAVIP`唯一`ID`，形如：`havip-9o233uri`。 */
   HaVipIds?: string[];
-  /** 过滤条件，参数不支持同时指定`HaVipIds`和`Filters`。havip-id - String - `HAVIP`唯一`ID`，形如：`havip-9o233uri`。havip-name - String - `HAVIP`名称。vpc-id - String - `HAVIP`所在私有网络`ID`。subnet-id - String - `HAVIP`所在子网`ID`。vip - String - `HAVIP`的地址`VIP`。address-ip - String - `HAVIP`绑定的弹性公网`IP`。 */
+  /** 过滤条件，参数不支持同时指定`HaVipIds`和`Filters`。havip-id - String - `HAVIP`唯一`ID`，形如：`havip-9o233uri`。havip-name - String - `HAVIP`名称。vpc-id - String - `HAVIP`所在私有网络`ID`。subnet-id - String - `HAVIP`所在子网`ID`。vip - String - `HAVIP`的地址`VIP`。address-ip - String - `HAVIP`绑定的弹性公网`IP`。havip-association.instance-id - String - `HAVIP`绑定的子机或网卡。havip-association.instance-type - String - `HAVIP`绑定的类型，取值:CVM, ENI。check-associate - Bool - 是否开启HaVip飘移时校验绑定的子机或网卡。cdc-id - String - CDC实例ID。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;

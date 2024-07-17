@@ -1654,6 +1654,22 @@ declare interface TopicRecord {
   TopicName: string;
 }
 
+/** Topic状态 */
+declare interface TopicStats {
+  /** 所属Broker节点 */
+  BrokerName?: string | null;
+  /** 队列编号 */
+  QueueId?: number | null;
+  /** 最小位点 */
+  MinOffset?: number | null;
+  /** 最大位点 */
+  MaxOffset?: number | null;
+  /** 消息条数 */
+  MessageCount?: number | null;
+  /** 消息最后写入时间 */
+  LastUpdateTimestamp?: number | null;
+}
+
 /** 消息轨迹结果 */
 declare interface TraceResult {
   /** 阶段 */
@@ -3818,6 +3834,44 @@ declare interface DescribeRocketMQTopicMsgsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQTopicStatsRequest {
+  /** 实例ID */
+  ClusterId: string;
+  /** 命名空间 */
+  NamespaceId: string;
+  /** 主题名 */
+  TopicName: string;
+}
+
+declare interface DescribeRocketMQTopicStatsResponse {
+  /** 生产详情列表 */
+  TopicStatsList?: TopicStats[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRocketMQTopicsByGroupRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 命名空间名称 */
+  NamespaceId: string;
+  /** 消费组名称 */
+  GroupId: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 限制条数 */
+  Limit?: number;
+}
+
+declare interface DescribeRocketMQTopicsByGroupResponse {
+  /** 总条数 */
+  TotalCount: number;
+  /** 主题列表 */
+  Topics: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQTopicsRequest {
   /** 查询偏移量 */
   Offset: number;
@@ -4324,6 +4378,22 @@ declare interface ModifyRocketMQGroupRequest {
 }
 
 declare interface ModifyRocketMQGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRocketMQInstanceRequest {
+  /** 专享实例ID */
+  InstanceId: string;
+  /** 实例名称 */
+  Name?: string;
+  /** 实例备注信息 */
+  Remark?: string;
+  /** 实例消息保留时间，小时为单位 */
+  MessageRetention?: number;
+}
+
+declare interface ModifyRocketMQInstanceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4909,8 +4979,12 @@ declare interface Tdmq {
   DescribeRocketMQSubscriptions(data: DescribeRocketMQSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSubscriptionsResponse>;
   /** rocketmq 消息查询 {@link DescribeRocketMQTopicMsgsRequest} {@link DescribeRocketMQTopicMsgsResponse} */
   DescribeRocketMQTopicMsgs(data: DescribeRocketMQTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicMsgsResponse>;
+  /** 获取Topic生产详情列表 {@link DescribeRocketMQTopicStatsRequest} {@link DescribeRocketMQTopicStatsResponse} */
+  DescribeRocketMQTopicStats(data: DescribeRocketMQTopicStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicStatsResponse>;
   /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */
   DescribeRocketMQTopics(data: DescribeRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicsResponse>;
+  /** 获取指定消费组下订阅的主题列表 {@link DescribeRocketMQTopicsByGroupRequest} {@link DescribeRocketMQTopicsByGroupResponse} */
+  DescribeRocketMQTopicsByGroup(data: DescribeRocketMQTopicsByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicsByGroupResponse>;
   /** 获取单个RocketMQ专享集群信息 {@link DescribeRocketMQVipInstanceDetailRequest} {@link DescribeRocketMQVipInstanceDetailResponse} */
   DescribeRocketMQVipInstanceDetail(data: DescribeRocketMQVipInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstanceDetailResponse>;
   /** 查询RocketMQ专享实例列表 {@link DescribeRocketMQVipInstancesRequest} {@link DescribeRocketMQVipInstancesResponse} */
@@ -4957,6 +5031,8 @@ declare interface Tdmq {
   ModifyRocketMQEnvironmentRole(data: ModifyRocketMQEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQEnvironmentRoleResponse>;
   /** 更新RocketMQ消费组信息 {@link ModifyRocketMQGroupRequest} {@link ModifyRocketMQGroupResponse} */
   ModifyRocketMQGroup(data: ModifyRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQGroupResponse>;
+  /** 修改RocketMQ专享实例 {@link ModifyRocketMQInstanceRequest} {@link ModifyRocketMQInstanceResponse} */
+  ModifyRocketMQInstance(data: ModifyRocketMQInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQInstanceResponse>;
   /** 修改RocketMQ专享实例配置 {@link ModifyRocketMQInstanceSpecRequest} {@link ModifyRocketMQInstanceSpecResponse} */
   ModifyRocketMQInstanceSpec(data: ModifyRocketMQInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQInstanceSpecResponse>;
   /** 更新RocketMQ命名空间 {@link ModifyRocketMQNamespaceRequest} {@link ModifyRocketMQNamespaceResponse} */
