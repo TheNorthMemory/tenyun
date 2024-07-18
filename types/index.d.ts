@@ -61,6 +61,7 @@ import Cim, { Versions as CimVersions } from "./cim";
 import Cis, { Versions as CisVersions } from "./cis";
 import Ckafka, { Versions as CkafkaVersions } from "./ckafka";
 import Clb, { Versions as ClbVersions } from "./clb";
+import Cloudapp, { Versions as CloudappVersions } from "./cloudapp";
 import Cloudaudit, { Versions as CloudauditVersions } from "./cloudaudit";
 import Cloudhsm, { Versions as CloudhsmVersions } from "./cloudhsm";
 import Cloudstudio, { Versions as CloudstudioVersions } from "./cloudstudio";
@@ -317,6 +318,7 @@ export declare type SERVICE_VERSIONS = {
   cis: CisVersions,
   ckafka: CkafkaVersions,
   clb: ClbVersions,
+  cloudapp: CloudappVersions,
   cloudaudit: CloudauditVersions,
   cloudhsm: CloudhsmVersions,
   cloudstudio: CloudstudioVersions,
@@ -646,6 +648,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ckafka: Ckafka,
   /** {@link Clb 负载均衡} */
   clb: Clb,
+  /** {@link Cloudapp 云应用} */
+  cloudapp: Cloudapp,
   /** {@link Cloudaudit 操作审计} */
   cloudaudit: Cloudaudit,
   /** {@link Cloudhsm 云加密机} */

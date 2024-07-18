@@ -866,7 +866,7 @@ declare interface CheckInstanceNameRequest {
 declare interface CheckInstanceNameResponse {
   /** 检查结果，true为合法，false为非法 */
   IsValidated?: boolean;
-  /** 1: Illegal（名子非法）, 2:Reserved（名字保留）, 3:Existed（名字已存在） */
+  /** 1: Illegal（名称非法）, 2:Reserved（名字保留）, 3:Existed（名字已存在） */
   DetailCode?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

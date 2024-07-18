@@ -2191,13 +2191,19 @@ declare interface CreateDSPADiscoveryTaskRequest {
   ComplianceGroupIds?: number[];
   /** 任务定时启动时间，格式如：2006-01-02 15:04:05当执行计划（Plan字段）为”立即“时，定时启动时间不会生效，此场景下给该字段传值不会被保存。 */
   TimingStartTime?: string;
+  /** random-随机，asc生序，desc降序 */
+  Order?: string;
+  /** 抽样的条数，范围30-1000 */
+  Rows?: number;
+  /** 抽样的排序字段 */
+  GlobalOrderField?: string;
 }
 
 declare interface CreateDSPADiscoveryTaskResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 扫描结果ID */
-  ResultId: number | null;
+  ResultId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3557,6 +3563,10 @@ declare interface DescribeDSPAESDataSampleRequest {
   DspaId: string;
   /** 字段扫描结果ID */
   FieldResultId: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  OrderField?: string;
 }
 
 declare interface DescribeDSPAESDataSampleResponse {
@@ -3681,11 +3691,15 @@ declare interface DescribeDSPATaskResultDataSampleRequest {
   DspaId: string;
   /** 字段扫描结果ID */
   FieldResultId: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  OrderField?: string;
 }
 
 declare interface DescribeDSPATaskResultDataSampleResponse {
   /** 数据样本列表，最多10条数据 */
-  Items: DspaFieldResultDataSample[] | null;
+  Items?: DspaFieldResultDataSample[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

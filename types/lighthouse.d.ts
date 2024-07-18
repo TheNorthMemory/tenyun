@@ -1889,9 +1889,9 @@ declare interface DescribeZonesRequest {
 
 declare interface DescribeZonesResponse {
   /** 可用区数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 可用区详细信息列表 */
-  ZoneInfoSet: ZoneInfo[];
+  ZoneInfoSet?: ZoneInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

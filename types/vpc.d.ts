@@ -8883,7 +8883,7 @@ declare interface Vpc {
   ModifyRouteTableSelectionPolicies(data: ModifyRouteTableSelectionPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableSelectionPoliciesResponse>;
   /** 修改安全组属性 {@link ModifySecurityGroupAttributeRequest} {@link ModifySecurityGroupAttributeResponse} */
   ModifySecurityGroupAttribute(data: ModifySecurityGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupAttributeResponse>;
-  /** 修改安全组出站和入站规则 {@link ModifySecurityGroupPoliciesRequest} {@link ModifySecurityGroupPoliciesResponse} */
+  /** 重置安全组出站和入站规则 {@link ModifySecurityGroupPoliciesRequest} {@link ModifySecurityGroupPoliciesResponse} */
   ModifySecurityGroupPolicies(data: ModifySecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupPoliciesResponse>;
   /** 修改协议端口模板 {@link ModifyServiceTemplateAttributeRequest} {@link ModifyServiceTemplateAttributeResponse} */
   ModifyServiceTemplateAttribute(data: ModifyServiceTemplateAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceTemplateAttributeResponse>;

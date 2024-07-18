@@ -95,6 +95,7 @@ export const SERVICE_VERSIONS = {
   cis: ['2018-04-08'],
   ckafka: ['2019-08-19'],
   clb: ['2018-03-17'],
+  cloudapp: ['2022-05-30'],
   cloudaudit: ['2019-03-19'],
   cloudhsm: ['2019-11-12'],
   cloudstudio: ['2023-05-08'],

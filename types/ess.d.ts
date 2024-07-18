@@ -2449,7 +2449,7 @@ declare interface CreateSealRequest {
   Agent?: Agent;
   /** 电子印章生成方式空值:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片SealGenerateSourceSystem: 系统生成印章, 无需上传SealImage图片 */
   GenerateSource?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章注: `同企业下只能有一个公章, 重复创建会报错` */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章**OTHER**: 其他注: 同企业下只能有一个公章, 重复创建会报错 */
   SealType?: string;
   /** 电子印章图片文件名称，1-50个中文字符。 */
   FileName?: string;
