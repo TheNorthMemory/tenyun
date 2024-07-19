@@ -112,6 +112,8 @@ declare interface Cluster {
   AgentSerialId?: string | null;
   /** 资源类型 */
   ResourceType?: number | null;
+  /** 集群类型 */
+  BillingResourceMode?: string | null;
 }
 
 /** 工作空间集群组信息 */
@@ -156,6 +158,8 @@ declare interface ClusterGroupSetItem {
   PayMode?: number;
   /** 弹性 */
   SubEks?: SubEks | null;
+  /** 默认 "" 包销模式 "exclusiveSale" */
+  BillingResourceMode?: string | null;
 }
 
 /** session集群信息 */

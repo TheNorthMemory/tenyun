@@ -1803,9 +1803,9 @@ declare interface DescribeRegionsRequest {
 
 declare interface DescribeRegionsResponse {
   /** 地域数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 地域信息列表。 */
-  RegionSet: RegionInfo[];
+  RegionSet?: RegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

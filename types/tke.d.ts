@@ -3536,7 +3536,7 @@ declare namespace V20180525 {
     Chart: string;
     /** 自定义参数 */
     Values?: ReleaseValues;
-    /** 制品来源，范围：tke-market 或 other */
+    /** 制品来源，范围：tke-market 或 other默认值：tke-market。 */
     ChartFrom?: string;
     /** 制品版本 */
     ChartVersion?: string;
@@ -3546,7 +3546,7 @@ declare namespace V20180525 {
     Username?: string;
     /** 制品访问密码 */
     Password?: string;
-    /** 制品命名空间 */
+    /** 制品命名空间，ChartFrom为tke-market时ChartNamespace不为空，值为DescribeProducts接口反馈的Namespace */
     ChartNamespace?: string;
     /** 集群类型，支持传 tke, eks, tkeedge, external(注册集群） */
     ClusterType?: string;
@@ -7098,7 +7098,7 @@ declare namespace V20180525 {
     Chart: string;
     /** 自定义参数，覆盖chart 中values.yaml 中的参数 */
     Values?: ReleaseValues;
-    /** 制品来源，范围：tke-market 或 other默认值：tke-market。 */
+    /** 制品来源，范围：tke-market 或 other 默认值：tke-market，示例值：tke-market */
     ChartFrom?: string;
     /** 制品版本( 从第三方安装时，不传这个参数） */
     ChartVersion?: string;
@@ -7108,7 +7108,7 @@ declare namespace V20180525 {
     Username?: string;
     /** 制品访问密码 */
     Password?: string;
-    /** 制品命名空间 */
+    /** 制品命名空间，ChartFrom为tke-market时ChartNamespace不为空，值为DescribeProducts接口反馈的Namespace */
     ChartNamespace?: string;
     /** 集群类型，支持传 tke, eks, tkeedge, external(注册集群） */
     ClusterType?: string;

@@ -464,10 +464,10 @@ declare interface CheckIdNameDateRequest {
 }
 
 declare interface CheckIdNameDateResponse {
-  /** 认证结果码，收费情况如下。收费结果码：0: 一致-1: 不一致不收费结果码：-2: 非法身份证号（长度、校验位等不正确）-3: 非法姓名（长度、格式等不正确）-4: 非法有效期（长度、格式等不正确）-5: 身份信息无效-6: 证件库服务异常-7: 证件库中无此身份证记录 */
-  Result: string;
+  /** 认证结果码，收费情况如下。收费结果码：0: 一致-1: 不一致不收费结果码：-2: 非法身份证号（长度、校验位等不正确）-3: 非法姓名（长度、格式等不正确）-4: 非法有效期（长度、格式等不正确）-5: 身份信息无效-6: 证件库服务异常-7: 证件库中无此身份证记录-8: 认证次数超过当日限制，请次日重试 */
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -482,7 +482,7 @@ declare interface CheckPhoneAndNameRequest {
 }
 
 declare interface CheckPhoneAndNameResponse {
-  /** 认证结果码，收费情况如下。收费结果码：0: 验证结果一致1: 验证结果不一致不收费结果码：-1:查无记录-2:引擎未知错误-3:引擎服务异常-4:姓名校验不通过-5:手机号码不合法 */
+  /** 认证结果码，收费情况如下。收费结果码：0: 验证结果一致1: 验证结果不一致不收费结果码：-1:查无记录-2:引擎未知错误-3:引擎服务异常-4:姓名校验不通过-5:手机号码不合法-6: 认证次数超过当日限制，请次日重试 */
   Result?: string;
   /** 业务结果描述 */
   Description?: string;
@@ -1212,7 +1212,7 @@ declare interface PhoneVerificationRequest {
 }
 
 declare interface PhoneVerificationResponse {
-  /** 认证结果码:收费结果码0: 三要素信息一致-4: 三要素信息不一致不收费结果码-6: 手机号码不合法-7: 身份证号码有误-8: 姓名校验不通过-9: 没有记录-11: 验证中心服务繁忙 */
+  /** 认证结果码:收费结果码0: 三要素信息一致-4: 三要素信息不一致不收费结果码-6: 手机号码不合法-7: 身份证号码有误-8: 姓名校验不通过-9: 没有记录-11: 验证中心服务繁忙-12: 认证次数超过当日限制，请次日重试 */
   Result?: string;
   /** 业务结果描述。 */
   Description?: string;
