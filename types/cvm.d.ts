@@ -2084,6 +2084,32 @@ declare interface DisassociateSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface EnterRescueModeRequest {
+  /** 需要进入救援模式的实例id */
+  InstanceId: string;
+  /** 救援模式下系统密码 */
+  Password: string;
+  /** 救援模式下系统用户名 */
+  Username?: string;
+  /** 是否强制关机 */
+  ForceStop?: boolean;
+}
+
+declare interface EnterRescueModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExitRescueModeRequest {
+  /** 退出救援模式的实例id */
+  InstanceId: string;
+}
+
+declare interface ExitRescueModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExportImagesRequest {
   /** COS存储桶名称 */
   BucketName: string;
@@ -3028,6 +3054,10 @@ declare interface Cvm {
   DisassociateInstancesKeyPairs(data: DisassociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateInstancesKeyPairsResponse>;
   /** 解绑安全组 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
+  /** 进入救援模式 {@link EnterRescueModeRequest} {@link EnterRescueModeResponse} */
+  EnterRescueMode(data: EnterRescueModeRequest, config?: AxiosRequestConfig): AxiosPromise<EnterRescueModeResponse>;
+  /** 退出救援模式 {@link ExitRescueModeRequest} {@link ExitRescueModeResponse} */
+  ExitRescueMode(data: ExitRescueModeRequest, config?: AxiosRequestConfig): AxiosPromise<ExitRescueModeResponse>;
   /** 导出自定义镜像 {@link ExportImagesRequest} {@link ExportImagesResponse} */
   ExportImages(data: ExportImagesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportImagesResponse>;
   /** 外部镜像导入 {@link ImportImageRequest} {@link ImportImageResponse} */

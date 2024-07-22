@@ -4202,6 +4202,38 @@ declare interface ModifyPasswordResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRoutineMaintenanceTaskRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 自动化运维类别 */
+  MaintenanceType: string;
+  /** 自动化运维子类别 */
+  MaintenanceSubtype: string;
+  /** 主题名称 */
+  TopicName?: string;
+  /** 任务触发阈值 */
+  ConfigureThreshold?: number;
+  /** 任务调整步长 */
+  ConfigureStepSize?: number;
+  /** 任务调整上限 */
+  ConfigureLimit?: number;
+  /** 任务预期触发时间，存储从当日 0AM 开始偏移的秒数 */
+  PlannedTime?: number;
+  /** 任务额外信息 */
+  ExtraConfig?: string;
+  /** 任务状态 */
+  Status?: number;
+  /** 执行week day */
+  Week?: string;
+}
+
+declare interface ModifyRoutineMaintenanceTaskResponse {
+  /** 返回结果 */
+  Result?: JgwOperateResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTopicAttributesRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -4529,6 +4561,8 @@ declare interface Ckafka {
   ModifyInstancePre(data: ModifyInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePreResponse>;
   /** 修改密码 {@link ModifyPasswordRequest} {@link ModifyPasswordResponse} */
   ModifyPassword(data: ModifyPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPasswordResponse>;
+  /** 设置自动化运维属性 {@link ModifyRoutineMaintenanceTaskRequest} {@link ModifyRoutineMaintenanceTaskResponse} */
+  ModifyRoutineMaintenanceTask(data: ModifyRoutineMaintenanceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutineMaintenanceTaskResponse>;
   /** 设置主题属性 {@link ModifyTopicAttributesRequest} {@link ModifyTopicAttributesResponse} */
   ModifyTopicAttributes(data: ModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributesResponse>;
   /** 续费Ckafka实例 {@link RenewCkafkaInstanceRequest} {@link RenewCkafkaInstanceResponse} */

@@ -2133,6 +2133,10 @@ declare interface RestartNodesRequest {
   IsOffline?: boolean;
   /** cvm延迟上架时间 */
   CvmDelayOnlineTime?: number;
+  /** 分片迁移并发数 */
+  ShardAllocationConcurrents?: number;
+  /** 分片迁移并发速度 */
+  ShardAllocationBytes?: number;
 }
 
 declare interface RestartNodesResponse {
@@ -2471,6 +2475,10 @@ declare interface UpgradeInstanceRequest {
   SkipCheckForceRestart?: boolean;
   /** cvm延迟上架参数 */
   CvmDelayOnlineTime?: number;
+  /** 分片迁移并发数 */
+  ShardAllocationConcurrents?: number;
+  /** 分片迁移并发速度 */
+  ShardAllocationBytes?: number;
 }
 
 declare interface UpgradeInstanceResponse {

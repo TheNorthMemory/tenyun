@@ -266,6 +266,24 @@ declare interface HardwareInfo {
   FlowTrunc?: number | null;
 }
 
+/** 三层互通规则信息 */
+declare interface L3ConnInfo {
+  /** 互通规则ID */
+  L3ConnId?: string;
+  /** 互通设备ID */
+  DeviceId1?: string;
+  /** 互通规则CIDR */
+  Cidr1?: string;
+  /** 互通设备ID */
+  DeviceId2?: string;
+  /** 互通规则CIDR */
+  Cidr2?: string;
+  /** 互通规则启用状态 */
+  Enable?: boolean;
+  /** 互通规则描述 */
+  Description?: string | null;
+}
+
 /** 流量监控指标 */
 declare interface MonitorData {
   /** 时间点：s */
@@ -426,6 +444,26 @@ declare interface AddHardwareResponse {
   RequestId?: string;
 }
 
+declare interface AddL3ConnRequest {
+  /** 设置互通网段CIDR1，支持： 10.0.0.0 - 10.255.255.255，172.16.0.0 - 172.31.255.255，192.168.0.0 - 192.168.255.255 */
+  Cidr1: string;
+  /** 设置互通网段CIDR2，支持： 10.0.0.0 - 10.255.255.255，172.16.0.0 - 172.31.255.255，192.168.0.0 - 192.168.255.255 */
+  Cidr2: string;
+  /** CIDR1对应的设备ID */
+  DeviceId1: string;
+  /** CIDR2对应的设备ID */
+  DeviceId2: string;
+  /** 规则描述 */
+  Description?: string;
+}
+
+declare interface AddL3ConnResponse {
+  /** 互通规则ID */
+  L3ConnId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateEncryptedKeyRequest {
 }
 
@@ -484,6 +522,16 @@ declare interface DeleteGroupRequest {
 }
 
 declare interface DeleteGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteL3ConnRequest {
+  /** 互通规则ID列表 */
+  L3ConnIdList: string[];
+}
+
+declare interface DeleteL3ConnResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -758,6 +806,26 @@ declare interface GetHardwareListResponse {
   RequestId?: string;
 }
 
+declare interface GetL3ConnListRequest {
+  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  PageSize: number;
+  /** 当前查看页码，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  PageNumber: number;
+  /** 搜索分组的DeviceId，为空时匹配所有分组 */
+  DeviceId?: string;
+}
+
+declare interface GetL3ConnListResponse {
+  /** 互通规则列表 */
+  L3ConnList?: L3ConnInfo[];
+  /** 设备总记录条数 */
+  Length?: number;
+  /** 总页数 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetMultiFlowStatisticRequest {
   /** 设备id列表，单次最多请求10个设备 */
   DeviceIds: string[];
@@ -984,6 +1052,48 @@ declare interface UpdateHardwareResponse {
   RequestId?: string;
 }
 
+declare interface UpdateL3CidrRequest {
+  /** 互通规则ID */
+  L3ConnId: string;
+  /** 互通规则CIDR */
+  Cidr1: string;
+  /** 互通设备ID */
+  DeviceId1?: string;
+  /** 互通设备ID */
+  DeviceId2?: string;
+  /** 互通规则CIDR */
+  Cidr2?: string;
+}
+
+declare interface UpdateL3CidrResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateL3ConnRequest {
+  /** 互通规则ID */
+  L3ConnId: string;
+  /** 互通规则备注 */
+  Description?: string;
+}
+
+declare interface UpdateL3ConnResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateL3SwitchRequest {
+  /** 互通规则ID */
+  L3ConnId: string;
+  /** 互通规则开关 */
+  Enable?: boolean;
+}
+
+declare interface UpdateL3SwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Mna 多网聚合加速} */
 declare interface Mna {
   (): Versions;
@@ -995,6 +1105,8 @@ declare interface Mna {
   AddGroup(data: AddGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddGroupResponse>;
   /** 添加硬件设备 {@link AddHardwareRequest} {@link AddHardwareResponse} */
   AddHardware(data: AddHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<AddHardwareResponse>;
+  /** 新建互通规则 {@link AddL3ConnRequest} {@link AddL3ConnResponse} */
+  AddL3Conn(data: AddL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<AddL3ConnResponse>;
   /** 设置或更新密钥 {@link CreateEncryptedKeyRequest} {@link CreateEncryptedKeyResponse} */
   CreateEncryptedKey(data?: CreateEncryptedKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptedKeyResponse>;
   /** 发起Qos加速过程 {@link CreateQosRequest} {@link CreateQosResponse} */
@@ -1003,6 +1115,8 @@ declare interface Mna {
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
   /** 删除分组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
+  /** 删除互通规则 {@link DeleteL3ConnRequest} {@link DeleteL3ConnResponse} */
+  DeleteL3Conn(data: DeleteL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL3ConnResponse>;
   /** 停止Qos加速过程 {@link DeleteQosRequest} {@link DeleteQosResponse} */
   DeleteQos(data: DeleteQosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQosResponse>;
   /** 获取Qos加速状态 {@link DescribeQosRequest} {@link DescribeQosResponse} */
@@ -1029,6 +1143,8 @@ declare interface Mna {
   GetGroupList(data: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
   /** 获取厂商硬件列表 {@link GetHardwareListRequest} {@link GetHardwareListResponse} */
   GetHardwareList(data: GetHardwareListRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareListResponse>;
+  /** 获取互通规则列表 {@link GetL3ConnListRequest} {@link GetL3ConnListResponse} */
+  GetL3ConnList(data: GetL3ConnListRequest, config?: AxiosRequestConfig): AxiosPromise<GetL3ConnListResponse>;
   /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
   GetMultiFlowStatistic(data: GetMultiFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetMultiFlowStatisticResponse>;
   /** 获取流量监控信息 {@link GetNetMonitorRequest} {@link GetNetMonitorResponse} */
@@ -1055,6 +1171,12 @@ declare interface Mna {
   UpdateGroup(data: UpdateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGroupResponse>;
   /** 更新硬件信息 {@link UpdateHardwareRequest} {@link UpdateHardwareResponse} */
   UpdateHardware(data: UpdateHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateHardwareResponse>;
+  /** 更新互通规则CIDR {@link UpdateL3CidrRequest} {@link UpdateL3CidrResponse} */
+  UpdateL3Cidr(data: UpdateL3CidrRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateL3CidrResponse>;
+  /** 更新互通规则备注 {@link UpdateL3ConnRequest} {@link UpdateL3ConnResponse} */
+  UpdateL3Conn(data: UpdateL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateL3ConnResponse>;
+  /** 修改互通规则开关 {@link UpdateL3SwitchRequest} {@link UpdateL3SwitchResponse} */
+  UpdateL3Switch(data: UpdateL3SwitchRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateL3SwitchResponse>;
 }
 
 export declare type Versions = ["2021-01-19"];

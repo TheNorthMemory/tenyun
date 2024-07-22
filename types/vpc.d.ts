@@ -1093,23 +1093,23 @@ declare interface IPSECOptionsSpecification {
 /** 云联网实例绑定路由表信息 */
 declare interface InstanceBind {
   /** 云联网ID。 */
-  CcnId: string;
+  CcnId?: string;
   /** 实例类型：VPC，DIRECTCONNECT，BMVPC，EDGE，EDGE_TUNNEL，EDGE_VPNGW，VPNGW。 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例绑定路由表的时间。 */
-  InstanceBindTime: string;
+  InstanceBindTime?: string;
   /** 路由表ID。 */
-  RouteTableId: string;
+  RouteTableId?: string;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例所在地域。 */
-  InstanceRegion: string[];
+  InstanceRegion?: string;
   /** 实例所属的账户uin。 */
-  InstanceUin: string;
+  InstanceUin?: string;
   /** 关联实例状态：`PENDING`：申请中`ACTIVE`：已连接`EXPIRED`：已过期`REJECTED`：已拒绝`DELETED`：已删除`FAILED`：失败的（2小时后将异步强制解关联）`ATTACHING`：关联中`DETACHING`：解关联中`DETACHFAILED`：解关联失败（2小时后将异步强制解关联） */
-  State: string;
+  State?: string;
 }
 
 /** 预付费（包年包月）计费对象。 */

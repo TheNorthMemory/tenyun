@@ -50,7 +50,7 @@ declare interface AutoCalloutTaskInfo {
   NotAfter?: number | null;
   /** 任务使用的IvrId */
   IvrId?: number;
-  /** 任务状态0初始 1运行中 2已完成 3结束中 4已结束 */
+  /** 任务状态：0初始：任务创建，呼叫未开始1运行中2 已完成：任务中所有呼叫完成3结束中：任务到期，但仍有部分呼叫未结束4已结束：任务到期终止 */
   State?: number;
   /** 任务Id */
   TaskId?: number;

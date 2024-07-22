@@ -1398,6 +1398,14 @@ declare interface PackageDetail {
   ExtendInfo?: string | null;
 }
 
+/** 资源包抵扣优先级 */
+declare interface PackagePriority {
+  /** 需要自定义抵扣优先级的资源包 */
+  PackageId?: string;
+  /** 自定义的抵扣优先级 */
+  DeductionPriority?: number;
+}
+
 /** 实例参数详细描述 */
 declare interface ParamDetail {
   /** 参数名称 */
@@ -3790,6 +3798,34 @@ declare interface ExportInstanceSlowQueriesResponse {
   RequestId?: string;
 }
 
+declare interface ExportResourcePackageDeductDetailsRequest {
+  /** 需要导出的资源包ID */
+  PackageId: string;
+  /** 使用资源包容量的cynos集群ID */
+  ClusterIds?: string[];
+  /** 排序字段，目前支持：createTime（资源包被抵扣时间），successDeductSpec（资源包抵扣量） */
+  OrderBy?: string;
+  /** 排序类型，支持ASC、DESC、asc、desc */
+  OrderByType?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 单次最大导出数据行数，目前最大支持2000行 */
+  Limit?: string;
+  /** 偏移量页数 */
+  Offset?: string;
+  /** 导出数据格式，目前仅支持csv格式，留作扩展 */
+  FileType?: string;
+}
+
+declare interface ExportResourcePackageDeductDetailsResponse {
+  /** 文件详情 */
+  FileContent?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GrantAccountPrivilegesRequest {
   /** 集群id */
   ClusterId: string;
@@ -4338,6 +4374,20 @@ declare interface ModifyResourcePackageNameRequest {
 }
 
 declare interface ModifyResourcePackageNameResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyResourcePackagesDeductionPriorityRequest {
+  /** 需要修改优先级的资源包类型，CCU：计算资源包，DISK：存储资源包 */
+  PackageType: string;
+  /** 修改后的抵扣优先级对于哪个cynos资源生效 */
+  ClusterId: string;
+  /** 资源包抵扣优先级 */
+  DeductionPriorities: PackagePriority[];
+}
+
+declare interface ModifyResourcePackagesDeductionPriorityResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5125,6 +5175,8 @@ declare interface Cynosdb {
   ExportInstanceErrorLogs(data: ExportInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportInstanceErrorLogsResponse>;
   /** 导出实例慢日志 {@link ExportInstanceSlowQueriesRequest} {@link ExportInstanceSlowQueriesResponse} */
   ExportInstanceSlowQueries(data: ExportInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportInstanceSlowQueriesResponse>;
+  /** 资源包使用明细导出 {@link ExportResourcePackageDeductDetailsRequest} {@link ExportResourcePackageDeductDetailsResponse} */
+  ExportResourcePackageDeductDetails(data: ExportResourcePackageDeductDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportResourcePackageDeductDetailsResponse>;
   /** 批量授权账号权限 {@link GrantAccountPrivilegesRequest} {@link GrantAccountPrivilegesResponse} */
   GrantAccountPrivileges(data: GrantAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<GrantAccountPrivilegesResponse>;
   /** 新购集群询价 {@link InquirePriceCreateRequest} {@link InquirePriceCreateResponse} */
@@ -5185,6 +5237,8 @@ declare interface Cynosdb {
   ModifyResourcePackageClusters(data: ModifyResourcePackageClustersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackageClustersResponse>;
   /** 修改资源包名称 {@link ModifyResourcePackageNameRequest} {@link ModifyResourcePackageNameResponse} */
   ModifyResourcePackageName(data: ModifyResourcePackageNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackageNameResponse>;
+  /** 修改已绑定资源包抵扣优先级 {@link ModifyResourcePackagesDeductionPriorityRequest} {@link ModifyResourcePackagesDeductionPriorityResponse} */
+  ModifyResourcePackagesDeductionPriority(data: ModifyResourcePackagesDeductionPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackagesDeductionPriorityResponse>;
   /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
   ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;
   /** 销毁集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */

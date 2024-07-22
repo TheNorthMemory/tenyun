@@ -78,6 +78,22 @@ declare interface Message {
   ToolCalls?: ToolCall[] | null;
 }
 
+/** 搜索结果信息 */
+declare interface SearchInfo {
+  /** 搜索引文信息 */
+  SearchResults?: SearchResult[] | null;
+}
+
+/** 搜索引文信息 */
+declare interface SearchResult {
+  /** 搜索引文序号 */
+  Index?: string | null;
+  /** 搜索引文标题 */
+  Title?: string | null;
+  /** 搜索引文链接 */
+  Url?: string | null;
+}
+
 /** 用户指定模型使用的工具 */
 declare interface Tool {
   /** 工具类型，当前只支持function */
@@ -145,6 +161,8 @@ declare interface ChatCompletionsRequest {
   ToolChoice?: string;
   /** 强制模型调用指定的工具，当参数ToolChoice为custom时，此参数为必填 */
   CustomTool?: Tool;
+  /** 默认是false，在值为true且命中搜索时，接口会返回SearchInfo */
+  SearchInfo?: boolean;
 }
 
 declare interface ChatCompletionsResponse {
@@ -162,6 +180,8 @@ declare interface ChatCompletionsResponse {
   ErrorMsg?: ErrorMsg | null;
   /** 多轮会话风险审核，值为1时，表明存在信息安全风险，建议终止客户多轮会话。 */
   ModerationLevel?: string;
+  /** 搜索结果信息 */
+  SearchInfo?: SearchInfo;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }
@@ -245,7 +265,7 @@ declare interface TextToImageLiteRequest {
   Prompt: string;
   /** 反向文本描述。用于一定程度上从反面引导模型生成的走向，减少生成结果中出现描述内容的可能，但不能完全杜绝。推荐使用中文。最多可传256个 utf-8 字符。 */
   NegativePrompt?: string;
-  /** 绘画风格。请在 [智能文生图风格列表](https://cloud.tencent.com/document/product/1668/86249) 中选择期望的风格，传入风格编号。推荐使用且只使用一种风格。不传默认使用201（日系动漫风格）。 */
+  /** 绘画风格。请在 [文生图轻量版风格列表](https://cloud.tencent.com/document/product/1729/108992) 中选择期望的风格，传入风格编号。不传默认使用201（日系动漫风格）。 */
   Style?: string;
   /** 生成图分辨率。支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3）、1080:1920（9:16）、1920:1080（16:9），不传默认使用768:768。 */
   Resolution?: string;
