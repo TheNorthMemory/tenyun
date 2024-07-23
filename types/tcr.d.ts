@@ -445,25 +445,25 @@ declare interface RetentionExecution {
 /** 版本保留策略 */
 declare interface RetentionPolicy {
   /** 版本保留策略Id */
-  RetentionId: number;
+  RetentionId?: number;
   /** 命名空间的名称 */
-  NamespaceName: string;
+  NamespaceName?: string;
   /** 规则列表 */
-  RetentionRuleList: RetentionRule[];
+  RetentionRuleList?: RetentionRule[];
   /** 定期执行方式 */
-  CronSetting: string;
+  CronSetting?: string;
   /** 是否启用规则 */
-  Disabled: boolean;
+  Disabled?: boolean;
   /** 基于当前时间根据cronSetting后下一次任务要执行的时间，仅做参考使用 */
-  NextExecutionTime: string;
+  NextExecutionTime?: string;
 }
 
 /** 版本保留规则 */
 declare interface RetentionRule {
   /** 支持的策略，可选值为latestPushedK（保留最新推送多少个版本）nDaysSinceLastPush（保留近天内推送） */
-  Key: string;
+  Key: string | null;
   /** 规则设置下的对应值 */
-  Value: number;
+  Value: number | null;
 }
 
 /** 版本保留执行的规则 */
@@ -1317,12 +1317,12 @@ declare interface DeleteImagePersonalResponse {
 declare interface DeleteImageRequest {
   /** 实例Id */
   RegistryId: string;
+  /** 命名空间名称 */
+  NamespaceName: string;
   /** 镜像仓库名称 */
   RepositoryName: string;
   /** 镜像版本 */
   ImageVersion: string;
-  /** 命名空间名称 */
-  NamespaceName: string;
 }
 
 declare interface DeleteImageResponse {
@@ -1726,6 +1726,10 @@ declare interface DescribeImageManifestsResponse {
   Manifest?: string;
   /** 镜像的配置信息 */
   Config?: string;
+  /** 镜像的Labels信息 */
+  Labels?: KeyValueString[] | null;
+  /** 镜像大小，单位：byte */
+  Size?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1769,9 +1773,9 @@ declare interface DescribeImagesRequest {
 
 declare interface DescribeImagesResponse {
   /** 容器镜像信息列表 */
-  ImageInfoList: TcrImageInfo[];
+  ImageInfoList?: TcrImageInfo[];
   /** 容器镜像总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2135,9 +2139,9 @@ declare interface DescribeTagRetentionExecutionRequest {
 
 declare interface DescribeTagRetentionExecutionResponse {
   /** 版本保留执行记录列表 */
-  RetentionExecutionList: RetentionExecution[];
+  RetentionExecutionList?: RetentionExecution[];
   /** 版本保留执行记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2157,9 +2161,9 @@ declare interface DescribeTagRetentionExecutionTaskRequest {
 
 declare interface DescribeTagRetentionExecutionTaskResponse {
   /** 版本保留执行任务列表 */
-  RetentionTaskList: RetentionTask[];
+  RetentionTaskList?: RetentionTask[];
   /** 版本保留执行任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2177,9 +2181,9 @@ declare interface DescribeTagRetentionRulesRequest {
 
 declare interface DescribeTagRetentionRulesResponse {
   /** 版本保留策略列表 */
-  RetentionPolicyList: RetentionPolicy[];
+  RetentionPolicyList?: RetentionPolicy[];
   /** 版本保留策略总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2825,7 +2829,7 @@ declare interface Tcr {
   DescribeTagRetentionExecution(data: DescribeTagRetentionExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionResponse>;
   /** 查询版本保留执行任务 {@link DescribeTagRetentionExecutionTaskRequest} {@link DescribeTagRetentionExecutionTaskResponse} */
   DescribeTagRetentionExecutionTask(data: DescribeTagRetentionExecutionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionTaskResponse>;
-  /** 查询版本保留规则 {@link DescribeTagRetentionRulesRequest} {@link DescribeTagRetentionRulesResponse} */
+  /** 查询镜像版本保留规则 {@link DescribeTagRetentionRulesRequest} {@link DescribeTagRetentionRulesResponse} */
   DescribeTagRetentionRules(data: DescribeTagRetentionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionRulesResponse>;
   /** 查询个人用户配额 {@link DescribeUserQuotaPersonalRequest} {@link DescribeUserQuotaPersonalResponse} */
   DescribeUserQuotaPersonal(data?: DescribeUserQuotaPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaPersonalResponse>;

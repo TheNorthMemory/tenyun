@@ -276,6 +276,28 @@ declare interface DBNode {
   Zone: string;
 }
 
+/** 描述数据库中某个对象所属的类型、是在哪个数据库、模式、表中的对象。 */
+declare interface DatabaseObject {
+  /** 支持使用的数据库对象类型有：account,database,schema,sequence,procedure,type,function,table,view,matview,column。 */
+  ObjectType: string | null;
+  /** 所描述的数据库对象名称 */
+  ObjectName: string | null;
+  /** 所要描述的数据库对象，所属的数据库名称。当描述对象类型不为database时，此参数必选。 */
+  DatabaseName?: string | null;
+  /** 所要描述的数据库对象，所属的模式名称。当描述对象不为database、schema时，此参数必选。 */
+  SchemaName?: string | null;
+  /** 所要描述的数据库对象，所属的表名称。当描述的对象类型为column时，此参数必填。 */
+  TableName?: string | null;
+}
+
+/** 指定账号对数据库对象拥有的权限列表 */
+declare interface DatabasePrivilege {
+  /** 数据库对象，当ObjectType为database时，DataseName/SchemaName/TableName可为空；当ObjectType为schema时，SchemaName/TableName可为空；当ObjectType为column时，TableName不可为空，其余情况均可为空。 */
+  Object?: DatabaseObject | null;
+  /** 指定账号对数据库对象拥有的权限列表 */
+  PrivilegeSet?: string[] | null;
+}
+
 /** 慢SQL 统计分析接口返回详情 */
 declare interface Detail {
   /** 输入时间范围内所有慢sql执行的总时间，单位毫秒（ms） */
@@ -382,6 +404,16 @@ declare interface LogBackup {
   FinishTime?: string;
   /** 备份的过期时间。 */
   ExpireTime?: string;
+}
+
+/** 用于修改数据库对象的权限，其中包含了数据库对象描述的数据结构、需要修改的权限列表以及修改的类型等。 */
+declare interface ModifyPrivilege {
+  /** 要修改的数据库对象及权限列表 */
+  DatabasePrivilege?: DatabasePrivilege | null;
+  /** 修改的方式，当前仅支持grantObject、revokeObject、alterRole。grantObject代表授权、revokeObject代表收回权、alterRole代表修改账号类型。 */
+  ModifyType?: string | null;
+  /** 当ModifyType为revokeObject才需要此参数，参数为true时，撤销权限会级联撤销。默认为false。 */
+  IsCascade?: boolean | null;
 }
 
 /** 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo） */
@@ -922,6 +954,24 @@ declare interface CloseServerlessDBExtranetAccessResponse {
   RequestId?: string;
 }
 
+declare interface CreateAccountRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 创建的账号名称。 */
+  UserName: string;
+  /** 账号对应的密码。 */
+  Password: string;
+  /** 账号类型。当前支持normal、tencentDBSuper两个输入。normal指代普通用户，tencentDBSuper为拥有pg_tencentdb_superuser角色的账号。 */
+  Type: string;
+  /** 账号备注。 */
+  Remark?: string;
+}
+
+declare interface CreateAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBaseBackupRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -1234,6 +1284,18 @@ declare interface CreateServerlessDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAccountRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 删除的账号名称。 */
+  UserName: string;
+}
+
+declare interface DeleteAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteBaseBackupRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -1324,6 +1386,22 @@ declare interface DeleteServerlessDBInstanceRequest {
 }
 
 declare interface DeleteServerlessDBInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccountPrivilegesRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 查询此账号对某数据库对象所拥有的权限信息。 */
+  UserName: string;
+  /** 要查询的数据库对象信息 */
+  DatabaseObjectSet: DatabaseObject[];
+}
+
+declare interface DescribeAccountPrivilegesResponse {
+  /** 用户拥有数据库user_database的CREATE、CONNECT、TEMPORARY权限 */
+  PrivilegeSet?: DatabasePrivilege[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1712,6 +1790,32 @@ declare interface DescribeDBXlogsResponse {
   TotalCount?: number;
   /** Xlog列表 */
   XlogList?: Xlog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatabaseObjectsRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 查询的对象类型。支持查询的数据对象有：database,schema,sequence,procedure,type,function,table,view,matview,column。 */
+  ObjectType: string;
+  /** 单次显示数量，默认20。可选范围为[0,100]。 */
+  Limit?: number;
+  /** 数据偏移量，从0开始。 */
+  Offset?: number;
+  /** 查询对象所属的数据库。当查询对象类型不为database时，此参数必填。 */
+  DatabaseName?: string;
+  /** 查询对象所属的模式。当查询对象类型不为database、schema时，此参数必填。 */
+  SchemaName?: string;
+  /** 查询对象所属的表。当查询对象类型为column时，此参数必填。 */
+  TableName?: string;
+}
+
+declare interface DescribeDatabaseObjectsResponse {
+  /** 查询对象列表。 */
+  ObjectSet?: string[] | null;
+  /** 查询对象总数量 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2126,6 +2230,32 @@ declare interface IsolateDBInstancesRequest {
 }
 
 declare interface IsolateDBInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface LockAccountRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 账号名称。 */
+  UserName: string;
+}
+
+declare interface LockAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccountPrivilegesRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 修改此账号对某数据库对象的权限。 */
+  UserName: string;
+  /** 修改的权限信息，支持批量修改，一次最高修改50条。 */
+  ModifyPrivilegeSet: ModifyPrivilege[];
+}
+
+declare interface ModifyAccountPrivilegesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2550,6 +2680,18 @@ declare interface SwitchDBInstancePrimaryResponse {
   RequestId?: string;
 }
 
+declare interface UnlockAccountRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 账号名称。 */
+  UserName: string;
+}
+
+declare interface UnlockAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeDBInstanceKernelVersionRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -2637,6 +2779,8 @@ declare interface Postgres {
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
   /** 关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
+  /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
+  CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
   /** 创建实例数据备份 {@link CreateBaseBackupRequest} {@link CreateBaseBackupResponse} */
   CreateBaseBackup(data: CreateBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseBackupResponse>;
   /** 创建实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
@@ -2655,6 +2799,8 @@ declare interface Postgres {
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
   /** 创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
+  /** 删除数据库账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
+  DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
   /** 删除实例数据备份 {@link DeleteBaseBackupRequest} {@link DeleteBaseBackupResponse} */
   DeleteBaseBackup(data: DeleteBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaseBackupResponse>;
   /** 删除实例网络 {@link DeleteDBInstanceNetworkAccessRequest} {@link DeleteDBInstanceNetworkAccessResponse} */
@@ -2669,6 +2815,8 @@ declare interface Postgres {
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
   /** 删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
   DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
+  /** 查询数据库账号的权限信息 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
+  DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
   /** 查询实例的数据库账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询实例可恢复的时间范围 {@link DescribeAvailableRecoveryTimeRequest} {@link DescribeAvailableRecoveryTimeResponse} */
@@ -2709,6 +2857,8 @@ declare interface Postgres {
   DescribeDBVersions(data?: DescribeDBVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBVersionsResponse>;
   /** 获取实例Xlog列表（废弃） {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
   DescribeDBXlogs(data: DescribeDBXlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBXlogsResponse>;
+  /** 查询数据库对象列表 {@link DescribeDatabaseObjectsRequest} {@link DescribeDatabaseObjectsResponse} */
+  DescribeDatabaseObjects(data: DescribeDatabaseObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseObjectsResponse>;
   /** 查询实例的数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询默认参数列表 {@link DescribeDefaultParametersRequest} {@link DescribeDefaultParametersResponse} */
@@ -2753,6 +2903,10 @@ declare interface Postgres {
   InquiryPriceUpgradeDBInstance(data: InquiryPriceUpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeDBInstanceResponse>;
   /** 隔离实例 {@link IsolateDBInstancesRequest} {@link IsolateDBInstancesResponse} */
   IsolateDBInstances(data: IsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstancesResponse>;
+  /** 锁定数据库账号 {@link LockAccountRequest} {@link LockAccountResponse} */
+  LockAccount(data: LockAccountRequest, config?: AxiosRequestConfig): AxiosPromise<LockAccountResponse>;
+  /** 修改数据库账号的权限、类型 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */
+  ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
   /** 修改账号备注 {@link ModifyAccountRemarkRequest} {@link ModifyAccountRemarkResponse} */
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
   /** 修改备份文件下载限制 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
@@ -2805,6 +2959,8 @@ declare interface Postgres {
   SetAutoRenewFlag(data: SetAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoRenewFlagResponse>;
   /** 切换实例主备关系 {@link SwitchDBInstancePrimaryRequest} {@link SwitchDBInstancePrimaryResponse} */
   SwitchDBInstancePrimary(data: SwitchDBInstancePrimaryRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDBInstancePrimaryResponse>;
+  /** 解除数据库账号锁定 {@link UnlockAccountRequest} {@link UnlockAccountResponse} */
+  UnlockAccount(data: UnlockAccountRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockAccountResponse>;
   /** 升级实例配置（废弃） {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
   /** 升级实例内核版本号 {@link UpgradeDBInstanceKernelVersionRequest} {@link UpgradeDBInstanceKernelVersionResponse} */

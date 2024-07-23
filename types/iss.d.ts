@@ -2397,7 +2397,7 @@ declare interface ListTasksRequest {
   PageNumber?: number;
   /** 每页数量，默认为20 */
   PageSize?: number;
-  /** 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，BatchUpgradeDevice，BatchResetDevice,BatchRebootDevice */
+  /** 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，BatchUpgradeDevice，BatchResetDevice,BatchRebootDevice,BatchRefreshDeviceChannel */
   Operation?: string;
   /** 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-未执行，2-执行中，3-完成，4-取消 */
   Status?: number;

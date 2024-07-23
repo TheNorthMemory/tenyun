@@ -206,6 +206,14 @@ declare interface BatchIpAccessControlItem {
   IpList?: string[] | null;
   /** 创建时间 */
   CreateTime?: number | null;
+  /** 定时任务类型 */
+  JobType?: string | null;
+  /** 周期任务类型 */
+  CronType?: string | null;
+  /** 定时任务配置详情 */
+  JobDateTime?: JobDateTime | null;
+  /** 生效状态 */
+  ValidStatus?: number | null;
 }
 
 /** Bot资源信息 */
@@ -275,29 +283,39 @@ declare interface CCRuleData {
 /** cc规则 */
 declare interface CCRuleItem {
   /** 动作 */
-  ActionType: number;
+  ActionType?: number;
   /** 高级模式 */
-  Advance: number;
+  Advance?: number;
   /** 时间周期 */
-  Interval: number;
+  Interval?: number;
   /** 限制次数 */
-  Limit: number;
+  Limit?: number;
   /** 匹配方法 */
-  MatchFunc: number;
+  MatchFunc?: number;
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 优先级 */
-  Priority: number;
+  Priority?: number;
   /** 状态 */
-  Status: number;
+  Status?: number;
   /** 更新时间戳 */
-  TsVersion: number;
+  TsVersion?: number;
   /** 匹配url */
-  Url: string;
+  Url?: string;
   /** 策略动作有效时间 */
-  ValidTime: number;
+  ValidTime?: number;
   /** 高级参数 */
-  OptionsArr: string | null;
+  OptionsArr?: string | null;
+  /** url长度 */
+  Length?: number | null;
+  /** 规则ID */
+  RuleId?: number | null;
+  /** 事件id */
+  EventId?: string | null;
+  /** 关联的Session规则 */
+  SessionApplied?: number[] | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
 }
 
 /** CC规则详情 */
@@ -1214,6 +1232,8 @@ declare interface InstanceInfo {
   MiniExtendPkg?: MiniExtendPkg | null;
   /** 计费项 */
   BillingItem?: string | null;
+  /** 实例延期释放标识 */
+  FreeDelayFlag?: number | null;
 }
 
 /** 数据封装 */
@@ -1248,6 +1268,12 @@ declare interface IpAccessControlItem {
   IpList?: string[] | null;
   /** 规则创建时间 */
   CreateTime?: number | null;
+  /** 定时任务类型 */
+  JobType?: string | null;
+  /** 周期任务类型 */
+  CronType?: string | null;
+  /** 定时任务配置详情 */
+  JobDateTime?: JobDateTime | null;
 }
 
 /** IP黑白名单参数结构体，主要用于IP黑白名单的导入。 */
@@ -1763,47 +1789,65 @@ declare interface UserDomainInfo {
 /** 用户特征规则描述 */
 declare interface UserSignatureRule {
   /** 特征ID */
-  ID: string;
+  ID?: string;
   /** 规则开关 */
-  Status: number;
+  Status?: number;
   /** 主类ID */
-  MainClassID: string;
+  MainClassID?: string;
   /** 子类ID */
-  SubClassID: string;
+  SubClassID?: string;
   /** CVE ID */
-  CveID: string;
+  CveID?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 主类名字，根据Language字段输出中文/英文 */
-  MainClassName: string;
+  MainClassName?: string;
   /** 子类名字，根据Language字段输出中文/英文，若子类id为00000000，此字段为空 */
-  SubClassName: string;
+  SubClassName?: string;
   /** 规则描述 */
-  Description: string;
+  Description?: string;
   /** 0/1 */
-  Reason: number;
+  Reason?: number;
+  /** 1: 高危 2:中危 3:低危 */
+  RiskLevel?: number | null;
 }
 
 /** 用户规则白名单 */
 declare interface UserWhiteRule {
   /** 白名单的id */
-  WhiteRuleId: number;
+  WhiteRuleId?: number;
   /** 规则id */
-  SignatureId: string;
+  SignatureId?: string;
   /** 状态 */
-  Status: number;
+  Status?: number;
   /** 匹配域 */
-  MatchField: string;
+  MatchField?: string;
+  /** 匹配参数 */
+  MatchParams?: string | null;
   /** 匹配方法 */
-  MatchMethod: string;
+  MatchMethod?: string;
   /** 匹配内容 */
-  MatchContent: string;
+  MatchContent?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
+  /** 规则ID列表 */
+  SignatureIds?: string[] | null;
+  /** 大类规则ID列表 */
+  TypeIds?: string[] | null;
+  /** 大类规则ID */
+  TypeId?: string | null;
+  /** 0:按照特定规则ID加白, 1:按照规则类型加白 */
+  Mode?: number | null;
+  /** 规则名 */
+  Name?: string | null;
+  /** 匹配规则列表 */
+  MatchInfo?: UserWhiteRuleItem[] | null;
+  /** MatchInfo字符串 */
+  MatchInfoStr?: string | null;
 }
 
 /** 用户规则白名单规则子项 */
@@ -1814,6 +1858,8 @@ declare interface UserWhiteRuleItem {
   MatchMethod: string;
   /** 匹配内容 */
   MatchContent: string;
+  /** 匹配参数名 */
+  MatchParams?: string | null;
 }
 
 /** Vip信息 */
@@ -1941,6 +1987,12 @@ declare interface AddAttackWhiteRuleRequest {
   SignatureId?: string;
   /** 加白的规则ID列表 */
   SignatureIds?: string[];
+  /** 加白的大类规则ID */
+  TypeIds?: string[];
+  /** 0:按照特定规则ID加白, 1:按照规则类型加白 */
+  Mode?: number;
+  /** 规则名 */
+  Name?: string;
 }
 
 declare interface AddAttackWhiteRuleResponse {
@@ -2193,10 +2245,14 @@ declare interface CreateIpAccessControlRequest {
   InstanceId?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
-  /** 可选值为：batch（批量添加）、bot、cc、custom（非批量添加时的默认值） */
+  /** 可选值为：batch（批量添加）、bot（BOT流量分析中的BOT详情列表中添加时）、cc（在攻击日志列表中对攻击类型为CC的IP添加时）、custom（非批量添加时的默认值） */
   SourceType?: string;
   /** 备注 */
   Note?: string;
+  /** 定时配置类型 */
+  JobType?: string;
+  /** 定时配置详情 */
+  JobDateTime?: JobDateTime;
 }
 
 declare interface CreateIpAccessControlResponse {
@@ -2683,7 +2739,7 @@ declare interface DescribeAttackWhiteRuleRequest {
   Offset: number;
   /** 每页容量 */
   Limit: number;
-  /** 排序字段，支持user_id, signature_id, modify_time */
+  /** 排序的字段，支持user_id, signature_id, modify_time */
   By?: string;
   /** 排序方式 */
   Order?: string;
@@ -2693,9 +2749,9 @@ declare interface DescribeAttackWhiteRuleRequest {
 
 declare interface DescribeAttackWhiteRuleResponse {
   /** 规则总数 */
-  Total: number;
+  Total?: number;
   /** 规则白名单列表 */
-  List: UserWhiteRule[] | null;
+  List?: UserWhiteRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3141,6 +3197,8 @@ declare interface DescribeInstancesRequest {
   Limit: number;
   /** 过滤数组 */
   Filters?: FiltersItemNew[];
+  /** 释放延期标识 */
+  FreeDelayFlag?: number;
 }
 
 declare interface DescribeInstancesResponse {
@@ -3169,7 +3227,7 @@ declare interface DescribeIpAccessControlRequest {
   CtsMax?: number;
   /** 分页偏移量，取Limit整数倍。最小值为0，最大值= Total/Limit向上取整 */
   OffSet?: number;
-  /** 每页返回的数量 */
+  /** 每页返回的数量，默认为20 */
   Limit?: number;
   /** 来源 */
   Source?: string;
@@ -3185,6 +3243,8 @@ declare interface DescribeIpAccessControlRequest {
   ValidTimeStampMax?: string;
   /** 规则ID */
   RuleId?: number;
+  /** 定时任务类型筛选0 1 2 3 4 */
+  TimerType?: number;
 }
 
 declare interface DescribeIpAccessControlResponse {
@@ -3201,7 +3261,7 @@ declare interface DescribeIpHitItemsRequest {
   Domain: string;
   /** 计数标识 */
   Count: number;
-  /** 类别 */
+  /** 类别，ip封禁传值auto_deny */
   Category: string;
   /** 有效时间最小时间戳 */
   VtsMin?: number;
@@ -3541,9 +3601,9 @@ declare interface DescribeUserSignatureRuleRequest {
 
 declare interface DescribeUserSignatureRuleResponse {
   /** 规则总数 */
-  Total: number;
+  Total?: number;
   /** 规则列表 */
-  Rules: UserSignatureRule[] | null;
+  Rules?: UserSignatureRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3879,6 +3939,12 @@ declare interface ModifyAttackWhiteRuleRequest {
   SignatureId?: string;
   /** 编辑的加白的规则ID列表 */
   SignatureIds?: string[];
+  /** 加白的大类规则ID */
+  TypeIds?: string[];
+  /** 0表示按照特定规则ID加白, 1表示按照规则类型加白 */
+  Mode?: number;
+  /** 规则名 */
+  Name?: string;
 }
 
 declare interface ModifyAttackWhiteRuleResponse {
@@ -4239,6 +4305,10 @@ declare interface ModifyIpAccessControlRequest {
   SourceType?: string;
   /** 备注 */
   Note?: string;
+  /** 定时配置类型 */
+  JobType?: string;
+  /** 定时配置详情 */
+  JobDateTime?: JobDateTime;
 }
 
 declare interface ModifyIpAccessControlResponse {
@@ -4661,6 +4731,8 @@ declare interface UpsertCCRuleRequest {
   RuleId?: number;
   /** 规则创建时间 */
   CreateTime?: number;
+  /** url长度 */
+  Length?: number;
 }
 
 declare interface UpsertCCRuleResponse {
@@ -4753,7 +4825,7 @@ declare interface Waf {
   CreateDeals(data: CreateDealsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealsResponse>;
   /** 添加负载均衡型WAF防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
-  /** Waf IP黑白名单新增接口 {@link CreateIpAccessControlRequest} {@link CreateIpAccessControlResponse} */
+  /** IP黑白名单新增接口 {@link CreateIpAccessControlRequest} {@link CreateIpAccessControlResponse} */
   CreateIpAccessControl(data: CreateIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpAccessControlResponse>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
@@ -4813,7 +4885,7 @@ declare interface Waf {
   DescribeAttackWhiteRule(data: DescribeAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackWhiteRuleResponse>;
   /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
-  /** Waf 批量防护IP黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
+  /** 批量防护IP黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
   /** 获取SAAS型接入的紧急CC防护状态 {@link DescribeCCAutoStatusRequest} {@link DescribeCCAutoStatusResponse} */
   DescribeCCAutoStatus(data: DescribeCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCAutoStatusResponse>;
@@ -4857,7 +4929,7 @@ declare interface Waf {
   DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
   /** 查询用户所有实例的详细信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** Waf IP黑白名单查询 {@link DescribeIpAccessControlRequest} {@link DescribeIpAccessControlResponse} */
+  /** IP黑白名单查询 {@link DescribeIpAccessControlRequest} {@link DescribeIpAccessControlResponse} */
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
@@ -4971,7 +5043,7 @@ declare interface Waf {
   ModifyInstanceQpsLimit(data: ModifyInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceQpsLimitResponse>;
   /** 修改实例的自动续费开关 {@link ModifyInstanceRenewFlagRequest} {@link ModifyInstanceRenewFlagResponse} */
   ModifyInstanceRenewFlag(data: ModifyInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceRenewFlagResponse>;
-  /** Waf IP黑白名单编辑接口 {@link ModifyIpAccessControlRequest} {@link ModifyIpAccessControlResponse} */
+  /** IP黑白名单编辑接口 {@link ModifyIpAccessControlRequest} {@link ModifyIpAccessControlResponse} */
   ModifyIpAccessControl(data: ModifyIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpAccessControlResponse>;
   /** 设置某个domain下基础安全模块的开关 {@link ModifyModuleStatusRequest} {@link ModifyModuleStatusResponse} */
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;

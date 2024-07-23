@@ -87,7 +87,7 @@ declare interface SearchInfo {
 /** 搜索引文信息 */
 declare interface SearchResult {
   /** 搜索引文序号 */
-  Index?: string | null;
+  Index?: number | null;
   /** 搜索引文标题 */
   Title?: string | null;
   /** 搜索引文链接 */

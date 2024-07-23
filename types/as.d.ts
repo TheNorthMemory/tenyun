@@ -176,6 +176,8 @@ declare interface DataDisk {
   Encrypt?: boolean | null;
   /** 云硬盘性能，单位：MB/s。使用此参数可给云硬盘购买额外的性能，功能介绍和类型限制详见：[增强型 SSD 云硬盘额外性能说明](https://cloud.tencent.com/document/product/362/51896)。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且 需容量 > 460GB。 */
   ThroughputPerformance?: number | null;
+  /** 突发性能。是否开启突发性能，默认取值为 false。注：内测中，需提单申请后使用。 */
+  BurstPerformance?: boolean | null;
 }
 
 /** 伸缩活动状态详细描述。 */
@@ -314,6 +316,8 @@ declare interface InstanceNameSettings {
   InstanceName: string;
   /** 云服务器实例名的风格，取值范围包括 ORIGINAL 和 UNIQUE，默认为 ORIGINAL。ORIGINAL，AS 直接将入参中所填的 InstanceName 传递给 CVM，CVM 可能会对 InstanceName 追加序列号，伸缩组中实例的 InstanceName 会出现冲突的情况。UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会对其进行拓展，伸缩组中实例的 InstanceName 可以保证唯一。 */
   InstanceNameStyle?: string;
+  /** 云服务器实例名后缀。字符长度为[1,105]，且与 InstanceName 的长度和不能超过107。假设后缀名称为 suffix，原实例名为 test.0，最终实例名为 test.0.suffix。 */
+  InstanceNameSuffix?: string | null;
 }
 
 /** 实例标签。通过指定该参数，可以为扩容的实例绑定标签。 */

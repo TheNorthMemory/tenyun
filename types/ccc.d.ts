@@ -526,6 +526,8 @@ declare interface SkillGroupInfoItem {
   LastModifyTimestamp?: number | null;
   /** 技能组类型0-电话，1-在线，3-音频，4-视频 */
   SkillGroupType?: number | null;
+  /** 技能组内线号码 */
+  Alias?: string | null;
 }
 
 /** 技能组信息 */

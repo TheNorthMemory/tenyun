@@ -995,7 +995,7 @@ declare interface CheckProxyCreateRequest {
 
 declare interface CheckProxyCreateResponse {
   /** 查询能否创建给定配置的通道，1可以创建，0不可创建。 */
-  CheckFlag: number;
+  CheckFlag?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1607,9 +1607,9 @@ declare interface DescribeAccessRegionsRequest {
 
 declare interface DescribeAccessRegionsResponse {
   /** 加速区域总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 加速区域详情列表 */
-  AccessRegionSet: RegionDetail[];
+  AccessRegionSet?: RegionDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1627,7 +1627,7 @@ declare interface DescribeBlackHeaderRequest {
 
 declare interface DescribeBlackHeaderResponse {
   /** 禁用的自定义header列表 */
-  BlackHeaders: string[] | null;
+  BlackHeaders?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1667,7 +1667,7 @@ declare interface DescribeCountryAreaMappingRequest {
 
 declare interface DescribeCountryAreaMappingResponse {
   /** 国家地区编码映射表。 */
-  CountryAreaMappingList: CountryAreaMap[];
+  CountryAreaMappingList?: CountryAreaMap[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2135,13 +2135,13 @@ declare interface DescribeRegionAndPriceRequest {
 
 declare interface DescribeRegionAndPriceResponse {
   /** 源站区域总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 源站区域详情列表 */
-  DestRegionSet: RegionDetail[];
+  DestRegionSet?: RegionDetail[];
   /** 通道带宽费用梯度价格 */
-  BandwidthUnitPrice: BandwidthPriceGradient[];
+  BandwidthUnitPrice?: BandwidthPriceGradient[];
   /** 带宽价格货币类型：CNY 人民币USD 美元 */
-  Currency: string;
+  Currency?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2385,21 +2385,21 @@ declare interface InquiryPriceCreateProxyRequest {
 
 declare interface InquiryPriceCreateProxyResponse {
   /** 通道基础费用价格，单位：元/天。 */
-  ProxyDailyPrice: number;
+  ProxyDailyPrice?: number;
   /** 通道带宽费用梯度价格。 */
-  BandwidthUnitPrice: BandwidthPriceGradient[] | null;
+  BandwidthUnitPrice?: BandwidthPriceGradient[] | null;
   /** 通道基础费用折扣价格，单位：元/天。 */
-  DiscountProxyDailyPrice: number;
+  DiscountProxyDailyPrice?: number;
   /** 价格使用的货币，支持人民币，美元等。 */
-  Currency: string;
+  Currency?: string;
   /** 通道的流量费用价格，单位: 元/GB */
-  FlowUnitPrice: number | null;
+  FlowUnitPrice?: number | null;
   /** 通道的流量费用折扣价格，单位:元/GB */
-  DiscountFlowUnitPrice: number | null;
+  DiscountFlowUnitPrice?: number | null;
   /** 精品BGP的带宽费用价格，单位: 元/Mbps/天 */
-  Cn2BandwidthPrice: number | null;
+  Cn2BandwidthPrice?: number | null;
   /** 精品BGP的折后带宽费用价格，单位: 元/Mbps/天 */
-  Cn2BandwidthPriceWithDiscount: number | null;
+  Cn2BandwidthPriceWithDiscount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

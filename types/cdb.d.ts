@@ -1730,6 +1730,14 @@ declare interface TaskDetail {
   TaskAttachInfo?: TaskAttachInfo[] | null;
 }
 
+/** 5.7升级8.0指定参数的结构 */
+declare interface UpgradeEngineVersionParams {
+  /** 参数名称 */
+  Name?: string | null;
+  /** 参数值 */
+  Value?: string | null;
+}
+
 /** 文件上传描述 */
 declare interface UploadInfo {
   /** 文件所有分片数 */
@@ -5021,6 +5029,8 @@ declare interface UpgradeDBInstanceEngineVersionRequest {
   UpgradeSubversion?: number;
   /** 延迟阈值。取值范围1~10 */
   MaxDelayTime?: number;
+  /** 版本升级支持指定参数 */
+  ParamList?: UpgradeEngineVersionParams[];
 }
 
 declare interface UpgradeDBInstanceEngineVersionResponse {

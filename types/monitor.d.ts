@@ -3969,13 +3969,13 @@ declare interface DescribePrometheusAlertGroupsResponse {
 }
 
 declare interface DescribePrometheusAlertPolicyRequest {
-  /** 实例id */
+  /** 实例ID */
   InstanceId: string;
-  /** 分页 */
+  /** 分页偏移量，默认为0。 示例值：1 */
   Offset?: number;
-  /** 分页 */
+  /** 分页返回数量，默认为20，最大值为100 */
   Limit?: number;
-  /** 过滤支持ID，Name */
+  /** 仅支持按Name, Values字段过滤:- Name = Name 按照给定的告警规则名称列表匹配- Name = ID 按照给定的告警规则ID列表匹配 */
   Filters?: Filter[];
 }
 
@@ -4211,13 +4211,13 @@ declare interface DescribePrometheusRecordRuleYamlResponse {
 }
 
 declare interface DescribePrometheusRecordRulesRequest {
-  /** 实例id */
+  /** 实例ID示例值：prom-343kafd34 */
   InstanceId: string;
-  /** 分页 */
+  /** 偏移量，默认为0。 示例值：1 */
   Offset?: number;
-  /** 分页 */
+  /** 返回数量，默认为20，最大值为100。示例值：1 */
   Limit?: number;
-  /** 过滤 */
+  /** 仅支持按Name, Values字段过滤:- Name = Name 按照给定的预聚合名称列表匹配 */
   Filters?: Filter[];
 }
 
@@ -4289,11 +4289,11 @@ declare interface DescribePrometheusTargetsTMPResponse {
 }
 
 declare interface DescribePrometheusTempRequest {
-  /** 模糊过滤条件，支持Level 按模板级别过滤Name 按名称过滤Describe 按描述过滤ID 按templateId过滤 */
+  /** 仅支持按Name, Values字段过滤:* Name = Name 按照给定的模板名称列表匹配* Name = ID 按照给定的模板ID列表匹配* Name = Describe 按照给定的模板描述列表匹配* Name = Level 按照给定的模板维度(instance, cluster)列表匹配 */
   Filters?: Filter[];
   /** 分页偏移量，默认为0 */
   Offset?: number;
-  /** 总数限制 */
+  /** 分页返回数量，默认为20，最大值为100 */
   Limit?: number;
 }
 
@@ -4349,9 +4349,9 @@ declare interface DescribeRecordingRulesRequest {
 
 declare interface DescribeRecordingRulesResponse {
   /** 规则组数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 规则组详情 */
-  RecordingRuleSet: RecordingRuleSet[] | null;
+  RecordingRuleSet?: RecordingRuleSet[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4713,9 +4713,9 @@ declare interface ModifyPrometheusAgentExternalLabelsResponse {
 }
 
 declare interface ModifyPrometheusAlertPolicyRequest {
-  /** 实例id */
+  /** Prometheus 实例 ID */
   InstanceId: string;
-  /** 告警配置 */
+  /** 告警配置，[具体参考](https://cloud.tencent.com/document/api/248/30354) */
   AlertRule: PrometheusAlertPolicyItem;
 }
 

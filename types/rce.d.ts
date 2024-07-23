@@ -14,6 +14,24 @@ declare interface AccountInfo {
   OtherAccount?: OtherAccountInfo;
 }
 
+/** 数据授权信息 */
+declare interface DataAuthorizationInfo {
+  /** 客户主体名称。示例值：某某有限公司。 */
+  DataProviderName: string;
+  /** 接收方主体名称。固定填：腾讯云计算（北京）有限责任公司示例值：腾讯云计算（北京）有限责任公司 */
+  DataRecipientName: string;
+  /** 客户请求RCE所涉及的用户敏感数据类型，支持多选。实际以接口请求传参为准。1-手机号；2-微信开放账号；3-QQ开放账号；4-IP地址；5-设备指纹；999-其它；示例值：[1, 4] */
+  UserDataType: number[];
+  /** 客户是否已经获取用户授权。1-已授权；其它值为未授权。示例值：1 */
+  IsAuthorize: number;
+  /** 是否是用户个人敏感数据。固定填：1。示例值：1 */
+  IsPersonalData: number;
+  /** 客户获得的用户授权期限时间戳（单位秒）。不填默认无固定期限。示例值：1719805604 */
+  AuthorizationTerm?: number;
+  /** 客户获得用户授权所依赖的协议地址。示例值：https://www.*****.com/***** */
+  PrivacyPolicyLink?: string;
+}
+
 /** 全栈式风控引擎入参 */
 declare interface InputCryptoManageMarketingRisk {
   /** 是否授权：1已授权，否则未授权。 调用全栈式风控引擎接口服务时，客户需先明确授权 */
@@ -78,6 +96,8 @@ declare interface InputManageMarketingRisk {
   OnlineScam?: OnlineScamInfo;
   /** 1：Android2：iOS3：H54：小程序 */
   Platform?: string;
+  /** 数据授权信息。 */
+  DataAuthorization?: DataAuthorizationInfo;
 }
 
 /** 诈骗信息。 */

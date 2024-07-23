@@ -762,6 +762,8 @@ declare interface RunJobDescription {
   UseOldSystemConnector?: boolean;
   /** 自定义时间戳 */
   CustomTimestamp?: number;
+  /** timestamp; latest-offset; earliest-offset; 任选一种 */
+  KafkaScanMode?: string;
 }
 
 /** 描述Savepoint信息 */
