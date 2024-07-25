@@ -137,6 +137,8 @@ declare interface SubmitVideoStylizationJobRequest {
   StyleId: string;
   /** 输入视频URL。视频要求：- 视频格式：mp4、mov；- 视频时长：1～60秒；- 视频分辨率：540P~2056P，即长宽像素数均在540px～2056px范围内；- 视频大小：不超过200M；- 视频FPS：15～60fps。 */
   VideoUrl: string;
+  /** 风格化强度 可选参数["low","medium","high"] "low":风格化强度弱,"medium":"风格化强度中等","high":"风格化强度强" 默认为medium */
+  StyleStrength?: string;
 }
 
 declare interface SubmitVideoStylizationJobResponse {

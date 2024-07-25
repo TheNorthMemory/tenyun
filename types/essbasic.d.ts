@@ -2612,7 +2612,7 @@ declare interface DescribeBatchOrganizationRegistrationUrlsRequest {
 }
 
 declare interface DescribeBatchOrganizationRegistrationUrlsResponse {
-  /** 子企业注册认证的的链接列表 */
+  /** 子企业注册认证的链接列表 */
   OrganizationAuthUrls?: OrganizationAuthUrl[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

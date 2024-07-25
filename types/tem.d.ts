@@ -1357,7 +1357,7 @@ declare interface DeployApplicationRequest {
   DeployMode?: string;
   /** 部署类型为 IMAGE 时，该参数表示镜像 tag。部署类型为 JAR/WAR 时，该参数表示包版本号。 */
   DeployVersion?: string;
-  /** 包名。使用 JAR 包或者 WAR 包部署的时候必填。 */
+  /** 传入内容为 /jar包名字 的形式。也就是在 jar包名字前增加一个/。如上传的 jar 包名字为 demo-1.0.0.jar，那么这里传入内容为：/demo-1.0.0.jar注：jar 包需要通过 tem 页面上传过，tem 后端才能拉到该 jar 包。 */
   PkgName?: string;
   /** JDK 版本。- KONA:8：使用 kona jdk 8。- OPEN:8：使用 open jdk 8。- KONA:11：使用 kona jdk 11。- OPEN:11：使用 open jdk 11。 */
   JdkVersion?: string;
@@ -1417,11 +1417,15 @@ declare interface DeployApplicationRequest {
   RepoServer?: string;
   /** 镜像部署时，仓库类型：0：个人仓库；1：企业版；2：公共仓库；3：tem托管仓库；4：demo仓库 */
   RepoType?: number;
+  /** 启动后执行的脚本，base64 编码 */
+  PostStartEncoded?: string;
+  /** 停止前执行的脚本，base64 编码 */
+  PreStopEncoded?: string;
 }
 
 declare interface DeployApplicationResponse {
   /** 版本ID（前端可忽略） */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

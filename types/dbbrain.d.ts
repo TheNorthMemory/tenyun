@@ -1067,6 +1067,8 @@ declare interface CreateKillTaskRequest {
   Command?: string;
   /** 任务过滤条件，支持单条件前缀匹配。 */
   Info?: string;
+  /** 任务过滤条件，支持多个关键字匹配，与Info参数互斥。 */
+  Infos?: string[];
   /** 任务过滤条件，用户类型。 */
   User?: string;
   /** 任务过滤条件，会话持续时长，单位秒。 */
@@ -1077,7 +1079,7 @@ declare interface CreateKillTaskRequest {
 
 declare interface CreateKillTaskResponse {
   /** kill会话任务创建成功返回1 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1047,7 +1047,7 @@ declare interface DeletePredictiveDialingCampaignResponse {
 declare interface DeleteStaffRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
-  /** 待删除客服邮箱列表 */
+  /** 待删除客服邮箱列表，一次最大支持200个。 */
   StaffList: string[];
 }
 
@@ -1587,9 +1587,9 @@ declare interface DescribeTelCallInfoResponse {
 }
 
 declare interface DescribeTelCdrRequest {
-  /** 起始时间戳，Unix 秒级时间戳 */
+  /** 起始时间戳，Unix 秒级时间戳，最大支持近180天。 */
   StartTimeStamp: number;
-  /** 结束时间戳，Unix 秒级时间戳 */
+  /** 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。 */
   EndTimeStamp: number;
   /** 实例 ID（废弃） */
   InstanceId?: number;

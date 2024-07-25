@@ -366,6 +366,8 @@ declare interface NativeNodePoolInfo {
   InstanceTypes?: string[];
   /** 期望节点数 */
   Replicas?: number | null;
+  /** 就绪 Machine 个数 */
+  ReadyReplicas?: number;
   /** 公网带宽设置 */
   InternetAccessible?: InternetAccessible | null;
   /** 原生节点池数据盘 */

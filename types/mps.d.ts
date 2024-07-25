@@ -5439,7 +5439,7 @@ declare interface CreateStreamLinkOutputInfoRequest {
 
 declare interface CreateStreamLinkOutputInfoResponse {
   /** 创建后的Output信息。 */
-  Info: DescribeOutput;
+  Info?: DescribeOutput;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6191,7 +6191,7 @@ declare interface DescribeStreamLinkRegionsRequest {
 
 declare interface DescribeStreamLinkRegionsResponse {
   /** 媒体传输地区信息。 */
-  Info: StreamLinkRegionInfo;
+  Info?: StreamLinkRegionInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

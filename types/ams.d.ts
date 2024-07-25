@@ -335,31 +335,31 @@ declare interface CreateAudioModerationSyncTaskRequest {
 
 declare interface CreateAudioModerationSyncTaskResponse {
   /** 请求接口时传入的数据标识 */
-  DataId: string;
+  DataId?: string;
   /** 文件名称，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符 */
-  Name: string | null;
+  Name?: string | null;
   /** Biztype为策略的具体的编号，用于接口调度，在内容安全控制台中可配置。不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；调用时不传入Biztype代表采用默认的识别策略。 */
-  BizType: string;
+  BizType?: string;
   /** 智能审核服务对于内容违规类型的等级，可选值：Pass 建议通过；Reveiw 建议复审；Block 建议屏蔽； */
-  Suggestion: string | null;
+  Suggestion?: string | null;
   /** 智能审核服务对于内容违规类型的判断，详见返回值列表如：Label：Porn（色情）； */
-  Label: string | null;
+  Label?: string | null;
   /** 音频文本，备注：这里的文本最大只返回前1000个字符 */
-  AsrText: string | null;
+  AsrText?: string | null;
   /** 音频中对话内容审核结果； */
-  TextResults: TextResult[] | null;
+  TextResults?: TextResult[] | null;
   /** 音频中低俗内容审核结果； */
-  MoanResults: MoanResult[] | null;
+  MoanResults?: MoanResult[] | null;
   /** 该字段用于返回当前标签（Lable）下的二级标签。注意：此字段可能返回null，表示取不到有效值。 */
-  SubLabel: string | null;
+  SubLabel?: string | null;
   /** 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。 */
-  LanguageResults: AudioResultDetailLanguageResult[] | null;
+  LanguageResults?: AudioResultDetailLanguageResult[] | null;
   /** 音频中说话人识别返回结果； */
-  SpeakerResults: AudioResultDetailSpeakerResult[] | null;
+  SpeakerResults?: AudioResultDetailSpeakerResult[] | null;
   /** 识别类标签结果信息列表 */
-  RecognitionResults: RecognitionResult[] | null;
+  RecognitionResults?: RecognitionResult[] | null;
   /** 识别音频时长，单位为毫秒； */
-  Duration: string | null;
+  Duration?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

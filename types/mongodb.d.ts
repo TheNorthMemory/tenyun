@@ -422,6 +422,30 @@ declare interface Operation {
   OpId: number;
 }
 
+/** 数据库参数模板 */
+declare interface ParamTpl {
+  /** 参数模板名称 */
+  TplName: string;
+  /** 参数模板ID */
+  TplId: string;
+  /** 适用数据库版本 */
+  MongoVersion: string;
+  /** 适用数据库类型 */
+  ClusterType: string;
+  /** 参数模板描述 */
+  TplDesc: string;
+  /** 模板类型，包括DEFAULT（默认模板）及CUSTOMIZE（定制模板）两种类型 */
+  TplType: string;
+}
+
+/** 数据库参数 */
+declare interface ParamType {
+  /** 参数 */
+  Key: string;
+  /** 参数值 */
+  Value: string;
+}
+
 /** 修改实例节点详情 */
 declare interface RemoveNodeList {
   /** 需要删除的节点角色。- SECONDARY：Mongod 从节点。- READONLY：只读节点。- MONGOS：Mongos 节点。 */
@@ -715,6 +739,8 @@ declare interface CreateDBInstanceHourRequest {
   ReadonlyNodeAvailabilityZoneList?: string[];
   /** Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。 */
   HiddenZone?: string;
+  /** 参数模板 ID。参数模板是一组 MongoDB 的参数并为预设置了参数值的集合，将一组有相同诉求的参数及值 存为模板，在创建实例时，可直接引用参数值到新实例。合理使用参数模板，可以提高MongoDB数据库的效率。模板列表从 DescribeDBInstanceParamTpl 接口获取，注意模板支持的版本。 */
+  ParamTemplateId?: string;
 }
 
 declare interface CreateDBInstanceHourResponse {
@@ -722,6 +748,28 @@ declare interface CreateDBInstanceHourResponse {
   DealId?: string;
   /** 创建的实例ID列表。 */
   InstanceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDBInstanceParamTplRequest {
+  /** 参数模板名称。 */
+  TplName: string;
+  /** 版本号，该参数模板支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是：MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。当MirrorTplId为空时，该字段必填。 */
+  MongoVersion?: string;
+  /** 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点当MirrorTplId为空时，该字段必填。 */
+  ClusterType?: string;
+  /** 模板描述信息。 */
+  TplDesc?: string;
+  /** 模板参数，若为空，则以系统默认模板作为新版本参数。 */
+  Params?: ParamType[];
+  /** 镜像模板ID，若该字段不为空，则以该模板为镜像，克隆出一个新的模板。注意：MirrorTplId不为空时，MongoVersion及ClusterType将以MirrorTpl模板的版本及实例类型为准。 */
+  MirrorTplId?: string;
+}
+
+declare interface CreateDBInstanceParamTplResponse {
+  /** 模板ID */
+  TplId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -785,6 +833,8 @@ declare interface CreateDBInstanceRequest {
   ReadonlyNodeAvailabilityZoneList?: string[];
   /** Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。 */
   HiddenZone?: string;
+  /** 参数模板 ID。参数模板是一组 MongoDB 的参数并为预设置了参数值的集合，将一组有相同诉求的参数及值 存为模板，在创建实例时，可直接引用参数值到新实例。合理使用参数模板，可以提高MongoDB数据库的效率。模板列表从 DescribeDBInstanceParamTpl 接口获取，注意模板支持的版本及实例类型。 */
+  ParamTemplateId?: string;
 }
 
 declare interface CreateDBInstanceResponse {
@@ -998,6 +1048,54 @@ declare interface DescribeDBInstanceNodePropertyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBInstanceParamTplDetailRequest {
+  /** 参数模板 ID。 */
+  TplId: string;
+  /** 参数名称，传入该值，则只会获取该字段的参数详情。为空时，返回全部参数。 */
+  ParamName?: string;
+}
+
+declare interface DescribeDBInstanceParamTplDetailResponse {
+  /** 枚举类参数详情列表。 */
+  InstanceEnumParams?: InstanceEnumParam[] | null;
+  /** 整形参数详情列表。 */
+  InstanceIntegerParams?: InstanceIntegerParam[] | null;
+  /** 文本参数详情列表。 */
+  InstanceTextParams?: InstanceTextParam[] | null;
+  /** 多值参数详情列表。 */
+  InstanceMultiParams?: InstanceMultiParam[] | null;
+  /** 参数总个数。 */
+  TotalCount?: number | null;
+  /** 模板适配实例版本。 */
+  MongoVersion?: string | null;
+  /** 模板适配集群类型，副本集或分片。。 */
+  ClusterType?: string | null;
+  /** 参数模板名称。 */
+  TplName?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBInstanceParamTplRequest {
+  /** 参数模板 ID 查询条件。 */
+  TplIds?: string[];
+  /** 模板名称，查询条件。 */
+  TplNames?: string[];
+  /** 根据版本号插叙参数模板，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是：MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。 */
+  MongoVersion?: string[];
+  /** 根据模板类型查询参数模板，支持DEFAULT（默认模板）和CUSTOMIZE（自定义模板）两种。 */
+  TplType?: string;
+}
+
+declare interface DescribeDBInstanceParamTplResponse {
+  /** 参数模板列表信息。 */
+  ParamTpls?: ParamTpl[] | null;
+  /** 参数模板总数。 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBInstancesRequest {
   /** 实例 ID 列表。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceIds?: string[];
@@ -1144,6 +1242,16 @@ declare interface DescribeTransparentDataEncryptionStatusResponse {
   TransparentDataEncryptionStatus?: string;
   /** 已绑定的密钥列表，如未绑定，返回null。 */
   KeyInfoList?: KMSInfoDetail[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DropDBInstanceParamTplRequest {
+  /** 参数模板 ID。 */
+  TplId: string;
+}
+
+declare interface DropDBInstanceParamTplResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1314,6 +1422,22 @@ declare interface ModifyDBInstanceNetworkAddressResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceParamTplRequest {
+  /** 待修改的参数模板 ID，示例：tpl-jglr91vew。 */
+  TplId: string;
+  /** 待修改参数模板名称，为空时，保持原有名称。 */
+  TplName?: string;
+  /** 待修改参数模板描述，为空时，保持原有描述。 */
+  TplDesc?: string;
+  /** 待修改参数名及参数值，为空时，各参数保持原有值，支持单条或批量修改。 */
+  Params?: ParamType[];
+}
+
+declare interface ModifyDBInstanceParamTplResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceSecurityGroupRequest {
   /** 实例 ID。例如：cmgo-7pje****。 */
   InstanceId: string;
@@ -1422,6 +1546,20 @@ declare interface ResetDBInstancePasswordRequest {
 declare interface ResetDBInstancePasswordResponse {
   /** 异步请求Id，用户查询该流程的运行状态 */
   AsyncRequestId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestartNodesRequest {
+  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
+  InstanceId: string;
+  /** 节点Id。 */
+  NodeIds: string[];
+}
+
+declare interface RestartNodesResponse {
+  /** 流程Id。 */
+  FlowId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1949,6 +2087,8 @@ declare interface Mongodb {
   CreateDBInstance(data: CreateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceResponse>;
   /** 创建云数据库实例（按量计费） {@link CreateDBInstanceHourRequest} {@link CreateDBInstanceHourResponse} */
   CreateDBInstanceHour(data: CreateDBInstanceHourRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceHourResponse>;
+  /** 创建数据库参数模板 {@link CreateDBInstanceParamTplRequest} {@link CreateDBInstanceParamTplResponse} */
+  CreateDBInstanceParamTpl(data: CreateDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceParamTplResponse>;
   /** 删除账号 {@link DeleteAccountUserRequest} {@link DeleteAccountUserResponse} */
   DeleteAccountUser(data: DeleteAccountUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountUserResponse>;
   /** 全部账号列表 {@link DescribeAccountUsersRequest} {@link DescribeAccountUsersResponse} */
@@ -1969,6 +2109,10 @@ declare interface Mongodb {
   DescribeDBInstanceDeal(data: DescribeDBInstanceDealRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDealResponse>;
   /** 查询节点属性 {@link DescribeDBInstanceNodePropertyRequest} {@link DescribeDBInstanceNodePropertyResponse} */
   DescribeDBInstanceNodeProperty(data: DescribeDBInstanceNodePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceNodePropertyResponse>;
+  /** 查询实例参数模板列表 {@link DescribeDBInstanceParamTplRequest} {@link DescribeDBInstanceParamTplResponse} */
+  DescribeDBInstanceParamTpl(data?: DescribeDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParamTplResponse>;
+  /** 参数模板详情 {@link DescribeDBInstanceParamTplDetailRequest} {@link DescribeDBInstanceParamTplDetailResponse} */
+  DescribeDBInstanceParamTplDetail(data: DescribeDBInstanceParamTplDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParamTplDetailResponse>;
   /** 查询云数据库实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 获取当前实例可修改的参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
@@ -1983,6 +2127,8 @@ declare interface Mongodb {
   DescribeSpecInfo(data?: DescribeSpecInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecInfoResponse>;
   /** 获取实例透明加密的开启状态 {@link DescribeTransparentDataEncryptionStatusRequest} {@link DescribeTransparentDataEncryptionStatusResponse} */
   DescribeTransparentDataEncryptionStatus(data: DescribeTransparentDataEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTransparentDataEncryptionStatusResponse>;
+  /** 删除参数模板 {@link DropDBInstanceParamTplRequest} {@link DropDBInstanceParamTplResponse} */
+  DropDBInstanceParamTpl(data: DropDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<DropDBInstanceParamTplResponse>;
   /** 开启实例数据透明加密 {@link EnableTransparentDataEncryptionRequest} {@link EnableTransparentDataEncryptionResponse} */
   EnableTransparentDataEncryption(data: EnableTransparentDataEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTransparentDataEncryptionResponse>;
   /** 按 Key 回档 {@link FlashBackDBInstanceRequest} {@link FlashBackDBInstanceResponse} */
@@ -2001,6 +2147,8 @@ declare interface Mongodb {
   KillOps(data: KillOpsRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsResponse>;
   /** 修改云数据库实例网络信息 {@link ModifyDBInstanceNetworkAddressRequest} {@link ModifyDBInstanceNetworkAddressResponse} */
   ModifyDBInstanceNetworkAddress(data: ModifyDBInstanceNetworkAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNetworkAddressResponse>;
+  /** 修改数据库参数模板 {@link ModifyDBInstanceParamTplRequest} {@link ModifyDBInstanceParamTplResponse} */
+  ModifyDBInstanceParamTpl(data: ModifyDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceParamTplResponse>;
   /** 修改实例安全组 {@link ModifyDBInstanceSecurityGroupRequest} {@link ModifyDBInstanceSecurityGroupResponse} */
   ModifyDBInstanceSecurityGroup(data: ModifyDBInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupResponse>;
   /** 调整云数据库实例配置 {@link ModifyDBInstanceSpecRequest} {@link ModifyDBInstanceSpecResponse} */
@@ -2015,6 +2163,8 @@ declare interface Mongodb {
   RenewDBInstances(data: RenewDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDBInstancesResponse>;
   /** 修改实例用户的密码 {@link ResetDBInstancePasswordRequest} {@link ResetDBInstancePasswordResponse} */
   ResetDBInstancePassword(data: ResetDBInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDBInstancePasswordResponse>;
+  /** 重启数据库节点 {@link RestartNodesRequest} {@link RestartNodesResponse} */
+  RestartNodes(data: RestartNodesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartNodesResponse>;
   /** 设置账户权限 {@link SetAccountUserPrivilegeRequest} {@link SetAccountUserPrivilegeResponse} */
   SetAccountUserPrivilege(data: SetAccountUserPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<SetAccountUserPrivilegeResponse>;
   /** 设置云数据库实例的自动备份规则 {@link SetBackupRulesRequest} {@link SetBackupRulesResponse} */

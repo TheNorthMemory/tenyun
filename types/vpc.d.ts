@@ -270,6 +270,16 @@ declare interface CCN {
   IsSecurityLock?: boolean | null;
   /** 是否开启云联网路由传播策略。`False` 未开启，`True` 开启。 */
   RouteBroadcastPolicyFlag?: boolean | null;
+  /** 是否开启等价路由功能。`False` 未开启，`True` 开启。 */
+  RouteECMPFlag?: boolean | null;
+  /** 是否开启路由重叠功能。`False` 未开启，`True` 开启。 */
+  RouteOverlapFlag?: boolean | null;
+  /** 是否开启QOS。 */
+  TrafficMarkingPolicyFlag?: boolean | null;
+  /** 是否开启路由表选择策略。 */
+  RouteSelectPolicyFlag?: boolean | null;
+  /** 是否开启二层云联网通道。 */
+  DirectConnectAccelerateChannelFlag?: boolean | null;
 }
 
 /** 云联网（CCN）关联实例（Instance）对象 */
@@ -1500,7 +1510,7 @@ declare interface NetworkAcl {
 declare interface NetworkAclEntry {
   /** 协议, 取值: TCP,UDP, ICMP, ALL。 */
   Protocol?: string;
-  /** 端口(all, 单个port, range)。当Protocol为ALL或ICMP时，不能指定Port。 */
+  /** 端口(all, 单个port, range)。当Protocol为ALL或ICMP时，不能指定Port。使用-指定端口范围，如：10-20。 */
   Port?: string;
   /** 网段或IP(互斥)。增量创建ACL规则时，CidrBlock和Ipv6CidrBlock至少提供一个。 */
   CidrBlock?: string;
@@ -7777,6 +7787,8 @@ declare interface ModifyVpnGatewayAttributeRequest {
   InstanceChargeType?: string;
   /** BGP ASN。ASN取值范围为1- 4294967295，默认值64551，其中139341、45090和58835不可用。 */
   BgpAsn?: number;
+  /** 服务端最大连接数个数。 */
+  MaxConnection?: number;
 }
 
 declare interface ModifyVpnGatewayAttributeResponse {

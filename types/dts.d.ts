@@ -2547,6 +2547,8 @@ declare interface StopCompareRequest {
   JobId: string;
   /** 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9 */
   CompareTaskId: string;
+  /** 是否强制停止。如果填true，同步任务增量阶段会跳过一致性校验产生的binlog，达到快速恢复任务的效果 */
+  ForceStop?: boolean;
 }
 
 declare interface StopCompareResponse {

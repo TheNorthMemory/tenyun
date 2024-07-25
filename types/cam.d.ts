@@ -326,6 +326,8 @@ declare interface RoleInfo {
   DeletionTaskId?: string | null;
   /** 标签 */
   Tags?: RoleTags[] | null;
+  /** 角色RoleArn信息 */
+  RoleArn?: string | null;
 }
 
 /** 角色标签类型 */

@@ -2014,6 +2014,10 @@ declare interface DescribeAddressTemplateListResponse {
   DomainTemplateCount?: number;
   /** 协议端口模板数量 */
   PortTemplateCount?: number;
+  /** 已使用的地址模版数 */
+  UsedTemplateCount?: number;
+  /** 地址模版配额数量 */
+  TemplateQuotaCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2372,6 +2376,8 @@ declare interface DescribeLogsResponse {
   ReturnCode?: number;
   /** 返回信息 success 成功 其他 不成功 */
   ReturnMsg?: string;
+  /** 七层协议，NTA日志有效 */
+  AppProtocolList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

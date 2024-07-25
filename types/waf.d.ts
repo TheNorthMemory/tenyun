@@ -4397,7 +4397,7 @@ declare interface ModifySpartaProtectionRequest {
   DomainId: string;
   /** 必填项。域名所属实例id */
   InstanceID: string;
-  /** 必填项。证书类型。0：仅配置HTTP监听端口，没有证书1：证书来源为自有证书2：证书来源为托管证书 */
+  /** 证书类型。0：仅配置HTTP监听端口，没有证书1：证书来源为自有证书2：证书来源为托管证书 */
   CertType?: number;
   /** CertType为1时，需要填充此参数，表示自有证书的证书链 */
   Cert?: string;
@@ -4405,45 +4405,45 @@ declare interface ModifySpartaProtectionRequest {
   PrivateKey?: string;
   /** CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
   SSLId?: string;
-  /** 必填项。waf前是否部署有七层代理服务。0：没有部署代理服务1：有部署代理服务，waf将使用XFF获取客户端IP2：有部署代理服务，waf将使用remote_addr获取客户端IP3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP */
+  /** waf前是否部署有七层代理服务。0：没有部署代理服务1：有部署代理服务，waf将使用XFF获取客户端IP2：有部署代理服务，waf将使用remote_addr获取客户端IP3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP */
   IsCdn?: number;
   /** 服务配置有HTTPS端口时，HTTPS的回源协议。http：使用http协议回源，和HttpsUpstreamPort配合使用https：使用https协议回源 */
   UpstreamScheme?: string;
   /** HTTPS回源端口,仅UpstreamScheme为http时需要填当前字段 */
   HttpsUpstreamPort?: string;
-  /** 必填项。是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转 */
+  /** 是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转 */
   HttpsRewrite?: number;
-  /** 必填项。回源类型。0：通过IP回源1：通过域名回源 */
+  /** 回源类型。0：通过IP回源1：通过域名回源 */
   UpstreamType?: number;
   /** 域名回源时的回源域名。UpstreamType为1时，需要填充此字段 */
   UpstreamDomain?: string;
   /** IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段 */
   SrcList?: string[];
-  /** 必填项。是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
+  /** 是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
   IsHttp2?: number;
-  /** 必填项。是否开启WebSocket支持。0：关闭1：开启 */
+  /** 是否开启WebSocket支持。0：关闭1：开启 */
   IsWebsocket?: number;
-  /** 必填项。回源负载均衡策略。0：轮询1：IP hash2：加权轮询 */
+  /** 回源负载均衡策略。0：轮询1：IP hash2：加权轮询 */
   LoadBalance?: number;
   /** 待废弃，可不填。是否开启灰度，0表示不开启灰度。 */
   IsGray?: number;
   /** 域名所属实例类型 */
   Edition?: string;
-  /** 必填项。端口信息，可通过DescribeDomains接口获取具体参数信息。 */
+  /** 端口信息，可通过DescribeDomains接口获取具体参数信息。 */
   Ports?: SpartaProtectionPort[];
-  /** 必填项。是否开启长连接。0： 短连接1： 长连接 */
+  /** 是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive?: string;
-  /** 必填项，待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
+  /** 待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
   Anycast?: number;
   /** 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 [] */
   Weights?: number[];
-  /** 必填项，是否开启主动健康检测。0：不开启1：开启 */
+  /** 是否开启主动健康检测。0：不开启1：开启 */
   ActiveCheck?: number;
   /** TLS版本信息 */
   TLSVersion?: number;
   /** 加密套件信息 */
   Ciphers?: number[];
-  /** 必填项。加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
+  /** 加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
   CipherTemplate?: number;
   /** WAF与源站的读超时时间，默认300s。 */
   ProxyReadTimeout?: number;
@@ -4455,7 +4455,7 @@ declare interface ModifySpartaProtectionRequest {
   SniHost?: string;
   /** IsCdn=3时，需要填此参数，表示自定义header */
   IpHeaders?: string[];
-  /** 必填项。是否开启XFF重置。0：关闭1：开启 */
+  /** 是否开启XFF重置。0：关闭1：开启 */
   XFFReset?: number;
   /** 域名备注信息 */
   Note?: string;

@@ -107,7 +107,9 @@ declare interface ComputeNode {
   /** 节点显示名称。不指定节点显示名称则默认显示‘未命名’。最多支持60个字符。 */
   InstanceName?: string;
   /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
-  ProjectId?: number | null;
+  ProjectId?: number;
+  /** 实例资源类型，默认是CVM资源 */
+  ResourceType?: string;
 }
 
 /** 计算节点概览。 */
@@ -322,6 +324,8 @@ declare interface NodeOverview {
   NodeRole?: string | null;
   /** 节点类型。STATIC：静态节点。DYNAMIC：弹性节点。 */
   NodeType?: string | null;
+  /** thpc集群节点id */
+  NodeId?: string | null;
 }
 
 /** 描述节点执行脚本信息。 */
@@ -521,6 +525,8 @@ declare interface AddNodesRequest {
   NodeType?: string;
   /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
   ProjectId?: number;
+  /** 要新增节点的资源类型。CVM：CVM实例类型资源WORKSPACE：工作空间类型实例资源默认值：CVM。 */
+  ResourceType?: string;
 }
 
 declare interface AddNodesResponse {
@@ -536,6 +542,24 @@ declare interface AddQueueRequest {
 }
 
 declare interface AddQueueResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AttachNodesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 节点的资源类型。CVM：CVM实例类型资源WORKSPACE：工作空间类型实例资源默认值：CVM。 */
+  ResourceSet: string[];
+  /** 队列名称。不指定则为默认队列：SLURM默认队列为：compute。 SGE默认队列为：all.q。 */
+  QueueName?: string;
+  /** 指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。如不指定，则该字段是默认镜像。 */
+  ImageId?: string;
+  /** 要新增节点的资源类型。CVM：CVM实例类型资源WORKSPACE：工作空间类型实例资源默认值：CVM。 */
+  ResourceType?: string;
+}
+
+declare interface AttachNodesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -721,7 +745,7 @@ declare interface DescribeInitNodeScriptsResponse {
 declare interface DescribeNodesRequest {
   /** 集群ID。 */
   ClusterId: string;
-  /** queue-name 按照【队列名称】进行过滤。队列名称形如：compute。类型：String必选：否node-role 按照【节点角色】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。）类型：String必选：否node-type 按照【节点类型】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。)类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
+  /** queue-name 按照【队列名称】进行过滤。队列名称形如：compute。 类型：String 必选：否 node-role 按照【节点角色】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。） 类型：String 必选：否 node-type 按照【节点类型】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。) 类型：String 必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
@@ -752,6 +776,18 @@ declare interface DescribeQueuesResponse {
   QueueSet?: QueueOverview[];
   /** 符合条件的队列数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DetachNodesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 集群中的节点id */
+  NodeIds: string[];
+}
+
+declare interface DetachNodesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1773,6 +1809,8 @@ declare interface Thpc {
   AddNodes(data: AddNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodesResponse>;
   /** 添加队列 {@link AddQueueRequest} {@link AddQueueResponse} */
   AddQueue(data: AddQueueRequest, config?: AxiosRequestConfig): AxiosPromise<AddQueueResponse>;
+  /** 绑定计算资源到集群 {@link AttachNodesRequest} {@link AttachNodesResponse} */
+  AttachNodes(data: AttachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNodesResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
@@ -1797,6 +1835,8 @@ declare interface Thpc {
   DescribeNodes(data: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
   DescribeQueues(data: DescribeQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueuesResponse>;
+  /** 从集群解绑节点 {@link DetachNodesRequest} {@link DetachNodesResponse} */
+  DetachNodes(data: DetachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNodesResponse>;
   /** 修改节点初始化脚本 {@link ModifyInitNodeScriptsRequest} {@link ModifyInitNodeScriptsResponse} */
   ModifyInitNodeScripts(data: ModifyInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInitNodeScriptsResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */

@@ -1483,19 +1483,19 @@ declare interface FunctionTypeOrKind {
 /** 函数提交版本信息 */
 declare interface FunctionVersion {
   /** 版本号：V0 V1 V2 */
-  Tag: string;
+  Tag?: string;
   /** 提交人 ID */
-  UserId: string;
+  UserId?: string;
   /** 变更类型：ADD、MODIFY */
-  Type: string;
+  Type?: string;
   /** 备注 */
-  Comment: string;
+  Comment?: string;
   /** 提交时间: UTC 秒数 */
-  Timestamp: string;
+  Timestamp?: string;
   /** 提交人名称 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 版本内容：json string 格式 */
-  Content: string | null;
+  Content?: string | null;
 }
 
 /** Spark SQL配置参数 */
@@ -2510,6 +2510,8 @@ declare interface OrganizationalFunction {
   OperatorUserIdsStr?: string[] | null;
   /** 公有云 Owner ID 列表 */
   OwnerUserIdsStr?: string[] | null;
+  /** 数据库环境 */
+  EnvType?: string | null;
 }
 
 /** 键值对 */
@@ -3124,6 +3126,8 @@ declare interface RuleGroupExecStrategy {
   RuleName?: string | null;
   /** 触发类型 */
   TriggerTypes?: string[] | null;
+  /** DLC资源组 */
+  DlcGroupName?: string | null;
 }
 
 /** 规则组分页 */
@@ -7175,6 +7179,10 @@ declare interface DescribeOrganizationalFunctionsRequest {
   DisplayName?: string;
   /** 标准模式开发环境：DEV标准模式生产环境：PROD简单模式：ALL */
   EnvType?: string;
+  /** 过滤条件 */
+  Filters?: Filter;
+  /** 排序条件 */
+  OrderFields?: OrderField;
 }
 
 declare interface DescribeOrganizationalFunctionsResponse {
@@ -7987,6 +7995,8 @@ declare interface DescribeTableSchemaInfoRequest {
   ConnectionType?: string;
   /** 元数据Database下的Schema名称 */
   SchemaName?: string;
+  /** 项目空间ID */
+  ProjectId?: string;
 }
 
 declare interface DescribeTableSchemaInfoResponse {

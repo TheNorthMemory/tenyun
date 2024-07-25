@@ -176,6 +176,12 @@ declare interface InstanceConfigItem {
   ConfValue: string;
 }
 
+/** Instance表detail字段 */
+declare interface InstanceDetail {
+  /** 告警策略是否可用 */
+  EnableAlarmStrategy?: boolean | null;
+}
+
 /** 实例描述信息 */
 declare interface InstanceInfo {
   /** 集群实例ID, "cdw-xxxx" 字符串类型 */
@@ -276,6 +282,8 @@ declare interface InstanceInfo {
   SecondaryZoneInfo?: string | null;
   /** 是否clickhouse-keeper */
   ClickHouseKeeper?: boolean | null;
+  /** 实例扩展信息 */
+  Details?: InstanceDetail | null;
 }
 
 /** 实例节点描述信息 */

@@ -2443,7 +2443,7 @@ declare interface CreateClustersRequest {
   TimeSpan?: number;
   /** 包年包月购买时长单位，['s','d','m','y'] */
   TimeUnit?: string;
-  /** 包年包月购买是否自动续费，默认为0。0标识默认续费方式，1表示自动续费，2表示手不自动续费。 */
+  /** 包年包月购买是否自动续费，默认为0。0标识默认续费方式，1表示自动续费，2表示不自动续费。 */
   AutoRenewFlag?: number;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher?: number;

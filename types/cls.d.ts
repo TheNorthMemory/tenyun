@@ -3401,7 +3401,7 @@ declare interface SplitPartitionResponse {
 declare interface UploadLogRequest {
   /** 主题id */
   TopicId: string;
-  /** 根据 hashkey 写入相应范围的主题分区 */
+  /** 该参数已废弃，请勿使用 */
   HashKey?: string;
   /** 压缩方法 */
   CompressType?: string;

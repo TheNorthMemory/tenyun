@@ -1127,11 +1127,11 @@ declare interface DescribeCloudRecordingRequest {
 
 declare interface DescribeCloudRecordingResponse {
   /** 录制任务的唯一Id。 */
-  TaskId: string;
+  TaskId?: string;
   /** 云端录制任务的状态信息。Idle：表示当前录制任务空闲中InProgress：表示当前录制任务正在进行中。Exited：表示当前录制任务正在退出的过程中。 */
-  Status: string;
+  Status?: string;
   /** 录制文件信息。 */
-  StorageFileList: StorageFile[] | null;
+  StorageFileList?: StorageFile[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
