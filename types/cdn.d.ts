@@ -916,6 +916,8 @@ declare interface DetailDomain {
   HttpsBilling?: HttpsBilling | null;
   /** 其他厂商对象存储回源鉴权 */
   OthersPrivateAccess?: OthersPrivateAccess | null;
+  /** 参数黑名单 */
+  ParamFilter?: ParamFilter | null;
 }
 
 /** 诊断报告内容数据 */
@@ -1670,6 +1672,24 @@ declare interface OverseaConfig {
   HwPrivateAccess?: HwPrivateAccess | null;
   /** 七牛云对象存储鉴权 */
   QnPrivateAccess?: QnPrivateAccess | null;
+}
+
+/** 参数黑名单 */
+declare interface ParamFilter {
+  /** 参数黑名单开关 */
+  Switch: string | null;
+  /** 参数黑名单规则 */
+  FilterRules?: ParamFilterRule[] | null;
+}
+
+/** 参数黑名单规则 */
+declare interface ParamFilterRule {
+  /** 参数名 */
+  Key: string | null;
+  /** 参数值数组, 小于10个 */
+  Values: string[] | null;
+  /** http 返回码 ( 暂仅支持403) */
+  ReturnCode?: string | null;
 }
 
 /** 分路径回源规则 */
@@ -4367,6 +4387,8 @@ declare interface UpdateDomainConfigRequest {
   OthersPrivateAccess?: OthersPrivateAccess;
   /** HTTPS服务（收费服务，详见计费说明和产品文档） */
   HttpsBilling?: HttpsBilling;
+  /** 参数黑名单 */
+  ParamFilter?: ParamFilter;
 }
 
 declare interface UpdateDomainConfigResponse {

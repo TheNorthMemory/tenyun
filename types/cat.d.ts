@@ -197,6 +197,8 @@ declare interface CreateProbeTasksRequest {
   ClientNum?: string;
   /** 拨测点IP类型：0-不限制IP类型，1-IPv4，2-IPv6 */
   NodeIpType?: number;
+  /** 供应商子账户同步标志 */
+  SubSyncFlag?: number;
 }
 
 declare interface CreateProbeTasksResponse {

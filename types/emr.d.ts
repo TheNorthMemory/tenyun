@@ -834,18 +834,8 @@ declare interface LoadAutoScaleStrategy {
   ScaleAction?: number | null;
   /** 每次规则生效时的扩缩容数量。 */
   ScaleNum?: number | null;
-  /** 扩缩容负载指标。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
-  LoadMetrics?: string | null;
-  /** 规则元数据记录ID。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
-  MetricId?: number | null;
-  /** 规则统计周期，提供300s,600s,900s。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
-  StatisticPeriod?: number | null;
   /** 指标处理方法，1表示MAX，2表示MIN，3表示AVG。 */
   ProcessMethod?: number | null;
-  /** 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
-  TriggerThreshold?: number;
-  /** 条件触发数组。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。 */
-  TriggerConditions?: TriggerConditions | null;
   /** 规则优先级，添加时无效，默认为自增。 */
   Priority?: number | null;
   /** 规则状态，1表示启动，3表示禁用。 */
@@ -1420,6 +1410,14 @@ declare interface PriceResource {
   LocalDiskNum: number | null;
 }
 
+/** 询价结果 */
+declare interface PriceResult {
+  /** 原价 */
+  OriginalCost?: number | null;
+  /** 折扣价 */
+  DiscountCost?: number | null;
+}
+
 /** 获取CVM配额 */
 declare interface QuotaEntity {
   /** 已使用配额 */
@@ -1435,23 +1433,23 @@ declare interface QuotaEntity {
 /** 集群续费实例信息 */
 declare interface RenewInstancesInfo {
   /** 节点资源ID */
-  EmrResourceId: string;
+  EmrResourceId?: string;
   /** 节点类型。0:common节点；1:master节点；2:core节点；3:task节点 */
-  Flag: number;
+  Flag?: number;
   /** 内网IP */
-  Ip: string;
+  Ip?: string;
   /** 节点内存描述 */
-  MemDesc: string;
+  MemDesc?: string;
   /** 节点核数 */
-  CpuNum: number;
+  CpuNum?: number;
   /** 硬盘大小 */
-  DiskSize: string;
+  DiskSize?: string;
   /** 过期时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 节点规格 */
-  Spec: string;
+  Spec?: string;
   /** 磁盘类型 */
-  StorageType: number;
+  StorageType?: number;
 }
 
 /** 定时伸缩任务策略 */
@@ -1754,10 +1752,46 @@ declare interface TriggerCondition {
   Threshold?: number | null;
 }
 
-/** 规则触发条件数组 */
-declare interface TriggerConditions {
-  /** 规则触发条件数组。 */
-  Conditions?: TriggerCondition[] | null;
+/** trino 查询信息 */
+declare interface TrinoQueryInfo {
+  /** catalog */
+  Catalog?: string | null;
+  /** 提交IP */
+  ClientIpAddr?: string | null;
+  /** 切片数 */
+  CompletedSplits?: string | null;
+  /** CPU时间 */
+  CpuTime?: number | null;
+  /** 累计内存 */
+  CumulativeMemory?: number | null;
+  /** 执行时长 */
+  DurationMillis?: number | null;
+  /** 结束时间 (s) */
+  EndTime?: number | null;
+  /** 查询ID */
+  Id?: string | null;
+  /** 内部传输量 */
+  InternalNetworkBytes?: number | null;
+  /** 输出字节数 */
+  OutputBytes?: number | null;
+  /** 峰值内存量 */
+  PeakUserMemoryBytes?: number | null;
+  /** 物理输入量 */
+  PhysicalInputBytes?: number | null;
+  /** 处理输入量 */
+  ProcessedInputBytes?: number | null;
+  /** 编译时长 */
+  SqlCompileTime?: number | null;
+  /** 开始时间 (s) */
+  StartTime?: number | null;
+  /** 执行状态 */
+  State?: string | null;
+  /** 执行语句 */
+  Statement?: string | null;
+  /** 提交用户 */
+  User?: string | null;
+  /** 写入字节数 */
+  WrittenBytes?: number | null;
 }
 
 /** 变配资源规格 */
@@ -2548,6 +2582,28 @@ declare interface DescribeResourceScheduleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTrinoQueryInfoRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 获取查询信息开始时间 (s) */
+  StartTime: number;
+  /** 获取查询信息结束时间 (s) */
+  EndTime: number;
+  /** 分页查询时的分页大小，最小1，最大100 */
+  PageSize: number;
+  /** 分页查询时的页号，从1开始 */
+  Page: number;
+}
+
+declare interface DescribeTrinoQueryInfoResponse {
+  /** 总数，分页查询时使用 */
+  TotalCount?: number;
+  /** 查询结果数组 */
+  QueryInfoList?: TrinoQueryInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUsersForUserManagerRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -2677,14 +2733,14 @@ declare interface InquiryPriceRenewInstanceRequest {
   TimeSpan: number;
   /** 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。 */
   ResourceIds: string[];
-  /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。 */
-  Placement: Placement;
   /** 实例计费模式。此处只支持取值为1，表示包年包月。 */
   PayMode: number;
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
   TimeUnit?: string;
   /** 货币种类。取值范围：CNY：表示人民币。 */
   Currency?: string;
+  /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。 */
+  Placement?: Placement;
   /** 是否按量转包年包月。0：否，1：是。 */
   ModifyPayMode?: number;
 }
@@ -2749,12 +2805,12 @@ declare interface InquiryPriceUpdateInstanceRequest {
   TimeUnit: string;
   /** 变配的时长。结合TimeUnit一起使用。TimeUnit为s时，该参数只能填写3600，表示按量计费实例。TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月 */
   TimeSpan: number;
-  /** 节点变配的目标配置。 */
-  UpdateSpec: UpdateInstanceSettings;
   /** 实例计费模式。取值范围：0：表示按量计费。1：表示包年包月。 */
   PayMode: number;
+  /** 节点变配的目标配置。 */
+  UpdateSpec?: UpdateInstanceSettings;
   /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。 */
-  Placement: Placement;
+  Placement?: Placement;
   /** 货币种类。取值范围：CNY：表示人民币。 */
   Currency?: string;
   /** 批量变配资源ID列表 */
@@ -2763,15 +2819,17 @@ declare interface InquiryPriceUpdateInstanceRequest {
 
 declare interface InquiryPriceUpdateInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost: number | null;
+  OriginalCost?: number | null;
   /** 折扣价，单位为元。 */
-  DiscountCost: number | null;
+  DiscountCost?: number | null;
   /** 变配的时间单位。取值范围：s：表示秒。m：表示月份。 */
-  TimeUnit: string | null;
+  TimeUnit?: string | null;
   /** 变配的时长。 */
-  TimeSpan: number | null;
+  TimeSpan?: number | null;
   /** 价格详情 */
-  PriceDetail: PriceDetail[] | null;
+  PriceDetail?: PriceDetail[] | null;
+  /** 新配置价格 */
+  NewConfigPrice?: PriceResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3157,7 +3215,7 @@ declare interface Emr {
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
   /** 查询监控概览页指标数据 {@link DescribeEmrOverviewMetricsRequest} {@link DescribeEmrOverviewMetricsResponse} */
   DescribeEmrOverviewMetrics(data: DescribeEmrOverviewMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrOverviewMetricsResponse>;
-  /** 【监控218】获取Hbase表级监控数据概览接口 {@link DescribeHBaseTableOverviewRequest} {@link DescribeHBaseTableOverviewResponse} */
+  /** 获取Hbase表级监控数据概览 {@link DescribeHBaseTableOverviewRequest} {@link DescribeHBaseTableOverviewResponse} */
   DescribeHBaseTableOverview(data: DescribeHBaseTableOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableOverviewResponse>;
   /** 获取hive查询信息 {@link DescribeHiveQueriesRequest} {@link DescribeHiveQueriesResponse} */
   DescribeHiveQueries(data: DescribeHiveQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHiveQueriesResponse>;
@@ -3175,6 +3233,8 @@ declare interface Emr {
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
   /** 查询YARN资源调度数据信息 {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
+  /** 获取trino查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */
+  DescribeTrinoQueryInfo(data: DescribeTrinoQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrinoQueryInfoResponse>;
   /** 查询用户列表 {@link DescribeUsersForUserManagerRequest} {@link DescribeUsersForUserManagerResponse} */
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;
   /** 获取Yarn的任务信息 {@link DescribeYarnApplicationsRequest} {@link DescribeYarnApplicationsResponse} */

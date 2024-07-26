@@ -2895,6 +2895,30 @@ declare namespace V20180525 {
     Gpu?: number;
   }
 
+  /** 预留券的使用率信息 */
+  interface ReservedInstanceUtilizationRate {
+    /** 使用率 */
+    Rate?: number | null;
+    /** 预留券数量 */
+    Num?: number | null;
+    /** 核数 */
+    CPU?: number | null;
+    /** 内存 */
+    Memory?: number | null;
+    /** 预留券类型 */
+    Type?: string | null;
+    /** GPU 卡数 */
+    GpuNum?: string | null;
+    /** 可用区 */
+    Zone?: string | null;
+    /** 集群 ID */
+    ClusterId?: string | null;
+    /** 节点名称 */
+    NodeName?: string | null;
+    /** Pod 数量 */
+    PodNum?: number | null;
+  }
+
   /** 资源删除选项 */
   interface ResourceDeleteOption {
     /** 资源类型，例如CBS、CLB、CVM */
@@ -5853,6 +5877,26 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeReservedInstanceUtilizationRateRequest {
+    /** 可用区 */
+    Zone?: string;
+    /** 集群 ID */
+    ClusterId?: string;
+    /** 节点名称 */
+    NodeName?: string;
+  }
+
+  interface DescribeReservedInstanceUtilizationRateResponse {
+    /** 预留券使用率 */
+    UtilizationRateSet?: ReservedInstanceUtilizationRate[];
+    /** 按量计费的 Pod 总数 */
+    PodNum?: number;
+    /** Pod 被预留券抵扣的抵扣率 */
+    PodRate?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeReservedInstancesRequest {
     /** 偏移量，默认0。 */
     Offset?: number;
@@ -7429,6 +7473,8 @@ declare interface Tke {
   DescribeRIUtilizationDetail(data: V20180525.DescribeRIUtilizationDetailRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeRIUtilizationDetailResponse>;
   /** 查询地域列表 {@link V20180525.DescribeRegionsRequest} {@link V20180525.DescribeRegionsResponse} */
   DescribeRegions(data: V20180525.DescribeRegionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeRegionsResponse>;
+  /** 查询预留券使用率 {@link V20180525.DescribeReservedInstanceUtilizationRateRequest} {@link V20180525.DescribeReservedInstanceUtilizationRateResponse} */
+  DescribeReservedInstanceUtilizationRate(data: V20180525.DescribeReservedInstanceUtilizationRateRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeReservedInstanceUtilizationRateResponse>;
   /** 查询预留实例列表 {@link V20180525.DescribeReservedInstancesRequest} {@link V20180525.DescribeReservedInstancesResponse} */
   DescribeReservedInstances(data: V20180525.DescribeReservedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeReservedInstancesResponse>;
   /** 获取集群资源使用量 {@link V20180525.DescribeResourceUsageRequest} {@link V20180525.DescribeResourceUsageResponse} */

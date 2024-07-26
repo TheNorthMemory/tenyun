@@ -344,6 +344,30 @@ declare interface DescAcItem {
   TargetName?: string | null;
 }
 
+/** NAT防火墙Dnat规则列表 */
+declare interface DescNatDnatRule {
+  /** id */
+  Id?: number | null;
+  /** 网络协议，可选值：TCP、UDP。 */
+  IpProtocol?: string | null;
+  /** 弹性IP。 */
+  PublicIpAddress?: string | null;
+  /** 公网端口。 */
+  PublicPort?: number | null;
+  /** 内网地址。 */
+  PrivateIpAddress?: string | null;
+  /** 内网端口。 */
+  PrivatePort?: number | null;
+  /** NAT防火墙转发规则描述。 */
+  Description?: string | null;
+  /** 是否被关联引用，如被远程运维使用 */
+  IsReferenced?: number | null;
+  /** 所属防火墙实例id */
+  FwInsId?: string | null;
+  /** 关联的nat网关Id */
+  NatGwId?: string | null;
+}
+
 /** 设置nat防火墙的vpc dns 接入开关 */
 declare interface DnsVpcSwitch {
   /** vpc id */
@@ -1196,6 +1220,10 @@ declare interface VpcFwGroupInfo {
   CdcName?: string | null;
   /** 跨租户模式 1管理员 2单边 0 非跨租户 */
   CrossUserMode?: string | null;
+  /** 云联网模式下，当前实例是否需要开启重叠路由开关，1：需要开启，0：不需要开启 */
+  NeedSwitchCcnOverlap?: number | null;
+  /** 云联网模式下，实例关联的云联网id */
+  CcnId?: string | null;
 }
 
 /** vpc 防火墙下单防火墙实例结构体 */
@@ -2412,6 +2440,34 @@ declare interface DescribeNatAcRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNatFwDnatRuleRequest {
+  /** 需要查询的索引，特定场景使用，可不填 */
+  Index?: string;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** 每页条数 */
+  Limit?: number;
+  /** 偏移值 */
+  Offset?: number;
+  /** 检索的起始时间，可不传 */
+  StartTime?: string;
+  /** 检索的截止时间，可不传 */
+  EndTime?: string;
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeNatFwDnatRuleResponse {
+  /** Dnat规则列表 */
+  Data?: DescNatDnatRule[] | null;
+  /** 列表总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNatFwInfoCountRequest {
 }
 
@@ -3589,6 +3645,8 @@ declare interface Cfw {
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */
   DescribeNatAcRule(data: DescribeNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatAcRuleResponse>;
+  /** 查询Nat防火墙Dnat规则 {@link DescribeNatFwDnatRuleRequest} {@link DescribeNatFwDnatRuleResponse} */
+  DescribeNatFwDnatRule(data?: DescribeNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwDnatRuleResponse>;
   /** 获取当前用户接入nat防火墙的所有子网数及natfw实例个数 {@link DescribeNatFwInfoCountRequest} {@link DescribeNatFwInfoCountResponse} */
   DescribeNatFwInfoCount(data?: DescribeNatFwInfoCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInfoCountResponse>;
   /** 获取租户所有NAT实例 {@link DescribeNatFwInstanceRequest} {@link DescribeNatFwInstanceResponse} */

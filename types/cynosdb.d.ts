@@ -1098,6 +1098,8 @@ declare interface InstanceCLSDeliveryInfo {
   Region?: string | null;
   /** 投递状态creating,running,offlining,offlined */
   Status?: string | null;
+  /** 日志类型 */
+  LogType?: string | null;
 }
 
 /** 实例初始化配置信息 */
@@ -2367,6 +2369,10 @@ declare interface CreateCLSDeliveryRequest {
   InstanceId: string;
   /** 日志投递配置 */
   CLSInfoList: CLSInfo[];
+  /** 日志类型 */
+  LogType?: string;
+  /** 是否维护时间运行 */
+  IsInMaintainPeriod?: string;
 }
 
 declare interface CreateCLSDeliveryResponse {
@@ -2687,6 +2693,10 @@ declare interface DeleteCLSDeliveryRequest {
   InstanceId: string;
   /** 日志主题id */
   CLSTopicIds: string[];
+  /** 日志类型 */
+  LogType?: string;
+  /** 是否维护时间运行 */
+  IsInMaintainPeriod?: string;
 }
 
 declare interface DeleteCLSDeliveryResponse {
@@ -3241,6 +3251,8 @@ declare interface DescribeFlowResponse {
 declare interface DescribeInstanceCLSLogDeliveryRequest {
   /** 实例id */
   InstanceId: string;
+  /** 日志类型 */
+  LogType?: string;
 }
 
 declare interface DescribeInstanceCLSLogDeliveryResponse {
@@ -4819,6 +4831,10 @@ declare interface StartCLSDeliveryRequest {
   InstanceId: string;
   /** 开通的日志主题id */
   CLSTopicIds: string[];
+  /** 日志类型 */
+  LogType?: string;
+  /** 是否维护时间运行 */
+  IsInMaintainPeriod?: string;
 }
 
 declare interface StartCLSDeliveryResponse {
@@ -4833,6 +4849,10 @@ declare interface StopCLSDeliveryRequest {
   InstanceId: string;
   /** 日志主题id */
   CLSTopicIds: string[];
+  /** 日志类型 */
+  LogType?: string;
+  /** 是否维护时间运行 */
+  IsInMaintainPeriod?: string;
 }
 
 declare interface StopCLSDeliveryResponse {

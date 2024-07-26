@@ -2185,7 +2185,7 @@ declare interface CreateCloneInstanceRequest {
   SlaveZone?: string;
   /** 备库 2 的可用区信息，默认为空，克隆强同步主实例时可指定该参数。 */
   BackupZone?: string;
-  /** 克隆实例类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例。 不指定则默认为通用型。 */
+  /** 克隆实例类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型。 */
   DeviceType?: string;
   /** 新克隆实例节点数。如果需要克隆出三节点实例， 请将该值设置为3 或指定 BackupZone 参数。如果需要克隆出两节点实例，请将该值设置为2。默认克隆出两节点实例。 */
   InstanceNodes?: number;
@@ -2201,6 +2201,8 @@ declare interface CreateCloneInstanceRequest {
   PayType?: string;
   /** 实例时长，PayType为PRE_PAID时必传，单位：月，可选值包括 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。 */
   Period?: number;
+  /** 集群版节点拓扑配置。 */
+  ClusterTopology?: ClusterTopology;
 }
 
 declare interface CreateCloneInstanceResponse {
@@ -2283,7 +2285,7 @@ declare interface CreateDBInstanceHourRequest {
   DeployGroupId?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - ONTKE单节点实例。 不指定则默认为通用型实例。 */
+  /** 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。 */
   DeviceType?: string;
   /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
@@ -2307,6 +2309,8 @@ declare interface CreateDBInstanceHourRequest {
   EngineType?: string;
   /** 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。 */
   Vips?: string[];
+  /** 集群版节点拓扑配置。 */
+  ClusterTopology?: ClusterTopology;
 }
 
 declare interface CreateDBInstanceHourResponse {
@@ -2371,7 +2375,7 @@ declare interface CreateDBInstanceRequest {
   DeployGroupId?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - ONTKE单节点实例。 不指定则默认为通用型实例。 */
+  /** 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。 */
   DeviceType?: string;
   /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
@@ -2395,6 +2399,8 @@ declare interface CreateDBInstanceRequest {
   EngineType?: string;
   /** 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。 */
   Vips?: string[];
+  /** 集群版节点拓扑配置。 */
+  ClusterTopology?: ClusterTopology;
 }
 
 declare interface CreateDBInstanceResponse {
