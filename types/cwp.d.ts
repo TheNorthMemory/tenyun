@@ -1719,43 +1719,45 @@ declare interface BaselineWeakPassword {
 /** 高危命令数据 */
 declare interface BashEvent {
   /** 数据ID */
-  Id: number;
+  Id?: number;
   /** 主机安全ID */
-  Uuid: string;
+  Uuid?: string;
   /** 主机ID */
-  Quuid: string;
+  Quuid?: string;
   /** 主机内网IP */
-  Hostip: string;
+  Hostip?: string;
   /** 执行用户名 */
-  User: string;
+  User?: string;
   /** 平台类型 */
-  Platform: number;
+  Platform?: number;
   /** 执行命令 */
-  BashCmd: string;
+  BashCmd?: string;
   /** 规则ID */
-  RuleId: number;
+  RuleId?: number;
   /** 规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** 规则等级：1-高 2-中 3-低 */
-  RuleLevel: number;
+  RuleLevel?: number;
   /** 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略 */
-  Status: number;
+  Status?: number;
   /** 发生时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 主机名 */
-  MachineName: string;
+  MachineName?: string;
   /** 0: bash日志 1: 实时监控(雷霆版) */
-  DetectBy: number | null;
+  DetectBy?: number | null;
   /** 进程id */
-  Pid: string | null;
+  Pid?: string | null;
   /** 进程名称 */
-  Exe: string | null;
+  Exe?: string | null;
   /** 处理时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 规则类别 0=系统规则，1=用户规则 */
-  RuleCategory: number | null;
+  RuleCategory?: number | null;
   /** 自动生成的正则表达式 */
-  RegexBashCmd: string | null;
+  RegexBashCmd?: string | null;
+  /** 主机HostName */
+  HostName?: string | null;
 }
 
 /** 高危命令数据(新) */
@@ -1807,55 +1809,57 @@ declare interface BashEventNew {
 /** 高危命令数据详情 */
 declare interface BashEventsInfo {
   /** 数据ID */
-  Id: number;
+  Id?: number;
   /** 云镜ID */
-  Uuid: string;
+  Uuid?: string;
   /** 主机ID */
-  Quuid: string;
+  Quuid?: string;
   /** 主机内网IP */
-  HostIp: string;
+  HostIp?: string;
   /** 平台类型 */
-  Platform: number;
+  Platform?: number;
   /** 执行命令 */
-  BashCmd: string;
+  BashCmd?: string;
   /** 规则ID,等于0表示已规则已被删除或生效范围已修改 */
-  RuleId: number;
+  RuleId?: number;
   /** 规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** 规则等级：1-高 2-中 3-低 */
-  RuleLevel: number;
+  RuleLevel?: number;
   /** 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略 */
-  Status: number;
+  Status?: number;
   /** 发生时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 主机名 */
-  MachineName: string;
+  MachineName?: string;
   /** 进程名称 */
-  Exe: string | null;
+  Exe?: string | null;
   /** 处理时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 规则类别 0=系统规则，1=用户规则 */
-  RuleCategory: number | null;
+  RuleCategory?: number | null;
   /** 自动生成的正则表达式 */
-  RegexBashCmd: string | null;
+  RegexBashCmd?: string | null;
   /** 进程树 json pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源 */
-  PsTree: string | null;
+  PsTree?: string | null;
   /** 建议方案 */
-  SuggestScheme: string | null;
+  SuggestScheme?: string | null;
   /** 描述 */
-  HarmDescribe: string | null;
+  HarmDescribe?: string | null;
   /** 标签 */
-  Tags: string[] | null;
+  Tags?: string[] | null;
   /** 参考链接 */
-  References: string[] | null;
+  References?: string[] | null;
   /** 主机外网ip */
-  MachineWanIp: string | null;
+  MachineWanIp?: string | null;
   /** 主机在线状态 OFFLINE ONLINE */
-  MachineStatus: string | null;
+  MachineStatus?: string | null;
   /** 登录用户 */
-  User: string | null;
+  User?: string | null;
   /** 进程号 */
-  Pid: string | null;
+  Pid?: string | null;
+  /** 数据来源 */
+  DetectBy?: string | null;
 }
 
 /** 高危命令数据详情(新) */
@@ -12523,7 +12527,7 @@ declare interface ExportAssetRecentMachineInfoRequest {
 
 declare interface ExportAssetRecentMachineInfoResponse {
   /** 下载地址 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13183,7 +13187,7 @@ declare interface ExportSecurityTrendsRequest {
 
 declare interface ExportSecurityTrendsResponse {
   /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

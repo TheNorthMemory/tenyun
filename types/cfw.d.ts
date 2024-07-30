@@ -342,6 +342,8 @@ declare interface DescAcItem {
   SourceName?: string | null;
   /** 访问目的名称 */
   TargetName?: string | null;
+  /** 规则最近命中时间 */
+  LastHitTime?: string | null;
 }
 
 /** NAT防火墙Dnat规则列表 */
@@ -2042,9 +2044,9 @@ declare interface DescribeAddressTemplateListResponse {
   DomainTemplateCount?: number;
   /** 协议端口模板数量 */
   PortTemplateCount?: number;
-  /** 已使用的地址模版数 */
+  /** 已使用的地址模板数 */
   UsedTemplateCount?: number;
-  /** 地址模版配额数量 */
+  /** 地址模板配额数量 */
   TemplateQuotaCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

@@ -1059,9 +1059,9 @@ declare interface CreateQAResponse {
 declare interface CreateReconstructDocumentFlowRequest {
   /** 文件类型。支持的文件类型：PDF、DOCX、DOC、XLS、XLSX、PPT、PPTX、PNG、JPG、JPEG、CSV */
   FileType?: string;
-  /** 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
+  /** 文件的 Base64 值。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
   FileBase64?: string;
-  /** 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 100M。文件下载时间不超过 15 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 文件的 Url 地址。支持的文件大小：所下载文件经 Base64 编码后不超过 100M。文件下载时间不超过 15 秒。支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl?: string;
   /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。 */
   FileStartPageNumber?: number;
@@ -1807,18 +1807,18 @@ declare interface GetTaskStatusResponse {
 declare interface GetWsTokenRequest {
   /** 接入类型 */
   Type: number;
-  /** 应用AppKey */
+  /** 应用AppKey（应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取） */
   BotAppKey?: string;
-  /** 坐席ID */
+  /** 访客ID（外部输入，建议唯一，标识当前接入会话的用户） */
   VisitorBizId?: string;
-  /** 坐席标签 */
+  /** 知识标签（用于知识库中知识的检索过滤） */
   VisitorLabels?: GetWsTokenReq_Label[];
 }
 
 declare interface GetWsTokenResponse {
-  /** token值 */
+  /** token值（有效期60s） */
   Token?: string;
-  /** 余额; 余额大于 0 时表示有效. */
+  /** 余额; 余额大于 0 时表示有效 */
   Balance?: number | null;
   /** 对话窗输入字符限制 */
   InputLenLimit?: number;

@@ -674,6 +674,14 @@ declare interface SeriesInfos {
   Values?: RowValues[] | null;
 }
 
+/** 服务端控制AI对话机器人播报指定文本 */
+declare interface ServerPushText {
+  /** 服务端推送播报文本 */
+  Text?: string;
+  /** 是否允许该文本打断机器人说话 */
+  Interrupt?: boolean;
+}
+
 /** 单流旁路转推的用户上行信息。 */
 declare interface SingleSubscribeParams {
   /** 用户媒体流参数。 */
@@ -960,6 +968,20 @@ declare interface WebRecordVideoParams {
   Format?: string;
   /** 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】Hls 格式录制此参数不生效。示例值：1440 */
   MaxMediaFileDuration?: number;
+}
+
+declare interface ControlAIConversationRequest {
+  /** 任务唯一标识 */
+  TaskId: string;
+  /** 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本 */
+  Command: string;
+  /** 服务端发送播报文本命令，当Command为ServerPushText时必填 */
+  ServerPushText?: ServerPushText;
+}
+
+declare interface ControlAIConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateCloudRecordingRequest {
@@ -1953,6 +1975,8 @@ declare interface UpdatePublishCdnStreamResponse {
 /** {@link Trtc 实时音视频} */
 declare interface Trtc {
   (): Versions;
+  /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
+  ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
   /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
   CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
   /** 上传图片 {@link CreatePictureRequest} {@link CreatePictureResponse} */

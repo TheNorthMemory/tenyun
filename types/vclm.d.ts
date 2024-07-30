@@ -60,6 +60,24 @@ declare interface DescribeImageAnimateJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribePortraitSingJobRequest {
+  /** 任务ID */
+  JobId: string;
+}
+
+declare interface DescribePortraitSingJobResponse {
+  /** 任务ID */
+  JobId?: string;
+  /** 任务状态码—RUN：处理中—FAIL：处理失败—STOP：处理终止—DONE：处理完成 */
+  StatusCode?: string;
+  /** 任务状态信息 */
+  StatusMsg?: string;
+  /** 生成视频的URL地址有效期24小时 */
+  ResultVideoUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoStylizationJobRequest {
   /** 任务ID */
   JobId: string;
@@ -132,6 +150,22 @@ declare interface SubmitImageAnimateJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitPortraitSingJobRequest {
+  /** 传入音频URL地址。音频要求：—音频时长：不超过60秒—音频格式：mp3、wav、m4a */
+  AudioUrl: string;
+  /** 传入图片URL地址，图片要求：—图片格式：jpg、jpeg、png—图片分辨率：长边不超过2560—图片大小：不超过6M—图片宽高比：图片【宽：高】在1:2到2:1范围内 */
+  ImageUrl?: string;
+  /** 传入图片Base64编码。—图片Base64编码与URL地址必传其一 */
+  ImageBase64?: string;
+}
+
+declare interface SubmitPortraitSingJobResponse {
+  /** 任务ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitVideoStylizationJobRequest {
   /** 风格ID，取值说明：2d_anime 2D动漫；3d_cartoon 3D卡通；3d_china 3D国潮；pixel_art	像素风。 */
   StyleId: string;
@@ -177,12 +211,16 @@ declare interface Vclm {
   ConfirmVideoTranslateJob(data: ConfirmVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmVideoTranslateJobResponse>;
   /** 查询图片跳舞任务 {@link DescribeImageAnimateJobRequest} {@link DescribeImageAnimateJobResponse} */
   DescribeImageAnimateJob(data?: DescribeImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAnimateJobResponse>;
+  /** 查询图片唱演任务 {@link DescribePortraitSingJobRequest} {@link DescribePortraitSingJobResponse} */
+  DescribePortraitSingJob(data: DescribePortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortraitSingJobResponse>;
   /** 查询视频风格化任务 {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
   DescribeVideoStylizationJob(data: DescribeVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoStylizationJobResponse>;
   /** 查询视频转译任务 {@link DescribeVideoTranslateJobRequest} {@link DescribeVideoTranslateJobResponse} */
   DescribeVideoTranslateJob(data: DescribeVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoTranslateJobResponse>;
   /** 提交图片跳舞任务 {@link SubmitImageAnimateJobRequest} {@link SubmitImageAnimateJobResponse} */
   SubmitImageAnimateJob(data?: SubmitImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageAnimateJobResponse>;
+  /** 提交图片唱演任务 {@link SubmitPortraitSingJobRequest} {@link SubmitPortraitSingJobResponse} */
+  SubmitPortraitSingJob(data: SubmitPortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPortraitSingJobResponse>;
   /** 提交视频风格化任务 {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */
   SubmitVideoStylizationJob(data: SubmitVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoStylizationJobResponse>;
   /** 提交视频转译任务 {@link SubmitVideoTranslateJobRequest} {@link SubmitVideoTranslateJobResponse} */

@@ -592,6 +592,8 @@ declare interface DataTransformTaskInfo {
   DstResources?: DataTransformResouceInfo[];
   /** 加工逻辑函数。 */
   EtlContent?: string;
+  /** 数据加工类型。0：标准加工任务；1：前置加工任务。 */
+  DataTransformType?: number | null;
 }
 
 /** 键值索引自动配置，启用后自动将日志内的字段添加到键值索引中，包括日志中后续新增的字段。 */
@@ -2363,7 +2365,7 @@ declare interface DescribeDashboardsResponse {
 }
 
 declare interface DescribeDataTransformInfoRequest {
-  /** taskName按照【加工任务名称】进行过滤。类型：String必选：否 taskId按照【加工任务id】进行过滤。类型：String必选：否 topicId按照【源topicId】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** - taskName按照【加工任务名称】进行过滤。类型：String必选：否- taskId按照【加工任务id】进行过滤。类型：String必选：否- topicId按照【源topicId】进行过滤。类型：String必选：否- status按照【 任务运行状态】进行过滤。 1：准备中，2：运行中，3：停止中，4：已停止类型：String必选：否- hasServiceLog按照【是否开启服务日志】进行过滤。 1：未开启，2：已开启类型：String必选：否- dstTopicType按照【目标topic类型】进行过滤。 1：固定，2：动态类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;

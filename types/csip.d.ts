@@ -2251,6 +2251,36 @@ declare interface DescribeAssetViewVulRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCFWAssetStatisticsRequest {
+}
+
+declare interface DescribeCFWAssetStatisticsResponse {
+  /** 网络资产总数 */
+  NetworkTotal?: number;
+  /** 资产clb数量 */
+  ClbTotal?: number;
+  /** nat数量 */
+  NatTotal?: number;
+  /** 公网ip数量 */
+  PublicAssetTotal?: number;
+  /** 主机数量 */
+  CVMAssetTotal?: number;
+  /** 配置风险 */
+  CFGTotal?: number;
+  /** 端口风险 */
+  PortTotal?: number;
+  /** 内容风险 */
+  WebsiteTotal?: number;
+  /** 风险服务暴露 */
+  ServerTotal?: number;
+  /** 弱口令风险 */
+  WeakPasswordTotal?: number;
+  /** 漏洞风险 */
+  VULTotal?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCVMAssetInfoRequest {
   /** - */
   AssetId: string;
@@ -3054,6 +3084,8 @@ declare interface Csip {
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
   /** 漏洞管理-资产视角的漏洞风险列表 {@link DescribeAssetViewVulRiskListRequest} {@link DescribeAssetViewVulRiskListResponse} */
   DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
+  /** 云防资产中心统计数据 {@link DescribeCFWAssetStatisticsRequest} {@link DescribeCFWAssetStatisticsResponse} */
+  DescribeCFWAssetStatistics(data?: DescribeCFWAssetStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCFWAssetStatisticsResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */

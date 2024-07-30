@@ -4918,6 +4918,8 @@ declare interface VerifyOfdVatInvoiceOCRResponse {
   AirTicketInfo?: AirTicketInfo;
   /** 铁路电子客票 */
   RailwayTicketInfo?: RailwayTicketInfo;
+  /** 发票标题 */
+  InvoiceTitle?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

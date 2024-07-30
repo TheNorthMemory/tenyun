@@ -1515,7 +1515,7 @@ declare interface DescribeBindedProductsResponse {
 }
 
 declare interface DescribeCloudStorageAIServiceCallbackRequest {
-  /** 产品ID */
+  /** 产品 ID */
   ProductId: string;
 }
 
@@ -1531,21 +1531,21 @@ declare interface DescribeCloudStorageAIServiceCallbackResponse {
 }
 
 declare interface DescribeCloudStorageAIServiceRequest {
-  /** 产品ID */
+  /** 产品 ID */
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
   ServiceType: string;
 }
 
 declare interface DescribeCloudStorageAIServiceResponse {
-  /** 启用状态 */
+  /** 视频分析启用状态 */
   Enabled?: boolean;
-  /** 视频分析区域 */
-  ROI?: string;
-  /** 云存 AI 服务的配置参数 */
+  /** 视频分析配置参数 */
   Config?: string;
+  /** 视频分析识别区域 */
+  ROI?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1567,7 +1567,7 @@ declare interface DescribeCloudStorageAIServiceTasksRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
   ServiceType: string;
   /** 分页拉取数量 */
   Limit: number;
@@ -1575,9 +1575,9 @@ declare interface DescribeCloudStorageAIServiceTasksRequest {
   Offset?: number;
   /** 任务状态。可选值：- （不传）：查询全部状态的任务- `1`：失败- `2`：成功但结果为空- `3`：成功且结果非空- `4`：执行中 */
   Status?: number;
-  /** 用户ID */
+  /** 用户 ID */
   UserId?: string;
-  /** 通道ID 非NVR设备则不填 NVR设备则必填 默认为无 */
+  /** 通道 ID */
   ChannelId?: number;
 }
 
@@ -2293,7 +2293,7 @@ declare interface DescribePositionFenceListResponse {
 }
 
 declare interface DescribeProductCloudStorageAIServiceRequest {
-  /** 产品ID */
+  /** 产品 ID */
   ProductId: string;
 }
 
@@ -2883,7 +2883,7 @@ declare interface ListTopicPolicyResponse {
 }
 
 declare interface ModifyCloudStorageAIServiceCallbackRequest {
-  /** 产品ID */
+  /** 产品 ID */
   ProductId: string;
   /** 推送类型。可选值：- `http`：HTTP 回调 */
   Type: string;
@@ -2899,17 +2899,17 @@ declare interface ModifyCloudStorageAIServiceCallbackResponse {
 }
 
 declare interface ModifyCloudStorageAIServiceRequest {
-  /** 产品ID */
+  /** 产品 ID */
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
   ServiceType: string;
-  /** 启用状态 */
+  /** 视频分析启用状态 */
   Enabled?: boolean;
-  /** 视频分析区域 */
+  /** 视频分析识别区域 */
   ROI?: string;
-  /** 云存 AI 服务的配置参数 */
+  /** 视频分析配置参数 */
   Config?: string;
 }
 
@@ -3025,7 +3025,7 @@ declare interface ModifyPositionSpaceResponse {
 }
 
 declare interface ModifyProductCloudStorageAIServiceRequest {
-  /** 产品ID */
+  /** 产品 ID */
   ProductId: string;
   /** 开通状态 */
   Enabled?: boolean;

@@ -1719,6 +1719,20 @@ declare interface UnbindDocumentFromRoomResponse {
   RequestId?: string;
 }
 
+declare interface UnblockKickedUserRequest {
+  /** 低代码平台的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间Id。 */
+  RoomId: number;
+  /** 需要解禁踢出的成员Id。 */
+  UserId: string;
+}
+
+declare interface UnblockKickedUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Lcic 实时互动-教育版} */
 declare interface Lcic {
   (): Versions;
@@ -1842,6 +1856,8 @@ declare interface Lcic {
   StartRoom(data: StartRoomRequest, config?: AxiosRequestConfig): AxiosPromise<StartRoomResponse>;
   /** 文档从房间解绑 {@link UnbindDocumentFromRoomRequest} {@link UnbindDocumentFromRoomResponse} */
   UnbindDocumentFromRoom(data: UnbindDocumentFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDocumentFromRoomResponse>;
+  /** 解禁房间被踢用户 {@link UnblockKickedUserRequest} {@link UnblockKickedUserResponse} */
+  UnblockKickedUser(data: UnblockKickedUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnblockKickedUserResponse>;
 }
 
 export declare type Versions = ["2022-08-17"];

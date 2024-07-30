@@ -2,12 +2,86 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 动作动态参数返回格式 */
+declare interface ActionFieldConfigDetail {
+  /** 组件类型可选项如下：input 文本框textarea 多行文本框number 数值输入框select 选择器cascader 级联选择器radio 单选time 时间选择 */
+  Type: string;
+  /** 组件label */
+  Lable: string;
+  /** 组件唯一标识， 传回后端时的key */
+  Field: string;
+  /** 默认值 */
+  DefaultValue: string | null;
+  /** 支持配置项如下,可根据需要选择配置项，不需要配置是设置空{}：{ placeholder: string (占位符) tooltip: string (提示信息) reg: RegExp (对输入内容格式进行正则校验的规则) max: number (对于输入框，限制最大输入字符数，对于数值输入框，设置上限) min: number (对于数值输入框，设置下限) step: number (设置数值输入框的步长，默认为1) format: string (时间选择的格式，如YYYY-MM-DD表示年月日, YYYY-MM-DD HH:mm:ss 表示时分秒) separator: string[] (多行输入框的分隔符，不传或者为空时表示不分隔，直接返回用户输入的文本字符串) multiple: boolean (是否多选,对选择器和级联选择器有效) options: 选择器的选项【支持以下两种形式】直接给定选项数组 { value: string; label: string }[]通过调接口获取选项 { api: string(接口地址), params: string[] (接口参数,对应于参数配置的field，前端根据field对应的所有组件的输入值作为参数查询数据， 为空时在组件加载时直接请求数据) }} */
+  Config: string;
+  /** 是否必填 (0 -- 否 1-- 是) */
+  Required: number;
+  /** compute配置依赖的其他field满足的条件时通过校验（如：三个表单项中必须至少有一个填写了）[fieldName,{ config: 此项保留，等待后面具体场景细化 }] */
+  Validate: string;
+  /** 是否可见 */
+  Visible: string;
+}
+
+/** 动作栏位配置结果 */
+declare interface ActionFieldConfigResult {
+  /** 动作ID */
+  ActionId: number;
+  /** 动作名称 */
+  ActionName: string;
+  /** 动作对应的栏位配置详情 */
+  ConfigDetail: ActionFieldConfigDetail[];
+}
+
 /** 动作库筛选栏位 */
 declare interface ActionFilter {
   /** 关键字 */
   Keyword: string;
   /** 搜索内容值 */
   Values: string[];
+}
+
+/** 动作库数据列表 */
+declare interface ActionLibraryListResult {
+  /** 动作名称 */
+  ActionName?: string;
+  /** 动作描述 */
+  Desc?: string;
+  /** 动作类型。范围：["平台","自定义"] */
+  ActionType?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 创建人 */
+  Creator?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 动作风险描述 */
+  RiskDesc?: string;
+  /** 动作ID */
+  ActionId?: number;
+  /** 动作属性（ 1：故障 2：恢复） */
+  AttributeId?: number;
+  /** 关联的动作ID */
+  RelationActionId?: number;
+  /** 操作命令 */
+  ActionCommand?: string;
+  /** 动作类型( 0 -- tat 1 -- 云API） */
+  ActionCommandType?: number;
+  /** 自定义动作的参数，json string */
+  ActionContent?: string;
+  /** 二级分类 */
+  ResourceType?: string | null;
+  /** 动作描述 */
+  ActionDetail?: string | null;
+  /** 是否允许当前账号使用 */
+  IsAllowed?: boolean | null;
+  /** 最佳实践案例的链接地址 */
+  ActionBestCase?: string | null;
+  /** 对象类型 */
+  ObjectType?: string | null;
+  /** 监控指标ID列表 */
+  MetricIdList?: number[] | null;
+  /** 是否是新动作 */
+  IsNewAction?: boolean | null;
 }
 
 /** 应用性能监控产品中应用信息 */
@@ -32,6 +106,54 @@ declare interface DescribePolicy {
   TaskPolicyDealType: number | null;
 }
 
+/** 对象类型 */
+declare interface ObjectType {
+  /** 对象类型ID */
+  ObjectTypeId?: number;
+  /** 对象类型名称 */
+  ObjectTypeTitle?: string;
+  /** 对象类型第一级 */
+  ObjectTypeLevelOne?: string;
+  /** 对象类型参数 */
+  ObjectTypeParams?: ObjectTypeConfig;
+  /** tke接口json解析规则，null不需要解析 */
+  ObjectTypeJsonParse?: ObjectTypeJsonParse | null;
+  /** 是否包含新动作 */
+  ObjectHasNewAction?: boolean | null;
+}
+
+/** 对象类型配置 */
+declare interface ObjectTypeConfig {
+  /** 主键 */
+  Key: string;
+  /** 对象类型配置字段列表 */
+  Fields: ObjectTypeConfigFields[];
+}
+
+/** 对象类型字段类型 */
+declare interface ObjectTypeConfigFields {
+  /** instanceId */
+  Key: string;
+  /** 实例id */
+  Header: string;
+  /** 字段值是否需要转译，当不需要转译时，此字段返回null */
+  Transfer?: string | null;
+  /** tke的pod字段信息解析 */
+  JsonParse?: string | null;
+}
+
+/** 标准pod对象类型下拉数据的解析 */
+declare interface ObjectTypeJsonParse {
+  /** 命名空间 */
+  NameSpace?: string | null;
+  /** 工作负载名称 */
+  WorkloadName?: string | null;
+  /** 节点IP */
+  LanIP?: string | null;
+  /** 节点ID */
+  InstanceId?: string | null;
+}
+
 /** 护栏策略触发日志 */
 declare interface PolicyTriggerLog {
   /** 演练ID */
@@ -44,6 +166,16 @@ declare interface PolicyTriggerLog {
   Content?: string | null;
   /** 触发时间 */
   CreatTime?: string | null;
+}
+
+/** 资源下线 */
+declare interface ResourceOffline {
+  /** 资源ID */
+  ResourceId?: number | null;
+  /** 资源下线时间 */
+  ResourceDeleteTime?: string | null;
+  /** 资源下线提示 */
+  ResourceDeleteMessage?: string | null;
 }
 
 /** 用于传入创建、编辑标签 */
@@ -484,6 +616,30 @@ declare interface TemplatePolicy {
   TemplatePolicyDealType: number;
 }
 
+declare interface CreateTaskFromActionRequest {
+  /** 动作ID，可从动作列表接口DescribeActionLibraryList获取 */
+  TaskActionId: number;
+  /** 参与演练的实例ID */
+  TaskInstances: string[];
+  /** 演练名称，不填则默认取动作名称 */
+  TaskTitle?: string;
+  /** 演练描述，不填则默认取动作描述 */
+  TaskDescription?: string;
+  /** 动作通用参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数 */
+  TaskActionGeneralConfiguration?: string;
+  /** 动作自定义参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数，注意：必填参数，是没有默认值的 ，务必保证传入有效值 */
+  TaskActionCustomConfiguration?: string;
+  /** 演练自动暂停时间，单位分钟, 不填则默认为60 */
+  TaskPauseDuration?: number;
+}
+
+declare interface CreateTaskFromActionResponse {
+  /** 创建成功的演练ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTaskFromTemplateRequest {
   /** 从经验库中查询到的经验模板ID */
   TemplateId: number;
@@ -504,6 +660,60 @@ declare interface DeleteTaskRequest {
 }
 
 declare interface DeleteTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeActionFieldConfigListRequest {
+  /** 动作ID列表 */
+  ActionIds: number[];
+  /** 对象类型ID */
+  ObjectTypeId: number;
+}
+
+declare interface DescribeActionFieldConfigListResponse {
+  /** 通用栏位配置列表 */
+  Common?: ActionFieldConfigResult[];
+  /** 动作栏位配置列表 */
+  Results?: ActionFieldConfigResult[];
+  /** 资源下线信息 */
+  ResourceOffline?: ResourceOffline[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeActionLibraryListRequest {
+  /** 0-100 */
+  Limit: number;
+  /** 默认值0 */
+  Offset: number;
+  /** 对象类型ID */
+  ObjectType: number;
+  /** Keyword取值{"动作名称": "a_title", "描述": "a_desc", "动作类型": "a_type", "创建时间": "a_create_time", "二级分类": "a_resource_type"} */
+  Filters?: ActionFilter[];
+  /** 动作分类，1表示故障动作，2表示恢复动作 */
+  Attribute?: number[];
+  /** 筛选项 -动作ID */
+  ActionIds?: number[];
+}
+
+declare interface DescribeActionLibraryListResponse {
+  /** 查询结果列表 */
+  Results?: ActionLibraryListResult[];
+  /** 符合记录条数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeObjectTypeListRequest {
+  /** 所支持的对象0：全平台产品1：平台接入的对象2：应用所支持的部分对象 */
+  SupportType?: number;
+}
+
+declare interface DescribeObjectTypeListResponse {
+  /** 对象类型列表 */
+  ObjectTypeList?: ObjectType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -705,10 +915,18 @@ declare interface TriggerPolicyResponse {
 /** {@link Cfg 混沌演练平台} */
 declare interface Cfg {
   (): Versions;
+  /** 从动作创建演练 {@link CreateTaskFromActionRequest} {@link CreateTaskFromActionResponse} */
+  CreateTaskFromAction(data: CreateTaskFromActionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFromActionResponse>;
   /** 从经验库创建演练 {@link CreateTaskFromTemplateRequest} {@link CreateTaskFromTemplateResponse} */
   CreateTaskFromTemplate(data: CreateTaskFromTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFromTemplateResponse>;
   /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
+  /** 获取动作栏位配置参数列表 {@link DescribeActionFieldConfigListRequest} {@link DescribeActionFieldConfigListResponse} */
+  DescribeActionFieldConfigList(data: DescribeActionFieldConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActionFieldConfigListResponse>;
+  /** 获取动作库列表 {@link DescribeActionLibraryListRequest} {@link DescribeActionLibraryListResponse} */
+  DescribeActionLibraryList(data: DescribeActionLibraryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActionLibraryListResponse>;
+  /** 查询对象类型列表 {@link DescribeObjectTypeListRequest} {@link DescribeObjectTypeListResponse} */
+  DescribeObjectTypeList(data?: DescribeObjectTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeObjectTypeListResponse>;
   /** 查询任务 {@link DescribeTaskRequest} {@link DescribeTaskResponse} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
   /** 获取演练过程日志 {@link DescribeTaskExecuteLogsRequest} {@link DescribeTaskExecuteLogsResponse} */

@@ -3275,7 +3275,7 @@ declare interface CreateAssistantCidrResponse {
 declare interface CreateBandwidthPackageRequest {
   /** 带宽包类型, 默认值: BGP, 可选值:BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包SINGLEISP_CMCC: 中国移动共享带宽包SINGLEISP_CTCC: 中国电信共享带宽包SINGLEISP_CUCC: 中国联通共享带宽包 */
   NetworkType?: string;
-  /** 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费FIXED_PREPAID_BY_MONTH: 包月预付费计费ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费 */
+  /** 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费FIXED_PREPAID_BY_MONTH: 包月预付费计费ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费按主流量计费 */
   ChargeType?: string;
   /** 带宽包名称。 */
   BandwidthPackageName?: string;
