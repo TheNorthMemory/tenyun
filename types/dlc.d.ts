@@ -3397,6 +3397,8 @@ declare interface DescribeNotebookSessionsRequest {
   Limit?: number;
   /** 分页参数，默认0 */
   Offset?: number;
+  /** 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, engine-generation - String（引擎时代： supersql：supersql引擎，native：标准引擎）：notebook-keyword - String（数据引擎名称或sessionid或sessionname的模糊搜索） */
+  Filters?: Filter[];
 }
 
 declare interface DescribeNotebookSessionsResponse {
@@ -3725,7 +3727,7 @@ declare interface DescribeTaskLogResponse {
 }
 
 declare interface DescribeTaskResultRequest {
-  /** 任务唯一ID */
+  /** 任务唯一ID，仅支持30天内的任务 */
   TaskId: string;
   /** 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。 */
   NextToken?: string;
@@ -3829,6 +3831,10 @@ declare interface DescribeThirdPartyAccessUserResponse {
 declare interface DescribeUpdatableDataEnginesRequest {
   /** 引擎配置操作命令，UpdateSparkSQLLakefsPath 更新托管表路径，UpdateSparkSQLResultPath 更新结果桶路径 */
   DataEngineConfigCommand: string;
+  /** 是否使用托管存储作为结果存储 */
+  UseLakeFs?: boolean;
+  /** 用户自定义结果存储路径 */
+  CustomResultPath?: string;
 }
 
 declare interface DescribeUpdatableDataEnginesResponse {

@@ -56,6 +56,22 @@ declare interface License {
   LicenseIds?: string[] | null;
 }
 
+/** 多网的网卡状态信息 */
+declare interface MultiNet {
+  /** 网卡序号 */
+  NetId?: number | null;
+  /** 网卡IP */
+  NetIp?: string | null;
+  /** 时延，单位ms */
+  Rtt?: number[] | null;
+  /** 丢包率，单位% */
+  Lost?: number[] | null;
+  /** 发送bps，单位kbps */
+  SendBps?: number[] | null;
+  /** 接收bps，单位kbps */
+  RecvBps?: number[] | null;
+}
+
 /** 权限信息 */
 declare interface PolicyInfo {
   /** 远端设备ID */
@@ -132,7 +148,7 @@ declare interface SessionDeviceDetail {
   SdkMode?: string | null;
   /** 解码耗时，单位：ms */
   DecodeCost?: number[] | null;
-  /** 渲染耗时，单位：ms */
+  /** 【已废弃，使用RenderCost】 */
   RenderConst?: number[] | null;
   /** 卡顿k100 */
   K100?: number[] | null;
@@ -150,6 +166,26 @@ declare interface SessionDeviceDetail {
   EncodeCost?: number[] | null;
   /** 采集耗时，单位：ms */
   CaptureCost?: number[] | null;
+  /** 渲染耗时，单位：ms */
+  RenderCost?: number[] | null;
+  /** 配置宽度 */
+  ConfigWidth?: number | null;
+  /** 配置高度 */
+  ConfigHeight?: number | null;
+  /** 平均帧间隔 */
+  FrameDelta?: number[] | null;
+  /** 最大帧间隔 */
+  MaxFrameDelta?: number[] | null;
+  /** 总码率评估,单位：kbps */
+  TotalBitrateEstimate?: number[] | null;
+  /** 帧间隔大于100ms的卡顿时长 */
+  Lag100Duration?: number[] | null;
+  /** 帧间隔大于150ms的卡顿时长 */
+  Lag150Duration?: number[] | null;
+  /** 是否开启多网：0 单网，1 多网 */
+  MultiMode?: number | null;
+  /** 多网卡信息 */
+  MultiNet?: MultiNet[] | null;
 }
 
 /** 会话信息 */
@@ -309,15 +345,17 @@ declare interface DescribeDeviceListRequest {
   PageSize?: number;
   /** 当前页码，不填默认为1（首页） */
   PageNumber?: number;
+  /** 设备状态筛选，不填默认为不过滤。取值：["ready","connected","online"]，online代表ready或connected */
+  DeviceStatus?: string;
 }
 
 declare interface DescribeDeviceListResponse {
   /** 设备信息列表 */
-  Devices: DeviceInfo[];
+  Devices?: DeviceInfo[];
   /** 设备总数 */
-  Total: number;
+  Total?: number;
   /** 本次返回的设备数 */
-  Num: number;
+  Num?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -329,7 +367,7 @@ declare interface DescribeDeviceSessionDetailsRequest {
 
 declare interface DescribeDeviceSessionDetailsResponse {
   /** 按设备区分的会话详细数据 */
-  Details: SessionDeviceDetail[];
+  Details?: SessionDeviceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

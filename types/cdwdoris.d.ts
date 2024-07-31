@@ -14,6 +14,14 @@ declare interface AttachCBSSpec {
   DiskDesc?: string;
 }
 
+/** 资源组绑定的用户信息，需要username和host信息进行授权 */
+declare interface BindUser {
+  /** 用户名 */
+  UserName?: string | null;
+  /** 主机信息 */
+  Host?: string | null;
+}
+
 /** 集群计费相关信息 */
 declare interface ChargeProperties {
   /** 计费类型，“PREPAID” 预付费，“POSTPAID_BY_HOUR” 后付费 */
@@ -98,6 +106,14 @@ declare interface DataBaseAuditRecord {
   SqlType?: string | null;
   /** catalog名称 */
   Catalog?: string | null;
+}
+
+/** KV配置 */
+declare interface InstanceConfigItem {
+  /** key */
+  ConfKey: string;
+  /** value */
+  ConfValue: string;
 }
 
 /** Instance表detail字段 */
@@ -292,6 +308,112 @@ declare interface NodesSummary {
   MaxDiskSize?: number | null;
 }
 
+/** 可用区的地域大类描述 */
+declare interface RegionAreaInfo {
+  /** 大类地域信息，如"south_china", "east_china"等 */
+  Name: string;
+  /** 对应Name的描述，例如“华南地区”，“华东地区”等 */
+  Desc: string;
+  /** 具体地域列表1 */
+  Regions: RegionInfo[];
+}
+
+/** 地域描述信息 */
+declare interface RegionInfo {
+  /** 地域名称，例如“ap-guangzhou" */
+  Name?: string;
+  /** 地域描述，例如"广州” */
+  Desc?: string;
+  /** 地域唯一标记 */
+  RegionId?: number;
+  /** 地域下所有可用区列表 */
+  Zones?: ZoneInfo[] | null;
+  /** 该地域下集群数目 */
+  Count?: number;
+  /** 0代表是国际站 1代表不是 */
+  IsInternationalSite?: number | null;
+  /** 桶 */
+  Bucket?: string | null;
+}
+
+/** 集群内节点的规格磁盘规格描述 */
+declare interface ResourceNodeDiskSpec {
+  /** 节点磁盘类型，例如“CLOUD_SSD”\"CLOUD_PREMIUM" */
+  DiskType?: string;
+  /** 磁盘容量，单位G */
+  DiskSize?: number;
+  /** 磁盘总数 */
+  DiskCount?: number;
+}
+
+/** 集群内节点的规格描述 */
+declare interface ResourceNodeSpec {
+  /** 节点类型，“DATA"数据节点，”COMMON" zookeeper节点 */
+  Type: string;
+  /** 节点规格名称，例如 “SCH1","SCH2”等 */
+  SpecName: string;
+  /** 节点数目 */
+  Count: number;
+  /** 磁盘规格描述 */
+  DiskSpec?: ResourceNodeDiskSpec | null;
+  /** 云盘是否加密，0不加密/1加密 默认为0 */
+  Encrypt?: number | null;
+  /** 额外信息 */
+  Extra?: SpecExtra | null;
+  /** 挂载云盘信息 */
+  AttachCBSSpec?: ResourceNodeDiskSpec | null;
+}
+
+/** 恢复任务信息 */
+declare interface RestoreStatus {
+  /** 恢复任务id */
+  JobId?: number;
+  /** 恢复任务标签 */
+  Label?: string;
+  /** 恢复任务时间戳 */
+  Timestamp?: string;
+  /** 恢复任务所在库 */
+  DbName?: string;
+  /** 恢复任务状态 */
+  State?: string;
+  /** 恢复时是否允许导入 */
+  AllowLoad?: boolean;
+  /** 副本数 */
+  ReplicationNum?: string;
+  /** 副本数 */
+  ReplicaAllocation?: string;
+  /** 恢复对象 */
+  RestoreObjects?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 元数据准备时间 */
+  MetaPreparedTime?: string;
+  /** 快照结束时间 */
+  SnapshotFinishedTime?: string;
+  /** 下载结束时间 */
+  DownloadFinishedTime?: string;
+  /** 结束时间 */
+  FinishedTime?: string;
+  /** 未完成任务 */
+  UnfinishedTasks?: string;
+  /** 进度 */
+  Progress?: string;
+  /** 错误信息 */
+  TaskErrMsg?: string;
+  /** 状态 */
+  Status?: string;
+  /** 作业超时时间 */
+  Timeout?: number;
+  /** 是否保持源表中的副本数 */
+  ReserveReplica?: boolean;
+  /** 是否保持源表中的动态分区 */
+  ReserveDynamicPartitionEnable?: boolean;
+  /** 备份实例id */
+  BackupJobId?: number | null;
+  /** 实例对应snapshot的id */
+  TaskId?: number | null;
+}
+
 /** 列表页搜索的标记列表 */
 declare interface SearchTags {
   /** 标签的键 */
@@ -336,12 +458,68 @@ declare interface SlowQueryRecord {
   DurationSec?: number | null;
 }
 
+/** 额外参数 */
+declare interface SpecExtra {
+  /** 要删除的shards */
+  DelShards?: string;
+  /** 要删除的节点uip */
+  DelHosts?: string;
+}
+
 /** 标签描述 */
 declare interface Tag {
   /** 标签的键 */
   TagKey: string;
   /** 标签的值 */
   TagValue: string;
+}
+
+/** 更新用户权限结构体 */
+declare interface UpdateUserPrivileges {
+  /** 是否设置catalog权限 */
+  IsSetGlobalCatalog?: boolean;
+}
+
+/** 用户绑定资源组信息 */
+declare interface UserWorkloadGroup {
+  /** test */
+  UserName?: string | null;
+  /** normal */
+  WorkloadGroupName?: string | null;
+}
+
+/** 检查doris内核是否支持新语法。 */
+declare interface VersionReplicaItem {
+  /** 版本描述 */
+  ReplicaFlag: number | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
+}
+
+/** 资源组相关配置 */
+declare interface WorkloadGroupConfig {
+  /** 资源组名称 */
+  WorkloadGroupName?: string | null;
+  /** CPU权重 */
+  CpuShare?: number | null;
+  /** 内存限制，所有资源组的内存限制值之和应该小于等于100 */
+  MemoryLimit?: number | null;
+  /** 是否允许超配分配 */
+  EnableMemoryOverCommit?: boolean | null;
+  /** cpu硬限制 */
+  CpuHardLimit?: string | null;
+}
+
+/** 可用区描述信息 */
+declare interface ZoneInfo {
+  /** 可用区名称，例如"ap-guangzhou-1" */
+  Name?: string;
+  /** 可用区描述信息，例如“广州一区” */
+  Desc?: string;
+  /** 可用区唯一标记 */
+  ZoneId?: number;
+  /** Encryptid */
+  Encrypt?: number | null;
 }
 
 declare interface CreateInstanceNewRequest {
@@ -382,6 +560,34 @@ declare interface CreateInstanceNewResponse {
   FlowId?: string;
   /** 实例ID */
   InstanceId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWorkloadGroupRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 资源组配置 */
+  WorkloadGroup?: WorkloadGroupConfig;
+}
+
+declare interface CreateWorkloadGroupResponse {
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWorkloadGroupRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 需要删除的资源组名称 */
+  WorkloadGroupName?: string;
+}
+
+declare interface DeleteWorkloadGroupResponse {
   /** 错误信息 */
   ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -488,6 +694,86 @@ declare interface DescribeDatabaseAuditRecordsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFederationTokenRequest {
+}
+
+declare interface DescribeFederationTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGoodsDetailRequest {
+  /** 操作类型，“CREATE"表示创建、”MODIFY"表示变更配置、“RENEW"表示续费 */
+  Case: string;
+  /** 可用区，例如"ap-guangzhou-3"表示广州三区等 */
+  Zone?: string;
+  /** 集群的高可用标记，true表示为高可用集群 */
+  HaFlag?: boolean;
+  /** 高可用类型： 0：非高可用 1：读高可用 2：读写高可用。 */
+  HaType?: number;
+  /** 用户集群的私有网络 */
+  UserVPCId?: string;
+  /** 用户集群的子网 */
+  UserSubnetId?: string;
+  /** 用户集群的版本，例如“20.7.2.30”等 */
+  ProductVersion?: string;
+  /** 集群ID，创建时为空，其他情况必须存在 */
+  InstanceId?: string;
+  /** 集群资源规格描述 */
+  Resources?: ResourceNodeSpec[];
+  /** 集群规格修改参数 */
+  ModifySpec?: ResourceNodeSpec;
+  /** 计费信息 */
+  ChargeProperties?: ChargeProperties;
+  /** 创建集群时需要填写InstanceName */
+  InstanceName?: string;
+  /** 购买页填写的标签列表 */
+  Tags?: Tag[];
+  /** CLS日志集ID */
+  ClsLogSetId?: string;
+  /** 用户子网剩余ip数量 */
+  UserSubnetIPNum?: number;
+  /** COS桶名称 */
+  CosBucketName?: string;
+  /** 按量计费转包年包月 */
+  HourToPrepaid?: boolean;
+  /** base64密码 */
+  DorisUserPwd?: string;
+  /** 日志的类型，es或者cls_topic */
+  LogType?: string;
+  /** 表名大小写是否敏感，0：敏感；1：不敏感，表名改为以小写存储；2：不敏感，以小写进行比较 */
+  CaseSensitive?: number;
+  /** true为滚动重启 false为批量重启 */
+  RollingRestart?: boolean;
+  /** 是否为多可用区 */
+  EnableMultiZones?: boolean;
+  /** 用户多可用区的网络信息 */
+  UserMultiZoneInfos?: NetworkInfo[];
+  /** 扩展字段 */
+  Details?: InstanceDetail;
+}
+
+declare interface DescribeGoodsDetailResponse {
+  /** GoodsDetail对象 */
+  GoodsDetail?: string;
+  /** GoodsCategoryId 表示操作类型 */
+  GoodsCategoryId?: number;
+  /** 子商品码 */
+  Type?: string;
+  /** 付费模式，0后付费，1预付费 */
+  PayMode?: number;
+  /** 地域ID */
+  RegionId?: number;
+  /** 可用区ID */
+  ZoneId?: number;
+  /** 资源标识符 */
+  ResourceId?: string;
+  /** 商品数目 */
+  GoodsNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceNodesInfoRequest {
   /** 集群id */
   InstanceID: string;
@@ -564,6 +850,20 @@ declare interface DescribeInstanceStateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceUsedSubnetsRequest {
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceUsedSubnetsResponse {
+  /** 集群使用的vpc信息 */
+  VpcId?: string | null;
+  /** 集群使用的subnet信息 */
+  UsedSubnets?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstancesRequest {
   /** 搜索的集群id名称 */
   SearchInstanceId?: string;
@@ -582,6 +882,52 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number;
   /** 实例数组 */
   InstancesList?: InstanceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegionZoneRequest {
+  /** 服务 */
+  Service?: string;
+  /** 是否是国际站 */
+  IsInternationalSite?: boolean;
+}
+
+declare interface DescribeRegionZoneResponse {
+  /** 地域列表 */
+  Items?: RegionAreaInfo[];
+  /** 内核版本列表 */
+  Versions?: string[];
+  /** 网络规则 */
+  VpcRule?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReplicaVersionRequest {
+  /** 实例id */
+  InstanceId: string;
+}
+
+declare interface DescribeReplicaVersionResponse {
+  /** 是否支持新语法 */
+  ReplicaFlagItem: VersionReplicaItem | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRestoreTaskDetailRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId: number;
+}
+
+declare interface DescribeRestoreTaskDetailResponse {
+  /** 恢复任务进度详情 */
+  RestoreStatus: RestoreStatus[] | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -664,6 +1010,50 @@ declare interface DescribeSlowQueryRecordsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSqlApisRequest {
+  /** 用户链接来自的 IP */
+  WhiteHost?: string;
+  /** catalog名称 */
+  Catalog?: string;
+  /** catalog集合 */
+  Catalogs?: string[];
+}
+
+declare interface DescribeSqlApisResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserBindWorkloadGroupRequest {
+  /** 集群id */
+  InstanceId?: string;
+}
+
+declare interface DescribeUserBindWorkloadGroupResponse {
+  /** 用户绑定资源组信息 */
+  UserBindInfos?: UserWorkloadGroup[];
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkloadGroupRequest {
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DescribeWorkloadGroupResponse {
+  /** 资源组信息 */
+  WorkloadGroups?: WorkloadGroupConfig[];
+  /** 是否开启资源组：开启-open、关闭-close */
+  Status?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyInstanceRequest {
   /** 集群ID */
   InstanceId: string;
@@ -680,6 +1070,54 @@ declare interface DestroyInstanceResponse {
   RequestId?: string;
 }
 
+declare interface FitClsLogRequest {
+  /** 集群ID，例如cdwch-xxxx */
+  InstanceId: string;
+  /** cls日志集ID */
+  ClsLogSetId: string;
+  /** 日志的类型，es还是cls_topic */
+  LogType?: string;
+}
+
+declare interface FitClsLogResponse {
+  /** 流程相关信息 */
+  FlowId?: number;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceKeyValConfigsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 文件名称 */
+  FileName: string;
+  /** 新增配置列表 */
+  AddItems?: InstanceConfigItem[];
+  /** 更新配置列表 */
+  UpdateItems?: InstanceConfigItem[];
+  /** 删除配置列表 */
+  DelItems?: InstanceConfigItem[];
+  /** 备注（50字以内） */
+  Message?: string;
+  /** 热更新列表 */
+  HotUpdateItems?: InstanceConfigItem[];
+  /** 删除配置列表 */
+  DeleteItems?: InstanceConfigItem;
+  /** ip地址 */
+  IPAddress?: string;
+}
+
+declare interface ModifyInstanceKeyValConfigsResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceRequest {
   /** 实例Id */
   InstanceId: string;
@@ -688,6 +1126,110 @@ declare interface ModifyInstanceRequest {
 }
 
 declare interface ModifyInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySecurityGroupsRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 修改前的安全组信息 */
+  OldSecurityGroupIds?: string[];
+  /** 修改后的安全组信息 */
+  ModifySecurityGroupIds?: string[];
+}
+
+declare interface ModifySecurityGroupsResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUserBindWorkloadGroupRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 需要绑定资源组的用户信息，如果一个账户拥有多个主机信息，需要将这些信息都传入 */
+  BindUsers?: BindUser[];
+  /** 修改前绑定的资源组名称 */
+  OldWorkloadGroupName?: string;
+  /** 修改后绑定的资源组名称 */
+  NewWorkloadGroupName?: string;
+}
+
+declare interface ModifyUserBindWorkloadGroupResponse {
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUserPrivilegesV3Request {
+  /** 集群id */
+  InstanceId: string;
+  /** 用户名 */
+  UserName: string;
+  /** 用户权限 */
+  UserPrivileges: UpdateUserPrivileges;
+  /** 用户链接来自的 IP */
+  WhiteHost?: string;
+}
+
+declare interface ModifyUserPrivilegesV3Response {
+  /** 错误信息，为空就是没有错误 */
+  ErrorMsg?: string | null;
+  /** 集群id */
+  InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWorkloadGroupRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 修改的资源组信息 */
+  WorkloadGroup?: WorkloadGroupConfig;
+}
+
+declare interface ModifyWorkloadGroupResponse {
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWorkloadGroupStatusRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 是否开启资源组：open-开启、close-关闭 */
+  OperationType?: string;
+}
+
+declare interface ModifyWorkloadGroupStatusResponse {
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReduceInstanceRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 节点列表 */
+  DelHosts: string[];
+  /** 角色（MATER/CORE），MASTER 对应 FE，CORE对应BE */
+  Type: string;
+  /** 缩容后集群高可用类型：0：非高可用，1：读高可用，2：读写高可用。 */
+  HaType: number;
+}
+
+declare interface ReduceInstanceResponse {
+  /** 流程ID */
+  FlowId?: string;
+  /** 集群ID */
+  InstanceId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -781,12 +1323,20 @@ declare interface Cdwdoris {
   (): Versions;
   /** 集群创建 {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
+  /** 创建资源组 {@link CreateWorkloadGroupRequest} {@link CreateWorkloadGroupResponse} */
+  CreateWorkloadGroup(data: CreateWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkloadGroupResponse>;
+  /** 删除资源组 {@link DeleteWorkloadGroupRequest} {@link DeleteWorkloadGroupResponse} */
+  DeleteWorkloadGroup(data: DeleteWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkloadGroupResponse>;
   /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */
   DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
   /** 下载数据库审计日志 {@link DescribeDatabaseAuditDownloadRequest} {@link DescribeDatabaseAuditDownloadResponse} */
   DescribeDatabaseAuditDownload(data: DescribeDatabaseAuditDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditDownloadResponse>;
   /** 获取数据库审计记录 {@link DescribeDatabaseAuditRecordsRequest} {@link DescribeDatabaseAuditRecordsResponse} */
   DescribeDatabaseAuditRecords(data: DescribeDatabaseAuditRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditRecordsResponse>;
+  /** 新获取联合身份临时访问凭证 {@link DescribeFederationTokenRequest} {@link DescribeFederationTokenResponse} */
+  DescribeFederationToken(data?: DescribeFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFederationTokenResponse>;
+  /** 生成GoodsDetail {@link DescribeGoodsDetailRequest} {@link DescribeGoodsDetailResponse} */
+  DescribeGoodsDetail(data: DescribeGoodsDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGoodsDetailResponse>;
   /** 获取集群描述信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取集群节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
@@ -795,16 +1345,46 @@ declare interface Cdwdoris {
   DescribeInstanceNodesInfo(data: DescribeInstanceNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesInfoResponse>;
   /** 获取集群状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
   DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
+  /** 获取集群已使用子网信息 {@link DescribeInstanceUsedSubnetsRequest} {@link DescribeInstanceUsedSubnetsResponse} */
+  DescribeInstanceUsedSubnets(data: DescribeInstanceUsedSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceUsedSubnetsResponse>;
   /** 获取集群列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 获取地域及可用区列表 {@link DescribeRegionZoneRequest} {@link DescribeRegionZoneResponse} */
+  DescribeRegionZone(data?: DescribeRegionZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionZoneResponse>;
+  /** 检查内核版本 {@link DescribeReplicaVersionRequest} {@link DescribeReplicaVersionResponse} */
+  DescribeReplicaVersion(data: DescribeReplicaVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicaVersionResponse>;
+  /** 查询恢复任务进度详情 {@link DescribeRestoreTaskDetailRequest} {@link DescribeRestoreTaskDetailResponse} */
+  DescribeRestoreTaskDetail(data: DescribeRestoreTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRestoreTaskDetailResponse>;
   /** 获取慢查询列表 {@link DescribeSlowQueryRecordsRequest} {@link DescribeSlowQueryRecordsResponse} */
   DescribeSlowQueryRecords(data: DescribeSlowQueryRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryRecordsResponse>;
   /** 下载慢查询文件 {@link DescribeSlowQueryRecordsDownloadRequest} {@link DescribeSlowQueryRecordsDownloadResponse} */
   DescribeSlowQueryRecordsDownload(data: DescribeSlowQueryRecordsDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryRecordsDownloadResponse>;
+  /** 通过sql查询集群信息 {@link DescribeSqlApisRequest} {@link DescribeSqlApisResponse} */
+  DescribeSqlApis(data?: DescribeSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlApisResponse>;
+  /** 获取用户绑定的资源组信息 {@link DescribeUserBindWorkloadGroupRequest} {@link DescribeUserBindWorkloadGroupResponse} */
+  DescribeUserBindWorkloadGroup(data?: DescribeUserBindWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserBindWorkloadGroupResponse>;
+  /** 获取资源组信息 {@link DescribeWorkloadGroupRequest} {@link DescribeWorkloadGroupResponse} */
+  DescribeWorkloadGroup(data: DescribeWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkloadGroupResponse>;
   /** 集群销毁 {@link DestroyInstanceRequest} {@link DestroyInstanceResponse} */
   DestroyInstance(data: DestroyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstanceResponse>;
+  /** 新增日志服务接口 {@link FitClsLogRequest} {@link FitClsLogResponse} */
+  FitClsLog(data: FitClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<FitClsLogResponse>;
   /** 修改集群名称 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
+  ModifyInstanceKeyValConfigs(data: ModifyInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceKeyValConfigsResponse>;
+  /** 更改安全组 {@link ModifySecurityGroupsRequest} {@link ModifySecurityGroupsResponse} */
+  ModifySecurityGroups(data: ModifySecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupsResponse>;
+  /** 修改用户绑定的资源组 {@link ModifyUserBindWorkloadGroupRequest} {@link ModifyUserBindWorkloadGroupResponse} */
+  ModifyUserBindWorkloadGroup(data: ModifyUserBindWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserBindWorkloadGroupResponse>;
+  /** 修改权接口 {@link ModifyUserPrivilegesV3Request} {@link ModifyUserPrivilegesV3Response} */
+  ModifyUserPrivilegesV3(data: ModifyUserPrivilegesV3Request, config?: AxiosRequestConfig): AxiosPromise<ModifyUserPrivilegesV3Response>;
+  /** 修改资源组信息 {@link ModifyWorkloadGroupRequest} {@link ModifyWorkloadGroupResponse} */
+  ModifyWorkloadGroup(data: ModifyWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkloadGroupResponse>;
+  /** 开启、关闭资源组 {@link ModifyWorkloadGroupStatusRequest} {@link ModifyWorkloadGroupStatusResponse} */
+  ModifyWorkloadGroupStatus(data: ModifyWorkloadGroupStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkloadGroupStatusResponse>;
+  /** 集群缩容 {@link ReduceInstanceRequest} {@link ReduceInstanceResponse} */
+  ReduceInstance(data: ReduceInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ReduceInstanceResponse>;
   /** 云盘扩容 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
   /** 集群滚动重启 {@link RestartClusterForNodeRequest} {@link RestartClusterForNodeResponse} */

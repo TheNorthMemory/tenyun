@@ -4992,10 +4992,10 @@ declare interface DescribeContainerGroupDetailResponse {
 }
 
 declare interface DescribeContainerGroupsRequest {
+  /** 分组所属应用ID。 */
+  ApplicationId: string;
   /** 搜索字段，模糊搜索groupName字段 */
   SearchWord?: string;
-  /** 分组所属应用ID。必填 */
-  ApplicationId?: string;
   /** 排序字段，默认为 createTime字段，支持id， name， createTime */
   OrderBy?: string;
   /** 排序方式，默认为1：倒序排序，0：正序，1：倒序 */
@@ -7594,7 +7594,7 @@ declare interface Tsf {
   /** 查询容器部署组详情 {@link DescribeContainerGroupDetailRequest} {@link DescribeContainerGroupDetailResponse} */
   DescribeContainerGroupDetail(data: DescribeContainerGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDetailResponse>;
   /** 容器部署组列表 {@link DescribeContainerGroupsRequest} {@link DescribeContainerGroupsResponse} */
-  DescribeContainerGroups(data?: DescribeContainerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupsResponse>;
+  DescribeContainerGroups(data: DescribeContainerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupsResponse>;
   /** 查询一键导入API分组任务的状态 {@link DescribeCreateGatewayApiStatusRequest} {@link DescribeCreateGatewayApiStatusResponse} */
   DescribeCreateGatewayApiStatus(data?: DescribeCreateGatewayApiStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateGatewayApiStatusResponse>;
   /** 获取单个投递项配置 {@link DescribeDeliveryConfigRequest} {@link DescribeDeliveryConfigResponse} */

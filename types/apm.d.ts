@@ -453,6 +453,8 @@ declare interface DescribeMetricRecordsRequest {
   PageSize?: number;
   /** Or过滤条件 */
   OrFilters?: Filter[];
+  /** 数据来源 */
+  Type?: string;
 }
 
 declare interface DescribeMetricRecordsResponse {

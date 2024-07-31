@@ -174,7 +174,7 @@ declare interface EidInfo {
 declare interface Encryption {
   /** 在使用加密服务时，填入要被加密的字段。本接口中可填入加密后的一个或多个字段 */
   EncryptList: string[] | null;
-  /** 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅数据加密 文档。 */
+  /** 加密后的对称密钥，关于密钥的生成和使用请查阅数据加密 文档。 */
   CiphertextBlob: string | null;
   /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。 */
   Iv: string | null;

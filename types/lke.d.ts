@@ -52,6 +52,12 @@ declare interface AppModel {
   AliasName?: string | null;
   /** token余量 */
   TokenBalance?: number | null;
+  /** 是否使用上下文指代轮次 */
+  IsUseContext?: boolean | null;
+  /** 上下文记忆轮数 */
+  HistoryLimit?: number | null;
+  /** 使用类型 */
+  UsageType?: string | null;
 }
 
 /** 属性标签详情信息 */
@@ -112,7 +118,7 @@ declare interface AttributeLabel {
 declare interface BaseConfig {
   /** 应用名称 */
   Name: string;
-  /** 应用头像 */
+  /** 应用头像url，在CreateApp和ModifyApp中作为入参必填。作为入参传入说明：1. 传入的url图片限制为jpeg和png，大小限制为500KB，url链接需允许head请求。2. 如果用户没有对象存储，可使用“获取文件上传临时密钥”(DescribeStorageCredential)接口，获取cos临时密钥和上传路径，自行上传头像至cos中并获取访问链接。 */
   Avatar: string;
   /** 应用描述 */
   Desc?: string;
@@ -286,6 +292,34 @@ declare interface Highlight {
   Text?: string | null;
 }
 
+/** 多轮历史信息 */
+declare interface HistorySummary {
+  /** 助手 */
+  Assistant?: string | null;
+  /** 用户 */
+  User?: string | null;
+}
+
+/** 请求的API信息 */
+declare interface InvokeAPI {
+  /** 请求方法，如GET/POST等 */
+  Method?: string | null;
+  /** 请求地址 */
+  Url?: string | null;
+  /** header参数 */
+  HeaderValues?: StrValue[] | null;
+  /** 入参Query */
+  QueryValues?: StrValue[] | null;
+  /** Post请求的原始数据 */
+  RequestPostBody?: string | null;
+  /** 返回的原始数据 */
+  ResponseBody?: string | null;
+  /** 出参 */
+  ResponseValues?: ValueInfo[] | null;
+  /** 异常信息 */
+  FailMessage?: string | null;
+}
+
 /** 知识问答配置 */
 declare interface KnowledgeQaConfig {
   /** 欢迎语，200字符以内 */
@@ -314,6 +348,8 @@ declare interface KnowledgeQaOutput {
   UseQuestionClarify?: boolean | null;
   /** 问题澄清关键词列表 */
   QuestionClarifyKeywords?: string[] | null;
+  /** 是否打开推荐问题开关 */
+  UseRecommended?: boolean | null;
 }
 
 /** 检索配置 */
@@ -334,6 +370,16 @@ declare interface KnowledgeQaSearch {
   DocTopN?: number | null;
   /** 检索置信度，针对文档和问答有效，最小0.01，最大0.99 */
   Confidence?: number | null;
+  /** 资源状态 1：资源可用；2：资源已用尽 */
+  ResourceStatus?: number | null;
+}
+
+/** 检索知识 */
+declare interface KnowledgeSummary {
+  /** 1是问答 2是文档片段 */
+  Type?: number | null;
+  /** 知识内容 */
+  Content?: string | null;
 }
 
 /** 标签ID */
@@ -488,6 +534,10 @@ declare interface ModelInfo {
   ModelDesc?: string | null;
   /** 模型名称 */
   AliasName?: string | null;
+  /** 资源状态 1：资源可用；2：资源已用尽 */
+  ResourceStatus?: number | null;
+  /** 提示词内容字符限制 */
+  PromptWordsLimit?: string | null;
 }
 
 /** 文档信息 */
@@ -600,6 +650,24 @@ declare interface Procedure {
   Status?: string | null;
   /** 消耗 token 数 */
   Count?: number | null;
+  /** 调试信息 */
+  Debugging?: ProcedureDebugging | null;
+  /** 计费资源状态，1：可用，2：不可用 */
+  ResourceStatus?: number | null;
+}
+
+/** 调试信息 */
+declare interface ProcedureDebugging {
+  /** 检索query */
+  Content?: string | null;
+  /** 系统prompt */
+  System?: string | null;
+  /** 多轮历史信息 */
+  Histories?: HistorySummary[] | null;
+  /** 检索知识 */
+  Knowledge?: KnowledgeSummary[] | null;
+  /** 任务流程 */
+  TaskFlow?: TaskFlowSummary | null;
 }
 
 /** 获取QA分类分组 */
@@ -792,6 +860,28 @@ declare interface ReleaseRejectedQuestion {
   Message?: string | null;
 }
 
+/** 节点信息 */
+declare interface RunNodeInfo {
+  /** 节点类型，0:未指定，1:开始节点，2:API节点，3:询问节点，4:答案节点 */
+  NodeType?: number | null;
+  /** 节点ID */
+  NodeId?: string | null;
+  /** 节点名称 */
+  NodeName?: string | null;
+  /** 请求的API */
+  InvokeApi?: InvokeAPI | null;
+  /** 当前节点的所有槽位的值，key：SlotID。没有值的时候也要返回空。 */
+  SlotValues?: ValueInfo[] | null;
+}
+
+/** 字符串KV信息 */
+declare interface StrValue {
+  /** 名称 */
+  Name?: string | null;
+  /** 值 */
+  Value?: string | null;
+}
+
 /** 知识摘要应用配置 */
 declare interface SummaryConfig {
   /** 模型配置 */
@@ -826,6 +916,18 @@ declare interface TaskFlowInfo {
   Type?: number | null;
 }
 
+/** 任务流程调试信息 */
+declare interface TaskFlowSummary {
+  /** 任务流程名 */
+  IntentName?: string | null;
+  /** 实体列表 */
+  UpdatedSlotValues?: ValueInfo[] | null;
+  /** 节点列表 */
+  RunNodes?: RunNodeInfo[] | null;
+  /** 意图判断 */
+  Purposes?: string[] | null;
+}
+
 /** 任务参数 */
 declare interface TaskParams {
   /** 下载地址,需要通过cos桶临时密钥去下载 */
@@ -856,6 +958,8 @@ declare interface TokenStat {
   TokenCount?: number | null;
   /** 执行过程信息 */
   Procedures?: Procedure[] | null;
+  /** 执行过程信息TraceId */
+  TraceId?: string | null;
 }
 
 /** 不满意回复 */
@@ -882,6 +986,26 @@ declare interface Usage {
   OutputTokens?: number;
   /** 总token数 */
   TotalTokens?: number;
+}
+
+/** 任务流程参数信息 */
+declare interface ValueInfo {
+  /** 值ID */
+  Id?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 值类型：0:未知或者空, 1:string, 2:int, 3:float, 4:bool, 5:array(字符串数组), 6: object_array(结构体数组), 7: object(结构体) */
+  ValueType?: number | null;
+  /** string */
+  ValueStr?: string | null;
+  /** int（避免精度丢失使用字符串返回） */
+  ValueInt?: string | null;
+  /** float */
+  ValueFloat?: number | null;
+  /** bool */
+  ValueBool?: boolean | null;
+  /** array */
+  ValueStrArray?: string[] | null;
 }
 
 /** 解析为 word 文档的结果 */

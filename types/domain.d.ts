@@ -697,7 +697,7 @@ declare interface DeleteTemplateResponse {
 }
 
 declare interface DescribeAuctionListRequest {
-  /** 业务ID */
+  /** 业务ID，通过接口DescribeBiddingList返回结果中获取 */
   BusinessId: string;
   /** 条数，默认10条 */
   Limit?: number;
