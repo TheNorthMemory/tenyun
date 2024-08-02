@@ -32,6 +32,34 @@ declare interface DataAuthorizationInfo {
   PrivacyPolicyLink?: string;
 }
 
+/** 黑白名单导入名单数据的业务入参数据结构 */
+declare interface DataContentInfo {
+  /** 名单数据内容 */
+  DataContent?: string;
+  /** 名单数据描述 */
+  DataRemark?: string;
+  /** 名单数据开始时间，时间格式示例"2024-05-05 12:10:15" */
+  StartTime?: string;
+  /** 名单数据结束时间，时间格式示例"2024-05-05 12:10:15" */
+  EndTime?: string;
+}
+
+/** 创建黑白名单入参 */
+declare interface InputCreateNameListFront {
+  /** 名单名称 */
+  ListName: string;
+  /** 名单类型 [1 黑名单 2白名单] */
+  ListType: number;
+  /** 数据类型[1 手机号 2 qqOpenId 3 2echatOpenId 4 ip 6 idfa 7 imei] */
+  DataType: number;
+  /** 描述 */
+  Remark?: string;
+  /** 加密类型[0 无需加密 1 MD5加密 2 SHA256加密] */
+  EncryptionType?: number;
+  /** 场景Code，all_scene代表全部场景 */
+  SceneCode?: string;
+}
+
 /** 全栈式风控引擎入参 */
 declare interface InputCryptoManageMarketingRisk {
   /** 是否授权：1已授权，否则未授权。 调用全栈式风控引擎接口服务时，客户需先明确授权 */
@@ -42,12 +70,70 @@ declare interface InputCryptoManageMarketingRisk {
   CryptoContent?: string;
 }
 
+/** 删除黑白名单数据业务入参 */
+declare interface InputDeleteNameListData {
+  /** 黑白名单数据ID集合 */
+  NameListDataIdList: number[];
+}
+
+/** 删除黑白名单入参 */
+declare interface InputDeleteNameListFront {
+  /** 名单ID */
+  NameListId: number;
+}
+
+/** 查询黑白名单数据入参 */
+declare interface InputDescribeDataListFront {
+  /** 名单ID */
+  NameListId: number;
+  /** 当前页数 */
+  PageNumber: number;
+  /** 每页显示条数 */
+  PageSize: number;
+  /** 搜索关键字，按照名单数据名称或加密名单数据名称搜索 */
+  KeyWord?: string;
+  /** 黑白名单列表状态[1 启用 2 停用] */
+  Status?: number;
+}
+
+/** 查询黑白名单详情入参 */
+declare interface InputDescribeNameListDetail {
+  /** 名单ID */
+  NameListId: number;
+}
+
+/** 查询黑白名单入参 */
+declare interface InputDescribeNameListFront {
+  /** 当前页数 */
+  PageNumber: number;
+  /** 每页显示条数 */
+  PageSize: number;
+  /** 名单类型 [1 黑名单 2 白名单] */
+  ListType?: number;
+  /** 数据类型[1 手机号 2 qqOpenId 3 wechatOpenId 4 ip 6 idfa 7 imei] */
+  DataType?: number;
+  /** 关键字，按照名单名称搜索 */
+  KeyWord?: string;
+  /** 记录状态[1 启用 2 停用] */
+  Status?: number;
+}
+
 /** 入参的详细参数信息 */
 declare interface InputDetails {
   /** 字段名称 */
   FieldName: string;
   /** 字段值 */
   FieldValue: string;
+}
+
+/** 添加名单数据入参 */
+declare interface InputImportNameListDataFront {
+  /** 名单ID */
+  NameListId: number;
+  /** 数据来源，固定传2（手工录入） */
+  DataSource: number;
+  /** 黑白名单数据内容 */
+  DataContentInfo?: DataContentInfo[];
 }
 
 /** 全栈式风控引擎入参 */
@@ -100,6 +186,40 @@ declare interface InputManageMarketingRisk {
   DataAuthorization?: DataAuthorizationInfo;
 }
 
+/** 修改黑白名单入参 */
+declare interface InputModifyNameFront {
+  /** 名单ID */
+  NameListId: number;
+  /** 名单名称 */
+  ListName?: string;
+  /** 名单状态 [1 启用 2 停用] */
+  Status?: number;
+  /** 描述 */
+  Remark?: string;
+}
+
+/** 名单数据集合 */
+declare interface InputModifyNameListDataFront {
+  /** 名单数据ID */
+  NameListDataId: number;
+  /** 名单数据内容 */
+  DataContent?: string;
+  /** 名单数据开始时间，时间格式示例"2024-05-05 12:10:15" */
+  StartTime?: string;
+  /** 名单数据结束时间，时间格式示例"2024-05-05 12:10:15" */
+  EndTime?: string;
+  /** 记录状态 [1 启用 2 停用] */
+  Status?: number;
+  /** 名单数据描述 */
+  Remark?: string;
+}
+
+/** 修改黑白名单数据入参 */
+declare interface InputModifyNameListDataFrontListData {
+  /** 名单数据集合 */
+  DataList?: InputModifyNameListDataFront[];
+}
+
 /** 诈骗信息。 */
 declare interface OnlineScamInfo {
   /** 内容标签。 */
@@ -122,6 +242,168 @@ declare interface OtherAccountInfo {
   MobilePhone?: string;
   /** 用户设备号（该字段已不推荐使用）。 */
   DeviceId?: string;
+}
+
+/** 黑白名单数据列表信息 */
+declare interface OuntputDescribeDataListInfo {
+  /** 数量 */
+  Count?: number | null;
+  /** 列表 */
+  List?: OutputDescribeDataListFront[] | null;
+}
+
+/** 创建黑白名单出参 */
+declare interface OutputCreateNameListFront {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 空数组 */
+  Value?: string[] | null;
+}
+
+/** 删除黑白名单出参 */
+declare interface OutputDeleteNameListData {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number | null;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 空数组 */
+  Value?: string[] | null;
+}
+
+/** 删除黑白名单出参 */
+declare interface OutputDeleteNameListFront {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 空数组 */
+  Value?: string[] | null;
+}
+
+/** 黑白名单数据信息 */
+declare interface OutputDescribeDataListFront {
+  /** 名单数据ID */
+  NameListDataId?: number;
+  /** 名单ID */
+  NameListId?: number;
+  /** 名单数据内容 */
+  DataContent?: string;
+  /** 数据来源，固定传2（手工录入） */
+  DataSource?: number;
+  /** 名单数据开始时间，时间格式示例"2024-05-05 12:10:15" */
+  StartTime?: string | null;
+  /** 名单数据结束时间，时间格式示例"2024-05-05 12:10:15" */
+  EndTime?: string | null;
+  /** 名单数据状态 [1 启用 2 停用] */
+  Status?: number;
+  /** 名单数据描述 */
+  Remark?: string | null;
+  /** 名单数据创建时间，时间格式示例"2024-05-05 12:10:15" */
+  CreateTime?: string;
+  /** 名单数据更新时间，时间格式示例"2024-05-05 12:10:15" */
+  UpdateTime?: string;
+  /** 加密名单数据内容 */
+  EncryptDataContent?: string | null;
+}
+
+/** 查询黑白名单数据出参 */
+declare interface OutputDescribeDataListFrontData {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number | null;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 黑白名单数据信息 */
+  Value?: OuntputDescribeDataListInfo | null;
+}
+
+/** 黑白名单详情出参 */
+declare interface OutputDescribeNameListDetail {
+  /** 名单ID */
+  NameListId?: number | null;
+  /** 名单名称 */
+  ListName?: string | null;
+  /** 名单类型 [1 黑名单 2 白名单] */
+  ListType?: number | null;
+  /** 数据类型[1 手机号 2 qqOpenId 3 2echatOpenId 4 ip 6 idfa 7 imei] */
+  DataType?: number | null;
+  /** 场景Code */
+  SceneCode?: string | null;
+  /** 名单列表状态 [1 启用 2 停用] */
+  Status?: number | null;
+  /** 描述 */
+  Remark?: string | null;
+  /** 创建时间，时间格式示例"2024-05-05 12:10:15" */
+  CreateTime?: string | null;
+  /** 更新时间，时间格式示例"2024-05-05 12:10:15" */
+  UpdateTime?: string | null;
+  /** 加密类型 [0 无需加密，1 MD5加密，2 SHA256加密] */
+  EncryptionType?: number | null;
+}
+
+/** 查询列表详情出参 */
+declare interface OutputDescribeNameListDetailFront {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number | null;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 列表详情信息 */
+  Value?: OutputDescribeNameListDetail | null;
+}
+
+/** 黑白名单信息 */
+declare interface OutputDescribeNameListFrontFix {
+  /** 名单ID */
+  NameListId?: number;
+  /** 名单名称 */
+  ListName?: string | null;
+  /** 名单类型 [1 黑名单 2 白名单] */
+  ListType?: number | null;
+  /** 数据类型[1 手机号 2 qqOpenId 3 2echatOpenId 4 ip 6 idfa 7 imei] */
+  DataType?: number;
+  /** 记录状态 [1 启用 2 停用] */
+  Status?: number;
+  /** 描述 */
+  Remark?: string | null;
+  /** 创建时间，时间格式示例"2024-05-05 12:10:15" */
+  CreateTime?: string;
+  /** 更新时间，时间格式示例"2024-05-05 12:10:15" */
+  UpdateTime?: string;
+  /** 有效数据/数据总数 */
+  EffectCount?: string;
+  /** 加密类型[0 无需加密 1 MD5加密 2 SHA256加密] */
+  EncryptionType?: number | null;
+  /** 场景Code，all_scene代表全部场景 */
+  SceneCode?: string | null;
+}
+
+/** 查询黑白名单出参 */
+declare interface OutputDescribeNameListFrontFixListData {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number | null;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 黑白名单列表信息 */
+  Value?: OutputDescribeNameListInfo | null;
+}
+
+/** 黑白名单信息 */
+declare interface OutputDescribeNameListInfo {
+  /** 总数 */
+  Count?: number | null;
+  /** 列表 */
+  List?: OutputDescribeNameListFrontFix[] | null;
+}
+
+/** 添加黑白名单数据出参 */
+declare interface OutputImportNameListDataFront {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 空数组 */
+  Value?: string[] | null;
 }
 
 /** 全栈式风控引擎出参 */
@@ -154,6 +436,26 @@ declare interface OutputManageMarketingRiskValue {
   ConstId?: string | null;
   /** 风险扩展数据。 */
   RiskInformation?: string | null;
+}
+
+/** 修改黑白名单出参 */
+declare interface OutputModifyNameFront {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 空数组 */
+  Value?: string[] | null;
+}
+
+/** 修改黑白名单数据出参 */
+declare interface OutputModifyNameListFront {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  Code?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 空数组 */
+  Value?: string[] | null;
 }
 
 /** QQ账号信息。 */
@@ -202,6 +504,90 @@ declare interface WeChatAccountInfo {
   DeviceId?: string;
 }
 
+declare interface CreateNameListRequest {
+  /** 业务入参 */
+  BusinessSecurityData: InputCreateNameListFront;
+}
+
+declare interface CreateNameListResponse {
+  /** 业务出参 */
+  Data?: OutputCreateNameListFront;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNameListDataRequest {
+  /** 业务入参 */
+  BusinessSecurityData?: InputDeleteNameListData;
+}
+
+declare interface DeleteNameListDataResponse {
+  /** 业务出参 */
+  Data?: OutputDeleteNameListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNameListRequest {
+  /** 业务入参 */
+  BusinessSecurityData: InputDeleteNameListFront;
+}
+
+declare interface DeleteNameListResponse {
+  /** 业务出参 */
+  Data?: OutputDeleteNameListFront;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNameListDataListRequest {
+  /** 业务入参 */
+  BusinessSecurityData: InputDescribeDataListFront;
+}
+
+declare interface DescribeNameListDataListResponse {
+  /** 业务出参 */
+  Data?: OutputDescribeDataListFrontData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNameListDetailRequest {
+  /** 业务入参 */
+  BusinessSecurityData?: InputDescribeNameListDetail;
+}
+
+declare interface DescribeNameListDetailResponse {
+  /** 黑白名单列表详情业务出参 */
+  Data?: OutputDescribeNameListDetailFront;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNameListRequest {
+  /** 业务入参 */
+  BusinessSecurityData: InputDescribeNameListFront;
+}
+
+declare interface DescribeNameListResponse {
+  /** 业务出参 */
+  Data?: OutputDescribeNameListFrontFixListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportNameListDataRequest {
+  /** 业务入参 */
+  BusinessSecurityData: InputImportNameListDataFront;
+}
+
+declare interface ImportNameListDataResponse {
+  /** 业务出参 */
+  Data?: OutputImportNameListDataFront;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ManageMarketingRiskRequest {
   /** 业务入参 */
   BusinessSecurityData?: InputManageMarketingRisk;
@@ -216,11 +602,53 @@ declare interface ManageMarketingRiskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNameListDataRequest {
+  /** 业务入参 */
+  BusinessSecurityData: InputModifyNameListDataFrontListData;
+}
+
+declare interface ModifyNameListDataResponse {
+  /** 业务出参 */
+  Data?: OutputModifyNameListFront;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNameListRequest {
+  /** 业务入参 */
+  BusinessSecurityData: InputModifyNameFront;
+}
+
+declare interface ModifyNameListResponse {
+  /** 业务出参 */
+  Data?: OutputModifyNameFront;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Rce 全栈式风控引擎} */
 declare interface Rce {
   (): Versions;
+  /** 创建黑白名单 {@link CreateNameListRequest} {@link CreateNameListResponse} */
+  CreateNameList(data: CreateNameListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNameListResponse>;
+  /** 删除黑白名单 {@link DeleteNameListRequest} {@link DeleteNameListResponse} */
+  DeleteNameList(data: DeleteNameListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNameListResponse>;
+  /** 删除黑白名单数据 {@link DeleteNameListDataRequest} {@link DeleteNameListDataResponse} */
+  DeleteNameListData(data?: DeleteNameListDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNameListDataResponse>;
+  /** 查询黑白名单 {@link DescribeNameListRequest} {@link DescribeNameListResponse} */
+  DescribeNameList(data: DescribeNameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNameListResponse>;
+  /** 查询黑白名单数据 {@link DescribeNameListDataListRequest} {@link DescribeNameListDataListResponse} */
+  DescribeNameListDataList(data: DescribeNameListDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNameListDataListResponse>;
+  /** 查询黑白名单详情 {@link DescribeNameListDetailRequest} {@link DescribeNameListDetailResponse} */
+  DescribeNameListDetail(data?: DescribeNameListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNameListDetailResponse>;
+  /** 添加黑白名单数据 {@link ImportNameListDataRequest} {@link ImportNameListDataResponse} */
+  ImportNameListData(data: ImportNameListDataRequest, config?: AxiosRequestConfig): AxiosPromise<ImportNameListDataResponse>;
   /** 全栈式风控引擎 {@link ManageMarketingRiskRequest} {@link ManageMarketingRiskResponse} */
   ManageMarketingRisk(data?: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
+  /** 修改黑白名单 {@link ModifyNameListRequest} {@link ModifyNameListResponse} */
+  ModifyNameList(data: ModifyNameListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNameListResponse>;
+  /** 修改黑白名单数据 {@link ModifyNameListDataRequest} {@link ModifyNameListDataResponse} */
+  ModifyNameListData(data: ModifyNameListDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNameListDataResponse>;
 }
 
 export declare type Versions = ["2020-11-03"];

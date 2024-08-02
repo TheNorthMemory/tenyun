@@ -14,6 +14,98 @@ declare interface AttachCBSSpec {
   DiskDesc?: string;
 }
 
+/** 备份实例详情 */
+declare interface BackUpJobDisplay {
+  /** 备份实例id */
+  JobId?: number;
+  /** 备份实例名 */
+  Snapshot?: string;
+  /** 备份数据量 */
+  BackUpSize?: number;
+  /** 备份单副本数据量 */
+  BackUpSingleSize?: number | null;
+  /** 实例创建时间 */
+  BackUpTime?: string;
+  /** 实例过期时间 */
+  ExpireTime?: string;
+  /** 实例状态 */
+  JobStatus?: string;
+  /** 0为默认。1时是对远端的doris进行备份，不周期，一次性 */
+  BackupType?: number | null;
+  /** 0为默认。1时是立即备份。2时是迁移 */
+  BackupTimeType?: number | null;
+  /** 远端doris的连接信息 */
+  DorisSourceInfo?: DorisSourceInfo | null;
+  /** 实例状态对应的数值 */
+  JobStatusNum?: number | null;
+  /** 备份实例中关于cos的信息 */
+  BackupCosInfo?: BackupCosInfo | null;
+}
+
+/** 备份实例中关于cos的信息 */
+declare interface BackupCosInfo {
+  /** 备份文件所在的cos桶 */
+  CosBucket?: string | null;
+  /** 备份文件所在的完整cos路径 */
+  CosPath?: string | null;
+  /** 备份文件名称 */
+  SnapShotPath?: string | null;
+}
+
+/** 备份任务的进度详情 */
+declare interface BackupStatus {
+  /** 备份任务id */
+  JobId?: number;
+  /** 快照名称 */
+  SnapshotName?: string;
+  /** 库名 */
+  DbName?: string;
+  /** 状态 */
+  State?: string;
+  /** 备份对象 */
+  BackupObjects?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 快照结束时间 */
+  SnapshotFinishedTime?: string;
+  /** 上传结束时间 */
+  UploadFinishedTime?: string;
+  /** 结束时间 */
+  FinishedTime?: string;
+  /** 未完成任务 */
+  UnfinishedTasks?: string;
+  /** 进度 */
+  Progress?: string;
+  /** 错误信息 */
+  TaskErrMsg?: string;
+  /** 状态 */
+  Status?: string;
+  /** 超时信息 */
+  Timeout?: number;
+  /** 备份实例id */
+  BackupJobId?: number | null;
+  /** 实例对应snapshoit的id */
+  TaskId?: number | null;
+}
+
+/** 备份表信息 */
+declare interface BackupTableContent {
+  /** 数据库 */
+  Database: string | null;
+  /** 表 */
+  Table: string | null;
+  /** 表总字节数 */
+  TotalBytes: number | null;
+  /** 表单个副本的大小 */
+  SingleReplicaBytes?: string | null;
+  /** 备份状态 */
+  BackupStatus?: number | null;
+  /** 备份的错误信息 */
+  BackupErrorMsg?: string | null;
+  /** 改库表是否绑定降冷策略 */
+  IsOpenCoolDown?: boolean | null;
+}
+
 /** 资源组绑定的用户信息，需要username和host信息进行授权 */
 declare interface BindUser {
   /** 用户名 */
@@ -32,6 +124,22 @@ declare interface ChargeProperties {
   TimeSpan?: number | null;
   /** 计费时间单位，“m”表示月等 */
   TimeUnit?: string | null;
+}
+
+/** 集群的配置文件的修改历史 */
+declare interface ClusterConfigsHistory {
+  /** 配置文件名称 */
+  FileName: string;
+  /** 修改后的配置文件内容，base64编码 */
+  NewConfValue: string;
+  /** 修改前的配置文件内容，base64编码 */
+  OldConfValue: string;
+  /** 修改原因 */
+  Remark: string | null;
+  /** 修改时间 */
+  ModifyTime: string;
+  /** 修改子账号id */
+  UserUin: string;
 }
 
 /** 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息 */
@@ -66,6 +174,16 @@ declare interface ConfigKeyValue {
   Display?: number | null;
   /** 0不支持 1支持热更新 */
   SupportHotUpdate?: number | null;
+}
+
+/** 客户提供cos认证信息。 */
+declare interface CosSourceInfo {
+  /** cos认证中的Id */
+  SecretId?: string | null;
+  /** cos认证中的key */
+  SecretKey?: string | null;
+  /** cos认证中的路径 */
+  CosPath?: string | null;
 }
 
 /** 集群规格 */
@@ -106,6 +224,52 @@ declare interface DataBaseAuditRecord {
   SqlType?: string | null;
   /** catalog名称 */
   Catalog?: string | null;
+}
+
+/** 展示doris监控指标请求入参 */
+declare interface DescribeMetricsFileReq {
+  /** 集群类型 */
+  InstanceType: string;
+  /** 指标类型 */
+  MetricType?: string;
+  /** 是否关注 */
+  IfAttention?: number;
+}
+
+/** 磁盘规格描述 */
+declare interface DiskSpec {
+  /** 磁盘类型，例如“CLOUD_SSD", "LOCAL_SSD"等 */
+  DiskType: string;
+  /** 磁盘类型说明，例如"云SSD", "本地SSD"等 */
+  DiskDesc: string;
+  /** 磁盘最小规格大小，单位G */
+  MinDiskSize: number;
+  /** 磁盘最大规格大小，单位G */
+  MaxDiskSize: number;
+  /** 磁盘数目 */
+  DiskCount: number;
+}
+
+/** 外部doris集群的连接信息 */
+declare interface DorisSourceInfo {
+  /** doris集群的fe的ip */
+  Host?: string | null;
+  /** doris集群的fe的端口号 */
+  Port?: number | null;
+  /** doris集群的账号 */
+  User?: string | null;
+  /** doris集群的密码 */
+  Password?: string | null;
+}
+
+/** 前端规则描述 */
+declare interface FrontEndRule {
+  /** id序列 */
+  ID: number | null;
+  /** 规则名称 */
+  Name: string | null;
+  /** 详细规则 */
+  Rule: string | null;
 }
 
 /** KV配置 */
@@ -248,6 +412,52 @@ declare interface InstanceNode {
   UUID?: string | null;
 }
 
+/** 集群操作描述 */
+declare interface InstanceOperation {
+  /** 操作名称，例如“create_instance"、“scaleout_instance”等 */
+  Name?: string;
+  /** 操作结果，“Success"表示成功，”Fail"表示失败 */
+  Result?: string;
+  /** 操作名称描述，例如“创建”，“修改集群名称”等 */
+  Desc?: string;
+  /** 操作级别，例如“Critical", "Normal"等 */
+  Level?: string;
+  /** 操作级别描述，例如“高危”，“一般”等 */
+  LevelDesc?: string;
+  /** 操作开始时间 */
+  StartTime?: string;
+  /** 操作结束时间 */
+  EndTime?: string;
+  /** 操作结果描述，例如“成功”，“失败” */
+  ResultDesc?: string;
+  /** 操作用户ID */
+  OperateUin?: string;
+  /** 操作对应的jobid */
+  JobId?: number;
+  /** 操作明细 */
+  OperationDetail?: string;
+}
+
+/** 用户是否关注监控指标入参 */
+declare interface ModifyMetricFileStruct {
+  /** 唯一id */
+  Id: number;
+  /** 是否关注 */
+  IfAttention?: string;
+}
+
+/** doris监控指标关注（取消关注）功能入参 */
+declare interface ModifyMetricFileStructNew {
+  /** 集群类型 */
+  InstanceType?: string;
+  /** 指标类型 */
+  MetricType?: string;
+  /** 指标英文名 */
+  Name?: string;
+  /** 1：关注0：取消关注 */
+  IfAttention?: number;
+}
+
 /** 网络信息 */
 declare interface NetworkInfo {
   /** 可用区 */
@@ -274,6 +484,22 @@ declare interface NodeInfo {
   LastRestartTime?: string | null;
   /** 节点所在可用区 */
   Zone?: string | null;
+}
+
+/** 节点信息列表 */
+declare interface NodeInfos {
+  /** 节点在doris中明朝n */
+  NodeName?: string;
+  /** 节点状态 */
+  Status?: number;
+  /** 节点ip */
+  Ip?: string;
+  /** 节点角色 */
+  NodeRole?: string;
+  /** 组件名 */
+  ComponentName?: string;
+  /** 上一次重启时间 */
+  LastRestartTime?: string;
 }
 
 /** 节点角色描述信息 */
@@ -362,6 +588,30 @@ declare interface ResourceNodeSpec {
   Extra?: SpecExtra | null;
   /** 挂载云盘信息 */
   AttachCBSSpec?: ResourceNodeDiskSpec | null;
+}
+
+/** 资源规格描述信息 */
+declare interface ResourceSpec {
+  /** 规格名称，例如“SCH1" */
+  Name?: string;
+  /** cpu核数 */
+  Cpu?: number;
+  /** 内存大小，单位G */
+  Mem?: number;
+  /** 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO */
+  Type?: string;
+  /** 系统盘描述信息 */
+  SystemDisk?: DiskSpec | null;
+  /** 数据盘描述信息 */
+  DataDisk?: DiskSpec | null;
+  /** 最大节点数目限制 */
+  MaxNodeSize?: number | null;
+  /** 是否可用，false代表售罄 */
+  Available?: boolean | null;
+  /** 规格描述信息 */
+  ComputeSpecDesc?: string | null;
+  /** cvm库存 */
+  InstanceQuota?: number | null;
 }
 
 /** 恢复任务信息 */
@@ -522,6 +772,48 @@ declare interface ZoneInfo {
   Encrypt?: number | null;
 }
 
+declare interface CancelBackupJobRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 需要取消的备份实例id */
+  BackUpJobId?: number;
+}
+
+declare interface CancelBackupJobResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBackUpScheduleRequest {
+  /** 编辑时需要传 */
+  ScheduleId?: number;
+  /** 选择的星期 逗号分隔废弃：使用ScheduleInfo */
+  WeekDays?: string;
+  /** 执行小时废弃：使用ScheduleInfo */
+  ExecuteHour?: number;
+  /** 备份表列表 */
+  BackUpTables?: BackupTableContent[];
+  /** 0为默认。1时是对远端的doris进行备份，不周期，一次性 */
+  BackupType?: number;
+  /** 远端doris集群的连接信息 */
+  DorisSourceInfo?: DorisSourceInfo;
+  /** 0为默认。1时是一次性备份。2时是远端备份 */
+  BackupTimeType?: number;
+  /** 0为默认。1时是备份完成后立即恢复 */
+  RestoreType?: number;
+  /** 0为默认。1时是提供自定义的secret连接cos */
+  AuthType?: number;
+  /** cos认证的信息 */
+  CosSourceInfo?: CosSourceInfo;
+}
+
+declare interface CreateBackUpScheduleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstanceNewRequest {
   /** 可用区 */
   Zone: string;
@@ -580,6 +872,20 @@ declare interface CreateWorkloadGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBackUpDataRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId?: number;
+  /** 是否删除所有数据 */
+  IsDeleteAll?: boolean;
+}
+
+declare interface DeleteBackUpDataResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteWorkloadGroupRequest {
   /** 集群id */
   InstanceId: string;
@@ -590,6 +896,124 @@ declare interface DeleteWorkloadGroupRequest {
 declare interface DeleteWorkloadGroupResponse {
   /** 错误信息 */
   ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAreaRegionRequest {
+  /** 是否是国际站 */
+  IsInternationalSite?: boolean;
+}
+
+declare interface DescribeAreaRegionResponse {
+  /** 地域列表 */
+  Items?: RegionAreaInfo[];
+  /** 前端规则描述 */
+  FrontEndRules?: FrontEndRule[] | null;
+  /** 返回可用的白名单名称 */
+  AvailableWhiteListNames?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackUpJobDetailRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId: number;
+}
+
+declare interface DescribeBackUpJobDetailResponse {
+  /** 备份表详情 */
+  TableContents: BackupTableContent[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackUpJobRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 页号 */
+  PageNum?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** jobid的string类型 */
+  JobIdFiltersStr?: string;
+}
+
+declare interface DescribeBackUpJobResponse {
+  /** 任务列表 */
+  BackUpJobs?: BackUpJobDisplay[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackUpSchedulesRequest {
+}
+
+declare interface DescribeBackUpSchedulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackUpTablesRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 0为默认。1时是对远端的doris进行备份，不周期，一次性。2时为cos恢复，一次性 */
+  BackupType?: number;
+  /** 远端doris集群的连接信息 */
+  DorisSourceInfo?: DorisSourceInfo;
+  /** cos信息 */
+  CosSourceInfo?: CosSourceInfo;
+}
+
+declare interface DescribeBackUpTablesResponse {
+  /** 可备份表列表 */
+  AvailableTables?: BackupTableContent[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackUpTaskDetailRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId: number;
+}
+
+declare interface DescribeBackUpTaskDetailResponse {
+  /** 备份任务进度详情 */
+  BackupStatus: BackupStatus[] | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterConfigsHistoryRequest {
+  /** 集群id名称 */
+  InstanceId: string;
+  /** 分页参数，第一页为0，第二页为10 */
+  Offset: number;
+  /** 分页参数，分页步长，默认为10 */
+  Limit: number;
+  /** 配置修改历史的时间范围开始 */
+  StartTime: string;
+  /** 配置修改历史的时间范围结束 */
+  EndTime: string;
+  /** 需要查询的配置文件名称数组，如果为空则查询全部历史记录。目前支持的配置文件名称有：apache_hdfs_broker.conf、be.conf、fe.conf、core-site.xml、hdfs-site.xml、odbcinst.ini */
+  ConfigFileNames?: string[];
+}
+
+declare interface DescribeClusterConfigsHistoryResponse {
+  /** 实例总数 */
+  TotalCount?: number;
+  /** 配置文件修改历史 */
+  ClusterConfHistory?: ClusterConfigsHistory[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -694,10 +1118,92 @@ declare interface DescribeDatabaseAuditRecordsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDatabaseAuditResourceRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeDatabaseAuditResourceResponse {
+  /** 数据库列表 */
+  Databases?: string[];
+  /** 用户列表 */
+  Users?: string[];
+  /** sql类型列表 */
+  SqlTypes?: string[];
+  /** catalog字段 */
+  Catalogs?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDmsSqlHistoryRequest {
+  /** 查询节点ip */
+  QueryNode?: string[];
+  /** 运行状态 */
+  QueryStatus?: string[];
+  /** 模糊搜索sql */
+  QuerySql?: string;
+  /** 根据报错原因搜索 */
+  QueryErrMsg?: string;
+}
+
+declare interface DescribeDmsSqlHistoryResponse {
+  /** 集群所有的查询节点 */
+  QueryNodeList?: string[];
+  /** 集群所有的查询状态 */
+  QueryStatusList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDorisMetricFilesRequest {
+  /** 接口类型 */
+  ApiType: string;
+  /** 集群id */
+  InstanceId: string;
+  /** 展示监控指标入参 */
+  DescribeMetricsFileReq?: DescribeMetricsFileReq;
+  /** 点关注功能入参 */
+  ModifyMetricFileReq?: ModifyMetricFileStruct;
+  /** 监控指标关注功能入参 */
+  ModifyAttentionMetricFileReq?: ModifyMetricFileStructNew;
+}
+
+declare interface DescribeDorisMetricFilesResponse {
+  /** ErrorMsg */
+  ErrorMsg?: string | null;
+  /** 返回数据 */
+  ReturnData?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFederationTokenRequest {
 }
 
 declare interface DescribeFederationTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFrontEndRequest {
+  /** 实例id */
+  InstanceId?: string;
+  /** 文件类型 */
+  ConfigType?: string;
+  /** 参数1 */
+  Param1?: string;
+  /** 参数2 */
+  Param2?: string;
+  /** 参数3 */
+  Param3?: string;
+  /** 参数4 */
+  Param4?: string;
+  /** 参数5 */
+  Param5?: string;
+}
+
+declare interface DescribeFrontEndResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -816,6 +1322,46 @@ declare interface DescribeInstanceNodesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceNodesRoleRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 过滤ip */
+  IpFilter?: string;
+}
+
+declare interface DescribeInstanceNodesRoleResponse {
+  /** 错误码 */
+  ErrorMsg?: string;
+  /** 节点总数 */
+  TotalCount?: number;
+  /** 无 */
+  NodeInfos?: NodeInfos[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceOperationsRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 分页参数，偏移量，从0开始 */
+  Offset?: number;
+  /** 分页参数，每页数目，默认为10 */
+  Limit?: number;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+declare interface DescribeInstanceOperationsResponse {
+  /** 操作记录总数 */
+  TotalCount: number;
+  /** 操作记录具体数据 */
+  Operations: InstanceOperation[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -860,6 +1406,20 @@ declare interface DescribeInstanceUsedSubnetsResponse {
   VpcId?: string | null;
   /** 集群使用的subnet信息 */
   UsedSubnets?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstancesHealthStateRequest {
+  /** 集群Id */
+  InstanceID?: string;
+  /** "" 或者 某个集群Id */
+  Input?: string;
+}
+
+declare interface DescribeInstancesHealthStateResponse {
+  /** 出参 */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1010,6 +1570,28 @@ declare interface DescribeSlowQueryRecordsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSpecRequest {
+  /** 地域信息，例如"ap-guangzhou-1" */
+  Zone: string;
+  /** 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费 */
+  PayMode?: string;
+  /** 多可用区 */
+  Zones?: string[];
+  /** 机型名称 */
+  SpecName?: string;
+}
+
+declare interface DescribeSpecResponse {
+  /** zookeeper节点规格描述 */
+  MasterSpec?: ResourceSpec[];
+  /** 数据节点规格描述 */
+  CoreSpec?: ResourceSpec[];
+  /** 云盘列表 */
+  AttachCBSSpec?: DiskSpec[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSqlApisRequest {
   /** 用户链接来自的 IP */
   WhiteHost?: string;
@@ -1130,6 +1712,26 @@ declare interface ModifyInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNodeStatusRequest {
+  /** 集群ID，例如cdwch-xxxx */
+  InstanceId: string;
+  /** 节点信息 */
+  NodeInfos: NodeInfos[];
+  /** 节点操作 */
+  OperationCode: string;
+  /** 超时时间（秒） */
+  RestartTimeOut?: string;
+}
+
+declare interface ModifyNodeStatusResponse {
+  /** 流程相关信息 */
+  FlowId?: number;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySecurityGroupsRequest {
   /** 集群id */
   InstanceId: string;
@@ -1212,6 +1814,52 @@ declare interface ModifyWorkloadGroupStatusResponse {
   RequestId?: string;
 }
 
+declare interface OpenBackUpRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 取值：open:打开close:关闭updateBucket:变更桶名 */
+  OperationType: string;
+  /** 桶名字 */
+  CosBucketName: string;
+}
+
+declare interface OpenBackUpResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RecoverBackUpJobRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 任务id */
+  BackUpJobId: number;
+  /** 恢复出来的新表副本数 */
+  ReplicationNum?: number;
+  /** 恢复是否保持源表中的配置，1时表示保留源表中的配置 */
+  ReserveSourceConfig?: number;
+  /** 0默认 1cos恢复 */
+  RecoverType?: number;
+  /** CosSourceInfo对象 */
+  CosSourceInfo?: CosSourceInfo;
+  /** 0默认 1定期执行 */
+  ScheduleType?: number;
+  /** 年-月-日 时:分:秒 */
+  NextTime?: string;
+  /** 调度名称 */
+  ScheduleName?: string;
+  /** create update */
+  OperationType?: string;
+  /** 恢复粒度：All全量、Database按库、Table按表 */
+  RecoverScope?: string;
+  /** 恢复库：如果是按库备份，则需要该字段，库之间用","分割 */
+  RecoverDatabase?: string;
+}
+
+declare interface RecoverBackUpJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReduceInstanceRequest {
   /** 集群ID */
   InstanceId: string;
@@ -1248,6 +1896,24 @@ declare interface ResizeDiskResponse {
   InstanceId?: string;
   /** 流程ID */
   FlowId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestartClusterForConfigsRequest {
+  /** 集群ID，例如cdwch-xxxx */
+  InstanceId: string;
+  /** 配置文件名称 */
+  ConfigName: string;
+  /** grace_restart为优雅滚动重启 不填默认立刻重启 */
+  OperationType?: string;
+}
+
+declare interface RestartClusterForConfigsResponse {
+  /** 流程相关信息 */
+  FlowId?: number;
   /** 错误信息 */
   ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1321,20 +1987,48 @@ declare interface ScaleUpInstanceResponse {
 /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
 declare interface Cdwdoris {
   (): Versions;
+  /** 取消备份实例 {@link CancelBackupJobRequest} {@link CancelBackupJobResponse} */
+  CancelBackupJob(data: CancelBackupJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBackupJobResponse>;
+  /** 创建或者修改备份策略 {@link CreateBackUpScheduleRequest} {@link CreateBackUpScheduleResponse} */
+  CreateBackUpSchedule(data?: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
   /** 集群创建 {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
   /** 创建资源组 {@link CreateWorkloadGroupRequest} {@link CreateWorkloadGroupResponse} */
   CreateWorkloadGroup(data: CreateWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkloadGroupResponse>;
+  /** 删除备份数据 {@link DeleteBackUpDataRequest} {@link DeleteBackUpDataResponse} */
+  DeleteBackUpData(data: DeleteBackUpDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackUpDataResponse>;
   /** 删除资源组 {@link DeleteWorkloadGroupRequest} {@link DeleteWorkloadGroupResponse} */
   DeleteWorkloadGroup(data: DeleteWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkloadGroupResponse>;
+  /** 获取各地域列表 {@link DescribeAreaRegionRequest} {@link DescribeAreaRegionResponse} */
+  DescribeAreaRegion(data?: DescribeAreaRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaRegionResponse>;
+  /** 查询备份实例列表 {@link DescribeBackUpJobRequest} {@link DescribeBackUpJobResponse} */
+  DescribeBackUpJob(data: DescribeBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpJobResponse>;
+  /** 查询备份任务详情 {@link DescribeBackUpJobDetailRequest} {@link DescribeBackUpJobDetailResponse} */
+  DescribeBackUpJobDetail(data: DescribeBackUpJobDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpJobDetailResponse>;
+  /** 获取备份、迁移任务 {@link DescribeBackUpSchedulesRequest} {@link DescribeBackUpSchedulesResponse} */
+  DescribeBackUpSchedules(data?: DescribeBackUpSchedulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpSchedulesResponse>;
+  /** 获取可备份表信息 {@link DescribeBackUpTablesRequest} {@link DescribeBackUpTablesResponse} */
+  DescribeBackUpTables(data: DescribeBackUpTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpTablesResponse>;
+  /** 查询备份任务进度详情 {@link DescribeBackUpTaskDetailRequest} {@link DescribeBackUpTaskDetailResponse} */
+  DescribeBackUpTaskDetail(data: DescribeBackUpTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpTaskDetailResponse>;
   /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */
   DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
+  /** 获取集群配置文件修改历史 {@link DescribeClusterConfigsHistoryRequest} {@link DescribeClusterConfigsHistoryResponse} */
+  DescribeClusterConfigsHistory(data: DescribeClusterConfigsHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsHistoryResponse>;
   /** 下载数据库审计日志 {@link DescribeDatabaseAuditDownloadRequest} {@link DescribeDatabaseAuditDownloadResponse} */
   DescribeDatabaseAuditDownload(data: DescribeDatabaseAuditDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditDownloadResponse>;
   /** 获取数据库审计记录 {@link DescribeDatabaseAuditRecordsRequest} {@link DescribeDatabaseAuditRecordsResponse} */
   DescribeDatabaseAuditRecords(data: DescribeDatabaseAuditRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditRecordsResponse>;
+  /** 数据库审计数据库、用户等 {@link DescribeDatabaseAuditResourceRequest} {@link DescribeDatabaseAuditResourceResponse} */
+  DescribeDatabaseAuditResource(data: DescribeDatabaseAuditResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditResourceResponse>;
+  /** 查询sql工作区历史运行记录 {@link DescribeDmsSqlHistoryRequest} {@link DescribeDmsSqlHistoryResponse} */
+  DescribeDmsSqlHistory(data?: DescribeDmsSqlHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDmsSqlHistoryResponse>;
+  /** 展示监控指标文件 {@link DescribeDorisMetricFilesRequest} {@link DescribeDorisMetricFilesResponse} */
+  DescribeDorisMetricFiles(data: DescribeDorisMetricFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDorisMetricFilesResponse>;
   /** 新获取联合身份临时访问凭证 {@link DescribeFederationTokenRequest} {@link DescribeFederationTokenResponse} */
   DescribeFederationToken(data?: DescribeFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFederationTokenResponse>;
+  /** 查询前端信息 {@link DescribeFrontEndRequest} {@link DescribeFrontEndResponse} */
+  DescribeFrontEnd(data?: DescribeFrontEndRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFrontEndResponse>;
   /** 生成GoodsDetail {@link DescribeGoodsDetailRequest} {@link DescribeGoodsDetailResponse} */
   DescribeGoodsDetail(data: DescribeGoodsDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGoodsDetailResponse>;
   /** 获取集群描述信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
@@ -1343,12 +2037,18 @@ declare interface Cdwdoris {
   DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
   /** 获取BE、FE节点角色 {@link DescribeInstanceNodesInfoRequest} {@link DescribeInstanceNodesInfoResponse} */
   DescribeInstanceNodesInfo(data: DescribeInstanceNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesInfoResponse>;
+  /** 获取集群节点角色 {@link DescribeInstanceNodesRoleRequest} {@link DescribeInstanceNodesRoleResponse} */
+  DescribeInstanceNodesRole(data: DescribeInstanceNodesRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesRoleResponse>;
+  /** 拉取集群操作列表 {@link DescribeInstanceOperationsRequest} {@link DescribeInstanceOperationsResponse} */
+  DescribeInstanceOperations(data: DescribeInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOperationsResponse>;
   /** 获取集群状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
   DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
   /** 获取集群已使用子网信息 {@link DescribeInstanceUsedSubnetsRequest} {@link DescribeInstanceUsedSubnetsResponse} */
   DescribeInstanceUsedSubnets(data: DescribeInstanceUsedSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceUsedSubnetsResponse>;
   /** 获取集群列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 集群健康检查 {@link DescribeInstancesHealthStateRequest} {@link DescribeInstancesHealthStateResponse} */
+  DescribeInstancesHealthState(data?: DescribeInstancesHealthStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesHealthStateResponse>;
   /** 获取地域及可用区列表 {@link DescribeRegionZoneRequest} {@link DescribeRegionZoneResponse} */
   DescribeRegionZone(data?: DescribeRegionZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionZoneResponse>;
   /** 检查内核版本 {@link DescribeReplicaVersionRequest} {@link DescribeReplicaVersionResponse} */
@@ -1359,6 +2059,8 @@ declare interface Cdwdoris {
   DescribeSlowQueryRecords(data: DescribeSlowQueryRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryRecordsResponse>;
   /** 下载慢查询文件 {@link DescribeSlowQueryRecordsDownloadRequest} {@link DescribeSlowQueryRecordsDownloadResponse} */
   DescribeSlowQueryRecordsDownload(data: DescribeSlowQueryRecordsDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryRecordsDownloadResponse>;
+  /** 获取集群规格 {@link DescribeSpecRequest} {@link DescribeSpecResponse} */
+  DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
   /** 通过sql查询集群信息 {@link DescribeSqlApisRequest} {@link DescribeSqlApisResponse} */
   DescribeSqlApis(data?: DescribeSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlApisResponse>;
   /** 获取用户绑定的资源组信息 {@link DescribeUserBindWorkloadGroupRequest} {@link DescribeUserBindWorkloadGroupResponse} */
@@ -1373,6 +2075,8 @@ declare interface Cdwdoris {
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
   /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
   ModifyInstanceKeyValConfigs(data: ModifyInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceKeyValConfigsResponse>;
+  /** 修改节点状态 {@link ModifyNodeStatusRequest} {@link ModifyNodeStatusResponse} */
+  ModifyNodeStatus(data: ModifyNodeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodeStatusResponse>;
   /** 更改安全组 {@link ModifySecurityGroupsRequest} {@link ModifySecurityGroupsResponse} */
   ModifySecurityGroups(data: ModifySecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupsResponse>;
   /** 修改用户绑定的资源组 {@link ModifyUserBindWorkloadGroupRequest} {@link ModifyUserBindWorkloadGroupResponse} */
@@ -1383,10 +2087,16 @@ declare interface Cdwdoris {
   ModifyWorkloadGroup(data: ModifyWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkloadGroupResponse>;
   /** 开启、关闭资源组 {@link ModifyWorkloadGroupStatusRequest} {@link ModifyWorkloadGroupStatusResponse} */
   ModifyWorkloadGroupStatus(data: ModifyWorkloadGroupStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkloadGroupStatusResponse>;
+  /** 开启或者关闭策略 {@link OpenBackUpRequest} {@link OpenBackUpResponse} */
+  OpenBackUp(data: OpenBackUpRequest, config?: AxiosRequestConfig): AxiosPromise<OpenBackUpResponse>;
+  /** 备份恢复 {@link RecoverBackUpJobRequest} {@link RecoverBackUpJobResponse} */
+  RecoverBackUpJob(data: RecoverBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverBackUpJobResponse>;
   /** 集群缩容 {@link ReduceInstanceRequest} {@link ReduceInstanceResponse} */
   ReduceInstance(data: ReduceInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ReduceInstanceResponse>;
   /** 云盘扩容 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
+  /** 重启集群让配置文件生效 {@link RestartClusterForConfigsRequest} {@link RestartClusterForConfigsResponse} */
+  RestartClusterForConfigs(data: RestartClusterForConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<RestartClusterForConfigsResponse>;
   /** 集群滚动重启 {@link RestartClusterForNodeRequest} {@link RestartClusterForNodeResponse} */
   RestartClusterForNode(data: RestartClusterForNodeRequest, config?: AxiosRequestConfig): AxiosPromise<RestartClusterForNodeResponse>;
   /** 水平扩容 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */

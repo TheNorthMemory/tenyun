@@ -181,10 +181,10 @@ declare interface QueryTrainPortraitModelJobResponse {
 declare interface ReplaceBackgroundRequest {
   /** 商品原图 Url。图片限制：单边分辨率小于4000，长宽比在2:5 ~ 5:2之间，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   ProductUrl: string;
+  /** 对新背景的文本描述。最多支持256个 utf-8 字符，支持中、英文。 */
+  Prompt: string;
   /** 商品 Mask 图 Url，要求背景透明，保留商品主体。如果不传，将自动使用内置的商品分割算法得到 Mask。支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。图片限制：Mask 图必须和商品原图分辨率一致，转成 Base64 字符串后小于 6MB，格式仅支持 png。 */
   MaskUrl?: string;
-  /** 对新背景的文本描述。最多支持256个 utf-8 字符，支持中、英文。 */
-  Prompt?: string;
   /** 替换背景后生成的商品图分辨率。支持生成单边分辨率大于500且小于4000、长宽比在2:5 ~ 5:2之间的图片，不传默认生成1280:1280。建议图片比例为1:1、9:16、16:9，生成效果更佳，使用其他比例的生成效果可能不如建议比例。 */
   Resolution?: string;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */

@@ -2157,9 +2157,9 @@ declare interface CreateCdbProxyResponse {
 declare interface CreateCloneInstanceRequest {
   /** 克隆源实例Id。 */
   InstanceId: string;
-  /** 如果需要克隆实例回档到指定时间，则指定该值。时间格式为： yyyy-mm-dd hh:mm:ss 。 */
+  /** 如果需要克隆实例回档到指定时间，则指定该值。时间格式为：yyyy-mm-dd hh:mm:ss。说明：此参数和 SpecifiedBackupId 参数需要2选1进行设置。 */
   SpecifiedRollbackTime?: string;
-  /** 如果需要克隆实例回档到指定备份的时间点，则指定该值为物理备份的Id。请使用 [查询数据备份文件列表](/document/api/236/15842) 。 */
+  /** 如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 [查询数据备份文件列表](/document/api/236/15842)。说明：如果是克隆双节点、三节点实例，备份文件为物理备份，如果是克隆单节点、集群版实例，备份文件为快照备份。 */
   SpecifiedBackupId?: number;
   /** 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778) 。 */
   UniqVpcId?: string;
@@ -2241,11 +2241,11 @@ declare interface CreateDBInstanceHourRequest {
   Memory: number;
   /** 实例硬盘大小，单位：GB，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的硬盘范围。 */
   Volume: number;
-  /** MySQL 版本，值包括：5.5、5.6、5.7、8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。说明：若此参数不填，则默认值为5.6。 */
+  /** MySQL 版本，值包括：5.5、5.6、5.7和8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。说明：创建非集群版实例时，请根据需要指定实例版本（推荐5.7或8.0），若此参数不填，则默认值为5.6；若创建的是集群版实例，则此参数仅能指定为5.7或8.0。 */
   EngineVersion?: string;
-  /** 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778) 。 */
+  /** 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778) 。说明：如果创建的是集群版实例，此参数为必填且为私有网络类型。 */
   UniqVpcId?: string;
-  /** 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用[查询子网列表](/document/api/215/15784)。 */
+  /** 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用 [查询子网列表](/document/api/215/15784)。 */
   UniqSubnetId?: string;
   /** 项目 ID，不填为默认项目。 */
   ProjectId?: number;
@@ -2285,7 +2285,7 @@ declare interface CreateDBInstanceHourRequest {
   DeployGroupId?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。 */
+  /** 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。说明：如果创建的是集群版实例，此参数为必填。 */
   DeviceType?: string;
   /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
@@ -2309,8 +2309,12 @@ declare interface CreateDBInstanceHourRequest {
   EngineType?: string;
   /** 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。 */
   Vips?: string[];
-  /** 集群版节点拓扑配置。 */
+  /** 集群版实例的数据保护空间大小，单位 GB，设置范围1 - 10。 */
+  DataProtectVolume?: number;
+  /** 集群版节点拓扑配置。说明：若购买的是集群版实例，此参数为必填，需设置集群版实例的 RW 和 RO 节点拓扑，RO 节点范围是1 - 5个，请至少设置1个 RO 节点。 */
   ClusterTopology?: ClusterTopology;
+  /** 磁盘类型，基础版或者集群版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘。 */
+  DiskType?: string;
 }
 
 declare interface CreateDBInstanceHourResponse {
@@ -2333,7 +2337,7 @@ declare interface CreateDBInstanceRequest {
   GoodsNum: number;
   /** 可用区信息，该参数缺省时，系统会自动选择一个可用区，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的可用区。 */
   Zone?: string;
-  /** 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778) 。 */
+  /** 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778)。说明：如果创建的是集群版实例，此参数为必填且为私有网络类型。 */
   UniqVpcId?: string;
   /** 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用 [查询子网列表](/document/api/215/15784)。 */
   UniqSubnetId?: string;
@@ -2345,7 +2349,7 @@ declare interface CreateDBInstanceRequest {
   InstanceRole?: string;
   /** 实例 ID，购买只读实例时必填，该字段表示只读实例的主实例ID，请使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询云数据库实例 ID。 */
   MasterInstanceId?: string;
-  /** MySQL 版本，值包括：5.5、5.6、5.7和8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。说明：若此参数不填，则默认值为5.6。 */
+  /** MySQL 版本，值包括：5.5、5.6、5.7和8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。说明：创建非集群版实例时，请根据需要指定实例版本（推荐5.7或8.0），若此参数不填，则默认值为5.6；若创建的是集群版实例，则此参数仅能指定为5.7或8.0。 */
   EngineVersion?: string;
   /** 设置 root 账号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
   Password?: string;
@@ -2375,7 +2379,7 @@ declare interface CreateDBInstanceRequest {
   DeployGroupId?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。 */
+  /** 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。说明：如果创建的是集群版实例，此参数为必填。 */
   DeviceType?: string;
   /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
@@ -2399,8 +2403,12 @@ declare interface CreateDBInstanceRequest {
   EngineType?: string;
   /** 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。 */
   Vips?: string[];
-  /** 集群版节点拓扑配置。 */
+  /** 集群版实例的数据保护空间大小，单位 GB，设置范围1 - 10。 */
+  DataProtectVolume?: number;
+  /** 集群版节点拓扑配置。说明：若购买的是集群版实例，此参数为必填，需设置集群版实例的 RW 和 RO 节点拓扑，RO 节点范围是1 - 5个，请至少设置1个 RO 节点。 */
   ClusterTopology?: ClusterTopology;
+  /** 磁盘类型，基础版或者集群版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘。 */
+  DiskType?: string;
 }
 
 declare interface CreateDBInstanceResponse {

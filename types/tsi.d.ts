@@ -39,9 +39,9 @@ declare interface TongChuanDisplayResponse {
 declare interface TongChuanRecognizeRequest {
   /** 一段完整的语音对应一个SessionUuid */
   SessionUuid: string;
-  /** 音频中的语言类型，支持语言列表 zh : 中文 en : 英文 */
+  /** 源语言，支持：zh：中文en：英语ja：日语ko：韩语yue：粤语 */
   Source: string;
-  /** 翻译目标语言类型，支持的语言列表 zh : 中文 en : 英文 */
+  /** 目标语言，各源语言的目标语言支持列表如下zh（中文）：en（英语）、ja（日语）、ko（韩语）、yue（粤语）en（英语）：zh（中文）ja（日语）：zh（中文）ko（韩语）：zh（中文）yue（粤语）：zh（中文） */
   Target: string;
   /** 语音编码类型，1-pcm */
   AudioFormat: number;
@@ -65,9 +65,9 @@ declare interface TongChuanRecognizeResponse {
 declare interface TongChuanSyncRequest {
   /** 一段完整的语音对应一个SessionUuid */
   SessionUuid: string;
-  /** 音频中的语言类型，支持语言列表 zh : 中文 en : 英文 */
+  /** 源语言，支持：zh：中文en：英语ja：日语ko：韩语yue：粤语 */
   Source: string;
-  /** 翻译目标语言类型，支持的语言列表 zh : 中文 en : 英文 */
+  /** 目标语言，各源语言的目标语言支持列表如下zh（中文）：en（英语）、ja（日语）、ko（韩语）、yue（粤语）en（英语）：zh（中文）ja（日语）：zh（中文）ko（韩语）：zh（中文）yue（粤语）：zh（中文） */
   Target: string;
   /** 语音编码类型，1-pcm */
   AudioFormat: number;

@@ -74,6 +74,38 @@ declare interface BigKeyTypeInfo {
   Updatetime: number;
 }
 
+/** redis独享集群详细信息 */
+declare interface CDCResource {
+  /** 用户的Appid */
+  AppId: number;
+  /** 地域id */
+  RegionId: number;
+  /** 可用区id */
+  ZoneId: number;
+  /** redis独享集群id */
+  RedisClusterId: string;
+  /** 计费模式，1-包年包月，0-按量计费 */
+  PayMode: number;
+  /** 项目id */
+  ProjectId: number;
+  /** 自动续费标识，0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费 */
+  AutoRenewFlag: number;
+  /** 独享集群名称 */
+  ClusterName: string;
+  /** 实例创建时间 */
+  StartTime: string;
+  /** 实例到期时间 */
+  EndTime: string;
+  /** 集群状态：1-流程中，2-运行中，3-已隔离 */
+  Status: number;
+  /** 基础管控资源包 */
+  BaseBundles: ResourceBundle[];
+  /** 资源包列表 */
+  ResourceBundles: ResourceBundle[];
+  /** 所属本地专有集群id */
+  DedicatedClusterId: string;
+}
+
 /** 命令耗时 */
 declare interface CommandTake {
   /** 命令名。 */
@@ -438,6 +470,12 @@ declare interface InstanceSet {
   WanAddress?: string | null;
   /** 北极星服务地址，内部使用。 */
   PolarisServer?: string | null;
+  /** CDC Redis集群ID。 */
+  RedisClusterId?: string | null;
+  /** CDC 集群ID。 */
+  DedicatedClusterId?: string | null;
+  /** 产品版本。local：本地盘。cloud：云盘版。cdc：CDC 集群版本。 */
+  ProductVersion?: string | null;
   /** 实例当前Proxy版本。 */
   CurrentProxyVersion?: string | null;
   /** 实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。 */
@@ -794,6 +832,16 @@ declare interface ReplicaGroup {
   Role?: string;
   /** 节点组节点列表 */
   RedisNodes?: RedisNode[];
+}
+
+/** redis独享集群资源包 */
+declare interface ResourceBundle {
+  /** 资源包名称 */
+  ResourceBundleName: string;
+  /** 可售卖内存，单位：GB */
+  AvailableMemory: number;
+  /** 资源包个数 */
+  Count: number;
 }
 
 /** API购买实例绑定标签 */
@@ -2048,6 +2096,50 @@ declare interface DescribeProxySlowLogResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRedisClusterOverviewRequest {
+  /** 本地专用集群id */
+  DedicatedClusterId?: string;
+}
+
+declare interface DescribeRedisClusterOverviewResponse {
+  /** 资源包总数 */
+  TotalBundle: number;
+  /** 资源包总内存大小，单位：GB */
+  TotalMemory: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisClustersRequest {
+  /** Redis独享集群id */
+  RedisClusterIds?: string[];
+  /** 集群状态：1-流程中，2-运行中，3-已隔离 */
+  Status?: number[];
+  /** 项目ID数组 */
+  ProjectIds?: number[];
+  /** 续费模式：0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费 */
+  AutoRenewFlag?: number[];
+  /** Redis独享集群名称 */
+  ClusterName?: string;
+  /** 搜索关键词：支持集群Id、集群名称 */
+  SearchKey?: string;
+  /** 分页限制返回大小，不传则默认为20 */
+  Limit?: number;
+  /** 偏移量，取Limit整数倍 */
+  Offset?: number;
+  /** 本地专用集群id */
+  DedicatedClusterId?: string;
+}
+
+declare interface DescribeRedisClustersResponse {
+  /** 集群总数 */
+  Total: number;
+  /** CDC集群资源列表 */
+  Resources: CDCResource[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReplicationGroupInstanceRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -3003,6 +3095,10 @@ declare interface Redis {
   DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
   /** 查询代理慢查询 {@link DescribeProxySlowLogRequest} {@link DescribeProxySlowLogResponse} */
   DescribeProxySlowLog(data: DescribeProxySlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySlowLogResponse>;
+  /** 查询Redis独享集群概览信息 {@link DescribeRedisClusterOverviewRequest} {@link DescribeRedisClusterOverviewResponse} */
+  DescribeRedisClusterOverview(data?: DescribeRedisClusterOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisClusterOverviewResponse>;
+  /** 查询Redis独享集群列表 {@link DescribeRedisClustersRequest} {@link DescribeRedisClustersResponse} */
+  DescribeRedisClusters(data?: DescribeRedisClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisClustersResponse>;
   /** 查询复制组 {@link DescribeReplicationGroupRequest} {@link DescribeReplicationGroupResponse} */
   DescribeReplicationGroup(data: DescribeReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationGroupResponse>;
   /** 查询复制组信息 {@link DescribeReplicationGroupInstanceRequest} {@link DescribeReplicationGroupInstanceResponse} */

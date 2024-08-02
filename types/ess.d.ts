@@ -1637,7 +1637,7 @@ declare interface CreateEmployeeQualificationSealQrCodeRequest {
   Operator: UserInfo;
   /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 提示信息，扫码后此信息会展示给扫描用户，用来提示用户授权操作的目的 */
+  /** 提示信息，扫码后此信息会展示给扫描用户，用来提示用户授权操作的目的，会在授权界面下面的位置展示。![image](https://qcloudimg.tencent-cloud.cn/raw/8436ffd78c20605e6b133ff4bc4d2ac7.png) */
   HintText?: string;
 }
 

@@ -87,7 +87,7 @@ declare interface ImageTranslateRequest {
   SessionUuid: string;
   /** doc:文档扫描 */
   Scene: string;
-  /** 图片数据的Base64字符串，图片大小上限为4M，建议对源图片进行一定程度压缩 */
+  /** 图片数据的Base64字符串，经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片中包含文字需要少于6000字符。 */
   Data: string;
   /** 源语言，支持语言列表： auto：自动识别（识别为一种语言） zh：简体中文 zh-TW：繁体中文 en：英语 ja：日语 ko：韩语 ru：俄语 fr：法语 de：德语 it：意大利语 es：西班牙语 pt：葡萄牙语 ms：马来西亚语 th：泰语vi：越南语 */
   Source: string;

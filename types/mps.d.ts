@@ -4764,6 +4764,8 @@ declare interface TranslateConfigureInfo {
   SourceLanguage?: string;
   /** 翻译目标语言。 */
   DestinationLanguage?: string;
+  /** 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件。 */
+  SubtitleFormat?: string | null;
 }
 
 /** 语音翻译任务控制参数 */
@@ -4774,6 +4776,8 @@ declare interface TranslateConfigureInfoForUpdate {
   SourceLanguage?: string;
   /** 翻译目标语言。 */
   DestinationLanguage?: string;
+  /** 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件。 */
+  SubtitleFormat?: string;
 }
 
 /** 媒体处理 URL 对象信息。 */

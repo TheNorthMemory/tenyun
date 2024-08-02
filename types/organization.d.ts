@@ -328,6 +328,36 @@ declare interface OrgProductFinancial {
   Ratio?: string | null;
 }
 
+/** 集团服务设置 */
+declare interface OrganizationServiceAssign {
+  /** 集团服务ID。 */
+  ServiceId?: number | null;
+  /** 集团服务产品名称。 */
+  ProductName?: string | null;
+  /** 是否支持委派。取值: 1-是 2-否 */
+  IsAssign?: number | null;
+  /** 集团服务描述。 */
+  Description?: string | null;
+  /** 当前委派管理员数。 */
+  MemberNum?: string | null;
+  /** 帮助文档。 */
+  Document?: string | null;
+  /** 集团服务产品控制台路径。 */
+  ConsoleUrl?: string | null;
+  /** 是否接入使用状态。取值: 1-是 2-否 */
+  IsUsageStatus?: number | null;
+  /** 委派管理员数量限制。 */
+  CanAssignCount?: number | null;
+  /** 集团服务产品标识。 */
+  Product?: string | null;
+  /** 是否支持集团服务授权。取值 1-是、2-否 */
+  ServiceGrant?: number | null;
+  /** 集团服务授权启用状态。ServiceGrant值为1时该字段有效 ，取值：Enabled-开启 Disabled-关闭 */
+  GrantStatus?: string | null;
+  /** 是否支持设置委派管理范围。取值: 1-是 2-否 */
+  IsSetManagementScope?: number | null;
+}
+
 /** 产品资源 */
 declare interface ProductResource {
   /** 产品资源ID。 */
@@ -1284,6 +1314,24 @@ declare interface ListOrganizationIdentityResponse {
   RequestId?: string;
 }
 
+declare interface ListOrganizationServiceRequest {
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
+  Offset: number;
+  /** 限制数目。取值范围：1~50，默认值：10 */
+  Limit: number;
+  /** 名称搜索关键字。 */
+  SearchKey?: string;
+}
+
+declare interface ListOrganizationServiceResponse {
+  /** 总数。 */
+  Total?: number | null;
+  /** 集团服务列表。 */
+  Items?: OrganizationServiceAssign[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListPoliciesForTargetRequest {
   /** 账号uin或者节点id。 */
   TargetId: number;
@@ -1917,6 +1965,8 @@ declare interface Organization {
   ListNonCompliantResource(data: ListNonCompliantResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ListNonCompliantResourceResponse>;
   /** 获取组织成员访问身份列表 {@link ListOrganizationIdentityRequest} {@link ListOrganizationIdentityResponse} */
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
+  /** 获取集团服务设置列表 {@link ListOrganizationServiceRequest} {@link ListOrganizationServiceResponse} */
+  ListOrganizationService(data: ListOrganizationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationServiceResponse>;
   /** 查看策略列表数据 {@link ListPoliciesRequest} {@link ListPoliciesResponse} */
   ListPolicies(data?: ListPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesResponse>;
   /** 查询目标关联的策略列表 {@link ListPoliciesForTargetRequest} {@link ListPoliciesForTargetResponse} */

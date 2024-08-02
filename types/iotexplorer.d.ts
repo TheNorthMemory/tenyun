@@ -1082,6 +1082,26 @@ declare interface CreateBatchProductionResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudStorageAIServiceRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存 AI 套餐 ID。可选值：- `1m_low_od`：低功耗目标检测月套餐- `1y_low_od`：低功耗目标检测年套餐- `1m_ev_od`：事件目标检测月套餐- `1y_ev_od`：事件目标检测年套餐- `1m_ft_od`：全时目标检测月套餐- `1y_ft_od`：全时目标检测年套餐- `1m_low_hl`：低功耗视频浓缩月套餐- `1y_low_hl`：低功耗视频浓缩年套餐- `1m_ev_hl`：事件视频浓缩月套餐- `1y_ev_hl`：事件视频浓缩年套餐- `1m_ft_hl`：全时视频浓缩月套餐- `1y_ft_hl`：全时视频浓缩年套餐 */
+  PackageId: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 订单 ID */
+  OrderId?: string;
+}
+
+declare interface CreateCloudStorageAIServiceResponse {
+  /** 订单 ID */
+  OrderId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeviceRequest {
   /** 产品ID。 */
   ProductId: string;
@@ -1540,6 +1560,14 @@ declare interface DescribeCloudStorageAIServiceRequest {
 }
 
 declare interface DescribeCloudStorageAIServiceResponse {
+  /** 云存 AI 套餐类型。可能取值：- `1`：全时套餐- `2`：事件套餐- `3`：低功耗套餐 */
+  Type?: number | null;
+  /** 云存 AI 套餐生效状态。可能取值：- `0`：未开通或已过期- `1`：生效中 */
+  Status?: number | null;
+  /** 云存 AI 套餐过期时间 UNIX 时间戳 */
+  ExpireTime?: number | null;
+  /** 用户 ID */
+  UserId?: string | null;
   /** 视频分析启用状态 */
   Enabled?: boolean;
   /** 视频分析配置参数 */
@@ -3210,6 +3238,24 @@ declare interface RemoveUserByRoomIdFromTRTCResponse {
   RequestId?: string;
 }
 
+declare interface ResetCloudStorageAIServiceRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
+  ServiceType: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 用户 ID */
+  UserId?: string;
+}
+
+declare interface ResetCloudStorageAIServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetCloudStorageEventRequest {
   /** 产品ID */
   ProductId: string;
@@ -3447,6 +3493,8 @@ declare interface Iotexplorer {
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
   /** 创建量产任务 {@link CreateBatchProductionRequest} {@link CreateBatchProductionResponse} */
   CreateBatchProduction(data: CreateBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchProductionResponse>;
+  /** 开通设备云存AI分析服务 {@link CreateCloudStorageAIServiceRequest} {@link CreateCloudStorageAIServiceResponse} */
+  CreateCloudStorageAIService(data: CreateCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudStorageAIServiceResponse>;
   /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
   /** 创建围栏绑定信息 {@link CreateFenceBindRequest} {@link CreateFenceBindResponse} */
@@ -3685,6 +3733,8 @@ declare interface Iotexplorer {
   RemoveUserByRoomIdFromTRTC(data: RemoveUserByRoomIdFromTRTCRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByRoomIdFromTRTCResponse>;
   /** 重置云存服务 {@link ResetCloudStorageRequest} {@link ResetCloudStorageResponse} */
   ResetCloudStorage(data: ResetCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageResponse>;
+  /** 重置设备云存AI分析服务 {@link ResetCloudStorageAIServiceRequest} {@link ResetCloudStorageAIServiceResponse} */
+  ResetCloudStorageAIService(data: ResetCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageAIServiceResponse>;
   /** 重置云存事件 {@link ResetCloudStorageEventRequest} {@link ResetCloudStorageEventResponse} */
   ResetCloudStorageEvent(data: ResetCloudStorageEventRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageEventResponse>;
   /** 搜索位置空间 {@link SearchPositionSpaceRequest} {@link SearchPositionSpaceResponse} */

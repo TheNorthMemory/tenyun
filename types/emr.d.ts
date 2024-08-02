@@ -2067,11 +2067,13 @@ declare interface CreateClusterRequest {
   DependService?: DependService[];
   /** 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。 */
   ZoneResourceConfiguration?: ZoneResourceConfiguration[];
+  /** cos桶路径，创建StarRocks存算分离集群时用到 */
+  CosBucket?: string;
 }
 
 declare interface CreateClusterResponse {
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2141,6 +2143,8 @@ declare interface CreateInstanceRequest {
   MultiZone?: boolean;
   /** 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。 */
   MultiZoneSettings?: MultiZoneSetting[];
+  /** cos桶路径，创建StarRocks存算分离集群时用到 */
+  CosBucket?: string;
 }
 
 declare interface CreateInstanceResponse {
@@ -3191,9 +3195,9 @@ declare interface Emr {
   AddMetricScaleStrategy(data: AddMetricScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<AddMetricScaleStrategyResponse>;
   /** 新增用户列表 {@link AddUsersForUserManagerRequest} {@link AddUsersForUserManagerResponse} */
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
-  /** 创建EMR集群实例 {@link CreateClusterRequest} {@link CreateClusterResponse} */
+  /** 创建EMR集群实例(新) {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** 创建EMR实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
+  /** 创建EMR实例(旧) {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** 删除自动扩缩容规则 {@link DeleteAutoScaleStrategyRequest} {@link DeleteAutoScaleStrategyResponse} */
   DeleteAutoScaleStrategy(data: DeleteAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScaleStrategyResponse>;

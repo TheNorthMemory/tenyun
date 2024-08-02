@@ -2217,6 +2217,10 @@ declare interface DescribeAlertListResponse {
   AlertTypeCount?: TagCount[];
   /** 告警总数 */
   TotalCount?: number;
+  /** 0：succeed 1：timeout */
+  ReturnCode?: number;
+  /** 返回状态信息 */
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

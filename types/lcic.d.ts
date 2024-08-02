@@ -1219,6 +1219,10 @@ declare interface DescribeRoomResponse {
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
+  /** 录制类型 0 仅录制混流（默认） ;1 录制混流+单流，该模式下除混流录制基础上，分别录制老师、台上学生的音视频流，每路录制都会产生相应的录制费用 。示例：0 */
+  RecordStream?: number;
+  /** 录制模板。房间子类型为视频+白板（SubType=videodoc）时默认为3，房间子类型为纯视频（SubType=video）时默认为0。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
+  RecordLayout?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

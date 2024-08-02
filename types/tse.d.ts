@@ -1256,6 +1256,8 @@ declare interface KongActiveHealthCheck {
   UnHealthyInterval?: number | null;
   /** 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。 */
   HttpPath?: string | null;
+  /** GET HTTP 请求的超时时间，单位：秒。默认 60。 */
+  Timeout?: number | null;
 }
 
 /** 云原生网关证书 */

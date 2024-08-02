@@ -2397,7 +2397,7 @@ declare interface CreateAlarmNoticeRequest {
   NoticeLanguage: string;
   /** 用户通知 最多5个 */
   UserNotices?: UserNotice[];
-  /** 回调通知 最多3个 */
+  /** 回调通知 最多6个 */
   URLNotices?: URLNotice[];
   /** 推送CLS日志服务的操作 最多1个 */
   CLSNotices?: CLSNotice[];
@@ -2407,7 +2407,7 @@ declare interface CreateAlarmNoticeRequest {
 
 declare interface CreateAlarmNoticeResponse {
   /** 告警通知模板ID */
-  NoticeId: string;
+  NoticeId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3517,9 +3517,9 @@ declare interface DescribeConditionsTemplateListRequest {
 
 declare interface DescribeConditionsTemplateListResponse {
   /** 模板总数 */
-  Total: number;
+  Total?: number;
   /** 模板列表 */
-  TemplateGroupList: TemplateGroup[] | null;
+  TemplateGroupList?: TemplateGroup[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4539,7 +4539,7 @@ declare interface ModifyAlarmNoticeRequest {
   NoticeId: string;
   /** 用户通知 最多5个 */
   UserNotices?: UserNotice[];
-  /** 回调通知 最多3个 */
+  /** 回调通知 最多6个 */
   URLNotices?: URLNotice[];
   /** 告警通知推送到CLS服务 最多1个 */
   CLSNotices?: CLSNotice[];
