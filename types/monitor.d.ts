@@ -2415,7 +2415,7 @@ declare interface CreateAlarmNoticeResponse {
 declare interface CreateAlarmPolicyRequest {
   /** 固定值，为"monitor" */
   Module: string;
-  /** 策略名称，不超过20字符 */
+  /** 策略名称，不超过60字符 */
   PolicyName: string;
   /** 监控类型 MT_QCE=云产品监控 */
   MonitorType: string;
@@ -3143,7 +3143,7 @@ declare interface DescribeAlarmHistoriesRequest {
   StartTime?: number;
   /** 结束时间，默认当前时间戳。对应 `FirstOccurTime` 告警首次出现时间，告警历史的 `FirstOccurTime` 早于 `EndTime` 才可能被搜索到。 */
   EndTime?: number;
-  /** 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能监控；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测 */
+  /** 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能监控；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测，"MT_TRTC"=实时音视频，"MT_RUMAPP"=终端性能监控 */
   MonitorTypes?: string[];
   /** 根据告警对象过滤 字符串模糊搜索 */
   AlarmObject?: string;
@@ -3451,11 +3451,11 @@ declare interface DescribeBasicAlarmListRequest {
 
 declare interface DescribeBasicAlarmListResponse {
   /** 告警列表 */
-  Alarms: DescribeBasicAlarmListAlarms[] | null;
+  Alarms?: DescribeBasicAlarmListAlarms[] | null;
   /** 总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 备注信息 */
-  Warning: string | null;
+  Warning?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3839,11 +3839,11 @@ declare interface DescribePolicyGroupListRequest {
 
 declare interface DescribePolicyGroupListResponse {
   /** 策略组列表 */
-  GroupList: DescribePolicyGroupListGroup[] | null;
+  GroupList?: DescribePolicyGroupListGroup[] | null;
   /** 策略组总数 */
-  Total: number;
+  Total?: number;
   /** 备注信息 */
-  Warning: string | null;
+  Warning?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

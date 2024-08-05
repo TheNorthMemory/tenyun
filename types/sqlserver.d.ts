@@ -1854,6 +1854,16 @@ declare interface CreateReadOnlyDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface CutXEventsRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface CutXEventsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccountRequest {
   /** 数据库实例ID，形如mssql-njj2mtpl */
   InstanceId: string;
@@ -4389,6 +4399,8 @@ declare interface Sqlserver {
   CreatePublishSubscribe(data: CreatePublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublishSubscribeResponse>;
   /** 创建只读实例 (本地盘) {@link CreateReadOnlyDBInstancesRequest} {@link CreateReadOnlyDBInstancesResponse} */
   CreateReadOnlyDBInstances(data: CreateReadOnlyDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyDBInstancesResponse>;
+  /** 手动切割阻塞日志和死锁日志 {@link CutXEventsRequest} {@link CutXEventsResponse} */
+  CutXEvents(data: CutXEventsRequest, config?: AxiosRequestConfig): AxiosPromise<CutXEventsResponse>;
   /** 删除实例账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
   /** 删除备份导入任务 {@link DeleteBackupMigrationRequest} {@link DeleteBackupMigrationResponse} */

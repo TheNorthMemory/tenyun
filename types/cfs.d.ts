@@ -374,7 +374,7 @@ declare interface TieringDetailInfo {
 
 /** 文件系统配额信息 */
 declare interface UserQuota {
-  /** 指定配额类型，包括Uid、Gid */
+  /** 指定配额类型，包括Uid、Gid、Dir */
   UserType: string;
   /** UID/GID信息 */
   UserId: string;
@@ -388,6 +388,10 @@ declare interface UserQuota {
   CapacityUsed?: number | null;
   /** 文件使用个数，单位个 */
   FileUsed?: number | null;
+  /** 目录配额的目录绝对路径 */
+  DirectoryPath?: string | null;
+  /** 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败 */
+  Status?: string | null;
 }
 
 declare interface BindAutoSnapshotPolicyRequest {

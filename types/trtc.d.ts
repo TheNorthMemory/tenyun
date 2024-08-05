@@ -1693,9 +1693,9 @@ declare interface StartAIConversationRequest {
   RoomIdType?: number;
   /** 语音识别配置。 */
   STTConfig?: STTConfig;
-  /** LLM配置。需符合openai规范，为JSON字符串，示例如下： { &emsp; "LLMType": “大模型类型"， // String 必填，目前固定为"openai" &emsp; "Model": "您的模型名称", // String 必填，指定使用的模型 "APIKey": "您的OpenAI API密钥", // String 必填，相当于环境变量中的OPENAI_API_KEY &emsp; "APIBaseUrl": "https://api.openai.com", // String 必填，OpenAI API的基础URL &emsp; "Streaming": true // Boolean 非必填，指定是否使用流式传输 &emsp;} */
+  /** LLM配置。需符合openai规范，为JSON字符串，示例如下： { &emsp; "LLMType": “大模型类型"， // String 必填，如："openai" &emsp; "Model": "您的模型名称", // String 必填，指定使用的模型 "APIKey": "您的LLM API密钥", // String 必填 &emsp; "APIUrl": "https://api.xxx.com/chat/completions", // String 必填，LLM API访问的URL &emsp; "Streaming": true // Boolean 非必填，指定是否使用流式传输 &emsp;} */
   LLMConfig?: string;
-  /** TTS配置。目前支持腾讯云TTS, 为JSON字符串，示例如下： { &emsp; "AppId": "您的应用ID", // String 必填 &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent" &emsp; "SercetId": "您的密钥ID", // String 必填 &emsp; "SercetKey": "您的密钥Key", // String 必填 &emsp; "VoiceType": 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &emsp; "PrimaryLanguage": "zh-CN" // String 非必填，主要语言 &emsp;} */
+  /** TTS配置，为JSON字符串，腾讯云TTS示例如下： { &emsp; "AppId": 您的应用ID, // Integer 必填 &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent" &emsp; "SecretId": "您的密钥ID", // String 必填 &emsp; "SecretKey": "您的密钥Key", // String 必填 &emsp; "VoiceType": 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &emsp; "PrimaryLanguage": "zh-CN" // String 非必填，主要语言 &emsp;} */
   TTSConfig?: string;
 }
 
