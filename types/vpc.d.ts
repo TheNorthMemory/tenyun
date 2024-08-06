@@ -1710,6 +1710,16 @@ declare interface PrivateIpAddressSpecification {
   QosLevel?: string;
 }
 
+/** 私网NAT网关跨域信息 */
+declare interface PrivateNatCrossDomainInfo {
+  /** 跨域私网NAT关联的云联网ID */
+  CcnId?: string | null;
+  /** 跨域私网NAT本端Vpc */
+  LocalVpcId?: string | null;
+  /** 跨域私网NAT对端Vpc */
+  PeerVpcId?: string | null;
+}
+
 /** 本端目的IP端口转换复杂结构 */
 declare interface PrivateNatDestinationIpPortTranslationNatRule {
   /** 协议 */
@@ -1746,6 +1756,16 @@ declare interface PrivateNatGateway {
   CreatedTime?: string;
   /** 标签键值对。 */
   TagSet?: Tag[] | null;
+  /** 专线网关唯一`ID` */
+  DirectConnectGatewayIds?: string[] | null;
+  /** 私网网关类型 */
+  NatType?: string | null;
+  /** 私网NAT跨域信息 */
+  CrossDomainInfo?: PrivateNatCrossDomainInfo | null;
+  /** 是否VPC型私网网关 */
+  VpcType?: boolean | null;
+  /** 跨域私网NAT关联的云联网ID */
+  CcnId?: string | null;
 }
 
 /** 可创建的私网网关配额数量 */
