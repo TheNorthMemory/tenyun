@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 数据授权信息 */
+declare interface DataAuthorizationInfo {
+  /** 数据委托方、需求方：客户主体名称。 */
+  DataProviderName: string;
+  /** 数据受托方、提供方：腾讯云主体名称。固定填：腾讯云计算（北京）有限责任公司 */
+  DataRecipientName: string;
+  /** 客户请求所涉及的用户个人信息类型，支持多选。实际以接口请求传参为准。1-手机号；2-微信开放账号；3-QQ开放账号；4-IP地址； */
+  UserDataType: number[];
+  /** 客户是否已按合规指南要求获取用户授权，同意客户委托腾讯云处理入参信息，结合已合法收集的用户数据进行必要处理得出服务结果，并返回给客户。1-已授权；其它值为未授权。 */
+  IsAuthorize: number;
+  /** 客户获得的用户授权期限时间戳（单位秒）。不填或0默认无固定期限。 */
+  AuthorizationTerm?: number;
+  /** 客户获得用户授权所依赖的协议地址。 */
+  PrivacyPolicyLink?: string;
+}
+
 /** 风险信息 */
 declare interface RiskInfo {
   /** 风险类型 */
@@ -95,6 +111,8 @@ declare interface DescribeFraudUltimateRequest {
   ClientIP?: string;
   /** QQ的OpenId */
   QQOpenId?: string;
+  /** 数据授权信息 */
+  DataAuthorization?: DataAuthorizationInfo;
 }
 
 declare interface DescribeFraudUltimateResponse {

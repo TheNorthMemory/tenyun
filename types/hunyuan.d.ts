@@ -162,6 +162,16 @@ declare interface Usage {
   TotalTokens?: number;
 }
 
+declare interface ActivateServiceRequest {
+  /** 开通之后，是否关闭后付费；默认为0，不关闭；1为关闭 */
+  PayMode?: number;
+}
+
+declare interface ActivateServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChatCompletionsRequest {
   /** 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
   Model: string;
@@ -171,9 +181,9 @@ declare interface ChatCompletionsRequest {
   Stream?: boolean;
   /** 流式输出审核开关。说明：1. 当使用流式输出（Stream 字段值为 true）时，该字段生效。2. 输出审核有流式和同步两种模式，**流式模式首包响应更快**。未传值时默认为流式模式（true）。3. 如果值为 true，将对输出内容进行分段审核，审核通过的内容流式输出返回。如果出现审核不过，响应中的 FinishReason 值为 sensitive。4. 如果值为 false，则不使用流式输出审核，需要审核完所有输出内容后再返回结果。注意：当选择流式输出审核时，可能会出现部分内容已输出，但中间某一段响应中的 FinishReason 值为 sensitive，此时说明安全审核未通过。如果业务场景有实时文字上屏的需求，需要自行撤回已上屏的内容，并建议自定义替换为一条提示语，如 “这个问题我不方便回答，不如我们换个话题试试”，以保障终端体验。 */
   StreamModeration?: boolean;
-  /** 说明：1. 影响输出文本的多样性，取值越大，生成文本的多样性越强。2. 取值区间为 [0.0, 1.0]，未传值时使用各模型推荐值。3. 非必要不建议使用，不合理的取值会影响效果。 */
+  /** 说明：1. 影响输出文本的多样性，取值区间为 [0.0, 1.0]。取值越大，生成文本的多样性越强。2. 模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。 */
   TopP?: number;
-  /** 说明：1. 较高的数值会使输出更加随机，而较低的数值会使其更加集中和确定。2. 取值区间为 [0.0, 2.0]，未传值时使用各模型推荐值。3. 非必要不建议使用，不合理的取值会影响效果。 */
+  /** 说明：1. 影响模型输出多样性，取值区间为 [0.0, 2.0]。较高的数值会使输出更加多样化和不可预测，而较低的数值会使其更加集中和确定。2. 模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。 */
   Temperature?: number;
   /** 功能增强（如搜索）开关。说明：1. hunyuan-lite 无功能增强（如搜索）能力，该参数对 hunyuan-lite 版本不生效。2. 未传值时默认打开开关。3. 关闭时将直接由主模型生成回复内容，可以降低响应时延（对于流式输出时的首字时延尤为明显）。但在少数场景里，回复效果可能会下降。4. 安全审核能力不属于功能增强范围，不受此字段影响。 */
   EnableEnhancement?: boolean;
@@ -264,6 +274,16 @@ declare interface QueryHunyuanImageJobResponse {
   RequestId?: string;
 }
 
+declare interface SetPayModeRequest {
+  /** 设置后付费状态，0：后付费；1：预付费 */
+  PayMode: number;
+}
+
+declare interface SetPayModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitHunyuanImageJobRequest {
   /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传1024个 utf-8 字符。 */
   Prompt: string;
@@ -317,6 +337,8 @@ declare interface TextToImageLiteResponse {
 /** {@link Hunyuan 腾讯混元大模型} */
 declare interface Hunyuan {
   (): Versions;
+  /** 开通服务 {@link ActivateServiceRequest} {@link ActivateServiceResponse} */
+  ActivateService(data?: ActivateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateServiceResponse>;
   /** hunyuan {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** hunyuan-embedding {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
@@ -325,6 +347,8 @@ declare interface Hunyuan {
   GetTokenCount(data: GetTokenCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenCountResponse>;
   /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */
   QueryHunyuanImageJob(data: QueryHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageJobResponse>;
+  /** 设置付费模式 {@link SetPayModeRequest} {@link SetPayModeResponse} */
+  SetPayMode(data: SetPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<SetPayModeResponse>;
   /** 提交混元生图任务 {@link SubmitHunyuanImageJobRequest} {@link SubmitHunyuanImageJobResponse} */
   SubmitHunyuanImageJob(data: SubmitHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageJobResponse>;
   /** 文生图轻量版 {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */

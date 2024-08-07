@@ -2154,6 +2154,8 @@ declare interface VatElectronicInfo {
   SubTax?: string;
   /** 电子发票详细条目信息 */
   VatElectronicItems?: VatElectronicItemInfo[];
+  /** 业务类型标志 */
+  ServiceTypeLabel?: string;
 }
 
 /** 电子发票详细条目信息 */

@@ -1495,7 +1495,7 @@ declare interface DescribeCommonDBInstancesRequest {
   SubnetIds?: number[];
   /** 计费类型过滤列表；0表示包年包月，1表示按量计费 */
   PayMode?: number;
-  /** 实例ID过滤信息列表 */
+  /** 实例ID过滤信息列表，数组最大长度限制为100 */
   InstanceIds?: string[];
   /** 实例名称过滤信息列表 */
   InstanceNames?: string[];
@@ -1625,7 +1625,7 @@ declare interface DescribeInstanceDTSInfoResponse {
 }
 
 declare interface DescribeInstanceDealDetailRequest {
-  /** 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。 */
+  /** 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。数组最大长度限制为10 */
   DealIds: string[];
 }
 
@@ -2009,11 +2009,11 @@ declare interface DescribeParamTemplateInfoResponse {
 }
 
 declare interface DescribeParamTemplatesRequest {
-  /** 产品类型数组。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。 */
+  /** 产品类型数组。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
   ProductTypes?: number[];
-  /** 模板名称数组。 */
+  /** 模板名称数组。数组最大长度限制为50 */
   TemplateNames?: string[];
-  /** 模板ID数组。 */
+  /** 模板ID数组。数组最大长度限制为50 */
   TemplateIds?: string[];
 }
 
@@ -2653,7 +2653,7 @@ declare interface ModifyInstanceReadOnlyResponse {
 declare interface ModifyInstanceRequest {
   /** 修改实例操作，如填写：rename-表示实例重命名；modifyProject-修改实例所属项目；modifyAutoRenew-修改实例续费标记 */
   Operation: string;
-  /** 实例Id */
+  /** 实例Id，每次请求的实例的上限为10。 */
   InstanceIds?: string[];
   /** 实例的新名称 */
   InstanceNames?: string[];
@@ -2905,13 +2905,13 @@ declare interface UpgradeInstanceRequest {
   RedisShardNum?: number;
   /** 指实例变更后的副本数量。每次只能修改参数RedisReplicasNum、MemSize和RedisShardNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。多AZ实例修改副本时必须要传入NodeSet。 */
   RedisReplicasNum?: number;
-  /** 多AZ实例，增加副本时的附带信息，包括副本的可用区和副本的类型（NodeType为1）。非多AZ实例不需要配置该参数。 */
+  /** 多AZ实例，增加副本时的节点信息，包括副本的 ID 编号及可用区信息。非多AZ实例不需要配置该参数。 */
   NodeSet?: RedisNodeInfo[];
 }
 
 declare interface UpgradeInstanceResponse {
   /** 订单ID。 */
-  DealId: string;
+  DealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

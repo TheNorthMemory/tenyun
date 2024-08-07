@@ -1146,14 +1146,14 @@ declare interface VirtualPrivateCloud {
 
 /** 可用区信息 */
 declare interface ZoneInfo {
-  /** 可用区名称，例如，ap-guangzhou-3全网可用区名称如下： ap-chongqing-1 ap-seoul-1 ap-seoul-2 ap-chengdu-1 ap-chengdu-2 ap-hongkong-1（售罄） ap-hongkong-2 ap-hongkong-3 ap-shenzhen-fsi-1 ap-shenzhen-fsi-2 ap-shenzhen-fsi-3 ap-guangzhou-1（售罄） ap-guangzhou-2（售罄） ap-guangzhou-3 ap-guangzhou-4 ap-guangzhou-6 ap-guangzhou-7 ap-tokyo-1 ap-tokyo-2 ap-singapore-1 ap-singapore-2 ap-singapore-3 ap-singapore-4 ap-shanghai-fsi-1 ap-shanghai-fsi-2 ap-shanghai-fsi-3 ap-bangkok-1 ap-bangkok-2 ap-shanghai-1（售罄） ap-shanghai-2 ap-shanghai-3 ap-shanghai-4 ap-shanghai-5 ap-shanghai-8 ap-mumbai-1 ap-mumbai-2 eu-moscow-1 ap-beijing-1（售罄） ap-beijing-2 ap-beijing-3 ap-beijing-4 ap-beijing-5 ap-beijing-6 ap-beijing-7 na-siliconvalley-1 na-siliconvalley-2 eu-frankfurt-1 eu-frankfurt-2 na-toronto-1 na-ashburn-1 na-ashburn-2 ap-nanjing-1 ap-nanjing-2 ap-nanjing-3 sa-saopaulo-1 ap-jakarta-1 ap-jakarta-2 */
-  Zone: string;
+  /** 可用区名称，例如，ap-guangzhou-3全网可用区名称如下： ap-chongqing-1 ap-seoul-1 ap-seoul-2 ap-chengdu-1 ap-chengdu-2 ap-hongkong-1（售罄） ap-hongkong-2 ap-hongkong-3 ap-shenzhen-fsi-1 ap-shenzhen-fsi-2 ap-shenzhen-fsi-3（售罄） ap-guangzhou-1（售罄） ap-guangzhou-2（售罄） ap-guangzhou-3 ap-guangzhou-4 ap-guangzhou-6 ap-guangzhou-7 ap-tokyo-1 ap-tokyo-2 ap-singapore-1 ap-singapore-2 ap-singapore-3 ap-singapore-4 ap-shanghai-fsi-1 ap-shanghai-fsi-2 ap-shanghai-fsi-3 ap-bangkok-1 ap-bangkok-2 ap-shanghai-1（售罄） ap-shanghai-2 ap-shanghai-3 ap-shanghai-4 ap-shanghai-5 ap-shanghai-8 ap-mumbai-1 ap-mumbai-2 eu-moscow-1 ap-beijing-1（售罄） ap-beijing-2 ap-beijing-3 ap-beijing-4 ap-beijing-5 ap-beijing-6 ap-beijing-7 na-siliconvalley-1 na-siliconvalley-2 eu-frankfurt-1 eu-frankfurt-2 na-toronto-1 na-ashburn-1 na-ashburn-2 ap-nanjing-1 ap-nanjing-2 ap-nanjing-3 sa-saopaulo-1 ap-jakarta-1 ap-jakarta-2 */
+  Zone?: string;
   /** 可用区描述，例如，广州三区 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 可用区ID */
-  ZoneId: string;
+  ZoneId?: string;
   /** 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。 */
-  ZoneState: string;
+  ZoneState?: string;
 }
 
 declare interface AllocateHostsRequest {
@@ -2766,7 +2766,7 @@ declare interface ResetInstancesInternetMaxBandwidthRequest {
   InternetAccessible: InternetAccessible;
   /** 带宽生效的起始时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。起始时间不能早于当前时间。如果起始时间是今天则新设置的带宽立即生效。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。 */
   StartTime?: string;
-  /** 带宽生效的终止时间。格式： `YYYY-MM-DD` ，例如：`2016-10-30` 。新设置的带宽的有效期包含终止时间此日期。终止时间不能晚于包年包月实例的到期时间。实例的到期时间可通过 [`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`ExpiredTime`获取。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。 */
+  /** 带宽生效的终止时间。格式： `YYYY-MM-DD` ，例如：`2016-10-30` 。新设置的带宽的有效期包含终止时间此日期。终止时间不能晚于包年包月实例的到期时间。实例的到期时间可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`ExpiredTime`获取。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。 */
   EndTime?: string;
 }
 
@@ -2920,13 +2920,13 @@ declare interface StopInstancesResponse {
 declare interface SyncImagesRequest {
   /** 镜像ID列表 ，镜像ID可以通过如下方式获取：通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。镜像ID必须满足限制：镜像ID对应的镜像状态必须为`NORMAL`。镜像状态请参考[镜像数据表](https://cloud.tencent.com/document/product/213/15753)。 */
   ImageIds: string[];
-  /** 目的同步地域列表，必须满足如下限制：必须是一个合法的Region。如果是自定义镜像，则目标同步地域不能为源地域。如果是共享镜像，则目的同步地域仅支持源地域，表示将共享镜像复制为源地域的自定义镜像。暂不支持部分地域同步。具体地域参数请参考[Region](https://cloud.tencent.com/document/product/213/6091)。 */
+  /** 目的同步地域列表，必须满足如下限制：必须是一个合法的Region。如果是自定义镜像，则目标同步地域不能为源地域。如果是共享镜像，则目的同步地域仅支持源地域，表示将共享镜像复制为源地域的自定义镜像。暂不支持部分地域同步，请参考[复制镜像](https://cloud.tencent.com/document/product/213/4943)。具体地域参数请参考[Region](https://cloud.tencent.com/document/product/213/6091)。 */
   DestinationRegions: string[];
-  /** 检测是否支持发起同步镜像。 */
+  /** 检测是否支持发起同步镜像。默认值: false */
   DryRun?: boolean;
-  /** 目标镜像名称。 */
+  /** 目标镜像名称。默认使用源镜像名称。 */
   ImageName?: string;
-  /** 是否需要返回目的地域的镜像ID。 */
+  /** 是否需要返回目的地域的镜像ID。默认值: false */
   ImageSetRequired?: boolean;
 }
 
@@ -2940,7 +2940,7 @@ declare interface SyncImagesResponse {
 declare interface TerminateInstancesRequest {
   /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
-  /** 释放实例挂载的包年包月数据盘。true表示销毁实例同时释放包年包月数据盘，false表示只销毁实例。 */
+  /** 释放实例挂载的包年包月数据盘。true表示销毁实例同时释放包年包月数据盘，false表示只销毁实例。默认值：false */
   ReleasePrepaidDataDisks?: boolean;
 }
 

@@ -1699,7 +1699,7 @@ declare interface StartJobRequest {
 
 declare interface StartJobResponse {
   /** 任务ID */
-  JobId: string;
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1793,7 +1793,7 @@ declare interface UpdateProjectResponse {
 declare interface UpdateScenarioRequest {
   /** 场景ID */
   ScenarioId: string;
-  /** 场景名 */
+  /** 场景名；调用该接口时，请将 Scenario 中不需要修改的字段保持原样也作为接口的入参，否则场景可能会不可用。 */
   Name?: string;
   /** 场景描述 */
   Description?: string;

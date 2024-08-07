@@ -2029,19 +2029,21 @@ declare interface DescribeCloudBaseRunServerRequest {
 
 declare interface DescribeCloudBaseRunServerResponse {
   /** 个数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 版本列表 */
-  VersionItems: CloudBaseRunServerVersionItem[] | null;
+  VersionItems?: CloudBaseRunServerVersionItem[] | null;
   /** 服务名称 */
-  ServerName: string | null;
+  ServerName?: string | null;
   /** 是否对于外网开放 */
-  IsPublic: boolean | null;
+  IsPublic?: boolean | null;
   /** 镜像仓库 */
-  ImageRepo: string | null;
+  ImageRepo?: string | null;
   /** 流量配置的类型（FLOW,URL_PARAMS) */
-  TrafficType: string | null;
+  TrafficType?: string | null;
   /** 服务创建类型，默认为空，一键部署为oneclick */
-  SourceType: string | null;
+  SourceType?: string | null;
+  /** 服务标签, function: 托管函数 */
+  Tag?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -96,6 +96,8 @@ declare interface AlarmEventInfo {
   MonitorObjectName?: string | null;
   /** 指标阈值 */
   Threshold?: number | null;
+  /** 告警原因 */
+  AlarmReason?: string | null;
 }
 
 /** 告警指标 */
@@ -590,6 +592,8 @@ declare interface ColumnMeta {
   LevelName?: string | null;
   /** 安全等级：值范围1-10 */
   LevelRank?: number | null;
+  /** influxdb字段类别 */
+  InfluxCategory?: string | null;
 }
 
 /** 内容详情 */
@@ -818,48 +822,52 @@ declare interface DatabaseInfo {
   OriginSchemaName?: string | null;
   /** 0或者未返回.未定义，1.生产 2.开发 */
   DsEnvType?: number | null;
+  /** EMR引擎部署方式：CVM/TKE */
+  ClusterDeployType?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
 }
 
 /** 数据源元数据 */
 declare interface DatabaseMeta {
   /** 项目Id */
-  ProjectId: string | null;
+  ProjectId?: string | null;
   /** 技术类型 */
-  MetastoreType: string | null;
+  MetastoreType?: string | null;
   /** 数据源名称 */
-  DatasourceName: string | null;
+  DatasourceName?: string | null;
   /** 数据源Id */
-  DatasourceId: number | null;
+  DatasourceId?: number | null;
   /** 项目英文名 */
-  ProjectName: string | null;
+  ProjectName?: string | null;
   /** 数据源类别：绑定引擎、绑定数据库,可用值:DB,ENGINE */
-  Category: string | null;
+  Category?: string | null;
   /** 数据源描述信息 */
-  Description: string | null;
+  Description?: string | null;
   /** 数据源引擎的实例ID，如CDB实例ID */
-  Instance: string | null;
+  Instance?: string | null;
   /** 数据源引擎所属区域 */
-  Region: string | null;
+  Region?: string | null;
   /** 数据源数据源的可见性，1为可见、0为不可见。默认为1 */
-  Status: number | null;
+  Status?: number | null;
   /** db名称 */
-  DatabaseName: string | null;
+  DatabaseName?: string | null;
   /** 项目中文名 */
-  ProjectDisplayName: string | null;
+  ProjectDisplayName?: string | null;
   /** 责任人名称 */
-  OwnerAccountName: string | null;
+  OwnerAccountName?: string | null;
   /** 数据来源展示名称 */
-  DisplayName: string | null;
+  DisplayName?: string | null;
   /** 数据库ID */
-  DatabaseId: string | null;
+  DatabaseId?: string | null;
   /** 数据来源类型：hive/mysql/hbase等 */
-  Catalog: string | null;
+  Catalog?: string | null;
   /** 存储量大小,单位为 byte */
-  StorageSize: number | null;
+  StorageSize?: number | null;
   /** 格式化后的存储量大小，带单位，如 12B */
-  StorageSizeWithUnit: string | null;
+  StorageSizeWithUnit?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
 }
 
 /** 数据源对象 */
@@ -1946,6 +1954,8 @@ declare interface IntegrationNodeSchema {
   Alias?: string | null;
   /** 字段备注 */
   Comment?: string | null;
+  /** category */
+  Category?: string | null;
 }
 
 /** 集成节点schema映射 */
@@ -2066,6 +2076,16 @@ declare interface IntegrationTaskInfo {
   ArrangeSpaceTaskId?: string | null;
   /** 离线任务状态区分1.未提交2.已提交3.已导出 */
   OfflineTaskStatus?: number | null;
+}
+
+/** 表生命周期相关信息 */
+declare interface LifecycleInfo {
+  /** 生命周期值 */
+  Lifecycle?: number | null;
+  /** 列名 */
+  Columns?: string[] | null;
+  /** 日期格式 */
+  DateFormat?: string[] | null;
 }
 
 /** 血缘参数记录 */
@@ -2818,6 +2838,12 @@ declare interface Rule {
   TriggerCondition?: string | null;
   /** 0或者未返回或者null：未定义，1：生产，2：开发 */
   DsEnvType?: number | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 目标模式名称 */
+  TargetSchemaName?: string | null;
 }
 
 /** 规则配置 */
@@ -2856,6 +2882,8 @@ declare interface RuleExecConfig {
   ExecutorGroupId?: string | null;
   /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
   EngineType?: string | null;
+  /** DLC执行引擎资源组 */
+  DlcGroupName?: string | null;
 }
 
 /** 概览趋势结果 */
@@ -2944,6 +2972,8 @@ declare interface RuleExecResultDetail {
   TableOwnerUserId?: number | null;
   /** 2.HIVE 3.DLC */
   DatasourceType?: number | null;
+  /** 集群部署类型，CVM/TKE */
+  ClusterDeployType?: string | null;
 }
 
 /** 规则执行结果分页 */
@@ -3026,6 +3056,8 @@ declare interface RuleGroup {
   DatabaseId?: string | null;
   /** 数据库名称 */
   DatabaseName?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
   /** 是否有权限 */
   Permission?: boolean | null;
   /** 已经配置的规则数量 */
@@ -3044,6 +3076,8 @@ declare interface RuleGroup {
   SubscribeConfig?: boolean | null;
   /** 数据源环境：0或者未返回.未定义，1.生产 2.开发 */
   DsEnvType?: number | null;
+  /** EMR集群部署方式：CVM/TKE */
+  ClusterDeployType?: string | null;
 }
 
 /** 规则组执行结果 */
@@ -3080,6 +3114,16 @@ declare interface RuleGroupExecResult {
   EngineType?: string | null;
   /** 规则执行结果 */
   RuleExecResultVOList?: RuleExecResult[] | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 本地规则表id */
+  RuleGroupTableId?: string | null;
+  /** 集群部署类型 */
+  ClusterDeployType?: string | null;
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 数据库所属环境，0.未定义，1.生产 2.开发 */
+  DsEnvType?: string | null;
 }
 
 /** 规则组执行结果分页 */
@@ -3706,6 +3750,8 @@ declare interface TableInfo {
   TableId?: string | null;
   /** 表名称 */
   TableName?: string | null;
+  /** 表类型，view/table */
+  TableType?: string | null;
   /** 表databaseName */
   OriginDatabaseName?: string | null;
   /** 表schemaName */
@@ -3920,6 +3966,10 @@ declare interface TableMeta {
   PartitionExpireDays?: number | null;
   /** 表附属信息 */
   TableProperties?: TableMetaProperty[] | null;
+  /** 环境，取值 prod或者 dev */
+  Environment?: string | null;
+  /** 数据库模式 */
+  Schema?: string | null;
 }
 
 /** 表附加信息 */
@@ -3986,6 +4036,10 @@ declare interface TableQualityDetail {
   LastPeriodRatio?: number | null;
   /** 0或者未返回或者null：未定义，1：生产，2：开发 */
   DsEnvType?: number | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 规则表 */
+  RuleGroupTableId?: string | null;
 }
 
 /** 表质量分分页结果 */
@@ -4004,6 +4058,18 @@ declare interface TableScoreStatisticsInfo {
   Scale: number | null;
   /** 表数量 */
   TableNumber: number | null;
+}
+
+/** 基于表的标签统计信息 */
+declare interface TagVoteSum {
+  /** 标签id */
+  TagId: number;
+  /** 该表该标签投票次数 */
+  VoteSum: number;
+  /** 当前用户对这张表是否加了该标签 true 已添加 false 未添加 */
+  Status: boolean;
+  /** 标签名 */
+  TagName: string;
 }
 
 /** 任务告警信息 */
@@ -4142,6 +4208,36 @@ declare interface TaskInstanceCountDto {
   Failed: number;
   /** 永久终止实例数 */
   Stopped: number;
+}
+
+/** 任务集成信息 */
+declare interface TaskLineageInfo {
+  /** 任务 ID */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 表 URI，格式：dsn.name */
+  TableUri?: string | null;
+  /** 表方向类型 - 0 - table作为源表 - 1 - table作为目标表 */
+  Type?: number | null;
+  /** 数据源ID */
+  DataSourceId?: number | null;
+  /** 数据源类型 */
+  DataSourceType?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 模型名称 */
+  SchemaName?: string | null;
+}
+
+/** 任务血缘信息，包括源表和目标表 */
+declare interface TaskLineageInfoPair {
+  /** 表血缘-源表 */
+  SourceTable?: TaskLineageInfo | null;
+  /** 表血缘-目标表 */
+  TargetTable?: TaskLineageInfo | null;
 }
 
 /** 任务锁的状态 */
@@ -5425,6 +5521,12 @@ declare interface CreateOpsMakePlanRequest {
   SchedulerResourceGroupName?: string;
   /** 补录指定的集成资源组名称 为空则表示使用任务原有集成执行资源组 */
   IntegrationResourceGroupName?: string;
+  /** 补录扩展属性 */
+  MakeExtList?: StrToStrMap[];
+  /** 补录扩展属性 */
+  SameSelfWorkflowDependType?: boolean;
+  /** 补录扩展属性 */
+  SelfWorkflowDependency?: string;
 }
 
 declare interface CreateOpsMakePlanResponse {
@@ -6285,11 +6387,15 @@ declare interface DescribeDatabaseMetasRequest {
   Filters?: Filter[];
   /** 排序字段，如name */
   OrderFields?: OrderField[];
+  /** pagesize */
+  PageSize?: number;
+  /** pageNumber */
+  PageNumber?: number;
 }
 
 declare interface DescribeDatabaseMetasResponse {
   /** 无 */
-  DatabaseMeta: DatabaseMeta[] | null;
+  DatabaseMeta?: DatabaseMeta[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7075,6 +7181,8 @@ declare interface DescribeOpsMakePlanInstancesRequest {
   PageNumber?: number;
   /** 分页大小，默认值10 */
   PageSize?: number;
+  /** 实例状态列表 */
+  StateList?: number[];
 }
 
 declare interface DescribeOpsMakePlanInstancesResponse {
@@ -7927,11 +8035,17 @@ declare interface DescribeTableMetaRequest {
   TableNameFilter?: TableNameFilter;
   /** 查询条件类型0按id，1按名称，默认为0 */
   TableFilterType?: number;
+  /** 查询字段列表 */
+  SearchNames?: string[];
 }
 
 declare interface DescribeTableMetaResponse {
   /** 表的元数据信息 */
   TableMeta?: TableMeta | null;
+  /** 生命周期信息 */
+  LifecycleInfo?: LifecycleInfo | null;
+  /** 标签 */
+  TagVoteSumList?: TagVoteSum | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7997,6 +8111,12 @@ declare interface DescribeTableSchemaInfoRequest {
   SchemaName?: string;
   /** 项目空间ID */
   ProjectId?: string;
+  /** 环境信息 */
+  Env?: string;
+  /** 空间模式 */
+  Model?: string;
+  /** 开发态的datasourceId */
+  DevDatasourceId?: string;
 }
 
 declare interface DescribeTableSchemaInfoResponse {
@@ -8114,6 +8234,22 @@ declare interface DescribeTaskByStatusReportRequest {
 declare interface DescribeTaskByStatusReportResponse {
   /** 任务上报趋势指标 */
   Data?: TaskByStatus[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTaskLineageRequest {
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
+  /** 任务ID */
+  TaskId?: string;
+}
+
+declare interface DescribeTaskLineageResponse {
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string | null;
+  /** 通过任务ID查询集成任务信息列表 */
+  TaskLineageInfos?: TaskLineageInfoPair[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8952,6 +9088,12 @@ declare interface ModifyRuleRequest {
   TargetObjectValue?: string;
   /** 该规则适配的执行引擎 */
   SourceEngineTypes?: number[];
+  /** 目标库名 */
+  TargetDatabaseName?: string;
+  /** 目标模式名 */
+  TargetSchemaName?: string;
+  /** 目标表名 */
+  TargetTableName?: string;
 }
 
 declare interface ModifyRuleResponse {
@@ -10191,6 +10333,8 @@ declare interface Wedata {
   DescribeTaskByCycleReport(data: DescribeTaskByCycleReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByCycleReportResponse>;
   /** 任务状态趋势 {@link DescribeTaskByStatusReportRequest} {@link DescribeTaskByStatusReportResponse} */
   DescribeTaskByStatusReport(data: DescribeTaskByStatusReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByStatusReportResponse>;
+  /** 通过任务查询表的血缘关系 {@link DescribeTaskLineageRequest} {@link DescribeTaskLineageResponse} */
+  DescribeTaskLineage(data?: DescribeTaskLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLineageResponse>;
   /** 查看任务锁状态信息 {@link DescribeTaskLockStatusRequest} {@link DescribeTaskLockStatusResponse} */
   DescribeTaskLockStatus(data: DescribeTaskLockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLockStatusResponse>;
   /** 分页查询任务运行历史 {@link DescribeTaskRunHistoryRequest} {@link DescribeTaskRunHistoryResponse} */
