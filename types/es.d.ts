@@ -612,6 +612,8 @@ declare interface InstanceInfo {
   NetConnectScheme?: string | null;
   /** 置放群组相关参数 */
   DisasterRecoverGroupAffinity?: number | null;
+  /** 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段 */
+  SubProductCode?: string | null;
 }
 
 /** ES集群日志详细信息 */
@@ -1413,6 +1415,8 @@ declare interface CreateInstanceRequest {
   CdcId?: string;
   /** 置放群组亲和度，范围[0,10]，0表示不开启 */
   DisasterRecoverGroupAffinity?: number;
+  /** 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段 */
+  SubProductCode?: string;
 }
 
 declare interface CreateInstanceResponse {
@@ -1769,6 +1773,8 @@ declare interface DescribeInstancesRequest {
   HealthStatus?: number[];
   /** Vpc列表 筛选项 */
   VpcIds?: string[];
+  /** cdc集群id */
+  CdcId?: string;
 }
 
 declare interface DescribeInstancesResponse {

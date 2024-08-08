@@ -4565,6 +4565,10 @@ declare interface UpdateDataEngineConfigRequest {
   DataEngineIds: string[];
   /** 引擎配置命令，支持UpdateSparkSQLLakefsPath（更新原生表配置）、UpdateSparkSQLResultPath（更新结果路径配置） */
   DataEngineConfigCommand: string;
+  /** 是否使用lakefs作为结果存储 */
+  UseLakeFs?: boolean;
+  /** 用户自定义结果路径 */
+  CustomResultPath?: string;
 }
 
 declare interface UpdateDataEngineConfigResponse {

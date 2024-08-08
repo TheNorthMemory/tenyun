@@ -168,6 +168,8 @@ declare interface DeviceActiveResult {
   Sn?: string | null;
   /** 设备激活状态，0：激活成功；9800020：设备数超出限制；9800040：资源包类型和设备类型不匹配；9800039：资源包余额不足；9800037：激活码序号已使用；9800038：设备有效期超出限制； */
   ErrCode?: number | null;
+  /** 过期时间 */
+  ExpireTime?: number | null;
 }
 
 /** DeviceData */
@@ -902,6 +904,10 @@ declare interface ActivateTWeCallLicenseRequest {
 declare interface ActivateTWeCallLicenseResponse {
   /** 设备激活返回数据 */
   DeviceList?: DeviceActiveResult[] | null;
+  /** 设备激活失败返回数据 */
+  FailureList?: DeviceActiveResult[] | null;
+  /** 设备激活成功返回数据 */
+  SuccessList?: DeviceActiveResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

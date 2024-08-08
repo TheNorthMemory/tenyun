@@ -135,9 +135,9 @@ declare interface FunctionInfo {
 /** 扩缩容入参 */
 declare interface HpaPolicy {
   /** 扩缩容类型 */
-  PolicyType: string;
+  PolicyType: string | null;
   /** 扩缩容阈值 */
-  PolicyThreshold: number;
+  PolicyThreshold: number | null;
 }
 
 /** 云日志服务相关信息 */
@@ -224,6 +224,8 @@ declare interface ServerBaseConfig {
   LogTopicId?: string;
   /** 解析类型：json ｜ line */
   LogParseType?: string;
+  /** 服务标签, function: 函数托管 */
+  Tag?: string | null;
 }
 
 /** 服务基本信息 */

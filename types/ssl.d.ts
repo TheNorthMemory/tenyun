@@ -295,23 +295,25 @@ declare interface ClbListenerRule {
 /** 公司信息 */
 declare interface CompanyInfo {
   /** 公司名称 */
-  CompanyName: string;
+  CompanyName?: string;
   /** 公司ID */
-  CompanyId: number;
+  CompanyId?: number;
   /** 公司所在国家 */
-  CompanyCountry: string;
+  CompanyCountry?: string;
   /** 公司所在省份 */
-  CompanyProvince: string;
+  CompanyProvince?: string;
   /** 公司所在城市 */
-  CompanyCity: string;
+  CompanyCity?: string;
   /** 公司所在详细地址 */
-  CompanyAddress: string;
+  CompanyAddress?: string;
   /** 公司电话 */
-  CompanyPhone: string;
+  CompanyPhone?: string;
   /** 类型 */
   IdType?: string | null;
   /** ID号 */
   IdNumber?: string | null;
+  /** 标签 */
+  Tags?: Tags[] | null;
 }
 
 /** COS实例详情 */
@@ -545,35 +547,37 @@ declare interface LiveInstanceList {
 /** 管理人信息 */
 declare interface ManagerInfo {
   /** 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期 */
-  Status: string;
+  Status?: string;
   /** 管理人姓名 */
-  ManagerFirstName: string;
+  ManagerFirstName?: string;
   /** 管理人姓名 */
-  ManagerLastName: string;
+  ManagerLastName?: string;
   /** 管理人职位 */
-  ManagerPosition: string;
+  ManagerPosition?: string;
   /** 管理人电话 */
-  ManagerPhone: string;
+  ManagerPhone?: string;
   /** 管理人邮箱 */
-  ManagerMail: string;
+  ManagerMail?: string;
   /** 管理人所属部门 */
-  ManagerDepartment: string;
+  ManagerDepartment?: string;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 管理人域名数量 */
-  DomainCount: number;
+  DomainCount?: number;
   /** 管理人证书数量 */
-  CertCount: number;
+  CertCount?: number;
   /** 管理人ID */
-  ManagerId: number;
+  ManagerId?: number;
   /** 审核有效到期时间 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 最近一次提交审核时间 */
-  SubmitAuditTime: string | null;
+  SubmitAuditTime?: string | null;
   /** 审核通过时间 */
-  VerifyTime: string | null;
+  VerifyTime?: string | null;
   /** 具体审核状态信息 */
-  StatusInfo: ManagerStatusInfo[] | null;
+  StatusInfo?: ManagerStatusInfo[] | null;
+  /** 标签 */
+  Tags?: Tags[] | null;
 }
 
 /** 管理人的四种审核状态 */
@@ -1705,9 +1709,9 @@ declare interface DescribeCompaniesRequest {
 
 declare interface DescribeCompaniesResponse {
   /** 公司列表 */
-  Companies: CompanyInfo[];
+  Companies?: CompanyInfo[];
   /** 公司总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2197,9 +2201,9 @@ declare interface DescribeManagersRequest {
 
 declare interface DescribeManagersResponse {
   /** 公司管理人列表 */
-  Managers: ManagerInfo[];
+  Managers?: ManagerInfo[];
   /** 公司管理人总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
