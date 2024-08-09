@@ -951,7 +951,7 @@ declare interface CreateCronJobRequest {
 
 declare interface CreateCronJobResponse {
   /** 定时任务ID */
-  CronJobId: string;
+  CronJobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1161,9 +1161,9 @@ declare interface DescribeAlertChannelsRequest {
 
 declare interface DescribeAlertChannelsResponse {
   /** 告警通知接收组列表 */
-  AlertChannelSet: AlertChannelRecord[] | null;
+  AlertChannelSet?: AlertChannelRecord[] | null;
   /** 告警通知接收组数目 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1189,9 +1189,9 @@ declare interface DescribeAlertRecordsRequest {
 
 declare interface DescribeAlertRecordsResponse {
   /** 告警历史 */
-  AlertRecordSet: AlertRecord[] | null;
+  AlertRecordSet?: AlertRecord[] | null;
   /** 告警历史记录的总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1293,9 +1293,9 @@ declare interface DescribeFilesRequest {
 
 declare interface DescribeFilesResponse {
   /** 文件列表 */
-  FileSet: File[] | null;
+  FileSet?: File[] | null;
   /** 文件总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1327,9 +1327,9 @@ declare interface DescribeJobsRequest {
 
 declare interface DescribeJobsResponse {
   /** 任务列表 */
-  JobSet: Job[] | null;
+  JobSet?: Job[] | null;
   /** 任务数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -853,45 +853,51 @@ declare interface ComplianceAssetPolicySetItem {
 /** 表示一类资产的总览信息。 */
 declare interface ComplianceAssetSummary {
   /** 资产类别。 */
-  AssetType: string;
+  AssetType?: string;
   /** 是否为客户的首次检测。与CheckStatus配合使用。 */
-  IsCustomerFirstCheck: boolean;
+  IsCustomerFirstCheck?: boolean;
   /** 检测状态CHECK_UNINIT, 用户未启用此功能CHECK_INIT, 待检测CHECK_RUNNING, 检测中CHECK_FINISHED, 检测完成CHECK_FAILED, 检测失败 */
-  CheckStatus: string;
+  CheckStatus?: string;
   /** 此类别的检测进度，为 0~100 的数。若未在检测中，无此字段。 */
-  CheckProgress: number | null;
+  CheckProgress?: number | null;
   /** 此类资产通过的检测项的数目。 */
-  PassedPolicyItemCount: number;
+  PassedPolicyItemCount?: number;
   /** 此类资产未通过的检测的数目。 */
-  FailedPolicyItemCount: number;
+  FailedPolicyItemCount?: number;
   /** 此类资产下未通过的严重级别的检测项的数目。 */
-  FailedCriticalPolicyItemCount: number;
+  FailedCriticalPolicyItemCount?: number;
   /** 此类资产下未通过的高危检测项的数目。 */
-  FailedHighRiskPolicyItemCount: number;
+  FailedHighRiskPolicyItemCount?: number;
   /** 此类资产下未通过的中危检测项的数目。 */
-  FailedMediumRiskPolicyItemCount: number;
+  FailedMediumRiskPolicyItemCount?: number;
   /** 此类资产下未通过的低危检测项的数目。 */
-  FailedLowRiskPolicyItemCount: number;
+  FailedLowRiskPolicyItemCount?: number;
   /** 此类资产下提示级别的检测项的数目。 */
-  NoticePolicyItemCount: number;
+  NoticePolicyItemCount?: number;
   /** 通过检测的资产的数目。 */
-  PassedAssetCount: number;
+  PassedAssetCount?: number;
   /** 未通过检测的资产的数目。 */
-  FailedAssetCount: number;
+  FailedAssetCount?: number;
   /** 此类资产的合规率，0~100的数。 */
-  AssetPassedRate: number;
+  AssetPassedRate?: number;
   /** 检测失败的资产的数目。 */
-  ScanFailedAssetCount: number;
+  ScanFailedAssetCount?: number;
   /** 上次检测的耗时，单位为秒。 */
-  CheckCostTime: number | null;
+  CheckCostTime?: number | null;
   /** 上次检测的时间。 */
-  LastCheckTime: string | null;
+  LastCheckTime?: string | null;
   /** 定时检测规则。 */
-  PeriodRule: CompliancePeriodTaskRule;
+  PeriodRule?: CompliancePeriodTaskRule;
   /** 已开启的检查项总数 */
   OpenPolicyItemCount?: number | null;
   /** 已忽略的检查项总数 */
   IgnoredPolicyItemCount?: number | null;
+  /** 总检测项数 */
+  TotalPolicyItemCount?: number | null;
+  /** 检测主机数 */
+  DetectHostCount?: number | null;
+  /** 当前任务剩余时间，单位秒 */
+  LeftTime?: number | null;
 }
 
 /** 表示一个合规标准的信息。 */
@@ -1001,41 +1007,43 @@ declare interface CompliancePolicyAssetSetItem {
 /** 表示一条检测项对应的汇总信息。 */
 declare interface CompliancePolicyItemSummary {
   /** 为客户分配的唯一的检测项的ID。 */
-  CustomerPolicyItemId: number;
+  CustomerPolicyItemId?: number;
   /** 检测项的原始ID。 */
-  BasePolicyItemId: number;
+  BasePolicyItemId?: number;
   /** 检测项的名称。 */
-  Name: string;
+  Name?: string;
   /** 检测项所属的类型，枚举字符串。 */
-  Category: string;
+  Category?: string;
   /** 所属的合规标准 */
-  BenchmarkStandardName: string;
+  BenchmarkStandardName?: string;
   /** 威胁等级。RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。 */
-  RiskLevel: string;
+  RiskLevel?: string;
   /** 检测项所属的资产类型 */
-  AssetType: string;
+  AssetType?: string;
   /** 最近检测的时间 */
-  LastCheckTime: string | null;
+  LastCheckTime?: string | null;
   /** 检测状态CHECK_INIT, 待检测CHECK_RUNNING, 检测中CHECK_FINISHED, 检测完成CHECK_FAILED, 检测失败 */
-  CheckStatus: string;
+  CheckStatus?: string;
   /** 检测结果。RESULT_PASSED: 通过RESULT_FAILED: 未通过 */
-  CheckResult: string | null;
+  CheckResult?: string | null;
   /** 通过检测的资产的数目 */
-  PassedAssetCount: number | null;
+  PassedAssetCount?: number | null;
   /** 未通过检测的资产的数目 */
-  FailedAssetCount: number | null;
+  FailedAssetCount?: number | null;
   /** 检测项对应的白名单项的ID。如果存在且非0，表示检测项被用户忽略。 */
-  WhitelistId: number | null;
+  WhitelistId?: number | null;
   /** 处理建议。 */
-  FixSuggestion: string;
+  FixSuggestion?: string;
   /** 所属的合规标准的ID */
-  BenchmarkStandardId: number;
+  BenchmarkStandardId?: number;
   /** 检测项适用的版本 */
-  ApplicableVersion: string | null;
+  ApplicableVersion?: string | null;
   /** 检查项描述 */
   Description?: string | null;
   /** 检查项审计方法 */
   AuditProcedure?: string | null;
+  /** 是否开启0 关闭1 开启 */
+  IsEnable?: number | null;
 }
 
 /** 表示检测失败的资产的信息。 */
@@ -3839,6 +3847,8 @@ declare interface AddAssetImageRegistryRegistryDetailResponse {
 declare interface AddComplianceAssetPolicySetToWhitelistRequest {
   /** 资产ID+检查项IDs. 列表 */
   AssetPolicySetList: ComplianceAssetPolicySetItem[];
+  /** 扫描资产类型 ASSET_CONTAINER Docker容器 ASSET_IMAGE Docker镜像 ASSET_HOST Docker主机 ASSET_K8S Kubernetes ASSET_CONTAINERD Containerd主机 ASSET_CONTAINERD_CONTAINER Containerd容器 */
+  AssetType?: string;
 }
 
 declare interface AddComplianceAssetPolicySetToWhitelistResponse {
@@ -4885,6 +4895,8 @@ declare interface DeleteComplianceAssetPolicySetFromWhitelistRequest {
   AssetItemId: number;
   /** 需要忽略指定资产内的检查项ID列表 */
   CustomerPolicyItemIdSet?: number[];
+  /** 扫描资产类型 ASSET_CONTAINER Docker容器 ASSET_IMAGE Docker镜像 ASSET_HOST Docker主机 ASSET_K8S Kubernetes ASSET_CONTAINERD Containerd主机 ASSET_CONTAINERD_CONTAINER Containerd容器 */
+  AssetType?: string;
 }
 
 declare interface DeleteComplianceAssetPolicySetFromWhitelistResponse {
@@ -6751,19 +6763,21 @@ declare interface DescribeClusterSummaryResponse {
 declare interface DescribeComplianceAssetDetailInfoRequest {
   /** 客户资产ID。 */
   CustomerAssetId: number;
+  /** 资产类型 ASSET_CONTAINER Docker容器 ASSET_IMAGE Docker镜像 ASSET_HOST Docker主机 ASSET_K8S Kubernetes ASSET_CONTAINERD Containerd主机 ASSET_CONTAINERD_CONTAINER Containerd容器 */
+  AssetType?: string;
 }
 
 declare interface DescribeComplianceAssetDetailInfoResponse {
   /** 某资产的详情。 */
-  AssetDetailInfo: ComplianceAssetDetailInfo;
+  AssetDetailInfo?: ComplianceAssetDetailInfo;
   /** 当资产为容器时，返回此字段。 */
-  ContainerDetailInfo: ComplianceContainerDetailInfo | null;
+  ContainerDetailInfo?: ComplianceContainerDetailInfo | null;
   /** 当资产为镜像时，返回此字段。 */
-  ImageDetailInfo: ComplianceImageDetailInfo | null;
+  ImageDetailInfo?: ComplianceImageDetailInfo | null;
   /** 当资产为主机时，返回此字段。 */
-  HostDetailInfo: ComplianceHostDetailInfo | null;
+  HostDetailInfo?: ComplianceHostDetailInfo | null;
   /** 当资产为K8S时，返回此字段。 */
-  K8SDetailInfo: ComplianceK8SDetailInfo | null;
+  K8SDetailInfo?: ComplianceK8SDetailInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6795,15 +6809,17 @@ declare interface DescribeComplianceAssetPolicyItemListRequest {
   Offset?: number;
   /** 要获取的数据量，默认为10，最大为100。 */
   Limit?: number;
-  /** 过滤器列表。Name字段支持RiskLevel */
+  /** 过滤器列表。Name字段支持RiskLevel， AppId */
   Filters?: ComplianceFilters[];
+  /** 资产类型 ASSET_CONTAINER Docker容器 ASSET_IMAGE Docker镜像 ASSET_HOST Docker主机 ASSET_K8S Kubernetes ASSET_CONTAINERD Containerd主机 ASSET_CONTAINERD_CONTAINER Containerd容器 */
+  AssetType?: string;
 }
 
 declare interface DescribeComplianceAssetPolicyItemListResponse {
   /** 返回检测项的总数。如果用户未启用基线检查，此处返回0。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回某个资产下的检测项的列表。 */
-  AssetPolicyItemList: ComplianceAssetPolicyItem[];
+  AssetPolicyItemList?: ComplianceAssetPolicyItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6899,17 +6915,17 @@ declare interface DescribeComplianceTaskPolicyItemSummaryListRequest {
   Offset?: number;
   /** 需要返回的数量，默认为10，最大值为100。 */
   Limit?: number;
-  /** 过滤条件。Name - StringName 可取值：ItemType, StandardId, RiskLevel。当为K8S资产时，还可取ClusterName。 */
+  /** 过滤条件 Name string 检测项名字 ItemType string 检测项类型 RiskLevel string 威胁等级 IsOpen int 是否开启 */
   Filters?: ComplianceFilters[];
 }
 
 declare interface DescribeComplianceTaskPolicyItemSummaryListResponse {
   /** 返回最近一次合规检查任务的ID。这个任务为本次所展示数据的来源。 */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 返回检测项的总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回各检测项对应的汇总信息的列表。 */
-  PolicyItemSummaryList: CompliancePolicyItemSummary[];
+  PolicyItemSummaryList?: CompliancePolicyItemSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10321,11 +10337,13 @@ declare interface ScanComplianceAssetsByPolicyItemRequest {
   CustomerPolicyItemId: number;
   /** 要重新扫描的客户资产项ID的列表。 */
   CustomerAssetIdSet: number[];
+  /** 扫描资产类型 ASSET_CONTAINER Docker容器 ASSET_IMAGE Docker镜像 ASSET_HOST Docker主机 ASSET_K8S Kubernetes ASSET_CONTAINERD Containerd主机 ASSET_CONTAINERD_CONTAINER Containerd容器 */
+  AssetType?: string;
 }
 
 declare interface ScanComplianceAssetsByPolicyItemResponse {
   /** 返回重新检测任务的ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10333,11 +10351,13 @@ declare interface ScanComplianceAssetsByPolicyItemResponse {
 declare interface ScanComplianceAssetsRequest {
   /** 要重新扫描的客户资产项ID的列表。 */
   CustomerAssetIdSet: number[];
+  /** 扫描资产类型 ASSET_CONTAINER Docker容器 ASSET_IMAGE Docker镜像 ASSET_HOST Docker主机 ASSET_K8S Kubernetes ASSET_CONTAINERD Containerd主机 ASSET_CONTAINERD_CONTAINER Containerd容器 */
+  AssetType?: string;
 }
 
 declare interface ScanComplianceAssetsResponse {
   /** 返回重新检测任务的ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10357,11 +10377,13 @@ declare interface ScanCompliancePolicyItemsResponse {
 declare interface ScanComplianceScanFailedAssetsRequest {
   /** 要重新扫描的客户资产项ID的列表。 */
   CustomerAssetIdSet: number[];
+  /** 扫描资产类型 ASSET_CONTAINER Docker容器 ASSET_IMAGE Docker镜像 ASSET_HOST Docker主机 ASSET_K8S Kubernetes ASSET_CONTAINERD Containerd主机 ASSET_CONTAINERD_CONTAINER Containerd容器 */
+  AssetType?: string;
 }
 
 declare interface ScanComplianceScanFailedAssetsResponse {
   /** 返回重新检测任务的ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

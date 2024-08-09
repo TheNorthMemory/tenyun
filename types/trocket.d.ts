@@ -836,6 +836,24 @@ declare interface DescribeConsumerGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConsumerLagRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 命名空间，4.x集群必填 */
+  Namespace?: string;
+  /** 订阅主题，不为空则查询订阅了该主题的消费组的堆积 */
+  SubscribeTopic?: string;
+}
+
+declare interface DescribeConsumerLagResponse {
+  /** 堆积数 */
+  ConsumerLag?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFusionInstanceListRequest {
   /** 查询起始位置 */
   Offset: number;
@@ -1511,6 +1529,8 @@ declare interface Trocket {
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
   /** 查询消费组列表 {@link DescribeConsumerGroupListRequest} {@link DescribeConsumerGroupListResponse} */
   DescribeConsumerGroupList(data: DescribeConsumerGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupListResponse>;
+  /** 查询指定消费组堆积数 {@link DescribeConsumerLagRequest} {@link DescribeConsumerLagResponse} */
+  DescribeConsumerLag(data: DescribeConsumerLagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerLagResponse>;
   /** 获取4.x和5.0版本的实例列表 {@link DescribeFusionInstanceListRequest} {@link DescribeFusionInstanceListResponse} */
   DescribeFusionInstanceList(data: DescribeFusionInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFusionInstanceListResponse>;
   /** 查询实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */

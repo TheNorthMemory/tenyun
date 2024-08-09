@@ -350,6 +350,42 @@ declare interface ConfigInfo {
   AdvancedConfig?: string | null;
 }
 
+/** 控制台分享配置 */
+declare interface ConsoleSharingConfig {
+  /** 分享链接名称 */
+  Name: string;
+  /** 仪表盘: 1; 检索页:2 */
+  Type: number;
+  /** 分享链接有效期，单位：毫秒，最长支持30天 */
+  DurationMilliseconds: number;
+  /** 允许访问的资源列表 */
+  Resources: string[];
+  /** 分享链接域名，可选范围- 公网匿名分享：填写clsshare.com- datasight内网匿名分享(若开启)：datasight内网域名 */
+  Domain?: string | null;
+  /** 验证码 */
+  VerifyCode?: string | null;
+  /** 开始时间，支持绝对时间(13位时间戳字符串)/相对时间字符串 */
+  StartTime?: string;
+  /** 结束时间，支持绝对时间(13位时间戳字符串)/相对时间字符串 */
+  EndTime?: string;
+  /** 当StartTime/EndTime为相对时间时，基于NowTime计算绝对时间，默认为创建时间 */
+  NowTime?: number | null;
+  /** params参数列表，当Type为2时支持 */
+  Params?: ConsoleSharingParam[] | null;
+  /** 是否允许访问者自行修改检索分析时间范围，默认不锁定 */
+  IsLockTimeRange?: boolean;
+  /** 是否允许访问者自行修改日志检索语句。在检索页分享中表示检索语句锁定状态；在仪表盘中表示过滤变量锁定状态 */
+  IsLockQuery?: boolean;
+}
+
+/** 控制台分享链接params参数 */
+declare interface ConsoleSharingParam {
+  /** 名称 */
+  Name?: string | null;
+  /** 值 */
+  Value?: string | null;
+}
+
 /** 投递任务出入参 Content */
 declare interface ConsumerContent {
   /** 是否投递 TAG 信息。当EnableTag为true时，表示投递TAG元信息。 */
@@ -1652,6 +1688,20 @@ declare interface CreateConfigResponse {
   RequestId?: string;
 }
 
+declare interface CreateConsoleSharingRequest {
+  /** 免密分享配置 */
+  SharingConfig: ConsoleSharingConfig;
+}
+
+declare interface CreateConsoleSharingResponse {
+  /** 免密分享链接 */
+  SharingUrl?: string;
+  /** 免密分享链接ID */
+  SharingId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConsumerRequest {
   /** 投递任务绑定的日志主题 ID */
   TopicId: string;
@@ -2050,6 +2100,16 @@ declare interface DeleteConfigResponse {
   RequestId?: string;
 }
 
+declare interface DeleteConsoleSharingRequest {
+  /** 免密分享Id */
+  SharingId: string;
+}
+
+declare interface DeleteConsoleSharingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConsumerRequest {
   /** 投递任务绑定的日志主题 ID */
   TopicId: string;
@@ -2295,6 +2355,16 @@ declare interface DescribeConfigsResponse {
   /** 采集配置列表 */
   Configs?: ConfigInfo[] | null;
   /** 过滤到的总数目 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsoleSharingListRequest {
+}
+
+declare interface DescribeConsoleSharingListResponse {
+  /** 分页的总数目 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2902,6 +2972,18 @@ declare interface ModifyConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyConsoleSharingRequest {
+  /** 免密分享链接Id */
+  SharingId: string;
+  /** 指定分享链接有效期，单位：毫秒，最长可设定有效期为30天 */
+  DurationMilliseconds: number;
+}
+
+declare interface ModifyConsoleSharingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConsumerRequest {
   /** 投递任务绑定的日志主题 ID */
   TopicId: string;
@@ -3437,6 +3519,8 @@ declare interface Cls {
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
   /** 创建特殊采集配置任务 {@link CreateConfigExtraRequest} {@link CreateConfigExtraResponse} */
   CreateConfigExtra(data: CreateConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigExtraResponse>;
+  /** 创建免密分享 {@link CreateConsoleSharingRequest} {@link CreateConsoleSharingResponse} */
+  CreateConsoleSharing(data: CreateConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleSharingResponse>;
   /** 创建投递Ckafka任务 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
   /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
@@ -3475,6 +3559,8 @@ declare interface Cls {
   DeleteConfigExtra(data: DeleteConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigExtraResponse>;
   /** 删除应用到机器组的采集配置 {@link DeleteConfigFromMachineGroupRequest} {@link DeleteConfigFromMachineGroupResponse} */
   DeleteConfigFromMachineGroup(data: DeleteConfigFromMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFromMachineGroupResponse>;
+  /** 删除免密分享 {@link DeleteConsoleSharingRequest} {@link DeleteConsoleSharingResponse} */
+  DeleteConsoleSharing(data: DeleteConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleSharingResponse>;
   /** 删除投递配置 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
   /** 删除仪表盘订阅 {@link DeleteDashboardSubscribeRequest} {@link DeleteDashboardSubscribeResponse} */
@@ -3513,6 +3599,8 @@ declare interface Cls {
   DescribeConfigMachineGroups(data: DescribeConfigMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMachineGroupsResponse>;
   /** 获取采集规则配置 {@link DescribeConfigsRequest} {@link DescribeConfigsResponse} */
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
+  /** 获取免密分享列表 {@link DescribeConsoleSharingListRequest} {@link DescribeConsoleSharingListResponse} */
+  DescribeConsoleSharingList(data?: DescribeConsoleSharingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsoleSharingListResponse>;
   /** 获取投递配置 {@link DescribeConsumerRequest} {@link DescribeConsumerResponse} */
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
   /** 获取cos导入配置 {@link DescribeCosRechargesRequest} {@link DescribeCosRechargesResponse} */
@@ -3567,6 +3655,8 @@ declare interface Cls {
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
   /** 修改特殊采集配置任务 {@link ModifyConfigExtraRequest} {@link ModifyConfigExtraResponse} */
   ModifyConfigExtra(data: ModifyConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigExtraResponse>;
+  /** 修改免密分享 {@link ModifyConsoleSharingRequest} {@link ModifyConsoleSharingResponse} */
+  ModifyConsoleSharing(data: ModifyConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsoleSharingResponse>;
   /** 修改投递Ckafka任务 {@link ModifyConsumerRequest} {@link ModifyConsumerResponse} */
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
   /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */

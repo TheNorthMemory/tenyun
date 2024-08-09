@@ -126,6 +126,14 @@ declare interface MemberMainInfo {
   MemberName: string | null;
 }
 
+/** 部门主要信息 */
+declare interface NodeMainInfo {
+  /** 部门ID */
+  NodeId: number | null;
+  /** 部门名称 */
+  NodeName: string | null;
+}
+
 /** 不允许删除的原因。 */
 declare interface NotAllowReason {
   /** 是否创建的成员。true-是、false-否；成员不是创建的成员不允许删除 */
@@ -356,6 +364,28 @@ declare interface OrganizationServiceAssign {
   GrantStatus?: string | null;
   /** 是否支持设置委派管理范围。取值: 1-是 2-否 */
   IsSetManagementScope?: number | null;
+}
+
+/** 集团服务委派成员信息 */
+declare interface OrganizationServiceAssignMember {
+  /** 集团服务ID。 */
+  ServiceId?: number | null;
+  /** 集团服务产品名称。 */
+  ProductName?: string | null;
+  /** 委派管理员Uin。 */
+  MemberUin?: number | null;
+  /** 委派管理员名称。 */
+  MemberName?: string | null;
+  /** 启用状态 。取值：0-服务无启用状态 1-已启用 2-未启用 */
+  UsageStatus?: number | null;
+  /** 委派时间。 */
+  CreateTime?: string | null;
+  /** 委派管理员管理范围。取值: 1-全部成员 2-部分成员 */
+  ManagementScope?: number | null;
+  /** 管理的成员Uin列表。ManagementScope值为2时该参数有效 */
+  ManagementScopeMembers?: MemberMainInfo[] | null;
+  /** 管理的部门ID列表。ManagementScope值为2时该参数有效 */
+  ManagementScopeNodes?: NodeMainInfo[] | null;
 }
 
 /** 产品资源 */
@@ -594,6 +624,24 @@ declare interface CheckAccountDeleteResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrgServiceAssignRequest {
+  /** 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取 */
+  ServiceId: number;
+  /** 委派管理员Uin列表。 最大长度20个 */
+  MemberUins: number[];
+  /** 委派管理员管理范围。 取值：1-全部成员 2-部分成员，默认值1 */
+  ManagementScope?: number;
+  /** 管理的成员Uin列表。ManagementScope为2时该参数有效 */
+  ManagementScopeUins?: number[];
+  /** 管理的部门ID列表。ManagementScope为2时该参数有效 */
+  ManagementScopeNodeIds?: number[];
+}
+
+declare interface CreateOrgServiceAssignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOrganizationIdentityRequest {
   /** 身份名称 */
   IdentityAliasName: string;
@@ -724,6 +772,18 @@ declare interface DeleteAccountRequest {
 }
 
 declare interface DeleteAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOrgServiceAssignRequest {
+  /** 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取 */
+  ServiceId: number;
+  /** 委派管理员Uin。 */
+  MemberUin: number;
+}
+
+declare interface DeleteOrgServiceAssignResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1288,6 +1348,24 @@ declare interface ListNonCompliantResourceResponse {
   Items?: ResourceTagMapping[] | null;
   /** 获取的下一页的Token值。 */
   PaginationToken?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListOrgServiceAssignMemberRequest {
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
+  Offset: number;
+  /** 限制数目。取值范围：1~50，默认值：10 */
+  Limit: number;
+  /** 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取 */
+  ServiceId: number;
+}
+
+declare interface ListOrgServiceAssignMemberResponse {
+  /** 总数。 */
+  Total?: number | null;
+  /** 委派管理员列表。 */
+  Items?: OrganizationServiceAssignMember[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1883,6 +1961,8 @@ declare interface Organization {
   CancelOrganizationMemberAuthAccount(data: CancelOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationMemberAuthAccountResponse>;
   /** 成员账号删除检查 {@link CheckAccountDeleteRequest} {@link CheckAccountDeleteResponse} */
   CheckAccountDelete(data: CheckAccountDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAccountDeleteResponse>;
+  /** 添加集团服务委派管理员 {@link CreateOrgServiceAssignRequest} {@link CreateOrgServiceAssignResponse} */
+  CreateOrgServiceAssign(data: CreateOrgServiceAssignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrgServiceAssignResponse>;
   /** 创建企业组织 {@link CreateOrganizationRequest} {@link CreateOrganizationResponse} */
   CreateOrganization(data?: CreateOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationResponse>;
   /** 添加组织身份 {@link CreateOrganizationIdentityRequest} {@link CreateOrganizationIdentityResponse} */
@@ -1899,6 +1979,8 @@ declare interface Organization {
   CreatePolicy(data: CreatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyResponse>;
   /** 删除成员账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
+  /** 删除集团服务委派管理员 {@link DeleteOrgServiceAssignRequest} {@link DeleteOrgServiceAssignResponse} */
+  DeleteOrgServiceAssign(data: DeleteOrgServiceAssignRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrgServiceAssignResponse>;
   /** 删除企业组织 {@link DeleteOrganizationRequest} {@link DeleteOrganizationResponse} */
   DeleteOrganization(data?: DeleteOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationResponse>;
   /** 删除组织身份 {@link DeleteOrganizationIdentityRequest} {@link DeleteOrganizationIdentityResponse} */
@@ -1963,6 +2045,8 @@ declare interface Organization {
   EnablePolicyType(data: EnablePolicyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<EnablePolicyTypeResponse>;
   /** 获取成员标签检测不合规资源列表 {@link ListNonCompliantResourceRequest} {@link ListNonCompliantResourceResponse} */
   ListNonCompliantResource(data: ListNonCompliantResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ListNonCompliantResourceResponse>;
+  /** 获取集团服务委派管理员列表 {@link ListOrgServiceAssignMemberRequest} {@link ListOrgServiceAssignMemberResponse} */
+  ListOrgServiceAssignMember(data: ListOrgServiceAssignMemberRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrgServiceAssignMemberResponse>;
   /** 获取组织成员访问身份列表 {@link ListOrganizationIdentityRequest} {@link ListOrganizationIdentityResponse} */
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
   /** 获取集团服务设置列表 {@link ListOrganizationServiceRequest} {@link ListOrganizationServiceResponse} */
