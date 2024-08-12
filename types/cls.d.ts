@@ -3427,10 +3427,12 @@ declare interface SearchLogRequest {
   TopicId?: string;
   /** - 要检索分析的日志主题列表，最大支持20个日志主题。- 检索单个日志主题时请使用TopicId。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
   Topics?: MultiTopicSearchInformation[];
-  /** 表示单次查询返回的原始日志条数，默认为100，最大值为1000，获取后续日志需使用Context参数注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法 */
-  Limit?: number;
   /** 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果排序方式参考SQL ORDER BY语法 */
   Sort?: string;
+  /** 表示单次查询返回的原始日志条数，默认为100，最大值为1000。注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法可通过两种方式获取后续更多日志：* Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志* Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制 */
+  Limit?: number;
+  /** 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。 注意：* 仅当检索分析语句(Query)不包含SQL时有效* 不能与Context参数同时使用* 仅适用于单日志主题检索 */
+  Offset?: number;
   /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。注意：* 透传该参数时，请勿修改除该参数外的其它参数* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考SQL LIMIT语法 */
   Context?: string;
   /** 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。0：自动采样;0～1：按指定采样率采样，例如0.02;1：不采样，即精确分析默认值为1 */

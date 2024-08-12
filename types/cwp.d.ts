@@ -14028,6 +14028,38 @@ declare interface ModifyRansomDefenseStrategyStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyReverseShellRulesAggregationRequest {
+  /** 规则ID(新增时请留空) */
+  Id?: number;
+  /** 客户端ID数组 */
+  Uuids?: string[];
+  /** 主机IP */
+  HostIp?: string;
+  /** 目标IP */
+  DestIp?: string;
+  /** 目标端口 */
+  DestPort?: string;
+  /** 进程名 */
+  ProcessName?: string;
+  /** 是否全局规则(默认否) */
+  IsGlobal?: number;
+  /** 事件列表和详情点击加白时关联的事件id (新增规则时请留空) */
+  EventId?: number;
+  /** 加白方式， 0:常规加白 1:正则加白 */
+  WhiteType?: number;
+  /** 正则表达式 */
+  RuleRegexp?: string;
+  /** 处理历史事件， 0:不处理 1:处理 */
+  HandleHistory?: number;
+  /** 批次id */
+  GroupID?: string;
+}
+
+declare interface ModifyReverseShellRulesAggregationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRiskDnsPolicyRequest {
   /** 策略 */
   Data: RiskDnsPolicy;
@@ -14759,7 +14791,7 @@ declare interface Cwp {
   CreateBaselineStrategy(data: CreateBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaselineStrategyResponse>;
   /** 创建新购授权绑定任务 {@link CreateBuyBindTaskRequest} {@link CreateBuyBindTaskResponse} */
   CreateBuyBindTask(data: CreateBuyBindTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBuyBindTaskResponse>;
-  /** 云护航服务确认收货 {@link CreateCloudProtectServiceOrderRecordRequest} {@link CreateCloudProtectServiceOrderRecordResponse} */
+  /** @deprecated 云护航服务确认收货 {@link CreateCloudProtectServiceOrderRecordRequest} {@link CreateCloudProtectServiceOrderRecordResponse} */
   CreateCloudProtectServiceOrderRecord(data: CreateCloudProtectServiceOrderRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudProtectServiceOrderRecordResponse>;
   /** 应急漏洞扫描 {@link CreateEmergencyVulScanRequest} {@link CreateEmergencyVulScanResponse} */
   CreateEmergencyVulScan(data: CreateEmergencyVulScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulScanResponse>;
@@ -15671,6 +15703,8 @@ declare interface Cwp {
   ModifyRansomDefenseEventsStatus(data: ModifyRansomDefenseEventsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRansomDefenseEventsStatusResponse>;
   /** 批量修改防勒索策略状态 {@link ModifyRansomDefenseStrategyStatusRequest} {@link ModifyRansomDefenseStrategyStatusResponse} */
   ModifyRansomDefenseStrategyStatus(data: ModifyRansomDefenseStrategyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRansomDefenseStrategyStatusResponse>;
+  /** 编辑反弹Shell规则（支持多服务器选择）-聚合版本-支持正则 {@link ModifyReverseShellRulesAggregationRequest} {@link ModifyReverseShellRulesAggregationResponse} */
+  ModifyReverseShellRulesAggregation(data?: ModifyReverseShellRulesAggregationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReverseShellRulesAggregationResponse>;
   /** 更改恶意请求策略 {@link ModifyRiskDnsPolicyRequest} {@link ModifyRiskDnsPolicyResponse} */
   ModifyRiskDnsPolicy(data: ModifyRiskDnsPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskDnsPolicyResponse>;
   /** 更改恶意请求策略状态 {@link ModifyRiskDnsPolicyStatusRequest} {@link ModifyRiskDnsPolicyStatusResponse} */

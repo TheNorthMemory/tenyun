@@ -2014,6 +2014,8 @@ declare interface EditMediaStreamInfo {
 declare interface EditMediaTEHDConfig {
   /** 极速高清类型，可选值：TEHD-100 表示极速高清-100; OFF 表示关闭极速高清。不填表示 OFF。 */
   Type: string;
+  /** 视频码率上限，当 Type 指定了极速高清类型时有效。不填或填0表示不设视频码率上限。 */
+  MaxVideoBitrate?: number;
 }
 
 /** 编辑视频任务信息 */

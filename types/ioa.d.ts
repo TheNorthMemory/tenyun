@@ -317,19 +317,19 @@ declare interface DescribeAccountGroupsResponse {
 declare interface DescribeDevicesRequest {
   /** 过滤条件Ip - String - 是否必填：否 - 操作符: eq - 排序支持：否- 按照Ip进行过滤。MacAddr - String - 是否必填：否 - 操作符: eq - 排序支持：否- 按照mac地址进行过滤。IoaUserName - String - 是否必填：否 - 操作符: eq - 排序支持：否- 按照ioa用户名进行过滤。分页参数PageNum 从1开始，小于等于0时使用默认参数。PageSize 最大值5000，最好不超过100。 */
   Condition?: Condition;
-  /** 私有化默认分组id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOS */
+  /** 【和GroupIds必须有一个填写】设备分组id（需要和OsType匹配）id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOS */
   GroupId?: number;
-  /** 系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios 默认值0） */
+  /** 【必填】操作系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios 默认值0），需要和GroupId或者GroupIds匹配 */
   OsType?: number;
-  /** 在线状态 2 在线 0，1 离线 */
+  /** 在线状态 （2表示在线，0或者1表示离线） */
   OnlineStatus?: number;
   /** 过滤条件--兼容旧接口,参数同Condition */
   Filters?: Filter[];
   /** 排序字段--兼容旧接口,参数同Condition */
   Sort?: Sort;
-  /** 获取第几页--兼容旧接口,参数同Condition(只支持32位) */
+  /** 获取第几页--兼容旧接口,参数同Condition */
   PageNum?: number;
-  /** 每页获取数--兼容旧接口,参数同Condition(只支持32位) */
+  /** 每页获取数--兼容旧接口,参数同Condition */
   PageSize?: number;
   /** 授权状态 4未授权 5已授权 */
   Status?: number;

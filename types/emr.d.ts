@@ -648,6 +648,16 @@ declare interface GroupGlobalConfs {
   CurrentSpotPaidNodes?: number | null;
 }
 
+/** 进程健康状态 */
+declare interface HealthStatus {
+  /** 运行正常 */
+  Code: number;
+  /** 运行正常 */
+  Text: string;
+  /** 运行正常 */
+  Desc: string;
+}
+
 /** Hive查询详情 */
 declare interface HiveQuery {
   /** 查询语句 */
@@ -1518,6 +1528,20 @@ declare interface ResourceDetail {
   InstanceType: string | null;
 }
 
+/** 组件重启策略 */
+declare interface RestartPolicy {
+  /** 重启策略名。 */
+  Name: string;
+  /** 策略展示名称。 */
+  DisplayName: string;
+  /** 策略描述。 */
+  Describe: string;
+  /** 批量重启节点数可选范围。 */
+  BatchSizeRange: number[];
+  /** 是否是默认策略。 */
+  IsDefault: string;
+}
+
 /** 扩容节点类型以及数量 */
 declare interface ScaleOutNodeConfig {
   /** 扩容节点类型取值范围： MASTER TASK CORE ROUTER */
@@ -1540,6 +1564,34 @@ declare interface SceneSoftwareConfig {
   Software: string[];
   /** 默认Hadoop-Default,[场景查询](https://cloud.tencent.com/document/product/589/14624)场景化取值范围：Hadoop-KuduHadoop-ZookeeperHadoop-PrestoHadoop-HbaseHadoop-Default */
   SceneName?: string;
+}
+
+/** 调度任务详情 */
+declare interface SchedulerTaskDetail {
+  /** 步骤 */
+  Step: string | null;
+  /** 进度 */
+  Progress: string | null;
+  /** 失败信息 */
+  FailReason: string | null;
+  /** 用来获取详情的id */
+  JobId?: number | null;
+}
+
+/** yarn资源调度历史 */
+declare interface SchedulerTaskInfo {
+  /** 调度器类型 */
+  SchedulerName: string;
+  /** 操作类型 */
+  OperatorName: string;
+  /** 开始时间 */
+  CreateTime: string | null;
+  /** 结束时间 */
+  EndTime: string | null;
+  /** 状态 */
+  State: number | null;
+  /** 详情 */
+  Details: SchedulerTaskDetail[] | null;
 }
 
 /** 添加引导操作 */
@@ -1570,6 +1622,70 @@ declare interface ServiceBasicRestartInfo {
   ServiceName?: string;
   /** 如果没传，则表示所有进程 */
   ComponentInfoList?: ComponentBasicRestartInfo[];
+}
+
+/** 服务进程信息 */
+declare interface ServiceNodeDetailInfo {
+  /** 进程所在节点IP */
+  Ip?: string;
+  /** 进程类型 */
+  NodeType?: number;
+  /** 进程名称 */
+  NodeName?: string;
+  /** 服务组件状态 */
+  ServiceStatus?: number;
+  /** 进程监控状态 */
+  MonitorStatus?: number;
+  /** 服务组件状态 */
+  Status?: number;
+  /** 进程端口信息 */
+  PortsInfo?: string;
+  /** 最近重启时间 */
+  LastRestartTime?: string;
+  /** 节点类型 */
+  Flag?: number;
+  /** 配置组ID */
+  ConfGroupId?: number;
+  /** 配置组名称 */
+  ConfGroupName?: string;
+  /** 节点是否需要重启 */
+  ConfStatus?: number;
+  /** 进程探测信息 */
+  ServiceDetectionInfo?: ServiceProcessFunctionInfo[] | null;
+  /** 节点类型 */
+  NodeFlagFilter?: string | null;
+  /** 进程健康状态 */
+  HealthStatus?: HealthStatus | null;
+  /** 角色是否支持监控 */
+  IsSupportRoleMonitor?: boolean | null;
+  /** 暂停策略 */
+  StopPolicies?: RestartPolicy[] | null;
+  /** 测试环境api强校验，现网没有，emrcc接口返回有。不加会报错 */
+  HAState?: string | null;
+  /** NameService名称 */
+  NameService?: string | null;
+  /** 是否支持联邦 */
+  IsFederation?: boolean | null;
+  /** datanode是否是维护状态 */
+  DataNodeMaintenanceState?: number | null;
+}
+
+/** 进程检测信息 */
+declare interface ServiceProcessFunctionInfo {
+  /** 探测告警级别 */
+  DetectAlert?: string | null;
+  /** 探测功能描述 */
+  DetetcFunctionKey?: string | null;
+  /** 探测功能结果 */
+  DetetcFunctionValue?: string | null;
+  /** 探测结果 */
+  DetetcTime?: string | null;
+  /** 探测功能描述 */
+  DetectFunctionKey?: string | null;
+  /** 探测功能结果 */
+  DetectFunctionValue?: string | null;
+  /** 探测结果 */
+  DetectTime?: string | null;
 }
 
 /** 节点信息 */
@@ -2586,6 +2702,46 @@ declare interface DescribeResourceScheduleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeServiceNodeInfosRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 页码 */
+  Offset?: number;
+  /** 页大小 */
+  Limit?: number;
+  /** 搜索字段 */
+  SearchText?: string;
+  /** '配置状态，-2：配置失败，-1:配置过期，1：已同步', -99 '全部' */
+  ConfStatus?: number;
+  /** 过滤条件：维护状态0代表所有状态1代表正常模式2代表维护模式 */
+  MaintainStateId?: number;
+  /** 过滤条件：操作状态0代表所有状态1代表已启动2代表已停止 */
+  OperatorStateId?: number;
+  /** 过滤条件：健康状态"0"代表不可用"1"代表良好"-2"代表未知"-99"代表所有"-3"代表存在隐患"-4"代表未探测 */
+  HealthStateId?: string;
+  /** 服务组件名称，都是大写比如YARN */
+  ServiceName?: string;
+  /** 节点名称mastercoretaskcommonrouter */
+  NodeTypeName?: string;
+  /** 过滤条件：dn是否处于维护状态0代表所有状态1代表处于维护状态 */
+  DataNodeMaintenanceId?: number;
+  /** 支持搜索的字段 */
+  SearchFields?: SearchItem[];
+}
+
+declare interface DescribeServiceNodeInfosResponse {
+  /** 总数量 */
+  TotalCnt?: number | null;
+  /** 进程信息 */
+  ServiceNodeList?: ServiceNodeDetailInfo[] | null;
+  /** 集群所有节点的别名序列化 */
+  AliasInfo?: string | null;
+  /** 支持的FlagNode列表 */
+  SupportNodeFlagFilterList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrinoQueryInfoRequest {
   /** 集群ID */
   InstanceId: string;
@@ -2648,6 +2804,36 @@ declare interface DescribeYarnApplicationsResponse {
   Total?: number;
   /** 结果列表 */
   Results?: YarnApplication[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeYarnScheduleHistoryRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 页码 */
+  Limit?: number;
+  /** 页大小 */
+  Offset?: number;
+  /** 调度器类型 可选值为“ALL”，"Capacity Scheduler", "Fair Scheduler" */
+  SchedulerType?: string;
+  /** 任务类型0:等待执行，1:执行中，2：完成，-1:失败 ，-99:全部 */
+  TaskState?: number;
+}
+
+declare interface DescribeYarnScheduleHistoryResponse {
+  /** 任务详情 */
+  Tasks?: SchedulerTaskInfo[] | null;
+  /** 任务详情总数 */
+  Total?: number | null;
+  /** 调度类型筛选列表 */
+  SchedulerNameList?: string[] | null;
+  /** 状态筛选列表 */
+  StateList?: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2936,6 +3122,24 @@ declare interface ModifyUserManagerPwdRequest {
 }
 
 declare interface ModifyUserManagerPwdResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyYarnDeployRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 切换后的调度器，可选值为fair、capacity */
+  NewScheduler: string;
+  /** 现在使用的调度器，可选值为fair、capacity */
+  OldScheduler?: string;
+}
+
+declare interface ModifyYarnDeployResponse {
+  /** 为false不点亮部署生效、重置 */
+  IsDraft?: boolean | null;
+  /** 错误信息，预留 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3237,12 +3441,16 @@ declare interface Emr {
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
   /** 查询YARN资源调度数据信息 {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
+  /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
+  DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
   /** 获取trino查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */
   DescribeTrinoQueryInfo(data: DescribeTrinoQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrinoQueryInfoResponse>;
   /** 查询用户列表 {@link DescribeUsersForUserManagerRequest} {@link DescribeUsersForUserManagerResponse} */
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;
   /** 获取Yarn的任务信息 {@link DescribeYarnApplicationsRequest} {@link DescribeYarnApplicationsResponse} */
   DescribeYarnApplications(data: DescribeYarnApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYarnApplicationsResponse>;
+  /** yarn资源调度-调度历史 {@link DescribeYarnScheduleHistoryRequest} {@link DescribeYarnScheduleHistoryResponse} */
+  DescribeYarnScheduleHistory(data: DescribeYarnScheduleHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYarnScheduleHistoryResponse>;
   /** 集群续费询价 {@link InquirePriceRenewEmrRequest} {@link InquirePriceRenewEmrResponse} */
   InquirePriceRenewEmr(data: InquirePriceRenewEmrRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewEmrResponse>;
   /** 创建实例询价 {@link InquiryPriceCreateInstanceRequest} {@link InquiryPriceCreateInstanceResponse} */
@@ -3265,6 +3473,8 @@ declare interface Emr {
   ModifyResourcesTags(data: ModifyResourcesTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagsResponse>;
   /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
+  /** 部署生效 {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */
+  ModifyYarnDeploy(data: ModifyYarnDeployRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnDeployResponse>;
   /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
   /** 扩容集群节点(新) {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */
