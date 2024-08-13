@@ -15113,7 +15113,7 @@ declare interface Cwp {
   DescribeCanNotSeparateMachine(data?: DescribeCanNotSeparateMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCanNotSeparateMachineResponse>;
   /** 获取客户端异常事件 {@link DescribeClientExceptionRequest} {@link DescribeClientExceptionResponse} */
   DescribeClientException(data: DescribeClientExceptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientExceptionResponse>;
-  /** 查询云护航服务订单列表 {@link DescribeCloudProtectServiceOrderListRequest} {@link DescribeCloudProtectServiceOrderListResponse} */
+  /** @deprecated 查询云护航服务订单列表 {@link DescribeCloudProtectServiceOrderListRequest} {@link DescribeCloudProtectServiceOrderListResponse} */
   DescribeCloudProtectServiceOrderList(data?: DescribeCloudProtectServiceOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudProtectServiceOrderListResponse>;
   /** 获取组件统计列表 {@link DescribeComponentStatisticsRequest} {@link DescribeComponentStatisticsResponse} */
   DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;

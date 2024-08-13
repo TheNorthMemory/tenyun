@@ -2896,9 +2896,9 @@ declare interface DriverLicenseOCRResponse {
   ArchivesCode?: string;
   /** 记录 */
   Record?: string;
-  /** Code 告警码列表和释义：-9102 复印件告警-9103 翻拍件告警注：告警码可以同时存在多个 */
+  /** Code 告警码列表和释义：-9102 复印件告警-9103 翻拍件告警-9104 反光告警-9105 模糊告警-9106 边框不完整告警注：告警码可以同时存在多个 */
   RecognizeWarnCode?: number[];
-  /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警注：告警信息可以同时存在多个 */
+  /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警WARN_DRIVER_LICENSE_REFLECTION 反光告警WARN_DRIVER_LICENSE_BLUR 模糊告警WARN_DRIVER_LICENSE_BORDER_INCOMPLETE 边框不完整告警注：告警信息可以同时存在多个 */
   RecognizeWarnMsg?: string[];
   /** 发证单位 */
   IssuingAuthority?: string;
@@ -4850,9 +4850,9 @@ declare interface VehicleLicenseOCRResponse {
   FrontInfo?: TextVehicleFront | null;
   /** 行驶证副页正面的识别结果，CardSide 为 BACK。 */
   BackInfo?: TextVehicleBack | null;
-  /** Code 告警码列表和释义：-9102 复印件告警-9103 翻拍件告警注：告警码可以同时存在多个 */
+  /** Code 告警码列表和释义：-9102 复印件告警-9103 翻拍件告警-9104 反光告警-9105 模糊告警-9106 边框不完整告警注：告警码可以同时存在多个 */
   RecognizeWarnCode?: number[];
-  /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警注：告警信息可以同时存在多个 */
+  /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警WARN_DRIVER_LICENSE_REFLECTION 反光告警WARN_DRIVER_LICENSE_BLUR 模糊告警WARN_DRIVER_LICENSE_BORDER_INCOMPLETE 边框不完整告警注：告警信息可以同时存在多个 */
   RecognizeWarnMsg?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

@@ -280,6 +280,8 @@ declare interface CCN {
   RouteSelectPolicyFlag?: boolean | null;
   /** 是否开启二层云联网通道。 */
   DirectConnectAccelerateChannelFlag?: boolean | null;
+  /** 是否支持ipv6路由表 */
+  Ipv6Flag?: string | null;
 }
 
 /** 云联网（CCN）关联实例（Instance）对象 */
@@ -439,29 +441,33 @@ declare interface CcnRoute {
   /** 路由策略ID */
   RouteId?: string;
   /** 目的端 */
-  DestinationCidrBlock: string;
+  DestinationCidrBlock?: string;
   /** 下一跳类型（关联实例类型），所有类型：VPC、DIRECTCONNECT */
-  InstanceType: string;
+  InstanceType?: string;
   /** 下一跳（关联实例） */
-  InstanceId: string;
+  InstanceId?: string;
   /** 下一跳名称（关联实例名称） */
-  InstanceName: string;
+  InstanceName?: string;
   /** 下一跳所属地域（关联实例所属地域） */
-  InstanceRegion: string;
+  InstanceRegion?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 路由是否启用 */
-  Enabled: boolean;
+  Enabled?: boolean;
   /** 关联实例所属UIN（根账号） */
-  InstanceUin: string;
+  InstanceUin?: string;
   /** 路由的扩展状态 */
-  ExtraState: string;
+  ExtraState?: string;
   /** 是否动态路由 */
-  IsBgp: boolean;
+  IsBgp?: boolean;
   /** 路由优先级 */
-  RoutePriority: number;
+  RoutePriority?: number;
   /** 下一跳扩展名称（关联实例的扩展名称） */
-  InstanceExtraName: string;
+  InstanceExtraName?: string;
+  /** 实例类型 */
+  AliasType?: string | null;
+  /** 实例id */
+  AliasInstanceId?: string | null;
 }
 
 /** 云联网路由传播策略之路由条件 */
