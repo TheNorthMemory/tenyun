@@ -2300,6 +2300,28 @@ declare interface ChannelVerifyPdfResponse {
   RequestId?: string;
 }
 
+declare interface CreateBatchInitOrganizationUrlRequest {
+  /** 应用相关信息。 此接口Agent.AppId 必填。 */
+  Agent: Agent;
+  /** 初始化操作类型CREATE_SEAL : 创建印章OPEN_AUTO_SIGN :开通企业自动签署 */
+  OperateTypes: string[];
+  /** 批量操作的企业列表在第三方平台的企业Id列表，即ProxyOrganizationOpenId列表,最大支持50个 */
+  ProxyOrganizationOpenIds: string[];
+}
+
+declare interface CreateBatchInitOrganizationUrlResponse {
+  /** 小程序路径 */
+  MiniAppPath?: string;
+  /** 操作长链 */
+  OperateLongUrl?: string;
+  /** 操作短链 */
+  OperateShortUrl?: string;
+  /** 操作二维码 */
+  QRCodeUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBatchOrganizationRegistrationTasksRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -4635,6 +4657,8 @@ declare interface Essbasic {
   ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
   /** 合同验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
+  /** 批量操作企业初始化 {@link CreateBatchInitOrganizationUrlRequest} {@link CreateBatchInitOrganizationUrlResponse} */
+  CreateBatchInitOrganizationUrl(data: CreateBatchInitOrganizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchInitOrganizationUrlResponse>;
   /** 提交子企业批量认证链接创建任务 {@link CreateBatchOrganizationRegistrationTasksRequest} {@link CreateBatchOrganizationRegistrationTasksResponse} */
   CreateBatchOrganizationRegistrationTasks(data: CreateBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationRegistrationTasksResponse>;
   /** 提交申请出证报告任务 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */

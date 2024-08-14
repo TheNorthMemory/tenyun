@@ -2117,19 +2117,43 @@ declare interface TagSummaryOverviewItem {
 /** 购买商品信息 */
 declare interface UsageDetails {
   /** 商品名 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 商品细节 */
-  SubProductName: string | null;
+  SubProductName?: string | null;
+  /** 产品码 */
+  ProductCode?: string | null;
+  /** 子产品码 */
+  SubProductCode?: string | null;
+  /** 计费项码 */
+  BillingItemCode?: string | null;
+  /** 计费细项码 */
+  SubBillingItemCode?: string | null;
+  /** 产品英文名 */
+  ProductEnName?: string | null;
+  /** 子产品英文名 */
+  SubProductEnName?: string | null;
+  /** 结算周期 */
+  CalcUnit?: string | null;
+  /** payMode为prepay 且 payScene为common的情况下存在 */
+  Action?: string | null;
 }
 
 /** 使用记录 */
 declare interface UsageRecords {
   /** 使用金额（微分） */
-  UsedAmount: number;
+  UsedAmount?: number;
   /** 使用时间 */
-  UsedTime: string;
+  UsedTime?: string;
   /** 使用记录细节 */
-  UsageDetails: UsageDetails[] | null;
+  UsageDetails?: UsageDetails[] | null;
+  /** 付费模式 */
+  PayMode?: string;
+  /** 查询的券id */
+  VoucherId?: string | null;
+  /** 交易场景：（adjust：调账、common：正常交易场景） */
+  PayScene?: string | null;
+  /** 唯一id,对应交易:预付费的dealName,调账/后付费的outTradeNo */
+  SeqId?: string | null;
 }
 
 /** 代金券相关信息 */

@@ -288,6 +288,20 @@ declare interface RegisterInstanceInfo {
   UpdatedTime?: string | null;
 }
 
+/** 场景详情。 */
+declare interface Scene {
+  /** 场景 ID 。 */
+  SceneId?: string | null;
+  /** 场景名称。 */
+  SceneName?: string | null;
+  /** 场景创建者。 */
+  CreatedBy?: string | null;
+  /** 创建时间。 */
+  CreatedTime?: string | null;
+  /** 更新时间。 */
+  UpdatedTime?: string | null;
+}
+
 /** 周期执行器设置。 */
 declare interface ScheduleSettings {
   /** 执行策略：ONCE：单次执行RECURRENCE：周期执行 */
@@ -491,7 +505,7 @@ declare interface DescribeAutomationAgentStatusResponse {
 declare interface DescribeCommandsRequest {
   /** 命令ID列表，每次请求的上限为100。参数不支持同时指定 `CommandIds` 和 `Filters` 。 */
   CommandIds?: string[];
-  /** 过滤条件。 command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。 command-type - String - 是否必填：否 -（过滤条件）按照命令类型过滤，取值为 SHELL 或 POWERSHELL。 created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例4每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `CommandIds` 和 `Filters` 。 */
+  /** 过滤条件。 command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。 command-type - String - 是否必填：否 -（过滤条件）按照命令类型过滤，取值为 SHELL 或 POWERSHELL。 scene-id - String - 是否必填：否 -（过滤条件）按照场景ID过滤。 created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例4每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `CommandIds` 和 `Filters` 。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
@@ -650,6 +664,26 @@ declare interface DescribeRegisterInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScenesRequest {
+  /** 场景 ID 数组 */
+  SceneIds?: string[];
+  /** 过滤条件。 scene-id - String - 是否必填：否 -（过滤条件）按照场景 ID 过滤。 scene-name - String - 是否必填：否 -（过滤条件）按照场景名称过滤。 created-by - String - 是否必填：否 -（过滤条件）按照场景创建者过滤，取值为 TAT 或 USER。TAT 代表公共命令，USER 代表由用户创建的命令。每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `SceneIds` 和 `Filters` 。 */
+  Filters?: Filter[];
+  /** 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit?: number;
+  /** 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset?: number;
+}
+
+declare interface DescribeScenesResponse {
+  /** 符合条件的场景总数。 */
+  TotalCount?: number;
+  /** 场景详情列表。 */
+  SceneSet?: Scene[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableInvokerRequest {
   /** 待停止的执行器ID。 */
   InvokerId: string;
@@ -765,7 +799,7 @@ declare interface ModifyInvokerResponse {
 declare interface ModifyRegisterInstanceRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 实例名。 */
+  /** 实例名称。有效长度为 1～60 字符。 */
   InstanceName: string;
 }
 
@@ -875,6 +909,8 @@ declare interface Tat {
   DescribeRegisterCodes(data?: DescribeRegisterCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegisterCodesResponse>;
   /** 查询托管实例 {@link DescribeRegisterInstancesRequest} {@link DescribeRegisterInstancesResponse} */
   DescribeRegisterInstances(data?: DescribeRegisterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegisterInstancesResponse>;
+  /** 查询场景 {@link DescribeScenesRequest} {@link DescribeScenesResponse} */
+  DescribeScenes(data?: DescribeScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenesResponse>;
   /** 停用执行器 {@link DisableInvokerRequest} {@link DisableInvokerResponse} */
   DisableInvoker(data: DisableInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DisableInvokerResponse>;
   /** 批量禁用注册码 {@link DisableRegisterCodesRequest} {@link DisableRegisterCodesResponse} */

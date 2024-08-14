@@ -394,6 +394,14 @@ declare interface SourceClusterGroupConfig {
   Namespace?: string | null;
   /** 导入状态Unknown 未知Success 成功Failure 失败AlreadyExists 已存在 */
   ImportStatus?: string | null;
+  /** 4.x的命名空间，出参使用 */
+  NamespaceV4?: string | null;
+  /** 4.x的消费组名，出参使用 */
+  GroupNameV4?: string | null;
+  /** 4.x的完整命名空间，出参使用 */
+  FullNamespaceV4?: string | null;
+  /** 是否为顺序投递，5.0有效 */
+  ConsumeMessageOrderly?: boolean | null;
 }
 
 /** 源集群主题配置 */
@@ -531,7 +539,7 @@ declare interface CreateConsumerGroupResponse {
 declare interface CreateInstanceRequest {
   /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
   InstanceType: string;
-  /** 实例名称 */
+  /** 集群名称 */
   Name: string;
   /** 商品规格，可用规格如下：experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w */
   SkuCode: string;
@@ -539,21 +547,23 @@ declare interface CreateInstanceRequest {
   Remark?: string;
   /** 标签列表 */
   TagList?: Tag[];
-  /** 实例绑定的VPC信息 */
+  /** 集群绑定的VPC信息，必填 */
   VpcList?: VpcInfo[];
-  /** 是否开启公网 */
+  /** 是否开启公网，默认值为false表示不开启 */
   EnablePublic?: boolean;
-  /** 公网带宽（单位：兆） */
+  /** 公网是否按流量计费，默认值为false表示不按流量计费 */
+  BillingFlow?: boolean;
+  /** 公网带宽（单位：兆），默认值为0。如果开启公网，该字段必须为大于0的正整数 */
   Bandwidth?: number;
   /** 公网访问白名单 */
   IpRules?: IpRule[];
   /** 消息保留时长（单位：小时） */
   MessageRetention?: number;
-  /** 付费模式（0: 后付费；1: 预付费） */
+  /** 付费模式（0: 后付费；1: 预付费），默认值为0 */
   PayMode?: number;
-  /** 是否自动续费（0: 不自动续费；1: 自动续费） */
+  /** 是否自动续费（0: 不自动续费；1: 自动续费），默认值为0 */
   RenewFlag?: number;
-  /** 购买时长（单位：月） */
+  /** 购买时长（单位：月），默认值为1 */
   TimeSpan?: number;
   /** 最大可创建主题数 */
   MaxTopicNum?: number;

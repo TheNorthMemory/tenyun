@@ -1092,6 +1092,8 @@ declare interface ServerlessIndexMetaField {
   StorageType?: number | null;
   /** 标签信息 */
   TagList?: TagInfo[];
+  /** 3782478.47 */
+  IndexTraffic?: number | null;
 }
 
 /** Serverless实例，网络、索引、kibana等连接信息 */
@@ -1168,6 +1170,8 @@ declare interface ServerlessSpace {
   KibanaLanguage?: string | null;
   /** 0 */
   ClusterType?: number | null;
+  /** key:value */
+  TagList?: TagInfo[] | null;
 }
 
 /** ServerlessSpaceUser */
@@ -1521,6 +1525,8 @@ declare interface CreateServerlessSpaceV2Request {
   KibanaWhiteIpList?: string[];
   /** 空间id */
   ZoneId?: number;
+  /** 标签信息 */
+  TagList?: TagInfo[];
 }
 
 declare interface CreateServerlessSpaceV2Response {
@@ -1917,13 +1923,23 @@ declare interface DescribeServerlessMetricsRequest {
   SpaceId?: string;
   /** index索引id */
   IndexId?: string;
-  /** 指标类型，暂时只支持Storage */
+  /** 指标类型，暂时只支持Storage(存储大小),AllMetric(所有存储指标：索引流量、存储大小、文档数量、读请求和写请求) */
   MetricType?: string[];
+  /** 时间长度类型DurationType(1: 3小时, 2: 昨天1天,3: 今日0点到现在) */
+  DurationType?: number;
 }
 
 declare interface DescribeServerlessMetricsResponse {
   /** storage指标值，单位byte */
   Storage?: number;
+  /** IndexTraffic指标值，单位byte */
+  IndexTraffic?: number;
+  /** 读请求数，单位次数 */
+  ReadReqTimes?: number;
+  /** 写请求数，单位次数 */
+  WriteReqTimes?: number;
+  /** 文档数量，单位个数 */
+  DocCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1967,6 +1983,8 @@ declare interface DescribeServerlessSpacesRequest {
   Offset?: number;
   /** 分页条数 */
   Limit?: number;
+  /** 标签信息 */
+  TagList?: TagInfo[];
 }
 
 declare interface DescribeServerlessSpacesResponse {
