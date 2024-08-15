@@ -27,11 +27,19 @@ declare interface ClientClusterManagerNodeInfo {
 /** 客户端节点属性 */
 declare interface ClientNodeAttribute {
   /** 客户端节点IP */
-  ClientNodeIp: string;
+  ClientNodeIp?: string;
   /** 客户端节点服务状态, Active(运行中), Adding(添加中), Destroying(销毁中), Down(已停止) */
-  Status: string;
+  Status?: string;
   /** 客户端节点类型，extend(扩展节点)，manager(管理节点) */
-  ClientType: string;
+  ClientType?: string;
+  /** 节点所属vpcid */
+  VpcId?: string;
+  /** 节点所属子网id */
+  SubnetId?: string;
+  /** cvmId */
+  InstanceId?: string;
+  /** 自定义挂载点 */
+  MountPoint?: string | null;
 }
 
 /** 查询Client Token */
@@ -115,11 +123,13 @@ declare interface LinuxNodeAttribute {
   /** cvmId */
   InstanceId?: string;
   /** 节点所属vpcid */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 节点所属子网id */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** linux客户端节点地址 */
-  LinuxClientNodeIp?: string | null;
+  LinuxClientNodeIp?: string;
+  /** 自定义挂载点 */
+  MountPoint?: string;
 }
 
 /** 关联的对象Bucket, 并将其映射到文件系统某个路径上 */

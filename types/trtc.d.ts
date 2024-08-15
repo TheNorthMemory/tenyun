@@ -36,6 +36,10 @@ declare interface AgentConfig {
   MaxIdleTime?: number | null;
   /** 机器人的欢迎语 */
   WelcomeMessage?: string | null;
+  /** 智能打断模式，默认为0，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断 */
+  InterruptMode?: number | null;
+  /** InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。 */
+  InterruptSpeechDuration?: number | null;
 }
 
 /** 转推服务加入TRTC房间的机器人参数。 */

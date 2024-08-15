@@ -402,6 +402,10 @@ declare interface DescribeDeviceData {
   AudioSwitch?: number | null;
   /** 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效 */
   SubscribeSwitch?: number | null;
+  /** RTMP推流地址自定义appName */
+  AppName?: string | null;
+  /** RTMP推流地址自定义streamName */
+  StreamName?: string | null;
 }
 
 /** 查询设备预置位返回数据 */
@@ -440,6 +444,8 @@ declare interface DescribeDomainData {
   AppId?: number | null;
   /** 证书ID */
   CertId?: string | null;
+  /** 域名类型 0:拉流域名 1:推流域名 */
+  DomainType?: number | null;
 }
 
 /** 查询域名可绑定集群数据 */
@@ -1589,6 +1595,10 @@ declare interface AddUserDeviceRequest {
   Username?: string;
   /** 设备 SN，仅IVCP 协议设备需要 */
   SNCode?: string;
+  /** RTMP推流地址自定义AppName（仅RTMP需要，支持英文、数字组合限制32个字符内） */
+  AppName?: string;
+  /** RTMP推流地址自定义StreamName（仅RTMP需要，支持英文、数字组合限制32个字符内） */
+  StreamName?: string;
 }
 
 declare interface AddUserDeviceResponse {
@@ -1849,6 +1859,8 @@ declare interface DescribeAITaskResultResponse {
 declare interface DescribeCNAMERequest {
   /** 服务节点 ID（从查询域名可绑定服务节点接口DescribeDomainRegion中获取） */
   ClusterId: string;
+  /** 域名类型，0:拉流域名 1:推流域名 */
+  DomainType?: number;
 }
 
 declare interface DescribeCNAMEResponse {

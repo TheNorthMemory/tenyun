@@ -1056,6 +1056,8 @@ declare interface Recipient {
   ApproverVerifyTypes?: number[];
   /** 签署人进行合同签署时的认证方式，支持的类型如下: 1 :人脸认证 2 :签署密码 3 :运营商三要素认证 4 :UKey认证 5 :设备指纹识别 6 :设备面容识别 */
   ApproverSignTypes?: number[];
+  /** 签署方是否可以转他人处理 **false** : ( 默认)可以转他人处理 **true** :不可以转他人处理 */
+  NoTransfer?: boolean;
 }
 
 /** 参与方填写控件信息 */
@@ -1490,6 +1492,36 @@ declare interface CreateBatchInitOrganizationUrlResponse {
   OperateShortUrl?: string;
   /** 操作二维码 */
   QRCodeUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchOrganizationAuthorizationUrlRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 组织机构超管姓名。 在注册流程中，必须是超管本人进行操作。此参数需要跟[创建企业批量认证链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks)中 AdminName 保持一致。 */
+  AdminName: string;
+  /** 组织机构超管手机号。 在注册流程中，必须是超管本人进行操作。此参数需要跟[创建企业批量认证链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks)中 Admin Mobile保持一致。 */
+  AdminMobile: string;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
+  /** 企业批量认证链接的子任务 SubTaskId，该 SubTaskId 是通过接口 查询企业批量认证链接 DescribeBatchOrganizationRegistrationUrls 获得。此参数需与超管个人三要素（AdminName，AdminMobile，AdminIdCardNumber）配合使用。若 SubTaskId 不属于传入的超级管理员，将进行筛选。 */
+  SubTaskIds?: string[];
+  /** 组织机构超管证件类型支持以下类型- ID_CARD : 居民身份证 (默认值)- HONGKONG_AND_MACAO : 港澳居民来往内地通行证- HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)此参数需要跟[创建企业批量认证链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks)中 AdminIdCardType保持一致。 */
+  AdminIdCardType?: string;
+  /** 组织机构超管证件号。 在注册流程中，必须是超管本人进行操作。此参数需要跟[创建企业批量认证链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks)中 AdminIdCardNumber保持一致。 */
+  AdminIdCardNumber?: string;
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链**APP**： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型**QR_CODE**： 跳转电子签小程序的http_url的二维码形式, 可以在页面展示适合此类型 */
+  Endpoint?: string;
+}
+
+declare interface CreateBatchOrganizationAuthorizationUrlResponse {
+  /** 批量企业注册链接-单链接包含多条认证流，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 Endpoint 示例 链接有效期限 HTTP https://res.ess.tencent.cn/cdn/h5-activity-dev/jump-mp.html?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&shortKey=yDCHHURDfBxSB2rj2Bfa 7天 HTTP_SHORT_URL https://test.essurl.cn/8gDKUBAWK8 7天 APP pages/guide/index?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&shortKey=yDCHpURDfR6iEkdpsDde 7天 QR_CODE https://dyn.test.ess.tencent.cn/imgs/qrcode_urls/authorization_enterprise_for_batch_submit/yDCHHUUckpbdauq9UEjnoFDCCumAMmv1.png 7天 注： `1.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
+  AuthUrl?: string;
+  /** 认证流认证失败信息 */
+  ErrorMessages?: string[];
+  /** 链接过期时间，为 7 天后，创建时间，格式为Unix标准时间戳（秒）。 */
+  ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3539,6 +3571,8 @@ declare interface Ess {
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
   /** 批量操作企业初始化 {@link CreateBatchInitOrganizationUrlRequest} {@link CreateBatchInitOrganizationUrlResponse} */
   CreateBatchInitOrganizationUrl(data: CreateBatchInitOrganizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchInitOrganizationUrlResponse>;
+  /** 创建企业批量认证链接-单链接 {@link CreateBatchOrganizationAuthorizationUrlRequest} {@link CreateBatchOrganizationAuthorizationUrlResponse} */
+  CreateBatchOrganizationAuthorizationUrl(data: CreateBatchOrganizationAuthorizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationAuthorizationUrlResponse>;
   /** 创建企业批量认证链接 {@link CreateBatchOrganizationRegistrationTasksRequest} {@link CreateBatchOrganizationRegistrationTasksResponse} */
   CreateBatchOrganizationRegistrationTasks(data: CreateBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationRegistrationTasksResponse>;
   /** 获取H5批量签署链接 {@link CreateBatchQuickSignUrlRequest} {@link CreateBatchQuickSignUrlResponse} */

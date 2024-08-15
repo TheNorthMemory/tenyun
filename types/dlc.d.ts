@@ -816,6 +816,14 @@ declare interface LakeFsInfo {
   SpaceUsedSize?: number;
   /** 创建时候的时间戳 */
   CreateTimeStamp?: number;
+  /** 是否是用户默认桶，0：默认桶，1：非默认桶 */
+  DefaultBucket?: number | null;
+  /** 托管存储short name */
+  ShortName?: string | null;
+  /** 桶描述信息 */
+  Description?: string | null;
+  /** 托管桶状态，当前取值为：creating、bind、readOnly、isolate */
+  Status?: string | null;
 }
 
 /** 元数据加锁内容 */
@@ -1210,6 +1218,10 @@ declare interface SmartOptimizerLifecyclePolicy {
   Expiration?: number | null;
   /** 是否删表 */
   DropTable?: boolean | null;
+  /** 过期字段 */
+  ExpiredField?: string | null;
+  /** 过期字段格式 */
+  ExpiredFieldFormat?: string | null;
 }
 
 /** SmartOptimizerPolicy */
@@ -1228,6 +1240,8 @@ declare interface SmartOptimizerPolicy {
 
 /** SmartOptimizerWrittenPolicy */
 declare interface SmartOptimizerWrittenPolicy {
+  /** none/enable/disable/default */
+  WrittenEnable?: string | null;
 }
 
 /** SmartPolicyRequest */
@@ -1427,19 +1441,23 @@ declare interface StreamingStatistics {
 /** 表字段描述信息 */
 declare interface TColumn {
   /** 字段名称 */
-  Name: string;
+  Name: string | null;
   /** 字段类型 */
-  Type: string;
+  Type: string | null;
   /** 字段描述 */
-  Comment?: string;
+  Comment?: string | null;
   /** 字段默认值 */
-  Default?: string;
+  Default?: string | null;
   /** 字段是否是非空 */
-  NotNull?: boolean;
+  NotNull?: boolean | null;
   /** 表示整个 numeric 的长度,取值1-38 */
   Precision?: number | null;
   /** 表示小数部分的长度Scale小于Precision */
   Scale?: number | null;
+  /** 字段位置，小的在前 */
+  Position?: number | null;
+  /** 是否为分区字段 */
+  IsPartition?: boolean | null;
 }
 
 /** 表分区字段信息 */

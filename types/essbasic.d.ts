@@ -960,6 +960,8 @@ declare interface Recipient {
   ApproverVerifyTypes?: number[];
   /** 签署人进行合同签署时的认证方式，支持的类型如下: 1 :人脸认证 2 :签署密码 3 :运营商三要素认证 4 :UKey认证 5 :设备指纹识别 6 :设备面容识别 */
   ApproverSignTypes?: number[];
+  /** 签署方是否可以转他人处理 **false** : ( 默认)可以转他人处理 **true** :不可以转他人处理 */
+  NoTransfer?: boolean;
 }
 
 /** 参与方填写控件信息 */
