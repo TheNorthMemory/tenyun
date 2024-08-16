@@ -48,17 +48,17 @@ declare interface FusionUltraParam {
 
 /** 图片编码参数 */
 declare interface ImageCodecParam {
-  /** 元数据 */
+  /** 元数据，个数不能大于1。 */
   MetaData?: MetaData[];
 }
 
 /** logo参数 */
 declare interface LogoParam {
-  /** 标识图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配 */
+  /** 标识图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配。 */
   LogoRect: FaceRect;
-  /** 标识图片Url地址 */
+  /** 标识图片Url地址。●base64 和 url 必须提供一个，如果都提供以 url 为准。●支持图片格式：支持jpg或png。 */
   LogoUrl?: string;
-  /** 标识图片base64 */
+  /** 标识图片base64●base64 和 url 必须提供一个，如果都提供以 url 为准。●支持图片格式：支持jpg或png。 */
   LogoImage?: string;
 }
 
@@ -72,15 +72,15 @@ declare interface MaterialFaces {
 
 /** 人脸图片和待被融合的素材模板图的人脸位置信息。 */
 declare interface MergeInfo {
-  /** 输入图片base64 */
+  /** 输入图片base64。●base64 和 url 必须提供一个，如果都提供以 url 为准。●素材图片限制：图片中面部尺寸大于34 * 34；图片尺寸大于64 * 64。（图片编码之后可能会大30%左右，建议合理控制图片大小）。●支持图片格式：支持jpg或png */
   Image?: string;
-  /** 输入图片url */
+  /** 输入图片url。●base64 和 url 必须提供一个，如果都提供以 url 为准。●素材图片限制：图片中面部尺寸大于34 * 34；图片尺寸大于64 * 64。（图片编码之后可能会大30%左右，建议合理控制图片大小）。●支持图片格式：支持jpg或png */
   Url?: string;
-  /** 上传的图片人脸位置信息（人脸框） */
+  /** 上传的图片人脸位置信息（人脸框）Width、Height >= 30。 */
   InputImageFaceRect?: FaceRect;
   /** 素材人脸ID，不填默认取最大人脸。 */
   TemplateFaceID?: string;
-  /** 模板中人脸位置信息(人脸框)，不填默认取最大人脸。此字段仅适用于图片融合自定义模板素材场景。 */
+  /** 模板中人脸位置信息(人脸框)，不填默认取最大人脸。此字段仅适用于图片融合自定义模板素材场景。Width、Height >= 30。 */
   TemplateFaceRect?: FaceRect;
 }
 
@@ -137,7 +137,7 @@ declare interface FuseFaceRequest {
   ModelId: string;
   /** 返回图像方式（url 或 base64) ，二选一。url有效期为7天。 */
   RspImgType: string;
-  /** 用户人脸图片、素材模板图的人脸位置信息。 */
+  /** 用户人脸图片、素材模板图的人脸位置信息。不能超过6个。 */
   MergeInfos: MergeInfo[];
   /** 脸型融合比例，数值越高，融合后的脸型越像素材人物。取值范围[0,100] 若此参数不填写，则使用人脸融合控制台中脸型参数数值。（换脸版算法暂不支持此参数调整） */
   FuseProfileDegree?: number;
@@ -152,7 +152,7 @@ declare interface FuseFaceRequest {
 }
 
 declare interface FuseFaceResponse {
-  /** RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。 */
+  /** RspImgType 为 url 时，返回结果的 url（有效期7天）， RspImgType 为 base64 时返回 base64 数据。 */
   FusedImage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -261,11 +261,11 @@ declare namespace V20181201 {
 
   /** 人脸图片和待被融合的素材模板图的人脸位置信息。 */
   interface MergeInfo {
-    /** 输入图片base64。 */
+    /** 输入图片base64。●base64 和 url 必须提供一个，如果都提供以 url 为准。●素材图片限制：图片中面部尺寸大于34 * 34；图片尺寸大于64 * 64。（图片编码之后可能会大30%左右，建议合理控制图片大小）。●支持图片格式：支持jpg或png。 */
     Image?: string;
-    /** 输入图片url。Url、Image必须提供一个，如果都提供，只使用 Url。 */
+    /** 输入图片url。●base64 和 url 必须提供一个，如果都提供以 url 为准。●素材图片限制：图片中面部尺寸大于34 * 34；图片尺寸大于64 * 64。（图片编码之后可能会大30%左右，建议合理控制图片大小）。●支持图片格式：支持jpg或png。 */
     Url?: string;
-    /** 输入图片人脸位置信息（人脸框）。不填默认取输入图中最大人脸。 */
+    /** 输入图片人脸位置信息（人脸框）。不填默认取输入图中最大人脸。Width、Height >= 30。 */
     InputImageFaceRect?: FaceRect;
     /** 素材人脸ID，不填默认取素材中最大人脸。 */
     TemplateFaceID?: string;
@@ -273,10 +273,10 @@ declare namespace V20181201 {
 
   /** MetaData数据结构，Key/Value格式 */
   interface MetaData {
-    /** MetaData的Key */
-    MetaKey: string | null;
-    /** MetaData的Value */
-    MetaValue: string | null;
+    /** MetaData的Key，长度不能超过32。 */
+    MetaKey: string;
+    /** MetaData的Value，长度不能超过256。 */
+    MetaValue: string;
   }
 
   /** 素材信息 */

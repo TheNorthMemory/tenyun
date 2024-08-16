@@ -1715,6 +1715,8 @@ declare interface ModifyStaffRequest {
   Phone?: string;
   /** 座席昵称 */
   Nick?: string;
+  /** 座席工号 */
+  StaffNo?: string;
   /** 绑定技能组ID列表 */
   SkillGroupIds?: number[];
   /** 是否开启手机外呼开关 */

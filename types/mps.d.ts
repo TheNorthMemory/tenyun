@@ -3650,6 +3650,10 @@ declare interface MediaVideoStreamItem {
   HdrType?: string | null;
   /** 视频Codecs。 */
   Codecs?: string | null;
+  /** 帧率分子部分 */
+  FpsNumerator?: number | null;
+  /** 帧率分母部分 */
+  FpsDenominator?: number | null;
 }
 
 /** 修改输入信息的参数。 */
@@ -4916,9 +4920,9 @@ declare interface VideoEnhanceConfig {
 declare interface VideoTemplateInfo {
   /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec: string;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。注意：自适应码率时取值范围是 [0, 60] */
+  /** 视频帧率，取值范围：当FpsDenominator的值为空时，范围：[0, 120]，单位：Hz；当FpsDenominator的值不为空时，Fps/FpsDenominator的范围：[0,120]当取值为 0，表示帧率和原始视频保持一致。 */
   Fps: number;
-  /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+  /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。注意：自适应模式时，Width不能小于Height。 */
   ResolutionAdaptive?: string;
@@ -4934,15 +4938,17 @@ declare interface VideoTemplateInfo {
   Vcrf?: number;
   /** hls 分片类型，可选值 ：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0 */
   SegmentType?: number | null;
+  /** 帧率分母部分注意：值必须大于0 */
+  FpsDenominator?: number | null;
 }
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfoForUpdate {
   /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
   Codec?: string | null;
-  /** 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 */
+  /** 视频帧率，取值范围：当FpsDenominator的值为空时，范围：[0, 120]，单位：Hz；当FpsDenominator的值不为空时，Fps/FpsDenominator的范围：[0,120]当取值为 0，表示帧率和原始视频保持一致。 */
   Fps?: number | null;
-  /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+  /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
   Bitrate?: number | null;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。注意：自适应模式时，Width不能小于Height。 */
   ResolutionAdaptive?: string | null;
@@ -4960,6 +4966,8 @@ declare interface VideoTemplateInfoForUpdate {
   ContentAdaptStream?: number | null;
   /** hls 分片类型，可选值：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0 */
   SegmentType?: number | null;
+  /** 帧率分母部分注意：值必须大于0 */
+  FpsDenominator?: number | null;
 }
 
 /** 音量均衡配置 */

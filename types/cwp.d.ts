@@ -2161,13 +2161,15 @@ declare interface CKafkaTopicInfo {
 /** 批量修复漏洞二次弹窗 漏洞主机信息 */
 declare interface CanFixVulInfo {
   /** 漏洞id */
-  VulId: number | null;
+  VulId?: number | null;
   /** 漏洞名称 */
-  VulName: string | null;
+  VulName?: string | null;
   /** 该漏洞可修复的主机信息 */
-  HostList: VulInfoHostInfo[] | null;
+  HostList?: VulInfoHostInfo[] | null;
   /** 修复提示tag */
-  FixTag: string[] | null;
+  FixTag?: string[] | null;
+  /** 漏洞分类1 web cms漏洞,2应用漏洞,4linux软件漏洞,5windows系统漏洞 */
+  VulCategory?: number | null;
 }
 
 /** 不可隔离木马的机器信息 */
@@ -2220,6 +2222,8 @@ declare interface CreateVulFixTaskQuuids {
   VulId: number;
   /** 需要修复漏洞的主机，所有主机必须有VulId的这个漏洞且是待修复状态。 */
   Quuids: string[];
+  /** 修复方式 0组件更新或者安装补丁,1禁用服务 */
+  FixMethod?: number;
 }
 
 /** 默认策略基础信息 */
@@ -5481,17 +5485,19 @@ declare interface VulFixStatusHostInfo {
 /** 查看漏洞修复详情 */
 declare interface VulFixStatusInfo {
   /** 漏洞id */
-  VulId: number | null;
+  VulId?: number | null;
   /** 漏洞名称 */
-  VulName: string | null;
+  VulName?: string | null;
   /** 漏洞修复进度 1-100； */
-  Progress: number;
+  Progress?: number;
   /** 漏洞对应主机修复状态 */
-  HostList: VulFixStatusHostInfo[] | null;
+  HostList?: VulFixStatusHostInfo[] | null;
   /** 漏洞修复失败主机数量 */
-  FailCnt: number | null;
+  FailCnt?: number | null;
   /** 修复成功的数量 */
-  FixSuccessCnt: number | null;
+  FixSuccessCnt?: number | null;
+  /** 修复方式 0组件更新或者安装补丁,1禁用服务 */
+  FixMethod?: number | null;
 }
 
 /** 机器快照信息 */

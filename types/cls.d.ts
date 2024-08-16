@@ -364,18 +364,20 @@ declare interface ConsoleSharingConfig {
   Domain?: string | null;
   /** 验证码 */
   VerifyCode?: string | null;
-  /** 开始时间，支持绝对时间(13位时间戳字符串)/相对时间字符串 */
+  /** 默认查询范围的开始时间点，支持绝对时间(13位Unix时间戳)或相对时间表达式 */
   StartTime?: string;
-  /** 结束时间，支持绝对时间(13位时间戳字符串)/相对时间字符串 */
+  /** 默认查询范围的结束时间点，支持绝对时间(13位Unix时间戳)或相对时间表达式。注意，结束时间点要大于开始时间点 */
   EndTime?: string;
-  /** 当StartTime/EndTime为相对时间时，基于NowTime计算绝对时间，默认为创建时间 */
+  /** 仅当StartTime/EndTime为相对时间时使用，基于NowTime计算绝对时间，默认为创建时间 */
   NowTime?: number | null;
-  /** params参数列表，当Type为2时支持 */
+  /** 默认的检索分析语句，仅当Type为2时使用 */
   Params?: ConsoleSharingParam[] | null;
-  /** 是否允许访问者自行修改检索分析时间范围，默认不锁定 */
+  /** 是否允许访问者自行修改检索分析时间范围。默认不锁定（false） */
   IsLockTimeRange?: boolean;
-  /** 是否允许访问者自行修改日志检索语句。在检索页分享中表示检索语句锁定状态；在仪表盘中表示过滤变量锁定状态 */
+  /** 是否允许访问者自行修改日志检索语句。在检索页分享中表示检索语句锁定状态；在仪表盘中表示过滤变量锁定状态。默认不锁定（false） */
   IsLockQuery?: boolean;
+  /** 检索页分享是否允许访问者下载日志，默认不允许（false） */
+  IsSupportLogExport?: boolean | null;
 }
 
 /** 控制台分享链接params参数 */
@@ -1753,6 +1755,14 @@ declare interface CreateCosRechargeResponse {
 }
 
 declare interface CreateDashboardSubscribeRequest {
+  /** 仪表盘订阅名称。 */
+  Name: string;
+  /** 仪表盘id。 */
+  DashboardId: string;
+  /** 订阅时间cron表达式，格式为：{秒数} {分钟} {小时} {日期} {月份} {星期}；（有效数据为：{分钟} {小时} {日期} {月份} {星期}）。{秒数} 取值范围： 0 ~ 59 {分钟} 取值范围： 0 ~ 59 {小时} 取值范围： 0 ~ 23 {日期} 取值范围： 1 ~ 31 AND (dayOfMonth最后一天： L) {月份} 取值范围： 1 ~ 12 {星期} 取值范围： 0 ~ 6 【0:星期日， 6星期六】 */
+  Cron: string;
+  /** 仪表盘订阅数据。 */
+  SubscribeData: DashboardSubscribeData;
 }
 
 declare interface CreateDashboardSubscribeResponse {
@@ -2121,6 +2131,8 @@ declare interface DeleteConsumerResponse {
 }
 
 declare interface DeleteDashboardSubscribeRequest {
+  /** 仪表盘订阅记录id。 */
+  Id: number;
 }
 
 declare interface DeleteDashboardSubscribeResponse {
@@ -2407,6 +2419,12 @@ declare interface DescribeCosRechargesResponse {
 }
 
 declare interface DescribeDashboardSubscribesRequest {
+  /** dashboardId：按照【仪表盘id】进行过滤。类型：String必选：否 每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
 }
 
 declare interface DescribeDashboardSubscribesResponse {
@@ -3037,6 +3055,16 @@ declare interface ModifyCosRechargeResponse {
 }
 
 declare interface ModifyDashboardSubscribeRequest {
+  /** 仪表盘订阅id。 */
+  Id: number;
+  /** 仪表盘id。 */
+  DashboardId?: string;
+  /** 仪表盘订阅名称。 */
+  Name?: string;
+  /** 订阅时间cron表达式，格式为：{秒数} {分钟} {小时} {日期} {月份} {星期}；（有效数据为：{分钟} {小时} {日期} {月份} {星期}）。 */
+  Cron?: string;
+  /** 仪表盘订阅数据。 */
+  SubscribeData?: DashboardSubscribeData;
 }
 
 declare interface ModifyDashboardSubscribeResponse {
@@ -3528,7 +3556,7 @@ declare interface Cls {
   /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
   CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
   /** 创建仪表盘订阅 {@link CreateDashboardSubscribeRequest} {@link CreateDashboardSubscribeResponse} */
-  CreateDashboardSubscribe(data?: CreateDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDashboardSubscribeResponse>;
+  CreateDashboardSubscribe(data: CreateDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDashboardSubscribeResponse>;
   /** 创建数据加工任务 {@link CreateDataTransformRequest} {@link CreateDataTransformResponse} */
   CreateDataTransform(data: CreateDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataTransformResponse>;
   /** 创建投递SCF任务 {@link CreateDeliverCloudFunctionRequest} {@link CreateDeliverCloudFunctionResponse} */
@@ -3566,7 +3594,7 @@ declare interface Cls {
   /** 删除投递配置 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
   /** 删除仪表盘订阅 {@link DeleteDashboardSubscribeRequest} {@link DeleteDashboardSubscribeResponse} */
-  DeleteDashboardSubscribe(data?: DeleteDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDashboardSubscribeResponse>;
+  DeleteDashboardSubscribe(data: DeleteDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDashboardSubscribeResponse>;
   /** 删除数据加工任务 {@link DeleteDataTransformRequest} {@link DeleteDataTransformResponse} */
   DeleteDataTransform(data: DeleteDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataTransformResponse>;
   /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
@@ -3664,7 +3692,7 @@ declare interface Cls {
   /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */
   ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;
   /** 修改仪表盘订阅 {@link ModifyDashboardSubscribeRequest} {@link ModifyDashboardSubscribeResponse} */
-  ModifyDashboardSubscribe(data?: ModifyDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDashboardSubscribeResponse>;
+  ModifyDashboardSubscribe(data: ModifyDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDashboardSubscribeResponse>;
   /** 修改数据加工任务 {@link ModifyDataTransformRequest} {@link ModifyDataTransformResponse} */
   ModifyDataTransform(data: ModifyDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataTransformResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */

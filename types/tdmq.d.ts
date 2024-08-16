@@ -3635,17 +3635,19 @@ declare interface DescribeRocketMQPublicAccessPointRequest {
 
 declare interface DescribeRocketMQPublicAccessPointResponse {
   /** 公网接入点状态：0， 已开启1， 已关闭2，开启中3，关闭中4，修改中 */
-  Status: number;
+  Status?: number;
   /** 支付状态：0, 未知1，正常2，欠费 */
-  PayStatus: number;
+  PayStatus?: number;
   /** 接入点地址 */
-  AccessUrl: string | null;
+  AccessUrl?: string | null;
   /** 安全访问规则列表 */
-  Rules: PublicAccessRule[] | null;
+  Rules?: PublicAccessRule[] | null;
   /** 带宽 */
-  Bandwidth: number | null;
+  Bandwidth?: number | null;
   /** 付费模式 */
-  PayMode: number | null;
+  PayMode?: number | null;
+  /** 公网是否按流量计费 */
+  BillingFlow?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4747,6 +4749,8 @@ declare interface SetRocketMQPublicAccessPointRequest {
   PayMode?: number;
   /** 公网访问安全规则列表，Enabled为true时必须传入 */
   Rules?: PublicAccessRule[];
+  /** 公网是否按流量计费 */
+  BillingFlow?: boolean;
 }
 
 declare interface SetRocketMQPublicAccessPointResponse {

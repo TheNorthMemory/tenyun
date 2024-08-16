@@ -104,7 +104,7 @@ declare interface CloudStorageAIServiceTask {
   DeviceName?: string;
   /** 通道 ID */
   ChannelId?: number;
-  /** 云存 AI 服务类型。可能取值：- `PackageDetect`：包裹检测- `Highlight`：视频浓缩 */
+  /** 云存 AI 服务类型。可能取值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
   ServiceType?: string;
   /** 对应云存视频的起始时间 */
   StartTime?: number;
@@ -120,6 +120,8 @@ declare interface CloudStorageAIServiceTask {
   CreateTime?: number;
   /** 最后更新时间 */
   UpdateTime?: number;
+  /** 自定义任务 ID */
+  CustomId?: string;
 }
 
 /** 云存事件 */
@@ -1567,13 +1569,13 @@ declare interface DescribeCloudStorageAIServiceRequest {
 
 declare interface DescribeCloudStorageAIServiceResponse {
   /** 云存 AI 套餐类型。可能取值：- `1`：全时套餐- `2`：事件套餐- `3`：低功耗套餐 */
-  Type?: number | null;
+  Type?: number;
   /** 云存 AI 套餐生效状态。可能取值：- `0`：未开通或已过期- `1`：生效中 */
-  Status?: number | null;
+  Status?: number;
   /** 云存 AI 套餐过期时间 UNIX 时间戳 */
-  ExpireTime?: number | null;
+  ExpireTime?: number;
   /** 用户 ID */
-  UserId?: string | null;
+  UserId?: string;
   /** 视频分析启用状态 */
   Enabled?: boolean;
   /** 视频分析配置参数 */

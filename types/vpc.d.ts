@@ -282,6 +282,10 @@ declare interface CCN {
   DirectConnectAccelerateChannelFlag?: boolean | null;
   /** 是否支持ipv6路由表 */
   Ipv6Flag?: string | null;
+  /** 是否支持路由表聚合策略 */
+  MrtbAggregatePolicyFlag?: boolean | null;
+  /** 是否支持策略值 */
+  MrtbPolicyValueFlag?: boolean | null;
 }
 
 /** 云联网（CCN）关联实例（Instance）对象 */
@@ -506,6 +510,14 @@ declare interface CcnRouteTableBroadcastPolicy {
   Action: string;
   /** 策略描述 */
   Description: string;
+  /** as-path操作 */
+  OperateAsPath?: string | null;
+  /** as-path操作模式 */
+  AsPathOperateMode?: string | null;
+  /** community操作 */
+  OperateCommunitySet?: string[] | null;
+  /** community操作模式 */
+  CommunityOperateMode?: string | null;
 }
 
 /** 云联网路由传播策略列表 */
@@ -526,6 +538,10 @@ declare interface CcnRouteTableInputPolicy {
   Action: string;
   /** 策略描述。 */
   Description: string;
+  /** as-path操作 */
+  OperateAsPath?: string | null;
+  /** as-path操作模式 */
+  AsPathOperateMode?: string | null;
 }
 
 /** 云联网路由接收策略列表 */

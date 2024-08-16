@@ -1290,12 +1290,12 @@ declare interface QrcodePositionObj {
 
 /** 二维码/条形码识别结果信息 */
 declare interface QrcodeResultsInfo {
-  /** 类型（二维码、条形码） */
-  TypeName: string;
+  /** 类型包括二维码：QR_CODE一维码：EAN-13、EAN-8、EAN-2、UPC-A、UPC-E、CODE-39、CODE-93、CODE-128 PDF：PDF_417DataMatrix：DATA_MATRIX小程序码：WX_CODE */
+  TypeName?: string;
   /** 二维码/条形码包含的地址 */
-  Url: string;
+  Url?: string;
   /** 二维码/条形码坐标 */
-  Position: QrcodePositionObj;
+  Position?: QrcodePositionObj;
 }
 
 /** 数学试题识别结构化对象 */
@@ -1552,6 +1552,16 @@ declare interface SmartFormFileUrl {
   FileUrl: string;
   /** 文件的顺序，顺序从1开始 */
   FileOrderNumber: number;
+}
+
+/** 门头照识别结果 */
+declare interface StoreInfo {
+  /** 识别出的字段名称(关键字)，支持以下字段：付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。 */
+  Name?: string;
+  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
+  Value?: string;
+  /** 文本行在旋转纠正之后的图像中的像素坐标 */
+  Rect?: Rect;
 }
 
 /** 智能结构化识别 */
@@ -2838,6 +2848,20 @@ declare interface ClassifyDetectOCRRequest {
 declare interface ClassifyDetectOCRResponse {
   /** 智能卡证分类结果。当图片类型不支持分类识别或者识别出的类型不在请求参数DiscernType指定的范围内时，返回结果中的Type字段将为空字符串，Name字段将返回"其它" */
   ClassifyDetectInfos: ClassifyDetectInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ClassifyStoreNameRequest {
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+}
+
+declare interface ClassifyStoreNameResponse {
+  /** 门头照标签 */
+  StoreLabel?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4228,6 +4252,24 @@ declare interface RecognizePhilippinesVoteIDOCRResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeStoreNameRequest {
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+}
+
+declare interface RecognizeStoreNameResponse {
+  /** 门头照名称 */
+  StoreInfo?: StoreInfo[];
+  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负 */
+  Angle?: number;
+  /** 门头照标签 */
+  StoreLabel?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeTableAccurateOCRRequest {
   /** 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片支持的像素范围：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4981,6 +5023,8 @@ declare interface Ocr {
   CarInvoiceOCR(data?: CarInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CarInvoiceOCRResponse>;
   /** 智能卡证分类 {@link ClassifyDetectOCRRequest} {@link ClassifyDetectOCRResponse} */
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
+  /** 门头照分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
+  ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
   /** 创建智慧表单文件识别任务 {@link CreateAIFormTaskRequest} {@link CreateAIFormTaskResponse} */
   CreateAIFormTask(data: CreateAIFormTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIFormTaskResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
@@ -5081,6 +5125,8 @@ declare interface Ocr {
   RecognizePhilippinesUMIDOCR(data?: RecognizePhilippinesUMIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesUMIDOCRResponse>;
   /** 菲律宾VoteID识别 {@link RecognizePhilippinesVoteIDOCRRequest} {@link RecognizePhilippinesVoteIDOCRResponse} */
   RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
+  /** 门头照识别 {@link RecognizeStoreNameRequest} {@link RecognizeStoreNameResponse} */
+  RecognizeStoreName(data?: RecognizeStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeStoreNameResponse>;
   /** 表格识别（V3） {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */
   RecognizeTableAccurateOCR(data?: RecognizeTableAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableAccurateOCRResponse>;
   /** 表格识别（V2) {@link RecognizeTableOCRRequest} {@link RecognizeTableOCRResponse} */

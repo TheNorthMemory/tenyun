@@ -568,6 +568,8 @@ declare interface TemplateGroupAction {
   ActionAttribute?: number | null;
   /** 动作类型：平台和自定义 */
   ActionType?: string | null;
+  /** 动作风险等级，1:低风险 2:中风险 3:高风险 */
+  ActionRisk?: string | null;
 }
 
 /** 经验库列表信息 */
