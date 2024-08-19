@@ -74,12 +74,14 @@ declare interface AccountPrivilege {
 declare interface AccountPrivilegeModifyInfo {
   /** 数据库用户名 */
   UserName: string;
-  /** 账号权限变更信息 */
+  /** 账号权限变更信息。参数DBPrivileges和AccAllDB只能二选一 */
   DBPrivileges: DBPrivilegeModifyInfo[];
   /** 表示是否为管理员账户，当值为true，表示是 管理员。若实例 是 单节点，则管理员所在的 账号类型为超级权限账号 ，即AccountType=L0；若实例 是 双节点，则管理员所在的 账号类型为高级权限账号，即AccountType=L1；当值为false，表示 不是管理员，则账号类型为普通账号，即AccountType=L3 */
   IsAdmin?: boolean;
   /** 账号类型，IsAdmin字段的扩展字段。 L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限，默认L3 */
   AccountType?: string;
+  /** 全量修改指定账号下的所有DB权限，只支持特殊权限账号和普通权限账号。参数DBPrivileges和AccAllDB只能二选一 */
+  AccAllDB?: SelectAllDB;
 }
 
 /** 账户备注信息 */
@@ -436,6 +438,14 @@ declare interface DBTDEEncrypt {
   DBName?: string;
   /** enable-开启数据库TDE加密，disable-关闭数据库TDE加密 */
   Encryption?: string;
+}
+
+/** 数据库账号权限变更信息 */
+declare interface DataBasePrivilegeModifyInfo {
+  /** 数据库名称 */
+  DataBaseName: string;
+  /** 数据库权限变更信息 */
+  AccountPrivileges: AccountPrivilege[];
 }
 
 /** 该数据结构表示具有发布订阅关系的两个数据库。 */
@@ -1110,6 +1120,12 @@ declare interface SecurityGroupPolicy {
   IpProtocol: string;
   /** 规则限定的方向，OUTPUT-出战规则 INPUT-进站规则 */
   Dir: string;
+}
+
+/** DB权限修改类型 */
+declare interface SelectAllDB {
+  /** 权限变更信息。ReadWrite表示可读写，ReadOnly表示只读，Delete表示删除账号对该DB的权限，DBOwner所有者 */
+  Privilege: string;
 }
 
 /** 备可用区信息 */
@@ -3880,6 +3896,20 @@ declare interface ModifyDatabaseMdfResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDatabasePrivilegeRequest {
+  /** 数据库实例ID，形如mssql-njj2mtpl */
+  InstanceId: string;
+  /** 数据库权限变更信息 */
+  DataBaseSet: DataBasePrivilegeModifyInfo[];
+}
+
+declare interface ModifyDatabasePrivilegeResponse {
+  /** 异步任务流程ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDatabaseShrinkMDFRequest {
   /** 数据库名数组 */
   DBNames: string[];
@@ -4593,6 +4623,8 @@ declare interface Sqlserver {
   ModifyDatabaseCT(data: ModifyDatabaseCTRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseCTResponse>;
   /** 收缩数据库mdf (已废弃） {@link ModifyDatabaseMdfRequest} {@link ModifyDatabaseMdfResponse} */
   ModifyDatabaseMdf(data: ModifyDatabaseMdfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseMdfResponse>;
+  /** 修改实例数据库权限 {@link ModifyDatabasePrivilegeRequest} {@link ModifyDatabasePrivilegeResponse} */
+  ModifyDatabasePrivilege(data: ModifyDatabasePrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabasePrivilegeResponse>;
   /** 收缩数据库mdf {@link ModifyDatabaseShrinkMDFRequest} {@link ModifyDatabaseShrinkMDFResponse} */
   ModifyDatabaseShrinkMDF(data: ModifyDatabaseShrinkMDFRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseShrinkMDFResponse>;
   /** 修改增量备份导入任务 {@link ModifyIncrementalMigrationRequest} {@link ModifyIncrementalMigrationResponse} */

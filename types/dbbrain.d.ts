@@ -838,6 +838,34 @@ declare interface SlowLogUser {
   Count?: number;
 }
 
+/** 会话统计的维度信息,可以多个维度 */
+declare interface StatDimension {
+  /** 维度名称，目前仅支持：SqlTag。 */
+  Dimension: string;
+  /** SQL 标签过滤与统计信息示例：示例 1：[p=position] 统计包含 p=position 标签的 SQL 会话。示例 2：[p] 统计包含 p 标签的 SQL 会话。示例 3：[p=position, c=idCard] 统计同时包含 p=position 标签和 c=idCard 标签的 SQL 会话。 */
+  Data?: string[];
+}
+
+/** 统计分析维度下的统计数据详情 */
+declare interface StatisticDataInfo {
+  /** 统计维度的值。 */
+  Name?: string | null;
+  /** 平均时间。 */
+  TimeAvg?: number | null;
+  /** 总时间。 */
+  TimeSum?: number | null;
+  /** 数量。 */
+  Count?: number | null;
+}
+
+/** sql会话统计信息 */
+declare interface StatisticInfo {
+  /** 统计分析的维度。 */
+  Dimension?: string | null;
+  /** 统计分析的维度下的统计数据详情。 */
+  Data?: StatisticDataInfo[] | null;
+}
+
 /** 表结构。 */
 declare interface Table {
   /** 库名。 */
@@ -1637,11 +1665,15 @@ declare interface DescribeMySqlProcessListRequest {
   Limit?: number;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
   Product?: string;
+  /** 会话统计的维度信息,可以多个维度。 */
+  StatDimensions?: StatDimension[];
 }
 
 declare interface DescribeMySqlProcessListResponse {
   /** 实时线程列表。 */
-  ProcessList: MySqlProcess[];
+  ProcessList?: MySqlProcess[];
+  /** sql会话统计信息。 */
+  Statistics?: StatisticInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

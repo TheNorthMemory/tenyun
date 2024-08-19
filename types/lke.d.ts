@@ -172,6 +172,8 @@ declare interface Coord {
 declare interface CreateReconstructDocumentFlowConfig {
   /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为1 */
   TableResultType?: string;
+  /** 智能文档解析返回结果的格式0：只返回全文MD；1：只返回每一页的OCR原始Json；2：只返回每一页的MD，3：返回全文MD + 每一页的OCR原始Json；4：返回全文MD + 每一页的MD，默认值为3（返回全文MD + 每一页的OCR原始Json） */
+  ResultType?: string;
 }
 
 /** 临时密钥结构 */

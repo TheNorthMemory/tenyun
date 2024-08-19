@@ -1606,6 +1606,28 @@ declare interface DescribeSqlApisResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTableListRequest {
+  /** 资源ID，建表所用的TCHouse-D资源ID。 */
+  InstanceId: string;
+  /** 需要获取表列表的库 */
+  DbName: string;
+  /** 使用该用户进行操作，该用户需要有对应的权限。如果该TCHouse-D集群使用CAM用户注册内核账户，则不需要填写 */
+  UserName?: string;
+  /** 用户对应的密码。如果该TCHouse-D集群使用CAM用户注册内核账户，则不需要填写 */
+  PassWord?: string;
+  /** 查询库所在的数据源，不填则默认为内部数据源（internal）。 */
+  CatalogName?: string;
+}
+
+declare interface DescribeTableListResponse {
+  /** 表名列表 */
+  TableNames?: string[] | null;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserBindWorkloadGroupRequest {
   /** 集群id */
   InstanceId?: string;
@@ -2063,6 +2085,8 @@ declare interface Cdwdoris {
   DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
   /** 通过sql查询集群信息 {@link DescribeSqlApisRequest} {@link DescribeSqlApisResponse} */
   DescribeSqlApis(data?: DescribeSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlApisResponse>;
+  /** 获取表列表 {@link DescribeTableListRequest} {@link DescribeTableListResponse} */
+  DescribeTableList(data: DescribeTableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableListResponse>;
   /** 获取用户绑定的资源组信息 {@link DescribeUserBindWorkloadGroupRequest} {@link DescribeUserBindWorkloadGroupResponse} */
   DescribeUserBindWorkloadGroup(data?: DescribeUserBindWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserBindWorkloadGroupResponse>;
   /** 获取资源组信息 {@link DescribeWorkloadGroupRequest} {@link DescribeWorkloadGroupResponse} */

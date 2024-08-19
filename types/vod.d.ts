@@ -4694,12 +4694,14 @@ declare interface RoundPlayInfo {
   Url?: string;
 }
 
-/** 轮播媒体文件信息 */
+/** 轮播播放节目信息 */
 declare interface RoundPlayListItemInfo {
   /** 媒体文件标识。 */
   FileId: string;
   /** 播放的音视频类型，可选值：Transcode：转码输出；转码输出会有多个模版，必须指定 Definition 字段Original：原始音视频。Type 对应的格式必须为 HLS 格式。 */
   AudioVideoType: string;
+  /** 播放节目的 ID，由系统分配。 */
+  ItemId?: string;
   /** 指定播放的转码模版，当 AudioVideoType 为 Transcode 时必须指定。 */
   Definition?: number;
 }
@@ -7623,19 +7625,29 @@ declare interface DescribeReviewTemplatesResponse {
 declare interface DescribeRoundPlaysRequest {
   /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
   SubAppId?: number;
-  /** 轮播播单标识过滤条件，数组长度限制：100。 */
+  /** 过滤条件：轮播播单标识，数组长度限制：100。 */
   RoundPlayIds?: string[];
-  /** 分页偏移量，默认值：0。 */
+  /** 过滤条件，轮播播单状态，可选值： Enabled：启动状态； Disabled：停止状态。 */
+  Status?: string;
+  /** 过滤条件：轮播播单创建时间。 */
+  CreateTime?: TimeRange;
+  /** 过滤条件：轮播播单更新时间。 */
+  UpdateTime?: TimeRange;
+  /** 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。 */
+  ScrollToken?: string;
+  /** 分页偏移量，默认值：0。已经废弃，请根据 ScrollToken 参数进行分批次查询。 */
   Offset?: number;
   /** 返回记录条数，默认值：10，最大值：100。 */
   Limit?: number;
 }
 
 declare interface DescribeRoundPlaysResponse {
-  /** 符合过滤条件的轮播播单总数。 */
+  /** 符合过滤条件的轮播播单总数。已经废弃，分批次查询请请使用 ScrollToken 参数。 */
   TotalCount?: number;
   /** 轮播播单详情列表。 */
   RoundPlaySet?: RoundPlayInfo[];
+  /** 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。 */
+  ScrollToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8715,7 +8727,7 @@ declare interface ModifyRoundPlayRequest {
   Name?: string;
   /** 轮播播单描述信息，长度限制：256 个字符。 */
   Desc?: string;
-  /** 播放状态，可选值：Disabled：结束播放，结束后轮播任务不能再次启动。 */
+  /** 播放状态，可选值：Disabled：停止播放。Enabled：启播时长到达后启动播放。 */
   Status?: string;
   /** 播放模式，可选值：Loop：循环播放播单；Linear：单次播放，播单播放完停止播放。 */
   PlayBackMode?: string;
