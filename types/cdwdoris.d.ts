@@ -176,6 +176,40 @@ declare interface ConfigKeyValue {
   SupportHotUpdate?: number | null;
 }
 
+/** 冷热分层backend节点信息 */
+declare interface CoolDownBackend {
+  /** 字段：Host */
+  Host?: string | null;
+  /** 字段：DataUsedCapacity */
+  DataUsedCapacity?: string | null;
+  /** 字段：TotalCapacity */
+  TotalCapacity?: string | null;
+  /** 字段：RemoteUsedCapacity */
+  RemoteUsedCapacity?: string | null;
+}
+
+/** 冷热分层策略 */
+declare interface CoolDownPolicyInfo {
+  /** 策略名称 */
+  PolicyName?: string | null;
+  /** cooldown_ttl */
+  CooldownDatetime?: string | null;
+  /** cooldown_datetime */
+  CooldownTtl?: string | null;
+}
+
+/** 冷热分层Table数据信息 */
+declare interface CoolDownTableDataInfo {
+  /** 列：DatabaseName */
+  DatabaseName?: string | null;
+  /** 列：TableName */
+  TableName?: string | null;
+  /** 列：Size */
+  Size?: string | null;
+  /** 列：RemoteSize */
+  RemoteSize?: string | null;
+}
+
 /** 客户提供cos认证信息。 */
 declare interface CosSourceInfo {
   /** cos认证中的Id */
@@ -224,16 +258,6 @@ declare interface DataBaseAuditRecord {
   SqlType?: string | null;
   /** catalog名称 */
   Catalog?: string | null;
-}
-
-/** 展示doris监控指标请求入参 */
-declare interface DescribeMetricsFileReq {
-  /** 集群类型 */
-  InstanceType: string;
-  /** 指标类型 */
-  MetricType?: string;
-  /** 是否关注 */
-  IfAttention?: number;
 }
 
 /** 磁盘规格描述 */
@@ -438,26 +462,6 @@ declare interface InstanceOperation {
   OperationDetail?: string;
 }
 
-/** 用户是否关注监控指标入参 */
-declare interface ModifyMetricFileStruct {
-  /** 唯一id */
-  Id: number;
-  /** 是否关注 */
-  IfAttention?: string;
-}
-
-/** doris监控指标关注（取消关注）功能入参 */
-declare interface ModifyMetricFileStructNew {
-  /** 集群类型 */
-  InstanceType?: string;
-  /** 指标类型 */
-  MetricType?: string;
-  /** 指标英文名 */
-  Name?: string;
-  /** 1：关注0：取消关注 */
-  IfAttention?: number;
-}
-
 /** 网络信息 */
 declare interface NetworkInfo {
   /** 可用区 */
@@ -560,34 +564,6 @@ declare interface RegionInfo {
   IsInternationalSite?: number | null;
   /** 桶 */
   Bucket?: string | null;
-}
-
-/** 集群内节点的规格磁盘规格描述 */
-declare interface ResourceNodeDiskSpec {
-  /** 节点磁盘类型，例如“CLOUD_SSD”\"CLOUD_PREMIUM" */
-  DiskType?: string;
-  /** 磁盘容量，单位G */
-  DiskSize?: number;
-  /** 磁盘总数 */
-  DiskCount?: number;
-}
-
-/** 集群内节点的规格描述 */
-declare interface ResourceNodeSpec {
-  /** 节点类型，“DATA"数据节点，”COMMON" zookeeper节点 */
-  Type: string;
-  /** 节点规格名称，例如 “SCH1","SCH2”等 */
-  SpecName: string;
-  /** 节点数目 */
-  Count: number;
-  /** 磁盘规格描述 */
-  DiskSpec?: ResourceNodeDiskSpec | null;
-  /** 云盘是否加密，0不加密/1加密 默认为0 */
-  Encrypt?: number | null;
-  /** 额外信息 */
-  Extra?: SpecExtra | null;
-  /** 挂载云盘信息 */
-  AttachCBSSpec?: ResourceNodeDiskSpec | null;
 }
 
 /** 资源规格描述信息 */
@@ -708,14 +684,6 @@ declare interface SlowQueryRecord {
   DurationSec?: number | null;
 }
 
-/** 额外参数 */
-declare interface SpecExtra {
-  /** 要删除的shards */
-  DelShards?: string;
-  /** 要删除的节点uip */
-  DelHosts?: string;
-}
-
 /** 标签描述 */
 declare interface Tag {
   /** 标签的键 */
@@ -736,14 +704,6 @@ declare interface UserWorkloadGroup {
   UserName?: string | null;
   /** normal */
   WorkloadGroupName?: string | null;
-}
-
-/** 检查doris内核是否支持新语法。 */
-declare interface VersionReplicaItem {
-  /** 版本描述 */
-  ReplicaFlag: number | null;
-  /** 错误信息 */
-  ErrorMsg: string | null;
 }
 
 /** 资源组相关配置 */
@@ -786,6 +746,18 @@ declare interface CancelBackupJobResponse {
   RequestId?: string;
 }
 
+declare interface CheckCoolDownWorkingVariableConfigCorrectRequest {
+  /** 集群id */
+  InstanceId?: string;
+}
+
+declare interface CheckCoolDownWorkingVariableConfigCorrectResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBackUpScheduleRequest {
   /** 编辑时需要传 */
   ScheduleId?: number;
@@ -810,6 +782,24 @@ declare interface CreateBackUpScheduleRequest {
 }
 
 declare interface CreateBackUpScheduleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCoolDownPolicyRequest {
+  /** 集群id */
+  InstanceId?: string;
+  /** 策略名称 */
+  PolicyName?: string;
+  /** cooldown_ttl */
+  CoolDownTtl?: string;
+  /** cooldown_datetime */
+  CoolDownDatetime?: string;
+}
+
+declare interface CreateCoolDownPolicyResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1040,6 +1030,50 @@ declare interface DescribeClusterConfigsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCoolDownBackendsRequest {
+  /** 集群id */
+  InstanceId?: string;
+}
+
+declare interface DescribeCoolDownBackendsResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 节点信息列表 */
+  List?: CoolDownBackend[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCoolDownPoliciesRequest {
+  /** 集群id */
+  InstanceId?: string;
+}
+
+declare interface DescribeCoolDownPoliciesResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 冷热分层策略列表 */
+  List?: CoolDownPolicyInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCoolDownTableDataRequest {
+  /** 集群id */
+  InstanceId?: string;
+  /** 数据库名称 */
+  DatabaseName?: string;
+}
+
+declare interface DescribeCoolDownTableDataResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 冷热分层Table数据列表 */
+  List?: CoolDownTableDataInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDatabaseAuditDownloadRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1114,168 +1148,6 @@ declare interface DescribeDatabaseAuditRecordsResponse {
   TotalCount?: number;
   /** 记录列表 */
   SlowQueryRecords?: DataBaseAuditRecord;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDatabaseAuditResourceRequest {
-  /** 实例ID */
-  InstanceId: string;
-}
-
-declare interface DescribeDatabaseAuditResourceResponse {
-  /** 数据库列表 */
-  Databases?: string[];
-  /** 用户列表 */
-  Users?: string[];
-  /** sql类型列表 */
-  SqlTypes?: string[];
-  /** catalog字段 */
-  Catalogs?: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDmsSqlHistoryRequest {
-  /** 查询节点ip */
-  QueryNode?: string[];
-  /** 运行状态 */
-  QueryStatus?: string[];
-  /** 模糊搜索sql */
-  QuerySql?: string;
-  /** 根据报错原因搜索 */
-  QueryErrMsg?: string;
-}
-
-declare interface DescribeDmsSqlHistoryResponse {
-  /** 集群所有的查询节点 */
-  QueryNodeList?: string[];
-  /** 集群所有的查询状态 */
-  QueryStatusList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDorisMetricFilesRequest {
-  /** 接口类型 */
-  ApiType: string;
-  /** 集群id */
-  InstanceId: string;
-  /** 展示监控指标入参 */
-  DescribeMetricsFileReq?: DescribeMetricsFileReq;
-  /** 点关注功能入参 */
-  ModifyMetricFileReq?: ModifyMetricFileStruct;
-  /** 监控指标关注功能入参 */
-  ModifyAttentionMetricFileReq?: ModifyMetricFileStructNew;
-}
-
-declare interface DescribeDorisMetricFilesResponse {
-  /** ErrorMsg */
-  ErrorMsg?: string | null;
-  /** 返回数据 */
-  ReturnData?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeFederationTokenRequest {
-}
-
-declare interface DescribeFederationTokenResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeFrontEndRequest {
-  /** 实例id */
-  InstanceId?: string;
-  /** 文件类型 */
-  ConfigType?: string;
-  /** 参数1 */
-  Param1?: string;
-  /** 参数2 */
-  Param2?: string;
-  /** 参数3 */
-  Param3?: string;
-  /** 参数4 */
-  Param4?: string;
-  /** 参数5 */
-  Param5?: string;
-}
-
-declare interface DescribeFrontEndResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeGoodsDetailRequest {
-  /** 操作类型，“CREATE"表示创建、”MODIFY"表示变更配置、“RENEW"表示续费 */
-  Case: string;
-  /** 可用区，例如"ap-guangzhou-3"表示广州三区等 */
-  Zone?: string;
-  /** 集群的高可用标记，true表示为高可用集群 */
-  HaFlag?: boolean;
-  /** 高可用类型： 0：非高可用 1：读高可用 2：读写高可用。 */
-  HaType?: number;
-  /** 用户集群的私有网络 */
-  UserVPCId?: string;
-  /** 用户集群的子网 */
-  UserSubnetId?: string;
-  /** 用户集群的版本，例如“20.7.2.30”等 */
-  ProductVersion?: string;
-  /** 集群ID，创建时为空，其他情况必须存在 */
-  InstanceId?: string;
-  /** 集群资源规格描述 */
-  Resources?: ResourceNodeSpec[];
-  /** 集群规格修改参数 */
-  ModifySpec?: ResourceNodeSpec;
-  /** 计费信息 */
-  ChargeProperties?: ChargeProperties;
-  /** 创建集群时需要填写InstanceName */
-  InstanceName?: string;
-  /** 购买页填写的标签列表 */
-  Tags?: Tag[];
-  /** CLS日志集ID */
-  ClsLogSetId?: string;
-  /** 用户子网剩余ip数量 */
-  UserSubnetIPNum?: number;
-  /** COS桶名称 */
-  CosBucketName?: string;
-  /** 按量计费转包年包月 */
-  HourToPrepaid?: boolean;
-  /** base64密码 */
-  DorisUserPwd?: string;
-  /** 日志的类型，es或者cls_topic */
-  LogType?: string;
-  /** 表名大小写是否敏感，0：敏感；1：不敏感，表名改为以小写存储；2：不敏感，以小写进行比较 */
-  CaseSensitive?: number;
-  /** true为滚动重启 false为批量重启 */
-  RollingRestart?: boolean;
-  /** 是否为多可用区 */
-  EnableMultiZones?: boolean;
-  /** 用户多可用区的网络信息 */
-  UserMultiZoneInfos?: NetworkInfo[];
-  /** 扩展字段 */
-  Details?: InstanceDetail;
-}
-
-declare interface DescribeGoodsDetailResponse {
-  /** GoodsDetail对象 */
-  GoodsDetail?: string;
-  /** GoodsCategoryId 表示操作类型 */
-  GoodsCategoryId?: number;
-  /** 子商品码 */
-  Type?: string;
-  /** 付费模式，0后付费，1预付费 */
-  PayMode?: number;
-  /** 地域ID */
-  RegionId?: number;
-  /** 可用区ID */
-  ZoneId?: number;
-  /** 资源标识符 */
-  ResourceId?: string;
-  /** 商品数目 */
-  GoodsNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1442,36 +1314,6 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number;
   /** 实例数组 */
   InstancesList?: InstanceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeRegionZoneRequest {
-  /** 服务 */
-  Service?: string;
-  /** 是否是国际站 */
-  IsInternationalSite?: boolean;
-}
-
-declare interface DescribeRegionZoneResponse {
-  /** 地域列表 */
-  Items?: RegionAreaInfo[];
-  /** 内核版本列表 */
-  Versions?: string[];
-  /** 网络规则 */
-  VpcRule?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeReplicaVersionRequest {
-  /** 实例id */
-  InstanceId: string;
-}
-
-declare interface DescribeReplicaVersionResponse {
-  /** 是否支持新语法 */
-  ReplicaFlagItem: VersionReplicaItem | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1674,20 +1516,20 @@ declare interface DestroyInstanceResponse {
   RequestId?: string;
 }
 
-declare interface FitClsLogRequest {
-  /** 集群ID，例如cdwch-xxxx */
-  InstanceId: string;
-  /** cls日志集ID */
-  ClsLogSetId: string;
-  /** 日志的类型，es还是cls_topic */
-  LogType?: string;
+declare interface ModifyCoolDownPolicyRequest {
+  /** 集群id */
+  InstanceId?: string;
+  /** 策略名称 */
+  PolicyName?: string;
+  /** cooldown_ttl */
+  CoolDownTtl?: string;
+  /** cooldown_datetime */
+  CoolDownDatetime?: string;
 }
 
-declare interface FitClsLogResponse {
-  /** 流程相关信息 */
-  FlowId?: number;
+declare interface ModifyCoolDownPolicyResponse {
   /** 错误信息 */
-  ErrorMsg?: string;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1836,16 +1678,40 @@ declare interface ModifyWorkloadGroupStatusResponse {
   RequestId?: string;
 }
 
-declare interface OpenBackUpRequest {
-  /** 集群id */
-  InstanceId: string;
-  /** 取值：open:打开close:关闭updateBucket:变更桶名 */
-  OperationType: string;
-  /** 桶名字 */
-  CosBucketName: string;
+declare interface OpenCoolDownPolicyRequest {
+  /** 实例id */
+  InstanceId?: string;
+  /** db名称 */
+  DatabaseName?: string;
+  /** table名称 */
+  TableName?: string;
+  /** 操作类型 */
+  OperationType?: string;
+  /** 逗号分隔 需要带上db的名字 db1.tb1,db1.tb2,db2.tb1 */
+  BatchOpenCoolDownTables?: string;
+  /** 绑定的时候用 策略名称 */
+  PolicyName?: string;
+  /** 逗号分隔 p1,p2,p3 */
+  BatchOpenCoolDownPartitions?: string;
 }
 
-declare interface OpenBackUpResponse {
+declare interface OpenCoolDownPolicyResponse {
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 返回信息 */
+  QueryDocument?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenCoolDownRequest {
+  /** 集群id */
+  InstanceId?: string;
+}
+
+declare interface OpenCoolDownResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2006,13 +1872,33 @@ declare interface ScaleUpInstanceResponse {
   RequestId?: string;
 }
 
+declare interface UpdateCoolDownRequest {
+  /** 集群id */
+  InstanceId?: string;
+  /** 是否启用 0：不启用 1：启用 */
+  Enable?: number;
+  /** 用户存放冷热分层数据Cos桶地址 */
+  Bucket?: string;
+}
+
+declare interface UpdateCoolDownResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
 declare interface Cdwdoris {
   (): Versions;
   /** 取消备份实例 {@link CancelBackupJobRequest} {@link CancelBackupJobResponse} */
   CancelBackupJob(data: CancelBackupJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBackupJobResponse>;
+  /** 检查冷热分层生效变量和配置是否正确 {@link CheckCoolDownWorkingVariableConfigCorrectRequest} {@link CheckCoolDownWorkingVariableConfigCorrectResponse} */
+  CheckCoolDownWorkingVariableConfigCorrect(data?: CheckCoolDownWorkingVariableConfigCorrectRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCoolDownWorkingVariableConfigCorrectResponse>;
   /** 创建或者修改备份策略 {@link CreateBackUpScheduleRequest} {@link CreateBackUpScheduleResponse} */
   CreateBackUpSchedule(data?: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
+  /** 创建冷热分层策略 {@link CreateCoolDownPolicyRequest} {@link CreateCoolDownPolicyResponse} */
+  CreateCoolDownPolicy(data?: CreateCoolDownPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCoolDownPolicyResponse>;
   /** 集群创建 {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
   /** 创建资源组 {@link CreateWorkloadGroupRequest} {@link CreateWorkloadGroupResponse} */
@@ -2037,22 +1923,16 @@ declare interface Cdwdoris {
   DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
   /** 获取集群配置文件修改历史 {@link DescribeClusterConfigsHistoryRequest} {@link DescribeClusterConfigsHistoryResponse} */
   DescribeClusterConfigsHistory(data: DescribeClusterConfigsHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsHistoryResponse>;
+  /** 查询冷热分层backend节点信息列表 {@link DescribeCoolDownBackendsRequest} {@link DescribeCoolDownBackendsResponse} */
+  DescribeCoolDownBackends(data?: DescribeCoolDownBackendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCoolDownBackendsResponse>;
+  /** 查询冷热分层策略列表 {@link DescribeCoolDownPoliciesRequest} {@link DescribeCoolDownPoliciesResponse} */
+  DescribeCoolDownPolicies(data?: DescribeCoolDownPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCoolDownPoliciesResponse>;
+  /** 查询冷热分层Table数据 {@link DescribeCoolDownTableDataRequest} {@link DescribeCoolDownTableDataResponse} */
+  DescribeCoolDownTableData(data?: DescribeCoolDownTableDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCoolDownTableDataResponse>;
   /** 下载数据库审计日志 {@link DescribeDatabaseAuditDownloadRequest} {@link DescribeDatabaseAuditDownloadResponse} */
   DescribeDatabaseAuditDownload(data: DescribeDatabaseAuditDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditDownloadResponse>;
   /** 获取数据库审计记录 {@link DescribeDatabaseAuditRecordsRequest} {@link DescribeDatabaseAuditRecordsResponse} */
   DescribeDatabaseAuditRecords(data: DescribeDatabaseAuditRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditRecordsResponse>;
-  /** 数据库审计数据库、用户等 {@link DescribeDatabaseAuditResourceRequest} {@link DescribeDatabaseAuditResourceResponse} */
-  DescribeDatabaseAuditResource(data: DescribeDatabaseAuditResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAuditResourceResponse>;
-  /** 查询sql工作区历史运行记录 {@link DescribeDmsSqlHistoryRequest} {@link DescribeDmsSqlHistoryResponse} */
-  DescribeDmsSqlHistory(data?: DescribeDmsSqlHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDmsSqlHistoryResponse>;
-  /** 展示监控指标文件 {@link DescribeDorisMetricFilesRequest} {@link DescribeDorisMetricFilesResponse} */
-  DescribeDorisMetricFiles(data: DescribeDorisMetricFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDorisMetricFilesResponse>;
-  /** 新获取联合身份临时访问凭证 {@link DescribeFederationTokenRequest} {@link DescribeFederationTokenResponse} */
-  DescribeFederationToken(data?: DescribeFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFederationTokenResponse>;
-  /** 查询前端信息 {@link DescribeFrontEndRequest} {@link DescribeFrontEndResponse} */
-  DescribeFrontEnd(data?: DescribeFrontEndRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFrontEndResponse>;
-  /** 生成GoodsDetail {@link DescribeGoodsDetailRequest} {@link DescribeGoodsDetailResponse} */
-  DescribeGoodsDetail(data: DescribeGoodsDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGoodsDetailResponse>;
   /** 获取集群描述信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取集群节点信息列表 {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
@@ -2071,10 +1951,6 @@ declare interface Cdwdoris {
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 集群健康检查 {@link DescribeInstancesHealthStateRequest} {@link DescribeInstancesHealthStateResponse} */
   DescribeInstancesHealthState(data?: DescribeInstancesHealthStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesHealthStateResponse>;
-  /** 获取地域及可用区列表 {@link DescribeRegionZoneRequest} {@link DescribeRegionZoneResponse} */
-  DescribeRegionZone(data?: DescribeRegionZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionZoneResponse>;
-  /** 检查内核版本 {@link DescribeReplicaVersionRequest} {@link DescribeReplicaVersionResponse} */
-  DescribeReplicaVersion(data: DescribeReplicaVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicaVersionResponse>;
   /** 查询恢复任务进度详情 {@link DescribeRestoreTaskDetailRequest} {@link DescribeRestoreTaskDetailResponse} */
   DescribeRestoreTaskDetail(data: DescribeRestoreTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRestoreTaskDetailResponse>;
   /** 获取慢查询列表 {@link DescribeSlowQueryRecordsRequest} {@link DescribeSlowQueryRecordsResponse} */
@@ -2093,8 +1969,8 @@ declare interface Cdwdoris {
   DescribeWorkloadGroup(data: DescribeWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkloadGroupResponse>;
   /** 集群销毁 {@link DestroyInstanceRequest} {@link DestroyInstanceResponse} */
   DestroyInstance(data: DestroyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstanceResponse>;
-  /** 新增日志服务接口 {@link FitClsLogRequest} {@link FitClsLogResponse} */
-  FitClsLog(data: FitClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<FitClsLogResponse>;
+  /** 修改冷热分层策略 {@link ModifyCoolDownPolicyRequest} {@link ModifyCoolDownPolicyResponse} */
+  ModifyCoolDownPolicy(data?: ModifyCoolDownPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCoolDownPolicyResponse>;
   /** 修改集群名称 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
   /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
@@ -2111,8 +1987,10 @@ declare interface Cdwdoris {
   ModifyWorkloadGroup(data: ModifyWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkloadGroupResponse>;
   /** 开启、关闭资源组 {@link ModifyWorkloadGroupStatusRequest} {@link ModifyWorkloadGroupStatusResponse} */
   ModifyWorkloadGroupStatus(data: ModifyWorkloadGroupStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkloadGroupStatusResponse>;
-  /** 开启或者关闭策略 {@link OpenBackUpRequest} {@link OpenBackUpResponse} */
-  OpenBackUp(data: OpenBackUpRequest, config?: AxiosRequestConfig): AxiosPromise<OpenBackUpResponse>;
+  /** 开始启用冷热分层 {@link OpenCoolDownRequest} {@link OpenCoolDownResponse} */
+  OpenCoolDown(data?: OpenCoolDownRequest, config?: AxiosRequestConfig): AxiosPromise<OpenCoolDownResponse>;
+  /** 冷热策略开启相关功能 {@link OpenCoolDownPolicyRequest} {@link OpenCoolDownPolicyResponse} */
+  OpenCoolDownPolicy(data?: OpenCoolDownPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<OpenCoolDownPolicyResponse>;
   /** 备份恢复 {@link RecoverBackUpJobRequest} {@link RecoverBackUpJobResponse} */
   RecoverBackUpJob(data: RecoverBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverBackUpJobResponse>;
   /** 集群缩容 {@link ReduceInstanceRequest} {@link ReduceInstanceResponse} */
@@ -2127,6 +2005,8 @@ declare interface Cdwdoris {
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
   /** 计算资源垂直变配 {@link ScaleUpInstanceRequest} {@link ScaleUpInstanceResponse} */
   ScaleUpInstance(data: ScaleUpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpInstanceResponse>;
+  /** 更新集群冷热分层信息 {@link UpdateCoolDownRequest} {@link UpdateCoolDownResponse} */
+  UpdateCoolDown(data?: UpdateCoolDownRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCoolDownResponse>;
 }
 
 export declare type Versions = ["2021-12-28"];

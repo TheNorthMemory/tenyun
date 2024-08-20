@@ -540,9 +540,9 @@ declare interface AiParagraphInfo {
   EndTimeOffset?: number | null;
 }
 
-/** 视频质检输入参数类型 */
+/** 媒体质检输入参数类型 */
 declare interface AiQualityControlTaskInput {
-  /** 媒体质检模板 ID 。暂时可以直接使用 预设模板ID 10，后面控制台支持用户配置自定义模板。 */
+  /** 媒体质检模板 ID 。可以直接使用预设模板，也可以在控制台自定义模板。预设模板如下：- 10：开启所有质检项；- 20：仅开启格式诊断对应质检项；- 30：仅开启无参考打分对应质检项；- 40：仅开启画面质量对应质检项。 */
   Definition?: number | null;
   /** 渠道扩展参数json序列化字符串。 */
   ChannelExtPara?: string | null;
@@ -2292,9 +2292,9 @@ declare interface DescribeRTSPPullSourceAddress {
 
 /** 诊断结果项。 */
 declare interface DiagnoseResult {
-  /** 诊断出的异常类别。 */
+  /** 诊断出的异常类别，取值范围：DecodeParamException：解码参数异常TimeStampException：时间戳异常FrameException： 帧率异常StreamStatusException：流状态异常StreamInfo：流信息异常StreamAbnormalCharacteristics：流特征异常DecodeException：解码异常HLSRequirements：HLS 格式异常 */
   Category?: string | null;
-  /** 诊断出的具体异常类型。 */
+  /** 诊断出的具体异常类型，取值如下：VideoResolutionChanged：视频分辨率变化AudioSampleRateChanged：音频采样率变化AudioChannelsChanged：音频通道数变化ParameterSetsChanged：流参数集信息发生变化DarOrSarInvalid：视频的宽高比异常TimestampFallback：DTS时间戳回退DtsJitter：DTS抖动过大PtsJitter：PTS抖动过大AACDurationDeviation：AAC帧时间戳间隔不合理AudioDroppingFrames：音频丢帧VideoDroppingFrames：视频丢帧AVTimestampInterleave：音视频交织不合理PtsLessThanDts：媒体流的 pts 小于 dtsReceiveFpsJitter：网络接收帧率抖动过大ReceiveFpsTooSmall：网络接收视频帧率过小FpsJitter：通过PTS计算得到的流帧率抖动过大StreamOpenFailed：流打开失败StreamEnd：流结束StreamParseFailed：流解析失败VideoFirstFrameNotIdr：首帧不是IDR帧StreamNALUError：NALU起始码错误TsStreamNoAud：mpegts的H26x流缺失 AUD NALUAudioStreamLack：无音频流VideoStreamLack：无视频流LackAudioRecover：缺失音频流恢复LackVideoRecover：缺失视频流恢复VideoBitrateOutofRange：视频流码率(kbps)超出范围AudioBitrateOutofRange：音频流码率(kbps)超出范围VideoDecodeFailed：视频解码错误AudioDecodeFailed：音频解码错误AudioOutOfPhase：双通道音频相位相反VideoDuplicatedFrame：视频流中存在重复帧AudioDuplicatedFrame：音频流中存在重复帧VideoRotation：视频画面旋转TsMultiPrograms：MPEG2-TS流有多个programMp4InvalidCodecFourcc：MP4中codec fourcc不符合Apple HLS要求HLSBadM3u8Format：无效的m3u8文件HLSInvalidMasterM3u8：无效的main m3u8文件HLSInvalidMediaM3u8：无效的media m3u8文件HLSMasterM3u8Recommended：main m3u8缺少标准推荐的参数HLSMediaM3u8Recommended：media m3u8缺少标准推荐的参数HLSMediaM3u8DiscontinuityExist：media m3u8存在EXT-X-DISCONTINUITYHLSMediaSegmentsStreamNumChange：切片的流数目发生变化HLSMediaSegmentsPTSJitterDeviation：切片间PTS跳变且没有EXT-X-DISCONTINUITYHLSMediaSegmentsDTSJitterDeviation：切片间DTS跳变且没有EXT-X-DISCONTINUITYTimecodeTrackExist：MP4存在tmcd轨道 */
   Type?: string | null;
   /** 诊断出异常开始的PTS时间戳。 */
   Timestamp?: number | null;
@@ -2302,7 +2302,7 @@ declare interface DiagnoseResult {
   Description?: string | null;
   /** 诊断到异常的北京时间，采用 ISO 日期格式。 */
   DateTime?: string | null;
-  /** 诊断出的异常级别。 */
+  /** 诊断出的异常级别，取值范围：Fatal：影响后续播放和解析，Error： 可能会影响播放，Warning： 可能会有潜在风险，但不一定会影响播放，Notice：比较重要的流信息，Info：一般性的流信息。 */
   SeverityLevel?: string | null;
 }
 
@@ -2864,12 +2864,16 @@ declare interface LiveStreamAiAnalysisResultItem {
   SegmentResultSet: SegmentRecognitionItem[] | null;
 }
 
-/** 直播流质检结果 */
+/** 直播流媒体质检结果 */
 declare interface LiveStreamAiQualityControlResultInfo {
-  /** 质检结果列表。 */
-  QualityControlResults: QualityControlResult[] | null;
+  /** 内容质检结果列表。 */
+  QualityControlResults?: QualityControlResult[] | null;
   /** 格式诊断结果列表。 */
   DiagnoseResults?: DiagnoseResult[] | null;
+  /** 内容质检结果列表。 */
+  QualityControlResultSet?: QualityControlResult[] | null;
+  /** 格式诊断结果列表。 */
+  DiagnoseResultSet?: DiagnoseResult[] | null;
 }
 
 /** 直播流 AI 识别结果 */
@@ -4060,17 +4064,17 @@ declare interface QualityControlItem {
 
 /** 质检项配置 */
 declare interface QualityControlItemConfig {
-  /** 质检项名称。 */
+  /** 质检项名称。质检项取值如下：LowEvaluation：无参考打分Mosaic：马赛克检测CrashScreen：花屏检测VideoFreezedFrame：视频冻结Blur：模糊检测BlackWhiteEdge：黑白边检测SolidColorScreen：纯色屏检测LowLighting：低光照HighLighting：过曝NoVoice：静音检测LowVoice：低音检测HighVoice：爆音检测Jitter：抖动检测Noise：噪点检测QRCode：二维码检测BarCode：条形码检测AppletCode：小程序码检测VideoResolutionChanged：视频分辨率变化AudioSampleRateChanged：音频采样率变化AudioChannelsChanged：音频通道数变化ParameterSetsChanged：流参数集信息发生变化DarOrSarInvalid：视频的宽高比异常TimestampFallback：DTS时间戳回退DtsJitter：DTS抖动过大PtsJitter：PTS抖动过大AACDurationDeviation：AAC帧时间戳间隔不合理AudioDroppingFrames：音频丢帧VideoDroppingFrames：视频丢帧AVTimestampInterleave：音视频交织不合理PtsLessThanDts：媒体流的 pts 小于 dtsReceiveFpsJitter：网络接收帧率抖动过大ReceiveFpsTooSmall：网络接收视频帧率过小FpsJitter：通过PTS计算得到的流帧率抖动过大StreamOpenFailed：流打开失败StreamEnd：流结束StreamParseFailed：流解析失败VideoFirstFrameNotIdr：首帧不是IDR帧StreamNALUError：NALU起始码错误TsStreamNoAud：mpegts的H26x流缺失 AUD NALUAudioStreamLack：无音频流VideoStreamLack：无视频流LackAudioRecover：缺失音频流恢复LackVideoRecover：缺失视频流恢复VideoBitrateOutofRange：视频流码率(kbps)超出范围AudioBitrateOutofRange：音频流码率(kbps)超出范围VideoDecodeFailed：视频解码错误AudioDecodeFailed：音频解码错误AudioOutOfPhase：双通道音频相位相反VideoDuplicatedFrame：视频流中存在重复帧AudioDuplicatedFrame：音频流中存在重复帧VideoRotation：视频画面旋转TsMultiPrograms：MPEG2-TS流有多个programMp4InvalidCodecFourcc：MP4中codec fourcc不符合Apple HLS要求HLSBadM3u8Format：无效的m3u8文件HLSInvalidMasterM3u8：无效的main m3u8文件HLSInvalidMediaM3u8：无效的media m3u8文件HLSMasterM3u8Recommended：main m3u8缺少标准推荐的参数HLSMediaM3u8Recommended：media m3u8缺少标准推荐的参数HLSMediaM3u8DiscontinuityExist：media m3u8存在EXT-X-DISCONTINUITYHLSMediaSegmentsStreamNumChange：切片的流数目发生变化HLSMediaSegmentsPTSJitterDeviation：切片间PTS跳变且没有EXT-X-DISCONTINUITYHLSMediaSegmentsDTSJitterDeviation：切片间DTS跳变且没有EXT-X-DISCONTINUITYTimecodeTrackExist：MP4存在tmcd轨道 */
   Type: string;
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string | null;
   /** 采样方式，取值范围：- Time：根据时间间隔采样。 */
   Sampling?: string | null;
-  /** 采样间隔时间，取值范围：[0, 60000]，单位：ms。默认值 0。 */
+  /** 采样间隔时间，单位：ms。 */
   IntervalTime?: number | null;
-  /** 异常持续时间，取值范围：[0, 60000]，单位：ms。默认值 0。 */
+  /** 异常持续时间，单位：ms。 */
   Duration?: number | null;
-  /** 检测分值的阈值，使用数学区间格式，当检测值超出区间范围会触发回调。 */
+  /** 检测项对应的阈值，不同检测项对应阈值不同。 */
   Threshold?: string | null;
 }
 

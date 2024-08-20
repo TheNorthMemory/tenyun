@@ -1187,10 +1187,10 @@ declare interface DescribeCarrierPrivilegeNumberApplicantsResponse {
 }
 
 declare interface DescribeChatMessagesRequest {
+  /** 应用 ID，可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
   /** 实例 ID（废弃） */
   InstanceId?: number;
-  /** 应用 ID，可以查看 https://console.cloud.tencent.com/ccc */
-  SdkAppId?: number;
   /** 服务记录ID（废弃） */
   CdrId?: string;
   /** 返回记录条数，最大为100 默认20 */
@@ -1930,7 +1930,7 @@ declare interface Ccc {
   /** 查询运营商白名单号码申请 {@link DescribeCarrierPrivilegeNumberApplicantsRequest} {@link DescribeCarrierPrivilegeNumberApplicantsResponse} */
   DescribeCarrierPrivilegeNumberApplicants(data: DescribeCarrierPrivilegeNumberApplicantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCarrierPrivilegeNumberApplicantsResponse>;
   /** 查询指定会话（SessionId）的聊天记录 {@link DescribeChatMessagesRequest} {@link DescribeChatMessagesResponse} */
-  DescribeChatMessages(data?: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
+  DescribeChatMessages(data: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
   /** 查询公司资质申请列表 {@link DescribeCompanyListRequest} {@link DescribeCompanyListResponse} */
   DescribeCompanyList(data: DescribeCompanyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompanyListResponse>;
   /** 获取话机信息 {@link DescribeExtensionRequest} {@link DescribeExtensionResponse} */

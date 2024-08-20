@@ -2272,6 +2272,20 @@ declare interface FaceEnhanceInfo {
   Intensity?: number;
 }
 
+/** 快速媒体编辑操作的输入媒体类型 */
+declare interface FastEditMediaFileInfo {
+  /** 媒体的 ID。 */
+  FileId: string;
+  /** 操作的音视频类型，可选值有：Transcode：转码输出；Original：原始音视频。注意：操作的音视频，必须为 HLS 格式。 */
+  AudioVideoType: string;
+  /** 当 AudioVideoType 为 Transcode 时有效，表示操作媒体的的转码模板 ID。 */
+  TranscodeDefinition?: number;
+  /** 媒体剪辑起始的偏移时间，单位：秒。 */
+  StartTimeOffset?: number;
+  /** 媒体剪辑结束的时间偏移，单位：秒。 */
+  EndTimeOffset?: number;
+}
+
 /** 文件删除结果信息 */
 declare interface FileDeleteResultItem {
   /** 删除的文件 ID 。 */
@@ -4674,6 +4688,20 @@ declare interface ReviewTemplate {
   UpdateTime?: string;
 }
 
+/** 轮播节目播放信息 */
+declare interface RoundPlayFilePlayInfo {
+  /** 播单节目的 ID，由系统分配。 */
+  ItemId?: string;
+  /** 媒体文件标识。 */
+  FileId?: string;
+  /** 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  StartPlayTime?: string;
+  /** 播放时长，单位为秒。 */
+  Duration?: number | null;
+  /** 播放进度，单位为妙。 */
+  Progress?: number | null;
+}
+
 /** 轮播任务信息 */
 declare interface RoundPlayInfo {
   /** 轮播播单标识。 */
@@ -4692,6 +4720,10 @@ declare interface RoundPlayInfo {
   PlayBackMode?: string;
   /** 轮播播放地址。 */
   Url?: string;
+  /** 创建时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string | null;
+  /** 更新时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  UpdateTime?: string | null;
 }
 
 /** 轮播播放节目信息 */
@@ -7132,6 +7164,22 @@ declare interface DescribeContentReviewTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCurrentPlaylistRequest {
+  /** 点播[应用](/document/product/266/14574) ID。 */
+  SubAppId: number;
+  /** 轮播播单唯一标识。 */
+  RoundPlayId: string;
+  /** 返回的播放列表的长度。最大10，默认值为5。 */
+  Limit?: number;
+}
+
+declare interface DescribeCurrentPlaylistResponse {
+  /** 当前播放列表信息。 */
+  CurrentPlaylist?: RoundPlayFilePlayInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDailyMediaPlayStatRequest {
   /** 媒体文件 ID 。 */
   FileId: string;
@@ -8134,6 +8182,24 @@ declare interface ExtractTraceWatermarkResponse {
   RequestId?: string;
 }
 
+declare interface FastEditMediaRequest {
+  /** 输入的媒体文件信息。最多支持传入100个媒体。 */
+  FileInfos: FastEditMediaFileInfo[];
+  /** ClipMode 用来表示剪辑时间点落在一个 TS 分片中间时，是否包含这个分片。共有两种取值： StartInclusiveEndInclusive：当剪辑起始时间点和结束时间点落在一个分片的中间时，都会包含这个分片； StartInclusiveEndExclusive：当起始时间点落在一个分片的中间时，会包含这个分片；而当结束时间点落在一个分片的中间时，不会包含这个分片。 不填时，默认为 StartInclusiveEndInclusive。 */
+  ClipMode?: string;
+  /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+  SubAppId?: number;
+}
+
+declare interface FastEditMediaResponse {
+  /** 快速编辑后的视频的媒体文件的唯一标识。 */
+  FileId?: string;
+  /** 快速编辑后的媒体播放地址。 */
+  Url?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ForbidMediaDistributionRequest {
   /** 媒体文件列表，每次最多可提交 20 条。 */
   FileIds: string[];
@@ -8146,6 +8212,26 @@ declare interface ForbidMediaDistributionRequest {
 declare interface ForbidMediaDistributionResponse {
   /** 不存在的文件 ID 列表。 */
   NotExistFileIdSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface HandleCurrentPlaylistRequest {
+  /** 点播[应用](/document/product/266/14574) ID。 */
+  SubAppId: number;
+  /** 轮播播单唯一标识。 */
+  RoundPlayId: string;
+  /** 操作类型，取值有：Insert：向当前播放列表插入播放节目。 InsertTemporary：向当前播放列表临时插入播放节目。只能插入到当前正在播放的节目后面，临时插入的节目只在本次轮播过程生效。Delete：删除播放列表中的播放节目。不能删除正在播放的节目。 */
+  Operation: string;
+  /** 播单节目 ID。当 Operation 为 Insert 时必填，表示插入的节目列表位于该播放节目之后。插入的位置必须在当前正在播放的节目之后。 */
+  ItemId?: string;
+  /** 节目列表。当 Operation 为 Insert、InsertTemporary、Delete 时必填，表示要操作的节目列表。列表长度最大为10。 */
+  RoundPlaylist?: RoundPlayListItemInfo[];
+}
+
+declare interface HandleCurrentPlaylistResponse {
+  /** 操作成功的节目列表。 */
+  RoundPlaylist?: RoundPlayListItemInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9705,6 +9791,8 @@ declare interface Vod {
   DescribeClientUploadAccelerationUsageData(data: DescribeClientUploadAccelerationUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientUploadAccelerationUsageDataResponse>;
   /** 获取音视频内容审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
+  /** 查询轮播当前播放列表 {@link DescribeCurrentPlaylistRequest} {@link DescribeCurrentPlaylistResponse} */
+  DescribeCurrentPlaylist(data: DescribeCurrentPlaylistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentPlaylistResponse>;
   /** 查询媒体文件的播放统计数据 {@link DescribeDailyMediaPlayStatRequest} {@link DescribeDailyMediaPlayStatResponse} */
   DescribeDailyMediaPlayStat(data: DescribeDailyMediaPlayStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyMediaPlayStatResponse>;
   /** 查询每日播放 Top100的媒体文件的播放统计数据 {@link DescribeDailyMostPlayedStatRequest} {@link DescribeDailyMostPlayedStatResponse} */
@@ -9797,8 +9885,12 @@ declare interface Vod {
   ExtractCopyRightWatermark(data: ExtractCopyRightWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractCopyRightWatermarkResponse>;
   /** 提取溯源水印 {@link ExtractTraceWatermarkRequest} {@link ExtractTraceWatermarkResponse} */
   ExtractTraceWatermark(data: ExtractTraceWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractTraceWatermarkResponse>;
+  /** 快速媒体编辑 {@link FastEditMediaRequest} {@link FastEditMediaResponse} */
+  FastEditMedia(data: FastEditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<FastEditMediaResponse>;
   /** 禁播媒体 {@link ForbidMediaDistributionRequest} {@link ForbidMediaDistributionResponse} */
   ForbidMediaDistribution(data: ForbidMediaDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidMediaDistributionResponse>;
+  /** 操作轮播当前播放列表 {@link HandleCurrentPlaylistRequest} {@link HandleCurrentPlaylistResponse} */
+  HandleCurrentPlaylist(data: HandleCurrentPlaylistRequest, config?: AxiosRequestConfig): AxiosPromise<HandleCurrentPlaylistResponse>;
   /** 音画质检测 {@link InspectMediaQualityRequest} {@link InspectMediaQualityResponse} */
   InspectMediaQuality(data: InspectMediaQualityRequest, config?: AxiosRequestConfig): AxiosPromise<InspectMediaQualityResponse>;
   /** 直播即时剪辑 {@link LiveRealTimeClipRequest} {@link LiveRealTimeClipResponse} */

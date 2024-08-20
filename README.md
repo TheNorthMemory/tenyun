@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 253+ 款产品，11589+ 服务数</summary>
+<details><summary>共计 253+ 款产品，11594+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -144,7 +144,7 @@ cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 20
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(5) |
 cdwch | [腾讯云数据仓库TCHouse-C](https://cloud.tencent.com/document/product/1299) | 2020-09-15(27) |
-cdwdoris | [腾讯云数据仓库 TCHouse-D](https://cloud.tencent.com/document/product/1387) | 2021-12-28(59) |
+cdwdoris | [腾讯云数据仓库 TCHouse-D](https://cloud.tencent.com/document/product/1387) | 2021-12-28(58) |
 cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(8) |
 cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-11-23(2) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(16) |
@@ -173,7 +173,7 @@ csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(99) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(516) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(144) |
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(146) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(62) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
@@ -327,7 +327,7 @@ trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/160
 trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(49) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(54) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
-trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(54) |
+trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(55) |
 tse | [微服务引擎](https://cloud.tencent.com/document/product/1364) | 2020-12-07(112) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(223) |
 tsi | [腾讯同传系统](https://cloud.tencent.com/document/product/1399) | 2021-03-25(3) |
@@ -339,7 +339,7 @@ vclm | [大模型视频创作引擎](https://cloud.tencent.com/document/product/
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(1) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
-vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(177) |
+vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(180) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(348) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(7) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |

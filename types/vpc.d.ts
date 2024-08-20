@@ -2246,7 +2246,7 @@ declare interface SnapshotPolicy {
 
 /** NAT的SNAT规则 */
 declare interface SourceIpTranslationNatRule {
-  /** 资源ID，如果ResourceType为USERDEFINED，可以为空 */
+  /** 资源ID，如果ResourceType为USERDEFINED，可以为空字符串 */
   ResourceId: string;
   /** 资源类型，目前包含SUBNET、NETWORKINTERFACE、USERDEFINED */
   ResourceType: string | null;

@@ -244,6 +244,16 @@ declare interface BindInstanceInfo {
   ExtendIds?: string[] | null;
 }
 
+/** binlog配置信息 */
+declare interface BinlogConfigInfo {
+  /** binlog保留时间 */
+  BinlogSaveDays: number | null;
+  /** binlog异地地域备份是否开启 */
+  BinlogCrossRegionsEnable: string | null;
+  /** binlog异地地域 */
+  BinlogCrossRegions?: string[] | null;
+}
+
 /** Binlog描述 */
 declare interface BinlogItem {
   /** Binlog文件名称 */
@@ -2984,6 +2994,20 @@ declare interface DescribeBackupListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBinlogConfigRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeBinlogConfigResponse {
+  /** Binlog跨地域配置更新时间 */
+  BinlogCrossRegionsConfigUpdateTime?: string | null;
+  /** Binlog配置信息 */
+  BinlogConfig?: BinlogConfigInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBinlogDownloadUrlRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4094,6 +4118,18 @@ declare interface ModifyBackupNameResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBinlogConfigRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** Binlog配置信息 */
+  BinlogConfig: BinlogConfigInfo;
+}
+
+declare interface ModifyBinlogConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBinlogSaveDaysRequest {
   /** 集群ID */
   ClusterId: string;
@@ -5113,6 +5149,8 @@ declare interface Cynosdb {
   DescribeBackupDownloadUrl(data: DescribeBackupDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadUrlResponse>;
   /** 查询备份文件列表 {@link DescribeBackupListRequest} {@link DescribeBackupListResponse} */
   DescribeBackupList(data: DescribeBackupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListResponse>;
+  /** 查询binlog配置 {@link DescribeBinlogConfigRequest} {@link DescribeBinlogConfigResponse} */
+  DescribeBinlogConfig(data: DescribeBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogConfigResponse>;
   /** 查询Binlog下载地址 {@link DescribeBinlogDownloadUrlRequest} {@link DescribeBinlogDownloadUrlResponse} */
   DescribeBinlogDownloadUrl(data: DescribeBinlogDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogDownloadUrlResponse>;
   /** 查询Binlog保留天数 {@link DescribeBinlogSaveDaysRequest} {@link DescribeBinlogSaveDaysResponse} */
@@ -5223,6 +5261,8 @@ declare interface Cynosdb {
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
   /** 修改备份文件备注名 {@link ModifyBackupNameRequest} {@link ModifyBackupNameResponse} */
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
+  /** 修改Binlog配置 {@link ModifyBinlogConfigRequest} {@link ModifyBinlogConfigResponse} */
+  ModifyBinlogConfig(data: ModifyBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBinlogConfigResponse>;
   /** 修改Binlog保留天数 {@link ModifyBinlogSaveDaysRequest} {@link ModifyBinlogSaveDaysResponse} */
   ModifyBinlogSaveDays(data: ModifyBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBinlogSaveDaysResponse>;
   /** 修改数据库 {@link ModifyClusterDatabaseRequest} {@link ModifyClusterDatabaseResponse} */

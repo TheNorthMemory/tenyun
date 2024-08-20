@@ -1988,6 +1988,22 @@ declare interface UpdatePublishCdnStreamResponse {
   RequestId?: string;
 }
 
+declare interface UpdateStreamIngestRequest {
+  /** TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同 */
+  SdkAppId: number;
+  /** 任务的唯一Id，在启动任务成功后会返回。 */
+  TaskId: string;
+  /** 源流URL【必填】。 */
+  StreamUrl: string;
+}
+
+declare interface UpdateStreamIngestResponse {
+  /** 任务的状态信息。InProgress：表示当前任务正在进行中。NotExist：表示当前任务不存在。示例值：InProgress */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trtc 实时音视频} */
 declare interface Trtc {
   (): Versions;
@@ -2099,6 +2115,8 @@ declare interface Trtc {
   SummarizeTranscription(data?: SummarizeTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<SummarizeTranscriptionResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
+  /** 更新输入在线媒体流 {@link UpdateStreamIngestRequest} {@link UpdateStreamIngestResponse} */
+  UpdateStreamIngest(data: UpdateStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStreamIngestResponse>;
 }
 
 export declare type Versions = ["2019-07-22"];
