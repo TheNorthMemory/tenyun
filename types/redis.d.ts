@@ -126,21 +126,21 @@ declare interface DelayDistribution {
 
 /** 详细DTS实例信息 */
 declare interface DescribeInstanceDTSInstanceInfo {
-  /** 地域ID */
+  /** 地域 ID。 */
   RegionId: number | null;
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string | null;
-  /** 仓库ID */
+  /** 仓库ID。 */
   SetId: number | null;
-  /** 可用区ID */
+  /** 可用区ID。 */
   ZoneId: number | null;
-  /** 实例类型 */
+  /** 实例类型。 */
   Type: number | null;
-  /** 实例名称 */
+  /** 实例名称。 */
   InstanceName: string | null;
-  /** 实例访问地址 */
+  /** 实例访问地址。 */
   Vip: string | null;
-  /** 状态 */
+  /** 状态。 */
   Status: number | null;
 }
 
@@ -1121,7 +1121,7 @@ declare interface CleanUpInstanceRequest {
 
 declare interface CleanUpInstanceResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1135,7 +1135,7 @@ declare interface ClearInstanceRequest {
 
 declare interface ClearInstanceResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1199,7 +1199,7 @@ declare interface CloseSSLRequest {
 
 declare interface CloseSSLResponse {
   /** 任务ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1335,7 +1335,7 @@ declare interface DeleteInstanceAccountRequest {
 
 declare interface DeleteInstanceAccountResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1477,13 +1477,13 @@ declare interface DescribeBandwidthRangeRequest {
 
 declare interface DescribeBandwidthRangeResponse {
   /** 标准带宽。指购买实例时，系统为每个节点分配的带宽。 */
-  BaseBandwidth: number;
+  BaseBandwidth?: number;
   /** 指实例的附加带宽。标准带宽不满足需求的情况下，用户可自行增加的带宽。开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数 * Max ([只读副本数量, 1])，标准架构的分片数 = 1。没有开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数，标准架构的分片数 = 1。 */
-  AddBandwidth: number;
+  AddBandwidth?: number;
   /** 附加带宽设置下限。 */
-  MinAddBandwidth: number;
+  MinAddBandwidth?: number;
   /** 附加带宽设置上限。 */
-  MaxAddBandwidth: number;
+  MaxAddBandwidth?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1605,21 +1605,21 @@ declare interface DescribeInstanceDTSInfoRequest {
 
 declare interface DescribeInstanceDTSInfoResponse {
   /** DTS任务ID */
-  JobId: string | null;
+  JobId?: string | null;
   /** DTS任务名称 */
-  JobName: string | null;
+  JobName?: string | null;
   /** 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing） */
-  Status: number | null;
+  Status?: number | null;
   /** 状态描述 */
-  StatusDesc: string | null;
+  StatusDesc?: string | null;
   /** 同步时延，单位：字节 */
-  Offset: number | null;
+  Offset?: number | null;
   /** 断开时间 */
-  CutDownTime: string | null;
+  CutDownTime?: string | null;
   /** 源实例信息 */
-  SrcInfo: DescribeInstanceDTSInstanceInfo | null;
+  SrcInfo?: DescribeInstanceDTSInstanceInfo | null;
   /** 目标实例信息 */
-  DstInfo: DescribeInstanceDTSInstanceInfo | null;
+  DstInfo?: DescribeInstanceDTSInstanceInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1815,9 +1815,9 @@ declare interface DescribeInstanceParamRecordsRequest {
 
 declare interface DescribeInstanceParamRecordsResponse {
   /** 总的修改历史记录数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 修改历史记录信息。 */
-  InstanceParamHistory: InstanceParamHistory[];
+  InstanceParamHistory?: InstanceParamHistory[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1998,7 +1998,7 @@ declare interface DescribeParamTemplateInfoResponse {
   TemplateId?: string;
   /** 参数模板名称。 */
   Name?: string;
-  /** 产品类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
+  /** 产品类型。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 5：Redis 2.8 内存版（单机）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
   ProductType?: number;
   /** 参数模板描述。 */
   Description?: string;
@@ -2339,7 +2339,7 @@ declare interface DisableReplicaReadonlyRequest {
 
 declare interface DisableReplicaReadonlyResponse {
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2367,9 +2367,9 @@ declare interface EnableReplicaReadonlyRequest {
 
 declare interface EnableReplicaReadonlyResponse {
   /** 错误：ERROR，正确OK（已废弃） */
-  Status: string | null;
+  Status?: string | null;
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2805,7 +2805,7 @@ declare interface RenewInstanceRequest {
 
 declare interface RenewInstanceResponse {
   /** 交易ID。 */
-  DealId: string;
+  DealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1243,13 +1243,13 @@ declare interface CreateRoleAssignmentResponse {
 declare interface CreateRoleConfigurationRequest {
   /** 空间 ID。 */
   ZoneId: string;
-  /** 访问配置名称。格式：包含英文字母、数字或短划线（-）。 长度：最大 128 个字符。 */
+  /** 权限配置名称。格式：包含英文字母、数字或短划线（-）。 长度：最大 128 个字符。 */
   RoleConfigurationName: string;
-  /** 访问配置的描述。 长度：最大 1024 个字符。 */
+  /** 权限配置的描述。 长度：最大 1024 个字符。 */
   Description?: string;
-  /** 会话持续时间。 CIC用户使用访问配置访问集团账号目标账号时，会话最多保持的时间。 单位：秒。 取值范围：900~43200（15 分钟~12 小时）。 默认值：3600（1 小时）。 */
+  /** 会话持续时间。 CIC用户使用权限配置访问集团账号目标账号时，会话最多保持的时间。 单位：秒。 取值范围：900 ~ 43200（15 分钟~12 小时）。 默认值：3600（1 小时）。 */
   SessionDuration?: number;
-  /** 初始访问页面。 CIC用户使用访问配置访问集团账号目标账号时，初始访问的页面地址。 该页面必须是腾讯云控制台页面。默认为空，表示跳转到腾讯云控制台首页。 */
+  /** 初始访问页面。 CIC用户使用权限配置访问集团账号目标账号时，初始访问的页面地址。 该页面必须是腾讯云控制台页面。默认为空，表示跳转到腾讯云控制台首页。 */
   RelayState?: string;
 }
 
@@ -1415,11 +1415,11 @@ declare interface DeleteRoleAssignmentRequest {
   TargetType: string;
   /** 集团账号目标账号的UIN */
   TargetUin: number;
-  /** CAM用户同步的身份类型。取值： User：表示该 CAM 用户同步的身份是CIC用户。 Group：表示该 CAM 用户同步的身份是CIC用户组。 */
+  /** CAM 用户同步的身份类型。取值： User：表示同步的身份是用户。 Group：表示同步的身份是用户组。 */
   PrincipalType: string;
-  /** CAM用户同步的身份 ID。取值： 当PrincipalType取值为Group时，该值为CIC 用户组 ID（g-********）， 当PrincipalType取值为User时，该值为CIC 用户 ID（u-********）。 */
+  /** 用户同步 ID。取值： 当PrincipalType取值为Group时，该值为用户组 ID（g-********）， 当PrincipalType取值为User时，该值为用户 ID（u-********）。 */
   PrincipalId: string;
-  /** 当您移除一个集团账号目标账号上使用某访问配置的最后一个授权时，是否同时解除访问配置部署。取值： DeprovisionForLastRoleAssignmentOnAccount：解除访问配置部署。 None（默认值）：不解除访问配置部署。 */
+  /** 当您移除一个集团账号目标账号上使用某权限配置的最后一个授权时，是否同时解除权限配置部署。取值： DeprovisionForLastRoleAssignmentOnAccount：解除权限配置部署。 None（默认值）：不解除权限配置部署。 */
   DeprovisionStrategy?: string;
 }
 
@@ -2355,9 +2355,9 @@ declare interface ListRoleAssignmentsRequest {
   TargetType?: string;
   /** 同步的集团账号目标账号的UIN。 */
   TargetUin?: number;
-  /** CAM 用户同步的身份类型。取值： User：表示该 CAM 用户同步的身份是CIC用户。 Group：表示该 CAM 用户同步的身份是CIC用户组。 */
+  /** CAM 用户同步的身份类型。取值： User：表示同步的身份是用户。 Group：表示同步的身份是用户组。 */
   PrincipalType?: string;
-  /** CAM 用户同步的身份 ID。取值： 当PrincipalType取值为Group时，该值为CIC 用户组 ID（g-********）。 当PrincipalType取值为User时，该值为CIC 用户 ID（u-********）。 */
+  /** 用户同步 ID。取值： 当PrincipalType取值为Group时，该值为用户组 ID（g-****)，当PrincipalType取值为User时，该值为用户 ID （u-****）。 */
   PrincipalId?: string;
   /** 查询条件，目前只支持权限配置名称查询。 */
   Filter?: string;
@@ -2419,7 +2419,7 @@ declare interface ListRoleConfigurationsRequest {
   NextToken?: string;
   /** 每页的最大数据条数。 取值范围：1~100。 默认值：10。 */
   MaxResults?: number;
-  /** 过滤条件。不区分大小写。目前，只支持 RoleConfigurationName，只支持 eq（Equals）和 sw（Start With）。 示例：Filter = "RoleConfigurationName，只支持 sw test"，表示查询名称以 test 开头的全部访问配置。Filter = "RoleConfigurationName，只支持 eq TestRoleConfiguration"，表示查询名称为 TestRoleConfiguration 的访问配置。 */
+  /** 过滤条件。不区分大小写。目前，只支持 RoleConfigurationName，只支持 eq（Equals）和 sw（Start With）。 示例：Filter = "RoleConfigurationName，只支持 sw test"，表示查询名称以 test 开头的全部权限配置。Filter = "RoleConfigurationName，只支持 eq TestRoleConfiguration"，表示查询名称为 TestRoleConfiguration 的权限配置。 */
   Filter?: string;
   /** 检索成员账号是否配置过权限，如果配置过返回IsSelected: true, 否则返回false。 */
   FilterTargets?: number[];
@@ -2469,13 +2469,13 @@ declare interface ListTargetsForPolicyResponse {
 declare interface ListTasksRequest {
   /** 空间 ID。 */
   ZoneId: string;
-  /** CAM 用户同步的身份 ID。取值： 当PrincipalType取值为Group时，该值为CIC用户组 ID（g-********）。 当PrincipalType取值为User时，该值为CIC用户 ID（u-********）。 */
+  /** 用户同步 ID。取值： 当PrincipalType取值为Group时，该值为用户组 ID（g-****）， 当PrincipalType取值为User时，该值为用户 ID（u-****）。 */
   PrincipalId?: string;
   /** 查询返回结果下一页的令牌。首次调用 API 不需要NextToken。 当您首次调用 API 时，如果返回数据总条数超过MaxResults限制，数据会被截断，只返回MaxResults条数据，同时，返回参数IsTruncated为true，返回一个NextToken。您可以使用上一次返回的NextToken继续调用 API，其他请求参数保持不变，查询被截断的数据。您可以按此方法多次查询，直到IsTruncated为false，表示全部数据查询完毕。 */
   NextToken?: string;
   /** 每页的最大数据条数。 取值范围：1~100。 默认值：10。 */
   MaxResults?: number;
-  /** CAM 用户同步的身份类型。取值： User：表示该 CAM 用户同步的身份是CIC用户。 Group：表示该 CAM 用户同步的身份是CIC用户组。 */
+  /** CAM 用户同步的身份类型。取值： User：表示同步的身份是用户。 Group：表示同步的身份是用户组。 */
   PrincipalType?: string;
   /** 同步的集团账号目标账号的UIN。 */
   TargetUin?: number;
@@ -2507,13 +2507,13 @@ declare interface ListTasksResponse {
 declare interface ListUserSyncProvisioningsRequest {
   /** 空间 ID。 */
   ZoneId: string;
-  /** CAM 用户同步的身份 ID。取值： 当PrincipalType取值为Group时，该值为CIC用户组 ID（g-********）。 当PrincipalType取值为User时，该值为CIC用户 ID（u-********）。 */
+  /** 用户同步 ID。取值： 当PrincipalType取值为Group时，该值为用户组 ID（g-********）。 当PrincipalType取值为User时，该值为用户 ID（u-********）。 */
   PrincipalId?: string;
   /** 查询返回结果下一页的令牌。首次调用 API 不需要NextToken。 当您首次调用 API 时，如果返回数据总条数超过MaxResults限制，数据会被截断，只返回MaxResults条数据，同时，返回参数IsTruncated为true，返回一个NextToken。您可以使用上一次返回的NextToken继续调用 API，其他请求参数保持不变，查询被截断的数据。您可以按此方法多次查询，直到IsTruncated为false，表示全部数据查询完毕。 */
   NextToken?: string;
   /** 每页的最大数据条数。 取值范围：1~100。 默认值：10。 */
   MaxResults?: number;
-  /** CAM 用户同步的身份类型。取值： User：表示该 CAM 用户同步的身份是CIC用户。 Group：表示该 CAM 用户同步的身份是CIC用户组。 */
+  /** CAM 用户同步的身份类型。取值： User：表示同步的身份是用户。 Group：表示同步的身份是用户组。 */
   PrincipalType?: string;
   /** 集团账号目标账号的UIN。 */
   TargetUin?: number;
@@ -2809,11 +2809,11 @@ declare interface UpdateRoleConfigurationRequest {
   ZoneId: string;
   /** 权限配置 ID */
   RoleConfigurationId: string;
-  /** 新的访问配置描述。 长度：最大 1024 个字符。 */
+  /** 新的权限配置描述。 长度：最大 1024 个字符。 */
   NewDescription?: string;
-  /** 新的会话持续时间。 CIC 用户使用访问配置访问集团账号目标账号时，会话最多保持的时间。 单位：秒。 取值范围：900-43200（15 分钟-12 小时）。 */
+  /** 新的会话持续时间。 CIC 用户使用权限配置访问集团账号目标账号时，会话最多保持的时间。 单位：秒。 取值范围：900-43200（15 分钟-12 小时）。 */
   NewSessionDuration?: number;
-  /** 新的初始访问页面。 CIC 用户使用访问配置访问集团账号目标账号时，初始访问的页面地址。 该页面必须是腾讯云控制台页面。 */
+  /** 新的初始访问页面。 CIC 用户使用权限配置访问集团账号目标账号时，初始访问的页面地址。 该页面必须是腾讯云控制台页面。 */
   NewRelayState?: string;
 }
 
@@ -3327,7 +3327,7 @@ declare interface Organization {
   DeleteUserSyncProvisioning(data: DeleteUserSyncProvisioningRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserSyncProvisioningResponse>;
   /** 查询目标关联的有效策略 {@link DescribeEffectivePolicyRequest} {@link DescribeEffectivePolicyResponse} */
   DescribeEffectivePolicy(data: DescribeEffectivePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEffectivePolicyResponse>;
-  /** 获取用户cam身份中心服务信息 {@link DescribeIdentityCenterRequest} {@link DescribeIdentityCenterResponse} */
+  /** 获取集团账号身份中心服务信息 {@link DescribeIdentityCenterRequest} {@link DescribeIdentityCenterResponse} */
   DescribeIdentityCenter(data?: DescribeIdentityCenterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentityCenterResponse>;
   /** 获取企业组织信息 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
@@ -3367,7 +3367,7 @@ declare interface Organization {
   DetachPolicy(data: DetachPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachPolicyResponse>;
   /** 禁用策略类型 {@link DisablePolicyTypeRequest} {@link DisablePolicyTypeResponse} */
   DisablePolicyType(data: DisablePolicyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DisablePolicyTypeResponse>;
-  /** 解除访问配置部署到成员账号上的部署 {@link DismantleRoleConfigurationRequest} {@link DismantleRoleConfigurationResponse} */
+  /** 解除权限配置部署 {@link DismantleRoleConfigurationRequest} {@link DismantleRoleConfigurationResponse} */
   DismantleRoleConfiguration(data: DismantleRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DismantleRoleConfigurationResponse>;
   /** 启用策略类型 {@link EnablePolicyTypeRequest} {@link EnablePolicyTypeResponse} */
   EnablePolicyType(data: EnablePolicyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<EnablePolicyTypeResponse>;
@@ -3427,9 +3427,9 @@ declare interface Organization {
   ListUsers(data: ListUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersResponse>;
   /** 移动成员到指定企业组织节点 {@link MoveOrganizationNodeMembersRequest} {@link MoveOrganizationNodeMembersResponse} */
   MoveOrganizationNodeMembers(data: MoveOrganizationNodeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<MoveOrganizationNodeMembersResponse>;
-  /** 开通cam身份中心服务 {@link OpenIdentityCenterRequest} {@link OpenIdentityCenterResponse} */
+  /** 开通集团账号身份中心服务 {@link OpenIdentityCenterRequest} {@link OpenIdentityCenterResponse} */
   OpenIdentityCenter(data: OpenIdentityCenterRequest, config?: AxiosRequestConfig): AxiosPromise<OpenIdentityCenterResponse>;
-  /** 将访问配置部署到成员账号上 {@link ProvisionRoleConfigurationRequest} {@link ProvisionRoleConfigurationResponse} */
+  /** 将权限配置部署到成员账号上 {@link ProvisionRoleConfigurationRequest} {@link ProvisionRoleConfigurationResponse} */
   ProvisionRoleConfiguration(data: ProvisionRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<ProvisionRoleConfigurationResponse>;
   /** 退出企业组织 {@link QuitOrganizationRequest} {@link QuitOrganizationResponse} */
   QuitOrganization(data: QuitOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<QuitOrganizationResponse>;

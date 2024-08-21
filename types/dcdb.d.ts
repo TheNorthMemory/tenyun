@@ -2301,11 +2301,17 @@ declare interface UpgradeDCDBInstanceRequest {
   VoucherIds?: string[];
   /** 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区 */
   Zones?: string[];
+  /** 切换开始时间，格式如: "2019-12-12 07:00:00"。开始时间必须在当前时间一个小时以后，3天以内。 */
+  SwitchStartTime?: string;
+  /** 切换结束时间, 格式如: "2019-12-12 07:15:00"，结束时间必须大于开始时间。 */
+  SwitchEndTime?: string;
+  /** 是否自动重试。 0：不自动重试 1：自动重试 */
+  SwitchAutoRetry?: number;
 }
 
 declare interface UpgradeDCDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -99,29 +99,33 @@ declare interface AddressInfo {
 /** IP地址模板 */
 declare interface AddressTemplate {
   /** IP地址模板名称。 */
-  AddressTemplateName: string;
+  AddressTemplateName?: string;
   /** IP地址模板实例唯一ID。 */
-  AddressTemplateId: string;
+  AddressTemplateId?: string;
   /** IP地址信息。 */
-  AddressSet: string[];
+  AddressSet?: string[];
   /** 创建时间。 */
   CreatedTime?: string;
   /** 带备注的IP地址信息。 */
-  AddressExtraSet: AddressInfo[];
+  AddressExtraSet?: AddressInfo[];
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** IP地址模板集合 */
 declare interface AddressTemplateGroup {
   /** IP地址模板集合名称。 */
-  AddressTemplateGroupName: string;
+  AddressTemplateGroupName?: string;
   /** IP地址模板集合实例ID，例如：ipmg-dih8xdbq。 */
-  AddressTemplateGroupId: string;
+  AddressTemplateGroupId?: string;
   /** IP地址模板ID。 */
-  AddressTemplateIdSet: string[];
+  AddressTemplateIdSet?: string[];
   /** 创建时间。 */
   CreatedTime?: string;
   /** IP地址模板实例。 */
-  AddressTemplateSet: AddressTemplateItem[];
+  AddressTemplateSet?: AddressTemplateItem[];
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** 地址信息 */
@@ -904,6 +908,8 @@ declare interface EndPoint {
   GroupSet?: string[];
   /** 终端节点服务名称。 */
   ServiceName?: string | null;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** 终端节点服务对象。 */
@@ -934,6 +940,8 @@ declare interface EndPointService {
   ServiceUin?: string | null;
   /** 服务IP类型 */
   BusinessIpType?: number | null;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** 过滤器 */
@@ -1054,6 +1062,8 @@ declare interface HaVip {
   CheckAssociate?: boolean | null;
   /** HAVIP 刷新时间。该参数只作为出参数。以下场景会触发 FlushTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00 */
   FlushedTime?: string | null;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** HaVip绑定的子机/网卡（用于限制HaVip飘移的范围，并不是真正的飘移动作）。 */
@@ -1325,17 +1335,21 @@ declare interface LocalDestinationIpPortTranslationNatRule {
 /** 本地网关信息 */
 declare interface LocalGateway {
   /** CDC实例ID */
-  CdcId: string;
+  CdcId?: string;
   /** VPC实例ID */
-  VpcId: string;
-  /** 本地网关实例ID */
-  UniqLocalGwId: string;
+  VpcId?: string;
+  /** 本地网关实例ID（计划弃用） */
+  UniqLocalGwId?: string;
   /** 本地网关名称 */
-  LocalGatewayName: string;
+  LocalGatewayName?: string;
   /** 本地网关IP地址 */
-  LocalGwIp: string;
+  LocalGwIp?: string;
   /** 本地网关创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
+  /** 本地网关实例ID（计划起用） */
+  LocalGatewayId?: string;
 }
 
 /** 模板对象成员信息 */
@@ -1484,6 +1498,8 @@ declare interface NetDetect {
   NetDetectDescription?: string | null;
   /** 创建时间。 */
   CreateTime?: string | null;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** 网络探测目的IP的验证结果。 */
@@ -2151,29 +2167,33 @@ declare interface SecurityPolicyDatabase {
 /** 协议端口模板 */
 declare interface ServiceTemplate {
   /** 协议端口实例ID，例如：ppm-f5n1f8da。 */
-  ServiceTemplateId: string;
+  ServiceTemplateId?: string;
   /** 模板名称。 */
-  ServiceTemplateName: string;
+  ServiceTemplateName?: string;
   /** 协议端口信息。 */
-  ServiceSet: string[];
+  ServiceSet?: string[];
   /** 创建时间。 */
   CreatedTime?: string;
   /** 带备注的协议端口信息。 */
-  ServiceExtraSet: ServicesInfo[];
+  ServiceExtraSet?: ServicesInfo[];
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** 协议端口模板集合 */
 declare interface ServiceTemplateGroup {
   /** 协议端口模板集合实例ID，例如：ppmg-2klmrefu。 */
-  ServiceTemplateGroupId: string;
+  ServiceTemplateGroupId?: string;
   /** 协议端口模板集合名称。 */
-  ServiceTemplateGroupName: string;
+  ServiceTemplateGroupName?: string;
   /** 协议端口模板实例ID。 */
-  ServiceTemplateIdSet: string[];
+  ServiceTemplateIdSet?: string[];
   /** 创建时间。 */
   CreatedTime?: string;
   /** 协议端口模板实例信息。 */
-  ServiceTemplateSet: ServiceTemplate[];
+  ServiceTemplateSet?: ServiceTemplate[];
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** 协议端口模板 */
@@ -2242,6 +2262,8 @@ declare interface SnapshotPolicy {
   Enable?: boolean;
   /** 创建时间。 */
   CreateTime?: string | null;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** NAT的SNAT规则 */

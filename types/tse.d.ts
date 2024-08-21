@@ -1536,6 +1536,16 @@ declare interface ListFilter {
   Value?: string | null;
 }
 
+/** 新增Location字段，展示zone/region/campus */
+declare interface Location {
+  /** 大区 */
+  Region?: string | null;
+  /** 可用区 */
+  Zone?: string | null;
+  /** 机房 */
+  Campus?: string | null;
+}
+
 /** 元数据信息 */
 declare interface Metadata {
   /** 元数据键名。 */
@@ -3097,6 +3107,8 @@ declare interface DescribeGovernanceInstancesRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
+  /** 地域 */
+  Location?: Location;
 }
 
 declare interface DescribeGovernanceInstancesResponse {
@@ -3104,6 +3116,8 @@ declare interface DescribeGovernanceInstancesResponse {
   TotalCount?: number;
   /** 服务里实例列表。 */
   Content?: GovernanceInstance[];
+  /** 地域 */
+  Location?: Location;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

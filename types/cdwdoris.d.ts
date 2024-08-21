@@ -408,6 +408,10 @@ declare interface InstanceInfo {
   CoolDownBucket?: string | null;
   /** 实例扩展信息 */
   Details?: InstanceDetail | null;
+  /** 是否启用DLC 0:关闭 1:开启 */
+  EnableDlc?: number | null;
+  /** 账户类型 0:普通用户 1:CAM用户 */
+  AccountType?: number | null;
 }
 
 /** 实例节点描述信息 */
@@ -698,6 +702,24 @@ declare interface UpdateUserPrivileges {
   IsSetGlobalCatalog?: boolean;
 }
 
+/** 新增或是修改用户 */
+declare interface UserInfo {
+  /** 集群实例id */
+  InstanceId: string;
+  /** 用户名 */
+  UserName: string;
+  /** 密码 */
+  PassWord: string;
+  /** 用户链接来自的 IP */
+  WhiteHost?: string;
+  /** 修改前用户链接来自的 IP */
+  OldWhiteHost?: string;
+  /** 描述 */
+  Describe?: string;
+  /** 旧密码 */
+  OldPwd?: string;
+}
+
 /** 用户绑定资源组信息 */
 declare interface UserWorkloadGroup {
   /** test */
@@ -730,6 +752,22 @@ declare interface ZoneInfo {
   ZoneId?: number;
   /** Encryptid */
   Encrypt?: number | null;
+}
+
+declare interface ActionAlterUserRequest {
+  /** 用户信息 */
+  UserInfo: UserInfo;
+  /** api接口类型 */
+  ApiType: string;
+  /** 用户权限类型 0:普通用户 1:管理员 */
+  UserPrivilege?: number;
+}
+
+declare interface ActionAlterUserResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CancelBackupJobRequest {
@@ -1891,6 +1929,8 @@ declare interface UpdateCoolDownResponse {
 /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
 declare interface Cdwdoris {
   (): Versions;
+  /** 新增、修改用户接口 {@link ActionAlterUserRequest} {@link ActionAlterUserResponse} */
+  ActionAlterUser(data: ActionAlterUserRequest, config?: AxiosRequestConfig): AxiosPromise<ActionAlterUserResponse>;
   /** 取消备份实例 {@link CancelBackupJobRequest} {@link CancelBackupJobResponse} */
   CancelBackupJob(data: CancelBackupJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBackupJobResponse>;
   /** 检查冷热分层生效变量和配置是否正确 {@link CheckCoolDownWorkingVariableConfigCorrectRequest} {@link CheckCoolDownWorkingVariableConfigCorrectResponse} */

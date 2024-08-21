@@ -1958,6 +1958,26 @@ declare interface SummarizeTranscriptionResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAIConversationRequest {
+  /** 唯一标识一个任务 */
+  TaskId: string;
+  /** 不填写则不进行更新，机器人的欢迎语 */
+  WelcomeMessage?: string;
+  /** 不填写则不进行更新。智能打断模式，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断 */
+  InterruptMode?: number;
+  /** 不填写则不进行更新。InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断 */
+  InterruptSpeechDuration?: number;
+  /** 不填写则不进行更新，LLM配置，详情见StartAIConversation接口 */
+  LLMConfig?: string;
+  /** 不填写则不进行更新，TTS配置，详情见StartAIConversation接口 */
+  TTSConfig?: string;
+}
+
+declare interface UpdateAIConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdatePublishCdnStreamRequest {
   /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和转推的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
@@ -2113,6 +2133,8 @@ declare interface Trtc {
   StopWebRecord(data: StopWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopWebRecordResponse>;
   /** @deprecated 总结转录文本 {@link SummarizeTranscriptionRequest} {@link SummarizeTranscriptionResponse} */
   SummarizeTranscription(data?: SummarizeTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<SummarizeTranscriptionResponse>;
+  /** 更新AI对话 {@link UpdateAIConversationRequest} {@link UpdateAIConversationResponse} */
+  UpdateAIConversation(data: UpdateAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIConversationResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
   /** 更新输入在线媒体流 {@link UpdateStreamIngestRequest} {@link UpdateStreamIngestResponse} */

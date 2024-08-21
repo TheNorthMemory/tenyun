@@ -262,6 +262,10 @@ declare interface CategoryRule {
   AliasRuleId?: number | null;
   /** 别名规则名称 */
   AliasRuleName?: string | null;
+  /** 各类分类分级规则数量 */
+  RuleEffectItems?: RuleEffectItem[] | null;
+  /** 规则状态 */
+  RuleStatus?: number | null;
 }
 
 /** 分类规则统计信息 */
@@ -915,17 +919,19 @@ declare interface DspaDiscoveryRDBRules {
 /** 敏感数据扫描任务识别规则详情 */
 declare interface DspaDiscoveryRuleDetail {
   /** 规则ID */
-  RuleId: number | null;
+  RuleId?: number | null;
   /** 规则名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 规则描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 规则来源，取值：0 内置, 1 自定义 */
-  Source: number | null;
+  Source?: number | null;
   /** RDB规则详情 */
-  RDBRules: DspaDiscoveryRDBRules | null;
+  RDBRules?: DspaDiscoveryRDBRules | null;
   /** COS规则详情 */
-  COSRules: DspaDiscoveryCOSRules | null;
+  COSRules?: DspaDiscoveryCOSRules | null;
+  /** 0关闭，1开启 */
+  Status?: number | null;
 }
 
 /** 描述对象存储类敏感识别扫描人元数据条件。 */
@@ -1704,6 +1710,14 @@ declare interface RuleDistribution {
   RuleCnt?: number | null;
 }
 
+/** 分类分级规则数量 */
+declare interface RuleEffectItem {
+  /** 规则描述 */
+  Name?: string | null;
+  /** 规则值 */
+  Value?: number | null;
+}
+
 /** 敏感识别任务COS识别规则 */
 declare interface ScanTaskCOSRules {
   /** regex规则内容 */
@@ -2155,11 +2169,13 @@ declare interface CreateDSPADiscoveryRuleRequest {
   RDBRules?: DspaDiscoveryRDBRules;
   /** COS类敏感数据识别规则 */
   COSRules?: DspaDiscoveryCOSRules;
+  /** 规则状态；0 不启用, 1 启用 */
+  Status?: number;
 }
 
 declare interface CreateDSPADiscoveryRuleResponse {
   /** 规则ID */
-  RuleId: number;
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3279,7 +3295,7 @@ declare interface DescribeDSPACategoryRulesRequest {
 
 declare interface DescribeDSPACategoryRulesResponse {
   /** 分类规则信息 */
-  CategoryRules: CategoryRule[] | null;
+  CategoryRules?: CategoryRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4305,6 +4321,8 @@ declare interface ModifyDSPADiscoveryRuleRequest {
   RDBRules?: ScanTaskRDBRules;
   /** COS类敏感数据识别规则 */
   COSRules?: ScanTaskCOSRules;
+  /** 规则状态 */
+  Status?: number;
 }
 
 declare interface ModifyDSPADiscoveryRuleResponse {

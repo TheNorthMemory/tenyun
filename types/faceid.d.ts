@@ -417,6 +417,10 @@ declare interface CheckIdCardInformationRequest {
   Config?: string;
   /** 是否需要对返回中的敏感信息进行加密。默认false。其中敏感信息包括：Response.IdNum、Response.Name */
   IsEncrypt?: boolean;
+  /** 是否需要对响应体加密 */
+  IsEncryptResponse?: boolean;
+  /** 是否需要对返回中的敏感信息进行加密,需指定加密算法Algorithm、CBC加密的初始向量、加密后的对称密钥。 */
+  Encryption?: Encryption;
 }
 
 declare interface CheckIdCardInformationResponse {
@@ -446,6 +450,8 @@ declare interface CheckIdCardInformationResponse {
   Quality?: number;
   /** 敏感数据加密信息。 */
   Encryption?: Encryption | null;
+  /** 加密后的数据 */
+  EncryptedBody?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

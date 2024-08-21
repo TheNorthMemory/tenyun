@@ -4698,7 +4698,7 @@ declare interface RoundPlayFilePlayInfo {
   StartPlayTime?: string;
   /** 播放时长，单位为秒。 */
   Duration?: number | null;
-  /** 播放进度，单位为妙。 */
+  /** 播放进度，单位为秒。 */
   Progress?: number | null;
 }
 
