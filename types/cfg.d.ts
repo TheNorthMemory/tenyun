@@ -64,7 +64,7 @@ declare interface ActionLibraryListResult {
   RelationActionId?: number;
   /** 操作命令 */
   ActionCommand?: string;
-  /** 动作类型( 0 -- tat 1 -- 云API） */
+  /** 动作类型（0 -- tat 1 -- 云API） */
   ActionCommandType?: number;
   /** 自定义动作的参数，json string */
   ActionContent?: string;

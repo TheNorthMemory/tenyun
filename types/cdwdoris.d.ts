@@ -176,6 +176,18 @@ declare interface ConfigKeyValue {
   SupportHotUpdate?: number | null;
 }
 
+/** 配置文件修改信息 */
+declare interface ConfigSubmitContext {
+  /** 配置文件名称 */
+  FileName: string;
+  /** 配置文件新内容，base64编码 */
+  NewConfValue: string;
+  /** 配置文件旧内容，base64编码 */
+  OldConfValue?: string;
+  /** 文件路径 */
+  FilePath?: string;
+}
+
 /** 冷热分层backend节点信息 */
 declare interface CoolDownBackend {
   /** 字段：Host */
@@ -1554,6 +1566,24 @@ declare interface DestroyInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterConfigsRequest {
+  /** 集群ID，例如cdwch-xxxx */
+  InstanceId: string;
+  /** 配置文件修改信息 */
+  ModifyConfContext: ConfigSubmitContext[];
+  /** 修改原因 */
+  Remark?: string;
+}
+
+declare interface ModifyClusterConfigsResponse {
+  /** 流程相关信息 */
+  FlowId?: number;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCoolDownPolicyRequest {
   /** 集群id */
   InstanceId?: string;
@@ -2009,6 +2039,8 @@ declare interface Cdwdoris {
   DescribeWorkloadGroup(data: DescribeWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkloadGroupResponse>;
   /** 集群销毁 {@link DestroyInstanceRequest} {@link DestroyInstanceResponse} */
   DestroyInstance(data: DestroyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstanceResponse>;
+  /** 修改集群配置文件 {@link ModifyClusterConfigsRequest} {@link ModifyClusterConfigsResponse} */
+  ModifyClusterConfigs(data: ModifyClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterConfigsResponse>;
   /** 修改冷热分层策略 {@link ModifyCoolDownPolicyRequest} {@link ModifyCoolDownPolicyResponse} */
   ModifyCoolDownPolicy(data?: ModifyCoolDownPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCoolDownPolicyResponse>;
   /** 修改集群名称 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */

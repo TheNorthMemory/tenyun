@@ -690,6 +690,8 @@ declare interface TelCdrInfo {
   IVRKeyPressedEx?: IVRKeyPressedElement[] | null;
   /** 获取录音ASR文本信息地址 */
   AsrUrl?: string | null;
+  /** AsrUrl的状态：Complete已完成;Processing正在生成中;NotExists无记录(未开启生成离线asr或者无套餐包) */
+  AsrStatus?: string | null;
   /** 录音转存第三方COS地址 */
   CustomRecordURL?: string | null;
   /** 备注 */

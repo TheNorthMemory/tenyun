@@ -228,7 +228,7 @@ declare interface BGPInstance {
   ModifyTime?: string | null;
   /** 是否是基础防护加强版 0: 不是 1: 是 */
   BasicPlusFlag?: number | null;
-  /** 是否是商业模式优化-普惠版 */
+  /** 是否标准版2.0 0: 包含标准版2.0 1: 只查询标准版2.0 2: 不查标准版2.0 */
   PlanCntFlag?: number | null;
   /** 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 */
   TransRegionFlag?: number | null;
@@ -1769,6 +1769,8 @@ declare interface DescribeBGPIPL7RulesRequest {
   Cname?: string;
   /** 默认为false，当为true时，将不对各个规则做策略检查，直接导出所有规则 */
   Export?: boolean;
+  /** 源站，模糊查询 */
+  Source?: string;
 }
 
 declare interface DescribeBGPIPL7RulesResponse {

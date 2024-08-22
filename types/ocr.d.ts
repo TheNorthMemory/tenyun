@@ -5023,7 +5023,7 @@ declare interface Ocr {
   CarInvoiceOCR(data?: CarInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CarInvoiceOCRResponse>;
   /** 智能卡证分类 {@link ClassifyDetectOCRRequest} {@link ClassifyDetectOCRResponse} */
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
-  /** 门头照分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
+  /** 商户照片分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
   ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
   /** 创建智慧表单文件识别任务 {@link CreateAIFormTaskRequest} {@link CreateAIFormTaskResponse} */
   CreateAIFormTask(data: CreateAIFormTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIFormTaskResponse>;
@@ -5125,7 +5125,7 @@ declare interface Ocr {
   RecognizePhilippinesUMIDOCR(data?: RecognizePhilippinesUMIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesUMIDOCRResponse>;
   /** 菲律宾VoteID识别 {@link RecognizePhilippinesVoteIDOCRRequest} {@link RecognizePhilippinesVoteIDOCRResponse} */
   RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
-  /** 门头照识别 {@link RecognizeStoreNameRequest} {@link RecognizeStoreNameResponse} */
+  /** 商户门头照识别 {@link RecognizeStoreNameRequest} {@link RecognizeStoreNameResponse} */
   RecognizeStoreName(data?: RecognizeStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeStoreNameResponse>;
   /** 表格识别（V3） {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */
   RecognizeTableAccurateOCR(data?: RecognizeTableAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableAccurateOCRResponse>;

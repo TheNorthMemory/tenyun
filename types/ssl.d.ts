@@ -1349,7 +1349,7 @@ declare interface DeleteManagerRequest {
 
 declare interface DeleteManagerResponse {
   /** 管理人ID */
-  ManagerId: number;
+  ManagerId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2353,7 +2353,7 @@ declare interface SubmitAuditManagerRequest {
 
 declare interface SubmitAuditManagerResponse {
   /** 管理人ID */
-  ManagerId: number;
+  ManagerId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2549,7 +2549,7 @@ declare interface VerifyManagerRequest {
 
 declare interface VerifyManagerResponse {
   /** 管理人ID */
-  ManagerId: number;
+  ManagerId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

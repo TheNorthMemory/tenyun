@@ -1787,6 +1787,8 @@ declare interface CreateDataTransformRequest {
   EnableFlag?: number;
   /** 用于预览加工结果的测试数据 */
   PreviewLogStatistics?: PreviewLogStatistic[];
+  /** 数据加工类型。0：标准加工任务； 1：前置加工任务。前置加工任务将采集的日志处理完成后，再写入日志主题。 */
+  DataTransformType?: number;
 }
 
 declare interface CreateDataTransformResponse {
