@@ -841,6 +841,8 @@ declare interface DescribeDataLogUrlStatisticsRequest {
   Browser?: string;
   /** 环境区分 */
   Env?: string;
+  /** js异常信息 */
+  ErrorMsg?: string;
 }
 
 declare interface DescribeDataLogUrlStatisticsResponse {

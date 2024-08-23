@@ -2304,6 +2304,8 @@ declare interface UserNotice {
   Weekday?: number[] | null;
   /** 值班表id列表 */
   OnCallFormIDs?: string[] | null;
+  /** 电话按键确认 */
+  VoiceConfirmKey?: string | null;
 }
 
 declare interface BindPrometheusManagedGrafanaRequest {

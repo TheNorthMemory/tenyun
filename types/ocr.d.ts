@@ -2938,6 +2938,8 @@ declare interface DriverLicenseOCRResponse {
   BackPageName?: string;
   /** 驾驶证副页证号 */
   BackPageCardCode?: string;
+  /** 驾驶证类型电子驾驶证：Electronic普通驾驶证：Normal */
+  DriverLicenseType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

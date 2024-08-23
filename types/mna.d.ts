@@ -76,6 +76,10 @@ declare interface DeviceBaseInfo {
   GroupName?: string | null;
   /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
   FlowTrunc?: number | null;
+  /** 设备sn */
+  Sn?: string | null;
+  /** 厂商 */
+  Vendor?: string | null;
 }
 
 /** 设备详细信息 */

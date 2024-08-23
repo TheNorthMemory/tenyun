@@ -508,7 +508,7 @@ declare interface NodeInfo {
 
 /** 节点信息列表 */
 declare interface NodeInfos {
-  /** 节点在doris中明朝n */
+  /** 节点名称 */
   NodeName?: string;
   /** 节点状态 */
   Status?: number;
@@ -917,7 +917,7 @@ declare interface DeleteBackUpDataRequest {
   InstanceId: string;
   /** 任务id */
   BackUpJobId?: number;
-  /** 是否删除所有数据 */
+  /** 是否删除所有实例 */
   IsDeleteAll?: boolean;
 }
 
@@ -1277,9 +1277,9 @@ declare interface DescribeInstanceOperationsRequest {
 
 declare interface DescribeInstanceOperationsResponse {
   /** 操作记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 操作记录具体数据 */
-  Operations: InstanceOperation[] | null;
+  Operations?: InstanceOperation[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1973,7 +1973,7 @@ declare interface Cdwdoris {
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
   /** 创建资源组 {@link CreateWorkloadGroupRequest} {@link CreateWorkloadGroupResponse} */
   CreateWorkloadGroup(data: CreateWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkloadGroupResponse>;
-  /** 删除备份数据 {@link DeleteBackUpDataRequest} {@link DeleteBackUpDataResponse} */
+  /** 删除备份实例 {@link DeleteBackUpDataRequest} {@link DeleteBackUpDataResponse} */
   DeleteBackUpData(data: DeleteBackUpDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackUpDataResponse>;
   /** 删除资源组 {@link DeleteWorkloadGroupRequest} {@link DeleteWorkloadGroupResponse} */
   DeleteWorkloadGroup(data: DeleteWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkloadGroupResponse>;
@@ -1989,7 +1989,7 @@ declare interface Cdwdoris {
   DescribeBackUpTables(data: DescribeBackUpTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpTablesResponse>;
   /** 查询备份任务进度详情 {@link DescribeBackUpTaskDetailRequest} {@link DescribeBackUpTaskDetailResponse} */
   DescribeBackUpTaskDetail(data: DescribeBackUpTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpTaskDetailResponse>;
-  /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */
+  /** 获取集群配置文件 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */
   DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
   /** 获取集群配置文件修改历史 {@link DescribeClusterConfigsHistoryRequest} {@link DescribeClusterConfigsHistoryResponse} */
   DescribeClusterConfigsHistory(data: DescribeClusterConfigsHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsHistoryResponse>;
@@ -2011,7 +2011,7 @@ declare interface Cdwdoris {
   DescribeInstanceNodesInfo(data: DescribeInstanceNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesInfoResponse>;
   /** 获取集群节点角色 {@link DescribeInstanceNodesRoleRequest} {@link DescribeInstanceNodesRoleResponse} */
   DescribeInstanceNodesRole(data: DescribeInstanceNodesRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesRoleResponse>;
-  /** 拉取集群操作列表 {@link DescribeInstanceOperationsRequest} {@link DescribeInstanceOperationsResponse} */
+  /** 获取集群操作审计记录 {@link DescribeInstanceOperationsRequest} {@link DescribeInstanceOperationsResponse} */
   DescribeInstanceOperations(data: DescribeInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOperationsResponse>;
   /** 获取集群状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
   DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
@@ -2045,7 +2045,7 @@ declare interface Cdwdoris {
   ModifyCoolDownPolicy(data?: ModifyCoolDownPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCoolDownPolicyResponse>;
   /** 修改集群名称 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
+  /** 修改BE或FE配置 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
   ModifyInstanceKeyValConfigs(data: ModifyInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceKeyValConfigsResponse>;
   /** 修改节点状态 {@link ModifyNodeStatusRequest} {@link ModifyNodeStatusResponse} */
   ModifyNodeStatus(data: ModifyNodeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodeStatusResponse>;
@@ -2053,7 +2053,7 @@ declare interface Cdwdoris {
   ModifySecurityGroups(data: ModifySecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupsResponse>;
   /** 修改用户绑定的资源组 {@link ModifyUserBindWorkloadGroupRequest} {@link ModifyUserBindWorkloadGroupResponse} */
   ModifyUserBindWorkloadGroup(data: ModifyUserBindWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserBindWorkloadGroupResponse>;
-  /** 修改权接口 {@link ModifyUserPrivilegesV3Request} {@link ModifyUserPrivilegesV3Response} */
+  /** 修改权限接口 {@link ModifyUserPrivilegesV3Request} {@link ModifyUserPrivilegesV3Response} */
   ModifyUserPrivilegesV3(data: ModifyUserPrivilegesV3Request, config?: AxiosRequestConfig): AxiosPromise<ModifyUserPrivilegesV3Response>;
   /** 修改资源组信息 {@link ModifyWorkloadGroupRequest} {@link ModifyWorkloadGroupResponse} */
   ModifyWorkloadGroup(data: ModifyWorkloadGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkloadGroupResponse>;
@@ -2063,7 +2063,7 @@ declare interface Cdwdoris {
   OpenCoolDown(data?: OpenCoolDownRequest, config?: AxiosRequestConfig): AxiosPromise<OpenCoolDownResponse>;
   /** 冷热策略开启相关功能 {@link OpenCoolDownPolicyRequest} {@link OpenCoolDownPolicyResponse} */
   OpenCoolDownPolicy(data?: OpenCoolDownPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<OpenCoolDownPolicyResponse>;
-  /** 备份恢复 {@link RecoverBackUpJobRequest} {@link RecoverBackUpJobResponse} */
+  /** 恢复备份的数据 {@link RecoverBackUpJobRequest} {@link RecoverBackUpJobResponse} */
   RecoverBackUpJob(data: RecoverBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverBackUpJobResponse>;
   /** 集群缩容 {@link ReduceInstanceRequest} {@link ReduceInstanceResponse} */
   ReduceInstance(data: ReduceInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ReduceInstanceResponse>;

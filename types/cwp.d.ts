@@ -6165,6 +6165,8 @@ declare interface CreateMalwareWhiteListRequest {
   Md5List?: string[];
   /** 木马事件ID */
   EventId?: number;
+  /** 对历史待处理执行加白操作；0是不处理，1是处理 */
+  IsHandleHistoryEvents?: number;
 }
 
 declare interface CreateMalwareWhiteListResponse {
@@ -10980,6 +10982,8 @@ declare interface DescribeScanVulSettingResponse {
   ClickTimeout?: number;
   /** 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机 */
   Uuids?: string[];
+  /** 0版本比对,2版本比对+poc */
+  ScanMethod?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12025,15 +12029,17 @@ declare interface DescribeWarningHostConfigRequest {
 
 declare interface DescribeWarningHostConfigResponse {
   /** 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机 */
-  HostRange: number;
+  HostRange?: number;
   /** 项目或标签的名称列表，自选主机时为空 */
-  ItemLabels: string[] | null;
+  ItemLabels?: string[] | null;
   /** 机器列表 */
-  Quuids: string[] | null;
+  Quuids?: string[] | null;
   /** 机器列表总数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 项目或标签的id列表，自选主机时为空 */
-  ItemLabelIds: string[] | null;
+  ItemLabelIds?: string[] | null;
+  /** 需排除的机器列表 */
+  ExcludedQuuids?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14169,6 +14175,8 @@ declare interface ModifyWarningHostConfigRequest {
   Quuids?: string[];
   /** 项目或标签的id列表，自选主机时为空 */
   ItemLabelIds?: string[];
+  /** 需排除的机器列表 */
+  ExcludedQuuids?: string[];
 }
 
 declare interface ModifyWarningHostConfigResponse {
@@ -14205,6 +14213,8 @@ declare interface ModifyWebHookPolicyRequest {
   IsDisabled?: number;
   /** 主机列表 */
   Quuids?: string[];
+  /** 需排除的机器列表 */
+  ExcludedQuuids?: string[];
 }
 
 declare interface ModifyWebHookPolicyResponse {
@@ -14463,6 +14473,8 @@ declare interface ScanVulRequest {
   TimeoutPeriod?: number;
   /** 需要扫描的漏洞id */
   VulIds?: number[];
+  /** 0版本比对，2版本比对+poc */
+  ScanMethod?: number;
 }
 
 declare interface ScanVulResponse {
@@ -14491,6 +14503,8 @@ declare interface ScanVulSettingRequest {
   EnableScan?: number;
   /** 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机 */
   Uuids?: string[];
+  /** 0版本比对，2版本比对+poc */
+  ScanMethod?: number;
 }
 
 declare interface ScanVulSettingResponse {

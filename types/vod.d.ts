@@ -106,9 +106,9 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   Definition: number;
   /** 水印列表，支持多张图片或文字水印，最大可支持 10 张。 */
   WatermarkSet?: WatermarkInput[];
-  /** 溯源水印。 */
+  /** 溯源水印，该功能已不再支持使用。 */
   TraceWatermark?: TraceWatermarkInput;
-  /** 版权水印。 */
+  /** 版权水印，该功能已不再支持使用。 */
   CopyRightWatermark?: CopyRightWatermarkInput;
   /** 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。 */
   SubtitleSet?: string[];
@@ -2230,10 +2230,10 @@ declare interface ExtractTraceWatermarkTaskInput {
 
 /** 提取溯源水印输出信息 */
 declare interface ExtractTraceWatermarkTaskOutput {
-  /** 播放者的 ID，以十六进制表示，共6位，该参数用于 [溯源水印](https://cloud.tencent.com/document/product/266/75789) 使用场景。 */
-  Uv: string;
+  /** 播放者的 ID，以十六进制表示，共6位。 */
+  Uv?: string;
   /** 该字段已废弃。 */
-  Uid: string;
+  Uid?: string;
 }
 
 /** 人脸识别任务控制参数 */
@@ -5326,9 +5326,9 @@ declare interface TranscodeTaskInput {
   Definition: number;
   /** 水印列表，支持多张图片或文字水印，最大可支持 10 张。 */
   WatermarkSet?: WatermarkInput[];
-  /** 溯源水印。 */
+  /** 溯源水印，该功能已不再支持使用。 */
   TraceWatermark?: TraceWatermarkInput;
-  /** 版权水印。 */
+  /** 版权水印，该功能已不再支持使用。 */
   CopyRightWatermark?: CopyRightWatermarkInput;
   /** 马赛克列表，最大可支持 10 张。 */
   MosaicSet?: MosaicInput[];
