@@ -412,6 +412,8 @@ declare interface ClusterInstanceDetail {
   InstanceTasks?: ObjectTask[] | null;
   /** 实例机器类型 */
   InstanceDeviceType?: string | null;
+  /** 实例存储类型 */
+  InstanceStorageType?: string | null;
 }
 
 /** 参数修改记录 */
@@ -776,6 +778,8 @@ declare interface CynosdbInstance {
   InstanceAbility?: InstanceAbility | null;
   /** 实例机器类型 */
   DeviceType?: string | null;
+  /** 实例存储类型 */
+  InstanceStorageType?: string | null;
 }
 
 /** 实例详情 */

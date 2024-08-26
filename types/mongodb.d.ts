@@ -1453,19 +1453,19 @@ declare interface ModifyDBInstanceSecurityGroupResponse {
 declare interface ModifyDBInstanceSpecRequest {
   /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 实例配置变更后的内存大小。- 单位：GB。- 内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。注意：节点变更时，输入实例当前的内存配置。 */
-  Memory: number;
-  /** 实例配置变更后的硬盘大小，单位：GB。内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。降配时，变更后的磁盘容量必须大于已用磁盘容量的1.2倍。 注意：节点变更时，输入实例当前的硬盘配置。 */
-  Volume: number;
+  /** 实例配置变更后的内存大小。- 单位：GB。为空时，默认取实例当前的内存大小。 注意：内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。 */
+  Memory?: number;
+  /** 实例配置变更后的硬盘大小，单位：GB。为空时，默认取当前实例的磁盘大小。- 内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。- 降配时，变更后的磁盘容量必须大于已用磁盘容量的1.2倍。 */
+  Volume?: number;
   /** (已废弃) 请使用ResizeOplog独立接口完成。实例配置变更后 Oplog 的大小。- 单位：GB。- 默认 Oplog 占用容量为磁盘空间的10%。系统允许设置的 Oplog 容量范围为磁盘空间的[10%,90%]。 */
   OplogSize?: number;
-  /** 实例变更后的节点数。- 变更节点类型包含：mongod节点 或 readonly 节点，mongos节点变更无需填写。变更节点类型，请查询参数**AddNodeList**或**RemoveNodeList**指定的类型。- 副本集节点数：取值范围请通过云数据库的售卖规格 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinNodeNum**与 **MaxNodeNum**获取。- 分片集群每个分片节点数：取值范围请通过云数据库的售卖规格 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinReplicateSetNodeNum**与**MaxReplicateSetNodeNum**获取。 */
+  /** 实例变更后mongod的节点数（不包含readonly节点数）。- 变更mongod CPU与内存规格时，该参数可以不配置或者输入当前 mongod(不包含readonly) 节点数量。- 变更 mongos CPU与内存规格时，该参数可以不配置或者输入当前 mongod(不包含readonly) 节点数量。- 节点变更时(全部类型)，该参数可不配置或输入变更后的 mongod(不包含readonl) 节点数量。- 副本集节点数：请确认节点数量取值范围，通过云数据库的售卖规格 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38565)接口返回的参数 MinNodeNum 与 MaxNodeNum 获取。- 分片集群每个分片节点数：请确认节点数量取值范围，通过云数据库的售卖规格 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38565)接口返回的参数 MinReplicateSetNodeNum 与 MaxReplicateSetNodeNum 获取。 */
   NodeNum?: number;
-  /** 实例变更后的分片数。取值范围请通过云数据库的售卖规格 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinReplicateSetNum**与**MaxReplicateSetNum**获取。该参数只能增加不能减少。 */
+  /** 实例变更后的分片数。- 取值范围请通过云数据库的售卖规格[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinReplicateSetNum**与**MaxReplicateSetNum**获取。- 该参数只能增加不能减少。 */
   ReplicateSetNum?: number;
   /** 实例配置变更的切换时间。- 0：调整完成时，立即执行变配任务。默认为0。- 1：在维护时间窗内，执行变配任务。**说明**：调整节点数和分片数不支持在维护时间窗内变更。 */
   InMaintenance?: number;
-  /** 分片实例配置变更后的mongos内存大小。- 单位：GB。 */
+  /** 分片实例配置变更后的mongos内存大小。单位：GB。 */
   MongosMemory?: string;
   /** 新增节点列表，节点类型及可用区信息。 */
   AddNodeList?: AddNodeList[];

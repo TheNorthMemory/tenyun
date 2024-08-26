@@ -456,6 +456,28 @@ declare interface SceneItem {
   CSSUrl?: string | null;
 }
 
+/** 录制流信息 */
+declare interface SingleStreamInfo {
+  /** 用户ID */
+  UserId?: string | null;
+  /** 开始时间 */
+  StartTime?: number | null;
+  /** 结束时间 */
+  StopTime?: number | null;
+  /** 总时长 */
+  Duration?: number | null;
+  /** 文件格式 */
+  FileFormat?: string | null;
+  /** 流url */
+  RecordUrl?: string | null;
+  /** 流大小 */
+  RecordSize?: number | null;
+  /** 流ID */
+  VideoId?: string | null;
+  /** 流类型 */
+  Role?: string | null;
+}
+
 /** 文字水印配置 */
 declare interface TextMarkConfig {
   /** 文字水印内容 */
@@ -1137,6 +1159,26 @@ declare interface DescribeQuestionListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordStreamRequest {
+  /** 学校ID */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId: number;
+}
+
+declare interface DescribeRecordStreamResponse {
+  /** 学校ID */
+  SchoolId?: number;
+  /** 课堂ID */
+  ClassId?: number;
+  /** 课堂类型 */
+  ClassType?: number;
+  /** 用户流信息 */
+  StreamInfo?: SingleStreamInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoomForbiddenUserRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -1806,6 +1848,8 @@ declare interface Lcic {
   DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
   /** 获取课堂提问列表 {@link DescribeQuestionListRequest} {@link DescribeQuestionListResponse} */
   DescribeQuestionList(data: DescribeQuestionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionListResponse>;
+  /** 获取流信息 {@link DescribeRecordStreamRequest} {@link DescribeRecordStreamResponse} */
+  DescribeRecordStream(data: DescribeRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStreamResponse>;
   /** 获取房间配置信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间中被禁言成员列表 {@link DescribeRoomForbiddenUserRequest} {@link DescribeRoomForbiddenUserResponse} */

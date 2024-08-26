@@ -730,6 +730,8 @@ declare interface UserInfo {
   Describe?: string;
   /** 旧密码 */
   OldPwd?: string;
+  /** 绑定的子用户uin */
+  CamUin?: string;
 }
 
 /** 用户绑定资源组信息 */
@@ -1335,12 +1337,12 @@ declare interface DescribeInstanceUsedSubnetsResponse {
 declare interface DescribeInstancesHealthStateRequest {
   /** 集群Id */
   InstanceID?: string;
-  /** "" 或者 某个集群Id */
+  /** 为空：代表当前appId下所有集群 或者 某个集群Id */
   Input?: string;
 }
 
 declare interface DescribeInstancesHealthStateResponse {
-  /** 出参 */
+  /** base64编码后的数据，包含了集群的健康信息 */
   Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
