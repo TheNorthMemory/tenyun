@@ -210,6 +210,8 @@ declare interface Apply {
   ApproverName?: string | null;
   /** 审批所属项目 */
   ApproveProjectName?: string | null;
+  /** 审批id */
+  ApplyId?: string | null;
 }
 
 /** 修改审批单状态 */

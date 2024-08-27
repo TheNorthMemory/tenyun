@@ -3675,6 +3675,10 @@ declare interface DescribeDSPARDBDataAssetDetailRequest {
   DspaId: string;
   /** 合规组Id */
   ComplianceId: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
   /** 可信分排序，ASC-升序DESC降序 */
   CreditScore?: string;
 }

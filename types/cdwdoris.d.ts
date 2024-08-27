@@ -732,6 +732,8 @@ declare interface UserInfo {
   OldPwd?: string;
   /** 绑定的子用户uin */
   CamUin?: string;
+  /** ranger group id列表 */
+  CamRangerGroupIds?: number[];
 }
 
 /** 用户绑定资源组信息 */

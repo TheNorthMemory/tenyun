@@ -264,7 +264,7 @@ declare interface ImageConfig {
   Args?: string | null;
   /** 镜像加速开关，默认False */
   ContainerImageAccelerate?: boolean | null;
-  /** 镜像函数端口设置默认值: 9000-1: 无端口镜像函数其他: 取值范围 0 ~ 65535 */
+  /** 镜像函数端口设置，可指定镜像类型Web Server镜像：9000Job 镜像：-1默认值：9000示例值：9000 */
   ImagePort?: number | null;
 }
 
@@ -1545,6 +1545,8 @@ declare interface PublishLayerVersionRequest {
   Description?: string;
   /** 层的软件许可证 */
   LicenseInfo?: string;
+  /** 层Tag 参数，以键值对数组形式传入 */
+  Tags?: Tag[];
 }
 
 declare interface PublishLayerVersionResponse {

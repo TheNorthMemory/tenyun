@@ -3271,7 +3271,7 @@ declare interface DescribeFlowRequest {
 
 declare interface DescribeFlowResponse {
   /** 任务流状态。0-成功，1-失败，2-处理中 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -234,6 +234,8 @@ declare interface Certificates {
   KeyPasswordCustomFlag?: boolean | null;
   /** 支持下载的WEB服务器类型： nginx、apache、iis、tomcat、jks、root、other */
   SupportDownloadType?: SupportDownloadType | null;
+  /** 证书吊销完成时间 */
+  CertRevokedTime?: string | null;
 }
 
 /** clb实例详情 */
