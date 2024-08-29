@@ -2680,6 +2680,18 @@ declare interface RemoveUserFromGroupResponse {
   RequestId?: string;
 }
 
+declare interface SendOrgMemberAccountBindEmailRequest {
+  /** 成员Uin。 */
+  MemberUin: number;
+  /** 绑定ID。可以通过[DescribeOrganizationMemberEmailBind](https://cloud.tencent.com/document/product/850/93332)获取 */
+  BindId: number;
+}
+
+declare interface SendOrgMemberAccountBindEmailResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetExternalSAMLIdentityProviderRequest {
   /** 空间ID。 */
   ZoneId: string;
@@ -3441,6 +3453,8 @@ declare interface Organization {
   RemovePermissionPolicyFromRoleConfiguration(data: RemovePermissionPolicyFromRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<RemovePermissionPolicyFromRoleConfigurationResponse>;
   /** 从用户组中移除用户 {@link RemoveUserFromGroupRequest} {@link RemoveUserFromGroupResponse} */
   RemoveUserFromGroup(data: RemoveUserFromGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserFromGroupResponse>;
+  /** 重新发送成员绑定邮箱激活邮件 {@link SendOrgMemberAccountBindEmailRequest} {@link SendOrgMemberAccountBindEmailResponse} */
+  SendOrgMemberAccountBindEmail(data: SendOrgMemberAccountBindEmailRequest, config?: AxiosRequestConfig): AxiosPromise<SendOrgMemberAccountBindEmailResponse>;
   /** 配置SAML身份提供商信息 {@link SetExternalSAMLIdentityProviderRequest} {@link SetExternalSAMLIdentityProviderResponse} */
   SetExternalSAMLIdentityProvider(data: SetExternalSAMLIdentityProviderRequest, config?: AxiosRequestConfig): AxiosPromise<SetExternalSAMLIdentityProviderResponse>;
   /** 修改用户组信息 {@link UpdateGroupRequest} {@link UpdateGroupResponse} */

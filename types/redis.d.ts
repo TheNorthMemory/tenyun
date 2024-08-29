@@ -127,21 +127,21 @@ declare interface DelayDistribution {
 /** 详细DTS实例信息 */
 declare interface DescribeInstanceDTSInstanceInfo {
   /** 地域 ID。 */
-  RegionId: number | null;
+  RegionId?: number | null;
   /** 实例 ID。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 仓库ID。 */
-  SetId: number | null;
+  SetId?: number | null;
   /** 可用区ID。 */
-  ZoneId: number | null;
+  ZoneId?: number | null;
   /** 实例类型。 */
-  Type: number | null;
+  Type?: number | null;
   /** 实例名称。 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 实例访问地址。 */
-  Vip: string | null;
+  Vip?: string | null;
   /** 状态。 */
-  Status: number | null;
+  Status?: number | null;
 }
 
 /** 复制组信息 */

@@ -42,6 +42,80 @@ declare interface AgentStatus {
   InOperation?: number | null;
 }
 
+/** 监听事件 */
+declare interface AiOpsEventListenerDTO {
+  /** 事件名 */
+  EventName?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 项目展示名 */
+  ProjectDisplayName?: string | null;
+  /** 事件周期 */
+  EventSubType?: string | null;
+  /** 事件项目ID */
+  ProjectId?: string | null;
+  /** 扩展名 */
+  PropertiesList?: ParamInfoDs[] | null;
+  /** 事件广播类型 */
+  EventBroadcastType?: string | null;
+}
+
+/** DLC资源配置信息 */
+declare interface AiopsDLCResourceConfigDto {
+  /** Driver资源 */
+  DriverSize?: string | null;
+  /** Executor资源 */
+  ExecutorSize?: string | null;
+  /** Executor数量 */
+  ExecutorNumbers?: string | null;
+  /** 资源配置方式 */
+  IsInherit?: string | null;
+}
+
+/** 数据运维脚本信息 */
+declare interface AiopsScriptInfo {
+  /** 脚本内容 */
+  ScriptContent: string | null;
+  /** 脚本所在COS的路径 */
+  CosPath: string | null;
+  /** 脚本所在COS的地域 */
+  CosRegion: string | null;
+  /** 脚本所在COS的桶名称 */
+  CosBucketName: string | null;
+}
+
+/** 父任务simple信息 */
+declare interface AiopsSimpleTaskDto {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 任务状态 */
+  Status?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
+  /** 任务创建人 */
+  Creator?: string | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目标识 */
+  ProjectIdent?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 配置策略 */
+  ConfigType?: string | null;
+  /** 时间维度 */
+  TimeDimension?: string | null;
+  /** 实例范围 */
+  InstanceScope?: string | null;
+  /** 执行策略 */
+  ExectuorPolicy?: string | null;
+}
+
 /** 告警事件详情 */
 declare interface AlarmEventInfo {
   /** 告警ID */
@@ -374,6 +448,16 @@ declare interface BatchResult {
   Total: number;
 }
 
+/** 批量执行结果 */
+declare interface BatchResultDs {
+  /** 成功数 */
+  Success?: number | null;
+  /** 失败数 */
+  Failed?: number | null;
+  /** 总计 */
+  Total?: number | null;
+}
+
 /** 操作结果 */
 declare interface BatchReturn {
   /** 执行结果 */
@@ -382,6 +466,12 @@ declare interface BatchReturn {
   ErrorDesc: string | null;
   /** 执行情况id */
   ErrorId: string | null;
+}
+
+/** 批量操作出参 */
+declare interface BatchTaskOperateNew {
+  /** 操作Id */
+  JobId?: number | null;
 }
 
 /** 实时任务同步速度 字节/s */
@@ -988,6 +1078,26 @@ declare interface DescribeFolderWorkflowListData {
   PageSize: number;
 }
 
+/** 待提交任务信息 */
+declare interface DescribePendingSubmitTaskInfo {
+  /** 任务编号 */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 修改类型 */
+  ModifyType?: string | null;
+  /** 任务状态 */
+  TaskStatus?: string | null;
+  /** 提交预检查（Y/N） */
+  SubmitPreCheck?: string | null;
+  /** 提交预检查提交可能会失败的原因 */
+  SubmitPreCheckDetailList?: TaskSubmitPreCheckDetailInfo[] | null;
+  /** 资源组编号 */
+  ExecutorGroupId?: string | null;
+  /** 资源组名称 */
+  ExecutorGroupName?: string | null;
+}
+
 /** DiagnoseRep */
 declare interface DiagnoseRep {
   /** 诊断信息内容 */
@@ -1378,6 +1488,20 @@ declare interface EventOpsDto {
   Listeners?: EventListenerOpsDto[] | null;
   /** 事件案例 */
   EventCases?: EventCaseOpsDto[] | null;
+}
+
+/** 扩展信息参数 */
+declare interface ExtResourceFlagDto {
+  /** 父任务信息获取标识 */
+  ParentTask?: boolean | null;
+  /** 生产事件获取标识 */
+  EventListener?: string | null;
+  /** Dlc相关配置获取标识 */
+  DlcResourceConfig?: string | null;
+  /** 脚本信息获取标识 */
+  Script?: string | null;
+  /** 离线任务信息获取标识 */
+  OfflineSyncTask?: string | null;
 }
 
 /** 错误处理结果信息 */
@@ -2554,6 +2678,14 @@ declare interface PairDto {
 
 /** 参数参数 */
 declare interface ParamInfo {
+  /** 参数名 */
+  ParamKey: string;
+  /** 参数值 */
+  ParamValue: string;
+}
+
+/** 参数参数 */
+declare interface ParamInfoDs {
   /** 参数名 */
   ParamKey: string;
   /** 参数值 */
@@ -4420,12 +4552,40 @@ declare interface TaskOpsDto {
   ExecutorGroupId?: string | null;
   /** 资源组名称 */
   ExecutorGroupName?: string | null;
+  /** 任务扩展信息(目前返沪离线同步的任务详情) */
+  TaskExtInfo?: string | null;
+  /** 任务绑定的事件信息 */
+  EventListenerInfos?: AiOpsEventListenerDTO[] | null;
+  /** 脚本信息 */
+  ScriptInfo?: AiopsScriptInfo | null;
+  /** DLC资源配置 */
+  DLCResourceConfig?: AiopsDLCResourceConfigDto | null;
+  /** 父任务simple信息 */
+  ParentTaskInfos?: AiopsSimpleTaskDto | null;
+  /** 资源获取标识 */
+  ExtResourceFlag?: ExtResourceFlagDto | null;
 }
 
 /** 任务执行脚本 */
 declare interface TaskScriptContent {
   /** 脚本内容 base64编码 */
   ScriptContent: string | null;
+}
+
+/** 任务提交预校验详细信息 */
+declare interface TaskSubmitPreCheckDetailInfo {
+  /** 任务编号 */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 项目编号 */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 责任人编号 */
+  InChargeId?: string | null;
+  /** 责任人名称 */
+  InCharge?: string | null;
 }
 
 /** 任务标签，可用于检索任务的条件 */
@@ -4756,6 +4916,52 @@ declare interface WorkflowExtOpsDtoPage {
   Items?: WorkflowExtOpsDto[] | null;
 }
 
+/** 工作流调度信息 */
+declare interface WorkflowScheduleDtoDs {
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 创建人 */
+  Creater?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 延迟时间 */
+  DelayTime?: number | null;
+  /** 启动时间 */
+  StartupTime?: number | null;
+  /** 任务依赖 */
+  SelfDepend?: string | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 指定运行时间 */
+  TaskAction?: string | null;
+  /** 调度周期时间单位 */
+  CycleType?: string | null;
+  /** 调度周期 */
+  CycleStep?: number | null;
+  /** Cron表达式 */
+  CrontabExpression?: string | null;
+  /** 执行时间左闭区间 */
+  ExecutionStartTime?: string | null;
+  /** 执行时间右闭区间 */
+  ExecutionEndTime?: string | null;
+  /** 实例初始化策略 */
+  InstanceInitStrategy?: string | null;
+  /** 工作流依赖 */
+  DependencyWorkflow?: string | null;
+  /** 调度计划 */
+  SchedulerDesc?: string | null;
+  /** 工作流首次提交时间 */
+  FirstSubmitTime?: string | null;
+  /** 工作流最近提交时间 */
+  LatestSubmitTime?: string | null;
+}
+
 /** 工作流调度详情 */
 declare interface WorkflowSchedulerOpsDto {
   /** 创建时间 */
@@ -4826,6 +5032,28 @@ declare interface BatchCreateIntegrationTaskAlarmsResponse {
   FailedCount?: number | null;
   /** 任务总数 */
   TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchCreateTaskVersionAsyncRequest {
+  /** 任务信息 */
+  Tasks: BatchCreateTaskVersionDTO[];
+  /** 项目ID */
+  ProjectId: string;
+  /** 是否自动运行 */
+  AutoRun?: boolean;
+  /** 告警方式:email-邮件;sms-短信;wecom-企业微信 */
+  AlarmWays?: string;
+  /** 告警对象:1-项目管理员，2-任务责任人 */
+  AlarmRecipientTypes?: string;
+  /** 是否需要校验父任务已经提交到调度 */
+  NeedCheckParentSubmitted?: boolean;
+}
+
+declare interface BatchCreateTaskVersionAsyncResponse {
+  /** 批量操作返回 */
+  Data?: BatchTaskOperateNew | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5260,6 +5488,29 @@ declare interface CommitRuleGroupTaskResponse {
   Data?: RuleGroupExecResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
+}
+
+declare interface CosTokenResponse {
+  /** token id */
+  Id?: string | null;
+  /** token内容 */
+  Token?: string | null;
+  /** 密钥id */
+  SecretId?: string | null;
+  /** 密钥内容 */
+  SecretKey?: string | null;
+  /** 响应 */
+  Response?: string | null;
+  /** 用户uin */
+  OwnerUin?: string | null;
+  /** 过期时间 */
+  ExpiredTime?: number | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 更新时间 */
+  UpdateTime?: number | null;
+  /** 操作者uin */
+  OperatorUin?: string | null;
 }
 
 declare interface CountOpsInstanceStateRequest {
@@ -7306,6 +7557,22 @@ declare interface DescribeOrganizationalFunctionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePendingSubmitTaskListRequest {
+  /** 项目编号 */
+  ProjectId: string;
+  /** 工作流编号 */
+  WorkflowId?: string;
+  /** 任务编号列表 */
+  TaskIdList?: string[];
+}
+
+declare interface DescribePendingSubmitTaskListResponse {
+  /** 待提交任务信息 */
+  Data?: DescribePendingSubmitTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProjectRequest {
   /** 项目id。一般使用项目Id来查询，与projectName必须存在一个。 */
   ProjectId?: string;
@@ -8424,6 +8691,20 @@ declare interface DescribeWorkflowListByProjectIdResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWorkflowSchedulerInfoDsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+}
+
+declare interface DescribeWorkflowSchedulerInfoDsResponse {
+  /** 数据 */
+  Data?: WorkflowScheduleDtoDs | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWorkflowTaskCountRequest {
   /** 工作流列表 */
   WorkflowId: string;
@@ -8614,6 +8895,32 @@ declare interface GenHiveTableDDLSqlResponse {
   RequestId?: string;
 }
 
+declare interface GetCosTokenRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 请求域名 */
+  OriginDomain: string;
+  /** 是否需要跨域 */
+  CrossFlag: boolean;
+  /** 桶名 */
+  BucketName?: string;
+  /** 远程地址 */
+  RemotePath?: string;
+}
+
+declare interface GetCosTokenResponse {
+  /** cos地域 */
+  Region?: string | null;
+  /** Token信息 */
+  Token?: CosTokenResponse | null;
+  /** 桶名 */
+  Bucket?: string | null;
+  /** 终止点（针对私有云环境） */
+  EndPoint?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetFileInfoRequest {
   /** 项目ID */
   ProjectId: string;
@@ -8745,6 +9052,20 @@ declare interface InstanceApiOpsRequest {
   DataTimeCycle?: string;
   /** 资源组id,多个资源组id用英文逗号分隔 */
   ExecutorGroupIdList?: string[];
+}
+
+declare interface JudgeResourceFileRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 资源路径 */
+  FilePath: string;
+}
+
+declare interface JudgeResourceFileResponse {
+  /** 资源文件完整路径 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface KillOpsMakePlanInstancesRequest {
@@ -9458,6 +9779,46 @@ declare interface RemoveWorkflowDsResponse {
   RequestId?: string;
 }
 
+declare interface RenewWorkflowSchedulerInfoDsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 延迟时间 */
+  DelayTime?: number;
+  /** 启动时间 */
+  StartupTime?: number;
+  /** 任务依赖 */
+  SelfDepend?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 指定运行时间 */
+  TaskAction?: string;
+  /** 调度周期时间单位 */
+  CycleType?: string;
+  /** 调度周期 */
+  CycleStep?: number;
+  /** 执行时间左闭区间 */
+  ExecutionStartTime?: string;
+  /** 执行时间右闭区间 */
+  ExecutionEndTime?: string;
+  /** 任务初始化策略，T_PLUS_1、T_PLUS_0、T_MINUS_1 */
+  InstanceInitStrategy?: string;
+  /** 工作流依赖，yes or no */
+  DependencyWorkflow?: string;
+  /** CrontabExpression */
+  CrontabExpression?: string;
+}
+
+declare interface RenewWorkflowSchedulerInfoDsResponse {
+  /** 数据 */
+  Data?: BatchResultDs | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResumeIntegrationTaskRequest {
   /** 任务id */
   TaskId: string;
@@ -10027,6 +10388,8 @@ declare interface Wedata {
   (): Versions;
   /** 批量创建任务告警规则 {@link BatchCreateIntegrationTaskAlarmsRequest} {@link BatchCreateIntegrationTaskAlarmsResponse} */
   BatchCreateIntegrationTaskAlarms(data: BatchCreateIntegrationTaskAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateIntegrationTaskAlarmsResponse>;
+  /** 异步批量创建任务版本 {@link BatchCreateTaskVersionAsyncRequest} {@link BatchCreateTaskVersionAsyncResponse} */
+  BatchCreateTaskVersionAsync(data: BatchCreateTaskVersionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateTaskVersionAsyncResponse>;
   /** 批量删除集成任务 {@link BatchDeleteIntegrationTasksRequest} {@link BatchDeleteIntegrationTasksResponse} */
   BatchDeleteIntegrationTasks(data: BatchDeleteIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteIntegrationTasksResponse>;
   /** 任务运维-批量删除任务 {@link BatchDeleteOpsTasksRequest} {@link BatchDeleteOpsTasksResponse} */
@@ -10249,6 +10612,8 @@ declare interface Wedata {
   DescribeOpsWorkflows(data: DescribeOpsWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpsWorkflowsResponse>;
   /** 查询全量函数（层级化）接口 {@link DescribeOrganizationalFunctionsRequest} {@link DescribeOrganizationalFunctionsResponse} */
   DescribeOrganizationalFunctions(data: DescribeOrganizationalFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationalFunctionsResponse>;
+  /** 获取待提交任务预提交校验信息 {@link DescribePendingSubmitTaskListRequest} {@link DescribePendingSubmitTaskListResponse} */
+  DescribePendingSubmitTaskList(data: DescribePendingSubmitTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePendingSubmitTaskListResponse>;
   /** 获取项目信息 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
   DescribeProject(data?: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
   /** 查询质量评分 {@link DescribeQualityScoreRequest} {@link DescribeQualityScoreResponse} */
@@ -10361,6 +10726,8 @@ declare interface Wedata {
   DescribeWorkflowInfoById(data: DescribeWorkflowInfoByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowInfoByIdResponse>;
   /** 根据项目id 获取项目下所有工作流列表 {@link DescribeWorkflowListByProjectIdRequest} {@link DescribeWorkflowListByProjectIdResponse} */
   DescribeWorkflowListByProjectId(data: DescribeWorkflowListByProjectIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowListByProjectIdResponse>;
+  /** 获取工作流调度信息 {@link DescribeWorkflowSchedulerInfoDsRequest} {@link DescribeWorkflowSchedulerInfoDsResponse} */
+  DescribeWorkflowSchedulerInfoDs(data: DescribeWorkflowSchedulerInfoDsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowSchedulerInfoDsResponse>;
   /** 查询工作流任务数 {@link DescribeWorkflowTaskCountRequest} {@link DescribeWorkflowTaskCountResponse} */
   DescribeWorkflowTaskCount(data: DescribeWorkflowTaskCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowTaskCountResponse>;
   /** 实例诊断信息-新 {@link DiagnoseProRequest} {@link DiagnoseProResponse} */
@@ -10375,6 +10742,8 @@ declare interface Wedata {
   FreezeTasksByWorkflowIds(data: FreezeTasksByWorkflowIdsRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksByWorkflowIdsResponse>;
   /** 生成建hive表的sql {@link GenHiveTableDDLSqlRequest} {@link GenHiveTableDDLSqlResponse} */
   GenHiveTableDDLSql(data: GenHiveTableDDLSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenHiveTableDDLSqlResponse>;
+  /** 开发空间-获取cos token {@link GetCosTokenRequest} {@link GetCosTokenResponse} */
+  GetCosToken(data: GetCosTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetCosTokenResponse>;
   /** 开发空间-获取数据开发脚本信息 {@link GetFileInfoRequest} {@link GetFileInfoResponse} */
   GetFileInfo(data: GetFileInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileInfoResponse>;
   /** 提取数据集成节点字段Schema {@link GetIntegrationNodeColumnSchemaRequest} {@link GetIntegrationNodeColumnSchemaResponse} */
@@ -10383,6 +10752,8 @@ declare interface Wedata {
   GetOfflineDIInstanceList(data: GetOfflineDIInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineDIInstanceListResponse>;
   /** 获取离线任务实例 {@link GetOfflineInstanceListRequest} {@link GetOfflineInstanceListResponse} */
   GetOfflineInstanceList(data: GetOfflineInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineInstanceListResponse>;
+  /** 【资源管理】判断资源文件是否存在 {@link JudgeResourceFileRequest} {@link JudgeResourceFileResponse} */
+  JudgeResourceFile(data: JudgeResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<JudgeResourceFileResponse>;
   /** 数据补录-按补录计划批量终止实例 {@link KillOpsMakePlanInstancesRequest} {@link KillOpsMakePlanInstancesResponse} */
   KillOpsMakePlanInstances(data: KillOpsMakePlanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsMakePlanInstancesResponse>;
   /** 实例运维-批量终止l实例 {@link KillScheduleInstancesRequest} {@link KillScheduleInstancesResponse} */
@@ -10433,6 +10804,8 @@ declare interface Wedata {
   RegisterEventListener(data: RegisterEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventListenerResponse>;
   /** 删除编排空间工作流 {@link RemoveWorkflowDsRequest} {@link RemoveWorkflowDsResponse} */
   RemoveWorkflowDs(data: RemoveWorkflowDsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkflowDsResponse>;
+  /** 更新工作流下任务调度信息 {@link RenewWorkflowSchedulerInfoDsRequest} {@link RenewWorkflowSchedulerInfoDsResponse} */
+  RenewWorkflowSchedulerInfoDs(data: RenewWorkflowSchedulerInfoDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowSchedulerInfoDsResponse>;
   /** 继续集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */
   ResumeIntegrationTask(data: ResumeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeIntegrationTaskResponse>;
   /** 抢占锁定集成任务 {@link RobAndLockIntegrationTaskRequest} {@link RobAndLockIntegrationTaskResponse} */

@@ -651,19 +651,19 @@ declare interface LaunchTemplate {
 /** 实例启动模板简要信息。 */
 declare interface LaunchTemplateInfo {
   /** 实例启动模版本号。 */
-  LatestVersionNumber: number | null;
+  LatestVersionNumber?: number | null;
   /** 实例启动模板ID。 */
-  LaunchTemplateId: string | null;
+  LaunchTemplateId?: string | null;
   /** 实例启动模板名。 */
-  LaunchTemplateName: string | null;
+  LaunchTemplateName?: string | null;
   /** 实例启动模板默认版本号。 */
-  DefaultVersionNumber: number | null;
+  DefaultVersionNumber?: number | null;
   /** 实例启动模板包含的版本总数量。 */
-  LaunchTemplateVersionCount: number | null;
+  LaunchTemplateVersionCount?: number | null;
   /** 创建该模板的用户UIN。 */
-  CreatedBy: string | null;
+  CreatedBy?: string | null;
   /** 创建该模板的时间。 */
-  CreationTime: string | null;
+  CreationTime?: string | null;
 }
 
 /** 实例启动模板版本信息 */
@@ -1146,7 +1146,7 @@ declare interface VirtualPrivateCloud {
 
 /** 可用区信息 */
 declare interface ZoneInfo {
-  /** 可用区名称，例如，ap-guangzhou-3全网可用区名称如下： ap-chongqing-1 ap-seoul-1 ap-seoul-2 ap-chengdu-1 ap-chengdu-2 ap-hongkong-1（售罄） ap-hongkong-2 ap-hongkong-3 ap-shenzhen-fsi-1 ap-shenzhen-fsi-2 ap-shenzhen-fsi-3（售罄） ap-guangzhou-1（售罄） ap-guangzhou-2（售罄） ap-guangzhou-3 ap-guangzhou-4 ap-guangzhou-6 ap-guangzhou-7 ap-tokyo-1 ap-tokyo-2 ap-singapore-1 ap-singapore-2 ap-singapore-3 ap-singapore-4 ap-shanghai-fsi-1 ap-shanghai-fsi-2 ap-shanghai-fsi-3 ap-bangkok-1 ap-bangkok-2 ap-shanghai-1（售罄） ap-shanghai-2 ap-shanghai-3 ap-shanghai-4 ap-shanghai-5 ap-shanghai-8 ap-mumbai-1 ap-mumbai-2 eu-moscow-1 ap-beijing-1（售罄） ap-beijing-2 ap-beijing-3 ap-beijing-4 ap-beijing-5 ap-beijing-6 ap-beijing-7 na-siliconvalley-1 na-siliconvalley-2 eu-frankfurt-1 eu-frankfurt-2 na-toronto-1 na-ashburn-1 na-ashburn-2 ap-nanjing-1 ap-nanjing-2 ap-nanjing-3 sa-saopaulo-1 ap-jakarta-1 ap-jakarta-2 */
+  /** 可用区名称，例如，ap-guangzhou-3全网可用区名称如下： ap-chongqing-1 ap-seoul-1 ap-seoul-2 ap-chengdu-1 ap-chengdu-2 ap-hongkong-1（售罄） ap-hongkong-2 ap-hongkong-3 ap-shenzhen-fsi-1 ap-shenzhen-fsi-2 ap-shenzhen-fsi-3（售罄） ap-guangzhou-1（售罄） ap-guangzhou-2（售罄） ap-guangzhou-3 ap-guangzhou-4 ap-guangzhou-6 ap-guangzhou-7 ap-tokyo-1 ap-tokyo-2 ap-singapore-1 ap-singapore-2 ap-singapore-3 ap-singapore-4 ap-shanghai-fsi-1 ap-shanghai-fsi-2 ap-shanghai-fsi-3 ap-bangkok-1 ap-bangkok-2 ap-shanghai-1（售罄） ap-shanghai-2 ap-shanghai-3 ap-shanghai-4 ap-shanghai-5 ap-shanghai-8 ap-mumbai-1 ap-mumbai-2 eu-moscow-1 ap-beijing-1（售罄） ap-beijing-2 ap-beijing-3 ap-beijing-4 ap-beijing-5 ap-beijing-6 ap-beijing-7 na-siliconvalley-1 na-siliconvalley-2 eu-frankfurt-1 eu-frankfurt-2 na-ashburn-1 na-ashburn-2 ap-nanjing-1 ap-nanjing-2 ap-nanjing-3 sa-saopaulo-1 ap-jakarta-1 ap-jakarta-2 */
   Zone?: string;
   /** 可用区描述，例如，广州三区 */
   ZoneName?: string;
@@ -1249,17 +1249,17 @@ declare interface CreateDisasterRecoverGroupRequest {
 
 declare interface CreateDisasterRecoverGroupResponse {
   /** 分散置放群组ID列表。 */
-  DisasterRecoverGroupId: string;
+  DisasterRecoverGroupId?: string;
   /** 分散置放群组类型，取值范围：HOST：物理机SW：交换机RACK：机架 */
-  Type: string;
+  Type?: string;
   /** 分散置放群组名称，长度1-60个字符，支持中、英文。 */
-  Name: string;
+  Name?: string;
   /** 置放群组内可容纳的云服务器数量。 */
-  CvmQuotaTotal: number;
+  CvmQuotaTotal?: number;
   /** 置放群组内已有的云服务器数量。 */
-  CurrentNum: number;
+  CurrentNum?: number;
   /** 置放群组创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1935,9 +1935,9 @@ declare interface DescribeRegionsRequest {
 
 declare interface DescribeRegionsResponse {
   /** 地域数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 地域列表信息。 */
-  RegionSet: RegionInfo[];
+  RegionSet?: RegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

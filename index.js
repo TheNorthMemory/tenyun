@@ -104,6 +104,7 @@ export const SERVICE_VERSIONS = {
   cmq: ['2019-03-04'],
   cms: ['2019-03-21'],
   config: ['2022-08-02'],
+  controlcenter: ['2023-01-10'],
   cpdp: ['2019-08-20'],
   cr: ['2018-03-21'],
   csip: ['2022-11-21'],

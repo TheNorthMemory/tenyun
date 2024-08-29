@@ -432,6 +432,8 @@ declare interface Resource {
   DomainCount?: number | null;
   /** 已使用网络域个数 */
   UsedDomainCount?: number | null;
+  /** 0 非试用版，1 试用版 */
+  Trial?: number | null;
 }
 
 /** 立即执行改密任务的入参 */
@@ -706,7 +708,7 @@ declare interface BindDeviceResourceRequest {
   /** 资产ID集合 */
   DeviceIdSet: number[];
   /** 堡垒机服务ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 网络域ID */
   DomainId?: string;
 }

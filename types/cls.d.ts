@@ -358,7 +358,7 @@ declare interface ConsoleSharingConfig {
   Type: number;
   /** 分享链接有效期，单位：毫秒，最长支持30天 */
   DurationMilliseconds: number;
-  /** 允许访问的资源列表 */
+  /** 允许访问的资源列表，目前仅支持一个Resource */
   Resources: string[];
   /** 分享链接域名，可选范围- 公网匿名分享：填写clsshare.com- datasight内网匿名分享(若开启)：datasight内网域名 */
   Domain?: string | null;

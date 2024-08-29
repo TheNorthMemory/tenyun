@@ -142,6 +142,48 @@ declare interface AlertExtraInfo {
   StrategyName?: string | null;
   /** 主机防护命中策略，是策略ID和策略名称的组合 */
   HitStrategy?: string | null;
+  /** 进程名 */
+  ProcessName?: string | null;
+  /** PID */
+  PID?: string | null;
+  /** 容器Pod名 */
+  PodName?: string | null;
+  /** 容器PodID */
+  PodID?: string | null;
+  /** Http响应 */
+  Response?: string | null;
+  /** 系统调用 */
+  SystemCall?: string | null;
+  /** 操作类型verb */
+  Verb?: string | null;
+  /** 日志ID */
+  LogID?: string | null;
+  /** 变更内容 */
+  Different?: string | null;
+  /** 事件类型 */
+  EventType?: string | null;
+  /** 事件描述 */
+  Description?: string | null;
+  /** 目标地址(容器反弹shell) */
+  TargetAddress?: string | null;
+  /** 恶意请求域名(容器恶意外联) */
+  MaliciousRequestDomain?: string | null;
+  /** 规则类型(容器K8sAPI异常请求) */
+  RuleType?: string | null;
+  /** 请求资源(容器K8sAPI异常请求) */
+  RequestURI?: string | null;
+  /** 发起请求用户(容器K8sAPI异常请求) */
+  RequestUser?: string | null;
+  /** 请求对象(容器K8sAPI异常请求) */
+  RequestObject?: string | null;
+  /** 响应对象(容器K8sAPI异常请求) */
+  ResponseObject?: string | null;
+  /** 文件类型(容器文件篡改) */
+  FileType?: string | null;
+  /** 标签特征(容器恶意外联) */
+  TIType?: string | null;
+  /** 来源IP(容器K8sAPI异常请求) */
+  SourceIP?: string | null;
 }
 
 /** 告警中心全量告警列表数据 */
@@ -200,6 +242,10 @@ declare interface AlertInfo {
   RiskInvestigation?: string | null;
   /** 风险处置 */
   RiskTreatment?: string | null;
+  /** 日志类型 */
+  LogType?: string | null;
+  /** 语句检索 */
+  LogSearch?: string | null;
 }
 
 /** 集群pod列表 */
@@ -618,7 +664,7 @@ declare interface BugInfoDetail {
   SubCategory?: string | null;
 }
 
-/** 主机资产信息 */
+/** 主机资产信息主机防护状态枚举，左边是常量，右边是显示0：未安装1：基础版防护中2：普惠版防护中3：专业版防护中4：旗舰版防护中5：已离线6：已关机 */
 declare interface CVMAssetVO {
   /** 资产id */
   AssetId?: string | null;
@@ -750,6 +796,10 @@ declare interface CVMAssetVO {
   RealAppid?: number | null;
   /** 云资产类型：0：腾讯云，1：aws，2：azure */
   CloudType?: number | null;
+  /** 主机防护状态枚举0：未安装1：基础版防护中2：普惠版防护中3：专业版防护中4：旗舰版防护中5：已离线6：已关机 */
+  ProtectStatus?: number | null;
+  /** 最后离线时间 */
+  OfflineTime?: string | null;
 }
 
 /** clb实例和监听器信息 */
@@ -1398,6 +1448,10 @@ declare interface RoleInfo {
   AssetType?: number | null;
   /** 来源日志分析的信息字段 */
   FromLogAnalysisData?: KeyValue[] | null;
+  /** 容器名 */
+  ContainerName?: string | null;
+  /** 容器ID */
+  ContainerID?: string | null;
 }
 
 /** 扫描任务详情 */
@@ -2331,6 +2385,8 @@ declare interface DescribeCVMAssetsResponse {
   AssetMapInstanceTypeList?: AssetInstanceTypeMap[] | null;
   /** 公网内网枚举 */
   PublicPrivateAttr?: FilterDataObject[] | null;
+  /** 主机防护状态 */
+  ProtectStatusList?: FilterDataObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

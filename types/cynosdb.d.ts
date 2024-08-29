@@ -2627,9 +2627,9 @@ declare interface CreateProxyResponse {
 }
 
 declare interface CreateResourcePackageRequest {
-  /** 实例类型 */
+  /** 实例类型，目前固定传cynosdb-serverless */
   InstanceType: string;
-  /** 资源包使用地域china-中国内地通用，overseas-港澳台及海外通用 */
+  /** 资源包使用地域chineseMainland-中国内地通用，overseas-港澳台及海外通用 */
   PackageRegion: string;
   /** 资源包类型：CCU-计算资源包，DISK-存储资源包 */
   PackageType: string;
@@ -4539,25 +4539,33 @@ declare interface OpenClusterPasswordComplexityResponse {
 }
 
 declare interface OpenClusterReadOnlyInstanceGroupAccessRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 端口 */
+  Port: string;
+  /** 安全组ID */
+  SecurityGroupIds?: string[];
 }
 
 declare interface OpenClusterReadOnlyInstanceGroupAccessResponse {
+  /** 开启流程ID */
+  FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface OpenReadOnlyInstanceExclusiveAccessRequest {
-  /** 集群ID */
+  /** 请使用 [集群信息描述](https://cloud.tencent.com/document/api/1003/48086) 获取 clusterId。 */
   ClusterId: string;
-  /** 需要开通独有访问的只读实例ID */
+  /** 请使用 [集群信息描述](https://cloud.tencent.com/document/api/1003/48086) 获取 instanceId。 */
   InstanceId: string;
-  /** 指定的vpc ID */
+  /** 指定的 vpc ID，请使用 [查询私有网络列表](https://cloud.tencent.com/document/api/215/15778) 获取 vpc ID。 */
   VpcId: string;
-  /** 指定的子网ID */
+  /** 指定的子网 ID，如果设置了 vpc ID，则 SubnetId 必填，请使用 [查询子网列表](https://cloud.tencent.com/document/api/215/15784) 获取 SubnetId。 */
   SubnetId: string;
-  /** 端口 */
+  /** 用户自定义的端口。 */
   Port: number;
-  /** 安全组 */
+  /** 安全组 ID，请使用 [查看安全组](https://cloud.tencent.com/document/api/215/15808) 获取 SecurityGroupId。 */
   SecurityGroupIds?: string[];
 }
 
@@ -5314,8 +5322,8 @@ declare interface Cynosdb {
   /** 开启自定义密码复杂度功能 {@link OpenClusterPasswordComplexityRequest} {@link OpenClusterPasswordComplexityResponse} */
   OpenClusterPasswordComplexity(data: OpenClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterPasswordComplexityResponse>;
   /** 开启只读实例组接入 {@link OpenClusterReadOnlyInstanceGroupAccessRequest} {@link OpenClusterReadOnlyInstanceGroupAccessResponse} */
-  OpenClusterReadOnlyInstanceGroupAccess(data?: OpenClusterReadOnlyInstanceGroupAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
-  /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
+  OpenClusterReadOnlyInstanceGroupAccess(data: OpenClusterReadOnlyInstanceGroupAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
+  /** 开通只读实例独有访问接入组。 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
   OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
   /** 开通外网 {@link OpenWanRequest} {@link OpenWanResponse} */
   OpenWan(data?: OpenWanRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanResponse>;

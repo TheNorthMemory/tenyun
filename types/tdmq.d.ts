@@ -650,6 +650,8 @@ declare interface PulsarProClusterInfo {
   CanEditRoute?: boolean | null;
   /** 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储 */
   BillingLabelVersion?: string | null;
+  /** 实例到期时间戳，毫秒级精度。 */
+  ExpireTime?: number | null;
 }
 
 /** Pulsar专业版集群规格信息 */

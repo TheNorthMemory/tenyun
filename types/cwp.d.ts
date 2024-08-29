@@ -9135,7 +9135,7 @@ declare interface DescribeHostLoginListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Quuid - String - 是否必填：否 - 云服务器uuidUuid - String - 是否必填：否 - 主机安全唯一UuidMachineName - String - 是否必填：否 - 主机别名Ip - String - 是否必填：否 - 主机ipInstanceID - String - 是否必填：否 - 主机实例IDSrcIp - String - 是否必填：否 - 来源ip筛选UserName - String - 是否必填：否 - 用户名筛选Status - int - 是否必填：否 - 状态筛选1:正常登录；5：已加白,14:已处理，15：已忽略LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间LoginTimeEnd - String - 是否必填：否 - 按照修改时间段筛选，结束时间RiskLevel - int - 是否必填：否 - 状态筛选0:高危；1：可疑 */
+  /** 过滤条件。Quuid - String - 是否必填：否 - 云服务器uuidUuid - String - 是否必填：否 - 主机安全唯一UuidMachineName - String - 是否必填：否 - 主机别名Ip - String - 是否必填：否 - 主机ipInstanceID - String - 是否必填：否 - 主机实例IDSrcIp - String - 是否必填：否 - 来源ip筛选UserName - String - 是否必填：否 - 用户名筛选Status - string - 是否必填：否 - 状态筛选1:正常登录；5：已加白,14:已处理，15：已忽略LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间LoginTimeEnd - String - 是否必填：否 - 按照修改时间段筛选，结束时间RiskLevel - string - 是否必填：否 - 状态筛选0:高危；1：可疑 */
   Filters?: Filter[];
   /** 排序方式：根据请求次数排序：asc-升序/desc-降序 */
   Order?: string;
@@ -13287,9 +13287,9 @@ declare interface ExportVulDetectionReportRequest {
 
 declare interface ExportVulDetectionReportResponse {
   /** 导出文件下载链接地址 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 导出检测报告的任务Id（不同于入参的漏洞扫描任务id） */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1495,6 +1495,10 @@ declare interface DescribeSqlApisRequest {
   Catalog?: string;
   /** catalog集合 */
   Catalogs?: string[];
+  /** 数据库名 */
+  DatabaseName?: string;
+  /** 表名 */
+  TableName?: string;
 }
 
 declare interface DescribeSqlApisResponse {

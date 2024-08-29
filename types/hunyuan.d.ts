@@ -58,6 +58,18 @@ declare interface ErrorMsg {
   Code?: number;
 }
 
+/** 混元生图多轮对话历史记录。 */
+declare interface History {
+  /** 对话的 ID，用于唯一标识一轮对话 */
+  ChatId?: string | null;
+  /** 原始输入的 Prompt 文本 */
+  Prompt?: string | null;
+  /** 扩写后的 Prompt 文本 */
+  RevisedPrompt?: string | null;
+  /** 生成图的随机种子 */
+  Seed?: number | null;
+}
+
 /** 具体的图片内容 */
 declare interface ImageUrl {
   /** 图片的 Url（以 http:// 或 https:// 开头） */
@@ -252,6 +264,32 @@ declare interface GetTokenCountResponse {
   RequestId?: string;
 }
 
+declare interface QueryHunyuanImageChatJobRequest {
+  /** 任务 ID。 */
+  JobId?: string;
+}
+
+declare interface QueryHunyuanImageChatJobResponse {
+  /** 当前任务状态码：1：等待中、2：运行中、4：处理失败、5：处理完成。 */
+  JobStatusCode?: string;
+  /** 当前任务状态：排队中、处理中、处理失败或者处理完成。 */
+  JobStatusMsg?: string;
+  /** 任务处理失败错误码。 */
+  JobErrorCode?: string;
+  /** 任务处理失败错误信息。 */
+  JobErrorMsg?: string;
+  /** 本轮对话的 ChatId，ChatId 用于唯一标识一轮对话。一个对话组中，最多支持进行100轮对话。每轮对话数据有效期为7天，到期后 ChatId 失效，有效期内的历史对话数据可通过 History 查询，如有长期使用需求请及时保存输入输出数据。 */
+  ChatId?: string;
+  /** 生成图 URL 列表，有效期7天，请及时保存。 */
+  ResultImage?: string[];
+  /** 结果 detail 数组，Success 代表成功。 */
+  ResultDetails?: string[];
+  /** 本轮对话前置的历史对话数据（不含生成图）。 */
+  History?: History[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryHunyuanImageJobRequest {
   /** 任务 ID。 */
   JobId: string;
@@ -282,6 +320,24 @@ declare interface SetPayModeRequest {
 }
 
 declare interface SetPayModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitHunyuanImageChatJobRequest {
+  /** 本轮对话的文本描述。提交一个任务请求对应发起一轮生图对话，每轮对话中可输入一条 Prompt，生成一张图像，支持通过多轮输入 Prompt 来不断调整图像内容。推荐使用中文，最多可传1024个 utf-8 字符。输入示例： 第一轮对话：一颗红色的苹果 第二轮对话：将苹果改为绿色 第三轮对话：苹果放在桌子上 */
+  Prompt: string;
+  /** 上传上一轮对话的 ChatId，本轮对话将在指定的上一轮对话结果基础上继续生成图像。如果不传代表新建一个对话组，重新开启一轮新的对话。一个对话组中，最多支持进行100轮对话。 */
+  ChatId?: string;
+  /** 为生成结果图添加显式水印标识的开关，默认为1。 1：添加。 0：不添加。 其他数值：默认按1处理。 建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitHunyuanImageChatJobResponse {
+  /** 任务 ID。 */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -347,10 +403,14 @@ declare interface Hunyuan {
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** Token 计数 {@link GetTokenCountRequest} {@link GetTokenCountResponse} */
   GetTokenCount(data: GetTokenCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenCountResponse>;
+  /** 查询混元生图（多轮对话）任务 {@link QueryHunyuanImageChatJobRequest} {@link QueryHunyuanImageChatJobResponse} */
+  QueryHunyuanImageChatJob(data?: QueryHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageChatJobResponse>;
   /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */
   QueryHunyuanImageJob(data: QueryHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageJobResponse>;
   /** 设置付费模式 {@link SetPayModeRequest} {@link SetPayModeResponse} */
   SetPayMode(data: SetPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<SetPayModeResponse>;
+  /** 提交混元生图（多轮对话）任务 {@link SubmitHunyuanImageChatJobRequest} {@link SubmitHunyuanImageChatJobResponse} */
+  SubmitHunyuanImageChatJob(data: SubmitHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageChatJobResponse>;
   /** 提交混元生图任务 {@link SubmitHunyuanImageJobRequest} {@link SubmitHunyuanImageJobResponse} */
   SubmitHunyuanImageJob(data: SubmitHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageJobResponse>;
   /** 文生图轻量版 {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */

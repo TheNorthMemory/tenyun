@@ -546,6 +546,16 @@ declare interface CloneItem {
   SrcRegionId: number;
 }
 
+/** 集群版节点信息 */
+declare interface ClusterInfo {
+  /** 节点id */
+  NodeId?: string | null;
+  /** 节点类型：主节点，从节点 */
+  Role?: string | null;
+  /** 地域 */
+  Zone?: string | null;
+}
+
 /** 集群版实例节点信息 */
 declare interface ClusterNodeInfo {
   /** 节点id。 */
@@ -928,6 +938,8 @@ declare interface InstanceInfo {
   DiskType?: string;
   /** 当前扩容的CPU核心数。 */
   ExpandCpu?: number | null;
+  /** 实例集群版节点信息 */
+  ClusterInfo?: ClusterInfo[] | null;
 }
 
 /** 实例预期重启时间 */
@@ -3389,6 +3401,8 @@ declare interface DescribeDBInstancesRequest {
   ProxyIds?: string[];
   /** 数据库引擎类型。 */
   EngineTypes?: string[];
+  /** 是否获取集群版实例节点信息，可填：true或false */
+  QueryClusterInfo?: boolean;
 }
 
 declare interface DescribeDBInstancesResponse {
@@ -3650,6 +3664,22 @@ declare interface DescribeInstanceParamsResponse {
   TotalCount: number;
   /** 参数详情。 */
   Items: ParameterDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceUpgradeCheckJobRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 目标数据库版本 */
+  DstMysqlVersion: string;
+}
+
+declare interface DescribeInstanceUpgradeCheckJobResponse {
+  /** 24小时内是否存在历史升级校验任务 */
+  ExistUpgradeCheckJob?: boolean;
+  /** 任务id */
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4960,6 +4990,20 @@ declare interface StopRollbackResponse {
   RequestId?: string;
 }
 
+declare interface SubmitInstanceUpgradeCheckJobRequest {
+  /** 实例D */
+  InstanceId: string;
+  /** 目标数据库版本 */
+  DstMysqlVersion: string;
+}
+
+declare interface SubmitInstanceUpgradeCheckJobResponse {
+  /** 任务ID */
+  JobId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SwitchCDBProxyRequest {
   /** 实例ID */
   InstanceId: string;
@@ -5043,6 +5087,8 @@ declare interface UpgradeDBInstanceEngineVersionRequest {
   UpgradeSubversion?: number;
   /** 延迟阈值。取值范围1~10 */
   MaxDelayTime?: number;
+  /** 5.7升级8.0是否忽略关键字错误，取值范围[0,1]，1表示忽略，0表示不忽略 */
+  IgnoreErrKeyword?: number;
   /** 版本升级支持指定参数 */
   ParamList?: UpgradeEngineVersionParams[];
 }
@@ -5289,6 +5335,8 @@ declare interface Cdb {
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的可设置参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查询实例版本升级校验任务 {@link DescribeInstanceUpgradeCheckJobRequest} {@link DescribeInstanceUpgradeCheckJobResponse} */
+  DescribeInstanceUpgradeCheckJob(data: DescribeInstanceUpgradeCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceUpgradeCheckJobResponse>;
   /** 查询数据库实例升级类型 {@link DescribeInstanceUpgradeTypeRequest} {@link DescribeInstanceUpgradeTypeResponse} */
   DescribeInstanceUpgradeType(data: DescribeInstanceUpgradeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceUpgradeTypeResponse>;
   /** 查询本地binlog保留策略 {@link DescribeLocalBinlogConfigRequest} {@link DescribeLocalBinlogConfigResponse} */
@@ -5437,6 +5485,8 @@ declare interface Cdb {
   StopReplication(data: StopReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StopReplicationResponse>;
   /** 撤销回档任务 {@link StopRollbackRequest} {@link StopRollbackResponse} */
   StopRollback(data: StopRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<StopRollbackResponse>;
+  /** 提交实例版本升级检查任务 {@link SubmitInstanceUpgradeCheckJobRequest} {@link SubmitInstanceUpgradeCheckJobResponse} */
+  SubmitInstanceUpgradeCheckJob(data: SubmitInstanceUpgradeCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitInstanceUpgradeCheckJobResponse>;
   /** 切换数据库代理 {@link SwitchCDBProxyRequest} {@link SwitchCDBProxyResponse} */
   SwitchCDBProxy(data: SwitchCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchCDBProxyResponse>;
   /** 切换实例主从角色 {@link SwitchDBInstanceMasterSlaveRequest} {@link SwitchDBInstanceMasterSlaveResponse} */

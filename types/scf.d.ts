@@ -323,13 +323,15 @@ declare interface LayerVersionInfo {
   /** 许可证信息 */
   LicenseInfo?: string | null;
   /** 版本号 */
-  LayerVersion: number;
+  LayerVersion?: number;
   /** 层名称 */
-  LayerName: string;
+  LayerName?: string;
   /** 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175) */
   Status?: string;
   /** Stamp */
   Stamp?: string | null;
+  /** 返回层绑定的标签信息 */
+  Tags?: Tag[] | null;
 }
 
 /** 指定某个Layer版本 */

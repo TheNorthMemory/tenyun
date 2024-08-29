@@ -726,7 +726,7 @@ declare interface LoadBalancer {
   SnatPro?: boolean | null;
   /** 开启SnatPro负载均衡后，SnatIp列表。 */
   SnatIps?: SnatIp[] | null;
-  /** 性能容量型规格。 clb.c2.medium：标准型规格 clb.c3.small：高阶型1规格 clb.c3.medium：高阶型2规格 clb.c4.small：超强型1规格 clb.c4.medium：超强型2规格 clb.c4.large：超强型3规格 clb.c4.xlarge：超强型4规格 null：共享型实例 */
+  /** 性能容量型规格。 clb.c1.small：简约型规格 clb.c2.medium：标准型规格 clb.c3.small：高阶型1规格 clb.c3.medium：高阶型2规格 clb.c4.small：超强型1规格 clb.c4.medium：超强型2规格 clb.c4.large：超强型3规格 clb.c4.xlarge：超强型4规格 ""：非性能容量型实例 */
   SlaType?: string | null;
   /** vip是否被封堵 */
   IsBlock?: boolean | null;
@@ -754,6 +754,8 @@ declare interface LoadBalancer {
   LoadBalancerDomain?: string | null;
   /** 网络出口 */
   Egress?: string | null;
+  /** 实例类型是否为独占型。1：独占型实例。0：非独占型实例。 */
+  Exclusive?: number | null;
 }
 
 /** 负载均衡详细信息 */
@@ -870,6 +872,14 @@ declare interface MultiCertInfo {
   SSLMode: string;
   /** 监听器或规则证书列表，单双向认证，多本服务端证书算法类型不能重复;若SSLMode为双向认证，证书列表必须包含一本ca证书。 */
   CertList: CertInfo[];
+}
+
+/** OAuth配置信息。 */
+declare interface OAuth {
+  /** 开启或关闭鉴权。True: 开启;False: 关闭 */
+  OAuthEnable?: boolean | null;
+  /** IAP全部故障后，拒绝请求还是放行。BYPASS:通过,REJECT: 拒绝 */
+  OAuthFailureStatus?: string | null;
 }
 
 /** 表示负载均衡的价格 */
@@ -1062,6 +1072,8 @@ declare interface RuleOutput {
   Domains?: string[] | null;
   /** 绑定的目标组列表 */
   TargetGroupList?: BasicTargetGroupInfo[] | null;
+  /** OAuth配置状态信息。 */
+  OAuth?: OAuth | null;
 }
 
 /** HTTP/HTTPS监听器下的转发规则绑定的后端服务信息 */
@@ -2595,6 +2607,8 @@ declare interface ModifyRuleRequest {
   TrpcCallee?: string;
   /** TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放。 */
   TrpcFunc?: string;
+  /** OAuth配置信息。 */
+  OAuth?: OAuth;
 }
 
 declare interface ModifyRuleResponse {

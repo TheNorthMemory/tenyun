@@ -919,7 +919,7 @@ declare interface AssignTWeCallLicenseRequest {
   PkgType: number;
   /** appId */
   MiniProgramAppId: string;
-  /** License数 */
+  /** License数，只支持50,500,1000,5000,10000,20000,50000 */
   DeductNum: number;
 }
 
