@@ -4128,6 +4128,26 @@ declare interface TableNameFilter {
   Name?: string;
 }
 
+/** 表的分区数据 */
+declare interface TablePartition {
+  /** 分区名称 */
+  PartitionName?: string;
+  /** 分区记录数 */
+  RecordCount?: number;
+  /** 分区数据存储大小，字节数 */
+  StorageSize?: string;
+  /** 分区创建时间 */
+  CreateTime?: string;
+  /** 分区修改时间 */
+  ModifiedTime?: string;
+  /** 分区数据存储大小，已转为适合的单位 */
+  StorageSizeWithUnit?: string;
+  /** 文件数 */
+  NumFiles?: number | null;
+  /** 平均文件大小 */
+  AverageFileSizeWithUnit?: string | null;
+}
+
 /** 按天更新的表的资产评分 */
 declare interface TablePropertyScore {
   /** 表ID */
@@ -8341,6 +8361,28 @@ declare interface DescribeTableMetasResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTablePartitionsRequest {
+  /** 表ID */
+  TableId: string;
+  /** 分页number */
+  PageNumber?: number;
+  /** 分页size */
+  PageSize?: number;
+  /** 过滤器 */
+  FilterSet?: Filter[];
+  /** 排序字段 */
+  OrderFieldSet?: OrderField[];
+}
+
+declare interface DescribeTablePartitionsResponse {
+  /** 分区详情列表 */
+  TablePartitionSet: TablePartition[] | null;
+  /** 总记录数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTableQualityDetailsRequest {
   /** 统计日期 */
   StatisticsDate: number;
@@ -10688,6 +10730,8 @@ declare interface Wedata {
   DescribeTableMeta(data: DescribeTableMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableMetaResponse>;
   /** 获取表元数据list {@link DescribeTableMetasRequest} {@link DescribeTableMetasResponse} */
   DescribeTableMetas(data?: DescribeTableMetasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableMetasResponse>;
+  /** 查询表的分区详情信息 {@link DescribeTablePartitionsRequest} {@link DescribeTablePartitionsResponse} */
+  DescribeTablePartitions(data: DescribeTablePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablePartitionsResponse>;
   /** 查询表质量详情 {@link DescribeTableQualityDetailsRequest} {@link DescribeTableQualityDetailsResponse} */
   DescribeTableQualityDetails(data: DescribeTableQualityDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableQualityDetailsResponse>;
   /** 获取表schema信息 {@link DescribeTableSchemaInfoRequest} {@link DescribeTableSchemaInfoResponse} */

@@ -662,7 +662,7 @@ declare interface SearchTags {
   TagKey?: string;
   /** 标签的值 */
   TagValue?: string;
-  /** 1表示只输入标签的键，没有输入值；0表示输入键时且输入值 */
+  /** 1表示只输入标签的键，没有输入值；非1则表示输入键时且输入值 */
   AllValue?: number;
 }
 
@@ -1359,7 +1359,7 @@ declare interface DescribeInstancesRequest {
   Offset?: number;
   /** 分页参数，分页步长，默认为10 */
   Limit?: number;
-  /** 搜索标签列表 */
+  /** 搜索标签列表，没匹配到则不过滤集群列表 */
   SearchTags?: SearchTags[];
 }
 
@@ -1489,6 +1489,12 @@ declare interface DescribeSpecResponse {
 }
 
 declare interface DescribeSqlApisRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** GetUsers：获取用户列表；GetDatabases：获取数据库列表；GetTables：获取数据库表列表；GetUserPrivilegesV2：获取用户下的权限，粒度到表级别；DeleteUser：删除用户；GetCatalog：获取Catalog列表； */
+  ApiType: string;
+  /** 用户名称 */
+  UserName?: string;
   /** 用户链接来自的 IP */
   WhiteHost?: string;
   /** catalog名称 */
@@ -1502,6 +1508,10 @@ declare interface DescribeSqlApisRequest {
 }
 
 declare interface DescribeSqlApisResponse {
+  /** 返回的查询数据，大部分情况是list，也可能是bool */
+  ReturnData?: string | null;
+  /** 错误消息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2038,7 +2048,7 @@ declare interface Cdwdoris {
   /** 获取集群规格 {@link DescribeSpecRequest} {@link DescribeSpecResponse} */
   DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
   /** 通过sql查询集群信息 {@link DescribeSqlApisRequest} {@link DescribeSqlApisResponse} */
-  DescribeSqlApis(data?: DescribeSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlApisResponse>;
+  DescribeSqlApis(data: DescribeSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlApisResponse>;
   /** 获取表列表 {@link DescribeTableListRequest} {@link DescribeTableListResponse} */
   DescribeTableList(data: DescribeTableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableListResponse>;
   /** 获取用户绑定的资源组信息 {@link DescribeUserBindWorkloadGroupRequest} {@link DescribeUserBindWorkloadGroupResponse} */

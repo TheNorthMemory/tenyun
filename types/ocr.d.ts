@@ -1556,7 +1556,7 @@ declare interface SmartFormFileUrl {
 
 /** 门头照识别结果 */
 declare interface StoreInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。 */
+  /** 识别出的字段名称(关键字)，如商店名称 */
   Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
   Value?: string;
@@ -5027,7 +5027,7 @@ declare interface Ocr {
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
   /** 商户照片分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
   ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
-  /** 创建智慧表单文件识别任务 {@link CreateAIFormTaskRequest} {@link CreateAIFormTaskResponse} */
+  /** @deprecated 创建智慧表单文件识别任务 {@link CreateAIFormTaskRequest} {@link CreateAIFormTaskResponse} */
   CreateAIFormTask(data: CreateAIFormTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIFormTaskResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
@@ -5059,7 +5059,7 @@ declare interface Ocr {
   GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
   /** 通用手写体识别 {@link GeneralHandwritingOCRRequest} {@link GeneralHandwritingOCRResponse} */
   GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
-  /** 查询智慧表单任务状态 {@link GetTaskStateRequest} {@link GetTaskStateResponse} */
+  /** @deprecated 查询智慧表单任务状态 {@link GetTaskStateRequest} {@link GetTaskStateResponse} */
   GetTaskState(data: GetTaskStateRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStateResponse>;
   /** 中国香港身份证识别 {@link HKIDCardOCRRequest} {@link HKIDCardOCRResponse} */
   HKIDCardOCR(data: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;

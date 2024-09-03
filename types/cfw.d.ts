@@ -1894,6 +1894,18 @@ declare interface DeleteNatFwInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRemoteAccessDomainRequest {
+  /** 域名列表 */
+  AccessDomainList: string[];
+}
+
+declare interface DeleteRemoteAccessDomainResponse {
+  /** 状态值 0：删除成功，非 0：删除失败 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteResourceGroupRequest {
   /** 组id */
   GroupId: string;
@@ -3599,6 +3611,8 @@ declare interface Cfw {
   DeleteIdsWhiteRule(data: DeleteIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIdsWhiteRuleResponse>;
   /** 销毁防火墙实例 {@link DeleteNatFwInstanceRequest} {@link DeleteNatFwInstanceResponse} */
   DeleteNatFwInstance(data: DeleteNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatFwInstanceResponse>;
+  /** 删除远程运维域名 {@link DeleteRemoteAccessDomainRequest} {@link DeleteRemoteAccessDomainResponse} */
+  DeleteRemoteAccessDomain(data: DeleteRemoteAccessDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRemoteAccessDomainResponse>;
   /** 资产中心资产组删除 {@link DeleteResourceGroupRequest} {@link DeleteResourceGroupResponse} */
   DeleteResourceGroup(data: DeleteResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGroupResponse>;
   /** 删除安全组规则 {@link DeleteSecurityGroupRuleRequest} {@link DeleteSecurityGroupRuleResponse} */

@@ -418,6 +418,10 @@ declare interface CreateAudioModerationSyncTaskResponse {
   RecognitionResults?: RecognitionResult[] | null;
   /** 识别音频时长，单位为毫秒； */
   Duration?: string | null;
+  /** 是否命中(0:否, 1: 是) */
+  HitFlag?: number;
+  /** 得分 */
+  Score?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

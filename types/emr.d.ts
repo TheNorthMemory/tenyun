@@ -3026,6 +3026,20 @@ declare interface InquiryPriceUpdateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAutoRenewFlagRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 实例ID */
+  ResourceIds: string[];
+  /** NOTIFY_AND_MANUAL_RENEW：表示通知即将过期，但不自动续费 NOTIFY_AND_AUTO_RENEW：表示通知即将过期，而且自动续费 DISABLE_NOTIFY_AND_MANUAL_RENEW：表示不通知即将过期，也不自动续费。 */
+  RenewFlag: string;
+}
+
+declare interface ModifyAutoRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAutoScaleStrategyRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -3463,6 +3477,8 @@ declare interface Emr {
   InquiryPriceScaleOutInstance(data: InquiryPriceScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceScaleOutInstanceResponse>;
   /** 变配询价 {@link InquiryPriceUpdateInstanceRequest} {@link InquiryPriceUpdateInstanceResponse} */
   InquiryPriceUpdateInstance(data: InquiryPriceUpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpdateInstanceResponse>;
+  /** 开启关闭自动续费接口 {@link ModifyAutoRenewFlagRequest} {@link ModifyAutoRenewFlagResponse} */
+  ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
   /** 修改自动扩缩容规则 {@link ModifyAutoScaleStrategyRequest} {@link ModifyAutoScaleStrategyResponse} */
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
   /** 刷新YARN的动态资源池 {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */

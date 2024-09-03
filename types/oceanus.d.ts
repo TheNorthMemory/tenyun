@@ -114,6 +114,8 @@ declare interface Cluster {
   ResourceType?: number | null;
   /** 集群类型 */
   BillingResourceMode?: string | null;
+  /** Cu比例 */
+  MemRatio?: number | null;
 }
 
 /** 工作空间集群组信息 */

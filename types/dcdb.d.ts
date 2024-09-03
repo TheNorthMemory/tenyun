@@ -1370,6 +1370,20 @@ declare interface DescribeDBTmpInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDCDBBinlogTimeRequest {
+  /** 需要回档的实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeDCDBBinlogTimeResponse {
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDCDBInstanceDetailRequest {
   /** 实例ID，形如dcdbt-7oaxtcb7 */
   InstanceId: string;
@@ -2415,6 +2429,8 @@ declare interface Dcdb {
   DescribeDBSyncMode(data: DescribeDBSyncModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSyncModeResponse>;
   /** 获取实例回档生成的临时实例 {@link DescribeDBTmpInstancesRequest} {@link DescribeDBTmpInstancesResponse} */
   DescribeDBTmpInstances(data: DescribeDBTmpInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBTmpInstancesResponse>;
+  /** 获取实例回档时可选的时间范围 {@link DescribeDCDBBinlogTimeRequest} {@link DescribeDCDBBinlogTimeResponse} */
+  DescribeDCDBBinlogTime(data: DescribeDCDBBinlogTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBBinlogTimeResponse>;
   /** 获取实例详情 {@link DescribeDCDBInstanceDetailRequest} {@link DescribeDCDBInstanceDetailResponse} */
   DescribeDCDBInstanceDetail(data: DescribeDCDBInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstanceDetailResponse>;
   /** 获取实例节点信息 {@link DescribeDCDBInstanceNodeInfoRequest} {@link DescribeDCDBInstanceNodeInfoResponse} */

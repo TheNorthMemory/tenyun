@@ -120,6 +120,10 @@ declare interface ObjectType {
   ObjectTypeJsonParse?: ObjectTypeJsonParse | null;
   /** 是否包含新动作 */
   ObjectHasNewAction?: boolean | null;
+  /** 对应在平台架构图中的资源类型名称 */
+  ObjectPlatformName?: string | null;
+  /** 1：平台支持的对象 2：应用支持的部分对象 */
+  ObjectSupportType?: number | null;
 }
 
 /** 对象类型配置 */
@@ -181,9 +185,9 @@ declare interface ResourceOffline {
 /** 用于传入创建、编辑标签 */
 declare interface TagWithCreate {
   /** 标签键 */
-  TagKey: string;
+  TagKey: string | null;
   /** 标签值 */
-  TagValue: string;
+  TagValue: string | null;
 }
 
 /** 展示标签列表 */
@@ -254,6 +258,14 @@ declare interface Task {
   VerifyId?: number | null;
   /** 护栏处理方式，1--顺序回滚，2--演练暂停 */
   PolicyDealType?: number | null;
+  /** 计划开始时间 */
+  TaskPlanStartTime?: string | null;
+  /** 计划结束时间 */
+  TaskPlanEndTime?: string | null;
+  /** 人员组织 */
+  TaskOrg?: TaskOrg[] | null;
+  /** 问题和改进 */
+  TaskIssue?: string | null;
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */
@@ -458,20 +470,32 @@ declare interface TaskMonitor {
   Unit: string | null;
 }
 
+/** 演练人员组织 */
+declare interface TaskOrg {
+  /** 演练角色 */
+  TaskRole?: string | null;
+  /** 负责人 */
+  TaskOperator?: string | null;
+}
+
 /** 演练报告状态信息 */
 declare interface TaskReportInfo {
   /** 0--未开始，1--正在导出，2--导出成功，3--导出失败 */
-  Stage: number;
+  Stage?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 有效期截止时间 */
-  ExpirationTime: string;
+  ExpirationTime?: string;
   /** 是否有效 */
-  Expired: boolean;
+  Expired?: boolean;
   /** 演练报告cos文件地址 */
-  CosUrl: string | null;
+  CosUrl?: string | null;
   /** 演练报告导出日志 */
-  Log: string | null;
+  Log?: string | null;
+  /** 0--未开始，1--正在归档，2--归档成功，3--归档失败 */
+  ArchiveStage?: number;
+  /** 归档时间 */
+  ArchiveTime?: string;
 }
 
 /** 经验库 */
@@ -887,6 +911,8 @@ declare interface ModifyTaskRunStatusRequest {
   IsExpect?: boolean;
   /** 演习结论（当演习状态转变为执行结束时，需要填写此字段） */
   Summary?: string;
+  /** 问题以及改进 */
+  Issue?: string;
 }
 
 declare interface ModifyTaskRunStatusResponse {

@@ -496,6 +496,16 @@ declare interface ListQaItem {
   FileType?: string;
   /** 问答字符数 */
   QaCharSize?: string;
+  /** 有效开始时间，unix时间戳 */
+  ExpireStart?: string;
+  /** 有效结束时间，unix时间戳，0代表永久有效 */
+  ExpireEnd?: string;
+  /** 属性标签适用范围 1：全部，2：按条件 */
+  AttrRange?: number;
+  /** 属性标签 */
+  AttrLabels?: AttrLabel[];
+  /** 相似问个数 */
+  SimilarQuestionNum?: number;
 }
 
 /** 发布列表详情 */
@@ -876,6 +886,24 @@ declare interface RunNodeInfo {
   SlotValues?: ValueInfo[] | null;
 }
 
+/** 相似问信息 */
+declare interface SimilarQuestion {
+  /** 相似问ID */
+  SimBizId?: string | null;
+  /** 相似问内容 */
+  Question?: string | null;
+}
+
+/** 相似问修改(更新)信息 */
+declare interface SimilarQuestionModify {
+  /** 需要添加的相似问(内容)列表 */
+  AddQuestions?: string[];
+  /** 需要更新的相似问列表 */
+  UpdateQuestions?: SimilarQuestion[];
+  /** 需要删除的相似问列表 */
+  DeleteQuestions?: SimilarQuestion[];
+}
+
 /** 字符串KV信息 */
 declare interface StrValue {
   /** 名称 */
@@ -1173,6 +1201,8 @@ declare interface CreateQARequest {
   ExpireStart?: string;
   /** 有效结束时间，unix时间戳，0代表永久有效 */
   ExpireEnd?: string;
+  /** 相似问内容 */
+  SimilarQuestions?: string[];
 }
 
 declare interface CreateQAResponse {
@@ -1510,6 +1540,8 @@ declare interface DescribeQAResponse {
   ExpireStart?: string;
   /** 有效结束时间，unix时间戳，0代表永久有效 */
   ExpireEnd?: string;
+  /** 相似问列表信息 */
+  SimilarQuestions?: SimilarQuestion[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2103,7 +2135,7 @@ declare interface ListQACateResponse {
 }
 
 declare interface ListQARequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -2113,7 +2145,7 @@ declare interface ListQARequest {
   Query?: string;
   /** 校验状态(1未校验2采纳3不采纳) */
   AcceptStatus?: number[];
-  /** 发布状态(2待发布 3发布中 4已发布 7审核中 8审核失败 9人工申述中 11人工申述失败) */
+  /** 发布状态(2待发布 3发布中 4已发布 7审核中 8审核失败 9人工申述中 11人工申述失败 12已过期 13超量失效 14超量失效恢复) */
   ReleaseStatus?: number[];
   /** 文档ID */
   DocBizId?: string;
@@ -2485,6 +2517,8 @@ declare interface ModifyQARequest {
   ExpireStart?: string;
   /** 有效结束时间，unix时间戳，0代表永久有效 */
   ExpireEnd?: string;
+  /** 相似问修改信息(相似问没有修改则不传) */
+  SimilarQuestionModify?: SimilarQuestionModify;
 }
 
 declare interface ModifyQAResponse {

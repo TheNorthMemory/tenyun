@@ -1397,7 +1397,7 @@ declare interface DeployCertificateRecordRollbackRequest {
 
 declare interface DeployCertificateRecordRollbackResponse {
   /** 回滚部署记录ID */
-  DeployRecordId: number;
+  DeployRecordId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1939,9 +1939,9 @@ declare interface DescribeHostDeployRecordRequest {
 
 declare interface DescribeHostDeployRecordResponse {
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 证书部署记录列表 */
-  DeployRecordList: DeployRecordInfo[] | null;
+  DeployRecordList?: DeployRecordInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

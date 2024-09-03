@@ -63,69 +63,73 @@ declare interface Coordinate {
 /** 物理专线信息列表 */
 declare interface DirectConnect {
   /** 物理专线ID。 */
-  DirectConnectId: string;
+  DirectConnectId?: string;
   /** 物理专线的名称。 */
-  DirectConnectName: string;
+  DirectConnectName?: string;
   /** 物理专线的接入点ID。 */
-  AccessPointId: string;
+  AccessPointId?: string;
   /** 物理专线的状态。申请中：PENDING 申请驳回：REJECTED 待付款：TOPAY 已付款：PAID 建设中：ALLOCATED 已开通：AVAILABLE 删除中 ：DELETING已删除：DELETED 。 */
-  State: string;
+  State?: string;
   /** 物理专线创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 物理专线的开通时间。 */
-  EnabledTime: string;
+  EnabledTime?: string;
   /** 提供接入物理专线的运营商。ChinaTelecom：中国电信， ChinaMobile：中国移动，ChinaUnicom：中国联通， In-houseWiring：楼内线，ChinaOther：中国其他， InternationalOperator：境外其他。 */
-  LineOperator: string;
+  LineOperator?: string;
   /** 本地数据中心的地理位置。 */
-  Location: string;
+  Location?: string;
   /** 物理专线接入接口带宽，单位为Mbps。 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 用户侧物理专线接入端口类型,取值：100Base-T：百兆电口,1000Base-T（默认值）：千兆电口,1000Base-LX：千兆单模光口（10千米）,10GBase-T：万兆电口10GBase-LR：万兆单模光口（10千米），默认值，千兆单模光口（10千米） */
-  PortType: string;
+  PortType?: string;
   /** 运营商或者服务商为物理专线提供的电路编码。 */
-  CircuitCode: string | null;
+  CircuitCode?: string | null;
   /** 冗余物理专线的ID。 */
-  RedundantDirectConnectId: string;
+  RedundantDirectConnectId?: string;
   /** 物理专线调试VLAN。默认开启VLAN，自动分配VLAN。 */
-  Vlan: number | null;
+  Vlan?: number | null;
   /** 物理专线调试腾讯侧互联IP。 */
-  TencentAddress: string | null;
+  TencentAddress?: string | null;
   /** 物理专线调试用户侧互联IP。 */
-  CustomerAddress: string | null;
+  CustomerAddress?: string | null;
   /** 物理专线申请者姓名。默认从账户体系获取。 */
-  CustomerName: string | null;
+  CustomerName?: string | null;
   /** 物理专线申请者联系邮箱。默认从账户体系获取。 */
-  CustomerContactMail: string | null;
+  CustomerContactMail?: string | null;
   /** 物理专线申请者联系号码。默认从账户体系获取。 */
-  CustomerContactNumber: string | null;
+  CustomerContactNumber?: string | null;
   /** 物理专线的过期时间。 */
-  ExpiredTime: string | null;
+  ExpiredTime?: string | null;
   /** 物理专线计费类型。 NON_RECURRING_CHARGE：一次性接入费用；PREPAID_BY_YEAR：按年预付费。 */
-  ChargeType: string | null;
+  ChargeType?: string | null;
   /** 报障联系人。 */
-  FaultReportContactPerson: string | null;
+  FaultReportContactPerson?: string | null;
   /** 报障联系电话。 */
-  FaultReportContactNumber: string | null;
+  FaultReportContactNumber?: string | null;
   /** 标签键值对 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 物理专线的接入点类型。 */
-  AccessPointType: string;
+  AccessPointType?: string;
   /** IDC所在城市 */
-  IdcCity: string | null;
+  IdcCity?: string | null;
   /** 计费状态 */
-  ChargeState: string | null;
+  ChargeState?: string | null;
   /** 物理专线开通时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 物理专线是否已签署用户协议 */
-  SignLaw: boolean | null;
+  SignLaw?: boolean | null;
   /** 物理专线是否为LocalZone */
-  LocalZone: boolean | null;
+  LocalZone?: boolean | null;
   /** 该物理专线下vlan 0的专用通道数量 */
-  VlanZeroDirectConnectTunnelCount: number | null;
+  VlanZeroDirectConnectTunnelCount?: number | null;
   /** 该物理专线下非vlan 0的专用通道数量 */
-  OtherVlanDirectConnectTunnelCount: number | null;
+  OtherVlanDirectConnectTunnelCount?: number | null;
   /** 物理专线最小带宽 */
-  MinBandwidth: number | null;
+  MinBandwidth?: number | null;
+  /** 建设模式 */
+  Construct?: number | null;
+  /** 物理专线的接入点名称 */
+  AccessPointName?: string | null;
 }
 
 /** 专用通道信息列表 */
@@ -423,6 +427,8 @@ declare interface CreateDirectConnectRequest {
   FaultReportContactNumber?: string;
   /** 物理专线申请者是否签署了用户使用协议。默认已签署。 */
   SignLaw?: boolean;
+  /** 标签键值对 */
+  Tags?: Tag[];
 }
 
 declare interface CreateDirectConnectResponse {
@@ -439,11 +445,11 @@ declare interface CreateDirectConnectTunnelRequest {
   DirectConnectTunnelName: string;
   /** 物理专线owner，缺省为当前客户（物理专线 owner）共享专线时这里需要填写共享专线的开发商账号 ID。 */
   DirectConnectOwnerAccount?: string;
-  /** 网络类型，枚举：VPC、BMVPC、CCN；默认为VPC。VPC：私有网络；BMVPC：黑石网络；CCN：云联网）。 */
+  /** 网络类型，枚举：VPC、CCN、NAT；默认为VPC。VPC：私有网络；CCN：云联网；NAT：NAT网络）。 */
   NetworkType?: string;
   /** 网络地域。 */
   NetworkRegion?: string;
-  /** 私有网络统一ID或黑石网络统一ID。 */
+  /** 私有网络统一ID，在NetworkType为VPC时必填，且与专线网关所属的VPCID一致；NetworkType为其它组网类型时可不填，内部会统一处理。 */
   VpcId?: string;
   /** 专线网关ID，例如 dcg-d545ddf。 */
   DirectConnectGatewayId?: string;
@@ -473,6 +479,8 @@ declare interface CreateDirectConnectTunnelRequest {
   BfdInfo?: BFDInfo;
   /** NQA配置信息。 */
   NqaInfo?: NQAInfo;
+  /** 标签键值对 */
+  Tags?: Tag[];
 }
 
 declare interface CreateDirectConnectTunnelResponse {
@@ -493,7 +501,7 @@ declare interface DeleteDirectConnectResponse {
 }
 
 declare interface DeleteDirectConnectTunnelRequest {
-  /** 专用通道ID */
+  /** 专用通道ID。 */
   DirectConnectTunnelId: string;
 }
 
@@ -553,13 +561,13 @@ declare interface DescribeDirectConnectTunnelsResponse {
 }
 
 declare interface DescribeDirectConnectsRequest {
-  /** 过滤条件: */
+  /** 过滤条件。 */
   Filters?: Filter[];
-  /** 物理专线 ID数组 */
+  /** 物理专线 ID数组。 */
   DirectConnectIds?: string[];
-  /** 偏移量，默认为0 */
+  /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100 */
+  /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
 }
 
@@ -568,7 +576,7 @@ declare interface DescribeDirectConnectsResponse {
   DirectConnectSet?: DirectConnect[];
   /** 符合物理专线列表数量。 */
   TotalCount?: number;
-  /** 用户名下物理专线是否都签署了用户协议 */
+  /** 用户名下物理专线是否都签署了用户协议。 */
   AllSignLaw?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -663,7 +671,7 @@ declare interface EnableInternetAddressResponse {
 }
 
 declare interface ModifyDirectConnectAttributeRequest {
-  /** 物理专线的ID。 */
+  /** 物理专线ID。 */
   DirectConnectId: string;
   /** 物理专线名称。 */
   DirectConnectName?: string;
@@ -685,9 +693,9 @@ declare interface ModifyDirectConnectAttributeRequest {
   FaultReportContactPerson?: string;
   /** 报障联系电话。 */
   FaultReportContactNumber?: string;
-  /** 物理专线申请者补签用户使用协议 */
+  /** 物理专线申请者补签用户使用协议。 */
   SignLaw?: boolean;
-  /** 物理专线带宽 */
+  /** 物理专线带宽。 */
   Bandwidth?: number;
 }
 
@@ -697,21 +705,21 @@ declare interface ModifyDirectConnectAttributeResponse {
 }
 
 declare interface ModifyDirectConnectTunnelAttributeRequest {
-  /** 专用通道ID */
+  /** 专用通道ID。 */
   DirectConnectTunnelId: string;
-  /** 专用通道名称 */
+  /** 专用通道名称。 */
   DirectConnectTunnelName?: string;
-  /** 用户侧BGP，包括Asn，AuthKey */
+  /** 用户侧BGP，包括Asn，AuthKey。 */
   BgpPeer?: BgpPeer;
-  /** 用户侧网段地址 */
+  /** 用户侧网段地址。 */
   RouteFilterPrefixes?: RouteFilterPrefix[];
-  /** 腾讯侧互联IP */
+  /** 腾讯侧互联IP。 */
   TencentAddress?: string;
-  /** 用户侧互联IP */
+  /** 用户侧互联IP。 */
   CustomerAddress?: string;
   /** 专用通道带宽值，单位为M。 */
   Bandwidth?: number;
-  /** 腾讯侧备用互联IP */
+  /** 腾讯侧备用互联IP。 */
   TencentBackupAddress?: string;
 }
 

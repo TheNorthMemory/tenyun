@@ -3710,6 +3710,28 @@ declare interface DescribeRollbackTimeValidityResponse {
   RequestId?: string;
 }
 
+declare interface DescribeServerlessStrategyRequest {
+  /** serverless集群id */
+  ClusterId: string;
+}
+
+declare interface DescribeServerlessStrategyResponse {
+  /** cpu负载为 0 时持续多久（秒）发起自动暂停 */
+  AutoPauseDelay?: number;
+  /** cpu负载超过当前规格核数时，持续多久（秒）发起自动扩容 */
+  AutoScaleUpDelay?: number;
+  /** cpu 负载低于低一级规格核数时，持续多久（秒）发起自动缩容 */
+  AutoScaleDownDelay?: number;
+  /** 是否自动暂停，可能值：yesno */
+  AutoPause?: string;
+  /** 集群是否允许向上扩容，可选范围yesno */
+  AutoScaleUp?: string;
+  /** 集群是否允许向下缩容，可选范围yesno */
+  AutoScaleDown?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSupportProxyVersionRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4440,6 +4462,42 @@ declare interface ModifyResourcePackagesDeductionPriorityRequest {
 }
 
 declare interface ModifyResourcePackagesDeductionPriorityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyServerlessStrategyRequest {
+  /** serverless集群id */
+  ClusterId: string;
+  /** 集群是否自动暂停，可选范围yesno */
+  AutoPause?: string;
+  /** 集群自动暂停的延迟，单位秒，可选范围[600,691200]，默认600 */
+  AutoPauseDelay?: number;
+  /** 该参数暂时无效 */
+  AutoScaleUpDelay?: number;
+  /** 该参数暂时无效 */
+  AutoScaleDownDelay?: number;
+  /** cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  MinCpu?: number;
+  /** cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  MaxCpu?: number;
+  /** 只读实例cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  MinRoCpu?: number;
+  /** 只读cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
+  MaxRoCpu?: number;
+  /** 只读节点最小个数 */
+  MinRoCount?: number;
+  /** 只读节点最大个数 */
+  MaxRoCount?: number;
+  /** 集群是否允许扩容，可选范围yesno */
+  AutoScaleUp?: string;
+  /** 集群是否允许缩容，可选范围yesno */
+  AutoScaleDown?: string;
+}
+
+declare interface ModifyServerlessStrategyResponse {
+  /** 异步流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5233,6 +5291,8 @@ declare interface Cynosdb {
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
   /** @deprecated 查询指定时间是否可回滚 {@link DescribeRollbackTimeValidityRequest} {@link DescribeRollbackTimeValidityResponse} */
   DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
+  /** 查询serverless策略 {@link DescribeServerlessStrategyRequest} {@link DescribeServerlessStrategyResponse} */
+  DescribeServerlessStrategy(data: DescribeServerlessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessStrategyResponse>;
   /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */
   DescribeSupportProxyVersion(data: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
@@ -5311,6 +5371,8 @@ declare interface Cynosdb {
   ModifyResourcePackageName(data: ModifyResourcePackageNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackageNameResponse>;
   /** 修改已绑定资源包抵扣优先级 {@link ModifyResourcePackagesDeductionPriorityRequest} {@link ModifyResourcePackagesDeductionPriorityResponse} */
   ModifyResourcePackagesDeductionPriority(data: ModifyResourcePackagesDeductionPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackagesDeductionPriorityResponse>;
+  /** 修改serverless策略 {@link ModifyServerlessStrategyRequest} {@link ModifyServerlessStrategyResponse} */
+  ModifyServerlessStrategy(data: ModifyServerlessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServerlessStrategyResponse>;
   /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
   ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;
   /** 销毁集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */

@@ -128,6 +128,8 @@ declare interface DatasourceInfo {
   DataOriginDatasourceId?: string | null;
   /** 集群id */
   ClusterId?: string | null;
+  /** 数据源名称 */
+  DbTypeName?: string | null;
 }
 
 /** 数据源详情列表 */

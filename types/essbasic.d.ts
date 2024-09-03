@@ -100,7 +100,7 @@ declare interface AutoSignConfig {
   UserDefineSeal?: boolean;
   /** 回调中是否需要自动签将要使用的印章（签名）图片的 base64:**false**: 不需要(默认)**true**: 需要 */
   SealImgCallback?: boolean;
-  /** 回调链接，如果渠道已经配置了，可以不传 */
+  /** 该字段已废弃，请使用【应用号配置】中的回调地址统一接口消息 */
   CallbackUrl?: string;
   /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸认别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
@@ -624,7 +624,7 @@ declare interface FlowFileInfo {
   FlowDescription?: string;
   /** 签署流程的类型，长度不超过255个字符 */
   FlowType?: string;
-  /** 签署流程回调地址，长度不超过255个字符 */
+  /** 已废弃，请使用【应用号配置】中的回调地址统一接收消息 */
   CallbackUrl?: string;
   /** 第三方应用的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   CustomerData?: string;
@@ -680,7 +680,7 @@ declare interface FlowInfo {
   FlowApprovers?: FlowApproverInfo[];
   /** 发起方角色的填写控件的填充内容。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。(白名单功能需要联系对接经理开通，否则模板编辑时无法将填写控件分配给发起方)。![image](https://qcloudimg.tencent-cloud.cn/raw/b1d3978140ee2b44e2c9fdc96e467a5d.png) */
   FormFields?: FormField[];
-  /** 合同状态变动结的通知回调URL，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性，最大长度1000个字符。腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。回调的相关说明可参考开发者中心的回调通知模块 */
+  /** 该字段已废弃，请使用【应用号配置】中的回调地址统一接口消息 */
   CallbackUrl?: string;
   /** 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。 */
   FlowType?: string;
@@ -1527,7 +1527,7 @@ declare interface ChannelCreateFlowByFilesRequest {
   Components?: Component[];
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。 */
   Deadline?: number;
-  /** 执行结果的回调URL，长度不超过255个字符，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性。腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。回调的相关说明可参考开发者中心的回调通知模块。注:`如果不传递回调地址， 则默认是配置应用号时候使用的回调地址` */
+  /** 该字段已废弃，请使用【应用号配置】中的回调地址 */
   CallbackUrl?: string;
   /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制**注**: `有序签署时以传入FlowApprovers数组的顺序作为签署顺序` */
   Unordered?: boolean;

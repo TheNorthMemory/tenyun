@@ -24,6 +24,44 @@ declare interface HotWord {
   Weight: number | null;
 }
 
+/** 关键词表信息 */
+declare interface KeyWordLib {
+  /** 关键词表ID */
+  KeyWordLibId?: string | null;
+  /** 关键词表名称 */
+  Name?: string | null;
+  /** 关键词列表 */
+  KeyWordList?: string[] | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+}
+
+/** 关键词ID */
+declare interface KeyWordLibIdData {
+  /** 关键词ID */
+  KeyWordLibId?: string | null;
+}
+
+/** 查询列表返回数据 */
+declare interface KeyWordLibListData {
+  /** 关键词表列表 */
+  KeyWordLibList?: KeyWordLib[] | null;
+  /** 关键词列表总数 */
+  TotalCount?: number | null;
+}
+
+/** 关键字识别结果 */
+declare interface KeyWordResult {
+  /** 关键词库ID */
+  KeyWordLibID?: string | null;
+  /** 关键词库名称 */
+  KeyWordLibName?: string | null;
+  /** 匹配到的关键词 */
+  KeyWords?: string[] | null;
+}
+
 /** [自学习模型信息](https://cloud.tencent.com/document/product/1093/90813) */
 declare interface Model {
   /** 模型名称 */
@@ -70,6 +108,8 @@ declare interface SentenceDetail {
   SilenceTime?: number | null;
   /** 情绪类型（可能为空） */
   EmotionType?: string[] | null;
+  /** 关键词识别结果列表 */
+  KeyWordResults?: KeyWordResult[] | null;
 }
 
 /** [一句话识别](https://cloud.tencent.com/document/product/1093/35646)返回的词时间戳 */
@@ -196,6 +236,20 @@ declare interface CloseAsyncRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateAsrKeyWordLibRequest {
+  /** 词表名称，长度在1-20之间仅限中英文数字-_ */
+  Name: string;
+  /** 词文件（纯文本文件）的二进制base64编码，以行分隔格式要求：TXT每行只有一个词，不满足格式则报错无法上传每个词限制**5个汉字，15个字符**，单个词库最多不超过100个词注意不要有空行，尤其是最后一行 */
+  KeyWordFile?: string;
+}
+
+declare interface CreateAsrKeyWordLibResponse {
+  /** 词表ID数据 */
+  Data?: KeyWordLibIdData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAsrVocabRequest {
   /** 热词表名称，长度在1-255之间 */
   Name: string;
@@ -309,11 +363,23 @@ declare interface CreateRecTaskRequest {
   Extra?: string;
   /** 临时热词表：该参数用于提升识别准确率。- 单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：“腾讯云|5” 或“ASR|11”；- 临时热词表限制：多个热词用英文逗号分割，最多支持128个热词，如：“腾讯云|10,语音识别|5,ASR|11”；- 参数 hotword_id（热词表） 与 hotword_list（临时热词表） 区别： - hotword_id：热词表。需要先在控制台或接口创建热词表，获得对应hotword_id传入参数来使用热词功能； - hotword_list：临时热词表。每次请求时直接传入临时热词表来使用热词功能，云端不保留临时热词表。适用于有极大量热词需求的用户；注意：- 如果同时传入了 hotword_id 和 hotword_list，会优先使用 hotword_list；- 热词权重设置为11时，当前热词将升级为超级热词，建议仅将重要且必须生效的热词设置到11，设置过多权重为11的热词将影响整体字准率。- 热词权重设置为100时，当前热词开启热词增强同音替换功能（仅支持8k_zh,16k_zh），举例：热词配置“蜜制|100”时，与“蜜制”同拼音（mizhi）的“秘制”的识别结果会被强制替换成“蜜制”。因此建议客户根据自己的实际情况开启该功能。建议仅将重要且必须生效的热词设置到100，设置过多权重为100的热词将影响整体字准率。 */
   HotwordList?: string;
+  /** 关键词识别ID列表，默认空为不进行识别，最多10个 */
+  KeyWordLibIdList?: string[];
 }
 
 declare interface CreateRecTaskResponse {
   /** 录音文件识别的请求返回结果，包含结果查询需要的TaskId。**注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。** */
   Data?: Task;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAsrKeyWordLibRequest {
+  /** 关键词表ID */
+  KeyWordLibId: string;
+}
+
+declare interface DeleteAsrKeyWordLibResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -382,6 +448,24 @@ declare interface DownloadCustomizationRequest {
 declare interface DownloadCustomizationResponse {
   /** 下载地址 */
   DownloadUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetAsrKeyWordLibListRequest {
+  /** 分页Offset */
+  Offset?: number;
+  /** 分页Limit */
+  Limit?: number;
+  /** 词库名称或者UIN检索 */
+  SpecifyNames?: string[];
+  /** 只看用户自己创建的 */
+  OnlySelf?: boolean;
+}
+
+declare interface GetAsrKeyWordLibListResponse {
+  /** 关键词列表返回数据 */
+  Data?: KeyWordLibListData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -556,6 +640,22 @@ declare interface SetVocabStateResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAsrKeyWordLibRequest {
+  /** 关键词表ID */
+  KeyWordLibId: string;
+  /** 词表名称，长度在1-20之间仅限中英文数字-_ */
+  Name?: string;
+  /** - 词文件（纯文本文件）以行分隔 ，进行二进制base64编码- 格式要求：TXT 每行只有一个词，不满足格式则报错无法上传 - 每个词最多5个汉字或15个字符，单个词库最多不超过100个词- 此参数为空则只更新词表名称 */
+  KeyWordFile?: string;
+}
+
+declare interface UpdateAsrKeyWordLibResponse {
+  /** 关键词表ID数据 */
+  Data?: KeyWordLibIdData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAsrVocabRequest {
   /** 热词表ID */
   VocabId: string;
@@ -707,6 +807,8 @@ declare interface Asr {
   (): Versions;
   /** 语音流异步识别任务关闭 {@link CloseAsyncRecognitionTaskRequest} {@link CloseAsyncRecognitionTaskResponse} */
   CloseAsyncRecognitionTask(data: CloseAsyncRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAsyncRecognitionTaskResponse>;
+  /** 创建关键词表 {@link CreateAsrKeyWordLibRequest} {@link CreateAsrKeyWordLibResponse} */
+  CreateAsrKeyWordLib(data: CreateAsrKeyWordLibRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAsrKeyWordLibResponse>;
   /** 创建热词表 {@link CreateAsrVocabRequest} {@link CreateAsrVocabResponse} */
   CreateAsrVocab(data: CreateAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAsrVocabResponse>;
   /** 语音流异步识别任务创建 {@link CreateAsyncRecognitionTaskRequest} {@link CreateAsyncRecognitionTaskResponse} */
@@ -715,6 +817,8 @@ declare interface Asr {
   CreateCustomization(data: CreateCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizationResponse>;
   /** 录音文件识别请求 {@link CreateRecTaskRequest} {@link CreateRecTaskResponse} */
   CreateRecTask(data: CreateRecTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecTaskResponse>;
+  /** 删除关键词表 {@link DeleteAsrKeyWordLibRequest} {@link DeleteAsrKeyWordLibResponse} */
+  DeleteAsrKeyWordLib(data: DeleteAsrKeyWordLibRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAsrKeyWordLibResponse>;
   /** 删除热词表 {@link DeleteAsrVocabRequest} {@link DeleteAsrVocabResponse} */
   DeleteAsrVocab(data: DeleteAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAsrVocabResponse>;
   /** 删除自学习模型 {@link DeleteCustomizationRequest} {@link DeleteCustomizationResponse} */
@@ -727,6 +831,8 @@ declare interface Asr {
   DownloadAsrVocab(data: DownloadAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadAsrVocabResponse>;
   /** 下载自学习模型语料 {@link DownloadCustomizationRequest} {@link DownloadCustomizationResponse} */
   DownloadCustomization(data: DownloadCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomizationResponse>;
+  /** 列举关键词表 {@link GetAsrKeyWordLibListRequest} {@link GetAsrKeyWordLibListResponse} */
+  GetAsrKeyWordLibList(data?: GetAsrKeyWordLibListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsrKeyWordLibListResponse>;
   /** 获取热词表 {@link GetAsrVocabRequest} {@link GetAsrVocabResponse} */
   GetAsrVocab(data: GetAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsrVocabResponse>;
   /** 列举热词表 {@link GetAsrVocabListRequest} {@link GetAsrVocabListResponse} */
@@ -743,6 +849,8 @@ declare interface Asr {
   SentenceRecognition(data: SentenceRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceRecognitionResponse>;
   /** 设置热词表状态 {@link SetVocabStateRequest} {@link SetVocabStateResponse} */
   SetVocabState(data: SetVocabStateRequest, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateResponse>;
+  /** 更新关键词表 {@link UpdateAsrKeyWordLibRequest} {@link UpdateAsrKeyWordLibResponse} */
+  UpdateAsrKeyWordLib(data: UpdateAsrKeyWordLibRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAsrKeyWordLibResponse>;
   /** 更新热词表 {@link UpdateAsrVocabRequest} {@link UpdateAsrVocabResponse} */
   UpdateAsrVocab(data: UpdateAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAsrVocabResponse>;
   /** 说话人比对 {@link VoicePrintCompareRequest} {@link VoicePrintCompareResponse} */

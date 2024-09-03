@@ -6386,6 +6386,8 @@ declare namespace V20180525 {
     ClusterId: string;
     /** kubelet根目录 */
     KubeletRootDir?: string;
+    /** 集群类型 tke/eks，默认tke */
+    ClusterType?: string;
   }
 
   interface InstallLogAgentResponse {

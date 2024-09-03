@@ -2505,7 +2505,7 @@ declare interface BatchModifyGroupOffsetsRequest {
 
 declare interface BatchModifyGroupOffsetsResponse {
   /** 返回结果 */
-  Result: JgwOperateResponse;
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2519,7 +2519,7 @@ declare interface BatchModifyTopicAttributesRequest {
 
 declare interface BatchModifyTopicAttributesResponse {
   /** 返回结果 */
-  Result: BatchModifyTopicResultDTO[];
+  Result?: BatchModifyTopicResultDTO[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2535,7 +2535,7 @@ declare interface CancelAuthorizationTokenRequest {
 
 declare interface CancelAuthorizationTokenResponse {
   /** 0 成功 */
-  Result: number | null;
+  Result?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2797,6 +2797,8 @@ declare interface CreateInstancePostRequest {
   InstanceNum?: number;
   /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍 */
   PublicNetworkMonthly?: number;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateInstancePostResponse {
@@ -2889,7 +2891,7 @@ declare interface CreatePostPaidInstanceRequest {
   ClusterId?: number;
   /** 实例版本。目前支持 "0.10.2","1.1.1","2.4.1","2.4.2","2.8.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
-  /** 实例类型。"standard"：标准版，"profession"：专业版 */
+  /** 实例类型。"standard"：标准版，"profession"：专业版。 (标准版仅国际站支持，国内站目前支持专业版) */
   SpecificationsType?: string;
   /** 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认值为 "CLOUD_BASIC" */
   DiskType?: string;
@@ -2911,6 +2913,8 @@ declare interface CreatePostPaidInstanceRequest {
   InstanceNum?: number;
   /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍 */
   PublicNetworkMonthly?: number;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreatePostPaidInstanceResponse {
@@ -3161,7 +3165,7 @@ declare interface DeleteInstancePreRequest {
 
 declare interface DeleteInstancePreResponse {
   /** 返回结果 */
-  Result: CreateInstancePreResp;
+  Result?: CreateInstancePreResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3185,6 +3189,8 @@ declare interface DeleteRouteResponse {
 }
 
 declare interface DeleteRouteTriggerTimeRequest {
+  /** 实例id */
+  InstanceId: string;
   /** 修改时间 */
   DelayTime: string;
 }
@@ -3567,7 +3573,7 @@ declare interface DescribePrometheusRequest {
 
 declare interface DescribePrometheusResponse {
   /** Prometheus监控映射列表 */
-  Result: PrometheusDTO[];
+  Result?: PrometheusDTO[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4179,7 +4185,7 @@ declare interface ModifyInstancePreRequest {
 
 declare interface ModifyInstancePreResponse {
   /** 变更预付费实例配置返回结构 */
-  Result: CreateInstancePreResp;
+  Result?: CreateInstancePreResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -861,13 +861,13 @@ declare interface CreateTriggerRequest {
   FunctionName: string;
   /** 新建触发器名称。如果是定时触发器，名称支持英文字母、数字、连接符和下划线，最长100个字符；如果是cos触发器，需要是对应cos存储桶适用于XML API的访问域名(例如:5401-5ff414-12345.cos.ap-shanghai.myqcloud.com);如果是其他触发器，见具体触发器绑定参数的说明 */
   TriggerName: string;
-  /** 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型。创建函数 URL 请在此填写 http，请参考[创建函数 URL ](https://cloud.tencent.com/document/product/583/100227)。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。 */
+  /** 触发器类型，目前支持 cos 、cls 、 timer、 ckafka、http类型。创建函数 URL 请使用 http 类型，参考[创建函数 URL ](https://cloud.tencent.com/document/product/583/100227)。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。 */
   Type: string;
   /** 触发器对应的参数，可见具体[触发器描述说明](https://cloud.tencent.com/document/product/583/39901) */
   TriggerDesc?: string;
   /** 函数的命名空间 */
   Namespace?: string;
-  /** 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149)方便后续进行版本的灰度发布。 */
+  /** 触发器所生效的版本或别名，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149)方便后续进行版本的灰度发布，默认为 $LATEST。 */
   Qualifier?: string;
   /** 触发器的初始是能状态 OPEN表示开启 CLOSE表示关闭 */
   Enable?: string;
@@ -965,13 +965,13 @@ declare interface DeleteTriggerRequest {
   FunctionName: string;
   /** 要删除的触发器名称 */
   TriggerName: string;
-  /** 要删除的触发器类型，目前支持 cos 、cmq、 timer、ckafka 类型 */
+  /** 要删除的触发器类型，目前只支持 timer、ckafka 、apigw 、cls 、cos 、cmq 、http 类型 */
   Type: string;
   /** 函数所属命名空间 */
   Namespace?: string;
   /** 如果删除的触发器类型为 COS 触发器，该字段为必填值，存放 JSON 格式的数据 {"event":"cos:ObjectCreated:*"}，数据内容和 SetTrigger 接口中该字段的格式相同；如果删除的触发器类型为定时触发器或 CMQ 触发器，可以不指定该字段 */
   TriggerDesc?: string;
-  /** 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149)方便后续进行版本的灰度发布。如果删除的触发器类型为 APIGW 触发器,该字段为必填参数 */
+  /** 要删除的触发器实际所指向的版本或别名，默认值为 $LATEST */
   Qualifier?: string;
 }
 
@@ -1795,13 +1795,13 @@ declare interface UpdateTriggerRequest {
   FunctionName: string;
   /** 触发器名称 */
   TriggerName: string;
-  /** 触发器类型 */
+  /** 触发器类型，目前只支持timer、ckafka、http三种类型 */
   Type: string;
   /** 触发器开启或关闭，传参为OPEN为开启，CLOSE为关闭 */
   Enable?: string;
-  /** 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149)方便后续进行版本的灰度发布。 */
+  /** 触发器创建时所指向的函数版本或别名，默认为 $LATEST */
   Qualifier?: string;
-  /** 函数的命名空间 */
+  /** 函数的命名空间，默认值为default */
   Namespace?: string;
   /** TriggerDesc参数 */
   TriggerDesc?: string;

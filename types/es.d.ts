@@ -2100,6 +2100,22 @@ declare interface InquirePriceRenewInstanceResponse {
   RequestId?: string;
 }
 
+declare interface InstallInstanceModelRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 客户上传到自己cos的地址列表 */
+  UsrCosModelUrlList?: string[];
+}
+
+declare interface InstallInstanceModelResponse {
+  /** 发起异步流程的flowId */
+  FlowId?: string;
+  /** 调用接口的错误信息 */
+  ErrMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyEsVipSecurityGroupRequest {
   /** es集群的实例id */
   InstanceId: string;
@@ -2611,6 +2627,8 @@ declare interface Es {
   GetRequestTargetNodeTypes(data: GetRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestTargetNodeTypesResponse>;
   /** 集群续费询价 {@link InquirePriceRenewInstanceRequest} {@link InquirePriceRenewInstanceResponse} */
   InquirePriceRenewInstance(data: InquirePriceRenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewInstanceResponse>;
+  /** 安装ES集群模型 {@link InstallInstanceModelRequest} {@link InstallInstanceModelResponse} */
+  InstallInstanceModel(data: InstallInstanceModelRequest, config?: AxiosRequestConfig): AxiosPromise<InstallInstanceModelResponse>;
   /** 修改集群VIP绑定的安全组 {@link ModifyEsVipSecurityGroupRequest} {@link ModifyEsVipSecurityGroupResponse} */
   ModifyEsVipSecurityGroup(data: ModifyEsVipSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEsVipSecurityGroupResponse>;
   /** 重启ES集群实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */

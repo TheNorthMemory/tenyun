@@ -764,7 +764,7 @@ declare interface LoadBalancerDetail {
   LoadBalancerId?: string;
   /** 负载均衡实例的名称。 */
   LoadBalancerName?: string;
-  /** 负载均衡实例的网络类型：Public：公网属性， Private：内网属性。 */
+  /** 负载均衡实例的网络类型：OPEN：公网属性，INTERNAL：内网属性。 */
   LoadBalancerType?: string | null;
   /** 负载均衡实例的状态，包括0：创建中，1：正常运行。 */
   Status?: number | null;
@@ -838,6 +838,12 @@ declare interface LoadBalancerDetail {
   LoadBalancerDomain?: string | null;
   /** 网络出口 */
   Egress?: string | null;
+  /** 负载均衡的属性 */
+  AttributeFlags?: string[] | null;
+  /** 负载均衡实例的规格类型信息 clb.c1.small：简约型规格 clb.c2.medium：标准型规格 clb.c3.small：高阶型1规格 clb.c3.medium：高阶型2规格 clb.c4.small：超强型1规格 clb.c4.medium：超强型2规格 clb.c4.large：超强型3规格 clb.c4.xlarge：超强型4规格 ""：非性能容量型实例 */
+  SlaType?: string | null;
+  /** 0：表示非独占型实例，1：表示独占型态实例。 */
+  Exclusive?: number | null;
 }
 
 /** 负载均衡实例的健康检查状态 */
@@ -1473,6 +1479,8 @@ declare interface CreateListenerRequest {
   IdleConnectTimeout?: number;
   /** 是否开启SNAT。 */
   SnatEnable?: boolean;
+  /** 全端口段监听器的结束端口 */
+  FullEndPorts?: number[];
 }
 
 declare interface CreateListenerResponse {

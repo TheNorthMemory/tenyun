@@ -1066,6 +1066,20 @@ declare interface DescribeBackupTimeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBinlogTimeRequest {
+  /** 实例 ID，形如：tdsql-ow728lmc。 */
+  InstanceId: string;
+}
+
+declare interface DescribeBinlogTimeResponse {
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBEncryptAttributesRequest {
   /** 实例Id，形如：tdsql-ow728lmc。 */
   InstanceId: string;
@@ -2183,6 +2197,8 @@ declare interface Mariadb {
   DescribeBackupFiles(data?: DescribeBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupFilesResponse>;
   /** 查询备份时间 {@link DescribeBackupTimeRequest} {@link DescribeBackupTimeResponse} */
   DescribeBackupTime(data: DescribeBackupTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupTimeResponse>;
+  /** 查询可回档时间范围 {@link DescribeBinlogTimeRequest} {@link DescribeBinlogTimeResponse} */
+  DescribeBinlogTime(data: DescribeBinlogTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogTimeResponse>;
   /** 查询实例数据加密状态 {@link DescribeDBEncryptAttributesRequest} {@link DescribeDBEncryptAttributesResponse} */
   DescribeDBEncryptAttributes(data: DescribeDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBEncryptAttributesResponse>;
   /** 查询实例详细信息 {@link DescribeDBInstanceDetailRequest} {@link DescribeDBInstanceDetailResponse} */

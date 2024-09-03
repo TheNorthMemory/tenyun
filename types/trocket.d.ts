@@ -16,6 +16,14 @@ declare interface ConsumeGroupItem {
   MaxRetryTimes?: number;
   /** 备注 */
   Remark?: string;
+  /** 4.x的集群ID */
+  ClusterIdV4?: string | null;
+  /** 4.x的命名空间 */
+  NamespaceV4?: string | null;
+  /** 4.x的消费组名称 */
+  ConsumerGroupV4?: string | null;
+  /** 4.x的完整命名空间 */
+  FullNamespaceV4?: string | null;
 }
 
 /** map结构返回 */

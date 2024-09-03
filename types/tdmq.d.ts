@@ -60,6 +60,20 @@ declare interface BindCluster {
   ClusterName: string;
 }
 
+/** 客户端订阅详情，可用于辅助判断哪些客户端订阅关系不一致 */
+declare interface ClientSubscriptionInfo {
+  /** 客户端ID */
+  ClientId?: string;
+  /** 客户端IP */
+  ClientAddr?: string | null;
+  /** 订阅主题 */
+  Topic?: string | null;
+  /** 订阅表达式 */
+  SubString?: string | null;
+  /** 订阅方式 */
+  ExpressionType?: string | null;
+}
+
 /** 集群信息集合 */
 declare interface Cluster {
   /** 集群Id。 */
@@ -145,67 +159,67 @@ declare interface CmqDeadLetterSource {
 /** cmq 批量queue属性信息 */
 declare interface CmqQueue {
   /** 消息队列ID。 */
-  QueueId: string;
+  QueueId?: string;
   /** 消息队列名字。 */
-  QueueName: string;
+  QueueName?: string;
   /** 每秒钟生产消息条数的限制，消费消息的大小是该值的1.1倍。 */
-  Qps: number | null;
+  Qps?: number | null;
   /** 带宽限制。 */
-  Bps: number | null;
+  Bps?: number | null;
   /** 飞行消息最大保留时间。 */
-  MaxDelaySeconds: number | null;
+  MaxDelaySeconds?: number | null;
   /** 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。 */
-  MaxMsgHeapNum: number;
+  MaxMsgHeapNum?: number;
   /** 消息接收长轮询等待时间。取值范围0 - 30秒，默认值0。 */
-  PollingWaitSeconds: number | null;
+  PollingWaitSeconds?: number | null;
   /** 消息保留周期。取值范围60-1296000秒（1min-15天），默认值345600秒（4 天）。 */
-  MsgRetentionSeconds: number | null;
+  MsgRetentionSeconds?: number | null;
   /** 消息可见性超时。取值范围1 - 43200秒（即12小时内），默认值30。 */
-  VisibilityTimeout: number | null;
+  VisibilityTimeout?: number | null;
   /** 消息最大长度。取值范围1024 - 1048576 Byte（即1K - 1024K），默认值65536。 */
-  MaxMsgSize: number | null;
+  MaxMsgSize?: number | null;
   /** 回溯队列的消息回溯时间最大值，取值范围0 - 43200秒，0表示不开启消息回溯。 */
-  RewindSeconds: number | null;
+  RewindSeconds?: number | null;
   /** 队列的创建时间。返回 Unix 时间戳，精确到毫秒。 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 最后一次修改队列属性的时间。返回 Unix 时间戳，精确到毫秒。 */
-  LastModifyTime: number | null;
+  LastModifyTime?: number | null;
   /** 在队列中处于 Active 状态（不处于被消费状态）的消息总数，为近似值。 */
-  ActiveMsgNum: number | null;
+  ActiveMsgNum?: number | null;
   /** 在队列中处于 Inactive 状态（正处于被消费状态）的消息总数，为近似值。 */
-  InactiveMsgNum: number | null;
+  InactiveMsgNum?: number | null;
   /** 延迟消息数。 */
-  DelayMsgNum: number | null;
+  DelayMsgNum?: number | null;
   /** 已调用 DelMsg 接口删除，但还在回溯保留时间内的消息数量。 */
-  RewindMsgNum: number | null;
+  RewindMsgNum?: number | null;
   /** 消息最小未消费时间，单位为秒。 */
-  MinMsgTime: number | null;
+  MinMsgTime?: number | null;
   /** 事务消息队列。true表示是事务消息，false表示不是事务消息。 */
-  Transaction: boolean | null;
+  Transaction?: boolean | null;
   /** 死信队列。 */
-  DeadLetterSource: CmqDeadLetterSource[] | null;
+  DeadLetterSource?: CmqDeadLetterSource[] | null;
   /** 死信队列策略。 */
-  DeadLetterPolicy: CmqDeadLetterPolicy | null;
+  DeadLetterPolicy?: CmqDeadLetterPolicy | null;
   /** 事务消息策略。 */
-  TransactionPolicy: CmqTransactionPolicy | null;
+  TransactionPolicy?: CmqTransactionPolicy | null;
   /** 创建者Uin。 */
-  CreateUin: number | null;
+  CreateUin?: number | null;
   /** 关联的标签。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 消息轨迹。true表示开启，false表示不开启。 */
-  Trace: boolean | null;
+  Trace?: boolean | null;
   /** 租户id */
-  TenantId: string | null;
+  TenantId?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
-  Status: number | null;
+  Status?: number | null;
   /** 最大未确认消息数量 */
-  MaxUnackedMsgNum: number | null;
+  MaxUnackedMsgNum?: number | null;
   /** 最大消息堆积大小（字节） */
-  MaxMsgBacklogSize: number | null;
+  MaxMsgBacklogSize?: number | null;
   /** 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启 */
-  RetentionSizeInMB: number | null;
+  RetentionSizeInMB?: number | null;
 }
 
 /** cmq订阅返回参数 */
@@ -657,17 +671,19 @@ declare interface PulsarProClusterInfo {
 /** Pulsar专业版集群规格信息 */
 declare interface PulsarProClusterSpecInfo {
   /** 集群规格名称 */
-  SpecName: string;
+  SpecName?: string;
   /** 峰值tps */
-  MaxTps: number;
+  MaxTps?: number;
   /** 峰值带宽。单位：mbps */
-  MaxBandWidth: number;
+  MaxBandWidth?: number;
   /** 最大命名空间个数 */
-  MaxNamespaces: number;
+  MaxNamespaces?: number;
   /** 最大主题分区数 */
-  MaxTopics: number;
+  MaxTopics?: number;
   /** 规格外弹性TPS */
-  ScalableTps: number | null;
+  ScalableTps?: number | null;
+  /** 32或者128当前集群topic的最大分区数 */
+  MaxPartitions?: number | null;
 }
 
 /** Pulsar专业版实例信息 */
@@ -1400,6 +1416,8 @@ declare interface RocketMQSubscription {
   MaxRetryTimes?: number | null;
   /** 协议类型 */
   ClientProtocol?: string | null;
+  /** 客户端订阅详情 */
+  ClientSubscriptionInfos?: ClientSubscriptionInfo[] | null;
 }
 
 /** RocketMQ主题信息 */
@@ -2629,7 +2647,7 @@ declare interface DescribeClusterDetailRequest {
 
 declare interface DescribeClusterDetailResponse {
   /** 集群的详细信息 */
-  ClusterSet: Cluster;
+  ClusterSet?: Cluster;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2705,9 +2723,9 @@ declare interface DescribeCmqQueuesRequest {
 
 declare interface DescribeCmqQueuesResponse {
   /** 数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 队列列表 */
-  QueueList: CmqQueue[] | null;
+  QueueList?: CmqQueue[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2743,7 +2761,7 @@ declare interface DescribeCmqTopicDetailRequest {
 
 declare interface DescribeCmqTopicDetailResponse {
   /** 主题详情 */
-  TopicDescribe: CmqTopic;
+  TopicDescribe?: CmqTopic;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2765,9 +2783,9 @@ declare interface DescribeCmqTopicsRequest {
 
 declare interface DescribeCmqTopicsResponse {
   /** 主题列表 */
-  TopicList: CmqTopic[] | null;
+  TopicList?: CmqTopic[] | null;
   /** 全量主题数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3789,9 +3807,9 @@ declare interface DescribeRocketMQSubscriptionsRequest {
 
 declare interface DescribeRocketMQSubscriptionsResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 订阅关系列表 */
-  Subscriptions: RocketMQSubscription[] | null;
+  Subscriptions?: RocketMQSubscription[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4533,9 +4551,9 @@ declare interface PublishCmqMsgRequest {
 
 declare interface PublishCmqMsgResponse {
   /** true表示发送成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 消息id */
-  MsgId: string;
+  MsgId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

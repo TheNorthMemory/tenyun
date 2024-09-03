@@ -604,17 +604,17 @@ declare namespace V20190711 {
   /** 获取短信签名信息响应 */
   interface DescribeSignListStatus {
     /** 签名Id */
-    SignId: number;
+    SignId?: number;
     /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。 */
-    International: number;
-    /** 申请签名状态。其中：0：表示审核通过。1：表示审核中。-1：表示审核未通过或审核失败。 */
-    StatusCode: number;
+    International?: number;
+    /** 申请签名状态。其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。 */
+    StatusCode?: number;
     /** 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。 */
-    ReviewReply: string;
+    ReviewReply?: string;
     /** 签名名称。 */
-    SignName: string;
+    SignName?: string;
     /** 提交审核时间，UNIX 时间戳（单位：秒）。 */
-    CreateTime: number;
+    CreateTime?: number;
   }
 
   /** 获取短信模板信息响应 */
@@ -768,7 +768,7 @@ declare namespace V20190711 {
     TemplateName: string;
     /** 模板内容。 */
     TemplateContent: string;
-    /** 短信类型，0表示普通短信, 1表示营销短信。 */
+    /** 短信类型，1表示营销短信，2表示通知短信，3表示验证码短信。注：原“普通短信”类型模板目前仍支持提交申请，为进一步提升短信发送质量、提高短信模板审核通过率，建议按“通知短信”类型或“验证码短信”类型申请新增模板，可参考[关于腾讯云短信模板类型优化公告](https://cloud.tencent.com/document/product/382/106171)。 */
     SmsType: number;
     /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。 */
     International: number;
@@ -890,7 +890,7 @@ declare namespace V20190711 {
     TemplateName: string;
     /** 新的模板内容。 */
     TemplateContent: string;
-    /** 短信类型，0表示普通短信, 1表示营销短信。 */
+    /** 短信类型，1表示营销短信，2表示通知短信，3表示验证码短信。注：原“普通短信”类型模板目前仍支持提交申请，为进一步提升短信发送质量、提高短信模板审核通过率，建议按“通知短信”类型或“验证码短信”类型申请新增模板，可参考[关于腾讯云短信模板类型优化公告](https://cloud.tencent.com/document/product/382/106171)。 */
     SmsType: number;
     /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。 */
     International: number;
