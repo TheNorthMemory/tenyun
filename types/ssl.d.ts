@@ -452,6 +452,26 @@ declare interface DeployedResources {
   Resources: string[] | null;
 }
 
+/** 域名验证结果 */
+declare interface DomainValidationResult {
+  /** 域名。 */
+  Domain: string;
+  /** 验证类型。 */
+  VerifyType: string | null;
+  /** 本地检查结果。 */
+  LocalCheck: number;
+  /** CA检查结果。 */
+  CaCheck: number;
+  /** 检查失败原因。 */
+  LocalCheckFailReason: string | null;
+  /** 检查到的值。 */
+  CheckValue: string[] | null;
+  /** 是否频繁请求。 */
+  Frequently: boolean;
+  /** 是否已经签发。 */
+  Issued: boolean;
+}
+
 /** 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。 */
 declare interface DvAuthDetail {
   /** DV 认证密钥。 */
@@ -1204,6 +1224,18 @@ declare interface CheckCertificateChainResponse {
   IsTrustedCA?: boolean;
   /** 包含证书链中每一段证书的通用名称。 */
   Chains?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckCertificateDomainVerificationRequest {
+  /** 证书ID。 */
+  CertificateId: string;
+}
+
+declare interface CheckCertificateDomainVerificationResponse {
+  /** 域名验证结果 */
+  VerificationResults: DomainValidationResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2567,6 +2599,8 @@ declare interface Ssl {
   CancelCertificateOrder(data: CancelCertificateOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCertificateOrderResponse>;
   /** 检查证书链完整性 {@link CheckCertificateChainRequest} {@link CheckCertificateChainResponse} */
   CheckCertificateChain(data: CheckCertificateChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateChainResponse>;
+  /** 检查证书域名验证 {@link CheckCertificateDomainVerificationRequest} {@link CheckCertificateDomainVerificationResponse} */
+  CheckCertificateDomainVerification(data: CheckCertificateDomainVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateDomainVerificationResponse>;
   /** 提交证书订单 {@link CommitCertificateInformationRequest} {@link CommitCertificateInformationResponse} */
   CommitCertificateInformation(data: CommitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CommitCertificateInformationResponse>;
   /** 主动触发证书验证 {@link CompleteCertificateRequest} {@link CompleteCertificateResponse} */

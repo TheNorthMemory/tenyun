@@ -554,7 +554,7 @@ declare interface QualityData {
 
 /** 语音识别使用的配置 */
 declare interface RecognizeConfig {
-  /** 语音转文字支持识别的语言，默认是"zh" 中文目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：可通过购买「语音转文本时长包」解锁或领取包月套餐体验版解锁此功能。语音转文本支持语言类型如下：- Chinese = "zh" # 中文- Chinese_TW = "zh-TW" # 中国台湾- English = "en" # 英语- Chinese_YUE = "zh-yue" # 中国粤语- Chinese_DIALECT = "zh-dialect" # 中国方言- English = "en" # 英语- Vietnamese = "vi" # 越南语- Japanese = "ja" # 日语- Korean = "ko" # 汉语- Indonesia = "id" # 印度尼西亚语- Thai = "th" # 泰语- Portuguese = "pt" # 葡萄牙语- Turkish = "tr" # 土耳其语- Arabic = "ar" # 阿拉伯语- Spanish = "es" # 西班牙语- Hindi = "hi" # 印地语- French = "fr" # 法语- Malay = "ms" # 马来语- Filipino = "fil" # 菲律宾语- German = "de" # 德语- Italian = "it" # 意大利语- Russian = "ru" # 俄语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
+  /** 语音转文字支持识别的语言，默认是"zh" 中文目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：可通过购买「语音转文本时长包」解锁或领取包月套餐体验版解锁此功能。语音转文本支持语言类型如下：- Chinese = "zh" # 中文- Chinese_TW = "zh-TW" # 中国台湾- English = "en" # 英语- Chinese_YUE = "zh-yue" # 中国粤语- Chinese_DIALECT = "zh-dialect" # 中国方言- English = "en" # 英语- Vietnamese = "vi" # 越南语- Japanese = "ja" # 日语- Korean = "ko" # 韩语- Indonesia = "id" # 印度尼西亚语- Thai = "th" # 泰语- Portuguese = "pt" # 葡萄牙语- Turkish = "tr" # 土耳其语- Arabic = "ar" # 阿拉伯语- Spanish = "es" # 西班牙语- Hindi = "hi" # 印地语- French = "fr" # 法语- Malay = "ms" # 马来语- Filipino = "fil" # 菲律宾语- German = "de" # 德语- Italian = "it" # 意大利语- Russian = "ru" # 俄语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
   Language?: string;
   /** 发起模糊识别额外可能替代语言类型,最多填写3种语言类型。注：Language指定为"zh-dialect" # 中国方言 时，不支持模糊识别，该字段无效 */
   AlternativeLanguage?: string[];
@@ -624,7 +624,7 @@ declare interface RowValues {
 
 /** 语音转文字参数 */
 declare interface STTConfig {
-  /** 语音识别支持的语言，默认是"zh" 中文目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：1. Chinese = "zh" # 中文2. Chinese_TW = "zh-TW" # 中国台湾3. Chinese_DIALECT = "zh-dialect" # 中国方言4. English = "en" # 英语5. Vietnamese = "vi" # 越南语6. Japanese = "ja" # 日语7. Korean = "ko" # 汉语8. Indonesia = "id" # 印度尼西亚语9. Thai = "th" # 泰语10. Portuguese = "pt" # 葡萄牙语11. Turkish = "tr" # 土耳其语12. Arabic = "ar" # 阿拉伯语13. Spanish = "es" # 西班牙语14. Hindi = "hi" # 印地语15. French = "fr" # 法语16. Malay = "ms" # 马来语17. Filipino = "fil" # 菲律宾语18. German = "de" # 德语19. Italian = "it" # 意大利语20. Russian = "ru" # 俄语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
+  /** 语音识别支持的语言，默认是"zh" 中文目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：1. Chinese = "zh" # 中文2. Chinese_TW = "zh-TW" # 中国台湾3. Chinese_DIALECT = "zh-dialect" # 中国方言4. English = "en" # 英语5. Vietnamese = "vi" # 越南语6. Japanese = "ja" # 日语7. Korean = "ko" # 韩语8. Indonesia = "id" # 印度尼西亚语9. Thai = "th" # 泰语10. Portuguese = "pt" # 葡萄牙语11. Turkish = "tr" # 土耳其语12. Arabic = "ar" # 阿拉伯语13. Spanish = "es" # 西班牙语14. Hindi = "hi" # 印地语15. French = "fr" # 法语16. Malay = "ms" # 马来语17. Filipino = "fil" # 菲律宾语18. German = "de" # 德语19. Italian = "it" # 意大利语20. Russian = "ru" # 俄语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
   Language?: string | null;
   /** 发起模糊识别额外可能替代语言类型,最多填写3种语言类型, 注：Language指定为"zh-dialect" # 中国方言 时，不支持模糊识别，该字段无效 */
   AlternativeLanguage?: string[] | null;

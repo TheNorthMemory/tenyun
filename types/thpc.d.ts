@@ -428,6 +428,78 @@ declare interface RunSecurityServiceEnabled {
   Enabled?: boolean;
 }
 
+/** 描述了工作空间的计费模式 */
+declare interface SpaceChargePrepaid {
+  /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 12, 24, 36。默认取值为1。 */
+  Period?: number | null;
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
+  RenewFlag?: string | null;
+}
+
+/** 工作空间数据盘配置 */
+declare interface SpaceDataDisk {
+  /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围： LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘 LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定 LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定 CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘 CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC。该参数对`ResizeInstanceDisk`接口无效。 */
+  DiskType?: string;
+  /** 数据盘 */
+  DiskId?: string | null;
+  /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
+  DiskSize?: number;
+  /** 数据盘是否随子机销毁。取值范围：TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘 FALSE：子机销毁时，保留数据盘 默认取值：TRUE 该参数目前仅用于 `RunInstances` 接口。 */
+  DeleteWithInstance?: boolean | null;
+  /** 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。 */
+  SnapshotId?: string | null;
+  /** 数据盘是加密。取值范围：true：加密 false：不加密 默认取值：false 该参数目前仅用于 `RunInstances` 接口。 */
+  Encrypt?: boolean | null;
+  /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `CreateWorkspaces` 接口。 */
+  KmsKeyId?: string | null;
+  /** 云硬盘性能，单位：MB/s */
+  ThroughputPerformance?: number | null;
+  /** 突发性能注：内测中。 */
+  BurstPerformance?: boolean | null;
+}
+
+/** 描述了工作空间的公网可访问性，声明了工作空间的公网使用计费模式，最大带宽等 */
+declare interface SpaceInternetAccessible {
+  /** 网络计费类型 */
+  InternetChargeType?: string | null;
+  /** 公网出带宽上限，默认为0 */
+  InternetMaxBandwidthOut?: number | null;
+  /** 是否分配公网IP */
+  PublicIpAssigned?: boolean | null;
+  /** 带宽包ID */
+  BandwidthPackageId?: string | null;
+}
+
+/** 描述了实例的抽象位置，包括其所在的可用区，所属的项目 */
+declare interface SpacePlacement {
+  /** 可用区 */
+  Zone: string | null;
+  /** 项目，默认是0 */
+  ProjectId?: number | null;
+}
+
+/** 工作空间系统盘配置 */
+declare interface SpaceSystemDisk {
+  /** 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_BSSD：通用性SSD云硬盘CLOUD_HSSD：增强型SSD云硬盘CLOUD_TSSD：极速型SSD云硬盘默认取值：当前有库存的硬盘类型。 */
+  DiskType?: string | null;
+  /** 系统盘大小，单位：GB。默认值为 50 */
+  DiskSize?: number | null;
+}
+
+/** 描述了工作空间VPC相关信息，包括子网，IP信息等 */
+declare interface SpaceVirtualPrivateCloud {
+  /** 私有网络ID */
+  VpcId: string;
+  /** 私有网络子网ID */
+  SubnetId: string;
+  /** 是否用作公网网关 */
+  AsVpcGateway?: boolean;
+  /** 私有网络子网 IP 数组 */
+  PrivateIpAddresses?: string[];
+  /** 为弹性网卡指定随机生成 */
+  Ipv6AddressCount?: number;
+}
+
 /** 描述集群文件系统选项 */
 declare interface StorageOption {
   /** 集群挂载CFS文件系统选项。 */
@@ -462,6 +534,14 @@ declare interface Tag {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** 创建资源工作空间时同时绑定的标签对说明 */
+declare interface TagSpecification {
+  /** 标签绑定的资源类型 */
+  ResourceType: string | null;
+  /** 标签对列表 */
+  Tags: Tag[] | null;
 }
 
 /** 描述了VPC相关信息 */
@@ -614,6 +694,60 @@ declare interface CreateClusterRequest {
 declare interface CreateClusterResponse {
   /** 集群ID。 */
   ClusterId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWorkspacesRequest {
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
+  /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。 注：如果您不指定LaunchTemplate参数，则Placement为必选参数。若同时传递Placement和LaunchTemplate，则默认覆盖LaunchTemplate中对应的Placement的值。 */
+  Placement?: SpacePlacement;
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
+  SpaceChargePrepaid?: SpaceChargePrepaid;
+  /** 工作空间计费类型 */
+  SpaceChargeType?: string;
+  /** 工作空间规格 */
+  SpaceType?: string;
+  /** 镜像ID */
+  ImageId?: string;
+  /** 工作空间系统盘信息 */
+  SystemDisk?: SpaceSystemDisk;
+  /** 工作空间数据盘信息 */
+  DataDisks?: SpaceDataDisk[];
+  /** 私有网络相关信息 */
+  VirtualPrivateCloud?: SpaceVirtualPrivateCloud;
+  /** 公网带宽相关信息设置 */
+  InternetAccessible?: SpaceInternetAccessible;
+  /** 购买工作空间数量 */
+  SpaceCount?: number;
+  /** 工作空间显示名称 */
+  SpaceName?: string;
+  /** 工作空间登陆设置 */
+  LoginSettings?: LoginSettings;
+  /** 工作空间所属安全组 */
+  SecurityGroupIds?: string[];
+  /** 增强服务 */
+  EnhancedService?: EnhancedService;
+  /** 是否只预检此次请求 */
+  DryRun?: boolean;
+  /** 提供给工作空间使用的用户数据 */
+  UserData?: string;
+  /** 置放群组id */
+  DisasterRecoverGroupIds?: string[];
+  /** 标签描述列表 */
+  TagSpecification?: TagSpecification[];
+  /** 高性能计算集群ID */
+  HpcClusterId?: string;
+  /** CAM角色名称 */
+  CamRoleName?: string;
+  /** 实例主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：主机名名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server{R:3}`，购买1台时，实例主机名为`server3`；购买2台时，实例主机名分别为`server3`，`server4`。支持指定多个模式串`{R:x}`。购买多台实例，如果不指定模式串，则在实例主机名添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server`，购买2台时，实例主机名分别为`server1`，`server2`。 */
+  HostName?: string;
+}
+
+declare interface CreateWorkspacesResponse {
+  /** 工作空间ID */
+  SpaceIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1813,6 +1947,8 @@ declare interface Thpc {
   AttachNodes(data: AttachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNodesResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
+  /** 创建工作空间 {@link CreateWorkspacesRequest} {@link CreateWorkspacesResponse} */
+  CreateWorkspaces(data?: CreateWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspacesResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** 删除集群存储选项 {@link DeleteClusterStorageOptionRequest} {@link DeleteClusterStorageOptionResponse} */

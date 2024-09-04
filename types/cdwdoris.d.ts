@@ -656,6 +656,24 @@ declare interface RestoreStatus {
   TaskId?: number | null;
 }
 
+/** 调度信息 */
+declare interface ScheduleInfo {
+  /** 生效时间 */
+  EffectivePeriod?: string | null;
+  /** 调度类型：Day-天Week-周Month-月Once-单次 */
+  ScheduleType?: string | null;
+  /** 执行调度的日期。调度类型为周和月时以英文逗号分隔；调度类型为单次时，该值是个日期 */
+  ScheduleData?: string | null;
+  /** 执行时间：时 */
+  ScheduleHour?: number | null;
+  /** 执行时间：分 */
+  ScheduleMin?: number | null;
+  /** 备份粒度：All-全量Database-按库Table-按表 */
+  BackupScope?: string | null;
+  /** 备份库：如果是按库备份，则需要该字段，库之间用英文逗号分割 */
+  BackupDatabase?: string | null;
+}
+
 /** 列表页搜索的标记列表 */
 declare interface SearchTags {
   /** 标签的键 */
@@ -813,6 +831,10 @@ declare interface CheckCoolDownWorkingVariableConfigCorrectResponse {
 }
 
 declare interface CreateBackUpScheduleRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 操作类型 create(创建) update(编辑修改) */
+  OperationType: string;
   /** 编辑时需要传 */
   ScheduleId?: number;
   /** 选择的星期 逗号分隔废弃：使用ScheduleInfo */
@@ -833,6 +855,14 @@ declare interface CreateBackUpScheduleRequest {
   AuthType?: number;
   /** cos认证的信息 */
   CosSourceInfo?: CosSourceInfo;
+  /** 调度任务名 */
+  ScheduleName?: string;
+  /** 调度信息 */
+  ScheduleInfo?: ScheduleInfo;
+  /** 更新任务状态：3-暂停,2-删除,1-启动 */
+  UpdateStatus?: number;
+  /** 当前任务的cos桶信息 */
+  CosBucket?: string;
 }
 
 declare interface CreateBackUpScheduleResponse {
@@ -1984,7 +2014,7 @@ declare interface Cdwdoris {
   /** 检查冷热分层生效变量和配置是否正确 {@link CheckCoolDownWorkingVariableConfigCorrectRequest} {@link CheckCoolDownWorkingVariableConfigCorrectResponse} */
   CheckCoolDownWorkingVariableConfigCorrect(data?: CheckCoolDownWorkingVariableConfigCorrectRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCoolDownWorkingVariableConfigCorrectResponse>;
   /** 创建或者修改备份策略 {@link CreateBackUpScheduleRequest} {@link CreateBackUpScheduleResponse} */
-  CreateBackUpSchedule(data?: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
+  CreateBackUpSchedule(data: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
   /** 创建冷热分层策略 {@link CreateCoolDownPolicyRequest} {@link CreateCoolDownPolicyResponse} */
   CreateCoolDownPolicy(data?: CreateCoolDownPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCoolDownPolicyResponse>;
   /** 集群创建 {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
