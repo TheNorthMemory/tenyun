@@ -3675,6 +3675,8 @@ declare interface DescribeDSPARDBDataAssetDetailRequest {
   DspaId: string;
   /** 合规组Id */
   ComplianceId: number;
+  /** 过滤数组。支持的Name：DataSourceID 数据源IDDbName 数据库名称CategoryID 敏感数据分类IDRuleID 规则IDLevelID 敏感分级IDResourceRegion 资源所在地域SensitiveField 过滤敏感字段，可选值为1，或者无此SensitiveField字段DataSourceType 数据源类型，不填默认过滤非自建的所有关系型数据源类型，填selfbuilt-db只过滤自建类型注意：每个name默认支持最多5个values。 */
+  Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */

@@ -2197,7 +2197,7 @@ declare interface CreateAccessExportRequest {
 
 declare interface CreateAccessExportResponse {
   /** 日志导出ID。 */
-  ExportId: string;
+  ExportId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3747,7 +3747,7 @@ declare interface GetAttackTotalCountRequest {
   StartTime: string;
   /** 结束时间 */
   EndTime: string;
-  /** 查询的域名，全部域名不指定 */
+  /** 查询的域名，全部域名填all */
   Domain: string;
   /** 查询条件，默认为"" */
   QueryString: string;
@@ -3755,7 +3755,7 @@ declare interface GetAttackTotalCountRequest {
 
 declare interface GetAttackTotalCountResponse {
   /** 攻击总次数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

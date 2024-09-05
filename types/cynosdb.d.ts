@@ -3428,6 +3428,30 @@ declare interface DescribeInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIsolatedInstancesRequest {
+  /** 返回数量，默认为 20，最大值为 100 */
+  Limit?: number;
+  /** 记录偏移量，默认值为0 */
+  Offset?: number;
+  /** 排序字段，取值范围： CREATETIME：创建时间 PERIODENDTIME：过期时间 */
+  OrderBy?: string;
+  /** 排序类型，取值范围： ASC：升序排序 DESC：降序排序 */
+  OrderByType?: string;
+  /** 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
+  Filters?: QueryFilter[];
+  /** 引擎类型：目前支持“MYSQL”， “POSTGRESQL” */
+  DbType?: string;
+}
+
+declare interface DescribeIsolatedInstancesResponse {
+  /** 实例个数 */
+  TotalCount?: number;
+  /** 实例列表 */
+  InstanceSet?: CynosdbInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMaintainPeriodRequest {
   /** 实例ID */
   InstanceId: string;
@@ -5265,6 +5289,8 @@ declare interface Cynosdb {
   DescribeInstanceSpecs(data: DescribeInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsResponse>;
   /** 查询实例的列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 查询回收站实例列表 {@link DescribeIsolatedInstancesRequest} {@link DescribeIsolatedInstancesResponse} */
+  DescribeIsolatedInstances(data?: DescribeIsolatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIsolatedInstancesResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintainPeriodRequest} {@link DescribeMaintainPeriodResponse} */
   DescribeMaintainPeriod(data: DescribeMaintainPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainPeriodResponse>;
   /** 查询参数模板详情 {@link DescribeParamTemplateDetailRequest} {@link DescribeParamTemplateDetailResponse} */

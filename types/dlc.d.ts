@@ -1735,23 +1735,25 @@ declare interface TextFile {
 /** 用户详细信息 */
 declare interface UserDetailInfo {
   /** 用户Id */
-  UserId: string | null;
+  UserId?: string | null;
   /** 返回的信息类型，Group：返回的当前用户的工作组信息；DataAuth：返回的当前用户的数据权限信息；EngineAuth：返回的当前用户的引擎权限信息 */
-  Type: string | null;
+  Type?: string | null;
   /** 用户类型：ADMIN：管理员 COMMON：一般用户 */
-  UserType: string | null;
+  UserType?: string | null;
   /** 用户描述信息 */
-  UserDescription: string | null;
+  UserDescription?: string | null;
   /** 数据权限信息集合 */
-  DataPolicyInfo: Policys | null;
+  DataPolicyInfo?: Policys | null;
   /** 引擎权限集合 */
-  EnginePolicyInfo: Policys | null;
+  EnginePolicyInfo?: Policys | null;
   /** 绑定到该用户的工作组集合信息 */
-  WorkGroupInfo: WorkGroups | null;
+  WorkGroupInfo?: WorkGroups | null;
   /** 用户别名 */
-  UserAlias: string | null;
+  UserAlias?: string | null;
   /** 行过滤集合 */
-  RowFilterInfo: Policys | null;
+  RowFilterInfo?: Policys | null;
+  /** 账号类型 */
+  AccountType?: string | null;
 }
 
 /** 绑定到同一个工作组的用户Id的集合 */
@@ -2068,6 +2070,8 @@ declare interface AssignMangedTablePropertiesRequest {
 }
 
 declare interface AssignMangedTablePropertiesResponse {
+  /** 分配的原生表表属性 */
+  Properties?: Property[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3889,7 +3893,7 @@ declare interface DescribeUserDataEngineConfigResponse {
 declare interface DescribeUserInfoRequest {
   /** 用户Id */
   UserId?: string;
-  /** 查询的信息类型，Group：工作组 DataAuth：数据权限 EngineAuth:引擎权限 */
+  /** 必传字段，查询的信息类型，Group：工作组 DataAuth：数据权限 EngineAuth:引擎权限 RowFilter：行级别权限 */
   Type?: string;
   /** 查询的过滤条件。当Type为Group时，支持Key为workgroup-name的模糊搜索；当Type为DataAuth时，支持key：policy-type：权限类型。policy-source：数据来源。data-name：库表的模糊搜索。当Type为EngineAuth时，支持key：policy-type：权限类型。policy-source：数据来源。engine-name：库表的模糊搜索。 */
   Filters?: Filter[];
@@ -3905,7 +3909,7 @@ declare interface DescribeUserInfoRequest {
 
 declare interface DescribeUserInfoResponse {
   /** 用户详细信息 */
-  UserInfo: UserDetailInfo | null;
+  UserInfo?: UserDetailInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

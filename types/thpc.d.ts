@@ -458,6 +458,38 @@ declare interface SpaceDataDisk {
   BurstPerformance?: boolean | null;
 }
 
+/** 描述工作空间的信息 */
+declare interface SpaceInfo {
+  /** 工作空间ID */
+  SpaceId?: string;
+  /** 工作空间类型 */
+  SpaceFamily?: string;
+  /** 工作空间规格 */
+  SpaceType?: string;
+  /** 工作空间名称 */
+  SpaceName?: string;
+  /** 工作空间状态。取值范围：PENDING：表示创建中LAUNCH_FAILED：表示创建失败ONLINE：表示运行中ARREARS：表示隔离中TERMINATING：表示销毁中。 */
+  SpaceState?: string;
+  /** 工作空间计费模式 */
+  SpaceChargeType?: string;
+  /** 工作空间对应资源ID */
+  ResourceId?: string;
+  /** 自动续费标识 */
+  RenewFlag?: string;
+  /** 工作空间关联的工作列表 */
+  Tags?: Tag[];
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 到期时间 */
+  ExpiredTime?: string;
+  /** 工作空间所在位置 */
+  Placement?: Placement;
+  /** 工作空间的最新操作 */
+  LatestOperation?: string | null;
+  /** 工作空间的最新操作状态 */
+  LatestOperationState?: string | null;
+}
+
 /** 描述了工作空间的公网可访问性，声明了工作空间的公网使用计费模式，最大带宽等 */
 declare interface SpaceInternetAccessible {
   /** 网络计费类型 */
@@ -914,6 +946,26 @@ declare interface DescribeQueuesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWorkspacesRequest {
+  /** 集群ID列表。通过该参数可以指定需要查询信息的集群列表。如果您不指定该参数，则返回Limit数量以内的集群信息。 */
+  SpaceIds?: string[];
+  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit?: number;
+  /** 过滤列表 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeWorkspacesResponse {
+  /** 集群概览信息列表 */
+  SpaceSet?: SpaceInfo[];
+  /** 集群数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DetachNodesRequest {
   /** 集群id */
   ClusterId: string;
@@ -938,6 +990,18 @@ declare interface ModifyInitNodeScriptsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyWorkspacesAttributeRequest {
+  /** 工作空间列表 */
+  SpaceIds: string[];
+  /** 修改后的工作空间名称。可任意命名，但不得超过60个字符。 */
+  SpaceName?: string;
+}
+
+declare interface ModifyWorkspacesAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetAutoScalingConfigurationRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -952,6 +1016,18 @@ declare interface SetAutoScalingConfigurationRequest {
 }
 
 declare interface SetAutoScalingConfigurationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TerminateWorkspacesRequest {
+  /** 工作空间ID */
+  SpaceIds: string[];
+  /** 释放空间挂载的包年包月数据盘。true表示销毁空间同时释放包年包月数据盘，false表示只销毁空间。 */
+  ReleasePrepaidDataDisks?: boolean;
+}
+
+declare interface TerminateWorkspacesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1971,12 +2047,18 @@ declare interface Thpc {
   DescribeNodes(data: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
   DescribeQueues(data: DescribeQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueuesResponse>;
+  /** 查询工作空间列表 {@link DescribeWorkspacesRequest} {@link DescribeWorkspacesResponse} */
+  DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
   /** 从集群解绑节点 {@link DetachNodesRequest} {@link DetachNodesResponse} */
   DetachNodes(data: DetachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNodesResponse>;
   /** 修改节点初始化脚本 {@link ModifyInitNodeScriptsRequest} {@link ModifyInitNodeScriptsResponse} */
   ModifyInitNodeScripts(data: ModifyInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInitNodeScriptsResponse>;
+  /** 修改工作空间的属性 {@link ModifyWorkspacesAttributeRequest} {@link ModifyWorkspacesAttributeResponse} */
+  ModifyWorkspacesAttribute(data: ModifyWorkspacesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesAttributeResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
+  /** 销毁工作空间 {@link TerminateWorkspacesRequest} {@link TerminateWorkspacesResponse} */
+  TerminateWorkspaces(data: TerminateWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateWorkspacesResponse>;
   /** 添加集群存储选项 {@link V20220401.AddClusterStorageOptionRequest} {@link V20220401.AddClusterStorageOptionResponse} */
   AddClusterStorageOption(data: V20220401.AddClusterStorageOptionRequest, config: AxiosRequestConfig & V20220401.VersionHeader): AxiosPromise<V20220401.AddClusterStorageOptionResponse>;
   /** 添加节点 {@link V20220401.AddNodesRequest} {@link V20220401.AddNodesResponse} */

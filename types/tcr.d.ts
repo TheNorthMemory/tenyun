@@ -1819,9 +1819,9 @@ declare interface DescribeInstanceCustomizedDomainRequest {
 
 declare interface DescribeInstanceCustomizedDomainResponse {
   /** 域名信息列表 */
-  DomainInfoList: CustomizedDomainInfo[] | null;
+  DomainInfoList?: CustomizedDomainInfo[] | null;
   /** 总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2353,7 +2353,7 @@ declare interface ManageInternalEndpointRequest {
 
 declare interface ManageInternalEndpointResponse {
   /** 实例Id */
-  RegistryId: string;
+  RegistryId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

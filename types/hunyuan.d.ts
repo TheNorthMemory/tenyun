@@ -108,7 +108,7 @@ declare interface Message {
   Contents?: Content[] | null;
   /** 当role为tool时传入，标识具体的函数调用 */
   ToolCallId?: string | null;
-  /** 模型生成的工具调用，仅 hunyuan-functioncall 模型支持 */
+  /** 模型生成的工具调用，仅 hunyuan-pro 或者 hunyuan-functioncall 模型支持 */
   ToolCalls?: ToolCall[] | null;
 }
 

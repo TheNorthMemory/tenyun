@@ -328,7 +328,7 @@ declare interface BackupInfo {
   Region?: string;
   /** 异地备份详细信息 */
   RemoteInfo?: RemoteBackupInfo[];
-  /** 存储方式，0-常规存储，1-归档存储，默认为0 */
+  /** 存储方式，0-常规存储，1-归档存储，2-标准存储，默认为0 */
   CosStorageType?: number;
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId?: string;
@@ -402,7 +402,7 @@ declare interface BinlogInfo {
   Status?: string;
   /** binlog异地备份详细信息 */
   RemoteInfo?: RemoteBackupInfo[];
-  /** 存储方式，0-常规存储，1-归档存储，默认为0 */
+  /** 存储方式，0-常规存储，1-归档存储，2-标准存储，默认为0 */
   CosStorageType?: number;
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId?: string;

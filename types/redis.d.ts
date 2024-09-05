@@ -1033,9 +1033,9 @@ declare interface AllocateWanAddressRequest {
 
 declare interface AllocateWanAddressResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 开通外网的状态 */
-  WanStatus: string;
+  WanStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2327,7 +2327,7 @@ declare interface DestroyPrepaidInstanceRequest {
 
 declare interface DestroyPrepaidInstanceResponse {
   /** 订单Id */
-  DealId: string;
+  DealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2539,7 +2539,7 @@ declare interface ModifyConnectionConfigRequest {
 
 declare interface ModifyConnectionConfigResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2629,9 +2629,9 @@ declare interface ModifyInstanceParamsRequest {
 
 declare interface ModifyInstanceParamsResponse {
   /** 说明修改参数配置是否成功。true：指修改成功；false：指修改失败。 */
-  Changed: boolean;
+  Changed?: boolean;
   /** 任务ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2685,7 +2685,7 @@ declare interface ModifyMaintenanceWindowRequest {
 
 declare interface ModifyMaintenanceWindowResponse {
   /** 修改状态：success 或者 failed */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2771,9 +2771,9 @@ declare interface ReleaseWanAddressRequest {
 
 declare interface ReleaseWanAddressResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 关闭外网的状态 */
-  WanStatus: string;
+  WanStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2821,7 +2821,7 @@ declare interface ResetPasswordRequest {
 
 declare interface ResetPasswordResponse {
   /** 任务ID（修改密码时的任务ID，如果时切换免密码或者非免密码实例，则无需关注此返回值） */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2848,8 +2848,8 @@ declare interface StartupInstanceRequest {
 }
 
 declare interface StartupInstanceResponse {
-  /** 任务id */
-  TaskId: number;
+  /** 该字段已废弃，请通过查询实例接口获取到的状态来判断实例是否已解隔离 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
