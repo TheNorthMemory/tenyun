@@ -58,7 +58,7 @@ declare interface DownloadVRSModelRsp {
 
 /** 训练文本 */
 declare interface TrainingText {
-  /** 文本ID */
+  /** 文本ID当复刻类型为一句话声音复刻时，生成的TextId有效期为7天，且在成功创建一次复刻任务后失效。 */
   TextId?: string | null;
   /** 文本 */
   Text?: string | null;

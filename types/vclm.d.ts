@@ -5,11 +5,11 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 文本片段及其时间戳 */
 declare interface AsrTimestamps {
   /** 文本片段 */
-  Text?: string | null;
+  Text: string | null;
   /** 开始时间 */
-  StartMs?: number | null;
+  StartMs: number | null;
   /** 结束时间 */
-  EndMs?: number | null;
+  EndMs: number | null;
 }
 
 /** 音频翻译结果 */
@@ -197,6 +197,8 @@ declare interface SubmitVideoTranslateJobRequest {
   Confirm?: number;
   /** 是否开启口型驱动，0：不开启，1：开启。默认开启。 */
   LipSync?: number;
+  /** 音色 Id */
+  VoiceType?: string;
 }
 
 declare interface SubmitVideoTranslateJobResponse {

@@ -66,7 +66,7 @@ declare interface CkUserAlterInfo {
   InstanceId: string;
   /** 用户名 */
   UserName: string;
-  /** 密码 */
+  /** base64加密后的密码 */
   PassWord: string;
   /** 描述 */
   Describe?: string;
