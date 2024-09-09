@@ -13567,7 +13567,7 @@ declare interface ModifyEventAttackStatusRequest {
   Ids?: number[];
   /** 是否更新全部，即是否对所有的事件进行操作，当ids 不为空时，此参数无效 */
   All?: boolean;
-  /** 0：待处理 1：已处理 2： 已加白 3： 已忽略 4：已删除 */
+  /** 0：待处理 1：已处理 3： 已忽略 4：已删除 */
   Status?: number;
   /** 过滤条件。Type - String 攻击状态 0: 尝试攻击 1: 攻击成功 - 是否必填: 否Status - String 事件处理状态 0：待处理 1：已处理 2： 已加白 3： 已忽略 4：已删除 - 是否必填: 否SrcIP - String 来源IP - 是否必填: 否DstPort - String 攻击目标端口 - 是否必填: 否MachineName - String 主机名称 - 是否必填: 否InstanceID - String 主机实例ID - 是否必填: 否Quuids - String 主机cvm uuid - 是否必填: 否 */
   Filters?: Filters[];

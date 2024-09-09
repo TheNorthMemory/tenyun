@@ -1073,6 +1073,8 @@ declare interface DescribeMQTTInstanceListRequest {
   Offset?: number;
   /** 查询结果限制数量 */
   Limit?: number;
+  /** 是否包含新控制台集群 */
+  IncludeNew?: boolean;
 }
 
 declare interface DescribeMQTTInstanceListResponse {

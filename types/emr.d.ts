@@ -326,6 +326,34 @@ declare interface ComponentBasicRestartInfo {
   IpList?: string[] | null;
 }
 
+/** 资源调度 - 队列修改信息 */
+declare interface ConfigModifyInfoV2 {
+  /** 操作类型，可选值：- 0：新建队列- 1：编辑-全量覆盖- 2：新建子队列- 3：删除- 4：克隆，与新建子队列的行为一样，特别的对于`fair`，可以复制子队列到新建队列- 6：编辑-增量更新 */
+  OpType: number | null;
+  /** 队列名称，不支持修改。 */
+  Name?: string;
+  /** 新建队列 传root的MyId；新建子队列 传 选中队列的 myId；克隆 要传 选中队列 parentId */
+  ParentId?: string | null;
+  /** 编辑、删除 传选中队列的 myId。克隆只有在调度器是`fair`时才需要传，用来复制子队列到新队列。 */
+  MyId?: string | null;
+  /** 基础配置信息。key的取值与**DescribeYarnQueue**返回的字段一致。###### 公平调度器key的取值信息如下：- type，父队列，取值为 **parent** 或 **null**- aclSubmitApps，提交访问控制，取值为**AclForYarnQueue类型的json串**或**null**- aclAdministerApps，管理访问控制，取值为**AclForYarnQueue类型的json串**或**null**- minSharePreemptionTimeout，最小共享优先权超时时间，取值为**数字字符串**或**null**- fairSharePreemptionTimeout，公平份额抢占超时时间，取值为**数字字符串**或**null**- fairSharePreemptionThreshold，公平份额抢占阈值，取值为**数字字符串**或**null**，其中数字的范围是（0，1]- allowPreemptionFrom，抢占模式，取值为**布尔字符串**或**null**- schedulingPolicy，调度策略，取值为**drf**、**fair**、**fifo**或**null**```type AclForYarnQueue struct {	User *string `json:"user"` //用户名	Group *string `json:"group"`//组名}```###### 容量调度器key的取值信息如下：- state，队列状态，取值为**STOPPED**或**RUNNING**- default-node-label-expression，默认标签表达式，取值为**标签**或**null**- acl_submit_applications，提交访问控制，取值为**AclForYarnQueue类型的json串**或**null**- acl_administer_queue，管理访问控制，取值为**AclForYarnQueue类型的json串**或**null**- maximum-allocation-mb，分配Container最大内存数量，取值为**数字字符串**或**null**- maximum-allocation-vcores，Container最大vCore数量，取值为**数字字符串**或**null**```type AclForYarnQueue struct {	User *string `json:"user"` //用户名	Group *string `json:"group"`//组名}``` */
+  BasicParams?: ItemSeq | null;
+  /** 配置集信息，取值见该复杂类型的参数说明。配置集是计划模式在队列中表现，表示的是不同时间段不同的配置值，所有队列的配置集名称都一样，对于单个队列，每个配置集中的标签与参数都一样，只是参数值不同。 */
+  ConfigSetParams?: ConfigSetInfo[] | null;
+  /** 容量调度专用，`OpType`为`6`时才生效，表示要删除这个队列中的哪些标签。优先级高于ConfigSetParams中的LabelParams。 */
+  DeleteLables?: string[] | null;
+}
+
+/** 资源调度-配置集信息 */
+declare interface ConfigSetInfo {
+  /** 配置集名称 */
+  ConfigSet: string | null;
+  /** 容量调度器会使用，里面设置了标签相关的配置。key的取值与**DescribeYarnQueue**返回的字段一致。key的取值信息如下：- labelName，标签名称，标签管理里的标签。- capacity，容量，取值为**数字字符串**- maximum-capacity，最大容量，取值为**数字字符串** */
+  LabelParams?: ItemSeq[] | null;
+  /** 设置配置集相关的参数。key的取值与**DescribeYarnQueue**返回的字段一致。###### 公平调度器key的取值信息如下：- minResources，最大资源量，取值为**YarnResource类型的json串**或**null**- maxResources，最大资源量，取值为**YarnResource类型的json串**或**null**- maxChildResources，能够分配给为未声明子队列的最大资源量，取值为**数字字符串**或**null**- maxRunningApps，最高可同时处于运行的App数量，取值为**数字字符串**或**null**- weight，权重，取值为**数字字符串**或**null**- maxAMShare，App Master最大份额，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1```type YarnResource struct {	Vcores *int `json:"vcores"`	Memory *int `json:"memory"`	Type *string `json:"type"` // 取值为`percent`或`null`当值为`percent`时，表示使用的百分比，否则就是使用的绝对数值。只有maxResources、maxChildResources才可以取值为`percent`}```###### 容量调度器key的取值信息如下：- minimum-user-limit-percent，用户最小容量，取值为**YarnResource类型的json串**或**null**，其中数字的范围是[0，100]- user-limit-factor，用户资源因子，取值为**YarnResource类型的json串**或**null**- maximum-applications，最大应用数Max-Applications，取值为**数字字符串**或**null**，其中数字为正整数- maximum-am-resource-percent，最大AM比例，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1- default-application-priority，资源池优先级，取值为**数字字符串**或**null**，其中数字为正整数 */
+  BasicParams?: Item[] | null;
+}
+
 /** 自定义配置参数 */
 declare interface Configuration {
   /** 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。 */
@@ -778,6 +806,20 @@ declare interface InstanceChargePrepaid {
   Period: number;
   /** 是否自动续费，默认为否。true：是false：否 */
   RenewFlag: boolean;
+}
+
+/** 代表一个kv结构 */
+declare interface Item {
+  /** 健值 */
+  Key: string | null;
+  /** 值 */
+  Value: string | null;
+}
+
+/** 键值对组成的列表 */
+declare interface ItemSeq {
+  /** 标签名称 */
+  Items: Item[] | null;
 }
 
 /** 机器资源描述。 */
@@ -2304,6 +2346,18 @@ declare interface DeleteUserManagerUserListResponse {
   RequestId?: string;
 }
 
+declare interface DeployYarnConfRequest {
+  /** emr集群的英文id */
+  InstanceId: string;
+}
+
+declare interface DeployYarnConfResponse {
+  /** 启动流程后的流程ID，可以使用[DescribeClusterFlowStatusDetail](https://cloud.tencent.com/document/product/589/107224)接口来获取流程状态 */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAutoScaleGroupGlobalConfRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2691,13 +2745,13 @@ declare interface DescribeResourceScheduleRequest {
 
 declare interface DescribeResourceScheduleResponse {
   /** 资源调度功能是否开启 */
-  OpenSwitch: boolean;
+  OpenSwitch?: boolean;
   /** 正在使用的资源调度器 */
-  Scheduler: string;
+  Scheduler?: string;
   /** 公平调度器的信息 */
-  FSInfo: string;
+  FSInfo?: string;
   /** 容量调度器的信息 */
-  CSInfo: string;
+  CSInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2804,6 +2858,22 @@ declare interface DescribeYarnApplicationsResponse {
   Total?: number;
   /** 结果列表 */
   Results?: YarnApplication[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeYarnQueueRequest {
+  /** 集群Id */
+  InstanceId: string;
+  /** 调度器，可选值：1. capacity2. fair */
+  Scheduler: string;
+}
+
+declare interface DescribeYarnQueueResponse {
+  /** 队列信息。是一个对象转成的json字符串，对应的golang结构体如下所示，比如`QueueWithConfigSetForFairScheduler`的第一个字段`Name`：```Name string `json:"name"` //队列名称```- `Name`：字段名- `string`：字段类型- `json:"name"`：表示在序列化和反序列化`json`时，对应的`json key`，下面以`json key`来指代- `//`：后面的注释内容对应页面上看到的名称字段类型以`*`开头的表示取值可能为json规范下的null，不同的语言需要使用能表达null的类型来接收，比如java的包装类型；字段类型以`[]`开头的表示是数组类型；`json key`在调用`ModifyYarnQueueV2 `接口也会使用。- 公平调度器```type QueueWithConfigSetForFairScheduler struct {	Name string `json:"name"` //队列名称	MyId string `json:"myId"` // 队列id，用于编辑、删除、克隆时使用	ParentId string `json:"parentId"` // 父队列Id	Type *string `json:"type"` // 队列归属。parent或空，当确定某个队列是父队列，且没有子队列时，才可以设置，通常用来支持放置策略nestedUserQueue	AclSubmitApps *AclForYarnQueue `json:"aclSubmitApps"` // 提交访问控制	AclAdministerApps *AclForYarnQueue `json:"aclAdministerApps"` // 管理访问控制	MinSharePreemptionTimeout *int `json:"minSharePreemptionTimeout"` // 最小共享优先权超时时间	FairSharePreemptionTimeout *int `json:"fairSharePreemptionTimeout"` // 公平份额抢占超时时间	FairSharePreemptionThreshold *float32 `json:"fairSharePreemptionThreshold"` // 公平份额抢占阈值。取值 （0，1]	AllowPreemptionFrom *bool `json:"allowPreemptionFrom"` // 抢占模式	SchedulingPolicy *string `json:"schedulingPolicy"` // 调度策略，取值有drf、fair、fifo	IsDefault *bool `json:"isDefault"` // 是否是root.default队列	IsRoot *bool `json:"isRoot"` // 是否是root队列	ConfigSets []ConfigSetForFairScheduler `json:"configSets"` // 配置集设置	Children []QueueWithConfigSetForFairScheduler `json:"queues"` // 子队列信息。递归}type AclForYarnQueue struct {	User *string `json:"user"` //用户名	Group *string `json:"group"`//组名}type ConfigSetForFairScheduler struct {	Name string `json:"name"` // 配置集名称	MinResources *YarnResource `json:"minResources"` // 最小资源量	MaxResources *YarnResource `json:"maxResources"` // 最大资源量	MaxChildResources *YarnResource `json:"maxChildResources"` // 能够分配给为未声明子队列的最大资源量	MaxRunningApps *int `json:"maxRunningApps"` // 最高可同时处于运行的App数量	Weight *float32 `json:"weight"` // 权重	MaxAMShare *float32 `json:"maxAMShare"` // App Master最大份额}type YarnResource struct {	Vcores *int `json:"vcores"`	Memory *int `json:"memory"`	Type *string `json:"type"` // 当值为`percent`时，表示使用的百分比，否则就是使用的绝对数值}```- 容量调度器```type QueueForCapacitySchedulerV3 struct {	Name string `json:"name"` // 队列名称	MyId string `json:"myId"` // 队列id，用于编辑、删除、克隆时使用	ParentId string `json:"parentId"` // 父队列Id	Configs []ConfigForCapacityV3 `json:"configs"` //配置集设置	State *string `json:"state"` // 资源池状态	DefaultNodeLabelExpression *string `json:"default-node-label-expression"` // 默认标签表达式	AclSubmitApps *AclForYarnQueue `json:"acl_submit_applications"` // 提交访问控制	AclAdminQueue *AclForYarnQueue `json:"acl_administer_queue"` //管理访问控制	MaxAllocationMB *int32 `json:"maximum-allocation-mb"` // 分配Container最大内存数量	MaxAllocationVcores *int32 `json:"maximum-allocation-vcores"` // Container最大vCore数量	IsDefault *bool `json:"isDefault"`// 是否是root.default队列	IsRoot *bool `json:"isRoot"` // 是否是root队列	Queues []*QueueForCapacitySchedulerV3 `json:"queues"`//子队列信息。递归}type ConfigForCapacityV3 struct {	Name string `json:"configName"` // 配置集名称	Labels []CapacityLabel `json:"labels"` // 标签信息	MinUserLimitPercent *int32 `json:"minimum-user-limit-percent"` // 用户最小容量	UserLimitFactor *float32 `json:"user-limit-factor" valid:"rangeExcludeLeft(0|)"` // 用户资源因子	MaxApps *int32 `json:"maximum-applications" valid:"rangeExcludeLeft(0|)"` // 最大应用数Max-Applications	MaxAmPercent *float32 `json:"maximum-am-resource-percent"` // 最大AM比例	DefaultApplicationPriority *int32 `json:"default-application-priority"` // 资源池优先级}type CapacityLabel struct {	Name string `json:"labelName"`	Capacity *float32 `json:"capacity"` // 容量	MaxCapacity *float32 `json:"maximum-capacity"` //最大容量}type AclForYarnQueue struct {	User *string `json:"user"` //用户名	Group *string `json:"group"`//组名}``` */
+  Queue?: string;
+  /** 版本 */
+  Version?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3067,9 +3137,9 @@ declare interface ModifyResourcePoolsRequest {
 
 declare interface ModifyResourcePoolsResponse {
   /** false表示不是草稿，提交刷新请求成功 */
-  IsDraft: boolean;
+  IsDraft?: boolean;
   /** 扩展字段，暂时没用 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3085,11 +3155,11 @@ declare interface ModifyResourceScheduleConfigRequest {
 
 declare interface ModifyResourceScheduleConfigResponse {
   /** true为草稿，表示还没有刷新资源池 */
-  IsDraft: boolean;
+  IsDraft?: boolean;
   /** 校验错误信息，如果不为空，则说明校验失败，配置没有成功 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 返回数据 */
-  Data: string | null;
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3156,6 +3226,32 @@ declare interface ModifyYarnDeployResponse {
   IsDraft?: boolean | null;
   /** 错误信息，预留 */
   ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyYarnQueueV2Request {
+  /** 集群Id */
+  InstanceId: string;
+  /** 调度器类型。可选值：1. capacity2. fair */
+  Scheduler: string;
+  /** 资源池数据 */
+  ConfigModifyInfoList: ConfigModifyInfoV2[];
+}
+
+declare interface ModifyYarnQueueV2Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetYarnConfigRequest {
+  /** emr集群的英文id */
+  InstanceId: string;
+  /** 要重置的配置别名，可选值：- capacityLabel：重置标签管理的配置- fair：重置公平调度的配置- capacity：重置容量调度的配置 */
+  Key?: string;
+}
+
+declare interface ResetYarnConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3423,6 +3519,8 @@ declare interface Emr {
   DeleteAutoScaleStrategy(data: DeleteAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScaleStrategyResponse>;
   /** 删除用户列表 {@link DeleteUserManagerUserListRequest} {@link DeleteUserManagerUserListResponse} */
   DeleteUserManagerUserList(data: DeleteUserManagerUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserManagerUserListResponse>;
+  /** yarn资源调度-部署生效 {@link DeployYarnConfRequest} {@link DeployYarnConfResponse} */
+  DeployYarnConf(data: DeployYarnConfRequest, config?: AxiosRequestConfig): AxiosPromise<DeployYarnConfResponse>;
   /** 获取伸缩组全局配置 {@link DescribeAutoScaleGroupGlobalConfRequest} {@link DescribeAutoScaleGroupGlobalConfResponse} */
   DescribeAutoScaleGroupGlobalConf(data: DescribeAutoScaleGroupGlobalConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleGroupGlobalConfResponse>;
   /** 获取自动扩缩容记录 {@link DescribeAutoScaleRecordsRequest} {@link DescribeAutoScaleRecordsResponse} */
@@ -3455,7 +3553,7 @@ declare interface Emr {
   DescribeInstancesList(data: DescribeInstancesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesListResponse>;
   /** 查询流程作业状态 {@link DescribeJobFlowRequest} {@link DescribeJobFlowResponse} */
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
-  /** 查询YARN资源调度数据信息 {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
+  /** 查询YARN资源调度数据信息（旧） {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
   /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
@@ -3465,7 +3563,9 @@ declare interface Emr {
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;
   /** 获取Yarn的任务信息 {@link DescribeYarnApplicationsRequest} {@link DescribeYarnApplicationsResponse} */
   DescribeYarnApplications(data: DescribeYarnApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYarnApplicationsResponse>;
-  /** yarn资源调度-调度历史 {@link DescribeYarnScheduleHistoryRequest} {@link DescribeYarnScheduleHistoryResponse} */
+  /** 获取资源调度中的队列信息 {@link DescribeYarnQueueRequest} {@link DescribeYarnQueueResponse} */
+  DescribeYarnQueue(data: DescribeYarnQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYarnQueueResponse>;
+  /** yarn资源调度-调度历史（旧） {@link DescribeYarnScheduleHistoryRequest} {@link DescribeYarnScheduleHistoryResponse} */
   DescribeYarnScheduleHistory(data: DescribeYarnScheduleHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYarnScheduleHistoryResponse>;
   /** 集群续费询价 {@link InquirePriceRenewEmrRequest} {@link InquirePriceRenewEmrResponse} */
   InquirePriceRenewEmr(data: InquirePriceRenewEmrRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewEmrResponse>;
@@ -3481,18 +3581,22 @@ declare interface Emr {
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
   /** 修改自动扩缩容规则 {@link ModifyAutoScaleStrategyRequest} {@link ModifyAutoScaleStrategyResponse} */
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
-  /** 刷新YARN的动态资源池 {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
+  /** 刷新YARN的动态资源池（旧） {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
-  /** 修改YARN资源调度的资源配置 {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */
+  /** 修改YARN资源调度的资源配置（旧） {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */
   ModifyResourceScheduleConfig(data: ModifyResourceScheduleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceScheduleConfigResponse>;
-  /** 修改YARN的资源调度器 {@link ModifyResourceSchedulerRequest} {@link ModifyResourceSchedulerResponse} */
+  /** 修改YARN的资源调度器（旧） {@link ModifyResourceSchedulerRequest} {@link ModifyResourceSchedulerResponse} */
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
   /** 强制修改标签 {@link ModifyResourcesTagsRequest} {@link ModifyResourcesTagsResponse} */
   ModifyResourcesTags(data: ModifyResourcesTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagsResponse>;
   /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
-  /** 部署生效 {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */
+  /** 部署生效（旧） {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */
   ModifyYarnDeploy(data: ModifyYarnDeployRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnDeployResponse>;
+  /** 修改yarn资源调度的队列信息 {@link ModifyYarnQueueV2Request} {@link ModifyYarnQueueV2Response} */
+  ModifyYarnQueueV2(data: ModifyYarnQueueV2Request, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnQueueV2Response>;
+  /** yarn资源调度-重置 {@link ResetYarnConfigRequest} {@link ResetYarnConfigResponse} */
+  ResetYarnConfig(data: ResetYarnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ResetYarnConfigResponse>;
   /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
   /** 扩容集群节点(新) {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */

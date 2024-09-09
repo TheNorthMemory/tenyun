@@ -2177,17 +2177,17 @@ declare interface CreateMultiFlowSignQRCodeResponse {
 declare interface CreateOrganizationAuthUrlRequest {
   /** 操作人信息 */
   Operator: UserInfo;
-  /** 指定授权方式 支持多选:1-上传授权书方式2- 法人授权方式3- 法人身份认证方式 */
+  /** 指定授权方式 支持多选:1:上传授权书方式2: 法人授权方式3: 法人身份认证方式 */
   AuthorizationTypes?: number[];
-  /** 企业名称EndPointType=“H5”或者"SHORT_H5"时，该参数必填 */
+  /** 认证企业名称，请确认该名称与企业营业执照中注册的名称一致。注：1. `如果名称中包含英文括号()，请使用中文括号（）代替。`2. `EndPointType=“H5”或者"SHORT_H5"时，该参数必填` */
   OrganizationName?: string;
   /** 企业统一社会信用代码 */
   UniformSocialCreditCode?: string;
-  /** 法人姓名 */
+  /** 企业法人的姓名 */
   LegalName?: string;
-  /** 认证完成跳转链接 */
+  /** 认证完成跳回的链接，最长500个字符 */
   AutoJumpUrl?: string;
-  /** 营业执照企业地址示例：xx省xx市xx县/区xx街道 */
+  /** 营业执照企业地址 */
   OrganizationAddress?: string;
   /** 认证人姓名 */
   AdminName?: string;
@@ -2195,30 +2195,30 @@ declare interface CreateOrganizationAuthUrlRequest {
   AdminMobile?: string;
   /** 认证人身份证号 */
   AdminIdCardNumber?: string;
-  /** 认证人证件类型支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 认证人证件类型， 支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
   AdminIdCardType?: string;
-  /** 营业执照的社会信用代码保持一致false 关闭-默认true 开启 */
+  /** 对方打开链接认证时，对方填写的营业执照的社会信用代码是否与接口上传上来的要保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   UniformSocialCreditCodeSame?: boolean;
-  /** 法人姓名保持一致false 关闭-默认true 开启 */
+  /** 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   LegalNameSame?: boolean;
-  /** 认证人姓名一致false 关闭-默认true 开启注意：开启后在认证过程前会校验拦截 */
+  /** 对方打开链接认证时，认证人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   AdminNameSame?: boolean;
-  /** 认证人居民身份证件号一致false 关闭-默认true 开启注意：开启后在认证过程前会校验拦截 */
+  /** 对方打开链接认证时，认证人居民身份证件号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   AdminIdCardNumberSame?: boolean;
-  /** 认证人手机号一致false 关闭-默认true 开启注意：开启后在认证过程前会校验拦截 */
+  /** 对方打开链接认证时，认证人手机号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   AdminMobileSame?: boolean;
-  /** 企业名称保持一致false 关闭-默认true 开启 */
+  /** 对方打开链接认证时，企业名称是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   OrganizationNameSame?: boolean;
-  /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
+  /** 营业执照正面照（支持PNG或JPG格式）需以base64格式提供，且文件大小不得超过5MB。 */
   BusinessLicense?: string;
-  /** 跳转链接类型："PC"-PC端认证链接 "APP"-全屏或半屏跳转小程序链接“H5”-H5页面认证链接 "SHORT_H5"- H5认证短链"SHORT_URL"- 跳转小程序短链 */
+  /** 跳转链接类型：PC：适用于PC端的认证链接APP：用于全屏或半屏跳转的小程序链接SHORT_URL：跳转小程序的链接的短链形式H5：适用于H5页面的认证链接SHORT_H5：H5认证链接的短链形式 */
   Endpoint?: string;
 }
 
 declare interface CreateOrganizationAuthUrlResponse {
-  /** “H5”-H5长连接"SHORT_H5"- H5短链"APP"-小程序"PC"-PC浏览器链接有效期统一30天 */
+  /** 生成的认证链接。注： `链接有效期统一30天` */
   AuthUrl?: string;
-  /** 链接过期时间戳 */
+  /** 链接过期时间，格式为Unix标准时间戳（秒） */
   ExpiredTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

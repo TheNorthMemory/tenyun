@@ -1950,14 +1950,6 @@ declare interface DeleteVpcFwGroupResponse {
   RequestId?: string;
 }
 
-declare interface DeleteVpcInstanceRequest {
-}
-
-declare interface DeleteVpcInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeAcListsRequest {
   /** 协议 */
   Protocol?: string;
@@ -3619,8 +3611,6 @@ declare interface Cfw {
   DeleteSecurityGroupRule(data: DeleteSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupRuleResponse>;
   /** 删除防火墙(组)，或者删除其中实例 {@link DeleteVpcFwGroupRequest} {@link DeleteVpcFwGroupResponse} */
   DeleteVpcFwGroup(data?: DeleteVpcFwGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcFwGroupResponse>;
-  /** @deprecated 删除防火墙实例 {@link DeleteVpcInstanceRequest} {@link DeleteVpcInstanceResponse} */
-  DeleteVpcInstance(data?: DeleteVpcInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcInstanceResponse>;
   /** 访问控制列表 {@link DescribeAcListsRequest} {@link DescribeAcListsResponse} */
   DescribeAcLists(data?: DescribeAcListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAcListsResponse>;
   /** 查询互联网边界访问控制列表 {@link DescribeAclRuleRequest} {@link DescribeAclRuleResponse} */

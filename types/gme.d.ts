@@ -271,15 +271,15 @@ declare interface RoomUser {
 /** 语音检测详情 */
 declare interface ScanDetail {
   /** 违规场景，参照Label定义 */
-  Label: string;
+  Label?: string;
   /** 该场景下概率[0.00,100.00],分值越大违规概率越高 */
-  Rate: string;
+  Rate?: string;
   /** 违规关键字 */
-  KeyWord: string;
-  /** 关键字在音频的开始时间，从0开始的偏移量，单位为毫秒 */
-  StartTime: number;
-  /** 关键字在音频的结束时间，从0开始的偏移量,，单位为毫秒 */
-  EndTime: number;
+  KeyWord?: string;
+  /** 关键字在音频的开始时间，从0开始的偏移量，单位为毫秒，Label=moan时有效 */
+  StartTime?: number;
+  /** 关键字在音频的结束时间，从0开始的偏移量,，单位为毫秒，Label=moan时有效 */
+  EndTime?: number;
 }
 
 /** 语音检测结果，Code 为 0 时返回 */

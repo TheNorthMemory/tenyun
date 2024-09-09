@@ -2645,7 +2645,7 @@ declare interface CreateSharedCNAMEResponse {
 }
 
 declare interface CreateZoneRequest {
-  /** 站点接入类型。该参数取值如下，不填写时默认为 partial：partial：CNAME 接入； full：NS 接入；noDomainAccess：无域名接入。 */
+  /** 站点接入类型。该参数取值如下，不填写时默认为 partial：partial：CNAME 接入；full：NS 接入；noDomainAccess：无域名接入；dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。 */
   Type?: string;
   /** 站点名称。CNAME/NS 接入的时，请传入二级域名（example.com）作为站点名称；无域名接入时，该值请保留为空。 */
   ZoneName?: string;
@@ -4095,7 +4095,7 @@ declare interface ModifySecurityPolicyResponse {
 declare interface ModifyZoneRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到CNAME接入。不填写保持原有配置。 */
+  /** 站点接入方式，取值有：full：NS 接入；partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到 CNAME 接入；dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。不填写保持原有配置。 */
   Type?: string;
   /** 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。 */
   VanityNameServers?: VanityNameServers;
