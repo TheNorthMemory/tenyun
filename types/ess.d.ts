@@ -132,6 +132,18 @@ declare interface AuthInfoDetail {
   AuthOrganizationTotal?: number | null;
 }
 
+/** 企业认证信息 */
+declare interface AuthRecord {
+  /** 经办人姓名。 */
+  OperatorName?: string;
+  /** 经办人手机号。 */
+  OperatorMobile?: string;
+  /** 认证授权方式： **0**：未选择授权方式（默认值） **1**：上传授权书 **2**：法人授权 **3**：法人认证 */
+  AuthType?: number;
+  /** 企业认证授权书审核状态： **0**：未提交授权书（默认值） **1**：审核通过 **2**：审核驳回 **3**：审核中 **4**：AI识别中 **5**：客户确认AI信息 */
+  AuditStatus?: number;
+}
+
 /** 授权用户 */
 declare interface AuthorizedUser {
   /** 电子签系统中的用户id */
@@ -3128,6 +3140,30 @@ declare interface DescribeIntegrationRolesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOrganizationAuthStatusRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 组织机构名称。 请确认该名称与企业营业执照中注册的名称一致。 如果名称中包含英文括号()，请使用中文括号（）代替。 */
+  OrganizationName?: string;
+  /** 企业统一社会信用代码注意：OrganizationName和UniformSocialCreditCode不能同时为空 */
+  UniformSocialCreditCode?: string;
+  /** 法人姓名 */
+  LegalName?: string;
+}
+
+declare interface DescribeOrganizationAuthStatusResponse {
+  /** 企业是否已认证 */
+  IsVerified?: boolean;
+  /** 企业认证状态 0-未认证 1-认证中 2-已认证 */
+  AuthStatus?: number;
+  /** 企业认证信息 */
+  AuthRecords?: AuthRecord[];
+  /** 企业在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多"->"企业设置"->"企业中心"- 中查看企业电子签账号。p.s. 只有当前企业认证成功的时候返回 */
+  OrganizationId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrganizationGroupOrganizationsRequest {
   /** 执行本接口操作的员工信息,userId必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
@@ -3703,6 +3739,8 @@ declare interface Ess {
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
   /** 查询企业角色列表 {@link DescribeIntegrationRolesRequest} {@link DescribeIntegrationRolesResponse} */
   DescribeIntegrationRoles(data: DescribeIntegrationRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationRolesResponse>;
+  /** 查询企业认证状态 {@link DescribeOrganizationAuthStatusRequest} {@link DescribeOrganizationAuthStatusResponse} */
+  DescribeOrganizationAuthStatus(data: DescribeOrganizationAuthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthStatusResponse>;
   /** 查询集团企业列表 {@link DescribeOrganizationGroupOrganizationsRequest} {@link DescribeOrganizationGroupOrganizationsResponse} */
   DescribeOrganizationGroupOrganizations(data: DescribeOrganizationGroupOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationGroupOrganizationsResponse>;
   /** 查询企业电子印章 {@link DescribeOrganizationSealsRequest} {@link DescribeOrganizationSealsResponse} */

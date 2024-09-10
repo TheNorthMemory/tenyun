@@ -756,8 +756,8 @@ declare interface CreateAccountRequest {
   /** 可以登录的主机，与mysql 账号的 host 格式一致，可以支持通配符，例如 %，10.%，10.20.%。 */
   Host: string;
   /** 账号密码，密码需要 8-32 个字符，不能以 '/' 开头，并且必须包含小写字母、大写字母、数字和符号()~!@#$%^&*-+=_|{}[]:<>,.?/。 */
-  Password: string;
-  /** 是否创建为只读账号，0：否:； 1：只读账号，该账号的sql请求优先选择备机执行，备机延迟时选择主机执行；2：只读账号，优先选择备机执行，备机延迟时操作报错；3：只读账号，优先选择备机执行，忽略备机延迟只读备机； */
+  Password?: string;
+  /** 是否创建为只读账号，0：否； 1：只读账号，该账号的sql请求优先选择备机执行，备机延迟时选择主机执行；2：只读账号，优先选择备机执行，备机延迟时操作报错；3：只读账号，优先选择备机执行，忽略备机延迟只读备机； */
   ReadOnly?: number;
   /** 账号备注，可以包含中文、英文字符、常见符号和数字，长度为0~256字符 */
   Description?: string;
@@ -767,6 +767,8 @@ declare interface CreateAccountRequest {
   SlaveConst?: number;
   /** 用户最大连接数限制参数。不传或者传0表示为不限制，对应max_user_connections参数，目前10.1内核版本不支持设置。 */
   MaxUserConnections?: number;
+  /** 使用GetPublicKey返回的RSA2048公钥加密后的密码 */
+  EncryptedPassword?: string;
 }
 
 declare interface CreateAccountResponse {
@@ -2048,7 +2050,9 @@ declare interface ResetAccountPasswordRequest {
   /** 用户允许的访问 host，用户名+host唯一确定一个账号。 */
   Host: string;
   /** 新密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。 */
-  Password: string;
+  Password?: string;
+  /** 使用GetPublicKey返回的RSA2048公钥加密后的密码 */
+  EncryptedPassword?: string;
 }
 
 declare interface ResetAccountPasswordResponse {

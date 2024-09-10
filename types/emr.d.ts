@@ -410,6 +410,56 @@ declare interface DependService {
   InstanceId: string;
 }
 
+/** 动态生成的变更详情 */
+declare interface DiffDetail {
+  /** tab页的头 */
+  Name?: string;
+  /** 变化项的个数 */
+  Count?: number;
+  /** 要渲染的明细数据 */
+  Rows?: DiffDetailItem[] | null;
+  /** 要渲染的头部信息 */
+  Header?: DiffHeader[] | null;
+}
+
+/** 动态生成的变更详情条目 */
+declare interface DiffDetailItem {
+  /** 属性 */
+  Attribute?: string | null;
+  /** 当前生效 */
+  InEffect?: string | null;
+  /** 待生效 */
+  PendingEffectiveness?: string | null;
+  /** 操作 */
+  Operation?: string | null;
+  /** 队列 */
+  Queue?: string | null;
+  /** 配置集 */
+  ConfigSet?: string | null;
+  /** 标签 */
+  LabelName?: string | null;
+  /** 当前所在位置 */
+  InEffectIndex?: string | null;
+  /** 待生效的位置 */
+  PendingEffectIndex?: string | null;
+  /** 计划模式名称 */
+  PlanName?: string | null;
+  /** 标签 */
+  Label?: string | null;
+  /** 放置规则 */
+  RuleName?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+}
+
+/** 动态生成的变更详情 */
+declare interface DiffHeader {
+  /** 名称 */
+  Name?: string;
+  /** ID，前端会使用 */
+  Id?: string;
+}
+
 /** 磁盘组。 */
 declare interface DiskGroup {
   /** 磁盘规格。 */
@@ -2738,6 +2788,20 @@ declare interface DescribeJobFlowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeResourceScheduleDiffDetailRequest {
+  /** emr集群的英文id */
+  InstanceId: string;
+  /** 查询的变更明细对应的调度器，可选值为fair、capacity。如果不传或者传空会使用最新的调度器 */
+  Scheduler?: string;
+}
+
+declare interface DescribeResourceScheduleDiffDetailResponse {
+  /** 变化项的明细 */
+  Details?: DiffDetail[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourceScheduleRequest {
   /** emr集群的英文id */
   InstanceId: string;
@@ -3555,6 +3619,8 @@ declare interface Emr {
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
   /** 查询YARN资源调度数据信息（旧） {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
+  /** YARN资源调度-变更详情 {@link DescribeResourceScheduleDiffDetailRequest} {@link DescribeResourceScheduleDiffDetailResponse} */
+  DescribeResourceScheduleDiffDetail(data: DescribeResourceScheduleDiffDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleDiffDetailResponse>;
   /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
   /** 获取trino查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */

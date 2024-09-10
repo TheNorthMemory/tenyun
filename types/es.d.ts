@@ -878,12 +878,34 @@ declare interface Metric {
   Value: number;
 }
 
+/** 全部指标数据 */
+declare interface MetricAllData {
+  /** 索引流量 */
+  IndexTraffic?: number;
+  /** 存储大小 */
+  Storage?: number;
+  /** 读请求次数 */
+  ReadReqTimes?: number;
+  /** 写请求次数 */
+  WriteReqTimes?: number;
+  /** 文档数量 */
+  DocCount?: number;
+}
+
 /** 智能运维指标详情 */
 declare interface MetricDetail {
   /** 指标详情名 */
   Key: string;
   /** 指标详情值 */
   Metrics: Metric[];
+}
+
+/** 指标数据map */
+declare interface MetricMapByIndexId {
+  /** 实例id */
+  IndexId?: string;
+  /** 指标数据 */
+  MetricAllData?: MetricAllData;
 }
 
 /** 集群中一种节点类型（如热数据节点，冷数据节点，专用主节点等）的规格描述信息，包括节点类型，节点个数，节点规格，磁盘类型，磁盘大小等, Type不指定时默认为热数据节点；如果节点为master节点，则DiskType和DiskSize参数会被忽略（主节点无数据盘） */
@@ -1933,6 +1955,8 @@ declare interface DescribeServerlessMetricsRequest {
   MetricType?: string[];
   /** 时间长度类型DurationType(1: 3小时, 2: 昨天1天,3: 今日0点到现在) */
   DurationType?: number;
+  /** 索引数据 */
+  BatchIndexList?: string[];
 }
 
 declare interface DescribeServerlessMetricsResponse {
@@ -1946,6 +1970,8 @@ declare interface DescribeServerlessMetricsResponse {
   WriteReqTimes?: number;
   /** 文档数量，单位个数 */
   DocCount?: number;
+  /** 指标数据数据 */
+  MetricMapList?: MetricMapByIndexId[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

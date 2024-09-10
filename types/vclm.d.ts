@@ -202,7 +202,7 @@ declare interface SubmitVideoTranslateJobRequest {
 }
 
 declare interface SubmitVideoTranslateJobResponse {
-  /** 任务ID。 */
+  /** 视频转译任务的Job id */
   JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

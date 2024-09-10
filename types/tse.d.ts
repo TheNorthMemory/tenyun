@@ -2135,8 +2135,6 @@ declare interface CreateCloudNativeAPIGatewayServiceRequest {
   Name: string;
   /** 请求协议：- https- http- tcp- udp */
   Protocol: string;
-  /** 请求路径 */
-  Path: string;
   /** 超时时间，单位ms */
   Timeout: number;
   /** 重试次数 */
@@ -2145,6 +2143,8 @@ declare interface CreateCloudNativeAPIGatewayServiceRequest {
   UpstreamType: string;
   /** 服务配置信息 */
   UpstreamInfo: KongUpstreamInfo;
+  /** 请求路径 */
+  Path?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewayServiceResponse {
@@ -3611,8 +3611,6 @@ declare interface ModifyCloudNativeAPIGatewayServiceRequest {
   Name: string;
   /** 请求协议： - https - http - tcp - udp */
   Protocol: string;
-  /** 请求路径 */
-  Path: string;
   /** 超时时间，单位ms */
   Timeout: number;
   /** 重试次数 */
@@ -3623,6 +3621,8 @@ declare interface ModifyCloudNativeAPIGatewayServiceRequest {
   UpstreamInfo: KongUpstreamInfo;
   /** 服务ID */
   ID: string;
+  /** 请求路径 */
+  Path?: string;
 }
 
 declare interface ModifyCloudNativeAPIGatewayServiceResponse {

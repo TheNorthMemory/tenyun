@@ -1130,6 +1130,14 @@ declare interface TagSpecification {
   Tags: Tag[] | null;
 }
 
+/** 操作系统转换的目标操作系统信息 */
+declare interface TargetOS {
+  /** 目标操作系统类型 */
+  TargetOSType?: string;
+  /** 目标操作系统版本 */
+  TargetOSVersion?: string;
+}
+
 /** 描述了VPC相关信息，包括子网，IP信息等 */
 declare interface VirtualPrivateCloud {
   /** 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
@@ -1234,6 +1242,26 @@ declare interface ConfigureChcDeployVpcRequest {
 }
 
 declare interface ConfigureChcDeployVpcResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ConvertOperatingSystemsRequest {
+  /** 执行操作系统转换的实例 ID */
+  InstanceIds: string[];
+  /** 是否最小规模转换 */
+  MinimalConversion?: boolean;
+  /** 是否只预检 */
+  DryRun?: boolean;
+  /** 转换的目标操作系统类型。仅支持 TencentOS。 */
+  TargetOSType?: string;
+}
+
+declare interface ConvertOperatingSystemsResponse {
+  /** 转换的目标操系统信息，仅在入参 DryRun 为 true 时返回。 */
+  SupportTargetOSList?: TargetOS[] | null;
+  /** 操作系统转换的任务 ID */
+  TaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2962,6 +2990,8 @@ declare interface Cvm {
   ConfigureChcAssistVpc(data: ConfigureChcAssistVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureChcAssistVpcResponse>;
   /** 配置CHC物理服务器部署网络 {@link ConfigureChcDeployVpcRequest} {@link ConfigureChcDeployVpcResponse} */
   ConfigureChcDeployVpc(data: ConfigureChcDeployVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureChcDeployVpcResponse>;
+  /** 转换操作系统 {@link ConvertOperatingSystemsRequest} {@link ConvertOperatingSystemsResponse} */
+  ConvertOperatingSystems(data: ConvertOperatingSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertOperatingSystemsResponse>;
   /** 创建分散置放群组 {@link CreateDisasterRecoverGroupRequest} {@link CreateDisasterRecoverGroupResponse} */
   CreateDisasterRecoverGroup(data: CreateDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisasterRecoverGroupResponse>;
   /** 创建高性能计算集群 {@link CreateHpcClusterRequest} {@link CreateHpcClusterResponse} */

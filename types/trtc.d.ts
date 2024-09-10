@@ -628,6 +628,8 @@ declare interface STTConfig {
   Language?: string | null;
   /** 发起模糊识别额外可能替代语言类型,最多填写3种语言类型, 注：Language指定为"zh-dialect" # 中国方言 时，不支持模糊识别，该字段无效 */
   AlternativeLanguage?: string[] | null;
+  /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。 */
+  VadSilenceTime?: number | null;
 }
 
 /** 历史规模信息 */

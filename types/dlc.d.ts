@@ -2856,6 +2856,16 @@ declare interface DeleteSparkAppResponse {
   RequestId?: string;
 }
 
+declare interface DeleteTableRequest {
+  /** 表基本信息 */
+  TableBaseInfo: TableBaseInfo;
+}
+
+declare interface DeleteTableResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteThirdPartyAccessUserRequest {
 }
 
@@ -4402,6 +4412,20 @@ declare interface ModifyWorkGroupResponse {
   RequestId?: string;
 }
 
+declare interface QueryInternalTableWarehouseRequest {
+  /** 库名 */
+  DatabaseName: string;
+  /** 表名 */
+  TableName: string;
+}
+
+declare interface QueryInternalTableWarehouseResponse {
+  /** warehouse路径 */
+  WarehousePath: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryResultRequest {
   /** 任务ID */
   TaskId: string;
@@ -4767,6 +4791,8 @@ declare interface Dlc {
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;
   /** 删除spark作业 {@link DeleteSparkAppRequest} {@link DeleteSparkAppResponse} */
   DeleteSparkApp(data: DeleteSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSparkAppResponse>;
+  /** 删除表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
+  DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
   /** 移除第三方平台访问用户 {@link DeleteThirdPartyAccessUserRequest} {@link DeleteThirdPartyAccessUserResponse} */
   DeleteThirdPartyAccessUser(data?: DeleteThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteThirdPartyAccessUserResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
@@ -4921,6 +4947,8 @@ declare interface Dlc {
   ModifyUserType(data: ModifyUserTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserTypeResponse>;
   /** 修改工作组信息 {@link ModifyWorkGroupRequest} {@link ModifyWorkGroupResponse} */
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
+  /** 获取原生表warehouse路径 {@link QueryInternalTableWarehouseRequest} {@link QueryInternalTableWarehouseResponse} */
+  QueryInternalTableWarehouse(data: QueryInternalTableWarehouseRequest, config?: AxiosRequestConfig): AxiosPromise<QueryInternalTableWarehouseResponse>;
   /** 获取任务结果查询 {@link QueryResultRequest} {@link QueryResultResponse} */
   QueryResult(data: QueryResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResultResponse>;
   /** 查询任务消耗明细 {@link QueryTaskCostDetailRequest} {@link QueryTaskCostDetailResponse} */

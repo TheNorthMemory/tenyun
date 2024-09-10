@@ -367,7 +367,7 @@ declare interface Tag {
 }
 
 declare interface AcceptDirectConnectTunnelRequest {
-  /** 物理专线拥有者接受共享专用通道申请 */
+  /** 专用通道ID。 */
   DirectConnectTunnelId: string;
 }
 
@@ -511,7 +511,7 @@ declare interface DeleteDirectConnectTunnelResponse {
 }
 
 declare interface DescribeAccessPointsRequest {
-  /** 接入点所在的地域。使用DescribeRegions查询您可以通过调用 DescribeRegions接口获取地域ID。 */
+  /** 接入点所在的地域。使用DescribeRegions查询。您可以通过调用 DescribeRegions接口获取地域ID。 */
   RegionId?: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -522,19 +522,19 @@ declare interface DescribeAccessPointsRequest {
 declare interface DescribeAccessPointsResponse {
   /** 接入点信息。 */
   AccessPointSet?: AccessPoint[];
-  /** 符合接入点数量。 */
+  /** 接入点总数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDirectConnectTunnelExtraRequest {
-  /** 专用通道ID */
+  /** 专用通道ID。 */
   DirectConnectTunnelId: string;
 }
 
 declare interface DescribeDirectConnectTunnelExtraResponse {
-  /** 专用通道扩展信息 */
+  /** 专用通道扩展信息。 */
   DirectConnectTunnelExtra?: DirectConnectTunnelExtra;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -775,7 +775,7 @@ declare interface ModifyDirectConnectTunnelExtraResponse {
 }
 
 declare interface RejectDirectConnectTunnelRequest {
-  /** 无 */
+  /** 专用通道ID。 */
   DirectConnectTunnelId: string;
 }
 
