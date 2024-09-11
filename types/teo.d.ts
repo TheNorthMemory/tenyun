@@ -1244,9 +1244,9 @@ declare interface Origin {
 
 /** 加速域名源站信息。 */
 declare interface OriginDetail {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VODEO：云点播-混合云版；VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
   OriginType?: string;
-  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；当 OriginType = VOD 时，该参数请填写云点播应用 ID ；当 OriginType = VODEO 时，如果 VodeoDistributionRange = ALL，则该参数为 "all-buckets-in-vodeo-application"；如果 VodeoDistributionRange = Bucket，则该参数为对应存储桶域名。 */
+  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；当 OriginType = VOD 时，该参数请填写云点播应用 ID ； */
   Origin?: string;
   /** 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 且配置了备源站组时会生效。 */
   BackupOrigin?: string;
@@ -1988,10 +1988,10 @@ declare interface TemplateScope {
 
 /** 统计曲线数据项 */
 declare interface TimingDataItem {
-  /** 返回数据对应时间点，采用unix秒级时间戳。 */
-  Timestamp: number;
+  /** 返回数据对应时间点，采用 unix 秒级时间戳。 */
+  Timestamp?: number;
   /** 具体数值。 */
-  Value: number;
+  Value?: number;
 }
 
 /** 时序数据信息 */
@@ -2122,7 +2122,7 @@ declare interface Zone {
   NameServers?: string[];
   /** 站点状态，取值有： active：NS 已切换； pending：NS 未切换； moved：NS 已切走； deactivated：被封禁。 initializing：待绑定套餐。 */
   Status?: string;
-  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入； vodeo：开启 VODEO 后默认接入。 */
+  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入； */
   Type?: string;
   /** 站点是否关闭。 */
   Paused?: boolean;
@@ -2857,7 +2857,7 @@ declare interface DescribeAccelerationDomainsRequest {
   Offset?: number;
   /** 分页查询限制数目，默认值：20，上限：200。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有域名信息。详细的过滤条件如下：domain-name：按照加速域名进行过滤；origin-type：按照源站类型进行过滤；origin：按照主源站地址进行过滤；backup-origin： 按照备用源站地址进行过滤；domain-cname：按照 CNAME 进行过滤；share-cname：按照共享 CNAME 进行过滤；vodeo-sub-app-id：按照【 vodeo 子应用 ID】进行过滤；vodeo-distribution-range：按照【 vodeo 分发范围】进行过滤；vodeo-bucket-id：按照【vodeo 存储桶 ID】进行过滤； */
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有域名信息。详细的过滤条件如下：domain-name：按照加速域名进行过滤；origin-type：按照源站类型进行过滤；origin：按照主源站地址进行过滤；backup-origin： 按照备用源站地址进行过滤；domain-cname：按照 CNAME 进行过滤；share-cname：按照共享 CNAME 进行过滤； */
   Filters?: AdvancedFilter[];
   /** 可根据该字段对返回结果进行排序，取值有：created_on：加速域名创建时间；domain-name：加速域名。不填写时，默认对返回结果按照 domain-name 排序。 */
   Order?: string;
@@ -3475,7 +3475,7 @@ declare interface DescribeTimingL4DataRequest {
   ProxyIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟 ；5min: 5分钟 ；hour: 1小时 ；day: 1天 。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
   Interval?: string;
-  /** 过滤条件，详细的过滤条件Key值如下：ruleId 按照【转发规则ID】进行过滤。proxyId 按照【四层代理实例ID】进行过滤。 */
+  /** 过滤条件，详细的过滤条件Key值如下：ruleId：按照转发规则 ID 进行过滤。proxyId：按照四层代理实例 ID 进行过滤。 */
   Filters?: QueryCondition[];
   /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;

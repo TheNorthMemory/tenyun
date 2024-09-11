@@ -266,6 +266,8 @@ declare interface Task {
   TaskOrg?: TaskOrg[] | null;
   /** 问题和改进 */
   TaskIssue?: string | null;
+  /** region信息 */
+  TaskRegionName?: string | null;
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */

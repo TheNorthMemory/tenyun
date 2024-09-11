@@ -20,6 +20,22 @@ declare interface AddShardConfig {
   ShardStorage: number;
 }
 
+/** 数据库超期备份配置 */
+declare interface BackupConfig {
+  /** 备份策略是否启用。 */
+  EnableBackupPolicy?: boolean;
+  /** 超期保留开始日期，早于开始日期的超期备份不保留，格式：yyyy-mm-dd。 */
+  BeginDate?: string;
+  /** 超期备份保留时长，超出保留时间的超期备份将被删除，可填写1-3650整数。 */
+  MaxRetentionDays?: number;
+  /** 备份模式，可选择按年月周模式保存* 按年：annually* 按月：monthly* 按周：weekly */
+  Frequency?: string;
+  /** Frequency等于weekly时生效。表示保留特定工作日备份。可选择周一到周日，支持多选，取星期英文：* 星期一 ：Monday* 星期二 ：Tuesday* 星期三：Wednesday* 星期四：Thursday* 星期五：Friday* 星期六：Saturday* 星期日：Sunday */
+  WeekDays?: string[];
+  /** 保留备份个数，Frequency等于monthly或weekly时生效。备份模式选择按月时，可填写1-28整数；备份模式选择年时，可填写1-336整数。 */
+  BackupCount?: number;
+}
+
 /** 描述分片DB节点信息 */
 declare interface BriefNodeInfo {
   /** DB节点ID */
@@ -410,6 +426,22 @@ declare interface LogFileInfo {
   Uri: string;
   /** 文件名 */
   FileName: string;
+}
+
+/** 数据库超期备份配置 */
+declare interface NewBackupConfig {
+  /** 备份策略是否启用。 */
+  EnableBackupPolicy: boolean;
+  /** 超期保留开始日期，早于开始日期的超期备份不保留，格式：yyyy-mm-dd。 */
+  BeginDate: string;
+  /** 超期备份保留时长，超出保留时间的超期备份将被删除，可填写1-3650整数。 */
+  MaxRetentionDays: number;
+  /** 备份模式，可选择按年月周模式保存* 按年：annually* 按月：monthly* 按周：weekly */
+  Frequency: string;
+  /** Frequency等于weekly时生效。表示保留特定工作日备份。可选择周一到周日，支持多选，取星期英文：* 星期一 ：Monday* 星期二 ：Tuesday* 星期三：Wednesday* 星期四：Thursday* 星期五：Friday* 星期六：Saturday* 星期日：Sunday */
+  WeekDays?: string[];
+  /** 保留备份个数，Frequency等于monthly或weekly时生效。备份模式选择按月时，可填写1-28整数；备份模式选择年时，可填写1-336整数。 */
+  BackupCount?: number;
 }
 
 /** 描述DB节点信息 */
@@ -1196,6 +1228,30 @@ declare interface DescribeAccountsResponse {
   InstanceId: string;
   /** 实例用户列表。 */
   Users: DBAccount[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupConfigsRequest {
+  /** 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+}
+
+declare interface DescribeBackupConfigsResponse {
+  /** 实例 ID。 */
+  InstanceId?: string;
+  /** 常规备份存储时长，范围[1, 3650]。 */
+  Days?: number;
+  /** 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00。 */
+  StartBackupTime?: string;
+  /** 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:59。 */
+  EndBackupTime?: string;
+  /** 执行备份周期，枚举值：Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday */
+  WeekDays?: string[];
+  /** 沉降到归档存储时长，-1表示关闭归档设置。 */
+  ArchiveDays?: number;
+  /** 超期备份配置。 */
+  BackupConfigSet?: BackupConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2078,6 +2134,28 @@ declare interface ModifyAccountPrivilegesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBackupConfigsRequest {
+  /** 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 常规备份存储时长，范围[1, 3650]。 */
+  Days?: number;
+  /** 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00。 */
+  StartBackupTime?: string;
+  /** 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:59。 */
+  EndBackupTime?: string;
+  /** 执行备份周期，枚举值：Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday */
+  WeekDays?: string[];
+  /** 沉降到归档存储时长，-1表示关闭归档设置。 */
+  ArchiveDays?: number;
+  /** 超期备份配置。 */
+  BackupConfigSet?: NewBackupConfig[];
+}
+
+declare interface ModifyBackupConfigsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBEncryptAttributesRequest {
   /** 实例Id，形如：tdsqlshard-ow728lmc。 */
   InstanceId: string;
@@ -2417,6 +2495,8 @@ declare interface Dcdb {
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
   /** 查询账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
+  /** 查询云数据库备份配置信息 {@link DescribeBackupConfigsRequest} {@link DescribeBackupConfigsResponse} */
+  DescribeBackupConfigs(data: DescribeBackupConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigsResponse>;
   /** 查看备份文件列表 {@link DescribeBackupFilesRequest} {@link DescribeBackupFilesResponse} */
   DescribeBackupFiles(data?: DescribeBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupFilesResponse>;
   /** 查询实例数据加密状态 {@link DescribeDBEncryptAttributesRequest} {@link DescribeDBEncryptAttributesResponse} */
@@ -2501,6 +2581,8 @@ declare interface Dcdb {
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
   /** 修改云数据库实例账号的权限信息 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
+  /** 修改云数据库备份配置信息 {@link ModifyBackupConfigsRequest} {@link ModifyBackupConfigsResponse} */
+  ModifyBackupConfigs(data: ModifyBackupConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigsResponse>;
   /** 修改实例数据加密属性 {@link ModifyDBEncryptAttributesRequest} {@link ModifyDBEncryptAttributesResponse} */
   ModifyDBEncryptAttributes(data: ModifyDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBEncryptAttributesResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */

@@ -428,6 +428,22 @@ declare interface DomainShareInfo {
   Status: string;
 }
 
+/** 域名共享信息 */
+declare interface DomainShareUserInfo {
+  /** 共享记录ID */
+  DomainShareId?: number;
+  /** 共享模式。r-只读；w-可写；rw-可读写。 */
+  Mode?: string | null;
+  /** 共享到的用户昵称 */
+  Nickname?: string | null;
+  /** 共享到的用户UIN */
+  QCloudUIN?: string | null;
+  /** 共享状态。enabled-有效；pause-无效。 */
+  Status?: string | null;
+  /** 共享的子域名 */
+  SubDomain?: string | null;
+}
+
 /** 域名分组列表 */
 declare interface GroupInfo {
   /** 分组ID */
@@ -1460,6 +1476,20 @@ declare interface DescribeDomainShareInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainShareUserListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
+  DomainId?: number;
+}
+
+declare interface DescribeDomainShareUserListResponse {
+  /** 域名套餐信息 */
+  DomainShareList?: DomainShareUserInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainWhoisRequest {
   /** 域名 */
   Domain: string;
@@ -2317,6 +2347,8 @@ declare interface Dnspod {
   DescribeDomainPurview(data: DescribeDomainPurviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPurviewResponse>;
   /** 获取域名共享信息 {@link DescribeDomainShareInfoRequest} {@link DescribeDomainShareInfoResponse} */
   DescribeDomainShareInfo(data: DescribeDomainShareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareInfoResponse>;
+  /** 获取指定域名的已共享列表 {@link DescribeDomainShareUserListRequest} {@link DescribeDomainShareUserListResponse} */
+  DescribeDomainShareUserList(data: DescribeDomainShareUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareUserListResponse>;
   /** 获取域名Whois信息 {@link DescribeDomainWhoisRequest} {@link DescribeDomainWhoisResponse} */
   DescribeDomainWhois(data: DescribeDomainWhoisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhoisResponse>;
   /** 获取各套餐配置详情 {@link DescribePackageDetailRequest} {@link DescribePackageDetailResponse} */

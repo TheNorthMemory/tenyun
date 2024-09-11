@@ -1634,6 +1634,40 @@ declare interface RestartPolicy {
   IsDefault: string;
 }
 
+/** EMR Lite HBase 实例信息 */
+declare interface SLInstanceInfo {
+  /** 集群实例字符串ID */
+  ClusterId?: string;
+  /** 集群实例数字ID */
+  Id?: number;
+  /** 状态描述 */
+  StatusDesc?: string;
+  /** 实例名称 */
+  ClusterName?: string;
+  /** 地域ID */
+  RegionId?: number;
+  /** 主可用区ID */
+  ZoneId?: number;
+  /** 主可用区 */
+  Zone?: string;
+  /** 用户APPID */
+  AppId?: number;
+  /** 主可用区私有网络ID */
+  VpcId?: number;
+  /** 主可用区子网ID */
+  SubnetId?: number;
+  /** 状态码 */
+  Status?: number;
+  /** 创建时间 */
+  AddTime?: string;
+  /** 集群计费类型。0表示按量计费，1表示包年包月 */
+  PayMode?: number;
+  /** 多可用区信息 */
+  ZoneSettings?: ZoneSetting[] | null;
+  /** 实例标签 */
+  Tags?: Tag[] | null;
+}
+
 /** 扩容节点类型以及数量 */
 declare interface ScaleOutNodeConfig {
   /** 扩容节点类型取值范围： MASTER TASK CORE ROUTER */
@@ -2202,6 +2236,16 @@ declare interface ZoneResourceConfiguration {
   ZoneTag?: string | null;
 }
 
+/** 可用区配置描述。 */
+declare interface ZoneSetting {
+  /** 可用区名称 */
+  Zone: string;
+  /** 可用区VPC和子网 */
+  VPCSettings: VPCSettings;
+  /** 可用区节点数量 */
+  NodeNum: number;
+}
+
 declare interface AddMetricScaleStrategyRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2358,6 +2402,30 @@ declare interface CreateInstanceRequest {
 declare interface CreateInstanceResponse {
   /** 实例ID */
   InstanceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSLInstanceRequest {
+  /** 实例名称。 */
+  InstanceName: string;
+  /** 实例计费模式，0表示后付费，即按量计费。 */
+  PayMode: number;
+  /** 实例存储类型，填写CLOUD_HSSD，表示性能云存储。 */
+  DiskType: string;
+  /** 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于10000，容量调整步长为20。 */
+  DiskSize: number;
+  /** 实例节点规格，可填写4C16G、8C32G、16C64G、32C128G，不区分大小写。 */
+  NodeType: string;
+  /** 实例可用区详细配置，当前支持多可用区，可用区数量只能为1或3，包含区域名称，VPC信息、节点数量，其中所有区域节点总数需大于等于3，小于等于50。 */
+  ZoneSettings: ZoneSetting[];
+  /** 实例要绑定的标签列表。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateSLInstanceResponse {
+  /** 实例唯一标识符（字符串表示） */
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2820,6 +2888,54 @@ declare interface DescribeResourceScheduleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSLInstanceListRequest {
+  /** 实例筛选策略。取值范围：clusterList：表示查询除了已销毁实例之外的实例列表。monitorManage：表示查询除了已销毁、创建中以及创建失败的实例之外的实例列表。 */
+  DisplayStrategy: string;
+  /** 页编号，默认值为0，表示第一页。 */
+  Offset?: number;
+  /** 每页返回数量，默认值为10，最大值为100。 */
+  Limit?: number;
+  /** 排序字段。取值范围：clusterId：表示按照实例ID排序。addTime：表示按照实例创建时间排序。status：表示按照实例的状态码排序。 */
+  OrderField?: string;
+  /** 按照OrderField升序或者降序进行排序。取值范围：0：表示降序。1：表示升序。默认值为0。 */
+  Asc?: number;
+  /** 自定义查询过滤器。 */
+  Filters?: Filters[];
+}
+
+declare interface DescribeSLInstanceListResponse {
+  /** 符合条件的实例总数。 */
+  TotalCnt?: number;
+  /** 实例信息列表，如果进行了分页，只显示当前分页的示例信息列表。 */
+  InstancesList?: SLInstanceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSLInstanceRequest {
+  /** 实例唯一标识符（字符串表示） */
+  InstanceId: string;
+}
+
+declare interface DescribeSLInstanceResponse {
+  /** 实例名称。 */
+  InstanceName?: string;
+  /** 实例计费模式。0表示后付费，即按量计费，1表示预付费，即包年包月。 */
+  PayMode?: number;
+  /** 实例存储类型。 */
+  DiskType?: string;
+  /** 实例单节点磁盘容量，单位GB。 */
+  DiskSize?: number;
+  /** 实例节点规格。 */
+  NodeType?: string;
+  /** 实例可用区详细配置，包含可用区名称，VPC信息、节点数量。 */
+  ZoneSettings?: ZoneSetting[];
+  /** 实例绑定的标签列表。 */
+  Tags?: Tag[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeServiceNodeInfosRequest {
   /** 实例ID */
   InstanceId: string;
@@ -3167,6 +3283,8 @@ declare interface ModifyAutoRenewFlagRequest {
   ResourceIds: string[];
   /** NOTIFY_AND_MANUAL_RENEW：表示通知即将过期，但不自动续费 NOTIFY_AND_AUTO_RENEW：表示通知即将过期，而且自动续费 DISABLE_NOTIFY_AND_MANUAL_RENEW：表示不通知即将过期，也不自动续费。 */
   RenewFlag: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
 }
 
 declare interface ModifyAutoRenewFlagResponse {
@@ -3258,6 +3376,20 @@ declare interface ModifyResourcesTagsResponse {
   PartSuccessList?: string[] | null;
   /** 集群id与流程id的映射列表 */
   ClusterToFlowIdList?: ClusterIDToFlowID[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySLInstanceRequest {
+  /** 实例唯一标识符（字符串表示）。 */
+  InstanceId: string;
+  /** 需要变更的区域名称。 */
+  Zone: string;
+  /** 该区域变配后的目标节点数量，所有区域节点总数应大于等于3，小于等于50。 */
+  NodeNum: number;
+}
+
+declare interface ModifySLInstanceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3556,6 +3688,16 @@ declare interface TerminateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface TerminateSLInstanceRequest {
+  /** 实例唯一标识符（字符串表示） */
+  InstanceId: string;
+}
+
+declare interface TerminateSLInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateTasksRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -3579,6 +3721,8 @@ declare interface Emr {
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建EMR实例(旧) {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
+  /** Lite HBase 创建实例 {@link CreateSLInstanceRequest} {@link CreateSLInstanceResponse} */
+  CreateSLInstance(data: CreateSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSLInstanceResponse>;
   /** 删除自动扩缩容规则 {@link DeleteAutoScaleStrategyRequest} {@link DeleteAutoScaleStrategyResponse} */
   DeleteAutoScaleStrategy(data: DeleteAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScaleStrategyResponse>;
   /** 删除用户列表 {@link DeleteUserManagerUserListRequest} {@link DeleteUserManagerUserListResponse} */
@@ -3621,6 +3765,10 @@ declare interface Emr {
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
   /** YARN资源调度-变更详情 {@link DescribeResourceScheduleDiffDetailRequest} {@link DescribeResourceScheduleDiffDetailResponse} */
   DescribeResourceScheduleDiffDetail(data: DescribeResourceScheduleDiffDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleDiffDetailResponse>;
+  /** Lite HBase 查询实例信息 {@link DescribeSLInstanceRequest} {@link DescribeSLInstanceResponse} */
+  DescribeSLInstance(data: DescribeSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceResponse>;
+  /** Lite HBase 查询实例列表 {@link DescribeSLInstanceListRequest} {@link DescribeSLInstanceListResponse} */
+  DescribeSLInstanceList(data: DescribeSLInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceListResponse>;
   /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
   /** 获取trino查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */
@@ -3655,6 +3803,8 @@ declare interface Emr {
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
   /** 强制修改标签 {@link ModifyResourcesTagsRequest} {@link ModifyResourcesTagsResponse} */
   ModifyResourcesTags(data: ModifyResourcesTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagsResponse>;
+  /** Lite HBase 修改实例节点数 {@link ModifySLInstanceRequest} {@link ModifySLInstanceResponse} */
+  ModifySLInstance(data: ModifySLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceResponse>;
   /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
   /** 部署生效（旧） {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */
@@ -3677,6 +3827,8 @@ declare interface Emr {
   TerminateClusterNodes(data: TerminateClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateClusterNodesResponse>;
   /** 销毁EMR实例 {@link TerminateInstanceRequest} {@link TerminateInstanceResponse} */
   TerminateInstance(data: TerminateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstanceResponse>;
+  /** Lite HBase 销毁实例 {@link TerminateSLInstanceRequest} {@link TerminateSLInstanceResponse} */
+  TerminateSLInstance(data: TerminateSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateSLInstanceResponse>;
   /** 缩容Task节点(旧) {@link TerminateTasksRequest} {@link TerminateTasksResponse} */
   TerminateTasks(data: TerminateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTasksResponse>;
 }

@@ -2,6 +2,26 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 安全组入站规则 */
+declare interface Inbound {
+  /** 策略，ACCEPT或者DROP。 */
+  Action: string;
+  /** 地址组id代表的地址集合。 */
+  AddressModule: string;
+  /** 来源Ip或Ip段，例如192.168.0.0/16。 */
+  CidrIp: string;
+  /** 描述。 */
+  Desc: string;
+  /** 网络协议，支持udp、tcp等。 */
+  IpProtocol: string;
+  /** 端口。 */
+  PortRange: string;
+  /** 服务组id代表的协议和端口集合。 */
+  ServiceModule: string;
+  /** 安全组id代表的地址集合。 */
+  Id: string;
+}
+
 /** 实例信息，用于实例列表 */
 declare interface InstanceInfo {
   /** 实例ID。 */
@@ -72,12 +92,94 @@ declare interface Network {
   Port?: number | null;
 }
 
+/** 实例pod信息，仅包含 pod 名称 */
+declare interface NodeInfo {
+  /** Pod名称。 */
+  Name?: string | null;
+}
+
+/** 安全组出站规则 */
+declare interface Outbound {
+  /** 策略，ACCEPT或者DROP。 */
+  Action: string;
+  /** 地址组id代表的地址集合。 */
+  AddressModule: string;
+  /** 来源Ip或Ip段，例如192.168.0.0/16。 */
+  CidrIp: string;
+  /** 描述。 */
+  Desc: string;
+  /** 网络协议，支持udp、tcp等。 */
+  IpProtocol: string;
+  /** 端口。 */
+  PortRange: string;
+  /** 服务组id代表的协议和端口集合。 */
+  ServiceModule: string;
+  /** 安全组id代表的地址集合。 */
+  Id: string;
+}
+
+/** 安全组规则 */
+declare interface SecurityGroup {
+  /** 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。 */
+  CreateTime?: string;
+  /** 项目ID。 */
+  ProjectId?: string;
+  /** 安全组ID。 */
+  SecurityGroupId?: string;
+  /** 安全组名称。 */
+  SecurityGroupName?: string;
+  /** 安全组备注。 */
+  SecurityGroupRemark?: string;
+  /** 出站规则。 */
+  Outbound?: Outbound[];
+  /** 入站规则。 */
+  Inbound?: Inbound[];
+  /** 修改时间，时间格式：yyyy-mm-dd hh:mm:ss。 */
+  UpdateTime?: string;
+}
+
 /** 标签键值对 */
 declare interface Tag {
   /** 标签键 */
   TagKey: string | null;
   /** 标签值 */
   TagValue: string | null;
+}
+
+declare interface AssociateSecurityGroupsRequest {
+  /** 要绑定的安全组 ID，类似sg-efil7***。 */
+  SecurityGroupIds: string[];
+  /** 实例 ID，格式如：vdb-c1nl9***，支持指定多个实例 */
+  InstanceIds: string[];
+}
+
+declare interface AssociateSecurityGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBSecurityGroupsRequest {
+  /** 实例ID，格式如：vdb-c1nl9***。 */
+  InstanceId: string;
+}
+
+declare interface DescribeDBSecurityGroupsResponse {
+  /** 安全组规则。 */
+  Groups?: SecurityGroup[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceNodesRequest {
+}
+
+declare interface DescribeInstanceNodesResponse {
+  /** 实例pod列表。 */
+  Items?: NodeInfo[] | null;
+  /** 查询结果总数量。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeInstancesRequest {
@@ -118,11 +220,45 @@ declare interface DescribeInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DisassociateSecurityGroupsRequest {
+  /** 要绑定的安全组 ID，类似sg-efil****。 */
+  SecurityGroupIds: string;
+  /** 实例 ID，格式如：vdb-c1nl****，支持指定多个实例。 */
+  InstanceIds: string[];
+}
+
+declare interface DisassociateSecurityGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBInstanceSecurityGroupsRequest {
+  /** 要修改的安全组ID列表，一个或者多个安全组 ID 组成的数组。 */
+  SecurityGroupIds: string[];
+  /** 实例ID，格式如：vdb-c9s3****。 */
+  InstanceIds: string[];
+}
+
+declare interface ModifyDBInstanceSecurityGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Vdb 向量数据库} */
 declare interface Vdb {
   (): Versions;
+  /** 绑定安全组 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
+  AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
+  /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
+  DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
+  /** 实例pod列表（仅返回 pod 名称） {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
+  DescribeInstanceNodes(data?: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
   /** 查询实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
+  DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
+  /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
+  ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
 }
 
 export declare type Versions = ["2023-06-16"];

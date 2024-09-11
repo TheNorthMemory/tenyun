@@ -578,6 +578,18 @@ declare interface Instances {
   UpdateTime?: string;
 }
 
+/** 日志投递信息 */
+declare interface LogDeliveryInfo {
+  /** 日志投递开启状态，开启：true，关闭：false */
+  Enabled?: boolean | null;
+  /** 日志集ID。 */
+  LogsetId?: string | null;
+  /** 日志主题ID。 */
+  TopicId?: string | null;
+  /** 日志集所在地域 */
+  LogRegion?: string | null;
+}
+
 /** 安全组出站规则 */
 declare interface Outbound {
   /** 策略，ACCEPT或者DROP。 */
@@ -1664,6 +1676,18 @@ declare interface DescribeInstanceEventsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceLogDeliveryRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceLogDeliveryResponse {
+  /** 实例慢日志投递信息。 */
+  SlowLog?: LogDeliveryInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceMonitorBigKeyRequest {
   /** 实例Id */
   InstanceId: string;
@@ -2620,6 +2644,34 @@ declare interface ModifyInstanceEventResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceLogDeliveryRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 日志类型。当前仅支持设置为slowlog，指慢查询日志。 */
+  LogType: string;
+  /** 日志投递开启状态。- true：开启。- false：关闭。 */
+  Enabled: boolean;
+  /** 投递的日志集ID。 */
+  LogsetId?: string;
+  /** 投递的日志主题ID。 */
+  TopicId?: string;
+  /** 日志集名称。若**LogsetId**未指定具体的日志集ID，请配置该参数，设置日志集名称，系统会以设置的日志集名称自动创建新的日志集。 */
+  LogsetName?: string;
+  /** 日志主题名称，TopicId为空时必传，会自动创建新的日志主题。 */
+  TopicName?: string;
+  /** 日志集所在地域，不传默认使用实例所在地域。 */
+  LogRegion?: string;
+  /** 日志存储时间，默认为30天，可选范围1-3600天。 */
+  Period?: number;
+  /** 创建日志主题时，是否创建索引。 */
+  CreateIndex?: boolean;
+}
+
+declare interface ModifyInstanceLogDeliveryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceParamsRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -3047,6 +3099,8 @@ declare interface Redis {
   DescribeInstanceDealDetail(data: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
   /** 查询实例事件信息 {@link DescribeInstanceEventsRequest} {@link DescribeInstanceEventsResponse} */
   DescribeInstanceEvents(data: DescribeInstanceEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceEventsResponse>;
+  /** 查询实例日志投递配置 {@link DescribeInstanceLogDeliveryRequest} {@link DescribeInstanceLogDeliveryResponse} */
+  DescribeInstanceLogDelivery(data: DescribeInstanceLogDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogDeliveryResponse>;
   /** 查询实例大Key（已废弃） {@link DescribeInstanceMonitorBigKeyRequest} {@link DescribeInstanceMonitorBigKeyResponse} */
   DescribeInstanceMonitorBigKey(data: DescribeInstanceMonitorBigKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeyResponse>;
   /** 查询实例大Key大小分布（已废弃） {@link DescribeInstanceMonitorBigKeySizeDistRequest} {@link DescribeInstanceMonitorBigKeySizeDistResponse} */
@@ -3151,6 +3205,8 @@ declare interface Redis {
   ModifyInstanceAvailabilityZones(data: ModifyInstanceAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAvailabilityZonesResponse>;
   /** 修改实例事件 {@link ModifyInstanceEventRequest} {@link ModifyInstanceEventResponse} */
   ModifyInstanceEvent(data: ModifyInstanceEventRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEventResponse>;
+  /** 修改实例日志投递配置 {@link ModifyInstanceLogDeliveryRequest} {@link ModifyInstanceLogDeliveryResponse} */
+  ModifyInstanceLogDelivery(data: ModifyInstanceLogDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceLogDeliveryResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 设置实例输入模式 {@link ModifyInstanceReadOnlyRequest} {@link ModifyInstanceReadOnlyResponse} */

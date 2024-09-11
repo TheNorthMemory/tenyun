@@ -153,25 +153,31 @@ declare interface ApiInfo {
 /** 微服务网关API限流规则 */
 declare interface ApiRateLimitRule {
   /** rule Id */
-  RuleId: string | null;
+  RuleId?: string | null;
   /** API ID */
-  ApiId: string | null;
+  ApiId?: string | null;
   /** 限流名称 */
-  RuleName: string | null;
+  RuleName?: string | null;
   /** 最大限流qps */
-  MaxQps: number | null;
+  MaxQps?: number | null;
   /** 生效/禁用, enabled/disabled */
-  UsableStatus: string | null;
+  UsableStatus?: string | null;
   /** 规则内容 */
-  RuleContent: string | null;
+  RuleContent?: string | null;
   /** Tsf Rule ID */
-  TsfRuleId: string | null;
+  TsfRuleId?: string | null;
   /** 描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 创建时间 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 更新时间 */
-  UpdatedTime: string | null;
+  UpdatedTime?: string | null;
+  /** 分页参数limit */
+  Limit?: number | null;
+  /** 分页参数offset */
+  Offset?: number | null;
+  /** AppId */
+  AppId?: string | null;
 }
 
 /** ApiRequestDescr */
@@ -1143,15 +1149,15 @@ declare interface GatewayDeployGroup {
 /** 网关API简单信息 */
 declare interface GatewayGroupApiVo {
   /** API ID */
-  ApiId: string;
+  ApiId?: string;
   /** API 请求路径 */
-  Path: string;
+  Path?: string;
   /** API 微服务名称 */
-  MicroserviceName: string;
+  MicroserviceName?: string;
   /** API 请求方法 */
-  Method: string | null;
+  Method?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
 }
 
 /** 网关部署组ID和网关API分组ID元组 */
@@ -3402,6 +3408,8 @@ declare interface CreateAllGatewayApiAsyncRequest {
   GroupId: string;
   /** 微服务ID */
   MicroserviceId: string;
+  /** 命名空间ID */
+  NamespaceId?: string;
 }
 
 declare interface CreateAllGatewayApiAsyncResponse {

@@ -2028,6 +2028,20 @@ declare interface DescribeServerlessSpacesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSpaceKibanaToolsRequest {
+  /** space的ID */
+  SpaceId: string;
+}
+
+declare interface DescribeSpaceKibanaToolsResponse {
+  /** 该token用于登录内嵌kibana */
+  KibanaToken?: string;
+  /** token的过期时间 */
+  ExpireTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserCosSnapshotListRequest {
   /** cos桶名 */
   CosBucket?: string;
@@ -2641,6 +2655,8 @@ declare interface Es {
   DescribeServerlessSpaceUser(data: DescribeServerlessSpaceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpaceUserResponse>;
   /** 获取Serverless索引空间列表 {@link DescribeServerlessSpacesRequest} {@link DescribeServerlessSpacesResponse} */
   DescribeServerlessSpaces(data?: DescribeServerlessSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessSpacesResponse>;
+  /** space维度的kibana获取登录token {@link DescribeSpaceKibanaToolsRequest} {@link DescribeSpaceKibanaToolsResponse} */
+  DescribeSpaceKibanaTools(data: DescribeSpaceKibanaToolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceKibanaToolsResponse>;
   /** 查询快照信息接口 {@link DescribeUserCosSnapshotListRequest} {@link DescribeUserCosSnapshotListResponse} */
   DescribeUserCosSnapshotList(data?: DescribeUserCosSnapshotListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCosSnapshotListResponse>;
   /** 查询集群视图 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */

@@ -107,6 +107,10 @@ declare interface ImageToImageRequest {
   Strength?: number;
   /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 */
   RspImgType?: string;
+  /** 画质增强开关，默认关闭。1：开启0：关闭开启后将增强图像的画质清晰度，生成耗时有所增加。 */
+  EnhanceImage?: number;
+  /** 细节优化的面部数量上限，支持0 ~ 6，默认为0。若上传大于0的值，将以此为上限对每张图片中面积占比较小的面部进行细节修复，生成耗时根据实际优化的面部个数有所增加。 */
+  RestoreFace?: number;
 }
 
 declare interface ImageToImageResponse {
@@ -204,6 +208,28 @@ declare interface ReplaceBackgroundResponse {
   ResultImage?: string;
   /** 如果 MaskUrl 未传，则返回使用内置商品分割算法得到的 Mask 结果。 */
   MaskImage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SketchToImageRequest {
+  /** 用于线稿生图的文本描述。最多支持200个 utf-8 字符。建议格式：线稿中的主体对象+画面场景+配色/材质/元素/风格等 */
+  Prompt: string;
+  /** 线稿图 Base64 数据。Base64 和 Url 必须提供一个，如果都提供以Url 为准。图片限制：黑白线稿图片，单边分辨率小于5000且大于512（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
+  InputImage?: string;
+  /** 线稿图 Url。Base64 和 Url 必须提供一个，如果都提供以Url 为准。图片限制：黑白线稿图片，单边分辨率小于5000且大于512（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
+  InputUrl?: string;
+  /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。 */
+  RspImgType?: string;
+}
+
+declare interface SketchToImageResponse {
+  /** 根据入参 RspImgType 填入不同，返回不同的内容。如果传入 base64 则返回生成图 Base64 编码。如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。 */
+  ResultImage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -323,6 +349,8 @@ declare interface Aiart {
   QueryTrainPortraitModelJob(data: QueryTrainPortraitModelJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTrainPortraitModelJobResponse>;
   /** 商品背景生成 {@link ReplaceBackgroundRequest} {@link ReplaceBackgroundResponse} */
   ReplaceBackground(data: ReplaceBackgroundRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceBackgroundResponse>;
+  /** 线稿生图 {@link SketchToImageRequest} {@link SketchToImageResponse} */
+  SketchToImage(data: SketchToImageRequest, config?: AxiosRequestConfig): AxiosPromise<SketchToImageResponse>;
   /** 提交生成写真图片任务 {@link SubmitDrawPortraitJobRequest} {@link SubmitDrawPortraitJobResponse} */
   SubmitDrawPortraitJob(data: SubmitDrawPortraitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitDrawPortraitJobResponse>;
   /** 提交文生图（高级版）任务（即将下线） {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */

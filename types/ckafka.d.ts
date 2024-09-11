@@ -1725,7 +1725,7 @@ declare interface MySQLParam {
 /** 操作类型返回的Data结构 */
 declare interface OperateResponseData {
   /** FlowId11 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** RouteIdDto */
   RouteDTO?: RouteDTO | null;
 }
@@ -4213,7 +4213,7 @@ declare interface ModifyRoutineMaintenanceTaskRequest {
   InstanceId: string;
   /** 自动化运维类别 */
   MaintenanceType: string;
-  /** 自动化运维子类别 */
+  /** INSTANCE_STORAGE_CAPACITY(磁盘自动扩容)/MESSAGE_RETENTION_PERIOD(磁盘动态消息保留策略) */
   MaintenanceSubtype: string;
   /** 主题名称 */
   TopicName?: string;
