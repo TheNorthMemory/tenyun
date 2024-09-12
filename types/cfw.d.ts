@@ -70,13 +70,15 @@ declare interface BanAndAllowRule {
   Comment?: string | null;
   /** 自定义白名单规则 */
   CustomRule?: CustomWhiteRule | null;
+  /** 放通的引擎: 1针对互联网边界 2针对nat防火墙 4针对vpc防火墙 */
+  FwType?: number | null;
 }
 
 /** 封禁列表和放通列表结构体 */
 declare interface BanAndAllowRuleDel {
   /** 封禁和放通对象 */
   Ioc?: string | null;
-  /** 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 */
+  /** 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 （DeleteBlockIgnoreRuleNew接口，该字段无效） */
   DirectionList?: string | null;
   /** 规则类型 */
   RuleType?: number | null;
@@ -140,6 +142,8 @@ declare interface BlockIgnoreRule {
   LastHitTime?: string | null;
   /** 自定义规则细节 */
   CustomRule?: CustomWhiteRule | null;
+  /** 1 border 2 nat 4 vpc 8 border-serial */
+  FwType?: number | null;
 }
 
 /** NAT防火墙Dnat规则 */
@@ -198,6 +202,8 @@ declare interface CreateNatRuleItem {
   ParamTemplateId?: string;
   /** 内部id */
   InternalUuid?: number;
+  /** 规则生效的范围：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度 */
+  Scope?: string;
 }
 
 /** 创建互联网边界规则参数结构 */
@@ -330,8 +336,10 @@ declare interface DescAcItem {
   Status?: number | null;
   /** 关联任务详情 */
   BetaList?: BetaInfoByACL[] | null;
-  /** 生效范围：serial，串行；side，旁路；all，全局 */
+  /** （1）互联网边界防火墙，生效范围：serial，串行；side，旁路；all，全局；（2）NAT边界防火墙：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度 */
   Scope?: string | null;
+  /** 生效范围描述 */
+  ScopeDesc?: string | null;
   /** 互联网边界防火墙使用的内部规则id */
   InternetBorderUuid?: string | null;
   /** 协议端口组名称 */
@@ -424,6 +432,8 @@ declare interface EdgeIpInfo {
   SwitchWeight?: number | null;
   /** 域名化CLB的域名 */
   Domain?: string | null;
+  /** IP超量状态 */
+  OverUsedStatus?: number | null;
 }
 
 /** 开启、关闭 防火墙互联网边界开关 */
@@ -756,6 +766,12 @@ declare interface NatSwitchListData {
   Region?: string | null;
   /** 开关是否异常,0:正常,1:异常 */
   Abnormal?: number | null;
+  /** nat防火墙出口路由表id */
+  ORTableId?: string | null;
+  /** nat防火墙出口路由表名称 */
+  ORTableName?: string | null;
+  /** 出口Snat Ip列表 */
+  Ohavips?: string[] | null;
 }
 
 /** 网络实例信息 */

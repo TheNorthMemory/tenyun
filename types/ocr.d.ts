@@ -3584,6 +3584,8 @@ declare interface MainlandPermitOCRResponse {
   Type?: string;
   /** RetProfile为True时返回头像字段， Base64编码 */
   Profile?: string;
+  /** 国籍 */
+  Nationality?: string;
   /** 背面字段信息 */
   MainlandTravelPermitBackInfos?: MainlandTravelPermitBackInfos;
   /** 唯一请求 ID，每次请求都会返回。 */

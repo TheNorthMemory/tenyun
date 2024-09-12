@@ -2668,9 +2668,9 @@ declare interface CreateUserMobileChangeUrlRequest {
 }
 
 declare interface CreateUserMobileChangeUrlResponse {
-  /** 腾讯电子签小程序的实名认证链接。如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。- 如果EndPoint是APP，得到的链接类似于pages/guide/index?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcExAlcOvNod0, 用法可以参考描述中的"跳转到小程序的实现"- 如果EndPoint是HTTP，得到的链接类似于https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcChrfpaswT0d，点击后会跳转到腾讯电子签小程序进行签署- 如果EndPoint是HTTP_SHORT_URL，得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签小程序进行签署注： 生成的链路后面不能再增加参数示例值：https://essurl.cn/2n**42Nd */
+  /** 腾讯电子签小程序的实名认证链接。 如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。1.如果EndPoint是APP，得到的链接类似于pages/guide/index?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcExAlcOvNod0, 用法可以参考描述中的"跳转到小程序的实现"2.如果EndPoint是HTTP，得到的链接类似于https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcChrfpaswT0d，点击后会跳转到腾讯电子签小程序进行签署3.如果EndPoint是HTTP_SHORT_URL，得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签小程序进行签署注： 生成的链路后面不能再增加参数 */
   Url?: string;
-  /** 链接失效期限如下：如果指定更换绑定手机号的用户(指定用户ID或姓名等信息)，则设定的链接失效期限为7天后。如果没有指定更换绑定手机号的用户，则生成通用跳转到个人换手机号的界面，链接不会过期。 */
+  /** 链接失效期限，为Unix时间戳（单位秒），有如下规则：如果指定更换绑定手机号的用户(指定用户ID或姓名等信息)，则设定的链接失效期限为7天后。如果没有指定更换绑定手机号的用户，则生成通用跳转到个人换手机号的界面，链接不会过期。 */
   ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2689,7 +2689,7 @@ declare interface CreateUserVerifyUrlRequest {
   Mobile?: string;
   /** 实名完之后的跳转链接，最大长度1000个字符。链接类型请参考 跳转电子签H5。注：此参数仅支持 Endpoint 为 H5 或 H5_SHORT_URL 的时候传递 */
   JumpUrl?: string;
-  /** 要跳转的链接类型- HTTP：跳转电子签小程序的http_url,短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)- HTTP_SHORT_URL：跳转电子签小程序的http_url,短信通知或者H5跳转适合此类型，此时返回短链- APP：第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型- H5：跳转电子签H5实名页面的长链- H5_SHORT_URL：跳转电子签H5实名页面的短链注：如果不传递，默认值是 APP */
+  /** 要跳转的链接类型HTTP：适用于短信通知或H5跳转的电子签小程序HTTP长链接HTTP_SHORT_URL：适用于短信通知或H5跳转的电子签小程序HTTP短链接APP：（默认类型）适用于第三方APP或小程序跳转的电子签小程序路径H5：适用于跳转至电子签H5实名页面的长链接H5_SHORT_URL：适用于跳转至电子签H5实名页面的短链接注：如果不传递，默认值是 APP */
   Endpoint?: string;
   /** 签署完成后是否自动回跳false：否, 实名完成不会自动跳转回来(默认)true：是, 实名完成会自动跳转回来注: 1. 该参数只针对APP类型（第三方APP或小程序跳转电子签小程序）场景 的实名链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
   AutoJumpBack?: boolean;
@@ -2698,9 +2698,9 @@ declare interface CreateUserVerifyUrlRequest {
 }
 
 declare interface CreateUserVerifyUrlResponse {
-  /** 腾讯电子签小程序的实名认证链接。如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。- 如果EndPoint是APP，得到的链接类似于pages/guide/index?to=MP_PERSONAL_VERIFY&shortKey=yDCZHUyOcExAlcOvNod0, 用法可以参考描述中的"跳转到小程序的实现"- 如果EndPoint是HTTP，得到的链接类似于https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=TAG_VERIFY&shortKey=yDCZHUyOcChrfpaswT0d，点击后会跳转到腾讯电子签小程序进行签署- 如果EndPoint是HTTP_SHORT_URL，得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签小程序进行签署- 如果EndPoint是H5，得到的链接类似于 https://quick.test.qian.tencent.cn/guide?Code=yDU****VJhsS5q&CodeType=xxx&shortKey=yD*****frcb，点击后会跳转到腾讯电子签H5页面进行签署- 如果EndPoint是H5_SHORT_URL，得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签H5页面进行签署`注：` 生成的链路后面不能再增加参数示例值：https://essurl.cn/2n**42Nd */
+  /** 腾讯电子签小程序的实名认证链接。如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。1.如果EndPoint是APP：得到的链接类似于pages/guide/index?to=MP_PERSONAL_VERIFY&shortKey=yDCZHUyOcExAlcOvNod0, 用法可以参考描述中的"跳转到小程序的实现"2.如果EndPoint是HTTP：得到的链接类似于 https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=TAG_VERIFY&shortKey=yDCZHUyOcChrfpaswT0d，点击后会跳转到腾讯电子签小程序进行签署3.如果EndPoint是HTTP_SHORT_URL：得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签小程序进行签署4.如果EndPoint是H5：得到的链接类似于 https://quick.test.qian.tencent.cn/guide?Code=yDU****VJhsS5q&CodeType=xxx&shortKey=yD*****frcb，点击后会跳转到腾讯电子签H5页面进行签署5.如果EndPoint是H5_SHORT_URL：得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签H5页面进行签署`注：` 生成的链路后面不能再增加参数，防止出错重复参数覆盖原有的参数示例值：https://essurl.cn/2n**42Nd */
   UserVerifyUrl?: string;
-  /** 链接过期时间 */
+  /** 链接过期时间，为Unix时间戳（单位为秒）。 */
   ExpireTime?: number;
   /** 小程序appid，用于半屏拉起电子签小程序， 仅在 Endpoint 设置为 APP 的时候返回 */
   MiniAppId?: string;
@@ -3695,7 +3695,7 @@ declare interface Ess {
   CreateUserAutoSignSealUrl(data: CreateUserAutoSignSealUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignSealUrlResponse>;
   /** 生成修改用户手机号链接 {@link CreateUserMobileChangeUrlRequest} {@link CreateUserMobileChangeUrlResponse} */
   CreateUserMobileChangeUrl(data: CreateUserMobileChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserMobileChangeUrlResponse>;
-  /** 获取c端用户实名链接 {@link CreateUserVerifyUrlRequest} {@link CreateUserVerifyUrlResponse} */
+  /** 获取个人用户实名链接 {@link CreateUserVerifyUrlRequest} {@link CreateUserVerifyUrlResponse} */
   CreateUserVerifyUrl(data: CreateUserVerifyUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserVerifyUrlResponse>;
   /** 设置本企业嵌入式页面主题配置 {@link CreateWebThemeConfigRequest} {@link CreateWebThemeConfigResponse} */
   CreateWebThemeConfig(data: CreateWebThemeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebThemeConfigResponse>;

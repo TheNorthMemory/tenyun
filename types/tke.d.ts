@@ -142,6 +142,58 @@ declare interface Filter {
   Values: string[];
 }
 
+/** 健康检测规则 */
+declare interface HealthCheckPolicy {
+  /** 健康检测策略名称 */
+  Name: string;
+  /** 健康检测策略规则列表 */
+  Rules: HealthCheckPolicyRule[];
+}
+
+/** 健康检测策略和节点池的绑定关系 */
+declare interface HealthCheckPolicyBinding {
+  /** 健康检测策略名称 */
+  Name: string;
+  /** 规则创建时间 */
+  CreatedAt: string;
+  /** 关联节点池数组 */
+  NodePools: string[];
+}
+
+/** 健康检测规则 */
+declare interface HealthCheckPolicyRule {
+  /** 健康检测规则 */
+  Name: string;
+  /** 是否检测此项目 */
+  Enabled: boolean;
+  /** 是否启用修复 */
+  AutoRepairEnabled: boolean;
+}
+
+/** 健康检测模板 */
+declare interface HealthCheckTemplate {
+  /** 健康检测项 */
+  Rules: HealthCheckTemplateRule[];
+}
+
+/** 健康检测模板规则 */
+declare interface HealthCheckTemplateRule {
+  /** 健康检测项目名称 */
+  Name: string;
+  /** 健康检测规则描述 */
+  Description: string;
+  /** 修复动作 */
+  RepairAction: string;
+  /** 修复影响 */
+  RepairEffect: string;
+  /** 是否建议开启检测 */
+  ShouldEnable: boolean;
+  /** 是否建议修复 */
+  ShouldRepair: boolean;
+  /** 问题严重程度 */
+  Severity: string;
+}
+
 /** 集群的实例信息 */
 declare interface Instance {
   /** 实例ID */
@@ -574,6 +626,20 @@ declare interface UpdateNativeNodePoolParam {
   KeyIds?: string[];
 }
 
+declare interface CreateHealthCheckPolicyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 健康检测策略 */
+  HealthCheckPolicy: HealthCheckPolicy;
+}
+
+declare interface CreateHealthCheckPolicyResponse {
+  /** 健康检测策略名称 */
+  HealthCheckPolicyName: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNodePoolRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -600,6 +666,18 @@ declare interface CreateNodePoolRequest {
 declare interface CreateNodePoolResponse {
   /** 节点池 ID */
   NodePoolId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteHealthCheckPolicyRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 健康检测策略名称 */
+  HealthCheckPolicyName: string;
+}
+
+declare interface DeleteHealthCheckPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -640,6 +718,56 @@ declare interface DescribeClusterInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHealthCheckPoliciesRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** · HealthCheckPolicyName 按照【健康检测策略名称】进行过滤。 类型：String 必选：否 */
+  Filters?: Filter[];
+  /** 最大输出条数，默认20，最大为100 */
+  Limit?: number;
+  /** 偏移量，默认0 */
+  Offset?: number;
+}
+
+declare interface DescribeHealthCheckPoliciesResponse {
+  /** 健康检测策略数组 */
+  HealthCheckPolicies: HealthCheckPolicy[] | null;
+  /** 数组总数目 */
+  TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHealthCheckPolicyBindingsRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** · HealthCheckPolicyName 按照【健康检测规则名称】进行过滤。 类型：String 必选：否 */
+  Filter?: Filter[];
+  /** 最大输出条数，默认20，最大为100 */
+  Limit?: number;
+  /** 偏移量，默认0 */
+  Offset?: number;
+}
+
+declare interface DescribeHealthCheckPolicyBindingsResponse {
+  /** 健康检测规则数组 */
+  HealthCheckPolicyBindings: HealthCheckPolicyBinding[] | null;
+  /** 健康检测规则数量 */
+  TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHealthCheckTemplateRequest {
+}
+
+declare interface DescribeHealthCheckTemplateResponse {
+  /** 健康检测策略模板 */
+  HealthCheckTemplate?: HealthCheckTemplate;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNodePoolsRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -656,6 +784,18 @@ declare interface DescribeNodePoolsResponse {
   NodePools?: NodePool[] | null;
   /** 资源总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHealthCheckPolicyRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 健康检测策略 */
+  HealthCheckPolicy: HealthCheckPolicy;
+}
+
+declare interface ModifyHealthCheckPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3604,6 +3744,8 @@ declare namespace V20180525 {
     InstanceDataDiskMountSettings?: InstanceDataDiskMountSetting[];
     /** 需要安装的扩展组件信息 */
     ExtensionAddons?: ExtensionAddon[];
+    /** 本地专用集群Id */
+    CdcId?: string;
   }
 
   interface CreateClusterResponse {
@@ -7173,14 +7315,26 @@ declare namespace V20180525 {
 /** {@link Tke 容器服务} */
 declare interface Tke {
   (): Versions;
+  /** 创建健康检测策略 {@link CreateHealthCheckPolicyRequest} {@link CreateHealthCheckPolicyResponse} */
+  CreateHealthCheckPolicy(data: CreateHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHealthCheckPolicyResponse>;
   /** 创建 TKE 节点池 {@link CreateNodePoolRequest} {@link CreateNodePoolResponse} */
   CreateNodePool(data: CreateNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNodePoolResponse>;
+  /** 删除健康检测策略 {@link DeleteHealthCheckPolicyRequest} {@link DeleteHealthCheckPolicyResponse} */
+  DeleteHealthCheckPolicy(data: DeleteHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHealthCheckPolicyResponse>;
   /** 删除 TKE 节点池 {@link DeleteNodePoolRequest} {@link DeleteNodePoolResponse} */
   DeleteNodePool(data: DeleteNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodePoolResponse>;
   /** 查询集群节点信息 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
+  /** 查询健康检测策略 {@link DescribeHealthCheckPoliciesRequest} {@link DescribeHealthCheckPoliciesResponse} */
+  DescribeHealthCheckPolicies(data: DescribeHealthCheckPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckPoliciesResponse>;
+  /** 查询健康检测策略绑定关系 {@link DescribeHealthCheckPolicyBindingsRequest} {@link DescribeHealthCheckPolicyBindingsResponse} */
+  DescribeHealthCheckPolicyBindings(data: DescribeHealthCheckPolicyBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckPolicyBindingsResponse>;
+  /** 查询健康检测策略模板 {@link DescribeHealthCheckTemplateRequest} {@link DescribeHealthCheckTemplateResponse} */
+  DescribeHealthCheckTemplate(data?: DescribeHealthCheckTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckTemplateResponse>;
   /** 查询 TKE 节点池列表 {@link DescribeNodePoolsRequest} {@link DescribeNodePoolsResponse} */
   DescribeNodePools(data: DescribeNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodePoolsResponse>;
+  /** 修改健康检测策略 {@link ModifyHealthCheckPolicyRequest} {@link ModifyHealthCheckPolicyResponse} */
+  ModifyHealthCheckPolicy(data: ModifyHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHealthCheckPolicyResponse>;
   /** 更新 TKE 节点池 {@link ModifyNodePoolRequest} {@link ModifyNodePoolResponse} */
   ModifyNodePool(data: ModifyNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolResponse>;
   /** 获取集群RBAC管理员角色 {@link V20180525.AcquireClusterAdminRoleRequest} {@link V20180525.AcquireClusterAdminRoleResponse} */

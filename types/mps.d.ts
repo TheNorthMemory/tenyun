@@ -230,6 +230,8 @@ declare interface AiAnalysisResult {
   HeadTailTask?: AiAnalysisTaskHeadTailResult | null;
   /** 视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。 */
   DescriptionTask?: AiAnalysisTaskDescriptionResult | null;
+  /** 视频内容分析横转竖任务的查询结果，当任务类型为 HorizontalToVertical 时有效。 */
+  HorizontalToVerticalTask?: AiAnalysisTaskHorizontalToVerticalResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -430,6 +432,36 @@ declare interface AiAnalysisTaskHighlightResult {
   Input?: AiAnalysisTaskHighlightInput;
   /** 智能精彩片段任务输出。 */
   Output?: AiAnalysisTaskHighlightOutput | null;
+}
+
+/** 智能横转竖任务输入类型 */
+declare interface AiAnalysisTaskHorizontalToVerticalInput {
+  /** 视频智能横转竖模板 ID */
+  Definition?: number | null;
+}
+
+/** 智能横转竖结果信息 */
+declare interface AiAnalysisTaskHorizontalToVerticalOutput {
+  /** 视频智能横转竖列表 */
+  Path?: string | null;
+  /** 智能横转竖视频的存储位置 */
+  OutputStorage?: TaskOutputStorage | null;
+  /** 置信度。 */
+  Confidence?: number | null;
+}
+
+/** 智能横转竖结果类型 */
+declare interface AiAnalysisTaskHorizontalToVerticalResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种 */
+  Status?: string | null;
+  /** 错误码，0：成功，其他值：失败 */
+  ErrCode?: number | null;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 智能横转竖任务输入 */
+  Input?: AiAnalysisTaskHorizontalToVerticalInput | null;
+  /** 智能横转竖任务输出 */
+  Output?: AiAnalysisTaskHorizontalToVerticalOutput | null;
 }
 
 /** AI 视频智能分析输入参数类型 */
@@ -2659,11 +2691,13 @@ declare interface HeadTailParameter {
 /** 智能精彩集锦片段列表。 */
 declare interface HighlightSegmentItem {
   /** 置信度。 */
-  Confidence: number;
+  Confidence?: number;
   /** 片段起始时间偏移。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 片段结束时间偏移。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
+  /** 片段标签 */
+  SegmentTags?: string[] | null;
 }
 
 /** 综合增强配置 */

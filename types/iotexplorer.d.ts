@@ -898,7 +898,7 @@ declare interface ActivateTWeCallLicenseRequest {
   /** TWecall类型： 0-测试激活码； 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
   PkgType: number;
   /** appId */
-  MiniProgramAppId: string;
+  MiniProgramAppId?: string;
   /** 设备列表 */
   DeviceList?: TWeCallInfo[];
 }
@@ -2766,7 +2766,7 @@ declare interface GetStudioProductListResponse {
 
 declare interface GetTWeCallActiveStatusRequest {
   /** appId */
-  MiniProgramAppId: string;
+  MiniProgramAppId?: string;
   /** 设备列表 */
   DeviceList?: TWeCallInfo[];
 }
@@ -3684,7 +3684,7 @@ declare interface Iotexplorer {
   /** 获取产品列表 {@link GetStudioProductListRequest} {@link GetStudioProductListResponse} */
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
   /** 查询TWeCall激活状态 {@link GetTWeCallActiveStatusRequest} {@link GetTWeCallActiveStatusResponse} */
-  GetTWeCallActiveStatus(data: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
+  GetTWeCallActiveStatus(data?: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
   /** 查询TWeCall包列表 {@link GetTWeCallPkgListRequest} {@link GetTWeCallPkgListResponse} */
   GetTWeCallPkgList(data: GetTWeCallPkgListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallPkgListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */

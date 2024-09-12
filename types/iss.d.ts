@@ -730,6 +730,12 @@ declare interface GatewaysData {
   DeviceNum?: number | null;
 }
 
+/** ISUP智能安全接入 API返回数据 */
+declare interface ISAPIOutputData {
+  /** 输出参数 */
+  OutputData?: string | null;
+}
+
 /** 生命周期，云文件生命周期设置，管理文件冷、热存储的时间 */
 declare interface LifeCycleData {
   /** 云文件热存储时长，单位天，最小1天，最大3650天 */
@@ -1618,6 +1624,22 @@ declare interface BatchOperateDeviceRequest {
 declare interface BatchOperateDeviceResponse {
   /** 返回结果 */
   Data?: BatchOperateDeviceData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CallISAPIRequest {
+  /** 设备ID */
+  DeviceId: string;
+  /** url 资源 */
+  Url: string;
+  /** 输入参数 */
+  InputData?: string;
+}
+
+declare interface CallISAPIResponse {
+  /** 返回数据 */
+  Data?: ISAPIOutputData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2701,6 +2723,8 @@ declare interface Iss {
   AddUserDevice(data: AddUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserDeviceResponse>;
   /** 批量操作设备 {@link BatchOperateDeviceRequest} {@link BatchOperateDeviceResponse} */
   BatchOperateDevice(data: BatchOperateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateDeviceResponse>;
+  /** ISAPI 透传异步回调 {@link CallISAPIRequest} {@link CallISAPIResponse} */
+  CallISAPI(data: CallISAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CallISAPIResponse>;
   /** 检测域名是否备案 {@link CheckDomainRequest} {@link CheckDomainResponse} */
   CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
   /** ptz 控制 {@link ControlDevicePTZRequest} {@link ControlDevicePTZResponse} */

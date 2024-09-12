@@ -2115,9 +2115,9 @@ declare interface DescribeHostUpdateRecordRequest {
 
 declare interface DescribeHostUpdateRecordResponse {
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 证书部署记录列表 */
-  DeployRecordList: UpdateRecordInfo[] | null;
+  DeployRecordList?: UpdateRecordInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2511,7 +2511,7 @@ declare interface UpdateCertificateRecordRollbackRequest {
 
 declare interface UpdateCertificateRecordRollbackResponse {
   /** 回滚部署记录ID */
-  DeployRecordId: number;
+  DeployRecordId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
