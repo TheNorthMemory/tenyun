@@ -108,7 +108,7 @@ declare interface CSVSerde {
 declare interface Column {
   /** 列名称，不区分大小写，最大支持25个字符。 */
   Name: string;
-  /** 列类型，支持如下类型定义:string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array|map|struct|uniontype。 */
+  /** string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array|map|struct|uniontype */
   Type: string;
   /** 对该类的注释。 */
   Comment?: string | null;
@@ -126,6 +126,8 @@ declare interface Column {
   ModifiedTime?: string | null;
   /** 是否为分区字段 */
   IsPartition?: boolean | null;
+  /** 数据脱敏策略信息 */
+  DataMaskStrategyInfo?: DataMaskStrategyInfo | null;
 }
 
 /** 任务公共指标 */
@@ -534,6 +536,22 @@ declare interface DataGovernPolicy {
   GovernEngine?: string | null;
 }
 
+/** 数据脱敏策略信息 */
+declare interface DataMaskStrategyInfo {
+  /** 策略名称 */
+  StrategyName?: string | null;
+  /** MASK_SHOW_FIRST_4; MASK_SHOW_LAST_4;MASK_HASH; MASK_DATE_SHOW_YEAR; MASK_NULL; MASK_DEFAULT 等 */
+  StrategyType?: string | null;
+  /** 策略描述 */
+  StrategyDesc?: string | null;
+  /** 用户组策略列表 */
+  Groups?: GroupInfo[] | null;
+  /** 用户子账号uin列表，按;拼接 */
+  Users?: string | null;
+  /** 策略Id */
+  StrategyId?: string | null;
+}
+
 /** 数据源详细信息 */
 declare interface DataSourceInfo {
   /** 数据源实例的唯一ID */
@@ -608,6 +626,8 @@ declare interface DatasourceConnectionConfig {
   Elasticsearch?: ElasticsearchInfo | null;
   /** TDSQL-PostgreSQL数据源连接的属性 */
   TDSQLPostgreSql?: DataSourceInfo | null;
+  /** Doris数据源连接的属性 */
+  TCHouseD?: TCHouseD | null;
 }
 
 /** 数据源信息 */
@@ -702,6 +722,14 @@ declare interface Filter {
   Name: string;
   /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
   Values: string[];
+}
+
+/** 数据脱敏用户组信息 */
+declare interface GroupInfo {
+  /** 用户组ID */
+  WorkGroupId?: number | null;
+  /** 策略类型 */
+  StrategyType?: string | null;
 }
 
 /** hive类型数据源的信息 */
@@ -1166,6 +1194,8 @@ declare interface ResourceInfo {
   Favor?: FavorInfo[] | null;
   /** 状态 */
   Status?: number | null;
+  /** 标准引擎资源组信息 */
+  ResourceGroupName?: string | null;
 }
 
 /** SQL查询任务 */
@@ -1436,6 +1466,26 @@ declare interface StreamingStatistics {
   AverageProcessingTime: number;
   /** 平均延时 */
   AverageTotalDelay: number;
+}
+
+/** Doirs数据源详细信息 */
+declare interface TCHouseD {
+  /** 数据源实例的唯一ID */
+  InstanceId?: string | null;
+  /** 数据源名称 */
+  InstanceName?: string | null;
+  /** 数据源的JDBC */
+  JdbcUrl?: string | null;
+  /** 用于访问数据源的用户 */
+  User?: string | null;
+  /** 数据源访问密码，需要base64编码 */
+  Password?: string | null;
+  /** 数据源的VPC和子网信息 */
+  Location?: DatasourceConnectionLocation | null;
+  /** 默认数据库名 */
+  DbName?: string | null;
+  /** 访问信息 */
+  AccessInfo?: string | null;
 }
 
 /** 表字段描述信息 */
@@ -1955,9 +2005,9 @@ declare interface AddDMSPartitionsRequest {
 
 declare interface AddDMSPartitionsResponse {
   /** 成功数量 */
-  Total: number;
+  Total?: number;
   /** 分区值 */
-  Partitions: DMSPartition[];
+  Partitions?: DMSPartition[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2529,13 +2579,13 @@ declare interface CreateResultDownloadRequest {
   TaskId: string;
   /** 下载格式 */
   Format: string;
-  /** 是否重新生成下载文件，仅当之前任务为 Timout | Error 时有效 */
+  /** 是否重新生成下载文件，仅当之前任务状态为 timeout | error 时有效 */
   Force?: boolean;
 }
 
 declare interface CreateResultDownloadResponse {
   /** 下载任务Id */
-  DownloadId: string;
+  DownloadId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2989,9 +3039,9 @@ declare interface DescribeDMSPartitionsRequest {
 
 declare interface DescribeDMSPartitionsResponse {
   /** 分区信息 */
-  Partitions: DMSPartition[];
+  Partitions?: DMSPartition[];
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3103,15 +3153,15 @@ declare interface DescribeDataEngineEventsRequest {
 
 declare interface DescribeDataEngineEventsResponse {
   /** 事件详细信息 */
-  Events: HouseEventsInfo[] | null;
+  Events?: HouseEventsInfo[] | null;
   /** 分页号 */
-  Page: number | null;
+  Page?: number | null;
   /** 分页大小 */
-  Size: number | null;
+  Size?: number | null;
   /** 总页数 */
-  TotalPages: number | null;
+  TotalPages?: number | null;
   /** 总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3153,7 +3203,7 @@ declare interface DescribeDataEngineRequest {
 
 declare interface DescribeDataEngineResponse {
   /** 数据引擎详细信息 */
-  DataEngine: DataEngineInfo;
+  DataEngine?: DataEngineInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3469,17 +3519,17 @@ declare interface DescribeResultDownloadRequest {
 
 declare interface DescribeResultDownloadResponse {
   /** 下载文件路径 */
-  Path: string | null;
+  Path?: string | null;
   /** 任务状态 init | queue | format | compress | success| timeout | error */
-  Status: string;
+  Status?: string;
   /** 任务异常原因 */
-  Reason: string | null;
-  /** 临时AK */
-  SecretId: string | null;
-  /** 临时SK */
-  SecretKey: string | null;
+  Reason?: string | null;
+  /** 临时SecretId */
+  SecretId?: string | null;
+  /** 临时SecretKey */
+  SecretKey?: string | null;
   /** 临时Token */
-  Token: string | null;
+  Token?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3953,7 +4003,7 @@ declare interface DescribeUserTypeRequest {
 
 declare interface DescribeUserTypeResponse {
   /** 用户类型。ADMIN：管理员 COMMON：普通用户 */
-  UserType: string | null;
+  UserType?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4881,7 +4931,7 @@ declare interface Dlc {
   DescribeTablesName(data: DescribeTablesNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesNameResponse>;
   /** 查询任务日志 {@link DescribeTaskLogRequest} {@link DescribeTaskLogResponse} */
   DescribeTaskLog(data: DescribeTaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogResponse>;
-  /** 查询任务结果(用于: SparkSQL、PrestoSQL、Spark作业任务) {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
+  /** 查询任务结果(用于: SparkSQL、PrestoSQL) {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;

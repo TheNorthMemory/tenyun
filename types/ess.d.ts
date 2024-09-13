@@ -732,6 +732,8 @@ declare interface FlowGroupInfo {
   NeedSignReview?: boolean;
   /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN示例值：E_PRESCRIPTION_AUTO_SIGN */
   AutoSignScene?: string;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
 }
 
 /** 此结构体(FlowGroupOptions)描述的是合同组的个性化配置，支持控制是否发送短信、未实名个人签署方查看合同组时是否需要实名认证（仅在合同组文件发起配置时生效） */
@@ -1076,24 +1078,24 @@ declare interface Recipient {
 
 /** 参与方填写控件信息 */
 declare interface RecipientComponentInfo {
-  /** 参与方Id */
+  /** 签署方经办人在合同流程中的参与方ID，与控件绑定，是控件的归属方 */
   RecipientId?: string | null;
-  /** 参与方填写状态0-未填写1-已填写 */
+  /** 参与方填写状态**空值** : 此参与方没有填写控件**0**: 未填写, 表示此参与方还没有填写合同的填写控件**1**: 已填写, 表示此参与方已经填写所有的填写控件 */
   RecipientFillStatus?: string | null;
   /** 是否为发起方true-发起方false-参与方 */
   IsPromoter?: boolean | null;
-  /** 填写控件列表 */
+  /** 改参与方填写控件信息列表 */
   Components?: FilledComponent[] | null;
 }
 
 /** 发起流程快速注册相关信息 */
 declare interface RegisterInfo {
   /** 法人姓名 */
-  LegalName: string;
+  LegalName: string | null;
   /** 社会统一信用代码 */
-  Uscc?: string;
+  Uscc?: string | null;
   /** 社会统一信用代码 */
-  UnifiedSocialCreditCode?: string;
+  UnifiedSocialCreditCode?: string | null;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
@@ -1823,6 +1825,8 @@ declare interface CreateFlowByFilesRequest {
   AutoSignScene?: string;
   /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下： **false**：（默认）不需要审批，直接签署。 **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
   NeedSignReview?: boolean;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
 }
 
 declare interface CreateFlowByFilesResponse {
@@ -1977,6 +1981,8 @@ declare interface CreateFlowRequest {
   RelatedFlowId?: string;
   /** 暂未开放 */
   CallbackUrl?: string;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
 }
 
 declare interface CreateFlowResponse {
@@ -2015,7 +2021,7 @@ declare interface CreateFlowSignUrlRequest {
   Operator?: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 流程签署人列表，其中结构体的ApproverName，ApproverMobile和ApproverType必传，企业签署人则需传OrganizationName，其他可不传。注:`1. 签署人只能有手写签名、时间类型、印章类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
+  /** 流程签署人列表，其中结构体的ApproverName，ApproverMobile和ApproverType必传，企业签署人则需传OrganizationName，其他可不传。注:`1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
   FlowApproverInfos?: FlowCreateApprover[];
   /** 机构信息，暂未开放 */
   Organization?: OrganizationInfo;
@@ -2979,14 +2985,14 @@ declare interface DescribeFlowBriefsResponse {
 declare interface DescribeFlowComponentsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  /** 合同流程ID，为32位字符串。[点击产看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png) */
   FlowId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
 }
 
 declare interface DescribeFlowComponentsResponse {
-  /** 合同流程关联的填写控件信息，按照参与方进行分类返回。 */
+  /** 合同流程关联的填写控件信息，包括填写控件的归属方以及是否填写等内容。 */
   RecipientComponentInfos?: RecipientComponentInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3725,7 +3731,7 @@ declare interface Ess {
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
   /** 查询流程基础信息 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */
   DescribeFlowBriefs(data: DescribeFlowBriefsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowBriefsResponse>;
-  /** 查询流程填写控件内容 {@link DescribeFlowComponentsRequest} {@link DescribeFlowComponentsResponse} */
+  /** 查询合同的填写控件信息 {@link DescribeFlowComponentsRequest} {@link DescribeFlowComponentsResponse} */
   DescribeFlowComponents(data: DescribeFlowComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowComponentsResponse>;
   /** 获取出证报告任务执行结果 {@link DescribeFlowEvidenceReportRequest} {@link DescribeFlowEvidenceReportResponse} */
   DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;

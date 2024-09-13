@@ -171,6 +171,12 @@ declare interface DescribeDBSecurityGroupsResponse {
 }
 
 declare interface DescribeInstanceNodesRequest {
+  /** limit */
+  Limit?: number;
+  /** offset */
+  Offset?: number;
+  /** component */
+  Component?: string;
 }
 
 declare interface DescribeInstanceNodesResponse {

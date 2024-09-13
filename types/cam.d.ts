@@ -302,6 +302,30 @@ declare interface PolicyVersionItem {
   IsDefaultVersion: number | null;
 }
 
+/** 消息接收人信息 */
+declare interface Receiver {
+  /** id */
+  Uid: number;
+  /** 名字 */
+  Name: string;
+  /** 备注 */
+  Remark: string | null;
+  /** 手机号码 */
+  PhoneNumber: string;
+  /** 手机号码是否验证 */
+  PhoneFlag: number;
+  /** 邮箱 */
+  Email: string;
+  /** 邮箱是否验证 */
+  EmailFlag: number;
+  /** 是否主联系人 */
+  IsReceiverOwner: number;
+  /** 是否允许微信接收通知 */
+  WechatFlag: number | null;
+  /** 账号uin */
+  Uin: number | null;
+}
+
 /** 角色详细信息 */
 declare interface RoleInfo {
   /** 角色ID */
@@ -784,6 +808,16 @@ declare interface DeleteGroupRequest {
 }
 
 declare interface DeleteGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMessageReceiverRequest {
+  /** 消息接受者的名称 */
+  Name: string;
+}
+
+declare interface DeleteMessageReceiverResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1550,6 +1584,22 @@ declare interface ListPolicyVersionsResponse {
   RequestId?: string;
 }
 
+declare interface ListReceiverRequest {
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 分页限制数目 */
+  Limit?: number;
+}
+
+declare interface ListReceiverResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 联系人列表 */
+  Receivers?: Receiver[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListSAMLProvidersRequest {
 }
 
@@ -1925,6 +1975,8 @@ declare interface Cam {
   DeleteAccessKey(data: DeleteAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessKeyResponse>;
   /** 删除用户组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
+  /** 删除消息接收人 {@link DeleteMessageReceiverRequest} {@link DeleteMessageReceiverResponse} */
+  DeleteMessageReceiver(data: DeleteMessageReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMessageReceiverResponse>;
   /** 删除OIDC身份提供商 {@link DeleteOIDCConfigRequest} {@link DeleteOIDCConfigResponse} */
   DeleteOIDCConfig(data: DeleteOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOIDCConfigResponse>;
   /** 删除策略 {@link DeletePolicyRequest} {@link DeletePolicyResponse} */
@@ -2017,6 +2069,8 @@ declare interface Cam {
   ListPoliciesGrantingServiceAccess(data?: ListPoliciesGrantingServiceAccessRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesGrantingServiceAccessResponse>;
   /** 获取策略版本列表 {@link ListPolicyVersionsRequest} {@link ListPolicyVersionsResponse} */
   ListPolicyVersions(data: ListPolicyVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPolicyVersionsResponse>;
+  /** 获取消息接收人列表 {@link ListReceiverRequest} {@link ListReceiverResponse} */
+  ListReceiver(data?: ListReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<ListReceiverResponse>;
   /** 查询SAML身份提供商列表 {@link ListSAMLProvidersRequest} {@link ListSAMLProvidersResponse} */
   ListSAMLProviders(data?: ListSAMLProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<ListSAMLProvidersResponse>;
   /** 拉取子用户 {@link ListUsersRequest} {@link ListUsersResponse} */

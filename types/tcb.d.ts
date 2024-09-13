@@ -2447,7 +2447,7 @@ declare interface DescribeEnvPostpaidDeductRequest {
 
 declare interface DescribeEnvPostpaidDeductResponse {
   /** 指标抵扣详情列表 */
-  PostPaidEnvDeductInfoList: PostPaidEnvDeductInfo[] | null;
+  PostPaidEnvDeductInfoList?: PostPaidEnvDeductInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

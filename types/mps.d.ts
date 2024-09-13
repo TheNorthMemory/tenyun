@@ -4913,7 +4913,7 @@ declare interface UserDefineOcrTextReviewTemplateInfoForUpdate {
   /** 用户自定文本审核任务开关，可选值：ON：开启自定义文本审核任务；OFF：关闭自定义文本审核任务。 */
   Switch?: string;
   /** 用户自定义文本过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。标签个数最多 10 个，每个标签长度最多 16 个字符。 */
-  LabelSet?: string;
+  LabelSet?: string[];
   /** 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。 */
   BlockConfidence?: number;
   /** 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。 */
@@ -4956,7 +4956,7 @@ declare interface VideoEnhanceConfig {
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfo {
-  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
+  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码mv-hevc：MV-HEVC 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。注意：MV-HEVC编码容器目前只支持mp4，hls，mov。其中hls格式只支持mp4分片格式。 */
   Codec: string;
   /** 视频帧率，取值范围：当FpsDenominator的值为空时，范围：[0, 120]，单位：Hz；当FpsDenominator的值不为空时，Fps/FpsDenominator的范围：[0,120]当取值为 0，表示帧率和原始视频保持一致。 */
   Fps: number;
@@ -4968,7 +4968,7 @@ declare interface VideoTemplateInfo {
   Width?: number;
   /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
   Height?: number;
-  /** 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。当填 0 或不填时，系统将自动设置 gop 长度。 */
+  /** 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。 当填 0 或不填时，系统将自动设置 gop 长度。 */
   Gop?: number;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。默认值：black 。注意：自适应码流只支持 stretch、black。 */
   FillType?: string;
@@ -4978,11 +4978,13 @@ declare interface VideoTemplateInfo {
   SegmentType?: number | null;
   /** 帧率分母部分注意：值必须大于0 */
   FpsDenominator?: number | null;
+  /** 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：side_by_side：左右视角top_bottom：上下视角默认值:side_by_side */
+  Stereo3dType?: string | null;
 }
 
 /** 视频流配置参数 */
 declare interface VideoTemplateInfoForUpdate {
-  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。 */
+  /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码mv-hevc：MV-HEVC 编码注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。注意：MV-HEVC编码容器目前只支持mp4，hls，mov。其中hls格式只支持mp4分片格式。 */
   Codec?: string | null;
   /** 视频帧率，取值范围：当FpsDenominator的值为空时，范围：[0, 120]，单位：Hz；当FpsDenominator的值不为空时，Fps/FpsDenominator的范围：[0,120]当取值为 0，表示帧率和原始视频保持一致。 */
   Fps?: number | null;
@@ -5006,6 +5008,8 @@ declare interface VideoTemplateInfoForUpdate {
   SegmentType?: number | null;
   /** 帧率分母部分注意：值必须大于0 */
   FpsDenominator?: number | null;
+  /** 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：side_by_side：左右视角top_bottom：上下视角默认值:side_by_side */
+  Stereo3dType?: string | null;
 }
 
 /** 音量均衡配置 */
@@ -5785,6 +5789,8 @@ declare interface DescribeAIAnalysisTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，不填则返回所有，可选值：* Preset：系统预置模板；* Custom：用户自定义模板。 */
   Type?: string;
+  /** 视频内容分析模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeAIAnalysisTemplatesResponse {
@@ -5805,6 +5811,8 @@ declare interface DescribeAIRecognitionTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，不填则返回所有，可选值：* Preset：系统预置模板；* Custom：用户自定义模板。 */
   Type?: string;
+  /** 视频内容识别模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeAIRecognitionTemplatesResponse {
@@ -5827,6 +5835,8 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
   Type?: string;
   /** 是否为纯音频，0表示视频，1表示纯音频 */
   PureAudio?: number;
+  /** 自适应转码模板标识过滤条件，长度限制：64 个字符 */
+  Name?: string;
 }
 
 declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
@@ -5847,6 +5857,8 @@ declare interface DescribeAnimatedGraphicsTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
+  /** 转动图模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeAnimatedGraphicsTemplatesResponse {
@@ -5867,6 +5879,8 @@ declare interface DescribeContentReviewTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，不填则返回所有，可选值：* Preset：系统预置模板；* Custom：用户自定义模板。 */
   Type?: string;
+  /** 智能审核模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeContentReviewTemplatesResponse {
@@ -5887,6 +5901,8 @@ declare interface DescribeImageSpriteTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
+  /** 雪碧图模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeImageSpriteTemplatesResponse {
@@ -5943,6 +5959,8 @@ declare interface DescribeQualityControlTemplatesRequest {
   Limit?: number;
   /** "Preset"：预设，Custom":客户魔板 */
   Type?: string;
+  /** 媒体质检模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeQualityControlTemplatesResponse {
@@ -5963,6 +5981,8 @@ declare interface DescribeSampleSnapshotTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
+  /** 采样截图模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeSampleSnapshotTemplatesResponse {
@@ -6005,6 +6025,8 @@ declare interface DescribeSnapshotByTimeOffsetTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
+  /** 指定时间点截图模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeSnapshotByTimeOffsetTemplatesResponse {
@@ -6321,6 +6343,8 @@ declare interface DescribeTranscodeTemplatesRequest {
   Limit?: number;
   /** 模板类型（替换旧版本 TEHDType），可选值：Common：普通转码模板；TEHD：视频极速高清，老的类型（建议使用 TEHD-100） 。TEHD-100：视频极速高清TEHD-200：音频极速高清Enhance：音视频增强模板。默认空，不限制类型。 */
   TranscodeType?: string;
+  /** 转码模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeTranscodeTemplatesResponse {
@@ -6341,6 +6365,8 @@ declare interface DescribeWatermarkTemplatesRequest {
   Offset?: number;
   /** 返回记录条数默认值：10；最大值：100。 */
   Limit?: number;
+  /** 水印模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
 }
 
 declare interface DescribeWatermarkTemplatesResponse {

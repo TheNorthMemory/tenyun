@@ -3307,9 +3307,9 @@ declare interface DescribeRabbitMQVirtualHostListRequest {
 
 declare interface DescribeRabbitMQVirtualHostListResponse {
   /** 集群列表数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群列表 */
-  VirtualHostList: RabbitMQPrivateVirtualHost[] | null;
+  VirtualHostList?: RabbitMQPrivateVirtualHost[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

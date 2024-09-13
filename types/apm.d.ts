@@ -152,6 +152,8 @@ declare interface ApmInstanceDetail {
   PayMode?: number | null;
   /** 实例计费模式是否生效 */
   PayModeEffective?: boolean | null;
+  /** 响应时间满意阈值 */
+  ResponseDurationWarningThreshold?: number | null;
 }
 
 /** 指标列表单元 */
@@ -555,6 +557,8 @@ declare interface ModifyApmInstanceRequest {
   CustomShowTags?: string[];
   /** 修改计费模式1为预付费0为按量付费 */
   PayMode?: number;
+  /** 响应时间满意阈值 */
+  ResponseDurationWarningThreshold?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

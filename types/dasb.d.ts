@@ -296,6 +296,28 @@ declare interface DeviceAccount {
   BoundPrivateKey: boolean;
 }
 
+/** 网络域 */
+declare interface Domain {
+  /** 自增id */
+  Id?: number;
+  /** 网络域id */
+  DomainId?: string;
+  /** 网络域名称 */
+  DomainName?: string | null;
+  /** 堡垒机id */
+  ResourceId?: string | null;
+  /** ip，网段 */
+  WhiteIpSet?: string[] | null;
+  /** 是否启用 默认 1启用 0禁用 */
+  Enabled?: number | null;
+  /** 状态 0-已断开 1-已连接 */
+  Status?: number | null;
+  /** 网络域创建时间 */
+  CreateTime?: string | null;
+  /** 是否资源默认网络域 1-资源默认网络域 0-用户添加网络域 */
+  Default?: number | null;
+}
+
 /** 主机参数，导入外部主机时使用 */
 declare interface ExternalDevice {
   /** 操作系统名称，只能是Linux、Windows或MySQL */
@@ -1320,6 +1342,24 @@ declare interface DescribeDevicesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainsRequest {
+  /** 每页条目数量，默认20，最大500 */
+  Limit?: number;
+  /** 过滤数组 */
+  Filters?: Filter[];
+  /** 分页偏移位置，默认值为0 */
+  Offset?: number;
+}
+
+declare interface DescribeDomainsResponse {
+  /** 网络域总数 */
+  TotalCount?: number;
+  /** 网络域列表 */
+  DomainSet?: Domain[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLoginEventRequest {
   /** 用户名，如果不包含其他条件时对user_name or real_name两个字段模糊查询 */
   UserName?: string;
@@ -2075,6 +2115,8 @@ declare interface Dasb {
   DescribeDeviceGroups(data?: DescribeDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupsResponse>;
   /** 查询资产列表 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
+  /** 查询网络域 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
+  DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
   /** 查询登录日志 {@link DescribeLoginEventRequest} {@link DescribeLoginEventResponse} */
   DescribeLoginEvent(data?: DescribeLoginEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginEventResponse>;
   /** 查询操作日志 {@link DescribeOperationEventRequest} {@link DescribeOperationEventResponse} */

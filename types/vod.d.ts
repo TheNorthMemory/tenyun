@@ -114,13 +114,13 @@ declare namespace V20180717 {
   /** 转自适应码流信息 */
   interface AdaptiveDynamicStreamingInfoItem {
     /** 转自适应码流规格。 */
-    Definition: number;
+    Definition?: number;
     /** 打包格式，取值范围：HLS；DASH。 */
-    Package: string;
+    Package?: string;
     /** 加密类型。 */
-    DrmType: string;
+    DrmType?: string;
     /** 播放地址。 */
-    Url: string;
+    Url?: string;
     /** 媒体文件大小，单位：字节。当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和；当媒体文件为 DASH 时，大小是 mpd 和分片文件大小的总和；注意：在 2022-01-10T16:00:00Z 前处理生成的自适应码流文件此字段为0。 */
     Size?: number;
     /** 数字水印类型。可选值：Trace 表示经过溯源水印处理；CopyRight 表示经过版权水印处理；None 表示没有经过数字水印处理。 */
@@ -129,6 +129,10 @@ declare namespace V20180717 {
     SubStreamSet?: MediaSubStreamInfoItem[];
     /** 版权信息。 */
     CopyRightWatermarkText?: string;
+    /** 字幕信息列表。 */
+    SubtitleSet?: MediaSubtitleItem[];
+    /** 默认字幕的唯一标识。 */
+    DefaultSubtitleId?: string;
   }
 
   /** 对视频转自适应码流的输入参数类型 */
@@ -5864,6 +5868,8 @@ declare namespace V20180717 {
     AdaptiveDynamicStreamingDefinition: number;
     /** 字幕的唯一标识。 */
     SubtitleIds: string[];
+    /** 默认字幕的唯一标识。不填则不设置默认字幕。 */
+    DefaultSubtitleId?: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }

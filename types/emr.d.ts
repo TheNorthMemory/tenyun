@@ -2953,7 +2953,7 @@ declare interface DescribeServiceNodeInfosRequest {
   OperatorStateId?: number;
   /** 过滤条件：健康状态"0"代表不可用"1"代表良好"-2"代表未知"-99"代表所有"-3"代表存在隐患"-4"代表未探测 */
   HealthStateId?: string;
-  /** 服务组件名称，都是大写比如YARN */
+  /** 服务组件名称，都是大写例如YARN */
   ServiceName?: string;
   /** 节点名称mastercoretaskcommonrouter */
   NodeTypeName?: string;

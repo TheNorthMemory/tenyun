@@ -636,6 +636,8 @@ declare interface FlowFileInfo {
   CustomShowMap?: string;
   /** 本企业(发起方企业)是否需要签署审批 */
   NeedSignReview?: boolean;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
 }
 
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
@@ -698,6 +700,8 @@ declare interface FlowInfo {
   CcNotifyType?: number;
   /** 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传： **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签） **OTHER** : 通用场景注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。` */
   AutoSignScene?: string;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
 }
 
 /** 流程对应资源链接信息 */
@@ -1551,6 +1555,8 @@ declare interface ChannelCreateFlowByFilesRequest {
   AutoSignScene?: string;
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
@@ -1649,7 +1655,7 @@ declare interface ChannelCreateFlowSignUrlRequest {
   Agent: Agent;
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 流程签署人列表，其中结构体的ApproverType必传。若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。若为子客企业签署方则需传OpenId、OrganizationOpenId，其他可不传。注:`1. 签署人只能有手写签名、时间类型、印章类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
+  /** 流程签署人列表，其中结构体的ApproverType必传。若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。若为子客企业签署方则需传OpenId、OrganizationOpenId，其他可不传。注:`1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
   FlowApproverInfos?: FlowApproverInfo[];
   /** 用户信息，暂未开放 */
   Operator?: UserInfo;

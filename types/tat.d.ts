@@ -44,6 +44,8 @@ declare interface Command {
   DefaultParameters?: string;
   /** 自定义参数的默认取值。 */
   DefaultParameterConfs?: DefaultParameterConf[] | null;
+  /** 命令关联的场景 */
+  Scenes?: string[] | null;
   /** 命令的结构化描述。公共命令有值，用户命令为空字符串。 */
   FormattedDescription?: string;
   /** 命令创建者。TAT 代表公共命令，USER 代表个人命令。 */
