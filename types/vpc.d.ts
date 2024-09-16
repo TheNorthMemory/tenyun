@@ -3099,7 +3099,7 @@ declare interface AssociateNetworkAclSubnetsResponse {
 }
 
 declare interface AssociateNetworkInterfaceSecurityGroupsRequest {
-  /** 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。 */
+  /** 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。本接口不支持主网卡绑定安全组。 */
   NetworkInterfaceIds: string[];
   /** 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。 */
   SecurityGroupIds: string[];
@@ -6869,9 +6869,9 @@ declare interface EnableGatewayFlowMonitorResponse {
 declare interface EnableRoutesRequest {
   /** 路由表唯一ID。 */
   RouteTableId: string;
-  /** 路由策略ID。不能和RouteItemIds同时使用，但至少输入一个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。 */
+  /** 路由策略ID。不能和RouteItemIds同时使用，但至少输入一个。单次处理上限100个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。 */
   RouteIds?: number[];
-  /** 路由策略唯一ID。不能和RouteIds同时使用，但至少输入一个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。 */
+  /** 路由策略唯一ID。不能和RouteIds同时使用，但至少输入一个。单次处理上限100个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。 */
   RouteItemIds?: string[];
 }
 

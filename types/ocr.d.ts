@@ -2774,6 +2774,8 @@ declare interface BizLicenseOCRResponse {
   SerialNumber?: string;
   /** 登记机关 */
   RegistrationAuthority?: string;
+  /** 是否是电子营业执照。0为不是，1为是。 */
+  Electronic?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

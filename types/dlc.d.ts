@@ -4485,13 +4485,13 @@ declare interface QueryResultRequest {
 
 declare interface QueryResultResponse {
   /** 任务Id */
-  TaskId: string;
+  TaskId?: string;
   /** 结果数据 */
-  ResultSet: string;
+  ResultSet?: string;
   /** schema */
-  ResultSchema: Column[];
+  ResultSchema?: Column[];
   /** 分页信息 */
-  NextToken: string | null;
+  NextToken?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

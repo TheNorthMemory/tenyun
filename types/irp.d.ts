@@ -337,11 +337,13 @@ declare interface FeedRecommendRequest {
   ItemCnt?: number;
   /** 当场景是相关推荐时该值必填，场景是非相关推荐时该值无效 */
   CurrentItemId?: string;
+  /** 扩展字段，json字符串，需要base64加密 */
+  Extension?: string;
 }
 
 declare interface FeedRecommendResponse {
-  /** 推荐返回的内容信息列表 */
-  DataList: RecItemData[];
+  /** 推荐返回的内容信息列表，返回结果已按策略规则做好了排序 */
+  DataList?: RecItemData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

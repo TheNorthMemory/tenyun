@@ -158,6 +158,8 @@ declare interface Context {
   Content?: string | null;
   /** 文档信息 */
   FileInfos?: MsgFileInfo[] | null;
+  /** 回复方式，15：澄清确认回复 */
+  ReplyMethod?: number | null;
 }
 
 /** 坐标 */
@@ -601,7 +603,7 @@ declare interface MsgRecord {
   /** 是否大模型 */
   IsLlmGenerated?: boolean;
   /** 图片链接，可公有读 */
-  ImageUrls?: string[];
+  ImageUrls?: string[] | null;
   /** 当次 token 统计信息 */
   TokenStat?: TokenStat | null;
   /** 回复方式1:大模型直接回复;2:保守回复, 未知问题回复;3:拒答问题回复;4:敏感回复;5:问答对直接回复, 已采纳问答对优先回复;6:欢迎语回复;7:并发超限回复;8:全局干预知识;9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;10:任务流程答案回复;11:搜索引擎回复;12:知识润色后回复;13:图片理解回复;14:实时文档回复; */
@@ -612,6 +614,8 @@ declare interface MsgRecord {
   TaskFlow?: TaskFlowInfo | null;
   /** 用户传入的文件信息 */
   FileInfos?: FileInfo[] | null;
+  /** 参考来源引用位置信息 */
+  QuoteInfos?: QuoteInfo[] | null;
 }
 
 /** 聊天详情Refer */
@@ -740,6 +744,14 @@ declare interface QAQuery {
   QueryAnswer?: string;
 }
 
+/** 搜索引擎参考来源索引 */
+declare interface QuoteInfo {
+  /** 参考来源位置 */
+  Position?: number | null;
+  /** 参考来源索引顺序 */
+  Index?: string | null;
+}
+
 /** ReconstructDocument配置选项 */
 declare interface ReconstructDocumentConfig {
   /** 生成的Markdown中是否嵌入图片 */
@@ -774,6 +786,12 @@ declare interface ReferDetail {
   Highlights?: Highlight[] | null;
   /** 原始内容 */
   OrgData?: string | null;
+  /** 页码信息 */
+  PageInfos?: number[] | null;
+  /** sheet信息 */
+  SheetInfos?: string[] | null;
+  /** 文档ID */
+  DocBizId?: string | null;
 }
 
 /** 发布拒答 */
@@ -1907,7 +1925,7 @@ declare interface GetMsgRecordRequest {
   SessionId: string;
   /** 最后一条记录ID */
   LastRecordId?: string;
-  /** 应用AppKey */
+  /** 应用AppKey, 当Type=5[API访客]时, 该字段必填 */
   BotAppKey?: string;
   /** 场景, 体验: 1; 正式: 2 */
   Scene?: number;

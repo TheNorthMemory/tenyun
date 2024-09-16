@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 254+ 款产品，11666+ 服务数</summary>
+<details><summary>共计 254+ 款产品，11668+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -149,13 +149,13 @@ cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/
 cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-11-23(2) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(16) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(43) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(114) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(115) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
 cim |  | 2019-03-18(1) |
 cis |  | 2018-04-08(7) |
-ckafka | [消息队列 CKafka 版](https://cloud.tencent.com/document/product/597) | 2019-08-19(84) |
+ckafka | [消息队列 CKafka 版](https://cloud.tencent.com/document/product/597) | 2019-08-19(85) |
 clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(86) |
 cloudapp | [云应用](https://cloud.tencent.com/document/product/1689) | 2022-05-30(1) |
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |

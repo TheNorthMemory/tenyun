@@ -171,6 +171,8 @@ declare interface DescribeDBSecurityGroupsResponse {
 }
 
 declare interface DescribeInstanceNodesRequest {
+  /** 实例ID。 */
+  InstanceId: string;
   /** limit */
   Limit?: number;
   /** offset */
@@ -258,7 +260,7 @@ declare interface Vdb {
   /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 实例pod列表（仅返回 pod 名称） {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
-  DescribeInstanceNodes(data?: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
+  DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
   /** 查询实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */

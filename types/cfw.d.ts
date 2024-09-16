@@ -448,6 +448,80 @@ declare interface EdgeIpSwitch {
   SwitchMode?: number;
 }
 
+/** 企业安全组自动化任务信息 */
+declare interface EnterpriseSecurityGroupRuleBetaInfo {
+  /** 任务id */
+  TaskId?: number | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 时间 */
+  LastTime?: string | null;
+}
+
+/** 企业安全组规则列表信息 */
+declare interface EnterpriseSecurityGroupRuleRuleInfo {
+  /** 排序 */
+  OrderIndex?: number | null;
+  /** 主键id */
+  RuleUuid?: number | null;
+  /** 规则uuid */
+  Uuid?: string | null;
+  /** 源规则内容 */
+  SourceId?: string | null;
+  /** 源规则类型 */
+  SourceType?: number | null;
+  /** 目的规则内容 */
+  TargetId?: string | null;
+  /** 目的规则类型 */
+  TargetType?: number | null;
+  /** 协议名称 */
+  Protocol?: string | null;
+  /** 端口 */
+  Port?: string | null;
+  /** 策略，1阻断，2放行 */
+  Strategy?: number | null;
+  /** 启用状态 ，0未开启，1开启 */
+  Status?: number | null;
+  /** 描述 */
+  Detail?: string | null;
+  /** 标签 */
+  AclTags?: string | null;
+  /** 是否最新一次改动的规则,0否，1是 */
+  IsNew?: number | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 是否延迟下发 */
+  IsDelay?: number | null;
+  /** 服务模版id */
+  ServiceTemplateId?: string | null;
+  /** 源资产名称 */
+  SouInstanceName?: string | null;
+  /** 源资产公网ip */
+  SouPublicIp?: string | null;
+  /** 源资产内网ip */
+  SouPrivateIp?: string | null;
+  /** 源资产网段信息 */
+  SouCidr?: string | null;
+  /** 源模版名称 */
+  SouParameterName?: string | null;
+  /** 目的资产名称 */
+  InstanceName?: string | null;
+  /** 目的资产公网ip */
+  PublicIp?: string | null;
+  /** 目的资产内网ip */
+  PrivateIp?: string | null;
+  /** 目的资产网段信息 */
+  Cidr?: string | null;
+  /** 目的模版名称 */
+  ParameterName?: string | null;
+  /** 端口模版名称 */
+  ProtocolPortName?: string | null;
+  /** 自动化任务任务信息 */
+  BetaList?: EnterpriseSecurityGroupRuleBetaInfo[] | null;
+  /** 规则id */
+  Id?: number | null;
+}
+
 /** 防火墙网段信息 */
 declare interface FwCidrInfo {
   /** 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义 */
@@ -2244,6 +2318,36 @@ declare interface DescribeEnterpriseSGRuleProgressResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEnterpriseSecurityGroupRuleListRequest {
+  /** 分页每页数量 */
+  Limit: number;
+  /** 分页当前页 */
+  Offset: number;
+  /** 启用状态 1启用 0 未启用 */
+  Status?: string;
+  /** 地域 */
+  Area?: string;
+  /** 规则下发方式筛选 1 新规则和延迟下发 2 仅看新规则 */
+  Filter?: number;
+  /** 查询条件 */
+  SearchValue?: string;
+  /** 查询条件新 */
+  SearchFilters?: CommonFilter[];
+}
+
+declare interface DescribeEnterpriseSecurityGroupRuleListResponse {
+  /** 查询结果总数 */
+  Total?: number;
+  /** 规则总数 */
+  AllTotal?: number;
+  /** 规则列表 */
+  Data?: EnterpriseSecurityGroupRuleRuleInfo[];
+  /** 规则整体启用状态 */
+  Enable?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnterpriseSecurityGroupRuleRequest {
   /** 分页查询时，显示的当前页的页码。默认值为1。 */
   PageNo: string;
@@ -3651,6 +3755,8 @@ declare interface Cfw {
   DescribeEnterpriseSGRuleProgress(data?: DescribeEnterpriseSGRuleProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSGRuleProgressResponse>;
   /** 查询新企业安全组规则 {@link DescribeEnterpriseSecurityGroupRuleRequest} {@link DescribeEnterpriseSecurityGroupRuleResponse} */
   DescribeEnterpriseSecurityGroupRule(data: DescribeEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSecurityGroupRuleResponse>;
+  /** 查询新企业安全组规则列表 {@link DescribeEnterpriseSecurityGroupRuleListRequest} {@link DescribeEnterpriseSecurityGroupRuleListResponse} */
+  DescribeEnterpriseSecurityGroupRuleList(data: DescribeEnterpriseSecurityGroupRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSecurityGroupRuleListResponse>;
   /** 串行防火墙开关列表 {@link DescribeFwEdgeIpsRequest} {@link DescribeFwEdgeIpsResponse} */
   DescribeFwEdgeIps(data?: DescribeFwEdgeIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwEdgeIpsResponse>;
   /** 获取租户所有VPC防火墙(组)及VPC防火墙实例卡片信息 {@link DescribeFwGroupInstanceInfoRequest} {@link DescribeFwGroupInstanceInfoResponse} */

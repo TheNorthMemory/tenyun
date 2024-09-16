@@ -158,8 +158,10 @@ declare interface NFOption {
   Report?: boolean | null;
   /** Resume。 */
   Resume?: boolean | null;
-  /** Nextflow引擎版本，取值范围：- 22.10.4- 22.10.8 - 23.10.1 */
+  /** Nextflow引擎版本，取值范围：- 22.10.7- 23.10.1 */
   NFVersion?: string | null;
+  /** 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。 */
+  LaunchDir?: string | null;
 }
 
 /** 云资源ID。 */
@@ -769,7 +771,7 @@ declare interface RunApplicationRequest {
   Option?: RunOption;
   /** Nextflow运行选项。 */
   NFOption?: NFOption;
-  /** 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。 */
+  /** 工作目录，当前仅支持Nextflow。可填写指定缓存卷内的绝对路径或者COS路径，不填使用默认缓存卷内的默认路径。如果使用COS路径，NFOption中LaunchDir需填写指定缓存卷内的绝对路径作为启动路径。 */
   WorkDir?: string;
   /** 访问模式，不填默认私有。取值范围- PRIVATE：私有应用- PUBLIC：公共应用 */
   AccessMode?: string;

@@ -3838,6 +3838,26 @@ declare interface FetchMessageListByOffsetResponse {
   RequestId?: string;
 }
 
+declare interface FetchMessageListByTimestampRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 主题名 */
+  Topic: string;
+  /** 分区id */
+  Partition?: number;
+  /** 查询开始时间，13位时间戳 */
+  StartTime?: number;
+  /** 最大查询条数，默认20，最大20 */
+  SinglePartitionRecordNumber?: number;
+}
+
+declare interface FetchMessageListByTimestampResponse {
+  /** 返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口 */
+  Result?: ConsumerRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GroupInfoResponse {
   /** 错误码，正常为0 */
   ErrorCode?: string;
@@ -4547,6 +4567,8 @@ declare interface Ckafka {
   FetchMessageByOffset(data: FetchMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageByOffsetResponse>;
   /** 根据位点查询消息列表 {@link FetchMessageListByOffsetRequest} {@link FetchMessageListByOffsetResponse} */
   FetchMessageListByOffset(data: FetchMessageListByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByOffsetResponse>;
+  /** 根据时间戳查询消息列表 {@link FetchMessageListByTimestampRequest} {@link FetchMessageListByTimestampResponse} */
+  FetchMessageListByTimestamp(data: FetchMessageListByTimestampRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByTimestampResponse>;
   /** Ckafka询价 {@link InquireCkafkaPriceRequest} {@link InquireCkafkaPriceResponse} */
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
   /** 按量实例缩容 {@link InstanceScalingDownRequest} {@link InstanceScalingDownResponse} */
