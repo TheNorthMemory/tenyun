@@ -987,6 +987,8 @@ declare namespace V20180525 {
     RuntimeVersion?: string | null;
     /** 集群当前etcd数量 */
     ClusterEtcdNodeNum?: number | null;
+    /** 本地专用集群Id */
+    CdcId?: string | null;
   }
 
   /** 集群高级配置 */
@@ -1226,7 +1228,7 @@ declare namespace V20180525 {
   /** 集群网络相关的参数 */
   interface ClusterNetworkSettings {
     /** 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突 */
-    ClusterCIDR: string;
+    ClusterCIDR?: string;
     /** 是否忽略 ClusterCIDR 冲突错误, 默认不忽略 */
     IgnoreClusterCIDRConflict?: boolean;
     /** 集群中每个Node上最大的Pod数量(默认为256) */
@@ -1240,19 +1242,19 @@ declare namespace V20180525 {
     /** 网络插件是否启用CNI(默认开启) */
     Cni?: boolean;
     /** service的网络模式，当前参数只适用于ipvs+bpf模式 */
-    KubeProxyMode: string | null;
+    KubeProxyMode?: string | null;
     /** 用于分配service的IP range，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突 */
-    ServiceCIDR: string | null;
+    ServiceCIDR?: string | null;
     /** 集群关联的容器子网 */
-    Subnets: string[] | null;
+    Subnets?: string[] | null;
     /** 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略 */
-    IgnoreServiceCIDRConflict: boolean | null;
+    IgnoreServiceCIDRConflict?: boolean | null;
     /** 集群VPC-CNI模式是否为非双栈集群，默认false，非双栈。 */
-    IsDualStack: boolean | null;
+    IsDualStack?: boolean | null;
     /** 用于分配service的IP range，由系统自动分配 */
-    Ipv6ServiceCIDR: string | null;
+    Ipv6ServiceCIDR?: string | null;
     /** 集群Cilium Mode配置- clusterIP */
-    CiliumMode: string | null;
+    CiliumMode?: string | null;
   }
 
   /** 集群属性 */
@@ -2281,6 +2283,54 @@ declare namespace V20180525 {
     AutoCreateClientId?: string[] | null;
     /** 创建PodIdentityWebhook组件 */
     AutoInstallPodIdentityWebhookAddon?: boolean | null;
+  }
+
+  /** 策略实例信息 */
+  interface OpenConstraintInfo {
+    /** 策略实例名称 */
+    Name?: string | null;
+    /** 策略实例关联事件数 */
+    EventNums?: number | null;
+    /** 实例yaml详情base64编码 */
+    YamlDetail?: string | null;
+  }
+
+  /** opa策略信息 */
+  interface OpenPolicyInfo {
+    /** 策略分类：cluster集群策略、node节点策略、namespace命名空间策略、configuration配置相关策略、compute计算资源策略、storage存储资源策略、network网络资源策略 */
+    PolicyCategory?: string | null;
+    /** 策略中文名称 */
+    PolicyName?: string | null;
+    /** 策略描述 */
+    PolicyDesc?: string | null;
+    /** 策略运行模式：dryrun空跑不生效，deny拦截生效 */
+    EnforcementAction?: string | null;
+    /** 关联的事件数量(最近7d) */
+    EventNums?: number | null;
+    /** 策略英文名称 */
+    Name?: string | null;
+    /** 策略模版类型 */
+    Kind?: string | null;
+    /** 策略开关状态：open打开，close关闭 */
+    EnabledStatus?: string | null;
+    /** 策略的实例的yaml示例base64编码 */
+    ConstraintYamlExample?: string | null;
+    /** 策略关联的实例列表 */
+    OpenConstraintInfoList?: OpenConstraintInfo[] | null;
+  }
+
+  /** opa策略开关 */
+  interface OpenPolicySwitch {
+    /** 策略运行模式：dryrun空跑不生效，deny拦截生效 */
+    EnforcementAction: string;
+    /** 策略英文名称 */
+    Name: string;
+    /** 策略模版类型 */
+    Kind: string;
+    /** 策略开关状态：open打开，close关闭 */
+    EnabledStatus?: string;
+    /** 策略关联的实例列表 */
+    OpenConstraintInfoList?: OpenConstraintInfo[];
   }
 
   /** 可选运行时 */
@@ -5483,8 +5533,10 @@ declare namespace V20180525 {
     Progress?: Step[] | null;
     /** 是否开启第三方节点公网连接支持 */
     EnabledPublicConnect?: boolean;
-    /** 公网连接地址 */
+    /** 注册节点公网版公网连接地址 */
     PublicConnectUrl?: string;
+    /** 注册节点公网版自定义域名 */
+    PublicCustomDomain?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5559,6 +5611,20 @@ declare namespace V20180525 {
   interface DescribeLogSwitchesResponse {
     /** 集群日志开关集合 */
     SwitchSet?: Switch[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeOpenPolicyListRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 策略分类 基线：baseline 优选：priority 可选：optional */
+    Category?: string;
+  }
+
+  interface DescribeOpenPolicyListResponse {
+    /** 策略信息列表 */
+    OpenPolicyInfoList?: OpenPolicyInfo[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6773,6 +6839,20 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyOpenPolicyListRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 修改的策略列表，目前仅支持修改EnforcementAction字段 */
+    OpenPolicyInfoList?: OpenPolicySwitch[];
+    /** 策略分类 基线：baseline 优选：priority 可选：optional */
+    Category?: string;
+  }
+
+  interface ModifyOpenPolicyListResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyPrometheusAgentExternalLabelsRequest {
     /** 实例ID */
     InstanceId: string;
@@ -7579,6 +7659,8 @@ declare interface Tke {
   DescribeImages(data: V20180525.DescribeImagesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeImagesResponse>;
   /** 查询集群日志开关列表 {@link V20180525.DescribeLogSwitchesRequest} {@link V20180525.DescribeLogSwitchesResponse} */
   DescribeLogSwitches(data: V20180525.DescribeLogSwitchesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogSwitchesResponse>;
+  /** 查询opa策略列表 {@link V20180525.DescribeOpenPolicyListRequest} {@link V20180525.DescribeOpenPolicyListResponse} */
+  DescribeOpenPolicyList(data: V20180525.DescribeOpenPolicyListRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeOpenPolicyListResponse>;
   /** 查询超级节点上正在运行中Pod的计费信息 {@link V20180525.DescribePodChargeInfoRequest} {@link V20180525.DescribePodChargeInfoResponse} */
   DescribePodChargeInfo(data: V20180525.DescribePodChargeInfoRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribePodChargeInfoResponse>;
   /** 查询Pod 抵扣率 {@link V20180525.DescribePodDeductionRateRequest} {@link V20180525.DescribePodDeductionRateResponse} */
@@ -7717,6 +7799,8 @@ declare interface Tke {
   ModifyNodePoolDesiredCapacityAboutAsg(data: V20180525.ModifyNodePoolDesiredCapacityAboutAsgRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyNodePoolDesiredCapacityAboutAsgResponse>;
   /** 修改节点池的机型配置 {@link V20180525.ModifyNodePoolInstanceTypesRequest} {@link V20180525.ModifyNodePoolInstanceTypesResponse} */
   ModifyNodePoolInstanceTypes(data: V20180525.ModifyNodePoolInstanceTypesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyNodePoolInstanceTypesResponse>;
+  /** 批量修改opa策略 {@link V20180525.ModifyOpenPolicyListRequest} {@link V20180525.ModifyOpenPolicyListResponse} */
+  ModifyOpenPolicyList(data: V20180525.ModifyOpenPolicyListRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyOpenPolicyListResponse>;
   /** 修改被关联集群的external labels {@link V20180525.ModifyPrometheusAgentExternalLabelsRequest} {@link V20180525.ModifyPrometheusAgentExternalLabelsResponse} */
   ModifyPrometheusAgentExternalLabels(data: V20180525.ModifyPrometheusAgentExternalLabelsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusAgentExternalLabelsResponse>;
   /** 修改2.0实例告警策略 {@link V20180525.ModifyPrometheusAlertPolicyRequest} {@link V20180525.ModifyPrometheusAlertPolicyResponse} */

@@ -4009,6 +4009,8 @@ declare interface CreateVpcEndPointRequest {
   EndPointVip?: string;
   /** 安全组ID。 */
   SecurityGroupId?: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateVpcEndPointResponse {

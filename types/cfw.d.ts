@@ -492,7 +492,7 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   Region?: string | null;
   /** 是否延迟下发 */
   IsDelay?: number | null;
-  /** 服务模版id */
+  /** 服务模板id */
   ServiceTemplateId?: string | null;
   /** 源资产名称 */
   SouInstanceName?: string | null;
@@ -502,7 +502,7 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   SouPrivateIp?: string | null;
   /** 源资产网段信息 */
   SouCidr?: string | null;
-  /** 源模版名称 */
+  /** 源模板名称 */
   SouParameterName?: string | null;
   /** 目的资产名称 */
   InstanceName?: string | null;
@@ -512,9 +512,9 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   PrivateIp?: string | null;
   /** 目的资产网段信息 */
   Cidr?: string | null;
-  /** 目的模版名称 */
+  /** 目的模板名称 */
   ParameterName?: string | null;
-  /** 端口模版名称 */
+  /** 端口模板名称 */
   ProtocolPortName?: string | null;
   /** 自动化任务任务信息 */
   BetaList?: EnterpriseSecurityGroupRuleBetaInfo[] | null;
