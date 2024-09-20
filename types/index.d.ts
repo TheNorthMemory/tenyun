@@ -154,6 +154,7 @@ import Mna, { Versions as MnaVersions } from "./mna";
 import Mongodb, { Versions as MongodbVersions } from "./mongodb";
 import Monitor, { Versions as MonitorVersions } from "./monitor";
 import Mps, { Versions as MpsVersions } from "./mps";
+import Mqtt, { Versions as MqttVersions } from "./mqtt";
 import Mrs, { Versions as MrsVersions } from "./mrs";
 import Ms, { Versions as MsVersions } from "./ms";
 import Msp, { Versions as MspVersions } from "./msp";
@@ -412,6 +413,7 @@ export declare type SERVICE_VERSIONS = {
   mongodb: MongodbVersions,
   monitor: MonitorVersions,
   mps: MpsVersions,
+  mqtt: MqttVersions,
   mrs: MrsVersions,
   ms: MsVersions,
   msp: MspVersions,
@@ -835,6 +837,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   monitor: Monitor,
   /** {@link Mps 媒体处理} */
   mps: Mps,
+  /** {@link Mqtt 消息队列 MQTT 版} */
+  mqtt: Mqtt,
   /** {@link Mrs 医疗报告结构化} */
   mrs: Mrs,
   /** {@link Ms 移动应用安全} */

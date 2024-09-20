@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 254+ 款产品，11670+ 服务数</summary>
+<details><summary>共计 255+ 款产品，11672+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -250,6 +250,7 @@ mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 20
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(49) | 2018-04-08(13) |
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(157) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(104) |
+mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(2) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
