@@ -1920,7 +1920,7 @@ declare interface BashEventsInfoNew {
   DetectBy?: number | null;
 }
 
-/** 高位命令策略 */
+/** 高危命令策略 */
 declare interface BashPolicy {
   /** 策略名称 */
   Name: string;
@@ -1930,7 +1930,7 @@ declare interface BashPolicy {
   White: number;
   /** 0:告警 1:白名单 2:拦截 */
   BashAction: number;
-  /** 正则表达式 */
+  /** 正则表达式 base64 加密,该字段废弃,如果写入则自动替换为Rules.Process.CmdLine */
   Rule: string;
   /** 危险等级(0:无，1: 高危 2:中危 3: 低危) */
   Level: number;
@@ -1954,6 +1954,8 @@ declare interface BashPolicy {
   ModifyTime?: string;
   /** 老版本兼容可能会用到 */
   Uuids?: string[];
+  /** 规则表达式 */
+  Rules?: PolicyRules | null;
 }
 
 /** 高危命令规则 */
@@ -2200,6 +2202,14 @@ declare interface CloudProtectService {
   ServiceName?: string;
   /** 购买时间 */
   BeginTime?: string;
+}
+
+/** 命令行内容 */
+declare interface CommandLine {
+  /** 路径,需要base64加密 */
+  Exe?: string | null;
+  /** 命令行,需要base64加密 */
+  Cmdline?: string | null;
 }
 
 /** 组件统计数据。 */
@@ -2926,6 +2936,16 @@ declare interface JavaMemShellInfo {
   MachineExtraInfo?: MachineExtraInfo | null;
   /** 服务器uuid */
   Uuid?: string | null;
+  /** 类名 */
+  ClassName?: string | null;
+  /** 父类名 */
+  SuperClassName?: string | null;
+  /** 继承的接口 */
+  Interfaces?: string | null;
+  /** 注释 */
+  Annotations?: string | null;
+  /** 所属的类加载器 */
+  LoaderClassName?: string | null;
 }
 
 /** Java内存马插件信息 */
@@ -3742,6 +3762,16 @@ declare interface Place {
   CountryId: number;
   /** 位置名称 */
   Location?: string;
+}
+
+/** 策略规则表达式 */
+declare interface PolicyRules {
+  /** 进程 */
+  Process?: CommandLine | null;
+  /** 父进程 */
+  PProcess?: CommandLine | null;
+  /** 祖先进程 */
+  AProcess?: CommandLine | null;
 }
 
 /** 本地提权数据 */
@@ -5885,23 +5915,25 @@ declare interface ChangeStrategyEnableStatusResponse {
 }
 
 declare interface CheckBashPolicyParamsRequest {
-  /** 校验内容 Name或Rule ，两个都要校验时逗号分割 */
+  /** 校验内容字段,如果需要检测多个字段时,用逗号分割Name 策略名称Process 进程Name PProcess 父进程Name AProcess 祖先进程 */
   CheckField: string;
   /** 在事件列表中新增白名时需要提交事件ID */
   EventId?: number;
   /** 填入的规则名称 */
   Name?: string;
-  /** 用户填入的正则表达式："正则表达式" 需与 "提交EventId对应的命令内容" 相匹配 */
+  /** 该字段不在维护,如果填入该参数,自动替换到Rules.Process */
   Rule?: string;
   /** 编辑时传的规则id */
   Id?: number;
+  /** 规则表达式 */
+  Rules?: PolicyRules;
 }
 
 declare interface CheckBashPolicyParamsResponse {
   /** 0=校验通过 1=规则名称校验不通过 2=正则表达式校验不通过 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 校验信息 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8613,9 +8645,9 @@ declare interface DescribeBashPoliciesRequest {
 
 declare interface DescribeBashPoliciesResponse {
   /** 列表内容 */
-  List: BashPolicy[];
+  List?: BashPolicy[];
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9259,7 +9291,7 @@ declare interface DescribeJavaMemShellInfoResponse {
 }
 
 declare interface DescribeJavaMemShellListRequest {
-  /** 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段 */
+  /** 过滤条件：InstanceID、IP、MachineName主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段 */
   Filters?: Filters[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -9269,9 +9301,9 @@ declare interface DescribeJavaMemShellListRequest {
 
 declare interface DescribeJavaMemShellListResponse {
   /** 事件列表 */
-  List: JavaMemShellInfo[] | null;
+  List?: JavaMemShellInfo[] | null;
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13643,10 +13675,12 @@ declare interface ModifyJavaMemShellPluginSwitchResponse {
 }
 
 declare interface ModifyJavaMemShellsStatusRequest {
-  /** 事件Id数组 */
-  Ids: number[];
   /** 目标处理状态： 0 - 待处理 1 - 已加白 2 - 已删除 3 - 已忽略 4 - 已手动处理 */
   Status: number;
+  /** 事件Id数组 */
+  Ids?: number[];
+  /** 是否更新全部，只支持忽略、已处理、删除 */
+  UpdateAll?: boolean;
 }
 
 declare interface ModifyJavaMemShellsStatusResponse {

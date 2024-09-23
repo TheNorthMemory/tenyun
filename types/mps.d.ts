@@ -3748,6 +3748,8 @@ declare interface ModifyOutputInfo {
   MaxConcurrent?: number;
   /** 绑定的安全组 ID。 仅支持关联一组安全组。 */
   SecurityGroupIds?: string[];
+  /** 可用区 */
+  Zones?: string[];
 }
 
 /** 媒体处理任务中的马赛克参数类型 */
@@ -5000,7 +5002,7 @@ declare interface VideoTemplateInfoForUpdate {
   Gop?: number | null;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。 */
   FillType?: string | null;
-  /** 视频恒定码率控制因子。取值范围为[0, 51]，填0表示禁用该参数。如果没有特殊需求，不建议指定该参数。 */
+  /** 视频恒定码率控制因子。取值范围为[0, 51]，填0表示禁用该参数。 如果没有特殊需求，不建议指定该参数。 */
   Vcrf?: number | null;
   /** 内容自适应编码。可选值：0：不开启1：开启默认值: 0. 当开启该参数时，将会自适应生成多个不同分辨率，不同码率的码流， 其中VideoTemplate的宽和高为多个码流中的最大分辨率，VideoTemplate中的码率为多个码流中的最高码率， VideoTemplate中的vcrf为多个码流中的最高质量。 当不设置分辨率、码率和vcrf时， ContentAdaptStream 参数生成的最高分辨率为视频源的分辨率，视频质量为接近vmaf95分。 若要开启该参数或了解计费细节, 请联系您的腾讯云商务。 */
   ContentAdaptStream?: number | null;
@@ -5957,7 +5959,7 @@ declare interface DescribeQualityControlTemplatesRequest {
   Offset?: number;
   /** 返回记录条数默认值：10；最大值：100。 */
   Limit?: number;
-  /** "Preset"：预设，Custom":客户魔板 */
+  /** "Preset"：预设，Custom":自定义模板 */
   Type?: string;
   /** 媒体质检模板标识过滤条件，长度限制：64 个字符。 */
   Name?: string;
@@ -7001,7 +7003,7 @@ declare interface ProcessLiveStreamResponse {
 declare interface ProcessMediaRequest {
   /** 媒体处理的文件输入信息。 */
   InputInfo: MediaInputInfo;
-  /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。 */
+  /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。注意：当InputInfo.Type为URL时，该参数是必填项 */
   OutputStorage?: TaskOutputStorage;
   /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
   OutputDir?: string;

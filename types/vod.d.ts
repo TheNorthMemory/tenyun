@@ -2145,7 +2145,7 @@ declare namespace V20180717 {
   interface EventContent {
     /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
     EventHandle?: string;
-    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
     EventType?: string;
     /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
     FileUploadEvent?: FileUploadTask | null;
@@ -2197,6 +2197,8 @@ declare namespace V20180717 {
     QualityEnhanceCompleteEvent?: QualityEnhanceTask | null;
     /** 媒体转推状态变化事件，当事件类型为 MediaCastStatusChanged 时有效。 */
     MediaCastStatusChangedEvent?: MediaCastEvent | null;
+    /** 剪辑固化完成事件，当事件类型为 PersistenceComplete 时有效。 */
+    PersistenceCompleteEvent?: PersistenceCompleteTask | null;
   }
 
   /** 提取版权水印任务。 */
@@ -3577,6 +3579,14 @@ declare namespace V20180717 {
     Codec?: string;
     /** 视频帧率，取值范围：[0, 60]，单位：Hz。默认值：0，表示和第一个视频轨的第一个视频片段的视频帧率一致。 */
     Fps?: number;
+  }
+
+  /** 剪辑固化任务信息。 */
+  interface PersistenceCompleteTask {
+    /** 固化生成的媒体 ID。 */
+    FileId?: string | null;
+    /** 剪辑固化的来源，有以下三种。SimpleHlsClip：来自简单 HLS 剪辑；FastEditMedia：来自快速媒体编辑；LiveRealTimeClip:来自直播即时剪辑。 */
+    PersistenceSource?: string | null;
   }
 
   /** 播放统计文件信息 */
@@ -7349,6 +7359,8 @@ declare namespace V20180717 {
     UploadMediaCompleteEventSwitch?: string;
     /** 是否接收 [视频删除完成](https://cloud.tencent.com/document/product/266/13434) 事件通知，"OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
     DeleteMediaCompleteEventSwitch?: string;
+    /** 是否接收剪辑固化完成事件通知，"OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
+    PersistenceCompleteEventSwitch?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -8582,6 +8594,8 @@ declare namespace V20180717 {
     UploadMediaCompleteEventSwitch?: string;
     /** 是否接收 [视频删除完成](https://cloud.tencent.com/document/product/266/13434) 事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
     DeleteMediaCompleteEventSwitch?: string;
+    /** 是否接收剪辑固化完成事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
+    PersistenceCompleteEventSwitch?: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }

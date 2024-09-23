@@ -64,6 +64,8 @@ declare interface InstanceInfo {
   EngineName?: string | null;
   /** 引擎版本。 */
   EngineVersion?: string | null;
+  /** api版本 */
+  ApiVersion?: string | null;
   /** 计费模式。 */
   PayMode?: number | null;
   /** 差异化扩展信息, json格式。 */

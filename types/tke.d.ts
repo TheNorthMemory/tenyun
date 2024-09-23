@@ -2346,19 +2346,19 @@ declare namespace V20180525 {
   /** 应用市场安装的Pending应用 */
   interface PendingRelease {
     /** 应用状态详情 */
-    Condition: string | null;
+    Condition?: string | null;
     /** 创建时间 */
-    CreatedTime: string | null;
+    CreatedTime?: string | null;
     /** 应用ID */
-    ID: string | null;
+    ID?: string | null;
     /** 应用名称 */
-    Name: string | null;
+    Name?: string | null;
     /** 应用命名空间 */
-    Namespace: string | null;
-    /** 应用状态 */
-    Status: string | null;
+    Namespace?: string | null;
+    /** 应用状态(参考helm的发布状态： unknown, deployed, uninstalled, superseded, failed, uninstalling, pending-install, pending-upgrade 或 pending-rollback) */
+    Status?: string | null;
     /** 更新时间 */
-    UpdatedTime: string | null;
+    UpdatedTime?: string | null;
   }
 
   /** Pod计费信息 */
@@ -4505,6 +4505,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DeleteLogConfigsRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 待删除采集规则名称，多个采集规则使用","分隔 */
+    LogConfigNames: string;
+    /** 集群集群类型, tke/eks 默认为 tke 集群 */
+    ClusterType?: string;
+  }
+
+  interface DeleteLogConfigsResponse {
+    /** 删除采集规则遇到错误时返回错误原因 */
+    Message?: string | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeletePrometheusAlertPolicyRequest {
     /** 实例id */
     InstanceId: string;
@@ -5597,6 +5613,30 @@ declare namespace V20180525 {
     TotalCount?: number | null;
     /** 镜像信息列表 */
     ImageInstanceSet?: ImageInstance[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeLogConfigsRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 当前集群类型支持tke、eks。默认为tke */
+    ClusterType?: string;
+    /** 按照采集规则名称查找，多个采集规则使用 "," 分隔。 */
+    LogConfigNames?: string;
+    /** 偏移量,默认0 */
+    Offset?: number;
+    /** 最大输出条数，默认20，最大为100 */
+    Limit?: number;
+  }
+
+  interface DescribeLogConfigsResponse {
+    /** 分页查找时返回采集规则总数 */
+    Total?: number | null;
+    /** 指定采集规则名称查找，部分失败时返回失败采集规则名称及最后一个失败原因 */
+    Message?: string | null;
+    /** 采集规则查询结果 */
+    LogConfigs?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7529,6 +7569,8 @@ declare interface Tke {
   DeleteEdgeClusterInstances(data: V20180525.DeleteEdgeClusterInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteEdgeClusterInstancesResponse>;
   /** 删除镜像缓存 {@link V20180525.DeleteImageCachesRequest} {@link V20180525.DeleteImageCachesResponse} */
   DeleteImageCaches(data: V20180525.DeleteImageCachesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteImageCachesResponse>;
+  /** 删除日志采集规则 {@link V20180525.DeleteLogConfigsRequest} {@link V20180525.DeleteLogConfigsResponse} */
+  DeleteLogConfigs(data: V20180525.DeleteLogConfigsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteLogConfigsResponse>;
   /** 删除2.0实例告警策略 {@link V20180525.DeletePrometheusAlertPolicyRequest} {@link V20180525.DeletePrometheusAlertPolicyResponse} */
   DeletePrometheusAlertPolicy(data: V20180525.DeletePrometheusAlertPolicyRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeletePrometheusAlertPolicyResponse>;
   /** 删除告警规则 {@link V20180525.DeletePrometheusAlertRuleRequest} {@link V20180525.DeletePrometheusAlertRuleResponse} */
@@ -7657,6 +7699,8 @@ declare interface Tke {
   DescribeImageCaches(data: V20180525.DescribeImageCachesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeImageCachesResponse>;
   /** 获取镜像信息 {@link V20180525.DescribeImagesRequest} {@link V20180525.DescribeImagesResponse} */
   DescribeImages(data: V20180525.DescribeImagesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeImagesResponse>;
+  /** 查询日志采集规则 {@link V20180525.DescribeLogConfigsRequest} {@link V20180525.DescribeLogConfigsResponse} */
+  DescribeLogConfigs(data: V20180525.DescribeLogConfigsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogConfigsResponse>;
   /** 查询集群日志开关列表 {@link V20180525.DescribeLogSwitchesRequest} {@link V20180525.DescribeLogSwitchesResponse} */
   DescribeLogSwitches(data: V20180525.DescribeLogSwitchesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogSwitchesResponse>;
   /** 查询opa策略列表 {@link V20180525.DescribeOpenPolicyListRequest} {@link V20180525.DescribeOpenPolicyListResponse} */

@@ -10753,7 +10753,7 @@ declare interface Tcss {
   DeleteComplianceAssetPolicySetFromWhitelist(data: DeleteComplianceAssetPolicySetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteComplianceAssetPolicySetFromWhitelistResponse>;
   /** 删除检测项+资产列表的白名单策略 {@link DeleteCompliancePolicyAssetSetFromWhitelistRequest} {@link DeleteCompliancePolicyAssetSetFromWhitelistResponse} */
   DeleteCompliancePolicyAssetSetFromWhitelist(data: DeleteCompliancePolicyAssetSetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyAssetSetFromWhitelistResponse>;
-  /** 安全合规取消忽略检测项列表 {@link DeleteCompliancePolicyItemFromWhitelistRequest} {@link DeleteCompliancePolicyItemFromWhitelistResponse} */
+  /** @deprecated 安全合规取消忽略检测项列表 {@link DeleteCompliancePolicyItemFromWhitelistRequest} {@link DeleteCompliancePolicyItemFromWhitelistResponse} */
   DeleteCompliancePolicyItemFromWhitelist(data: DeleteCompliancePolicyItemFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyItemFromWhitelistResponse>;
   /** 删除逃逸白名单 {@link DeleteEscapeWhiteListRequest} {@link DeleteEscapeWhiteListResponse} */
   DeleteEscapeWhiteList(data: DeleteEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEscapeWhiteListResponse>;

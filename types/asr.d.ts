@@ -156,6 +156,22 @@ declare interface TaskStatus {
   AudioDuration?: number | null;
 }
 
+/** 用户用量信息 */
+declare interface UsageByDateInfo {
+  /** 业务类型名称 */
+  BizName?: string | null;
+  /** 识别次数单位：次 */
+  Count?: number | null;
+  /** 识别时长单位：秒 */
+  Duration?: number | null;
+}
+
+/** 用户用量信息 */
+declare interface UsageByDateInfoData {
+  /** 用量信息列表 */
+  UsageByDateInfoList?: UsageByDateInfo[] | null;
+}
+
 /** 声纹组对比结果top数据 */
 declare interface VerifyTop {
   /** 相似度打分 */
@@ -542,6 +558,22 @@ declare interface GetModelInfoResponse {
   RequestId?: string;
 }
 
+declare interface GetUsageByDateRequest {
+  /** 需要查询的业务类型名字列表- asr_rt 实时识别- asr_rec 录音文件识别 */
+  BizNameList: string[];
+  /** 查询开始时间开始时间包含当天，支持 YYYY-MM-DD 日期以国内时区为准开始时间到结束时间需要在3个月以内 */
+  StartDate: string;
+  /** 查询结束时间结束时间包含当天，，支持 YYYY-MM-DD 日期以国内时区为准开始时间到结束时间需要在3个月以内 */
+  EndDate: string;
+}
+
+declare interface GetUsageByDateResponse {
+  /** 用量次数 */
+  Data?: UsageByDateInfoData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomizationRequest {
   /** 要修改的模型ID */
   ModelId: string;
@@ -841,6 +873,8 @@ declare interface Asr {
   GetCustomizationList(data?: GetCustomizationListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomizationListResponse>;
   /** 获取自学习模型信息 {@link GetModelInfoRequest} {@link GetModelInfoResponse} */
   GetModelInfo(data: GetModelInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelInfoResponse>;
+  /** 通过日期查询用量 {@link GetUsageByDateRequest} {@link GetUsageByDateResponse} */
+  GetUsageByDate(data: GetUsageByDateRequest, config?: AxiosRequestConfig): AxiosPromise<GetUsageByDateResponse>;
   /** 更新自学习模型 {@link ModifyCustomizationRequest} {@link ModifyCustomizationResponse} */
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
   /** 修改自学习模型状态 {@link ModifyCustomizationStateRequest} {@link ModifyCustomizationStateResponse} */

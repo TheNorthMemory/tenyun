@@ -324,6 +324,16 @@ declare interface InvokeAPI {
   FailMessage?: string | null;
 }
 
+/** 知识库容量饼图详情 */
+declare interface KnowledgeCapacityPieGraphDetail {
+  /** 应用名称 */
+  AppName?: string | null;
+  /** 应用使用的字符数 */
+  UsedCharSize?: string | null;
+  /** 应用占比 */
+  Proportion?: number | null;
+}
+
 /** 知识问答配置 */
 declare interface KnowledgeQaConfig {
   /** 欢迎语，200字符以内 */
@@ -922,6 +932,14 @@ declare interface SimilarQuestionModify {
   DeleteQuestions?: SimilarQuestion[];
 }
 
+/** 计费统计信息 */
+declare interface Stat {
+  /** x轴时间戳 */
+  X?: string | null;
+  /** y轴统计值 */
+  Y?: number | null;
+}
+
 /** 字符串KV信息 */
 declare interface StrValue {
   /** 名称 */
@@ -1430,6 +1448,84 @@ declare interface DescribeAttributeLabelResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCallStatsGraphRequest {
+  /** uin */
+  UinAccount?: string[];
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+  /** 子业务类型 */
+  SubBizType?: string;
+  /** 模型标识 */
+  ModelName?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 应用id列表 */
+  AppBizIds?: string[];
+}
+
+declare interface DescribeCallStatsGraphResponse {
+  /** 统计信息 */
+  List?: Stat[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConcurrencyUsageGraphRequest {
+  /** 模型标识 */
+  ModelName: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** uin */
+  UinAccount?: string[];
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+  /** 子业务类型 */
+  SubBizType?: string;
+  /** 应用id列表 */
+  AppBizIds?: string[];
+}
+
+declare interface DescribeConcurrencyUsageGraphResponse {
+  /** 统计信息 */
+  X?: string[];
+  /** 可用并发y轴坐标 */
+  AvailableY?: number[];
+  /** 成功调用并发y轴坐标 */
+  SuccessCallY?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConcurrencyUsageRequest {
+  /** 模型标识 */
+  ModelName: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 应用id列表 */
+  AppBizIds?: string[];
+}
+
+declare interface DescribeConcurrencyUsageResponse {
+  /** 可用并发数 */
+  AvailableConcurrency?: number;
+  /** 并发峰值 */
+  ConcurrencyPeak?: number;
+  /** 调用超可用次数 */
+  ExceedUsageTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCorpRequest {
 }
 
@@ -1498,6 +1594,32 @@ declare interface DescribeDocResponse {
   AttrRange?: number;
   /** 属性标签 */
   AttrLabels?: AttrLabel[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKnowledgeUsagePieGraphRequest {
+  /** 应用ID数组 */
+  AppBizIds?: string[];
+}
+
+declare interface DescribeKnowledgeUsagePieGraphResponse {
+  /** 所有应用已用的字符总数 */
+  AvailableCharSize?: string;
+  /** 应用饼图详情列表 */
+  List?: KnowledgeCapacityPieGraphDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKnowledgeUsageRequest {
+}
+
+declare interface DescribeKnowledgeUsageResponse {
+  /** 可用字符数 */
+  AvailableCharSize?: string;
+  /** 超量字符数 */
+  ExceedCharSize?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1632,6 +1754,32 @@ declare interface DescribeRobotBizIDByAppKeyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSearchStatsGraphRequest {
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+  /** uin列表 */
+  UinAccount?: string[];
+  /** 子业务类型 */
+  SubBizType?: string;
+  /** 模型标识 */
+  ModelName?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 应用id列表 */
+  AppBizIds?: string[];
+}
+
+declare interface DescribeSearchStatsGraphResponse {
+  /** 统计结果 */
+  List?: Stat[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSegmentsRequest {
   /** 应用ID */
   BotBizId: string;
@@ -1678,6 +1826,66 @@ declare interface DescribeStorageCredentialResponse {
   ImagePath?: string;
   /** 上传存储路径，到具体文件 */
   UploadPath?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTokenUsageGraphRequest {
+  /** 腾讯云主账号 */
+  UinAccount?: string[];
+  /** 知识引擎子业务类型: FileParse(文档解析)、Embedding、Rewrite(多轮改写)、 Concurrency(并发)、KnowledgeSummary(知识总结) KnowledgeQA(知识问答)、KnowledgeCapacity(知识库容量)、SearchEngine(搜索引擎) */
+  SubBizType?: string;
+  /** 模型标识 */
+  ModelName?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 应用id列表 */
+  AppBizIds?: string[];
+}
+
+declare interface DescribeTokenUsageGraphResponse {
+  /** 总消耗 */
+  Total?: Stat[];
+  /** 输入消耗 */
+  Input?: Stat[];
+  /** 输出消耗 */
+  Output?: Stat[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTokenUsageRequest {
+  /** 腾讯云主账号 */
+  UinAccount?: string[];
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+  /** 知识引擎子业务类型: FileParse(文档解析)、Embedding、Rewrite(多轮改写)、 Concurrency(并发)、KnowledgeSummary(知识总结) KnowledgeQA(知识问答)、KnowledgeCapacity(知识库容量)、SearchEngine(搜索引擎) */
+  SubBizType?: string;
+  /** 模型标识 */
+  ModelName?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 应用id列表 */
+  AppBizIds?: string[];
+}
+
+declare interface DescribeTokenUsageResponse {
+  /** 总token消耗量 */
+  TotalTokenUsage?: number;
+  /** 输入token消耗 */
+  InputTokenUsage?: number;
+  /** 输出token消耗 */
+  OutputTokenUsage?: number;
+  /** 接口调用次数 */
+  ApiCallStats?: number;
+  /** 搜索服务调用次数 */
+  SearchUsage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2849,10 +3057,20 @@ declare interface Lke {
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
   /** 查询属性标签详情 {@link DescribeAttributeLabelRequest} {@link DescribeAttributeLabelResponse} */
   DescribeAttributeLabel(data: DescribeAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttributeLabelResponse>;
+  /** 接口调用折线图 {@link DescribeCallStatsGraphRequest} {@link DescribeCallStatsGraphResponse} */
+  DescribeCallStatsGraph(data?: DescribeCallStatsGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallStatsGraphResponse>;
+  /** 并发调用 {@link DescribeConcurrencyUsageRequest} {@link DescribeConcurrencyUsageResponse} */
+  DescribeConcurrencyUsage(data: DescribeConcurrencyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyUsageResponse>;
+  /** 并发调用折线图 {@link DescribeConcurrencyUsageGraphRequest} {@link DescribeConcurrencyUsageGraphResponse} */
+  DescribeConcurrencyUsageGraph(data: DescribeConcurrencyUsageGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyUsageGraphResponse>;
   /** 企业详情 {@link DescribeCorpRequest} {@link DescribeCorpResponse} */
   DescribeCorp(data?: DescribeCorpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCorpResponse>;
   /** 文档详情 {@link DescribeDocRequest} {@link DescribeDocResponse} */
   DescribeDoc(data: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
+  /** 查询知识库用量 {@link DescribeKnowledgeUsageRequest} {@link DescribeKnowledgeUsageResponse} */
+  DescribeKnowledgeUsage(data?: DescribeKnowledgeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeUsageResponse>;
+  /** 查询知识库容量饼图 {@link DescribeKnowledgeUsagePieGraphRequest} {@link DescribeKnowledgeUsagePieGraphResponse} */
+  DescribeKnowledgeUsagePieGraph(data?: DescribeKnowledgeUsagePieGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeUsagePieGraphResponse>;
   /** 问答详情 {@link DescribeQARequest} {@link DescribeQAResponse} */
   DescribeQA(data: DescribeQARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQAResponse>;
   /** 获取来源详情列表 {@link DescribeReferRequest} {@link DescribeReferResponse} */
@@ -2863,10 +3081,16 @@ declare interface Lke {
   DescribeReleaseInfo(data: DescribeReleaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseInfoResponse>;
   /** 通过appKey获取应用业务ID {@link DescribeRobotBizIDByAppKeyRequest} {@link DescribeRobotBizIDByAppKeyResponse} */
   DescribeRobotBizIDByAppKey(data: DescribeRobotBizIDByAppKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRobotBizIDByAppKeyResponse>;
+  /** 查询搜索服务调用折线图 {@link DescribeSearchStatsGraphRequest} {@link DescribeSearchStatsGraphResponse} */
+  DescribeSearchStatsGraph(data?: DescribeSearchStatsGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchStatsGraphResponse>;
   /** 获取片段详情 {@link DescribeSegmentsRequest} {@link DescribeSegmentsResponse} */
   DescribeSegments(data: DescribeSegmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSegmentsResponse>;
   /** 获取文件上传临时密钥 {@link DescribeStorageCredentialRequest} {@link DescribeStorageCredentialResponse} */
   DescribeStorageCredential(data?: DescribeStorageCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageCredentialResponse>;
+  /** 接口调用token详情 {@link DescribeTokenUsageRequest} {@link DescribeTokenUsageResponse} */
+  DescribeTokenUsage(data?: DescribeTokenUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenUsageResponse>;
+  /** 接口调用token折线图 {@link DescribeTokenUsageGraphRequest} {@link DescribeTokenUsageGraphResponse} */
+  DescribeTokenUsageGraph(data?: DescribeTokenUsageGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenUsageGraphResponse>;
   /** 获取不满意回复上下文 {@link DescribeUnsatisfiedReplyContextRequest} {@link DescribeUnsatisfiedReplyContextResponse} */
   DescribeUnsatisfiedReplyContext(data: DescribeUnsatisfiedReplyContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnsatisfiedReplyContextResponse>;
   /** 导出属性标签 {@link ExportAttributeLabelRequest} {@link ExportAttributeLabelResponse} */

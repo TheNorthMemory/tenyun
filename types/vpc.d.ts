@@ -78,6 +78,8 @@ declare interface Address {
   RenewFlag?: string;
   /** 当前公网IP所关联的带宽包ID，如果该公网IP未使用带宽包计费，则返回为空 */
   BandwidthPackageId?: string | null;
+  /** 传统弹性公网IPv6所属vpc唯一ID */
+  UnVpcId?: string | null;
 }
 
 /** 用于描述弹性公网IP的费用对象 */
@@ -1832,12 +1834,14 @@ declare interface ProductQuota {
 
 /** 描述配额信息 */
 declare interface Quota {
-  /** 配额名称，取值范围：`TOTAL_EIP_QUOTA`：用户当前地域下EIP的配额数；`DAILY_EIP_APPLY`：用户当前地域下今日申购次数；`DAILY_PUBLIC_IP_ASSIGN`：用户当前地域下，重新分配公网 IP次数。 */
+  /** 配额名称，取值范围：- `TOTAL_EIP_QUOTA`：用户当前地域下EIP的配额数；- `DAILY_EIP_APPLY`：用户当前地域下今日申购次数；- `DAILY_PUBLIC_IP_ASSIGN`：用户当前地域下，重新分配公网 IP次数；- `TOTAL_EIP6_QUOTA`：用户当前地域下，传统弹性公网IPv6的配额数；- `BGP_EIPv6_QUOTA`：用户当前地域下，可申请的 BGP 弹性公网IPv6 的配额数；- `SINGLEISP_EIPv6_QUOTA`：用户当前地域下，可申请的静态单线弹性公网IPv6 的配额数； */
   QuotaId?: string;
   /** 当前数量 */
   QuotaCurrent?: number;
   /** 配额数量 */
   QuotaLimit?: number;
+  /** 配额所属的网络组 */
+  QuotaGroup?: string | null;
 }
 
 /** 安全组被引用信息 */
