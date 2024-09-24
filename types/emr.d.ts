@@ -140,6 +140,18 @@ declare interface COSSettings {
   LogOnCosPath?: string;
 }
 
+/** 资源调度-容量调度器的全局设置 */
+declare interface CapacityGlobalConfig {
+  /** 是否开启了标签调度 */
+  EnableLabel?: boolean;
+  /** 如果开启了标签调度，标签信息存放的路径 */
+  LabelDir?: string | null;
+  /** 是否覆盖用户指定队列，为true表示覆盖。 */
+  QueueMappingOverride?: boolean | null;
+  /** 高级设置 */
+  DefaultSettings?: DefaultSetting[] | null;
+}
+
 /** 出参 */
 declare interface CdbInfo {
   /** 数据库实例 */
@@ -402,6 +414,20 @@ declare interface DayRepeatStrategy {
   Step: number | null;
 }
 
+/** 资源调度的默认设置 */
+declare interface DefaultSetting {
+  /** 名称，作为入参的key */
+  Name?: string;
+  /** 描述 */
+  Desc?: string;
+  /** 提示 */
+  Prompt?: string;
+  /** key，用于展示，该配置对应与配置文件中的配置项 */
+  Key?: string;
+  /** Name对应的值 */
+  Value?: string | null;
+}
+
 /** 共用组件信息 */
 declare interface DependService {
   /** 共用组件名 */
@@ -484,6 +510,8 @@ declare interface DiskSpecInfo {
   DiskType: string | null;
   /** 数据容量，单位为GB */
   DiskSize: number | null;
+  /** 额外性能 */
+  ExtraPerformance?: number | null;
 }
 
 /** POD浮动规格 */
@@ -680,6 +708,12 @@ declare interface ExternalService {
   Service: string;
   /** 共用组件集群 */
   InstanceId: string;
+}
+
+/** 资源调度-公平调度器的全局配置 */
+declare interface FairGlobalConfig {
+  /** 对应与页面的程序上限 */
+  UserMaxAppsDefault?: number | null;
 }
 
 /** Emr集群列表实例自定义查询过滤 */
@@ -1050,6 +1084,8 @@ declare interface MultiDiskMC {
   Count: number | null;
   /** 磁盘类型 */
   Type?: number | null;
+  /** 磁盘大小 */
+  Size?: string | null;
   /** 云盘大小 */
   Volume?: number | null;
 }
@@ -1200,6 +1236,10 @@ declare interface NodeHardwareInfo {
   ServicesStatus?: string | null;
   /** 备注 */
   Remark?: string | null;
+  /** 共享集群id */
+  SharedClusterId?: string | null;
+  /** 共享集群id描述 */
+  SharedClusterIdDesc?: string | null;
 }
 
 /** 资源详情 */
@@ -2670,6 +2710,26 @@ declare interface DescribeEmrOverviewMetricsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGlobalConfigRequest {
+  /** emr集群的英文id */
+  InstanceId: string;
+}
+
+declare interface DescribeGlobalConfigResponse {
+  /** 是否开启了资源调度功能 */
+  EnableResourceSchedule?: boolean;
+  /** 当前生效的资源调度器 */
+  ActiveScheduler?: string;
+  /** 公平调度器的信息 */
+  CapacityGlobalConfig?: CapacityGlobalConfig | null;
+  /** 容量调度器的信息 */
+  FairGlobalConfig?: FairGlobalConfig | null;
+  /** 最新的资源调度器 */
+  Scheduler?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHBaseTableOverviewRequest {
   /** 实例ID */
   InstanceId: string;
@@ -3310,6 +3370,18 @@ declare interface ModifyAutoScaleStrategyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGlobalConfigRequest {
+  /** emr集群的英文id */
+  InstanceId: string;
+  /** 修改的配置列表。其中Key的取值与`DescribeGlobalConfig`接口的出参一一对应，不区分大小写（如果报错找不到Key，以出参为准），分别为：1. 开启或关闭资源调度：enableResourceSchedule；在关闭时会有一个同步的选项，Key为sync，取值为true或false。2. 调度器类型：scheduler。2. 开启或关闭标签：enableLabel，取值为true或false。2. 标签目录：labelDir。3. 是否覆盖用户指定队列：queueMappingOverride，取值为true、false。4. 程序上限：userMaxAppsDefault。5. 动态配置项：`DescribeGlobalConfig`接口返回的DefaultSettings中的Name字段。Value的取值都是字符串，对于**是否覆盖用户指定队列**、**程序上限**，json规范中的null表示清空该配置的值。支持修改单个配置项的值。对于**动态配置项**则需要全量传递以进行覆盖。 */
+  Items: Item[];
+}
+
+declare interface ModifyGlobalConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyResourcePoolsRequest {
   /** emr集群id */
   InstanceId: string;
@@ -3745,6 +3817,8 @@ declare interface Emr {
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
   /** 查询监控概览页指标数据 {@link DescribeEmrOverviewMetricsRequest} {@link DescribeEmrOverviewMetricsResponse} */
   DescribeEmrOverviewMetrics(data: DescribeEmrOverviewMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrOverviewMetricsResponse>;
+  /** 查询YARN资源调度的全局配置 {@link DescribeGlobalConfigRequest} {@link DescribeGlobalConfigResponse} */
+  DescribeGlobalConfig(data: DescribeGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalConfigResponse>;
   /** 获取Hbase表级监控数据概览 {@link DescribeHBaseTableOverviewRequest} {@link DescribeHBaseTableOverviewResponse} */
   DescribeHBaseTableOverview(data: DescribeHBaseTableOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableOverviewResponse>;
   /** 获取hive查询信息 {@link DescribeHiveQueriesRequest} {@link DescribeHiveQueriesResponse} */
@@ -3795,6 +3869,8 @@ declare interface Emr {
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
   /** 修改自动扩缩容规则 {@link ModifyAutoScaleStrategyRequest} {@link ModifyAutoScaleStrategyResponse} */
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
+  /** 修改YARN资源调度的全局配置 {@link ModifyGlobalConfigRequest} {@link ModifyGlobalConfigResponse} */
+  ModifyGlobalConfig(data: ModifyGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalConfigResponse>;
   /** 刷新YARN的动态资源池（旧） {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
   /** 修改YARN资源调度的资源配置（旧） {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */

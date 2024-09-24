@@ -2370,6 +2370,14 @@ declare interface DescribeExclusiveInstanceDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExclusiveInstanceRegionsRequest {
+}
+
+declare interface DescribeExclusiveInstanceRegionsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExclusiveInstancesRequest {
   /** 分页查询，limit */
   Limit: number;
@@ -3587,6 +3595,8 @@ declare interface Apigateway {
   DescribeApisStatus(data: DescribeApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApisStatusResponse>;
   /** 查询独享实例详情 {@link DescribeExclusiveInstanceDetailRequest} {@link DescribeExclusiveInstanceDetailResponse} */
   DescribeExclusiveInstanceDetail(data: DescribeExclusiveInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstanceDetailResponse>;
+  /** 获取专享实例支持地域列表 {@link DescribeExclusiveInstanceRegionsRequest} {@link DescribeExclusiveInstanceRegionsResponse} */
+  DescribeExclusiveInstanceRegions(data?: DescribeExclusiveInstanceRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstanceRegionsResponse>;
   /** 查询独享实例列表 {@link DescribeExclusiveInstancesRequest} {@link DescribeExclusiveInstancesResponse} */
   DescribeExclusiveInstances(data: DescribeExclusiveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstancesResponse>;
   /** 查询专享实例列表（新） {@link DescribeExclusiveInstancesStatusRequest} {@link DescribeExclusiveInstancesStatusResponse} */

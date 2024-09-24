@@ -3347,17 +3347,17 @@ declare interface DescribePrefetchTasksResponse {
 }
 
 declare interface DescribePurgeTasksRequest {
-  /** 站点ID。必填参数。 */
+  /** 站点 ID。该参数必填。 */
   ZoneId?: string;
-  /** 查询起始时间，时间与job-id必填一个。 */
+  /** 查询起始时间，时间与 job-id 必填一个。 */
   StartTime?: string;
-  /** 查询结束时间，时间与job-id必填一个。 */
+  /** 查询结束时间，时间与 job-id 必填一个。 */
   EndTime?: string;
-  /** 分页查询偏移量，默认为0。 */
+  /** 分页查询偏移量，默认为 0。 */
   Offset?: number;
-  /** 分页查限制数目，默认值：20，最大值：1000。 */
+  /** 分页查询限制数目，默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：job-id 按照【任务ID】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。 类型：String 必选：否 模糊查询：不支持target 按照【目标资源信息】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值 类型：String 必选：否 模糊查询：不支持domains 按照【域名】进行过滤，domains形如：www.qq.com 类型：String 必选：否 模糊查询：不支持。statuses 按照【任务状态】进行过滤 必选：否 模糊查询：不支持。 可选项： processing：处理中 success：成功 failed：失败 timeout：超时type 按照【清除缓存类型】进行过滤，暂不支持多值。 类型：String 必选：否 模糊查询：不支持 可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname purge_cache_tag：CacheTag */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；target：按照目标资源信息进行过滤，target 形如：http://www.qq.com/1.txt 或者 tag1，暂不支持多值，支持模糊查询；domains：按照域名进行过滤，形如：www.qq.com，不支持模糊查询；statuses：按照任务状态进行过滤，不支持模糊查询。可选项： processing：处理中 success：成功 failed：失败 timeout：超时type：按照清除缓存类型进行过滤，暂不支持多值，不支持模糊查询。可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname purge_cache_tag：CacheTag */
   Filters?: AdvancedFilter[];
 }
 

@@ -229,7 +229,7 @@ declare interface ChatCompletionsRequest {
   Citation?: boolean;
   /** 是否开启极速版搜索，默认false，不开启；在开启且命中搜索时，会启用极速版搜索，流式输出首字返回更快。 */
   EnableSpeedSearch?: boolean;
-  /** 图文并茂开关。说明：1. 该参数仅在功能增强（如搜索）开关开启（EnableEnhancement=true）时生效。2. hunyuan-lite 无图文并茂能力，该参数对 hunyuan-lite 版本不生效。3. 未传值时默认关闭。4. 开启并搜索到对应的多媒体信息时，会输出对应的多媒体地址，可以定制个性化的图文消息。 */
+  /** 图文并茂开关。详细介绍请阅读 [图文并茂](https://cloud.tencent.com/document/product/1729/111178) 中的说明。说明：1. 该参数仅在功能增强（如搜索）开关开启（EnableEnhancement=true）时生效。2. hunyuan-lite 无图文并茂能力，该参数对 hunyuan-lite 版本不生效。3. 未传值时默认关闭。4. 开启并搜索到对应的多媒体信息时，会输出对应的多媒体地址，可以定制个性化的图文消息。 */
   EnableMultimedia?: boolean;
 }
 

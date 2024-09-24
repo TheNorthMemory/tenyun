@@ -12,6 +12,14 @@ declare interface AuthNode {
   Manager: MemberMainInfo | null;
 }
 
+/** 野鹤实名互信申请证明文件 */
+declare interface AuthRelationFile {
+  /** 文件名。 */
+  Name: string | null;
+  /** 文件路径。 */
+  Url: string | null;
+}
+
 /** 有效策略。 */
 declare interface EffectivePolicy {
   /** 目标ID。 */
@@ -241,39 +249,41 @@ declare interface OrgIdentity {
 /** 企业组织成员 */
 declare interface OrgMember {
   /** 成员Uin */
-  MemberUin: number | null;
+  MemberUin?: number | null;
   /** 成员名 */
-  Name: string | null;
+  Name?: string | null;
   /** 成员类型，邀请：Invite， 创建：Create */
-  MemberType: string | null;
+  MemberType?: string | null;
   /** 关系策略类型 */
-  OrgPolicyType: string | null;
+  OrgPolicyType?: string | null;
   /** 关系策略名 */
-  OrgPolicyName: string | null;
+  OrgPolicyName?: string | null;
   /** 关系策略权限 */
-  OrgPermission: OrgPermission[] | null;
+  OrgPermission?: OrgPermission[] | null;
   /** 所属节点ID */
-  NodeId: number | null;
+  NodeId?: number | null;
   /** 所属节点名 */
-  NodeName: string | null;
+  NodeName?: string | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 是否允许成员退出。允许：Allow，不允许：Denied。 */
-  IsAllowQuit: string | null;
+  IsAllowQuit?: string | null;
   /** 代付者Uin */
-  PayUin: string | null;
+  PayUin?: string | null;
   /** 代付者名称 */
-  PayName: string | null;
+  PayName?: string | null;
   /** 管理身份 */
-  OrgIdentity: MemberIdentity[] | null;
+  OrgIdentity?: MemberIdentity[] | null;
   /** 安全信息绑定状态 未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed */
-  BindStatus: string | null;
+  BindStatus?: string | null;
   /** 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed */
-  PermissionStatus: string | null;
+  PermissionStatus?: string | null;
+  /** 成员标签列表 */
+  Tags?: Tag[] | null;
 }
 
 /** 成员和子账号的授权关系 */
@@ -357,17 +367,19 @@ declare interface OrgMemberPolicy {
 /** 企业组织单元 */
 declare interface OrgNode {
   /** 组织节点ID */
-  NodeId: number | null;
+  NodeId?: number | null;
   /** 名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 父节点ID */
-  ParentNodeId: number | null;
+  ParentNodeId?: number | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
+  /** 成员标签列表 */
+  Tags?: Tag[] | null;
 }
 
 /** 关系策略权限 */
@@ -682,6 +694,14 @@ declare interface ShareUnitResource {
   ShareManagerUin?: number | null;
 }
 
+/** 标签键值对 */
+declare interface Tag {
+  /** 标签键 */
+  TagKey: string | null;
+  /** 标签值 */
+  TagValue: string | null;
+}
+
 /** 标签合规信息 */
 declare interface TagComplianceDetails {
   /** 合规状态。true-合规，false-不合规 */
@@ -909,6 +929,8 @@ declare interface AddOrganizationNodeRequest {
   Name: string;
   /** 备注。 */
   Remark?: string;
+  /** 部门标签列表。最大10个 */
+  Tags?: Tag[];
 }
 
 declare interface AddOrganizationNodeResponse {
@@ -923,11 +945,11 @@ declare interface AddPermissionPolicyToRoleConfigurationRequest {
   ZoneId: string;
   /** 权限配置 ID */
   RoleConfigurationId: string;
-  /** 权限策略类型。取值： System：系统策略。复用 CAM 的系统策略。 Custom: 自定义策略。按照 CAM 权限策略语法和结构编写的自定义策略。 前期只支持系统策略，自定义策略后期在支持 */
+  /** 权限策略类型。取值： System：系统策略。复用 CAM 的系统策略。 Custom: 自定义策略。按照 CAM 权限策略语法和结构编写的自定义策略。 */
   RolePolicyType: string;
-  /** 权限策略名称，长度最大为 20策略，每个策略长度最大32个字符。 */
+  /** 权限策略名称，长度最大为 20策略，每个策略长度最大32个字符。如果要添加系统策略，建议使用RolePolicies参数。自定义策略时，数组长度最大为1。 */
   RolePolicyNames?: string[];
-  /** 策略详情。 */
+  /** 添加的系统策略详情。 */
   RolePolicies?: PolicyDetail[];
   /** 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。 */
   CustomPolicyDocument?: string;
@@ -1169,6 +1191,8 @@ declare interface CreateOrganizationMemberRequest {
   IdentityRoleID?: number[];
   /** 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取 */
   AuthRelationId?: number;
+  /** 成员标签列表。最大10个 */
+  Tags?: Tag[];
 }
 
 declare interface CreateOrganizationMemberResponse {
@@ -1729,6 +1753,8 @@ declare interface DescribeOrganizationMembersRequest {
   AuthName?: string;
   /** 可信服务产品简称。可信服务管理员查询时必须指定 */
   Product?: string;
+  /** 成员标签搜索列表，最大10个 */
+  Tags?: Tag[];
 }
 
 declare interface DescribeOrganizationMembersResponse {
@@ -1745,6 +1771,8 @@ declare interface DescribeOrganizationNodesRequest {
   Limit: number;
   /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
+  /** 部门标签搜索列表，最大10个 */
+  Tags?: Tag[];
 }
 
 declare interface DescribeOrganizationNodesResponse {
@@ -2094,6 +2122,36 @@ declare interface GetZoneStatisticsRequest {
 declare interface GetZoneStatisticsResponse {
   /** 空间的统计信息。 */
   ZoneStatistics?: ZoneStatistics;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InviteOrganizationMemberRequest {
+  /** 被邀请账号Uin。 */
+  MemberUin: number;
+  /** 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:, */
+  Name: string;
+  /** 关系策略。取值：Financial */
+  PolicyType: string;
+  /** 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须 */
+  PermissionIds: number[];
+  /** 成员所属部门的节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取 */
+  NodeId: number;
+  /** 备注。 */
+  Remark?: string;
+  /** 是否允许成员退出。允许：Allow，不允许：Denied。 */
+  IsAllowQuit?: string;
+  /** 代付者Uin。成员代付费时需要 */
+  PayUin?: string;
+  /** 互信实名主体名称。 */
+  RelationAuthName?: string;
+  /** 互信主体证明文件列表。 */
+  AuthFile?: AuthRelationFile[];
+  /** 成员标签列表。最大10个 */
+  Tags?: Tag[];
+}
+
+declare interface InviteOrganizationMemberResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2708,6 +2766,22 @@ declare interface SetExternalSAMLIdentityProviderRequest {
 }
 
 declare interface SetExternalSAMLIdentityProviderResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateCustomPolicyForRoleConfigurationRequest {
+  /** 空间 ID */
+  ZoneId: string;
+  /** 权限配置 ID */
+  RoleConfigurationId: string;
+  /** 权限策略名称，长度最大为 32 个字符。 */
+  CustomPolicyName: string;
+  /** 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。 */
+  NewCustomPolicyDocument?: string;
+}
+
+declare interface UpdateCustomPolicyForRoleConfigurationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3401,6 +3475,8 @@ declare interface Organization {
   GetZoneSAMLServiceProviderInfo(data: GetZoneSAMLServiceProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetZoneSAMLServiceProviderInfoResponse>;
   /** 查询空间的统计信息 {@link GetZoneStatisticsRequest} {@link GetZoneStatisticsResponse} */
   GetZoneStatistics(data: GetZoneStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetZoneStatisticsResponse>;
+  /** 邀请组织成员 {@link InviteOrganizationMemberRequest} {@link InviteOrganizationMemberResponse} */
+  InviteOrganizationMember(data: InviteOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<InviteOrganizationMemberResponse>;
   /** 查询SAML签名证书列表 {@link ListExternalSAMLIdPCertificatesRequest} {@link ListExternalSAMLIdPCertificatesResponse} */
   ListExternalSAMLIdPCertificates(data: ListExternalSAMLIdPCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListExternalSAMLIdPCertificatesResponse>;
   /** 查询用户组中的用户列表 {@link ListGroupMembersRequest} {@link ListGroupMembersResponse} */
@@ -3457,6 +3533,8 @@ declare interface Organization {
   SendOrgMemberAccountBindEmail(data: SendOrgMemberAccountBindEmailRequest, config?: AxiosRequestConfig): AxiosPromise<SendOrgMemberAccountBindEmailResponse>;
   /** 配置SAML身份提供商信息 {@link SetExternalSAMLIdentityProviderRequest} {@link SetExternalSAMLIdentityProviderResponse} */
   SetExternalSAMLIdentityProvider(data: SetExternalSAMLIdentityProviderRequest, config?: AxiosRequestConfig): AxiosPromise<SetExternalSAMLIdentityProviderResponse>;
+  /** 为权限配置修改自定义策略 {@link UpdateCustomPolicyForRoleConfigurationRequest} {@link UpdateCustomPolicyForRoleConfigurationResponse} */
+  UpdateCustomPolicyForRoleConfiguration(data: UpdateCustomPolicyForRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomPolicyForRoleConfigurationResponse>;
   /** 修改用户组信息 {@link UpdateGroupRequest} {@link UpdateGroupResponse} */
   UpdateGroup(data: UpdateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGroupResponse>;
   /** 更新组织身份 {@link UpdateOrganizationIdentityRequest} {@link UpdateOrganizationIdentityResponse} */

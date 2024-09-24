@@ -298,6 +298,8 @@ declare interface RuleIdConfig {
   IntentionType?: number;
   /** 用户语音回答过程中是否开启张嘴识别检测，默认不开启，仅在意愿核身问答模式中使用。 */
   MouthOpenRecognition?: boolean;
+  /** 意愿核身语音播报速度，配置后问答模式和点头模式的语音播报环节都会生效，默认值为0：0：智能语速（根据播报文案的长度自动调整语音播报速度）1：固定1倍速2：固定1.2倍速3：固定1.5倍速 */
+  Speed?: number;
 }
 
 /** 账单详情 */

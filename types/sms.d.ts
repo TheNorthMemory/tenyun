@@ -255,9 +255,9 @@ declare interface AddSmsTemplateResponse {
 }
 
 declare interface CallbackStatusStatisticsRequest {
-  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。 */
+  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。 */
   BeginTime: string;
-  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。注：EndTime 必须大于 BeginTime，且相差不超过32天。 */
+  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。注：EndTime 必须大于等于 BeginTime，且相差不超过32天。 */
   EndTime: string;
   /** 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
@@ -507,9 +507,9 @@ declare interface SendSmsResponse {
 }
 
 declare interface SendStatusStatisticsRequest {
-  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。 */
+  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。 */
   BeginTime: string;
-  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。注：EndTime 必须大于 BeginTime。 */
+  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。注：EndTime 必须大于等于 BeginTime。 */
   EndTime: string;
   /** 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
@@ -529,13 +529,13 @@ declare interface SendStatusStatisticsResponse {
 declare interface SmsPackagesStatisticsRequest {
   /** 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
-  /** 最大上限(需要拉取的套餐包个数)。 */
+  /** 最大上限(需要拉取的套餐包个数)。注：Limit默认最大值为500，可结合Offset实现分页查询。 */
   Limit: number;
   /** 偏移量。 */
   Offset: number;
-  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。注：接口会返回 BeginTime 到 EndTime 之间创建的套餐包的统计信息。 */
+  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。注：接口会返回 BeginTime 到 EndTime 之间创建的套餐包的统计信息。 */
   BeginTime: string;
-  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。注：EndTime 必须大于 BeginTime 且小于当前时间。 */
+  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。注：EndTime 必须大于 BeginTime 且小于当前时间。 */
   EndTime: string;
 }
 
@@ -786,7 +786,7 @@ declare namespace V20190711 {
   interface CallbackStatusStatisticsRequest {
     /** 开始时间，yyyymmddhh 需要拉取的起始时间，精确到小时。 */
     StartDateTime: number;
-    /** 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时。注：EndDataTime 必须大于 StartDateTime。 */
+    /** 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时。注：EndDataTime 必须大于等于 StartDateTime。 */
     EndDataTime: number;
     /** 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，示例如1400006666。 */
     SmsSdkAppid: string;
@@ -1006,7 +1006,7 @@ declare namespace V20190711 {
   interface SendStatusStatisticsRequest {
     /** 拉取起始时间，yyyymmddhh 需要拉取的起始时间，精确到小时。 */
     StartDateTime: number;
-    /** 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时注：EndDataTime 必须大于 StartDateTime。 */
+    /** 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时注：EndDataTime 必须大于等于 StartDateTime。 */
     EndDataTime: number;
     /** 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，示例如1400006666。 */
     SmsSdkAppid: string;
@@ -1026,9 +1026,9 @@ declare namespace V20190711 {
   interface SmsPackagesStatisticsRequest {
     /** 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，示例如1400006666。 */
     SmsSdkAppid: string;
-    /** 最大上限(需要拉取的套餐包个数)。 */
+    /** 最大上限(需要拉取的套餐包个数)。注：Limit默认最大值为500，可结合Offset实现分页查询。 */
     Limit: number;
-    /** 偏移量。注：目前固定设置为0。 */
+    /** 偏移量。 */
     Offset: number;
   }
 

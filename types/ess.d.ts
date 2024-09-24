@@ -1581,6 +1581,8 @@ declare interface CreateBatchQuickSignUrlRequest {
   ApproverSignTypes?: number[];
   /** 生成H5签署链接时，您可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。注：`不指定该值时，默认为签署方自行选择。` */
   SignTypeSelector?: number;
+  /** 批量签署合同相关信息，指定合同和签署方的信息，用于补充动态签署人。 */
+  FlowBatchUrlInfo?: FlowBatchUrlInfo;
 }
 
 declare interface CreateBatchQuickSignUrlResponse {
@@ -2401,6 +2403,8 @@ declare interface CreatePrepareFlowRequest {
   Agent?: Agent;
   /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体 */
   InitiatorComponents?: Component[];
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
 }
 
 declare interface CreatePrepareFlowResponse {

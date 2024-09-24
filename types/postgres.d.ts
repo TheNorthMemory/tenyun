@@ -268,12 +268,32 @@ declare interface DBInstanceNetInfo {
   ProtocolType: string | null;
 }
 
-/** 描述实例节点信息，包括节点类型、节点所在可用区。 */
+/** 描述实例节点信息，包括节点类型、节点所在可用区、节点所在专属集群。 */
 declare interface DBNode {
   /** 节点类型，值可以为：Primary，代表主节点；Standby，代表备节点。 */
   Role: string;
   /** 节点所在可用区，例如 ap-guangzhou-1。 */
   Zone: string;
+}
+
+/** 描述数据库详细信息，包括所有者、字符编码等 */
+declare interface Database {
+  /** 数据库名 */
+  DatabaseName?: string | null;
+  /** 数据库所有者 */
+  DatabaseOwner?: string | null;
+  /** 数据库字符编码 */
+  Encoding?: string | null;
+  /** 数据库排序规则 */
+  Collate?: string | null;
+  /** 数据库字符分类 */
+  Ctype?: string | null;
+  /** 数据库是否允许连接 */
+  AllowConn?: boolean | null;
+  /** 数据库最大连接数，-1表示无限制 */
+  ConnLimit?: number | null;
+  /** 数据库权限列表 */
+  Privileges?: string | null;
 }
 
 /** 描述数据库中某个对象所属的类型、是在哪个数据库、模式、表中的对象。 */
@@ -1058,6 +1078,26 @@ declare interface CreateDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface CreateDatabaseRequest {
+  /** 实例ID，形如postgres-6fego161 */
+  DBInstanceId: string;
+  /** 创建的数据库名 */
+  DatabaseName: string;
+  /** 数据库的所有者 */
+  DatabaseOwner: string;
+  /** 数据库的字符编码 */
+  Encoding?: string;
+  /** 数据库的排序规则 */
+  Collate?: string;
+  /** 数据库的字符分类 */
+  Ctype?: string;
+}
+
+declare interface CreateDatabaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstancesRequest {
   /** 实例所属主可用区， 如：ap-guangzhou-3；若需要支持多可用区，在DBNodeSet.N字段中进行添加主可用区和备可用区信息；可用区信息可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/409/16769) 接口的返回值中的Zone字段来获取。 */
   Zone: string;
@@ -1163,9 +1203,9 @@ declare interface CreateReadOnlyDBInstanceRequest {
   InstanceCount: number;
   /** 购买时长，单位：月。预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36后付费：只支持1 */
   Period: number;
-  /** 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。 */
+  /** 私有网络ID，形如vpc-xxxxxxxx（该参数当前必传）。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。 */
   VpcId?: string;
-  /** 私有网络子网ID，形如subnet-xxxxxxxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。 */
+  /** 私有网络子网ID，形如subnet-xxxxxxxx（该参数当前必传）。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。 */
   SubnetId?: string;
   /** 实例计费类型，目前支持：PREPAID：预付费，即包年包月。POSTPAID_BY_HOUR：后付费，即按量计费。默认值：PREPAID。如果主实例为后付费，只读实例必须也为后付费。 */
   InstanceChargeType?: string;
@@ -1713,7 +1753,7 @@ declare interface DescribeDBInstanceSecurityGroupsResponse {
 }
 
 declare interface DescribeDBInstancesRequest {
-  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为stringdb-instance-name：按照实例名过滤，类型为stringdb-project-id：按照项目ID过滤，类型为integerdb-pay-mode：按照实例付费模式过滤，类型为stringdb-tag-key：按照标签键过滤，类型为stringdb-private-ip： 按照实例私有网络IP过滤，类型为stringdb-public-address： 按照实例外网地址过滤，类型为string */
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为stringdb-instance-name：按照实例名过滤，类型为stringdb-project-id：按照项目ID过滤，类型为integerdb-pay-mode：按照实例付费模式过滤，类型为stringdb-tag-key：按照标签键过滤，类型为stringdb-private-ip： 按照实例私有网络IP过滤，类型为stringdb-public-address： 按照实例外网地址过滤，类型为stringdb-dedicated-cluster-id: 按照私有集群Id过滤，类型为string */
   Filters?: Filter[];
   /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
   Limit?: number;
@@ -1836,6 +1876,8 @@ declare interface DescribeDatabasesResponse {
   Items?: string[];
   /** 数据库总数 */
   TotalCount?: number;
+  /** 数据库详情列表 */
+  Databases?: Database[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2484,6 +2526,20 @@ declare interface ModifyDBInstancesProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDatabaseOwnerRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 数据库名称 */
+  DatabaseName: string;
+  /** 数据库新所有者 */
+  DatabaseOwner: string;
+}
+
+declare interface ModifyDatabaseOwnerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyParameterTemplateRequest {
   /** 参数模板ID，用于唯一确认参数模板，不可修改 */
   TemplateId: string;
@@ -2787,6 +2843,8 @@ declare interface Postgres {
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
   /** 创建实例（废弃） {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
+  /** 创建数据库 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
+  CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
   /** 创建实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
   /** 创建参数模板 {@link CreateParameterTemplateRequest} {@link CreateParameterTemplateResponse} */
@@ -2933,6 +2991,8 @@ declare interface Postgres {
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
   /** 修改实例所属项目 {@link ModifyDBInstancesProjectRequest} {@link ModifyDBInstancesProjectResponse} */
   ModifyDBInstancesProject(data: ModifyDBInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstancesProjectResponse>;
+  /** 修改数据库所有者 {@link ModifyDatabaseOwnerRequest} {@link ModifyDatabaseOwnerResponse} */
+  ModifyDatabaseOwner(data: ModifyDatabaseOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseOwnerResponse>;
   /** 修改参数模板 {@link ModifyParameterTemplateRequest} {@link ModifyParameterTemplateResponse} */
   ModifyParameterTemplate(data: ModifyParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParameterTemplateResponse>;
   /** 修改只读组配置 {@link ModifyReadOnlyGroupConfigRequest} {@link ModifyReadOnlyGroupConfigResponse} */

@@ -841,33 +841,33 @@ declare interface RegionInfo {
 /** 描述维修任务的相关信息 */
 declare interface RepairTaskInfo {
   /** 维修任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  Alias: string | null;
+  Alias?: string | null;
   /** 任务类型ID，与任务类型中文名的对应关系如下：- `101`：实例运行隐患- `102`：实例运行异常- `103`：实例硬盘异常- `104`：实例网络连接异常- `105`：实例运行预警- `106`：实例硬盘预警- `107`：实例维护升级各任务类型的具体含义，可参考 [维修任务分类](https://cloud.tencent.com/document/product/213/67789)。 */
-  TaskTypeId: number;
+  TaskTypeId?: number;
   /** 任务类型中文名 */
   TaskTypeName?: string;
   /** 任务状态ID，与任务状态中文名的对应关系如下：- `1`：待授权- `2`：处理中- `3`：已结束- `4`：已预约- `5`：已取消- `6`：已避免各任务状态的具体含义，可参考 [任务状态](https://cloud.tencent.com/document/product/213/67789)。 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 设备状态ID，与设备状态中文名的对应关系如下：- `1`：故障中- `2`：处理中- `3`：正常- `4`：已预约- `5`：已取消- `6`：已避免 */
   DeviceStatus?: number;
   /** 操作状态ID，与操作状态中文名的对应关系如下：- `1`：未授权- `2`：已授权- `3`：已处理- `4`：已预约- `5`：已取消- `6`：已避免 */
   OperateStatus?: number;
   /** 任务创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务授权时间 */
-  AuthTime: string | null;
+  AuthTime?: string | null;
   /** 任务结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 任务详情 */
-  TaskDetail: string | null;
+  TaskDetail?: string | null;
   /** 可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 所在私有网络ID */
   VpcId?: string | null;
   /** 所在私有网络名称 */
