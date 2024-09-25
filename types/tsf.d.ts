@@ -4679,16 +4679,6 @@ declare interface DescribeApplicationAttributeResponse {
   RequestId?: string;
 }
 
-declare interface DescribeApplicationBusinessLogConfigRequest {
-  /** TSF应用ID */
-  ApplicationId: string;
-}
-
-declare interface DescribeApplicationBusinessLogConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeApplicationRequest {
   /** 应用ID */
   ApplicationId: string;
@@ -7567,8 +7557,6 @@ declare interface Tsf {
   DescribeApplication(data: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
   /** 获取应用列表其它字段 {@link DescribeApplicationAttributeRequest} {@link DescribeApplicationAttributeResponse} */
   DescribeApplicationAttribute(data: DescribeApplicationAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationAttributeResponse>;
-  /** @deprecated 查询应用关联日志配置项信息 {@link DescribeApplicationBusinessLogConfigRequest} {@link DescribeApplicationBusinessLogConfigResponse} */
-  DescribeApplicationBusinessLogConfig(data: DescribeApplicationBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationBusinessLogConfigResponse>;
   /** 获取应用列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** TSF基本资源信息概览 {@link DescribeBasicResourceUsageRequest} {@link DescribeBasicResourceUsageResponse} */

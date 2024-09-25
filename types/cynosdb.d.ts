@@ -3712,28 +3712,6 @@ declare interface DescribeRollbackTimeRangeResponse {
   RequestId?: string;
 }
 
-declare interface DescribeRollbackTimeValidityRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** 期望回滚的时间点 */
-  ExpectTime: string;
-  /** 回滚时间点的允许误差范围 */
-  ExpectTimeThresh: number;
-}
-
-declare interface DescribeRollbackTimeValidityResponse {
-  /** 存储poolID */
-  PoolId?: number;
-  /** 回滚任务ID，后续按该时间点回滚时，需要传入 */
-  QueryId?: number;
-  /** 时间点是否有效：pass，检测通过；fail，检测失败 */
-  Status?: string;
-  /** 建议时间点，在Status为fail时，该值才有效 */
-  SuggestTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeServerlessStrategyRequest {
   /** serverless集群id */
   ClusterId: string;
@@ -5315,8 +5293,6 @@ declare interface Cynosdb {
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
   /** 查询回档时间范围 {@link DescribeRollbackTimeRangeRequest} {@link DescribeRollbackTimeRangeResponse} */
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
-  /** @deprecated 查询指定时间是否可回滚 {@link DescribeRollbackTimeValidityRequest} {@link DescribeRollbackTimeValidityResponse} */
-  DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
   /** 查询serverless策略 {@link DescribeServerlessStrategyRequest} {@link DescribeServerlessStrategyResponse} */
   DescribeServerlessStrategy(data: DescribeServerlessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessStrategyResponse>;
   /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */

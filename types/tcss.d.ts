@@ -1722,6 +1722,24 @@ declare interface ImageRiskTendencyInfo {
   ImageRiskType: string;
 }
 
+/** 镜像扫描计费信息 */
+declare interface ImageScanInquireInfo {
+  /** 计费项 */
+  InquireKey?: string;
+  /** 容量 */
+  Capcity?: number;
+  /** 已使用量 */
+  Useage?: number;
+  /** 起始时间 */
+  StartTime?: string;
+  /** 截止时间 */
+  EndTime?: string;
+  /** 计费状态(Pending:待购)(Normal:正常)(Isolate:隔离) */
+  PurchaseStatus?: string;
+  /** 资源ID */
+  ResourceID?: string;
+}
+
 /** 镜像列表 */
 declare interface ImageSimpleInfo {
   /** 镜像id */
@@ -5875,9 +5893,11 @@ declare interface DescribeAssetImageRegistryAssetStatusRequest {
 
 declare interface DescribeAssetImageRegistryAssetStatusResponse {
   /** 更新进度状态,doing更新中，success更新成功，failed失败 */
-  Status: string;
+  Status?: string;
   /** 错误信息 */
-  Err: string | null;
+  Err?: string | null;
+  /** 最后一次同步成功时间 */
+  LatestSyncSuccessTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6140,6 +6160,8 @@ declare interface DescribeAssetImageRegistrySummaryRequest {
 }
 
 declare interface DescribeAssetImageRegistrySummaryResponse {
+  /** 待扫描镜像个数 */
+  UnScannedImageCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6300,6 +6322,10 @@ declare interface DescribeAssetImageScanSettingResponse {
   ScanEndTime?: string;
   /** 排除的扫描镜像 */
   ExcludeImages?: string[] | null;
+  /** 最后一次扫描时间 */
+  LastScanTime?: string | null;
+  /** 扫描结果(Success|InsufficientLicense|ImageNeedIsEmpty|InternalError) */
+  ScanResult?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6333,7 +6359,13 @@ declare interface DescribeAssetImageScanTaskRequest {
 
 declare interface DescribeAssetImageScanTaskResponse {
   /** 任务id */
-  TaskID: string;
+  TaskID?: string;
+  /** 最近扫描时间 */
+  LastScanTime?: string;
+  /** 扫描状态(READY:准备 SCANNING:扫描中 END:完成) */
+  Status?: string;
+  /** 扫描子状态(Success:成功 Timeout:超时 Cancel:取消 Error:错误) */
+  SubStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6540,6 +6572,8 @@ declare interface DescribeAssetSummaryResponse {
   RecommendedFixImageCnt?: number;
   /** 已扫描镜像个数 */
   ScannedImageCnt?: number;
+  /** 待扫描镜像个数 */
+  UnScannedImageCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7296,6 +7330,10 @@ declare interface DescribeImageAuthorizedInfoResponse {
   UsedPurchasedAuthorizedCnt?: number;
   /** 是否可免费领取镜像授权数 */
   CanApplyFreeImageAuthorize?: boolean;
+  /** 镜像扫描计费信息 */
+  ImageScanInquireInfo?: ImageScanInquireInfo;
+  /** 重复镜像数(本地镜像和仓库镜像) */
+  RepeatImageIdCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7444,6 +7482,10 @@ declare interface DescribeImageRegistryTimingScanTaskResponse {
   Namespace?: string[];
   /** 排除的镜像资产id */
   ExcludeImageAssetIds?: number[] | null;
+  /** 最近扫描时间 */
+  LastScanTime?: string | null;
+  /** 扫描结果(Success|InsufficientLicense|ImageNeedIsEmpty|InternalError) */
+  ScanResult?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

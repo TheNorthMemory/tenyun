@@ -779,15 +779,17 @@ declare interface SearchScope {
 /** 卡槽信息。 */
 declare interface SlotInfo {
   /** 卡槽 Id。 */
-  Id: number;
+  Id?: number;
   /** 卡槽类型，可取值有： AUDIO：音频卡槽，可替换素材类型为 AUDIO 的音频素材; VIDEO：视频卡槽，可替换素材类型为 VIDEO 的视频素材; IMAGE：图片卡槽，可替换素材类型为 IMAGE 的图片素材; TEXT：文本卡槽，可替换文本内容。 */
-  Type: string;
+  Type?: string;
   /** 默认素材ID。当卡槽类型为 AUDIO，VIDEO，或 IMAGE 中的一种时有效。 */
-  DefaultMaterialId: string;
+  DefaultMaterialId?: string;
   /** 默认文本卡槽信息。当卡槽类型为 TEXT 时有效。 */
-  DefaultTextSlotInfo: TextSlotInfo | null;
+  DefaultTextSlotInfo?: TextSlotInfo | null;
   /** 素材时长，单位秒。 */
-  Duration: number;
+  Duration?: number;
+  /** 卡槽起始时间，单位秒。 */
+  StartTime?: number;
 }
 
 /** 卡槽替换信息。 */
@@ -981,7 +983,7 @@ declare interface TextReplacementInfo {
 /** 文本类型卡槽信息。 */
 declare interface TextSlotInfo {
   /** 文本内容。 */
-  Text: string;
+  Text?: string;
 }
 
 /** 第三方平台视频发布信息。 */

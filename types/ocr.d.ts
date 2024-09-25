@@ -2843,13 +2843,13 @@ declare interface ClassifyDetectOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 可以指定要识别的票证类型,指定后不出现在此列表的票证将不返回类型。不指定时默认返回所有支持类别票证的识别信息。以下是当前支持的类型：IDCardFront: 身份证正面识别IDCardBack: 身份证背面识别Passport: 护照BusinessCard: 名片识别BankCard: 银行卡识别VehicleLicenseFront: 行驶证主页识别VehicleLicenseBack: 行驶证副页识别DriverLicenseFront: 驾驶证主页识别DriverLicenseBack: 驾驶证副页识别PermitFront: 港澳台通行证正面ResidenceBooklet: 户口本资料页MainlandPermitFront: 港澳台来往内地通行证正面HmtResidentPermitFront: 港澳台居住证正面HmtResidentPermitBack: 港澳台居住证背面EstateCert: 不动产证BizLicense: 营业执照 */
+  /** 可以指定要识别的票证类型,指定后不出现在此列表的票证将不返回类型。不指定时默认返回所有支持类别票证的识别信息。以下是当前支持的类型：IDCardFront: 身份证正面识别IDCardBack: 身份证背面识别Passport: 护照BusinessCard: 名片识别BankCard: 银行卡识别VehicleLicenseFront: 行驶证主页识别VehicleLicenseBack: 行驶证副页识别DriverLicenseFront: 驾驶证主页识别DriverLicenseBack: 驾驶证副页识别PermitFront: 港澳台通行证正面ResidenceBooklet: 户口本资料页MainlandPermitFront: 港澳台来往内地通行证正面HmtResidentPermitFront: 港澳台居住证正面HmtResidentPermitBack: 港澳台居住证背面EstateCert: 不动产证BizLicense: 营业执照ForeignPermanentResidentFront: 外国人永居证正面识别ForeignPermanentResidentBack: 外国人永居证背面识别 */
   DiscernType?: string[];
 }
 
 declare interface ClassifyDetectOCRResponse {
   /** 智能卡证分类结果。当图片类型不支持分类识别或者识别出的类型不在请求参数DiscernType指定的范围内时，返回结果中的Type字段将为空字符串，Name字段将返回"其它" */
-  ClassifyDetectInfos: ClassifyDetectInfo[];
+  ClassifyDetectInfos?: ClassifyDetectInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

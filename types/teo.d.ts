@@ -1122,6 +1122,16 @@ declare interface L4Proxy {
   UpdateTime?: string;
 }
 
+/** 四层远程鉴权信息 */
+declare interface L4ProxyRemoteAuth {
+  /** 四层远程鉴权开关，取值有：on：表示开启;off：表示关闭。 */
+  Switch: string;
+  /** 远程鉴权服务地址，格式为: domain/ip:port。例：example.auth.com:8888 */
+  Address: string;
+  /** 远程鉴权服务不可访问后，经过四层转发规则默认回源行为，取值有：reject：表示进行拦截，拒绝访问;allow：表示允许通过。 */
+  ServerFaultyBehavior: string;
+}
+
 /** 四层代理转发规则详情。 */
 declare interface L4ProxyRule {
   /** 转发规则 ID。注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数请勿填写；在 ModifyL4ProxyRules 作为入参使用时，该参数必填。 */
@@ -1148,6 +1158,8 @@ declare interface L4ProxyRule {
   Status?: string;
   /** BuID。 */
   BuId?: string;
+  /** 远程鉴权信息。注意：RemoteAuth 在 CreateL4ProxyRules 或 ModifyL4ProxyRules 不可作为入参使用，如有传此参数，会忽略。在 DescribeL4ProxyRules 返回为空时，表示没有开启远程鉴权。 */
+  RemoteAuth?: L4ProxyRemoteAuth | null;
 }
 
 /** 七层离线日志详细信息。 */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 255+ 款产品，11707+ 服务数</summary>
+<details><summary>共计 255+ 款产品，11685+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -138,7 +138,7 @@ captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(6) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(12) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(42) |
-ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(58) |
+ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(59) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(170) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(21) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
@@ -174,7 +174,7 @@ csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(100) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(516) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(149) |
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(148) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
@@ -219,7 +219,7 @@ iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-0
 ic | [图片瘦身](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
 icr | [对话机器人](https://cloud.tencent.com/document/product/1268) | 2021-10-14(1) |
 ie | [智能编辑](https://cloud.tencent.com/document/product/1186) | 2020-03-04(10) |
-iecp | [物联网边缘计算平台](https://cloud.tencent.com/document/product/1118) | 2021-09-14(102) |
+iecp | [物联网边缘计算平台](https://cloud.tencent.com/document/product/1118) | 2021-09-14(82) |
 iir | [智能识图](https://cloud.tencent.com/document/product/1217) | 2020-04-17(1) |
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(4) |
@@ -248,7 +248,7 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(41) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(49) | 2018-04-08(13) |
-monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(157) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(155) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(104) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(19) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
@@ -264,7 +264,7 @@ open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(118) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(19) |
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
-postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(100) |
+postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(101) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(25) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(10) |
@@ -331,7 +331,7 @@ trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) 
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(56) |
 tse | [微服务引擎](https://cloud.tencent.com/document/product/1364) | 2020-12-07(112) |
-tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(223) |
+tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(222) |
 tsi | [腾讯同传系统](https://cloud.tencent.com/document/product/1399) | 2021-03-25(3) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |

@@ -4584,6 +4584,8 @@ declare interface TaskOpsDto {
   ParentTaskInfos?: AiopsSimpleTaskDto | null;
   /** 资源获取标识 */
   ExtResourceFlag?: ExtResourceFlagDto | null;
+  /** 父任务simple信息(新) */
+  NewParentTaskInfos?: AiopsSimpleTaskDto[] | null;
 }
 
 /** 任务执行脚本 */

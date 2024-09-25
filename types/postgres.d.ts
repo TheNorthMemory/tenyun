@@ -274,6 +274,8 @@ declare interface DBNode {
   Role: string;
   /** 节点所在可用区，例如 ap-guangzhou-1。 */
   Zone: string;
+  /** 专属集群ID */
+  DedicatedClusterId?: string | null;
 }
 
 /** 描述数据库详细信息，包括所有者、字符编码等 */
@@ -316,6 +318,32 @@ declare interface DatabasePrivilege {
   Object?: DatabaseObject | null;
   /** 指定账号对数据库对象拥有的权限列表 */
   PrivilegeSet?: string[] | null;
+}
+
+/** 专属集群相关信息，用于查询用户的专属集群列表 */
+declare interface DedicatedCluster {
+  /** 专属集群ID */
+  DedicatedClusterId?: string | null;
+  /** 专属集群名称 */
+  Name?: string | null;
+  /** 专属集群所在可用区 */
+  Zone?: string | null;
+  /** 灾备集群 */
+  StandbyDedicatedClusterSet?: string[] | null;
+  /** 实例数量 */
+  InstanceCount?: number | null;
+  /** Cpu总量 */
+  CpuTotal?: number | null;
+  /** Cpu可用数量 */
+  CpuAvailable?: number | null;
+  /** 内存总量 */
+  MemTotal?: number | null;
+  /** 内存可用量 */
+  MemAvailable?: number | null;
+  /** 磁盘总量 */
+  DiskTotal?: number | null;
+  /** 磁盘可用量 */
+  DiskAvailable?: number | null;
 }
 
 /** 慢SQL 统计分析接口返回详情 */
@@ -1231,6 +1259,8 @@ declare interface CreateReadOnlyDBInstanceRequest {
   Name?: string;
   /** 【废弃】不再需要指定，内核版本号与主实例保持一致 */
   DBVersion?: string;
+  /** 专属集群ID */
+  DedicatedClusterId?: string;
 }
 
 declare interface CreateReadOnlyDBInstanceResponse {
@@ -1878,6 +1908,18 @@ declare interface DescribeDatabasesResponse {
   TotalCount?: number;
   /** 数据库详情列表 */
   Databases?: Database[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDedicatedClustersRequest {
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：dedicated-cluster-id: 按照专属集群ID筛选，类型为string */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDedicatedClustersResponse {
+  /** 专属集群信息 */
+  DedicatedClusterSet?: DedicatedCluster[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2919,6 +2961,8 @@ declare interface Postgres {
   DescribeDatabaseObjects(data: DescribeDatabaseObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseObjectsResponse>;
   /** 查询实例的数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  /** 查询专属集群 {@link DescribeDedicatedClustersRequest} {@link DescribeDedicatedClustersResponse} */
+  DescribeDedicatedClusters(data?: DescribeDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClustersResponse>;
   /** 查询默认参数列表 {@link DescribeDefaultParametersRequest} {@link DescribeDefaultParametersResponse} */
   DescribeDefaultParameters(data: DescribeDefaultParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParametersResponse>;
   /** 查询实例密钥信息列表 {@link DescribeEncryptionKeysRequest} {@link DescribeEncryptionKeysResponse} */

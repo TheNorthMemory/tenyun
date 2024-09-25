@@ -72,22 +72,6 @@ declare interface ApplicationStatusInfo {
   AvailableReplicas: number | null;
 }
 
-/** 应用模板列表详情 */
-declare interface ApplicationTemplate {
-  /** 模板ID */
-  Id: number | null;
-  /** 模板名称 */
-  Name: string | null;
-  /** 来源。1 自定义应用模板 ; 2 官方应用模板 */
-  Source: number | null;
-  /** 应用类型 */
-  WorkloadKind: string | null;
-  /** 管理地址 */
-  ManageUrl: string | null;
-  /** 发布时间 */
-  DistributeTime: string | null;
-}
-
 /** ConfigMap基本信息 */
 declare interface ConfigMapBasicInfo {
   /** 名称 */
@@ -136,20 +120,6 @@ declare interface Container {
   SecurityContext?: SecurityContext;
   /** 就绪探针配置 */
   ReadinessProbe?: Probe;
-}
-
-/** 容器状态 */
-declare interface ContainerStatus {
-  /** 容器名 */
-  Name: string | null;
-  /** 容器ID */
-  ID: string | null;
-  /** 镜像 */
-  Image: string | null;
-  /** 重启次数 */
-  RestartCount: number | null;
-  /** 状态 */
-  Status: string;
 }
 
 /** CronJob配置 */
@@ -352,20 +322,6 @@ declare interface EdgeNodeResourceInfo {
   AvailableGPU: string | null;
 }
 
-/** 单元内的统计信息 */
-declare interface EdgeUnitStatisticItem {
-  /** 总数 */
-  Total: number | null;
-  /** 在线数 */
-  Online: number | null;
-  /** 异常数 */
-  Abnormal: number | null;
-  /** 离线数 */
-  Offline: number | null;
-  /** 未激活 */
-  NotActive: number | null;
-}
-
 /** 环境变量 */
 declare interface Env {
   /** 名称 */
@@ -384,26 +340,6 @@ declare interface EnvValueSelector {
   ObjectName: string;
   /** 对象值 */
   ObjectType: string;
-}
-
-/** 事件信息 */
-declare interface Event {
-  /** 第一次出现时间 */
-  FirstTime: string | null;
-  /** 最后一次出现时间 */
-  LastTime: string | null;
-  /** 事件关联对象类型 */
-  InvolvedObjectKind: string | null;
-  /** 事件关联对象名 */
-  InvolvedObjectName: string | null;
-  /** 事件类型(Normal|Warning) */
-  Type: string;
-  /** 原因 */
-  Reason: string | null;
-  /** 内容 */
-  Message: string | null;
-  /** 出现次数 */
-  Count: number | null;
 }
 
 /** 字段排序 */
@@ -778,24 +714,6 @@ declare interface OperationLogsCondition {
   Status?: number[] | null;
 }
 
-/** Pod状态信息 */
-declare interface PodStatus {
-  /** 名称 */
-  Name: string | null;
-  /** 命名空间 */
-  NameSpace: string | null;
-  /** 状态 */
-  Status: string | null;
-  /** IP地址 */
-  IP: string | null;
-  /** 启动时间 */
-  StartTime: string | null;
-  /** 运行时间 */
-  RunSec: number | null;
-  /** 重启次数 */
-  RestartCount: number | null;
-}
-
 /** 端口配置 */
 declare interface PortConfig {
   /** 协议类型(tcp|udp) */
@@ -998,16 +916,6 @@ declare interface VolumeNFS {
   Path: string;
 }
 
-declare interface ApplyMarketComponentRequest {
-  /** 组件ID */
-  ID: number;
-}
-
-declare interface ApplyMarketComponentResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface BuildMessageRouteRequest {
   /** 路由名字 */
   RouteName: string;
@@ -1028,38 +936,6 @@ declare interface BuildMessageRouteRequest {
 }
 
 declare interface BuildMessageRouteResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateApplicationVisualizationRequest {
-  /** 基本信息 */
-  BasicInfo: ApplicationBasicInfo;
-  /** 基本配置 */
-  BasicConfig: ApplicationBasicConfig;
-  /** 卷列表 */
-  Volumes?: Volume[];
-  /** 服务配置 */
-  Service?: Service;
-  /** Job配置 */
-  Job?: Job;
-  /** CronJob配置 */
-  CronJob?: CronJob;
-  /** 重新运行策略 */
-  RestartPolicy?: string;
-  /** 镜像拉取密钥 */
-  ImagePullSecrets?: string[];
-  /** HPA配置 */
-  HorizontalPodAutoscaler?: HorizontalPodAutoscaler;
-  /** 初始化容器列表 */
-  InitContainers?: Container[];
-  /** 容器列表 */
-  Containers?: Container[];
-}
-
-declare interface CreateApplicationVisualizationResponse {
-  /** 应用ID */
-  ApplicationId: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1136,58 +1012,6 @@ declare interface CreateEdgeNodeUnitTemplateRequest {
 }
 
 declare interface CreateEdgeNodeUnitTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateEdgeUnitApplicationVisualizationRequest {
-  /** 基本信息 */
-  BasicInfo: ApplicationBasicInfo;
-  /** 基本配置 */
-  BasicConfig: ApplicationBasicConfig;
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** 卷列表 */
-  Volumes?: Volume[];
-  /** 服务配置 */
-  Service?: Service;
-  /** 模版ID */
-  TemplateID?: number;
-  /** Job配置 */
-  Job?: Job;
-  /** CronJob配置 */
-  CronJob?: CronJob;
-  /** 重新运行策略 */
-  RestartPolicy?: string;
-  /** 镜像拉取密钥 */
-  ImagePullSecrets?: string[];
-  /** HPA配置 */
-  HorizontalPodAutoscaler?: HorizontalPodAutoscaler;
-  /** 初始化容器列表 */
-  InitContainers?: Container[];
-  /** 容器列表 */
-  Containers?: Container[];
-}
-
-declare interface CreateEdgeUnitApplicationVisualizationResponse {
-  /** 应用ID */
-  ApplicationId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateEdgeUnitApplicationYamlRequest {
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** base64后的Yaml配置 */
-  Yaml: string;
-  /** 基本信息 */
-  BasicInfo?: ApplicationBasicInfo;
-}
-
-declare interface CreateEdgeUnitApplicationYamlResponse {
-  /** 应用ID */
-  ApplicationId: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1330,16 +1154,6 @@ declare interface CreateUserTokenResponse {
   RequestId?: string;
 }
 
-declare interface DeleteApplicationsRequest {
-  /** 应用模板ID列表 */
-  ApplicationIds: number[];
-}
-
-declare interface DeleteApplicationsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteConfigMapRequest {
   /** 单元ID */
   EdgeUnitID: number;
@@ -1388,18 +1202,6 @@ declare interface DeleteEdgeNodesRequest {
 }
 
 declare interface DeleteEdgeNodesResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteEdgeUnitApplicationsRequest {
-  /** 单元ID */
-  EdgeUnitID: number;
-  /** 应用ID列表 */
-  ApplicationIDs: number[];
-}
-
-declare interface DeleteEdgeUnitApplicationsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1526,86 +1328,6 @@ declare interface DeleteSecretRequest {
 }
 
 declare interface DeleteSecretResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeApplicationVisualizationRequest {
-  /** 应用模板ID */
-  ApplicationId: number;
-}
-
-declare interface DescribeApplicationVisualizationResponse {
-  /** 基本信息 */
-  BasicInfo: ApplicationBasicInfo | null;
-  /** 基本配置 */
-  BasicConfig: ApplicationBasicConfig | null;
-  /** 卷配置 */
-  Volumes: Volume[] | null;
-  /** 初始化容器配置 */
-  InitContainers: Container[] | null;
-  /** 容器配置 */
-  Containers: Container[] | null;
-  /** 服务配置 */
-  Service: Service | null;
-  /** Job配置 */
-  Job: Job | null;
-  /** CronJob配置 */
-  CronJob: CronJob | null;
-  /** 重启策略 */
-  RestartPolicy: string | null;
-  /** HPA */
-  HorizontalPodAutoscaler: HorizontalPodAutoscaler | null;
-  /** 镜像拉取Secret */
-  ImagePullSecrets: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeApplicationYamlErrorRequest {
-  /** Yaml配置 */
-  Yaml: string;
-}
-
-declare interface DescribeApplicationYamlErrorResponse {
-  /** 是否通过 */
-  CheckPass: boolean | null;
-  /** 错误类型 */
-  ErrType: number | null;
-  /** 错误信息 */
-  ErrInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeApplicationYamlRequest {
-  /** 应用模板ID */
-  ApplicationId: number;
-}
-
-declare interface DescribeApplicationYamlResponse {
-  /** base64 后的yaml */
-  Yaml: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeApplicationsRequest {
-  /** 模糊搜索字符串 */
-  NamePattern?: string;
-  /** 默认 0 */
-  Offset?: number;
-  /** 默认 20 */
-  Limit?: number;
-  /** 仅支持对 DistributeTime 字段排序，ASC/DESC */
-  Sort?: FieldSort[];
-}
-
-declare interface DescribeApplicationsResponse {
-  /** 总条数 */
-  TotalCount: number | null;
-  /** 详细列表 */
-  ApplicationSet: ApplicationTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1884,134 +1606,6 @@ declare interface DescribeEdgeSnNodesResponse {
   RequestId?: string;
 }
 
-declare interface DescribeEdgeUnitApplicationEventsRequest {
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** 应用ID */
-  ApplicationId: number;
-}
-
-declare interface DescribeEdgeUnitApplicationEventsResponse {
-  /** 事件列表 */
-  EventSet: Event[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEdgeUnitApplicationLogsRequest {
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** 应用ID */
-  ApplicationId: number;
-  /** 最大条数 */
-  Limit: number;
-  /** Pod名 */
-  PodName: string;
-  /** 容器名 */
-  ContainerName?: string;
-}
-
-declare interface DescribeEdgeUnitApplicationLogsResponse {
-  /** 日志列表 */
-  LogSet: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEdgeUnitApplicationPodContainersRequest {
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** 应用ID */
-  ApplicationId: number;
-  /** Pod名 */
-  PodName: string;
-}
-
-declare interface DescribeEdgeUnitApplicationPodContainersResponse {
-  /** 容器列表 */
-  ContainerSet: ContainerStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEdgeUnitApplicationPodsRequest {
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** 应用ID */
-  ApplicationId: number;
-}
-
-declare interface DescribeEdgeUnitApplicationPodsResponse {
-  /** Pod列表 */
-  PodSet: PodStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEdgeUnitApplicationVisualizationRequest {
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** 应用ID */
-  ApplicationId: number;
-}
-
-declare interface DescribeEdgeUnitApplicationVisualizationResponse {
-  /** 基本信息 */
-  BasicInfo: ApplicationBasicInfo | null;
-  /** 基本配置 */
-  BasicConfig: ApplicationBasicConfig | null;
-  /** 卷配置 */
-  Volumes: Volume[] | null;
-  /** 初始化容器配置 */
-  InitContainers: Container[] | null;
-  /** 容器配置 */
-  Containers: Container[] | null;
-  /** 服务配置 */
-  Service: Service | null;
-  /** Job配置 */
-  Job: Job | null;
-  /** CronJob配置 */
-  CronJob: CronJob | null;
-  /** 重启策略 */
-  RestartPolicy: string | null;
-  /** HPA */
-  HorizontalPodAutoscaler: HorizontalPodAutoscaler | null;
-  /** 镜像拉取Secret */
-  ImagePullSecrets: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEdgeUnitApplicationYamlErrorRequest {
-  /** Yaml配置 */
-  Yaml: string;
-}
-
-declare interface DescribeEdgeUnitApplicationYamlErrorResponse {
-  /** 是否通过 */
-  CheckPass: boolean | null;
-  /** 错误类型 */
-  ErrType: number | null;
-  /** 错误信息 */
-  ErrInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEdgeUnitApplicationYamlRequest {
-  /** 单元ID */
-  EdgeUnitId: number;
-  /** 应用ID */
-  ApplicationId: number;
-}
-
-declare interface DescribeEdgeUnitApplicationYamlResponse {
-  /** Yaml配置 */
-  Yaml: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeEdgeUnitApplicationsRequest {
   /** 单元ID */
   EdgeUnitId: number;
@@ -2032,52 +1626,6 @@ declare interface DescribeEdgeUnitApplicationsResponse {
   TotalCount: number | null;
   /** 应用列表 */
   ApplicationSet: ApplicationStatusInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEdgeUnitCloudRequest {
-  /** 边缘集群ID */
-  EdgeUnitId: number;
-}
-
-declare interface DescribeEdgeUnitCloudResponse {
-  /** 边缘集群名称 */
-  Name: string;
-  /** 描述 */
-  Description: string | null;
-  /** 创建时间 */
-  CreateTime: string | null;
-  /** 更新时间 */
-  UpdateTime: string | null;
-  /** 集群最后探活时间 */
-  LiveTime: string | null;
-  /** 集群状态 */
-  MasterStatus: string | null;
-  /** 版本号 */
-  K8sVersion: string | null;
-  /** pod cidr */
-  PodCIDR: string | null;
-  /** service cidr */
-  ServiceCIDR: string | null;
-  /** 集群内网访问地址 */
-  APIServerAddress: string | null;
-  /** 集群外网访问地址 */
-  APIServerExposeAddress: string | null;
-  /** 用户ID */
-  UID: string | null;
-  /** 集群ID */
-  UnitID: number | null;
-  /** 集群标识 */
-  Cluster: string | null;
-  /** 节点统计 */
-  Node: EdgeUnitStatisticItem | null;
-  /** 工作负载统计 */
-  Workload: EdgeUnitStatisticItem | null;
-  /** Grid应用统计 */
-  Grid: EdgeUnitStatisticItem | null;
-  /** 设备统计 */
-  SubDevice: EdgeUnitStatisticItem | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2658,50 +2206,6 @@ declare interface GetMarketComponentResponse {
   RequestId?: string;
 }
 
-declare interface ModifyApplicationBasicInfoRequest {
-  /** 应用模板ID */
-  ApplicationId: number;
-  /** 应用模板基本信息 */
-  BasicInfo: ApplicationBasicInfo;
-}
-
-declare interface ModifyApplicationBasicInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyApplicationVisualizationRequest {
-  /** 应用ID */
-  ApplicationId: number;
-  /** 应用配置 */
-  BasicConfig: ApplicationBasicConfig;
-  /** 卷配置 */
-  Volumes?: Volume[];
-  /** 初始容器 */
-  InitContainers?: Container[];
-  /** 容器配置 */
-  Containers?: Container[];
-  /** 服务配置 */
-  Service?: Service;
-  /** Job配置 */
-  Job?: Job;
-  /** CronJob配置 */
-  CronJob?: CronJob;
-  /** 重启策略 */
-  RestartPolicy?: string;
-  /** 镜像拉取密钥 */
-  ImagePullSecrets?: string[];
-  /** HPA配置 */
-  HorizontalPodAutoscaler?: HorizontalPodAutoscaler;
-  /** 单个初始化容器 */
-  InitContainer?: Container;
-}
-
-declare interface ModifyApplicationVisualizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyConfigMapRequest {
   /** 单元ID */
   EdgeUnitID: number;
@@ -2931,12 +2435,8 @@ declare interface SetRouteOnOffResponse {
 /** {@link Iecp 物联网边缘计算平台} */
 declare interface Iecp {
   (): Versions;
-  /** @deprecated 使用组件市场中的组件 {@link ApplyMarketComponentRequest} {@link ApplyMarketComponentResponse} */
-  ApplyMarketComponent(data: ApplyMarketComponentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyMarketComponentResponse>;
   /** 建立消息路由 {@link BuildMessageRouteRequest} {@link BuildMessageRouteResponse} */
   BuildMessageRoute(data: BuildMessageRouteRequest, config?: AxiosRequestConfig): AxiosPromise<BuildMessageRouteResponse>;
-  /** @deprecated 创建可视化创建应用模板 {@link CreateApplicationVisualizationRequest} {@link CreateApplicationVisualizationResponse} */
-  CreateApplicationVisualization(data: CreateApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationVisualizationResponse>;
   /** 创建ConfigMap {@link CreateConfigMapRequest} {@link CreateConfigMapResponse} */
   CreateConfigMap(data: CreateConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigMapResponse>;
   /** 创建边缘节点 {@link CreateEdgeNodeRequest} {@link CreateEdgeNodeResponse} */
@@ -2947,10 +2447,6 @@ declare interface Iecp {
   CreateEdgeNodeGroup(data: CreateEdgeNodeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeGroupResponse>;
   /** 创建边缘单元NodeUnit模板 {@link CreateEdgeNodeUnitTemplateRequest} {@link CreateEdgeNodeUnitTemplateResponse} */
   CreateEdgeNodeUnitTemplate(data: CreateEdgeNodeUnitTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeUnitTemplateResponse>;
-  /** @deprecated 可视化创建应用 {@link CreateEdgeUnitApplicationVisualizationRequest} {@link CreateEdgeUnitApplicationVisualizationResponse} */
-  CreateEdgeUnitApplicationVisualization(data: CreateEdgeUnitApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitApplicationVisualizationResponse>;
-  /** @deprecated yaml方式创建应用 {@link CreateEdgeUnitApplicationYamlRequest} {@link CreateEdgeUnitApplicationYamlResponse} */
-  CreateEdgeUnitApplicationYaml(data: CreateEdgeUnitApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitApplicationYamlResponse>;
   /** 创建边缘单元 {@link CreateEdgeUnitCloudRequest} {@link CreateEdgeUnitCloudResponse} */
   CreateEdgeUnitCloud(data: CreateEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitCloudResponse>;
   /** 批量绑定设备到单元 {@link CreateEdgeUnitDevicesRequest} {@link CreateEdgeUnitDevicesResponse} */
@@ -2967,8 +2463,6 @@ declare interface Iecp {
   CreateUpdateNodeUnit(data: CreateUpdateNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUpdateNodeUnitResponse>;
   /** 创建token {@link CreateUserTokenRequest} {@link CreateUserTokenResponse} */
   CreateUserToken(data?: CreateUserTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserTokenResponse>;
-  /** @deprecated 删除应用模板 {@link DeleteApplicationsRequest} {@link DeleteApplicationsResponse} */
-  DeleteApplications(data: DeleteApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationsResponse>;
   /** 删除ConfigMap {@link DeleteConfigMapRequest} {@link DeleteConfigMapResponse} */
   DeleteConfigMap(data: DeleteConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigMapResponse>;
   /** 删除边缘单元NodeGroup {@link DeleteEdgeNodeGroupRequest} {@link DeleteEdgeNodeGroupResponse} */
@@ -2977,8 +2471,6 @@ declare interface Iecp {
   DeleteEdgeNodeUnitTemplates(data: DeleteEdgeNodeUnitTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeNodeUnitTemplatesResponse>;
   /** 批量删除边缘节点 {@link DeleteEdgeNodesRequest} {@link DeleteEdgeNodesResponse} */
   DeleteEdgeNodes(data: DeleteEdgeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeNodesResponse>;
-  /** @deprecated 删除应用列表 {@link DeleteEdgeUnitApplicationsRequest} {@link DeleteEdgeUnitApplicationsResponse} */
-  DeleteEdgeUnitApplications(data: DeleteEdgeUnitApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitApplicationsResponse>;
   /** 删除边缘单元 {@link DeleteEdgeUnitCloudRequest} {@link DeleteEdgeUnitCloudResponse} */
   DeleteEdgeUnitCloud(data: DeleteEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitCloudResponse>;
   /** 重新部署边缘单元指定Grid下应用 {@link DeleteEdgeUnitDeployGridItemRequest} {@link DeleteEdgeUnitDeployGridItemResponse} */
@@ -2999,14 +2491,6 @@ declare interface Iecp {
   DeleteNodeUnit(data: DeleteNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodeUnitResponse>;
   /** 删除Secret {@link DeleteSecretRequest} {@link DeleteSecretResponse} */
   DeleteSecret(data: DeleteSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretResponse>;
-  /** @deprecated 获取应用模板可视化配置信息 {@link DescribeApplicationVisualizationRequest} {@link DescribeApplicationVisualizationResponse} */
-  DescribeApplicationVisualization(data: DescribeApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationVisualizationResponse>;
-  /** @deprecated 查询应用模板Yaml {@link DescribeApplicationYamlRequest} {@link DescribeApplicationYamlResponse} */
-  DescribeApplicationYaml(data: DescribeApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationYamlResponse>;
-  /** @deprecated 检查应用模板的Yaml配置 {@link DescribeApplicationYamlErrorRequest} {@link DescribeApplicationYamlErrorResponse} */
-  DescribeApplicationYamlError(data: DescribeApplicationYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationYamlErrorResponse>;
-  /** @deprecated 获取应用模板列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
-  DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 获取ConfigMap详情 {@link DescribeConfigMapRequest} {@link DescribeConfigMapResponse} */
   DescribeConfigMap(data: DescribeConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMapResponse>;
   /** 校验ConfigMap的Yaml语法 {@link DescribeConfigMapYamlErrorRequest} {@link DescribeConfigMapYamlErrorResponse} */
@@ -3035,24 +2519,8 @@ declare interface Iecp {
   DescribeEdgePod(data: DescribeEdgePodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgePodResponse>;
   /** 查询预注册节点列表 {@link DescribeEdgeSnNodesRequest} {@link DescribeEdgeSnNodesResponse} */
   DescribeEdgeSnNodes(data: DescribeEdgeSnNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeSnNodesResponse>;
-  /** @deprecated 获取应用事件列表 {@link DescribeEdgeUnitApplicationEventsRequest} {@link DescribeEdgeUnitApplicationEventsResponse} */
-  DescribeEdgeUnitApplicationEvents(data: DescribeEdgeUnitApplicationEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationEventsResponse>;
-  /** @deprecated 获取应用日志 {@link DescribeEdgeUnitApplicationLogsRequest} {@link DescribeEdgeUnitApplicationLogsResponse} */
-  DescribeEdgeUnitApplicationLogs(data: DescribeEdgeUnitApplicationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationLogsResponse>;
-  /** @deprecated 获取应用容器状态 {@link DescribeEdgeUnitApplicationPodContainersRequest} {@link DescribeEdgeUnitApplicationPodContainersResponse} */
-  DescribeEdgeUnitApplicationPodContainers(data: DescribeEdgeUnitApplicationPodContainersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationPodContainersResponse>;
-  /** @deprecated 获取应用下Pod状态 {@link DescribeEdgeUnitApplicationPodsRequest} {@link DescribeEdgeUnitApplicationPodsResponse} */
-  DescribeEdgeUnitApplicationPods(data: DescribeEdgeUnitApplicationPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationPodsResponse>;
-  /** @deprecated 获取单元可视化配置信息 {@link DescribeEdgeUnitApplicationVisualizationRequest} {@link DescribeEdgeUnitApplicationVisualizationResponse} */
-  DescribeEdgeUnitApplicationVisualization(data: DescribeEdgeUnitApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationVisualizationResponse>;
-  /** @deprecated 获取应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlRequest} {@link DescribeEdgeUnitApplicationYamlResponse} */
-  DescribeEdgeUnitApplicationYaml(data: DescribeEdgeUnitApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationYamlResponse>;
-  /** @deprecated 检查单元应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlErrorRequest} {@link DescribeEdgeUnitApplicationYamlErrorResponse} */
-  DescribeEdgeUnitApplicationYamlError(data: DescribeEdgeUnitApplicationYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationYamlErrorResponse>;
   /** 获取单元下应用列表 {@link DescribeEdgeUnitApplicationsRequest} {@link DescribeEdgeUnitApplicationsResponse} */
   DescribeEdgeUnitApplications(data: DescribeEdgeUnitApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationsResponse>;
-  /** @deprecated 查询边缘集群详情 {@link DescribeEdgeUnitCloudRequest} {@link DescribeEdgeUnitCloudResponse} */
-  DescribeEdgeUnitCloud(data: DescribeEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitCloudResponse>;
   /** 查询边缘单元Grid列表 {@link DescribeEdgeUnitDeployGridRequest} {@link DescribeEdgeUnitDeployGridResponse} */
   DescribeEdgeUnitDeployGrid(data: DescribeEdgeUnitDeployGridRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitDeployGridResponse>;
   /** 查询边缘单元指定Grid下的部署应用列表 {@link DescribeEdgeUnitDeployGridItemRequest} {@link DescribeEdgeUnitDeployGridItemResponse} */
@@ -3103,10 +2571,6 @@ declare interface Iecp {
   GetMarketComponent(data: GetMarketComponentRequest, config?: AxiosRequestConfig): AxiosPromise<GetMarketComponentResponse>;
   /** 获取组件市场组件列表 {@link GetMarketComponentListRequest} {@link GetMarketComponentListResponse} */
   GetMarketComponentList(data: GetMarketComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<GetMarketComponentListResponse>;
-  /** @deprecated 修改应用模板基本信息 {@link ModifyApplicationBasicInfoRequest} {@link ModifyApplicationBasicInfoResponse} */
-  ModifyApplicationBasicInfo(data: ModifyApplicationBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationBasicInfoResponse>;
-  /** @deprecated 修改应用模板配置 {@link ModifyApplicationVisualizationRequest} {@link ModifyApplicationVisualizationResponse} */
-  ModifyApplicationVisualization(data: ModifyApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationVisualizationResponse>;
   /** 修改ConfigMap {@link ModifyConfigMapRequest} {@link ModifyConfigMapResponse} */
   ModifyConfigMap(data: ModifyConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigMapResponse>;
   /** 编辑draco设备信息 {@link ModifyEdgeDracoNodeRequest} {@link ModifyEdgeDracoNodeResponse} */

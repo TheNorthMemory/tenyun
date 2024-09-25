@@ -1457,7 +1457,7 @@ declare interface CreateListenerRequest {
   SessionExpireTime?: number;
   /** 监听器转发的方式。可选值：WRR、LEAST_CONN分别表示按权重轮询、最小连接数， 默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。 */
   Scheduler?: string;
-  /** 是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示开启，1表示未开启。 */
+  /** 是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示未开启，1表示开启。 */
   SniSwitch?: number;
   /** 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。 */
   TargetType?: string;
@@ -1481,6 +1481,10 @@ declare interface CreateListenerRequest {
   SnatEnable?: boolean;
   /** 全端口段监听器的结束端口 */
   FullEndPorts?: number[];
+  /** 内网http监听器开启h2c开关 */
+  H2cSwitch?: boolean;
+  /** TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关 */
+  SslCloseSwitch?: boolean;
 }
 
 declare interface CreateListenerResponse {

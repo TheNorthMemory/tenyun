@@ -1702,6 +1702,10 @@ declare interface RuleFilter {
   Key?: string | null;
   /** 限流条件的Values */
   Values?: string[] | null;
+  /** 操作符 */
+  Operator?: string | null;
+  /** header或query对应的name */
+  Name?: string | null;
 }
 
 /** 微服务注册引擎实例 */

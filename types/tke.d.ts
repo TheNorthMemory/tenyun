@@ -20,16 +20,16 @@ declare interface AutoUpgradeOptions {
   WeeklyPeriod?: string[] | null;
 }
 
-/** 自动扩所容的节点 */
+/** 自动扩缩容的节点 */
 declare interface AutoscalingAdded {
   /** 正在加入中的节点数量 */
-  Joining: number;
+  Joining?: number;
   /** 初始化中的节点数量 */
-  Initializing: number;
+  Initializing?: number;
   /** 正常的节点数量 */
-  Normal: number;
+  Normal?: number;
   /** 节点总数 */
-  Total: number;
+  Total?: number;
 }
 
 /** 原生节点池创建参数 */
@@ -877,16 +877,16 @@ declare namespace V20180525 {
     IsAutoUpgrade: boolean;
   }
 
-  /** 自动扩所容的节点 */
+  /** 自动扩缩容的节点 */
   interface AutoscalingAdded {
     /** 正在加入中的节点数量 */
-    Joining: number;
+    Joining?: number;
     /** 初始化中的节点数量 */
-    Initializing: number;
+    Initializing?: number;
     /** 正常的节点数量 */
-    Normal: number;
+    Normal?: number;
     /** 节点总数 */
-    Total: number;
+    Total?: number;
   }
 
   /** 仓储仓库信息 */

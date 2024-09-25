@@ -2861,7 +2861,7 @@ declare interface DescribeInstancesListRequest {
   OrderField?: string;
   /** 按照OrderField升序或者降序进行排序。取值范围：0：表示升序。1：表示降序。默认值为0。 */
   Asc?: number;
-  /** 自定义查询 */
+  /** 自定义查询过滤器。示例：根据ClusterId过滤实例：[{"Name":"ClusterId","Values":["emr-xxxxxxxx"]}]根据clusterName过滤实例：[{"Name": "ClusterName","Values": ["cluster_name"]}]根据ClusterStatus过滤实例：[{"Name": "ClusterStatus","Values": ["2"]}] */
   Filters?: Filters[];
 }
 
@@ -2957,9 +2957,9 @@ declare interface DescribeSLInstanceListRequest {
   Limit?: number;
   /** 排序字段。取值范围：clusterId：表示按照实例ID排序。addTime：表示按照实例创建时间排序。status：表示按照实例的状态码排序。 */
   OrderField?: string;
-  /** 按照OrderField升序或者降序进行排序。取值范围：0：表示降序。1：表示升序。默认值为0。 */
+  /** 按照OrderField升序或者降序进行排序。取值范围：0：表示升序。1：表示降序。默认值为0。 */
   Asc?: number;
-  /** 自定义查询过滤器。 */
+  /** 自定义查询过滤器。示例：根据ClusterId过滤实例：[{"Name":"ClusterId","Values":["emr-xxxxxxxx"]}]根据clusterName过滤实例：[{"Name": "ClusterName","Values": ["cluster_name"]}]根据ClusterStatus过滤实例：[{"Name": "ClusterStatus","Values": ["2"]}] */
   Filters?: Filters[];
 }
 

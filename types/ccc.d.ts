@@ -770,6 +770,50 @@ declare interface BindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
+declare interface CreateAICallRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 被叫 */
+  Callee: string;
+  /** 用于设定AI座席人设、说话规则、任务等的全局提示词。 */
+  SystemPrompt: string;
+  /** LLM类型 */
+  LLMType: string;
+  /** 模型（当前仅支持openai协议的模型） */
+  Model: string;
+  /** API密钥 */
+  APIKey: string;
+  /** API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions */
+  APIUrl: string;
+  /** 音色，目前仅支持以下音色:汉语：ZhiMei：智美，客服女声ZhiXi： 智希 通用女声ZhiQi：智琪 客服女声ZhiTian：智甜 女童声AiXiaoJing：爱小静 对话女声英语:WeRose：英文女声Monika：英文女声日语：Nanami韩语：SunHi印度尼西亚语(印度尼西亚)：Gadis马来语（马来西亚）:Yasmin 泰米尔语（马来西亚）:Kani泰语（泰国）:Achara越南语(越南):HoaiMy */
+  VoiceType: string;
+  /** 主叫号码列表 */
+  Callers?: string[];
+  /** 用于设定AI座席欢迎语。 */
+  WelcomeMessage?: string;
+  /** 0：使用welcomeMessage(为空时，被叫先说话；不为空时，机器人先说话)1: 使用ai根据prompt自动生成welcomeMessage并先说话 */
+  WelcomeType?: number;
+  /** 最大等待时长(毫秒)，默认60秒，超过这个时间用户没说话，自动挂断 */
+  MaxDuration?: number;
+  /** 语音识别支持的语言, 默认是"zh" 中文,填写数组,最长4个语言，第一个语言为主要识别语言，后面为可选语言，注意:主要语言为中国方言时，可选语言无效目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循ISO639：1. Chinese = "zh" # 中文2. Chinese_TW = "zh-TW" # 中国台湾3. Chinese_DIALECT = "zh-dialect" # 中国方言4. English = "en" # 英语5. Vietnamese = "vi" # 越南语6. Japanese = "ja" # 日语7. Korean = "ko" # 汉语8. Indonesia = "id" # 印度尼西亚语9. Thai = "th" # 泰语10. Portuguese = "pt" # 葡萄牙语11. Turkish = "tr" # 土耳其语12. Arabic = "ar" # 阿拉伯语13. Spanish = "es" # 西班牙语14. Hindi = "hi" # 印地语15. French = "fr" # 法语16. Malay = "ms" # 马来语17. Filipino = "fil" # 菲律宾语18. German = "de" # 德语19. Italian = "it" # 意大利语20. Russian = "ru" # 俄语 */
+  Languages?: string[];
+  /** 打断AI说话模式，默认为0，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断 */
+  InterruptMode?: number;
+  /** InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。 */
+  InterruptSpeechDuration?: number;
+  /** 模型是否支持(或者开启)call_end function calling */
+  EndFunctionEnable?: boolean;
+  /** EndFunctionEnable为true时生效；call_end function calling的desc，默认为 "End the call when user has to leave (like says bye) or you are instructed to do so." */
+  EndFunctionDesc?: string;
+}
+
+declare interface CreateAICallResponse {
+  /** 新创建的会话 ID */
+  SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAdminURLRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1889,6 +1933,8 @@ declare interface Ccc {
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定座席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
+  /** 创建ai会话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
+  CreateAICall(data: CreateAICallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAICallResponse>;
   /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;
   /** 创建自动外呼任务 {@link CreateAutoCalloutTaskRequest} {@link CreateAutoCalloutTaskResponse} */

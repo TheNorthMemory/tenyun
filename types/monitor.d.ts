@@ -2370,14 +2370,6 @@ declare interface BindingPolicyTagResponse {
   RequestId?: string;
 }
 
-declare interface CheckIsPrometheusNewUserRequest {
-}
-
-declare interface CheckIsPrometheusNewUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CleanGrafanaInstanceRequest {
   /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
@@ -4196,22 +4188,6 @@ declare interface DescribePrometheusInstancesResponse {
   RequestId?: string;
 }
 
-declare interface DescribePrometheusRecordRuleYamlRequest {
-  /** 实例id */
-  InstanceId: string;
-  /** 分页 */
-  Offset?: number;
-  /** 分页 */
-  Limit?: number;
-  /** 过滤，当前支持Name = NameValues = 目标名称列表 */
-  Filters?: Filter[];
-}
-
-declare interface DescribePrometheusRecordRuleYamlResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribePrometheusRecordRulesRequest {
   /** Prometheus 实例 ID */
   InstanceId: string;
@@ -5237,8 +5213,6 @@ declare interface Monitor {
   BindingPolicyObject(data: BindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyObjectResponse>;
   /** 策略绑定标签 {@link BindingPolicyTagRequest} {@link BindingPolicyTagResponse} */
   BindingPolicyTag(data: BindingPolicyTagRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyTagResponse>;
-  /** @deprecated 判断用户是否为云原生监控新用户 {@link CheckIsPrometheusNewUserRequest} {@link CheckIsPrometheusNewUserResponse} */
-  CheckIsPrometheusNewUser(data?: CheckIsPrometheusNewUserRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIsPrometheusNewUserResponse>;
   /** 强制销毁 Grafana 实例 {@link CleanGrafanaInstanceRequest} {@link CleanGrafanaInstanceResponse} */
   CleanGrafanaInstance(data: CleanGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanGrafanaInstanceResponse>;
   /** 创建通知模板 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
@@ -5419,8 +5393,6 @@ declare interface Monitor {
   DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
   /** 获取2.0实例列表 {@link DescribePrometheusInstancesOverviewRequest} {@link DescribePrometheusInstancesOverviewResponse} */
   DescribePrometheusInstancesOverview(data?: DescribePrometheusInstancesOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesOverviewResponse>;
-  /** @deprecated 拉取Prometheus聚合规则yaml列表 {@link DescribePrometheusRecordRuleYamlRequest} {@link DescribePrometheusRecordRuleYamlResponse} */
-  DescribePrometheusRecordRuleYaml(data: DescribePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRuleYamlResponse>;
   /** 获取聚合规则列表，包含关联集群内的资源 {@link DescribePrometheusRecordRulesRequest} {@link DescribePrometheusRecordRulesResponse} */
   DescribePrometheusRecordRules(data: DescribePrometheusRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRulesResponse>;
   /** 列出 Prometheus 服务所有可用的地域 {@link DescribePrometheusRegionsRequest} {@link DescribePrometheusRegionsResponse} */
