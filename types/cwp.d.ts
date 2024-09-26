@@ -15221,7 +15221,7 @@ declare interface Cwp {
   DescribeIgnoreRuleEffectHostList(data: DescribeIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreRuleEffectHostListResponse>;
   /** 查询批量导入机器信息 {@link DescribeImportMachineInfoRequest} {@link DescribeImportMachineInfoResponse} */
   DescribeImportMachineInfo(data: DescribeImportMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportMachineInfoResponse>;
-  /** 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
+  /** @deprecated 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
   /** 查询java内存马事件详细信息 {@link DescribeJavaMemShellInfoRequest} {@link DescribeJavaMemShellInfoResponse} */
   DescribeJavaMemShellInfo(data: DescribeJavaMemShellInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellInfoResponse>;

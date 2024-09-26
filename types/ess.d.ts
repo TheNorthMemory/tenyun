@@ -42,13 +42,13 @@ declare interface ApproverInfo {
   OrganizationName?: string;
   /** 合同中的签署控件列表，列表中可支持下列多种签署控件,控件的详细定义参考开发者中心的Component结构体 个人签名/印章 企业印章 骑缝章等签署控件 */
   SignComponents?: Component[];
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 签署方经办人的证件类型，支持以下类型，样式可以参考常见个人证件类型介绍ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
   /** 通知签署方经办人的方式, 有以下途径: **sms** : (默认)短信 **none** : 不通知注意：`如果使用的是通过文件发起合同（CreateFlowByFiles），NotifyType必须 是 sms 才会发送短信` */
   NotifyType?: string;
-  /** 收据场景设置签署人角色类型, 可以设置如下****类型****: **1** :收款人 **2** :开具人 **3** :见证人注: `收据场景为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 收据场景设置签署人角色类型, 可以设置如下类型: **1** :收款人 **2** :开具人 **3** :见证人注: `收据场景为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverRole?: number;
   /** 可以自定义签署人角色名：收款人、开具人、见证人等，长度不能超过20，只能由中文、字母、数字和下划线组成。注: `如果是用模板发起, 优先使用此处上传的, 如果不传则用模板的配置的` */
   ApproverRoleName?: string;
@@ -660,7 +660,7 @@ declare interface FlowCreateApprover {
   SignTypeSelector?: number;
   /** 签署人的签署截止时间，格式为Unix标准时间戳（秒）, 超过此时间未签署的合同变成已过期状态，不能在继续签署注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同` */
   Deadline?: number;
-  /** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `1.视频认证为白名单功能，使用前请联系对接的客户经理沟通。``2.使用视频认证必须指定签署认证方式为人脸（即ApproverSignTypes）。` */
+  /** 只有在生成H5签署链接的情形下（ 如调用获取H5签署链接、获取H5批量签署链接等接口），该配置才会生效。您可以指定H5签署视频核身的意图配置，选择问答模式或点头模式的语音文本。注意：1. 视频认证为白名单功能，使用前请联系对接的客户经理沟通。2. 使用视频认证时，合同发起的时候必须将签署认证方式指定为人脸（即ApproverSignTypes设置成人脸签署）。3. 签署完成后，可以通过查询签署认证人脸视频获取到当时的视频。 */
   Intention?: Intention;
 }
 
@@ -3625,7 +3625,7 @@ declare interface Ess {
   CreateBatchOrganizationAuthorizationUrl(data: CreateBatchOrganizationAuthorizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationAuthorizationUrlResponse>;
   /** 创建企业批量认证链接 {@link CreateBatchOrganizationRegistrationTasksRequest} {@link CreateBatchOrganizationRegistrationTasksResponse} */
   CreateBatchOrganizationRegistrationTasks(data: CreateBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationRegistrationTasksResponse>;
-  /** 获取H5批量签署链接 {@link CreateBatchQuickSignUrlRequest} {@link CreateBatchQuickSignUrlResponse} */
+  /** 获取H5批量签署或查看链接 {@link CreateBatchQuickSignUrlRequest} {@link CreateBatchQuickSignUrlResponse} */
   CreateBatchQuickSignUrl(data: CreateBatchQuickSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchQuickSignUrlResponse>;
   /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
   CreateBatchSignUrl(data: CreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchSignUrlResponse>;

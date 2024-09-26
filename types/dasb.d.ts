@@ -74,6 +74,8 @@ declare interface Acl {
   ACTemplateSet?: ACTemplate[] | null;
   /** 关联的白命令命令 */
   WhiteCmds?: string[] | null;
+  /** 是否允许记录键盘 */
+  AllowKeyboardLogger?: boolean | null;
 }
 
 /** 资产同步状态 */
@@ -177,11 +179,11 @@ declare interface Clb {
 /** 高危命令模板 */
 declare interface CmdTemplate {
   /** 高危命令模板ID */
-  Id: number;
+  Id?: number;
   /** 高危命令模板名称 */
-  Name: string;
+  Name?: string;
   /** 命令列表，命令之间用换行符（"\n"）分隔 */
-  CmdList: string;
+  CmdList?: string;
 }
 
 /** 命令集合 */
@@ -795,6 +797,8 @@ declare interface CreateAclRequest {
   DepartmentId?: string;
   /** 是否允许使用访问串，默认允许 */
   AllowAccessCredential?: boolean;
+  /** 是否允许记录键盘 */
+  AllowKeyboardLogger?: boolean;
 }
 
 declare interface CreateAclResponse {
@@ -1591,6 +1595,8 @@ declare interface ModifyAclRequest {
   DepartmentId?: string;
   /** 是否允许使用访问串 */
   AllowAccessCredential?: boolean;
+  /** 是否允许键盘记录 */
+  AllowKeyboardLogger?: boolean;
 }
 
 declare interface ModifyAclResponse {

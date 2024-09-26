@@ -22,6 +22,8 @@ declare interface ApplicationVersion {
   CreatorId?: string | null;
   /** Git信息。 */
   GitInfo?: string | null;
+  /** Git信息。 */
+  GitSource?: GitInfo | null;
 }
 
 /** 云服务器配置。 */
@@ -129,15 +131,15 @@ declare interface Filter {
 /** Git信息。 */
 declare interface GitInfo {
   /** Git地址。 */
-  GitHttpPath: string;
+  GitHttpPath: string | null;
   /** Git用户名。 */
-  GitUserName?: string;
+  GitUserName?: string | null;
   /** Git密码或者Token。 */
-  GitTokenOrPassword?: string;
+  GitTokenOrPassword?: string | null;
   /** 分支。 */
-  Branch?: string;
+  Branch?: string | null;
   /** 标签。 */
-  Tag?: string;
+  Tag?: string | null;
 }
 
 /** 资源限制范围。 */
@@ -244,6 +246,10 @@ declare interface RunGroup {
   ApplicationName?: string;
   /** 应用类型。 */
   ApplicationType?: string;
+  /** 应用版本。 */
+  ApplicationVersion?: ApplicationVersion | null;
+  /** 应用访问类型：- PRIVATE 私有应用- PUBLIC 公共应用 */
+  AccessMode?: string | null;
   /** 环境ID。 */
   EnvironmentId?: string;
   /** 环境名称。 */
@@ -256,12 +262,24 @@ declare interface RunGroup {
   Description?: string;
   /** 任务状态。 */
   Status?: string;
+  /** 任务批次类型 ：- WDL- NEXTFLOW */
+  Type?: string | null;
+  /** 工作目录。 */
+  WorkDir?: string | null;
   /** 任务输入。 */
   Input?: string;
+  /** 任务输入类型：- JSON: 导入JSON- MANUAL: 手动输入- COS: COS文件 */
+  InputType?: string | null;
+  /** 输入COS地址。 */
+  InputCosUri?: string | null;
+  /** 输入模版ID。 */
+  InputTemplateId?: string | null;
   /** WDL运行选项。 */
   Option?: RunOption;
   /** Nextflow运行选项。 */
   NFOption?: NFOption | null;
+  /** 使用的缓存卷。 */
+  Volumes?: VolumeInfo[] | null;
   /** 任务总数量。 */
   TotalRun?: number;
   /** 各状态任务的数量。 */
@@ -270,6 +288,8 @@ declare interface RunGroup {
   ExecutionTime?: ExecutionTime;
   /** 错误信息。 */
   ErrorMessage?: string;
+  /** 运行结果通知方式。 */
+  ResultNotify?: string | null;
   /** 创建时间。 */
   CreateTime?: string;
   /** 更新时间。 */
@@ -278,10 +298,6 @@ declare interface RunGroup {
   Creator?: string | null;
   /** 创建者ID。 */
   CreatorId?: string | null;
-  /** 运行结果通知方式。 */
-  ResultNotify?: string | null;
-  /** 应用版本。 */
-  ApplicationVersion?: ApplicationVersion | null;
 }
 
 /** 任务作业详情。 */
@@ -322,6 +338,8 @@ declare interface RunMetadata {
   PostProcess?: boolean | null;
   /** Cache命中 */
   CallCached?: boolean | null;
+  /** 工作目录。 */
+  WorkDir?: string | null;
   /** 标准输出。 */
   Stdout?: string | null;
   /** 错误输出。 */
@@ -342,6 +360,8 @@ declare interface RunOption {
   FinalWorkflowOutputsDir?: string | null;
   /** 是否使用相对目录归档输出。 */
   UseRelativeOutputPaths?: boolean | null;
+  /** 是否添加运行信息到输出目录中 */
+  AddRunInfoToOutputDir?: boolean | null;
 }
 
 /** 任务运行状态。 */
@@ -442,6 +462,16 @@ declare interface Volume {
   IsDefault?: boolean | null;
   /** 状态。 */
   Status?: string | null;
+}
+
+/** 缓存卷信息。 */
+declare interface VolumeInfo {
+  /** 缓存卷ID。 */
+  VolumeId?: string | null;
+  /** 名称。 */
+  Name?: string | null;
+  /** 挂载路径。 */
+  MountPath?: string | null;
 }
 
 declare interface CreateEnvironmentRequest {
@@ -545,7 +575,7 @@ declare interface DescribeRunGroupsRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤器，支持过滤字段：- Name：任务批次名称- RunGroupId：任务批次ID- Status：任务批次状态 */
+  /** 过滤器，支持过滤字段：- Name：任务批次名称- RunGroupId：任务批次ID- Status：任务批次状态- ApplicationId：应用ID- Type：类型（支持WDL，NEXTFLOW） */
   Filters?: Filter[];
 }
 
@@ -565,7 +595,7 @@ declare interface DescribeRunsRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤器，支持过滤字段：- RunGroupId：任务批次ID- Status：任务状态- RunUuid：任务UUID- UserDefinedId：用户定义ID */
+  /** 过滤器，支持过滤字段：- RunGroupId：任务批次ID- Status：任务状态- RunUuid：任务UUID- ApplicationId：应用ID- UserDefinedId：用户定义ID（批量运行表格第一列） */
   Filters?: Filter[];
 }
 

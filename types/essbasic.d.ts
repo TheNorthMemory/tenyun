@@ -546,7 +546,7 @@ declare interface FlowApproverInfo {
   SignTypeSelector?: number;
   /** 签署人在合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体单行文本控件多行文本控件勾选框控件数字控件图片控件数据表格等填写控件具体使用说明可参考[为签署方指定填写控件](https://qian.tencent.cn/developers/partner/createFlowByFiles#为签署方指定填写控件)注：`此参数仅在通过文件发起合同或者合同组时生效` */
   Components?: Component[];
-  /** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `1.视频认证为白名单功能，使用前请联系对接的客户经理沟通。``2.使用视频认证必须指定签署认证方式为人脸（即ApproverSignTypes）。` */
+  /** 只有在生成H5签署链接的情形下（ 如调用获取H5签署链接、获取H5批量签署链接等接口），该配置才会生效。您可以指定H5签署视频核身的意图配置，选择问答模式或点头模式的语音文本。注意：1. 视频认证为白名单功能，使用前请联系对接的客户经理沟通。2. 使用视频认证时，合同发起的时候必须将签署认证方式指定为人脸（即ApproverSignTypes设置成人脸签署）。3. 签署完成后，可以通过查询签署认证人脸视频获取到当时的视频。 */
   Intention?: Intention;
 }
 
@@ -2425,6 +2425,8 @@ declare interface CreateConsoleLoginUrlRequest {
   AutoJumpUrl?: string;
   /** 是否展示头顶导航栏 **ENABLE** : (默认)进入web控制台展示头顶导航栏 **DISABLE** : 进入web控制台不展示头顶导航栏 注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   TopNavigationStatus?: string;
+  /** 是否自动激活子客 */
+  AutoActive?: boolean;
 }
 
 declare interface CreateConsoleLoginUrlResponse {
@@ -4619,7 +4621,7 @@ declare interface Essbasic {
   ChannelCancelUserAutoSignEnableUrl(data: ChannelCancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelUserAutoSignEnableUrlResponse>;
   /** 获取批量撤销合同流程的腾讯电子签小程序链接 {@link ChannelCreateBatchCancelFlowUrlRequest} {@link ChannelCreateBatchCancelFlowUrlResponse} */
   ChannelCreateBatchCancelFlowUrl(data: ChannelCreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchCancelFlowUrlResponse>;
-  /** 获取H5批量签署链接 {@link ChannelCreateBatchQuickSignUrlRequest} {@link ChannelCreateBatchQuickSignUrlResponse} */
+  /** 获取H5批量签署或查看链接 {@link ChannelCreateBatchQuickSignUrlRequest} {@link ChannelCreateBatchQuickSignUrlResponse} */
   ChannelCreateBatchQuickSignUrl(data: ChannelCreateBatchQuickSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchQuickSignUrlResponse>;
   /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link ChannelCreateBatchSignUrlRequest} {@link ChannelCreateBatchSignUrlResponse} */
   ChannelCreateBatchSignUrl(data: ChannelCreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchSignUrlResponse>;

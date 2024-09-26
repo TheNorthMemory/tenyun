@@ -236,6 +236,10 @@ declare interface Certificates {
   SupportDownloadType?: SupportDownloadType | null;
   /** 证书吊销完成时间 */
   CertRevokedTime?: string | null;
+  /** 托管资源类型列表 */
+  HostingResourceTypes?: string[] | null;
+  /** 托管配置信息 */
+  HostingConfig?: HostingConfig | null;
 }
 
 /** clb实例详情 */
@@ -532,6 +536,14 @@ declare interface GatewayCertificate {
   CertSource?: string | null;
   /** 当前绑定的SSL证书ID */
   CertId?: string | null;
+}
+
+/** 托管配置 */
+declare interface HostingConfig {
+  /** 托管资源替换时间， 默认为证书过期前30天存在续费证书则替换 */
+  ReplaceTime?: number | null;
+  /** 托管发送消息类型：0，托管开始前消息提醒（没有续费证书也会收到该提示消息）； 1， 托管开始消息提醒（存在续费证书才会收到消息提醒）； 2， 托管资源替换失败消息提醒； 3 托管资源替换成功消息提醒 */
+  MessageTypes?: number[] | null;
 }
 
 /** Lighthouse实例 */

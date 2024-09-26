@@ -410,6 +410,8 @@ declare interface CloudBaseRunVolumeMount {
   ReadOnly?: boolean | null;
   /** Nfs挂载信息 */
   NfsVolumes?: CloudBaseRunNfsVolumeSource[] | null;
+  /** 挂载配置 */
+  MountPropagation?: string | null;
 }
 
 /** vpc信息 */
@@ -1553,11 +1555,13 @@ declare interface DeleteCloudBaseRunServerVersionRequest {
   IsDeleteImage?: boolean;
   /** 操作备注 */
   OperatorRemark?: string;
+  /** 延迟删除版本时间 */
+  DelayedDeletionTime?: number;
 }
 
 declare interface DeleteCloudBaseRunServerVersionResponse {
   /** 返回结果，succ为成功 */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
