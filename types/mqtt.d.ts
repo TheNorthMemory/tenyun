@@ -24,7 +24,7 @@ declare interface AuthorizationPolicyItem {
   ClientId?: string | null;
   /** 用户 */
   Username?: string | null;
-  /** ip地址 */
+  /** IP地址 */
   Ip?: string | null;
   /** 0，1，2 */
   Qos?: string | null;

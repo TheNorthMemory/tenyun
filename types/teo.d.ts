@@ -930,6 +930,62 @@ declare interface ForceRedirect {
   RedirectStatusCode?: number | null;
 }
 
+/** 边缘函数详情 */
+declare interface Function {
+  /** 函数 ID。 */
+  FunctionId?: string;
+  /** 站点 ID。 */
+  ZoneId?: string;
+  /** 函数名字。 */
+  Name?: string;
+  /** 函数描述。 */
+  Remark?: string;
+  /** 函数内容。 */
+  Content?: string;
+  /** 函数默认域名。 */
+  Domain?: string;
+  /** 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  CreateTime?: string;
+  /** 修改时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  UpdateTime?: string;
+}
+
+/** 边缘函数环境变量 */
+declare interface FunctionEnvironmentVariable {
+  /** 变量的名称，限制只能包含大小写字母、数字，特殊字符仅支持 @ . - _ ，最大 64 个字节，不支持重复。 */
+  Key: string;
+  /** 变量的值，限制最大 5000 字节，默认值为空。 */
+  Value?: string;
+  /** 变量的类型，取值有：string：字符串类型；json：json 对象类型。默认值为：string。 */
+  Type?: string;
+}
+
+/** 边缘函数触发规则。 */
+declare interface FunctionRule {
+  /** 规则ID。 */
+  RuleId?: string;
+  /** 规则条件列表，列表项之间为或关系。 */
+  FunctionRuleConditions?: FunctionRuleCondition[];
+  /** 函数 ID，命中触发规则条件后执行的函数。 */
+  FunctionId?: string;
+  /** 规则描述。 */
+  Remark?: string;
+  /** 函数名称。 */
+  FunctionName?: string;
+  /** 函数触发规则优先级，数值越大，优先级越高。 */
+  Priority?: number;
+  /** 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  CreateTime?: string;
+  /** 更新时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  UpdateTime?: string;
+}
+
+/** 边缘函数触发规则条件。 */
+declare interface FunctionRuleCondition {
+  /** 边缘函数触发规则条件，该列表内所有项全部满足即判断该条件满足。 */
+  RuleConditions: RuleCondition[];
+}
+
 /** Grpc配置项 */
 declare interface Grpc {
   /** 是否开启 Grpc 配置，取值有：on：开启；off：关闭。 */
@@ -2430,6 +2486,42 @@ declare interface CreateCustomizeErrorPageResponse {
   RequestId?: string;
 }
 
+declare interface CreateFunctionRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数名称，只能包含小写字母、数字、连字符，以数字或字母开头，以数字或字母结尾，最大支持 30 个字符。 */
+  Name: string;
+  /** 函数内容，当前仅支持 JavaScript 代码，最大支持 5MB 大小。 */
+  Content: string;
+  /** 函数描述，最大支持 60 个字符。 */
+  Remark?: string;
+}
+
+declare interface CreateFunctionResponse {
+  /** 函数 ID。 */
+  FunctionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFunctionRuleRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 规则条件列表，相同触发规则的不同条件匹配项之间为或关系。 */
+  FunctionRuleConditions: FunctionRuleCondition[];
+  /** 函数 ID，命中触发规则条件后执行的函数。 */
+  FunctionId: string;
+  /** 规则描述，最大支持 60 个字符。 */
+  Remark?: string;
+}
+
+declare interface CreateFunctionRuleResponse {
+  /** 规则 ID。 */
+  RuleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateL4ProxyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2744,6 +2836,30 @@ declare interface DeleteCustomErrorPageRequest {
 }
 
 declare interface DeleteCustomErrorPageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFunctionRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+}
+
+declare interface DeleteFunctionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFunctionRulesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 规则 ID 列表。 */
+  RuleIds: string[];
+}
+
+declare interface DeleteFunctionRulesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3170,6 +3286,56 @@ declare interface DescribeEnvironmentsResponse {
   TotalCount?: number;
   /** 环境列表。 */
   EnvInfos?: EnvInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFunctionRulesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 过滤条件列表，多个条件为且关系，Filters.Values 的上限为 20。详细的过滤条件如下：rule-id：按照【规则 ID】进行精确匹配。function-id：按照【函数 ID】进行精确匹配。remark：按照【规则描述】进行模糊匹配。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeFunctionRulesResponse {
+  /** 规则详情列表。 */
+  FunctionRules?: FunctionRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFunctionRuntimeEnvironmentRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+}
+
+declare interface DescribeFunctionRuntimeEnvironmentResponse {
+  /** 环境变量列表。 */
+  EnvironmentVariables?: FunctionEnvironmentVariable[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFunctionsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 按照函数 ID 列表过滤。 */
+  FunctionIds?: string[];
+  /** 过滤条件列表，多个条件为且关系，Filters.Values 的上限为 20。详细的过滤条件如下：name：按照【函数名称】进行模糊匹配。remark：按照【函数描述】进行模糊匹配。 */
+  Filters?: Filter[];
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：200。 */
+  Limit?: number;
+}
+
+declare interface DescribeFunctionsResponse {
+  /** 符合查询条件的函数总数。 */
+  TotalCount?: number;
+  /** 符合查询条件的所有函数信息。 */
+  Functions?: Function[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3702,6 +3868,22 @@ declare interface DownloadL7LogsResponse {
   RequestId?: string;
 }
 
+declare interface HandleFunctionRuntimeEnvironmentRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 操作类型，取值有：setEnvironmentVariable：设置环境变量，当环境变量存在时为修改行为，否则为添加行为；deleteEnvironmentVariable：删除环境变量变量；clearEnvironmentVariable：清空环境变量变量；resetEnvironmentVariable：重置环境变量变量。 */
+  Operation: string;
+  /** 环境变量列表，函数运行环境最多支持 64 个变量。当 Operation 取值为 setEnvironmentVariable、deleteEnvironmentVariable、resetEnvironmentVariable 时必填。 */
+  EnvironmentVariables?: FunctionEnvironmentVariable[];
+}
+
+declare interface HandleFunctionRuntimeEnvironmentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface IdentifyZoneRequest {
   /** 站点名称。 */
   ZoneName: string;
@@ -3904,6 +4086,52 @@ declare interface ModifyCustomErrorPageRequest {
 }
 
 declare interface ModifyCustomErrorPageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyFunctionRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 函数描述，最大支持 60 个字符，不填写保持原有配置。 */
+  Remark?: string;
+  /** 函数内容，当前仅支持 JavaScript 代码，最大支持 5MB 大小，不填写保持原有配置。 */
+  Content?: string;
+}
+
+declare interface ModifyFunctionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyFunctionRulePriorityRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 规则 ID 列表，必须填入调整优先级后的所有规则 ID，多条规则执行顺序依次从上往下，不填写保持原优先级顺序。 */
+  RuleIds: string[];
+}
+
+declare interface ModifyFunctionRulePriorityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyFunctionRuleRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 规则 ID。 */
+  RuleId: string;
+  /** 规则条件列表，相同触发规则的不同条件匹配项之间为或关系，不填写保持原有配置。 */
+  FunctionRuleConditions?: FunctionRuleCondition[];
+  /** 函数 ID，命中触发规则条件后执行的函数，不填写保持原有配置。 */
+  FunctionId?: string;
+  /** 规则描述，最大支持 60 个字符，不填写保持原有配置。 */
+  Remark?: string;
+}
+
+declare interface ModifyFunctionRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4495,6 +4723,10 @@ declare interface Teo {
   CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
   /** 创建自定义响应页面 {@link CreateCustomizeErrorPageRequest} {@link CreateCustomizeErrorPageResponse} */
   CreateCustomizeErrorPage(data: CreateCustomizeErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeErrorPageResponse>;
+  /** 创建边缘函数 {@link CreateFunctionRequest} {@link CreateFunctionResponse} */
+  CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
+  /** 创建边缘函数触发规则 {@link CreateFunctionRuleRequest} {@link CreateFunctionRuleResponse} */
+  CreateFunctionRule(data: CreateFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionRuleResponse>;
   /** 创建四层代理实例 {@link CreateL4ProxyRequest} {@link CreateL4ProxyResponse} */
   CreateL4Proxy(data: CreateL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ProxyResponse>;
   /** 创建四层代理转发规则 {@link CreateL4ProxyRulesRequest} {@link CreateL4ProxyRulesResponse} */
@@ -4529,6 +4761,10 @@ declare interface Teo {
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
   /** 删除自定义响应页面 {@link DeleteCustomErrorPageRequest} {@link DeleteCustomErrorPageResponse} */
   DeleteCustomErrorPage(data: DeleteCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomErrorPageResponse>;
+  /** 删除边缘函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
+  DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
+  /** 删除边缘函数触发规则 {@link DeleteFunctionRulesRequest} {@link DeleteFunctionRulesResponse} */
+  DeleteFunctionRules(data: DeleteFunctionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionRulesResponse>;
   /** 删除四层代理实例 {@link DeleteL4ProxyRequest} {@link DeleteL4ProxyResponse} */
   DeleteL4Proxy(data: DeleteL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyResponse>;
   /** 删除四层代理转发规则 {@link DeleteL4ProxyRulesRequest} {@link DeleteL4ProxyRulesResponse} */
@@ -4577,6 +4813,12 @@ declare interface Teo {
   DescribeDeployHistory(data: DescribeDeployHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployHistoryResponse>;
   /** 查询环境信息 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  /** 查询边缘函数触发规则 {@link DescribeFunctionRulesRequest} {@link DescribeFunctionRulesResponse} */
+  DescribeFunctionRules(data: DescribeFunctionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionRulesResponse>;
+  /** 查询边缘函数运行环境 {@link DescribeFunctionRuntimeEnvironmentRequest} {@link DescribeFunctionRuntimeEnvironmentResponse} */
+  DescribeFunctionRuntimeEnvironment(data: DescribeFunctionRuntimeEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionRuntimeEnvironmentResponse>;
+  /** 查询边缘函数列表 {@link DescribeFunctionsRequest} {@link DescribeFunctionsResponse} */
+  DescribeFunctions(data: DescribeFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionsResponse>;
   /** 查询域名详细配置 {@link DescribeHostsSettingRequest} {@link DescribeHostsSettingResponse} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
   /** 查询 IP 归属信息 {@link DescribeIPRegionRequest} {@link DescribeIPRegionResponse} */
@@ -4629,6 +4871,8 @@ declare interface Teo {
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
+  /** 操作边缘函数运行环境 {@link HandleFunctionRuntimeEnvironmentRequest} {@link HandleFunctionRuntimeEnvironmentResponse} */
+  HandleFunctionRuntimeEnvironment(data: HandleFunctionRuntimeEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<HandleFunctionRuntimeEnvironmentResponse>;
   /** 认证站点 {@link IdentifyZoneRequest} {@link IdentifyZoneResponse} */
   IdentifyZone(data: IdentifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<IdentifyZoneResponse>;
   /** 增购套餐配额 {@link IncreasePlanQuotaRequest} {@link IncreasePlanQuotaResponse} */
@@ -4651,6 +4895,12 @@ declare interface Teo {
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
   /** 修改自定义响应页面 {@link ModifyCustomErrorPageRequest} {@link ModifyCustomErrorPageResponse} */
   ModifyCustomErrorPage(data: ModifyCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomErrorPageResponse>;
+  /** 修改边缘函数 {@link ModifyFunctionRequest} {@link ModifyFunctionResponse} */
+  ModifyFunction(data: ModifyFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionResponse>;
+  /** 修改边缘函数触发规则 {@link ModifyFunctionRuleRequest} {@link ModifyFunctionRuleResponse} */
+  ModifyFunctionRule(data: ModifyFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionRuleResponse>;
+  /** 修改边缘函数触发规则优先级 {@link ModifyFunctionRulePriorityRequest} {@link ModifyFunctionRulePriorityResponse} */
+  ModifyFunctionRulePriority(data: ModifyFunctionRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionRulePriorityResponse>;
   /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
   /** 修改四层代理实例 {@link ModifyL4ProxyRequest} {@link ModifyL4ProxyResponse} */

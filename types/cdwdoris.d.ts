@@ -294,7 +294,7 @@ declare interface DorisSourceInfo {
   Port?: number | null;
   /** doris集群的账号 */
   User?: string | null;
-  /** doris集群的密码 */
+  /** base64编码的doris集群对应用户的密码 */
   Password?: string | null;
 }
 

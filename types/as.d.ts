@@ -422,6 +422,8 @@ declare interface LaunchConfiguration {
   IPv6InternetAccessible?: IPv6InternetAccessible;
   /** 置放群组id，仅支持指定一个。 */
   DisasterRecoverGroupIds?: string[];
+  /** 镜像族名称。 */
+  ImageFamily?: string | null;
 }
 
 /** 生命周期挂钩动作的执行结果信息。 */
@@ -895,8 +897,8 @@ declare interface CreateAutoScalingGroupResponse {
 declare interface CreateLaunchConfigurationRequest {
   /** 启动配置显示名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。 */
   LaunchConfigurationName: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。 */
-  ImageId: string;
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像Id与镜像族名称，二者必填一个且只能填写一个。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。 */
+  ImageId?: string;
   /** 启动配置所属项目ID。不填为默认项目。注意：伸缩组内实例所属项目ID取伸缩组项目ID，与这里取值无关。 */
   ProjectId?: number;
   /** 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。`InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。 */
@@ -943,6 +945,8 @@ declare interface CreateLaunchConfigurationRequest {
   IPv6InternetAccessible?: IPv6InternetAccessible;
   /** 置放群组id，仅支持指定一个。 */
   DisasterRecoverGroupIds?: string[];
+  /** 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。 */
+  ImageFamily?: string;
 }
 
 declare interface CreateLaunchConfigurationResponse {
@@ -1239,9 +1243,9 @@ declare interface DescribeLaunchConfigurationsRequest {
 
 declare interface DescribeLaunchConfigurationsResponse {
   /** 符合条件的启动配置数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 启动配置详细信息列表。 */
-  LaunchConfigurationSet: LaunchConfiguration[];
+  LaunchConfigurationSet?: LaunchConfiguration[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1550,6 +1554,8 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   LoginSettings?: LoginSettings;
   /** 实例标签列表。通过指定该参数，可以为扩容的实例绑定标签。最多支持指定10个标签。该参数会覆盖原有的实例标签列表，如需新增标签，需将新标签和原有标签一并传入。 */
   InstanceTags?: InstanceTag[];
+  /** 镜像族名称。 */
+  ImageFamily?: string;
 }
 
 declare interface ModifyLaunchConfigurationAttributesResponse {

@@ -37,6 +37,7 @@ import Bpaas, { Versions as BpaasVersions } from "./bpaas";
 import Bri, { Versions as BriVersions } from "./bri";
 import Bsca, { Versions as BscaVersions } from "./bsca";
 import Btoe, { Versions as BtoeVersions } from "./btoe";
+import Ca, { Versions as CaVersions } from "./ca";
 import Cam, { Versions as CamVersions } from "./cam";
 import Captcha, { Versions as CaptchaVersions } from "./captcha";
 import Car, { Versions as CarVersions } from "./car";
@@ -296,6 +297,7 @@ export declare type SERVICE_VERSIONS = {
   bri: BriVersions,
   bsca: BscaVersions,
   btoe: BtoeVersions,
+  ca: CaVersions,
   cam: CamVersions,
   captcha: CaptchaVersions,
   car: CarVersions,
@@ -606,6 +608,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   bsca: Bsca,
   /** {@link Btoe 区块链可信取证} */
   btoe: Btoe,
+  /** {@link Ca 腾讯云CA} */
+  ca: Ca,
   /** {@link Cam 访问管理} */
   cam: Cam,
   /** {@link Captcha 验证码} */

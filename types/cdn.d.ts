@@ -528,6 +528,8 @@ declare interface CacheConfigCache {
   IgnoreCacheControl: string | null;
   /** 当源站返回Set-Cookie头部时，节点是否缓存该头部及bodyon：开启，不缓存该头部及bodyoff：关闭，遵循用户自定义的节点缓存规则默认为关闭状态 */
   IgnoreSetCookie: string | null;
+  /** 当缓存过期后，是否开启源站 mtime 校验，配置值为equal、since、none 和 null。默认配置值为equal，会校验源站文件的mtime与长度。2024-09-12 18:00 之前创建的域名默认值 null，行为保持不变。equal：源站响应mtime必须和缓存mtime一致，若mtime值不一致，清除缓存。since：若源站响应mtime大于缓存mtime，清除缓存。none： 缓存过期回源重新获取文件mtime和长度后，不会校验源站响应mtime，若源站响应携带Content-Length头部，只有文件大小改变时才会更新缓存；若源站响应不携带Content-Length头部，会更新缓存。 */
+  OriginMtimeCheckType?: string | null;
 }
 
 /** 路径缓存遵循源站配置 */
@@ -536,6 +538,8 @@ declare interface CacheConfigFollowOrigin {
   Switch: string;
   /** 启发式缓存配置 */
   HeuristicCache?: HeuristicCache | null;
+  /** 当缓存过期后，是否开启源站 mtime 校验，配置值为equal、since、none 和 null。默认配置值为equal，会校验源站文件的mtime与长度。2024-09-12 18:00 之前创建的域名默认值 null，行为保持不变。equal：源站响应mtime必须和缓存mtime一致，若mtime值不一致，清除缓存。since：若源站响应mtime大于缓存mtime，清除缓存。none： 缓存过期回源重新获取文件mtime和长度后，不会校验源站响应mtime，若源站响应携带Content-Length头部，只有文件大小改变时才会更新缓存；若源站响应不携带Content-Length头部，会更新缓存。 */
+  OriginMtimeCheckType?: string | null;
 }
 
 /** 路径缓存不缓存配置 */

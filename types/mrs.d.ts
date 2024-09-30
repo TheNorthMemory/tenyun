@@ -2294,6 +2294,24 @@ declare interface ObstetricalHistoryBlock {
   FertilityHistory?: FertilityHistoryBlock | null;
 }
 
+/** 图片完整的OCR信息 */
+declare interface OcrInfo {
+  /** 图片进行OCR之后得到的所有包含字块的OCR信息 */
+  Items?: OcrItem[];
+  /** 图片进行OCR之后得到的所有字符 */
+  Text?: string;
+}
+
+/** 图片进行OCR之后,包含字符块的信息，包含字符与坐标，一个图片进行OCR之后可能分为多个这样的块 */
+declare interface OcrItem {
+  /** 图片中文字的字符串 */
+  Words?: string;
+  /** Words 中每个文字的坐标数组，顺序与Words中的字符顺序一致 */
+  Coords?: Coordinate[];
+  /** 整个字符块的坐标信息 */
+  WordCoords?: Coordinate;
+}
+
 /** 体检报告-眼科-裸眼视力 */
 declare interface OphthalmologyBareEyeSight {
   /** 左眼视力 */
@@ -3845,6 +3863,8 @@ declare interface ImageToObjectRequest {
   UserType?: number;
   /** 可选。用于指定不同报告使用的结构化引擎版本，不同版本返回的JSON 数据结果不兼容。若不指定版本号，就默认用旧的版本号。（1）检验报告 11，默认使用 V2，最高支持 V3。（2）病理报告 15，默认使用 V1，最高支持 V2。（3）入院记录29、出院记录 28、病历记录 216、病程记录 217、门诊记录 210，默认使用 V1，最高支持 V2。 */
   ReportTypeVersion?: ReportTypeVersion[];
+  /** 可选。 图片OCR信息列表，每一个元素是一张图片的OCR结果。适用于不想将医疗报告图片传入腾讯云的客户，客户可对图片OCR信息中的敏感信息去除之后再传入。与 ImageInfoList 二选一，同时存在则使用OcrInfoList */
+  OcrInfoList?: OcrInfo[];
 }
 
 declare interface ImageToObjectResponse {

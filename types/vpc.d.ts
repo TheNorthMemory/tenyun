@@ -912,6 +912,8 @@ declare interface EndPoint {
   GroupSet?: string[];
   /** 终端节点服务名称。 */
   ServiceName?: string | null;
+  /** CDC 集群唯一 ID */
+  CdcId?: string | null;
   /** 标签键值对。 */
   TagSet?: Tag[] | null;
 }
@@ -940,6 +942,8 @@ declare interface EndPointService {
   CreateTime?: string;
   /** 挂载的PAAS服务类型，CLB,CDB,CRS */
   ServiceType?: string;
+  /** CDC 集群唯一 ID */
+  CdcId?: string | null;
   /** Uin */
   ServiceUin?: string | null;
   /** 服务IP类型 */
@@ -1064,6 +1068,8 @@ declare interface HaVip {
   HaVipAssociationSet?: HaVipAssociation[] | null;
   /** 是否开启`HAVIP`的飘移范围校验。 */
   CheckAssociate?: boolean | null;
+  /** CDC实例ID。 */
+  CdcId?: string | null;
   /** HAVIP 刷新时间。该参数只作为出参数。以下场景会触发 FlushTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00 */
   FlushedTime?: string | null;
   /** 标签键值对。 */
@@ -1090,6 +1096,54 @@ declare interface HealthCheckConfig {
   ProbeThreshold?: number | null;
   /** 探测超时时间，范围【10-5000】，单位ms。 */
   ProbeTimeout?: number | null;
+}
+
+/** 高优路由表条目修改属性。 */
+declare interface HighPriorityModifyItem {
+  /** 高优路由条目唯一ID。 */
+  HighPriorityRouteId?: string;
+  /** 高优路由条目描述。 */
+  Description?: string;
+}
+
+/** 高优路由表条目信息 */
+declare interface HighPriorityRoute {
+  /** 高优路由表唯一 ID */
+  HighPriorityRouteTableId?: string | null;
+  /** 高优路由表条目唯一 ID */
+  HighPriorityRouteId?: string | null;
+  /** 目标网段 */
+  DestinationCidrBlock?: string | null;
+  /** 网关类型 */
+  GatewayType?: string | null;
+  /** 网关唯一ID */
+  GatewayId?: string | null;
+  /** 高优路由条目描述 */
+  Description?: string | null;
+  /** ECMP算法，支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
+  SubnetRouteAlgorithm?: string | null;
+  /** 出参展示，是否为CDC属性高优路由 */
+  IsCdc?: boolean | null;
+  /** 出参展示，CDC 唯一ID */
+  CdcId?: string | null;
+  /** 创建时间。 */
+  CreatedTime?: string | null;
+}
+
+/** 高优路由表信息 */
+declare interface HighPriorityRouteTable {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId?: string | null;
+  /** VPC实例ID。 */
+  VpcId?: string | null;
+  /** 高优路由表名称。 */
+  Name?: string | null;
+  /** 高优路由表关联的子网列表。 */
+  SubnetSet?: string[] | null;
+  /** 高优路由表条目信息 */
+  HighPriorityRouteSet?: HighPriorityRoute[] | null;
+  /** 创建时间。 */
+  CreatedTime?: string | null;
 }
 
 /** IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议 */
@@ -2000,6 +2054,8 @@ declare interface Route {
   PublishedToVbc?: boolean | null;
   /** 路由策略创建时间 */
   CreatedTime?: string;
+  /** CDC 集群唯一 ID。 */
+  CdcId?: string | null;
 }
 
 /** 路由冲突对象 */
@@ -2010,6 +2066,14 @@ declare interface RouteConflict {
   DestinationCidrBlock: string;
   /** 冲突的路由策略列表 */
   ConflictSet: Route[];
+}
+
+/** 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
+declare interface RouteECMPAlgorithm {
+  /** 目标网段 */
+  DestinationCidrBlock?: string | null;
+  /** 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
+  SubnetRouteAlgorithm?: string | null;
 }
 
 /** 路由表选择策略信息 */
@@ -2426,6 +2490,14 @@ declare interface SubnetInput {
 declare interface Tag {
   /** 标签键 */
   Key: string | null;
+  /** 标签值 */
+  Value?: string | null;
+}
+
+/** 标签描述信息 */
+declare interface Tags {
+  /** 标签键 */
+  Key?: string | null;
   /** 标签值 */
   Value?: string | null;
 }
@@ -3410,6 +3482,22 @@ declare interface CreateCcnRouteTablesResponse {
   RequestId?: string;
 }
 
+declare interface CreateCdcLDCXListRequest {
+}
+
+declare interface CreateCdcLDCXListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCdcNetPlanesRequest {
+}
+
+declare interface CreateCdcNetPlanesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomerGatewayRequest {
   /** 对端网关名称，可任意命名，但不得超过60个字符。 */
   CustomerGatewayName: string;
@@ -3558,6 +3646,36 @@ declare interface CreateHaVipRequest {
 declare interface CreateHaVipResponse {
   /** `HAVIP`对象。 */
   HaVip?: HaVip;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHighPriorityRouteTableRequest {
+  /** 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
+  VpcId: string;
+  /** 高优路由表名称，最大长度不能超过60个字节。 */
+  Name: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
+  Tags?: Tag[];
+}
+
+declare interface CreateHighPriorityRouteTableResponse {
+  /** 高优路由表信息 */
+  HighPriorityRouteTable?: HighPriorityRouteTable;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHighPriorityRoutesRequest {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId: string;
+  /** 高优路由表条目信息。 */
+  HighPriorityRoutes: HighPriorityRoute[];
+}
+
+declare interface CreateHighPriorityRoutesResponse {
+  /** 高优路由表信息。 */
+  HighPriorityRouteSet?: HighPriorityRoute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4083,6 +4201,8 @@ declare interface CreateVpcPeeringConnectionRequest {
   ChargeType?: string;
   /** 服务分级：PT、AU、AG。 */
   QosLevel?: string;
+  /** 标签键值对 */
+  Tags?: Tags[];
 }
 
 declare interface CreateVpcPeeringConnectionResponse {
@@ -4328,6 +4448,22 @@ declare interface DeleteCcnRouteTablesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCdcLDCXListRequest {
+}
+
+declare interface DeleteCdcLDCXListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCdcNetPlanesRequest {
+}
+
+declare interface DeleteCdcNetPlanesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCustomerGatewayRequest {
   /** 对端网关ID，例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/api/215/17516)接口查询对端网关。 */
   CustomerGatewayId: string;
@@ -4388,6 +4524,30 @@ declare interface DeleteHaVipRequest {
 }
 
 declare interface DeleteHaVipResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteHighPriorityRouteTablesRequest {
+  /** 高优路由表表唯一ID 列表。 */
+  HighPriorityRouteTableIds?: string[];
+}
+
+declare interface DeleteHighPriorityRouteTablesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteHighPriorityRoutesRequest {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId: string;
+  /** 高优路由表条目唯一 ID 列表。 */
+  HighPriorityRouteIds: string[];
+}
+
+declare interface DeleteHighPriorityRoutesResponse {
+  /** 高优路由表条目信息。 */
+  HighPriorityRouteSet?: HighPriorityRoute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5080,6 +5240,30 @@ declare interface DescribeCcnsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCdcLDCXListRequest {
+}
+
+declare interface DescribeCdcLDCXListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCdcNetPlanesRequest {
+}
+
+declare interface DescribeCdcNetPlanesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCdcUsedIdcVlanRequest {
+}
+
+declare interface DescribeCdcUsedIdcVlanResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClassicLinkInstancesRequest {
   /** 过滤条件。vpc-id - String - （过滤条件）VPC实例ID。vm-ip - String - （过滤条件）基础网络云服务器IP。 */
   Filters?: FilterObject[];
@@ -5400,6 +5584,48 @@ declare interface DescribeHaVipsResponse {
   TotalCount?: number;
   /** `HAVIP`对象数组。 */
   HaVipSet?: HaVip[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHighPriorityRouteTablesRequest {
+  /** 过滤条件，参数不支持同时指定HighPriorityRouteTableIds和Filters。high-priority-route-table-id - String - （过滤条件）高优路由表实例ID。name - String - （过滤条件）高优路由表名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。tag-key - String -是否必填：否 - （过滤条件）按照标签键进行过滤。next-hop-type - String - 是否必填：否 - （过滤条件）按下一跳类型进行过滤。使用next-hop-type进行过滤时，必须同时携带route-table-id与vpc-id。目前我们支持的类型有：HAVIP：高可用虚拟IP；NORMAL_CVM：普通云服务器； */
+  Filters?: Filter[];
+  /** 高优路由表实例ID，例如：hprtb-18mot1fm。 */
+  HighPriorityRouteTableIds?: string[];
+  /** 偏移量。 */
+  Offset?: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: string;
+  /** 是否需要获取路由策略信息，默认获取，当控制台不需要拉取路由策略信息时，改为False。 */
+  NeedRouterInfo?: boolean;
+}
+
+declare interface DescribeHighPriorityRouteTablesResponse {
+  /** 高优路由表对象。 */
+  HighPriorityRouteTableSet?: HighPriorityRouteTable[];
+  /** 符合条件的实例数量。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHighPriorityRoutesRequest {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId: string;
+  /** gateway-id - String - （过滤条件）网关ID。description - String - （过滤条件）路由描述。dest-cidr - String - （过滤条件）目的端地址，支持模糊左匹配。subnet-route-algorithm - String - （过滤条件）现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。is-cdc - String - （过滤条件）CDC属性高优路由表。cdc-id - String - （过滤条件）CDC 集群唯一 ID 。 */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 请求对象个数。 */
+  Limit?: number;
+}
+
+declare interface DescribeHighPriorityRoutesResponse {
+  /** 高优路由表条目信息。 */
+  HighPriorityRouteSet?: HighPriorityRoute[];
+  /** 高优路由表条目个数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5920,6 +6146,24 @@ declare interface DescribeRouteTablesResponse {
   TotalCount?: number;
   /** 路由表对象。 */
   RouteTableSet?: RouteTable[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRoutesRequest {
+  /** 过滤条件，参数不支持同时指定RouteTableIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。gateway-id - String - （过滤条件）网关ID。description - String - （过滤条件）路由描述。route-table-id - String - （过滤条件）路由表实例ID。dest-cidr - String - （过滤条件）目的端地址，支持模糊左匹配。 */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 请求对象个数。 */
+  Limit?: number;
+}
+
+declare interface DescribeRoutesResponse {
+  /** 路由对象。 */
+  RouteSet?: Route[];
+  /** 符合条件的实例数量。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7256,6 +7500,22 @@ declare interface ModifyCcnRouteTablesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCdcLDCXAttributeRequest {
+}
+
+declare interface ModifyCdcLDCXAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCdcNetPlaneAttributeRequest {
+}
+
+declare interface ModifyCdcNetPlaneAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomerGatewayAttributeRequest {
   /** 对端网关ID，例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/api/215/17516)接口查询对端网关。 */
   CustomerGatewayId: string;
@@ -7336,6 +7596,42 @@ declare interface ModifyHaVipAttributeRequest {
 }
 
 declare interface ModifyHaVipAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHighPriorityRouteAttributeRequest {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId: string;
+  /** 高优路由表条目修改属性。 */
+  HighPriorityModifyItems: HighPriorityModifyItem[];
+}
+
+declare interface ModifyHighPriorityRouteAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHighPriorityRouteECMPAlgorithmRequest {
+  /** 高优路由表实例唯一ID。 */
+  HighPriorityRouteTableId: string;
+  /** 高优路由表HASH策略。 */
+  RouteECMPAlgorithms: RouteECMPAlgorithm[];
+}
+
+declare interface ModifyHighPriorityRouteECMPAlgorithmResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHighPriorityRouteTableAttributeRequest {
+  /** 高优路由表表唯一ID */
+  HighPriorityRouteTableId: string;
+  /** 高优路由表表名称 */
+  Name: string;
+}
+
+declare interface ModifyHighPriorityRouteTableAttributeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8114,6 +8410,34 @@ declare interface ReplaceDirectConnectGatewayCcnRoutesResponse {
   RequestId?: string;
 }
 
+declare interface ReplaceHighPriorityRouteTableAssociationRequest {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId: string;
+  /** 子网唯一 ID */
+  SubnetId: string;
+}
+
+declare interface ReplaceHighPriorityRouteTableAssociationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReplaceHighPriorityRoutesRequest {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId: string;
+  /** 高优路由表条目信息。 */
+  HighPriorityRoutes: HighPriorityRoute[];
+}
+
+declare interface ReplaceHighPriorityRoutesResponse {
+  /** 新的高优路由表条目列表。 */
+  NewHighPriorityRouteSet?: HighPriorityRoute[];
+  /** 旧的高优路由表条目列表。 */
+  OldHighPriorityRouteSet?: HighPriorityRoute[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReplaceRouteTableAssociationRequest {
   /** 子网实例ID，例如：subnet-3x5lf5q0。可通过DescribeSubnets接口查询。 */
   SubnetId: string;
@@ -8180,6 +8504,20 @@ declare interface ResetAttachCcnInstancesRequest {
 }
 
 declare interface ResetAttachCcnInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetHighPriorityRoutesRequest {
+  /** 高优路由表唯一 ID。 */
+  HighPriorityRouteTableId: string;
+  /** 高优路由表名称。 */
+  Name: string;
+  /** 高优路由表条目信息。 */
+  HighPriorityRoutes: HighPriorityRoute[];
+}
+
+declare interface ResetHighPriorityRoutesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8455,6 +8793,10 @@ declare interface Vpc {
   CreateCcn(data: CreateCcnRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcnResponse>;
   /** 新建云联网路由表 {@link CreateCcnRouteTablesRequest} {@link CreateCcnRouteTablesResponse} */
   CreateCcnRouteTables(data: CreateCcnRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcnRouteTablesResponse>;
+  /** 创建 IDC 通道 {@link CreateCdcLDCXListRequest} {@link CreateCdcLDCXListResponse} */
+  CreateCdcLDCXList(data?: CreateCdcLDCXListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCdcLDCXListResponse>;
+  /** 创建虚拟连接 {@link CreateCdcNetPlanesRequest} {@link CreateCdcNetPlanesResponse} */
+  CreateCdcNetPlanes(data?: CreateCdcNetPlanesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCdcNetPlanesResponse>;
   /** 创建对端网关 {@link CreateCustomerGatewayRequest} {@link CreateCustomerGatewayResponse} */
   CreateCustomerGateway(data: CreateCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerGatewayResponse>;
   /** 创建默认安全组 {@link CreateDefaultSecurityGroupRequest} {@link CreateDefaultSecurityGroupResponse} */
@@ -8471,6 +8813,10 @@ declare interface Vpc {
   CreateFlowLog(data: CreateFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowLogResponse>;
   /** 创建HAVIP {@link CreateHaVipRequest} {@link CreateHaVipResponse} */
   CreateHaVip(data: CreateHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHaVipResponse>;
+  /** 创建高优路由表 {@link CreateHighPriorityRouteTableRequest} {@link CreateHighPriorityRouteTableResponse} */
+  CreateHighPriorityRouteTable(data: CreateHighPriorityRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHighPriorityRouteTableResponse>;
+  /** 创建高优路由表条目 {@link CreateHighPriorityRoutesRequest} {@link CreateHighPriorityRoutesResponse} */
+  CreateHighPriorityRoutes(data: CreateHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHighPriorityRoutesResponse>;
   /** 创建IPV6转换IPV4实例 {@link CreateIp6TranslatorsRequest} {@link CreateIp6TranslatorsResponse} */
   CreateIp6Translators(data?: CreateIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIp6TranslatorsResponse>;
   /** 创建本地网关 {@link CreateLocalGatewayRequest} {@link CreateLocalGatewayResponse} */
@@ -8553,6 +8899,10 @@ declare interface Vpc {
   DeleteCcn(data: DeleteCcnRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCcnResponse>;
   /** 删除云联网路由表 {@link DeleteCcnRouteTablesRequest} {@link DeleteCcnRouteTablesResponse} */
   DeleteCcnRouteTables(data: DeleteCcnRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCcnRouteTablesResponse>;
+  /** 删除 IDC通道 {@link DeleteCdcLDCXListRequest} {@link DeleteCdcLDCXListResponse} */
+  DeleteCdcLDCXList(data?: DeleteCdcLDCXListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCdcLDCXListResponse>;
+  /** 删除虚拟连接 {@link DeleteCdcNetPlanesRequest} {@link DeleteCdcNetPlanesResponse} */
+  DeleteCdcNetPlanes(data?: DeleteCdcNetPlanesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCdcNetPlanesResponse>;
   /** 删除对端网关 {@link DeleteCustomerGatewayRequest} {@link DeleteCustomerGatewayResponse} */
   DeleteCustomerGateway(data: DeleteCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerGatewayResponse>;
   /** 删除DhcpIp {@link DeleteDhcpIpRequest} {@link DeleteDhcpIpResponse} */
@@ -8565,6 +8915,10 @@ declare interface Vpc {
   DeleteFlowLog(data: DeleteFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFlowLogResponse>;
   /** 删除HAVIP {@link DeleteHaVipRequest} {@link DeleteHaVipResponse} */
   DeleteHaVip(data: DeleteHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHaVipResponse>;
+  /** 删除高优路由表 {@link DeleteHighPriorityRouteTablesRequest} {@link DeleteHighPriorityRouteTablesResponse} */
+  DeleteHighPriorityRouteTables(data?: DeleteHighPriorityRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHighPriorityRouteTablesResponse>;
+  /** 删除高优路由表条目 {@link DeleteHighPriorityRoutesRequest} {@link DeleteHighPriorityRoutesResponse} */
+  DeleteHighPriorityRoutes(data: DeleteHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHighPriorityRoutesResponse>;
   /** 释放IPV6转换实例 {@link DeleteIp6TranslatorsRequest} {@link DeleteIp6TranslatorsResponse} */
   DeleteIp6Translators(data: DeleteIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIp6TranslatorsResponse>;
   /** 删除本地网关 {@link DeleteLocalGatewayRequest} {@link DeleteLocalGatewayResponse} */
@@ -8667,6 +9021,12 @@ declare interface Vpc {
   DescribeCcnRoutes(data: DescribeCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRoutesResponse>;
   /** 查询CCN列表 {@link DescribeCcnsRequest} {@link DescribeCcnsResponse} */
   DescribeCcns(data?: DescribeCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnsResponse>;
+  /** 查询 IDC通道信息 {@link DescribeCdcLDCXListRequest} {@link DescribeCdcLDCXListResponse} */
+  DescribeCdcLDCXList(data?: DescribeCdcLDCXListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdcLDCXListResponse>;
+  /** 查询虚拟连接 {@link DescribeCdcNetPlanesRequest} {@link DescribeCdcNetPlanesResponse} */
+  DescribeCdcNetPlanes(data?: DescribeCdcNetPlanesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdcNetPlanesResponse>;
+  /** 查询IDC使用的 VLAN {@link DescribeCdcUsedIdcVlanRequest} {@link DescribeCdcUsedIdcVlanResponse} */
+  DescribeCdcUsedIdcVlan(data?: DescribeCdcUsedIdcVlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdcUsedIdcVlanResponse>;
   /** 查询基础网络互通列表 {@link DescribeClassicLinkInstancesRequest} {@link DescribeClassicLinkInstancesResponse} */
   DescribeClassicLinkInstances(data?: DescribeClassicLinkInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicLinkInstancesResponse>;
   /** 查询云联网跨境限速实例 {@link DescribeCrossBorderCcnRegionBandwidthLimitsRequest} {@link DescribeCrossBorderCcnRegionBandwidthLimitsResponse} */
@@ -8695,6 +9055,10 @@ declare interface Vpc {
   DescribeGatewayFlowQos(data: DescribeGatewayFlowQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayFlowQosResponse>;
   /** 查询HAVIP列表 {@link DescribeHaVipsRequest} {@link DescribeHaVipsResponse} */
   DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
+  /** 查询高优路由表 {@link DescribeHighPriorityRouteTablesRequest} {@link DescribeHighPriorityRouteTablesResponse} */
+  DescribeHighPriorityRouteTables(data?: DescribeHighPriorityRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighPriorityRouteTablesResponse>;
+  /** 查询高优路由表条目 {@link DescribeHighPriorityRoutesRequest} {@link DescribeHighPriorityRoutesResponse} */
+  DescribeHighPriorityRoutes(data: DescribeHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighPriorityRoutesResponse>;
   /** 查询IPV6地址信息 {@link DescribeIp6AddressesRequest} {@link DescribeIp6AddressesResponse} */
   DescribeIp6Addresses(data?: DescribeIp6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6AddressesResponse>;
   /** 查询账户在指定地域IPV6转换实例和规则的配额 {@link DescribeIp6TranslatorQuotaRequest} {@link DescribeIp6TranslatorQuotaResponse} */
@@ -8751,6 +9115,8 @@ declare interface Vpc {
   DescribeRouteTableSelectionPolicies(data?: DescribeRouteTableSelectionPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTableSelectionPoliciesResponse>;
   /** 查询路由表 {@link DescribeRouteTablesRequest} {@link DescribeRouteTablesResponse} */
   DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
+  /** 查询路由列表 {@link DescribeRoutesRequest} {@link DescribeRoutesResponse} */
+  DescribeRoutes(data?: DescribeRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutesResponse>;
   /** 查询安全组关联实例统计 {@link DescribeSecurityGroupAssociationStatisticsRequest} {@link DescribeSecurityGroupAssociationStatisticsResponse} */
   DescribeSecurityGroupAssociationStatistics(data: DescribeSecurityGroupAssociationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupAssociationStatisticsResponse>;
   /** 查询用户安全组配额 {@link DescribeSecurityGroupLimitsRequest} {@link DescribeSecurityGroupLimitsResponse} */
@@ -8921,6 +9287,10 @@ declare interface Vpc {
   ModifyCcnRegionBandwidthLimitsType(data: ModifyCcnRegionBandwidthLimitsTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnRegionBandwidthLimitsTypeResponse>;
   /** 修改云联网路由表 {@link ModifyCcnRouteTablesRequest} {@link ModifyCcnRouteTablesResponse} */
   ModifyCcnRouteTables(data: ModifyCcnRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnRouteTablesResponse>;
+  /** 修改 IDC通道信息 {@link ModifyCdcLDCXAttributeRequest} {@link ModifyCdcLDCXAttributeResponse} */
+  ModifyCdcLDCXAttribute(data?: ModifyCdcLDCXAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCdcLDCXAttributeResponse>;
+  /** 修改虚拟连接 {@link ModifyCdcNetPlaneAttributeRequest} {@link ModifyCdcNetPlaneAttributeResponse} */
+  ModifyCdcNetPlaneAttribute(data?: ModifyCdcNetPlaneAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCdcNetPlaneAttributeResponse>;
   /** 修改对端网关 {@link ModifyCustomerGatewayAttributeRequest} {@link ModifyCustomerGatewayAttributeResponse} */
   ModifyCustomerGatewayAttribute(data: ModifyCustomerGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerGatewayAttributeResponse>;
   /** 修改DhcpIp属性 {@link ModifyDhcpIpAttributeRequest} {@link ModifyDhcpIpAttributeResponse} */
@@ -8933,6 +9303,12 @@ declare interface Vpc {
   ModifyGatewayFlowQos(data: ModifyGatewayFlowQosRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatewayFlowQosResponse>;
   /** 修改HAVIP属性 {@link ModifyHaVipAttributeRequest} {@link ModifyHaVipAttributeResponse} */
   ModifyHaVipAttribute(data: ModifyHaVipAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHaVipAttributeResponse>;
+  /** 修改高优路由表条目属性 {@link ModifyHighPriorityRouteAttributeRequest} {@link ModifyHighPriorityRouteAttributeResponse} */
+  ModifyHighPriorityRouteAttribute(data: ModifyHighPriorityRouteAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHighPriorityRouteAttributeResponse>;
+  /** 修改高优路由ECMP的HASH算法 {@link ModifyHighPriorityRouteECMPAlgorithmRequest} {@link ModifyHighPriorityRouteECMPAlgorithmResponse} */
+  ModifyHighPriorityRouteECMPAlgorithm(data: ModifyHighPriorityRouteECMPAlgorithmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHighPriorityRouteECMPAlgorithmResponse>;
+  /** 修改高优路由表属性 {@link ModifyHighPriorityRouteTableAttributeRequest} {@link ModifyHighPriorityRouteTableAttributeResponse} */
+  ModifyHighPriorityRouteTableAttribute(data: ModifyHighPriorityRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHighPriorityRouteTableAttributeResponse>;
   /** 修改IPV6访问internet的带宽 {@link ModifyIp6AddressesBandwidthRequest} {@link ModifyIp6AddressesBandwidthResponse} */
   ModifyIp6AddressesBandwidth(data: ModifyIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIp6AddressesBandwidthResponse>;
   /** 修改IPV6转换规则属性 {@link ModifyIp6RuleRequest} {@link ModifyIp6RuleResponse} */
@@ -9037,6 +9413,10 @@ declare interface Vpc {
   ReplaceCcnRouteTableInputPolicys(data: ReplaceCcnRouteTableInputPolicysRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCcnRouteTableInputPolicysResponse>;
   /** 替换专线网关云联网路由 {@link ReplaceDirectConnectGatewayCcnRoutesRequest} {@link ReplaceDirectConnectGatewayCcnRoutesResponse} */
   ReplaceDirectConnectGatewayCcnRoutes(data: ReplaceDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceDirectConnectGatewayCcnRoutesResponse>;
+  /** 替换高优路由表和子网绑定关系 {@link ReplaceHighPriorityRouteTableAssociationRequest} {@link ReplaceHighPriorityRouteTableAssociationResponse} */
+  ReplaceHighPriorityRouteTableAssociation(data: ReplaceHighPriorityRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceHighPriorityRouteTableAssociationResponse>;
+  /** 替换高优路由表条目信息。 {@link ReplaceHighPriorityRoutesRequest} {@link ReplaceHighPriorityRoutesResponse} */
+  ReplaceHighPriorityRoutes(data: ReplaceHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceHighPriorityRoutesResponse>;
   /** 替换路由表绑定关系 {@link ReplaceRouteTableAssociationRequest} {@link ReplaceRouteTableAssociationResponse} */
   ReplaceRouteTableAssociation(data: ReplaceRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRouteTableAssociationResponse>;
   /** 替换路由策略 {@link ReplaceRoutesRequest} {@link ReplaceRoutesResponse} */
@@ -9047,6 +9427,8 @@ declare interface Vpc {
   ReplaceSecurityGroupPolicy(data: ReplaceSecurityGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceSecurityGroupPolicyResponse>;
   /** 重新申请关联实例 {@link ResetAttachCcnInstancesRequest} {@link ResetAttachCcnInstancesResponse} */
   ResetAttachCcnInstances(data: ResetAttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAttachCcnInstancesResponse>;
+  /** 重置高优路由表路由 {@link ResetHighPriorityRoutesRequest} {@link ResetHighPriorityRoutesResponse} */
+  ResetHighPriorityRoutes(data: ResetHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetHighPriorityRoutesResponse>;
   /** 调整NAT网关并发连接上限 {@link ResetNatGatewayConnectionRequest} {@link ResetNatGatewayConnectionResponse} */
   ResetNatGatewayConnection(data: ResetNatGatewayConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetNatGatewayConnectionResponse>;
   /** 重置路由表名称和路由策略 {@link ResetRoutesRequest} {@link ResetRoutesResponse} */

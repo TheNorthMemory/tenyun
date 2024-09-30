@@ -290,6 +290,8 @@ declare interface IMCdrInfo {
   SkillGroupName?: string | null;
   /** 满意度 */
   Satisfaction?: IMSatisfaction | null;
+  /** 用户ID */
+  ClientUserId?: string;
 }
 
 /** IM满意度 */
@@ -334,6 +336,18 @@ declare interface NumberInfo {
   CallOutSkillGroupIds?: number[];
   /** 号码状态，1-正常，2-欠费停用，4-管理员停用，5-违规停用 */
   State?: number;
+}
+
+/** 用户自带号码审批明细数据类型 */
+declare interface OwnNumberApplyDetailItem {
+  /** 号码类型：0-呼入|1-呼出|2-呼入呼出 */
+  CallType: number;
+  /** 线路号码 */
+  PhoneNumber: string;
+  /** 最大并发呼叫数 */
+  MaxCallCount: number;
+  /** 每秒最大并发数 */
+  MaxCallPSec: number;
 }
 
 /** PSTN 会话类型。 */
@@ -972,6 +986,24 @@ declare interface CreateIVRSessionRequest {
 declare interface CreateIVRSessionResponse {
   /** 新创建的会话 ID */
   SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateOwnNumberApplyRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** SIP通道ID */
+  SipTrunkId: number;
+  /** 线路相关参数 */
+  DetailList: OwnNumberApplyDetailItem[];
+  /** 送号前缀 */
+  Prefix?: string;
+}
+
+declare interface CreateOwnNumberApplyResponse {
+  /** 审批单号 */
+  ApplyId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1736,6 +1768,22 @@ declare interface ModifyExtensionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOwnNumberApplyRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 线路相关参数 */
+  DetailList: OwnNumberApplyDetailItem[];
+  /** 审批单号 */
+  ApplyId?: number;
+  /** 送号前缀 */
+  Prefix?: string;
+}
+
+declare interface ModifyOwnNumberApplyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyStaffPasswordRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1951,6 +1999,8 @@ declare interface Ccc {
   CreateExtension(data: CreateExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtensionResponse>;
   /** CreateIVRSession {@link CreateIVRSessionRequest} {@link CreateIVRSessionResponse} */
   CreateIVRSession(data: CreateIVRSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIVRSessionResponse>;
+  /** 创建客户自携号码接入审核 {@link CreateOwnNumberApplyRequest} {@link CreateOwnNumberApplyResponse} */
+  CreateOwnNumberApply(data: CreateOwnNumberApplyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOwnNumberApplyResponse>;
   /** 创建预测式外呼任务 {@link CreatePredictiveDialingCampaignRequest} {@link CreatePredictiveDialingCampaignResponse} */
   CreatePredictiveDialingCampaign(data: CreatePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePredictiveDialingCampaignResponse>;
   /** 创建 SDK 登录 Token {@link CreateSDKLoginTokenRequest} {@link CreateSDKLoginTokenResponse} */
@@ -2023,6 +2073,8 @@ declare interface Ccc {
   ModifyCompanyApply(data: ModifyCompanyApplyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompanyApplyResponse>;
   /** 修改话机账号(绑定技能组、绑定坐席账号) {@link ModifyExtensionRequest} {@link ModifyExtensionResponse} */
   ModifyExtension(data: ModifyExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtensionResponse>;
+  /** 修改客户自携号码审批单 {@link ModifyOwnNumberApplyRequest} {@link ModifyOwnNumberApplyResponse} */
+  ModifyOwnNumberApply(data: ModifyOwnNumberApplyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwnNumberApplyResponse>;
   /** 修改客服账号 {@link ModifyStaffRequest} {@link ModifyStaffResponse} */
   ModifyStaff(data: ModifyStaffRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStaffResponse>;
   /** 修改座席密码 {@link ModifyStaffPasswordRequest} {@link ModifyStaffPasswordResponse} */

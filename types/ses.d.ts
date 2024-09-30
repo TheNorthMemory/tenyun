@@ -294,6 +294,16 @@ declare interface CreateCustomBlacklistRequest {
 }
 
 declare interface CreateCustomBlacklistResponse {
+  /** 收件人总数 */
+  TotalCount?: number | null;
+  /** 实际上传数量 */
+  ValidCount?: number | null;
+  /** 数据过长数量 */
+  TooLongCount?: number | null;
+  /** 重复数量 */
+  RepeatCount?: number | null;
+  /** 格式不正确数量 */
+  InvalidCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

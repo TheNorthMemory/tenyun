@@ -328,6 +328,10 @@ declare interface Image {
   Tags?: Tag[] | null;
   /** 镜像许可类型 */
   LicenseType?: string;
+  /** 镜像族 */
+  ImageFamily?: string | null;
+  /** 镜像是否废弃 */
+  ImageDeprecated?: boolean;
 }
 
 /** 支持的操作系统类型，根据Windows和Linux分类。 */
@@ -756,7 +760,7 @@ declare interface LoginSettings {
   Password?: string | null;
   /** 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。 */
   KeyIds?: string[] | null;
-  /** 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：TRUE：表示保持镜像的登录设置FALSE：表示不保持镜像的登录设置默认取值：FALSE。 */
+  /** 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为true。取值范围：true：表示保持镜像的登录设置false：表示不保持镜像的登录设置默认取值：false。 */
   KeepImageLogin?: string | null;
 }
 
@@ -915,13 +919,17 @@ declare interface ReservedInstanceFamilyItem {
 /** 预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。 */
 declare interface ReservedInstancePrice {
   /** 预支合计费用的原价，单位：元。 */
-  OriginalFixedPrice: number;
+  OriginalFixedPrice?: number;
   /** 预支合计费用的折扣价，单位：元。 */
-  DiscountFixedPrice: number;
+  DiscountFixedPrice?: number;
   /** 后续合计费用的原价，单位：元/小时 */
-  OriginalUsagePrice: number;
+  OriginalUsagePrice?: number;
   /** 后续合计费用的折扣价，单位：元/小时 */
-  DiscountUsagePrice: number;
+  DiscountUsagePrice?: number;
+  /** 预支费用的折扣，如20.0代表2折。 */
+  FixedPriceDiscount?: number | null;
+  /** 后续费用的折扣，如20.0代表2折。 */
+  UsagePriceDiscount?: number | null;
 }
 
 /** 基于付费类型的预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。 */
@@ -940,6 +948,10 @@ declare interface ReservedInstancePriceItem {
   Duration?: number;
   /** 预留实例计费的平台描述（即操作系统）。形如：Linux。返回项： Linux 。 */
   ProductDescription?: string;
+  /** 预支合计费用，单位：元。 */
+  DiscountUsagePrice?: number;
+  /** 后续合计费用的折扣价，单位：元/小时 */
+  DiscountFixedPrice?: number;
 }
 
 /** 预留实例类型信息。预留实例当前只针对国际站白名单用户开放。 */
@@ -1331,6 +1343,8 @@ declare interface CreateImageRequest {
   DryRun?: boolean;
   /** 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。 */
   TagSpecification?: TagSpecification[];
+  /** 镜像族 */
+  ImageFamily?: string;
 }
 
 declare interface CreateImageResponse {
@@ -1686,6 +1700,18 @@ declare interface DescribeHpcClustersResponse {
   HpcClusterSet?: HpcClusterInfo[];
   /** 高性能计算集群总数。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageFromFamilyRequest {
+  /** 镜像族 */
+  ImageFamily?: string;
+}
+
+declare interface DescribeImageFromFamilyResponse {
+  /** 镜像信息，没有可用镜像是返回为空 */
+  Image?: Image | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2269,7 +2295,7 @@ declare interface InquiryPriceRenewHostsRequest {
   HostIds: string[];
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。 */
   HostChargePrepaid: ChargePrepaid;
-  /** 试运行，测试使用，不执行具体逻辑。取值范围：TRUE：跳过执行逻辑FALSE：执行逻辑默认取值：FALSE。 */
+  /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例 */
   DryRun?: boolean;
 }
 
@@ -2405,6 +2431,8 @@ declare interface InquiryPriceRunInstancesRequest {
   InstanceMarketOptions?: InstanceMarketOptionsRequest;
   /** 高性能计算集群ID。 */
   HpcClusterId?: string;
+  /** 描述了实例CPU拓扑结构的相关信息。若不指定该参数，则按系统资源情况决定。 */
+  CpuTopology?: CpuTopology;
   /** 实例启动模板。 */
   LaunchTemplate?: LaunchTemplate;
 }
@@ -2504,6 +2532,10 @@ declare interface ModifyImageAttributeRequest {
   ImageName?: string;
   /** 设置新的镜像描述；必须满足下列限制： 不得超过 256 个字符。 */
   ImageDescription?: string;
+  /** 设置镜像族； */
+  ImageFamily?: string;
+  /** 设置镜像是否废弃； */
+  ImageDeprecated?: boolean;
 }
 
 declare interface ModifyImageAttributeResponse {
@@ -3032,6 +3064,8 @@ declare interface Cvm {
   DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
   /** 查询高性能集群信息 {@link DescribeHpcClustersRequest} {@link DescribeHpcClustersResponse} */
   DescribeHpcClusters(data?: DescribeHpcClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHpcClustersResponse>;
+  /** 查询镜像族内可用镜像 {@link DescribeImageFromFamilyRequest} {@link DescribeImageFromFamilyResponse} */
+  DescribeImageFromFamily(data?: DescribeImageFromFamilyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageFromFamilyResponse>;
   /** 查询镜像配额上限 {@link DescribeImageQuotaRequest} {@link DescribeImageQuotaResponse} */
   DescribeImageQuota(data?: DescribeImageQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageQuotaResponse>;
   /** 查看镜像分享信息 {@link DescribeImageSharePermissionRequest} {@link DescribeImageSharePermissionResponse} */

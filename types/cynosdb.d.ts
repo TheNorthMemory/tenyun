@@ -2207,7 +2207,7 @@ declare interface AddInstancesResponse {
 }
 
 declare interface AssociateSecurityGroupsRequest {
-  /** 实例组ID数组 */
+  /** 实例组 ID 数组，cynosdbmysql-grp-前缀开头或集群 ID。说明：要获取集群的实例组 ID，可通过 [查询集群实例组](https://cloud.tencent.com/document/product/1003/103934) 进行。 */
   InstanceIds: string[];
   /** 要修改的安全组ID列表，一个或者多个安全组Id组成的数组。 */
   SecurityGroupIds: string[];
@@ -3787,11 +3787,11 @@ declare interface DescribeZonesResponse {
 }
 
 declare interface DisassociateSecurityGroupsRequest {
-  /** 实例组ID数组 */
+  /** 实例组 ID 数组，cynosdbmysql-grp-前缀开头或集群 ID。说明：要获取集群的实例组 ID，可通过 [查询集群实例组](https://cloud.tencent.com/document/product/1003/103934) 进行。 */
   InstanceIds: string[];
   /** 要修改的安全组ID列表，一个或者多个安全组ID组成的数组。 */
   SecurityGroupIds: string[];
-  /** 可用区 */
+  /** 可用区。说明：请正确输入集群所在的主可用区，若输入非集群所在的主可用区可能显示调用成功，但实际执行会失败。 */
   Zone: string;
 }
 
@@ -4281,7 +4281,7 @@ declare interface ModifyClusterStorageResponse {
 }
 
 declare interface ModifyDBInstanceSecurityGroupsRequest {
-  /** 实例组ID */
+  /** 网络组id(cynosdbmysql-grp-前缀开头)或集群id */
   InstanceId: string;
   /** 要修改的安全组ID列表，一个或者多个安全组ID组成的数组。 */
   SecurityGroupIds: string[];
@@ -5387,7 +5387,7 @@ declare interface Cynosdb {
   OpenClusterPasswordComplexity(data: OpenClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterPasswordComplexityResponse>;
   /** 开启只读实例组接入 {@link OpenClusterReadOnlyInstanceGroupAccessRequest} {@link OpenClusterReadOnlyInstanceGroupAccessResponse} */
   OpenClusterReadOnlyInstanceGroupAccess(data: OpenClusterReadOnlyInstanceGroupAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
-  /** 开通只读实例独有访问接入组。 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
+  /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
   OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
   /** 开通外网 {@link OpenWanRequest} {@link OpenWanResponse} */
   OpenWan(data?: OpenWanRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanResponse>;

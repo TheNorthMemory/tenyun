@@ -963,7 +963,7 @@ declare interface AssociateInstancesKeyPairsResponse {
 }
 
 declare interface AttachCcnRequest {
-  /** 云联网实例ID。可通过[DescribeCcnAttachedInstances](https://cloud.tencent.com/document/product/1207/58797)接口返回值中的CcnId获取。 */
+  /** 云联网实例ID。可通过[DescribeCcns](https://cloud.tencent.com/document/product/215/19199)接口返回值中的CcnId获取。 */
   CcnId: string;
 }
 
@@ -2345,7 +2345,7 @@ declare interface RerunDockerContainerResponse {
 }
 
 declare interface ResetAttachCcnRequest {
-  /** 云联网实例ID。可通过[DescribeCcnAttachedInstances](https://cloud.tencent.com/document/product/1207/58797)接口返回值中的CcnId获取。 */
+  /** 云联网实例ID。可通过[DescribeCcns](https://cloud.tencent.com/document/product/215/19199)接口返回值中的CcnId获取。 */
   CcnId: string;
 }
 
