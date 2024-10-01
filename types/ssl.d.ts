@@ -1375,6 +1375,10 @@ declare interface DeleteCertificateResponse {
 }
 
 declare interface DeleteCertificatesRequest {
+  /** 要删除的证书ID。单次最多100个 */
+  CertificateIds: string[];
+  /** 删除时是否检查证书关联了云资源。默认不检查。如需要检查关联云资源 (需授权服务角色SSL_QCSLinkedRoleInReplaceLoadCertificate)，完成授权后，删除将变成异步任务，接口会返回异步任务ID。需搭配 DescribeDeleteCertificatesTaskResult接口使用，查询删除任务是否成功。 */
+  IsSync?: boolean;
 }
 
 declare interface DeleteCertificatesResponse {
@@ -2626,7 +2630,7 @@ declare interface Ssl {
   /** 删除证书 {@link DeleteCertificateRequest} {@link DeleteCertificateResponse} */
   DeleteCertificate(data: DeleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificateResponse>;
   /** 批量删除证书 {@link DeleteCertificatesRequest} {@link DeleteCertificatesResponse} */
-  DeleteCertificates(data?: DeleteCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificatesResponse>;
+  DeleteCertificates(data: DeleteCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificatesResponse>;
   /** 删除管理人 {@link DeleteManagerRequest} {@link DeleteManagerResponse} */
   DeleteManager(data: DeleteManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteManagerResponse>;
   /** 证书部署到云资源实例列表 {@link DeployCertificateInstanceRequest} {@link DeployCertificateInstanceResponse} */
