@@ -504,6 +504,8 @@ declare interface NodeInfo {
   LastRestartTime?: string | null;
   /** 节点所在可用区 */
   Zone?: string | null;
+  /** Id */
+  Id?: string | null;
 }
 
 /** 节点信息列表 */
@@ -520,6 +522,10 @@ declare interface NodeInfos {
   ComponentName?: string;
   /** 上一次重启时间 */
   LastRestartTime?: string;
+  /** id */
+  Id?: string | null;
+  /** 可用区 */
+  Zone?: string | null;
 }
 
 /** 节点角色描述信息 */
@@ -716,6 +722,10 @@ declare interface SlowQueryRecord {
   MemoryUsageMB?: number | null;
   /** DurationMs的秒表示 */
   DurationSec?: number | null;
+  /** 状态 */
+  State?: string | null;
+  /** Catalog Name */
+  CatalogName?: string | null;
 }
 
 /** 标签描述 */
@@ -786,6 +796,8 @@ declare interface ZoneInfo {
   ZoneId?: number;
   /** Encryptid */
   Encrypt?: number | null;
+  /** 是否为主力园区 */
+  Main?: boolean | null;
 }
 
 declare interface ActionAlterUserRequest {
@@ -1110,6 +1122,8 @@ declare interface DescribeClusterConfigsResponse {
   ClusterConfList?: ClusterConfigsInfoFromEMR[];
   /** 返回当前内核版本 如果不存在则返回空字符串 */
   BuildVersion?: string;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1232,6 +1246,8 @@ declare interface DescribeDatabaseAuditRecordsResponse {
   TotalCount?: number;
   /** 记录列表 */
   SlowQueryRecords?: DataBaseAuditRecord;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
