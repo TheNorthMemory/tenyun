@@ -1275,9 +1275,9 @@ declare interface GetRequestStatusRequest {
 
 declare interface GetRequestStatusResponse {
   /** 函数运行状态的总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 函数运行状态数组 */
-  Data: RequestStatus[] | null;
+  Data?: RequestStatus[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

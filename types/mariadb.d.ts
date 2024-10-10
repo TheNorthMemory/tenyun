@@ -1438,6 +1438,22 @@ declare interface DescribeDBSlowLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBSyncModeRequest {
+  /** 实例ID，形如：tdsql-ow728lmc */
+  InstanceId: string;
+}
+
+declare interface DescribeDBSyncModeResponse {
+  /** 同步模式：0 异步，1 强同步， 2 强同步可退化 */
+  SyncMode: number;
+  /** 是否有修改流程在执行中：1 是， 0 否。 */
+  IsModifying: number;
+  /** 当前复制方式，0 异步，1 同步 */
+  CurrentSyncMode: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBTmpInstancesRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2299,6 +2315,8 @@ declare interface Mariadb {
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询慢查询日志列表 {@link DescribeDBSlowLogsRequest} {@link DescribeDBSlowLogsResponse} */
   DescribeDBSlowLogs(data: DescribeDBSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowLogsResponse>;
+  /** 查询同步模式 {@link DescribeDBSyncModeRequest} {@link DescribeDBSyncModeResponse} */
+  DescribeDBSyncMode(data: DescribeDBSyncModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSyncModeResponse>;
   /** 获取实例回档生成的临时实例 {@link DescribeDBTmpInstancesRequest} {@link DescribeDBTmpInstancesResponse} */
   DescribeDBTmpInstances(data: DescribeDBTmpInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBTmpInstancesResponse>;
   /** 查询数据库对象列表 {@link DescribeDatabaseObjectsRequest} {@link DescribeDatabaseObjectsResponse} */

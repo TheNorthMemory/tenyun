@@ -210,6 +210,10 @@ declare interface ChannelOrganizationInfo {
   AuthorizationStatus?: string;
   /** 企业认证方式字段。值如下： **"AuthorizationInit"**： 暂未选择授权方式 **"AuthorizationFile"**： 授权书 **"AuthorizationLegalPerson"**： 法人授权超管 **"AuthorizationLegalIdentity"**： 法人直接认证 */
   AuthorizationType?: string;
+  /** 子企业激活状态。值如下： **0**： 未激活 **1**： 已激活 */
+  ActiveStatus?: number;
+  /** 账号过期时间，时间戳 */
+  LicenseExpireTime?: number;
 }
 
 /** 角色信息 */
@@ -2390,6 +2394,20 @@ declare interface CreateChannelOrganizationInfoChangeUrlResponse {
   Url?: string;
   /** 链接过期时间。链接7天有效。 */
   ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateChannelSubOrganizationActiveRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 要进行激活或者续期的子客企业OrganizationOpenId列表，请确保所有列出的子客企业均已完成认证。 */
+  SubOrganizationOpenIds?: string[];
+  /** 操作类型，可以选择如下：**false**：（默认）激活子客企业**true**：续期子客企业 */
+  Renew?: boolean;
+}
+
+declare interface CreateChannelSubOrganizationActiveResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4709,6 +4727,8 @@ declare interface Essbasic {
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
   /** 获取变更企业信息电子签小程序链接 {@link CreateChannelOrganizationInfoChangeUrlRequest} {@link CreateChannelOrganizationInfoChangeUrlResponse} */
   CreateChannelOrganizationInfoChangeUrl(data: CreateChannelOrganizationInfoChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelOrganizationInfoChangeUrlResponse>;
+  /** 激活或者续期子企业 {@link CreateChannelSubOrganizationActiveRequest} {@link CreateChannelSubOrganizationActiveResponse} */
+  CreateChannelSubOrganizationActive(data: CreateChannelSubOrganizationActiveRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelSubOrganizationActiveResponse>;
   /** 生成子客登录链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
   /** 创建个人印章授权给企业使用的授权二维码 {@link CreateEmployeeQualificationSealQrCodeRequest} {@link CreateEmployeeQualificationSealQrCodeResponse} */

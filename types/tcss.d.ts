@@ -10569,6 +10569,8 @@ declare interface UpdateAssetImageRegistryRegistryDetailRequest {
   Insecure?: number;
   /** 联通性检测的配置 */
   ConnDetectConfig?: ConnDetectConfig[];
+  /** 仓库唯一id */
+  RegistryId?: number;
 }
 
 declare interface UpdateAssetImageRegistryRegistryDetailResponse {

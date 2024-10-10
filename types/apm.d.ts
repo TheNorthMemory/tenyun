@@ -36,17 +36,17 @@ declare interface ApmAgentInfo {
 
 /** 应用相关的配置列表项 */
 declare interface ApmApplicationConfigView {
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceKey?: string;
-  /** 服务名 */
+  /** 应用名 */
   ServiceName?: string;
   /** 接口过滤 */
   OperationNameFilter?: string;
-  /** 异常过滤 */
+  /** 错误类型过滤 */
   ExceptionFilter?: string;
-  /** 错误码过滤 */
+  /** HTTP状态码过滤 */
   ErrorCodeFilter?: string;
-  /** 应用诊断开关 */
+  /** 应用诊断开关（已废弃） */
   EventEnable?: boolean | null;
   /** URL收敛开关 0 关 1 开 */
   UrlConvergenceSwitch?: number;
@@ -58,21 +58,21 @@ declare interface ApmApplicationConfigView {
   UrlExclude?: string;
   /** 是否开启日志 0 关 1 开 */
   IsRelatedLog?: number;
-  /** 日志来源 */
+  /** 日志源 */
   LogSource?: string | null;
-  /** CLS日志集 */
+  /** 日志集 */
   LogSet?: string;
-  /** 日志主题ID */
+  /** 日志主题 */
   LogTopicID?: string;
-  /** 线程剖析开关 */
+  /** 方法栈快照开关 true 开启 false 关闭 */
   SnapshotEnable?: boolean;
-  /** 线程剖析超时阈值 */
+  /** 慢调用监听触发阈值 */
   SnapshotTimeout?: number;
-  /** 探针开启开关 */
+  /** 探针总开关 */
   AgentEnable?: boolean;
-  /** 组件列表开关 */
+  /** 组件列表开关（已废弃） */
   InstrumentList?: Instrument[] | null;
-  /** 链路压缩开关 */
+  /** 链路压缩开关（已废弃） */
   TraceSquash?: boolean;
 }
 
@@ -567,11 +567,11 @@ declare interface ModifyApmInstanceResponse {
 }
 
 declare interface ModifyGeneralApmApplicationConfigRequest {
-  /** 实例Id */
+  /** 业务系统Id */
   InstanceId: string;
-  /** 需要修改的字段key value分别指定字段名、字段值 */
+  /** 需要修改的字段key value分别指定字段名、字段值[具体字段请见](https://cloud.tencent.com/document/product/248/111241) */
   Tags: ApmTag[];
-  /** 需要修改配置的服务列表名称 */
+  /** 需要修改配置的应用列表名称 */
   ServiceNames?: string[];
 }
 
