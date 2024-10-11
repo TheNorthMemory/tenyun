@@ -289,7 +289,7 @@ declare interface CCN {
   /** 是否开启二层云联网通道。 */
   DirectConnectAccelerateChannelFlag?: boolean | null;
   /** 是否支持ipv6路由表 */
-  Ipv6Flag?: string | null;
+  Ipv6Flag?: boolean | null;
   /** 是否支持路由表聚合策略 */
   MrtbAggregatePolicyFlag?: boolean | null;
   /** 是否支持策略值 */

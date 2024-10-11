@@ -3940,6 +3940,32 @@ declare interface InquirePriceCreateResponse {
   RequestId?: string;
 }
 
+declare interface InquirePriceModifyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** CPU核数 */
+  Cpu?: number;
+  /** 内存大小 */
+  Memory?: number;
+  /** 存储大小，存储资源变配：ClusterId,StorageLimit */
+  StorageLimit?: number;
+  /** 实例ID，计算资源变配必传: ClusterId,InstanceId,Cpu,Memory */
+  InstanceId?: string;
+  /** 实例设备类型 */
+  DeviceType?: string;
+  /** serverless实例ccu大小 */
+  Ccu?: number;
+}
+
+declare interface InquirePriceModifyResponse {
+  /** 实例价格 */
+  InstancePrice?: TradePrice | null;
+  /** 存储价格 */
+  StoragePrice?: TradePrice | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InquirePriceRenewRequest {
   /** 集群ID */
   ClusterId: string;
@@ -5313,6 +5339,8 @@ declare interface Cynosdb {
   GrantAccountPrivileges(data: GrantAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<GrantAccountPrivilegesResponse>;
   /** 新购集群询价 {@link InquirePriceCreateRequest} {@link InquirePriceCreateResponse} */
   InquirePriceCreate(data: InquirePriceCreateRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateResponse>;
+  /** 变配预付费集群询价 {@link InquirePriceModifyRequest} {@link InquirePriceModifyResponse} */
+  InquirePriceModify(data: InquirePriceModifyRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyResponse>;
   /** 续费集群询价 {@link InquirePriceRenewRequest} {@link InquirePriceRenewResponse} */
   InquirePriceRenew(data: InquirePriceRenewRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewResponse>;
   /** 隔离集群 {@link IsolateClusterRequest} {@link IsolateClusterResponse} */

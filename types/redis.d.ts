@@ -2889,7 +2889,7 @@ declare interface RestoreInstanceRequest {
 
 declare interface RestoreInstanceResponse {
   /** 任务ID，可通过 DescribeTaskInfo 接口查询任务执行状态 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

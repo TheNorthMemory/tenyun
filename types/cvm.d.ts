@@ -2213,6 +2213,8 @@ declare interface ImportImageRequest {
   LicenseType?: string;
   /** 启动模式 */
   BootMode?: string;
+  /** 镜像族 */
+  ImageFamily?: string;
 }
 
 declare interface ImportImageResponse {
