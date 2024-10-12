@@ -1114,6 +1114,8 @@ declare interface RecordTimeLine {
   Begin?: number;
   /** 时间片段结束时间，UTC秒数，例如：1662114146 */
   End?: number;
+  /** 对应时间片段的播放url */
+  HlsUrl?: string | null;
 }
 
 /** 设置通道禁止播流，有通道Id和使能enable字段 */
@@ -2035,6 +2037,8 @@ declare interface DescribeRecordFileRequest {
   StartTime: number;
   /** 检索结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天 */
   EndTime: number;
+  /** 是否携带每个时间段的播放url */
+  WithUrl?: boolean;
 }
 
 declare interface DescribeRecordFileResponse {
