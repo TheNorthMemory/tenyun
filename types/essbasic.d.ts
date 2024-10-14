@@ -1705,6 +1705,8 @@ declare interface ChannelCreateMultiFlowSignQRCodeRequest {
   ApproverRestrictions?: ApproverRestriction;
   /** 暂未开放 */
   Operator?: UserInfo;
+  /** 禁止个人用户重复签署，默认不禁止，即同一用户可多次扫码签署多份合同。若要求同一用户仅能扫码签署一份合同，请传入true。 */
+  ForbidPersonalMultipleSign?: boolean;
 }
 
 declare interface ChannelCreateMultiFlowSignQRCodeResponse {
@@ -2032,6 +2034,26 @@ declare interface ChannelDeleteSealPoliciesRequest {
 }
 
 declare interface ChannelDeleteSealPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDescribeAccountBillDetailRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业必须已经经过实名认证 */
+  Agent: Agent;
+}
+
+declare interface ChannelDescribeAccountBillDetailResponse {
+  /** 当前绑定中账号数量 */
+  BoundAccountsNumber?: number;
+  /** 剩余可绑定账号数量 */
+  RemainAvailableAccountsNumber?: number;
+  /** 已失效账号数量 */
+  InvalidAccountsNumber?: number;
+  /** 购买数量 */
+  TotalBuyAccountsNumber?: number;
+  /** 赠送数量 */
+  TotalGiftAccountsNumber?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2954,7 +2976,7 @@ declare interface ModifyExtendedServiceRequest {
 }
 
 declare interface ModifyExtendedServiceResponse {
-  /** 操作跳转链接，有效期24小时若操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通/关闭服务。当操作类型是 OPEN 且 扩展服务类型是 AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回操作链接，返回的链接需要平台方自行触达超管或法人，超管或法人点击链接完成服务开通操作 */
+  /** 操作跳转链接链接有效期： 跳转链接的有效期为24小时。没有返回链接的情形： 如果在操作时没有返回跳转链接，说明此次操作无需进行跳转，服务将会直接被开通或关闭。返回链接的情形： 当操作类型为“OPEN”（开通服务），并且扩展服务类型为“AUTO_SIGN”（自动签名）、“DOWNLOAD_FLOW”（下载流程）或“OVERSEA_SIGN”（海外签名）时，系统将返回一个操作链接。收到操作链接后，贵方需主动联系超级管理员（超管）或法人。由超管或法人点击链接，以完成服务的开通操作。 */
   OperateUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4693,6 +4715,8 @@ declare interface Essbasic {
   ChannelDeleteRoleUsers(data: ChannelDeleteRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteRoleUsersResponse>;
   /** 删除印章授权 {@link ChannelDeleteSealPoliciesRequest} {@link ChannelDeleteSealPoliciesResponse} */
   ChannelDeleteSealPolicies(data: ChannelDeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteSealPoliciesResponse>;
+  /** 查询渠道子客账号计费详情 {@link ChannelDescribeAccountBillDetailRequest} {@link ChannelDescribeAccountBillDetailResponse} */
+  ChannelDescribeAccountBillDetail(data: ChannelDescribeAccountBillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeAccountBillDetailResponse>;
   /** 查询渠道计费消耗情况 {@link ChannelDescribeBillUsageDetailRequest} {@link ChannelDescribeBillUsageDetailResponse} */
   ChannelDescribeBillUsageDetail(data: ChannelDescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeBillUsageDetailResponse>;
   /** 查询企业员工列表 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */

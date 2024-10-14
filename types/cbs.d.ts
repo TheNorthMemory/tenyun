@@ -280,11 +280,11 @@ declare interface DiskConfig {
   Price?: Price | null;
 }
 
-/** 描述键值对过滤器，用于条件过滤查询。 */
+/** 过滤条件 */
 declare interface Filter {
-  /** 过滤键的名称。 */
+  /** 过滤键的名称 */
   Name: string;
-  /** 一个或者多个过滤值。 */
+  /** 一个或者多个过滤值 */
   Values: string[];
 }
 

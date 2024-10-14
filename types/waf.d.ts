@@ -112,6 +112,84 @@ declare interface AccessValueInfo {
   ContainZH: boolean | null;
 }
 
+/** api列表 */
+declare interface ApiAsset {
+  /** 域名 */
+  Domain?: string;
+  /** 请求方法 */
+  Method?: string;
+  /** api名称 */
+  ApiName?: string;
+  /** 场景 */
+  Scene?: string | null;
+  /** 数据标签 */
+  Label?: string[] | null;
+  /** 过去7天是否活跃 */
+  Active?: boolean | null;
+  /** 最近更新时间 */
+  Timestamp?: number;
+  /** api发现时间 */
+  InsertTime?: number;
+  /** 资产状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略 */
+  Mode?: string | null;
+  /** 风险等级，100,200,300对应低中高 */
+  Level?: string | null;
+  /** 近30天调用量 */
+  Count?: number | null;
+  /** 备注 */
+  Remark?: string | null;
+  /** 是否鉴权，1标识是，0表示否 */
+  IsAuth?: number | null;
+  /** 如果添加了api入参检测规则，则此id返回值不为0 */
+  ApiRequestRuleId?: number | null;
+  /** 如果添加了api限流规则，则此id返回值不为0 */
+  ApiLimitRuleId?: number | null;
+  /** 对象接入和泛域名接入时，展示host列表 */
+  HostList?: string[] | null;
+}
+
+/** api资产列表过滤器 */
+declare interface ApiDataFilter {
+  /** 数据标签，是否活跃，功能场景 */
+  Entity: string;
+  /** 等于 */
+  Operator: string;
+  /** 日期，手机号，邮箱等 */
+  Value: string;
+}
+
+/** api历史样例返回结构体 */
+declare interface ApiDetailSampleHistory {
+  /** 样例名称 */
+  SampleNme?: string | null;
+  /** 请求样例 */
+  RepLog?: string | null;
+  /** 响应样例 */
+  RspLog?: string | null;
+}
+
+/** api请求参数类型 */
+declare interface ApiParameterType {
+  /** 参数名称 */
+  ParameterName?: string | null;
+  /** 参数类型 */
+  Type?: string | null;
+  /** 参数位置 */
+  Location?: string | null;
+  /** 数据标签(敏感字段) */
+  Label?: string[] | null;
+  /** 时间戳 */
+  Timestamp?: number | null;
+  /** 备注信息 */
+  Remark?: string | null;
+  /** 来源是请求或者响应 */
+  Source?: string | null;
+  /** 是否需要泛化 ，0表示不需要，1表示需要 */
+  IsPan?: number | null;
+  /** 是否鉴权，1表示是，0表示否 */
+  IsAuth?: number | null;
+}
+
 /** API安全资源信息 */
 declare interface ApiPkg {
   /** 资源id */
@@ -2686,6 +2764,78 @@ declare interface DescribeAntiInfoLeakageRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeApiDetailRequest {
+  /** 域名 */
+  Domain: string;
+  /** Api名称 */
+  ApiName: string;
+  /** 请求方法 */
+  Method: string;
+  /** 是否仅查询敏感的，1表示查询，0表示不查询 */
+  IsSensitive?: number;
+  /** 是否仅查询泛化的，1表示查询，0表示不查询 */
+  IsPan?: number;
+}
+
+declare interface DescribeApiDetailResponse {
+  /** 请求样例，json字符串格式 */
+  Log?: string | null;
+  /** 请求参数样例列表 */
+  ParameterList?: ApiParameterType[] | null;
+  /** 当前场景标签 */
+  Scene?: string | null;
+  /** 敏感字段 */
+  SensitiveFields?: string[] | null;
+  /** 7天内是否活跃 */
+  IsActive?: boolean | null;
+  /** 访问ip数 */
+  IpCount?: number | null;
+  /** 访问地域数量 */
+  RegionCount?: number | null;
+  /** 关联事件数 */
+  EventCount?: number | null;
+  /** 涉敏数据条数 */
+  SensitiveCount?: number | null;
+  /** 风险等级 */
+  Level?: number | null;
+  /** 响应体 */
+  RspLog?: string | null;
+  /** 昨日访问峰值QPS */
+  MaxQPS?: number | null;
+  /** 历史样例 */
+  ApiDetailSampleHistory?: ApiDetailSampleHistory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApiListVersionTwoRequest {
+  /** 域名 */
+  Domain: string;
+  /** 页面索引，第几页 */
+  PageIndex: number;
+  /** 页面大小 */
+  PageSize: number;
+  /** 过滤条件 */
+  Filters?: ApiDataFilter[];
+  /** 排序方法，1 升序，-1 降序 */
+  Sort?: string[];
+  /** 是否进行总数查询 */
+  NeedTotalCount?: boolean;
+  /** 查询开始时间 */
+  StartTs?: number;
+  /** 查询结束时间 */
+  EndTs?: number;
+}
+
+declare interface DescribeApiListVersionTwoResponse {
+  /** api资产列表 */
+  Data?: ApiAsset[] | null;
+  /** 总数 */
+  Total?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAreaBanAreasRequest {
   /** 需要查询的域名 */
   Domain: string;
@@ -4941,6 +5091,10 @@ declare interface Waf {
   DescribeAntiInfoLeakRules(data: DescribeAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakRulesResponse>;
   /** 获取信息防泄漏规则列表 {@link DescribeAntiInfoLeakageRulesRequest} {@link DescribeAntiInfoLeakageRulesResponse} */
   DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
+  /** 获取Api请求详情信息 {@link DescribeApiDetailRequest} {@link DescribeApiDetailResponse} */
+  DescribeApiDetail(data: DescribeApiDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiDetailResponse>;
+  /** api资产列表 {@link DescribeApiListVersionTwoRequest} {@link DescribeApiListVersionTwoResponse} */
+  DescribeApiListVersionTwo(data: DescribeApiListVersionTwoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiListVersionTwoResponse>;
   /** 获取地域封禁配置 {@link DescribeAreaBanAreasRequest} {@link DescribeAreaBanAreasResponse} */
   DescribeAreaBanAreas(data: DescribeAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanAreasResponse>;
   /** 获取WAF地域封禁支持的地域列表 {@link DescribeAreaBanSupportAreasRequest} {@link DescribeAreaBanSupportAreasResponse} */

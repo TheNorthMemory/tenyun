@@ -284,6 +284,10 @@ declare interface InstanceInfo {
   ClickHouseKeeper?: boolean | null;
   /** 实例扩展信息 */
   Details?: InstanceDetail | null;
+  /** 安全组白名单 */
+  IsWhiteSGs?: boolean | null;
+  /** 绑定的安全组 */
+  BindSGs?: string[] | null;
 }
 
 /** 实例节点描述信息 */

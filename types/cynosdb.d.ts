@@ -462,6 +462,16 @@ declare interface CreateClustersData {
   StorageLimit?: number;
 }
 
+/** 跨地域备份各地域备份信息 */
+declare interface CrossRegionBackupItem {
+  /** 备份的目标地域 */
+  CrossRegion?: string | null;
+  /** 目标地域的备份任务ID */
+  BackupId?: string | null;
+  /** 目标地域的备份状态 */
+  BackupStatus?: string | null;
+}
+
 /** 集群信息 */
 declare interface CynosdbCluster {
   /** 集群状态， 可选值如下:creating: 创建中running:运行中isolating:隔离中isolated:已隔离activating:解隔离中offlining:下线中offlined:已下线deleting:删除中deleted:已删除 */
@@ -1232,6 +1242,8 @@ declare interface ManualBackupData {
   BackupMethod?: string;
   /** 备份时间 */
   SnapshotTime?: string;
+  /** 跨地域备份项详细信息 */
+  CrossRegionBackupInfos?: CrossRegionBackupItem[] | null;
 }
 
 /** 参数是否可修改的详细信息 */
@@ -1696,6 +1708,14 @@ declare interface ProxySpec {
   Cpu: number;
   /** 数据库代理内存 */
   Mem: number;
+}
+
+/** TDSQL-C MySQL支持的proxy版本信息 */
+declare interface ProxyVersionInfo {
+  /** proxy版本号 */
+  ProxyVersion?: string | null;
+  /** 版本描述：GA:稳定版 BETA:尝鲜版，DEPRECATED:过旧， */
+  ProxyVersionType?: string | null;
 }
 
 /** proxy节点可用区内个数 */
@@ -3746,6 +3766,8 @@ declare interface DescribeSupportProxyVersionResponse {
   SupportProxyVersions?: string[] | null;
   /** 当前proxy版本号 */
   CurrentProxyVersion?: string | null;
+  /** 代理版本详情 */
+  SupportProxyVersionDetail?: ProxyVersionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

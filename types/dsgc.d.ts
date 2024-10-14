@@ -400,6 +400,8 @@ declare interface DSPACosMetaDataInfo {
   BindStatus?: string;
   /** COS桶存储量 */
   Storage?: number;
+  /** 治理授权状态，0:关闭 1：开启 */
+  GovernAuthStatus?: number;
 }
 
 /** DSPA数据源的数据库信息 */
@@ -1090,6 +1092,10 @@ declare interface DspaInstance {
   RenewFlag?: number;
   /** 实例渠道 */
   Channel?: string | null;
+  /** 已授权的实例数量 */
+  InsAuthCount?: number | null;
+  /** 已购买的实例数量 */
+  InsTotalQuota?: number | null;
 }
 
 /** RDB关系型数据库敏感数据资产统计 */
@@ -1236,6 +1242,10 @@ declare interface DspaUserResourceMeta {
   InstanceType?: string | null;
   /** 实例值 */
   InstanceValue?: string | null;
+  /** //治理授权状态（0：关闭 1：开启） */
+  GovernAuthStatus?: number;
+  /** 授权范围：all - 授权整个数据源 manual:手动指定数据源 */
+  AuthRange?: string | null;
 }
 
 /** es的资产统计结果 */
@@ -1562,6 +1572,8 @@ declare interface ReportInfo {
   ComplianceName?: string | null;
   /** 进度百分比 */
   ProgressPercent?: number | null;
+  /** 报告模版名称 */
+  ReportTemplateName?: string | null;
 }
 
 /** 待处理风险项数量信息 */
@@ -1841,6 +1853,10 @@ declare interface AuthorizeDSPAMetaResourcesRequest {
   ResourceRegion: string;
   /** 用户授权的账户信息，如果是一键自动授权模式，则不需要填写账户名与密码。 */
   ResourcesAccount: DspaResourceAccount[];
+  /** 创建默认主模板扫描任务 */
+  CreateDefaultTask?: boolean;
+  /** 授权范围（all:授权整个数据源 manual:手动指定数据库） */
+  AuthRange?: string;
 }
 
 declare interface AuthorizeDSPAMetaResourcesResponse {
@@ -2281,19 +2297,19 @@ declare interface CreateDSPASelfBuildMetaResourceRequest {
   ResourceRegion: string;
   /** 自建云资源ID。 */
   ResourceId: string;
-  /** 可用于访问自建云资源的IP。 */
-  ResourceVip: string;
-  /** 可用于访问自建云资源的端口。 */
-  ResourceVPort: number;
   /** 自建云资源的VPC ID。 */
   ResourceUniqueVpcId: string;
   /** 自建云资源的Subnet ID。 */
   ResourceUniqueSubnetId: string;
   /** 自建云资源所处的服务类型，可选：cvm - 通过云服务器直接访问。clb - 通过LB的方式进行访问。 */
   ResourceAccessType: string;
-  /** 账户名。 */
+  /** 可用于访问自建云资源的IP。emr的连接不需要使用该字段 */
+  ResourceVip: string;
+  /** 可用于访问自建云资源的端口。emr的连接不需要使用该字段 */
+  ResourceVPort: number;
+  /** 账户名。如果emr_hive的连接方式为“LDAP”，则复用该字段 */
   UserName: string;
-  /** 账户密码。 */
+  /** 账户密码。如果emr_hive的连接方式为“LDAP”，则复用该字段 */
   Password: string;
   /** 资源名称，1-60个字符。 */
   ResourceName?: string;
@@ -2301,6 +2317,8 @@ declare interface CreateDSPASelfBuildMetaResourceRequest {
   InstanceType?: string;
   /** 实例值 */
   InstanceValue?: string;
+  /** 授权范围（all:授权整个数据源 manual:手动指定数据库） */
+  AuthRange?: string;
 }
 
 declare interface CreateDSPASelfBuildMetaResourceResponse {
@@ -4030,6 +4048,12 @@ declare interface GetUserQuotaInfoResponse {
   DBUnbindNum?: number;
   /** cos月解绑次数 */
   COSUnbindNum?: number;
+  /** 用户购买的实例配额。 */
+  InsTotalQuota?: number;
+  /** 用户可用的实例配额。 */
+  InsRemainQuota?: number;
+  /** 用户购买的版本 */
+  Version?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4083,7 +4107,7 @@ declare interface ListDSPACosMetaResourcesResponse {
 declare interface ListDSPAMetaResourcesRequest {
   /** DSPA实例ID。 */
   DspaId: string;
-  /** 过滤项。可过滤值包括：ResoureRegion - 资源所处地域，需要填写完整地域名称，不支持模糊匹配。AuthStatus - authorized（已授权）、unauthorized（未授权）、deleted（资源已被删除），不支持模糊匹配，需要填写完整。BuildType - cloud（云原生资源）、build（用户自建资源），不支持模糊匹配，需要填写完整。MetaType - cdb（云数据Mysql）、dcdb（TDSQL MySQL版）、mariadb（云数据库 MariaDB）、postgres（云数据库 PostgreSQL）、cynosdbmysql（TDSQL-C MySQL版）、cos（对象存储）、mysql_like_proto（自建型Mysql协议类关系型数据库）、postgre_like_proto（自建型Postgre协议类关系型数据库）。ResourceId - 资源ID，支持模糊搜索。 */
+  /** 过滤项。可过滤值包括：ResoureRegion - 资源所处地域，需要填写完整地域名称，不支持模糊匹配。AuthStatus - authorized（已授权）、unauthorized（未授权）、deleted（资源已被删除），不支持模糊匹配，需要填写完整。BuildType - cloud（云原生资源）、build（用户自建资源），不支持模糊匹配，需要填写完整。MetaType - cdb（云数据Mysql）、dcdb（TDSQL MySQL版）、mariadb（云数据库 MariaDB）、postgres（云数据库 PostgreSQL）、cynosdbmysql（TDSQL-C MySQL版）、cos（对象存储）、mysql_like_proto（自建型Mysql协议类关系型数据库）、postgre_like_proto（自建型Postgre协议类关系型数据库）。ResourceId - 资源ID，支持模糊搜索。CvmID - 自建资源对应CvmId，如：ins-xxxxxxxx。该字段用于casb调用dsgc接口时，根据cvmId和vport确定具体的自建实例 */
   Filters?: DspaDataSourceMngFilter[];
   /** 分页步长，默认为100。 */
   Limit?: number;
@@ -4571,6 +4595,8 @@ declare interface UpdateDSPASelfBuildResourceRequest {
   UserName: string;
   /** 账户密码，为空则表示不更新。UserName和Password必须同时填写或同时为空。 */
   Password: string;
+  /** 授权范围：all 授权全部 manual：手动指定 */
+  AuthRange?: string;
 }
 
 declare interface UpdateDSPASelfBuildResourceResponse {

@@ -2325,9 +2325,9 @@ declare interface DescribeTendisSlowLogRequest {
 
 declare interface DescribeTendisSlowLogResponse {
   /** 慢查询总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 慢查询详情 */
-  TendisSlowLogDetail: TendisSlowLogDetail[];
+  TendisSlowLogDetail?: TendisSlowLogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2339,7 +2339,7 @@ declare interface DestroyPostpaidInstanceRequest {
 
 declare interface DestroyPostpaidInstanceResponse {
   /** 任务Id */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2571,7 +2571,7 @@ declare interface ModifyConnectionConfigResponse {
 declare interface ModifyDBInstanceSecurityGroupsRequest {
   /** 数据库引擎名称，本接口取值：redis。 */
   Product: string;
-  /** 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。 */
+  /** 更换为新的安全组 ID 列表，即一个或者多个安全组 ID 组成的数组。若实例第一次配置安全组，请使用接口[AssociateSecurityGroups](https://cloud.tencent.com/document/product/239/41260)先绑定安全组。 */
   SecurityGroupIds: string[];
   /** 实例 ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -2683,6 +2683,22 @@ declare interface ModifyInstanceParamsResponse {
   /** 说明修改参数配置是否成功。true：指修改成功；false：指修改失败。 */
   Changed?: boolean;
   /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstancePasswordRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 实例旧密码。 */
+  OldPassword: string;
+  /** 实例新密码。密码复杂度要求如下：- 长度8 - 30位, 推荐使用12位以上的密码。- 不能以"/"开头。- 至少包含小写字母a - z、大写字母A - Z、数字0 - 9、特殊字符 ()~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。 */
+  Password: string;
+}
+
+declare interface ModifyInstancePasswordResponse {
+  /** 任务 ID。 */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2997,7 +3013,7 @@ declare interface UpgradeProxyVersionRequest {
 
 declare interface UpgradeProxyVersionResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3015,7 +3031,7 @@ declare interface UpgradeSmallVersionRequest {
 
 declare interface UpgradeSmallVersionResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3029,7 +3045,7 @@ declare interface UpgradeVersionToMultiAvailabilityZonesRequest {
 
 declare interface UpgradeVersionToMultiAvailabilityZonesResponse {
   /** 任务ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3209,6 +3225,8 @@ declare interface Redis {
   ModifyInstanceLogDelivery(data: ModifyInstanceLogDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceLogDeliveryResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
+  /** 修改Redis密码 {@link ModifyInstancePasswordRequest} {@link ModifyInstancePasswordResponse} */
+  ModifyInstancePassword(data: ModifyInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePasswordResponse>;
   /** 设置实例输入模式 {@link ModifyInstanceReadOnlyRequest} {@link ModifyInstanceReadOnlyResponse} */
   ModifyInstanceReadOnly(data: ModifyInstanceReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceReadOnlyResponse>;
   /** 修改实例维护时间窗时间 {@link ModifyMaintenanceWindowRequest} {@link ModifyMaintenanceWindowResponse} */

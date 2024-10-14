@@ -438,6 +438,14 @@ declare interface JobInstanceForSubmissionLog {
   StartingMillis: number;
 }
 
+/** 作业运行时信息 */
+declare interface JobRuntimeInfo {
+  /** 运行信息的key，目前支持：TaskManagers：taskmanager pod 列表； StreamGraph：作业对应的 StreamGraph；SubTasks：作业的 subtask 列表 */
+  Key?: string | null;
+  /** 运行信息 */
+  Value?: string | null;
+}
+
 /** Job详细信息 */
 declare interface JobV1 {
   /** 作业ID */
@@ -1422,6 +1430,22 @@ declare interface DescribeJobEventsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeJobRuntimeInfoRequest {
+  /** 作业ID */
+  JobId: string;
+  /** 工作空间ID */
+  WorkSpaceId: string;
+  /** 作业运行信息 key */
+  IncludeInfo: string[];
+}
+
+declare interface DescribeJobRuntimeInfoResponse {
+  /** 作业运行时信息 */
+  JobRuntimeInfo?: JobRuntimeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobSavepointRequest {
   /** 作业 SerialId */
   JobId: string;
@@ -1891,6 +1915,8 @@ declare interface Oceanus {
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
   /** 获取指定作业的事件 {@link DescribeJobEventsRequest} {@link DescribeJobEventsResponse} */
   DescribeJobEvents(data: DescribeJobEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobEventsResponse>;
+  /** 获取作业运行时的信息 {@link DescribeJobRuntimeInfoRequest} {@link DescribeJobRuntimeInfoResponse} */
+  DescribeJobRuntimeInfo(data: DescribeJobRuntimeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobRuntimeInfoResponse>;
   /** 查找Savepoint列表 {@link DescribeJobSavepointRequest} {@link DescribeJobSavepointResponse} */
   DescribeJobSavepoint(data: DescribeJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSavepointResponse>;
   /** 查询作业实例启动日志 {@link DescribeJobSubmissionLogRequest} {@link DescribeJobSubmissionLogResponse} */

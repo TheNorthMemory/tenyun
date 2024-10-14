@@ -1136,6 +1136,28 @@ declare interface CreateDeviceResponse {
   RequestId?: string;
 }
 
+declare interface CreateExternalSourceAIServiceTaskRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `VideoToText`：视频语义理解 */
+  ServiceType: string;
+  /** 分析外部传入的视频 URL 列表，支持 HLS 点播（m3u8）及常见视频格式（mp4 等） */
+  VideoURLs: string[];
+  /** 自定义任务 ID */
+  CustomId?: string;
+  /** 视频分析配置参数 */
+  Config?: string;
+  /** 视频分析识别区域 */
+  ROI?: string;
+}
+
+declare interface CreateExternalSourceAIServiceTaskResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFenceBindRequest {
   /** 围栏Id */
   FenceId: number;
@@ -2854,6 +2876,32 @@ declare interface InheritCloudStorageUserResponse {
   RequestId?: string;
 }
 
+declare interface InvokeExternalSourceAIServiceTaskRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `VideoToText`：视频语义理解 */
+  ServiceType: string;
+  /** 分析外部传入的视频 URL 列表，支持 HLS 点播（m3u8）及常见视频格式（mp4 等） */
+  VideoURLs: string[];
+  /** 自定义任务 ID */
+  CustomId?: string;
+  /** 视频分析配置参数 */
+  Config?: string;
+  /** 视频分析识别区域 */
+  ROI?: string;
+}
+
+declare interface InvokeExternalSourceAIServiceTaskResponse {
+  /** 任务是否执行完成 */
+  Completed?: boolean;
+  /** 任务 ID */
+  TaskId?: string;
+  /** 任务信息 */
+  TaskInfo?: CloudStorageAIServiceTask | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListEventHistoryRequest {
   /** 产品ID */
   ProductId: string;
@@ -3505,6 +3553,8 @@ declare interface Iotexplorer {
   CreateCloudStorageAIService(data: CreateCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudStorageAIServiceResponse>;
   /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
+  /** 创建外部视频AI分析任务 {@link CreateExternalSourceAIServiceTaskRequest} {@link CreateExternalSourceAIServiceTaskResponse} */
+  CreateExternalSourceAIServiceTask(data: CreateExternalSourceAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExternalSourceAIServiceTaskResponse>;
   /** 创建围栏绑定信息 {@link CreateFenceBindRequest} {@link CreateFenceBindResponse} */
   CreateFenceBind(data: CreateFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFenceBindResponse>;
   /** 开通video云存服务 {@link CreateIotVideoCloudStorageRequest} {@link CreateIotVideoCloudStorageResponse} */
@@ -3693,6 +3743,8 @@ declare interface Iotexplorer {
   GetWechatDeviceTicket(data: GetWechatDeviceTicketRequest, config?: AxiosRequestConfig): AxiosPromise<GetWechatDeviceTicketResponse>;
   /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */
   InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
+  /** 同步执行外部视频AI分析任务 {@link InvokeExternalSourceAIServiceTaskRequest} {@link InvokeExternalSourceAIServiceTaskResponse} */
+  InvokeExternalSourceAIServiceTask(data: InvokeExternalSourceAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeExternalSourceAIServiceTaskResponse>;
   /** 获取设备的历史事件 {@link ListEventHistoryRequest} {@link ListEventHistoryResponse} */
   ListEventHistory(data: ListEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventHistoryResponse>;
   /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */

@@ -10827,7 +10827,7 @@ declare interface Tcss {
   DescribeAbnormalProcessEventTendency(data: DescribeAbnormalProcessEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventTendencyResponse>;
   /** 运行时异常进程列表 {@link DescribeAbnormalProcessEventsRequest} {@link DescribeAbnormalProcessEventsResponse} */
   DescribeAbnormalProcessEvents(data?: DescribeAbnormalProcessEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsResponse>;
-  /** 运行时异常进程列表导出 {@link DescribeAbnormalProcessEventsExportRequest} {@link DescribeAbnormalProcessEventsExportResponse} */
+  /** @deprecated 运行时异常进程列表导出 {@link DescribeAbnormalProcessEventsExportRequest} {@link DescribeAbnormalProcessEventsExportResponse} */
   DescribeAbnormalProcessEventsExport(data: DescribeAbnormalProcessEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsExportResponse>;
   /** 统计异常进程各威胁等级待处理事件数 {@link DescribeAbnormalProcessLevelSummaryRequest} {@link DescribeAbnormalProcessLevelSummaryResponse} */
   DescribeAbnormalProcessLevelSummary(data?: DescribeAbnormalProcessLevelSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessLevelSummaryResponse>;
@@ -10835,7 +10835,7 @@ declare interface Tcss {
   DescribeAbnormalProcessRuleDetail(data?: DescribeAbnormalProcessRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRuleDetailResponse>;
   /** 运行时异常进程策略列表 {@link DescribeAbnormalProcessRulesRequest} {@link DescribeAbnormalProcessRulesResponse} */
   DescribeAbnormalProcessRules(data?: DescribeAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesResponse>;
-  /** 运行时异常进程策略列表导出 {@link DescribeAbnormalProcessRulesExportRequest} {@link DescribeAbnormalProcessRulesExportResponse} */
+  /** @deprecated 运行时异常进程策略列表导出 {@link DescribeAbnormalProcessRulesExportRequest} {@link DescribeAbnormalProcessRulesExportResponse} */
   DescribeAbnormalProcessRulesExport(data: DescribeAbnormalProcessRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesExportResponse>;
   /** 运行时访问控制事件详细信息 {@link DescribeAccessControlDetailRequest} {@link DescribeAccessControlDetailResponse} */
   DescribeAccessControlDetail(data: DescribeAccessControlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlDetailResponse>;
@@ -10847,7 +10847,7 @@ declare interface Tcss {
   DescribeAccessControlRuleDetail(data?: DescribeAccessControlRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRuleDetailResponse>;
   /** 运行时访问控制策略列表 {@link DescribeAccessControlRulesRequest} {@link DescribeAccessControlRulesResponse} */
   DescribeAccessControlRules(data?: DescribeAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesResponse>;
-  /** 运行时访问控制策略列表导出 {@link DescribeAccessControlRulesExportRequest} {@link DescribeAccessControlRulesExportResponse} */
+  /** @deprecated 运行时访问控制策略列表导出 {@link DescribeAccessControlRulesExportRequest} {@link DescribeAccessControlRulesExportResponse} */
   DescribeAccessControlRulesExport(data: DescribeAccessControlRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesExportResponse>;
   /** 获取受影响的集群数量 {@link DescribeAffectedClusterCountRequest} {@link DescribeAffectedClusterCountResponse} */
   DescribeAffectedClusterCount(data?: DescribeAffectedClusterCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAffectedClusterCountResponse>;
@@ -10883,7 +10883,7 @@ declare interface Tcss {
   DescribeAssetImageHostList(data?: DescribeAssetImageHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageHostListResponse>;
   /** 查询镜像列表 {@link DescribeAssetImageListRequest} {@link DescribeAssetImageListResponse} */
   DescribeAssetImageList(data?: DescribeAssetImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListResponse>;
-  /** 查询镜像列表导出 {@link DescribeAssetImageListExportRequest} {@link DescribeAssetImageListExportResponse} */
+  /** @deprecated 查询镜像列表导出 {@link DescribeAssetImageListExportRequest} {@link DescribeAssetImageListExportResponse} */
   DescribeAssetImageListExport(data: DescribeAssetImageListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListExportResponse>;
   /** 查看镜像仓库资产更新进度状态 {@link DescribeAssetImageRegistryAssetStatusRequest} {@link DescribeAssetImageRegistryAssetStatusResponse} */
   DescribeAssetImageRegistryAssetStatus(data?: DescribeAssetImageRegistryAssetStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryAssetStatusResponse>;
@@ -10993,7 +10993,7 @@ declare interface Tcss {
   DescribeEscapeEventTendency(data: DescribeEscapeEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventTendencyResponse>;
   /** 统计容器逃逸各事件类型和待处理事件数 {@link DescribeEscapeEventTypeSummaryRequest} {@link DescribeEscapeEventTypeSummaryResponse} */
   DescribeEscapeEventTypeSummary(data?: DescribeEscapeEventTypeSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventTypeSummaryResponse>;
-  /** 查询容器逃逸事件列表导出 {@link DescribeEscapeEventsExportRequest} {@link DescribeEscapeEventsExportResponse} */
+  /** @deprecated 查询容器逃逸事件列表导出 {@link DescribeEscapeEventsExportRequest} {@link DescribeEscapeEventsExportResponse} */
   DescribeEscapeEventsExport(data: DescribeEscapeEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventsExportResponse>;
   /** 查询容器逃逸扫描规则信息 {@link DescribeEscapeRuleInfoRequest} {@link DescribeEscapeRuleInfoResponse} */
   DescribeEscapeRuleInfo(data?: DescribeEscapeRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeRuleInfoResponse>;
