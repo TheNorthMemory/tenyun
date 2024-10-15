@@ -2823,7 +2823,7 @@ declare interface DescribeInsightListRequest {
   PageSize: number;
   /** 分页查询时的页号，从1开始 */
   Page: number;
-  /** 查询类型,支持HIVE,SPARK,MAPREDUCE,TRINO等类型,默认查询全部 */
+  /** 查询类型,支持HIVE,SPARK,DLC_SPARK,SPARK_SQL,SCHEDULE,MAPREDUCE,TRINO等类型,默认查询全部 */
   Type?: string;
 }
 

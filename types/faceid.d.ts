@@ -4,7 +4,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 疑似攻击风险详情 */
 declare interface AttackRiskDetail {
-  /** 疑似的攻击痕迹类型SuspectedSpoofingAttack：翻拍攻击SuspectedSynthesisImage：疑似合成图片SuspectedSynthesisVideo：疑似合成视频SuspectedeAnomalyAttack：人脸特征疑似非真人SuspectedAdversarialAttack：疑似对抗样本攻击SuspectedBlackIndustry：疑似黑产攻击SuspectedWatermark：疑似存在水印 */
+  /** 疑似的攻击痕迹类型SuspectedSpoofingAttack：翻拍攻击SuspectedSynthesisImage：疑似合成图片SuspectedSynthesisVideo：疑似合成视频SuspectedeAnomalyAttack：人脸特征疑似非真人SuspectedAdversarialAttack：疑似对抗样本攻击SuspectedBlackIndustry：疑似黑产批量模版攻击SuspectedWatermark：疑似存在水印 */
   Type?: string | null;
 }
 

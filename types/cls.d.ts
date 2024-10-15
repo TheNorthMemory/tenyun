@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 高级过滤规则 */
+declare interface AdvanceFilterRuleInfo {
+  /** 过滤字段 */
+  Key: string | null;
+  /** 过滤规则，0:等于，1:字段存在，2:字段不存在 */
+  Rule: number | null;
+  /** 过滤值 */
+  Value?: string | null;
+}
+
 /** 告警多维分析一些配置信息 */
 declare interface AlarmAnalysisConfig {
   /** 键。支持以下key：SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。QueryIndex：执行语句序号。value支持 -1：自定义； 1：执行语句1； 2：执行语句2。CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。Limit：最大日志条数。 value示例： 5。 */
@@ -734,6 +744,8 @@ declare interface ExtractRuleInfo {
   MetaTags?: MetaTagInfo[];
   /** Windows事件日志采集规则，只有在LogType为windows_event_log时生效，其余类型无需填写。 */
   EventLogRules?: EventLog[];
+  /** 日志过滤规则列表（新版）。注意：- 2.9.3以下版本LogListener不支持， 请使用FilterKeyRegex配置日志过滤规则。- 自建k8s采集配置（CreateConfigExtra、ModifyConfigExtra）不支持此字段。 */
+  AdvanceFilterRules?: AdvanceFilterRuleInfo[] | null;
 }
 
 /** 文件路径信息 */

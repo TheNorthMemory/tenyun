@@ -5501,24 +5501,6 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
-  interface DescribeExternalClusterSpecRequest {
-    /** 注册集群ID */
-    ClusterId: string;
-    /** 默认false 获取内网，是否获取外网版注册命令 */
-    IsExtranet?: boolean;
-    /** 默认false 不刷新有效时间 ，true刷新有效时间 */
-    IsRefreshExpirationTime?: boolean;
-  }
-
-  interface DescribeExternalClusterSpecResponse {
-    /** 导入第三方集群YAML定义 */
-    Spec: string;
-    /** agent.yaml文件过期时间字符串，时区UTC */
-    Expiration: string;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
   interface DescribeExternalNodeSupportConfigRequest {
     /** 集群Id */
     ClusterId: string;
@@ -7689,8 +7671,6 @@ declare interface Tke {
   DescribeEncryptionStatus(data: V20180525.DescribeEncryptionStatusRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeEncryptionStatusResponse>;
   /** 查询已经存在的节点 {@link V20180525.DescribeExistedInstancesRequest} {@link V20180525.DescribeExistedInstancesResponse} */
   DescribeExistedInstances(data: V20180525.DescribeExistedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExistedInstancesResponse>;
-  /** @deprecated 获取导入第三方集群YAML定义 {@link V20180525.DescribeExternalClusterSpecRequest} {@link V20180525.DescribeExternalClusterSpecResponse} */
-  DescribeExternalClusterSpec(data: V20180525.DescribeExternalClusterSpecRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalClusterSpecResponse>;
   /** 查看开启第三方节点池配置信息 {@link V20180525.DescribeExternalNodeSupportConfigRequest} {@link V20180525.DescribeExternalNodeSupportConfigResponse} */
   DescribeExternalNodeSupportConfig(data: V20180525.DescribeExternalNodeSupportConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalNodeSupportConfigResponse>;
   /** 获取eniipamd组件信息 {@link V20180525.DescribeIPAMDRequest} {@link V20180525.DescribeIPAMDResponse} */

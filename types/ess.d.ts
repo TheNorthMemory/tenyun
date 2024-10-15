@@ -118,9 +118,9 @@ declare interface ApproverRestriction {
 
 /** 动态签署2.0合同参与人信息 */
 declare interface ArchiveDynamicApproverData {
-  /** 签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。 注意：不指定该字段时默认为发起方 */
+  /** 签署方唯一编号，一个全局唯一的标识符，不同的流程不会出现冲突。可以使用签署方的唯一编号来生成签署链接（也可以通过RecipientId来生成签署链接）。 */
   SignId?: string | null;
-  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。 模板发起合同时，该参数为必填项。 文件发起合同是，该参数无需传值。 如果开发者后序用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
+  /** 签署方角色编号，签署方角色编号是用于区分同一个流程中不同签署方的唯一标识。不同的流程会出现同样的签署方角色编号。填写控件和签署控件都与特定的角色编号关联。 */
   RecipientId?: string | null;
 }
 
@@ -388,11 +388,11 @@ declare interface DetectInfoVideoData {
 
 /** 动态添加签署人的结果信息 */
 declare interface DynamicFlowApproverResult {
-  /** 签署方角色编号 */
+  /** 签署方角色编号，签署方角色编号是用于区分同一个流程中不同签署方的唯一标识。不同的流程会出现同样的签署方角色编号。填写控件和签署控件都与特定的角色编号关联。在进行新增签署方操作时，建议记录下该签署方的角色编号。后续可以拉取流程信息，用来判断该签署方的当前状态。 */
   RecipientId?: string | null;
-  /** 签署方唯一编号 */
+  /** 签署方唯一编号，一个全局唯一的标识符，不同的流程不会出现冲突。可以使用签署方的唯一编号来生成签署链接（也可以通过RecipientId来生成签署链接）。 */
   SignId?: string | null;
-  /** 签署方当前状态 */
+  /** 签署方当前状态，会出现下面的状态2：待签署3：已签署4：已拒绝5：已过期6：已撤销8：待填写9：因为各种原因（签署人改名等）而终止10：填写完成15：已解除19：转他人处理 */
   ApproverStatus?: number | null;
 }
 
@@ -3683,7 +3683,7 @@ declare interface VerifyPdfResponse {
 /** {@link Ess 腾讯电子签企业版} */
 declare interface Ess {
   (): Versions;
-  /** 结束动态签署合同 {@link ArchiveDynamicFlowRequest} {@link ArchiveDynamicFlowResponse} */
+  /** 结束动态签署流程 {@link ArchiveDynamicFlowRequest} {@link ArchiveDynamicFlowResponse} */
   ArchiveDynamicFlow(data: ArchiveDynamicFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ArchiveDynamicFlowResponse>;
   /** 员工Userid与客户系统Openid绑定 {@link BindEmployeeUserIdWithClientOpenIdRequest} {@link BindEmployeeUserIdWithClientOpenIdResponse} */
   BindEmployeeUserIdWithClientOpenId(data: BindEmployeeUserIdWithClientOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<BindEmployeeUserIdWithClientOpenIdResponse>;
@@ -3709,7 +3709,7 @@ declare interface Ess {
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
-  /** 补充动态签署合同的签署人信息 {@link CreateDynamicFlowApproverRequest} {@link CreateDynamicFlowApproverResponse} */
+  /** 补充动态签署合同的签署方 {@link CreateDynamicFlowApproverRequest} {@link CreateDynamicFlowApproverResponse} */
   CreateDynamicFlowApprover(data: CreateDynamicFlowApproverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDynamicFlowApproverResponse>;
   /** 获取其他可嵌入web页面 {@link CreateEmbedWebUrlRequest} {@link CreateEmbedWebUrlResponse} */
   CreateEmbedWebUrl(data: CreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedWebUrlResponse>;
