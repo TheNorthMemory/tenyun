@@ -2309,7 +2309,7 @@ declare namespace V20180525 {
     EventNums?: number | null;
     /** 策略英文名称 */
     Name?: string | null;
-    /** 策略模版类型 */
+    /** 策略模板类型 */
     Kind?: string | null;
     /** 策略开关状态：open打开，close关闭 */
     EnabledStatus?: string | null;
@@ -2325,7 +2325,7 @@ declare namespace V20180525 {
     EnforcementAction: string;
     /** 策略英文名称 */
     Name: string;
-    /** 策略模版类型 */
+    /** 策略模板类型 */
     Kind: string;
     /** 策略开关状态：open打开，close关闭 */
     EnabledStatus?: string;

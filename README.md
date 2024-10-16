@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 256+ 款产品，11740+ 服务数</summary>
+<details><summary>共计 257+ 款产品，11764+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -162,7 +162,7 @@ cloudapp | [云应用](https://cloud.tencent.com/document/product/1689) | 2022-0
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(101) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(105) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -181,7 +181,7 @@ dataintegration | [数据接入平台](https://cloud.tencent.com/document/produc
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(63) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
-dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
+dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(76) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(144) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(75) |
@@ -211,6 +211,7 @@ goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1
 gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 2020-08-20(18) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(9) |
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74) |
+gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(18) |
 habo |  | 2018-12-03(2) |
 hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(11) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
@@ -266,7 +267,7 @@ organization | [集团账号管理](https://cloud.tencent.com/document/product/8
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(19) |
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(101) |
-privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(25) |
+privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(26) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(10) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(107) |

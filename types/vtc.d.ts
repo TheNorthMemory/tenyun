@@ -95,6 +95,8 @@ declare interface SubmitVideoTranslateJobRequest {
   DstLang: string;
   /** 当音频 URL 不为空时，默认以音频驱动视频任务口型。格式要求：支持 mp3、m4a、acc、wav 格式。时长要求：【10~300】秒大小要求：不超过 100M。示例值：http://xxx/audio.mp3 */
   AudioUrl?: string;
+  /** 是否需要去除VideoUrl或AudioUrl中背景音，取值范围：0-不需要，1-需要，默认0 。 */
+  RemoveVocal?: number;
   /** 是否需要确认翻译结果0：不需要，1：需要 */
   Confirm?: number;
   /** 是否开启口型驱动，0：不开启，1：开启。默认开启。 */

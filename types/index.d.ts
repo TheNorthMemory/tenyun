@@ -115,6 +115,7 @@ import Goosefs, { Versions as GoosefsVersions } from "./goosefs";
 import Gpm, { Versions as GpmVersions } from "./gpm";
 import Gs, { Versions as GsVersions } from "./gs";
 import Gse, { Versions as GseVersions } from "./gse";
+import Gwlb, { Versions as GwlbVersions } from "./gwlb";
 import Habo, { Versions as HaboVersions } from "./habo";
 import Hai, { Versions as HaiVersions } from "./hai";
 import Hasim, { Versions as HasimVersions } from "./hasim";
@@ -375,6 +376,7 @@ export declare type SERVICE_VERSIONS = {
   gpm: GpmVersions,
   gs: GsVersions,
   gse: GseVersions,
+  gwlb: GwlbVersions,
   habo: HaboVersions,
   hai: HaiVersions,
   hasim: HasimVersions,
@@ -762,6 +764,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   gs: Gs,
   /** {@link Gse 游戏服务器伸缩} */
   gse: Gse,
+  /** {@link Gwlb 网关负载均衡} */
+  gwlb: Gwlb,
   habo: Habo,
   /** {@link Hai 高性能应用服务} */
   hai: Hai,

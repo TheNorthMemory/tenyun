@@ -172,7 +172,7 @@ declare interface AutoSignConfig {
   CallbackUrl?: string;
   /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸认别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起 */
+  /** 设置用户自动签合同的扣费方式。1: (默认)使用合同份额进行扣减 */
   LicenseType?: number;
   /** 开通成功后前端页面跳转的url，此字段的用法场景请联系客户经理确认。注：`仅支持H5开通场景`, `跳转链接仅支持 https:// , qianapp:// 开头`跳转场景：**贵方H5 -> 腾讯电子签H5 -> 贵方H5** : JumpUrl格式: https://YOUR_CUSTOM_URL/xxxx，只需满足 https:// 开头的正确且合规的网址即可。**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。`APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。`APP拦截地址跳转可参考：Android，IOS 成功结果返回：若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，例如： qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess */
   JumpUrl?: string;
@@ -3480,7 +3480,7 @@ declare interface ModifyExtendedServiceRequest {
 }
 
 declare interface ModifyExtendedServiceResponse {
-  /** 操作跳转链接有效期： 跳转链接的有效期为24小时。无跳转链接返回的情况： 如果在操作过程中没有返回跳转链接，这意味着无需进行跳转操作。在这种情况下，服务将会直接被开通或关闭。有跳转链接返回的情况： 当操作类型为“OPEN”（开通服务），并且扩展服务类型为以下之一时， 系统将返回一个操作链接。当前操作人（超级管理员或法人）需要点击此链接，以完成服务的开通操作。OPEN_SERVER_SIGN（开放服务器签名）OVERSEA_SIGN（海外签名） */
+  /** 操作跳转链接有效期： 跳转链接的有效期为24小时。无跳转链接返回的情况： 如果在操作过程中没有返回跳转链接，这意味着无需进行跳转操作。在这种情况下，服务将会直接被开通或关闭。有跳转链接返回的情况： 当操作类型为“OPEN”（开通服务），并且扩展服务类型为以下之一时， 系统将返回一个操作链接。当前操作人（超级管理员或法人）需要点击此链接，以完成服务的开通操作。OPEN_SERVER_SIGN（企业自动签署）OVERSEA_SIGN（企业与港澳台居民签署合同） */
   OperateUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

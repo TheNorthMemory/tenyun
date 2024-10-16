@@ -18,6 +18,8 @@ declare interface Ability {
   IsSupportTransparentDataEncryption?: string | null;
   /** 不支持透明数据加密原因 */
   NoSupportTransparentDataEncryptionReason?: string | null;
+  /** 是否支持手动发起逻辑备份 */
+  IsSupportManualLogic?: string | null;
 }
 
 /** 数据库账号信息 */

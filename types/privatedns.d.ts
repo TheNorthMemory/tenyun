@@ -230,6 +230,30 @@ declare interface AddSpecifyPrivateZoneVpcResponse {
   RequestId?: string;
 }
 
+declare interface CreateEndPointRequest {
+  /** 终端节点名称 */
+  EndPointName: string;
+  /** 终端节点服务ID（vpc终端节点服务ID） */
+  EndPointServiceId: string;
+  /** 终端节点地域，必须要和终端节点服务所属地域一致 */
+  EndPointRegion: string;
+  /** 终端节点ip数量 */
+  IpNum?: number;
+}
+
+declare interface CreateEndPointResponse {
+  /** 终端节点id */
+  EndPointId?: string;
+  /** 终端节点名称 */
+  EndPointName?: string;
+  /** 终端节点服务ID */
+  EndPointServiceId?: string;
+  /** 终端节点的IP列表 */
+  EndPointVipSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePrivateDNSAccountRequest {
   /** 私有域解析账号 */
   Account: PrivateDNSAccount;
@@ -633,6 +657,8 @@ declare interface Privatedns {
   (): Versions;
   /** 追加与私有域关联的VPC {@link AddSpecifyPrivateZoneVpcRequest} {@link AddSpecifyPrivateZoneVpcResponse} */
   AddSpecifyPrivateZoneVpc(data: AddSpecifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpecifyPrivateZoneVpcResponse>;
+  /** 创建终端节点 {@link CreateEndPointRequest} {@link CreateEndPointResponse} */
+  CreateEndPoint(data: CreateEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEndPointResponse>;
   /** 创建私有域解析账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
   /** 创建私有域 {@link CreatePrivateZoneRequest} {@link CreatePrivateZoneResponse} */

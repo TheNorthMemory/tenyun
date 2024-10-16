@@ -52,12 +52,70 @@ declare interface BgpPeer {
   AuthKey?: string | null;
 }
 
+/** 敏捷上云服务信息 */
+declare interface CloudAttachInfo {
+  /** 敏捷上云实例id */
+  InstanceId?: string;
+  /** 敏捷上云名称 */
+  Name?: string;
+  /** 合作伙伴的AppId */
+  IapId?: string;
+  /** 需要接入敏捷上云的IDC的地址 */
+  IdcAddress?: string;
+  /** 需要接入敏捷上云的IDC的互联网服务提供商类型 */
+  IdcType?: string;
+  /** 敏捷上云的带宽，单位为MB */
+  Bandwidth?: number;
+  /** 联系电话 */
+  Telephone?: string;
+  /** 敏捷上云的状态available：就绪状态applying：申请，待审核状态pendingpay：代付款状态building：建设中状态confirming：待确认状态isolate: 隔离状态stoped：终止状态 */
+  Status?: string;
+  /** 敏捷上云申请的时间 */
+  ApplyTime?: string;
+  /** 敏捷上云建设完成的时间 */
+  ReadyTime?: string | null;
+  /** 敏捷上云过期时间 */
+  ExpireTime?: string;
+  /** 备注信息 */
+  Remarks?: string;
+  /** 敏捷上云的地域状态。same-region：同地域cross-region：跨地域 */
+  RegionStatus?: string;
+  /** 用户的AppId */
+  AppId?: string;
+  /** 用户的Uin */
+  Uin?: string;
+  /** 用户注册名称 */
+  CustomerAuthName?: string;
+  /** 物理专线实例ID */
+  DirectConnectId?: string;
+  /** 敏捷上云是否支持创建高速上云专线网关 */
+  CloudAttachServiceGatewaysSupport?: boolean;
+  /** 敏捷上云服务是否处于升降配中 */
+  BUpdateBandwidth?: boolean;
+}
+
 /** 坐标，经维度描述 */
 declare interface Coordinate {
   /** 纬度 */
   Lat: number;
   /** 经度 */
   Lng: number;
+}
+
+/** 创建敏捷上云入参 */
+declare interface CreateCasInput {
+  /** 敏捷上云名称 */
+  Name: string;
+  /** 需要接入敏捷上云的IDC的地址 */
+  IdcAddress: string;
+  /** 需要接入敏捷上云的IDC的互联网服务提供商类型 */
+  IdcType: string;
+  /** 敏捷上云的带宽，单位为MB */
+  Bandwidth: number;
+  /** 联系电话 */
+  Telephone: string;
+  /** 备注信息 */
+  Remarks: string;
 }
 
 /** 物理专线信息列表 */
@@ -388,6 +446,18 @@ declare interface ApplyInternetAddressRequest {
 declare interface ApplyInternetAddressResponse {
   /** 互联网公网地址ID */
   InstanceId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudAttachServiceRequest {
+  /** 创建敏捷上云入参 */
+  Data: CreateCasInput;
+}
+
+declare interface CreateCloudAttachServiceResponse {
+  /** 敏捷上云服务详情 */
+  CloudAttach?: CloudAttachInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -801,6 +871,8 @@ declare interface Dc {
   AcceptDirectConnectTunnel(data: AcceptDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptDirectConnectTunnelResponse>;
   /** 申请互联网地址 {@link ApplyInternetAddressRequest} {@link ApplyInternetAddressResponse} */
   ApplyInternetAddress(data: ApplyInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyInternetAddressResponse>;
+  /** 创建敏捷上云服务 {@link CreateCloudAttachServiceRequest} {@link CreateCloudAttachServiceResponse} */
+  CreateCloudAttachService(data: CreateCloudAttachServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudAttachServiceResponse>;
   /** 申请物理专线 {@link CreateDirectConnectRequest} {@link CreateDirectConnectResponse} */
   CreateDirectConnect(data: CreateDirectConnectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectResponse>;
   /** 创建专用通道 {@link CreateDirectConnectTunnelRequest} {@link CreateDirectConnectTunnelResponse} */

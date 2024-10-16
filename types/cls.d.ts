@@ -1098,6 +1098,8 @@ declare interface MonitorTime {
   Type: string;
   /** 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。当type为`Period`,`Fixed`时，time字段生效。 */
   Time?: number;
+  /** 执行的周期cron表达式。示例：`"1 * * * *"` 从左到右每个field的含义 Minutes field, Hours field,Day of month field,Month field,Day of week field， 不支持秒级别。当type为`Cron`时，CronExpression字段生效。 */
+  CronExpression?: string | null;
 }
 
 /** 多触发条件。 */
@@ -1116,6 +1118,48 @@ declare interface MultiTopicSearchInformation {
   Context?: string;
 }
 
+/** 通知内容模版详细配置 */
+declare interface NoticeContent {
+  /** 渠道类型Email:邮件;Sms:短信;WeChat:微信;Phone:电话;WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调; */
+  Type: string;
+  /** 告警触发通知内容模版。 */
+  TriggerContent?: NoticeContentInfo | null;
+  /** 告警恢复通知内容模版。 */
+  RecoveryContent?: NoticeContentInfo | null;
+}
+
+/** 通知模板内容 */
+declare interface NoticeContentInfo {
+  /** 通知内容模板标题信息。部分通知渠道类型不支持“标题”，请参照腾讯云控制台页面。 */
+  Title?: string | null;
+  /** 通知内容模板正文信息。 */
+  Content?: string | null;
+  /** 请求头（Request Headers）：在HTTP请求中，请求头包含了客户端向服务器发送的附加信息，如用户代理、授权凭证、期望的响应格式等。仅“自定义回调”支持该配置。 */
+  Headers?: string[] | null;
+}
+
+/** 通知内容模板信息 */
+declare interface NoticeContentTemplate {
+  /** 通知内容模板ID。 */
+  NoticeContentId?: string | null;
+  /** 通知内容模板名称 */
+  Name?: string | null;
+  /** 语言类型。0： 中文1： 英文 */
+  Type?: number | null;
+  /** 通知内容模板信息。 */
+  NoticeContents?: NoticeContent[] | null;
+  /** 通知内容模板标记。0： 用户自定义1： 系统内置 */
+  Flag?: number | null;
+  /** 创建者主账号。 */
+  Uin?: number | null;
+  /** 创建/修改者子账号。 */
+  SubUin?: number | null;
+  /** 创建时间 秒级时间戳。 */
+  CreateTime?: number | null;
+  /** 更新时间 秒级时间戳。 */
+  UpdateTime?: number | null;
+}
+
 /** 告警通知接收者信息 */
 declare interface NoticeReceiver {
   /** 接受者类型。可选值：- Uin - 用户ID- Group - 用户组ID暂不支持其余接收者类型。 */
@@ -1130,6 +1174,8 @@ declare interface NoticeReceiver {
   EndTime?: string;
   /** 位序。- 入参时无效。- 出参时有效。 */
   Index?: number;
+  /** 通知内容模板ID。 */
+  NoticeContentId?: string | null;
 }
 
 /** 通知规则 */
@@ -1952,6 +1998,22 @@ declare interface CreateMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateNoticeContentRequest {
+  /** 模版名称。 */
+  Name: string;
+  /** 模版内容语言。0：中文1：英文 */
+  Type?: number;
+  /** 模版详细配置。 */
+  NoticeContents?: NoticeContent[];
+}
+
+declare interface CreateNoticeContentResponse {
+  /** 通知内容配置ID */
+  NoticeContentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateScheduledSqlRequest {
   /** 源日志主题 */
   SrcTopicId: string;
@@ -2224,6 +2286,16 @@ declare interface DeleteMachineGroupRequest {
 }
 
 declare interface DeleteMachineGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNoticeContentRequest {
+  /** 通知内容模版ID */
+  NoticeContentId: string;
+}
+
+declare interface DeleteNoticeContentResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2696,6 +2768,24 @@ declare interface DescribeMachinesResponse {
   ServiceLogging?: boolean;
   /** 总数目 */
   TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNoticeContentsRequest {
+  /** name按照【通知内容模版名称】进行过滤。类型：String必选：否 noticeContentId按照【通知内容模版ID】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeNoticeContentsResponse {
+  /** 通知内容模版列表。 */
+  NoticeContents?: NoticeContentTemplate[] | null;
+  /** 符合条件的通知内容模版总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3214,6 +3304,22 @@ declare interface ModifyMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNoticeContentRequest {
+  /** 通知内容模版ID。 */
+  NoticeContentId: string;
+  /** 通知内容模版名称。 */
+  Name?: string;
+  /** 通知内容语言。0：中文 1：英文 */
+  Type?: number;
+  /** 通知内容模版详细信息。 */
+  NoticeContents?: NoticeContent[];
+}
+
+declare interface ModifyNoticeContentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyScheduledSqlRequest {
   /** 任务ID */
   TaskId: string;
@@ -3587,6 +3693,8 @@ declare interface Cls {
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
   /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
+  /** 创建通知内容模版 {@link CreateNoticeContentRequest} {@link CreateNoticeContentResponse} */
+  CreateNoticeContent(data: CreateNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
@@ -3625,6 +3733,8 @@ declare interface Cls {
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
   /** 删除机器组信息 {@link DeleteMachineGroupInfoRequest} {@link DeleteMachineGroupInfoResponse} */
   DeleteMachineGroupInfo(data: DeleteMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupInfoResponse>;
+  /** 删除通知内容模版 {@link DeleteNoticeContentRequest} {@link DeleteNoticeContentResponse} */
+  DeleteNoticeContent(data: DeleteNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
   /** 删除投递COS任务 {@link DeleteShipperRequest} {@link DeleteShipperResponse} */
@@ -3677,6 +3787,8 @@ declare interface Cls {
   DescribeMachineGroups(data?: DescribeMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupsResponse>;
   /** 获取机器状态 {@link DescribeMachinesRequest} {@link DescribeMachinesResponse} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
+  /** 获取通知内容模版 {@link DescribeNoticeContentsRequest} {@link DescribeNoticeContentsResponse} */
+  DescribeNoticeContents(data?: DescribeNoticeContentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentsResponse>;
   /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
   /** 获取定时SQL分析任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
@@ -3721,6 +3833,8 @@ declare interface Cls {
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
   /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */
   ModifyMachineGroup(data: ModifyMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineGroupResponse>;
+  /** 修改通知内容模版 {@link ModifyNoticeContentRequest} {@link ModifyNoticeContentResponse} */
+  ModifyNoticeContent(data: ModifyNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
   /** 修改投递COS任务 {@link ModifyShipperRequest} {@link ModifyShipperResponse} */
