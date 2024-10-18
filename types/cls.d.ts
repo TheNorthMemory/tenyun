@@ -1003,19 +1003,19 @@ declare interface LogRechargeRuleInfo {
 /** 日志集相关信息 */
 declare interface LogsetInfo {
   /** 日志集ID */
-  LogsetId: string;
+  LogsetId?: string;
   /** 日志集名称 */
-  LogsetName: string;
+  LogsetName?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
-  AssumerName: string | null;
+  AssumerName?: string | null;
   /** 日志集绑定的标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 日志集下日志主题的数目 */
-  TopicCount: number;
+  TopicCount?: number;
   /** 若AssumerName非空，则表示创建该日志集的服务方角色 */
-  RoleName: string;
+  RoleName?: string;
 }
 
 /** 机器组信息 */
@@ -1482,6 +1482,12 @@ declare interface TopicInfo {
   IsWebTracking?: boolean | null;
   /** 日志主题扩展信息 */
   Extends?: TopicExtendInfo | null;
+  /** 异步迁移任务ID */
+  TopicAsyncTaskID?: string | null;
+  /** 异步迁移状态 */
+  MigrationStatus?: number | null;
+  /** 异步迁移完成后，预计生效日期 */
+  EffectiveDate?: string | null;
 }
 
 /** 需要开启键值索引的字段的索引描述信息 */
@@ -1504,12 +1510,16 @@ declare interface WebCallback {
   CallbackType: string;
   /** 回调方法。可选值：- POST（默认值）- PUT注意：- 参数CallbackType为Http时为必选。 */
   Method?: string | null;
-  /** 请求头。注意：该参数已废弃，请在创建告警策略接口CallBack参数中指定请求头。 */
+  /** 请求头。注意：该参数已废弃，请使用NoticeContentId。 */
   Headers?: string[] | null;
-  /** 请求内容。注意：该参数已废弃，请在创建告警策略接口CallBack参数中指定请求内容。 */
+  /** 请求内容。注意：该参数已废弃，请使用NoticeContentId。 */
   Body?: string | null;
   /** 序号。- 入参无效。- 出参有效。 */
   Index?: number;
+  /** 通知内容模板ID。 */
+  NoticeContentId?: string | null;
+  /** 集成配置ID。 */
+  WebCallbackId?: string | null;
 }
 
 declare interface AddMachineGroupInfoRequest {
@@ -3409,6 +3419,8 @@ declare interface ModifyTopicRequest {
   Extends?: TopicExtendInfo;
   /** 日志主题分区数量 */
   PartitionCount?: number;
+  /** 取消切换存储任务的id */
+  CancelTopicAsyncTaskID?: string;
 }
 
 declare interface ModifyTopicResponse {
@@ -3469,7 +3481,7 @@ declare interface QueryMetricRequest {
   Query: string;
   /** 指标主题ID */
   TopicId: string;
-  /** 查询时间，秒级Unix时间戳 */
+  /** 查询时间，秒级Unix时间戳。为空时代表当前时间戳。 */
   Time?: number;
 }
 

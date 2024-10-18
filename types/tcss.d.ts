@@ -2941,37 +2941,45 @@ declare interface SecLogDeliveryKafkaSettingInfo {
 /** 安全日志接入详情 */
 declare interface SecLogJoinInfo {
   /** 已接入普通主机数量 */
-  Count: number;
+  Count?: number;
   /** 已接入超级节点数量 */
   SuperNodeCount?: number;
   /** 是否已接入(true:已接入 false:未接入) */
-  IsJoined: boolean;
+  IsJoined?: boolean;
   /** 日志类型(容器bash: "container_bash"容器启动: "container_launch"k8sApi: "k8s_api") */
-  LogType: string;
+  LogType?: string;
+  /** 已接入集群数量 */
+  ClusterCount?: number;
 }
 
 /** 安全日志接入对象详情 */
 declare interface SecLogJoinObjectInfo {
   /** 主机ID */
-  HostID: string;
+  HostID?: string;
   /** 主机名称 */
-  HostName: string | null;
+  HostName?: string | null;
   /** 主机IP */
-  HostIP: string | null;
+  HostIP?: string | null;
   /** 主机状态 */
-  HostStatus: string;
+  HostStatus?: string;
   /** 集群ID */
-  ClusterID: string | null;
+  ClusterID?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 外网IP */
-  PublicIP: string | null;
+  PublicIP?: string | null;
   /** 接入状态(true:已接入 false:未接入) */
-  JoinState: boolean;
+  JoinState?: boolean;
   /** 集群版本 */
-  ClusterVersion: string | null;
+  ClusterVersion?: string | null;
   /** 集群主节点地址 */
-  ClusterMainAddress: string;
+  ClusterMainAddress?: string;
+  /** 容器数 */
+  ContainerCnt?: number;
+  /** 集群类型 */
+  ClusterType?: string;
+  /** 集群状态 */
+  ClusterStatus?: string | null;
 }
 
 /** 运行时安全事件趋势信息 */
@@ -7047,11 +7055,13 @@ declare interface DescribeContainerSecEventSummaryResponse {
 declare interface DescribeESAggregationsRequest {
   /** ES聚合条件JSON */
   Query: string;
+  /** 日志类型列表 */
+  LogTypes?: string[];
 }
 
 declare interface DescribeESAggregationsResponse {
   /** ES聚合结果JSON */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7063,11 +7073,13 @@ declare interface DescribeESHitsRequest {
   Offset?: number;
   /** 返回数量，最大值为100。 */
   Limit?: number;
+  /** 日志类型列表 */
+  LogTypes?: string[];
 }
 
 declare interface DescribeESHitsResponse {
   /** ES查询结果JSON */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8477,11 +8489,13 @@ declare interface DescribeScanIgnoreVulListResponse {
 declare interface DescribeSearchExportListRequest {
   /** ES查询条件JSON */
   Query: string;
+  /** 日志类型列表 */
+  LogTypes?: string[];
 }
 
 declare interface DescribeSearchExportListResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
-  JobId: string;
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8630,6 +8644,12 @@ declare interface DescribeSecLogJoinObjectListResponse {
   TotalCount?: number;
   /** 接入对象列表 */
   List?: SecLogJoinObjectInfo[];
+  /** 日志节点范围类型,0自选 1全部 */
+  RangeType?: number;
+  /** 新增资产是否自动加入，节点范围为全部时生效 */
+  AutoJoin?: boolean;
+  /** 剔除节点数 */
+  ExcludedCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10157,12 +10177,16 @@ declare interface ModifySecLogDeliveryKafkaSettingResponse {
 declare interface ModifySecLogJoinObjectsRequest {
   /** 日志类型bash日志: container_bash容器启动: container_launchk8sApi: k8s_api */
   LogType: string;
-  /** 绑定主机quuid列表 */
+  /** 绑定列表 */
   BindList?: string[];
-  /** 待解绑主机quuid列表 */
+  /** 待解绑列表，节点范围为全部时，含义为需剔除资产列表 */
   UnBindList?: string[];
   /** 节点类型:NORMAL: 普通节点(默认值)SUPER: 超级节点 */
   NodeType?: string;
+  /** 日志节点范围类型,0自选 1全部 */
+  RangeType?: number;
+  /** 新增资产是否自动加入，节点范围为全部时生效 */
+  AutoJoin?: boolean;
 }
 
 declare interface ModifySecLogJoinObjectsResponse {

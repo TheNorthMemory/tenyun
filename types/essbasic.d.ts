@@ -1014,6 +1014,8 @@ declare interface RegistrationOrganizationInfo {
   BusinessLicense?: string;
   /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。p.s. 如果上传授权书 ，需遵循以下条件1. 超管的信息（超管姓名，超管身份证，超管手机号）必须为必填参数。2. 超管的个人身份必须在电子签已经实名。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
   PowerOfAttorneys?: string[];
+  /** 认证完之后的H5页面的跳转链接，最大长度1000个字符。链接类型请参考 [跳转电子签H5](https://qian.tencent.com/developers/company/openqianh5/) */
+  AutoJumpUrl?: string;
 }
 
 /** 解除协议的签署人，如不指定，默认使用待解除流程(原流程)中的签署人。`注意`: - 不支持更换C端(个人身份类型)签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。 - 目前不支持替换C端(个人身份类型)签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。 - 当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只传参数ApproverSignRole。如果需要指定B端(企业身份类型)签署人，其中ReleasedApprover需要传递的参数如下：(`ApproverNumber`, `ReleasedApproverRecipientId`这两个二选一), `OrganizationName`, `ApproverType`必传。对于其他身份标识：- **子客企业指定经办人**：OpenId必传，OrganizationOpenId必传；- **非子客企业经办人**：Name、Mobile必传。 */
@@ -1807,7 +1809,7 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   SealImageCompress?: boolean;
   /** 手机号码；当需要开通自动签时，该参数必传 */
   Mobile?: string;
-  /** 是否开通自动签，该功能需联系运营工作人员开通后使用 */
+  /** 此字段已废弃，请勿继续使用。 */
   EnableAutoSign?: boolean;
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
   LicenseType?: number;
@@ -2451,7 +2453,7 @@ declare interface CreateConsoleLoginUrlRequest {
   ModuleId?: string;
   /** 是否展示左侧菜单栏 **ENABLE** : (默认)进入web控制台展示左侧菜单栏 **DISABLE** : 进入web控制台不展示左侧菜单栏注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。 */
   MenuStatus?: string;
-  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序**H5**：H5长链接跳转H5链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面**SHORT_H5**：H5短链跳转H5的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签H5页面 */
+  /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**WEIXIN_QRCODE_URL**：直接跳转至电子签小程序的二维码链接，无需通过中转页。您需要自行将其转换为二维码，使用微信扫码后可直接进入。请注意，直接点击链接是无效的。**APP**：APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序**H5**：H5长链接跳转H5链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面**SHORT_H5**：H5短链跳转H5的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签H5页面 */
   Endpoint?: string;
   /** 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括： **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序 */
   AutoJumpBackEvent?: string;
@@ -2470,7 +2472,7 @@ declare interface CreateConsoleLoginUrlRequest {
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 CHANNEL/APP/H5/SHORT_H5 30天 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP/H5/SHORT_H5 30天 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   ConsoleUrl?: string;
   /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：`企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码` */
   IsActivated?: boolean;
@@ -2971,7 +2973,7 @@ declare interface ModifyExtendedServiceRequest {
   ServiceType: string;
   /** 操作类型OPEN : 开通CLOSE : 关闭 */
   Operate: string;
-  /** 链接跳转类型，支持以下类型WEIXINAPP : 短链直接跳转到电子签小程序 (默认值)APP : 第三方APP或小程序跳转电子签小程序 */
+  /** 链接跳转类型，支持以下类型WEIXINAPP : 短链直接跳转到电子签小程序 (默认值)APP : 第三方APP或小程序跳转电子签小程序WEIXIN_QRCODE_URL：直接跳转至电子签小程序的二维码链接，无需通过中转页。您需要自行将其转换为二维码，使用微信扫码后可直接进入。请注意，直接点击链接是无效的。 */
   Endpoint?: string;
 }
 

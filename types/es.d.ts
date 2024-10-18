@@ -316,6 +316,18 @@ declare interface Dimension {
   Value: string;
 }
 
+/** 置放群组异步任务维护的时间段 */
+declare interface EnableScheduleOperationDuration {
+  /** 支持开启异步任务的日期 */
+  Periods?: string[] | null;
+  /** 支持开启异步的开始时间 */
+  TimeStart?: string | null;
+  /** 支持开启异步的结束时间 */
+  TimeEnd?: string | null;
+  /** 支持开启异步的时区 */
+  TimeZone?: string | null;
+}
+
 /** ES集群配置项 */
 declare interface EsAcl {
   /** kibana访问黑名单 */
@@ -974,6 +986,10 @@ declare interface NodeView {
   IsCoordinationNode?: boolean;
   /** CVM运行状态 */
   CVMStatus?: string;
+  /** cvm绑定的置放群组的id */
+  CVMDisasterRecoverGroupId?: string | null;
+  /** cvm绑定置放群组的状态。2: 已绑定；1: 绑定中；0: 未开启 */
+  CVMDisasterRecoverGroupStatus?: number | null;
 }
 
 /** ES集群操作详细信息 */
@@ -1449,6 +1465,10 @@ declare interface CreateInstanceRequest {
   SubProductCode?: string;
   /** 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离 */
   ReadWriteMode?: number;
+  /** 置放群组是否开启异步任务 */
+  EnableScheduleRecoverGroup?: boolean;
+  /** 置放群组开启异步任务的可维护时间段 */
+  EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 
 declare interface CreateInstanceResponse {
@@ -2143,7 +2163,7 @@ declare interface InquirePriceRenewInstanceResponse {
 declare interface InstallInstanceModelRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 客户上传到自己cos的地址列表 */
+  /** 客户上传到cos的模型地址，单次请求限制一个。cos文件为压缩文件，格式包括：zip、tgz和tar.gz */
   UsrCosModelUrlList?: string[];
 }
 
@@ -2223,6 +2243,10 @@ declare interface RestartNodesRequest {
   ShardAllocationConcurrents?: number;
   /** 分片迁移并发速度 */
   ShardAllocationBytes?: number;
+  /** 是否开启置放群组异步任务 */
+  EnableScheduleRecoverGroup?: boolean;
+  /** 置放群组异步任务时间段 */
+  EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 
 declare interface RestartNodesResponse {
@@ -2409,6 +2433,10 @@ declare interface UpdateInstanceRequest {
   ShardAllocationBytes?: number;
   /** 读写分离模式：-1-不开启，1-本地读写分离，2-远端读写分离 */
   ReadWriteMode?: number;
+  /** 是否开启置放群组异步任务 */
+  EnableScheduleRecoverGroup?: boolean;
+  /** 置放群组异步任务可维护时间段 */
+  EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 
 declare interface UpdateInstanceResponse {
@@ -2567,6 +2595,10 @@ declare interface UpgradeInstanceRequest {
   ShardAllocationConcurrents?: number;
   /** 分片迁移并发速度 */
   ShardAllocationBytes?: number;
+  /** 是否开启置放群组异步任务 */
+  EnableScheduleRecoverGroup?: boolean;
+  /** 置放群组异步任务时间段 */
+  EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 
 declare interface UpgradeInstanceResponse {

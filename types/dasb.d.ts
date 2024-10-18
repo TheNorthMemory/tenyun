@@ -1257,10 +1257,12 @@ declare interface DescribeDeviceAccountsResponse {
 }
 
 declare interface DescribeDeviceGroupMembersRequest {
-  /** 资产组ID */
-  Id: number;
   /** true - 查询已在该资产组的资产，false - 查询未在该资产组的资产 */
   Bound: boolean;
+  /** 资产组ID，Id和IdSet二选一 */
+  Id?: number;
+  /** 资产组ID集合，传Id，IdSet不生效。 */
+  IdSet?: number[];
   /** 资产名或资产IP，模糊查询 */
   Name?: string;
   /** 分页偏移位置，默认值为0 */
@@ -1277,9 +1279,9 @@ declare interface DescribeDeviceGroupMembersRequest {
 
 declare interface DescribeDeviceGroupMembersResponse {
   /** 资产组成员总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 资产组成员列表 */
-  DeviceSet: Device[];
+  DeviceSet?: Device[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

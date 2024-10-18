@@ -260,6 +260,8 @@ declare interface CreateBPFakeAPPRequest {
 }
 
 declare interface CreateBPFakeAPPResponse {
+  /** FakeAPPId */
+  FakeAPPId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -276,6 +278,8 @@ declare interface CreateBPFakeURLRequest {
 }
 
 declare interface CreateBPFakeURLResponse {
+  /** FakeURLId */
+  FakeURLId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

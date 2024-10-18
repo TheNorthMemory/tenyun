@@ -467,7 +467,7 @@ declare interface PullSmsSendStatusResponse {
 declare interface ReportConversionRequest {
   /** 短信应用ID。在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
-  /** 发送短信返回的流水号。 */
+  /** 发送短信返回的流水号。对应SendSms接口返回的SendStatusSet参数中的SerialNo字段。 */
   SerialNo: string;
   /** 用户回填时间，UNIX 时间戳（单位：秒）。 */
   ConversionTime?: number;

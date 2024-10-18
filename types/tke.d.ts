@@ -1787,6 +1787,14 @@ declare namespace V20180525 {
     AddonParam: string;
   }
 
+  /** 修改标签失败的资源 */
+  interface FailedResource {
+    /** 资源六段式 */
+    Resource?: string | null;
+    /** 执行失败的原因 */
+    Error?: string | null;
+  }
+
   /** 过滤器 */
   interface Filter {
     /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
@@ -4733,6 +4741,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeBatchModifyTagsStatusRequest {
+  }
+
+  interface DescribeBatchModifyTagsStatusResponse {
+    /** 失败资源列表 */
+    FailedResources?: FailedResource[] | null;
+    /** 任务状态：- running 运行中- failed 失败- done 成功 */
+    Status?: string | null;
+    /** 是否同步集群内子资源标签 */
+    SyncSubresource?: boolean;
+    /** 集群标签 */
+    Tags?: Tag[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeClusterAsGroupOptionRequest {
     /** 集群ID */
     ClusterId: string;
@@ -6811,6 +6835,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyClusterTagsRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 集群标签 */
+    Tags?: Tag[];
+    /** 是否同步集群内子资源标签 */
+    SyncSubresource?: boolean;
+  }
+
+  interface ModifyClusterTagsResponse {
+    /** 集群标签 */
+    Tags?: Tag[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyClusterVirtualNodePoolRequest {
     /** 集群ID */
     ClusterId: string;
@@ -7585,6 +7625,8 @@ declare interface Tke {
   DescribeAvailableTKEEdgeVersion(data: V20180525.DescribeAvailableTKEEdgeVersionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeAvailableTKEEdgeVersionResponse>;
   /** 查询备份仓库 {@link V20180525.DescribeBackupStorageLocationsRequest} {@link V20180525.DescribeBackupStorageLocationsResponse} */
   DescribeBackupStorageLocations(data: V20180525.DescribeBackupStorageLocationsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeBackupStorageLocationsResponse>;
+  /** 查询批量修改标签状态 {@link V20180525.DescribeBatchModifyTagsStatusRequest} {@link V20180525.DescribeBatchModifyTagsStatusResponse} */
+  DescribeBatchModifyTagsStatus(data: V20180525.DescribeBatchModifyTagsStatusRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeBatchModifyTagsStatusResponse>;
   /** 集群弹性伸缩配置 {@link V20180525.DescribeClusterAsGroupOptionRequest} {@link V20180525.DescribeClusterAsGroupOptionResponse} */
   DescribeClusterAsGroupOption(data: V20180525.DescribeClusterAsGroupOptionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterAsGroupOptionResponse>;
   /** 集群关联的伸缩组列表 {@link V20180525.DescribeClusterAsGroupsRequest} {@link V20180525.DescribeClusterAsGroupsResponse} */
@@ -7817,6 +7859,8 @@ declare interface Tke {
   ModifyClusterNodePool(data: V20180525.ModifyClusterNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterNodePoolResponse>;
   /** 修改集群运行时配置 {@link V20180525.ModifyClusterRuntimeConfigRequest} {@link V20180525.ModifyClusterRuntimeConfigResponse} */
   ModifyClusterRuntimeConfig(data: V20180525.ModifyClusterRuntimeConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterRuntimeConfigResponse>;
+  /** 修改集群标签 {@link V20180525.ModifyClusterTagsRequest} {@link V20180525.ModifyClusterTagsResponse} */
+  ModifyClusterTags(data: V20180525.ModifyClusterTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterTagsResponse>;
   /** 修改超级节点池 {@link V20180525.ModifyClusterVirtualNodePoolRequest} {@link V20180525.ModifyClusterVirtualNodePoolResponse} */
   ModifyClusterVirtualNodePool(data: V20180525.ModifyClusterVirtualNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterVirtualNodePoolResponse>;
   /** 修改节点池关联伸缩组的期望实例数 {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgRequest} {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgResponse} */

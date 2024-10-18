@@ -2507,7 +2507,7 @@ declare interface CreatePreparedPersonalEsignRequest {
   SealImageCompress?: boolean;
   /** 手机号码；当需要开通自动签时，该参数必传 */
   Mobile?: string;
-  /** 是否开通自动签，该功能需联系运营工作人员开通后使用 */
+  /** 此字段已废弃，请勿继续使用。 */
   EnableAutoSign?: boolean;
   /** 印章颜色（参数ProcessSeal=true时生效）默认值：BLACK黑色取值: BLACK 黑色,RED 红色,BLUE 蓝色。 */
   SealColor?: string;
@@ -3475,7 +3475,7 @@ declare interface ModifyExtendedServiceRequest {
   Operate: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 链接跳转类型，支持以下类型WEIXINAPP : 短链直接跳转到电子签小程序 (默认值)APP : 第三方APP或小程序跳转电子签小程序 */
+  /** 链接跳转类型，支持以下类型WEIXINAPP : 短链直接跳转到电子签小程序 (默认值)APP : 第三方APP或小程序跳转电子签小程序WEIXIN_QRCODE_URL：直接跳转至电子签小程序的二维码链接，无需通过中转页。您需要自行将其转换为二维码，使用微信扫码后可直接进入。请注意，直接点击链接是无效的。 */
   Endpoint?: string;
 }
 

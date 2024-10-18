@@ -4,9 +4,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 目标组关联到的规则 */
 declare interface AssociationItem {
-  /** 关联到的负载均衡ID */
+  /** 关联到的网关负载均衡实例ID */
   LoadBalancerId?: string;
-  /** 负载均衡名称 */
+  /** 网关负载均衡实例名称 */
   LoadBalancerName?: string;
 }
 
@@ -68,7 +68,7 @@ declare interface ItemPrice {
 declare interface Price {
   /** 描述了实例价格。 */
   InstancePrice?: ItemPrice | null;
-  /** 描述了实例价格。 */
+  /** 描述了GLCU的价格。 */
   LcuPrice?: ItemPrice | null;
 }
 
@@ -82,7 +82,7 @@ declare interface TagInfo {
 
 /** 规则与目标组的关联关系。 */
 declare interface TargetGroupAssociation {
-  /** 负载均衡ID。 */
+  /** 网关负载均衡实例ID。 */
   LoadBalancerId: string;
   /** 目标组ID。 */
   TargetGroupId: string;
@@ -118,7 +118,7 @@ declare interface TargetGroupBackend {
 declare interface TargetGroupHealthCheck {
   /** 是否开启健康检查。 */
   HealthSwitch: boolean;
-  /** 健康检查使用的协议。支持icmp和tcp，默认为icmp。 */
+  /** 健康检查使用的协议。支持ping和tcp，默认为ping。- PING: icmp- TCP: tcp */
   Protocol?: string;
   /** 健康检查端口，探测协议未tcp时，该参数必填。 */
   Port?: number;
@@ -150,7 +150,7 @@ declare interface TargetGroupInfo {
   AssociatedRule?: AssociationItem[] | null;
   /** 后端协议类型。 */
   Protocol?: string | null;
-  /** 调度算法。ip_hash_3：3元组对称弹性Haship_hash_3_consistent：3元组对称一致性Hash */
+  /** 调度算法。ip_hash_3：弹性哈希 */
   ScheduleAlgorithm?: string | null;
   /** 健康检查详情。 */
   HealthCheck?: TargetGroupHealthCheck | null;
@@ -195,7 +195,7 @@ declare interface CreateGatewayLoadBalancerRequest {
   VpcId: string;
   /** 网关负载均衡后端目标设备所属的私有网络的子网ID。 */
   SubnetId: string;
-  /** 网关负载均衡实例名称。可支持输入1-60个字符，允许英文字母、数字、中文字符、“-”、“_”、“.”。不填写时默认自动生成。 */
+  /** 网关负载均衡实例名称。可支持输入1-60个字符。不填写时默认自动生成。 */
   LoadBalancerName?: string;
   /** 创建网关负载均衡的个数，默认值为 1。批量创建数量最大支持10个。 */
   Number?: number;
@@ -215,7 +215,7 @@ declare interface CreateGatewayLoadBalancerResponse {
 }
 
 declare interface CreateTargetGroupRequest {
-  /** 目标组名称，限定50个字符 */
+  /** 目标组名称，限定60个字符。 */
   TargetGroupName?: string;
   /** 目标组的vpcid属性，不填则使用默认vpc */
   VpcId?: string;
@@ -223,11 +223,11 @@ declare interface CreateTargetGroupRequest {
   Port?: number;
   /** 目标组绑定的后端服务器 */
   TargetGroupInstances?: TargetGroupInstance[];
-  /** 网关负载均衡目标组协议。- AWS_GENEVE：GENEVE 兼容协议 - TENCENT_GENEVE ：GENEVE 标准协议 */
+  /** 网关负载均衡目标组协议。- TENCENT_GENEVE ：GENEVE 标准协议- AWS_GENEVE：GENEVE 兼容协议（需要提交工单申请开白） */
   Protocol?: string;
-  /** 健康检查。 */
+  /** 健康检查设置。 */
   HealthCheck?: TargetGroupHealthCheck;
-  /** RS调度算法。- IP_HASH_3_ELASTIC：弹性哈希 */
+  /** 均衡算法。- IP_HASH_3_ELASTIC：弹性哈希 */
   ScheduleAlgorithm?: string;
   /** 是否支持全死全活。默认支持。 */
   AllDeadToAlive?: boolean;
@@ -251,7 +251,7 @@ declare interface DeleteGatewayLoadBalancerResponse {
 }
 
 declare interface DeleteTargetGroupsRequest {
-  /** 目标组列表。 */
+  /** 目标组ID列表。 */
   TargetGroupIds: string[];
 }
 
@@ -409,7 +409,7 @@ declare interface InquirePriceCreateGatewayLoadBalancerResponse {
 declare interface ModifyGatewayLoadBalancerAttributeRequest {
   /** 网关负载均衡的唯一ID。 */
   LoadBalancerId: string;
-  /** 网关负载均衡名称。 */
+  /** 网关负载均衡实例名称。可支持输入1-60个字符。 */
   LoadBalancerName?: string;
 }
 
@@ -437,7 +437,7 @@ declare interface ModifyTargetGroupAttributeResponse {
 declare interface ModifyTargetGroupInstancesWeightRequest {
   /** 目标组ID。 */
   TargetGroupId: string;
-  /** 待修改权重的服务器数组。 */
+  /** 实例绑定配置数组。 */
   TargetGroupInstances: TargetGroupInstance[];
 }
 
@@ -471,13 +471,13 @@ declare interface Gwlb {
   DeleteGatewayLoadBalancer(data: DeleteGatewayLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayLoadBalancerResponse>;
   /** 删除目标组 {@link DeleteTargetGroupsRequest} {@link DeleteTargetGroupsResponse} */
   DeleteTargetGroups(data: DeleteTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetGroupsResponse>;
-  /** 解绑目标组服务器 {@link DeregisterTargetGroupInstancesRequest} {@link DeregisterTargetGroupInstancesResponse} */
+  /** 解绑目标组中的实例 {@link DeregisterTargetGroupInstancesRequest} {@link DeregisterTargetGroupInstancesResponse} */
   DeregisterTargetGroupInstances(data: DeregisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetGroupInstancesResponse>;
   /** 查询网关负载均衡实例列表 {@link DescribeGatewayLoadBalancersRequest} {@link DescribeGatewayLoadBalancersResponse} */
   DescribeGatewayLoadBalancers(data?: DescribeGatewayLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayLoadBalancersResponse>;
   /** 查询目标组后端服务状态 {@link DescribeTargetGroupInstanceStatusRequest} {@link DescribeTargetGroupInstanceStatusResponse} */
   DescribeTargetGroupInstanceStatus(data: DescribeTargetGroupInstanceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstanceStatusResponse>;
-  /** 获取目标组绑定的服务器 {@link DescribeTargetGroupInstancesRequest} {@link DescribeTargetGroupInstancesResponse} */
+  /** 获取目标组绑定的实例列表 {@link DescribeTargetGroupInstancesRequest} {@link DescribeTargetGroupInstancesResponse} */
   DescribeTargetGroupInstances(data: DescribeTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstancesResponse>;
   /** 获取目标组列表 {@link DescribeTargetGroupListRequest} {@link DescribeTargetGroupListResponse} */
   DescribeTargetGroupList(data?: DescribeTargetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupListResponse>;
@@ -495,7 +495,7 @@ declare interface Gwlb {
   ModifyTargetGroupAttribute(data: ModifyTargetGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupAttributeResponse>;
   /** 修改目标组的服务器权重 {@link ModifyTargetGroupInstancesWeightRequest} {@link ModifyTargetGroupInstancesWeightResponse} */
   ModifyTargetGroupInstancesWeight(data: ModifyTargetGroupInstancesWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupInstancesWeightResponse>;
-  /** 注册服务器到目标组 {@link RegisterTargetGroupInstancesRequest} {@link RegisterTargetGroupInstancesResponse} */
+  /** 目标组中添加实例 {@link RegisterTargetGroupInstancesRequest} {@link RegisterTargetGroupInstancesResponse} */
   RegisterTargetGroupInstances(data: RegisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetGroupInstancesResponse>;
 }
 

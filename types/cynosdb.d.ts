@@ -1947,21 +1947,23 @@ declare interface SaleRegion {
 /** 售卖可用区信息 */
 declare interface SaleZone {
   /** 可用区英文名 */
-  Zone: string;
+  Zone?: string;
   /** 可用区数字ID */
-  ZoneId: number;
+  ZoneId?: number;
   /** 可用区中文名 */
-  ZoneZh: string;
+  ZoneZh?: string;
   /** 是否支持serverless集群0:不支持1:支持 */
-  IsSupportServerless: number;
+  IsSupportServerless?: number;
   /** 是否支持普通集群0:不支持1:支持 */
-  IsSupportNormal: number;
+  IsSupportNormal?: number;
   /** 物理区 */
-  PhysicalZone: string;
+  PhysicalZone?: string;
   /** 用户是否有可用区权限 */
   HasPermission?: boolean | null;
   /** 是否为全链路RDMA可用区 */
   IsWholeRdmaZone?: string;
+  /** 当前可用区是否允许新购集群，1:允许，0:不允许 */
+  IsSupportCreateCluster?: number;
 }
 
 /** 安全组详情 */

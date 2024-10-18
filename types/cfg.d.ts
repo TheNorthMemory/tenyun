@@ -82,6 +82,8 @@ declare interface ActionLibraryListResult {
   MetricIdList?: number[] | null;
   /** 是否是新动作 */
   IsNewAction?: boolean | null;
+  /** 对象类型ID */
+  ObjectTypeId?: number | null;
 }
 
 /** 应用性能监控产品中应用信息 */
@@ -498,6 +500,8 @@ declare interface TaskReportInfo {
   ArchiveStage?: number;
   /** 归档时间 */
   ArchiveTime?: string;
+  /** 归档ID */
+  ArchiveUuid?: string | null;
 }
 
 /** 经验库 */

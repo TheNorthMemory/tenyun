@@ -1004,6 +1004,8 @@ declare interface RecordPlanBaseInfo {
   Status?: number;
   /** 通道总数 */
   ChannelCount?: number;
+  /** 录像补录模式（0:不启用，1:启用） */
+  RepairMode?: number;
 }
 
 /** 计划下的设备通道信息 */
@@ -1018,6 +1020,8 @@ declare interface RecordPlanChannelInfo {
   ChannelName?: string | null;
   /** 所属组织名称 */
   OrganizationName?: string | null;
+  /** 通道所属设备的接入协议类型 */
+  AccessProtocol?: number;
 }
 
 /** 实时上云计划添加和修改的返回数据 */
@@ -1034,6 +1038,8 @@ declare interface RecordPlanOptData {
   LifeCycle?: LifeCycleData;
   /** 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义 */
   StreamType?: string | null;
+  /** 录像补录模式（0:不启用，1:启用） */
+  RepairMode?: number;
 }
 
 /** 云录像回放url */
@@ -1402,6 +1408,8 @@ declare interface UpdateRecordPlanData {
   Del?: string[];
   /** 组织目录ID，添加组织目录下所有设备通道，Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量） */
   OrganizationId?: string[];
+  /** 录像补录模式（0:不启用，1:启用） */
+  RepairMode?: number;
 }
 
 /** 修改实时上云模板的请求数据结构 */
@@ -1435,7 +1443,7 @@ declare interface AddAITaskResponse {
 }
 
 declare interface AddOrganizationRequest {
-  /** 组织名称（仅支持中文、英文、数字、_、-的组合，长度不超过16个字符，且组织名称不能重复） */
+  /** 组织名称（仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过64位，且组织名称不能重复） */
   Name: string;
   /** 组织父节点 ID（从查询组织接口DescribeOrganization中获取，填0代表根组织） */
   ParentId: string;
@@ -1503,6 +1511,8 @@ declare interface AddRecordPlanRequest {
   Channels?: ChannelInfo[];
   /** 添加组织目录下所有设备通道，Json数组，可以为空，通道总数量不超过5000个（包括Channel字段的数量） */
   OrganizationId?: string[];
+  /** 录像补录模式（0:不启用，1:启用），无该字段，默认不启用 */
+  RepairMode?: number;
 }
 
 declare interface AddRecordPlanResponse {
@@ -1513,7 +1523,7 @@ declare interface AddRecordPlanResponse {
 }
 
 declare interface AddRecordRetrieveTaskRequest {
-  /** 任务名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，模板名称全局唯一，不能为空，不能重复 */
+  /** 任务名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，名称全局唯一，不能为空，不能重复 */
   TaskName: string;
   /** 取回录像的开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天 */
   StartTime: number;
@@ -1575,7 +1585,7 @@ declare interface AddStreamAuthResponse {
 }
 
 declare interface AddUserDeviceRequest {
-  /** 设备名称，仅支持中文、英文、数字、_、-，长度不超过32个字符；（设备名称无需全局唯一，可以重复） */
+  /** 设备名称，仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过128位；（设备名称无需全局唯一，可以重复） */
   Name: string;
   /** 设备接入协议（1:RTMP,2:GB,3:GW,4:IVCP） */
   AccessProtocol: number;
@@ -1587,9 +1597,9 @@ declare interface AddUserDeviceRequest {
   ClusterId: string;
   /** 设备流传输协议，1:UDP,2:TCP；(国标设备有效，不填写则默认UDP协议) */
   TransportProtocol?: number;
-  /** 设备密码（国标，网关设备必填，仅支持数字组合，长度为1-64个字符） */
+  /** 设备密码（国标，网关设备必填，长度为1-64个字符） */
   Password?: string;
-  /** 设备描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
+  /** 设备描述，长度不超过128个字符 */
   Description?: string;
   /** 设备接入网关ID，从查询网关列表接口中ListGateways获取（仅网关接入需要） */
   GatewayId?: string;
@@ -1603,9 +1613,9 @@ declare interface AddUserDeviceRequest {
   Username?: string;
   /** 设备 SN，仅IVCP 协议设备需要 */
   SNCode?: string;
-  /** RTMP推流地址自定义AppName（仅RTMP需要，支持英文、数字组合限制32个字符内） */
+  /** RTMP推流地址自定义AppName（仅RTMP需要，支持英文、数字、_、-、.、长度不超过64位） */
   AppName?: string;
-  /** RTMP推流地址自定义StreamName（仅RTMP需要，支持英文、数字组合限制32个字符内） */
+  /** RTMP推流地址自定义StreamName（仅RTMP需要，支持英文、数字、_、-、.、长度不超过64位） */
   StreamName?: string;
 }
 
@@ -1619,7 +1629,7 @@ declare interface AddUserDeviceResponse {
 declare interface BatchOperateDeviceRequest {
   /** 设备 ID 数组（从获取设备列表接口ListDevices中获取） */
   DeviceIds: string[];
-  /** 操作命令（enable：启用；disable：禁用；delete：删除；upgrade：固件升级；reset：恢复出厂设置；reboot：重启） */
+  /** 操作命令（enable：启用；disable：禁用；delete：删除；sync：同步设备通道；upgrade：固件升级；reset：恢复出厂设置；reboot：重启） */
   Cmd: string;
 }
 
@@ -2595,7 +2605,7 @@ declare interface UpdateGatewayResponse {
 declare interface UpdateOrganizationRequest {
   /** 组织ID（从查询组织接口DescribeOrganization中获取） */
   OrganizationId: string;
-  /** 组织名称 */
+  /** 组织名称，支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过64位，且组织名称不能重复 */
   Name: string;
 }
 
@@ -2665,13 +2675,13 @@ declare interface UpdateRecordTemplateResponse {
 declare interface UpdateUserDeviceRequest {
   /** 设备ID（从获取设备列表接口ListDevices中获取） */
   DeviceId: string;
-  /** 设备名称（仅支持中文、英文、数字、_、-，长度不超过32个字符） */
+  /** 设备名称（仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过128位） */
   Name?: string;
   /** 设备流传输协议，仅国标设备有效，填0则不做更改（1:UDP,2:TCP） */
   TransportProtocol?: number;
-  /** 设备密码（仅国标，网关设备支持） */
+  /** 设备密码（仅国标，网关设备支持，长度不超过 64 位） */
   Password?: string;
-  /** 设备描述（仅支持中文、英文、数字、_、-，长度不超过128位） */
+  /** 设备描述（长度不超过128位） */
   Description?: string;
   /** 设备接入Ip（仅网关接入支持） */
   Ip?: string;
@@ -2849,7 +2859,7 @@ declare interface Iss {
   PlayRecord(data: PlayRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PlayRecordResponse>;
   /** 查询禁播通道列表 {@link QueryForbidPlayChannelListRequest} {@link QueryForbidPlayChannelListResponse} */
   QueryForbidPlayChannelList(data: QueryForbidPlayChannelListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryForbidPlayChannelListResponse>;
-  /** 刷新设备通道 {@link RefreshDeviceChannelRequest} {@link RefreshDeviceChannelResponse} */
+  /** 同步设备通道 {@link RefreshDeviceChannelRequest} {@link RefreshDeviceChannelResponse} */
   RefreshDeviceChannel(data: RefreshDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDeviceChannelResponse>;
   /** 设置通道禁止播流 {@link SetForbidPlayChannelsRequest} {@link SetForbidPlayChannelsResponse} */
   SetForbidPlayChannels(data: SetForbidPlayChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<SetForbidPlayChannelsResponse>;

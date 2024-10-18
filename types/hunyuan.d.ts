@@ -112,17 +112,25 @@ declare interface Message {
   ToolCalls?: ToolCall[] | null;
 }
 
-/** 图文并茂详情 */
+/** 多媒体详情 */
 declare interface Multimedia {
-  /** 多媒体类型，image：图片。 */
+  /** 多媒体类型，可选值包括 image、music、album、playlist。说明：1. image：图片；music：单曲，类型为单曲时，会返回详细歌手和歌曲信息；album：专辑；playlist：歌单。2. 当 type 为 music、album、playlist 时，需要配合 [QQ音乐SDK](https://developer.y.qq.com/) 使用。 */
   Type?: string;
-  /** 多媒体预览地址。 */
+  /** 多媒体地址。说明：1. type 为 image 时，地址为图片的预览地址；其他类型时，地址为封面图地址。 */
   Url?: string;
-  /** 多媒体详情地址。 */
-  JumpUrl?: string;
+  /** 多媒体详情地址。说明：1. 仅 type 为 image 时，该字段有值。 */
+  JumpUrl?: string | null;
+  /** 名称。说明：1. type 为 image 时，该字段为空。 */
+  Title?: string | null;
+  /** 描述。 */
+  Desc?: string | null;
+  /** 歌手名称。说明：1. 仅 type 为 music 时，该字段有值。 */
+  Singer?: string | null;
+  /** 歌曲详情。说明：1. 仅 type 为 music 时，该字段有值。 */
+  Ext?: SongExt | null;
 }
 
-/** 图文并茂占位符替换信息 */
+/** 多媒体占位符替换信息 */
 declare interface Replace {
   /** 占位符序号 */
   Id?: string;
@@ -144,6 +152,16 @@ declare interface SearchResult {
   Title?: string | null;
   /** 搜索引文链接 */
   Url?: string | null;
+}
+
+/** 歌曲详情。具体含义参考 [QQ音乐SDK](https://developer.y.qq.com/) */
+declare interface SongExt {
+  /** 歌曲id */
+  SongId?: number;
+  /** 歌曲mid */
+  SongMid?: string;
+  /** 歌曲是否为vip。1：vip歌曲； 0：普通歌曲。 */
+  Vip?: number;
 }
 
 /** 用户指定模型使用的工具 */
@@ -205,7 +223,7 @@ declare interface ActivateServiceResponse {
 declare interface ChatCompletionsRequest {
   /** 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
   Model: string;
-  /** 聊天上下文信息。说明：1. 长度最多为 40，按对话时间从旧到新在数组中排列。2. Message.Role 可选值：system、user、assistant、 tool。其中，system 角色可选，如存在则必须位于列表的最开始。user（tool） 和 assistant 需交替出现（一问一答），以 user 提问开始，user（tool）提问结束，且 Content 不能为空。Role 的顺序示例：[system（可选） user assistant user assistant user ...]。3. Messages 中 Content 总长度不能超过模型输入长度上限（可参考 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 文档），超过则会截断最前面的内容，只保留尾部内容。 */
+  /** 聊天上下文信息。说明：1. 长度最多为 40，按对话时间从旧到新在数组中排列。2. Message.Role 可选值：system、user、assistant、 tool（functioncall场景）。其中，system 角色可选，如存在则必须位于列表的最开始。user（tool） 和 assistant 需交替出现（一问一答），以 user 提问开始，user（tool）提问结束，其中tool可以连续出现多次，且 Content 不能为空。Role 的顺序示例：[system（可选） user assistant user（tool tool ...） assistant user（tool tool ...） ...]。3. Messages 中 Content 总长度不能超过模型输入长度上限（可参考 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 文档），超过则会截断最前面的内容，只保留尾部内容。 */
   Messages: Message[];
   /** 流式调用开关。说明：1. 未传值时默认为非流式调用（false）。2. 流式调用时以 SSE 协议增量返回结果（返回值取 Choices[n].Delta 中的值，需要拼接增量数据才能获得完整结果）。3. 非流式调用时：调用方式与普通 HTTP 请求无异。接口响应耗时较长，**如需更低时延建议设置为 true**。只返回一次最终结果（返回值取 Choices[n].Message 中的值）。注意：通过 SDK 调用时，流式和非流式调用需用**不同的方式**获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。 */
   Stream?: boolean;
@@ -229,7 +247,7 @@ declare interface ChatCompletionsRequest {
   Citation?: boolean;
   /** 是否开启极速版搜索，默认false，不开启；在开启且命中搜索时，会启用极速版搜索，流式输出首字返回更快。 */
   EnableSpeedSearch?: boolean;
-  /** 图文并茂开关。详细介绍请阅读 [图文并茂](https://cloud.tencent.com/document/product/1729/111178) 中的说明。说明：1. 该参数仅在功能增强（如搜索）开关开启（EnableEnhancement=true）时生效。2. hunyuan-lite 无图文并茂能力，该参数对 hunyuan-lite 版本不生效。3. 未传值时默认关闭。4. 开启并搜索到对应的多媒体信息时，会输出对应的多媒体地址，可以定制个性化的图文消息。 */
+  /** 多媒体开关。详细介绍请阅读 [多媒体介绍](https://cloud.tencent.com/document/product/1729/111178) 中的说明。说明：1. 该参数目前仅对白名单内用户生效，如您想体验该功能请 [联系我们](https://cloud.tencent.com/act/event/Online_service)。2. 该参数仅在功能增强（如搜索）开关开启（EnableEnhancement=true）并且极速版搜索开关关闭（EnableSpeedSearch=false）时生效。3. hunyuan-lite 无多媒体能力，该参数对 hunyuan-lite 版本不生效。4. 未传值时默认关闭。5. 开启并搜索到对应的多媒体信息时，会输出对应的多媒体地址，可以定制个性化的图文消息。 */
   EnableMultimedia?: boolean;
 }
 
@@ -250,7 +268,7 @@ declare interface ChatCompletionsResponse {
   ModerationLevel?: string;
   /** 搜索结果信息 */
   SearchInfo?: SearchInfo;
-  /** 多媒体信息。说明：1. 可以用多媒体信息替换回复内容里的占位符，得到完整的图文信息。2. 可能会出现回复内容里存在占位符，但是因为审核等原因没有返回多媒体信息。 */
+  /** 多媒体信息。说明：1. 可以用多媒体信息替换回复内容里的占位符，得到完整的消息。2. 可能会出现回复内容里存在占位符，但是因为审核等原因没有返回多媒体信息。 */
   Replaces?: Replace[];
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;

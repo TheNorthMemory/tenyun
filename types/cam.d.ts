@@ -1173,26 +1173,26 @@ declare interface GetGroupResponse {
 }
 
 declare interface GetPolicyRequest {
-  /** 策略Id */
+  /** 策略Id。 */
   PolicyId: number;
 }
 
 declare interface GetPolicyResponse {
-  /** 策略名 */
+  /** 策略名。 */
   PolicyName?: string | null;
-  /** 策略描述 */
+  /** 策略描述。 */
   Description?: string | null;
-  /** 1 表示自定义策略，2 表示预设策略 */
+  /** 1 表示自定义策略，2 表示预设策略。 */
   Type?: number | null;
-  /** 创建时间 */
+  /** 策略创建时间。 */
   AddTime?: string | null;
-  /** 最近更新时间 */
+  /** 策略最近更新时间。 */
   UpdateTime?: string | null;
-  /** 策略文档 */
+  /** 策略文档。 */
   PolicyDocument?: string | null;
-  /** 备注 */
+  /** 备注。 */
   PresetAlias?: string | null;
-  /** 是否服务相关策略 */
+  /** 是否是服务相关策略，0代表不是服务相关策略，1代表是服务相关策略。 */
   IsServiceLinkedRolePolicy?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1417,25 +1417,25 @@ declare interface ListAttachedRolePoliciesResponse {
 }
 
 declare interface ListAttachedUserAllPoliciesRequest {
-  /** 目标用户ID */
+  /** 目标用户Uin */
   TargetUin: number;
-  /** 每页数量，必须大于 0 且小于或等于 200 */
+  /** 每页数量，必须大于 0 且小于等于 200。 */
   Rp: number;
-  /** 页码，从 1开始，不能大于 200 */
+  /** 页码，从 1开始，不能大于 200。 */
   Page: number;
-  /** 0:返回直接关联和随组关联策略，1:只返回直接关联策略，2:只返回随组关联策略 */
+  /** 关联类型。0:返回直接关联和随组关联策略，1:只返回直接关联策略，2:只返回随组关联策略。 */
   AttachType: number;
-  /** 策略类型 */
+  /** 策略类型。1表示自定义策略，2表示预设策略。 */
   StrategyType?: number;
   /** 搜索关键字 */
   Keyword?: string;
 }
 
 declare interface ListAttachedUserAllPoliciesResponse {
-  /** 策略列表数据 */
-  PolicyList: AttachedUserPolicy[];
-  /** 策略总数 */
-  TotalNum: number;
+  /** 策略列表数据。 */
+  PolicyList?: AttachedUserPolicy[];
+  /** 策略总数。 */
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

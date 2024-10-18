@@ -514,6 +514,14 @@ declare interface DiskSpecInfo {
   ExtraPerformance?: number | null;
 }
 
+/** 采样序列 */
+declare interface Dps {
+  /** 时间戳 */
+  Timestamp?: string | null;
+  /** 采样值 */
+  Value?: string | null;
+}
+
 /** POD浮动规格 */
 declare interface DynamicPodSpec {
   /** 需求最小cpu核数 */
@@ -956,6 +964,34 @@ declare interface KeyValue {
   Key: string | null;
   /** 值 */
   Value: string | null;
+}
+
+/** Kyuubi查询信息 */
+declare interface KyuubiQueryInfo {
+  /** 提交IP */
+  ClientIP?: string | null;
+  /** 执行时长 */
+  Duration?: number | null;
+  /** 结束时间 */
+  EndTime?: number | null;
+  /** Engine Id */
+  EngineID?: string | null;
+  /** 计算引擎 */
+  EngineType?: string | null;
+  /** ID */
+  Id?: string | null;
+  /** Session Id */
+  SessionID?: string | null;
+  /** 开始时间 */
+  BeginTime?: number | null;
+  /** 执行状态 */
+  ExecutionState?: string | null;
+  /** 执行语句 */
+  ExecutionStatement?: string | null;
+  /** Statement Id */
+  StatementID?: string | null;
+  /** 提交用户 */
+  User?: string | null;
 }
 
 /** 自动扩缩容基于负载指标的规则 */
@@ -1870,6 +1906,40 @@ declare interface SoftDependInfo {
   Required: boolean;
 }
 
+/** spark查询详情 */
+declare interface SparkQuery {
+  /** 执行语句 */
+  Statement?: string;
+  /** 执行时长（单位毫秒） */
+  Duration?: number;
+  /** 执行状态 */
+  Status?: string;
+  /** 查询ID */
+  Id?: string;
+  /** 扫描分区数 */
+  ScanPartitionNum?: number | null;
+  /** 扫描总行数 */
+  ScanRowNum?: number | null;
+  /** 扫描总文件数 */
+  ScanFileNum?: number | null;
+  /** 查询扫描总数据量(单位B) */
+  ScanTotalData?: number | null;
+  /** 应用ID */
+  ApplicationId?: string[] | null;
+  /** 输出总行数 */
+  OutputRowNum?: number | null;
+  /** 输出总文件数 */
+  OutputFileNum?: number | null;
+  /** 输出分区数 */
+  OutputPartitionNum?: number | null;
+  /** 输出总数据量（单位B） */
+  OutputTotalData?: number | null;
+  /** 开始时间 */
+  BeginTime?: number | null;
+  /** 结束时间 */
+  EndTime?: number | null;
+}
+
 /** 任务步骤详情 */
 declare interface StageInfoDetail {
   /** 步骤id */
@@ -1904,6 +1974,48 @@ declare interface StageInfoDetail {
   TimeConsuming?: string | null;
 }
 
+/** StarRocks 查询信息 */
+declare interface StarRocksQueryInfo {
+  /** 提交IP */
+  ClientIP?: string | null;
+  /** CPU总时间(ns) */
+  CPUCost?: number | null;
+  /** 默认DB */
+  DefaultDB?: string | null;
+  /** 结束时间 */
+  EndTime?: number | null;
+  /** 执行IP */
+  ExecutionIP?: string | null;
+  /** 查询ID */
+  QueryID?: string | null;
+  /** 查询类型 */
+  QueryType?: string | null;
+  /** 消耗总内存(bytes) */
+  MemCost?: number | null;
+  /** plan阶段CPU占用(ns) */
+  PlanCpuCosts?: number | null;
+  /** plan阶段内存占用(bytes) */
+  PlanMemCosts?: number | null;
+  /** 执行时长 */
+  QueryTime?: number | null;
+  /** 资源组 */
+  ResourceGroup?: string | null;
+  /** 获取行数 */
+  ReturnRows?: number | null;
+  /** 扫描数据量(bytes) */
+  ScanBytes?: number | null;
+  /** 扫描行数 */
+  ScanRows?: number | null;
+  /** 开始时间 */
+  BeginTime?: number | null;
+  /** 执行状态 */
+  ExecutionState?: string | null;
+  /** 执行语句 */
+  ExecutionStatement?: string | null;
+  /** 用户 */
+  User?: string | null;
+}
+
 /** 执行步骤 */
 declare interface Step {
   /** 执行步骤名称。 */
@@ -1922,6 +2034,16 @@ declare interface StopParams {
   StopPolicy?: string;
   /** 线程数 */
   ThreadCount?: number;
+}
+
+/** HDFS文件存储详情 */
+declare interface StorageSummaryDistribution {
+  /** 数据项 */
+  MetricItem?: string | null;
+  /** 数据项描述 */
+  MetricName?: string | null;
+  /** 采样值 */
+  Dps?: Dps[] | null;
 }
 
 /** 重启/停止/启动服务/监控的配置 */
@@ -2756,6 +2878,24 @@ declare interface DescribeHBaseTableOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHDFSStorageInfoRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 获取查询信息开始时间 (s) */
+  StartTime: number;
+  /** 获取查询信息结束时间 (s) */
+  EndTime: number;
+}
+
+declare interface DescribeHDFSStorageInfoResponse {
+  /** 采样时间 */
+  SampleTime?: number | null;
+  /** hdfs存储详情 */
+  StorageSummaryDistribution?: StorageSummaryDistribution[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHiveQueriesRequest {
   /** 集群ID */
   InstanceId: string;
@@ -2918,6 +3058,28 @@ declare interface DescribeJobFlowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKyuubiQueryInfoRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 获取查询信息开始时间 (s) */
+  StartTime: number;
+  /** 获取查询信息结束时间 (s) */
+  EndTime: number;
+  /** 分页查询时的分页大小，最小1，最大100 */
+  PageSize: number;
+  /** 分页查询时的页号，从1开始 */
+  Page: number;
+}
+
+declare interface DescribeKyuubiQueryInfoResponse {
+  /** 总数，分页查询时使用 */
+  TotalCount?: number;
+  /** Kyuubi查询信息列表 */
+  KyuubiQueryInfoList?: KyuubiQueryInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourceScheduleDiffDetailRequest {
   /** emr集群的英文id */
   InstanceId: string;
@@ -3034,6 +3196,52 @@ declare interface DescribeServiceNodeInfosResponse {
   AliasInfo?: string | null;
   /** 支持的FlagNode列表 */
   SupportNodeFlagFilterList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSparkQueriesRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 分页起始偏移，从0开始 */
+  Offset: number;
+  /** 分页大小，合法范围[1,100] */
+  Limit: number;
+  /** 执行状态:RUNNING,COMPLETED,FAILED */
+  Status?: string[];
+}
+
+declare interface DescribeSparkQueriesResponse {
+  /** 总数 */
+  Total?: number;
+  /** 结果列表 */
+  Results?: SparkQuery[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStarRocksQueryInfoRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 获取查询信息开始时间 (s) */
+  StartTime: number;
+  /** 获取查询信息结束时间 (s) */
+  EndTime: number;
+  /** 分页查询时的分页大小，最小1，最大100 */
+  PageSize: number;
+  /** 分页查询时的页号，从1开始 */
+  Page: number;
+}
+
+declare interface DescribeStarRocksQueryInfoResponse {
+  /** 总数，分页查询时使用 */
+  TotalCount?: number;
+  /** Starrocks 查询信息列表 */
+  StarRocksQueryInfoList?: StarRocksQueryInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3823,6 +4031,8 @@ declare interface Emr {
   DescribeGlobalConfig(data: DescribeGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalConfigResponse>;
   /** 获取Hbase表级监控数据概览 {@link DescribeHBaseTableOverviewRequest} {@link DescribeHBaseTableOverviewResponse} */
   DescribeHBaseTableOverview(data: DescribeHBaseTableOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableOverviewResponse>;
+  /** 查询HDFS存储文件数量 {@link DescribeHDFSStorageInfoRequest} {@link DescribeHDFSStorageInfoResponse} */
+  DescribeHDFSStorageInfo(data: DescribeHDFSStorageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHDFSStorageInfoResponse>;
   /** 获取hive查询信息 {@link DescribeHiveQueriesRequest} {@link DescribeHiveQueriesResponse} */
   DescribeHiveQueries(data: DescribeHiveQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHiveQueriesResponse>;
   /** 获取Impala查询列表 {@link DescribeImpalaQueriesRequest} {@link DescribeImpalaQueriesResponse} */
@@ -3837,6 +4047,8 @@ declare interface Emr {
   DescribeInstancesList(data: DescribeInstancesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesListResponse>;
   /** 查询流程作业状态 {@link DescribeJobFlowRequest} {@link DescribeJobFlowResponse} */
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
+  /** 查询Kyuubi查询信息 {@link DescribeKyuubiQueryInfoRequest} {@link DescribeKyuubiQueryInfoResponse} */
+  DescribeKyuubiQueryInfo(data: DescribeKyuubiQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKyuubiQueryInfoResponse>;
   /** 查询YARN资源调度数据信息（旧） {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
   /** YARN资源调度-变更详情 {@link DescribeResourceScheduleDiffDetailRequest} {@link DescribeResourceScheduleDiffDetailResponse} */
@@ -3847,6 +4059,10 @@ declare interface Emr {
   DescribeSLInstanceList(data: DescribeSLInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceListResponse>;
   /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
+  /** 查询Spark查询列表 {@link DescribeSparkQueriesRequest} {@link DescribeSparkQueriesResponse} */
+  DescribeSparkQueries(data: DescribeSparkQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkQueriesResponse>;
+  /** 查询StarRocsk查询信息 {@link DescribeStarRocksQueryInfoRequest} {@link DescribeStarRocksQueryInfoResponse} */
+  DescribeStarRocksQueryInfo(data: DescribeStarRocksQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStarRocksQueryInfoResponse>;
   /** 获取trino查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */
   DescribeTrinoQueryInfo(data: DescribeTrinoQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrinoQueryInfoResponse>;
   /** 查询用户列表 {@link DescribeUsersForUserManagerRequest} {@link DescribeUsersForUserManagerResponse} */
