@@ -2513,7 +2513,7 @@ declare interface BatchModifyGroupOffsetsResponse {
 declare interface BatchModifyTopicAttributesRequest {
   /** 实例id */
   InstanceId: string;
-  /** 主题属性列表 */
+  /** 主题属性列表 (同一个批次最多支持10个) */
   Topic: BatchModifyTopicInfo[];
 }
 

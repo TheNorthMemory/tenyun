@@ -791,13 +791,13 @@ declare interface CreateAICallRequest {
   Callee: string;
   /** 用于设定AI座席人设、说话规则、任务等的全局提示词。 */
   SystemPrompt: string;
-  /** LLM类型 */
+  /** LLM类型目前有两种openai(兼容openai协议的模型)azure */
   LLMType: string;
   /** 模型（当前仅支持openai协议的模型） */
   Model: string;
   /** API密钥 */
   APIKey: string;
-  /** API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions */
+  /** API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions；llmType为azure时,URL填写格式需为：https://{your-resource-name}.openai.azure.com?api-version={api-version},填写url时后缀不要带/openai/deployments/{deployment-id}/chat/completions，系统会自动帮你填充后缀 */
   APIUrl: string;
   /** 音色，目前仅支持以下音色:汉语：ZhiMei：智美，客服女声ZhiXi： 智希 通用女声ZhiQi：智琪 客服女声ZhiTian：智甜 女童声AiXiaoJing：爱小静 对话女声英语:WeRose：英文女声Monika：英文女声日语：Nanami韩语：SunHi印度尼西亚语(印度尼西亚)：Gadis马来语（马来西亚）:Yasmin 泰米尔语（马来西亚）:Kani泰语（泰国）:Achara越南语(越南):HoaiMy */
   VoiceType?: string;

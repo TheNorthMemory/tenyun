@@ -4742,6 +4742,8 @@ declare namespace V20180525 {
   }
 
   interface DescribeBatchModifyTagsStatusRequest {
+    /** 集群id */
+    ClusterId: string;
   }
 
   interface DescribeBatchModifyTagsStatusResponse {

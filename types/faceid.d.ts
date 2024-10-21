@@ -390,7 +390,7 @@ declare interface CheckBankCardInformationRequest {
 }
 
 declare interface CheckBankCardInformationResponse {
-  /** 认证结果码，收费情况如下。收费结果码：0: 查询成功-1: 未查到信息不收费结果码：-2：验证中心服务繁忙-3：银行卡不存在 */
+  /** 认证结果码，收费情况如下。收费结果码：0: 查询成功-1: 未查到信息不收费结果码：-2：验证中心服务繁忙-3：银行卡不存在-4：认证次数超过当日限制，请次日重试 */
   Result?: string;
   /** 业务结果描述 */
   Description?: string;
@@ -1066,12 +1066,12 @@ declare interface MobileNetworkTimeVerificationRequest {
 }
 
 declare interface MobileNetworkTimeVerificationResponse {
-  /** 认证结果码，收费情况如下。收费结果码：0: 成功-2: 手机号不存在-3: 手机号存在，但无法查询到在网时长不收费结果码：-1: 手机号格式不正确-4: 验证中心服务繁忙 */
-  Result: string;
+  /** 认证结果码，收费情况如下。收费结果码：0: 成功-2: 手机号不存在-3: 手机号存在，但无法查询到在网时长不收费结果码：-1: 手机号格式不正确-4: 验证中心服务繁忙-5：认证次数超过当日限制，请次日重试 */
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 在网时长区间。格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。 */
-  Range: string;
+  Range?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1084,12 +1084,12 @@ declare interface MobileStatusRequest {
 }
 
 declare interface MobileStatusResponse {
-  /** 认证结果码，收费情况如下。收费结果码：0：成功不收费结果码：-1：未查询到结果-2：手机号格式不正确-3：验证中心服务繁忙 */
-  Result: string;
+  /** 认证结果码，收费情况如下。收费结果码：0：成功不收费结果码：-1：未查询到结果-2：手机号格式不正确-3：验证中心服务繁忙-4：认证次数超过当日限制，请次日重试 */
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 状态码：0：正常1：停机2：销号3：空号4：不在网99：未知状态 */
-  StatusCode: number;
+  StatusCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

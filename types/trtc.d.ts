@@ -27,19 +27,19 @@ declare interface AbnormalExperience {
 /** 机器人参数 */
 declare interface AgentConfig {
   /** 机器人的UserId，用于进房发起任务。【注意】这个UserId不能与当前房间内的主播观众[UserId](https://cloud.tencent.com/document/product/647/46351)重复。如果一个房间发起多个任务时，机器人的UserId也不能相互重复，否则会中断前一个任务。需要保证机器人UserId在房间内唯一。 */
-  UserId: string | null;
+  UserId: string;
   /** 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910)的方案。 */
-  UserSig: string | null;
+  UserSig: string;
   /** 机器人拉流的UserId, 填写后，机器人会拉取该UserId的流进行实时处理 */
-  TargetUserId: string | null;
+  TargetUserId: string;
   /** 房间内超过MaxIdleTime 没有推流，后台自动关闭任务，默认值是60s。 */
-  MaxIdleTime?: number | null;
+  MaxIdleTime?: number;
   /** 机器人的欢迎语 */
-  WelcomeMessage?: string | null;
+  WelcomeMessage?: string;
   /** 智能打断模式，默认为0，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断 */
-  InterruptMode?: number | null;
+  InterruptMode?: number;
   /** InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。 */
-  InterruptSpeechDuration?: number | null;
+  InterruptSpeechDuration?: number;
 }
 
 /** 转推服务加入TRTC房间的机器人参数。 */
@@ -624,12 +624,12 @@ declare interface RowValues {
 
 /** 语音转文字参数 */
 declare interface STTConfig {
-  /** 语音识别支持的语言，默认是"zh" 中文目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：1. Chinese = "zh" # 中文2. Chinese_TW = "zh-TW" # 中国台湾3. Chinese_DIALECT = "zh-dialect" # 中国方言4. English = "en" # 英语5. Vietnamese = "vi" # 越南语6. Japanese = "ja" # 日语7. Korean = "ko" # 韩语8. Indonesia = "id" # 印度尼西亚语9. Thai = "th" # 泰语10. Portuguese = "pt" # 葡萄牙语11. Turkish = "tr" # 土耳其语12. Arabic = "ar" # 阿拉伯语13. Spanish = "es" # 西班牙语14. Hindi = "hi" # 印地语15. French = "fr" # 法语16. Malay = "ms" # 马来语17. Filipino = "fil" # 菲律宾语18. German = "de" # 德语19. Italian = "it" # 意大利语20. Russian = "ru" # 俄语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
-  Language?: string | null;
+  /** 语音识别支持的语言，默认是"zh" 中文目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：1. Chinese = "zh" # 中文2. Chinese_TW = "zh-TW" # 中国台湾3. Chinese_DIALECT = "zh-dialect" # 中国方言4. English = "en" # 英语5. Vietnamese = "vi" # 越南语6. Japanese = "ja" # 日语7. Korean = "ko" # 韩语8. Indonesia = "id" # 印度尼西亚语9. Thai = "th" # 泰语10. Portuguese = "pt" # 葡萄牙语11. Turkish = "tr" # 土耳其语12. Arabic = "ar" # 阿拉伯语13. Spanish = "es" # 西班牙语14. Hindi = "hi" # 印地语15. French = "fr" # 法语16. Malay = "ms" # 马来语17. Filipino = "fil" # 菲律宾语18. German = "de" # 德语19. Italian = "it" # 意大利语20. Russian = "ru" # 俄语21. Swedish = "sv" # 瑞典语22. Danish = "da" # 丹麦语23. Norwegian = "no" # 挪威语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
+  Language?: string;
   /** 发起模糊识别额外可能替代语言类型,最多填写3种语言类型, 注：Language指定为"zh-dialect" # 中国方言 时，不支持模糊识别，该字段无效 */
-  AlternativeLanguage?: string[] | null;
+  AlternativeLanguage?: string[];
   /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。 */
-  VadSilenceTime?: number | null;
+  VadSilenceTime?: number;
 }
 
 /** 历史规模信息 */
