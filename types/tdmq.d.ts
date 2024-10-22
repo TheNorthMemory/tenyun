@@ -1351,17 +1351,17 @@ declare interface RocketMQMsgLog {
 /** RocketMQ命名空间信息 */
 declare interface RocketMQNamespace {
   /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
-  NamespaceId: string;
+  NamespaceId?: string;
   /** 已废弃，未消费消息的保留时间，以毫秒单位，范围60秒到15天 */
-  Ttl: number;
+  Ttl?: number;
   /** 消息持久化后保留的时间，以毫秒单位 */
-  RetentionTime: number;
+  RetentionTime?: number;
   /** 说明 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 公网接入点地址 */
-  PublicEndpoint: string | null;
+  PublicEndpoint?: string | null;
   /** VPC接入点地址 */
-  VpcEndpoint: string | null;
+  VpcEndpoint?: string | null;
   /** 内部接入点地址 */
   InternalEndpoint?: string | null;
 }
@@ -1974,6 +1974,32 @@ declare interface CreateProClusterResponse {
   ClusterId?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRabbitMQBindingRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** Vhost参数 */
+  VirtualHost: string;
+  /** 源exchange */
+  Source: string;
+  /** 目标类型,取值queue或exchange */
+  DestinationType: string;
+  /** 目标 */
+  Destination: string;
+  /** 绑定key */
+  RoutingKey?: string;
+}
+
+declare interface CreateRabbitMQBindingResponse {
+  /** 队列名称 */
+  InstanceId?: string | null;
+  /** vhost参数 */
+  VirtualHost?: string | null;
+  /** 路由关系Id */
+  BindingId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3611,9 +3637,9 @@ declare interface DescribeRocketMQNamespacesRequest {
 
 declare interface DescribeRocketMQNamespacesResponse {
   /** 命名空间列表 */
-  Namespaces: RocketMQNamespace[];
+  Namespaces?: RocketMQNamespace[];
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3935,7 +3961,7 @@ declare interface DescribeRocketMQVipInstanceDetailResponse {
 }
 
 declare interface DescribeRocketMQVipInstancesRequest {
-  /** 查询条件过滤器，支持的查询条件如下：instanceIds - 实例IDinstanceName - 实例名称 */
+  /** 查询条件过滤器，支持的查询条件如下：instanceIds - 实例IDinstanceName - 实例名称status - 实例状态 */
   Filters?: Filter[];
   /** 查询数目上限，默认20 */
   Limit?: number;
@@ -4831,6 +4857,8 @@ declare interface Tdmq {
   CreateEnvironmentRole(data: CreateEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentRoleResponse>;
   /** 创建专业集群 {@link CreateProClusterRequest} {@link CreateProClusterResponse} */
   CreateProCluster(data: CreateProClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProClusterResponse>;
+  /** 创建RabbitMQ路由关系 {@link CreateRabbitMQBindingRequest} {@link CreateRabbitMQBindingResponse} */
+  CreateRabbitMQBinding(data: CreateRabbitMQBindingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQBindingResponse>;
   /** 创建RabbitMQ的用户 {@link CreateRabbitMQUserRequest} {@link CreateRabbitMQUserResponse} */
   CreateRabbitMQUser(data: CreateRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQUserResponse>;
   /** 创建RabbitMQ专享版实例 {@link CreateRabbitMQVipInstanceRequest} {@link CreateRabbitMQVipInstanceResponse} */

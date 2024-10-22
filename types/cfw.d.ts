@@ -96,7 +96,7 @@ declare interface BetaInfoByACL {
 
 /** 入侵防御放通封禁规则 */
 declare interface BlockIgnoreRule {
-  /** 1 封禁 2外部IP 3域名 4情报 5assets 6udf 7入侵防御规则id （2-7属于白名单类型） */
+  /** 规则类型，取值：1 封禁，2外部IP，3域名，4情报，5assets，6自定义策略，7入侵防御规则id （2-7属于白名单类型） */
   RuleType?: number | null;
   /** 规则ip或白名单内容 */
   Ioc?: string | null;
@@ -468,29 +468,29 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   Uuid?: string | null;
   /** 源规则内容 */
   SourceId?: string | null;
-  /** 源规则类型 */
+  /** 源规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(intance)2表示子网实例(intance)3表示CVM实例(intance)4表示CLB实例(intance)5表示ENI实例(intance)6表示数据库实例(intance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
   SourceType?: number | null;
   /** 目的规则内容 */
   TargetId?: string | null;
-  /** 目的规则类型 */
+  /** 目的规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(intance)2表示子网实例(intance)3表示CVM实例(intance)4表示CLB实例(intance)5表示ENI实例(intance)6表示数据库实例(intance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
   TargetType?: number | null;
-  /** 协议名称 */
+  /** 协议名称取值范围:TCP/ANY/ICMP/UDPANY:表示所有 */
   Protocol?: string | null;
   /** 端口 */
   Port?: string | null;
-  /** 策略，1阻断，2放行 */
+  /** 规则策略取值范围:1/21:阻断2:放行 */
   Strategy?: number | null;
-  /** 启用状态 ，0未开启，1开启 */
+  /** 规则启用状态 取值范围： 0/10:未开启1:开启 */
   Status?: number | null;
   /** 描述 */
   Detail?: string | null;
   /** 标签 */
   AclTags?: string | null;
-  /** 是否最新一次改动的规则,0否，1是 */
+  /** 规则最新一次是否有改动取值范围：0/10:否1:是 */
   IsNew?: number | null;
   /** 地域 */
   Region?: string | null;
-  /** 是否延迟下发 */
+  /** 是否延迟下发规则 取值范围：0/10:立即下发 1:延迟下发 */
   IsDelay?: number | null;
   /** 服务模板id */
   ServiceTemplateId?: string | null;
@@ -516,9 +516,9 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   ParameterName?: string | null;
   /** 端口模板名称 */
   ProtocolPortName?: string | null;
-  /** 自动化任务任务信息 */
+  /** 自动化任务信息 */
   BetaList?: EnterpriseSecurityGroupRuleBetaInfo[] | null;
-  /** 规则id */
+  /** 规则id 等同RuleUuid */
   Id?: number | null;
 }
 
@@ -684,10 +684,10 @@ declare interface IntrusionDefenseRule {
   IP?: string;
   /** 规则域名，IP与Domain必填其中之一 */
   Domain?: string;
-  /** 备注信息，长度不能超过50 */
-  Comment?: string;
   /** 规则开始时间 */
   StartTime?: string;
+  /** 备注信息，长度不能超过50 */
+  Comment?: string;
 }
 
 /** 封禁放通IOC列表 */
@@ -1216,6 +1216,8 @@ declare interface TemplateListInfo {
   ProtocolType?: string | null;
   /** 模板包含地址数量 */
   IPNum?: number | null;
+  /** IP版本,0,IPv4;1,IPv6 */
+  IpVersion?: number | null;
 }
 
 /** 未处置事件详情 */
@@ -2111,15 +2113,15 @@ declare interface DescribeAddressTemplateListRequest {
   Offset?: number;
   /** 条数，分页用 */
   Limit?: number;
-  /** 排序字段，取值 'UpdateTime' | 'RulesNum' */
+  /** 排序字段，取值：UpdateTime最近更新时间，RulesNum关联规则数 */
   By?: string;
-  /** 排序，取值 'asc'|'desc' */
+  /** 排序，取值 ：asc正序，desc逆序 */
   Order?: string;
   /** 搜索值 */
   SearchValue?: string;
   /** 检索地址模板唯一id */
   Uuid?: string;
-  /** 1：ip模板，5：域名模板，6：协议端口模板 */
+  /** 模板类型，取值：1：ip模板，5：域名模板，6：协议端口模板 */
   TemplateType?: string;
   /** 模板Id */
   TemplateId?: string;
@@ -2342,7 +2344,7 @@ declare interface DescribeEnterpriseSecurityGroupRuleListResponse {
   AllTotal?: number;
   /** 规则列表 */
   Data?: EnterpriseSecurityGroupRuleRuleInfo[];
-  /** 规则整体启用状态 */
+  /** 规则列表整体启用状态 取值范围 0/1/20.表示没有启用的(可以批量启用) 1.表示没有禁用的(可以批量禁用) 2 表示混合情况（不可批量操作） */
   Enable?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3173,7 +3175,7 @@ declare interface ModifyBlockIgnoreRuleNewResponse {
 }
 
 declare interface ModifyBlockIgnoreRuleRequest {
-  /** 规则 */
+  /** 规则列表 */
   Rule: IntrusionDefenseRule;
   /** 规则类型，1封禁，2放通 */
   RuleType: number;
@@ -3797,7 +3799,7 @@ declare interface Cfw {
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
   /** 查询全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
-  /** 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
+  /** @deprecated 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;
   /** 告警中心概况 {@link DescribeTLogInfoRequest} {@link DescribeTLogInfoResponse} */
   DescribeTLogInfo(data: DescribeTLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogInfoResponse>;

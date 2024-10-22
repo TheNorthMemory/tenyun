@@ -2764,6 +2764,38 @@ declare interface Project {
   Model?: string | null;
 }
 
+/** 项目的用户对象 */
+declare interface ProjectUserRole {
+  /** 用户角色对象 */
+  Roles: SystemRole[] | null;
+  /** mc */
+  UserName: string | null;
+  /** 用户id */
+  UserId: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 是否创建者 */
+  Creator: boolean | null;
+  /** 显示名称 */
+  DisplayName?: string | null;
+  /** 是否项目管理员 */
+  IsProjectAdmin?: boolean | null;
+}
+
+/** 项目下的用户集合 */
+declare interface ProjectUsersPage {
+  /** 用户集合 */
+  Rows: ProjectUserRole[] | null;
+  /** 分页大小 */
+  PageSize: number | null;
+  /** 分页页码 */
+  PageNumber: number | null;
+  /** 总数量 */
+  TotalCount: number | null;
+  /** 总分页页码 */
+  TotalPageNumber: number | null;
+}
+
 /** dlc建表属性 */
 declare interface Property {
   /** key值 */
@@ -2878,6 +2910,24 @@ declare interface RobLockState {
   IsRob?: boolean;
   /** 当前持锁人 */
   Locker?: string;
+}
+
+/** 角色权限对象 */
+declare interface RolePrivilege {
+  /** id */
+  PrivilegeId?: string | null;
+  /** 名称 */
+  PrivilegeName?: string | null;
+  /** 路径 */
+  RestPath?: string | null;
+  /** 方法 */
+  RestMethod?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 模块id */
+  ModuleId?: string | null;
+  /** 权限类型 N、R、RW、RWD */
+  Type?: string | null;
 }
 
 /** 数据质量规则 */
@@ -3754,6 +3804,28 @@ declare interface SubscribeWebHook {
   HookType?: string | null;
   /** 群机器人webhook地址，配置方式参考https://cloud.tencent.com/document/product/1254/70736 */
   HookAddress?: string | null;
+}
+
+/** 角色对象 */
+declare interface SystemRole {
+  /** 角色id */
+  RoleId: string;
+  /** 角色名称 */
+  Name: string | null;
+  /** 角色昵称 */
+  NameCn: string | null;
+  /** 描述 */
+  Description: string | null;
+  /** 角色权限 */
+  Privileges: RolePrivilege[] | null;
+  /** 方法路径 */
+  MethodPaths: string[] | null;
+  /** 角色类型, 分为System,Tenant,Project,Commercial */
+  RoleType?: string | null;
+  /** 是否系统默认 */
+  SystemInit?: boolean | null;
+  /** 自定义参数 */
+  Params?: string | null;
 }
 
 /** Table */
@@ -7619,6 +7691,26 @@ declare interface DescribeProjectResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProjectUsersRequest {
+  /** 分页号 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
+  /** 【过滤参数】自定义条件查询 */
+  Filters?: FilterOptional[];
+  /** 【排序参数】排序字段 */
+  OrderFields?: OrderFieldOptional[];
+  /** 是否项目管理员 */
+  IsProjectAdmin?: boolean;
+}
+
+declare interface DescribeProjectUsersResponse {
+  /** 项目列表 */
+  Data?: ProjectUsersPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQualityScoreRequest {
   /** 统计日期 */
   StatisticsDate: number;
@@ -10660,6 +10752,8 @@ declare interface Wedata {
   DescribePendingSubmitTaskList(data: DescribePendingSubmitTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePendingSubmitTaskListResponse>;
   /** 获取项目信息 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
   DescribeProject(data?: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
+  /** 获取项目下的用户列表 {@link DescribeProjectUsersRequest} {@link DescribeProjectUsersResponse} */
+  DescribeProjectUsers(data: DescribeProjectUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectUsersResponse>;
   /** 查询质量评分 {@link DescribeQualityScoreRequest} {@link DescribeQualityScoreResponse} */
   DescribeQualityScore(data: DescribeQualityScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityScoreResponse>;
   /** 查询质量分趋势 {@link DescribeQualityScoreTrendRequest} {@link DescribeQualityScoreTrendResponse} */

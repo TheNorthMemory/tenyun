@@ -377,7 +377,7 @@ declare interface DescribeCaptchaMiniOperDataResponse {
 }
 
 declare interface DescribeCaptchaMiniResultRequest {
-  /** 固定填值：9（滑块验证码） */
+  /** 固定填值：9 */
   CaptchaType: number;
   /** 验证码返回给用户的票据 */
   Ticket: string;
@@ -465,7 +465,7 @@ declare interface DescribeCaptchaOperDataResponse {
 }
 
 declare interface DescribeCaptchaRceResultRequest {
-  /** 固定填值：9。可在控制台配置不同验证码类型。 */
+  /** 固定填值：9。 */
   CaptchaType: number;
   /** 前端回调函数返回的用户验证票据 */
   Ticket: string;
@@ -509,7 +509,7 @@ declare interface DescribeCaptchaRceResultResponse {
 }
 
 declare interface DescribeCaptchaResultRequest {
-  /** 固定填值：9。可在控制台配置不同验证码类型。 */
+  /** 固定填值：9。 */
   CaptchaType: number;
   /** 前端回调函数返回的用户验证票据 */
   Ticket: string;
@@ -546,6 +546,8 @@ declare interface DescribeCaptchaResultResponse {
   EvilBitmap?: number | null;
   /** 提交验证码时间 */
   SubmitCaptchaTime?: number;
+  /** 设备风险大类 */
+  DeviceRiskCategory?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -39,9 +39,9 @@ declare interface CallbackStatusStatistics {
 /** 删除签名响应 */
 declare interface DeleteSignStatus {
   /** 删除状态信息。 */
-  DeleteStatus: string | null;
+  DeleteStatus: string;
   /** 删除时间，UNIX 时间戳（单位：秒）。 */
-  DeleteTime: number | null;
+  DeleteTime: number;
 }
 
 /** 删除模板响应 */
@@ -101,37 +101,37 @@ declare interface ModifyTemplateStatus {
 /** 号码信息。 */
 declare interface PhoneNumberInfo {
   /** 号码信息查询错误码，查询成功返回 "Ok"。 */
-  Code: string;
+  Code?: string;
   /** 号码信息查询错误码描述。 */
-  Message: string;
+  Message?: string;
   /** 国家（或地区）码。 */
-  NationCode: string;
-  /** 用户号码，去除国家或地区码前缀的普通格式，示例如：13711112222。 */
-  SubscriberNumber: string;
+  NationCode?: string;
+  /** 用户号码，去除国家或地区码前缀的普通格式，示例如：18501234444。 */
+  SubscriberNumber?: string;
   /** 解析后的规范的 E.164 号码，与下发短信的号码解析结果一致。解析失败时会原样返回。 */
-  PhoneNumber: string;
+  PhoneNumber?: string;
   /** 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF。 */
-  IsoCode: string;
+  IsoCode?: string;
   /** 国家码或地区名，例如 China，可参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051) */
-  IsoName: string;
+  IsoName?: string;
 }
 
 /** 短信回复状态 */
 declare interface PullSmsReplyStatus {
   /** 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773)。 */
-  ExtendCode: string;
+  ExtendCode?: string;
   /** 国家（或地区）码。 */
-  CountryCode: string;
-  /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
-  PhoneNumber: string;
+  CountryCode?: string;
+  /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
+  PhoneNumber?: string;
   /** 短信签名名称。 */
-  SignName: string;
+  SignName?: string;
   /** 用户回复的内容。 */
-  ReplyContent: string;
+  ReplyContent?: string;
   /** 回复时间，UNIX 时间戳（单位：秒）。 */
-  ReplyTime: number;
-  /** 用户号码，普通格式，示例如：13711112222。 */
-  SubscriberNumber: string;
+  ReplyTime?: number;
+  /** 用户号码，普通格式，示例如：18501234444。 */
+  SubscriberNumber?: string;
 }
 
 /** 短信的下发状态详细信息 */
@@ -140,9 +140,9 @@ declare interface PullSmsSendStatus {
   UserReceiveTime?: number;
   /** 国家（或地区）码。 */
   CountryCode?: string;
-  /** 用户号码，普通格式，示例如：13711112222。 */
+  /** 用户号码，普通格式，示例如：18501234444。 */
   SubscriberNumber?: string;
-  /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
+  /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
   PhoneNumber?: string;
   /** 本次发送标识 ID。 */
   SerialNo?: string;
@@ -151,7 +151,7 @@ declare interface PullSmsSendStatus {
   /** 用户接收短信状态描述。 */
   Description?: string;
   /** 用户的 session 内容。与请求中的 SessionContext 一致，默认为空，如需开通请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773) 评估。 */
-  SessionContext?: string | null;
+  SessionContext?: string;
 }
 
 /** 转化率上报响应。 */
@@ -165,19 +165,19 @@ declare interface ReportConversionStatus {
 /** 发送短信状态 */
 declare interface SendStatus {
   /** 发送流水号。 */
-  SerialNo: string;
-  /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
-  PhoneNumber: string;
+  SerialNo?: string;
+  /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
+  PhoneNumber?: string;
   /** 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。 */
-  Fee: number;
+  Fee?: number;
   /** 用户 session 内容。 */
-  SessionContext: string;
+  SessionContext?: string;
   /** 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/api/382/55981)，发送成功返回 "Ok"。 */
-  Code: string;
+  Code?: string;
   /** 短信请求错误码描述。 */
-  Message: string;
+  Message?: string;
   /** 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF，具体支持列表请参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051)。 */
-  IsoCode: string;
+  IsoCode?: string;
 }
 
 /** 发送数据统计响应包体 */
@@ -299,7 +299,7 @@ declare interface DeleteSmsTemplateResponse {
 }
 
 declare interface DescribePhoneNumberInfoRequest {
-  /** 查询手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号。例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
+  /** 查询手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号。例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
   PhoneNumberSet: string[];
 }
 
@@ -399,7 +399,7 @@ declare interface PullSmsReplyStatusByPhoneNumberRequest {
   Offset: number;
   /** 拉取最大条数，最多 100。 */
   Limit: number;
-  /** 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
+  /** 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
   PhoneNumber: string;
   /** 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
@@ -435,7 +435,7 @@ declare interface PullSmsSendStatusByPhoneNumberRequest {
   Offset: number;
   /** 拉取最大条数，最多 100。 */
   Limit: number;
-  /** 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
+  /** 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
   PhoneNumber: string;
   /** 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
@@ -481,7 +481,7 @@ declare interface ReportConversionResponse {
 }
 
 declare interface SendSmsRequest {
-  /** 下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。注：发送国内短信格式还支持0086、86或无任何国家或地区码的11位手机号码，前缀默认为+86。 */
+  /** 下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。注：发送国内短信格式还支持0086、86或无任何国家或地区码的11位手机号码，前缀默认为+86。 */
   PhoneNumberSet: string[];
   /** 短信 SdkAppId，在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
@@ -588,9 +588,9 @@ declare namespace V20190711 {
   /** 删除签名响应 */
   interface DeleteSignStatus {
     /** 删除状态信息。 */
-    DeleteStatus: string | null;
+    DeleteStatus: string;
     /** 删除时间，UNIX 时间戳（单位：秒）。 */
-    DeleteTime: number | null;
+    DeleteTime: number;
   }
 
   /** 删除模板响应 */
@@ -650,57 +650,57 @@ declare namespace V20190711 {
   /** 短信回复状态 */
   interface PullSmsReplyStatus {
     /** 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773)。 */
-    ExtendCode: string;
+    ExtendCode?: string;
     /** 国家（或地区）码。 */
-    NationCode: string;
-    /** 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
-    PhoneNumber: string;
+    NationCode?: string;
+    /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
+    PhoneNumber?: string;
     /** 短信签名。 */
-    Sign: string;
+    Sign?: string;
     /** 用户回复的内容。 */
-    ReplyContent: string;
+    ReplyContent?: string;
     /** 回复时间（例如：2019-10-08 17:18:37）。 */
-    ReplyTime: string;
+    ReplyTime?: string;
     /** 回复时间，UNIX 时间戳（单位：秒）。 */
-    ReplyUnixTime: number;
+    ReplyUnixTime?: number;
   }
 
   /** 短信的下发状态详细信息 */
   interface PullSmsSendStatus {
     /** 用户实际接收到短信的时间。 */
-    UserReceiveTime: string;
+    UserReceiveTime?: string;
     /** 用户实际接收到短信的时间，UNIX 时间戳（单位：秒）。 */
-    UserReceiveUnixTime: number;
+    UserReceiveUnixTime?: number;
     /** 国家（或地区）码。 */
-    NationCode: string;
-    /** 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
-    PurePhoneNumber: string;
-    /** 手机号码，普通格式，示例如：13711112222。 */
-    PhoneNumber: string;
+    NationCode?: string;
+    /** 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
+    PurePhoneNumber?: string;
+    /** 手机号码，普通格式，示例如：18501234444。 */
+    PhoneNumber?: string;
     /** 本次发送标识 ID。 */
-    SerialNo: string;
+    SerialNo?: string;
     /** 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）。 */
-    ReportStatus: string;
+    ReportStatus?: string;
     /** 用户接收短信状态描述。 */
-    Description: string;
+    Description?: string;
   }
 
   /** 发送短信状态 */
   interface SendStatus {
     /** 发送流水号。 */
-    SerialNo: string;
-    /** 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
-    PhoneNumber: string;
+    SerialNo?: string;
+    /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
+    PhoneNumber?: string;
     /** 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。 */
-    Fee: number;
+    Fee?: number;
     /** 用户Session内容。 */
-    SessionContext: string;
+    SessionContext?: string;
     /** 短信请求错误码，具体含义请参考错误码。 */
-    Code: string;
+    Code?: string;
     /** 短信请求错误码描述。 */
-    Message: string;
+    Message?: string;
     /** 国家码或地区码，例如CN,US等，对于未识别出国家码或者地区码，默认返回DEF,具体支持列表请参考国际/港澳台计费总览。 */
-    IsoCode: string;
+    IsoCode?: string;
   }
 
   /** 发送数据统计响应包体 */
@@ -912,7 +912,7 @@ declare namespace V20190711 {
     Offset: number;
     /** 拉取最大条数，最多 100。 */
     Limit: number;
-    /** 下发目的手机号码，依据 e.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
+    /** 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
     PhoneNumber: string;
     /** 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，例如1400006666。 */
     SmsSdkAppid: string;
@@ -948,7 +948,7 @@ declare namespace V20190711 {
     Offset: number;
     /** 拉取最大条数，最多 100。 */
     Limit: number;
-    /** 下发目的手机号码，依据 e.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
+    /** 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
     PhoneNumber: string;
     /** 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，例如1400006666。 */
     SmsSdkAppid: string;
@@ -978,7 +978,7 @@ declare namespace V20190711 {
   }
 
   interface SendSmsRequest {
-    /** 下发手机号码，采用 e.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。 */
+    /** 下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。 */
     PhoneNumberSet: string[];
     /** 模板 ID，必须填写已审核通过的模板 ID。模板ID可登录 [短信控制台](https://console.cloud.tencent.com/smsv2) 查看，若向境外手机号发送短信，仅支持使用国际/港澳台短信模板。 */
     TemplateID: string;

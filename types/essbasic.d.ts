@@ -1395,6 +1395,10 @@ declare interface ChannelCreateBatchQuickSignUrlRequest {
   SignTypeSelector?: number;
   /** 批量签署合同相关信息，指定合同和签署方的信息，用于补充动态签署人。 */
   FlowBatchUrlInfo?: FlowBatchUrlInfo;
+  /** 只有在生成H5签署链接的情形下（ 如调用获取H5签署链接、获取H5批量签署链接等接口），该配置才会生效。 您可以指定H5签署视频核身的意图配置，选择问答模式或点头模式的语音文本。 注意： 1. 视频认证为白名单功能，使用前请联系对接的客户经理沟通。 2. 使用视频认证时，生成H5签署链接的时候必须将签署认证方式指定为人脸（即ApproverSignTypes设置成人脸签署）。 3. 签署完成后，可以通过查询签署认证人脸视频获取到当时的视频。 */
+  Intention?: Intention;
+  /** 是否开启缓存签署人信息 */
+  CacheApproverInfo?: boolean;
 }
 
 declare interface ChannelCreateBatchQuickSignUrlResponse {

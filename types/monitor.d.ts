@@ -118,6 +118,8 @@ declare interface AlarmHistory {
   InternalDimensions?: string | null;
   /** 指标名称 */
   MetricName?: string | null;
+  /** 策略是否有权限 */
+  PolicyPermissions?: number | null;
 }
 
 /** 告警历史的指标信息 */
@@ -3165,6 +3167,8 @@ declare interface DescribeAlarmHistoriesRequest {
   AlarmLevels?: string[];
   /** 收敛历史的唯一id */
   ConvergenceHistoryIDs?: string[];
+  /** 告警类型 */
+  AlarmTypes?: string[];
 }
 
 declare interface DescribeAlarmHistoriesResponse {

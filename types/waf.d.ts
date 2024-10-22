@@ -1852,6 +1852,14 @@ declare interface TargetEntity {
   Domain?: string;
 }
 
+/** Tiga引擎中Mainclass的TypeID和防护模式 */
+declare interface TigaMainClassMode {
+  /** MainclassID */
+  TypeID?: string | null;
+  /** 防护模式，0表示观察，1表示拦截 */
+  Mode?: number | null;
+}
+
 /** 规则定时任务数据结构 */
 declare interface TimedJob {
   /** 开始时间戳，单位为秒 */
@@ -3616,6 +3624,20 @@ declare interface DescribePortsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProtectionModesRequest {
+  /** sparta-waf或clb */
+  Edition: string;
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeProtectionModesResponse {
+  /** 规则大类ID及防护模式 */
+  Modes?: TigaMainClassMode[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRuleLimitRequest {
   /** 域名 */
   Domain: string;
@@ -5167,6 +5189,8 @@ declare interface Waf {
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
   /** 获取Saas型WAF防护端口列表 {@link DescribePortsRequest} {@link DescribePortsResponse} */
   DescribePorts(data?: DescribePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortsResponse>;
+  /** 查询tiga引擎下大类规则的防护模式 {@link DescribeProtectionModesRequest} {@link DescribeProtectionModesResponse} */
+  DescribeProtectionModes(data: DescribeProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionModesResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
   /** Waf 会话定义查询接口 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */

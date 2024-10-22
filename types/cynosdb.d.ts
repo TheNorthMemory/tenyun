@@ -3619,6 +3619,8 @@ declare interface DescribeProxyNodesResponse {
 }
 
 declare interface DescribeProxySpecsRequest {
+  /** 集群id */
+  ClusterId?: string;
 }
 
 declare interface DescribeProxySpecsResponse {

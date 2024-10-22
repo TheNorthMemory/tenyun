@@ -28,7 +28,7 @@ declare interface AuthorizationPolicyItem {
   Ip?: string | null;
   /** 0，1，2 */
   Qos?: string | null;
-  /** 1、2、3 */
+  /** 1：表示匹配retain消息2：表示匹配非retain消息3：表示匹配retain和非retain消息 */
   Retain?: number | null;
   /** 描述 */
   Remark?: string | null;
@@ -56,7 +56,7 @@ declare interface Filter {
 
 /** MQTT认证器信息 */
 declare interface MQTTAuthenticatorItem {
-  /** 认证器类型 */
+  /** 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 BYOC：一端一证认证器 */
   Type?: string | null;
   /** 认证器配置 */
   Config?: string | null;

@@ -1635,9 +1635,9 @@ declare interface DescribeMailProfileRequest {
 
 declare interface DescribeMailProfileResponse {
   /** 邮件配置详情。 */
-  ProfileList: UserProfile[] | null;
+  ProfileList?: UserProfile[] | null;
   /** 邮件配置总数。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

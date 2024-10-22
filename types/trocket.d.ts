@@ -52,6 +52,8 @@ declare interface Endpoint {
   Bandwidth?: number | null;
   /** 公网放通规则 */
   IpRules?: IpRule[] | null;
+  /** 公网是否按流量计费 */
+  BillingFlow?: boolean | null;
 }
 
 /** 查询过滤器 */
@@ -216,7 +218,7 @@ declare interface MQTTInstanceItem {
   InstanceName?: string;
   /** 实例版本 */
   Version?: string;
-  /** 实例类型，EXPERIMENT，体验版BASIC，基础版PRO，专业版PLATINUM，铂金版 */
+  /** 实例类型，BASIC，基础版PRO，专业版 */
   InstanceType?: string;
   /** 实例状态，RUNNING, 运行中MAINTAINING，维护中ABNORMAL，异常OVERDUE，欠费DESTROYED，已删除CREATING，创建中MODIFYING，变配中CREATE_FAILURE，创建失败MODIFY_FAILURE，变配失败DELETING，删除中 */
   InstanceStatus?: string;
@@ -373,15 +375,15 @@ declare interface PublicAccessRule {
 /** 角色信息 */
 declare interface RoleItem {
   /** 角色名称 */
-  RoleName?: string;
+  RoleName: string;
+  /** 是否开启消费 */
+  PermRead: boolean;
+  /** 是否开启生产 */
+  PermWrite: boolean;
   /** Access Key */
   AccessKey?: string;
   /** Secret Key */
   SecretKey?: string;
-  /** 是否开启消费 */
-  PermRead?: boolean;
-  /** 是否开启生产 */
-  PermWrite?: boolean;
   /** 备注信息 */
   Remark?: string;
   /** 创建时间，秒为单位 */
@@ -428,6 +430,12 @@ declare interface SourceClusterTopicConfig {
   Namespace?: string | null;
   /** 导入状态，Unknown 未知，AlreadyExists 已存在，Success 成功，Failure 失败 */
   ImportStatus?: string | null;
+  /** 4.x的命名空间，出参使用 */
+  NamespaceV4?: string | null;
+  /** 4.x的主题名，出参使用 */
+  TopicNameV4?: string | null;
+  /** 4.x的完整命名空间，出参使用 */
+  FullNamespaceV4?: string | null;
 }
 
 /** MQTT客户端数据流量统计 */
@@ -494,12 +502,12 @@ declare interface TopicItem {
   InstanceId?: string;
   /** 主题名称 */
   Topic?: string;
-  /** 主题类型 */
+  /** 主题类型NORMAL:普通消息,FIFO:顺序消息,DELAY:延时消息,TRANSACTION:事务消息 */
   TopicType?: string;
   /** 队列数量 */
   QueueNum?: number;
   /** 描述 */
-  Remark?: string | null;
+  Remark?: string;
   /** 4.x的集群id */
   ClusterIdV4?: string | null;
   /** 4.x的命名空间 */
@@ -521,24 +529,24 @@ declare interface VpcInfo {
 }
 
 declare interface CreateConsumerGroupRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 消费组名称 */
-  ConsumerGroup: string;
   /** 最大重试次数 */
   MaxRetryTimes: number;
   /** 是否开启消费 */
   ConsumeEnable: boolean;
   /** 顺序投递：true并发投递：false */
   ConsumeMessageOrderly: boolean;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
   /** 备注 */
   Remark?: string;
 }
 
 declare interface CreateConsumerGroupResponse {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId?: string;
-  /** 消费组 */
+  /** 消费组名称 */
   ConsumerGroup?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -578,7 +586,7 @@ declare interface CreateInstanceRequest {
 }
 
 declare interface CreateInstanceResponse {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -603,7 +611,7 @@ declare interface CreateMQTTInstanceRequest {
   InstanceType: string;
   /** 实例名称 */
   Name: string;
-  /** 商品规格，可用规格如下：experiment_500,basic_1k,basic_2k,basic_4k,basic_6k,pro_4k,pro_6k,pro_1w,pro_2w,pro_3w,pro_4w,pro_5w,platinum_6k,platinum_1w,platinum_2w,platinum_4w,platinum_10w,platinum_15w,platinum_20w,platinum_40w,platinum_60w,platinum_100w */
+  /** 商品规格，可用规格如下：basic_1k, */
   SkuCode: string;
   /** 备注信息 */
   Remark?: string;
@@ -631,9 +639,9 @@ declare interface CreateMQTTInstanceResponse {
 }
 
 declare interface CreateMQTTTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
   /** 备注 */
   Remark?: string;
@@ -649,7 +657,7 @@ declare interface CreateMQTTTopicResponse {
 }
 
 declare interface CreateMQTTUserRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 备注 */
   Remark: string;
@@ -669,7 +677,7 @@ declare interface CreateMQTTUserResponse {
 }
 
 declare interface CreateRoleRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 角色名称 */
   Role: string;
@@ -689,9 +697,9 @@ declare interface CreateRoleResponse {
 }
 
 declare interface CreateTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
   /** 主题类型UNSPECIFIED:未指定,NORMAL:普通消息,FIFO:顺序消息,DELAY:延时消息,TRANSACTION:事务消息 */
   TopicType: string;
@@ -704,19 +712,19 @@ declare interface CreateTopicRequest {
 }
 
 declare interface CreateTopicResponse {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId?: string;
-  /** 主题 */
+  /** 主题名 */
   Topic?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DeleteConsumerGroupRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 消费组名称 */
-  ConsumerGroup: string;
+  ConsumerGroup?: string;
 }
 
 declare interface DeleteConsumerGroupResponse {
@@ -725,7 +733,7 @@ declare interface DeleteConsumerGroupResponse {
 }
 
 declare interface DeleteInstanceRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
 }
 
@@ -767,7 +775,7 @@ declare interface DeleteMQTTTopicResponse {
 }
 
 declare interface DeleteMQTTUserRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 用户名 */
   Username: string;
@@ -779,7 +787,7 @@ declare interface DeleteMQTTUserResponse {
 }
 
 declare interface DeleteRoleRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 角色名称 */
   Role: string;
@@ -791,9 +799,9 @@ declare interface DeleteRoleResponse {
 }
 
 declare interface DeleteTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
 }
 
@@ -803,14 +811,14 @@ declare interface DeleteTopicResponse {
 }
 
 declare interface DescribeConsumerGroupListRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 查询起始位置 */
-  Offset: number;
-  /** 查询结果限制数量 */
-  Limit: number;
   /** 查询条件列表 */
   Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
   /** 查询指定主题下的消费组 */
   FromTopic?: string;
 }
@@ -825,7 +833,7 @@ declare interface DescribeConsumerGroupListResponse {
 }
 
 declare interface DescribeConsumerGroupRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 消费组名称 */
   ConsumerGroup?: string;
@@ -850,12 +858,14 @@ declare interface DescribeConsumerGroupResponse {
   MaxRetryTimes?: number;
   /** 备注 */
   Remark?: string;
+  /** 消费模式：BROADCASTING 广播模式CLUSTERING 集群模式 */
+  MessageModel?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeConsumerLagRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 消费组名称 */
   ConsumerGroup?: string;
@@ -874,9 +884,9 @@ declare interface DescribeConsumerLagResponse {
 
 declare interface DescribeFusionInstanceListRequest {
   /** 查询起始位置 */
-  Offset: number;
+  Offset?: number;
   /** 查询结果限制数量 */
-  Limit: number;
+  Limit?: number;
   /** 查询条件列表 */
   Filters?: Filter[];
   /** 标签过滤器 */
@@ -913,7 +923,7 @@ declare interface DescribeInstanceListResponse {
 }
 
 declare interface DescribeInstanceRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
 }
 
@@ -1019,7 +1029,7 @@ declare interface DescribeMQTTClientResponse {
 }
 
 declare interface DescribeMQTTInsPublicEndpointsRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
 }
 
@@ -1051,7 +1061,7 @@ declare interface DescribeMQTTInsVPCEndpointsResponse {
 }
 
 declare interface DescribeMQTTInstanceCertRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
 }
 
@@ -1073,7 +1083,7 @@ declare interface DescribeMQTTInstanceListRequest {
   Offset?: number;
   /** 查询结果限制数量 */
   Limit?: number;
-  /** 是否包含新控制台集群 */
+  /** 是否包含新控制台集群：默认为包含 */
   IncludeNew?: boolean;
 }
 
@@ -1087,7 +1097,7 @@ declare interface DescribeMQTTInstanceListResponse {
 }
 
 declare interface DescribeMQTTInstanceRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
 }
 
@@ -1149,9 +1159,9 @@ declare interface DescribeMQTTMessageListResponse {
 }
 
 declare interface DescribeMQTTMessageRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
   /** 消息ID */
   MsgId: string;
@@ -1257,12 +1267,12 @@ declare interface DescribeProductSKUsResponse {
 }
 
 declare interface DescribeRoleListRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 查询起始位置 */
-  Offset: number;
+  Offset?: number;
   /** 查询结果限制数量 */
-  Limit: number;
+  Limit?: number;
   /** 查询条件列表 */
   Filters?: Filter[];
 }
@@ -1277,7 +1287,7 @@ declare interface DescribeRoleListResponse {
 }
 
 declare interface DescribeTopicListRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 查询条件列表 */
   Filters?: Filter[];
@@ -1297,9 +1307,9 @@ declare interface DescribeTopicListResponse {
 }
 
 declare interface DescribeTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
   /** 查询条件列表 */
   Filters?: Filter[];
@@ -1357,7 +1367,7 @@ declare interface ImportSourceClusterTopicsResponse {
 }
 
 declare interface ModifyConsumerGroupRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 消费组名称 */
   ConsumerGroup?: string;
@@ -1401,7 +1411,7 @@ declare interface ModifyInstanceResponse {
 }
 
 declare interface ModifyMQTTInsPublicEndpointRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 带宽 */
   Bandwidth: number;
@@ -1429,7 +1439,7 @@ declare interface ModifyMQTTInstanceCertBindingResponse {
 }
 
 declare interface ModifyMQTTInstanceRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 实例名称 */
   Name?: string;
@@ -1443,9 +1453,9 @@ declare interface ModifyMQTTInstanceResponse {
 }
 
 declare interface ModifyMQTTTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
   /** 备注信息 */
   Remark?: string;
@@ -1457,7 +1467,7 @@ declare interface ModifyMQTTTopicResponse {
 }
 
 declare interface ModifyMQTTUserRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 用户名 */
   Username: string;
@@ -1475,7 +1485,7 @@ declare interface ModifyMQTTUserResponse {
 }
 
 declare interface ModifyRoleRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 角色名称 */
   Role: string;
@@ -1493,9 +1503,9 @@ declare interface ModifyRoleResponse {
 }
 
 declare interface ModifyTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
   /** 队列数量 */
   QueueNum?: number;
@@ -1525,13 +1535,13 @@ declare interface Trocket {
   CreateMQTTTopic(data: CreateMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTTopicResponse>;
   /** 添加MQTT角色 {@link CreateMQTTUserRequest} {@link CreateMQTTUserResponse} */
   CreateMQTTUser(data: CreateMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTUserResponse>;
-  /** 添加角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
+  /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 删除消费组 {@link DeleteConsumerGroupRequest} {@link DeleteConsumerGroupResponse} */
   DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
-  /** 删除实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
+  /** 删除集群 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
   /** 删除MQTT实例的公网接入点 {@link DeleteMQTTInsPublicEndpointRequest} {@link DeleteMQTTInsPublicEndpointResponse} */
   DeleteMQTTInsPublicEndpoint(data: DeleteMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTInsPublicEndpointResponse>;
@@ -1551,9 +1561,9 @@ declare interface Trocket {
   DescribeConsumerGroupList(data: DescribeConsumerGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupListResponse>;
   /** 查询指定消费组堆积数 {@link DescribeConsumerLagRequest} {@link DescribeConsumerLagResponse} */
   DescribeConsumerLag(data: DescribeConsumerLagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerLagResponse>;
-  /** 获取4.x和5.0版本的实例列表 {@link DescribeFusionInstanceListRequest} {@link DescribeFusionInstanceListResponse} */
-  DescribeFusionInstanceList(data: DescribeFusionInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFusionInstanceListResponse>;
-  /** 查询实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
+  /** 查询集群列表 {@link DescribeFusionInstanceListRequest} {@link DescribeFusionInstanceListResponse} */
+  DescribeFusionInstanceList(data?: DescribeFusionInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFusionInstanceListResponse>;
+  /** 查询集群信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 查询实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
@@ -1589,9 +1599,9 @@ declare interface Trocket {
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
-  /** 平滑迁移：导入消费者组列表 {@link ImportSourceClusterConsumerGroupsRequest} {@link ImportSourceClusterConsumerGroupsResponse} */
+  /** 导入 Group 元数据 {@link ImportSourceClusterConsumerGroupsRequest} {@link ImportSourceClusterConsumerGroupsResponse} */
   ImportSourceClusterConsumerGroups(data: ImportSourceClusterConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterConsumerGroupsResponse>;
-  /** 平滑迁移：导入topic列表 {@link ImportSourceClusterTopicsRequest} {@link ImportSourceClusterTopicsResponse} */
+  /** 导入 Topic 元数据 {@link ImportSourceClusterTopicsRequest} {@link ImportSourceClusterTopicsResponse} */
   ImportSourceClusterTopics(data: ImportSourceClusterTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterTopicsResponse>;
   /** 修改消费组属性 {@link ModifyConsumerGroupRequest} {@link ModifyConsumerGroupResponse} */
   ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;

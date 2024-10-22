@@ -4063,7 +4063,7 @@ declare interface Emr {
   DescribeSparkQueries(data: DescribeSparkQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkQueriesResponse>;
   /** 查询StarRocsk查询信息 {@link DescribeStarRocksQueryInfoRequest} {@link DescribeStarRocksQueryInfoResponse} */
   DescribeStarRocksQueryInfo(data: DescribeStarRocksQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStarRocksQueryInfoResponse>;
-  /** 获取trino查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */
+  /** 查询Trino(PrestoSQL)查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */
   DescribeTrinoQueryInfo(data: DescribeTrinoQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrinoQueryInfoResponse>;
   /** 查询用户列表 {@link DescribeUsersForUserManagerRequest} {@link DescribeUsersForUserManagerResponse} */
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;

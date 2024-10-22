@@ -515,9 +515,9 @@ declare interface DescribeEcdnDomainStatisticsRequest {
 
 declare interface DescribeEcdnDomainStatisticsResponse {
   /** 域名数据 */
-  Data: DomainData[];
+  Data?: DomainData[];
   /** 数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

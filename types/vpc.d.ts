@@ -4355,10 +4355,10 @@ declare interface CreateVpnGatewaySslServerRequest {
   VpnGatewayId: string;
   /** SSL-VPN-SERVER 实例名称，长度不超过60个字节。 */
   SslVpnServerName: string;
-  /** 云端地址（CIDR）列表。 */
-  LocalAddress: string[];
   /** 客户端地址网段。 */
   RemoteAddress: string;
+  /** 云端地址（CIDR）列表。 */
+  LocalAddress?: string[];
   /** SSL VPN服务端监听协议。当前仅支持 UDP，默认UDP。 */
   SslVpnProtocol?: string;
   /** SSL VPN服务端监听协议端口，默认1194。 */

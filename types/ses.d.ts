@@ -13,15 +13,15 @@ declare interface Attachment {
 /** 黑名单详情 */
 declare interface BlackAddressDetail {
   /** 黑名单地址id */
-  Id?: number | null;
+  Id?: number;
   /** 邮箱地址 */
-  Email?: string | null;
+  Email?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 过期时间 */
-  ExpireDate?: string | null;
+  ExpireDate?: string;
   /** 黑名单状态，0:已过期，1:生效中 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 邮箱黑名单结构，包含被拉黑的邮箱地址和被拉黑时间，以及被拉黑的理由 */
@@ -295,15 +295,15 @@ declare interface CreateCustomBlacklistRequest {
 
 declare interface CreateCustomBlacklistResponse {
   /** 收件人总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实际上传数量 */
-  ValidCount?: number | null;
+  ValidCount?: number;
   /** 数据过长数量 */
-  TooLongCount?: number | null;
+  TooLongCount?: number;
   /** 重复数量 */
-  RepeatCount?: number | null;
+  RepeatCount?: number;
   /** 格式不正确数量 */
-  InvalidCount?: number | null;
+  InvalidCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

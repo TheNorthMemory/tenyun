@@ -4700,7 +4700,7 @@ declare interface ScanTaskDetails {
   Description?: string;
   /** id唯一 */
   Id?: number;
-  /** 失败详情 */
+  /** 失败类型 3离线、4超时、5失败、8agent版本过低 */
   FailType?: number;
   /** 外网ip */
   MachineWanIp?: string;
@@ -4725,17 +4725,17 @@ declare interface ScreenAttackHotspot {
 /** 大屏基线信息 */
 declare interface ScreenBaselineInfo {
   /** 基线名 */
-  Name: string | null;
+  Name?: string | null;
   /** 危害等级：1-低危；2-中危；3-高危；4-严重 */
-  Level: number | null;
+  Level?: number | null;
   /** 基线id */
-  CategoryId: number | null;
+  CategoryId?: number | null;
   /** 最后检测时间 */
-  LastScanTime: string | null;
+  LastScanTime?: string | null;
   /** 基线风险项 */
-  BaselineFailCount: number | null;
+  BaselineFailCount?: number | null;
   /** 主机uuid */
-  Uuid: string | null;
+  Uuid?: string | null;
 }
 
 /** 大屏可视化安全播报内容 */
@@ -5593,57 +5593,59 @@ declare interface VulInfoHostInfo {
 /** 主机安全-漏洞管理-漏洞列表 */
 declare interface VulInfoList {
   /** 漏洞包含的事件id串，多个用“,”分割 */
-  Ids: string;
+  Ids?: string;
   /** 漏洞名 */
-  Name: string;
+  Name?: string;
   /** 0: 待处理 1:忽略 3:已修复 5:检测中 6:修复中 8:修复失败 */
-  Status: number;
+  Status?: number;
   /** 漏洞id */
-  VulId: number;
+  VulId?: number;
   /** 漏洞披露事件 */
-  PublishTime: string;
+  PublishTime?: string;
   /** 最后检测时间 */
-  LastTime: string;
+  LastTime?: string;
   /** 影响主机数 */
-  HostCount: number;
+  HostCount?: number;
   /** 漏洞等级 1:低 2:中 3:高 4:严重 */
-  Level: number;
+  Level?: number;
   /** 废弃字段 */
-  From: number | null;
+  From?: number | null;
   /** 描述 */
-  Descript: string | null;
+  Descript?: string | null;
   /** 废弃字段 */
-  PublishTimeWisteria: string | null;
+  PublishTimeWisteria?: string | null;
   /** 废弃字段 */
-  NameWisteria: string | null;
+  NameWisteria?: string | null;
   /** 废弃字段 */
-  DescriptWisteria: string | null;
+  DescriptWisteria?: string | null;
   /** 聚合后事件状态串 */
-  StatusStr: string | null;
+  StatusStr?: string | null;
   /** cve编号 */
-  CveId: string | null;
+  CveId?: string | null;
   /** CVSS评分 */
-  CvssScore: number | null;
+  CvssScore?: number | null;
   /** 漏洞标签 多个逗号分割 */
-  Labels: string | null;
+  Labels?: string | null;
   /** 是否能自动修复且包含能自动修复的主机， 0=否 1=是 */
-  FixSwitch: number | null;
+  FixSwitch?: number | null;
   /** 最后扫描任务的id */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 是否支持防御， 0:不支持 1:支持 */
-  IsSupportDefense: number | null;
+  IsSupportDefense?: number | null;
   /** 已防御的攻击次数 */
-  DefenseAttackCount: number | null;
+  DefenseAttackCount?: number | null;
   /** 首次出现时间 */
-  FirstAppearTime: string | null;
+  FirstAppearTime?: string | null;
   /** 漏洞类别 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞 */
-  VulCategory: number | null;
+  VulCategory?: number | null;
   /** 攻击热度级别 */
   AttackLevel?: number | null;
   /** 漏洞修复后是否需要重启 */
   FixNoNeedRestart?: boolean | null;
   /** 检测方式0 - 版本比对, 1 - POC验证 */
   Method?: number | null;
+  /** 漏洞是否支持修复 0不支持，1支持 */
+  VulFixSwitch?: number | null;
 }
 
 /** 漏洞等级数量实体 */
@@ -5673,22 +5675,22 @@ declare interface VulOverview {
 /** 漏洞仓库列表信息 */
 declare interface VulStoreListInfo {
   /** 漏洞ID */
-  VulId: number;
+  VulId?: number;
   /** 漏洞级别 */
-  Level: number;
+  Level?: number;
   /** 漏洞名称 */
-  Name: string;
+  Name?: string;
   /** cve编号 */
-  CveId: string;
+  CveId?: string;
   /** 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞 */
-  VulCategory: number;
+  VulCategory?: number;
   /** 发布时间 */
-  PublishDate: string;
+  PublishDate?: string;
   /** 漏洞检测方法 0 - 版本比对, 1 - POC验证 */
   Method?: number;
   /** 漏洞攻击热度 */
   AttackLevel?: number;
-  /** 漏洞是否支持自动修复0-windows/linux均关闭; 1-windows/linux均打开; 2-仅linux; 3-仅windows */
+  /** 漏洞是否支持自动修复0-Windows/Linux均关闭; 1-Windows/Linux均打开; 2-仅Linux; 3-仅Windows */
   FixSwitch?: number;
   /** 漏洞是否支持防御0:不支持 1:支持 */
   SupportDefense?: number;
@@ -7451,7 +7453,7 @@ declare interface DescribeAssetTypesRequest {
 
 declare interface DescribeAssetTypesResponse {
   /** 资产指纹类型列表 */
-  Types: AssetType[];
+  Types?: AssetType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7997,15 +7999,15 @@ declare interface DescribeBaselineAnalysisDataRequest {
 
 declare interface DescribeBaselineAnalysisDataResponse {
   /** 最后检测时间 */
-  LatestScanTime: string | null;
+  LatestScanTime?: string | null;
   /** 是否全部服务器：1-是 0-否 */
-  IsGlobal: number | null;
+  IsGlobal?: number | null;
   /** 服务器总数 */
-  ScanHostCount: number | null;
+  ScanHostCount?: number | null;
   /** 检测项总数 */
-  ScanRuleCount: number | null;
+  ScanRuleCount?: number | null;
   /** 是否是第一次检测 1是 0不是 */
-  IfFirstScan: number | null;
+  IfFirstScan?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8489,25 +8491,25 @@ declare interface DescribeBaselineStrategyDetailRequest {
 
 declare interface DescribeBaselineStrategyDetailResponse {
   /** 策略扫描通过率 */
-  PassRate: number | null;
+  PassRate?: number | null;
   /** 策略名 */
-  StrategyName: string | null;
+  StrategyName?: string | null;
   /** 策略扫描周期(天) */
-  ScanCycle: string | null;
+  ScanCycle?: string | null;
   /** 定期检测时间, 该时间下发扫描 */
-  ScanAt: string | null;
+  ScanAt?: string | null;
   /** 扫描范围是否全部服务器, 1:是 0:否, 为1则为全部专业版主机 */
-  IsGlobal: number | null;
+  IsGlobal?: number | null;
   /** 云服务器类型：cvm：腾讯云服务器bm：裸金属ecm：边缘计算主机lh: 轻量应用服务器ohter: 混合云机器 */
-  MachineType: string | null;
+  MachineType?: string | null;
   /** 主机地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 用户该策略下的所有主机id */
-  Quuids: string[] | null;
+  Quuids?: string[] | null;
   /** 用户该策略下所有的基线id */
-  CategoryIds: string[] | null;
+  CategoryIds?: string[] | null;
   /** 1 表示扫描过, 0没扫描过 */
-  IfScanned: number | null;
+  IfScanned?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8731,7 +8733,7 @@ declare interface DescribeCanNotSeparateMachineRequest {
 
 declare interface DescribeCanNotSeparateMachineResponse {
   /** 不可隔离主机列表 */
-  List: CanNotSeparateInfo[];
+  List?: CanNotSeparateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10945,35 +10947,35 @@ declare interface DescribeScanTaskDetailsRequest {
 
 declare interface DescribeScanTaskDetailsResponse {
   /** 扫描任务信息列表 */
-  ScanTaskDetailList: ScanTaskDetails[];
+  ScanTaskDetailList?: ScanTaskDetails[];
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 扫描机器总数 */
-  ScanMachineCount: number;
+  ScanMachineCount?: number;
   /** 发现风险机器数 */
-  RiskMachineCount: number;
+  RiskMachineCount?: number;
   /** 扫描开始时间 */
-  ScanBeginTime: string;
+  ScanBeginTime?: string;
   /** 扫描结束时间 */
-  ScanEndTime: string;
+  ScanEndTime?: string;
   /** 检测时间 */
-  ScanTime: number;
+  ScanTime?: number;
   /** 扫描进度 */
-  ScanProgress: number;
+  ScanProgress?: number;
   /** 扫描剩余时间 */
-  ScanLeftTime: number;
+  ScanLeftTime?: number;
   /** 扫描内容 */
-  ScanContent: string[];
+  ScanContent?: string[];
   /** 漏洞信息 */
-  VulInfo: VulDetailInfo[] | null;
+  VulInfo?: VulDetailInfo[] | null;
   /** 风险事件个数 */
-  RiskEventCount: number | null;
+  RiskEventCount?: number | null;
   /** 0一键检测 1定时检测 */
-  Type: number | null;
+  Type?: number | null;
   /** 任务是否全部正在被停止 ture是 */
-  StoppingAll: boolean | null;
+  StoppingAll?: boolean | null;
   /** 扫描出漏洞个数 */
-  VulCount: number | null;
+  VulCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11025,7 +11027,7 @@ declare interface DescribeScreenAttackHotspotRequest {
 
 declare interface DescribeScreenAttackHotspotResponse {
   /** 攻击热点列表 */
-  List: ScreenAttackHotspot[] | null;
+  List?: ScreenAttackHotspot[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11035,7 +11037,7 @@ declare interface DescribeScreenBroadcastsRequest {
 
 declare interface DescribeScreenBroadcastsResponse {
   /** 播报文章列表 */
-  List: ScreenBroadcasts[] | null;
+  List?: ScreenBroadcasts[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11049,7 +11051,7 @@ declare interface DescribeScreenDefenseTrendsRequest {
 
 declare interface DescribeScreenDefenseTrendsResponse {
   /** 统计详情图标数据 */
-  TrendsChart: ScreenTrendsChart[] | null;
+  TrendsChart?: ScreenTrendsChart[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11059,7 +11061,7 @@ declare interface DescribeScreenEmergentMsgRequest {
 
 declare interface DescribeScreenEmergentMsgResponse {
   /** 通知内容 */
-  MessageInfo: ScreenEmergentMsg[];
+  MessageInfo?: ScreenEmergentMsg[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11071,7 +11073,7 @@ declare interface DescribeScreenEventsCntRequest {
 
 declare interface DescribeScreenEventsCntResponse {
   /** 事件统计详情 */
-  Info: ScreenEventsCnt[] | null;
+  Info?: ScreenEventsCnt[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11095,13 +11097,13 @@ declare interface DescribeScreenHostInvasionRequest {
 
 declare interface DescribeScreenHostInvasionResponse {
   /** 网络攻击事件列表 */
-  DefendAttackLog: ScreenDefendAttackLog[];
+  DefendAttackLog?: ScreenDefendAttackLog[];
   /** 入侵检测事件列表 */
-  InvasionEvents: ScreenInvasion[];
+  InvasionEvents?: ScreenInvasion[];
   /** 漏洞事件列表 */
-  Vul: ScreenVulInfo[];
+  Vul?: ScreenVulInfo[];
   /** 基线事件列表 */
-  Baseline: ScreenBaselineInfo[] | null;
+  Baseline?: ScreenBaselineInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11111,7 +11113,7 @@ declare interface DescribeScreenMachineRegionsRequest {
 
 declare interface DescribeScreenMachineRegionsResponse {
   /** 列表详情 */
-  List: ScreenRegionInfo[] | null;
+  List?: ScreenRegionInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11127,7 +11129,7 @@ declare interface DescribeScreenMachinesRequest {
 
 declare interface DescribeScreenMachinesResponse {
   /** 列表详情 */
-  List: ScreenRegionMachines[] | null;
+  List?: ScreenRegionMachines[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11137,7 +11139,7 @@ declare interface DescribeScreenProtectionCntRequest {
 
 declare interface DescribeScreenProtectionCntResponse {
   /** 主机安全防护引擎介绍 内容 */
-  List: ScreenProtectionCnt[];
+  List?: ScreenProtectionCnt[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11147,7 +11149,7 @@ declare interface DescribeScreenProtectionStatRequest {
 
 declare interface DescribeScreenProtectionStatResponse {
   /** 文件查杀 status: 0:从未检测过，或0资产付费情况, 1:已检测，存在恶意文件, 2:已检测，未开启隔离防护, 3:已检测且已开启防护且无风险暴力破解status: 0:未开启防护或0付费资产情况 1:已开启防护 2:存在带处理事件漏洞扫描status: 0:从未检测过，或0资产付费情况, 1:存在漏洞风险, 2:无风险基线检测status: 0:从未检测过，或0资产付费情况, 1:存在基线风险,2:无风险 */
-  Info: ScreenProtection[];
+  Info?: ScreenProtection[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11159,7 +11161,7 @@ declare interface DescribeScreenRiskAssetsTopRequest {
 
 declare interface DescribeScreenRiskAssetsTopResponse {
   /** 统计详情图标数据 Name：展示主机ip 和地域， value：事件数量 */
-  Chart: ScreenNameValue[] | null;
+  Chart?: ScreenNameValue[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
