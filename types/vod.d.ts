@@ -60,33 +60,37 @@ declare namespace V20180717 {
   /** 视频内容识别模板详情 */
   interface AIRecognitionTemplateItem {
     /** 视频内容识别模板唯一标识。 */
-    Definition: number;
+    Definition?: number;
     /** 视频内容识别模板名称。 */
-    Name: string;
+    Name?: string;
     /** 视频内容识别模板描述信息。 */
-    Comment: string;
+    Comment?: string;
+    /** 模板类型，取值：Preset：系统预置模板；Custom：用户自定义模板。 */
+    Type?: string;
     /** 头尾识别控制参数。 */
-    HeadTailConfigure: HeadTailConfigureInfo | null;
+    HeadTailConfigure?: HeadTailConfigureInfo | null;
     /** 拆条识别控制参数。 */
-    SegmentConfigure: SegmentConfigureInfo | null;
+    SegmentConfigure?: SegmentConfigureInfo | null;
     /** 人脸识别控制参数。 */
-    FaceConfigure: FaceConfigureInfo | null;
+    FaceConfigure?: FaceConfigureInfo | null;
     /** 文本全文识别控制参数。 */
-    OcrFullTextConfigure: OcrFullTextConfigureInfo | null;
+    OcrFullTextConfigure?: OcrFullTextConfigureInfo | null;
     /** 文本关键词识别控制参数。 */
-    OcrWordsConfigure: OcrWordsConfigureInfo | null;
+    OcrWordsConfigure?: OcrWordsConfigureInfo | null;
     /** 语音全文识别控制参数。 */
-    AsrFullTextConfigure: AsrFullTextConfigureInfo | null;
+    AsrFullTextConfigure?: AsrFullTextConfigureInfo | null;
     /** 语音关键词识别控制参数。 */
-    AsrWordsConfigure: AsrWordsConfigureInfo | null;
+    AsrWordsConfigure?: AsrWordsConfigureInfo | null;
+    /** 语音翻译控制参数。 */
+    AsrTranslateConfigure?: AsrTranslateConfigureInfo | null;
     /** 物体识别控制参数。 */
-    ObjectConfigure: ObjectConfigureInfo | null;
+    ObjectConfigure?: ObjectConfigureInfo | null;
     /** 截图时间间隔，单位：秒。 */
-    ScreenshotInterval: number;
+    ScreenshotInterval?: number;
     /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    UpdateTime: string;
+    UpdateTime?: string;
   }
 
   /** 视频画面低光、过曝检测的控制参数。 */
@@ -439,24 +443,26 @@ declare namespace V20180717 {
 
   /** 智能识别结果。 */
   interface AiRecognitionResult {
-    /** 任务的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别，HeadTailRecognition：视频片头片尾识别，ObjectRecognition：物体识别。 */
-    Type: string;
+    /** 任务的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，AsrTranslateRecognition：语音翻译识别，OcrFullTextRecognition：文本全文识别，HeadTailRecognition：视频片头片尾识别，ObjectRecognition：物体识别。 */
+    Type?: string;
     /** 视频片头片尾识别结果，当 Type 为 HeadTailRecognition 时有效。 */
-    HeadTailTask: AiRecognitionTaskHeadTailResult | null;
+    HeadTailTask?: AiRecognitionTaskHeadTailResult | null;
     /** 视频拆条识别结果，当 Type 为 SegmentRecognition 时有效。 */
-    SegmentTask: AiRecognitionTaskSegmentResult | null;
+    SegmentTask?: AiRecognitionTaskSegmentResult | null;
     /** 人脸识别结果，当 Type 为 FaceRecognition 时有效。 */
-    FaceTask: AiRecognitionTaskFaceResult | null;
+    FaceTask?: AiRecognitionTaskFaceResult | null;
     /** 语音关键词识别结果，当 Type 为 AsrWordsRecognition 时有效。 */
-    AsrWordsTask: AiRecognitionTaskAsrWordsResult | null;
+    AsrWordsTask?: AiRecognitionTaskAsrWordsResult | null;
     /** 语音全文识别结果，当 Type 为 AsrFullTextRecognition 时有效。 */
-    AsrFullTextTask: AiRecognitionTaskAsrFullTextResult | null;
+    AsrFullTextTask?: AiRecognitionTaskAsrFullTextResult | null;
+    /** 语音翻译结果，当 Type 为 AsrTranslateRecognition 时有效。 */
+    AsrTranslateTask?: AiRecognitionTaskAsrTranslateResult | null;
     /** 文本关键词识别结果，当 Type 为 OcrWordsRecognition 时有效。 */
-    OcrWordsTask: AiRecognitionTaskOcrWordsResult | null;
+    OcrWordsTask?: AiRecognitionTaskOcrWordsResult | null;
     /** 文本全文识别结果，当 Type 为 OcrFullTextRecognition 时有效。 */
-    OcrFullTextTask: AiRecognitionTaskOcrFullTextResult | null;
+    OcrFullTextTask?: AiRecognitionTaskOcrFullTextResult | null;
     /** 物体识别结果，当 Type 为 ObjectRecognition 时有效。 */
-    ObjectTask: AiRecognitionTaskObjectResult | null;
+    ObjectTask?: AiRecognitionTaskObjectResult | null;
   }
 
   /** 语音全文识别结果。 */
@@ -490,19 +496,25 @@ declare namespace V20180717 {
   /** 语音全文识别结果。 */
   interface AiRecognitionTaskAsrFullTextResultOutput {
     /** 语音全文识别片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
-    SegmentSet: AiRecognitionTaskAsrFullTextSegmentItem[];
+    SegmentSet?: AiRecognitionTaskAsrFullTextSegmentItem[];
     /** 语音全文识别片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
-    SegmentSetFileUrl: string;
+    SegmentSetFileUrl?: string;
     /** 语音全文识别片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    SegmentSetFileUrlExpireTime: string;
+    SegmentSetFileUrlExpireTime?: string;
     /** 生成的字幕列表，对应 [语音全文识别任务控制参数](https://cloud.tencent.com/document/api/266/31773) SubtitleFormats。 */
-    SubtitleSet: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem[];
+    SubtitleSet?: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem[];
     /** 生成的字幕文件 Url，对应 [语音全文识别任务控制参数](https://cloud.tencent.com/document/api/266/31773) SubtitleFormat。 */
-    SubtitleUrl: string;
+    SubtitleUrl?: string;
   }
 
   /** 字幕信息。 */
   interface AiRecognitionTaskAsrFullTextResultOutputSubtitleItem {
+    /** 媒资字幕 ID，用于媒资字幕管理，仅当 Format 为 vtt 时有效。注意：2024-11-01T10:00:00Z 之前的任务返回此字段无效。 */
+    Id?: string;
+    /** 媒资字幕名字，用于播放器展示，仅当 Format 为 vtt 时有效。注意：2024-11-01T10:00:00Z 之前的任务返回此字段无效。 */
+    Name?: string;
+    /** 字幕语言。 */
+    Language?: string;
     /** 字幕文件格式，取值范围：vtt：WebVTT 字幕文件；srt：SRT 字幕文件。 */
     Format?: string;
     /** 字幕文件 Url。 */
@@ -519,6 +531,60 @@ declare namespace V20180717 {
     EndTimeOffset: number;
     /** 识别文本。 */
     Text: string;
+  }
+
+  /** 语音翻译结果。 */
+  interface AiRecognitionTaskAsrTranslateResult {
+    /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+    Status?: string;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
+    ErrCodeExt?: string;
+    /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 语音翻译任务输入信息。 */
+    Input?: AiRecognitionTaskAsrTranslateResultInput;
+    /** 语音翻译任务输出信息。 */
+    Output?: AiRecognitionTaskAsrTranslateResultOutput | null;
+    /** 语音翻译任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** 语音翻译任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    BeginProcessTime?: string;
+    /** 语音翻译任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    FinishTime?: string;
+  }
+
+  /** 语音翻译的输入。 */
+  interface AiRecognitionTaskAsrTranslateResultInput {
+    /** 语音翻译模板 ID。 */
+    Definition?: number;
+  }
+
+  /** 语音翻译结果。 */
+  interface AiRecognitionTaskAsrTranslateResultOutput {
+    /** 语音翻译片段列表。注意 ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。 */
+    SegmentSet?: AiRecognitionTaskAsrTranslateSegmentItem[];
+    /** 语音翻译片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。 */
+    SegmentSetFileUrl?: string;
+    /** 语音翻译片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    SegmentSetFileUrlExpireTime?: string;
+    /** 生成的字幕列表。 */
+    SubtitleSet?: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem[];
+  }
+
+  /** 语音翻译片段。 */
+  interface AiRecognitionTaskAsrTranslateSegmentItem {
+    /** 语音翻译片段置信度。取值：0~100。 */
+    Confidence?: number;
+    /** 语音翻译片段起始的偏移时间，单位：秒。 */
+    StartTimeOffset?: number;
+    /** 语音翻译片段终止的偏移时间，单位：秒。 */
+    EndTimeOffset?: number;
+    /** 识别文本。 */
+    Text?: string;
+    /** 翻译文本。 */
+    Translation?: string;
   }
 
   /** 语音关键词识别结果。 */
@@ -1455,12 +1521,14 @@ declare namespace V20180717 {
   interface AsrFullTextConfigureInfo {
     /** 语音全文识别任务开关，可选值：ON：开启智能语音全文识别任务；OFF：关闭智能语音全文识别任务。 */
     Switch: string;
-    /** 生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。 */
+    /** 生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。注意：云点播媒资信息仅支持添加 vtt 字幕，因此当且仅当 SubtitleFormats 包含 vtt 时，云点播将生成的字幕添加到媒资。 */
     SubtitleFormats?: string[];
     /** 生成的字幕文件格式，不填或者填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。注意：此字段已废弃，建议使用 SubtitleFormats。 */
     SubtitleFormat?: string;
     /** 媒体源语言，取值范围：zh：中文普通话；en：英语；ja：日语；zh-ca：粤语。注意： 填空字符串，或者不填该参数，则自动识别（效果较难保证，推荐填写原始媒体对应的语言，以提高识别的准确率）。 */
     SrcLanguage?: string;
+    /** 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示，若不填则云点播自动生成。注意：仅当 SubtitleFormats 包含 vtt 时，该字段有效。 */
+    SubtitleName?: string;
   }
 
   /** 语音全文识别任务控制参数 */
@@ -1473,6 +1541,36 @@ declare namespace V20180717 {
     SubtitleFormat?: string;
     /** 媒体源语言，取值范围：zh：中文普通话；en：英语；ja：日语；zh-ca：粤语。 */
     SrcLanguage?: string;
+    /** 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示。 */
+    SubtitleName?: string;
+  }
+
+  /** 语音翻译任务控制参数 */
+  interface AsrTranslateConfigureInfo {
+    /** 语音翻译任务开关，可选值：ON：开启；OFF：关闭。注意：语音翻译任务本身会返回 ASR 全文识别结果，为避免重复收费，因此禁止同时开启语音翻译和 ASR 全文识别功能项。 */
+    Switch: string;
+    /** 媒体源语言，当 Switch 为 ON 时，此参数必填。取值范围：zh：中文；en：英文；ja：日文；ko：韩文；vi：越南语；ms：马来语；th：泰语；pt：葡萄牙语；tr：土耳其语；ar：阿拉伯语；es：西班牙语；hi：印地语；fr：法语。 */
+    SrcLanguage?: string;
+    /** 翻译目标语言，当 Switch 为 ON 时，此参数必填。当 SrcLanguage 为 zh（中文）时，取值范围：en：英文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语。当 SrcLanguage 为 en（英文）时，取值范围：zh：中文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语；ar：阿拉伯语；hi：印地语。当 SrcLanguage 为 ja（日文）时，取值范围：zh：中文；en：英文；ko：韩文。当 SrcLanguage 为 ko（韩文）时，取值范围：zh：中文；en：英文；ja：日文。当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：zh：中文；en：英文。当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语。当 SrcLanguage 为 tr（土耳其语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 es（西班牙语）时，取值范围：zh：中文；en：英文；fr：法语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：en：英文。当 SrcLanguage 为 fr（法语）时，取值范围：zh：中文；en：英文；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。 */
+    DstLanguage?: string;
+    /** 生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。注意： 云点播媒资信息仅支持添加 vtt 字幕，因此当且仅当 SubtitleFormats 包含 vtt 时，云点播将生成的字幕添加到媒资。 */
+    SubtitleFormats?: string[];
+    /** 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示，若不填则云点播自动生成。注意：仅当 SubtitleFormats 包含 vtt 时，该字段有效。 */
+    SubtitleName?: string;
+  }
+
+  /** 语音翻译控制参数 */
+  interface AsrTranslateConfigureInfoForUpdate {
+    /** 语音翻译任务开关，可选值：ON：开启；OFF：关闭。 */
+    Switch?: string;
+    /** 媒体源语言，取值范围：zh：中文；en：英文；ja：日文；ko：韩文；vi：越南语；ms：马来语；th：泰语；pt：葡萄牙语；tr：土耳其语；ar：阿拉伯语；es：西班牙语；hi：印地语；fr：法语。 */
+    SrcLanguage?: string;
+    /** 翻译目标语言。当 SrcLanguage 为 zh（中文）时，取值范围：en：英文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语。当 SrcLanguage 为 en（英文）时，取值范围：zh：中文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语；ar：阿拉伯语；hi：印地语。当 SrcLanguage 为 ja（日文）时，取值范围：zh：中文；en：英文；ko：韩文。当 SrcLanguage 为 ko（韩文）时，取值范围：zh：中文；en：英文；ja：日文。当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：zh：中文；en：英文。当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语。当 SrcLanguage 为 tr（土耳其语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 es（西班牙语）时，取值范围：zh：中文；en：英文；fr：法语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：en：英文。当 SrcLanguage 为 fr（法语）时，取值范围：zh：中文；en：英文；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。 */
+    DstLanguage?: string;
+    /** 字幕格式列表操作信息。 */
+    SubtitleFormatsOperation?: SubtitleFormatsOperation;
+    /** 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示。 */
+    SubtitleName?: string;
   }
 
   /** 语音关键词识别控制参数。 */
@@ -3363,7 +3461,7 @@ declare namespace V20180717 {
   interface MediaSubtitleInput {
     /** 字幕名字，长度限制：64 个字符。 */
     Name: string;
-    /** 字幕语言。常见的取值如下：cn：中文ja：日文en-US：英文其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646) */
+    /** 字幕语言。常见的取值如下：zh：中文；en：英文；ja：日文；ko：韩文；vi：越南语；ms：马来语；th：泰语；pt：葡萄牙语；tr：土耳其语；ar：阿拉伯语；es：西班牙语；hi：印地语；fr：法语。其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646) */
     Language: string;
     /** 字幕格式。取值范围如下：vtt */
     Format: string;
@@ -3379,12 +3477,14 @@ declare namespace V20180717 {
     Id?: string;
     /** 字幕名字。 */
     Name?: string;
-    /** 字幕语言。常见的取值如下：cn：中文ja：日文en-US：英文其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646) */
+    /** 字幕语言。常见的取值如下：zh：中文；en：英文；ja：日文；ko：韩文；vi：越南语；ms：马来语；th：泰语；pt：葡萄牙语；tr：土耳其语；ar：阿拉伯语；es：西班牙语；hi：印地语；fr：法语。其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646) */
     Language?: string;
     /** 字幕格式。取值范围如下：vtt */
     Format?: string;
     /** 字幕 URL。 */
     Url?: string;
+    /** 字幕来源，取值范围：UserUploaded：用户上传；AIRecognition：AI 识别，通过语音识别或语音翻译生成。 */
+    Source?: string;
   }
 
   /** 轨道信息 */
@@ -5990,6 +6090,8 @@ declare namespace V20180717 {
     AsrFullTextConfigure?: AsrFullTextConfigureInfo;
     /** 语音关键词识别控制参数。 */
     AsrWordsConfigure?: AsrWordsConfigureInfo;
+    /** 语音翻译控制参数。 */
+    AsrTranslateConfigure?: AsrTranslateConfigureInfo;
     /** 物体识别控制参数。 */
     ObjectConfigure?: ObjectConfigureInfo;
     /** 截帧间隔，单位为秒。当不填时，默认截帧间隔为 1 秒，最小值为 0.5 秒。 */
@@ -6972,6 +7074,8 @@ declare namespace V20180717 {
     SubAppId?: number;
     /** 音视频内容识别模板唯一标识过滤条件，数组长度限制：100。 */
     Definitions?: number[];
+    /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。不填默认为空，即不对模板类型过滤。 */
+    Type?: string;
     /** 分页偏移量，默认值：0。 */
     Offset?: number;
     /** 返回记录条数，默认值：10，最大值：100。 */
@@ -8418,6 +8522,8 @@ declare namespace V20180717 {
     AsrFullTextConfigure?: AsrFullTextConfigureInfoForUpdate;
     /** 语音关键词识别控制参数。 */
     AsrWordsConfigure?: AsrWordsConfigureInfoForUpdate;
+    /** 语音翻译控制参数。 */
+    AsrTranslateConfigure?: AsrTranslateConfigureInfoForUpdate;
     /** 物体识别控制参数。 */
     ObjectConfigure?: ObjectConfigureInfoForUpdate;
     /** 截帧间隔，单位为秒，最小值为 0.5 秒。 */

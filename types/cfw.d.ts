@@ -390,7 +390,7 @@ declare interface DnsVpcSwitch {
 declare interface EdgeIpInfo {
   /** 公网IP */
   PublicIp?: string;
-  /** 公网 IP 类型 */
+  /** 公网 IP 类型 1 公网,2 弹性,3 弹性ipv6,4 anycastIP, 6 HighQualityEIP */
   PublicIpType?: number | null;
   /** 实例ID */
   InstanceId?: string | null;
@@ -2183,9 +2183,9 @@ declare interface DescribeAssociatedInstanceListRequest {
 
 declare interface DescribeAssociatedInstanceListResponse {
   /** 实例数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 实例列表 */
-  Data: AssociatedInstanceInfo[] | null;
+  Data?: AssociatedInstanceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2369,7 +2369,7 @@ declare interface DescribeEnterpriseSecurityGroupRuleRequest {
   Port?: string;
   /** 协议；TCP/UDP/ICMP/ANY */
   Protocol?: string;
-  /** 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥 */
+  /** 端口协议类型参数模板id；协议端口模板id */
   ServiceTemplateId?: string;
   /** 规则的uuid */
   RuleUuid?: number;
@@ -2663,11 +2663,11 @@ declare interface DescribeNatFwVpcDnsLstRequest {
 
 declare interface DescribeNatFwVpcDnsLstResponse {
   /** nat防火墙vpc dns 信息数组 */
-  VpcDnsSwitchLst: VpcDnsInfo[] | null;
+  VpcDnsSwitchLst?: VpcDnsInfo[] | null;
   /** 返回参数 */
-  ReturnMsg: string | null;
+  ReturnMsg?: string | null;
   /** 开关总条数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3261,9 +3261,9 @@ declare interface ModifyEnterpriseSecurityGroupRuleRequest {
 
 declare interface ModifyEnterpriseSecurityGroupRuleResponse {
   /** 状态值，0：编辑成功，非0：编辑失败 */
-  Status: number;
+  Status?: number;
   /** 编辑后新生成规则的Id */
-  NewRuleUuid: number;
+  NewRuleUuid?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3787,7 +3787,7 @@ declare interface Cfw {
   DescribeNatFwInstancesInfo(data?: DescribeNatFwInstancesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstancesInfoResponse>;
   /** 展示当前natfw 实例对应的vpc dns开关 {@link DescribeNatFwVpcDnsLstRequest} {@link DescribeNatFwVpcDnsLstResponse} */
   DescribeNatFwVpcDnsLst(data: DescribeNatFwVpcDnsLstRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwVpcDnsLstResponse>;
-  /** 查询NAT边界防火墙开关列表 {@link DescribeNatSwitchListRequest} {@link DescribeNatSwitchListResponse} */
+  /** @deprecated 查询NAT边界防火墙开关列表 {@link DescribeNatSwitchListRequest} {@link DescribeNatSwitchListResponse} */
   DescribeNatSwitchList(data: DescribeNatSwitchListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatSwitchListResponse>;
   /** 资产中心资产树信息查询 {@link DescribeResourceGroupRequest} {@link DescribeResourceGroupResponse} */
   DescribeResourceGroup(data: DescribeResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupResponse>;

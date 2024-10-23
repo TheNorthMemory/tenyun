@@ -203,7 +203,7 @@ declare interface RecognizeTargetAudienceRequest {
 
 declare interface RecognizeTargetAudienceResponse {
   /** 回包数据 */
-  Data: OutputRecognizeTargetAudience | null;
+  Data?: OutputRecognizeTargetAudience | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

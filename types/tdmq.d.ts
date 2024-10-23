@@ -401,17 +401,17 @@ declare interface Environment {
 /** 环境角色集合 */
 declare interface EnvironmentRole {
   /** 环境（命名空间）。 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 角色名称。 */
-  RoleName: string;
+  RoleName?: string;
   /** 授权项，最多只能包含produce、consume两项的非空字符串数组。 */
-  Permissions: string[];
+  Permissions?: string[];
   /** 角色描述。 */
-  RoleDescribe: string;
+  RoleDescribe?: string;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 批量绑定名字空间和角色权限关系 */
@@ -734,6 +734,28 @@ declare interface QueueQuota {
   MaxQueue?: number;
   /** 已创建Queue数 */
   UsedQueue?: number | null;
+}
+
+/** Rabbitmq路由关系列表成员 */
+declare interface RabbitMQBindingListInfo {
+  /** 路由关系id */
+  BindingId?: number | null;
+  /** Vhost参数 */
+  VirtualHost?: string | null;
+  /** 源exchange名称 */
+  Source?: string | null;
+  /** 目标类型,queue或exchange */
+  DestinationType?: string | null;
+  /** 目标资源名称 */
+  Destination?: string | null;
+  /** 绑定key */
+  RoutingKey?: string | null;
+  /** 源exchange类型 */
+  SourceExchangeType?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
 }
 
 /** RabbitMQ集群访问信息 */
@@ -1187,17 +1209,17 @@ declare interface RocketMQConsumerConnection {
 /** 消费者详情中的主题信息 */
 declare interface RocketMQConsumerTopic {
   /** 主题名称 */
-  Topic: string;
-  /** 主题类型，Default表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信 */
-  Type: string;
+  Topic?: string;
+  /** 主题类型，Normal表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信 */
+  Type?: string;
   /** 分区数 */
-  PartitionNum: number;
+  PartitionNum?: number;
   /** 消息堆积数 */
-  Accumulative: number;
+  Accumulative?: number;
   /** 最后消费时间，以毫秒为单位 */
-  LastConsumptionTime: number;
+  LastConsumptionTime?: number;
   /** 订阅规则 */
-  SubRule: string | null;
+  SubRule?: string | null;
 }
 
 /** 监控数据点 */
@@ -1311,13 +1333,13 @@ declare interface RocketMQInstanceConfig {
 /** Rocketmq消息消费track信息 */
 declare interface RocketMQMessageTrack {
   /** 消费者组 */
-  Group: string;
+  Group?: string;
   /** 消费状态,CONSUMED: 已消费CONSUMED_BUT_FILTERED: 已过滤NOT_CONSUME: 未消费ENTER_RETRY: 进入重试队列ENTER_DLQ: 进入死信队列UNKNOWN: 查询不到消费状态 */
-  ConsumeStatus: string;
+  ConsumeStatus?: string;
   /** 消息track类型 */
-  TrackType: string;
+  TrackType?: string;
   /** 异常信息 */
-  ExceptionDesc: string | null;
+  ExceptionDesc?: string | null;
 }
 
 /** 迁移主题的阶段分布 */
@@ -1406,7 +1428,7 @@ declare interface RocketMQSubscription {
   ConsumerGroup?: string | null;
   /** 是否在线 */
   IsOnline?: boolean | null;
-  /** 消费类型 */
+  /** 消费类型0: 广播消费1: 集群消费 */
   ConsumeType?: number | null;
   /** 订阅一致性 */
   Consistency?: number | null;
@@ -1527,15 +1549,15 @@ declare interface RocketMQVipInstance {
 /** 角色实例 */
 declare interface Role {
   /** 角色名称。 */
-  RoleName: string;
+  RoleName?: string;
   /** 角色token值。 */
-  Token: string;
+  Token?: string;
   /** 备注说明。 */
-  Remark: string;
+  Remark?: string;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 服务方信息 */
@@ -2107,7 +2129,7 @@ declare interface CreateRocketMQClusterResponse {
 }
 
 declare interface CreateRocketMQEnvironmentRoleRequest {
-  /** 环境（命名空间）名称。 */
+  /** 命名空间 */
   EnvironmentId: string;
   /** 角色名称。 */
   RoleName: string;
@@ -2404,6 +2426,26 @@ declare interface DeleteProClusterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRabbitMQBindingRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** Vhost参数 */
+  VirtualHost: string;
+  /** 路由关系Id */
+  BindingId: number;
+}
+
+declare interface DeleteRabbitMQBindingResponse {
+  /** 队列名称 */
+  InstanceId?: string | null;
+  /** vhost参数 */
+  VirtualHost?: string | null;
+  /** 路由关系Id */
+  BindingId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -2459,7 +2501,7 @@ declare interface DeleteRocketMQEnvironmentRolesRequest {
   EnvironmentId: string;
   /** 角色名称数组。 */
   RoleNames: string[];
-  /** 必填字段，集群的ID */
+  /** 集群的ID */
   ClusterId: string;
 }
 
@@ -3096,6 +3138,34 @@ declare interface DescribePulsarProInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRabbitMQBindingsRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** Vhost参数 */
+  VirtualHost: string;
+  /** 分页offset */
+  Offset?: number;
+  /** 分页limit */
+  Limit?: number;
+  /** 搜索关键词，根据源exchange名称/目标资源名称/绑定key进行模糊搜索 */
+  SearchWord?: string;
+  /** 根据源Exchange精准搜索过滤 */
+  SourceExchange?: string;
+  /** 根据目标QueueName精准搜索过滤，和DestinationExchange过滤不可同时设置 */
+  QueueName?: string;
+  /** 根据目标Exchange精准搜索过滤，和QueueName过滤不可同时设置 */
+  DestinationExchange?: string;
+}
+
+declare interface DescribeRabbitMQBindingsResponse {
+  /** 路由关系列表 */
+  BindingInfoList?: RabbitMQBindingListInfo[] | null;
+  /** 数量 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRabbitMQExchangesRequest {
   /** 实例 id */
   InstanceId: string;
@@ -3443,9 +3513,9 @@ declare interface DescribeRocketMQConsumerConnectionDetailRequest {
 
 declare interface DescribeRocketMQConsumerConnectionDetailResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 消费端主题信息列表 */
-  Details: RocketMQConsumerTopic[];
+  Details?: RocketMQConsumerTopic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3469,11 +3539,11 @@ declare interface DescribeRocketMQConsumerConnectionsRequest {
 
 declare interface DescribeRocketMQConsumerConnectionsResponse {
   /** 总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 在线消费者信息 */
-  Connections: RocketMQConsumerConnection[];
+  Connections?: RocketMQConsumerConnection[];
   /** 订阅组信息 */
-  GroupDetail: RocketMQGroup | null;
+  GroupDetail?: RocketMQGroup | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3481,7 +3551,7 @@ declare interface DescribeRocketMQConsumerConnectionsResponse {
 declare interface DescribeRocketMQEnvironmentRolesRequest {
   /** 必填字段，RocketMQ集群的ID */
   ClusterId: string;
-  /** 环境（命名空间）名称。 */
+  /** 命名空间 */
   EnvironmentId?: string;
   /** 起始下标，不填默认为0。 */
   Offset?: number;
@@ -3489,7 +3559,7 @@ declare interface DescribeRocketMQEnvironmentRolesRequest {
   Limit?: number;
   /** 角色名称 */
   RoleName?: string;
-  /** * RoleName按照角色名进行过滤，精确查询。类型：String必选：否 */
+  /** RoleName按照角色名进行过滤，精确查询。类型：String必选：否 */
   Filters?: Filter[];
 }
 
@@ -3616,7 +3686,7 @@ declare interface DescribeRocketMQMsgTraceRequest {
 }
 
 declare interface DescribeRocketMQMsgTraceResponse {
-  /** [ { "Stage": "produce", "Data": { "ProducerName": "生产者名", "ProduceTime": "消息生产时间", "ProducerAddr": "客户端地址", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "persist", "Data": { "PersistTime": "存储时间", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "consume", "Data": { "TotalCount": 2, "RocketMqConsumeLogs": [ { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" }, { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" } ] } }] */
+  /** 轨迹详情列表 */
   Result?: TraceResult[];
   /** 消息轨迹页展示的topic名称 */
   ShowTopicName?: string;
@@ -3707,7 +3777,7 @@ declare interface DescribeRocketMQRolesRequest {
   ClusterId: string;
   /** 角色名称，模糊查询 */
   RoleName?: string;
-  /** * RoleName按照角色名进行过滤，精确查询。类型：String必选：否 */
+  /** RoleName按照角色名进行过滤，精确查询。类型：String必选：否 */
   Filters?: Filter[];
 }
 
@@ -3913,9 +3983,9 @@ declare interface DescribeRocketMQTopicsByGroupRequest {
 
 declare interface DescribeRocketMQTopicsByGroupResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 主题列表 */
-  Topics: string[];
+  Topics?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4825,7 +4895,7 @@ declare interface VerifyRocketMQConsumeRequest {
   MsgId: string;
   /** 客户端ID */
   ClientId: string;
-  /** topic名称 */
+  /** 主题名称 */
   TopicName: string;
 }
 
@@ -4899,6 +4969,8 @@ declare interface Tdmq {
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
   /** 删除专业集群实例 {@link DeleteProClusterRequest} {@link DeleteProClusterResponse} */
   DeleteProCluster(data: DeleteProClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClusterResponse>;
+  /** 解绑RabbitMQ路由关系 {@link DeleteRabbitMQBindingRequest} {@link DeleteRabbitMQBindingResponse} */
+  DeleteRabbitMQBinding(data: DeleteRabbitMQBindingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQBindingResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
   DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;
   /** 删除RabbitMQ专享版实例 {@link DeleteRabbitMQVipInstanceRequest} {@link DeleteRabbitMQVipInstanceResponse} */
@@ -4973,6 +5045,8 @@ declare interface Tdmq {
   DescribePulsarProInstanceDetail(data: DescribePulsarProInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstanceDetailResponse>;
   /** 查询Pulsar专业版实例列表 {@link DescribePulsarProInstancesRequest} {@link DescribePulsarProInstancesResponse} */
   DescribePulsarProInstances(data?: DescribePulsarProInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstancesResponse>;
+  /** 查询RabbitMQ路由关系列表 {@link DescribeRabbitMQBindingsRequest} {@link DescribeRabbitMQBindingsResponse} */
+  DescribeRabbitMQBindings(data: DescribeRabbitMQBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQBindingsResponse>;
   /** 查询RabbitMQ exchange 列表 {@link DescribeRabbitMQExchangesRequest} {@link DescribeRabbitMQExchangesResponse} */
   DescribeRabbitMQExchanges(data: DescribeRabbitMQExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQExchangesResponse>;
   /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */

@@ -814,9 +814,9 @@ declare interface AssetUserBaseInfo {
   Name?: string;
   /** 主机业务组ID */
   ProjectId?: number;
-  /** 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows */
+  /** 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅Windows */
   UserType?: number;
-  /** 是否域账号：0否， 1是，2否, 999为空 仅windows */
+  /** 是否域账号：0否， 1是，2否, 999为空 仅Windows */
   IsDomain?: number;
   /** 是否有sudo权限，1是，0否, 999为空, 仅linux */
   IsSudo?: number;
@@ -849,63 +849,63 @@ declare interface AssetUserBaseInfo {
 /** 资源管理账号基本信息 */
 declare interface AssetUserDetail {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 账号UID */
-  Uid: string;
+  Uid?: string;
   /** 账号GID */
-  Gid: string;
+  Gid?: string;
   /** 账号状态：0-禁用；1-启用 */
-  Status: number;
+  Status?: number;
   /** 是否有root权限：0-否；1是，999为空: 仅linux */
-  IsRoot: number;
+  IsRoot?: number;
   /** 上次登录时间 */
-  LastLoginTime: string;
+  LastLoginTime?: string;
   /** 账号名称 */
-  Name: string;
-  /** 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows */
-  UserType: number;
-  /** 是否域账号：0否， 1是, 999为空 仅windows */
-  IsDomain: number;
+  Name?: string;
+  /** 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅Windows */
+  UserType?: number;
+  /** 是否域账号：0否， 1是, 999为空 仅Windows */
+  IsDomain?: number;
   /** 是否允许ssh登录，1是，0否, 999为空, 仅linux */
-  IsSshLogin: number;
+  IsSshLogin?: number;
   /** Home目录 */
-  HomePath: string;
+  HomePath?: string;
   /** Shell路径 仅linux */
-  Shell: string;
+  Shell?: string;
   /** 是否shell登录性，0不是；1是 仅linux */
-  ShellLoginStatus: number;
+  ShellLoginStatus?: number;
   /** 密码修改时间 */
-  PasswordChangeTime: string;
+  PasswordChangeTime?: string;
   /** 密码过期时间 仅linux */
-  PasswordDueTime: string;
+  PasswordDueTime?: string;
   /** 密码锁定时间：单位天, -1为永不锁定 999为空，仅linux */
-  PasswordLockDays: number;
+  PasswordLockDays?: number;
   /** 备注 */
-  Remark: string;
+  Remark?: string;
   /** 用户组名 */
-  GroupName: string;
+  GroupName?: string;
   /** 账号到期时间 */
-  DisableTime: string;
+  DisableTime?: string;
   /** 最近登录终端 */
-  LastLoginTerminal: string;
+  LastLoginTerminal?: string;
   /** 最近登录位置 */
-  LastLoginLoc: string;
+  LastLoginLoc?: string;
   /** 最近登录IP */
-  LastLoginIp: string;
+  LastLoginIp?: string;
   /** 密码过期提醒：单位天 */
-  PasswordWarnDays: number;
+  PasswordWarnDays?: number;
   /** 密码修改设置：0-不可修改，1-可修改 */
-  PasswordChangeType: number;
+  PasswordChangeType?: number;
   /** 用户公钥列表 */
-  Keys: AssetUserKeyInfo[] | null;
+  Keys?: AssetUserKeyInfo[] | null;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 资产管理账号key详情 */
@@ -3502,6 +3502,8 @@ declare interface MalwareInfo {
   StrFileAccessTime?: string | null;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 参考链接 */
+  References?: string[] | null;
 }
 
 /** 恶意文件风险提示列表信息 */
@@ -3547,27 +3549,29 @@ declare interface MalwareWhiteListAffectEvent {
 /** 木马白名单信息 */
 declare interface MalwareWhiteListInfo {
   /** 唯一ID。 */
-  Id: number;
+  Id?: number;
   /** cvm quuid 按,分割。 */
-  QuuidList: string;
+  QuuidList?: string;
   /** md5列表 按,分割 */
-  Md5List: string;
+  Md5List?: string;
   /** 是否全部主机； 0否，1是 */
-  IsGlobal: number;
+  IsGlobal?: number;
   /** 白名单模式；0 MD5 ，1自定义 */
-  Mode: number;
+  Mode?: number;
   /** 匹配模式；0精确匹配，1模糊匹配 */
-  MatchType: number;
+  MatchType?: number;
   /** 文件名；按,分割 */
-  FileName: string;
+  FileName?: string;
   /** 文件目录；按,分割 */
-  FileDirectory: string;
+  FileDirectory?: string;
   /** 文件后缀；按,分割 */
-  FileExtension: string;
+  FileExtension?: string;
   /** 规则创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 受影响记录 */
-  EventsCount: number;
+  EventsCount?: number;
+  /** 规则修改时间 */
+  ModifyTime?: string;
 }
 
 /** 专家服务-月巡检报告 */
@@ -4154,6 +4158,8 @@ declare interface RansomDefenseRollbackTask {
   ModifyTime: string;
   /** 可用区信息 */
   RegionInfo: RegionInfo;
+  /** 主机示例ID */
+  InstanceId?: string | null;
 }
 
 /** 主机列表查询接口相应数据HostList的TagList节点 */
@@ -4268,6 +4274,8 @@ declare interface RansomDefenseStrategyMachineBackupInfo {
   RollBackStatus: number | null;
   /** 备份成功次数 */
   BackupSuccessCount: number | null;
+  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版 */
+  HostVersion?: number | null;
 }
 
 /** 防勒索主机列表 */
@@ -6885,7 +6893,7 @@ declare interface DescribeAssetAppCountRequest {
 
 declare interface DescribeAssetAppCountResponse {
   /** 各软件应用数量 */
-  Apps: AssetKeyVal[] | null;
+  Apps?: AssetKeyVal[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6985,7 +6993,7 @@ declare interface DescribeAssetDatabaseCountRequest {
 
 declare interface DescribeAssetDatabaseCountResponse {
   /** 各数据库数量 */
-  Databases: AssetKeyVal[];
+  Databases?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7043,9 +7051,9 @@ declare interface DescribeAssetDiskListRequest {
 
 declare interface DescribeAssetDiskListResponse {
   /** 磁盘分区列表 */
-  Disks: AssetDiskPartitionInfo[] | null;
+  Disks?: AssetDiskPartitionInfo[] | null;
   /** 分区总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7071,9 +7079,9 @@ declare interface DescribeAssetEnvListRequest {
 
 declare interface DescribeAssetEnvListResponse {
   /** 列表 */
-  Envs: AssetEnvBaseInfo[] | null;
+  Envs?: AssetEnvBaseInfo[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7087,7 +7095,7 @@ declare interface DescribeAssetHostTotalCountRequest {
 
 declare interface DescribeAssetHostTotalCountResponse {
   /** 各项资源数量system : 资源监控account: 账号port: 端口process: 进程app: 应用软件database:数据库webapp: Web应用webframe: Web框架webservice: Web服务weblocation: Web站点systempackage: 系统安装包jar: jar包initservice:启动服务env: 环境变量coremodule: 内核模块 */
-  Types: AssetKeyVal[];
+  Types?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7337,7 +7345,7 @@ declare interface DescribeAssetProcessCountRequest {
 
 declare interface DescribeAssetProcessCountResponse {
   /** 各进程数量 */
-  Process: AssetKeyVal[] | null;
+  Process?: AssetKeyVal[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7481,7 +7489,7 @@ declare interface DescribeAssetUserInfoRequest {
 
 declare interface DescribeAssetUserInfoResponse {
   /** 用户详细信息 */
-  User: AssetUserDetail;
+  User?: AssetUserDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7501,9 +7509,9 @@ declare interface DescribeAssetUserKeyListRequest {
 
 declare interface DescribeAssetUserKeyListResponse {
   /** 公钥列表 */
-  Keys: AssetUserKeyInfo[] | null;
+  Keys?: AssetUserKeyInfo[] | null;
   /** 分区总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7539,7 +7547,7 @@ declare interface DescribeAssetWebAppCountRequest {
 
 declare interface DescribeAssetWebAppCountResponse {
   /** 各Web应用数量 */
-  WebApps: AssetKeyVal[];
+  WebApps?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7597,7 +7605,7 @@ declare interface DescribeAssetWebFrameCountRequest {
 
 declare interface DescribeAssetWebFrameCountResponse {
   /** 各Web框架数量 */
-  WebFrames: AssetKeyVal[];
+  WebFrames?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7633,7 +7641,7 @@ declare interface DescribeAssetWebLocationCountRequest {
 
 declare interface DescribeAssetWebLocationCountResponse {
   /** 各Web站点数量 */
-  WebLocations: AssetKeyVal[];
+  WebLocations?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7693,9 +7701,9 @@ declare interface DescribeAssetWebLocationPathListRequest {
 
 declare interface DescribeAssetWebLocationPathListResponse {
   /** 总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 列表 */
-  Paths: AssetWebLocationPath[] | null;
+  Paths?: AssetWebLocationPath[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7707,7 +7715,7 @@ declare interface DescribeAssetWebServiceCountRequest {
 
 declare interface DescribeAssetWebServiceCountResponse {
   /** 各Web服务数量 */
-  WebServices: AssetKeyVal[];
+  WebServices?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8829,7 +8837,7 @@ declare interface DescribeESAggregationsRequest {
 
 declare interface DescribeESAggregationsResponse {
   /** ES聚合结果JSON */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9025,7 +9033,7 @@ declare interface DescribeFileTamperRuleCountRequest {
 
 declare interface DescribeFileTamperRuleCountResponse {
   /** 主机关联核心文件规则数量信息 */
-  List: FileTamperRuleCount[] | null;
+  List?: FileTamperRuleCount[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9041,7 +9049,7 @@ declare interface DescribeFileTamperRuleInfoRequest {
 
 declare interface DescribeFileTamperRuleInfoResponse {
   /** 规则详情信息 */
-  FileTamperRuleDetail: FileTamperRuleDetail;
+  FileTamperRuleDetail?: FileTamperRuleDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9133,19 +9141,19 @@ declare interface DescribeHistoryServiceRequest {
 
 declare interface DescribeHistoryServiceResponse {
   /** 1 可购买 2 只能升降配 3 只能跳到续费管理页 */
-  BuyStatus: number;
+  BuyStatus?: number;
   /** 用户已购容量 单位 G */
-  InquireNum: number;
+  InquireNum?: number;
   /** 到期时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 是否自动续费,0 初始值, 1 开通 2 没开通 */
-  IsAutoOpenRenew: number;
+  IsAutoOpenRenew?: number;
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 0 没开通 1 正常 2隔离 3销毁 */
-  Status: number;
+  Status?: number;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10059,7 +10067,7 @@ declare interface DescribeMalwareFileRequest {
 
 declare interface DescribeMalwareFileResponse {
   /** 木马文件下载地址 */
-  FileUrl: string;
+  FileUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10071,7 +10079,7 @@ declare interface DescribeMalwareInfoRequest {
 
 declare interface DescribeMalwareInfoResponse {
   /** 恶意文件详情信息 */
-  MalwareInfo: MalwareInfo;
+  MalwareInfo?: MalwareInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10091,13 +10099,13 @@ declare interface DescribeMalwareRiskWarningRequest {
 
 declare interface DescribeMalwareRiskWarningResponse {
   /** 是否开启自动扫描：true-开启，false-未开启 */
-  IsCheckRisk: boolean;
+  IsCheckRisk?: boolean;
   /** 风险文件列表信息 */
-  List: MalwareRisk[] | null;
+  List?: MalwareRisk[] | null;
   /** 是否弹出提示 true 弹出, false不弹 */
-  IsPop: boolean;
+  IsPop?: boolean;
   /** 异常进程列表信息 */
-  ProcessList: MalwareRisk[] | null;
+  ProcessList?: MalwareRisk[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10163,9 +10171,9 @@ declare interface DescribeMalwareWhiteListAffectListRequest {
 
 declare interface DescribeMalwareWhiteListAffectListResponse {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 白名单规则影响事件列表 */
-  AffectList: MalwareWhiteListAffectEvent[] | null;
+  AffectList?: MalwareWhiteListAffectEvent[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10179,15 +10187,15 @@ declare interface DescribeMalwareWhiteListRequest {
   Filters?: Filter[];
   /** 排序方式: [ASC:升序|DESC:降序] */
   Order?: string;
-  /** 可选排序列: [EventsCount] */
+  /** 可选排序列: [EventsCount|CreateTime|ModifyTime] */
   By?: string;
 }
 
 declare interface DescribeMalwareWhiteListResponse {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 白名单列表 */
-  WhiteList: MalwareWhiteListInfo[];
+  WhiteList?: MalwareWhiteListInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10499,9 +10507,9 @@ declare interface DescribeRansomDefenseBackupListRequest {
 
 declare interface DescribeRansomDefenseBackupListResponse {
   /** 备份列表 */
-  List: RansomDefenseBackup[] | null;
+  List?: RansomDefenseBackup[] | null;
   /** 分页查询记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10521,9 +10529,9 @@ declare interface DescribeRansomDefenseEventsListRequest {
 
 declare interface DescribeRansomDefenseEventsListResponse {
   /** 事件列表 */
-  List: RansomDefenseEvent[] | null;
+  List?: RansomDefenseEvent[] | null;
   /** 分页查询记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10543,9 +10551,9 @@ declare interface DescribeRansomDefenseMachineListRequest {
 
 declare interface DescribeRansomDefenseMachineListResponse {
   /** 主机列表 */
-  List: RansomDefenseStrategyMachineBackupInfo[] | null;
+  List?: RansomDefenseStrategyMachineBackupInfo[] | null;
   /** 分页查询记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10577,9 +10585,9 @@ declare interface DescribeRansomDefenseRollBackTaskListRequest {
 
 declare interface DescribeRansomDefenseRollBackTaskListResponse {
   /** 任务列表 */
-  List: RansomDefenseRollbackTask[] | null;
+  List?: RansomDefenseRollbackTask[] | null;
   /** 分页查询记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10619,7 +10627,7 @@ declare interface DescribeRansomDefenseStrategyDetailRequest {
 
 declare interface DescribeRansomDefenseStrategyDetailResponse {
   /** 策略详情 */
-  Strategy: RansomDefenseStrategyDetail | null;
+  Strategy?: RansomDefenseStrategyDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10663,9 +10671,9 @@ declare interface DescribeRansomDefenseStrategyMachinesRequest {
 
 declare interface DescribeRansomDefenseStrategyMachinesResponse {
   /** 主机列表 */
-  List: RansomDefenseStrategyMachineDetail[] | null;
+  List?: RansomDefenseStrategyMachineDetail[] | null;
   /** 分页查询记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10751,7 +10759,7 @@ declare interface DescribeRiskBatchStatusRequest {
 
 declare interface DescribeRiskBatchStatusResponse {
   /** Handling:正在执行删除操作，Pending：没有任务执行 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11083,9 +11091,9 @@ declare interface DescribeScreenGeneralStatRequest {
 
 declare interface DescribeScreenGeneralStatResponse {
   /** name 的值: 在线，关机/离线,未安装，value : 表示对应的数量 */
-  Machines: ScreenNameValue[];
+  Machines?: ScreenNameValue[];
   /** name 的值: 旗舰版，专业版，基础版value : 表示对应的数量 */
-  Protection: ScreenNameValue[];
+  Protection?: ScreenNameValue[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11199,7 +11207,7 @@ declare interface DescribeSecurityBroadcastInfoRequest {
 
 declare interface DescribeSecurityBroadcastInfoResponse {
   /** 安全播报文章详情 */
-  BroadcastInfo: BroadcastInfo | null;
+  BroadcastInfo?: BroadcastInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11213,15 +11221,15 @@ declare interface DescribeSecurityBroadcastsRequest {
   BeginDate?: string;
   /** 筛选发布日期：结束时间 */
   EndDate?: string;
-  /** 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布 */
+  /** 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布，4-最佳实践 */
   BroadcastType?: string;
 }
 
 declare interface DescribeSecurityBroadcastsResponse {
   /** 列表 */
-  List: Broadcasts[];
+  List?: Broadcasts[];
   /** 总共多少条 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11235,9 +11243,9 @@ declare interface DescribeSecurityDynamicsRequest {
 
 declare interface DescribeSecurityDynamicsResponse {
   /** 安全事件消息数组。 */
-  SecurityDynamics: SecurityDynamic[];
+  SecurityDynamics?: SecurityDynamic[];
   /** 记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11249,51 +11257,51 @@ declare interface DescribeSecurityEventStatRequest {
 
 declare interface DescribeSecurityEventStatResponse {
   /** 木马事件统计 */
-  MalwareStat: EventStat;
+  MalwareStat?: EventStat;
   /** 异地事件统计 */
-  HostLoginStat: EventStat;
+  HostLoginStat?: EventStat;
   /** 爆破事件统计 */
-  BruteAttackStat: EventStat;
+  BruteAttackStat?: EventStat;
   /** 恶意请求事件统计 */
-  MaliciousRequestStat: EventStat;
+  MaliciousRequestStat?: EventStat;
   /** 本地提权事件统计 */
-  PrivilegeStat: EventStat;
+  PrivilegeStat?: EventStat;
   /** 反弹Shell事件统计 */
-  ReverseShellStat: EventStat;
+  ReverseShellStat?: EventStat;
   /** 高危命令事件统计 */
-  HighRiskBashStat: EventStat;
+  HighRiskBashStat?: EventStat;
   /** 网络攻击事件统计 */
-  AttackLogsStat: EventStat;
+  AttackLogsStat?: EventStat;
   /** 高危漏洞事件统计 */
-  VulHighStat: EventStat;
+  VulHighStat?: EventStat;
   /** 中危漏洞事件统计 */
-  VulNormalStat: EventStat;
+  VulNormalStat?: EventStat;
   /** 低危漏洞事件统计 */
-  VulLowStat: EventStat;
+  VulLowStat?: EventStat;
   /** 高危基线漏洞事件统计 */
-  BaselineHighStat: EventStat;
+  BaselineHighStat?: EventStat;
   /** 中危基线漏事件统计 */
-  BaselineNormalStat: EventStat;
+  BaselineNormalStat?: EventStat;
   /** 低危基线漏事件统计 */
-  BaselineLowStat: EventStat;
+  BaselineLowStat?: EventStat;
   /** 有未处理安全事件的机器总数 */
-  MachineTotalAffectNum: number;
+  MachineTotalAffectNum?: number;
   /** 有未处理入侵安全事件的机器总数 */
-  InvasionTotalAffectNum: number;
+  InvasionTotalAffectNum?: number;
   /** 有未处理漏洞安全事件的机器总数 */
-  VulTotalAffectNum: number;
+  VulTotalAffectNum?: number;
   /** 有未处理基线安全事件的机器总数 */
-  BaseLineTotalAffectNum: number;
+  BaseLineTotalAffectNum?: number;
   /** 有未处理网络攻击安全事件的机器总数 */
-  CyberAttackTotalAffectNum: number;
+  CyberAttackTotalAffectNum?: number;
   /** 严重漏洞事件统计 */
-  VulRiskStat: EventStat;
+  VulRiskStat?: EventStat;
   /** 严重基线漏洞事件统计 */
-  BaselineRiskStat: EventStat;
+  BaselineRiskStat?: EventStat;
   /** 漏洞数统计 */
-  VulStat: EventStat;
+  VulStat?: EventStat;
   /** 安全得分 */
-  Score: number;
+  Score?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11417,17 +11425,17 @@ declare interface DescribeServerRelatedDirInfoRequest {
 
 declare interface DescribeServerRelatedDirInfoResponse {
   /** 服务器名称 */
-  HostName: string;
+  HostName?: string;
   /** 服务器IP */
-  HostIp: string;
+  HostIp?: string;
   /** 防护目录数量 */
-  ProtectDirNum: number;
+  ProtectDirNum?: number;
   /** 防护文件数量 */
-  ProtectFileNum: number;
+  ProtectFileNum?: number;
   /** 防篡改数量 */
-  ProtectTamperNum: number;
+  ProtectTamperNum?: number;
   /** 防护软链数量 */
-  ProtectLinkNum: number;
+  ProtectLinkNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11437,15 +11445,15 @@ declare interface DescribeServersAndRiskAndFirstInfoRequest {
 
 declare interface DescribeServersAndRiskAndFirstInfoResponse {
   /** 风险文件数 */
-  RiskFileCount: number;
+  RiskFileCount?: number;
   /** 今日新增风险文件数 */
-  AddRiskFileCount: number;
+  AddRiskFileCount?: number;
   /** 受影响服务器台数 */
-  ServersCount: number;
+  ServersCount?: number;
   /** 是否试用：true-是，false-否 */
-  IsFirstCheck: boolean;
+  IsFirstCheck?: boolean;
   /** 木马最近检测时间 */
-  ScanTime: string;
+  ScanTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11673,7 +11681,7 @@ declare interface DescribeVulDefenceOverviewRequest {
 
 declare interface DescribeVulDefenceOverviewResponse {
   /** 漏洞防御概览信息 */
-  Overview: VulDefenceOverview;
+  Overview?: VulDefenceOverview;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12195,9 +12203,9 @@ declare interface DescribeWebPageEventListRequest {
 
 declare interface DescribeWebPageEventListResponse {
   /** 防护事件列表信息 */
-  List: ProtectEventLists[];
+  List?: ProtectEventLists[];
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12241,23 +12249,23 @@ declare interface DescribeWebPageServiceInfoRequest {
 
 declare interface DescribeWebPageServiceInfoResponse {
   /** 是否已购服务：true-是，false-否 */
-  Status: boolean;
+  Status?: boolean;
   /** 已使用授权数 */
-  UsedNum: number;
+  UsedNum?: number;
   /** 剩余授权数 */
-  ResidueNum: number;
+  ResidueNum?: number;
   /** 已购授权数 */
-  BuyNum: number;
+  BuyNum?: number;
   /** 临近到期数量 */
-  ExpireNum: number;
+  ExpireNum?: number;
   /** 所有授权机器信息 */
-  AllAuthorizedMachines: ProtectMachineInfo[];
+  AllAuthorizedMachines?: ProtectMachineInfo[];
   /** 临近到期授权机器信息 */
-  ExpireAuthorizedMachines: ProtectMachine[];
+  ExpireAuthorizedMachines?: ProtectMachine[];
   /** 已过期授权数 */
-  ExpiredNum: number;
+  ExpiredNum?: number;
   /** 防护目录数 */
-  ProtectDirNum: number;
+  ProtectDirNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12365,7 +12373,7 @@ declare interface EditTagsResponse {
 declare interface ExportAssetAppListRequest {
   /** 查询指定Quuid主机的信息 */
   Quuid?: string;
-  /** 过滤条件。AppName- string - 是否必填：否 - 应用名搜索IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDType - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他OsType - uint64 - 是否必填：否 - windows/linux */
+  /** 过滤条件。AppName- string - 是否必填：否 - 应用名搜索IP - String - 是否必填：否 - 主机ipMachineName - String - 是否必填：否 - 主机名称InstanceID - string - 是否必填：否 - 实例IDType - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他OsType - uint64 - 是否必填：否 - Windows/Linux */
   Filters?: AssetFilters[];
   /** 排序方式，asc升序 或 desc降序 */
   Order?: string;
@@ -12413,7 +12421,7 @@ declare interface ExportAssetDatabaseListRequest {
 
 declare interface ExportAssetDatabaseListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12433,7 +12441,7 @@ declare interface ExportAssetEnvListRequest {
 
 declare interface ExportAssetEnvListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12453,7 +12461,7 @@ declare interface ExportAssetInitServiceListRequest {
 
 declare interface ExportAssetInitServiceListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12473,7 +12481,7 @@ declare interface ExportAssetJarListRequest {
 
 declare interface ExportAssetJarListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12523,7 +12531,7 @@ declare interface ExportAssetPlanTaskListRequest {
 
 declare interface ExportAssetPlanTaskListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12541,7 +12549,7 @@ declare interface ExportAssetPortInfoListRequest {
 
 declare interface ExportAssetPortInfoListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12559,7 +12567,7 @@ declare interface ExportAssetProcessInfoListRequest {
 
 declare interface ExportAssetProcessInfoListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12629,7 +12637,7 @@ declare interface ExportAssetWebAppListRequest {
 
 declare interface ExportAssetWebAppListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12665,7 +12673,7 @@ declare interface ExportAssetWebLocationListRequest {
 
 declare interface ExportAssetWebLocationListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12683,7 +12691,7 @@ declare interface ExportAssetWebServiceInfoListRequest {
 
 declare interface ExportAssetWebServiceInfoListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14439,7 +14447,7 @@ declare interface ScanAssetRequest {
 
 declare interface ScanAssetResponse {
   /** 任务id */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14586,10 +14594,10 @@ declare interface SeparateMalwaresRequest {
 }
 
 declare interface SeparateMalwaresResponse {
-  /** 隔离成功的id数组，若无则返回空数组 */
-  SuccessIds: number[];
-  /** 隔离失败的id数组，若无则返回空数组 */
-  FailedIds: number[];
+  /** 隔离成功的ID数组，若无则返回空数组 */
+  SuccessIds?: number[];
+  /** 隔离失败的ID数组，若无则返回空数组 */
+  FailedIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15065,9 +15073,9 @@ declare interface Cwp {
   DescribeAttackEvents(data?: DescribeAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventsResponse>;
   /** 网络攻击日志列表(待下线,请使用DescribeAttackEvents代替) {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
-  /** 查询攻击溯源 {@link DescribeAttackSourceRequest} {@link DescribeAttackSourceResponse} */
+  /** @deprecated 查询攻击溯源 {@link DescribeAttackSourceRequest} {@link DescribeAttackSourceResponse} */
   DescribeAttackSource(data: DescribeAttackSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackSourceResponse>;
-  /** 查询攻击溯源事件 {@link DescribeAttackSourceEventsRequest} {@link DescribeAttackSourceEventsResponse} */
+  /** @deprecated 查询攻击溯源事件 {@link DescribeAttackSourceEventsRequest} {@link DescribeAttackSourceEventsResponse} */
   DescribeAttackSourceEvents(data: DescribeAttackSourceEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackSourceEventsResponse>;
   /** 网络攻击数据统计 {@link DescribeAttackStatisticsRequest} {@link DescribeAttackStatisticsResponse} */
   DescribeAttackStatistics(data?: DescribeAttackStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackStatisticsResponse>;

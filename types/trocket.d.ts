@@ -1387,7 +1387,7 @@ declare interface ModifyConsumerGroupResponse {
 }
 
 declare interface ModifyInstanceRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 实例名称 */
   Name?: string;
@@ -1401,8 +1401,12 @@ declare interface ModifyInstanceRequest {
   MessageRetention?: number;
   /** 是否开启弹性TPS */
   ScaledTpsEnabled?: boolean;
+  /** 是否开启ACL */
+  AclEnabled?: boolean;
   /** 最大可创建主题数 */
   MaxTopicNum?: number;
+  /** 免费额度之外的主题个数 */
+  ExtraTopicNum?: string;
 }
 
 declare interface ModifyInstanceResponse {
@@ -1565,7 +1569,7 @@ declare interface Trocket {
   DescribeFusionInstanceList(data?: DescribeFusionInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFusionInstanceListResponse>;
   /** 查询集群信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
-  /** 查询实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
+  /** 查询 5.X 集群列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
   /** 查询 MQTT 客户端详情 {@link DescribeMQTTClientRequest} {@link DescribeMQTTClientResponse} */
   DescribeMQTTClient(data: DescribeMQTTClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTClientResponse>;
@@ -1605,7 +1609,7 @@ declare interface Trocket {
   ImportSourceClusterTopics(data: ImportSourceClusterTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterTopicsResponse>;
   /** 修改消费组属性 {@link ModifyConsumerGroupRequest} {@link ModifyConsumerGroupResponse} */
   ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;
-  /** 修改实例属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
+  /** 修改集群属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
   /** 更新MQTT实例公网接入点 {@link ModifyMQTTInsPublicEndpointRequest} {@link ModifyMQTTInsPublicEndpointResponse} */
   ModifyMQTTInsPublicEndpoint(data: ModifyMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInsPublicEndpointResponse>;

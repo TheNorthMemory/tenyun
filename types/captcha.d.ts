@@ -433,11 +433,11 @@ declare interface DescribeCaptchaMiniRiskResultRequest {
 
 declare interface DescribeCaptchaMiniRiskResultResponse {
   /** 1 ticket verification succeeded 票据验证成功7 CaptchaAppId does not match 票据与验证码应用APPID不匹配8 ticket expired 票据超时10 ticket format error 票据格式不正确15 ticket decryption failed 票据解密失败16 CaptchaAppId wrong format 检查验证码应用APPID错误21 ticket error 票据验证错误25 bad visitor 策略拦截26 system internal error 系统内部错误100 param err 参数校验错误 */
-  CaptchaCode: number;
+  CaptchaCode?: number;
   /** 状态描述及验证错误信息 */
-  CaptchaMsg: string | null;
+  CaptchaMsg?: string | null;
   /** 拦截策略返回信息 */
-  ManageMarketingRiskValue: OutputManageMarketingRiskValue | null;
+  ManageMarketingRiskValue?: OutputManageMarketingRiskValue | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

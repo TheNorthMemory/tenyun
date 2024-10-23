@@ -422,6 +422,8 @@ declare interface Job {
   ProjectName?: string | null;
   /** test-scenario */
   ScenarioName?: string | null;
+  /** 付费类型 */
+  PayMode?: number | null;
 }
 
 /** 包含labelName 和labelValue */
