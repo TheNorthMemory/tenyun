@@ -2198,9 +2198,9 @@ declare interface SecurityGroupPolicy {
   Port?: string | null;
   /** 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。 */
   ServiceTemplate?: ServiceTemplateSpecification | null;
-  /** 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。 */
+  /** 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IP地址。 */
   CidrBlock?: string | null;
-  /** 网段或IPv6(互斥)。 */
+  /** 网段或IPv6(互斥)。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IPv6地址。 */
   Ipv6CidrBlock?: string | null;
   /** 安全组实例ID，例如：sg-ohuuioma。 */
   SecurityGroupId?: string | null;
@@ -6153,7 +6153,7 @@ declare interface DescribeRouteTablesResponse {
 }
 
 declare interface DescribeRoutesRequest {
-  /** 过滤条件，参数不支持同时指定RouteTableIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。gateway-id - String - （过滤条件）网关ID。description - String - （过滤条件）路由描述。route-table-id - String - （过滤条件）路由表实例ID。dest-cidr - String - （过滤条件）目的端地址，支持模糊左匹配。 */
+  /** vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。gateway-id - String - （过滤条件）网关ID。description - String - （过滤条件）路由描述。route-table-id - String - （过滤条件）路由表实例ID。dest-cidr - String - （过滤条件）目的端地址，支持模糊左匹配。 */
   Filters?: Filter[];
   /** 偏移量。 */
   Offset?: number;
@@ -7838,7 +7838,7 @@ declare interface ModifyNetworkInterfaceQosRequest {
   /** 弹性网卡ID，支持批量修改。 */
   NetworkInterfaceIds: string[];
   /** 服务质量，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
-  QosLevel: string;
+  QosLevel?: string;
   /** DirectSend端口范围最大值。 */
   DirectSendMaxPort?: number;
 }

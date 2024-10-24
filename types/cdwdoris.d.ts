@@ -40,6 +40,8 @@ declare interface BackUpJobDisplay {
   JobStatusNum?: number | null;
   /** 备份实例中关于cos的信息 */
   BackupCosInfo?: BackupCosInfo | null;
+  /** 是否使用的自定义桶 */
+  IsUserDefineBucket?: boolean | null;
 }
 
 /** 备份实例中关于cos的信息 */

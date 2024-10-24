@@ -2619,6 +2619,8 @@ declare interface DeleteUserManagerUserListRequest {
   DisplayStrategy?: string;
   /** 用户组 */
   UserGroupList?: UserAndGroup[];
+  /** 是否删除家目录，只针对cvm集群 */
+  DeleteHomeDir?: boolean;
 }
 
 declare interface DeleteUserManagerUserListResponse {

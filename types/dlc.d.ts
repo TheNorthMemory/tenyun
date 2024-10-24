@@ -524,6 +524,8 @@ declare interface DataEngineInfo {
   AccessInfos?: AccessInfo[] | null;
   /** 引擎所在网络名称 */
   EngineNetworkName?: string | null;
+  /** 是否使用预留池 */
+  IsPoolMode?: string | null;
 }
 
 /** 引擎规格详情 */

@@ -348,6 +348,8 @@ declare interface OwnNumberApplyDetailItem {
   MaxCallCount: number;
   /** 每秒最大并发数 */
   MaxCallPSec: number;
+  /** 呼出被叫格式，使用 {+E.164} 或 {E.164}, */
+  OutboundCalleeFormat?: string;
 }
 
 /** PSTN 会话类型。 */

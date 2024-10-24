@@ -729,7 +729,7 @@ declare interface DescribeAvailableZoneInfoRequest {
 
 declare interface DescribeAvailableZoneInfoResponse {
   /** 各可用区的资源售卖情况以及支持的存储类型、存储协议等信息 */
-  RegionZones: AvailableRegion[];
+  RegionZones?: AvailableRegion[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -821,7 +821,7 @@ declare interface DescribeCfsServiceStatusRequest {
 
 declare interface DescribeCfsServiceStatusResponse {
   /** 该用户当前 CFS 服务的状态，none 为未开通，creating 为开通中，created 为已开通 */
-  CfsServiceStatus: string;
+  CfsServiceStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -831,7 +831,7 @@ declare interface DescribeCfsSnapshotOverviewRequest {
 
 declare interface DescribeCfsSnapshotOverviewResponse {
   /** 统计信息 */
-  StatisticsList: SnapshotStatistics[];
+  StatisticsList?: SnapshotStatistics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -153,7 +153,7 @@ declare interface CreateAuthorizationPolicyRequest {
   Username?: string;
   /** 客户端 */
   ClientId?: string;
-  /** ip */
+  /** IP地址 */
   Ip?: string;
   /** 备注信息 */
   Remark?: string;
@@ -427,7 +427,7 @@ declare interface ModifyAuthorizationPolicyRequest {
   Retain?: number;
   /** 客户端 */
   ClientId?: string;
-  /** ip */
+  /** IP */
   Ip?: string;
   /** 0、1、2 */
   Qos?: string;

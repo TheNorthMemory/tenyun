@@ -470,7 +470,7 @@ declare interface CacheTag {
 
 /** https 证书配置。 */
 declare interface CertificateInfo {
-  /** 证书 ID。 */
+  /** 证书 ID。来源于 SSL 侧，您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
   CertId: string;
   /** 证书备注名。 */
   Alias?: string;
@@ -1268,7 +1268,7 @@ declare interface MaxAge {
 declare interface MutualTLS {
   /** 双向认证配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 双向认证证书列表。注意：MutualTLS 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。 */
+  /** 双向认证证书列表。注意：MutualTLS 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
   CertInfos?: CertificateInfo[];
 }
 
@@ -1904,7 +1904,7 @@ declare interface SecurityType {
 
 /** https 服务端证书配置 */
 declare interface ServerCertInfo {
-  /** 服务器证书 ID。 */
+  /** 服务器证书 ID。来源于 SSL 侧，您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
   CertId: string | null;
   /** 证书备注名。 */
   Alias?: string | null;
@@ -4143,11 +4143,11 @@ declare interface ModifyHostsCertificateRequest {
   Hosts: string[];
   /** 配置服务端证书的模式，取值有：disable：不配置服务端证书；eofreecert：配置 EdgeOne 免费服务端证书；sslcert：配置 SSL 托管服务端证书；不填写表示服务端证书保持原有配置。 */
   Mode?: string;
-  /** SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。 */
+  /** SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
   ServerCertInfo?: ServerCertInfo[];
   /** 托管类型，取值有：none：不托管EO；apply：托管EO不填，默认取值为none。 */
   ApplyType?: string;
-  /** 边缘双向认证配置。不填写表示边缘双向认证保持原有配置。 */
+  /** 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 的入口侧，用于客户端对 EO 节点进行认证。不填写表示保持原有配置。 */
   ClientCertInfo?: MutualTLS;
 }
 

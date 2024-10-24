@@ -390,6 +390,8 @@ declare interface EmbedUrlOption {
   ShowFlowDetailComponent?: boolean;
   /** 模板预览，允许展示模板控件信息 true :允许在模板预览页展示控件 false :（默认）不允许在模板预览页展示控件 */
   ShowTemplateComponent?: boolean;
+  /** 跳过上传文件，默认为false(展示上传文件页）![image](https://qcloudimg.tencent-cloud.cn/raw/8ca33745cf772e79831dbe5a70e82400.png)- false: 展示上传文件页- true: 不展示上传文件页 注意: 此参数仅针对**EmbedType=CREATE_TEMPLATE(创建模板)有效**， */
+  SkipUploadFile?: string;
 }
 
 /** 扩展服务开通和授权的详细信息 */
@@ -1489,7 +1491,7 @@ declare interface ChannelCreateEmbedWebUrlRequest {
   Agent: Agent;
   /** 要生成WEB嵌入界面的类型, 可以选择的值如下: CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成修改模板的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_FLOW：生成预览合同文档的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面（仅支持PC端）PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成扩展服务的嵌入页面 */
   EmbedType: string;
-  /** WEB嵌入的业务资源ID当EmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时需要填写模板id作为BusinessId当EmbedType取值PREVIEW_FLOW，PREVIEW_FLOW_DETAIL时需要填写合同id作为BusinessId当EmbedType取值PREVIEW_SEAL_DETAIL需要填写印章id作为BusinessId */
+  /** WEB嵌入的业务资源ID当EmbedType取值为MODIFY_TEMPLATE，PREVIEW_TEMPLATE必填，取值为模板id为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/partnerApis/files/UploadFiles)*为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL必填，取值为合同id为PREVIEW_SEAL_DETAIL必填，取值为印章id注意： 1. CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口[创建文件转换任务](https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi) 和[查询转换任务状态](https://qian.tencent.com/developers/partnerApis/files/ChannelGetTaskResultApi) 来进行转换成PDF资源。 */
   BusinessId?: string;
   /** 是否隐藏控件，只有预览模板时生效 */
   HiddenComponents?: boolean;

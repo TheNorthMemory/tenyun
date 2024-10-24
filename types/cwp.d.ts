@@ -71,17 +71,17 @@ declare interface AssetAppBaseInfo {
 /** 软件应用关联进程信息 */
 declare interface AssetAppProcessInfo {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 进程状态 */
-  Status: string;
+  Status?: string;
   /** 进程版本 */
-  Version: string;
+  Version?: string;
   /** 路径 */
-  Path: string;
+  Path?: string;
   /** 用户 */
-  User: string;
+  User?: string;
   /** 启动时间 */
-  StartTime: string;
+  StartTime?: string;
 }
 
 /** 资产管理内核模块列表 */
@@ -127,23 +127,23 @@ declare interface AssetCoreModuleBaseInfo {
 /** 资产管理内核模块详情 */
 declare interface AssetCoreModuleDetail {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 描述 */
-  Desc: string;
+  Desc?: string;
   /** 路径 */
-  Path: string;
+  Path?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 大小 */
-  Size: number;
+  Size?: number;
   /** 依赖进程 */
-  Processes: string;
+  Processes?: string;
   /** 被依赖模块 */
-  Modules: string;
+  Modules?: string;
   /** 参数信息 */
-  Params: AssetCoreModuleParam[] | null;
+  Params?: AssetCoreModuleParam[] | null;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 资产管理内核模块参数 */
@@ -215,45 +215,45 @@ declare interface AssetDatabaseBaseInfo {
 /** 资源管理数据库列表信息 */
 declare interface AssetDatabaseDetail {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 数据库名 */
-  Name: string;
+  Name?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 监听端口 */
-  Port: string;
+  Port?: string;
   /** 协议 */
-  Proto: string;
+  Proto?: string;
   /** 运行用户 */
-  User: string;
+  User?: string;
   /** 绑定IP */
-  Ip: string;
+  Ip?: string;
   /** 配置文件路径 */
-  ConfigPath: string;
+  ConfigPath?: string;
   /** 日志文件路径 */
-  LogPath: string;
+  LogPath?: string;
   /** 数据路径 */
-  DataPath: string;
+  DataPath?: string;
   /** 运行权限 */
-  Permission: string;
+  Permission?: string;
   /** 错误日志路径 */
-  ErrorLogPath: string;
+  ErrorLogPath?: string;
   /** 插件路径 */
-  PlugInPath: string;
+  PlugInPath?: string;
   /** 二进制路径 */
-  BinPath: string;
+  BinPath?: string;
   /** 启动参数 */
-  Param: string;
+  Param?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 资产管理磁盘分区信息 */
@@ -391,27 +391,27 @@ declare interface AssetJarBaseInfo {
 /** 资产管理jar包详情 */
 declare interface AssetJarDetail {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 类型：1应用程序，2系统类库，3Web服务自带库，8:其他， */
-  Type: number;
+  Type?: number;
   /** 是否可执行：0未知，1是，2否 */
-  Status: number;
+  Status?: number;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 路径 */
-  Path: string;
+  Path?: string;
   /** 服务器IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 引用进程列表 */
-  Process: AssetAppProcessInfo[] | null;
+  Process?: AssetAppProcessInfo[] | null;
   /** Jar包Md5 */
-  Md5: string | null;
+  Md5?: string | null;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** key-val类型的通用数据结构 */
@@ -726,7 +726,7 @@ declare interface AssetProcessBaseInfo {
   ParentProcessName?: string;
   /** 进程状态 */
   Status?: string;
-  /** 数字签名:0无，1有， 999 空，仅windows */
+  /** 数字签名:0无，1有， 999 空，仅Windows */
   HasSign?: number;
   /** 是否通过安装包安装：:0否，1是， 999 空，仅linux */
   InstallByPackage?: number;
@@ -747,27 +747,27 @@ declare interface AssetProcessBaseInfo {
 /** 资源管理系统安装包列表信息 */
 declare interface AssetSystemPackageInfo {
   /** 数据库名 */
-  Name: string;
+  Name?: string;
   /** 描述 */
-  Desc: string;
+  Desc?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 安装时间 */
-  InstallTime: string;
+  InstallTime?: string;
   /** 类型 */
-  Type: string;
+  Type?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 主机IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo;
   /** 主机Id */
@@ -967,13 +967,13 @@ declare interface AssetWebAppBaseInfo {
 /** 资产管理Web应用插件详情 */
 declare interface AssetWebAppPluginInfo {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 描述 */
-  Desc: string;
+  Desc?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 链接 */
-  Link: string;
+  Link?: string;
 }
 
 /** 资源管理Web应用列表信息 */
@@ -992,7 +992,7 @@ declare interface AssetWebFrameBaseInfo {
   ProjectId?: number;
   /** 主机标签 */
   Tag?: MachineTag[] | null;
-  /** 数据库名 */
+  /** Web应用名 */
   Name?: string;
   /** 版本 */
   Version?: string;
@@ -1065,25 +1065,25 @@ declare interface AssetWebLocationBaseInfo {
 /** 资产管理Web站点列表信息 */
 declare interface AssetWebLocationInfo {
   /** 域名 */
-  Name: string;
+  Name?: string;
   /** 站点端口 */
-  Port: string;
+  Port?: string;
   /** 站点协议 */
-  Proto: string;
+  Proto?: string;
   /** 服务类型 */
-  ServiceType: string;
+  ServiceType?: string;
   /** 安全模块状态：0未启用，1启用，999空，仅nginx */
-  SafeStatus: number;
+  SafeStatus?: number;
   /** 运行用户 */
-  User: string;
+  User?: string;
   /** 主目录 */
-  MainPath: string;
+  MainPath?: string;
   /** 启动命令 */
-  Command: string;
+  Command?: string;
   /** 绑定IP */
-  Ip: string;
+  Ip?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 资产管理Web站点虚拟目录 */
@@ -1116,7 +1116,7 @@ declare interface AssetWebServiceBaseInfo {
   ProjectId?: number;
   /** 主机标签 */
   Tag?: MachineTag[] | null;
-  /** 数据库名 */
+  /** 服务名 */
   Name?: string;
   /** 版本 */
   Version?: string;
@@ -3334,7 +3334,7 @@ declare interface MachineSimple {
   Tag?: MachineTag[];
   /** 地域信息 */
   RegionInfo?: RegionInfo;
-  /** 实例状态 TERMINATED_PRO_VERSION 已销毁 */
+  /** 实例状态请参考CVM实例列表InstanceState值https://cloud.tencent.com/document/api/213/15753 */
   InstanceState?: string;
   /** 项目ID */
   ProjectId?: number;
@@ -6847,7 +6847,7 @@ declare interface DescribeAgentInstallationTokenRequest {
 
 declare interface DescribeAgentInstallationTokenResponse {
   /** 安装命令token */
-  Token: string;
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6937,9 +6937,9 @@ declare interface DescribeAssetAppProcessListRequest {
 
 declare interface DescribeAssetAppProcessListResponse {
   /** 进程列表 */
-  Process: AssetAppProcessInfo[] | null;
+  Process?: AssetAppProcessInfo[] | null;
   /** 分区总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6955,7 +6955,7 @@ declare interface DescribeAssetCoreModuleInfoRequest {
 
 declare interface DescribeAssetCoreModuleInfoResponse {
   /** 内核模块详情 */
-  Module: AssetCoreModuleDetail;
+  Module?: AssetCoreModuleDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7009,7 +7009,7 @@ declare interface DescribeAssetDatabaseInfoRequest {
 
 declare interface DescribeAssetDatabaseInfoResponse {
   /** 数据库详情 */
-  Database: AssetDatabaseDetail;
+  Database?: AssetDatabaseDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7185,7 +7185,7 @@ declare interface DescribeAssetJarInfoRequest {
 
 declare interface DescribeAssetJarInfoResponse {
   /** Jar包详情 */
-  Jar: AssetJarDetail;
+  Jar?: AssetJarDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7221,11 +7221,11 @@ declare interface DescribeAssetLoadInfoRequest {
 
 declare interface DescribeAssetLoadInfoResponse {
   /** 系统负载 */
-  CpuLoad: AssetLoadSummary | null;
+  CpuLoad?: AssetLoadSummary | null;
   /** 内存使用率 */
-  MemLoad: AssetLoadSummary | null;
+  MemLoad?: AssetLoadSummary | null;
   /** 硬盘使用率 */
-  DiskLoad: AssetLoadSummary | null;
+  DiskLoad?: AssetLoadSummary | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7271,7 +7271,7 @@ declare interface DescribeAssetMachineTagTopRequest {
 
 declare interface DescribeAssetMachineTagTopResponse {
   /** Top5标签及数量 */
-  Tags: AssetKeyVal[] | null;
+  Tags?: AssetKeyVal[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7309,7 +7309,7 @@ declare interface DescribeAssetPortCountRequest {
 
 declare interface DescribeAssetPortCountResponse {
   /** 各进程数量 */
-  Ports: AssetKeyVal[];
+  Ports?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7383,13 +7383,13 @@ declare interface DescribeAssetRecentMachineInfoRequest {
 
 declare interface DescribeAssetRecentMachineInfoResponse {
   /** 总数量列表 */
-  TotalList: AssetKeyVal[] | null;
+  TotalList?: AssetKeyVal[] | null;
   /** 在线数量列表 */
-  LiveList: AssetKeyVal[] | null;
+  LiveList?: AssetKeyVal[] | null;
   /** 离线数量列表 */
-  OfflineList: AssetKeyVal[] | null;
+  OfflineList?: AssetKeyVal[] | null;
   /** 风险数量列表 */
-  RiskList: AssetKeyVal[] | null;
+  RiskList?: AssetKeyVal[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7473,7 +7473,7 @@ declare interface DescribeAssetUserCountRequest {
 
 declare interface DescribeAssetUserCountResponse {
   /** 各账号数量 */
-  Users: AssetKeyVal[];
+  Users?: AssetKeyVal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7591,9 +7591,9 @@ declare interface DescribeAssetWebAppPluginListRequest {
 
 declare interface DescribeAssetWebAppPluginListResponse {
   /** 列表 */
-  Plugins: AssetWebAppPluginInfo[] | null;
+  Plugins?: AssetWebAppPluginInfo[] | null;
   /** 分区总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7657,7 +7657,7 @@ declare interface DescribeAssetWebLocationInfoRequest {
 
 declare interface DescribeAssetWebLocationInfoResponse {
   /** 站点信息 */
-  WebLocation: AssetWebLocationInfo | null;
+  WebLocation?: AssetWebLocationInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7737,9 +7737,9 @@ declare interface DescribeAssetWebServiceInfoListRequest {
 
 declare interface DescribeAssetWebServiceInfoListResponse {
   /** 列表 */
-  WebServices: AssetWebServiceBaseInfo[] | null;
+  WebServices?: AssetWebServiceBaseInfo[] | null;
   /** 总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7759,9 +7759,9 @@ declare interface DescribeAssetWebServiceProcessListRequest {
 
 declare interface DescribeAssetWebServiceProcessListResponse {
   /** 进程列表 */
-  Process: AssetAppProcessInfo[] | null;
+  Process?: AssetAppProcessInfo[] | null;
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8823,9 +8823,9 @@ declare interface DescribeDirectConnectInstallCommandRequest {
 
 declare interface DescribeDirectConnectInstallCommandResponse {
   /** 安装命令的ip */
-  Ip: string;
+  Ip?: string;
   /** 安装命令的token */
-  Token: string;
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9167,7 +9167,7 @@ declare interface DescribeHostInfoRequest {
 
 declare interface DescribeHostInfoResponse {
   /** 主机信息与标签信息 */
-  HostInfoList: HostTagInfo[] | null;
+  HostInfoList?: HostTagInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10009,9 +10009,9 @@ declare interface DescribeMachinesSimpleRequest {
 
 declare interface DescribeMachinesSimpleResponse {
   /** 主机列表 */
-  Machines: MachineSimple[];
+  Machines?: MachineSimple[];
   /** 主机数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12495,7 +12495,7 @@ declare interface ExportAssetMachineDetailRequest {
 
 declare interface ExportAssetMachineDetailResponse {
   /** 下载地址 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14699,13 +14699,13 @@ declare interface SyncAssetScanRequest {
 
 declare interface SyncAssetScanResponse {
   /** 枚举值有(大写)：NOTASK（没有同步任务），SYNCING（同步中），FINISHED（同步完成） */
-  State: string;
+  State?: string;
   /** 最新开始同步时间 */
-  LatestStartTime: string;
+  LatestStartTime?: string;
   /** 最新结束同步时间 */
-  LatestEndTime: string;
+  LatestEndTime?: string;
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

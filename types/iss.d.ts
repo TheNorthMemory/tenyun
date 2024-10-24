@@ -406,6 +406,8 @@ declare interface DescribeDeviceData {
   AppName?: string | null;
   /** RTMP推流地址自定义streamName */
   StreamName?: string | null;
+  /** 是否开启静音帧（0：关闭；1 开启） */
+  SilentFrameSwitch?: number | null;
 }
 
 /** 查询设备预置位返回数据 */
@@ -2695,6 +2697,8 @@ declare interface UpdateUserDeviceRequest {
   AudioSwitch?: number;
   /** 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效 */
   SubscribeSwitch?: number;
+  /** 是否开启静音帧（0：关闭；1 开启） */
+  SilentFrameSwitch?: number;
 }
 
 declare interface UpdateUserDeviceResponse {

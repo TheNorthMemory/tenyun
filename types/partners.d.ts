@@ -494,6 +494,18 @@ declare interface DescribeAgentPayDealsV2Response {
   RequestId?: string;
 }
 
+declare interface DescribeAgentRelateBigDealIdsRequest {
+  /** 大订单号 */
+  BigDealId: string;
+}
+
+declare interface DescribeAgentRelateBigDealIdsResponse {
+  /** 申请合并支付的关联大订单号列表（不包含请求的订单号） */
+  BigDealIdList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAgentSelfPayDealsV2Request {
   /** 下单人账号ID */
   OwnerUin: string;
@@ -669,6 +681,8 @@ declare interface Partners {
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
   /** 代理商代付订单查询接口（预付费） {@link DescribeAgentPayDealsV2Request} {@link DescribeAgentPayDealsV2Response} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
+  /** 代理商查询合并支付的关联订单号 {@link DescribeAgentRelateBigDealIdsRequest} {@link DescribeAgentRelateBigDealIdsResponse} */
+  DescribeAgentRelateBigDealIds(data: DescribeAgentRelateBigDealIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentRelateBigDealIdsResponse>;
   /** 代理商自付订单查询接口（预付费） {@link DescribeAgentSelfPayDealsV2Request} {@link DescribeAgentSelfPayDealsV2Response} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
   /** 查询客户余额（新） {@link DescribeClientBalanceNewRequest} {@link DescribeClientBalanceNewResponse} */

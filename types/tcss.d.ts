@@ -1686,6 +1686,44 @@ declare interface ImageRepoInfo {
   RecommendedFix?: boolean;
 }
 
+/** 容器安全镜像仓库列表 */
+declare interface ImageRepoRegistryInfo {
+  /** 仓库id */
+  RegistryId?: number;
+  /** 仓库名 */
+  Name?: string;
+  /** 仓库类型，列表：harbor、tcr */
+  RegistryType?: string;
+  /** 仓库url */
+  Url?: string;
+  /** 网络类型，列表：public */
+  NetType?: string;
+  /** 区域，列表：default */
+  RegistryRegion?: string;
+  /** 仓库版本 */
+  RegistryVersion?: string;
+  /** 仓库连接错误信息，待废弃，请使用ConnDetectException */
+  ConnectMsg?: string | null;
+  /** 联通性检测方式 */
+  ConnDetectType?: string;
+  /** 联通性检测主机数 */
+  ConnDetectHostCount?: number;
+  /** 联通性检测详情 */
+  ConnDetectDetail?: RegistryConnDetectResult[];
+  /** tcr情况下的instance_id */
+  InstanceID?: string;
+  /** 最近同步成功时间 */
+  LatestSyncTime?: string;
+  /** 同步状态 */
+  SyncStatus?: string;
+  /** 同步失败原因 */
+  SyncFailReason?: string;
+  /** 同步失败解决方案 */
+  SyncSolution?: string;
+  /** 同步失败信息 */
+  SyncMessage?: string;
+}
+
 /** 容器安全镜像高危行为信息 */
 declare interface ImageRisk {
   /** 高危行为 */
@@ -6075,9 +6113,23 @@ declare interface DescribeAssetImageRegistryRegistryDetailResponse {
 }
 
 declare interface DescribeAssetImageRegistryRegistryListRequest {
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 过滤字段IsAuthorized是否授权，取值全部all，未授权0，已授权1 */
+  Filters?: AssetFilters[];
+  /** 排序字段 */
+  By?: string;
+  /** 排序方式，asc，desc */
+  Order?: string;
 }
 
 declare interface DescribeAssetImageRegistryRegistryListResponse {
+  /** 镜像仓库列表 */
+  List?: ImageRepoRegistryInfo[] | null;
+  /** 总数量 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

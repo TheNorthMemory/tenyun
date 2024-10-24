@@ -216,7 +216,7 @@ declare interface CreateRuleItem {
   TargetContent: string;
   /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location */
   TargetType: string;
-  /** 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS */
+  /** 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS1. 入方向 旁路防火墙/全局规则 仅支持TCP2.出方向 旁路防火墙/全局规则 仅支持TCP HTTP/HTTPS TLS/SSL3.domain 请选择七层协议 如HTTP/HTTPS */
   Protocol: string;
   /** 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察 */
   RuleAction: string;
@@ -1801,7 +1801,7 @@ declare interface CreateNatFwInstanceRequest {
 
 declare interface CreateNatFwInstanceResponse {
   /** 防火墙实例id */
-  CfwInsId: string;
+  CfwInsId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3607,7 +3607,7 @@ declare interface RemoveVpcAcRuleRequest {
 
 declare interface RemoveVpcAcRuleResponse {
   /** 删除成功后返回被删除策略的uuid列表 */
-  RuleUuids: number[];
+  RuleUuids?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
