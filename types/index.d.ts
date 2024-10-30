@@ -73,7 +73,6 @@ import Cms, { Versions as CmsVersions } from "./cms";
 import Config, { Versions as ConfigVersions } from "./config";
 import Controlcenter, { Versions as ControlcenterVersions } from "./controlcenter";
 import Cpdp, { Versions as CpdpVersions } from "./cpdp";
-import Cr, { Versions as CrVersions } from "./cr";
 import Csip, { Versions as CsipVersions } from "./csip";
 import Csxg, { Versions as CsxgVersions } from "./csxg";
 import Cvm, { Versions as CvmVersions } from "./cvm";
@@ -334,7 +333,6 @@ export declare type SERVICE_VERSIONS = {
   config: ConfigVersions,
   controlcenter: ControlcenterVersions,
   cpdp: CpdpVersions,
-  cr: CrVersions,
   csip: CsipVersions,
   csxg: CsxgVersions,
   cvm: CvmVersions,
@@ -606,7 +604,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   bpaas: Bpaas,
   /** {@link Bri 业务风险情报} */
   bri: Bri,
-  /** {@link Bsca 二进制软件成分分析} */
+  /** {@link Bsca 软件成分分析} */
   bsca: Bsca,
   /** {@link Btoe 区块链可信取证} */
   btoe: Btoe,
@@ -680,8 +678,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   controlcenter: Controlcenter,
   /** {@link Cpdp 企业收付平台} */
   cpdp: Cpdp,
-  /** {@link Cr 金融联络机器人} */
-  cr: Cr,
   /** {@link Csip 云安全一体化平台} */
   csip: Csip,
   /** {@link Csxg 5G入云服务} */
