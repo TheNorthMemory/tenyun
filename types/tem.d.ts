@@ -8,9 +8,9 @@ declare interface Autoscaler {
   MinReplicas: number;
   /** 弹性伸缩最大实例数 */
   MaxReplicas: number;
-  /** 指标弹性伸缩策略 */
+  /** 指标弹性伸缩策略(指标策略和定时策略必须填写一个) */
   HorizontalAutoscaler?: HorizontalAutoscaler[] | null;
-  /** 定时弹性伸缩策略 */
+  /** 定时弹性伸缩策略(指标策略和定时策略必须填写一个) */
   CronHorizontalAutoscaler?: CronHorizontalAutoscaler[] | null;
   /** 弹性伸缩ID */
   AutoscalerId?: string | null;
@@ -333,31 +333,31 @@ declare interface IngressTls {
 /** 日志收集配置 */
 declare interface LogConfig {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 收集类型，container_stdout 为标准输出；container_file 为文件； */
-  InputType: string;
+  InputType?: string;
   /** 日志集 ID */
-  LogsetId: string | null;
+  LogsetId?: string | null;
   /** 日志主题 ID */
-  TopicId: string | null;
+  TopicId?: string | null;
   /** 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文； fullregex_log 为单行正则； multiline_fullregex_log 为多行正则； json_log 为 json； */
-  LogType: string;
+  LogType?: string;
   /** 首行正则表达式，当 LogType 为多行全文、多行正则时生效 */
-  BeginningRegex: string | null;
+  BeginningRegex?: string | null;
   /** 收集文件目录，当 InputType=container_file 时生效 */
-  LogPath: string | null;
+  LogPath?: string | null;
   /** 收集文件名模式，当 InputType=container_file 时生效 */
-  FilePattern: string | null;
+  FilePattern?: string | null;
   /** 创建时间 */
-  CreateDate: string | null;
+  CreateDate?: string | null;
   /** 更新时间 */
-  ModifyDate: string | null;
+  ModifyDate?: string | null;
   /** 应用 ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 应用名 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 导出规则 */
-  ExtractRule: LogConfigExtractRule | null;
+  ExtractRule?: LogConfigExtractRule | null;
 }
 
 /** 日志采集的导出规则配置 */
@@ -411,13 +411,13 @@ declare interface LogOutputConf {
 /** 挂载配置信息 */
 declare interface MountedSettingConf {
   /** 配置名称 */
-  ConfigDataName: string;
+  ConfigDataName: string | null;
   /** 挂载路径 */
-  MountedPath: string;
+  MountedPath: string | null;
   /** 配置内容 */
-  Data?: Pair[];
+  Data?: Pair[] | null;
   /** 加密配置名称 */
-  SecretDataName?: string;
+  SecretDataName?: string | null;
 }
 
 /** Namespace 基础信息 */
@@ -578,7 +578,7 @@ declare interface ServicePage {
 
 /** 端口映射详细信息结构体 */
 declare interface ServicePortMapping {
-  /** 服务类型 */
+  /** 服务类型：如：EXTERNAL，VPC，CLUSTER */
   Type?: string | null;
   /** 服务名称 */
   ServiceName?: string | null;
@@ -1137,7 +1137,7 @@ declare interface CreateConfigDataRequest {
 
 declare interface CreateConfigDataResponse {
   /** 创建是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1227,7 +1227,7 @@ declare interface CreateLogConfigRequest {
 
 declare interface CreateLogConfigResponse {
   /** 创建是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1235,7 +1235,7 @@ declare interface CreateLogConfigResponse {
 declare interface CreateResourceRequest {
   /** 环境 Id */
   EnvironmentId: string;
-  /** 资源类型，目前支持文件系统：CFS；日志服务：CLS；注册中心：TSE_SRE */
+  /** 资源类型，目前支持文件系统：CFS；注册中心：TSE_SRE */
   ResourceType: string;
   /** 资源 Id */
   ResourceId?: string;
@@ -1321,7 +1321,7 @@ declare interface DeleteIngressRequest {
 
 declare interface DeleteIngressResponse {
   /** 是否删除成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1331,9 +1331,9 @@ declare interface DeployApplicationRequest {
   ApplicationId: string;
   /** 初始化 pod 数 */
   InitPodNum: number;
-  /** cpu规格 */
+  /** cpu规格 单位：核 */
   CpuSpec: number;
-  /** 内存规格 */
+  /** 内存规格 单位：G */
   MemorySpec: number;
   /** 环境ID */
   EnvironmentId: string;
@@ -1441,7 +1441,7 @@ declare interface DescribeApplicationAutoscalerListRequest {
 
 declare interface DescribeApplicationAutoscalerListResponse {
   /** 弹性伸缩策略组合 */
-  Result: Autoscaler[] | null;
+  Result?: Autoscaler[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1491,13 +1491,13 @@ declare interface DescribeApplicationServiceListRequest {
   EnvironmentId: string;
   /** 服务ID */
   ApplicationId: string;
-  /** xx */
+  /** 来源渠道 */
   SourceChannel?: number;
 }
 
 declare interface DescribeApplicationServiceListResponse {
   /** 应用 EKS Service 列表 */
-  Result: EksService;
+  Result?: EksService;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1537,7 +1537,7 @@ declare interface DescribeApplicationsStatusRequest {
 
 declare interface DescribeApplicationsStatusResponse {
   /** 返回结果 */
-  Result: ServiceVersionBrief[];
+  Result?: ServiceVersionBrief[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1555,7 +1555,7 @@ declare interface DescribeConfigDataListRequest {
 
 declare interface DescribeConfigDataListResponse {
   /** 配置列表 */
-  Result: DescribeConfigDataListPage;
+  Result?: DescribeConfigDataListPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1571,7 +1571,7 @@ declare interface DescribeConfigDataRequest {
 
 declare interface DescribeConfigDataResponse {
   /** 配置 */
-  Result: ConfigData;
+  Result?: ConfigData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1689,7 +1689,7 @@ declare interface DescribeLogConfigRequest {
 
 declare interface DescribeLogConfigResponse {
   /** 配置 */
-  Result: LogConfig;
+  Result?: LogConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1745,7 +1745,7 @@ declare interface DestroyConfigDataRequest {
 
 declare interface DestroyConfigDataResponse {
   /** 返回结果 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1829,7 +1829,7 @@ declare interface GenerateApplicationPackageDownloadUrlRequest {
 
 declare interface GenerateApplicationPackageDownloadUrlResponse {
   /** 包下载临时链接 */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1905,7 +1905,7 @@ declare interface ModifyApplicationServiceRequest {
 
 declare interface ModifyApplicationServiceResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1923,7 +1923,7 @@ declare interface ModifyConfigDataRequest {
 
 declare interface ModifyConfigDataResponse {
   /** 编辑是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1979,7 +1979,7 @@ declare interface ModifyLogConfigRequest {
 
 declare interface ModifyLogConfigResponse {
   /** 编辑是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2033,7 +2033,7 @@ declare interface ResumeDeployApplicationRequest {
 
 declare interface ResumeDeployApplicationResponse {
   /** 是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

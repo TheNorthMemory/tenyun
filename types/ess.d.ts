@@ -98,7 +98,7 @@ declare interface ApproverOption {
   NoTransfer?: boolean;
   /** 允许编辑签署人信息（嵌入式使用） 默认true-可以编辑 false-不可以编辑 */
   CanEditApprover?: boolean;
-  /** 签署人信息补充类型，默认无需补充。 **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`注：`使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关` */
+  /** 签署人信息补充类型，默认无需补充。 **1** : 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`注：`使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关` */
   FillType?: number;
   /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
   FlowReadLimit?: string;
@@ -364,6 +364,16 @@ declare interface CreateStaffResult {
   FailedEmployeeData: FailedCreateStaffData[] | null;
 }
 
+/** 清理的企业认证流信息 */
+declare interface DeleteOrganizationAuthorizationInfo {
+  /** 认证流 Id 是指在企业认证过程中，当前操作人的认证流程的唯一标识。每个企业在认证过程中只能有一条认证流认证成功。这意味着在同一认证过程内，一个企业只能有一个认证流程处于成功状态，以确保认证的唯一性和有效性。 */
+  AuthorizationId?: string;
+  /** 认证的企业名称 */
+  OrganizationName?: string;
+  /** 清除认证流产生的错误信息 */
+  Errormessage?: string;
+}
+
 /** 删除员工结果 */
 declare interface DeleteStaffsResult {
   /** 删除员工的成功数据 */
@@ -514,7 +524,7 @@ declare interface FillApproverInfo {
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
   ApproverIdCardNumber?: string;
-  /** 合同流程ID，补充合同组子合同动态签署人时必传。 */
+  /** 合同流程ID- 补充合同组子合同动态签署人时必传。- 补充普通合同时，请阅读：补充签署人接口的接口使用说明 */
   FlowId?: string;
 }
 
@@ -524,6 +534,8 @@ declare interface FillError {
   RecipientId?: string | null;
   /** 补充失败错误说明 */
   ErrMessage?: string | null;
+  /** 合同流程ID，为32位字符串。 */
+  FlowId?: string | null;
 }
 
 /** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
@@ -1168,7 +1180,7 @@ declare interface ReleasedApprover {
   ApproverType?: string;
   /** 签署控件类型，支持自定义企业签署方的签署控件类型 **SIGN_SEAL**：默认为印章控件类型（默认值） **SIGN_SIGNATURE**：手写签名控件类型 */
   ApproverSignComponentType?: string;
-  /** 参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫`甲方`,第二个叫`乙方`, 第三个叫`丙方`，以此类推。如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。 */
+  /** 参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫`甲方`,第二个叫`乙方`, 第三个叫`丙方`，以此类推。如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。![image](https://qcloudimg.tencent-cloud.cn/raw/973a820ab66d1ce57082c160c2b2d44a.png) */
   ApproverSignRole?: string;
   /** 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署 */
   ApproverSignSealId?: string;
@@ -1819,7 +1831,7 @@ declare interface CreateFlowApproversRequest {
   Operator: UserInfo;
   /** 补充签署环节签署候选人信息。注：` 如果发起方指定的补充签署人是企业微信签署人（ApproverSource=WEWORKAPP），则需要提供企业微信UserId进行补充； 如果不指定，则使用姓名和手机号进行补充。` */
   Approvers: FillApproverInfo[];
-  /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
+  /** 合同流程ID，为32位字符串。- 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。- 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。- 不建议继续使用，请使用补充签署人结构体中的FlowId来指定需要补充的合同id */
   FlowId?: string;
   /** 签署人信息补充方式**0**: 或签合同添加签署候选人，或签支持一个节点传多个签署人，不传值默认或签。注: `或签只支持企业签署方`**1**: 动态签署人合同的添加签署候选人，支持企业或个人签署方。 */
   FillApproverType?: number;
@@ -2563,7 +2575,7 @@ declare interface CreateReleaseFlowResponse {
 declare interface CreateSchemeUrlRequest {
   /** 执行本接口操作的员工信息, userId 必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 合同流程签署方的组织机构名称。如果名称中包含英文括号()，请使用中文括号（）代替。 */
+  /** 合同流程签署方的组织机构名称。如果名称中包含英文括号()，请使用中文括号（）代替。注: `获取B端动态签署人领取链接时,可指定此字段来预先设定签署人的企业,预设后只能以该企业身份去领取合同并完成签署` */
   OrganizationName?: string;
   /** 合同流程里边签署方经办人的姓名。 */
   Name?: string;
@@ -2876,6 +2888,28 @@ declare interface DeleteIntegrationRoleUsersRequest {
 declare interface DeleteIntegrationRoleUsersResponse {
   /** 角色id */
   RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOrganizationAuthorizationsRequest {
+  /** 执行本接口操作的员工信息, userId 必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 认证流Ids数组认证流 Id 是指在企业认证过程中，当前操作人的认证流程的唯一标识。每个企业在认证过程中只能有一条认证流认证成功。这意味着在同一认证过程内，一个企业只能有一个认证流程处于成功状态，以确保认证的唯一性和有效性。认证流 Id可以通过回调 [授权书认证审核结果回调](https://qian.tencent.com/developers/company/callback_types_staffs/#%E5%8D%81%E5%9B%9B-%E6%8E%88%E6%9D%83%E4%B9%A6%E8%AE%A4%E8%AF%81%E5%AE%A1%E6%A0%B8%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83) 获取注意：如果传递了认证流Id，则下面的参数 超管二要素不会生效 */
+  AuthorizationIds?: string[];
+  /** 认证人姓名，组织机构超管姓名。 在注册流程中，必须是超管本人进行操作。 */
+  AdminName?: string;
+  /** 认证人手机号，组织机构超管手机号。 在注册流程中，必须是超管本人进行操作。 */
+  AdminMobile?: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DeleteOrganizationAuthorizationsResponse {
+  /** 清理的认证流的详细信息，其中包括企业名称，认证流唯一 Id 以及清理过程中产生的错误信息 */
+  DeleteOrganizationAuthorizationInfos?: DeleteOrganizationAuthorizationInfo[];
+  /** 批量清理认证流返回的状态值其中包括- 1 全部成功- 2 部分成功- 3 全部失败 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3801,6 +3835,8 @@ declare interface Ess {
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
   /** 解绑员工角色 {@link DeleteIntegrationRoleUsersRequest} {@link DeleteIntegrationRoleUsersResponse} */
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
+  /** 批量清除未认证的企业认证流 {@link DeleteOrganizationAuthorizationsRequest} {@link DeleteOrganizationAuthorizationsResponse} */
+  DeleteOrganizationAuthorizations(data: DeleteOrganizationAuthorizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationAuthorizationsResponse>;
   /** 撤销企业员工的印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */

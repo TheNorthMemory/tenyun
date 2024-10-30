@@ -139,21 +139,21 @@ declare interface Cluster {
 /** cmq DeadLetterPolicy */
 declare interface CmqDeadLetterPolicy {
   /** 死信队列。 */
-  DeadLetterQueue: string | null;
-  /** 死信队列策略。 */
-  Policy: number | null;
+  DeadLetterQueue?: string | null;
+  /** 死信队列策略。0:最大接收次数;1:最大未消费时间 */
+  Policy?: number | null;
   /** 最大未消费过期时间。Policy为1时必选。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds。 */
-  MaxTimeToLive: number | null;
-  /** 最大接收次数。 */
-  MaxReceiveCount: number | null;
+  MaxTimeToLive?: number | null;
+  /** 最大接收次数。Policy为0时必选，范围在1到1000。 */
+  MaxReceiveCount?: number | null;
 }
 
 /** Cmq DeadLetterSource */
 declare interface CmqDeadLetterSource {
   /** 消息队列ID。 */
-  QueueId: string | null;
+  QueueId?: string | null;
   /** 消息队列名字。 */
-  QueueName: string | null;
+  QueueName?: string | null;
 }
 
 /** cmq 批量queue属性信息 */
@@ -166,7 +166,7 @@ declare interface CmqQueue {
   Qps?: number | null;
   /** 带宽限制。 */
   Bps?: number | null;
-  /** 飞行消息最大保留时间。 */
+  /** 飞行消息最大保留时间，需要小于消息保留周期。 */
   MaxDelaySeconds?: number | null;
   /** 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。 */
   MaxMsgHeapNum?: number;
@@ -260,7 +260,7 @@ declare interface CmqTopic {
   TopicName?: string | null;
   /** 消息在主题中最长存活时间，从发送到该主题开始经过此参数指定的时间后，不论消息是否被成功推送给用户都将被删除，单位为秒。固定为一天（86400秒），该属性不能修改。 */
   MsgRetentionSeconds?: number | null;
-  /** 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为65536。 */
+  /** 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为1048576。 */
   MaxMsgSize?: number | null;
   /** 每秒钟发布消息的条数。 */
   Qps?: number | null;
@@ -4271,7 +4271,7 @@ declare interface ModifyCmqQueueAttributeRequest {
   MaxQueryCount?: number;
   /** 死信队列名称 */
   DeadLetterQueueName?: string;
-  /** MaxTimeToLivepolicy为1时必选。最大未消费过期时间。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds */
+  /** policy为1时必选。最大未消费过期时间。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds */
   MaxTimeToLive?: number;
   /** 最大接收次数 */
   MaxReceiveCount?: number;

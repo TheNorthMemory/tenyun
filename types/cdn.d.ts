@@ -1136,7 +1136,7 @@ declare interface ForceRedirect {
   Switch: string | null;
   /** 访问强制跳转类型http：强制 http 跳转https：强制 https 跳转 */
   RedirectType?: string | null;
-  /** 强制跳转时返回状态码 支持 301、302 */
+  /** 强制跳转时返回状态码 支持 301、302、307、308 */
   RedirectStatusCode?: number | null;
   /** 强制跳转时是否返回增加的头部。 */
   CarryHeaders?: string | null;

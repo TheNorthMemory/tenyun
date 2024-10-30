@@ -70,10 +70,12 @@ declare interface AlarmInfo {
   MultiConditions?: MultiCondition[] | null;
 }
 
-/** 告警通知模板类型 */
+/** 告警通知渠道组详细配置 */
 declare interface AlarmNotice {
-  /** 告警通知模板名称。 */
+  /** 告警通知渠道组名称。 */
   Name?: string;
+  /** 告警通知渠道组绑定的标签信息。 */
+  Tags?: Tag[] | null;
   /** 告警模板的类型。可选值： Trigger - 告警触发 Recovery - 告警恢复 All - 告警触发和告警恢复 */
   Type?: string;
   /** 告警通知模板接收者信息。 */
@@ -82,12 +84,26 @@ declare interface AlarmNotice {
   WebCallbacks?: WebCallback[] | null;
   /** 告警通知模板ID。 */
   AlarmNoticeId?: string | null;
+  /** 通知规则。 */
+  NoticeRules?: NoticeRule[] | null;
+  /** 免登录操作告警开关。参数值： 1：关闭 2：开启（默认开启） */
+  AlarmShieldStatus?: number | null;
+  /** 调用链接域名。http:// 或者 https:// 开头，不能/结尾 */
+  JumpDomain?: string | null;
+  /** 投递相关信息。 */
+  AlarmNoticeDeliverConfig?: AlarmNoticeDeliverConfig | null;
   /** 创建时间。 */
   CreateTime?: string | null;
   /** 最近更新时间。 */
   UpdateTime?: string | null;
-  /** 通知规则。 */
-  NoticeRules?: NoticeRule[] | null;
+}
+
+/** 通知渠道投递日志配置信息 */
+declare interface AlarmNoticeDeliverConfig {
+  /** 通知渠道投递日志配置信息。 */
+  DeliverConfig?: DeliverConfig;
+  /** 投递失败原因。 */
+  ErrMsg?: string | null;
 }
 
 /** 告警屏蔽任务配置 */
@@ -644,10 +660,36 @@ declare interface DataTransformTaskInfo {
   DataTransformType?: number | null;
 }
 
+/** 投递配置入参 */
+declare interface DeliverConfig {
+  /** 地域信息。示例： ap-guangzhou 广州地域；ap-nanjing 南京地域。详细信息请查看官网：https://cloud.tencent.com/document/product/614/18940 */
+  Region: string;
+  /** 日志主题ID。 */
+  TopicId: string;
+  /** 投递数据范围。0: 全部日志, 包括告警策略日常周期执行的所有日志，也包括告警策略变更产生的日志，默认值1:仅告警触发及恢复日志 */
+  Scope: number;
+}
+
 /** 键值索引自动配置，启用后自动将日志内的字段添加到键值索引中，包括日志中后续新增的字段。 */
 declare interface DynamicIndex {
   /** 键值索引自动配置开关 */
   Status?: boolean | null;
+}
+
+/** 升级通知 */
+declare interface EscalateNoticeInfo {
+  /** 告警通知模板接收者信息。 */
+  NoticeReceivers: NoticeReceiver[];
+  /** 告警通知模板回调信息。 */
+  WebCallbacks: WebCallback[];
+  /** 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false */
+  Escalate?: boolean | null;
+  /** 告警升级间隔。单位：分钟，范围`[1，14400]` */
+  Interval?: number | null;
+  /** 升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1- 无人认领且未恢复：告警没有恢复并且没有人认领则升级- 未恢复：当前告警持续未恢复则升级 */
+  Type?: number | null;
+  /** 告警升级后下一个环节的通知渠道配置，最多可配置5个环节。 */
+  EscalateNotice?: EscalateNoticeInfo | null;
 }
 
 /** Windows事件日志采集配置 */
@@ -1168,24 +1210,32 @@ declare interface NoticeReceiver {
   ReceiverIds: number[];
   /** 通知接收渠道。- Email - 邮件- Sms - 短信- WeChat - 微信- Phone - 电话 */
   ReceiverChannels: string[];
-  /** 允许接收信息的开始时间。格式：`15:04:05`，必填。 */
+  /** 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。 */
+  NoticeContentId?: string | null;
+  /** 允许接收信息的开始时间。格式：`15:04:05`。必填 */
   StartTime?: string;
-  /** 允许接收信息的结束时间。格式：`15:04:05`，必填。 */
+  /** 允许接收信息的结束时间。格式：`15:04:05`。必填 */
   EndTime?: string;
   /** 位序。- 入参时无效。- 出参时有效。 */
   Index?: number;
-  /** 通知内容模板ID。 */
-  NoticeContentId?: string | null;
 }
 
 /** 通知规则 */
 declare interface NoticeRule {
-  /** 告警通知模板接收者信息。 */
-  NoticeReceivers?: NoticeReceiver[] | null;
-  /** 告警通知模板回调信息。 */
-  WebCallbacks?: WebCallback[] | null;
   /** 匹配规则 JSON串。**rule规则树格式为嵌套结构体JSON字符串**`{"Value":"AND","Type":"Operation","Children":[{"Value":"OR","Type":"Operation","Children":[{"Type":"Condition","Value":"Level","Children":[{"Value":"In","Type":"Compare"},{"Value":"[1,0]","Type":"Value"}]},{"Type":"Condition","Value":"Level","Children":[{"Value":"NotIn","Type":"Compare"},{"Value":"[2]","Type":"Value"}]}]}]}`**rule规则树限制规则如下**：- 顶层rule中Type可取值：`Condition`，`Operation`- Type为`Operation`的子节点支持的Type可取值：`Condition`，`Operation`- Type为`Condition`的子节点支持的Type可取值：`String`，`Compare`，`Array`，`TimeRange`，`Value`，`Key`- 其他Type无子节点- 当rule Type为`Operation`时，value可取值：`AND`，`OR`- 当rule Type为`Condition`时，value不可为空，子节点个数不能小于2 - 当子节点Type为 `Compare` 时，value可取值：`>`，`<`，`>=`，`<=`，`=`，`!=`，`Between`，`NotBetween`，`=~`，`!=~`，`In`，`NotIn` - value为`Between`，`NotBetween`时，下一个子节点value必须是长度为2的数组 - value为`=~`，`!=~`时，下一个子节点value必须是一个正则表达式 - value为`In`，`NotIn`时， 下一个子节点value必须是一个数组**业务参数含义**：- Type：Condition 表示是规则条件，Value：Level 表示告警等级 - 子节点Type支持`Compare`，Value支持`In`，`NotIn` - 下一个子节点value支持的值：0（警告），1（提醒），2 （紧急）以下示例表示：告警等级属于提醒`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Level\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]}]}`- Type：Condition 表示是规则条件，Value：NotifyType 表示通知类型 - 子节点Type支持`Compare`，Value支持`In`，`NotIn` - 下一个子节点value支持的值：1（告警通知），2 （恢复通知）以下示例表示：通知类型属于告警通知或通知类型不属于恢复通知`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[2]\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：AlarmID 表示告警策略 - 子节点Type支持`Compare`，Value支持`In`，`NotIn` - 下一个子节点value支持的值：告警策略id数组以下示例表示：告警策略属于alarm-53af048c-254b-4c73-bb48-xxx,alarm-6dfa8bc5-08da-4d64-b6cb-xxx或告警策略不属于alarm-1036314c-1e49-4cee-a8fb-xxx`"{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-53af048c-254b-4c73-bb48-xxx\\\",\\\"alarm-6dfa8bc5-08da-4d64-b6cb-xxx\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-1036314c-1e49-4cee-a8fb-xxx\\\"]\",\"Type\":\"Value\"}]}]}]}"`- Type：Condition 表示是规则条件，Value：AlarmName 表示告警策略名称 - 子节点Type支持`Compare`，Value支持`=~`，`!=~` - 下一个子节点value支持的值：必须是正则表达式以下示例表示：告警策略名称正则匹配^test$或告警策略名称正则不匹配^hahaha$`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：Label 表示告警分类字段 - 子节点Type支持`Compare`，Value支持`In`，`NotIn`，`=~`，`!=~` - 下一个子节点value支持的值：`In`，`NotIn` 时value是数组，`=~`，`!=~`时value是正则表达式以下示例表示：告警分类字段key1属于v1或告警分类字段key2不属于v2或告警分类字段key3正则匹配^test$或告警分类字段key4正则不匹配^hahaha$`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key1\",\"Type\":\"Key\"},{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v1\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key2\",\"Type\":\"Key\"},{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v2\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key3\",\"Type\":\"Key\"},{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key4\",\"Type\":\"Key\"},{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：NotifyTime 表示通知时间 - 子节点Type支持`Compare`，Value支持`Between `，`NotBetween ` - 下一个子节点value支持的值：长度为2，格式为`14:20:36`的字符串数组以下示例表示：通知时间在指定范围内14:18:36至14:33:36或通知时间不在指定范围内14:20:36至14:30:36`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"Between\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:18:36\\\",\\\"14:33:36\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"NotBetween\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:20:36\\\",\\\"14:30:36\\\"]\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：Duration 表示告警持续时间 - 子节点Type支持`Compare`，Value支持`>`，`<`，`>=`，`<=` - 下一个子节点value支持的值：整型值单位分钟以下示例表示：告警持续时间大于1分钟或告警持续时间大于等于2分钟或告警持续时间小于3分钟或告警持续时间小于等于4分钟`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">\",\"Type\":\"Compare\"},{\"Value\":1,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">=\",\"Type\":\"Compare\"},{\"Value\":2,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<\",\"Type\":\"Compare\"},{\"Value\":3,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<=\",\"Type\":\"Compare\"},{\"Value\":4,\"Type\":\"Value\"}]}]}]}` */
   Rule?: string | null;
+  /** 告警通知接收者信息。 */
+  NoticeReceivers?: NoticeReceiver[] | null;
+  /** 告警通知模板回调信息，包括企业微信、钉钉、飞书。 */
+  WebCallbacks?: WebCallback[] | null;
+  /** 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false */
+  Escalate?: boolean | null;
+  /** 告警升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1- 无人认领且未恢复：告警没有恢复并且没有人认领则升级- 未恢复：当前告警持续未恢复则升级 */
+  Type?: number | null;
+  /** 告警升级间隔。单位：分钟，范围`[1，14400]` */
+  Interval?: number | null;
+  /** 告警升级后下一个环节的通知渠道配置 */
+  EscalateNotice?: EscalateNoticeInfo | null;
 }
 
 /** Parquet内容 */
@@ -1504,22 +1554,28 @@ declare interface ValueInfo {
 
 /** 回调地址 */
 declare interface WebCallback {
-  /** 回调地址。最大支持1024个字节数。 */
-  Url: string;
-  /** 回调的类型。可选值：- WeCom- Http- DingTalk- Lark */
+  /** 回调的类型。可选值：- Http- WeCom- DingTalk- Lark */
   CallbackType: string;
-  /** 回调方法。可选值：- POST（默认值）- PUT注意：- 参数CallbackType为Http时为必选。 */
+  /** 回调地址，最大支持1024个字节。也可使用WebCallbackId引用集成配置中的URL，此时该字段请填写为空字符串。 */
+  Url: string;
+  /** 集成配置ID。 */
+  WebCallbackId?: string | null;
+  /** 回调方法。可选值：- POST（默认值）- PUT注意：- 参数CallbackType为Http时为必选，其它回调方式无需填写。 */
   Method?: string | null;
-  /** 请求头。注意：该参数已废弃，请使用NoticeContentId。 */
+  /** 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。 */
+  NoticeContentId?: string | null;
+  /** 提醒类型。0：不提醒；1：指定人；2：所有人 */
+  RemindType?: number | null;
+  /** 电话列表。 */
+  Mobiles?: string[] | null;
+  /** 用户ID列表。 */
+  UserIds?: string[] | null;
+  /** 该参数已废弃，请使用NoticeContentId。 */
   Headers?: string[] | null;
-  /** 请求内容。注意：该参数已废弃，请使用NoticeContentId。 */
+  /** 该参数已废弃，请使用NoticeContentId。 */
   Body?: string | null;
   /** 序号。- 入参无效。- 出参有效。 */
   Index?: number;
-  /** 通知内容模板ID。 */
-  NoticeContentId?: string | null;
-  /** 集成配置ID。 */
-  WebCallbackId?: string | null;
 }
 
 declare interface AddMachineGroupInfoRequest {
@@ -1597,14 +1653,24 @@ declare interface CloseKafkaConsumerResponse {
 declare interface CreateAlarmNoticeRequest {
   /** 通知渠道组名称。 */
   Name: string;
-  /** 通知类型。可选值：- Trigger - 告警触发- Recovery - 告警恢复- All - 告警触发和告警恢复 注意: - Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空- 2组rule配置互斥- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置 */
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持50个标签键值对，并且不能有重复的键值对。 */
+  Tags?: Tag[];
+  /** 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）需要发送通知的告警类型。可选值：- Trigger - 告警触发- Recovery - 告警恢复- All - 告警触发和告警恢复 */
   Type?: string;
-  /** 通知接收对象。 注意: - Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空- 2组rule配置互斥- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置 */
+  /** 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）通知接收对象。 */
   NoticeReceivers?: NoticeReceiver[];
-  /** 接口回调信息（包括企业微信）。 注意: - Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空- 2组rule配置互斥- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置 */
+  /** 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）接口回调信息（包括企业微信、钉钉、飞书）。 */
   WebCallbacks?: WebCallback[];
-  /** 通知规则。 注意: - Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空- 2组rule配置互斥- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置 */
+  /** 【高级模式】（简易模式/告警模式二选一，分别配置相应参数）通知规则。 */
   NoticeRules?: NoticeRule[];
+  /** 查询数据链接。http:// 或者 https:// 开头，不能/结尾 */
+  JumpDomain?: string;
+  /** 投递日志开关。可取值如下：1：关闭（默认值）；2：开启 投递日志开关开启时， DeliverConfig参数必填。 */
+  DeliverStatus?: number;
+  /** 投递日志配置参数。当DeliverStatus开启时，必填。 */
+  DeliverConfig?: DeliverConfig;
+  /** 免登录操作告警开关。可取值如下：- 1：关闭- 2：开启（默认值） */
+  AlarmShieldStatus?: number;
 }
 
 declare interface CreateAlarmNoticeResponse {

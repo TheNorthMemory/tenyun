@@ -1190,6 +1190,10 @@ declare interface CreateIotVideoCloudStorageRequest {
 }
 
 declare interface CreateIotVideoCloudStorageResponse {
+  /** 订单金额，单位为分 */
+  Price?: number | null;
+  /** 支付金额，单位为分 */
+  Amount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1734,6 +1738,10 @@ declare interface DescribeCloudStorageOrderResponse {
   Status?: number;
   /** 通道id */
   ChannelId?: number;
+  /** 订单金额，单位为分 */
+  Price?: number | null;
+  /** 支付金额，单位为分 */
+  Amount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

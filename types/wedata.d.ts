@@ -808,6 +808,64 @@ declare interface DataCheckStat {
   ColumnExec: number;
 }
 
+/** 获取数据服务API的发布态信息列表过滤条件 */
+declare interface DataServicePublishedApiListFilter {
+  /** 请求路径关键词筛选 */
+  PathUrl?: string;
+  /** Api名称关键词筛选 */
+  Keyword?: string;
+  /** Api认证方式筛选 0:免认证 1:应用认证 */
+  AuthTypes?: number[];
+  /** 服务Api状态 1:已上线 3:已下线 */
+  ApiStatus?: number[];
+  /** API配置方式 0:向导、1、脚本、2、注册Api */
+  ConfigTypes?: number[];
+}
+
+/** 数据服务通用排序参数 */
+declare interface DataServiceRequestListOrder {
+  /** 排序参数名称取值： CreateTime 表示按照创建时间排序 ModifyTime 表示按照更新时间排序 */
+  Name?: string;
+  /** 排序参数顺序 */
+  Direction?: string;
+}
+
+/** 数据服务入参 */
+declare interface DataServiceRequestParam {
+  /** 参数名称 */
+  ParamName: string | null;
+  /** 绑定字段 */
+  BindField: string | null;
+  /** 参数类型 */
+  ParamType: string | null;
+  /** 参数位置 */
+  ParamPosition: string | null;
+  /** 操作符 */
+  Operator: string | null;
+  /** 是否为空 */
+  NonEmpty: number | null;
+  /** 默认值 */
+  DefaultValue?: string | null;
+  /** 示例值 */
+  ExampleValue?: string | null;
+  /** 参数描述 */
+  Description?: string | null;
+}
+
+/** 数据服务入参 */
+declare interface DataServiceResponseParam {
+  /** 参数名称 */
+  ParamName: string | null;
+  /** 绑定字段 */
+  BindField: string | null;
+  /** 参数类型 */
+  ParamType: string | null;
+  /** 示例值 */
+  ExampleValue: string | null;
+  /** 参数描述 */
+  Description: string | null;
+}
+
 /** 数据源对象 */
 declare interface DataSourceInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
@@ -1064,6 +1122,72 @@ declare interface DescribeBatchOperateTaskPage {
   Items: DescribeBatchOperateTaskDTO[] | null;
   /** 总个数 */
   TotalCount?: number | null;
+}
+
+/** 查询数据服务API的发布态信息详情出参 */
+declare interface DescribeDataServicePublishedApiDetailResp {
+  /** 服务Api名称 */
+  ApiName?: string;
+  /** 服务请求Path */
+  PathUrl?: string;
+  /** 服务责任人名称 */
+  OwnerName?: string;
+  /** 服务请求方式 */
+  RequestType?: string;
+  /** 服务标签名称集合 */
+  ApiTagNames?: string | null;
+  /** 服务描述 */
+  ApiDescription?: string | null;
+  /** 服务请求返回示例 */
+  RequestExample?: string | null;
+  /** 服务请求成功返回示例 */
+  RequestSuccess?: string | null;
+  /** 服务请求失败返回示例 */
+  RequestError?: string | null;
+  /** 服务请求参数列表 */
+  RequestParam?: DataServiceRequestParam[] | null;
+  /** 服务响应参数列表 */
+  ResponseParam?: DataServiceResponseParam[] | null;
+  /** 最大qps */
+  MaxAllowQps?: number;
+  /** 最大记录数 */
+  MaxAllowPageSize?: number;
+  /** 超时时间，单位ms */
+  TimeoutPeriod?: number;
+  /** ApiId */
+  ApiId?: string | null;
+  /** 0:免认证 1:应用认证 */
+  AuthType?: number;
+  /** 请求地址 */
+  GatewayApiUrl?: string | null;
+  /** 服务Api状态 1:已上线 3:已下线 */
+  ApiStatus?: number | null;
+}
+
+/** 获取数据服务API的发布态信息列表响应内容 */
+declare interface DescribeDataServicePublishedApiListResp {
+  /** 服务id */
+  Id?: string;
+  /** 服务Api名称 */
+  ApiName?: string;
+  /** 所属目录名称 */
+  ApiFolderName?: string;
+  /** 服务Api标签名称集合 */
+  ApiTagNames?: string;
+  /** 服务负责人 */
+  OwnerName?: string;
+  /** 服务创建时间 */
+  CreateTime?: string;
+  /** Api的id */
+  ApiId?: string;
+  /** 服务Api认证方式 0:免认证 1:应用认证 */
+  AuthType?: number;
+  /** 服务Api状态 0:创建 1:已上线 2:已删除 3:已下线 */
+  ApiStatus?: number;
+  /** 配置方式 0:向导、1、脚本、2、注册Api */
+  ConfigType?: number | null;
+  /** 更新时间 */
+  ModifyTime?: string | null;
 }
 
 /** 文件夹分页信息 */
@@ -6673,6 +6797,42 @@ declare interface DescribeDataCheckStatResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataServicePublishedApiDetailRequest {
+  /** 服务Id */
+  Id: string;
+  /** 项目ID */
+  ProjectId: string;
+}
+
+declare interface DescribeDataServicePublishedApiDetailResponse {
+  /** 服务详情 */
+  Data?: DescribeDataServicePublishedApiDetailResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataServicePublishedApiListRequest {
+  /** 页码 */
+  PageNumber: number;
+  /** 每页大小 */
+  PageSize: number;
+  /** 项目ID */
+  ProjectId: string;
+  /** 查询参数 */
+  Filters?: DataServicePublishedApiListFilter;
+  /** 排序配置 */
+  OrderFields?: DataServiceRequestListOrder[];
+}
+
+declare interface DescribeDataServicePublishedApiListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 服务列表 */
+  DataSet?: DescribeDataServicePublishedApiListResp[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataSourceInfoListRequest {
   /** 项目id */
   ProjectId: string;
@@ -10658,6 +10818,10 @@ declare interface Wedata {
   DescribeColumnsMeta(data: DescribeColumnsMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeColumnsMetaResponse>;
   /** 数据质量数据监测情况接口 {@link DescribeDataCheckStatRequest} {@link DescribeDataCheckStatResponse} */
   DescribeDataCheckStat(data: DescribeDataCheckStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataCheckStatResponse>;
+  /** 查询数据服务API的发布态信息详情 {@link DescribeDataServicePublishedApiDetailRequest} {@link DescribeDataServicePublishedApiDetailResponse} */
+  DescribeDataServicePublishedApiDetail(data: DescribeDataServicePublishedApiDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataServicePublishedApiDetailResponse>;
+  /** 获取数据服务API的发布态信息列表 {@link DescribeDataServicePublishedApiListRequest} {@link DescribeDataServicePublishedApiListResponse} */
+  DescribeDataServicePublishedApiList(data: DescribeDataServicePublishedApiListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataServicePublishedApiListResponse>;
   /** 获取数据源信息 {@link DescribeDataSourceInfoListRequest} {@link DescribeDataSourceInfoListResponse} */
   DescribeDataSourceInfoList(data: DescribeDataSourceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceInfoListResponse>;
   /** 数据源管理-查询数据源分页列表 {@link DescribeDataSourceListRequest} {@link DescribeDataSourceListResponse} */

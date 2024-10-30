@@ -1010,6 +1010,14 @@ declare interface DbTable {
   TableName?: string;
 }
 
+/** 日志投递信息 */
+declare interface DeliverSummary {
+  /** 投递类型，store（存储类），mq（消息通道） */
+  DeliverType?: string | null;
+  /** 投递子类型：cls，ckafka。 */
+  DeliverSubType?: string | null;
+}
+
 /** 错误日志导出格式 */
 declare interface ErrorLogItemExport {
   /** 时间 */
@@ -1104,6 +1112,10 @@ declare interface InstanceAuditStatus {
   RealStorage?: number | null;
   /** 实例所应用的规则模板。 */
   RuleTemplateIds?: string[] | null;
+  /** 是否开启日志投递：ON，OFF */
+  Deliver?: string | null;
+  /** 日志投递类型 */
+  DeliverSummary?: DeliverSummary[] | null;
 }
 
 /** 实例日志投递信息 */

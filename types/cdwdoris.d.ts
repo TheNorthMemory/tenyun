@@ -452,6 +452,8 @@ declare interface InstanceNode {
   FeRole?: string | null;
   /** UUID */
   UUID?: string | null;
+  /** 可用区 */
+  Zone?: string | null;
 }
 
 /** 集群操作描述 */
@@ -666,9 +668,9 @@ declare interface RestoreStatus {
 
 /** 调度信息 */
 declare interface ScheduleInfo {
-  /** 生效时间 */
+  /** 生效周期 */
   EffectivePeriod?: string | null;
-  /** 调度类型：Day-天Week-周Month-月Once-单次 */
+  /** 调度类型，不传该参数时为立即执行：Day-天Week-周Month-月Once-单次 */
   ScheduleType?: string | null;
   /** 执行调度的日期。调度类型为周和月时以英文逗号分隔；调度类型为单次时，该值是个日期 */
   ScheduleData?: string | null;

@@ -6773,6 +6773,18 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyClusterImageRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 指定有效的镜像ID，格式形如img-xxxx。可通过登录控制台查询，也可调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715)，取返回信息中的ImageId字段。 */
+    ImageId: string;
+  }
+
+  interface ModifyClusterImageResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyClusterNodePoolRequest {
     /** 集群ID */
     ClusterId: string;
@@ -7857,6 +7869,8 @@ declare interface Tke {
   ModifyClusterAuthenticationOptions(data: V20180525.ModifyClusterAuthenticationOptionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterAuthenticationOptionsResponse>;
   /** 修改托管集群外网端口的安全策略 {@link V20180525.ModifyClusterEndpointSPRequest} {@link V20180525.ModifyClusterEndpointSPResponse} */
   ModifyClusterEndpointSP(data: V20180525.ModifyClusterEndpointSPRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterEndpointSPResponse>;
+  /** 修改集群镜像 {@link V20180525.ModifyClusterImageRequest} {@link V20180525.ModifyClusterImageResponse} */
+  ModifyClusterImage(data: V20180525.ModifyClusterImageRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterImageResponse>;
   /** 编辑节点池 {@link V20180525.ModifyClusterNodePoolRequest} {@link V20180525.ModifyClusterNodePoolResponse} */
   ModifyClusterNodePool(data: V20180525.ModifyClusterNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterNodePoolResponse>;
   /** 修改集群运行时配置 {@link V20180525.ModifyClusterRuntimeConfigRequest} {@link V20180525.ModifyClusterRuntimeConfigResponse} */

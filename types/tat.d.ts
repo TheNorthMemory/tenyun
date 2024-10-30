@@ -293,15 +293,15 @@ declare interface RegisterInstanceInfo {
 /** 场景详情。 */
 declare interface Scene {
   /** 场景 ID 。 */
-  SceneId?: string | null;
+  SceneId?: string;
   /** 场景名称。 */
-  SceneName?: string | null;
+  SceneName?: string;
   /** 场景创建者。 */
-  CreatedBy?: string | null;
+  CreatedBy?: string;
   /** 创建时间。 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** 更新时间。 */
-  UpdatedTime?: string | null;
+  UpdatedTime?: string;
 }
 
 /** 周期执行器设置。 */
@@ -407,7 +407,7 @@ declare interface CreateInvokerRequest {
 
 declare interface CreateInvokerResponse {
   /** 执行器ID。 */
-  InvokerId: string;
+  InvokerId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -487,7 +487,7 @@ declare interface DeleteRegisterInstanceResponse {
 declare interface DescribeAutomationAgentStatusRequest {
   /** 待查询的实例ID列表。 */
   InstanceIds?: string[];
-  /** 过滤条件。 agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。 environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。 instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。 */
+  /** agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
@@ -577,9 +577,9 @@ declare interface DescribeInvokerRecordsRequest {
 
 declare interface DescribeInvokerRecordsResponse {
   /** 符合条件的历史记录数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 执行器执行历史记录。 */
-  InvokerRecordSet: InvokerRecord[];
+  InvokerRecordSet?: InvokerRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

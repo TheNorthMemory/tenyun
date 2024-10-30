@@ -82,6 +82,12 @@ declare interface Event {
   Location?: string;
 }
 
+/** 跟踪集数据投递筛选条件 */
+declare interface Filter {
+  /** 资源筛选条件 */
+  ResourceFields?: ResourceField[] | null;
+}
+
 /** CMK属性 */
 declare interface KeyMetadata {
   /** 作为密钥更容易辨识，更容易被人看懂的别名 */
@@ -104,6 +110,16 @@ declare interface Resource {
   ResourceType?: string | null;
   /** 资源名称 */
   ResourceName?: string | null;
+}
+
+/** 资源筛选条件 */
+declare interface ResourceField {
+  /** 跟踪事件所属产品（支持全部产品或单个产品，如：cam，全部：*） */
+  ResourceType: string | null;
+  /** 跟踪事件类型（读：Read；写：Write；全部：*） */
+  ActionType: string | null;
+  /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：[""]；指定ResourceType时，支持全部接口：[""]；支持部分接口：["cos", "cls"]，接口列表上限10个） */
+  EventNames: string[] | null;
 }
 
 /** 跟踪集存储信息 */
@@ -142,42 +158,6 @@ declare interface Tracks {
   TrackId: number;
 }
 
-declare interface CreateAuditRequest {
-  /** 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。 */
-  IsEnableCmqNotify: number;
-  /** 管理事件的读写属性。1：只读，2：只写，3：全部。 */
-  ReadWriteAttribute: number;
-  /** 跟踪集名称。3-128字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9，下划线 _。 */
-  AuditName: string;
-  /** cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。 */
-  CosRegion: string;
-  /** 是否创建新的cos存储桶。1：是，0：否。 */
-  IsCreateNewBucket: number;
-  /** cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。 */
-  CosBucketName: string;
-  /** CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。 */
-  KeyId?: string;
-  /** 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。 */
-  CmqQueueName?: string;
-  /** kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。 */
-  KmsRegion?: string;
-  /** 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。 */
-  IsEnableKmsEncry?: number;
-  /** 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。 */
-  CmqRegion?: string;
-  /** 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。可以不填，默认以账号ID作为日志前缀。 */
-  LogFilePrefix?: string;
-  /** 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。 */
-  IsCreateNewQueue?: number;
-}
-
-declare interface CreateAuditResponse {
-  /** 是否创建成功。 */
-  IsSuccess: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateAuditTrackRequest {
   /** 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符 */
   Name: string;
@@ -202,14 +182,22 @@ declare interface CreateAuditTrackResponse {
   RequestId?: string;
 }
 
-declare interface DeleteAuditRequest {
-  /** 跟踪集名称 */
-  AuditName: string;
+declare interface CreateEventsAuditTrackRequest {
+  /** 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符 */
+  Name: string;
+  /** 跟踪集状态（未开启：0；开启：1） */
+  Status: number;
+  /** 数据投递存储（目前支持 cos、cls） */
+  Storage: Storage;
+  /** 数据过滤条件 */
+  Filters: Filter;
+  /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
+  TrackForAllMembers?: number;
 }
 
-declare interface DeleteAuditResponse {
-  /** 是否删除成功 */
-  IsSuccess: number;
+declare interface CreateEventsAuditTrackResponse {
+  /** 跟踪集 ID */
+  TrackId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -282,6 +270,8 @@ declare interface DescribeAuditTrackResponse {
   CreateTime?: string;
   /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号 */
   TrackForAllMembers?: number | null;
+  /** 数据投递过滤条件 */
+  Filters?: Filter | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -454,6 +444,26 @@ declare interface ModifyAuditTrackResponse {
   RequestId?: string;
 }
 
+declare interface ModifyEventsAuditTrackRequest {
+  /** 跟踪集 ID */
+  TrackId: number;
+  /** 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符 */
+  Name?: string;
+  /** 跟踪集状态（未开启：0；开启：1） */
+  Status?: number;
+  /** 数据投递存储（目前支持 cos、cls） */
+  Storage?: Storage;
+  /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
+  TrackForAllMembers?: number;
+  /** 多产品筛选过滤条件 */
+  Filters?: Filter;
+}
+
+declare interface ModifyEventsAuditTrackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartLoggingRequest {
   /** 跟踪集名称 */
   AuditName: string;
@@ -517,12 +527,10 @@ declare interface UpdateAuditResponse {
 /** {@link Cloudaudit 操作审计} */
 declare interface Cloudaudit {
   (): Versions;
-  /** 创建跟踪集 {@link CreateAuditRequest} {@link CreateAuditResponse} */
-  CreateAudit(data: CreateAuditRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditResponse>;
   /** 创建操作审计跟踪集 {@link CreateAuditTrackRequest} {@link CreateAuditTrackResponse} */
   CreateAuditTrack(data: CreateAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTrackResponse>;
-  /** 删除跟踪集 {@link DeleteAuditRequest} {@link DeleteAuditResponse} */
-  DeleteAudit(data: DeleteAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditResponse>;
+  /** 创建操作审计跟踪集（多事件） {@link CreateEventsAuditTrackRequest} {@link CreateEventsAuditTrackResponse} */
+  CreateEventsAuditTrack(data: CreateEventsAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEventsAuditTrackResponse>;
   /** 删除操作审计跟踪集 {@link DeleteAuditTrackRequest} {@link DeleteAuditTrackResponse} */
   DeleteAuditTrack(data: DeleteAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditTrackResponse>;
   /** 查询跟踪集详情 {@link DescribeAuditRequest} {@link DescribeAuditResponse} */
@@ -549,6 +557,8 @@ declare interface Cloudaudit {
   LookUpEvents(data: LookUpEventsRequest, config?: AxiosRequestConfig): AxiosPromise<LookUpEventsResponse>;
   /** 修改操作审计跟踪集 {@link ModifyAuditTrackRequest} {@link ModifyAuditTrackResponse} */
   ModifyAuditTrack(data: ModifyAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditTrackResponse>;
+  /** 修改操作审计跟踪集（多事件） {@link ModifyEventsAuditTrackRequest} {@link ModifyEventsAuditTrackResponse} */
+  ModifyEventsAuditTrack(data: ModifyEventsAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEventsAuditTrackResponse>;
   /** 开启跟踪集 {@link StartLoggingRequest} {@link StartLoggingResponse} */
   StartLogging(data: StartLoggingRequest, config?: AxiosRequestConfig): AxiosPromise<StartLoggingResponse>;
   /** 关闭跟踪集 {@link StopLoggingRequest} {@link StopLoggingResponse} */

@@ -865,15 +865,15 @@ declare interface DirectConnectGateway {
 /** 专线网关云联网路由（IDC网段）对象 */
 declare interface DirectConnectGatewayCcnRoute {
   /** 路由ID。 */
-  RouteId: string;
+  RouteId?: string;
   /** IDC网段。 */
-  DestinationCidrBlock: string;
+  DestinationCidrBlock?: string;
   /** `BGP`的`AS-Path`属性。 */
-  ASPath: string[];
+  ASPath?: string[];
   /** 备注 */
-  Description: string;
+  Description?: string;
   /** 最后更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** IDC子网信息 */
@@ -1506,22 +1506,22 @@ declare interface NatGatewayAddress {
 declare interface NatGatewayDestinationIpPortTranslationNatRule {
   /** 网络协议，可选值：`TCP`、`UDP`。 */
   IpProtocol?: string;
-  /** 弹性IP。 */
-  PublicIpAddress: string;
+  /** 弹性公网IP。 */
+  PublicIpAddress?: string;
   /** 公网端口。 */
-  PublicPort: number;
+  PublicPort?: number;
   /** 内网地址。 */
-  PrivateIpAddress: string;
+  PrivateIpAddress?: string;
   /** 内网端口。 */
-  PrivatePort: number;
+  PrivatePort?: number;
   /** NAT网关转发规则描述。 */
   Description?: string;
   /** NAT网关的ID。 */
-  NatGatewayId: string | null;
+  NatGatewayId?: string | null;
   /** 私有网络VPC的ID。 */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** NAT网关转发规则创建时间。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
 }
 
 /** NAT地域地区对象 */
@@ -2208,7 +2208,7 @@ declare interface SecurityGroupPolicy {
   AddressTemplate?: AddressTemplateSpecification | null;
   /** ACCEPT 或 DROP。 */
   Action?: string | null;
-  /** 安全组规则描述。 */
+  /** 安全组规则描述。作为入参时，当未传递该参数或值为空，且参数CidrBlock或Ipv6CidrBlock值为MY_PUBLIC_IP时，该参数的值将会被自动填充为Replaced-From-MY_PUBLIC_IP。 */
   PolicyDescription?: string | null;
   /** 安全组最近修改时间。 */
   ModifyTime?: string | null;
@@ -4491,6 +4491,8 @@ declare interface DeleteDirectConnectGatewayCcnRoutesRequest {
   DirectConnectGatewayId: string;
   /** 路由ID。形如：ccnr-f49l6u0z。 */
   RouteIds: string[];
+  /** 地址类型，支持：IPv4、IPv6。默认IPv4。 */
+  AddressType?: string;
 }
 
 declare interface DeleteDirectConnectGatewayCcnRoutesResponse {
@@ -5429,6 +5431,8 @@ declare interface DescribeDirectConnectGatewayCcnRoutesRequest {
   DirectConnectGatewayId: string;
   /** 云联网路由学习类型，可选值：`BGP` - 自动学习。`STATIC` - 静态，即用户配置，默认值。 */
   CcnRouteType?: string;
+  /** 地址类型，支持：IPv4、IPv6。默认IPv4。 */
+  AddressType?: string;
   /** 偏移量。 */
   Offset?: number;
   /** 返回数量。 */
@@ -5437,9 +5441,9 @@ declare interface DescribeDirectConnectGatewayCcnRoutesRequest {
 
 declare interface DescribeDirectConnectGatewayCcnRoutesResponse {
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 云联网路由（IDC网段）列表。 */
-  RouteSet: DirectConnectGatewayCcnRoute[];
+  RouteSet?: DirectConnectGatewayCcnRoute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7420,6 +7424,18 @@ declare interface ModifyAddressesBandwidthResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAddressesRenewFlagRequest {
+  /** EIP唯一标识ID列表，形如'eip-xxxx' */
+  AddressIds: string[];
+  /** 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费 DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费 若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 示例值：NOTIFY_AND_AUTO_RENEW */
+  RenewFlag: string;
+}
+
+declare interface ModifyAddressesRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAssistantCidrRequest {
   /** `VPC`实例`ID`。形如：`vpc-6v2ht8q5`。 */
   VpcId: string;
@@ -8405,6 +8421,8 @@ declare interface ReplaceDirectConnectGatewayCcnRoutesRequest {
   DirectConnectGatewayId: string;
   /** 需要连通的IDC网段列表 */
   Routes: DirectConnectGatewayCcnRoute[];
+  /** 地址类型，支持：IPv4、IPv6。默认IPv4。 */
+  AddressType?: string;
 }
 
 declare interface ReplaceDirectConnectGatewayCcnRoutesResponse {
@@ -9277,6 +9295,8 @@ declare interface Vpc {
   ModifyAddressTemplateGroupAttribute(data: ModifyAddressTemplateGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressTemplateGroupAttributeResponse>;
   /** 调整弹性公网IP带宽 {@link ModifyAddressesBandwidthRequest} {@link ModifyAddressesBandwidthResponse} */
   ModifyAddressesBandwidth(data: ModifyAddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressesBandwidthResponse>;
+  /** 调整包月IP续费标识 {@link ModifyAddressesRenewFlagRequest} {@link ModifyAddressesRenewFlagResponse} */
+  ModifyAddressesRenewFlag(data: ModifyAddressesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressesRenewFlagResponse>;
   /** 修改辅助CIDR {@link ModifyAssistantCidrRequest} {@link ModifyAssistantCidrResponse} */
   ModifyAssistantCidr(data: ModifyAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssistantCidrResponse>;
   /** 修改带宽包属性 {@link ModifyBandwidthPackageAttributeRequest} {@link ModifyBandwidthPackageAttributeResponse} */

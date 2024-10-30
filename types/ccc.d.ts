@@ -14,6 +14,20 @@ declare interface ActiveCarrierPrivilegeNumber {
   CreateTime?: number;
 }
 
+/** 语音转文本信息 */
+declare interface AsrData {
+  /** 用户方 */
+  User?: string;
+  /** 消息内容 */
+  Message?: string;
+  /** 时间戳 */
+  Timestamp?: number;
+  /** 句子开始时间，Unix 毫秒时间戳 */
+  Start?: number | null;
+  /** 句子结束时间，Unix 毫秒时间戳 */
+  End?: number | null;
+}
+
 /** 音频文件审核信息 */
 declare interface AudioFileInfo {
   /** 文件ID */
@@ -304,10 +318,18 @@ declare interface IMSatisfaction {
 
 /** ivr 按键信息 */
 declare interface IVRKeyPressedElement {
-  /** 按键 */
-  Key: string | null;
+  /** 命中的关键字或者按键 */
+  Key?: string | null;
   /** 按键关联的标签 */
-  Label: string | null;
+  Label?: string | null;
+  /** Unix 毫秒时间戳 */
+  Timestamp?: number | null;
+  /** 节点标签 */
+  NodeLabel?: string | null;
+  /** 用户原始输入 */
+  OriginalContent?: string | null;
+  /** TTS 提示音内容 */
+  TTSPrompt?: string | null;
 }
 
 /** 单条消息 */
@@ -799,7 +821,7 @@ declare interface CreateAICallRequest {
   Model: string;
   /** API密钥 */
   APIKey: string;
-  /** API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions；llmType为azure时,URL填写格式需为：https://{your-resource-name}.openai.azure.com?api-version={api-version},填写url时后缀不要带/openai/deployments/{deployment-id}/chat/completions，系统会自动帮你填充后缀 */
+  /** API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions；llmType为azure时,URL填写格式需为：https://{your-resource-name}.openai.azure.com?api-version={api-version},填写url时后缀不要带/openai/deployments/{deployment-id}/chat/completions，系统会自动帮您填充后缀 */
   APIUrl: string;
   /** 音色，目前仅支持以下音色:汉语：ZhiMei：智美，客服女声ZhiXi： 智希 通用女声ZhiQi：智琪 客服女声ZhiTian：智甜 女童声AiXiaoJing：爱小静 对话女声英语:WeRose：英文女声Monika：英文女声日语：Nanami韩语：SunHi印度尼西亚语(印度尼西亚)：Gadis马来语（马来西亚）:Yasmin 泰米尔语（马来西亚）:Kani泰语（泰国）:Achara越南语(越南):HoaiMy */
   VoiceType?: string;
@@ -885,7 +907,7 @@ declare interface CreateAutoCalloutTaskResponse {
 }
 
 declare interface CreateCCCSkillGroupRequest {
-  /** 应用 ID（必填） */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 技能组名称 */
   SkillGroupName: string;
@@ -929,7 +951,7 @@ declare interface CreateCallOutSessionResponse {
 }
 
 declare interface CreateCarrierPrivilegeNumberApplicantRequest {
-  /** SdkAppId */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 主叫号码，必须为实例中存在的号码，格式为0086xxxx（暂时只支持国内号码） */
   Callers: string[];
@@ -1145,7 +1167,7 @@ declare interface DeleteStaffResponse {
 }
 
 declare interface DescribeActiveCarrierPrivilegeNumberRequest {
-  /** 实例Id */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 默认0 */
   PageNumber?: number;
@@ -1253,7 +1275,7 @@ declare interface DescribeCallInMetricsResponse {
 }
 
 declare interface DescribeCarrierPrivilegeNumberApplicantsRequest {
-  /** 实例Id */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 默认0，从0开始 */
   PageNumber?: number;
@@ -1706,6 +1728,20 @@ declare interface DescribeTelCdrResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTelRecordAsrRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 会话 ID */
+  SessionId: string;
+}
+
+declare interface DescribeTelRecordAsrResponse {
+  /** 录音转文本信息 */
+  AsrDataList?: AsrData[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTelSessionRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1807,7 +1843,7 @@ declare interface ModifyStaffPasswordResponse {
 }
 
 declare interface ModifyStaffRequest {
-  /** 应用ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 座席账户 */
   Email: string;
@@ -1911,7 +1947,7 @@ declare interface UnbindStaffSkillGroupListResponse {
 }
 
 declare interface UpdateCCCSkillGroupRequest {
-  /** 应用 ID（必填） */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 技能组ID */
   SkillGroupID: number;
@@ -2071,6 +2107,8 @@ declare interface Ccc {
   DescribeTelCallInfo(data: DescribeTelCallInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelCallInfoResponse>;
   /** 获取电话服务记录与录音 {@link DescribeTelCdrRequest} {@link DescribeTelCdrResponse} */
   DescribeTelCdr(data: DescribeTelCdrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelCdrResponse>;
+  /** 拉取会话录音转文本信息 {@link DescribeTelRecordAsrRequest} {@link DescribeTelRecordAsrResponse} */
+  DescribeTelRecordAsr(data: DescribeTelRecordAsrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelRecordAsrResponse>;
   /** 获取 PSTN 会话信息 {@link DescribeTelSessionRequest} {@link DescribeTelSessionResponse} */
   DescribeTelSession(data: DescribeTelSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelSessionResponse>;
   /** 停用号码 {@link DisableCCCPhoneNumberRequest} {@link DisableCCCPhoneNumberResponse} */

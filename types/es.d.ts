@@ -366,6 +366,18 @@ declare interface EsPublicAcl {
   WhiteIpList?: string[];
 }
 
+/** 索引备份失败的数据结构 */
+declare interface Failures {
+  /** 备份失败的索引名称 */
+  Index?: string | null;
+  /** 快照失败的分片号 */
+  ShardId?: number | null;
+  /** 快照失败的原因 */
+  Reason?: string | null;
+  /** 快照失败的状态 */
+  Status?: string | null;
+}
+
 /** 索引元数据字段 */
 declare interface IndexMetaField {
   /** 索引类型 */
@@ -1242,6 +1254,36 @@ declare interface SettingDetail {
   Advise: string;
 }
 
+/** 集群快照数据结构 */
+declare interface Snapshots {
+  /** 快照名称 */
+  SnapshotName?: string | null;
+  /** 快照Uuid */
+  Uuid?: string | null;
+  /** 该快照所属集群的版本号 */
+  Version?: string | null;
+  /** 备份的索引列表 */
+  Indices?: string[] | null;
+  /** 备份的datastream列表 */
+  DataStreams?: string[] | null;
+  /** 备份的状态FAILED 备份失败IN_PROGRESS 备份执行中PARTIAL 备份部分成功，部分失败，备份失败的索引和原因会在Failures字段中展示SUCCESS 备份成功 */
+  State?: string | null;
+  /** 快照备份的开始时间 */
+  StartTime?: string | null;
+  /** 快照备份的结束时间 */
+  EndTime?: string | null;
+  /** 快照备份的耗时时间 */
+  DurationInMillis?: number | null;
+  /** 备份的总分片数 */
+  TotalShards?: number | null;
+  /** 备份失败的分片数量 */
+  FailedShards?: number | null;
+  /** 备份成功的分片数量 */
+  SuccessfulShards?: number | null;
+  /** 备份失败的索引分片和失败原因 */
+  Failures?: Failures[] | null;
+}
+
 /** 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项） */
 declare interface SubTaskDetail {
   /** 子任务名 */
@@ -1340,6 +1382,22 @@ declare interface CheckMigrateIndexMetaDataResponse {
   MappingTimeTypeCheckFailedIndexArr?: string[];
   /** 索引的创建时间不在 serverless的存储周期内 */
   SettingCheckFailedIndexArr?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateClusterSnapshotRequest {
+  /** 实例名称 */
+  InstanceId: string;
+  /** 快照名称 */
+  SnapshotName: string;
+  /** 索引名称 */
+  Indices?: string;
+}
+
+declare interface CreateClusterSnapshotResponse {
+  /** 实例名称 */
+  InstanceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1584,6 +1642,22 @@ declare interface CreateServerlessSpaceV2Response {
   RequestId?: string;
 }
 
+declare interface DeleteClusterSnapshotRequest {
+  /** 集群实例Id，格式：es-xxxx */
+  InstanceId: string;
+  /** 快照仓库名称 */
+  RepositoryName: string;
+  /** 集群快照名称 */
+  SnapshotName: string;
+}
+
+declare interface DeleteClusterSnapshotResponse {
+  /** 集群id */
+  InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteIndexRequest {
   /** ES集群ID */
   InstanceId: string;
@@ -1654,6 +1728,26 @@ declare interface DeleteServerlessSpaceUserRequest {
 }
 
 declare interface DeleteServerlessSpaceUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterSnapshotRequest {
+  /** 集群实例Id，格式：es-xxxx */
+  InstanceId: string;
+  /** 快照仓库名称 */
+  RepositoryName?: string;
+  /** 集群快照名称 */
+  SnapshotName?: string;
+}
+
+declare interface DescribeClusterSnapshotResponse {
+  /** 集群实例Id，格式：es-xxxx */
+  InstanceId?: string;
+  /** 快照备份详情列表 */
+  Snapshots?: Snapshots[];
+  /** 快照仓库名称 */
+  RepositoryName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2254,6 +2348,34 @@ declare interface RestartNodesResponse {
   RequestId?: string;
 }
 
+declare interface RestoreClusterSnapshotRequest {
+  /** 集群实例Id，格式：es-xxxx */
+  InstanceId: string;
+  /** 仓库名称 */
+  RepositoryName: string;
+  /** 集群快照名称 */
+  SnapshotName: string;
+  /** 目标集群实例Id，格式：es-xxxx，如果是恢复到本地，则和InstanceId一致 */
+  TargetInstanceId: string;
+  /** elastic用户名对应的密码信息 */
+  Password?: string;
+  /** 要在所有恢复的索引中添加或更改的设置的逗号分隔列表。使用此参数可以在恢复快照时覆盖索引设置。 */
+  IndexSettings?: string;
+  /** 不应从快照还原的以逗号分隔的索引设置列表。 */
+  IncludeGlobalState?: string[];
+  /** 需要恢复的索引名称，非必填，为空则表示恢复所有支持传多个索引名称 */
+  Indices?: string;
+  /** 如果为 false，则如果快照中包含的一个或多个索引没有所有主分片可用，则整个恢复操作将失败。默认为 false,如果为 true，则允许恢复具有不可用分片的索引的部分快照。只有成功包含在快照中的分片才会被恢复。所有丢失的碎片将被重新创建为空 */
+  Partial?: string;
+}
+
+declare interface RestoreClusterSnapshotResponse {
+  /** 集群实例id */
+  InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SaveAndDeployLogstashPipelineRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2633,6 +2755,8 @@ declare interface Es {
   (): Versions;
   /** 检查cos迁移索引元数据 {@link CheckMigrateIndexMetaDataRequest} {@link CheckMigrateIndexMetaDataResponse} */
   CheckMigrateIndexMetaData(data: CheckMigrateIndexMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckMigrateIndexMetaDataResponse>;
+  /** 创建集群快照 {@link CreateClusterSnapshotRequest} {@link CreateClusterSnapshotResponse} */
+  CreateClusterSnapshot(data: CreateClusterSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterSnapshotResponse>;
   /** cos迁移流程 {@link CreateCosMigrateToServerlessInstanceRequest} {@link CreateCosMigrateToServerlessInstanceResponse} */
   CreateCosMigrateToServerlessInstance(data: CreateCosMigrateToServerlessInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosMigrateToServerlessInstanceResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
@@ -2645,6 +2769,8 @@ declare interface Es {
   CreateServerlessInstance(data: CreateServerlessInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessInstanceResponse>;
   /** 创建Serverless索引项目空间(new) {@link CreateServerlessSpaceV2Request} {@link CreateServerlessSpaceV2Response} */
   CreateServerlessSpaceV2(data: CreateServerlessSpaceV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessSpaceV2Response>;
+  /** 删除快照仓库里备份的快照 {@link DeleteClusterSnapshotRequest} {@link DeleteClusterSnapshotResponse} */
+  DeleteClusterSnapshot(data: DeleteClusterSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterSnapshotResponse>;
   /** 删除索引 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
   /** 销毁ES集群实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
@@ -2657,6 +2783,8 @@ declare interface Es {
   DeleteServerlessInstance(data: DeleteServerlessInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessInstanceResponse>;
   /** 删除Serverless空间子用户 {@link DeleteServerlessSpaceUserRequest} {@link DeleteServerlessSpaceUserResponse} */
   DeleteServerlessSpaceUser(data: DeleteServerlessSpaceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessSpaceUserResponse>;
+  /** 获取快照备份列表 {@link DescribeClusterSnapshotRequest} {@link DescribeClusterSnapshotResponse} */
+  DescribeClusterSnapshot(data: DescribeClusterSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterSnapshotResponse>;
   /** 查询智能运维诊断结果报告 {@link DescribeDiagnoseRequest} {@link DescribeDiagnoseResponse} */
   DescribeDiagnose(data: DescribeDiagnoseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseResponse>;
   /** 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
@@ -2713,6 +2841,8 @@ declare interface Es {
   RestartLogstashInstance(data: RestartLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartLogstashInstanceResponse>;
   /** 重启集群节点 {@link RestartNodesRequest} {@link RestartNodesResponse} */
   RestartNodes(data: RestartNodesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartNodesResponse>;
+  /** 快照备份恢复 {@link RestoreClusterSnapshotRequest} {@link RestoreClusterSnapshotResponse} */
+  RestoreClusterSnapshot(data: RestoreClusterSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreClusterSnapshotResponse>;
   /** 保存并部署管道 {@link SaveAndDeployLogstashPipelineRequest} {@link SaveAndDeployLogstashPipelineResponse} */
   SaveAndDeployLogstashPipeline(data: SaveAndDeployLogstashPipelineRequest, config?: AxiosRequestConfig): AxiosPromise<SaveAndDeployLogstashPipelineResponse>;
   /** 启动Logstash管道 {@link StartLogstashPipelinesRequest} {@link StartLogstashPipelinesResponse} */

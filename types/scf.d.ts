@@ -60,6 +60,12 @@ declare interface AsyncTriggerConfig {
   MsgTTL: number;
 }
 
+/** 证书配置 */
+declare interface CertConf {
+  /** ssl证书ID */
+  CertificateId?: string | null;
+}
+
 /** 文件系统(cfs)配置描述 */
 declare interface CfsConfig {
   /** 文件系统信息列表 */
@@ -132,6 +138,20 @@ declare interface DeadLetterConfig {
   FilterType?: string;
 }
 
+/** 云函数自定义域名详情 */
+declare interface DomainInfo {
+  /** 域名，不支持泛域名 */
+  Domain: string;
+  /** 协议，取值范围：HTTP, HTTPS, HTTP&HTTPS */
+  Protocol?: string;
+  /** 路由配置信息 */
+  EndpointsConfig?: EndpointsConf[] | null;
+  /** 证书配置信息，HTTPS协议必传路由配置 */
+  CertConfig?: CertConf | null;
+  /** web 应用防火墙配置 */
+  WafConfig?: WafConf | null;
+}
+
 /** 公网访问固定ip配置 */
 declare interface EipConfigIn {
   /** Eip开启状态，取值['ENABLE','DISABLE'] */
@@ -152,6 +172,20 @@ declare interface EipOutConfig {
   EipFixed: string;
   /** IP列表 */
   Eips: string[];
+}
+
+/** 后端路由配置信息 */
+declare interface EndpointsConf {
+  /** 函数命名空间 */
+  Namespace: string | null;
+  /** 函数名 */
+  FunctionName: string | null;
+  /** 函数别名或版本 */
+  Qualifier: string | null;
+  /** 路径,取值规范：/，/*，/xxx，/xxx/a，/xxx/*" */
+  PathMatch: string | null;
+  /** 路径重写策略 */
+  PathRewrite?: PathRewriteRule[] | null;
 }
 
 /** 函数的环境变量参数 */
@@ -448,6 +482,16 @@ declare interface NamespaceUsage {
   TotalAllocatedProvisionedMem: number | null;
 }
 
+/** 路径路由重写规则 */
+declare interface PathRewriteRule {
+  /** 需要重路由的路径，取值规范：/，/*，/xxx，/xxx/a，/xxx/* */
+  Path: string | null;
+  /** 匹配规，取值范围： WildcardRules 通配符匹配， ExactRules 精确匹配 */
+  Type: string | null;
+  /** 替换值：比如/, /$ */
+  Rewrite: string | null;
+}
+
 /** HTTP函数支持其他访问协议的参数 */
 declare interface ProtocolParams {
   /** WebSockets协议支持的参数 */
@@ -728,6 +772,14 @@ declare interface WSParams {
   IdleTimeOut?: number | null;
 }
 
+/** web应用防火墙配置信息 */
+declare interface WafConf {
+  /** web应用防火墙是否打开， 取值范围:OPEN, CLOSE */
+  WafOpen?: string | null;
+  /** web应用防火墙实例ID */
+  WafInstanceId?: string | null;
+}
+
 declare interface CopyFunctionRequest {
   /** 要复制的函数的名称 */
   FunctionName: string;
@@ -768,6 +820,24 @@ declare interface CreateAliasRequest {
 }
 
 declare interface CreateAliasResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCustomDomainRequest {
+  /** 域名，不支持泛域名 */
+  Domain: string;
+  /** 协议，取值范围：HTTP, HTTPS, HTTP&HTTPS */
+  Protocol: string;
+  /** 路由配置 */
+  EndpointsConfig: EndpointsConf[];
+  /** 证书配置信息，HTTPS协议必穿 */
+  CertConfig?: CertConf;
+  /** web 应用防火墙配置 */
+  WafConfig?: WafConf;
+}
+
+declare interface CreateCustomDomainResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -894,6 +964,16 @@ declare interface DeleteAliasRequest {
 }
 
 declare interface DeleteAliasResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCustomDomainRequest {
+  /** 域名 */
+  Domain?: string;
+}
+
+declare interface DeleteCustomDomainResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1026,6 +1106,26 @@ declare interface GetAsyncEventStatusRequest {
 declare interface GetAsyncEventStatusResponse {
   /** 异步事件状态 */
   Result?: AsyncEventStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetCustomDomainRequest {
+  /** 域名 */
+  Domain?: string;
+}
+
+declare interface GetCustomDomainResponse {
+  /** 域名 */
+  Domain?: string;
+  /** 协议 */
+  Protocol?: string;
+  /** 路由配置 */
+  EndpointsConfig?: EndpointsConf[];
+  /** 证书配置信息 */
+  CertConfig?: CertConf;
+  /** web 应用防火墙配置 */
+  WafConfig?: WafConf;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1400,6 +1500,28 @@ declare interface ListAsyncEventsResponse {
   RequestId?: string;
 }
 
+declare interface ListCustomDomainsRequest {
+  /** 偏移量，默认0 */
+  Offset?: number;
+  /** 容量，默认20 */
+  Limit?: number;
+  /** 取值范围：AddTime，ModTime， 默认AddTime */
+  OrderBy?: string;
+  /** 取值范围：DESC, ASC 默认DESC */
+  Order?: string;
+  /** 过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface ListCustomDomainsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 域名列表信息 */
+  Domains?: DomainInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListFunctionsRequest {
   /** 以升序还是降序的方式返回结果，可选值 ASC 和 DESC */
   Order?: string;
@@ -1676,6 +1798,24 @@ declare interface UpdateAliasResponse {
   RequestId?: string;
 }
 
+declare interface UpdateCustomDomainRequest {
+  /** 自定义域名 */
+  Domain: string;
+  /** 协议，取值范围：HTTP, HTTPS, HTTP&HTTPS */
+  Protocol?: string;
+  /** 证书配置信息，HTTPS协议必穿 */
+  CertConfig?: CertConf;
+  /** web 应用防火墙配置 */
+  WafConfig?: WafConf;
+  /** 路由配置 */
+  EndpointsConfig?: EndpointsConf[];
+}
+
+declare interface UpdateCustomDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateFunctionCodeRequest {
   /** 要修改的函数名称 */
   FunctionName: string;
@@ -1845,6 +1985,8 @@ declare interface Scf {
   CopyFunction(data: CopyFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CopyFunctionResponse>;
   /** 创建函数版本别名 {@link CreateAliasRequest} {@link CreateAliasResponse} */
   CreateAlias(data: CreateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasResponse>;
+  /** 创建云函数自定义域名 {@link CreateCustomDomainRequest} {@link CreateCustomDomainResponse} */
+  CreateCustomDomain(data: CreateCustomDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomDomainResponse>;
   /** 创建函数 {@link CreateFunctionRequest} {@link CreateFunctionResponse} */
   CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
   /** 创建命名空间 {@link CreateNamespaceRequest} {@link CreateNamespaceResponse} */
@@ -1853,6 +1995,8 @@ declare interface Scf {
   CreateTrigger(data: CreateTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerResponse>;
   /** 删除别名 {@link DeleteAliasRequest} {@link DeleteAliasResponse} */
   DeleteAlias(data: DeleteAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasResponse>;
+  /** 删除云函数自定义域名 {@link DeleteCustomDomainRequest} {@link DeleteCustomDomainResponse} */
+  DeleteCustomDomain(data?: DeleteCustomDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomDomainResponse>;
   /** 删除函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
   /** 删除层版本 {@link DeleteLayerVersionRequest} {@link DeleteLayerVersionResponse} */
@@ -1871,6 +2015,8 @@ declare interface Scf {
   GetAlias(data: GetAliasRequest, config?: AxiosRequestConfig): AxiosPromise<GetAliasResponse>;
   /** 获取函数异步事件状态 {@link GetAsyncEventStatusRequest} {@link GetAsyncEventStatusResponse} */
   GetAsyncEventStatus(data: GetAsyncEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsyncEventStatusResponse>;
+  /** 查看云函数自定义域名详情 {@link GetCustomDomainRequest} {@link GetCustomDomainResponse} */
+  GetCustomDomain(data?: GetCustomDomainRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomDomainResponse>;
   /** 获取函数详细信息 {@link GetFunctionRequest} {@link GetFunctionResponse} */
   GetFunction(data?: GetFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionResponse>;
   /** 获取函数代码下载地址 {@link GetFunctionAddressRequest} {@link GetFunctionAddressResponse} */
@@ -1895,6 +2041,8 @@ declare interface Scf {
   ListAliases(data: ListAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAliasesResponse>;
   /** 拉取函数异步事件列表 {@link ListAsyncEventsRequest} {@link ListAsyncEventsResponse} */
   ListAsyncEvents(data: ListAsyncEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAsyncEventsResponse>;
+  /** 获取云函数自定义域名列表 {@link ListCustomDomainsRequest} {@link ListCustomDomainsResponse} */
+  ListCustomDomains(data?: ListCustomDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCustomDomainsResponse>;
   /** 获取函数列表 {@link ListFunctionsRequest} {@link ListFunctionsResponse} */
   ListFunctions(data?: ListFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFunctionsResponse>;
   /** 获取层版本列表 {@link ListLayerVersionsRequest} {@link ListLayerVersionsResponse} */
@@ -1921,6 +2069,8 @@ declare interface Scf {
   TerminateAsyncEvent(data: TerminateAsyncEventRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateAsyncEventResponse>;
   /** 更新别名的配置 {@link UpdateAliasRequest} {@link UpdateAliasResponse} */
   UpdateAlias(data: UpdateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAliasResponse>;
+  /** 更新云函数自定义域名 {@link UpdateCustomDomainRequest} {@link UpdateCustomDomainResponse} */
+  UpdateCustomDomain(data: UpdateCustomDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomDomainResponse>;
   /** 更新函数代码 {@link UpdateFunctionCodeRequest} {@link UpdateFunctionCodeResponse} */
   UpdateFunctionCode(data: UpdateFunctionCodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionCodeResponse>;
   /** 更新函数配置 {@link UpdateFunctionConfigurationRequest} {@link UpdateFunctionConfigurationResponse} */

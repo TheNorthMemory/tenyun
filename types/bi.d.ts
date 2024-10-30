@@ -174,6 +174,8 @@ declare interface EmbedTokenInfo {
   TicketNum?: number | null;
   /** 全局参数 */
   GlobalParam?: string | null;
+  /** embed表示页面看板嵌出，chatBIEmbed表示ChatBI嵌出 */
+  Intention?: string | null;
 }
 
 /** 自定义错误信息对象 */
@@ -441,13 +443,15 @@ declare interface UserRoleListDataUserRoleInfo {
 declare interface ApplyEmbedIntervalRequest {
   /** 分享项目id，必选 */
   ProjectId?: number;
-  /** 分享页面id，嵌出看板时此为空值0 */
+  /** 分享页面id，嵌出看板时此为空值0，ChatBI嵌出时不传 */
   PageId?: number;
   /** 需要申请延期的Token */
   BIToken?: string;
   /** 备用字段 */
   ExtraParam?: string;
-  /** panel,看板；page，页面 */
+  /** embed：页面/看板嵌出chatBIEmbed：ChatBI嵌出 */
+  Intention?: string;
+  /** panel, 看板；page，页面project，ChatBI嵌出时 */
   Scope?: string;
 }
 
@@ -579,9 +583,11 @@ declare interface CreateDatasourceResponse {
 declare interface CreateEmbedTokenRequest {
   /** 分享项目id */
   ProjectId?: number;
-  /** 分享页面id，嵌出看板时此为空值0 */
+  /** 分享页面id，嵌出看板时此为空值0，ChatBI嵌出时不传 */
   PageId?: number;
-  /** page表示嵌出页面，panel表示嵌出整个看板 */
+  /** embed表示页面看板嵌出，chatBIEmbed表示ChatBI嵌出 */
+  Intention?: string;
+  /** page表示嵌出页面，panel表示嵌出整个看板，ChatBI嵌出时使用project */
   Scope?: string;
   /** 过期时间。 单位：分钟 最大值：240。即，4小时 默认值：240 */
   ExpireTime?: string;

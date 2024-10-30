@@ -282,6 +282,10 @@ declare interface Device {
   DomainId?: string | null;
   /** 网络域名称 */
   DomainName?: string | null;
+  /** 是否启用SSL，仅支持Redis资产。0：禁用 1：启用 */
+  EnableSSL?: number | null;
+  /** 已上传的SSL证书名称 */
+  SSLCertName?: string | null;
 }
 
 /** 主机账号 */
@@ -334,6 +338,12 @@ declare interface ExternalDevice {
   DepartmentId?: string;
   /** 资产多节点：字段ip和端口 */
   IpPortSet?: string[];
+  /** 是否启用SSL,1:启用 0：禁用，仅支持Redis资产 */
+  EnableSSL?: number;
+  /** SSL证书，EnableSSL时必填 */
+  SSLCert?: string;
+  /** SSL证书名称，EnableSSL时必填 */
+  SSLCertName?: string;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询 */
@@ -458,6 +468,12 @@ declare interface Resource {
   UsedDomainCount?: number | null;
   /** 0 非试用版，1 试用版 */
   Trial?: number | null;
+  /** cdc集群id */
+  CdcClusterId?: string | null;
+  /** 日志投递规格信息 */
+  LogDelivery?: string | null;
+  /** 部署模式 */
+  DeployModel?: number | null;
 }
 
 /** 立即执行改密任务的入参 */

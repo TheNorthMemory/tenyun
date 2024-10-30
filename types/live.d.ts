@@ -1302,6 +1302,14 @@ declare interface TimeShiftStreamInfo {
   StreamType?: number;
   /** 时移数据存储时长，单位秒。 */
   Duration?: number | null;
+  /** 时移自适应码率子流列表。 */
+  TimeShiftSubStreams?: TimeShiftSubStream[] | null;
+}
+
+/** 时移自适应码率子流信息。 */
+declare interface TimeShiftSubStream {
+  /** 时移自适应码率子流转码模板ID。 */
+  TransCodeId?: number;
 }
 
 /** 直播时移模板配置 */

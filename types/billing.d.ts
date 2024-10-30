@@ -26,6 +26,22 @@ declare interface ActionSummaryOverviewItem {
   TotalCost: string;
 }
 
+/** UIN异常调整明细 */
+declare interface AdjustInfoDetail {
+  /** 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识 */
+  PayerUin?: string | null;
+  /** 账单月份，格式：yyyy-MM */
+  Month?: string | null;
+  /** 调整类型调账：manualAdjustment补结算：supplementarySettlement重结算：reSettlement */
+  AdjustType?: string | null;
+  /** 调整单号 */
+  AdjustNum?: string | null;
+  /** 异常调整完成时间，格式：yyyy-MM-dd HH:mm:ss */
+  AdjustCompletionTime?: string | null;
+  /** 调整金额 */
+  AdjustAmount?: number | null;
+}
+
 /** 分账账单趋势图平均值 */
 declare interface AllocationAverageData {
   /** 起始月份 */
@@ -180,6 +196,18 @@ declare interface AllocationDetail {
   ComponentConfig?: string | null;
   /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊1 - 归集2 - 未分配 */
   AllocationType?: number | null;
+  /** 当前消费项的优惠对象，例如：官网折扣、用户折扣、活动折扣。 */
+  DiscountObject?: string | null;
+  /** 当前消费项的优惠类型，例如：折扣、合同价。 */
+  DiscountType?: string | null;
+  /** 对优惠类型的补充描述，例如：商务折扣8折，则优惠类型为“折扣”，优惠内容为“0.8”。 */
+  DiscountContent?: string | null;
+  /** SPDeduction */
+  SPDeduction?: string | null;
+  /** SPDeduction */
+  SPDeductionRate?: string | null;
+  /** 账单月 */
+  BillMonth?: string | null;
 }
 
 /** 分账账单月概览金额明细 */
@@ -502,6 +530,20 @@ declare interface AllocationSummaryByItem {
   FormulaUrl?: string | null;
   /** 配置描述：资源配置规格信息 */
   ComponentConfig?: string | null;
+  /** SPDeduction */
+  SPDeduction?: string | null;
+  /** 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率 */
+  SPDeductionRate?: string | null;
+  /** AssociatedOrder */
+  AssociatedOrder?: string | null;
+  /** 当前消费项的优惠对象，例如：官网折扣、用户折扣、活动折扣。 */
+  DiscountObject?: string | null;
+  /** 当前消费项的优惠类型，例如：折扣、合同价。 */
+  DiscountType?: string | null;
+  /** 对优惠类型的补充描述，例如：商务折扣8折，则优惠类型为“折扣”，优惠内容为“0.8”。 */
+  DiscountContent?: string | null;
+  /** 账单月 */
+  BillMonth?: string | null;
 }
 
 /** 分账账单按资源汇总明细 */
@@ -590,6 +632,10 @@ declare interface AllocationSummaryByResource {
   RegionTypeName?: string | null;
   /** 配置描述：对应资源下各组件名称及用量（如组件为用量累加型计费则为合计用量） */
   ComponentConfig?: string | null;
+  /** SPDeduction */
+  SPDeduction?: string | null;
+  /** 账单月 */
+  BillMonth?: string | null;
 }
 
 /** 当前归属单元信息 */
@@ -2366,6 +2412,8 @@ declare interface DescribeAllocationBillConditionsResponse {
   Zone?: BillZoneId[] | null;
   /** 分账单元筛选列表 */
   AllocationTreeNode?: AllocationTreeNode[] | null;
+  /** 分账标签键 */
+  TagKey?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2634,6 +2682,24 @@ declare interface DescribeAllocationTrendByMonthResponse {
   Previous?: AllocationBillTrendDetail[] | null;
   /** 费用统计信息 */
   Stat?: AllocationStat | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBillAdjustInfoRequest {
+  /** 格式：yyyy-MM账单月份，month和timeFrom&timeTo必传一个，如果有传timeFrom&timeTo则month字段无效 */
+  Month?: string;
+  /** 格式：yyyy-MM-dd开始时间，month和timeFrom&timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据 */
+  TimeFrom?: string;
+  /** 格式：yyyy-MM-dd截止时间，month和timeFrom&timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据 */
+  TimeTo?: string;
+}
+
+declare interface DescribeBillAdjustInfoResponse {
+  /** 数据总量 */
+  Total?: number;
+  /** 明细数据 */
+  Data?: AdjustInfoDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3553,6 +3619,8 @@ declare interface Billing {
   DescribeAllocationSummaryByResource(data: DescribeAllocationSummaryByResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationSummaryByResourceResponse>;
   /** 查询分账账单费用趋势 {@link DescribeAllocationTrendByMonthRequest} {@link DescribeAllocationTrendByMonthResponse} */
   DescribeAllocationTrendByMonth(data: DescribeAllocationTrendByMonthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationTrendByMonthResponse>;
+  /** 获取账单异常调整信息 {@link DescribeBillAdjustInfoRequest} {@link DescribeBillAdjustInfoResponse} */
+  DescribeBillAdjustInfo(data?: DescribeBillAdjustInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillAdjustInfoResponse>;
   /** 获取账单明细数据 {@link DescribeBillDetailRequest} {@link DescribeBillDetailResponse} */
   DescribeBillDetail(data: DescribeBillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillDetailResponse>;
   /** 成员账号获取管理账号代付账单（费用明细） {@link DescribeBillDetailForOrganizationRequest} {@link DescribeBillDetailForOrganizationResponse} */

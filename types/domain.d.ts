@@ -1331,7 +1331,7 @@ declare interface ModifyTemplateRequest {
 
 declare interface ModifyTemplateResponse {
   /** 模板信息 */
-  Template: TemplateInfo;
+  Template?: TemplateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

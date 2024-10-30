@@ -4740,6 +4740,22 @@ declare interface ModifyUserSignatureRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserSignatureRuleV2Request {
+  /** 域名 */
+  Domain: string;
+  /** 主类id */
+  MainClassID?: string;
+  /** 主类开关0=关闭，1=开启，2=只告警 */
+  Status?: number;
+  /** 下发修改的规则列表 */
+  RuleID?: ReqUserRule[];
+}
+
+declare interface ModifyUserSignatureRuleV2Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWafAutoDenyRulesRequest {
   /** 域名 */
   Domain: string;
@@ -5305,6 +5321,8 @@ declare interface Waf {
   ModifyUserLevel(data: ModifyUserLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserLevelResponse>;
   /** 修改用户防护规则 {@link ModifyUserSignatureRuleRequest} {@link ModifyUserSignatureRuleResponse} */
   ModifyUserSignatureRule(data: ModifyUserSignatureRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserSignatureRuleResponse>;
+  /** 修改用户防护规则V2 {@link ModifyUserSignatureRuleV2Request} {@link ModifyUserSignatureRuleV2Response} */
+  ModifyUserSignatureRuleV2(data: ModifyUserSignatureRuleV2Request, config?: AxiosRequestConfig): AxiosPromise<ModifyUserSignatureRuleV2Response>;
   /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
   /** 配置WAF威胁情报封禁模块详情 {@link ModifyWafThreatenIntelligenceRequest} {@link ModifyWafThreatenIntelligenceResponse} */

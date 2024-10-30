@@ -193,7 +193,7 @@ declare interface CreateNatRuleItem {
   /** 规则序号 */
   OrderIndex: number;
   /** 规则状态，true表示启用，false表示禁用 */
-  Enable: string;
+  Enable?: string;
   /** 规则对应的唯一id，创建规则时无需填写 */
   Uuid?: number;
   /** 描述 */
@@ -876,6 +876,8 @@ declare interface RuleChangeItem {
   OrderIndex: number;
   /** 新的sequence 值 */
   NewOrderIndex: number;
+  /** Ip版本，0：IPv4，1：IPv6，默认为IPv4 */
+  IpVersion?: number;
 }
 
 /** 规则输入对象 */
@@ -1434,12 +1436,12 @@ declare interface VpcRuleItem {
   Description: string;
   /** 规则顺序，-1表示最低，1表示最高 */
   OrderIndex: number;
-  /** 规则对应的唯一id */
-  Uuid: number;
   /** 规则状态，true表示启用，false表示禁用 */
   Enable: string;
   /** 规则生效的范围，是在哪对vpc之间还是针对所有vpc间生效 */
   EdgeId: string;
+  /** 规则对应的唯一id，添加规则时忽略该字段，修改该规则时需要填写Uuid;查询返回时会返回该参数 */
+  Uuid?: number;
   /** 规则的命中次数，增删改查规则时无需传入此参数，主要用于返回查询结果数据 */
   DetectedTimes?: number;
   /** EdgeId对应的这对VPC间防火墙的描述 */
@@ -1462,6 +1464,8 @@ declare interface VpcRuleItem {
   TargetName?: string | null;
   /** 访问源名称 */
   SourceName?: string | null;
+  /** Ip版本，0：IPv4，1：IPv6，默认为IPv4 */
+  IpVersion?: number | null;
 }
 
 /** vpc区域数据详情 */
@@ -1615,6 +1619,8 @@ declare interface CreateAddressTemplateRequest {
   Type: number;
   /** 协议端口模板，协议类型，4:4层协议，7:7层协议，Type=6时必填 */
   ProtocolType?: string;
+  /** IP版本,0 IPV4;1 IPV6 */
+  IpVersion?: number;
 }
 
 declare interface CreateAddressTemplateResponse {
@@ -2211,7 +2217,7 @@ declare interface DescribeBlockByIpTimesListRequest {
 
 declare interface DescribeBlockByIpTimesListResponse {
   /** 返回数据 */
-  Data: IpStatic[];
+  Data?: IpStatic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2267,7 +2273,9 @@ declare interface DescribeBlockStaticListRequest {
 
 declare interface DescribeBlockStaticListResponse {
   /** 无 */
-  Data: StaticInfo[];
+  Data?: StaticInfo[];
+  /** 异步查询状态，1查询执行中，0查询已结束 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2861,7 +2869,7 @@ declare interface DescribeTLogInfoRequest {
 
 declare interface DescribeTLogInfoResponse {
   /** "NetworkNum":网络扫描探测 "HandleNum": 待处理事件"BanNum": "VulNum": 漏洞利用 "OutNum": 失陷主机"BruteForceNum": 0 */
-  Data: TLogInfo;
+  Data?: TLogInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2881,7 +2889,7 @@ declare interface DescribeTLogIpListRequest {
 
 declare interface DescribeTLogIpListResponse {
   /** 数据集合 */
-  Data: StaticInfo[];
+  Data?: StaticInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3371,11 +3379,11 @@ declare interface ModifyNatSequenceRulesResponse {
 }
 
 declare interface ModifyResourceGroupRequest {
-  /** 组id */
+  /** 资产组id */
   GroupId: string;
   /** 组名称 */
   GroupName: string;
-  /** 上级组id */
+  /** 上级组资产组id */
   ParentId: string;
 }
 
@@ -3679,7 +3687,7 @@ declare interface Cfw {
   AddAclRule(data: AddAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAclRuleResponse>;
   /** 创建新企业安全组规则 {@link AddEnterpriseSecurityGroupRulesRequest} {@link AddEnterpriseSecurityGroupRulesResponse} */
   AddEnterpriseSecurityGroupRules(data: AddEnterpriseSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEnterpriseSecurityGroupRulesResponse>;
-  /** 添加nat访问控制规则(地域必填) {@link AddNatAcRuleRequest} {@link AddNatAcRuleResponse} */
+  /** 添加nat访问控制规则 {@link AddNatAcRuleRequest} {@link AddNatAcRuleResponse} */
   AddNatAcRule(data: AddNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddNatAcRuleResponse>;
   /** 添加VPC内网间规则 {@link AddVpcAcRuleRequest} {@link AddVpcAcRuleResponse} */
   AddVpcAcRule(data: AddVpcAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddVpcAcRuleResponse>;
@@ -3801,9 +3809,9 @@ declare interface Cfw {
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
   /** @deprecated 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;
-  /** 告警中心概况 {@link DescribeTLogInfoRequest} {@link DescribeTLogInfoResponse} */
+  /** DescribeTLogInfo告警中心概况查询 {@link DescribeTLogInfoRequest} {@link DescribeTLogInfoResponse} */
   DescribeTLogInfo(data: DescribeTLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogInfoResponse>;
-  /** 告警中心IP柱形图 {@link DescribeTLogIpListRequest} {@link DescribeTLogIpListResponse} */
+  /** 告警中心IP柱形图查询 {@link DescribeTLogIpListRequest} {@link DescribeTLogIpListResponse} */
   DescribeTLogIpList(data: DescribeTLogIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogIpListResponse>;
   /** 查询规则表状态 {@link DescribeTableStatusRequest} {@link DescribeTableStatusResponse} */
   DescribeTableStatus(data?: DescribeTableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableStatusResponse>;
@@ -3825,7 +3833,7 @@ declare interface Cfw {
   ModifyAllPublicIPSwitchStatus(data: ModifyAllPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllPublicIPSwitchStatusResponse>;
   /** 启用停用全部规则 {@link ModifyAllRuleStatusRequest} {@link ModifyAllRuleStatusResponse} */
   ModifyAllRuleStatus(data: ModifyAllRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllRuleStatusResponse>;
-  /** VPC防火墙一键开关 {@link ModifyAllVPCSwitchStatusRequest} {@link ModifyAllVPCSwitchStatusResponse} */
+  /** @deprecated VPC防火墙一键开关 {@link ModifyAllVPCSwitchStatusRequest} {@link ModifyAllVPCSwitchStatusResponse} */
   ModifyAllVPCSwitchStatus(data: ModifyAllVPCSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllVPCSwitchStatusResponse>;
   /** 资产扫描 {@link ModifyAssetScanRequest} {@link ModifyAssetScanResponse} */
   ModifyAssetScan(data: ModifyAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetScanResponse>;

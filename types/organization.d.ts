@@ -644,6 +644,22 @@ declare interface SAMLServiceProvider {
   AcsUrl?: string;
 }
 
+/** SCIM密钥 */
+declare interface SCIMCredential {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
+  ZoneId?: string;
+  /** SCIM密钥状态，Enabled已开启，Disabled已关闭。 */
+  Status?: string;
+  /** SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。 */
+  CredentialId?: string;
+  /** SCIM密钥类型。 */
+  CredentialType?: string;
+  /** SCIM 密钥的创建时间。 */
+  CreateTime?: string;
+  /** SCIM 密钥的过期时间。 */
+  ExpireTime?: string;
+}
+
 /** 共享地域 */
 declare interface ShareArea {
   /** 地域名称。 */
@@ -1097,6 +1113,8 @@ declare interface CreateGroupRequest {
   GroupName: string;
   /** 用户组的描述。 长度：最大 1024 个字符。 */
   Description?: string;
+  /** 用户组类型 Manual：手动创建，Synchronized：外部导入 */
+  GroupType?: string;
 }
 
 declare interface CreateGroupResponse {
@@ -1284,6 +1302,30 @@ declare interface CreateRoleConfigurationResponse {
   RequestId?: string;
 }
 
+declare interface CreateSCIMCredentialRequest {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
+  ZoneId: string;
+}
+
+declare interface CreateSCIMCredentialResponse {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母。 */
+  ZoneId?: string;
+  /** SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。 */
+  CredentialId?: string;
+  /** SCIM密钥类型。 */
+  CredentialType?: string;
+  /** SCIM 密钥的创建时间。 */
+  CreateTime?: string;
+  /** SCIM 密钥的过期时间。 */
+  ExpireTime?: string;
+  /** SCIM密钥状态，Enabled已开启，Disabled已关闭。 */
+  CredentialStatus?: string;
+  /** SCIM密钥。 */
+  CredentialSecret?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserRequest {
   /** 空间 ID。 */
   ZoneId: string;
@@ -1301,6 +1343,8 @@ declare interface CreateUserRequest {
   Email?: string;
   /** 用户的状态。取值： Enabled（默认值）：启用。 Disabled：禁用。 */
   UserStatus?: string;
+  /** 用户类型 Manual：手动创建，Synchronized：外部导入 */
+  UserType?: string;
 }
 
 declare interface CreateUserResponse {
@@ -1462,6 +1506,18 @@ declare interface DeleteRoleConfigurationRequest {
 }
 
 declare interface DeleteRoleConfigurationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSCIMCredentialRequest {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
+  ZoneId: string;
+  /** SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。 */
+  CredentialId: string;
+}
+
+declare interface DeleteSCIMCredentialResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2060,6 +2116,18 @@ declare interface GetRoleConfigurationResponse {
   RequestId?: string;
 }
 
+declare interface GetSCIMSynchronizationStatusRequest {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
+  ZoneId: string;
+}
+
+declare interface GetSCIMSynchronizationStatusResponse {
+  /** SCIM 同步状态。Enabled：启用。 Disabled：禁用。 */
+  SCIMSynchronizationStatus?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTaskStatusRequest {
   /** 空间ID。 */
   ZoneId: string;
@@ -2215,6 +2283,8 @@ declare interface ListGroupsRequest {
   SortField?: string;
   /** 排序类型：Desc 倒序 Asc 正序，需要你和SortField一起设置 */
   SortType?: string;
+  /** 翻页offset. 不要与NextToken同时使用，优先使用NextToken */
+  Offset?: number;
 }
 
 declare interface ListGroupsResponse {
@@ -2500,6 +2570,22 @@ declare interface ListRoleConfigurationsResponse {
   RequestId?: string;
 }
 
+declare interface ListSCIMCredentialsRequest {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
+  ZoneId: string;
+  /** SCIM密钥ID */
+  CredentialId?: string;
+}
+
+declare interface ListSCIMCredentialsResponse {
+  /** SCIM密钥数量。 */
+  TotalCounts?: number;
+  /** SCIM 密钥信息。 */
+  SCIMCredentials?: SCIMCredential[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTargetsForPolicyRequest {
   /** 策略Id。 */
   PolicyId: number;
@@ -2615,6 +2701,8 @@ declare interface ListUsersRequest {
   SortField?: string;
   /** 排序类型：Desc 倒序 Asc 正序，需要你和SortField一起设置 */
   SortType?: string;
+  /** 翻页offset. 不要与NextToken同时使用，优先使用NextToken */
+  Offset?: number;
 }
 
 declare interface ListUsersResponse {
@@ -2906,6 +2994,32 @@ declare interface UpdateRoleConfigurationRequest {
 declare interface UpdateRoleConfigurationResponse {
   /** 权限配置详情 */
   RoleConfigurationInfo?: RoleConfiguration;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateSCIMCredentialStatusRequest {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
+  ZoneId: string;
+  /** SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。 */
+  CredentialId: string;
+  /** SCIM密钥状态。Enabled：启用。 Disabled：禁用。 */
+  NewStatus: string;
+}
+
+declare interface UpdateSCIMCredentialStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateSCIMSynchronizationStatusRequest {
+  /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
+  ZoneId: string;
+  /** SCIM 同步状态。Enabled：启用。Disabled：禁用。 */
+  SCIMSynchronizationStatus: string;
+}
+
+declare interface UpdateSCIMSynchronizationStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3373,6 +3487,8 @@ declare interface Organization {
   CreateRoleAssignment(data: CreateRoleAssignmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleAssignmentResponse>;
   /** 创建权限配置 {@link CreateRoleConfigurationRequest} {@link CreateRoleConfigurationResponse} */
   CreateRoleConfiguration(data: CreateRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleConfigurationResponse>;
+  /** 创建SCIM密钥 {@link CreateSCIMCredentialRequest} {@link CreateSCIMCredentialResponse} */
+  CreateSCIMCredential(data: CreateSCIMCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSCIMCredentialResponse>;
   /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 创建CAM用户同步 {@link CreateUserSyncProvisioningRequest} {@link CreateUserSyncProvisioningResponse} */
@@ -3401,6 +3517,8 @@ declare interface Organization {
   DeleteRoleAssignment(data: DeleteRoleAssignmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleAssignmentResponse>;
   /** 删除权限配置信息 {@link DeleteRoleConfigurationRequest} {@link DeleteRoleConfigurationResponse} */
   DeleteRoleConfiguration(data: DeleteRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleConfigurationResponse>;
+  /** 删除SCIM密钥 {@link DeleteSCIMCredentialRequest} {@link DeleteSCIMCredentialResponse} */
+  DeleteSCIMCredential(data: DeleteSCIMCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSCIMCredentialResponse>;
   /** 删除共享单元 {@link DeleteShareUnitRequest} {@link DeleteShareUnitResponse} */
   DeleteShareUnit(data: DeleteShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitResponse>;
   /** 删除共享单元成员 {@link DeleteShareUnitMembersRequest} {@link DeleteShareUnitMembersResponse} */
@@ -3465,6 +3583,8 @@ declare interface Organization {
   GetProvisioningTaskStatus(data: GetProvisioningTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvisioningTaskStatusResponse>;
   /** 查询权限配置信息 {@link GetRoleConfigurationRequest} {@link GetRoleConfigurationResponse} */
   GetRoleConfiguration(data: GetRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoleConfigurationResponse>;
+  /** 查询SCIM同步的状态 {@link GetSCIMSynchronizationStatusRequest} {@link GetSCIMSynchronizationStatusResponse} */
+  GetSCIMSynchronizationStatus(data: GetSCIMSynchronizationStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSCIMSynchronizationStatusResponse>;
   /** 查询异步任务的状态 {@link GetTaskStatusRequest} {@link GetTaskStatusResponse} */
   GetTaskStatus(data: GetTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStatusResponse>;
   /** 查询用户信息 {@link GetUserRequest} {@link GetUserResponse} */
@@ -3505,6 +3625,8 @@ declare interface Organization {
   ListRoleConfigurationProvisionings(data: ListRoleConfigurationProvisioningsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRoleConfigurationProvisioningsResponse>;
   /** 查询权限配置列表 {@link ListRoleConfigurationsRequest} {@link ListRoleConfigurationsResponse} */
   ListRoleConfigurations(data: ListRoleConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRoleConfigurationsResponse>;
+  /** 查询SCIM密钥列表 {@link ListSCIMCredentialsRequest} {@link ListSCIMCredentialsResponse} */
+  ListSCIMCredentials(data: ListSCIMCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSCIMCredentialsResponse>;
   /** 查询某个指定策略关联的目标列表 {@link ListTargetsForPolicyRequest} {@link ListTargetsForPolicyResponse} */
   ListTargetsForPolicy(data: ListTargetsForPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTargetsForPolicyResponse>;
   /** 查询异步任务列表 {@link ListTasksRequest} {@link ListTasksResponse} */
@@ -3549,6 +3671,10 @@ declare interface Organization {
   UpdatePolicy(data: UpdatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePolicyResponse>;
   /** 修改权限配置信息 {@link UpdateRoleConfigurationRequest} {@link UpdateRoleConfigurationResponse} */
   UpdateRoleConfiguration(data: UpdateRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleConfigurationResponse>;
+  /** 启用或禁用SCIM密钥 {@link UpdateSCIMCredentialStatusRequest} {@link UpdateSCIMCredentialStatusResponse} */
+  UpdateSCIMCredentialStatus(data: UpdateSCIMCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSCIMCredentialStatusResponse>;
+  /** 启用或禁用SCIM同步 {@link UpdateSCIMSynchronizationStatusRequest} {@link UpdateSCIMSynchronizationStatusResponse} */
+  UpdateSCIMSynchronizationStatus(data: UpdateSCIMSynchronizationStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSCIMSynchronizationStatusResponse>;
   /** 更新共享单元 {@link UpdateShareUnitRequest} {@link UpdateShareUnitResponse} */
   UpdateShareUnit(data: UpdateShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateShareUnitResponse>;
   /** 修改用户信息 {@link UpdateUserRequest} {@link UpdateUserResponse} */

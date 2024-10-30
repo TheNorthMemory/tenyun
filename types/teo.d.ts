@@ -486,6 +486,16 @@ declare interface CertificateInfo {
   Status?: string;
 }
 
+/** 各个健康检查区域下源站的健康状态。 */
+declare interface CheckRegionHealthStatus {
+  /** 健康检查区域，ISO-3166-1 两位字母代码。 */
+  Region?: string;
+  /** 单健康检查区域下探测源站的健康状态，取值有：Healthy：健康；Unhealthy：不健康； Undetected：未探测到数据。说明：单健康检查区域下所有源站为健康，则状态为健康，否则为不健康。 */
+  Healthy?: string;
+  /** 源站健康状态。 */
+  OriginHealthStatus?: OriginHealthStatus[];
+}
+
 /** 回源时携带客户端IP所属地域信息，值的格式为ISO-3166-1两位字母代码。 */
 declare interface ClientIpCountry {
   /** 配置开关，取值有：on：开启；off：关闭。 */
@@ -498,7 +508,7 @@ declare interface ClientIpCountry {
 declare interface ClientIpHeader {
   /** 配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 回源时，存放客户端 IP 的请求头名称。为空则使用默认值：X-Forwarded-IP。 */
+  /** 回源时，存放客户端 IP 的请求头名称。当 Switch 为 on 时，该参数必填。该参数不允许填写 X-Forwarded-For。 */
   HeaderName?: string | null;
 }
 
@@ -588,6 +598,14 @@ declare interface CustomField {
   Value: string | null;
   /** 是否投递该字段，不填表示不投递此字段。 */
   Enabled?: boolean | null;
+}
+
+/** 负载均衡实例 HTTP/HTTPS 健康检查策略下可配置的自定义头部。 */
+declare interface CustomizedHeader {
+  /** 自定义头部 Key。 */
+  Key: string | null;
+  /** 自定义头部 Value。 */
+  Value: string | null;
 }
 
 /** DDoS配置 */
@@ -910,19 +928,19 @@ declare interface FirstPartConfig {
   StatTime?: number | null;
 }
 
-/** 缓存遵循源站配置 */
+/** 缓存遵循源站配置。 */
 declare interface FollowOrigin {
   /** 遵循源站配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 源站未返回 Cache-Control 头时, 设置默认的缓存时间 */
-  DefaultCacheTime?: number | null;
-  /** 源站未返回 Cache-Control 头时, 设置缓存/不缓存 */
+  /** 源站未返回 Cache-Control 头时，缓存/不缓存开关。当 Switch 为 on 时，此字段必填，否则此字段不生效。取值有：on：缓存；off：不缓存。 */
   DefaultCache?: string | null;
-  /** 源站未返回 Cache-Control 头时, 使用/不使用默认缓存策略 */
+  /** 源站未返回 Cache-Control 头时，使用/不使用默认缓存策略开关。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheTime 不为 0 时，此字段必须为 off。取值有：on：使用默认缓存策略；off：不使用默认缓存策略。 */
   DefaultCacheStrategy?: string | null;
+  /** 源站未返回 Cache-Control 头时，表示默认的缓存时间，单位为秒，取值：0～315360000。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheStrategy 为 on 时， 此字段必须为 0。 */
+  DefaultCacheTime?: number | null;
 }
 
-/** 访问协议强制https跳转配置 */
+/** 访问协议强制 HTTPS 跳转配置。 */
 declare interface ForceRedirect {
   /** 访问强制跳转配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
@@ -998,6 +1016,36 @@ declare interface Header {
   Name: string;
   /** HTTP头部值。 */
   Value: string;
+}
+
+/** 负载均衡实例健康检查策略。 */
+declare interface HealthChecker {
+  /** 健康检查策略，取值有：HTTP；HTTPS；TCP；UDP；ICMP Ping；NoCheck。注意：NoCheck 表示不启用健康检查策略。 */
+  Type: string;
+  /** 检查端口。当 Type=HTTP 或 Type=HTTPS 或 Type=TCP 或 Type=UDP 时为必填。 */
+  Port?: number;
+  /** 检查频率，表示多久发起一次健康检查任务，单位为秒。可取值有：30，60，180，300 或 600。 */
+  Interval?: number;
+  /** 每一次健康检查的超时时间，若健康检查消耗时间大于此值，则检查结果判定为”不健康“， 单位为秒，默认值为 5s，取值必须小于 Interval。 */
+  Timeout?: number;
+  /** 健康阈值，表示连续几次健康检查结果为"健康"，则判断源站为"健康"，单位为次，默认 3 次，最小取值 1 次。 */
+  HealthThreshold?: number;
+  /** 不健康阈值，表示连续几次健康检查结果为"不健康"，则判断源站为"不健康"，单位为次，默认 2 次。 */
+  CriticalThreshold?: number;
+  /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测路径，需要填写完整的 host/path，不包含协议部分，例如：www.example.com/test。 */
+  Path?: string;
+  /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示请求方法，取值有：GET；HEAD。 */
+  Method?: string;
+  /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测节点向源站发起健康检查时，响应哪些状态码可用于认定探测结果为健康。 */
+  ExpectedCodes?: string[];
+  /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测请求携带的自定义 HTTP 请求头，至多可配置 10 个。 */
+  Headers?: CustomizedHeader[];
+  /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示是否启用遵循 301/302 重定向。启用后，301/302 默认为"健康"的状态码，默认跳转 3 次。 */
+  FollowRedirect?: string;
+  /** 该参数仅当 Type=UDP 时有效，表示健康检查发送的内容。只允许 ASCII 可见字符，最大长度限制 500 个字符。 */
+  SendContext?: string;
+  /** 该参数仅当 Type=UDP 时有效，表示健康检查期望源站返回结果。只允许 ASCII 可见字符，最大长度限制 500 个字符。 */
+  RecvContext?: string;
 }
 
 /** Hsts配置 */
@@ -1128,6 +1176,12 @@ declare interface Ipv6 {
   Switch: string;
 }
 
+/** 视频即时处理配置 */
+declare interface JITVideoProcess {
+  /** 视频即时处理配置开关，取值有：on：开启；off：关闭。 */
+  Switch: string;
+}
+
 /** 离线日志详细信息 */
 declare interface L4OfflineLog {
   /** 四层代理实例 ID。 */
@@ -1236,6 +1290,30 @@ declare interface L7OfflineLog {
   LogEndTime?: string;
   /** 日志原始大小，单位 Byte。 */
   Size?: number;
+}
+
+/** 负载均衡实例信息。 */
+declare interface LoadBalancer {
+  /** 实例 ID。 */
+  InstanceId?: string;
+  /** 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。 */
+  Name?: string;
+  /** 实例类型，取值有：HTTP：HTTP 专用型，支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）；GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。 */
+  Type?: string;
+  /** 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。 */
+  HealthChecker?: HealthChecker;
+  /** 源站组间的流量调度策略，取值有：Pritory：按优先级顺序进行故障转移 。 */
+  SteeringPolicy?: string;
+  /** 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。 */
+  FailoverPolicy?: string;
+  /** 源站组健康状态。 */
+  OriginGroupHealthStatus?: OriginGroupHealthStatus[];
+  /** 负载均衡状态，取值有：Pending：部署中；Deleting：删除中；Running：已生效。 */
+  Status?: string;
+  /** 该负载均衡实例绑的定四层层代理实例的列表。 */
+  L4UsedList?: string[];
+  /** 该负载均衡实例绑定的七层域名列表。 */
+  L7UsedList?: string[];
 }
 
 /** 实时日志投递的输出格式。您可以直接通过 FormatType 参数使用指定预设日志输出格式（JSON Lines / csv），也可以在预设日志输出格式基础上，通过其他参数来自定义变体输出格式。 */
@@ -1354,6 +1432,38 @@ declare interface OriginGroup {
   HostHeader?: string | null;
 }
 
+/** 源站组健康状态。 */
+declare interface OriginGroupHealthStatus {
+  /** 源站组 ID。 */
+  OriginGroupID?: string;
+  /** 源站组名。 */
+  OriginGroupName?: string;
+  /** 源站组类型，取值有：HTTP：HTTP 专用型；GENERAL：通用型。 */
+  OriginType?: string;
+  /** 优先级。 */
+  Priority?: string;
+  /** 源站组里各源站的健康状态。 */
+  OriginHealthStatus?: OriginHealthStatus[];
+}
+
+/** 源站组健康状态详情。 */
+declare interface OriginGroupHealthStatusDetail {
+  /** 源站组 ID。 */
+  OriginGroupId?: string;
+  /** 根据所有探测区域的结果综合决策出来的源站组下各个源站的健康状态。超过一半的地域判定该源站不健康，则对应状态为不健康，否则为健康。 */
+  OriginHealthStatus?: OriginHealthStatus[];
+  /** 各个健康检查区域下源站的健康状态。 */
+  CheckRegionHealthStatus?: CheckRegionHealthStatus[];
+}
+
+/** 负载均衡实例中需要绑定的源站组和优先级关系。 */
+declare interface OriginGroupInLoadBalancer {
+  /** 优先级，填写格式为 "priority_" + "数字"，最高优先级为 "priority_1"。参考取值有：priority_1：第一优先级；priority_2：第二优先级；priority_3：第三优先级。其他优先级可以将数字递增，最多可以递增至 "priority_10"。 */
+  Priority: string;
+  /** 源站组 ID。 */
+  OriginGroupId: string;
+}
+
 /** 源站组引用服务。 */
 declare interface OriginGroupReference {
   /** 引用服务类型，取值有：AccelerationDomain: 加速域名；RuleEngine: 规则引擎；Loadbalance: 负载均衡；ApplicationProxy: 四层代理。 */
@@ -1362,6 +1472,14 @@ declare interface OriginGroupReference {
   InstanceId?: string;
   /** 应用类型的实例名称。 */
   InstanceName?: string;
+}
+
+/** 源站组里的源站健康状态。 */
+declare interface OriginHealthStatus {
+  /** 源站。 */
+  Origin?: string;
+  /** 源站健康状态，取值有：Healthy：健康；Unhealthy：不健康；Undetected：未探测到数据。 */
+  Healthy?: string;
 }
 
 /** 加速域名源站信息。 */
@@ -2272,6 +2390,8 @@ declare interface ZoneSetting {
   AccelerateMainland?: AccelerateMainland | null;
   /** 标准 Debug 配置。 */
   StandardDebug?: StandardDebug | null;
+  /** 视频即时处理配置。 */
+  JITVideoProcess?: JITVideoProcess | null;
 }
 
 declare interface BindSecurityTemplateToEntityRequest {
@@ -2558,6 +2678,30 @@ declare interface CreateL4ProxyRulesRequest {
 declare interface CreateL4ProxyRulesResponse {
   /** 新增转发规则的 ID，以数组的形式返回。 */
   L4ProxyRuleIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLoadBalancerRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。 */
+  Name: string;
+  /** 实例类型，取值有：HTTP：HTTP 专用型，支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）；GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。 */
+  Type: string;
+  /** 源站组列表及其对应的容灾调度优先级。详情请参考 [快速创建负载均衡实例](https://cloud.tencent.com/document/product/1552/104223) 中的示例场景。 */
+  OriginGroups: OriginGroupInLoadBalancer[];
+  /** 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。不填写时，默认为不启用健康检查。 */
+  HealthChecker?: HealthChecker;
+  /** 源站组间的流量调度策略，取值有：Pritory：按优先级顺序进行故障转移。默认值为 Pritory。 */
+  SteeringPolicy?: string;
+  /** 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。默认值为 OtherRecordInOriginGroup。 */
+  FailoverPolicy?: string;
+}
+
+declare interface CreateLoadBalancerResponse {
+  /** 负载均衡实例 ID。 */
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2886,6 +3030,18 @@ declare interface DeleteL4ProxyRulesRequest {
 }
 
 declare interface DeleteL4ProxyRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLoadBalancerRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 负载均衡实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DeleteLoadBalancerResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3428,6 +3584,42 @@ declare interface DescribeL4ProxyRulesResponse {
   TotalCount?: number;
   /** 转发规则列表。 */
   L4ProxyRules?: L4ProxyRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLoadBalancerListRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+  /** 分页查询限制数目，默认值：20，最大值：100。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有负载均衡实例信息。详细的过滤条件如下：InstanceName：按照负载均衡实例名称进行过滤；InstanceId：按照负载均衡实例 ID 进行过滤。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeLoadBalancerListResponse {
+  /** 负载均衡实例总数。 */
+  TotalCount?: number;
+  /** 负载均衡实例列表。 */
+  LoadBalancerList?: LoadBalancer[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOriginGroupHealthStatusRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 负载均衡实例 ID。 */
+  LBInstanceId: string;
+  /** 源站组 ID。不填写时默认获取负载均衡下所有源站组的健康状态。 */
+  OriginGroupIds?: string[];
+}
+
+declare interface DescribeOriginGroupHealthStatusResponse {
+  /** 源站组下源站的健康状态。 */
+  OriginGroupHealthStatusList?: OriginGroupHealthStatusDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4216,6 +4408,28 @@ declare interface ModifyL4ProxyStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLoadBalancerRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 负载均衡实例 ID。 */
+  InstanceId: string;
+  /** 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。不填写表示维持原有配置。 */
+  Name?: string;
+  /** 源站组列表及其对应的容灾调度优先级。详情请参考 [快速创建负载均衡实例](https://cloud.tencent.com/document/product/1552/104223) 中的示例场景。不填写表示维持原有配置。 */
+  OriginGroups?: OriginGroupInLoadBalancer[];
+  /** 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。不填写表示维持原有配置。 */
+  HealthChecker?: HealthChecker;
+  /** 源站组间的流量调度策略，取值有：Pritory：按优先级顺序进行故障转移 。不填写表示维持原有配置。 */
+  SteeringPolicy?: string;
+  /** 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。不填写表示维持原有配置。 */
+  FailoverPolicy?: string;
+}
+
+declare interface ModifyLoadBalancerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOriginGroupRequest {
   /** 站点 ID */
   ZoneId: string;
@@ -4395,6 +4609,8 @@ declare interface ModifyZoneSettingRequest {
   ImageOptimize?: ImageOptimize;
   /** 标准 Debug 配置。 */
   StandardDebug?: StandardDebug;
+  /** 视频即时处理配置。不填写表示保持原有配置。 */
+  JITVideoProcess?: JITVideoProcess;
 }
 
 declare interface ModifyZoneSettingResponse {
@@ -4731,6 +4947,8 @@ declare interface Teo {
   CreateL4Proxy(data: CreateL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ProxyResponse>;
   /** 创建四层代理转发规则 {@link CreateL4ProxyRulesRequest} {@link CreateL4ProxyRulesResponse} */
   CreateL4ProxyRules(data: CreateL4ProxyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ProxyRulesResponse>;
+  /** 创建负载均衡实例 {@link CreateLoadBalancerRequest} {@link CreateLoadBalancerResponse} */
+  CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
   /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
   CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
   /** 创建套餐 {@link CreatePlanRequest} {@link CreatePlanResponse} */
@@ -4769,6 +4987,8 @@ declare interface Teo {
   DeleteL4Proxy(data: DeleteL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyResponse>;
   /** 删除四层代理转发规则 {@link DeleteL4ProxyRulesRequest} {@link DeleteL4ProxyRulesResponse} */
   DeleteL4ProxyRules(data: DeleteL4ProxyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyRulesResponse>;
+  /** 删除负载均衡实例 {@link DeleteLoadBalancerRequest} {@link DeleteLoadBalancerResponse} */
+  DeleteLoadBalancer(data: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
   /** 删除源站组 {@link DeleteOriginGroupRequest} {@link DeleteOriginGroupResponse} */
   DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
   /** 删除实时日志投递任务 {@link DeleteRealtimeLogDeliveryTaskRequest} {@link DeleteRealtimeLogDeliveryTaskResponse} */
@@ -4829,8 +5049,12 @@ declare interface Teo {
   DescribeL4Proxy(data: DescribeL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ProxyResponse>;
   /** 查询四层代理转发规则列表 {@link DescribeL4ProxyRulesRequest} {@link DescribeL4ProxyRulesResponse} */
   DescribeL4ProxyRules(data: DescribeL4ProxyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ProxyRulesResponse>;
+  /** 查询负载均衡实例列表 {@link DescribeLoadBalancerListRequest} {@link DescribeLoadBalancerListResponse} */
+  DescribeLoadBalancerList(data: DescribeLoadBalancerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerListResponse>;
   /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
   DescribeOriginGroup(data?: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
+  /** 查询负载均衡实例下源站组健康状态 {@link DescribeOriginGroupHealthStatusRequest} {@link DescribeOriginGroupHealthStatusResponse} */
+  DescribeOriginGroupHealthStatus(data: DescribeOriginGroupHealthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupHealthStatusResponse>;
   /** 查询源站防护信息 {@link DescribeOriginProtectionRequest} {@link DescribeOriginProtectionResponse} */
   DescribeOriginProtection(data?: DescribeOriginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginProtectionResponse>;
   /** 查询监控流量时序数据（待废弃） {@link DescribeOverviewL7DataRequest} {@link DescribeOverviewL7DataResponse} */
@@ -4911,6 +5135,8 @@ declare interface Teo {
   ModifyL4ProxyRulesStatus(data: ModifyL4ProxyRulesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ProxyRulesStatusResponse>;
   /** 修改四层代理实例状态 {@link ModifyL4ProxyStatusRequest} {@link ModifyL4ProxyStatusResponse} */
   ModifyL4ProxyStatus(data: ModifyL4ProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ProxyStatusResponse>;
+  /** 修改负载均衡实例 {@link ModifyLoadBalancerRequest} {@link ModifyLoadBalancerResponse} */
+  ModifyLoadBalancer(data: ModifyLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
   /** 修改套餐配置 {@link ModifyPlanRequest} {@link ModifyPlanResponse} */

@@ -56,58 +56,6 @@ declare interface HitInfo {
   Positions: Positions[] | null;
 }
 
-/** 内容审核多级标签结构 */
-declare interface LabelGrade {
-  /** 内容审核结果客户定制标签码 */
-  Code?: string | null;
-  /** 内容审核结果客户定制一级标签 */
-  Grade1?: string | null;
-  /** 内容审核结果客户定制二级标签 */
-  Grade2?: string | null;
-  /** 内容审核结果客户定制三级标签 */
-  Grade3?: string | null;
-}
-
-/** 库检测结果 */
-declare interface LibCheckResult {
-  /** 库ID */
-  LibId?: string | null;
-  /** 库名称 */
-  LibName?: string | null;
-  /** 库类型 */
-  LibType?: number | null;
-  /** 命中的关键词 */
-  Keyword?: string | null;
-  /** 命中的关键词在送审文本的位置，可能存在多个位置，每个位置显示开始位置和结束位置 */
-  Positions?: Positions[] | null;
-}
-
-/** 模型检测结果 */
-declare interface ModelResult {
-  /** 模型检测出的违规内容 */
-  Content?: string | null;
-  /** 模型检测出的违规内容的位置 */
-  Positions?: Positions[] | null;
-}
-
-/** 文本审核明细结果 */
-declare interface ModerationDetail {
-  /** 审核建议，Block表示建议拦截，Review表示建议人工复审，Pass表示建议放行 */
-  Suggestion?: string | null;
-  /** 命中标签，含标签码和一二三级标签名 */
-  Label?: LabelGrade | null;
-  /** 标签得分 */
-  Score?: number | null;
-  /** label对应腾讯侧命中标签码 */
-  TcLabelCodes?: string[] | null;
-  /** 库检测命中详情 */
-  LibResults?: LibCheckResult[] | null;
-  /** 模型检测详情 */
-  ModelResults?: ModelResult[] | null;
-  /** 情绪正负向检测结果 */
-  SentimentResult?: SentimentDetail | null;
-}
-
 /** 标识命中的违规关键词位置信息 */
 declare interface Positions {
   /** 关键词起始位置 */
@@ -182,40 +130,6 @@ declare interface User {
   ReceiverId?: string;
   /** 消息生成时间，精确到毫秒 */
   SendTime?: number;
-}
-
-declare interface ModerateTextRequest {
-  /** 该字段表示待检测对象的文本内容，文本需要按utf-8格式编码，长度不能超过10000个字符（按unicode编码计算），并进行 Base64加密 */
-  Content: string;
-  /** 该字段表示策略的具体编号，用于接口调度，在内容安全控制台中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype */
-  BizType?: string;
-  /** 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，长度不超过64个字符 */
-  DataId?: string;
-  /** 该字段表示待检测对象对应的用户相关信息，传入后可便于甄别相应违规风险用户 */
-  User?: User;
-  /** 该字段表示待检测对象对应的设备相关信息，传入后可便于甄别相应违规风险设备 */
-  Device?: Device;
-}
-
-declare interface ModerateTextResponse {
-  /** 该字段用于返回检测对象对应请求参数中的DataId，与输入的DataId字段中的内容对应 */
-  DataId?: string;
-  /** 该字段用于返回请求参数中的BizType参数 */
-  BizType?: string;
-  /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：Block：建议屏蔽，Review ：建议人工复审，Pass：建议通过 */
-  Suggestion?: string;
-  /** 命中标签，可参阅对应数据结构（LabelGrade）的详细描述 */
-  Label?: LabelGrade;
-  /** 命中标签对应腾讯侧定义的标签 */
-  TcLabelCodes?: string[];
-  /** 该字段用于返回当前标签（Label）下被检测文本命中的关键词信息，用于标注文本违规的具体原因（如：加我微信）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值 */
-  Keywords?: string[];
-  /** 该字段用于返回文本审核的详细结果，返回值信息可参阅对应数据结构（ModerationDetail）的详细描述 */
-  ModerationDetails?: ModerationDetail[];
-  /** 该字段用于返回审核结果置信度，使用百分制。分数越高表示结果可信度越高。 */
-  Score?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
 }
 
 declare interface TextModerationRequest {
@@ -494,8 +408,6 @@ declare namespace V20200713 {
 /** {@link Tms 文本内容安全} */
 declare interface Tms {
   (): Versions;
-  /** 客户定制标签文本审核 {@link ModerateTextRequest} {@link ModerateTextResponse} */
-  ModerateText(data: ModerateTextRequest, config?: AxiosRequestConfig): AxiosPromise<ModerateTextResponse>;
   /** 文本内容安全 {@link TextModerationRequest} {@link TextModerationResponse} */
   TextModeration(data: TextModerationRequest, config?: AxiosRequestConfig): AxiosPromise<TextModerationResponse>;
   /** 账号举报接口 {@link V20200713.AccountTipoffAccessRequest} {@link V20200713.AccountTipoffAccessResponse} */

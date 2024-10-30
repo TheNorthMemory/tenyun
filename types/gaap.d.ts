@@ -1059,7 +1059,7 @@ declare interface CreateCertificateRequest {
 
 declare interface CreateCertificateResponse {
   /** 证书ID */
-  CertificateId: string;
+  CertificateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1297,7 +1297,7 @@ declare interface CreateProxyRequest {
 
 declare interface CreateProxyResponse {
   /** 通道的实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1655,9 +1655,9 @@ declare interface DescribeCertificatesRequest {
 
 declare interface DescribeCertificatesResponse {
   /** 服务器证书列表，包括证书ID 和证书名称。 */
-  CertificateSet: Certificate[];
+  CertificateSet?: Certificate[];
   /** 满足查询条件的服务器证书总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1911,7 +1911,7 @@ declare interface DescribeListenerStatisticsRequest {
 
 declare interface DescribeListenerStatisticsResponse {
   /** 通道组统计数据 */
-  StatisticsData: MetricStatisticsInfo[];
+  StatisticsData?: MetricStatisticsInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2049,7 +2049,7 @@ declare interface DescribeProxyStatisticsRequest {
   StartTime: string;
   /** 结束时间(2019-03-25 12:00:00) */
   EndTime: string;
-  /** 统计指标名称列表，支持: 入带宽:InBandwidth, 出带宽:OutBandwidth, 并发:Concurrent, 入包量:InPackets, 出包量:OutPackets, 丢包率:PacketLoss, 延迟:Latency，http请求量：HttpQPS, Https请求量：HttpsQPS */
+  /** 统计指标名称列表，支持: 入带宽:InBandwidth, 出带宽:OutBandwidth, 并发:Concurrent, 入包量:InPackets, 出包量:OutPackets, 丢包率:PacketLoss, 延迟:Latency，HTTP请求量：HttpQPS, HTTP请求量利用率：HttpQPSPercent,HTTPS请求量：HttpsQPS,HTTPS请求量利用率：HttpsQPSPercent */
   MetricNames: string[];
   /** 监控粒度，目前支持60，300，3600，86400，单位：秒。当时间范围不超过3天，支持最小粒度60秒；当时间范围不超过7天，支持最小粒度300秒；当时间范围不超过30天，支持最小粒度3600秒。 */
   Granularity: number;
@@ -2059,7 +2059,7 @@ declare interface DescribeProxyStatisticsRequest {
 
 declare interface DescribeProxyStatisticsResponse {
   /** 通道统计数据 */
-  StatisticsData: MetricStatisticsInfo[];
+  StatisticsData?: MetricStatisticsInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2177,13 +2177,13 @@ declare interface DescribeRuleRealServersRequest {
 
 declare interface DescribeRuleRealServersResponse {
   /** 可绑定的源站个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 可绑定的源站信息列表 */
-  RealServerSet: RealServer[];
+  RealServerSet?: RealServer[];
   /** 已绑定的源站个数 */
-  BindRealServerTotalCount: number;
+  BindRealServerTotalCount?: number;
   /** 已绑定的源站信息列表 */
-  BindRealServerSet: BindRealServer[];
+  BindRealServerSet?: BindRealServer[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2195,9 +2195,9 @@ declare interface DescribeRulesByRuleIdsRequest {
 
 declare interface DescribeRulesByRuleIdsResponse {
   /** 返回的规则总个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的规则列表。 */
-  RuleSet: RuleInfo[];
+  RuleSet?: RuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2279,7 +2279,7 @@ declare interface DescribeTCPListenersResponse {
 }
 
 declare interface DescribeTaskStatusRequest {
-  /** 任务ID，值为异步接口返回的RequestId */
+  /** 任务ID，值为异步接口返回的RequestId，此参数不能传空值。 */
   TaskId?: string;
 }
 
@@ -2333,9 +2333,9 @@ declare interface DestroyProxiesRequest {
 
 declare interface DestroyProxiesResponse {
   /** 处于不可销毁状态下的通道实例ID列表。 */
-  InvalidStatusInstanceSet: string[];
+  InvalidStatusInstanceSet?: string[];
   /** 销毁操作失败的通道实例ID列表。 */
-  OperationFailedInstanceSet: string[];
+  OperationFailedInstanceSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2817,6 +2817,10 @@ declare interface SetAuthenticationRequest {
   RealServerCertificateDomain?: string;
   /** 多源站CA证书ID，从证书管理页获取。源站认证时，填写该参数或RealServerCertificateId参数 */
   PolyRealServerCertificateIds?: string[];
+  /** TLS支持的版本支持TLSv1，TLSv1.1,TLSv1.2,TLSv1.3 */
+  TLSSupportVersion?: string[];
+  /** 支持的TLS密码套件，可选值为：[GAAP_TLS_CIPHERS_WIDE,GAAPTLS_CIPHERS_GENERAL,GAAPTLS_CIPHERS_STRICT] */
+  TLSCiphers?: string;
 }
 
 declare interface SetAuthenticationResponse {
@@ -2827,7 +2831,7 @@ declare interface SetAuthenticationResponse {
 declare interface SetTlsVersionRequest {
   /** 监听器ID */
   ListenerId: string;
-  /** TLS版本,可选TLSv1.0、TLSv1.1、TLSv1.2、TLSv1.3 */
+  /** TLS版本,可选TLSv1、TLSv1.1、TLSv1.2、TLSv1.3 */
   TLSSupportVersion: string[];
   /** 密码套件包,可选 GAAP_TLS_CIPHERS_STRICT，GAAP_TLS_CIPHERS_GENERAL，GAAP_TLS_CIPHERS_WIDE(默认) */
   TLSCiphers: string;

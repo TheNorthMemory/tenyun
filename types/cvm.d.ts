@@ -350,6 +350,12 @@ declare interface ImageQuota {
   TotalQuota: number;
 }
 
+/** 导入镜像的数据盘信息 */
+declare interface ImportImageDataDisk {
+  /** 数据盘镜像 COS 链接 */
+  ImageUrl: string;
+}
+
 /** 描述实例的信息 */
 declare interface Instance {
   /** 实例所在的位置。 */
@@ -2215,6 +2221,8 @@ declare interface ImportImageRequest {
   BootMode?: string;
   /** 镜像族 */
   ImageFamily?: string;
+  /** 导入的数据盘列表 */
+  ImportImageDataDiskList?: ImportImageDataDisk[];
 }
 
 declare interface ImportImageResponse {
@@ -2990,6 +2998,10 @@ declare interface SyncImagesRequest {
   ImageName?: string;
   /** 是否需要返回目的地域的镜像ID。默认值: false */
   ImageSetRequired?: boolean;
+  /** 是否复制为加密自定义镜像。默认值为 false。复制加密自定义镜像仅支持同地域。 */
+  Encrypt?: boolean;
+  /** 加密自定义镜像使用的 KMS 密钥 ID。仅当复制加密镜像时，即 Encrypt 为 true 时，此参数有效；不指定 KmsKeyId，默认使用 CBS 云产品 KMS 密钥。 */
+  KmsKeyId?: string;
 }
 
 declare interface SyncImagesResponse {

@@ -2589,7 +2589,7 @@ declare interface DeleteAuditRuleTemplatesResponse {
 declare interface DeleteBackupRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 备份任务 ID。该任务 ID 为 [创建云数据库备份](https://cloud.tencent.com/document/api/236/15844) 接口返回的任务 ID。 */
+  /** 备份任务 ID。您可通过 [查询数据备份文件列表](https://cloud.tencent.com/document/api/236/15842) 来获取目标备份任务 ID。 */
   BackupId: number;
 }
 
@@ -2639,6 +2639,8 @@ declare interface DeleteRotationPasswordRequest {
   Host: string;
   /** 关闭密码轮转后实例账户的最新密码 */
   Password: string;
+  /** 传入不为空则对密码进行了加密处理 */
+  EncryptMethod?: string;
 }
 
 declare interface DeleteRotationPasswordResponse {

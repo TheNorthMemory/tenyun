@@ -154,6 +154,10 @@ declare interface ApmInstanceDetail {
   PayModeEffective?: boolean | null;
   /** 响应时间满意阈值 */
   ResponseDurationWarningThreshold?: number | null;
+  /** 是否免费（0=否，1=限额免费，2=完全免费），默认0 */
+  Free?: number | null;
+  /** 是否tsf默认业务系统（0=否，1-是） */
+  DefaultTSF?: number | null;
 }
 
 /** 指标列表单元 */

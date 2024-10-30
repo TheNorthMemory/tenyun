@@ -55,25 +55,51 @@ declare interface CVSSV3Info {
 /** 描述一个第三方组件的源信息。 */
 declare interface Component {
   /** 第三方组件的PURL */
-  PURL: PURL;
+  PURL?: PURL;
   /** 第三方组件的主页 */
-  Homepage: string;
+  Homepage?: string;
   /** 第三方组件的简介 */
-  Summary: string;
+  Summary?: string;
   /** 第三方组件的别名列表 */
-  NicknameList: string[] | null;
+  NicknameList?: string[] | null;
   /** 第三方组件的代码位置列表 */
-  CodeLocationList: string[] | null;
+  CodeLocationList?: string[] | null;
   /** 第三方组件的许可证表达式 */
-  LicenseExpression: string;
+  LicenseExpression?: string;
+  /** 第三方组件的版本信息(如果匹配到版本) */
+  VersionInfo?: ComponentVersionInfo | null;
+  /** 第三方组件的最后更新时间 */
+  LastUpdateTime?: string | null;
+  /** 第三方组件的类型标签 */
+  TagList?: string[] | null;
 }
 
-/** 描述组件的一条版本信息。 */
+/** 筛选条件，同一个Tag不能同时出现在IncludeTags和ExcludeTags，可能的Tag包括："CopyrightUpdated", "LicenseUpdated", "ContainsVulnerability" */
+declare interface ComponentTagFilter {
+  /** 包括的Tag */
+  IncludeTags?: string[];
+  /** 排除的Tag */
+  ExcludeTags?: string[];
+}
+
+/** 描述一个组件版本。 */
 declare interface ComponentVersion {
   /** 该组件的PURL */
   PURL?: PURL | null;
   /** 该组件版本的许可证表达式 */
   LicenseExpression?: string | null;
+  /** 组件的版本信息 */
+  VersionInfo?: ComponentVersionInfo | null;
+}
+
+/** 描述组件版本的详情，包含组件发布时间、Copyright列表、组件描述Tag。 */
+declare interface ComponentVersionInfo {
+  /** 版本发布时间 */
+  PublishTime?: string | null;
+  /** 当前版本的所有copyright */
+  CopyrightList?: string[] | null;
+  /** 版本标签 */
+  TagList?: string[] | null;
 }
 
 /** 与输入组件相关的漏洞信息摘要信息。 */
@@ -188,6 +214,8 @@ declare interface VulnerabilityDetail {
   CVSSv3Info?: CVSSV3Info | null;
   /** 漏洞提交时间 */
   SubmitTime?: string;
+  /** 漏洞更新时间 */
+  UpdateTime?: string;
   /** CWE编号 */
   CWEID?: string;
   /** 漏洞CVSSv2向量 */
@@ -214,6 +242,12 @@ declare interface VulnerabilitySummary {
   IsSuggest?: boolean;
   /** 漏洞风险等级CriticalHighMediumLow */
   Severity?: string;
+  /** 架构信息，如x86、ARM等，废弃，请使用ArchitectureList */
+  Architecture?: string[] | null;
+  /** 架构信息，如x86、ARM等 */
+  ArchitectureList?: string[] | null;
+  /** patch链接 */
+  PatchUrlList?: string[] | null;
 }
 
 /** 描述漏洞的详细信息。 */
@@ -231,7 +265,7 @@ declare interface DescribeKBComponentRequest {
 
 declare interface DescribeKBComponentResponse {
   /** 匹配的组件信息 */
-  Component: Component;
+  Component?: Component;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -239,6 +273,16 @@ declare interface DescribeKBComponentResponse {
 declare interface DescribeKBComponentVersionListRequest {
   /** 要查询的组件 PURL */
   PURL: PURL;
+  /** 页号 */
+  PageNumber?: number;
+  /** 页大小 */
+  PageSize?: number;
+  /** 排序方式，可以是"ASC"或"DESC"，默认"DESC" */
+  Order?: string;
+  /** 排序字段，可能的字段包括“Version”、"PublishTime" */
+  OrderBy?: string[];
+  /** Tag筛选 */
+  Filter?: ComponentTagFilter;
 }
 
 declare interface DescribeKBComponentVersionListResponse {
@@ -258,6 +302,10 @@ declare interface DescribeKBComponentVulnerabilityRequest {
 declare interface DescribeKBComponentVulnerabilityResponse {
   /** 漏洞信息列表 */
   VulnerabilityList?: ComponentVulnerabilityUnion[] | null;
+  /** 组件purl */
+  PURL?: PURL;
+  /** 推荐版本，当前版本中的所有漏洞都修复了的版本 */
+  RecommendedVersion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -330,7 +378,7 @@ declare interface SearchKBComponentResponse {
   RequestId?: string;
 }
 
-/** {@link Bsca 二进制软件成分分析} */
+/** {@link Bsca 软件成分分析} */
 declare interface Bsca {
   (): Versions;
   /** 查询知识库组件信息 {@link DescribeKBComponentRequest} {@link DescribeKBComponentResponse} */
