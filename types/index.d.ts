@@ -25,6 +25,7 @@ import As, { Versions as AsVersions } from "./as";
 import Ba, { Versions as BaVersions } from "./ba";
 import Batch, { Versions as BatchVersions } from "./batch";
 import Bda, { Versions as BdaVersions } from "./bda";
+import Bh, { Versions as BhVersions } from "./bh";
 import Bi, { Versions as BiVersions } from "./bi";
 import Billing, { Versions as BillingVersions } from "./billing";
 import Bizlive, { Versions as BizliveVersions } from "./bizlive";
@@ -125,6 +126,7 @@ import Ic, { Versions as IcVersions } from "./ic";
 import Icr, { Versions as IcrVersions } from "./icr";
 import Ie, { Versions as IeVersions } from "./ie";
 import Iecp, { Versions as IecpVersions } from "./iecp";
+import Ig, { Versions as IgVersions } from "./ig";
 import Iir, { Versions as IirVersions } from "./iir";
 import Ims, { Versions as ImsVersions } from "./ims";
 import Ioa, { Versions as IoaVersions } from "./ioa";
@@ -285,6 +287,7 @@ export declare type SERVICE_VERSIONS = {
   ba: BaVersions,
   batch: BatchVersions,
   bda: BdaVersions,
+  bh: BhVersions,
   bi: BiVersions,
   billing: BillingVersions,
   bizlive: BizliveVersions,
@@ -385,6 +388,7 @@ export declare type SERVICE_VERSIONS = {
   icr: IcrVersions,
   ie: IeVersions,
   iecp: IecpVersions,
+  ig: IgVersions,
   iir: IirVersions,
   ims: ImsVersions,
   ioa: IoaVersions,
@@ -584,6 +588,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   batch: Batch,
   /** {@link Bda 人体分析} */
   bda: Bda,
+  /** {@link Bh 运维安全中心（堡垒机）} */
+  bh: Bh,
   /** {@link Bi 商业智能分析 BI} */
   bi: Bi,
   /** {@link Billing 费用中心} */
@@ -781,6 +787,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ie: Ie,
   /** {@link Iecp 物联网边缘计算平台} */
   iecp: Iecp,
+  /** {@link Ig 智能导诊} */
+  ig: Ig,
   /** {@link Iir 智能识图} */
   iir: Iir,
   /** {@link Ims 图片内容安全} */
