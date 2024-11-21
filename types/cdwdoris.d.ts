@@ -272,6 +272,8 @@ declare interface DataBaseAuditRecord {
   SqlType?: string | null;
   /** catalog名称 */
   Catalog?: string | null;
+  /** 状态 */
+  State?: string | null;
 }
 
 /** 磁盘规格描述 */
@@ -882,6 +884,8 @@ declare interface CreateBackUpScheduleRequest {
 }
 
 declare interface CreateBackUpScheduleResponse {
+  /** 错误信息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1040,6 +1044,10 @@ declare interface DescribeBackUpJobRequest {
 declare interface DescribeBackUpJobResponse {
   /** 任务列表 */
   BackUpJobs?: BackUpJobDisplay[] | null;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

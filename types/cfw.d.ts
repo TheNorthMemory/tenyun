@@ -5,145 +5,173 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 访问控制列表对象 */
 declare interface AcListsData {
   /** 规则id */
-  Id: number;
+  Id?: number;
   /** 访问源 */
-  SourceIp: string | null;
+  SourceIp?: string;
   /** 访问目的 */
-  TargetIp: string | null;
+  TargetIp?: string;
   /** 协议 */
-  Protocol: string | null;
+  Protocol?: string;
   /** 端口 */
-  Port: string | null;
+  Port?: string;
   /** 策略 */
-  Strategy: number | null;
+  Strategy?: number;
   /** 描述 */
-  Detail: string | null;
+  Detail?: string;
   /** 命中次数 */
-  Count: number;
+  Count?: number;
   /** 执行顺序 */
-  OrderIndex: number;
+  OrderIndex?: number;
   /** 告警规则id */
-  LogId: string | null;
+  LogId?: string;
+  /** 规则开关状态 1打开 0关闭 */
+  Status?: number;
+  /** 规则源类型 */
+  SrcType?: number;
+  /** 规则目的类型 */
+  DstType?: number;
+  /** 规则唯一ID */
+  Uuid?: string;
+  /** 规则有效性1 有效0 无效 */
+  Invalid?: number;
+  /** 是否地域规则 */
+  IsRegion?: number;
+  /** 云厂商代码 */
+  CloudCode?: string;
+  /** 自动化助手信息 */
+  AutoTask?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 地域码信息 */
+  RegionCode?: string;
+  /** 国家代码 */
+  Country?: number;
+  /** 城市代码 */
+  City?: number;
+  /** 国家名称 */
+  RegName1?: string;
+  /** 城市名称 */
+  RegName2?: string;
 }
 
 /** AssetZone */
 declare interface AssetZone {
   /** 地域 */
-  Zone: string;
+  Zone?: string;
   /** 地域英文 */
-  ZoneEng: string;
+  ZoneEng?: string;
 }
 
 /** 企业安全组关联实例信息 */
 declare interface AssociatedInstanceInfo {
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId: string;
   /** 实例名称 */
-  InstanceName: string | null;
+  InstanceName: string;
   /** 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库 */
-  Type: number | null;
+  Type: number;
   /** 私有网络ID */
-  VpcId: string | null;
+  VpcId: string;
   /** 私有网络名称 */
-  VpcName: string | null;
+  VpcName: string;
   /** 公网IP */
-  PublicIp: string | null;
+  PublicIp: string;
   /** 内网IP */
-  Ip: string | null;
+  Ip: string;
   /** 关联安全组数量 */
-  SecurityGroupCount: number | null;
+  SecurityGroupCount: number;
   /** 关联安全组规则数量 */
-  SecurityGroupRuleCount?: number | null;
+  SecurityGroupRuleCount?: number;
   /** 关联数据库代理Id */
-  CdbId?: string | null;
+  CdbId?: string;
 }
 
 /** 封禁列表和放通列表结构体 */
 declare interface BanAndAllowRule {
-  /** 封禁和放通对象 */
-  Ioc?: string | null;
-  /** 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 */
-  DirectionList?: string | null;
-  /** 规则截止时间 */
-  EndTime?: string | null;
   /** 规则评论 */
-  Comment?: string | null;
+  Comment?: string;
   /** 自定义白名单规则 */
-  CustomRule?: CustomWhiteRule | null;
+  CustomRule?: CustomWhiteRule;
+  /** 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 */
+  DirectionList?: string;
+  /** 规则截止时间 */
+  EndTime?: string;
   /** 放通的引擎: 1针对互联网边界 2针对nat防火墙 4针对vpc防火墙 */
-  FwType?: number | null;
+  FwType?: number;
+  /** 封禁和放通对象 */
+  Ioc?: string;
 }
 
 /** 封禁列表和放通列表结构体 */
 declare interface BanAndAllowRuleDel {
   /** 封禁和放通对象 */
-  Ioc?: string | null;
+  Ioc?: string;
   /** 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 （DeleteBlockIgnoreRuleNew接口，该字段无效） */
-  DirectionList?: string | null;
-  /** 规则类型 */
-  RuleType?: number | null;
+  DirectionList?: string;
+  /** 规则类型RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则 7入侵防御规则 */
+  RuleType?: number;
 }
 
 /** 规则关联的beta任务 */
 declare interface BetaInfoByACL {
   /** 任务id */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 上次执行时间 */
-  LastTime?: string | null;
+  LastTime?: string;
 }
 
 /** 入侵防御放通封禁规则 */
 declare interface BlockIgnoreRule {
   /** 规则类型，取值：1 封禁，2外部IP，3域名，4情报，5assets，6自定义策略，7入侵防御规则id （2-7属于白名单类型） */
-  RuleType?: number | null;
+  RuleType?: number;
   /** 规则ip或白名单内容 */
-  Ioc?: string | null;
+  Ioc?: string;
   /** 资产实例名称、自定义策略名称等 */
-  IocName?: string | null;
+  IocName?: string;
   /** 白名单信息 */
-  IocInfo?: string | null;
+  IocInfo?: string;
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** IP */
-  IP?: string | null;
+  IP?: string;
   /** 危险等级 */
-  Level?: string | null;
+  Level?: string;
   /** 来源事件名称 */
-  EventName?: string | null;
+  EventName?: string;
   /** 方向：1入站，0出站 */
-  Direction?: number | null;
+  Direction?: number;
   /** 所有方向聚合成字符串 */
-  DirectionList?: string | null;
+  DirectionList?: string;
   /** 协议 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 地理位置 */
-  Address?: string | null;
+  Address?: string;
   /** 规则类型：1封禁，2放通 */
-  Action?: number | null;
+  Action?: number;
   /** 规则生效开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 规则生效结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 忽略原因 */
-  IgnoreReason?: string | null;
+  IgnoreReason?: string;
   /** 安全事件来源 */
-  Source?: string | null;
+  Source?: string;
   /** 规则id */
-  UniqueId?: string | null;
+  UniqueId?: string;
   /** 规则命中次数 */
-  MatchTimes?: number | null;
+  MatchTimes?: number;
   /** 国家 */
-  Country?: string | null;
+  Country?: string;
   /** 备注 */
-  Comment?: string | null;
+  Comment?: string;
   /** 上次命中时间 */
-  LastHitTime?: string | null;
+  LastHitTime?: string;
   /** 自定义规则细节 */
-  CustomRule?: CustomWhiteRule | null;
+  CustomRule?: CustomWhiteRule;
   /** 1 border 2 nat 4 vpc 8 border-serial */
-  FwType?: number | null;
+  FwType?: number;
 }
 
 /** NAT防火墙Dnat规则 */
@@ -166,10 +194,10 @@ declare interface CfwNatDnatRule {
 declare interface CommonFilter {
   /** 检索的键值 */
   Name: string;
-  /** 检索的值，各检索值间为OR关系 */
-  Values: string[];
   /** 枚举类型，代表Name与Values之间的匹配关系enum FilterOperatorType { //等于 FILTER_OPERATOR_TYPE_EQUAL = 1; //大于 FILTER_OPERATOR_TYPE_GREATER = 2; //小于 FILTER_OPERATOR_TYPE_LESS = 3; //大于等于 FILTER_OPERATOR_TYPE_GREATER_EQ = 4; //小于等于 FILTER_OPERATOR_TYPE_LESS_EQ = 5; //不等于 FILTER_OPERATOR_TYPE_NO_EQ = 6; //not in FILTER_OPERATOR_TYPE_NOT_IN = 8; //模糊匹配 FILTER_OPERATOR_TYPE_FUZZINESS = 9;} */
   OperatorType: number;
+  /** 检索的值，各检索值间为OR关系 */
+  Values: string[];
 }
 
 /** 创建NAT ACL规则参数结构 */
@@ -244,14 +272,14 @@ declare interface CreateRuleItem {
 
 /** 自定义白名单规则 */
 declare interface CustomWhiteRule {
-  /** 访问源 */
-  SrcIP?: string | null;
   /** 访问目的 */
-  DstIP?: string | null;
-  /** 规则名称 */
-  IdsRuleName?: string | null;
+  DstIP?: string;
   /** 规则ID */
-  IdsRuleId?: string | null;
+  IdsRuleId?: string;
+  /** 规则名称 */
+  IdsRuleName?: string;
+  /** 访问源 */
+  SrcIP?: string;
 }
 
 /** 数据库白名单规则数据 */
@@ -287,95 +315,95 @@ declare interface DatabaseWhiteListRuleData {
 /** 访问控制列表对象 */
 declare interface DescAcItem {
   /** 访问源 */
-  SourceContent?: string | null;
+  SourceContent?: string;
   /** 访问目的 */
-  TargetContent?: string | null;
+  TargetContent?: string;
   /** 协议 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 端口 */
-  Port?: string | null;
+  Port?: string;
   /** 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察 */
-  RuleAction?: string | null;
+  RuleAction?: string;
   /** 描述 */
-  Description?: string | null;
+  Description?: string;
   /** 命中次数 */
   Count?: number;
   /** 执行顺序 */
   OrderIndex?: number;
   /** 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag */
-  SourceType?: string | null;
+  SourceType?: string;
   /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location,dnsparse */
-  TargetType?: string | null;
+  TargetType?: string;
   /** 规则对应的唯一id */
-  Uuid?: number | null;
+  Uuid?: number;
   /** 规则有效性 */
-  Invalid?: number | null;
+  Invalid?: number;
   /** 0为正常规则,1为地域规则 */
-  IsRegion?: number | null;
+  IsRegion?: number;
   /** 国家id */
-  CountryCode?: number | null;
+  CountryCode?: number;
   /** 城市id */
-  CityCode?: number | null;
+  CityCode?: number;
   /** 国家名称 */
-  CountryName?: string | null;
+  CountryName?: string;
   /** 省名称 */
-  CityName?: string | null;
+  CityName?: string;
   /** 云厂商code */
-  CloudCode?: string | null;
+  CloudCode?: string;
   /** 0为正常规则,1为云厂商规则 */
-  IsCloud?: number | null;
+  IsCloud?: number;
   /** 规则状态，true表示启用，false表示禁用 */
-  Enable?: string | null;
+  Enable?: string;
   /** 规则方向：1，入向；0，出向 */
-  Direction?: number | null;
+  Direction?: number;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 内部使用的uuid，一般情况下不会使用到该字段 */
-  InternalUuid?: number | null;
+  InternalUuid?: number;
   /** 规则状态，查询规则命中详情时该字段有效，0：新增，1: 已删除, 2: 编辑删除 */
-  Status?: number | null;
+  Status?: number;
   /** 关联任务详情 */
-  BetaList?: BetaInfoByACL[] | null;
+  BetaList?: BetaInfoByACL[];
   /** （1）互联网边界防火墙，生效范围：serial，串行；side，旁路；all，全局；（2）NAT边界防火墙：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度 */
-  Scope?: string | null;
+  Scope?: string;
   /** 生效范围描述 */
-  ScopeDesc?: string | null;
+  ScopeDesc?: string;
   /** 互联网边界防火墙使用的内部规则id */
-  InternetBorderUuid?: string | null;
+  InternetBorderUuid?: string;
   /** 协议端口组名称 */
-  ParamTemplateName?: string | null;
+  ParamTemplateName?: string;
   /** 协议端口组ID */
-  ParamTemplateId?: string | null;
+  ParamTemplateId?: string;
   /** 访问源名称 */
-  SourceName?: string | null;
+  SourceName?: string;
   /** 访问目的名称 */
-  TargetName?: string | null;
+  TargetName?: string;
   /** 规则最近命中时间 */
-  LastHitTime?: string | null;
+  LastHitTime?: string;
 }
 
 /** NAT防火墙Dnat规则列表 */
 declare interface DescNatDnatRule {
   /** id */
-  Id?: number | null;
+  Id?: number;
   /** 网络协议，可选值：TCP、UDP。 */
-  IpProtocol?: string | null;
+  IpProtocol?: string;
   /** 弹性IP。 */
-  PublicIpAddress?: string | null;
+  PublicIpAddress?: string;
   /** 公网端口。 */
-  PublicPort?: number | null;
+  PublicPort?: number;
   /** 内网地址。 */
-  PrivateIpAddress?: string | null;
+  PrivateIpAddress?: string;
   /** 内网端口。 */
-  PrivatePort?: number | null;
+  PrivatePort?: number;
   /** NAT防火墙转发规则描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 是否被关联引用，如被远程运维使用 */
-  IsReferenced?: number | null;
+  IsReferenced?: number;
   /** 所属防火墙实例id */
-  FwInsId?: string | null;
+  FwInsId?: string;
   /** 关联的nat网关Id */
-  NatGwId?: string | null;
+  NatGwId?: string;
 }
 
 /** 设置nat防火墙的vpc dns 接入开关 */
@@ -391,49 +419,49 @@ declare interface EdgeIpInfo {
   /** 公网IP */
   PublicIp?: string;
   /** 公网 IP 类型 1 公网,2 弹性,3 弹性ipv6,4 anycastIP, 6 HighQualityEIP */
-  PublicIpType?: number | null;
+  PublicIpType?: number;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例名 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 内网IP */
-  IntranetIp?: string | null;
+  IntranetIp?: string;
   /** 资产类型 */
-  AssetType?: string | null;
+  AssetType?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 风险端口数 */
-  PortRiskCount?: number | null;
+  PortRiskCount?: number;
   /** 最近扫描时间 */
-  LastScanTime?: string | null;
+  LastScanTime?: string;
   /** 是否为region eip0 不为region eip，不能选择串行1 为region eip 可以选择串行 */
-  IsRegionEip?: number | null;
+  IsRegionEip?: number;
   /** EIP 所关联的VPC */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 0: 该地域暂未支持串行1: 该用户未在该地域配置串行带宽2: 该用户已在该地域配置串行带宽，可以开启串行开关 */
-  IsSerialRegion?: number | null;
+  IsSerialRegion?: number;
   /** 0: 不是公网CLB 可以开启串行开关1: 是公网CLB 不可以开启串行开关 */
-  IsPublicClb?: number | null;
+  IsPublicClb?: number;
   /** 0: 开启开关时提示要创建私有连接。1: 关闭该开关是提示删除私有连接。如果大于 1: 关闭开关 、开启开关不需提示创建删除私有连接。 */
-  EndpointBindEipNum?: number | null;
+  EndpointBindEipNum?: number;
   /** 扫描深度 */
-  ScanMode?: string | null;
+  ScanMode?: string;
   /** 扫描状态 */
-  ScanStatus?: number | null;
+  ScanStatus?: number;
   /** 开关状态0 : 关闭1 : 开启2 : 开启中3 : 关闭中4 : 异常 */
-  Status?: number | null;
+  Status?: number;
   /** 私有连接ID */
-  EndpointId?: string | null;
+  EndpointId?: string;
   /** 私有连接IP */
-  EndpointIp?: string | null;
+  EndpointIp?: string;
   /** 0 : 旁路1 : 串行2 : 正在模式切换 */
   SwitchMode?: number;
   /** 开关权重 */
-  SwitchWeight?: number | null;
+  SwitchWeight?: number;
   /** 域名化CLB的域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** IP超量状态 */
-  OverUsedStatus?: number | null;
+  OverUsedStatus?: number;
 }
 
 /** 开启、关闭 防火墙互联网边界开关 */
@@ -451,75 +479,75 @@ declare interface EdgeIpSwitch {
 /** 企业安全组自动化任务信息 */
 declare interface EnterpriseSecurityGroupRuleBetaInfo {
   /** 任务id */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 时间 */
-  LastTime?: string | null;
+  LastTime?: string;
 }
 
 /** 企业安全组规则列表信息 */
 declare interface EnterpriseSecurityGroupRuleRuleInfo {
   /** 排序 */
-  OrderIndex?: number | null;
+  OrderIndex?: number;
   /** 主键id */
-  RuleUuid?: number | null;
+  RuleUuid?: number;
   /** 规则uuid */
-  Uuid?: string | null;
+  Uuid?: string;
   /** 源规则内容 */
-  SourceId?: string | null;
+  SourceId?: string;
   /** 源规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(intance)2表示子网实例(intance)3表示CVM实例(intance)4表示CLB实例(intance)5表示ENI实例(intance)6表示数据库实例(intance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
-  SourceType?: number | null;
+  SourceType?: number;
   /** 目的规则内容 */
-  TargetId?: string | null;
+  TargetId?: string;
   /** 目的规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(intance)2表示子网实例(intance)3表示CVM实例(intance)4表示CLB实例(intance)5表示ENI实例(intance)6表示数据库实例(intance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
-  TargetType?: number | null;
+  TargetType?: number;
   /** 协议名称取值范围:TCP/ANY/ICMP/UDPANY:表示所有 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 端口 */
-  Port?: string | null;
+  Port?: string;
   /** 规则策略取值范围:1/21:阻断2:放行 */
-  Strategy?: number | null;
+  Strategy?: number;
   /** 规则启用状态 取值范围： 0/10:未开启1:开启 */
-  Status?: number | null;
+  Status?: number;
   /** 描述 */
-  Detail?: string | null;
+  Detail?: string;
   /** 标签 */
-  AclTags?: string | null;
+  AclTags?: string;
   /** 规则最新一次是否有改动取值范围：0/10:否1:是 */
-  IsNew?: number | null;
+  IsNew?: number;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 是否延迟下发规则 取值范围：0/10:立即下发 1:延迟下发 */
-  IsDelay?: number | null;
+  IsDelay?: number;
   /** 服务模板id */
-  ServiceTemplateId?: string | null;
+  ServiceTemplateId?: string;
   /** 源资产名称 */
-  SouInstanceName?: string | null;
+  SouInstanceName?: string;
   /** 源资产公网ip */
-  SouPublicIp?: string | null;
+  SouPublicIp?: string;
   /** 源资产内网ip */
-  SouPrivateIp?: string | null;
+  SouPrivateIp?: string;
   /** 源资产网段信息 */
-  SouCidr?: string | null;
+  SouCidr?: string;
   /** 源模板名称 */
-  SouParameterName?: string | null;
+  SouParameterName?: string;
   /** 目的资产名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 目的资产公网ip */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 目的资产内网ip */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** 目的资产网段信息 */
-  Cidr?: string | null;
+  Cidr?: string;
   /** 目的模板名称 */
-  ParameterName?: string | null;
+  ParameterName?: string;
   /** 端口模板名称 */
-  ProtocolPortName?: string | null;
+  ProtocolPortName?: string;
   /** 自动化任务信息 */
-  BetaList?: EnterpriseSecurityGroupRuleBetaInfo[] | null;
+  BetaList?: EnterpriseSecurityGroupRuleBetaInfo[];
   /** 规则id 等同RuleUuid */
-  Id?: number | null;
+  Id?: number;
 }
 
 /** 防火墙网段信息 */
@@ -545,7 +573,7 @@ declare interface FwDeploy {
   /** 备可用区，为空则选择默认可用区 */
   ZoneBak?: string;
   /** 若为cdc防火墙时填充该id */
-  CdcId?: string | null;
+  CdcId?: string;
 }
 
 /** 防火墙引流网关信息 */
@@ -553,17 +581,17 @@ declare interface FwGateway {
   /** 防火墙网关id */
   GatewayId: string;
   /** 网关所属vpc id */
-  VpcId: string | null;
+  VpcId: string;
   /** 网关ip地址 */
-  IpAddress: string | null;
+  IpAddress: string;
 }
 
 /** 多种VPC墙模式开关结构 */
 declare interface FwGroupSwitch {
   /** 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由 */
-  SwitchMode?: number | null;
+  SwitchMode?: number;
   /** 防火墙开关ID支持三种类型1. 边开关(单点互通)2. 点开关(多点互通)3. 全开关(全互通) */
-  SwitchId?: string | null;
+  SwitchId?: string;
 }
 
 /** VPC防火墙(组)四种开关展示 */
@@ -571,39 +599,41 @@ declare interface FwGroupSwitchShow {
   /** 防火墙开关ID */
   SwitchId?: string;
   /** 防火墙开关NAME */
-  SwitchName?: string | null;
+  SwitchName?: string;
   /** 互通模式 */
   SwitchMode?: number;
   /** 开关边连接类型 0：对等连接， 1：云连网 */
-  ConnectType?: number | null;
+  ConnectType?: number;
   /** 连接ID */
-  ConnectId?: string | null;
+  ConnectId?: string;
   /** 连接名称 */
-  ConnectName?: string | null;
+  ConnectName?: string;
   /** 源实例信息 */
-  SrcInstancesInfo?: NetInstancesInfo[] | null;
+  SrcInstancesInfo?: NetInstancesInfo[];
   /** 目的实例信息 */
-  DstInstancesInfo?: NetInstancesInfo[] | null;
+  DstInstancesInfo?: NetInstancesInfo[];
   /** 防火墙(组)数据 */
-  FwGroupId?: string | null;
+  FwGroupId?: string;
   /** 防火墙(组)名称 */
-  FwGroupName?: string | null;
+  FwGroupName?: string;
   /** 开关状态 0：关 ， 1：开 */
-  Enable?: number | null;
+  Enable?: number;
   /** 开关的状态 0：正常， 1：转换中 */
-  Status?: number | null;
+  Status?: number;
   /** 0-非sase实例，忽略，1-未绑定状态，2-已绑定 */
-  AttachWithEdge?: number | null;
+  AttachWithEdge?: number;
   /** 对等防火墙和开关状态 0：正常， 1：对等未创建防火墙，2：对等已创建防火墙，未打开开关 */
-  CrossEdgeStatus?: number | null;
+  CrossEdgeStatus?: number;
   /** 网络经过VPC防火墙CVM所在地域 */
-  FwInsRegion?: string[] | null;
+  FwInsRegion?: string[];
   /** 0 观察 1 拦截 2 严格 3 关闭 4 不支持ips 前端展示tag */
-  IpsAction?: number | null;
+  IpsAction?: number;
   /** 开关关联的防火墙实例列表 */
-  FwInsLst?: VpcFwInstanceShow[] | null;
+  FwInsLst?: VpcFwInstanceShow[];
   /** 开关是否处于bypass状态0：正常状态1：bypass状态 */
-  BypassStatus?: number | null;
+  BypassStatus?: number;
+  /** 0: ipv4 , 1:ipv6 */
+  IpVersion?: number;
 }
 
 /** vpc的防火墙网段 */
@@ -625,53 +655,53 @@ declare interface IPDefendStatus {
 /** 入侵防御规则白名单详情 */
 declare interface IdsWhiteInfo {
   /** 白名单唯一ID */
-  Id?: number | null;
+  Id?: number;
   /** 源IP */
-  SrcIp?: string | null;
+  SrcIp?: string;
   /** 目的IP */
-  DstIp?: string | null;
+  DstIp?: string;
   /** 规则类型 */
-  WhiteRuleType?: string | null;
+  WhiteRuleType?: string;
   /** 白名单生效防火墙范围： 1 边界防火墙 2 nat防火墙 4 vpc防火墙 7 = 1+2+4 所有防火墙 */
-  FwType?: number | null;
+  FwType?: number;
   /** 入侵防御规则ID */
-  RuleId?: string | null;
+  RuleId?: string;
 }
 
-/** // InstanceInfo 实例详情结果type InstanceInfo struct {	AppID string `json:"AppId" gorm:"column:appid"`	Region string `json:"Region" gorm:"column:region"`	VPCID string `json:"VpcId" gorm:"column:vpc_id"`	SubNetID string `json:"SubnetId" gorm:"column:subnet_id"`	InstanceID string `json:"InstanceId" gorm:"column:instance_id"`	InstanceName string `json:"InstanceName" gorm:"column:instance_name"`	//InsType common.CVM 3是cvm实例,4是clb实例,5是eni实例,6是mysql,7是redis,8是NAT,9是VPN,10是ES,11是MARIADB,12是KAFKA	InsType int `json:"InsType" gorm:"column:instance_type"`	PublicIP string `json:"PublicIp" gorm:"column:public_ip"`	PrivateIP string `json:"PrivateIp" gorm:"column:ip"`	//规则下发无需管，前端展示用	PortNum string `json:"PortNum" gorm:"column:port_num"`	LeakNum string `json:"LeakNum" gorm:"column:leak_num"`	ResourceGroupNum int `json:"ResourceGroupNum"`	VPCName string `json:"VPCName" gorm:"column:VPCName"`} */
+/** 实例详情结果 */
 declare interface InstanceInfo {
   /** appid信息 */
-  AppId: string;
-  /** 地域 */
-  Region: string;
-  /** vpcid信息 */
-  VpcId: string;
-  /** vpc名称 */
-  VPCName: string;
-  /** 子网id */
-  SubnetId: string;
-  /** 资产id */
-  InstanceId: string;
-  /** 资产名 */
-  InstanceName: string;
+  AppId?: string;
+  /** 资产来源1公网 2内网 */
+  InsSource?: string;
   /** 资产类型 3是cvm实例,4是clb实例,5是eni实例,6是mysql,7是redis,8是NAT,9是VPN,10是ES,11是MARIADB,12是KAFKA 13 NATFW */
-  InsType: number;
-  /** 公网ip */
-  PublicIp: string;
-  /** 内网ip */
-  PrivateIp: string;
-  /** 端口数 */
-  PortNum: string;
+  InsType?: number;
+  /** 资产id */
+  InstanceId?: string;
+  /** 资产名 */
+  InstanceName?: string;
   /** 漏洞数 */
-  LeakNum: string;
-  /** 1，公网 2内网 */
-  InsSource: string;
-  /** [a,b] */
-  ResourcePath: string[] | null;
-  /** 扫描结果 */
-  Server?: string[] | null;
+  LeakNum?: string;
+  /** 端口数 */
+  PortNum?: string;
+  /** 内网ip */
+  PrivateIp?: string;
+  /** 公网ip */
+  PublicIp?: string;
   /** 地域 */
-  RegionKey?: string | null;
+  Region?: string;
+  /** 地域 */
+  RegionKey?: string;
+  /** 资产路径 */
+  ResourcePath?: string[];
+  /** 扫描结果 */
+  Server?: string[];
+  /** 子网id */
+  SubnetId?: string;
+  /** vpc名称 */
+  VPCName?: string;
+  /** vpcid信息 */
+  VpcId?: string;
 }
 
 /** 入侵防御封禁列表、放通列表添加规则入参 */
@@ -693,29 +723,29 @@ declare interface IntrusionDefenseRule {
 /** 封禁放通IOC列表 */
 declare interface IocListData {
   /** 待处置IP地址，IP/Domain字段二选一 */
-  IP: string | null;
+  IP: string;
   /** 只能为0或者1 0代表出站 1代表入站 */
-  Direction: number | null;
+  Direction: number;
   /** 待处置域名，IP/Domain字段二选一 */
-  Domain?: string | null;
+  Domain?: string;
 }
 
 /** 统计折线图通用结构体 */
 declare interface IpStatic {
   /** 值 */
-  Num: number;
+  Num?: number;
   /** 折线图横坐标时间 */
-  StatTime: string;
+  StatTime?: string;
 }
 
 /** Nat防火墙弹性公网ip列表 */
 declare interface NatFwEipsInfo {
   /** 弹性公网ip */
-  Eip: string;
+  Eip?: string;
   /** 所属的Nat网关Id */
-  NatGatewayId: string | null;
+  NatGatewayId?: string;
   /** Nat网关名称 */
-  NatGatewayName: string | null;
+  NatGatewayName?: string;
 }
 
 /** nat fw 实例展示的过滤列表 */
@@ -729,17 +759,17 @@ declare interface NatFwFilter {
 /** Nat实例类型 */
 declare interface NatFwInstance {
   /** nat实例id */
-  NatinsId: string;
+  NatinsId?: string;
   /** nat实例名称 */
-  NatinsName: string;
+  NatinsName?: string;
   /** 实例所在地域 */
-  Region: string | null;
+  Region?: string;
   /** 0:新增模式，1:接入模式 */
-  FwMode: number | null;
+  FwMode?: number;
   /** 0:正常状态， 1: 正在创建 */
-  Status: number | null;
+  Status?: number;
   /** nat公网ip */
-  NatIp: string | null;
+  NatIp?: string;
 }
 
 /** Nat实例卡片详细信息 */
@@ -761,97 +791,53 @@ declare interface NatInstanceInfo {
   /** 地域中文信息 */
   RegionZh?: string;
   /** 公网ip数组 */
-  EipAddress?: string[] | null;
+  EipAddress?: string[];
   /** 内外使用ip数组 */
-  VpcIp?: string[] | null;
+  VpcIp?: string[];
   /** 实例关联子网数组 */
-  Subnets?: string[] | null;
+  Subnets?: string[];
   /** 0 :正常 1：正在初始化 */
-  Status?: number | null;
+  Status?: number;
   /** 地域区域信息 */
-  RegionDetail?: string | null;
+  RegionDetail?: string;
   /** 实例所在可用区 */
-  ZoneZh?: string | null;
+  ZoneZh?: string;
   /** 实例所在可用区 */
-  ZoneZhBak?: string | null;
+  ZoneZhBak?: string;
   /** 已使用规则数 */
-  RuleUsed?: number | null;
+  RuleUsed?: number;
   /** 实例的规则限制最大规格数 */
-  RuleMax?: number | null;
+  RuleMax?: number;
   /** 实例引擎版本 */
-  EngineVersion?: string | null;
+  EngineVersion?: string;
   /** 引擎是否可升级：0，不可升级；1，可升级 */
-  UpdateEnable?: number | null;
+  UpdateEnable?: number;
   /** 是的需要升级引擎 支持 nat拨测 1需要 0不需要 */
-  NeedProbeEngineUpdate?: number | null;
+  NeedProbeEngineUpdate?: number;
   /** 引擎运行模式，Normal:正常, OnlyRoute:透明模式 */
-  TrafficMode?: string | null;
+  TrafficMode?: string;
   /** 实例主所在可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 实例备所在可用区 */
-  ZoneBak?: string | null;
+  ZoneBak?: string;
   /** 引擎预约升级时间 */
-  ReserveTime?: string | null;
+  ReserveTime?: string;
   /** 引擎预约升级版本 */
-  ReserveVersion?: string | null;
-  /** 引擎预约升级版本状态 */
-  ReserveVersionState?: string | null;
+  ReserveVersion?: string;
+  /** 引擎预约升级版本状态 stable:稳定版；previewed:预览版 */
+  ReserveVersionState?: string;
   /** 弹性开关1 打开0 关闭 */
-  ElasticSwitch?: number | null;
+  ElasticSwitch?: number;
   /** 弹性带宽，单位Mbps */
-  ElasticBandwidth?: number | null;
+  ElasticBandwidth?: number;
   /** 是否首次开通按量付费1 是0 不是 */
-  IsFirstAfterPay?: number | null;
-}
-
-/** NAT防火墙开关列表数据 */
-declare interface NatSwitchListData {
-  /** 列表ID */
-  Id?: number;
-  /** 子网ID */
-  SubnetId?: string | null;
-  /** 子网名称 */
-  SubnetName?: string | null;
-  /** IPv4 CIDR */
-  SubnetCidr?: string | null;
-  /** 关联路由ID */
-  RouteId?: string | null;
-  /** 关联路由名称 */
-  RouteName?: string | null;
-  /** 云服务器个数 */
-  CvmNum?: number | null;
-  /** 所属VPC ID */
-  VpcId?: string | null;
-  /** 所属VPC名称 */
-  VpcName?: string | null;
-  /** 是否生效 */
-  Enable?: number | null;
-  /** 开关状态 */
-  Status?: number | null;
-  /** NAT网关ID */
-  NatId?: string | null;
-  /** NAT网关名称 */
-  NatName?: string | null;
-  /** NAT防火墙实例ID */
-  NatInsId?: string | null;
-  /** NAT防火墙实例名称 */
-  NatInsName?: string | null;
-  /** 地域 */
-  Region?: string | null;
-  /** 开关是否异常,0:正常,1:异常 */
-  Abnormal?: number | null;
-  /** nat防火墙出口路由表id */
-  ORTableId?: string | null;
-  /** nat防火墙出口路由表名称 */
-  ORTableName?: string | null;
-  /** 出口Snat Ip列表 */
-  Ohavips?: string[] | null;
+  IsFirstAfterPay?: number;
 }
 
 /** 网络实例信息 */
 declare interface NetInstancesInfo {
   /** 网络实例ID */
-  InstanceId: string | null;
+  InstanceId?: string;
   /** 网络实例名称 */
   InstanceName?: string;
   /** 网络cidr (多段以逗号分隔) */
@@ -924,76 +910,76 @@ declare interface RuleInfoData {
 
 /** 新手引导扫描信息 */
 declare interface ScanInfo {
-  /** 扫描结果信息 */
-  ScanResultInfo: ScanResultInfo;
-  /** 扫描状态 0扫描中 1完成 2未勾选自动扫描 */
-  ScanStatus: number;
   /** 进度 */
-  ScanPercent: number;
+  ScanPercent?: number;
+  /** 扫描结果信息 */
+  ScanResultInfo?: ScanResultInfo;
+  /** 扫描状态 0扫描中 1完成 2未勾选自动扫描 */
+  ScanStatus?: number;
   /** 预计完成时间 */
-  ScanTime: string;
+  ScanTime?: string;
 }
 
-/** 新手引导扫描结果信息PortNum int	LeakNum int	IPNum int	IPStatus bool	IdpStatus bool	BanStatus bool */
+/** 新手引导扫描结果信息 */
 declare interface ScanResultInfo {
-  /** 暴露漏洞数量 */
-  LeakNum: number;
-  /** 防护ip数量 */
-  IPNum: number;
-  /** 暴露端口数量 */
-  PortNum: number;
-  /** 是否开启防护 */
-  IPStatus: boolean;
-  /** 是否拦截攻击 */
-  IdpStatus: boolean;
   /** 是否禁封端口 */
-  BanStatus: boolean;
+  BanStatus?: boolean;
+  /** 防护ip数量 */
+  IPNum?: number;
+  /** 是否开启防护 */
+  IPStatus?: boolean;
+  /** 是否拦截攻击 */
+  IdpStatus?: boolean;
+  /** 暴露漏洞数量 */
+  LeakNum?: number;
+  /** 暴露端口数量 */
+  PortNum?: number;
 }
 
 /** 双向下发的企业安全组规则 */
 declare interface SecurityGroupBothWayInfo {
   /** 执行顺序 */
-  OrderIndex: number | null;
+  OrderIndex: number;
   /** 访问源 */
-  SourceId: string | null;
+  SourceId: string;
   /** 访问源类型，默认为0，0: IP, 1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 7: 参数模板, 100: 资产分组 */
-  SourceType: number | null;
+  SourceType: number;
   /** 访问目的 */
-  TargetId: string | null;
+  TargetId: string;
   /** 访问目的类型，默认为0，0: IP, 1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 7: 参数模板, 100: 资产分组 */
-  TargetType: number | null;
+  TargetType: number;
   /** 协议 */
-  Protocol: string | null;
+  Protocol: string;
   /** 目的端口 */
-  Port: string | null;
+  Port: string;
   /** 策略, 1：阻断，2：放行 */
-  Strategy: number | null;
+  Strategy: number;
   /** 方向，0：出站，1：入站，默认1 */
-  Direction: number | null;
+  Direction: number;
   /** 地域 */
   Region: string;
   /** 描述 */
-  Detail?: string | null;
+  Detail?: string;
   /** 是否开关开启，0：未开启，1：开启 */
-  Status?: number | null;
+  Status?: number;
   /** 是否是正常规则，0：正常，1：异常 */
-  IsNew?: number | null;
+  IsNew?: number;
   /** 单/双向下发，0:单向下发，1：双向下发 */
-  BothWay?: number | null;
+  BothWay?: number;
   /** 私有网络ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 公网IP，多个以英文逗号分隔 */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 内网IP，多个以英文逗号分隔 */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** 掩码地址，多个以英文逗号分隔 */
-  Cidr?: string | null;
+  Cidr?: string;
   /** 端口协议类型参数模板id */
-  ServiceTemplateId?: string | null;
+  ServiceTemplateId?: string;
   /** 是否使用端口协议模板，0：否，1：是 */
   ProtocolPortType?: number;
 }
@@ -1027,35 +1013,35 @@ declare interface SecurityGroupListData {
   /** 是否是正常规则，0：正常，1：异常 */
   IsNew?: number;
   /** 私有网络ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 公网IP，多个以英文逗号分隔 */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 内网IP，多个以英文逗号分隔 */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** 掩码地址，多个以英文逗号分隔 */
-  Cidr?: string | null;
+  Cidr?: string;
   /** 端口协议类型参数模板id */
-  ServiceTemplateId?: string | null;
+  ServiceTemplateId?: string;
   /** 生成双向下发规则 */
-  BothWayInfo?: SecurityGroupBothWayInfo[] | null;
+  BothWayInfo?: SecurityGroupBothWayInfo[];
   /** 方向，0：出站，1：入站，默认1 */
   Direction?: number;
   /** 是否使用端口协议模板，0：否，1：是 */
   ProtocolPortType?: number;
   /** Uuid */
-  Uuid?: string | null;
+  Uuid?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 资产分组名称 */
-  AssetGroupNameIn?: string | null;
+  AssetGroupNameIn?: string;
   /** 资产分组名称 */
-  AssetGroupNameOut?: string | null;
+  AssetGroupNameOut?: string;
   /** 模板名称 */
-  ParameterName?: string | null;
+  ParameterName?: string;
   /** 端口协议类型参数模板名称 */
   ProtocolPortName?: string;
 }
@@ -1085,11 +1071,11 @@ declare interface SecurityGroupRule {
   /** 规则顺序，-1表示最低，1表示最高，请勿和外层Type冲突（和外层的Type配合使用，当中间插入时，指定添加位置） */
   OrderIndex: string;
   /** 协议；TCP/UDP/ICMP/ANY */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 访问控制策略的端口。取值：-1/-1：全部端口80：80端口 */
-  Port?: string | null;
+  Port?: string;
   /** 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥 */
-  ServiceTemplateId?: string | null;
+  ServiceTemplateId?: string;
   /** （入参时无需填写，自动生成）规则对应的唯一id */
   Id?: string;
   /** （入参时、Enable已弃用；由通用配置中新增规则启用状态控制）规则状态，true表示启用，false表示禁用 */
@@ -1101,17 +1087,17 @@ declare interface SecurityGroupRule {
 /** 安全组规则 */
 declare interface SecurityGroupSimplifyRule {
   /** 访问源示例：net：IP/CIDR(192.168.0.2)template：参数模板(ipm-dyodhpby)instance：资产实例(ins-123456)resourcegroup：资产分组(/全部分组/分组1/子分组1)tag：资源标签({"Key":"标签key值","Value":"标签Value值"})region：地域(ap-gaungzhou) */
-  SourceContent: string | null;
+  SourceContent?: string;
   /** 访问目的示例：net：IP/CIDR(192.168.0.2)template：参数模板(ipm-dyodhpby)instance：资产实例(ins-123456)resourcegroup：资产分组(/全部分组/分组1/子分组1)tag：资源标签({"Key":"标签key值","Value":"标签Value值"})region：地域(ap-gaungzhou) */
-  DestContent: string | null;
+  DestContent?: string;
   /** 协议；TCP/UDP/ICMP/ANY */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 描述 */
-  Description: string | null;
+  Description?: string;
   /** 规则对应的唯一id */
-  RuleUuid?: number | null;
+  RuleUuid?: number;
   /** 规则序号 */
-  Sequence?: number | null;
+  Sequence?: number;
 }
 
 /** 执行顺序对象 */
@@ -1126,64 +1112,64 @@ declare interface SequenceData {
 
 /** StaticInfo 告警柱形图统计信息 */
 declare interface StaticInfo {
-  /** 数 */
-  Num: number;
-  /** 端口 */
-  Port: string;
-  /** ip信息 */
-  Ip: string;
   /** 地址 */
-  Address: string;
+  Address?: string;
   /** 资产id */
-  InsID: string;
+  InsID?: string;
   /** 资产名称 */
-  InsName: string;
+  InsName?: string;
+  /** ip信息 */
+  Ip?: string;
+  /** 数 */
+  Num?: number;
+  /** 端口 */
+  Port?: string;
 }
 
 /** 防火墙开关列表对象 */
 declare interface SwitchListsData {
   /** 公网IP */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 内网IP */
-  IntranetIp?: string | null;
+  IntranetIp?: string;
   /** 实例名 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 资产类型 */
   AssetType?: string;
   /** 地域 */
-  Area?: string | null;
+  Area?: string;
   /** 防火墙开关 */
   Switch?: number;
   /** id值 */
   Id?: number;
   /** 公网 IP 类型 */
-  PublicIpType?: number | null;
+  PublicIpType?: number;
   /** 风险端口数 */
-  PortTimes?: number | null;
+  PortTimes?: number;
   /** 最近扫描时间 */
-  LastTime?: string | null;
+  LastTime?: string;
   /** 扫描深度 */
-  ScanMode?: string | null;
+  ScanMode?: string;
   /** 扫描状态 */
-  ScanStatus?: number | null;
+  ScanStatus?: number;
 }
 
 /** 告警中心概览数据 */
 declare interface TLogInfo {
-  /** 失陷主机 */
-  OutNum: number;
-  /** 待处置告警 */
-  HandleNum: number;
-  /** 漏洞攻击 */
-  VulNum: number;
-  /** 网络探测 */
-  NetworkNum: number;
   /** 封禁列表 */
-  BanNum: number;
+  BanNum?: number;
   /** 暴力破解 */
-  BruteForceNum: number;
+  BruteForceNum?: number;
+  /** 待处置告警 */
+  HandleNum?: number;
+  /** 网络探测 */
+  NetworkNum?: number;
+  /** 失陷主机 */
+  OutNum?: number;
+  /** 漏洞攻击 */
+  VulNum?: number;
 }
 
 /** 标签信息 */
@@ -1197,43 +1183,43 @@ declare interface TagInfo {
 /** 地址模板列表数据 */
 declare interface TemplateListInfo {
   /** 模板ID */
-  Uuid?: string | null;
+  Uuid?: string;
   /** 模板名称 */
-  Name?: string | null;
+  Name?: string;
   /** 描述 */
-  Detail?: string | null;
+  Detail?: string;
   /** IP模板 */
-  IpString?: string | null;
+  IpString?: string;
   /** 插入时间 */
-  InsertTime?: string | null;
+  InsertTime?: string;
   /** 修改时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 模板类型 */
-  Type?: number | null;
+  Type?: number;
   /** 关联规则条数 */
-  RulesNum?: number | null;
+  RulesNum?: number;
   /** 模板Id */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 协议端口模板，协议类型，4:4层协议，7:7层协议 */
-  ProtocolType?: string | null;
+  ProtocolType?: string;
   /** 模板包含地址数量 */
-  IPNum?: number | null;
+  IPNum?: number;
   /** IP版本,0,IPv4;1,IPv6 */
-  IpVersion?: number | null;
+  IpVersion?: number;
 }
 
 /** 未处置事件详情 */
 declare interface UnHandleEvent {
   /** 伪攻击链类型 */
-  EventTableListStruct: UnHandleEventDetail[];
+  EventTableListStruct?: UnHandleEventDetail[];
   /** 1 是 0否 */
-  BaseLineUser: number;
+  BaseLineUser?: number;
   /** 1 打开 0 关闭 */
-  BaseLineInSwitch: number;
+  BaseLineInSwitch?: number;
   /** 1 打开 0 关闭 */
-  BaseLineOutSwitch: number;
+  BaseLineOutSwitch?: number;
   /** vpc间防火墙实例数量 */
-  VpcFwCount: number | null;
+  VpcFwCount?: number;
 }
 
 /** 未处置事件信息汇总 */
@@ -1247,155 +1233,155 @@ declare interface UnHandleEventDetail {
 /** nat防火墙 vpc dns 开关信息 */
 declare interface VpcDnsInfo {
   /** vpc id */
-  VpcId: string;
+  VpcId?: string;
   /** vpc 名称 */
-  VpcName: string;
+  VpcName?: string;
   /** nat 防火墙模式 0：新增模式， 1: 接入模式 */
-  FwMode: number;
+  FwMode?: number;
   /** vpc ipv4网段范围 CIDR（Classless Inter-Domain Routing，无类域间路由选择） */
-  VpcIpv4Cidr: string;
+  VpcIpv4Cidr?: string;
   /** 外网弹性ip，防火墙 dns解析地址 */
-  DNSEip: string;
+  DNSEip?: string;
   /** nat网关id */
-  NatInsId: string | null;
+  NatInsId?: string;
   /** nat网关名称 */
-  NatInsName: string | null;
+  NatInsName?: string;
   /** 0：开关关闭 ， 1: 开关打开 */
-  SwitchStatus: number;
+  SwitchStatus?: number;
   /** 0：未防护， 1: 已防护，2：忽略此字段 */
-  ProtectedStatus?: number | null;
+  ProtectedStatus?: number;
   /** 是否支持DNS FW，0-不支持、1-支持 */
-  SupportDNSFW?: number | null;
+  SupportDNSFW?: number;
 }
 
 /** VPC防火墙实例的CVM信息 */
 declare interface VpcFwCvmInsInfo {
   /** VPC防火墙实例ID */
-  FwInsId: string | null;
+  FwInsId: string;
   /** CVM所在地域 */
-  Region?: string | null;
+  Region?: string;
   /** CVM所在地域中文 */
-  RegionZh?: string | null;
+  RegionZh?: string;
   /** CVM所在地域详情 */
-  RegionDetail?: string | null;
+  RegionDetail?: string;
   /** 主机所在可用区 */
-  ZoneZh?: string | null;
+  ZoneZh?: string;
   /** 备机所在可用区 */
-  ZoneZhBack?: string | null;
+  ZoneZhBack?: string;
   /** 防火墙CVM带宽值 */
-  BandWidth?: number | null;
+  BandWidth?: number;
   /** 实例主机所在可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 实例备机所在可用区 */
-  ZoneBak?: string | null;
+  ZoneBak?: string;
 }
 
 /** VPC防火墙(组)及防火墙实例详情信息 */
 declare interface VpcFwGroupInfo {
   /** 防火墙(组)ID */
-  FwGroupId?: string | null;
+  FwGroupId?: string;
   /** 防火墙(组)名称 */
-  FwGroupName?: string | null;
+  FwGroupName?: string;
   /** 防火墙组涉及到的开关个数 */
-  FwSwitchNum?: number | null;
+  FwSwitchNum?: number;
   /** 防火墙(组)部署的地域 */
-  RegionLst?: string[] | null;
+  RegionLst?: string[];
   /** 模式 1：CCN云联网模式；0：私有网络模式 2: sase 模式 3：ccn 高级模式 4: 私有网络(跨租户单边模式) */
-  Mode?: number | null;
+  Mode?: number;
   /** 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由 */
-  SwitchMode?: number | null;
+  SwitchMode?: number;
   /** VPC防火墙实例卡片信息数组 */
-  FwInstanceLst?: VpcFwInstanceInfo[] | null;
+  FwInstanceLst?: VpcFwInstanceInfo[];
   /** 防火墙(状态) 0：正常 1: 初始化或操作中 */
-  Status?: number | null;
+  Status?: number;
   /** auto :自动选择如果为网段，则为用户自定义 192.168.0.0/20 */
   FwVpcCidr?: string;
   /** cdc专用集群场景时表示部署所属的cdc */
-  CdcId?: string | null;
+  CdcId?: string;
   /** cdc专用集群场景时表示cdc名称 */
-  CdcName?: string | null;
+  CdcName?: string;
   /** 跨租户模式 1管理员 2单边 0 非跨租户 */
-  CrossUserMode?: string | null;
+  CrossUserMode?: string;
   /** 云联网模式下，当前实例是否需要开启重叠路由开关，1：需要开启，0：不需要开启 */
-  NeedSwitchCcnOverlap?: number | null;
+  NeedSwitchCcnOverlap?: number;
   /** 云联网模式下，实例关联的云联网id */
-  CcnId?: string | null;
+  CcnId?: string;
 }
 
 /** vpc 防火墙下单防火墙实例结构体 */
 declare interface VpcFwInstance {
   /** 防火墙实例名称 */
-  Name: string | null;
+  Name: string;
   /** 私有网络模式下接入的VpcId列表；仅私有网络模式使用 */
-  VpcIds: string[] | null;
+  VpcIds: string[];
   /** 部署地域信息 */
-  FwDeploy: FwDeploy | null;
+  FwDeploy: FwDeploy;
   /** 防火墙实例ID (编辑场景传) */
-  FwInsId?: string | null;
+  FwInsId?: string;
 }
 
 /** VPC防火墙实例卡片信息 */
 declare interface VpcFwInstanceInfo {
   /** VPC防火墙实例名称 */
-  FwInsName: string | null;
+  FwInsName: string;
   /** VPC防火墙实例ID */
-  FwInsId: string | null;
+  FwInsId: string;
   /** VPC防火墙实例模式 0: 旧VPC模式防火墙 1: CCN模式防火墙 */
-  FwMode: number | null;
+  FwMode: number;
   /** VPC防火墙接入网络实例个数 */
-  JoinInsNum: number | null;
+  JoinInsNum: number;
   /** VPC防火墙开关个数 */
-  FwSwitchNum: number | null;
+  FwSwitchNum: number;
   /** VPC防火墙状态 0:正常 ， 1：创建中 2: 变更中 */
-  Status: number | null;
+  Status: number;
   /** VPC防火墙创建时间 */
-  Time: string | null;
+  Time: string;
   /** VPC 相关云联网ID列表 */
-  CcnId?: string[] | null;
+  CcnId?: string[];
   /** VPC 相关云联网名称列表 */
-  CcnName?: string[] | null;
+  CcnName?: string[];
   /** VPC 相关对等连接ID列表 */
-  PeerConnectionId?: string[] | null;
+  PeerConnectionId?: string[];
   /** VPC 相关对等连接名称列表 */
-  PeerConnectionName?: string[] | null;
+  PeerConnectionName?: string[];
   /** VPC防火墙CVM的列表 */
-  FwCvmLst?: VpcFwCvmInsInfo[] | null;
+  FwCvmLst?: VpcFwCvmInsInfo[];
   /** VPC防火墙接入网络实例类型列表 */
-  JoinInsLst?: VpcFwJoinInstanceType[] | null;
+  JoinInsLst?: VpcFwJoinInstanceType[];
   /** 防火墙网关信息 */
-  FwGateway?: FwGateway[] | null;
+  FwGateway?: FwGateway[];
   /** 防火墙(组)ID */
-  FwGroupId?: string | null;
+  FwGroupId?: string;
   /** 已使用规则数 */
-  RuleUsed?: number | null;
+  RuleUsed?: number;
   /** 最大规则数 */
-  RuleMax?: number | null;
+  RuleMax?: number;
   /** 防火墙实例带宽 */
-  Width?: number | null;
+  Width?: number;
   /** 用户VPC墙总带宽 */
-  UserVpcWidth?: number | null;
+  UserVpcWidth?: number;
   /** 接入的vpc列表 */
-  JoinInsIdLst?: string[] | null;
+  JoinInsIdLst?: string[];
   /** 内网间峰值带宽 (单位 bps ) */
   FlowMax?: number;
   /** 实例引擎版本 */
-  EngineVersion?: string | null;
+  EngineVersion?: string;
   /** 引擎是否可升级：0，不可升级；1，可升级 */
-  UpdateEnable?: number | null;
+  UpdateEnable?: number;
   /** 引擎运行模式，Normal:正常, OnlyRoute:透明模式 */
-  TrafficMode?: string | null;
+  TrafficMode?: string;
   /** 引擎预约升级时间 */
-  ReserveTime?: string | null;
+  ReserveTime?: string;
   /** 预约引擎升级版本 */
-  ReserveVersion?: string | null;
+  ReserveVersion?: string;
   /** 引擎预约升级版本状态 */
-  ReserveVersionState?: string | null;
+  ReserveVersionState?: string;
   /** 弹性开关 1打开 0关闭 */
-  ElasticSwitch?: number | null;
+  ElasticSwitch?: number;
   /** 弹性带宽，单位Mbps */
-  ElasticBandwidth?: number | null;
+  ElasticBandwidth?: number;
   /** 是否首次开通按量付费1 是0 不是 */
-  IsFirstAfterPay?: number | null;
+  IsFirstAfterPay?: number;
 }
 
 /** VPC防火墙实例信息 */
@@ -1403,17 +1389,17 @@ declare interface VpcFwInstanceShow {
   /** VPC防火墙实例ID */
   FwInsId?: string;
   /** VPC防火墙实例名称 */
-  FwInsName?: string | null;
+  FwInsName?: string;
   /** 网络经过VPC防火墙CVM所在地域 */
-  FwInsRegion?: string | null;
+  FwInsRegion?: string;
 }
 
 /** VPC防火墙接入的网络实例类型及数量 */
 declare interface VpcFwJoinInstanceType {
   /** 接入实例类型，VPC、DIRECTCONNECT、 VPNGW 等 */
-  JoinType: string | null;
+  JoinType: string;
   /** 接入的对应网络实例类型的数量 */
-  Num: number | null;
+  Num: number;
 }
 
 /** VPC内网间规则 */
@@ -1427,11 +1413,11 @@ declare interface VpcRuleItem {
   /** 访问目的类型，类型可以为：net，domain，dnsparse */
   DestType: string;
   /** 协议，可选的值：TCPUDPICMPANYHTTPHTTPSHTTP/HTTPSSMTPSMTPSSMTP/SMTPSFTPDNSTLS/SSL */
-  Protocol: string | null;
+  Protocol: string;
   /** 访问控制策略中设置的流量通过云防火墙的方式。取值：accept：放行drop：拒绝log：观察 */
   RuleAction: string;
   /** 访问控制策略的端口。取值：-1/-1：全部端口80：80端口 */
-  Port: string | null;
+  Port: string;
   /** 描述 */
   Description: string;
   /** 规则顺序，-1表示最低，1表示最高 */
@@ -1451,21 +1437,23 @@ declare interface VpcRuleItem {
   /** 规则被删除：1，已删除；0，未删除 */
   Deleted?: number;
   /** 规则生效的防火墙实例ID */
-  FwGroupId?: string | null;
+  FwGroupId?: string;
   /** 防火墙名称 */
-  FwGroupName?: string | null;
+  FwGroupName?: string;
   /** beta任务详情 */
-  BetaList?: BetaInfoByACL[] | null;
+  BetaList?: BetaInfoByACL[];
   /** 端口协议组ID */
-  ParamTemplateId?: string | null;
+  ParamTemplateId?: string;
   /** 端口协议组名称 */
-  ParamTemplateName?: string | null;
+  ParamTemplateName?: string;
   /** 访问目的名称 */
-  TargetName?: string | null;
+  TargetName?: string;
   /** 访问源名称 */
-  SourceName?: string | null;
+  SourceName?: string;
   /** Ip版本，0：IPv4，1：IPv6，默认为IPv4 */
-  IpVersion?: number | null;
+  IpVersion?: number;
+  /** 是否是无效规则，0 表示有效规则，1 表示无效规则，出参场景返回使用 */
+  Invalid?: number;
 }
 
 /** vpc区域数据详情 */
@@ -1505,11 +1493,11 @@ declare interface AddAcRuleRequest {
 
 declare interface AddAcRuleResponse {
   /** 创建成功后返回新策略的uuid */
-  RuleUuid: number;
+  RuleUuid?: number;
   /** 0代表成功，-1代表失败 */
-  ReturnCode: number;
+  ReturnCode?: number;
   /** success代表成功，failed代表失败 */
-  ReturnMsg: string;
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1539,15 +1527,15 @@ declare interface AddEnterpriseSecurityGroupRulesRequest {
   IsDelay?: number;
   /** 来源 默认空 覆盖导入是 batch_import_cover */
   From?: string;
-  /** 是否使用id 默认不需要 */
+  /** 是否复用rule id，1为是，默认不需要 */
   IsUseId?: number;
 }
 
 declare interface AddEnterpriseSecurityGroupRulesResponse {
   /** 状态值，0：添加成功，非0：添加失败 */
   Status?: number;
-  /** 规则uuid */
-  Rules?: SecurityGroupSimplifyRule[] | null;
+  /** 添加成功的规则详情 */
+  Rules?: SecurityGroupSimplifyRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1601,9 +1589,9 @@ declare interface CreateAcRulesRequest {
 
 declare interface CreateAcRulesResponse {
   /** 状态值，0:操作成功 */
-  Status: number;
+  Status?: number;
   /** 返回多余的信息 */
-  Info: string | null;
+  Info?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1755,7 +1743,7 @@ declare interface CreateDatabaseWhiteListRulesRequest {
 
 declare interface CreateDatabaseWhiteListRulesResponse {
   /** 状态值，0:添加成功，非0：添加失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1839,7 +1827,7 @@ declare interface CreateNatFwInstanceWithDomainRequest {
 
 declare interface CreateNatFwInstanceWithDomainResponse {
   /** nat实例信息 */
-  CfwInsId: string | null;
+  CfwInsId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1857,7 +1845,7 @@ declare interface CreateSecurityGroupRulesRequest {
 
 declare interface CreateSecurityGroupRulesResponse {
   /** 状态值，0：添加成功，非0：添加失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1883,7 +1871,7 @@ declare interface CreateVpcFwGroupRequest {
 
 declare interface CreateVpcFwGroupResponse {
   /** 防火墙组ID */
-  FwGroupId?: string | null;
+  FwGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1901,9 +1889,9 @@ declare interface DeleteAcRuleRequest {
 
 declare interface DeleteAcRuleResponse {
   /** 状态值 0: 删除成功, !0: 删除失败 */
-  Status: number;
+  Status?: number;
   /** 返回多余的信息 */
-  Info: string | null;
+  Info?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1931,9 +1919,9 @@ declare interface DeleteAllAccessControlRuleRequest {
 
 declare interface DeleteAllAccessControlRuleResponse {
   /** 状态值 0: 修改成功, 非0: 修改失败 */
-  Status: number;
+  Status?: number;
   /** 删除了几条访问控制规则 */
-  Info: number | null;
+  Info?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1999,7 +1987,7 @@ declare interface DeleteRemoteAccessDomainRequest {
 
 declare interface DeleteRemoteAccessDomainResponse {
   /** 状态值 0：删除成功，非 0：删除失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2027,9 +2015,9 @@ declare interface DeleteSecurityGroupRuleRequest {
 
 declare interface DeleteSecurityGroupRuleResponse {
   /** 状态值，0：成功，非0：失败 */
-  Status: number;
+  Status?: number;
   /** 返回多余的信息 */
-  Info: string | null;
+  Info?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2073,13 +2061,13 @@ declare interface DescribeAcListsRequest {
 
 declare interface DescribeAcListsResponse {
   /** 总条数 */
-  Total: number;
+  Total?: number;
   /** 访问控制列表数据 */
-  Data: AcListsData[];
+  Data?: AcListsData[];
   /** 不算筛选条数的总条数 */
-  AllTotal: number;
+  AllTotal?: number;
   /** 访问控制规则全部启用/全部停用 */
-  Enable: number | null;
+  Enable?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2097,9 +2085,9 @@ declare interface DescribeAclRuleRequest {
   StartTime?: string;
   /** 检索的截止时间，可不传 */
   EndTime?: string;
-  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc */
   Order?: string;
-  /** 排序所用到的字段 */
+  /** 排序所用到的字段，默认为sequence */
   By?: string;
 }
 
@@ -2107,7 +2095,7 @@ declare interface DescribeAclRuleResponse {
   /** 总条数 */
   Total?: number;
   /** nat访问控制列表数据 */
-  Data?: DescAcItem[] | null;
+  Data?: DescAcItem[];
   /** 未过滤的总条数 */
   AllTotal?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2189,30 +2177,30 @@ declare interface DescribeAssociatedInstanceListRequest {
 
 declare interface DescribeAssociatedInstanceListResponse {
   /** 实例数量 */
-  Total?: number | null;
+  Total?: number;
   /** 实例列表 */
-  Data?: AssociatedInstanceInfo[] | null;
+  Data?: AssociatedInstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBlockByIpTimesListRequest {
-  /** 开始时间 */
-  StartTime: string;
   /** 结束时间 */
   EndTime: string;
   /** ip查询条件 */
   Ip: string;
-  /** 地域 */
-  Zone?: string;
+  /** 开始时间 */
+  StartTime: string;
   /** 方向 */
   Direction?: string;
-  /** 来源 */
-  Source?: string;
   /** vpc间防火墙开关边id */
   EdgeId?: string;
   /** 日志来源 move：vpc间防火墙 */
   LogSource?: string;
+  /** 来源 */
+  Source?: string;
+  /** 地域 */
+  Zone?: string;
 }
 
 declare interface DescribeBlockByIpTimesListResponse {
@@ -2259,12 +2247,12 @@ declare interface DescribeBlockIgnoreListResponse {
 }
 
 declare interface DescribeBlockStaticListRequest {
-  /** 开始时间 */
-  StartTime: string;
   /** 结束时间 */
   EndTime: string;
   /** 列表类型，只能是下面三种之一：port、address、ip */
   QueryType: string;
+  /** 开始时间 */
+  StartTime: string;
   /** top数 */
   Top: number;
   /** 查询条件 */
@@ -2415,13 +2403,13 @@ declare interface DescribeFwEdgeIpsRequest {
 
 declare interface DescribeFwEdgeIpsResponse {
   /** ip 开关列表 */
-  Data?: EdgeIpInfo[] | null;
+  Data?: EdgeIpInfo[];
   /** ip 开关列表个数 */
-  Total?: number | null;
+  Total?: number;
   /** 地域列表 */
-  RegionLst?: string[] | null;
+  RegionLst?: string[];
   /** 实例类型列表 */
-  InstanceTypeLst?: string[] | null;
+  InstanceTypeLst?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2444,10 +2432,10 @@ declare interface DescribeFwGroupInstanceInfoRequest {
 }
 
 declare interface DescribeFwGroupInstanceInfoResponse {
-  /** 防火墙(组) */
-  VpcFwGroupLst?: VpcFwGroupInfo[] | null;
+  /** 防火墙(组)详细信息 */
+  VpcFwGroupLst?: VpcFwGroupInfo[];
   /** 防火墙(组)个数 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2541,7 +2529,7 @@ declare interface DescribeLogsResponse {
   /** 返回信息 success 成功 其他 不成功 */
   ReturnMsg?: string;
   /** 七层协议，NTA日志有效 */
-  AppProtocolList?: string[] | null;
+  AppProtocolList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2553,15 +2541,15 @@ declare interface DescribeNatAcRuleRequest {
   Offset: number;
   /** 需要查询的索引，特定场景使用，可不填 */
   Index?: string;
-  /** 过滤条件组合 */
+  /** 过滤条件组合，Direction 为0时表述查询出向规则，为1时表示查询入向规则 */
   Filters?: CommonFilter[];
   /** 检索的起始时间，可不传 */
   StartTime?: string;
   /** 检索的截止时间，可不传 */
   EndTime?: string;
-  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc */
   Order?: string;
-  /** 排序所用到的字段 */
+  /** 排序所用到的字段，默认为sequence */
   By?: string;
 }
 
@@ -2569,7 +2557,7 @@ declare interface DescribeNatAcRuleResponse {
   /** 总条数 */
   Total?: number;
   /** nat访问控制列表数据 */
-  Data?: DescAcItem[] | null;
+  Data?: DescAcItem[];
   /** 未过滤的总条数 */
   AllTotal?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2589,15 +2577,15 @@ declare interface DescribeNatFwDnatRuleRequest {
   StartTime?: string;
   /** 检索的截止时间，可不传 */
   EndTime?: string;
-  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，可不传 */
   Order?: string;
-  /** 排序所用到的字段 */
+  /** 排序所用到的字段，可不传 */
   By?: string;
 }
 
 declare interface DescribeNatFwDnatRuleResponse {
   /** Dnat规则列表 */
-  Data?: DescNatDnatRule[] | null;
+  Data?: DescNatDnatRule[];
   /** 列表总数 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2608,14 +2596,14 @@ declare interface DescribeNatFwInfoCountRequest {
 }
 
 declare interface DescribeNatFwInfoCountResponse {
-  /** 返回参数 */
-  ReturnMsg?: string | null;
-  /** 当前租户的nat实例个数 */
-  NatFwInsCount?: number | null;
-  /** 当前租户接入子网个数 */
-  SubnetCount?: number | null;
-  /** 打开开关个数 */
-  OpenSwitchCount?: number | null;
+  /** 返回参数 success 成功 failed 失败 */
+  ReturnMsg?: string;
+  /** 当前租户的nat防火墙实例个数 */
+  NatFwInsCount?: number;
+  /** 当前租户接入防火墙的子网个数 */
+  SubnetCount?: number;
+  /** 打开NAT防火墙开关个数 */
+  OpenSwitchCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2625,7 +2613,7 @@ declare interface DescribeNatFwInstanceRequest {
 
 declare interface DescribeNatFwInstanceResponse {
   /** 实例数组 */
-  NatinsLst: NatFwInstance[];
+  NatinsLst?: NatFwInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2635,7 +2623,7 @@ declare interface DescribeNatFwInstanceWithRegionRequest {
 
 declare interface DescribeNatFwInstanceWithRegionResponse {
   /** 实例数组 */
-  NatinsLst: NatFwInstance[] | null;
+  NatinsLst?: NatFwInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2651,9 +2639,9 @@ declare interface DescribeNatFwInstancesInfoRequest {
 
 declare interface DescribeNatFwInstancesInfoResponse {
   /** 实例卡片信息数组 */
-  NatinsLst: NatInstanceInfo[] | null;
+  NatinsLst?: NatInstanceInfo[];
   /** nat 防火墙个数 */
-  Total: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2671,39 +2659,11 @@ declare interface DescribeNatFwVpcDnsLstRequest {
 
 declare interface DescribeNatFwVpcDnsLstResponse {
   /** nat防火墙vpc dns 信息数组 */
-  VpcDnsSwitchLst?: VpcDnsInfo[] | null;
-  /** 返回参数 */
-  ReturnMsg?: string | null;
+  VpcDnsSwitchLst?: VpcDnsInfo[];
+  /** 返回参数 success成功 failed 失败 */
+  ReturnMsg?: string;
   /** 开关总条数 */
-  Total?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeNatSwitchListRequest {
-  /** 偏移量，分页用 */
-  Offset: number;
-  /** 条数，分页用 */
-  Limit: number;
-  /** 搜索值 */
-  SearchValue?: string;
-  /** 开关，1打开，0关闭 */
-  Status?: number;
-  /** 筛选NAT防火墙子网开关所属VPC */
-  VpcId?: string;
-  /** 筛选NAT防火墙子网开关所属NAT网关 */
-  NatId?: string;
-  /** 筛选NAT防火墙子网开关所属NAT防火墙实例 */
-  NatInsId?: string;
-  /** 筛选NAT防火墙子网开关所属地域 */
-  Area?: string;
-}
-
-declare interface DescribeNatSwitchListResponse {
-  /** 总数 */
   Total?: number;
-  /** NAT边界防火墙开关列表数据 */
-  Data?: NatSwitchListData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2720,12 +2680,12 @@ declare interface DescribeResourceGroupNewRequest {
 declare interface DescribeResourceGroupNewResponse {
   /** 返回树形结构 */
   Data?: string;
-  /** 未分类实例数量 */
-  UnResourceNum?: number;
-  /** 接口返回消息 */
-  ReturnMsg?: string;
   /** 返回码；0为请求成功 */
   ReturnCode?: number;
+  /** 接口返回消息 */
+  ReturnMsg?: string;
+  /** 未分类实例数量 */
+  UnResourceNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2753,15 +2713,15 @@ declare interface DescribeRuleOverviewRequest {
 
 declare interface DescribeRuleOverviewResponse {
   /** 规则总数 */
-  AllTotal: number | null;
+  AllTotal?: number;
   /** 阻断策略规则数量 */
-  StrategyNum: number | null;
+  StrategyNum?: number;
   /** 启用规则数量 */
-  StartRuleNum: number | null;
+  StartRuleNum?: number;
   /** 停用规则数量 */
-  StopRuleNum: number | null;
+  StopRuleNum?: number;
   /** 剩余配额 */
-  RemainingNum: number | null;
+  RemainingNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2785,39 +2745,39 @@ declare interface DescribeSecurityGroupListRequest {
 
 declare interface DescribeSecurityGroupListResponse {
   /** 列表当前规则总条数 */
-  Total: number;
+  Total?: number;
   /** 安全组规则列表数据 */
-  Data: SecurityGroupListData[];
+  Data?: SecurityGroupListData[];
   /** 不算筛选条数的总条数 */
-  AllTotal: number;
+  AllTotal?: number;
   /** 访问控制规则全部启用/全部停用 */
-  Enable: number | null;
+  Enable?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeSourceAssetRequest {
+  /** ChooseType为1，查询已经分组的资产；ChooseType不为1查询没有分组的资产 */
+  ChooseType?: string;
   /** 模糊查询 */
   FuzzySearch?: string;
   /** 资产类型 1公网 2内网 */
   InsType?: string;
-  /** ChooseType为1，查询已经分组的资产；ChooseType不为1查询没有分组的资产 */
-  ChooseType?: string;
-  /** 地域 */
-  Zone?: string;
   /** 查询单页的最大值；eg：10；则最多返回10条结果 */
   Limit?: number;
   /** 查询结果的偏移量 */
   Offset?: number;
+  /** 地域 */
+  Zone?: string;
 }
 
 declare interface DescribeSourceAssetResponse {
-  /** 地域集合 */
-  ZoneList?: AssetZone[];
   /** 数据 */
   Data?: InstanceInfo[];
   /** 返回数据总数 */
   Total?: number;
+  /** 地域集合 */
+  ZoneList?: AssetZone[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2849,20 +2809,20 @@ declare interface DescribeSwitchListsResponse {
   /** 区域列表 */
   AreaLists?: string[];
   /** 打开个数 */
-  OnNum?: number | null;
+  OnNum?: number;
   /** 关闭个数 */
-  OffNum?: number | null;
+  OffNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeTLogInfoRequest {
-  /** 开始时间 */
-  StartTime: string;
   /** 结束时间 */
   EndTime: string;
   /** 类型 1 告警 2阻断 */
   QueryType: string;
+  /** 开始时间 */
+  StartTime: string;
   /** 查询条件 */
   SearchValue?: string;
 }
@@ -2875,12 +2835,12 @@ declare interface DescribeTLogInfoResponse {
 }
 
 declare interface DescribeTLogIpListRequest {
-  /** 开始时间 */
-  StartTime: string;
   /** 结束时间 */
   EndTime: string;
   /** 类型 1 告警 2阻断 */
   QueryType: string;
+  /** 开始时间 */
+  StartTime: string;
   /** top数 */
   Top: number;
   /** 查询条件 */
@@ -2907,7 +2867,7 @@ declare interface DescribeTableStatusRequest {
 
 declare interface DescribeTableStatusResponse {
   /** 0：正常，其它：不正常 */
-  Status: number | null;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2923,7 +2883,7 @@ declare interface DescribeUnHandleEventTabListRequest {
 
 declare interface DescribeUnHandleEventTabListResponse {
   /** 租户伪攻击链未处置事件 */
-  Data?: UnHandleEvent | null;
+  Data?: UnHandleEvent;
   /** 错误码，0成功 非0错误 */
   ReturnCode?: number;
   /** 返回信息 success成功 */
@@ -2979,9 +2939,9 @@ declare interface DescribeVpcFwGroupSwitchRequest {
 
 declare interface DescribeVpcFwGroupSwitchResponse {
   /** 开关列表 */
-  SwitchList?: FwGroupSwitchShow[] | null;
+  SwitchList?: FwGroupSwitchShow[];
   /** 开关总个数 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3019,15 +2979,15 @@ declare interface ModifyAcRuleRequest {
 
 declare interface ModifyAcRuleResponse {
   /** 状态值，0:操作成功，非0：操作失败 */
-  Status: number;
+  Status?: number;
   /** 返回多余的信息 */
-  Info: string | null;
+  Info?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ModifyAclRuleRequest {
-  /** 需要编辑的规则数组 */
+  /** 需要编辑的规则数组，基于Uuid唯一id修改该规则 */
   Rules: CreateRuleItem[];
 }
 
@@ -3071,9 +3031,9 @@ declare interface ModifyAllPublicIPSwitchStatusRequest {
 
 declare interface ModifyAllPublicIPSwitchStatusResponse {
   /** 接口返回信息 */
-  ReturnMsg: string | null;
+  ReturnMsg?: string;
   /** 接口返回错误码，0请求成功 非0失败 */
-  ReturnCode: number | null;
+  ReturnCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3091,7 +3051,7 @@ declare interface ModifyAllRuleStatusRequest {
 
 declare interface ModifyAllRuleStatusResponse {
   /** 0: 修改成功, 其他: 修改失败 */
-  Status: number | null;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3125,11 +3085,11 @@ declare interface ModifyAssetScanRequest {
 
 declare interface ModifyAssetScanResponse {
   /** 接口返回信息 */
-  ReturnMsg: string | null;
+  ReturnMsg?: string;
   /** 接口返回错误码，0请求成功 非0失败 */
-  ReturnCode: number | null;
+  ReturnCode?: number;
   /** 状态值 0：成功，1 执行扫描中,其他：失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3195,10 +3155,10 @@ declare interface ModifyBlockIgnoreRuleResponse {
 }
 
 declare interface ModifyBlockTopRequest {
-  /** 记录id */
-  UniqueId: string;
   /** 操作类型 1 置顶 0取消 */
   OpeType: string;
+  /** 记录id */
+  UniqueId: string;
 }
 
 declare interface ModifyBlockTopResponse {
@@ -3221,9 +3181,9 @@ declare interface ModifyEWRuleStatusRequest {
 
 declare interface ModifyEWRuleStatusResponse {
   /** 状态值，0：修改成功，非0：修改失败 */
-  ReturnCode: number;
+  ReturnCode?: number;
   /** 状态信息，success：查询成功，fail：查询失败 */
-  ReturnMsg: string;
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3251,7 +3211,7 @@ declare interface ModifyEnterpriseSecurityDispatchStatusRequest {
 
 declare interface ModifyEnterpriseSecurityDispatchStatusResponse {
   /** 0: 修改成功, 其他: 修改失败 */
-  Status?: number | null;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3291,7 +3251,7 @@ declare interface ModifyFwGroupSwitchResponse {
 }
 
 declare interface ModifyNatAcRuleRequest {
-  /** 需要编辑的规则数组 */
+  /** 需要编辑的规则数组,基于Uuid唯一id来修改该规则 */
   Rules: CreateNatRuleItem[];
 }
 
@@ -3345,7 +3305,7 @@ declare interface ModifyNatFwVpcDnsSwitchRequest {
 
 declare interface ModifyNatFwVpcDnsSwitchResponse {
   /** 修改成功 */
-  ReturnMsg: string | null;
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3415,7 +3375,7 @@ declare interface ModifySecurityGroupItemRuleStatusRequest {
 
 declare interface ModifySecurityGroupItemRuleStatusResponse {
   /** 状态值，0：修改成功，非0：修改失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3433,9 +3393,9 @@ declare interface ModifySecurityGroupRuleRequest {
 
 declare interface ModifySecurityGroupRuleResponse {
   /** 状态值，0：编辑成功，非0：编辑失败 */
-  Status: number;
+  Status?: number;
   /** 编辑后新生成规则的Id */
-  NewRuleId: number;
+  NewRuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3449,7 +3409,7 @@ declare interface ModifySecurityGroupSequenceRulesRequest {
 
 declare interface ModifySecurityGroupSequenceRulesResponse {
   /** 状态值，0：修改成功，非0：修改失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3479,7 +3439,7 @@ declare interface ModifySequenceRulesRequest {
 
 declare interface ModifySequenceRulesResponse {
   /** 0: 修改成功, 非0: 修改失败 */
-  Status: number | null;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3505,7 +3465,7 @@ declare interface ModifyTableStatusRequest {
 
 declare interface ModifyTableStatusResponse {
   /** 0：正常，-1：不正常 */
-  Status: number | null;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3555,11 +3515,11 @@ declare interface RemoveAcRuleRequest {
 
 declare interface RemoveAcRuleResponse {
   /** 删除成功后返回被删除策略的uuid */
-  RuleUuid: number;
+  RuleUuid?: number;
   /** 0代表成功，-1代表失败 */
-  ReturnCode: number | null;
+  ReturnCode?: number;
   /** success代表成功，failed代表失败 */
-  ReturnMsg: string | null;
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3587,9 +3547,9 @@ declare interface RemoveEnterpriseSecurityGroupRuleRequest {
 
 declare interface RemoveEnterpriseSecurityGroupRuleResponse {
   /** 删除成功后返回被删除策略的uuid */
-  RuleUuid: number;
+  RuleUuid?: number;
   /** 0代表成功，-1代表失败 */
-  Status: number | null;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3611,6 +3571,8 @@ declare interface RemoveNatAcRuleResponse {
 declare interface RemoveVpcAcRuleRequest {
   /** 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则 */
   RuleUuids: number[];
+  /** 仅当RuleUuids为-1时有效；0：删除Ipv4规则，1：删除Ipv6规则；默认为Ipv4类型规则 */
+  IpVersion?: number;
 }
 
 declare interface RemoveVpcAcRuleResponse {
@@ -3661,7 +3623,7 @@ declare interface StopSecurityGroupRuleDispatchRequest {
 
 declare interface StopSecurityGroupRuleDispatchResponse {
   /** true代表成功，false代表错误 */
-  Status: boolean | null;
+  Status?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3681,7 +3643,7 @@ declare interface SyncFwOperateResponse {
 /** {@link Cfw 云防火墙} */
 declare interface Cfw {
   (): Versions;
-  /** 添加互联网边界规则 {@link AddAcRuleRequest} {@link AddAcRuleResponse} */
+  /** @deprecated 添加互联网边界规则（不再使用，已迁移到新接口AddAclRule） {@link AddAcRuleRequest} {@link AddAcRuleResponse} */
   AddAcRule(data: AddAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAcRuleResponse>;
   /** 添加互联网边界访问控制规则 {@link AddAclRuleRequest} {@link AddAclRuleResponse} */
   AddAclRule(data: AddAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAclRuleResponse>;
@@ -3795,8 +3757,6 @@ declare interface Cfw {
   DescribeNatFwInstancesInfo(data?: DescribeNatFwInstancesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstancesInfoResponse>;
   /** 展示当前natfw 实例对应的vpc dns开关 {@link DescribeNatFwVpcDnsLstRequest} {@link DescribeNatFwVpcDnsLstResponse} */
   DescribeNatFwVpcDnsLst(data: DescribeNatFwVpcDnsLstRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwVpcDnsLstResponse>;
-  /** @deprecated 查询NAT边界防火墙开关列表 {@link DescribeNatSwitchListRequest} {@link DescribeNatSwitchListResponse} */
-  DescribeNatSwitchList(data: DescribeNatSwitchListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatSwitchListResponse>;
   /** 资产中心资产树信息查询 {@link DescribeResourceGroupRequest} {@link DescribeResourceGroupResponse} */
   DescribeResourceGroup(data: DescribeResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupResponse>;
   /** 资产中心资产树信息查询new {@link DescribeResourceGroupNewRequest} {@link DescribeResourceGroupNewResponse} */
@@ -3807,7 +3767,7 @@ declare interface Cfw {
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
   /** 查询全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
-  /** @deprecated 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
+  /** 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;
   /** DescribeTLogInfo告警中心概况查询 {@link DescribeTLogInfoRequest} {@link DescribeTLogInfoResponse} */
   DescribeTLogInfo(data: DescribeTLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogInfoResponse>;

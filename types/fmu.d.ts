@@ -59,11 +59,11 @@ declare interface LipColorInfo {
 /** LUT素材信息 */
 declare interface ModelInfo {
   /** 唇色素材ID */
-  ModelId: string;
+  ModelId?: string;
   /** 唇色素材 url 。 LUT 文件 url 5分钟有效。 */
-  LUTFileUrl: string;
+  LUTFileUrl?: string;
   /** 文件描述信息。 */
-  Description: string;
+  Description?: string;
 }
 
 /** RGBA通道信息 */
@@ -141,7 +141,7 @@ declare interface CreateModelRequest {
 
 declare interface CreateModelResponse {
   /** 唇色素材ID。 */
-  ModelId: string;
+  ModelId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

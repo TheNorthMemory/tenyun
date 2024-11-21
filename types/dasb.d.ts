@@ -5,11 +5,11 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 权限控制模板对象 */
 declare interface ACTemplate {
   /** 模板id */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 模板名称 */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 模板描述 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 访问权限 */
@@ -67,113 +67,113 @@ declare interface Acl {
   /** 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期 */
   Status?: number;
   /** 所属部门的信息 */
-  Department?: Department | null;
+  Department?: Department;
   /** 是否允许使用访问串，默认允许 */
-  AllowAccessCredential?: boolean | null;
+  AllowAccessCredential?: boolean;
   /** 关联的数据库高危命令列表 */
-  ACTemplateSet?: ACTemplate[] | null;
+  ACTemplateSet?: ACTemplate[];
   /** 关联的白命令命令 */
-  WhiteCmds?: string[] | null;
+  WhiteCmds?: string[];
   /** 是否允许记录键盘 */
-  AllowKeyboardLogger?: boolean | null;
+  AllowKeyboardLogger?: boolean;
 }
 
 /** 资产同步状态 */
 declare interface AssetSyncStatus {
   /** 上一次同步完成的时间 */
-  LastTime: string;
+  LastTime?: string;
   /** 上一次同步的结果。 0 - 从未进行, 1 - 成功， 2 - 失败 */
-  LastStatus: number;
+  LastStatus?: number;
   /** 同步任务是否正在进行中 */
-  InProcess: boolean;
+  InProcess?: boolean;
 }
 
 /** 审计日志 */
 declare interface AuditLogResult {
   /** 被审计会话的Sid */
-  Sid: string;
+  Sid?: string;
   /** 审计者的编号 */
-  Uin: string;
+  Uin?: string;
   /** 审计动作发生的时间 */
-  Time: string;
+  Time?: string;
   /** 审计者的Ip */
-  ClientIp: string;
+  ClientIp?: string;
   /** 审计动作类型，1--回放、2--中断、3--监控 */
-  Operation: number;
+  Operation?: number;
   /** 被审计主机的Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 被审计主机的主机名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 被审计会话所属的类型，如字符会话 */
-  Protocol: string;
+  Protocol?: string;
   /** 被审计主机的内部Ip */
-  PrivateIp: string;
+  PrivateIp?: string;
   /** 被审计主机的外部Ip */
-  PublicIp: string;
+  PublicIp?: string;
   /** 审计者的子账号 */
-  SubAccountUin: string;
+  SubAccountUin?: string;
 }
 
 /** 查询改密计划详情 */
 declare interface ChangePwdTaskDetail {
   /** 资产信息 */
-  Device?: Device | null;
+  Device?: Device;
   /** 资产账号 */
-  Account?: string | null;
+  Account?: string;
   /** 上次改密结果。0-未改密 1-改密成功 2-改密失败 */
-  LastChangeStatus?: number | null;
+  LastChangeStatus?: number;
 }
 
 /** 修改密码任务信息 */
 declare interface ChangePwdTaskInfo {
   /** id */
-  Id?: number | null;
+  Id?: number;
   /** 任务id */
   OperationId?: string;
   /** 任务名 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 所属部门信息 */
-  Department?: Department | null;
+  Department?: Department;
   /** 改密方式。1：使用执行账号。2：修改自身密码 */
-  ChangeMethod?: number | null;
+  ChangeMethod?: number;
   /** 执行账号 */
-  RunAccount?: string | null;
+  RunAccount?: string;
   /** 密码生成策略 */
-  AuthGenerationStrategy?: number | null;
+  AuthGenerationStrategy?: number;
   /** 密码长度 */
-  PasswordLength?: number | null;
+  PasswordLength?: number;
   /** 包含小写字母 */
-  SmallLetter?: number | null;
+  SmallLetter?: number;
   /** 包含大写字母 */
-  BigLetter?: number | null;
+  BigLetter?: number;
   /** 包含数字 */
-  Digit?: number | null;
+  Digit?: number;
   /** 包含的特殊字符，base64 */
-  Symbol?: string | null;
+  Symbol?: string;
   /** 改密完成通知。0-通知，1-不通知 */
-  CompleteNotify?: number | null;
+  CompleteNotify?: number;
   /** 通知人邮箱 */
-  NotifyEmails?: string[] | null;
+  NotifyEmails?: string[];
   /** 加密附件密码 */
-  FilePassword?: string | null;
+  FilePassword?: string;
   /** 需要改密的账户 */
-  AccountSet?: string[] | null;
+  AccountSet?: string[];
   /** 需要改密的主机 */
-  DeviceSet?: Device[] | null;
+  DeviceSet?: Device[];
   /** 任务类型：4手动，5自动 */
-  Type?: number | null;
+  Type?: number;
   /** 周期 */
-  Period?: number | null;
+  Period?: number;
   /** 首次执行时间 */
-  FirstTime?: string | null;
+  FirstTime?: string;
   /** 下次执行时间 */
-  NextTime?: string | null;
+  NextTime?: string;
 }
 
 /** 负载均衡 */
 declare interface Clb {
   /** 负载均衡IP */
-  ClbIp?: string | null;
+  ClbIp?: string;
 }
 
 /** 高危命令模板 */
@@ -184,6 +184,8 @@ declare interface CmdTemplate {
   Name?: string;
   /** 命令列表，命令之间用换行符（"\n"）分隔 */
   CmdList?: string;
+  /** 命令模板类型 1-内置 2-自定义 */
+  Type?: number;
 }
 
 /** 命令集合 */
@@ -197,31 +199,33 @@ declare interface Command {
   /** 命令执行情况，1--允许，2--拒绝，3--确认 */
   Action?: number;
   /** 会话id */
-  Sid?: string | null;
+  Sid?: string;
   /** 用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** 设备account */
-  Account?: string | null;
+  Account?: string;
   /** 设备ip */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** source ip */
-  FromIp?: string | null;
+  FromIp?: string;
   /** 该命令所属会话的会话开始时间 */
-  SessionTime?: string | null;
+  SessionTime?: string;
   /** 该命令所属会话的会话开始时间 */
-  SessTime?: string | null;
+  SessTime?: string;
   /** 复核时间 */
-  ConfirmTime?: string | null;
+  ConfirmTime?: string;
   /** 用户部门id */
-  UserDepartmentId?: string | null;
+  UserDepartmentId?: string;
   /** 用户部门name */
-  UserDepartmentName?: string | null;
+  UserDepartmentName?: string;
   /** 设备部门id */
-  DeviceDepartmentId?: string | null;
+  DeviceDepartmentId?: string;
   /** 设备部门name */
-  DeviceDepartmentName?: string | null;
+  DeviceDepartmentName?: string;
   /** 会话大小 */
-  Size?: number | null;
+  Size?: number;
+  /** 签名值 */
+  SignValue?: string;
 }
 
 /** 部门信息 */
@@ -231,17 +235,17 @@ declare interface Department {
   /** 部门名称，1 - 256个字符 */
   Name?: string;
   /** 部门管理员账号ID */
-  Managers?: string[] | null;
+  Managers?: string[];
   /** 管理员用户 */
-  ManagerUsers?: DepartmentManagerUser[] | null;
+  ManagerUsers?: DepartmentManagerUser[];
 }
 
 /** 部门管理员信息 */
 declare interface DepartmentManagerUser {
   /** 管理员Id */
-  ManagerId?: string | null;
+  ManagerId?: string;
   /** 管理员姓名 */
-  ManagerName?: string | null;
+  ManagerName?: string;
 }
 
 /** 资产信息 */
@@ -273,33 +277,33 @@ declare interface Device {
   /** 子网ID */
   SubnetId?: string;
   /** 堡垒机服务信息，注意没有绑定服务时为null */
-  Resource?: Resource | null;
+  Resource?: Resource;
   /** 资产所属部门 */
-  Department?: Department | null;
+  Department?: Department;
   /** 数据库资产的多节点 */
-  IpPortSet?: string[] | null;
+  IpPortSet?: string[];
   /** 网络域Id */
-  DomainId?: string | null;
+  DomainId?: string;
   /** 网络域名称 */
-  DomainName?: string | null;
+  DomainName?: string;
   /** 是否启用SSL，仅支持Redis资产。0：禁用 1：启用 */
-  EnableSSL?: number | null;
+  EnableSSL?: number;
   /** 已上传的SSL证书名称 */
-  SSLCertName?: string | null;
+  SSLCertName?: string;
 }
 
 /** 主机账号 */
 declare interface DeviceAccount {
   /** 账号ID */
-  Id: number;
+  Id?: number;
   /** 主机ID */
-  DeviceId: number;
+  DeviceId?: number;
   /** 账号名 */
-  Account: string;
+  Account?: string;
   /** true-已托管密码，false-未托管密码 */
-  BoundPassword: boolean;
+  BoundPassword?: boolean;
   /** true-已托管私钥，false-未托管私钥 */
-  BoundPrivateKey: boolean;
+  BoundPrivateKey?: boolean;
 }
 
 /** 网络域 */
@@ -309,19 +313,19 @@ declare interface Domain {
   /** 网络域id */
   DomainId?: string;
   /** 网络域名称 */
-  DomainName?: string | null;
+  DomainName?: string;
   /** 堡垒机id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** ip，网段 */
-  WhiteIpSet?: string[] | null;
+  WhiteIpSet?: string[];
   /** 是否启用 默认 1启用 0禁用 */
-  Enabled?: number | null;
+  Enabled?: number;
   /** 状态 0-已断开 1-已连接 */
-  Status?: number | null;
+  Status?: number;
   /** 网络域创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 是否资源默认网络域 1-资源默认网络域 0-用户添加网络域 */
-  Default?: number | null;
+  Default?: number;
 }
 
 /** 主机参数，导入外部主机时使用 */
@@ -361,43 +365,45 @@ declare interface Group {
   /** 组名称 */
   Name?: string;
   /** 所属部门信息 */
-  Department?: Department | null;
+  Department?: Department;
   /** 个数 */
-  Count?: number | null;
+  Count?: number;
 }
 
 /** 登录日志 */
 declare interface LoginEvent {
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 姓名 */
-  RealName: string;
+  RealName?: string;
   /** 操作时间 */
-  Time: string;
+  Time?: string;
   /** 来源IP */
-  SourceIp: string;
+  SourceIp?: string;
   /** 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API */
-  Entry: number;
+  Entry?: number;
   /** 操作结果，1-成功，2-失败 */
-  Result: number;
+  Result?: number;
 }
 
 /** 操作日志 */
 declare interface OperationEvent {
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 姓名 */
-  RealName: string;
+  RealName?: string;
   /** 操作时间 */
-  Time: string;
+  Time?: string;
   /** 来源IP */
-  SourceIp: string;
+  SourceIp?: string;
   /** 操作类型 */
-  Kind: number;
+  Kind?: number;
   /** 具体操作内容 */
-  Operation: string;
+  Operation?: string;
   /** 操作结果，1-成功，2-失败 */
-  Result: number;
+  Result?: number;
+  /** 签名值 */
+  SignValue?: string;
 }
 
 /** 堡垒机服务信息 */
@@ -459,21 +465,29 @@ declare interface Resource {
   /** 授权点数扩展包个数(50点) */
   PackageNode?: number;
   /** 日志投递规格信息 */
-  LogDeliveryArgs?: string | null;
+  LogDeliveryArgs?: string;
   /** 堡垒机资源LB */
-  ClbSet?: Clb[] | null;
+  ClbSet?: Clb[];
   /** 网络域个数 */
-  DomainCount?: number | null;
+  DomainCount?: number;
   /** 已使用网络域个数 */
-  UsedDomainCount?: number | null;
+  UsedDomainCount?: number;
   /** 0 非试用版，1 试用版 */
-  Trial?: number | null;
+  Trial?: number;
   /** cdc集群id */
-  CdcClusterId?: string | null;
+  CdcClusterId?: string;
   /** 日志投递规格信息 */
-  LogDelivery?: string | null;
+  LogDelivery?: string;
   /** 部署模式 */
-  DeployModel?: number | null;
+  DeployModel?: number;
+  /** 0 默认值，非内网访问，1 内网访问，2 内网访问开通中，3 内网访问关闭中 */
+  IntranetAccess?: number;
+  /** 内网访问的ip */
+  IntranetPrivateIpSet?: string[];
+  /** 开通内网访问的vpc */
+  IntranetVpcId?: string;
+  /** 开通内网访问vpc的网段 */
+  IntranetVpcCidr?: string;
 }
 
 /** 立即执行改密任务的入参 */
@@ -509,69 +523,75 @@ declare interface SearchCommandResult {
   /** 命令执行时间相对于所属会话开始时间的偏移量，单位ms */
   TimeOffset?: number;
   /** 账号 */
-  Account?: string | null;
+  Account?: string;
   /** source ip */
-  FromIp?: string | null;
+  FromIp?: string;
   /** 该命令所属会话的会话开始时间 */
-  SessionTime?: string | null;
+  SessionTime?: string;
   /** 该命令所属会话的会话开始时间（废弃，使用SessionTime） */
-  SessTime?: string | null;
+  SessTime?: string;
   /** 复核时间 */
-  ConfirmTime?: string | null;
+  ConfirmTime?: string;
   /** 部门id */
-  UserDepartmentId?: string | null;
+  UserDepartmentId?: string;
   /** 用户部门名称 */
-  UserDepartmentName?: string | null;
+  UserDepartmentName?: string;
   /** 设备部门id */
-  DeviceDepartmentId?: string | null;
+  DeviceDepartmentId?: string;
   /** 设备部门名称 */
-  DeviceDepartmentName?: string | null;
+  DeviceDepartmentName?: string;
   /** 会话大小 */
-  Size?: number | null;
+  Size?: number;
+  /** 签名值 */
+  SignValue?: string;
 }
 
 /** 文件操作搜索结果 */
 declare interface SearchFileBySidResult {
   /** 文件操作时间 */
-  Time: string;
+  Time?: string;
   /** 1-上传文件 2-下载文件 3-删除文件 4-移动文件 5-重命名文件 6-新建文件夹 7-移动文件夹 8-重命名文件夹 9-删除文件夹 */
-  Method: number;
+  Method?: number;
   /** 文件传输协议 */
-  Protocol: string;
+  Protocol?: string;
   /** method为上传、下载、删除时文件在服务器上的位置, 或重命名、移动文件前文件的位置 */
-  FileCurr: string;
+  FileCurr?: string;
   /** method为重命名、移动文件时代表移动后的新位置.其他情况为null */
-  FileNew: string | null;
+  FileNew?: string;
   /** method为上传文件、下载文件、删除文件时显示文件大小。其他情况为null */
-  Size: number | null;
+  Size?: number;
   /** 堡垒机拦截情况, 1-已执行， 2-被阻断 */
-  Action: number;
+  Action?: number;
+  /** 签名值 */
+  SignValue?: string;
 }
 
 /** 文件传输检索结果 */
 declare interface SearchFileResult {
   /** 文件传输的时间 */
-  Time: string;
+  Time?: string;
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 姓名 */
-  RealName: string;
+  RealName?: string;
   /** 资产ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 资产名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 资产公网IP */
-  PublicIp: string;
+  PublicIp?: string;
   /** 资产内网IP */
-  PrivateIp: string;
+  PrivateIp?: string;
   /** 操作结果：1 - 已执行，2 - 已阻断 */
-  Action: number;
+  Action?: number;
   /** 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹 */
-  Method: number;
+  Method?: number;
   /** 下载的文件（夹）路径及名称 */
-  FileCurr: string;
+  FileCurr?: string;
   /** 上传或新建文件（夹）路径及名称 */
-  FileNew: string;
+  FileNew?: string;
+  /** 签名值 */
+  SignValue?: string;
 }
 
 /** 用于搜索文件传输记录等日志时按照protocol和method进行过滤 */
@@ -585,69 +605,69 @@ declare interface SearchFileTypeFilter {
 /** 命令和所属会话 */
 declare interface SessionCommand {
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 账号 */
-  RealName: string;
+  RealName?: string;
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 内部Ip */
-  PrivateIp: string;
+  PrivateIp?: string;
   /** 外部Ip */
-  PublicIp: string;
+  PublicIp?: string;
   /** 命令列表 */
-  Commands: Command[];
+  Commands?: Command[];
   /** 记录数 */
-  Count: number;
+  Count?: number;
   /** 会话Id */
-  Id: string;
+  Id?: string;
   /** 设备id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 设备所属的地域 */
-  ApCode: string;
+  ApCode?: string;
 }
 
 /** 搜索字符或图形会话时返回的SessionResul结构体 */
 declare interface SessionResult {
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 姓名 */
-  RealName: string;
+  RealName?: string;
   /** 主机账号 */
-  Account: string;
+  Account?: string;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 会话大小 */
-  Size: number;
+  Size?: number;
   /** 设备ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 内部Ip */
-  PrivateIp: string;
+  PrivateIp?: string;
   /** 外部Ip */
-  PublicIp: string;
+  PublicIp?: string;
   /** 来源Ip */
-  FromIp: string;
+  FromIp?: string;
   /** 会话持续时长 */
-  Duration: number;
+  Duration?: number;
   /** 该会话内命令数量 ，搜索图形会话时该字段无意义 */
-  Count: number;
+  Count?: number;
   /** 该会话内高危命令数，搜索图形时该字段无意义 */
-  DangerCount: number;
+  DangerCount?: number;
   /** 会话状态，如1会话活跃 2会话结束 3强制离线 4其他错误 */
-  Status: number;
+  Status?: number;
   /** 会话Id */
-  Id: string;
+  Id?: string;
   /** 设备所属的地域 */
-  ApCode: string;
+  ApCode?: string;
   /** 会话协议 */
-  Protocol: string;
+  Protocol?: string;
 }
 
 /** 资产标签 */
@@ -681,17 +701,19 @@ declare interface User {
   /** 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问 */
   ValidateTime?: string;
   /** 用户所属部门（用于出参） */
-  Department?: Department | null;
+  Department?: Department;
   /** 用户所属部门（用于入参） */
-  DepartmentId?: string | null;
+  DepartmentId?: string;
   /** 激活状态 0 - 未激活 1 - 激活 */
-  ActiveStatus?: number | null;
+  ActiveStatus?: number;
   /** 锁定状态 0 - 未锁定 1 - 锁定 */
-  LockStatus?: number | null;
+  LockStatus?: number;
+  /** ukey绑定状态 0 - 未绑定 1 - 已绑定 */
+  UKeyStatus?: number;
   /** 状态 与Filter中一致 */
-  Status?: string | null;
+  Status?: string;
   /** 权限版本 */
-  AclVersion?: number | null;
+  AclVersion?: number;
 }
 
 declare interface AddDeviceGroupMembersRequest {
@@ -907,7 +929,7 @@ declare interface CreateDeviceAccountRequest {
 
 declare interface CreateDeviceAccountResponse {
   /** 新建成功后返回的记录ID */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -921,7 +943,7 @@ declare interface CreateDeviceGroupRequest {
 
 declare interface CreateDeviceGroupResponse {
   /** 新建成功的资产组ID */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -953,7 +975,7 @@ declare interface CreateResourceRequest {
 
 declare interface CreateResourceResponse {
   /** 实例Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -967,7 +989,7 @@ declare interface CreateUserGroupRequest {
 
 declare interface CreateUserGroupResponse {
   /** 新建成功的用户组ID */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1153,13 +1175,15 @@ declare interface DescribeAclsRequest {
   Status?: number;
   /** 部门ID，用于过滤属于某个部门的访问权限 */
   DepartmentId?: string;
+  /** 过滤数组 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeAclsResponse {
   /** 访问权限总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 访问权限列表 */
-  AclSet: Acl[];
+  AclSet?: Acl[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1171,7 +1195,7 @@ declare interface DescribeAssetSyncStatusRequest {
 
 declare interface DescribeAssetSyncStatusResponse {
   /** 资产同步结果 */
-  Status: AssetSyncStatus;
+  Status?: AssetSyncStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1193,7 +1217,7 @@ declare interface DescribeChangePwdTaskDetailResponse {
   /** 总数 */
   TotalCount?: number;
   /** 任务详情 */
-  Details?: ChangePwdTaskDetail[] | null;
+  Details?: ChangePwdTaskDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1211,9 +1235,9 @@ declare interface DescribeChangePwdTaskRequest {
 
 declare interface DescribeChangePwdTaskResponse {
   /** 任务详情 */
-  Tasks?: ChangePwdTaskInfo[] | null;
+  Tasks?: ChangePwdTaskInfo[];
   /** 任务总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1223,6 +1247,8 @@ declare interface DescribeCmdTemplatesRequest {
   IdSet?: number[];
   /** 命令模板名，模糊查询，最大长度64字符 */
   Name?: string;
+  /** 命令模板类型 1-内置模板 2-自定义模板 */
+  Type?: number;
   /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，默认20 */
@@ -1231,9 +1257,9 @@ declare interface DescribeCmdTemplatesRequest {
 
 declare interface DescribeCmdTemplatesResponse {
   /** 命令模板列表 */
-  CmdTemplateSet: CmdTemplate[];
+  CmdTemplateSet?: CmdTemplate[];
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1265,9 +1291,9 @@ declare interface DescribeDeviceAccountsRequest {
 
 declare interface DescribeDeviceAccountsResponse {
   /** 记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 账号信息列表 */
-  DeviceAccountSet: DeviceAccount[];
+  DeviceAccountSet?: DeviceAccount[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1317,9 +1343,9 @@ declare interface DescribeDeviceGroupsRequest {
 
 declare interface DescribeDeviceGroupsResponse {
   /** 资产组总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 资产组列表 */
-  GroupSet: Group[];
+  GroupSet?: Group[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1333,7 +1359,7 @@ declare interface DescribeDevicesRequest {
   Ip?: string;
   /** 地域码集合 */
   ApCodeSet?: string[];
-  /** 操作系统类型, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer */
+  /** 操作系统类型, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer, 5 - TDSQL MySQL, 6 - TDSQL-C MySQL, 7 - MariaDB, 8 - PostgreSQL, 9 - MongoDB副本集群, 10 - MongoDB分片集群, 11 - Redis */
   Kind?: number;
   /** 分页偏移位置，默认值为0 */
   Offset?: number;
@@ -1343,7 +1369,7 @@ declare interface DescribeDevicesRequest {
   AuthorizedUserIdSet?: number[];
   /** 过滤条件，资产绑定的堡垒机服务ID集合 */
   ResourceIdSet?: string[];
-  /** 可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer */
+  /** 可提供按照多种类型过滤, 取值范围与Kind一致 */
   KindSet?: number[];
   /** 资产是否包含托管账号。1，包含；0，不包含 */
   ManagedAccount?: string;
@@ -1405,9 +1431,9 @@ declare interface DescribeLoginEventRequest {
 
 declare interface DescribeLoginEventResponse {
   /** 登录日志列表 */
-  LoginEventSet: LoginEvent[];
+  LoginEventSet?: LoginEvent[];
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1435,9 +1461,9 @@ declare interface DescribeOperationEventRequest {
 
 declare interface DescribeOperationEventResponse {
   /** 操作日志列表 */
-  OperationEventSet: OperationEvent[];
+  OperationEventSet?: OperationEvent[];
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1459,7 +1485,7 @@ declare interface DescribeResourcesResponse {
   /** 堡垒机资源列表 */
   ResourceSet?: Resource[];
   /** 堡垒机资源数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1481,9 +1507,9 @@ declare interface DescribeUserGroupMembersRequest {
 
 declare interface DescribeUserGroupMembersResponse {
   /** 用户组成员总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 用户组成员列表 */
-  UserSet: User[];
+  UserSet?: User[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1503,9 +1529,9 @@ declare interface DescribeUserGroupsRequest {
 
 declare interface DescribeUserGroupsResponse {
   /** 用户组总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 用户组列表 */
-  GroupSet: Group[];
+  GroupSet?: Group[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1551,7 +1577,7 @@ declare interface ImportExternalDeviceRequest {
 
 declare interface ImportExternalDeviceResponse {
   /** 资产ID列表 */
-  DeviceIdSet?: number[] | null;
+  DeviceIdSet?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1681,6 +1707,8 @@ declare interface ModifyCmdTemplateRequest {
   Id: number;
   /** CmdList字段前端是否base64传值。0：否，1：是 */
   Encoding?: number;
+  /** 命令模板类型 1-内置模板 2-自定义模板 */
+  Type?: number;
 }
 
 declare interface ModifyCmdTemplateResponse {
@@ -1869,9 +1897,9 @@ declare interface SearchAuditLogRequest {
 
 declare interface SearchAuditLogResponse {
   /** 审计日志 */
-  AuditLogSet: AuditLogResult[];
+  AuditLogSet?: AuditLogResult[];
   /** 日志总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1957,9 +1985,9 @@ declare interface SearchFileBySidRequest {
 
 declare interface SearchFileBySidResponse {
   /** 记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 某会话的文件操作列表 */
-  SearchFileBySidResult: SearchFileBySidResult[] | null;
+  SearchFileBySidResult?: SearchFileBySidResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1995,9 +2023,9 @@ declare interface SearchFileRequest {
 
 declare interface SearchFileResponse {
   /** 记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 文件操作列表 */
-  Files: SearchFileResult[] | null;
+  Files?: SearchFileResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2059,9 +2087,9 @@ declare interface SearchSessionRequest {
 
 declare interface SearchSessionResponse {
   /** 记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 会话信息列表 */
-  SessionSet: SessionResult[];
+  SessionSet?: SessionResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

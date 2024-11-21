@@ -1221,7 +1221,7 @@ declare interface CreateInstanceAccountRequest {
   InstanceId: string;
   /** 自定义访问数据库的名称。- 仅由字母、数字、下划线、中划线组成。- 长度不能大于32位。 */
   AccountName: string;
-  /** 设置自定义账号的密码。密码复杂度要求如下：- 字符个数为[8,32]。- 至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的两种。- 不能以"/"开头。 */
+  /** 设置自定义账号的密码。密码复杂度要求如下：- 字符个数为[8,64]。- 至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的两种。- 不能以"/"开头。 */
   AccountPassword: string;
   /** 指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。- master：主节点- replication：副本节点 */
   ReadonlyPolicy: string[];
@@ -1239,7 +1239,7 @@ declare interface CreateInstanceAccountResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。17：Redis 7.0 内存版（标准架构）。18：Redis 7.0 内存版（集群架构）。 */
+  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。17：Redis 7.0 内存版（标准架构）。18：Redis 7.0 内存版（集群架构）。说明：CKV 版本当前有存量用户使用，暂时保留。 */
   TypeId: number;
   /** 内存容量，单位为MB， 数值需为1024的整数倍。具体规格，请通过 [DescribeProductInfo](https://cloud.tencent.com/document/api/239/30600) 接口查询全地域的售卖规格。- **TypeId**为标准架构时，**MemSize**是实例总内存容量；- **TypeId**为集群架构时，**MemSize**是单分片内存容量。 */
   MemSize: number;
@@ -1251,7 +1251,7 @@ declare interface CreateInstancesRequest {
   BillingMode: number;
   /** 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
   ZoneId?: number;
-  /** 访问实例的密码。- 当输入参数**NoAuth**为**true**时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。- 当实例类型**TypeId**为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.0内存版标准架构或集群架构时，其密码复杂度要求为：8-30个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。- 当实例类型**TypeId**为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且 不包含其他字符。 */
+  /** 访问实例的密码。- 当输入参数**NoAuth**为**true**时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。- 当实例类型**TypeId**为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.0内存版标准架构或集群架构时，其密码复杂度要求为：8-64个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。- 当实例类型**TypeId**为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
   Password?: string;
   /** 私有网络ID。如果不配置该参数则默认选择基础网络。请登录 [私有网络](https://console.cloud.tencent.com/vpc)控制台查询具体的ID。 */
   VpcId?: string;
@@ -1453,7 +1453,7 @@ declare interface DescribeBackupDownloadRestrictionResponse {
 }
 
 declare interface DescribeBackupUrlRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 备份 ID，可通过 [DescribeInstanceBackups ](https://cloud.tencent.com/document/product/239/20011)接口返回的参数 RedisBackupSet 获取。 */
   BackupId: string;
@@ -1591,9 +1591,9 @@ declare interface DescribeInstanceBackupsRequest {
   Offset?: number;
   /** 待操作的实例ID，可通过 DescribeInstance 接口返回值中的 InstanceId 获取。 */
   InstanceId?: string;
-  /** 开始时间，格式如：2017-02-08 16:46:34。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表。 */
+  /** 开始时间，格式如：2017-02-08 16:46:34。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。 */
   BeginTime?: string;
-  /** 结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表。 */
+  /** 结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。 */
   EndTime?: string;
   /** 备份任务的状态：1：备份在流程中。2：备份正常。3：备份转RDB文件处理中。4：已完成RDB转换。-1：备份已过期。-2：备份已删除。 */
   Status?: number[];
@@ -1649,13 +1649,13 @@ declare interface DescribeInstanceDealDetailResponse {
 }
 
 declare interface DescribeInstanceEventsRequest {
-  /** 配置查询事件执行计划的起始日期。 */
+  /** 配置查询事件执行计划的起始日期，查询日期最大跨度30天。 */
   ExecutionStartDate: string;
-  /** 配置查询事件执行计划的结束日期。 */
+  /** 配置查询事件执行计划的结束日期，查询日期最大跨度30天。 */
   ExecutionEndDate: string;
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId?: string;
-  /** 输出每页显示事件的数量，默认：10。 */
+  /** 输出每页显示事件的数量，默认：10，最大100。 */
   PageSize?: number;
   /** 配置查询事件的输出页码，即支持根据PageNo（页码）与 PageSize （每页输出数量）查询某一页的事件。默认：1。 */
   PageNo?: number;
@@ -2099,15 +2099,15 @@ declare interface DescribeProjectSecurityGroupsResponse {
 declare interface DescribeProxySlowLogRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 慢查询的开始时间。 */
+  /** 慢查询的开始时间，查询时间最大跨度30天。 */
   BeginTime: string;
-  /** 慢查询的结束时间。 */
+  /** 慢查询的结束时间，查询时间最大跨度30天。 */
   EndTime: string;
   /** 慢查询阈值，单位：毫秒。 */
   MinQueryTime?: number;
-  /** 分页大小。默认为 20，取值范围[20,1000]。 */
+  /** 每页输出的任务列表大小，默认为 20，最多输出100条。 */
   Limit?: number;
-  /** 偏移量，取Limit整数倍。 */
+  /** 分页偏移量，取Limit整数倍，计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
 }
 
@@ -2227,13 +2227,13 @@ declare interface DescribeSSLStatusResponse {
 declare interface DescribeSlowLogRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 预查询慢日志的起始时间。 */
+  /** 预查询慢日志的起始时间，查询时间最大跨度30天。 */
   BeginTime: string;
-  /** 预查询慢日志的结束时间。 */
+  /** 预查询慢日志的结束时间，查询时间最大跨度30天 */
   EndTime: string;
   /** 慢查询平均执行时间阈值，单位：毫秒。 */
   MinQueryTime?: number;
-  /** 每个页面展示的慢查询条数，默认值为20。取值范围：[20,1000]。 */
+  /** 每个页面展示的慢查询条数，默认值为20，最大100。 */
   Limit?: number;
   /** 慢查询条数的偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
@@ -2285,9 +2285,9 @@ declare interface DescribeTaskListRequest {
   ProjectIds?: number[];
   /** 任务类型。- FLOW_CREATE: "001"，新建实例。- FLOW_RESIZE ： "002"，配置变更。- FLOW_CLOSE："003"，关闭实例。- FLOW_CLEAN： "004"，清空实例。- FLOW_STARTUP："005"，实例启用。- FLOW_DELETE："006"，删除实例。- FLOW_SETPWD："007"，重置密码。- FLOW_EXPORTBACKUP："009"，导出备份文件。- FLOW_RESTOREBACKUP："010"，恢复备份。- FLOW_BACKUPINSTANCE："012"，备份实例。- FLOW_MIGRATEINSTANCE："013"，迁移实例。- FLOW_DELBACKUP："014"，删除备份。- FLOW_EXCHANGEINSTANCE： "016"，切换实例流程。- FLOW_AUTOBACKUP："017"，自动备份实例。- FLOW_MIGRATECHECK： "022"，迁移参数校验。- FLOW_MIGRATETASK："023"，数据迁移中。- FLOW_CLEANDB："025"，清空某个数据库。- FLOW_CLONEBACKUP："026"，克隆备份。- FLOW_CHANGEVIP： "027"，改变vip地址。- FLOW_EXPORSHR ："028"，扩缩容。- FLOW_ADDNODES："029"，加（减）节点。- FLOW_CHANGENET："031"，改变网络类型。- FLOW_MODIFYINSTACEREADONLY："033"，只读策略变更。- FLOW_MODIFYINSTANCEPARAMS："034"，修改实例参数。- FLOW_MODIFYINSTANCEPASSWORDFREE："035"，设置免密。- FLOW_SWITCHINSTANCEVIP："036"，实例VIP切换。- FLOW_MODIFYINSTANCEACCOUNT："037"，实例帐号变更。- FLOW_MODIFYINSTANCEBANDWIDTH："038"，实例带宽变更。- FLOW_ENABLEINSTANCE_REPLICATE："039"，开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE："040"，关闭副本只读。- FLOW_UpgradeArch："041"，实例架构升级，主从升集群。- FLOW_DowngradeArch： "042"，实例架构降级，集群降主从。- FLOW_UpgradeVersion： "043"，版本升级。- FLOW_MODIFYCONNECTIONCONFIG："044"，带宽连接数调整，- FLOW_CLEARNETWORK："045"，更换网络，- FLOW_REMOVE_BACKUP_FILE："046"，删除备份。- FLOW_UPGRADE_SUPPORT_MULTI_AZ："047"，升级实例支持多可用区。- FLOW_SHUTDOWN_MASTER："048"，模拟故障。- FLOW_CHANGE_REPLICA_TO_MASTER："049"，手动提主。- FLOW_CODE_ADD_REPLICATION_INSTANCE："050"，新增复制组。- FLOW_OPEN_WAN："052"，开通外网。- FLOW_CLOSE_WAN："053"，关闭外网FLOW_UPDATE_WAN："054"，更新外网。- FLOW_CODE_DELETE_REPLICATION_INSTANCE："055"，解绑复制组。- FLOW_CODE_CHANGE_MASTER_INSTANCE："056"，复制组实例切主。- FLOW_CODE_CHANGE_INSTANCE_ROLE： "057"，更改复制组实例角色。- FLOW_MIGRATE_NODE："058"，迁移节点。- FLOW_SWITCH_NODE："059"，切换节点。- FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redi s版本。- FLOW_UPGRADE_PROXY_VERSION："061"，升级 Proxy 版本。- FLOW_MODIFY_INSTANCE_NETWORK： "062"，实例修改网络。- FLOW_MIGRATE_PROXY_NODE："063"，迁移proxy节点。- FLOW_MIGRATION_INSTANCE_ZONE："066"，实例可用区迁移中。- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。- FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。- FLOW_MODIFYBACKUPMOD："070"，变更实例备份模式。 */
   TaskTypes?: string[];
-  /** 任务执行的起始时间。格式如：2021-12-30 00:00:00。 */
+  /** 任务执行的起始时间，格式如：2021-12-30 00:00:00，支持查询近30天内数据。 */
   BeginTime?: string;
-  /** 任务运行的终止时间。格式如：2021-12-30 20:59:35 */
+  /** 任务运行的终止时间。格式如：2021-12-30 20:59:35，支持查询近30天内数据。 */
   EndTime?: string;
   /** 该参数为内部使用，请忽略。 */
   TaskStatus?: number[];
@@ -2311,15 +2311,15 @@ declare interface DescribeTaskListResponse {
 declare interface DescribeTendisSlowLogRequest {
   /** 实例Id：crs-ngvou0i1 */
   InstanceId: string;
-  /** 开始时间：2019-09-08 12:12:41 */
+  /** 开始时间：2019-09-08 12:12:41，查询时间最大跨度30天。 */
   BeginTime: string;
-  /** 结束时间：2019-09-09 12:12:41 */
+  /** 结束时间：2019-09-09 12:12:41，查询时间最大跨度30天。 */
   EndTime: string;
   /** 慢查询阈值（毫秒） */
   MinQueryTime?: number;
-  /** 页面大小：默认20 */
+  /** 页面大小：默认20，最大100。 */
   Limit?: number;
-  /** 偏移量，取Limit整数倍 */
+  /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
 }
 
@@ -2411,9 +2411,9 @@ declare interface InquiryPriceCreateInstanceRequest {
   BillingMode: number;
   /** 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
   ZoneId?: number;
-  /** 实例分片数量。Redis2.8标准架构、CKV标准架构、Redis4.0标准架构无需填写。 */
+  /** 实例分片数量。2.8 标准架构无需配置分片，其余版本标准架构需要配置分片数量为1。集群架构需指定需购买的分片数量。 */
   RedisShardNum?: number;
-  /** 实例副本数量。Redis2.8标准架构、CKV标准架构无需填写。 */
+  /** 实例副本数量。2.8 标准架构无需配置副本数量。 */
   RedisReplicasNum?: number;
   /** 是否支持副本只读。Redis2.8标准架构、CKV标准架构无需填写。- true：无需支持副本只读。- false：需支持。 */
   ReplicasReadonly?: boolean;
@@ -2759,15 +2759,15 @@ declare interface ModifyMaintenanceWindowResponse {
 }
 
 declare interface ModifyNetworkConfigRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 指预修改网络的类别，包括：- changeVip：指切换私有网络，包含其内网IPv4地址及端口。- changeVpc：指切换私有网络所属子网。- changeBaseToVpc：指基础网络切换为私有网络。- changeVPort：指仅修改实例网络端口。 */
   Operation: string;
   /** 指实例私有网络内网 IPv4 地址。当**Operation**为**changeVip**时，需配置该参数。 */
   Vip?: string;
-  /** 指修改后的私有网络 ID，当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。 */
+  /** 指修改后的私有网络 ID。- 当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。- 请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)，切换至**实例详情**页面，在**网络信息**区域，单击所属网络后面的私有网络名称，获取私有网络 ID。 */
   VpcId?: string;
-  /** 指修改后的私有网络所属子网 ID，当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。 */
+  /** 指修改后的私有网络所属子网 ID。- 当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。- 请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)，切换至**实例详情**页面，在**网络信息**区域，单击所属网络后面的子网名称，获取子网ID。 */
   SubnetId?: string;
   /** 原内网 IPv4 地址保留时长。- 单位：天。- 取值范围：0、1、2、3、7、15。**说明**：设置原地址保留时长需最新版SDK，否则原地址将立即释放，查看SDK版本，请参见 [SDK中心](https://cloud.tencent.com/document/sdk)。 */
   Recycle?: number;
@@ -2784,7 +2784,7 @@ declare interface ModifyNetworkConfigResponse {
   VpcId?: string;
   /** 指实例新的内网 IPv4 地址。 */
   Vip?: string;
-  /** 任务 ID。可获取**taskId**，通过接口 **DescribeTaskInfo **查询任务执行状态。 */
+  /** 任务 ID。获取**taskId**，通过接口 [DescribeTaskInfo](https://cloud.tencent.com/document/product/239/30601) 查询任务执行状态。 */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2807,11 +2807,11 @@ declare interface ModifyParamTemplateResponse {
 }
 
 declare interface ModifyReplicationGroupRequest {
-  /** 复制组字符串ID */
+  /** 复制组ID。请登录[Redis控制台的全球复制](https://console.cloud.tencent.com/redis/replication)页面获取复制组 ID。 */
   GroupId: string;
-  /** 复制组名称 */
+  /** 修改后的复制组名称。 */
   GroupName?: string;
-  /** 备注 */
+  /** 备注描述。 */
   Remark?: string;
 }
 
@@ -2865,7 +2865,7 @@ declare interface RemoveReplicationInstanceResponse {
 declare interface RenewInstanceRequest {
   /** 购买时长，单位：月。 */
   Period: number;
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 标识是否修改计费模式。当前实例计费模式为按量计费方式，预转换为包年包月而续费，请指定该参数为 prepaid。当前实例计费模式为包年包月方式，可不设置该参数。 */
   ModifyPayMode?: string;

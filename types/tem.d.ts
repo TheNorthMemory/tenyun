@@ -262,8 +262,6 @@ declare interface HorizontalAutoscaler {
 declare interface IngressInfo {
   /** 环境ID */
   EnvironmentId: string | null;
-  /** 环境namespace */
-  ClusterNamespace: string;
   /** ip version */
   AddressIPVersion: string;
   /** ingress name */
@@ -271,7 +269,9 @@ declare interface IngressInfo {
   /** rules 配置 */
   Rules: IngressRule[];
   /** clb ID */
-  ClbId?: string | null;
+  ClbId: string | null;
+  /** 环境namespace */
+  ClusterNamespace?: string;
   /** tls 配置 */
   Tls?: IngressTls[] | null;
   /** 环境集群ID */
@@ -1055,15 +1055,15 @@ declare interface CreateApplicationAutoscalerRequest {
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
+  /** 弹性伸缩策略 */
+  Autoscaler: Autoscaler;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 弹性伸缩策略 */
-  Autoscaler?: Autoscaler;
 }
 
 declare interface CreateApplicationAutoscalerResponse {
   /** 弹性伸缩策略组合ID */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1111,15 +1111,15 @@ declare interface CreateApplicationServiceRequest {
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
+  /** 访问方式详情 */
+  Service: ServicePortMapping;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 访问方式详情 */
-  Service?: ServicePortMapping;
 }
 
 declare interface CreateApplicationServiceResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1129,10 +1129,10 @@ declare interface CreateConfigDataRequest {
   EnvironmentId: string;
   /** 配置名 */
   Name: string;
+  /** 配置信息 */
+  Data: Pair[];
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 配置信息 */
-  Data?: Pair[];
 }
 
 declare interface CreateConfigDataResponse {
@@ -1175,17 +1175,17 @@ declare interface CreateEnvironmentRequest {
   K8sVersion?: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 是否开启tsw服务 */
+  /** 是否开启tsw服务。默认值：false */
   EnableTswTraceService?: boolean;
   /** 标签 */
   Tags?: Tag[];
-  /** 环境类型：test、pre、prod */
+  /** 环境类型：test、pre、prod。默认值：prod */
   EnvType?: string;
   /** 创建环境的region */
   CreateRegion?: string;
-  /** 是否创建私有网络 */
+  /** 是否创建私有网络.默认值:true */
   SetupVpc?: boolean;
-  /** 是否创建 Prometheus 实例 */
+  /** 是否创建 Prometheus 实例。默认值：false */
   SetupPrometheus?: boolean;
   /** prometheus 实例 id */
   PrometheusId?: string;
@@ -1208,7 +1208,7 @@ declare interface CreateLogConfigRequest {
   /** 收集类型，container_stdout 为标准输出；container_file 为文件； */
   InputType: string;
   /** 应用 ID */
-  ApplicationId?: string;
+  ApplicationId: string;
   /** 日志集 ID */
   LogsetId?: string;
   /** 日志主题 ID */
@@ -1259,15 +1259,15 @@ declare interface DeleteApplicationAutoscalerRequest {
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
+  /** 弹性伸缩策略ID */
+  AutoscalerId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 弹性伸缩策略ID */
-  AutoscalerId?: string;
 }
 
 declare interface DeleteApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1292,18 +1292,18 @@ declare interface DeleteApplicationResponse {
 
 declare interface DeleteApplicationServiceRequest {
   /** 服务id */
-  ApplicationId?: string;
+  ApplicationId: string;
+  /** 环境ID */
+  EnvironmentId: string;
+  /** 访问方式服务名 */
+  ServiceName: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 环境ID */
-  EnvironmentId?: string;
-  /** 访问方式服务名 */
-  ServiceName?: string;
 }
 
 declare interface DeleteApplicationServiceResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1337,6 +1337,8 @@ declare interface DeployApplicationRequest {
   MemorySpec: number;
   /** 环境ID */
   EnvironmentId: string;
+  /** 部署类型为 IMAGE 时，该参数表示镜像 tag。部署类型为 JAR/WAR 时，该参数表示包版本号。 */
+  DeployVersion: string;
   /** 镜像仓库 */
   ImgRepo?: string;
   /** 版本描述信息 */
@@ -1355,8 +1357,6 @@ declare interface DeployApplicationRequest {
   StorageMountConfs?: StorageMountConf[];
   /** 部署类型。- JAR：通过 jar 包部署- WAR：通过 war 包部署- IMAGE：通过镜像部署 */
   DeployMode?: string;
-  /** 部署类型为 IMAGE 时，该参数表示镜像 tag。部署类型为 JAR/WAR 时，该参数表示包版本号。 */
-  DeployVersion?: string;
   /** 传入内容为 /jar包名字 的形式。也就是在 jar包名字前增加一个/。如上传的 jar 包名字为 demo-1.0.0.jar，那么这里传入内容为：/demo-1.0.0.jar注：jar 包需要通过 tem 页面上传过，tem 后端才能拉到该 jar 包。 */
   PkgName?: string;
   /** JDK 版本。- KONA:8：使用 kona jdk 8。- OPEN:8：使用 open jdk 8。- KONA:11：使用 kona jdk 11。- OPEN:11：使用 open jdk 11。 */
@@ -1457,7 +1457,7 @@ declare interface DescribeApplicationInfoRequest {
 
 declare interface DescribeApplicationInfoResponse {
   /** 返回结果 */
-  Result: TemServiceVersionInfo;
+  Result?: TemServiceVersionInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1481,7 +1481,7 @@ declare interface DescribeApplicationPodsRequest {
 
 declare interface DescribeApplicationPodsResponse {
   /** 返回结果 */
-  Result: DescribeRunPodPage;
+  Result?: DescribeRunPodPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1505,9 +1505,9 @@ declare interface DescribeApplicationServiceListResponse {
 declare interface DescribeApplicationsRequest {
   /** 命名空间ID */
   EnvironmentId?: string;
-  /** 分页Limit */
+  /** 分页Limit，默认值：20 */
   Limit?: number;
-  /** 分页offset */
+  /** 分页offset,默认值：0 */
   Offset?: number;
   /** 来源渠道 */
   SourceChannel?: number;
@@ -1523,16 +1523,16 @@ declare interface DescribeApplicationsRequest {
 
 declare interface DescribeApplicationsResponse {
   /** 返回结果 */
-  Result: ServicePage;
+  Result?: ServicePage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeApplicationsStatusRequest {
+  /** 环境ID */
+  EnvironmentId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 环境ID */
-  EnvironmentId?: string;
 }
 
 declare interface DescribeApplicationsStatusResponse {
@@ -1578,16 +1578,16 @@ declare interface DescribeConfigDataResponse {
 
 declare interface DescribeDeployApplicationDetailRequest {
   /** 服务id */
-  ApplicationId?: string;
+  ApplicationId: string;
   /** 环境id */
-  EnvironmentId?: string;
+  EnvironmentId: string;
   /** 版本部署id */
   VersionId?: string;
 }
 
 declare interface DescribeDeployApplicationDetailResponse {
   /** 分批发布结果详情 */
-  Result: TemDeployApplicationDetailInfo;
+  Result?: TemDeployApplicationDetailInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1601,7 +1601,7 @@ declare interface DescribeEnvironmentRequest {
 
 declare interface DescribeEnvironmentResponse {
   /** 环境信息 */
-  Result: NamespaceInfo;
+  Result?: NamespaceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1615,15 +1615,15 @@ declare interface DescribeEnvironmentStatusRequest {
 
 declare interface DescribeEnvironmentStatusResponse {
   /** 返回状态列表 */
-  Result: NamespaceStatusInfo[];
+  Result?: NamespaceStatusInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeEnvironmentsRequest {
-  /** 分页limit */
+  /** 分页limit，默认：20 */
   Limit?: number;
-  /** 分页下标 */
+  /** 分页下标，默认：0 */
   Offset?: number;
   /** 来源source */
   SourceChannel?: number;
@@ -1637,7 +1637,7 @@ declare interface DescribeEnvironmentsRequest {
 
 declare interface DescribeEnvironmentsResponse {
   /** 返回结果 */
-  Result: NamespacePage;
+  Result?: NamespacePage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1655,16 +1655,16 @@ declare interface DescribeIngressRequest {
 
 declare interface DescribeIngressResponse {
   /** Ingress 规则配置 */
-  Result: IngressInfo;
+  Result?: IngressInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeIngressesRequest {
   /** 环境 id */
-  EnvironmentId?: string;
+  EnvironmentId: string;
   /** 环境 namespace */
-  ClusterNamespace?: string;
+  ClusterNamespace: string;
   /** 来源渠道 */
   SourceChannel?: number;
   /** ingress 规则名列表 */
@@ -1673,7 +1673,7 @@ declare interface DescribeIngressesRequest {
 
 declare interface DescribeIngressesResponse {
   /** ingress 数组 */
-  Result: IngressInfo[] | null;
+  Result?: IngressInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1684,7 +1684,7 @@ declare interface DescribeLogConfigRequest {
   /** 配置名 */
   Name: string;
   /** 应用 ID */
-  ApplicationId?: string;
+  ApplicationId: string;
 }
 
 declare interface DescribeLogConfigResponse {
@@ -1711,25 +1711,25 @@ declare interface DescribePagedLogConfigListRequest {
 
 declare interface DescribePagedLogConfigListResponse {
   /** 日志收集配置列表 */
-  Result: LogConfigListPage;
+  Result?: LogConfigListPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeRelatedIngressesRequest {
   /** 环境 id */
-  EnvironmentId?: string;
+  EnvironmentId: string;
   /** 环境 namespace */
-  ClusterNamespace?: string;
+  ClusterNamespace: string;
+  /** 应用 ID */
+  ApplicationId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 应用 ID */
-  ApplicationId?: string;
 }
 
 declare interface DescribeRelatedIngressesResponse {
   /** ingress 数组 */
-  Result: IngressInfo[] | null;
+  Result?: IngressInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1753,13 +1753,13 @@ declare interface DestroyConfigDataResponse {
 declare interface DestroyEnvironmentRequest {
   /** 命名空间ID */
   EnvironmentId: string;
-  /** Namespace */
+  /** 来源渠道 */
   SourceChannel?: number;
 }
 
 declare interface DestroyEnvironmentResponse {
   /** 返回结果 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1775,7 +1775,7 @@ declare interface DestroyLogConfigRequest {
 
 declare interface DestroyLogConfigResponse {
   /** 返回结果 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1785,15 +1785,15 @@ declare interface DisableApplicationAutoscalerRequest {
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
+  /** 弹性伸缩策略ID */
+  AutoscalerId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 弹性伸缩策略ID */
-  AutoscalerId?: string;
 }
 
 declare interface DisableApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1803,15 +1803,15 @@ declare interface EnableApplicationAutoscalerRequest {
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
+  /** 弹性伸缩策略ID */
+  AutoscalerId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 弹性伸缩策略ID */
-  AutoscalerId?: string;
 }
 
 declare interface EnableApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1839,17 +1839,17 @@ declare interface ModifyApplicationAutoscalerRequest {
   ApplicationId: string;
   /** 环境ID */
   EnvironmentId: string;
+  /** 弹性伸缩策略ID */
+  AutoscalerId: string;
+  /** 弹性伸缩策略 */
+  Autoscaler: Autoscaler;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 弹性伸缩策略ID */
-  AutoscalerId?: string;
-  /** 弹性伸缩策略 */
-  Autoscaler?: Autoscaler;
 }
 
 declare interface ModifyApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1867,7 +1867,7 @@ declare interface ModifyApplicationInfoRequest {
 
 declare interface ModifyApplicationInfoResponse {
   /** 成功与否 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1915,10 +1915,10 @@ declare interface ModifyConfigDataRequest {
   EnvironmentId: string;
   /** 配置名 */
   Name: string;
+  /** 配置信息 */
+  Data: Pair[];
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 配置信息 */
-  Data?: Pair[];
 }
 
 declare interface ModifyConfigDataResponse {
@@ -1931,7 +1931,7 @@ declare interface ModifyConfigDataResponse {
 declare interface ModifyEnvironmentRequest {
   /** 环境id */
   EnvironmentId: string;
-  /** 环境名称 */
+  /** 环境名称。环境名称不可修改 */
   EnvironmentName?: string;
   /** 环境描述 */
   Description?: string;
@@ -1947,7 +1947,7 @@ declare interface ModifyEnvironmentRequest {
 
 declare interface ModifyEnvironmentResponse {
   /** 成功时为环境ID，失败为null */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1972,9 +1972,9 @@ declare interface ModifyLogConfigRequest {
   /** 配置名 */
   Name: string;
   /** 日志收集配置信息 */
-  Data?: LogConfig;
+  Data: LogConfig;
   /** 应用 ID */
-  ApplicationId?: string;
+  ApplicationId: string;
 }
 
 declare interface ModifyLogConfigResponse {
@@ -2003,7 +2003,7 @@ declare interface RestartApplicationPodRequest {
 
 declare interface RestartApplicationPodResponse {
   /** 返回结果 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2011,10 +2011,10 @@ declare interface RestartApplicationPodResponse {
 declare interface RestartApplicationRequest {
   /** 服务id */
   ApplicationId: string;
+  /** 环境ID/命名空间ID */
+  EnvironmentId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 环境ID/命名空间ID */
-  EnvironmentId?: string;
 }
 
 declare interface RestartApplicationResponse {
@@ -2026,9 +2026,9 @@ declare interface RestartApplicationResponse {
 
 declare interface ResumeDeployApplicationRequest {
   /** 需要开始下一批次的服务id */
-  ApplicationId?: string;
+  ApplicationId: string;
   /** 环境id */
-  EnvironmentId?: string;
+  EnvironmentId: string;
 }
 
 declare interface ResumeDeployApplicationResponse {
@@ -2040,14 +2040,14 @@ declare interface ResumeDeployApplicationResponse {
 
 declare interface RevertDeployApplicationRequest {
   /** 需要回滚的服务id */
-  ApplicationId?: string;
+  ApplicationId: string;
   /** 需要回滚的服务所在环境id */
-  EnvironmentId?: string;
+  EnvironmentId: string;
 }
 
 declare interface RevertDeployApplicationResponse {
   /** 是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2087,10 +2087,10 @@ declare interface RollingUpdateApplicationByVersionResponse {
 declare interface StopApplicationRequest {
   /** 服务id */
   ApplicationId: string;
+  /** 环境ID/命名空间ID */
+  EnvironmentId: string;
   /** 来源渠道 */
   SourceChannel?: number;
-  /** 环境ID/命名空间ID */
-  EnvironmentId?: string;
 }
 
 declare interface StopApplicationResponse {
@@ -2832,7 +2832,7 @@ declare interface Tem {
   /** 删除应用弹性策略组合 {@link DeleteApplicationAutoscalerRequest} {@link DeleteApplicationAutoscalerResponse} */
   DeleteApplicationAutoscaler(data: DeleteApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationAutoscalerResponse>;
   /** 删除一条访问方式 {@link DeleteApplicationServiceRequest} {@link DeleteApplicationServiceResponse} */
-  DeleteApplicationService(data?: DeleteApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationServiceResponse>;
+  DeleteApplicationService(data: DeleteApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationServiceResponse>;
   /** 删除 Ingress 规则 {@link DeleteIngressRequest} {@link DeleteIngressResponse} */
   DeleteIngress(data: DeleteIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIngressResponse>;
   /** 应用部署 {@link DeployApplicationRequest} {@link DeployApplicationResponse} */
@@ -2848,13 +2848,13 @@ declare interface Tem {
   /** 获取运行服务列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 单环境下所有应用状态查看 {@link DescribeApplicationsStatusRequest} {@link DescribeApplicationsStatusResponse} */
-  DescribeApplicationsStatus(data?: DescribeApplicationsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsStatusResponse>;
+  DescribeApplicationsStatus(data: DescribeApplicationsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsStatusResponse>;
   /** 查询配置详情 {@link DescribeConfigDataRequest} {@link DescribeConfigDataResponse} */
   DescribeConfigData(data: DescribeConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataResponse>;
   /** 查询配置列表 {@link DescribeConfigDataListRequest} {@link DescribeConfigDataListResponse} */
   DescribeConfigDataList(data: DescribeConfigDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataListResponse>;
   /** 获取分批发布详情 {@link DescribeDeployApplicationDetailRequest} {@link DescribeDeployApplicationDetailResponse} */
-  DescribeDeployApplicationDetail(data?: DescribeDeployApplicationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployApplicationDetailResponse>;
+  DescribeDeployApplicationDetail(data: DescribeDeployApplicationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployApplicationDetailResponse>;
   /** 获取环境基础信息 {@link DescribeEnvironmentRequest} {@link DescribeEnvironmentResponse} */
   DescribeEnvironment(data: DescribeEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentResponse>;
   /** 获取环境状态 {@link DescribeEnvironmentStatusRequest} {@link DescribeEnvironmentStatusResponse} */
@@ -2864,13 +2864,13 @@ declare interface Tem {
   /** 查询 Ingress 规则 {@link DescribeIngressRequest} {@link DescribeIngressResponse} */
   DescribeIngress(data: DescribeIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressResponse>;
   /** 查询 Ingress 规则列表 {@link DescribeIngressesRequest} {@link DescribeIngressesResponse} */
-  DescribeIngresses(data?: DescribeIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressesResponse>;
+  DescribeIngresses(data: DescribeIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressesResponse>;
   /** 查询日志收集配置详情 {@link DescribeLogConfigRequest} {@link DescribeLogConfigResponse} */
   DescribeLogConfig(data: DescribeLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogConfigResponse>;
   /** 查询分页的日志收集配置列表 {@link DescribePagedLogConfigListRequest} {@link DescribePagedLogConfigListResponse} */
   DescribePagedLogConfigList(data: DescribePagedLogConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePagedLogConfigListResponse>;
   /** 查询应用关联的 Ingress 规则列表 {@link DescribeRelatedIngressesRequest} {@link DescribeRelatedIngressesResponse} */
-  DescribeRelatedIngresses(data?: DescribeRelatedIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedIngressesResponse>;
+  DescribeRelatedIngresses(data: DescribeRelatedIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedIngressesResponse>;
   /** 销毁配置 {@link DestroyConfigDataRequest} {@link DestroyConfigDataResponse} */
   DestroyConfigData(data: DestroyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyConfigDataResponse>;
   /** 销毁环境 {@link DestroyEnvironmentRequest} {@link DestroyEnvironmentResponse} */
@@ -2904,9 +2904,9 @@ declare interface Tem {
   /** 重启应用实例 {@link RestartApplicationPodRequest} {@link RestartApplicationPodResponse} */
   RestartApplicationPod(data: RestartApplicationPodRequest, config?: AxiosRequestConfig): AxiosPromise<RestartApplicationPodResponse>;
   /** 开始下一批次发布 {@link ResumeDeployApplicationRequest} {@link ResumeDeployApplicationResponse} */
-  ResumeDeployApplication(data?: ResumeDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDeployApplicationResponse>;
+  ResumeDeployApplication(data: ResumeDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDeployApplicationResponse>;
   /** 回滚分批发布 {@link RevertDeployApplicationRequest} {@link RevertDeployApplicationResponse} */
-  RevertDeployApplication(data?: RevertDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDeployApplicationResponse>;
+  RevertDeployApplication(data: RevertDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDeployApplicationResponse>;
   /** 更新应用部署版本 {@link RollingUpdateApplicationByVersionRequest} {@link RollingUpdateApplicationByVersionResponse} */
   RollingUpdateApplicationByVersion(data: RollingUpdateApplicationByVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollingUpdateApplicationByVersionResponse>;
   /** 服务停止 {@link StopApplicationRequest} {@link StopApplicationResponse} */

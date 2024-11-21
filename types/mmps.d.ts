@@ -5,23 +5,23 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 隐私合规应用信息 */
 declare interface AppInfoItem {
   /** 小程序apiiid */
-  AppPackage: string;
+  AppPackage?: string;
   /** 小程序应用名称 */
-  AppName: string | null;
+  AppName?: string | null;
   /** 小程序应用版本 */
-  AppVersion: string | null;
+  AppVersion?: string | null;
   /** 应用平台, 0:android, 1:ios, 2:小程序 */
-  Platform: number;
+  Platform?: number;
   /** 小程序隐私诊断报告下载链接 */
-  ReportUrl: string | null;
+  ReportUrl?: string | null;
   /** 小程序隐私诊断报告名称 */
-  ReportTitle: string | null;
+  ReportTitle?: string | null;
   /** 小程序隐私诊断堆栈报告下载链接 */
-  BehaviorUrl: string | null;
+  BehaviorUrl?: string | null;
   /** 小程序隐私诊断堆栈报告名称 */
-  BehaviorTitle: string | null;
+  BehaviorTitle?: string | null;
   /** 诊断风险项数量 */
-  HighRiskCount: number | null;
+  HighRiskCount?: number | null;
   /** 隐私申明文件名称 */
   PrivacyTextName?: string | null;
   /** 软件MD5 */
@@ -33,21 +33,21 @@ declare interface AppInfoItem {
 /** 应用隐私合规诊断任务数据 */
 declare interface AppTaskData {
   /** 任务id */
-  TaskID: string;
+  TaskID?: string;
   /** 任务类型, 0:基础版, 1:专家版, 2:本地化 */
-  TaskType: number;
+  TaskType?: number;
   /** 0:默认值(待检测/待咨询), 1.检测中, 2:待评估, 3:评估中, 4:任务完成/咨询完成, 5:任务失败, 6:咨询中; */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 错误信息 */
-  TaskErrMsg: string | null;
+  TaskErrMsg?: string | null;
   /** 任务来源,0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android); */
-  Source: number;
+  Source?: number;
   /** 应用信息 */
-  AppInfo: AppInfoItem;
+  AppInfo?: AppInfoItem;
   /** 任务启动时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 任务完成时间(更新时间) */
-  EndTime: string;
+  EndTime?: string;
   /** 联系人信息 */
   ContactName?: string | null;
 }
@@ -191,9 +191,9 @@ declare interface CreateAppScanTaskRequest {
 
 declare interface CreateAppScanTaskResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 任务id */
-  TaskID: string;
+  TaskID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -217,7 +217,7 @@ declare interface CreateFlySecMiniAppProfessionalScanTaskRequest {
 
 declare interface CreateFlySecMiniAppProfessionalScanTaskResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -271,9 +271,9 @@ declare interface CreateFlySecMiniAppScanTaskRequest {
 
 declare interface CreateFlySecMiniAppScanTaskResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 任务id */
-  TaskID: string;
+  TaskID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -285,13 +285,13 @@ declare interface DescribeBasicDiagnosisResourceUsageInfoRequest {
 
 declare interface DescribeBasicDiagnosisResourceUsageInfoResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 资源类型 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 资源总数 */
-  Total: number;
+  Total?: number;
   /** 资源未使用次数 */
-  UnusedCount: number;
+  UnusedCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -441,11 +441,11 @@ declare interface DescribeScanTaskListRequest {
 
 declare interface DescribeScanTaskListResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 诊断任务数据列表 */
-  Data: AppTaskData[] | null;
+  Data?: AppTaskData[] | null;
   /** 任务总数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -10,6 +10,8 @@ declare interface Choice {
   Delta?: Delta | null;
   /** 返回值，非流式调用时使用该字段。 */
   Message?: Message | null;
+  /** 索引值，流式调用时使用该字段。 */
+  Index?: number;
 }
 
 /** 可以传入多种类型的内容，如图片或文本。当前只支持传入单张图片，传入多张图片时，以第一个图片为准。 */
@@ -56,6 +58,22 @@ declare interface ErrorMsg {
   Msg?: string;
   /** 错误码。4000 服务内部异常。4001 请求模型超时。 */
   Code?: number;
+}
+
+/** 已上传的文件对象。 */
+declare interface FileObject {
+  /** 文件标识符，可在各个API中引用。 */
+  ID?: string;
+  /** 对象类型，始终为 file。 */
+  Object?: string;
+  /** 文件大小，单位为字节。 */
+  Bytes?: number;
+  /** 文件创建时的 Unix 时间戳（秒）。 */
+  CreatedAt?: number;
+  /** 文件名。 */
+  Filename?: string;
+  /** 上传文件的用途。 */
+  Purpose?: string;
 }
 
 /** 混元生图多轮对话历史记录。 */
@@ -112,6 +130,14 @@ declare interface Message {
   ToolCalls?: ToolCall[] | null;
 }
 
+/** 脑图 */
+declare interface Mindmap {
+  /** 脑图缩略图链接 */
+  ThumbUrl: string | null;
+  /** 脑图图片链接 */
+  Url: string | null;
+}
+
 /** 多媒体详情 */
 declare interface Multimedia {
   /** 多媒体类型，可选值包括 image、music、album、playlist。说明：1. image：图片；music：单曲，类型为单曲时，会返回详细歌手和歌曲信息；album：专辑；playlist：歌单。2. 当 type 为 music、album、playlist 时，需要配合 [QQ音乐SDK](https://developer.y.qq.com/) 使用。 */
@@ -130,6 +156,28 @@ declare interface Multimedia {
   Ext?: SongExt | null;
 }
 
+/** 相关组织及人物 */
+declare interface RelevantEntity {
+  /** 相关组织及人物名称 */
+  Name: string | null;
+  /** 相关组织及人物内容 */
+  Content: string | null;
+  /** 相关事件引用文章标号 */
+  Reference: number[] | null;
+}
+
+/** 相关事件 */
+declare interface RelevantEvent {
+  /** 相关事件标题 */
+  Title: string | null;
+  /** 相关事件内容 */
+  Content: string | null;
+  /** 相关事件时间 */
+  Datetime: string | null;
+  /** 相关事件引用文章标号 */
+  Reference: number[] | null;
+}
+
 /** 多媒体占位符替换信息 */
 declare interface Replace {
   /** 占位符序号 */
@@ -142,6 +190,18 @@ declare interface Replace {
 declare interface SearchInfo {
   /** 搜索引文信息 */
   SearchResults?: SearchResult[] | null;
+  /** 脑图（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回） */
+  Mindmap?: Mindmap | null;
+  /** 相关事件（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回） */
+  RelevantEvents?: RelevantEvent[] | null;
+  /** 相关组织及人物（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回） */
+  RelevantEntities?: RelevantEntity[] | null;
+  /** 时间线（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回） */
+  Timeline?: Timeline[] | null;
+  /** 是否命中搜索深度模式 */
+  SupportDeepSearch?: boolean | null;
+  /** 搜索回复大纲（深度模式下返回） */
+  Outline?: string[] | null;
 }
 
 /** 搜索引文信息 */
@@ -164,6 +224,76 @@ declare interface SongExt {
   Vip?: number;
 }
 
+/** 会话额外消息 */
+declare interface ThreadAdditionalMessage {
+  /** 角色 */
+  Role?: string;
+  /** 内容 */
+  Content?: string;
+  /** 附件 */
+  Attachments?: ThreadMessageAttachmentObject[] | null;
+}
+
+/** 会话消息 */
+declare interface ThreadMessage {
+  /** 消息 ID */
+  ID?: string;
+  /** 对象类型 */
+  Object?: string;
+  /** 创建时间 */
+  CreatedAt?: number;
+  /** 会话 ID */
+  ThreadID?: string;
+  /** 状态，处理中 in_progress，已完成 completed，未完成 incomplete。 */
+  Status?: string;
+  /** 未完成原因 */
+  InCompleteDetails?: ThreadMessageInCompleteDetailsObject | null;
+  /** 完成时间 */
+  CompletedAt?: number | null;
+  /** 未完成时间 */
+  InCompleteAt?: number | null;
+  /** 角色 */
+  Role?: string;
+  /** 内容 */
+  Content?: string;
+  /** 助手 ID */
+  AssistantID?: string | null;
+  /** 运行 ID */
+  RunID?: string | null;
+  /** 附件 */
+  Attachments?: ThreadMessageAttachmentObject[] | null;
+}
+
+/** 会话消息附件 */
+declare interface ThreadMessageAttachmentObject {
+  /** 文件 ID */
+  FileID?: string | null;
+}
+
+/** 会话消息未完成原因 */
+declare interface ThreadMessageInCompleteDetailsObject {
+  /** 会话消息未完成原因 */
+  Reason?: string;
+}
+
+/** 在会话中提供给助手工具的一系列资源。不同类型的工具会有各自对应的资源。比如代码解释器需要一个文件 ID 的列表，而文件搜索工具则需要一个向量存储 ID 的列表。 */
+declare interface ThreadToolResources {
+  /** 文件 ID 列表 */
+  CodeInterpreter?: string[];
+  /** 向量存储 ID 列表 */
+  VectorStoreIDs?: string[];
+}
+
+/** 时间线 */
+declare interface Timeline {
+  /** 标题 */
+  Title?: string | null;
+  /** 时间 */
+  Datetime?: string | null;
+  /** 相关网页链接 */
+  Url?: string | null;
+}
+
 /** 用户指定模型使用的工具 */
 declare interface Tool {
   /** 工具类型，当前只支持function */
@@ -180,6 +310,8 @@ declare interface ToolCall {
   Type: string;
   /** 具体的function调用 */
   Function: ToolCallFunction;
+  /** 索引值 */
+  Index?: number;
 }
 
 /** 具体的function调用 */
@@ -221,7 +353,7 @@ declare interface ActivateServiceResponse {
 }
 
 declare interface ChatCompletionsRequest {
-  /** 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo、 hunyuan-turbo-latest。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
+  /** 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo、 hunyuan-turbo-latest、 hunyuan-large。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
   Model: string;
   /** 聊天上下文信息。说明：1. 长度最多为 40，按对话时间从旧到新在数组中排列。2. Message.Role 可选值：system、user、assistant、 tool（functioncall场景）。其中，system 角色可选，如存在则必须位于列表的最开始。user（tool） 和 assistant 需交替出现（一问一答），以 user 提问开始，user（tool）提问结束，其中tool可以连续出现多次，且 Content 不能为空。Role 的顺序示例：[system（可选） user assistant user（tool tool ...） assistant user（tool tool ...） ...]。3. Messages 中 Content 总长度不能超过模型输入长度上限（可参考 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 文档），超过则会截断最前面的内容，只保留尾部内容。 */
   Messages: Message[];
@@ -249,6 +381,10 @@ declare interface ChatCompletionsRequest {
   EnableSpeedSearch?: boolean;
   /** 多媒体开关。详细介绍请阅读 [多媒体介绍](https://cloud.tencent.com/document/product/1729/111178) 中的说明。说明：1. 该参数目前仅对白名单内用户生效，如您想体验该功能请 [联系我们](https://cloud.tencent.com/act/event/Online_service)。2. 该参数仅在功能增强（如搜索）开关开启（EnableEnhancement=true）并且极速版搜索开关关闭（EnableSpeedSearch=false）时生效。3. hunyuan-lite 无多媒体能力，该参数对 hunyuan-lite 版本不生效。4. 未传值时默认关闭。5. 开启并搜索到对应的多媒体信息时，会输出对应的多媒体地址，可以定制个性化的图文消息。 */
   EnableMultimedia?: boolean;
+  /** 是否开启深度研究该问题，默认是false，在值为true且命中深度研究该问题时，会返回深度研究该问题信息。 */
+  EnableDeepSearch?: boolean;
+  /** 说明： 1. 确保模型的输出是可复现的。 2. 取值区间为非0正整数，最大值10000。 3. 非必要不建议使用，不合理的取值会影响效果。 */
+  Seed?: number;
 }
 
 declare interface ChatCompletionsResponse {
@@ -274,17 +410,173 @@ declare interface ChatCompletionsResponse {
   RequestId?: string;
 }
 
+declare interface CreateThreadRequest {
+}
+
+declare interface CreateThreadResponse {
+  /** 会话 ID */
+  ID?: string;
+  /** 对象类型 */
+  Object?: string;
+  /** 创建时间，Unix 时间戳，单位为秒。 */
+  CreatedAt?: number;
+  /** 提供给工具的资源列表 */
+  ToolResources?: ThreadToolResources | null;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface FilesDeletionsRequest {
+  /** 文件标识符。 */
+  ID: string;
+}
+
+declare interface FilesDeletionsResponse {
+  /** 文件标识符。 */
+  ID?: string;
+  /** 对象类型，始终为 file。 */
+  Object?: string;
+  /** 是否删除成功。 */
+  Deleted?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface FilesListRequest {
+  /** 分页偏移量。 */
+  Offset?: number;
+  /** 每页数量，最大 100。 */
+  Limit?: number;
+}
+
+declare interface FilesListResponse {
+  /** 文件数量。 */
+  Total?: number;
+  /** 对象类型，始终为 list。 */
+  Object?: string;
+  /** FileObject 列表。 */
+  Data?: FileObject[];
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface FilesUploadsRequest {
+  /** 文件名。 */
+  Name: string;
+  /** 文件链接。目前仅支持 pdf 格式，单文件大小限制为100M。 */
+  URL: string;
+}
+
+declare interface FilesUploadsResponse {
+  /** 文件标识符，可在各个API中引用。 */
+  ID?: string;
+  /** 对象类型，始终为 file。 */
+  Object?: string;
+  /** 文件大小，单位为字节。 */
+  Bytes?: number;
+  /** 文件创建时的 Unix 时间戳（秒）。 */
+  CreatedAt?: number;
+  /** 文件名。 */
+  Filename?: string;
+  /** 上传文件的用途。 */
+  Purpose?: string;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
 declare interface GetEmbeddingRequest {
   /** 输入文本。总长度不超过 1024 个 Token，超过则会截断最后面的内容。 */
-  Input: string;
+  Input?: string;
+  /** 输入文本数组。输入数组总长度不超过 200 。 */
+  InputList?: string[];
 }
 
 declare interface GetEmbeddingResponse {
-  /** 返回的 Embedding 信息。当前不支持批量，所以数组元素数目为 1。 */
+  /** 返回的 Embedding 信息。 */
   Data?: EmbeddingData[];
   /** Token 使用计数，按照总 Token 数量收费。 */
   Usage?: EmbeddingUsage;
   /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetThreadMessageListRequest {
+  /** 会话 ID */
+  ThreadID: string;
+  /** 返回的消息条数，1 - 100 条 */
+  Limit?: number;
+  /** 排序方式，按创建时间升序（asc）或降序（desc），默认为 desc */
+  Order?: string;
+}
+
+declare interface GetThreadMessageListResponse {
+  /** 消息列表 */
+  Data?: ThreadMessage[];
+  /** 第一条消息 ID */
+  FirstID?: string | null;
+  /** 最后一条消息 ID */
+  LastID?: number | null;
+  /** 是否还有更多消息 */
+  HasMore?: boolean;
+  /** 对象类型 */
+  Object?: string;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface GetThreadMessageRequest {
+  /** 会话 ID */
+  ThreadID: string;
+  /** 消息 ID */
+  MessageID: string;
+}
+
+declare interface GetThreadMessageResponse {
+  /** 消息 ID */
+  ID?: string;
+  /** 对象类型 */
+  Object?: string;
+  /** 创建时间 */
+  CreatedAt?: number;
+  /** 会话 ID */
+  ThreadID?: string;
+  /** 状态，处理中 in_progress，已完成 completed，未完成 incomplete。 */
+  Status?: string;
+  /** 未完成原因 */
+  InCompleteDetails?: ThreadMessageInCompleteDetailsObject | null;
+  /** 完成时间 */
+  CompletedAt?: number | null;
+  /** 未完成时间 */
+  InCompleteAt?: number | null;
+  /** 角色 */
+  Role?: string;
+  /** 内容 */
+  Content?: string;
+  /** 助手 ID */
+  AssistantID?: string | null;
+  /** 运行 ID */
+  RunID?: string | null;
+  /** 附件 */
+  Attachments?: ThreadMessageAttachmentObject[] | null;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface GetThreadRequest {
+  /** 会话 ID */
+  ThreadID: string;
+}
+
+declare interface GetThreadResponse {
+  /** 会话 ID */
+  ID?: string;
+  /** 对象类型 */
+  Object?: string;
+  /** 创建时间，Unix 时间戳，单位为秒。 */
+  CreatedAt?: number;
+  /** 提供给工具的资源列表 */
+  ToolResources?: ThreadToolResources | null;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }
 
@@ -348,14 +640,44 @@ declare interface QueryHunyuanImageJobResponse {
   ResultImage?: string[];
   /** 结果 detail 数组，Success 代表成功。 */
   ResultDetails?: string[];
-  /** 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。 */
+  /** 对应 SubmitHunyuanImageJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。 */
   RevisedPrompt?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
+declare interface RunThreadRequest {
+  /** 会话 ID */
+  ThreadID: string;
+  /** 助手 ID */
+  AssistantID?: string;
+  /** 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
+  Model?: string;
+  /** 附加消息 */
+  AdditionalMessages?: ThreadAdditionalMessage[];
+  /** 说明：1. 影响模型输出多样性，模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。2. 取值区间为 [0.0, 2.0]。较高的数值会使输出更加多样化和不可预测，而较低的数值会使其更加集中和确定。 */
+  Temperature?: number;
+  /** 说明：1. 影响输出文本的多样性。模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。2. 取值区间为 [0.0, 1.0]。取值越大，生成文本的多样性越强。 */
+  TopP?: number;
+  /** 是否流式输出，当前只允许 true */
+  Stream?: boolean;
+  /** 运行过程中可使用的 token 最大数量。 */
+  MaxPromptTokens?: number;
+  /** 运行过程中可使用的完成 token 的最大数量。 */
+  MaxCompletionTokens?: number;
+  /** 可调用的工具列表，仅对 hunyuan-pro、hunyuan-turbo、hunyuan-functioncall 模型生效。 */
+  Tools?: Tool[];
+  /** 工具使用选项，可选值包括 none、auto、custom。说明：1. 仅对 hunyuan-pro、hunyuan-turbo、hunyuan-functioncall 模型生效。2. none：不调用工具；auto：模型自行选择生成回复或调用工具；custom：强制模型调用指定的工具。3. 未设置时，默认值为auto */
+  ToolChoice?: string;
+}
+
+declare interface RunThreadResponse {
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
 declare interface SetPayModeRequest {
-  /** 设置后付费状态，0：后付费；1：预付费 */
+  /** 设置后付费状态，0：后付费打开；1：后付费关闭 */
   PayMode: number;
 }
 
@@ -385,6 +707,8 @@ declare interface SubmitHunyuanImageChatJobResponse {
 declare interface SubmitHunyuanImageJobRequest {
   /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传1024个 utf-8 字符。 */
   Prompt: string;
+  /** 反向提示词。 推荐使用中文。最多可传1024个 utf-8 字符。 */
+  NegativePrompt?: string;
   /** 绘画风格。请在 [混元生图风格列表](https://cloud.tencent.com/document/product/1729/105846) 中选择期望的风格，传入风格编号。不传默认不指定风格。 */
   Style?: string;
   /** 生成图分辨率。支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3），不传默认使用1024:1024。 */
@@ -439,14 +763,30 @@ declare interface Hunyuan {
   ActivateService(data?: ActivateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateServiceResponse>;
   /** hunyuan {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
+  /** 创建会话 {@link CreateThreadRequest} {@link CreateThreadResponse} */
+  CreateThread(data?: CreateThreadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateThreadResponse>;
+  /** 文件删除 {@link FilesDeletionsRequest} {@link FilesDeletionsResponse} */
+  FilesDeletions(data: FilesDeletionsRequest, config?: AxiosRequestConfig): AxiosPromise<FilesDeletionsResponse>;
+  /** 文件列表 {@link FilesListRequest} {@link FilesListResponse} */
+  FilesList(data?: FilesListRequest, config?: AxiosRequestConfig): AxiosPromise<FilesListResponse>;
+  /** 文件上传 {@link FilesUploadsRequest} {@link FilesUploadsResponse} */
+  FilesUploads(data: FilesUploadsRequest, config?: AxiosRequestConfig): AxiosPromise<FilesUploadsResponse>;
   /** hunyuan-embedding {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
-  GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
+  GetEmbedding(data?: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
+  /** 查询会话 {@link GetThreadRequest} {@link GetThreadResponse} */
+  GetThread(data: GetThreadRequest, config?: AxiosRequestConfig): AxiosPromise<GetThreadResponse>;
+  /** 获取会话消息 {@link GetThreadMessageRequest} {@link GetThreadMessageResponse} */
+  GetThreadMessage(data: GetThreadMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetThreadMessageResponse>;
+  /** 会话消息列表 {@link GetThreadMessageListRequest} {@link GetThreadMessageListResponse} */
+  GetThreadMessageList(data: GetThreadMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<GetThreadMessageListResponse>;
   /** Token 计数 {@link GetTokenCountRequest} {@link GetTokenCountResponse} */
   GetTokenCount(data: GetTokenCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenCountResponse>;
   /** 查询混元生图（多轮对话）任务 {@link QueryHunyuanImageChatJobRequest} {@link QueryHunyuanImageChatJobResponse} */
   QueryHunyuanImageChatJob(data?: QueryHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageChatJobResponse>;
   /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */
   QueryHunyuanImageJob(data: QueryHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageJobResponse>;
+  /** 执行会话 {@link RunThreadRequest} {@link RunThreadResponse} */
+  RunThread(data: RunThreadRequest, config?: AxiosRequestConfig): AxiosPromise<RunThreadResponse>;
   /** 设置付费模式 {@link SetPayModeRequest} {@link SetPayModeResponse} */
   SetPayMode(data: SetPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<SetPayModeResponse>;
   /** 提交混元生图（多轮对话）任务 {@link SubmitHunyuanImageChatJobRequest} {@link SubmitHunyuanImageChatJobResponse} */

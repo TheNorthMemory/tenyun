@@ -1658,20 +1658,6 @@ declare interface CallISAPIResponse {
   RequestId?: string;
 }
 
-declare interface CheckDomainRequest {
-  /** 播放域名 */
-  PlayDomain: string;
-  /** CNAME 记录值 */
-  InternalDomain: string;
-}
-
-declare interface CheckDomainResponse {
-  /** 是否备案 */
-  Data?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ControlDevicePTZRequest {
   /** 通道 ID（从通道查询接口DescribeDeviceChannel中获取） */
   ChannelId: string;
@@ -2081,6 +2067,8 @@ declare interface DescribeRecordPlaybackUrlRequest {
   EndTime: number;
   /** 是否获取内网地址 */
   IsInternal?: boolean;
+  /** 云录像回放时，是否需要开启时间戳矫正，主要解决时间戳反转，会退等问题导致无法播放 */
+  CorrectTimestamp?: boolean;
 }
 
 declare interface DescribeRecordPlaybackUrlResponse {
@@ -2243,7 +2231,7 @@ declare interface ListDevicesRequest {
   CurrentUin?: number;
   /** 页码，默认为1。 */
   PageNumber?: number;
-  /** 每页数量，默认为20。 */
+  /** 每页数量，默认为20，单页最大10000条 */
   PageSize?: number;
 }
 
@@ -2743,8 +2731,6 @@ declare interface Iss {
   BatchOperateDevice(data: BatchOperateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateDeviceResponse>;
   /** ISAPI 透传异步回调 {@link CallISAPIRequest} {@link CallISAPIResponse} */
   CallISAPI(data: CallISAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CallISAPIResponse>;
-  /** 检测域名是否备案 {@link CheckDomainRequest} {@link CheckDomainResponse} */
-  CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
   /** ptz 控制 {@link ControlDevicePTZRequest} {@link ControlDevicePTZResponse} */
   ControlDevicePTZ(data: ControlDevicePTZRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDevicePTZResponse>;
   /** 预置位操作 {@link ControlDevicePresetRequest} {@link ControlDevicePresetResponse} */

@@ -13,11 +13,11 @@ declare interface AgeInfo {
 /** 人像渐变返回结果 */
 declare interface FaceMorphOutput {
   /** 人像渐变输出的url */
-  MorphUrl: string | null;
+  MorphUrl?: string | null;
   /** 人像渐变输出的结果MD5，用于校验 */
-  MorphMd5: string | null;
+  MorphMd5?: string | null;
   /** 人像渐变输出的结果封面图base64字符串 */
-  CoverImage: string | null;
+  CoverImage?: string | null;
 }
 
 /** 人脸框信息 */
@@ -91,9 +91,9 @@ declare interface FaceCartoonPicRequest {
 
 declare interface FaceCartoonPicResponse {
   /** 结果图片Base64信息。 */
-  ResultImage: string;
+  ResultImage?: string;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。(默认为base64) */
-  ResultUrl: string;
+  ResultUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -117,9 +117,9 @@ declare interface MorphFaceRequest {
 
 declare interface MorphFaceResponse {
   /** 人像渐变任务的Job id */
-  JobId: string;
+  JobId?: string;
   /** 预估处理时间，粒度为秒 */
-  EstimatedProcessTime: number;
+  EstimatedProcessTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -131,11 +131,11 @@ declare interface QueryFaceMorphJobRequest {
 
 declare interface QueryFaceMorphJobResponse {
   /** 当前任务状态：排队中、处理中、处理失败或者处理完成 */
-  JobStatus: string;
+  JobStatus?: string;
   /** 人像渐变输出的结果信息 */
-  FaceMorphOutput: FaceMorphOutput | null;
+  FaceMorphOutput?: FaceMorphOutput | null;
   /** 当前任务状态码：1：排队中、3: 处理中、5: 处理失败、7:处理完成 */
-  JobStatusCode: number | null;
+  JobStatusCode?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

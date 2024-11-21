@@ -3226,6 +3226,20 @@ declare interface DescribeGovernanceServicesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceTagInfosRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceTagInfosResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例标签集合 */
+  TagInfos?: InstanceTagInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNacosReplicasRequest {
   /** 引擎实例ID */
   InstanceId: string;
@@ -3853,6 +3867,22 @@ declare interface RateLimitResponse {
   HttpStatus?: number | null;
 }
 
+declare interface RestartSREInstanceRequest {
+  /** 微服务引擎实例Id */
+  InstanceId: string;
+  /** 重启的环境类型（PROD，DEV，UAT等） */
+  EnvTypes?: string[];
+  /** 指定需要重启的实例节点（当前仅支持zk单节点重启） */
+  NodeName?: string;
+}
+
+declare interface RestartSREInstanceResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RollbackConfigFileReleasesRequest {
   /** TSE实例id */
   InstanceId: string;
@@ -4106,6 +4136,8 @@ declare interface Tse {
   DescribeGovernanceServiceContracts(data: DescribeGovernanceServiceContractsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceServiceContractsResponse>;
   /** 查询服务列表 {@link DescribeGovernanceServicesRequest} {@link DescribeGovernanceServicesResponse} */
   DescribeGovernanceServices(data?: DescribeGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceServicesResponse>;
+  /** 查看实例的标签信息 {@link DescribeInstanceTagInfosRequest} {@link DescribeInstanceTagInfosResponse} */
+  DescribeInstanceTagInfos(data: DescribeInstanceTagInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTagInfosResponse>;
   /** 查询Nacos类型引擎实例副本信息 {@link DescribeNacosReplicasRequest} {@link DescribeNacosReplicasResponse} */
   DescribeNacosReplicas(data: DescribeNacosReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosReplicasResponse>;
   /** 查询nacos服务接口列表 {@link DescribeNacosServerInterfacesRequest} {@link DescribeNacosServerInterfacesResponse} */
@@ -4174,6 +4206,8 @@ declare interface Tse {
   OpenWafProtection(data: OpenWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWafProtectionResponse>;
   /** 发布配置文件 {@link PublishConfigFilesRequest} {@link PublishConfigFilesResponse} */
   PublishConfigFiles(data: PublishConfigFilesRequest, config?: AxiosRequestConfig): AxiosPromise<PublishConfigFilesResponse>;
+  /** 重启微服务引擎实例 {@link RestartSREInstanceRequest} {@link RestartSREInstanceResponse} */
+  RestartSREInstance(data: RestartSREInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartSREInstanceResponse>;
   /** 回滚配置发布 {@link RollbackConfigFileReleasesRequest} {@link RollbackConfigFileReleasesResponse} */
   RollbackConfigFileReleases(data: RollbackConfigFileReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackConfigFileReleasesResponse>;
   /** 弹性伸缩策略批量解绑网关分组 {@link UnbindAutoScalerResourceStrategyFromGroupsRequest} {@link UnbindAutoScalerResourceStrategyFromGroupsResponse} */

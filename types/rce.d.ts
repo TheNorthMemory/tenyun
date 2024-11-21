@@ -398,6 +398,34 @@ declare interface OutputDescribeNameListInfo {
   List?: OutputDescribeNameListFrontFix[] | null;
 }
 
+/** 预付费 后付费 总数显示接口出参 */
+declare interface OutputDescribeUserUsageCnt {
+  /** 当前付费模式，0 后付费 1 预付费 */
+  PayMode?: number | null;
+  /** 后付费本月使用量 */
+  AfterPayModeThisMonthUsedCnt?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 超出时间 */
+  ExpireTime?: string | null;
+  /** 后付费上月使用量 */
+  AfterPayModeLastMonthUsedCnt?: number | null;
+  /** 预付费总量 */
+  BeforePayModeTotalUsedCnt?: number | null;
+  /** 预付费剩余用量 */
+  BeforePayModeRemainUsedCnt?: number | null;
+}
+
+/** RCE控制台预付费和后付费次数展示出参数据 */
+declare interface OutputDescribeUserUsageCntData {
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 4300：未开通服务 */
+  Code?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 业务详情 */
+  Value?: OutputDescribeUserUsageCnt | null;
+}
+
 /** 添加黑白名单数据出参 */
 declare interface OutputImportNameListDataFront {
   /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
@@ -578,6 +606,16 @@ declare interface DescribeNameListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserUsageCntRequest {
+}
+
+declare interface DescribeUserUsageCntResponse {
+  /** 业务出参 */
+  Data?: OutputDescribeUserUsageCntData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImportNameListDataRequest {
   /** 业务入参 */
   BusinessSecurityData: InputImportNameListDataFront;
@@ -643,6 +681,8 @@ declare interface Rce {
   DescribeNameListDataList(data: DescribeNameListDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNameListDataListResponse>;
   /** 查询黑白名单详情 {@link DescribeNameListDetailRequest} {@link DescribeNameListDetailResponse} */
   DescribeNameListDetail(data?: DescribeNameListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNameListDetailResponse>;
+  /** 客户资源用量查询 {@link DescribeUserUsageCntRequest} {@link DescribeUserUsageCntResponse} */
+  DescribeUserUsageCnt(data?: DescribeUserUsageCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserUsageCntResponse>;
   /** 添加黑白名单数据 {@link ImportNameListDataRequest} {@link ImportNameListDataResponse} */
   ImportNameListData(data: ImportNameListDataRequest, config?: AxiosRequestConfig): AxiosPromise<ImportNameListDataResponse>;
   /** 全栈式风控引擎 {@link ManageMarketingRiskRequest} {@link ManageMarketingRiskResponse} */

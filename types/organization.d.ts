@@ -969,6 +969,8 @@ declare interface AddPermissionPolicyToRoleConfigurationRequest {
   RolePolicies?: PolicyDetail[];
   /** 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。 */
   CustomPolicyDocument?: string;
+  /** 自定义策略内容列表（跟RolePolicyNames一一对应） */
+  CustomPolicyDocuments?: string[];
 }
 
 declare interface AddPermissionPolicyToRoleConfigurationResponse {
@@ -2281,7 +2283,7 @@ declare interface ListGroupsRequest {
   FilterUsers?: string[];
   /** 排序的字段，目前只支持CreateTime，默认是CreateTime字段 */
   SortField?: string;
-  /** 排序类型：Desc 倒序 Asc 正序，需要你和SortField一起设置 */
+  /** 排序类型：Desc 倒序 Asc 正序，需要您和SortField一起设置 */
   SortType?: string;
   /** 翻页offset. 不要与NextToken同时使用，优先使用NextToken */
   Offset?: number;
@@ -2547,7 +2549,7 @@ declare interface ListRoleConfigurationsRequest {
   NextToken?: string;
   /** 每页的最大数据条数。 取值范围：1~100。 默认值：10。 */
   MaxResults?: number;
-  /** 过滤条件。不区分大小写。目前，只支持 RoleConfigurationName，只支持 eq（Equals）和 sw（Start With）。 示例：Filter = "RoleConfigurationName，只支持 sw test"，表示查询名称以 test 开头的全部权限配置。Filter = "RoleConfigurationName，只支持 eq TestRoleConfiguration"，表示查询名称为 TestRoleConfiguration 的权限配置。 */
+  /** 过滤文本。不区分大小写。目前，支持 RoleConfigurationName和Description. 示例：Filter = "test"，表示查询名称或描述里包含 test 的权限配置。 */
   Filter?: string;
   /** 检索成员账号是否配置过权限，如果配置过返回IsSelected: true, 否则返回false。 */
   FilterTargets?: number[];
@@ -2699,7 +2701,7 @@ declare interface ListUsersRequest {
   FilterGroups?: string[];
   /** 排序的字段，目前只支持CreateTime，默认是CreateTime字段 */
   SortField?: string;
-  /** 排序类型：Desc 倒序 Asc 正序，需要你和SortField一起设置 */
+  /** 排序类型：Desc 倒序 Asc 正序，需要您和SortField一起设置 */
   SortType?: string;
   /** 翻页offset. 不要与NextToken同时使用，优先使用NextToken */
   Offset?: number;

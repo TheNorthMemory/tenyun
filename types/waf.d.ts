@@ -15,11 +15,11 @@ declare interface AccessFieldValueRatioInfo {
 /** DescribeAccessIndex */
 declare interface AccessFullTextInfo {
   /** 是否大小写敏感 */
-  CaseSensitive: boolean | null;
+  CaseSensitive?: boolean;
   /** 全文索引的分词符，字符串中每个字符代表一个分词符 */
-  Tokenizer: string | null;
+  Tokenizer?: string;
   /** 是否包含中文 */
-  ContainZH: boolean | null;
+  ContainZH?: boolean;
 }
 
 /** 用于接口DescribeAccessHistogram 的出参 */
@@ -35,81 +35,81 @@ declare interface AccessHistogramItem {
 /** 用于 DescribeAccessIndex 的出参 */
 declare interface AccessKeyValueInfo {
   /** 需要配置键值或者元字段索引的字段 */
-  Key: string | null;
+  Key?: string;
   /** 字段的索引描述信息 */
-  Value: AccessValueInfo | null;
+  Value?: AccessValueInfo;
 }
 
 /** 单条日志数据描述 */
 declare interface AccessLogInfo {
   /** 日志时间，单位ms */
-  Time: number | null;
+  Time?: number;
   /** 日志主题ID */
-  TopicId: string | null;
+  TopicId?: string;
   /** 日志主题名称 */
-  TopicName: string | null;
+  TopicName?: string;
   /** 日志来源IP */
-  Source: string | null;
+  Source?: string;
   /** 日志文件名称 */
-  FileName: string | null;
+  FileName?: string;
   /** 日志上报请求包的ID */
-  PkgId: string | null;
+  PkgId?: string;
   /** 请求包内日志的ID */
-  PkgLogId: string | null;
+  PkgLogId?: string;
   /** 日志内容的Json序列化字符串 */
-  LogJson: string | null;
+  LogJson?: string;
 }
 
 /** 日志KeyValue对 */
 declare interface AccessLogItem {
   /** 日记Key */
-  Key: string | null;
+  Key?: string;
   /** 日志Value */
-  Value: string | null;
+  Value?: string;
 }
 
 /** 日志KeyValue对数组，用于搜索访问日志 */
 declare interface AccessLogItems {
   /** 分析结果返回的KV数据对 */
-  Data: AccessLogItem[] | null;
+  Data?: AccessLogItem[];
 }
 
 /** DescribeAccessIndex接口的出参数 */
 declare interface AccessRuleInfo {
   /** 全文索引配置 */
-  FullText: AccessFullTextInfo | null;
+  FullText?: AccessFullTextInfo;
   /** 键值索引配置 */
-  KeyValue: AccessRuleKeyValueInfo | null;
+  KeyValue?: AccessRuleKeyValueInfo;
   /** 元字段索引配置 */
-  Tag: AccessRuleTagInfo | null;
+  Tag?: AccessRuleTagInfo;
 }
 
 /** DescribeAccessIndex接口的出参 */
 declare interface AccessRuleKeyValueInfo {
   /** 是否大小写敏感 */
-  CaseSensitive: boolean | null;
+  CaseSensitive?: boolean;
   /** 需要建立索引的键值对信息；最大只能配置100个键值对 */
-  KeyValues: AccessKeyValueInfo[] | null;
+  KeyValues?: AccessKeyValueInfo[];
 }
 
 /** DescribeAccessIndex接口的出参 */
 declare interface AccessRuleTagInfo {
   /** 是否大小写敏感 */
-  CaseSensitive: boolean | null;
+  CaseSensitive?: boolean;
   /** 标签索引配置中的字段信息 */
-  KeyValues: AccessKeyValueInfo[] | null;
+  KeyValues?: AccessKeyValueInfo[];
 }
 
 /** 用于DescribeAccessIndex接口的出参 */
 declare interface AccessValueInfo {
   /** 字段类型，目前支持的类型有：long、text、double */
-  Type: string | null;
+  Type?: string;
   /** 字段的分词符，只有当字段类型为text时才有意义；输入字符串中的每个字符代表一个分词符 */
-  Tokenizer: string | null;
+  Tokenizer?: string;
   /** 字段是否开启分析功能 */
-  SqlFlag: boolean | null;
+  SqlFlag?: boolean;
   /** 是否包含中文 */
-  ContainZH: boolean | null;
+  ContainZH?: boolean;
 }
 
 /** api列表 */
@@ -121,31 +121,31 @@ declare interface ApiAsset {
   /** api名称 */
   ApiName?: string;
   /** 场景 */
-  Scene?: string | null;
+  Scene?: string;
   /** 数据标签 */
-  Label?: string[] | null;
+  Label?: string[];
   /** 过去7天是否活跃 */
-  Active?: boolean | null;
+  Active?: boolean;
   /** 最近更新时间 */
   Timestamp?: number;
   /** api发现时间 */
   InsertTime?: number;
   /** 资产状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略 */
-  Mode?: string | null;
+  Mode?: string;
   /** 风险等级，100,200,300对应低中高 */
-  Level?: string | null;
+  Level?: string;
   /** 近30天调用量 */
-  Count?: number | null;
+  Count?: number;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 是否鉴权，1标识是，0表示否 */
-  IsAuth?: number | null;
+  IsAuth?: number;
   /** 如果添加了api入参检测规则，则此id返回值不为0 */
-  ApiRequestRuleId?: number | null;
+  ApiRequestRuleId?: number;
   /** 如果添加了api限流规则，则此id返回值不为0 */
-  ApiLimitRuleId?: number | null;
+  ApiLimitRuleId?: number;
   /** 对象接入和泛域名接入时，展示host列表 */
-  HostList?: string[] | null;
+  HostList?: string[];
 }
 
 /** api资产列表过滤器 */
@@ -161,57 +161,57 @@ declare interface ApiDataFilter {
 /** api历史样例返回结构体 */
 declare interface ApiDetailSampleHistory {
   /** 样例名称 */
-  SampleNme?: string | null;
+  SampleNme?: string;
   /** 请求样例 */
-  RepLog?: string | null;
+  RepLog?: string;
   /** 响应样例 */
-  RspLog?: string | null;
+  RspLog?: string;
 }
 
 /** api请求参数类型 */
 declare interface ApiParameterType {
   /** 参数名称 */
-  ParameterName?: string | null;
+  ParameterName?: string;
   /** 参数类型 */
-  Type?: string | null;
+  Type?: string;
   /** 参数位置 */
-  Location?: string | null;
+  Location?: string;
   /** 数据标签(敏感字段) */
-  Label?: string[] | null;
+  Label?: string[];
   /** 时间戳 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 备注信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** 来源是请求或者响应 */
-  Source?: string | null;
+  Source?: string;
   /** 是否需要泛化 ，0表示不需要，1表示需要 */
-  IsPan?: number | null;
+  IsPan?: number;
   /** 是否鉴权，1表示是，0表示否 */
-  IsAuth?: number | null;
+  IsAuth?: number;
 }
 
 /** API安全资源信息 */
 declare interface ApiPkg {
   /** 资源id */
-  ResourceIds?: string | null;
+  ResourceIds?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 地域 */
-  Region?: number | null;
+  Region?: number;
   /** 开始时间 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 申请数量 */
-  InquireNum?: number | null;
+  InquireNum?: number;
   /** 使用数量 */
-  UsedNum?: number | null;
+  UsedNum?: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 计费项 */
-  BillingItem?: string | null;
+  BillingItem?: string;
   /** api安全7天试用标识。1试用。0没试用 */
-  IsAPISecurityTrial?: number | null;
+  IsAPISecurityTrial?: number;
 }
 
 /** api列表 */
@@ -255,15 +255,15 @@ declare interface AutoDenyDetail {
 /** 多域名黑白名单describe返回 */
 declare interface BatchIpAccessControlData {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 黑白名单条目 */
-  Res: BatchIpAccessControlItem[];
+  Res?: BatchIpAccessControlItem[];
 }
 
 /** 批量多域名黑白名单列表Ip */
 declare interface BatchIpAccessControlItem {
   /** mongo表自增Id */
-  Id?: string | null;
+  Id?: string;
   /** 黑名单42或白名单40 */
   ActionType?: number;
   /** 黑白名单的IP */
@@ -279,47 +279,47 @@ declare interface BatchIpAccessControlItem {
   /** 域名列表 */
   Hosts?: string[];
   /** 55101145 */
-  RuleId?: number | null;
+  RuleId?: number;
   /** IP列表 */
-  IpList?: string[] | null;
+  IpList?: string[];
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 定时任务类型 */
-  JobType?: string | null;
+  JobType?: string;
   /** 周期任务类型 */
-  CronType?: string | null;
+  CronType?: string;
   /** 定时任务配置详情 */
-  JobDateTime?: JobDateTime | null;
+  JobDateTime?: JobDateTime;
   /** 生效状态 */
-  ValidStatus?: number | null;
+  ValidStatus?: number;
 }
 
 /** Bot资源信息 */
 declare interface BotPkg {
   /** 资源id */
-  ResourceIds?: string | null;
+  ResourceIds?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 地域 */
-  Region?: number | null;
+  Region?: number;
   /** 开始时间 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 申请数量 */
-  InquireNum?: number | null;
+  InquireNum?: number;
   /** 使用数量 */
-  UsedNum?: number | null;
+  UsedNum?: number;
   /** 子产品code */
-  Type?: string | null;
+  Type?: string;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 购买页bot6折 */
-  BotCPWaf?: number | null;
+  BotCPWaf?: number;
   /** 控制台买bot5折 */
-  BotNPWaf?: number | null;
+  BotNPWaf?: number;
   /** 7天bot试用标识 1 试用 0 没有试用 */
-  IsBotTrial?: number | null;
+  IsBotTrial?: number;
 }
 
 /** bot的qps详情 */
@@ -335,7 +335,7 @@ declare interface BotQPS {
   /** 使用qps的最大值 */
   MaxBotQPS: number;
   /** 续费标志 */
-  RenewFlag: number | null;
+  RenewFlag: number;
 }
 
 /** bot的趋势图对象 */
@@ -353,14 +353,14 @@ declare interface BotStatPointItem {
 /** 数据封装 */
 declare interface CCRuleData {
   /** cc规则 */
-  Res: CCRuleItem[];
+  Res?: CCRuleItem[];
   /** 规则数目 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 /** cc规则 */
 declare interface CCRuleItem {
-  /** 动作 */
+  /** 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，24表示JS校验 */
   ActionType?: number;
   /** 高级模式 */
   Advance?: number;
@@ -383,17 +383,17 @@ declare interface CCRuleItem {
   /** 策略动作有效时间 */
   ValidTime?: number;
   /** 高级参数 */
-  OptionsArr?: string | null;
+  OptionsArr?: string;
   /** url长度 */
-  Length?: number | null;
+  Length?: number;
   /** 规则ID */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 事件id */
-  EventId?: string | null;
+  EventId?: string;
   /** 关联的Session规则 */
-  SessionApplied?: number[] | null;
+  SessionApplied?: number[];
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
 }
 
 /** CC规则详情 */
@@ -412,7 +412,7 @@ declare interface CCRuleItems {
   Url?: string;
   /** 匹配类型 */
   MatchFunc?: number;
-  /** 动作 */
+  /** 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，24表示JS校验 */
   ActionType?: number;
   /** 优先级 */
   Priority?: number;
@@ -425,35 +425,19 @@ declare interface CCRuleItems {
   /** 规则ID */
   RuleId?: number;
   /** 事件id */
-  EventId?: string | null;
+  EventId?: string;
   /** 关联的Session规则 */
-  SessionApplied?: number[] | null;
+  SessionApplied?: number[];
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
 }
 
 /** CC规则总览 */
 declare interface CCRuleLists {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 规则 */
-  Res: CCRuleItems[] | null;
-}
-
-/** 防篡改url元素 */
-declare interface CacheUrlItem {
-  /** Id */
-  Id: string;
-  /** 名称 */
-  Name: string;
-  /** 域名 */
-  Domain: string;
-  /** uri */
-  Uri: string;
-  /** 协议 */
-  Protocol: string;
-  /** 状态 */
-  Status: string;
+  Res?: CCRuleItems[];
 }
 
 /** 防篡改url元素 */
@@ -471,9 +455,9 @@ declare interface CacheUrlItems {
   /** 状态 */
   Status?: number;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** CDC场景下负载均衡WAF的集群信息 */
@@ -481,7 +465,7 @@ declare interface CdcCluster {
   /** cdc的集群id */
   Id: string;
   /** cdc的集群名称 */
-  Name: string | null;
+  Name: string;
 }
 
 /** CDC场景下负载均衡WAF的地域信息 */
@@ -489,7 +473,7 @@ declare interface CdcRegion {
   /** 地域 */
   Region: string;
   /** 该地域对应的集群信息 */
-  Clusters: CdcCluster[] | null;
+  Clusters: CdcCluster[];
 }
 
 /** 负载均衡型WAF域名详情 */
@@ -511,19 +495,19 @@ declare interface ClbDomainsInfo {
   /** 负载均衡型WAF的流量模式，1：清洗模式，0：镜像模式 */
   FlowMode?: number;
   /** 域名绑定负载均衡器状态 */
-  State?: number | null;
+  State?: number;
   /** 负载均衡类型，clb或者apisix */
-  AlbType?: string | null;
+  AlbType?: string;
   /** IsCdn=3时，表示自定义header */
-  IpHeaders?: string[] | null;
+  IpHeaders?: string[];
   /** cdc-clb-waf类型WAF的CDC集群信息 */
-  CdcClusters?: string | null;
+  CdcClusters?: string;
   /** 云类型:public:公有云；private:私有云;hybrid:混合云 */
-  CloudType?: string | null;
+  CloudType?: string;
   /** 域名备注信息 */
-  Note?: string | null;
+  Note?: string;
   /** 域名标签 */
-  Labels?: string[] | null;
+  Labels?: string[];
 }
 
 /** Clb类型防护对象 */
@@ -559,33 +543,41 @@ declare interface ClbObject {
   /** kafka投递开关 */
   PostCKafkaStatus?: number;
   /** 对象类型：CLB:负载均衡器，TSE:云原生网关 */
-  Type?: string | null;
+  Type?: string;
   /** 对象地域 */
-  Region?: string | null;
+  Region?: string;
   /** 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出 */
-  Proxy?: number | null;
+  Proxy?: number;
   /** 指定获取客户端IP的头部字段列表。IsCdn为3时有效 */
-  IpHeaders?: string[] | null;
+  IpHeaders?: string[];
   /** bot防护开关 */
-  BotStatus?: number | null;
+  BotStatus?: number;
   /** api防护开关 */
-  ApiStatus?: number | null;
+  ApiStatus?: number;
   /** 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式 */
-  ObjectFlowMode?: number | null;
+  ObjectFlowMode?: number;
   /** 数值形式的私有网络 ID */
-  NumericalVpcId?: number | null;
+  NumericalVpcId?: number;
 }
 
 /** Clb-waf地域信息 */
 declare interface ClbWafRegionItem {
   /** 地域ID */
-  Id?: string | null;
+  Id?: string;
   /** 地域中文说明 */
-  Text?: string | null;
+  Text?: string;
   /** 地域英文全拼 */
-  Value?: string | null;
+  Value?: string;
   /** 地域编码 */
-  Code?: string | null;
+  Code?: string;
+}
+
+/** 通用返回 */
+declare interface CommonRspData {
+  /** 操作结果 */
+  Code?: number;
+  /** 输出信息 */
+  Msg?: string;
 }
 
 /** 计费下单接口出入参Goods */
@@ -595,49 +587,49 @@ declare interface CreateDealsGoods {
   /** 商品明细 */
   GoodsDetail: CreateDealsGoodsDetail;
   /** 订单类型ID，用来唯一标识一个业务的一种场景（总共三种场景：新购、配置变更、续费）高级版: 102375(新购),102376(续费),102377(变配)企业版 : 102378(新购),102379(续费),102380(变配)旗舰版 : 102369(新购),102370(续费),102371(变配)域名包 : 102372(新购),102373(续费),102374(变配)业务扩展包 : 101040(新购),101041(续费),101042(变配)高级版-CLB: 新购 101198 续费 101199 变配 101200企业版-CLB 101204(新购),101205(续费),101206(变配)旗舰版-CLB : 101201(新购),101202(续费),101203(变配)域名包-CLB: 101207(新购),101208(续费),101209(变配)业务扩展包-CLB: 101210(新购),101211(续费),101212(变配) */
-  GoodsCategoryId?: number | null;
+  GoodsCategoryId?: number;
   /** 购买waf实例区域ID1 表示购买大陆资源;9表示购买非中国大陆资源 */
-  RegionId?: number | null;
+  RegionId?: number;
 }
 
 /** 产品明细 */
 declare interface CreateDealsGoodsDetail {
   /** 时间间隔 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 单位，支持购买d、m、y 即（日、月、年） */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面Saas 高级版 ：sp_wsm_waf_premiumSaas企业版 ：sp_wsm_waf_enterpriseSaas旗舰版 ：sp_wsm_waf_ultimateSaas 业务扩展包：sp_wsm_waf_qpsepSaas 域名扩展包：sp_wsm_waf_domain高级版-CLB:sp_wsm_waf_premium_clb企业版-CLB : sp_wsm_waf_enterprise_clb旗舰版-CLB:sp_wsm_waf_ultimate_clb 业务扩展包-CLB：sp_wsm_waf_qpsep_clb域名扩展包-CLB：sp_wsm_waf_domain_clb */
-  SubProductCode?: string | null;
+  SubProductCode?: string;
   /** 业务产品申请的pid（对应一个定价公式），通过pid计费查询到定价模型高级版 ：1000827企业版 ：1000830旗舰版 ：1000832域名包 : 1000834业务扩展包 : 1000481高级版-CLB:1001150企业版-CLB : 1001152旗舰版-CLB:1001154域名包-CLB: 1001156业务扩展包-CLB : 1001160 */
-  Pid?: number | null;
+  Pid?: number;
   /** waf实例名 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 1:自动续费，0:不自动续费 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** waf购买的实际地域信息 */
-  RealRegion?: number | null;
+  RealRegion?: number;
   /** 计费细项标签数组Saas 高级版 sv_wsm_waf_package_premium Saas 企业版 sv_wsm_waf_package_enterpriseSaas 旗舰版 sv_wsm_waf_package_ultimate Saas 非中国大陆高级版 sv_wsm_waf_package_premium_intlSaas 非中国大陆企业版 sv_wsm_waf_package_enterprise_intlSaas 非中国大陆旗舰版 sv_wsm_waf_package_ultimate _intlSaas 业务扩展包 sv_wsm_waf_qps_epSaas 域名扩展包 sv_wsm_waf_domain高级版CLB sv_wsm_waf_package_premium_clb企业版CLB sv_wsm_waf_package_enterprise_clb旗舰版CLB sv_wsm_waf_package_ultimate_clb非中国大陆高级版 CLB sv_wsm_waf_package_premium_clb_intl非中国大陆企业版CLB sv_wsm_waf_package_premium_clb_intl非中国大陆旗舰版CLB sv_wsm_waf_package_ultimate_clb _intl业务扩展包CLB sv_wsm_waf_qps_ep_clb域名扩展包CLB sv_wsm_waf_domain_clb */
-  LabelTypes?: string[] | null;
+  LabelTypes?: string[];
   /** 计费细项标签数量，一般和SvLabelType一一对应 */
-  LabelCounts?: number[] | null;
+  LabelCounts?: number[];
   /** 变配使用，实例到期时间 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
   /** 对存在的实例购买bot 或api 安全 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 资源id */
-  ResourceId?: string | null;
+  ResourceId?: string;
 }
 
 /** 规则周期执行的数据结构 */
 declare interface CronJob {
   /** 每个月的几号执行 */
-  Days?: number[] | null;
+  Days?: number[];
   /** 每个星期的星期几执行 */
-  WDays?: number[] | null;
+  WDays?: number[];
   /** 开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 计费下单响应实体 */
@@ -648,30 +640,14 @@ declare interface DealData {
   BigDealId?: string;
 }
 
-/** DescribeAntiInfoLeakRules返回的规则列表元素 */
-declare interface DescribeAntiInfoLeakRulesRuleItem {
-  /** 规则ID */
-  RuleId: string;
-  /** 规则名称 */
-  Name: string;
-  /** 规则状态 */
-  Status: string;
-  /** 规则动作类型 */
-  ActionType: string;
-  /** 规则创建时间 */
-  CreateTime: string;
-  /** 详细的规则 */
-  Strategies: DescribeAntiInfoLeakRulesStrategyItem[];
-}
-
 /** DescribeAntiInfoLeakRules返回的规则元素中的具体的规则元素 */
 declare interface DescribeAntiInfoLeakRulesStrategyItem {
   /** 字段 */
-  Field: string;
+  Field?: string;
   /** 条件 */
-  CompareFunc: string;
+  CompareFunc?: string;
   /** 内容 */
-  Content: string;
+  Content?: string;
 }
 
 /** 出参 */
@@ -687,11 +663,11 @@ declare interface DescribeAntiLeakageItem {
   /** 创建时间 */
   CreateTime?: string;
   /** 匹配条件 */
-  Strategies?: DescribeAntiInfoLeakRulesStrategyItem[] | null;
+  Strategies?: DescribeAntiInfoLeakRulesStrategyItem[];
   /** 匹配的URL */
-  Uri?: string | null;
+  Uri?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
 }
 
 /** DescribeAreaBanAreas接口的回包 */
@@ -699,20 +675,20 @@ declare interface DescribeAreaBanAreasRsp {
   /** 状态 "0"：未开启地域封禁 "1"：开启地域封禁 */
   Status?: string;
   /** 数据来源 custom-自定义(默认)、batch-批量防护 */
-  Source?: string | null;
+  Source?: string;
   /** 字符串数据，配置的地域列表 */
   Areas?: string[];
   /** 定时任务类型 */
-  JobType?: string | null;
+  JobType?: string;
   /** 定时任务详细配置 */
-  JobDateTime?: JobDateTime | null;
+  JobDateTime?: JobDateTime;
   /** 周期任务配置 */
-  CronType?: string | null;
+  CronType?: string;
 }
 
 /** DescribeCustomRules接口回包中的复杂类型 */
 declare interface DescribeCustomRulesRspRuleListItem {
-  /** 动作类型 */
+  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
   ActionType?: string;
   /** 跳过的策略 */
   Bypass?: string;
@@ -733,25 +709,25 @@ declare interface DescribeCustomRulesRspRuleListItem {
   /** 策略详情 */
   Strategies?: Strategy[];
   /** 事件id */
-  EventId?: string | null;
+  EventId?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 生效状态 */
-  ValidStatus?: number | null;
+  ValidStatus?: number;
   /** 来源 */
-  Source?: string | null;
+  Source?: string;
   /** 定时任务类型 */
-  JobType?: string | null;
+  JobType?: string;
   /** 定时任务配置信息 */
-  JobDateTime?: JobDateTime | null;
+  JobDateTime?: JobDateTime;
   /** 周期任务粒度 */
-  CronType?: string | null;
+  CronType?: string;
   /** 自定义标签，风控规则用，用来表示是内置规则还是用户自定义的 */
-  Label?: string | null;
+  Label?: string;
   /** 拦截页面id */
-  PageId?: string | null;
+  PageId?: string;
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
 }
 
 /** domain列表 */
@@ -805,51 +781,51 @@ declare interface DomainInfo {
   /** 投递CKafka状态。0：关闭 1：开启 */
   PostCKafkaStatus?: number;
   /** cdc实例域名接入的集群信息,非cdc实例忽略。 */
-  CdcClusters?: string | null;
+  CdcClusters?: string;
   /** api安全开关状态。0：关闭 1：开启 */
-  ApiStatus?: number | null;
+  ApiStatus?: number;
   /** 应用型负载均衡类型，默认clb。clb：七层负载均衡器类型apisix：apisix网关型 */
-  AlbType?: string | null;
+  AlbType?: string;
   /** 安全组状态。0：不展示1：非腾讯云源站2：安全组绑定失败3：安全组发生变更 */
-  SgState?: number | null;
+  SgState?: number;
   /** 安全组状态的详细解释 */
-  SgDetail?: string | null;
+  SgDetail?: string;
   /** 域名云环境。hybrid：混合云域名public：公有云域名 */
-  CloudType?: string | null;
+  CloudType?: string;
   /** 域名备注信息 */
-  Note?: string | null;
+  Note?: string;
   /** SAASWAF源站IP列表 */
-  SrcList?: string[] | null;
+  SrcList?: string[];
   /** SAASWAF源站域名列表 */
-  UpstreamDomainList?: string[] | null;
+  UpstreamDomainList?: string[];
   /** 安全组ID */
-  SgID?: string | null;
+  SgID?: string;
   /** clbwaf接入状态 */
-  AccessStatus?: number | null;
+  AccessStatus?: number;
   /** 域名标签 */
-  Labels?: string[] | null;
+  Labels?: string[];
 }
 
-/** clb-waf 域名扩展套餐 */
+/** waf 域名扩展套餐 */
 declare interface DomainPackageNew {
   /** 资源ID */
-  ResourceIds: string | null;
+  ResourceIds: string;
   /** 过期时间 */
-  ValidTime: string | null;
+  ValidTime: string;
   /** 是否自动续费，1：自动续费，0：不自动续费 */
-  RenewFlag: number | null;
+  RenewFlag: number;
   /** 套餐购买个数 */
-  Count: number | null;
+  Count: number;
   /** 套餐购买地域，clb-waf暂时没有用到 */
-  Region: string | null;
+  Region: string;
 }
 
 /** 域名-规则id结构体 */
 declare interface DomainRuleId {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 规则id */
-  RuleId?: string | null;
+  RuleId?: string;
 }
 
 /** 唯一定位Domain */
@@ -859,7 +835,7 @@ declare interface DomainURI {
   /** 版本 */
   Edition: string;
   /** 实例ID */
-  InstanceID?: string | null;
+  InstanceID?: string;
 }
 
 /** SaaS型WAF域名详情 */
@@ -919,105 +895,107 @@ declare interface DomainsPartInfo {
   /** 是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive?: number;
   /** 是否开启主动健康检测。0：不开启1：开启 */
-  ActiveCheck?: number | null;
+  ActiveCheck?: number;
   /** TLS版本信息 */
-  TLSVersion?: number | null;
+  TLSVersion?: number;
   /** 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。 */
-  Ciphers?: number[] | null;
+  Ciphers?: number[];
   /** 加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
-  CipherTemplate?: number | null;
+  CipherTemplate?: number;
   /** WAF与源站的读超时时间，默认300s。 */
-  ProxyReadTimeout?: number | null;
+  ProxyReadTimeout?: number;
   /** WAF与源站的写超时时间，默认300s。 */
-  ProxySendTimeout?: number | null;
+  ProxySendTimeout?: number;
   /** WAF回源时的SNI类型。0：关闭SNI，不配置client_hello中的server_name1：开启SNI，client_hello中的server_name为防护域名2：开启SNI，SNI为域名回源时的源站域名3：开启SNI，SNI为自定义域名 */
-  SniType?: number | null;
+  SniType?: number;
   /** SniType为3时，需要填此参数，表示自定义的SNI； */
-  SniHost?: string | null;
+  SniHost?: string;
   /** 回源IP权重 */
-  Weights?: string[] | null;
+  Weights?: string[];
   /** IsCdn=3时，表示自定义header */
-  IpHeaders?: string[] | null;
+  IpHeaders?: string[];
   /** 是否开启XFF重置。0：关闭1：开启 */
-  XFFReset?: number | null;
+  XFFReset?: number;
   /** 域名备注信息 */
-  Note?: string | null;
+  Note?: string;
   /** 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。 */
-  UpstreamHost?: string | null;
+  UpstreamHost?: string;
   /** 防护规则 */
-  Level?: string | null;
+  Level?: string;
   /** 是否开启缓存 0-关闭 1-开启 */
-  ProxyBuffer?: number | null;
+  ProxyBuffer?: number;
   /** 国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问 */
-  GmType?: number | null;
+  GmType?: number;
   /** 国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书 */
-  GmCertType?: number | null;
+  GmCertType?: number;
   /** GmCertType为1时，需要填充此参数，表示自有国密证书的证书链 */
-  GmCert?: string | null;
+  GmCert?: string;
   /** GmCertType为1时，需要填充此参数，表示自有国密证书的私钥 */
-  GmPrivateKey?: string | null;
+  GmPrivateKey?: string;
   /** GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书 */
-  GmEncCert?: string | null;
+  GmEncCert?: string;
   /** GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥 */
-  GmEncPrivateKey?: string | null;
+  GmEncPrivateKey?: string;
   /** GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
-  GmSSLId?: string | null;
+  GmSSLId?: string;
   /** 域名标签 */
-  Labels?: string[] | null;
+  Labels?: string[];
+  /** 拨测状态。 0: 禁用拨测, 1: 启用拨测 */
+  ProbeStatus?: number;
 }
 
 /** 下载攻击日志记录数据项 */
 declare interface DownloadAttackRecordInfo {
   /** 记录ID */
-  Id: number;
+  Id?: number;
   /** 下载任务名 */
-  TaskName: string;
+  TaskName?: string;
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 域名 */
-  Host: string;
+  Host?: string;
   /** 当前下载任务的日志条数 */
-  Count: number;
+  Count?: number;
   /** 下载任务运行状态：-1-下载超时，0-下载等待，1-下载完成，2-下载失败，4-正在下载 */
-  Status: number;
+  Status?: number;
   /** 下载文件URL */
-  Url: string;
+  Url?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后更新修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 过期时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 下载任务需下载的日志总条数 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 /** DescribeAccessExports接口 */
 declare interface ExportAccessInfo {
   /** 日志导出任务ID */
-  ExportId: string | null;
+  ExportId?: string;
   /** 日志导出查询语句 */
-  Query: string | null;
+  Query?: string;
   /** 日志导出文件名 */
-  FileName: string | null;
+  FileName?: string;
   /** 日志文件大小 */
-  FileSize: number;
+  FileSize?: number;
   /** 日志导出时间排序 */
-  Order: string | null;
+  Order?: string;
   /** 日志导出格式 */
-  Format: string | null;
+  Format?: string;
   /** 日志导出数量 */
-  Count: number | null;
+  Count?: number;
   /** 日志下载状态。Processing:导出正在进行中，Complete:导出完成，Failed:导出失败，Expired:日志导出已过期（三天有效期） */
-  Status: string;
+  Status?: string;
   /** 日志导出起始时间 */
-  From: number;
+  From?: number;
   /** 日志导出结束时间 */
-  To: number;
+  To?: number;
   /** 日志导出路径 */
-  CosPath: string;
+  CosPath?: string;
   /** 日志导出创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 过滤数组 */
@@ -1033,41 +1011,41 @@ declare interface FiltersItemNew {
 /** 域名列表 */
 declare interface FindAllDomainDetail {
   /** 用户id */
-  Appid: number;
+  Appid?: number;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 域名ip */
-  Ips: string[];
+  Ips?: string[];
   /** 发现时间 */
-  FindTime: string;
+  FindTime?: string;
   /** 实例id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 域名id */
-  DomainId: string;
+  DomainId?: string;
   /** waf类型 */
-  Edition: string;
+  Edition?: string;
   /** 是否接入waf */
-  IsWafDomain: number;
+  IsWafDomain?: number;
 }
 
 /** 业务安全资源信息 */
 declare interface FraudPkg {
   /** 资源id */
-  ResourceIds?: string | null;
+  ResourceIds?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 地域 */
-  Region?: number | null;
+  Region?: number;
   /** 开始时间 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 申请数量 */
-  InquireNum?: number | null;
+  InquireNum?: number;
   /** 使用数量 */
-  UsedNum?: number | null;
+  UsedNum?: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
 }
 
 /** 计费下单接口出入参Goods */
@@ -1077,9 +1055,9 @@ declare interface GoodNews {
   /** 商品明细 */
   GoodsDetail: GoodsDetailNew;
   /** 订单类型ID，用来唯一标识一个业务的一种场景（总共三种场景：新购、配置变更、续费）高级版: 102375(新购),102376(续费),102377(变配)企业版 : 102378(新购),102379(续费),102380(变配)旗舰版 : 102369(新购),102370(续费),102371(变配)域名包 : 102372(新购),102373(续费),102374(变配)业务扩展包 : 101040(新购),101041(续费),101042(变配)高级版-CLB: 新购 101198 续费 101199 变配 101200企业版-CLB 101204(新购),101205(续费),101206(变配)旗舰版-CLB : 101201(新购),101202(续费),101203(变配)域名包-CLB: 101207(新购),101208(续费),101209(变配)业务扩展包-CLB: 101210(新购),101211(续费),101212(变配) */
-  GoodsCategoryId?: number | null;
+  GoodsCategoryId?: number;
   /** 购买waf实例区域ID1 表示购买大陆资源;9表示购买非中国大陆资源 */
-  RegionId?: number | null;
+  RegionId?: number;
 }
 
 /** 计费下单接口出入参Goods */
@@ -1091,13 +1069,13 @@ declare interface Goods {
   /** 商品明细 */
   GoodsDetail: GoodsDetail;
   /** 默认为0 */
-  ProjectId: number | null;
+  ProjectId: number;
   /** 计费类目ID，对应cid */
-  GoodsCategoryId?: number | null;
+  GoodsCategoryId?: number;
   /** 平台类型，默认1 */
-  Platform?: number | null;
+  Platform?: number;
   /** 购买waf实例区域ID */
-  RegionId?: number | null;
+  RegionId?: number;
 }
 
 /** 产品明细 */
@@ -1113,57 +1091,57 @@ declare interface GoodsDetail {
   /** 计费策略id */
   Pid: number;
   /** waf产品码 */
-  ProductInfo?: ProductInfo[] | null;
+  ProductInfo?: ProductInfo[];
   /** waf实例名 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** QPS数量 */
-  ElasticQps?: number | null;
+  ElasticQps?: number;
   /** 弹性账单 */
-  FlexBill?: number | null;
+  FlexBill?: number;
   /** 1:自动续费，0:不自动续费 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** waf购买的实际地域信息 */
-  RealRegion?: number | null;
+  RealRegion?: number;
   /** Waf实例对应的二级产品码 */
-  Type?: string | null;
+  Type?: string;
   /** 计费细项标签数组 */
-  LabelTypes?: string[] | null;
+  LabelTypes?: string[];
   /** 计费细项标签数量，一般和SvLabelType一一对应 */
-  LabelCounts?: number[] | null;
+  LabelCounts?: number[];
   /** 变配使用，实例到期时间 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
   /** 对存在的实例购买bot 或api 安全 */
-  InstanceId?: string | null;
+  InstanceId?: string;
 }
 
 /** 产品明细 */
 declare interface GoodsDetailNew {
   /** 时间间隔 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 单位，支持购买d、m、y 即（日、月、年） */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面Saas 高级版 ：sp_wsm_waf_premiumSaas企业版 ：sp_wsm_waf_enterpriseSaas旗舰版 ：sp_wsm_waf_ultimateSaas 业务扩展包：sp_wsm_waf_qpsepSaas 域名扩展包：sp_wsm_waf_domain高级版-CLB:sp_wsm_waf_premium_clb企业版-CLB : sp_wsm_waf_enterprise_clb旗舰版-CLB:sp_wsm_waf_ultimate_clb 业务扩展包-CLB：sp_wsm_waf_qpsep_clb域名扩展包-CLB：sp_wsm_waf_domain_clb */
-  SubProductCode?: string | null;
+  SubProductCode?: string;
   /** 业务产品申请的pid（对应一个定价公式），通过pid计费查询到定价模型高级版 ：1000827企业版 ：1000830旗舰版 ：1000832域名包 : 1000834业务扩展包 : 1000481高级版-CLB:1001150企业版-CLB : 1001152旗舰版-CLB:1001154域名包-CLB: 1001156业务扩展包-CLB : 1001160 */
-  Pid?: number | null;
+  Pid?: number;
   /** waf实例名 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 1:自动续费，0:不自动续费 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** waf购买的实际地域信息 */
-  RealRegion?: number | null;
+  RealRegion?: number;
   /** 计费细项标签数组Saas 高级版 sv_wsm_waf_package_premium Saas 企业版 sv_wsm_waf_package_enterpriseSaas 旗舰版 sv_wsm_waf_package_ultimate Saas 非中国大陆高级版 sv_wsm_waf_package_premium_intlSaas 非中国大陆企业版 sv_wsm_waf_package_enterprise_intlSaas 非中国大陆旗舰版 sv_wsm_waf_package_ultimate _intlSaas 业务扩展包 sv_wsm_waf_qps_epSaas 域名扩展包 sv_wsm_waf_domain高级版CLB sv_wsm_waf_package_premium_clb企业版CLB sv_wsm_waf_package_enterprise_clb旗舰版CLB sv_wsm_waf_package_ultimate_clb非中国大陆高级版 CLB sv_wsm_waf_package_premium_clb_intl非中国大陆企业版CLB sv_wsm_waf_package_premium_clb_intl非中国大陆旗舰版CLB sv_wsm_waf_package_ultimate_clb _intl业务扩展包CLB sv_wsm_waf_qps_ep_clb域名扩展包CLB sv_wsm_waf_domain_clb */
-  LabelTypes?: string[] | null;
+  LabelTypes?: string[];
   /** 计费细项标签数量，一般和SvLabelType一一对应 */
-  LabelCounts?: number[] | null;
+  LabelCounts?: number[];
   /** 变配使用，实例到期时间 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
   /** 对存在的实例购买bot 或api 安全 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 资源id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 模式clb-waf或者saas-waf */
-  MicroVersion?: string | null;
+  MicroVersion?: string;
 }
 
 /** CLB-WAF删除域名参数 */
@@ -1205,19 +1183,19 @@ declare interface HostRecord {
   /** 是否开启访问日志。1：开启0：关闭 */
   ClsStatus: number;
   /** 防护等级，可选值100,200,300 */
-  Level?: number | null;
+  Level?: number;
   /** 域名需要下发到的cdc集群列表。仅CDC场景下填充 */
-  CdcClusters?: string[] | null;
-  /** 应用型负载均衡类型，默认clb。 clb：七层负载均衡器类型 apisix：apisix网关型 */
-  AlbType?: string | null;
+  CdcClusters?: string[];
+  /** 应用型负载均衡类型，默认clb。 clb：七层负载均衡器类型 apisix：apisix网关型tsegw：云原生API网关scf：云函数 */
+  AlbType?: string;
   /** IsCdn=3时，需要填此参数，表示自定义header */
-  IpHeaders?: string[] | null;
+  IpHeaders?: string[];
   /** 规则引擎类型。1: menshen2: tiga */
-  EngineType?: number | null;
+  EngineType?: number;
   /** 云类型。public:公有云private:私有云hybrid:混合云 */
-  CloudType?: string | null;
+  CloudType?: string;
   /** 域名备注信息 */
-  Note?: string | null;
+  Note?: string;
 }
 
 /** 设置WAF状态的结构体 */
@@ -1235,21 +1213,21 @@ declare interface HostStatus {
 /** 混合云节点资源信息 */
 declare interface HybridPkg {
   /** 资源id */
-  ResourceIds?: string | null;
+  ResourceIds?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 地域 */
-  Region?: number | null;
+  Region?: number;
   /** 开始时间 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 申请数量 */
-  InquireNum?: number | null;
+  InquireNum?: number;
   /** 使用数量 */
-  UsedNum?: number | null;
+  UsedNum?: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
 }
 
 /** 一个实例的详细信息 */
@@ -1293,63 +1271,63 @@ declare interface InstanceInfo {
   /** clb或saas */
   Edition: string;
   /** 业务安全包 */
-  FraudPkg?: FraudPkg | null;
+  FraudPkg?: FraudPkg;
   /** Bot资源包 */
-  BotPkg?: BotPkg | null;
+  BotPkg?: BotPkg;
   /** bot的qps详情 */
-  BotQPS?: BotQPS | null;
+  BotQPS?: BotQPS;
   /** qps弹性计费上限 */
-  ElasticBilling?: number | null;
+  ElasticBilling?: number;
   /** 攻击日志投递开关 */
-  AttackLogPost?: number | null;
+  AttackLogPost?: number;
   /** 带宽峰值，单位为B/s(字节每秒) */
-  MaxBandwidth?: number | null;
+  MaxBandwidth?: number;
   /** api安全是否购买 */
   APISecurity?: number;
   /** 购买的qps规格 */
-  QpsStandard?: number | null;
+  QpsStandard?: number;
   /** 购买的带宽规格 */
-  BandwidthStandard?: number | null;
+  BandwidthStandard?: number;
   /** 实例状态 */
-  Status?: number | null;
+  Status?: number;
   /** 实例沙箱qps值 */
-  SandboxQps?: number | null;
+  SandboxQps?: number;
   /** 是否api 安全试用 */
-  IsAPISecurityTrial?: number | null;
+  IsAPISecurityTrial?: number;
   /** 重保包 */
-  MajorEventsPkg?: MajorEventsPkg | null;
+  MajorEventsPkg?: MajorEventsPkg;
   /** 混合云子节点包 */
-  HybridPkg?: HybridPkg | null;
+  HybridPkg?: HybridPkg;
   /** API安全资源包 */
-  ApiPkg?: ApiPkg | null;
+  ApiPkg?: ApiPkg;
   /** 小程序安全加速包 */
-  MiniPkg?: MiniPkg | null;
+  MiniPkg?: MiniPkg;
   /** 小程序qps规格 */
-  MiniQpsStandard?: number | null;
+  MiniQpsStandard?: number;
   /** 小程序qps峰值 */
-  MiniMaxQPS?: number | null;
+  MiniMaxQPS?: number;
   /** 最近一次超量时间 */
-  LastQpsExceedTime?: string | null;
+  LastQpsExceedTime?: string;
   /** 小程序安全接入ID数量扩张包 */
-  MiniExtendPkg?: MiniExtendPkg | null;
+  MiniExtendPkg?: MiniExtendPkg;
   /** 计费项 */
-  BillingItem?: string | null;
+  BillingItem?: string;
   /** 实例延期释放标识 */
-  FreeDelayFlag?: number | null;
+  FreeDelayFlag?: number;
 }
 
 /** 数据封装 */
 declare interface IpAccessControlData {
   /** ip黑白名单 */
-  Res: IpAccessControlItem[] | null;
+  Res?: IpAccessControlItem[];
   /** 计数 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 /** ip黑白名单 */
 declare interface IpAccessControlItem {
   /** mongo表自增Id */
-  Id?: string | null;
+  Id?: string;
   /** 动作 */
   ActionType?: number;
   /** ip */
@@ -1359,23 +1337,23 @@ declare interface IpAccessControlItem {
   /** 来源 */
   Source?: string;
   /** 更新时间戳 */
-  TsVersion?: number | null;
+  TsVersion?: number;
   /** 有效截止时间戳 */
   ValidTs?: number;
   /** 生效状态 */
-  ValidStatus?: number | null;
+  ValidStatus?: number;
   /** 55000001 */
-  RuleId?: number | null;
+  RuleId?: number;
   /** IP列表 */
-  IpList?: string[] | null;
+  IpList?: string[];
   /** 规则创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 定时任务类型 */
-  JobType?: string | null;
+  JobType?: string;
   /** 周期任务类型 */
-  CronType?: string | null;
+  CronType?: string;
   /** 定时任务配置详情 */
-  JobDateTime?: JobDateTime | null;
+  JobDateTime?: JobDateTime;
 }
 
 /** IP黑白名单参数结构体，主要用于IP黑白名单的导入。 */
@@ -1393,43 +1371,43 @@ declare interface IpAccessControlParam {
 /** ip封堵状态数据 */
 declare interface IpHitItem {
   /** 动作 */
-  Action: number;
+  Action?: number;
   /** 类别 */
-  Category: string;
+  Category?: string;
   /** ip */
-  Ip: string;
+  Ip?: string;
   /** 规则名称 */
-  Name: string;
+  Name?: string;
   /** 时间戳 */
-  TsVersion: number;
+  TsVersion?: number;
   /** 有效截止时间戳 */
-  ValidTs: number;
+  ValidTs?: number;
 }
 
 /** 封装参数 */
 declare interface IpHitItemsData {
   /** 数组封装 */
-  Res: IpHitItem[];
+  Res?: IpHitItem[];
   /** 总数目 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 /** 规则执行的时间结构体 */
 declare interface JobDateTime {
   /** 定时执行的时间参数 */
-  Timed?: TimedJob[] | null;
+  Timed?: TimedJob[];
   /** 周期执行的时间参数 */
-  Cron?: CronJob[] | null;
+  Cron?: CronJob[];
   /** 时区 */
-  TimeTZone?: string | null;
+  TimeTZone?: string;
 }
 
 /** Key-Value的形式，Value为Int */
 declare interface KVInt {
   /** Key */
-  Key: string;
+  Key?: string;
   /** Value */
-  Value: number;
+  Value?: number;
 }
 
 /** 负载均衡的监听器 */
@@ -1453,119 +1431,111 @@ declare interface LoadBalancer {
   /** 负载均衡监听器所在的zone */
   Zone: string;
   /** 负载均衡的VPCID，公网为-1，内网按实际填写 */
-  NumericalVpcId?: number | null;
-  /** 负载均衡的网络类型 */
-  LoadBalancerType?: string | null;
+  NumericalVpcId?: number;
+  /** 负载均衡的网络类型。OPEN： 公网 INTERNAL ：内网 */
+  LoadBalancerType?: string;
   /** 负载均衡的域名 */
-  LoadBalancerDomain?: string | null;
+  LoadBalancerDomain?: string;
 }
 
 /** 负载均衡器 */
 declare interface LoadBalancerPackageNew {
   /** 监听id */
-  ListenerId: string | null;
+  ListenerId: string;
   /** 监听名 */
-  ListenerName: string | null;
+  ListenerName: string;
   /** 负载均衡id */
-  LoadBalancerId: string | null;
+  LoadBalancerId: string;
   /** 负载均衡名 */
-  LoadBalancerName: string | null;
+  LoadBalancerName: string;
   /** 协议 */
-  Protocol: string | null;
+  Protocol: string;
   /** 地区"多伦多": "ca", "广州": "gz", "成都": "cd", "福州": "fzec", "深圳": "szx", "印度": "in", "济南": "jnec", "重庆": "cq", "天津": "tsn", "欧洲东北": "ru", "南京": "nj", "美国硅谷": "usw", "泰国": "th", "广州Open": "gzopen", "深圳金融": "szjr", "法兰克福": "de", "日本": "jp", "弗吉尼亚": "use", "北京": "bj", "中国香港": "hk", "杭州": "hzec", "北京金融": "bjjr", "上海金融": "shjr", "台北": "tpe", "首尔": "kr", "上海": "sh", "新加坡": "sg", "清远": "qy" */
-  Region: string | null;
+  Region: string;
   /** 接入IP */
-  Vip: string | null;
+  Vip: string;
   /** 接入端口 */
-  Vport: number | null;
+  Vport: number;
   /** 地域 */
-  Zone: string | null;
+  Zone: string;
   /** VPCID */
-  NumericalVpcId: number | null;
+  NumericalVpcId: number;
   /** CLB类型 */
-  LoadBalancerType: string | null;
+  LoadBalancerType: string;
   /** 负载均衡器的域名 */
-  LoadBalancerDomain?: string | null;
+  LoadBalancerDomain?: string;
 }
 
 /** 攻击日志统计详情 */
 declare interface LogHistogramInfo {
   /** 日志条数 */
-  Count: number;
+  Count?: number;
   /** 时间戳 */
-  TimeStamp: number;
+  TimeStamp?: number;
 }
 
 /** 重保防护资源信息 */
 declare interface MajorEventsPkg {
   /** 资源id */
-  ResourceIds?: string | null;
+  ResourceIds?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 地域 */
-  Region?: number | null;
+  Region?: number;
   /** 开始时间 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 申请数量 */
-  InquireNum?: number | null;
+  InquireNum?: number;
   /** 使用数量 */
-  UsedNum?: number | null;
+  UsedNum?: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 计费项 */
-  BillingItem?: string | null;
+  BillingItem?: string;
   /** 护网包状态 */
-  HWState?: number | null;
+  HWState?: number;
 }
 
 /** 小程序安全接入ID扩展资源信息 */
 declare interface MiniExtendPkg {
   /** 资源id */
-  ResourceIds?: string | null;
+  ResourceIds?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 地域 */
-  Region?: number | null;
+  Region?: number;
   /** 开始时间 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 购买数量 */
-  Count?: number | null;
+  Count?: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 计费项 */
-  BillingItem?: string | null;
+  BillingItem?: string;
 }
 
-/** API安全资源信息 */
+/** 小程序安全资源信息 */
 declare interface MiniPkg {
   /** 资源id */
-  ResourceIds?: string | null;
+  ResourceIds?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 地域 */
-  Region?: number | null;
+  Region?: number;
   /** 开始时间 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 购买数量 */
-  Count?: number | null;
+  Count?: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 计费项 */
-  BillingItem?: string | null;
-}
-
-/** 公共翻页参数 */
-declare interface PageInfo {
-  /** 页码 */
-  PageNumber: string;
-  /** 页条目数量 */
-  PageSize: string;
+  BillingItem?: string;
 }
 
 /** PeakPoints数组项 */
@@ -1585,43 +1555,43 @@ declare interface PeakPointsItem {
   /** Bot qps */
   BotAccess?: number;
   /** WAF返回给客户端状态码5xx次数 */
-  StatusServerError?: number | null;
+  StatusServerError?: number;
   /** WAF返回给客户端状态码4xx次数 */
-  StatusClientError?: number | null;
+  StatusClientError?: number;
   /** WAF返回给客户端状态码302次数 */
-  StatusRedirect?: number | null;
+  StatusRedirect?: number;
   /** WAF返回给客户端状态码202次数 */
-  StatusOk?: number | null;
+  StatusOk?: number;
   /** 源站返回给WAF状态码5xx次数 */
-  UpstreamServerError?: number | null;
+  UpstreamServerError?: number;
   /** 源站返回给WAF状态码4xx次数 */
-  UpstreamClientError?: number | null;
+  UpstreamClientError?: number;
   /** 源站返回给WAF状态码302次数 */
-  UpstreamRedirect?: number | null;
+  UpstreamRedirect?: number;
   /** 黑名单次数 */
-  BlackIP?: number | null;
+  BlackIP?: number;
   /** 防篡改次数 */
-  Tamper?: number | null;
+  Tamper?: number;
   /** 信息防泄露次数 */
-  Leak?: number | null;
+  Leak?: number;
   /** 访问控制 */
-  ACL?: number | null;
+  ACL?: number;
   /** 小程序 qps */
-  WxAccess?: number | null;
+  WxAccess?: number;
   /** 小程序请求数 */
-  WxCount?: number | null;
+  WxCount?: number;
   /** 小程序上行带宽峰值，单位B */
-  WxUp?: number | null;
+  WxUp?: number;
   /** 小程序下行带宽峰值，单位B */
-  WxDown?: number | null;
+  WxDown?: number;
 }
 
 /** 饼图数据类型 */
 declare interface PiechartItem {
   /** 类型 */
-  Type: string;
+  Type?: string;
   /** 数量 */
-  Count: number;
+  Count?: number;
 }
 
 /** 服务端口配置 */
@@ -1648,46 +1618,46 @@ declare interface PortItem {
   UpstreamPort: string;
   /** 与Port一一对应, 表示回源协议 */
   UpstreamProtocol: string;
-  /** Nginx的服务器ID */
+  /** Nginx的服务器ID,新增域名时填"0" */
   NginxServerId: string;
 }
 
 /** waf产品 */
 declare interface ProductInfo {
   /** 产品名称 */
-  Name?: string | null;
+  Name?: string;
   /** 版本 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** clb-waf QPS套餐 New */
 declare interface QPSPackageNew {
   /** 资源ID */
-  ResourceIds: string | null;
+  ResourceIds: string;
   /** 过期时间 */
-  ValidTime: string | null;
+  ValidTime: string;
   /** 是否自动续费，1：自动续费，0：不自动续费 */
-  RenewFlag: number | null;
+  RenewFlag: number;
   /** 套餐购买个数 */
-  Count: number | null;
+  Count: number;
   /** 套餐购买地域，clb-waf暂时没有用到 */
-  Region: string | null;
+  Region: string;
   /** 计费项 */
-  BillingItem?: string | null;
+  BillingItem?: string;
 }
 
 /** 获取弹性qps的默认相关值 */
 declare interface QpsData {
   /** 弹性qps默认值 */
-  ElasticBillingDefault?: number | null;
+  ElasticBillingDefault?: number;
   /** 弹性qps最小值 */
-  ElasticBillingMin?: number | null;
+  ElasticBillingMin?: number;
   /** 弹性qps最大值 */
-  ElasticBillingMax?: number | null;
+  ElasticBillingMax?: number;
   /** 业务扩展包最大qps */
-  QPSExtendMax?: number | null;
-  /** 海外业务扩展包最大qps */
-  QPSExtendIntlMax?: number | null;
+  QPSExtendMax?: number;
+  /** 境外业务扩展包最大qps */
+  QPSExtendIntlMax?: number;
 }
 
 /** 用户规则更新输出规则子项 */
@@ -1713,19 +1683,19 @@ declare interface Rule {
   /** 规则id */
   Id?: number;
   /** 规则类型 */
-  Type?: string | null;
+  Type?: string;
   /** 规则等级 */
   Level?: string;
   /** 规则描述 */
-  Description?: string | null;
+  Description?: string;
   /** 规则防护的CVE编号 */
-  CVE?: string | null;
+  CVE?: string;
   /** 规则的状态 */
   Status?: number;
   /** 规则修改的时间 */
   ModifyTime?: string;
   /** 门神规则新增/更新时间 */
-  AddTime?: string | null;
+  AddTime?: string;
 }
 
 /** 规则白名单 */
@@ -1743,7 +1713,39 @@ declare interface RuleList {
   /** 开关状态 */
   Status?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
+}
+
+/** Tiga规则 */
+declare interface RuleType {
+  /** 规则ID */
+  TypeID?: string;
+  /** 规则名称 */
+  Name?: string;
+  /** 规则类型描述 */
+  Desc?: string;
+  /** 规则类型状态，即类型生效开关，0：关闭，1：开启 */
+  RuleTypeStatus?: number;
+  /** 类型下生效的规则数量 */
+  ActiveRuleCount?: number;
+  /** 类型下的规则总数量 */
+  TotalRuleCount?: number;
+}
+
+/** 扫描ip信息 */
+declare interface ScanIpInfo {
+  /** 所属业务 */
+  Bussiness?: string;
+  /** 扫描对象 */
+  Target?: string;
+  /** ip列表 */
+  IpList?: string[];
+  /** 扫描说明 */
+  Descibe?: string;
+  /** 官方公告 */
+  Referer?: string;
+  /** 更新时间 */
+  UpdateTime?: number;
 }
 
 /** 接入列表查询复杂条件 */
@@ -1759,7 +1761,7 @@ declare interface SearchItem {
 /** 参数包装 */
 declare interface SessionData {
   /** session定义 */
-  Res: SessionItem[];
+  Res?: SessionItem[];
 }
 
 /** session定义 */
@@ -1779,18 +1781,18 @@ declare interface SessionItem {
   /** 更新时间戳 */
   TsVersion?: string;
   /** SessionID */
-  SessionId?: number | null;
+  SessionId?: number;
   /** Session名 */
-  SessionName?: string | null;
+  SessionName?: string;
   /** Session是否正在被启用 */
-  SessionInUsed?: boolean | null;
+  SessionInUsed?: boolean;
   /** Session关联的CC规则ID */
-  RelatedRuleID?: number[] | null;
+  RelatedRuleID?: number[];
 }
 
 /** waf斯巴达-编辑防护域名中的端口结构 */
 declare interface SpartaProtectionPort {
-  /** nginx Id */
+  /** 分配的服务器id */
   NginxServerId: number;
   /** 端口 */
   Port: string;
@@ -1805,15 +1807,15 @@ declare interface SpartaProtectionPort {
 /** 自定义规则的匹配条件结构体 */
 declare interface Strategy {
   /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内 */
-  Field: string | null;
+  Field: string;
   /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
-  CompareFunc: string | null;
+  CompareFunc: string;
   /** 匹配内容 目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要 */
-  Content: string | null;
+  Content: string;
   /** 匹配参数 配置参数一共分2种类型 不支持参数与支持参数 当匹配字段为以下4个时，匹配参数才能录入，否则不支持该参数 GET（GET参数值） POST（POST参数值） ARGS_COOKIE（Cookie参数值） ARGS_HEADER（Header参数值） */
-  Arg: string | null;
+  Arg: string;
   /** 0：大小写敏感1：大小写不敏感 */
-  CaseNotSensitive?: number | null;
+  CaseNotSensitive?: number;
 }
 
 /** 防信息泄露的匹配条件结构体 */
@@ -1829,19 +1831,19 @@ declare interface StrategyForAntiInfoLeak {
 /** TLS 加密套件 */
 declare interface TLSCiphers {
   /** TLS版本ID */
-  VersionId: number | null;
+  VersionId?: number;
   /** 加密套件ID */
-  CipherId: number | null;
+  CipherId?: number;
   /** 加密套件 */
-  CipherName: string | null;
+  CipherName?: string;
 }
 
 /** TLS信息 */
 declare interface TLSVersion {
   /** TLSVERSION的ID */
-  VersionId: number | null;
+  VersionId?: number;
   /** TLSVERSION的NAME */
-  VersionName: string | null;
+  VersionName?: string;
 }
 
 /** 需要开启/关闭API安全的 实例+域名 组合实体 */
@@ -1855,17 +1857,17 @@ declare interface TargetEntity {
 /** Tiga引擎中Mainclass的TypeID和防护模式 */
 declare interface TigaMainClassMode {
   /** MainclassID */
-  TypeID?: string | null;
+  TypeID?: string;
   /** 防护模式，0表示观察，1表示拦截 */
-  Mode?: number | null;
+  Mode?: number;
 }
 
 /** 规则定时任务数据结构 */
 declare interface TimedJob {
   /** 开始时间戳，单位为秒 */
-  StartDateTime?: number | null;
+  StartDateTime?: number;
   /** 结束时间戳，单位为秒 */
-  EndDateTime?: number | null;
+  EndDateTime?: number;
 }
 
 /** saas和clb信息 */
@@ -1883,19 +1885,19 @@ declare interface UserDomainInfo {
   /** waf类型 */
   Edition?: string;
   /** 版本 */
-  Level?: string | null;
+  Level?: string;
   /** 指定域名访问日志字段的开关 */
-  WriteConfig?: string | null;
+  WriteConfig?: string;
   /** 指定域名是否写cls的开关 1:写 0:不写 */
-  Cls?: number | null;
+  Cls?: number;
   /** 标记是否是混合云接入。hybrid表示混合云接入域名 */
-  CloudType?: string | null;
+  CloudType?: string;
   /** 标记clbwaf类型 */
-  AlbType?: string | null;
+  AlbType?: string;
   /** BOT开关状态 */
-  BotStatus?: number | null;
+  BotStatus?: number;
   /** API开关状态 */
-  ApiStatus?: number | null;
+  ApiStatus?: number;
 }
 
 /** 用户特征规则描述 */
@@ -1923,7 +1925,7 @@ declare interface UserSignatureRule {
   /** 0/1 */
   Reason?: number;
   /** 1: 高危 2:中危 3:低危 */
-  RiskLevel?: number | null;
+  RiskLevel?: number;
 }
 
 /** 用户规则白名单 */
@@ -1937,7 +1939,7 @@ declare interface UserWhiteRule {
   /** 匹配域 */
   MatchField?: string;
   /** 匹配参数 */
-  MatchParams?: string | null;
+  MatchParams?: string;
   /** 匹配方法 */
   MatchMethod?: string;
   /** 匹配内容 */
@@ -1947,19 +1949,19 @@ declare interface UserWhiteRule {
   /** 修改时间 */
   ModifyTime?: string;
   /** 规则ID列表 */
-  SignatureIds?: string[] | null;
+  SignatureIds?: string[];
   /** 大类规则ID列表 */
-  TypeIds?: string[] | null;
+  TypeIds?: string[];
   /** 大类规则ID */
-  TypeId?: string | null;
+  TypeId?: string;
   /** 0:按照特定规则ID加白, 1:按照规则类型加白 */
-  Mode?: number | null;
+  Mode?: number;
   /** 规则名 */
-  Name?: string | null;
+  Name?: string;
   /** 匹配规则列表 */
-  MatchInfo?: UserWhiteRuleItem[] | null;
+  MatchInfo?: UserWhiteRuleItem[];
   /** MatchInfo字符串 */
-  MatchInfoStr?: string | null;
+  MatchInfoStr?: string;
 }
 
 /** 用户规则白名单规则子项 */
@@ -1971,15 +1973,27 @@ declare interface UserWhiteRuleItem {
   /** 匹配内容 */
   MatchContent: string;
   /** 匹配参数名 */
-  MatchParams?: string | null;
+  MatchParams?: string;
 }
 
 /** Vip信息 */
 declare interface VipInfo {
-  /** Virtual IP */
-  Vip?: string | null;
+  /** VIP地址 */
+  Vip?: string;
   /** waf实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
+  /** 创建时间 */
+  InstanceCreateTime?: string;
+  /** 地域 */
+  Region?: string;
+  /** 地域ID */
+  RegionId?: number;
+  /** ip运营商类型 */
+  ISP?: string;
+  /** ip类型 */
+  VipType?: string;
+  /** 域名信息 */
+  AddressName?: string;
 }
 
 /** waf模块的规格 */
@@ -2015,7 +2029,7 @@ declare interface WafRuleLimit {
 /** 当前WAF威胁情报封禁模块详情 */
 declare interface WafThreatenIntelligenceDetails {
   /** 封禁属性标签 */
-  Tags?: string[] | null;
+  Tags?: string[];
   /** 封禁模组启用状态 */
   DefenseStatus?: number;
   /** 最后更新时间 */
@@ -2075,7 +2089,7 @@ declare interface AddAreaBanAreasRequest {
   Areas: string[];
   /** waf版本信息，spart-waf或者clb-waf，其他无效，请一定填写 */
   Edition?: string;
-  /** 定时任务类型 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时任务配置 */
   JobDateTime?: JobDateTime;
@@ -2123,7 +2137,7 @@ declare interface AddCustomRuleRequest {
   Strategies: Strategy[];
   /** 需要添加策略的域名 */
   Domain: string;
-  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向 */
+  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
   ActionType: string;
   /** 如果动作是重定向，则表示重定向的地址；其他情况可以为空 */
   Redirect?: string;
@@ -2131,7 +2145,7 @@ declare interface AddCustomRuleRequest {
   ExpireTime?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
-  /** 放行的详情 */
+  /** 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。默认是"geoip,cc,owasp,ai,antileakage" */
   Bypass?: string;
   /** 添加规则的来源，默认为空 */
   EventId?: string;
@@ -2153,7 +2167,7 @@ declare interface AddCustomRuleResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
   Success?: ResponseCode;
   /** 添加成功的规则ID */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2171,7 +2185,7 @@ declare interface AddCustomWhiteRuleRequest {
   Domain: string;
   /** 放行的详情 */
   Bypass: string;
-  /** 定时任务类型 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时任务配置 */
   JobDateTime?: JobDateTime;
@@ -2181,7 +2195,7 @@ declare interface AddCustomWhiteRuleResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
   Success?: ResponseCode;
   /** 添加成功的规则ID */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2304,6 +2318,28 @@ declare interface AddSpartaProtectionResponse {
   RequestId?: string;
 }
 
+declare interface BatchOperateUserSignatureRulesRequest {
+  /** 域名 */
+  Domain: string;
+  /** 0:关闭，1:开启，2:仅观察 */
+  Status: string;
+  /** 如果SelectedAll为true，则表示反选的规则，否则表示手动选择的规则ID */
+  RuleIds?: string[];
+  /** 仅观察原因 */
+  Reason?: number;
+  /** 是否全选 */
+  SelectedAll?: boolean;
+  /** 过滤 */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface BatchOperateUserSignatureRulesResponse {
+  /** 操作结果 */
+  CommonRsp?: CommonRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccessExportRequest {
   /** 客户要查询的日志主题ID，每个客户都有对应的一个主题 */
   TopicId: string;
@@ -2335,11 +2371,11 @@ declare interface CreateDealsRequest {
 
 declare interface CreateDealsResponse {
   /** 计费下单响应结构体 */
-  Data?: DealData | null;
+  Data?: DealData;
   /** 1:成功，0:失败 */
   Status?: number;
   /** 返回message */
-  ReturnMessage?: string | null;
+  ReturnMessage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2366,7 +2402,7 @@ declare interface CreateIpAccessControlRequest {
   /** 42为黑名单，40为白名单 */
   ActionType: number;
   /** valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
-  ValidTS: number;
+  ValidTS?: number;
   /** 实例Id */
   InstanceId?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
@@ -2375,7 +2411,7 @@ declare interface CreateIpAccessControlRequest {
   SourceType?: string;
   /** 备注 */
   Note?: string;
-  /** 定时配置类型 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时配置详情 */
   JobDateTime?: JobDateTime;
@@ -2383,7 +2419,7 @@ declare interface CreateIpAccessControlRequest {
 
 declare interface CreateIpAccessControlResponse {
   /** 新增的规则对应的ID */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2443,7 +2479,7 @@ declare interface DeleteAttackWhiteRuleRequest {
 
 declare interface DeleteAttackWhiteRuleResponse {
   /** 删除失败的规则序号组 */
-  FailIds?: number[] | null;
+  FailIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2461,7 +2497,7 @@ declare interface DeleteCCRuleRequest {
 
 declare interface DeleteCCRuleResponse {
   /** 一般为null */
-  Data?: string | null;
+  Data?: string;
   /** 操作的规则Id */
   RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2495,7 +2531,7 @@ declare interface DeleteCustomWhiteRuleRequest {
 
 declare interface DeleteCustomWhiteRuleResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
-  Success: ResponseCode;
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2509,17 +2545,7 @@ declare interface DeleteDomainWhiteRulesRequest {
 
 declare interface DeleteDomainWhiteRulesResponse {
   /** 出参 */
-  Data?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteDownloadRecordRequest {
-  /** 记录id */
-  Flow: string;
-}
-
-declare interface DeleteDownloadRecordResponse {
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2553,9 +2579,9 @@ declare interface DeleteIpAccessControlRequest {
 
 declare interface DeleteIpAccessControlResponse {
   /** 删除失败的条目 */
-  FailedItems?: string | null;
+  FailedItems?: string;
   /** 删除失败的条目数 */
-  FailedCount?: number | null;
+  FailedCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2591,7 +2617,7 @@ declare interface DeleteSessionRequest {
 
 declare interface DeleteSessionResponse {
   /** 结果 */
-  Data?: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2621,9 +2647,9 @@ declare interface DescribeAccessExportsRequest {
 
 declare interface DescribeAccessExportsResponse {
   /** 日志导出ID。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志导出列表 */
-  Exports: ExportAccessInfo[] | null;
+  Exports?: ExportAccessInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2647,7 +2673,7 @@ declare interface DescribeAccessFastAnalysisRequest {
 
 declare interface DescribeAccessFastAnalysisResponse {
   /** 注意：此字段可能返回 null，表示取不到有效值 */
-  FieldValueRatioInfos?: AccessFieldValueRatioInfo[] | null;
+  FieldValueRatioInfos?: AccessFieldValueRatioInfo[];
   /** 日志条数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2673,7 +2699,7 @@ declare interface DescribeAccessHistogramResponse {
   /** 满足条件的日志条数 */
   TotalCount?: number;
   /** 注意：此字段可能返回 null，表示取不到有效值 */
-  HistogramInfos?: AccessHistogramItem[] | null;
+  HistogramInfos?: AccessHistogramItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2685,7 +2711,7 @@ declare interface DescribeAccessIndexResponse {
   /** 是否生效，true表示生效，false表示未生效 */
   Status?: boolean;
   /** 索引配置信息 */
-  Rule?: AccessRuleInfo | null;
+  Rule?: AccessRuleInfo;
   /** 索引修改时间，初始值为索引创建时间。 */
   ModifyTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2711,41 +2737,7 @@ declare interface DescribeAntiFakeRulesResponse {
   /** 总数 */
   Total?: number;
   /** 返回值 */
-  Data?: CacheUrlItems[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAntiFakeUrlRequest {
-  /** 域名 */
-  Domain: string;
-  /** 翻页参数 */
-  PageInfo: PageInfo;
-}
-
-declare interface DescribeAntiFakeUrlResponse {
-  /** 总数 */
-  Total?: string;
-  /** 信息 */
-  List?: CacheUrlItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAntiInfoLeakRulesRequest {
-  /** 域名 */
-  Domain: string;
-  /** 动作类型 */
-  ActionType?: number;
-  /** 翻页 */
-  PageInfo?: PageInfo;
-}
-
-declare interface DescribeAntiInfoLeakRulesResponse {
-  /** 记录条数 */
-  TotalCount?: string;
-  /** 规则列表 */
-  RuleList?: DescribeAntiInfoLeakRulesRuleItem[];
+  Data?: CacheUrlItems[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2787,29 +2779,29 @@ declare interface DescribeApiDetailRequest {
 
 declare interface DescribeApiDetailResponse {
   /** 请求样例，json字符串格式 */
-  Log?: string | null;
+  Log?: string;
   /** 请求参数样例列表 */
-  ParameterList?: ApiParameterType[] | null;
+  ParameterList?: ApiParameterType[];
   /** 当前场景标签 */
-  Scene?: string | null;
+  Scene?: string;
   /** 敏感字段 */
-  SensitiveFields?: string[] | null;
+  SensitiveFields?: string[];
   /** 7天内是否活跃 */
-  IsActive?: boolean | null;
+  IsActive?: boolean;
   /** 访问ip数 */
-  IpCount?: number | null;
+  IpCount?: number;
   /** 访问地域数量 */
-  RegionCount?: number | null;
+  RegionCount?: number;
   /** 关联事件数 */
-  EventCount?: number | null;
+  EventCount?: number;
   /** 涉敏数据条数 */
-  SensitiveCount?: number | null;
+  SensitiveCount?: number;
   /** 风险等级 */
-  Level?: number | null;
+  Level?: number;
   /** 响应体 */
-  RspLog?: string | null;
+  RspLog?: string;
   /** 昨日访问峰值QPS */
-  MaxQPS?: number | null;
+  MaxQPS?: number;
   /** 历史样例 */
   ApiDetailSampleHistory?: ApiDetailSampleHistory[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2837,9 +2829,9 @@ declare interface DescribeApiListVersionTwoRequest {
 
 declare interface DescribeApiListVersionTwoResponse {
   /** api资产列表 */
-  Data?: ApiAsset[] | null;
+  Data?: ApiAsset[];
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2851,7 +2843,7 @@ declare interface DescribeAreaBanAreasRequest {
 
 declare interface DescribeAreaBanAreasResponse {
   /** 回包内容 */
-  Data?: DescribeAreaBanAreasRsp | null;
+  Data?: DescribeAreaBanAreasRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2895,15 +2887,15 @@ declare interface DescribeAttackOverviewResponse {
   /** api资产总数 */
   ApiAssetsCount?: number;
   /** api风险事件数量 */
-  ApiRiskEventCount?: number | null;
+  ApiRiskEventCount?: number;
   /** 黑名单总数 */
-  IPBlackCount?: number | null;
+  IPBlackCount?: number;
   /** 防篡改总数 */
-  TamperCount?: number | null;
+  TamperCount?: number;
   /** 信息泄露总数 */
-  LeakCount?: number | null;
+  LeakCount?: number;
   /** API风险事件周环比 */
-  ApiRiskEventCircleCount?: number | null;
+  ApiRiskEventCircleCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2925,7 +2917,7 @@ declare interface DescribeAttackTypeRequest {
 
 declare interface DescribeAttackTypeResponse {
   /** 数量 */
-  Piechart: PiechartItem[];
+  Piechart?: PiechartItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2949,7 +2941,7 @@ declare interface DescribeAttackWhiteRuleResponse {
   /** 规则总数 */
   Total?: number;
   /** 规则白名单列表 */
-  List?: UserWhiteRule[] | null;
+  List?: UserWhiteRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2989,7 +2981,7 @@ declare interface DescribeAutoDenyIPResponse {
 }
 
 declare interface DescribeBatchIpAccessControlRequest {
-  /** 筛选条件，支持 ActionType 40/42，Ip：ip地址，Domain：域名三类 */
+  /** 筛选条件，支持 ActionType，可选的值为40（白名单）42（黑名单），ValidStatus，可选的值为1（生效）0（过期） */
   Filters: FiltersItemNew[];
   /** 偏移 */
   OffSet?: number;
@@ -3001,7 +2993,7 @@ declare interface DescribeBatchIpAccessControlRequest {
 
 declare interface DescribeBatchIpAccessControlResponse {
   /** 输出 */
-  Data?: BatchIpAccessControlData | null;
+  Data?: BatchIpAccessControlData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3035,7 +3027,7 @@ declare interface DescribeCCRuleListRequest {
 
 declare interface DescribeCCRuleListResponse {
   /** 查询到的CC规则的列表 */
-  Data?: CCRuleLists | null;
+  Data?: CCRuleLists;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3057,7 +3049,7 @@ declare interface DescribeCCRuleRequest {
 
 declare interface DescribeCCRuleResponse {
   /** 结果 */
-  Data?: CCRuleData | null;
+  Data?: CCRuleData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3095,7 +3087,7 @@ declare interface DescribeCertificateVerifyResultResponse {
   /** 过期时间 */
   NotAfter?: string;
   /** 证书是否改变。0：未变化1：有变化 */
-  Changed?: number | null;
+  Changed?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3105,7 +3097,7 @@ declare interface DescribeCiphersDetailRequest {
 
 declare interface DescribeCiphersDetailResponse {
   /** 加密套件信息 */
-  Ciphers?: TLSCiphers[] | null;
+  Ciphers?: TLSCiphers[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3165,15 +3157,15 @@ declare interface DescribeDomainCountInfoRequest {
 
 declare interface DescribeDomainCountInfoResponse {
   /** 域名总数 */
-  AllDomain: number;
+  AllDomain?: number;
   /** 最近发现时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 接入域名总数 */
-  WafDomainCount: number;
+  WafDomainCount?: number;
   /** 剩下配额 */
-  LeftDomainCount: number;
+  LeftDomainCount?: number;
   /** 开启防护域名数 */
-  OpenWafDomain: number;
+  OpenWafDomain?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3275,7 +3267,7 @@ declare interface DescribeDomainsResponse {
   /** 总数 */
   Total?: number;
   /** domain列表 */
-  Domains?: DomainInfo[] | null;
+  Domains?: DomainInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3287,7 +3279,7 @@ declare interface DescribeFindDomainListRequest {
   Limit: number;
   /** 过滤条件 */
   Key: string;
-  /** 是否接入waf */
+  /** 是否接入waf；传"1"返回接入域名的详情，传"0"返回未接入域名的详情，传""返回接入和未接入域名的详情 */
   IsWafDomain: string;
   /** 排序参数 */
   By?: string;
@@ -3297,9 +3289,9 @@ declare interface DescribeFindDomainListRequest {
 
 declare interface DescribeFindDomainListResponse {
   /** 域名总数 */
-  Total: number;
+  Total?: number;
   /** 域名信息列表 */
-  List: FindAllDomainDetail[];
+  List?: FindAllDomainDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3357,7 +3349,7 @@ declare interface DescribeHostLimitRequest {
 
 declare interface DescribeHostLimitResponse {
   /** 成功返回的状态码 */
-  Success?: ResponseCode | null;
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3395,7 +3387,7 @@ declare interface DescribeHostsResponse {
   /** 防护域名列表的长度 */
   TotalCount?: number;
   /** 防护域名的列表 */
-  HostList?: HostRecord[] | null;
+  HostList?: HostRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3459,9 +3451,9 @@ declare interface DescribeIpAccessControlRequest {
 
 declare interface DescribeIpAccessControlResponse {
   /** 输出 */
-  Data?: IpAccessControlData | null;
+  Data?: IpAccessControlData;
   /** 已经使用的IP黑白名单的IP总数 */
-  UsedTotal?: number | null;
+  UsedTotal?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3499,7 +3491,7 @@ declare interface DescribeIpHitItemsRequest {
 
 declare interface DescribeIpHitItemsResponse {
   /** 结果 */
-  Data?: IpHitItemsData | null;
+  Data?: IpHitItemsData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3579,15 +3571,15 @@ declare interface DescribePeakValueRequest {
 
 declare interface DescribePeakValueResponse {
   /** QPS峰值 */
-  Access: number;
+  Access?: number;
   /** 上行带宽峰值，单位B */
-  Up: number;
+  Up?: number;
   /** 下行带宽峰值，单位B */
-  Down: number;
+  Down?: number;
   /** Web攻击总数 */
-  Attack: number;
+  Attack?: number;
   /** CC攻击总数 */
-  Cc: number;
+  Cc?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3601,9 +3593,9 @@ declare interface DescribePolicyStatusRequest {
 
 declare interface DescribePolicyStatusResponse {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 防护状态 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3652,6 +3644,38 @@ declare interface DescribeRuleLimitResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScanIpRequest {
+  /** 要查询的ip地址 */
+  Ip: string;
+}
+
+declare interface DescribeScanIpResponse {
+  /** ip列表,当入参Ip为all时，返回所有已知ip列表 */
+  IpList?: ScanIpInfo[];
+  /** 所属业务 */
+  Bussiness?: string;
+  /** 业务特征 */
+  Characteristic?: string;
+  /** 扫描说明 */
+  Descibe?: string;
+  /** 官方公告 */
+  Referer?: string;
+  /** 扫描示例 */
+  Demo?: string;
+  /** 扫描对象 */
+  Target?: string;
+  /** 扫描目的 */
+  Purpose?: string;
+  /** 产品文案 */
+  Announcement?: string;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** ipowner */
+  IpOwner?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSessionRequest {
   /** 域名 */
   Domain: string;
@@ -3661,7 +3685,7 @@ declare interface DescribeSessionRequest {
 
 declare interface DescribeSessionResponse {
   /** 返回结果 */
-  Data?: SessionData | null;
+  Data?: SessionData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3677,57 +3701,57 @@ declare interface DescribeSpartaProtectionInfoRequest {
 
 declare interface DescribeSpartaProtectionInfoResponse {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 域名ID */
-  DomainId: string;
+  DomainId?: string;
   /** cname取值 */
-  Cname: string;
+  Cname?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 源IP地址列表 */
-  SrcList: string[];
+  SrcList?: string[];
   /** 证书类型 */
-  CertType: string;
+  CertType?: string;
   /** 证书 */
-  Cert: string;
+  Cert?: string;
   /** 私有密钥 */
-  PrivateKey: string;
+  PrivateKey?: string;
   /** ssl的id */
-  Sslid: string;
+  Sslid?: string;
   /** 是否是cdn */
-  IsCdn: string;
+  IsCdn?: string;
   /** 灰度区域列表 */
-  GrayAreas: string[];
+  GrayAreas?: string[];
   /** 引擎 */
-  Engine: string;
+  Engine?: string;
   /** HTTPS重写 */
-  HttpsRewrite: string;
+  HttpsRewrite?: string;
   /** upstreamType取值 */
-  UpstreamType: string;
+  UpstreamType?: string;
   /** upstreamDomain取值 */
-  UpstreamDomain: string;
+  UpstreamDomain?: string;
   /** upstreamScheme取值 */
-  UpstreamScheme: string;
+  UpstreamScheme?: string;
   /** 是否是HTTP2 */
-  IsHttp2: string;
+  IsHttp2?: string;
   /** 是否含有websocket */
-  IsWebsocket: string;
+  IsWebsocket?: string;
   /** loadBalance信息 */
-  LoadBalance: string;
+  LoadBalance?: string;
   /** httpsUpstreamPort取值 */
-  HttpsUpstreamPort: string;
+  HttpsUpstreamPort?: string;
   /** port信息 */
-  Ports: PortItem[];
+  Ports?: PortItem[];
   /** 是否灰度 */
-  IsGray: string;
+  IsGray?: string;
   /** 模式 */
-  Mode: string;
+  Mode?: string;
   /** 防御等级,100,200,300 */
-  Level: string;
+  Level?: string;
   /** 与源站是否保持长连接 */
-  IsKeepAlive: string;
+  IsKeepAlive?: string;
   /** 0：BGP 1：Anycast */
-  Anycast: string | null;
+  Anycast?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3736,7 +3760,7 @@ declare interface DescribeTlsVersionRequest {
 }
 
 declare interface DescribeTlsVersionResponse {
-  /** TLS key value */
+  /** TLS信息 */
   TLS?: TLSVersion[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3757,9 +3781,9 @@ declare interface DescribeTopAttackDomainRequest {
 
 declare interface DescribeTopAttackDomainResponse {
   /** CC攻击域名列表 */
-  CC: KVInt[];
+  CC?: KVInt[];
   /** Web攻击域名列表 */
-  Web: KVInt[];
+  Web?: KVInt[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3769,7 +3793,7 @@ declare interface DescribeUserCdcClbWafRegionsRequest {
 
 declare interface DescribeUserCdcClbWafRegionsResponse {
   /** CdcRegion的类型描述 */
-  Data?: CdcRegion[] | null;
+  Data?: CdcRegion[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3781,9 +3805,9 @@ declare interface DescribeUserClbWafRegionsRequest {
 
 declare interface DescribeUserClbWafRegionsResponse {
   /** 地域（标准的ap-格式）列表 */
-  Data?: string[] | null;
+  Data?: string[];
   /** 包含详细属性的地域信息 */
-  RichDatas?: ClbWafRegionItem[] | null;
+  RichDatas?: ClbWafRegionItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3810,6 +3834,20 @@ declare interface DescribeUserLevelResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserSignatureClassRequest {
+  /** 查询域名 */
+  Domain: string;
+}
+
+declare interface DescribeUserSignatureClassResponse {
+  /** 规则类型数量 */
+  Total?: number;
+  /** 规则类型列表及信息 */
+  RuleTypeList?: RuleType[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserSignatureRuleRequest {
   /** 需要查询的域名 */
   Domain: string;
@@ -3829,7 +3867,31 @@ declare interface DescribeUserSignatureRuleResponse {
   /** 规则总数 */
   Total?: number;
   /** 规则列表 */
-  Rules?: UserSignatureRule[] | null;
+  Rules?: UserSignatureRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserSignatureRuleV2Request {
+  /** 需要查询的域名 */
+  Domain: string;
+  /** 分页 */
+  Offset: number;
+  /** 每页容量 */
+  Limit: number;
+  /** 排序字段，支持 signature_id, modify_time */
+  By?: string;
+  /** 排序方式 */
+  Order?: string;
+  /** 筛选条件，支持 MainClassName，SubClassID ,CveID, Status, ID; ID为规则id */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeUserSignatureRuleV2Response {
+  /** 规则总数 */
+  Total?: number;
+  /** 规则列表 */
+  Rules?: UserSignatureRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3863,7 +3925,7 @@ declare interface DescribeWafAutoDenyRulesResponse {
   /** 自动封禁状态 */
   DefenseStatus?: number;
   /** 数据来源Source字段 custom-自定义(默认)、batch-domain-批量域名 */
-  Source?: string | null;
+  Source?: string;
   /** 重保护网域名状态 */
   HWState?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3885,7 +3947,7 @@ declare interface DescribeWafThreatenIntelligenceRequest {
 
 declare interface DescribeWafThreatenIntelligenceResponse {
   /** WAF 威胁情报封禁信息 */
-  WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
+  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3925,13 +3987,13 @@ declare interface GenerateDealsAndPayNewRequest {
 
 declare interface GenerateDealsAndPayNewResponse {
   /** 计费下单响应结构体 */
-  Data?: DealData | null;
+  Data?: DealData;
   /** 1:成功，0:失败 */
   Status?: number;
   /** 返回message */
-  ReturnMessage?: string | null;
+  ReturnMessage?: string;
   /** 购买的实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3941,7 +4003,7 @@ declare interface GetAttackDownloadRecordsRequest {
 
 declare interface GetAttackDownloadRecordsResponse {
   /** 下载攻击日志记录数组 */
-  Records: DownloadAttackRecordInfo[];
+  Records?: DownloadAttackRecordInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4093,11 +4155,11 @@ declare interface ModifyApiAnalyzeStatusRequest {
 
 declare interface ModifyApiAnalyzeStatusResponse {
   /** 已经开启的数量,如果返回值为3（大于支持的域名开启数量），则表示开启失败 */
-  Count?: number | null;
+  Count?: number;
   /** 不支持开启的域名列表 */
-  UnSupportedList?: string[] | null;
+  UnSupportedList?: string[];
   /** 开启/关闭失败的域名列表 */
-  FailDomainList?: string[] | null;
+  FailDomainList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4129,7 +4191,7 @@ declare interface ModifyAreaBanAreasRequest {
   Domain: string;
   /** 需要调整的地域信息，一个字符串数组 */
   Areas: string[];
-  /** 定时任务类型 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时任务配置 */
   JobDateTime?: JobDateTime;
@@ -4199,11 +4261,11 @@ declare interface ModifyBotStatusRequest {
 
 declare interface ModifyBotStatusResponse {
   /** 正常情况为null */
-  Data?: string | null;
+  Data?: string;
   /** 未购买BOT的域名列表 */
-  UnSupportedList?: string[] | null;
+  UnSupportedList?: string[];
   /** 已购买但操作失败的域名列表 */
-  FailDomainList?: string[] | null;
+  FailDomainList?: string[];
   /** 成功数目 */
   Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4217,7 +4279,7 @@ declare interface ModifyCustomRuleRequest {
   RuleId: number;
   /** 编辑的规则名称 */
   RuleName: string;
-  /** 执行动作，0：放行、1：阻断、2：人机识别、3：观察、4：重定向 */
+  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
   RuleAction: string;
   /** 匹配条件数组 */
   Strategies: Strategy[];
@@ -4231,7 +4293,7 @@ declare interface ModifyCustomRuleRequest {
   SortId?: number;
   /** 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。默认是0 */
   ExpireTime?: number;
-  /** 定时任务类型 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时任务配置 */
   JobDateTime?: JobDateTime;
@@ -4285,7 +4347,7 @@ declare interface ModifyCustomWhiteRuleRequest {
   ExpireTime: number;
   /** 匹配条件数组 */
   Strategies: Strategy[];
-  /** 定时任务类型 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时任务配置 */
   JobDateTime?: JobDateTime;
@@ -4309,7 +4371,7 @@ declare interface ModifyCustomWhiteRuleStatusRequest {
 
 declare interface ModifyCustomWhiteRuleStatusResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
-  Success: ResponseCode;
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4333,7 +4395,7 @@ declare interface ModifyDomainIpv6StatusResponse {
 }
 
 declare interface ModifyDomainPostActionRequest {
-  /** www.tx.com */
+  /** 域名 */
   Domain: string;
   /** 0-关闭投递，1-开启投递 */
   PostCLSAction: number;
@@ -4385,11 +4447,11 @@ declare interface ModifyGenerateDealsRequest {
 
 declare interface ModifyGenerateDealsResponse {
   /** 计费下单响应结构体 */
-  Data?: DealData | null;
+  Data?: DealData;
   /** 1:成功，0:失败 */
   Status?: number;
   /** 返回message */
-  ReturnMessage?: string | null;
+  ReturnMessage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4429,7 +4491,7 @@ declare interface ModifyHostModeRequest {
 
 declare interface ModifyHostModeResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
-  Success?: ResponseCode | null;
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4477,7 +4539,7 @@ declare interface ModifyInstanceNameRequest {
   InstanceName: string;
   /** 实例id */
   InstanceID: string;
-  /** 版本 */
+  /** 实例版本，支持clb-waf、sparta-waf */
   Edition: string;
 }
 
@@ -4519,10 +4581,10 @@ declare interface ModifyIpAccessControlRequest {
   IpList: string[];
   /** 42为黑名单，40为白名单 */
   ActionType: number;
-  /** valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
-  ValidTS: number;
   /** 规则ID */
   RuleId: number;
+  /** valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
+  ValidTS?: number;
   /** 实例Id */
   InstanceId?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
@@ -4531,7 +4593,7 @@ declare interface ModifyIpAccessControlRequest {
   SourceType?: string;
   /** 备注 */
   Note?: string;
-  /** 定时配置类型 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时配置详情 */
   JobDateTime?: JobDateTime;
@@ -4609,6 +4671,8 @@ declare interface ModifySpartaProtectionModeRequest {
   Edition?: string;
   /** 0是修改规则引擎状态，1是修改AI的状态 */
   Type?: number;
+  /** 实例id */
+  InstanceID?: string;
 }
 
 declare interface ModifySpartaProtectionModeResponse {
@@ -4861,11 +4925,11 @@ declare interface SearchAccessLogResponse {
   /** 返回的是否为分析结果，其中，“true”表示返回分析结果，“false”表示未返回分析结果 */
   Analysis?: boolean;
   /** 如果Analysis为True，则返回分析结果的列名，否则为空 */
-  ColNames?: string[] | null;
+  ColNames?: string[];
   /** 日志查询结果；当Analysis为True时，可能返回为null注意：此字段可能返回 null，表示取不到有效值 */
-  Results?: AccessLogInfo[] | null;
+  Results?: AccessLogInfo[];
   /** 日志分析结果；当Analysis为False时，可能返回为null注意：此字段可能返回 null，表示取不到有效值 */
-  AnalysisResults?: AccessLogItems[] | null;
+  AnalysisResults?: AccessLogItems[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4945,7 +5009,7 @@ declare interface UpsertCCAutoStatusRequest {
 
 declare interface UpsertCCAutoStatusResponse {
   /** 正常情况为null */
-  Data?: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4967,7 +5031,7 @@ declare interface UpsertCCRuleRequest {
   Url: string;
   /** 匹配方法，0表示等于，1表示前缀匹配，2表示包含 */
   MatchFunc: number;
-  /** 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截 */
+  /** 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，26表示精准人机识别，27表示JS校验 */
   ActionType: string;
   /** 优先级 */
   Priority: number;
@@ -4993,7 +5057,7 @@ declare interface UpsertCCRuleRequest {
 
 declare interface UpsertCCRuleResponse {
   /** 一般为null */
-  Data?: string | null;
+  Data?: string;
   /** 操作的RuleId */
   RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -5015,11 +5079,11 @@ declare interface UpsertIpAccessControlRequest {
 
 declare interface UpsertIpAccessControlResponse {
   /** 添加或修改失败的条目 */
-  FailedItems?: string | null;
+  FailedItems?: string;
   /** 添加或修改失败的数目 */
-  FailedCount?: number | null;
+  FailedCount?: number;
   /** 添加或修改的IP数据Id列表 */
-  Ids?: string[] | null;
+  Ids?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5049,9 +5113,9 @@ declare interface UpsertSessionRequest {
 
 declare interface UpsertSessionResponse {
   /** 结果 */
-  Data?: string | null;
+  Data?: string;
   /** SessionID */
-  SessionID?: number | null;
+  SessionID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5067,7 +5131,7 @@ declare interface Waf {
   AddAreaBanAreas(data: AddAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<AddAreaBanAreasResponse>;
   /** 增加规则引擎白名单 {@link AddAttackWhiteRuleRequest} {@link AddAttackWhiteRuleResponse} */
   AddAttackWhiteRule(data: AddAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAttackWhiteRuleResponse>;
-  /** 增加访问控制（自定义策略） {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
+  /** 新增自定义规则 {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
   /** 添加精准白名单规则 {@link AddCustomWhiteRuleRequest} {@link AddCustomWhiteRuleResponse} */
   AddCustomWhiteRule(data: AddCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomWhiteRuleResponse>;
@@ -5075,6 +5139,8 @@ declare interface Waf {
   AddDomainWhiteRule(data?: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
   /** 添加SaaS型WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
+  /** 批量操作Tiga规则 {@link BatchOperateUserSignatureRulesRequest} {@link BatchOperateUserSignatureRulesResponse} */
+  BatchOperateUserSignatureRules(data: BatchOperateUserSignatureRulesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateUserSignatureRulesResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
   /** 计费实例创建订单 {@link CreateDealsRequest} {@link CreateDealsResponse} */
@@ -5101,8 +5167,6 @@ declare interface Waf {
   DeleteCustomWhiteRule(data: DeleteCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomWhiteRuleResponse>;
   /** 删除域名规则白名单 {@link DeleteDomainWhiteRulesRequest} {@link DeleteDomainWhiteRulesResponse} */
   DeleteDomainWhiteRules(data?: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
-  /** @deprecated 删除访问日志下载记录 {@link DeleteDownloadRecordRequest} {@link DeleteDownloadRecordResponse} */
-  DeleteDownloadRecord(data: DeleteDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDownloadRecordResponse>;
   /** 删除负载均衡型WAF域名 {@link DeleteHostRequest} {@link DeleteHostResponse} */
   DeleteHost(data: DeleteHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostResponse>;
   /** Waf IP黑白名单Delete接口 {@link DeleteIpAccessControlRequest} {@link DeleteIpAccessControlResponse} */
@@ -5123,10 +5187,6 @@ declare interface Waf {
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
   /** 获取防篡改信息 {@link DescribeAntiFakeRulesRequest} {@link DescribeAntiFakeRulesResponse} */
   DescribeAntiFakeRules(data: DescribeAntiFakeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeRulesResponse>;
-  /** @deprecated 获取防篡改url {@link DescribeAntiFakeUrlRequest} {@link DescribeAntiFakeUrlResponse} */
-  DescribeAntiFakeUrl(data: DescribeAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeUrlResponse>;
-  /** @deprecated 获取信息防泄漏规则列表【老接口】 {@link DescribeAntiInfoLeakRulesRequest} {@link DescribeAntiInfoLeakRulesResponse} */
-  DescribeAntiInfoLeakRules(data: DescribeAntiInfoLeakRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakRulesResponse>;
   /** 获取信息防泄漏规则列表 {@link DescribeAntiInfoLeakageRulesRequest} {@link DescribeAntiInfoLeakageRulesResponse} */
   DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
   /** 获取Api请求详情信息 {@link DescribeApiDetailRequest} {@link DescribeApiDetailResponse} */
@@ -5149,7 +5209,7 @@ declare interface Waf {
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
   /** 获取SAAS型接入的紧急CC防护状态 {@link DescribeCCAutoStatusRequest} {@link DescribeCCAutoStatusResponse} */
   DescribeCCAutoStatus(data: DescribeCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCAutoStatusResponse>;
-  /** Waf CC V2 Query接口 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
+  /** Waf CC V2 Query接口旧版 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
   DescribeCCRule(data: DescribeCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleResponse>;
   /** 查询CC规则 {@link DescribeCCRuleListRequest} {@link DescribeCCRuleListResponse} */
   DescribeCCRuleList(data: DescribeCCRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCRuleListResponse>;
@@ -5209,6 +5269,8 @@ declare interface Waf {
   DescribeProtectionModes(data: DescribeProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionModesResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
+  /** DescribeScanIp {@link DescribeScanIpRequest} {@link DescribeScanIpResponse} */
+  DescribeScanIp(data: DescribeScanIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanIpResponse>;
   /** Waf 会话定义查询接口 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */
   DescribeSession(data: DescribeSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionResponse>;
   /** waf斯巴达-获取防护域名信息 {@link DescribeSpartaProtectionInfoRequest} {@link DescribeSpartaProtectionInfoResponse} */
@@ -5225,8 +5287,12 @@ declare interface Waf {
   DescribeUserDomainInfo(data?: DescribeUserDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDomainInfoResponse>;
   /** 获取用户防护规则等级 {@link DescribeUserLevelRequest} {@link DescribeUserLevelResponse} */
   DescribeUserLevel(data: DescribeUserLevelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserLevelResponse>;
+  /** 查询Tiga引擎规则类型及状态 {@link DescribeUserSignatureClassRequest} {@link DescribeUserSignatureClassResponse} */
+  DescribeUserSignatureClass(data: DescribeUserSignatureClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSignatureClassResponse>;
   /** 获取用户特征规则列表 {@link DescribeUserSignatureRuleRequest} {@link DescribeUserSignatureRuleResponse} */
   DescribeUserSignatureRule(data: DescribeUserSignatureRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSignatureRuleResponse>;
+  /** 获取用户特征规则列表V2 {@link DescribeUserSignatureRuleV2Request} {@link DescribeUserSignatureRuleV2Response} */
+  DescribeUserSignatureRuleV2(data: DescribeUserSignatureRuleV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSignatureRuleV2Response>;
   /** 查询VIP信息 {@link DescribeVipInfoRequest} {@link DescribeVipInfoResponse} */
   DescribeVipInfo(data: DescribeVipInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVipInfoResponse>;
   /** 查询ip惩罚规则 {@link DescribeWafAutoDenyRulesRequest} {@link DescribeWafAutoDenyRulesResponse} */

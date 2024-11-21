@@ -10,7 +10,7 @@ declare interface Activity {
   ActivityId?: string;
   /** 伸缩活动类型。取值如下：SCALE_OUT：扩容活动SCALE_IN：缩容活动ATTACH_INSTANCES：添加实例REMOVE_INSTANCES：销毁实例DETACH_INSTANCES：移出实例TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁REPLACE_UNHEALTHY_INSTANCE：替换不健康实例START_INSTANCES：开启实例STOP_INSTANCES：关闭实例INVOKE_COMMAND：执行命令 */
   ActivityType?: string;
-  /** 伸缩活动状态。取值如下：INIT：初始化中RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败CANCELLED：活动取消 */
+  /** 伸缩活动状态。取值如下INIT：初始化中RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败CANCELLED：活动取消 */
   StatusCode?: string;
   /** 伸缩活动状态描述。 */
   StatusMessage?: string;
@@ -49,11 +49,11 @@ declare interface ActivtyRelatedInstance {
 /** 伸缩配置建议。 */
 declare interface Advice {
   /** 问题描述。 */
-  Problem: string;
+  Problem?: string;
   /** 问题详情。 */
-  Detail: string;
+  Detail?: string;
   /** 建议解决方案。 */
-  Solution: string;
+  Solution?: string;
   /** 伸缩建议警告级别。取值范围：WARNING：警告级别CRITICAL：严重级别 */
   Level?: string;
 }
@@ -61,11 +61,11 @@ declare interface Advice {
 /** 伸缩组配置建议。 */
 declare interface AutoScalingAdvice {
   /** 伸缩组ID。 */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 伸缩组警告级别。取值范围：NORMAL：正常WARNING：警告级别CRITICAL：严重级别 */
-  Level: string;
+  Level?: string;
   /** 伸缩组配置建议集合。 */
-  Advices: Advice[];
+  Advices?: Advice[];
 }
 
 /** 伸缩组 */
@@ -139,9 +139,9 @@ declare interface AutoScalingGroup {
 /** 伸缩组简明信息。 */
 declare interface AutoScalingGroupAbstract {
   /** 伸缩组ID。 */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 伸缩组名称。 */
-  AutoScalingGroupName: string;
+  AutoScalingGroupName?: string;
 }
 
 /** 弹性伸缩事件通知 */
@@ -183,19 +183,19 @@ declare interface DataDisk {
 /** 伸缩活动状态详细描述。 */
 declare interface DetailedStatusMessage {
   /** 错误类型。 */
-  Code: string;
+  Code?: string;
   /** 可用区信息。 */
-  Zone: string;
+  Zone?: string;
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例计费类型。 */
-  InstanceChargeType: string;
+  InstanceChargeType?: string;
   /** 子网ID。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 错误描述。 */
-  Message: string;
+  Message?: string;
   /** 实例类型。 */
-  InstanceType: string;
+  InstanceType?: string;
 }
 
 /** 描述了实例的增强服务启用情况与其设置，如云安全，云监控，自动化助手等实例 Agent。 */
@@ -345,17 +345,17 @@ declare interface InternetAccessible {
 /** 执行命令结果。 */
 declare interface InvocationResult {
   /** 实例ID。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 执行活动ID。 */
-  InvocationId: string | null;
+  InvocationId?: string | null;
   /** 执行任务ID。 */
-  InvocationTaskId: string | null;
+  InvocationTaskId?: string | null;
   /** 命令ID。 */
-  CommandId: string | null;
+  CommandId?: string | null;
   /** 执行任务状态。 */
-  TaskStatus: string | null;
+  TaskStatus?: string | null;
   /** 执行异常信息。 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
 }
 
 /** 符合条件的启动配置信息的集合。 */
@@ -424,6 +424,8 @@ declare interface LaunchConfiguration {
   DisasterRecoverGroupIds?: string[];
   /** 镜像族名称。 */
   ImageFamily?: string | null;
+  /** 本地专用集群 ID。 */
+  DedicatedClusterId?: string;
 }
 
 /** 生命周期挂钩动作的执行结果信息。 */
@@ -455,43 +457,43 @@ declare interface LifecycleCommand {
 /** 生命周期挂钩 */
 declare interface LifecycleHook {
   /** 生命周期挂钩ID */
-  LifecycleHookId: string;
+  LifecycleHookId?: string;
   /** 生命周期挂钩名称 */
-  LifecycleHookName: string;
+  LifecycleHookName?: string;
   /** 伸缩组ID */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 生命周期挂钩默认结果 */
-  DefaultResult: string;
+  DefaultResult?: string;
   /** 生命周期挂钩等待超时时间 */
-  HeartbeatTimeout: number;
+  HeartbeatTimeout?: number;
   /** 生命周期挂钩适用场景 */
-  LifecycleTransition: string;
+  LifecycleTransition?: string;
   /** 通知目标的附加信息 */
-  NotificationMetadata: string;
+  NotificationMetadata?: string;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 通知目标 */
-  NotificationTarget: NotificationTarget;
+  NotificationTarget?: NotificationTarget;
   /** 生命周期挂钩适用场景 */
-  LifecycleTransitionType: string;
+  LifecycleTransitionType?: string;
   /** 远程命令执行对象 */
-  LifecycleCommand: LifecycleCommand | null;
+  LifecycleCommand?: LifecycleCommand | null;
 }
 
 /** 描述了实例登录相关配置与信息，出于安全性考虑，不会描述敏感信息。 */
 declare interface LimitedLoginSettings {
   /** 密钥ID列表。 */
-  KeyIds: string[];
+  KeyIds?: string[];
 }
 
 /** 描述了实例登录相关配置与信息。 */
 declare interface LoginSettings {
   /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。 */
-  Password?: string | null;
+  Password?: string;
   /** 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。 */
   KeyIds?: string[];
   /** 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：TRUE：表示保持镜像的登录设置FALSE：表示不保持镜像的登录设置默认取值：FALSE。 */
-  KeepImageLogin?: boolean | null;
+  KeepImageLogin?: boolean;
 }
 
 /** 弹性伸缩告警指标 */
@@ -598,6 +600,8 @@ declare interface RollingUpdateSettings {
   BatchNumber: number;
   /** 批次间暂停策略。默认值为 Automatic，取值范围如下：FIRST_BATCH_PAUSE：第一批次更新完成后暂停BATCH_INTERVAL_PAUSE：批次间暂停AUTOMATIC：不暂停 */
   BatchPause?: string;
+  /** 最大额外数量。设置该参数后，在滚动更新开始前根据启动配置创建一批按量计费的额外实例，滚动更新完成后销毁额外实例。该参数用于保证滚动更新过程中可用实例的数量，最大额外数量不能超过滚动更新单个批次的刷新实例数。回滚流程暂不支持该参数。 */
+  MaxSurge?: number;
 }
 
 /** 描述了 “自动化助手” 服务相关的信息 */
@@ -621,59 +625,59 @@ declare interface RunSecurityServiceEnabled {
 /** 告警触发策略。 */
 declare interface ScalingPolicy {
   /** 伸缩组ID。 */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 告警触发策略ID。 */
-  AutoScalingPolicyId: string;
+  AutoScalingPolicyId?: string;
   /** 告警触发策略类型。取值：- SIMPLE：简单策略- TARGET_TRACKING：目标追踪策略 */
   ScalingPolicyType?: string;
   /** 告警触发策略名称。 */
-  ScalingPolicyName: string;
+  ScalingPolicyName?: string;
   /** 告警触发后，期望实例数修改方式，仅适用于简单策略。取值范围：CHANGE_IN_CAPACITY：增加或减少若干期望实例数EXACT_CAPACITY：调整至指定期望实例数 PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数 */
-  AdjustmentType: string;
+  AdjustmentType?: string;
   /** 告警触发后，期望实例数的调整值，仅适用于简单策略。 */
-  AdjustmentValue: number;
+  AdjustmentValue?: number;
   /** 冷却时间，仅适用于简单策略。 */
-  Cooldown: number;
+  Cooldown?: number;
   /** 简单告警触发策略告警监控指标，仅适用于简单策略。 */
-  MetricAlarm: MetricAlarm;
+  MetricAlarm?: MetricAlarm;
   /** 预定义监控项，仅适用于目标追踪策略。取值范围：ASG_AVG_CPU_UTILIZATION：平均CPU使用率ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽 */
-  PredefinedMetricType: string | null;
+  PredefinedMetricType?: string | null;
   /** 目标值，仅适用于目标追踪策略。ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：MbpsASG_AVG_LAN_TRAFFIC_IN：>0，单位：MbpsASG_AVG_WAN_TRAFFIC_OUT：>0，单位：MbpsASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps */
-  TargetValue: number | null;
+  TargetValue?: number | null;
   /** 实例预热时间，单位为秒，仅适用于目标追踪策略。取值范围为0-3600。 */
-  EstimatedInstanceWarmup: number | null;
+  EstimatedInstanceWarmup?: number | null;
   /** 是否禁用缩容，仅适用于目标追踪策略。取值范围：true：目标追踪策略仅触发扩容false：目标追踪策略触发扩容和缩容 */
-  DisableScaleIn: boolean | null;
+  DisableScaleIn?: boolean | null;
   /** 告警监控指标列表，仅适用于目标追踪策略。 */
-  MetricAlarms: MetricAlarm[] | null;
+  MetricAlarms?: MetricAlarm[] | null;
   /** 通知组ID，即为用户组ID集合。 */
-  NotificationUserGroupIds: string[];
+  NotificationUserGroupIds?: string[];
 }
 
 /** 描述定时任务的信息 */
 declare interface ScheduledAction {
   /** 定时任务ID。 */
-  ScheduledActionId: string;
+  ScheduledActionId?: string;
   /** 定时任务名称。 */
-  ScheduledActionName: string;
+  ScheduledActionName?: string;
   /** 定时任务所在伸缩组ID。 */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 定时任务的开始时间。取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。 */
-  StartTime: string;
+  StartTime?: string;
   /** 定时任务的重复方式。 */
-  Recurrence: string;
+  Recurrence?: string;
   /** 定时任务的结束时间。取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。 */
-  EndTime: string;
+  EndTime?: string;
   /** 定时任务设置的最大实例数。 */
-  MaxSize: number;
+  MaxSize?: number;
   /** 定时任务设置的期望实例数。 */
-  DesiredCapacity: number;
+  DesiredCapacity?: number;
   /** 定时任务设置的最小实例数。 */
-  MinSize: number;
+  MinSize?: number;
   /** 定时任务的创建时间。取值为`UTC`时间，按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ssZ`。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 定时任务的执行类型。取值范围：CRONTAB：代表定时任务为重复执行。ONCE：代表定时任务为单次执行。 */
-  ScheduledType: string;
+  ScheduledType?: string;
 }
 
 /** 服务设置 */
@@ -722,7 +726,7 @@ declare interface Tag {
   Key: string;
   /** 标签值 */
   Value: string;
-  /** 标签绑定的资源类型，当前支持类型："auto-scaling-group */
+  /** 标签绑定的资源类型，当前支持类型："auto-scaling-group", "launch-configuration" */
   ResourceType?: string | null;
 }
 
@@ -759,7 +763,7 @@ declare interface AttachLoadBalancersRequest {
 
 declare interface AttachLoadBalancersResponse {
   /** 伸缩活动ID */
-  ActivityId: string;
+  ActivityId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -861,7 +865,7 @@ declare interface CreateAutoScalingGroupRequest {
   TerminationPolicies?: string[];
   /** 可用区列表，基础网络场景下必须指定可用区。多个可用区以填写顺序为优先级，依次进行尝试，直至可以成功创建实例。 */
   Zones?: string[];
-  /** 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。部分成功的伸缩活动判定为一次失败活动。 IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。 INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。 NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。 */
+  /** 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。部分成功的伸缩活动判定为一次失败活动。 IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。 INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大。前 10 次重试间隔与立即重试模式相同，后续逐步递增至 10 分钟、30 分钟、60 分钟、一天。 NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。 */
   RetryPolicy?: string;
   /** 可用区校验策略，取值包括 ALL 和 ANY，默认取值为ANY。 ALL，所有可用区（Zone）或子网（SubnetId）都可用则通过校验，否则校验报错。 ANY，存在任何一个可用区（Zone）或子网（SubnetId）可用则通过校验，否则校验报错。可用区或子网不可用的常见原因包括该可用区CVM实例类型售罄、该可用区CBS云盘售罄、该可用区配额不足、该子网IP不足等。如果 Zones/SubnetIds 中可用区或者子网不存在，则无论 ZonesCheckPolicy 采用何种取值，都会校验报错。 */
   ZonesCheckPolicy?: string;
@@ -917,7 +921,7 @@ declare interface CreateLaunchConfigurationRequest {
   EnhancedService?: EnhancedService;
   /** 经过 Base64 编码后的自定义数据，最大长度不超过16KB。 */
   UserData?: string;
-  /** 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费PREPAID：预付费，即包年包月 */
+  /** 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费PREPAID：预付费，即包年包月CDCPAID：专用集群付费 */
   InstanceChargeType?: string;
   /** 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。 */
   InstanceMarketOptions?: InstanceMarketOptionsRequest;
@@ -947,6 +951,8 @@ declare interface CreateLaunchConfigurationRequest {
   DisasterRecoverGroupIds?: string[];
   /** 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。 */
   ImageFamily?: string;
+  /** 本地专用集群ID。 */
+  DedicatedClusterId?: string;
 }
 
 declare interface CreateLaunchConfigurationResponse {
@@ -979,7 +985,7 @@ declare interface CreateLifecycleHookRequest {
 
 declare interface CreateLifecycleHookResponse {
   /** 生命周期挂钩ID */
-  LifecycleHookId: string;
+  LifecycleHookId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1061,7 +1067,7 @@ declare interface CreateScheduledActionRequest {
 
 declare interface CreateScheduledActionResponse {
   /** 定时任务ID */
-  ScheduledActionId: string;
+  ScheduledActionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1159,9 +1165,9 @@ declare interface DescribeAutoScalingActivitiesRequest {
 
 declare interface DescribeAutoScalingActivitiesResponse {
   /** 符合条件的伸缩活动数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合条件的伸缩活动信息集合。 */
-  ActivitySet: Activity[];
+  ActivitySet?: Activity[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1185,7 +1191,7 @@ declare interface DescribeAutoScalingGroupLastActivitiesRequest {
 
 declare interface DescribeAutoScalingGroupLastActivitiesResponse {
   /** 符合条件的伸缩活动信息集合。说明：伸缩组伸缩活动不存在的则不返回，如传50个伸缩组ID，返回45条数据，说明其中有5个伸缩组伸缩活动不存在。 */
-  ActivitySet: Activity[];
+  ActivitySet?: Activity[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1203,9 +1209,9 @@ declare interface DescribeAutoScalingGroupsRequest {
 
 declare interface DescribeAutoScalingGroupsResponse {
   /** 伸缩组详细信息列表。 */
-  AutoScalingGroupSet: AutoScalingGroup[];
+  AutoScalingGroupSet?: AutoScalingGroup[];
   /** 符合条件的伸缩组数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1223,9 +1229,9 @@ declare interface DescribeAutoScalingInstancesRequest {
 
 declare interface DescribeAutoScalingInstancesResponse {
   /** 实例详细信息列表。 */
-  AutoScalingInstanceSet: Instance[];
+  AutoScalingInstanceSet?: Instance[];
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1263,9 +1269,9 @@ declare interface DescribeLifecycleHooksRequest {
 
 declare interface DescribeLifecycleHooksResponse {
   /** 生命周期挂钩数组 */
-  LifecycleHookSet: LifecycleHook[];
+  LifecycleHookSet?: LifecycleHook[];
   /** 总体数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1283,9 +1289,9 @@ declare interface DescribeNotificationConfigurationsRequest {
 
 declare interface DescribeNotificationConfigurationsResponse {
   /** 符合条件的通知数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 弹性伸缩事件通知详细信息列表。 */
-  AutoScalingNotificationSet: AutoScalingNotification[];
+  AutoScalingNotificationSet?: AutoScalingNotification[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1343,9 +1349,9 @@ declare interface DescribeScheduledActionsRequest {
 
 declare interface DescribeScheduledActionsResponse {
   /** 符合条件的定时任务数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 定时任务详细信息列表。 */
-  ScheduledActionSet: ScheduledAction[];
+  ScheduledActionSet?: ScheduledAction[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1375,7 +1381,7 @@ declare interface DetachLoadBalancersRequest {
 
 declare interface DetachLoadBalancersResponse {
   /** 伸缩活动ID */
-  ActivityId: string;
+  ActivityId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1524,7 +1530,7 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   SecurityGroupIds?: string[];
   /** 公网带宽相关信息设置。当公网出带宽上限为0Mbps时，不支持修改为开通分配公网IP；相应的，当前为开通分配公网IP时，修改的公网出带宽上限值必须大于0Mbps。 */
   InternetAccessible?: InternetAccessible;
-  /** 实例计费类型。具体取值范围如下：POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费PREPAID：预付费，即包年包月 */
+  /** 实例计费类型。具体取值范围如下：POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费PREPAID：预付费，即包年包月CDCPAID：专用集群付费 */
   InstanceChargeType?: string;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若修改实例的付费模式为预付费，则该参数必传；从预付费修改为其他付费模式时，本字段原信息会自动丢弃。当新增该字段时，必须传递购买实例的时长，其它未传递字段会设置为默认值。当修改本字段时，当前付费模式必须为预付费。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
@@ -1556,6 +1562,8 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   InstanceTags?: InstanceTag[];
   /** 镜像族名称。 */
   ImageFamily?: string;
+  /** 本地专用集群ID。 */
+  DedicatedClusterId?: string;
 }
 
 declare interface ModifyLaunchConfigurationAttributesResponse {
@@ -1616,7 +1624,7 @@ declare interface ModifyLoadBalancersRequest {
 
 declare interface ModifyLoadBalancersResponse {
   /** 伸缩活动ID */
-  ActivityId: string;
+  ActivityId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

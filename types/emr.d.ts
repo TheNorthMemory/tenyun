@@ -1374,6 +1374,14 @@ declare interface PartDetailPriceItem {
   GoodsNum: number | null;
 }
 
+/** Serverless HBase包年包月时间 */
+declare interface Period {
+  /** 时间跨度 */
+  TimeSpan: number | null;
+  /** 时间单位，"m"代表月。 */
+  TimeUnit?: string | null;
+}
+
 /** Pod PVC存储方式描述 */
 declare interface PersistentVolumeContext {
   /** 磁盘大小，单位为GB。 */
@@ -1546,6 +1554,14 @@ declare interface PreExecuteFileSettings {
   Remark?: string;
 }
 
+/** Serverless HBase 预付费设置 */
+declare interface PrePaySetting {
+  /** 时间 */
+  Period: Period | null;
+  /** 自动续费标记，0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费 */
+  AutoRenewFlag: number | null;
+}
+
 /** 价格详情 */
 declare interface PriceDetail {
   /** 节点ID */
@@ -1628,6 +1644,12 @@ declare interface RenewInstancesInfo {
   Spec?: string;
   /** 磁盘类型 */
   StorageType?: number;
+  /** 系统盘大小 */
+  RootSize?: number | null;
+  /** 系统盘类型 */
+  RootStorageType?: number | null;
+  /** 数据盘信息 */
+  MCMultiDisk?: MultiDiskMC[] | null;
 }
 
 /** 定时伸缩任务策略 */
@@ -1710,7 +1732,7 @@ declare interface RestartPolicy {
   IsDefault: string;
 }
 
-/** EMR Lite HBase 实例信息 */
+/** Serverless HBase 实例信息 */
 declare interface SLInstanceInfo {
   /** 集群实例字符串ID */
   ClusterId?: string;
@@ -1742,6 +1764,12 @@ declare interface SLInstanceInfo {
   ZoneSettings?: ZoneSetting[] | null;
   /** 实例标签 */
   Tags?: Tag[] | null;
+  /** 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念，设置为0 */
+  AutoRenewFlag?: number;
+  /** 隔离时间，未隔离返回0000-00-00 00:00:00。 */
+  IsolateTime?: string;
+  /** 过期时间，后付费返回0000-00-00 00:00:00 */
+  ExpireTime?: string;
 }
 
 /** 扩容节点类型以及数量 */
@@ -2433,9 +2461,9 @@ declare interface AddUsersForUserManagerRequest {
 
 declare interface AddUsersForUserManagerResponse {
   /** 添加成功的用户列表 */
-  SuccessUserList: string[] | null;
+  SuccessUserList?: string[] | null;
   /** 添加失败的用户列表 */
-  FailedUserList: string[] | null;
+  FailedUserList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2575,7 +2603,7 @@ declare interface CreateSLInstanceRequest {
   PayMode: number;
   /** 实例存储类型，填写CLOUD_HSSD，表示性能云存储。 */
   DiskType: string;
-  /** 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于10000，容量调整步长为20。 */
+  /** 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于250*CPU核心数，容量调整步长为100。 */
   DiskSize: number;
   /** 实例节点规格，可填写4C16G、8C32G、16C64G、32C128G，不区分大小写。 */
   NodeType: string;
@@ -2583,6 +2611,8 @@ declare interface CreateSLInstanceRequest {
   ZoneSettings: ZoneSetting[];
   /** 实例要绑定的标签列表。 */
   Tags?: Tag[];
+  /** 预付费参数 */
+  PrePaySetting?: PrePaySetting;
 }
 
 declare interface CreateSLInstanceResponse {
@@ -2733,9 +2763,9 @@ declare interface DescribeClusterNodesRequest {
   HardwareResourceType?: string;
   /** 支持搜索的字段 */
   SearchFields?: SearchItem[];
-  /** 无 */
+  /** 排序字段 */
   OrderField?: string;
-  /** 无 */
+  /** 是否升序，1:升序，0:降序 */
   Asc?: number;
 }
 
@@ -2813,7 +2843,7 @@ declare interface DescribeEmrApplicationStaticsResponse {
 declare interface DescribeEmrOverviewMetricsRequest {
   /** 结束时间 */
   End: number;
-  /** 指标名 */
+  /** 指标名，NODE.CPU：节点平均CPU利用率和总核数；NODE.CPU.SLHBASE：Serverless实例平均CPU利用率和总核数；HDFS.NN.CAPACITY：存储使用率和总量 */
   Metric: string;
   /** 集群id */
   InstanceId: string;
@@ -2985,11 +3015,11 @@ declare interface DescribeInstanceRenewNodesRequest {
 
 declare interface DescribeInstanceRenewNodesResponse {
   /** 查询到的节点总数 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** 节点详细信息列表 */
-  NodeList: RenewInstancesInfo[] | null;
+  NodeList?: RenewInstancesInfo[] | null;
   /** 用户所有的标签键列表 */
-  MetaInfo: string[] | null;
+  MetaInfo?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3144,6 +3174,8 @@ declare interface DescribeSLInstanceRequest {
 }
 
 declare interface DescribeSLInstanceResponse {
+  /** 实例字符串标识。 */
+  InstanceId?: string;
   /** 实例名称。 */
   InstanceName?: string;
   /** 实例计费模式。0表示后付费，即按量计费，1表示预付费，即包年包月。 */
@@ -3158,6 +3190,24 @@ declare interface DescribeSLInstanceResponse {
   ZoneSettings?: ZoneSetting[];
   /** 实例绑定的标签列表。 */
   Tags?: Tag[] | null;
+  /** 实例数字标识。 */
+  ClusterId?: number;
+  /** 实例区域ID。 */
+  RegionId?: number;
+  /** 实例主可用区。 */
+  Zone?: string;
+  /** 实例过期时间，后付费返回0000-00-00 00:00:00 */
+  ExpireTime?: string;
+  /** 实例隔离时间，未隔离返回0000-00-00 00:00:00。 */
+  IsolateTime?: string;
+  /** 实例创建时间。 */
+  CreateTime?: string;
+  /** 实例状态码，-2: "TERMINATED", 2: "RUNNING", 14: "TERMINATING", 19: "ISOLATING", 22: "ADJUSTING", 201: "ISOLATED"。 */
+  Status?: number;
+  /** 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念为0 */
+  AutoRenewFlag?: number;
+  /** 实例节点总数。 */
+  NodeNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3181,7 +3231,7 @@ declare interface DescribeServiceNodeInfosRequest {
   HealthStateId?: string;
   /** 服务组件名称，都是大写例如YARN */
   ServiceName?: string;
-  /** 节点名称mastercoretaskcommonrouter */
+  /** 节点名称master,core,task,common,router */
   NodeTypeName?: string;
   /** 过滤条件：dn是否处于维护状态0代表所有状态1代表处于维护状态 */
   DataNodeMaintenanceId?: number;
@@ -3415,7 +3465,7 @@ declare interface InquiryPriceCreateInstanceRequest {
   MetaDBInfo?: CustomMetaInfo;
   /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：2：表示EMR-V2.0.116：表示EMR-V2.3.020：表示EMR-V2.5.030：表示EMR-V2.6.038：表示EMR-V2.7.057：表示EMR-V2.8.07：表示EMR-V3.0.025：表示EMR-V3.1.031：表示EMR-V3.1.128：表示EMR-V3.2.033：表示EMR-V3.2.134：表示EMR-V3.3.037：表示EMR-V3.4.044：表示EMR-V3.5.053：表示EMR-V3.6.058：表示EMR-V3.6.147：表示EMR-V4.0.0 */
   ProductId?: number;
-  /** 场景化取值：Hadoop-KuduHadoop-ZookeeperHadoop-PrestoHadoop-Hbase */
+  /** 场景化取值：Hadoop-Kudu，Hadoop-Zookeeper，Hadoop-Presto，Hadoop-Hbase */
   SceneName?: string;
   /** 共用组件信息 */
   ExternalService?: ExternalService[];
@@ -3769,7 +3819,7 @@ declare interface RunJobFlowRequest {
 
 declare interface RunJobFlowResponse {
   /** 作业流程ID。 */
-  JobFlowId: number;
+  JobFlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4005,7 +4055,7 @@ declare interface Emr {
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建EMR实例(旧) {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** Lite HBase 创建实例 {@link CreateSLInstanceRequest} {@link CreateSLInstanceResponse} */
+  /** Serverless HBase创建实例 {@link CreateSLInstanceRequest} {@link CreateSLInstanceResponse} */
   CreateSLInstance(data: CreateSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSLInstanceResponse>;
   /** 删除自动扩缩容规则 {@link DeleteAutoScaleStrategyRequest} {@link DeleteAutoScaleStrategyResponse} */
   DeleteAutoScaleStrategy(data: DeleteAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScaleStrategyResponse>;
@@ -4055,9 +4105,9 @@ declare interface Emr {
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
   /** YARN资源调度-变更详情 {@link DescribeResourceScheduleDiffDetailRequest} {@link DescribeResourceScheduleDiffDetailResponse} */
   DescribeResourceScheduleDiffDetail(data: DescribeResourceScheduleDiffDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleDiffDetailResponse>;
-  /** Lite HBase 查询实例信息 {@link DescribeSLInstanceRequest} {@link DescribeSLInstanceResponse} */
+  /** Serverless HBase查询实例信息 {@link DescribeSLInstanceRequest} {@link DescribeSLInstanceResponse} */
   DescribeSLInstance(data: DescribeSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceResponse>;
-  /** Lite HBase 查询实例列表 {@link DescribeSLInstanceListRequest} {@link DescribeSLInstanceListResponse} */
+  /** Serverless HBase查询实例列表 {@link DescribeSLInstanceListRequest} {@link DescribeSLInstanceListResponse} */
   DescribeSLInstanceList(data: DescribeSLInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceListResponse>;
   /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
@@ -4099,7 +4149,7 @@ declare interface Emr {
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
   /** 强制修改标签 {@link ModifyResourcesTagsRequest} {@link ModifyResourcesTagsResponse} */
   ModifyResourcesTags(data: ModifyResourcesTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagsResponse>;
-  /** Lite HBase 修改实例节点数 {@link ModifySLInstanceRequest} {@link ModifySLInstanceResponse} */
+  /** Serverless HBase变配实例 {@link ModifySLInstanceRequest} {@link ModifySLInstanceResponse} */
   ModifySLInstance(data: ModifySLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceResponse>;
   /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
@@ -4123,7 +4173,7 @@ declare interface Emr {
   TerminateClusterNodes(data: TerminateClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateClusterNodesResponse>;
   /** 销毁EMR实例 {@link TerminateInstanceRequest} {@link TerminateInstanceResponse} */
   TerminateInstance(data: TerminateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstanceResponse>;
-  /** Lite HBase 销毁实例 {@link TerminateSLInstanceRequest} {@link TerminateSLInstanceResponse} */
+  /** Serverless HBase销毁实例 {@link TerminateSLInstanceRequest} {@link TerminateSLInstanceResponse} */
   TerminateSLInstance(data: TerminateSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateSLInstanceResponse>;
   /** 缩容Task节点(旧) {@link TerminateTasksRequest} {@link TerminateTasksResponse} */
   TerminateTasks(data: TerminateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTasksResponse>;

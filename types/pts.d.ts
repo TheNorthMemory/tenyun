@@ -424,6 +424,8 @@ declare interface Job {
   ScenarioName?: string | null;
   /** 付费类型 */
   PayMode?: number | null;
+  /** job VUM用量 */
+  Usage?: number | null;
 }
 
 /** 包含labelName 和labelValue */

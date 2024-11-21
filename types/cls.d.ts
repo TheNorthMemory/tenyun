@@ -250,18 +250,34 @@ declare interface CallBackInfo {
 
 /** CKafka的描述-需要投递到的kafka信息 */
 declare interface Ckafka {
-  /** Ckafka 的 Vip */
-  Vip: string;
-  /** Ckafka 的 Vport */
-  Vport: string;
   /** Ckafka 的 InstanceId */
   InstanceId: string;
-  /** Ckafka 的 InstanceName */
-  InstanceName: string;
-  /** Ckafka 的 TopicId */
-  TopicId: string;
   /** Ckafka 的 TopicName */
   TopicName: string;
+  /** Ckafka 的 Vip */
+  Vip?: string;
+  /** Ckafka 的 Vport */
+  Vport?: string;
+  /** Ckafka 的 InstanceName */
+  InstanceName?: string;
+  /** Ckafka 的 TopicId */
+  TopicId?: string;
+}
+
+/** 云产品日志投递任务信息 */
+declare interface CloudProductLogTaskInfo {
+  /** 日志服务地域 */
+  ClsRegion?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 日志集ID */
+  LogsetId?: string;
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志配置拓展信息， 一般用于存储额外的日志投递配置 */
+  Extend?: string | null;
+  /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
+  LogType?: string | null;
 }
 
 /** 采集配置信息 */
@@ -658,6 +674,10 @@ declare interface DataTransformTaskInfo {
   EtlContent?: string;
   /** 数据加工类型。0：标准加工任务；1：前置加工任务。 */
   DataTransformType?: number | null;
+  /** 保留失败日志状态。 1:不保留，2:保留 */
+  KeepFailureLog?: number | null;
+  /** 失败日志的字段名称 */
+  FailureLogKey?: string | null;
 }
 
 /** 投递配置入参 */
@@ -1160,13 +1180,13 @@ declare interface MultiTopicSearchInformation {
   Context?: string;
 }
 
-/** 通知内容模版详细配置 */
+/** 通知内容模板详细配置 */
 declare interface NoticeContent {
   /** 渠道类型Email:邮件;Sms:短信;WeChat:微信;Phone:电话;WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调; */
   Type: string;
-  /** 告警触发通知内容模版。 */
+  /** 告警触发通知内容模板。 */
   TriggerContent?: NoticeContentInfo | null;
-  /** 告警恢复通知内容模版。 */
+  /** 告警恢复通知内容模板。 */
   RecoveryContent?: NoticeContentInfo | null;
 }
 
@@ -1750,6 +1770,42 @@ declare interface CreateAlarmShieldResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudProductLogTaskRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS */
+  AssumerName: string;
+  /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
+  LogType: string;
+  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  CloudProductRegion: string;
+  /** CLS目标地域 */
+  ClsRegion: string;
+  /** 日志集名称，未填LogsetId时必填。若日志集不存在, 将自动创建 */
+  LogsetName?: string;
+  /** 日志集ID，若指定则代表选择已有日志集。选择已有日志集时，LogsetName可以不填 */
+  LogsetId?: string;
+  /** 日志主题名称，在未填TopicId时必填。 若日志主题不存在，将自动创建 */
+  TopicName?: string;
+  /** 日志主题ID，若指定则代表选择已有日志主题，选择已有日志主题时，TopicName可以不填 */
+  TopicId?: string;
+  /** 日志配置拓展信息， 一般用于存储额外的日志投递配置 */
+  Extend?: string;
+}
+
+declare interface CreateCloudProductLogTaskResponse {
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志主题名称 */
+  TopicName?: string;
+  /** 日志集ID */
+  LogsetId?: string;
+  /** 日志集名称 */
+  LogsetName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConfigExtraRequest {
   /** 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾 */
   Name: string;
@@ -2075,11 +2131,11 @@ declare interface CreateMachineGroupResponse {
 }
 
 declare interface CreateNoticeContentRequest {
-  /** 模版名称。 */
+  /** 模板名称。 */
   Name: string;
-  /** 模版内容语言。0：中文1：英文 */
+  /** 模板内容语言。0：中文1：英文 */
   Type?: number;
-  /** 模版详细配置。 */
+  /** 模板详细配置。 */
   NoticeContents?: NoticeContent[];
 }
 
@@ -2230,6 +2286,22 @@ declare interface DeleteAlarmShieldResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudProductLogTaskRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS */
+  AssumerName: string;
+  /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
+  LogType: string;
+  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  CloudProductRegion: string;
+}
+
+declare interface DeleteCloudProductLogTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConfigExtraRequest {
   /** 特殊采集规则扩展配置ID */
   ConfigExtraId: string;
@@ -2367,7 +2439,7 @@ declare interface DeleteMachineGroupResponse {
 }
 
 declare interface DeleteNoticeContentRequest {
-  /** 通知内容模版ID */
+  /** 通知内容模板ID */
   NoticeContentId: string;
 }
 
@@ -2486,6 +2558,24 @@ declare interface DescribeAlertRecordHistoryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudProductLogTasksRequest {
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为100，最大值100。 */
+  Limit?: number;
+  /** - assumerName - 按照【云产品标识】进行过滤。 - 类型：String - 必选：否 - 枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS- logType - 按照【日志类型】进行过滤。 - 类型：String - 必选：否 - 枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS- instanceId - 按照【实例ID】进行过滤。 - 类型：String - 必选：否 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeCloudProductLogTasksResponse {
+  /** 日志配置详情列表 */
+  Tasks?: CloudProductLogTaskInfo[];
+  /** 日志配置总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConfigExtrasRequest {
   /** 过滤器，支持如下选项：name- 按照【特殊采集配置名称】进行模糊匹配过滤。- 类型：StringconfigExtraId- 按照【特殊采集配置ID】进行过滤。- 类型：StringtopicId- 按照【日志主题】进行过滤。- 类型：StringmachineGroupId- 按照【机器组ID】进行过滤。- 类型：String每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
@@ -2551,15 +2641,15 @@ declare interface DescribeConsumerRequest {
 
 declare interface DescribeConsumerResponse {
   /** 投递任务是否生效 */
-  Effective: boolean;
+  Effective?: boolean;
   /** 是否投递日志的元数据信息 */
-  NeedContent: boolean;
+  NeedContent?: boolean;
   /** 如果需要投递元数据信息，元数据信息的描述 */
-  Content: ConsumerContent | null;
+  Content?: ConsumerContent | null;
   /** CKafka的描述 */
-  Ckafka: Ckafka;
+  Ckafka?: Ckafka;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
-  Compression: number | null;
+  Compression?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2849,7 +2939,7 @@ declare interface DescribeMachinesResponse {
 }
 
 declare interface DescribeNoticeContentsRequest {
-  /** name按照【通知内容模版名称】进行过滤。类型：String必选：否 noticeContentId按照【通知内容模版ID】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** name按照【通知内容模板名称】进行过滤。类型：String必选：否 noticeContentId按照【通知内容模板ID】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -2858,9 +2948,9 @@ declare interface DescribeNoticeContentsRequest {
 }
 
 declare interface DescribeNoticeContentsResponse {
-  /** 通知内容模版列表。 */
+  /** 通知内容模板列表。 */
   NoticeContents?: NoticeContentTemplate[] | null;
-  /** 符合条件的通知内容模版总数。 */
+  /** 符合条件的通知内容模板总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2917,7 +3007,7 @@ declare interface DescribeShipperTasksResponse {
 }
 
 declare interface DescribeShippersRequest {
-  /** - shipperName：按照【投递规则名称】进行过滤。类型：String。必选：否- shipperId：按照【投递规则ID】进行过滤。类型：String。必选：否- topicId：按照【日志主题】进行过滤。类型：String。必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** - shipperName：按照【投递规则名称】进行过滤。 类型：String。 必选：否- shipperId：按照【投递规则ID】进行过滤。 类型：String。 必选：否- topicId：按照【日志主题】进行过滤。 类型：String。 必选：否- taskStatus按照【任务运行状态】进行过滤。 支持`0`：停止，`1`：运行中，`2`：异常类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -3013,16 +3103,26 @@ declare interface MergePartitionResponse {
 declare interface ModifyAlarmNoticeRequest {
   /** 通知渠道组ID。 */
   AlarmNoticeId: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持10个标签键值对，并且不能有重复的键值对。 */
+  Tags?: Tag[];
   /** 通知渠道组名称。 */
   Name?: string;
   /** 通知类型。可选值： Trigger - 告警触发 Recovery - 告警恢复 All - 告警触发和告警恢复 */
   Type?: string;
   /** 通知接收对象。 */
   NoticeReceivers?: NoticeReceiver[];
-  /** 接口回调信息（包括企业微信）。 */
+  /** 接口回调信息（包括企业微信等）。 */
   WebCallbacks?: WebCallback[];
   /** 通知规则。注意: - Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。- 传其中一组数据，则另一组数据置空。 */
   NoticeRules?: NoticeRule[];
+  /** 调用链接域名。http:// 或者 https:// 开头，不能/结尾 */
+  JumpDomain?: string;
+  /** 投递日志开关。参数值：1：关闭；2：开启 */
+  DeliverStatus?: number;
+  /** 投递日志配置。 */
+  DeliverConfig?: DeliverConfig;
+  /** 免登录操作告警开关。参数值： 1：关闭 2：开启（默认开启） */
+  AlarmShieldStatus?: number;
 }
 
 declare interface ModifyAlarmNoticeResponse {
@@ -3098,6 +3198,24 @@ declare interface ModifyAlarmShieldRequest {
 }
 
 declare interface ModifyAlarmShieldResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudProductLogTaskRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS */
+  AssumerName: string;
+  /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
+  LogType: string;
+  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  CloudProductRegion: string;
+  /** 日志配置拓展信息， 一般用于存储额外的日志投递配置 */
+  Extend?: string;
+}
+
+declare interface ModifyCloudProductLogTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3381,13 +3499,13 @@ declare interface ModifyMachineGroupResponse {
 }
 
 declare interface ModifyNoticeContentRequest {
-  /** 通知内容模版ID。 */
+  /** 通知内容模板ID。 */
   NoticeContentId: string;
-  /** 通知内容模版名称。 */
+  /** 通知内容模板名称。 */
   Name?: string;
   /** 通知内容语言。0：中文 1：英文 */
   Type?: number;
-  /** 通知内容模版详细信息。 */
+  /** 通知内容模板详细信息。 */
   NoticeContents?: NoticeContent[];
 }
 
@@ -3745,6 +3863,8 @@ declare interface Cls {
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
   /** 创建告警屏蔽规则 {@link CreateAlarmShieldRequest} {@link CreateAlarmShieldResponse} */
   CreateAlarmShield(data: CreateAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmShieldResponse>;
+  /** 创建云产品日志投递任务 {@link CreateCloudProductLogTaskRequest} {@link CreateCloudProductLogTaskResponse} */
+  CreateCloudProductLogTask(data: CreateCloudProductLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudProductLogTaskResponse>;
   /** 创建采集规则配置 {@link CreateConfigRequest} {@link CreateConfigResponse} */
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
   /** 创建特殊采集配置任务 {@link CreateConfigExtraRequest} {@link CreateConfigExtraResponse} */
@@ -3771,7 +3891,7 @@ declare interface Cls {
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
   /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
-  /** 创建通知内容模版 {@link CreateNoticeContentRequest} {@link CreateNoticeContentResponse} */
+  /** 创建通知内容模板 {@link CreateNoticeContentRequest} {@link CreateNoticeContentResponse} */
   CreateNoticeContent(data: CreateNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
@@ -3785,6 +3905,8 @@ declare interface Cls {
   DeleteAlarmNotice(data: DeleteAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmNoticeResponse>;
   /** 删除告警屏蔽规则 {@link DeleteAlarmShieldRequest} {@link DeleteAlarmShieldResponse} */
   DeleteAlarmShield(data: DeleteAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmShieldResponse>;
+  /** 删除云产品日志投递任务 {@link DeleteCloudProductLogTaskRequest} {@link DeleteCloudProductLogTaskResponse} */
+  DeleteCloudProductLogTask(data: DeleteCloudProductLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudProductLogTaskResponse>;
   /** 删除采集规则配置 {@link DeleteConfigRequest} {@link DeleteConfigResponse} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
   /** 删除特殊采集规则配置 {@link DeleteConfigExtraRequest} {@link DeleteConfigExtraResponse} */
@@ -3811,7 +3933,7 @@ declare interface Cls {
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
   /** 删除机器组信息 {@link DeleteMachineGroupInfoRequest} {@link DeleteMachineGroupInfoResponse} */
   DeleteMachineGroupInfo(data: DeleteMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupInfoResponse>;
-  /** 删除通知内容模版 {@link DeleteNoticeContentRequest} {@link DeleteNoticeContentResponse} */
+  /** 删除通知内容模板 {@link DeleteNoticeContentRequest} {@link DeleteNoticeContentResponse} */
   DeleteNoticeContent(data: DeleteNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
@@ -3827,6 +3949,8 @@ declare interface Cls {
   DescribeAlarms(data?: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
   /** 获取告警历史 {@link DescribeAlertRecordHistoryRequest} {@link DescribeAlertRecordHistoryResponse} */
   DescribeAlertRecordHistory(data: DescribeAlertRecordHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRecordHistoryResponse>;
+  /** 查看云产品日志投递任务列表 {@link DescribeCloudProductLogTasksRequest} {@link DescribeCloudProductLogTasksResponse} */
+  DescribeCloudProductLogTasks(data?: DescribeCloudProductLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudProductLogTasksResponse>;
   /** 获取特殊采集配置 {@link DescribeConfigExtrasRequest} {@link DescribeConfigExtrasResponse} */
   DescribeConfigExtras(data?: DescribeConfigExtrasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigExtrasResponse>;
   /** 获取采集规则配置所绑定的机器组 {@link DescribeConfigMachineGroupsRequest} {@link DescribeConfigMachineGroupsResponse} */
@@ -3865,7 +3989,7 @@ declare interface Cls {
   DescribeMachineGroups(data?: DescribeMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupsResponse>;
   /** 获取机器状态 {@link DescribeMachinesRequest} {@link DescribeMachinesResponse} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
-  /** 获取通知内容模版 {@link DescribeNoticeContentsRequest} {@link DescribeNoticeContentsResponse} */
+  /** 获取通知内容模板 {@link DescribeNoticeContentsRequest} {@link DescribeNoticeContentsResponse} */
   DescribeNoticeContents(data?: DescribeNoticeContentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentsResponse>;
   /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
@@ -3887,6 +4011,8 @@ declare interface Cls {
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
   /** 修改告警屏蔽规则 {@link ModifyAlarmShieldRequest} {@link ModifyAlarmShieldResponse} */
   ModifyAlarmShield(data: ModifyAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmShieldResponse>;
+  /** 修改云产品日志投递任务 {@link ModifyCloudProductLogTaskRequest} {@link ModifyCloudProductLogTaskResponse} */
+  ModifyCloudProductLogTask(data: ModifyCloudProductLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudProductLogTaskResponse>;
   /** 修改采集规则配置 {@link ModifyConfigRequest} {@link ModifyConfigResponse} */
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
   /** 修改特殊采集配置任务 {@link ModifyConfigExtraRequest} {@link ModifyConfigExtraResponse} */
@@ -3911,7 +4037,7 @@ declare interface Cls {
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
   /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */
   ModifyMachineGroup(data: ModifyMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineGroupResponse>;
-  /** 修改通知内容模版 {@link ModifyNoticeContentRequest} {@link ModifyNoticeContentResponse} */
+  /** 修改通知内容模板 {@link ModifyNoticeContentRequest} {@link ModifyNoticeContentResponse} */
   ModifyNoticeContent(data: ModifyNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;

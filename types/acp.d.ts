@@ -157,9 +157,9 @@ declare interface CreateAppScanTaskRequest {
 
 declare interface CreateAppScanTaskResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 任务ID */
-  TaskID: string | null;
+  TaskID?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

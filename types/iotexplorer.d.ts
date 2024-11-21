@@ -164,7 +164,7 @@ declare interface CloudStorageUserInfo {
 
 /** 设备激活结果数据 */
 declare interface DeviceActiveResult {
-  /** 模版ID */
+  /** 模板ID */
   ModelId?: string | null;
   /** SN信息 */
   Sn?: string | null;
@@ -648,7 +648,7 @@ declare interface ProductEntry {
   ProductName?: string;
   /** 产品分组模板ID */
   CategoryId?: number;
-  /** 加密类型。1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式 */
+  /** 加密类型。1表示证书认证，2表示密钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式 */
   EncryptionType?: string;
   /** 连接类型。如：wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh */
   NetType?: string;
@@ -882,7 +882,7 @@ declare interface WXIoTDeviceInfo {
   SN?: string | null;
   /** 票据 */
   SNTicket?: string | null;
-  /** 模版ID */
+  /** 模板ID */
   ModelId?: string | null;
 }
 
@@ -895,7 +895,7 @@ declare interface WifiInfo {
 }
 
 declare interface ActivateTWeCallLicenseRequest {
-  /** TWecall类型： 0-测试激活码； 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
+  /** TWecall类型：1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
   PkgType: number;
   /** appId */
   MiniProgramAppId?: string;
@@ -1533,17 +1533,21 @@ declare interface DescribeBatchProductionRequest {
 
 declare interface DescribeBatchProductionResponse {
   /** 量产数量。 */
-  BatchCnt: number;
+  BatchCnt?: number;
   /** 烧录方式。 */
-  BurnMethod: number;
+  BurnMethod?: number;
   /** 创建时间。 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 下载URL。 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 生成方式。 */
-  GenerationMethod: number;
+  GenerationMethod?: number;
   /** 上传URL。 */
-  UploadUrl: string;
+  UploadUrl?: string;
+  /** 成功数 */
+  SuccessCount?: number | null;
+  /** 量产最后失败原因 */
+  LastFailedReason?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

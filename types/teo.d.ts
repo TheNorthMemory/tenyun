@@ -50,10 +50,12 @@ declare interface AccelerationDomain {
 declare interface AccelerationDomainCertificate {
   /** 配置证书的模式，取值有： disable：不配置证书； eofreecert：配置 EdgeOne 免费证书； sslcert：配置 SSL 证书。 */
   Mode?: string;
-  /** 服务端证书列表。 */
+  /** 服务端证书列表，相关证书部署在 EO 的入口侧。 */
   List?: CertificateInfo[] | null;
-  /** 边缘双向认证配置。 */
+  /** 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于 EO 节点认证客户端证书。 */
   ClientCertInfo?: MutualTLS;
+  /** 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。 */
+  UpstreamCertInfo?: UpstreamCertInfo;
 }
 
 /** 精准防护条件 */
@@ -1540,9 +1542,9 @@ declare interface OriginRecord {
 
 /** 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。 */
 declare interface OwnershipVerification {
-  /** CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。 */
+  /** CNAME 、无域名接入时，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。 */
   DnsVerification?: DnsVerification | null;
-  /** CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。 */
+  /** CNAME 、无域名接入时，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。 */
   FileVerification?: FileVerification | null;
   /** NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。 */
   NsVerification?: NsVerification | null;
@@ -2232,6 +2234,12 @@ declare interface TopEntryValue {
   Name: string;
   /** 排序实体数量。 */
   Count: number;
+}
+
+/** 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。 */
+declare interface UpstreamCertInfo {
+  /** 在回源双向认证场景下，该字段为 EO 节点回源时携带的证书（包含公钥、私钥即可），部署在 EO 节点，用于源站对 EO 节点进行认证。在作为入参使用时，不填写表示保持原有配置。 */
+  UpstreamMutualTLS?: MutualTLS;
 }
 
 /** Http2回源配置 */
@@ -3575,7 +3583,7 @@ declare interface DescribeL4ProxyRulesRequest {
   Offset: number;
   /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit: number;
-  /** 过滤条件，Filters.Values的上限为20。不填写时返回当前四层实例下所有的规则信息，详细的过滤条件如下： rule-tag：按照规则标签对四层代理实例下的规则进行过滤。 */
+  /** 过滤条件，Filters.Values的上限为20。不填写时返回当前四层实例下所有的规则信息，详细的过滤条件如下： rule-id：按照规则 ID 对四层代理实例下的规则进行过滤。规则 ID 形如：rule-31vv7qig0vjy； rule-tag：按照规则标签对四层代理实例下的规则进行过滤。 */
   Filters?: Filter[];
 }
 
@@ -4339,7 +4347,7 @@ declare interface ModifyHostsCertificateRequest {
   ServerCertInfo?: ServerCertInfo[];
   /** 托管类型，取值有：none：不托管EO；apply：托管EO不填，默认取值为none。 */
   ApplyType?: string;
-  /** 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 的入口侧，用于客户端对 EO 节点进行认证。不填写表示保持原有配置。 */
+  /** 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。 */
   ClientCertInfo?: MutualTLS;
 }
 

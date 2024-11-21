@@ -445,6 +445,8 @@ declare interface UpdateProbeTaskConfigurationListRequest {
   ResourceIDs?: string[];
   /** 拨测节点的IP类型，0-不限，1-IPv4，2-IPv6 */
   NodeIpType?: number;
+  /** 批量任务名-地址 */
+  BatchTasks?: ProbeTaskBasicConfiguration[];
 }
 
 declare interface UpdateProbeTaskConfigurationListResponse {

@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 算法的名称 和 标识 */
 declare interface AlgorithmInfo {
   /** 算法的标识 */
-  KeyUsage: string;
+  KeyUsage?: string;
   /** 算法的名称 */
-  Algorithm: string;
+  Algorithm?: string;
 }
 
 /** 设备指纹 */
@@ -15,49 +15,53 @@ declare interface DeviceFingerprint {
   /** 指纹信息，由设备指纹采集工具采集获得，格式满足正则表达式：^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$ */
   Identity: string;
   /** 描述信息，如：IP，设备名称等，最大1024字节 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 返回CMK列表信息 */
 declare interface Key {
   /** CMK的全局唯一标识。 */
-  KeyId: string;
+  KeyId?: string;
 }
 
 /** CMK属性信息 */
 declare interface KeyMetadata {
   /** CMK的全局唯一标识 */
-  KeyId: string;
+  KeyId?: string;
   /** 作为密钥更容易辨识，更容易被人看懂的别名 */
-  Alias: string;
+  Alias?: string;
   /** 密钥创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** CMK的描述 */
-  Description: string;
+  Description?: string;
   /** CMK的状态， 取值为：Enabled | Disabled | PendingDelete | PendingImport | Archived */
-  KeyState: string;
+  KeyState?: string;
   /** CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2 | ASYMMETRIC_SIGN_VERIFY_RSA_2048 | ASYMMETRIC_SIGN_VERIFY_ECC */
-  KeyUsage: string;
+  KeyUsage?: string;
   /** CMK类型，2 表示符合FIPS标准，4表示符合国密标准 */
-  Type: number;
+  Type?: number;
   /** 创建者 */
-  CreatorUin: number;
+  CreatorUin?: number;
   /** 是否开启了密钥轮换功能 */
-  KeyRotationEnabled: boolean;
+  KeyRotationEnabled?: boolean;
   /** CMK的创建者，用户创建的为 user，授权各云产品自动创建的为对应的产品名 */
-  Owner: string;
+  Owner?: string;
   /** 在密钥轮换开启状态下，下次轮换的时间 */
-  NextRotateTime: number;
+  NextRotateTime?: number;
   /** 计划删除的时间 */
-  DeletionDate: number | null;
+  DeletionDate?: number;
   /** CMK 密钥材料类型，由KMS创建的为： TENCENT_KMS， 由用户导入的类型为：EXTERNAL */
-  Origin: string | null;
+  Origin?: string;
   /** 在Origin为 EXTERNAL 时有效，表示密钥材料的有效日期， 0 表示不过期 */
-  ValidTo: number | null;
+  ValidTo?: number;
   /** 资源ID，格式：creatorUin/$creatorUin/$keyId */
-  ResourceId: string;
+  ResourceId?: string;
   /** HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效） */
-  HsmClusterId: string | null;
+  HsmClusterId?: string;
+  /** 密钥轮转周期（天） */
+  RotateDays?: number;
+  /** 上次乱转时间（Unix timestamp） */
+  LastRotateTime?: number;
 }
 
 /** 标签键和标签值 */
@@ -79,29 +83,29 @@ declare interface TagFilter {
 /** 白盒密钥信息 */
 declare interface WhiteboxKeyInfo {
   /** 白盒密钥的全局唯一标识符 */
-  KeyId: string;
+  KeyId?: string;
   /** 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字. 不可重复 */
-  Alias: string;
+  Alias?: string;
   /** 创建者 */
-  CreatorUin: number;
+  CreatorUin?: number;
   /** 密钥的描述信息 */
-  Description: string;
+  Description?: string;
   /** 密钥创建时间，Unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 白盒密钥的状态， 取值为：Enabled | Disabled */
-  Status: string;
+  Status?: string;
   /** 创建者 */
-  OwnerUin: number;
+  OwnerUin?: number;
   /** 密钥所用的算法类型 */
-  Algorithm: string;
+  Algorithm?: string;
   /** 白盒加密密钥，base64编码 */
-  EncryptKey: string;
+  EncryptKey?: string;
   /** 白盒解密密钥，base64编码 */
-  DecryptKey: string;
+  DecryptKey?: string;
   /** 资源ID，格式：creatorUin/$creatorUin/$keyId */
-  ResourceId: string;
+  ResourceId?: string;
   /** 是否有设备指纹与当前密钥绑定 */
-  DeviceFingerprintBind: boolean | null;
+  DeviceFingerprintBind?: boolean;
 }
 
 declare interface ArchiveKeyRequest {
@@ -125,9 +129,9 @@ declare interface AsymmetricRsaDecryptRequest {
 
 declare interface AsymmetricRsaDecryptResponse {
   /** CMK的唯一标识 */
-  KeyId: string;
+  KeyId?: string;
   /** 解密后的明文，base64编码 */
-  Plaintext: string;
+  Plaintext?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -179,7 +183,7 @@ declare interface CancelKeyDeletionRequest {
 
 declare interface CancelKeyDeletionResponse {
   /** 唯一标志被取消删除的CMK。 */
-  KeyId: string;
+  KeyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -201,23 +205,23 @@ declare interface CreateKeyRequest {
 
 declare interface CreateKeyResponse {
   /** CMK的全局唯一标识符 */
-  KeyId: string;
+  KeyId?: string;
   /** 作为密钥更容易辨识，更容易被人看懂的别名 */
-  Alias: string;
+  Alias?: string;
   /** 密钥创建时间，unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** CMK的描述 */
-  Description: string | null;
+  Description?: string;
   /** CMK的状态 */
-  KeyState: string;
+  KeyState?: string;
   /** CMK的用途 */
-  KeyUsage: string;
+  KeyUsage?: string;
   /** 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误 */
-  TagCode: number | null;
+  TagCode?: number;
   /** 标签操作的返回信息 */
-  TagMsg: string | null;
+  TagMsg?: string;
   /** HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效） */
-  HsmClusterId: string | null;
+  HsmClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -235,15 +239,15 @@ declare interface CreateWhiteBoxKeyRequest {
 
 declare interface CreateWhiteBoxKeyResponse {
   /** 用于加密的密钥，base64编码 */
-  EncryptKey: string;
+  EncryptKey?: string;
   /** 用于解密的密钥，base64编码 */
-  DecryptKey: string;
+  DecryptKey?: string;
   /** 白盒密钥的全局唯一标识符 */
-  KeyId: string;
+  KeyId?: string;
   /** 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误 */
-  TagCode: number | null;
+  TagCode?: number;
   /** 标签操作的返回信息 */
-  TagMsg: string | null;
+  TagMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -261,9 +265,9 @@ declare interface DecryptRequest {
 
 declare interface DecryptResponse {
   /** CMK的全局唯一标识 */
-  KeyId: string;
+  KeyId?: string;
   /** 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。 */
-  Plaintext: string;
+  Plaintext?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -295,7 +299,7 @@ declare interface DescribeKeyRequest {
 
 declare interface DescribeKeyResponse {
   /** 密钥属性信息 */
-  KeyMetadata: KeyMetadata | null;
+  KeyMetadata?: KeyMetadata;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -307,7 +311,7 @@ declare interface DescribeKeysRequest {
 
 declare interface DescribeKeysResponse {
   /** 返回的属性信息列表 */
-  KeyMetadatas: KeyMetadata[] | null;
+  KeyMetadatas?: KeyMetadata[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -319,7 +323,7 @@ declare interface DescribeWhiteBoxDecryptKeyRequest {
 
 declare interface DescribeWhiteBoxDecryptKeyResponse {
   /** 白盒解密密钥，base64编码 */
-  DecryptKey: string;
+  DecryptKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -331,7 +335,7 @@ declare interface DescribeWhiteBoxDeviceFingerprintsRequest {
 
 declare interface DescribeWhiteBoxDeviceFingerprintsResponse {
   /** 设备指纹列表 */
-  DeviceFingerprints: DeviceFingerprint[];
+  DeviceFingerprints?: DeviceFingerprint[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -349,9 +353,9 @@ declare interface DescribeWhiteBoxKeyDetailsRequest {
 
 declare interface DescribeWhiteBoxKeyDetailsResponse {
   /** 白盒密钥信息列表。 */
-  KeyInfos: WhiteboxKeyInfo[];
+  KeyInfos?: WhiteboxKeyInfo[];
   /** 白盒密钥总数。 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -363,7 +367,7 @@ declare interface DescribeWhiteBoxKeyRequest {
 
 declare interface DescribeWhiteBoxKeyResponse {
   /** 白盒密钥信息 */
-  KeyInfo: WhiteboxKeyInfo;
+  KeyInfo?: WhiteboxKeyInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -373,7 +377,7 @@ declare interface DescribeWhiteBoxServiceStatusRequest {
 
 declare interface DescribeWhiteBoxServiceStatusResponse {
   /** 用户的白盒密钥服务是否可用 */
-  ServiceEnabled: boolean;
+  ServiceEnabled?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -491,9 +495,9 @@ declare interface EncryptByWhiteBoxRequest {
 
 declare interface EncryptByWhiteBoxResponse {
   /** 初始化向量，加密算法会使用到, base64编码。如果由调用方在入参中传入，则原样返回。如果调用方没有传入，则后端服务随机生成，并返回 */
-  InitializationVector: string;
+  InitializationVector?: string;
   /** 加密后的密文，base64编码 */
-  CipherText: string;
+  CipherText?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -509,9 +513,9 @@ declare interface EncryptRequest {
 
 declare interface EncryptResponse {
   /** 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为Decrypt接口的输入参数，才可以解密出原文。 */
-  CiphertextBlob: string;
+  CiphertextBlob?: string;
   /** 加密使用的CMK的全局唯一标识 */
-  KeyId: string;
+  KeyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -533,11 +537,11 @@ declare interface GenerateDataKeyRequest {
 
 declare interface GenerateDataKeyResponse {
   /** CMK的全局唯一标识 */
-  KeyId: string;
+  KeyId?: string;
   /** 若调用时未提供 EncryptionPublicKey，该字段值为生成的数据密钥 DataKey 的 Base64 编码的明文，需进行 Base64 解码以获取 DataKey 明文。若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取 DataKey 明文。 */
-  Plaintext: string;
+  Plaintext?: string;
   /** 数据密钥DataKey加密后的密文，用户需要自行保存该密文，KMS不托管用户的数据密钥。可以通过Decrypt接口从CiphertextBlob中获取数据密钥DataKey明文 */
-  CiphertextBlob: string;
+  CiphertextBlob?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -561,7 +565,7 @@ declare interface GetKeyRotationStatusRequest {
 
 declare interface GetKeyRotationStatusResponse {
   /** 密钥轮换是否开启 */
-  KeyRotationEnabled: boolean;
+  KeyRotationEnabled?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -609,7 +613,7 @@ declare interface GetRegionsRequest {
 
 declare interface GetRegionsResponse {
   /** 可用region列表 */
-  Regions: string[] | null;
+  Regions?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -621,21 +625,21 @@ declare interface GetServiceStatusResponse {
   /** KMS服务是否开通， true 表示已开通 */
   ServiceEnabled?: boolean;
   /** 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放 */
-  InvalidType?: number | null;
+  InvalidType?: number;
   /** 0-普通版，1-旗舰版 */
   UserLevel?: number;
   /** 旗舰版到期时间（Epoch Unix Timestamp）。 */
-  ProExpireTime?: number | null;
+  ProExpireTime?: number;
   /** 旗舰版是否自动续费：0-不自动续费，1-自动续费 */
-  ProRenewFlag?: number | null;
+  ProRenewFlag?: number;
   /** 旗舰版购买记录的唯一性标识。如果为开通旗舰版，则返回值为空 */
-  ProResourceId?: string | null;
+  ProResourceId?: string;
   /** 是否开通 KMS 托管版 */
-  ExclusiveVSMEnabled?: boolean | null;
+  ExclusiveVSMEnabled?: boolean;
   /** 是否开通 KMS 独享版 */
-  ExclusiveHSMEnabled?: boolean | null;
+  ExclusiveHSMEnabled?: boolean;
   /** KMS 订阅信息。 */
-  SubscriptionInfo?: string | null;
+  SubscriptionInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -661,11 +665,11 @@ declare interface ListAlgorithmsRequest {
 
 declare interface ListAlgorithmsResponse {
   /** 本地区支持的对称加密算法 */
-  SymmetricAlgorithms: AlgorithmInfo[];
+  SymmetricAlgorithms?: AlgorithmInfo[];
   /** 本地区支持的非对称加密算法 */
-  AsymmetricAlgorithms: AlgorithmInfo[];
+  AsymmetricAlgorithms?: AlgorithmInfo[];
   /** 本地区支持的非对称签名验签算法 */
-  AsymmetricSignVerifyAlgorithms: AlgorithmInfo[];
+  AsymmetricSignVerifyAlgorithms?: AlgorithmInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -695,9 +699,9 @@ declare interface ListKeyDetailRequest {
 
 declare interface ListKeyDetailResponse {
   /** CMK的总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的属性信息列表。 */
-  KeyMetadatas: KeyMetadata[] | null;
+  KeyMetadatas?: KeyMetadata[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -715,9 +719,9 @@ declare interface ListKeysRequest {
 
 declare interface ListKeysResponse {
   /** CMK列表数组 */
-  Keys: Key[] | null;
+  Keys?: Key[];
   /** CMK的总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -811,13 +815,13 @@ declare interface ReEncryptRequest {
 
 declare interface ReEncryptResponse {
   /** 重新加密后的密文 */
-  CiphertextBlob: string;
+  CiphertextBlob?: string;
   /** 重新加密使用的CMK */
-  KeyId: string;
+  KeyId?: string;
   /** 重新加密前密文使用的CMK */
-  SourceKeyId: string;
+  SourceKeyId?: string;
   /** true表示密文已经重新加密。同一个CMK进行重加密，在密钥没有发生轮换的情况下不会进行实际重新加密操作，返回原密文 */
-  ReEncrypted: boolean;
+  ReEncrypted?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -831,9 +835,9 @@ declare interface ScheduleKeyDeletionRequest {
 
 declare interface ScheduleKeyDeletionResponse {
   /** 计划删除执行时间 */
-  DeletionDate: number;
+  DeletionDate?: number;
   /** 唯一标志被计划删除的CMK */
-  KeyId: string;
+  KeyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -851,7 +855,7 @@ declare interface SignByAsymmetricKeyRequest {
 
 declare interface SignByAsymmetricKeyResponse {
   /** 签名，Base64编码 */
-  Signature: string;
+  Signature?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -909,7 +913,7 @@ declare interface VerifyByAsymmetricKeyRequest {
 
 declare interface VerifyByAsymmetricKeyResponse {
   /** 签名是否有效。true：签名有效，false：签名无效。 */
-  SignatureValid: boolean;
+  SignatureValid?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

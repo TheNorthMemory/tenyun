@@ -1880,7 +1880,7 @@ declare interface CoverConfigureInfoForUpdate {
 declare interface CreateInput {
   /** 输入名称，可填大小写、数字和下划线，长度为[1, 32]。 */
   InputName: string;
-  /** 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL]。 */
+  /** 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。 */
   Protocol: string;
   /** 输入描述，长度为[0, 255]。 */
   Description?: string;
@@ -1904,12 +1904,26 @@ declare interface CreateInput {
   SecurityGroupIds?: string[];
   /** 可用区，非必填，如果开启容灾必须输入两个不同的可用区，否则最多只允许输入一个可用区。 */
   Zones?: string[];
+  /** 输入的RIST配置信息。 */
+  RISTSettings?: CreateInputRISTSettings;
+  /** 输入节点的地区 */
+  InputRegion?: string;
 }
 
 /** 创建的输入HLS拉流的配置信息。 */
 declare interface CreateInputHLSPullSettings {
   /** HLS源站的源站地址，有且只能有一个。 */
   SourceAddresses: HLSPullSourceAddress[];
+}
+
+/** 创建的输入RIST的配置信息。 */
+declare interface CreateInputRISTSettings {
+  /** RIST模式，可选[LISTENER]，默认为LISTENER。 */
+  Mode?: string;
+  /** RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。 */
+  Profile?: string;
+  /** RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120 */
+  Buffer?: number;
 }
 
 /** 创建的输入RTMP拉流的配置信息。 */
@@ -1960,7 +1974,7 @@ declare interface CreateOutputInfo {
   OutputName: string;
   /** 输出描述。 */
   Description: string;
-  /** 输出协议，可选[SRT|RTP|RTMP|RTMP_PULL]。 */
+  /** 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。 */
   Protocol: string;
   /** 输出地区。 */
   OutputRegion: string;
@@ -1978,6 +1992,10 @@ declare interface CreateOutputInfo {
   SecurityGroupIds?: string[];
   /** 可用区，output最多只支持输入一个可用区。 */
   Zones?: string[];
+  /** 输出类型：Internet/TencentCSS/StreamLive */
+  OutputType?: string;
+  /** 输出的RIST的配置。 */
+  RISTSettings?: CreateOutputRistSettings;
 }
 
 /** 创建媒体传输流的输出的RTP配置。 */
@@ -2004,6 +2022,16 @@ declare interface CreateOutputRTPSettingsDestinations {
   Ip: string;
   /** 转推的目标端口。 */
   Port: number;
+}
+
+/** 创建媒体传输流的输出的RIST配置。 */
+declare interface CreateOutputRistSettings {
+  /** RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。 */
+  Mode?: string;
+  /** RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。 */
+  Profile?: string;
+  /** RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120 */
+  Buffer?: number;
 }
 
 /** 创建媒体传输流的输出的RTMP的目标地址。 */
@@ -2130,12 +2158,24 @@ declare interface DescribeInput {
   SecurityGroupIds?: string[] | null;
   /** 可用区配置，开启容灾情况下最多有两个，顺序和pipeline 0、1对应，否则最多只有一个可用区。 */
   Zones?: string[];
+  /** 输入的RIST配置信息。 */
+  RISTSettings?: DescribeInputRISTSettings | null;
 }
 
 /** 查询输入的HLS配置信息。 */
 declare interface DescribeInputHLSPullSettings {
   /** HLS源站地址信息。 */
   SourceAddresses: DescribeHLSPullSourceAddress[];
+}
+
+/** 查询输入的RIST配置信息。 */
+declare interface DescribeInputRISTSettings {
+  /** RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。 */
+  Mode?: string;
+  /** RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。 */
+  Profile?: string;
+  /** RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120 */
+  Buffer?: number;
 }
 
 /** 查询输入的RTMP配置信息。 */
@@ -2224,6 +2264,8 @@ declare interface DescribeOutput {
   SecurityGroupIds?: string[] | null;
   /** 可用区，output目前最多只支持一个。 */
   Zones?: string[];
+  /** 输出的RIST配置信息。 */
+  RISTSettings?: DescribeOutputRISTSettings | null;
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -2236,6 +2278,18 @@ declare interface DescribeOutputHLSPullServerUrl {
 declare interface DescribeOutputHLSPullSettings {
   /** HLS拉流地址列表。 */
   ServerUrls: DescribeOutputHLSPullServerUrl[] | null;
+}
+
+/** 查询输出的RIST拉流配置信息。 */
+declare interface DescribeOutputRISTSettings {
+  /** RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。 */
+  Mode?: string;
+  /** RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。 */
+  Profile?: string;
+  /** RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120 */
+  Buffer?: number;
+  /** 服务器监听地址，RIST模式为LISTENER时使用。 */
+  SourceAddresses?: OutputRISTSourceAddressResp[] | null;
 }
 
 /** 查询输出的RTMP拉流URL信息。 */
@@ -2362,7 +2416,7 @@ declare interface EditMediaFileInfo {
 declare interface EditMediaOutputConfig {
   /** 封装格式，可选值：mp4、hls、mov、flv、avi。默认是 mp4。 */
   Container?: string | null;
-  /** 剪辑模式，可选值 normal、fast。默认是精确剪辑 normal */
+  /** 剪辑模式，可选值：normal（默认）：精准编辑fast：快速编辑，处理速度更快但精准度一定程度降低注意：fast只支持单文件，normal默认输出转码格式是h264 */
   Type?: string | null;
 }
 
@@ -3708,7 +3762,7 @@ declare interface ModifyInput {
   SRTSettings: CreateInputSRTSettings;
   /** RTP的配置信息。 */
   RTPSettings: CreateInputRTPSettings;
-  /** 输入的协议，可选[SRT|RTP|RTMP]。当输出包含RTP时，输入只能是RTP。当输出包含RTMP时，输入可以是SRT/RTMP。当输出包含SRT时，输入只能是SRT。 */
+  /** 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。当输出包含RTP时，输入只能是RTP。当输出包含RTMP时，输入可以是SRT/RTMP。当输出包含SRT时，输入只能是SRT。 */
   Protocol?: string;
   /** 输入的主备开关，可选[OPEN|CLOSE]。 */
   FailOver?: string;
@@ -3724,6 +3778,10 @@ declare interface ModifyInput {
   SecurityGroupIds?: string[];
   /** 可用区，非必填，最多支持输入两个可用区，对于需改接口，只要第二个可用区会参与到资源分配。如果input开启容灾或者涉及RTSP_PULL协议切换时有效(会重新分配地址)。 */
   Zones?: string[];
+  /** RIST的配置信息。 */
+  RISTSettings?: CreateInputRISTSettings;
+  /** 输入节点的地区 */
+  InputRegion?: string;
 }
 
 /** 修改Output配置。 */
@@ -3734,7 +3792,7 @@ declare interface ModifyOutputInfo {
   OutputName: string;
   /** 输出的描述。 */
   Description: string;
-  /** 输出的转推协议，支持SRT|RTP|RTMP。 */
+  /** 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。 */
   Protocol: string;
   /** 转推SRT的配置。 */
   SRTSettings?: CreateOutputSRTSettings;
@@ -3750,6 +3808,8 @@ declare interface ModifyOutputInfo {
   SecurityGroupIds?: string[];
   /** 可用区 */
   Zones?: string[];
+  /** 转推RIST的配置。 */
+  RISTSettings?: CreateOutputRistSettings;
 }
 
 /** 媒体处理任务中的马赛克参数类型 */
@@ -3814,6 +3874,14 @@ declare interface OcrWordsConfigureInfoForUpdate {
 declare interface OutputAddress {
   /** 出口IP。 */
   Ip: string;
+}
+
+/** RIST输出的监听地址。 */
+declare interface OutputRISTSourceAddressResp {
+  /** 监听IP。 */
+  Ip?: string | null;
+  /** 监听端口。 */
+  Port?: number | null;
 }
 
 /** SRT输出的监听地址。 */
@@ -4480,6 +4548,10 @@ declare interface SegmentRecognitionItem {
   Title?: string | null;
   /** 分段概要。 */
   Summary?: string | null;
+  /** 直播切片对应直播起始时间点，采用 ISO 日期格式。 */
+  BeginTime?: string | null;
+  /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
+  EndTime?: string | null;
 }
 
 /** 切片特殊配置信息。 */

@@ -57,7 +57,7 @@ declare interface AMQPClusterInfo {
 /** 用户专享集群信息 */
 declare interface BindCluster {
   /** 物理集群的名称 */
-  ClusterName: string;
+  ClusterName?: string;
 }
 
 /** 客户端订阅详情，可用于辅助判断哪些客户端订阅关系不一致 */
@@ -301,15 +301,15 @@ declare interface CmqTransactionPolicy {
 /** 消费者 */
 declare interface Consumer {
   /** 消费者开始连接的时间。 */
-  ConnectedSince: string | null;
+  ConnectedSince?: string | null;
   /** 消费者地址。 */
-  ConsumerAddr: string | null;
+  ConsumerAddr?: string | null;
   /** 消费者名称。 */
-  ConsumerName: string | null;
+  ConsumerName?: string | null;
   /** 消费者版本。 */
-  ClientVersion: string | null;
+  ClientVersion?: string | null;
   /** 消费者连接的主题分区号 */
-  Partition: number | null;
+  Partition?: number | null;
 }
 
 /** 消费日志 */
@@ -318,7 +318,7 @@ declare interface ConsumerLog {
   MsgId: string;
   /** 消费组。 */
   ConsumerGroup: string;
-  /** 消费组名称。 */
+  /** 消费者名称。 */
   ConsumerName: string;
   /** 消费时间。 */
   ConsumeTime: string;
@@ -333,9 +333,9 @@ declare interface ConsumerLog {
 /** 消费信息 */
 declare interface ConsumerLogs {
   /** 记录数。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 消费日志。 */
-  ConsumerLogSets: ConsumerLog[] | null;
+  ConsumerLogSets?: ConsumerLog[] | null;
 }
 
 /** 消费详情 */
@@ -361,17 +361,17 @@ declare interface ConsumerStats {
 /** 消费进度详情 */
 declare interface ConsumersSchedule {
   /** 当前分区id。 */
-  Partitions: number | null;
+  Partitions?: number | null;
   /** 消息数量。 */
-  NumberOfEntries: number | null;
+  NumberOfEntries?: number | null;
   /** 消息积压数量。 */
-  MsgBacklog: number | null;
+  MsgBacklog?: number | null;
   /** 消费者每秒分发消息的数量之和。 */
-  MsgRateOut: string;
+  MsgRateOut?: string;
   /** 消费者每秒消息的byte。 */
-  MsgThroughputOut: string;
+  MsgThroughputOut?: string;
   /** 超时丢弃比例。 */
-  MsgRateExpired: string | null;
+  MsgRateExpired?: string | null;
 }
 
 /** 命名空间信息 */
@@ -453,59 +453,61 @@ declare interface FilterSubscription {
 /** 实例节点分布信息 */
 declare interface InstanceNodeDistribution {
   /** 可用区 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 可用区id */
-  ZoneId: string;
+  ZoneId?: string;
   /** 节点数 */
-  NodeCount: number;
+  NodeCount?: number;
+  /** 有调度任务且没有切回的可用区，此标识为true */
+  NodePermWipeFlag?: boolean;
 }
 
 /** 面向运营端的虚拟集群信息 */
 declare interface InternalTenant {
   /** 虚拟集群ID */
-  TenantId: string;
+  TenantId?: string;
   /** 虚拟集群名称 */
-  TenantName: string;
+  TenantName?: string;
   /** 客户UIN */
-  CustomerUin: string;
+  CustomerUin?: string;
   /** 客户的APPID */
-  CustomerAppId: string;
+  CustomerAppId?: string;
   /** 物理集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群协议类型，支持的值为TDMQ，ROCKETMQ，AMQP，CMQ */
-  Type: string;
+  Type?: string;
   /** 命名空间配额 */
-  MaxNamespaces: number;
+  MaxNamespaces?: number;
   /** 已使用命名空间配额 */
-  UsedNamespaces: number;
+  UsedNamespaces?: number;
   /** Topic配额 */
-  MaxTopics: number;
+  MaxTopics?: number;
   /** 已使用Topic配额 */
-  UsedTopics: number;
+  UsedTopics?: number;
   /** Topic分区数配额 */
-  MaxPartitions: number;
+  MaxPartitions?: number;
   /** 已使用Topic分区数配额 */
-  UsedPartitions: number;
+  UsedPartitions?: number;
   /** 存储配额, byte为单位 */
-  MaxMsgBacklogSize: number;
+  MaxMsgBacklogSize?: number;
   /** 命名空间最大生产TPS */
-  MaxPublishTps: number;
+  MaxPublishTps?: number;
   /** 消息最大保留时间，秒为单位 */
-  MaxRetention: number;
+  MaxRetention?: number;
   /** 创建时间，毫秒为单位 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 修改时间，毫秒为单位 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 命名空间最大消费TPS */
-  MaxDispatchTps: number;
+  MaxDispatchTps?: number;
   /** 命名空间最大消费带宽，byte为单位 */
-  MaxDispatchRateInBytes: number | null;
+  MaxDispatchRateInBytes?: number | null;
   /** 命名空间最大生产带宽，byte为单位 */
-  MaxPublishRateInBytes: number | null;
+  MaxPublishRateInBytes?: number | null;
   /** 消息最大保留空间，MB为单位 */
-  MaxRetentionSizeInMB: number | null;
+  MaxRetentionSizeInMB?: number | null;
   /** public Access Enabled */
-  PublicAccessEnabled: boolean | null;
+  PublicAccessEnabled?: boolean | null;
 }
 
 /** 迁移topic列表数据 */
@@ -525,59 +527,59 @@ declare interface MigrateTopic {
 /** 消息日志 */
 declare interface MsgLog {
   /** 消息ID。 */
-  MsgId: string;
+  MsgId?: string;
   /** 生产者名称。 */
-  ProducerName: string;
+  ProducerName?: string;
   /** 生产时间。 */
-  ProduceTime: string;
+  ProduceTime?: string;
   /** 生产客户端地址。 */
-  ProducerAddr: string;
+  ProducerAddr?: string;
 }
 
 /** 分区topic */
 declare interface PartitionsTopic {
   /** 最后一次间隔内发布消息的平均byte大小。 */
-  AverageMsgSize: string | null;
+  AverageMsgSize?: string | null;
   /** 消费者数量。 */
-  ConsumerCount: string | null;
+  ConsumerCount?: string | null;
   /** 被记录下来的消息总数。 */
-  LastConfirmedEntry: string | null;
+  LastConfirmedEntry?: string | null;
   /** 最后一个ledger创建的时间。 */
-  LastLedgerCreatedTimestamp: string | null;
+  LastLedgerCreatedTimestamp?: string | null;
   /** 本地和复制的发布者每秒发布消息的速率。 */
-  MsgRateIn: string | null;
+  MsgRateIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的数量之和。 */
-  MsgRateOut: string | null;
+  MsgRateOut?: string | null;
   /** 本地和复制的发布者每秒发布消息的byte。 */
-  MsgThroughputIn: string | null;
+  MsgThroughputIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的byte。 */
-  MsgThroughputOut: string | null;
+  MsgThroughputOut?: string | null;
   /** 被记录下来的消息总数。 */
-  NumberOfEntries: string | null;
+  NumberOfEntries?: string | null;
   /** 子分区id。 */
-  Partitions: number | null;
+  Partitions?: number | null;
   /** 生产者数量。 */
-  ProducerCount: string | null;
+  ProducerCount?: string | null;
   /** 以byte计算的所有消息存储总量。 */
-  TotalSize: string | null;
+  TotalSize?: string | null;
   /** topic类型描述。 */
-  TopicType: number | null;
+  TopicType?: number | null;
 }
 
 /** 消息生产信息 */
 declare interface ProducerLog {
   /** 消息ID。 */
-  MsgId: string;
+  MsgId?: string;
   /** 生产者名称。 */
-  ProducerName: string;
+  ProducerName?: string;
   /** 消息生产时间。 */
-  ProduceTime: string;
+  ProduceTime?: string;
   /** 生产者客户端。 */
-  ProducerAddr: string;
+  ProducerAddr?: string;
   /** 生产耗时（秒）。 */
-  ProduceUseTime: number;
+  ProduceUseTime?: number;
   /** 状态。 */
-  Status: string;
+  Status?: string;
 }
 
 /** rabbitmq Prometheus信息 */
@@ -605,23 +607,23 @@ declare interface PublicAccessRule {
 /** 生产者信息 */
 declare interface Publisher {
   /** 生产者id */
-  ProducerId: number | null;
+  ProducerId?: number | null;
   /** 生产者名称 */
-  ProducerName: string | null;
+  ProducerName?: string | null;
   /** 生产者地址 */
-  Address: string | null;
+  Address?: string | null;
   /** 客户端版本 */
-  ClientVersion: string | null;
+  ClientVersion?: string | null;
   /** 消息生产速率（条/秒） */
-  MsgRateIn: number | null;
+  MsgRateIn?: number | null;
   /** 消息生产吞吐速率（字节/秒） */
-  MsgThroughputIn: number | null;
+  MsgThroughputIn?: number | null;
   /** 平均消息大小（字节） */
-  AverageMsgSize: number | null;
+  AverageMsgSize?: number | null;
   /** 连接时间 */
-  ConnectedSince: string | null;
+  ConnectedSince?: string | null;
   /** 生产者连接的主题分区号 */
-  Partition: number | null;
+  Partition?: number | null;
 }
 
 /** Pulsar 网络接入点信息 */
@@ -640,6 +642,14 @@ declare interface PulsarNetworkAccessPointInfo {
   OperationType?: number | null;
   /** 接入点类型 */
   AccessPointsType?: string | null;
+  /** 带宽，目前只有公网会有这个值 */
+  Bandwidth?: number | null;
+  /** 类 */
+  SecurityPolicy?: SecurityPolicy[] | null;
+  /** 是否是标准的接入点 true是标准的 false不是标准的 */
+  StandardAccessPoint?: boolean | null;
+  /** 可用区信息 */
+  ZoneName?: string;
 }
 
 /** Pulsar专业版集群信息 */
@@ -666,6 +676,10 @@ declare interface PulsarProClusterInfo {
   BillingLabelVersion?: string | null;
   /** 实例到期时间戳，毫秒级精度。 */
   ExpireTime?: number | null;
+  /** 是否开启自动创建主题true就是开启了，false是关闭 */
+  AutoCreateTopicStatus?: boolean | null;
+  /** 自动创建主题的默认分区数，如果没开启就是0 */
+  DefaultPartitionNumber?: number | null;
 }
 
 /** Pulsar专业版集群规格信息 */
@@ -784,7 +798,7 @@ declare interface RabbitMQClusterAccessInfo {
   PublicDataStreamStatus?: string | null;
   /** Prometheus信息 */
   PrometheusEndpointInfo?: PrometheusEndpointInfo | null;
-  /** http://amqp-k3eb47gm.dashboard.rabbitmq.cq.public.tencenttdmq.com:15672/公网域名接入点 */
+  /** 公网域名接入点 */
   WebConsoleDomainEndpoint?: string | null;
 }
 
@@ -836,6 +850,8 @@ declare interface RabbitMQClusterInfo {
   ClusterVersion?: string | null;
   /** 计费模式，0-后付费，1-预付费 */
   PayMode?: number | null;
+  /** 实例类型，0 专享版、1 Serverless 版 */
+  InstanceType?: number;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -1036,6 +1052,8 @@ declare interface RabbitMQVipInstance {
   Vpcs?: VpcEndpointInfo[] | null;
   /** 创建时间，毫秒为单位 */
   CreateTime?: number | null;
+  /** 实例类型，0 专享版、1 Serverless 版 */
+  InstanceType?: number;
 }
 
 /** RabbitMQ的vhost详情 */
@@ -1560,12 +1578,22 @@ declare interface Role {
   UpdateTime?: string;
 }
 
+/** 安全策略 */
+declare interface SecurityPolicy {
+  /** ip或者网段 */
+  Route?: string | null;
+  /** 策略 true就是允许，白名单或者 false 拒绝 黑名单 */
+  Policy?: boolean | null;
+  /** 备注 */
+  Remark?: string | null;
+}
+
 /** 服务方信息 */
 declare interface ServerLog {
   /** 存储时间。 */
-  SaveTime: string;
+  SaveTime?: string;
   /** 状态。 */
-  Status: string;
+  Status?: string;
 }
 
 /** 排序器 */
@@ -1579,45 +1607,45 @@ declare interface Sort {
 /** 订阅者 */
 declare interface Subscription {
   /** 主题名称。 */
-  TopicName: string;
+  TopicName?: string;
   /** 环境（命名空间）名称。 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 消费者开始连接的时间。 */
-  ConnectedSince: string | null;
+  ConnectedSince?: string | null;
   /** 消费者地址。 */
-  ConsumerAddr: string | null;
+  ConsumerAddr?: string | null;
   /** 消费者数量。 */
-  ConsumerCount: string | null;
+  ConsumerCount?: string | null;
   /** 消费者名称。 */
-  ConsumerName: string | null;
+  ConsumerName?: string | null;
   /** 堆积的消息数量。 */
-  MsgBacklog: string | null;
+  MsgBacklog?: string | null;
   /** 于TTL，此订阅下没有被发送而是被丢弃的比例。 */
-  MsgRateExpired: string | null;
+  MsgRateExpired?: string | null;
   /** 消费者每秒分发消息的数量之和。 */
-  MsgRateOut: string | null;
+  MsgRateOut?: string | null;
   /** 消费者每秒消息的byte。 */
-  MsgThroughputOut: string | null;
+  MsgThroughputOut?: string | null;
   /** 订阅名称。 */
-  SubscriptionName: string | null;
+  SubscriptionName?: string | null;
   /** 消费者集合。 */
-  ConsumerSets: Consumer[] | null;
+  ConsumerSets?: Consumer[] | null;
   /** 是否在线。 */
-  IsOnline: boolean | null;
+  IsOnline?: boolean | null;
   /** 消费进度集合。 */
-  ConsumersScheduleSets: ConsumersSchedule[] | null;
+  ConsumersScheduleSets?: ConsumersSchedule[] | null;
   /** 备注。 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 最近修改时间。 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 订阅类型，Exclusive，Shared，Failover， Key_Shared，空或NULL表示未知， */
-  SubType: string | null;
+  SubType?: string | null;
   /** 是否由于未 ack 数到达上限而被 block */
-  BlockedSubscriptionOnUnackedMsgs: boolean | null;
+  BlockedSubscriptionOnUnackedMsgs?: boolean | null;
   /** 未 ack 消息数上限 */
-  MaxUnackedMsgNum: number | null;
+  MaxUnackedMsgNum?: number | null;
 }
 
 /** 订阅关系 */
@@ -1731,17 +1759,17 @@ declare interface VirtualHostQuota {
 /** vcp绑定记录 */
 declare interface VpcBindRecord {
   /** 租户Vpc Id */
-  UniqueVpcId: string;
+  UniqueVpcId?: string;
   /** 租户Vpc子网Id */
-  UniqueSubnetId: string;
+  UniqueSubnetId?: string;
   /** 路由Id */
-  RouterId: string;
+  RouterId?: string;
   /** Vpc的Id */
-  Ip: string;
+  Ip?: string;
   /** Vpc的Port */
-  Port: number;
+  Port?: number;
   /** 说明，128个字符以内 */
-  Remark: string | null;
+  Remark?: string | null;
 }
 
 /** VPC配置信息 */
@@ -1782,7 +1810,7 @@ declare interface AcknowledgeMessageRequest {
 }
 
 declare interface AcknowledgeMessageResponse {
-  /** 如果为“”，则说明没有错误返回 */
+  /** 如果为""，则说明没有错误返回，否则返回具体的错误信息。 */
   ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2003,7 +2031,7 @@ declare interface CreateProClusterResponse {
 declare interface CreateRabbitMQBindingRequest {
   /** 实例Id */
   InstanceId: string;
-  /** Vhost参数 */
+  /** Vhost名称 */
   VirtualHost: string;
   /** 源exchange */
   Source: string;
@@ -2011,14 +2039,14 @@ declare interface CreateRabbitMQBindingRequest {
   DestinationType: string;
   /** 目标 */
   Destination: string;
-  /** 绑定key */
+  /** 路由键 */
   RoutingKey?: string;
 }
 
 declare interface CreateRabbitMQBindingResponse {
-  /** 队列名称 */
+  /** 实例名称 */
   InstanceId?: string | null;
-  /** vhost参数 */
+  /** vhost名称 */
   VirtualHost?: string | null;
   /** 路由关系Id */
   BindingId?: number | null;
@@ -2349,7 +2377,7 @@ declare interface DeleteClusterRequest {
 
 declare interface DeleteClusterResponse {
   /** 集群的ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2436,7 +2464,7 @@ declare interface DeleteRabbitMQBindingRequest {
 }
 
 declare interface DeleteRabbitMQBindingResponse {
-  /** 队列名称 */
+  /** 实例名称 */
   InstanceId?: string | null;
   /** vhost参数 */
   VirtualHost?: string | null;
@@ -2601,7 +2629,7 @@ declare interface DeleteSubscriptionsRequest {
 
 declare interface DeleteSubscriptionsResponse {
   /** 成功删除的订阅关系数组。 */
-  SubscriptionTopicSets: SubscriptionTopic[];
+  SubscriptionTopicSets?: SubscriptionTopic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2671,9 +2699,9 @@ declare interface DescribeAllTenantsRequest {
 
 declare interface DescribeAllTenantsResponse {
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 虚拟集群列表 */
-  Tenants: InternalTenant[];
+  Tenants?: InternalTenant[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2683,9 +2711,9 @@ declare interface DescribeBindClustersRequest {
 
 declare interface DescribeBindClustersResponse {
   /** 专享集群的数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 专享集群的列表 */
-  ClusterSet: BindCluster[];
+  ClusterSet?: BindCluster[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2735,9 +2763,9 @@ declare interface DescribeClustersRequest {
 
 declare interface DescribeClustersResponse {
   /** 集群列表数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群信息列表 */
-  ClusterSet: Cluster[];
+  ClusterSet?: Cluster[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2903,9 +2931,9 @@ declare interface DescribeEnvironmentRolesRequest {
 
 declare interface DescribeEnvironmentRolesResponse {
   /** 记录数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 命名空间角色集合。 */
-  EnvironmentRoleSets: EnvironmentRole[];
+  EnvironmentRoleSets?: EnvironmentRole[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2952,7 +2980,7 @@ declare interface DescribeMqMsgTraceRequest {
 }
 
 declare interface DescribeMqMsgTraceResponse {
-  /** [ { "Stage": "produce", "Data": { "ProducerName": "生产者名", "ProduceTime": "消息生产时间", "ProducerAddr": "客户端地址", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "persist", "Data": { "PersistTime": "存储时间", "Duration": "耗时ms", "Status": "状态（0：成功，1：失败）" } }, { "Stage": "consume", "Data": { "TotalCount": 2, "RocketMqConsumeLogs": [ { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" }, { "ConsumerGroup": "消费组", "ConsumeModel": "消费模式", "ConsumerAddr": "消费者地址", "ConsumeTime": "推送时间", "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）" } ] } }] */
+  /** 消息内容 */
   Result?: TraceResult[];
   /** 消息轨迹页展示的topic名称 */
   ShowTopicName?: string;
@@ -3007,11 +3035,11 @@ declare interface DescribeMsgTraceRequest {
 
 declare interface DescribeMsgTraceResponse {
   /** 生产信息。 */
-  ProducerLog: ProducerLog | null;
+  ProducerLog?: ProducerLog | null;
   /** 服务方信息。 */
-  ServerLog: ServerLog | null;
+  ServerLog?: ServerLog | null;
   /** 消费信息。 */
-  ConsumerLogs: ConsumerLogs | null;
+  ConsumerLogs?: ConsumerLogs | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3141,7 +3169,7 @@ declare interface DescribePulsarProInstancesResponse {
 declare interface DescribeRabbitMQBindingsRequest {
   /** 实例Id */
   InstanceId: string;
-  /** Vhost参数 */
+  /** Vhost名称 */
   VirtualHost: string;
   /** 分页offset */
   Offset?: number;
@@ -3234,7 +3262,7 @@ declare interface DescribeRabbitMQQueueDetailRequest {
 }
 
 declare interface DescribeRabbitMQQueueDetailResponse {
-  /** 队列名称 */
+  /** 实例名称 */
   InstanceId?: string | null;
   /** Vhost参数 */
   VirtualHost?: string | null;
@@ -3385,9 +3413,9 @@ declare interface DescribeRabbitMQVipInstancesRequest {
 
 declare interface DescribeRabbitMQVipInstancesResponse {
   /** 未分页的总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例信息列表 */
-  Instances: RabbitMQVipInstance[];
+  Instances?: RabbitMQVipInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4117,9 +4145,9 @@ declare interface DescribeTopicMsgsRequest {
 
 declare interface DescribeTopicMsgsResponse {
   /** 总记录数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 消息日志列表。 */
-  TopicMsgLogSets: MsgLog[];
+  TopicMsgLogSets?: MsgLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4237,7 +4265,7 @@ declare interface ModifyClusterRequest {
   ClusterId: string;
   /** 更新后的集群名称。 */
   ClusterName?: string;
-  /** 说明信息。 */
+  /** 说明信息。长度限制为 128 字节 */
   Remark?: string;
   /** 开启公网访问，只能为true */
   PublicAccessEnabled?: boolean;
@@ -4245,7 +4273,7 @@ declare interface ModifyClusterRequest {
 
 declare interface ModifyClusterResponse {
   /** Pulsar 集群的ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4999,7 +5027,7 @@ declare interface Tdmq {
   DeleteTopics(data: DeleteTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicsResponse>;
   /** 获取amqp集群列表 {@link DescribeAMQPClustersRequest} {@link DescribeAMQPClustersResponse} */
   DescribeAMQPClusters(data: DescribeAMQPClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClustersResponse>;
-  /** 获取某个租户的虚拟集群列表 {@link DescribeAllTenantsRequest} {@link DescribeAllTenantsResponse} */
+  /** 获取某租户的虚拟集群列表 {@link DescribeAllTenantsRequest} {@link DescribeAllTenantsResponse} */
   DescribeAllTenants(data: DescribeAllTenantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllTenantsResponse>;
   /** 获取专享集群列表 {@link DescribeBindClustersRequest} {@link DescribeBindClustersResponse} */
   DescribeBindClusters(data?: DescribeBindClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindClustersResponse>;
@@ -5119,7 +5147,7 @@ declare interface Tdmq {
   DescribeRoles(data: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
   /** 获取消费订阅列表 {@link DescribeSubscriptionsRequest} {@link DescribeSubscriptionsResponse} */
   DescribeSubscriptions(data: DescribeSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionsResponse>;
-  /** 消息查询 {@link DescribeTopicMsgsRequest} {@link DescribeTopicMsgsResponse} */
+  /** topic消息查询 {@link DescribeTopicMsgsRequest} {@link DescribeTopicMsgsResponse} */
   DescribeTopicMsgs(data: DescribeTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicMsgsResponse>;
   /** 查询主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;

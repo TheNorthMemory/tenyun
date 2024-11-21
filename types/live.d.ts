@@ -136,6 +136,28 @@ declare interface CallbackEventInfo {
   StreamId?: string;
 }
 
+/** 导播台简略信息 */
+declare interface CasterBriefInfo {
+  /** 导播台ID */
+  CasterId?: number;
+  /** 导播台名称 */
+  CasterName?: string | null;
+  /** 导播台的描述 */
+  Description?: string | null;
+  /** 开始计费时间，值为unix时间戳 */
+  StartBillingTime?: number | null;
+  /** 结束计费时间，值为unix时间戳 */
+  StopBillingTime?: number | null;
+  /** 创建时间，值为unix时间戳 */
+  CreateTime?: number | null;
+  /** 导播台状态0：停止状态，无预监，无主监1：无预监，有主监2：有预监，无主监3：有预监，有主监 */
+  Status?: number | null;
+  /** 导播台的过期时间，值为-1或unix时间戳。当值为-1时，代表永不过期。当值为特定unix时间戳时，代表过期时间为对应的时间，导播台在该时间自动停止。 */
+  ExpireTime?: number | null;
+  /** 计费字段，该字段暂无作用 */
+  FeeType?: number | null;
+}
+
 /** 下行播放统计指标 */
 declare interface CdnPlayStatData {
   /** 时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -1386,6 +1408,16 @@ declare interface TranscodeTotalInfo {
   Resolution: string;
 }
 
+/** 转场信息 */
+declare interface TransitionTypeInfo {
+  /** 转场名称 */
+  TransitionType?: string | null;
+  /** 素材url */
+  SourceUrl?: string | null;
+  /** 转场的下标，可用来排序，从1开始递增 */
+  Index?: number | null;
+}
+
 /** 水印信息。 */
 declare interface WatermarkInfo {
   /** 水印 ID。 */
@@ -2408,6 +2440,38 @@ declare interface DescribeCallbackRecordsListResponse {
   TotalNum?: number;
   /** 总页数。 */
   TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterListRequest {
+}
+
+declare interface DescribeCasterListResponse {
+  /** 用户对应的导播台简要信息列表 */
+  CasterList?: CasterBriefInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterTransitionTypesRequest {
+  /** 导播台ID */
+  CasterId: number;
+}
+
+declare interface DescribeCasterTransitionTypesResponse {
+  /** 转场信息列表 */
+  TransitionTypes?: TransitionTypeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterUserStatusRequest {
+}
+
+declare interface DescribeCasterUserStatusResponse {
+  /** 0: 未开通导播台1:开通了导播台，且处于正常状态2:开通了导播台，但处于欠费状态3:开通了导播台，但处于封禁状态 */
+  UserStatus: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4519,6 +4583,12 @@ declare interface Live {
   DescribeBillBandwidthAndFluxList(data: DescribeBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillBandwidthAndFluxListResponse>;
   /** 回调事件查询 {@link DescribeCallbackRecordsListRequest} {@link DescribeCallbackRecordsListResponse} */
   DescribeCallbackRecordsList(data: DescribeCallbackRecordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallbackRecordsListResponse>;
+  /** 查询导播台列表 {@link DescribeCasterListRequest} {@link DescribeCasterListResponse} */
+  DescribeCasterList(data?: DescribeCasterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterListResponse>;
+  /** 获取所有的转场列表 {@link DescribeCasterTransitionTypesRequest} {@link DescribeCasterTransitionTypesResponse} */
+  DescribeCasterTransitionTypes(data: DescribeCasterTransitionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterTransitionTypesResponse>;
+  /** 查询当前APPID导播台业务状态 {@link DescribeCasterUserStatusRequest} {@link DescribeCasterUserStatusResponse} */
+  DescribeCasterUserStatus(data?: DescribeCasterUserStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterUserStatusResponse>;
   /** 查询并发录制路数 {@link DescribeConcurrentRecordStreamNumRequest} {@link DescribeConcurrentRecordStreamNumResponse} */
   DescribeConcurrentRecordStreamNum(data: DescribeConcurrentRecordStreamNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrentRecordStreamNumResponse>;
   /** 查询直播转推计费带宽 {@link DescribeDeliverBandwidthListRequest} {@link DescribeDeliverBandwidthListResponse} */

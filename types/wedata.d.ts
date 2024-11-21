@@ -1018,6 +1018,18 @@ declare interface DatabaseMeta {
   StorageSizeWithUnit?: string | null;
   /** 创建时间 */
   CreateTime?: string | null;
+  /** 总表数 */
+  TableCount?: number | null;
+  /** 数据源信息 */
+  DatasourceList?: GovDatasourceInfo[] | null;
+  /** 采集任务id */
+  CollectJobId?: string | null;
+  /** 采集任务名称 */
+  CollectJobName?: string | null;
+  /** 引擎id */
+  ClusterId?: string | null;
+  /** 引擎名称 */
+  ClusterName?: string | null;
 }
 
 /** 数据源对象 */
@@ -1764,6 +1776,20 @@ declare interface GeneralTaskParam {
   Value: string;
 }
 
+/** 数据源信息 */
+declare interface GovDatasourceInfo {
+  /** 数据源id */
+  DatasourceId?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据源集群ID */
+  DatasourceClusterId?: string | null;
+  /** 数据源urn */
+  DatasourceUrn?: string | null;
+  /** 数据源环境 */
+  DatasourceEnv?: string | null;
+}
+
 /** 实例检索条件 */
 declare interface InstanceCondition {
   /** 执行类型 */
@@ -1804,6 +1830,12 @@ declare interface InstanceLifeCycleOpsDto {
   InstanceLogListOpsDto?: InstanceLogInfo | null;
   /** 实例状态 */
   InstanceState?: string | null;
+  /** 调度运行方式, 0: 周期调度, 1: 空跑调度 */
+  ScheduleRunType?: number | null;
+  /** 统一执行平台，下发执行Id */
+  ExecutionJobId?: string | null;
+  /** 实例运行类型: 0: 普通运行, 1: 空跑运行 */
+  InstanceRunType?: number | null;
 }
 
 /** 实例生命周期detail */
@@ -1876,6 +1908,8 @@ declare interface InstanceLogInfo {
   CodeFileName?: string | null;
   /** 扩展属性 */
   ExtensionInfo?: AttributeItemDTO[] | null;
+  /** 统一执行平台，下发执行Id */
+  ExecutionJobId?: string | null;
 }
 
 /** 实例日志信息详情 */
@@ -1892,6 +1926,12 @@ declare interface InstanceLogInfoOpsDto {
   ThirdTaskLogUrlDesc?: string | null;
   /** 日志行数 */
   LineCount?: number | null;
+  /** 统一执行平台日志分页查询参数 */
+  ExtInfo?: string | null;
+  /** 日志分页查询，是否最后一页 */
+  IsEnd?: boolean | null;
+  /** 文件大小 */
+  FileSize?: string | null;
 }
 
 /** 实例日志信息 */
@@ -2056,6 +2096,10 @@ declare interface InstanceOpsDto {
   DeletedFatherList?: string[] | null;
   /** 循环依赖关联的实例 */
   CirculateInstanceList?: InstanceOpsDto[] | null;
+  /** 并发策略, 0: 等待并发, 1: kill自身 */
+  ConcurrentStrategy?: number | null;
+  /** 调度运行方式, 0: 周期调度, 1: 空跑调度 */
+  ScheduleRunType?: number | null;
 }
 
 /** 任务运行历史分页记录 */
@@ -2782,6 +2826,8 @@ declare interface OrganizationalFunction {
   OwnerUserIdsStr?: string[] | null;
   /** 数据库环境 */
   EnvType?: string | null;
+  /** 函数资源文件类型 */
+  FunctionResourceFileType?: string | null;
 }
 
 /** 键值对 */
@@ -2891,19 +2937,27 @@ declare interface Project {
 /** 项目的用户对象 */
 declare interface ProjectUserRole {
   /** 用户角色对象 */
-  Roles: SystemRole[] | null;
+  Roles?: SystemRole[] | null;
   /** mc */
-  UserName: string | null;
+  UserName?: string | null;
   /** 用户id */
-  UserId: string | null;
+  UserId?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 是否创建者 */
-  Creator: boolean | null;
+  Creator?: boolean | null;
   /** 显示名称 */
   DisplayName?: string | null;
   /** 是否项目管理员 */
   IsProjectAdmin?: boolean | null;
+  /** 手机号 */
+  PhoneNum?: string | null;
+  /** 邮箱 */
+  Email?: string | null;
+  /** 主账号id */
+  OwnerUin?: string | null;
+  /** 租户iD */
+  AppId?: string | null;
 }
 
 /** 项目下的用户集合 */
@@ -3152,6 +3206,10 @@ declare interface Rule {
   SchemaName?: string | null;
   /** 目标模式名称 */
   TargetSchemaName?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
 }
 
 /** 规则配置 */
@@ -3256,6 +3314,8 @@ declare interface RuleExecResult {
   StartTime?: string | null;
   /** 1/2/3:低/中/高 */
   AlarmLevel?: number | null;
+  /** 触发条件 */
+  TriggerCondition?: string | null;
 }
 
 /** 规则执行结果详情 */
@@ -3432,6 +3492,16 @@ declare interface RuleGroupExecResult {
   InstanceId?: string | null;
   /** 数据库所属环境，0.未定义，1.生产 2.开发 */
   DsEnvType?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 实例状态 */
+  InstanceStatus?: string | null;
+  /** 实例运行的开始时间 */
+  StartTime?: string;
+  /** 实例运行的结束时间 */
+  FinishTime?: string;
 }
 
 /** 规则组执行结果分页 */
@@ -3933,17 +4003,17 @@ declare interface SubscribeWebHook {
 /** 角色对象 */
 declare interface SystemRole {
   /** 角色id */
-  RoleId: string;
+  RoleId?: string;
   /** 角色名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 角色昵称 */
-  NameCn: string | null;
+  NameCn?: string | null;
   /** 描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 角色权限 */
-  Privileges: RolePrivilege[] | null;
+  Privileges?: RolePrivilege[] | null;
   /** 方法路径 */
-  MethodPaths: string[] | null;
+  MethodPaths?: string[] | null;
   /** 角色类型, 分为System,Tenant,Project,Commercial */
   RoleType?: string | null;
   /** 是否系统默认 */
@@ -4300,6 +4370,16 @@ declare interface TableMeta {
   Environment?: string | null;
   /** 数据库模式 */
   Schema?: string | null;
+  /** 关联数据眼信息 */
+  CollectDatasourceList?: GovDatasourceInfo[] | null;
+  /** 采集任务id */
+  CollectJobId?: string | null;
+  /** 采集任务名称 */
+  CollectJobName?: string | null;
+  /** 数据源urn */
+  Urn?: string | null;
+  /** 是否有修改业务权限 */
+  HasBizPermission?: boolean | null;
 }
 
 /** 表附加信息 */
@@ -5178,6 +5258,12 @@ declare interface WorkflowScheduleDtoDs {
   FirstSubmitTime?: string | null;
   /** 工作流最近提交时间 */
   LatestSubmitTime?: string | null;
+  /** 日历调度是否开启 */
+  CalendarOpen?: string | null;
+  /** 日历调度名称 */
+  CalendarName?: string | null;
+  /** 日历调度id */
+  CalendarId?: string | null;
 }
 
 /** 工作流调度详情 */
@@ -5769,6 +5855,28 @@ declare interface CreateCustomFunctionResponse {
   RequestId?: string;
 }
 
+declare interface CreateDataModelRequest {
+  /** 云应用的实例id */
+  CloudappId: string;
+  /** 用户的子账号id */
+  UserId: string;
+  /** Wedata数据建模购买参数，包年包月类型单位，年：y，月：m，默认m */
+  TimeUnit?: string;
+  /** Wedata数据建模购买参数，购买时长，默认1 */
+  TimeSpan?: number;
+  /** Wedata数据建模购买参数，是否自动续费，是：1，否：0，默认0 */
+  AutoRenewFlag?: number;
+  /** Wedata数据建模购买参数，标准版：DATA_MODEL_STANDARD，企业版：DATA_MODEL_PRO，默认DATA_MODEL_STANDARD */
+  DataModelVersion?: string;
+}
+
+declare interface CreateDataModelResponse {
+  /** “Wedata数据建模”的实例id */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDataSourceRequest {
   /** 数据源名称，在相同SpaceName下，数据源名称不能为空 */
   Name: string;
@@ -6116,10 +6224,12 @@ declare interface CreateTaskFolderRequest {
   ProjectId: string;
   /** 文件夹名称 */
   FolderName: string;
-  /** 工作量ID */
+  /** 工作流ID */
   WorkflowId: string;
   /** 父文件夹ID */
   ParentFolderId?: string;
+  /** 目录分类 */
+  TaskNodeType?: string;
 }
 
 declare interface CreateTaskFolderResponse {
@@ -6263,6 +6373,22 @@ declare interface DeleteCustomFunctionResponse {
   FunctionId?: string | null;
   /** 无 */
   ErrorMessage?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDataModelRequest {
+  /** 云应用的实例id */
+  CloudappId: string;
+  /** 数据建模的实例id */
+  DataModelId: string;
+  /** 用户的子账号id */
+  UserId: string;
+}
+
+declare interface DeleteDataModelResponse {
+  /** 是否销毁成功 */
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7322,14 +7448,24 @@ declare interface DescribeInstanceLogDetailRequest {
   TaskId: string;
   /** 数据时间 */
   CurRunDate: string;
+  /** 日志级别，Info/Debug/Warn/Error/All */
+  LogLevelType?: string;
+  /** 文件类型,Log/Code */
+  ExecutionFileType?: string;
+  /** 统一执行平台执行id */
+  ExecutionJobId?: string;
   /** 服务器Ip */
-  BrokerIp: string;
+  BrokerIp?: string;
   /** 文件Name */
-  OriginFileName: string;
+  OriginFileName?: string;
   /** 起始行 */
   StartCount?: number;
   /** 每次查询行数 */
   LineCount?: number;
+  /** 查询日志扩展信息,通过统一执行平台接口分页查询日志时需要带上,第一页时为null */
+  ExtInfo?: string;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
 }
 
 declare interface DescribeInstanceLogDetailResponse {
@@ -7346,10 +7482,18 @@ declare interface DescribeInstanceLogFileRequest {
   TaskId: string;
   /** 实例数据时间 */
   CurRunDate: string;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
   /** 执行机IP */
-  BrokerIp: string;
+  BrokerIp?: string;
   /** 日志文件名 */
-  OriginFileName: string;
+  OriginFileName?: string;
+  /** 执行平台下发执行id */
+  ExecutionJobId?: string;
+  /** 日志级别，Info/Debug/Warn/Error/All */
+  LogLevelType?: string;
+  /** 文件类型,Log/Code */
+  ExecutionFileType?: string;
 }
 
 declare interface DescribeInstanceLogFileResponse {
@@ -7797,9 +7941,9 @@ declare interface DescribeOrganizationalFunctionsRequest {
   /** 标准模式开发环境：DEV标准模式生产环境：PROD简单模式：ALL */
   EnvType?: string;
   /** 过滤条件 */
-  Filters?: Filter;
+  Filters?: Filter[];
   /** 排序条件 */
-  OrderFields?: OrderField;
+  OrderFields?: OrderField[];
 }
 
 declare interface DescribeOrganizationalFunctionsResponse {
@@ -8270,6 +8414,8 @@ declare interface DescribeRulesResponse {
 }
 
 declare interface DescribeScheduleInstancesRequest {
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
   /** 实例列表 */
   Instances?: InstanceOpsDto[];
   /** 检查父任务类型, true: 检查父任务; false: 不检查父任务 */
@@ -8306,9 +8452,13 @@ declare interface DescribeScheduleInstancesRequest {
   RequestBaseInfo?: ProjectBaseInfoOpsRequest;
   /** 是否计算总数 */
   IsCount?: boolean;
+  /** 项目ID列表，用于多项目实例列表筛选，请注意，该字段传入时 ProjectId 字段也必须传，且传入的 ProjectIds 中的项目ID必须是当前用户有权限的项目ID，否则会由于权限校验失败报错 */
+  ProjectIds?: string[];
 }
 
 declare interface DescribeScheduleInstancesResponse {
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string | null;
   /** 实例结果集 */
   Data?: CollectionInstanceOpsDto;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -9202,6 +9352,8 @@ declare interface GetCosTokenRequest {
   BucketName?: string;
   /** 远程地址 */
   RemotePath?: string;
+  /** 地域 */
+  RemoteRegion?: string;
 }
 
 declare interface GetCosTokenResponse {
@@ -9348,6 +9500,8 @@ declare interface InstanceApiOpsRequest {
   DataTimeCycle?: string;
   /** 资源组id,多个资源组id用英文逗号分隔 */
   ExecutorGroupIdList?: string[];
+  /** true 只过滤重跑过的实例，false 忽略此过滤条件，结果集过滤条件中不包括是否重跑 */
+  OnlyRerun?: boolean;
 }
 
 declare interface JudgeResourceFileRequest {
@@ -10106,6 +10260,14 @@ declare interface RenewWorkflowSchedulerInfoDsRequest {
   DependencyWorkflow?: string;
   /** CrontabExpression */
   CrontabExpression?: string;
+  /** 0：不修改1：将任务的上游依赖配置改为默认值 */
+  ModifyCycleValue?: string;
+  /** 是否开启日历调度 1 开启 0关闭 */
+  CalendarOpen?: string;
+  /** 日历名称 */
+  CalendarName?: string;
+  /** 日历id */
+  CalendarId?: string;
 }
 
 declare interface RenewWorkflowSchedulerInfoDsResponse {
@@ -10631,6 +10793,32 @@ declare interface UnlockIntegrationTaskResponse {
   RequestId?: string;
 }
 
+declare interface UpdateDataModelRegistryInfoRequest {
+  /** 云应用的实例id */
+  CloudappId: string;
+  /** 数语的CAM角色 */
+  AppCamRole: string;
+  /** 数语的ip */
+  Ip?: string;
+  /** 数语的端口 */
+  Port?: number;
+  /** 数语的CAM角色id */
+  AppCamRoleId?: string;
+  /** 服务提供方 */
+  Provider?: string;
+  /** 租户id */
+  TenantId?: string;
+  /** 主账号id */
+  OwnId?: string;
+}
+
+declare interface UpdateDataModelRegistryInfoResponse {
+  /** 数语向wedata注册成功 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateWorkflowOwnerRequest {
   /** 项目Id */
   ProjectId: string;
@@ -10732,6 +10920,8 @@ declare interface Wedata {
   CountOpsInstanceState(data: CountOpsInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<CountOpsInstanceStateResponse>;
   /** 创建用户自定义函数 {@link CreateCustomFunctionRequest} {@link CreateCustomFunctionResponse} */
   CreateCustomFunction(data: CreateCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomFunctionResponse>;
+  /** （仅公有云）创建数据建模，提供给云应用使用，实现"Wedata数据建模"的下单发货 {@link CreateDataModelRequest} {@link CreateDataModelResponse} */
+  CreateDataModel(data: CreateDataModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataModelResponse>;
   /** 数据源管理-创建数据源 {@link CreateDataSourceRequest} {@link CreateDataSourceResponse} */
   CreateDataSource(data: CreateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataSourceResponse>;
   /** 创建文件夹 {@link CreateDsFolderRequest} {@link CreateDsFolderResponse} */
@@ -10766,6 +10956,8 @@ declare interface Wedata {
   DagInstances(data?: DagInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DagInstancesResponse>;
   /** 删除用户自定义函数 {@link DeleteCustomFunctionRequest} {@link DeleteCustomFunctionResponse} */
   DeleteCustomFunction(data?: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
+  /** （仅公有云）销毁数据建模，提供给云应用使用，实现Wedata数据建模的销毁 {@link DeleteDataModelRequest} {@link DeleteDataModelResponse} */
+  DeleteDataModel(data: DeleteDataModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataModelResponse>;
   /** 数据源管理-删除数据源 {@link DeleteDataSourcesRequest} {@link DeleteDataSourcesResponse} */
   DeleteDataSources(data: DeleteDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourcesResponse>;
   /** 删除文件夹 {@link DeleteDsFolderRequest} {@link DeleteDsFolderResponse} */
@@ -11148,6 +11340,8 @@ declare interface Wedata {
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
   /** 解锁集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
+  /** （仅公有云）数语向Wedata注册，更新相关信息 {@link UpdateDataModelRegistryInfoRequest} {@link UpdateDataModelRegistryInfoResponse} */
+  UpdateDataModelRegistryInfo(data: UpdateDataModelRegistryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataModelRegistryInfoResponse>;
   /** 修改工作流责任人 {@link UpdateWorkflowOwnerRequest} {@link UpdateWorkflowOwnerResponse} */
   UpdateWorkflowOwner(data: UpdateWorkflowOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowOwnerResponse>;
   /** 开发空间-保存任务信息 {@link UploadContentRequest} {@link UploadContentResponse} */

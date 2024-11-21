@@ -1249,22 +1249,22 @@ declare interface CreateQAResponse {
 }
 
 declare interface CreateReconstructDocumentFlowRequest {
-  /** 文件类型。支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2 */
+  /** 文件类型。支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2。 */
   FileType?: string;
   /** 文件的 Base64 值。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
   FileBase64?: string;
-  /** 文件的 Url 地址。支持的文件大小：所下载文件经 Base64 编码后不超过 100M。文件下载时间不超过 15 秒。支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 文件的Url地址。文件下载时间不超过15秒。支持的图片像素：单边介于20-10000px之间。文件存储于腾讯云的Url可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。所下载文件经 Base64 编码后不超过支持的文件大小： 文件类型 支持的文件大小 PDF 200M DOC 200M DOCX 200M PPT 200M PPTX 200M MD 10M TXT 10M XLS 20M XLSX 20M CSV 20M PNG 20M JPG 20M JPEG 20M BMP 20M GIF 20M WEBP 20M HEIC 20M EPS 20M ICNS 20M IM 20M PCX 20M PPM 20M TIFF 20M XBM 20M HEIF 20M JP2 20M */
   FileUrl?: string;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。 */
+  /** 当传入文件类型为PDF、DOC、DOCX、PPT、PPTX，用来指定文件识别的起始页码，识别的页码包含当前值。默认为1，表示从文件的第1页开始识别。 */
   FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为100，表示识别到pdf文件的第100页。单次调用最多支持识别100页内容，即FileEndPageNumber-FileStartPageNumber需要不大于100。 */
+  /** 当传入文件类型为PDF、DOC、DOCX、PPT、PPTX，用来指定文件识别的结束页码，识别的页码包含当前值。默认为100，表示识别到文件的第100页。单次调用最多支持识别1000页内容，即FileEndPageNumber-FileStartPageNumber需要不大于1000。 */
   FileEndPageNumber?: number;
-  /** 创建文档解析任务配置信息 */
+  /** 创建文档解析任务配置信息。 */
   Config?: CreateReconstructDocumentFlowConfig;
 }
 
 declare interface CreateReconstructDocumentFlowResponse {
-  /** 任务唯一id。30天内可以通过GetReconstructDocumentResult接口查询TaskId对应的处理结果。 */
+  /** 任务唯一ID。30天内可以通过[GetReconstructDocumentResult](https://cloud.tencent.com/document/product/1759/107505)接口查询TaskId对应的处理结果。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1799,7 +1799,7 @@ declare interface DescribeStorageCredentialRequest {
   BotBizId?: string;
   /** 文件类型,正常的文件名类型后缀，例如 xlsx、pdf、 docx、png 等 */
   FileType?: string;
-  /** IsPublic为空用于上传文件时选择场景，当上传为图片文件是IsPublic为true，上传文档文件时场景IsPublic为false */
+  /** IsPublic用于上传文件时选择场景，当上传为对话端文件时IsPublic为true，上传文档库文件时场景IsPublic为false */
   IsPublic?: boolean;
   /** 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline */
   TypeKey?: string;
@@ -2049,7 +2049,7 @@ declare interface GetAppSecretResponse {
 }
 
 declare interface GetDocPreviewRequest {
-  /** 文档业务ID */
+  /** 文档BizID */
   DocBizId: string;
   /** 应用ID */
   BotBizId: string;
@@ -2149,16 +2149,16 @@ declare interface GetMsgRecordResponse {
 }
 
 declare interface GetReconstructDocumentResultRequest {
-  /** 任务唯一id */
+  /** 任务唯一Id。[CreateReconstructDocumentFlow](https://cloud.tencent.com/document/product/1759/107506) 返回的TaskId。 */
   TaskId: string;
 }
 
 declare interface GetReconstructDocumentResultResponse {
-  /** 任务状态: Success->执行完成；Processing->执行中；Failed->执行失败；WaitExecute->等待执行； */
+  /** 任务状态: Success->执行完成；Processing->执行中；Failed->执行失败；WaitExecute->等待执行。 */
   Status?: string;
-  /** 输入文件中嵌入的图片中文字内容的识别结果，存储在腾讯云cos的下载地址 */
+  /** 本次文档解析的结果文件，存储在腾讯云COS的下载URL，下载URL的有效期为10分钟。 */
   DocumentRecognizeResultUrl?: string;
-  /** 文档解析失败的页码 */
+  /** 本次文档解析失败的页码信息。 */
   FailedPages?: ReconstructDocumentFailedPage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2213,7 +2213,7 @@ declare interface GetWsTokenResponse {
 declare interface GroupQARequest {
   /** 应用ID */
   BotBizId: string;
-  /** QA业务ID列表 */
+  /** QaBizID列表 */
   QaBizIds: string[];
   /** 分组 ID */
   CateBizId: string;
@@ -2487,7 +2487,7 @@ declare interface ListReleaseDocPreviewRequest {
   PageSize: number;
   /** 查询内容 */
   Query?: string;
-  /** 发布业务ID */
+  /** 发布单ID */
   ReleaseBizId?: string;
   /** 开始时间 */
   StartTime?: string;
@@ -3023,7 +3023,7 @@ declare interface Lke {
   CheckAttributeLabelExist(data: CheckAttributeLabelExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelExistResponse>;
   /** 检查属性标签引用 {@link CheckAttributeLabelReferRequest} {@link CheckAttributeLabelReferResponse} */
   CheckAttributeLabelRefer(data: CheckAttributeLabelReferRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelReferResponse>;
-  /** 文档转换 {@link ConvertDocumentRequest} {@link ConvertDocumentResponse} */
+  /** @deprecated 文档转换 {@link ConvertDocumentRequest} {@link ConvertDocumentResponse} */
   ConvertDocument(data?: ConvertDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertDocumentResponse>;
   /** 创建应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;

@@ -259,15 +259,15 @@ declare interface BinlogConfigInfo {
 /** Binlog描述 */
 declare interface BinlogItem {
   /** Binlog文件名称 */
-  FileName: string;
+  FileName?: string;
   /** 文件大小，单位：字节 */
-  FileSize: number;
+  FileSize?: number;
   /** 事务最早时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 事务最晚时间 */
-  FinishTime: string;
+  FinishTime?: string;
   /** Binlog文件ID */
-  BinlogId: number;
+  BinlogId?: number;
 }
 
 /** 任务信息 */
@@ -2987,7 +2987,7 @@ declare interface DescribeBackupDownloadUrlRequest {
 
 declare interface DescribeBackupDownloadUrlResponse {
   /** 备份下载地址 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3057,7 +3057,7 @@ declare interface DescribeBinlogDownloadUrlRequest {
 
 declare interface DescribeBinlogDownloadUrlResponse {
   /** 下载地址 */
-  DownloadUrl: string;
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3089,9 +3089,9 @@ declare interface DescribeBinlogsRequest {
 
 declare interface DescribeBinlogsResponse {
   /** 记录总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** Binlog列表 */
-  Binlogs: BinlogItem[] | null;
+  Binlogs?: BinlogItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5289,11 +5289,11 @@ declare interface Cynosdb {
   DescribeBackupList(data: DescribeBackupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListResponse>;
   /** 查询binlog配置 {@link DescribeBinlogConfigRequest} {@link DescribeBinlogConfigResponse} */
   DescribeBinlogConfig(data: DescribeBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogConfigResponse>;
-  /** 查询Binlog下载地址 {@link DescribeBinlogDownloadUrlRequest} {@link DescribeBinlogDownloadUrlResponse} */
+  /** 查询 Binlog下载地址 {@link DescribeBinlogDownloadUrlRequest} {@link DescribeBinlogDownloadUrlResponse} */
   DescribeBinlogDownloadUrl(data: DescribeBinlogDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogDownloadUrlResponse>;
   /** 查询Binlog保留天数 {@link DescribeBinlogSaveDaysRequest} {@link DescribeBinlogSaveDaysResponse} */
   DescribeBinlogSaveDays(data: DescribeBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogSaveDaysResponse>;
-  /** 查询Binlog列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
+  /** 查询 Binlog 列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
   /** 升降配运行参数对比 {@link DescribeChangedParamsAfterUpgradeRequest} {@link DescribeChangedParamsAfterUpgradeResponse} */
   DescribeChangedParamsAfterUpgrade(data: DescribeChangedParamsAfterUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChangedParamsAfterUpgradeResponse>;

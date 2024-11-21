@@ -25,21 +25,21 @@ declare interface AgeDetectTaskResult {
 /** 应用用量统计数据 */
 declare interface AppStatisticsItem {
   /** 实时语音统计数据 */
-  RealtimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem | null;
+  RealtimeSpeechStatisticsItem?: RealTimeSpeechStatisticsItem | null;
   /** 语音消息统计数据 */
-  VoiceMessageStatisticsItem: VoiceMessageStatisticsItem | null;
+  VoiceMessageStatisticsItem?: VoiceMessageStatisticsItem | null;
   /** 语音过滤统计数据 */
-  VoiceFilterStatisticsItem: VoiceFilterStatisticsItem | null;
+  VoiceFilterStatisticsItem?: VoiceFilterStatisticsItem | null;
   /** 统计时间 */
-  Date: string;
+  Date?: string;
   /** 录音转文本用量统计数据 */
-  AudioTextStatisticsItem: AudioTextStatisticsItem | null;
+  AudioTextStatisticsItem?: AudioTextStatisticsItem | null;
   /** 流式转文本用量数据 */
-  StreamTextStatisticsItem: StreamTextStatisticsItem | null;
+  StreamTextStatisticsItem?: StreamTextStatisticsItem | null;
   /** 海外转文本用量数据 */
-  OverseaTextStatisticsItem: OverseaTextStatisticsItem | null;
+  OverseaTextStatisticsItem?: OverseaTextStatisticsItem | null;
   /** 实时语音转文本用量数据 */
-  RealtimeTextStatisticsItem: RealtimeTextStatisticsItem | null;
+  RealtimeTextStatisticsItem?: RealtimeTextStatisticsItem | null;
 }
 
 /** 应用统计数据 */
@@ -519,8 +519,10 @@ declare interface DeleteRoomMemberRequest {
   DeleteType: number;
   /** 应用id */
   BizId: number;
-  /** 要剔除的用户列表 */
+  /** 要剔除的用户列表（整型） */
   Uids?: string[];
+  /** 要剔除的用户列表（字符串类型） */
+  StrUids?: string[];
 }
 
 declare interface DeleteRoomMemberResponse {

@@ -49,33 +49,33 @@ declare interface LifeCycleCommand {
 /** 获取用户工作空间返回信息 */
 declare interface WorkspaceStatusInfo {
   /** 工作空间 ID */
-  Id: number;
+  Id?: number;
   /** 工作空间名称 */
-  Name: string;
+  Name?: string;
   /** 工作空间标识 */
-  SpaceKey: string;
+  SpaceKey?: string;
   /** 工作空间状态 */
-  Status: string;
+  Status?: string;
   /** CPU数量 */
-  Cpu: number;
+  Cpu?: number;
   /** 内存 */
-  Memory: number;
+  Memory?: number;
   /** 工作空间图标 */
-  Icon?: string | null;
+  Icon?: string;
   /** 工作空间状态, 异常原因 */
-  StatusReason?: string | null;
+  StatusReason?: string;
   /** 工作空间描述 */
-  Description: string | null;
+  Description?: string;
   /** 工作空间类型 */
-  WorkspaceType?: string | null;
+  WorkspaceType?: string;
   /** Git 仓库 HTTPS 地址 */
-  VersionControlUrl: string | null;
+  VersionControlUrl?: string;
   /** Git 仓库引用。指定分支使用 /refs/heads/{分支名}, 指定 Tag 用 /refs/tags/{Tag名} */
-  VersionControlRef: string | null;
+  VersionControlRef?: string;
   /** 最后操作时间 */
-  LastOpsDate: string | null;
+  LastOpsDate?: string;
   /** 创建时间 */
-  CreateDate: string | null;
+  CreateDate?: string;
 }
 
 declare interface CreateWorkspaceRequest {
@@ -141,7 +141,7 @@ declare interface DescribeConfigRequest {
 
 declare interface DescribeConfigResponse {
   /** 配置值 */
-  Data?: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

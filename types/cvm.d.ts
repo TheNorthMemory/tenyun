@@ -5,23 +5,23 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 配额详情 */
 declare interface AccountQuota {
   /** 后付费配额列表 */
-  PostPaidQuotaSet: PostPaidQuota[];
+  PostPaidQuotaSet?: PostPaidQuota[];
   /** 预付费配额列表 */
-  PrePaidQuotaSet: PrePaidQuota[];
+  PrePaidQuotaSet?: PrePaidQuota[];
   /** spot配额列表 */
-  SpotPaidQuotaSet: SpotPaidQuota[];
+  SpotPaidQuotaSet?: SpotPaidQuota[];
   /** 镜像配额列表 */
-  ImageQuotaSet: ImageQuota[];
+  ImageQuotaSet?: ImageQuota[];
   /** 置放群组配额列表 */
-  DisasterRecoverGroupQuotaSet: DisasterRecoverGroupQuota[];
+  DisasterRecoverGroupQuotaSet?: DisasterRecoverGroupQuota[];
 }
 
 /** 配额详情概览 */
 declare interface AccountQuotaOverview {
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 配额数据 */
-  AccountQuota: AccountQuota;
+  AccountQuota?: AccountQuota;
 }
 
 /** 定时任务 */
@@ -32,6 +32,12 @@ declare interface ActionTimer {
   ActionTime?: string | null;
   /** 扩展数据 */
   Externals?: Externals | null;
+  /** 定时器ID。 */
+  ActionTimerId?: string;
+  /** 定时器状态，取值范围：UNDO：未触发DOING：触发中DONE：已经触发 */
+  Status?: string;
+  /** 定时器对应的实例ID。 */
+  InstanceId?: string;
 }
 
 /** 描述预付费模式，即包年包月相关参数。包括购买时长和自动续费逻辑等。 */
@@ -763,7 +769,7 @@ declare interface LocalDiskType {
 /** 描述了实例登录相关配置与信息。 */
 declare interface LoginSettings {
   /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。 */
-  Password?: string | null;
+  Password?: string;
   /** 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。 */
   KeyIds?: string[] | null;
   /** 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为true。取值范围：true：表示保持镜像的登录设置false：表示不保持镜像的登录设置默认取值：false。 */
@@ -1201,7 +1207,7 @@ declare interface AllocateHostsRequest {
 
 declare interface AllocateHostsResponse {
   /** 新创建云子机的实例ID列表。 */
-  HostIdSet: string[];
+  HostIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1451,7 +1457,7 @@ declare interface CreateLaunchTemplateVersionRequest {
   LaunchTemplateVersionDescription?: string;
   /** 实例机型。不同实例机型指定了不同的资源规格。对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。 */
   InstanceType?: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。 */
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：公共镜像自定义镜像共享镜像云镜像市场可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`云镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。 */
   ImageId?: string;
   /** 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
@@ -1469,7 +1475,7 @@ declare interface CreateLaunchTemplateVersionRequest {
   LoginSettings?: LoginSettings;
   /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
   SecurityGroupIds?: string[];
-  /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。 */
+  /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与云镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。 */
   EnhancedService?: EnhancedService;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -1603,7 +1609,7 @@ declare interface DescribeChcDeniedActionsRequest {
 
 declare interface DescribeChcDeniedActionsResponse {
   /** CHC实例禁止操作信息 */
-  ChcHostDeniedActionSet: ChcHostDeniedActions[];
+  ChcHostDeniedActionSet?: ChcHostDeniedActions[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1667,7 +1673,7 @@ declare interface DescribeDisasterRecoverGroupsResponse {
 }
 
 declare interface DescribeHostsRequest {
-  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表project-id按照【项目ID】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。项目ID形如：1002189。类型：Integer必选：否host-id按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。类型：String必选：否host-name按照【CDH实例名称】进行过滤。类型：String必选：否host-state按照【CDH实例状态】进行过滤。（PENDING：创建中 | LAUNCH_FAILURE：创建失败 | RUNNING：运行中 | EXPIRED：已过期）类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
+  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表project-id按照【项目ID】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID形如：1002189。类型：Integer必选：否host-id按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。类型：String必选：否host-name按照【CDH实例名称】进行过滤。类型：String必选：否host-state按照【CDH实例状态】进行过滤。（PENDING：创建中 | LAUNCH_FAILURE：创建失败 | RUNNING：运行中 | EXPIRED：已过期）类型：String必选：否host-type按照【CDH机型】进行过滤。类型：String必选：否tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例。每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -1677,9 +1683,9 @@ declare interface DescribeHostsRequest {
 
 declare interface DescribeHostsResponse {
   /** 符合查询条件的cdh实例总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** cdh实例详细信息列表 */
-  HostSet: HostItem[];
+  HostSet?: HostItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1739,7 +1745,7 @@ declare interface DescribeImageSharePermissionRequest {
 
 declare interface DescribeImageSharePermissionResponse {
   /** 镜像共享信息 */
-  SharePermissionSet: SharePermission[];
+  SharePermissionSet?: SharePermission[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1829,19 +1835,19 @@ declare interface DescribeInstancesActionTimerRequest {
   ActionTimerIds?: string[];
   /** 按照一个或者多个实例ID查询。 */
   InstanceIds?: string[];
-  /** 定时任务执行时间，格式如：2018-05-01 19:00:00，必须大于当前时间5分钟。 */
+  /** 定时器动作，目前仅支持销毁一个值：TerminateInstances。 */
   TimerAction?: string;
   /** 执行时间的结束范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
   EndActionTime?: string;
   /** 执行时间的开始范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
   StartActionTime?: string;
-  /** 定时任务状态列表。UNDO：未执行DOING：正在执行DONE：执行完成。 */
+  /** 定时任务状态列表。UNDO：未执行 DOING：正在执行DONE：执行完成。 */
   StatusList?: string[];
 }
 
 declare interface DescribeInstancesActionTimerResponse {
   /** 定时任务信息列表。 */
-  ActionTimers: ActionTimer[];
+  ActionTimers?: ActionTimer[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -38,7 +38,7 @@ declare interface Instance {
   InstanceId?: string | null;
   /** 实例名称 */
   InstanceName?: string | null;
-  /** 实例状态：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中ARREAR：表示欠费隔离TERMINATING：表示销毁中。TERMINATED：表示已销毁 */
+  /** 实例状态：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中ARREARS：表示欠费隔离TERMINATING：表示销毁中。TERMINATED：表示已销毁 */
   InstanceState?: string | null;
   /** 应用名称 */
   ApplicationName?: string | null;
@@ -80,6 +80,16 @@ declare interface Instance {
   OSType?: string | null;
 }
 
+/** 实例预付费入参 */
+declare interface InstanceChargePrepaid {
+  /** 时长，默认值：1 */
+  Period?: number;
+  /** 续费标志可选参数：NOTIFY_AND_MANUAL_RENEW：表示默认状态(用户未设置，即初始状态：若用户有预付费不停服特权，也会对该值进行自动续费)NOTIFY_AND_AUTO_RENEW：表示自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：表示明确不自动续费(用户设置)默认值：NOTIFY_AND_MANUAL_RENEW */
+  RenewFlag?: string;
+  /** 时长单位，默认值MONTH */
+  TimeUnit?: string;
+}
+
 /** 套餐价格 */
 declare interface ItemPrice {
   /** 原单价 */
@@ -88,10 +98,22 @@ declare interface ItemPrice {
   DiscountUnitPrice?: number | null;
   /** 折扣 */
   Discount?: number | null;
-  /** 单位：时 */
+  /** 单位：时/月 */
   ChargeUnit?: string | null;
   /** 商品数量 */
   Amount?: number | null;
+}
+
+/** 分实例价格 */
+declare interface ItemPriceDetail {
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 实例价格详情 */
+  InstancePrice?: ItemPrice | null;
+  /** 磁盘价格详情 */
+  CloudDiskPrice?: ItemPrice | null;
+  /** 该实例的总价钱 */
+  InstanceTotalPrice?: ItemPrice | null;
 }
 
 /** 登录服务详情 */
@@ -128,6 +150,8 @@ declare interface Price {
   InstancePrice?: ItemPrice | null;
   /** 云盘价格信息 */
   CloudDiskPrice?: ItemPrice | null;
+  /** 分实例价格 */
+  PriceDetailSet?: ItemPriceDetail[] | null;
 }
 
 /** 地域列表 */
@@ -201,7 +225,7 @@ declare interface DescribeInstanceNetworkStatusResponse {
 declare interface DescribeInstancesRequest {
   /** 实例元组 */
   InstanceIds?: string[];
-  /** 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态 */
+  /** 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态；charge-type，付费方式；public-ip-address，公网IP过滤 */
   Filters?: Filter[];
   /** 偏移量，默认为0 */
   Offset?: number;
@@ -269,6 +293,10 @@ declare interface InquirePriceRunInstancesRequest {
   ClientToken?: string;
   /** DryRun为True就是只验接口连通性，默认为False */
   DryRun?: boolean;
+  /** 付费方式，POSTPAID_BY_HOUR按量后付费，PREPAID_BY_MONTH预付费按月，PREPAID_BY_DAY预付费按天 */
+  InstanceChargeType?: string;
+  /** 预付费参数 */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
 }
 
 declare interface InquirePriceRunInstancesResponse {
@@ -359,13 +387,13 @@ declare interface Hai {
   DescribeScenes(data?: DescribeScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenesResponse>;
   /** 查询服务登录配置 {@link DescribeServiceLoginSettingsRequest} {@link DescribeServiceLoginSettingsResponse} */
   DescribeServiceLoginSettings(data: DescribeServiceLoginSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceLoginSettingsResponse>;
-  /** 实例费用询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
+  /** 创建实例询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
   /** 创建实例 {@link RunInstancesRequest} {@link RunInstancesResponse} */
   RunInstances(data: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
-  /** 启动hai实例 {@link StartInstanceRequest} {@link StartInstanceResponse} */
+  /** 启动实例 {@link StartInstanceRequest} {@link StartInstanceResponse} */
   StartInstance(data: StartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstanceResponse>;
-  /** 关闭hai实例 {@link StopInstanceRequest} {@link StopInstanceResponse} */
+  /** 关闭实例 {@link StopInstanceRequest} {@link StopInstanceResponse} */
   StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
   /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;

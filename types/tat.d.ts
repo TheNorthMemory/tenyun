@@ -43,9 +43,9 @@ declare interface Command {
   /** 自定义参数的默认取值。 */
   DefaultParameters?: string;
   /** 自定义参数的默认取值。 */
-  DefaultParameterConfs?: DefaultParameterConf[] | null;
+  DefaultParameterConfs?: DefaultParameterConf[];
   /** 命令关联的场景 */
-  Scenes?: string[] | null;
+  Scenes?: string[];
   /** 命令的结构化描述。公共命令有值，用户命令为空字符串。 */
   FormattedDescription?: string;
   /** 命令创建者。TAT 代表公共命令，USER 代表个人命令。 */
@@ -81,11 +81,11 @@ declare interface CommandDocument {
 /** 自定义参数。 */
 declare interface DefaultParameterConf {
   /** 参数名。 */
-  ParameterName: string | null;
+  ParameterName: string;
   /** 参数默认值。 */
-  ParameterValue: string | null;
+  ParameterValue: string;
   /** 参数描述。 */
-  ParameterDescription?: string | null;
+  ParameterDescription?: string;
 }
 
 /** > 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> - 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> - 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。> > 以[DescribeCommands](https://cloud.tencent.com/document/api/1340/52681)接口的`Filters`为例。若我们需要查询命令名称（`command-name`）为 “打印工作目录” ***并且*** 命令类型（`command-type`）为 “POWERSHELL” ***或者*** “BAT” 时，可如下实现：```Filters.0.Name=command-name&Filters.0.Values.0=打印工作目录&Filters.1.Name=command-type&Filters.1.Values.0=POWERSHELL&Filters.1.Values.1=BAT``` */
@@ -99,11 +99,11 @@ declare interface Filter {
 /** 用户配额信息。 */
 declare interface GeneralResourceQuotaSet {
   /** 资源名称 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 已使用额度 */
-  ResourceQuotaUsed?: number | null;
+  ResourceQuotaUsed?: number;
   /** 总额度 */
-  ResourceQuotaTotal?: number | null;
+  ResourceQuotaTotal?: number;
 }
 
 /** 执行活动详情。 */
@@ -193,27 +193,27 @@ declare interface InvocationTaskBasicInfo {
 /** 执行器信息。 */
 declare interface Invoker {
   /** 执行器ID。 */
-  InvokerId: string;
+  InvokerId?: string;
   /** 执行器名称。 */
-  Name: string;
+  Name?: string;
   /** 执行器类型。 */
-  Type: string;
+  Type?: string;
   /** 命令ID。 */
-  CommandId: string;
+  CommandId?: string;
   /** 用户名。 */
-  Username: string;
+  Username?: string;
   /** 自定义参数。 */
-  Parameters: string;
+  Parameters?: string;
   /** 实例ID列表。 */
-  InstanceIds: string[];
+  InstanceIds?: string[];
   /** 执行器是否启用。 */
-  Enable: boolean;
+  Enable?: boolean;
   /** 执行器周期计划。周期执行器会返回此字段。 */
-  ScheduleSettings: ScheduleSettings | null;
+  ScheduleSettings?: ScheduleSettings | null;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 修改时间。 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
 }
 
 /** 执行器执行记录。 */
@@ -243,51 +243,51 @@ declare interface RegionInfo {
 /** 注册码信息。 */
 declare interface RegisterCodeInfo {
   /** 注册码ID。 */
-  RegisterCodeId?: string | null;
+  RegisterCodeId?: string;
   /** 注册码描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 注册实例名称前缀。 */
-  InstanceNamePrefix?: string | null;
+  InstanceNamePrefix?: string;
   /** 该注册码允许注册的实例数目。 */
-  RegisterLimit?: number | null;
+  RegisterLimit?: number;
   /** 该注册码的过期时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  ExpiredTime?: string | null;
+  ExpiredTime?: string;
   /** 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。 */
-  IpAddressRange?: string | null;
+  IpAddressRange?: string;
   /** 该注册码是否可用。 */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
   /** 该注册码已注册数目。 */
-  RegisteredCount?: number | null;
+  RegisteredCount?: number;
   /** 注册码创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** 注册码最近一次更新时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  UpdatedTime?: string | null;
+  UpdatedTime?: string;
 }
 
 /** 注册实例信息。 */
 declare interface RegisterInstanceInfo {
   /** 注册码ID。 */
-  RegisterCodeId?: string | null;
+  RegisterCodeId?: string;
   /** 实例ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例名。 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 机器ID。 */
-  MachineId?: string | null;
+  MachineId?: string;
   /** 系统名。 */
-  SystemName?: string | null;
+  SystemName?: string;
   /** 主机名。 */
-  HostName?: string | null;
+  HostName?: string;
   /** 内网IP。 */
-  LocalIp?: string | null;
+  LocalIp?: string;
   /** 公钥。 */
-  PublicKey?: string | null;
+  PublicKey?: string;
   /** 托管状态。返回Online表示实例正在托管，返回Offline表示实例未托管。 */
   Status?: string;
   /** 创建时间。 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** 上次更新时间。 */
-  UpdatedTime?: string | null;
+  UpdatedTime?: string;
 }
 
 /** 场景详情。 */
@@ -597,9 +597,9 @@ declare interface DescribeInvokersRequest {
 
 declare interface DescribeInvokersResponse {
   /** 满足条件的执行器数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 执行器信息。 */
-  InvokerSet: Invoker[];
+  InvokerSet?: Invoker[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -362,6 +362,8 @@ declare interface TaskGroupAction {
   ActionRisk?: string | null;
   /** 动作运行时间 */
   TaskGroupActionExecuteTime?: number | null;
+  /** 动作开始执行时间 */
+  TaskGroupActionStartTime?: string;
 }
 
 /** 动作组中的动作参数 */

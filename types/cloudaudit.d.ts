@@ -31,17 +31,17 @@ declare interface AuditSummary {
 /** cmq地域信息 */
 declare interface CmqRegionInfo {
   /** 地域描述 */
-  CmqRegionName?: string;
+  CmqRegionName?: string | null;
   /** cmq地域 */
-  CmqRegion?: string;
+  CmqRegion?: string | null;
 }
 
 /** cos地域信息 */
 declare interface CosRegionInfo {
   /** cos地域 */
-  CosRegion?: string;
+  CosRegion?: string | null;
   /** 地域描述 */
-  CosRegionName?: string;
+  CosRegionName?: string | null;
 }
 
 /** 日志详情 */
@@ -161,16 +161,16 @@ declare interface Tracks {
 declare interface CreateAuditTrackRequest {
   /** 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符 */
   Name: string;
+  /** 跟踪集状态（未开启：0；开启：1） */
+  Status: number;
+  /** 数据投递存储（目前支持 cos、cls） */
+  Storage: Storage;
   /** 跟踪事件类型（读：Read；写：Write；全部：*） */
   ActionType: string;
   /** 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*） */
   ResourceType: string;
-  /** 跟踪集状态（未开启：0；开启：1） */
-  Status: number;
   /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个） */
   EventNames: string[];
-  /** 数据投递存储（目前支持 cos、cls） */
-  Storage: Storage;
   /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
   TrackForAllMembers?: number;
 }
@@ -358,8 +358,8 @@ declare interface ListCmqEnableRegionRequest {
 }
 
 declare interface ListCmqEnableRegionResponse {
-  /** 云审计支持的cmq的可用区 */
-  EnableRegions: CmqRegionInfo[];
+  /** 操作审计支持的cmq的可用区 */
+  EnableRegions?: CmqRegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -370,8 +370,8 @@ declare interface ListCosEnableRegionRequest {
 }
 
 declare interface ListCosEnableRegionResponse {
-  /** 云审计支持的cos可用区 */
-  EnableRegions: CosRegionInfo[];
+  /** 操作审计支持的cos可用区 */
+  EnableRegions?: CosRegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -405,17 +405,19 @@ declare interface LookUpEventsRequest {
   NextToken?: string;
   /** 返回日志的最大条数 */
   MaxResults?: number;
-  /** 云审计模式，有效值：standard | quick，其中standard是标准模式，quick是极速模式。默认为标准模式 */
+  /** 操作审计模式，有效值：standard | quick，其中standard是标准模式，quick是极速模式。默认为标准模式 */
   Mode?: string;
 }
 
 declare interface LookUpEventsResponse {
   /** 查看更多日志的凭证 */
-  NextToken: string | null;
+  NextToken?: string | null;
   /** 日志集合 */
-  Events: Event[] | null;
+  Events?: Event[] | null;
   /** 日志集合是否结束 */
-  ListOver: boolean | null;
+  ListOver?: boolean | null;
+  /** 数量 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -547,9 +549,9 @@ declare interface Cloudaudit {
   InquireAuditCredit(data?: InquireAuditCreditRequest, config?: AxiosRequestConfig): AxiosPromise<InquireAuditCreditResponse>;
   /** 查询跟踪集概要 {@link ListAuditsRequest} {@link ListAuditsResponse} */
   ListAudits(data?: ListAuditsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuditsResponse>;
-  /** 查询云审计支持的cmq的可用区 {@link ListCmqEnableRegionRequest} {@link ListCmqEnableRegionResponse} */
+  /** 查询操作审计支持的cmq的可用区 {@link ListCmqEnableRegionRequest} {@link ListCmqEnableRegionResponse} */
   ListCmqEnableRegion(data?: ListCmqEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCmqEnableRegionResponse>;
-  /** 查询云审计支持的cos可用区 {@link ListCosEnableRegionRequest} {@link ListCosEnableRegionResponse} */
+  /** 查询操作审计支持的cos可用区 {@link ListCosEnableRegionRequest} {@link ListCosEnableRegionResponse} */
   ListCosEnableRegion(data?: ListCosEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCosEnableRegionResponse>;
   /** 根据地域获取KMS密钥别名 {@link ListKeyAliasByRegionRequest} {@link ListKeyAliasByRegionResponse} */
   ListKeyAliasByRegion(data: ListKeyAliasByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyAliasByRegionResponse>;

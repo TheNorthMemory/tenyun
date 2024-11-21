@@ -188,6 +188,8 @@ declare interface ClusterSession {
   WebUIUrl?: string;
   /** session集群高级参数 */
   Properties?: Property[] | null;
+  /** 引用资源 */
+  ResourceRefs?: SessionClusterRefItem[] | null;
   /** JobManager的规格 */
   JobManagerCuSpec?: number;
   /** TaskManager的规格 */
@@ -198,6 +200,14 @@ declare interface ClusterSession {
   CreateTime?: string;
   /** 更新时间 */
   UpdateTime?: string;
+  /** JobManagerCpu */
+  JobManagerCpu?: number;
+  /** JobManagerMem */
+  JobManagerMem?: number;
+  /** TaskManagerCpu */
+  TaskManagerCpu?: number;
+  /** TaskManagerMem */
+  TaskManagerMem?: number;
 }
 
 /** 集群的版本相关信息 */
@@ -516,6 +526,12 @@ declare interface JobV1 {
   EventInfo?: JobEventInfo | null;
   /** 描述信息 */
   Description?: string | null;
+  /** 0:代表没开启调优任务，1:开启智能调优，2:代表定时调优 */
+  ScalingType?: number | null;
+  /** 使用CPU数目 */
+  RunningCpu?: number | null;
+  /** 使用内存数量 */
+  RunningMem?: number | null;
 }
 
 /** 日志查询的每行日志信息 */
@@ -806,6 +822,18 @@ declare interface Savepoint {
   TimeConsuming?: number | null;
   /** 快照路径状态 1：可用；2：不可用； */
   PathStatus?: number | null;
+}
+
+/** session集群引用资源信息 */
+declare interface SessionClusterRefItem {
+  /** 空间唯一标识 */
+  WorkspaceId: string | null;
+  /** 资源唯一标识 */
+  ResourceId: string | null;
+  /** 版本号 */
+  Version: number | null;
+  /** 引用类型，0:用户资源 */
+  Type: number | null;
 }
 
 /** SlotSharingGroup 描述 */

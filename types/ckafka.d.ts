@@ -395,11 +395,11 @@ declare interface CreateDatahubTaskRes {
 /** 创建后付费接口返回的 Data 数据结构 */
 declare interface CreateInstancePostData {
   /** CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 订单号列表 */
-  DealNames: string[] | null;
-  /** 实例Id，当购买多个实例时，默认返回购买的第一个实例 id */
-  InstanceId: string | null;
+  DealNames?: string[] | null;
+  /** ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id */
+  InstanceId?: string | null;
   /** 订单和购买实例对应映射列表 */
   DealNameInstanceIdMapping?: DealInstanceDTO[] | null;
 }
@@ -407,21 +407,21 @@ declare interface CreateInstancePostData {
 /** 后付费实例相关接口返回结构 */
 declare interface CreateInstancePostResp {
   /** 返回的code，0为正常，非0为错误 */
-  ReturnCode: string;
+  ReturnCode?: string;
   /** 接口返回消息，当接口报错时提示错误信息 */
-  ReturnMessage: string;
+  ReturnMessage?: string;
   /** 返回的Data数据 */
-  Data: CreateInstancePostData | null;
+  Data?: CreateInstancePostData | null;
 }
 
 /** 创建预付费接口返回的Data */
 declare interface CreateInstancePreData {
   /** CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 订单号列表 */
-  DealNames: string[] | null;
-  /** 实例Id，当购买多个实例时，默认返回购买的第一个实例 id */
-  InstanceId: string | null;
+  DealNames?: string[] | null;
+  /** ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id */
+  InstanceId?: string | null;
   /** 订单和购买实例对应映射列表 */
   DealNameInstanceIdMapping?: DealInstanceDTO[] | null;
 }
@@ -429,11 +429,11 @@ declare interface CreateInstancePreData {
 /** 预付费实例相关接口返回结构 */
 declare interface CreateInstancePreResp {
   /** 返回的code，0为正常，非0为错误 */
-  ReturnCode: string;
+  ReturnCode?: string;
   /** 成功消息 */
-  ReturnMessage: string;
+  ReturnMessage?: string;
   /** 操作型返回的Data数据 */
-  Data: CreateInstancePreData | null;
+  Data?: CreateInstancePreData | null;
   /** 删除时间。目前该参数字段已废弃，将会在未来被删除 */
   DeleteRouteTimestamp?: string | null;
 }
@@ -1724,7 +1724,7 @@ declare interface MySQLParam {
 
 /** 操作类型返回的Data结构 */
 declare interface OperateResponseData {
-  /** FlowId11 */
+  /** 流程Id */
   FlowId?: number | null;
   /** RouteIdDto */
   RouteDTO?: RouteDTO | null;
@@ -1960,7 +1960,7 @@ declare interface Route {
 
 /** RouteDTO */
 declare interface RouteDTO {
-  /** RouteId11 */
+  /** 路由Id */
   RouteId?: number | null;
 }
 
@@ -2761,9 +2761,9 @@ declare interface CreateDatahubTopicResponse {
 }
 
 declare interface CreateInstancePostRequest {
-  /** 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** ckafka集群实例Name，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
   InstanceName: string;
-  /** 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填 */
+  /** 私有网络Id 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填 */
   VpcId: string;
   /** 子网id。创建实例默认接入点所在的子网对应的子网 id */
   SubnetId: string;
@@ -2799,6 +2799,8 @@ declare interface CreateInstancePostRequest {
   PublicNetworkMonthly?: number;
   /** 标签 */
   Tags?: Tag[];
+  /** 弹性带宽开关 0不开启 1开启（0默认） */
+  ElasticBandwidthSwitch?: number;
 }
 
 declare interface CreateInstancePostResponse {
@@ -2809,7 +2811,7 @@ declare interface CreateInstancePostResponse {
 }
 
 declare interface CreateInstancePreRequest {
-  /** 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** ckafka集群实例Name，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
   InstanceName: string;
   /** 可用区。当购买多可用区实例时，当前参数为主可用区。需要保证传入的参数和 SubnetId 所在子网属于同一个可用区 */
   ZoneId: number;
@@ -2817,7 +2819,7 @@ declare interface CreateInstancePreRequest {
   Period: string;
   /** 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。 */
   InstanceType: number;
-  /** vpcId，必填 */
+  /** 私有网络Id，必填 */
   VpcId?: string;
   /** 子网id，必填 */
   SubnetId?: string;
@@ -2833,7 +2835,7 @@ declare interface CreateInstancePreRequest {
   SpecificationsType?: string;
   /** 磁盘大小，如果跟控制台规格配比不相符，则无法创建成功 */
   DiskSize?: number;
-  /** 带宽，如果跟控制台规格配比不相符，则无法创建成功 */
+  /** 实例带宽,单位MB/s; 最小值:20MB/s, 高级版最大值:360MB/s,专业版最大值:100000MB/s 标准版固定带宽规格: 40MB/s, 100MB/s, 150MB/s */
   BandWidth?: number;
   /** 分区大小，如果跟控制台规格配比不相符，则无法创建成功 */
   Partition?: number;
@@ -2851,6 +2853,8 @@ declare interface CreateInstancePreRequest {
   InstanceNum?: number;
   /** 是否自动选择代金券:1-是;0否。默认为0 */
   AutoVoucher?: number;
+  /** 弹性带宽开关 0不开启 1开启（0默认） */
+  ElasticBandwidthSwitch?: number;
 }
 
 declare interface CreateInstancePreResponse {
@@ -2877,9 +2881,9 @@ declare interface CreatePartitionResponse {
 }
 
 declare interface CreatePostPaidInstanceRequest {
-  /** 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** ckafka集群实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
   InstanceName?: string;
-  /** 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填 */
+  /** 私有网络Id 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填 */
   VpcId?: string;
   /** 子网id。创建实例默认接入点所在的子网对应的子网 id */
   SubnetId?: string;
@@ -2915,6 +2919,8 @@ declare interface CreatePostPaidInstanceRequest {
   PublicNetworkMonthly?: number;
   /** 标签 */
   Tags?: Tag[];
+  /** 弹性带宽开关 0不开启 1开启（0默认 */
+  ElasticBandwidthSwitch?: number;
 }
 
 declare interface CreatePostPaidInstanceResponse {
@@ -3543,11 +3549,11 @@ declare interface DescribeInstancesDetailResponse {
 }
 
 declare interface DescribeInstancesRequest {
-  /** （过滤条件）按照实例ID过滤 */
+  /** （查询条件）按照ckafka集群实例Id过滤 */
   InstanceId?: string;
-  /** （过滤条件）按照实例名称过滤，支持模糊查询 */
+  /** 搜索词 ex:（查询条件）按照实例名称过滤，支持模糊查询 */
   SearchWord?: string;
-  /** （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部 */
+  /** （查询条件）实例的状态 0：创建中，1：运行中，2：删除中，5: 隔离中, 7:升级中 不填默认返回全部 */
   Status?: number[];
   /** 偏移量，不填默认为0 */
   Offset?: number;
@@ -3555,7 +3561,7 @@ declare interface DescribeInstancesRequest {
   Limit?: number;
   /** 已废弃。匹配标签key值。 */
   TagKey?: string;
-  /** 私有网络Id */
+  /** （查询条件）私有网络Id */
   VpcId?: string;
 }
 
@@ -4041,11 +4047,11 @@ declare interface InstanceScalingDownResponse {
 
 declare interface JgwOperateResponse {
   /** 返回的code，0为正常，非0为错误 */
-  ReturnCode: string;
+  ReturnCode?: string;
   /** 成功消息 */
-  ReturnMessage: string;
+  ReturnMessage?: string;
   /** 操作型返回的Data数据,可能有flowId等 */
-  Data: OperateResponseData | null;
+  Data?: OperateResponseData | null;
 }
 
 declare interface ModifyAclRuleRequest {

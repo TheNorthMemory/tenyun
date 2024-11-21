@@ -5,13 +5,13 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 人脸信息 */
 declare interface FaceInfo {
   /** 人脸框的横坐标 */
-  X: number;
+  X?: number;
   /** 人脸框的纵坐标 */
-  Y: number;
+  Y?: number;
   /** 人脸框的宽度 */
-  Width: number;
+  Width?: number;
   /** 人脸框的高度 */
-  Height: number;
+  Height?: number;
 }
 
 /** 人脸框信息 */
@@ -35,15 +35,15 @@ declare interface FuseParam {
 /** 高精度融合参数 */
 declare interface FusionUltraParam {
   /** 拉脸强度。主要用于调整生成结果人脸脸型更像素材模板还是用户人脸。取值越大越像用户人脸。取值范围：0-1之间。默认取值0.7。该参数仅对SwapModelType（模型类型）取值1-5生效 */
-  WarpRadio?: number | null;
+  WarpRadio?: number;
   /** 人脸增强强度。对整个人脸进行增强，增加清晰度，改善质量。当生成的人脸不够清晰，质感不够好的时候可以设置。取值越大增强强度越大。取值范围：0-1之间。默认取值1。该参数仅对SwapModelType（模型类型）取值1-5生效 */
-  EnhanceRadio?: number | null;
+  EnhanceRadio?: number;
   /** 磨皮强度。当生成脸的图像面部显脏时，可进行设置。取值范围：0-1之间。默认取值1。该参数仅对SwapModelType（模型类型）取值1-5生效 */
-  MpRadio?: number | null;
+  MpRadio?: number;
   /** 人脸模糊开关（暂不支持）当生成人脸比较清晰时，将人脸模糊到接近模板的清晰度的程度该参数仅对SwapModelType（模型类型）取值1-5生效 */
-  BlurRadio?: number | null;
+  BlurRadio?: number;
   /** 牙齿增强开关，默认取值为1牙齿增强，修复牙齿。当生成牙齿不好（如牙齿裂开）可以打开此开关0：牙齿增强关闭1：牙齿增强打开该参数仅对SwapModelType（模型类型）取值1-5生效 */
-  TeethEnhanceRadio?: number | null;
+  TeethEnhanceRadio?: number;
 }
 
 /** 图片编码参数 */
@@ -107,7 +107,7 @@ declare interface PublicMaterialInfos {
   /** 素材名 */
   MaterialName?: string;
   /** 审核原因 */
-  AuditResult?: string | null;
+  AuditResult?: string;
 }
 
 declare interface DescribeMaterialListRequest {
@@ -190,13 +190,13 @@ declare namespace V20181201 {
   /** 人脸信息 */
   interface FaceInfo {
     /** 人脸框的横坐标 */
-    X: number;
+    X?: number;
     /** 人脸框的纵坐标 */
-    Y: number;
+    Y?: number;
     /** 人脸框的宽度 */
-    Width: number;
+    Width?: number;
     /** 人脸框的高度 */
-    Height: number;
+    Height?: number;
   }
 
   /** 人脸框信息 */
@@ -282,25 +282,25 @@ declare namespace V20181201 {
   /** 素材信息 */
   interface PublicMaterialInfos {
     /** 素材Id */
-    MaterialId: string;
+    MaterialId?: string;
     /** 素材状态 */
-    MaterialStatus: number;
+    MaterialStatus?: number;
     /** 脸型参数P图 */
-    BlendParamPtu: number;
+    BlendParamPtu?: number;
     /** 五官参数P图 */
-    PositionParamPtu: number;
+    PositionParamPtu?: number;
     /** 脸型参数优图 */
-    BlendParamYoutu: number;
+    BlendParamYoutu?: number;
     /** 五官参数优图 */
-    PositionParamYoutu: number;
+    PositionParamYoutu?: number;
     /** 素材COS地址 */
-    Url: string;
+    Url?: string;
     /** 创建时间 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 修改时间 */
-    UpdateTime: string;
+    UpdateTime?: string;
     /** 人脸信息 */
-    MaterialFaceList: MaterialFaceList[];
+    MaterialFaceList?: MaterialFaceList[];
   }
 
   interface DescribeMaterialListRequest {

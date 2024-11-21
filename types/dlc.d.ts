@@ -1967,21 +1967,23 @@ declare interface VpcInfo {
 /** 工作组详细信息 */
 declare interface WorkGroupDetailInfo {
   /** 工作组Id */
-  WorkGroupId: number | null;
+  WorkGroupId?: number | null;
   /** 工作组名称 */
-  WorkGroupName: string | null;
+  WorkGroupName?: string | null;
   /** 包含的信息类型。User：用户信息；DataAuth：数据权限；EngineAuth:引擎权限 */
-  Type: string | null;
+  Type?: string | null;
   /** 工作组上绑定的用户集合 */
-  UserInfo: Users | null;
+  UserInfo?: Users | null;
   /** 数据权限集合 */
-  DataPolicyInfo: Policys | null;
+  DataPolicyInfo?: Policys | null;
   /** 引擎权限集合 */
-  EnginePolicyInfo: Policys | null;
+  EnginePolicyInfo?: Policys | null;
   /** 工作组描述信息 */
-  WorkGroupDescription: string | null;
+  WorkGroupDescription?: string | null;
   /** 行过滤信息集合 */
-  RowFilterInfo: Policys | null;
+  RowFilterInfo?: Policys | null;
+  /** 数据目录权限集 */
+  CatalogPolicyInfo?: Policy | null;
 }
 
 /** 同一个用户绑定的工作组集合 */
@@ -3873,13 +3875,13 @@ declare interface DescribeTasksAnalysisRequest {
   Offset?: number;
   /** 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个: task-id - String - （任务ID准确过滤）task-id 取值形如：e386471f-139a-4e59-877f-50ece8135b99。task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)，rule-id - String - （洞察类型）取值范围 SPARK-StageScheduleDelay（资源抢占）, SPARK-ShuffleFailure（Shuffle异常）, SPARK-SlowTask（慢task）, SPARK-DataSkew（数据倾斜）, SPARK-InsufficientResource（磁盘或内存不足） */
   Filters?: Filter[];
-  /** 排序字段，支持如下字段类型，instance-start-time (任务开始时间）, instance-complete-time (任务结束时间）,job-time-sum （单位毫秒，引擎内执行耗时）,task-time-sum （CU资源消耗，单位秒）,input-bytes-sum（数据扫描总大小，单位bytes）,shuffle-read-bytes-sum（数据shuffle总大小，单位bytes） */
+  /** 排序字段，支持如下字段类型，instance-start-time (任务开始时间）,job-time-sum （单位毫秒，引擎内执行耗时）,task-time-sum （CU资源消耗，单位秒）,input-bytes-sum（数据扫描总大小，单位bytes）,shuffle-read-bytes-sum（数据shuffle总大小，单位bytes） */
   SortBy?: string;
   /** 排序方式，desc表示正序，asc表示反序， 默认为asc。 */
   Sorting?: string;
-  /** 起始时间点，格式为yyyy-mm-dd HH:MM:SS */
+  /** 任务开始时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近30天数据查询。默认为当前时刻 */
   StartTime?: string;
-  /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻 */
+  /** 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近30天数据查询。默认为当前时刻 */
   EndTime?: string;
 }
 

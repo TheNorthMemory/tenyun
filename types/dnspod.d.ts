@@ -464,6 +464,16 @@ declare interface KeyValue {
   Value?: string | null;
 }
 
+/** 自定义线路分组详细信息 */
+declare interface LineGroupDetail {
+  /** 自定义线路分组ID */
+  Id: number;
+  /** 自定线路分组名称 */
+  Name: string;
+  /** 自定义线路分组包含的线路列表 */
+  Lines: string[];
+}
+
 /** 线路分组信息 */
 declare interface LineGroupInfo {
   /** 线路分组ID */
@@ -474,6 +484,32 @@ declare interface LineGroupInfo {
   Type: string;
   /** 线路分组包含的线路列表 */
   LineList: string[];
+}
+
+/** 自定义线路分组元素 */
+declare interface LineGroupItem {
+  /** 域名ID */
+  DomainId: number;
+  /** 自定义线路分组ID */
+  Id: number;
+  /** 自定义线路分组名称 */
+  Name: string;
+  /** 自定义线路分组包含的线路 */
+  Lines: string[];
+  /** 创建时间 */
+  CreatedOn: string;
+  /** 更新时间 */
+  UpdatedOn: string;
+}
+
+/** 自定义线路数量信息 */
+declare interface LineGroupSum {
+  /** 本次请求返回自定义线路分组个数 */
+  NowTotal: number;
+  /** 自定义线路分组总数 */
+  Total: number;
+  /** 还可允许添加的自定义线路分组个数 */
+  AvailableCount: number;
 }
 
 /** 解析线路信息 */
@@ -1036,6 +1072,38 @@ declare interface CreateDomainResponse {
   RequestId?: string;
 }
 
+declare interface CreateLineGroupCopyRequest {
+  /** 域名 */
+  Domain: string;
+  /** 要复制的域名ID。要从多个域名复制线路分组时，用英文逗号分隔，例如1002,1005 */
+  DomainIds: string;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface CreateLineGroupCopyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLineGroupRequest {
+  /** 自定义线路分组的名称。 */
+  Name: string;
+  /** 自定义线路分组包含的线路列表，包含多个线路时用英文逗号分隔。例如，铁通,奇虎 */
+  Lines: string;
+  /** 域名 */
+  Domain: string;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface CreateLineGroupResponse {
+  /** 自定义线路分组详情 */
+  Data?: LineGroupDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRecordBatchRequest {
   /** 域名ID，多个 domain_id 用英文逗号进行分割。 */
   DomainIdList: string[];
@@ -1118,6 +1186,36 @@ declare interface CreateSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface CreateTXTRecordRequest {
+  /** 域名 */
+  Domain: string;
+  /** 记录线路，通过 API 记录线路获得，中文，比如：默认。 */
+  RecordLine: string;
+  /** 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。 */
+  Value: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+  /** 主机记录，如 www，如果不传，默认为 @。 */
+  SubDomain?: string;
+  /** 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。 */
+  RecordLineId?: string;
+  /** TTL，范围1-604800，不同套餐域名最小值不同。 */
+  TTL?: number;
+  /** 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。 */
+  Status?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 记录分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。 */
+  GroupId?: number;
+}
+
+declare interface CreateTXTRecordResponse {
+  /** 记录ID */
+  RecordId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDomainAliasRequest {
   /** 域名别名ID。可以通过接口DescribeDomainAliasList查到所有的域名别名列表以及对应的ID */
   DomainAliasId: number;
@@ -1168,6 +1266,20 @@ declare interface DeleteDomainRequest {
 }
 
 declare interface DeleteDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLineGroupRequest {
+  /** 域名 */
+  Domain: string;
+  /** 自定义线路分组ID */
+  LineGroupId: number;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface DeleteLineGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1498,6 +1610,28 @@ declare interface DescribeDomainWhoisRequest {
 declare interface DescribeDomainWhoisResponse {
   /** 域名Whois信息 */
   Info?: WhoisInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLineGroupListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 偏移量，默认值为0。 */
+  Offset?: number;
+  /** 限制数量，传0或不传会返回所有。 */
+  Length?: number;
+  /** 按自定义线路分组名称排序的方向。升序传asc，降序传desc。 */
+  SortType?: string;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface DescribeLineGroupListResponse {
+  /** 自定义线路分组列表 */
+  LineGroups?: LineGroupItem[];
+  /** 自定义线路分组数量信息 */
+  Info?: LineGroupSum;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2020,6 +2154,24 @@ declare interface ModifyDynamicDNSResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLineGroupRequest {
+  /** 自定义线路分组的名称。 */
+  Name: string;
+  /** 自定义线路分组包含的线路列表，包含多个线路时用英文逗号分隔。例如，铁通,奇虎 */
+  Lines: string;
+  /** 域名 */
+  Domain: string;
+  /** 自定义线路分组ID */
+  LineGroupId: number;
+  /** 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId */
+  DomainId?: number;
+}
+
+declare interface ModifyLineGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPackageAutoRenewRequest {
   /** 资源ID。可以在控制台查看所有的资源 */
   ResourceId: string;
@@ -2210,6 +2362,36 @@ declare interface ModifySubdomainStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTXTRecordRequest {
+  /** 域名 */
+  Domain: string;
+  /** 记录线路，通过 API 记录线路获得，中文，比如：默认。 */
+  RecordLine: string;
+  /** 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。 */
+  Value: string;
+  /** 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId */
+  RecordId: number;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
+  DomainId?: number;
+  /** 主机记录，如 www，如果不传，默认为 @。 */
+  SubDomain?: string;
+  /** 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。 */
+  RecordLineId?: string;
+  /** TTL，范围1-604800，不同等级域名最小值不同。 */
+  TTL?: number;
+  /** 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。 */
+  Status?: string;
+  /** 记录的备注信息。传空删除备注。 */
+  Remark?: string;
+}
+
+declare interface ModifyTXTRecordResponse {
+  /** 记录ID */
+  RecordId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVasAutoRenewStatusRequest {
   /** 资源ID。可以从控制台查看所有的资源 */
   ResourceId: string;
@@ -2297,6 +2479,10 @@ declare interface Dnspod {
   CreateDomainCustomLine(data: CreateDomainCustomLineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainCustomLineResponse>;
   /** 创建域名分组 {@link CreateDomainGroupRequest} {@link CreateDomainGroupResponse} */
   CreateDomainGroup(data: CreateDomainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainGroupResponse>;
+  /** 创建域名的线路分组 {@link CreateLineGroupRequest} {@link CreateLineGroupResponse} */
+  CreateLineGroup(data: CreateLineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLineGroupResponse>;
+  /** 复制域名的线路分组 {@link CreateLineGroupCopyRequest} {@link CreateLineGroupCopyResponse} */
+  CreateLineGroupCopy(data: CreateLineGroupCopyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLineGroupCopyResponse>;
   /** 添加记录 {@link CreateRecordRequest} {@link CreateRecordResponse} */
   CreateRecord(data: CreateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordResponse>;
   /** 批量添加记录 {@link CreateRecordBatchRequest} {@link CreateRecordBatchResponse} */
@@ -2305,6 +2491,8 @@ declare interface Dnspod {
   CreateRecordGroup(data: CreateRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordGroupResponse>;
   /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
+  /** 添加TXT记录 {@link CreateTXTRecordRequest} {@link CreateTXTRecordResponse} */
+  CreateTXTRecord(data: CreateTXTRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTXTRecordResponse>;
   /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
   /** 删除域名别名 {@link DeleteDomainAliasRequest} {@link DeleteDomainAliasResponse} */
@@ -2313,6 +2501,8 @@ declare interface Dnspod {
   DeleteDomainBatch(data: DeleteDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainBatchResponse>;
   /** 删除域名的自定义线路 {@link DeleteDomainCustomLineRequest} {@link DeleteDomainCustomLineResponse} */
   DeleteDomainCustomLine(data: DeleteDomainCustomLineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainCustomLineResponse>;
+  /** 删除域名的线路分组 {@link DeleteLineGroupRequest} {@link DeleteLineGroupResponse} */
+  DeleteLineGroup(data: DeleteLineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLineGroupResponse>;
   /** 删除记录 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 批量删除解析记录 {@link DeleteRecordBatchRequest} {@link DeleteRecordBatchResponse} */
@@ -2351,6 +2541,8 @@ declare interface Dnspod {
   DescribeDomainShareUserList(data: DescribeDomainShareUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareUserListResponse>;
   /** 获取域名Whois信息 {@link DescribeDomainWhoisRequest} {@link DescribeDomainWhoisResponse} */
   DescribeDomainWhois(data: DescribeDomainWhoisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhoisResponse>;
+  /** 获取域名的线路分组列表 {@link DescribeLineGroupListRequest} {@link DescribeLineGroupListResponse} */
+  DescribeLineGroupList(data: DescribeLineGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLineGroupListResponse>;
   /** 获取各套餐配置详情 {@link DescribePackageDetailRequest} {@link DescribePackageDetailResponse} */
   DescribePackageDetail(data?: DescribePackageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageDetailResponse>;
   /** 获取记录信息 {@link DescribeRecordRequest} {@link DescribeRecordResponse} */
@@ -2403,6 +2595,8 @@ declare interface Dnspod {
   ModifyDomainUnlock(data: ModifyDomainUnlockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainUnlockResponse>;
   /** 更新动态 DNS 记录 {@link ModifyDynamicDNSRequest} {@link ModifyDynamicDNSResponse} */
   ModifyDynamicDNS(data: ModifyDynamicDNSRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDynamicDNSResponse>;
+  /** 修改域名的线路分组 {@link ModifyLineGroupRequest} {@link ModifyLineGroupResponse} */
+  ModifyLineGroup(data: ModifyLineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLineGroupResponse>;
   /** DNS 解析套餐自动续费设置 {@link ModifyPackageAutoRenewRequest} {@link ModifyPackageAutoRenewResponse} */
   ModifyPackageAutoRenew(data: ModifyPackageAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageAutoRenewResponse>;
   /** 修改记录 {@link ModifyRecordRequest} {@link ModifyRecordResponse} */
@@ -2423,6 +2617,8 @@ declare interface Dnspod {
   ModifySnapshotConfig(data: ModifySnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotConfigResponse>;
   /** 暂停子域名的解析记录 {@link ModifySubdomainStatusRequest} {@link ModifySubdomainStatusResponse} */
   ModifySubdomainStatus(data: ModifySubdomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubdomainStatusResponse>;
+  /** 修改TXT记录 {@link ModifyTXTRecordRequest} {@link ModifyTXTRecordResponse} */
+  ModifyTXTRecord(data: ModifyTXTRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTXTRecordResponse>;
   /** 增值服务自动续费设置 {@link ModifyVasAutoRenewStatusRequest} {@link ModifyVasAutoRenewStatusResponse} */
   ModifyVasAutoRenewStatus(data: ModifyVasAutoRenewStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVasAutoRenewStatusResponse>;
   /** DNSPod商品余额支付 {@link PayOrderWithBalanceRequest} {@link PayOrderWithBalanceResponse} */

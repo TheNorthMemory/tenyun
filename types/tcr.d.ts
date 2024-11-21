@@ -1611,7 +1611,7 @@ declare interface DescribeChartDownloadInfoRequest {
 
 declare interface DescribeChartDownloadInfoResponse {
   /** 用于下载的url的预签名地址 */
-  PreSignedDownloadURL: string;
+  PreSignedDownloadURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

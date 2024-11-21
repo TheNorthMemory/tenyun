@@ -220,21 +220,21 @@ declare interface ListGrantServiceAccessService {
   ServiceName: string;
 }
 
-/** 登录和敏感操作flag */
+/** 登录和敏感操作flag（校验方式是单选） */
 declare interface LoginActionFlag {
-  /** 手机 */
+  /** 0: 非安全手机校验 1: 安全手机校验。 */
   Phone?: number;
-  /** 硬token */
+  /** 0: 非硬token校验 1: 硬token校验。 */
   Token?: number;
-  /** 软token */
+  /** 0: 非软token校验 1: 软token校验 */
   Stoken?: number;
-  /** 微信 */
+  /** 0: 非微信校验 1: 微信校验 */
   Wechat?: number;
-  /** 自定义 */
+  /** 0: 非自定义校验 1: 自定义校验 */
   Custom?: number;
-  /** 邮箱 */
+  /** 0: 非邮箱校验 1: 邮箱校验 */
   Mail?: number;
-  /** u2f硬件token */
+  /** 0: 非u2f硬件token 1: u2f硬件token */
   U2FToken?: number | null;
 }
 
@@ -1459,9 +1459,9 @@ declare interface ListAttachedUserPoliciesResponse {
 }
 
 declare interface ListCollaboratorsRequest {
-  /** 分页条数，缺省为20 */
+  /** 分页的条数，默认是20条。 */
   Limit?: number;
-  /** 分页起始值，缺省为0 */
+  /** 分页的起始值，默认从0开始。 */
   Offset?: number;
 }
 

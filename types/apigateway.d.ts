@@ -1709,7 +1709,7 @@ declare interface CreateApiAppRequest {
 
 declare interface CreateApiAppResponse {
   /** 新增的应用详情。 */
-  Result: ApiAppInfo | null;
+  Result?: ApiAppInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2019,7 +2019,7 @@ declare interface DeleteApiKeyRequest {
 
 declare interface DeleteApiKeyResponse {
   /** 删除操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2289,7 +2289,7 @@ declare interface DescribeApiKeyRequest {
 
 declare interface DescribeApiKeyResponse {
   /** 密钥详情。 */
-  Result: ApiKey | null;
+  Result?: ApiKey | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2891,7 +2891,7 @@ declare interface DescribeUsagePlanSecretIdsRequest {
 
 declare interface DescribeUsagePlanSecretIdsResponse {
   /** 使用计划绑定的密钥列表。 */
-  Result: UsagePlanBindSecretStatus | null;
+  Result?: UsagePlanBindSecretStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2937,7 +2937,7 @@ declare interface DisableApiKeyRequest {
 
 declare interface DisableApiKeyResponse {
   /** 禁用密钥操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2949,7 +2949,7 @@ declare interface EnableApiKeyRequest {
 
 declare interface EnableApiKeyResponse {
   /** 启动密钥操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3407,7 +3407,7 @@ declare interface UnBindSecretIdsRequest {
 
 declare interface UnBindSecretIdsResponse {
   /** 解绑操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3485,7 +3485,7 @@ declare interface UpdateApiKeyRequest {
 
 declare interface UpdateApiKeyResponse {
   /** 更换后的密钥详情。 */
-  Result: ApiKey | null;
+  Result?: ApiKey | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 自动扩容规则 */
+declare interface AutoScaleUpRule {
+  /** 自动扩容策略开启，关闭 */
+  Status?: string;
+  /** 集群用量占比，到达这个值后开始扩容,范围[10-90] */
+  ScaleThreshold?: number;
+  /** 扩容后使用量跟集群总量比例,范围[1-90] */
+  TargetThreshold?: number;
+}
+
 /** 快照策略信息 */
 declare interface AutoSnapshotPolicyInfo {
   /** 快照策略ID */
@@ -164,6 +174,10 @@ declare interface FileSystemInfo {
   AppId?: number;
   /** 文件系统吞吐上限，吞吐上限是根据文件系统当前已使用存储量、绑定的存储资源包以及吞吐资源包一同确定. 单位MiB/s */
   BandwidthLimit?: number;
+  /** 文件系统关联的快照策略 */
+  AutoSnapshotPolicyId?: string;
+  /** 文件系统处理快照状态 */
+  SnapStatus?: string;
   /** 文件系统容量规格上限单位:GiB */
   Capacity?: number;
   /** 文件系统标签列表 */
@@ -172,6 +186,10 @@ declare interface FileSystemInfo {
   TieringState?: string;
   /** 分层存储详情 */
   TieringDetail?: TieringDetailInfo | null;
+  /** 文件系统自动扩容策略 */
+  AutoScaleUpRule?: AutoScaleUpRule | null;
+  /** 文件系统版本 */
+  Version?: string | null;
 }
 
 /** 条件过滤 */
@@ -370,6 +388,8 @@ declare interface TagInfo {
 declare interface TieringDetailInfo {
   /** 低频存储容量 */
   TieringSizeInBytes?: number | null;
+  /** 冷存储容量 */
+  SecondaryTieringSizeInBytes?: number;
 }
 
 /** 文件系统配额信息 */
@@ -845,7 +865,7 @@ declare interface DescribeCfsSnapshotsRequest {
   Offset?: number;
   /** 页面长度，默认为20 */
   Limit?: number;
-  /** 过滤条件。SnapshotId - Array of String - 是否必填：否 -（过滤条件）按快照ID过滤。SnapshotName - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。FileSystemId - Array of String - 是否必填：否 -（过滤条件）按文件系统ID过滤。FsName - Array of String - 是否必填：否 -（过滤条件）按文件系统名过滤。Status - Array of String - 是否必填：否 -（过滤条件）按按照快照状态过滤。(creating：表示创建中 | available：表示可用。| rollbacking：表示回滚。| rollbacking_new：表示由快照创建新文件系统中。tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
+  /** 过滤条件。SnapshotId - Array of String - 是否必填：否 -（过滤条件）按快照ID过滤。SnapshotName - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。FileSystemId - Array of String - 是否必填：否 -（过滤条件）按文件系统ID过滤。FsName - Array of String - 是否必填：否 -（过滤条件）按文件系统名过滤。Status - Array of String - 是否必填：否 -（过滤条件）按照快照状态过滤(creating：表示创建中 | available：表示可用。| rollbacking：表示回滚。| rollbacking_new：表示由快照创建新文件系统中）tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 排序取值 */
   OrderField?: string;

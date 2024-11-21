@@ -19,11 +19,11 @@ declare interface FlowProductRemindRequest {
 
 declare interface FlowProductRemindResponse {
   /** 是否成功 */
-  Success: string;
+  Success?: string;
   /** 流水号 */
-  FlowId: string;
+  FlowId?: string;
   /** 消息 */
-  Info: string | null;
+  Info?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

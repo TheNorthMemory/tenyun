@@ -5,247 +5,247 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 告警下拉字段 */
 declare interface AlertExtraInfo {
   /** 相关攻击事件 */
-  RelateEvent?: RelatedEvent | null;
+  RelateEvent?: RelatedEvent;
   /** 泄漏内容 */
-  LeakContent?: string | null;
+  LeakContent?: string;
   /** 泄漏API */
-  LeakAPI?: string | null;
+  LeakAPI?: string;
   /** secretID */
-  SecretID?: string | null;
+  SecretID?: string;
   /** 命中规则 */
-  Rule?: string | null;
+  Rule?: string;
   /** 规则描述 */
-  RuleDesc?: string | null;
+  RuleDesc?: string;
   /** 协议端口 */
-  ProtocolPort?: string | null;
+  ProtocolPort?: string;
   /** 攻击内容 */
-  AttackContent?: string | null;
+  AttackContent?: string;
   /** 攻击IP画像 */
-  AttackIPProfile?: string | null;
+  AttackIPProfile?: string;
   /** 攻击IP标签 */
-  AttackIPTags?: string | null;
+  AttackIPTags?: string;
   /** 请求方式 */
-  RequestMethod?: string | null;
+  RequestMethod?: string;
   /** HTTP日志 */
-  HttpLog?: string | null;
+  HttpLog?: string;
   /** 被攻击域名 */
-  AttackDomain?: string | null;
+  AttackDomain?: string;
   /** 文件路径 */
-  FilePath?: string | null;
+  FilePath?: string;
   /** user_agent */
-  UserAgent?: string | null;
+  UserAgent?: string;
   /** 请求头 */
-  RequestHeaders?: string | null;
+  RequestHeaders?: string;
   /** 登录用户名 */
-  LoginUserName?: string | null;
+  LoginUserName?: string;
   /** 漏洞名称 */
-  VulnerabilityName?: string | null;
+  VulnerabilityName?: string;
   /** 公共漏洞和暴露 */
-  CVE?: string | null;
+  CVE?: string;
   /** 服务进程 */
-  ServiceProcess?: string | null;
+  ServiceProcess?: string;
   /** 文件名 */
-  FileName?: string | null;
+  FileName?: string;
   /** 文件大小 */
-  FileSize?: string | null;
+  FileSize?: string;
   /** 文件MD5 */
-  FileMD5?: string | null;
+  FileMD5?: string;
   /** 文件最近访问时间 */
-  FileLastAccessTime?: string | null;
+  FileLastAccessTime?: string;
   /** 文件修改时间 */
-  FileModifyTime?: string | null;
+  FileModifyTime?: string;
   /** 最近访问时间 */
-  RecentAccessTime?: string | null;
+  RecentAccessTime?: string;
   /** 最近修改时间 */
-  RecentModifyTime?: string | null;
+  RecentModifyTime?: string;
   /** 病毒名 */
-  VirusName?: string | null;
+  VirusName?: string;
   /** 病毒文件标签 */
-  VirusFileTags?: string | null;
+  VirusFileTags?: string;
   /** 行为特征 */
-  BehavioralCharacteristics?: string | null;
+  BehavioralCharacteristics?: string;
   /** 进程名（PID） */
-  ProcessNamePID?: string | null;
+  ProcessNamePID?: string;
   /** 进程路径 */
-  ProcessPath?: string | null;
+  ProcessPath?: string;
   /** 进程命令行 */
-  ProcessCommandLine?: string | null;
+  ProcessCommandLine?: string;
   /** 进程权限 */
-  ProcessPermissions?: string | null;
+  ProcessPermissions?: string;
   /** 执行命令 */
-  ExecutedCommand?: string | null;
+  ExecutedCommand?: string;
   /** 受影响文件名 */
-  AffectedFileName?: string | null;
+  AffectedFileName?: string;
   /** 诱饵路径 */
-  DecoyPath?: string | null;
+  DecoyPath?: string;
   /** 恶意进程文件大小 */
-  MaliciousProcessFileSize?: string | null;
+  MaliciousProcessFileSize?: string;
   /** 恶意进程文件MD5 */
-  MaliciousProcessFileMD5?: string | null;
+  MaliciousProcessFileMD5?: string;
   /** 恶意进程名（PID） */
-  MaliciousProcessNamePID?: string | null;
+  MaliciousProcessNamePID?: string;
   /** 恶意进程路径 */
-  MaliciousProcessPath?: string | null;
+  MaliciousProcessPath?: string;
   /** 恶意进程启动时间 */
-  MaliciousProcessStartTime?: string | null;
+  MaliciousProcessStartTime?: string;
   /** 命令内容 */
-  CommandContent?: string | null;
+  CommandContent?: string;
   /** 启动用户 */
-  StartupUser?: string | null;
+  StartupUser?: string;
   /** 用户所属组 */
-  UserGroup?: string | null;
+  UserGroup?: string;
   /** 新增权限 */
-  NewPermissions?: string | null;
+  NewPermissions?: string;
   /** 父进程 */
-  ParentProcess?: string | null;
+  ParentProcess?: string;
   /** 类名 */
-  ClassName?: string | null;
+  ClassName?: string;
   /** 所属类加载器 */
-  ClassLoader?: string | null;
+  ClassLoader?: string;
   /** 类文件大小 */
-  ClassFileSize?: string | null;
+  ClassFileSize?: string;
   /** 类文件MD5 */
-  ClassFileMD5?: string | null;
+  ClassFileMD5?: string;
   /** 父类名 */
-  ParentClassName?: string | null;
+  ParentClassName?: string;
   /** 继承接口 */
-  InheritedInterface?: string | null;
+  InheritedInterface?: string;
   /** 注释 */
-  Comment?: string | null;
+  Comment?: string;
   /** 载荷内容 */
-  PayloadContent?: string | null;
+  PayloadContent?: string;
   /** 回连地址画像 */
-  CallbackAddressPortrait?: string | null;
+  CallbackAddressPortrait?: string;
   /** 回连地址标签 */
-  CallbackAddressTag?: string | null;
+  CallbackAddressTag?: string;
   /** 进程MD5 */
-  ProcessMD5?: string | null;
+  ProcessMD5?: string;
   /** 文件权限 */
-  FilePermission?: string | null;
+  FilePermission?: string;
   /** 来源于日志分析的信息字段 */
-  FromLogAnalysisData?: KeyValue[] | null;
+  FromLogAnalysisData?: KeyValue[];
   /** 命中探针 */
-  HitProbe?: string | null;
+  HitProbe?: string;
   /** 命中蜜罐 */
-  HitHoneyPot?: string | null;
+  HitHoneyPot?: string;
   /** 命令列表 */
-  CommandList?: string | null;
+  CommandList?: string;
   /** 攻击事件描述 */
-  AttackEventDesc?: string | null;
+  AttackEventDesc?: string;
   /** 进程信息 */
-  ProcessInfo?: string | null;
+  ProcessInfo?: string;
   /** 使用用户名&密码 */
-  UserNameAndPwd?: string | null;
+  UserNameAndPwd?: string;
   /** 主机防护策略ID */
-  StrategyID?: string | null;
+  StrategyID?: string;
   /** 主机防护策略名称 */
-  StrategyName?: string | null;
+  StrategyName?: string;
   /** 主机防护命中策略，是策略ID和策略名称的组合 */
-  HitStrategy?: string | null;
+  HitStrategy?: string;
   /** 进程名 */
-  ProcessName?: string | null;
+  ProcessName?: string;
   /** PID */
-  PID?: string | null;
+  PID?: string;
   /** 容器Pod名 */
-  PodName?: string | null;
+  PodName?: string;
   /** 容器PodID */
-  PodID?: string | null;
+  PodID?: string;
   /** Http响应 */
-  Response?: string | null;
+  Response?: string;
   /** 系统调用 */
-  SystemCall?: string | null;
+  SystemCall?: string;
   /** 操作类型verb */
-  Verb?: string | null;
+  Verb?: string;
   /** 日志ID */
-  LogID?: string | null;
+  LogID?: string;
   /** 变更内容 */
-  Different?: string | null;
+  Different?: string;
   /** 事件类型 */
-  EventType?: string | null;
+  EventType?: string;
   /** 事件描述 */
-  Description?: string | null;
+  Description?: string;
   /** 目标地址(容器反弹shell) */
-  TargetAddress?: string | null;
+  TargetAddress?: string;
   /** 恶意请求域名(容器恶意外联) */
-  MaliciousRequestDomain?: string | null;
+  MaliciousRequestDomain?: string;
   /** 规则类型(容器K8sAPI异常请求) */
-  RuleType?: string | null;
+  RuleType?: string;
   /** 请求资源(容器K8sAPI异常请求) */
-  RequestURI?: string | null;
+  RequestURI?: string;
   /** 发起请求用户(容器K8sAPI异常请求) */
-  RequestUser?: string | null;
+  RequestUser?: string;
   /** 请求对象(容器K8sAPI异常请求) */
-  RequestObject?: string | null;
+  RequestObject?: string;
   /** 响应对象(容器K8sAPI异常请求) */
-  ResponseObject?: string | null;
+  ResponseObject?: string;
   /** 文件类型(容器文件篡改) */
-  FileType?: string | null;
+  FileType?: string;
   /** 标签特征(容器恶意外联) */
-  TIType?: string | null;
+  TIType?: string;
   /** 来源IP(容器K8sAPI异常请求) */
-  SourceIP?: string | null;
+  SourceIP?: string;
 }
 
 /** 告警中心全量告警列表数据 */
 declare interface AlertInfo {
   /** 告警ID */
-  ID?: string | null;
+  ID?: string;
   /** 告警名称 */
-  Name?: string | null;
+  Name?: string;
   /** 告警来源CFW:云防火墙WAF:Web应用防火墙CWP:主机安全CSIP:云安全中心 */
-  Source?: string | null;
+  Source?: string;
   /** 告警等级1:提示2:低危3:中危4:高危5:严重 */
-  Level?: number | null;
+  Level?: number;
   /** 攻击者 */
-  Attacker?: RoleInfo | null;
+  Attacker?: RoleInfo;
   /** 受害者 */
-  Victim?: RoleInfo | null;
-  /** 证据数据(例如攻击内容等) */
-  EvidenceData?: string | null;
+  Victim?: RoleInfo;
+  /** 证据数据(例如攻击内容等，base64编码) */
+  EvidenceData?: string;
   /** 证据位置(例如协议端口) */
-  EvidenceLocation?: string | null;
+  EvidenceLocation?: string;
   /** 证据路径 */
-  EvidencePath?: string | null;
+  EvidencePath?: string;
   /** 首次告警时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 最近告警时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 告警次数 */
-  Count?: number | null;
+  Count?: number;
   /** 紧急缓解建议 */
-  UrgentSuggestion?: string | null;
+  UrgentSuggestion?: string;
   /** 根治建议 */
-  RemediationSuggestion?: string | null;
+  RemediationSuggestion?: string;
   /** 处理状态0：未处置，1：已忽略，2：已处置 */
-  Status?: number | null;
+  Status?: number;
   /** 告警处理类型 */
-  ProcessType?: string | null;
+  ProcessType?: string;
   /** 告警大类 */
-  Type?: string | null;
+  Type?: string;
   /** 告警小类 */
-  SubType?: string | null;
+  SubType?: string;
   /** 下拉字段 */
-  ExtraInfo?: AlertExtraInfo | null;
+  ExtraInfo?: AlertExtraInfo;
   /** 聚合字段 */
-  Key?: string | null;
+  Key?: string;
   /** 告警日期 */
-  Date?: string | null;
+  Date?: string;
   /** appid */
-  AppID?: string | null;
+  AppID?: string;
   /** 账户名称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 账户ID */
-  Uin?: string | null;
+  Uin?: string;
   /** 行为 */
-  Action?: number | null;
+  Action?: number;
   /** 风险排查 */
-  RiskInvestigation?: string | null;
+  RiskInvestigation?: string;
   /** 风险处置 */
-  RiskTreatment?: string | null;
+  RiskTreatment?: string;
   /** 日志类型 */
-  LogType?: string | null;
+  LogType?: string;
   /** 语句检索 */
-  LogSearch?: string | null;
+  LogSearch?: string;
 }
 
 /** 集群pod列表 */
@@ -257,81 +257,81 @@ declare interface AssetClusterPod {
   /** 租户昵称 */
   Nick?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** pod id */
   AssetId?: string;
   /** pod名称 */
   AssetName?: string;
   /** pod创建时间 */
-  InstanceCreateTime?: string | null;
+  InstanceCreateTime?: string;
   /** 命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** 集群id */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 主机id */
-  MachineId?: string | null;
+  MachineId?: string;
   /** 主机名 */
-  MachineName?: string | null;
+  MachineName?: string;
   /** pod ip */
-  PodIp?: string | null;
+  PodIp?: string;
   /** 关联service数 */
-  ServiceCount?: number | null;
+  ServiceCount?: number;
   /** 关联容器数 */
-  ContainerCount?: number | null;
+  ContainerCount?: number;
   /** 公网ip */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 内网ip */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** 是否核心：1:核心，2:非核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
 }
 
 /** 资产扫描结构细节 */
 declare interface AssetInfoDetail {
   /** 用户appid */
-  AppID?: string | null;
+  AppID?: string;
   /** CVE编号 */
-  CVEId?: string | null;
+  CVEId?: string;
   /** 是扫描，0默认未扫描，1正在扫描，2扫描完成，3扫描出错 */
-  IsScan?: number | null;
+  IsScan?: number;
   /** 影响资产数目 */
-  InfluenceAsset?: number | null;
+  InfluenceAsset?: number;
   /** 未修复资产数目 */
-  NotRepairAsset?: number | null;
+  NotRepairAsset?: number;
   /** 未防护资产数目 */
-  NotProtectAsset?: number | null;
+  NotProtectAsset?: number;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 任务百分比 */
-  TaskPercent?: number | null;
+  TaskPercent?: number;
   /** 任务时间 */
-  TaskTime?: number | null;
+  TaskTime?: number;
   /** 扫描时间 */
-  ScanTime?: string | null;
+  ScanTime?: string;
 }
 
 /** 资产类型和实例类型的映射 */
 declare interface AssetInstanceTypeMap {
   /** 资产类型 */
-  Text?: string | null;
+  Text?: string;
   /** 资产类型 */
-  Value?: string | null;
+  Value?: string;
   /** 资产类型和实例类型映射关系 */
-  InstanceTypeList?: FilterDataObject[] | null;
+  InstanceTypeList?: FilterDataObject[];
 }
 
 /** 安全中心资产标签 */
 declare interface AssetTag {
   /** 标签的key值,可以是字母、数字、下划线 */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签的vale值,可以是字母、数字、下划线 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 资产视角配置风险 */
@@ -373,9 +373,11 @@ declare interface AssetViewCFGRisk {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
+  /** 当资产类型为LBL的时候，展示该字段，方便定位具体的LB */
+  ClbId?: string;
 }
 
 /** 资产视角的端口风险对象 */
@@ -413,9 +415,9 @@ declare interface AssetViewPortRisk {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 识别来源，详细看枚举返回。 */
   From?: string;
 }
@@ -449,9 +451,9 @@ declare interface AssetViewVULRisk {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 漏洞类型 */
   VULType?: string;
   /** 端口 */
@@ -487,7 +489,7 @@ declare interface AssetViewVULRisk {
   /** 攻击载荷 */
   Payload?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
-  EMGCVulType?: number | null;
+  EMGCVulType?: number;
 }
 
 /** 资产视角的漏洞风险对象 */
@@ -515,9 +517,9 @@ declare interface AssetViewVULRiskData {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 漏洞类型 */
   VULType?: string;
   /** 端口 */
@@ -543,35 +545,35 @@ declare interface AssetViewVULRiskData {
   /** 攻击载荷 */
   Payload?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
-  EMGCVulType?: number | null;
+  EMGCVulType?: number;
   /** CVSS评分 */
-  CVSS?: number | null;
+  CVSS?: number;
   /** 前端索引id */
-  Index?: string | null;
+  Index?: string;
   /** pcmgrId */
-  PCMGRId?: string | null;
+  PCMGRId?: string;
   /** 报告id */
-  LogId?: string | null;
+  LogId?: string;
   /** 任务id */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 漏洞标签 */
-  VulTag?: string[] | null;
+  VulTag?: string[];
   /** 漏洞披露时间 */
-  DisclosureTime?: string | null;
+  DisclosureTime?: string;
   /** 攻击热度 */
-  AttackHeat?: number | null;
+  AttackHeat?: number;
   /** 是否必修漏洞1是，0不是 */
-  IsSuggest?: number | null;
+  IsSuggest?: number;
   /** 处置任务ID */
-  HandleTaskId?: string | null;
+  HandleTaskId?: string;
   /** 引擎来源 */
-  EngineSource?: string | null;
+  EngineSource?: string;
   /** 新的漏洞风险id(同全网漏洞表的riskid) */
-  VulRiskId?: string | null;
+  VulRiskId?: string;
   /** 新版漏洞id */
-  TvdID?: string | null;
+  TvdID?: string;
   /** 是否可以一键体检，1-可以，0-不可以 */
-  IsOneClick?: number | null;
+  IsOneClick?: number;
 }
 
 /** 资产视角的弱口令风险 */
@@ -603,9 +605,9 @@ declare interface AssetViewWeakPassRisk {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 弱口令类型 */
   PasswordType?: string;
   /** 来源 */
@@ -623,417 +625,421 @@ declare interface AssetViewWeakPassRisk {
 /** 漏洞详细信息 */
 declare interface BugInfoDetail {
   /** 漏洞编号 */
-  Id?: number | null;
+  Id?: number;
   /** 漏洞对应pocId */
-  PatchId?: string | null;
+  PatchId?: string;
   /** 漏洞名称 */
-  VULName?: string | null;
+  VULName?: string;
   /** 漏洞严重性：high,middle，low，info */
-  Level?: string | null;
+  Level?: string;
   /** cvss评分 */
-  CVSSScore?: string | null;
+  CVSSScore?: string;
   /** cve编号 */
-  CVEId?: string | null;
+  CVEId?: string;
   /** 漏洞标签 */
-  Tag?: string | null;
+  Tag?: string;
   /** 漏洞种类，1:web应用，2:系统组件漏洞，3:配置风险 */
-  VULCategory?: number | null;
+  VULCategory?: number;
   /** 漏洞影响系统 */
-  ImpactOs?: string | null;
+  ImpactOs?: string;
   /** 漏洞影响组件 */
-  ImpactCOMPENT?: string | null;
+  ImpactCOMPENT?: string;
   /** 漏洞影响版本 */
-  ImpactVersion?: string | null;
+  ImpactVersion?: string;
   /** 链接 */
-  Reference?: string | null;
+  Reference?: string;
   /** 漏洞描述 */
-  VULDescribe?: string | null;
+  VULDescribe?: string;
   /** 修复建议 */
-  Fix?: string | null;
+  Fix?: string;
   /** 产品支持状态，实时返回 */
-  ProSupport?: number | null;
+  ProSupport?: number;
   /** 是否公开，0为未发布，1为发布 */
-  IsPublish?: number | null;
+  IsPublish?: number;
   /** 释放时间 */
-  ReleaseTime?: string | null;
+  ReleaseTime?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 漏洞子类别 */
-  SubCategory?: string | null;
+  SubCategory?: string;
 }
 
 /** 主机资产信息主机防护状态枚举，左边是常量，右边是显示0：未安装1：基础版防护中2：普惠版防护中3：专业版防护中4：旗舰版防护中5：已离线6：已关机 */
 declare interface CVMAssetVO {
   /** 资产id */
-  AssetId?: string | null;
+  AssetId?: string;
   /** 资产名 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 资产类型 */
-  AssetType?: string | null;
+  AssetType?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 防护状态 */
-  CWPStatus?: number | null;
+  CWPStatus?: number;
   /** 资产创建时间 */
-  AssetCreateTime?: string | null;
+  AssetCreateTime?: string;
   /** 公网ip */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 私网ip */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** vpc id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** vpc 名 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** appid信息 */
-  AppId?: number | null;
+  AppId?: number;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 昵称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 可用区 */
-  AvailableArea?: string | null;
+  AvailableArea?: string;
   /** 是否核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 子网id */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 子网名 */
-  SubnetName?: string | null;
+  SubnetName?: string;
   /** uuid */
-  InstanceUuid?: string | null;
+  InstanceUuid?: string;
   /** qquid */
-  InstanceQUuid?: string | null;
+  InstanceQUuid?: string;
   /** os名 */
-  OsName?: string | null;
+  OsName?: string;
   /** 分区 */
-  PartitionCount?: number | null;
+  PartitionCount?: number;
   /** cpu信息 */
-  CPUInfo?: string | null;
+  CPUInfo?: string;
   /** cpu大小 */
-  CPUSize?: number | null;
+  CPUSize?: number;
   /** cpu负载 */
-  CPULoad?: string | null;
+  CPULoad?: string;
   /** 内存大小 */
-  MemorySize?: string | null;
+  MemorySize?: string;
   /** 内存负载 */
-  MemoryLoad?: string | null;
+  MemoryLoad?: string;
   /** 硬盘大小 */
-  DiskSize?: string | null;
+  DiskSize?: string;
   /** 硬盘负载 */
-  DiskLoad?: string | null;
+  DiskLoad?: string;
   /** 账号数 */
-  AccountCount?: string | null;
+  AccountCount?: string;
   /** 进程数 */
-  ProcessCount?: string | null;
+  ProcessCount?: string;
   /** 软件应用 */
-  AppCount?: string | null;
+  AppCount?: string;
   /** 监听端口 */
-  PortCount?: number | null;
+  PortCount?: number;
   /** 网络攻击 */
-  Attack?: number | null;
+  Attack?: number;
   /** 网络访问 */
-  Access?: number | null;
+  Access?: number;
   /** 网络拦截 */
-  Intercept?: number | null;
+  Intercept?: number;
   /** 入向峰值带宽 */
-  InBandwidth?: string | null;
+  InBandwidth?: string;
   /** 出向峰值带宽 */
-  OutBandwidth?: string | null;
+  OutBandwidth?: string;
   /** 入向累计流量 */
-  InFlow?: string | null;
+  InFlow?: string;
   /** 出向累计流量 */
-  OutFlow?: string | null;
+  OutFlow?: string;
   /** 最近扫描时间 */
-  LastScanTime?: string | null;
+  LastScanTime?: string;
   /** 恶意主动外联 */
-  NetWorkOut?: number | null;
+  NetWorkOut?: number;
   /** 端口风险 */
-  PortRisk?: number | null;
+  PortRisk?: number;
   /** 漏洞风险 */
-  VulnerabilityRisk?: number | null;
+  VulnerabilityRisk?: number;
   /** 配置风险 */
-  ConfigurationRisk?: number | null;
+  ConfigurationRisk?: number;
   /** 扫描任务数 */
-  ScanTask?: number | null;
+  ScanTask?: number;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** memberId */
-  MemberId?: string | null;
+  MemberId?: string;
   /** os全称 */
-  Os?: string | null;
+  Os?: string;
   /** 风险服务暴露 */
-  RiskExposure?: number | null;
+  RiskExposure?: number;
   /** 模拟攻击工具状态。0代表未安装，1代表已安装，2代表已离线 */
-  BASAgentStatus?: number | null;
+  BASAgentStatus?: number;
   /** 1新资产；0 非新资产 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
   /** 0 未安装 1安装 2:安装中 */
-  CVMAgentStatus?: number | null;
+  CVMAgentStatus?: number;
   /** 1:开启 0:未开启 */
-  CVMStatus?: number | null;
+  CVMStatus?: number;
   /** 1:客户端已安装 0：未安装 2: Agentless */
-  DefenseModel?: number | null;
+  DefenseModel?: number;
   /** 1:已安装 0:未安装 */
-  TatStatus?: number | null;
+  TatStatus?: number;
   /** cpu趋势图 */
-  CpuTrend?: Element[] | null;
+  CpuTrend?: Element[];
   /** 内存趋势图 */
-  MemoryTrend?: Element[] | null;
+  MemoryTrend?: Element[];
   /** 1:agent在线 0:agent离线 2:主机离线 */
-  AgentStatus?: number | null;
+  AgentStatus?: number;
   /** 本月防护关闭次数 */
-  CloseDefenseCount?: number | null;
+  CloseDefenseCount?: number;
   /** 运行状态 */
-  InstanceState?: string | null;
+  InstanceState?: string;
   /** 安全组数据 */
-  SecurityGroupIds?: string[] | null;
+  SecurityGroupIds?: string[];
   /** 物理内存占用KB */
-  AgentMemRss?: number | null;
+  AgentMemRss?: number;
   /** CPU使用率百分比 */
-  AgentCpuPer?: number | null;
+  AgentCpuPer?: number;
   /** cvm真正所属的appid */
-  RealAppid?: number | null;
+  RealAppid?: number;
   /** 云资产类型：0：腾讯云，1：aws，2：azure */
-  CloudType?: number | null;
+  CloudType?: number;
   /** 主机防护状态枚举0：未安装1：基础版防护中2：普惠版防护中3：专业版防护中4：旗舰版防护中5：已离线6：已关机 */
-  ProtectStatus?: number | null;
+  ProtectStatus?: number;
   /** 最后离线时间 */
-  OfflineTime?: string | null;
+  OfflineTime?: string;
 }
 
 /** clb实例和监听器信息 */
 declare interface ClbListenerListInfo {
   /** 监听器id */
-  ListenerId?: string | null;
+  ListenerId?: string;
   /** 监听器名称 */
-  ListenerName?: string | null;
+  ListenerName?: string;
   /** 负载均衡Id */
-  LoadBalancerId?: string | null;
+  LoadBalancerId?: string;
   /** 负载均衡名称 */
-  LoadBalancerName?: string | null;
+  LoadBalancerName?: string;
   /** 协议 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 负载均衡ip */
-  Vip?: string | null;
+  Vip?: string;
   /** 端口 */
-  VPort?: number | null;
+  VPort?: number;
   /** 区域 */
-  Zone?: string | null;
+  Zone?: string;
   /** 私有网络id */
-  NumericalVpcId?: number | null;
+  NumericalVpcId?: number;
   /** 负载均衡类型 */
-  LoadBalancerType?: string | null;
+  LoadBalancerType?: string;
   /** 监听器域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 负载均衡域名 */
-  LoadBalancerDomain?: string | null;
+  LoadBalancerDomain?: string;
 }
 
 /** db资产输出字段 */
 declare interface DBAssetVO {
   /** 资产id */
-  AssetId?: string | null;
+  AssetId?: string;
   /** 资产名 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 资产类型 */
-  AssetType?: string | null;
+  AssetType?: string;
   /** vpcid */
-  VpcId?: string | null;
+  VpcId?: string;
   /** vpc标签 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 资产创建时间 */
-  AssetCreateTime?: string | null;
+  AssetCreateTime?: string;
   /** 最近扫描时间 */
-  LastScanTime?: string | null;
+  LastScanTime?: string;
   /** 配置风险 */
-  ConfigurationRisk?: number | null;
+  ConfigurationRisk?: number;
   /** 网络攻击 */
-  Attack?: number | null;
+  Attack?: number;
   /** 网络访问 */
-  Access?: number | null;
+  Access?: number;
   /** 扫描任务 */
-  ScanTask?: number | null;
+  ScanTask?: number;
   /** 用户appid */
-  AppId?: number | null;
+  AppId?: number;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 昵称别名 */
-  NickName?: string | null;
+  NickName?: string;
   /** 端口 */
-  Port?: number | null;
+  Port?: number;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** 内网ip */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** 公网ip */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 是否核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 是否新资产: 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
 }
 
 /** 漏洞和资产信息 */
 declare interface DataSearchBug {
   /** 返回查询状态 */
   StateCode?: string;
-  /** 无 */
-  DataBug?: BugInfoDetail[] | null;
-  /** 无 */
-  DataAsset?: AssetInfoDetail[] | null;
+  /** 漏洞详情 */
+  DataBug?: BugInfoDetail[];
+  /** 漏洞影响资产详情 */
+  DataAsset?: AssetInfoDetail[];
   /** true支持扫描。false不支持扫描 */
-  VSSScan?: boolean | null;
+  VSSScan?: boolean;
   /** 0不支持，1支持 */
-  CWPScan?: string | null;
+  CWPScan?: string;
   /** 1支持虚拟补丁，0或空不支持 */
-  CFWPatch?: string | null;
+  CFWPatch?: string;
   /** 0不支持，1支持 */
-  WafPatch?: number | null;
+  WafPatch?: number;
   /** 0不支持，1支持 */
-  CWPFix?: number | null;
+  CWPFix?: number;
+  /** 产品支持状态 */
+  DataSupport?: ProductSupport[];
+  /** cveId */
+  CveId?: string;
 }
 
 /** db资产详情 */
 declare interface DbAssetInfo {
   /** 云防状态 */
-  CFWStatus?: number | null;
+  CFWStatus?: number;
   /** 资产id */
-  AssetId?: string | null;
+  AssetId?: string;
   /** vpc信息 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** 资产类型 */
-  AssetType?: string | null;
+  AssetType?: string;
   /** 公网ip */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 私网ip */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** vpc信息 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 资产名 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 云防保护版本 */
-  CFWProtectLevel?: number | null;
+  CFWProtectLevel?: number;
   /** tag信息 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
 }
 
 /** 域名资产 */
 declare interface DomainAssetVO {
   /** 资产id */
-  AssetId?: string[] | null;
+  AssetId?: string[];
   /** 资产名 */
-  AssetName?: string[] | null;
+  AssetName?: string[];
   /** 资产类型 */
-  AssetType?: string[] | null;
+  AssetType?: string[];
   /** 地域 */
-  Region?: string[] | null;
+  Region?: string[];
   /** Waf状态 */
-  WAFStatus?: number | null;
+  WAFStatus?: number;
   /** 资产创建时间 */
-  AssetCreateTime?: string | null;
+  AssetCreateTime?: string;
   /** Appid */
-  AppId?: number | null;
+  AppId?: number;
   /** 账号id */
-  Uin?: string | null;
+  Uin?: string;
   /** 账号名称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 是否核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 是否云上资产 */
-  IsCloud?: number | null;
+  IsCloud?: number;
   /** 网络攻击 */
-  Attack?: number | null;
+  Attack?: number;
   /** 网络访问 */
-  Access?: number | null;
+  Access?: number;
   /** 网络拦截 */
-  Intercept?: number | null;
+  Intercept?: number;
   /** 入站峰值带宽 */
-  InBandwidth?: string | null;
+  InBandwidth?: string;
   /** 出站峰值带宽 */
-  OutBandwidth?: string | null;
+  OutBandwidth?: string;
   /** 入站累计流量 */
-  InFlow?: string | null;
+  InFlow?: string;
   /** 出站累计流量 */
-  OutFlow?: string | null;
+  OutFlow?: string;
   /** 最近扫描时间 */
-  LastScanTime?: string | null;
+  LastScanTime?: string;
   /** 端口风险 */
-  PortRisk?: number | null;
+  PortRisk?: number;
   /** 漏洞风险 */
-  VulnerabilityRisk?: number | null;
+  VulnerabilityRisk?: number;
   /** 配置风险 */
-  ConfigurationRisk?: number | null;
+  ConfigurationRisk?: number;
   /** 扫描任务 */
-  ScanTask?: number | null;
+  ScanTask?: number;
   /** 域名 */
-  SubDomain?: string | null;
+  SubDomain?: string;
   /** 解析ip */
-  SeverIp?: string[] | null;
+  SeverIp?: string[];
   /** bot攻击数量 */
-  BotCount?: number | null;
+  BotCount?: number;
   /** 弱口令风险 */
-  WeakPassword?: number | null;
+  WeakPassword?: number;
   /** 内容风险 */
-  WebContentRisk?: number | null;
+  WebContentRisk?: number;
   /** tag标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** 关联实例类型 */
-  SourceType?: string | null;
+  SourceType?: string;
   /** memberiD */
-  MemberId?: string | null;
+  MemberId?: string;
   /** cc攻击 */
-  CCAttack?: number | null;
+  CCAttack?: number;
   /** web攻击 */
-  WebAttack?: number | null;
+  WebAttack?: number;
   /** 风险服务暴露数量 */
-  ServiceRisk?: number | null;
+  ServiceRisk?: number;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
   /** 待确认资产的随机三级域名 */
-  VerifyDomain?: string | null;
+  VerifyDomain?: string;
   /** 待确认资产的TXT记录内容 */
-  VerifyTXTRecord?: string | null;
+  VerifyTXTRecord?: string;
   /** 待确认资产的认证状态，0-待认证，1-认证成功，2-认证中，3-txt认证失败，4-人工认证失败 */
-  VerifyStatus?: number | null;
+  VerifyStatus?: number;
   /** bot访问数量 */
-  BotAccessCount?: number | null;
+  BotAccessCount?: number;
 }
 
 /** 统计条目 */
 declare interface Element {
   /** 统计类型 */
-  Key?: string | null;
+  Key?: string;
   /** 统计对象 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */
 declare interface Filter {
   /** 查询数量限制 */
-  Limit?: number | null;
+  Limit?: number;
   /** 查询偏移位置 */
-  Offset?: number | null;
+  Offset?: number;
   /** 排序采用升序还是降序 升:asc 降 desc */
-  Order?: string | null;
+  Order?: string;
   /** 需排序的字段 */
-  By?: string | null;
+  By?: string;
   /** 过滤的列及内容 */
-  Filters?: WhereFilter[] | null;
+  Filters?: WhereFilter[];
   /** 可填无， 日志使用查询时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 可填无， 日志使用查询时间 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 过滤数据对象 */
@@ -1067,7 +1073,7 @@ declare interface GateWayAsset {
   /** 私有网络名 */
   VpcName?: string;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** 出向峰值带宽 */
   OutboundPeakBandwidth?: string;
   /** 入向峰值带宽 */
@@ -1093,99 +1099,99 @@ declare interface GateWayAsset {
   /** 昵称 */
   Nick?: string;
   /** ipv6地址 */
-  AddressIPV6?: string | null;
+  AddressIPV6?: string;
   /** 是否核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 风险服务暴露 */
-  RiskExposure?: number | null;
+  RiskExposure?: number;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
   /** 网关状态 */
-  Status?: string | null;
+  Status?: string;
   /** TSE的网关真实地域 */
-  EngineRegion?: string | null;
+  EngineRegion?: string;
 }
 
 /** ip列表 */
 declare interface IpAssetListVO {
   /** 资产id */
-  AssetId?: string | null;
+  AssetId?: string;
   /** 资产name */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 资产类型 */
-  AssetType?: string | null;
+  AssetType?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 云防状态 */
-  CFWStatus?: number | null;
+  CFWStatus?: number;
   /** 资产创建时间 */
-  AssetCreateTime?: string | null;
+  AssetCreateTime?: string;
   /** 公网ip */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 公网ip类型 */
-  PublicIpType?: number | null;
+  PublicIpType?: number;
   /** vpc */
-  VpcId?: string | null;
+  VpcId?: string;
   /** vpc名 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** appid */
-  AppId?: number | null;
+  AppId?: number;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 名称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 云上 */
-  IsCloud?: number | null;
+  IsCloud?: number;
   /** 网络攻击 */
-  Attack?: number | null;
+  Attack?: number;
   /** 网络访问 */
-  Access?: number | null;
+  Access?: number;
   /** 网络拦截 */
-  Intercept?: number | null;
+  Intercept?: number;
   /** 入向带宽 */
-  InBandwidth?: string | null;
+  InBandwidth?: string;
   /** 出向带宽 */
-  OutBandwidth?: string | null;
+  OutBandwidth?: string;
   /** 入向流量 */
-  InFlow?: string | null;
+  InFlow?: string;
   /** 出向流量 */
-  OutFlow?: string | null;
+  OutFlow?: string;
   /** 最近扫描时间 */
-  LastScanTime?: string | null;
+  LastScanTime?: string;
   /** 端口风险 */
-  PortRisk?: number | null;
+  PortRisk?: number;
   /** 漏洞风险 */
-  VulnerabilityRisk?: number | null;
+  VulnerabilityRisk?: number;
   /** 配置风险 */
-  ConfigurationRisk?: number | null;
+  ConfigurationRisk?: number;
   /** 扫描任务 */
-  ScanTask?: number | null;
+  ScanTask?: number;
   /** 弱口令 */
-  WeakPassword?: number | null;
+  WeakPassword?: number;
   /** 内容风险 */
-  WebContentRisk?: number | null;
+  WebContentRisk?: number;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** eip主键 */
-  AddressId?: string | null;
+  AddressId?: string;
   /** memberid信息 */
-  MemberId?: string | null;
+  MemberId?: string;
   /** 风险服务暴露 */
-  RiskExposure?: number | null;
+  RiskExposure?: number;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
   /** 资产认证状态，0-待认证，1-认证成功，2-认证中，3+-认证失败 */
-  VerifyStatus?: number | null;
+  VerifyStatus?: number;
 }
 
 /** KeyValue对 */
 declare interface KeyValue {
   /** 字段 */
-  Key?: string | null;
+  Key?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 网卡资产 */
@@ -1211,7 +1217,7 @@ declare interface NICAsset {
   /** 私有网络名 */
   VpcName?: string;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** 出向峰值带宽 */
   OutboundPeakBandwidth?: string;
   /** 入向峰值带宽 */
@@ -1237,9 +1243,9 @@ declare interface NICAsset {
   /** 昵称 */
   Nick?: string;
   /** 是否核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
 }
 
 /** 该结构体用来传入告警的key，以更新告警的status */
@@ -1265,53 +1271,53 @@ declare interface NewAlertKey {
 /** 集团账号成员详情 */
 declare interface OrganizationUserInfo {
   /** 成员账号Uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 成员账号名称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 部门节点名称，账号所属部门 */
-  NodeName?: string | null;
+  NodeName?: string;
   /** 资产数量 */
-  AssetCount?: number | null;
+  AssetCount?: number;
   /** 风险数量 */
-  RiskCount?: number | null;
+  RiskCount?: number;
   /** 攻击数量 */
-  AttackCount?: number | null;
+  AttackCount?: number;
   /** Member/Admin/;成员或者管理员 */
-  Role?: string | null;
+  Role?: string;
   /** 成员账号id */
-  MemberId?: string | null;
+  MemberId?: string;
   /** 成员账号Appid */
-  AppId?: string | null;
+  AppId?: string;
   /** 账号加入方式,create/invite */
-  JoinType?: string | null;
+  JoinType?: string;
   /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
-  CFWProtect?: string | null;
+  CFWProtect?: string;
   /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
-  WAFProtect?: string | null;
+  WAFProtect?: string;
   /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
-  CWPProtect?: string | null;
+  CWPProtect?: string;
   /** 1启用，0未启用 */
-  Enable?: number | null;
+  Enable?: number;
   /** "Free" //免费版 "Advanced" //高级版 "Enterprise" //企业版 "Ultimate" //旗舰版 */
-  CSIPProtect?: string | null;
+  CSIPProtect?: string;
   /** 1为配额消耗者 */
-  QuotaConsumer?: number | null;
+  QuotaConsumer?: number;
   /** 账户类型，0为腾讯云账户，1为AWS账户 */
-  CloudType?: number | null;
+  CloudType?: number;
   /** 0为缺省值，1为10分钟，2为1小时，3为24小时 */
-  SyncFrequency?: number | null;
+  SyncFrequency?: number;
   /** 多云账户是否过期 */
-  IsExpired?: boolean | null;
+  IsExpired?: boolean;
   /** 多云账户 权限列表 */
-  PermissionList?: string[] | null;
+  PermissionList?: string[];
   /** 1 */
-  AuthType?: number | null;
+  AuthType?: number;
   /** 0 腾讯云集团账户1 腾讯云接入账户2 非腾讯云 */
-  TcMemberType?: number | null;
+  TcMemberType?: number;
   /** 子账号数量 */
-  SubUserCount?: number | null;
+  SubUserCount?: number;
   /** 加入方式详细信息 */
-  JoinTypeInfo?: string | null;
+  JoinTypeInfo?: string;
 }
 
 /** 端口风险高级配置项 */
@@ -1355,11 +1361,27 @@ declare interface PortViewPortRisk {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 服务 */
   Service?: string;
+}
+
+/** 漏洞信息产品支持状态 */
+declare interface ProductSupport {
+  /** true支持扫描。false不支持扫描 */
+  VSSScan?: boolean;
+  /** 0不支持，1支持 */
+  CWPScan?: string;
+  /** 1支持虚拟补丁，0或空不支持 */
+  CFWPatch?: string;
+  /** 0不支持，1支持 */
+  WafPatch?: number;
+  /** 0不支持，1支持 */
+  CWPFix?: number;
+  /** cveid */
+  CveId?: string;
 }
 
 /** 公网IP和域名资产列表key */
@@ -1371,11 +1393,11 @@ declare interface PublicIpDomainListKey {
 /** 相关攻击事件结构 */
 declare interface RelatedEvent {
   /** 事件ID */
-  EventID?: string | null;
+  EventID?: string;
   /** 事件描述 */
-  Description?: string | null;
+  Description?: string;
   /** 与事件关联的告警数量 */
-  RelatedCount?: number | null;
+  RelatedCount?: number;
 }
 
 /** 报告项key */
@@ -1407,163 +1429,163 @@ declare interface RiskCenterStatusKey {
 /** 告警数据攻击者或受害者信息 */
 declare interface RoleInfo {
   /** IP */
-  IP?: string | null;
+  IP?: string;
   /** HostIP */
-  HostIP?: string | null;
+  HostIP?: string;
   /** 原始IP */
-  OriginIP?: string | null;
+  OriginIP?: string;
   /** 端口 */
-  Port?: number | null;
+  Port?: number;
   /** 资产ID */
-  InstanceID?: string | null;
+  InstanceID?: string;
   /** 城市 */
-  City?: string | null;
+  City?: string;
   /** 省份 */
-  Province?: string | null;
+  Province?: string;
   /** 国家 */
-  Country?: string | null;
+  Country?: string;
   /** 地址 */
-  Address?: string | null;
+  Address?: string;
   /** 纬度 */
-  Latitude?: string | null;
+  Latitude?: string;
   /** 经度 */
-  Longitude?: string | null;
+  Longitude?: string;
   /** 信息 */
-  Info?: string | null;
+  Info?: string;
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 企业名称 */
-  Name?: string | null;
+  Name?: string;
   /** 账号 */
-  Account?: string | null;
+  Account?: string;
   /** 家族团伙 */
-  Family?: string | null;
+  Family?: string;
   /** 病毒名 */
-  VirusName?: string | null;
+  VirusName?: string;
   /** MD5值 */
-  MD5?: string | null;
+  MD5?: string;
   /** 恶意进程文件名 */
-  FileName?: string | null;
+  FileName?: string;
   /** 1:主机资产 2:域名资产 3:网络资产 */
-  AssetType?: number | null;
+  AssetType?: number;
   /** 来源日志分析的信息字段 */
-  FromLogAnalysisData?: KeyValue[] | null;
+  FromLogAnalysisData?: KeyValue[];
   /** 容器名 */
-  ContainerName?: string | null;
+  ContainerName?: string;
   /** 容器ID */
-  ContainerID?: string | null;
+  ContainerID?: string;
 }
 
 /** 扫描任务详情 */
 declare interface ScanTaskInfo {
   /** 任务Id */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 任务状态码：1等待开始 2正在扫描 3扫描出错 4扫描完成 */
-  Status?: number | null;
+  Status?: number;
   /** 任务进度 */
-  Progress?: number | null;
+  Progress?: number;
   /** 任务完成时间 */
-  TaskTime?: string | null;
+  TaskTime?: string;
   /** 报告ID */
-  ReportId?: string | null;
+  ReportId?: string;
   /** 报告名称 */
-  ReportName?: string | null;
+  ReportName?: string;
   /** 扫描计划，0-周期任务,1-立即扫描,2-定时扫描,3-自定义 */
-  ScanPlan?: number | null;
+  ScanPlan?: number;
   /** 关联的资产数 */
-  AssetCount?: number | null;
+  AssetCount?: number;
   /** APP ID */
-  AppId?: string | null;
+  AppId?: string;
   /** 用户主账户ID */
-  UIN?: string | null;
+  UIN?: string;
   /** 用户名称 */
-  UserName?: string | null;
+  UserName?: string;
 }
 
 /** 扫描任务列表展示信息 */
 declare interface ScanTaskInfoList {
   /** 任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 任务开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 任务结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** cron格式 */
-  ScanPlanContent?: string | null;
+  ScanPlanContent?: string;
   /** 0-周期任务,1-立即扫描,2-定时扫描,3-自定义 */
-  TaskType?: number | null;
+  TaskType?: number;
   /** 创建时间 */
-  InsertTime?: string | null;
+  InsertTime?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 自定义指定扫描资产信息 */
-  SelfDefiningAssets?: string[] | null;
+  SelfDefiningAssets?: string[];
   /** 预估时间 */
-  PredictTime?: number | null;
+  PredictTime?: number;
   /** 预估完成时间 */
-  PredictEndTime?: string | null;
+  PredictEndTime?: string;
   /** 报告数量 */
-  ReportNumber?: number | null;
+  ReportNumber?: number;
   /** 资产数量 */
-  AssetNumber?: number | null;
+  AssetNumber?: number;
   /** 扫描状态, 0-初始值，1-正在扫描，2-扫描完成，3-扫描出错，4-停止扫描 */
-  ScanStatus?: number | null;
+  ScanStatus?: number;
   /** 任务进度 */
-  Percent?: number | null;
+  Percent?: number;
   /** port/poc/weakpass/webcontent/configrisk */
-  ScanItem?: string | null;
+  ScanItem?: string;
   /** 0-全扫，1-指定资产扫，2-排除资产扫，3-自定义指定资产扫描 */
-  ScanAssetType?: number | null;
+  ScanAssetType?: number;
   /** vss子任务id */
-  VSSTaskId?: string | null;
+  VSSTaskId?: string;
   /** cspm子任务id */
-  CSPMTaskId?: string | null;
+  CSPMTaskId?: string;
   /** 主机漏扫子任务id */
-  CWPPOCId?: string | null;
+  CWPPOCId?: string;
   /** 主机基线子任务id */
-  CWPBlId?: string | null;
+  CWPBlId?: string;
   /** vss子任务进度 */
-  VSSTaskProcess?: number | null;
+  VSSTaskProcess?: number;
   /** cspm子任务进度 */
-  CSPMTaskProcess?: number | null;
+  CSPMTaskProcess?: number;
   /** 主机漏扫子任务进度 */
-  CWPPOCProcess?: number | null;
+  CWPPOCProcess?: number;
   /** 主机基线子任务进度 */
-  CWPBlProcess?: number | null;
+  CWPBlProcess?: number;
   /** 异常状态码 */
-  ErrorCode?: number | null;
+  ErrorCode?: number;
   /** 异常信息 */
-  ErrorInfo?: string | null;
+  ErrorInfo?: string;
   /** 周期任务开始的天数 */
-  StartDay?: number | null;
+  StartDay?: number;
   /** 扫描频率,单位天,1-每天,7-每周,30-月,0-扫描一次 */
-  Frequency?: number | null;
+  Frequency?: number;
   /** 完成次数 */
-  CompleteNumber?: number | null;
+  CompleteNumber?: number;
   /** 已完成资产个数 */
-  CompleteAssetNumber?: number | null;
+  CompleteAssetNumber?: number;
   /** 风险数 */
-  RiskCount?: number | null;
+  RiskCount?: number;
   /** 资产 */
-  Assets?: TaskAssetObject[] | null;
+  Assets?: TaskAssetObject[];
   /** 用户Appid */
-  AppId?: string | null;
+  AppId?: string;
   /** 用户主账户ID */
-  UIN?: string | null;
+  UIN?: string;
   /** 用户名称 */
-  UserName?: string | null;
+  UserName?: string;
   /** 体检模式，0-标准模式，1-快速模式，2-高级模式 */
-  TaskMode?: number | null;
+  TaskMode?: number;
   /** 扫描来源 */
-  ScanFrom?: string | null;
+  ScanFrom?: string;
   /** 是否限免体检0不是，1是 */
-  IsFree?: number | null;
+  IsFree?: number;
   /** 是否可以删除，1-可以，0-不可以，对应多账户管理使用 */
-  IsDelete?: number | null;
+  IsDelete?: number;
   /** 任务源类型，0-默认，1-小助手，2-体检项 */
-  SourceType?: number | null;
+  SourceType?: number;
 }
 
 /** 服务风险 */
@@ -1571,7 +1593,7 @@ declare interface ServerRisk {
   /** 测绘标签 */
   ServiceTag?: string;
   /** 端口 */
-  Port?: number | null;
+  Port?: number;
   /** 影响资产 */
   AffectAsset?: string;
   /** 实例id */
@@ -1593,7 +1615,7 @@ declare interface ServerRisk {
   /** 首次识别时间 */
   FirstTime?: string;
   /** 风险详情 */
-  RiskDetails?: string | null;
+  RiskDetails?: string;
   /** 处置建议 */
   Suggestion?: string;
   /** 状态，0未处理、1已处置、2已忽略 */
@@ -1603,41 +1625,41 @@ declare interface ServerRisk {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 服务快照 */
-  ServiceSnapshot?: string | null;
+  ServiceSnapshot?: string;
   /** 服务访问的url */
-  Url?: string | null;
+  Url?: string;
   /** 列表索引值 */
-  Index?: string | null;
+  Index?: string;
   /** 风险列表 */
-  RiskList?: ServerRiskSuggestion[] | null;
+  RiskList?: ServerRiskSuggestion[];
   /** 建议列表 */
-  SuggestionList?: ServerRiskSuggestion[] | null;
+  SuggestionList?: ServerRiskSuggestion[];
   /** HTTP响应状态码 */
-  StatusCode?: string | null;
+  StatusCode?: string;
 }
 
 /** 风险详情 */
 declare interface ServerRiskSuggestion {
   /** 标题 */
-  Title?: string | null;
+  Title?: string;
   /** 详情 */
-  Body?: string | null;
+  Body?: string;
 }
 
 /** 产品支持情况 */
 declare interface ServiceSupport {
   /** 产品名称:"cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix" */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 已处理的资产总数 */
-  SupportHandledCount?: number | null;
+  SupportHandledCount?: number;
   /** 支持的资产总数 */
-  SupportTotalCount?: number | null;
+  SupportTotalCount?: number;
   /** 是否支持该产品1支持；0不支持 */
-  IsSupport?: boolean | null;
+  IsSupport?: boolean;
 }
 
 /** 子网资产 */
@@ -1657,7 +1679,7 @@ declare interface SubnetAsset {
   /** 私有网络名 */
   VpcName?: string;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** 昵称 */
   Nick?: string;
   /** cidr */
@@ -1677,9 +1699,9 @@ declare interface SubnetAsset {
   /** 最后扫描时间 */
   LastScanTime?: string;
   /** 是否核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
 }
 
 /** 标签 */
@@ -1693,17 +1715,17 @@ declare interface Tag {
 /** 产品日志条数 */
 declare interface TagCount {
   /** 产品名 */
-  Name?: string | null;
+  Name?: string;
   /** 日志条数 */
-  Count?: number | null;
+  Count?: number;
 }
 
 /** 主机标签信息 */
 declare interface Tags {
-  /** 无 */
-  TagKey?: string | null;
-  /** 无 */
-  TagValue?: string | null;
+  /** 主机标签key */
+  TagKey?: string;
+  /** 主机标签value */
+  TagValue?: string;
 }
 
 /** 任务高级配置 */
@@ -1721,17 +1743,17 @@ declare interface TaskAdvanceCFG {
 /** 任务资产项 */
 declare interface TaskAssetObject {
   /** 资产名 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 资产类型 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 资产分类 */
-  AssetType?: string | null;
+  AssetType?: string;
   /** ip/域名/资产id，数据库id等 */
   Asset?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 多云资产唯一id */
-  Arn?: string | null;
+  Arn?: string;
 }
 
 /** 配置风险高级配置 */
@@ -1747,9 +1769,9 @@ declare interface TaskCenterCFGRiskInputParam {
 /** 漏洞风险高级配置 */
 declare interface TaskCenterVulRiskInputParam {
   /** 风险ID */
-  RiskId: string | null;
+  RiskId: string;
   /** 是否开启，0-不开启，1-开启 */
-  Enable: number | null;
+  Enable: number;
 }
 
 /** 弱口令风险高级配置 */
@@ -1769,45 +1791,45 @@ declare interface TaskIdListKey {
 /** 任务报告信息 */
 declare interface TaskLogInfo {
   /** 报告名称 */
-  TaskLogName?: string | null;
+  TaskLogName?: string;
   /** 报告ID */
   TaskLogId?: string;
   /** 关联资产个数 */
-  AssetsNumber?: number | null;
+  AssetsNumber?: number;
   /** 安全风险数量 */
-  RiskNumber?: number | null;
+  RiskNumber?: number;
   /** 报告生成时间 */
-  Time?: string | null;
+  Time?: string;
   /** 任务状态码：0 初始值 1正在扫描 2扫描完成 3扫描出错，4停止，5暂停，6该任务已被重启过 */
-  Status?: number | null;
+  Status?: number;
   /** 关联任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 扫描开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 任务中心扫描任务ID */
-  TaskCenterTaskId?: string | null;
+  TaskCenterTaskId?: string;
   /** 租户ID */
-  AppId?: string | null;
+  AppId?: string;
   /** 主账户ID */
-  UIN?: string | null;
+  UIN?: string;
   /** 用户名称 */
-  UserName?: string | null;
+  UserName?: string;
   /** 报告类型： 1安全体检 2日报 3周报 4月报 */
-  ReportType?: number | null;
+  ReportType?: number;
   /** 报告模板id */
-  TemplateId?: number | null;
+  TemplateId?: number;
 }
 
 /** 报告pdf下载的临时链接 */
 declare interface TaskLogURL {
   /** 报告下载临时链接 */
-  URL?: string | null;
+  URL?: string;
   /** 任务报告id */
-  LogId?: string | null;
+  LogId?: string;
   /** 任务报告名称 */
-  TaskLogName?: string | null;
+  TaskLogName?: string;
   /** APP ID */
-  AppId?: string | null;
+  AppId?: string;
 }
 
 /** 漏洞风险高级配置列表 */
@@ -1821,49 +1843,49 @@ declare interface VULRiskAdvanceCFGList {
   /** 识别来源 */
   CheckFrom?: string;
   /** 是否启用，1-启用，0-禁用 */
-  Enable?: number | null;
+  Enable?: number;
   /** 风险类型 */
   VULType?: string;
   /** 影响版本 */
   ImpactVersion?: string;
   /** CVE */
-  CVE?: string | null;
+  CVE?: string;
   /** 漏洞标签 */
   VULTag?: string[];
   /** 修复方式 */
-  FixMethod?: string[] | null;
+  FixMethod?: string[];
   /** 披露时间 */
-  ReleaseTime?: string | null;
+  ReleaseTime?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
-  EMGCVulType?: number | null;
+  EMGCVulType?: number;
   /** 漏洞描述 */
-  VULDescribe?: string | null;
+  VULDescribe?: string;
   /** 影响组件 */
-  ImpactComponent?: string | null;
+  ImpactComponent?: string;
   /** 漏洞Payload */
-  Payload?: string | null;
+  Payload?: string;
   /** 技术参考 */
-  References?: string | null;
+  References?: string;
   /** cvss评分 */
-  CVSS?: string | null;
+  CVSS?: string;
   /** 攻击热度 */
-  AttackHeat?: string | null;
+  AttackHeat?: string;
   /** 安全产品支持情况 */
-  ServiceSupport?: ServiceSupport[] | null;
+  ServiceSupport?: ServiceSupport[];
   /** 最新检测时间 */
-  RecentScanTime?: string | null;
+  RecentScanTime?: string;
 }
 
 /** 漏洞风险信息 */
 declare interface VULRiskInfo {
   /** 修复建议 */
-  Fix?: string | null;
+  Fix?: string;
   /** 技术参考/参考链接 */
-  References?: string | null;
+  References?: string;
   /** 漏洞描述 */
-  Describe?: string | null;
+  Describe?: string;
   /** 受影响组件 */
-  ImpactComponent?: VulImpactComponentInfo[] | null;
+  ImpactComponent?: VulImpactComponentInfo[];
 }
 
 /** 漏洞视角的漏洞风险对象 */
@@ -1907,15 +1929,15 @@ declare interface VULViewVULRisk {
   /** 风险点 */
   VULURL?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户appid */
   AppId?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 修复建议 */
-  Fix?: string | null;
+  Fix?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
-  EMGCVulType?: number | null;
+  EMGCVulType?: number;
 }
 
 /** 漏洞视角的漏洞风险对象 */
@@ -1955,35 +1977,35 @@ declare interface VULViewVULRiskData {
   /** 风险点 */
   VULURL?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户appid */
   AppId?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
-  EMGCVulType?: number | null;
+  EMGCVulType?: number;
   /** CVSS评分 */
-  CVSS?: number | null;
+  CVSS?: number;
   /** PCMGRId */
-  PCMGRId?: string | null;
+  PCMGRId?: string;
   /** 漏洞标签。搜索时应急 必修传参VulTag=SuggestRepair/EMGCVul */
-  VulTag?: string[] | null;
+  VulTag?: string[];
   /** 漏洞披露时间 */
-  DisclosureTime?: string | null;
+  DisclosureTime?: string;
   /** 攻击热度 */
-  AttackHeat?: number | null;
+  AttackHeat?: number;
   /** 是否必修漏洞，1-是，0-不是 */
-  IsSuggest?: number | null;
+  IsSuggest?: number;
   /** 处置任务id */
-  HandleTaskId?: string | null;
+  HandleTaskId?: string;
   /** 引擎来源 */
-  EngineSource?: string | null;
+  EngineSource?: string;
   /** 新的漏洞风险id */
-  VulRiskId?: string | null;
+  VulRiskId?: string;
   /** 新版漏洞id */
-  TvdID?: string | null;
+  TvdID?: string;
   /** 是否可以一键体检，1-可以，0-不可以 */
-  IsOneClick?: number | null;
+  IsOneClick?: number;
 }
 
 /** vpc列表数据 */
@@ -1999,9 +2021,9 @@ declare interface Vpc {
   /** 云服务器(只支持32位) */
   CVM?: number;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** dns域名 */
-  DNS?: string[] | null;
+  DNS?: string[];
   /** 资产名称 */
   AssetName?: string;
   /** cidr网段 */
@@ -2015,29 +2037,29 @@ declare interface Vpc {
   /** 昵称 */
   Nick?: string;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
   /** 是否核心资产1是 2不是 */
-  IsCore?: number | null;
+  IsCore?: number;
 }
 
 /** 漏洞影响组件信息 */
 declare interface VulImpactComponentInfo {
   /** 组件名称 */
-  Component?: string | null;
+  Component?: string;
   /** 版本名称 */
-  Version?: string | null;
+  Version?: string;
 }
 
 /** 漏洞趋势-攻击趋势、影响用户、影响资产 */
 declare interface VulTrend {
   /** 影响的资产数 */
-  AffectAssetCount?: number | null;
+  AffectAssetCount?: number;
   /** 影响的用户数 */
-  AffectUserCount?: number | null;
+  AffectUserCount?: number;
   /** 攻击数 */
-  AttackCount?: number | null;
+  AttackCount?: number;
   /** 时间 */
-  Date?: string | null;
+  Date?: string;
 }
 
 /** 网站风险对象 */
@@ -2063,9 +2085,9 @@ declare interface WebsiteRisk {
   /** 用户appid */
   AppId?: string;
   /** 用户昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 风险链接 */
   URL?: string;
   /** 风险文件地址 */
@@ -2085,11 +2107,11 @@ declare interface WebsiteRisk {
 /** 过滤条件 */
 declare interface WhereFilter {
   /** 过滤的项 */
-  Name: string | null;
+  Name: string;
   /** 过滤的值 */
-  Values: string[] | null;
+  Values: string[];
   /** 中台定义：1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与精确匹配填 7 模糊匹配填9 */
-  OperatorType?: number | null;
+  OperatorType?: number;
 }
 
 declare interface AddNewBindRoleUserRequest {
@@ -2104,63 +2126,63 @@ declare interface AddNewBindRoleUserResponse {
 
 declare interface AssetBaseInfoResponse {
   /** vpc-id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** vpc-name */
-  VpcName?: string | null;
+  VpcName?: string;
   /** 资产名 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 操作系统 */
-  Os?: string | null;
+  Os?: string;
   /** 公网ip */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 内网ip */
-  PrivateIp?: string | null;
+  PrivateIp?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 资产类型 */
-  AssetType?: string | null;
+  AssetType?: string;
   /** 资产id */
-  AssetId?: string | null;
+  AssetId?: string;
   /** 账号数量 */
-  AccountNum?: number | null;
+  AccountNum?: number;
   /** 端口数量 */
-  PortNum?: number | null;
+  PortNum?: number;
   /** 进程数量 */
-  ProcessNum?: number | null;
+  ProcessNum?: number;
   /** 软件应用数量 */
-  SoftApplicationNum?: number | null;
+  SoftApplicationNum?: number;
   /** 数据库数量 */
-  DatabaseNum?: number | null;
+  DatabaseNum?: number;
   /** Web应用数量 */
-  WebApplicationNum?: number | null;
+  WebApplicationNum?: number;
   /** 服务数量 */
-  ServiceNum?: number | null;
+  ServiceNum?: number;
   /** web框架数量 */
-  WebFrameworkNum?: number | null;
+  WebFrameworkNum?: number;
   /** Web站点数量 */
-  WebSiteNum?: number | null;
+  WebSiteNum?: number;
   /** Jar包数量 */
-  JarPackageNum?: number | null;
+  JarPackageNum?: number;
   /** 启动服务数量 */
-  StartServiceNum?: number | null;
+  StartServiceNum?: number;
   /** 计划任务数量 */
-  ScheduledTaskNum?: number | null;
+  ScheduledTaskNum?: number;
   /** 环境变量数量 */
-  EnvironmentVariableNum?: number | null;
+  EnvironmentVariableNum?: number;
   /** 内核模块数量 */
-  KernelModuleNum?: number | null;
+  KernelModuleNum?: number;
   /** 系统安装包数量 */
-  SystemInstallationPackageNum?: number | null;
+  SystemInstallationPackageNum?: number;
   /** 剩余防护时长 */
-  SurplusProtectDay?: number | null;
+  SurplusProtectDay?: number;
   /** 客户端是否安装 1 已安装 0 未安装 */
-  CWPStatus?: number | null;
+  CWPStatus?: number;
   /** 标签 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** 防护等级 */
-  ProtectLevel?: string | null;
+  ProtectLevel?: string;
   /** 防护时长 */
-  ProtectedDay?: number | null;
+  ProtectedDay?: number;
 }
 
 declare interface CreateDomainAndIpRequest {
@@ -2292,7 +2314,7 @@ declare interface DescribeAssetViewVulRiskListResponse {
   /** 总条数 */
   TotalCount?: number;
   /** 资产视角的漏洞风险列表 */
-  Data?: AssetViewVULRiskData[] | null;
+  Data?: AssetViewVULRiskData[];
   /** 状态列表 */
   StatusLists?: FilterDataObject[];
   /** 危险等级列表 */
@@ -2304,7 +2326,7 @@ declare interface DescribeAssetViewVulRiskListResponse {
   /** 资产类型列表 */
   InstanceTypeLists?: FilterDataObject[];
   /** tag枚举 */
-  Tags?: FilterDataObject[] | null;
+  Tags?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2340,13 +2362,13 @@ declare interface DescribeCFWAssetStatisticsResponse {
 }
 
 declare interface DescribeCVMAssetInfoRequest {
-  /** - */
+  /** 资产id */
   AssetId: string;
 }
 
 declare interface DescribeCVMAssetInfoResponse {
-  /** - */
-  Data?: AssetBaseInfoResponse | null;
+  /** 数据 */
+  Data?: AssetBaseInfoResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2354,44 +2376,46 @@ declare interface DescribeCVMAssetInfoResponse {
 declare interface DescribeCVMAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** - */
+  /** 过滤器参数 */
   Filter?: Filter;
 }
 
 declare interface DescribeCVMAssetsResponse {
-  /** - */
-  Total?: number | null;
-  /** - */
-  Data?: CVMAssetVO[] | null;
+  /** 总数 */
+  Total?: number;
+  /** 机器列表 */
+  Data?: CVMAssetVO[];
   /** 地域列表 */
-  RegionList?: FilterDataObject[] | null;
+  RegionList?: FilterDataObject[];
   /** 防护状态 */
-  DefenseStatusList?: FilterDataObject[] | null;
+  DefenseStatusList?: FilterDataObject[];
   /** vpc枚举 */
-  VpcList?: FilterDataObject[] | null;
+  VpcList?: FilterDataObject[];
   /** 资产类型枚举 */
-  AssetTypeList?: FilterDataObject[] | null;
+  AssetTypeList?: FilterDataObject[];
   /** 操作系统枚举 */
-  SystemTypeList?: FilterDataObject[] | null;
+  SystemTypeList?: FilterDataObject[];
   /** ip列表 */
-  IpTypeList?: FilterDataObject[] | null;
+  IpTypeList?: FilterDataObject[];
   /** appid列表 */
-  AppIdList?: FilterDataObject[] | null;
+  AppIdList?: FilterDataObject[];
   /** 可用区列表 */
-  ZoneList?: FilterDataObject[] | null;
+  ZoneList?: FilterDataObject[];
   /** os列表 */
-  OsList?: FilterDataObject[] | null;
+  OsList?: FilterDataObject[];
   /** 资产类型和实例类型的对应关系 */
-  AssetMapInstanceTypeList?: AssetInstanceTypeMap[] | null;
+  AssetMapInstanceTypeList?: AssetInstanceTypeMap[];
   /** 公网内网枚举 */
-  PublicPrivateAttr?: FilterDataObject[] | null;
+  PublicPrivateAttr?: FilterDataObject[];
   /** 主机防护状态 */
-  ProtectStatusList?: FilterDataObject[] | null;
+  ProtectStatusList?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeClusterPodAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤 */
   Filter?: Filter;
 }
@@ -2420,7 +2444,7 @@ declare interface DescribeDbAssetInfoRequest {
 
 declare interface DescribeDbAssetInfoResponse {
   /** db资产详情 */
-  Data?: DbAssetInfo | null;
+  Data?: DbAssetInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2428,7 +2452,7 @@ declare interface DescribeDbAssetInfoResponse {
 declare interface DescribeDbAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** - */
+  /** 过滤器参数 */
   Filter?: Filter;
   /** 资产类型:MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS */
   AssetTypes?: string[];
@@ -2436,19 +2460,19 @@ declare interface DescribeDbAssetsRequest {
 
 declare interface DescribeDbAssetsResponse {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 资产总数 */
-  Data?: DBAssetVO[] | null;
+  Data?: DBAssetVO[];
   /** 地域枚举 */
-  RegionList?: FilterDataObject[] | null;
+  RegionList?: FilterDataObject[];
   /** 资产类型枚举 */
-  AssetTypeList?: FilterDataObject[] | null;
+  AssetTypeList?: FilterDataObject[];
   /** Vpc枚举 */
-  VpcList?: FilterDataObject[] | null;
+  VpcList?: FilterDataObject[];
   /** Appid枚举 */
-  AppIdList?: FilterDataObject[] | null;
+  AppIdList?: FilterDataObject[];
   /** 公网内网枚举 */
-  PublicPrivateAttr?: FilterDataObject[] | null;
+  PublicPrivateAttr?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2456,25 +2480,25 @@ declare interface DescribeDbAssetsResponse {
 declare interface DescribeDomainAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** - */
+  /** 过滤器参数 */
   Filter?: Filter;
   /** 安全中心自定义标签 */
   Tags?: AssetTag[];
 }
 
 declare interface DescribeDomainAssetsResponse {
-  /** - */
-  Total?: number | null;
-  /** - */
-  Data?: DomainAssetVO[] | null;
+  /** 总数 */
+  Total?: number;
+  /** 域名列表 */
+  Data?: DomainAssetVO[];
   /** 防护状态列表 */
-  DefenseStatusList?: FilterDataObject[] | null;
+  DefenseStatusList?: FilterDataObject[];
   /** 资产归属地列表 */
-  AssetLocationList?: FilterDataObject[] | null;
+  AssetLocationList?: FilterDataObject[];
   /** 资产类型列表 */
-  SourceTypeList?: FilterDataObject[] | null;
+  SourceTypeList?: FilterDataObject[];
   /** 地域列表 */
-  RegionList?: FilterDataObject[] | null;
+  RegionList?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2506,15 +2530,15 @@ declare interface DescribeGatewayAssetsResponse {
 declare interface DescribeListenerListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** - */
+  /** 过滤器参数 */
   Filter?: Filter;
 }
 
 declare interface DescribeListenerListResponse {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 监听器列表 */
-  Data?: ClbListenerListInfo[] | null;
+  Data?: ClbListenerListInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2554,13 +2578,13 @@ declare interface DescribeOrganizationUserInfoRequest {
 
 declare interface DescribeOrganizationUserInfoResponse {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 集团用户列表 */
-  Data?: OrganizationUserInfo[] | null;
+  Data?: OrganizationUserInfo[];
   /** 加入方式枚举 */
-  JoinTypeLst?: FilterDataObject[] | null;
+  JoinTypeLst?: FilterDataObject[];
   /** 云厂商枚举 */
-  CloudTypeLst?: FilterDataObject[] | null;
+  CloudTypeLst?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2568,7 +2592,7 @@ declare interface DescribeOrganizationUserInfoResponse {
 declare interface DescribePublicIpAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** filte过滤条件 */
+  /** 过滤器参数 */
   Filter?: Filter;
   /** 安全中心自定义标签 */
   Tags?: AssetTag[];
@@ -2576,21 +2600,21 @@ declare interface DescribePublicIpAssetsRequest {
 
 declare interface DescribePublicIpAssetsResponse {
   /** 列表 */
-  Data?: IpAssetListVO[] | null;
+  Data?: IpAssetListVO[];
   /** 总数 */
   Total?: number;
   /** 资产归属地 */
-  AssetLocationList?: FilterDataObject[] | null;
+  AssetLocationList?: FilterDataObject[];
   /** ip列表枚举 */
-  IpTypeList?: FilterDataObject[] | null;
+  IpTypeList?: FilterDataObject[];
   /** 地域列表枚举 */
-  RegionList?: FilterDataObject[] | null;
+  RegionList?: FilterDataObject[];
   /** 防护枚举 */
-  DefenseStatusList?: FilterDataObject[] | null;
+  DefenseStatusList?: FilterDataObject[];
   /** 资产类型枚举 */
-  AssetTypeList?: FilterDataObject[] | null;
+  AssetTypeList?: FilterDataObject[];
   /** AppId枚举 */
-  AppIdList?: FilterDataObject[] | null;
+  AppIdList?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2812,9 +2836,9 @@ declare interface DescribeScanReportListRequest {
 
 declare interface DescribeScanReportListResponse {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 任务日志列表 */
-  Data?: ScanTaskInfo[] | null;
+  Data?: ScanTaskInfo[];
   /** 主账户ID列表 */
   UINList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2832,19 +2856,19 @@ declare interface DescribeScanTaskListRequest {
 
 declare interface DescribeScanTaskListResponse {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 任务日志列表 */
-  Data?: ScanTaskInfoList[] | null;
+  Data?: ScanTaskInfoList[];
   /** 主账户ID列表 */
-  UINList?: string[] | null;
+  UINList?: string[];
   /** 体检模式过滤列表 */
-  TaskModeList?: FilterDataObject[] | null;
+  TaskModeList?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeSearchBugInfoRequest {
-  /** 无 */
+  /** 1的时候返回应急漏洞，2的时候返回应急漏洞列表，3的时候搭配输入CVEId字段展示该漏洞数据 */
   Id: string;
   /** id=3时传入该参数 */
   CVEId?: string;
@@ -2852,7 +2876,7 @@ declare interface DescribeSearchBugInfoRequest {
 
 declare interface DescribeSearchBugInfoResponse {
   /** 漏洞信息和资产信息 */
-  Data?: DataSearchBug | null;
+  Data?: DataSearchBug;
   /** 状态值，0：查询成功，非0：查询失败 */
   ReturnCode?: number;
   /** 状态信息，success：查询成功，fail：查询失败 */
@@ -2862,6 +2886,8 @@ declare interface DescribeSearchBugInfoResponse {
 }
 
 declare interface DescribeSubnetAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤参数 */
   Filter?: Filter;
 }
@@ -2892,13 +2918,13 @@ declare interface DescribeTaskLogListRequest {
 
 declare interface DescribeTaskLogListResponse {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 报告列表 */
-  Data?: TaskLogInfo[] | null;
+  Data?: TaskLogInfo[];
   /** 待查看数量 */
-  NotViewNumber?: number | null;
+  NotViewNumber?: number;
   /** 报告模板数 */
-  ReportTemplateNumber?: number | null;
+  ReportTemplateNumber?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2922,6 +2948,8 @@ declare interface DescribeTaskLogURLResponse {
 }
 
 declare interface DescribeTopAttackInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 被调用的集团账号的成员id */
   OperatedMemberId?: string[];
 }
@@ -2944,17 +2972,17 @@ declare interface DescribeVULRiskAdvanceCFGListRequest {
 
 declare interface DescribeVULRiskAdvanceCFGListResponse {
   /** 配置项列表 */
-  Data?: VULRiskAdvanceCFGList[] | null;
+  Data?: VULRiskAdvanceCFGList[];
   /** 总数 */
   TotalCount?: number;
   /** 风险等级过滤列表 */
-  RiskLevelLists?: FilterDataObject[] | null;
+  RiskLevelLists?: FilterDataObject[];
   /** 漏洞类型过滤列表 */
-  VULTypeLists?: FilterDataObject[] | null;
+  VULTypeLists?: FilterDataObject[];
   /** 识别来源过滤列表 */
-  CheckFromLists?: FilterDataObject[] | null;
+  CheckFromLists?: FilterDataObject[];
   /** 漏洞标签列表 */
-  VulTagList?: FilterDataObject[] | null;
+  VulTagList?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2984,6 +3012,8 @@ declare interface DescribeVULRiskDetailResponse {
 }
 
 declare interface DescribeVpcAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤参数 */
   Filter?: Filter;
 }
@@ -3016,7 +3046,7 @@ declare interface DescribeVulViewVulRiskListResponse {
   /** 总条数 */
   TotalCount?: number;
   /** 漏洞产视角的漏洞风险列表 */
-  Data?: VULViewVULRiskData[] | null;
+  Data?: VULViewVULRiskData[];
   /** 危险等级列表 */
   LevelLists?: FilterDataObject[];
   /** 来源列表 */
@@ -3024,7 +3054,7 @@ declare interface DescribeVulViewVulRiskListResponse {
   /** 漏洞类型列表 */
   VULTypeLists?: FilterDataObject[];
   /** tag枚举 */
-  Tags?: FilterDataObject[] | null;
+  Tags?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3032,6 +3062,8 @@ declare interface DescribeVulViewVulRiskListResponse {
 declare interface ModifyOrganizationAccountStatusRequest {
   /** 修改集团账号状态，1 开启， 2关闭 */
   Status: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
 }
 
 declare interface ModifyOrganizationAccountStatusResponse {
@@ -3114,13 +3146,15 @@ declare interface UpdateAlertStatusListRequest {
   ID: NewAlertKey[];
   /** 操作类型 1:撤销处置 2:标记为已处置 3:标记忽略 4:取消标记处置5:取消标记忽略 */
   OperateType: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 被调用的集团账号的成员id */
   OperatedMemberId?: string[];
 }
 
 declare interface UpdateAlertStatusListResponse {
   /** 结果信息 */
-  Msg?: string | null;
+  Msg?: string;
   /** 结果代码 */
   Code?: string;
   /** 唯一请求 ID，每次请求都会返回。 */

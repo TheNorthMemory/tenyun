@@ -429,19 +429,19 @@ declare interface ParamConstraint {
 /** DB参数描述 */
 declare interface ParamDesc {
   /** 参数名字 */
-  Param: string;
+  Param?: string;
   /** 当前参数值 */
-  Value: string;
+  Value?: string;
   /** 设置过的值，参数生效后，该值和value一样。 */
-  SetValue: string | null;
+  SetValue?: string | null;
   /** 系统默认值 */
-  Default: string;
+  Default?: string;
   /** 参数限制 */
-  Constraint: ParamConstraint;
+  Constraint?: ParamConstraint;
   /** 是否有设置过值，false:没有设置过值，true:有设置过值。 */
-  HaveSetValue: boolean;
+  HaveSetValue?: boolean;
   /** 是否需要重启生效，false:不需要重启，true:需要重启 */
-  NeedRestart: boolean;
+  NeedRestart?: boolean;
 }
 
 /** 修改参数结果 */

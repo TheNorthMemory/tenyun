@@ -87,37 +87,37 @@ declare interface ArrivalInfo {
 /** 渠道活码详情 */
 declare interface ChannelCodeInnerDetail {
   /** 渠道活码id */
-  Id: number;
+  Id?: number;
   /** 欢迎语类型，0：普通欢迎语、1:渠道欢迎语 */
-  Type: number;
+  Type?: number;
   /** 渠道来源 */
-  Source: string;
+  Source?: string;
   /** 渠道来源名称 */
-  SourceName: string;
+  SourceName?: string;
   /** 二维码名称 */
-  Name: string;
+  Name?: string;
   /** 使用成员用户id集 */
-  UseUserIdList: number[];
+  UseUserIdList?: number[];
   /** 使用成员企微账号id集 */
-  UseUserOpenIdList: string[];
+  UseUserOpenIdList?: string[];
   /** 标签 */
-  TagList: WeComTagDetail[];
+  TagList?: WeComTagDetail[];
   /** 自动通过好友，0：开启、1：关闭，默认0开启 */
-  SkipVerify: number;
+  SkipVerify?: number;
   /** 添加好友人数 */
-  Friends: number;
+  Friends?: number;
   /** 备注 */
-  Remark: string;
+  Remark?: string;
   /** 欢迎语id（通过欢迎语新增返回的id） */
-  MsgId: number;
+  MsgId?: number;
   /** 联系我config_id */
-  ConfigId: string;
+  ConfigId?: string;
   /** 联系我二维码地址 */
-  QrCodeUrl: string;
+  QrCodeUrl?: string;
   /** 记录状态， 0：有效、1：无效 */
-  RecStatus: number;
+  RecStatus?: number;
   /** 应用ID */
-  AppId: string;
+  AppId?: string;
 }
 
 /** 客户渠道标签 */
@@ -469,17 +469,17 @@ declare interface EnterpriseTag {
 /** 客户信息 */
 declare interface ExternalContact {
   /** 外部联系人的userId */
-  ExternalUserId: string;
+  ExternalUserId?: string;
   /** 外部联系人性别 0-未知 1-男性 2-女性 */
-  Gender: number;
+  Gender?: number;
   /** 外部联系人的名称 */
-  Name: string;
+  Name?: string;
   /** 外部联系人的类型，1表示该外部联系人是微信用户，2表示该外部联系人是企业微信用户 */
-  Type: number;
+  Type?: number;
   /** 外部联系人在微信开放平台的唯一身份标识（微信unionid），通过此字段企业可将外部联系人与公众号/小程序用户关联起来。仅当联系人类型是微信用户，且企业或第三方服务商绑定了微信开发者ID有此字段。 */
-  UnionId: string | null;
+  UnionId?: string | null;
   /** 外部联系人联系电话 */
-  Phone: string | null;
+  Phone?: string | null;
 }
 
 /** 具备更多信息的外部联系人详细信息 */
@@ -493,13 +493,13 @@ declare interface ExternalContactDetailPro {
 /** 外部联系人简短信息 */
 declare interface ExternalContactSimpleInfo {
   /** 外部联系人的userId */
-  ExternalUserId: string;
+  ExternalUserId?: string;
   /** 添加了此外部联系人的企业成员userId */
-  UserId: string;
+  UserId?: string;
   /** 添加了此外部联系人的企业成员的姓名 */
-  SalesName: string | null;
+  SalesName?: string | null;
   /** 添加了此外部联系人的企业成员的归属部门id列表 */
-  DepartmentIdList: number[];
+  DepartmentIdList?: number[];
 }
 
 /** 外部联系人标签 */
@@ -529,9 +529,9 @@ declare interface ExternalUserEventInfo {
 /** 外部联系人映射信息 */
 declare interface ExternalUserMappingInfo {
   /** 企业主体对应的外部联系人userId */
-  CorpExternalUserId: string;
+  CorpExternalUserId?: string;
   /** 乐销车应用主体对应的外部联系人, 当不存在好友关系时，该字段值为空 */
-  ExternalUserId: string | null;
+  ExternalUserId?: string | null;
 }
 
 /** 发生过跟进的潜客信息 */
@@ -567,19 +567,19 @@ declare interface FollowInfo {
 /** 添加了此外部联系人的企业成员信息 */
 declare interface FollowUser {
   /** 添加了此外部联系人的企业成员userid */
-  UserId: string;
+  UserId?: string;
   /** 该成员对此外部联系人的备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 该成员对此外部联系人的描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 该成员添加此外部联系人的时间戳，单位为秒 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 该成员添加此客户的来源，具体含义详见来源定义 */
-  AddWay: number;
+  AddWay?: number;
   /** 发起添加的userid，如果成员主动添加，为成员的userid；如果是客户主动添加，则为客户的外部联系人userid；如果是内部成员共享/管理员分配，则为对应的成员/管理员userid */
-  OperUserId: string;
+  OperUserId?: string;
   /** 该成员添加此外部联系人所打标签信息 */
-  Tags: ExternalContactTag[] | null;
+  Tags?: ExternalContactTag[] | null;
 }
 
 /** 具备更多信息的添加了此外部联系人的企业成员信息 */
@@ -1129,9 +1129,9 @@ declare interface QueryExternalContactListRequest {
 
 declare interface QueryExternalContactListResponse {
   /** 外部联系人信息列表 */
-  PageData: ExternalContactSimpleInfo[] | null;
+  PageData?: ExternalContactSimpleInfo[] | null;
   /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
-  NextCursor: string | null;
+  NextCursor?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1163,7 +1163,7 @@ declare interface QueryExternalUserMappingInfoRequest {
 
 declare interface QueryExternalUserMappingInfoResponse {
   /** 外部联系人映射信息, 只返回映射成功的记录 */
-  ExternalUserIdMapping: ExternalUserMappingInfo[] | null;
+  ExternalUserIdMapping?: ExternalUserMappingInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

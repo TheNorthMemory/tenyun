@@ -191,9 +191,9 @@ declare interface GetDepositCertRequest {
 
 declare interface GetDepositCertResponse {
   /** 存证编码 */
-  EvidenceId: string;
+  EvidenceId?: string;
   /** 存证证书文件临时链接 */
-  EvidenceCert: string;
+  EvidenceCert?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -205,9 +205,9 @@ declare interface GetDepositFileRequest {
 
 declare interface GetDepositFileResponse {
   /** 存证编号 */
-  EvidenceId: string;
+  EvidenceId?: string;
   /** 存证文件临时链接 */
-  EvidenceFile: string;
+  EvidenceFile?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

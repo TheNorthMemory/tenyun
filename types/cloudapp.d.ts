@@ -41,13 +41,13 @@ declare interface License {
 /** 表示商品 SKU 的单个售卖参数 */
 declare interface SaleParam {
   /** 售卖参数标识 */
-  ParamKey?: string;
+  ParamKey: string;
   /** 售卖参数值 */
-  ParamValue?: string;
+  ParamValue: string;
   /** 售卖参数的展示名称 */
-  ParamKeyName?: string | null;
+  ParamKeyName: string | null;
   /** 售卖参数值的展示名称 */
-  ParamValueName?: string | null;
+  ParamValueName: string | null;
 }
 
 declare interface VerifyLicenseRequest {

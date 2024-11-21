@@ -379,33 +379,35 @@ declare interface CommonNamespaceNew {
 /** 告警条件 */
 declare interface Condition {
   /** 告警通知频率 */
-  AlarmNotifyPeriod: number;
+  AlarmNotifyPeriod?: number;
   /** 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警） */
-  AlarmNotifyType: number;
+  AlarmNotifyType?: number;
   /** 检测方式 */
-  CalcType: string | null;
+  CalcType?: string | null;
   /** 检测值 */
-  CalcValue: string | null;
+  CalcValue?: string | null;
   /** 持续时间，单位秒 */
-  ContinueTime: string | null;
+  ContinueTime?: string | null;
   /** 指标ID */
-  MetricID: number;
+  MetricID?: number;
   /** 指标展示名称（对外） */
-  MetricDisplayName: string;
+  MetricDisplayName?: string;
   /** 周期 */
-  Period: number;
+  Period?: number;
   /** 规则ID */
-  RuleID: number;
+  RuleID?: number;
   /** 指标单位 */
-  Unit: string;
+  Unit?: string;
   /** 是否为高级指标，0：否；1：是 */
-  IsAdvanced: number;
+  IsAdvanced?: number;
   /** 是否开通高级指标，0：否；1：是 */
-  IsOpen: number;
+  IsOpen?: number;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 告警分级阈值配置 */
-  HierarchicalValue: AlarmHierarchicalValue | null;
+  HierarchicalValue?: AlarmHierarchicalValue | null;
+  /** 指标类型，用于区分动态指标 */
+  RuleType?: string | null;
 }
 
 /** 告警条件模板 */
@@ -1704,18 +1706,20 @@ declare interface PrometheusClusterAgentBasic {
   Region: string;
   /** 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群 */
   ClusterType: string;
-  /** 集群ID */
+  /** 集群 ID */
   ClusterId: string;
-  /** 是否开启公网CLB */
+  /** 是否开启公网 CLB */
   EnableExternal: boolean;
-  /** 集群内部署组件的pod配置 */
+  /** 集群内部署组件的pod 配置 */
   InClusterPodConfig?: PrometheusClusterAgentPodConfig;
   /** 该集群采集的所有指标都会带上这些labels */
   ExternalLabels?: Label[];
-  /** 是否安装默认采集配置 */
+  /** 是否安装默认采集 exporter 和采集配置 */
   NotInstallBasicScrape?: boolean;
-  /** 是否采集指标，true代表drop所有指标，false代表采集默认指标 */
+  /** 是否安装采集配置，true 只安装采集 exporter 不会安装采集配置，false 会同时安装采集配置 */
   NotScrape?: boolean;
+  /** 是否丢弃所有指标，true 代表丢弃所有指标，false 代表采集默认指标 */
+  DropAll?: boolean;
   /** 是否开启默认预聚合规则 */
   OpenDefaultRecord?: boolean;
 }

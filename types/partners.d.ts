@@ -31,69 +31,69 @@ declare interface AgentAuditedClient {
   /** 项目类型：可以为self(自拓项目)/platform(合作项目)/repeat(复算项目 )/空 */
   ProjectType?: string;
   /** 业务员ID */
-  SalesUin?: string | null;
+  SalesUin?: string;
   /** 业务员姓名 */
-  SalesName?: string | null;
+  SalesName?: string;
   /** 代客邮箱 */
-  Mail?: string | null;
+  Mail?: string;
   /** 交易类型:交易类型 1-原类型 2-代理型 3-代采型 */
-  TransactionType?: string | null;
+  TransactionType?: string;
 }
 
 /** 业务信息定义 */
 declare interface AgentBillElem {
   /** 代理商账号ID */
-  Uin: string;
+  Uin?: string;
   /** 订单号，仅对预付费账单有意义 */
-  OrderId: string;
+  OrderId?: string;
   /** 代客账号ID */
-  ClientUin: string;
+  ClientUin?: string;
   /** 代客备注名称 */
-  ClientRemark: string;
+  ClientRemark?: string;
   /** 支付时间 */
-  PayTime: string;
+  PayTime?: string;
   /** 云产品名称 */
-  GoodsType: string;
+  GoodsType?: string;
   /** 预付费/后付费 */
-  PayMode: string;
+  PayMode?: string;
   /** 支付月份 */
-  SettleMonth: string;
+  SettleMonth?: string;
   /** 支付金额，单位分 */
-  Amt: number;
+  Amt?: number;
   /** agentpay：代付；selfpay：自付 */
-  PayerMode: string;
+  PayerMode?: string;
   /** 客户类型：可以为new(自拓)/assign(指定)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空 */
-  ClientType: string | null;
+  ClientType?: string;
   /** 项目类型：可以为self(自拓项目)/platform(合作项目)/repeat(复算项目 )/空 */
-  ProjectType: string | null;
+  ProjectType?: string;
   /** 活动ID */
-  ActivityId: string | null;
+  ActivityId?: string;
 }
 
 /** 描述待审核代客信息 */
 declare interface AgentClientElem {
   /** 代理商账号ID */
-  Uin: string;
+  Uin?: string;
   /** 代客账号ID */
-  ClientUin: string;
+  ClientUin?: string;
   /** 代客申请时间戳 */
-  ApplyTime: number;
-  /** 代客类型，可能值为a/b/c */
-  ClientFlag: string;
+  ApplyTime?: number;
+  /** 代客类型，可能值为a/b/c/other */
+  ClientFlag?: string;
   /** 代客邮箱，打码显示 */
-  Mail: string;
+  Mail?: string;
   /** 代客手机，打码显示 */
-  Phone: string;
+  Phone?: string;
   /** 0表示不欠费，1表示欠费 */
-  HasOverdueBill: number;
+  HasOverdueBill?: number;
   /** 1:待代理商审核;2:待腾讯云审核4:待腾讯云渠道审批 */
-  Status: number;
+  Status?: number;
   /** 业务员ID */
-  SalesUin: string | null;
+  SalesUin?: string;
   /** 业务员姓名 */
-  SalesName: string | null;
+  SalesName?: string;
   /** 客户名称，此字段和控制台返回一致。 */
-  ClientName: string | null;
+  ClientName?: string;
 }
 
 /** 描述代理商代付的订单信息 */
@@ -107,71 +107,71 @@ declare interface AgentDealNewElem {
   /** 订单所有者 */
   OwnerUin?: string;
   /** 订单所有者对应 appId */
-  AppId?: string | null;
+  AppId?: string;
   /** 商品数量 */
-  GoodsNum?: string | null;
+  GoodsNum?: string;
   /** 价格详情 */
-  GoodsPrice?: DealGoodsPriceNewElem | null;
+  GoodsPrice?: DealGoodsPriceNewElem;
   /** 下单人 */
-  Creater?: string | null;
+  Creater?: string;
   /** 下单时间 */
-  CreatTime?: string | null;
+  CreatTime?: string;
   /** 支付结束时间 */
-  PayEndTime?: string | null;
+  PayEndTime?: string;
   /** 扣费流水号 */
-  BillId?: string | null;
+  BillId?: string;
   /** 支付人 */
-  Payer?: string | null;
+  Payer?: string;
   /** 订单状态，中文描述 */
-  DealStatus?: string | null;
+  DealStatus?: string;
   /** 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中) */
-  Status?: string | null;
+  Status?: string;
   /** 产品名称 */
-  GoodsName?: string | null;
+  GoodsName?: string;
   /** 客户备注 */
-  ClientRemark?: string | null;
+  ClientRemark?: string;
   /** 订单操作类型，"purchase":"新购","upgrade":"升配","upConvertExpire":"升配","downgrade":"降配","downConvertExpire":"降配","renew":"续费","refund":"退货","modifyNetworkMode":"调整带宽模式","modifyNetworkSize":"调整带宽大小","preMoveOut":"资源迁出","preMoveIn":"资源迁入","preToPost":"包年包月转按量","modify":"变配","postMoveOut":"资源迁出","postMoveIn":"资源迁入","recoverRefundForward":"调账补偿","recoverPayReserve":"调账补偿","recoverPayForward":"调账扣费","recoverRefundReserve":"调账扣费" */
-  ActionType?: string | null;
+  ActionType?: string;
   /** 代金券抵扣金额，单位分 */
-  VoucherDecline?: string | null;
+  VoucherDecline?: string;
   /** 大订单号 */
-  BigDealId?: string | null;
+  BigDealId?: string;
   /** 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)） */
-  ClientType?: string | null;
+  ClientType?: string;
   /** 项目类型（self：自拓；repeat：直销；platform：官网合作） */
-  ProjectType?: string | null;
+  ProjectType?: string;
   /** 业务员账号ID */
-  SalesUin?: string | null;
+  SalesUin?: string;
   /** 支付方式，0：自付；1：代付 */
-  PayerMode?: string | null;
+  PayerMode?: string;
   /** 活动ID */
-  ActivityId?: string | null;
+  ActivityId?: string;
   /** 订单过期时间 */
-  OverdueTime?: string | null;
+  OverdueTime?: string;
   /** 产品详情 */
-  ProductInfo?: ProductInfoElem[] | null;
+  ProductInfo?: ProductInfoElem[];
   /** 付款方式 */
-  PaymentMethod?: string | null;
+  PaymentMethod?: string;
   /** 订单更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 资源id */
-  ResourceIds?: string[] | null;
+  ResourceIds?: string[];
   /** 退款单的原订单信息。当前仅 DescribeClientDealsByCache 接口会返回该字段 */
-  RefundMap?: RefundMap[] | null;
+  RefundMap?: RefundMap[];
   /** 子产品名称 */
-  SubGoodsName?: string | null;
+  SubGoodsName?: string;
 }
 
 /** 代理商业务员信息 */
 declare interface AgentSalesmanElem {
   /** 代理商账号ID */
-  Uin: string;
+  Uin?: string;
   /** 业务员ID */
-  SalesUin: string;
+  SalesUin?: string;
   /** 业务员姓名 */
-  SalesName: string;
+  SalesName?: string;
   /** 业务员创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 订单价格详情 */
@@ -185,63 +185,63 @@ declare interface DealGoodsPriceNewElem {
 /** 产品详情 */
 declare interface ProductInfoElem {
   /** 产品属性 */
-  Name: string;
+  Name?: string;
   /** 产品属性值 */
-  Value: string;
+  Value?: string;
 }
 
 /** 返佣信息定义 */
 declare interface RebateInfoElem {
   /** 代理商账号ID */
-  Uin: string;
+  Uin?: string;
   /** 返佣月份，如2018-02 */
-  RebateMonth: string;
+  RebateMonth?: string;
   /** 返佣金额，单位分 */
-  Amt: number;
+  Amt?: number;
   /** 月度业绩，单位分 */
-  MonthSales: number;
+  MonthSales?: number;
   /** 季度业绩，单位分 */
-  QuarterSales: number;
+  QuarterSales?: number;
   /** NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同) */
-  ExceptionFlag: string;
+  ExceptionFlag?: string;
 }
 
 /** 返佣信息定义 */
 declare interface RebateInfoElemNew {
   /** 代理商账号ID */
-  Uin: string;
+  Uin?: string;
   /** 返佣月份，如2018-02 */
-  RebateMonth: string;
+  RebateMonth?: string;
   /** 返佣金额，单位分 */
-  Amt: number;
+  Amt?: number;
   /** 月度业绩，单位分 */
-  MonthSales: number;
+  MonthSales?: number;
   /** 季度业绩，单位分 */
-  QuarterSales: number;
+  QuarterSales?: number;
   /** NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同) */
-  ExceptionFlag: string;
+  ExceptionFlag?: string;
 }
 
 /** 退款单关联的原始订单信息 */
 declare interface RefundMap {
   /** 退款单关联的原始子订单号 */
-  DealName?: string | null;
+  DealName?: string;
   /** 退款金额，单位分 */
-  RefundAmount?: number | null;
+  RefundAmount?: number;
 }
 
 /** 解绑客户信息 */
 declare interface UnbindClientElem {
   /** 解绑账号ID */
-  Uin: string;
+  Uin?: string;
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 状态：0:审核中；1：已解绑；2：已撤销 3：关联撤销 4: 已驳回 */
-  Status: number;
+  Status?: number;
   /** 申请时间 */
-  ApplyTime: string | null;
+  ApplyTime?: string;
   /** 解绑/撤销时间 */
-  ActionTime: string | null;
+  ActionTime?: string;
 }
 
 declare interface AgentPayDealsRequest {
@@ -283,9 +283,9 @@ declare interface AssignClientsToSalesRequest {
 
 declare interface AssignClientsToSalesResponse {
   /** 处理成功的代客uin列表 */
-  SucceedUins?: string[] | null;
+  SucceedUins?: string[];
   /** 处理失败的代客uin列表 */
-  FailedUins?: string[] | null;
+  FailedUins?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -301,13 +301,13 @@ declare interface AuditApplyClientRequest {
 
 declare interface AuditApplyClientResponse {
   /** 代理商账号ID */
-  Uin: string;
+  Uin?: string;
   /** 客户账号ID */
-  ClientUin: string;
+  ClientUin?: string;
   /** 审核结果，包括accept/reject/qcloudaudit（腾讯云审核） */
-  AuditResult: string;
+  AuditResult?: string;
   /** 关联时间对应的时间戳 */
-  AgentTime: number | null;
+  AgentTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -353,9 +353,9 @@ declare interface DescribeAgentAuditedClientsRequest {
 
 declare interface DescribeAgentAuditedClientsResponse {
   /** 已审核代客列表 */
-  AgentClientSet: AgentAuditedClient[];
+  AgentClientSet?: AgentAuditedClient[];
   /** 符合条件的代客总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -379,9 +379,9 @@ declare interface DescribeAgentBillsRequest {
 
 declare interface DescribeAgentBillsResponse {
   /** 符合查询条件列表总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 业务明细列表 */
-  AgentBillSet: AgentBillElem[];
+  AgentBillSet?: AgentBillElem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -393,13 +393,13 @@ declare interface DescribeAgentClientGradeRequest {
 
 declare interface DescribeAgentClientGradeResponse {
   /** 审核状态：0待审核，1，已审核 */
-  AuditStatus: number;
+  AuditStatus?: number;
   /** 实名认证状态：0，未实名认证，1实名认证 */
-  AuthState: number;
+  AuthState?: number;
   /** 客户级别 */
-  ClientGrade: string;
+  ClientGrade?: string;
   /** 客户类型：1，个人；2，企业；3，其他 */
-  ClientType: number;
+  ClientType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -425,9 +425,9 @@ declare interface DescribeAgentClientsRequest {
 
 declare interface DescribeAgentClientsResponse {
   /** 待审核代客列表 */
-  AgentClientSet: AgentClientElem[];
+  AgentClientSet?: AgentClientElem[];
   /** 符合条件的代客总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -501,7 +501,7 @@ declare interface DescribeAgentRelateBigDealIdsRequest {
 
 declare interface DescribeAgentRelateBigDealIdsResponse {
   /** 申请合并支付的关联大订单号列表（不包含请求的订单号） */
-  BigDealIdList?: string[] | null;
+  BigDealIdList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -561,9 +561,9 @@ declare interface DescribeRebateInfosNewRequest {
 
 declare interface DescribeRebateInfosNewResponse {
   /** 返佣信息列表 */
-  RebateInfoSet: RebateInfoElemNew[];
+  RebateInfoSet?: RebateInfoElemNew[];
   /** 符合查询条件返佣信息数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -601,9 +601,9 @@ declare interface DescribeSalesmansRequest {
 
 declare interface DescribeSalesmansResponse {
   /** 业务员列表 */
-  AgentSalesmanSet: AgentSalesmanElem[];
+  AgentSalesmanSet?: AgentSalesmanElem[];
   /** 符合条件的代客总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -627,9 +627,9 @@ declare interface DescribeUnbindClientListRequest {
 
 declare interface DescribeUnbindClientListResponse {
   /** 符合条件的解绑客户数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合条件的解绑客户列表 */
-  UnbindClientList: UnbindClientElem[];
+  UnbindClientList?: UnbindClientElem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

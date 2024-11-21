@@ -84,7 +84,7 @@ declare interface ClusterOverview {
   LoginNodeSet?: LoginNodeOverview[];
   /** 登录节点数量。 */
   LoginNodeCount?: number;
-  /** 弹性伸缩类型。取值范围：THPC_AS：集群自动扩缩容由THPC产品内部实现。AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。 */
+  /** 弹性伸缩类型。 */
   AutoScalingType?: string;
   /** 集群所属私有网络ID。 */
   VpcId?: string;
@@ -587,7 +587,7 @@ declare interface VirtualPrivateCloud {
 declare interface AddClusterStorageOptionRequest {
   /** 集群ID。 */
   ClusterId: string;
-  /** 集群存储选项。 */
+  /** 集群存储选项；集群已存在的节点和新增节点都会挂载此存储。 */
   StorageOption: StorageOption;
 }
 
@@ -661,7 +661,7 @@ declare interface AddQueueResponse {
 declare interface AttachNodesRequest {
   /** 集群id */
   ClusterId: string;
-  /** 节点的资源类型。CVM：CVM实例类型资源WORKSPACE：工作空间类型实例资源默认值：CVM。 */
+  /** 节点的实例id列表 */
   ResourceSet: string[];
   /** 队列名称。不指定则为默认队列：SLURM默认队列为：compute。 SGE默认队列为：all.q。 */
   QueueName?: string;
@@ -691,7 +691,7 @@ declare interface CreateClusterRequest {
   SchedulerType?: string;
   /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是"latest", 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7SGE： 8.1.9 */
   SchedulerVersion?: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。 */
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。公共镜像请参考[镜像限制](https://cloud.tencent.com/document/product/1527/64818) */
   ImageId?: string;
   /** 私有网络相关信息配置。 */
   VirtualPrivateCloud?: VirtualPrivateCloud;
@@ -715,7 +715,7 @@ declare interface CreateClusterRequest {
   LoginNodeCount?: number;
   /** 创建集群时同时绑定的标签对说明。 */
   Tags?: Tag[];
-  /** 弹性伸缩类型。默认值：THPC_ASTHPC_AS：集群自动扩缩容由THPC产品内部实现。AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。 */
+  /** 弹性伸缩类型。默认值：THPC_AS */
   AutoScalingType?: string;
   /** 节点初始化脚本信息列表。 */
   InitNodeScripts?: NodeScript[];

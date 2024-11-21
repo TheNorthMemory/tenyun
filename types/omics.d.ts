@@ -5,25 +5,27 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 应用版本。 */
 declare interface ApplicationVersion {
   /** 版本类型。 */
-  Type?: string | null;
+  Type?: string;
   /** 版本ID。 */
-  ApplicationVersionId?: string | null;
+  ApplicationVersionId?: string;
   /** 发布名称。 */
-  Name?: string | null;
+  Name?: string;
   /** 发布描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 入口文件。 */
-  Entrypoint?: string | null;
+  Entrypoint?: string;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 创建者名称。 */
-  CreatorName?: string | null;
+  CreatorName?: string;
   /** 创建者ID。 */
-  CreatorId?: string | null;
+  CreatorId?: string;
   /** Git信息。 */
-  GitInfo?: string | null;
+  GitInfo?: string;
   /** Git信息。 */
-  GitSource?: GitInfo | null;
+  GitSource?: GitInfo;
+  /** COS信息。 */
+  CosSource?: CosFileInfo;
 }
 
 /** 云服务器配置。 */
@@ -37,11 +39,11 @@ declare interface CVMOption {
 /** 缓存信息。 */
 declare interface CacheInfo {
   /** 缓存清理时间(小时)。 */
-  CacheClearDelay?: number | null;
+  CacheClearDelay?: number;
   /** 缓存清理计划时间。 */
-  CacheClearTime?: string | null;
+  CacheClearTime?: string;
   /** 缓存是否已被清理。 */
-  CacheCleared?: boolean | null;
+  CacheCleared?: boolean;
 }
 
 /** 计算集群配置。 */
@@ -56,6 +58,16 @@ declare interface ClusterOption {
   ResourceQuota?: ResourceQuota;
   /** 限制范围。 */
   LimitRange?: LimitRange;
+}
+
+/** COS 文件信息 */
+declare interface CosFileInfo {
+  /** 存储桶。 */
+  Bucket?: string;
+  /** COS文件地址。 */
+  Uri?: string;
+  /** 地域。 */
+  Region?: string;
 }
 
 /** 数据库配置。 */
@@ -89,9 +101,9 @@ declare interface Environment {
   /** 云资源ID。 */
   ResourceIds?: ResourceIds;
   /** 上个工作流UUID。 */
-  LastWorkflowUuid?: string | null;
+  LastWorkflowUuid?: string;
   /** 创建时间。 */
-  CreationTime?: string | null;
+  CreationTime?: string;
 }
 
 /** 环境配置。 */
@@ -113,87 +125,87 @@ declare interface EnvironmentConfig {
 /** 执行时间。 */
 declare interface ExecutionTime {
   /** 提交时间。 */
-  SubmitTime?: string | null;
+  SubmitTime?: string;
   /** 开始时间。 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 结束时间。 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
 declare interface Filter {
   /** 过滤字段。 */
-  Name: string | null;
+  Name: string;
   /** 过滤字段值。 */
-  Values: string[] | null;
+  Values: string[];
 }
 
 /** Git信息。 */
 declare interface GitInfo {
   /** Git地址。 */
-  GitHttpPath: string | null;
+  GitHttpPath: string;
   /** Git用户名。 */
-  GitUserName?: string | null;
+  GitUserName?: string;
   /** Git密码或者Token。 */
-  GitTokenOrPassword?: string | null;
+  GitTokenOrPassword?: string;
   /** 分支。 */
-  Branch?: string | null;
+  Branch?: string;
   /** 标签。 */
-  Tag?: string | null;
+  Tag?: string;
 }
 
 /** 资源限制范围。 */
 declare interface LimitRange {
   /** 最大CPU设置 */
-  MaxCPU?: string | null;
+  MaxCPU?: string;
   /** 最大内存设置（单位：Mi，Gi，Ti，M，G，T） */
-  MaxMemory?: string | null;
+  MaxMemory?: string;
 }
 
 /** Nextflow选项。 */
 declare interface NFOption {
   /** Config。 */
-  Config?: string | null;
+  Config?: string;
   /** Profile。 */
-  Profile?: string | null;
+  Profile?: string;
   /** Report。 */
-  Report?: boolean | null;
+  Report?: boolean;
   /** Resume。 */
-  Resume?: boolean | null;
+  Resume?: boolean;
   /** Nextflow引擎版本，取值范围：- 22.10.7- 23.10.1 */
-  NFVersion?: string | null;
+  NFVersion?: string;
   /** 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。 */
-  LaunchDir?: string | null;
+  LaunchDir?: string;
 }
 
 /** 云资源ID。 */
 declare interface ResourceIds {
   /** 私有网络ID。 */
-  VPCId?: string | null;
+  VPCId?: string;
   /** 子网ID。 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 安全组ID。 */
-  SecurityGroupId?: string | null;
+  SecurityGroupId?: string;
   /** TDSQL-C Mysql版数据库ID。 */
-  TDSQLCId?: string | null;
+  TDSQLCId?: string;
   /** 文件存储ID。 */
-  CFSId?: string | null;
+  CFSId?: string;
   /** 文件存储类型：取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
-  CFSStorageType?: string | null;
+  CFSStorageType?: string;
   /** 云服务器ID。 */
-  CVMId?: string | null;
+  CVMId?: string;
   /** 弹性容器集群ID。 */
-  EKSId?: string | null;
+  EKSId?: string;
 }
 
 /** 资源配额。 */
 declare interface ResourceQuota {
   /** CPU Limit设置。 */
-  CPULimit?: string | null;
+  CPULimit?: string;
   /** 内存Limit设置（单位：Mi，Gi，Ti，M，G，T） */
-  MemoryLimit?: string | null;
+  MemoryLimit?: string;
   /** Pods数量设置 */
-  Pods?: string | null;
+  Pods?: string;
 }
 
 /** 任务。 */
@@ -209,11 +221,11 @@ declare interface Run {
   /** 环境ID。 */
   EnvironmentId?: string;
   /** 用户定义ID，单例运行为空。 */
-  UserDefinedId?: string | null;
+  UserDefinedId?: string;
   /** 表格ID，单例运行为空。 */
-  TableId?: string | null;
+  TableId?: string;
   /** 表格行UUID，单例运行为空。 */
-  TableRowUuid?: string | null;
+  TableRowUuid?: string;
   /** 任务状态。 */
   Status?: string;
   /** 任务输入。 */
@@ -223,7 +235,7 @@ declare interface Run {
   /** 执行时间。 */
   ExecutionTime?: ExecutionTime;
   /** 缓存信息。 */
-  Cache?: CacheInfo | null;
+  Cache?: CacheInfo;
   /** 错误信息。 */
   ErrorMessage?: string;
   /** 创建时间。 */
@@ -247,15 +259,15 @@ declare interface RunGroup {
   /** 应用类型。 */
   ApplicationType?: string;
   /** 应用版本。 */
-  ApplicationVersion?: ApplicationVersion | null;
+  ApplicationVersion?: ApplicationVersion;
   /** 应用访问类型：- PRIVATE 私有应用- PUBLIC 公共应用 */
-  AccessMode?: string | null;
+  AccessMode?: string;
   /** 环境ID。 */
   EnvironmentId?: string;
   /** 环境名称。 */
   EnvironmentName?: string;
   /** 表格ID，单例运行为空。 */
-  TableId?: string | null;
+  TableId?: string;
   /** 任务名称。 */
   Name?: string;
   /** 任务描述。 */
@@ -263,23 +275,23 @@ declare interface RunGroup {
   /** 任务状态。 */
   Status?: string;
   /** 任务批次类型 ：- WDL- NEXTFLOW */
-  Type?: string | null;
+  Type?: string;
   /** 工作目录。 */
-  WorkDir?: string | null;
+  WorkDir?: string;
   /** 任务输入。 */
   Input?: string;
   /** 任务输入类型：- JSON: 导入JSON- MANUAL: 手动输入- COS: COS文件 */
-  InputType?: string | null;
+  InputType?: string;
   /** 输入COS地址。 */
-  InputCosUri?: string | null;
+  InputCosUri?: string;
   /** 输入模版ID。 */
-  InputTemplateId?: string | null;
+  InputTemplateId?: string;
   /** WDL运行选项。 */
   Option?: RunOption;
   /** Nextflow运行选项。 */
-  NFOption?: NFOption | null;
+  NFOption?: NFOption;
   /** 使用的缓存卷。 */
-  Volumes?: VolumeInfo[] | null;
+  Volumes?: VolumeInfo[];
   /** 任务总数量。 */
   TotalRun?: number;
   /** 各状态任务的数量。 */
@@ -289,63 +301,63 @@ declare interface RunGroup {
   /** 错误信息。 */
   ErrorMessage?: string;
   /** 运行结果通知方式。 */
-  ResultNotify?: string | null;
+  ResultNotify?: string;
   /** 创建时间。 */
   CreateTime?: string;
   /** 更新时间。 */
   UpdateTime?: string;
   /** 创建者。 */
-  Creator?: string | null;
+  Creator?: string;
   /** 创建者ID。 */
-  CreatorId?: string | null;
+  CreatorId?: string;
 }
 
 /** 任务作业详情。 */
 declare interface RunMetadata {
   /** 任务类型。 */
-  RunType?: string | null;
+  RunType?: string;
   /** 任务ID。 */
-  RunId?: string | null;
+  RunId?: string;
   /** 父层ID。 */
-  ParentId?: string | null;
+  ParentId?: string;
   /** 作业ID。 */
-  JobId?: string | null;
+  JobId?: string;
   /** 作业名称。 */
-  CallName?: string | null;
+  CallName?: string;
   /** Scatter索引。 */
-  ScatterIndex?: string | null;
+  ScatterIndex?: string;
   /** 输入。 */
-  Input?: string | null;
+  Input?: string;
   /** 输出。 */
-  Output?: string | null;
+  Output?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** 错误信息。 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
   /** 开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 提交时间。 */
-  SubmitTime?: string | null;
+  SubmitTime?: string;
   /** 结束时间。 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 命令行。 */
-  Command?: string | null;
+  Command?: string;
   /** 运行时。 */
-  Runtime?: string | null;
+  Runtime?: string;
   /** 预处理。 */
-  Preprocess?: boolean | null;
+  Preprocess?: boolean;
   /** 后处理。 */
-  PostProcess?: boolean | null;
+  PostProcess?: boolean;
   /** Cache命中 */
-  CallCached?: boolean | null;
+  CallCached?: boolean;
   /** 工作目录。 */
-  WorkDir?: string | null;
+  WorkDir?: string;
   /** 标准输出。 */
-  Stdout?: string | null;
+  Stdout?: string;
   /** 错误输出。 */
-  Stderr?: string | null;
+  Stderr?: string;
   /** 其他信息。 */
-  Meta?: string | null;
+  Meta?: string;
 }
 
 /** 运行应用选项。 */
@@ -357,11 +369,11 @@ declare interface RunOption {
   /** 是否使用错误挂起功能。 */
   UseErrorOnHold: boolean;
   /** 输出归档COS路径。 */
-  FinalWorkflowOutputsDir?: string | null;
+  FinalWorkflowOutputsDir?: string;
   /** 是否使用相对目录归档输出。 */
-  UseRelativeOutputPaths?: boolean | null;
+  UseRelativeOutputPaths?: boolean;
   /** 是否添加运行信息到输出目录中 */
-  AddRunInfoToOutputDir?: boolean | null;
+  AddRunInfoToOutputDir?: boolean;
 }
 
 /** 任务运行状态。 */
@@ -391,35 +403,37 @@ declare interface StorageOption {
 /** 表格。 */
 declare interface Table {
   /** 表格ID */
-  TableId?: string | null;
+  TableId?: string;
   /** 关联项目ID */
-  ProjectId?: string | null;
+  ProjectId?: string;
   /** 表格名称 */
-  Name?: string | null;
+  Name?: string;
   /** 表格描述 */
-  Description?: string | null;
+  Description?: string;
   /** 表格列 */
-  Columns?: TableColumn[] | null;
+  Columns?: TableColumn[];
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 创建人 */
-  Creator?: string | null;
+  Creator?: string;
+  /** 创建人ID */
+  CreatorId?: string;
 }
 
 /** 表格列。 */
 declare interface TableColumn {
   /** 列名称 */
-  Header?: string | null;
+  Header?: string;
   /** 列数据类型 */
-  DataType?: string | null;
+  DataType?: string;
 }
 
 /** 表格行。 */
 declare interface TableRow {
   /** 表格行UUID。 */
-  TableRowUuid?: string | null;
+  TableRowUuid?: string;
   /** 表格行内容。 */
-  Content?: string[] | null;
+  Content?: string[];
 }
 
 /** 私有网络配置。 */
@@ -439,39 +453,39 @@ declare interface VPCOption {
 /** 缓存卷。 */
 declare interface Volume {
   /** 缓存卷ID。 */
-  VolumeId?: string | null;
+  VolumeId?: string;
   /** 名称。 */
-  Name?: string | null;
+  Name?: string;
   /** 描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 环境ID。 */
-  EnvironmentId?: string | null;
+  EnvironmentId?: string;
   /** 缓存卷类型，取值范围：* SHARED：多点挂载共享存储 */
-  Type?: string | null;
+  Type?: string;
   /** 缓存卷规格，取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
-  Spec?: string | null;
+  Spec?: string;
   /** 缓存卷大小（GB）。 */
-  Capacity?: number | null;
+  Capacity?: number;
   /** 缓存卷使用量（Byte）。 */
-  Usage?: number | null;
+  Usage?: number;
   /** 缓存卷吞吐上限（MiB/s）。 */
-  BandwidthLimit?: number | null;
+  BandwidthLimit?: number;
   /** 默认挂载路径。 */
-  DefaultMountPath?: string | null;
+  DefaultMountPath?: string;
   /** 是否为默认缓存卷。 */
-  IsDefault?: boolean | null;
+  IsDefault?: boolean;
   /** 状态。 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 缓存卷信息。 */
 declare interface VolumeInfo {
   /** 缓存卷ID。 */
-  VolumeId?: string | null;
+  VolumeId?: string;
   /** 名称。 */
-  Name?: string | null;
+  Name?: string;
   /** 挂载路径。 */
-  MountPath?: string | null;
+  MountPath?: string;
 }
 
 declare interface CreateEnvironmentRequest {
@@ -511,7 +525,7 @@ declare interface CreateVolumeRequest {
 
 declare interface CreateVolumeResponse {
   /** 缓存卷ID。 */
-  VolumeId?: string | null;
+  VolumeId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -531,7 +545,7 @@ declare interface DeleteEnvironmentResponse {
 declare interface DeleteVolumeDataRequest {
   /** 缓存卷ID。 */
   VolumeId: string;
-  /** 需要删除的路径 */
+  /** 需要删除的路径。 */
   Path: string;
 }
 
@@ -663,9 +677,9 @@ declare interface DescribeVolumesRequest {
 
 declare interface DescribeVolumesResponse {
   /** 缓存卷。 */
-  Volumes?: Volume[] | null;
+  Volumes?: Volume[];
   /** 符合条件的数量。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -701,7 +715,7 @@ declare interface GetRunMetadataFileResponse {
   /** 文件预签名链接，一分钟内有效。 */
   CosSignedUrl?: string;
   /** 批量文件预签名链接，一分钟内有效。 */
-  CosSignedUrls?: string[] | null;
+  CosSignedUrls?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -769,7 +783,7 @@ declare interface RetryRunsRequest {
 
 declare interface RetryRunsResponse {
   /** 新的任务批次ID。 */
-  RunGroupId?: string | null;
+  RunGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

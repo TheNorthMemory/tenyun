@@ -158,6 +158,14 @@ declare interface ApmInstanceDetail {
   Free?: number | null;
   /** 是否tsf默认业务系统（0=否，1-是） */
   DefaultTSF?: number | null;
+  /** 是否关联dashboard： 0 关 1 开 */
+  IsRelatedDashboard?: number | null;
+  /** dashboard ID */
+  DashboardTopicID?: string | null;
+  /** 是否开启组件漏洞检测 */
+  IsInstrumentationVulnerabilityScan?: number | null;
+  /** 是否开启SQL注入分析 */
+  IsSqlInjectionAnalysis?: number | null;
 }
 
 /** 指标列表单元 */
@@ -311,6 +319,8 @@ declare interface CreateApmInstanceRequest {
   SpanDailyCounters?: number;
   /** 实例的计费模式 */
   PayMode?: number;
+  /** （0=付费版；1=tsf受限免费版；2=免费版） */
+  Free?: number;
 }
 
 declare interface CreateApmInstanceResponse {
@@ -563,6 +573,16 @@ declare interface ModifyApmInstanceRequest {
   PayMode?: number;
   /** 响应时间满意阈值 */
   ResponseDurationWarningThreshold?: number;
+  /** （0=付费版；1=tsf受限免费版；2=免费版） */
+  Free?: number;
+  /** 是否关联dashboard： 0 关 1 开 */
+  IsRelatedDashboard?: number;
+  /** dashboard ID */
+  DashboardTopicID?: string;
+  /** 是否开启SQL注入检测 */
+  IsSqlInjectionAnalysis?: number;
+  /** 是否开启组件漏洞检测 */
+  IsInstrumentationVulnerabilityScan?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

@@ -705,9 +705,9 @@ declare interface CreateDBInstanceHourRequest {
   Zone: string;
   /** 实例架构类型。- REPLSET：副本集。- SHARD：分片集群。 */
   ClusterType: string;
-  /** 私有网络ID。如果不设置该参数，则默认选择基础网络。 */
+  /** 私有网络ID。请登录 [私有网络控制台](https://console.cloud.tencent.com/vpc) 查询确认正确的ID。 示例值：vpc-pxyzim13 */
   VpcId?: string;
-  /** 私有网络下的子网 ID，如果配置参数 VpcId，则 SubnetId必须配置。 */
+  /** 私有网络VPC的子网。请登录 [私有网络控制台](https://console.cloud.tencent.com/vpc) 查询子网列表确认正确的 ID。 示例值：subnet-7jbabche */
   SubnetId?: string;
   /** 实例密码。自定义密码长度为8-32个字符，至少包含字母、数字和字符（!@#%^*()_）中的两种。 */
   Password?: string;
@@ -797,9 +797,9 @@ declare interface CreateDBInstanceRequest {
   ReplicateSetNum: number;
   /** 项目ID。- 若不设置该参数，则为默认项目。- 在 [MongoDB 控制台项目管理](https://console.cloud.tencent.com/project)页面，可获取项目ID。 */
   ProjectId?: number;
-  /** 私有网络ID。如果不设置该参数，则默认选择基础网络。 */
+  /** 私有网络ID。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)查询确认正确的ID。 示例值：vpc-pxyzim13 */
   VpcId?: string;
-  /** 私有网络下的子网 ID，如果配置参数 VpcId，则 SubnetId必须配置。 */
+  /** 私有网络VPC的子网。请登录 [私有网络控制台](https://console.cloud.tencent.com/vpc) 查询子网列表确认正确的 ID。 示例值：subnet-7jbabche */
   SubnetId?: string;
   /** 实例密码。自定义密码长度为8-32个字符，至少包含字母、数字和字符（!@#%^*()_）中的两种。 */
   Password?: string;

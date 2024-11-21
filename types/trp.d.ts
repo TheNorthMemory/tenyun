@@ -595,21 +595,21 @@ declare interface TraceItem {
 /** 付费信息使用量 */
 declare interface UsageQuota {
   /** 企业ID */
-  CorpId: number | null;
+  CorpId?: number | null;
   /** 商户配额 */
-  FactoryCnt: number | null;
+  FactoryCnt?: number | null;
   /** 商品数量 */
-  ItemCnt: number | null;
+  ItemCnt?: number | null;
   /** 溯源码量 */
-  TrackCnt: number | null;
+  TrackCnt?: number | null;
   /** 营销码额度 */
-  SaleCnt: number | null;
+  SaleCnt?: number | null;
   /** 区块链上链次数 */
-  ChainCnt: number | null;
-  /** 营销风控次数 */
-  RiskCnt: number | null;
+  ChainCnt?: number | null;
+  /** 风险检测次数 */
+  RiskCnt?: number | null;
   /** 时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 declare interface AuthorizedTransferRequest {
@@ -727,7 +727,7 @@ declare interface CreateCorporationOrderRequest {
 
 declare interface CreateCorporationOrderResponse {
   /** 企业ID */
-  CorpId: number | null;
+  CorpId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -783,7 +783,7 @@ declare interface CreateCustomRuleRequest {
 
 declare interface CreateCustomRuleResponse {
   /** 码规则ID */
-  CustomId: string | null;
+  CustomId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -795,7 +795,7 @@ declare interface CreateMerchantRequest {
   Remark?: string;
   /** 企业ID */
   CorpId?: number;
-  /** 码包来源 0:自建, 1:第三发 */
+  /** 码包来源 0:自建, 1:第三方 */
   CodeType?: number;
   /** 码包前缀地址 第三方码包时必填 */
   CodeUrl?: string;
@@ -803,7 +803,7 @@ declare interface CreateMerchantRequest {
 
 declare interface CreateMerchantResponse {
   /** 商户标识码 */
-  MerchantId: string | null;
+  MerchantId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -829,7 +829,7 @@ declare interface CreateProductRequest {
 
 declare interface CreateProductResponse {
   /** 商品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -843,7 +843,7 @@ declare interface CreateTraceChainRequest {
 
 declare interface CreateTraceChainResponse {
   /** 溯源ID */
-  TraceId: string;
+  TraceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -859,7 +859,7 @@ declare interface CreateTraceCodesAsyncRequest {
 
 declare interface CreateTraceCodesAsyncResponse {
   /** 批次ID */
-  BatchId: string | null;
+  BatchId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -915,7 +915,7 @@ declare interface CreateTraceDataRequest {
 
 declare interface CreateTraceDataResponse {
   /** 溯源ID */
-  TraceId: string;
+  TraceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -929,7 +929,7 @@ declare interface DeleteCodeBatchRequest {
 
 declare interface DeleteCodeBatchResponse {
   /** 批次ID */
-  BatchId: string;
+  BatchId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -943,7 +943,7 @@ declare interface DeleteMerchantRequest {
 
 declare interface DeleteMerchantResponse {
   /** 商户标识码 */
-  MerchantId: string | null;
+  MerchantId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -971,7 +971,7 @@ declare interface DeleteTraceDataRequest {
 
 declare interface DeleteTraceDataResponse {
   /** 溯源id */
-  TraceId: string | null;
+  TraceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1001,7 +1001,7 @@ declare interface DescribeCodeBatchByIdRequest {
 
 declare interface DescribeCodeBatchByIdResponse {
   /** 批次 */
-  CodeBatch: CodeBatch;
+  CodeBatch?: CodeBatch;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1021,7 +1021,7 @@ declare interface DescribeCodeBatchesRequest {
   BatchType?: string;
   /** 企业ID */
   CorpId?: number;
-  /** 批次状态 */
+  /** 批次状态 0: 未激活 1: 已激活 -1: 已冻结 */
   Status?: number;
 }
 
@@ -1151,9 +1151,9 @@ declare interface DescribeCorpQuotasRequest {
 
 declare interface DescribeCorpQuotasResponse {
   /** 子企业额度使用情况 */
-  CorpQuotas: CorpQuota[] | null;
+  CorpQuotas?: CorpQuota[] | null;
   /** 记录总数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1167,7 +1167,7 @@ declare interface DescribeCustomRuleByIdRequest {
 
 declare interface DescribeCustomRuleByIdResponse {
   /** 码规则信息 */
-  CustomRule: CustomRule | null;
+  CustomRule?: CustomRule | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1189,9 +1189,9 @@ declare interface DescribeCustomRulesRequest {
 
 declare interface DescribeCustomRulesResponse {
   /** 码规则列表 */
-  CustomRules: CustomRule[] | null;
+  CustomRules?: CustomRule[] | null;
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1219,7 +1219,7 @@ declare interface DescribeMerchantByIdRequest {
 
 declare interface DescribeMerchantByIdResponse {
   /** 商户信息 */
-  Merchant: Merchant | null;
+  Merchant?: Merchant | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1239,9 +1239,9 @@ declare interface DescribeMerchantsRequest {
 
 declare interface DescribeMerchantsResponse {
   /** 商户列表 */
-  Merchants: Merchant[] | null;
+  Merchants?: Merchant[] | null;
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1301,7 +1301,7 @@ declare interface DescribeProductByIdRequest {
 
 declare interface DescribeProductByIdResponse {
   /** 商品信息 */
-  Product: Product | null;
+  Product?: Product | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1459,7 +1459,7 @@ declare interface DescribeTraceDataByIdRequest {
 
 declare interface DescribeTraceDataByIdResponse {
   /** 无 */
-  TraceData: TraceData;
+  TraceData?: TraceData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1473,7 +1473,7 @@ declare interface DescribeTraceDataListRequest {
   TaskId?: string;
   /** 页数 */
   PageNumber?: number;
-  /** 二维码 */
+  /** 溯源码 */
   Code?: string;
   /** 溯源阶段 0:商品 1:通用 2:内部溯源 3:外部溯源 */
   Phase?: number;
@@ -1482,10 +1482,10 @@ declare interface DescribeTraceDataListRequest {
 }
 
 declare interface DescribeTraceDataListResponse {
-  /** 数量 */
-  TotalCount: number;
-  /** 无 */
-  TraceDataList: TraceData[];
+  /** 溯源阶段数量 */
+  TotalCount?: number;
+  /** 溯源明细 */
+  TraceDataList?: TraceData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1547,7 +1547,7 @@ declare interface ModifyCustomRuleRequest {
 
 declare interface ModifyCustomRuleResponse {
   /** 码规则ID */
-  CustomId: string | null;
+  CustomId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1563,7 +1563,7 @@ declare interface ModifyCustomRuleStatusRequest {
 
 declare interface ModifyCustomRuleStatusResponse {
   /** 码规则ID */
-  CustomId: string | null;
+  CustomId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1577,7 +1577,7 @@ declare interface ModifyMerchantRequest {
   Remark?: string;
   /** 企业ID */
   CorpId?: number;
-  /** 码包来源 0:自建, 1:第三码包，暂不支持修改 */
+  /** 码包来源 0:自建, 1:第三方码包，暂不支持修改 */
   CodeType?: number;
   /** 码包前缀地址 第三方码包时必填 */
   CodeUrl?: string;
@@ -1585,7 +1585,7 @@ declare interface ModifyMerchantRequest {
 
 declare interface ModifyMerchantResponse {
   /** 商户标识码 */
-  MerchantId: string | null;
+  MerchantId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1609,7 +1609,7 @@ declare interface ModifyProductRequest {
 
 declare interface ModifyProductResponse {
   /** 商品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1661,7 +1661,7 @@ declare interface ModifyTraceDataRanksRequest {
 
 declare interface ModifyTraceDataRanksResponse {
   /** 批次ID */
-  BatchId: string | null;
+  BatchId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

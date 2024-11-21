@@ -467,19 +467,19 @@ declare interface ParamConstraint {
 /** DB参数描述 */
 declare interface ParamDesc {
   /** 参数名字 */
-  Param: string;
+  Param?: string;
   /** 当前参数值 */
-  Value: string;
+  Value?: string;
   /** 设置过的值，参数生效后，该值和value一样。未设置过就不返回该字段。 */
-  SetValue: string | null;
+  SetValue?: string | null;
   /** 系统默认值 */
-  Default: string;
+  Default?: string;
   /** 参数限制 */
-  Constraint: ParamConstraint;
+  Constraint?: ParamConstraint;
   /** 是否有设置过值，false:没有设置过值，true:有设置过值。 */
-  HaveSetValue: boolean;
+  HaveSetValue?: boolean;
   /** 是否需要重启生效，false:不需要重启，true:需要重启 */
-  NeedRestart: boolean;
+  NeedRestart?: boolean;
 }
 
 /** 修改参数结果 */
@@ -1156,6 +1156,38 @@ declare interface CreateHourDCDBInstanceResponse {
   FlowId?: number;
   /** 订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
   DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateOnlineDDLJobRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 要执行的 DDL 语句。常用的在线DDL参考此API文档示例部分 */
+  Alter: string;
+  /** 要修改的数据库 */
+  DbName: string;
+  /** 要修改的表 */
+  Table: string;
+  /** 指定账号执行DDL，需确保账号有 ALTER, CREATE, INSERT, UPDATE, DROP, DELETE, INDEX, CREATE TEMPORARY TABLES, LOCK TABLES, TRIGGER, REPLICATION CLIENT, REPLICATION SLAVE 等相关权限 （若不填写将默认使用系统账号） */
+  User?: string;
+  /** 指定账号的密码 */
+  Password?: string;
+  /** 运行线程数大于此值时，将终止DDL。不填则默认58 */
+  CriticalLoad?: number;
+  /** 是否检查自增字段。为1则不允许修改自增字段，0或不填写则不检查 */
+  CheckAutoInc?: number;
+  /** 允许的主备延迟时间(单位s)，0或不填写则不检查延迟 */
+  MaxDelay?: number;
+  /** 是否使用pt-osc工具做DDL */
+  UsePt?: number;
+  /** 开始执行时间 */
+  StartTime?: string;
+}
+
+declare interface CreateOnlineDDLJobResponse {
+  /** 在线DDL任务Id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2487,6 +2519,8 @@ declare interface Dcdb {
   CreateDedicatedClusterDCDBInstance(data: CreateDedicatedClusterDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterDCDBInstanceResponse>;
   /** 创建TDSQL按量计费实例 {@link CreateHourDCDBInstanceRequest} {@link CreateHourDCDBInstanceResponse} */
   CreateHourDCDBInstance(data: CreateHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHourDCDBInstanceResponse>;
+  /** 创建在线DDL任务 {@link CreateOnlineDDLJobRequest} {@link CreateOnlineDDLJobResponse} */
+  CreateOnlineDDLJob(data: CreateOnlineDDLJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOnlineDDLJobResponse>;
   /** 回档TDSQL实例 {@link CreateTmpDCDBInstanceRequest} {@link CreateTmpDCDBInstanceResponse} */
   CreateTmpDCDBInstance(data: CreateTmpDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTmpDCDBInstanceResponse>;
   /** 删除账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */

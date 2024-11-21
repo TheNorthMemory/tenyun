@@ -23,21 +23,21 @@ declare interface AsrData {
   /** 时间戳 */
   Timestamp?: number;
   /** 句子开始时间，Unix 毫秒时间戳 */
-  Start?: number | null;
+  Start?: number;
   /** 句子结束时间，Unix 毫秒时间戳 */
-  End?: number | null;
+  End?: number;
 }
 
 /** 音频文件审核信息 */
 declare interface AudioFileInfo {
   /** 文件ID */
-  FileId?: number | null;
+  FileId?: number;
   /** 文件别名 */
-  CustomFileName?: string | null;
+  CustomFileName?: string;
   /** 文件名 */
-  AudioFileName?: string | null;
+  AudioFileName?: string;
   /** 审核状态，0-未审核，1-审核通过，2-审核拒绝 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 外呼任务被叫信息 */
@@ -73,27 +73,27 @@ declare interface AutoCalloutTaskInfo {
 /** 呼入实时指标 */
 declare interface CallInMetrics {
   /** IVR驻留数量 */
-  IvrCount: number;
+  IvrCount?: number;
   /** 排队中数量 */
-  QueueCount: number;
+  QueueCount?: number;
   /** 振铃中数量 */
-  RingCount: number;
+  RingCount?: number;
   /** 接通中数量 */
-  AcceptCount: number;
+  AcceptCount?: number;
   /** 客服转接外线中数量 */
-  TransferOuterCount: number;
+  TransferOuterCount?: number;
   /** 最大排队时长 */
-  MaxQueueDuration: number;
+  MaxQueueDuration?: number;
   /** 平均排队时长 */
-  AvgQueueDuration: number;
+  AvgQueueDuration?: number;
   /** 最大振铃时长 */
-  MaxRingDuration: number;
+  MaxRingDuration?: number;
   /** 平均振铃时长 */
-  AvgRingDuration: number;
+  AvgRingDuration?: number;
   /** 最大接通时长 */
-  MaxAcceptDuration: number;
+  MaxAcceptDuration?: number;
   /** 平均接通时长 */
-  AvgAcceptDuration: number;
+  AvgAcceptDuration?: number;
 }
 
 /** 呼入线路维度相关指标 */
@@ -137,7 +137,7 @@ declare interface CarrierPrivilegeNumberApplicant {
   /** 被叫号码列表 */
   Callees?: string[];
   /** 描述 */
-  Description?: string | null;
+  Description?: string;
   /** 审批状态:1 待审核、2 通过、3 拒绝 */
   State?: number;
   /** 创建时间，unix时间戳(秒) */
@@ -149,51 +149,51 @@ declare interface CarrierPrivilegeNumberApplicant {
 /** 企业资质申请信息 */
 declare interface CompanyApplyInfo {
   /** 申请人身份，0-公司法定代表人，1-经办人（受法定代表人委托） */
-  ApplicantType: number | null;
+  ApplicantType: number;
   /** 企业名称 */
-  CompanyName: string | null;
+  CompanyName: string;
   /** 统一社会信用代码 */
-  BusinessId: string | null;
+  BusinessId: string;
   /** 营业执照扫描件(加盖公章)。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  BusinessIdPicUrl: string | null;
+  BusinessIdPicUrl: string;
   /** 法定代表人名称 */
-  CorporationName: string | null;
+  CorporationName: string;
   /** 法定代表人身份证号码 */
-  CorporationId: string | null;
+  CorporationId: string;
   /** 法定代表人身份证正反面扫描件。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  CorporationIdPicUrl: string | null;
+  CorporationIdPicUrl: string;
   /** 安全合规使用承诺书。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  NetworkCommitmentPicUrl: string | null;
+  NetworkCommitmentPicUrl: string;
   /** 是否与腾讯云账号的资质一致,0-不一致,1-一致 */
-  IsEqualTencentCloud: number | null;
+  IsEqualTencentCloud: number;
   /** 法定代表人手机号 */
-  CorporationMobile: string | null;
+  CorporationMobile: string;
   /** 法定代表人手机号码实名认证。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  CorporationMobilePicUrl: string | null;
+  CorporationMobilePicUrl: string;
   /** 通话话术。(支持doc、docx格式的文档不超过50MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  UseDescribeFileUrl: string | null;
+  UseDescribeFileUrl: string;
   /** 公司授权函。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  CompanyAuthLetterPicUrl: string | null;
+  CompanyAuthLetterPicUrl: string;
   /** 电话受理单。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  AcceptPicUrl: string | null;
+  AcceptPicUrl: string;
   /** 法定代表人手持身份证照，申请人类型为法定代表人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  CorporationHoldingOnIdPicUrl?: string | null;
+  CorporationHoldingOnIdPicUrl?: string;
   /** 经办人名称，申请人类型为经办人时必填。 */
-  OperatorName?: string | null;
+  OperatorName?: string;
   /** 经办人证件号码，申请人类型为经办人时必填。 */
-  OperatorId?: string | null;
+  OperatorId?: string;
   /** 经办人身份证正反面扫描件，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  OperatorIdPicUrl?: string | null;
+  OperatorIdPicUrl?: string;
   /** 经办人手持身份证照，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  OperatorHoldingOnIdPicUrl?: string | null;
+  OperatorHoldingOnIdPicUrl?: string;
   /** 委托授权书，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  CommissionPicUrl?: string | null;
+  CommissionPicUrl?: string;
   /** 经办人手机号，申请人类型为经办人时必填。 */
-  OperatorMobile?: string | null;
+  OperatorMobile?: string;
   /** 经办人邮箱，申请人类型为经办人时必填。 */
-  OperatorEmail?: string | null;
+  OperatorEmail?: string;
   /** 经办人手机号码实名认证，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update) */
-  OperatorMobilePicUrl?: string | null;
+  OperatorMobilePicUrl?: string;
 }
 
 /** 公司资质审核状态信息 */
@@ -201,39 +201,41 @@ declare interface CompanyStateInfo {
   /** 申请单ID */
   Id?: number;
   /** 公司名称 */
-  CompanyName?: string | null;
+  CompanyName?: string;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 审核时间 */
-  CheckTime?: number | null;
+  CheckTime?: number;
   /** 审核备注 */
-  CheckMsg?: string | null;
+  CheckMsg?: string;
   /** 审核状态，1-待审核，2-审核通过，3-驳回 */
-  State?: number | null;
+  State?: number;
   /** 公司统一社会信用代码 */
-  BusinessId?: string | null;
+  BusinessId?: string;
   /** 修改时间 */
-  ModifyTime?: number | null;
+  ModifyTime?: number;
+  /** 合同编号 */
+  ContractNo?: string;
 }
 
 /** 查询预测式外呼任务列表元素 */
 declare interface DescribePredictiveDialingCampaignsElement {
   /** 任务 ID */
-  CampaignId?: number | null;
+  CampaignId?: number;
   /** 任务名称 */
-  Name?: string | null;
+  Name?: string;
   /** 任务状态 0 待开始 1 进行中 2 已暂停 3 已终止 4 已完成 */
-  Status?: number | null;
+  Status?: number;
   /** 任务状态原因 0 正常 1 手动结束 2 超时结束 */
-  StatusReason?: number | null;
+  StatusReason?: number;
   /** 被叫号码个数 */
-  CalleeCount?: number | null;
+  CalleeCount?: number;
   /** 已完成的被叫个数 */
-  FinishedCalleeCount?: number | null;
+  FinishedCalleeCount?: number;
   /** 相同应用内多个任务运行优先级，从高到底 1 - 5 */
-  Priority?: number | null;
+  Priority?: number;
   /** 使用的座席技能组 ID */
-  SkillGroupId?: number | null;
+  SkillGroupId?: number;
 }
 
 /** 批量添加客服时，返回出错客服的信息 */
@@ -297,11 +299,11 @@ declare interface IMCdrInfo {
   /** 服务时间戳 */
   Timestamp?: number;
   /** 会话ID */
-  SessionId?: string | null;
+  SessionId?: string;
   /** 技能组ID */
-  SkillGroupId?: string | null;
+  SkillGroupId?: string;
   /** 技能组名称 */
-  SkillGroupName?: string | null;
+  SkillGroupName?: string;
   /** 满意度 */
   Satisfaction?: IMSatisfaction | null;
   /** 用户ID */
@@ -311,25 +313,25 @@ declare interface IMCdrInfo {
 /** IM满意度 */
 declare interface IMSatisfaction {
   /** 满意度值 */
-  Id: number | null;
+  Id?: number;
   /** 满意度标签 */
-  Label: string | null;
+  Label?: string;
 }
 
 /** ivr 按键信息 */
 declare interface IVRKeyPressedElement {
   /** 命中的关键字或者按键 */
-  Key?: string | null;
+  Key?: string;
   /** 按键关联的标签 */
-  Label?: string | null;
+  Label?: string;
   /** Unix 毫秒时间戳 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 节点标签 */
-  NodeLabel?: string | null;
+  NodeLabel?: string;
   /** 用户原始输入 */
-  OriginalContent?: string | null;
+  OriginalContent?: string;
   /** TTS 提示音内容 */
-  TTSPrompt?: string | null;
+  TTSPrompt?: string;
 }
 
 /** 单条消息 */
@@ -483,7 +485,7 @@ declare interface SdkAppIdBuyInfo {
   /** 号码购买列表 */
   PhoneNumBuyList?: PhoneNumBuyInfo[];
   /** 办公电话购买数（还在有效期内） */
-  SipBuyNum?: number | null;
+  SipBuyNum?: number;
 }
 
 /** 座席用户信息 */
@@ -493,7 +495,7 @@ declare interface SeatUserInfo {
   /** 座席邮箱 */
   Mail: string;
   /** 工号 */
-  StaffNumber: string | null;
+  StaffNumber: string;
   /** 座席电话号码（带0086前缀） */
   Phone?: string;
   /** 座席昵称 */
@@ -501,49 +503,49 @@ declare interface SeatUserInfo {
   /** 用户ID */
   UserId?: string;
   /** 座席关联的技能组列表 */
-  SkillGroupNameList?: string[] | null;
+  SkillGroupNameList?: string[];
   /** 1:管理员2:质检员3:普通座席else:自定义角色ID */
-  Role?: number | null;
+  Role?: number;
 }
 
 /** 参与者信息 */
 declare interface ServeParticipant {
   /** 座席邮箱 */
-  Mail?: string | null;
+  Mail?: string;
   /** 座席电话 */
-  Phone?: string | null;
+  Phone?: string;
   /** 振铃时间戳，Unix 秒级时间戳 */
-  RingTimestamp?: number | null;
+  RingTimestamp?: number;
   /** 接听时间戳，Unix 秒级时间戳 */
-  AcceptTimestamp?: number | null;
+  AcceptTimestamp?: number;
   /** 结束时间戳，Unix 秒级时间戳 */
-  EndedTimestamp?: number | null;
+  EndedTimestamp?: number;
   /** 录音 ID，能够索引到座席侧的录音 */
-  RecordId?: string | null;
+  RecordId?: string;
   /** 参与者类型，"staffSeat", "outboundSeat", "staffPhoneSeat" */
-  Type?: string | null;
+  Type?: string;
   /** 转接来源座席信息 */
-  TransferFrom?: string | null;
+  TransferFrom?: string;
   /** 转接来源参与者类型，取值与 Type 一致 */
-  TransferFromType?: string | null;
+  TransferFromType?: string;
   /** 转接去向座席信息 */
-  TransferTo?: string | null;
+  TransferTo?: string;
   /** 转接去向参与者类型，取值与 Type 一致 */
-  TransferToType?: string | null;
+  TransferToType?: string;
   /** 技能组 ID */
-  SkillGroupId?: number | null;
+  SkillGroupId?: number;
   /** 结束状态 */
-  EndStatusString?: string | null;
+  EndStatusString?: string;
   /** 录音 URL */
-  RecordURL?: string | null;
+  RecordURL?: string;
   /** 参与者序号，从 0 开始 */
-  Sequence?: number | null;
+  Sequence?: number;
   /** 开始时间戳，Unix 秒级时间戳 */
-  StartTimestamp?: number | null;
+  StartTimestamp?: number;
   /** 技能组名称 */
-  SkillGroupName?: string | null;
+  SkillGroupName?: string;
   /** 录音转存第三方COS地址 */
-  CustomRecordURL?: string | null;
+  CustomRecordURL?: string;
 }
 
 /** 技能组信息 */
@@ -555,17 +557,17 @@ declare interface SkillGroupInfoItem {
   /** （废弃）类型：IM、TEL、ALL（全媒体） */
   Type?: string;
   /** 会话分配策略 */
-  RoutePolicy?: string | null;
+  RoutePolicy?: string;
   /** 会话分配是否优先上次服务座席 */
-  UsingLastSeat?: number | null;
+  UsingLastSeat?: number;
   /** 单客服最大并发数（电话类型默认1） */
-  MaxConcurrency?: number | null;
+  MaxConcurrency?: number;
   /** 最后修改时间 */
-  LastModifyTimestamp?: number | null;
+  LastModifyTimestamp?: number;
   /** 技能组类型0-电话，1-在线，3-音频，4-视频 */
-  SkillGroupType?: number | null;
+  SkillGroupType?: number;
   /** 技能组内线号码 */
-  Alias?: string | null;
+  Alias?: string;
 }
 
 /** 技能组信息 */
@@ -589,27 +591,27 @@ declare interface StaffBuyInfo {
   /** 截止时间戳 */
   EndTime?: number;
   /** 购买办公电话数量 */
-  SipNum?: number | null;
+  SipNum?: number;
 }
 
 /** 带有技能组优先级的座席信息 */
 declare interface StaffInfo {
   /** 座席名称 */
-  Name?: string | null;
+  Name?: string;
   /** 座席邮箱 */
   Mail?: string;
   /** 座席电话号码 */
-  Phone?: string | null;
+  Phone?: string;
   /** 座席昵称 */
-  Nick?: string | null;
+  Nick?: string;
   /** 座席工号 */
-  StaffNumber?: string | null;
+  StaffNumber?: string;
   /** 用户角色id */
   RoleId?: number;
   /** 所属技能组列表 */
-  SkillGroupList?: SkillGroupItem[] | null;
+  SkillGroupList?: SkillGroupItem[];
   /** 最后修改时间 */
-  LastModifyTimestamp?: number | null;
+  LastModifyTimestamp?: number;
 }
 
 /** 座席绑定技能组列表 */
@@ -679,7 +681,7 @@ declare interface TelCdrInfo {
   /** 录音信息 */
   RecordURL?: string;
   /** 录音 ID */
-  RecordId?: string | null;
+  RecordId?: string;
   /** 座席信息 */
   SeatUser?: SeatUserInfo;
   /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通电话呼出 108 restrictedCallee	被叫因高风险受限电话呼出 109 tooManyRequest 超频电话呼出 110 restrictedArea 外呼盲区电话呼出 111 restrictedTime	外呼时间限制 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
@@ -689,57 +691,57 @@ declare interface TelCdrInfo {
   /** 主叫归属地 */
   CallerLocation?: string;
   /** IVR 阶段耗时 */
-  IVRDuration?: number | null;
+  IVRDuration?: number;
   /** 振铃时间戳，UNIX 秒级时间戳 */
-  RingTimestamp?: number | null;
+  RingTimestamp?: number;
   /** 接听时间戳，UNIX 秒级时间戳 */
-  AcceptTimestamp?: number | null;
+  AcceptTimestamp?: number;
   /** 结束时间戳，UNIX 秒级时间戳 */
-  EndedTimestamp?: number | null;
+  EndedTimestamp?: number;
   /** IVR 按键信息 ，e.g. ["1","2","3"] */
-  IVRKeyPressed?: string[] | null;
+  IVRKeyPressed?: string[];
   /** 挂机方 seat 座席 user 用户 system 系统 */
-  HungUpSide?: string | null;
+  HungUpSide?: string;
   /** 服务参与者列表 */
-  ServeParticipants?: ServeParticipant[] | null;
+  ServeParticipants?: ServeParticipant[];
   /** 技能组ID */
-  SkillGroupId?: number | null;
+  SkillGroupId?: number;
   /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通电话呼出 108 restrictedCallee	被叫因高风险受限电话呼出 109 tooManyRequest 超频电话呼出 110 restrictedArea 外呼盲区电话呼出 111 restrictedTime	外呼时间限制 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误 */
-  EndStatusString?: string | null;
+  EndStatusString?: string;
   /** 会话开始时间戳，UNIX 秒级时间戳 */
-  StartTimestamp?: number | null;
+  StartTimestamp?: number;
   /** 进入排队时间，Unix 秒级时间戳 */
-  QueuedTimestamp?: number | null;
+  QueuedTimestamp?: number;
   /** 后置IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]） */
-  PostIVRKeyPressed?: IVRKeyPressedElement[] | null;
+  PostIVRKeyPressed?: IVRKeyPressedElement[];
   /** 排队技能组Id */
-  QueuedSkillGroupId?: number | null;
+  QueuedSkillGroupId?: number;
   /** 会话 ID */
-  SessionId?: string | null;
+  SessionId?: string;
   /** 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空 */
-  ProtectedCaller?: string | null;
+  ProtectedCaller?: string;
   /** 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空 */
-  ProtectedCallee?: string | null;
+  ProtectedCallee?: string;
   /** 客户自定义数据（User-to-User Interface） */
   Uui?: string | null;
   /** 客户自定义数据（User-to-User Interface） */
-  UUI?: string | null;
+  UUI?: string;
   /** IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]） */
-  IVRKeyPressedEx?: IVRKeyPressedElement[] | null;
+  IVRKeyPressedEx?: IVRKeyPressedElement[];
   /** 获取录音ASR文本信息地址 */
-  AsrUrl?: string | null;
+  AsrUrl?: string;
   /** AsrUrl的状态：Complete已完成;Processing正在生成中;NotExists无记录(未开启生成离线asr或者无套餐包) */
-  AsrStatus?: string | null;
+  AsrStatus?: string;
   /** 录音转存第三方COS地址 */
-  CustomRecordURL?: string | null;
+  CustomRecordURL?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 排队技能组名称 */
-  QueuedSkillGroupName?: string | null;
+  QueuedSkillGroupName?: string;
   /** 通话中语音留言录音URL */
-  VoicemailRecordURL?: string[] | null;
+  VoicemailRecordURL?: string[];
   /** 通话中语音留言ASR文本信息地址 */
-  VoicemailAsrURL?: string[] | null;
+  VoicemailAsrURL?: string[];
 }
 
 /** 上传音频文件信息 */
@@ -753,9 +755,9 @@ declare interface UploadAudioInfo {
 /** 上传音频文件失败信息 */
 declare interface UploadIvrAudioFailedInfo {
   /** 文件名 */
-  FileName?: string | null;
+  FileName?: string;
   /** 失败原因 */
-  FailedMsg?: string | null;
+  FailedMsg?: string;
 }
 
 /** 变量 */
@@ -811,19 +813,19 @@ declare interface BindStaffSkillGroupListResponse {
 declare interface CreateAICallRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
-  /** 被叫 */
+  /** 被叫号码 */
   Callee: string;
-  /** 用于设定AI座席人设、说话规则、任务等的全局提示词。 */
+  /** 用于设定AI人设、说话规则、任务等的全局提示词。示例：## 人设您是人民医院友善、和蔼的随访医生李医生，正在给患者小明的家长打电话，原因是医院要求小明2024-08-08回院复查手术恢复情况，但小明没有来。您需要按照任务流程对小明家长进行电话随访调查。## 要求简洁回复：使用简练语言，每次最多询问一个问题，不要在一个回复中询问多个问题。富有变化：尽量使表达富有变化，表达机械重复。自然亲切：使用日常语言，尽量显得专业并亲切。提到时间时使用口语表述，如下周三、6月18日。积极主动：尝试引导对话，每个回复通常以问题或下一步建议来结尾。询问清楚：如果对方部分回答了您的问题，或者回答很模糊，请通过追问来确保回答的完整明确。遵循任务：当对方的回答偏离了您的任务时，及时引导对方回到任务中。不要从头开始重复，从偏离的地方继续询问。诚实可靠：对于客户的提问，如果不确定请务必不要编造，礼貌告知对方不清楚。不要捏造患者未提及的症状史、用药史、治疗史。其他注意点：避免提到病情恶化、恢复不理想或疾病名称等使用会使患者感到紧张的表述。不要问患者已经直接或间接回答过的问题，例如患者已经说没有不适症状，那就不要再问手术部位是否有红肿疼痛症状的问题。##任务： 1.自我介绍您是人民医院负责随访的李医生，并说明致电的目的。2.询问被叫方是否是小明家长。 - 如果不是小明家长，请礼貌表达歉意，并使用 call_end 挂断电话。- 如果小明家长没空，请礼貌告诉对方稍后会重新致电，并使用 end_call 挂断电话。3.询问小明出院后水肿情况如何，较出院时是否有变化。- 如果水肿变严重，直接跳转步骤7。4.询问出院后是否给小朋友量过体温，是否出现过发烧情况。- 如果没有量过体温，请礼貌告诉家长出院后三个月内需要每天观察体温。- 如果出现过发烧，请直接跳转步骤7。5.询问出院后是否给小朋友按时服药。- 如果没有按时服药，请友善提醒家长严格按医嘱服用药物，避免影响手术效果。6.询问小朋友在饮食上是否做到低盐低脂，适量吃优质蛋白如鸡蛋、牛奶、瘦肉等。- 如果没有做到，请友善提醒家长低盐低脂和优质蛋白有助小朋友尽快恢复。7.告知家长医生要求6月18日回院复查，但没看到有相关复诊记录。提醒家长尽快前往医院体检复查血化验、尿常规。8.询问家长是否有问题需要咨询，如果没有请礼貌道别并用call_end挂断电话。 */
   SystemPrompt: string;
-  /** LLM类型目前有两种openai(兼容openai协议的模型)azure */
+  /** 模型接口协议类型，目前兼容三种协议类型：- OpenAI协议(包括GPT、混元、DeepSeek等)："openai"- Azure协议："azure"- Minimax协议："minimax" */
   LLMType: string;
-  /** 模型（当前仅支持openai协议的模型） */
+  /** 模型名称，如- OpenAI协议"gpt-4o-mini","gpt-4o"，"hunyuan-standard", "hunyuan-turbo"，"deepseek-chat"；- Azure协议"gpt-4o-mini", "gpt-4o"；- Minmax协议"deepseek-chat". */
   Model: string;
-  /** API密钥 */
+  /** 模型API密钥，获取鉴权信息方式请参见各模型官网- OpenAI协议：[GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key)，[混元](https://cloud.tencent.com/document/product/1729/111008)，[DeepSeek](https://api-docs.deepseek.com/zh-cn/)；- Azure协议：[Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings)；- Minimax：[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2) */
   APIKey: string;
-  /** API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions；llmType为azure时,URL填写格式需为：https://{your-resource-name}.openai.azure.com?api-version={api-version},填写url时后缀不要带/openai/deployments/{deployment-id}/chat/completions，系统会自动帮您填充后缀 */
+  /** 模型接口地址- OpenAI协议GPT："https://api.openai.com/v1/"混元："https://api.hunyuan.cloud.tencent.com/v1"Deepseek："https://api.deepseek.com/v1"- Azure协议 "https://{your-resource-name}.openai.azure.com?api-version={api-version}"- Minimax协议"https://api.minimax.chat/v1" */
   APIUrl: string;
-  /** 音色，目前仅支持以下音色:汉语：ZhiMei：智美，客服女声ZhiXi： 智希 通用女声ZhiQi：智琪 客服女声ZhiTian：智甜 女童声AiXiaoJing：爱小静 对话女声英语:WeRose：英文女声Monika：英文女声日语：Nanami韩语：SunHi印度尼西亚语(印度尼西亚)：Gadis马来语（马来西亚）:Yasmin 泰米尔语（马来西亚）:Kani泰语（泰国）:Achara越南语(越南):HoaiMy */
+  /** 默认提供以下音色参数值可选择，如需自定义音色VoiceType请留空并在参数CustomTTSConfig中配置汉语：ZhiMei：智美，客服女声ZhiXi： 智希 通用女声ZhiQi：智琪 客服女声ZhiTian：智甜 女童声AiXiaoJing：爱小静 对话女声英语:WeRose：英文女声Monika：英文女声日语：Nanami韩语：SunHi印度尼西亚语(印度尼西亚)：Gadis马来语（马来西亚）:Yasmin 泰米尔语（马来西亚）:Kani泰语（泰国）:Achara越南语(越南):HoaiMy */
   VoiceType?: string;
   /** 主叫号码列表 */
   Callers?: string[];
@@ -845,9 +847,9 @@ declare interface CreateAICallRequest {
   EndFunctionDesc?: string;
   /** 用户多久没说话提示时长,最小10秒,默认10秒 */
   NotifyDuration?: number;
-  /** 用户NotifyDuration没说话，ai提示的语句，默认是"抱歉，我没听清。您可以重复下吗？" */
+  /** 用户NotifyDuration没说话，AI提示的语句，默认是"抱歉，我没听清。您可以重复下吗？" */
   NotifyMessage?: string;
-  /** 和voiceType字段需要选填一个，这里是使用自己自定义的TTS，voiceType是系统内置的一些音色tencent TTS:{ "TTSType": "tencent", // String TTS类型, 目前支持"tencent" 和 “minixmax”， 其他的厂商支持中 "AppId": "您的应用ID", // String 必填 "SecretId": "您的密钥ID", // String 必填 "SecretKey": "您的密钥Key", // String 必填 "VoiceType": 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 "PrimaryLanguage": 1, // Integer 可选 主要语言 1-中文（默认） 2-英文 3-日文 "FastVoiceType": "xxxx" // 可选参数， 快速声音复刻的参数 }参考：https://cloud.tencent.com/document/product/1073/92668"TTSType": "minimax", // String TTS类型, "Model": "speech-01-turbo", "APIUrl": "https://api.minimax.chat/v1/t2a_v2", "APIKey": "eyxxxx", "GroupId": "181000000000000", "VoiceType":"female-tianmei-jingpin", "Speed": 1.2}参考：https://platform.minimaxi.com/document/T2A%20V2?key=66719005a427f0c8a5701643 限频参考：https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572 可能会导致回答卡顿volcengine TTS{ "TTSType": "volcengine", // 必填：String TTS类型 "AppId" : "xxxxxxxx", // 必填：String 火山引擎分配的Appid "Token" : "TY9d4sQXHxxxxxxx", // 必填： String类型 火山引擎的访问token "Speed" : 1.0, // 可选参数 语速，默认为1.0 "Volume": 1.0, // 可选参数， 音量大小， 默认为1.0 "Cluster" : "volcano_tts", // 可选参数，业务集群, 默认是 volcano_tts "VoiceType" : "zh_male_aojiaobazong_moon_bigtts" // 音色类型， 默认为大模型语音合成的音色。 如果使用普通语音合成，则需要填写对应的音色类型。 音色类型填写错误会导致没有声音。}火山引擎音色类型参考：https://www.volcengine.com/docs/6561/162929 语音合成音色列表--语音技术-火山引擎大模型语音合成音色列表--语音技术-火山引擎Azure TTS{ "TTSType": "azure", // 必填：String TTS类型 "SubscriptionKey": "xxxxxxxx", // 必填：String 订阅的Key "Region": "chinanorth3", // 必填：String 订阅的地区 "VoiceName": "zh-CN-XiaoxiaoNeural", // 必填：String 音色名必填 "Language": "zh-CN", // 必填：String 合成的语言 "Rate": 1 // 选填：float 语速 0.5～2 默认为 1}参考：https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice 自定义 TTS { "TTSType": "custom", // String 必填 "APIKey": "ApiKey", // String 必填 用来鉴权 "APIUrl": "http://0.0.0.0:8080/stream-audio" // String，必填，TTS API URL "AudioFormat": "wav", // String, 非必填，期望输出的音频格式，如mp3， ogg_opus，pcm，wav，默认为 wav，目前只支持pcm和wav， "SampleRate": 16000, // Integer，非必填，音频采样率，默认为16000(16k)，推荐值为16000 "AudioChannel": 1, // Integer，非必填，音频通道数，取值：1 或 2 默认为1 }具体协议规范： https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw */
+  /** 和VoiceType字段需要选填一个，这里是使用自己自定义的TTS，VoiceType是系统内置的一些音色Tencent TTS配置请参考腾讯云TTS文档链接{ &quot;TTSType&quot;: &quot;tencent&quot;, // String TTS类型, 目前支持&quot;tencent&quot; 和 “minixmax”， 其他的厂商支持中 &quot;AppId&quot;: &quot;您的应用ID&quot;, // String 必填 &quot;SecretId&quot;: &quot;您的密钥ID&quot;, // String 必填 &quot;SecretKey&quot;: &quot;您的密钥Key&quot;, // String 必填 &quot;VoiceType&quot;: 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &quot;Speed&quot;: 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &quot;Volume&quot;: 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &quot;PrimaryLanguage&quot;: 1, // Integer 可选 主要语言 1-中文（默认） 2-英文 3-日文 &quot;FastVoiceType&quot;: &quot;xxxx&quot; // 可选参数， 快速声音复刻的参数 } Minimax TTS配置请参考Minimax TTS文档链接。注意Minimax TTS存在频率限制，超频可能会导致回答卡顿，Minimax TTS频率限制相关文档链接。{ &quot;TTSType&quot;: &quot;minimax&quot;, // String TTS类型, &quot;Model&quot;: &quot;speech-01-turbo&quot;, &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;, &quot;APIKey&quot;: &quot;eyxxxx&quot;, &quot;GroupId&quot;: &quot;181000000000000&quot;, &quot;VoiceType&quot;:&quot;female-tianmei-jingpin&quot;, &quot;Speed&quot;: 1.2}火山 TTS配置音色类型参考火山TTS文档链接语音合成音色列表–语音技术-火山引擎大模型语音合成音色列表–语音技术-火山引擎{ &quot;TTSType&quot;: &quot;volcengine&quot;, // 必填：String TTS类型 &quot;AppId&quot; : &quot;xxxxxxxx&quot;, // 必填：String 火山引擎分配的Appid &quot;Token&quot; : &quot;TY9d4sQXHxxxxxxx&quot;, // 必填： String类型 火山引擎的访问token &quot;Speed&quot; : 1.0, // 可选参数 语速，默认为1.0 &quot;Volume&quot;: 1.0, // 可选参数， 音量大小， 默认为1.0 &quot;Cluster&quot; : &quot;volcano_tts&quot;, // 可选参数，业务集群, 默认是 volcano_tts &quot;VoiceType&quot; : &quot;zh_male_aojiaobazong_moon_bigtts&quot; // 音色类型， 默认为大模型语音合成的音色。 如果使用普通语音合成，则需要填写对应的音色类型。 音色类型填写错误会导致没有声音。}Azure TTS配置请参考AzureTTS文档链接{ &quot;TTSType&quot;: &quot;azure&quot;, // 必填：String TTS类型 &quot;SubscriptionKey&quot;: &quot;xxxxxxxx&quot;, // 必填：String 订阅的Key &quot;Region&quot;: &quot;chinanorth3&quot;, // 必填：String 订阅的地区 &quot;VoiceName&quot;: &quot;zh-CN-XiaoxiaoNeural&quot;, // 必填：String 音色名必填 &quot;Language&quot;: &quot;zh-CN&quot;, // 必填：String 合成的语言 &quot;Rate&quot;: 1 // 选填：float 语速 0.5～2 默认为 1}自定义TTS具体协议规范请参考腾讯文档{ &quot;TTSType&quot;: &quot;custom&quot;, // String 必填 &quot;APIKey&quot;: &quot;ApiKey&quot;, // String 必填 用来鉴权 &quot;APIUrl&quot;: &quot;http://0.0.0.0:8080/stream-audio&quot; // String，必填，TTS API URL &quot;AudioFormat&quot;: &quot;wav&quot;, // String, 非必填，期望输出的音频格式，如mp3， ogg_opus，pcm，wav，默认为 wav，目前只支持pcm和wav， &quot;SampleRate&quot;: 16000, // Integer，非必填，音频采样率，默认为16000(16k)，推荐值为16000 &quot;AudioChannel&quot;: 1, // Integer，非必填，音频通道数，取值：1 或 2 默认为1 } */
   CustomTTSConfig?: string;
 }
 
@@ -981,7 +983,7 @@ declare interface CreateCompanyApplyResponse {
 }
 
 declare interface CreateExtensionRequest {
-  /** TCCC 实例应用 ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 分机号 */
   ExtensionId: string;
@@ -1065,6 +1067,12 @@ declare interface CreatePredictiveDialingCampaignRequest {
   IVRId?: number;
   /** 呼叫重试次数，0 - 2 */
   RetryTimes?: number;
+  /** 自定义变量 */
+  Variables?: Variable[];
+  /** UUI */
+  UUI?: string;
+  /** 被叫属性 */
+  CalleeAttributes?: CalleeAttribute[];
 }
 
 declare interface CreatePredictiveDialingCampaignResponse {
@@ -1105,7 +1113,7 @@ declare interface CreateStaffRequest {
 
 declare interface CreateStaffResponse {
   /** 错误坐席列表及错误信息 */
-  ErrorStaffList?: ErrStaffItem[] | null;
+  ErrorStaffList?: ErrStaffItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1129,7 +1137,7 @@ declare interface CreateUserSigResponse {
 }
 
 declare interface DeleteExtensionRequest {
-  /** TCCC 实例应用 ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 分机号 */
   ExtensionId: string;
@@ -1161,7 +1169,7 @@ declare interface DeleteStaffRequest {
 
 declare interface DeleteStaffResponse {
   /** 无法删除的状态为在线的客服列表 */
-  OnlineStaffList?: string[] | null;
+  OnlineStaffList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1267,9 +1275,9 @@ declare interface DescribeCallInMetricsResponse {
   /** 总体指标 */
   TotalMetrics?: CallInMetrics;
   /** 线路维度指标 */
-  NumberMetrics?: CallInNumberMetrics[] | null;
+  NumberMetrics?: CallInNumberMetrics[];
   /** 技能组维度指标 */
-  SkillGroupMetrics?: CallInSkillGroupMetrics[] | null;
+  SkillGroupMetrics?: CallInSkillGroupMetrics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1315,7 +1323,7 @@ declare interface DescribeChatMessagesResponse {
   /** 总记录数 */
   TotalCount?: number;
   /** 消息列表 */
-  Messages?: MessageBody[] | null;
+  Messages?: MessageBody[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1335,7 +1343,7 @@ declare interface DescribeCompanyListRequest {
 
 declare interface DescribeCompanyListResponse {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 企业资质审核信息 */
   CompanyInfo?: CompanyStateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1343,7 +1351,7 @@ declare interface DescribeCompanyListResponse {
 }
 
 declare interface DescribeExtensionRequest {
-  /** TCCC 实例应用 ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 分机号 */
   ExtensionId: string;
@@ -1365,7 +1373,7 @@ declare interface DescribeExtensionResponse {
 }
 
 declare interface DescribeExtensionsRequest {
-  /** TCCC 实例应用 ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 分页页号（从0开始） */
   PageNumber: number;
@@ -1407,7 +1415,7 @@ declare interface DescribeIMCdrListResponse {
   /** 总记录数 */
   TotalCount?: number;
   /** 服务记录列表 */
-  IMCdrList?: IMCdrInfo[] | null;
+  IMCdrList?: IMCdrInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1549,9 +1557,9 @@ declare interface DescribePredictiveDialingCampaignsRequest {
 
 declare interface DescribePredictiveDialingCampaignsResponse {
   /** 数据总量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 数据 */
-  CampaignList?: DescribePredictiveDialingCampaignsElement[] | null;
+  CampaignList?: DescribePredictiveDialingCampaignsElement[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1737,7 +1745,7 @@ declare interface DescribeTelRecordAsrRequest {
 
 declare interface DescribeTelRecordAsrResponse {
   /** 录音转文本信息 */
-  AsrDataList?: AsrData[] | null;
+  AsrDataList?: AsrData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1771,7 +1779,7 @@ declare interface DisableCCCPhoneNumberResponse {
 }
 
 declare interface HangUpCallRequest {
-  /** TCCC 实例应用 ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 会话ID */
   SessionId: string;
@@ -1795,7 +1803,7 @@ declare interface ModifyCompanyApplyResponse {
 }
 
 declare interface ModifyExtensionRequest {
-  /** TCCC 实例应用 ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 分机号 */
   ExtensionId: string;
@@ -1881,7 +1889,7 @@ declare interface PausePredictiveDialingCampaignResponse {
 }
 
 declare interface ResetExtensionPasswordRequest {
-  /** TCCC 实例应用 ID */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 分机号 */
   ExtensionId: string;
@@ -1907,7 +1915,7 @@ declare interface ResumePredictiveDialingCampaignResponse {
 }
 
 declare interface StopAutoCalloutTaskRequest {
-  /** 呼叫中心实例Id */
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
   /** 任务Id */
   TaskId: number;
@@ -1993,6 +2001,12 @@ declare interface UpdatePredictiveDialingCampaignRequest {
   IVRId?: number;
   /** 呼叫重试次数，0 - 2 */
   RetryTimes?: number;
+  /** 自定义变量 */
+  Variables?: Variable[];
+  /** UUI */
+  UUI?: string;
+  /** 被叫属性 */
+  CalleeAttributes?: CalleeAttribute[];
 }
 
 declare interface UpdatePredictiveDialingCampaignResponse {
@@ -2009,9 +2023,9 @@ declare interface UploadIvrAudioRequest {
 
 declare interface UploadIvrAudioResponse {
   /** 上传失败的文件列表 */
-  FailedFileList?: UploadIvrAudioFailedInfo[] | null;
+  FailedFileList?: UploadIvrAudioFailedInfo[];
   /** 上传成功文件列表 */
-  SuccessFileList?: AudioFileInfo[] | null;
+  SuccessFileList?: AudioFileInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2025,7 +2039,7 @@ declare interface Ccc {
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定座席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
-  /** 创建ai会话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
+  /** 创建AI会话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
   CreateAICall(data: CreateAICallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAICallResponse>;
   /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;

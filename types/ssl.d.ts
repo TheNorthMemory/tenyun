@@ -88,6 +88,20 @@ declare interface CdnInstanceList {
   Error?: string | null;
 }
 
+/** 证书基本信息 */
+declare interface CertBasicInfo {
+  /** 颁发者 */
+  Issuer?: string;
+  /** 颁发给 */
+  Subject?: string;
+  /** 证书指纹 */
+  Fingerprint?: string;
+  /** 证书有效期开始时间 */
+  ValidFrom?: string;
+  /** 证书有效期结束时间 */
+  ValidTo?: string;
+}
+
 /** 证书异步任务ID */
 declare interface CertTaskId {
   /** 证书ID */
@@ -544,6 +558,10 @@ declare interface HostingConfig {
   ReplaceTime?: number | null;
   /** 托管发送消息类型：0，托管开始前消息提醒（没有续费证书也会收到该提示消息）； 1， 托管开始消息提醒（存在续费证书才会收到消息提醒）； 2， 托管资源替换失败消息提醒； 3 托管资源替换成功消息提醒 */
   MessageTypes?: number[] | null;
+  /** 资源替换开始时间 */
+  ReplaceStartTime?: string;
+  /** 资源替换结束时间 */
+  ReplaceEndTime?: string;
 }
 
 /** Lighthouse实例 */
@@ -1602,6 +1620,8 @@ declare interface DescribeCertificateDetailResponse {
   EncryptAlgorithm?: string | null;
   /** DV证书吊销验证值 */
   DvRevokeAuthDetail?: DvAuths[] | null;
+  /** 证书链信息 */
+  CertChainInfo?: CertBasicInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1801,15 +1821,15 @@ declare interface DescribeDeployedResourcesResponse {
 declare interface DescribeDownloadCertificateUrlRequest {
   /** 证书ID */
   CertificateId: string;
-  /** 下载的服务类型: nginx tomcat apache iis jks other root */
+  /** 必填选项，下载的服务类型: nginx tomcat apache iis jks other root */
   ServiceType?: string;
 }
 
 declare interface DescribeDownloadCertificateUrlResponse {
   /** 下载链接 */
-  DownloadCertificateUrl: string;
+  DownloadCertificateUrl?: string;
   /** 下载文件的名称 */
-  DownloadFilename: string;
+  DownloadFilename?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2553,7 +2573,7 @@ declare interface UploadCertificateRequest {
   CertificateUse?: string;
   /** 标签列表 */
   Tags?: Tags[];
-  /** 相同的证书是否允许重复上传 */
+  /** 相同的证书是否允许重复上传； true：允许上传相同指纹的证书； false：不允许上传相同指纹的证书； 默认值：true */
   Repeatable?: boolean;
 }
 

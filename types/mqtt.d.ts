@@ -4,9 +4,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** AuthorizationPolicyItem */
 declare interface AuthorizationPolicyItem {
-  /** 规则id */
+  /** 规则ID */
   Id?: number;
-  /** 集群id */
+  /** 集群ID */
   InstanceId?: string;
   /** 规则名 */
   PolicyName?: string | null;

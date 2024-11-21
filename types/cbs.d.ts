@@ -40,10 +40,10 @@ declare interface AutoSnapshotPolicy {
   DiskIdSet?: string[];
   /** 定期快照策略是否激活。 */
   IsActivated?: boolean;
-  /** 定期快照策略的状态。取值范围：NORMAL：正常ISOLATED：已隔离。 */
+  /** 定期快照策略的状态。取值范围： NORMAL：正常 ISOLATED：已隔离 */
   AutoSnapshotPolicyState?: string;
   /** 是否是跨账号复制快照快照, 1：是, 0: 不是 */
-  IsCopyToRemote: number | null;
+  IsCopyToRemote?: number | null;
   /** 使用该定期快照策略创建出来的快照是否永久保留。 */
   IsPermanent?: boolean;
   /** 定期快照下次触发的时间。 */
@@ -59,15 +59,15 @@ declare interface AutoSnapshotPolicy {
   /** 使用该定期快照策略创建出来的快照保留天数。 */
   RetentionDays?: number;
   /** 复制的目标账户ID */
-  CopyToAccountUin: string | null;
+  CopyToAccountUin?: string | null;
   /** 已绑定当前定期快照策略的实例ID列表。 */
-  InstanceIdSet: string[] | null;
+  InstanceIdSet?: string[] | null;
   /** 该定期快照创建的快照可以保留的月数。 */
-  RetentionMonths: number | null;
+  RetentionMonths?: number | null;
   /** 该定期快照创建的快照最大保留数量。 */
-  RetentionAmount: number | null;
+  RetentionAmount?: number | null;
   /** 定期快照高级保留策略。 */
-  AdvancedRetentionPolicy: AdvancedRetentionPolicy | null;
+  AdvancedRetentionPolicy?: AdvancedRetentionPolicy | null;
   /** 该复制快照策略的源端账户ID */
   CopyFromAccountUin?: string | null;
   /** 标签。 */
@@ -77,25 +77,25 @@ declare interface AutoSnapshotPolicy {
 /** 描述独享集群的详细信息。 */
 declare interface Cdc {
   /** 独享集群围笼ID。 */
-  CageId: string | null;
+  CageId?: string | null;
   /** 独享集群状态。取值范围：NORMAL：正常；CLOSED：关闭，此时将不可使用该独享集群创建新的云硬盘；FAULT：独享集群状态异常，此时独享集群将不可操作，腾讯云运维团队将会及时修复该集群；ISOLATED：因未及时续费导致独享集群被隔离，此时将不可使用该独享集群创建新的云硬盘，对应的云硬盘也将不可操作。 */
-  CdcState: string;
+  CdcState?: string;
   /** 独享集群所属的[可用区](/document/product/213/15753)ID。 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 独享集群实例名称。 */
-  CdcName: string;
+  CdcName?: string;
   /** 独享集群的资源容量大小。 */
-  CdcResource: CdcSize | null;
+  CdcResource?: CdcSize | null;
   /** 独享集群实例id。 */
-  CdcId: string;
+  CdcId?: string;
   /** 独享集群类型。取值范围：CLOUD_BASIC：表示普通云硬盘集群CLOUD_PREMIUM：表示高性能云硬盘集群CLOUD_SSD：SSD表示SSD云硬盘集群。 */
-  DiskType: string;
+  DiskType?: string;
   /** 独享集群到期时间。 */
-  ExpiredTime: string;
+  ExpiredTime?: string;
   /** 存储池创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 当前集群中已创建的云盘数量。 */
-  DiskNumber: number;
+  DiskNumber?: number;
 }
 
 /** 显示独享集群的大小 */
@@ -135,7 +135,7 @@ declare interface DetailPrice {
 /** 描述了云硬盘的详细信息 */
 declare interface Disk {
   /** 云盘是否与挂载的实例一起销毁。true:销毁实例时会同时销毁云盘，只支持按小时后付费云盘。false：销毁实例时不销毁云盘。 */
-  DeleteWithInstance: boolean | null;
+  DeleteWithInstance?: boolean | null;
   /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费。 */
   RenewFlag?: string | null;
   /** 硬盘介质类型。取值范围：CLOUD_BASIC：表示普通云硬盘CLOUD_PREMIUM：表示高性能云硬盘CLOUD_BSSD：表示通用型SSD云硬盘CLOUD_SSD：表示SSD云硬盘CLOUD_HSSD：表示增强型SSD云硬盘CLOUD_TSSD：表示极速型SSD云硬盘。 */
@@ -143,35 +143,35 @@ declare interface Disk {
   /** 云盘状态。取值范围：UNATTACHED：未挂载ATTACHING：挂载中ATTACHED：已挂载DETACHING：解挂中EXPANDING：扩容中ROLLBACKING：回滚中TORECYCLE：待回收DUMPING：拷贝硬盘中。 */
   DiskState?: string;
   /** 云盘拥有的快照总数。 */
-  SnapshotCount: number;
+  SnapshotCount?: number;
   /** 云盘已挂载到子机，且子机与云盘都是包年包月。true：子机设置了自动续费标识，但云盘未设置false：云盘自动续费标识正常。 */
   AutoRenewFlagError?: boolean | null;
   /** 云盘是否处于快照回滚状态。取值范围：false:表示不处于快照回滚状态true:表示处于快照回滚状态。 */
   Rollbacking?: boolean;
   /** 对于非共享型云盘，该参数为空数组。对于共享型云盘，则表示该云盘当前被挂载到的CVM实例InstanceId */
-  InstanceIdList: string[];
+  InstanceIdList?: string[];
   /** 云盘是否为加密盘。取值范围：false:表示非加密盘true:表示加密盘。 */
   Encrypt?: boolean;
   /** 云硬盘名称。 */
   DiskName?: string;
   /** 云硬盘因欠费销毁或者到期销毁时， 是否使用快照备份数据的标识。true表示销毁时创建快照进行数据备份。false表示直接销毁，不进行数据备份。 */
-  BackupDisk: boolean;
+  BackupDisk?: boolean;
   /** 与云盘绑定的标签，云盘未绑定标签则取值为空。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 云硬盘挂载的云主机ID。 */
   InstanceId?: string;
   /** 云盘的挂载类型。取值范围：PF: PF挂载VF: VF挂载 */
-  AttachMode: string | null;
+  AttachMode?: string | null;
   /** 云盘关联的定期快照ID。只有在调用DescribeDisks接口时，入参ReturnBindAutoSnapshotPolicy取值为TRUE才会返回该参数。 */
   AutoSnapshotPolicyIds?: string[] | null;
   /** 云硬盘额外性能值，单位MB/s。 */
-  ThroughputPerformance: number | null;
+  ThroughputPerformance?: number | null;
   /** 云盘是否处于类型变更中。取值范围：false:表示云盘不处于类型变更中true:表示云盘已发起类型变更，正处于迁移中。 */
-  Migrating: boolean | null;
+  Migrating?: boolean | null;
   /** 云硬盘ID。 */
   DiskId?: string;
   /** 云盘拥有的快照总容量，单位为MB。 */
-  SnapshotSize: number;
+  SnapshotSize?: number;
   /** 云硬盘所在的位置。 */
   Placement?: Placement;
   /** 判断预付费的云盘是否支持主动退还。true:支持主动退还false:不支持主动退还。 */
@@ -183,7 +183,7 @@ declare interface Disk {
   /** 云硬盘大小，单位GB。 */
   DiskSize?: number;
   /** 云盘类型变更的迁移进度，取值0到100。 */
-  MigratePercent: number | null;
+  MigratePercent?: number | null;
   /** 云硬盘类型。取值范围：SYSTEM_DISK：系统盘DATA_DISK：数据盘。 */
   DiskUsage?: string;
   /** 付费模式。取值范围：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：后付费，即按量计费。 */
@@ -197,21 +197,21 @@ declare interface Disk {
   /** 云盘快照回滚的进度。 */
   RollbackPercent?: number;
   /** 当前时间距离盘到期的天数（仅对预付费盘有意义）。 */
-  DifferDaysOfDeadline: number | null;
+  DifferDaysOfDeadline?: number | null;
   /** 预付费云盘在不支持主动退还的情况下，该参数表明不支持主动退还的具体原因。取值范围：1：云硬盘已经退还2：云硬盘已过期3：云盘不支持退还8：超过可退还数量的限制。 */
   ReturnFailCode?: number | null;
   /** 云盘是否为共享型云盘。 */
-  Shareable: boolean;
+  Shareable?: boolean;
   /** 云硬盘的创建时间。 */
   CreateTime?: string;
   /** 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过DescribeSnapshots接口返回的快照详情的IsPermanent字段来判断，true表示永久快照，false表示非永久快照。 */
-  DeleteSnapshot: number;
+  DeleteSnapshot?: number;
   /** 云硬盘备份点配额。表示最大可以保留的备份点数量。 */
-  DiskBackupQuota: number;
+  DiskBackupQuota?: number;
   /** 云硬盘备份点已使用的数量。 */
-  DiskBackupCount: number;
+  DiskBackupCount?: number;
   /** 云硬盘挂载实例的类型。取值范围：CVMEKS */
-  InstanceType: string;
+  InstanceType?: string;
   /** 云硬盘最后一次挂载的实例ID */
   LastAttachInsId?: string | null;
   /** 云硬盘最后一次操作错误提示 */
@@ -291,9 +291,9 @@ declare interface Filter {
 /** 镜像。 */
 declare interface Image {
   /** 镜像名称。 */
-  ImageName: string;
+  ImageName?: string;
   /** 镜像实例ID。 */
-  ImageId: string;
+  ImageId?: string;
 }
 
 /** 描述了实例的抽象位置，包括其所在的可用区，所属的项目，以及所属的独享集群的ID和名字。 */
@@ -302,7 +302,7 @@ declare interface Placement {
   Zone: string;
   /** 围笼Id。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。 */
   CageId?: string | null;
-  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  /** 实例所属项目ID。不填为默认项目。 */
   ProjectId?: number;
   /** 实例所属项目名称。 */
   ProjectName?: string | null;
@@ -329,23 +329,23 @@ declare interface Policy {
 /** 预付费订单的费用。 */
 declare interface PrepayPrice {
   /** 预付费云盘或快照预支费用的折扣价，单位：元。 */
-  DiscountPrice: number | null;
+  DiscountPrice?: number | null;
   /** 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。 */
-  ChargeUnit: string | null;
+  ChargeUnit?: string | null;
   /** 高精度后付费云盘原单价, 单位：元 */
-  UnitPriceHigh: string | null;
+  UnitPriceHigh?: string | null;
   /** 高精度预付费云盘或快照预支费用的原价，单位：元 */
-  OriginalPriceHigh: string | null;
+  OriginalPriceHigh?: string | null;
   /** 预付费云盘或快照预支费用的原价，单位：元。 */
-  OriginalPrice: number | null;
+  OriginalPrice?: number | null;
   /** 后付费云盘折扣单价，单位：元。 */
-  UnitPriceDiscount: number | null;
+  UnitPriceDiscount?: number | null;
   /** 高精度后付费云盘折扣单价, 单位：元 */
-  UnitPriceDiscountHigh: string | null;
+  UnitPriceDiscountHigh?: string | null;
   /** 高精度预付费云盘或快照预支费用的折扣价，单位：元 */
-  DiscountPriceHigh: string | null;
+  DiscountPriceHigh?: string | null;
   /** 后付费云盘原单价，单位：元。 */
-  UnitPrice: number | null;
+  UnitPrice?: number | null;
   /** 计费项目明细列表。 */
   DetailPrices?: DetailPrice[] | null;
 }
@@ -353,42 +353,42 @@ declare interface PrepayPrice {
 /** 描述预付费或后付费云盘的价格。 */
 declare interface Price {
   /** 后付费云盘折扣单价，单位：元。 */
-  UnitPriceDiscount: number | null;
+  UnitPriceDiscount?: number | null;
   /** 预付费云盘预支费用的折扣价，单位：元。 */
   DiscountPrice?: number | null;
   /** 后付费云盘原单价，单位：元。 */
-  UnitPrice: number | null;
+  UnitPrice?: number | null;
   /** 高精度后付费云盘原单价, 单位：元 */
-  UnitPriceHigh: string | null;
+  UnitPriceHigh?: string | null;
   /** 高精度预付费云盘预支费用的原价, 单位：元	。 */
-  OriginalPriceHigh: string | null;
+  OriginalPriceHigh?: string | null;
   /** 预付费云盘预支费用的原价，单位：元。 */
   OriginalPrice?: number | null;
   /** 高精度预付费云盘预支费用的折扣价, 单位：元 */
-  DiscountPriceHigh: string | null;
+  DiscountPriceHigh?: string | null;
   /** 高精度后付费云盘折扣单价, 单位：元 */
-  UnitPriceDiscountHigh: string | null;
+  UnitPriceDiscountHigh?: string | null;
   /** 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。 */
-  ChargeUnit: string | null;
+  ChargeUnit?: string | null;
 }
 
 /** 快照分享信息集合 */
 declare interface SharePermission {
   /** 快照分享的时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 分享的账号Id */
-  AccountId: string;
+  AccountId?: string;
 }
 
 /** 描述了快照的详细信息 */
 declare interface Snapshot {
   /** 快照所在的位置。 */
   Placement?: Placement;
-  /** 是否为跨地域复制的快照。取值范围：true：表示为跨地域复制的快照。false:本地域的快照。 */
-  CopyFromRemote: boolean;
-  /** 快照的状态。取值范围：NORMAL：正常CREATING：创建中ROLLBACKING：回滚中COPYING_FROM_REMOTE：跨地域复制中CHECKING_COPIED：复制校验中TORECYCLE：待回收。 */
+  /** 是否为跨地域复制的快照。取值范围： true：表示为跨地域复制的快照。 false：本地域的快照。 */
+  CopyFromRemote?: boolean;
+  /** 快照的状态。取值范围： NORMAL：正常 CREATING：创建中 ROLLBACKING：回滚中 COPYING_FROM_REMOTE：跨地域复制中 CHECKING_COPIED：复制校验中 TORECYCLE：待回收 */
   SnapshotState?: string;
-  /** 是否为永久快照。取值范围：true：永久快照false：非永久快照。 */
+  /** 是否为永久快照。取值范围： true：永久快照 false：非永久快照 */
   IsPermanent?: boolean;
   /** 快照名称，用户自定义的快照别名。调用[ModifySnapshotAttribute](/document/product/362/15650)可修改此字段。 */
   SnapshotName?: string;
@@ -397,29 +397,29 @@ declare interface Snapshot {
   /** 快照创建进度百分比，快照创建成功后此字段恒为100。 */
   Percent?: number;
   /** 快照关联的镜像列表。 */
-  Images: Image[];
+  Images?: Image[];
   /** 快照当前被共享数。 */
-  ShareReference: number;
+  ShareReference?: number;
   /** 快照类型，目前该项取值可以为PRIVATE_SNAPSHOT或者SHARED_SNAPSHOT */
-  SnapshotType: string;
+  SnapshotType?: string;
   /** 创建此快照的云硬盘大小，单位GB。 */
   DiskSize?: number;
   /** 创建此快照的云硬盘ID。 */
   DiskId?: string;
   /** 快照正在跨地域复制的目的地域，默认取值为[]。 */
-  CopyingToRegions: string[];
-  /** 是否为加密盘创建的快照。取值范围：true：该快照为加密盘创建的false:非加密盘创建的快照。 */
+  CopyingToRegions?: string[];
+  /** 是否为加密盘创建的快照。取值范围： true：该快照为加密盘创建的 false：非加密盘创建的快照 */
   Encrypt?: boolean;
   /** 快照的创建时间。 */
   CreateTime?: string;
   /** 快照关联的镜像个数。 */
-  ImageCount: number;
-  /** 创建此快照的云硬盘类型。取值范围：SYSTEM_DISK：系统盘DATA_DISK：数据盘。 */
+  ImageCount?: number;
+  /** 创建此快照的云硬盘类型。取值范围： SYSTEM_DISK：系统盘 DATA_DISK：数据盘 */
   DiskUsage?: string;
   /** 快照ID。 */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 快照开始共享的时间。 */
-  TimeStartShare: string;
+  TimeStartShare?: string;
   /** 快照绑定的标签列表。 */
   Tags?: Tag[];
 }
@@ -427,13 +427,13 @@ declare interface Snapshot {
 /** 描述快照跨地域复制的结果。 */
 declare interface SnapshotCopyResult {
   /** 复制到目标地域的新快照ID。 */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 指示具体错误信息，成功时为空字符串。 */
-  Message: string;
+  Message?: string;
   /** 错误码，成功时取值为“Success”。 */
-  Code: string;
+  Code?: string;
   /** 跨地复制的目标地域。 */
-  DestinationRegion: string;
+  DestinationRegion?: string;
 }
 
 /** 标签。 */
@@ -763,7 +763,7 @@ declare interface DescribeDiskStoragePoolResponse {
 }
 
 declare interface DescribeDisksRequest {
-  /** 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：表示SSD云硬盘 | CLOUD_HSSD：表示增强型SSD云硬盘。| CLOUD_TSSD：表示极速型云硬盘。)disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。)instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753)过滤。instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。dedicated-cluster-id - Array of String - 是否必填：否 -（过滤条件）按照 CDC 独享集群 ID 进行过滤。cluster-group-id - String - 是否必填：否 -（过滤条件）按照 集群群组 ID 进行过滤。 */
+  /** 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。 disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘) disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。) portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。) project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。 disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。 disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。 disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：表示SSD云硬盘 | CLOUD_HSSD：表示增强型SSD云硬盘。| CLOUD_TSSD：表示极速型云硬盘。) disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。) instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。 zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753)过滤。 instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。 instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。 tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。 tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。 tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 dedicated-cluster-id - Array of String - 是否必填：否 -（过滤条件）按照 CDC 独享集群 ID 进行过滤。 cluster-group-id - String - 是否必填：否 -（过滤条件）按照 集群群组 ID 进行过滤。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。 */
   Limit?: number;

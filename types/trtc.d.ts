@@ -108,6 +108,14 @@ declare interface CloudVod {
   TencentVod?: TencentVod;
 }
 
+/** 渲染移动模式参数，不渲染移动模式时，请勿设置此参数。 */
+declare interface EmulateMobileParams {
+  /** 移动设备类型，0: 手机1: 平板 */
+  MobileDeviceType?: number | null;
+  /** 屏幕方向，0: 竖屏，1: 横屏 */
+  ScreenOrientation?: number | null;
+}
+
 /** MCU混流输出流编码参数 */
 declare interface EncodeParams {
   /** 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。 */
@@ -680,6 +688,8 @@ declare interface STTConfig {
   Language?: string;
   /** 发起模糊识别额外可能替代语言类型,最多填写3种语言类型, 注：Language指定为"zh-dialect" # 中国方言 时，不支持模糊识别，该字段无效 */
   AlternativeLanguage?: string[];
+  /** 自定义参数，联系后台使用 */
+  CustomParam?: string;
   /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。 */
   VadSilenceTime?: number;
 }
@@ -1219,7 +1229,7 @@ declare interface DescribeCloudRecordingResponse {
   /** 云端录制任务的状态信息。Idle：表示当前录制任务空闲中InProgress：表示当前录制任务正在进行中。Exited：表示当前录制任务正在退出的过程中。 */
   Status?: string;
   /** 录制文件信息。 */
-  StorageFileList?: StorageFile[] | null;
+  StorageFileList?: StorageFile[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1895,6 +1905,8 @@ declare interface StartStreamIngestRequest {
   RepeatNum?: number;
   /** 循环播放最大时长,仅支持RepeatNum设置-1时生效，取值范围[1, 10080]，单位分钟。 */
   MaxDuration?: number;
+  /** 音量，取值范围[0, 100]，默认100，表示原音量。 */
+  Volume?: number;
 }
 
 declare interface StartStreamIngestResponse {
@@ -1921,6 +1933,8 @@ declare interface StartWebRecordRequest {
   PublishCdnParams?: McuPublishCdnParam[];
   /** 录制页面资源加载的超时时间，单位：秒。默认值为 0 秒，该值需大于等于 0秒，且小于等于 60秒。录制页面未启用页面加载超时检测时，请勿设置此参数。 */
   ReadyTimeout?: number;
+  /** 渲染移动模式参数；不准备渲染移动模式页面时，请勿设置此参数。 */
+  EmulateMobileParams?: EmulateMobileParams;
 }
 
 declare interface StartWebRecordResponse {
@@ -2012,14 +2026,6 @@ declare interface StopWebRecordResponse {
   RequestId?: string;
 }
 
-declare interface SummarizeTranscriptionRequest {
-}
-
-declare interface SummarizeTranscriptionResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface UpdateAIConversationRequest {
   /** 唯一标识一个任务 */
   TaskId: string;
@@ -2075,8 +2081,10 @@ declare interface UpdateStreamIngestRequest {
   SdkAppId: number;
   /** 任务的唯一Id，在启动任务成功后会返回。 */
   TaskId: string;
-  /** 源流URL【必填】。 */
-  StreamUrl: string;
+  /** 源流URL。 */
+  StreamUrl?: string;
+  /** 音量，取值范围[0, 100]，默认100，表示原音量。 */
+  Volume?: number;
 }
 
 declare interface UpdateStreamIngestResponse {
@@ -2193,8 +2201,6 @@ declare interface Trtc {
   StopStreamIngest(data: StopStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamIngestResponse>;
   /** 停止页面录制 {@link StopWebRecordRequest} {@link StopWebRecordResponse} */
   StopWebRecord(data: StopWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopWebRecordResponse>;
-  /** @deprecated 总结转录文本 {@link SummarizeTranscriptionRequest} {@link SummarizeTranscriptionResponse} */
-  SummarizeTranscription(data?: SummarizeTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<SummarizeTranscriptionResponse>;
   /** 更新AI对话 {@link UpdateAIConversationRequest} {@link UpdateAIConversationResponse} */
   UpdateAIConversation(data: UpdateAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIConversationResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */

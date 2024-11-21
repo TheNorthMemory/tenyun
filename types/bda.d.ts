@@ -367,9 +367,9 @@ declare interface CreateSegmentationTaskRequest {
 
 declare interface CreateSegmentationTaskResponse {
   /** 任务标识ID,可以用与追溯任务状态，查看任务结果 */
-  TaskID: string;
+  TaskID?: string;
   /** 预估处理时间，单位为秒 */
-  EstimatedProcessingTime: number;
+  EstimatedProcessingTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -603,15 +603,15 @@ declare interface SegmentPortraitPicRequest {
 
 declare interface SegmentPortraitPicResponse {
   /** 处理后的图片 base64 数据，透明背景图。 */
-  ResultImage: string | null;
+  ResultImage?: string | null;
   /** 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。这些浮点数代表原图从左上角开始的每一行的每一个像素点，每一个浮点数的值是原图相应像素点位于人体轮廓内的置信度（0-1）转化的灰度值（0-255）。 */
-  ResultMask: string | null;
+  ResultMask?: string | null;
   /** 图片是否存在前景。 */
-  HasForeground: boolean | null;
+  HasForeground?: boolean | null;
   /** 支持将处理过的图片 base64 数据，透明背景图以Url的形式返回值，Url有效期为30分钟。 */
-  ResultImageUrl: string | null;
+  ResultImageUrl?: string | null;
   /** 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。支持以Url形式的返回值；Url有效期为30分钟。 */
-  ResultMaskUrl: string | null;
+  ResultMaskUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

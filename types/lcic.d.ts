@@ -96,6 +96,26 @@ declare interface CustomMsgContent {
   Ext?: string | null;
 }
 
+/** 自定义录制信息 */
+declare interface CustomRecordInfo {
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  StopTime?: number;
+  /** 总时长 */
+  Duration?: number;
+  /** 文件格式 */
+  FileFormat?: string;
+  /** 流url */
+  RecordUrl?: string;
+  /** 流大小 */
+  RecordSize?: number;
+  /** 流ID */
+  VideoId?: string;
+  /** 任务Id */
+  TaskId?: string;
+}
+
 /** 文档信息 */
 declare interface DocumentInfo {
   /** 文档Id */
@@ -1159,6 +1179,24 @@ declare interface DescribeQuestionListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordRequest {
+  /** 学校ID */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId: number;
+}
+
+declare interface DescribeRecordResponse {
+  /** 学校ID */
+  SchoolId?: number;
+  /** 课堂ID */
+  ClassId?: number;
+  /** 录制信息 */
+  RecordInfo?: CustomRecordInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRecordStreamRequest {
   /** 学校ID */
   SdkAppId: number;
@@ -1743,12 +1781,40 @@ declare interface SetWatermarkResponse {
   RequestId?: string;
 }
 
+declare interface StartRecordRequest {
+  /** 学校ID */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId: number;
+}
+
+declare interface StartRecordResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartRoomRequest {
   /** 房间ID。 */
   RoomId: number;
 }
 
 declare interface StartRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopRecordRequest {
+  /** 学校ID */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId: number;
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface StopRecordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1848,6 +1914,8 @@ declare interface Lcic {
   DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
   /** 获取课堂提问列表 {@link DescribeQuestionListRequest} {@link DescribeQuestionListResponse} */
   DescribeQuestionList(data: DescribeQuestionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionListResponse>;
+  /** 查询录制信息 {@link DescribeRecordRequest} {@link DescribeRecordResponse} */
+  DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
   /** 获取流信息 {@link DescribeRecordStreamRequest} {@link DescribeRecordStreamResponse} */
   DescribeRecordStream(data: DescribeRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStreamResponse>;
   /** 获取房间配置信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
@@ -1900,8 +1968,12 @@ declare interface Lcic {
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
   /** 设置水印 {@link SetWatermarkRequest} {@link SetWatermarkResponse} */
   SetWatermark(data: SetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<SetWatermarkResponse>;
+  /** 开启录制 {@link StartRecordRequest} {@link StartRecordResponse} */
+  StartRecord(data: StartRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartRecordResponse>;
   /** 开始房间 {@link StartRoomRequest} {@link StartRoomResponse} */
   StartRoom(data: StartRoomRequest, config?: AxiosRequestConfig): AxiosPromise<StartRoomResponse>;
+  /** 停止录制 {@link StopRecordRequest} {@link StopRecordResponse} */
+  StopRecord(data: StopRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordResponse>;
   /** 文档从房间解绑 {@link UnbindDocumentFromRoomRequest} {@link UnbindDocumentFromRoomResponse} */
   UnbindDocumentFromRoom(data: UnbindDocumentFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDocumentFromRoomResponse>;
   /** 解禁房间被踢用户 {@link UnblockKickedUserRequest} {@link UnblockKickedUserResponse} */

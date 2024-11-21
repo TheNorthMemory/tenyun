@@ -21,9 +21,9 @@ declare interface AccessPolicy {
 /** 账户属性对象 */
 declare interface AccountAttribute {
   /** 属性名 */
-  AttributeName: string;
+  AttributeName?: string;
   /** 属性值 */
-  AttributeValues: string[];
+  AttributeValues?: string[];
 }
 
 /** 描述 EIP 信息 */
@@ -134,7 +134,7 @@ declare interface AddressTemplateGroup {
 
 /** 地址信息 */
 declare interface AddressTemplateItem {
-  /** ipm-xxxxxxxx */
+  /** IP地址模板ID */
   AddressTemplateId?: string;
   /** IP模板名称 */
   AddressTemplateName?: string;
@@ -155,21 +155,21 @@ declare interface AddressTemplateSpecification {
 /** ALG协议类型 */
 declare interface AlgType {
   /** Ftp协议Alg功能是否开启 */
-  Ftp: boolean;
+  Ftp?: boolean;
   /** Sip协议Alg功能是否开启 */
-  Sip: boolean;
+  Sip?: boolean;
 }
 
 /** VPC辅助CIDR信息。 */
 declare interface AssistantCidr {
   /** `VPC`实例`ID`。形如：`vpc-6v2ht8q5` */
-  VpcId: string;
+  VpcId?: string;
   /** 辅助CIDR。形如：`172.16.0.0/16` */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** 辅助CIDR类型（0：普通辅助CIDR，1：容器辅助CIDR），默认都是0。 */
-  AssistantType: number;
+  AssistantType?: number;
   /** 辅助CIDR拆分的子网。 */
-  SubnetSet: Subnet[] | null;
+  SubnetSet?: Subnet[] | null;
 }
 
 /** 时间备份策略详情 */
@@ -403,7 +403,7 @@ declare interface CcnInstance {
   /** 关联实例ID所属大区，例如：ap-guangzhou。 */
   InstanceRegion: string;
   /** 关联实例类型，可选值：`VPC`：私有网络`DIRECTCONNECT`：专线网关`BMVPC`：黑石私有网络`VPNGW`：VPNGW类型 */
-  InstanceType?: string;
+  InstanceType: string;
   /** 备注 */
   Description?: string;
   /** 实例关联的路由表ID。 */
@@ -587,27 +587,29 @@ declare interface CidrForCcn {
 /** 私有网络和基础网络互通设备 */
 declare interface ClassicLinkInstance {
   /** VPC实例ID */
-  VpcId: string;
+  VpcId?: string | null;
   /** 云服务器实例唯一ID */
-  InstanceId: string;
+  InstanceId?: string | null;
 }
 
 /** 冲突资源条目信息。 */
 declare interface ConflictItem {
-  /** 冲突资源的ID */
-  ConfilctId: string;
+  /** 冲突资源的ID。已废弃 */
+  ConfilctId?: string;
   /** 冲突目的资源 */
-  DestinationItem: string;
+  DestinationItem?: string;
+  /** 冲突资源的ID */
+  ConflictId?: string;
 }
 
 /** 冲突资源信息。 */
 declare interface ConflictSource {
   /** 冲突资源ID */
-  ConflictSourceId: string;
+  ConflictSourceId?: string;
   /** 冲突资源 */
-  SourceItem: string;
+  SourceItem?: string;
   /** 冲突资源条目信息 */
-  ConflictItemSet: ConflictItem[];
+  ConflictItemSet?: ConflictItem[];
 }
 
 /** 创建路由添加的指向此通道的路由 */
@@ -709,29 +711,29 @@ declare interface CustomerGatewayVendor {
 /** 云主机实例信息。 */
 declare interface CvmInstance {
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 子网实例ID。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 云主机实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 云主机名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 云主机状态。 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 实例的CPU核数，单位：核。 */
-  CPU: number;
+  CPU?: number;
   /** 实例内存容量，单位：GB。 */
-  Memory: number;
+  Memory?: number;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 实例机型。 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例弹性网卡配额（包含主网卡）。 */
-  EniLimit: number;
+  EniLimit?: number;
   /** 实例弹性网卡内网IP配额（包含主网卡）。 */
-  EniIpLimit: number;
+  EniIpLimit?: number;
   /** 实例已绑定弹性网卡的个数（包含主网卡）。 */
-  InstanceEniCount: number;
+  InstanceEniCount?: number;
 }
 
 /** 默认VPC和子网 */
@@ -793,25 +795,27 @@ declare interface DestinationIpPortTranslationNatRuleDiff {
 /** 描述 DhcpIp 信息 */
 declare interface DhcpIp {
   /** `DhcpIp`的`ID`，是`DhcpIp`的唯一标识。 */
-  DhcpIpId: string;
+  DhcpIpId?: string;
   /** `DhcpIp`所在私有网络`ID`。 */
-  VpcId: string;
+  VpcId?: string;
   /** `DhcpIp`所在子网`ID`。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** `DhcpIp`的名称。 */
-  DhcpIpName: string;
+  DhcpIpName?: string;
   /** IP地址。 */
-  PrivateIpAddress: string;
+  PrivateIpAddress?: string;
   /** 绑定`EIP`。 */
-  AddressIp: string;
+  AddressIp?: string;
   /** `DhcpIp`关联弹性网卡`ID`。 */
-  NetworkInterfaceId: string;
+  NetworkInterfaceId?: string;
   /** 被绑定的实例`ID`。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 状态：`AVAILABLE`：运行中`UNBIND`：未绑定 */
-  State: string;
+  State?: string;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
+  /** 标签键值对。 */
+  TagSet?: Tag[] | null;
 }
 
 /** 专线网关对象。 */
@@ -991,15 +995,15 @@ declare interface FlowLog {
   /** 流日志创建时间。 */
   CreatedTime?: string;
   /** 标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** 是否启用，true-启用，false-停用。 */
-  Enable: boolean;
+  Enable?: boolean;
   /** 消费端类型：cls、ckafka。 */
-  StorageType: string | null;
+  StorageType?: string | null;
   /** 消费端信息，当消费端类型为ckafka时返回。 */
-  FlowLogStorage: FlowLogStorage | null;
+  FlowLogStorage?: FlowLogStorage | null;
   /** 流日志存储ID对应的地域信息。 */
-  CloudLogRegion: string | null;
+  CloudLogRegion?: string | null;
 }
 
 /** 流日志存储信息 */
@@ -1031,13 +1035,13 @@ declare interface GatewayFlowMonitorDetail {
 /** 网关流控带宽信息 */
 declare interface GatewayQos {
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 云服务器内网IP。 */
-  IpAddress: string;
+  IpAddress?: string;
   /** 流控带宽值。 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 描述 HAVIP 信息 */
@@ -1223,31 +1227,31 @@ declare interface InstanceChargePrepaid {
 /** 用于描述实例的统计信息 */
 declare interface InstanceStatistic {
   /** 实例的类型 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例的个数 */
-  InstanceCount: number;
+  InstanceCount?: number;
 }
 
 /** IPV6转换规则 */
 declare interface Ip6Rule {
   /** IPV6转换规则唯一ID，形如rule6-xxxxxxxx */
-  Ip6RuleId: string;
+  Ip6RuleId?: string;
   /** IPV6转换规则名称 */
-  Ip6RuleName: string;
+  Ip6RuleName?: string;
   /** IPV6地址 */
-  Vip6: string;
+  Vip6?: string;
   /** IPV6端口号 */
-  Vport6: number;
+  Vport6?: number;
   /** 协议类型，支持TCP/UDP */
-  Protocol: string;
+  Protocol?: string;
   /** IPV4地址 */
-  Vip: string;
+  Vip?: string;
   /** IPV4端口号 */
-  Vport: number;
+  Vport?: number;
   /** 转换规则状态，限于CREATING,RUNNING,DELETING,MODIFYING */
-  RuleStatus: string;
+  RuleStatus?: string;
   /** 转换规则创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
 }
 
 /** IPV6转换规则 */
@@ -1265,21 +1269,21 @@ declare interface Ip6RuleInfo {
 /** IPV6转换实例信息 */
 declare interface Ip6Translator {
   /** IPV6转换实例唯一ID，形如ip6-xxxxxxxx */
-  Ip6TranslatorId: string;
+  Ip6TranslatorId?: string;
   /** IPV6转换实例名称 */
-  Ip6TranslatorName: string;
+  Ip6TranslatorName?: string;
   /** IPV6地址 */
-  Vip6: string;
+  Vip6?: string;
   /** IPV6转换地址所属运营商 */
-  IspName: string;
+  IspName?: string;
   /** 转换实例状态，限于CREATING,RUNNING,DELETING,MODIFYING */
-  TranslatorStatus: string;
+  TranslatorStatus?: string;
   /** IPV6转换实例创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 绑定的IPV6转换规则数量 */
-  Ip6RuleCount: number;
+  Ip6RuleCount?: number;
   /** IPV6转换规则信息 */
-  IP6RuleSet: Ip6Rule[];
+  IP6RuleSet?: Ip6Rule[];
 }
 
 /** 占用ip的资源信息 */
@@ -1335,7 +1339,7 @@ declare interface IpGeolocationInfo {
   /** 注释信息。目前的填充值为移动接入用户的APN值，如无APN属性则为空 */
   Comment?: string | null;
   /** IP地址 */
-  AddressIp: string | null;
+  AddressIp?: string | null;
 }
 
 /** `IPv6`地址信息。 */
@@ -1352,6 +1356,10 @@ declare interface Ipv6Address {
   IsWanIpBlocked?: boolean;
   /** `IPv6`地址状态：`PENDING`：生产中`MIGRATING`：迁移中`DELETING`：删除中`AVAILABLE`：可用的 */
   State?: string;
+  /** 如果 IPv6地址是 ULA 类型，绑定的公网IP地址。 */
+  PublicIpAddress?: string | null;
+  /** `IPv6`地址的类型: `GUA`, `OTHER`, `ULA` */
+  AddressType?: string | null;
 }
 
 /** IPv6子网段对象。 */
@@ -1365,13 +1373,13 @@ declare interface Ipv6SubnetCidrBlock {
 /** 单项计费价格信息 */
 declare interface ItemPrice {
   /** 按量计费后付费单价，单位：元。 */
-  UnitPrice?: number;
+  UnitPrice?: number | null;
   /** 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。 */
-  ChargeUnit?: string;
+  ChargeUnit?: string | null;
   /** 预付费商品的原价，单位：元。 */
-  OriginalPrice?: number;
+  OriginalPrice?: number | null;
   /** 预付费商品的折扣价，单位：元。 */
-  DiscountPrice?: number;
+  DiscountPrice?: number | null;
 }
 
 /** 本端目的IP端口转换复杂结构 */
@@ -1563,21 +1571,21 @@ declare interface NetDetect {
 /** 网络探测目的IP的验证结果。 */
 declare interface NetDetectIpState {
   /** 探测目的IPv4地址。 */
-  DetectDestinationIp: string;
+  DetectDestinationIp?: string;
   /** 探测结果。0：成功；-1：查询不到路由丢包；-2：外出ACL丢包；-3：IN ACL丢包；-4：其他错误； */
-  State: number;
+  State?: number;
   /** 时延，单位毫秒 */
-  Delay: number;
+  Delay?: number;
   /** 丢包率 */
-  PacketLossRate: number;
+  PacketLossRate?: number;
 }
 
 /** 网络探测验证结果。 */
 declare interface NetDetectState {
   /** 网络探测实例ID。形如：netd-12345678。 */
-  NetDetectId: string;
+  NetDetectId?: string;
   /** 网络探测目的IP验证结果对象数组。 */
-  NetDetectIpStateSet: NetDetectIpState[];
+  NetDetectIpStateSet?: NetDetectIpState[];
 }
 
 /** 网络ACL */
@@ -1877,15 +1885,15 @@ declare interface PrivateNatGatewayLimit {
 /** 描述网络中心每个产品的配额信息 */
 declare interface ProductQuota {
   /** 产品配额ID */
-  QuotaId: string;
+  QuotaId?: string;
   /** 产品配额名称 */
-  QuotaName: string;
+  QuotaName?: string;
   /** 产品当前配额 */
-  QuotaCurrent: number;
+  QuotaCurrent?: number;
   /** 产品配额上限 */
-  QuotaLimit: number;
+  QuotaLimit?: number;
   /** 产品配额是否有地域属性 */
-  QuotaRegion: boolean;
+  QuotaRegion?: boolean;
 }
 
 /** 描述配额信息 */
@@ -1903,9 +1911,9 @@ declare interface Quota {
 /** 安全组被引用信息 */
 declare interface ReferredSecurityGroup {
   /** 安全组实例ID。 */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 引用安全组实例ID（SecurityGroupId）的所有安全组实例ID。 */
-  ReferredSecurityGroupIds: string[];
+  ReferredSecurityGroupIds?: string[];
 }
 
 /** 描述带宽包资源信息的结构 */
@@ -2009,23 +2017,23 @@ declare interface ResourceDashboard {
 /** 资源统计信息 */
 declare interface ResourceStatistics {
   /** Vpc实例ID，例如：vpc-f1xjkw1b。 */
-  VpcId: string;
+  VpcId?: string;
   /** 子网实例ID，例如：subnet-bthucmmy。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 当前已使用的IP总数。 */
-  Ip: number;
+  Ip?: number;
   /** 资源统计信息。 */
-  ResourceStatisticsItemSet: ResourceStatisticsItem[];
+  ResourceStatisticsItemSet?: ResourceStatisticsItem[];
 }
 
 /** 资源统计项。 */
 declare interface ResourceStatisticsItem {
   /** 资源类型。比如，CVM，ENI等。 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 资源名称。 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 资源个数。 */
-  ResourceCount: number;
+  ResourceCount?: number;
 }
 
 /** 路由策略对象 */
@@ -2061,11 +2069,11 @@ declare interface Route {
 /** 路由冲突对象 */
 declare interface RouteConflict {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
-  RouteTableId: string;
+  RouteTableId?: string;
   /** 要检查的与之冲突的目的端 */
-  DestinationCidrBlock: string;
+  DestinationCidrBlock?: string;
   /** 冲突的路由策略列表 */
-  ConflictSet: Route[];
+  ConflictSet?: Route[];
 }
 
 /** 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
@@ -2123,9 +2131,9 @@ declare interface RouteTable {
 /** 路由表关联关系 */
 declare interface RouteTableAssociation {
   /** 子网实例ID。 */
-  SubnetId: string;
+  SubnetId?: string | null;
   /** 路由表实例ID。 */
-  RouteTableId: string;
+  RouteTableId?: string | null;
 }
 
 /** 安全组对象 */
@@ -2151,35 +2159,35 @@ declare interface SecurityGroup {
 /** 安全组关联的实例统计 */
 declare interface SecurityGroupAssociationStatistics {
   /** 安全组实例ID。 */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 云服务器实例数。 */
-  CVM: number;
+  CVM?: number;
   /** MySQL数据库实例数。 */
-  CDB: number;
+  CDB?: number;
   /** 弹性网卡实例数。 */
-  ENI: number;
+  ENI?: number;
   /** 被安全组引用数。 */
-  SG: number;
+  SG?: number;
   /** 负载均衡实例数。 */
-  CLB: number;
+  CLB?: number;
   /** 全量实例的绑定统计。 */
-  InstanceStatistics: InstanceStatistic[];
+  InstanceStatistics?: InstanceStatistic[];
   /** 所有资源的总计数（不包含被安全组引用数）。 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 /** 用户安全组配额限制。 */
 declare interface SecurityGroupLimitSet {
   /** 每个项目每个地域可创建安全组数 */
-  SecurityGroupLimit: number;
+  SecurityGroupLimit?: number;
   /** 安全组下的最大规则数 */
-  SecurityGroupPolicyLimit: number;
+  SecurityGroupPolicyLimit?: number;
   /** 安全组下嵌套安全组规则数 */
-  ReferedSecurityGroupLimit: number;
+  ReferedSecurityGroupLimit?: number;
   /** 单安全组关联实例数 */
-  SecurityGroupInstanceLimit: number;
+  SecurityGroupInstanceLimit?: number;
   /** 实例关联安全组数 */
-  InstanceSecurityGroupLimit: number;
+  InstanceSecurityGroupLimit?: number;
   /** 安全组展开后的规则数限制 */
   SecurityGroupExtendedPolicyLimit?: number;
   /** 被引用的安全组关联CVM、ENI的实例配额 */
@@ -2346,7 +2354,7 @@ declare interface SourceIpTranslationNatRule {
   PrivateIpAddress: string;
   /** 弹性IP地址池 */
   PublicIpAddresses: string[];
-  /** 描述 */
+  /** 规则描述 */
   Description: string;
   /** Snat规则ID */
   NatGatewaySnatId?: string;
@@ -2505,23 +2513,23 @@ declare interface Tags {
 /** 参数模板配额 */
 declare interface TemplateLimit {
   /** 参数模板IP地址成员配额。 */
-  AddressTemplateMemberLimit: number;
+  AddressTemplateMemberLimit?: number;
   /** 参数模板IP地址组成员配额。 */
-  AddressTemplateGroupMemberLimit: number;
+  AddressTemplateGroupMemberLimit?: number;
   /** 参数模板I协议端口成员配额。 */
-  ServiceTemplateMemberLimit: number;
+  ServiceTemplateMemberLimit?: number;
   /** 参数模板协议端口组成员配额。 */
-  ServiceTemplateGroupMemberLimit: number;
+  ServiceTemplateGroupMemberLimit?: number;
 }
 
 /** 流量描述。 */
 declare interface TrafficFlow {
   /** 实际流量，单位为 字节 */
-  Value: number;
+  Value?: number;
   /** 格式化后的流量，单位见参数 FormatUnit */
-  FormatValue: number | null;
+  FormatValue?: number | null;
   /** 格式化后流量的单位 */
-  FormatUnit: string | null;
+  FormatUnit?: string | null;
 }
 
 /** 流量包信息描述类型 */
@@ -2593,13 +2601,13 @@ declare interface TranslationNatRuleDiff {
   /** 转发规则映射`IP`,当转发规则类型为四层时为`IP`池 */
   TranslationIp: string;
   /** 转发规则描述。 */
-  Description: string | null;
+  Description: string;
   /** 旧转发规则映射`IP`,当转发规则类型为四层时为`IP`池 */
   OldTranslationIp: string;
   /** 新转发规则源`IP`,当转发规则类型为三层时有效 */
-  OriginalIp?: string | null;
+  OriginalIp?: string;
   /** 旧转发规则源`IP`,当转发规则类型为三层时有效 */
-  OldOriginalIp?: string | null;
+  OldOriginalIp?: string;
 }
 
 /** 私网网关Snat转发规则入参 */
@@ -2611,33 +2619,33 @@ declare interface TranslationNatRuleInput {
   /** 转换`IP`,当转换规则类型为四层时为`IP`池。 */
   TranslationIp: string;
   /** 转换规则描述。 */
-  Description: string | null;
+  Description: string;
   /** 源`IP`,当转换规则类型为三层时有效。 */
-  OriginalIp?: string | null;
+  OriginalIp?: string;
 }
 
 /** 共享流量包用量明细 */
 declare interface UsedDetail {
   /** 流量包唯一ID */
-  TrafficPackageId: string;
+  TrafficPackageId?: string;
   /** 流量包名称 */
-  TrafficPackageName: string | null;
+  TrafficPackageName?: string | null;
   /** 流量包总量 */
-  TotalAmount: TrafficFlow;
+  TotalAmount?: TrafficFlow;
   /** 本次抵扣 */
-  Deduction: TrafficFlow;
+  Deduction?: TrafficFlow;
   /** 本次抵扣后剩余量 */
-  RemainingAmount: TrafficFlow;
+  RemainingAmount?: TrafficFlow;
   /** 抵扣时间 */
-  Time: string;
+  Time?: string;
   /** 资源类型。可能的值: CVM, LB, NAT, HAVIP, EIP */
-  ResourceType: string;
+  ResourceType?: string;
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源名称 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 流量包到期时间 */
-  Deadline: string;
+  Deadline?: string;
 }
 
 /** 私有网络(VPC)对象。 */
@@ -2673,47 +2681,47 @@ declare interface VpcInfo {
 /** 终端节点服务的服务白名单对象详情。 */
 declare interface VpcEndPointServiceUser {
   /** AppId。 */
-  Owner: number;
+  Owner?: number;
   /** Uin。 */
-  UserUin: string;
+  UserUin?: string;
   /** 描述信息。 */
-  Description: string;
+  Description?: string;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 终端节点服务ID。 */
-  EndPointServiceId: string;
+  EndPointServiceId?: string;
 }
 
 /** VPC内网IPv6对象。 */
 declare interface VpcIpv6Address {
   /** `VPC`内`IPv6`地址。 */
-  Ipv6Address: string;
+  Ipv6Address?: string;
   /** 所属子网 `IPv6` `CIDR`。 */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** `IPv6`类型。 */
-  Ipv6AddressType: string;
+  Ipv6AddressType?: string;
   /** `IPv6`申请时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
 }
 
 /** 私有网络配额 */
 declare interface VpcLimit {
   /** 私有网络配额描述 */
-  LimitType: string;
+  LimitType?: string;
   /** 私有网络配额值 */
-  LimitValue: number;
+  LimitValue?: number;
 }
 
 /** VPC内网IP对象。 */
 declare interface VpcPrivateIpAddress {
   /** `VPC`内网`IP`。 */
-  PrivateIpAddress: string;
+  PrivateIpAddress?: string;
   /** 所属子网`CIDR`。 */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** 内网`IP`类型。 */
-  PrivateIpAddressType: string;
+  PrivateIpAddressType?: string;
   /** `IP`申请时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
 }
 
 /** Vpc任务结果详细信息。 */
@@ -2971,6 +2979,8 @@ declare interface AllocateAddressesRequest {
   AddressType?: string;
   /** Anycast发布域。已开通Anycast公网加速白名单的用户，可选值：ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）ANYCAST_ZONE_OVERSEAS：境外发布域[已废弃] ANYCAST_ZONE_A：发布域A（已更新为全球发布域）[已废弃] ANYCAST_ZONE_B：发布域B（已更新为全球发布域）默认值：ANYCAST_ZONE_OVERSEAS。 */
   AnycastZone?: string;
+  /** 指定IP地址申请EIP，每个账户每个月只有三次配额 */
+  VipCluster?: string[];
   /** [已废弃] AnycastEIP不再区分是否负载均衡。原参数说明如下：AnycastEIP是否用于绑定负载均衡。已开通Anycast公网加速白名单的用户，可选值：TRUE：AnycastEIP可绑定对象为负载均衡FALSE：AnycastEIP可绑定对象为云服务器、NAT网关、高可用虚拟IP等默认值：FALSE。 */
   ApplicableForCLB?: boolean;
   /** 需要关联的标签列表。 */
@@ -3553,6 +3563,8 @@ declare interface CreateDhcpIpRequest {
   DhcpIpName: string;
   /** 新申请的内网IP地址个数。总数不能超过64个，为了兼容性，当前参数必填。 */
   SecondaryPrivateIpAddressCount?: number;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateDhcpIpResponse {
@@ -3643,6 +3655,8 @@ declare interface CreateHaVipRequest {
   NetworkInterfaceId?: string;
   /** 是否开启`HAVIP`漂移时子机或网卡范围的校验。默认不开启。 */
   CheckAssociate?: boolean;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateHaVipResponse {
@@ -3705,6 +3719,8 @@ declare interface CreateLocalGatewayRequest {
   VpcId: string;
   /** CDC实例ID。 */
   CdcId: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateLocalGatewayResponse {
@@ -3791,6 +3807,8 @@ declare interface CreateNetDetectRequest {
   NextHopDestination?: string;
   /** 网络探测描述。 */
   NetDetectDescription?: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateNetDetectResponse {
@@ -3851,7 +3869,7 @@ declare interface CreateNetworkInterfaceRequest {
   SubnetId: string;
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
-  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。 */
+  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。配额数查询：[DescribeVpcLimits](https://cloud.tencent.com/document/api/215/42942)。 */
   SecondaryPrivateIpAddressCount?: number;
   /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
   QosLevel?: string;
@@ -5315,6 +5333,8 @@ declare interface DescribeCrossBorderComplianceRequest {
   UniformSocialCreditCode?: string;
   /** （模糊查询）法定代表人。 */
   LegalPerson?: string;
+  /** （精确查询）法人身份证号。 */
+  LegalPersonId?: string;
   /** （模糊查询）发证机关。 */
   IssuingAuthority?: string;
   /** （模糊查询）营业执照住所。 */
@@ -5345,9 +5365,9 @@ declare interface DescribeCrossBorderComplianceRequest {
 
 declare interface DescribeCrossBorderComplianceResponse {
   /** 合规化审批单列表。 */
-  CrossBorderComplianceSet: CrossBorderCompliance[];
+  CrossBorderComplianceSet?: CrossBorderCompliance[];
   /** 合规化审批单总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5671,7 +5691,7 @@ declare interface DescribeIp6TranslatorQuotaResponse {
 declare interface DescribeIp6TranslatorsRequest {
   /** IPV6转换实例唯一ID数组，形如ip6-xxxxxxxx */
   Ip6TranslatorIds?: string[];
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`Ip6TranslatorIds`和`Filters`。详细的过滤条件如下： ip6-translator-id - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的唯一ID过滤,形如ip6-xxxxxxx。 ip6-translator-vip6 - String - 是否必填：否 - （过滤条件）按照IPV6地址过滤。不支持模糊过滤。 ip6-translator-name - String - 是否必填：否 - （过滤条件）按照IPV6转换实例名称过滤。不支持模糊过滤。 ip6-translator-status - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的状态过滤。状态取值范围为"CREATING","RUNNING","DELETING","MODIFYING" */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`Ip6TranslatorIds`和`Filters`。详细的过滤条件如下： ip6-translator-id - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的唯一ID过滤,形如ip6-xxxxxxx。 ip6-translator-vip6 - String - 是否必填：否 - （过滤条件）按照IPV6地址过滤。不支持模糊过滤。 ip6-translator-name - String - 是否必填：否 - （过滤条件）按照IPV6转换实例名称过滤。不支持模糊过滤。 ip6-translator-status - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的状态过滤。状态取值范围为"CREATING","RUNNING","DELETING","MODIFYING"。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
   Offset?: number;
@@ -5873,15 +5893,15 @@ declare interface DescribeNetworkAclQuintupleEntriesRequest {
   Offset?: number;
   /** 返回数量，默认为20，最小值为1，最大值为100。 */
   Limit?: number;
-  /** 过滤条件，参数不支持同时指定`HaVipIds`和`Filters`。protocol - String - 协议，形如：`TCP`。description - String - 描述。destination-cidr - String - 目的CIDR， 形如：'192.168.0.0/24'。source-cidr- String - 源CIDR， 形如：'192.168.0.0/24'。action - String - 动作，形如ACCEPT或DROP。network-acl-quintuple-entry-id - String - 五元组唯一ID，形如：'acli45-ahnu4rv5'。network-acl-direction - String - 方向，形如：'INGRESS'或'EGRESS'。 */
+  /** 过滤条件，参数不支持同时指定`NetworkAclId`和`Filters`。protocol - String - 协议，形如：`TCP`。description - String - 描述。destination-cidr - String - 目的CIDR， 形如：'192.168.0.0/24'。source-cidr- String - 源CIDR， 形如：'192.168.0.0/24'。action - String - 动作，形如ACCEPT或DROP。network-acl-quintuple-entry-id - String - 五元组唯一ID，形如：'acli45-ahnu4rv5'。network-acl-direction - String - 方向，形如：'INGRESS'或'EGRESS'。 */
   Filters?: Filter[];
 }
 
 declare interface DescribeNetworkAclQuintupleEntriesResponse {
   /** 网络ACL条目列表（NetworkAclTuple5Entry） */
-  NetworkAclQuintupleSet: NetworkAclQuintupleEntry[];
+  NetworkAclQuintupleSet?: NetworkAclQuintupleEntry[];
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6145,6 +6165,8 @@ declare interface DescribeRouteTablesRequest {
   Offset?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: string;
+  /** 是否需要获取路由策略信息，默认获取，当控制台不需要拉取路由策略信息时，改为False。 */
+  NeedRouterInfo?: boolean;
 }
 
 declare interface DescribeRouteTablesResponse {
@@ -6371,9 +6393,9 @@ declare interface DescribeSnapshotPoliciesRequest {
 
 declare interface DescribeSnapshotPoliciesResponse {
   /** 快照策略。 */
-  SnapshotPolicySet: SnapshotPolicy[];
+  SnapshotPolicySet?: SnapshotPolicy[];
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6589,7 +6611,7 @@ declare interface DescribeVpcEndPointServiceWhiteListResponse {
 }
 
 declare interface DescribeVpcInstancesRequest {
-  /** 过滤条件，参数不支持同时指定RouteTableIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。instance-id - String - （过滤条件）云主机实例ID。instance-name - String - （过滤条件）云主机名称。 */
+  /** vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。instance-id - String - （过滤条件）云主机实例ID。instance-name - String - （过滤条件）云主机名称。 */
   Filters: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6709,7 +6731,7 @@ declare interface DescribeVpcTaskResultResponse {
 declare interface DescribeVpcsRequest {
   /** VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。 */
   VpcIds?: string[];
-  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调。 */
+  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联通。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;
@@ -7466,6 +7488,18 @@ declare interface ModifyBandwidthPackageAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBandwidthPackageBandwidthRequest {
+  /** 带宽包限速大小。单位：Mbps。 */
+  InternetMaxBandwidth: number;
+  /** 共享带宽包ID */
+  BandwidthPackageId: string;
+}
+
+declare interface ModifyBandwidthPackageBandwidthResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCcnAttachedInstancesAttributeRequest {
   /** CCN实例ID。形如：ccn-f49l6u0z。 */
   CcnId: string;
@@ -7991,7 +8025,7 @@ declare interface ModifyServiceTemplateAttributeRequest {
   ServiceTemplateId: string;
   /** 协议端口模板名称。 */
   ServiceTemplateName?: string;
-  /** 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。 */
+  /** 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。协议后面的端口部分长度不能超过128个字符。 */
   Services?: string[];
   /** 支持添加备注的协议端口信息，支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。 */
   ServicesExtra?: ServicesInfo[];
@@ -8408,7 +8442,7 @@ declare interface ReplaceCcnRouteTableInputPolicysRequest {
   /** 云联网路由表ID。 */
   RouteTableId: string;
   /** 新的路由接收策略。 */
-  Policys?: CcnRouteTableInputPolicy[];
+  Policys: CcnRouteTableInputPolicy[];
 }
 
 declare interface ReplaceCcnRouteTableInputPolicysResponse {
@@ -9301,6 +9335,8 @@ declare interface Vpc {
   ModifyAssistantCidr(data: ModifyAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssistantCidrResponse>;
   /** 修改带宽包属性 {@link ModifyBandwidthPackageAttributeRequest} {@link ModifyBandwidthPackageAttributeResponse} */
   ModifyBandwidthPackageAttribute(data: ModifyBandwidthPackageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBandwidthPackageAttributeResponse>;
+  /** 调整共享带宽包带宽 {@link ModifyBandwidthPackageBandwidthRequest} {@link ModifyBandwidthPackageBandwidthResponse} */
+  ModifyBandwidthPackageBandwidth(data: ModifyBandwidthPackageBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBandwidthPackageBandwidthResponse>;
   /** 修改CCN关联实例属性 {@link ModifyCcnAttachedInstancesAttributeRequest} {@link ModifyCcnAttachedInstancesAttributeResponse} */
   ModifyCcnAttachedInstancesAttribute(data: ModifyCcnAttachedInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnAttachedInstancesAttributeResponse>;
   /** 修改CCN属性 {@link ModifyCcnAttributeRequest} {@link ModifyCcnAttributeResponse} */

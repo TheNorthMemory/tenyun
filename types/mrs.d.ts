@@ -594,6 +594,8 @@ declare interface ChemicalProductInfoName {
   EnName?: string | null;
   /** 拼音 */
   Pinyin?: string | null;
+  /** 品牌名 */
+  BrandName?: string;
 }
 
 /** 药物过量 */
@@ -1947,9 +1949,9 @@ declare interface LymphTotal {
   /** 项目名称 */
   Name?: string | null;
   /** 转移数量 */
-  TransferNum?: string | null;
+  TransferNum?: number | null;
   /** 总数量 */
-  Total?: string | null;
+  Total?: number | null;
   /** 原文 */
   Src?: string | null;
   /** 索引 */
@@ -2256,6 +2258,8 @@ declare interface NormPart {
   Upper?: string | null;
   /** 部位详情 */
   PartDetail?: PartDesc | null;
+  /** 部位详情 */
+  PartDetailList?: PartDesc[] | null;
 }
 
 /** 大小 */
@@ -3809,6 +3813,8 @@ declare interface ImageMaskAsyncRequest {
   Image: ImageInfo;
   /** 图片脱敏选项, 不传默认都脱敏 */
   MaskFlag?: ImageMaskFlags;
+  /** 是否自动矫正图片方向 */
+  AutoFixImageDirection?: boolean;
 }
 
 declare interface ImageMaskAsyncResponse {
@@ -3823,6 +3829,8 @@ declare interface ImageMaskRequest {
   Image: ImageInfo;
   /** 图片脱敏选项, 不传默认都脱敏 */
   MaskFlag?: ImageMaskFlags;
+  /** 是否自动矫正图片方向 */
+  AutoFixImageDirection?: boolean;
 }
 
 declare interface ImageMaskResponse {
@@ -3869,9 +3877,9 @@ declare interface ImageToObjectRequest {
 
 declare interface ImageToObjectResponse {
   /** 报告结构化结果 */
-  Template?: Template | null;
+  Template?: Template;
   /** 多级分类结果 */
-  TextTypeList?: TextType[] | null;
+  TextTypeList?: TextType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -26,7 +26,7 @@ declare interface AssociationItem {
 
 /** 监听器绑定的后端服务的详细信息 */
 declare interface Backend {
-  /** 后端服务的类型，可取：CVM、ENI、CCN */
+  /** 后端服务的类型，可取：CVM、ENI、CCN、EVM、GLOBALROUTE、NAT、SRV等 */
   Type?: string;
   /** 后端服务的唯一 ID，如 ins-abcd1234 */
   InstanceId?: string;
@@ -648,7 +648,7 @@ declare interface LoadBalancer {
   LoadBalancerId?: string;
   /** 负载均衡实例的名称。 */
   LoadBalancerName?: string;
-  /** 负载均衡实例的网络类型：OPEN：公网属性， INTERNAL：内网属性。 */
+  /** 负载均衡实例的网络类型：OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均衡，可通过绑定EIP出公网，具体可参考EIP文档。 */
   LoadBalancerType?: string;
   /** 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。 */
   Forward?: number;
@@ -764,7 +764,7 @@ declare interface LoadBalancerDetail {
   LoadBalancerId?: string;
   /** 负载均衡实例的名称。 */
   LoadBalancerName?: string;
-  /** 负载均衡实例的网络类型：OPEN：公网属性，INTERNAL：内网属性。 */
+  /** 负载均衡实例的网络类型：OPEN：公网属性，INTERNAL：内网属性；对于内网属性的负载均衡，可通过绑定EIP出公网，具体可参考EIP文档。 */
   LoadBalancerType?: string | null;
   /** 负载均衡实例的状态，包括0：创建中，1：正常运行。 */
   Status?: number | null;
@@ -1146,7 +1146,7 @@ declare interface Target {
   Port: number | null;
   /** 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）；作为入参时，目前本参数暂不生效。 */
   Type?: string | null;
-  /** 绑定CVM时需要传入此参数，代表CVM的唯一 ID，可通过 DescribeInstances 接口返回字段中的 InstanceId 字段获取。表示绑定主网卡主IP。注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。 */
+  /** 绑定CVM时需要传入此参数，代表CVM的唯一 ID，可通过 DescribeInstances 接口返回字段中的 InstanceId 字段获取。表示绑定主网卡主IPv4地址；以下场景都不支持指定InstanceId：绑定非CVM，绑定CVM上的辅助网卡IP，通过跨域2.0绑定CVM，以及绑定CVM的IPv6地址等。注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。 */
   InstanceId?: string | null;
   /** 后端服务修改后的转发权重，取值范围：[0, 100]，默认为 10。此参数的优先级高于[RsWeightRule](https://cloud.tencent.com/document/api/214/30694)中的Weight参数，即最终的权重值以此Weight参数值为准，仅当此Weight参数为空时，才以RsWeightRule中的Weight参数为准。 */
   Weight?: number;
@@ -1229,17 +1229,19 @@ declare interface TargetGroupInstance {
 /** 描述一个Target的健康信息 */
 declare interface TargetHealth {
   /** Target的内网IP */
-  IP: string;
+  IP?: string;
   /** Target绑定的端口 */
-  Port: number;
+  Port?: number;
   /** 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。 */
-  HealthStatus: boolean;
+  HealthStatus?: boolean;
   /** Target的实例ID，如 ins-12345678 */
-  TargetId: string;
-  /** 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。 */
-  HealthStatusDetail: string;
+  TargetId?: string;
+  /** 当前健康状态的详细信息。如：Alive、Dead、Unknown、Close。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知，Close表示健康检查关闭或监听器状态停止。 */
+  HealthStatusDetail?: string;
   /** (**该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情**) 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。 */
   HealthStatusDetial?: string;
+  /** 目标组唯一ID。 */
+  TargetGroupId?: string | null;
 }
 
 /** 负载均衡实例所绑定的后端服务的信息，包括所属地域、所属网络。 */
@@ -1393,7 +1395,7 @@ declare interface CloneLoadBalancerRequest {
   ZoneId?: string;
   /** 仅适用于公网负载均衡。负载均衡的网络计费模式。 */
   InternetAccessible?: InternetAccessible;
-  /** 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。示例值：CMCC */
+  /** 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。 */
   VipIsp?: string;
   /** 指定Vip申请负载均衡。 */
   Vip?: string;
@@ -1511,9 +1513,9 @@ declare interface CreateLoadBalancerRequest {
   AddressIPVersion?: string;
   /** 创建负载均衡的个数，默认值 1。 */
   Number?: number;
-  /** 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。目前仅广州、上海、南京、北京、成都、深圳金融、中国香港、首尔、法兰克福、新加坡地域的 IPv4 版本的 CLB 支持主备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。 */
+  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。目前仅广州、上海、南京、北京、成都、深圳金融、中国香港、首尔、法兰克福、新加坡地域的 IPv4 版本的 CLB 支持主备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】 */
   MasterZoneId?: string;
-  /** 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。 */
+  /** 仅适用于公网且IP版本为IPv4的负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。 */
   ZoneId?: string;
   /** 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。 */
   InternetAccessible?: InternetAccessible;
@@ -1539,7 +1541,7 @@ declare interface CreateLoadBalancerRequest {
   SnatIps?: SnatIp[];
   /** Stgw独占集群的标签。 */
   ClusterTag?: string;
-  /** 仅适用于公网负载均衡。设置跨可用区容灾时的备可用区ID，例如 100001 或 ap-guangzhou-1注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。 */
+  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的备可用区ID，例如 100001 或 ap-guangzhou-1注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】 */
   SlaveZoneId?: string;
   /** EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP。 */
   EipAddressId?: string;
@@ -2087,7 +2089,7 @@ declare interface DescribeLoadBalancersDetailRequest {
   Offset?: number;
   /** 选择返回的Fields列表，系统仅会返回Fileds中填写的字段，可填写的字段详情请参见LoadBalancerDetail。若未在Fileds填写相关字段，则此字段返回null。Fileds中默认添加LoadBalancerId和LoadBalancerName字段。 */
   Fields?: string[];
-  /** 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight、ListenerId、Protocol、Port、LocationId、Domain、Url等Fields时，必选选择导出目标组的Target或者非目标组Target，值范围NODE、GROUP。 */
+  /** 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight、ListenerId、Protocol、Port、LocationId、Domain、Url等Fields时，必选选择导出目标组的Target或者非目标组Target，取值范围NODE、GROUP。 */
   TargetType?: string;
   /** 查询负载均衡详细信息列表条件，详细的过滤条件如下： loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 负载均衡ID 过滤，如："lb-12345678"。 project-id - String - 是否必填：否 - （过滤条件）按照 项目ID 过滤，如："0","123"。 network - String - 是否必填：否 - （过滤条件）按照 负载均衡网络类型 过滤，如："Public","Private"。 vip - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip 过滤，如："1.1.1.1","2204::22:3"。 target-ip - String - 是否必填：否 - （过滤条件）按照 后端目标内网Ip 过滤，如："1.1.1.1","2203::214:4"。 vpcid - String - 是否必填：否 - （过滤条件）按照 负载均衡所属vpcId 过滤，如："vpc-12345678"。 zone - String - 是否必填：否 - （过滤条件）按照 负载均衡所属的可用区 过滤，如："ap-guangzhou-1"。 tag-key - String - 是否必填：否 - （过滤条件）按照 负载均衡标签的标签键 过滤，如："name"。 tag:* - String - 是否必填：否 - （过滤条件）按照 负载均衡的标签 过滤，':' 后面跟的是标签键。如：过滤标签键name，标签值zhangsan,lisi，{"Name": "tag:name","Values": ["zhangsan", "lisi"]}。 fuzzy-search - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip，负载均衡名称 模糊搜索，如："1.1"。 */
   Filters?: Filter[];
@@ -2300,6 +2302,8 @@ declare interface DescribeTaskStatusResponse {
   Status?: number;
   /** 由负载均衡实例唯一 ID 组成的数组。 */
   LoadBalancerIds?: string[] | null;
+  /** 辅助描述信息，如失败原因等。 */
+  Message?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2,18 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 查询文件翻译任务 */
+/** 文件翻译任务结果 */
 declare interface GetFileTranslateData {
   /** 任务ID */
   TaskId?: string;
-  /** 状态 */
+  /** 任务状态- init：任务已初始化- wait：任务等待执行- success：任务执行成功- fail：任务执行失败 */
   Status?: string;
   /** 文件数据，目标文件必须小于50M，否则请通过回调方式请求文件翻译接口 */
   FileData?: string | null;
   /** 错误提示 */
   Message?: string | null;
-  /** 翻译进度 */
+  /** 任务进度 */
   Progress?: number;
+  /** 本次翻译消耗的字符数 */
+  UsedAmount?: number;
 }
 
 /** 图片翻译结果 */
@@ -190,6 +192,8 @@ declare interface TextTranslateBatchResponse {
   Target?: string;
   /** 翻译后的文本列表 */
   TargetTextList?: string[];
+  /** 本次翻译消耗的字符数 */
+  UsedAmount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -218,6 +222,8 @@ declare interface TextTranslateResponse {
   Source?: string;
   /** 目标语言，详见入参Target */
   Target?: string;
+  /** 本次翻译消耗的字符数 */
+  UsedAmount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

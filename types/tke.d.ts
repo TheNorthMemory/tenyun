@@ -74,6 +74,8 @@ declare interface CreateNativeNodePoolParam {
   DataDisks?: DataDisk[];
   /** 节点池ssh公钥id数组 */
   KeyIds?: string[];
+  /** 节点池类型 */
+  MachineType?: string;
 }
 
 /** 描述了k8s节点数据盘相关配置与信息。 */
@@ -378,6 +380,8 @@ declare interface NativeNodeInfo {
   SubnetId?: string | null;
   /** OS的名称 */
   OsImage?: string | null;
+  /** **原生节点对应的实例 ID**- ins-q47ofw6 表示这个实例是一个 CVM 的实例- eks-f8mvyaep 表示这个实例是一个 CXM 的实例 */
+  InstanceId?: string | null;
 }
 
 /** 原生节点池信息 */
@@ -424,6 +428,8 @@ declare interface NativeNodePoolInfo {
   InternetAccessible?: InternetAccessible | null;
   /** 原生节点池数据盘 */
   DataDisks?: DataDisk[] | null;
+  /** 原生节点机型 Native, NativeCVM */
+  MachineType?: string | null;
 }
 
 /** 节点统计列表 */
@@ -824,6 +830,46 @@ declare interface ModifyNodePoolRequest {
 }
 
 declare interface ModifyNodePoolResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RebootMachinesRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点名字列表，一次请求，传入节点数量上限为100个 */
+  MachineNames: string[];
+  /** 实例的关闭模式。取值范围：soft_first：表示在正常关闭失败后进行强制关闭hard：直接强制关闭soft：仅软关机默认取值：soft。 */
+  StopType?: string;
+}
+
+declare interface RebootMachinesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartMachinesRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点名字列表，一次请求，传入节点数量上限为100个 */
+  MachineNames: string[];
+}
+
+declare interface StartMachinesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopMachinesRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点名字列表，一次请求，传入节点数量上限为100个 */
+  MachineNames: string[];
+  /** 实例的关闭模式。取值范围：soft_first：表示在正常关闭失败后进行强制关闭hard：直接强制关闭soft：仅软关机 */
+  StopType?: string;
+}
+
+declare interface StopMachinesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2162,7 +2208,7 @@ declare namespace V20180525 {
   /** 描述了实例登录相关配置与信息。 */
   interface LoginSettings {
     /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。 */
-    Password?: string | null;
+    Password?: string;
     /** 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。 */
     KeyIds?: string[] | null;
     /** 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为true。取值范围：true：表示保持镜像的登录设置false：表示不保持镜像的登录设置默认取值：false。 */
@@ -3666,7 +3712,7 @@ declare namespace V20180525 {
     IsExtranet?: boolean;
     /** 设置域名 */
     Domain?: string;
-    /** 使用的安全组，只有外网访问需要传递（开启外网访问时必传） */
+    /** 使用的安全组，只有外网访问需要传递（开启外网访问且不使用已有clb时必传） */
     SecurityGroup?: string;
     /** 创建lb参数，只有外网访问需要设置，是一个json格式化后的字符串：{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":200},"VipIsp":"","BandwidthPackageId":""}。各个参数意义：InternetAccessible.InternetChargeType含义：TRAFFIC_POSTPAID_BY_HOUR按流量按小时后计费;BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;InternetAccessible.BANDWIDTH_PACKAGE 按带宽包计费。InternetMaxBandwidthOut含义：最大出带宽，单位Mbps，范围支持0到2048，默认值10。VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费BANDWIDTH_PACKAGE。BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式InternetAccessible.InternetChargeType只支持按带宽包计费BANDWIDTH_PACKAGE。 */
     ExtensiveParameters?: string;
@@ -4420,9 +4466,9 @@ declare namespace V20180525 {
   interface DeleteClusterVirtualNodePoolRequest {
     /** 集群ID */
     ClusterId: string;
-    /** 虚拟节点池ID列表 */
+    /** 超级节点池ID列表 */
     NodePoolIds: string[];
-    /** 是否强制删除，在虚拟节点上有pod的情况下，如果选择非强制删除，则删除会失败 */
+    /** 是否强制删除，在超级节点上有pod的情况下，如果选择非强制删除，则删除会失败 */
     Force?: boolean;
   }
 
@@ -7238,10 +7284,12 @@ declare namespace V20180525 {
     ClusterId: string;
     /** addon名称 */
     AddonName: string;
-    /** addon版本（不传默认不更新） */
+    /** addon版本（不传默认不更新，不传AddonVersion时RawValues必传） */
     AddonVersion?: string;
-    /** addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取） */
+    /** addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取，不传RawValues时AddonVersion必传）） */
     RawValues?: string;
+    /** addon参数的更新策略，支持replace和merge两种策略，默认值为merge，兼容旧版本API。replace：使用新RawValues全量替换addon原RawValues，merge：根据新RawValues新增或更新addon原RawValues中对应参数。 */
+    UpdateStrategy?: string;
   }
 
   interface UpdateAddonResponse {
@@ -7493,6 +7541,12 @@ declare interface Tke {
   ModifyHealthCheckPolicy(data: ModifyHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHealthCheckPolicyResponse>;
   /** 更新 TKE 节点池 {@link ModifyNodePoolRequest} {@link ModifyNodePoolResponse} */
   ModifyNodePool(data: ModifyNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolResponse>;
+  /** 重启原生节点实例 {@link RebootMachinesRequest} {@link RebootMachinesResponse} */
+  RebootMachines(data: RebootMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootMachinesResponse>;
+  /** 启动原生节点实例 {@link StartMachinesRequest} {@link StartMachinesResponse} */
+  StartMachines(data: StartMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<StartMachinesResponse>;
+  /** 关闭原生节点实例 {@link StopMachinesRequest} {@link StopMachinesResponse} */
+  StopMachines(data: StopMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<StopMachinesResponse>;
   /** 获取集群RBAC管理员角色 {@link V20180525.AcquireClusterAdminRoleRequest} {@link V20180525.AcquireClusterAdminRoleResponse} */
   AcquireClusterAdminRole(data: V20180525.AcquireClusterAdminRoleRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.AcquireClusterAdminRoleResponse>;
   /** 给集群增加ClusterCIDR {@link V20180525.AddClusterCIDRRequest} {@link V20180525.AddClusterCIDRResponse} */

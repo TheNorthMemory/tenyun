@@ -598,6 +598,8 @@ declare interface Instance {
   InstanceRestrictState?: string;
   /** 创建实例后自动执行TAT命令的调用ID。 */
   InitInvocationId?: string;
+  /** 实例违规详情。 */
+  InstanceViolationDetail?: InstanceViolationDetail | null;
 }
 
 /** 描述了实例的计费模式 */
@@ -666,6 +668,18 @@ declare interface InstanceTrafficPackage {
   InstanceId?: string;
   /** 流量包详情列表。 */
   TrafficPackageSet?: TrafficPackage[];
+}
+
+/** 实例违规详情。 */
+declare interface InstanceViolationDetail {
+  /** 来源：RESTRICT：封禁、FREEZW：冻结 */
+  Source?: string | null;
+  /** 是否允许自助解封：1是，2否 */
+  State?: string | null;
+  /** 违规类型 */
+  Reason?: string | null;
+  /** 违规内容（URL、关联域名） */
+  Content?: string | null;
 }
 
 /** 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。 */

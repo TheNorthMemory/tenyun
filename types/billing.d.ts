@@ -2281,31 +2281,31 @@ declare interface DescribeAccountBalanceRequest {
 
 declare interface DescribeAccountBalanceResponse {
   /** 接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分 */
-  Balance: number;
+  Balance?: number;
   /** 查询的用户Uin */
-  Uin: number;
+  Uin?: number;
   /** 当前真实可用余额,单位 分 */
-  RealBalance: number;
+  RealBalance?: number;
   /** 现金账户余额,单位 分 */
-  CashAccountBalance: number;
+  CashAccountBalance?: number;
   /** 收益转入账户余额,单位 分 */
-  IncomeIntoAccountBalance: number;
+  IncomeIntoAccountBalance?: number;
   /** 赠送账户余额,单位 分 */
-  PresentAccountBalance: number;
+  PresentAccountBalance?: number;
   /** 冻结金额,单位 分 */
-  FreezeAmount: number;
+  FreezeAmount?: number;
   /** 欠费金额,单位 分 */
-  OweAmount: number;
+  OweAmount?: number;
   /** 是否允许欠费消费 */
-  IsAllowArrears: boolean;
+  IsAllowArrears?: boolean;
   /** 是否限制信用额度 */
-  IsCreditLimited: boolean;
-  /** 信用额度 */
-  CreditAmount: number;
-  /** 可用信用额度 */
-  CreditBalance: number;
-  /** 真实可用信用额度 */
-  RealCreditBalance: number;
+  IsCreditLimited?: boolean;
+  /** 信用额度,单位 分 */
+  CreditAmount?: number;
+  /** 可用信用额度,单位 分 */
+  CreditBalance?: number;
+  /** 真实可用信用额度,单位 分 */
+  RealCreditBalance?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3595,7 +3595,7 @@ declare interface Billing {
   (): Versions;
   /** 批量设置分账标签 {@link CreateAllocationTagRequest} {@link CreateAllocationTagResponse} */
   CreateAllocationTag(data: CreateAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationTagResponse>;
-  /** 创建节省计划订单 {@link CreateSavingPlanOrderRequest} {@link CreateSavingPlanOrderResponse} */
+  /** @deprecated 创建节省计划订单 {@link CreateSavingPlanOrderRequest} {@link CreateSavingPlanOrderResponse} */
   CreateSavingPlanOrder(data: CreateSavingPlanOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSavingPlanOrderResponse>;
   /** 批量取消设置分账标签 {@link DeleteAllocationTagRequest} {@link DeleteAllocationTagResponse} */
   DeleteAllocationTag(data: DeleteAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationTagResponse>;
@@ -3671,11 +3671,11 @@ declare interface Billing {
   DescribeGatherResource(data: DescribeGatherResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherResourceResponse>;
   /** 查询节省计划覆盖率数据 {@link DescribeSavingPlanCoverageRequest} {@link DescribeSavingPlanCoverageResponse} */
   DescribeSavingPlanCoverage(data: DescribeSavingPlanCoverageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanCoverageResponse>;
-  /** 查询节省计划总览明细 {@link DescribeSavingPlanOverviewRequest} {@link DescribeSavingPlanOverviewResponse} */
+  /** @deprecated 查询节省计划总览明细 {@link DescribeSavingPlanOverviewRequest} {@link DescribeSavingPlanOverviewResponse} */
   DescribeSavingPlanOverview(data: DescribeSavingPlanOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanOverviewResponse>;
   /** 查询节省计划可共享列表详情 {@link DescribeSavingPlanResourceInfoRequest} {@link DescribeSavingPlanResourceInfoResponse} */
   DescribeSavingPlanResourceInfo(data: DescribeSavingPlanResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanResourceInfoResponse>;
-  /** 查询节省计划使用率明细 {@link DescribeSavingPlanUsageRequest} {@link DescribeSavingPlanUsageResponse} */
+  /** @deprecated 查询节省计划使用率明细 {@link DescribeSavingPlanUsageRequest} {@link DescribeSavingPlanUsageResponse} */
   DescribeSavingPlanUsage(data: DescribeSavingPlanUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanUsageResponse>;
   /** 获取分账标签 {@link DescribeTagListRequest} {@link DescribeTagListResponse} */
   DescribeTagList(data: DescribeTagListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagListResponse>;

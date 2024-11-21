@@ -1875,7 +1875,7 @@ declare interface DescribePackageConsumeTaskRequest {
 
 declare interface DescribePackageConsumeTaskResponse {
   /** 文件下载的url，文件详情是套餐包消耗详情 */
-  URL: string;
+  URL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3436,7 +3436,7 @@ declare namespace V20201215 {
 
   interface DescribeCloudStorageThumbnailResponse {
     /** 缩略图访问地址 */
-    ThumbnailURL: string;
+    ThumbnailURL?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4383,6 +4383,18 @@ declare namespace V20191126 {
     Role: string;
   }
 
+  /** 证书信息 */
+  interface CertificateInfo {
+    /** SecretId */
+    SecretId: string | null;
+    /** SecretKey */
+    SecretKey: string | null;
+    /** Token */
+    Token: string | null;
+    /** 过期时间，UNIX时间戳，单位秒 */
+    ExpiredTime: number | null;
+  }
+
   /** 版本发布的描述信息，需要国际化，可以为空 */
   interface Contents {
     /** 英文，长度不超过300个字符 */
@@ -4393,6 +4405,20 @@ declare namespace V20191126 {
     Tc?: string | null;
     /** 默认语言，最多不超过300个字符 */
     Default?: string | null;
+  }
+
+  /** 申请上传证书回包 */
+  interface CosCertificate {
+    /** cos存储桶 */
+    StorageBucket: string | null;
+    /** cos存储园区 */
+    StorageRegion: string | null;
+    /** 存储路径，录制场景下该值为存储目录 */
+    StoragePath: string | null;
+    /** 证书信息 */
+    TempCertificate: CertificateInfo | null;
+    /** SessionKey */
+    SessionKey: string | null;
   }
 
   /** 接口DescribeStream输出参数 */
@@ -4619,6 +4645,12 @@ declare namespace V20191126 {
     CunionId: string;
     /** 注册状态 */
     IsRegisted: boolean;
+  }
+
+  /** 刷新证书信息 */
+  interface RenewCertificate {
+    /** 刷新证书信息 */
+    TempCertificate: CertificateInfo | null;
   }
 
   /** 云存订单信息 */
@@ -4945,6 +4977,20 @@ declare namespace V20191126 {
     RequestId?: string;
   }
 
+  interface CreateUploadTestRequest {
+    /** package ID */
+    PkgId: string;
+    /** 设备TID */
+    Tid: string;
+  }
+
+  interface CreateUploadTestResponse {
+    /** 申请设备证书返回的信息 */
+    Data?: CosCertificate | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateUsrTokenRequest {
     /** 终端用户在IoT Video上的唯一标识ID */
     AccessId: string;
@@ -5070,25 +5116,25 @@ declare namespace V20191126 {
 
   interface DeliverStorageServiceResponse {
     /** 被转出的云存服务ID */
-    SrcServiceId: string;
+    SrcServiceId?: string;
     /** 被转入的云存服务ID */
-    ServiceId: string;
+    ServiceId?: string;
     /** 云存服务所在的区域 */
-    StorageRegion: string;
+    StorageRegion?: string;
     /** 设备TID */
-    Tid: string;
+    Tid?: string;
     /** 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应) */
-    ChnNum: number;
+    ChnNum?: number;
     /** 终端用户在IoT Video平台的注册ID */
-    AccessId: string;
+    AccessId?: string;
     /** 服务开始时间 */
-    StartTime: number;
+    StartTime?: number;
     /** 服务失效时间 */
-    EndTime: number;
+    EndTime?: number;
     /** 服务状态1：正常使用中2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。3：已过期。查询不到设备保存在云端的数据。4：等待服务生效。 */
-    Status: number;
-    /** 新增的云存定单列表 */
-    Data: StorageOrder[];
+    Status?: number;
+    /** 新增的云存订单列表 */
+    Data?: StorageOrder[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5404,23 +5450,23 @@ declare namespace V20191126 {
 
   interface DescribeStorageServiceResponse {
     /** 云存服务ID */
-    ServiceId: string;
+    ServiceId?: string;
     /** 云存服务所在的区域 */
-    StorageRegion: string;
+    StorageRegion?: string;
     /** 设备TID */
-    Tid: string;
+    Tid?: string;
     /** 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应) */
-    ChnNum: number;
+    ChnNum?: number;
     /** 终端用户在IoT Video平台的注册ID */
-    AccessId: string;
+    AccessId?: string;
     /** 服务开始时间 */
-    StartTime: number;
+    StartTime?: number;
     /** 服务失效时间 */
-    EndTime: number;
+    EndTime?: number;
     /** 服务状态1：正常使用中2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。3：已过期。查询不到设备保存在云端的数据。4：等待服务生效。 */
-    Status: number;
-    /** 云存定单列表 */
-    Data: StorageOrder[];
+    Status?: number;
+    /** 云存订单列表 */
+    Data?: StorageOrder[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5617,6 +5663,22 @@ declare namespace V20191126 {
     Status: number;
     /** 有效云存定单列表 */
     Data: StorageOrder[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface RenewUploadTestRequest {
+    /** package ID */
+    PkgId: string;
+    /** 设备TID */
+    Tid: string;
+    /** SessionKeys */
+    SessionKey: string;
+  }
+
+  interface RenewUploadTestResponse {
+    /** 刷新证书返回的信息 */
+    Data?: RenewCertificate | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6169,6 +6231,8 @@ declare interface Iotvideo {
   CreateTraceIds(data: V20191126.CreateTraceIdsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateTraceIdsResponse>;
   /** 获取固件上传路径 {@link V20191126.CreateUploadPathRequest} {@link V20191126.CreateUploadPathResponse} */
   CreateUploadPath(data: V20191126.CreateUploadPathRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateUploadPathResponse>;
+  /** 设备申请cos上传证书 {@link V20191126.CreateUploadTestRequest} {@link V20191126.CreateUploadTestResponse} */
+  CreateUploadTest(data: V20191126.CreateUploadTestRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateUploadTestResponse>;
   /** 终端用户接入授权 {@link V20191126.CreateUsrTokenRequest} {@link V20191126.CreateUsrTokenResponse} */
   CreateUsrToken(data: V20191126.CreateUsrTokenRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateUsrTokenResponse>;
   /** 删除终端用户 {@link V20191126.DeleteAppUsrRequest} {@link V20191126.DeleteAppUsrResponse} */
@@ -6255,6 +6319,8 @@ declare interface Iotvideo {
   ModifyVerContent(data: V20191126.ModifyVerContentRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyVerContentResponse>;
   /** 退订已购买的云存服务 {@link V20191126.RefundStorageServiceRequest} {@link V20191126.RefundStorageServiceResponse} */
   RefundStorageService(data: V20191126.RefundStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RefundStorageServiceResponse>;
+  /** 设备刷新cos上传证书 {@link V20191126.RenewUploadTestRequest} {@link V20191126.RenewUploadTestResponse} */
+  RenewUploadTest(data: V20191126.RenewUploadTestRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RenewUploadTestResponse>;
   /** 启用设备 {@link V20191126.RunDeviceRequest} {@link V20191126.RunDeviceResponse} */
   RunDevice(data: V20191126.RunDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunDeviceResponse>;
   /** 开启设备推流 {@link V20191126.RunDeviceStreamRequest} {@link V20191126.RunDeviceStreamResponse} */

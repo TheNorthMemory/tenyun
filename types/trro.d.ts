@@ -43,33 +43,33 @@ declare interface DeviceInfo {
 /** 按授权查看的license列表 */
 declare interface License {
   /** 该类型的license个数 */
-  Count?: number | null;
+  Count?: number;
   /** license状态：0:未绑定；1:已绑定；2:已停服；3:已退费 */
-  Status?: number | null;
+  Status?: number;
   /** 到期时间戳：s */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 服务时长：s */
-  Duration?: string | null;
+  Duration?: string;
   /** 剩余天数：天 */
-  RemainDay?: number | null;
+  RemainDay?: number;
   /** 该类型的licenseId列表 */
-  LicenseIds?: string[] | null;
+  LicenseIds?: string[];
 }
 
 /** 多网的网卡状态信息 */
 declare interface MultiNet {
   /** 网卡序号 */
-  NetId?: number | null;
+  NetId?: number;
   /** 网卡IP */
-  NetIp?: string | null;
+  NetIp?: string;
   /** 时延，单位ms */
-  Rtt?: number[] | null;
+  Rtt?: number[];
   /** 丢包率，单位% */
-  Lost?: number[] | null;
+  Lost?: number[];
   /** 发送bps，单位kbps */
-  SendBps?: number[] | null;
+  SendBps?: number[];
   /** 接收bps，单位kbps */
-  RecvBps?: number[] | null;
+  RecvBps?: number[];
 }
 
 /** 权限信息 */
@@ -85,31 +85,31 @@ declare interface PolicyInfo {
 /** 项目信息 */
 declare interface ProjectInfo {
   /** 项目ID */
-  ProjectId: string;
+  ProjectId?: string;
   /** 项目名称 */
-  ProjectName: string;
+  ProjectName?: string;
   /** 项目描述 */
-  ProjectDescription: string;
+  ProjectDescription?: string;
   /** 项目权限模式，black为黑名单，white为白名单 */
-  PolicyMode: string;
+  PolicyMode?: string;
   /** 项目信息修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
 }
 
 /** 最新会话信息 */
 declare interface RecentSessionInfo {
   /** 会话ID */
-  SessionId: string;
+  SessionId?: string;
   /** 远端设备ID */
-  RemoteDeviceId: string;
+  RemoteDeviceId?: string;
   /** 现场设备ID */
-  FieldDeviceId: string;
+  FieldDeviceId?: string;
   /** 分辨率 */
-  Resolution: string;
+  Resolution?: string;
   /** 会话开始时间 */
-  StartTime: number;
+  StartTime?: number;
   /** 最后更新时间 */
-  LatestUpdateTime: number;
+  LatestUpdateTime?: number;
 }
 
 /** 会话数据详单（按设备区分） */
@@ -191,19 +191,19 @@ declare interface SessionDeviceDetail {
 /** 会话信息 */
 declare interface SessionInfo {
   /** 会话ID */
-  SessionId: string;
+  SessionId?: string;
   /** 远端设备ID */
-  RemoteDeviceId: string;
+  RemoteDeviceId?: string;
   /** 现场设备ID */
-  FieldDeviceId: string;
+  FieldDeviceId?: string;
   /** 分辨率 */
-  Resolution: string;
+  Resolution?: string;
   /** 会话开始时间 */
-  StartTime: number;
+  StartTime?: number;
   /** 会话结束时间 */
-  EndTime: number;
+  EndTime?: number;
   /** 通话质量：good|normal|bad，对应优良差 */
-  Quality: string;
+  Quality?: string;
 }
 
 /** 单位时间间隔的会话统计数据 */
@@ -233,7 +233,7 @@ declare interface BatchDeleteDevicesRequest {
 
 declare interface BatchDeleteDevicesResponse {
   /** 删除失败的设备ID列表 */
-  FailedDeviceIds: string[] | null;
+  FailedDeviceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -297,7 +297,7 @@ declare interface CreateProjectRequest {
 
 declare interface CreateProjectResponse {
   /** 项目ID，长度为16位 */
-  ProjectId: string;
+  ProjectId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -641,9 +641,9 @@ declare interface ModifyPolicyRequest {
 
 declare interface ModifyPolicyResponse {
   /** 添加关联失败的现场设备ID列表 */
-  FailedInsertIds: string[] | null;
+  FailedInsertIds?: string[];
   /** 解除关联失败的现场设备ID列表 */
-  FailedDeleteIds: string[] | null;
+  FailedDeleteIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -103,19 +103,19 @@ declare interface AndroidResult {
 /** app的详细基础信息 */
 declare interface AppDetailInfo {
   /** app的名称 */
-  AppName: string;
+  AppName?: string;
   /** app的包名 */
-  AppPkgName: string;
+  AppPkgName?: string;
   /** app的版本号 */
-  AppVersion: string;
+  AppVersion?: string;
   /** app的大小 */
-  AppSize: number;
+  AppSize?: number;
   /** app的md5 */
-  AppMd5: string;
+  AppMd5?: string;
   /** app的图标url */
-  AppIconUrl: string;
+  AppIconUrl?: string;
   /** app的文件名称 */
-  FileName: string;
+  FileName?: string;
 }
 
 /** 提交的app基本信息 */
@@ -141,35 +141,35 @@ declare interface AppInfo {
 /** 加固后app的信息，包含基本信息和加固信息 */
 declare interface AppSetInfo {
   /** 任务唯一标识 */
-  ItemId: string;
+  ItemId?: string;
   /** app的名称 */
-  AppName: string;
+  AppName?: string;
   /** app的包名 */
-  AppPkgName: string;
+  AppPkgName?: string;
   /** app的版本号 */
-  AppVersion: string;
+  AppVersion?: string;
   /** app的md5 */
-  AppMd5: string;
+  AppMd5?: string;
   /** app的大小 */
-  AppSize: number;
+  AppSize?: number;
   /** 加固服务版本 */
-  ServiceEdition: string;
+  ServiceEdition?: string;
   /** 加固结果返回码 */
-  ShieldCode: number;
+  ShieldCode?: number;
   /** 加固后的APP下载地址 */
   AppUrl?: string;
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 请求的客户端ip */
-  ClientIp: string;
+  ClientIp?: string;
   /** 提交加固时间 */
-  TaskTime: number;
+  TaskTime?: number;
   /** app的图标url */
-  AppIconUrl: string;
+  AppIconUrl?: string;
   /** 加固后app的md5 */
-  ShieldMd5: string;
+  ShieldMd5?: string;
   /** 加固后app的大小 */
-  ShieldSize: number;
+  ShieldSize?: number;
 }
 
 /** 小程序加固信息 */
@@ -227,11 +227,11 @@ declare interface AppletResult {
 /** 用户绑定app的基本信息 */
 declare interface BindInfo {
   /** app的icon的url */
-  AppIconUrl: string;
+  AppIconUrl?: string;
   /** app的名称 */
-  AppName: string;
+  AppName?: string;
   /** app的包名 */
-  AppPkgName: string;
+  AppPkgName?: string;
 }
 
 /** 渠道合作加固结果信息 */
@@ -253,13 +253,13 @@ declare interface EncryptResults {
   /** 与当前任务关联的订单Id */
   OrderId?: string;
   /** 对应PlatformType平台类型值 1-android加固结果 */
-  AndroidResult?: AndroidResult | null;
+  AndroidResult?: AndroidResult;
   /** 对应PlatformType平台类型值 2-ios源码混淆加固结果 */
-  IOSResult?: IOSResult | null;
+  IOSResult?: IOSResult;
   /** 对应PlatformType平台类型值 3-sdk加固结果 */
-  SDKResult?: SDKResult | null;
+  SDKResult?: SDKResult;
   /** 对应PlatformType平台类型值 4-applet小程序加固结果 */
-  AppletResult?: AppletResult | null;
+  AppletResult?: AppletResult;
 }
 
 /** 筛选数据结构 */
@@ -291,39 +291,39 @@ declare interface IOSPlan {
 /** 渠道合作ios源码混淆加固结果 */
 declare interface IOSResult {
   /** 加固任务结果Id */
-  ResultId?: string | null;
+  ResultId?: string;
   /** 用户uid */
-  OpUin?: number | null;
+  OpUin?: number;
   /** 加固类型，这里为ios */
-  EncryptType?: string | null;
+  EncryptType?: string;
   /** 资源id */
-  ResourceId?: string | null;
-  /** 加固状态 */
-  EncryptState?: number | null;
+  ResourceId?: string;
+  /** 加固状态：0等待，1成功，2任务中，3失败，4重试中 */
+  EncryptState?: number;
   /** 业务错误码 */
-  EncryptErrno?: number | null;
+  EncryptErrno?: number;
   /** 业务错误信息 */
-  EncryptErrDesc?: string | null;
+  EncryptErrDesc?: string;
   /** 创建时间 */
-  CreatTime?: string | null;
+  CreatTime?: string;
   /** 开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 消耗时间 */
-  CostTime?: number | null;
+  CostTime?: number;
   /** 加固（混淆）包结果url */
-  EncryptPkgUrl?: string | null;
+  EncryptPkgUrl?: string;
 }
 
 /** APK检测服务：非广告插件结果列表(SDK、风险插件等) */
 declare interface OptPluginListItem {
   /** 非广告类型 */
-  PluginType: string;
+  PluginType?: string;
   /** 非广告插件名称 */
-  PluginName: string;
+  PluginName?: string;
   /** 非广告插件描述 */
-  PluginDesc: string;
+  PluginDesc?: string;
 }
 
 /** 渠道合作加固订单资源信息 */
@@ -373,17 +373,19 @@ declare interface Orders {
 /** 加固策略具体信息 */
 declare interface PlanDetailInfo {
   /** 默认策略，1为默认，0为非默认 */
-  IsDefault: number;
+  IsDefault?: number;
   /** 策略id */
-  PlanId: number;
+  PlanId?: number;
   /** 策略名称 */
-  PlanName: string;
+  PlanName?: string;
   /** 策略信息 */
-  PlanInfo: PlanInfo;
+  PlanInfo?: PlanInfo;
 }
 
 /** 加固策略信息 */
 declare interface PlanInfo {
+  /** Dex分离，0关闭，1开启 */
+  SetFile?: string;
   /** apk大小优化，0关闭，1开启 */
   ApkSizeOpt?: number;
   /** Dex加固，0关闭，1开启 */
@@ -394,12 +396,8 @@ declare interface PlanInfo {
   Bugly?: number;
   /** 防止重打包，0关闭，1开启 */
   AntiRepack?: number;
-  /** Dex分离，0关闭，1开启 */
-  SeperateDex?: number;
   /** 内存保护，0关闭，1开启 */
   Db?: number;
-  /** Dex签名校验，0关闭，1开启 */
-  DexSig?: number;
   /** So文件信息 */
   SoInfo?: SoInfo;
   /** vmp，0关闭，1开启 */
@@ -408,98 +406,102 @@ declare interface PlanInfo {
   SoType?: string[];
   /** 防日志泄漏，0关闭，1开启 */
   AntiLogLeak?: number;
-  /** root检测，0关闭，1开启 */
-  AntiQemuRoot?: number;
   /** 资源防篡改，0关闭，1开启 */
   AntiAssets?: number;
   /** 防止截屏，0关闭，1开启 */
   AntiScreenshot?: number;
   /** SSL证书防窃取，0关闭，1开启 */
   AntiSSL?: number;
-  /** Dex分离，0关闭，1开启 */
-  SetFile?: string | null;
   /** Dex签名校验，0关闭，1开启 */
-  FileSign?: string | null;
+  FileSign?: string;
   /** root检测，0关闭，1开启 */
-  AntiRoot?: string | null;
+  AntiRoot?: string;
+  /** Dex分离，0关闭，1开启 */
+  SeperateDex?: number;
+  /** Dex签名校验，0关闭，1开启 */
+  DexSig?: number;
+  /** root检测，0关闭，1开启 */
+  AntiQemuRoot?: number;
 }
 
 /** APK检测服务：广告插件结果结构体 */
 declare interface PluginListItem {
   /** 数字类型，分别为 1-通知栏广告，2-积分墙广告，3-banner广告，4- 悬浮窗图标广告，5-精品推荐列表广告, 6-插播广告 */
-  PluginType: string;
+  PluginType?: string;
   /** 广告插件名称 */
-  PluginName: string;
+  PluginName?: string;
   /** 广告插件描述 */
-  PluginDesc: string;
+  PluginDesc?: string;
 }
 
 /** 拉取某个用户的所有资源信息 */
 declare interface ResourceInfo {
   /** 用户购买的资源id，全局唯一 */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源的pid，MTP加固-12767，应用加固-12750 MTP反作弊-12766 源代码混淆-12736 */
-  Pid: number;
+  Pid?: number;
   /** 购买时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 到期时间戳 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 0-未绑定，1-已绑定 */
-  IsBind: number;
+  IsBind?: number;
   /** 用户绑定app的基本信息 */
-  BindInfo: BindInfo;
+  BindInfo?: BindInfo;
   /** 资源名称，如应用加固，漏洞扫描 */
-  ResourceName: string;
+  ResourceName?: string;
 }
 
 /** 资源服务信息 */
 declare interface ResourceServiceInfo {
   /** 创建时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 到期时间戳 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 资源名称，如应用加固，源码混淆 */
-  ResourceName: string;
+  ResourceName?: string;
 }
 
 /** APK检测服务参数返回具体信息 */
 declare interface ResultListItem {
   /** banner广告软件标记，分别为-1-不确定，0-否，1-是 */
-  Banner: string;
+  Banner?: string;
   /** 精品推荐列表广告标记，分别为-1-不确定，0-否，1-是 */
-  BoutiqueRecommand: string;
+  BoutiqueRecommand?: string;
   /** 悬浮窗图标广告标记,分别为-1-不确定，0-否，1-是 */
-  FloatWindows: string;
+  FloatWindows?: string;
   /** 积分墙广告软件标记，分别为 -1 -不确定，0-否，1-是 */
-  IntegralWall: string;
+  IntegralWall?: string;
   /** 安装包的md5 */
-  Md5: string;
+  Md5?: string;
   /** 通知栏广告软件标记，分别为-1-不确定，0-否，1-是 */
-  NotifyBar: string;
+  NotifyBar?: string;
   /** 1表示官方，0表示非官方 */
-  Official: string;
+  Official?: string;
   /** 广告插件结果列表 */
-  PluginList: PluginListItem[];
+  PluginList?: PluginListItem[];
   /** 非广告插件结果列表(SDK、风险插件等) */
-  OptPluginList: OptPluginListItem[];
+  OptPluginList?: OptPluginListItem[];
   /** 数字类型，分别为0-未知， 1-安全软件，2-风险软件，3-病毒软件 */
-  SafeType: string;
+  SafeType?: string;
   /** Session id，合作方可以用来区分回调数据，需要唯一。 */
-  Sid: string;
+  Sid?: string;
   /** 安装包名称 */
-  SoftName: string;
+  SoftName?: string;
   /** 插播广告软件标记，取值：-1 不确定，0否， 1 是 */
-  Spot: string;
+  Spot?: string;
   /** 病毒名称，utf8编码 */
-  VirusName: string;
+  VirusName?: string;
   /** 病毒描述，utf8编码 */
-  VirusDesc: string;
+  VirusDesc?: string;
   /** 二次打包状态：0-表示默认；1-表示二次 */
-  RepackageStatus: string;
+  RepackageStatus?: string;
   /** 应用错误码：0、1-表示正常； 2表示System Error(engine analysis error).3表示App analysis error, please confirm it.4表示App have not cert, please confirm it.5表示App size is zero, please confirm it.6表示App have not package name, please confirm it.7表示App build time is empty, please confirm it.8表示App have not valid cert, please confirm it.99表示Other error.1000表示App downloadlink download fail, please confirm it.1001表示APP md5 different between real md5, please confirm it.1002表示App md5 uncollect, please offer downloadlink. */
-  Errno: string;
+  Errno?: string;
   /** 对应errno的错误信息描述 */
-  ErrMsg: string;
+  ErrMsg?: string;
+  /** 应用错误码：0、1-表示正常； 2表示System Error(engine analysis error).3表示App analysis error, please confirm it.4表示App have not cert, please confirm it.5表示App size is zero, please confirm it.6表示App have not package name, please confirm it.7表示App build time is empty, please confirm it.8表示App have not valid cert, please confirm it.99表示Other error.1000表示App downloadlink download fail, please confirm it.1001表示APP md5 different between real md5, please confirm it.1002表示App md5 uncollect, please offer downloadlink. */
+  ErrNo?: string;
 }
 
 /** 渠道合作sdk加固策略配置 */
@@ -529,7 +531,7 @@ declare interface ServiceInfo {
 /** 加固后app的信息 */
 declare interface ShieldInfo {
   /** 加固结果的返回码 */
-  ShieldCode: number;
+  ShieldCode?: number;
   /** 加固后app的大小 */
   ShieldSize?: number;
   /** 加固后app的md5 */
@@ -537,25 +539,25 @@ declare interface ShieldInfo {
   /** 加固后的APP下载地址，该地址有效期为20分钟，请及时下载 */
   AppUrl?: string;
   /** 加固的提交时间 */
-  TaskTime: number;
+  TaskTime?: number;
   /** 任务唯一标识 */
-  ItemId: string;
+  ItemId?: string;
   /** 加固版本，basic基础版，professional专业版，enterprise企业版 */
-  ServiceEdition: string;
+  ServiceEdition?: string;
 }
 
 /** 加固策略信息 */
 declare interface ShieldPlanInfo {
   /** 加固策略数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 加固策略具体信息数组 */
-  PlanSet: PlanDetailInfo[];
+  PlanSet?: PlanDetailInfo[];
 }
 
 /** so加固信息 */
 declare interface SoInfo {
   /** so文件列表 */
-  SoFileNames: string[];
+  SoFileNames?: string[];
 }
 
 declare interface CancelEncryptTaskRequest {
@@ -689,9 +691,9 @@ declare interface CreateShieldInstanceRequest {
 
 declare interface CreateShieldInstanceResponse {
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  Progress: number;
+  Progress?: number;
   /** 任务唯一标识 */
-  ItemId: string;
+  ItemId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -707,9 +709,9 @@ declare interface CreateShieldPlanInstanceRequest {
 
 declare interface CreateShieldPlanInstanceResponse {
   /** 策略id */
-  PlanId: number;
+  PlanId?: number;
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  Progress: number;
+  Progress?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -735,11 +737,11 @@ declare interface DescribeApkDetectionResultRequest {
 
 declare interface DescribeApkDetectionResultResponse {
   /** 响应结果，ok表示正常，error表示错误 */
-  Result: string;
+  Result?: string;
   /** Result为error错误时的原因说明 */
-  Reason: string;
+  Reason?: string;
   /** APK检测结果数组 */
-  ResultList: ResultListItem[];
+  ResultList?: ResultListItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -813,13 +815,13 @@ declare interface DescribeEncryptPlanResponse {
   /** 资源id */
   ResourceId?: string;
   /** 上次加固策略 */
-  AndroidPlan?: AndroidPlan | null;
+  AndroidPlan?: AndroidPlan;
   /** 上次小程序加固策略 */
-  AppletPlan?: AppletPlan | null;
+  AppletPlan?: AppletPlan;
   /** 上次ios源码混淆加固配置 */
-  IOSPlan?: IOSPlan | null;
+  IOSPlan?: IOSPlan;
   /** 上次sdk加固配置 */
-  SDKPlan?: SDKPlan | null;
+  SDKPlan?: SDKPlan;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -875,9 +877,9 @@ declare interface DescribeResourceInstancesRequest {
 
 declare interface DescribeResourceInstancesResponse {
   /** 符合要求的资源数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合要求的资源数组 */
-  ResourceSet: ResourceInfo[];
+  ResourceSet?: ResourceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -899,9 +901,9 @@ declare interface DescribeShieldInstancesRequest {
 
 declare interface DescribeShieldInstancesResponse {
   /** 符合要求的app数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 一个关于app详细信息的结构体，主要包括app的基本信息和加固信息。 */
-  AppSet: AppSetInfo[];
+  AppSet?: AppSetInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -915,11 +917,11 @@ declare interface DescribeShieldPlanInstanceRequest {
 
 declare interface DescribeShieldPlanInstanceResponse {
   /** 绑定资源信息 */
-  BindInfo: BindInfo;
+  BindInfo?: BindInfo;
   /** 加固策略信息 */
-  ShieldPlanInfo: ShieldPlanInfo;
+  ShieldPlanInfo?: ShieldPlanInfo;
   /** 加固资源信息 */
-  ResourceServiceInfo: ResourceServiceInfo;
+  ResourceServiceInfo?: ResourceServiceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -931,15 +933,15 @@ declare interface DescribeShieldResultRequest {
 
 declare interface DescribeShieldResultResponse {
   /** 任务状态: 0-请返回,1-已完成,2-处理中,3-处理出错,4-处理超时 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** app加固前的详细信息 */
-  AppDetailInfo: AppDetailInfo;
+  AppDetailInfo?: AppDetailInfo;
   /** app加固后的详细信息 */
-  ShieldInfo: ShieldInfo;
+  ShieldInfo?: ShieldInfo;
   /** 状态描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 状态指引 */
-  StatusRef: string;
+  StatusRef?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1095,7 +1097,7 @@ declare interface Ms {
   CreateEncryptInstance(data: CreateEncryptInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptInstanceResponse>;
   /** 创建渠道合作应用加固订单 {@link CreateOrderInstanceRequest} {@link CreateOrderInstanceResponse} */
   CreateOrderInstance(data: CreateOrderInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderInstanceResponse>;
-  /** 创建资源 {@link CreateResourceInstancesRequest} {@link CreateResourceInstancesResponse} */
+  /** @deprecated 创建资源 {@link CreateResourceInstancesRequest} {@link CreateResourceInstancesResponse} */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
   /** 提交加固基础数据 {@link CreateShieldInstanceRequest} {@link CreateShieldInstanceResponse} */
   CreateShieldInstance(data: CreateShieldInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldInstanceResponse>;

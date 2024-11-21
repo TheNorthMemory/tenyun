@@ -2,22 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 临时证书。 */
+/** 临时访问凭证。 */
 declare interface Credentials {
-  /** 秘钥 ID。 */
+  /** 访问凭证 ID。 */
   AccessKeyId?: string;
-  /** 秘钥 Key。 */
+  /** 访问凭证 Key。 */
   SecretAccessKey?: string;
-  /** token。token长度和绑定的策略有关，最长不超过4096字节。 */
+  /** 访问凭证 Token，长度和绑定的策略有关，最长不超过 4096 字节。 */
   SessionToken?: string;
-  /** 凭据的过期时间。 */
+  /** 访问凭证的过期时间。 */
   Expiration?: string;
 }
 
 declare interface CreateStorageCredentialsRequest {
-  /** 点播[应用](/document/product/266/14574) ID。 */
+  /** 点播专业版[应用](/document/product/266/14574) ID。 */
   SubAppId: number;
-  /** 按照下方语法组装好策略后，先序列化为字符串，再做 urlencode，结果作为 Policy 字段入参。服务端会对该字段做 urldecode，并按解析后的策略授予临时访问凭证权限，请按规范传入参数。注意： 1.策略语法参照[访问管理策略](/document/product/598/10603)。2.策略中不能包含 principal 元素。3.策略的 action 元素仅支持：name/vod:PutObject;name/vod:ListParts;name/vod:PostObject;name/vod:InitiateMultipartUpload;name/vod:UploadPart;name/vod:CompleteMultipartUpload;name/vod:AbortMultipartUpload;name/vod:ListMultipartUploads;4.策略的 resource 元素填写格式为：qcs::vod::uid/[账号AppID]:prefix//[子应用ID]/[存储桶ID]/[存储路径]，其中账号AppID、子应用ID、存储桶ID和存储路径要按需填写，其他内容不允许改动，例：qcs::vod::uid/1:prefix//1/1/path。 */
+  /** 按照下方语法组装好策略后，先序列化为字符串，再做 URL Encode，结果作为 Policy 字段入参。服务端会对该字段做 URL Decode，并按解析后的策略授予临时访问凭证权限，请按规范传入参数。注意： 1.策略语法参照[访问管理策略](/document/product/598/10603)。2.策略中不能包含 principal 元素。3.策略的 action 元素仅支持：name/vod:PutObject;name/vod:ListParts;name/vod:PostObject;name/vod:InitiateMultipartUpload;name/vod:UploadPart;name/vod:CompleteMultipartUpload;name/vod:AbortMultipartUpload;name/vod:ListMultipartUploads;4.策略的 resource 元素填写格式为：`qcs::vod:[存储地域]:uid/[账号AppID]:prefix//[点播应用ID]/[存储桶ID]/[存储路径]`，其中存储地域、账号 AppID、点播应用 ID、存储桶 ID 和存储路径要按需填写，其他内容不允许改动，例：`qcs:ap-chongqing:vod::uid/1231456789:prefix//1234567890/2ceds3ew323w3mu/file_path`。 */
   Policy: string;
   /** 指定临时证书的有效期，单位：秒。默认 1800 秒，最大 129600 秒。 */
   DurationSeconds?: number;
@@ -1761,6 +1761,76 @@ declare namespace V20180717 {
     Type?: string;
   }
 
+  /** 自适应码流任务信息。 */
+  interface ComplexAdaptiveDynamicStreamingTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 自适应码流任务的执行状态与结果，每个元素对应一个自适应码流模版。 */
+    ComplexAdaptiveDynamicStreamingTaskResultSet?: ComplexAdaptiveDynamicStreamingTaskResult[];
+  }
+
+  /** 自适应码流任务多语言音频流输入参数。 */
+  interface ComplexAdaptiveDynamicStreamingTaskAudioInput {
+    /** 音频源的媒体 ID。固定取该媒体中的首个音频流，视频流和其它音频流（如有）将被忽略。 */
+    FileId: string;
+    /** 输出的自适应码流中的音频流名称，长度限制为16个字符。 */
+    Name: string;
+    /** 输出的自适应码流中的音频流语言，长度限制为16个字符。要求符合 RFC5646 规范。 */
+    Language: string;
+    /** 是否设置为自适应码流的默认音频。取值：YES：设置为默认音频；NO：不设置为默认音频（默认值）。 */
+    Default?: string;
+  }
+
+  /** 自适应码流任务的输入参数。 */
+  interface ComplexAdaptiveDynamicStreamingTaskInput {
+    /** 自适应码流参数。 */
+    StreamPara: ComplexAdaptiveDynamicStreamingTaskStreamPara | null;
+  }
+
+  /** 自适应码流任务的输出结果。 */
+  interface ComplexAdaptiveDynamicStreamingTaskOutput {
+    /** 自适应码流模版 ID。 */
+    Definition?: number;
+    /** 自适应码流打包格式。可选值：HLS；MPEG-DASH。 */
+    Format?: string;
+    /** DRM 方案类型。可选值：空字符串：无加密；SimpleAES；Widevine；FairPlay。 */
+    DrmType?: string;
+    /** 自适应码流的播放地址。 */
+    Url?: string;
+  }
+
+  /** 自适应码流任务信息。 */
+  interface ComplexAdaptiveDynamicStreamingTaskResult {
+    /** 任务状态，取值：PROCESSING：处理中；SUCCESS：已完成；FAIL：失败。 */
+    Status?: string;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 转码进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** 自适应码流任务的输入。 */
+    Input?: ComplexAdaptiveDynamicStreamingTaskInput;
+    /** 自适应码流任务的输出。 */
+    Output?: ComplexAdaptiveDynamicStreamingTaskOutput | null;
+  }
+
+  /** 自适应码流任务的流参数。 */
+  interface ComplexAdaptiveDynamicStreamingTaskStreamPara {
+    /** 自适应码流模板 ID。 */
+    Definition: number;
+  }
+
+  /** 自适应码流任务多语言字幕的输入参数。 */
+  interface ComplexAdaptiveDynamicStreamingTaskSubtitleInput {
+    /** 字幕 ID。该字幕必须归属于自适应码流任务的输入主媒体。 */
+    Id: string;
+    /** 是否设置为自适应码流的默认字幕。取值：YES：设置为默认字幕；NO：不设置为默认字幕（默认值）。 */
+    Default?: string;
+  }
+
   /** 输出的媒体文件信息。 */
   interface ComposeMediaOutput {
     /** 文件名称，最长 64 个字符。 */
@@ -2063,6 +2133,8 @@ declare namespace V20180717 {
     CreateTime?: string;
     /** 域名 QUIC 配置信息。 */
     QUICConfig?: DomainQUICConfig | null;
+    /** IP 访问限制配置信息。 */
+    IPFilterPolicy?: IPFilterPolicy | null;
   }
 
   /** 域名 HTTPS 配置信息 */
@@ -2243,7 +2315,7 @@ declare namespace V20180717 {
   interface EventContent {
     /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
     EventHandle?: string;
-    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
     EventType?: string;
     /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
     FileUploadEvent?: FileUploadTask | null;
@@ -2297,6 +2369,8 @@ declare namespace V20180717 {
     MediaCastStatusChangedEvent?: MediaCastEvent | null;
     /** 剪辑固化完成事件，当事件类型为 PersistenceComplete 时有效。 */
     PersistenceCompleteEvent?: PersistenceCompleteTask | null;
+    /** 自适应码流任务信息，仅当 EventType 为ComplexAdaptiveDynamicStreamingComplete 时有效。 */
+    ComplexAdaptiveDynamicStreamingCompleteEvent?: ComplexAdaptiveDynamicStreamingTask | null;
   }
 
   /** 提取版权水印任务。 */
@@ -2551,6 +2625,16 @@ declare namespace V20180717 {
   interface HighlightsConfigureInfoForUpdate {
     /** 智能精彩片段任务开关，可选值：ON：开启智能精彩片段任务；OFF：关闭智能精彩片段任务。 */
     Switch?: string;
+  }
+
+  /** IP 访问限制规则，当前支持配置 IP 黑名单和白名单。 */
+  interface IPFilterPolicy {
+    /** IP 访问限制状态，可选值：Enabled：启用；Disabled：禁用。 */
+    Status: string;
+    /** IP 访问限制类型： Black：黑名单方式校验。只有来自 IPList 列表中的 IP 请求会被拦截。White：白名单方式校验。只有来自 IPList 列表中的 IP 请求会被放行。当 Status 取值为 Enabled 时，FilterType 必须赋值。 */
+    FilterType?: string;
+    /** IP 列表，支持 X.X.X.X 格式 IPV4 地址，或 X:X:X:X:X:X:X:X 格式 IPV6 地址，或网段格式 /N（IPV4:1≤N≤32；IPV6:1≤N≤128）；最多可填充 200 个 IP 或网段。当 Status 取值为 Enabled 时，IPList 必须赋值。 */
+    IPList?: string[];
   }
 
   /** 图片模糊处理。 */
@@ -5291,7 +5375,7 @@ declare namespace V20180717 {
 
   /** 视频处理任务统计数据。 */
   interface TaskStatData {
-    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
+    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译 */
     TaskType?: string;
     /** 任务数统计数据概览，用量单位为秒。 */
     Summary?: TaskStatDataItem[];
@@ -6203,6 +6287,28 @@ declare namespace V20180717 {
   interface CreateClassResponse {
     /** 分类 ID */
     ClassId?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateComplexAdaptiveDynamicStreamingTaskRequest {
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** 主媒体文件的媒体 ID。 */
+    FileId: string;
+    /** 自适应码流参数，最大支持8个。 */
+    StreamParaSet: ComplexAdaptiveDynamicStreamingTaskStreamPara[];
+    /** 片头片尾列表，支持多片头片尾，最大可支持 4 个。如果填写了该字段，AudioSet 和 SubtitleSet 中指定的媒体的起始时间将会自动调整，和主媒体保持同步。 */
+    HeadTailSet?: HeadTailTaskInput[];
+    /** 多语言音频流参数，最大支持16个。每个数组元素对应自适应码流中的一条音频流。如果要将主媒体文件中的音频流添加到输出的自适应码流中，那么也需要在此处指定。数组中元素的顺序将决定自适应码流中的音频流顺序。如果输入的媒体文件同时带有视频流和音频流，那么视频流将被忽略。 */
+    AudioSet?: ComplexAdaptiveDynamicStreamingTaskAudioInput[];
+    /** 多语言字幕参数，最大可支持16个。每个数组元素对应自适应码流中的一条字幕流。数组中元素的顺序将决定自适应码流中的字幕流顺序。 */
+    SubtitleSet?: ComplexAdaptiveDynamicStreamingTaskSubtitleInput[];
+  }
+
+  interface CreateComplexAdaptiveDynamicStreamingTaskResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7668,7 +7774,7 @@ declare namespace V20180717 {
     EndTime: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用） */
+    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译 */
     Type?: string;
   }
 
@@ -8005,7 +8111,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务。 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务。 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -8057,6 +8163,8 @@ declare namespace V20180717 {
     QualityInspectTask?: QualityInspectTask | null;
     /** 音画质重生任务信息，仅当 TaskType 为 QualityEnhance，该字段有值。 */
     QualityEnhanceTask?: QualityEnhanceTask | null;
+    /** 复杂自适应码流任务信息，仅当 TaskType 为 ComplexAdaptiveDynamicStreaming，该字段有值。 */
+    ComplexAdaptiveDynamicStreamingTask?: ComplexAdaptiveDynamicStreamingTask | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -9152,6 +9260,8 @@ declare namespace V20180717 {
     UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy;
     /** QUIC 配置。 */
     QUICConfig?: DomainQUICConfig;
+    /** IP 访问限制规则。 */
+    IPFilterPolicy?: IPFilterPolicy;
   }
 
   interface ModifyVodDomainConfigResponse {
@@ -9829,6 +9939,8 @@ declare interface Vod {
   CreateCLSTopic(data: V20180717.CreateCLSTopicRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateCLSTopicResponse>;
   /** 创建分类 {@link V20180717.CreateClassRequest} {@link V20180717.CreateClassResponse} */
   CreateClass(data: V20180717.CreateClassRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateClassResponse>;
+  /** 创建复杂自适应码流任务 {@link V20180717.CreateComplexAdaptiveDynamicStreamingTaskRequest} {@link V20180717.CreateComplexAdaptiveDynamicStreamingTaskResponse} */
+  CreateComplexAdaptiveDynamicStreamingTask(data: V20180717.CreateComplexAdaptiveDynamicStreamingTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateComplexAdaptiveDynamicStreamingTaskResponse>;
   /** 创建音视频内容审核模板 {@link V20180717.CreateContentReviewTemplateRequest} {@link V20180717.CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data: V20180717.CreateContentReviewTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateContentReviewTemplateResponse>;
   /** 生成域名解析记录 {@link V20180717.CreateDomainVerifyRecordRequest} {@link V20180717.CreateDomainVerifyRecordResponse} */

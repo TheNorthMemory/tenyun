@@ -123,11 +123,11 @@ declare interface AirTransport {
 /** 银行回单识别出的字段 */
 declare interface BankSlipInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 汽车票 */
@@ -179,11 +179,11 @@ declare interface BusInvoice {
 /** 汽车票字段信息 */
 declare interface BusInvoiceInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、身份证号、省、市、开票日期、乘车地点、检票口、客票类型、车型、座位号、车次。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 名片识别结果 */
@@ -214,6 +214,20 @@ declare interface CarInvoiceInfo {
   Polygon?: Polygon | null;
 }
 
+/** 卡证告警信息返回 */
+declare interface CardWarnInfo {
+  /** 证件边缘是否完整0：正常1：边缘不完整 */
+  BorderCheck?: number;
+  /** 证件是否被遮挡0：正常1：有遮挡 */
+  OcclusionCheck?: number;
+  /** 是否复印0:正常1:复印件 */
+  CopyCheck?: number;
+  /** 是否屏幕翻拍0:正常1:翻拍 */
+  ReshootCheck?: number;
+  /** 证件是否有PS0：正常1：有PS */
+  PSCheck?: number;
+}
+
 /** 单元格识别结果 */
 declare interface CellContent {
   /** 段落编号 */
@@ -232,12 +246,24 @@ declare interface ClassifyDetectInfo {
   Rect: Rect;
 }
 
+/** 卡证字段信息返回值 */
+declare interface ContentInfo {
+  /** 字段内容 */
+  Content?: string;
+  /** 结果置信度 */
+  Confidence?: number;
+  /** 字段是否不完整0 字段正常1 字段不完整 */
+  IsInComplete?: number;
+  /** 字段反光0 字段正常1 字段有反光 */
+  IsReflect?: number;
+}
+
 /** 坐标 */
 declare interface Coord {
   /** 横坐标 */
-  X: number;
+  X?: number;
   /** 纵坐标 */
-  Y: number;
+  Y?: number;
 }
 
 /** 机票详细信息元组 */
@@ -323,11 +349,11 @@ declare interface DocumentRecognizeInfo {
 /** 识别出的字段 */
 declare interface DutyPaidProofInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 全电发票（航空运输电子客票行程单） */
@@ -536,9 +562,9 @@ declare interface ElectronicTrainTicketFull {
 
 /** 敏感数据加密 */
 declare interface Encryption {
-  /** 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。 */
+  /** 有加密需求的用户，接入传入kms的CiphertextBlob（Base64编码），关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。 */
   CiphertextBlob: string | null;
-  /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。 */
+  /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符，Base64编码）。 */
   Iv: string | null;
   /** 加密使用的算法（支持'AES-256-CBC'、'SM4-GCM'），不传默认为'AES-256-CBC' */
   Algorithm?: string | null;
@@ -559,17 +585,17 @@ declare interface EnterpriseLicenseInfo {
 /** 金融票据整单识别单个字段的内容 */
 declare interface FinanBillInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：【进账单】日期、出票全称、出票账号、出票开户行、收款人全称、收款人账号、收款开户行、大写金额、小写金额、票据种类、票据张数、票据号码；【支票】开户银行、支票种类、凭证号码2、日期、大写金额、小写金额、付款行编号、密码、凭证号码1；【银行承兑汇票】或【商业承兑汇票】出票日期、行号1、行号2、出票人全称、出票人账号、付款行全称、收款人全称、收款人账号、收款人开户行、出票金额大写、出票金额小写、汇票到期日、付款行行号、付款行地址。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
 }
 
 /** 金融票据切片识别单个字段的内容 */
 declare interface FinanBillSliceInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：大写金额、小写金额、账号、票号1、票号2、收款人、大写日期、同城交换号、地址-省份、地址-城市、付款行全称、支票密码、支票用途。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
 }
 
 /** 财务票据查验返回结果 */
@@ -746,6 +772,44 @@ declare interface GroupInfo {
   Groups?: LineInfo[];
 }
 
+/** 身份证信息返回 */
+declare interface IDCardInfo {
+  /** 姓名（人像面） */
+  Name?: ContentInfo;
+  /** 性别（人像面） */
+  Sex?: ContentInfo;
+  /** 民族（人像面） */
+  Nation?: ContentInfo;
+  /** 出生日期（人像面） */
+  Birth?: ContentInfo;
+  /** 地址（人像面） */
+  Address?: ContentInfo;
+  /** 公民身份号码（人像面） */
+  IdNum?: ContentInfo;
+  /** 发证机关（国徽面） */
+  Authority?: ContentInfo;
+  /** 证件有效期（国徽面） */
+  ValidDate?: ContentInfo;
+  /** WarnInfos，告警信息 */
+  WarnInfos?: CardWarnInfo;
+  /** IdCard，裁剪后身份证照片的base64编码，请求 EnableCropImage 时返回； */
+  CardImage?: ContentInfo;
+  /** Portrait，身份证头像照片的base64编码，请求 EnablePortrait 时返回； */
+  PortraitImage?: ContentInfo;
+}
+
+/** 头像位置坐标 */
+declare interface ImageCoordinates {
+  /** 头像左上角横坐标 */
+  X?: number | null;
+  /** 头像左上角纵坐标 */
+  Y?: number | null;
+  /** 头像框宽度 */
+  Width?: number | null;
+  /** 头像框高度 */
+  Height?: number | null;
+}
+
 /** 图片分辨率信息 */
 declare interface ImageSize {
   /** 图片的宽，单位像素 */
@@ -765,23 +829,23 @@ declare interface InsuranceBillInfo {
 /** 票据检测结果 */
 declare interface InvoiceDetectInfo {
   /** 识别出的图片在混贴票据图片中的旋转角度。 */
-  Angle: number;
+  Angle?: number;
   /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票4：客运限额发票5：机票行程单6：酒店账单7：完税证明8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票14：购物小票 */
-  Type: number;
+  Type?: number;
   /** 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。 */
-  Rect: Rect;
+  Rect?: Rect;
   /** 入参 ReturnImage 为 True 时返回 Base64 编码后的图片。 */
-  Image: string | null;
+  Image?: string | null;
 }
 
 /** 通用机打发票信息 */
 declare interface InvoiceGeneralInfo {
   /** 识别出的字段名称(关键字)，支持以下字段识别（注：下划线表示一个字段）：发票代码、发票号码、日期、合计金额(小写)、合计金额(大写)、购买方识别号、销售方识别号、校验码、购买方名称、销售方名称、时间、种类、发票消费类型、省、市、是否有公司印章、发票名称、购买方地址、电话、销售方地址、电话、购买方开户行及账号、销售方开户行及账号、经办人取票用户、经办人支付信息、经办人商户号、经办人订单号、货物或应税劳务、服务名称、数量、单价、税率、税额、金额、单位、规格型号、合计税额、合计金额、备注、收款人、复核、开票人、密码区、行业分类 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 混贴票据单张发票识别信息 */
@@ -997,15 +1061,15 @@ declare interface MedicalInvoiceItem {
 /** 混贴票据单张发票识别信息 */
 declare interface MixedInvoiceItem {
   /** 识别结果。OK：表示识别成功；FailedOperation.UnsupportedInvioce：表示不支持识别；FailedOperation.UnKnowError：表示识别失败；其它错误码见各个票据接口的定义。 */
-  Code: string;
+  Code?: string;
   /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票 */
-  Type: number;
+  Type?: number;
   /** 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。 */
-  Rect: Rect;
+  Rect?: Rect;
   /** 识别出的图片在混贴票据图片中的旋转角度。 */
-  Angle: number;
+  Angle?: number;
   /** 识别到的内容。 */
-  SingleInvoiceInfos: SingleInvoiceInfo[];
+  SingleInvoiceInfos?: SingleInvoiceInfo[];
   /** 发票处于识别图片或PDF文件中的页教，默认从1开始。 */
   Page?: number;
 }
@@ -1175,11 +1239,11 @@ declare interface NonTaxItem {
 /** 网约车行程单识别结果 */
 declare interface OnlineTaxiItineraryInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：发票代码、 机打代码、 发票号码、 发动机号码、 合格证号、 机打号码、 价税合计(小写)、 销货单位名称、 身份证号码/组织机构代码、 购买方名称、 销售方纳税人识别号、 购买方纳税人识别号、主管税务机关、 主管税务机关代码、 开票日期、 不含税价(小写)、 吨位、增值税税率或征收率、 车辆识别代号/车架号码、 增值税税额、 厂牌型号、 省、 市、 发票消费类型、 销售方电话、 销售方账号、 产地、 进口证明书号、 车辆类型、 机器编号、备注、开票人、限乘人数、商检单号、销售方地址、销售方开户银行、价税合计、发票类型。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1 */
-  Row: number;
+  Row?: number;
 }
 
 /** 其他发票 */
@@ -1256,16 +1320,54 @@ declare interface PassportRecognizeInfos {
   IssuingAuthority?: string;
 }
 
+/** 外国人永久居留证信息返回 */
+declare interface PermanentResidencePermitInfo {
+  /** 姓名（人像面） */
+  Name?: ContentInfo;
+  /** 性别（人像面） */
+  Sex?: ContentInfo;
+  /** 民族（人像面） */
+  Nation?: ContentInfo;
+  /** 出生日期（人像面） */
+  Birth?: ContentInfo;
+  /** 地址（人像面） */
+  Address?: ContentInfo;
+  /** 公民身份号码（人像面） */
+  IdNum?: ContentInfo;
+  /** 发证机关（国徽面） */
+  Authority?: ContentInfo;
+  /** 证件有效期（国徽面） */
+  ValidDate?: ContentInfo;
+  /** WarnInfos，告警信息 */
+  WarnInfos?: CardWarnInfo;
+  /** IdCard，裁剪后身份证照片的base64编码，请求 EnableCropImage 时返回； */
+  CardImage?: ContentInfo;
+  /** Portrait，身份证头像照片的base64编码，请求 EnablePortrait 时返回； */
+  PortraitImage?: ContentInfo;
+  /** 持证人持有号码，外国人永久居留证 返回该字段 */
+  HolderNum?: ContentInfo;
+  /** 国籍，外国人永久居留证 返回该字段 */
+  Nationality?: ContentInfo;
+}
+
 /** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */
 declare interface Polygon {
   /** 左上顶点坐标 */
-  LeftTop: Coord;
+  LeftTop?: Coord;
   /** 右上顶点坐标 */
-  RightTop: Coord;
+  RightTop?: Coord;
   /** 右下顶点坐标 */
-  RightBottom: Coord;
+  RightBottom?: Coord;
   /** 左下顶点坐标 */
-  LeftBottom: Coord;
+  LeftBottom?: Coord;
+}
+
+/** 头像照片和坐标 */
+declare interface PortraitImageInfo {
+  /** 头像 */
+  PortraitImage?: string | null;
+  /** 头像坐标 */
+  ImageCoordinates?: ImageCoordinates | null;
 }
 
 /** 图片大小 */
@@ -1409,19 +1511,49 @@ declare interface ReconstructDocumentConfig {
 /** 矩形坐标 */
 declare interface Rect {
   /** 左上角x */
-  X: number;
+  X?: number;
   /** 左上角y */
-  Y: number;
+  Y?: number;
   /** 宽度 */
-  Width: number;
+  Width?: number;
   /** 高度 */
-  Height: number;
+  Height?: number;
 }
 
 /** 反光点覆盖区域详情结果 */
 declare interface ReflectDetailInfo {
   /** NationalEmblem 国徽位置Portrait 人像照片位置RecognitionField 识别字段位置Others 其他位置 */
   Position?: string;
+}
+
+/** 港澳台居住证信息返回 */
+declare interface ResidencePermitInfo {
+  /** 姓名（人像面） */
+  Name?: ContentInfo;
+  /** 性别（人像面） */
+  Sex?: ContentInfo;
+  /** 民族（人像面） */
+  Nation?: ContentInfo;
+  /** 出生日期（人像面） */
+  Birth?: ContentInfo;
+  /** 地址（人像面） */
+  Address?: ContentInfo;
+  /** 公民身份号码（人像面） */
+  IdNum?: ContentInfo;
+  /** 发证机关（国徽面） */
+  Authority?: ContentInfo;
+  /** 证件有效期（国徽面） */
+  ValidDate?: ContentInfo;
+  /** WarnInfos，告警信息 */
+  WarnInfos?: CardWarnInfo;
+  /** IdCard，裁剪后身份证照片的base64编码，请求 EnableCropImage 时返回； */
+  CardImage?: ContentInfo;
+  /** Portrait，身份证头像照片的base64编码，请求 EnablePortrait 时返回； */
+  PortraitImage?: ContentInfo;
+  /** 通行证号码，港澳台居住证国徽面 返回该字段 */
+  PassNum?: ContentInfo;
+  /** 签发次数，港澳台居住证国徽面 返回该字段 */
+  IssueNum?: ContentInfo;
 }
 
 /** 印章信息 */
@@ -1439,11 +1571,11 @@ declare interface SealInfo {
 /** 轮船票字段信息 */
 declare interface ShipInvoiceInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 轮船票 */
@@ -1481,11 +1613,11 @@ declare interface ShippingInvoice {
 /** 混贴票据中单张发票的内容 */
 declare interface SingleInvoiceInfo {
   /** 识别出的字段名称 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。 */
-  Row: number;
+  Row?: number;
 }
 
 /** 混贴票据中单张发票的内容 */
@@ -1690,24 +1822,50 @@ declare interface TaxiTicket {
   CompanySealMark?: number;
 }
 
+/** 临时身份证信息返回 */
+declare interface TemporaryIDCardInfo {
+  /** 姓名（人像面） */
+  Name?: ContentInfo;
+  /** 性别（人像面） */
+  Sex?: ContentInfo;
+  /** 民族（人像面） */
+  Nation?: ContentInfo;
+  /** 出生日期（人像面） */
+  Birth?: ContentInfo;
+  /** 地址（人像面） */
+  Address?: ContentInfo;
+  /** 公民身份号码（人像面） */
+  IdNum?: ContentInfo;
+  /** 发证机关（国徽面） */
+  Authority?: ContentInfo;
+  /** 证件有效期（国徽面） */
+  ValidDate?: ContentInfo;
+  /** WarnInfos，告警信息 */
+  WarnInfos?: CardWarnInfo;
+  /** IdCard，裁剪后身份证照片的base64编码，请求 EnableCropImage 时返回； */
+  CardImage?: ContentInfo;
+  /** Portrait，身份证头像照片的base64编码，请求 EnablePortrait 时返回； */
+  PortraitImage?: ContentInfo;
+}
+
 /** 算式识别结果 */
 declare interface TextArithmetic {
   /** 识别出的文本行内容 */
-  DetectedText: string;
+  DetectedText?: string;
   /** 算式运算结果，true-正确 false-错误或非法参数 */
-  Result: boolean;
+  Result?: boolean;
   /** 保留字段，暂不支持 */
-  Confidence: number;
+  Confidence?: number;
   /** 原图文本行坐标，以四个顶点坐标表示（保留字段，暂不支持） */
-  Polygon: Coord[] | null;
+  Polygon?: Coord[] | null;
   /** 保留字段，暂不支持 */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
   /** 文本行旋转纠正之后在图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
-  ItemCoord: ItemCoord;
+  ItemCoord?: ItemCoord;
   /** 算式题型编号：‘1’: 加减乘除四则‘2’: 加减乘除已知结果求运算因子‘3’: 判断大小‘4’: 约等于估算‘5’: 带余数除法‘6’: 分数四则运算‘7’: 单位换算‘8’: 竖式加减法‘9’: 竖式乘除法‘10’: 脱式计算‘11’: 解方程 */
-  ExpressionType: string;
-  /** 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如1<10<7）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回) */
-  Answer: string;
+  ExpressionType?: string;
+  /** 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如`1<10<7`）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回) */
+  Answer?: string;
 }
 
 /** 文字识别结果 */
@@ -1749,9 +1907,9 @@ declare interface TextDetectionEn {
 /** 识别结果 */
 declare interface TextDetectionResult {
   /** 识别出的文本行内容 */
-  Value: string;
+  Value?: string;
   /** 坐标，以四个顶点坐标表示 */
-  Polygon: Coord[];
+  Polygon?: Coord[];
 }
 
 /** 数学试题识别结果 */
@@ -1809,11 +1967,11 @@ declare interface TextTable {
 /** 增值税发票识别结果 */
 declare interface TextVatInvoice {
   /** 识别出的字段名称（关键字）。支持以下字段的识别：发票代码、 发票号码、 打印发票代码、 打印发票号码、 开票日期、 购买方识别号、 小写金额、 价税合计(大写)、 销售方识别号、 校验码、 购买方名称、 销售方名称、 税额、 复核、 联次名称、 备注、 联次、 密码区、 开票人、 收款人、 （货物或应税劳务、服务名称）、省、 市、 服务类型、 通行费标志、 是否代开、 是否收购、 合计金额、 是否有公司印章、 发票消费类型、 车船税、 机器编号、 成品油标志、 税率、 合计税额、 （购买方地址、电话）、 （销售方地址、电话）、 单价、 金额、 销售方开户行及账号、 购买方开户行及账号、 规格型号、 发票名称、 单位、 数量、 校验码备选、 校验码后六位备选、发票号码备选、车牌号、类型、通行日期起、通行日期止、发票类型。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 字段在原图中的中的四点坐标。 */
-  Polygon: Polygon | null;
+  Polygon?: Polygon | null;
 }
 
 /** 行驶证副页正面的识别结果 */
@@ -1873,19 +2031,19 @@ declare interface TextVehicleFront {
 /** 运单识别结果 */
 declare interface TextWaybill {
   /** 收件人姓名 */
-  RecName: WaybillObj;
+  RecName?: WaybillObj;
   /** 收件人手机号 */
-  RecNum: WaybillObj;
+  RecNum?: WaybillObj;
   /** 收件人地址 */
-  RecAddr: WaybillObj;
+  RecAddr?: WaybillObj;
   /** 寄件人姓名 */
-  SenderName: WaybillObj;
+  SenderName?: WaybillObj;
   /** 寄件人手机号 */
-  SenderNum: WaybillObj;
+  SenderNum?: WaybillObj;
   /** 寄件人地址 */
-  SenderAddr: WaybillObj;
+  SenderAddr?: WaybillObj;
   /** 运单号 */
-  WaybillNum: WaybillObj;
+  WaybillNum?: WaybillObj;
 }
 
 /** 过路过桥费发票 */
@@ -1917,11 +2075,11 @@ declare interface TollInvoice {
 /** 过路过桥费字段信息 */
 declare interface TollInvoiceInfo {
   /** 识别出的字段名称（关键字）。支持以下字段的识别：发票代码、发票号码、日期、金额、入口、出口、时间、发票消费类型、高速标志。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 火车票 */
@@ -2517,11 +2675,11 @@ declare interface VatInvoiceUserInfo {
 /** 增值税发票卷票信息 */
 declare interface VatRollInvoiceInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：发票代码、合计金额(小写)、合计金额(大写)、开票日期、发票号码、购买方识别号、销售方识别号、校验码、销售方名称、购买方名称、发票消费类型、省、市、是否有公司印章、单价、金额、数量、服务类型、品名、种类。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 增值税普通发票（卷票）条目 */
@@ -2679,23 +2837,23 @@ declare interface BankCardOCRRequest {
 
 declare interface BankCardOCRResponse {
   /** 卡号 */
-  CardNo: string;
+  CardNo?: string;
   /** 银行信息 */
-  BankInfo: string;
+  BankInfo?: string;
   /** 有效期，格式如：07/2023 */
-  ValidDate: string;
+  ValidDate?: string;
   /** 卡类型 */
-  CardType: string;
+  CardType?: string;
   /** 卡名字 */
-  CardName: string;
+  CardName?: string;
   /** 切片图片数据 */
-  BorderCutImage: string | null;
+  BorderCutImage?: string | null;
   /** 卡号图片数据 */
-  CardNoImage: string | null;
+  CardNoImage?: string | null;
   /** WarningCode 告警码列表和释义：-9110:银行卡日期无效; -9111:银行卡边框不完整; -9112:银行卡图片反光;-9113:银行卡复印件;-9114:银行卡翻拍件（告警码可以同时存在多个） */
-  WarningCode: number[] | null;
+  WarningCode?: number[] | null;
   /** 图片质量分数，请求EnableQualityValue时返回（取值范围：0-100，分数越低越模糊，建议阈值≥50）。 */
-  QualityValue: number | null;
+  QualityValue?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2762,11 +2920,11 @@ declare interface BizLicenseOCRResponse {
   RegistrationDate?: string;
   /** 图片旋转角度(角度制)，文本的水平方向为0度；顺时针为正，角度范围是0-360度 */
   Angle?: number;
-  /** 是否有国徽。0为没有，1为有。 */
+  /** 是否有国徽。false为没有，true为有。 */
   NationalEmblem?: boolean;
-  /** 是否有二维码。0为没有，1为有。 */
+  /** 是否有二维码。false为没有，true为有。 */
   QRCode?: boolean;
-  /** 是否有印章。0为没有，1为有。 */
+  /** 是否有印章。false为没有，true为有。 */
   Seal?: boolean;
   /** 标题 */
   Title?: string;
@@ -2774,7 +2932,7 @@ declare interface BizLicenseOCRResponse {
   SerialNumber?: string;
   /** 登记机关 */
   RegistrationAuthority?: string;
-  /** 是否是电子营业执照。0为不是，1为是。 */
+  /** 是否是电子营业执照。false为没有，true为有。 */
   Electronic?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2977,11 +3135,11 @@ declare interface EduPaperOCRRequest {
 
 declare interface EduPaperOCRResponse {
   /** 检测到的文本信息，具体内容请点击左侧链接。 */
-  EduPaperInfos: TextEduPaper[];
+  EduPaperInfos?: TextEduPaper[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。 */
-  Angle: number;
+  Angle?: number;
   /** 结构化方式输出，具体内容请点击左侧链接。 */
-  QuestionBlockInfos: QuestionBlockObj[];
+  QuestionBlockInfos?: QuestionBlockObj[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3033,29 +3191,29 @@ declare interface EstateCertOCRRequest {
 
 declare interface EstateCertOCRResponse {
   /** 权利人 */
-  Obligee: string;
+  Obligee?: string;
   /** 共有情况 */
-  Ownership: string;
+  Ownership?: string;
   /** 坐落 */
-  Location: string;
+  Location?: string;
   /** 不动产单元号 */
-  Unit: string;
+  Unit?: string;
   /** 权利类型 */
-  Type: string;
+  Type?: string;
   /** 权利性质 */
-  Property: string;
+  Property?: string;
   /** 用途 */
-  Usage: string;
+  Usage?: string;
   /** 面积 */
-  Area: string;
+  Area?: string;
   /** 使用期限 */
-  Term: string;
+  Term?: string;
   /** 权利其他状况，多行会用换行符\n连接。 */
-  Other: string;
+  Other?: string;
   /** 图片旋转角度 */
-  Angle: number;
+  Angle?: number;
   /** 不动产权号 */
-  Number: string;
+  Number?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3125,7 +3283,7 @@ declare interface FormulaOCRResponse {
 declare interface GeneralAccurateOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
   /** 是否返回单字信息，默认关 */
   IsWords?: boolean;
@@ -3153,7 +3311,7 @@ declare interface GeneralAccurateOCRResponse {
 declare interface GeneralBasicOCRRequest {
   /** 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
   /** 保留字段。 */
   Scene?: string;
@@ -3237,9 +3395,11 @@ declare interface GeneralHandwritingOCRRequest {
 
 declare interface GeneralHandwritingOCRResponse {
   /** 检测到的文本信息，具体内容请点击左侧链接。 */
-  TextDetections: TextGeneralHandwriting[];
+  TextDetections?: TextGeneralHandwriting[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
-  Angel: number;
+  Angel?: number;
+  /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
+  Angle?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3307,6 +3467,8 @@ declare interface HmtResidentPermitOCRRequest {
   ImageUrl?: string;
   /** FRONT：有照片的一面（人像面），BACK：无照片的一面（国徽面），该参数如果不填或填错，将为您自动判断正反面。 */
   CardSide?: string;
+  /** 是否返回头像和位置坐标 */
+  CropPortrait?: boolean;
 }
 
 declare interface HmtResidentPermitOCRResponse {
@@ -3330,6 +3492,8 @@ declare interface HmtResidentPermitOCRResponse {
   VisaNum?: string;
   /** 通行证号码 */
   PassNo?: string;
+  /** 头像和坐标信息 */
+  PortraitImageInfo?: PortraitImageInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3425,7 +3589,7 @@ declare interface InsuranceBillOCRRequest {
 
 declare interface InsuranceBillOCRResponse {
   /** 保险单据识别结果，具体内容请点击左侧链接。 */
-  InsuranceBillInfos: InsuranceBillInfo[];
+  InsuranceBillInfos?: InsuranceBillInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3667,6 +3831,8 @@ declare interface PassportOCRRequest {
   ImageUrl?: string;
   /** 默认填写CN支持中国大陆地区护照。 */
   Type?: string;
+  /** 是否返回头像和位置坐标 */
+  CropPortrait?: boolean;
 }
 
 declare interface PassportOCRResponse {
@@ -3700,6 +3866,8 @@ declare interface PassportOCRResponse {
   FamilyName?: string;
   /** 名 */
   FirstName?: string;
+  /** 头像和坐标信息 */
+  PortraitImageInfo?: PortraitImageInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3845,13 +4013,13 @@ declare interface RecognizeContainerOCRResponse {
 }
 
 declare interface RecognizeEncryptedIDCardOCRRequest {
-  /** 请求体被加密后的密文，本接口只支持加密传输 */
+  /** 请求体被加密后的密文（Base64编码），本接口只支持加密传输 */
   EncryptedBody: string;
   /** 敏感数据加密信息。对传入信息有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption: Encryption;
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
   ImageUrl?: string;
   /** FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。 */
   CardSide?: string;
@@ -3884,7 +4052,7 @@ declare interface RecognizeEncryptedIDCardOCRResponse {
   AdvancedInfo?: string;
   /** 反光点覆盖区域详情结果，具体内容请点击左侧链接 */
   ReflectDetailInfos?: ReflectDetailInfo[];
-  /** 加密后的数据 */
+  /** 加密后的数据（Base64编码） */
   EncryptedBody?: string;
   /** 敏感数据加密信息 */
   Encryption?: Encryption;
@@ -3901,6 +4069,8 @@ declare interface RecognizeForeignPermanentResidentIdCardRequest {
   EnablePdf?: boolean;
   /** 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。示例值：1 */
   PdfPageNumber?: number;
+  /** 是否返回头像和位置坐标 */
+  CropPortrait?: boolean;
 }
 
 declare interface RecognizeForeignPermanentResidentIdCardResponse {
@@ -3922,6 +4092,8 @@ declare interface RecognizeForeignPermanentResidentIdCardResponse {
   PreviousNumber?: string;
   /** 签发机关。 */
   IssuedAuthority?: string;
+  /** 头像和坐标信息。 */
+  PortraitImageInfo?: PortraitImageInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4072,6 +4244,70 @@ declare interface RecognizeIndonesiaIDCardOCRResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeKoreanDrivingLicenseOCRRequest {
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 是否返回人像照片。 */
+  ReturnHeadImage?: boolean;
+}
+
+declare interface RecognizeKoreanDrivingLicenseOCRResponse {
+  /** 身份证号码 */
+  ID?: string;
+  /** 驾照号码 */
+  LicenseNumber?: string;
+  /** 居民登记号码 */
+  Number?: string;
+  /** 驾照类型 */
+  Type?: string;
+  /** 地址 */
+  Address?: string;
+  /** 姓名 */
+  Name?: string;
+  /** 换证时间 */
+  AptitudeTesDate?: string;
+  /** 发证日期 */
+  DateOfIssue?: string;
+  /** 人像截图Base64后的结果 */
+  Photo?: string;
+  /** 性别 */
+  Sex?: string;
+  /** 生日，格式为dd/mm/yyyy */
+  Birthday?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RecognizeKoreanIDCardOCRRequest {
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 是否返回人像照片。 */
+  ReturnHeadImage?: boolean;
+}
+
+declare interface RecognizeKoreanIDCardOCRResponse {
+  /** 身份证号码 */
+  ID?: string;
+  /** 地址 */
+  Address?: string;
+  /** 姓名 */
+  Name?: string;
+  /** 发证日期 */
+  DateOfIssue?: string;
+  /** 人像截图Base64后的结果 */
+  Photo?: string;
+  /** 性别 */
+  Sex?: string;
+  /** 生日，格式为dd/mm/yyyy */
+  Birthday?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeMedicalInvoiceOCRRequest {
   /** 图片的Base64 值。支持的文件格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4125,29 +4361,29 @@ declare interface RecognizePhilippinesDrivingLicenseOCRRequest {
 
 declare interface RecognizePhilippinesDrivingLicenseOCRResponse {
   /** 人像照片Base64后的结果 */
-  HeadPortrait: TextDetectionResult;
+  HeadPortrait?: TextDetectionResult;
   /** 姓名 */
-  Name: TextDetectionResult;
+  Name?: TextDetectionResult;
   /** 姓氏 */
-  LastName: TextDetectionResult;
+  LastName?: TextDetectionResult;
   /** 首姓名 */
-  FirstName: TextDetectionResult;
+  FirstName?: TextDetectionResult;
   /** 中间姓名 */
-  MiddleName: TextDetectionResult;
+  MiddleName?: TextDetectionResult;
   /** 国籍 */
-  Nationality: TextDetectionResult;
+  Nationality?: TextDetectionResult;
   /** 性别 */
-  Sex: TextDetectionResult;
+  Sex?: TextDetectionResult;
   /** 地址 */
-  Address: TextDetectionResult;
+  Address?: TextDetectionResult;
   /** 证号 */
-  LicenseNo: TextDetectionResult;
+  LicenseNo?: TextDetectionResult;
   /** 有效期 */
-  ExpiresDate: TextDetectionResult;
+  ExpiresDate?: TextDetectionResult;
   /** 机构代码 */
-  AgencyCode: TextDetectionResult;
+  AgencyCode?: TextDetectionResult;
   /** 出生日期 */
-  Birthday: TextDetectionResult;
+  Birthday?: TextDetectionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4185,17 +4421,17 @@ declare interface RecognizePhilippinesTinIDOCRRequest {
 
 declare interface RecognizePhilippinesTinIDOCRResponse {
   /** 人像照片Base64后的结果 */
-  HeadPortrait: TextDetectionResult;
+  HeadPortrait?: TextDetectionResult;
   /** 编码 */
-  LicenseNumber: TextDetectionResult;
+  LicenseNumber?: TextDetectionResult;
   /** 姓名 */
-  FullName: TextDetectionResult;
+  FullName?: TextDetectionResult;
   /** 地址 */
-  Address: TextDetectionResult;
+  Address?: TextDetectionResult;
   /** 生日 */
-  Birthday: TextDetectionResult;
+  Birthday?: TextDetectionResult;
   /** 发证日期 */
-  IssueDate: TextDetectionResult;
+  IssueDate?: TextDetectionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4394,10 +4630,50 @@ declare interface RecognizeTravelCardOCRResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeValidIDCardOCRRequest {
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
+  ImageUrl?: string;
+  /** 0 自动，自动判断输入证件的类型1 身份证人像面，指定输入证件类型为二代身份证人像面2 身份证国徽面，指定输入证件类型为二代身份证国徽面3 身份证人像国徽面，指定输入证件类型为二代身份证人像面或者国徽面4 临时身份证人像面，指定输入证件类型为临时身份证人像面5 临时身份证国徽面，指定输入证件类型为临时身份证国徽面6 临时身份证人像国徽面，指定输入证件类型为临时身份证人像面或者国徽面7 港澳台居住证人像面，指定输入证件类型为港澳台居住证人像面8 港澳台居住证国徽面，指定输入证件类型为港澳台居住证国徽面9 港澳台居住证人像国徽面，指定输入证件类型为港澳台居住证人像面或者国徽面10 外国人永久居留身份证人像面，指定输入证件类型为外国人永久居留证人像面11 外国人永久居留身份证国徽面，指定输入证件类型为外国人永久居留证国徽面12 外国人永久居留身份证人像国徽面，指定输入证件类型为外国人永久居留证人像或者国徽面该参数如果不填，将为您自动判断卡证类型。 */
+  CardType?: number;
+  /** 默认值为false，打开返回证件头像切图。 */
+  EnablePortrait?: boolean;
+  /** 默认值为false，打开返回证件主体切图。 */
+  EnableCropImage?: boolean;
+  /** 默认值为false，打开返回边缘完整性判断。 */
+  EnableBorderCheck?: boolean;
+  /** 默认值为false，打开返回证件是否被遮挡。 */
+  EnableOcclusionCheck?: boolean;
+  /** 默认值为false，打开返回证件是否存在复印。 */
+  EnableCopyCheck?: boolean;
+  /** 默认值为false，打开返回证件是否存在屏幕翻拍。 */
+  EnableReshootCheck?: boolean;
+  /** 默认值为false，打开返回证件是否存在PS。类型为：临时、港澳台居住证、外国人居住证失效 */
+  EnablePSCheck?: boolean;
+  /** 默认值为false，打开返回字段级反光和字段级完整性告警。类型为：临时、港澳台居住证、外国人居住证失效 */
+  EnableWordCheck?: boolean;
+}
+
+declare interface RecognizeValidIDCardOCRResponse {
+  /** 卡证类型身份证人像面身份证国徽面临时身份证人像面临时身份证人像面港澳台居住证人像面港澳台居住证国徽面外国人永久居留证人像面外国人永久居留证国徽面 */
+  Type?: string;
+  /** 身份证信息 */
+  IDCardInfo?: IDCardInfo | null;
+  /** 临时身份证信息 */
+  TemporaryIDCardInfo?: TemporaryIDCardInfo | null;
+  /** 港澳台居住证信息 */
+  ResidencePermitInfo?: ResidencePermitInfo | null;
+  /** 外国人永久居留证信息 */
+  PermanentResidencePermitInfo?: PermanentResidencePermitInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReconstructDocumentRequest {
   /** PDF,Image */
   FileType: string;
-  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
   FileBase64?: string;
   /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl?: string;
@@ -4597,9 +4873,9 @@ declare interface SmartStructuralOCRRequest {
 
 declare interface SmartStructuralOCRResponse {
   /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
-  Angle: number;
+  Angle?: number;
   /** 识别信息 */
-  StructuralItems: StructuralItem[];
+  StructuralItems?: StructuralItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4624,6 +4900,32 @@ declare interface SmartStructuralOCRV2Request {
 }
 
 declare interface SmartStructuralOCRV2Response {
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
+  Angle?: number;
+  /** 配置结构化文本信息 */
+  StructuralList?: GroupInfo[];
+  /** 还原文本信息 */
+  WordList?: WordItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SmartStructuralProRequest {
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
+  /** 自定义结构化功能需返回的字段名称，例：若客户只想返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
+  ItemNames?: string[];
+  /** 是否开启全文字段识别 */
+  ReturnFullText?: boolean;
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 海运提单、国际invoice模版 WayBillEng --海运订单模板 */
+  ConfigId?: string;
+}
+
+declare interface SmartStructuralProResponse {
   /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
   Angle?: number;
   /** 配置结构化文本信息 */
@@ -5121,6 +5423,10 @@ declare interface Ocr {
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
   /** 印尼身份证识别 {@link RecognizeIndonesiaIDCardOCRRequest} {@link RecognizeIndonesiaIDCardOCRResponse} */
   RecognizeIndonesiaIDCardOCR(data?: RecognizeIndonesiaIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeIndonesiaIDCardOCRResponse>;
+  /** 韩国驾驶证识别 {@link RecognizeKoreanDrivingLicenseOCRRequest} {@link RecognizeKoreanDrivingLicenseOCRResponse} */
+  RecognizeKoreanDrivingLicenseOCR(data?: RecognizeKoreanDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeKoreanDrivingLicenseOCRResponse>;
+  /** 韩国身份证识别 {@link RecognizeKoreanIDCardOCRRequest} {@link RecognizeKoreanIDCardOCRResponse} */
+  RecognizeKoreanIDCardOCR(data?: RecognizeKoreanIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeKoreanIDCardOCRResponse>;
   /** 医疗票据识别 {@link RecognizeMedicalInvoiceOCRRequest} {@link RecognizeMedicalInvoiceOCRResponse} */
   RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
   /** 网约车行程单识别 {@link RecognizeOnlineTaxiItineraryOCRRequest} {@link RecognizeOnlineTaxiItineraryOCRResponse} */
@@ -5145,6 +5451,8 @@ declare interface Ocr {
   RecognizeThaiIDCardOCR(data?: RecognizeThaiIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeThaiIDCardOCRResponse>;
   /** 通信行程卡识别 {@link RecognizeTravelCardOCRRequest} {@link RecognizeTravelCardOCRResponse} */
   RecognizeTravelCardOCR(data?: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
+  /** 有效身份证件识别（鉴伪版） {@link RecognizeValidIDCardOCRRequest} {@link RecognizeValidIDCardOCRResponse} */
+  RecognizeValidIDCardOCR(data?: RecognizeValidIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeValidIDCardOCRResponse>;
   /** 智能文档识别 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
   ReconstructDocument(data: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
   /** 户口本识别 {@link ResidenceBookletOCRRequest} {@link ResidenceBookletOCRResponse} */
@@ -5161,6 +5469,8 @@ declare interface Ocr {
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
   /** 智能结构化识别V2 {@link SmartStructuralOCRV2Request} {@link SmartStructuralOCRV2Response} */
   SmartStructuralOCRV2(data?: SmartStructuralOCRV2Request, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRV2Response>;
+  /** 智能结构化高级版识别 {@link SmartStructuralProRequest} {@link SmartStructuralProResponse} */
+  SmartStructuralPro(data?: SmartStructuralProRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralProResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
   /** 出租车发票识别 {@link TaxiInvoiceOCRRequest} {@link TaxiInvoiceOCRResponse} */
