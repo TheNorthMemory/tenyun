@@ -367,7 +367,7 @@ declare interface CreateCommandRequest {
   Timeout?: number;
   /** 是否启用自定义参数功能。一旦创建，此值不提供修改。默认值：false。 */
   EnableParameter?: boolean;
-  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
   /** 自定义参数数组。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。自定义参数最多20个。 */
   DefaultParameterConfs?: DefaultParameterConf[];
@@ -721,7 +721,7 @@ declare interface InvokeCommandRequest {
   CommandId: string;
   /** 待执行命令的实例ID列表，上限200。 */
   InstanceIds: string[];
-  /** Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** Command 的自定义参数。字段类型为json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   Parameters?: string;
   /** 在 CVM 或 Lighthouse 实例中执行命令的用户名称。使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。若不填，默认以 Command 配置的 Username 执行。 */
   Username?: string;
@@ -757,7 +757,7 @@ declare interface ModifyCommandRequest {
   WorkingDirectory?: string;
   /** 命令超时时间。取值范围[1, 86400]。 */
   Timeout?: number;
-  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。采取整体全覆盖式修改，即修改时必须提供所有新默认值。必须 Command 的 EnableParameter 为 true 时，才允许修改这个值。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。采取整体全覆盖式修改，即修改时必须提供所有新默认值。必须 Command 的 EnableParameter 为 true 时，才允许修改这个值。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
   /** 自定义参数数组。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。自定义参数最多20个。 */
   DefaultParameterConfs?: DefaultParameterConf[];
@@ -845,11 +845,11 @@ declare interface RunCommandRequest {
   SaveCommand?: boolean;
   /** 是否启用自定义参数功能。一旦创建，此值不提供修改。取值范围： true：启用 false：不启用 默认值：false。 */
   EnableParameter?: boolean;
-  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果 Parameters 未提供，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果 Parameters 未提供，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
   /** 自定义参数数组。 如果 Parameters 未提供，将使用这里的默认值进行替换。 自定义参数最多20个。 */
   DefaultParameterConfs?: DefaultParameterConf[];
-  /** Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果未提供该参数取值，将使用 DefaultParameters 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** Command 的自定义参数。字段类型为json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果未提供该参数取值，将使用 DefaultParameters 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   Parameters?: string;
   /** 如果保存命令，可为命令设置标签。列表长度不超过10。 */
   Tags?: Tag[];

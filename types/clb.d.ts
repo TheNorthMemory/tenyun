@@ -339,17 +339,17 @@ declare interface ClustersZone {
 /** 配置内容 */
 declare interface ConfigListItem {
   /** 配置ID */
-  UconfigId: string;
+  UconfigId?: string;
   /** 配置类型 */
-  ConfigType: string;
+  ConfigType?: string;
   /** 配置名字 */
-  ConfigName: string | null;
+  ConfigName?: string | null;
   /** 配置内容 */
-  ConfigContent: string;
+  ConfigContent?: string;
   /** 增加配置时间 */
-  CreateTimestamp: string;
+  CreateTimestamp?: string;
   /** 修改配置时间 */
-  UpdateTimestamp: string;
+  UpdateTimestamp?: string;
 }
 
 /** 跨域2.0云联网下子机和网卡信息 */

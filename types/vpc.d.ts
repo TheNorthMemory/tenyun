@@ -1916,6 +1916,32 @@ declare interface ReferredSecurityGroup {
   ReferredSecurityGroupIds?: string[];
 }
 
+/** 内网保留IP数据 */
+declare interface ReserveIpAddressInfo {
+  /** 内网保留IP唯一 ID。 */
+  ReserveIpId?: string;
+  /** VPC唯一 ID。 */
+  VpcId?: string;
+  /** 子网唯一 ID。 */
+  SubnetId?: string;
+  /** 内网保留IP地址。 */
+  ReserveIpAddress?: string;
+  /** 内网保留 IP绑定的资源实例 ID。 */
+  ResourceId?: string;
+  /** 产品申请的IpType。 */
+  IpType?: number;
+  /** 绑定状态，UnBind-未绑定， Bind-绑定。 */
+  State?: string;
+  /** 保留 IP名称。 */
+  Name?: string;
+  /** 保留 IP描述。 */
+  Description?: string;
+  /** 创建时间。 */
+  CreatedTime?: string;
+  /** 标签键值对。 */
+  TagSet?: Tag[];
+}
+
 /** 描述带宽包资源信息的结构 */
 declare interface Resource {
   /** 带宽包资源类型，包括'Address'和'LoadBalance' */
@@ -3343,11 +3369,13 @@ declare interface CloneSecurityGroupRequest {
   ProjectId?: string;
   /** 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。 */
   RemoteRegion?: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。若指定Tags入参且指定IsCloneTags为true，会合并源安全组的标签和新增的标签。 */
+  Tags?: Tag;
 }
 
 declare interface CloneSecurityGroupResponse {
   /** 安全组对象。 */
-  SecurityGroup?: SecurityGroup | null;
+  SecurityGroup?: SecurityGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3425,7 +3453,7 @@ declare interface CreateAssistantCidrRequest {
 
 declare interface CreateAssistantCidrResponse {
   /** 辅助CIDR数组。 */
-  AssistantCidrSet?: AssistantCidr[] | null;
+  AssistantCidrSet?: AssistantCidr[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3960,6 +3988,32 @@ declare interface CreatePrivateNatGatewayTranslationNatRuleRequest {
 declare interface CreatePrivateNatGatewayTranslationNatRuleResponse {
   /** 私网网关唯一`ID`。 */
   NatGatewayId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateReserveIpAddressesRequest {
+  /** VPC唯一 ID。 */
+  VpcId: string;
+  /** 指定IP申请的内网保留IP地址。 */
+  IpAddresses?: string[];
+  /** 不指定IP地址，指定个数自动分配保留内网IP。 */
+  IpAddressCount?: number;
+  /** 子网唯一 ID。 */
+  SubnetId?: string;
+  /** 内网保留 IP名称。 */
+  Name?: string;
+  /** 内网保留 IP描述。 */
+  Description?: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
+}
+
+declare interface CreateReserveIpAddressesResponse {
+  /** 内网保留 IP返回信息 */
+  ReserveIpAddressSet?: ReserveIpAddressInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4744,6 +4798,18 @@ declare interface DeletePrivateNatGatewayTranslationNatRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteReserveIpAddressesRequest {
+  /** VPC唯一 ID。 */
+  VpcId: string;
+  /** 内网保留IP地址列表。 */
+  ReserveIpIds: string[];
+}
+
+declare interface DeleteReserveIpAddressesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRouteTableRequest {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId: string;
@@ -5057,7 +5123,7 @@ declare interface DescribeAssistantCidrRequest {
 
 declare interface DescribeAssistantCidrResponse {
   /** 符合条件的辅助CIDR数组。 */
-  AssistantCidrSet?: AssistantCidr[] | null;
+  AssistantCidrSet?: AssistantCidr[];
   /** 符合条件的实例数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -5439,9 +5505,9 @@ declare interface DescribeDhcpIpsRequest {
 
 declare interface DescribeDhcpIpsResponse {
   /** 实例详细信息列表。 */
-  DhcpIpSet: DhcpIp[];
+  DhcpIpSet?: DhcpIp[];
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5519,9 +5585,9 @@ declare interface DescribeFlowLogsRequest {
   CloudLogId?: string;
   /** 流日志存储ID状态。 */
   CloudLogState?: string;
-  /** 按某个字段排序,支持字段：flowLogName,createTime，默认按createTime。 */
+  /** 按某个字段排序,支持字段：flowLogName,createTime，默认按CreatedTime。 */
   OrderField?: string;
-  /** 升序（asc）还是降序（desc）,默认：desc。 */
+  /** 升序（ASC）还是降序（DESC）,默认：DESC。 */
   OrderDirection?: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -5849,9 +5915,9 @@ declare interface DescribeNetDetectStatesRequest {
 
 declare interface DescribeNetDetectStatesResponse {
   /** 符合条件的网络探测验证结果对象数组。 */
-  NetDetectStateSet?: NetDetectState[] | null;
+  NetDetectStateSet?: NetDetectState[];
   /** 符合条件的网络探测验证结果对象数量。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5869,9 +5935,9 @@ declare interface DescribeNetDetectsRequest {
 
 declare interface DescribeNetDetectsResponse {
   /** 符合条件的网络探测对象数组。 */
-  NetDetectSet?: NetDetect[] | null;
+  NetDetectSet?: NetDetect[];
   /** 符合条件的网络探测对象数量。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5941,13 +6007,13 @@ declare interface DescribeNetworkInterfaceLimitResponse {
   /** 每个标准型弹性网卡可以分配的IP配额。 */
   EniPrivateIpAddressQuantity?: number;
   /** 扩展型网卡配额。 */
-  ExtendEniQuantity?: number | null;
+  ExtendEniQuantity?: number;
   /** 每个扩展型弹性网卡可以分配的IP配额。 */
-  ExtendEniPrivateIpAddressQuantity?: number | null;
+  ExtendEniPrivateIpAddressQuantity?: number;
   /** 中继网卡配额。 */
-  SubEniQuantity?: number | null;
+  SubEniQuantity?: number;
   /** 每个中继网卡可以分配的IP配额。 */
-  SubEniPrivateIpAddressQuantity?: number | null;
+  SubEniPrivateIpAddressQuantity?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6101,6 +6167,26 @@ declare interface DescribeProductQuotaResponse {
   /** ProductQuota对象数组。 */
   ProductQuotaSet?: ProductQuota[];
   /** 符合条件的产品类型个数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReserveIpAddressesRequest {
+  /** 内网保留IP唯一ID 列表 */
+  ReserveIpIds?: string[];
+  /** 过滤条件，参数不支持同时指定ReserveIpIds和Filters。reserve-ip-id - String - （过滤条件）内网保留 IP唯一 ID，形如：rsvip-pvqgv9vi。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。address-ip - String - （过滤条件）内网保留 IP 地址，形如：192.168.0.10。ip-type - String - （过滤条件）业务类型 ipType，0。name - String - （过滤条件）名称。state - String - （过滤条件）状态，可选值：Bind， UnBind。resource-id - String - （过滤条件）绑定的实例资源，形如：eni-059qmnif。tag-key - String -（过滤条件）按照标签键进行过滤。tag:tag-key - String - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 请求对象个数。 */
+  Limit?: number;
+}
+
+declare interface DescribeReserveIpAddressesResponse {
+  /** 内网保留 IP返回信息。 */
+  ReserveIpAddressSet?: ReserveIpAddressInfo[];
+  /** 返回内网保留IP的个数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -6261,7 +6347,7 @@ declare interface DescribeSecurityGroupsRequest {
 
 declare interface DescribeSecurityGroupsResponse {
   /** 安全组对象。 */
-  SecurityGroupSet?: SecurityGroup[] | null;
+  SecurityGroupSet?: SecurityGroup[];
   /** 符合条件的实例数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -6541,9 +6627,9 @@ declare interface DescribeUsedIpAddressRequest {
 
 declare interface DescribeUsedIpAddressResponse {
   /** 占用ip地址的资源信息 */
-  IpAddressStates?: IpAddressStates[] | null;
+  IpAddressStates?: IpAddressStates[];
   /** 返回占用资源的个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7968,6 +8054,22 @@ declare interface ModifyPrivateNatGatewayTranslationNatRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyReserveIpAddressRequest {
+  /** VPC唯一 ID。 */
+  VpcId: string;
+  /** 内网保留IP唯一ID。 */
+  ReserveIpId: string;
+  /** 内网保留 IP名称。 */
+  Name?: string;
+  /** 内网保留 IP描述。 */
+  Description?: string;
+}
+
+declare interface ModifyReserveIpAddressResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRouteTableAttributeRequest {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId: string;
@@ -8899,6 +9001,8 @@ declare interface Vpc {
   CreatePrivateNatGatewayTranslationAclRule(data: CreatePrivateNatGatewayTranslationAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateNatGatewayTranslationAclRuleResponse>;
   /** 创建私网NAT网关源端转换规则 {@link CreatePrivateNatGatewayTranslationNatRuleRequest} {@link CreatePrivateNatGatewayTranslationNatRuleResponse} */
   CreatePrivateNatGatewayTranslationNatRule(data: CreatePrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateNatGatewayTranslationNatRuleResponse>;
+  /** 创建保留内网IP {@link CreateReserveIpAddressesRequest} {@link CreateReserveIpAddressesResponse} */
+  CreateReserveIpAddresses(data: CreateReserveIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReserveIpAddressesResponse>;
   /** 创建路由表 {@link CreateRouteTableRequest} {@link CreateRouteTableResponse} */
   CreateRouteTable(data: CreateRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteTableResponse>;
   /** 创建路由策略 {@link CreateRoutesRequest} {@link CreateRoutesResponse} */
@@ -9001,6 +9105,8 @@ declare interface Vpc {
   DeletePrivateNatGatewayTranslationAclRule(data: DeletePrivateNatGatewayTranslationAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateNatGatewayTranslationAclRuleResponse>;
   /** 删除私网NAT网关源端转换规则 {@link DeletePrivateNatGatewayTranslationNatRuleRequest} {@link DeletePrivateNatGatewayTranslationNatRuleResponse} */
   DeletePrivateNatGatewayTranslationNatRule(data: DeletePrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateNatGatewayTranslationNatRuleResponse>;
+  /** 删除内网保留IP {@link DeleteReserveIpAddressesRequest} {@link DeleteReserveIpAddressesResponse} */
+  DeleteReserveIpAddresses(data: DeleteReserveIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReserveIpAddressesResponse>;
   /** 删除路由表 {@link DeleteRouteTableRequest} {@link DeleteRouteTableResponse} */
   DeleteRouteTable(data: DeleteRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTableResponse>;
   /** 删除路由策略 {@link DeleteRoutesRequest} {@link DeleteRoutesResponse} */
@@ -9161,6 +9267,8 @@ declare interface Vpc {
   DescribePrivateNatGateways(data?: DescribePrivateNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateNatGatewaysResponse>;
   /** 查询网络产品配额信息 {@link DescribeProductQuotaRequest} {@link DescribeProductQuotaResponse} */
   DescribeProductQuota(data: DescribeProductQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductQuotaResponse>;
+  /** 查询内网保留IP {@link DescribeReserveIpAddressesRequest} {@link DescribeReserveIpAddressesResponse} */
+  DescribeReserveIpAddresses(data?: DescribeReserveIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReserveIpAddressesResponse>;
   /** 查询路由策略冲突列表 {@link DescribeRouteConflictsRequest} {@link DescribeRouteConflictsResponse} */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
   /** 查询实例绑定路由表信息 {@link DescribeRouteTableAssociatedInstancesRequest} {@link DescribeRouteTableAssociatedInstancesResponse} */
@@ -9405,6 +9513,8 @@ declare interface Vpc {
   ModifyPrivateNatGatewayTranslationAclRule(data: ModifyPrivateNatGatewayTranslationAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayTranslationAclRuleResponse>;
   /** 修改私网NAT网关源端转换规则 {@link ModifyPrivateNatGatewayTranslationNatRuleRequest} {@link ModifyPrivateNatGatewayTranslationNatRuleResponse} */
   ModifyPrivateNatGatewayTranslationNatRule(data: ModifyPrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayTranslationNatRuleResponse>;
+  /** 修改内网保留IP {@link ModifyReserveIpAddressRequest} {@link ModifyReserveIpAddressResponse} */
+  ModifyReserveIpAddress(data: ModifyReserveIpAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReserveIpAddressResponse>;
   /** 修改路由表属性 {@link ModifyRouteTableAttributeRequest} {@link ModifyRouteTableAttributeResponse} */
   ModifyRouteTableAttribute(data: ModifyRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableAttributeResponse>;
   /** 编辑云联网路由表选择策略 {@link ModifyRouteTableSelectionPoliciesRequest} {@link ModifyRouteTableSelectionPoliciesResponse} */

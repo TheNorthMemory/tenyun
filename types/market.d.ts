@@ -35,11 +35,11 @@ declare interface GetUsagePlanUsageAmountRequest {
 
 declare interface GetUsagePlanUsageAmountResponse {
   /** 最大调用量 */
-  MaxRequestNum: number;
+  MaxRequestNum?: number;
   /** 已经调用量 */
-  InUseRequestNum: number;
+  InUseRequestNum?: number;
   /** 剩余调用量 */
-  RemainingRequestNum: number;
+  RemainingRequestNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

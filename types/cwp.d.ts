@@ -5640,7 +5640,7 @@ declare interface VulInfoList {
   CveId?: string;
   /** CVSS评分 */
   CvssScore?: number;
-  /** 漏洞标签 多个逗号分割 */
+  /** 漏洞标签 多个逗号分割存在EXP:EXP在野攻击:KNOWN_EXPLOITED本地利用:LOCAL必修漏洞:NEED_FIX远程利用:NETWORK存在POC:POC系统重启:RESTART */
   Labels?: string;
   /** 是否能自动修复且包含能自动修复的主机， 0=否 1=是 */
   FixSwitch?: number;

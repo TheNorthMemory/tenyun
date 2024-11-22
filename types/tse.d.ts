@@ -506,6 +506,8 @@ declare interface ConfigFileRelease {
   Active?: boolean | null;
   /** 格式 */
   Format?: string | null;
+  /** 配置文件ID */
+  ConfigFileId?: string | null;
 }
 
 /** 配置发布删除 */
@@ -518,6 +520,8 @@ declare interface ConfigFileReleaseDeletion {
   FileName?: string | null;
   /** 发布版本 */
   ReleaseVersion?: string | null;
+  /** 配置发布ID */
+  Id?: number | null;
 }
 
 /** 配置文件发布历史 */
@@ -1670,10 +1674,18 @@ declare interface QpsThreshold {
 
 /** 配置发布版本信息 */
 declare interface ReleaseVersion {
-  /** 名称 */
+  /** 配置发布的版本 */
   Name?: string | null;
   /** 是否生效 */
   Active?: boolean | null;
+  /** 配置发布的ID */
+  Id?: string | null;
+  /** 配置发布的命名空间 */
+  Namespace?: string | null;
+  /** 配置发布的分组 */
+  Group?: string | null;
+  /** 配置发布的文件名 */
+  FileName?: string | null;
 }
 
 /** 路由 WAF 状态 */
@@ -2182,6 +2194,8 @@ declare interface CreateConfigFileRequest {
 declare interface CreateConfigFileResponse {
   /** 是否创建成功 */
   Result?: boolean;
+  /** 创建的配置文件Id */
+  ConfigFileId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2329,11 +2343,17 @@ declare interface CreateOrUpdateConfigFileAndReleaseRequest {
   InstanceId: string;
   /** 配置文件列表详情 */
   ConfigFilePublishInfo: ConfigFilePublishInfo;
+  /** 控制开启校验配置版本是否已经存在 */
+  StrictEnable?: boolean;
 }
 
 declare interface CreateOrUpdateConfigFileAndReleaseResponse {
   /** 操作是否成功 */
   Result?: boolean;
+  /** 配置发布Id */
+  ConfigFileReleaseId?: string | null;
+  /** 配置文件Id */
+  ConfigFileId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2502,11 +2522,13 @@ declare interface DeleteConfigFilesRequest {
   /** TSE实例id */
   InstanceId: string;
   /** 命名空间 */
-  Namespace: string;
+  Namespace?: string;
   /** 配置分组名称 */
-  Group: string;
+  Group?: string;
   /** 配置文件名称 */
-  Name: string;
+  Name?: string;
+  /** 配置文件Id */
+  Id?: string;
 }
 
 declare interface DeleteConfigFilesResponse {
@@ -2909,6 +2931,8 @@ declare interface DescribeConfigFileReleaseHistoriesRequest {
   Name?: string;
   /** 发布历史记录id，用于分页优化，一般指定 EndId，就不用指定 Offset，否则分页可能不连续 */
   EndId?: number;
+  /** 配置文件ID */
+  ConfigFileId?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
   /** 偏移量，默认为0。 */
@@ -2928,13 +2952,15 @@ declare interface DescribeConfigFileReleaseRequest {
   /** TSE实例id */
   InstanceId: string;
   /** 命名空间名称 */
-  Namespace: string;
+  Namespace?: string;
   /** 配置分组名称 */
-  Group: string;
+  Group?: string;
   /** 配置文件名称 */
-  Name: string;
+  Name?: string;
   /** 配置文件发布名称 */
   ReleaseName?: string;
+  /** 配置文件发布Id */
+  Id?: string;
 }
 
 declare interface DescribeConfigFileReleaseResponse {
@@ -2953,6 +2979,8 @@ declare interface DescribeConfigFileReleaseVersionsRequest {
   Group?: string;
   /** 文件名称 */
   FileName?: string;
+  /** 配置文件ID */
+  ConfigFileId?: string;
 }
 
 declare interface DescribeConfigFileReleaseVersionsResponse {
@@ -2983,6 +3011,8 @@ declare interface DescribeConfigFileReleasesRequest {
   OrderField?: string;
   /** 排序，asc/desc，默认 desc */
   OrderDesc?: string;
+  /** 配置发布ID */
+  Id?: string;
 }
 
 declare interface DescribeConfigFileReleasesResponse {
@@ -2998,11 +3028,13 @@ declare interface DescribeConfigFileRequest {
   /** TSE实例id */
   InstanceId: string;
   /** 命名空间 */
-  Namespace: string;
+  Namespace?: string;
   /** 组 */
-  Group: string;
-  /** 名称 */
-  Name: string;
+  Group?: string;
+  /** 配置文件名称 */
+  Name?: string;
+  /** 配置文件Id */
+  Id?: string;
 }
 
 declare interface DescribeConfigFileResponse {
@@ -3041,7 +3073,7 @@ declare interface DescribeConfigFilesRequest {
   InstanceId?: string;
   /** 组名 */
   Group?: string;
-  /** 名称 */
+  /** 配置文件名称 */
   Name?: string;
   /** 标签列表 */
   Tags?: ConfigFileTag[];
@@ -3049,6 +3081,8 @@ declare interface DescribeConfigFilesRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
+  /** 配置文件ID */
+  Id?: string;
 }
 
 declare interface DescribeConfigFilesResponse {
@@ -3849,11 +3883,15 @@ declare interface PublishConfigFilesRequest {
   InstanceId: string;
   /** 配置文件发布 */
   ConfigFileReleases: ConfigFileRelease;
+  /** 控制开启校验配置版本是否已经存在 */
+  StrictEnable?: boolean;
 }
 
 declare interface PublishConfigFilesResponse {
   /** 配置文件发布是否成功 */
   Result?: boolean;
+  /** 配置文件发布Id */
+  ConfigFileReleaseId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

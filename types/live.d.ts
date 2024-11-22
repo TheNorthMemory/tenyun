@@ -158,6 +158,62 @@ declare interface CasterBriefInfo {
   FeeType?: number | null;
 }
 
+/** 导播台展示信息，包括使用的布局、水印、字幕、转场、音频等信息 */
+declare interface CasterDisplayInfo {
+  /** 布局Index。如果使用自定义布局，为自定义布局下标。如果使用单输入布局，如使用输入1，则LayoutIndexType=1， 且LayoutIndex=1，以此类推。 */
+  LayoutIndex?: number | null;
+  /** 使用的水印Index列表。注：当作为入参使用时，列表中的水印Index需要已经存在。 */
+  MarkPicIndexList?: number[] | null;
+  /** 使用的文字水印Index列表。注：作为入参使用时，列表中的Index需要已经存在。 */
+  MarkWordIndexList?: number[] | null;
+  /** 使用的转场类型。注：支持的转场类型可通过DescribeCasterTransitionTypes接口获取。 */
+  TransitionType?: string | null;
+  /** 使用的音频输入Index列表。注：当该字段非空时，表示使用布局中对应的输入源的视频，AudioIndexList中对应的输入源的音频。且这些输入源需已存在。 */
+  AudioIndexList?: number[] | null;
+  /** 作为入参时，表示使用点播输入源，单画面输入时，点播文件是否从头开始播放。默认为0。有效值，0,1。0代表不从头播放1代表从头播放 */
+  InputStartType?: number | null;
+  /** LayoutIndex类型，默认值:0可选值[0,1]0:默认类型，代表普通布局1:单输入类型，代表单输入布局 */
+  LayoutIndexType?: number | null;
+}
+
+/** 导播台信息 */
+declare interface CasterInfo {
+  /** 导播台ID */
+  CasterId?: number;
+  /** 导播台名称 */
+  CasterName?: string;
+  /** 导播台上一次启动pgm的时间，值为unix时间戳。 */
+  StartLiveTime?: number;
+  /** 导播台的描述 */
+  Description?: string;
+  /** 导播台创建时间，值为unix时间戳。 */
+  CreateTime?: number;
+  /** 导播台状态 0：停止状态，无预监，无主监1：无预监，有主监2：有预监，无主监3：有预监，有主监 */
+  Status?: number;
+  /** 导播台的过期时间戳。值为-1或unix时间戳。 默认值为-1。 当值为-1时，表示该导播台永不过期。 当值为正常unix时间戳时，导播台将在该时间过期。 导播台过期后，预监与主监画面将自动停止，转推自动停止。 点播、直播url将停止转拉，推流url需自行停止推流。 */
+  ExpireTime?: number;
+  /** 导播台延时播放时间，单位为秒。 */
+  DelayTime?: number;
+  /** 导播台主监输出的宽度，单位为像素。 */
+  PgmWidth?: number;
+  /** 导播台主监输出的高度，单位为像素。 */
+  PgmHeight?: number;
+  /** 导播台主监输出的帧率。 */
+  PgmFps?: number;
+  /** 导播台主监输出的码率，单位为kbps */
+  PgmBitRate?: number;
+  /** 导播台主监输出的音频码率，单位为kbps。 */
+  PgmAudioBitRate?: number;
+  /** 导播台的计费类型。 0 通用型 1 播单型。注： 本参数暂无作用。 */
+  FeeType?: number;
+  /** 录制模板id。 */
+  RecordTemplateId?: number;
+  /** 录制状态。 0：未录制 1：录制中 */
+  RecordStatus?: number;
+  /** 录制接口返回的taskid */
+  RecordTaskId?: string;
+}
+
 /** 下行播放统计指标 */
 declare interface CdnPlayStatData {
   /** 时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -1354,6 +1410,20 @@ declare interface TimeShiftTemplate {
   TranscodeTemplateIds?: number[];
 }
 
+/** 直播时移写入量数据。 */
+declare interface TimeShiftWriteSizeData {
+  /** 区域。 */
+  Area: string;
+  /** 时间，格式为：yyyy-mm-ddTHH:MM:SSZ。 */
+  Time: string;
+  /** 写入量（单位：字节） */
+  WriteSize: number;
+  /** 域名。 */
+  Domain: string;
+  /** 时移天数。 */
+  StorageDays: number;
+}
+
 /** 某个时间点的指标的数值是多少。 */
 declare interface TimeValue {
   /** UTC 时间，时间格式：yyyy-mm-ddTHH:MM:SSZ。 */
@@ -1558,6 +1628,54 @@ declare interface CancelCommonMixStreamRequest {
 }
 
 declare interface CancelCommonMixStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CopyCasterRequest {
+  /** 源导播台的ID */
+  CasterId: number;
+  /** 复制产生的新导播台名称 */
+  CasterName?: string;
+  /** 复制产生的导播台推送到云直播的流id注意：该流id不能与云直播中的流id重复 */
+  OutputStreamId?: string;
+}
+
+declare interface CopyCasterResponse {
+  /** 复制生成的导播台ID */
+  CasterId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCasterRequest {
+  /** 导播台名称 */
+  CasterName?: string;
+  /** 导播台的描述最大允许长度256 */
+  Description?: string;
+  /** 导播台的过期时间戳。值为-1或unix时间戳。默认值为-1。当值为-1时，表示该导播台永不过期。当值为正常unix时间戳时，导播台将在该时间过期。导播台过期后，预监与主监画面将自动停止，转推自动停止。点播、直播url将停止转拉，推流url需自行停止推流。 */
+  ExpireTime?: number;
+  /** 导播台延时播放时间，单位为秒。默认为0，最大支持300秒 */
+  DelayTime?: number;
+  /** 导播台转场类型。默认为空。允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。 */
+  TransitionType?: string;
+  /** 导播台主监输出的宽度，单位为像素。默认为1280，最大允许4096。 */
+  PgmWidth?: number;
+  /** 导播台主监输出的高度，单位为像素。默认为720，最大允许2160。 */
+  PgmHeight?: number;
+  /** 导播台主监输出的帧率。默认为0，表示随源输出。最大支持60。 */
+  PgmFps?: number;
+  /** 导播台主监输出的码率，单位为kbps。默认为0，表示随源的码率输出。最大允许10000kbps。 */
+  PgmBitRate?: number;
+  /** 导播台的计费类型。0 通用型 1 播单型。注： 本参数暂无作用。 */
+  FeeType?: number;
+  /** 导播台主监输出的音频码率，单位为kbps。可选项：[0, 128, 192, 256]默认值为0，表示随源的音频码率输出。 */
+  PgmAudioBitRate?: number;
+}
+
+declare interface CreateCasterResponse {
+  /** 导播台ID */
+  CasterId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2088,6 +2206,16 @@ declare interface CreateScreenshotTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCasterRequest {
+  /** 待删除的导播台ID */
+  CasterId: number;
+}
+
+declare interface DeleteCasterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLiveCallbackRuleRequest {
   /** 推流域名。 */
   DomainName: string;
@@ -2444,12 +2572,60 @@ declare interface DescribeCallbackRecordsListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCasterDisplayInfoRequest {
+  /** 导播台ID */
+  CasterId: number;
+}
+
+declare interface DescribeCasterDisplayInfoResponse {
+  /** 导播台状态0：停止状态，无预监，无主监 1：无预监，有主监 2：有预监，无主监 3：有预监，有主监 */
+  Status?: number | null;
+  /** 预监使用的展示参数。 */
+  PvwDisplayInfo?: CasterDisplayInfo | null;
+  /** 主监使用的展示参数。 */
+  PgmDisplayInfo?: CasterDisplayInfo | null;
+  /** 启动直播的时间，值为unix时间戳。 */
+  StartLiveTime?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCasterListRequest {
 }
 
 declare interface DescribeCasterListResponse {
   /** 用户对应的导播台简要信息列表 */
   CasterList?: CasterBriefInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterPlayUrlRequest {
+  /** 导播台ID */
+  CasterId: number;
+  /** 请求播放url的类型。取值范围[1，2，3]1：获取输入源的播放url2：获取pvw的播放url3：获取pgm的播放url */
+  PlayUrlType: number;
+  /** 仅在PlayUrlType为1时生效，此时该参数表示请求的输入源Index。注：对应的输入源必须存在。 */
+  PlayUrlIndex?: number;
+}
+
+declare interface DescribeCasterPlayUrlResponse {
+  /** 播放url。当导播台不存在预监或主监时，若请求预监或主监的播放地址，该字段为空。 */
+  PlayUrl?: string | null;
+  /** webrtc协议播放地址。当导播台不存在预监或主监时，若请求预监或主监的webrtc播放地址，该字段为空。注：webrtc协议播放地址需配合腾讯云快直播播放sdk方可使用。 */
+  WebRTCPlayUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterRequest {
+  /** 需查询的导播台ID */
+  CasterId: number;
+}
+
+declare interface DescribeCasterResponse {
+  /** 导播台信息 */
+  CasterInfo?: CasterInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2865,6 +3041,8 @@ declare interface DescribeLivePullStreamTasksRequest {
   PageNum?: number;
   /** 分页大小，默认值：10。取值范围：1~20 之前的任意整数。 */
   PageSize?: number;
+  /** 使用指定任务 ID 查询任务信息。注意：仅供使用指定 ID 创建的任务查询。 */
+  SpecifyTaskId?: string;
 }
 
 declare interface DescribeLivePullStreamTasksResponse {
@@ -3162,6 +3340,30 @@ declare interface DescribeLiveTimeShiftTemplatesRequest {
 declare interface DescribeLiveTimeShiftTemplatesResponse {
   /** 直播时移模板信息。 */
   Templates: TimeShiftTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveTimeShiftWriteSizeInfoListRequest {
+  /** 起始时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。支持最近六个月的查询，查询开始和结束时间跨度不支持超过31天。 */
+  StartTime: string;
+  /** 结束时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。支持最近六个月的查询，查询开始和结束时间跨度不支持超过31天。 */
+  EndTime: string;
+  /** 域名。 */
+  DomainNames?: string[];
+  /** 维度Area地区、Domain 域名、StorageDays 时移天数 */
+  Dimensions?: string[];
+  /** 时移天数。 */
+  StorageDays?: number[];
+  /** 时间跨度（分钟）默认5，可选 5、60或者1440。 */
+  Granularity?: number;
+  /** 区域可选Mainland、Oversea。 */
+  MainlandOrOversea?: string;
+}
+
+declare interface DescribeLiveTimeShiftWriteSizeInfoListResponse {
+  /** 直播时移写入量数据明细。 */
+  DataInfoList?: TimeShiftWriteSizeData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3914,6 +4116,44 @@ declare interface ForbidLiveStreamResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCasterRequest {
+  /** 导播台ID */
+  CasterId: number;
+  /** 导播台名称 */
+  CasterName?: string;
+  /** 导播台的描述最大允许长度256 */
+  Description?: string;
+  /** 录制模板id。默认为0。当使用直播录制功能时，可将使用的录制模版填入。该接口仅保存字段，不涉及任何录制功能。 */
+  RecordTemplateId?: number;
+  /** 录制状态，当调用录制接口后，可通过该字段保存录制状态。0：未录制 1：录制中该接口仅保存字段，不涉及任何录制处理。 */
+  RecordStatus?: number;
+  /** 导播台的过期时间戳。值为-1或unix时间戳。默认值为-1。 当值为-1时，表示该导播台永不过期。 当值为正常unix时间戳时，导播台将在该时间过期。导播台过期后，预监与主监画面将自动停止，转推自动停止。 点播、直播url将停止转拉，推流url需自行停止推流。 */
+  ExpireTime?: number;
+  /** 导播台延时播放时间，单位为秒。 默认为0，最大支持300秒 */
+  DelayTime?: number;
+  /** 导播台转场类型。 默认为空。 允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。 */
+  TransitionType?: string;
+  /** 导播台主监输出的宽度，单位为像素。 默认为1280，最大允许4096。 */
+  PgmWidth?: number;
+  /** 导播台主监输出的高度，单位为像素。 默认为720，最大允许2160。 */
+  PgmHeight?: number;
+  /** 导播台主监输出的帧率。 默认为0，表示随源输出。 最大支持60。 */
+  PgmFps?: number;
+  /** 导播台主监输出的码率，单位为kbps。 默认为0，表示随源的码率输出。 最大允许10000kbps。 */
+  PgmBitRate?: number;
+  /** 导播台的计费类型。 0 通用型 1 播单型。 注： 本参数暂无作用。 */
+  FeeType?: number;
+  /** 录制接口返回的taskid注：该接口只做字段保存，不涉及录制操作。 */
+  RecordTaskId?: string;
+  /** 导播台主监输出的音频码率，单位为kbps。 可选项：[0, 128, 192, 256] 默认值为0，表示随源的音频码率输出。 */
+  PgmAudioBitRate?: number;
+}
+
+declare interface ModifyCasterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLiveCallbackTemplateRequest {
   /** DescribeLiveCallbackTemplates接口返回的模板 ID。 */
   TemplateId: number;
@@ -4491,6 +4731,10 @@ declare interface Live {
   AuthenticateDomainOwner(data: AuthenticateDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<AuthenticateDomainOwnerResponse>;
   /** 取消通用混流 {@link CancelCommonMixStreamRequest} {@link CancelCommonMixStreamResponse} */
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
+  /** 复制导播台 {@link CopyCasterRequest} {@link CopyCasterResponse} */
+  CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
+  /** 创建新导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
+  CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
   /** 创建通用混流 {@link CreateCommonMixStreamRequest} {@link CreateCommonMixStreamResponse} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
   /** 创建回调规则 {@link CreateLiveCallbackRuleRequest} {@link CreateLiveCallbackRuleResponse} */
@@ -4531,6 +4775,8 @@ declare interface Live {
   CreateRecordTask(data: CreateRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordTaskResponse>;
   /** 创建截图任务 {@link CreateScreenshotTaskRequest} {@link CreateScreenshotTaskResponse} */
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
+  /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
+  DeleteCaster(data: DeleteCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterResponse>;
   /** 删除回调规则 {@link DeleteLiveCallbackRuleRequest} {@link DeleteLiveCallbackRuleResponse} */
   DeleteLiveCallbackRule(data: DeleteLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackRuleResponse>;
   /** 删除回调模板 {@link DeleteLiveCallbackTemplateRequest} {@link DeleteLiveCallbackTemplateResponse} */
@@ -4583,8 +4829,14 @@ declare interface Live {
   DescribeBillBandwidthAndFluxList(data: DescribeBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillBandwidthAndFluxListResponse>;
   /** 回调事件查询 {@link DescribeCallbackRecordsListRequest} {@link DescribeCallbackRecordsListResponse} */
   DescribeCallbackRecordsList(data: DescribeCallbackRecordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallbackRecordsListResponse>;
+  /** 查询导播台信息 {@link DescribeCasterRequest} {@link DescribeCasterResponse} */
+  DescribeCaster(data: DescribeCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterResponse>;
+  /** 查询导播台展示信息 {@link DescribeCasterDisplayInfoRequest} {@link DescribeCasterDisplayInfoResponse} */
+  DescribeCasterDisplayInfo(data: DescribeCasterDisplayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterDisplayInfoResponse>;
   /** 查询导播台列表 {@link DescribeCasterListRequest} {@link DescribeCasterListResponse} */
   DescribeCasterList(data?: DescribeCasterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterListResponse>;
+  /** 获取导播台视频流播放url {@link DescribeCasterPlayUrlRequest} {@link DescribeCasterPlayUrlResponse} */
+  DescribeCasterPlayUrl(data: DescribeCasterPlayUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterPlayUrlResponse>;
   /** 获取所有的转场列表 {@link DescribeCasterTransitionTypesRequest} {@link DescribeCasterTransitionTypesResponse} */
   DescribeCasterTransitionTypes(data: DescribeCasterTransitionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterTransitionTypesResponse>;
   /** 查询当前APPID导播台业务状态 {@link DescribeCasterUserStatusRequest} {@link DescribeCasterUserStatusResponse} */
@@ -4675,6 +4927,8 @@ declare interface Live {
   DescribeLiveTimeShiftRules(data?: DescribeLiveTimeShiftRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftRulesResponse>;
   /** 获取直播时移模板 {@link DescribeLiveTimeShiftTemplatesRequest} {@link DescribeLiveTimeShiftTemplatesResponse} */
   DescribeLiveTimeShiftTemplates(data?: DescribeLiveTimeShiftTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftTemplatesResponse>;
+  /** 直播时移写入量数据 {@link DescribeLiveTimeShiftWriteSizeInfoListRequest} {@link DescribeLiveTimeShiftWriteSizeInfoListResponse} */
+  DescribeLiveTimeShiftWriteSizeInfoList(data: DescribeLiveTimeShiftWriteSizeInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftWriteSizeInfoListResponse>;
   /** 查询直播转码统计信息 {@link DescribeLiveTranscodeDetailInfoRequest} {@link DescribeLiveTranscodeDetailInfoResponse} */
   DescribeLiveTranscodeDetailInfo(data?: DescribeLiveTranscodeDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeDetailInfoResponse>;
   /** 获取转码规则列表 {@link DescribeLiveTranscodeRulesRequest} {@link DescribeLiveTranscodeRulesResponse} */
@@ -4745,6 +4999,8 @@ declare interface Live {
   ForbidLiveDomain(data: ForbidLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveDomainResponse>;
   /** 禁推直播流 {@link ForbidLiveStreamRequest} {@link ForbidLiveStreamResponse} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
+  /** 修改导播台信息 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
+  ModifyCaster(data: ModifyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterResponse>;
   /** 修改回调模板 {@link ModifyLiveCallbackTemplateRequest} {@link ModifyLiveCallbackTemplateResponse} */
   ModifyLiveCallbackTemplate(data: ModifyLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveCallbackTemplateResponse>;
   /** 批量绑定证书对应的播放域名 {@link ModifyLiveDomainCertBindingsRequest} {@link ModifyLiveDomainCertBindingsResponse} */

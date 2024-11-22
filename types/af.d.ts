@@ -301,7 +301,7 @@ declare interface QueryAntiFraudResponse {
 /** {@link Af 借贷反欺诈} */
 declare interface Af {
   (): Versions;
-  /** 金融借贷反欺诈 {@link DescribeAntiFraudRequest} {@link DescribeAntiFraudResponse} */
+  /** @deprecated 金融借贷反欺诈 {@link DescribeAntiFraudRequest} {@link DescribeAntiFraudResponse} */
   DescribeAntiFraud(data?: DescribeAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFraudResponse>;
   /** 反欺诈评分接口 {@link GetAntiFraudRequest} {@link GetAntiFraudResponse} */
   GetAntiFraud(data?: GetAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudResponse>;

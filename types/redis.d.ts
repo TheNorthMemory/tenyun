@@ -1023,9 +1023,9 @@ declare interface ZoneCapacityConf {
 }
 
 declare interface AddReplicationInstanceRequest {
-  /** 复制组ID。 */
+  /** 复制组ID。请登录[Redis控制台的全球复制](https://console.cloud.tencent.com/redis/replication)页面获取复制组 ID。 */
   GroupId: string;
-  /** 实例ID。 */
+  /** 实例ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 给复制组添加的实例分配角色。rw：可读写。r：只读。 */
   InstanceRole: string;
@@ -1039,7 +1039,7 @@ declare interface AddReplicationInstanceResponse {
 }
 
 declare interface AllocateWanAddressRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1053,9 +1053,9 @@ declare interface AllocateWanAddressResponse {
 }
 
 declare interface ApplyParamsTemplateRequest {
-  /** 实例ID列表 */
+  /** 实例 ID 列表，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceIds: string[];
-  /** 应用的参数模板ID */
+  /** 应用的参数模板ID，请通过接口[DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/239/58748)的返回参数 **TemplateId** 获取参数模板 ID。 */
   TemplateId: string;
 }
 
@@ -1069,9 +1069,9 @@ declare interface ApplyParamsTemplateResponse {
 declare interface AssociateSecurityGroupsRequest {
   /** 数据库引擎名称，本接口取值：redis。 */
   Product: string;
-  /** 要绑定的安全组ID，类似sg-efil73jd。 */
+  /** 要绑定的安全组ID，请在[控制台安全组](https://console.cloud.tencent.com/vpc/security-group)页面获取安全组 ID。 */
   SecurityGroupId: string;
-  /** 被绑定的实例ID，类似ins-lesecurk，支持指定多个实例。 */
+  /** 被绑定的实例ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID，支持指定多个实例。 */
   InstanceIds: string[];
 }
 
@@ -1081,17 +1081,17 @@ declare interface AssociateSecurityGroupsResponse {
 }
 
 declare interface ChangeInstanceRoleRequest {
-  /** 复制组ID */
+  /** 复制组ID。请登录[Redis控制台的全球复制](https://console.cloud.tencent.com/redis/replication)页面获取复制组 ID。 */
   GroupId: string;
-  /** 实例ID */
+  /** 实例ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 实例角色，rw可读写，r只读 */
+  /** 实例角色。- rw：可读写。- r：只读。 */
   InstanceRole: string;
 }
 
 declare interface ChangeInstanceRoleResponse {
   /** 异步流程ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1127,7 +1127,7 @@ declare interface ChangeReplicaToMasterResponse {
 }
 
 declare interface CleanUpInstanceRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1139,9 +1139,9 @@ declare interface CleanUpInstanceResponse {
 }
 
 declare interface ClearInstanceRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** redis的实例密码（免密实例不需要传密码，非免密实例必传） */
+  /** 实例访问密码。- 免密访问：无需配置。- 密码认证：必须配置。字符个数为[8,64]，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。 */
   Password?: string;
 }
 
@@ -1205,7 +1205,7 @@ declare interface CloneInstancesResponse {
 }
 
 declare interface CloseSSLRequest {
-  /** 实例ID。 */
+  /** 实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1217,9 +1217,9 @@ declare interface CloseSSLResponse {
 }
 
 declare interface CreateInstanceAccountRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 自定义访问数据库的名称。- 仅由字母、数字、下划线、中划线组成。- 长度不能大于32位。 */
+  /** 自定义的访问数据库的账号名称。- 仅由字母、数字、下划线、中划线组成。- 长度不能大于32位。 */
   AccountName: string;
   /** 设置自定义账号的密码。密码复杂度要求如下：- 字符个数为[8,64]。- 至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的两种。- 不能以"/"开头。 */
   AccountPassword: string;
@@ -1323,9 +1323,9 @@ declare interface CreateParamTemplateResponse {
 }
 
 declare interface CreateReplicationGroupRequest {
-  /** 指定复制组中的主实例ID。 */
+  /** 指定复制组中的主实例ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 复制组名称。名称只支持长度为2-64个字符的中文、英文、数字、下划线_、分隔符-。 */
+  /** 配置复制组名称。仅支持长度为2-64个字符的中文、英文、数字、下划线_、分隔符-。 */
   GroupName?: string;
   /** 备注信息。 */
   Remark?: string;
@@ -1339,9 +1339,9 @@ declare interface CreateReplicationGroupResponse {
 }
 
 declare interface DeleteInstanceAccountRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 子账号名称 */
+  /** 子账号名称。请登录[Redis控制台](https://console.cloud.tencent.com/redis)，切换至**账号管理**页面获取。具体信息，请参见[管理账号](https://cloud.tencent.com/document/product/239/36710)。 */
   AccountName: string;
 }
 
@@ -1363,11 +1363,11 @@ declare interface DeleteParamTemplateResponse {
 }
 
 declare interface DeleteReplicationInstanceRequest {
-  /** 复制组ID */
+  /** 复制组ID。请登录[Redis控制台的全球复制](https://console.cloud.tencent.com/redis/replication)页面获取复制组 ID。 */
   GroupId: string;
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 数据同步类型，true:需要数据强同步,false:不需要强同步，仅限删除主实例 */
+  /** 数据同步类型。- true：需要数据强同步。- false：不需要强同步，仅限删除主实例。 */
   SyncType: boolean;
 }
 
@@ -1399,7 +1399,7 @@ declare interface DescribeAutoBackupConfigResponse {
 }
 
 declare interface DescribeBackupDetailRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 备份 ID，可通过接口 [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) 返回的参数 **RedisBackupSet** 获取。 */
   BackupId: string;
@@ -1483,7 +1483,7 @@ declare interface DescribeBackupUrlResponse {
 }
 
 declare interface DescribeBandwidthRangeRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1611,7 +1611,7 @@ declare interface DescribeInstanceBackupsResponse {
 }
 
 declare interface DescribeInstanceDTSInfoRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1747,7 +1747,7 @@ declare interface DescribeInstanceMonitorHotKeyResponse {
 }
 
 declare interface DescribeInstanceMonitorSIPRequest {
-  /** 实例Id */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1759,7 +1759,7 @@ declare interface DescribeInstanceMonitorSIPResponse {
 }
 
 declare interface DescribeInstanceMonitorTookDistRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 查询时间日期。 */
   Date: string;
@@ -1789,7 +1789,7 @@ declare interface DescribeInstanceMonitorTopNCmdResponse {
 }
 
 declare interface DescribeInstanceMonitorTopNCmdTookRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 查询时间范围。- 1：实时。- 2：近30分钟。- 3：近6小时。- 4：近24小时。 */
   SpanType: number;
@@ -2061,15 +2061,15 @@ declare interface DescribeProductInfoResponse {
 }
 
 declare interface DescribeProjectSecurityGroupRequest {
-  /** 0:默认项目；-1 所有项目; >0: 特定项目 */
+  /** 指定查询的项目 ID。- 0：默认项目。- -1：所有项目。- 大于0：特定项目。请登录[Redis控制台的项目管理](https://console.cloud.tencent.com/project)页面，在**项目名称**中复制项目 ID。 */
   ProjectId?: number;
-  /** 安全组Id */
+  /** 安全组 ID，通过接口[DescribeInstanceSecurityGroup](https://cloud.tencent.com/document/product/239/34447)的返回参数 **InstanceSecurityGroupsDetail** 的子参数 **SecurityGroupId** 获取。 */
   SecurityGroupId?: string;
 }
 
 declare interface DescribeProjectSecurityGroupResponse {
   /** 项目安全组 */
-  SecurityGroupDetails: SecurityGroupDetail[];
+  SecurityGroupDetails?: SecurityGroupDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2077,7 +2077,7 @@ declare interface DescribeProjectSecurityGroupResponse {
 declare interface DescribeProjectSecurityGroupsRequest {
   /** 数据库引擎名称，本接口取值：redis。 */
   Product: string;
-  /** 项目 ID。 */
+  /** 项目 ID，请登录[Redis控制台的项目管理](https://console.cloud.tencent.com/project)页面，在**项目名称**中复制项目 ID。 */
   ProjectId?: number;
   /** 偏移量，取值为Limit的整数倍。 */
   Offset?: number;
@@ -2121,45 +2121,45 @@ declare interface DescribeProxySlowLogResponse {
 }
 
 declare interface DescribeRedisClusterOverviewRequest {
-  /** 本地专用集群id */
+  /** 本地专用集群 ID，请登录[专用集群控制台](https://console.cloud.tencent.com/cdc/dedicatedcluster/index?rid=1)实例列表获取集群 ID。 */
   DedicatedClusterId?: string;
 }
 
 declare interface DescribeRedisClusterOverviewResponse {
   /** 资源包总数 */
-  TotalBundle: number;
+  TotalBundle?: number;
   /** 资源包总内存大小，单位：GB */
-  TotalMemory: number;
+  TotalMemory?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeRedisClustersRequest {
-  /** Redis独享集群id */
+  /** Redis独享集群 ID。请登录[专用集群控制台](https://console.cloud.tencent.com/cdc/dedicatedcluster/index?rid=1)切换至**云服务管理**页面，在下拉框选择**云数据库 Redis**，可获取独享集群ID。 */
   RedisClusterIds?: string[];
-  /** 集群状态：1-流程中，2-运行中，3-已隔离 */
+  /** 集群状态。- 1：流程。- 2：运行中。- 3：已隔离。 */
   Status?: number[];
-  /** 项目ID数组 */
+  /** 项目ID数组。请登录[项目管理](https://console.cloud.tencent.com/project)页面，在**项目名称**中复制项目 ID。 */
   ProjectIds?: number[];
-  /** 续费模式：0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费 */
+  /** 续费模式。- 0：默认状态，手动续费。- 1：自动续费。- 2：明确不自动续费。 */
   AutoRenewFlag?: number[];
-  /** Redis独享集群名称 */
+  /** Redis 独享集群名称。 */
   ClusterName?: string;
-  /** 搜索关键词：支持集群Id、集群名称 */
+  /** 搜索关键词：支持集群 ID、集群名称。 */
   SearchKey?: string;
-  /** 分页限制返回大小，不传则默认为20 */
+  /** 分页限制返回大小，不传则默认为20。 */
   Limit?: number;
   /** 偏移量，取Limit整数倍 */
   Offset?: number;
-  /** 本地专用集群id */
+  /** 本地专用集群 ID，请登录[专用集群控制台](https://console.cloud.tencent.com/cdc/dedicatedcluster/index?rid=1)实例列表获取集群 ID。 */
   DedicatedClusterId?: string;
 }
 
 declare interface DescribeRedisClustersResponse {
   /** 集群总数 */
-  Total: number;
+  Total?: number;
   /** CDC集群资源列表 */
-  Resources: CDCResource[];
+  Resources?: CDCResource[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2253,7 +2253,7 @@ declare interface DescribeSlowLogResponse {
 }
 
 declare interface DescribeTaskInfoRequest {
-  /** 任务 ID。 */
+  /** 任务 ID, 请通过接口[DescribeTaskList](https://cloud.tencent.com/document/product/239/39374) 的返回参数 **Tasks** 的子参数 **TaskId** 获取。 */
   TaskId: number;
 }
 
@@ -2309,7 +2309,7 @@ declare interface DescribeTaskListResponse {
 }
 
 declare interface DescribeTendisSlowLogRequest {
-  /** 实例Id：crs-ngvou0i1 */
+  /** 实例 ID，请登录[Tendis控制台](https://console.cloud.tencent.com/tendis)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 开始时间：2019-09-08 12:12:41，查询时间最大跨度30天。 */
   BeginTime: string;
@@ -2333,7 +2333,7 @@ declare interface DescribeTendisSlowLogResponse {
 }
 
 declare interface DestroyPostpaidInstanceRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -2345,7 +2345,7 @@ declare interface DestroyPostpaidInstanceResponse {
 }
 
 declare interface DestroyPrepaidInstanceRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -2357,7 +2357,7 @@ declare interface DestroyPrepaidInstanceResponse {
 }
 
 declare interface DisableReplicaReadonlyRequest {
-  /** 实例序号ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -2371,9 +2371,9 @@ declare interface DisableReplicaReadonlyResponse {
 declare interface DisassociateSecurityGroupsRequest {
   /** 数据库引擎名称，本接口取值：redis。 */
   Product: string;
-  /** 安全组 ID。 */
+  /** 安全组 ID，请通过接口[DescribeInstanceSecurityGroup](https://cloud.tencent.com/document/product/239/34447)的返回参数InstanceSecurityGroupsDetail 的子参数**SecurityGroupId**获取。 */
   SecurityGroupId: string;
-  /** 实例ID列表，一个或者多个实例 ID 组成的数组。 */
+  /** 实例ID列表，一个或者多个实例 ID 组成的数组。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceIds: string[];
 }
 
@@ -2383,9 +2383,9 @@ declare interface DisassociateSecurityGroupsResponse {
 }
 
 declare interface EnableReplicaReadonlyRequest {
-  /** 实例序号ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 账号路由策略：填写master或者replication，表示路由主节点，从节点；不填路由策略默认为写主节点，读从节点 */
+  /** 只读路由策略。- master：表示只读路由至主节点。- replication：表示只读路由至从节点。- 默认策略：表示写主节点，读从节点。 */
   ReadonlyPolicy?: string[];
 }
 
@@ -2445,13 +2445,13 @@ declare interface InquiryPriceRenewInstanceResponse {
 }
 
 declare interface InquiryPriceUpgradeInstanceRequest {
-  /** 实例Id */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 分片大小 单位 MB */
+  /** 分片大小，单位：MB。 */
   MemSize: number;
-  /** 分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写 */
+  /** 分片数量，Redis 2.8主从版、CKV主从版和Redis2.8单机版不需要填写。 */
   RedisShardNum?: number;
-  /** 副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写 */
+  /** 副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。 */
   RedisReplicasNum?: number;
 }
 
@@ -2467,7 +2467,7 @@ declare interface KillMasterGroupRequest {
   InstanceId: string;
   /** 该参数用于配置指定实例的访问密码。若为免密认证，该参数则无需配置。密码复杂度要求如下所示。- 长度8-30位,推荐使用12位以上的密码- 不能以"/"开头- 至少包含小写字母a-z、大写字母A-Z、数字0-9及其 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。 */
   Password?: string;
-  /** 分片集群的分片 ID。 */
+  /** 分片集群的分片 ID。请通过接口[DescribeInstanceNodeInfo](https://cloud.tencent.com/document/product/239/48603) 的返回参数 **Redis** 中的 **ClusterId** 获取。 */
   ShardIds?: number[];
 }
 
@@ -2553,11 +2553,11 @@ declare interface ModifyBackupDownloadRestrictionResponse {
 }
 
 declare interface ModifyConnectionConfigRequest {
-  /** 实例的ID，长度在12-36之间。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 附加带宽，大于0，单位MB。 */
   Bandwidth?: number;
-  /** 单分片的总连接数。未开启副本只读时，下限为10000，上限为40000；开启副本只读时，下限为10000，上限为10000×(只读副本数+3)。 */
+  /** 单分片的总连接数。- 未开启副本只读时，下限为10000，上限为40000。- 开启副本只读时，下限为10000，上限为10000×(只读副本数+3)。 */
   ClientLimit?: number;
 }
 
@@ -2571,9 +2571,9 @@ declare interface ModifyConnectionConfigResponse {
 declare interface ModifyDBInstanceSecurityGroupsRequest {
   /** 数据库引擎名称，本接口取值：redis。 */
   Product: string;
-  /** 更换为新的安全组 ID 列表，即一个或者多个安全组 ID 组成的数组。若实例第一次配置安全组，请使用接口[AssociateSecurityGroups](https://cloud.tencent.com/document/product/239/41260)先绑定安全组。 */
+  /** 更换为新的安全组 ID 列表，即一个或者多个安全组 ID 组成的数组。- 若实例第一次配置安全组，请使用接口[AssociateSecurityGroups](https://cloud.tencent.com/document/product/239/41260)先绑定安全组。- 更换安全组，请在[控制台安全组](https://console.cloud.tencent.com/vpc/security-group)页面获取安全组 ID。 */
   SecurityGroupIds: string[];
-  /** 实例 ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -2583,19 +2583,19 @@ declare interface ModifyDBInstanceSecurityGroupsResponse {
 }
 
 declare interface ModifyInstanceAccountRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 子账号名称，如果要修改主账号，填root */
+  /** 子账号名称，如果要修改主账号，填 root。 */
   AccountName: string;
-  /** 子账号密码 */
+  /** 子账号密码。 */
   AccountPassword?: string;
   /** 子账号描述信息 */
   Remark?: string;
-  /** 路由策略：填写master或者replication，表示主节点或者从节点 */
+  /** 账号读写路由策略。- master：表示主节点。- replication：表示从节点。 */
   ReadonlyPolicy?: string[];
-  /** 子账号读写策略：填写r、w、rw，表示只读，只写，读写策略 */
+  /** 子账号读写策略。- r：只读。- w：只写。- rw：读写。 */
   Privilege?: string;
-  /** true表示将主账号切换为免密账号，这里只适用于主账号，子账号不可免密。 */
+  /** 指定是否将主账号切换为免密账号。这里只适用于主账号，子账号不可免密。- true：将主账号切换为免密账号。- false：不切换。 */
   NoAuth?: boolean;
 }
 
@@ -2645,15 +2645,15 @@ declare interface ModifyInstanceEventResponse {
 }
 
 declare interface ModifyInstanceLogDeliveryRequest {
-  /** 实例ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 日志类型。当前仅支持设置为slowlog，指慢查询日志。 */
   LogType: string;
   /** 日志投递开启状态。- true：开启。- false：关闭。 */
   Enabled: boolean;
-  /** 投递的日志集ID。 */
+  /** 投递的日志集ID。通过接口[DescribeInstanceLogDelivery](https://cloud.tencent.com/document/product/239/110878)的返回参数 **SlowLog** 的子参数 **LogsetId** 获取。 */
   LogsetId?: string;
-  /** 投递的日志主题ID。 */
+  /** 投递的日志主题ID。请通过接口[DescribeInstanceLogDelivery](https://cloud.tencent.com/document/product/239/110878)的返回参数 **SlowLog** 的子参数 **TopicId** 获取。 */
   TopicId?: string;
   /** 日志集名称。若**LogsetId**未指定具体的日志集ID，请配置该参数，设置日志集名称，系统会以设置的日志集名称自动创建新的日志集。 */
   LogsetName?: string;
@@ -2673,7 +2673,7 @@ declare interface ModifyInstanceLogDeliveryResponse {
 }
 
 declare interface ModifyInstanceParamsRequest {
-  /** 实例ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 实例修改的参数列表。 */
   InstanceParams: InstanceParam[];
@@ -2705,35 +2705,35 @@ declare interface ModifyInstancePasswordResponse {
 }
 
 declare interface ModifyInstanceReadOnlyRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 实例输入模式，0：读写 1：只读 */
+  /** 实例输入模式。- 0：读写。- 1：只读。 */
   InputMode: string;
 }
 
 declare interface ModifyInstanceReadOnlyResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ModifyInstanceRequest {
-  /** 修改实例操作，如填写：rename-表示实例重命名；modifyProject-修改实例所属项目；modifyAutoRenew-修改实例续费标记 */
+  /** 修改实例操作。如填写：- rename：表示实例重命名。- modifyProject：修改实例所属项目。- modifyAutoRenew：修改实例续费标记。 */
   Operation: string;
-  /** 实例Id，每次请求的实例的上限为10。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。每次请求的实例数量的上限为10。 */
   InstanceIds?: string[];
-  /** 实例的新名称 */
+  /** 实例的新名称。 */
   InstanceNames?: string[];
-  /** 项目Id */
+  /** 项目 ID，请登录[Redis控制台的项目管理](https://console.cloud.tencent.com/project)页面，在**项目名称**中复制项目 ID。 */
   ProjectId?: number;
-  /** 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费 */
+  /** 自动续费标识。- 0：默认状态，指手动续费。- 1：自动续费。- 2：明确不自动续费。 */
   AutoRenews?: number[];
-  /** 已经废弃 */
+  /** 目前在废弃中，存量用户还可以使用，建议新用户使用 InstanceIds。 */
   InstanceId?: string;
   /** 已经废弃 */
   InstanceName?: string;
-  /** 已经废弃 */
+  /** 已经废弃。 */
   AutoRenew?: number;
 }
 
@@ -2743,11 +2743,11 @@ declare interface ModifyInstanceResponse {
 }
 
 declare interface ModifyMaintenanceWindowRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 维护时间窗起始时间，如：17:00 */
+  /** 维护时间窗起始时间，如：17:00。 */
   StartTime: string;
-  /** 维护时间窗结束时间，如：19:00 */
+  /** 维护时间窗结束时间，如：19:00。 */
   EndTime: string;
 }
 
@@ -2791,7 +2791,7 @@ declare interface ModifyNetworkConfigResponse {
 }
 
 declare interface ModifyParamTemplateRequest {
-  /** 源参数模板 ID。 */
+  /** 源参数模板 ID。 请通过接口[DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/239/58748)的返回参数 **TemplateId** 获取参数模板 ID。 */
   TemplateId: string;
   /** 参数模板修改后的新名称。 */
   Name?: string;
@@ -2821,7 +2821,7 @@ declare interface ModifyReplicationGroupResponse {
 }
 
 declare interface OpenSSLRequest {
-  /** 实例ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -2833,7 +2833,7 @@ declare interface OpenSSLResponse {
 }
 
 declare interface ReleaseWanAddressRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -2847,17 +2847,17 @@ declare interface ReleaseWanAddressResponse {
 }
 
 declare interface RemoveReplicationInstanceRequest {
-  /** 复制组ID */
+  /** 复制组 ID。例如：crs-rpl-m3zt****。请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID。 */
   GroupId: string;
-  /** 实例ID */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 数据同步类型，true:需要数据强同步,false:不需要强同步，仅限删除主实例 */
+  /** 数据同步类型。- true：需数据强同步。- false：无需强同步，仅限删除主实例。 */
   SyncType: boolean;
 }
 
 declare interface RemoveReplicationInstanceResponse {
-  /** 异步任务ID */
-  TaskId: number;
+  /** 异步任务ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2879,11 +2879,11 @@ declare interface RenewInstanceResponse {
 }
 
 declare interface ResetPasswordRequest {
-  /** Redis实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 重置的密码（切换为免密实例时，可不传；其他情况必传） */
+  /** 重置的密码。若切换为免密实例时，可不配置该参数。其他情况必须配置。 */
   Password?: string;
-  /** 是否切换免密实例，false-切换为非免密码实例，true-切换为免密码实例；默认false */
+  /** 是否切换免密实例。- false：切换为非免密码实例。- true：切换为免密码实例。默认 false。 */
   NoAuth?: boolean;
 }
 
@@ -2911,7 +2911,7 @@ declare interface RestoreInstanceResponse {
 }
 
 declare interface StartupInstanceRequest {
-  /** 实例id */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -2933,13 +2933,13 @@ declare interface SwitchAccessNewInstanceResponse {
 }
 
 declare interface SwitchInstanceVipRequest {
-  /** 源实例ID */
+  /** 源实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   SrcInstanceId: string;
-  /** 目标实例ID */
+  /** 目标实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   DstInstanceId: string;
-  /** 单位为秒。源实例与目标实例间DTS已断开时间，如果DTS断开时间大于TimeDelay，则不切换VIP，建议尽量根据业务设置一个可接受的值。 */
+  /** 单位为秒。源实例与目标实例间DTS已断开时间。如果 DTS 断开时间大于TimeDelay，则不切换VIP，建议尽量根据业务设置一个可接受的值。 */
   TimeDelay?: number;
-  /** 在DTS断开的情况下是否强制切换。1：强制切换，0：不强制切换 */
+  /** 在 DTS 断开的情况下是否强制切换。- 1：强制切换。- 0：不强制切换。 */
   ForceSwitch?: number;
   /** now: 立即切换，syncComplete：等待同步完成后切换 */
   SwitchTime?: string;
@@ -2947,15 +2947,15 @@ declare interface SwitchInstanceVipRequest {
 
 declare interface SwitchInstanceVipResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface SwitchProxyRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 实例ProxyID */
+  /** 实例 ProxyID，请通过接口[DescribeInstanceNodeInfo](https://cloud.tencent.com/document/product/239/48603)的返回参数**Proxy**中的**NodeId**获取。 */
   ProxyID?: string;
 }
 
@@ -3001,13 +3001,13 @@ declare interface UpgradeInstanceVersionResponse {
 }
 
 declare interface UpgradeProxyVersionRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 当前proxy版本 */
+  /** 当前 Proxy 版本。 */
   CurrentProxyVersion: string;
-  /** 可升级的redis版本 */
+  /** 可升级的 Redis 版本。 */
   UpgradeProxyVersion: string;
-  /** 1-立即升级 0-维护时间窗口升级 */
+  /** 指定是否立即升级。- 1：立即升级。- 0：维护时间窗口升级。 */
   InstanceTypeUpgradeNow: number;
 }
 
@@ -3019,13 +3019,13 @@ declare interface UpgradeProxyVersionResponse {
 }
 
 declare interface UpgradeSmallVersionRequest {
-  /** 实例ID */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 当前redis版本 */
+  /** 当前 Redis 小版本。小版本信息，请参见[升级实例版本](https://cloud.tencent.com/document/product/239/46457)。 */
   CurrentRedisVersion: string;
-  /** 可升级的redis版本 */
+  /** 升级后的 Redis 小版本。小版本信息，请参见[升级实例版本](https://cloud.tencent.com/document/product/239/46457)。 */
   UpgradeRedisVersion: string;
-  /** 1-立即升级 0-维护时间窗口升级 */
+  /** 指定是否立即升级。- 1：立即升级。- 0：维护时间窗口升级。 */
   InstanceTypeUpgradeNow: number;
 }
 
@@ -3037,7 +3037,7 @@ declare interface UpgradeSmallVersionResponse {
 }
 
 declare interface UpgradeVersionToMultiAvailabilityZonesRequest {
-  /** 实例ID。 */
+  /** 实例ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 升级多可用区之后是否支持就近访问功能。true：支持就近访问功能。升级过程，需同时升级 Proxy 版本和 Redis 内核小版本，涉及数据搬迁，可能会长达数小时。false：无需支持就近访问功能。升级多可用区仅涉及管理元数据迁移，对服务没有影响，升级过程通常在3分钟内完成。 */
   UpgradeProxyAndRedisServer?: boolean;

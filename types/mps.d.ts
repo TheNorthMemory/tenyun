@@ -4544,10 +4544,14 @@ declare interface SegmentRecognitionItem {
   EndTimeOffset?: number;
   /** 拆条片段URL。 */
   SegmentUrl?: string | null;
+  /** 拆条片段封面。 */
+  CovImgUrl?: string | null;
   /** 分段标题。 */
   Title?: string | null;
   /** 分段概要。 */
   Summary?: string | null;
+  /** 分段关键词。 */
+  Keywords?: string[];
   /** 直播切片对应直播起始时间点，采用 ISO 日期格式。 */
   BeginTime?: string | null;
   /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
