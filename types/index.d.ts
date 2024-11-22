@@ -122,6 +122,7 @@ import Hasim, { Versions as HasimVersions } from "./hasim";
 import Hcm, { Versions as HcmVersions } from "./hcm";
 import Hunyuan, { Versions as HunyuanVersions } from "./hunyuan";
 import Iai, { Versions as IaiVersions } from "./iai";
+import Iap, { Versions as IapVersions } from "./iap";
 import Ic, { Versions as IcVersions } from "./ic";
 import Icr, { Versions as IcrVersions } from "./icr";
 import Ie, { Versions as IeVersions } from "./ie";
@@ -384,6 +385,7 @@ export declare type SERVICE_VERSIONS = {
   hcm: HcmVersions,
   hunyuan: HunyuanVersions,
   iai: IaiVersions,
+  iap: IapVersions,
   ic: IcVersions,
   icr: IcrVersions,
   ie: IeVersions,
@@ -779,6 +781,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   hunyuan: Hunyuan,
   /** {@link Iai 人脸识别} */
   iai: Iai,
+  /** {@link Iap 身份识别平台} */
+  iap: Iap,
   /** {@link Ic 图片瘦身} */
   ic: Ic,
   /** {@link Icr 对话机器人} */
