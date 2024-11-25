@@ -1553,12 +1553,14 @@ declare interface CreateBatchCancelFlowUrlResponse {
 declare interface CreateBatchInitOrganizationUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 初始化操作类型CREATE_SEAL : 创建印章AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业OPEN_AUTO_SIGN :开通企业自动签署 */
+  /** 初始化操作类型CREATE_SEAL : 创建印章AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业OPEN_AUTO_SIGN :开通企业自动签署PARTNER_AUTO_SIGN_AUTH :合作方企业授权自动签 */
   OperateTypes: string[];
   /** 批量操作的企业Id列表，最大支持50个 */
   OrganizationIds: string[];
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 被授权的合作方企业在电子签的企业电子签账号，当操作类型包含 PARTNER_AUTO_SIGN_AUTH （合作方企业授权自动签）时必传。企业电子签账号可在[电子签的网页端](https://qian.tencent.com/console/company-settings/company-center) ，于企业设置-企业信息菜单栏下复制获取。![企业电子签账号](https://qcloudimg.tencent-cloud.cn/raw/4e6b30ee92f00671f7f1c5bd127c27db.png) */
+  AuthorizedOrganizationId?: string;
 }
 
 declare interface CreateBatchInitOrganizationUrlResponse {

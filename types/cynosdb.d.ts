@@ -416,6 +416,8 @@ declare interface ClusterInstanceDetail {
   InstanceDeviceType?: string | null;
   /** 实例存储类型 */
   InstanceStorageType?: string | null;
+  /** 数据库类型 */
+  DbMode?: string;
 }
 
 /** 参数修改记录 */
@@ -606,7 +608,7 @@ declare interface CynosdbClusterDetail {
   CreateTime?: string;
   /** 数据库类型 */
   DbType?: string;
-  /** 数据库类型，normal，serverless */
+  /** Db类型：NORMALSERVERLESS */
   DbMode?: string | null;
   /** 数据库版本 */
   DbVersion?: string;

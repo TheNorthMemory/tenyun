@@ -10798,9 +10798,9 @@ declare interface UpdateDataModelRegistryInfoRequest {
   CloudappId: string;
   /** 数语的CAM角色 */
   AppCamRole: string;
-  /** 数语的ip */
+  /** 数语的公网访问ip */
   Ip?: string;
-  /** 数语的端口 */
+  /** 数语的公网访问端口 */
   Port?: number;
   /** 数语的CAM角色id */
   AppCamRoleId?: string;
@@ -10810,6 +10810,16 @@ declare interface UpdateDataModelRegistryInfoRequest {
   TenantId?: string;
   /** 主账号id */
   OwnId?: string;
+  /** VpcId */
+  VpcId?: string;
+  /** Vpc地域 */
+  VpcRegion?: string;
+  /** 数语的内网访问ip */
+  Pip?: string;
+  /** 数语的内网访问端口 */
+  Pport?: number;
+  /** 是否开放公网访问数语, 1:是，0:否，默认1开放 */
+  IsPublic?: number;
 }
 
 declare interface UpdateDataModelRegistryInfoResponse {

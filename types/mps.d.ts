@@ -2754,6 +2754,20 @@ declare interface HighlightSegmentItem {
   SegmentTags?: string[] | null;
 }
 
+/** 图片编码格式参数 */
+declare interface ImageEncodeConfig {
+  /** 图片格式，取值范围：JPG、BMP、GIF、PNG、WebP，缺省为原图格式。 */
+  Format?: string | null;
+  /** 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。 */
+  Quality?: number | null;
+}
+
+/** 图片增强参数 */
+declare interface ImageEnhanceConfig {
+  /** 超分配置。 */
+  SuperResolution?: SuperResolutionConfig | null;
+}
+
 /** 综合增强配置 */
 declare interface ImageQualityEnhanceConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -2808,6 +2822,14 @@ declare interface ImageSpriteTemplate {
   Comment: string;
   /** 图片格式。 */
   Format: string;
+}
+
+/** 图片任务输入参数 */
+declare interface ImageTaskInput {
+  /** 图片编码配置。 */
+  EncodeConfig?: ImageEncodeConfig | null;
+  /** 图片增强配置。 */
+  EnhanceConfig?: ImageEnhanceConfig | null;
 }
 
 /** 图片水印模板输入参数 */
@@ -7186,6 +7208,24 @@ declare interface ParseNotificationResponse {
   RequestId?: string;
 }
 
+declare interface ProcessImageRequest {
+  /** 图片处理的文件输入信息。 */
+  InputInfo: MediaInputInfo;
+  /** 图片处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+  /** 图片处理生成的文件输出的路径。如果不填表示与 InputInfo 中文件所在的目录一致。如果是目录，如`/image/201907/`，表示继承原文件名输出到该目录。 */
+  OutputDir?: string;
+  /** 图片处理参数。 */
+  ImageTask?: ImageTaskInput;
+}
+
+declare interface ProcessImageResponse {
+  /** 任务 ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ProcessLiveStreamRequest {
   /** 直播流 URL（必须是直播文件地址，支持 rtmp，hls 和 flv 等）。 */
   Url: string;
@@ -7543,6 +7583,8 @@ declare interface Mps {
   ParseLiveStreamProcessNotification(data: ParseLiveStreamProcessNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ParseLiveStreamProcessNotificationResponse>;
   /** 解析事件通知 {@link ParseNotificationRequest} {@link ParseNotificationResponse} */
   ParseNotification(data: ParseNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ParseNotificationResponse>;
+  /** 发起图片处理 {@link ProcessImageRequest} {@link ProcessImageResponse} */
+  ProcessImage(data: ProcessImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessImageResponse>;
   /** 对直播流发起处理 {@link ProcessLiveStreamRequest} {@link ProcessLiveStreamResponse} */
   ProcessLiveStream(data: ProcessLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessLiveStreamResponse>;
   /** 发起媒体处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */

@@ -934,6 +934,30 @@ declare interface ResizeDiskResponse {
   RequestId?: string;
 }
 
+declare interface ScaleCNOutUpInstanceRequest {
+  /** 实例唯一ID */
+  InstanceId: string;
+  /** warehouse名称 */
+  VirtualCluster: string;
+  /** 子网id */
+  UserSubnetID: string;
+  /** 新的warehouse的个数 */
+  NewCount: number;
+  /** 集群的规格2X-Small、X-Small、Small */
+  NewSpecName: string;
+}
+
+declare interface ScaleCNOutUpInstanceResponse {
+  /** 流程ID */
+  FlowId?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ScaleOutInstanceRequest {
   /** 实例唯一ID */
   InstanceId: string;
@@ -1037,6 +1061,8 @@ declare interface Cdwch {
   RecoverBackUpJob(data: RecoverBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverBackUpJobResponse>;
   /** 扩容磁盘容量 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
+  /** 通过接口弹性伸缩云原生集群(openapi) {@link ScaleCNOutUpInstanceRequest} {@link ScaleCNOutUpInstanceResponse} */
+  ScaleCNOutUpInstance(data: ScaleCNOutUpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleCNOutUpInstanceResponse>;
   /** 水平调整实例节点 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
   /** 垂直扩缩容节点规格 {@link ScaleUpInstanceRequest} {@link ScaleUpInstanceResponse} */
