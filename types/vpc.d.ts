@@ -389,11 +389,11 @@ declare interface CcnBatchRouteTable {
 /** 云联网限速实例锁对象，该对象特用于运营端使用，用于封禁实例流量。 */
 declare interface CcnFlowLock {
   /** 带宽所属的云联网ID。 */
-  CcnId: string | null;
+  CcnId: string;
   /** 实例所属用户主账号ID。 */
-  UserAccountID: string | null;
+  UserAccountID: string;
   /** 带宽实例的唯一ID。作为`UnlockCcnBandwidths`接口和`LockCcnBandwidths`接口的入参时，该字段必传。 */
-  RegionFlowControlId?: string | null;
+  RegionFlowControlId?: string;
 }
 
 /** 云联网（CCN）关联实例（Instance）对象。 */
@@ -547,9 +547,9 @@ declare interface CcnRouteTableInputPolicy {
   /** 策略描述。 */
   Description: string;
   /** as-path操作 */
-  OperateAsPath?: string | null;
+  OperateAsPath?: string;
   /** as-path操作模式 */
-  AsPathOperateMode?: string | null;
+  AsPathOperateMode?: string;
 }
 
 /** 云联网路由接收策略列表 */
@@ -7555,7 +7555,7 @@ declare interface ModifyAssistantCidrRequest {
 
 declare interface ModifyAssistantCidrResponse {
   /** 辅助CIDR数组。 */
-  AssistantCidrSet?: AssistantCidr[] | null;
+  AssistantCidrSet?: AssistantCidr[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1285,7 +1285,7 @@ declare interface KongCertificatesPreview {
   /** 证书名称 */
   Name?: string | null;
   /** Id */
-  Id: string | null;
+  Id?: string | null;
   /** 绑定的域名 */
   BindDomains?: string[] | null;
   /** 证书状态：expired(已过期) active(生效中) */
@@ -1535,9 +1535,9 @@ declare interface ListCloudNativeAPIGatewayStrategyResult {
 /** 列表过滤条件，模糊匹配 */
 declare interface ListFilter {
   /** 过滤字段 */
-  Key?: string | null;
+  Key?: string;
   /** 过滤值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 新增Location字段，展示zone/region/campus */
@@ -2891,7 +2891,7 @@ declare interface DescribeCloudNativeAPIGatewaysRequest {
 
 declare interface DescribeCloudNativeAPIGatewaysResponse {
   /** 获取云原生API网关实例列表响应结果。 */
-  Result: ListCloudNativeAPIGatewayResult;
+  Result?: ListCloudNativeAPIGatewayResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

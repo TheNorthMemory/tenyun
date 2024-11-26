@@ -1076,6 +1076,12 @@ declare interface DescribeBackUpTablesRequest {
 declare interface DescribeBackUpTablesResponse {
   /** 可备份表列表 */
   AvailableTables?: BackupTableContent[];
+  /** msg */
+  Msg?: string | null;
+  /** 未知version */
+  IsUnknownVersion?: boolean | null;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1262,6 +1268,8 @@ declare interface DescribeDatabaseAuditRecordsResponse {
   TotalCount?: number;
   /** 记录列表 */
   SlowQueryRecords?: DataBaseAuditRecord;
+  /** 记录列表 */
+  Records?: DataBaseAuditRecord[] | null;
   /** 错误信息 */
   ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */

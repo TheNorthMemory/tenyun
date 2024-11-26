@@ -390,6 +390,16 @@ declare interface TaskGroupConfig {
   TaskGroupActionsConfig?: TaskGroupActionConfig[];
 }
 
+/** 演练动作组简易配置 */
+declare interface TaskGroupForAction {
+  /** 动作ID */
+  TaskActionId?: number;
+  /** {"ActionTimeout":1800} */
+  TaskActionGeneralConfiguration?: string;
+  /** {"ip": "0.0.0.0"} */
+  TaskActionCustomConfiguration?: string;
+}
+
 /** 任务分组动作实例 */
 declare interface TaskGroupInstance {
   /** 实例ID */
@@ -668,6 +678,26 @@ declare interface CreateTaskFromActionRequest {
 }
 
 declare interface CreateTaskFromActionResponse {
+  /** 创建成功的演练ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTaskFromMultiActionRequest {
+  /** 参与演练的实例ID */
+  TaskInstances: string[];
+  /** 演练名称，不填则默认取动作名称 */
+  TaskTitle?: string;
+  /** 演练描述，不填则默认取动作描述 */
+  TaskDescription?: string;
+  /** 演练自动暂停时间，单位分钟, 不填则默认为60 */
+  TaskPauseDuration?: number;
+  /** 演练动作组配置 */
+  TaskAction?: TaskGroupForAction[];
+}
+
+declare interface CreateTaskFromMultiActionResponse {
   /** 创建成功的演练ID */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -955,6 +985,8 @@ declare interface Cfg {
   (): Versions;
   /** 从动作创建演练 {@link CreateTaskFromActionRequest} {@link CreateTaskFromActionResponse} */
   CreateTaskFromAction(data: CreateTaskFromActionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFromActionResponse>;
+  /** 快速创建多个动作的演练 {@link CreateTaskFromMultiActionRequest} {@link CreateTaskFromMultiActionResponse} */
+  CreateTaskFromMultiAction(data: CreateTaskFromMultiActionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFromMultiActionResponse>;
   /** 从经验库创建演练 {@link CreateTaskFromTemplateRequest} {@link CreateTaskFromTemplateResponse} */
   CreateTaskFromTemplate(data: CreateTaskFromTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFromTemplateResponse>;
   /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */

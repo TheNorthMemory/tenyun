@@ -866,6 +866,8 @@ declare interface CynosdbInstanceDetail {
   MinCpu?: number;
   /** serverless实例cpu上限 */
   MaxCpu?: number;
+  /** Db类型:NORMALSERVERLESS */
+  DbMode?: string | null;
 }
 
 /** 实例组信息 */

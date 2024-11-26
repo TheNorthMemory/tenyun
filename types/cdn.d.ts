@@ -3657,7 +3657,7 @@ declare interface DescribeTopDataRequest {
 
 declare interface DescribeTopDataResponse {
   /** 各个资源的Top 访问数据详情。 */
-  Data: TopDataMore[];
+  Data?: TopDataMore[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4555,7 +4555,7 @@ declare interface Cdn {
   DescribeScdnIpStrategy(data?: DescribeScdnIpStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnIpStrategyResponse>;
   /** 获取SCDN的Top数据 {@link DescribeScdnTopDataRequest} {@link DescribeScdnTopDataResponse} */
   DescribeScdnTopData(data: DescribeScdnTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnTopDataResponse>;
-  /** TOP 新版数据查询（beta版） {@link DescribeTopDataRequest} {@link DescribeTopDataResponse} */
+  /** TOP 新版数据查询 {@link DescribeTopDataRequest} {@link DescribeTopDataResponse} */
   DescribeTopData(data: DescribeTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopDataResponse>;
   /** 流量包查询 {@link DescribeTrafficPackagesRequest} {@link DescribeTrafficPackagesResponse} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;

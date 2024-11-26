@@ -4604,6 +4604,8 @@ declare interface RecognizeThaiIDCardOCRResponse {
   PortraitImage?: string;
   /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
   WarnCardInfos?: number[];
+  /** 字段置信度：{ "ID": { "Confidence": 0.9999 }, "ThaiName": { "Confidence": 0.9996 }} */
+  AdvancedInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

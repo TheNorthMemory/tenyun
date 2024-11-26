@@ -2973,7 +2973,7 @@ declare interface DescribeTemplatesRequest {
   QueryAllComponents?: boolean;
   /** 是否获取模板预览链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接, 有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   WithPreviewUrl?: boolean;
-  /** 是否获取模板的PDF文件链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 是否获取模板的PDF文件链接。**false**：不获取（默认）**true**：获取设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地注: `此功能需要开通功能白名单【第三方应用集成企业获取模版PDF下载链接】，使用前请联系对接的客户经理沟通。` */
   WithPdfUrl?: boolean;
   /** 操作者的信息 */
   Operator?: UserInfo;

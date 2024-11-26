@@ -605,7 +605,7 @@ declare interface AddNodesRequest {
   VirtualPrivateCloud: VirtualPrivateCloud;
   /** 添加节点数量。 */
   Count: number;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和特定自定义镜像。 */
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。公共镜像请参考[镜像限制](https://cloud.tencent.com/document/product/1527/64818) */
   ImageId?: string;
   /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
   InstanceChargeType?: string;

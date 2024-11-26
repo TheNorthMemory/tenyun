@@ -762,6 +762,14 @@ declare interface QuoteInfo {
   Index?: string | null;
 }
 
+/** 重排数据, 计算2段内容的关联性 */
+declare interface ReRankDataObject {
+  /** 第一段内容 */
+  PromptA: string;
+  /** 第二段内容 */
+  PromptB: string;
+}
+
 /** ReconstructDocument配置选项 */
 declare interface ReconstructDocumentConfig {
   /** 生成的Markdown中是否嵌入图片 */
@@ -2912,6 +2920,28 @@ declare interface RetryReleaseResponse {
   RequestId?: string;
 }
 
+declare interface RunReRankRequest {
+  /** 模型名称, 必填，默认: lke-reranker-base */
+  Query?: string;
+  /** 文档列表，必填，最多20个 */
+  Docs?: string[];
+  /** 模型名称, 非必填，默认: lke-reranker-base */
+  Model?: string;
+  /** 需要计算关联性的2段内容 */
+  DataList?: ReRankDataObject[];
+  /** 是否在线, 后台异步任务使用离线, 实时任务使用在线, 默认值: false */
+  Online?: boolean;
+}
+
+declare interface RunReRankResponse {
+  /** 相关性, 数值越大越相关 */
+  ScoreList?: number[];
+  /** 消耗量，仅返回TotalToken */
+  Usage?: Usage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SaveDocRequest {
   /** 应用ID */
   BotBizId: string;
@@ -3191,6 +3221,8 @@ declare interface Lke {
   RetryDocParse(data: RetryDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDocParseResponse>;
   /** 发布暂停后重试 {@link RetryReleaseRequest} {@link RetryReleaseResponse} */
   RetryRelease(data: RetryReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryReleaseResponse>;
+  /** 重排序 {@link RunReRankRequest} {@link RunReRankResponse} */
+  RunReRank(data?: RunReRankRequest, config?: AxiosRequestConfig): AxiosPromise<RunReRankResponse>;
   /** 保存文档 {@link SaveDocRequest} {@link SaveDocResponse} */
   SaveDoc(data: SaveDocRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDocResponse>;
   /** 终止文档解析 {@link StopDocParseRequest} {@link StopDocParseResponse} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 259+ 款产品，11908+ 服务数</summary>
+<details><summary>共计 259+ 款产品，11910+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -149,7 +149,7 @@ cdwch | [腾讯云数据仓库TCHouse-C](https://cloud.tencent.com/document/prod
 cdwdoris | [腾讯云数据仓库 TCHouse-D](https://cloud.tencent.com/document/product/1387) | 2021-12-28(60) |
 cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/878) | 2020-12-30(8) |
 cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-11-23(2) |
-cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(16) |
+cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(43) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(114) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
@@ -241,7 +241,7 @@ kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 201
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(65) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(109) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(167) |
-lke | [大模型知识引擎](https://cloud.tencent.com/document/product/1759) | 2023-11-30(90) |
+lke | [大模型知识引擎](https://cloud.tencent.com/document/product/1759) | 2023-11-30(91) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
