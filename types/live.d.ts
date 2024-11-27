@@ -214,6 +214,80 @@ declare interface CasterInfo {
   RecordTaskId?: string;
 }
 
+/** 导播台输入信息参数 */
+declare interface CasterInputInfo {
+  /** 输入源Index。范围[1, 20] */
+  InputIndex: number;
+  /** 输入源类型。范围[0,1,2,3,4]。0：推流地址。1：点播文件地址。2：直播拉流地址。3：图片地址。4：webrtc协议推流地址。 */
+  InputType?: number;
+  /** 输入源的源地址。最大允许长度512。当InputType为0（推流地址），2（直播拉流地址），3（图片地址）,4（webrtc推流地址）这几种类型时，URL需填入该字段。 */
+  InputUrl?: string | null;
+  /** 输入源描述。最大允许长度256字符。 */
+  Description?: string | null;
+  /** 点播地址列表。仅当input type为1（点播地址）时，将一个或多个点播地址，填入该字段。单个地址最大允许长度512字符。最多允许同时填入5个地址。注：此时需保持InputUrl字段为空。 */
+  InputUrls?: string[] | null;
+  /** 是否启用点播无限循环播放。注：当前该字段未生效，默认为True。 */
+  LoopEnable?: boolean | null;
+  /** 点播循环次数。允许值-1或正整数。当值为-1时，表示无限循环。当值为其他正整数时，表示循环对应次数。注：该字段暂未生效。 */
+  LoopNumber?: number | null;
+  /** 是否启用拉取到导播台。注：该字段默认强制为true。 */
+  PullPushEnable?: boolean | null;
+  /** 输入源音量百分比。默认为100。表示音量为原始大小。允许值[0,200]。 */
+  Volume?: number | null;
+}
+
+/** 导播台布局参数。 */
+declare interface CasterLayoutInfo {
+  /** 布局Index。 */
+  LayoutIndex: number;
+  /** 布局模板Id。有效值[1，20，21，31，32，41]当使用布局模版时，无需LayoutParams参数，导播台将使用模版布局参数。 */
+  LayoutTemplateId?: number;
+  /** 布局绑定的输入列表。按布局LayerId从小到大，按顺序排列。已有两个画面的布局为例，输入1对应LayerId为1，输入2对应的LayerId为2，该字段应该填入"1|2"。 */
+  InputIndexList?: string;
+  /** 详细的布局参数列表。 */
+  LayoutParams?: CasterLayoutParam[];
+  /** 布局输出的宽度，单位为像素。默认为1280像素。注：该值仅在画中画布局，且未设置PgmWidth时生效。 */
+  LayoutWidth?: number | null;
+  /** 布局输出的高度，单位为像素。注：该参数仅在画中画布局，且未设置PgmHeight时生效。 */
+  LayoutHeight?: number | null;
+}
+
+/** 导播台布局详细参数。 */
+declare interface CasterLayoutParam {
+  /** 布局层ID。在画面最终渲染时，将按ID从小到大的顺序，由下至上渲染。 */
+  LayerId: number;
+  /** 布局层宽度。当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面上所占的比例值。 */
+  LayerWidth: number;
+  /** 布局层高度.当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面上所占的比例值。 */
+  LayerHeight: number;
+  /** 布局层位置x坐标。当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面上x坐标所占的比例值。 */
+  LayerLocationX: number;
+  /** 布局层位置Y坐标。当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面Y坐标上所占的比例值。 */
+  LayerLocationY: number;
+  /** 是否启用抠图。 */
+  UsePortraitSegment?: boolean | null;
+}
+
+/** 导播台推流信息。当导播台主监启动后，系统将自动将主监推流到腾讯云和其他第三方平台。 */
+declare interface CasterOutputInfo {
+  /** 推流信息Index。当OutputType为1（表示推流到腾讯云直播）时，该值固定为0。范围[0,10]。 */
+  OutputIndex: number;
+  /** rtmp协议推流地址。最大允许长度512字符。 */
+  OutputUrl?: string;
+  /** 描述信息。 */
+  Description?: string | null;
+  /** 推流到腾讯云直播源站时，使用的流ID。仅当OutputType为1时生效。最大允许128字符。 */
+  OutputStreamId?: string | null;
+  /** 推流类型。范围[1,2]1. 推送到腾讯云直播源站。2. 推送到第三方源站。 */
+  OutputType?: number;
+  /** 推到腾讯云直播源站时，使用的域名。最大允许128字符，且域名需属于当前账号绑定的云直播推流域名。仅在OutputType为1时生效。 */
+  OutputDomainName?: string | null;
+  /** 推到腾讯云直播源站时，使用的AppName。最大允许64字符。仅在OutputType为1时生效。 */
+  OutputAppName?: string | null;
+  /** 推到腾讯云直播源站时需要添加的推流参数。最大允许长度256字符。仅在OutputType为1时生效。 */
+  OutputParam?: string | null;
+}
+
 /** 下行播放统计指标 */
 declare interface CdnPlayStatData {
   /** 时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -1540,6 +1614,46 @@ declare interface XP2PDetailInfo {
   AppId?: string | null;
 }
 
+declare interface AddCasterInputInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 导播台输入源详细信息。 */
+  InputInfo: CasterInputInfo;
+}
+
+declare interface AddCasterInputInfoResponse {
+  /** rtmp协议输入源播放地址。注：仅可作为预览使用，不可分发。 */
+  InputPlayUrl?: string;
+  /** webrtc协议播放地址。注：1. 需配合使用腾讯云快直播播放SDK使用才可正常播放。2. 仅作为预览使用，不可分发。 */
+  InputWebRTCPlayUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddCasterLayoutInfoRequest {
+  /** 导播台ID */
+  CasterId: number;
+  /** 导播台布局参数信息。 */
+  LayoutInfo: CasterLayoutInfo;
+}
+
+declare interface AddCasterLayoutInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddCasterOutputInfoRequest {
+  /** 导播台ID */
+  CasterId: number;
+  /** 导播台推流参数信息。 */
+  OutputInfo: CasterOutputInfo;
+}
+
+declare interface AddCasterOutputInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddDelayLiveStreamRequest {
   /** 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。 */
   AppName: string;
@@ -1644,6 +1758,22 @@ declare interface CopyCasterRequest {
 declare interface CopyCasterResponse {
   /** 复制生成的导播台ID */
   CasterId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCasterInputPushUrlRequest {
+  /** 导播台ID */
+  CasterId: number;
+  /** 请求生成推流地址的输入Index。允许范围[1,20]。 */
+  InputIndex: number;
+  /** 生成推流地址协议。范围[rtmp,webrtc]。注：获取webrtc推流地址时，需配合腾讯云快直播推流sdk才可成功推流。 */
+  Protocol?: string;
+}
+
+declare interface CreateCasterInputPushUrlResponse {
+  /** 生成可使用的推流地址。 */
+  PushUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2206,6 +2336,42 @@ declare interface CreateScreenshotTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCasterInputInfoRequest {
+  /** 导播台ID */
+  CasterId: number;
+  /** 导播台输入Index。范围[0,20]注：该Index对应的输入源需存在。 */
+  InputIndex: number;
+}
+
+declare interface DeleteCasterInputInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCasterLayoutInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 要删除的布局Index。注：待删除的Index对应的布局需存在。 */
+  LayoutIndex: number;
+}
+
+declare interface DeleteCasterLayoutInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCasterOutputInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 待删除的推流信息Index。注：删除时，该Index对应的配置需要存在。 */
+  OutputIndex: number;
+}
+
+declare interface DeleteCasterOutputInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCasterRequest {
   /** 待删除的导播台ID */
   CasterId: number;
@@ -2590,12 +2756,48 @@ declare interface DescribeCasterDisplayInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCasterInputInfosRequest {
+  /** 导播台ID */
+  CasterId: number;
+}
+
+declare interface DescribeCasterInputInfosResponse {
+  /** 导播台输入源信息列表。 */
+  InputInfos?: CasterInputInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterLayoutInfosRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface DescribeCasterLayoutInfosResponse {
+  /** 导播台的布局列表。 */
+  LayoutInfos?: CasterLayoutInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCasterListRequest {
 }
 
 declare interface DescribeCasterListResponse {
   /** 用户对应的导播台简要信息列表 */
   CasterList?: CasterBriefInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterOutputInfosRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface DescribeCasterOutputInfosResponse {
+  /** 导播台的推流信息列表。 */
+  OutputInfos?: CasterOutputInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4116,6 +4318,46 @@ declare interface ForbidLiveStreamResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCasterInputInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 修改的导播台输入源信息 */
+  InputInfo: CasterInputInfo;
+}
+
+declare interface ModifyCasterInputInfoResponse {
+  /** 修改输入源后的预览地址。注：该地址仅作为预览使用，不可分发。 */
+  InputPlayUrl?: string;
+  /** 修改后的输入源webrtc预览地址。该地址需配合腾讯云快直播播放SDK使用。注：该地址仅做预览使用，不可分发。 */
+  InputWebRTCPlayUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCasterLayoutInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 导播台布局参数信息。 */
+  LayoutInfo: CasterLayoutInfo;
+}
+
+declare interface ModifyCasterLayoutInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCasterOutputInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 导播台推流参数信息。 */
+  OutputInfo: CasterOutputInfo;
+}
+
+declare interface ModifyCasterOutputInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCasterRequest {
   /** 导播台ID */
   CasterId: number;
@@ -4721,6 +4963,12 @@ declare interface UpdateLiveWatermarkResponse {
 /** {@link Live 云直播CSS} */
 declare interface Live {
   (): Versions;
+  /** 新增导播台输入源 {@link AddCasterInputInfoRequest} {@link AddCasterInputInfoResponse} */
+  AddCasterInputInfo(data: AddCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterInputInfoResponse>;
+  /** 增加导播台布局参数 {@link AddCasterLayoutInfoRequest} {@link AddCasterLayoutInfoResponse} */
+  AddCasterLayoutInfo(data: AddCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterLayoutInfoResponse>;
+  /** 新增导播台推流信息 {@link AddCasterOutputInfoRequest} {@link AddCasterOutputInfoResponse} */
+  AddCasterOutputInfo(data: AddCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterOutputInfoResponse>;
   /** 设置延时直播 {@link AddDelayLiveStreamRequest} {@link AddDelayLiveStreamResponse} */
   AddDelayLiveStream(data: AddDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<AddDelayLiveStreamResponse>;
   /** 添加域名 {@link AddLiveDomainRequest} {@link AddLiveDomainResponse} */
@@ -4735,6 +4983,8 @@ declare interface Live {
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
   /** 创建新导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
   CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
+  /** 生成导播台推流URL {@link CreateCasterInputPushUrlRequest} {@link CreateCasterInputPushUrlResponse} */
+  CreateCasterInputPushUrl(data: CreateCasterInputPushUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterInputPushUrlResponse>;
   /** 创建通用混流 {@link CreateCommonMixStreamRequest} {@link CreateCommonMixStreamResponse} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
   /** 创建回调规则 {@link CreateLiveCallbackRuleRequest} {@link CreateLiveCallbackRuleResponse} */
@@ -4777,6 +5027,12 @@ declare interface Live {
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
   /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
   DeleteCaster(data: DeleteCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterResponse>;
+  /** 删除导播台输入源信息 {@link DeleteCasterInputInfoRequest} {@link DeleteCasterInputInfoResponse} */
+  DeleteCasterInputInfo(data: DeleteCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterInputInfoResponse>;
+  /** 删除导播台的布局信息 {@link DeleteCasterLayoutInfoRequest} {@link DeleteCasterLayoutInfoResponse} */
+  DeleteCasterLayoutInfo(data: DeleteCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterLayoutInfoResponse>;
+  /** 删除导播台推流信息 {@link DeleteCasterOutputInfoRequest} {@link DeleteCasterOutputInfoResponse} */
+  DeleteCasterOutputInfo(data: DeleteCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterOutputInfoResponse>;
   /** 删除回调规则 {@link DeleteLiveCallbackRuleRequest} {@link DeleteLiveCallbackRuleResponse} */
   DeleteLiveCallbackRule(data: DeleteLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackRuleResponse>;
   /** 删除回调模板 {@link DeleteLiveCallbackTemplateRequest} {@link DeleteLiveCallbackTemplateResponse} */
@@ -4833,8 +5089,14 @@ declare interface Live {
   DescribeCaster(data: DescribeCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterResponse>;
   /** 查询导播台展示信息 {@link DescribeCasterDisplayInfoRequest} {@link DescribeCasterDisplayInfoResponse} */
   DescribeCasterDisplayInfo(data: DescribeCasterDisplayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterDisplayInfoResponse>;
+  /** 查询导播台输入源信息列表 {@link DescribeCasterInputInfosRequest} {@link DescribeCasterInputInfosResponse} */
+  DescribeCasterInputInfos(data: DescribeCasterInputInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterInputInfosResponse>;
+  /** 查询导播台的布局列表 {@link DescribeCasterLayoutInfosRequest} {@link DescribeCasterLayoutInfosResponse} */
+  DescribeCasterLayoutInfos(data: DescribeCasterLayoutInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterLayoutInfosResponse>;
   /** 查询导播台列表 {@link DescribeCasterListRequest} {@link DescribeCasterListResponse} */
   DescribeCasterList(data?: DescribeCasterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterListResponse>;
+  /** 查询导播台的推流信息列表 {@link DescribeCasterOutputInfosRequest} {@link DescribeCasterOutputInfosResponse} */
+  DescribeCasterOutputInfos(data: DescribeCasterOutputInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterOutputInfosResponse>;
   /** 获取导播台视频流播放url {@link DescribeCasterPlayUrlRequest} {@link DescribeCasterPlayUrlResponse} */
   DescribeCasterPlayUrl(data: DescribeCasterPlayUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterPlayUrlResponse>;
   /** 获取所有的转场列表 {@link DescribeCasterTransitionTypesRequest} {@link DescribeCasterTransitionTypesResponse} */
@@ -5001,6 +5263,12 @@ declare interface Live {
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
   /** 修改导播台信息 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
   ModifyCaster(data: ModifyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterResponse>;
+  /** 修改导播台输入源信息 {@link ModifyCasterInputInfoRequest} {@link ModifyCasterInputInfoResponse} */
+  ModifyCasterInputInfo(data: ModifyCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterInputInfoResponse>;
+  /** 修改布局参数 {@link ModifyCasterLayoutInfoRequest} {@link ModifyCasterLayoutInfoResponse} */
+  ModifyCasterLayoutInfo(data: ModifyCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterLayoutInfoResponse>;
+  /** 修改导播台推流信息 {@link ModifyCasterOutputInfoRequest} {@link ModifyCasterOutputInfoResponse} */
+  ModifyCasterOutputInfo(data: ModifyCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterOutputInfoResponse>;
   /** 修改回调模板 {@link ModifyLiveCallbackTemplateRequest} {@link ModifyLiveCallbackTemplateResponse} */
   ModifyLiveCallbackTemplate(data: ModifyLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveCallbackTemplateResponse>;
   /** 批量绑定证书对应的播放域名 {@link ModifyLiveDomainCertBindingsRequest} {@link ModifyLiveDomainCertBindingsResponse} */

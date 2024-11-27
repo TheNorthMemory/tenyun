@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 自定义变量和标签关系数据 */
+declare interface ApiVarAttrInfo {
+  /** 自定义变量id */
+  ApiVarId?: string | null;
+  /** 标签id */
+  AttrBizId?: string | null;
+}
+
 /** 应用配置 */
 declare interface AppConfig {
   /** 知识问答管理应用配置 */
@@ -326,11 +334,11 @@ declare interface InvokeAPI {
 
 /** 知识库容量饼图详情 */
 declare interface KnowledgeCapacityPieGraphDetail {
-  /** 应用名称 */
+  /** 当前应用名称 */
   AppName?: string | null;
-  /** 应用使用的字符数 */
+  /** 当前应用使用的字符数 */
   UsedCharSize?: string | null;
-  /** 应用占比 */
+  /** 当前应用对于总用量的占比 */
   Proportion?: number | null;
 }
 
@@ -346,6 +354,10 @@ declare interface KnowledgeQaConfig {
   Search?: KnowledgeQaSearch[] | null;
   /** 知识管理输出配置 */
   Output?: KnowledgeQaOutput | null;
+  /** 工作流程配置 */
+  Workflow?: KnowledgeWorkflow | null;
+  /** 检索范围 */
+  SearchRange?: SearchRange | null;
 }
 
 /** 应用管理输出配置 */
@@ -394,6 +406,12 @@ declare interface KnowledgeSummary {
   Type?: number | null;
   /** 知识内容 */
   Content?: string | null;
+}
+
+/** 问答知识库工作流配置 */
+declare interface KnowledgeWorkflow {
+  /** 是否启用工作流 */
+  IsEnabled?: boolean | null;
 }
 
 /** 标签ID */
@@ -562,6 +580,22 @@ declare interface ModelInfo {
   ResourceStatus?: number | null;
   /** 提示词内容字符限制 */
   PromptWordsLimit?: string | null;
+  /** 通过核心采样控制内容生成的多样性，较高的Top P值会导致生成更多样的内容 */
+  TopP?: ModelParameter | null;
+  /** 温度控制随机性 */
+  Temperature?: ModelParameter | null;
+  /** 最多能生成的token数量 */
+  MaxTokens?: ModelParameter | null;
+}
+
+/** 模型参数范围 */
+declare interface ModelParameter {
+  /** 默认值 */
+  Default?: number | null;
+  /** 最小值 */
+  Min?: number | null;
+  /** 最大值 */
+  Max?: number | null;
 }
 
 /** 文档信息 */
@@ -694,6 +728,8 @@ declare interface ProcedureDebugging {
   Knowledge?: KnowledgeSummary[] | null;
   /** 任务流程 */
   TaskFlow?: TaskFlowSummary | null;
+  /** 工作流调试信息 */
+  WorkFlow?: WorkFlowSummary | null;
 }
 
 /** 获取QA分类分组 */
@@ -922,12 +958,22 @@ declare interface RunNodeInfo {
   SlotValues?: ValueInfo[] | null;
 }
 
+/** 检索范围配置 */
+declare interface SearchRange {
+  /** 检索条件and/or */
+  Condition?: string | null;
+  /** 自定义变量和标签关系数据 */
+  ApiVarAttrInfos?: ApiVarAttrInfo[] | null;
+}
+
 /** 相似问信息 */
 declare interface SimilarQuestion {
   /** 相似问ID */
   SimBizId?: string | null;
   /** 相似问内容 */
   Question?: string | null;
+  /** 相似问审核状态，1审核失败 */
+  AuditStatus?: number | null;
 }
 
 /** 相似问修改(更新)信息 */
@@ -942,10 +988,26 @@ declare interface SimilarQuestionModify {
 
 /** 计费统计信息 */
 declare interface Stat {
-  /** x轴时间戳 */
+  /** X轴: 时间区域；根据查询条件的粒度返回“分/小时/日”三种区间范围 */
   X?: string | null;
-  /** y轴统计值 */
+  /** Y轴: 该时间区域内的统计值，如token消耗量，调用次数或使用量等信息 */
   Y?: number | null;
+}
+
+/** 大模型token统计信息 */
+declare interface StatisticInfo {
+  /** 模型名称 */
+  ModelName?: string | null;
+  /** 首Token耗时 */
+  FirstTokenCost?: number | null;
+  /** 总耗时 */
+  TotalCost?: number | null;
+  /** 输入Token数量 */
+  InputTokens?: number | null;
+  /** 输出Token数量 */
+  OutputTokens?: number | null;
+  /** 总Token数量 */
+  TotalTokens?: number | null;
 }
 
 /** 字符串KV信息 */
@@ -1090,6 +1152,42 @@ declare interface WordRecognizeInfo {
   WordBase64?: string | null;
 }
 
+/** 工作流程调试信息 */
+declare interface WorkFlowSummary {
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 工作流运行ID */
+  WorkflowRunId?: string | null;
+  /** 节点信息 */
+  RunNodes?: WorkflowRunNodeInfo[] | null;
+}
+
+/** 工作流运行节点信息 */
+declare interface WorkflowRunNodeInfo {
+  /** 节点ID */
+  NodeId?: string | null;
+  /** 节点类型 */
+  NodeType?: number | null;
+  /** 节点名称 */
+  NodeName?: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 输入 */
+  Input?: string | null;
+  /** 输出 */
+  Output?: string | null;
+  /** 任务输出 */
+  TaskOutput?: string | null;
+  /** 错误信息 */
+  FailMessage?: string | null;
+  /** 花费时长 */
+  CostMilliSeconds?: number | null;
+  /** 大模型输出信息 */
+  StatisticInfos?: StatisticInfo[] | null;
+}
+
 declare interface CheckAttributeLabelExistRequest {
   /** 应用ID */
   BotBizId: string;
@@ -1160,6 +1258,8 @@ declare interface CreateAppRequest {
 declare interface CreateAppResponse {
   /** 应用ID */
   AppBizId?: string | null;
+  /** 判断账户应用列表权限是否是自定义的，用户交互提示 */
+  IsCustomList?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1167,12 +1267,12 @@ declare interface CreateAppResponse {
 declare interface CreateAttributeLabelRequest {
   /** 应用ID */
   BotBizId: string;
-  /** 属性标识 */
-  AttrKey: string;
-  /** 属性名称 */
+  /** 标签名 */
   AttrName: string;
-  /** 属性标签 */
+  /** 标签值 */
   Labels: AttributeLabel[];
+  /** 标签标识（不生效，无需填写） 已作废 */
+  AttrKey?: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
@@ -1180,6 +1280,8 @@ declare interface CreateAttributeLabelRequest {
 }
 
 declare interface CreateAttributeLabelResponse {
+  /** 标签ID */
+  AttrBizId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1231,11 +1333,11 @@ declare interface CreateQARequest {
   Question: string;
   /** 答案 */
   Answer: string;
-  /** 属性标签适用范围 1：全部，2：按条件 */
+  /** 标签适用范围 1：全部，2：按条件 */
   AttrRange: number;
   /** 自定义参数 */
   CustomParam?: string;
-  /** 属性标签引用 */
+  /** 标签引用 */
   AttrLabels?: AttrLabelRefer[];
   /** 文档ID */
   DocBizId?: string;
@@ -1247,6 +1349,8 @@ declare interface CreateQARequest {
   ExpireEnd?: string;
   /** 相似问内容 */
   SimilarQuestions?: string[];
+  /** 问题描述 */
+  QuestionDesc?: string;
 }
 
 declare interface CreateQAResponse {
@@ -1323,7 +1427,7 @@ declare interface DeleteAppResponse {
 declare interface DeleteAttributeLabelRequest {
   /** 应用ID */
   BotBizId: string;
-  /** 属性ID */
+  /** 标签ID */
   AttributeBizIds: string[];
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -1467,16 +1571,18 @@ declare interface DescribeCallStatsGraphRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间 */
+  /** 开始时间戳, 单位为秒 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间戳, 单位为秒 */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
+  /** 筛选子场景(文档解析场景使用) */
+  SubScenes?: string[];
 }
 
 declare interface DescribeCallStatsGraphResponse {
-  /** 统计信息 */
+  /** 接口调用次数统计信息 */
   List?: Stat[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1485,9 +1591,9 @@ declare interface DescribeCallStatsGraphResponse {
 declare interface DescribeConcurrencyUsageGraphRequest {
   /** 模型标识 */
   ModelName: string;
-  /** 开始时间 */
+  /** 开始时间戳, 单位为秒 */
   StartTime: string;
-  /** 结束时间 */
+  /** 结束时间戳, 单位为秒 */
   EndTime: string;
   /** uin */
   UinAccount?: string[];
@@ -1502,7 +1608,7 @@ declare interface DescribeConcurrencyUsageGraphRequest {
 }
 
 declare interface DescribeConcurrencyUsageGraphResponse {
-  /** 统计信息 */
+  /** X轴: 时间区域；根据查询条件的粒度返回“分/小时/日”两种区间范围 */
   X?: string[];
   /** 可用并发y轴坐标 */
   AvailableY?: number[];
@@ -1515,20 +1621,20 @@ declare interface DescribeConcurrencyUsageGraphResponse {
 declare interface DescribeConcurrencyUsageRequest {
   /** 模型标识 */
   ModelName: string;
-  /** 开始时间 */
+  /** 开始时间戳, 单位为秒 */
   StartTime: string;
-  /** 结束时间 */
+  /** 结束时间戳, 单位为秒 */
   EndTime: string;
   /** 应用id列表 */
   AppBizIds?: string[];
 }
 
 declare interface DescribeConcurrencyUsageResponse {
-  /** 可用并发数 */
+  /** 可用并发数上限 */
   AvailableConcurrency?: number;
   /** 并发峰值 */
   ConcurrencyPeak?: number;
-  /** 调用超可用次数 */
+  /** 超出可用并发数上限的次数 */
   ExceedUsageTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1598,10 +1704,12 @@ declare interface DescribeDocResponse {
   DocCharSize?: string;
   /** 是否允许编辑 */
   IsAllowEdit?: boolean;
-  /** 属性标签适用范围 1：全部，2：按条件范围 */
+  /** 标签适用范围 1：全部，2：按条件范围 */
   AttrRange?: number;
-  /** 属性标签 */
+  /** 标签 */
   AttrLabels?: AttrLabel[];
+  /** 分类ID */
+  CateBizId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1624,9 +1732,9 @@ declare interface DescribeKnowledgeUsageRequest {
 }
 
 declare interface DescribeKnowledgeUsageResponse {
-  /** 可用字符数 */
+  /** 可用字符数上限 */
   AvailableCharSize?: string;
-  /** 超量字符数 */
+  /** 超过可用字符数上限的字符数 */
   ExceedCharSize?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1680,9 +1788,9 @@ declare interface DescribeQAResponse {
   Highlights?: Highlight[];
   /** 分片内容 */
   OrgData?: string;
-  /** 属性标签适用范围 */
+  /** 标签适用范围 */
   AttrRange?: number;
-  /** 属性标签 */
+  /** 标签 */
   AttrLabels?: AttrLabel[];
   /** 有效开始时间，unix时间戳 */
   ExpireStart?: string;
@@ -1690,6 +1798,14 @@ declare interface DescribeQAResponse {
   ExpireEnd?: string;
   /** 相似问列表信息 */
   SimilarQuestions?: SimilarQuestion[];
+  /** 问题和答案文本审核状态 1审核失败 */
+  QaAuditStatus?: number;
+  /** 答案中的图片审核状态 1审核失败 */
+  PicAuditStatus?: number;
+  /** 答案中的视频审核状态 1审核失败 */
+  VideoAuditStatus?: number;
+  /** 问题描述 */
+  QuestionDesc?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1773,9 +1889,9 @@ declare interface DescribeSearchStatsGraphRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间 */
+  /** 开始时间戳, 单位为秒 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间戳, 单位为秒 */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
@@ -1791,7 +1907,7 @@ declare interface DescribeSearchStatsGraphResponse {
 declare interface DescribeSegmentsRequest {
   /** 应用ID */
   BotBizId: string;
-  /** 文档ID */
+  /** 文档片段ID */
   SegBizId?: string[];
 }
 
@@ -1845,20 +1961,20 @@ declare interface DescribeTokenUsageGraphRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间 */
+  /** 开始时间戳, 单位为秒 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间戳, 单位为秒 */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
 }
 
 declare interface DescribeTokenUsageGraphResponse {
-  /** 总消耗 */
+  /** Token消耗总量 */
   Total?: Stat[];
-  /** 输入消耗 */
+  /** 输入Token消耗量 */
   Input?: Stat[];
-  /** 输出消耗 */
+  /** 输出Token消耗量 */
   Output?: Stat[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1875,12 +1991,14 @@ declare interface DescribeTokenUsageRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间 */
+  /** 开始时间戳, 单位为秒 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间戳, 单位为秒 */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
+  /** 筛选子场景(文档解析场景使用) */
+  SubScenes?: string[];
 }
 
 declare interface DescribeTokenUsageResponse {
@@ -1894,6 +2012,8 @@ declare interface DescribeTokenUsageResponse {
   ApiCallStats?: number;
   /** 搜索服务调用次数 */
   SearchUsage?: number;
+  /** 文档解析消耗页数 */
+  PageUsage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2329,6 +2449,10 @@ declare interface ListDocRequest {
   Query?: string;
   /** 文档状态： 1-未生成 2-生成中 3-生成成功 4-生成失败 5-删除中 6-删除成功 7-审核中 8-审核失败 9-审核成功 10-待发布 11-发布中 12-已发布 13-学习中 14-学习失败 15-更新中 16-更新失败 17-解析中 18-解析失败 19-导入失败 20-已过期 21-超量失效 22-超量失效恢复 */
   Status?: number[];
+  /** 查询类型 filename 文档、 attribute 标签 */
+  QueryType?: string;
+  /** 分类ID */
+  CateBizId?: string;
 }
 
 declare interface ListDocResponse {
@@ -2389,6 +2513,8 @@ declare interface ListQARequest {
   QueryAnswer?: string;
   /** QA业务ID列表 */
   QaBizIds?: string[];
+  /** 查询类型 filename 名称、 attribute 标签 */
+  QueryType?: string;
 }
 
 declare interface ListQAResponse {
@@ -2611,10 +2737,10 @@ declare interface ModifyAppRequest {
   AppType: string;
   /** 应用基础配置 */
   BaseConfig: BaseConfig;
+  /** 应用配置 */
+  AppConfig: AppConfig;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
-  /** 应用配置 */
-  AppConfig?: AppConfig;
 }
 
 declare interface ModifyAppResponse {
@@ -2629,19 +2755,19 @@ declare interface ModifyAppResponse {
 declare interface ModifyAttributeLabelRequest {
   /** 应用ID */
   BotBizId: string;
-  /** 属性ID */
+  /** 标签ID */
   AttributeBizId: string;
-  /** 属性标识 */
-  AttrKey: string;
-  /** 属性名称 */
+  /** 标签名称 */
   AttrName: string;
+  /** 标签标识 （已作废） */
+  AttrKey?: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
-  /** 删除的属性标签 */
+  /** 删除的标签值 */
   DeleteLabelBizIds?: string[];
-  /** 新增或编辑的属性标签 */
+  /** 新增或编辑的标签 */
   Labels?: AttributeLabel[];
 }
 
@@ -2675,13 +2801,13 @@ declare interface ModifyDocRequest {
   DocBizId: string;
   /** 是否引用链接 */
   IsRefer: boolean;
-  /** 属性标签适用范围 1：全部，2：按条件 */
+  /** 标签适用范围 1：全部，2：按条件 */
   AttrRange: number;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
-  /** 适用范围，关联的属性标签 */
+  /** 关联的标签 */
   AttrLabels?: AttrLabelRefer[];
   /** 网页(或自定义链接)地址 */
   WebUrl?: string;
@@ -2691,6 +2817,8 @@ declare interface ModifyDocRequest {
   ExpireStart?: string;
   /** 有效结束时间，unix时间戳，0代表永久有效 */
   ExpireEnd?: string;
+  /** 分类ID */
+  CateBizId?: string;
 }
 
 declare interface ModifyDocResponse {
@@ -2739,9 +2867,9 @@ declare interface ModifyQARequest {
   Answer: string;
   /** 自定义参数 */
   CustomParam?: string;
-  /** 属性标签适用范围 1：全部，2：按条件 */
+  /** 标签适用范围 1：全部，2：按条件 */
   AttrRange?: number;
-  /** 属性标签引用 */
+  /** 标签引用 */
   AttrLabels?: AttrLabelRefer[];
   /** 文档ID */
   DocBizId?: string;
@@ -2753,6 +2881,8 @@ declare interface ModifyQARequest {
   ExpireEnd?: string;
   /** 相似问修改信息(相似问没有修改则不传) */
   SimilarQuestionModify?: SimilarQuestionModify;
+  /** 问题描述 */
+  QuestionDesc?: string;
 }
 
 declare interface ModifyQAResponse {
@@ -2957,13 +3087,13 @@ declare interface SaveDocRequest {
   CosHash: string;
   /** 文件大小 */
   Size: string;
-  /** 属性标签适用范围 1：全部，2：按条件范围 */
+  /** 标签适用范围 1：全部，2：按条件范围 */
   AttrRange: number;
   /** 来源(0 源文件导入 1 网页导入) */
   Source?: number;
   /** 网页(或自定义链接)地址 */
   WebUrl?: string;
-  /** 属性标签引用 */
+  /** 标签引用 */
   AttrLabels?: AttrLabelRefer[];
   /** 外部引用链接类型 0：系统链接 1：自定义链接值为1时，WebUrl 字段不能为空，否则不生效。 */
   ReferUrlType?: number;
@@ -2975,6 +3105,8 @@ declare interface SaveDocRequest {
   IsRefer?: boolean;
   /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） */
   Opt?: number;
+  /** 分类ID */
+  CateBizId?: string;
 }
 
 declare interface SaveDocResponse {
@@ -3057,7 +3189,7 @@ declare interface Lke {
   ConvertDocument(data?: ConvertDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertDocumentResponse>;
   /** 创建应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
-  /** 创建属性 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
+  /** 创建标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
   CreateAttributeLabel(data: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
   /** 创建企业 {@link CreateCorpRequest} {@link CreateCorpResponse} */
   CreateCorp(data: CreateCorpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorpResponse>;

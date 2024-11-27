@@ -788,10 +788,10 @@ declare interface TWeCallCategoryPkgInfo {
 
 /** TWeCall信息 */
 declare interface TWeCallInfo {
-  /** 小程序ID */
-  ModelId: string | null;
   /** Sn信息，SN格式：产品ID_设备名 */
   Sn: string | null;
+  /** 小程序ID */
+  ModelId?: string | null;
   /** 激活数 */
   ActiveNum?: number | null;
 }

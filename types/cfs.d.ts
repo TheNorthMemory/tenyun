@@ -937,7 +937,7 @@ declare interface DescribeSnapshotOperationLogsResponse {
 declare interface DescribeUserQuotaRequest {
   /** 文件系统 ID */
   FileSystemId: string;
-  /** 过滤条件。UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid| Gid )UserId - Array of String - 是否必填：否 -（过滤条件）按UID/GID过滤。 */
+  /** 过滤条件。UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid|Gid|Dir )UserId- Array of String - 是否必填：否 -（过滤条件）按id过滤。 */
   Filters?: Filter[];
   /** Offset 分页码 */
   Offset?: number;

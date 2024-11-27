@@ -301,9 +301,9 @@ declare interface McuLayoutVolume {
   /** SEI消息的payload_type，默认值100，取值范围100-254（244除外，244为我们内部自定义的时间戳SEI） */
   PayloadType?: number;
   /** SEI发送间隔，单位毫秒，默认值为1000。 */
-  Interval?: number | null;
+  Interval?: number;
   /** 取值范围[0,1]，填1：发送关键帧时会确保带SEI；填0：发送关键帧时不确保带SEI。默认值为0。 */
-  FollowIdr?: number | null;
+  FollowIdr?: number;
 }
 
 /** 自定义透传SEI */
@@ -620,7 +620,7 @@ declare interface RecognizeConfig {
   AlternativeLanguage?: string[];
   /** 目前已不支持 */
   Model?: string;
-  /** 目前已不支持 */
+  /** 填写则翻译，目前支持的语言：中文: zh英语: en越南语: vi日语: ja韩语: ko印度尼西亚语: id泰语: th葡萄牙语: pt土耳其语: tr阿拉伯语: ar西班牙语: es印地语: hi法语: fr马来语: ms菲律宾语: fil德语: de意大利语: it俄语: ru瑞典语: sv挪威语: no丹麦语: da */
   TranslationLanguage?: string;
 }
 

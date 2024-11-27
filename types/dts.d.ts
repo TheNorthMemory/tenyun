@@ -1705,7 +1705,7 @@ declare interface DescribeConsumerGroupsResponse {
 }
 
 declare interface DescribeMigrateDBInstancesRequest {
-  /** 数据库类型，如mysql */
+  /** 数据库类型，如mysql,redis等 */
   DatabaseType: string;
   /** 实例作为迁移的源还是目标,src(表示源)，dst(表示目标) */
   MigrateRole?: string;

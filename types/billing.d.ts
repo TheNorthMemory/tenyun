@@ -795,9 +795,9 @@ declare interface AnalyseZoneDetail {
 /** 适用商品信息 */
 declare interface ApplicableProducts {
   /** 适用商品名称，值为“全产品通用”或商品名称组成的string，以","分割。 */
-  GoodsName: string;
+  GoodsName?: string;
   /** postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。如GoodsName为多个商品名以","分割组成的string，而PayMode为"*"，表示每一件商品的模式都为"*"。 */
-  PayMode: string;
+  PayMode?: string;
 }
 
 /** 交易类型筛选列表 */
@@ -1847,9 +1847,9 @@ declare interface DistributionBillDetail {
 /** 不适用商品信息 */
 declare interface ExcludedProducts {
   /** 不适用商品名称 */
-  GoodsName: string;
+  GoodsName?: string;
   /** postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。 */
-  PayMode: string;
+  PayMode?: string;
 }
 
 /** 资源归集汇总 */
@@ -2205,27 +2205,27 @@ declare interface UsageRecords {
 /** 代金券相关信息 */
 declare interface VoucherInfos {
   /** 代金券拥有者 */
-  OwnerUin: string;
+  OwnerUin?: string;
   /** 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue */
-  Status: string;
+  Status?: string;
   /** 代金券面额（微分） */
-  NominalValue: number;
+  NominalValue?: number;
   /** 剩余金额（微分） */
-  Balance: number;
+  Balance?: number;
   /** 代金券id */
-  VoucherId: string;
+  VoucherId?: string;
   /** postPay后付费/prePay预付费/riPay预留实例/空字符串或者'*'表示全部模式 */
-  PayMode: string;
+  PayMode?: string;
   /** 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景 */
-  PayScene: string;
+  PayScene?: string;
   /** 有效期生效时间 */
-  BeginTime: string;
+  BeginTime?: string;
   /** 有效期截止时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 适用商品信息 */
-  ApplicableProducts: ApplicableProducts | null;
+  ApplicableProducts?: ApplicableProducts;
   /** 不适用商品信息 */
-  ExcludedProducts: ExcludedProducts[] | null;
+  ExcludedProducts?: ExcludedProducts[];
 }
 
 declare interface CreateAllocationTagRequest {
@@ -3541,7 +3541,7 @@ declare interface DescribeVoucherInfoResponse {
   /** 总余额（微分） */
   TotalBalance?: number;
   /** 代金券相关信息 */
-  VoucherInfos?: VoucherInfos[] | null;
+  VoucherInfos?: VoucherInfos[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

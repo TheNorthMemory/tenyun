@@ -321,15 +321,15 @@ declare interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
 /** 策略绑定的网关分组信息 */
 declare interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
   /** 网关分组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 节点配置 */
-  NodeConfig: CloudNativeAPIGatewayNodeConfig | null;
+  NodeConfig?: CloudNativeAPIGatewayNodeConfig | null;
   /** 绑定时间 */
-  BindTime: string | null;
+  BindTime?: string | null;
   /** 网关分组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 绑定状态 */
-  Status: string | null;
+  Status?: string | null;
 }
 
 /** 定时伸缩策略配置 */
@@ -1945,7 +1945,7 @@ declare interface BindAutoScalerResourceStrategyToGroupsRequest {
 
 declare interface BindAutoScalerResourceStrategyToGroupsResponse {
   /** 是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2793,7 +2793,7 @@ declare interface DescribeCloudNativeAPIGatewayRequest {
 
 declare interface DescribeCloudNativeAPIGatewayResponse {
   /** 获取云原生API网关基础信息响应结果。 */
-  Result: DescribeCloudNativeAPIGatewayResult;
+  Result?: DescribeCloudNativeAPIGatewayResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3313,17 +3313,17 @@ declare interface DescribeNacosServerInterfacesResponse {
 declare interface DescribeNativeGatewayServerGroupsRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
-  /** 翻页从第几个开始获取 */
+  /** 偏移量，默认为 0。 */
   Offset?: number;
-  /** 翻页获取多少个 */
+  /** 返回数量，默认为 20。 */
   Limit?: number;
-  /** 过滤参数 */
+  /** 过滤参数，支持按照分组名称、分组ID（Name、GroupId）筛选 */
   Filters?: Filter[];
 }
 
 declare interface DescribeNativeGatewayServerGroupsResponse {
   /** 分组列表信息 */
-  Result: NativeGatewayServerGroups;
+  Result?: NativeGatewayServerGroups;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3946,7 +3946,7 @@ declare interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
 
 declare interface UnbindAutoScalerResourceStrategyFromGroupsResponse {
   /** 是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

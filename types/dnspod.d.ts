@@ -1681,7 +1681,7 @@ declare interface DescribeRecordFilterListRequest {
   SortField?: string;
   /** 排序方式，升序：ASC，降序：DESC。默认值为ASC。 */
   SortType?: string;
-  /** 偏移量，默认值为0。 */
+  /** 偏移量，默认值为0。如果入参携带"Domain","ffset","Limit" 这3个以外的参数，记录结果限制最大3000条 */
   Offset?: number;
   /** 限制数量，当前Limit最大支持3000。默认值为100。 */
   Limit?: number;

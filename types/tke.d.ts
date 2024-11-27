@@ -5719,6 +5719,8 @@ declare namespace V20180525 {
   interface DescribeOpenPolicyListResponse {
     /** 策略信息列表 */
     OpenPolicyInfoList?: OpenPolicyInfo[] | null;
+    /** 集群内是否安装了gatekeeper addon */
+    GatekeeperStatus?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

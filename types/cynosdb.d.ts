@@ -4679,7 +4679,7 @@ declare interface OpenClusterReadOnlyInstanceGroupAccessRequest {
 
 declare interface OpenClusterReadOnlyInstanceGroupAccessResponse {
   /** 开启流程ID */
-  FlowId?: string;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

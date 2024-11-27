@@ -304,8 +304,10 @@ declare interface DescribeKBComponentVulnerabilityResponse {
   VulnerabilityList?: ComponentVulnerabilityUnion[] | null;
   /** 组件purl */
   PURL?: PURL;
-  /** 推荐版本，当前版本中的所有漏洞都修复了的版本 */
+  /** 推荐版本，最小无高危/严重漏洞的版本。无法升级到安全版本时的备选方案。 */
   RecommendedVersion?: string;
+  /** 安全版本（首选），最小无漏洞的版本。当无法升级到安全版本时可考虑使用推荐版本。 */
+  SecureVersion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

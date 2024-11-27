@@ -191,7 +191,7 @@ declare interface DescribeSavingPlanUsageResponse {
   /** 查询命中的节省计划总览明细数据总条数 */
   Total?: number;
   /** 节省计划使用率数据 */
-  Usages?: SavingPlanUsageDetail[] | null;
+  Usages?: SavingPlanUsageDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
