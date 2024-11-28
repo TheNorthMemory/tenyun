@@ -128,6 +128,8 @@ declare interface Message {
   ToolCallId?: string | null;
   /** 模型生成的工具调用，仅 hunyuan-pro 或者 hunyuan-functioncall 模型支持 */
   ToolCalls?: ToolCall[] | null;
+  /** 文件标识符。单次最大 50 个文件。 */
+  FileIDs?: string[] | null;
 }
 
 /** 脑图 */

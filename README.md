@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 259+ 款产品，11923+ 服务数</summary>
+<details><summary>共计 259+ 款产品，11921+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -184,7 +184,7 @@ dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/132
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(77) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(144) |
-dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(82) |
+dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(84) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(55) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
@@ -240,7 +240,7 @@ keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(65) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(109) |
-live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(180) |
+live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(186) |
 lke | [大模型知识引擎](https://cloud.tencent.com/document/product/1759) | 2023-11-30(91) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |
@@ -269,7 +269,7 @@ organization | [集团账号管理](https://cloud.tencent.com/document/product/8
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(20) |
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(101) |
-privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(34) |
+privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(24) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(11) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(107) |

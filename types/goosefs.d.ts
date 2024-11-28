@@ -273,6 +273,8 @@ declare interface CreateFileSystemRequest {
   GooseFSxBuildElements?: GooseFSxBuildElement;
   /** 客户端集群所属的安全组 */
   SecurityGroupId?: string;
+  /** 集群ssh通信端口，默认是22 */
+  ClusterPort?: number;
 }
 
 declare interface CreateFileSystemResponse {

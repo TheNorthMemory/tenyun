@@ -2598,6 +2598,8 @@ declare interface TranslationAclRule {
   AclRuleId?: number;
   /** 是否匹配。 */
   Action?: number;
+  /** ACL规则描述 */
+  Description?: string;
 }
 
 /** 私网网关Snat转发规则 */
@@ -6103,6 +6105,8 @@ declare interface DescribePrivateNatGatewayTranslationAclRulesRequest {
   Offset?: number;
   /** 返回数目，默认值为20。 */
   Limit?: number;
+  /** ACL规则描述 */
+  Description?: string;
 }
 
 declare interface DescribePrivateNatGatewayTranslationAclRulesResponse {

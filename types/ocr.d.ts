@@ -2000,6 +2000,10 @@ declare interface TextVehicleBack {
   SubPageCode?: string | null;
   /** 燃料种类 */
   FuelType?: string | null;
+  /** 住址 */
+  AddressElectronic?: string;
+  /** 发证机关 */
+  IssueAuthorityElectronic?: string;
 }
 
 /** 行驶证主页正面的识别结果 */
@@ -5210,6 +5214,8 @@ declare interface VehicleLicenseOCRResponse {
   RecognizeWarnCode?: number[];
   /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警WARN_DRIVER_LICENSE_REFLECTION 反光告警WARN_DRIVER_LICENSE_BLUR 模糊告警WARN_DRIVER_LICENSE_BORDER_INCOMPLETE 边框不完整告警注：告警信息可以同时存在多个 */
   RecognizeWarnMsg?: string[];
+  /** 行驶证类型 电子行驶证：Electronic 普通行驶证：Normal */
+  VehicleLicenseType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

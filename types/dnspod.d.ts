@@ -1186,6 +1186,24 @@ declare interface CreateSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface CreateSubdomainValidateTXTValueRequest {
+  /** 要添加的子域名 Zone 域。 */
+  DomainZone: string;
+}
+
+declare interface CreateSubdomainValidateTXTValueResponse {
+  /** 需要添加 TXT 记录的域名。 */
+  Domain?: string;
+  /** 需要添加 TXT 记录的主机记录。 */
+  Subdomain?: string;
+  /** 需要添加记录类型。 */
+  RecordType?: string;
+  /** 需要添加 TXT 记录的记录值。 */
+  Value?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTXTRecordRequest {
   /** 域名 */
   Domain: string;
@@ -1986,6 +2004,16 @@ declare interface DescribeSubdomainAnalyticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSubdomainValidateStatusRequest {
+  /** 要查看 TXT 记录校验状态的子域名 Zone 域。 */
+  DomainZone: string;
+}
+
+declare interface DescribeSubdomainValidateStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserDetailRequest {
 }
 
@@ -2491,6 +2519,8 @@ declare interface Dnspod {
   CreateRecordGroup(data: CreateRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordGroupResponse>;
   /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
+  /** 创建添加子域名 Zone 域解析时所需要的 TXT 记录值 {@link CreateSubdomainValidateTXTValueRequest} {@link CreateSubdomainValidateTXTValueResponse} */
+  CreateSubdomainValidateTXTValue(data: CreateSubdomainValidateTXTValueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubdomainValidateTXTValueResponse>;
   /** 添加TXT记录 {@link CreateTXTRecordRequest} {@link CreateTXTRecordResponse} */
   CreateTXTRecord(data: CreateTXTRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTXTRecordResponse>;
   /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
@@ -2573,6 +2603,8 @@ declare interface Dnspod {
   DescribeSnapshotRollbackTask(data: DescribeSnapshotRollbackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotRollbackTaskResponse>;
   /** 子域名解析量统计 {@link DescribeSubdomainAnalyticsRequest} {@link DescribeSubdomainAnalyticsResponse} */
   DescribeSubdomainAnalytics(data: DescribeSubdomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubdomainAnalyticsResponse>;
+  /** 查看添加子域名 Zone 域解析 TXT 记录值验证状态 {@link DescribeSubdomainValidateStatusRequest} {@link DescribeSubdomainValidateStatusResponse} */
+  DescribeSubdomainValidateStatus(data: DescribeSubdomainValidateStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubdomainValidateStatusResponse>;
   /** 获取账户信息 {@link DescribeUserDetailRequest} {@link DescribeUserDetailResponse} */
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
   /** 获取域名增值服务用量 {@link DescribeVASStatisticRequest} {@link DescribeVASStatisticResponse} */

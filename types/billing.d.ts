@@ -45,21 +45,21 @@ declare interface AdjustInfoDetail {
 /** 分账账单趋势图平均值 */
 declare interface AllocationAverageData {
   /** 起始月份 */
-  BeginMonth?: string | null;
+  BeginMonth?: string;
   /** 结束月份 */
-  EndMonth?: string | null;
+  EndMonth?: string;
   /** 合计费用(折后总额)平均值 */
-  RealTotalCost?: string | null;
+  RealTotalCost?: string;
 }
 
 /** 分账趋势图详情数据 */
 declare interface AllocationBillTrendDetail {
   /** 账单月份 */
-  Month?: string | null;
+  Month?: string;
   /** 账单月份展示名称 */
-  Name?: string | null;
+  Name?: string;
   /** 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额) */
-  RealTotalCost?: string | null;
+  RealTotalCost?: string;
 }
 
 /** 分账账单明细 */
@@ -649,25 +649,25 @@ declare interface AllocationTreeNode {
 /** 成本分析交易类型复杂类型 */
 declare interface AnalyseActionTypeDetail {
   /** 交易类型code */
-  ActionType?: string | null;
+  ActionType?: string;
   /** 交易类型Name */
-  ActionTypeName?: string | null;
+  ActionTypeName?: string;
 }
 
 /** 成本分析金额返回数据模型 */
 declare interface AnalyseAmountDetail {
   /** 费用类型 */
-  Key?: string | null;
+  Key?: string;
   /** 是否展示 */
-  Display?: number | null;
+  Display?: number;
 }
 
 /** 成本分析产品返回复杂类型 */
 declare interface AnalyseBusinessDetail {
   /** 产品码code */
-  BusinessCode?: string | null;
+  BusinessCode?: string;
   /** 产品名称 */
-  BusinessCodeName?: string | null;
+  BusinessCodeName?: string;
 }
 
 /** 成本分析过滤框复杂类型 */
@@ -693,31 +693,31 @@ declare interface AnalyseConditionDetail {
 /** 成本分析查询条件 */
 declare interface AnalyseConditions {
   /** 产品名称代码 */
-  BusinessCodes?: string | null;
+  BusinessCodes?: string;
   /** 子产品名称代码 */
-  ProductCodes?: string | null;
+  ProductCodes?: string;
   /** 组件类型代码 */
-  ComponentCode?: string | null;
+  ComponentCode?: string;
   /** 可用区ID：资源所属可用区ID */
-  ZoneIds?: string | null;
+  ZoneIds?: string;
   /** 地域ID:资源所属地域ID */
-  RegionIds?: string | null;
+  RegionIds?: string;
   /** 项目ID:资源所属项目ID */
-  ProjectIds?: string | null;
+  ProjectIds?: string;
   /** 计费模式 prePay(表示包年包月)/postPay(表示按量计费) */
-  PayModes?: string | null;
+  PayModes?: string;
   /** 交易类型，查询交易类型（请使用交易类型code入参） */
-  ActionTypes?: string | null;
+  ActionTypes?: string;
   /** 分账标签键 */
-  Tags?: string | null;
+  Tags?: string;
   /** 费用类型，查询费用类型（请使用费用类型code入参)入参枚举如下：cashPayAmount:现金 incentivePayAmount:赠送金 voucherPayAmount:优惠券 tax:税金 costBeforeTax:税前价 */
-  FeeType?: string | null;
+  FeeType?: string;
   /** 查询成本分析数据的用户UIN */
-  PayerUins?: string | null;
+  PayerUins?: string;
   /** 使用资源的用户UIN */
-  OwnerUins?: string | null;
+  OwnerUins?: string;
   /** 消耗类型，查询消耗类型（请使用消耗类型code入参） */
-  ConsumptionTypes?: string | null;
+  ConsumptionTypes?: string;
 }
 
 /** 成本分析数据复杂类型 */
@@ -733,63 +733,63 @@ declare interface AnalyseDetail {
 /** 成本分析表头数据复杂类型 */
 declare interface AnalyseHeaderDetail {
   /** 表头日期 */
-  HeadDetail?: AnalyseHeaderTimeDetail[] | null;
+  HeadDetail?: AnalyseHeaderTimeDetail[];
   /** 时间 */
-  Name?: string | null;
+  Name?: string;
   /** 总计 */
-  Total?: string | null;
+  Total?: string;
 }
 
 /** 成本分析header表头数据 */
 declare interface AnalyseHeaderTimeDetail {
   /** 日期 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 成本分析使用者uin复杂类型 */
 declare interface AnalyseOwnerUinDetail {
   /** 使用者uin */
-  OwnerUin?: string | null;
+  OwnerUin?: string;
 }
 
 /** 成本分析支付方式复杂类型 */
 declare interface AnalysePayModeDetail {
   /** 计费模式code */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 计费模式Name */
-  PayModeName?: string | null;
+  PayModeName?: string;
 }
 
 /** 成本分析项目返回复杂类型 */
 declare interface AnalyseProjectDetail {
   /** 项目id */
-  ProjectId?: string | null;
+  ProjectId?: string;
   /** 默认项目 */
-  ProjectName?: string | null;
+  ProjectName?: string;
 }
 
 /** 成本分析地域返回复杂类型 */
 declare interface AnalyseRegionDetail {
   /** 地域id */
-  RegionId?: string | null;
+  RegionId?: string;
   /** 地域名称 */
-  RegionName?: string | null;
+  RegionName?: string;
 }
 
 /** 成本分返回值复杂类型 */
 declare interface AnalyseTimeDetail {
   /** 日期 */
-  Time?: string | null;
+  Time?: string;
   /** 金额 */
-  Money?: string | null;
+  Money?: string;
 }
 
 /** 成本分析可用区复杂类型 */
 declare interface AnalyseZoneDetail {
   /** 可用区id */
-  ZoneId?: string | null;
+  ZoneId?: string;
   /** 可用区Name */
-  ZoneName?: string | null;
+  ZoneName?: string;
 }
 
 /** 适用商品信息 */
@@ -1775,11 +1775,11 @@ declare interface DetailPoint {
 /** 由域名和使用明细组成的数据结构 */
 declare interface DetailSet {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 使用数据明细 */
-  DetailPoints: DetailPoint[];
+  DetailPoints?: DetailPoint[];
   /** 实例ID */
-  InstanceID: string | null;
+  InstanceID?: string | null;
 }
 
 /** 经销账单明细数据对象 */

@@ -1397,7 +1397,9 @@ declare interface DescribeSupervisorsResponse {
 
 declare interface DescribeUserRequest {
   /** 用户Id。 */
-  UserId: string;
+  UserId?: string;
+  /** 客户端用户 id,如果未指定则为用户 id。 */
+  OriginId?: string;
 }
 
 declare interface DescribeUserResponse {
@@ -1931,7 +1933,7 @@ declare interface Lcic {
   /** 获取巡课列表 {@link DescribeSupervisorsRequest} {@link DescribeSupervisorsResponse} */
   DescribeSupervisors(data: DescribeSupervisorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupervisorsResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
-  DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
   /** 结束房间 {@link EndRoomRequest} {@link EndRoomResponse} */
   EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
   /** 禁言和取消禁言 {@link ForbidSendMsgRequest} {@link ForbidSendMsgResponse} */

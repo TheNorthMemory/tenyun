@@ -107,105 +107,105 @@ declare interface DBParamValue {
 /** 分布式数据库实例信息 */
 declare interface DCDBInstanceInfo {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 应用ID */
-  AppId: number;
+  AppId?: number;
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** VPC数字ID */
-  VpcId: number;
+  VpcId?: number;
   /** Subnet数字ID */
-  SubnetId: number;
+  SubnetId?: number;
   /** 状态中文描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 实例状态：0 创建中，1 流程处理中， 2 运行中，3 实例未初始化，-1 实例已隔离，4 实例初始化中，5 实例删除中，6 实例重启中，7 数据迁移中 */
-  Status: number;
+  Status?: number;
   /** 内网IP */
-  Vip: string;
+  Vip?: string;
   /** 内网端口 */
-  Vport: number;
+  Vport?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 自动续费标志 */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 内存大小，单位 GB */
-  Memory: number;
+  Memory?: number;
   /** 存储大小，单位 GB */
-  Storage: number;
+  Storage?: number;
   /** 分片个数 */
-  ShardCount: number;
+  ShardCount?: number;
   /** 到期时间 */
-  PeriodEndTime: string;
+  PeriodEndTime?: string;
   /** 隔离时间 */
-  IsolatedTimestamp: string;
+  IsolatedTimestamp?: string;
   /** 账号ID */
-  Uin: string;
+  Uin?: string;
   /** 分片详情 */
-  ShardDetail: ShardInfo[];
+  ShardDetail?: ShardInfo[];
   /** 节点数，2 为一主一从， 3 为一主二从 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 临时实例标记，0 为非临时实例 */
-  IsTmp: number;
+  IsTmp?: number;
   /** 独享集群ID，为空表示非独享集群实例 */
-  ExclusterId: string;
+  ExclusterId?: string;
   /** 字符串型的私有网络ID */
-  UniqueVpcId: string;
+  UniqueVpcId?: string;
   /** 字符串型的私有网络子网ID */
-  UniqueSubnetId: string;
+  UniqueSubnetId?: string;
   /** 数字实例ID（过时字段，请勿依赖该值） */
-  Id: number;
+  Id?: number;
   /** 外网访问的域名，公网可解析 */
-  WanDomain: string;
+  WanDomain?: string;
   /** 外网 IP 地址，公网可访问 */
-  WanVip: string;
+  WanVip?: string;
   /** 外网端口 */
-  WanPort: number;
+  WanPort?: number;
   /** 产品类型 ID（过时字段，请勿依赖该值） */
-  Pid: number;
+  Pid?: number;
   /** 实例最后更新时间，格式为 2006-01-02 15:04:05 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 数据库引擎 */
-  DbEngine: string;
+  DbEngine?: string;
   /** 数据库引擎版本 */
-  DbVersion: string;
+  DbVersion?: string;
   /** 付费模式 */
-  Paymode: string;
+  Paymode?: string;
   /** 实例处于异步任务状态时，表示异步任务流程ID */
-  Locker: number | null;
+  Locker?: number | null;
   /** 外网状态，0-未开通；1-已开通；2-关闭；3-开通中 */
-  WanStatus: number;
+  WanStatus?: number;
   /** 该实例是否支持审计。1-支持；0-不支持 */
-  IsAuditSupported: number;
+  IsAuditSupported?: number;
   /** Cpu核数 */
-  Cpu: number;
+  Cpu?: number;
   /** 实例IPv6标志 */
-  Ipv6Flag: number | null;
+  Ipv6Flag?: number | null;
   /** 内网IPv6 */
-  Vipv6: string | null;
+  Vipv6?: string | null;
   /** 外网IPv6 */
-  WanVipv6: string | null;
+  WanVipv6?: string | null;
   /** 外网IPv6端口 */
-  WanPortIpv6: number | null;
+  WanPortIpv6?: number | null;
   /** 外网IPv6状态 */
-  WanStatusIpv6: number | null;
+  WanStatusIpv6?: number | null;
   /** DCN标志，0-无，1-主实例，2-灾备实例 */
-  DcnFlag: number | null;
+  DcnFlag?: number | null;
   /** DCN状态，0-无，1-创建中，2-同步中，3-已断开 */
-  DcnStatus: number | null;
+  DcnStatus?: number | null;
   /** DCN灾备实例数 */
-  DcnDstNum: number | null;
+  DcnDstNum?: number | null;
   /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
-  InstanceType: number | null;
+  InstanceType?: number | null;
   /** 实例标签信息 */
-  ResourceTags: ResourceTag[] | null;
+  ResourceTags?: ResourceTag[] | null;
   /** 数据库引擎版本 */
-  DbVersionId: string | null;
+  DbVersionId?: string | null;
 }
 
 /** 描述分布式数据库分片信息。 */
@@ -573,13 +573,13 @@ declare interface SecurityGroup {
 /** 安全出入口规则 */
 declare interface SecurityGroupBound {
   /** 来源 IP 或 IP 段，例如192.168.0.0/16 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 策略，ACCEPT 或者 DROP */
-  Action: string;
+  Action?: string;
   /** 端口 */
-  PortRange: string;
+  PortRange?: string;
   /** 网络协议，支持 UDP、TCP 等 */
-  IpProtocol: string;
+  IpProtocol?: string;
 }
 
 /** DCDB分片信息 */

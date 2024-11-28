@@ -1536,7 +1536,7 @@ declare interface TopicInfo {
   AutoSplit?: boolean | null;
   /** 若开启自动分裂的话，该主题能够允许的最大分区数 */
   MaxSplitPartitions?: number | null;
-  /** 主题的存储类型 */
+  /** 主题的存储类型- hot: 标准存储- cold: 低频存储 */
   StorageType?: string | null;
   /** 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存 */
   Period?: number | null;

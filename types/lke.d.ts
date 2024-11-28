@@ -82,7 +82,7 @@ declare interface AttrLabel {
   Labels?: Label[] | null;
 }
 
-/** 属性标签详情 */
+/** 标签详情 */
 declare interface AttrLabelDetail {
   /** 属性ID */
   AttrBizId?: string | null;
@@ -94,6 +94,10 @@ declare interface AttrLabelDetail {
   LabelNames?: string[] | null;
   /** 属性标签是否在更新中 */
   IsUpdating?: boolean | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 状态描述 */
+  StatusDesc?: string | null;
 }
 
 /** 属性标签引用信息 */
@@ -3181,9 +3185,9 @@ declare interface VerifyQAResponse {
 /** {@link Lke 大模型知识引擎} */
 declare interface Lke {
   (): Versions;
-  /** 检查属性下的标签名是否存在 {@link CheckAttributeLabelExistRequest} {@link CheckAttributeLabelExistResponse} */
+  /** 检查标签下的标签值是否存在 {@link CheckAttributeLabelExistRequest} {@link CheckAttributeLabelExistResponse} */
   CheckAttributeLabelExist(data: CheckAttributeLabelExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelExistResponse>;
-  /** 检查属性标签引用 {@link CheckAttributeLabelReferRequest} {@link CheckAttributeLabelReferResponse} */
+  /** 检查标签引用 {@link CheckAttributeLabelReferRequest} {@link CheckAttributeLabelReferResponse} */
   CheckAttributeLabelRefer(data: CheckAttributeLabelReferRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelReferResponse>;
   /** @deprecated 文档转换 {@link ConvertDocumentRequest} {@link ConvertDocumentResponse} */
   ConvertDocument(data?: ConvertDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertDocumentResponse>;
@@ -3205,7 +3209,7 @@ declare interface Lke {
   CreateRelease(data: CreateReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseResponse>;
   /** 删除应用 {@link DeleteAppRequest} {@link DeleteAppResponse} */
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
-  /** 删除属性标签 {@link DeleteAttributeLabelRequest} {@link DeleteAttributeLabelResponse} */
+  /** 删除标签 {@link DeleteAttributeLabelRequest} {@link DeleteAttributeLabelResponse} */
   DeleteAttributeLabel(data: DeleteAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttributeLabelResponse>;
   /** 删除文档 {@link DeleteDocRequest} {@link DeleteDocResponse} */
   DeleteDoc(data: DeleteDocRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocResponse>;
@@ -3217,7 +3221,7 @@ declare interface Lke {
   DeleteRejectedQuestion(data: DeleteRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRejectedQuestionResponse>;
   /** 获取企业下应用详情 {@link DescribeAppRequest} {@link DescribeAppResponse} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
-  /** 查询属性标签详情 {@link DescribeAttributeLabelRequest} {@link DescribeAttributeLabelResponse} */
+  /** 查询标签详情 {@link DescribeAttributeLabelRequest} {@link DescribeAttributeLabelResponse} */
   DescribeAttributeLabel(data: DescribeAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttributeLabelResponse>;
   /** 接口调用折线图 {@link DescribeCallStatsGraphRequest} {@link DescribeCallStatsGraphResponse} */
   DescribeCallStatsGraph(data?: DescribeCallStatsGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallStatsGraphResponse>;
@@ -3255,7 +3259,7 @@ declare interface Lke {
   DescribeTokenUsageGraph(data?: DescribeTokenUsageGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenUsageGraphResponse>;
   /** 获取不满意回复上下文 {@link DescribeUnsatisfiedReplyContextRequest} {@link DescribeUnsatisfiedReplyContextResponse} */
   DescribeUnsatisfiedReplyContext(data: DescribeUnsatisfiedReplyContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnsatisfiedReplyContextResponse>;
-  /** 导出属性标签 {@link ExportAttributeLabelRequest} {@link ExportAttributeLabelResponse} */
+  /** 导出标签 {@link ExportAttributeLabelRequest} {@link ExportAttributeLabelResponse} */
   ExportAttributeLabel(data: ExportAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttributeLabelResponse>;
   /** 导出QA列表 {@link ExportQAListRequest} {@link ExportQAListResponse} */
   ExportQAList(data: ExportQAListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportQAListResponse>;
@@ -3293,7 +3297,7 @@ declare interface Lke {
   ListApp(data?: ListAppRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppResponse>;
   /** 应用类型列表 {@link ListAppCategoryRequest} {@link ListAppCategoryResponse} */
   ListAppCategory(data?: ListAppCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppCategoryResponse>;
-  /** 查询属性标签列表 {@link ListAttributeLabelRequest} {@link ListAttributeLabelResponse} */
+  /** 查询标签列表 {@link ListAttributeLabelRequest} {@link ListAttributeLabelResponse} */
   ListAttributeLabel(data: ListAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttributeLabelResponse>;
   /** 文档列表 {@link ListDocRequest} {@link ListDocResponse} */
   ListDoc(data: ListDocRequest, config?: AxiosRequestConfig): AxiosPromise<ListDocResponse>;
@@ -3321,7 +3325,7 @@ declare interface Lke {
   ListUnsatisfiedReply(data: ListUnsatisfiedReplyRequest, config?: AxiosRequestConfig): AxiosPromise<ListUnsatisfiedReplyResponse>;
   /** 修改应用请求结构体 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
-  /** 编辑属性标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */
+  /** 编辑标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */
   ModifyAttributeLabel(data: ModifyAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttributeLabelResponse>;
   /** 修改文档 {@link ModifyDocRequest} {@link ModifyDocResponse} */
   ModifyDoc(data: ModifyDocRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDocResponse>;
@@ -3359,7 +3363,7 @@ declare interface Lke {
   SaveDoc(data: SaveDocRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDocResponse>;
   /** 终止文档解析 {@link StopDocParseRequest} {@link StopDocParseResponse} */
   StopDocParse(data: StopDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<StopDocParseResponse>;
-  /** 上传导入属性标签 {@link UploadAttributeLabelRequest} {@link UploadAttributeLabelResponse} */
+  /** 上传导入标签 {@link UploadAttributeLabelRequest} {@link UploadAttributeLabelResponse} */
   UploadAttributeLabel(data: UploadAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<UploadAttributeLabelResponse>;
   /** 校验问答 {@link VerifyQARequest} {@link VerifyQAResponse} */
   VerifyQA(data: VerifyQARequest, config?: AxiosRequestConfig): AxiosPromise<VerifyQAResponse>;

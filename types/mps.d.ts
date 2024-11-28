@@ -481,7 +481,9 @@ declare interface AiAnalysisTaskSegmentInput {
 /** 智能拆条结果信息 */
 declare interface AiAnalysisTaskSegmentOutput {
   /** 智能拆条子片段列表。 */
-  SegmentSet: SegmentRecognitionItem[];
+  SegmentSet?: SegmentRecognitionItem[];
+  /** 视频摘要，离线场景用。 */
+  Abstract?: string | null;
 }
 
 /** 拆条结果类型 */

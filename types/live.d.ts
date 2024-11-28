@@ -1778,6 +1778,60 @@ declare interface CreateCasterInputPushUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateCasterPgmFromPvwRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface CreateCasterPgmFromPvwResponse {
+  /** 主监任务的rtmp协议预览地址。 注：该地址仅供预览，不可分发。 */
+  PgmPlayUrl?: string;
+  /** 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址 */
+  CdnPlayUrl?: string | null;
+  /** 主监任务在腾讯云直播侧的流ID。 */
+  CdnStreamId?: string;
+  /** 主监任务的webrtc协议播放地址。 注：1.该预览地址仅作为预览，不可分发。2.webrtc播放地址需配合腾讯云快直播播放sdk使用。 */
+  PgmWebRTCPlayUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCasterPgmRequest {
+  /** 导播台展示信息参数。 */
+  PgmDisplayInfo: CasterDisplayInfo;
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface CreateCasterPgmResponse {
+  /** 主监任务的rtmp协议预览地址。注：该地址仅供预览，不可分发。 */
+  PgmPlayUrl?: string | null;
+  /** 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址。 */
+  CdnPlayUrl?: string | null;
+  /** 主监任务在腾讯云直播侧的流ID。 */
+  CdnStreamId?: string | null;
+  /** 主监任务的webrtc协议播放地址。注：1. 该预览地址仅作为预览，不可分发。2. webrtc播放地址需配合腾讯云快直播播放sdk使用。 */
+  PgmWebRTCPlayUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCasterPvwRequest {
+  /** 导播台预监展示信息参数 */
+  PvwDisplayInfo: CasterDisplayInfo;
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface CreateCasterPvwResponse {
+  /** 预监任务的画面rtmp协议预览地址。注：该预览地址仅供画面预览，不可分发。 */
+  PvwPlayUrl?: string;
+  /** 预监任务的webrtc协议预览画面。注：1. 该预览地址仅供预览，不可分发。2. webrtc播放地址，需配合腾讯云快直播播放sdk使用 */
+  PvwWebRTCPlayUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCasterRequest {
   /** 导播台名称 */
   CasterName?: string;
@@ -2447,6 +2501,8 @@ declare interface DeleteLivePullStreamTaskRequest {
   TaskId: string;
   /** 操作人姓名。 */
   Operator: string;
+  /** 指定任务 ID。注意：用于删除使用自定义任务 ID 创建的任务。 */
+  SpecifyTaskId?: string;
 }
 
 declare interface DeleteLivePullStreamTaskResponse {
@@ -4794,6 +4850,16 @@ declare interface ModifyPullStreamStatusResponse {
   RequestId?: string;
 }
 
+declare interface ReleaseCasterRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface ReleaseCasterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RestartLivePullStreamTaskRequest {
   /** 任务 Id。 */
   TaskId: string;
@@ -4842,6 +4908,26 @@ declare interface StartLiveStreamMonitorRequest {
 }
 
 declare interface StartLiveStreamMonitorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopCasterPgmRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface StopCasterPgmResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopCasterPvwRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface StopCasterPvwResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4985,6 +5071,12 @@ declare interface Live {
   CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
   /** 生成导播台推流URL {@link CreateCasterInputPushUrlRequest} {@link CreateCasterInputPushUrlResponse} */
   CreateCasterInputPushUrl(data: CreateCasterInputPushUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterInputPushUrlResponse>;
+  /** 创建主监任务 {@link CreateCasterPgmRequest} {@link CreateCasterPgmResponse} */
+  CreateCasterPgm(data: CreateCasterPgmRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPgmResponse>;
+  /** 复制预监展示信息创建主监 {@link CreateCasterPgmFromPvwRequest} {@link CreateCasterPgmFromPvwResponse} */
+  CreateCasterPgmFromPvw(data: CreateCasterPgmFromPvwRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPgmFromPvwResponse>;
+  /** 创建预监任务 {@link CreateCasterPvwRequest} {@link CreateCasterPvwResponse} */
+  CreateCasterPvw(data: CreateCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPvwResponse>;
   /** 创建通用混流 {@link CreateCommonMixStreamRequest} {@link CreateCommonMixStreamResponse} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
   /** 创建回调规则 {@link CreateLiveCallbackRuleRequest} {@link CreateLiveCallbackRuleResponse} */
@@ -5299,6 +5391,8 @@ declare interface Live {
   ModifyPullStreamConfig(data: ModifyPullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamConfigResponse>;
   /** 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamStatusRequest} {@link ModifyPullStreamStatusResponse} */
   ModifyPullStreamStatus(data: ModifyPullStreamStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamStatusResponse>;
+  /** 释放导播台 {@link ReleaseCasterRequest} {@link ReleaseCasterResponse} */
+  ReleaseCaster(data: ReleaseCasterRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseCasterResponse>;
   /** 重启直播拉流任务 {@link RestartLivePullStreamTaskRequest} {@link RestartLivePullStreamTaskResponse} */
   RestartLivePullStreamTask(data: RestartLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartLivePullStreamTaskResponse>;
   /** 取消直播延时 {@link ResumeDelayLiveStreamRequest} {@link ResumeDelayLiveStreamResponse} */
@@ -5307,6 +5401,10 @@ declare interface Live {
   ResumeLiveStream(data: ResumeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeLiveStreamResponse>;
   /** 启动直播流监播任务 {@link StartLiveStreamMonitorRequest} {@link StartLiveStreamMonitorResponse} */
   StartLiveStreamMonitor(data: StartLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveStreamMonitorResponse>;
+  /** 停止导播台主监任务 {@link StopCasterPgmRequest} {@link StopCasterPgmResponse} */
+  StopCasterPgm(data: StopCasterPgmRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPgmResponse>;
+  /** 停止导播台预监任务 {@link StopCasterPvwRequest} {@link StopCasterPvwResponse} */
+  StopCasterPvw(data: StopCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPvwResponse>;
   /** 停止垫片流 {@link StopLivePadProcessorRequest} {@link StopLivePadProcessorResponse} */
   StopLivePadProcessor(data: StopLivePadProcessorRequest, config?: AxiosRequestConfig): AxiosPromise<StopLivePadProcessorResponse>;
   /** 终止录制任务(已废弃,请使用新接口) {@link StopLiveRecordRequest} {@link StopLiveRecordResponse} */

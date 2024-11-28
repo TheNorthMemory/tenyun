@@ -116,6 +116,8 @@ declare interface Cluster {
   BillingResourceMode?: string | null;
   /** Cu比例 */
   MemRatio?: number | null;
+  /** 是否开启跨租户弹性网卡 */
+  CrossTenantEniMode?: number;
 }
 
 /** 工作空间集群组信息 */
