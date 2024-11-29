@@ -86,6 +86,14 @@ declare interface Evaluation {
   Annotation?: Annotation | null;
 }
 
+/** 资源列表筛选 */
+declare interface Filter {
+  /** 查询字段名称 资源名称：resourceName 资源ID：resourceId 资源类型：resourceType 资源地域：resourceRegion 删除状态：resourceDelete 0未删除，1已删除 resourceRegionAndZone地域/可用区 */
+  Name?: string;
+  /** 查询字段值 */
+  Values?: string[];
+}
+
 /** 参数值 */
 declare interface InputParameter {
   /** 参数名 */
@@ -108,6 +116,30 @@ declare interface InputParameterForManage {
   DefaultValue?: string | null;
   /** 描述 */
   Description?: string | null;
+}
+
+/** 资源列列表信息 */
+declare interface ResourceListInfo {
+  /** 资源类型 */
+  ResourceType: string;
+  /** 资源名称 */
+  ResourceName: string;
+  /** 资源ID */
+  ResourceId: string;
+  /** 地域 */
+  ResourceRegion: string | null;
+  /** 资源状态 */
+  ResourceStatus: string | null;
+  /** 1 :已删除 2：未删除 */
+  ResourceDelete: number | null;
+  /** 资源创建时间 */
+  ResourceCreateTime: string | null;
+  /** 标签信息 */
+  Tags: Tag[] | null;
+  /** 可用区 */
+  ResourceZone: string | null;
+  /** 合规状态 */
+  ComplianceResult: string | null;
 }
 
 /** 管理端规则条件 */
@@ -138,6 +170,38 @@ declare interface TriggerType {
   MessageType: string;
   /** 触发时间周期 */
   MaximumExecutionFrequency?: string | null;
+}
+
+declare interface DescribeDiscoveredResourceRequest {
+  /** 资源ID */
+  ResourceId: string;
+  /** 资源类型 */
+  ResourceType: string;
+  /** 资源地域 */
+  ResourceRegion: string;
+}
+
+declare interface DescribeDiscoveredResourceResponse {
+  /** 资源Id */
+  ResourceId?: string | null;
+  /** 资源类型 */
+  ResourceType?: string | null;
+  /** 资源名 */
+  ResourceName?: string | null;
+  /** 资源地域 */
+  ResourceRegion?: string | null;
+  /** 资源可用区 */
+  ResourceZone?: string | null;
+  /** 资源配置 */
+  Configuration?: string | null;
+  /** 资源创建时间 */
+  ResourceCreateTime?: string | null;
+  /** 资源标签 */
+  Tags?: Tag[] | null;
+  /** 资源更新时间 */
+  UpdateTime?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface ListAggregateConfigRulesRequest {
@@ -196,6 +260,28 @@ declare interface ListConfigRulesResponse {
   RequestId?: string;
 }
 
+declare interface ListDiscoveredResourcesRequest {
+  /** 每页显示数量 */
+  MaxResults: number;
+  /** resourceName：资源名 resourceId ：资源ID */
+  Filters?: Filter[];
+  /** 标签 */
+  Tags?: Tag[];
+  /** 下一页token */
+  NextToken?: string;
+  /** 排序方式 asc、desc */
+  OrderType?: string;
+}
+
+declare interface ListDiscoveredResourcesResponse {
+  /** 详情 */
+  Items: ResourceListInfo[];
+  /** 下一页 */
+  NextToken: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PutEvaluationsRequest {
   /** 回调令牌。从自定义规则所选的scf云函数Context中取参数ResultToken值 */
   ResultToken: string;
@@ -211,10 +297,14 @@ declare interface PutEvaluationsResponse {
 /** {@link Config 配置审计} */
 declare interface Config {
   (): Versions;
+  /** 资源详情 {@link DescribeDiscoveredResourceRequest} {@link DescribeDiscoveredResourceResponse} */
+  DescribeDiscoveredResource(data: DescribeDiscoveredResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiscoveredResourceResponse>;
   /** 账号组获取规则列表 {@link ListAggregateConfigRulesRequest} {@link ListAggregateConfigRulesResponse} */
   ListAggregateConfigRules(data: ListAggregateConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateConfigRulesResponse>;
   /** 获取规则列表 {@link ListConfigRulesRequest} {@link ListConfigRulesResponse} */
   ListConfigRules(data: ListConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListConfigRulesResponse>;
+  /** 获取资源列表 {@link ListDiscoveredResourcesRequest} {@link ListDiscoveredResourcesResponse} */
+  ListDiscoveredResources(data: ListDiscoveredResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiscoveredResourcesResponse>;
   /** 上报自定义规则评估结果 {@link PutEvaluationsRequest} {@link PutEvaluationsResponse} */
   PutEvaluations(data: PutEvaluationsRequest, config?: AxiosRequestConfig): AxiosPromise<PutEvaluationsResponse>;
 }

@@ -1161,6 +1161,40 @@ declare interface DescribeGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMarqueeRequest {
+  /** 学校ID */
+  SdkAppId: number;
+  /** 房间号 */
+  RoomId: number;
+}
+
+declare interface DescribeMarqueeResponse {
+  /** 跑马灯类型：1为固定值，2为用户昵称，3为固定值+用户昵称，4为用户ID，5为originId+固定值，6为用户昵称（originId） */
+  MarqueeType?: number;
+  /** 固定值内容（当MarqueeType=1或5，则展示固定值内容） */
+  Content?: string;
+  /** 字体大小（数字，像素单位，范围：10到24） */
+  FontSize?: number;
+  /** 字体粗细：1为粗体，0为细体 */
+  FontWeight?: number;
+  /** 字体颜色（十六进制颜色值） */
+  FontColor?: string;
+  /** 字体透明度（数字，范围 0.0 到 1.0） */
+  FontOpacity?: number;
+  /** 背景颜色（十六进制颜色值） */
+  BackgroundColor?: string;
+  /** 背景透明度（数字，范围 0.0 到 1.0） */
+  BackgroundOpacity?: number;
+  /** 显示方式：1为滚动，2为闪烁 */
+  DisplayMode?: number;
+  /** 停留时长（秒，整数，范围 1～10） */
+  Duration?: number;
+  /** 跑马灯个数：目前仅支持1或2, 对应显示单排或双排 */
+  MarqueeCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQuestionListRequest {
   /** 房间ID */
   RoomId: number;
@@ -1396,9 +1430,9 @@ declare interface DescribeSupervisorsResponse {
 }
 
 declare interface DescribeUserRequest {
-  /** 用户Id。 */
+  /** 用户id。支持通过 user_id 或 OriginId 查询用户信息，优先使用 user_id 进行查询。 */
   UserId?: string;
-  /** 客户端用户 id,如果未指定则为用户 id。 */
+  /** 用户在客户系统的Id。支持通过 user_id 或 OriginId 查询用户信息，优先使用 user_id 进行查询（UserId不为空时，OriginId不生效）。 */
   OriginId?: string;
 }
 
@@ -1747,6 +1781,40 @@ declare interface SetAppCustomContentResponse {
   RequestId?: string;
 }
 
+declare interface SetMarqueeRequest {
+  /** 学校ID */
+  SdkAppId: number;
+  /** 房间号 */
+  RoomId: number;
+  /** 跑马灯类型：1为固定值，2为用户昵称，3为固定值+用户昵称，4为用户ID，5为originId+固定值，6为用户昵称（originId） */
+  MarqueeType: number;
+  /** 显示方式：1为滚动，2为闪烁 */
+  DisplayMode: number;
+  /** 固定值内容（当MarqueeType=1或5，则展示固定值内容） */
+  Content?: string;
+  /** 字体大小（数字，像素单位，范围：10到24）。 */
+  FontSize?: number;
+  /** 字体粗细：1为粗体，0为细体 */
+  FontWeight?: number;
+  /** 字体颜色（十六进制颜色值，例如：#00FF00（绿色）） */
+  FontColor?: string;
+  /** 字体透明度（数字，范围 0.0 到 1.0） */
+  FontOpacity?: number;
+  /** 背景颜色（十六进制颜色值，例如：#FFFF00（黄色）） */
+  BackgroundColor?: string;
+  /** 背景透明度（数字，范围 0.0 到 1.0） */
+  BackgroundOpacity?: number;
+  /** 跑马灯文字移动/闪烁指定像素所需时间，范围：1-10；数值越小，跑马灯滚动/闪烁速度越快 */
+  Duration?: number;
+  /** 跑马灯个数：目前仅支持1或2, 对应显示单排或双排 */
+  MarqueeCount?: number;
+}
+
+declare interface SetMarqueeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetWatermarkRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -1914,6 +1982,8 @@ declare interface Lcic {
   DescribeGroupList(data: DescribeGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupListResponse>;
   /** 获取群组成员列表 {@link DescribeGroupMemberListRequest} {@link DescribeGroupMemberListResponse} */
   DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
+  /** 查询跑马灯配置 {@link DescribeMarqueeRequest} {@link DescribeMarqueeResponse} */
+  DescribeMarquee(data: DescribeMarqueeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMarqueeResponse>;
   /** 获取课堂提问列表 {@link DescribeQuestionListRequest} {@link DescribeQuestionListResponse} */
   DescribeQuestionList(data: DescribeQuestionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionListResponse>;
   /** 查询录制信息 {@link DescribeRecordRequest} {@link DescribeRecordResponse} */
@@ -1968,6 +2038,8 @@ declare interface Lcic {
   SendRoomNotificationMessage(data: SendRoomNotificationMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendRoomNotificationMessageResponse>;
   /** 设置应用自定义内容 {@link SetAppCustomContentRequest} {@link SetAppCustomContentResponse} */
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
+  /** 设置跑马灯参数 {@link SetMarqueeRequest} {@link SetMarqueeResponse} */
+  SetMarquee(data: SetMarqueeRequest, config?: AxiosRequestConfig): AxiosPromise<SetMarqueeResponse>;
   /** 设置水印 {@link SetWatermarkRequest} {@link SetWatermarkResponse} */
   SetWatermark(data: SetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<SetWatermarkResponse>;
   /** 开启录制 {@link StartRecordRequest} {@link StartRecordResponse} */

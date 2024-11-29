@@ -655,7 +655,7 @@ declare interface DescribeClusterConfigsRequest {
 
 declare interface DescribeClusterConfigsResponse {
   /** 返回实例的配置文件相关的信息 */
-  ClusterConfList: ClusterConfigsInfoFromEMR[];
+  ClusterConfList?: ClusterConfigsInfoFromEMR[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

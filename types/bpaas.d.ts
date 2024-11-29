@@ -69,45 +69,45 @@ declare interface ScfParam {
 /** 状态节点 */
 declare interface StatusNode {
   /** 节点id */
-  NodeId: string;
+  NodeId?: string;
   /** 节点名称 */
-  NodeName: string;
+  NodeName?: string;
   /** 节点类型 1:审批节点 2:执行节点 3:条件节点 */
-  NodeType: number;
+  NodeType?: number;
   /** 下一个节点 */
-  NextNode: string;
+  NextNode?: string;
   /** 审批意见模型 */
-  Opinion: ApproveOpinion | null;
+  Opinion?: ApproveOpinion | null;
   /** scf函数名称 */
-  ScfName: string | null;
+  ScfName?: string | null;
   /** 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功）18: 外部审批中 */
-  SubStatus: number | null;
+  SubStatus?: number | null;
   /** 审批节点审批人 */
-  ApprovedUin: number[] | null;
+  ApprovedUin?: number[] | null;
   /** 审批时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 审批意见信息 审批节点:审批人意见 执行节点:scf函数执行日志 */
-  Msg: string | null;
+  Msg?: string | null;
   /** 有权限审批该节点的uin */
-  Users: ApproveUser | null;
+  Users?: ApproveUser | null;
   /** 是否有权限审批该节点 */
-  IsApprove: boolean | null;
+  IsApprove?: boolean | null;
   /** 审批id */
-  ApproveId: string | null;
+  ApproveId?: string | null;
   /** 审批方式 0或签 1会签 */
-  ApproveMethod: number | null;
+  ApproveMethod?: number | null;
   /** 审批节点审批类型，1人工审批 2自动通过 3自动决绝 4外部审批scf */
-  ApproveType: number | null;
+  ApproveType?: number | null;
   /** 外部审批类型 scf:0或null ; CKafka:1 */
-  CallMethod: number | null;
+  CallMethod?: number | null;
   /** CKafka - 接入资源ID */
-  DataHubId: string | null;
+  DataHubId?: string | null;
   /** CKafka - 任务名称 */
-  TaskName: string | null;
+  TaskName?: string | null;
   /** CKafka - 地域 */
-  CKafkaRegion: string | null;
+  CKafkaRegion?: string | null;
   /** 外部审批Url */
-  ExternalUrl: string | null;
+  ExternalUrl?: string | null;
   /** 并行节点 3-4 */
   ParallelNodes?: string | null;
   /** scf拒绝时返回信息 */

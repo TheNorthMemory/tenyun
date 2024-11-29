@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 259+ 款产品，11921+ 服务数</summary>
+<details><summary>共计 259+ 款产品，11924+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -113,7 +113,7 @@ antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/prod
 apcas | [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) | 2020-11-27(7) |
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
-apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(97) |
+apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(99) |
 apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(12) |
 asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(32) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
@@ -122,7 +122,7 @@ ba | [ICP备案](https://cloud.tencent.com/document/product/243) | 2020-07-20(3)
 batch | [批量计算](https://cloud.tencent.com/document/product/599) | 2017-03-12(31) |
 bda | [人体分析](https://cloud.tencent.com/document/product/1208) | 2020-03-24(18) |
 bh | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2023-04-18(62) |
-bi | [商业智能分析 BI](https://cloud.tencent.com/document/product/590) | 2022-01-05(22) |
+bi | [商业智能分析 BI](https://cloud.tencent.com/document/product/590) | 2022-01-05(24) |
 billing | [费用中心](https://cloud.tencent.com/document/product/555) | 2018-07-09(46) |
 bizlive | 商业直播 | 2019-03-13(6) |
 bm | [黑石物理服务器CPM](https://cloud.tencent.com/document/product/386) | 2018-04-23(53) |
@@ -167,7 +167,7 @@ cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-1
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
 cms | 内容安全 | 2019-03-21(6) |
-config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(3) |
+config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(5) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(1) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(43) |
@@ -238,7 +238,7 @@ iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(28) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
-lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(65) |
+lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(67) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(109) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(186) |
 lke | [大模型知识引擎](https://cloud.tencent.com/document/product/1759) | 2023-11-30(91) |
@@ -262,7 +262,7 @@ mvj | 营销价值判断 | 2019-09-26(1) |
 nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(39) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(91) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(84) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(20) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(124) | 2018-12-25(20) |
@@ -333,7 +333,7 @@ trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/160
 trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(49) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(54) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
-trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(55) |
+trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(57) |
 tse | [微服务引擎](https://cloud.tencent.com/document/product/1364) | 2020-12-07(114) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(222) |
 tsi | [腾讯同传系统](https://cloud.tencent.com/document/product/1399) | 2021-03-25(3) |

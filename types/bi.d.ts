@@ -214,6 +214,26 @@ declare interface IdDTO {
   TranStatus?: number | null;
 }
 
+/** 页面截图列表 */
+declare interface PageScreenListVO {
+  /** 图片导出类型。base64；url */
+  PicType?: string | null;
+  /** 图片列表 */
+  List?: PageScreenVO[] | null;
+  /** 异步事务id */
+  TranId?: string | null;
+  /** 事务状态1: 处理中; 2: 处理成功; 3 处理失败(错误内容见外层Msg) */
+  TranStatus?: number | null;
+}
+
+/** 页面截图信息 */
+declare interface PageScreenVO {
+  /** 截图base64或 url */
+  Content?: string | null;
+  /** 组件Id */
+  WidgetId?: string | null;
+}
+
 /** 商业版本权限单元 */
 declare interface PermissionComponent {
   /** 权限值 */
@@ -444,6 +464,26 @@ declare interface UserRoleListDataUserRoleInfo {
   InValidateAppRange?: boolean | null;
   /** 用户openid */
   AppOpenUserId?: string | null;
+}
+
+/** 页面组件信息 */
+declare interface WidgetListVO {
+  /** uin */
+  CorpId?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 页面id */
+  PageId?: string | null;
+  /** 组件数组 */
+  WidgetList?: WidgetVO[] | null;
+}
+
+/** 组件信息 */
+declare interface WidgetVO {
+  /** 组件Id */
+  WidgetId?: string | null;
+  /** 组件name */
+  WidgetName?: string | null;
 }
 
 declare interface ApplyEmbedIntervalRequest {
@@ -812,6 +852,26 @@ declare interface DescribeDatasourceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribePageWidgetListRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 页面id */
+  PageId: string;
+}
+
+declare interface DescribePageWidgetListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展参数 */
+  Extra?: string | null;
+  /** 返回数据结果 */
+  Data?: WidgetListVO | null;
+  /** 返回消息 */
+  Msg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProjectInfoRequest {
   /** 项目Id */
   Id: number;
@@ -931,6 +991,36 @@ declare interface DescribeUserRoleProjectListResponse {
   /** 数据 */
   Data?: UserRoleListData | null;
   /** 消息 */
+  Msg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExportScreenPageRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 页面id */
+  PageId: string;
+  /** 画布类型。栅格画布：GRID；自由画布：FREE */
+  CanvasType?: string;
+  /** 图片导出类型。base64；url（有效期：1天） */
+  PicType?: string;
+  /** 组件Ids。为空时，导出整个页面 */
+  WidgetIds?: string[];
+  /** 是否是异步请求 */
+  AsyncRequest?: boolean;
+  /** 事务id */
+  TranId?: string;
+}
+
+declare interface ExportScreenPageResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展参数 */
+  Extra?: string | null;
+  /** 返回数据结果 */
+  Data?: PageScreenListVO | null;
+  /** 返回消息 */
   Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1173,6 +1263,8 @@ declare interface Bi {
   DeleteUserRoleProject(data: DeleteUserRoleProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserRoleProjectResponse>;
   /** 查询数据源列表 {@link DescribeDatasourceListRequest} {@link DescribeDatasourceListResponse} */
   DescribeDatasourceList(data: DescribeDatasourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceListResponse>;
+  /** 查询页面组件信息 {@link DescribePageWidgetListRequest} {@link DescribePageWidgetListResponse} */
+  DescribePageWidgetList(data: DescribePageWidgetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePageWidgetListResponse>;
   /** 项目详情 {@link DescribeProjectInfoRequest} {@link DescribeProjectInfoResponse} */
   DescribeProjectInfo(data: DescribeProjectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectInfoResponse>;
   /** 项目列表数据接口 {@link DescribeProjectListRequest} {@link DescribeProjectListResponse} */
@@ -1183,6 +1275,8 @@ declare interface Bi {
   DescribeUserRoleList(data: DescribeUserRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRoleListResponse>;
   /** 项目内-用户角色列表 {@link DescribeUserRoleProjectListRequest} {@link DescribeUserRoleProjectListResponse} */
   DescribeUserRoleProjectList(data: DescribeUserRoleProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRoleProjectListResponse>;
+  /** 分享页截图导出 {@link ExportScreenPageRequest} {@link ExportScreenPageResponse} */
+  ExportScreenPage(data: ExportScreenPageRequest, config?: AxiosRequestConfig): AxiosPromise<ExportScreenPageResponse>;
   /** 更新数据源 {@link ModifyDatasourceRequest} {@link ModifyDatasourceResponse} */
   ModifyDatasource(data: ModifyDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatasourceResponse>;
   /** 更新云数据库 {@link ModifyDatasourceCloudRequest} {@link ModifyDatasourceCloudResponse} */

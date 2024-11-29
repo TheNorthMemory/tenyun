@@ -913,7 +913,7 @@ declare interface ImportMediaRequest {
 
 declare interface ImportMediaResponse {
   /** 媒资文件在系统中的ID */
-  MediaId: string;
+  MediaId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

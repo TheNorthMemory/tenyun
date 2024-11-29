@@ -874,6 +874,12 @@ declare interface InstanceInfo {
   UniqVpcId?: string | null;
 }
 
+/** 专享网络配置 */
+declare interface InstanceNetworkConfig {
+  /** 公网带宽 */
+  InternetMaxBandwidthOut: number;
+}
+
 /** 独享实例参数信息 */
 declare interface InstanceParameterInput {
   /** ServiceRequestNumPreSec，ApiRequestNumPreSec */
@@ -1852,6 +1858,36 @@ declare interface CreateApiResponse {
   RequestId?: string;
 }
 
+declare interface CreateExclusiveInstancesRequest {
+  /** 可用区 */
+  Zones: string[];
+  /** 实例类型： basic： 基础版professional： 专业版enterprise： 企业版platium： 铂金版diamond： 钻石版 */
+  InstanceType: string;
+  /** 网络配置 */
+  NetworkConfig: InstanceNetworkConfig;
+  /** VPC配置 */
+  VpcConfig: VpcConfig;
+  /** 付费类型：POSTPAID：后付费PREPAID： 预付费 */
+  PayMode: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 实例描述 */
+  InstanceDescription?: string;
+  /** 标签 */
+  Tags?: Tag[];
+  /** 预付费付费时长：单位是月 */
+  Period?: number;
+  /** 预付费续费标志：NOTIFY_AND_MANUAL_RENEW 手动续费NOTIFY_AND_AUTO_RENEW 自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW 不续费 */
+  AutoRenewFlag?: string;
+}
+
+declare interface CreateExclusiveInstancesResponse {
+  /** 实例ID */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateIPStrategyRequest {
   /** 服务的唯一ID。 */
   ServiceId: string;
@@ -2464,6 +2500,18 @@ declare interface DescribeIPStrategysStatusRequest {
 declare interface DescribeIPStrategysStatusResponse {
   /** 符合条件的策略列表。 */
   Result?: IPStrategiesStatus | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstancesNetworkConfigRequest {
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+}
+
+declare interface DescribeInstancesNetworkConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3533,6 +3581,8 @@ declare interface Apigateway {
   CreateApiApp(data: CreateApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiAppResponse>;
   /** 创建密钥 {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
   CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
+  /** 创建专享实例 {@link CreateExclusiveInstancesRequest} {@link CreateExclusiveInstancesResponse} */
+  CreateExclusiveInstances(data: CreateExclusiveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExclusiveInstancesResponse>;
   /** 创建服务IP策略 {@link CreateIPStrategyRequest} {@link CreateIPStrategyResponse} */
   CreateIPStrategy(data: CreateIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIPStrategyResponse>;
   /** 创建插件 {@link CreatePluginRequest} {@link CreatePluginResponse} */
@@ -3607,6 +3657,8 @@ declare interface Apigateway {
   DescribeIPStrategyApisStatus(data: DescribeIPStrategyApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategyApisStatusResponse>;
   /** 查询服务IP策略列表（旧） {@link DescribeIPStrategysStatusRequest} {@link DescribeIPStrategysStatusResponse} */
   DescribeIPStrategysStatus(data: DescribeIPStrategysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategysStatusResponse>;
+  /** 获取专享实例网络配置 {@link DescribeInstancesNetworkConfigRequest} {@link DescribeInstancesNetworkConfigResponse} */
+  DescribeInstancesNetworkConfig(data?: DescribeInstancesNetworkConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesNetworkConfigResponse>;
   /** 日志搜索服务 {@link DescribeLogSearchRequest} {@link DescribeLogSearchResponse} */
   DescribeLogSearch(data: DescribeLogSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSearchResponse>;
   /** 查询插件详情 {@link DescribePluginRequest} {@link DescribePluginResponse} */

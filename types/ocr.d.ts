@@ -1904,14 +1904,6 @@ declare interface TextDetectionEn {
   Words: Words[];
 }
 
-/** 识别结果 */
-declare interface TextDetectionResult {
-  /** 识别出的文本行内容 */
-  Value?: string;
-  /** 坐标，以四个顶点坐标表示 */
-  Polygon?: Coord[];
-}
-
 /** 数学试题识别结果 */
 declare interface TextEduPaper {
   /** 识别出的字段名称（关键字） */
@@ -4194,60 +4186,6 @@ declare interface RecognizeHealthCodeOCRResponse {
   RequestId?: string;
 }
 
-declare interface RecognizeIndonesiaIDCardOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否返回人像照片。 */
-  ReturnHeadImage?: boolean;
-  /** 场景参数，默认值为V1可选值：V1V2 */
-  Scene?: string;
-}
-
-declare interface RecognizeIndonesiaIDCardOCRResponse {
-  /** 证件号码 */
-  NIK?: string;
-  /** 姓名 */
-  Nama?: string;
-  /** 出生地/出生时间 */
-  TempatTglLahir?: string;
-  /** 性别 */
-  JenisKelamin?: string;
-  /** 血型 */
-  GolDarah?: string;
-  /** 地址 */
-  Alamat?: string;
-  /** 街道 */
-  RTRW?: string;
-  /** 村 */
-  KelDesa?: string;
-  /** 地区 */
-  Kecamatan?: string;
-  /** 宗教信仰 */
-  Agama?: string;
-  /** 婚姻状况 */
-  StatusPerkawinan?: string;
-  /** 职业 */
-  Perkerjaan?: string;
-  /** 国籍 */
-  KewargaNegaraan?: string;
-  /** 身份证有效期限 */
-  BerlakuHingga?: string;
-  /** 发证日期 */
-  IssuedDate?: string;
-  /** 人像截图 */
-  Photo?: string;
-  /** 省份，Scene为V2时支持识别 */
-  Provinsi?: string;
-  /** 城市，Scene为V2时支持识别 */
-  Kota?: string;
-  /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
-  WarnCardInfos?: number[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RecognizeKoreanDrivingLicenseOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4272,34 +4210,6 @@ declare interface RecognizeKoreanDrivingLicenseOCRResponse {
   Name?: string;
   /** 换证时间 */
   AptitudeTesDate?: string;
-  /** 发证日期 */
-  DateOfIssue?: string;
-  /** 人像截图Base64后的结果 */
-  Photo?: string;
-  /** 性别 */
-  Sex?: string;
-  /** 生日，格式为dd/mm/yyyy */
-  Birthday?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizeKoreanIDCardOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否返回人像照片。 */
-  ReturnHeadImage?: boolean;
-}
-
-declare interface RecognizeKoreanIDCardOCRResponse {
-  /** 身份证号码 */
-  ID?: string;
-  /** 地址 */
-  Address?: string;
-  /** 姓名 */
-  Name?: string;
   /** 发证日期 */
   DateOfIssue?: string;
   /** 人像截图Base64后的结果 */
@@ -4350,154 +4260,6 @@ declare interface RecognizeOnlineTaxiItineraryOCRRequest {
 declare interface RecognizeOnlineTaxiItineraryOCRResponse {
   /** 网约车行程单识别结果，具体内容请点击左侧链接。 */
   OnlineTaxiItineraryInfos?: OnlineTaxiItineraryInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizePhilippinesDrivingLicenseOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否返回人像照片。 */
-  ReturnHeadImage?: boolean;
-}
-
-declare interface RecognizePhilippinesDrivingLicenseOCRResponse {
-  /** 人像照片Base64后的结果 */
-  HeadPortrait?: TextDetectionResult;
-  /** 姓名 */
-  Name?: TextDetectionResult;
-  /** 姓氏 */
-  LastName?: TextDetectionResult;
-  /** 首姓名 */
-  FirstName?: TextDetectionResult;
-  /** 中间姓名 */
-  MiddleName?: TextDetectionResult;
-  /** 国籍 */
-  Nationality?: TextDetectionResult;
-  /** 性别 */
-  Sex?: TextDetectionResult;
-  /** 地址 */
-  Address?: TextDetectionResult;
-  /** 证号 */
-  LicenseNo?: TextDetectionResult;
-  /** 有效期 */
-  ExpiresDate?: TextDetectionResult;
-  /** 机构代码 */
-  AgencyCode?: TextDetectionResult;
-  /** 出生日期 */
-  Birthday?: TextDetectionResult;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizePhilippinesSssIDOCRRequest {
-  /** 是否返回人像照片。 */
-  ReturnHeadImage: boolean;
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface RecognizePhilippinesSssIDOCRResponse {
-  /** 人像照片Base64后的结果 */
-  HeadPortrait?: TextDetectionResult;
-  /** 编号 */
-  LicenseNumber?: TextDetectionResult;
-  /** 姓名 */
-  FullName?: TextDetectionResult;
-  /** 生日 */
-  Birthday?: TextDetectionResult;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizePhilippinesTinIDOCRRequest {
-  /** 是否返回人像照片。 */
-  ReturnHeadImage: boolean;
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface RecognizePhilippinesTinIDOCRResponse {
-  /** 人像照片Base64后的结果 */
-  HeadPortrait?: TextDetectionResult;
-  /** 编码 */
-  LicenseNumber?: TextDetectionResult;
-  /** 姓名 */
-  FullName?: TextDetectionResult;
-  /** 地址 */
-  Address?: TextDetectionResult;
-  /** 生日 */
-  Birthday?: TextDetectionResult;
-  /** 发证日期 */
-  IssueDate?: TextDetectionResult;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizePhilippinesUMIDOCRRequest {
-  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否返回人像照片。 */
-  ReturnHeadImage?: boolean;
-}
-
-declare interface RecognizePhilippinesUMIDOCRResponse {
-  /** 姓 */
-  Surname?: TextDetectionResult;
-  /** 中间名 */
-  MiddleName?: TextDetectionResult;
-  /** 名 */
-  GivenName?: TextDetectionResult;
-  /** 地址 */
-  Address?: TextDetectionResult;
-  /** 生日 */
-  Birthday?: TextDetectionResult;
-  /** crn码 */
-  CRN?: TextDetectionResult;
-  /** 性别 */
-  Sex?: TextDetectionResult;
-  /** 人像照片Base64后的结果 */
-  HeadPortrait?: TextDetectionResult;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizePhilippinesVoteIDOCRRequest {
-  /** 是否返回人像照片。 */
-  ReturnHeadImage: boolean;
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface RecognizePhilippinesVoteIDOCRResponse {
-  /** 人像照片Base64后的结果 */
-  HeadPortrait?: TextDetectionResult;
-  /** 菲律宾VoteID的VIN */
-  VIN?: TextDetectionResult;
-  /** 姓名 */
-  FirstName?: TextDetectionResult;
-  /** 姓氏 */
-  LastName?: TextDetectionResult;
-  /** 出生日期 */
-  Birthday?: TextDetectionResult;
-  /** 婚姻状况 */
-  CivilStatus?: TextDetectionResult;
-  /** 国籍 */
-  Citizenship?: TextDetectionResult;
-  /** 地址 */
-  Address?: TextDetectionResult;
-  /** 地区 */
-  PrecinctNo?: TextDetectionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5429,26 +5191,12 @@ declare interface Ocr {
   RecognizeGeneralTextImageWarn(data?: RecognizeGeneralTextImageWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralTextImageWarnResponse>;
   /** 健康码识别 {@link RecognizeHealthCodeOCRRequest} {@link RecognizeHealthCodeOCRResponse} */
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
-  /** 印尼身份证识别 {@link RecognizeIndonesiaIDCardOCRRequest} {@link RecognizeIndonesiaIDCardOCRResponse} */
-  RecognizeIndonesiaIDCardOCR(data?: RecognizeIndonesiaIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeIndonesiaIDCardOCRResponse>;
   /** 韩国驾驶证识别 {@link RecognizeKoreanDrivingLicenseOCRRequest} {@link RecognizeKoreanDrivingLicenseOCRResponse} */
   RecognizeKoreanDrivingLicenseOCR(data?: RecognizeKoreanDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeKoreanDrivingLicenseOCRResponse>;
-  /** 韩国身份证识别 {@link RecognizeKoreanIDCardOCRRequest} {@link RecognizeKoreanIDCardOCRResponse} */
-  RecognizeKoreanIDCardOCR(data?: RecognizeKoreanIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeKoreanIDCardOCRResponse>;
   /** 医疗票据识别 {@link RecognizeMedicalInvoiceOCRRequest} {@link RecognizeMedicalInvoiceOCRResponse} */
   RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
   /** 网约车行程单识别 {@link RecognizeOnlineTaxiItineraryOCRRequest} {@link RecognizeOnlineTaxiItineraryOCRResponse} */
   RecognizeOnlineTaxiItineraryOCR(data?: RecognizeOnlineTaxiItineraryOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeOnlineTaxiItineraryOCRResponse>;
-  /** 菲律宾驾驶证识别 {@link RecognizePhilippinesDrivingLicenseOCRRequest} {@link RecognizePhilippinesDrivingLicenseOCRResponse} */
-  RecognizePhilippinesDrivingLicenseOCR(data?: RecognizePhilippinesDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesDrivingLicenseOCRResponse>;
-  /** 菲律宾SSSID识别 {@link RecognizePhilippinesSssIDOCRRequest} {@link RecognizePhilippinesSssIDOCRResponse} */
-  RecognizePhilippinesSssIDOCR(data: RecognizePhilippinesSssIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesSssIDOCRResponse>;
-  /** 菲律宾TinID识别 {@link RecognizePhilippinesTinIDOCRRequest} {@link RecognizePhilippinesTinIDOCRResponse} */
-  RecognizePhilippinesTinIDOCR(data: RecognizePhilippinesTinIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesTinIDOCRResponse>;
-  /** 菲律宾UMID识别 {@link RecognizePhilippinesUMIDOCRRequest} {@link RecognizePhilippinesUMIDOCRResponse} */
-  RecognizePhilippinesUMIDOCR(data?: RecognizePhilippinesUMIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesUMIDOCRResponse>;
-  /** 菲律宾VoteID识别 {@link RecognizePhilippinesVoteIDOCRRequest} {@link RecognizePhilippinesVoteIDOCRResponse} */
-  RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
   /** 商户门头照识别 {@link RecognizeStoreNameRequest} {@link RecognizeStoreNameResponse} */
   RecognizeStoreName(data?: RecognizeStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeStoreNameResponse>;
   /** 表格识别（V3） {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */

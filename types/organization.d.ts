@@ -5,29 +5,29 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 互信主体主要信息 */
 declare interface AuthNode {
   /** 互信主体关系ID */
-  RelationId: number | null;
+  RelationId?: number;
   /** 互信主体名称 */
-  AuthName: string | null;
+  AuthName?: string;
   /** 主体管理员 */
-  Manager: MemberMainInfo | null;
+  Manager?: MemberMainInfo;
 }
 
 /** 野鹤实名互信申请证明文件 */
 declare interface AuthRelationFile {
   /** 文件名。 */
-  Name: string | null;
+  Name: string;
   /** 文件路径。 */
-  Url: string | null;
+  Url: string;
 }
 
 /** 有效策略。 */
 declare interface EffectivePolicy {
   /** 目标ID。 */
-  TargetId: number;
+  TargetId?: number;
   /** 有效策略内容。 */
-  PolicyContent: string;
+  PolicyContent?: string;
   /** 有效策略更新时间。 */
-  LastUpdatedTimestamp: number;
+  LastUpdatedTimestamp?: number;
 }
 
 /** 用户组信息。 */
@@ -175,17 +175,17 @@ declare interface ManagerShareUnit {
 /** 成员管理身份 */
 declare interface MemberIdentity {
   /** 身份ID。 */
-  IdentityId: number | null;
+  IdentityId?: number;
   /** 身份名称。 */
-  IdentityAliasName: string | null;
+  IdentityAliasName?: string;
 }
 
 /** 成员主要信息 */
 declare interface MemberMainInfo {
   /** 成员uin */
-  MemberUin: number | null;
-  /** 成员名称j */
-  MemberName: string | null;
+  MemberUin?: number;
+  /** 成员名称 */
+  MemberName?: string;
 }
 
 /** 部门主要信息 */
@@ -199,23 +199,23 @@ declare interface NodeMainInfo {
 /** 不允许删除的原因。 */
 declare interface NotAllowReason {
   /** 是否创建的成员。true-是、false-否；成员不是创建的成员不允许删除 */
-  IsCreateMember?: boolean | null;
+  IsCreateMember?: boolean;
   /** 成员删除许可。true-开启、false-关闭；成员删除许可关闭时不允许删除 */
-  DeletionPermission?: boolean | null;
+  DeletionPermission?: boolean;
   /** 是否可信服务委派管理员。true-是、false-否；成员是可信服务委派管理员不允许删除 */
-  IsAssignManager?: boolean | null;
+  IsAssignManager?: boolean;
   /** 是否主体管理员。true-是、false-否；成员是主体管理员不允许删除 */
-  IsAuthManager?: boolean | null;
+  IsAuthManager?: boolean;
   /** 是否共享资源管理员。true-是、false-否；成员是共享资源管理员不允许删除 */
-  IsShareManager?: boolean | null;
+  IsShareManager?: boolean;
   /** 成员是否设置了操作审批。true-是、false-否；成员设置了操作审批时不允许删除 */
-  OperateProcess?: boolean | null;
+  OperateProcess?: boolean;
   /** 是否允许解除成员财务权限。true-是、false-否；成员不能解除财务权限时不允许删除 */
-  BillingPermission?: boolean | null;
+  BillingPermission?: boolean;
   /** 存在的资源列表。账号存在资源时不允许删除 */
-  ExistResources?: string[] | null;
+  ExistResources?: string[];
   /** 检测失败的资源列表。账号有资源检测失败时不允许删除。 */
-  DetectFailedResources?: string[] | null;
+  DetectFailedResources?: string[];
 }
 
 /** 按月获取组织财务信息 */
@@ -233,153 +233,153 @@ declare interface OrgFinancialByMonth {
 /** 组织身份 */
 declare interface OrgIdentity {
   /** 身份ID。 */
-  IdentityId?: number | null;
+  IdentityId?: number;
   /** 身份名称。 */
-  IdentityAliasName?: string | null;
+  IdentityAliasName?: string;
   /** 描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 身份策略。 */
-  IdentityPolicy?: IdentityPolicy[] | null;
+  IdentityPolicy?: IdentityPolicy[];
   /** 身份类型。 1-预设、 2-自定义 */
-  IdentityType?: number | null;
+  IdentityType?: number;
   /** 更新时间。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 /** 企业组织成员 */
 declare interface OrgMember {
   /** 成员Uin */
-  MemberUin?: number | null;
+  MemberUin?: number;
   /** 成员名 */
-  Name?: string | null;
+  Name?: string;
   /** 成员类型，邀请：Invite， 创建：Create */
-  MemberType?: string | null;
+  MemberType?: string;
   /** 关系策略类型 */
-  OrgPolicyType?: string | null;
+  OrgPolicyType?: string;
   /** 关系策略名 */
-  OrgPolicyName?: string | null;
+  OrgPolicyName?: string;
   /** 关系策略权限 */
-  OrgPermission?: OrgPermission[] | null;
+  OrgPermission?: OrgPermission[];
   /** 所属节点ID */
-  NodeId?: number | null;
+  NodeId?: number;
   /** 所属节点名 */
-  NodeName?: string | null;
+  NodeName?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 是否允许成员退出。允许：Allow，不允许：Denied。 */
-  IsAllowQuit?: string | null;
+  IsAllowQuit?: string;
   /** 代付者Uin */
-  PayUin?: string | null;
+  PayUin?: string;
   /** 代付者名称 */
-  PayName?: string | null;
+  PayName?: string;
   /** 管理身份 */
-  OrgIdentity?: MemberIdentity[] | null;
+  OrgIdentity?: MemberIdentity[];
   /** 安全信息绑定状态 未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed */
-  BindStatus?: string | null;
+  BindStatus?: string;
   /** 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed */
-  PermissionStatus?: string | null;
+  PermissionStatus?: string;
   /** 成员标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 成员和子账号的授权关系 */
 declare interface OrgMemberAuthAccount {
   /** 组织子账号Uin。 */
-  OrgSubAccountUin: number | null;
+  OrgSubAccountUin?: number;
   /** 策略ID。 */
-  PolicyId: number | null;
+  PolicyId?: number;
   /** 策略名。 */
-  PolicyName: string | null;
+  PolicyName?: string;
   /** 身份ID。 */
-  IdentityId: number | null;
+  IdentityId?: number;
   /** 身份角色名。 */
-  IdentityRoleName: string | null;
+  IdentityRoleName?: string;
   /** 身份角色别名。 */
-  IdentityRoleAliasName: string | null;
+  IdentityRoleAliasName?: string;
   /** 创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 更新时间。 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
   /** 子账号名称 */
-  OrgSubAccountName: string | null;
+  OrgSubAccountName?: string;
 }
 
 /** 组织成员可授权的身份 */
 declare interface OrgMemberAuthIdentity {
   /** 身份ID。 */
-  IdentityId?: number | null;
+  IdentityId?: number;
   /** 身份的角色名。 */
-  IdentityRoleName?: string | null;
+  IdentityRoleName?: string;
   /** 身份的角色别名。 */
-  IdentityRoleAliasName?: string | null;
+  IdentityRoleAliasName?: string;
   /** 身份描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 首次配置成功的时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 最后一次配置成功的时间。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 身份类型。取值： 1-预设身份 2-自定义身份 */
-  IdentityType?: number | null;
+  IdentityType?: number;
   /** 配置状态。取值：1-配置完成 2-需重新配置 */
-  Status?: number | null;
+  Status?: number;
   /** 成员Uin。 */
-  MemberUin?: number | null;
+  MemberUin?: number;
   /** 成员名称。 */
-  MemberName?: string | null;
+  MemberName?: string;
 }
 
 /** 组织成员财务信息。 */
 declare interface OrgMemberFinancial {
   /** 成员Uin。 */
-  MemberUin: number | null;
+  MemberUin?: number;
   /** 成员名称。 */
-  MemberName: string | null;
+  MemberName?: string;
   /** 消耗金额，单位：元。 */
-  TotalCost: number | null;
+  TotalCost?: number;
   /** 占比%。 */
-  Ratio?: string | null;
+  Ratio?: string;
 }
 
 /** 组织成员被授权的策略 */
 declare interface OrgMemberPolicy {
   /** 策略ID。 */
-  PolicyId: number | null;
+  PolicyId?: number;
   /** 策略名。 */
-  PolicyName: string | null;
+  PolicyName?: string;
   /** 身份ID。 */
-  IdentityId: number | null;
+  IdentityId?: number;
   /** 身份角色名。 */
-  IdentityRoleName: string | null;
+  IdentityRoleName?: string;
   /** 身份角色别名。 */
-  IdentityRoleAliasName: string | null;
+  IdentityRoleAliasName?: string;
   /** 描述。 */
-  Description: string | null;
+  Description?: string;
   /** 创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 更新时间。 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
 }
 
 /** 企业组织单元 */
 declare interface OrgNode {
   /** 组织节点ID */
-  NodeId?: number | null;
+  NodeId?: number;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 父节点ID */
-  ParentNodeId?: number | null;
+  ParentNodeId?: number;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 成员标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 关系策略权限 */
@@ -405,53 +405,53 @@ declare interface OrgProductFinancial {
 /** 集团服务设置 */
 declare interface OrganizationServiceAssign {
   /** 集团服务ID。 */
-  ServiceId?: number | null;
+  ServiceId?: number;
   /** 集团服务产品名称。 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 是否支持委派。取值: 1-是 2-否 */
-  IsAssign?: number | null;
+  IsAssign?: number;
   /** 集团服务描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 当前委派管理员数。 */
-  MemberNum?: string | null;
+  MemberNum?: string;
   /** 帮助文档。 */
-  Document?: string | null;
+  Document?: string;
   /** 集团服务产品控制台路径。 */
-  ConsoleUrl?: string | null;
+  ConsoleUrl?: string;
   /** 是否接入使用状态。取值: 1-是 2-否 */
-  IsUsageStatus?: number | null;
+  IsUsageStatus?: number;
   /** 委派管理员数量限制。 */
-  CanAssignCount?: number | null;
+  CanAssignCount?: number;
   /** 集团服务产品标识。 */
-  Product?: string | null;
+  Product?: string;
   /** 是否支持集团服务授权。取值 1-是、2-否 */
-  ServiceGrant?: number | null;
+  ServiceGrant?: number;
   /** 集团服务授权启用状态。ServiceGrant值为1时该字段有效 ，取值：Enabled-开启 Disabled-关闭 */
-  GrantStatus?: string | null;
+  GrantStatus?: string;
   /** 是否支持设置委派管理范围。取值: 1-是 2-否 */
-  IsSetManagementScope?: number | null;
+  IsSetManagementScope?: number;
 }
 
 /** 集团服务委派成员信息 */
 declare interface OrganizationServiceAssignMember {
   /** 集团服务ID。 */
-  ServiceId?: number | null;
+  ServiceId?: number;
   /** 集团服务产品名称。 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 委派管理员Uin。 */
-  MemberUin?: number | null;
+  MemberUin?: number;
   /** 委派管理员名称。 */
-  MemberName?: string | null;
+  MemberName?: string;
   /** 启用状态 。取值：0-服务无启用状态 1-已启用 2-未启用 */
-  UsageStatus?: number | null;
+  UsageStatus?: number;
   /** 委派时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 委派管理员管理范围。取值: 1-全部成员 2-部分成员 */
-  ManagementScope?: number | null;
+  ManagementScope?: number;
   /** 管理的成员Uin列表。ManagementScope值为2时该参数有效 */
-  ManagementScopeMembers?: MemberMainInfo[] | null;
+  ManagementScopeMembers?: MemberMainInfo[];
   /** 管理的部门ID列表。ManagementScope值为2时该参数有效 */
-  ManagementScopeNodes?: NodeMainInfo[] | null;
+  ManagementScopeNodes?: NodeMainInfo[];
 }
 
 /** 策略详情 */
@@ -473,11 +473,11 @@ declare interface ProductResource {
 /** 资源及关联的标签 */
 declare interface ResourceTagMapping {
   /** 资源六段式。腾讯云使用资源六段式描述一个资源。例如：qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。 */
-  Resource: string | null;
+  Resource?: string;
   /** 合规详情。 */
-  ComplianceDetails: TagComplianceDetails | null;
+  ComplianceDetails?: TagComplianceDetails;
   /** 资源标签。 */
-  Tags: Tags[] | null;
+  Tags?: Tags[];
 }
 
 /** 授权成员账号信息 */
@@ -721,19 +721,19 @@ declare interface Tag {
 /** 标签合规信息 */
 declare interface TagComplianceDetails {
   /** 合规状态。true-合规，false-不合规 */
-  ComplianceStatus: boolean | null;
+  ComplianceStatus?: boolean;
   /** 值不合规的标签键列表。 */
-  KeysWithNonCompliantValues: string[] | null;
+  KeysWithNonCompliantValues?: string[];
   /** 键不合规的标签键列表。 */
-  NonCompliantKeys: string[] | null;
+  NonCompliantKeys?: string[];
 }
 
 /** 标签键值对 */
 declare interface Tags {
   /** 标签键。 */
-  TagKey: string | null;
+  TagKey?: string;
   /** 标签值。 */
-  TagValue: string | null;
+  TagValue?: string;
 }
 
 /** 任务状态信息。 */
@@ -1155,7 +1155,7 @@ declare interface CreateOrganizationIdentityRequest {
 
 declare interface CreateOrganizationIdentityResponse {
   /** 身份ID */
-  IdentityId?: number | null;
+  IdentityId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1185,7 +1185,7 @@ declare interface CreateOrganizationMemberPolicyRequest {
 
 declare interface CreateOrganizationMemberPolicyResponse {
   /** 策略ID。 */
-  PolicyId?: number | null;
+  PolicyId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1217,7 +1217,7 @@ declare interface CreateOrganizationMemberRequest {
 
 declare interface CreateOrganizationMemberResponse {
   /** 成员Uin。 */
-  Uin?: number | null;
+  Uin?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1235,7 +1235,7 @@ declare interface CreateOrganizationMembersPolicyRequest {
 
 declare interface CreateOrganizationMembersPolicyResponse {
   /** 策略ID。 */
-  PolicyId?: number | null;
+  PolicyId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1245,9 +1245,9 @@ declare interface CreateOrganizationRequest {
 
 declare interface CreateOrganizationResponse {
   /** 企业组织ID */
-  OrgId: number;
+  OrgId?: number;
   /** 创建者昵称 */
-  NickName: string;
+  NickName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1597,7 +1597,7 @@ declare interface DescribeEffectivePolicyRequest {
 
 declare interface DescribeEffectivePolicyResponse {
   /** 有效策略。 */
-  EffectivePolicy?: EffectivePolicy | null;
+  EffectivePolicy?: EffectivePolicy;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1633,9 +1633,9 @@ declare interface DescribeOrganizationAuthNodeRequest {
 
 declare interface DescribeOrganizationAuthNodeResponse {
   /** 总数。 */
-  Total?: number | null;
+  Total?: number;
   /** 条目详情。 */
-  Items?: AuthNode[] | null;
+  Items?: AuthNode[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1657,11 +1657,11 @@ declare interface DescribeOrganizationFinancialByMemberRequest {
 
 declare interface DescribeOrganizationFinancialByMemberResponse {
   /** 当月总消耗。 */
-  TotalCost?: number | null;
+  TotalCost?: number;
   /** 成员消耗详情。 */
-  Items?: OrgMemberFinancial[] | null;
+  Items?: OrgMemberFinancial[];
   /** 总数目。 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1679,7 +1679,7 @@ declare interface DescribeOrganizationFinancialByMonthRequest {
 
 declare interface DescribeOrganizationFinancialByMonthResponse {
   /** 产品消耗详情。 */
-  Items?: OrgFinancialByMonth[] | null;
+  Items?: OrgFinancialByMonth[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1701,11 +1701,11 @@ declare interface DescribeOrganizationFinancialByProductRequest {
 
 declare interface DescribeOrganizationFinancialByProductResponse {
   /** 当月总消耗。 */
-  TotalCost?: number | null;
+  TotalCost?: number;
   /** 产品消耗详情。 */
-  Items?: OrgProductFinancial[] | null;
+  Items?: OrgProductFinancial[];
   /** 总数目。 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1723,9 +1723,9 @@ declare interface DescribeOrganizationMemberAuthAccountsRequest {
 
 declare interface DescribeOrganizationMemberAuthAccountsResponse {
   /** 列表 */
-  Items?: OrgMemberAuthAccount[] | null;
+  Items?: OrgMemberAuthAccount[];
   /** 总数目 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1743,9 +1743,9 @@ declare interface DescribeOrganizationMemberAuthIdentitiesRequest {
 
 declare interface DescribeOrganizationMemberAuthIdentitiesResponse {
   /** 授权身份列表。 */
-  Items?: OrgMemberAuthIdentity[] | null;
+  Items?: OrgMemberAuthIdentity[];
   /** 总数目。 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1757,23 +1757,23 @@ declare interface DescribeOrganizationMemberEmailBindRequest {
 
 declare interface DescribeOrganizationMemberEmailBindResponse {
   /** 绑定ID。 */
-  BindId?: number | null;
+  BindId?: number;
   /** 申请时间。 */
-  ApplyTime?: string | null;
+  ApplyTime?: string;
   /** 邮箱地址。 */
-  Email?: string | null;
+  Email?: string;
   /** 安全手机号。 */
-  Phone?: string | null;
+  Phone?: string;
   /** 绑定状态。 未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed */
-  BindStatus?: string | null;
+  BindStatus?: string;
   /** 绑定时间。 */
-  BindTime?: string | null;
+  BindTime?: string;
   /** 失败说明。 */
-  Description?: string | null;
+  Description?: string;
   /** 安全手机绑定状态 。 未绑定：0，已绑定：1 */
-  PhoneBind?: number | null;
+  PhoneBind?: number;
   /** 国际区号。 */
-  CountryCode?: string | null;
+  CountryCode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1791,9 +1791,9 @@ declare interface DescribeOrganizationMemberPoliciesRequest {
 
 declare interface DescribeOrganizationMemberPoliciesResponse {
   /** 列表。 */
-  Items?: OrgMemberPolicy[] | null;
+  Items?: OrgMemberPolicy[];
   /** 总数目。 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1835,9 +1835,9 @@ declare interface DescribeOrganizationNodesRequest {
 
 declare interface DescribeOrganizationNodesResponse {
   /** 总数。 */
-  Total?: number | null;
+  Total?: number;
   /** 列表详情。 */
-  Items?: OrgNode[] | null;
+  Items?: OrgNode[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1851,37 +1851,37 @@ declare interface DescribeOrganizationRequest {
 
 declare interface DescribeOrganizationResponse {
   /** 企业组织ID。 */
-  OrgId?: number | null;
+  OrgId?: number;
   /** 创建者UIN。 */
-  HostUin?: number | null;
+  HostUin?: number;
   /** 创建者昵称。 */
-  NickName?: string | null;
+  NickName?: string;
   /** 企业组织类型。 */
-  OrgType?: number | null;
+  OrgType?: number;
   /** 是否组织管理员。是：true ，否：false */
-  IsManager?: boolean | null;
+  IsManager?: boolean;
   /** 策略类型。财务管理：Financial */
-  OrgPolicyType?: string | null;
+  OrgPolicyType?: string;
   /** 策略名。 */
-  OrgPolicyName?: string | null;
+  OrgPolicyName?: string;
   /** 成员财务权限列表。 */
-  OrgPermission?: OrgPermission[] | null;
+  OrgPermission?: OrgPermission[];
   /** 组织根节点ID。 */
-  RootNodeId?: number | null;
+  RootNodeId?: number;
   /** 组织创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 成员加入时间。 */
-  JoinTime?: string | null;
+  JoinTime?: string;
   /** 成员是否允许退出。允许：Allow，不允许：Denied */
-  IsAllowQuit?: string | null;
+  IsAllowQuit?: string;
   /** 代付者Uin。 */
-  PayUin?: string | null;
+  PayUin?: string;
   /** 代付者名称。 */
-  PayName?: string | null;
+  PayName?: string;
   /** 是否可信服务管理员。是：true，否：false */
-  IsAssignManager?: boolean | null;
+  IsAssignManager?: boolean;
   /** 是否实名主体管理员。是：true，否：false */
-  IsAuthManager?: boolean | null;
+  IsAuthManager?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1935,7 +1935,7 @@ declare interface DescribeShareAreasRequest {
 
 declare interface DescribeShareAreasResponse {
   /** 详情 */
-  Items?: ShareArea[] | null;
+  Items?: ShareArea[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1955,9 +1955,9 @@ declare interface DescribeShareUnitMembersRequest {
 
 declare interface DescribeShareUnitMembersResponse {
   /** 总数目。 */
-  Total?: number | null;
+  Total?: number;
   /** 共享单元成员列表。 */
-  Items?: ShareUnitMember[] | null;
+  Items?: ShareUnitMember[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1979,9 +1979,9 @@ declare interface DescribeShareUnitResourcesRequest {
 
 declare interface DescribeShareUnitResourcesResponse {
   /** 总数目。 */
-  Total?: number | null;
+  Total?: number;
   /** 共享单元资源列表。 */
-  Items?: ShareUnitResource[] | null;
+  Items?: ShareUnitResource[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1999,9 +1999,9 @@ declare interface DescribeShareUnitsRequest {
 
 declare interface DescribeShareUnitsResponse {
   /** 总数目。 */
-  Total?: number | null;
+  Total?: number;
   /** 共享单元列表。 */
-  Items?: ManagerShareUnit[] | null;
+  Items?: ManagerShareUnit[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3116,51 +3116,51 @@ declare namespace V20181225 {
   /** 企业组织邀请 */
   interface OrgInvitation {
     /** 邀请ID */
-    Id: number;
+    Id?: number;
     /** 被邀请UIN */
-    Uin: number;
+    Uin?: number;
     /** 创建者UIN */
-    HostUin: number;
+    HostUin?: number;
     /** 创建者名称 */
-    HostName: string;
+    HostName?: string;
     /** 创建者邮箱 */
-    HostMail: string;
+    HostMail?: string;
     /** 邀请状态。-1：已过期，0：正常，1：已接受，2：已失效，3：已取消 */
-    Status: number;
+    Status?: number;
     /** 名称 */
-    Name: string;
+    Name?: string;
     /** 备注 */
-    Remark: string;
+    Remark?: string;
     /** 企业组织类型 */
-    OrgType: number;
+    OrgType?: number;
     /** 邀请时间 */
-    InviteTime: string;
+    InviteTime?: string;
     /** 过期时间 */
-    ExpireTime: string;
+    ExpireTime?: string;
   }
 
   /** 企业组织成员 */
   interface OrgMember {
     /** UIN */
-    Uin: number;
+    Uin?: number;
     /** 名称 */
-    Name: string;
+    Name?: string;
     /** 备注 */
-    Remark: string;
+    Remark?: string;
     /** 加入时间 */
-    JoinTime: string;
+    JoinTime?: string;
   }
 
   /** 企业组织单元 */
   interface OrgNode {
     /** 组织单元ID */
-    NodeId: number;
+    NodeId?: number;
     /** 名称 */
-    Name: string;
+    Name?: string;
     /** 父单元ID */
-    ParentNodeId: number;
+    ParentNodeId?: number;
     /** 成员数量 */
-    MemberCount: number;
+    MemberCount?: number;
   }
 
   interface AcceptOrganizationInvitationRequest {
@@ -3366,7 +3366,7 @@ declare namespace V20181225 {
 
   interface ListOrganizationNodesResponse {
     /** 企业组织单元列表 */
-    Nodes: OrgNode[];
+    Nodes?: OrgNode[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

@@ -21,17 +21,17 @@ declare interface AlarmPolicy {
 /** 设备厂商信息 */
 declare interface DeviceInfo {
   /** 厂商名称 */
-  Manufacturer: string;
+  Manufacturer?: string;
   /** 此厂商旗下的设备信息列表 */
-  HsmTypes: HsmInfo[];
+  HsmTypes?: HsmInfo[];
 }
 
 /** 支持的加密机类型信息 */
 declare interface HsmInfo {
   /** 加密机型号 */
-  Model: string;
+  Model?: string;
   /** 此类型的加密机所支持的VSM类型列表 */
-  VsmTypes: VsmInfo[];
+  VsmTypes?: VsmInfo[];
   /** 加密机母机类型：virtualization、GHSM、EHSM、SHSM */
   HsmType?: string;
 }
@@ -39,85 +39,85 @@ declare interface HsmInfo {
 /** 资源信息 */
 declare interface ResourceInfo {
   /** 资源Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 资源名称 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 资源状态，1-正常，2-隔离，3-销毁 */
-  Status?: number | null;
+  Status?: number;
   /** 资源IP */
-  Vip?: string | null;
+  Vip?: string;
   /** 资源所属Vpc */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 资源所属子网 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 资源所属HSM规格 */
-  Model?: string | null;
+  Model?: string;
   /** 云加密机类型id */
-  VsmType?: number | null;
+  VsmType?: number;
   /** 地域Id */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 区域Id */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 过期时间（Epoch Unix Timestamp） */
-  ExpireTime?: number | null;
+  ExpireTime?: number;
   /** 地域名 */
-  RegionName?: string | null;
+  RegionName?: string;
   /** 区域名 */
-  ZoneName?: string | null;
+  ZoneName?: string;
   /** 实例的安全组列表 */
-  SgList?: SgUnit[] | null;
+  SgList?: SgUnit[];
   /** 子网名称 */
-  SubnetName?: string | null;
+  SubnetName?: string;
   /** 当前实例是否已经过期 */
-  Expired?: boolean | null;
+  Expired?: boolean;
   /** 为正数表示实例距离过期时间还剩余多少秒，为负数表示已经过期多少秒 */
-  RemainSeconds?: number | null;
+  RemainSeconds?: number;
   /** Vpc名称 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** 创建者Uin账号 */
-  CreateUin?: string | null;
+  CreateUin?: string;
   /** 自动续费状态标识， 0-手动续费，1-自动续费，2-到期不续 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 厂商 */
-  Manufacturer?: string | null;
+  Manufacturer?: string;
   /** 告警状态，0：停用，1：启用 */
-  AlarmStatus?: number | null;
+  AlarmStatus?: number;
 }
 
 /** 安全组基础信息 */
 declare interface SgUnit {
   /** 安全组Id */
-  SgId: string | null;
+  SgId?: string;
   /** 安全组名称 */
-  SgName: string | null;
+  SgName?: string;
   /** 备注 */
-  SgRemark: string | null;
+  SgRemark?: string;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string;
 }
 
 /** Subnet对象 */
 declare interface Subnet {
   /** VPC实例ID。 */
-  VpcId: string | null;
+  VpcId?: string;
   /** 子网实例ID，例如：subnet-bthucmmy。 */
-  SubnetId: string | null;
+  SubnetId?: string;
   /** 子网名称。 */
-  SubnetName: string | null;
+  SubnetName?: string;
   /** 子网的 IPv4 CIDR。 */
-  CidrBlock: string | null;
+  CidrBlock?: string;
   /** 创建时间。 */
-  CreatedTime: string | null;
+  CreatedTime?: string;
   /** 可用IP数。 */
-  AvailableIpAddressCount: number | null;
+  AvailableIpAddressCount?: number;
   /** 子网的 IPv6 CIDR。 */
-  Ipv6CidrBlock: string | null;
+  Ipv6CidrBlock?: string;
   /** 总IP数 */
-  TotalIpAddressCount: number | null;
+  TotalIpAddressCount?: number;
   /** 是否为默认Subnet */
-  IsDefault: boolean | null;
+  IsDefault?: boolean;
 }
 
 /** 标签 */
@@ -139,51 +139,51 @@ declare interface TagFilter {
 /** 安全组策略 */
 declare interface UsgPolicy {
   /** cidr格式地址 */
-  Ip?: string | null;
+  Ip?: string;
   /** 安全组id代表的地址集合 */
-  Id?: string | null;
+  Id?: string;
   /** 地址组id代表的地址集合 */
-  AddressModule?: string | null;
+  AddressModule?: string;
   /** 协议 */
-  Proto?: string | null;
+  Proto?: string;
   /** 端口 */
-  Port?: string | null;
+  Port?: string;
   /** 服务组id代表的协议和端口集合 */
-  ServiceModule?: string | null;
+  ServiceModule?: string;
   /** 备注 */
-  Desc?: string | null;
+  Desc?: string;
   /** 匹配后行为:ACCEPT/DROP */
-  Action?: string | null;
+  Action?: string;
 }
 
 /** 安全组规则详情 */
 declare interface UsgRuleDetail {
   /** 入站规则 */
-  InBound?: UsgPolicy[] | null;
+  InBound?: UsgPolicy[];
   /** 出站规则 */
-  OutBound?: UsgPolicy[] | null;
+  OutBound?: UsgPolicy[];
   /** 安全组Id */
-  SgId?: string | null;
+  SgId?: string;
   /** 安全组名称 */
-  SgName?: string | null;
+  SgName?: string;
   /** 备注 */
-  SgRemark?: string | null;
+  SgRemark?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 版本 */
-  Version?: number | null;
+  Version?: number;
 }
 
 /** VPC对象 */
 declare interface Vpc {
   /** Vpc名称 */
-  VpcName: string | null;
+  VpcName?: string;
   /** VpcId */
-  VpcId: string | null;
+  VpcId?: string;
   /** 创建时间 */
-  CreatedTime: string | null;
+  CreatedTime?: string;
   /** 是否为默认VPC */
-  IsDefault: boolean | null;
+  IsDefault?: boolean;
 }
 
 /** 支持的Vsm类型信息 */
@@ -229,15 +229,15 @@ declare interface DescribeSubnetRequest {
   Offset: number;
   /** 查询指定VpcId下的子网信息。 */
   VpcId: string;
-  /** 查找关键字 */
+  /** 过滤条件 */
   SearchWord?: string;
 }
 
 declare interface DescribeSubnetResponse {
   /** 返回的子网数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的子网实例列表。 */
-  SubnetList: Subnet[] | null;
+  SubnetList?: Subnet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -249,7 +249,7 @@ declare interface DescribeSupportedHsmRequest {
 
 declare interface DescribeSupportedHsmResponse {
   /** 当前地域所支持的设备列表 */
-  DeviceTypes: DeviceInfo[] | null;
+  DeviceTypes?: DeviceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -259,29 +259,29 @@ declare interface DescribeUsgRequest {
   Offset: number;
   /** 返回量，当Offset和Limit均为0时将一次性返回用户所有的安全组列表。 */
   Limit: number;
-  /** 搜索关键字 */
+  /** 过滤条件，支持安全组id */
   SearchWord?: string;
 }
 
 declare interface DescribeUsgResponse {
   /** 用户的安全组列表 */
-  SgList: SgUnit[] | null;
+  SgList?: SgUnit[];
   /** 返回的安全组数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeUsgRuleRequest {
-  /** 根据安全组Id获取安全组详情 */
+  /** 安全组Id列表 */
   SgIds: string[];
 }
 
 declare interface DescribeUsgRuleResponse {
   /** 安全组详情 */
-  SgRules: UsgRuleDetail[] | null;
+  SgRules?: UsgRuleDetail[];
   /** 安全组详情数量 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -297,9 +297,9 @@ declare interface DescribeVpcRequest {
 
 declare interface DescribeVpcResponse {
   /** 可查询到的所有Vpc实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** Vpc对象列表 */
-  VpcList: Vpc[] | null;
+  VpcList?: Vpc[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -332,30 +332,30 @@ declare interface DescribeVsmAttributesResponse {
   ZoneId?: number;
   /** 资源过期时间，以时间戳形式展示。 */
   ExpireTime?: number;
-  /** 安全组详情信息 */
-  SgList?: UsgRuleDetail[] | null;
+  /** 安全组详情信息,如果未配置字段返回null */
+  SgList?: UsgRuleDetail[];
   /** 子网名 */
-  SubnetName?: string | null;
+  SubnetName?: string;
   /** 地域名 */
-  RegionName?: string | null;
+  RegionName?: string;
   /** 区域名 */
-  ZoneName?: string | null;
+  ZoneName?: string;
   /** 实例是否已经过期 */
-  Expired?: boolean | null;
+  Expired?: boolean;
   /** 为正数表示实例距离过期时间剩余秒数，为负数表示实例已经过期多少秒 */
-  RemainSeconds?: number | null;
+  RemainSeconds?: number;
   /** 私有虚拟网络名称 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** VPC的IPv4 CIDR */
-  VpcCidrBlock?: string | null;
+  VpcCidrBlock?: string;
   /** 子网的CIDR */
-  SubnetCidrBlock?: string | null;
-  /** 资源所关联的Tag */
-  Tags?: Tag[] | null;
+  SubnetCidrBlock?: string;
+  /** 资源所关联的标签Tag */
+  Tags?: Tag[];
   /** 资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置) */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 厂商 */
-  Manufacturer?: string | null;
+  Manufacturer?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -379,7 +379,7 @@ declare interface DescribeVsmsResponse {
   /** 获取实例的总个数 */
   TotalCount?: number;
   /** 资源信息 */
-  VsmList?: ResourceInfo[] | null;
+  VsmList?: ResourceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -389,7 +389,7 @@ declare interface GetAlarmEventRequest {
 
 declare interface GetAlarmEventResponse {
   /** 用户所有的告警策略 */
-  AlarmConfig?: AlarmPolicy[] | null;
+  AlarmConfig?: AlarmPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -427,15 +427,15 @@ declare interface InquiryPriceBuyVsmRequest {
 
 declare interface InquiryPriceBuyVsmResponse {
   /** 原始总金额，浮点型参数，精确到小数点后两位，如：2000.99 */
-  TotalCost: number | null;
+  TotalCost?: number;
   /** 购买的实例数量 */
-  GoodsNum: number | null;
+  GoodsNum?: number;
   /** 商品的时间大小，整型参数，举例：当TimeSpan为1，TImeUnit为m时，表示询价购买时长为1个月时的价格 */
-  TimeSpan: string | null;
+  TimeSpan?: string;
   /** 商品的时间单位，m表示月，y表示年 */
-  TimeUnit: string | null;
+  TimeUnit?: string;
   /** 应付总金额，浮点型参数，精确到小数点后两位，如：2000.99 */
-  OriginalCost: number | null;
+  OriginalCost?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

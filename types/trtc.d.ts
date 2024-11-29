@@ -1060,6 +1060,24 @@ declare interface ControlAIConversationResponse {
   RequestId?: string;
 }
 
+declare interface CreateBasicModerationRequest {
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和TRTC的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，为TRTC房间所对应的RoomId。 */
+  RoomId: string;
+  /** 目标审核用户id */
+  UserId: string;
+  /** TRTC房间号的类型。【*注意】必须和TRTC的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认） */
+  RoomIdType?: number;
+}
+
+declare interface CreateBasicModerationResponse {
+  /** 审核服务分配的任务ID。任务ID是对一次审核任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudRecordingRequest {
   /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和录制的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
@@ -1112,6 +1130,20 @@ declare interface CreatePictureRequest {
 declare interface CreatePictureResponse {
   /** 图片id */
   PictureId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBasicModerationRequest {
+  /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 审核任务的唯一Id，在启动审核任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DeleteBasicModerationResponse {
+  /** 审核任务的唯一Id，在启动审核任务成功后会返回。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2099,10 +2131,14 @@ declare interface Trtc {
   (): Versions;
   /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
+  /** 创建基础审核任务 {@link CreateBasicModerationRequest} {@link CreateBasicModerationResponse} */
+  CreateBasicModeration(data: CreateBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicModerationResponse>;
   /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
   CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
   /** 上传图片 {@link CreatePictureRequest} {@link CreatePictureResponse} */
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
+  /** 停止基础审核任务 {@link DeleteBasicModerationRequest} {@link DeleteBasicModerationResponse} */
+  DeleteBasicModeration(data: DeleteBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBasicModerationResponse>;
   /** 停止云端录制任务 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */

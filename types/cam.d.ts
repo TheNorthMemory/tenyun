@@ -305,25 +305,25 @@ declare interface PolicyVersionItem {
 /** 消息接收人信息 */
 declare interface Receiver {
   /** id */
-  Uid: number;
+  Uid?: number;
   /** 名字 */
-  Name: string;
+  Name?: string;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 手机号码 */
-  PhoneNumber: string;
+  PhoneNumber?: string;
   /** 手机号码是否验证 */
-  PhoneFlag: number;
+  PhoneFlag?: number;
   /** 邮箱 */
-  Email: string;
+  Email?: string;
   /** 邮箱是否验证 */
-  EmailFlag: number;
+  EmailFlag?: number;
   /** 是否主联系人 */
-  IsReceiverOwner: number;
+  IsReceiverOwner?: number;
   /** 是否允许微信接收通知 */
-  WechatFlag: number | null;
+  WechatFlag?: number | null;
   /** 账号uin */
-  Uin: number | null;
+  Uin?: number | null;
 }
 
 /** 角色详细信息 */
@@ -957,9 +957,9 @@ declare interface DescribeRoleListRequest {
 
 declare interface DescribeRoleListResponse {
   /** 角色详情列表。 */
-  List: RoleInfo[] | null;
+  List?: RoleInfo[] | null;
   /** 角色总数 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -987,11 +987,11 @@ declare interface DescribeSafeAuthFlagIntlRequest {
 
 declare interface DescribeSafeAuthFlagIntlResponse {
   /** 登录保护设置 */
-  LoginFlag: LoginActionFlagIntl;
+  LoginFlag?: LoginActionFlagIntl;
   /** 敏感操作保护设置 */
-  ActionFlag: LoginActionFlagIntl;
+  ActionFlag?: LoginActionFlagIntl;
   /** 异地登录保护设置 */
-  OffsiteFlag: OffsiteFlag;
+  OffsiteFlag?: OffsiteFlag;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1001,13 +1001,13 @@ declare interface DescribeSafeAuthFlagRequest {
 
 declare interface DescribeSafeAuthFlagResponse {
   /** 登录保护设置 */
-  LoginFlag: LoginActionFlag;
+  LoginFlag?: LoginActionFlag;
   /** 敏感操作保护设置 */
-  ActionFlag: LoginActionFlag;
+  ActionFlag?: LoginActionFlag;
   /** 异地登录保护设置 */
-  OffsiteFlag: OffsiteFlag;
-  /** 1: 提示7天信任设备 0: 不提示 */
-  PromptTrust: number;
+  OffsiteFlag?: OffsiteFlag;
+  /** 是否提示信任设备：1: 提示 0: 不提示 */
+  PromptTrust?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1241,7 +1241,7 @@ declare interface GetRoleRequest {
 
 declare interface GetRoleResponse {
   /** 角色详情 */
-  RoleInfo: RoleInfo;
+  RoleInfo?: RoleInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1487,9 +1487,9 @@ declare interface ListEntitiesForPolicyRequest {
 
 declare interface ListEntitiesForPolicyResponse {
   /** 实体总数 */
-  TotalNum: number | null;
+  TotalNum?: number | null;
   /** 实体列表 */
-  List: AttachEntityOfPolicy[] | null;
+  List?: AttachEntityOfPolicy[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1563,11 +1563,11 @@ declare interface ListPoliciesRequest {
 
 declare interface ListPoliciesResponse {
   /** 策略总数 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中： policyId：策略 id policyName：策略名addTime：策略创建时间type：1 表示自定义策略，2 表示预设策略 description：策略描述 createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略Attachments: 关联的用户数ServiceType: 策略关联的产品IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略 */
-  List: StrategyInfo[];
+  List?: StrategyInfo[];
   /** 保留字段 */
-  ServiceTypeList: string[] | null;
+  ServiceTypeList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1635,7 +1635,7 @@ declare interface ListUsersRequest {
 
 declare interface ListUsersResponse {
   /** 子用户信息 */
-  Data: SubAccountInfo[];
+  Data?: SubAccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
